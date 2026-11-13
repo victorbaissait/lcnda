@@ -11,6 +11,10 @@
 (function (root) {
     'use strict';
     const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+    /* 🌐 docs/I18N.md : dans Node (essais), le français avec ses variables */
+    const L = () => (root && root.LCNDA_I18N) || null;
+    const i18n = (s, v) => (L() ? L().t(s, v) : String(s).replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? v[k] : m)));
+    const plural = (n, one, many) => (L() ? L().plural(n, one, many) : `${n} ${n > 1 ? many : one}`);
     /** market : part approximative des visites (%), sert à classer par gravité */
     const BROWSERS = [
         {id: 'chrome', name: 'Chrome', icon: '🟡', market: 64, letter: 'C'},
@@ -282,15 +286,15 @@
         }
     };
 
-    const missText = browsers => browsers.map(x => x.since == null ? `pas sur ${x.name}` : `pas sur ${x.name} avant ${fmtV(x.since)}`).join(', ');
+    const missText = browsers => browsers.map(x => x.since == null ? i18n('pas sur {name}', {name: x.name}) : i18n('pas sur {name} avant {v}', {name: x.name, v: fmtV(x.since)})).join(', ');
     const targetsText = tg => BROWSERS.filter(b => tg[b.id] != null).map(b => `${b.name} ${fmtV(tg[b.id])}+`).join(', ');
     /** la liste à lire, en français ; chaque ligne porte data-compat-goto="fichier:ligne" */
     const panelHtml = (results = [], opts = {}) => {
         const tg = getTargets(opts.targets), bad = results.filter(r => r.browsers.length), good = results.filter(r => !r.browsers.length);
-        const row = r => `<li class="swc-item ${r.browsers.length ? 'swc-bad' : 'swc-ok'}" data-compat-goto="${esc(r.file)}:${r.line}" tabindex="0" role="button" title="Aller à la ligne ${r.line} de ${esc(r.file)}">${r.browsers.length ? '⚠️' : '✅'} <b>${esc(r.label)}</b> — ${r.browsers.length ? esc(missText(r.browsers)) : 'partout chez les navigateurs visés'} · <span class="swc-where">ligne ${r.line} de ${esc(r.file)}</span> · <span class="swc-advice">${esc(r.advice)}</span></li>`;
-        const foot = `<p class="swc-targets"><small>Navigateurs visés : ${esc(targetsText(tg))}.</small></p>`;
-        if (!bad.length) return `<div class="swc-panel"><p class="swc-empty">✅ Rien à signaler : ton site devrait marcher sur tous les navigateurs visés.</p>${good.length ? `<details class="swc-good"><summary>${good.length} fonction${good.length > 1 ? 's' : ''} récente${good.length > 1 ? 's' : ''}, bien prise${good.length > 1 ? 's' : ''} en charge</summary><ul class="swc-list">${good.map(row).join('')}</ul></details>` : ''}${foot}</div>`;
-        return `<div class="swc-panel"><p class="swc-head"><b>${bad.length} point${bad.length > 1 ? 's' : ''} à vérifier</b> : certains visiteurs verront ton site un peu différemment.</p><ul class="swc-list">${bad.map(row).join('')}</ul>${good.length ? `<details class="swc-good"><summary>${good.length} autre${good.length > 1 ? 's' : ''} fonction${good.length > 1 ? 's' : ''} récente${good.length > 1 ? 's' : ''}, sans souci</summary><ul class="swc-list">${good.map(row).join('')}</ul></details>` : ''}${foot}</div>`;
+        const row = r => `<li class="swc-item ${r.browsers.length ? 'swc-bad' : 'swc-ok'}" data-compat-goto="${esc(r.file)}:${r.line}" tabindex="0" role="button" title="${esc(i18n('Aller à la ligne {n} de {file}', {n: String(r.line), file: r.file}))}">${r.browsers.length ? '⚠️' : '✅'} <b>${esc(i18n(r.label))}</b> — ${r.browsers.length ? esc(missText(r.browsers)) : i18n('partout chez les navigateurs visés')} · <span class="swc-where">${esc(i18n('ligne {n} de {file}', {n: String(r.line), file: r.file}))}</span> · <span class="swc-advice">${esc(i18n(r.advice))}</span></li>`;
+        const foot = `<p class="swc-targets"><small>${esc(i18n('Navigateurs visés : {list}.', {list: targetsText(tg)}))}</small></p>`;
+        if (!bad.length) return `<div class="swc-panel"><p class="swc-empty">${i18n('✅ Rien à signaler : ton site devrait marcher sur tous les navigateurs visés.')}</p>${good.length ? `<details class="swc-good"><summary>${plural(good.length, 'fonction récente, bien prise en charge', 'fonctions récentes, bien prises en charge')}</summary><ul class="swc-list">${good.map(row).join('')}</ul></details>` : ''}${foot}</div>`;
+        return `<div class="swc-panel"><p class="swc-head">${i18n('{what} : certains visiteurs verront ton site un peu différemment.', {what: `<b>${plural(bad.length, 'point à vérifier', 'points à vérifier')}</b>`})}</p><ul class="swc-list">${bad.map(row).join('')}</ul>${good.length ? `<details class="swc-good"><summary>${plural(good.length, 'autre fonction récente, sans souci', 'autres fonctions récentes, sans souci')}</summary><ul class="swc-list">${good.map(row).join('')}</ul></details>` : ''}${foot}</div>`;
     };
 
     const API = {BROWSERS: BROWSERS.map(({letter, ...b}) => b), FEATURES, DEFAULT_TARGETS, CURRENT, scan, ua, chrome, panelHtml, _views: views};

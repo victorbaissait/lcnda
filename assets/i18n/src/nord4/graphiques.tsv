@@ -1,0 +1,1800 @@
+fr ¦ fi ¦ hu
+Règle un diagramme puis enregistre-le comme vue pour le retrouver ici. ¦ Säädä kaavio ja tallenna se näkymäksi, niin löydät sen täältä. ¦ Állíts be egy diagramot, majd mentsd nézetként, hogy itt megtaláld.
+Vue enregistrée supprimée ¦ Tallennettu näkymä poistettu ¦ Mentett nézet törölve
+Première personne ¦ Ensimmäinen henkilö ¦ Első személy
+Deuxième personne ¦ Toinen henkilö ¦ Második személy
+Afficher le lien ¦ Näytä sukulaisuus ¦ A rokonság megjelenítése
+Année non renseignée ¦ Vuotta ei ole annettu ¦ Az év nincs megadva
+Adresse non renseignée ¦ Osoitetta ei ole annettu ¦ A cím nincs megadva
+Membre du foyer ¦ Talouden jäsen ¦ Háztartás tagja
+Aucun membre relevé. ¦ Jäseniä ei ole merkitty. ¦ Nincs feljegyzett tag.
+Aucune maisonnée recensée pour cette personne. ¦ Tälle henkilölle ei ole henkikirjoihin merkittyä taloutta. ¦ Ennek a személynek nincs népszámlálásban rögzített háztartása.
+Ajoute des recensements depuis sa fiche. ¦ Lisää henkikirjoja hänen kortiltaan. ¦ Adj hozzá népszámlálásokat az adatlapjáról.
+Aucun déplacement entre deux lieux géocodés n’est encore disponible pour cette branche. ¦ Tälle haaralle ei ole vielä yhtään muuttoa kahden paikannetun paikan välillä. ¦ Ehhez az ághoz még nincs elérhető költözés két földrajzilag kódolt hely között.
+Pas encore assez de liens renseignés pour dessiner ce graphe. ¦ Yhteyksiä ei ole vielä tarpeeksi tämän verkoston piirtämiseen. ¦ Még nincs elég kitöltött kapcsolat a gráf megrajzolásához.
+Réseau social ¦ Sosiaalinen verkosto ¦ Közösségi háló
+Métiers transmis ¦ Periytyneet ammatit ¦ Öröklődő foglalkozások
+Migrations de la branche ¦ Haaran muuttoliike ¦ Az ág vándorlásai
+Réseau ¦ Verkosto ¦ Háló
+=nœud ¦ solmu|solmua ¦ csomópont|csomópont
+{nodes} · {links}. Survole un lien pour voir sa nature et clique sur une personne pour ouvrir sa fiche. ¦ {nodes} · {links}. Vie osoitin yhteyden päälle nähdäksesi sen laadun ja napsauta henkilöä avataksesi hänen korttinsa. ¦ {nodes} · {links}. Vidd az egeret egy kapcsolat fölé, hogy lásd a jellegét, és kattints egy személyre az adatlapja megnyitásához.
+Tous les actes ¦ Kaikki asiakirjat ¦ Minden bejegyzés
+Actes rattachés ¦ Liitetyt asiakirjat ¦ Csatolt bejegyzések
+Actes liés ¦ Yhdistetyt asiakirjat ¦ Kapcsolódó bejegyzések
+Sépultures ¦ Hautaukset ¦ Temetések
+Aucun acte pour ces filtres. ¦ Näillä suodattimilla ei löydy asiakirjoja. ¦ Ezekkel a szűrőkkel nincs bejegyzés.
+Sans précision ¦ Ei tarkennusta ¦ Pontosítás nélkül
+Aucun recensement pour ces filtres. ¦ Näillä suodattimilla ei löydy henkikirjoja. ¦ Ezekkel a szűrőkkel nincs népszámlálás.
+Aucun dépouillement enregistré pour ces filtres. ¦ Näillä suodattimilla ei ole tallennettua indeksointia. ¦ Ezekkel a szűrőkkel nincs mentett feldolgozás.
+GRAPHIQUES · LIEUX ¦ KAAVIOT · PAIKAT ¦ GRAFIKONOK · HELYEK
+SYNTHÈSE LOCALE ¦ PAIKALLINEN YHTEENVETO ¦ HELYI ÖSSZEGZÉS
+Regroupe les sources et recherches déjà rattachées à un même lieu. ¦ Kokoaa yhteen samaan paikkaan jo liitetyt lähteet ja tutkimukset. ¦ Összegyűjti az ugyanahhoz a helyhez már csatolt forrásokat és kutatásokat.
+Choisis une commune pour afficher les actes, dépouillements, battues et sépultures liés à ce lieu. ¦ Valitse kunta nähdäksesi siihen paikkaan liittyvät asiakirjat, indeksoinnit, laajat haut ja hautaukset. ¦ Válassz egy települést, hogy megjelenjenek az ehhez a helyhez kapcsolódó bejegyzések, feldolgozások, átfésülések és temetések.
+génération {list} ¦ sukupolvi {list} ¦ {list}. nemzedék
+générations {list} ¦ sukupolvet {list} ¦ nemzedékek: {list}
+est {list} ¦ on {list} ¦ egyben {list}
+(… {n} places en tout) ¦ (… yhteensä {n} paikkaa) ¦ (… összesen {n} hely)
+Ancêtres répétés de {name} ¦ Henkilön {name} toistuvat esivanhemmat ¦ {name} ismétlődő felmenői
+Voir aussi leurs ancêtres répétés ({n}) ¦ Näytä myös heidän toistuvat esivanhempansa ({n}) ¦ Az ő ismétlődő felmenőik megtekintése is ({n})
+Quand deux ancêtres sont cousins, leurs propres ancêtres apparaissent plusieurs fois dans l’arbre : c’est l’implexe. Seules les filiations biologiques comptent. Le taux = 1 − personnes différentes ÷ places connues. ¦ Kun kaksi esivanhempaa on serkuksia, heidän omat esivanhempansa näkyvät puussa useaan kertaan: tämä on esivanhempien kato (implex). Vain biologiset polveutumiset lasketaan. Osuus = 1 − eri henkilöt ÷ tunnetut paikat. ¦ Ha két felmenő unokatestvér, az ő saját felmenőik többször is megjelennek a fán: ez az ősveszteség (implexus). Csak a vér szerinti leszármazás számít. Az arány = 1 − különböző személyek ÷ ismert helyek.
+Places théoriques ¦ Teoreettiset paikat ¦ Elméleti helyek
+Places connues ¦ Tunnetut paikat ¦ Ismert helyek
+places connues ¦ tunnettua paikkaa ¦ ismert hely
+Personnes différentes ¦ Eri henkilöt ¦ Különböző személyek
+Implexe ¦ Esivanhempien kato ¦ Ősveszteség
+IMPLEXE ¦ ESIVANHEMPIEN KATO ¦ ŐSVESZTESÉG
+Implexe cumulé ¦ Kertynyt esivanhempien kato ¦ Halmozott ősveszteség
+implexe global ¦ kokonaiskato ¦ teljes ősveszteség
+ancêtres différents ¦ eri esivanhempaa ¦ különböző felmenő
+ancêtres répétés ¦ toistuvaa esivanhempaa ¦ ismétlődő felmenő
+Calcul arrêté : arbre trop grand. ¦ Laskenta keskeytetty: puu on liian suuri. ¦ A számítás leállt: a fa túl nagy.
+Les couples communs les plus proches ¦ Lähimmät yhteiset parit ¦ A legközelebbi közös párok
+C’est ici que les branches se rejoignent ; leurs ancêtres sont répétés à leur suite. ¦ Tässä haarat yhtyvät; niiden esivanhemmat toistuvat niiden jälkeen. ¦ Itt találkoznak az ágak; a felmenőik utánuk ismétlődnek.
+Aucun ancêtre répété : chaque ancêtre connu n’apparaît qu’une fois. ¦ Ei toistuvia esivanhempia: jokainen tunnettu esivanhempi esiintyy vain kerran. ¦ Nincs ismétlődő felmenő: minden ismert felmenő csak egyszer szerepel.
+LIENS DE PARENTÉ ¦ SUKULAISUUSSUHTEET ¦ ROKONI KAPCSOLATOK
+Choisis deux personnes ¦ Valitse kaksi henkilöä ¦ Válassz ki két személyt
+Recherche les deux individus dans la colonne de gauche pour afficher le chemin familial le plus court. ¦ Hae kaksi henkilöä vasemmasta palstasta nähdäksesi lyhimmän sukulaisuusketjun. ¦ Keresd meg a két személyt a bal oldali oszlopban, hogy megjelenjen a legrövidebb családi útvonal.
+lié à ¦ yhteydessä henkilöön ¦ kapcsolatban:
+{links} entre les deux personnes. ¦ {links} näiden kahden henkilön välillä. ¦ {links} a két személy között.
+Aucun chemin familial trouvé entre ces deux personnes. ¦ Näiden kahden henkilön välillä ei löytynyt sukulaisuusketjua. ¦ Nem található családi útvonal a két személy között.
+Aucune relation disponible. ¦ Ei sukulaisuussuhteita saatavilla. ¦ Nincs elérhető kapcsolat.
+Ajoute des parents, conjoints ou enfants sur la fiche. ¦ Lisää kortille vanhempia, puolisoita tai lapsia. ¦ Adj hozzá szülőket, házastársakat vagy gyermekeket az adatlapon.
+Molette : zoomer · Maj + molette ou glisser : déplacer ¦ Rulla: zoomaa · Vaihto + rulla tai vedä: siirrä ¦ Görgő: nagyítás · Shift + görgő vagy húzás: mozgatás
+Choisir dans Personnes ¦ Valitse Henkilöistä ¦ Kiválasztás a Személyek közül
+Aucune ascendance disponible. ¦ Esivanhempia ei ole saatavilla. ¦ Nincs elérhető felmenő.
+Ajoute des parents sur la fiche pour voir l’arbre. ¦ Lisää kortille vanhemmat nähdäksesi puun. ¦ Adj hozzá szülőket az adatlapon, hogy lásd a fát.
+♂ Masculin ¦ ♂ Mies ¦ ♂ Férfi
+♀ Féminin ¦ ♀ Nainen ¦ ♀ Nő
+□ Masculin ¦ □ Mies ¦ □ Férfi
+○ Féminin ¦ ○ Nainen ¦ ○ Nő
+◇ Sexe non renseigné ¦ ◇ Sukupuoli tuntematon ¦ ◇ A nem nincs megadva
+Les traits relient les générations connues. ¦ Viivat yhdistävät tunnetut sukupolvet. ¦ A vonalak az ismert nemzedékeket kötik össze.
+Distribution des noms ¦ Nimien jakauma ¦ A nevek eloszlása
+DISTRIBUTION ¦ JAKAUMA ¦ ELOSZLÁS
+=naissance regroupée ¦ ryhmitelty syntymä|ryhmiteltyä syntymää ¦ csoportosított születés|csoportosított születés
+{births} par année et patronyme. ¦ {births} vuoden ja sukunimen mukaan. ¦ {births} év és vezetéknév szerint.
+Vivant·e ¦ Elossa ¦ Élő
+Décédé·e ¦ Kuollut ¦ Elhunyt
+D’autres générations existent ¦ Muitakin sukupolvia on ¦ Vannak további nemzedékek
+Côte à côte ¦ Rinnakkain ¦ Egymás mellett
+Dessus / dessous ¦ Päällekkäin ¦ Egymás alatt
+Aucune vue enregistrée pour l’instant ¦ Ei vielä tallennettuja näkymiä ¦ Még nincs mentett nézet
+Montrer les animaux de chacun à côté de leur maître (trait pointillé) ¦ Näytä kunkin eläimet omistajansa vieressä (katkoviiva) ¦ Mindenki állatainak megjelenítése a gazdájuk mellett (szaggatott vonal)
+Couleur et épaisseur des traits selon la solidité de chaque lien parent-enfant ¦ Viivojen väri ja paksuus kunkin vanhempi–lapsi-yhteyden luotettavuuden mukaan ¦ A vonalak színe és vastagsága az egyes szülő–gyermek kapcsolatok megbízhatósága szerint
+🛡 Vue solidité ¦ 🛡 Luotettavuusnäkymä ¦ 🛡 Megbízhatósági nézet
+Tableau des chiffres ¦ Lukutaulukko ¦ Számtáblázat
+Graphique d’une statistique de l’app ¦ Sovelluksen tilaston kaavio ¦ Az alkalmazás egyik statisztikájának grafikonja
+Ce graphique n’existe plus. ¦ Tätä kaaviota ei ole enää. ¦ Ez a grafikon már nem létezik.
+Un de mes graphiques ¦ Yksi kaavioistani ¦ Az egyik grafikonom
+📈 Un de mes graphiques ¦ 📈 Yksi kaavioistani ¦ 📈 Az egyik grafikonom
+Un graphique de l’Éditeur de graphiques, tenu à jour ¦ Kaavioeditorin kaavio, pidetään ajan tasalla ¦ A grafikonszerkesztő egyik grafikonja, naprakészen tartva
+Données de l’app ¦ Sovelluksen tiedot ¦ Az alkalmazás adatai
+🔄 Données de l’app ¦ 🔄 Sovelluksen tiedot ¦ 🔄 Az alkalmazás adatai
+✍️ Mes chiffres ¦ ✍️ Omat lukuni ¦ ✍️ Saját számaim
+Mon diagramme ¦ Oma diagrammini ¦ Saját diagramom
+Posé : {where} ¦ Sijoitettu: {where} ¦ Elhelyezve: {where}
+LISTES · GRAPHIQUES ¦ LUETTELOT · KAAVIOT ¦ LISTÁK · GRAFIKONOK
+📈 Graphiques et diagrammes ¦ 📈 Kaaviot ja diagrammit ¦ 📈 Grafikonok és diagramok
+Tous tes graphiques (faits dans <b>Réglages → Éditeur de graphiques</b>, avec tes propres chiffres ou ceux de l’app) et tes diagrammes (hémicycle, frise d’un groupe, camembert…). Chacun se pose partout : un widget du tableau de bord, une Fiche, une enquête, l’Atelier, la page d’une personne, la mise en page — bouton « ＋ Diagramme », puis « 📈 Un de mes graphiques ». ¦ Kaikki kaaviosi (tehty kohdassa <b>Asetukset → Kaavioeditori</b>, omilla luvuillasi tai sovelluksen luvuilla) ja diagrammisi (puolikaari, ryhmän aikajana, piirakka…). Jokaisen voi sijoittaa minne tahansa: kojelaudan pienoisohjelmaan, Korttiin, selvitykseen, Työpajaan, henkilön sivulle, taittoon — painike ”＋ Diagrammi”, sitten ”📈 Yksi kaavioistani”. ¦ Az összes grafikonod (a <b>Beállítások → Grafikonszerkesztő</b> részben készültek, saját számaiddal vagy az alkalmazáséival) és diagramod (félkör, egy csoport idővonala, kördiagram…). Mindegyik bárhová elhelyezhető: az irányítópult egy widgetjébe, egy Adatlapra, egy nyomozásba, a Műhelybe, egy személy oldalára, a tördelésbe — „＋ Diagram” gomb, majd „📈 Az egyik grafikonom”.
+＋ Nouveau diagramme ¦ ＋ Uusi diagrammi ¦ ＋ Új diagram
+Aucun graphique ni diagramme pour l’instant ¦ Ei vielä kaavioita eikä diagrammeja ¦ Még nincs grafikon vagy diagram
+Un graphique compte ce que tu veux (tes propres chiffres, des personnes, des événements, une statistique de l’app) ; un diagramme dessine une assemblée, une frise, un organigramme… ¦ Kaavio laskee mitä haluat (omat lukusi, henkilöitä, tapahtumia, sovelluksen tilaston); diagrammi piirtää kokoonpanon, aikajanan, organisaatiokaavion… ¦ Egy grafikon azt számolja, amit szeretnél (saját számaidat, személyeket, eseményeket, az alkalmazás egy statisztikáját); egy diagram gyűlést, idővonalat, szervezeti ábrát rajzol…
+Rien ne correspond : retire un filtre ou change la recherche. ¦ Mikään ei vastaa: poista suodatin tai muuta hakua. ¦ Semmi sem felel meg: vegyél ki egy szűrőt, vagy módosítsd a keresést.
+Chercher un graphique, un diagramme… (ex. naissances, Rennes) ¦ Hae kaaviota, diagrammia… (esim. syntymät, Rennes) ¦ Grafikon, diagram keresése… (pl. születések, Rennes)
+Seulement ceux posés quelque part ¦ Vain jonnekin sijoitetut ¦ Csak a valahová elhelyezettek
+Posés quelque part ¦ Sijoitettu jonnekin ¦ Valahová elhelyezve
+Posé nulle part pour l’instant ¦ Ei vielä sijoitettu minnekään ¦ Még sehová nincs elhelyezve
+Courbe ¦ Viiva ¦ Vonal
+Aire ¦ Alue ¦ Terület
+Anneau ¦ Rengas ¦ Fánk
+Camembert ¦ Piirakka ¦ Kördiagram
+Barres ¦ Pylväät ¦ Oszlopok
+Revenir à la personne ¦ Palaa henkilöön ¦ Vissza a személyhez
+Prénom contient ¦ Etunimi sisältää ¦ Az utónév tartalmazza
+Statut (vivant, décédé) ¦ Tila (elossa, kuollut) ¦ Állapot (élő, elhunyt)
+Métier contient ¦ Ammatti sisältää ¦ A foglalkozás tartalmazza
+Dans mes favoris ¦ Suosikeissani ¦ A kedvenceim között
+Naissance entre (années) ¦ Syntynyt välillä (vuodet) ¦ Születés ideje (évek között)
+Naissance entre deux dates précises ¦ Syntynyt kahden tarkan päivämäärän välillä ¦ Születés két pontos dátum között
+Naissance en (mois) ¦ Syntynyt (kuukausi) ¦ Születés hónapja
+Décès entre (années) ¦ Kuollut välillä (vuodet) ¦ Halál ideje (évek között)
+Âge à un événement entre ¦ Ikä tapahtumassa välillä ¦ Életkor egy eseménykor (között)
+A vécu entre … ans ¦ Elänyt … – … vuotta ¦ … és … év között élt
+Lieu de naissance (contient) ¦ Syntymäpaikka (sisältää) ¦ Születési hely (tartalmazza)
+Lieu de décès ou d’inhumation (contient) ¦ Kuolin- tai hautapaikka (sisältää) ¦ Halálozási vagy temetési hely (tartalmazza)
+A un événement à (lieu contient) ¦ Tapahtuma paikassa (sisältää) ¦ Eseménye van itt (a hely tartalmazza)
+A un événement dans le département, la région ou le pays ¦ Tapahtuma departementissa, alueella tai maassa ¦ Eseménye van a megyében, régióban vagy országban
+A un événement à moins de … km de ¦ Tapahtuma alle … km:n päässä paikasta ¦ Eseménye van … km-en belül ettől:
+A eu un événement (mariage, divorce, voyage…) ¦ On ollut tapahtuma (avioliitto, avioero, matka…) ¦ Volt eseménye (házasság, válás, utazás…)
+Nombre d’événements d’un type entre ¦ Tietyn tyypin tapahtumien määrä välillä ¦ Egy típusú események száma (között)
+Nombre d’unions (mariages) entre ¦ Liittojen (avioliittojen) määrä välillä ¦ Kapcsolatok (házasságok) száma (között)
+Nombre d’enfants entre ¦ Lasten määrä välillä ¦ Gyermekek száma (között)
+Conjoint : nom ou prénom contient ¦ Puoliso: suku- tai etunimi sisältää ¦ Házastárs: a vezeték- vagy utónév tartalmazza
+Parent : nom ou prénom contient ¦ Vanhempi: suku- tai etunimi sisältää ¦ Szülő: a vezeték- vagy utónév tartalmazza
+Cause de décès contient ¦ Kuolinsyy sisältää ¦ A halál oka tartalmazza
+Seulement mes ancêtres (Sosa) ¦ Vain esivanhempani (Sosa) ¦ Csak a felmenőim (Sosa)
+Par rapport à la personne de la fiche (ses ancêtres, sa famille…) ¦ Suhteessa kortin henkilöön (hänen esivanhempansa, perheensä…) ¦ Az adatlap személyéhez viszonyítva (felmenői, családja…)
+Génération Sosa entre ¦ Sosa-sukupolvi välillä ¦ Sosa-nemzedék (között)
+Sans source ¦ Ilman lähdettä ¦ Forrás nélkül
+Nombre de sources entre ¦ Lähteiden määrä välillä ¦ Források száma (között)
+A une photo ou un document ¦ Sisältää kuvan tai asiakirjan ¦ Van fényképe vagy dokumentuma
+Les filtres ci-dessus (années, limite, sexe et critères) peuvent devenir ceux de départ de ¦ Yllä olevista suodattimista (vuodet, raja, sukupuoli ja ehdot) voi tulla lähtöasetukset ¦ A fenti szűrők (évek, korlát, nem és feltételek) kiinduló beállításként szolgálhatnak
+les distributions. ¦ jakaumille. ¦ az eloszlásokhoz.
+Usage des noms de famille dans la base. ¦ Sukunimien käyttö tietokannassa. ¦ A vezetéknevek előfordulása az adatbázisban.
+Années de naissance (par décennie) ¦ Syntymävuodet (vuosikymmenittäin) ¦ Születési évek (évtizedenként)
+Années de décès (par décennie) ¦ Kuolinvuodet (vuosikymmenittäin) ¦ Halálozási évek (évtizedenként)
+Mes ancêtres par siècle ¦ Esivanhempani vuosisadoittain ¦ A felmenőim évszázadonként
+Métiers les plus fréquents ¦ Yleisimmät ammatit ¦ A leggyakoribb foglalkozások
+Femmes et hommes ¦ Naiset ja miehet ¦ Nők és férfiak
+Ancêtres à sourcer ¦ Lähteitä vailla olevat esivanhemmat ¦ Forrással ellátandó felmenők
+Toutes les personnes récentes ont au moins une source. ¦ Kaikilla viimeaikaisilla henkilöillä on vähintään yksi lähde. ¦ Minden friss személynek van legalább egy forrása.
+Tous les événements récents ont un média. ¦ Kaikilla viimeaikaisilla tapahtumilla on media. ¦ Minden friss eseménynek van médiája.
+Aucun média. ¦ Ei mediaa. ¦ Nincs média.
+Aucun média isolé. ¦ Ei irrallista mediaa. ¦ Nincs elszigetelt média.
+Toutes les images récentes ont au moins une zone identifiée. ¦ Kaikissa viimeaikaisissa kuvissa on vähintään yksi tunnistettu alue. ¦ Minden friss képen van legalább egy azonosított terület.
+Aucune fiche récente avec parent manquant. ¦ Ei viimeaikaisia kortteja, joilta puuttuu vanhempi. ¦ Nincs friss adatlap hiányzó szülővel.
+Aucun baptême récent sans parrain/marraine. ¦ Ei viimeaikaisia kasteita ilman kummia. ¦ Nincs friss keresztelő keresztszülő nélkül.
+✎ Modifier l’onglet ¦ ✎ Muokkaa välilehteä ¦ ✎ A lap szerkesztése
+Aucun widget affiché ¦ Pienoisohjelmia ei näytetä ¦ Nincs megjelenített widget
+Onglet vide ¦ Tyhjä välilehti ¦ Üres lap
+Ajoute des widgets, tes listes ou tes graphiques depuis la colonne de gauche. ¦ Lisää pienoisohjelmia, luetteloitasi tai kaavioitasi vasemmasta palstasta. ¦ Adj hozzá widgeteket, listákat vagy grafikonokat a bal oldali oszlopból.
+Ajoute-en depuis la colonne de gauche, ou crée le tien. ¦ Lisää niitä vasemmasta palstasta tai luo omasi. ¦ Adj hozzá a bal oldali oszlopból, vagy hozd létre a sajátodat.
+Widget « {name} » retiré du tableau de bord. ¦ Pienoisohjelma ”{name}” irrotettu kojelaudalta. ¦ A(z) „{name}” widget eltávolítva az irányítópultról.
+Widget retiré du tableau de bord. ¦ Pienoisohjelma irrotettu kojelaudalta. ¦ Widget eltávolítva az irányítópultról.
+Widget supprimé du tableau de bord. ¦ Pienoisohjelma poistettu kojelaudalta. ¦ Widget törölve az irányítópultról.
+Widget modifié. ¦ Pienoisohjelmaa muokattu. ¦ Widget módosítva.
+Revenir au widget ¦ Palaa pienoisohjelmaan ¦ Vissza a widgethez
+Enquêtes ouvertes ¦ Avoimet selvitykset ¦ Nyitott nyomozások
+Battues ouvertes ¦ Avoimet laajat haut ¦ Nyitott átfésülések
+Rappels proches ¦ Lähestyvät muistutukset ¦ Közelgő emlékeztetők
+Incohérences ¦ Ristiriidat ¦ Ellentmondások
+Seulement les SOSA ¦ Vain SOSA ¦ Csak a SOSA
+Types d’évènements ¦ Tapahtumatyypit ¦ Eseménytípusok
+Ex : trouver la date de naissance de Jean Dupont ¦ Esim. löydä Jean Dupont'n syntymäaika ¦ Pl. Jean Dupont születési dátumának megkeresése
+Personne liée (facultatif) ¦ Yhdistetty henkilö (valinnainen) ¦ Kapcsolódó személy (nem kötelező)
+Réglages du widget ¦ Pienoisohjelman asetukset ¦ A widget beállításai
+Statistique affichée ¦ Näytettävä tilasto ¦ Megjelenített statisztika
+Dernière fiche consultée ¦ Viimeksi katsottu kortti ¦ Utoljára megnézett adatlap
+Les descendants ¦ Jälkeläiset ¦ A leszármazottak
+Les ascendants ¦ Esivanhemmat ¦ A felmenők
+Sites affichés ¦ Näytettävät sivustot ¦ Megjelenített oldalak
+Prendre cette image ¦ Ota tämä kuva ¦ Ez a kép legyen
+Provenance affichée ¦ Näytettävä alkuperä ¦ Megjelenített származás
+Ex : Jean Dupont · Enquête ¦ Esim. Jean Dupont · Selvitys ¦ Pl. Jean Dupont · Nyomozás
+Personne affichée ¦ Näytettävä henkilö ¦ Megjelenített személy
+Aléatoire ¦ Satunnainen ¦ Véletlenszerű
+Personne précise ¦ Tietty henkilö ¦ Adott személy
+📁 ou glisse une image ici, ou colle-la (⌘V). ¦ 📁 tai vedä kuva tähän tai liitä se (⌘V). ¦ 📁 vagy húzz ide egy képet, vagy illeszd be (⌘V).
+Pages du suivi ¦ Seurannan sivut ¦ A követés oldalai
+Pages du tableau de bord ¦ Kojelaudan sivut ¦ Az irányítópult oldalai
+Chaque page a ses widgets ; les boutons des pages sont en haut du Suivi des animaux. La page cochée s’affiche à l’ouverture. ¦ Jokaisella sivulla on omat pienoisohjelmansa; sivujen painikkeet ovat Eläinten seurannan yläreunassa. Valittu sivu näytetään avattaessa. ¦ Minden oldalnak saját widgetjei vannak; az oldalak gombjai az Állatkövetés tetején vannak. A bejelölt oldal jelenik meg megnyitáskor.
+Chaque page a ses widgets ; les boutons des pages sont en haut du tableau de bord. La page cochée s’affiche à l’ouverture. ¦ Jokaisella sivulla on omat pienoisohjelmansa; sivujen painikkeet ovat kojelaudan yläreunassa. Valittu sivu näytetään avattaessa. ¦ Minden oldalnak saját widgetjei vannak; az oldalak gombjai az irányítópult tetején vannak. A bejelölt oldal jelenik meg megnyitáskor.
+Ranger ses widgets ¦ Järjestä pienoisohjelmat ¦ Widgetek rendezése
+✎ en cours ¦ ✎ kesken ¦ ✎ folyamatban
+Titre de l’ensemble ¦ Kokonaisuuden otsikko ¦ A csoport címe
+Un niveau plus haut ¦ Tasoa ylemmäs ¦ Egy szinttel feljebb
+Sous-ensemble (un niveau plus bas) ¦ Alaryhmä (tasoa alempana) ¦ Alcsoport (egy szinttel lejjebb)
+SUIVI DES ANIMAUX ¦ ELÄINTEN SEURANTA ¦ ÁLLATKÖVETÉS
+MON ONGLET ¦ OMA VÄLILEHTENI ¦ SAJÁT LAPOM
+Son widget sera supprimé avec elle. ¦ Sen pienoisohjelma poistetaan sen mukana. ¦ A widgetje is törlődik vele együtt.
+Ses {widgets} seront supprimés avec elle. ¦ Sen {widgets} poistetaan sen mukana. ¦ A(z) {widgets} is törlődnek vele együtt.
+=widget ¦ pienoisohjelma|pienoisohjelmaa ¦ widget|widget
+Supprimer la page « {name} » ? ¦ Poistetaanko sivu ”{name}”? ¦ Törlöd a(z) „{name}” oldalt?
+Page ¦ Sivu ¦ Oldal
+Pages du suivi enregistrées. ¦ Seurannan sivut tallennettu. ¦ A követés oldalai mentve.
+Tableau de bord enregistré. ¦ Kojelauta tallennettu. ¦ Irányítópult mentve.
+=fiche créée ¦ luotu kortti|luotua korttia ¦ létrehozott adatlap|létrehozott adatlap
+=événement ajouté ¦ lisätty tapahtuma|lisättyä tapahtumaa ¦ hozzáadott esemény|hozzáadott esemény
+=source ajoutée ¦ lisätty lähde|lisättyä lähdettä ¦ hozzáadott forrás|hozzáadott forrás
+=recensement ajouté ¦ lisätty henkikirja|lisättyä henkikirjaa ¦ hozzáadott népszámlálás|hozzáadott népszámlálás
+=nouvel ancêtre Sosa ¦ uusi Sosa-esivanhempi|uutta Sosa-esivanhempaa ¦ új Sosa-felmenő|új Sosa-felmenő
+=battue terminée ¦ päättynyt laaja haku|päättynyttä laajaa hakua ¦ befejezett átfésülés|befejezett átfésülés
+=enquête terminée ¦ päättynyt selvitys|päättynyttä selvitystä ¦ befejezett nyomozás|befejezett nyomozás
+=évènement ¦ tapahtuma|tapahtumaa ¦ esemény|esemény
+=doublon ¦ kaksoiskappale|kaksoiskappaletta ¦ duplikátum|duplikátum
+pas encore de modification ce mois-ci ¦ ei vielä muutoksia tässä kuussa ¦ ebben a hónapban még nincs módosítás
+rien pour l’instant ¦ ei vielä mitään ¦ egyelőre semmi
+En {month} : ¦ {month}: ¦ {month}:
+En {year} : ¦ Vuonna {year}: ¦ {year}. évben:
+{days} de recherche. ¦ {days} tutkimusta. ¦ {days} kutatás.
+{days} de recherche, {changes}. ¦ {days} tutkimusta, {changes}. ¦ {days} kutatás, {changes}.
+↑ plus actif que le mois dernier ¦ ↑ aktiivisempi kuin viime kuussa ¦ ↑ aktívabb, mint a múlt hónapban
+Modifications par mois sur un an ¦ Muutokset kuukausittain vuoden ajalta ¦ Módosítások havonta egy évre
+D’après le journal des modifications : le travail fait à la main (les imports de fichiers ne comptent pas comme fiches créées). ¦ Muutoslokin mukaan: käsin tehty työ (tiedostojen tuonnit eivät lasketa luoduiksi korteiksi). ¦ A módosítási napló alapján: a kézzel végzett munka (a fájlimportok nem számítanak létrehozott adatlapnak).
+Bilan indisponible. ¦ Yhteenveto ei ole saatavilla. ¦ Az összegzés nem érhető el.
+dernière fiche consultée ¦ viimeksi katsottu kortti ¦ utoljára megnézett adatlap
+Aucun anniversaire aujourd’hui. ¦ Ei merkkipäiviä tänään. ¦ Ma nincs évforduló.
+Aucune personne verrouillée récemment. ¦ Ei äskettäin lukittuja henkilöitä. ¦ Nincs nemrég zárolt személy.
+Aucune personne disponible pour ce widget. ¦ Tälle pienoisohjelmalle ei ole henkilöitä saatavilla. ¦ Ehhez a widgethez nincs elérhető személy.
+Aucun événement renseigné. ¦ Ei merkittyjä tapahtumia. ¦ Nincs megadott esemény.
+Aucune note. ¦ Ei muistiinpanoja. ¦ Nincs jegyzet.
+Aucun recensement. ¦ Ei henkikirjoja. ¦ Nincs népszámlálás.
+Aucune source ou citation. ¦ Ei lähteitä tai lainauksia. ¦ Nincs forrás vagy idézet.
+Bloc surtout utile pour une fiche féminine. ¦ Lohko on hyödyllinen lähinnä naisen kortilla. ¦ Ez a blokk főleg női adatlapon hasznos.
+Aucune enquête ou battue liée. ¦ Ei yhdistettyjä selvityksiä tai laajoja hakuja. ¦ Nincs kapcsolódó nyomozás vagy átfésülés.
+Aucun détail ¦ Ei yksityiskohtia ¦ Nincs részlet
+Décision ¦ Päätös ¦ Döntés
+Bureau ¦ Toimisto ¦ Hivatal
+Œuvre ¦ Teos ¦ Mű
+Ouvrir fiche ¦ Avaa kortti ¦ Adatlap megnyitása
+Tous les événements récents ont une source. ¦ Kaikilla viimeaikaisilla tapahtumilla on lähde. ¦ Minden friss eseménynek van forrása.
+Aucun lieu prioritaire à compléter. ¦ Ei täydennettäviä tärkeitä paikkoja. ¦ Nincs kiemelten kiegészítendő hely.
+Coordonnées ou pays à compléter ¦ Koordinaatit tai maa täydennettävä ¦ Koordináták vagy ország kiegészítendő
+Aucun couple prioritaire sans mariage. ¦ Ei tärkeitä pareja ilman avioliittoa. ¦ Nincs kiemelt pár házasság nélkül.
+Personne 1 ¦ Henkilö 1 ¦ 1. személy
+Personne 2 ¦ Henkilö 2 ¦ 2. személy
+Aucune incohérence de dates détectée. ¦ Päivämäärien ristiriitoja ei havaittu. ¦ Nem található ellentmondás a dátumokban.
+Incohérences et conflits ¦ Ristiriidat ja konfliktit ¦ Ellentmondások és ütközések
+Vérifier ¦ Tarkista ¦ Ellenőrzés
+Aucun SOSA manquant proche. ¦ Ei puuttuvia lähellä olevia SOSA-henkilöitä. ¦ Nincs közeli hiányzó SOSA.
+Aucune battue prioritaire. ¦ Ei tärkeitä laajoja hakuja. ¦ Nincs kiemelt átfésülés.
+Commune de départ inconnue ¦ Lähtökunta tuntematon ¦ Ismeretlen kiinduló település
+Aucune action prioritaire pour le moment. ¦ Ei tärkeitä toimia tällä hetkellä. ¦ Egyelőre nincs kiemelt teendő.
+À traiter ¦ Käsiteltävät ¦ Teendő
+Liste de travail quotidienne ¦ Päivittäinen työlista ¦ Napi munkalista
+Aucune archive disponible. ¦ Arkistoja ei ole saatavilla. ¦ Nincs elérhető archívum.
+Aucune racine SOSA définie. ¦ SOSA-juurta ei ole määritetty. ¦ Nincs megadva SOSA-kiindulópont.
+Aucun doublon probable repéré. ¦ Todennäköisiä kaksoiskappaleita ei löytynyt. ¦ Nem található valószínű duplikátum.
+Aucun point géographique exploitable. ¦ Ei käyttökelpoisia maantieteellisiä pisteitä. ¦ Nincs használható földrajzi pont.
+Aperçu cartographique ¦ Karttaesikatselu ¦ Térképes előnézet
+Aucune personne avec lieux datés. ¦ Ei henkilöitä, joilla on päivättyjä paikkoja. ¦ Nincs személy keltezett helyekkel.
+Aucune personne disponible. ¦ Ei henkilöitä saatavilla. ¦ Nincs elérhető személy.
+Aucun événement daté. ¦ Ei päivättyjä tapahtumia. ¦ Nincs keltezett esemény.
+Éléments datés ou localisés ¦ Päivätyt tai paikannetut kohteet ¦ Keltezett vagy helyhez kötött elemek
+Documents et images ¦ Asiakirjat ja kuvat ¦ Dokumentumok és képek
+Sources enregistrées ¦ Tallennetut lähteet ¦ Mentett források
+En cours ou en pause ¦ Käynnissä tai tauolla ¦ Folyamatban vagy szüneteltetve
+Recherches commune par commune ¦ Tutkimukset kunta kunnalta ¦ Kutatások településenként
+À vérifier dans maintenance ¦ Tarkistettava ylläpidossa ¦ Ellenőrizendő a karbantartásban
+100 fiches ¦ 100 korttia ¦ 100 adatlap
+Au moins 100 personnes enregistrées ¦ Vähintään 100 tallennettua henkilöä ¦ Legalább 100 mentett személy
+100 médias ¦ 100 mediaa ¦ 100 média
+Au moins 100 documents conservés ¦ Vähintään 100 säilytettyä asiakirjaa ¦ Legalább 100 megőrzött dokumentum
+Au moins la moitié des fiches sourcées ¦ Vähintään puolella korteista on lähde ¦ Az adatlapok legalább felének van forrása
+Illustrée ¦ Kuvitettu ¦ Illusztrált
+Au moins la moitié des fiches avec un média ¦ Vähintään puolella korteista on media ¦ Az adatlapok legalább felének van médiája
+5 générations SOSA ¦ 5 SOSA-sukupolvea ¦ 5 SOSA-nemzedék
+Cinq générations complètes ¦ Viisi täydellistä sukupolvea ¦ Öt teljes nemzedék
+Au moins une battue créée ¦ Vähintään yksi luotu laaja haku ¦ Legalább egy létrehozott átfésülés
+Aucune suppression récente. ¦ Ei viimeaikaisia poistoja. ¦ Nincs friss törlés.
+Aucune modification récente. ¦ Ei viimeaikaisia muutoksia. ¦ Nincs friss módosítás.
+Aucun événement exploitable pour ce quiz avec les filtres choisis. ¦ Valituilla suodattimilla ei ole tähän tietovisaan sopivia tapahtumia. ¦ A kiválasztott szűrőkkel nincs használható esemény ehhez a kvízhez.
+Pas assez de dates distinctes pour générer des propositions. ¦ Ei tarpeeksi eri päivämääriä vaihtoehtojen luomiseen. ¦ Nincs elég különböző dátum a válaszlehetőségek elkészítéséhez.
+Quelle est la date de <strong>{what}</strong> de <strong>{name}</strong> ? ¦ Mikä on henkilön <strong>{name}</strong> <strong>{what}</strong> päivämäärä? ¦ Mi <strong>{name}</strong> <strong>{what}</strong> dátuma?
+Aucune image disponible. ¦ Ei kuvia saatavilla. ¦ Nincs elérhető kép.
+Choisis une image dans les réglages du widget. ¦ Valitse kuva pienoisohjelman asetuksista. ¦ Válassz egy képet a widget beállításaiban.
+Choisis deux personnes dans les réglages du widget. ¦ Valitse kaksi henkilöä pienoisohjelman asetuksista. ¦ Válassz két személyt a widget beállításaiban.
+Personne liée ¦ Yhdistetty henkilö ¦ Kapcsolódó személy
+Ouvre Comparaison pour analyser le lien. ¦ Avaa Vertailu analysoidaksesi yhteyden. ¦ Nyisd meg az Összehasonlítást a kapcsolat elemzéséhez.
+Aucune personne favorite. ¦ Ei suosikkihenkilöitä. ¦ Nincs kedvenc személy.
+Rappels à traiter ¦ Käsiteltävät muistutukset ¦ Teendő emlékeztetők
+Alertes cohérence ¦ Johdonmukaisuushälytykset ¦ Következetességi figyelmeztetések
+Naissance renseignée ¦ Syntymä merkitty ¦ Születés megadva
+Décès renseigné ¦ Kuolema merkitty ¦ Halál megadva
+Au moins un média ¦ Vähintään yksi media ¦ Legalább egy média
+Au moins une source ¦ Vähintään yksi lähde ¦ Legalább egy forrás
+Aucun lieu renseigné. ¦ Ei merkittyjä paikkoja. ¦ Nincs megadott hely.
+Ajoute un objectif dans les réglages du widget. ¦ Lisää tavoite pienoisohjelman asetuksissa. ¦ Adj meg egy célt a widget beállításaiban.
+Ajouter {what} ¦ Lisää {what} ¦ {what} hozzáadása
+Aucun rappel à venir. ¦ Ei tulevia muistutuksia. ¦ Nincs közelgő emlékeztető.
+Aucune fiche consultée sur ce navigateur. ¦ Tällä selaimella ei ole katsottu kortteja. ¦ Ebben a böngészőben még nem néztél meg adatlapot.
+Aucun média à transcrire. ¦ Ei litteroitavaa mediaa. ¦ Nincs átírandó média.
+Aucune signature identifiée à comparer. ¦ Ei vertailtavia tunnistettuja allekirjoituksia. ¦ Nincs összehasonlítható azonosított aláírás.
+Aucune commune de battue à reprendre. ¦ Ei jatkettavia laajan haun kuntia. ¦ Nincs folytatandó átfésülési település.
+Aucune source ou piste à vérifier. ¦ Ei tarkistettavia lähteitä tai johtolankoja. ¦ Nincs ellenőrizendő forrás vagy nyom.
+Rien à relire pour le moment. ¦ Ei mitään tarkistettavaa tällä hetkellä. ¦ Egyelőre nincs mit átnézni.
+Aucun départ enregistré : coche « Départs / émigration » sur une fiche. ¦ Lähtöjä ei ole tallennettu: valitse ”Lähdöt / maastamuutto” kortilla. ¦ Nincs mentett elvándorlás: jelöld be a „Elvándorlás / kivándorlás” lehetőséget egy adatlapon.
+Aucun enfant placé enregistré. ¦ Ei tallennettuja sijoitettuja lapsia. ¦ Nincs mentett kihelyezett gyermek.
+Aucune armoirie. ¦ Ei vaakunoita. ¦ Nincs címer.
+Ajouter des armoiries ¦ Lisää vaakuna ¦ Címer hozzáadása
+Aucun poilu : coche « Poilu 14-18 » sur une fiche. ¦ Ei sotilaita: valitse ”Poilu 14-18” kortilla. ¦ Nincs poilu: jelöld be a „Poilu 14-18” lehetőséget egy adatlapon.
+Aucune recherche enregistrée (Recherche → Recherche multicritère). ¦ Ei tallennettuja hakuja (Tutkimus → Monikriteerinen haku). ¦ Nincs mentett keresés (Kutatás → Összetett keresés).
+Aucun circuit à faire. ¦ Ei tehtäviä kiertomatkoja. ¦ Nincs elvégzendő körutazás.
+Préparer un circuit ¦ Valmistele kiertomatka ¦ Körutazás előkészítése
+⚠ Aucun dossier hors de cet ordinateur n’est réglé : si le Mac est volé ou tombe en panne, tout part avec lui. ¦ ⚠ Yhtään tämän tietokoneen ulkopuolista kansiota ei ole asetettu: jos Mac varastetaan tai hajoaa, kaikki katoaa sen mukana. ¦ ⚠ Nincs beállítva mappa ezen a számítógépen kívül: ha a Macet ellopják vagy elromlik, minden vele együtt elvész.
+Régler ¦ Aseta ¦ Beállítás
+Aucun dossier surveillé pour l’instant ¦ Ei vielä valvottuja kansioita ¦ Még nincs figyelt mappa
+Choisir un dossier ¦ Valitse kansio ¦ Mappa kiválasztása
+Aucun nom indexé dans les transcriptions. ¦ Litteroinneissa ei ole indeksoituja nimiä. ¦ Az átiratokban nincs indexelt név.
+Rien de prévu sur les 7 prochains jours. ¦ Ei mitään suunniteltua seuraavalle 7 päivälle. ¦ A következő 7 napra nincs semmi tervezve.
+Aucune date récurrente repérée dans les 7 prochains jours. ¦ Seuraavan 7 päivän aikana ei löytynyt toistuvia päivämääriä. ¦ A következő 7 napban nincs ismétlődő dátum.
+Texte vide : écris-le avec le crayon ✎. ¦ Tyhjä teksti: kirjoita se kynällä ✎. ¦ Üres szöveg: írd meg a ceruzával ✎.
+↗ Ouvrir mon agenda ¦ ↗ Avaa kalenterini ¦ ↗ Naptáram megnyitása
+Ce mois-ci ¦ Tässä kuussa ¦ Ebben a hónapban
+Voir le mois ¦ Näytä kuukausi ¦ A hónap megtekintése
+Qui ¦ Kuka ¦ Ki
+Entrée : calculer · ↑ : reprendre le dernier ¦ Enter: laske · ↑: ota edellinen ¦ Enter: számolás · ↑: az előző visszahívása
+⛶ Ouvrir la calculette ¦ ⛶ Avaa laskin ¦ ⛶ Számológép megnyitása
+Fond de carte indisponible (pas d’Internet ?) : les photos restent à leur place. ¦ Karttapohja ei ole saatavilla (ei internetiä?): kuvat pysyvät paikoillaan. ¦ Az alaptérkép nem érhető el (nincs internet?): a fényképek a helyükön maradnak.
+Pas précédent ¦ Edellinen vaihe ¦ Előző lépés
+Pas suivant ¦ Seuraava vaihe ¦ Következő lépés
+Aucune date pour l’instant. ¦ Ei vielä päivämääriä. ¦ Még nincs dátum.
+Frise : glisse pour choisir une période, molette pour zoomer, double-clic pour tout voir ¦ Aikajana: vedä valitaksesi jakson, rulla zoomaa, kaksoisnapsautus näyttää kaiken ¦ Idővonal: húzással választhatsz időszakot, görgővel nagyíthatsz, dupla kattintással mindent látsz
+Choisis une carte dans les réglages du widget (✎). ¦ Valitse kartta pienoisohjelman asetuksista (✎). ¦ Válassz egy térképet a widget beállításaiban (✎).
+Des barres ou un camembert : par métier, par lieu, par décennie, par siècle… ¦ Pylväitä tai piirakka: ammatin, paikan, vuosikymmenen, vuosisadan mukaan… ¦ Oszlopok vagy kördiagram: foglalkozás, hely, évtized, évszázad szerint…
+Écran de l’app ¦ Sovelluksen näkymä ¦ Az alkalmazás képernyője
+Une liste, un diagramme, une statistique, la fiche d’une personne, la carte… tel quel. ¦ Luettelo, diagrammi, tilasto, henkilön kortti, kartta… sellaisenaan. ¦ Egy lista, egy diagram, egy statisztika, egy személy adatlapja, a térkép… ahogy van.
+Un pense-bête, une citation, une consigne, avec des émojis. ¦ Muistilappu, lainaus, ohje, emojeilla. ¦ Egy emlékeztető, egy idézet, egy utasítás, emojikkal.
+Raccourcis ¦ Pikakuvakkeet ¦ Gyorsgombok
+Des boutons vers les écrans, les listes ou des sites que tu utilises souvent. ¦ Painikkeita näkymiin, luetteloihin tai sivustoihin, joita käytät usein. ¦ Gombok a gyakran használt képernyőkhöz, listákhoz vagy oldalakhoz.
+Parcours jour par jour ¦ Kulku päivä päivältä ¦ Útvonal napról napra
+Widget de l’app habillé ¦ Muotoiltu sovelluksen pienoisohjelma ¦ Formázott alkalmazás-widget
+Widget de l’app ¦ Sovelluksen pienoisohjelma ¦ Alkalmazás-widget
+toute la largeur ¦ koko leveys ¦ teljes szélesség
+Mosaïque (carrés proportionnels) ¦ Mosaiikki (suhteelliset neliöt) ¦ Mozaik (arányos négyzetek)
+Aire (courbe remplie) ¦ Alue (täytetty käyrä) ¦ Terület (kitöltött görbe)
+cliquer pour voir qui ¦ napsauta nähdäksesi ketkä ¦ kattints, hogy lásd, kik
+Tout voir ({n}) ¦ Näytä kaikki ({n}) ¦ Az összes ({n})
+{n} autres valeurs ¦ {n} muuta arvoa ¦ {n} további érték
+Aucune ligne. ¦ Ei rivejä. ¦ Nincs sor.
+Personne ne correspond. ¦ Kukaan ei vastaa hakua. ¦ Senki sem felel meg.
+=personne différente ¦ eri henkilö|eri henkilöä ¦ különböző személy|különböző személy
+{people} pour {n} comptés (les 3 000 premières lignes seulement). ¦ {people}, laskettu {n} (vain ensimmäiset 3 000 riviä). ¦ {people} {n} számolt elemre (csak az első 3 000 sor).
+{people} pour {n} comptés : une même personne peut compter plusieurs fois (deux événements, deux étiquettes…). ¦ {people}, laskettu {n}: sama henkilö voi tulla lasketuksi useasti (kaksi tapahtumaa, kaksi tunnistetta…). ¦ {people} {n} számolt elemre: ugyanaz a személy többször is számíthat (két esemény, két címke…).
+Chercher un nom, un métier… ¦ Hae nimeä, ammattia… ¦ Név, foglalkozás keresése…
+Par nom, A → Z ¦ Nimen mukaan, A → Ö ¦ Név szerint, A → Z
+Par nom, Z → A ¦ Nimen mukaan, Ö → A ¦ Név szerint, Z → A
+Par naissance, les plus anciennes ¦ Syntymän mukaan, vanhimmat ensin ¦ Születés szerint, a legrégebbiek elöl
+Par naissance, les plus récentes ¦ Syntymän mukaan, uusimmat ensin ¦ Születés szerint, a legújabbak elöl
+Aucun raccourci. ¦ Ei pikakuvakkeita. ¦ Nincs gyorsgomb.
+Frise verticale ¦ Pystysuora aikajana ¦ Függőleges idővonal
+Frise horizontale (défile) ¦ Vaakasuora aikajana (vierii) ¦ Vízszintes idővonal (görgethető)
+Cartes en grille ¦ Kortit ruudukkona ¦ Kártyák rácsban
+Liste compacte ¦ Tiivis luettelo ¦ Tömör lista
+jusqu’au… (facultatif) ¦ asti… (valinnainen) ¦ eddig… (nem kötelező)
+Titre de l’étape ¦ Vaiheen otsikko ¦ A lépés címe
+Couleur de l’étape ¦ Vaiheen väri ¦ A lépés színe
+Ce qui s’est passé ce jour-là ¦ Mitä sinä päivänä tapahtui ¦ Ami azon a napon történt
+Aucun événement daté pour cette personne. ¦ Tällä henkilöllä ei ole päivättyjä tapahtumia. ¦ Ennek a személynek nincs keltezett eseménye.
+Étape ¦ Vaihe ¦ Lépés
+Ancêtres trouvés (Sosa) ¦ Löydetyt esivanhemmat (Sosa) ¦ Megtalált felmenők (Sosa)
+Ancêtres sans source ¦ Esivanhemmat ilman lähdettä ¦ Felmenők forrás nélkül
+décès avant 1800 ¦ kuolleet ennen vuotta 1800 ¦ 1800 előtti halálozás
+Pense-bête ¦ Muistilappu ¦ Emlékeztető
+Crée tes propres graphiques, sans rien programmer : avec ¦ Luo omat kaaviosi ohjelmoimatta mitään: käyttäen ¦ Készítsd el a saját grafikonjaidat programozás nélkül:
+tes propres chiffres ¦ omia lukujasi ¦ saját számaiddal
+＋ Nouveau widget ¦ ＋ Uusi pienoisohjelma ¦ ＋ Új widget
+Importer un widget reçu ¦ Tuo saatu pienoisohjelma ¦ Kapott widget importálása
+Un fichier « .lcnda-widget.json » envoyé par un proche : seul le modèle du widget est partagé, jamais les données. ¦ Läheisen lähettämä tiedosto ”.lcnda-widget.json”: vain pienoisohjelman malli jaetaan, ei koskaan tietoja. ¦ Egy hozzátartozó által küldött „.lcnda-widget.json” fájl: csak a widget mintája kerül megosztásra, az adatok soha.
+sur le tableau de bord ¦ kojelaudalla ¦ az irányítópulton
+↗ Ouvrir dans Graphiques ¦ ↗ Avaa Kaavioissa ¦ ↗ Megnyitás a Grafikonokban
+＋ Ajouter au tableau de bord ¦ ＋ Lisää kojelautaan ¦ ＋ Hozzáadás az irányítópulthoz
+Widget supprimé. ¦ Pienoisohjelma poistettu. ¦ Widget törölve.
+Mon widget ¦ Oma pienoisohjelmani ¦ Saját widgetem
+Supprimer le widget ¦ Poista pienoisohjelma ¦ Widget törlése
+Supprimer le widget « {name} » ? Il disparaît aussi du tableau de bord. ¦ Poistetaanko pienoisohjelma ”{name}”? Se katoaa myös kojelaudalta. ¦ Törlöd a(z) „{name}” widgetet? Az irányítópultról is eltűnik.
+Supprimer le widget « {name} » ? Il disparaît aussi du tableau de bord et de tous les endroits où ce graphique est posé (fiches, enquêtes, mise en page…). ¦ Poistetaanko pienoisohjelma ”{name}”? Se katoaa myös kojelaudalta ja kaikista paikoista, joihin tämä kaavio on sijoitettu (kortit, selvitykset, taitto…). ¦ Törlöd a(z) „{name}” widgetet? Eltűnik az irányítópultról és minden olyan helyről is, ahová ez a grafikon el van helyezve (adatlapok, nyomozások, tördelés…).
+« {name} » importé : il est dans Graphiques → « Mes graphiques ». ¦ ”{name}” tuotu: se on kohdassa Kaaviot → ”Omat kaavioni”. ¦ „{name}” importálva: a Grafikonok → „Saját grafikonjaim” alatt találod.
+Widget « {name} » importé : ajoute-le au tableau de bord. ¦ Pienoisohjelma ”{name}” tuotu: lisää se kojelautaan. ¦ „{name}” widget importálva: add hozzá az irányítópulthoz.
+📌 Le poser aussi sur… ¦ 📌 Sijoita se myös… ¦ 📌 Elhelyezés ide is…
+(à l’enregistrement) ¦ (tallennettaessa) ¦ (mentéskor)
+Posé nulle part pour l’instant. ¦ Ei vielä sijoitettu minnekään. ¦ Még sehová nincs elhelyezve.
+La page d’une personne, une enquête… ¦ Henkilön sivu, selvitys… ¦ Egy személy oldala, egy nyomozás…
+Graphique posé : {name}. ¦ Kaavio sijoitettu: {name}. ¦ Grafikon elhelyezve: {name}.
+Graphique retiré de cet endroit ¦ Kaavio irrotettu tästä paikasta ¦ A grafikon eltávolítva erről a helyről
+L’ouvrir dans Graphiques ¦ Avaa se Kaavioissa ¦ Megnyitás a Grafikonokban
+… et {n} autres (Listes → Graphiques et diagrammes) ¦ … ja {n} muuta (Luettelot → Kaaviot ja diagrammit) ¦ … és {n} további (Listák → Grafikonok és diagramok)
+Widget ajouté au tableau de bord. ¦ Pienoisohjelma lisätty kojelautaan. ¦ Widget hozzáadva az irányítópulthoz.
+NOUVEAU WIDGET ¦ UUSI PIENOISOHJELMA ¦ ÚJ WIDGET
+NOUVEAU GRAPHIQUE ¦ UUSI KAAVIO ¦ ÚJ GRAFIKON
+Par quoi commencer ? ¦ Mistä aloitat? ¦ Mivel kezded?
+Partir de rien ¦ Aloita tyhjästä ¦ Kezdés a nulláról
+Partir d’un élément de l’app ¦ Aloita sovelluksen osasta ¦ Kiindulás az alkalmazás egy eleméből
+N’importe quel écran devient un widget : une liste (fiche d’un village, recensements, rappels…), un diagramme, une statistique, une de tes listes, la fiche d’une personne, la carte, un outil des Réglages. ¦ Mistä tahansa näkymästä tulee pienoisohjelma: luettelo (kylän kortti, henkikirjat, muistutukset…), diagrammi, tilasto, yksi luetteloistasi, henkilön kortti, kartta, Asetusten työkalu. ¦ Bármelyik képernyőből widget lehet: egy lista (egy falu adatlapja, népszámlálások, emlékeztetők…), egy diagram, egy statisztika, az egyik listád, egy személy adatlapja, a térkép, a Beállítások egy eszköze.
+Créer ce widget ¦ Luo tämä pienoisohjelma ¦ A widget létrehozása
+Partir d’un widget de l’app ¦ Aloita sovelluksen pienoisohjelmasta ¦ Kiindulás az alkalmazás egyik widgetjéből
+Partir d’un de mes widgets ¦ Aloita jostakin pienoisohjelmastani ¦ Kiindulás az egyik widgetemből
+Avec mes propres chiffres ¦ Omilla luvuillani ¦ Saját számaimmal
+Un tableau à remplir (des noms et des chiffres, en une ou plusieurs séries), collé d’un tableur ou importé d’un fichier CSV. ¦ Täytettävä taulukko (nimiä ja lukuja, yhtenä tai useampana sarjana), liitetty taulukkolaskennasta tai tuotu CSV-tiedostosta. ¦ Kitöltendő táblázat (nevek és számok, egy vagy több adatsorban), táblázatkezelőből beillesztve vagy CSV-fájlból importálva.
+Mes propres chiffres ¦ Omat lukuni ¦ Saját számaim
+Un diagramme ¦ Diagrammi ¦ Egy diagram
+Hémicycle d’une assemblée, frise des membres d’un groupe, organigramme, flux, nuage de mots… (Mes diagrammes). ¦ Kokouksen puolikaari, ryhmän jäsenten aikajana, organisaatiokaavio, virtaus, sanapilvi… (Omat diagrammini). ¦ Egy gyűlés félköre, egy csoport tagjainak idővonala, szervezeti ábra, áramlás, szófelhő… (Saját diagramjaim).
+Partir de rien, avec les données de l’app ¦ Aloita tyhjästä sovelluksen tiedoilla ¦ Kezdés a nulláról, az alkalmazás adataival
+Un ou plusieurs nombres : combien de personnes, d’événements, de lieux… répondent à tes critères. ¦ Yksi tai useampi luku: kuinka monta henkilöä, tapahtumaa, paikkaa… vastaa ehtojasi. ¦ Egy vagy több szám: hány személy, esemény, hely… felel meg a feltételeidnek.
+Les premières lignes d’une liste, avec les colonnes et l’ordre que tu veux. ¦ Luettelon ensimmäiset rivit haluamillasi sarakkeilla ja järjestyksessä. ¦ Egy lista első sorai, a kívánt oszlopokkal és sorrendben.
+Partir d’une statistique de l’app ¦ Aloita sovelluksen tilastosta ¦ Kiindulás az alkalmazás egy statisztikájából
+Les mêmes chiffres que dans Graphiques → Statistiques, avec ton dessin (barres, camembert, courbe, mosaïque…), tes couleurs, et autant de critères que tu veux : métier, lieu et rayon en km, dates précises, mariage, nombre d’enfants, durée de vie, divorce, voyage… ¦ Samat luvut kuin kohdassa Kaaviot → Tilastot, omalla piirroksellasi (pylväät, piirakka, käyrä, mosaiikki…), omilla väreilläsi ja niin monella ehdolla kuin haluat: ammatti, paikka ja säde kilometreinä, tarkat päivämäärät, avioliitto, lasten määrä, elinikä, avioero, matka… ¦ Ugyanazok a számok, mint a Grafikonok → Statisztikák részben, a saját rajzoddal (oszlopok, kördiagram, görbe, mozaik…), a saját színeiddel, és annyi feltétellel, amennyit szeretnél: foglalkozás, hely és sugár km-ben, pontos dátumok, házasság, gyermekek száma, élettartam, válás, utazás…
+D’une statistique de l’app ¦ Sovelluksen tilastosta ¦ Az alkalmazás egy statisztikájából
+Partir d’un de mes widgets ou de mes graphiques ¦ Aloita jostakin pienoisohjelmastani tai kaaviostani ¦ Kiindulás az egyik widgetemből vagy grafikonomból
+── ou des données de l’app ── ¦ ── tai sovelluksen tiedoista ── ¦ ── vagy az alkalmazás adataiból ──
+Listes de l’app ¦ Sovelluksen luettelot ¦ Az alkalmazás listái
+Aucun critère : toute la base. ¦ Ei ehtoja: koko tietokanta. ¦ Nincs feltétel: a teljes adatbázis.
+Toutes les lignes de cette liste de l’app. ¦ Kaikki tämän sovelluksen luettelon rivit. ¦ Az alkalmazás e listájának összes sora.
+(ce que montre cette partie, affichée dessous) ¦ (mitä tämä osa näyttää, näkyy alla) ¦ (amit ez a rész mutat, alatta látható)
+Ex. : Les baptêmes de la paroisse, du plus ancien au plus récent ¦ Esim.: Seurakunnan kasteet vanhimmasta uusimpaan ¦ Pl.: A plébánia keresztelői a legrégebbitől a legújabbig
+✨ Proposer une légende d’après les critères ¦ ✨ Ehdota kuvatekstiä ehtojen perusteella ¦ ✨ Felirat javaslata a feltételek alapján
+Tableau vide : « ＋ Ligne » ou « 📋 Coller un tableau ». ¦ Tyhjä taulukko: ”＋ Rivi” tai ”📋 Liitä taulukko”. ¦ Üres táblázat: „＋ Sor” vagy „📋 Táblázat beillesztése”.
+＋ Série (colonne de chiffres) ¦ ＋ Sarja (lukusarake) ¦ ＋ Adatsor (számoszlop)
+Recopier les chiffres d’un graphique (à toi, un exemple, ou une statistique de l’app) pour les retoucher ¦ Kopioi kaavion luvut (oman, esimerkin tai sovelluksen tilaston) muokataksesi niitä ¦ Egy grafikon számainak átmásolása (a sajátodé, egy példáé vagy az alkalmazás egy statisztikájáé), hogy átdolgozd őket
+📋 Coller un tableau ¦ 📋 Liitä taulukko ¦ 📋 Táblázat beillesztése
+📊 Partir d’un graphique ¦ 📊 Aloita kaaviosta ¦ 📊 Kiindulás egy grafikonból
+🧾 Modifier les données ¦ 🧾 Muokkaa tietoja ¦ 🧾 Az adatok szerkesztése
+Fichier trop gros (5 Mo au plus). ¦ Tiedosto on liian suuri (enintään 5 Mt). ¦ A fájl túl nagy (legfeljebb 5 MB).
+Ligne retirée ¦ Rivi irrotettu ¦ Sor eltávolítva
+Tableau vidé ¦ Taulukko tyhjennetty ¦ Táblázat kiürítve
+Remplacer le tableau ¦ Korvaa taulukko ¦ A táblázat cseréje
+La première ligne ¦ Ensimmäinen rivi ¦ Az első sor
+à deviner ¦ arvataan ¦ kitalálandó
+donne les titres (noms des séries) ¦ antaa otsikot (sarjojen nimet) ¦ a címeket adja (az adatsorok neveit)
+est une ligne de chiffres ¦ on lukurivi ¦ egy számsor
+Aucun graphique disponible. ¦ Kaavioita ei ole saatavilla. ¦ Nincs elérhető grafikon.
+Recopier ces chiffres ¦ Kopioi nämä luvut ¦ A számok átmásolása
+Aucun chiffre pour ce graphique. ¦ Tällä kaaviolla ei ole lukuja. ¦ Ehhez a grafikonhoz nincs szám.
+=valeur recopiée ¦ kopioitu arvo|kopioitua arvoa ¦ átmásolt érték|átmásolt érték
+=série ¦ sarja|sarjaa ¦ adatsor|adatsor
+Série {num} ¦ Sarja {num} ¦ {num}. adatsor
+Nom de la série {num} ¦ Sarjan {num} nimi ¦ A(z) {num}. adatsor neve
+Tableau importé ({rows}) ¦ Taulukko tuotu ({rows}) ¦ Táblázat importálva ({rows})
+Série « {name} » retirée ¦ Sarja ”{name}” irrotettu ¦ „{name}” adatsor eltávolítva
+Chiffres repris du tableur ({rows}) ¦ Luvut otettu taulukkolaskennasta ({rows}) ¦ Számok átvéve a táblázatkezelőből ({rows})
+Tableau collé ({rows}) ¦ Taulukko liitetty ({rows}) ¦ Táblázat beillesztve ({rows})
+Retirer cette série ¦ Irrota tämä sarja ¦ Az adatsor eltávolítása
+(type masqué) ¦ (piilotettu tyyppi) ¦ (rejtett típus)
+Dessins simples ¦ Yksinkertaiset piirrokset ¦ Egyszerű rajzok
+Sépia (photos anciennes) ¦ Seepia (vanhat valokuvat) ¦ Szépia (régi fényképek)
+Une couleur en dégradé ¦ Yksi väri liukuvärinä ¦ Egy szín színátmenetben
+Couleur du dégradé ¦ Liukuvärin väri ¦ A színátmenet színe
+Les valeurs apparaissent ici après le calcul de l’aperçu. ¦ Arvot näkyvät tässä, kun esikatselu on laskettu. ¦ Az értékek az előnézet kiszámítása után jelennek meg itt.
+Valeurs les plus fréquentes ¦ Yleisimmät arvot ¦ A leggyakoribb értékek
+Écrans indisponibles. ¦ Näkymiä ei ole saatavilla. ¦ A képernyők nem érhetők el.
+(date précise ou année, facultatif) ¦ (tarkka päivämäärä tai vuosi, valinnainen) ¦ (pontos dátum vagy év, nem kötelező)
+Nés à partir du ¦ Syntyneet alkaen ¦ Születtek ettől:
+12 mars 1750 ou 1700 ¦ 12 mars 1750 tai 1700 ¦ 12 mars 1750 vagy 1700
+jusqu’au ¦ asti ¦ eddig:
+31/12/1850 ou 1900 ¦ 31/12/1850 tai 1900 ¦ 31/12/1850 vagy 1900
+Cette statistique garde ses seuls filtres (années, sexe, lignée). ¦ Tämä tilasto pitää vain omat suodattimensa (vuodet, sukupuoli, sukulinja). ¦ Ez a statisztika csak a saját szűrőit tartja meg (évek, nem, ág).
+ne pas montrer les valeurs vides ¦ älä näytä tyhjiä arvoja ¦ az üres értékek elrejtése
+Libellé ¦ Nimike ¦ Felirat
+retirer ce chiffre ¦ irrota tämä luku ¦ a szám eltávolítása
+ordre de la liste ¦ luettelon järjestys ¦ a lista sorrendje
+croissant ¦ nouseva ¦ növekvő
+décroissant ¦ laskeva ¦ csökkenő
+Compter par ¦ Laske ¦ Számolás alapja
+Regrouper ¦ Ryhmittele ¦ Csoportosítás
+par valeur ¦ arvon mukaan ¦ érték szerint
+par année ¦ vuoden mukaan ¦ év szerint
+par décennie ¦ vuosikymmenen mukaan ¦ évtized szerint
+par tranche (de … ans, ou de … pour un nombre) ¦ väleittäin (… vuoden välein, tai … luvulle) ¦ sávonként (… évenként, vagy számnál …-onként)
+par siècle ¦ vuosisadan mukaan ¦ évszázad szerint
+par mois de l’année ¦ vuoden kuukauden mukaan ¦ az év hónapja szerint
+Tranche de ¦ Välin koko ¦ Sávszélesség
+Seulement du ¦ Vain alkaen ¦ Csak ettől:
+12 mars 1750 ou 1750 ¦ 12 mars 1750 tai 1750 ¦ 12 mars 1750 vagy 1750
+au ¦ asti ¦ eddig:
+31/12/1800 ou 1800 ¦ 31/12/1800 tai 1800 ¦ 31/12/1800 vagy 1800
+ne pas compter les cases vides ¦ älä laske tyhjiä soluja ¦ az üres cellák kihagyása
+Les étapes viennent ¦ Vaiheet tulevat ¦ A lépések forrása
+écrites à la main ¦ käsin kirjoitettuina ¦ kézzel írva
+des événements d’une personne ¦ henkilön tapahtumista ¦ egy személy eseményeiből
+Présentation ¦ Esitystapa ¦ Megjelenítés
+par date ¦ päivämäärän mukaan ¦ dátum szerint
+dans l’ordre écrit ¦ kirjoitetussa järjestyksessä ¦ a beírt sorrendben
+Hauteur de la carte ¦ Kartan korkeus ¦ A térkép magassága
+Carte du parcours ¦ Reitin kartta ¦ Az útvonal térképe
+« Jour 1, Jour 2… » ¦ ”Päivä 1, Päivä 2…” ¦ „1. nap, 2. nap…”
+Textes des étapes ¦ Vaiheiden tekstit ¦ A lépések szövegei
+Seulement les événements avec un lieu ¦ Vain tapahtumat, joilla on paikka ¦ Csak a hellyel rendelkező események
+✎ Modifier ce diagramme ¦ ✎ Muokkaa tätä diagrammia ¦ ✎ A diagram szerkesztése
+Le widget montre toujours la dernière version du diagramme (Graphiques → Mes diagrammes). ¦ Pienoisohjelma näyttää aina diagrammin uusimman version (Kaaviot → Omat diagrammini). ¦ A widget mindig a diagram legutóbbi változatát mutatja (Grafikonok → Saját diagramjaim).
+Un pense-bête, une citation… Les émojis marchent 🌳 ¦ Muistilappu, lainaus… Emojit toimivat 🌳 ¦ Egy emlékeztető, egy idézet… Az emojik is működnek 🌳
+Un site internet… ¦ Verkkosivusto… ¦ Egy weboldal…
+Texte du bouton ¦ Painikkeen teksti ¦ A gomb szövege
+Sous-titre de cette partie ¦ Tämän osan alaotsikko ¦ E rész alcíme
+Ex. : À faire, Mes chiffres, Liens utiles ¦ Esim.: Tehtävät, Omat lukuni, Hyödylliset linkit ¦ Pl.: Teendők, Saját számaim, Hasznos linkek
+ÉDITEUR DE GRAPHIQUES ¦ KAAVIOEDITORI ¦ GRAFIKONSZERKESZTŐ
+ÉDITEUR DE WIDGETS ¦ PIENOISOHJELMAEDITORI ¦ WIDGETSZERKESZTŐ
+Nouveau widget ¦ Uusi pienoisohjelma ¦ Új widget
+Règle ton widget à gauche ; l’aperçu se met à jour à droite. ¦ Säädä pienoisohjelmaa vasemmalla; esikatselu päivittyy oikealla. ¦ Állítsd be a widgetet bal oldalon; az előnézet jobb oldalon frissül.
+1. Le widget ¦ 1. Pienoisohjelma ¦ 1. A widget
+Mes ancêtres bretons ¦ Bretagnelaiset esivanhempani ¦ Breton felmenőim
+Texte en haut du widget ¦ Teksti pienoisohjelman yläreunassa ¦ Szöveg a widget tetején
+Une phrase pour expliquer ce widget ¦ Lause, joka selittää tämän pienoisohjelman ¦ Egy mondat, amely elmagyarázza a widgetet
+Où l’afficher ¦ Missä se näytetään ¦ Hol jelenjen meg
+Enregistrer et ouvrir dans Graphiques ¦ Tallenna ja avaa Kaavioissa ¦ Mentés és megnyitás a Grafikonokban
+Enregistrer et ajouter au tableau de bord ¦ Tallenna ja lisää kojelautaan ¦ Mentés és hozzáadás az irányítópulthoz
+la courbe ¦ käyrä ¦ a görbe
+Aucune valeur. ¦ Ei arvoja. ¦ Nincs érték.
+remettre les couleurs de la palette ¦ palauta paletin värit ¦ a paletta színeinek visszaállítása
+Donne un titre au widget. ¦ Anna pienoisohjelmalle otsikko. ¦ Adj címet a widgetnek.
+Widget enregistré : ajoute-le depuis la colonne de gauche du tableau de bord. ¦ Pienoisohjelma tallennettu: lisää se kojelaudan vasemmasta palstasta. ¦ Widget mentve: add hozzá az irányítópult bal oldali oszlopából.
+Graphique enregistré : il est dans Graphiques → Statistiques, rubrique « Mes graphiques ». ¦ Kaavio tallennettu: se on kohdassa Kaaviot → Tilastot, osio ”Omat kaavioni”. ¦ Grafikon mentve: a Grafikonok → Statisztikák alatt van, a „Saját grafikonjaim” részben.
+ce n’est pas un widget LCNDA. ¦ tämä ei ole LCNDA-pienoisohjelma. ¦ ez nem LCNDA-widget.
+Liste absente de ta base ({name}) : remplacée par « Personnes ». ¦ Luetteloa ei ole tietokannassasi ({name}): korvattu luettelolla ”Henkilöt”. ¦ A lista nincs meg az adatbázisodban ({name}): a „Személyek” lista került a helyére.
+Widget importé ¦ Pienoisohjelma tuotu ¦ Widget importálva
+Ce widget n’existe plus. ¦ Tätä pienoisohjelmaa ei ole enää. ¦ Ez a widget már nem létezik.
+Statistiques de l’app ¦ Sovelluksen tilastot ¦ Az alkalmazás statisztikái
+Source introuvable (graphique supprimé ?). ¦ Lähdettä ei löydy (kaavio poistettu?). ¦ A forrás nem található (törölt grafikon?).
+MES GRAPHIQUES ¦ OMAT KAAVIONI ¦ SAJÁT GRAFIKONJAIM
+Graphique introuvable ¦ Kaaviota ei löydy ¦ A grafikon nem található
+Il a peut-être été supprimé. ¦ Se on ehkä poistettu. ¦ Lehet, hogy törölték.
+Image PNG ou JPG, PDF, impression, tableau CSV ¦ PNG- tai JPG-kuva, PDF, tulostus, CSV-taulukko ¦ PNG- vagy JPG-kép, PDF, nyomtatás, CSV-táblázat
+léger, pour un courriel ¦ kevyt, sähköpostiin ¦ könnyű, e-mailhez
+les chiffres, pour un tableur ¦ luvut taulukkolaskentaan ¦ a számok, táblázatkezelőhöz
+Fenêtre d’impression bloquée. ¦ Tulostusikkuna estettiin. ¦ A nyomtatási ablak le van tiltva.
+Une photo de tes médias, une nouvelle chaque jour. ¦ Kuva mediastasi, uusi joka päivä. ¦ Egy fénykép a médiáidból, minden nap új.
+Compte à rebours ¦ Lähtölaskenta ¦ Visszaszámlálás
+Les jours qui restent avant une date : la cousinade, un anniversaire, un voyage aux archives… ¦ Päivät, jotka ovat jäljellä tiettyyn päivään: sukukokous, merkkipäivä, arkistomatka… ¦ Egy dátumig hátralévő napok: a családi találkozó, egy születésnap, egy levéltári út…
+Le widget n’a pas pu être fabriqué. ¦ Pienoisohjelmaa ei voitu luoda. ¦ A widgetet nem sikerült elkészíteni.
+Widget prêt : {file}. Ouvre-le d’un double-clic et garde l’onglet ouvert (ou épingle-le) : il change tout seul chaque jour. ¦ Pienoisohjelma valmis: {file}. Avaa se kaksoisnapsautuksella ja pidä välilehti auki (tai kiinnitä se): se vaihtuu itsestään joka päivä. ¦ A widget kész: {file}. Nyisd meg dupla kattintással, és hagyd nyitva a lapot (vagy tűzd ki): magától változik minden nap.
+La cousinade ¦ Sukukokous ¦ A családi találkozó
+ton ordinateur ¦ tietokoneesi ¦ a számítógéped
+Toujours au-dessus ¦ Aina päällimmäisenä ¦ Mindig felül
+× Retirer du bureau ¦ × Irrota työpöydältä ¦ × Eltávolítás az asztalról
+⤓ Télécharger le widget (.html) ¦ ⤓ Lataa pienoisohjelma (.html) ¦ ⤓ A widget letöltése (.html)
+Démarrer avec l’ordinateur (les widgets s’ouvrent seuls, sans la grande fenêtre) ¦ Käynnistä tietokoneen mukana (pienoisohjelmat avautuvat itsestään, ilman isoa ikkunaa) ¦ Indítás a számítógéppel együtt (a widgetek maguktól nyílnak meg, a nagy ablak nélkül)
+⛔ Je ne comprends pas cette date : écris par exemple « 14 juillet 2027 » ou « 14/07/2027 ». ¦ ⛔ En ymmärrä tätä päivämäärää: kirjoita esimerkiksi ”14 juillet 2027” tai ”14/07/2027”. ¦ ⛔ Nem értem ezt a dátumot: írd például így: „14 juillet 2027” vagy „14/07/2027”.
+⛔ Donne la date du compte à rebours. ¦ ⛔ Anna lähtölaskennan päivämäärä. ¦ ⛔ Add meg a visszaszámlálás dátumát.
+Donne la date. ¦ Anna päivämäärä. ¦ Add meg a dátumot.
+Le widget n’a pas pu s’ouvrir. ¦ Pienoisohjelmaa ei voitu avata. ¦ A widgetet nem sikerült megnyitni.
+Retiré du bureau. ¦ Irrotettu työpöydältä. ¦ Eltávolítva az asztalról.
+« {name} » retiré du bureau ¦ ”{name}” irrotettu työpöydältä ¦ „{name}” eltávolítva az asztalról
+Les widgets démarreront avec l’ordinateur. ¦ Pienoisohjelmat käynnistyvät tietokoneen mukana. ¦ A widgetek a számítógéppel együtt indulnak.
+Les widgets ne démarreront plus avec l’ordinateur. ¦ Pienoisohjelmat eivät enää käynnisty tietokoneen mukana. ¦ A widgetek már nem indulnak a számítógéppel együtt.
+🪟 Mettre sur le bureau (« {name} », une petite fenêtre à part) ¦ 🪟 Laita työpöydälle (”{name}”, pieni erillinen ikkuna) ¦ 🪟 Kitétel az asztalra („{name}”, egy kis külön ablak)
+🪟 Mettre sur le bureau (« {name} » : un fichier .html autonome dans un navigateur) ¦ 🪟 Laita työpöydälle (”{name}”: itsenäinen .html-tiedosto selaimessa) ¦ 🪟 Kitétel az asztalra („{name}”: önálló .html-fájl egy böngészőben)
+Retirer {name} ¦ Irrota {name} ¦ {name} eltávolítása
+Aucune personne ¦ Ei henkilöitä ¦ Nincs személy
+Flèches ¦ Nuolet ¦ Nyilak
+▶ Carte de la vie animée ¦ ▶ Elämän kartta animaationa ¦ ▶ Animált élettérkép
+Ajoute une personne. ¦ Lisää henkilö. ¦ Adj hozzá egy személyt.
+Aucun lieu daté. ¦ Ei päivättyjä paikkoja. ¦ Nincs keltezett hely.
+Comparer avec ¦ Vertaa kanssa ¦ Összehasonlítás ezzel:
+Opacité ¦ Peittävyys ¦ Átlátszatlanság
+Année de ¦ Vuosi alkaen ¦ Évtől
+Âge de ¦ Ikä alkaen ¦ Életkortól
+Famille / groupe ¦ Perhe / ryhmä ¦ Család / csoport
+Fond ¦ Tausta ¦ Háttér
+Recentrer ¦ Keskitä uudelleen ¦ Középre igazítás
+carte|sépulture ¦ hautaukset ¦ temetések
+carte|évt ¦ tapaht. ¦ esem.
+contributeurs OpenStreetMap ¦ OpenStreetMapin tekijät ¦ OpenStreetMap közreműködők
+· connexion requise pour les tuiles ¦ · karttaruudut vaativat yhteyden ¦ · a csempékhez internetkapcsolat kell
+connexion requise pour les tuiles ¦ karttaruudut vaativat yhteyden ¦ a csempékhez internetkapcsolat kell
+Aucun événement dans cette zone ¦ Tällä alueella ei ole tapahtumia ¦ Ezen a területen nincs esemény
+⤢ Voir tout ¦ ⤢ Näytä kaikki ¦ ⤢ Az összes
+Lieu non précisé ¦ Paikkaa ei ole tarkennettu ¦ A hely nincs pontosítva
+Voir la tombe ¦ Näytä hauta ¦ A sír megtekintése
+Événement non rattaché ¦ Liittämätön tapahtuma ¦ Csatolatlan esemény
+🚢 voyage ¦ 🚢 matka ¦ 🚢 utazás
+👶 placement ¦ 👶 sijoitus ¦ 👶 kihelyezés
+🎖 armée ¦ 🎖 armeija ¦ 🎖 hadsereg
+💞 conjoint ¦ 💞 puoliso ¦ 💞 házastárs
+👶 enfant ¦ 👶 lapsi ¦ 👶 gyermek
+🏫 école ¦ 🏫 koulu ¦ 🏫 iskola
+École ¦ Koulu ¦ Iskola
+Les étapes ¦ Vaiheet ¦ A lépések
+📍 Lieux sans position ¦ 📍 Paikat ilman sijaintia ¦ 📍 Helyek pozíció nélkül
+🗓 Sans lieu ¦ 🗓 Ilman paikkaa ¦ 🗓 Hely nélkül
+CARTE · LA VIE D’UNE PERSONNE ¦ KARTTA · HENKILÖN ELÄMÄ ¦ TÉRKÉP · EGY SZEMÉLY ÉLETE
+Carte de sa vie ¦ Hänen elämänsä kartta ¦ Az élete térképen
+👪 Avec la famille (le couple, les enfants) ¦ 👪 Perheen kanssa (pariskunta, lapset) ¦ 👪 A családdal (a pár, a gyermekek)
+Les étapes l’une après l’autre, en vidéo (MP4 ou WebM) ¦ Vaiheet peräkkäin, videona (MP4 tai WebM) ¦ A lépések egymás után, videón (MP4 vagy WebM)
+Ce navigateur ne sait pas enregistrer de vidéo ¦ Tämä selain ei osaa tallentaa videota ¦ Ez a böngésző nem tud videót rögzíteni
+🎬 Exporter en vidéo ¦ 🎬 Vie videona ¦ 🎬 Exportálás videóként
+Chargement de la carte… ¦ Ladataan karttaa… ¦ A térkép betöltése…
+La carte de sa vie se remplit avec ses événements, ses résidences, ses recensements, ses voyages… ¦ Hänen elämänsä kartta täyttyy hänen tapahtumistaan, asuinpaikoistaan, henkikirjoistaan, matkoistaan… ¦ Az élete térképe az eseményeivel, lakóhelyeivel, népszámlálásaival, utazásaival… telik meg.
+🗺 La vie de {name} ¦ 🗺 Henkilön {name} elämä ¦ 🗺 {name} élete
+La vie de {name} ¦ Henkilön {name} elämä ¦ {name} élete
+Aucun lieu dans cette vie ¦ Tässä elämässä ei ole paikkoja ¦ Ebben az életben nincs hely
+Ajoute un lieu à ses événements (naissance, mariage, résidence…) pour voir sa vie sur la carte. ¦ Lisää paikka hänen tapahtumiinsa (syntymä, avioliitto, asuinpaikka…) nähdäksesi hänen elämänsä kartalla. ¦ Adj helyet az eseményeihez (születés, házasság, lakóhely…), hogy lásd az életét a térképen.
+Le moteur vidéo n’est pas chargé. ¦ Videomoottoria ei ole ladattu. ¦ A videómotor nincs betöltve.
+Durée d’une étape ¦ Vaiheen kesto ¦ Egy lépés időtartama
+aucune étape avec un lieu. ¦ ei yhtään vaihetta, jolla on paikka. ¦ nincs hellyel rendelkező lépés.
+🎬 Vidéo {file} ¦ 🎬 Video {file} ¦ 🎬 Videó {file}
+les étapes animées ¦ animoidut vaiheet ¦ az animált lépések
+⤓ Exporter la vidéo en {file} ¦ ⤓ Vie video muodossa {file} ¦ ⤓ A videó exportálása {file} formátumban
+Vidéo exportée, mais pas rangée dans les médias : {err} ¦ Video viety, mutta sitä ei tallennettu mediaan: {err} ¦ A videó exportálva, de nem került a médiák közé: {err}
+✓ Vidéo exportée ({file}). ¦ ✓ Video viety ({file}). ¦ ✓ Videó exportálva ({file}).
+Montrer la même vie, étape par étape, avec la lecture ▶ et la vidéo ¦ Näytä sama elämä vaihe vaiheelta, toistolla ▶ ja videolla ¦ Ugyanaz az élet lépésről lépésre, lejátszással ▶ és videóval
+Comparer deux époques ¦ Vertaa kahta aikakautta ¦ Két korszak összehasonlítása
+Fermer la comparaison ¦ Sulje vertailu ¦ Összehasonlítás bezárása
+Glisse le trait (← →) ¦ Vedä viivaa (← →) ¦ Húzd a vonalat (← →)
+Transparence ¦ Läpinäkyvyys ¦ Átlátszóság
+Deux fonds sur la même zone : un trait à glisser, côte à côte ou en transparence ¦ Kaksi taustaa samalla alueella: vedettävä viiva, rinnakkain tai läpinäkyvästi ¦ Két háttér ugyanazon a területen: húzható vonal, egymás mellett vagy áttetszően
+Fond des départements introuvable. ¦ Departementtien taustaa ei löydy. ¦ A megyék háttere nem található.
+supprimée (partagée entre ses voisines) ¦ lakkautettu (jaettu naapurikuntien kesken) ¦ megszüntetve (felosztva a szomszédai között)
+fusionnée ¦ yhdistetty ¦ összevonva
+fusionnée (fusion-association) ¦ yhdistetty (liitosyhdistyminen) ¦ összevonva (társult összevonás)
+disparue ¦ kadonnut ¦ megszűnt
+renommée ¦ nimetty uudelleen ¦ átnevezve
+renommée « {name} » le {date} ¦ nimetty uudelleen nimellä ”{name}” {date} ¦ átnevezve „{name}” névre ({date})
+{what} le {date} ¦ {what} {date} ¦ {what} ({date})
+dans {name} ¦ kuntaan {name} ¦ ebbe: {name}
+(devenue commune {name}) ¦ (nyt kunta {name}) ¦ (ma {name} település része)
+Aujourd’hui : <b>{name}</b> ¦ Nykyään: <b>{name}</b> ¦ Ma: <b>{name}</b>
+Rétablie le {date}. ¦ Palautettu {date}. ¦ Visszaállítva: {date}.
+Position approximative : le centre de la commune d’aujourd’hui. ¦ Likimääräinen sijainti: nykyisen kunnan keskipiste. ¦ Hozzávetőleges pozíció: a mai település középpontja.
+Source : INSEE, Code officiel géographique (depuis 1943). ¦ Lähde: INSEE, Code officiel géographique (vuodesta 1943). ¦ Forrás: INSEE, Code officiel géographique (1943 óta).
+{name}, commune renommée ¦ {name}, uudelleen nimetty kunta ¦ {name}, átnevezett település
+{name}, commune disparue ¦ {name}, kadonnut kunta ¦ {name}, megszűnt település
+{name} — renommée en {year} ¦ {name} — nimetty uudelleen vuonna {year} ¦ {name} — átnevezve: {year}
+{name} — disparue en {year} ¦ {name} — kadonnut vuonna {year} ¦ {name} — megszűnt: {year}
+🏛 Frontières ▾ ¦ 🏛 Rajat ▾ ¦ 🏛 Határok ▾
+Provinces, départements de 1790, communes disparues ¦ Maakunnat, vuoden 1790 departementit, kadonneet kunnat ¦ Tartományok, 1790-es megyék, megszűnt települések
+Tracé approximatif, d’après les départements d’aujourd’hui ¦ Likimääräinen rajaus nykyisten departementtien mukaan ¦ Hozzávetőleges vonal a mai megyék alapján
+Frontières anciennes ¦ Vanhat rajat ¦ Régi határok
+Provinces d’Ancien Régime (≈ 1789) ¦ Vanhan järjestelmän maakunnat (≈ 1789) ¦ Az Ancien Régime tartományai (≈ 1789)
+Approximatif : d’après les départements d’aujourd’hui. ¦ Likimääräinen: nykyisten departementtien mukaan. ¦ Hozzávetőleges: a mai megyék alapján.
+Départements de 1790 ¦ Vuoden 1790 departementit ¦ Az 1790-es megyék
+Les 83 départements, noms d’alors ; approximatif. ¦ 83 departementtia, silloisilla nimillä; likimääräinen. ¦ A 83 megye az akkori nevekkel; hozzávetőleges.
+Communes disparues ou fusionnées ¦ Kadonneet tai yhdistetyt kunnat ¦ Megszűnt vagy összevont települések
+🏚 Communes disparues ou fusionnées ¦ 🏚 Kadonneet tai yhdistetyt kunnat ¦ 🏚 Megszűnt vagy összevont települések
+Depuis 1943 (INSEE). Zoome sur une région. ¦ Vuodesta 1943 (INSEE). Zoomaa alueelle. ¦ 1943 óta (INSEE). Nagyíts rá egy régióra.
+Avec les communes renommées ¦ Uudelleen nimettyjen kuntien kanssa ¦ Az átnevezett településekkel együtt
+Les communes disparues se téléchargent une fois : ¦ Kadonneet kunnat ladataan kerran: ¦ A megszűnt településeket egyszer kell letölteni:
+Réglages → Frontières anciennes ↗ ¦ Asetukset → Vanhat rajat ↗ ¦ Beállítások → Régi határok ↗
+Pas encore téléchargé ¦ Ei vielä ladattu ¦ Még nincs letöltve
+Téléchargé ¦ Ladattu ¦ Letöltve
+Installé ¦ Asennettu ¦ Telepítve
+Pas installé ¦ Ei asennettu ¦ Nincs telepítve
+=commune disparue ¦ kadonnut kunta|kadonnutta kuntaa ¦ megszűnt település|megszűnt település
+=commune renommée ¦ uudelleen nimetty kunta|uudelleen nimettyä kuntaa ¦ átnevezett település|átnevezett település
+=placée sur la carte ¦ kartalle sijoitettu|kartalle sijoitettua ¦ a térképen elhelyezve|a térképen elhelyezve
+L’historique officiel des communes de l’INSEE (depuis 1943) : chaque commune disparue avec sa date et sa commune d’aujourd’hui. Livré avec l’app (5,5 Mo, Licence Ouverte 2.0 de l’INSEE) : installé tout seul, sans Internet. Les anciens noms aident aussi le menu de choix des lieux (« anc. « … » »). ¦ INSEE:n virallinen kuntahistoria (vuodesta 1943): jokainen kadonnut kunta päivämäärineen ja nykyisine kuntineen. Toimitetaan sovelluksen mukana (5,5 Mt, INSEE:n Licence Ouverte 2.0): asentuu itsestään, ilman internetiä. Vanhat nimet auttavat myös paikkojen valintavalikkoa (”vanh. ”…””). ¦ Az INSEE hivatalos településtörténete (1943 óta): minden megszűnt település a dátumával és a mai településével. Az alkalmazással együtt érkezik (5,5 MB, az INSEE Licence Ouverte 2.0 licence): magától települ, internet nélkül. A régi nevek a helyválasztó menüt is segítik („régi „…””).
+⤓ Télécharger de nouveau (mise à jour) ¦ ⤓ Lataa uudelleen (päivitys) ¦ ⤓ Újbóli letöltés (frissítés)
+🗑 Retirer ¦ 🗑 Irrota ¦ 🗑 Eltávolítás
+⤓ Installer les frontières anciennes ¦ ⤓ Asenna vanhat rajat ¦ ⤓ A régi határok telepítése
+(taille…) ¦ (koko…) ¦ (méret…)
+dossier des données ¦ tietokansio ¦ adatmappa
+Rangé dans le {name}, commun à toutes tes généalogies. ¦ Tallennettu kohteeseen {name}, yhteinen kaikille sukututkimuksillesi. ¦ A(z) {name} helyen tárolva, minden családfád közös.
+Téléchargement et vérification… ¦ Ladataan ja tarkistetaan… ¦ Letöltés és ellenőrzés…
+Frontières anciennes retirées ¦ Vanhat rajat irrotettu ¦ A régi határok eltávolítva
+pas d’Internet ¦ ei internetiä ¦ nincs internet
+Adresse de téléchargement injoignable pour l’instant ({err}). ¦ Latausosoitteeseen ei saada yhteyttä juuri nyt ({err}). ¦ A letöltési cím most nem érhető el ({err}).
+✓ Frontières anciennes installées : {n}. ¦ ✓ Vanhat rajat asennettu: {n}. ¦ ✓ A régi határok telepítve: {n}.
+Départ, voyage ¦ Lähtö, matka ¦ Indulás, utazás
+Tous les autres ¦ Kaikki muut ¦ Az összes többi
+Couvert ¦ Pilvistä ¦ Borult
+Pluie toute la journée ¦ Sadetta koko päivän ¦ Egész nap eső
+Pluie faible ¦ Heikkoa sadetta ¦ Gyenge eső
+Matin de brouillard glacé ¦ Jäätävän sumuinen aamu ¦ Zúzmarás ködös reggel
+Brouillard le matin ¦ Sumua aamulla ¦ Reggel köd
+Il faisait très froid ¦ Oli hyvin kylmä ¦ Nagyon hideg volt
+Grand soleil et chaleur ¦ Aurinkoista ja kuumaa ¦ Napsütés és hőség
+Gris et frais ¦ Harmaata ja viileää ¦ Szürke és hűvös
+Nuages et éclaircies ¦ Pilviä ja poutaa ¦ Felhők és napos időszakok
+Froid mais ensoleillé ¦ Kylmää mutta aurinkoista ¦ Hideg, de napos
+Beau temps ¦ Kaunis sää ¦ Szép idő
+Neige ¦ Lunta ¦ Hó
+Orage ¦ Ukkonen ¦ Zivatar
+Mesuré ¦ Mitattu ¦ Mért
+Station à moins de 15 km (et moins de 150 m d’écart d’altitude) ¦ Asema alle 15 km:n päässä (ja korkeusero alle 150 m) ¦ Állomás 15 km-en belül (és 150 m-nél kisebb magasságkülönbséggel)
+Station à {n} km ¦ Asema {n} km:n päässä ¦ Állomás {n} km-re
+Station entre 15 et 40 km : indicatif (la pluie change vite d’un village à l’autre) ¦ Asema 15–40 km:n päässä: suuntaa antava (sade vaihtelee nopeasti kylästä toiseen) ¦ Állomás 15 és 40 km között: tájékoztató jellegű (az eső gyorsan változik faluról falura)
+Estimé (carreau ≈ 30 km) ¦ Arvioitu (ruutu ≈ 30 km) ¦ Becsült (rács ≈ 30 km)
+Réanalyse ERA5 : aucune station à moins de 40 km ¦ ERA5-uudelleenanalyysi: ei asemaa alle 40 km:n päässä ¦ ERA5 reanalízis: nincs állomás 40 km-en belül
+Reconstitution grossière (≈ 100 km) ¦ Karkea rekonstruktio (≈ 100 km) ¦ Durva rekonstrukció (≈ 100 km)
+Réanalyse 20CR (1836–1939) : une idée du temps, pas une mesure ¦ 20CR-uudelleenanalyysi (1836–1939): käsitys säästä, ei mittaus ¦ 20CR reanalízis (1836–1939): elképzelés az időjárásról, nem mérés
+Les données météo ne sont pas installées. ¦ Säätietoja ei ole asennettu. ¦ Az időjárási adatok nincsenek telepítve.
+Le lieu n’a pas de coordonnées : place-le sur la carte pour avoir sa météo. ¦ Paikalla ei ole koordinaatteja: sijoita se kartalle saadaksesi sen sään. ¦ A helynek nincsenek koordinátái: helyezd el a térképen, hogy lásd az időjárását.
+La date n’est pas connue au jour près. ¦ Päivämäärää ei tiedetä päivän tarkkuudella. ¦ A dátum nem ismert napra pontosan.
+Pas de météo pour ce lieu : les données installées couvrent la France, la Belgique, la Suisse et le Luxembourg (le pack Europe ajoute le reste). ¦ Tälle paikalle ei ole säätä: asennetut tiedot kattavat Ranskan, Belgian, Sveitsin ja Luxemburgin (Eurooppa-paketti lisää loput). ¦ Ehhez a helyhez nincs időjárás: a telepített adatok Franciaországot, Belgiumot, Svájcot és Luxemburgot fedik le (az Európa-csomag hozzáadja a többit).
+Pas de relevé connu près d’ici avant {year} (première station : {name}). ¦ Ei tunnettuja havaintoja tämän lähellä ennen vuotta {year} (ensimmäinen asema: {name}). ¦ {year} előtt nincs ismert mérés a közelben (első állomás: {name}).
+Pas de relevé connu près d’ici avant {year}. ¦ Ei tunnettuja havaintoja tämän lähellä ennen vuotta {year}. ¦ {year} előtt nincs ismert mérés a közelben.
+Cliquer pour le détail ¦ Napsauta nähdäksesi tiedot ¦ Kattints a részletekért
+À propos des données ¦ Tietoja aineistosta ¦ Az adatokról
+🙈 Météo masquée pour cet événement ¦ 🙈 Sää piilotettu tältä tapahtumalta ¦ 🙈 Az időjárás elrejtve ennél az eseménynél
+🙈 Météo masquée pour cette personne ¦ 🙈 Sää piilotettu tältä henkilöltä ¦ 🙈 Az időjárás elrejtve ennél a személynél
+{what} (la retrouver : Réglages → 🌦 Météo d’autrefois) ¦ {what} (löydät sen: Asetukset → 🌦 Menneiden aikojen sää) ¦ {what} (itt találod meg: Beállítások → 🌦 Régi idők időjárása)
+Ton lieu ¦ Paikkasi ¦ A helyed
+(carte du relief) ¦ (korkeuskartta) ¦ (domborzati térkép)
+Fiabilité ¦ Luotettavuus ¦ Megbízhatóság
+3 jours avant · 3 jours après ¦ 3 päivää ennen · 3 päivää jälkeen ¦ 3 nappal előtte · 3 nappal utána
+Tout le détail… ¦ Kaikki tiedot… ¦ Minden részlet…
+⛰ Altitude du lieu ¦ ⛰ Paikan korkeus ¦ ⛰ A hely tengerszint feletti magassága
+Lecture des données météo… ¦ Luetaan säätietoja… ¦ Az időjárási adatok beolvasása…
+Météo ¦ Sää ¦ Időjárás
+🌦 MÉTÉO D’AUTREFOIS ¦ 🌦 MENNEIDEN AIKOJEN SÄÄ ¦ 🌦 RÉGI IDŐK IDŐJÁRÁSA
+Le lieu, la station et le carreau ¦ Paikka, asema ja ruutu ¦ A hely, az állomás és a rács
+↺ Altitude remise à celle de la carte ¦ ↺ Korkeus palautettu kartan mukaiseksi ¦ ↺ A magasság visszaállítva a térkép szerintire
+⛰ Altitude enregistrée : {n} ¦ ⛰ Korkeus tallennettu: {n} ¦ ⛰ Magasság mentve: {n}
+⛰ LIEU ¦ ⛰ PAIKKA ¦ ⛰ HELY
+Altitude de {name} ¦ Paikan {name} korkeus ¦ {name} magassága
+ce lieu ¦ tämä paikka ¦ ez a hely
+Ce qu’elle donne ¦ Mitä se antaa ¦ Mit ad
+Licence et mention ¦ Lisenssi ja maininta ¦ Licenc és feltüntetés
+Une météo ancienne reste une estimation : elle aide à imaginer la journée, elle ne remplace pas ce que dit l’acte ou un journal de l’époque. ¦ Vanha säätieto on aina arvio: se auttaa kuvittelemaan päivän, mutta ei korvaa sitä, mitä asiakirja tai aikakauden sanomalehti kertoo. ¦ A régi időjárás mindig csak becslés: segít elképzelni a napot, de nem helyettesíti azt, amit az anyakönyvi bejegyzés vagy egy korabeli újság mond.
+Rien n’est envoyé sur Internet : toutes ces données sont dans l’app ou dans les packs importés. Les règles de fiabilité : station à moins de 15 km et moins de 150 m d’écart d’altitude → « Mesuré » ; de 15 à 40 km → « Station à … km » ; sinon la réanalyse ERA5 (1940 →) → « Estimé » ; de 1836 à 1939 la reconstitution 20CR → « Reconstitution grossière ». ¦ Mitään ei lähetetä internetiin: kaikki nämä tiedot ovat sovelluksessa tai tuoduissa paketeissa. Luotettavuussäännöt: asema alle 15 km:n päässä ja korkeusero alle 150 m → ”Mitattu”; 15–40 km → ”Asema … km:n päässä”; muuten ERA5-uudelleenanalyysi (1940 →) → ”Arvioitu”; vuosina 1836–1939 20CR-rekonstruktio → ”Karkea rekonstruktio”. ¦ Semmi nem kerül fel az internetre: ezek az adatok mind az alkalmazásban vagy az importált csomagokban vannak. A megbízhatósági szabályok: 15 km-en belüli állomás és 150 m-nél kisebb magasságkülönbség → „Mért”; 15–40 km → „Állomás … km-re”; különben az ERA5 reanalízis (1940 →) → „Becsült”; 1836 és 1939 között a 20CR rekonstrukció → „Durva rekonstrukció”.
+Comment les obtenir ¦ Miten ne saa ¦ Hogyan szerezd be őket
+Comment l’obtenir ¦ Miten sen saa ¦ Hogyan szerezd be
+(avant 1940, la météo montre la journée) ¦ (ennen vuotta 1940 sää näyttää koko päivän) ¦ (1940 előtt az időjárás az egész napot mutatja)
+Socle inclus ¦ Perusaineisto mukana ¦ Alapcsomag mellékelve
+Pack complet ¦ Täysi paketti ¦ Teljes csomag
+Pack Europe ¦ Eurooppa-paketti ¦ Európa-csomag
+Pack ¦ Paketti ¦ Csomag
+1836 à 2025 · France, Belgique, Suisse, Luxembourg · ≈ 300 stations chaque jour, 4 heures par jour depuis 1940 · ≈ 550 Mo ¦ 1836–2025 · Ranska, Belgia, Sveitsi, Luxemburg · ≈ 300 asemaa joka päivä, 4 tuntia päivässä vuodesta 1940 · ≈ 550 Mt ¦ 1836–2025 · Franciaország, Belgium, Svájc, Luxemburg · ≈ 300 állomás naponta, napi 4 óra 1940 óta · ≈ 550 MB
+Toutes les stations (≈ 14 700), heure par heure depuis 1950 · ≈ 3 Go ¦ Kaikki asemat (≈ 14 700), tunti tunnilta vuodesta 1950 · ≈ 3 Gt ¦ Az összes állomás (≈ 14 700), óránként 1950 óta · ≈ 3 GB
+🗑 Supprimer le pack ¦ 🗑 Poista paketti ¦ 🗑 A csomag törlése
+⤒ Importer le fichier… ¦ ⤒ Tuo tiedosto… ¦ ⤒ Fájl importálása…
+🗑 {name} supprimé ¦ 🗑 {name} poistettu ¦ 🗑 {name} törölve
+Le temps qu’il faisait le jour de chaque événement, sans Internet. ¦ Millainen sää oli kunkin tapahtuman päivänä, ilman internetiä. ¦ Milyen idő volt az egyes események napján, internet nélkül.
+Météo sur les fiches ¦ Sää korteilla ¦ Időjárás az adatlapokon
+Au survol ¦ Osoitettaessa ¦ Rámutatáskor
+Au clic sur la pastille ¦ Napsautettaessa merkkiä ¦ A jelvényre kattintva
+Fenêtre ¦ Ikkuna ¦ Ablak
+Sous l’événement ¦ Tapahtuman alla ¦ Az esemény alatt
+Températures ¦ Lämpötilat ¦ Hőmérsékletek
+Pluie ¦ Sade ¦ Eső
+pouces ¦ tuumaa ¦ hüvelyk
+La phrase simple ¦ Yksinkertainen lause ¦ Az egyszerű mondat
+« Il faisait froid : −4 °C au matin… » ¦ ”Oli kylmä: −4 °C aamulla…” ¦ „Hideg volt: reggel −4 °C…”
+Comparer à la normale ¦ Vertaa tavanomaiseen ¦ Összevetés az átlaggal
+Ligne des sources sous le détail ¦ Lähderivi tietojen alla ¦ Forrássor a részletek alatt
+Obligatoire pour certaines licences : elle reste dans le détail et à l’export. ¦ Pakollinen joillekin lisensseille: se pysyy tiedoissa ja viennissä. ¦ Egyes licenceknél kötelező: a részletekben és az exportban is megmarad.
+Bloc « 🌦 Météo de sa vie » sur les fiches ¦ Lohko ”🌦 Hänen elämänsä sää” korteilla ¦ „🌦 Élete időjárása” blokk az adatlapokon
+Phrases curieuses (« Né le jour le plus froid… ») ¦ Kiinnostavat lauseet (”Syntyi kylmimpänä päivänä…”) ¦ Érdekes mondatok („A leghidegebb napon született…”)
+Dans « Ce jour-là » et le tableau de bord ¦ Kohdissa ”Tänä päivänä” ja kojelaudalla ¦ A „Ezen a napon” részben és az irányítópulton
+Montrer aussi les reconstitutions grossières (avant 1940) ¦ Näytä myös karkeat rekonstruktiot (ennen vuotta 1940) ¦ A durva rekonstrukciók megjelenítése is (1940 előtt)
+Pour quels événements ¦ Mille tapahtumille ¦ Mely eseményekhez
+Tous les types d’événements de ta base (avec leur nombre). Décoche ceux qui n’ont pas besoin de la météo. ¦ Kaikki tietokantasi tapahtumatyypit (määrineen). Poista valinta niiltä, jotka eivät tarvitse säätä. ¦ Az adatbázisod összes eseménytípusa (a számukkal). Vedd ki a pipát azok elől, amelyekhez nem kell időjárás.
+Météo masquée ¦ Piilotettu sää ¦ Elrejtett időjárás
+Remontrer la météo ¦ Näytä sää uudelleen ¦ Az időjárás újbóli megjelenítése
+Rien n’est masqué. ¦ Mitään ei ole piilotettu. ¦ Semmi sincs elrejtve.
+Sur une fiche : clic droit sur la pastille météo (ou ⋯ du détail) → « Masquer la météo ». ¦ Kortilla: napsauta sääosoitinta hiiren oikealla (tai tietojen ⋯) → ”Piilota sää”. ¦ Egy adatlapon: jobb kattintás az időjárás-jelvényre (vagy a részletek ⋯ gombja) → „Időjárás elrejtése”.
+Les données dans l’app ¦ Tiedot sovelluksessa ¦ Az adatok az alkalmazásban
+Le téléchargement se fait une fois, depuis n’importe quel ordinateur. Ensuite on importe le fichier ici et l’app n’a plus besoin d’Internet. ¦ Lataus tehdään kerran, miltä tahansa tietokoneelta. Sen jälkeen tiedosto tuodaan tähän, eikä sovellus enää tarvitse internetiä. ¦ A letöltést egyszer kell elvégezni, bármelyik számítógépről. Utána ide importálod a fájlt, és az alkalmazásnak már nincs szüksége internetre.
+le socle ¦ perusaineisto ¦ az alapcsomag
+le pack complet ¦ täysi paketti ¦ a teljes csomag
+le pack Europe ¦ Eurooppa-paketti ¦ az Európa-csomag
+le pack ¦ paketti ¦ a csomag
+Obtenir {name} ¦ Hanki {name} ¦ Beszerzés: {name}
+Importer un pack météo ¦ Tuo sääpaketti ¦ Időjárás-csomag importálása
+aucun fichier ¦ ei tiedostoa ¦ nincs fájl
+l’en-tête du pack est abîmé. ¦ paketin otsake on vioittunut. ¦ a csomag fejléce sérült.
+le fichier est incomplet (téléchargement interrompu ?). ¦ tiedosto on vaillinainen (keskeytynyt lataus?). ¦ a fájl hiányos (megszakadt letöltés?).
+heure par heure ¦ tunti tunnilta ¦ óránként
+sur le disque ¦ levyllä ¦ a lemezen
+Le socle reste : le pack s’ajoute par-dessus. ¦ Perusaineisto säilyy: paketti lisätään sen päälle. ¦ Az alapcsomag megmarad: a csomag ráépül.
+Vérifié ¦ Tarkistettu ¦ Ellenőrizve
+Envoi du fichier… ¦ Lähetetään tiedostoa… ¦ A fájl küldése…
+Envoi du fichier… {n} % ¦ Lähetetään tiedostoa… {n} % ¦ A fájl küldése… {n} %
+réponse illisible ¦ lukukelvoton vastaus ¦ olvashatatlan válasz
+Vérification du pack… ¦ Tarkistetaan pakettia… ¦ A csomag ellenőrzése…
+La météo est masquée ici (Réglages → 🌦 Météo d’autrefois). ¦ Sää on piilotettu tässä (Asetukset → 🌦 Menneiden aikojen sää). ¦ Az időjárás itt el van rejtve (Beállítások → 🌦 Régi idők időjárása).
+Aucun anniversaire rond avec une météo connue aujourd’hui. ¦ Tänään ei ole tasavuotismerkkipäivää, jonka sää tunnetaan. ¦ Ma nincs kerek évforduló ismert időjárással.
+Bague métal lue ¦ Metallirengas luettu ¦ Fémgyűrű leolvasva
+Photo-identifié ¦ Kuvatunnistettu ¦ Fényképpel azonosítva
+(pas tout lu) ¦ (ei kaikkea luettu) ¦ (nem minden olvasható)
+Éloigner ¦ Loitonna ¦ Kicsinyítés
+Le temps ¦ Aika ¦ Az idő
+1 heure par seconde ¦ 1 tunti sekunnissa ¦ 1 óra másodpercenként
+1 jour par seconde ¦ 1 päivä sekunnissa ¦ 1 nap másodpercenként
+1 semaine par seconde ¦ 1 viikko sekunnissa ¦ 1 hét másodpercenként
+1 mois par seconde ¦ 1 kuukausi sekunnissa ¦ 1 hónap másodpercenként
+↗ Ouvrir l’observation ¦ ↗ Avaa havainto ¦ ↗ A megfigyelés megnyitása
+cette année ¦ tänä vuonna ¦ idén
+période choisie ¦ valittu jakso ¦ a kiválasztott időszak
+La journée (ou la nuit) d’un animal qui porte une balise ou un collier GPS. ¦ GPS-lähetintä tai -kaulapantaa kantavan eläimen päivä (tai yö). ¦ Egy GPS-jeladót vagy -nyakörvet viselő állat napja (vagy éjszakája).
+Animaux vus par mois, distance parcourue, zone fréquentée, jamais revus. ¦ Kuukausittain nähdyt eläimet, kuljettu matka, käytetty alue, ei koskaan uudelleen nähdyt. ¦ Havonta látott állatok, megtett távolság, látogatott terület, soha többé nem látottak.
+Une case pour retrouver un animal par ses couleurs, un code gravé, une bague métal, une puce, un tatouage ou une boucle. ¦ Ruutu eläimen löytämiseen värien, kaiverretun koodin, metallirenkaan, sirun, tatuoinnin tai korvamerkin perusteella. ¦ Egy mező, amellyel megtalálhatsz egy állatot a színei, egy gravírozott kód, fémgyűrű, chip, tetoválás vagy fülcímke alapján.
+Déposer un fichier GPX, KML ou CSV d’une balise ou d’un collier. ¦ Pudota lähettimen tai kaulapannan GPX-, KML- tai CSV-tiedosto. ¦ Egy jeladó vagy nyakörv GPX-, KML- vagy CSV-fájljának behúzása.
+Le suivi n’a pas pu se charger. ¦ Seurantaa ei voitu ladata. ¦ A követést nem sikerült betölteni.
+dernière position GPS ¦ viimeisin GPS-sijainti ¦ utolsó GPS-pozíció
+Aucune observation pour l’instant. ¦ Ei vielä havaintoja. ¦ Még nincs megfigyelés.
+Tous ont été revus récemment. ¦ Kaikki on nähty äskettäin. ¦ Mindet láttuk nemrég.
+Tous ont été revus. ¦ Kaikki on nähty uudelleen. ¦ Mindet láttuk újra.
+pas encore vu ¦ ei vielä nähty ¦ még nem látott
+Aucun animal suivi pour l’instant. ¦ Ei vielä seurattuja eläimiä. ¦ Még nincs követett állat.
+Ouvre la fiche d’un animal (Listes → Animaux) et ajoute-lui une marque ou une observation. ¦ Avaa eläimen kortti (Luettelot → Eläimet) ja lisää sille merkintä tai havainto. ¦ Nyisd meg egy állat adatlapját (Listák → Állatok), és adj hozzá jelölést vagy megfigyelést.
+Le plus suivi ¦ Eniten seurattu ¦ A legtöbbet követett
+Code, couleurs ou numéro ¦ Koodi, värit tai numero ¦ Kód, színek vagy szám
+Chercher… (« 7K », « vert rouge », n° de puce) ¦ Hae… (”7K”, ”vihreä punainen”, sirun numero) ¦ Keresés… („7K”, „zöld piros”, chipszám)
+Couleurs (« vert rouge »), code gravé, bague métal, puce, tatouage, boucle. « ? » = pas lu, [K|X] = j’hésite. ¦ Värit (”vihreä punainen”), kaiverrettu koodi, metallirengas, siru, tatuointi, korvamerkki. ”?” = ei luettu, [K|X] = epäröin. ¦ Színek („zöld piros”), gravírozott kód, fémgyűrű, chip, tetoválás, fülcímke. „?” = nem olvasható, [K|X] = bizonytalan vagyok.
+Aucun trajet GPS pour l’instant. ¦ Ei vielä GPS-reittejä. ¦ Még nincs GPS-útvonal.
+＋ Nouveau site ¦ ＋ Uusi paikka ¦ ＋ Új terület
+＋ Nouveau site de suivi ¦ ＋ Uusi seurantapaikka ¦ ＋ Új követési terület
+Nouveau site de suivi ¦ Uusi seurantapaikka ¦ Új követési terület
+Aucun site de suivi pour l’instant. ¦ Ei vielä seurantapaikkoja. ¦ Még nincs követési terület.
+Aucun comptage. ¦ Ei laskentoja. ¦ Nincs számlálás.
+↗ Le site ¦ ↗ Paikka ¦ ↗ A terület
+La météo… ¦ Sää… ¦ Az időjárás…
+Dernier événement ¦ Viimeisin tapahtuma ¦ Utolsó esemény
+Aucun groupe pour l’instant. ¦ Ei vielä ryhmiä. ¦ Még nincs csoport.
+🪺 Nids occupés ¦ 🪺 Asutut pesät ¦ 🪺 Lakott fészkek
+🐣 Poussins bagués ¦ 🐣 Rengastetut poikaset ¦ 🐣 Meggyűrűzött fiókák
+Courbe des comptages ¦ Laskentojen käyrä ¦ A számlálások görbéje
+Cette année ¦ Tänä vuonna ¦ Idén
+Montrer les trajets GPS ¦ Näytä GPS-reitit ¦ GPS-útvonalak megjelenítése
+Pas revus depuis ¦ Ei nähty sitten ¦ Nem látták azóta
+Le même seuil que « 👁 Vu la dernière fois » des fiches d’animaux. ¦ Sama raja kuin eläinkorttien kohdassa ”👁 Nähty viimeksi”. ¦ Ugyanaz a küszöb, mint az állatok adatlapján a „👁 Utoljára látva”.
+Seulement ceux qui ne vont pas bien ¦ Vain ne, jotka eivät voi hyvin ¦ Csak akik nincsenek jól
+Réglages du bloc remis comme au départ. ¦ Lohkon asetukset palautettu alkuperäisiksi. ¦ A blokk beállításai visszaállítva alapra.
+un site ¦ paikka ¦ egy terület
+⤒ Recevoir un suivi partagé… ¦ ⤒ Vastaanota jaettu seuranta… ¦ ⤒ Megosztott követés fogadása…
+Toutes les espèces ¦ Kaikki lajit ¦ Minden faj
+Corneilles, Hérissons, Chats du quartier… ¦ Varikset, siilit, naapuruston kissat… ¦ Varjak, sünök, a környék macskái…
+Corneille noire, Hérisson d’Europe… ¦ Mustavaris, siili… ¦ Kormos varjú, közönséges sün…
+Renommer la page ¦ Nimeä sivu uudelleen ¦ Az oldal átnevezése
+Un émoji : 🐦 🦔 🐈 🐬 🐺… ¦ Emoji: 🐦 🦔 🐈 🐬 🐺… ¦ Egy emoji: 🐦 🦔 🐈 🐬 🐺…
+Icône changée. ¦ Kuvake vaihdettu. ¦ Ikon módosítva.
+Espèce et site par défaut… ¦ Oletuslaji ja -paikka… ¦ Alapértelmezett faj és terület…
+Dupliquer la page ¦ Monista sivu ¦ Az oldal duplikálása
+Bloc dupliqué. ¦ Lohko monistettu. ¦ Blokk duplikálva.
+Copier vers une autre page… ¦ Kopioi toiselle sivulle… ¦ Másolás egy másik oldalra…
+Copier vers la page… ¦ Kopioi sivulle… ¦ Másolás erre az oldalra…
+Pages rangées. ¦ Sivut järjestetty. ¦ Oldalak rendezve.
+📁 Glisse ici un trajet (GPX, KML, CSV), colle-le (⌘V) ou choisis-le ¦ 📁 Vedä reitti tähän (GPX, KML, CSV), liitä se (⌘V) tai valitse se ¦ 📁 Húzz ide egy útvonalat (GPX, KML, CSV), illeszd be (⌘V), vagy válaszd ki
+Balises de la faune sauvage (Movebank…) ou colliers (Tractive, Weenect, Invoxia, Kippy…). ¦ Villieläinten lähettimet (Movebank…) tai kaulapannat (Tractive, Weenect, Invoxia, Kippy…). ¦ Vadállatok jeladói (Movebank…) vagy nyakörvek (Tractive, Weenect, Invoxia, Kippy…).
+Aucune observation datée et placée. ¦ Ei päivättyjä ja paikannettuja havaintoja. ¦ Nincs keltezett és helyhez kötött megfigyelés.
+Aucun événement de santé pour l’instant. ¦ Ei vielä terveystapahtumia. ¦ Még nincs egészségügyi esemény.
+Aucun passage sur cette période. ¦ Ei käyntejä tällä jaksolla. ¦ Ebben az időszakban nincs áthaladás.
+Ce mois ¦ Tässä kuussa ¦ Ebben a hónapban
+Météo trouvée ¦ Sää löytyi ¦ Időjárás megtalálva
+=animal trouvé ¦ löydetty eläin|löydettyä eläintä ¦ talált állat|talált állat
+SUIVI DES ANIMAUX · EN GRAND ¦ ELÄINTEN SEURANTA · ISONA ¦ ÁLLATKÖVETÉS · NAGYBAN
+SUIVI DES ANIMAUX · CHIFFRES ¦ ELÄINTEN SEURANTA · LUVUT ¦ ÁLLATKÖVETÉS · SZÁMOK
+Par animal ¦ Eläimittäin ¦ Állatonként
+Par année ¦ Vuosittain ¦ Évenként
+relié dans l’ordre ¦ yhdistetty järjestyksessä ¦ sorrendben összekötve
+Les chiffres… ¦ Luvut… ¦ A számok…
+Tous les animaux ¦ Kaikki eläimet ¦ Az összes állat
+Par site · observations ¦ Paikoittain · havainnot ¦ Területenként · megfigyelések
+Aucune observation. ¦ Ei havaintoja. ¦ Nincs megfigyelés.
+Zone fréquentée ¦ Käytetty alue ¦ Látogatott terület
+enveloppe des points vus ¦ nähtyjen pisteiden ääriviiva ¦ a látott pontok körvonala
+Il faut au moins 3 points pour une zone. ¦ Alueeseen tarvitaan vähintään 3 pistettä. ¦ Egy területhez legalább 3 pont kell.
+Délai ¦ Aikaraja ¦ Határidő
+Ce qu’il faisait ¦ Mitä se teki ¦ Mit csinált
+Vu par ¦ Nähnyt ¦ Ki látta
+Avec qui ¦ Kenen kanssa ¦ Kivel
+Chaque caractère du code ¦ Koodin jokainen merkki ¦ A kód minden karaktere
+Pas lu : clique pour dire « j’hésite entre… » ¦ Ei luettu: napsauta sanoaksesi ”epäröin, onko…” ¦ Nem olvasható: kattints, ha ezt akarod jelezni: „bizonytalan vagyok, hogy…”
+J’hésite : clique pour dire que c’est sûr ¦ Epäröin: napsauta sanoaksesi, että se on varma ¦ Bizonytalan: kattints, ha biztos
+Sûr : clique pour dire « pas lu » ¦ Varma: napsauta sanoaksesi ”ei luettu” ¦ Biztos: kattints, ha „nem olvasható”
+un clic : sûr → pas lu → j’hésite entre… ¦ yksi napsautus: varma → ei luettu → epäröin, onko… ¦ egy kattintás: biztos → nem olvasható → bizonytalan vagyok, hogy…
+Modifier l’observation ¦ Muokkaa havaintoa ¦ A megfigyelés szerkesztése
+Nouvelle observation ¦ Uusi havainto ¦ Új megfigyelés
+Retrouver l’animal · selon l’espèce : ¦ Eläimen tunnistus · lajin mukaan: ¦ Az állat azonosítása · faj szerint:
+Photos, sons ou vidéos ¦ Kuvat, äänet tai videot ¦ Fényképek, hangok vagy videók
+Dis quand tu l’as vu. ¦ Kerro, milloin näit sen. ¦ Add meg, mikor láttad.
+Dis où tu l’as vu (un lieu, un site, ou 📍 Ma position). ¦ Kerro, missä näit sen (paikka, seurantapaikka tai 📍 Sijaintini). ¦ Add meg, hol láttad (egy hely, egy terület vagy 📍 Saját pozícióm).
+Observation enregistrée. ¦ Havainto tallennettu. ¦ Megfigyelés mentve.
+Observation créée. ¦ Havainto luotu. ¦ Megfigyelés létrehozva.
+🌊 En mer ¦ 🌊 Merellä ¦ 🌊 A tengeren
+Taille du groupe ¦ Ryhmän koko ¦ A csoport mérete
+📷 Piège photo ¦ 📷 Riistakamera ¦ 📷 Vadkamera
+Vu par un piège photo ¦ Nähty riistakameralla ¦ Vadkamera látta
+Piège n° ¦ Kamera nro ¦ Kamera száma
+mise toute seule d’après ce que tu as cliqué ¦ täytetty itsestään sen mukaan, mitä napsautit ¦ magától kitöltve az alapján, amire kattintottál
+＋ Créer la fiche d’un nouvel animal ¦ ＋ Luo uuden eläimen kortti ¦ ＋ Új állat adatlapjának létrehozása
+✎ Garder sans fiche ¦ ✎ Pidä ilman korttia ¦ ✎ Megtartás adatlap nélkül
+Deux animaux correspondent autant : la lecture sera marquée « Doute ». ¦ Kaksi eläintä vastaa yhtä hyvin: lukema merkitään ”Epävarma”. ¦ Két állat egyformán megfelel: a leolvasás „Kétes” jelölést kap.
+Couleurs des bagues ¦ Renkaiden värit ¦ A gyűrűk színei
+Bague vue mais couleur pas sûre ¦ Rengas nähty, mutta väri epävarma ¦ Gyűrű látva, de a szín nem biztos
+Une autre couleur (pipette, code #…) ¦ Muu väri (pipetti, koodi #…) ¦ Más szín (pipetta, # kód…)
+Pas regardé ¦ Ei katsottu ¦ Nem néztem meg
+J’hésite entre… ¦ Epäröin, onko… ¦ Bizonytalan vagyok, hogy…
+L’observation sera gardée sans fiche, avec la lecture. ¦ Havainto säilytetään ilman korttia, lukeman kanssa. ¦ A megfigyelés adatlap nélkül marad meg, a leolvasással együtt.
+Son nom (ou un code : « 7K », « Sans nom 2C9 ») ¦ Sen nimi (tai koodi: ”7K”, ”Nimetön 2C9”) ¦ A neve (vagy egy kód: „7K”, „Névtelen 2C9”)
+En quelques mots (« se baigne », « chasse un goéland »…) ¦ Muutamalla sanalla (”uiskentelee”, ”jahtaa lokkia”…) ¦ Néhány szóban („fürdik”, „sirályt kerget”…)
+Cet appareil ne donne pas sa position. ¦ Tämä laite ei kerro sijaintiaan. ¦ Ez az eszköz nem adja meg a pozícióját.
+La fenêtre d’import n’est pas chargée. ¦ Tuonti-ikkunaa ei ole ladattu. ¦ Az importálási ablak nincs betöltve.
+Un trajet GPS ¦ GPS-reitti ¦ Egy GPS-útvonal
+Fichier trop gros (40 Mo au plus). ¦ Tiedosto on liian suuri (enintään 40 Mt). ¦ A fájl túl nagy (legfeljebb 40 MB).
+Fichier trop gros (200 Mo au plus). ¦ Tiedosto on liian suuri (enintään 200 Mt). ¦ A fájl túl nagy (legfeljebb 200 MB).
+{rows} sans date ou sans position seront sautées. ¦ {rows} ilman päivämäärää tai sijaintia ohitetaan. ¦ {rows} dátum vagy pozíció nélkül kimarad.
+{rows} sans date ou sans position sera sautée. ¦ {rows} ilman päivämäärää tai sijaintia ohitetaan. ¦ {rows} dátum vagy pozíció nélkül kimarad.
+=point importé ¦ tuotu piste|tuotua pistettä ¦ importált pont|importált pont
+{points} pour {name} ¦ {points} eläimelle {name} ¦ {points} – {name}
+({n} déjà là, sautés) ¦ ({n} jo olemassa, ohitettu) ¦ ({n} már megvolt, kihagyva)
+({n} déjà là, sauté) ¦ ({n} jo olemassa, ohitettu) ¦ ({n} már megvolt, kihagyva)
+{points} en tout ¦ yhteensä {points} ¦ összesen {points}
+{name} a déjà {points} : ils restent, ce fichier s’y ajoute (un instant déjà là n’est pas repris deux fois). ¦ Eläimellä {name} on jo {points}: ne säilyvät, ja tämä tiedosto lisätään niihin (jo olemassa olevaa hetkeä ei oteta kahdesti). ¦ {name} már rendelkezik ennyivel: {points}; ezek megmaradnak, a fájl hozzáadódik (egy már meglévő időpontot nem vesz fel kétszer).
+l’animal ¦ eläin ¦ az állat
+Ne va pas bien ¦ Ei voi hyvin ¦ Nincs jól
+Chercher… (nom, code « 7K », bague EA…, lieu, observateur) ¦ Hae… (nimi, koodi ”7K”, rengas EA…, paikka, havainnoija) ¦ Keresés… (név, „7K” kód, EA… gyűrű, hely, megfigyelő)
+Chercher… (nom, code « 7K », puce…) ¦ Hae… (nimi, koodi ”7K”, siru…) ¦ Keresés… (név, „7K” kód, chip…)
+Vus récemment ¦ Nähty äskettäin ¦ Nemrég látott
+＋ Nouveau comptage ¦ ＋ Uusi laskenta ¦ ＋ Új számlálás
+Nouveau comptage ¦ Uusi laskenta ¦ Új számlálás
+＋ Nouvelle observation ici ¦ ＋ Uusi havainto tähän ¦ ＋ Új megfigyelés itt
+🗑 Supprimer le site ¦ 🗑 Poista paikka ¦ 🗑 A terület törlése
+Aucun comptage pour l’instant. ¦ Ei vielä laskentoja. ¦ Még nincs számlálás.
+? Non identifiés ¦ ? Tunnistamattomat ¦ ? Azonosítatlanok
+Personne encore. ¦ Ei vielä ketään. ¦ Még senki.
+contour du site ¦ paikan ääriviiva ¦ a terület körvonala
+Site enregistré. ¦ Paikka tallennettu. ¦ Terület mentve.
+Site créé. ¦ Paikka luotu. ¦ Terület létrehozva.
+île, colonie nord… ¦ saari, pohjoinen yhdyskunta… ¦ sziget, északi kolónia…
+Ce qu’on compte ¦ Mitä lasketaan ¦ Mit számolunk
+Donne la date du comptage. ¦ Anna laskennan päivämäärä. ¦ Add meg a számlálás dátumát.
+Comptage enregistré. ¦ Laskenta tallennettu. ¦ Számlálás mentve.
+Comptage supprimé. ¦ Laskenta poistettu. ¦ Számlálás törölve.
+＋ Ajouter un membre ¦ ＋ Lisää jäsen ¦ ＋ Tag hozzáadása
+Aucun membre pour l’instant. ¦ Ei vielä jäseniä. ¦ Még nincs tag.
+Membres passés ¦ Entiset jäsenet ¦ Korábbi tagok
+Personne n’est parti. ¦ Kukaan ei ole lähtenyt. ¦ Senki sem távozott.
+Frise du groupe ¦ Ryhmän aikajana ¦ A csoport idővonala
+🗑 Supprimer le groupe ¦ 🗑 Poista ryhmä ¦ 🗑 A csoport törlése
+Loup gris, chimpanzé, orque… ¦ Harmaasusi, simpanssi, miekkavalas… ¦ Szürke farkas, csimpánz, kardszárnyú delfin…
+Territoire ¦ Reviiri ¦ Territórium
+Donne un nom au groupe. ¦ Anna ryhmälle nimi. ¦ Adj nevet a csoportnak.
+Groupe enregistré. ¦ Ryhmä tallennettu. ¦ Csoport mentve.
+Groupe créé. ¦ Ryhmä luotu. ¦ Csoport létrehozva.
+Groupe supprimé (son histoire aussi). ¦ Ryhmä poistettu (myös sen historia). ¦ Csoport törölve (a története is).
+✓ Onglet « 🐾 Suivi des animaux » affiché ¦ ✓ Välilehti ”🐾 Eläinten seuranta” näytetään ¦ ✓ Az „🐾 Állatkövetés” lap megjelenítve
+Tu suis des animaux sauvages ou un chat avec un collier GPS ? ¦ Seuraatko villieläimiä tai kissaa GPS-pannalla? ¦ Vadállatokat vagy GPS-nyakörves macskát követsz?
+L’onglet « 🐾 Suivi des animaux » est caché. Pour l’afficher : Réglages → Apparence → Onglets du haut. ¦ Välilehti ”🐾 Eläinten seuranta” on piilotettu. Näytä se: Asetukset → Ulkoasu → Yläreunan välilehdet. ¦ Az „🐾 Állatkövetés” lap rejtve van. A megjelenítéséhez: Beállítások → Megjelenés → Felső lapok.
+↗ Afficher l’onglet ¦ ↗ Näytä välilehti ¦ ↗ A lap megjelenítése
+Observation dupliquée. ¦ Havainto monistettu. ¦ Megfigyelés duplikálva.
+Observation supprimée. ¦ Havainto poistettu. ¦ Megfigyelés törölve.
+Voir les {n} autres médias ¦ Näytä {n} muuta mediaa ¦ A további {n} média megtekintése
+{n} sans bague ¦ {n} ilman rengasta ¦ {n} gyűrű nélkül
+Animal sans fiche ¦ Eläin ilman korttia ¦ Állat adatlap nélkül
+pas revus depuis {days} ¦ ei nähty {days} ¦ {days} óta nem látták
+Suivi des animaux · Page « {name} » ¦ Eläinten seuranta · Sivu ”{name}” ¦ Állatkövetés · „{name}” oldal
+Cette page montre seulement : <b>{what}</b>. Tous ses blocs s’y règlent d’office (un bloc peut garder son propre choix). ¦ Tämä sivu näyttää vain: <b>{what}</b>. Kaikki sen lohkot säätyvät siihen automaattisesti (lohko voi pitää oman valintansa). ¦ Ez az oldal csak ezt mutatja: <b>{what}</b>. Az összes blokkja automatikusan ehhez igazodik (egy blokk megtarthatja a saját választását).
+Cette page montre seulement : <b>{what}</b> · tous les sites. Tous ses blocs s’y règlent d’office (un bloc peut garder son propre choix). ¦ Tämä sivu näyttää vain: <b>{what}</b> · kaikki paikat. Kaikki sen lohkot säätyvät siihen automaattisesti (lohko voi pitää oman valintansa). ¦ Ez az oldal csak ezt mutatja: <b>{what}</b> · minden terület. Az összes blokkja automatikusan ehhez igazodik (egy blokk megtarthatja a saját választását).
+Nouvelle page ¦ Uusi sivu ¦ Új oldal
+Espèce et site de la page « {name} » ¦ Sivun ”{name}” laji ja paikka ¦ A(z) „{name}” oldal faja és területe
+Page « {name} » créée. ¦ Sivu ”{name}” luotu. ¦ „{name}” oldal létrehozva.
+Page « {name} » supprimée (ses blocs, pas les animaux). ¦ Sivu ”{name}” poistettu (sen lohkot, ei eläimiä). ¦ „{name}” oldal törölve (a blokkjai, az állatok nem).
+Bloc copié vers « {name} ». ¦ Lohko kopioitu sivulle ”{name}”. ¦ Blokk átmásolva ide: „{name}”.
+Aucun animal pour « {q} ». ¦ Ei eläimiä haulle ”{q}”. ¦ Nincs állat erre: „{q}”.
+première observation ¦ ensimmäinen havainto ¦ első megfigyelés
+dernière : {date} ¦ viimeisin: {date} ¦ utolsó: {date}
+parcourus par {name} ({from} → {to}) ¦ kulkenut {name} ({from} → {to}) ¦ – {name} útja ({from} → {to})
+pas de trajet GPS ¦ ei GPS-reittiä ¦ nincs GPS-útvonal
+Fiche de « {name} » créée. ¦ Kortti ”{name}” luotu. ¦ „{name}” adatlapja létrehozva.
+vu sur {sites} ¦ nähty paikoissa {sites} ¦ látva itt: {sites}
+Pas revu depuis {when} ¦ Ei nähty sitten {when} ¦ Nem látták {when} óta
+Jamais vu ¦ Ei koskaan nähty ¦ Soha nem látták
+Suivi en cours ¦ Seuranta käynnissä ¦ Követés folyamatban
+Ce qu’on partage ¦ Mitä jaetaan ¦ Mit osztunk meg
+Des animaux choisis ¦ Valitut eläimet ¦ Kiválasztott állatok
+Tous les animaux d’une espèce ¦ Kaikki saman lajin eläimet ¦ Egy faj összes állata
+Les animaux d’un site ¦ Paikan eläimet ¦ Egy terület állatai
+Les points GPS ¦ GPS-pisteet ¦ A GPS-pontok
+Choisis au moins un animal. ¦ Valitse vähintään yksi eläin. ¦ Válassz legalább egy állatot.
+Choisis l’espèce. ¦ Valitse laji. ¦ Válaszd ki a fajt.
+📤 Fichier prêt : {animals}. ¦ 📤 Tiedosto valmis: {animals}. ¦ 📤 A fájl kész: {animals}.
+📤 Fichier prêt : {animals} (sans les noms des observateurs). ¦ 📤 Tiedosto valmis: {animals} (ilman havainnoijien nimiä). ¦ 📤 A fájl kész: {animals} (a megfigyelők neve nélkül).
+Ce fichier n’est pas un suivi partagé (suivi.json manque). ¦ Tämä tiedosto ei ole jaettu seuranta (suivi.json puuttuu). ¦ Ez a fájl nem megosztott követés (hiányzik a suivi.json).
+Fichier abîmé : il ne se lit pas. ¦ Tiedosto on vioittunut: sitä ei voi lukea. ¦ Sérült fájl: nem olvasható.
+Ce fichier n’est pas un suivi d’animaux partagé (format inconnu). ¦ Tämä tiedosto ei ole jaettu eläinseuranta (tuntematon muoto). ¦ Ez a fájl nem megosztott állatkövetés (ismeretlen formátum).
+Un suivi partagé ¦ Jaettu seuranta ¦ Egy megosztott követés
+=nouvel animal ¦ uusi eläin|uutta eläintä ¦ új állat|új állat
+=animal déjà là ¦ jo olemassa oleva eläin|jo olemassa olevaa eläintä ¦ már meglévő állat|már meglévő állat
+=ligne nouvelle ¦ uusi rivi|uutta riviä ¦ új sor|új sor
+=ligne déjà là, écartée ¦ jo olemassa oleva rivi, ohitettu|jo olemassa olevaa riviä, ohitettu ¦ már meglévő sor, kihagyva|már meglévő sor, kihagyva
+=conflit ¦ ristiriita|ristiriitaa ¦ ütközés|ütközés
+<b>{new}</b>, {known} (à compléter), <b>{rows}</b> (observations, marques, santé, groupes) ¦ <b>{new}</b>, {known} (täydennettäviä), <b>{rows}</b> (havainnot, merkinnät, terveys, ryhmät) ¦ <b>{new}</b>, {known} (kiegészítendő), <b>{rows}</b> (megfigyelések, jelölések, egészség, csoportok)
+{n} points GPS ¦ {n} GPS-pistettä ¦ {n} GPS-pont
+{rows} (doublons exacts). ¦ {rows} (täsmälliset kaksoiskappaleet). ¦ {rows} (pontos duplikátumok).
+{conflicts} : tu choisiras pour chacun, à l’étape suivante. ¦ {conflicts}: valitset jokaiselle seuraavassa vaiheessa. ¦ {conflicts}: a következő lépésben mindegyikről te döntesz.
+{name} chez toi (reconnu par {how}) ¦ {name} omassa tietokannassasi (tunnistettu: {how}) ¦ {name} nálad (felismerve: {how})
+reçu · chez toi : {name} (reconnu par {how}) ¦ vastaanotettu · omassasi: {name} (tunnistettu: {how}) ¦ kapott · nálad: {name} (felismerve: {how})
+Comparer et fusionner… ¦ Vertaa ja yhdistä… ¦ Összehasonlítás és egyesítés…
+⤒ Importer {animals} ¦ ⤒ Tuo {animals} ¦ ⤒ {animals} importálása
+Suivi reçu : {what} ¦ Seuranta vastaanotettu: {what} ¦ Követés megérkezett: {what}
+conflit restant ¦ jäljellä oleva ristiriita ¦ megmaradt ütközés
+conflits restants ¦ jäljellä olevaa ristiriitaa ¦ megmaradt ütközés
+nouveaux ¦ uutta ¦ új
+lignes nouvelles ¦ uutta riviä ¦ új sor
+doublons écartés ¦ ohitettua kaksoiskappaletta ¦ kihagyott duplikátum
+média reçu non importé ¦ vastaanotettu media, jota ei tuotu ¦ kapott, nem importált média
+Fusionner avec ma fiche ¦ Yhdistä korttiini ¦ Egyesítés az adatlapommal
+En faire une nouvelle fiche ¦ Tee siitä uusi kortti ¦ Új adatlap készítése belőle
+Ne pas le prendre ¦ Älä ota sitä ¦ Ne vegyem át
+Le mien : ¦ Omani: ¦ Az enyém:
+Le sien : ¦ Hänen: ¦ Az övé:
+Observation modifiée ¦ Havaintoa muokattu ¦ Megfigyelés módosítva
+Marque modifiée ¦ Merkintää muokattu ¦ Jelölés módosítva
+Événement de santé modifié ¦ Terveystapahtumaa muokattu ¦ Egészségügyi esemény módosítva
+Rôle dans le groupe ¦ Rooli ryhmässä ¦ Szerep a csoportban
+Choisis d’abord pour chaque conflit ¦ Valitse ensin jokaiselle ristiriidalle ¦ Előbb dönts minden ütközésről
+Fusionner ¦ Yhdistä ¦ Egyesítés
+vert foncé ¦ tummanvihreä ¦ sötétzöld
+bleu foncé ¦ tummansininen ¦ sötétkék
+métal ¦ metalli ¦ fém
+👥 En groupe ¦ 👥 Ryhmässä ¦ 👥 Csoportban
+💤 Au dortoir ¦ 💤 Yöpymispaikalla ¦ 💤 Éjszakázóhelyen
+🕊 En vol ¦ 🕊 Lennossa ¦ 🕊 Repülés közben
+💞 En couple ¦ 💞 Parina ¦ 💞 Párban
+🏠 Rentré ¦ 🏠 Palannut ¦ 🏠 Hazatért
+🐄 En troupeau ¦ 🐄 Laumassa ¦ 🐄 Csordában
+😴 Au repos ¦ 😴 Levossa ¦ 😴 Pihen
+🌊 En surface ¦ 🌊 Pinnalla ¦ 🌊 A felszínen
+⛵ À la proue ¦ ⛵ Keulassa ¦ ⛵ A hajóorrnál
+🧭 Marque son territoire ¦ 🧭 Merkitsee reviiriään ¦ 🧭 Jelöli a territóriumát
+🍼 Avec des jeunes ¦ 🍼 Poikasten kanssa ¦ 🍼 Kicsinyeivel
+🪵 Utilise un outil ¦ 🪵 Käyttää työkalua ¦ 🪵 Eszközt használ
+🔖 Bague changée ¦ 🔖 Rengas vaihdettu ¦ 🔖 Gyűrű kicserélve
+🪤 Piège ¦ 🪤 Ansa ¦ 🪤 Csapda
+🚧 Clôture ¦ 🚧 Aita ¦ 🚧 Kerítés
+🌬 Éolienne ¦ 🌬 Tuulivoimala ¦ 🌬 Szélturbina
+🏖 Échouage ¦ 🏖 Rantautuminen ¦ 🏖 Partra vetődés
+⚔️ Conflit avec un autre ¦ ⚔️ Kiista toisen kanssa ¦ ⚔️ Összetűzés egy másikkal
+Bonne santé ¦ Hyvä terveys ¦ Jó egészség
+Blessé ¦ Loukkaantunut ¦ Sérült
+En soins ¦ Hoidossa ¦ Kezelés alatt
+Relâché ¦ Vapautettu ¦ Szabadon engedve
+Mammifère sauvage ¦ Villi nisäkäs ¦ Vadon élő emlős
+Vache, mouton, chèvre ¦ Lehmä, lammas, vuohi ¦ Tehén, juh, kecske
+Format inconnu : GPX, KML, GeoJSON ou CSV. ¦ Tuntematon muoto: GPX, KML, GeoJSON tai CSV. ¦ Ismeretlen formátum: GPX, KML, GeoJSON vagy CSV.
+Le tableau est vide. ¦ Taulukko on tyhjä. ¦ A táblázat üres.
+Fichier refusé : il contient une déclaration DOCTYPE ou ENTITY. ¦ Tiedosto hylätty: se sisältää DOCTYPE- tai ENTITY-määrittelyn. ¦ A fájl elutasítva: DOCTYPE- vagy ENTITY-deklarációt tartalmaz.
+3 février 2026 ¦ 3 février 2026 ¦ 3 février 2026
+⚖️ Mise en garde : en France, les tests ADN « récréatifs » ne sont pas légaux ¦ ⚖️ Varoitus: Ranskassa ”viihdekäyttöön” tarkoitetut DNA-testit eivät ole laillisia ¦ ⚖️ Figyelmeztetés: Franciaországban a „szabadidős” DNS-tesztek nem legálisak
+En France, l’examen des caractéristiques génétiques d’une personne n’est permis <b>qu’à des fins médicales ou de recherche scientifique</b>, avec son <b>consentement écrit</b> (Code civil, article 16-10). L’identification par empreintes génétiques est réservée à la justice et à quelques cas prévus par la loi (article 16-11). <b>Demander</b> un tel examen hors de ces cas — par exemple commander un test généalogique sur internet — est puni d’une <b>amende de 3 750 €</b> (Code pénal, article 226-28-1), même si le laboratoire est à l’étranger. ¦ Ranskassa henkilön geneettisten ominaisuuksien tutkiminen on sallittua <b>vain lääketieteellisiin tai tieteellisen tutkimuksen tarkoituksiin</b>, hänen <b>kirjallisella suostumuksellaan</b> (Code civil, artikla 16-10). Tunnistaminen DNA-tunnisteiden avulla on varattu oikeuslaitokselle ja muutamiin laissa säädettyihin tapauksiin (artikla 16-11). Tällaisen tutkimuksen <b>pyytäminen</b> näiden tapausten ulkopuolella — esimerkiksi sukututkimustestin tilaaminen internetistä — on rangaistava <b>3 750 euron sakolla</b> (Code pénal, artikla 226-28-1), vaikka laboratorio olisi ulkomailla. ¦ Franciaországban egy személy genetikai jellemzőinek vizsgálata <b>csak orvosi vagy tudományos kutatási célból</b> megengedett, az ő <b>írásos beleegyezésével</b> (Code civil, 16-10. cikk). A DNS-ujjlenyomattal történő azonosítás az igazságszolgáltatásnak és néhány törvényben meghatározott esetnek van fenntartva (16-11. cikk). Ilyen vizsgálat <b>kérése</b> ezeken az eseteken kívül — például egy családfakutatási teszt megrendelése az interneten — <b>3 750 € pénzbírsággal</b> büntetendő (Code pénal, 226-28-1. cikk), akkor is, ha a laboratórium külföldön van.
+<b>Vérifie toujours le texte en vigueur</b> sur Légifrance : la loi peut changer (les débats sur la généalogie génétique sont réguliers). Cet onglet ne donne pas de conseil juridique. ¦ <b>Tarkista aina voimassa oleva teksti</b> Légifrancesta: laki voi muuttua (geneettisestä sukututkimuksesta keskustellaan säännöllisesti). Tämä välilehti ei anna oikeudellisia neuvoja. ¦ <b>Mindig ellenőrizd a hatályos szöveget</b> a Légifrance oldalon: a törvény változhat (a genetikai családfakutatásról rendszeresen folynak viták). Ez a lap nem ad jogi tanácsot.
+<b>Ce que fait LCNDA</b> : rien n’est analysé ni envoyé. L’onglet sert à <b>ranger des informations</b> (par exemple des résultats obtenus légalement à l’étranger, par un parent résidant hors de France, dans un cadre médical ou de recherche, ou des renseignements donnés par d’autres personnes) et à <b>comprendre</b> ce que signifient des cM, des segments, un haplogroupe. ¦ <b>Mitä LCNDA tekee</b>: mitään ei analysoida eikä lähetetä. Välilehti on tarkoitettu <b>tietojen järjestämiseen</b> (esimerkiksi ulkomailla laillisesti saadut tulokset, Ranskan ulkopuolella asuvan sukulaisen tulokset, lääketieteellisessä tai tutkimuskäytössä saadut tulokset tai muiden ihmisten antamat tiedot) ja sen <b>ymmärtämiseen</b>, mitä cM:t, segmentit ja haploryhmä tarkoittavat. ¦ <b>Amit az LCNDA tesz</b>: semmit sem elemez és semmit sem küld el. A lap arra szolgál, hogy <b>rendszerezz információkat</b> (például külföldön jogszerűen kapott eredményeket, egy Franciaországon kívül élő rokontól, orvosi vagy kutatási keretben kapottakat, vagy mások által adott adatokat), és hogy <b>megértsd</b>, mit jelentenek a cM-ek, a szegmensek, egy haplocsoport.
+<b>Données sensibles</b> : l’ADN révèle des choses sur toi <i>et sur ta famille</i> (parents, frères et sœurs, enfants, cousins), qui n’ont pas consenti. Il peut révéler un secret de famille : naissance hors mariage, adoption, don de gamètes, parent inconnu. Prends le temps d’y penser avant de partager. ¦ <b>Arkaluonteiset tiedot</b>: DNA paljastaa asioita sinusta <i>ja perheestäsi</i> (vanhemmat, sisarukset, lapset, serkut), jotka eivät ole antaneet suostumustaan. Se voi paljastaa perhesalaisuuden: avioliiton ulkopuolisen syntymän, adoption, sukusolulahjoituksen, tuntemattoman vanhemman. Mieti rauhassa ennen kuin jaat. ¦ <b>Érzékeny adatok</b>: a DNS rólad <i>és a családodról</i> (szülők, testvérek, gyermekek, unokatestvérek) is elárul dolgokat, akik ehhez nem járultak hozzá. Felfedhet egy családi titkot: házasságon kívüli születést, örökbefogadást, ivarsejt-adományozást, ismeretlen szülőt. Gondold át alaposan, mielőtt megosztod.
+<b>Les sociétés de test</b> gardent les données selon leurs conditions (vente de société, fuites de données, demandes de la justice dans certains pays). Lis leurs conditions, choisis ce que tu partages, supprime ce que tu ne veux plus voir conservé. ¦ <b>Testiyhtiöt</b> säilyttävät tietoja omien ehtojensa mukaan (yhtiön myynti, tietovuodot, oikeusviranomaisten pyynnöt joissakin maissa). Lue niiden ehdot, valitse mitä jaat, poista se, mitä et enää halua säilytettävän. ¦ <b>A tesztelő cégek</b> a saját feltételeik szerint őrzik az adatokat (cég eladása, adatszivárgás, igazságügyi megkeresések egyes országokban). Olvasd el a feltételeiket, válaszd meg, mit osztasz meg, és töröld, amit már nem szeretnél tároltatni.
+<b>Personnes vivantes</b> : les noms, cM et contacts de correspondances sont des données personnelles. Garde-les pour ta recherche, ne les publie pas sans accord. ¦ <b>Elävät henkilöt</b>: osumien nimet, cM:t ja yhteystiedot ovat henkilötietoja. Pidä ne omaa tutkimustasi varten, äläkä julkaise niitä ilman lupaa. ¦ <b>Élő személyek</b>: az egyezések nevei, cM-értékei és elérhetőségei személyes adatok. Tartsd meg őket a kutatásodhoz, és ne tedd közzé engedély nélkül.
+Textes officiels ¦ Viralliset tekstit ¦ Hivatalos szövegek
+Lire la mise en garde complète et les textes officiels → ¦ Lue koko varoitus ja viralliset tekstit → ¦ A teljes figyelmeztetés és a hivatalos szövegek elolvasása →
+Commencer ¦ Aloita ¦ Kezdés
+Lis la <button type="button" class="link-button" data-dna-go="law">mise en garde sur la loi française</button>. ¦ Lue <button type="button" class="link-button" data-dna-go="law">varoitus Ranskan laista</button>. ¦ Olvasd el a <button type="button" class="link-button" data-dna-go="law">francia törvényre vonatkozó figyelmeztetést</button>.
+« 🧬 Mes tests » : ajoute le test d’une personne (société, type, haplogroupes, origines). ¦ ”🧬 Omat testini”: lisää henkilön testi (yhtiö, tyyppi, haploryhmät, alkuperät). ¦ „🧬 Saját tesztjeim”: add hozzá egy személy tesztjét (cég, típus, haplocsoportok, származás).
+« 👥 Correspondances » : importe le fichier CSV de la société, ou ajoute-les à la main. ¦ ”👥 Osumat”: tuo yhtiön CSV-tiedosto tai lisää ne käsin. ¦ „👥 Egyezések”: importáld a cég CSV-fájlját, vagy add hozzá őket kézzel.
+Le calculateur de cM, la méthode de Leeds et le navigateur de chromosomes t’aident à placer chacun dans l’arbre. ¦ cM-laskin, Leedsin menetelmä ja kromosomiselain auttavat sijoittamaan jokaisen puuhun. ¦ A cM-kalkulátor, a Leeds-módszer és a kromoszómaböngésző segít mindenkit elhelyezni a fán.
+Tes tests, tes correspondances et où tu en es. Tout se règle dans « ⚙️ Réglages » (rubriques montrées, ordre, colonnes, couleurs). ¦ Testisi, osumasi ja missä vaiheessa olet. Kaiken voi säätää kohdassa ”⚙️ Asetukset” (näytettävät osiot, järjestys, sarakkeet, värit). ¦ A tesztjeid, az egyezéseid és hogy hol tartasz. Mindent a „⚙️ Beállítások” alatt állíthatsz be (megjelenített rovatok, sorrend, oszlopok, színek).
+🧬 Synthèse ¦ 🧬 Yhteenveto ¦ 🧬 Összegzés
+Loi et mises en garde ¦ Laki ja varoitukset ¦ Törvény és figyelmeztetések
+⚖️ Loi et mises en garde ¦ ⚖️ Laki ja varoitukset ¦ ⚖️ Törvény és figyelmeztetések
+À lire avant d’utiliser cet onglet. ¦ Luettava ennen tämän välilehden käyttöä. ¦ Olvasd el, mielőtt ezt a lapot használod.
+Mes tests ¦ Omat testini ¦ Saját tesztjeim
+Correspondances ¦ Osumat ¦ Egyezések
+Groupes (méthode de Leeds) ¦ Ryhmät (Leedsin menetelmä) ¦ Csoportok (Leeds-módszer)
+🗂️ Groupes (méthode de Leeds) ¦ 🗂️ Ryhmät (Leedsin menetelmä) ¦ 🗂️ Csoportok (Leeds-módszer)
+Groupes automatiques ¦ Automaattiset ryhmät ¦ Automatikus csoportok
+Placer un cousin ¦ Sijoita serkku ¦ Unokatestvér elhelyezése
+📍 Placer un cousin ¦ 📍 Sijoita serkku ¦ 📍 Unokatestvér elhelyezése
+Chromosomes et segments ¦ Kromosomit ja segmentit ¦ Kromoszómák és szegmensek
+🧩 Chromosomes et segments ¦ 🧩 Kromosomit ja segmentit ¦ 🧩 Kromoszómák és szegmensek
+Calculateur de cM ¦ cM-laskin ¦ cM-kalkulátor
+📐 Calculateur de cM ¦ 📐 cM-laskin ¦ 📐 cM-kalkulátor
+Lignées Y, mt et X ¦ Y-, mt- ja X-linjat ¦ Y-, mt- és X-vonalak
+🌳 Lignées Y, mt et X ¦ 🌳 Y-, mt- ja X-linjat ¦ 🌳 Y-, mt- és X-vonalak
+Origines estimées ¦ Arvioidut alkuperät ¦ Becsült származás
+🌍 Origines estimées ¦ 🌍 Arvioidut alkuperät ¦ 🌍 Becsült származás
+Comprendre l’ADN ¦ Ymmärrä DNA:ta ¦ A DNS megértése
+📚 Comprendre l’ADN ¦ 📚 Ymmärrä DNA:ta ¦ 📚 A DNS megértése
+cM partagés ¦ Jaetut cM:t ¦ Közös cM
+% partagé ¦ Jaettu % ¦ Közös %
+Plus long segment ¦ Pisin segmentti ¦ Leghosszabb szegmens
+Relation (société) ¦ Sukulaisuus (yhtiö) ¦ Rokonság (cég szerint)
+Relation probable ¦ Todennäköinen sukulaisuus ¦ Valószínű rokonság
+Fiche liée ¦ Yhdistetty kortti ¦ Kapcsolt adatlap
+Ancêtre commun ¦ Yhteinen esivanhempi ¦ Közös felmenő
+Noms en commun ¦ Yhteiset nimet ¦ Közös nevek
+Des deux côtés ¦ Molemmilta puolilta ¦ Mindkét oldalról
+Contacté ¦ Otettu yhteyttä ¦ Megkeresve
+A répondu ¦ On vastannut ¦ Válaszolt
+Arbre échangé ¦ Puu vaihdettu ¦ Családfa kicserélve
+Placé dans l’arbre ✓ ¦ Sijoitettu puuhun ✓ ¦ Elhelyezve a fán ✓
+À ignorer ¦ Ohitettava ¦ Figyelmen kívül hagyandó
+Placées dans l’arbre ¦ Sijoitettu puuhun ¦ Elhelyezve a fán
+Tests ¦ Testit ¦ Tesztek
+Correspondances par nombre de cM ¦ Osumat cM-määrän mukaan ¦ Egyezések cM szerint
+Par côté ¦ Puolittain ¦ Oldalanként
+Les plus proches ¦ Lähimmät ¦ A legközelebbiek
+Autosomal (atDNA) : tous les ancêtres récents ¦ Autosomaalinen (atDNA): kaikki lähiajan esivanhemmat ¦ Autoszomális (atDNA): minden közelmúltbeli felmenő
+ADN-Y : lignée paternelle directe ¦ Y-DNA: suora isälinja ¦ Y-DNS: egyenes apai ág
+ADN mitochondrial : lignée maternelle directe ¦ Mitokondrio-DNA: suora äitilinja ¦ Mitokondriális DNS: egyenes anyai ág
+Nebula / séquençage complet ¦ Nebula / koko genomin sekvensointi ¦ Nebula / teljes szekvenálás
+Labo médical ¦ Lääketieteellinen laboratorio ¦ Orvosi labor
+Parent / enfant ¦ Vanhempi / lapsi ¦ Szülő / gyermek
+Frère ou sœur ¦ Veli tai sisar ¦ Fiú- vagy lánytestvér
+Demi-frère ou demi-sœur ¦ Velipuoli tai sisarpuoli ¦ Féltestvér
+Grand-parent / petit-enfant ¦ Isovanhempi / lapsenlapsi ¦ Nagyszülő / unoka
+Oncle, tante / neveu, nièce ¦ Setä, eno, täti / veljen- tai sisarenpoika, -tytär ¦ Nagybácsi, nagynéni / unokaöcs, unokahúg
+Arrière-grand-parent ¦ Isoisovanhempi ¦ Dédszülő
+Grand-oncle, grand-tante ¦ Isosetä, isotäti ¦ Dédnagybácsi, dédnagynéni
+Cousin germain (1C) ¦ Serkku (1C) ¦ Első unokatestvér (1C)
+Cousin germain, une génération d’écart (1C1R) ¦ Serkku, yhden sukupolven ero (1C1R) ¦ Első unokatestvér, egy nemzedék különbséggel (1C1R)
+Cousin germain, deux générations d’écart (1C2R) ¦ Serkku, kahden sukupolven ero (1C2R) ¦ Első unokatestvér, két nemzedék különbséggel (1C2R)
+Demi-cousin germain ¦ Puoliserkku ¦ Fél első unokatestvér
+Demi-cousin germain, une génération d’écart ¦ Puoliserkku, yhden sukupolven ero ¦ Fél első unokatestvér, egy nemzedék különbséggel
+Cousin issu de germain (2C) ¦ Pikkuserkku (2C) ¦ Másodunokatestvér (2C)
+Cousin issu de germain, une génération d’écart (2C1R) ¦ Pikkuserkku, yhden sukupolven ero (2C1R) ¦ Másodunokatestvér, egy nemzedék különbséggel (2C1R)
+Cousin issu de germain, deux générations d’écart (2C2R) ¦ Pikkuserkku, kahden sukupolven ero (2C2R) ¦ Másodunokatestvér, két nemzedék különbséggel (2C2R)
+Demi-cousin issu de germain ¦ Puolipikkuserkku ¦ Fél másodunokatestvér
+Cousin au 3e degré (3C, issu d’issu de germain) ¦ Kolmannen asteen serkku (3C, pikkuserkun lapsi) ¦ Harmadunokatestvér (3C)
+Demi-cousin au 3e degré ¦ Kolmannen asteen puoliserkku ¦ Fél harmadunokatestvér
+Cousin au 4e degré (4C) ¦ Neljännen asteen serkku (4C) ¦ Negyedunokatestvér (4C)
+Cousin au 5e degré (5C) ¦ Viidennen asteen serkku (5C) ¦ Ötödunokatestvér (5C)
+Cousin au 6e degré ou plus ¦ Kuudennen asteen serkku tai kaukaisempi ¦ Hatodunokatestvér vagy távolabbi
+Noté. ¦ Merkitty. ¦ Feljegyezve.
+Nouveau test ¦ Uusi testi ¦ Új teszt
+Personne testée ¦ Testattu henkilö ¦ Tesztelt személy
+Nom du test ¦ Testin nimi ¦ A teszt neve
+(si la personne n’est pas dans l’arbre) ¦ (jos henkilö ei ole puussa) ¦ (ha a személy nincs a fán)
+Test supprimé. ¦ Testi poistettu. ¦ Teszt törölve.
+Test enregistré. ¦ Testi tallennettu. ¦ Teszt mentve.
+les voir ¦ näytä ne ¦ megtekintés
+Tous les tests ¦ Kaikki testit ¦ Minden teszt
+Tous les côtés ¦ Kaikki puolet ¦ Minden oldal
+Tout suivi ¦ Mikä tahansa seuranta ¦ Bármilyen követés
+Tous les groupes ¦ Kaikki ryhmät ¦ Minden csoport
+Sans groupe ¦ Ilman ryhmää ¦ Csoport nélkül
+Côté… ¦ Puoli… ¦ Oldal…
+Étoiles ¦ Tähdet ¦ Csillagok
+Afficher la suite ¦ Näytä lisää ¦ A folytatás megjelenítése
+Ajoute d’abord un test (« 🧬 Mes tests »). ¦ Lisää ensin testi (”🧬 Omat testini”). ¦ Előbb adj hozzá egy tesztet („🧬 Saját tesztjeim”).
+Ajoute d’abord un test. ¦ Lisää ensin testi. ¦ Előbb adj hozzá egy tesztet.
+Nouvelle correspondance ¦ Uusi osuma ¦ Új egyezés
+Fiche dans l’arbre ¦ Kortti puussa ¦ Adatlap a fán
+Si tu sais qui c’est… ¦ Jos tiedät, kuka se on… ¦ Ha tudod, ki az…
+Tape les cM partagés : la relation probable s’affiche ici. ¦ Kirjoita jaetut cM:t: todennäköinen sukulaisuus näkyy tässä. ¦ Írd be a közös cM-et: itt jelenik meg a valószínű rokonság.
+Supprimée. ¦ Poistettu. ¦ Törölve.
+Correspondance enregistrée. ¦ Osuma tallennettu. ¦ Egyezés mentve.
+Importer des segments ADN ¦ Tuo DNA-segmenttejä ¦ DNS-szegmensek importálása
+Importer des correspondances ADN ¦ Tuo DNA-osumia ¦ DNS-egyezések importálása
+Fichier vide ou illisible. ¦ Tiedosto on tyhjä tai lukukelvoton. ¦ A fájl üres vagy olvashatatlan.
+Colonnes reconnues (à vérifier) ¦ Tunnistetut sarakkeet (tarkista) ¦ Felismert oszlopok (ellenőrizd)
+— ne pas prendre — ¦ — älä ota mukaan — ¦ — ne vegye át —
+=correspondance ajoutée ¦ lisätty osuma|lisättyä osumaa ¦ hozzáadott egyezés|hozzáadott egyezés
+=segment importé ¦ tuotu segmentti|tuotua segmenttiä ¦ importált szegmens|importált szegmens
+=groupe créé ¦ luotu ryhmä|luotua ryhmää ¦ létrehozott csoport|létrehozott csoport
+=cochée ¦ valittu|valittua ¦ bejelölve|bejelölve
+=ancêtre possible ¦ mahdollinen esivanhempi|mahdollista esivanhempaa ¦ lehetséges felmenő|lehetséges felmenő
+Un groupe range ensemble les correspondances d’une même branche. ¦ Ryhmä kokoaa yhteen saman haaran osumat. ¦ Egy csoport ugyanannak az ágnak az egyezéseit fogja össze.
+arrière-grands-parents ¦ isoisovanhemmat ¦ dédszülők
+🎯 Ancêtres communs ¦ 🎯 Yhteiset esivanhemmat ¦ 🎯 Közös felmenők
+🤔 Ancêtres probables ¦ 🤔 Todennäköiset esivanhemmat ¦ 🤔 Valószínű felmenők
+Ancêtre commun encore inconnu ¦ Yhteinen esivanhempi vielä tuntematon ¦ A közös felmenő még ismeretlen
+📍 Placer un cousin dans l’arbre ¦ 📍 Sijoita serkku puuhun ¦ 📍 Unokatestvér elhelyezése a fán
+Hors des valeurs connues. ¦ Tunnettujen arvojen ulkopuolella. ¦ Az ismert értékeken kívül.
+Probabilité ¦ Todennäköisyys ¦ Valószínűség
+Couple d’ancêtres ¦ Esivanhempipari ¦ Felmenő pár
+(un seul des deux : demi-cousin) ¦ (vain toinen kahdesta: puoliserkku) ¦ (csak az egyikük: fél unokatestvér)
+Choisis une correspondance ou entre des cM. ¦ Valitse osuma tai syötä cM:t. ¦ Válassz egy egyezést, vagy írd be a cM-et.
+Aucun test ¦ Ei testejä ¦ Nincs teszt
+Couleur par correspondance ¦ Väri osuman mukaan ¦ Szín egyezésenként
+Par groupe ¦ Ryhmittäin ¦ Csoportonként
+Aucun segment. ¦ Ei segmenttejä. ¦ Nincs szegmens.
+Nouveau segment ¦ Uusi segmentti ¦ Új szegmens
+Ancêtre supposé ¦ Oletettu esivanhempi ¦ Feltételezett felmenő
+♂ ADN-Y — lignée paternelle directe ¦ ♂ Y-DNA — suora isälinja ¦ ♂ Y-DNS — egyenes apai ág
+♀ ADN mitochondrial — lignée maternelle directe ¦ ♀ Mitokondrio-DNA — suora äitilinja ¦ ♀ Mitokondriális DNS — egyenes anyai ág
+✕ ADN-X — ancêtres possibles ¦ ✕ X-DNA — mahdolliset esivanhemmat ¦ ✕ X-DNS — lehetséges felmenők
+Endogamie et implexe ¦ Endogamia ja esivanhempien kato ¦ Endogámia és ősveszteség
+Placer une correspondance ¦ Sijoita osuma ¦ Egyezés elhelyezése
+Confidentialité et éthique ¦ Yksityisyys ja etiikka ¦ Adatvédelem és etika
+Colonnes du tableau des correspondances ¦ Osumataulukon sarakkeet ¦ Az egyezések táblázatának oszlopai
+Chiffres et couleurs ¦ Luvut ja värit ¦ Számok és színek
+⤓ Exporter tout l’ADN (JSON) ¦ ⤓ Vie kaikki DNA-tiedot (JSON) ¦ ⤓ Az összes DNS-adat exportálása (JSON)
+Ouvrir l’onglet ADN → ¦ Avaa DNA-välilehti → ¦ A DNS lap megnyitása →
+Nouveau diagramme ¦ Uusi diagrammi ¦ Új diagram
+Choisis un dessin : il arrive avec un exemple que tu remplaces par tes chiffres (à la main, collés d’un tableur, d’un CSV, ou pris dans l’app). ¦ Valitse piirros: se tulee esimerkin kanssa, jonka korvaat omilla luvuillasi (käsin, taulukkolaskennasta liitettyinä, CSV:stä tai sovelluksesta otettuina). ¦ Válassz egy rajzot: egy példával érkezik, amelyet lecserélsz a saját számaidra (kézzel, táblázatkezelőből beillesztve, CSV-ből vagy az alkalmazásból véve).
+Ordre, types montrés ou cachés, groupes à toi ¦ Järjestys, näytetyt tai piilotetut tyypit, omat ryhmäsi ¦ Sorrend, megjelenített vagy rejtett típusok, saját csoportok
+⚙️ Ranger les types ¦ ⚙️ Järjestä tyypit ¦ ⚙️ Típusok rendezése
+Assemblées ¦ Kokoukset ¦ Gyűlések
+Parlement, assemblée, conseil ¦ Parlamentti, kokous, valtuusto ¦ Parlament, gyűlés, tanács
+Arc élargi (Assemblée en éventail) ¦ Levennetty kaari (viuhkamainen sali) ¦ Kiszélesített ív (legyező alakú terem)
+Fer à cheval ¦ Hevosenkenkä ¦ Patkó
+Westminster (bancs face à face) ¦ Westminster (penkit vastakkain) ¦ Westminster (szemközti padsorok)
+Salle face à la tribune (conseil municipal…) ¦ Sali puhujakorokkeen edessä (kunnanvaltuusto…) ¦ Terem a szónoki emelvénnyel szemben (önkormányzati testület…)
+Frise des membres (groupe de musique, association…) ¦ Jäsenten aikajana (yhtye, yhdistys…) ¦ A tagok idővonala (zenekar, egyesület…)
+Frise de vies (des personnes de la base) ¦ Elämien aikajana (tietokannan henkilöt) ¦ Életek idővonala (az adatbázis személyei)
+Planning (tâches d’une enquête, Gantt) ¦ Aikataulu (selvityksen tehtävät, Gantt) ¦ Ütemterv (egy nyomozás feladatai, Gantt)
+Frise chronologique (dates clés) ¦ Aikajana (tärkeät päivämäärät) ¦ Idővonal (fontos dátumok)
+Calendrier coloré (jour par jour) ¦ Värikäs kalenteri (päivä päivältä) ¦ Színes naptár (napról napra)
+Rose des mois (12 parts) ¦ Kuukausiruusu (12 osaa) ¦ Hónaprózsa (12 rész)
+Spirale du temps (une spire par siècle) ¦ Ajan spiraali (yksi kierros vuosisataa kohti) ¦ Időspirál (évszázadonként egy menet)
+Arbre en frise (vies par génération) ¦ Puu aikajanana (elämät sukupolvittain) ¦ Fa idővonalként (életek nemzedékenként)
+Naissances, décès et crises ¦ Syntymät, kuolemat ja kriisit ¦ Születések, halálozások és válságok
+Âges comparés d’une fratrie ¦ Sisarusparven ikävertailu ¦ Testvérek életkorának összevetése
+Pyramide « qui vivait en … » ¦ Pyramidi ”kuka eli vuonna …” ¦ Piramis: „ki élt …-ban/ben”
+Les vies de plusieurs générations superposées : qui a connu son arrière-petit-enfant, et combien d’années. ¦ Useiden sukupolvien elämät päällekkäin: kuka tunsi lapsenlapsenlapsensa ja kuinka monta vuotta. ¦ Több nemzedék élete egymásra vetítve: ki ismerte a dédunokáját, és hány évig.
+Qui a connu qui (vies de plusieurs générations) ¦ Kuka tunsi kenet (usean sukupolven elämät) ¦ Ki kit ismert (több nemzedék élete)
+Les mariages et les conceptions (naissance − 9 mois) mois par mois, avec le Carême et l’Avent repérés. ¦ Avioliitot ja hedelmöitykset (syntymä − 9 kuukautta) kuukausittain, paasto ja adventti merkittyinä. ¦ A házasságok és a fogantatások (születés − 9 hónap) hónapról hónapra, a nagyböjt és az advent jelölésével.
+Mois des mariages et des conceptions (Carême, Avent) ¦ Avioliittojen ja hedelmöitysten kuukaudet (paasto, adventti) ¦ A házasságok és fogantatások hónapjai (nagyböjt, advent)
+Une ligne par mère : ses enfants à l’âge qu’elle avait, l’écart entre deux naissances et les enfants morts jeunes. ¦ Yksi rivi äitiä kohden: hänen lapsensa sen ikäisenä kuin hän oli, kahden syntymän väli ja nuorena kuolleet lapset. ¦ Anyánként egy sor: a gyerekei az anya akkori életkora szerint, két születés közötti idő és a fiatalon meghalt gyerekek.
+Espacement des naissances (les enfants de chaque mère) ¦ Syntymien väli (kunkin äidin lapset) ¦ A születések közötti időközök (az egyes anyák gyerekei)
+Une bande par personne, colorée selon la commune (ou le département, le pays) où elle vivait à chaque époque. ¦ Yksi nauha henkilöä kohden, väritetty sen kunnan (tai departementin, maan) mukaan, jossa hän asui kunakin aikana. ¦ Személyenként egy sáv, annak a településnek (vagy megyének, országnak) a színével, ahol az adott időszakban élt.
+Frise des lieux de vie (une bande par personne) ¦ Asuinpaikkojen aikajana (yksi nauha henkilöä kohden) ¦ A lakóhelyek idővonala (személyenként egy sáv)
+Une ligne par tâche, de sa date de début à sa date de fin, avec ce qui est déjà fait. ¦ Yksi rivi tehtävää kohden, alkupäivästä loppupäivään, ja mitä on jo tehty. ¦ Feladatonként egy sor, a kezdő dátumtól a záró dátumig, a már elvégzett résszel.
+Diagramme de Gantt (tâches, chantiers de recherche) ¦ Gantt-kaavio (tehtävät, tutkimushankkeet) ¦ Gantt-diagram (feladatok, kutatási munkák)
+Les anniversaires, mariages, décès et fêtes des prénoms autour d’un cercle de douze mois. ¦ Syntymäpäivät, avioliitot, kuolemat ja nimipäivät kahdentoista kuukauden ympyrän ympärillä. ¦ A születésnapok, házasságok, halálesetek és névnapok egy tizenkét hónapos kör mentén.
+Roue de l’année (anniversaires et fêtes de la famille) ¦ Vuoden pyörä (suvun syntymäpäivät ja juhlat) ¦ Az év kereke (a család születésnapjai és ünnepei)
+Colonnes empilées ¦ Pinotut pylväät ¦ Halmozott oszlopok
+Colonnes empilées à 100 % ¦ 100 %:n pinotut pylväät ¦ 100%-os halmozott oszlopok
+Pyramide (des âges…) ¦ Pyramidi (ikä…) ¦ Piramis (korfa…)
+Carte de chaleur (tableau coloré) ¦ Lämpökartta (väritetty taulukko) ¦ Hőtérkép (színezett táblázat)
+Classement qui évolue (prénoms par décennie…) ¦ Muuttuva sijoitus (etunimet vuosikymmenittäin…) ¦ Változó rangsor (utónevek évtizedenként…)
+Courants empilés (métiers sur 200 ans…) ¦ Pinotut virrat (ammatit 200 vuoden ajalta…) ¦ Halmozott folyamok (foglalkozások 200 év alatt…)
+Histogramme (valeurs rangées en tranches) ¦ Histogrammi (arvot luokiteltuina) ¦ Hisztogram (sávokba rendezett értékek)
+Boîte à moustaches (médiane, quartiles) ¦ Laatikko-jana-kuvio (mediaani, kvartiilit) ¦ Dobozdiagram (medián, kvartilisek)
+Haltères (deux valeurs par ligne) ¦ Käsipainot (kaksi arvoa riviä kohden) ¦ Súlyzók (soronként két érték)
+Pente avant / après ¦ Kaltevuus ennen / jälkeen ¦ Lejtő előtte / utána
+Cascade (un total qui monte et descend) ¦ Vesiputous (nouseva ja laskeva summa) ¦ Vízesés (emelkedő és csökkenő összeg)
+Sucettes couchées ¦ Vaakasuorat tikkarit ¦ Fekvő nyalókák
+Essaim de points (une personne = un point) ¦ Pisteparvi (yksi henkilö = yksi piste) ¦ Pontraj (egy személy = egy pont)
+Petites courbes en grille ¦ Pienet käyrät ruudukossa ¦ Kis görbék rácsban
+Violon (répartition par catégorie) ¦ Viulu (jakauma luokittain) ¦ Hegedű (eloszlás kategóriánként)
+Pour chaque âge, la part des personnes encore en vie : une courbe par siècle, par sexe ou par branche. ¦ Kunkin iän kohdalla vielä elossa olevien osuus: yksi käyrä vuosisataa, sukupuolta tai haaraa kohden. ¦ Minden életkorban a még élők aránya: egy görbe évszázadonként, nemenként vagy áganként.
+Courbe de survie (part encore en vie à chaque âge) ¦ Eloonjäämiskäyrä (vielä elossa olevien osuus kussakin iässä) ¦ Túlélési görbe (a még élők aránya minden életkorban)
+Vagues (une répartition par siècle…) ¦ Aallot (yksi jakauma vuosisataa kohden…) ¦ Hullámok (évszázadonként egy eloszlás…)
+Échelle de points (Cleveland) ¦ Pisteasteikko (Cleveland) ¦ Pontskála (Cleveland)
+Tableau de mobilité (métier du père × métier de l’enfant) ¦ Liikkuvuustaulukko (isän ammatti × lapsen ammatti) ¦ Mobilitási táblázat (az apa foglalkozása × a gyerek foglalkozása)
+Barres en cercle (classement qui s’enroule) ¦ Pylväät ympyrässä (kiertyvä sijoitus) ¦ Körbe rendezett oszlopok (körbefutó rangsor)
+Des barres sur l’axe de gauche et une courbe sur un deuxième axe à droite, pour comparer deux sortes de chiffres. ¦ Pylväät vasemmalla akselilla ja käyrä toisella akselilla oikealla, kahdenlaisten lukujen vertailuun. ¦ Oszlopok a bal tengelyen és egy görbe egy második tengelyen jobbra, kétféle érték összevetésére.
+Barres + courbe (deuxième axe à droite) ¦ Pylväät + käyrä (toinen akseli oikealla) ¦ Oszlopok + görbe (második tengely jobbra)
+Deux chiffres face à face de chaque côté d’un trait (décès et naissances, femmes et hommes), ou un chiffre au-dessus et en dessous d’un centre. ¦ Kaksi lukua vastakkain viivan kummallakin puolella (kuolemat ja syntymät, naiset ja miehet) tai luku keskikohdan ylä- ja alapuolella. ¦ Két érték egymással szemben egy vonal két oldalán (halálesetek és születések, nők és férfiak), vagy egy érték egy középpont fölött és alatt.
+Barres divergentes (gauche / droite d’un centre) ¦ Hajaantuvat pylväät (keskikohdan vasemmalla / oikealla) ¦ Széttartó oszlopok (egy középponttól balra / jobbra)
+Une colline par série (un nom de famille, un prénom, une commune…), l’une derrière l’autre, au fil du temps. ¦ Yksi kukkula sarjaa kohden (sukunimi, etunimi, kunta…), peräkkäin, ajan kuluessa. ¦ Sorozatonként egy domb (egy vezetéknév, egy utónév, egy település…), egymás mögött, az idő múlásával.
+Collines empilées (une courbe par série, décalées) ¦ Pinotut kukkulat (yksi käyrä sarjaa kohden, siirrettyinä) ¦ Halmozott dombok (sorozatonként egy görbe, eltolva)
+Chaque personne est une ligne qui passe par plusieurs axes (âge au mariage, enfants, âge au décès…) : les profils se voient d’un coup d’œil. ¦ Jokainen henkilö on viiva, joka kulkee useiden akselien kautta (ikä avioituessa, lapset, kuolinikä…): profiilit näkyvät yhdellä silmäyksellä. ¦ Minden személy egy vonal, amely több tengelyen halad át (életkor a házasságkötéskor, gyerekek, életkor a halálkor…): a profilok egy pillantással láthatók.
+Coordonnées parallèles (plusieurs chiffres par personne) ¦ Rinnakkaiset koordinaatit (useita lukuja henkilöä kohden) ¦ Párhuzamos koordináták (személyenként több érték)
+Une courbe qui avance par marches : le chiffre reste le même jusqu’au prochain changement (vivants de la famille, ancêtres trouvés…). ¦ Portaittain etenevä käyrä: luku pysyy samana seuraavaan muutokseen asti (suvun elävät, löydetyt esivanhemmat…). ¦ Lépcsőkben haladó görbe: az érték a következő változásig ugyanaz marad (élő családtagok, megtalált ősök…).
+Courbe en escalier (ex. combien de vivants, année par année) ¦ Porraskäyrä (esim. montako elossa, vuosi vuodelta) ¦ Lépcsős görbe (pl. hányan élnek, évről évre)
+Mosaïque (100 carrés) ¦ Mosaiikki (100 ruutua) ¦ Mozaik (100 négyzet)
+Carte proportionnelle (rectangles) ¦ Suhteellinen kartta (suorakulmiot) ¦ Arányos térkép (téglalapok)
+Pictogrammes (symboles répétés) ¦ Kuvasymbolit (toistuvat symbolit) ¦ Piktogramok (ismétlődő szimbólumok)
+Mosaïque à largeur variable (Marimekko) ¦ Vaihtuvalevyinen mosaiikki (Marimekko) ¦ Változó szélességű mozaik (Marimekko)
+Bulles groupées (noms, métiers, lieux) ¦ Ryhmitellyt kuplat (nimet, ammatit, paikat) ¦ Csoportosított buborékok (nevek, foglalkozások, helyek)
+Flux (Sankey) : migrations, métiers… ¦ Virta (Sankey): muuttoliikkeet, ammatit… ¦ Áramlás (Sankey): vándorlások, foglalkozások…
+Diagramme d’accord (mariages entre villages) ¦ Jännekaavio (kylien väliset avioliitot) ¦ Húrdiagram (falvak közötti házasságok)
+Une idée au centre, des branches autour, et les idées de chaque branche. ¦ Yksi ajatus keskellä, haarat ympärillä ja kunkin haaran ajatukset. ¦ Egy gondolat középen, körülötte ágak, és az egyes ágak gondolatai.
+Carte mentale (une idée, ses branches) ¦ Miellekartta (ajatus ja sen haarat) ¦ Gondolattérkép (egy gondolat, az ágai)
+Éventail d’ascendance (mes chiffres) ¦ Esipolviviuhka (omat lukuni) ¦ Felmenői legyező (saját értékeim)
+Soleil des lignées (anneaux) ¦ Sukulinjojen aurinko (renkaat) ¦ Ágak napja (gyűrűk)
+Réseau de relations (témoins, parrains…) ¦ Suhdeverkosto (todistajat, kummit…) ¦ Kapcsolati háló (tanúk, keresztszülők…)
+Diagramme de Venn (2 à 4 ensembles) ¦ Venn-diagrammi (2–4 joukkoa) ¦ Venn-diagram (2–4 halmaz)
+Arbre en accordéon (cousins) ¦ Haitarisukupuu (serkut) ¦ Harmonikafa (unokatestvérek)
+Graphe des cousinages ¦ Serkkusuhteiden graafi ¦ Unokatestvéri kapcsolatok gráfja
+Matrice de parenté (qui est quoi pour qui) ¦ Sukulaisuusmatriisi (kuka on mitä kenellekin) ¦ Rokonsági mátrix (ki kinek micsodája)
+Arbre des patronymes (transmission du nom) ¦ Sukunimipuu (nimen periytyminen) ¦ Vezetéknévfa (a név öröklődése)
+Quadrillage des ancêtres (une case par Sosa) ¦ Esivanhempien ruudukko (yksi ruutu Sosa-numeroa kohden) ¦ Ősök rácsa (Sosa-számonként egy négyzet)
+Les métiers d’une génération à l’autre : chaque bande suit des lignées, du trisaïeul au fils. ¦ Ammatit sukupolvesta toiseen: kukin nauha seuraa sukulinjoja isoisän isoisästä poikaan. ¦ Foglalkozások nemzedékről nemzedékre: minden sáv ágakat követ, az ükapától a fiúig.
+Métiers de père en fils (flux sur plusieurs générations) ¦ Ammatit isältä pojalle (virta usean sukupolven yli) ¦ Foglalkozások apáról fiúra (áramlás több nemzedéken át)
+Chaque couple est un point : sa distance au centre est celle qui séparait les lieux de naissance des deux époux. ¦ Jokainen pariskunta on piste: sen etäisyys keskustasta on puolisoiden syntymäpaikkojen välinen etäisyys. ¦ Minden pár egy pont: a középponttól mért távolsága a két házastárs születési helye közötti távolság.
+Rayon des mariages (distance entre les villages des époux) ¦ Avioliittojen säde (puolisoiden kylien välinen etäisyys) ¦ A házasságok sugara (a házastársak falvai közötti távolság)
+Par génération : les ancêtres qu’on devrait avoir (2, 4, 8…), les places trouvées et les personnes différentes. ¦ Sukupolvittain: esivanhemmat, jotka pitäisi olla (2, 4, 8…), löydetyt paikat ja eri henkilöt. ¦ Nemzedékenként: a felmenők, akiknek lenniük kellene (2, 4, 8…), a megtalált helyek és a különböző személyek.
+Implexe (ancêtres théoriques et réels) ¦ Esivanhempien kato (teoreettiset ja todelliset esivanhemmat) ¦ Ősveszteség (elméleti és valós felmenők)
+Descendance en rectangles (icicle) ¦ Jälkeläiset suorakulmioina (jääpuikko) ¦ Leszármazottak téglalapokban (jégcsap)
+Prénoms transmis (parrain, marraine → filleul) ¦ Siirtyneet etunimet (kummisetä, kummitäti → kummilapsi) ¦ Továbbadott utónevek (keresztapa, keresztanya → keresztgyerek)
+Causes de décès en anneaux (familles puis détail) ¦ Kuolinsyyt renkaina (ryhmät ja sitten tarkemmin) ¦ Halálokok gyűrűkben (csoportok, aztán részletek)
+Une personne au milieu ; ses parents, grands-parents… au-dessus ; ses enfants, petits-enfants… au-dessous. ¦ Henkilö keskellä; hänen vanhempansa, isovanhempansa… yläpuolella; hänen lapsensa, lastenlapsensa… alapuolella. ¦ Egy személy középen; a szülei, nagyszülei… fölötte; a gyerekei, unokái… alatta.
+Sablier (ascendants et descendants d’une personne) ¦ Tiimalasi (henkilön esivanhemmat ja jälkeläiset) ¦ Homokóra (egy személy felmenői és leszármazottai)
+Le plus court chemin entre deux personnes, étape par étape, et la phrase qui dit le lien (« cousin issu de germains », « beau-frère »…). ¦ Lyhin polku kahden henkilön välillä vaihe vaiheelta ja lause, joka kertoo suhteen (”pikkuserkku”, ”lanko”…). ¦ A legrövidebb út két személy között, lépésről lépésre, és a mondat, amely kimondja a kapcsolatot („másodunokatestvér”, „sógor”…).
+Chemin de parenté entre deux personnes ¦ Sukulaisuuspolku kahden henkilön välillä ¦ Rokonsági út két személy között
+La part des ancêtres connus à chaque génération (1, 2, 4, 8… possibles), en barres ou en éventail. ¦ Tunnettujen esivanhempien osuus kussakin sukupolvessa (1, 2, 4, 8… mahdollista) pylväinä tai viuhkana. ¦ Az ismert felmenők aránya minden nemzedékben (1, 2, 4, 8… lehetséges), oszlopokban vagy legyezőben.
+Complétude de l’arbre (ancêtres connus par génération) ¦ Sukupuun kattavuus (tunnetut esivanhemmat sukupolvittain) ¦ A családfa teljessége (ismert felmenők nemzedékenként)
+La liste des ancêtres par numéro Sosa, génération par génération, prête à imprimer. ¦ Esivanhempien luettelo Sosa-numeron mukaan, sukupolvi sukupolvelta, valmiina tulostettavaksi. ¦ A felmenők listája Sosa-szám szerint, nemzedékről nemzedékre, nyomtatásra készen.
+Tableau d’ascendance (ahnentafel, une ligne par Sosa) ¦ Esipolvitaulukko (ahnentafel, yksi rivi Sosa-numeroa kohden) ¦ Felmenői táblázat (ahnentafel, Sosa-számonként egy sor)
+Cartes de chiffres (KPI) ¦ Lukukortit (KPI) ¦ Számkártyák (KPI)
+Barre d’objectif (valeur, objectif, zones) ¦ Tavoitepalkki (arvo, tavoite, alueet) ¦ Célsáv (érték, cél, zónák)
+Un anneau par objectif : plein quand c’est fini (ancêtres trouvés, actes sourcés, photos identifiées…). ¦ Yksi rengas tavoitetta kohden: täynnä, kun se on valmis (löydetyt esivanhemmat, lähteistetyt asiakirjat, tunnistetut valokuvat…). ¦ Célonként egy gyűrű: tele, ha kész (megtalált ősök, forrással ellátott okiratok, azonosított fényképek…).
+Anneaux d’avancement (objectifs de recherche) ¦ Edistymisrenkaat (tutkimustavoitteet) ¦ Haladási gyűrűk (kutatási célok)
+Carte colorée par zones (départements, régions, pays…) ¦ Alueittain väritetty kartta (departementit, alueet, maat…) ¦ Területenként színezett térkép (megyék, régiók, országok…)
+Carte des migrations (flèches d’un lieu à un autre) ¦ Muuttoliikekartta (nuolet paikasta toiseen) ¦ Vándorlási térkép (nyilak egyik helyről a másikra)
+Carte à symboles proportionnels (ronds par lieu) ¦ Suhteellisten symbolien kartta (ympyrät paikoittain) ¦ Arányos szimbólumos térkép (körök helyenként)
+Carte en points (un point par événement) ¦ Pistekartta (yksi piste tapahtumaa kohden) ¦ Pontos térkép (eseményenként egy pont)
+Carte en hexagones (densité en alvéoles) ¦ Kuusikulmiokartta (tiheys soluina) ¦ Hatszöges térkép (sűrűség cellákban)
+Carte déformée (zones grossies selon leur chiffre) ¦ Vääristetty kartta (alueet suurennettu lukunsa mukaan) ¦ Torzított térkép (értékük szerint nagyított területek)
+Carte qui raconte (une vie étape par étape) ¦ Tarinakartta (elämä pysähdys pysähdykseltä) ¦ Mesélő térkép (egy élet állomásról állomásra)
+Carte des patronymes (siècle par siècle) ¦ Sukunimikartta (vuosisata vuosisadalta) ¦ Vezetéknév-térkép (évszázadról évszázadra)
+Carte de chaleur dans le temps (décennie par décennie) ¦ Lämpökartta ajassa (vuosikymmen vuosikymmeneltä) ¦ Hőtérkép időben (évtizedről évtizedre)
+Carte des cousins ADN (lieux des ancêtres communs) ¦ DNA-serkkujen kartta (yhteisten esivanhempien paikat) ¦ DNS-unokatestvérek térképe (a közös ősök helyei)
+Carte de tes recherches (vu, en partie, trous) ¦ Tutkimustesi kartta (nähty, osittain, aukot) ¦ Kutatásaid térképe (átnézve, részben, hiányok)
+Le point moyen des lieux de naissance de chaque génération, et le chemin qu’il a fait jusqu’à toi. ¦ Kunkin sukupolven syntymäpaikkojen keskipiste ja polku, jonka se kulki sinuun asti. ¦ Az egyes nemzedékek születési helyeinek átlagpontja, és az út, amelyet hozzád vezetően bejárt.
+Centre de gravité de la famille par génération ¦ Suvun painopiste sukupolvittain ¦ A család súlypontja nemzedékenként
+Les lieux de naissance des ancêtres, une couleur par génération : on voit la famille venir de plus loin. ¦ Esivanhempien syntymäpaikat, yksi väri sukupolvea kohden: näet suvun tulevan yhä kauempaa. ¦ A felmenők születési helyei, nemzedékenként egy szín: látod, ahogy a család egyre távolabbról érkezik.
+Carte des générations (une couleur par génération) ¦ Sukupolvikartta (yksi väri sukupolvea kohden) ¦ Nemzedéki térkép (nemzedékenként egy szín)
+Vie et mort ¦ Elämä ja kuolema ¦ Élet és halál
+La part des enfants morts avant 1 an et avant 5 ans, période par période. ¦ Alle 1-vuotiaina ja alle 5-vuotiaina kuolleiden lasten osuus ajanjaksoittain. ¦ Az 1 éves és 5 éves koruk előtt meghalt gyerekek aránya, időszakonként.
+Mortalité des enfants (avant 1 an, avant 5 ans) ¦ Lapsikuolleisuus (alle 1 v, alle 5 v) ¦ Gyermekhalandóság (1 év alatt, 5 év alatt)
+Pour chaque couple, ses enfants : arrivés à l’âge adulte, morts jeunes, ou dont on ne sait pas. ¦ Kunkin pariskunnan lapset: aikuisikään ehtineet, nuorena kuolleet tai ne, joista ei tiedetä. ¦ Minden pár gyerekei: felnőttkort megértek, fiatalon meghaltak, vagy akikről nem tudni.
+Fratries qui survivent (enfants nés, arrivés adultes) ¦ Henkiin jääneet sisarussarjat (syntyneet lapset, aikuisiksi ehtineet) ¦ Túlélő testvérsorok (született és felnőttkort megért gyerekek)
+Un damier : chaque mois de l’année, pour chaque époque. Plus c’est foncé, plus il y a de naissances (ou de décès). ¦ Ruudukko: jokainen vuoden kuukausi kultakin aikakaudelta. Mitä tummempi, sitä enemmän syntymiä (tai kuolemia). ¦ Sakktábla: az év minden hónapja, minden korszakra. Minél sötétebb, annál több a születés (vagy haláleset).
+Saisons des naissances et des décès (mois × époque) ¦ Syntymien ja kuolemien vuodenajat (kuukausi × aikakausi) ¦ A születések és halálesetek évszakai (hónap × korszak)
+Couples et familles ¦ Pariskunnat ja perheet ¦ Párok és családok
+Combien de temps attendaient les veufs et les veuves avant de se remarier. ¦ Kuinka kauan lesket odottivat ennen uutta avioliittoa. ¦ Mennyi ideig vártak az özvegyek, mielőtt újraházasodtak.
+Veuvage et remariage (délai avant de se remarier) ¦ Leskeys ja uusi avioliitto (aika ennen uutta avioliittoa) ¦ Özvegység és újraházasodás (az újraházasodásig eltelt idő)
+Combien d’années duraient les mariages, de la noce à la mort du premier des deux. ¦ Kuinka monta vuotta avioliitot kestivät häistä ensimmäisen puolison kuolemaan. ¦ Hány évig tartottak a házasságok, az esküvőtől az egyik fél haláláig.
+Durée des mariages (jusqu’à la mort d’un époux) ¦ Avioliittojen kesto (toisen puolison kuolemaan asti) ¦ A házasságok időtartama (az egyik házastárs haláláig)
+Chaque naissance est un point : l’âge du père (et celui de la mère) selon l’année. ¦ Jokainen syntymä on piste: isän (ja äidin) ikä vuoden mukaan. ¦ Minden születés egy pont: az apa (és az anya) életkora év szerint.
+Âge des parents à chaque naissance (nuage de points) ¦ Vanhempien ikä kunkin syntymän aikaan (pistekaavio) ¦ A szülők életkora minden születéskor (pontdiagram)
+La part des premiers enfants nés avant le mariage, ou moins de 8 mois après. ¦ Ennen avioliittoa tai alle 8 kuukautta sen jälkeen syntyneiden esikoisten osuus. ¦ A házasság előtt vagy annál kevesebb mint 8 hónappal később született első gyerekek aránya.
+Conceptions avant mariage (premier enfant « trop tôt ») ¦ Hedelmöitykset ennen avioliittoa (esikoinen ”liian aikaisin”) ¦ Házasság előtti fogantatások (az első gyerek „túl korán”)
+À gauche les couples où le mari est plus âgé, à droite ceux où la femme est plus âgée, par tranches d’écart. ¦ Vasemmalla pariskunnat, joissa mies on vanhempi, oikealla ne, joissa vaimo on vanhempi, ikäeron mukaan ryhmiteltyinä. ¦ Balra azok a párok, ahol a férj idősebb, jobbra azok, ahol a feleség, korkülönbség-sávok szerint.
+Écart d’âge entre époux (pyramide) ¦ Puolisoiden ikäero (pyramidi) ¦ A házastársak korkülönbsége (piramis)
+À chaque génération d’ancêtres, la distance moyenne entre leur lieu de naissance et le lieu de référence. ¦ Kussakin esivanhempien sukupolvessa syntymäpaikan ja viitepaikan välinen keskimääräinen etäisyys. ¦ A felmenők minden nemzedékében az átlagos távolság a születési helyük és a viszonyítási hely között.
+Loin du berceau (distance par génération) ¦ Kaukana kehdosta (etäisyys sukupolvittain) ¦ Messze a bölcsőtől (távolság nemzedékenként)
+La part de ceux qui ont signé l’acte (époux, épouses, témoins), période par période. ¦ Asiakirjan allekirjoittaneiden osuus (sulhaset, morsiamet, todistajat) ajanjaksoittain. ¦ Az okiratot aláírók aránya (vőlegények, menyasszonyok, tanúk), időszakonként.
+Savoir signer (époux, épouses, témoins) ¦ Osasi kirjoittaa nimensä (sulhaset, morsiamet, todistajat) ¦ Aláírni tudók (vőlegények, menyasszonyok, tanúk)
+Pour chaque génération d’ancêtres : naissances, mariages et décès prouvés par une source (vert), sans source (jaune) ou manquants (gris). ¦ Kullekin esivanhempien sukupolvelle: syntymät, avioliitot ja kuolemat, jotka on todistettu lähteellä (vihreä), ilman lähdettä (keltainen) tai puuttuvat (harmaa). ¦ A felmenők minden nemzedékére: forrással igazolt (zöld), forrás nélküli (sárga) vagy hiányzó (szürke) születések, házasságok és halálesetek.
+Ce que tu as prouvé (actes sourcés par génération) ¦ Mitä olet todistanut (lähteistetyt asiakirjat sukupolvittain) ¦ Amit igazoltál (forrással ellátott okiratok nemzedékenként)
+Pour chaque commune, une frise des années : dépouillées, vues sans rien trouver, à faire, actes trouvés ; en rouge pâle, les trous. ¦ Jokaiselle kunnalle vuosien aikajana: indeksoidut, katsotut ilman löytöjä, tekemättä, löydetyt asiakirjat; vaaleanpunaisella aukot. ¦ Minden településre egy idővonal az évekről: feldolgozott, eredmény nélkül átnézett, teendő, megtalált okiratok; halványpirossal a hiányok.
+Registres consultés (années vues et trous) ¦ Tutkitut rekisterit (katsotut vuodet ja aukot) ¦ Átnézett anyakönyvek (átnézett évek és hiányok)
+Peinture des chromosomes (segments ADN par branche) ¦ Kromosomimaalaus (DNA-segmentit haaroittain) ¦ Kromoszómafestés (DNS-szakaszok áganként)
+Règle des cM (parentés possibles) ¦ cM-viivain (mahdolliset sukulaisuudet) ¦ cM-vonalzó (lehetséges rokonságok)
+Les correspondances ADN qui se correspondent entre elles, rangées en groupes de couleur (souvent un par grand-parent). ¦ Toisiaan vastaavat DNA-osumat värillisiin ryhmiin järjestettyinä (usein yksi isovanhempaa kohden). ¦ Az egymással is egyező DNS-egyezések színes csoportokba rendezve (gyakran nagyszülőnként egy).
+Matrice des correspondances ADN (méthode de Leeds) ¦ DNA-osumien matriisi (Leedsin menetelmä) ¦ DNS-egyezések mátrixa (Leeds-módszer)
+Chargement du diagramme… ¦ Ladataan diagrammia… ¦ A diagram betöltése…
+Diagramme introuvable (supprimé ?). ¦ Diagrammia ei löydy (poistettu?). ¦ A diagram nem található (törölték?).
+la fenêtre « Imprimer » n’est pas chargée ¦ ”Tulosta”-ikkunaa ei ole ladattu ¦ a „Nyomtatás” ablak nincs betöltve
+Titre et légende ¦ Otsikko ja kuvateksti ¦ Cím és képaláírás
+Tableau des données dessous ¦ Tietotaulukko alla ¦ Adattáblázat alatta
+Taille réelle ¦ Todellinen koko ¦ Valódi méret
+Image copiée : colle-la où tu veux (⌘V). ¦ Kuva kopioitu: liitä se minne haluat (⌘V). ¦ Kép kimásolva: illeszd be, ahová szeretnéd (⌘V).
+Copie impossible ici : utilise « Image PNG ». ¦ Kopiointi ei onnistu tässä: käytä ”PNG-kuva”. ¦ Itt nem lehet másolni: használd a „PNG-kép” lehetőséget.
+image trop grande : baisse la qualité ¦ kuva liian suuri: laske laatua ¦ túl nagy kép: csökkentsd a minőséget
+📋 Copier l’image ¦ 📋 Kopioi kuva ¦ 📋 Kép másolása
+🧾 Prendre un classeur du Tableur ¦ 🧾 Ota työkirja Taulukkolaskennasta ¦ 🧾 Munkafüzet a Táblázatkezelőből
+Prendre un classeur du Tableur ¦ Ota työkirja Taulukkolaskennasta ¦ Munkafüzet a Táblázatkezelőből
+Nom du diagramme ¦ Diagrammin nimi ¦ A diagram neve
+PNG, JPG, SVG, PDF, impression, CSV, fichier du diagramme ¦ PNG, JPG, SVG, PDF, tulostus, CSV, diagrammitiedosto ¦ PNG, JPG, SVG, PDF, nyomtatás, CSV, diagramfájl
+Depuis l’app ¦ Sovelluksesta ¦ Az alkalmazásból
+Personnaliser n’est pas chargé. ¦ Mukauta ei ole ladattu. ¦ A Testreszabás nincs betöltve.
+Dans l’ordre du tableau ¦ Taulukon järjestyksessä ¦ A táblázat sorrendjében
+Prendre ces données ¦ Ota nämä tiedot ¦ Ezen adatok átvétele
+Prendre ces chiffres ¦ Ota nämä luvut ¦ Ezen értékek átvétele
+🧮 Refaire avec « Compter dans ma base » ¦ 🧮 Tee uudelleen toiminnolla ”Laske tietokannastani” ¦ 🧮 Újra a „Számlálás az adatbázisomban” funkcióval
+🧮 Compter dans ma base ¦ 🧮 Laske tietokannastani ¦ 🧮 Számlálás az adatbázisomban
+Une personne, une enquête… ¦ Henkilö, selvitys… ¦ Egy személy, egy nyomozás…
+Tableau importé. ¦ Taulukko tuotu. ¦ Táblázat importálva.
+Vider ce tableau ? ¦ Tyhjennetäänkö tämä taulukko? ¦ Kiürítsem ezt a táblázatot?
+Coller un tableau ¦ Liitä taulukko ¦ Táblázat beillesztése
+Données reprises du tableur. ¦ Tiedot otettu taulukkolaskennasta. ¦ Adatok átvéve a táblázatkezelőből.
+Fermer sans enregistrer les changements ? ¦ Suljetaanko tallentamatta muutoksia? ¦ Bezárod a változtatások mentése nélkül?
+Changements non enregistrés ¦ Tallentamattomia muutoksia ¦ Nem mentett változtatások
+Remplacer mes données ¦ Korvaa tietoni ¦ Adataim lecserélése
+Choisir un diagramme ¦ Valitse diagrammi ¦ Diagram kiválasztása
+Importer (fichier, tableau, Wikipédia, image) ¦ Tuo (tiedosto, taulukko, Wikipedia, kuva) ¦ Importálás (fájl, táblázat, Wikipédia, kép)
+un classeur du Tableur ¦ Taulukkolaskennan työkirja ¦ egy munkafüzet a Táblázatkezelőből
+Copie créée. ¦ Kopio luotu. ¦ Másolat létrehozva.
+Diagramme supprimé. ¦ Diagrammi poistettu. ¦ Diagram törölve.
+Ce fichier n’est pas un diagramme. ¦ Tämä tiedosto ei ole diagrammi. ¦ Ez a fájl nem diagram.
+Diagramme importé ¦ Tuotu diagrammi ¦ Importált diagram
+Diagramme importé. ¦ Diagrammi tuotu. ¦ Diagram importálva.
+Naissances (ou baptêmes) ¦ Syntymät (tai kasteet) ¦ Születések (vagy keresztelők)
+Baptêmes ¦ Kasteet ¦ Keresztelők
+Décès (ou sépultures) ¦ Kuolemat (tai hautaukset) ¦ Halálesetek (vagy temetések)
+Rien (un seul total) ¦ Ei mitään (vain yksi summa) ¦ Semmi (egyetlen összeg)
+Âge (par 5 ans) ¦ Ikä (5 vuoden välein) ¦ Életkor (5 évenként)
+Âge (par 10 ans) ¦ Ikä (10 vuoden välein) ¦ Életkor (10 évenként)
+Nombre d’enfants ¦ Lasten määrä ¦ Gyerekek száma
+Âge au mariage (par 5 ans) ¦ Ikä avioituessa (5 vuoden välein) ¦ Életkor a házasságkötéskor (5 évenként)
+Âge au premier enfant (par 5 ans) ¦ Ikä esikoisen syntyessä (5 vuoden välein) ¦ Életkor az első gyereknél (5 évenként)
+Nombre d’unions ¦ Liittojen määrä ¦ Kapcsolatok száma
+Branche (côté père, côté mère) ¦ Haara (isän puoli, äidin puoli) ¦ Ág (apai oldal, anyai oldal)
+En vie ou décédé ¦ Elossa tai kuollut ¦ Élő vagy elhunyt
+En vie ou décédés ¦ Elossa tai kuolleet ¦ Élők vagy elhunytak
+Avec ou sans source ¦ Lähteen kanssa tai ilman ¦ Forrással vagy forrás nélkül
+par nom ¦ sukunimen mukaan ¦ vezetéknév szerint
+par prénom ¦ etunimen mukaan ¦ utónév szerint
+par sexe ¦ sukupuolen mukaan ¦ nem szerint
+par métier ¦ ammatin mukaan ¦ foglalkozás szerint
+par génération ¦ sukupolven mukaan ¦ nemzedék szerint
+par commune ¦ kunnan mukaan ¦ település szerint
+par département ¦ departementin mukaan ¦ megye szerint
+par région ¦ alueen mukaan ¦ régió szerint
+par pays ¦ maan mukaan ¦ ország szerint
+par âge (5 ans) ¦ iän mukaan (5 v) ¦ életkor szerint (5 év)
+par âge (10 ans) ¦ iän mukaan (10 v) ¦ életkor szerint (10 év)
+par nombre d’enfants ¦ lasten määrän mukaan ¦ a gyerekek száma szerint
+par âge au mariage ¦ avioitumisiän mukaan ¦ a házasságkötéskori életkor szerint
+par âge au premier enfant ¦ esikoisen syntymäiän mukaan ¦ az első gyereknél betöltött életkor szerint
+par nombre d’unions ¦ liittojen määrän mukaan ¦ a kapcsolatok száma szerint
+par branche ¦ haaran mukaan ¦ ág szerint
+par cause ¦ syyn mukaan ¦ ok szerint
+par sorte d’événement ¦ tapahtumalajin mukaan ¦ eseményfajta szerint
+Mes ancêtres ¦ Esivanhempani ¦ Felmenőim
+Branche paternelle (côté père) ¦ Isän haara (isän puoli) ¦ Apai ág (apai oldal)
+Branche maternelle (côté mère) ¦ Äidin haara (äidin puoli) ¦ Anyai ág (anyai oldal)
+Une étiquette ¦ Tunniste ¦ Egy címke
+Une recherche dans les noms ¦ Haku nimistä ¦ Keresés a nevekben
+Les personnes que je choisis ¦ Valitsemani henkilöt ¦ Az általam kiválasztott személyek
+Une seule série ¦ Vain yksi sarja ¦ Egyetlen sorozat
+Une série par sexe ¦ Yksi sarja sukupuolta kohden ¦ Nemenként egy sorozat
+Une série par siècle ¦ Yksi sarja vuosisataa kohden ¦ Évszázadonként egy sorozat
+Une série par branche (côté père / mère) ¦ Yksi sarja haaraa kohden (isän / äidin puoli) ¦ Áganként egy sorozat (apai / anyai oldal)
+Une série par génération ¦ Yksi sarja sukupolvea kohden ¦ Nemzedékenként egy sorozat
+Une série par département ¦ Yksi sarja departementtia kohden ¦ Megyénként egy sorozat
+Une série par pays ¦ Yksi sarja maata kohden ¦ Országonként egy sorozat
+Du plus grand au plus petit ¦ Suurimmasta pienimpään ¦ A legnagyobbtól a legkisebbig
+Du plus petit au plus grand ¦ Pienimmästä suurimpaan ¦ A legkisebbtől a legnagyobbig
+Dans l’ordre (temps, âges…) ¦ Järjestyksessä (aika, iät…) ¦ Sorrendben (idő, életkorok…)
+Médiane ¦ Mediaani ¦ Medián
+Ce que chaque barre (ou part) compte : des personnes, des naissances, des mariages, des lieux, des médias… ¦ Mitä kukin pylväs (tai siivu) laskee: henkilöitä, syntymiä, avioliittoja, paikkoja, mediaa… ¦ Mit számol az egyes oszlop (vagy szelet): személyeket, születéseket, házasságokat, helyeket, médiát…
+Seulement les fiches qui portent cette étiquette. ¦ Vain kortit, joilla on tämä tunniste. ¦ Csak az ezzel a címkével ellátott adatlapok.
+Seulement les personnes que tu choisis ici, une par une. ¦ Vain henkilöt, jotka valitset tässä yksi kerrallaan. ¦ Csak az itt egyenként kiválasztott személyek.
+Comment on range ce qu’on compte : par nom, par lieu (commune, département, pays), par siècle, décennie ou année, par âge, par génération… ¦ Miten laskettu ryhmitellään: nimen, paikan (kunta, departementti, maa), vuosisadan, vuosikymmenen tai vuoden, iän, sukupolven mukaan… ¦ Hogyan csoportosítjuk, amit számolunk: név, hely (település, megye, ország), évszázad, évtized vagy év, életkor, nemzedék szerint…
+Prénoms, par siècle ¦ Etunimet vuosisadoittain ¦ Utónevek évszázadonként
+Âge au décès (par 5 ans) ¦ Kuolinikä (5 vuoden välein) ¦ Életkor a halálkor (5 évenként)
+Mariages par décennie ¦ Avioliitot vuosikymmenittäin ¦ Házasságok évtizedenként
+Nombre d’unions par personne ¦ Liittojen määrä henkilöä kohden ¦ A kapcsolatok száma személyenként
+Nombre moyen d’enfants par famille, par siècle ¦ Lasten keskimäärä perhettä kohden vuosisadoittain ¦ A gyerekek átlagos száma családonként, évszázadonként
+Naissances par département ¦ Syntymät departementeittain ¦ Születések megyénként
+Mariages par département, par siècle ¦ Avioliitot departementeittain ja vuosisadoittain ¦ Házasságok megyénként, évszázadonként
+Lieux par département ¦ Paikat departementeittain ¦ Helyek megyénként
+Métiers, par siècle ¦ Ammatit vuosisadoittain ¦ Foglalkozások évszázadonként
+Âge moyen au décès, par métier ¦ Keskimääräinen kuolinikä ammateittain ¦ Átlagos életkor a halálkor, foglalkozásonként
+Décès par décennie ¦ Kuolemat vuosikymmenittäin ¦ Halálesetek évtizedenként
+Événements par siècle ¦ Tapahtumat vuosisadoittain ¦ Események évszázadonként
+Mes ancêtres par génération ¦ Esivanhempani sukupolvittain ¦ Felmenőim nemzedékenként
+Fiches avec ou sans source ¦ Kortit lähteen kanssa tai ilman ¦ Adatlapok forrással vagy forrás nélkül
+Mes ancêtres avec ou sans source ¦ Esivanhempani lähteen kanssa tai ilman ¦ Felmenőim forrással vagy forrás nélkül
+Événements par sorte ¦ Tapahtumat lajeittain ¦ Események fajta szerint
+Médias par sorte ¦ Media lajeittain ¦ Média fajta szerint
+Médias par décennie ¦ Media vuosikymmenittäin ¦ Média évtizedenként
+Seulement les personnes… ¦ Vain henkilöt… ¦ Csak a személyek…
+tous ces critères (ET) ¦ kaikki nämä ehdot (JA) ¦ minden feltétel (ÉS)
+choisir… (métier, enfants, lieu, période…) ¦ valitse… (ammatti, lapset, paikka, ajanjakso…) ¦ válassz… (foglalkozás, gyerekek, hely, időszak…)
+Compter chaque personne une seule fois ¦ Laske kukin henkilö vain kerran ¦ Minden személy csak egyszer számít
+Jusqu’à (générations, 0 = toutes) ¦ Enintään (sukupolvia, 0 = kaikki) ¦ Legfeljebb (nemzedék, 0 = mind)
+Nom ou prénom qui contient ¦ Sukunimi tai etunimi, joka sisältää ¦ Vezetéknév vagy utónév, amely tartalmazza
+Chercher… (Martin, Jean) ¦ Hae… (Martin, Jean) ¦ Keresés… (Martin, Jean)
+Nées entre (période) ¦ Syntyneet välillä (ajanjakso) ¦ Születtek (időszak)
+Regrouper par ¦ Ryhmittele ¦ Csoportosítás
+Garder les premiers (0 = tous) ¦ Pidä ensimmäiset (0 = kaikki) ¦ Az elsők megtartása (0 = mind)
+Le reste dans « Autres » ¦ Loput kohtaan ”Muut” ¦ A többi az „Egyéb” alatt
+Montrer « Inconnu » (les valeurs vides) ¦ Näytä ”Tuntematon” (tyhjät arvot) ¦ „Ismeretlen” mutatása (üres értékek)
+De quoi ¦ Mistä ¦ Miből
+Écris une année (ex. 1800, vers 1850). ¦ Kirjoita vuosi (esim. 1800, vers 1850). ¦ Írj be egy évet (pl. 1800, vers 1850).
+Choisis une étiquette. ¦ Valitse tunniste. ¦ Válassz egy címkét.
+Écris au moins 2 lettres. ¦ Kirjoita vähintään 2 kirjainta. ¦ Írj be legalább 2 betűt.
+Choisis au moins une personne. ¦ Valitse vähintään yksi henkilö. ¦ Válassz ki legalább egy személyt.
+=siège ¦ paikka|paikkaa ¦ mandátum|mandátum
+Ajoute des valeurs positives. ¦ Lisää positiivisia arvoja. ¦ Adj hozzá pozitív értékeket.
+Il faut au moins 3 lignes (les axes). ¦ Tarvitaan vähintään 3 riviä (akselit). ¦ Legalább 3 sor kell (a tengelyek).
+Ajoute des valeurs. ¦ Lisää arvoja. ¦ Adj hozzá értékeket.
+Ajoute des flux : de, vers, combien. ¦ Lisää virtoja: mistä, mihin, kuinka monta. ¦ Adj hozzá áramlásokat: honnan, hová, mennyi.
+Il faut 2 ou 3 ensembles. ¦ Tarvitaan 2 tai 3 joukkoa. ¦ 2 vagy 3 halmaz kell.
+Ajoute une jauge : un nom, une valeur, un maximum. ¦ Lisää mittari: nimi, arvo, maksimi. ¦ Adj hozzá egy mérőt: egy nevet, egy értéket, egy maximumot.
+Ajoute des lignes : un nom, un nombre, un symbole (👤, 👶, ⚓…). ¦ Lisää rivejä: nimi, luku, symboli (👤, 👶, ⚓…). ¦ Adj hozzá sorokat: egy nevet, egy számot, egy szimbólumot (👤, 👶, ⚓…).
+Majorité (banc du haut) ¦ Enemmistö (ylempi penkki) ¦ Többség (felső padsor)
+Opposition (banc du bas) ¦ Oppositio (alempi penkki) ¦ Ellenzék (alsó padsor)
+Non-inscrits (bout) ¦ Sitoutumattomat (pääty) ¦ Független képviselők (vég)
+Présidence ¦ Puheenjohtajisto ¦ Elnökség
+Les chiffres ¦ Luvut ¦ Az értékek
+Afficher les valeurs ¦ Näytä arvot ¦ Értékek mutatása
+Hauteur du dessin ¦ Piirroksen korkeus ¦ A rajz magassága
+Unité (ex. : personnes, €) ¦ Yksikkö (esim. henkilöt, €) ¦ Mértékegység (pl. személy, €)
+Trou au centre ¦ Reikä keskellä ¦ Lyuk középen
+Sièges ¦ Paikat ¦ Mandátumok
+Hémicycle (demi-cercle) ¦ Puolikaari (puoliympyrä) ¦ Félkör (félköríves ülésrend)
+Arc élargi (angle au choix) ¦ Leveä kaari (valittava kulma) ¦ Széles ív (választható szög)
+Longueur des bancs droits ¦ Suorien penkkien pituus ¦ Az egyenes padsorok hossza
+Forme des sièges ¦ Paikkojen muoto ¦ Az ülések alakja
+Carrés ¦ Neliöt ¦ Négyzetek
+Carrés arrondis ¦ Pyöristetyt neliöt ¦ Lekerekített négyzetek
+Espace entre les sièges ¦ Paikkojen väli ¦ Távolság az ülések között
+Contour des sièges ¦ Paikkojen ääriviiva ¦ Az ülések körvonala
+Majorité absolue ¦ Ehdoton enemmistö ¦ Abszolút többség
+Ne pas montrer ¦ Älä näytä ¦ Ne mutassa
+En texte ¦ Tekstinä ¦ Szövegként
+Sièges dans la légende ¦ Paikat selitteessä ¦ Mandátumok a jelmagyarázatban
+Assemblée ¦ Edustajakokous ¦ Gyűlés
+Les membres (une ligne par période ; même nom = même ligne) ¦ Jäsenet (yksi rivi ajanjaksoa kohden; sama nimi = sama rivi) ¦ A tagok (időszakonként egy sor; azonos név = azonos sor)
+Rôles (séparés par des virgules) ¦ Roolit (pilkuilla erotettuina) ¦ Szerepek (vesszővel elválasztva)
+1987 ou 03/1987 ¦ 1987 tai 03/1987 ¦ 1987 vagy 03/1987
+Fin (vide = aujourd’hui) ¦ Loppu (tyhjä = tänään) ¦ Vége (üres = ma)
+Les traits verticaux (albums, tournées, événements) ¦ Pystyviivat (albumit, kiertueet, tapahtumat) ¦ A függőleges vonalak (albumok, turnék, események)
+Tournée (rouge, pointillés) ¦ Kiertue (punainen, pisteviiva) ¦ Turné (piros, pontozott)
+Autre (bleu, pointillés) ¦ Muu (sininen, pisteviiva) ¦ Egyéb (kék, pontozott)
+Un repère tous les … ans (vide = auto) ¦ Merkki … vuoden välein (tyhjä = automaattinen) ¦ Jelölés … évente (üres = automatikus)
+Épaisseur des barres ¦ Pylväiden paksuus ¦ Az oszlopok vastagsága
+Espace entre les lignes ¦ Rivien väli ¦ Távolság a sorok között
+Ordre des lignes ¦ Rivien järjestys ¦ A sorok sorrendje
+Par date d’arrivée ¦ Tulopäivän mukaan ¦ Belépés dátuma szerint
+Rôle par défaut (si vide) ¦ Oletusrooli (jos tyhjä) ¦ Alapértelmezett szerep (ha üres)
+Les événements ¦ Tapahtumat ¦ Az események
+En alternance dessus / dessous ¦ Vuorotellen ylä- / alapuolella ¦ Felváltva fölötte / alatta
+Tous au-dessus ¦ Kaikki yläpuolella ¦ Mind fölötte
+Étages au plus (pour éviter les chevauchements) ¦ Kerroksia enintään (päällekkäisyyksien välttämiseksi) ¦ Szintek legfeljebb (az átfedések elkerülésére)
+Carrés par ligne ¦ Ruutuja riviä kohden ¦ Négyzetek soronként
+Personnes trouvées ¦ Löydetyt henkilöt ¦ Megtalált személyek
+Avec un acte ¦ Asiakirjan kanssa ¦ Okirattal
+Acte vérifié ¦ Asiakirja tarkistettu ¦ Ellenőrzött okirat
+Sourcées ¦ Lähteistetyt ¦ Forrással ellátva
+Complétude par branche ¦ Kattavuus haaroittain ¦ Teljesség áganként
+Couleur des petites valeurs ¦ Pienten arvojen väri ¦ A kis értékek színe
+Couleur des grandes valeurs ¦ Suurten arvojen väri ¦ A nagy értékek színe
+Les points ¦ Pisteet ¦ A pontok
+Une seule couleur ¦ Yksi väri ¦ Egyetlen szín
+Les flux ¦ Virrat ¦ Az áramlások
+D’où venaient les conjoints ¦ Mistä puolisot tulivat ¦ Honnan jöttek a házastársak
+Les cases ¦ Ruudut ¦ A dobozok
+Largeur des cases (vide = auto) ¦ Ruutujen leveys (tyhjä = automaattinen) ¦ A dobozok szélessége (üres = automatikus)
+Les ensembles (2 ou 3) ¦ Joukot (2 tai 3) ¦ A halmazok (2 vagy 3)
+Ce qu’on écrit dans chaque zone ¦ Mitä kuhunkin alueeseen kirjoitetaan ¦ Mi kerüljön az egyes területekre
+Texte ou nombre ¦ Teksti tai luku ¦ Szöveg vagy szám
+Les mots ¦ Sanat ¦ A szavak
+Taille du plus gros mot ¦ Suurimman sanan koko ¦ A legnagyobb szó mérete
+Les jauges ¦ Mittarit ¦ A mérők
+Les lignes ¦ Rivit ¦ A sorok
+Un symbole vaut ¦ Yksi symboli vastaa ¦ Egy szimbólum értéke
+Taille des symboles ¦ Symbolien koko ¦ A szimbólumok mérete
+Légende ¦ Selite ¦ Jelmagyarázat
+En bas ¦ Alhaalla ¦ Alul
+Couleurs par défaut ¦ Oletusvärit ¦ Alapértelmezett színek
+Sépia (ancien) ¦ Seepia (vanha) ¦ Szépia (régi)
+Taille des textes ¦ Tekstien koko ¦ A szövegek mérete
+Couleur du fond ¦ Taustaväri ¦ Háttérszín
+Couleur des textes ¦ Tekstien väri ¦ A szövegek színe
+Types remis comme au départ. ¦ Tyypit palautettu alkuperäisiksi. ¦ Típusok visszaállítva alapra.
+Nom du groupe (ex. « Mes favoris », « Pour la famille ») : ¦ Ryhmän nimi (esim. ”Suosikkini”, ”Suvulle”): ¦ A csoport neve (pl. „Kedvenceim”, „A családnak”):
+Un tableau ¦ Taulukko ¦ Egy táblázat
+Un fichier CSV ¦ CSV-tiedosto ¦ Egy CSV-fájl
+Une page Wikipédia ¦ Wikipedia-sivu ¦ Egy Wikipédia-oldal
+Un graphique partagé ¦ Jaettu kaavio ¦ Egy megosztott grafikon
+📊 D’un graphique ¦ 📊 Kaaviosta ¦ 📊 Egy grafikonból
+Avec quel dessin ? ¦ Millä piirroksella? ¦ Milyen rajzzal?
+🖼️ Image d’un graphique ¦ 🖼️ Kaavion kuva ¦ 🖼️ Egy grafikon képe
+Un diagramme LCNDA (.json), un graphique partagé (.lcnda-widget.json) ou un tableau CSV. ¦ LCNDA-diagrammi (.json), jaettu kaavio (.lcnda-widget.json) tai CSV-taulukko. ¦ Egy LCNDA-diagram (.json), egy megosztott grafikon (.lcnda-widget.json) vagy egy CSV-táblázat.
+Lire la page ¦ Lue sivu ¦ Az oldal beolvasása
+Comment faire mon propre graphique avec des données d’ailleurs ? ¦ Miten teen oman kaavion muualta saaduista tiedoista? ¦ Hogyan készíthetek saját grafikont máshonnan származó adatokból?
+Ce fichier JSON n’est ni un diagramme ni un graphique LCNDA. ¦ Tämä JSON-tiedosto ei ole LCNDA-diagrammi eikä -kaavio. ¦ Ez a JSON-fájl se nem LCNDA-diagram, se nem LCNDA-grafikon.
+Colle un tableau. ¦ Liitä taulukko. ¦ Illessz be egy táblázatot.
+Tableau collé ¦ Taulukko liitetty ¦ Táblázat beillesztve
+Clique « Lire la page », puis choisis un tableau ou une image. ¦ Napsauta ”Lue sivu” ja valitse sitten taulukko tai kuva. ¦ Kattints „Az oldal beolvasása” gombra, majd válassz egy táblázatot vagy egy képet.
+Colle l’adresse d’une page Wikipédia (https://xx.wikipedia.org/wiki/…). ¦ Liitä Wikipedia-sivun osoite (https://xx.wikipedia.org/wiki/…). ¦ Illeszd be egy Wikipédia-oldal címét (https://xx.wikipedia.org/wiki/…).
+Aucun tableau. ¦ Ei taulukkoa. ¦ Nincs táblázat.
+＋ Une ligne ¦ ＋ Rivi ¦ ＋ Egy sor
+Je ne sais pas (barres ou colonnes) ¦ En tiedä (pylväät tai sarakkeet) ¦ Nem tudom (sávok vagy oszlopok)
+Hémicycle (sièges) ¦ Puolikaari (paikat) ¦ Félkör (mandátumok)
+Valeur du haut (la plus grande barre, ou 100 %) ¦ Yläarvo (suurin pylväs tai 100 %) ¦ Felső érték (a legnagyobb oszlop, vagy 100 %)
+D’après une image ¦ Kuvan perusteella ¦ Egy kép alapján
+Président ¦ Puheenjohtaja ¦ Elnök
+Majorité ¦ Enemmistö ¦ Többség
+Indépendants ¦ Sitoutumattomat ¦ Függetlenek
+Liste du maire ¦ Pormestarin lista ¦ A polgármester listája
+Sens de l’arbre ¦ Puun suunta ¦ A fa iránya
+Chercher un métier… (tisserand, laboureur) ¦ Hae ammattia… (kutoja, kyntäjä) ¦ Foglalkozás keresése… (takács, szántóvető)
+Chercher un métier ¦ Hae ammattia ¦ Foglalkozás keresése
+Pour montrer ou imprimer l’arbre : les vivants et les fiches confidentielles n’apparaissent plus ¦ Puun näyttämiseen tai tulostamiseen: elävät ja luottamukselliset kortit eivät enää näy ¦ A fa megmutatásához vagy nyomtatásához: az élők és a bizalmas adatlapok nem jelennek meg
+🔒 Sans les vivants ni les fiches confidentielles ¦ 🔒 Ilman eläviä ja luottamuksellisia kortteja ¦ 🔒 Élők és bizalmas adatlapok nélkül
+ARBRE DES MÉTIERS ¦ AMMATTIPUU ¦ FOGLALKOZÁSOK FÁJA
+Les métiers des ancêtres de {name} ¦ Henkilön {name} esivanhempien ammatit ¦ {name} felmenőinek foglalkozásai
+🧬 Les métiers des ancêtres de {name} ¦ 🧬 Henkilön {name} esivanhempien ammatit ¦ 🧬 {name} felmenőinek foglalkozásai
+métier inconnu ¦ ammatti tuntematon ¦ ismeretlen foglalkozás
+Aucun métier noté dans cet arbre. ¦ Tähän puuhun ei ole merkitty ammatteja. ¦ Ebben a fában nincs feljegyzett foglalkozás.
+Même métier que le parent ¦ Sama ammatti kuin vanhemmalla ¦ Ugyanaz a foglalkozás, mint a szülőé
+Changement de métier ¦ Ammatin vaihdos ¦ Foglalkozásváltás
+Métier inconnu pour l’un des deux ¦ Toisen ammatti tuntematon ¦ Az egyiknél ismeretlen a foglalkozás
+📊 La transmission du métier ¦ 📊 Ammatin periytyminen ¦ 📊 A foglalkozás továbbadása
+Un enfant « reprend » le métier quand au moins un de ses métiers est aussi celui du parent (mêmes mots du dictionnaire des métiers anciens : « laboureur » et « laboureur à bras » comptent pareil). ¦ Lapsi ”jatkaa” ammattia, kun ainakin yksi hänen ammateistaan on myös vanhemman ammatti (samat sanat vanhojen ammattien sanakirjassa: ”laboureur” ja ”laboureur à bras” lasketaan samaksi). ¦ Egy gyerek akkor „viszi tovább” a foglalkozást, ha legalább az egyik foglalkozása a szülőé is (a régi foglalkozások szótárában ugyanazok a szavak: a „laboureur” és a „laboureur à bras” ugyanannak számít).
+Pas encore de quoi compter : il faut le métier d’un parent et celui de son enfant du même sexe. ¦ Vielä ei ole mitään laskettavaa: tarvitaan vanhemman ja samaa sukupuolta olevan lapsen ammatti. ¦ Még nincs mit számolni: kell egy szülő és az azonos nemű gyereke foglalkozása.
+Arrivée au bagne ¦ Saapuminen vankisiirtolaan ¦ Érkezés a fegyenctelepre
+Autre événement ¦ Muu tapahtuma ¦ Egyéb esemény
+Décoration ¦ Kunniamerkki ¦ Kitüntetés
+Décès en déportation ¦ Kuolema karkotuksessa ¦ Halál a deportálásban
+Déportation ¦ Karkotus ¦ Deportálás
+Fusillé ¦ Ammuttu (teloitettu) ¦ Kivégezték (golyó általi)
+Libération ou décès au bagne ¦ Vapautus tai kuolema vankisiirtolassa ¦ Szabadulás vagy halál a fegyenctelepen
+Lieu de résidence ¦ Asuinpaikka ¦ Lakóhely
+Obsèques ¦ Hautajaiset ¦ Gyászszertartás
+Séparation ¦ Asumusero ¦ Különválás
+{name} : {n} — voir les personnes ¦ {name}: {n} — näytä henkilöt ¦ {name}: {n} — személyek megtekintése
+Personne de ta base n’est né ou baptisé un {date}. ¦ Kukaan tietokannassasi ei ole syntynyt tai kastettu päivänä {date}. ¦ Az adatbázisodban senki sem született vagy keresztelkedett ezen a napon: {date}.
+{n} coïncidences dans l’arbre ¦ {n} yhteensattumaa sukupuussa ¦ {n} egybeesés a családfában
+Aucune bougie allumée cette semaine. ¦ Tällä viikolla ei ole sytytetty kynttilöitä. ¦ Ezen a héten nem gyújtottak gyertyát.
+Aucune lettre scellée. ¦ Ei sinetöityjä kirjeitä. ¦ Nincs lepecsételt levél.
+Le détail ¦ Yksityiskohdat ¦ A részletek
+Prochain à voir : ¦ Seuraavaksi katsottava: ¦ Következő megtekintendő:
+L’ambiance ¦ Tunnelma ¦ A hangulat
+La veillée au coin du feu (vers 1880) ¦ Iltapuhde takkatulen ääressä (noin 1880) ¦ Esti beszélgetés a tűz mellett (1880 körül)
+Le village un dimanche matin ¦ Kylä sunnuntaiaamuna ¦ A falu vasárnap reggel
+L’atelier du forgeron ¦ Sepän paja ¦ A kovácsműhely
+La gare (vers 1900) ¦ Rautatieasema (noin 1900) ¦ A vasútállomás (1900 körül)
+Le moulin au bord de l’eau ¦ Mylly veden äärellä ¦ A malom a víz partján
+La nuit d’orage ¦ Ukkosyö ¦ A viharos éjszaka
+Le port ¦ Satama ¦ A kikötő
+La ferme au petit matin ¦ Maatila aamuvarhaisella ¦ A tanya kora reggel
+Une nuit d’été à la campagne ¦ Kesäyö maalla ¦ Nyári éjszaka vidéken
+Le lavoir ¦ Pesupaikka ¦ A mosóház
+Le jour de marché ¦ Markkinapäivä ¦ A vásárnap
+Le café du village ¦ Kylän kahvila ¦ A falusi kávéház
+Le bal musette ¦ Harmonikkatanssit ¦ A harmonikás bál
+La messe à l’église ¦ Messu kirkossa ¦ A mise a templomban
+L’atelier de couture ¦ Ompelimo ¦ A varroda
+La filature et le tissage ¦ Kehruu ja kudonta ¦ A fonás és a szövés
+La veillée des fileuses ¦ Kehrääjien iltapuhde ¦ A fonók estéje
+L’atelier du menuisier ¦ Puusepän paja ¦ Az asztalosműhely
+La classe (vers 1900) ¦ Luokkahuone (noin 1900) ¦ Az osztályterem (1900 körül)
+L’étude du notaire ¦ Notaarin toimisto ¦ A közjegyzői iroda
+Les moissons ¦ Elonkorjuu ¦ Az aratás
+Le rucher ¦ Mehiläistarha ¦ A méhes
+La route en diligence ¦ Postivaunutie ¦ Úton a postakocsival
+Sons fabriqués par l’ordinateur, libres de droits. ¦ Tietokoneen tekemiä ääniä, vapaasti käytettävissä. ¦ Számítógéppel készített, jogdíjmentes hangok.
+Montrer les cartes postales anciennes à l’endroit qu’elles montrent (avec la direction de la vue) ¦ Näytä vanhat postikortit siinä paikassa, jota ne esittävät (katselusuunnan kanssa) ¦ A régi képeslapok mutatása azon a helyen, amelyet ábrázolnak (a nézési iránnyal)
+＋ Nouvelle couche ¦ ＋ Uusi taso ¦ ＋ Új réteg
+Départements ¦ Departementit ¦ Megyék
+Grandes régions ¦ Suuralueet ¦ Nagyrégiók
+Grandes régions (NUTS 1) ¦ Suuralueet (NUTS 1) ¦ Nagyrégiók (NUTS 1)
+Régions (NUTS 2) ¦ Alueet (NUTS 2) ¦ Régiók (NUTS 2)
+Le monde entier ¦ Koko maailma ¦ Az egész világ
+France et voisins ¦ Ranska ja naapurit ¦ Franciaország és szomszédai
+France entière ¦ Koko Ranska ¦ Egész Franciaország
+Ajoute des flux : départ, arrivée, combien. ¦ Lisää virtoja: lähtö, saapuminen, kuinka monta. ¦ Adj hozzá áramlásokat: kiindulás, érkezés, mennyi.
+📍 Zoomer sur ¦ 📍 Zoomaa kohteeseen ¦ 📍 Nagyítás erre
+✋ Mon cadrage (souris ou cadre tracé) ¦ ✋ Oma rajaukseni (hiiri tai piirretty kehys) ¦ ✋ Saját kivágásom (egér vagy rajzolt keret)
+Mon cadrage : ouest, sud, est, nord (degrés) ¦ Oma rajaukseni: länsi, etelä, itä, pohjoinen (astetta) ¦ Saját kivágásom: nyugat, dél, kelet, észak (fok)
+Dégradé continu ¦ Jatkuva liukuväri ¦ Folytonos színátmenet
+Par classes (tranches) ¦ Luokittain (välit) ¦ Osztályok szerint (sávok)
+Du jaune au rouge ¦ Keltaisesta punaiseen ¦ Sárgától pirosig
+Du bleu au rouge (écarts) ¦ Sinisestä punaiseen (poikkeamat) ¦ Kéktől pirosig (eltérések)
+Couleur des petits chiffres ¦ Pienten lukujen väri ¦ A kis értékek színe
+Couleur des grands chiffres ¦ Suurten lukujen väri ¦ A nagy értékek színe
+Découpage des classes ¦ Luokkien rajat ¦ Az osztályok határai
+Couleur des zones sans chiffre ¦ Luvuttomien alueiden väri ¦ Az érték nélküli területek színe
+Couleur des limites ¦ Rajojen väri ¦ A határok színe
+Automatiques (là où il y a la place) ¦ Automaattiset (missä on tilaa) ¦ Automatikus (ahol van hely)
+Noms des zones ¦ Alueiden nimet ¦ A területek nevei
+Noms et chiffres ¦ Nimet ja luvut ¦ Nevek és értékek
+Taille des étiquettes ¦ Nimilappujen koko ¦ A feliratok mérete
+Unité (ex. : naissances, %) ¦ Yksikkö (esim. syntymät, %) ¦ Mértékegység (pl. születés, %)
+Courbure des flèches ¦ Nuolten kaarevuus ¦ A nyilak görbülete
+Opacité des flèches ¦ Nuolten peittävyys ¦ A nyilak átlátszatlansága
+Couleur des flèches ¦ Nuolten väri ¦ A nyilak színe
+Taille des ronds ¦ Ympyröiden koko ¦ A körök mérete
+Couleur du tour des ronds ¦ Ympyröiden reunan väri ¦ A körök körvonalának színe
+Tous (sans se chevaucher) ¦ Kaikki (ilman päällekkäisyyttä) ¦ Mind (átfedés nélkül)
+Les 12 plus importants ¦ 12 tärkeintä ¦ A 12 legfontosabb
+Taille des noms ¦ Nimien koko ¦ A nevek mérete
+Couleur des terres ¦ Maan väri ¦ A szárazföld színe
+Unité (ex. : personnes) ¦ Yksikkö (esim. henkilöt) ¦ Mértékegység (pl. személy)
+Signaler les lieux sans position ¦ Ilmoita paikat ilman sijaintia ¦ A pozíció nélküli helyek jelzése
+Couleur des ronds ¦ Ympyröiden väri ¦ A körök színe
+Opacité des ronds ¦ Ympyröiden peittävyys ¦ A körök átlátszatlansága
+Les 15 plus gros (sans se chevaucher) ¦ 15 suurinta (ilman päällekkäisyyttä) ¦ A 15 legnagyobb (átfedés nélkül)
+Unité (ex. : naissances) ¦ Yksikkö (esim. syntymät) ¦ Mértékegység (pl. születés)
+Où sont nés mes ancêtres ¦ Missä esivanhempani syntyivät ¦ Hol születtek a felmenőim
+Baptêmes seuls ¦ Vain kasteet ¦ Csak keresztelők
+Sépultures seules ¦ Vain hautaukset ¦ Csak temetések
+Recensements (personnes recensées) ¦ Henkikirjat (kirjatut henkilöt) ¦ Népszámlálások (összeírt személyek)
+Métiers (lieux où on les exerçait) ¦ Ammatit (paikat, joissa niitä harjoitettiin) ¦ Foglalkozások (a helyek, ahol űzték őket)
+Départs (nés ici, morts ailleurs) ¦ Lähdöt (syntyneet täällä, kuolleet muualla) ¦ Elvándorlások (itt születtek, máshol haltak meg)
+Arrivées (nés ailleurs, morts ici) ¦ Tulot (syntyneet muualla, kuolleet täällä) ¦ Bevándorlások (máshol születtek, itt haltak meg)
+Familles (patronymes différents) ¦ Suvut (eri sukunimet) ¦ Családok (különböző vezetéknevek)
+Une sorte d’événement ¦ Tapahtumalaji ¦ Egy eseményfajta
+▭ Tracer un cadre ¦ ▭ Piirrä kehys ¦ ▭ Keret rajzolása
+Chargement des sortes d’événements… ¦ Ladataan tapahtumalajeja… ¦ Eseményfajták betöltése…
+Quelle sorte d’événement ¦ Mikä tapahtumalaji ¦ Melyik eseményfajta
+Seulement mes ancêtres (lignée Sosa) ¦ Vain esivanhempani (Sosa-linja) ¦ Csak a felmenőim (Sosa-ág)
+Jusqu’à l’année ¦ Vuoteen asti ¦ Eddig az évig
+Départ ¦ Lähtö ¦ Kiindulás
+Arrivée ¦ Saapuminen ¦ Érkezés
+📍 Les lieux du tableau ¦ 📍 Taulukon paikat ¦ 📍 A táblázat helyei
+🔎 Retrouver les lieux sans position ¦ 🔎 Etsi paikat ilman sijaintia ¦ 🔎 Pozíció nélküli helyek megkeresése
+Choisis d’abord une sorte d’événement. ¦ Valitse ensin tapahtumalaji. ¦ Először válassz egy eseményfajtát.
+Choisis une sorte d’événement. ¦ Valitse tapahtumalaji. ¦ Válassz egy eseményfajtát.
+Aucun lieu retrouvé : choisis-les un par un. ¦ Paikkoja ei löytynyt: valitse ne yksitellen. ¦ Nem található hely: válaszd ki őket egyenként.
+Colorer les villes elles-mêmes ¦ Väritä itse kaupungit ¦ Maguk a városok színezése
+Zones proposées ¦ Ehdotetut alueet ¦ Javasolt területek
+Tape un nom ou un code… ¦ Kirjoita nimi tai koodi… ¦ Írj be egy nevet vagy egy kódot…
+Note (dans la bulle) ¦ Huomautus (kuplassa) ¦ Megjegyzés (a buborékban)
+Les flux (départ → arrivée) ¦ Virrat (lähtö → saapuminen) ¦ Az áramlások (kiindulás → érkezés)
+Départ (lieu) ¦ Lähtö (paikka) ¦ Kiindulás (hely)
+Arrivée (lieu) ¦ Saapuminen (paikka) ¦ Érkezés (hely)
+Hauteur au plus ¦ Korkeus enintään ¦ Legnagyobb magasság
+Clic : ouvrir la fiche ¦ Napsautus: avaa kortti ¦ Kattintás: az adatlap megnyitása
+Oncle ou tante ¦ Setä, eno tai täti ¦ Nagybácsi vagy nagynéni
+Père ou mère ¦ Isä tai äiti ¦ Apa vagy anya
+Autre lien (ou inconnu) ¦ Muu suhde (tai tuntematon) ¦ Egyéb kapcsolat (vagy ismeretlen)
+Autre prénom ¦ Muu etunimi ¦ Másik utónév
+Trait plein : même premier prénom ¦ Yhtenäinen viiva: sama ensimmäinen etunimi ¦ Folytonos vonal: azonos első utónév
+Guerre et violence ¦ Sota ja väkivalta ¦ Háború és erőszak
+Poumons et respiration ¦ Keuhkot ja hengitys ¦ Tüdő és légzés
+Cœur et vaisseaux ¦ Sydän ja verisuonet ¦ Szív és erek
+Cancers et tumeurs ¦ Syövät ja kasvaimet ¦ Rákok és daganatok
+Ventre et digestion ¦ Vatsa ja ruoansulatus ¦ Has és emésztés
+Nerfs et cerveau ¦ Hermot ja aivot ¦ Idegek és agy
+Autres et inconnues ¦ Muut ja tuntemattomat ¦ Egyéb és ismeretlen
+Où vivait la famille ¦ Missä suku asui ¦ Hol élt a család
+Ancêtres ¦ Esivanhemmat ¦ Ősök
+De quoi sont morts mes ancêtres ¦ Mihin esivanhempani kuolivat ¦ Miben haltak meg a felmenőim
+Tous les lieux ont une position. ¦ Kaikilla paikoilla on sijainti. ¦ Minden helynek van pozíciója.
+Résidences et recensements ¦ Asuinpaikat ja henkikirjat ¦ Lakóhelyek és népszámlálások
+Prendre ces événements ¦ Ota nämä tapahtumat ¦ Ezen események átvétele
+📖 La vie d’une personne ¦ 📖 Henkilön elämä ¦ 📖 Egy személy élete
+Prendre sa vie ¦ Ota hänen elämänsä ¦ Az élete átvétele
+🧱 Une descendance ¦ 🧱 Jälkeläiset ¦ 🧱 Egy leszármazási ág
+Prendre la descendance ¦ Ota jälkeläiset ¦ A leszármazottak átvétele
+Ces personnes ¦ Nämä henkilöt ¦ Ezek a személyek
+Toute la vie ¦ Koko elämä ¦ Az egész élet
+Voir toute la vie ¦ Näytä koko elämä ¦ Az egész élet megtekintése
+Lecture : les étapes défilent ¦ Toisto: pysähdykset vaihtuvat ¦ Lejátszás: az állomások egymás után jönnek
+⤢ Toute la vie ¦ ⤢ Koko elämä ¦ ⤢ Az egész élet
+Les événements (un point par ligne) ¦ Tapahtumat (yksi piste riviä kohden) ¦ Az események (soronként egy pont)
+Date ou année ¦ Päivämäärä tai vuosi ¦ Dátum vagy év
+Couleur des points ¦ Pisteiden väri ¦ A pontok színe
+Selon la sorte d’événement ¦ Tapahtumalajin mukaan ¦ Eseményfajta szerint
+Taille des points ¦ Pisteiden koko ¦ A pontok mérete
+Opacité des points ¦ Pisteiden peittävyys ¦ A pontok átlátszatlansága
+Les 10 plus remplis ¦ 10 täysintä ¦ A 10 legtelibb
+Opacité des alvéoles ¦ Solujen peittävyys ¦ A cellák átlátszatlansága
+Traits blancs entre les alvéoles ¦ Valkoiset viivat solujen välissä ¦ Fehér vonalak a cellák között
+Des ronds (Dorling) ¦ Ympyrät (Dorling) ¦ Körök (Dorling)
+Des carrés (Demers) ¦ Neliöt (Demers) ¦ Négyzetek (Demers)
+Couleur des formes ¦ Muotojen väri ¦ Az alakzatok színe
+Nom et chiffre (là où il y a la place) ¦ Nimi ja luku (missä on tilaa) ¦ Név és érték (ahol van hely)
+Légende des tailles ¦ Kokojen selite ¦ Méretek jelmagyarázata
+Unité (ex. : ancêtres) ¦ Yksikkö (esim. esivanhemmat) ¦ Mértékegység (pl. ős)
+Signaler les zones pas trouvées ¦ Ilmoita alueet, joita ei löytynyt ¦ A nem talált területek jelzése
+Les étapes, dans l’ordre ¦ Pysähdykset järjestyksessä ¦ Az állomások sorrendben
+Détail (dans la bulle) ¦ Lisätiedot (kuplassa) ¦ Részletek (a buborékban)
+La carte ¦ Kartta ¦ A térkép
+Montre toute la vie (fixe) ¦ Näyttää koko elämän (kiinteä) ¦ Az egész életet mutatja (rögzített)
+Couleur du chemin ¦ Polun väri ¦ Az útvonal színe
+Oui (sans se chevaucher) ¦ Kyllä (ilman päällekkäisyyttä) ¦ Igen (átfedés nélkül)
+Les personnes (parent → enfant) ¦ Henkilöt (vanhempi → lapsi) ¦ A személyek (szülő → gyerek)
+Parent (vide = l’ancêtre) ¦ Vanhempi (tyhjä = esivanhempi) ¦ Szülő (üres = az ős)
+Le chiffre (ou la somme) ¦ Luku (tai summa) ¦ Az érték (vagy az összeg)
+Une par génération ¦ Yksi sukupolvea kohden ¦ Nemzedékenként egy
+Hauteur d’une génération ¦ Yhden sukupolven korkeus ¦ Egy nemzedék magassága
+Dans les cases ¦ Ruuduissa ¦ A dobozokban
+Ordre des enfants ¦ Lasten järjestys ¦ A gyerekek sorrendje
+Les plus grandes familles d’abord ¦ Suurimmat perheet ensin ¦ A legnagyobb családok elöl
+Traits blancs entre les cases ¦ Valkoiset viivat ruutujen välissä ¦ Fehér vonalak a dobozok között
+Traits blancs entre les parts ¦ Valkoiset viivat siivujen välissä ¦ Fehér vonalak a szeletek között
+Seulement les prénoms transmis ¦ Vain siirtyneet etunimet ¦ Csak a továbbadott utónevek
+Aussi les filleuls au prénom différent ¦ Myös kummilapset, joilla on eri etunimi ¦ A más utónevű keresztgyerekek is
+Hauteur d’une ligne ¦ Rivin korkeus ¦ Egy sor magassága
+Noms sous les ronds ¦ Nimet ympyröiden alla ¦ Nevek a körök alatt
+Quand il y a la place ¦ Kun on tilaa ¦ Ha van hely
+Les noms ¦ Nimet ¦ A nevek
+Qui a connu qui dans la famille ¦ Kuka tunsi kenet suvussa ¦ Ki kit ismert a családban
+Autres métiers ¦ Muut ammatit ¦ Egyéb foglalkozások
+Métier différent ¦ Eri ammatti ¦ Eltérő foglalkozás
+Même lieu ¦ Sama paikka ¦ Ugyanaz a hely
+Tout près ¦ Aivan lähellä ¦ Egészen közel
+Ancêtres possibles (2, 4, 8…) ¦ Mahdolliset esivanhemmat (2, 4, 8…) ¦ Lehetséges ősök (2, 4, 8…)
+Places trouvées ¦ Löydetyt paikat ¦ Megtalált helyek
+Carême et Avent ¦ Paasto ja adventti ¦ Nagyböjt és advent
+Si tout était égal ¦ Jos kaikki olisi tasan ¦ Ha minden egyenlő lenne
+Garçon ¦ Poika ¦ Fiú
+Autres lieux ¦ Muut paikat ¦ Egyéb helyek
+Prendre dans ma base ¦ Ota tietokannastani ¦ Átvétel az adatbázisomból
+Personnes comptées ¦ Lasketut henkilöt ¦ Megszámolt személyek
+🤝 Les vies autour d’une personne ¦ 🤝 Elämät henkilön ympärillä ¦ 🤝 Az életek egy személy körül
+Une courbe par ¦ Yksi käyrä kohden ¦ Egy görbe ennyiként:
+Une seule courbe ¦ Vain yksi käyrä ¦ Egyetlen görbe
+Lignées ¦ Sukulinjat ¦ Ágak
+Père → fils (lignées d’hommes) ¦ Isä → poika (miesten linjat) ¦ Apa → fiú (férfiágak)
+Rayon des mariages ¦ Avioliittojen säde ¦ A házasságok sugara
+🧮 L’ascendance d’une personne ¦ 🧮 Henkilön esipolvet ¦ 🧮 Egy személy felmenői
+De (année) ¦ Alkaen (vuosi) ¦ Ettől (év)
+Quelles mères ¦ Mitkä äidit ¦ Mely anyák
+Une seule mère ¦ Vain yksi äiti ¦ Egyetlen anya
+Espacement des naissances ¦ Syntymien väli ¦ A születések közötti időközök
+Quelles personnes ¦ Mitkä henkilöt ¦ Mely személyek
+Générations d’ancêtres ¦ Esivanhempien sukupolvet ¦ A felmenők nemzedékei
+Début (année, vide = auto) ¦ Alku (vuosi, tyhjä = automaattinen) ¦ Kezdet (év, üres = automatikus)
+Fin (année, vide = auto) ¦ Loppu (vuosi, tyhjä = automaattinen) ¦ Vége (év, üres = automatikus)
+Les personnes (une ligne chacune) ¦ Henkilöt (kullekin oma rivi) ¦ A személyek (mindegyik egy sor)
+Ordre des groupes ¦ Ryhmien järjestys ¦ A csoportok sorrendje
+Les plus nombreux d’abord ¦ Lukuisimmat ensin ¦ A legnépesebbek elöl
+Couleur des bandes ¦ Nauhojen väri ¦ A sávok színe
+Cacher les métiers inconnus ¦ Piilota tuntemattomat ammatit ¦ Az ismeretlen foglalkozások elrejtése
+Les couples ¦ Pariskunnat ¦ A párok
+Année du mariage ¦ Avioliiton vuosi ¦ A házasságkötés éve
+Par siècle du mariage ¦ Avioliiton vuosisadan mukaan ¦ A házasságkötés évszázada szerint
+Selon la distance ¦ Etäisyyden mukaan ¦ Távolság szerint
+Où allait-on chercher son conjoint ? ¦ Mistä puoliso haettiin? ¦ Honnan hozták a házastársat?
+Montrer les ancêtres possibles ¦ Näytä mahdolliset esivanhemmat ¦ A lehetséges ősök mutatása
+Mon implexe, génération par génération ¦ Esivanhempieni kato sukupolvi sukupolvelta ¦ Ősveszteségem nemzedékről nemzedékre
+En % du total ¦ Prosentteina kokonaismäärästä ¦ Az összeg %-ában
+Les années ¦ Vuodet ¦ Az évek
+Ordre des mères ¦ Äitien järjestys ¦ Az anyák sorrendje
+Le plus d’enfants d’abord ¦ Eniten lapsia ensin ¦ A legtöbb gyerek elöl
+Chargement des personnes… ¦ Ladataan henkilöitä… ¦ Személyek betöltése…
+Aucune fiche trouvée. ¦ Kortteja ei löytynyt. ¦ Nem található adatlap.
+Frères et sœurs ¦ Veljet ja siskot ¦ Fivérek és nővérek
+Plier cette branche ¦ Taita tämä haara ¦ Az ág összecsukása

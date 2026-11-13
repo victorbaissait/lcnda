@@ -1,0 +1,1563 @@
+fr ¦ vi ¦ id
+=élément retiré ¦ mục đã gỡ ra ¦ item dilepas
+=heure ¦ giờ ¦ jam
+=généalogie ¦ gia phả ¦ silsilah
+=changement ¦ thay đổi ¦ perubahan
+=paquet ¦ gói ¦ paket
+=chose changée des deux côtés ¦ mục thay đổi ở cả hai bên ¦ hal yang berubah di kedua sisi
+=changement reçu ¦ thay đổi đã nhận ¦ perubahan diterima
+=changement envoyé ¦ thay đổi đã gửi ¦ perubahan terkirim
+=corrigée ¦ đã sửa ¦ diperbaiki
+=écartée ¦ đã gác lại ¦ dikesampingkan
+=document traité ¦ tài liệu đã xử lý ¦ dokumen diproses
+=erreur ¦ lỗi ¦ kesalahan
+=nom corrigé ¦ tên đã sửa ¦ nama diperbaiki
+=document sélectionné ¦ tài liệu đã chọn ¦ dokumen dipilih
+=photo ¦ ảnh ¦ foto
+=souvenir ¦ kỷ niệm ¦ kenangan
+=bonne réponse ¦ câu trả lời đúng ¦ jawaban benar
+=chiffre tapé ¦ chữ số đã gõ ¦ angka diketik
+=an ¦ năm ¦ tahun
+=raccourci ¦ phím tắt ¦ pintasan
+=forme ¦ hình ¦ bentuk
+=chemin gardé ¦ đường đi đã giữ ¦ jalur disimpan
+=famille vide ¦ gia đình trống ¦ keluarga kosong
+=famille vide supprimée ¦ gia đình trống đã xoá ¦ keluarga kosong dihapus
+=ligne exportée ¦ dòng đã xuất ¦ baris diekspor
+=autre élément ¦ mục khác ¦ item lain
+=fiche trouvée ¦ hồ sơ tìm thấy ¦ profil ditemukan
+=hypothèse ¦ giả thuyết ¦ hipotesis
+=média enregistré ¦ tư liệu đã ghi nhận ¦ media terdaftar
+=fichier présent ¦ tệp hiện có ¦ berkas tersedia
+=lien familial impossible ignoré ¦ liên kết gia đình không thể có đã bỏ qua ¦ hubungan keluarga mustahil dilewati
+=média introuvable ¦ tư liệu không tìm thấy ¦ media tidak ditemukan
+=mois ¦ tháng ¦ bulan
+=minute ¦ phút ¦ menit
+=seconde ¦ giây ¦ detik
+=ligne ¦ dòng ¦ baris
+=cadre ¦ ô ¦ kotak
+=copie ¦ bản sao ¦ salinan
+Ressemblance {n} % ¦ Giống nhau {n} % ¦ Kemiripan {n} %
+Score {n}/110 ¦ Điểm {n}/110 ¦ Skor {n}/110
+Naissances : {a} / {b} ¦ Sinh: {a} / {b} ¦ Kelahiran: {a} / {b}
+Décès : {a} / {b} ¦ Mất: {a} / {b} ¦ Kematian: {a} / {b}
+Fusionner la fiche #{a} dans la fiche #{b} ? ¦ Gộp hồ sơ #{a} vào hồ sơ #{b}? ¦ Gabungkan profil #{a} ke profil #{b}?
+Lancer sur {n} ¦ Chạy trên {n} ¦ Jalankan pada {n}
+{n} avec succès. ¦ {n} thành công. ¦ {n} berhasil.
+{n} sera concernée. Confirmer pour {action} ? ¦ {n} sẽ bị ảnh hưởng. Xác nhận để {action}? ¦ {n} akan terdampak. Konfirmasi untuk {action}?
+{n} seront concernées. Confirmer pour {action} ? ¦ {n} sẽ bị ảnh hưởng. Xác nhận để {action}? ¦ {n} akan terdampak. Konfirmasi untuk {action}?
+corriger le nom inscrit en conservant une variante ¦ sửa tên đã ghi và giữ lại một biến thể ¦ perbaiki nama yang tercatat dan simpan satu varian
+rattacher au groupe ¦ liên kết vào nhóm ¦ hubungkan ke grup
+{n} et ancien nom conservé. ¦ {n} và đã giữ tên cũ. ¦ {n} dan nama lama disimpan.
+{n} et anciens noms conservés. ¦ {n} và đã giữ các tên cũ. ¦ {n} dan nama-nama lama disimpan.
+{n} rattachée au groupe. ¦ {n} đã liên kết vào nhóm. ¦ {n} dihubungkan ke grup.
+{n} rattachées au groupe. ¦ {n} đã liên kết vào nhóm. ¦ {n} dihubungkan ke grup.
+Couleur de « {name} » ¦ Màu của “{name}” ¦ Warna “{name}”
+Pictogramme de « {name} » ¦ Biểu tượng của “{name}” ¦ Ikon “{name}”
+Supprimer le type « {name} » ? ¦ Xoá loại “{name}”? ¦ Hapus jenis “{name}”?
+Import de « {name} » annulé : tout ce qu’il avait ajouté a été retiré. ¦ Đã hủy nhập “{name}”: mọi thứ nó đã thêm đều đã được gỡ ra. ¦ Impor “{name}” dibatalkan: semua yang ditambahkannya sudah dilepas.
+Supprimer définitivement la base « {name} » ? ¦ Xoá vĩnh viễn cơ sở dữ liệu “{name}”? ¦ Hapus permanen basis data “{name}”?
+Convertir {n} Deed en Décès ? ¦ Chuyển {n} Deed thành Mất? ¦ Ubah {n} Deed menjadi Kematian?
+Le texte sur « {name} » ¦ Văn bản về “{name}” ¦ Teks tentang “{name}”
+Les photos de {name} ¦ Ảnh của {name} ¦ Foto {name}
+{x} de {who} (lien) ¦ {x} của {who} ¦ {x} dari {who}
+C’est toi ¦ Đó là bạn ¦ Ini kamu
+c’est toi ¦ đó là bạn ¦ ini kamu
+C’est toi ! ¦ Đó là bạn! ¦ Ini kamu!
+C’est {rel}. ¦ Đó là {rel}. ¦ Ini {rel}.
+Bonjour {name} ! ¦ Xin chào {name}! ¦ Halo {name}!
+Bonjour ! ¦ Xin chào! ¦ Halo!
+Bonjour {name}. Touche un gros bouton : {list}. ¦ Xin chào {name}. Hãy chạm vào một nút lớn: {list}. ¦ Halo {name}. Sentuh salah satu tombol besar: {list}.
+Bonjour. Touche un gros bouton : {list}. ¦ Xin chào. Hãy chạm vào một nút lớn: {list}. ¦ Halo. Sentuh salah satu tombol besar: {list}.
+Bonjour {name} ! L’app dira « ta mère », « ton petit-fils »… ¦ Xin chào {name}! Ứng dụng sẽ nói “mẹ của bạn”, “cháu trai của bạn”… ¦ Halo {name}! Aplikasi akan bilang “ibumu”, “cucu laki-lakimu”…
+D’accord. L’app ne dira pas les liens de famille. ¦ Được rồi. Ứng dụng sẽ không nói quan hệ gia đình. ¦ Baik. Aplikasi tidak akan menyebut hubungan keluarga.
+⚠️ {what} (caché sur la tablette) ¦ ⚠️ {what} (ẩn trên máy tính bảng) ¦ ⚠️ {what} (disembunyikan di tablet)
+{n} aujourd’hui ¦ {n} hôm nay ¦ {n} hari ini
+Ce n’est pas {name} ? ¦ Không phải {name}? ¦ Bukan {name}?
+Quitter le mode simple : garde le doigt appuyé {n} secondes, ou garde la touche Entrée enfoncée ¦ Thoát chế độ đơn giản: giữ ngón tay {n} giây, hoặc giữ phím Enter ¦ Keluar dari mode sederhana: tahan jarimu {n} detik, atau tahan tombol Enter
+garde le doigt appuyé {n} s ¦ giữ ngón tay {n} giây ¦ tahan jarimu {n} dtk
+Garde le doigt appuyé {n} secondes ¦ Giữ ngón tay {n} giây ¦ Tahan jarimu {n} detik
+Vers les parents ¦ Về phía cha mẹ ¦ Ke arah orang tua
+Vers les enfants ¦ Về phía con cái ¦ Ke arah anak-anak
+l’aîné ¦ con cả ¦ anak sulung
+l’aînée ¦ con cả ¦ anak sulung
+Regarder les {n} ¦ Xem {n} ¦ Lihat {n}
+{a} sur {b} ¦ {a} trên {b} ¦ {a} dari {b}
+vers {y} (date) ¦ khoảng {y} ¦ sekitar {y}
+en {date} (année) ¦ năm {date} ¦ pada tahun {date}
+en {date} (mois) ¦ vào {date} ¦ pada {date}
+le {date} (jour) ¦ ngày {date} ¦ pada {date}
+à {place} (lieu) ¦ tại {place} ¦ di {place}
+{name} fait partie de la famille. ¦ {name} là người trong gia đình. ¦ {name} adalah bagian dari keluarga.
+{name} est né {details}. ¦ {name} sinh {details}. ¦ {name} lahir {details}.
+{name} est née {details}. ¦ {name} sinh {details}. ¦ {name} lahir {details}.
+{name} a été baptisé {details}. ¦ {name} được rửa tội {details}. ¦ {name} dibaptis {details}.
+{name} a été baptisée {details}. ¦ {name} được rửa tội {details}. ¦ {name} dibaptis {details}.
+Il ¦ Ông ấy ¦ Dia
+Elle ¦ Bà ấy ¦ Dia
+C’est la fille de {names}. ¦ Đó là con gái của {names}. ¦ Dia putri dari {names}.
+C’est le fils de {names}. ¦ Đó là con trai của {names}. ¦ Dia putra dari {names}.
+C’est l’enfant de {names}. ¦ Đó là con của {names}. ¦ Dia anak dari {names}.
+Il était {job}. ¦ Ông ấy là {job}. ¦ Dia seorang {job}.
+Elle était {job}. ¦ Bà ấy là {job}. ¦ Dia seorang {job}.
+Il a été {job}. ¦ Ông ấy đã từng là {job}. ¦ Dia pernah menjadi {job}.
+Elle a été {job}. ¦ Bà ấy đã từng là {job}. ¦ Dia pernah menjadi {job}.
+Il est {job}. ¦ Ông ấy là {job}. ¦ Dia adalah {job}.
+Elle est {job}. ¦ Bà ấy là {job}. ¦ Dia adalah {job}.
+Il s’est marié avec {name} {details}. ¦ Ông ấy kết hôn với {name} {details}. ¦ Dia menikah dengan {name} {details}.
+Elle s’est mariée avec {name} {details}. ¦ Bà ấy kết hôn với {name} {details}. ¦ Dia menikah dengan {name} {details}.
+Il s’est marié avec {name}. ¦ Ông ấy kết hôn với {name}. ¦ Dia menikah dengan {name}.
+Elle s’est mariée avec {name}. ¦ Bà ấy kết hôn với {name}. ¦ Dia menikah dengan {name}.
+Il a vécu avec {name}. ¦ Ông ấy đã sống chung với {name}. ¦ Dia pernah hidup bersama {name}.
+Elle a vécu avec {name}. ¦ Bà ấy đã sống chung với {name}. ¦ Dia pernah hidup bersama {name}.
+Ils ont eu une fille, {name}. ¦ Họ có một con gái, {name}. ¦ Mereka punya seorang putri, {name}.
+Ils ont eu un fils, {name}. ¦ Họ có một con trai, {name}. ¦ Mereka punya seorang putra, {name}.
+Ils ont eu un enfant, {name}. ¦ Họ có một người con, {name}. ¦ Mereka punya seorang anak, {name}.
+Ils ont eu {n} enfants : {names}. ¦ Họ có {n} người con: {names}. ¦ Mereka punya {n} anak: {names}.
+Aujourd’hui, il a {age}. ¦ Hôm nay, ông ấy {age}. ¦ Hari ini, umurnya {age}.
+Aujourd’hui, elle a {age}. ¦ Hôm nay, bà ấy {age}. ¦ Hari ini, umurnya {age}.
+Il est décédé {details}, à {age}. ¦ Ông ấy mất {details}, lúc {age}. ¦ Dia meninggal {details}, pada umur {age}.
+Elle est décédée {details}, à {age}. ¦ Bà ấy mất {details}, lúc {age}. ¦ Dia meninggal {details}, pada umur {age}.
+Il est décédé {details}. ¦ Ông ấy mất {details}. ¦ Dia meninggal {details}.
+Elle est décédée {details}. ¦ Bà ấy mất {details}. ¦ Dia meninggal {details}.
+né en {y} ¦ sinh năm {y} ¦ lahir tahun {y}
+née en {y} ¦ sinh năm {y} ¦ lahir tahun {y}
+mort en {y} ¦ mất năm {y} ¦ meninggal tahun {y}
+morte en {y} ¦ mất năm {y} ¦ meninggal tahun {y}
+de {a} à {b} ¦ từ {a} đến {b} ¦ dari {a} sampai {b}
+Toucher pour la mettre au milieu. ¦ Chạm để đặt người này vào giữa. ¦ Sentuh untuk menaruhnya di tengah.
+Toucher pour voir sa fiche. ¦ Chạm để xem hồ sơ. ¦ Sentuh untuk melihat profilnya.
+Les prénoms en « {x} » ¦ Tên bắt đầu bằng “{x}” ¦ Nama depan berawalan “{x}”
+Personne ne s’appelle « {q} ». Vérifie l’orthographe. ¦ Không ai tên là “{q}”. Hãy kiểm tra chính tả. ¦ Tidak ada yang bernama “{q}”. Periksa ejaannya.
+Pas d’anniversaire aujourd’hui. ¦ Hôm nay không có sinh nhật. ¦ Tidak ada ulang tahun hari ini.
+Pas d’anniversaire aujourd’hui. Voici ce qui arrive bientôt. ¦ Hôm nay không có sinh nhật. Đây là những ngày sắp tới. ¦ Tidak ada ulang tahun hari ini. Ini yang akan datang.
+📷 Des photos prises en {month} ¦ 📷 Ảnh chụp vào {month} ¦ 📷 Foto yang diambil pada {month}
+La famille de {name} ¦ Gia đình của {name} ¦ Keluarga {name}
+Aujourd’hui ! ¦ Hôm nay! ¦ Hari ini!
+Demain ¦ Ngày mai ¦ Besok
+Dans {n} jours ¦ Trong {n} ngày ¦ Dalam {n} hari
+{n} depuis le début ¦ {n} từ đầu ¦ {n} sejak awal
+Ce n’est pas {name}. Essaie encore ! ¦ Đó không phải {name}. Thử lại nhé! ¦ Itu bukan {name}. Coba lagi!
+Ce n’est pas ça. Essaie encore ! ¦ Không phải vậy. Thử lại nhé! ¦ Bukan itu. Coba lagi!
+C’est {part} ¦ Đó là {part} ¦ Itu {part}
+le matin ¦ buổi sáng ¦ pagi hari
+l’après-midi ¦ buổi chiều ¦ siang hari
+le soir ¦ buổi tối ¦ malam hari
+{n} sur 4 ¦ {n} trên 4 ¦ {n} dari 4
+⚠️ {what} pour qu’il apparaisse ¦ ⚠️ {what} để nó hiện ra ¦ ⚠️ {what} agar muncul
+Modifier « {name} » ¦ Sửa “{name}” ¦ Ubah “{name}”
+Dupliquer « {name} » ¦ Nhân bản “{name}” ¦ Duplikat “{name}”
+Retirer « {name} » ¦ Gỡ “{name}” ¦ Lepas “{name}”
+Monter « {name} » ¦ Đưa “{name}” lên ¦ Naikkan “{name}”
+Descendre « {name} » ¦ Đưa “{name}” xuống ¦ Turunkan “{name}”
+Montrer « {name} » ¦ Hiện “{name}” ¦ Tunjukkan “{name}”
+Afficher « {name} » ¦ Hiển thị “{name}” ¦ Tampilkan “{name}”
+cadres ajoutés au plus. ¦ ô được thêm tối đa. ¦ kotak ditambahkan paling banyak.
+Côté {branch} ¦ Bên {branch} ¦ Pihak {branch}
+Remettre « {name} » dans le mode simple ¦ Đưa “{name}” trở lại chế độ đơn giản ¦ Kembalikan “{name}” ke mode sederhana
+Photo ¦ Ảnh ¦ Foto
+{n} s par photo ¦ {n} giây mỗi ảnh ¦ {n} dtk per foto
+cadre après {n} min ¦ khung ảnh sau {n} phút ¦ bingkai foto setelah {n} menit
+sans cadre photo ¦ không có khung ảnh ¦ tanpa bingkai foto
+Chiffre {n} du code ¦ Chữ số {n} của mã ¦ Angka ke-{n} kode
+Ce que verra {name} sur une tablette. Le mode simple ne permet <b>ni de modifier, ni de supprimer</b> : ni menu caché, ni clic droit. ¦ Những gì {name} sẽ thấy trên máy tính bảng. Chế độ đơn giản <b>không cho sửa, cũng không cho xoá</b>: không có menu ẩn, không có nhấp chuột phải. ¦ Yang akan dilihat {name} di tablet. Mode sederhana <b>tidak bisa mengubah atau menghapus</b>: tanpa menu tersembunyi, tanpa klik kanan.
+Ce que verra la personne sur une tablette. Le mode simple ne permet <b>ni de modifier, ni de supprimer</b> : ni menu caché, ni clic droit. ¦ Những gì người đó sẽ thấy trên máy tính bảng. Chế độ đơn giản <b>không cho sửa, cũng không cho xoá</b>: không có menu ẩn, không có nhấp chuột phải. ¦ Yang akan dilihat orang itu di tablet. Mode sederhana <b>tidak bisa mengubah atau menghapus</b>: tanpa menu tersembunyi, tanpa klik kanan.
+Réglage « {name} » supprimé ¦ Đã xoá thiết lập “{name}” ¦ Pengaturan “{name}” dihapus
+Réglage « {name} » importé : clique « Appliquer » pour t’en servir. ¦ Đã nhập thiết lập “{name}”: hãy nhấp “Áp dụng” để dùng. ¦ Pengaturan “{name}” diimpor: klik “Terapkan” untuk memakainya.
+Maison choisie : « {name} ». ¦ Nhà đã chọn: “{name}”. ¦ Rumah dipilih: “{name}”.
+Maison ¦ Nhà ¦ Rumah
+Adresse copiée : {url} ¦ Đã sao chép địa chỉ: {url} ¦ Alamat disalin: {url}
+ ou  ¦ hoặc ¦ atau
+Seulement avec {what}. ¦ Chỉ khi có {what}. ¦ Hanya dengan {what}.
+{what} remis comme au départ ¦ {what} đã đặt lại như ban đầu ¦ {what} dikembalikan seperti semula
+activé ¦ đã bật ¦ aktif
+désactivé ¦ đã tắt ¦ nonaktif
+Style des fiches : {name}. ¦ Kiểu hồ sơ: {name}. ¦ Gaya profil: {name}.
+Style des fiches : {name} (retouché). ¦ Kiểu hồ sơ: {name} (đã chỉnh). ¦ Gaya profil: {name} (diubah).
+ton {x} (lien) ¦ {x} của bạn ¦ {x}mu
+ta {x} (lien) ¦ {x} của bạn ¦ {x}mu
+le {x} (lien) ¦ {x} ¦ {x}
+la {x} (lien) ¦ {x} ¦ {x}
+la femme de {who} {name} (lien) ¦ vợ của {who} {name} ¦ istri dari {who} {name}
+le mari de {who} {name} (lien) ¦ chồng của {who} {name} ¦ suami dari {who} {name}
+le conjoint de {who} {name} (lien) ¦ người bạn đời của {who} {name} ¦ pasangan dari {who} {name}
+lien|mère ¦ mẹ ¦ ibu
+lien|père ¦ cha ¦ ayah
+lien|parent ¦ cha mẹ ¦ orang tua
+lien|grand-mère ¦ bà ¦ nenek
+lien|grand-père ¦ ông ¦ kakek
+lien|arrière-grand-mère ¦ bà cố ¦ nenek buyut
+lien|arrière-grand-père ¦ ông cố ¦ kakek buyut
+lien|arrière-arrière-grand-mère ¦ bà sơ ¦ nenek canggah
+lien|arrière-arrière-grand-père ¦ ông sơ ¦ kakek canggah
+lien|fille ¦ con gái ¦ anak perempuan
+lien|fils ¦ con trai ¦ anak laki-laki
+lien|enfant ¦ con ¦ anak
+lien|petite-fille ¦ cháu gái ¦ cucu perempuan
+lien|petit-fils ¦ cháu trai ¦ cucu laki-laki
+lien|arrière-petite-fille ¦ chắt gái ¦ cicit perempuan
+lien|arrière-petit-fils ¦ chắt trai ¦ cicit laki-laki
+lien|arrière-arrière-petite-fille ¦ chút gái ¦ canggah perempuan
+lien|arrière-arrière-petit-fils ¦ chút trai ¦ canggah laki-laki
+lien|sœur ¦ chị em gái ¦ saudara perempuan
+lien|frère ¦ anh em trai ¦ saudara laki-laki
+lien|tante ¦ cô/dì ¦ bibi
+lien|oncle ¦ chú/bác/cậu ¦ paman
+lien|grand-tante ¦ bà cô/bà dì ¦ bibi kakek-nenek
+lien|grand-oncle ¦ ông chú/ông bác ¦ paman kakek-nenek
+lien|arrière-grand-tante ¦ cụ cô/cụ dì ¦ bibi buyut
+lien|arrière-grand-oncle ¦ cụ chú/cụ bác ¦ paman buyut
+lien|arrière-arrière-grand-tante ¦ kỵ cô/kỵ dì ¦ bibi canggah
+lien|arrière-arrière-grand-oncle ¦ kỵ chú/kỵ bác ¦ paman canggah
+lien|nièce ¦ cháu gái (con anh chị em) ¦ keponakan perempuan
+lien|neveu ¦ cháu trai (con anh chị em) ¦ keponakan laki-laki
+lien|petite-nièce ¦ cháu gái họ (đời thứ hai) ¦ cucu keponakan perempuan
+lien|petit-neveu ¦ cháu trai họ (đời thứ hai) ¦ cucu keponakan laki-laki
+lien|arrière-petite-nièce ¦ chắt gái họ ¦ cicit keponakan perempuan
+lien|arrière-petit-neveu ¦ chắt trai họ ¦ cicit keponakan laki-laki
+lien|arrière-arrière-petite-nièce ¦ chút gái họ ¦ canggah keponakan perempuan
+lien|arrière-arrière-petit-neveu ¦ chút trai họ ¦ canggah keponakan laki-laki
+lien|cousin germain ¦ anh em họ (bậc một) ¦ sepupu laki-laki (sekali)
+lien|cousine germaine ¦ chị em họ (bậc một) ¦ sepupu perempuan (sekali)
+lien|cousin issu de germains ¦ anh em họ bậc hai ¦ sepupu dua kali laki-laki
+lien|cousine issue de germains ¦ chị em họ bậc hai ¦ sepupu dua kali perempuan
+lien|cousin éloigné ¦ anh em họ xa ¦ sepupu jauh laki-laki
+lien|cousine éloignée ¦ chị em họ xa ¦ sepupu jauh perempuan
+lien|cousin ¦ anh em họ ¦ sepupu laki-laki
+lien|cousine ¦ chị em họ ¦ sepupu perempuan
+lien|femme ¦ vợ ¦ istri
+lien|mari ¦ chồng ¦ suami
+lien|conjoint ¦ bạn đời ¦ pasangan
+lien|belle-mère ¦ mẹ chồng/mẹ vợ ¦ ibu mertua
+lien|beau-père ¦ bố chồng/bố vợ ¦ ayah mertua
+lien|belle-fille ¦ con dâu ¦ menantu perempuan
+lien|gendre ¦ con rể ¦ menantu laki-laki
+lien|beau-fils ¦ con riêng (con trai) ¦ anak tiri laki-laki
+lien|belle-sœur ¦ chị dâu/em dâu/chị em chồng/chị em vợ ¦ ipar perempuan
+lien|beau-frère ¦ anh rể/em rể/anh em chồng/anh em vợ ¦ ipar laki-laki
+⚙️ Gérer les formes ({n}) ¦ ⚙️ Quản lý hình ({n}) ¦ ⚙️ Kelola bentuk ({n})
+Forme « {name} » supprimée ¦ Đã xoá hình “{name}” ¦ Bentuk “{name}” dihapus
+Forme « {name} » importée : elle est dans le menu « Forme des avatars ». ¦ Đã nhập hình “{name}”: nó nằm trong menu “Hình ảnh đại diện”. ¦ Bentuk “{name}” diimpor: ada di menu “Bentuk avatar”.
+Aucune forme pour « {q} ». Essaie un autre mot (cœur, arbre, étoile, croix…). ¦ Không có hình nào cho “{q}”. Hãy thử từ khác (trái tim, cây, ngôi sao, thập tự…). ¦ Tidak ada bentuk untuk “{q}”. Coba kata lain (hati, pohon, bintang, salib…).
+{n} points au plus. ¦ Tối đa {n} điểm. ¦ Paling banyak {n} titik.
+{what} (scripts, textes, images, styles…) ¦ {what} (mã lệnh, văn bản, hình ảnh, kiểu…) ¦ {what} (skrip, teks, gambar, gaya…)
+Forme « {name} » enregistrée. ¦ Đã lưu hình “{name}”. ¦ Bentuk “{name}” tersimpan.
+Forme « {name} » créée : elle est dans le menu « Forme des avatars » (✎ Mes formes). ¦ Đã tạo hình “{name}”: nó nằm trong menu “Hình ảnh đại diện” (✎ Hình của tôi). ¦ Bentuk “{name}” dibuat: ada di menu “Bentuk avatar” (✎ Bentukku).
+Ce qu’ouvre « {name} » ¦ Nút “{name}” mở gì ¦ Yang dibuka “{name}”
+Ouvre la fenêtre « ＋ Nouvelle personne » (ou un nouvel animal sur la page des animaux). Caché au départ. ¦ Mở cửa sổ “＋ Người mới” (hoặc một con vật mới trên trang con vật). Ẩn lúc đầu. ¦ Membuka jendela “＋ Orang baru” (atau hewan baru di halaman hewan). Disembunyikan di awal.
+Raccourci : Enquêtes, sur cet onglet. Caché au départ. ¦ Lối tắt: Tìm hiểu, trên thẻ này. Ẩn lúc đầu. ¦ Pintasan: Penelusuran, di tab ini. Disembunyikan di awal.
+Raccourci : Listes → 🛠️ Outils de modification, sur cet outil. Caché au départ. ¦ Lối tắt: Danh sách → 🛠️ Công cụ chỉnh sửa, trên công cụ này. Ẩn lúc đầu. ¦ Pintasan: Daftar → 🛠️ Alat pengubah, di alat ini. Disembunyikan di awal.
+Forme : « {name} » ¦ Hình: “{name}” ¦ Bentuk: “{name}”
+Portraits : « {name} » ¦ Chân dung: “{name}” ¦ Potret: “{name}”
+Colonne de gauche : partir de « {name} » ¦ Cột bên trái: bắt đầu từ “{name}” ¦ Kolom kiri: mulai dari “{name}”
+Contrôlé {when} ¦ Đã kiểm tra {when} ¦ Diperiksa {when}
+Lieu corrigé : {name} ({what}) ¦ Đã sửa địa điểm: {name} ({what}) ¦ Tempat diperbaiki: {name} ({what})
+La bonne commune pour « {name} » ¦ Xã đúng cho “{name}” ¦ Kota yang benar untuk “{name}”
+Exception gardée : {what} ¦ Đã giữ ngoại lệ: {what} ¦ Pengecualian disimpan: {what}
+Signalée de nouveau : {what} ¦ Đã báo lại: {what} ¦ Dilaporkan lagi: {what}
+Alerte {i} sur {n} ¦ Cảnh báo {i} trên {n} ¦ Peringatan {i} dari {n}
+{n} plus tard ¦ {n} sau ¦ {n} kemudian
+Date enregistrée : {date} ¦ Đã lưu ngày: {date} ¦ Tanggal tersimpan: {date}
+✓ Alerte réglée ({date}) ¦ ✓ Đã xử lý cảnh báo ({date}) ¦ ✓ Peringatan diselesaikan ({date})
+Bandeau sur la fiche : {what} ¦ Dải thông báo trên hồ sơ: {what} ¦ Spanduk di profil: {what}
+{a} fiches sur {b} n’ont aucune alerte (les exceptions ne comptent pas) ¦ {a} trên {b} hồ sơ không có cảnh báo nào (không tính ngoại lệ) ¦ {a} dari {b} profil tanpa peringatan (pengecualian tidak dihitung)
+{n} ans ¦ {n} tuổi ¦ {n} tahun
+{n} mois ¦ {n} tháng ¦ {n} bulan
+Supprimer les {n} familles vides ¦ Xoá {n} gia đình trống ¦ Hapus {n} keluarga kosong
+Supprimer les {n} familles vides ? ¦ Xoá {n} gia đình trống? ¦ Hapus {n} keluarga kosong?
+Me le signaler à nouveau si une de ces dates change ¦ Báo lại cho tôi nếu một trong các ngày này thay đổi ¦ Beri tahu aku lagi jika salah satu tanggal ini berubah
+Me le signaler à nouveau si une de ces coordonnées change ¦ Báo lại cho tôi nếu một trong các toạ độ này thay đổi ¦ Beri tahu aku lagi jika salah satu koordinat ini berubah
+Déjà pris par {os} ou le menu de l’application : « {what} ». ¦ Đã được {os} hoặc menu ứng dụng dùng: “{what}”. ¦ Sudah dipakai oleh {os} atau menu aplikasi: “{what}”.
+Déjà pris par l’app (même quand un outil est ouvert) : « {what} ». Change-le d’abord dans Raccourcis clavier si tu veux cette touche. ¦ Đã được ứng dụng dùng (kể cả khi một công cụ đang mở): “{what}”. Hãy đổi nó trước trong Phím tắt nếu bạn muốn phím này. ¦ Sudah dipakai aplikasi (bahkan saat alat terbuka): “{what}”. Ubah dulu di Pintasan keyboard jika kamu ingin tombol ini.
+Dans cet outil, cette touche sert déjà à « {what} » : ton raccourci passera avant. ¦ Trong công cụ này, phím này đã dùng cho “{what}”: phím tắt của bạn sẽ được ưu tiên. ¦ Di alat ini, tombol ini sudah dipakai untuk “{what}”: pintasanmu akan didahulukan.
+La touche de départ ({key}) ne fera plus cette action : elle est libre pour autre chose. ¦ Phím ban đầu ({key}) sẽ không làm việc này nữa: nó được để trống cho việc khác. ¦ Tombol awal ({key}) tidak akan menjalankan tindakan ini lagi: tombol itu bebas untuk hal lain.
+Déjà donné à « {what} » : il lui sera retiré. ¦ Đã gán cho “{what}”: nó sẽ bị gỡ khỏi đó. ¦ Sudah diberikan ke “{what}”: akan dilepas darinya.
+Sans {key}, il ne marchera qu’en dehors des cases de texte. ¦ Không có {key}, nó chỉ chạy bên ngoài ô văn bản. ¦ Tanpa {key}, pintasan ini hanya berfungsi di luar kotak teks.
+NOUVEAU RACCOURCI ¦ PHÍM TẮT MỚI ¦ PINTASAN BARU
+Nouveau raccourci : {key} ¦ Phím tắt mới: {key} ¦ Pintasan baru: {key}
+Donne une touche à n’importe quelle commande de l’outil (ses menus, ses outils, ses boutons). {os} et le menu de l’application passent avant : une touche qu’ils prennent est refusée. Ton raccourci passe avant la touche de l’outil. Sans {key}, il ne marche qu’en dehors des cases de texte. ¦ Gán một phím cho bất kỳ lệnh nào của công cụ (menu, công cụ, nút). {os} và menu ứng dụng được ưu tiên: phím mà chúng đã dùng sẽ bị từ chối. Phím tắt của bạn được ưu tiên hơn phím của công cụ. Không có {key}, nó chỉ chạy bên ngoài ô văn bản. ¦ Beri tombol untuk perintah apa pun di alat ini (menu, alat, tombol). {os} dan menu aplikasi didahulukan: tombol yang mereka pakai ditolak. Pintasanmu didahulukan dari tombol alat. Tanpa {key}, pintasan hanya berfungsi di luar kotak teks.
+{n} à toi ¦ {n} của bạn ¦ {n} milikmu
+{a} et {n} autres personnes ¦ {a} và {n} người khác ¦ {a} dan {n} orang lain
+Sinon, on lira : « {text} » ¦ Nếu không, sẽ đọc: “{text}” ¦ Jika tidak, yang dibacakan: “{text}”
+Dicter dans ce champ ({key}) ¦ Đọc chính tả vào ô này ({key}) ¦ Dikte ke kolom ini ({key})
+Dicter : parle, le texte s’écrit au curseur ({key}, Échap pour arrêter) ¦ Đọc chính tả: hãy nói, văn bản sẽ được viết tại con trỏ ({key}, Esc để dừng) ¦ Dikte: bicaralah, teks ditulis di kursor ({key}, Esc untuk berhenti)
+Voici un message : il reste {n} secondes environ. ¦ Đây là một tin nhắn: còn khoảng {n} giây. ¦ Ini sebuah pesan: tersisa sekitar {n} detik.
+toutes les {n} ¦ mỗi {n} ¦ setiap {n}
+chaque jour ¦ mỗi ngày ¦ setiap hari
+chaque semaine ¦ mỗi tuần ¦ setiap minggu
+Dernière sauvegarde : <b>{when}</b> ¦ Sao lưu gần nhất: <b>{when}</b> ¦ Cadangan terakhir: <b>{when}</b>
+Dernière sauvegarde : <b>jamais</b> ¦ Sao lưu gần nhất: <b>chưa bao giờ</b> ¦ Cadangan terakhir: <b>belum pernah</b>
+rien n’avait changé ¦ không có gì thay đổi ¦ tidak ada yang berubah
+dès maintenant ¦ ngay bây giờ ¦ mulai sekarang
+Prochaine : {when} ({freq}). ¦ Lần tới: {when} ({freq}). ¦ Berikutnya: {when} ({freq}).
+Prochaine : {when} ({freq}, et à la fermeture). ¦ Lần tới: {when} ({freq}, và khi đóng). ¦ Berikutnya: {when} ({freq}, dan saat ditutup).
+Dernier essai raté : {error} ¦ Lần thử gần nhất bị lỗi: {error} ¦ Percobaan terakhir gagal: {error}
+Rien n’est bloqué : continue à travailler. ¦ Không có gì bị chặn: bạn cứ tiếp tục làm việc. ¦ Tidak ada yang terhambat: lanjutkan bekerja.
+Toutes mes généalogies ({n}) ¦ Tất cả gia phả của tôi ({n}) ¦ Semua silsilahku ({n})
+Remettre ta généalogie comme dans la copie choisie ({when}) ? Tout ce que tu as fait depuis sera remplacé. Ta base actuelle est d’abord gardée dans les sauvegardes (« avant restauration »), pour pouvoir y revenir. ¦ Đưa gia phả của bạn về như bản sao đã chọn ({when})? Mọi thứ bạn làm từ đó sẽ bị thay thế. Cơ sở dữ liệu hiện tại sẽ được giữ trước trong các bản sao lưu (“trước khi khôi phục”), để có thể quay lại. ¦ Kembalikan silsilahmu seperti salinan yang dipilih ({when})? Semua yang kamu lakukan sejak itu akan diganti. Basis datamu saat ini disimpan dulu di cadangan (“sebelum pemulihan”), agar bisa kembali ke sana.
+Remettre ta généalogie comme dans la copie choisie ? Tout ce que tu as fait depuis sera remplacé. Ta base actuelle est d’abord gardée dans les sauvegardes (« avant restauration »), pour pouvoir y revenir. ¦ Đưa gia phả của bạn về như bản sao đã chọn? Mọi thứ bạn làm từ đó sẽ bị thay thế. Cơ sở dữ liệu hiện tại sẽ được giữ trước trong các bản sao lưu (“trước khi khôi phục”), để có thể quay lại. ¦ Kembalikan silsilahmu seperti salinan yang dipilih? Semua yang kamu lakukan sejak itu akan diganti. Basis datamu saat ini disimpan dulu di cadangan (“sebelum pemulihan”), agar bisa kembali ke sana.
+✓ Généalogie remise comme dans la copie ({n}). L’ancienne est gardée : {file}. ¦ ✓ Gia phả đã được đưa về như bản sao ({n}). Bản cũ được giữ: {file}. ¦ ✓ Silsilah dikembalikan seperti salinan ({n}). Yang lama disimpan: {file}.
+✓ Sauvegarde faite et vérifiée ({n}) : {size}. ¦ ✓ Đã sao lưu và kiểm tra ({n}): {size}. ¦ ✓ Cadangan dibuat dan diperiksa ({n}): {size}.
+✓ Sauvegarde faite et vérifiée : {size}. ¦ ✓ Đã sao lưu và kiểm tra: {size}. ¦ ✓ Cadangan dibuat dan diperiksa: {size}.
+Supprimée sur cet ordinateur, modifiée sur « {name} ». ¦ Đã xoá trên máy tính này, đã sửa trên “{name}”. ¦ Dihapus di komputer ini, diubah di “{name}”.
+Modifiée ici, supprimée sur « {name} ». ¦ Đã sửa ở đây, đã xoá trên “{name}”. ¦ Diubah di sini, dihapus di “{name}”.
+modifiée des deux côtés ¦ đã sửa ở cả hai bên ¦ diubah di kedua sisi
+Sur « {name} » ¦ Trên “{name}” ¦ Di “{name}”
+<b>{n}</b> à envoyer ¦ <b>{n}</b> cần gửi ¦ <b>{n}</b> untuk dikirim
+<b>{n}</b> à recevoir ¦ <b>{n}</b> cần nhận ¦ <b>{n}</b> untuk diterima
+Rien à envoyer ¦ Không có gì để gửi ¦ Tidak ada yang perlu dikirim
+Rien à recevoir ¦ Không có gì để nhận ¦ Tidak ada yang perlu diterima
+Dernière synchronisation : {when} ¦ Đồng bộ gần nhất: {when} ¦ Sinkronisasi terakhir: {when}
+jamais ¦ chưa bao giờ ¦ belum pernah
+⚠️ {n} : choisis ¦ ⚠️ {n}: hãy chọn ¦ ⚠️ {n}: pilihlah
+rien de nouveau ¦ không có gì mới ¦ tidak ada yang baru
+{n} de « {from} » ¦ {n} từ “{from}” ¦ {n} dari “{from}”
+Déjà à jour ¦ Đã cập nhật ¦ Sudah terbaru
+⚠️ {n} : à toi de choisir. ¦ ⚠️ {n}: bạn hãy chọn. ¦ ⚠️ {n}: kamu yang memilih.
+Cette généalogie est déjà ouverte sur l’ordinateur <b>« {name} »</b> (depuis {when}). ¦ Gia phả này đã đang mở trên máy tính <b>“{name}”</b> (từ {when}). ¦ Silsilah ini sudah terbuka di komputer <b>“{name}”</b> (sejak {when}).
+Cette généalogie est déjà ouverte sur l’ordinateur <b>« {name} »</b>. ¦ Gia phả này đã đang mở trên máy tính <b>“{name}”</b>. ¦ Silsilah ini sudah terbuka di komputer <b>“{name}”</b>.
+Ouvrir quand même ? Fais-le seulement si « {name} » est éteint ou si l’app y est fermée (sinon le fichier peut s’abîmer). ¦ Vẫn mở? Chỉ làm vậy nếu “{name}” đã tắt hoặc ứng dụng ở đó đã đóng (nếu không tệp có thể bị hỏng). ¦ Tetap buka? Lakukan hanya jika “{name}” mati atau aplikasinya sudah ditutup di sana (jika tidak, berkas bisa rusak).
+Télécharger LCNDA {v} ¦ Tải LCNDA {v} ¦ Unduh LCNDA {v}
+{a} sur {b}… ¦ {a} trên {b}… ¦ {a} dari {b}…
+Plus de message pour la version {v} ¦ Không báo nữa cho phiên bản {v} ¦ Jangan beri pesan lagi untuk versi {v}
+🔄 Une nouvelle version {v} est disponible. ¦ 🔄 Có phiên bản mới {v}. ¦ 🔄 Versi baru {v} tersedia.
+regardé {when} ¦ đã kiểm tra {when} ¦ diperiksa {when}
+« 🔍 Rechercher une mise à jour » regarde tout de suite. ¦ “🔍 Tìm bản cập nhật” sẽ kiểm tra ngay. ¦ “🔍 Cari pembaruan” langsung memeriksa.
+Pas encore regardé sur cet ordinateur. « 🔍 Rechercher une mise à jour » regarde tout de suite. ¦ Chưa kiểm tra trên máy tính này. “🔍 Tìm bản cập nhật” sẽ kiểm tra ngay. ¦ Belum diperiksa di komputer ini. “🔍 Cari pembaruan” langsung memeriksa.
+Tu as la dernière version publiée ({v}){when}. ¦ Bạn đang có phiên bản mới nhất ({v}){when}. ¦ Kamu sudah memakai versi terbaru ({v}){when}.
+Une nouvelle version {v} est disponible (tu as la {cur}). ¦ Có phiên bản mới {v} (bạn đang có {cur}). ¦ Versi baru {v} tersedia (kamu memakai {cur}).
+Tu as choisi de ne plus être prévenu pour la {v}{when}. ¦ Bạn đã chọn không được báo nữa cho {v}{when}. ¦ Kamu memilih untuk tidak diberi tahu lagi tentang {v}{when}.
+Ce réglage vient d’un autre outil (« {name} ») : il ne va pas dans la visionneuse. ¦ Thiết lập này đến từ công cụ khác (“{name}”): nó không dùng được trong trình xem. ¦ Pengaturan ini berasal dari alat lain (“{name}”): tidak bisa dipakai di penampil.
+Réglage « {name} » mis. ¦ Đã áp dụng thiết lập “{name}”. ¦ Pengaturan “{name}” diterapkan.
+Range avec ↑ ↓, coche ce qui s’affiche dans la colonne, en groupes ou en une seule liste. ¦ Sắp xếp bằng ↑ ↓, đánh dấu những gì hiện trong cột, theo nhóm hoặc thành một danh sách. ¦ Urutkan dengan ↑ ↓, centang yang tampil di kolom, dalam grup atau satu daftar.
+Range avec ↑ ↓, en groupes ou en une seule liste. ¦ Sắp xếp bằng ↑ ↓, theo nhóm hoặc thành một danh sách. ¦ Urutkan dengan ↑ ↓, dalam grup atau satu daftar.
+Réordonner les listes ¦ Sắp xếp lại danh sách ¦ Atur ulang urutan daftar
+Réordonner les pages ¦ Sắp xếp lại các trang ¦ Atur ulang urutan halaman
+Réordonner les {what} ¦ Sắp xếp lại {what} ¦ Atur ulang urutan {what}
+Range avec ↑ ↓, coche ce qui s’affiche, en groupes ou en une seule liste. Puis Enregistrer. ¦ Sắp xếp bằng ↑ ↓, đánh dấu những gì hiển thị, theo nhóm hoặc thành một danh sách. Rồi Lưu. ¦ Urutkan dengan ↑ ↓, centang yang tampil, dalam grup atau satu daftar. Lalu Simpan.
+Range avec ↑ ↓, en groupes ou en une seule liste. Puis Enregistrer. ¦ Sắp xếp bằng ↑ ↓, theo nhóm hoặc thành một danh sách. Rồi Lưu. ¦ Urutkan dengan ↑ ↓, dalam grup atau satu daftar. Lalu Simpan.
+Garde au moins une liste visible. ¦ Hãy giữ ít nhất một danh sách được hiện. ¦ Biarkan setidaknya satu daftar terlihat.
+Garde au moins une page visible. ¦ Hãy giữ ít nhất một trang được hiện. ¦ Biarkan setidaknya satu halaman terlihat.
+(CC BY 4.0) ; collectivités locales d’Australie : © ¦ (CC BY 4.0); chính quyền địa phương Úc: © ¦ (CC BY 4.0); pemerintah daerah Australia: ©
+(OGL v3) ; paroisses civiles d’Irlande : © ¦ (OGL v3); giáo xứ dân sự Ireland: © ¦ (OGL v3); paroki sipil Irlandia: ©
+(William & Mary geoLab), d’après leurs sources (gouvernements, OCHA, Banque mondiale, GRID3…), licences ouvertes indiquées pays par pays dans le fichier de chaque pays (domaine public, CC BY, CC BY IGO, ODbL, CC BY-SA pour le Togo et Taïwan). ¦ (William & Mary geoLab), theo nguồn của họ (chính phủ, OCHA, Ngân hàng Thế giới, GRID3…), giấy phép mở ghi rõ từng nước trong tệp của mỗi nước (phạm vi công cộng, CC BY, CC BY IGO, ODbL, CC BY-SA cho Togo và Đài Loan). ¦ (William & Mary geoLab), berdasarkan sumber mereka (pemerintah, OCHA, Bank Dunia, GRID3…), lisensi terbuka disebutkan per negara di berkas tiap negara (domain publik, CC BY, CC BY IGO, ODbL, CC BY-SA untuk Togo dan Taiwan).
+(auto = comme l’app) ¦ (tự động = như ứng dụng) ¦ (otomatis = seperti aplikasi)
+(avec ou sans accents). Ex. : ¦ (có hoặc không có dấu). Ví dụ: ¦ (dengan atau tanpa aksen). Contoh:
+(domaine public) ; paroisses d’Angleterre et du pays de Galles : © ¦ (phạm vi công cộng); giáo xứ Anh và xứ Wales: © ¦ (domain publik); paroki Inggris dan Wales: ©
+(familles qu’on ouvre et referme) ¦ (gia đình mở ra rồi gập lại) ¦ (keluarga yang dibuka dan ditutup)
+(hors des cases de texte) ¦ (bên ngoài ô văn bản) ¦ (di luar kotak teks)
+(jusqu’à 32 px). ¦ (tối đa 32 px). ¦ (hingga 32 px).
+(style « Onglets en haut ») ¦ (kiểu “Thẻ ở trên”) ¦ (gaya “Tab di atas”)
+(un petit fichier, par e-mail par exemple). ¦ (một tệp nhỏ, ví dụ gửi qua e-mail). ¦ (berkas kecil, misalnya lewat e-mail).
+), parle, et le texte s’écrit au curseur. Dis « virgule », « point », « point d’interrogation », « deux points », « à la ligne » ou « nouveau paragraphe » pour la ponctuation. ¦ ), hãy nói, và văn bản sẽ được viết tại con trỏ. Nói “dấu phẩy”, “dấu chấm”, “dấu hỏi”, “dấu hai chấm”, “xuống dòng” hoặc “đoạn mới” để thêm dấu câu. ¦ ), bicaralah, dan teks ditulis di kursor. Ucapkan “koma”, “titik”, “tanda tanya”, “titik dua”, “baris baru” atau “paragraf baru” untuk tanda baca.
+). Il se règle avec la forme de l’en-tête, plus bas sur cette page. ¦ ). Nó được chỉnh cùng với hình dạng phần đầu, ở dưới trang này. ¦ ). Diatur bersama bentuk kepala, lebih bawah di halaman ini.
+, contient des données OS © Crown copyright (OGL v3) ; paroisses civiles d’Écosse : © ¦ , chứa dữ liệu OS © Crown copyright (OGL v3); giáo xứ dân sự Scotland: © ¦ , berisi data OS © Crown copyright (OGL v3); paroki sipil Skotlandia: ©
+, données sous licence ¦ , dữ liệu theo giấy phép ¦ , data dengan lisensi
+, même dans un tableau large avec beaucoup de colonnes. ¦ , kể cả trong một bảng rộng có nhiều cột. ¦ , bahkan di tabel lebar dengan banyak kolom.
+. Aucune fiche n’est supprimée : les personnes restent là, même quand l’onglet est caché. On peut en allumer plusieurs : leurs onglets s’additionnent. ¦ . Không hồ sơ nào bị xoá: mọi người vẫn còn đó, kể cả khi thẻ bị ẩn. Có thể bật nhiều cái: các thẻ của chúng cộng dồn. ¦ . Tidak ada profil yang dihapus: orang-orangnya tetap ada, meski tab disembunyikan. Kamu bisa menyalakan beberapa: tab-tabnya bertambah.
+. Double-clic sur un curseur : valeur de départ. ¦ . Nhấp đúp vào thanh trượt: giá trị ban đầu. ¦ . Klik dua kali pada penggeser: nilai awal.
+. Même licence pour les communes d’Amérique du Sud, du Moyen-Orient, d’Asie et d’une partie de l’Afrique. ¦ . Cùng giấy phép cho các xã ở Nam Mỹ, Trung Đông, châu Á và một phần châu Phi. ¦ . Lisensi yang sama untuk kota di Amerika Selatan, Timur Tengah, Asia dan sebagian Afrika.
+12/03/1790, mars 1790 ou 1790 ¦ 12/03/1790, mars 1790 hoặc 1790 ¦ 12/03/1790, mars 1790 atau 1790
+1re heure du jour, au lever du soleil ¦ Giờ thứ nhất trong ngày, lúc mặt trời mọc ¦ Jam pertama hari itu, saat matahari terbit
+3e heure, milieu de la matinée (heure de la grand-messe) ¦ Giờ thứ ba, giữa buổi sáng (giờ lễ Misa chính) ¦ Jam ketiga, pertengahan pagi (jam Misa agung)
+9e heure, milieu de l’après-midi ¦ Giờ thứ chín, giữa buổi chiều ¦ Jam kesembilan, pertengahan sore
+256 ancêtres de la génération 8 en théorie (Sosa 256 à 511) ; 510 ancêtres en tout jusqu’à cette génération ¦ Theo lý thuyết 256 tổ tiên ở thế hệ 8 (Sosa 256 đến 511); tổng cộng 510 tổ tiên đến thế hệ này ¦ Secara teori 256 leluhur di generasi 8 (Sosa 256 sampai 511); total 510 leluhur sampai generasi ini
+4 générations ¦ 4 thế hệ ¦ 4 generasi
+5 générations ¦ 5 thế hệ ¦ 5 generasi
+6 générations ¦ 6 thế hệ ¦ 6 generasi
+6 secondes (de départ) ¦ 6 giây (mặc định) ¦ 6 detik (bawaan)
+4 tailles seulement : 22 px (dans une ligne), 34 px (listes, menu de choix), 48 px (arbre, vignettes), 88 px (fiche). ¦ Chỉ 4 kích cỡ: 22 px (trong một dòng), 34 px (danh sách, menu chọn), 48 px (cây, hình thu nhỏ), 88 px (hồ sơ). ¦ Hanya 4 ukuran: 22 px (dalam baris), 34 px (daftar, menu pilihan), 48 px (pohon, gambar mini), 88 px (profil).
+: boutons et barres d’outils au trait, rubriques et contenus en émoji (💍 conjoints, 🎂 anniversaires…). ¦ : nút và thanh công cụ dạng nét vẽ, mục và nội dung bằng emoji (💍 vợ chồng, 🎂 sinh nhật…). ¦ : tombol dan bilah alat bergaya garis, rubrik dan isi dengan emoji (💍 pasangan, 🎂 ulang tahun…).
+: chaque bouton est une vraie « touche » encadrée, avec son ombre. ¦ : mỗi nút là một “phím” thật có viền, có bóng. ¦ : setiap tombol adalah “tuts” sungguhan berbingkai, dengan bayangan.
+: coins presque droits, traits fins, un léger grain de papier derrière les pages. Pour le fond crème, choisis le Preset « Archive papier » dans Apparence. ¦ : góc gần như vuông, nét mảnh, có vân giấy nhẹ phía sau các trang. Để có nền màu kem, hãy chọn Preset “Giấy lưu trữ” trong Giao diện. ¦ : sudut hampir tegak, garis tipis, tekstur kertas tipis di belakang halaman. Untuk latar krem, pilih Preset “Kertas arsip” di Tampilan.
+: comme un registre, on voit beaucoup de lignes. ¦ : như một cuốn sổ, thấy được nhiều dòng. ¦ : seperti buku register, banyak baris terlihat.
+: des émojis en couleur, faciles à reconnaître. ¦ : emoji có màu, dễ nhận ra. ¦ : emoji berwarna, mudah dikenali.
+: grand nom très lisible, outils toujours à droite. ¦ : tên lớn rất dễ đọc, công cụ luôn ở bên phải. ¦ : nama besar sangat mudah dibaca, alat selalu di kanan.
+: le style « néo-brutal » que tu connais, net et très lisible. ¦ : kiểu “tân thô mộc” mà bạn đã biết, rõ ràng và rất dễ đọc. ¦ : gaya “neo-brutal” yang kamu kenal, tegas dan sangat mudah dibaca.
+: les autres restent visibles mais plus légers. ¦ : những cái khác vẫn hiện nhưng nhạt hơn. ¦ : yang lain tetap terlihat tetapi lebih samar.
+: les lignes sont hautes, on ne se trompe pas de ligne. ¦ : dòng cao, không nhầm dòng. ¦ : baris tinggi, tidak salah baris.
+: l’équilibre actuel entre place et lisibilité. ¦ : cân bằng hiện tại giữa chỗ trống và độ dễ đọc. ¦ : keseimbangan saat ini antara ruang dan keterbacaan.
+: nom, prénoms, naissance, décès rangés dans des cases fixes. ¦ : họ, tên, ngày sinh, ngày mất xếp trong các ô cố định. ¦ : nama keluarga, nama depan, kelahiran, kematian dalam kotak tetap.
+: parfait pour les longues listes et les petits écrans. ¦ : hoàn hảo cho danh sách dài và màn hình nhỏ. ¦ : cocok untuk daftar panjang dan layar kecil.
+: rien ne dépasse, seul le contenu compte. Idéal pour imprimer ou faire des captures. ¦ : không có gì thừa, chỉ có nội dung. Lý tưởng để in hoặc chụp màn hình. ¦ : tidak ada yang berlebih, hanya isi yang penting. Ideal untuk mencetak atau tangkapan layar.
+: toutes les icônes ont le même trait et prennent la couleur du texte (aussi en mode sombre). ¦ : mọi biểu tượng có cùng nét và lấy màu của chữ (cả ở chế độ tối). ¦ : semua ikon bergaris sama dan memakai warna teks (juga di mode gelap).
+: traits dans les Listes, cartes encadrées dans la colonne Personnes. ¦ : đường kẻ trong Danh sách, thẻ có khung trong cột Người. ¦ : garis di Daftar, kartu berbingkai di kolom Orang.
+: traits fins et pâles, coins ronds, ombres floues comme sur un téléphone. ¦ : nét mảnh và nhạt, góc bo tròn, bóng mờ như trên điện thoại. ¦ : garis tipis dan pucat, sudut membulat, bayangan lembut seperti di ponsel.
+: une clé USB, ou un dossier iCloud Drive, Dropbox, OneDrive… L’app n’utilise aucun service en ligne et n’a pas besoin de serveur : chaque ordinateur garde sa base et dépose ses changements dans ce dossier ; l’autre les reprend. ¦ : một USB, hoặc một thư mục iCloud Drive, Dropbox, OneDrive… Ứng dụng không dùng dịch vụ trực tuyến nào và không cần máy chủ: mỗi máy tính giữ cơ sở dữ liệu của mình và đặt các thay đổi vào thư mục này; máy kia lấy chúng về. ¦ : flashdisk USB, atau folder iCloud Drive, Dropbox, OneDrive… Aplikasi tidak memakai layanan online dan tidak butuh server: tiap komputer menyimpan basis datanya dan menaruh perubahannya di folder ini; komputer lain mengambilnya.
+: une grande photo (la maison, la famille, le village) et le portrait rond par-dessus, comme un profil. ¦ : một ảnh lớn (ngôi nhà, gia đình, ngôi làng) và chân dung tròn đè lên, như một trang cá nhân. ¦ : satu foto besar (rumah, keluarga, desa) dan potret bulat di atasnya, seperti profil.
+: « Annuler », « Modifier » deviennent des mots en couleur, soulignés au survol. ¦ : “Hủy”, “Sửa” trở thành chữ có màu, gạch chân khi di chuột. ¦ : “Batal”, “Ubah” menjadi kata berwarna, bergaris bawah saat disorot.
+: « Née le … à …, décédée le … », portrait ovale sépia, tampon Sosa. ¦ : “Sinh ngày … tại …, mất ngày …”, chân dung bầu dục màu nâu đỏ, con dấu Sosa. ¦ : “Lahir tanggal … di …, meninggal tanggal …”, potret oval sepia, cap Sosa.
+; des Pays-Bas : © ¦ ; Hà Lan: © ¦ ; Belanda: ©
+; du Québec : © ¦ ; Québec: © ¦ ; Québec: ©
+; noms traduits en français. Les autres formes sont dessinées pour l’application. ¦ ; tên được dịch sang tiếng Pháp. Các hình khác được vẽ cho ứng dụng. ¦ ; nama diterjemahkan ke bahasa Prancis. Bentuk lain digambar untuk aplikasi.
+Accents et esprits (s’ajoutent à la lettre avant le curseur) ¦ Dấu và dấu thở (thêm vào chữ trước con trỏ) ¦ Aksen dan tanda napas (ditambahkan ke huruf sebelum kursor)
+Accents é è ê, et ç, œ, æ. ¦ Dấu é è ê, và ç, œ, æ. ¦ Aksen é è ê, serta ç, œ, æ.
+Actes et documents ¦ Giấy tờ và tài liệu ¦ Akta dan dokumen
+Affichage des événements ¦ Hiển thị sự kiện ¦ Tampilan peristiwa
+Afficher ce bouton ¦ Hiện nút này ¦ Tampilkan tombol ini
+Afficher cette catégorie ¦ Hiện danh mục này ¦ Tampilkan kategori ini
+Afficher dans la fiche ¦ Hiện trong hồ sơ ¦ Tampilkan di profil
+Afficher dans le menu ¦ Hiện trong menu ¦ Tampilkan di menu
+Afficher la liste des raccourcis ¦ Hiện danh sách phím tắt ¦ Tampilkan daftar pintasan
+Afficher le cadre (défaut) ¦ Hiện khung (mặc định) ¦ Tampilkan bingkai (bawaan)
+Afficher seulement si renseigné ¦ Chỉ hiện khi có điền ¦ Tampilkan hanya jika diisi
+Affiché : clique pour le cacher ¦ Đang hiện: nhấp để ẩn ¦ Ditampilkan: klik untuk menyembunyikan
+Agit sur les marges intérieures et l’écart entre les blocs. 100 % = comme avant. La « Taille typographique » de l’Apparence reste à part et s’ajoute ; une colonne de gauche réglée « Compacte » (onglet Colonne) garde sa propre taille : la Densité ne la touche pas. ¦ Tác động lên lề bên trong và khoảng cách giữa các khối. 100 % = như trước. “Cỡ chữ” của Giao diện vẫn riêng và được cộng thêm; cột bên trái chỉnh “Gọn” (thẻ Cột) giữ cỡ riêng: Mật độ không ảnh hưởng đến nó. ¦ Mengatur margin dalam dan jarak antarblok. 100 % = seperti sebelumnya. “Ukuran huruf” di Tampilan tetap terpisah dan ditambahkan; kolom kiri yang diatur “Ringkas” (tab Kolom) tetap memakai ukurannya sendiri: Kepadatan tidak mengubahnya.
+Agrandit et aère le texte. Les outils en plein écran gardent leur taille pour que leurs réglages restent à leur place. ¦ Làm chữ to hơn và thoáng hơn. Các công cụ toàn màn hình giữ nguyên cỡ để thiết lập vẫn ở đúng chỗ. ¦ Memperbesar dan melonggarkan teks. Alat layar penuh tetap pada ukurannya agar pengaturannya tetap di tempat.
+Aide : Ce que tu fais avec l’app : ses onglets et son premier écran. Aucune fiche n’est supprimée. ¦ Trợ giúp: Những gì bạn làm với ứng dụng: các thẻ và màn hình đầu tiên. Không hồ sơ nào bị xoá. ¦ Bantuan: Apa yang kamu lakukan dengan aplikasi: tab-tabnya dan layar pertamanya. Tidak ada profil yang dihapus.
+Aide : Choisis la sorte de daltonisme : l’app corrige ses couleurs pour que tu les distingues mieux. Les petites pastilles montrent comment ces couleurs sont vues. ¦ Trợ giúp: Hãy chọn loại mù màu: ứng dụng sẽ chỉnh màu để bạn phân biệt dễ hơn. Các chấm nhỏ cho thấy những màu này được nhìn thế nào. ¦ Bantuan: Pilih jenis buta warna: aplikasi menyesuaikan warnanya agar kamu lebih mudah membedakannya. Titik-titik kecil menunjukkan bagaimana warna ini terlihat.
+Aide : La forme des petits carrés numérotés des blocs et des initiales des fiches. Ajoute tes formes (bibliothèque des tableaux, polygone dessiné, SVG importé), range la liste du menu « Forme des avatars », cache celles qui ne te servent pas. ¦ Trợ giúp: Hình của các ô vuông nhỏ đánh số trong khối và chữ cái đầu trên hồ sơ. Thêm hình của bạn (thư viện bảng, đa giác tự vẽ, SVG đã nhập), sắp xếp danh sách menu “Hình ảnh đại diện”, ẩn những hình bạn không dùng. ¦ Bantuan: Bentuk kotak kecil bernomor pada blok dan inisial di profil. Tambahkan bentukmu (pustaka tabel, poligon gambar sendiri, SVG impor), atur daftar menu “Bentuk avatar”, sembunyikan yang tidak kamu pakai.
+(CC BY 4.0) ; de Slovénie : © ¦ (CC BY 4.0); Slovenia: © ¦ (CC BY 4.0); Slovenia: ©
+3 fiches trouvées ¦ Tìm thấy 3 hồ sơ ¦ 3 profil ditemukan
+Aide des touches ¦ Trợ giúp phím ¦ Bantuan tombol
+Anniversaires et souvenirs ¦ Sinh nhật và kỷ niệm ¦ Ulang tahun dan kenangan
+Année ¦ Năm ¦ Tahun
+Année de naissance lue par SocFace ¦ Năm sinh do SocFace đọc ¦ Tahun lahir dibaca SocFace
+Aperçu vivant ¦ Xem trước trực tiếp ¦ Pratinjau langsung
+Appeler quelqu’un ¦ Gọi ai đó ¦ Panggil seseorang
+Arial, comme d’habitude. ¦ Arial, như thường lệ. ¦ Arial, seperti biasa.
+Arrondi des coins ¦ Bo góc ¦ Pembulatan sudut
+Atkinson Hyperlegible : faite pour les personnes qui voient mal (lettres qu’on ne confond pas : I l 1, O 0). Toujours disponible. ¦ Atkinson Hyperlegible: dành cho người nhìn kém (các chữ không bị nhầm: I l 1, O 0). Luôn có sẵn. ¦ Atkinson Hyperlegible: dibuat untuk orang yang penglihatannya kurang (huruf yang tidak tertukar: I l 1, O 0). Selalu tersedia.
+Atkinson Hyperlegible, texte 30 px, très gros boutons ¦ Atkinson Hyperlegible, chữ 30 px, nút rất lớn ¦ Atkinson Hyperlegible, teks 30 px, tombol sangat besar
+Au démarrage, une fois par jour au plus. Seule une demande « quelle est la dernière version ? » part vers GitHub : aucune donnée de ta généalogie, aucun identifiant. Rien n’est installé tout seul. ¦ Khi khởi động, nhiều nhất một lần mỗi ngày. Chỉ một câu hỏi “phiên bản mới nhất là gì?” được gửi đến GitHub: không có dữ liệu gia phả nào, không có định danh nào. Không có gì tự cài đặt. ¦ Saat dibuka, paling banyak sekali sehari. Hanya permintaan “apa versi terbarunya?” yang dikirim ke GitHub: tanpa data silsilahmu, tanpa pengenal. Tidak ada yang dipasang sendiri.
+Aucun fichier média manquant. ¦ Không thiếu tệp tư liệu nào. ¦ Tidak ada berkas media yang hilang.
+Aucune modification pour ce filtre. ¦ Không có thay đổi nào cho bộ lọc này. ¦ Tidak ada perubahan untuk saringan ini.
+Aucune ombre ¦ Không bóng ¦ Tanpa bayangan
+Aucune voix française trouvée ¦ Không tìm thấy giọng tiếng Pháp nào ¦ Tidak ada suara bahasa Prancis
+Aujourd’hui, pas de portrait dans les cases de l’arbre. ¦ Hiện tại, không có chân dung trong các ô của cây. ¦ Saat ini, tidak ada potret di kotak pohon.
+Aussi : ⇧ + Entrée dans la recherche rapide. ¦ Cũng có: ⇧ + Enter trong ô tìm nhanh. ¦ Juga: ⇧ + Enter di pencarian cepat.
+Aussi dans Réglages → Accessibilité → 🧓 Mode simple (« Montrer le bouton »). Caché au départ. ¦ Cũng có trong Cài đặt → Trợ năng → 🧓 Chế độ đơn giản (“Hiện nút”). Ẩn lúc đầu. ¦ Juga di Pengaturan → Aksesibilitas → 🧓 Mode sederhana (“Tampilkan tombol”). Disembunyikan di awal.
+Aussi dans les réglages de la calculette (« Bouton 🧮 dans la barre du haut »). ¦ Cũng có trong cài đặt của máy tính bỏ túi (“Nút 🧮 trên thanh trên cùng”). ¦ Juga di pengaturan kalkulator (“Tombol 🧮 di bilah atas”).
+Avec les médias (photos, actes, sons…) ¦ Kèm tư liệu (ảnh, giấy tờ, âm thanh…) ¦ Dengan media (foto, akta, suara…)
+Avec les pastilles ¦ Có chấm màu ¦ Dengan titik warna
+Aérée ¦ Thoáng ¦ Lega
+Bande d’actions rapides ¦ Dải thao tác nhanh ¦ Bilah tindakan cepat
+Baptême loin de la naissance ¦ Rửa tội cách xa ngày sinh ¦ Baptis jauh dari kelahiran
+Baptême tardif (avant 1900) ¦ Rửa tội muộn (trước 1900) ¦ Baptis terlambat (sebelum 1900)
+Barre de côté ¦ Thanh bên ¦ Bilah samping
+Bleu et jaune affaiblis. ¦ Xanh dương và vàng bị nhạt đi. ¦ Biru dan kuning melemah.
+Bouton bleu « ＋ Observation » au-dessus de la grille ¦ Nút xanh “＋ Quan sát” phía trên lưới ¦ Tombol biru “＋ Pengamatan” di atas kisi
+Boutons carrés ¦ Nút vuông ¦ Tombol persegi
+Boutons des pistes : plus grands ¦ Nút của các rãnh: lớn hơn ¦ Tombol trek: lebih besar
+Boutons des pistes : plus petits ¦ Nút của các rãnh: nhỏ hơn ¦ Tombol trek: lebih kecil
+Boutons des pistes : taille de départ ¦ Nút của các rãnh: cỡ ban đầu ¦ Tombol trek: ukuran awal
+Boutons encadrés ¦ Nút có khung ¦ Tombol berbingkai
+Cache les outils avancés ou rarement utilisés : ADN, comparaison, animaux, écran divisé, nouvelle fenêtre, réglages du tableau de bord, supprimer / verrouiller une fiche, historique, filtres avancés de la carte… ¦ Ẩn các công cụ nâng cao hoặc ít dùng: ADN, so sánh, con vật, chia màn hình, cửa sổ mới, cài đặt bảng điều khiển, xoá / khoá hồ sơ, lịch sử, bộ lọc nâng cao của bản đồ… ¦ Menyembunyikan alat lanjutan atau yang jarang dipakai: DNA, perbandingan, hewan, layar terbagi, jendela baru, pengaturan dasbor, hapus / kunci profil, riwayat, saringan lanjutan peta…
+Caché ¦ Ẩn ¦ Tersembunyi
+Caché : le mode simple s’ouvre d’ici, ou par le widget du tableau de bord. ¦ Ẩn: chế độ đơn giản được mở từ đây, hoặc bằng tiện ích trên bảng điều khiển. ¦ Tersembunyi: mode sederhana dibuka dari sini, atau lewat widget dasbor.
+Calendrier de cette date ¦ Lịch của ngày này ¦ Kalender tanggal ini
+Calendrier républicain ¦ Lịch Cộng hoà Pháp ¦ Kalender Republik Prancis
+Calendrier source ¦ Lịch nguồn ¦ Kalender sumber
+Calendrier utilisé par défaut dans les champs de date ¦ Lịch dùng mặc định trong các ô ngày ¦ Kalender bawaan di kolom tanggal
+Carré arrondi ¦ Vuông bo góc ¦ Persegi membulat
+Carré droit ¦ Vuông góc ¦ Persegi tegak
+Carré penché (défaut) ¦ Vuông nghiêng (mặc định) ¦ Persegi miring (bawaan)
+Carrés numérotés ¦ Ô vuông đánh số ¦ Kotak bernomor
+Cartes avec repère ¦ Thẻ có điểm đánh dấu ¦ Kartu dengan penanda
+Cartes espacées ¦ Thẻ cách xa nhau ¦ Kartu berjarak
+Cases de l’arbre ¦ Ô của cây ¦ Kotak pohon
+Ce n’est pas une erreur ¦ Đây không phải là lỗi ¦ Ini bukan kesalahan
+Ce que tu as réglé dans « ♿ Toute l’app » (daltonisme, contraste, taille du texte, mouvements, voix) s’applique aussi au mode simple. Pour un réglage différent, choisis « Propre au mode simple ». ¦ Những gì bạn đã chỉnh trong “♿ Toàn ứng dụng” (mù màu, độ tương phản, cỡ chữ, chuyển động, giọng đọc) cũng áp dụng cho chế độ đơn giản. Để có thiết lập khác, hãy chọn “Riêng cho chế độ đơn giản”. ¦ Yang kamu atur di “♿ Seluruh aplikasi” (buta warna, kontras, ukuran teks, gerakan, suara) juga berlaku di mode sederhana. Untuk pengaturan berbeda, pilih “Khusus mode sederhana”.
+Ce qui semble impossible ou très rare dans tes fiches : souvent une faute de frappe, un homonyme ou de mauvais parents. Rien n’est changé sans toi. ¦ Những gì có vẻ không thể hoặc rất hiếm trong hồ sơ của bạn: thường là lỗi gõ, người trùng tên hoặc sai cha mẹ. Không có gì thay đổi nếu không có bạn. ¦ Hal yang tampak mustahil atau sangat jarang di profilmu: sering salah ketik, nama kembar, atau orang tua yang keliru. Tidak ada yang diubah tanpamu.
+Ce qu’on montre ¦ Những gì được hiển thị ¦ Yang ditampilkan
+Celle de l’app ¦ Của ứng dụng ¦ Milik aplikasi
+Celle du thème ¦ Của chủ đề ¦ Milik tema
+Cette personne était… (ses profils) ¦ Người này từng là… (các vai trò) ¦ Orang ini dulunya… (profilnya)
+Ceux qui arrivent ¦ Những ngày sắp tới ¦ Yang akan datang
+Champs œuvre ¦ Trường tác phẩm ¦ Kolom karya
+Changer la couleur ¦ Đổi màu ¦ Ubah warna
+Changer le pictogramme ¦ Đổi biểu tượng ¦ Ubah ikon
+Chaque choix se voit : clique, l’aperçu suit. Pour les outils Graphiques, Carte, Enquêtes, Recherche, Personnes, Listes, Réglages… ¦ Mỗi lựa chọn đều thấy ngay: nhấp, bản xem trước theo sau. Cho các công cụ Biểu đồ, Bản đồ, Tìm hiểu, Nghiên cứu, Người, Danh sách, Cài đặt… ¦ Setiap pilihan langsung terlihat: klik, pratinjau mengikuti. Untuk alat Grafik, Peta, Penelusuran, Riset, Orang, Daftar, Pengaturan…
+Chaque fiche est un objet ¦ Mỗi hồ sơ là một đối tượng ¦ Setiap profil adalah satu objek
+Chaque gros bouton garde sa couleur partout : on se repère sans lire. ¦ Mỗi nút lớn giữ màu của nó ở mọi nơi: nhận ra mà không cần đọc. ¦ Setiap tombol besar memakai warnanya di mana-mana: mudah dikenali tanpa membaca.
+Chercher quelqu’un par son nom ¦ Tìm ai đó theo tên ¦ Cari seseorang berdasarkan nama
+Chercher une commande… ¦ Tìm một lệnh… ¦ Cari perintah…
+Chercher… (nom, contrôle, lieu) ¦ Tìm… (tên, kiểm tra, địa điểm) ¦ Cari… (nama, pemeriksaan, tempat)
+Choisir une voix propre au mode simple ¦ Chọn giọng riêng cho chế độ đơn giản ¦ Pilih suara khusus mode sederhana
+Clair ou sombre ¦ Sáng hoặc tối ¦ Terang atau gelap
+Clavier et souris ¦ Bàn phím và chuột ¦ Keyboard dan mouse
+Comme le prototype ¦ Như bản mẫu ¦ Seperti prototipe
+Comme le reste ¦ Như phần còn lại ¦ Seperti bagian lain
+Comme les blocs (réglage A1) ¦ Như các khối (thiết lập A1) ¦ Seperti blok (pengaturan A1)
+Communes de Belgique : IGN-NGI (Institut géographique national belge), licence ouverte, via ¦ Xã của Bỉ: IGN-NGI (Viện Địa lý Quốc gia Bỉ), giấy phép mở, qua ¦ Kota di Belgia: IGN-NGI (Institut Geografi Nasional Belgia), lisensi terbuka, lewat
+Communes de Tchéquie : RÚIAN © ¦ Xã của Séc: RÚIAN © ¦ Kota di Ceko: RÚIAN ©
+Communes d’Allemagne : VG250 © ¦ Xã của Đức: VG250 © ¦ Kota di Jerman: VG250 ©
+Communes d’Autriche : © ¦ Xã của Áo: © ¦ Kota di Austria: ©
+Communes d’Espagne : © ¦ Xã của Tây Ban Nha: © ¦ Kota di Spanyol: ©
+Communes d’Italie : confini amministrativi © ¦ Xã của Ý: confini amministrativi © ¦ Kota di Italia: confini amministrativi ©
+Compact et clair ¦ Gọn và rõ ¦ Ringkas dan jelas
+Comparer les GEDCOM ¦ So sánh các GEDCOM ¦ Bandingkan GEDCOM
+Comtés des États-Unis : ¦ Các hạt của Hoa Kỳ: ¦ County di Amerika Serikat:
+Contour bien visible autour de l’élément choisi au clavier ¦ Viền thật rõ quanh mục được chọn bằng bàn phím ¦ Garis tepi jelas di sekitar elemen yang dipilih dengan keyboard
+Contours des communes : IGN, Admin Express, via ¦ Đường ranh giới các xã: IGN, Admin Express, qua ¦ Batas kota: IGN, Admin Express, lewat
+Contraste élevé ¦ Độ tương phản cao ¦ Kontras tinggi
+Contrôle ¦ Kiểm tra ¦ Pemeriksaan
+Convertir une date ¦ Chuyển đổi ngày ¦ Konversi tanggal
+Correspondance (lettres, cartes) ¦ Thư từ (thư, bưu thiếp) ¦ Surat-menyurat (surat, kartu pos)
+Couleur du bord ¦ Màu viền ¦ Warna tepi
+Couleur du genre, fond plein (lettres blanches) ¦ Màu theo giới tính, nền đặc (chữ trắng) ¦ Warna jenis kelamin, latar penuh (huruf putih)
+Couleur du genre, fond pâle (lettres de couleur) ¦ Màu theo giới tính, nền nhạt (chữ có màu) ¦ Warna jenis kelamin, latar pucat (huruf berwarna)
+Couleur principale pâle avec un trait ¦ Màu chính nhạt có một đường kẻ ¦ Warna utama pucat dengan garis
+Couleurs et daltonisme ¦ Màu sắc và mù màu ¦ Warna dan buta warna
+Couleurs seulement affaiblies (léger) ¦ Chỉ làm nhạt màu (nhẹ) ¦ Warna hanya dilemahkan (ringan)
+Créer / modifier une branche ¦ Tạo / sửa một nhánh ¦ Buat / ubah cabang
+Créer / modifier une étiquette ¦ Tạo / sửa một nhãn ¦ Buat / ubah label
+Créer le type ¦ Tạo loại ¦ Buat jenis
+Créer un type ¦ Tạo một loại ¦ Buat jenis
+Créer une copie de test ¦ Tạo bản sao thử ¦ Buat salinan uji
+Créer une forme ¦ Tạo một hình ¦ Buat bentuk
+DENSITÉ ¦ MẬT ĐỘ ¦ KEPADATAN
+Dans la barre au-dessus ¦ Trong thanh phía trên ¦ Di bilah atas
+Dans un navigateur ¦ Trong trình duyệt ¦ Di peramban
+Demander aussi un code ¦ Hỏi thêm một mã ¦ Minta juga kode
+Demander « Qui regarde ? » ¦ Hỏi “Ai đang xem?” ¦ Tanya “Siapa yang melihat?”
+Densité ¦ Mật độ ¦ Kepadatan
+Des photos au hasard ¦ Ảnh ngẫu nhiên ¦ Foto acak
+Des photos choisies ¦ Ảnh đã chọn ¦ Foto pilihan
+Dessin au trait ¦ Hình nét vẽ ¦ Gambar garis
+Deutéranomalie ¦ Deuteranomaly (yếu màu lục) ¦ Deuteranomali
+Deutéranopie ¦ Deuteranopia (mù màu lục) ¦ Deuteranopia
+Deux façons de faire selon l’endroit. ¦ Hai cách làm tuỳ theo chỗ. ¦ Dua cara tergantung tempatnya.
+Diaporama et cadre photo ¦ Trình chiếu và khung ảnh ¦ Tayangan slide dan bingkai foto
+Dictée vocale ¦ Đọc chính tả ¦ Dikte suara
+Dictée vocale dans les champs texte ¦ Đọc chính tả trong ô văn bản ¦ Dikte suara di kolom teks
+Données géographiques ¦ Dữ liệu địa lý ¦ Data geografis
+Dossier des copies ¦ Thư mục bản sao ¦ Folder salinan
+Dossier partagé ¦ Thư mục dùng chung ¦ Folder bersama
+Double-clic : 320 px, la valeur de départ. ¦ Nhấp đúp: 320 px, giá trị ban đầu. ¦ Klik dua kali: 320 px, nilai awal.
+Douces et floues ¦ Mềm và mờ ¦ Lembut dan kabur
+Duplique la base ouverte pour essayer un import ou une fusion sans modifier l’original. Les médias restent partagés : ne les supprime pas depuis la copie si tu veux préserver l’original. ¦ Nhân bản cơ sở dữ liệu đang mở để thử nhập hoặc gộp mà không sửa bản gốc. Tư liệu vẫn dùng chung: đừng xoá chúng từ bản sao nếu bạn muốn giữ bản gốc. ¦ Menggandakan basis data yang terbuka untuk mencoba impor atau penggabungan tanpa mengubah aslinya. Media tetap dipakai bersama: jangan hapus dari salinan jika kamu ingin menjaga aslinya.
+Durée de chaque photo ¦ Thời gian mỗi ảnh ¦ Durasi tiap foto
+Durée de l’appui long ¦ Thời gian nhấn giữ ¦ Durasi tekan lama
+Décrire les images ¦ Mô tả hình ảnh ¦ Jelaskan gambar
+Défilement ¦ Cuộn ¦ Gulir
+Délai après la mort du père ¦ Khoảng cách sau khi cha mất ¦ Jeda setelah kematian ayah
+Effacer le groupe (son contenu va dans le groupe d’à côté) ¦ Xoá nhóm (nội dung chuyển sang nhóm bên cạnh) ¦ Hapus grup (isinya pindah ke grup sebelah)
+En bas de la colonne ¦ Ở cuối cột ¦ Di bawah kolom
+En bas de la colonne des badges ¦ Ở cuối cột huy hiệu ¦ Di bawah kolom lencana
+En bas de l’en-tête ¦ Ở cuối phần đầu ¦ Di bawah kepala
+En diaporama ¦ Dạng trình chiếu ¦ Sebagai tayangan slide
+En français. Pas dans les cases de recherche, les dates, les nombres ni les mots de passe. ¦ Bằng tiếng Pháp. Không dùng trong ô tìm kiếm, ngày, số hoặc mật khẩu. ¦ Dalam bahasa Prancis. Tidak di kotak pencarian, tanggal, angka, atau kata sandi.
+En grand, avec sa légende ¦ Cỡ lớn, kèm chú thích ¦ Besar, dengan keterangannya
+En très grand ¦ Rất lớn ¦ Sangat besar
+En-tête actuel ¦ Phần đầu hiện tại ¦ Kepala saat ini
+En-tête de la fiche ¦ Phần đầu hồ sơ ¦ Kepala profil
+En-têtes ¦ Phần đầu ¦ Kepala
+Enlever l’élément choisi ¦ Bỏ mục đã chọn ¦ Hilangkan elemen terpilih
+Enregistrer la branche ¦ Lưu nhánh ¦ Simpan cabang
+Enregistrer le projet sous un autre nom… ¦ Lưu dự án dưới tên khác… ¦ Simpan proyek dengan nama lain…
+Ensembles prêts ¦ Bộ có sẵn ¦ Set siap pakai
+Entre une date complète pour convertir. ¦ Nhập một ngày đầy đủ để chuyển đổi. ¦ Masukkan tanggal lengkap untuk mengonversi.
+Espace dans les blocs ¦ Khoảng trống trong khối ¦ Ruang di dalam blok
+Espace entre les boutons ¦ Khoảng cách giữa các nút ¦ Jarak antartombol
+Espace entre les cadres ¦ Khoảng cách giữa các ô ¦ Jarak antarkotak
+Espace entre les lettres ¦ Khoảng cách giữa các chữ ¦ Jarak antarhuruf
+Espace entre les mots ¦ Khoảng cách giữa các từ ¦ Jarak antarkata
+Essaie ici ¦ Thử ở đây ¦ Coba di sini
+FICHES ANIMAUX ¦ HỒ SƠ CON VẬT ¦ PROFIL HEWAN
+FICHES PERSONNES ET ANIMAUX ¦ HỒ SƠ NGƯỜI VÀ CON VẬT ¦ PROFIL ORANG DAN HEWAN
+Fiche d’une personne ¦ Hồ sơ của một người ¦ Profil seseorang
+Fiche · 88 px ¦ Hồ sơ · 88 px ¦ Profil · 88 px
+Fiches personnes ¦ Hồ sơ người ¦ Profil orang
+Fichiers médias ¦ Tệp tư liệu ¦ Berkas media
+Fond crème, police de livre, doux pour les yeux ¦ Nền màu kem, phông chữ sách, dịu mắt ¦ Latar krem, huruf buku, nyaman di mata
+Fond pâle (comme avant) ¦ Nền nhạt (như trước) ¦ Latar pucat (seperti sebelumnya)
+Force de la correction ¦ Mức độ chỉnh ¦ Kekuatan koreksi
+Forme de l’en-tête ¦ Hình dạng phần đầu ¦ Bentuk kepala
+Forme des boutons ¦ Hình dạng nút ¦ Bentuk tombol
+Forme des listes ¦ Hình dạng danh sách ¦ Bentuk daftar
+Français ¦ Tiếng Pháp ¦ Bahasa Prancis
+Fratrie étalée ¦ Anh chị em cách nhau xa ¦ Saudara kandung berjarak jauh
+GEDCOM de référence ¦ GEDCOM tham chiếu ¦ GEDCOM acuan
+Garder les dernières ¦ Giữ những bản mới nhất ¦ Simpan yang terakhir
+Gouvernement du Québec ¦ Chính quyền Québec ¦ Pemerintah Québec
+Gravité ¦ Mức độ nghiêm trọng ¦ Tingkat keparahan
+Grosse flèche de souris ¦ Con trỏ chuột lớn ¦ Panah mouse besar
+Grégorien ¦ Lịch Gregory ¦ Gregorian
+Hauteur des boutons ¦ Chiều cao nút ¦ Tinggi tombol
+Hauteur des cadres ¦ Chiều cao ô ¦ Tinggi kotak
+Hauteur des lignes ¦ Chiều cao dòng ¦ Tinggi baris
+Hauteur du bandeau ¦ Chiều cao dải đầu ¦ Tinggi spanduk
+ICÔNES ¦ BIỂU TƯỢNG ¦ IKON
+Ici : choisis le dossier. L’app y pose une copie de départ ( ¦ Ở đây: hãy chọn thư mục. Ứng dụng đặt vào đó một bản sao ban đầu ( ¦ Di sini: pilih foldernya. Aplikasi menaruh salinan awal di sana (
+Icône + nom ¦ Biểu tượng + tên ¦ Ikon + nama
+Icône au-dessus ¦ Biểu tượng ở trên ¦ Ikon di atas
+Icônes ¦ Biểu tượng ¦ Ikon
+Ignorée dans une case de texte ; réglable dans Raccourcis clavier. ¦ Bỏ qua trong ô văn bản; chỉnh được trong Phím tắt. ¦ Diabaikan di kotak teks; bisa diatur di Pintasan keyboard.
+Ils sont gardés avec ta généalogie : chaque tablette ou ordinateur part d’ici. ¦ Chúng được giữ cùng gia phả của bạn: mỗi máy tính bảng hoặc máy tính đều bắt đầu từ đây. ¦ Disimpan bersama silsilahmu: setiap tablet atau komputer mulai dari sini.
+Intégrité SQLite : ¦ Tính toàn vẹn SQLite: ¦ Integritas SQLite:
+Jamais testé ¦ Chưa thử bao giờ ¦ Belum pernah diuji
+Je ne suis pas dans l’arbre ¦ Tôi không có trong cây ¦ Aku tidak ada di pohon
+La forme ¦ Hình dạng ¦ Bentuk
+La maison ¦ Ngôi nhà ¦ Rumah
+La personne de départ ¦ Người bắt đầu ¦ Orang awal
+La photo de chaque case : plus grande, on se reconnaît plus vite. ¦ Ảnh của mỗi ô: lớn hơn, nhận ra nhau nhanh hơn. ¦ Foto tiap kotak: lebih besar, lebih cepat dikenali.
+Largeur de la colonne ¦ Độ rộng cột ¦ Lebar kolom
+Le bouton principal ressort ¦ Nút chính nổi bật ¦ Tombol utama menonjol
+Le cadre du haut ¦ Khung trên cùng ¦ Bingkai atas
+Le carré de la fiche, partout ¦ Ô vuông của hồ sơ, ở mọi nơi ¦ Kotak profil, di mana-mana
+Le dessin de la colonne ¦ Kiểu vẽ của cột ¦ Gambar kolom
+Le gris peut se confondre avec une ligne choisie si l’écran est pâle. ¦ Màu xám có thể bị nhầm với dòng đang chọn nếu màn hình nhạt. ¦ Abu-abu bisa tertukar dengan baris terpilih jika layar pucat.
+Le meilleur des deux ¦ Tốt nhất của cả hai ¦ Terbaik dari keduanya
+Le mode simple ¦ Chế độ đơn giản ¦ Mode sederhana
+Le nom est moins grand ; un style plus « administratif ». ¦ Tên nhỏ hơn; kiểu “hành chính” hơn. ¦ Nama lebih kecil; gaya lebih “administratif”.
+Le plus discret ¦ Kín đáo nhất ¦ Paling samar
+Le plus épuré ¦ Gọn gàng nhất ¦ Paling bersih
+Le portrait ¦ Chân dung ¦ Potret
+Le rond ou carré qui montre une personne : ses couleurs, sa photo, ses initiales. ¦ Hình tròn hoặc vuông thể hiện một người: màu, ảnh, chữ cái đầu. ¦ Bulatan atau kotak yang menampilkan seseorang: warnanya, fotonya, inisialnya.
+Le rouge est peu visible (paraît sombre, se confond avec le vert). ¦ Màu đỏ khó thấy (trông tối, dễ nhầm với màu xanh lá). ¦ Merah sulit terlihat (tampak gelap, tertukar dengan hijau).
+Le rouge prévient avant de cliquer : on ne supprime pas une fiche par erreur. ¦ Màu đỏ cảnh báo trước khi nhấp: không xoá nhầm hồ sơ. ¦ Merah memberi peringatan sebelum diklik: profil tidak terhapus karena salah.
+Le site propose seulement des candidats. La fusion déplace les données vers la fiche gardée puis supprime l’autre fiche. ¦ Trang web chỉ đề xuất các ứng viên. Việc gộp chuyển dữ liệu sang hồ sơ được giữ rồi xoá hồ sơ kia. ¦ Situs hanya mengusulkan kandidat. Penggabungan memindahkan data ke profil yang disimpan lalu menghapus profil lainnya.
+Le sépia est plus doux pour les yeux fatigués ; le sombre n’éblouit pas le soir. ¦ Màu nâu đỏ dịu hơn cho mắt mỏi; màu tối không chói vào buổi tối. ¦ Sepia lebih nyaman untuk mata lelah; gelap tidak menyilaukan di malam hari.
+Le texte des boutons principaux ¦ Chữ trên các nút chính ¦ Teks tombol utama
+Lecteur d’écran ¦ Trình đọc màn hình ¦ Pembaca layar
+Les anniversaires ¦ Sinh nhật ¦ Ulang tahun
+Les blocs se détachent un peu moins du fond. ¦ Các khối ít tách khỏi nền hơn một chút. ¦ Blok sedikit kurang menonjol dari latar.
+Les couleurs de l’app, sans changement. ¦ Màu của ứng dụng, không thay đổi. ¦ Warna aplikasi, tanpa perubahan.
+Les dates seules (comme avant) ¦ Chỉ ngày (như trước) ¦ Hanya tanggal (seperti sebelumnya)
+Les deux ¦ Cả hai ¦ Keduanya
+Les fiches marquées « confidentielles » ne sont jamais montrées. ¦ Hồ sơ được đánh dấu “bảo mật” không bao giờ được hiển thị. ¦ Profil bertanda “rahasia” tidak pernah ditampilkan.
+Les gros boutons ¦ Các nút lớn ¦ Tombol besar
+Les modifications effectuées depuis ce site sont enregistrées ici. ¦ Những thay đổi thực hiện từ trang web này được lưu ở đây. ¦ Perubahan yang dibuat dari situs ini disimpan di sini.
+Les personnes ¦ Mọi người ¦ Orang-orang
+Les photos ¦ Các ảnh ¦ Foto-foto
+Les réglages du prototype que tu as aimé ¦ Thiết lập của bản mẫu mà bạn thích ¦ Pengaturan prototipe yang kamu suka
+Lettres d’origine ¦ Chữ gốc ¦ Huruf asli
+Lien « 🧩 Cette personne était… » ¦ Liên kết “🧩 Người này từng là…” ¦ Tautan “🧩 Orang ini dulunya…”
+Liens toujours soulignés ¦ Liên kết luôn gạch chân ¦ Tautan selalu bergaris bawah
+Lier au mode Artiste : masqué pour les personnes non artistes ¦ Liên kết với chế độ Nghệ sĩ: ẩn với những người không phải nghệ sĩ ¦ Hubungkan dengan mode Seniman: disembunyikan untuk orang yang bukan seniman
+Lieux et souvenirs ¦ Địa điểm và kỷ niệm ¦ Tempat dan kenangan
+Lire les légendes des photos dans le diaporama ¦ Đọc chú thích ảnh trong trình chiếu ¦ Bacakan keterangan foto di tayangan slide
+Lire l’histoire dès qu’on ouvre une fiche ¦ Đọc câu chuyện ngay khi mở hồ sơ ¦ Bacakan kisah begitu profil dibuka
+Liste aérée ¦ Danh sách thoáng ¦ Daftar lega
+Liste continue ¦ Danh sách liền ¦ Daftar bersambung
+Liste · 34 px ¦ Danh sách · 34 px ¦ Daftar · 34 px
+Listes et arbre ¦ Danh sách và cây ¦ Daftar dan pohon
+Longévité 🔴 ¦ Tuổi thọ 🔴 ¦ Umur panjang 🔴
+Longévité 🟠 ¦ Tuổi thọ 🟠 ¦ Umur panjang 🟠
+L’ambiance des archives ¦ Không khí của kho lưu trữ ¦ Suasana arsip
+L’app dit alors les noms, sans « ta mère » ni « ton petit-fils ». ¦ Khi đó ứng dụng nói tên, không nói “mẹ của bạn” hay “cháu trai của bạn”. ¦ Aplikasi lalu menyebut nama, tanpa “ibumu” atau “cucu laki-lakimu”.
+L’arbre ¦ Cây ¦ Pohon
+L’heure et la date ¦ Giờ và ngày ¦ Jam dan tanggal
+L’ombre fait « touche qu’on enfonce ». Elle suit le style général (franche, douce ou aucune). ¦ Bóng tạo cảm giác “phím được nhấn”. Nó theo kiểu chung (rõ, mềm hoặc không có). ¦ Bayangan membuat kesan “tuts yang ditekan”. Mengikuti gaya umum (tegas, lembut, atau tanpa).
+Masquer tout le cadre ¦ Ẩn cả khung ¦ Sembunyikan seluruh bingkai
+Mettre les espacements conseillés pour la dyslexie ¦ Dùng khoảng cách khuyên dùng cho chứng khó đọc ¦ Pakai jarak yang disarankan untuk disleksia
+Mode consultation (la famille regarde sans rien modifier) ¦ Chế độ chỉ xem (gia đình xem mà không sửa gì) ¦ Mode lihat saja (keluarga melihat tanpa mengubah apa pun)
+Modifier ce cadre ¦ Sửa ô này ¦ Ubah kotak ini
+Moins de boutons, moins d’hésitation : garde seulement ce que la personne aime regarder. Un cadre ajouté peut ouvrir directement la fiche d’une personne, ses photos ou un petit mot. ¦ Ít nút hơn, ít phân vân hơn: chỉ giữ những gì người đó thích xem. Một ô được thêm có thể mở thẳng hồ sơ của một người, ảnh của họ hoặc một lời nhắn. ¦ Lebih sedikit tombol, lebih sedikit ragu: simpan hanya yang disukai orang itu. Kotak tambahan bisa langsung membuka profil seseorang, fotonya, atau sebuah pesan singkat.
+Moins de choses visibles d’un coup ; plus de défilement. ¦ Ít thứ hiện cùng lúc hơn; phải cuộn nhiều hơn. ¦ Lebih sedikit yang terlihat sekaligus; lebih banyak gulir.
+Moins de lignes visibles ; plus de défilement. ¦ Ít dòng hiện hơn; phải cuộn nhiều hơn. ¦ Lebih sedikit baris terlihat; lebih banyak gulir.
+Moins de place pour les boutons ; plus décoratif que pratique. ¦ Ít chỗ cho nút hơn; trang trí nhiều hơn thực dụng. ¦ Lebih sedikit ruang untuk tombol; lebih dekoratif daripada praktis.
+Montre l’écran comme le voit une personne daltonienne, pour vérifier qu’un document reste lisible avant de l’envoyer ou de l’imprimer. Rien n’est modifié. ¦ Hiển thị màn hình như người mù màu nhìn thấy, để kiểm tra một tài liệu vẫn dễ đọc trước khi gửi hoặc in. Không có gì bị thay đổi. ¦ Menampilkan layar seperti dilihat orang buta warna, untuk memeriksa dokumen tetap terbaca sebelum dikirim atau dicetak. Tidak ada yang diubah.
+Montrer la photo de la fiche quand elle existe ¦ Hiện ảnh của hồ sơ khi có ¦ Tampilkan foto profil jika ada
+Montrer les boutons « 🔊 Écouter » ¦ Hiện các nút “🔊 Nghe” ¦ Tampilkan tombol “🔊 Dengarkan”
+Médias et transcriptions ¦ Tư liệu và bản chép ¦ Media dan transkripsi
+Ne range jamais le fichier de la base lui-même dans iCloud ou Dropbox pour l’ouvrir des deux côtés : l’app le refuse (verrou), car il pourrait s’abîmer. ¦ Đừng bao giờ đặt chính tệp cơ sở dữ liệu vào iCloud hay Dropbox để mở ở cả hai bên: ứng dụng sẽ từ chối (khoá), vì nó có thể bị hỏng. ¦ Jangan pernah menaruh berkas basis data itu sendiri di iCloud atau Dropbox untuk dibuka di kedua sisi: aplikasi menolaknya (kunci), karena berkas bisa rusak.
+Net et régulier ¦ Rõ nét và đều đặn ¦ Tegas dan rapi
+Norvégien ¦ Tiếng Na Uy ¦ Bahasa Norwegia
+Nouveau GEDCOM ¦ GEDCOM mới ¦ GEDCOM baru
+Nouvelle étiquette ¦ Nhãn mới ¦ Label baru
+Numéros ¦ Số ¦ Nomor
+Numéros qui se suivent (01, 02, 03…), les mêmes onglets partout (icône + nom), « Liste | Fiches » dans la barre au-dessus de la liste ¦ Số liên tiếp (01, 02, 03…), cùng các thẻ ở mọi nơi (biểu tượng + tên), “Danh sách | Thẻ” trên thanh phía trên danh sách ¦ Nomor berurutan (01, 02, 03…), tab yang sama di mana-mana (ikon + nama), “Daftar | Kartu” di bilah atas daftar
+N’importe quel autre lieu peut être saisi librement. ¦ Mọi địa điểm khác đều có thể nhập tự do. ¦ Tempat lain apa pun bisa diketik bebas.
+On suit la ligne sans se tromper ¦ Theo dòng mà không nhầm ¦ Mengikuti baris tanpa salah
+Onglets du haut ¦ Thẻ ở trên ¦ Tab atas
+Ordre des pages des Réglages ¦ Thứ tự các trang Cài đặt ¦ Urutan halaman Pengaturan
+Ordre et visibilité des boutons ¦ Thứ tự và hiển thị các nút ¦ Urutan dan visibilitas tombol
+Ordre et visibilité des éléments de l’en-tête ¦ Thứ tự và hiển thị các thành phần của phần đầu ¦ Urutan dan visibilitas elemen kepala
+Par défaut ¦ Mặc định ¦ Bawaan
+Par ligne ¦ Mỗi dòng ¦ Per baris
+Pareil que l’app ¦ Giống ứng dụng ¦ Sama dengan aplikasi
+Parle au lieu de taper : un petit 🎤 apparaît dans le champ texte où tu écris. Clique dessus (ou ¦ Nói thay vì gõ: một 🎤 nhỏ xuất hiện trong ô văn bản bạn đang viết. Nhấp vào đó (hoặc ¦ Bicara alih-alih mengetik: 🎤 kecil muncul di kolom teks tempat kamu menulis. Klik (atau
+Pas de numéros ¦ Không có số ¦ Tanpa nomor
+Pas vérifiée ¦ Chưa kiểm tra ¦ Belum diperiksa
+Pastille sous le nom ¦ Chấm màu dưới tên ¦ Titik di bawah nama
+Persan (hégirien solaire) ¦ Ba Tư (Hijri mặt trời) ¦ Persia (Hijriah Syamsiah)
+Personne qui regarde ¦ Người đang xem ¦ Orang yang melihat
+Personnes identifiées ¦ Người đã nhận diện ¦ Orang yang dikenali
+Personnes vivantes ¦ Người còn sống ¦ Orang yang masih hidup
+Petit écran ¦ Màn hình nhỏ ¦ Layar kecil
+Peut se confondre avec un lien ; demande un peu d’habitude. ¦ Có thể nhầm với liên kết; cần làm quen một chút. ¦ Bisa tertukar dengan tautan; perlu sedikit terbiasa.
+Photo de la personne ¦ Ảnh của người ¦ Foto orang itu
+Photo des cases de l’arbre ¦ Ảnh trong các ô của cây ¦ Foto di kotak pohon
+Photos retirées ¦ Ảnh đã gỡ ra ¦ Foto yang dilepas
+Pictogrammes des tableaux ¦ Biểu tượng của bảng ¦ Piktogram tabel
+Place de ＋ Nouvelle observation ¦ Vị trí của ＋ Quan sát mới ¦ Posisi ＋ Pengamatan baru
+Plus calme pour les yeux ¦ Dịu mắt hơn ¦ Lebih tenang untuk mata
+Plus discret que « Comme avant » : les blocs se détachent un peu moins. ¦ Kín đáo hơn “Như trước”: các khối ít tách nền hơn một chút. ¦ Lebih samar dari “Seperti sebelumnya”: blok sedikit kurang menonjol.
+Plus d’actions (menu ⋯) ¦ Thao tác khác (menu ⋯) ¦ Tindakan lain (menu ⋯)
+Plus d’espace : on touche moins souvent le bouton d’à côté. ¦ Nhiều khoảng trống hơn: ít khi chạm nhầm nút bên cạnh. ¦ Lebih banyak ruang: lebih jarang menyentuh tombol di sebelahnya.
+Plus grandes, elles se voient de loin ; plus petites, les barres d’outils prennent moins de place. ¦ Lớn hơn thì nhìn thấy từ xa; nhỏ hơn thì thanh công cụ chiếm ít chỗ. ¦ Lebih besar, terlihat dari jauh; lebih kecil, bilah alat memakan lebih sedikit tempat.
+Plus haut, la photo se voit mieux ; plus bas, la fiche commence plus tôt. Seulement pour le bandeau photo. ¦ Cao hơn thì ảnh dễ thấy hơn; thấp hơn thì hồ sơ bắt đầu sớm hơn. Chỉ cho dải ảnh. ¦ Lebih tinggi, foto lebih terlihat; lebih rendah, profil mulai lebih awal. Hanya untuk spanduk foto.
+Police des cadres ¦ Phông chữ của ô ¦ Huruf kotak
+Portée ¦ Phạm vi ¦ Cakupan
+Pour la dyslexie : choisis celle qui te va ¦ Cho chứng khó đọc: hãy chọn cái hợp với bạn ¦ Untuk disleksia: pilih yang cocok untukmu
+Pour quitter ¦ Để thoát ¦ Untuk keluar
+Pour tout le monde ¦ Cho mọi người ¦ Untuk semua orang
+Pratique pour apprendre l’app : plus besoin de passer la souris pour savoir ce que fait chaque bouton. Prend un peu plus de place. ¦ Tiện để học ứng dụng: không cần rê chuột để biết mỗi nút làm gì. Chiếm thêm một chút chỗ. ¦ Praktis untuk mempelajari aplikasi: tak perlu menyorot untuk tahu fungsi tiap tombol. Memakan sedikit lebih banyak tempat.
+Prend de la hauteur ; sans photo, le bandeau prend la couleur principale (Apparence). ¦ Chiếm chiều cao; không có ảnh thì dải đầu lấy màu chính (Giao diện). ¦ Memakan tinggi; tanpa foto, spanduk memakai warna utama (Tampilan).
+Proposer dans le menu ¦ Đề xuất trong menu ¦ Tawarkan di menu
+Prénom + nom (JM) ¦ Tên + họ (JM) ¦ Nama depan + nama keluarga (JM)
+Prénom seulement ¦ Chỉ tên ¦ Nama depan saja
+Présentation (Keynote) ¦ Trình chiếu (Keynote) ¦ Presentasi (Keynote)
+Quand il y a beaucoup de boutons, on ne voit plus lequel est important. ¦ Khi có quá nhiều nút, không còn thấy nút nào quan trọng. ¦ Jika tombolnya banyak, tak terlihat lagi mana yang penting.
+Quand personne ne touche, lancer le diaporama ¦ Khi không ai chạm vào, bắt đầu trình chiếu ¦ Saat tidak ada yang menyentuh, mulai tayangan slide
+Quand plusieurs personnes se servent de la même tablette. ¦ Khi nhiều người dùng chung một máy tính bảng. ¦ Saat beberapa orang memakai tablet yang sama.
+Quelqu’un d’autre de la famille ¦ Một người khác trong gia đình ¦ Anggota keluarga lain
+Qui est-ce ? ¦ Đây là ai? ¦ Siapa ini?
+Qui regarde ¦ Ai đang xem ¦ Siapa yang melihat
+Qui regarde ? ¦ Ai đang xem? ¦ Siapa yang melihat?
+Qui regarde l’arbre ? ¦ Ai đang xem cây? ¦ Siapa yang melihat pohon?
+Qui se suivent ¦ Liên tiếp ¦ Berurutan
+Quitter le mode simple ¦ Thoát chế độ đơn giản ¦ Keluar dari mode sederhana
+Rattaché à ¦ Liên kết với ¦ Terhubung ke
+Recherche et enquêtes ¦ Nghiên cứu và tìm hiểu ¦ Riset dan penelusuran
+Reculer le morceau → ¦ Lùi đoạn nhạc → ¦ Mundurkan potongan →
+Remettre un réglage exporté (fichier .json) ¦ Khôi phục một thiết lập đã xuất (tệp .json) ¦ Pulihkan pengaturan yang diekspor (berkas .json)
+Ressemblance des doublons ¦ Độ giống của bản trùng ¦ Kemiripan duplikat
+Rien ne bouge ¦ Không có gì chuyển động ¦ Tidak ada yang bergerak
+Récit d’une vie (diaporama tout fait) ¦ Câu chuyện một đời người (trình chiếu làm sẵn) ¦ Kisah hidup (tayangan slide siap pakai)
+Réduire les mouvements ¦ Giảm chuyển động ¦ Kurangi gerakan
+Réglages de base ¦ Thiết lập cơ bản ¦ Pengaturan dasar
+Réglages et export ¦ Thiết lập và xuất ¦ Pengaturan dan ekspor
+Républicain ¦ Lịch Cộng hoà ¦ Republik
+Sans couleur, il faut parfois une seconde de plus pour les reconnaître. ¦ Không có màu, đôi khi cần thêm một giây để nhận ra. ¦ Tanpa warna, kadang perlu sedetik lebih lama untuk mengenalinya.
+Se lit comme un acte ¦ Đọc như một giấy tờ ¦ Terbaca seperti akta
+Ses photos, ceux qui y sont nés ¦ Ảnh của nơi đó, những người sinh ra ở đó ¦ Fotonya, orang-orang yang lahir di sana
+Signatures identifiées ¦ Chữ ký đã nhận diện ¦ Tanda tangan yang dikenali
+Son rapide ¦ Âm thanh nhanh ¦ Suara cepat
+Sortie et démarrage ¦ Thoát và khởi động ¦ Keluar dan mulai
+Sous la souris ¦ Dưới con trỏ chuột ¦ Di bawah mouse
+Sous le nom ¦ Dưới tên ¦ Di bawah nama
+Sous À vérifier, Hors généalogie, Artiste. ¦ Dưới Cần kiểm tra, Ngoài gia phả, Nghệ sĩ. ¦ Di bawah Perlu diperiksa, Di luar silsilah, Seniman.
+Sous-titres toujours affichés ¦ Luôn hiện phụ đề ¦ Teks film selalu ditampilkan
+Studio son ¦ Phòng thu âm thanh ¦ Studio suara
+Style des entrées ¦ Kiểu mục ¦ Gaya entri
+Style des fiches ¦ Kiểu hồ sơ ¦ Gaya profil
+Style « acte ancien » ¦ Kiểu “giấy tờ cổ” ¦ Gaya “akta kuno”
+Style « carte d’identité » ¦ Kiểu “chứng minh thư” ¦ Gaya “kartu identitas”
+Suit l’accessibilité de l’app ¦ Theo trợ năng của ứng dụng ¦ Mengikuti aksesibilitas aplikasi
+Sur 1 colonne ¦ Trên 1 cột ¦ Dalam 1 kolom
+Sur 2 colonnes ¦ Trên 2 cột ¦ Dalam 2 kolom
+Sur 2 lignes (défaut) ¦ Trên 2 dòng (mặc định) ¦ Dalam 2 baris (bawaan)
+Sur cet appareil ¦ Trên thiết bị này ¦ Di perangkat ini
+Sur l’autre ordinateur : ouvre ¦ Trên máy tính kia: hãy mở ¦ Di komputer lain: buka
+Sur un grand écran, l’œil peut sauter de ligne. ¦ Trên màn hình lớn, mắt có thể nhảy dòng. ¦ Di layar besar, mata bisa melompati baris.
+Sur un petit portable, il faut souvent faire défiler. ¦ Trên máy xách tay nhỏ, thường phải cuộn. ¦ Di laptop kecil, sering harus menggulir.
+Sur un téléphone, la barre du haut est repliée : ces boutons n’y sont pas montrés. ¦ Trên điện thoại, thanh trên cùng được thu gọn: các nút này không hiện ở đó. ¦ Di ponsel, bilah atas dilipat: tombol-tombol ini tidak ditampilkan di sana.
+Suédois ¦ Tiếng Thuỵ Điển ¦ Bahasa Swedia
+Sépia doux ¦ Nâu đỏ dịu ¦ Sepia lembut
+Ta version ¦ Phiên bản của bạn ¦ Versimu
+Taille des entrées ¦ Cỡ mục ¦ Ukuran entri
+Taille des icônes ¦ Cỡ biểu tượng ¦ Ukuran ikon
+Taille des initiales ¦ Cỡ chữ cái đầu ¦ Ukuran inisial
+Taille du texte ¦ Cỡ chữ ¦ Ukuran teks
+Taille du titre des cadres ¦ Cỡ tiêu đề của ô ¦ Ukuran judul kotak
+Tchèque ¦ Tiếng Séc ¦ Bahasa Ceko
+Tes réglages d’accessibilité valent aussi ici ¦ Thiết lập trợ năng của bạn cũng áp dụng ở đây ¦ Pengaturan aksesibilitasmu juga berlaku di sini
+Tester cette sauvegarde ¦ Thử bản sao lưu này ¦ Uji cadangan ini
+Texte et traits ¦ Chữ và nét ¦ Teks dan garis
+Thème et couleurs → Taille typographique ¦ Chủ đề và màu sắc → Cỡ chữ ¦ Tema dan warna → Ukuran huruf
+Ton prénom ¦ Tên của bạn ¦ Nama depanmu
+Touche O pour une nouvelle observation ¦ Phím O để thêm quan sát mới ¦ Tombol O untuk pengamatan baru
+Touche de l’outil ¦ Phím của công cụ ¦ Tombol alat
+Touche ta photo. L’app dira ensuite « ta mère », « ton petit-fils »… ¦ Hãy chạm vào ảnh của bạn. Sau đó ứng dụng sẽ nói “mẹ của bạn”, “cháu trai của bạn”… ¦ Sentuh fotomu. Lalu aplikasi akan bilang “ibumu”, “cucu laki-lakimu”…
+Touche un gros bouton pour commencer. ¦ Hãy chạm vào một nút lớn để bắt đầu. ¦ Sentuh salah satu tombol besar untuk mulai.
+Touches déjà prévues dans cet outil ¦ Các phím đã có sẵn trong công cụ này ¦ Tombol yang sudah ada di alat ini
+Toujours proposée (la forme de départ) ¦ Luôn được đề xuất (hình ban đầu) ¦ Selalu ditawarkan (bentuk awal)
+Tous, dans l’ordre d’origine ¦ Tất cả, theo thứ tự gốc ¦ Semua, sesuai urutan asli
+Tout désélectionner ¦ Bỏ chọn tất cả ¦ Batalkan semua pilihan
+Tout d’un coup d’œil ¦ Tất cả trong một cái nhìn ¦ Semua dalam sekali lihat
+Tout le monde ¦ Mọi người ¦ Semua orang
+Tout seul ¦ Tự động ¦ Otomatis
+Tout sélectionner ¦ Chọn tất cả ¦ Pilih semua
+Toute l’app ¦ Toàn ứng dụng ¦ Seluruh aplikasi
+Toutes les ¦ Mỗi ¦ Setiap
+Toutes les … heures ¦ Mỗi … giờ ¦ Setiap … jam
+Traits entre les lignes ¦ Đường kẻ giữa các dòng ¦ Garis antarbaris
+Trois par ligne ¦ Ba mỗi dòng ¦ Tiga per baris
+Très grande (56 px) ¦ Rất lớn (56 px) ¦ Sangat besar (56 px)
+Très lisible ¦ Rất dễ đọc ¦ Sangat mudah dibaca
+Très petite (30 px) ¦ Rất nhỏ (30 px) ¦ Sangat kecil (30 px)
+Un album ¦ Một album ¦ Sebuah album
+Un appui long ne se fait pas par hasard : on ne sort pas par erreur. ¦ Nhấn giữ lâu không xảy ra tình cờ: không thoát nhầm. ¦ Tekan lama tidak terjadi kebetulan: tidak keluar karena salah.
+Un bord noir va avec les blocs de l’app (tous ont un trait noir de 2 px) ; sans bord, c’est plus léger. Sur les plus petits portraits, le bord s’affine tout seul. ¦ Viền đen hợp với các khối của ứng dụng (tất cả đều có nét đen 2 px); không viền thì nhẹ hơn. Ở chân dung nhỏ nhất, viền tự mảnh đi. ¦ Tepi hitam cocok dengan blok aplikasi (semuanya bergaris hitam 2 px); tanpa tepi, lebih ringan. Pada potret terkecil, tepinya menipis sendiri.
+Un bouton carré 🧩, dans la colonne des boutons ¦ Một nút vuông 🧩, trong cột các nút ¦ Tombol persegi 🧩, di kolom tombol
+Un bouton qui ne répond pas, un écran bizarre, un message d’erreur ? Décris-le : un rapport technique (sans aucune donnée de ta généalogie) est préparé, tu le relis, puis tu l’envoies par GitHub ou par e-mail. ¦ Một nút không phản hồi, một màn hình lạ, một thông báo lỗi? Hãy mô tả nó: một báo cáo kỹ thuật (không có dữ liệu gia phả nào) được chuẩn bị, bạn đọc lại, rồi gửi qua GitHub hoặc e-mail. ¦ Tombol yang tidak merespons, layar aneh, pesan kesalahan? Jelaskan: laporan teknis (tanpa data silsilahmu sama sekali) disiapkan, kamu baca ulang, lalu kirim lewat GitHub atau e-mail.
+Un doigt qui tremble touche facilement un bouton de 72 px ou plus (64 px au moins). ¦ Ngón tay run vẫn dễ chạm vào nút từ 72 px trở lên (ít nhất 64 px). ¦ Jari yang gemetar mudah menyentuh tombol 72 px atau lebih (minimal 64 px).
+Un film de famille ¦ Một đoạn phim gia đình ¦ Film keluarga
+Un lieu de famille ¦ Một địa điểm của gia đình ¦ Tempat keluarga
+Un mot de la famille ¦ Một lời nhắn của gia đình ¦ Pesan dari keluarga
+Un petit jeu avec les portraits ¦ Một trò chơi nhỏ với chân dung ¦ Permainan kecil dengan potret
+Un petit portrait au début de chaque ligne ¦ Một chân dung nhỏ ở đầu mỗi dòng ¦ Potret kecil di awal tiap baris
+Un peu grande (46 px) ¦ Hơi lớn (46 px) ¦ Agak besar (46 px)
+Un peu moins « cliquable » au premier regard. ¦ Thoạt nhìn hơi kém “bấm được”. ¦ Sekilas tampak kurang “bisa diklik”.
+Un peu petite (38 px) ¦ Hơi nhỏ (38 px) ¦ Agak kecil (38 px)
+Un peu « bureau » : moins de caractère que les autres. ¦ Hơi “văn phòng”: ít cá tính hơn các kiểu khác. ¦ Agak “kantoran”: kurang berkarakter dibanding yang lain.
+Un son, une chanson ¦ Một âm thanh, một bài hát ¦ Suara, lagu
+Un trait épais ressemble aux traits noirs de l’app ; un trait fin fait plus élégant. Seulement pour les icônes au trait. ¦ Nét dày giống các nét đen của ứng dụng; nét mảnh trông thanh lịch hơn. Chỉ cho biểu tượng nét vẽ. ¦ Garis tebal mirip garis hitam aplikasi; garis tipis lebih elegan. Hanya untuk ikon bergaris.
+Une copie de ta généalogie, faite toute seule, vérifiée, rangée dans le dossier de ton choix. ¦ Một bản sao gia phả của bạn, tự làm, đã kiểm tra, cất trong thư mục bạn chọn. ¦ Salinan silsilahmu, dibuat otomatis, diperiksa, disimpan di folder pilihanmu.
+Une copie quand tu quittes l’app (ou fermes l’onglet), seulement si quelque chose a changé. ¦ Một bản sao khi bạn thoát ứng dụng (hoặc đóng thẻ), chỉ khi có gì đó thay đổi. ¦ Salinan saat kamu keluar dari aplikasi (atau menutup tab), hanya jika ada yang berubah.
+Une grande colonne ¦ Một cột lớn ¦ Satu kolom besar
+Une grande partie des formes des tableaux (animaux, métiers, maison, transports, météo, santé…) vient de ¦ Phần lớn các hình của bảng (con vật, nghề nghiệp, nhà, phương tiện, thời tiết, sức khoẻ…) lấy từ ¦ Sebagian besar bentuk tabel (hewan, pekerjaan, rumah, transportasi, cuaca, kesehatan…) berasal dari
+Une ombre sous les boutons ¦ Bóng dưới các nút ¦ Bayangan di bawah tombol
+Une photo ¦ Một ảnh ¦ Sebuah foto
+Une photo rend la fiche vivante. Sans elle, les initiales prennent sa place (le bandeau prend la couleur principale de l’Apparence). ¦ Ảnh làm hồ sơ sống động. Không có ảnh, chữ cái đầu sẽ thế chỗ (dải đầu lấy màu chính của Giao diện). ¦ Foto membuat profil hidup. Tanpa foto, inisial menggantikannya (spanduk memakai warna utama Tampilan).
+Une phrase écoutée se comprend même quand on lit mal. ¦ Một câu được nghe thì dễ hiểu ngay cả khi đọc kém. ¦ Kalimat yang didengar tetap dipahami meski sulit membaca.
+Une seule couleur pour tous (comme la fiche) ¦ Một màu cho tất cả (như hồ sơ) ¦ Satu warna untuk semua (seperti profil)
+Une seule lettre, celle du nom (M) ¦ Chỉ một chữ, chữ của họ (M) ¦ Satu huruf saja, dari nama keluarga (M)
+Utile quand un petit-enfant joue aussi avec la tablette. Ce n’est pas une vraie protection : il évite seulement de sortir par erreur. ¦ Hữu ích khi cháu nhỏ cũng chơi với máy tính bảng. Đây không phải bảo vệ thật sự: nó chỉ tránh thoát nhầm. ¦ Berguna jika cucu kecil juga bermain dengan tablet. Ini bukan perlindungan sungguhan: hanya mencegah keluar karena salah.
+Utiliser la personne affichée ¦ Dùng người đang hiển thị ¦ Pakai orang yang ditampilkan
+Verrouiller / déverrouiller ¦ Khoá / mở khoá ¦ Kunci / buka kunci
+Vert affaibli (le plus courant de tous). ¦ Màu xanh lá bị nhạt (phổ biến nhất). ¦ Hijau melemah (paling umum).
+Vitesse de la voix ¦ Tốc độ giọng đọc ¦ Kecepatan suara
+Voir l’aperçu ¦ Xem trước ¦ Lihat pratinjau
+Voix française de l’appareil ¦ Giọng tiếng Pháp của thiết bị ¦ Suara bahasa Prancis perangkat
+Vu la dernière fois (fiches d’animaux) ¦ Lần cuối được thấy (hồ sơ con vật) ¦ Terakhir terlihat (profil hewan)
+Zoom de départ ¦ Thu phóng ban đầu ¦ Zoom awal
+arrête la lecture. ¦ dừng đọc. ¦ menghentikan pembacaan.
+au-delà de ¦ vượt quá ¦ lebih dari
+carré photo, grand nom ¦ ô ảnh vuông, tên lớn ¦ foto persegi, nama besar
+champs rangés, photo d’identité ¦ các trường xếp gọn, ảnh thẻ ¦ kolom tertata, pas foto
+chaque ligne dans son cadre ¦ mỗi dòng trong khung riêng ¦ tiap baris dalam bingkainya
+chaque liste garde le sien ¦ mỗi danh sách giữ cái riêng ¦ tiap daftar menyimpan miliknya
+chaque outil le sien ¦ mỗi công cụ một cái riêng ¦ tiap alat punya sendiri
+coins arrondis, ombres légères ¦ góc bo tròn, bóng nhẹ ¦ sudut membulat, bayangan ringan
+dans LCNDA (écran de démarrage → Importer un fichier, ou une nouvelle généalogie vide), puis ici même, choisis le même dossier. ¦ trong LCNDA (màn hình khởi động → Nhập một tệp, hoặc một gia phả mới trống), rồi ngay tại đây, hãy chọn cùng thư mục đó. ¦ di LCNDA (layar awal → Impor berkas, atau silsilah baru yang kosong), lalu di sini juga, pilih folder yang sama.
+de départ ¦ ban đầu ¦ awal
+dossier partagé ¦ thư mục dùng chung ¦ folder bersama
+du nom ¦ của họ ¦ dari nama keluarga
+décédé ¦ đã mất ¦ meninggal
+décédée ¦ đã mất ¦ meninggal
+ex. Dimensions, Technique, Lieu de conservation ¦ ví dụ Kích thước, Kỹ thuật, Nơi lưu giữ ¦ mis. Dimensi, Teknik, Tempat penyimpanan
+icônes fines, une seule couleur ¦ biểu tượng mảnh, một màu ¦ ikon tipis, satu warna
+impossible au-delà de ¦ không thể nếu vượt quá ¦ mustahil jika lebih dari
+juste au-dessus de la liste ¦ ngay trên danh sách ¦ tepat di atas daftar
+la Densité ne s’y ajoute pas ¦ Mật độ không cộng thêm vào đó ¦ Kepadatan tidak ditambahkan di sana
+la liste des projets ¦ danh sách dự án ¦ daftar proyek
+le numéro dans un carré ¦ số trong một ô vuông ¦ nomor dalam kotak
+là où il était ¦ ở chỗ cũ ¦ di tempat semula
+l’entrée choisie dépasse ¦ mục đã chọn vượt ra ngoài ¦ entri terpilih melebihi
+on passe par le bloc « 👁 Observations » ¦ đi qua khối “👁 Quan sát” ¦ lewat blok “👁 Pengamatan”
+papier, phrase d’état civil ¦ giấy, câu văn hộ tịch ¦ kertas, kalimat catatan sipil
+par défaut ¦ mặc định ¦ bawaan
+plus d’espace ¦ thêm khoảng trống ¦ lebih banyak ruang
+plus d’espace partout ¦ thêm khoảng trống ở mọi nơi ¦ lebih banyak ruang di mana-mana
+règle tout d’un coup ; tu peux ensuite changer chaque ligne (« retouché » s’affiche). ¦ chỉnh mọi thứ cùng lúc; sau đó bạn có thể đổi từng dòng (“đã chỉnh” sẽ hiện ra). ¦ mengatur semuanya sekaligus; lalu kamu bisa mengubah tiap baris (“diubah” akan muncul).
+sans icône ¦ không biểu tượng ¦ tanpa ikon
+se règle dans ¦ được chỉnh trong ¦ diatur di
+serré, plus de lignes ¦ chật, nhiều dòng hơn ¦ rapat, lebih banyak baris
+sous l’en-tête de la fiche, replié ¦ dưới phần đầu hồ sơ, thu gọn ¦ di bawah kepala profil, dilipat
+sur une ligne ¦ trên một dòng ¦ dalam satu baris
+taille du texte ¦ cỡ chữ ¦ ukuran teks
+tout dans un cadre ¦ tất cả trong một khung ¦ semua dalam satu bingkai
+tout reste comme avant ¦ mọi thứ như trước ¦ semua tetap seperti sebelumnya
+trait pour agir, émoji pour les rubriques ¦ nét vẽ để thao tác, emoji cho các mục ¦ garis untuk bertindak, emoji untuk rubrik
+traits fins, grain du papier ¦ nét mảnh, vân giấy ¦ garis tipis, tekstur kertas
+traits épais, ombres franches ¦ nét dày, bóng rõ ¦ garis tebal, bayangan tegas
+un seul cadre, lignes fines ¦ một khung duy nhất, dòng mảnh ¦ satu bingkai, garis tipis
+un trait fin, fond transparent ¦ một nét mảnh, nền trong suốt ¦ garis tipis, latar transparan
+« Calendrier de cette date » ¦ “Lịch của ngày này” ¦ “Kalender tanggal ini”
+« Liste | Fiches » ¦ “Danh sách | Thẻ” ¦ “Daftar | Kartu”
+« Retirer » cache la photo du mode simple seulement : elle reste dans tes médias. ¦ “Gỡ” chỉ ẩn ảnh khỏi chế độ đơn giản: ảnh vẫn ở trong tư liệu của bạn. ¦ “Lepas” hanya menyembunyikan foto dari mode sederhana: foto tetap ada di mediamu.
+« ＋ Nouvelle observation · vu il y a 2 j » ¦ “＋ Quan sát mới · thấy 2 ngày trước” ¦ “＋ Pengamatan baru · terlihat 2 hr lalu”
+À chaque ouverture ¦ Mỗi lần mở ¦ Setiap kali dibuka
+À droite, les unes sous les autres (comme avant) ¦ Bên phải, xếp chồng lên nhau (như trước) ¦ Di kanan, bertumpuk ke bawah (seperti sebelumnya)
+À vérifier, branche maternelle, acte illisible… ¦ Cần kiểm tra, nhánh bên ngoại, giấy tờ khó đọc… ¦ Perlu diperiksa, cabang ibu, akta tak terbaca…
+À écouter ¦ Để nghe ¦ Untuk didengar
+Âge de la mère 🔴 ¦ Tuổi của mẹ 🔴 ¦ Umur ibu 🔴
+Âge de la mère 🟠 ¦ Tuổi của mẹ 🟠 ¦ Umur ibu 🟠
+Âge du père 🔴 ¦ Tuổi của cha 🔴 ¦ Umur ayah 🔴
+Âge du père 🟠 ¦ Tuổi của cha 🟠 ¦ Umur ayah 🟠
+Âge minimum au mariage ¦ Tuổi kết hôn tối thiểu ¦ Umur minimal menikah
+Ère ¦ Kỷ nguyên ¦ Era
+Ère d’Espagne ¦ Kỷ nguyên Tây Ban Nha ¦ Era Spanyol
+Écart entre deux naissances ¦ Khoảng cách giữa hai lần sinh ¦ Jarak antara dua kelahiran
+Écouter ¦ Nghe ¦ Dengarkan
+Édition ¦ Chỉnh sửa ¦ Edit
+Émojis ¦ Emoji ¦ Emoji
+Énorme (62 px) ¦ Khổng lồ (62 px) ¦ Raksasa (62 px)
+Épaisseur des traits ¦ Độ dày nét ¦ Ketebalan garis
+Épaisseur du trait ¦ Độ dày nét ¦ Ketebalan garis
+Éteint : seulement la pastille « Vu hier ». ¦ Tắt: chỉ còn chấm màu “Thấy hôm qua”. ¦ Mati: hanya titik “Terlihat kemarin”.
+Éthiopien ¦ Lịch Ethiopia ¦ Etiopia
+Étoile ¦ Ngôi sao ¦ Bintang
+à vérifier au-delà de ¦ cần kiểm tra nếu vượt quá ¦ perlu diperiksa jika lebih dari
+← Avancer le morceau ¦ ← Tiến đoạn nhạc ¦ ← Majukan potongan
+↗ Voir les versions publiées ¦ ↗ Xem các phiên bản đã phát hành ¦ ↗ Lihat versi yang dirilis
+↺ Remettre seulement les groupes ¦ ↺ Chỉ đặt lại các nhóm ¦ ↺ Kembalikan grup saja
+↻ Relancer le contrôle ¦ ↻ Chạy lại kiểm tra ¦ ↻ Jalankan ulang pemeriksaan
+▶ Ouvrir le mode simple ¦ ▶ Mở chế độ đơn giản ¦ ▶ Buka mode sederhana
+♿ Voir les réglages de toute l’app ¦ ♿ Xem cài đặt của toàn ứng dụng ¦ ♿ Lihat pengaturan seluruh aplikasi
+⤓ Exporter ce réglage ¦ ⤓ Xuất thiết lập này ¦ ⤓ Ekspor pengaturan ini
+＋ Créer une forme… ¦ ＋ Tạo một hình… ¦ ＋ Buat bentuk…
+＋ Nouvelle branche ¦ ＋ Nhánh mới ¦ ＋ Cabang baru
+＋ Nouvelle forme… ¦ ＋ Hình mới… ¦ ＋ Bentuk baru…
+＋ Nouvelle observation (fiches d’animaux) ¦ ＋ Quan sát mới (hồ sơ con vật) ¦ ＋ Pengamatan baru (profil hewan)
+＋ Nouvelle étiquette ¦ ＋ Nhãn mới ¦ ＋ Label baru
+🌳 L’arbre ¦ 🌳 Cây ¦ 🌳 Pohon
+🎂 Âges ¦ 🎂 Tuổi ¦ 🎂 Umur
+🎤 Dictée vocale ¦ 🎤 Đọc chính tả ¦ 🎤 Dikte suara
+🎯 Élément choisi ¦ 🎯 Mục đã chọn ¦ 🎯 Elemen terpilih
+👁 Aperçu : le même réglage partout ¦ 👁 Xem trước: cùng một thiết lập ở mọi nơi ¦ 👁 Pratinjau: pengaturan sama di mana-mana
+👁 Aperçu vivant ¦ 👁 Xem trước trực tiếp ¦ 👁 Pratinjau langsung
+👁 Essayer ici ¦ 👁 Thử ở đây ¦ 👁 Coba di sini
+👁＋ Observation · 🩺＋ Santé · 📍 Trajet GPS · 🔖 Marque ¦ 👁＋ Quan sát · 🩺＋ Sức khoẻ · 📍 Hành trình GPS · 🔖 Dấu ¦ 👁＋ Pengamatan · 🩺＋ Kesehatan · 📍 Rute GPS · 🔖 Tanda
+👤 Sur la fiche ¦ 👤 Trên hồ sơ ¦ 👤 Di profil
+👥 Les personnes ¦ 👥 Mọi người ¦ 👥 Orang-orang
+📊 Moyennes de la famille ¦ 📊 Trung bình của gia đình ¦ 📊 Rata-rata keluarga
+📜 Sépia ¦ 📜 Nâu đỏ ¦ 📜 Sepia
+📦 Quoi ¦ 📦 Cái gì ¦ 📦 Apa
+📷 Les photos ¦ 📷 Ảnh ¦ 📷 Foto-foto
+🔗 Relier ce dossier ¦ 🔗 Liên kết thư mục này ¦ 🔗 Hubungkan folder ini
+🔴 moins de ¦ 🔴 dưới ¦ 🔴 kurang dari
+🔴 naissance plus tard que ¦ 🔴 sinh muộn hơn ¦ 🔴 lahir lebih lambat dari
+🔷 Formes des avatars ¦ 🔷 Hình ảnh đại diện ¦ 🔷 Bentuk avatar
+🖨 Imprimer la liste ¦ 🖨 In danh sách ¦ 🖨 Cetak daftar
+🗂 Les copies ¦ 🗂 Các bản sao ¦ 🗂 Salinan
+🗑 Enlever l’élément choisi ¦ 🗑 Bỏ mục đã chọn ¦ 🗑 Hilangkan elemen terpilih
+🟠 au-delà de ¦ 🟠 vượt quá ¦ 🟠 lebih dari
+🟡 au-delà de ¦ 🟡 vượt quá ¦ 🟡 lebih dari
+🟡 plus de ¦ 🟡 hơn ¦ 🟡 lebih dari
+🟡 écart de plus de ¦ 🟡 cách nhau hơn ¦ 🟡 selisih lebih dari
+🦮 Lecteur d’écran ¦ 🦮 Trình đọc màn hình ¦ 🦮 Pembaca layar
+🪙 Convertisseur d’autrefois ¦ 🪙 Bộ chuyển đổi thời xưa ¦ 🪙 Konverter zaman dulu
+C’est ton anniversaire ! ¦ Hôm nay là sinh nhật của bạn! ¦ Hari ini ulang tahunmu!
+{name} a {n} ans aujourd’hui ! ¦ {name} tròn {n} tuổi hôm nay! ¦ {name} berumur {n} tahun hari ini!
+Il est né {details}. ¦ Ông ấy sinh {details}. ¦ Dia lahir {details}.
+Elle est née {details}. ¦ Bà ấy sinh {details}. ¦ Dia lahir {details}.
+{a} et {b} se sont mariés il y a {n} ans ¦ {a} và {b} đã kết hôn {n} năm trước ¦ {a} dan {b} menikah {n} tahun lalu
+{name} aurait eu {n} ans aujourd’hui ¦ {name} lẽ ra đã {n} tuổi hôm nay ¦ {name} seharusnya berumur {n} tahun hari ini
+On se souvient de {name} ¦ Tưởng nhớ {name} ¦ Mengenang {name}
+Elle nous a quittés {details}, il y a {n} ans. ¦ Bà ấy đã rời xa chúng ta {details}, cách đây {n} năm. ¦ Dia meninggalkan kita {details}, {n} tahun lalu.
+Il nous a quittés {details}, il y a {n} ans. ¦ Ông ấy đã rời xa chúng ta {details}, cách đây {n} năm. ¦ Dia meninggalkan kita {details}, {n} tahun lalu.
+ton anniversaire ¦ sinh nhật của bạn ¦ ulang tahunmu
+Elle aurait eu {n} ans ¦ Bà ấy lẽ ra đã {n} tuổi ¦ Dia seharusnya berumur {n} tahun
+Il aurait eu {n} ans ¦ Ông ấy lẽ ra đã {n} tuổi ¦ Dia seharusnya berumur {n} tahun
+Tu auras {n} ans ¦ Bạn sẽ tròn {n} tuổi ¦ Kamu akan berumur {n} tahun
+Elle aura {n} ans ¦ Bà ấy sẽ tròn {n} tuổi ¦ Dia akan berumur {n} tahun
+Il aura {n} ans ¦ Ông ấy sẽ tròn {n} tuổi ¦ Dia akan berumur {n} tahun
+Mariés ici ¦ Kết hôn ở đây ¦ Menikah di sini
+Né·es ici ¦ Sinh ra ở đây ¦ Lahir di sini
+Mort·es ici ¦ Mất ở đây ¦ Meninggal di sini
+Bravo ! C’est {name} ({rel}). ¦ Giỏi lắm! Đó là {name} ({rel}). ¦ Hebat! Itu {name} ({rel}).
+Bravo ! C’est {name}. ¦ Giỏi lắm! Đó là {name}. ¦ Hebat! Itu {name}.
+toi ¦ bạn ¦ kamu
+Avec toi ({n}) ¦ Có bạn ({n}) ¦ Bersamamu ({n})
+Ses photos ({n}) ¦ Ảnh của người này ({n}) ¦ Fotonya ({n})
+Sur la photo : {names}. ¦ Trong ảnh: {names}. ¦ Di foto: {names}.
+=personne trouvée ¦ người tìm thấy ¦ orang ditemukan
+Icône du gros bouton ¦ Biểu tượng của nút lớn ¦ Ikon tombol besar
+Un cadre ¦ Một ô ¦ Sebuah kotak
+Écris le mot ¦ Hãy viết lời nhắn ¦ Tulis pesannya
+Choisis la maison ¦ Hãy chọn ngôi nhà ¦ Pilih rumahnya
+Choisis la personne ¦ Hãy chọn người ¦ Pilih orangnya
+Choisis la photo ¦ Hãy chọn ảnh ¦ Pilih fotonya
+Choisis les photos ¦ Hãy chọn các ảnh ¦ Pilih foto-fotonya
+Choisis le film ¦ Hãy chọn phim ¦ Pilih filmnya
+Choisis le son ¦ Hãy chọn âm thanh ¦ Pilih suaranya
+Choisis le lieu ¦ Hãy chọn địa điểm ¦ Pilih tempatnya
+Écris le numéro ¦ Hãy viết số ¦ Tulis nomornya
+Sa fiche ¦ Hồ sơ của người này ¦ Profilnya
+Un mot ¦ Một lời nhắn ¦ Sebuah pesan
+Un film ¦ Một bộ phim ¦ Sebuah film
+Un lieu ¦ Một địa điểm ¦ Sebuah tempat
+Un instant… ¦ Chờ một chút… ¦ Sebentar…
+Sans prénom ¦ Không có tên ¦ Tanpa nama depan
+Un instant, on prépare l’arbre… ¦ Chờ một chút, đang chuẩn bị cây… ¦ Sebentar, pohon sedang disiapkan…
+Un instant, on construit la maison… ¦ Chờ một chút, đang dựng ngôi nhà… ¦ Sebentar, rumah sedang dibangun…
+La maison n’a pas pu être montrée. ¦ Không thể hiển thị ngôi nhà. ¦ Rumah tidak bisa ditampilkan.
+Monter d’un étage ¦ Lên một tầng ¦ Naik satu lantai
+Descendre d’un étage ¦ Xuống một tầng ¦ Turun satu lantai
+Voir toute la maison ¦ Xem cả ngôi nhà ¦ Lihat seluruh rumah
+Plus près ¦ Gần hơn ¦ Lebih dekat
+Plus loin ¦ Xa hơn ¦ Lebih jauh
+La visite ¦ Chuyến tham quan ¦ Kunjungan
+Étage ¦ Tầng ¦ Lantai
+Il se passe quelque chose aujourd’hui ! ¦ Hôm nay có chuyện đặc biệt! ¦ Ada sesuatu hari ini!
+Continue… encore un peu ¦ Tiếp tục… thêm chút nữa ¦ Terus… sedikit lagi
+On ne connaît pas encore ses parents ¦ Chưa biết cha mẹ của người này ¦ Orang tuanya belum diketahui
+Voir sa fiche ¦ Xem hồ sơ ¦ Lihat profilnya
+Pas d’enfants connus ¦ Không có con được biết ¦ Tidak ada anak yang diketahui
+Plus gros ¦ To hơn ¦ Lebih besar
+Plus de monde ¦ Nhiều người hơn ¦ Lebih banyak orang
+Photo d’avant ¦ Ảnh ngày xưa ¦ Foto dulu
+Cacher les noms ¦ Ẩn tên ¦ Sembunyikan nama
+Qui est là ? ¦ Ai ở đây? ¦ Siapa di sini?
+Arrêter le défilement ¦ Dừng cuộn ¦ Hentikan gulir
+Défilement tout seul ¦ Tự cuộn ¦ Gulir otomatis
+Ses maris ¦ Các người chồng ¦ Para suaminya
+Son mari ¦ Chồng ¦ Suaminya
+Ses femmes ¦ Các người vợ ¦ Para istrinya
+Sa femme ¦ Vợ ¦ Istrinya
+Son conjoint ¦ Bạn đời ¦ Pasangannya
+Sa sœur ¦ Chị/em gái ¦ Saudara perempuannya
+Son frère ¦ Anh/em trai ¦ Saudara laki-lakinya
+Ses frères et sœurs ¦ Anh chị em ¦ Saudara-saudaranya
+Écouter son histoire ¦ Nghe câu chuyện của người này ¦ Dengarkan kisahnya
+Voir dans l’arbre ¦ Xem trong cây ¦ Lihat di pohon
+Ses parents ¦ Cha mẹ ¦ Orang tuanya
+Son parent ¦ Cha hoặc mẹ ¦ Orang tuanya
+Ses enfants ¦ Các con ¦ Anak-anaknya
+Son enfant ¦ Con ¦ Anaknya
+Par famille ¦ Theo gia đình ¦ Per keluarga
+Par prénom ¦ Theo tên ¦ Per nama depan
+La famille d’aujourd’hui ¦ Gia đình hôm nay ¦ Keluarga masa kini
+Touche la première lettre du prénom. ¦ Hãy chạm vào chữ cái đầu của tên. ¦ Sentuh huruf pertama nama depan.
+Touche la personne qui regarde. ¦ Hãy chạm vào người đang xem. ¦ Sentuh orang yang sedang melihat.
+Tape un prénom ou un nom ¦ Gõ tên hoặc họ ¦ Ketik nama depan atau nama keluarga
+Effacer une lettre ¦ Xoá một chữ ¦ Hapus satu huruf
+J’écoute… ¦ Đang nghe… ¦ Aku mendengarkan…
+Je n’ai pas bien entendu. Réessaie, ou utilise le clavier. ¦ Tôi nghe không rõ. Hãy thử lại, hoặc dùng bàn phím. ¦ Aku kurang dengar. Coba lagi, atau pakai keyboard.
+La dictée n’a pas marché. Utilise le clavier. ¦ Đọc chính tả không chạy được. Hãy dùng bàn phím. ¦ Dikte tidak berhasil. Pakai keyboard.
+Voir la photo ¦ Xem ảnh ¦ Lihat foto
+🎈 Bientôt ¦ 🎈 Sắp tới ¦ 🎈 Segera
+Dis d’abord qui regarde : l’app montrera ta famille. ¦ Hãy cho biết ai đang xem trước: ứng dụng sẽ hiện gia đình của bạn. ¦ Sebutkan dulu siapa yang melihat: aplikasi akan menampilkan keluargamu.
+Tes conjoints ¦ Vợ chồng của bạn ¦ Pasangan-pasanganmu
+Ta femme ¦ Vợ của bạn ¦ Istrimu
+Ton mari ¦ Chồng của bạn ¦ Suamimu
+Tes parents ¦ Cha mẹ của bạn ¦ Orang tuamu
+Tes grands-parents ¦ Ông bà của bạn ¦ Kakek-nenekmu
+Tes enfants ¦ Các con của bạn ¦ Anak-anakmu
+Tes petits-enfants ¦ Các cháu của bạn ¦ Cucu-cucumu
+Tes arrière-petits-enfants ¦ Các chắt của bạn ¦ Cicit-cicitmu
+Personne n’est encore relié dans l’arbre. ¦ Chưa có ai được liên kết trong cây. ¦ Belum ada yang terhubung di pohon.
+Ton anniversaire ¦ Sinh nhật của bạn ¦ Ulang tahunmu
+Les anniversaires qui arrivent ¦ Các sinh nhật sắp tới ¦ Ulang tahun yang akan datang
+Pas de date de naissance connue pour l’instant. ¦ Hiện chưa biết ngày sinh. ¦ Tanggal lahir belum diketahui.
+Voir les photos ¦ Xem ảnh ¦ Lihat foto-foto
+Il faut au moins trois portraits pour jouer. ¦ Cần ít nhất ba chân dung để chơi. ¦ Perlu setidaknya tiga potret untuk bermain.
+Un autre portrait ¦ Một chân dung khác ¦ Potret lain
+Écouter l’heure ¦ Nghe giờ ¦ Dengarkan jamnya
+Écouter le numéro ¦ Nghe số ¦ Dengarkan nomornya
+Tape le code pour quitter ¦ Gõ mã để thoát ¦ Ketik kode untuk keluar
+Arrêter ¦ Dừng ¦ Berhenti
+Les gros boutons : avancer, reculer, tourner. On passe par les portes. ¦ Các nút lớn: tiến, lùi, quay. Đi qua các cửa. ¦ Tombol besar: maju, mundur, berbelok. Lewat pintu-pintu.
+On voit déjà le plus de monde possible. ¦ Đã thấy nhiều người nhất có thể. ¦ Sudah terlihat orang sebanyak mungkin.
+Pas de frère ou de sœur après. ¦ Không có anh chị em nào sau. ¦ Tidak ada saudara sesudahnya.
+Pas de frère ou de sœur avant. ¦ Không có anh chị em nào trước. ¦ Tidak ada saudara sebelumnya.
+Mode simple quitté. Tu retrouves l’app normale. ¦ Đã thoát chế độ đơn giản. Bạn trở lại ứng dụng bình thường. ¦ Mode sederhana ditutup. Kamu kembali ke aplikasi biasa.
+Première fois : vérifie ces réglages, puis « ▶ Ouvrir le mode simple ». ¦ Lần đầu: hãy kiểm tra các thiết lập này, rồi “▶ Mở chế độ đơn giản”. ¦ Pertama kali: periksa pengaturan ini, lalu “▶ Buka mode sederhana”.
+▶ Démarrer le mode simple ¦ ▶ Bắt đầu chế độ đơn giản ¦ ▶ Mulai mode sederhana
+⚙️ Préparer ¦ ⚙️ Chuẩn bị ¦ ⚙️ Siapkan
+Ta couleur ¦ Màu của bạn ¦ Warnamu
+La personne ¦ Người ¦ Orangnya
+⚠️ Pas encore de photo de cette personne : le cadre est caché ¦ ⚠️ Chưa có ảnh của người này: ô bị ẩn ¦ ⚠️ Belum ada foto orang ini: kotak disembunyikan
+Écrite toute seule (nombre de photos, souvenirs du jour) ¦ Tự viết (số ảnh, kỷ niệm trong ngày) ¦ Ditulis otomatis (jumlah foto, kenangan hari ini)
+Le mot ¦ Lời nhắn ¦ Pesannya
+Icône du cadre ¦ Biểu tượng của ô ¦ Ikon kotak
+↺ Remettre ce cadre comme au départ ¦ ↺ Đặt lại ô này như ban đầu ¦ ↺ Kembalikan kotak ini seperti semula
+Retirer ce cadre ¦ Gỡ ô này ¦ Lepas kotak ini
+La photo ¦ Ảnh ¦ Fotonya
+Le film ¦ Phim ¦ Filmnya
+Le son ¦ Âm thanh ¦ Suaranya
+Le lieu ¦ Địa điểm ¦ Tempatnya
+Choisis un lieu… ¦ Chọn một địa điểm… ¦ Pilih tempat…
+Aucun lieu dans l’arbre pour l’instant (naissances, mariages, photos). ¦ Hiện chưa có địa điểm nào trong cây (sinh, kết hôn, ảnh). ¦ Belum ada tempat di pohon (kelahiran, pernikahan, foto).
+Le numéro ¦ Số ¦ Nomornya
+Montre la famille de la personne qui regarde (ses parents, ses enfants, ses petits-enfants…). ¦ Hiện gia đình của người đang xem (cha mẹ, con, cháu…). ¦ Menampilkan keluarga orang yang melihat (orang tuanya, anaknya, cucunya…).
+Les anniversaires des vivants, du plus proche au plus lointain. ¦ Sinh nhật của những người còn sống, từ gần nhất đến xa nhất. ¦ Ulang tahun orang yang masih hidup, dari yang terdekat sampai terjauh.
+Un portrait, trois prénoms : il faut trouver le bon. Il faut au moins trois portraits. ¦ Một chân dung, ba cái tên: phải tìm đúng tên. Cần ít nhất ba chân dung. ¦ Satu potret, tiga nama depan: temukan yang benar. Perlu setidaknya tiga potret.
+Toutes les photos, dans le désordre. ¦ Tất cả ảnh, không theo thứ tự. ¦ Semua foto, secara acak.
+Propre au mode simple ¦ Riêng cho chế độ đơn giản ¦ Khusus mode sederhana
+✕ Fermer l’essai ¦ ✕ Đóng bản thử ¦ ✕ Tutup percobaan
+Daltonisme propre au mode simple ¦ Mù màu riêng cho chế độ đơn giản ¦ Buta warna khusus mode sederhana
+Contraste fort dans le mode simple ¦ Tương phản cao trong chế độ đơn giản ¦ Kontras tinggi di mode sederhana
+Moins d’animations dans le mode simple ¦ Ít hiệu ứng động hơn trong chế độ đơn giản ¦ Lebih sedikit animasi di mode sederhana
+✓ Appliqué ¦ ✓ Đã áp dụng ¦ ✓ Diterapkan
+Personne de l’arbre ¦ Người trong cây ¦ Orang di pohon
+Le contraste fort est allumé : les couleurs choisies ici reviendront quand tu l’éteindras. ¦ Tương phản cao đang bật: các màu đã chọn ở đây sẽ trở lại khi bạn tắt nó. ¦ Kontras tinggi menyala: warna yang dipilih di sini kembali saat kamu mematikannya.
+✓ très lisible ¦ ✓ rất dễ đọc ¦ ✓ sangat mudah dibaca
+Jamais moins de 22 px. ¦ Không bao giờ dưới 22 px. ¦ Tidak pernah kurang dari 22 px.
+Comme l’app ¦ Như ứng dụng ¦ Seperti aplikasi
+↺ Remettre la disposition comme au départ ¦ ↺ Đặt lại bố cục như ban đầu ¦ ↺ Kembalikan tata letak seperti semula
+ℹ️ Le « mode confidentialité » de l’app est allumé : les vivants sont montrés par leur prénom seulement. ¦ ℹ️ “Chế độ riêng tư” của ứng dụng đang bật: người còn sống chỉ hiện tên. ¦ ℹ️ “Mode privasi” aplikasi menyala: orang yang masih hidup hanya ditampilkan dengan nama depannya.
+Les branches apparaîtront quand l’arbre sera lu. ¦ Các nhánh sẽ hiện ra khi cây được đọc. ¦ Cabang akan muncul setelah pohon dibaca.
+Remettre dans le mode simple ¦ Đưa trở lại chế độ đơn giản ¦ Kembalikan ke mode sederhana
+🔒 Un code est enregistré (il est gardé caché, même pour l’app). Tape 4 chiffres pour le changer. ¦ 🔒 Đã lưu một mã (được giữ kín, kể cả với ứng dụng). Gõ 4 chữ số để đổi. ¦ 🔒 Kode sudah tersimpan (dirahasiakan, bahkan dari aplikasi). Ketik 4 angka untuk menggantinya.
+Coupé : cet appareil garde ses propres réglages du mode simple. ¦ Đã tắt: thiết bị này giữ thiết lập chế độ đơn giản riêng. ¦ Mati: perangkat ini memakai pengaturan mode sederhananya sendiri.
+⚠️ À corriger ¦ ⚠️ Cần sửa ¦ ⚠️ Perlu diperbaiki
+⚠️ Pas assez lisible ¦ ⚠️ Chưa đủ dễ đọc ¦ ⚠️ Kurang mudah dibaca
+Essai fermé : c’est ainsi qu’on quitte le mode simple. ¦ Đã đóng bản thử: đó là cách thoát chế độ đơn giản. ¦ Percobaan ditutup: begitulah cara keluar dari mode sederhana.
+La photo du gros bouton ¦ Ảnh của nút lớn ¦ Foto tombol besar
+Les photos du gros bouton ¦ Các ảnh của nút lớn ¦ Foto-foto tombol besar
+Le film du gros bouton ¦ Phim của nút lớn ¦ Film tombol besar
+Le son du gros bouton ¦ Âm thanh của nút lớn ¦ Suara tombol besar
+La police des gros boutons ¦ Phông chữ của các nút lớn ¦ Huruf tombol besar
+La police du mode simple ¦ Phông chữ của chế độ đơn giản ¦ Huruf mode sederhana
+Il faut garder au moins un gros bouton. ¦ Cần giữ ít nhất một nút lớn. ¦ Simpan setidaknya satu tombol besar.
+Code de sortie enregistré (gardé caché). ¦ Đã lưu mã thoát (được giữ kín). ¦ Kode keluar tersimpan (dirahasiakan).
+Retour à l’écran d’avant ¦ Quay lại màn hình trước ¦ Kembali ke layar sebelumnya
+Âges ¦ Tuổi ¦ Umur
+Lieux mal placés ¦ Địa điểm đặt sai chỗ ¦ Tempat salah posisi
+Baptême loin ¦ Rửa tội cách xa ¦ Baptis jauh
+Lieux contradictoires ¦ Địa điểm mâu thuẫn ¦ Tempat bertentangan
+une mauvaise année de décès (1862 au lieu de 1882 ?), ou un homonyme pris pour le père. Regarde l’acte de décès du père. ¦ năm mất sai (1862 thay vì 1882?), hoặc một người trùng tên bị nhầm là cha. Hãy xem giấy tờ khai tử của người cha. ¦ tahun kematian yang salah (1862 bukan 1882?), atau orang bernama sama dikira ayahnya. Lihat akta kematian sang ayah.
+une erreur de date, ou la mère confondue avec une homonyme (une tante, une cousine). Regarde l’acte de naissance de l’enfant. ¦ một lỗi ngày, hoặc người mẹ bị nhầm với người trùng tên (một người cô, một người chị em họ). Hãy xem giấy khai sinh của đứa con. ¦ kesalahan tanggal, atau sang ibu tertukar dengan orang bernama sama (bibi, sepupu). Lihat akta kelahiran sang anak.
+une génération confondue (la grand-mère prise pour la mère), ou une année mal lue. ¦ nhầm thế hệ (bà bị nhầm là mẹ), hoặc một năm bị đọc sai. ¦ generasi tertukar (nenek dikira ibu), atau tahun salah dibaca.
+une génération sautée, ou une année mal lue. ¦ bỏ sót một thế hệ, hoặc một năm bị đọc sai. ¦ satu generasi terlewat, atau tahun salah dibaca.
+une mauvaise date de décès, ou le mariage d’un homonyme. ¦ ngày mất sai, hoặc cuộc hôn nhân của một người trùng tên. ¦ tanggal kematian yang salah, atau pernikahan orang bernama sama.
+deux dates inversées, ou une année mal recopiée. ¦ hai ngày bị đảo, hoặc một năm bị chép sai. ¦ dua tanggal tertukar, atau tahun salah disalin.
+un chiffre mal lu (31 au lieu de 21) ou un mois mal recopié. ¦ một chữ số bị đọc sai (31 thay vì 21) hoặc một tháng bị chép sai. ¦ angka salah dibaca (31 bukan 21) atau bulan salah disalin.
+la naissance d’un parent prise pour la sienne, ou un homonyme. ¦ ngày sinh của cha hoặc mẹ bị nhầm là của người này, hoặc một người trùng tên. ¦ kelahiran orang tua dikira kelahirannya sendiri, atau orang bernama sama.
+des jumeaux mal datés, ou un enfant rattaché aux mauvais parents. ¦ cặp sinh đôi bị ghi sai ngày, hoặc một đứa con được gắn vào sai cha mẹ. ¦ anak kembar salah tanggal, atau anak dihubungkan ke orang tua yang salah.
+la même personne saisie deux fois : compare les deux fiches avant de les fusionner. ¦ cùng một người được nhập hai lần: hãy so sánh hai hồ sơ trước khi gộp. ¦ orang yang sama dimasukkan dua kali: bandingkan kedua profil sebelum menggabungkannya.
+une commune homonyme d’un autre département, ou des coordonnées inversées. ¦ một xã trùng tên ở tỉnh khác, hoặc toạ độ bị đảo. ¦ kota bernama sama di departemen lain, atau koordinat tertukar.
+deux homonymes confondus dans une seule fiche. ¦ hai người trùng tên bị gộp vào một hồ sơ. ¦ dua orang bernama sama tercampur dalam satu profil.
+une commune homonyme d’un autre département. ¦ một xã trùng tên ở tỉnh khác. ¦ kota bernama sama di departemen lain.
+les deux dates inversées. ¦ hai ngày bị đảo. ¦ kedua tanggal tertukar.
+un tiret tapé par erreur devant l’année. ¦ một dấu gạch gõ nhầm trước năm. ¦ tanda hubung yang salah ketik di depan tahun.
+un homonyme pris pour le conjoint, ou une fiche rattachée une génération trop haut ou trop bas. ¦ một người trùng tên bị nhầm là vợ/chồng, hoặc một hồ sơ được gắn cao hơn hay thấp hơn một thế hệ. ¦ orang bernama sama dikira pasangannya, atau profil dihubungkan satu generasi terlalu tinggi atau terlalu rendah.
+un chiffre mal lu par la machine (1/7, 3/8, 5/6), ou un âge déclaré au hasard par la famille : regarde l’image du recensement. ¦ một chữ số máy đọc sai (1/7, 3/8, 5/6), hoặc tuổi do gia đình khai đại: hãy xem ảnh của bản điều tra dân số. ¦ angka salah dibaca mesin (1/7, 3/8, 5/6), atau umur yang disebut asal oleh keluarga: lihat gambar sensusnya.
+un nom de commune mal lu ou abrégé (« St » pour Saint) : regarde l’image du recensement. ¦ tên xã bị đọc sai hoặc viết tắt (“St” cho Saint): hãy xem ảnh của bản điều tra dân số. ¦ nama kota salah dibaca atau disingkat (“St” untuk Saint): lihat gambar sensusnya.
+la case du genre mal lue, ou une autre personne du ménage : regarde l’image du recensement. ¦ ô giới tính bị đọc sai, hoặc một người khác trong hộ: hãy xem ảnh của bản điều tra dân số. ¦ kotak jenis kelamin salah dibaca, atau orang lain dalam rumah tangga: lihat gambar sensusnya.
+un lien mal lu (fils / fille), un ménage mal découpé, ou une fiche pas encore reliée : regarde l’image du recensement. ¦ một quan hệ bị đọc sai (con trai / con gái), một hộ bị chia sai, hoặc một hồ sơ chưa được liên kết: hãy xem ảnh của bản điều tra dân số. ¦ hubungan salah dibaca (putra / putri), rumah tangga salah dipotong, atau profil belum terhubung: lihat gambar sensusnya.
+J’ai vérifié dans l’acte : c’est bien ça ¦ Tôi đã kiểm tra trong giấy tờ: đúng là như vậy ¦ Aku sudah memeriksa di akta: memang begitu
+La date est approximative (« vers… ») ¦ Ngày chỉ là ước chừng (“khoảng…”) ¦ Tanggalnya perkiraan (“sekitar…”)
+Ce sont deux personnes différentes ¦ Đây là hai người khác nhau ¦ Ini dua orang yang berbeda
+Le lieu est juste ¦ Địa điểm là đúng ¦ Tempatnya benar
+J’ai regardé l’image : ma fiche est juste, SocFace a mal lu ¦ Tôi đã xem ảnh: hồ sơ của tôi đúng, SocFace đọc sai ¦ Aku sudah melihat gambarnya: profilku benar, SocFace salah baca
+Ce n’est pas la même personne (homonyme) ¦ Đây không phải cùng một người (trùng tên) ¦ Ini bukan orang yang sama (nama kembar)
+L’âge déclaré au recensement était approximatif ¦ Tuổi khai trong điều tra dân số chỉ là ước chừng ¦ Umur yang disebut di sensus hanya perkiraan
+Personne sans nom ¦ Người không có tên ¦ Orang tanpa nama
+Dates changées ¦ Ngày đã thay đổi ¦ Tanggal berubah
+Écartée ¦ Đã gác lại ¦ Dikesampingkan
+Plus d’alerte ¦ Hết cảnh báo ¦ Tidak ada peringatan lagi
+Le contrôle ne trouve plus ce problème ¦ Việc kiểm tra không còn thấy vấn đề này ¦ Pemeriksaan tidak lagi menemukan masalah ini
+Pas une erreur ¦ Không phải lỗi ¦ Bukan kesalahan
+Toute la base ¦ Toàn bộ cơ sở dữ liệu ¦ Seluruh basis data
+Mes ancêtres (Sosa) ¦ Tổ tiên của tôi (Sosa) ¦ Leluhurku (Sosa)
+Tous les lieux ¦ Tất cả địa điểm ¦ Semua tempat
+Aucune alerte écartée ¦ Không có cảnh báo nào bị gác lại ¦ Tidak ada peringatan yang dikesampingkan
+Rien avec ces filtres ¦ Không có gì với các bộ lọc này ¦ Tidak ada hasil dengan saringan ini
+Retire un filtre pour revoir les autres alertes. ¦ Hãy gỡ một bộ lọc để xem lại các cảnh báo khác. ¦ Lepas satu saringan untuk melihat peringatan lain.
+Aucune incohérence trouvée dans tes fiches. Bravo ! ¦ Không tìm thấy điểm bất hợp lý nào trong hồ sơ của bạn. Giỏi lắm! ¦ Tidak ada ketidakcocokan di profilmu. Hebat!
+Ouvre l’événement dans la fiche pour corriger sa date. ¦ Mở sự kiện trong hồ sơ để sửa ngày. ¦ Buka peristiwa di profil untuk memperbaiki tanggalnya.
+PLACER SUR LA CARTE ¦ ĐẶT LÊN BẢN ĐỒ ¦ TARUH DI PETA
+Choisis la commune : ses coordonnées seront reprises ¦ Hãy chọn xã: toạ độ của nó sẽ được lấy theo ¦ Pilih kotanya: koordinatnya akan dipakai
+Ce lieu n’a pas de coordonnées : choisis une commune de la liste. ¦ Địa điểm này không có toạ độ: hãy chọn một xã trong danh sách. ¦ Tempat ini tidak punya koordinat: pilih kota dari daftar.
+CONTRÔLE DE LA BASE ¦ KIỂM TRA CƠ SỞ DỮ LIỆU ¦ PEMERIKSAAN BASIS DATA
+Ta raison ¦ Lý do của bạn ¦ Alasanmu
+Ne plus signaler ¦ Không báo nữa ¦ Jangan laporkan lagi
+Écris ta raison, ou choisis-en une. ¦ Hãy viết lý do, hoặc chọn một lý do. ¦ Tulis alasanmu, atau pilih salah satu.
+Détail ¦ Chi tiết ¦ Rincian
+Fermer (Échap) ¦ Đóng (Esc) ¦ Tutup (Esc)
+La famille ¦ Gia đình ¦ Keluarga
+Contrôle impossible pour l’instant. ¦ Hiện không thể kiểm tra. ¦ Pemeriksaan belum bisa dilakukan.
+des fiches sans alerte ¦ hồ sơ không có cảnh báo ¦ profil tanpa peringatan
+Tout voir dans « ✅ Contrôle de la base » → ¦ Xem tất cả trong “✅ Kiểm tra cơ sở dữ liệu” → ¦ Lihat semua di “✅ Pemeriksaan basis data” →
+Moyennes de la famille ¦ Trung bình của gia đình ¦ Rata-rata keluarga
+Âge au mariage des hommes ¦ Tuổi kết hôn của nam ¦ Umur menikah pria
+des femmes ¦ của nữ ¦ wanita
+Écart entre naissances ¦ Khoảng cách giữa các lần sinh ¦ Jarak antarkelahiran
+Pas assez de dates ¦ Không đủ ngày ¦ Tanggal tidak cukup
+: ni conjoint, ni enfant, ni événement, ni note, ni média, ni source (souvent laissées par un ancien logiciel ou un import). Une copie de sécurité de la base est faite juste avant. ¦ : không vợ/chồng, không con, không sự kiện, không ghi chú, không tư liệu, không nguồn (thường do phần mềm cũ hoặc một lần nhập để lại). Một bản sao an toàn của cơ sở dữ liệu được tạo ngay trước đó. ¦ : tanpa pasangan, anak, peristiwa, catatan, media, maupun sumber (sering tertinggal dari perangkat lunak lama atau impor). Salinan pengaman basis data dibuat tepat sebelumnya.
+Elles ne contiennent aucune information. Une copie de sécurité de la base est faite juste avant. ¦ Chúng không chứa thông tin nào. Một bản sao an toàn của cơ sở dữ liệu được tạo ngay trước đó. ¦ Tidak berisi informasi apa pun. Salinan pengaman basis data dibuat tepat sebelumnya.
+Familles vides ¦ Gia đình trống ¦ Keluarga kosong
+Supprimer la famille vide ¦ Xoá gia đình trống ¦ Hapus keluarga kosong
+Supprimer la famille vide ? ¦ Xoá gia đình trống? ¦ Hapus keluarga kosong?
+Supprimer les familles vides ¦ Xoá các gia đình trống ¦ Hapus keluarga-keluarga kosong
+À la fermeture ¦ Khi đóng ¦ Saat ditutup
+À la main ¦ Thủ công ¦ Manual
+Avant une restauration ou une fusion ¦ Trước khi khôi phục hoặc gộp ¦ Sebelum pemulihan atau penggabungan
+Automatique ¦ Tự động ¦ Otomatis
+Avant une mise à jour ¦ Trước khi cập nhật ¦ Sebelum pembaruan
+Jamais tout seul (seulement à la main) ¦ Không bao giờ tự động (chỉ thủ công) ¦ Tidak pernah otomatis (hanya manual)
+Chaque jour ¦ Mỗi ngày ¦ Setiap hari
+Chaque semaine ¦ Mỗi tuần ¦ Setiap minggu
+Vérifiée ¦ Đã kiểm tra ¦ Diperiksa
+Échec ¦ Thất bại ¦ Gagal
+Dossier absent ¦ Không có thư mục ¦ Folder tidak ada
+La sauvegarde automatique est éteinte : choisis « Chaque jour » ci-dessous. ¦ Sao lưu tự động đang tắt: hãy chọn “Mỗi ngày” bên dưới. ¦ Pencadangan otomatis mati: pilih “Setiap hari” di bawah.
+Prochaine : à la fermeture de l’app (si quelque chose a changé). ¦ Lần tới: khi đóng ứng dụng (nếu có gì thay đổi). ¦ Berikutnya: saat aplikasi ditutup (jika ada yang berubah).
+Aucune copie dans ce dossier pour l’instant. ¦ Hiện chưa có bản sao nào trong thư mục này. ¦ Belum ada salinan di folder ini.
+Abîmée ¦ Bị hỏng ¦ Rusak
+⚠️ Dossier introuvable pour l’instant (clé débranchée ?). ¦ ⚠️ Hiện không tìm thấy thư mục (USB đã rút?). ¦ ⚠️ Folder belum ditemukan (flashdisk dicabut?).
+Dossier trouvé ¦ Đã tìm thấy thư mục ¦ Folder ditemukan
+Dossier synchronisé en ligne ¦ Thư mục đồng bộ trực tuyến ¦ Folder tersinkron online
+Chacune dans son sous-dossier, pour qu’elles ne s’effacent pas l’une l’autre. ¦ Mỗi bản trong thư mục con riêng, để chúng không xoá lẫn nhau. ¦ Masing-masing di subfoldernya, agar tidak saling menghapus.
+Avec les médias ¦ Kèm tư liệu ¦ Dengan media
+Toutes mes généalogies ¦ Tất cả gia phả của tôi ¦ Semua silsilahku
+État indisponible. ¦ Không có trạng thái. ¦ Status tidak tersedia.
+Dossier introuvable (clé débranchée ?). Rien n’est bloqué. ¦ Không tìm thấy thư mục (USB đã rút?). Không có gì bị chặn. ¦ Folder tidak ditemukan (flashdisk dicabut?). Tidak ada yang terhambat.
+Éteinte : rien ne se fait tout seul. ¦ Đã tắt: không có gì tự diễn ra. ¦ Mati: tidak ada yang berjalan otomatis.
+⚙️ Régler ¦ ⚙️ Chỉnh ¦ ⚙️ Atur
+Lieu (texte) ¦ Địa điểm (văn bản) ¦ Tempat (teks)
+Sorte d’événement ¦ Loại sự kiện ¦ Jenis peristiwa
+Posée sur ¦ Đặt trên ¦ Ditaruh di
+l’autre ordinateur ¦ máy tính kia ¦ komputer lain
+À choisir ¦ Cần chọn ¦ Perlu dipilih
+Sur cet ordinateur ¦ Trên máy tính này ¦ Di komputer ini
+Garder la mienne ¦ Giữ bản của tôi ¦ Simpan milikku
+Prendre l’autre ¦ Lấy bản kia ¦ Ambil yang lain
+Garder les deux ¦ Giữ cả hai ¦ Simpan keduanya
+Dossier branché ¦ Thư mục đã kết nối ¦ Folder tersambung
+💻 L’autre : ¦ 💻 Máy kia: ¦ 💻 Yang lain:
+L’autre ordinateur n’est pas encore passé par ce dossier. ¦ Máy tính kia chưa từng dùng thư mục này. ¦ Komputer lain belum pernah memakai folder ini.
+Dossier introuvable pour l’instant (clé débranchée ?). Rien n’est perdu : tes changements partiront la prochaine fois. ¦ Hiện không tìm thấy thư mục (USB đã rút?). Không có gì bị mất: các thay đổi của bạn sẽ được gửi lần sau. ¦ Folder belum ditemukan (flashdisk dicabut?). Tidak ada yang hilang: perubahanmu akan dikirim lain kali.
+Paquets mis de côté ¦ Các gói đã để riêng ¦ Paket yang disisihkan
+Tu as annulé leur fusion : ils ne sont plus repris tout seuls. « Revoir » pour choisir changement par changement. ¦ Bạn đã hủy việc gộp chúng: chúng không còn được tự lấy nữa. “Xem lại” để chọn từng thay đổi. ¦ Kamu membatalkan penggabungannya: paket tidak lagi diambil otomatis. “Tinjau” untuk memilih perubahan satu per satu.
+Revoir ¦ Xem lại ¦ Tinjau
+Dernières fusions ¦ Những lần gộp gần nhất ¦ Penggabungan terakhir
+Annulée ¦ Đã hoàn tác ¦ Diurungkan
+Écris le chemin du dossier partagé. ¦ Hãy nhập đường dẫn của thư mục dùng chung. ¦ Ketik jalur folder bersama.
+✓ Dossier relié. Sur l’autre ordinateur, ouvre « depart.db » qui s’y trouve, puis choisis ce même dossier. ¦ ✓ Đã liên kết thư mục. Trên máy tính kia, hãy mở “depart.db” trong đó, rồi chọn chính thư mục này. ¦ ✓ Folder terhubung. Di komputer lain, buka “depart.db” yang ada di dalamnya, lalu pilih folder yang sama ini.
+Dossier partagé retiré de cet ordinateur ¦ Đã gỡ thư mục dùng chung khỏi máy tính này ¦ Folder bersama dilepas dari komputer ini
+Ta version gardée ¦ Đã giữ phiên bản của bạn ¦ Versimu dipertahankan
+Version de l’autre ordinateur prise ¦ Đã lấy phiên bản của máy tính kia ¦ Versi komputer lain diambil
+Les deux notes gardées ¦ Đã giữ cả hai ghi chú ¦ Kedua catatan dipertahankan
+Fusion annulée : ses paquets sont mis de côté ¦ Đã hủy hợp nhất: các gói của nó được để riêng ¦ Penggabungan diurungkan: paket-paketnya disisihkan
+🔒 Généalogie ouverte ailleurs ¦ 🔒 Gia phả đang mở ở nơi khác ¦ 🔒 Silsilah sedang dibuka di tempat lain
+Ouvrir quand même ¦ Vẫn mở ¦ Tetap buka
+⏹ Arrêter la lecture ¦ ⏹ Dừng đọc ¦ ⏹ Berhenti membaca
+🔊 Lire la fiche ¦ 🔊 Đọc hồ sơ ¦ 🔊 Bacakan profil
+Type de daltonisme simulé ¦ Kiểu mù màu mô phỏng ¦ Jenis buta warna yang disimulasikan
+Description de l’image ¦ Mô tả hình ảnh ¦ Deskripsi gambar
+Tout afficher ¦ Hiện tất cả ¦ Tampilkan semua
+Ta machine ne propose pas la dictée ici. Sur Mac, utilise la dictée du système : touche 🎤 ou deux fois Fn. Sur Windows : touche Windows + H. ¦ Máy của bạn không có tính năng đọc chính tả ở đây. Trên Mac, hãy dùng tính năng đọc chính tả của hệ thống: phím 🎤 hoặc nhấn Fn hai lần. Trên Windows: phím Windows + H. ¦ Perangkatmu tidak menyediakan dikte di sini. Di Mac, gunakan dikte sistem: tombol 🎤 atau Fn dua kali. Di Windows: tombol Windows + H.
+Je t’écoute… ¦ Mình đang nghe… ¦ Aku mendengarkan…
+Aucun micro trouvé : branche-en un ou vérifie les réglages du son. ¦ Không tìm thấy micrô: hãy cắm một cái hoặc kiểm tra cài đặt âm thanh. ¦ Mikrofon tidak ditemukan: colokkan satu atau periksa pengaturan suara.
+La dictée de ce navigateur a besoin d’Internet. Sur Mac, la dictée du système marche hors ligne : touche 🎤 ou deux fois Fn. ¦ Tính năng đọc chính tả của trình duyệt này cần Internet. Trên Mac, tính năng đọc chính tả của hệ thống hoạt động ngoại tuyến: phím 🎤 hoặc nhấn Fn hai lần. ¦ Dikte di browser ini memerlukan Internet. Di Mac, dikte sistem bekerja secara offline: tombol 🎤 atau Fn dua kali.
+Choisis la sorte de daltonisme : l’app corrige ses couleurs pour que tu les distingues mieux. Les petites pastilles montrent comment ces couleurs sont vues. ¦ Hãy chọn kiểu mù màu: ứng dụng sẽ chỉnh màu để bạn phân biệt chúng dễ hơn. Các chấm nhỏ cho thấy những màu này được nhìn thấy như thế nào. ¦ Pilih jenis buta warna: aplikasi mengoreksi warnanya agar kamu bisa membedakannya dengan lebih baik. Titik-titik kecil menunjukkan bagaimana warna-warna ini terlihat.
+Moins de choses qui bougent : pas d’animations, pas de glissements, pas de défilement animé. ¦ Ít thứ chuyển động hơn: không hoạt ảnh, không trượt, không cuộn có hoạt ảnh. ¦ Lebih sedikit yang bergerak: tanpa animasi, tanpa efek geser, tanpa gulir beranimasi.
+Ton ordinateur demande déjà moins d’animations : c’est respecté. ¦ Máy tính của bạn đã yêu cầu giảm hoạt ảnh: điều này được tôn trọng. ¦ Komputermu sudah meminta lebih sedikit animasi: itu dihormati.
+Durée des messages ¦ Thời gian hiển thị thông báo ¦ Durasi pesan
+Les messages restent affichés ¦ Thông báo được hiển thị trong ¦ Pesan tetap ditampilkan
+2 fois plus (12 s) ¦ Lâu gấp 2 lần (12 s) ¦ 2 kali lebih lama (12 s)
+3 fois plus (18 s) ¦ Lâu gấp 3 lần (18 s) ¦ 3 kali lebih lama (18 s)
+Voix française de l’ordinateur ¦ Giọng tiếng Pháp của máy tính ¦ Suara bahasa Prancis komputer
+Comment faire lire la description des images par un lecteur d’écran ? ¦ Làm sao để trình đọc màn hình đọc mô tả hình ảnh? ¦ Bagaimana cara membuat pembaca layar membacakan deskripsi gambar?
+Pas disponible ici (voir au-dessus). ¦ Không có ở đây (xem phía trên). ¦ Tidak tersedia di sini (lihat di atas).
+Aperçu : la page prendra cette taille quand tu lâcheras le curseur. ¦ Xem trước: trang sẽ có kích thước này khi bạn thả thanh trượt. ¦ Pratinjau: halaman akan berukuran seperti ini saat kamu melepas penggeser.
+Espacements conseillés appliqués. ¦ Đã áp dụng khoảng cách được khuyên dùng. ¦ Jarak yang disarankan diterapkan.
+Enregistrement impossible : la place du navigateur est pleine ? ¦ Không thể lưu: bộ nhớ của trình duyệt đã đầy? ¦ Tidak bisa menyimpan: penyimpanan browser penuh?
+Cette forme n’est pas lisible. ¦ Không đọc được hình dạng này. ¦ Bentuk ini tidak bisa dibaca.
+Trop de formes enregistrées : supprime-en avant d’en ajouter. ¦ Có quá nhiều hình dạng đã lưu: hãy xoá bớt trước khi thêm. ¦ Terlalu banyak bentuk tersimpan: hapus beberapa sebelum menambah.
+Liste des formes enregistrée. ¦ Đã lưu danh sách hình dạng. ¦ Daftar bentuk tersimpan.
+Liste des formes remise comme au départ ¦ Đã đặt lại danh sách hình dạng như ban đầu ¦ Daftar bentuk dikembalikan seperti semula
+Écusson ¦ Huy hiệu ¦ Perisai
+Ce fichier est trop gros (2 Mo au plus). ¦ Tệp này quá lớn (tối đa 2 MB). ¦ Berkas ini terlalu besar (paling banyak 2 MB).
+Ce n’est pas un dessin SVG lisible. ¦ Đây không phải là bản vẽ SVG đọc được. ¦ Ini bukan gambar SVG yang bisa dibaca.
+Ce dessin est plat : il n’a pas de surface. ¦ Bản vẽ này phẳng: nó không có diện tích. ¦ Gambar ini datar: tidak punya luas.
+Ce dessin n’a pas pu être nettoyé. ¦ Không thể làm sạch bản vẽ này. ¦ Gambar ini tidak bisa dibersihkan.
+Nouvelle forme d’avatar ¦ Hình dạng ảnh đại diện mới ¦ Bentuk avatar baru
+APPARENCE · FORME DES AVATARS ¦ GIAO DIỆN · HÌNH DẠNG ẢNH ĐẠI DIỆN ¦ TAMPILAN · BENTUK AVATAR
+Ex. Blason, Médaillon, Feuille… ¦ Vd. Huy hiệu, Mề đay, Chiếc lá… ¦ Mis. Lambang, Medali, Daun…
+Chercher… (cœur, arbre, blason, étoile) ¦ Tìm… (trái tim, cây, huy hiệu, ngôi sao) ¦ Cari… (hati, pohon, lambang, bintang)
+Chercher une forme ¦ Tìm một hình dạng ¦ Cari bentuk
+Formes de la bibliothèque ¦ Hình dạng trong thư viện ¦ Bentuk dari pustaka
+Cadre de dessin du polygone ¦ Khung vẽ đa giác ¦ Area gambar poligon
+📚 Bibliothèque ¦ 📚 Thư viện ¦ 📚 Pustaka
+✏️ Dessiner un polygone ¦ ✏️ Vẽ một đa giác ¦ ✏️ Gambar poligon
+Modèles ¦ Mẫu ¦ Templat
+↶ Enlever le dernier point ¦ ↶ Bỏ điểm cuối cùng ¦ ↶ Hapus titik terakhir
+ou colle le code SVG ici ¦ hoặc dán mã SVG vào đây ¦ atau tempel kode SVG di sini
+Lire ce SVG ¦ Đọc SVG này ¦ Baca SVG ini
+Créer la forme ¦ Tạo hình dạng ¦ Buat bentuk
+Pose au moins 3 points. ¦ Hãy đặt ít nhất 3 điểm. ¦ Letakkan paling sedikit 3 titik.
+Choisis ou colle un dessin SVG. ¦ Hãy chọn hoặc dán một bản vẽ SVG. ¦ Pilih atau tempel gambar SVG.
+Choisis une forme dans la bibliothèque. ¦ Hãy chọn một hình dạng trong thư viện. ¦ Pilih bentuk dari pustaka.
+SVG importé ¦ SVG đã nhập ¦ SVG yang diimpor
+Il faut un fichier SVG (.svg). ¦ Cần một tệp SVG (.svg). ¦ Diperlukan berkas SVG (.svg).
+📁 Glisse un fichier SVG ici, colle-le (⌘V) ou choisis-le ¦ 📁 Kéo một tệp SVG vào đây, dán nó (⌘V) hoặc chọn nó ¦ 📁 Seret berkas SVG ke sini, tempel (⌘V) atau pilih
+Seuls ses chemins pleins sont gardés : pas de script, d’image ni de texte. ¦ Chỉ giữ lại các đường tô kín: không có script, hình ảnh hay chữ. ¦ Hanya jalur penuhnya yang disimpan: tanpa skrip, gambar, atau teks.
+Choisis d’abord un dessin SVG. ¦ Hãy chọn một bản vẽ SVG trước. ¦ Pilih gambar SVG terlebih dahulu.
+Choisis d’abord une forme. ¦ Hãy chọn một hình dạng trước. ¦ Pilih bentuk terlebih dahulu.
+Clique dans le cadre pour poser les points, dans l’ordre du tour. Glisse un point pour le déplacer ; double-clic sur un point pour l’enlever. ¦ Hãy bấm vào khung để đặt các điểm, theo thứ tự vòng quanh. Kéo một điểm để di chuyển nó; bấm đúp vào một điểm để bỏ nó. ¦ Klik di dalam bingkai untuk meletakkan titik, berurutan mengelilingi bentuk. Seret titik untuk memindahkannya; klik dua kali pada titik untuk menghapusnya.
+Un dessin SVG (logo, pictogramme…) : seuls ses chemins pleins sont gardés. Les scripts, liens, images, textes et styles sont retirés. ¦ Một bản vẽ SVG (logo, biểu tượng…): chỉ giữ lại các đường tô kín. Script, liên kết, hình ảnh, chữ và kiểu dáng sẽ bị bỏ. ¦ Gambar SVG (logo, piktogram…): hanya jalur penuhnya yang disimpan. Skrip, tautan, gambar, teks, dan gaya dihapus.
+Revenir en arrière (Ctrl+Z) ¦ Lùi lại (Ctrl+Z) ¦ Mundur (Ctrl+Z)
+Revenir en avant (Ctrl+Maj+Z ou Ctrl+Y) ¦ Tiến lên (Ctrl+Maj+Z hoặc Ctrl+Y) ¦ Maju (Ctrl+Maj+Z atau Ctrl+Y)
+Comme dans les blocs (01) et sur les fiches (initiales). ¦ Như trong các khối (01) và trên hồ sơ (chữ cái đầu). ¦ Seperti di blok (01) dan di profil (inisial).
+Clique sur « Appliquer » pour utiliser cette forme. ¦ Bấm “Áp dụng” để dùng hình dạng này. ¦ Klik “Terapkan” untuk memakai bentuk ini.
+＋ Nouveau projet ¦ ＋ Dự án mới ¦ ＋ Proyek baru
+＋ Nouvelle battue ¦ ＋ Cuộc tìm kiếm diện rộng mới ¦ ＋ Penyisiran baru
+＋ Nouveau tableau ¦ ＋ Bảng mới ¦ ＋ Papan baru
+Mes généalogies (changer, en créer une autre) ¦ Các gia phả của tôi (chuyển, tạo cái khác) ¦ Silsilahku (ganti, buat yang lain)
+L’ordre de l’app, tous les boutons montrés sauf 🧓 et les raccourcis vers les outils (cachés au départ) ¦ Thứ tự của ứng dụng, hiện mọi nút trừ 🧓 và các lối tắt đến công cụ (ẩn lúc đầu) ¦ Urutan aplikasi, semua tombol ditampilkan kecuali 🧓 dan pintasan ke alat (tersembunyi di awal)
+Le clic ouvre ¦ Bấm vào sẽ mở ¦ Klik membuka
+Enquêtes, sur cet onglet ¦ Tìm hiểu, trên thẻ này ¦ Penelusuran, di tab ini
+: chaque écran garde le dessin que tu connais. ¦ : mỗi màn hình giữ kiểu vẽ bạn đã quen. ¦ : setiap layar tetap memakai tampilan yang kamu kenal.
+Un seul dessin partout ¦ Một kiểu vẽ ở mọi nơi ¦ Satu tampilan di mana-mana
+Le style « archive » ¦ Kiểu “lưu trữ” ¦ Gaya “arsip”
+Va avec les blocs de l’app (traits noirs, coins droits). Plus sobre, moins coloré. ¦ Hợp với các khối của ứng dụng (nét đen, góc vuông). Giản dị hơn, ít màu hơn. ¦ Serasi dengan blok aplikasi (garis hitam, sudut lurus). Lebih sederhana, kurang berwarna.
+Où ? ¦ Ở đâu? ¦ Di mana?
+Nouvelle forme choisie ¦ Đã chọn hình dạng mới ¦ Bentuk baru dipilih
+« Liste | Fiches » est dans la barre au-dessus des enquêtes. ¦ “Danh sách | Thẻ” nằm trên thanh phía trên các cuộc tìm hiểu. ¦ “Daftar | Kartu” ada di bilah di atas penelusuran.
+« Liste | Fiches » est en bas de la colonne. ¦ “Danh sách | Thẻ” nằm ở cuối cột. ¦ “Daftar | Kartu” ada di bagian bawah kolom.
+Ici pas de liste : « Liste | Fiches » ne concerne que Recherche, Enquêtes et les autres listes. ¦ Ở đây không có danh sách: “Danh sách | Thẻ” chỉ dành cho Nghiên cứu, Tìm hiểu và các danh sách khác. ¦ Tidak ada daftar di sini: “Daftar | Kartu” hanya untuk Riset, Penelusuran, dan daftar lainnya.
+à droite ¦ bên phải ¦ di kanan
+à gauche ¦ bên trái ¦ di kiri
+Colonne à droite ¦ Cột bên phải ¦ Kolom di kanan
+Colonne à gauche ¦ Cột bên trái ¦ Kolom di kiri
+Colonne de gauche remise comme au départ ¦ Đã đặt lại cột bên trái như ban đầu ¦ Kolom kiri dikembalikan seperti semula
+Portraits remis comme au départ ¦ Đã đặt lại chân dung như ban đầu ¦ Potret dikembalikan seperti semula
+Designs remis comme au départ ¦ Đã đặt lại thiết kế như ban đầu ¦ Desain dikembalikan seperti semula
+Quel style pour les fiches ? ¦ Kiểu nào cho hồ sơ? ¦ Gaya apa untuk profil?
+Combien d’espace autour des choses ? ¦ Bao nhiêu khoảng trống quanh các thứ? ¦ Berapa banyak ruang di sekitar elemen?
+Quelles icônes veux-tu ? ¦ Bạn muốn biểu tượng nào? ¦ Ikon mana yang kamu mau?
+Quel en-tête pour la fiche d’une personne ? ¦ Phần đầu nào cho hồ sơ của một người? ¦ Kepala apa untuk profil seseorang?
+Cases des arbres ¦ Ô của cây ¦ Kotak pohon
+Quelles cases pour les arbres ? ¦ Ô nào cho các cây? ¦ Kotak apa untuk pohon?
+Les cases des personnes dans les arbres (Graphiques) : ascendants, descendants, sablier… ¦ Ô của từng người trong cây (Biểu đồ): tổ tiên, con cháu, đồng hồ cát… ¦ Kotak orang di pohon (Grafik): leluhur, keturunan, jam pasir…
+Toutes pareilles : on ne voit pas d’un coup les hommes, les femmes ni les ancêtres directs. ¦ Tất cả giống nhau: không nhìn ra ngay nam, nữ hay tổ tiên trực hệ. ¦ Semua sama: kamu tidak langsung melihat laki-laki, perempuan, atau leluhur langsung.
+Repérage immédiat ¦ Nhận ra ngay ¦ Langsung terlihat
+Avec photo ¦ Có ảnh ¦ Dengan foto
+le portrait au-dessus du nom ¦ chân dung phía trên tên ¦ potret di atas nama
+On reconnaît les visages ¦ Nhận ra khuôn mặt ¦ Wajah dikenali
+le nom seul ¦ chỉ có tên ¦ nama saja
+Les dates n’apparaissent qu’au survol (sauf si tu les remets). ¦ Ngày tháng chỉ hiện khi rê chuột (trừ khi bạn bật lại). ¦ Tanggal hanya muncul saat kursor diarahkan (kecuali kamu menampilkannya lagi).
+Largeur des cases ¦ Độ rộng của ô ¦ Lebar kotak
+Couleurs du genre ¦ Màu theo giới tính ¦ Warna jenis kelamin
+Ce sont aussi les couleurs des portraits ronds (Apparence → 👤 Portraits : menu de choix, listes). Les changer ici les change partout. ¦ Đây cũng là màu của chân dung tròn (Giao diện → 👤 Chân dung: menu chọn, danh sách). Đổi ở đây là đổi ở mọi nơi. ¦ Ini juga warna potret bulat (Tampilan → 👤 Potret: menu pilihan, daftar). Mengubahnya di sini mengubahnya di mana-mana.
+Traits entre les cases ¦ Nét nối giữa các ô ¦ Garis antar-kotak
+Écrire les dates dans les cases ¦ Ghi ngày tháng trong ô ¦ Tulis tanggal di kotak
+Les dates évitent de confondre deux Louise BORIE ; sans elles, l’arbre est plus léger (elles restent au survol). ¦ Ngày tháng giúp không nhầm hai người Louise BORIE; không có chúng, cây gọn hơn (vẫn hiện khi rê chuột). ¦ Tanggal mencegah tertukarnya dua Louise BORIE; tanpanya, pohon lebih ringan (tetap muncul saat kursor diarahkan).
+Petit badge Sosa sur la case ¦ Huy hiệu Sosa nhỏ trên ô ¦ Lencana Sosa kecil di kotak
+Tu vois tout de suite le numéro de chaque ancêtre direct, utile pour parler d’un ancêtre (« le 6 »). ¦ Bạn thấy ngay số của từng tổ tiên trực hệ, tiện khi nói về một tổ tiên (“số 6”). ¦ Kamu langsung melihat nomor setiap leluhur langsung, berguna untuk membicarakan seorang leluhur (“nomor 6”).
+Quels boutons veux-tu ? ¦ Bạn muốn nút nào? ¦ Tombol mana yang kamu mau?
+Comment les choses apparaissent-elles ? ¦ Các thứ xuất hiện như thế nào? ¦ Bagaimana elemen muncul?
+Instantané ¦ Tức thì ¦ Seketika
+L’apparition brusque peut surprendre : on ne voit pas d’où vient la fenêtre. ¦ Xuất hiện đột ngột có thể gây bất ngờ: không thấy cửa sổ đến từ đâu. ¦ Kemunculan mendadak bisa mengejutkan: kamu tidak melihat dari mana jendela datang.
+doux et court (0,18 s) ¦ nhẹ và ngắn (0,18 s) ¦ lembut dan singkat (0,18 s)
+On suit ce qui se passe ¦ Theo dõi được điều đang xảy ra ¦ Kamu bisa mengikuti yang terjadi
+Très léger temps d’attente (moins d’un quart de seconde). ¦ Chờ một chút rất ngắn (chưa đến một phần tư giây). ¦ Jeda sangat singkat (kurang dari seperempat detik).
+Aucune animation ¦ Không có hoạt ảnh ¦ Tanpa animasi
+rien ne bouge jamais ¦ không bao giờ có gì chuyển động ¦ tidak ada yang pernah bergerak
+Le plus calme ¦ Yên tĩnh nhất ¦ Paling tenang
+Les boutons s’enfoncent sous la souris ¦ Các nút lún xuống dưới con chuột ¦ Tombol tertekan di bawah mouse
+Montre que le bouton réagit avant même de cliquer. ¦ Cho thấy nút phản hồi ngay cả trước khi bấm. ¦ Menunjukkan tombol bereaksi bahkan sebelum diklik.
+Barre bleue du temps qui reste (messages H7) ¦ Thanh xanh thời gian còn lại (thông báo H7) ¦ Bilah biru waktu tersisa (pesan H7)
+Suivre le réglage « réduire les animations » de l’ordinateur ¦ Theo cài đặt “giảm hoạt ảnh” của máy tính ¦ Ikuti pengaturan “kurangi animasi” komputer
+Comment séparer les lignes des listes ? ¦ Phân cách các dòng của danh sách như thế nào? ¦ Bagaimana memisahkan baris daftar?
+retouché ¦ đã chỉnh ¦ diubah
+🎨 Designs au choix ¦ 🎨 Thiết kế tuỳ chọn ¦ 🎨 Desain pilihan
+La forme des éléments est rangée là où on s’en sert : ¦ Hình dạng của các thành phần được chỉnh ở nơi bạn dùng chúng: ¦ Bentuk elemen diatur di tempat kamu memakainya:
+🎨 le style des fiches ¦ 🎨 kiểu của hồ sơ ¦ 🎨 gaya profil
+Exporter ce réglage ¦ Xuất cài đặt này ¦ Ekspor pengaturan ini
+Nom de ce réglage : ¦ Tên của cài đặt này: ¦ Nama pengaturan ini:
+Ce fichier n’est pas un réglage LCNDA (il n’est pas lisible). ¦ Tệp này không phải là cài đặt LCNDA (không đọc được). ¦ Berkas ini bukan pengaturan LCNDA (tidak bisa dibaca).
+Ce fichier n’est pas un réglage LCNDA. ¦ Tệp này không phải là cài đặt LCNDA. ¦ Berkas ini bukan pengaturan LCNDA.
+Ce réglage est vide. ¦ Cài đặt này trống. ¦ Pengaturan ini kosong.
+MISE À JOUR ¦ CẬP NHẬT ¦ PEMBARUAN
+Téléchargement dans ton dossier « Téléchargements »… ¦ Đang tải về thư mục “Tải về” của bạn… ¦ Mengunduh ke folder “Unduhan”-mu…
+📁 Afficher dans le dossier ¦ 📁 Hiện trong thư mục ¦ 📁 Tampilkan di folder
+Impossible d’ouvrir le dossier. ¦ Không thể mở thư mục. ¦ Tidak bisa membuka folder.
+Impossible d’ouvrir le fichier. ¦ Không thể mở tệp. ¦ Tidak bisa membuka berkas.
+Ouvre-le, puis glisse LCNDA dans « Applications » (à la place de l’ancienne). Ta généalogie ne bouge pas. ¦ Hãy mở nó, rồi kéo LCNDA vào “Applications” (thay cho bản cũ). Gia phả của bạn vẫn giữ nguyên. ¦ Buka, lalu seret LCNDA ke “Applications” (menggantikan yang lama). Silsilahmu tetap seperti semula.
+Ouvre-le et suis l’installation : elle remplace l’ancienne version. Ta généalogie ne bouge pas. Windows peut afficher « Windows a protégé votre ordinateur » : « Informations complémentaires » → « Exécuter quand même ». ¦ Hãy mở nó và làm theo phần cài đặt: nó sẽ thay phiên bản cũ. Gia phả của bạn vẫn giữ nguyên. Windows có thể hiện “Windows đã bảo vệ máy tính của bạn”: “Thông tin thêm” → “Vẫn chạy”. ¦ Buka dan ikuti instalasinya: ini menggantikan versi lama. Silsilahmu tetap seperti semula. Windows mungkin menampilkan “Windows melindungi PC”: “Info selengkapnya” → “Tetap jalankan”.
+Ouvre-le avec l’installateur de paquets (ou « sudo apt install ./ce-fichier.deb »). Ta généalogie ne bouge pas. ¦ Hãy mở nó bằng trình cài đặt gói (hoặc “sudo apt install ./ce-fichier.deb”). Gia phả của bạn vẫn giữ nguyên. ¦ Buka dengan penginstal paket (atau “sudo apt install ./ce-fichier.deb”). Silsilahmu tetap seperti semula.
+⤓ Télécharger ¦ ⤓ Tải về ¦ ⤓ Unduh
+Voir les nouveautés ¦ Xem điểm mới ¦ Lihat yang baru
+↗ Voir les nouveautés ¦ ↗ Xem điểm mới ¦ ↗ Lihat yang baru
+Ne plus me prévenir pour cette version ¦ Đừng báo cho tôi về phiên bản này nữa ¦ Jangan beri tahu aku lagi tentang versi ini
+Recherche de la dernière version… ¦ Đang tìm phiên bản mới nhất… ¦ Mencari versi terbaru…
+La recherche n’a pas abouti. ¦ Không tìm được. ¦ Pencarian tidak berhasil.
+À jour ¦ Đã cập nhật ¦ Terbaru
+Pas d’installateur pour cet ordinateur dans cette version : regarde la page des nouveautés. ¦ Phiên bản này không có trình cài đặt cho máy tính này: hãy xem trang điểm mới. ¦ Tidak ada penginstal untuk komputer ini di versi ini: lihat halaman yang baru.
+↺ Me prévenir de nouveau pour cette version ¦ ↺ Báo lại cho tôi về phiên bản này ¦ ↺ Beri tahu aku lagi tentang versi ini
+Le fichier va dans ton dossier « Téléchargements », son empreinte est vérifiée, puis tu l’ouvres pour installer. Ta généalogie ne bouge pas. ¦ Tệp được tải vào thư mục “Tải về” của bạn, dấu vân tay của nó được kiểm tra, rồi bạn mở nó để cài đặt. Gia phả của bạn vẫn giữ nguyên. ¦ Berkas masuk ke folder “Unduhan”-mu, sidik jarinya diperiksa, lalu kamu membukanya untuk menginstal. Silsilahmu tetap seperti semula.
+Ce que la carte montre ¦ Những gì thẻ hiển thị ¦ Yang ditampilkan kartu
+Naissances par décennie ¦ Số ca sinh theo thập niên ¦ Kelahiran per dekade
+Prénoms les plus donnés ¦ Tên được đặt nhiều nhất ¦ Nama depan yang paling sering diberikan
+Âge au mariage ¦ Tuổi khi kết hôn ¦ Usia saat menikah
+Liste | Fiches ¦ Danh sách | Thẻ ¦ Daftar | Kartu
+Minguo (Taïwan) ¦ Dân Quốc (Đài Loan) ¦ Minguo (Taiwan)
+Tailte Éireann ¦ Tailte Éireann ¦ Tailte Éireann
+💾 Enregistrer le projet ¦ 💾 Lưu dự án ¦ 💾 Simpan proyek
+⤓ Exporter la vidéo (MP4 / WebM, plusieurs formats)… ¦ ⤓ Xuất video (MP4 / WebM, nhiều định dạng)… ¦ ⤓ Ekspor video (MP4 / WebM, beberapa format)…
+⤓ Exporter les sous-titres (.srt) ¦ ⤓ Xuất phụ đề (.srt) ¦ ⤓ Ekspor subtitel (.srt)
+🔖 Copier les chapitres (pour YouTube) ¦ 🔖 Sao chép các chương (cho YouTube) ¦ 🔖 Salin bab (untuk YouTube)
+✂️ Couper ici ¦ ✂️ Cắt ở đây ¦ ✂️ Potong di sini
+⟦ Commence ici ¦ ⟦ Bắt đầu ở đây ¦ ⟦ Mulai di sini
+⟧ Finit ici ¦ ⟧ Kết thúc ở đây ¦ ⟧ Selesai di sini
+🔊 Séparer le son de l’image ¦ 🔊 Tách âm thanh khỏi hình ảnh ¦ 🔊 Pisahkan suara dari gambar
+⌨️ Raccourcis du montage… ¦ ⌨️ Phím tắt dựng phim… ¦ ⌨️ Pintasan penyuntingan…
+🎥 Plusieurs caméras (calées par le son)… ¦ 🎥 Nhiều máy quay (khớp theo âm thanh)… ¦ 🎥 Beberapa kamera (diselaraskan lewat suara)…
+🗂 Un rush de la base… ¦ 🗂 Một đoạn quay thô từ cơ sở dữ liệu… ¦ 🗂 Klip mentah dari basis data…
+＋ Son / musique ¦ ＋ Âm thanh / nhạc ¦ ＋ Suara / musik
+🎙 Enregistrer une voix off ¦ 🎙 Ghi âm lời bình ¦ 🎙 Rekam sulih suara
+💬 Sous-titre ici ¦ 💬 Phụ đề ở đây ¦ 💬 Subtitel di sini
+🔖 Chapitre ici ¦ 🔖 Chương ở đây ¦ 🔖 Bab di sini
+🪄 Modèle « La vie de… » ¦ 🪄 Mẫu “Cuộc đời của…” ¦ 🪄 Templat “Kehidupan…”
+🪄 Modèle « Une famille » ¦ 🪄 Mẫu “Một gia đình” ¦ 🪄 Templat “Sebuah keluarga”
+＋ Piste vidéo ¦ ＋ Rãnh video ¦ ＋ Trek video
+＋ Piste son ¦ ＋ Rãnh âm thanh ¦ ＋ Trek suara
+⏮ Au début ¦ ⏮ Về đầu ¦ ⏮ Ke awal
+◀ ◆ Image clé précédente ¦ ◀ ◆ Khung hình chính trước ¦ ◀ ◆ Keyframe sebelumnya
+◆ ▶ Image clé suivante ¦ ◆ ▶ Khung hình chính sau ¦ ◆ ▶ Keyframe berikutnya
+🧲 Aimanter (marche / arrêt) ¦ 🧲 Bắt dính (bật / tắt) ¦ 🧲 Tempelkan (aktif / nonaktif)
+🎨 Couleurs du film ¦ 🎨 Màu của phim ¦ 🎨 Warna film
+🔊 Son du film ¦ 🔊 Âm thanh của phim ¦ 🔊 Suara film
+🎞️ Le film (rotation, fondus) ¦ 🎞️ Bộ phim (xoay, chuyển mờ) ¦ 🎞️ Film (rotasi, pudar)
+Le dessin des personnes partout dans l’app : d’abord la forme, puis le portrait. Tant que tu ne touches à rien, ¦ Cách vẽ người ở mọi nơi trong ứng dụng: trước là hình dạng, sau là chân dung. Khi bạn chưa chạm vào gì, ¦ Cara orang digambar di seluruh aplikasi: pertama bentuknya, lalu potretnya. Selama kamu tidak mengubah apa pun,
+Une seule, qui vaut partout : la fiche, les listes, l’arbre, le menu de choix et les petits carrés numérotés des blocs. ¦ Chỉ một, dùng cho mọi nơi: hồ sơ, danh sách, cây, menu chọn và các ô vuông nhỏ đánh số của khối. ¦ Hanya satu, berlaku di mana-mana: profil, daftar, pohon, menu pilihan, dan kotak kecil bernomor pada blok.
+Les formes proposées dans « Forme des avatars » : coche celles à montrer, range-les en glissant ⠿ (ou ↑ ↓). Celles de l’app ne se suppriment pas : décoche-les pour les cacher. Les tiennes (✎) se modifient, se dupliquent, s’exportent. ¦ Các hình dạng có trong “Hình dạng ảnh đại diện”: đánh dấu những cái muốn hiện, sắp xếp chúng bằng cách kéo ⠿ (hoặc ↑ ↓). Hình dạng của ứng dụng không xoá được: bỏ đánh dấu để ẩn chúng. Hình dạng của bạn (✎) có thể sửa, nhân bản, xuất. ¦ Bentuk yang ditawarkan di “Bentuk avatar”: centang yang ingin ditampilkan, atur dengan menyeret ⠿ (atau ↑ ↓). Bentuk bawaan aplikasi tidak bisa dihapus: hapus centangnya untuk menyembunyikan. Bentukmu (✎) bisa diubah, diduplikasi, diekspor.
+Créer une forme à partir de celle-ci ¦ Tạo một hình dạng từ hình này ¦ Buat bentuk dari yang ini
+Enregistrer l’ordre et les formes montrées ¦ Lưu thứ tự và các hình dạng được hiện ¦ Simpan urutan dan bentuk yang ditampilkan
+La liste de départ : l’ordre de l’app et toutes les formes montrées (tes formes restent, à la fin) ¦ Danh sách ban đầu: thứ tự của ứng dụng và mọi hình dạng được hiện (hình dạng của bạn vẫn còn, ở cuối) ¦ Daftar awal: urutan aplikasi dan semua bentuk ditampilkan (bentukmu tetap ada, di akhir)
+Avec le portrait « Comme avant », la forme s’applique aux carrés numérotés et aux initiales des fiches. ¦ Với chân dung “Như trước”, hình dạng áp dụng cho các ô vuông đánh số và chữ cái đầu của hồ sơ. ¦ Dengan potret “Seperti sebelumnya”, bentuk berlaku untuk kotak bernomor dan inisial profil.
+règle tout d’un coup (le rond unique et le carré de la fiche choisissent aussi la forme) ; tu peux ensuite changer chaque ligne (« retouché » s’affiche). ¦ chỉnh mọi thứ một lần (hình tròn duy nhất và ô vuông của hồ sơ cũng chọn hình dạng); sau đó bạn có thể đổi từng dòng (hiện “đã chỉnh”). ¦ mengatur semuanya sekaligus (lingkaran tunggal dan kotak profil juga memilih bentuknya); lalu kamu bisa mengubah setiap baris (muncul “diubah”).
+Avec « Comme avant », chaque endroit garde son propre dessin (la forme ci-dessus s’applique quand même aux petits carrés numérotés et aux initiales des fiches). Pars du rond unique ou du carré de la fiche pour utiliser ces réglages. ¦ Với “Như trước”, mỗi nơi giữ kiểu vẽ riêng (hình dạng phía trên vẫn áp dụng cho các ô vuông nhỏ đánh số và chữ cái đầu của hồ sơ). Hãy bắt đầu từ hình tròn duy nhất hoặc ô vuông của hồ sơ để dùng các cài đặt này. ¦ Dengan “Seperti sebelumnya”, setiap tempat mempertahankan tampilannya sendiri (bentuk di atas tetap berlaku untuk kotak kecil bernomor dan inisial profil). Mulailah dari lingkaran tunggal atau kotak profil untuk memakai pengaturan ini.
+Un peu d’arrondi adoucit le carré sans le confondre avec un rond. Seulement pour la forme « Carré arrondi ». Double-clic sur le curseur : valeur de départ. ¦ Bo góc một chút làm ô vuông mềm hơn mà không thành hình tròn. Chỉ cho hình dạng “Vuông bo góc”. Bấm đúp vào thanh trượt: giá trị ban đầu. ¦ Sedikit pembulatan melembutkan persegi tanpa membuatnya jadi lingkaran. Hanya untuk bentuk “Persegi membulat”. Klik dua kali pada penggeser: nilai awal.
+Plus grandes, elles se lisent mieux de loin et sur les petits ronds ; plus petites, le portrait paraît plus calme. Le chiffre est une part de la taille du portrait, donc ça reste juste aux 4 tailles. ¦ To hơn thì dễ đọc từ xa và trên các hình tròn nhỏ; nhỏ hơn thì chân dung trông nhẹ nhàng hơn. Con số là một phần của kích thước chân dung, nên vẫn đúng ở cả 4 kích thước. ¦ Lebih besar, lebih mudah dibaca dari jauh dan pada lingkaran kecil; lebih kecil, potret terlihat lebih tenang. Angkanya adalah bagian dari ukuran potret, jadi tetap pas di keempat ukuran.
+Avec la couleur du genre, tu sais d’un coup d’œil si c’est un homme, une femme ou un animal, partout pareil. Une seule couleur, c’est plus sobre et plus « archive », comme le carré actuel de la fiche. ¦ Với màu theo giới tính, bạn nhìn qua là biết đó là nam, nữ hay con vật, ở mọi nơi như nhau. Một màu duy nhất thì giản dị hơn và mang vẻ “lưu trữ” hơn, như ô vuông hiện nay của hồ sơ. ¦ Dengan warna jenis kelamin, sekilas kamu tahu apakah itu laki-laki, perempuan, atau hewan, sama di mana-mana. Satu warna saja lebih sederhana dan lebih bergaya “arsip”, seperti kotak profil saat ini.
+Photos en noir et blanc ¦ Ảnh đen trắng ¦ Foto hitam putih
+Une photo, c’est plus parlant que deux lettres. Les initiales toujours, c’est plus régulier quand certaines photos sont floues ou mal cadrées. Le noir et blanc donne le même ton à toutes les photos, anciennes comme récentes (c’est ce que fait la fiche aujourd’hui). ¦ Một tấm ảnh nói lên nhiều hơn hai chữ cái. Luôn dùng chữ cái đầu thì đều đặn hơn khi có ảnh bị mờ hoặc cắt khung không đẹp. Đen trắng cho mọi ảnh cùng một tông, ảnh cũ cũng như mới (đó là cách hồ sơ đang làm hiện nay). ¦ Foto lebih bercerita daripada dua huruf. Selalu memakai inisial terlihat lebih rata saat beberapa foto buram atau dibingkai kurang pas. Hitam putih memberi nada yang sama pada semua foto, lama maupun baru (begitulah profil saat ini).
+Deux lettres distinguent Joseph et Jean MARTIN. Une seule lettre est plus lisible sur les petits ronds de 22 px et met la famille en avant. ¦ Hai chữ cái giúp phân biệt Joseph và Jean MARTIN. Một chữ cái thì dễ đọc hơn trên các hình tròn nhỏ 22 px và làm nổi bật gia đình. ¦ Dua huruf membedakan Joseph dan Jean MARTIN. Satu huruf lebih mudah dibaca pada lingkaran kecil 22 px dan menonjolkan keluarga.
+Mettre le numéro Sosa sur le portrait ¦ Đặt số Sosa lên chân dung ¦ Tampilkan nomor Sosa di potret
+Tu repères tes ancêtres directs sans lire la ligne. Si tu trouves que ça charge trop, laisse-le éteint : le Sosa reste écrit à droite des listes. Il n’apparaît pas sur les portraits de 22 px, trop petits. ¦ Bạn nhận ra tổ tiên trực hệ mà không cần đọc dòng. Nếu thấy rối quá, hãy để tắt: số Sosa vẫn được ghi ở bên phải danh sách. Nó không hiện trên chân dung 22 px, vì quá nhỏ. ¦ Kamu mengenali leluhur langsungmu tanpa membaca barisnya. Jika terasa terlalu ramai, biarkan nonaktif: Sosa tetap tertulis di kanan daftar. Ini tidak muncul di potret 22 px, terlalu kecil.
+Aujourd’hui, pas d’initiales dans la liste des personnes : seulement la photo, quand la fiche en a une. ¦ Hiện nay, danh sách người không có chữ cái đầu: chỉ có ảnh, khi hồ sơ có ảnh. ¦ Saat ini, tidak ada inisial di daftar orang: hanya foto, jika profilnya punya.
+Où elle est, et son dessin. Tant que tu ne touches à rien, ¦ Nó ở đâu, và kiểu vẽ của nó. Khi bạn chưa chạm vào gì, ¦ Letaknya, dan tampilannya. Selama kamu tidak mengubah apa pun,
+La colonne, à gauche ou à droite de l’écran. ¦ Cột, ở bên trái hoặc bên phải màn hình. ¦ Kolom, di kiri atau kanan layar.
+Lettres d’origine (A, H, S1…), les onglets de chaque outil, « Liste | Fiches » en bas de la colonne ¦ Chữ cái gốc (A, H, S1…), các thẻ của từng công cụ, “Danh sách | Thẻ” ở cuối cột ¦ Huruf asli (A, H, S1…), tab setiap alat, “Daftar | Kartu” di bagian bawah kolom
+encadrés, à plat ¦ có khung, phẳng ¦ berbingkai, datar
+un trait bleu à gauche ¦ một nét xanh bên trái ¦ garis biru di kiri
+sans cadre, tout en douceur ¦ không khung, thật mềm mại ¦ tanpa bingkai, serba lembut
+Des boutons, cadres et champs de la colonne. ¦ Của các nút, khung và ô nhập trong cột. ¦ Untuk tombol, bingkai, dan kolom isian di kolom.
+Franches, décalées en bleu (comme avant) ¦ Rõ nét, lệch màu xanh (như trước) ¦ Tegas, bergeser dengan biru (seperti sebelumnya)
+Réglages en plus ¦ Cài đặt thêm ¦ Pengaturan tambahan
+Les groupes de départ ; l’ordre à l’intérieur est gardé ¦ Các nhóm ban đầu; thứ tự bên trong được giữ ¦ Grup awal; urutan di dalamnya dipertahankan
+Décoché : une seule liste. Chaque façon garde ses propres réglages : tu les retrouves en recochant ou en décochant. ¦ Bỏ đánh dấu: một danh sách duy nhất. Mỗi cách giữ cài đặt riêng: bạn tìm lại chúng khi đánh dấu lại hoặc bỏ đánh dấu. ¦ Tidak dicentang: satu daftar saja. Setiap cara menyimpan pengaturannya sendiri: kamu menemukannya lagi dengan mencentang atau menghapus centang.
+Boutons en haut à droite ¦ Các nút ở góc trên bên phải ¦ Tombol di kanan atas
+Ajouter aux raccourcis (étoile) ¦ Thêm vào lối tắt (ngôi sao) ¦ Tambahkan ke pintasan (bintang)
+Les boutons secondaires de toute l’app (Annuler, Modifier, ＋ Ajouter…) ; le bouton principal reste plein, à la couleur principale. ¦ Các nút phụ của toàn ứng dụng (Hủy, Sửa, ＋ Thêm…); nút chính vẫn tô đầy, theo màu chính. ¦ Tombol sekunder di seluruh aplikasi (Batal, Ubah, ＋ Tambah…); tombol utama tetap penuh, dengan warna utama.
+pour les boutons secondaires ¦ cho các nút phụ ¦ untuk tombol sekunder
+Ils partent du choix du dessus. Si tu en changes un, la carte choisie affiche « retouché ». ¦ Chúng bắt đầu từ lựa chọn phía trên. Nếu bạn đổi một cái, thẻ được chọn sẽ hiện “đã chỉnh”. ¦ Semuanya berawal dari pilihan di atas. Jika kamu mengubah salah satunya, kartu yang dipilih menampilkan “diubah”.
+La hauteur et la marge des boutons : les grands sont plus faciles à viser, surtout sur une tablette ; les petits laissent plus de place au contenu. La taille des lettres reste celle de l’Apparence. ¦ Chiều cao và lề của nút: nút lớn dễ nhắm hơn, nhất là trên máy tính bảng; nút nhỏ chừa nhiều chỗ hơn cho nội dung. Cỡ chữ vẫn theo Giao diện. ¦ Tinggi dan bantalan tombol: yang besar lebih mudah dikenai, terutama di tablet; yang kecil memberi lebih banyak ruang untuk isi. Ukuran huruf tetap mengikuti Tampilan.
+Des boutons bien ronds se distinguent des cadres et des champs ; comme les blocs, tout reste cohérent. ¦ Nút thật tròn thì nổi bật so với khung và ô nhập; giống như các khối, mọi thứ vẫn nhất quán. ¦ Tombol yang bulat menonjol dari bingkai dan kolom isian; seperti blok, semuanya tetap selaras.
+Le changement est gardé tout de suite (« ✓ Enregistré »), sans bouton. Un message en bas à gauche propose « ↶ Annuler ». ¦ Thay đổi được giữ ngay (“✓ Đã lưu”), không cần nút. Một thông báo ở góc dưới bên trái đề nghị “↶ Hoàn tác”. ¦ Perubahan langsung disimpan (“✓ Tersimpan”), tanpa tombol. Pesan di kiri bawah menawarkan “↶ Urungkan”.
+Comment se séparent les lignes des listes, de la colonne des personnes et des tableaux. ¦ Cách phân cách các dòng trong danh sách, cột người và bảng. ¦ Cara memisahkan baris di daftar, kolom orang, dan tabel.
+Une ligne sur deux grisée ¦ Tô xám xen kẽ một dòng ¦ Baris berselang diberi abu-abu
+qu’on attrape : facile à glisser, à viser sur une tablette. ¦ để nắm lấy: dễ kéo, dễ nhắm trên máy tính bảng. ¦ untuk dipegang: mudah diseret, mudah dikenai di tablet.
+Trait de la couleur principale à gauche ¦ Nét màu chính ở bên trái ¦ Garis warna utama di kiri
+Le fond pâle se voit de loin ; le trait à gauche ne cache pas le gris des lignes alternées. ¦ Nền nhạt nhìn thấy từ xa; nét bên trái không che màu xám của các dòng xen kẽ. ¦ Latar pucat terlihat dari jauh; garis di kiri tidak menutupi abu-abu baris berselang.
+Les visages et les couleurs du genre aident à retrouver une personne sans lire. ¦ Khuôn mặt và màu theo giới tính giúp tìm lại một người mà không cần đọc. ¦ Wajah dan warna jenis kelamin membantu menemukan seseorang tanpa membaca.
+Les titres des colonnes restent en haut quand on fait défiler ¦ Tiêu đề cột vẫn ở trên cùng khi cuộn ¦ Judul kolom tetap di atas saat menggulir
+Dans une longue liste, tu sais toujours quelle colonne est la naissance et laquelle est le décès. ¦ Trong một danh sách dài, bạn luôn biết cột nào là ngày sinh và cột nào là ngày mất. ¦ Di daftar panjang, kamu selalu tahu kolom mana kelahiran dan mana kematian.
+Émojis, traits, pictogrammes… les petits dessins des boutons, des barres d’outils et des rubriques. ¦ Emoji, nét vẽ, biểu tượng… những hình nhỏ trên nút, thanh công cụ và mục. ¦ Emoji, garis, piktogram… gambar kecil pada tombol, bilah alat, dan bagian.
+Leur dessin change d’un ordinateur à l’autre (Mac, Windows) et certains sont un peu enfantins. ¦ Hình vẽ của chúng thay đổi tuỳ máy tính (Mac, Windows) và một số hơi trẻ con. ¦ Tampilannya berbeda antarkomputer (Mac, Windows) dan beberapa agak kekanak-kanakan.
+Deux styles à l’écran en même temps. ¦ Hai kiểu trên màn hình cùng lúc. ¦ Dua gaya di layar sekaligus.
+La corbeille 🗑 toujours en rouge ¦ Thùng rác 🗑 luôn màu đỏ ¦ Tempat sampah 🗑 selalu merah
+Noms à côté ¦ Tên bên cạnh ¦ Nama di samping
+Écrire le nom à côté des boutons de la fiche ¦ Ghi tên bên cạnh các nút của hồ sơ ¦ Tulis nama di samping tombol profil
+Combien d’espace autour des choses : dans et entre les blocs, entre les lignes, autour des boutons. ¦ Bao nhiêu khoảng trống quanh các thứ: trong và giữa các khối, giữa các dòng, quanh các nút. ¦ Berapa banyak ruang di sekitar elemen: di dalam dan di antara blok, di antara baris, di sekitar tombol.
+Reposant et facile à cliquer ¦ Thư thái và dễ bấm ¦ Nyaman dan mudah diklik
+Plus d’informations à l’écran ¦ Nhiều thông tin hơn trên màn hình ¦ Lebih banyak informasi di layar
+Les cibles sont plus petites : demande plus de précision à la souris. ¦ Mục tiêu nhỏ hơn: cần dùng chuột chính xác hơn. ¦ Sasaran lebih kecil: perlu ketelitian lebih dengan mouse.
+Passer en compact tout seul sur un petit écran ¦ Tự chuyển sang gọn trên màn hình nhỏ ¦ Otomatis beralih ke ringkas di layar kecil
+Sur un téléphone ou une tablette, l’app se resserre d’elle-même, puis reprend ton réglage sur le grand écran. ¦ Trên điện thoại hoặc máy tính bảng, ứng dụng tự thu gọn, rồi trở lại cài đặt của bạn trên màn hình lớn. ¦ Di ponsel atau tablet, aplikasi merapat sendiri, lalu kembali ke pengaturanmu di layar besar.
+Beaucoup de blanc sous le nom ; la photo est petite et en gris. ¦ Nhiều khoảng trắng dưới tên; ảnh nhỏ và màu xám. ¦ Banyak ruang kosong di bawah nama; fotonya kecil dan abu-abu.
+une photo de famille en haut ¦ một tấm ảnh gia đình ở trên cùng ¦ foto keluarga di bagian atas
+Les dates et les lieux ¦ Ngày tháng và địa điểm ¦ Tanggal dan tempat
+Dates, lieux et métier ¦ Ngày tháng, địa điểm và nghề nghiệp ¦ Tanggal, tempat, dan pekerjaan
+Les lieux évitent d’ouvrir les blocs pour savoir d’où vient la personne ; le métier aide à distinguer les homonymes. ¦ Địa điểm giúp khỏi phải mở các khối để biết người đó từ đâu đến; nghề nghiệp giúp phân biệt những người trùng tên. ¦ Tempat membuatmu tak perlu membuka blok untuk tahu asal orang itu; pekerjaan membantu membedakan orang yang namanya sama.
+Sous le nom, sur une ligne ¦ Dưới tên, trên một dòng ¦ Di bawah nama, dalam satu baris
+À droite, elles ne gênent pas le nom ; sous le nom, elles se lisent avec lui et l’en-tête est moins haut. ¦ Ở bên phải, chúng không vướng tên; ở dưới tên, chúng được đọc cùng với tên và phần đầu thấp hơn. ¦ Di kanan, tidak mengganggu nama; di bawah nama, terbaca bersama nama dan bagian kepala lebih pendek.
+Beaucoup de traits épais et d’ombres décalées : ça peut paraître chargé sur un grand écran plein de blocs. ¦ Nhiều nét dày và bóng lệch: có thể trông rối trên một màn hình lớn đầy khối. ¦ Banyak garis tebal dan bayangan bergeser: bisa terlihat ramai di layar besar yang penuh blok.
+Des coins droits font « dossier d’archives » ; arrondis, l’app paraît plus douce et plus moderne. Le même arrondi va sur toute la fiche (blocs, boutons, champs). ¦ Góc vuông trông như “hồ sơ lưu trữ”; bo tròn thì ứng dụng trông mềm mại và hiện đại hơn. Cùng độ bo áp dụng cho toàn bộ hồ sơ (khối, nút, ô nhập). ¦ Sudut lurus terlihat seperti “map arsip”; dengan sudut membulat, aplikasi terlihat lebih lembut dan modern. Pembulatan yang sama berlaku untuk seluruh profil (blok, tombol, kolom isian).
+Des traits épais séparent nettement les blocs (utile si tu vois mal) ; des traits fins allègent les pages pleines de cadres. Leur couleur suit les couleurs de l’Apparence ; un thème à toi qui a ses propres traits (Apparence → ✎ Mes thèmes) garde les siens. ¦ Nét dày tách rõ các khối (hữu ích nếu bạn nhìn kém); nét mảnh làm nhẹ các trang đầy khung. Màu của chúng theo màu của Giao diện; một chủ đề riêng của bạn có nét riêng (Giao diện → ✎ Chủ đề của tôi) thì giữ nét của nó. ¦ Garis tebal memisahkan blok dengan jelas (berguna jika penglihatanmu kurang); garis tipis meringankan halaman yang penuh bingkai. Warnanya mengikuti warna Tampilan; tema milikmu yang punya garis sendiri (Tampilan → ✎ Temaku) tetap memakai garisnya.
+L’ombre dit « ceci est un bloc qu’on peut toucher ». Franches, elles donnent du relief ; douces, elles sont presque invisibles ; sans ombre, c’est le plus sobre (et le plus net à l’impression). ¦ Bóng đổ nói rằng “đây là một khối có thể chạm vào”. Rõ nét thì tạo chiều sâu; mềm thì gần như không thấy; không có bóng là giản dị nhất (và sắc nét nhất khi in). ¦ Bayangan berkata “ini blok yang bisa disentuh”. Tegas, memberi kedalaman; lembut, hampir tak terlihat; tanpa bayangan, paling sederhana (dan paling tajam saat dicetak).
+Pour voir, lire et utiliser l’app plus facilement (couleurs, texte, contraste, clavier, mouvement, voix, lecteur d’écran, sous-titres, dictée), et pour préparer le mode simple. Chaque réglage s’applique tout de suite et reste gardé avec ta généalogie. ¦ Để nhìn, đọc và dùng ứng dụng dễ hơn (màu sắc, chữ, độ tương phản, bàn phím, chuyển động, giọng nói, trình đọc màn hình, phụ đề, đọc chính tả), và để chuẩn bị chế độ đơn giản. Mỗi cài đặt áp dụng ngay và được giữ cùng gia phả của bạn. ¦ Untuk melihat, membaca, dan memakai aplikasi dengan lebih mudah (warna, teks, kontras, keyboard, gerakan, suara, pembaca layar, subtitel, dikte), dan untuk menyiapkan mode sederhana. Setiap pengaturan langsung berlaku dan disimpan bersama silsilahmu.
+Environ 1 homme sur 12 voit mal certaines couleurs. Choisis ce qui te ressemble : l’app décale ses couleurs pour que les différences se voient (c’est une correction, réglable). ¦ Khoảng 1 trên 12 người nam nhìn kém một số màu. Hãy chọn kiểu giống bạn: ứng dụng dịch màu để thấy được sự khác biệt (đây là sự hiệu chỉnh, có thể điều chỉnh). ¦ Sekitar 1 dari 12 laki-laki kurang bisa melihat beberapa warna. Pilih yang sesuai denganmu: aplikasi menggeser warnanya agar perbedaannya terlihat (ini koreksi, bisa diatur).
+Le bleu et le jaune se confondent (rare). ¦ Màu xanh lam và vàng bị lẫn với nhau (hiếm). ¦ Biru dan kuning tertukar (jarang).
+Pas de couleurs du tout : tout est en gris. ¦ Hoàn toàn không có màu: mọi thứ đều xám. ¦ Tanpa warna sama sekali: semuanya abu-abu.
+Couleurs faciles à distinguer ¦ Màu dễ phân biệt ¦ Warna yang mudah dibedakan
+Erreur / réussi, homme / femme et graphiques prennent des couleurs que tout le monde distingue (palette Okabe-Ito). ¦ Lỗi / thành công, nam / nữ và biểu đồ dùng những màu mà ai cũng phân biệt được (bảng màu Okabe-Ito). ¦ Galat / berhasil, laki-laki / perempuan, dan grafik memakai warna yang bisa dibedakan semua orang (palet Okabe-Ito).
+Les couleurs que tu as choisies toi-même (dessins, plans et maison 3D, tableaux, mises en page, photos) ne sont pas remplacées : c’est la correction (le curseur au-dessus) qui les rend plus faciles à distinguer, partout, y compris dans les outils de modification en plein écran. ¦ Các màu do chính bạn chọn (bản vẽ, sơ đồ mặt bằng và nhà 3D, bảng, dàn trang, ảnh) không bị thay thế: chính sự hiệu chỉnh (thanh trượt phía trên) giúp chúng dễ phân biệt hơn, ở mọi nơi, kể cả trong các công cụ chỉnh sửa toàn màn hình. ¦ Warna yang kamu pilih sendiri (gambar, denah dan rumah 3D, papan, tata letak, foto) tidak diganti: koreksinya (penggeser di atas) yang membuatnya lebih mudah dibedakan, di mana-mana, termasuk di alat penyuntingan layar penuh.
+Ajouter des formes en plus des couleurs ¦ Thêm hình dạng bên cạnh màu sắc ¦ Tambahkan bentuk selain warna
+Symboles ✓ ⚠ ⛔ dans les messages, hachures sur les pastilles des légendes et les barres des graphiques, ronds et carrés pour femmes et hommes. ¦ Ký hiệu ✓ ⚠ ⛔ trong thông báo, gạch chéo trên chấm chú giải và cột biểu đồ, hình tròn và hình vuông cho nữ và nam. ¦ Simbol ✓ ⚠ ⛔ di pesan, arsiran pada titik legenda dan batang grafik, lingkaran dan persegi untuk perempuan dan laki-laki.
+pour vérifier un faire-part, un livre ou un graphique ¦ để kiểm tra một thiệp báo tin, một cuốn sách hay một biểu đồ ¦ untuk memeriksa kartu pemberitahuan, buku, atau grafik
+Montre tout l’écran comme le voit une personne daltonienne (une simulation, pas une correction). Va ensuite sur l’écran à vérifier : un bandeau en haut rappelle que c’est une simulation, avec « Arrêter ». ¦ Hiện toàn màn hình như người mù màu nhìn thấy (một mô phỏng, không phải hiệu chỉnh). Sau đó hãy đến màn hình cần kiểm tra: một dải ở trên nhắc rằng đây là mô phỏng, kèm “Dừng”. ¦ Menampilkan seluruh layar seperti yang dilihat penyandang buta warna (simulasi, bukan koreksi). Lalu buka layar yang ingin diperiksa: spanduk di atas mengingatkan bahwa ini simulasi, dengan “Berhenti”.
+L’interligne, les espaces et la police. La taille du texte de toute l’app se règle dans Thème et couleurs (Taille typographique). ¦ Khoảng cách dòng, khoảng trống và phông chữ. Cỡ chữ của toàn ứng dụng được chỉnh trong Chủ đề và màu sắc (Cỡ chữ). ¦ Jarak baris, spasi, dan fon. Ukuran teks seluruh aplikasi diatur di Tema dan warna (Ukuran huruf).
+Plus aéré, une police plus facile à lire. Recommandé pour la dyslexie : interligne 1,5, lettres + 12 %, mots + 16 %. ¦ Thoáng hơn, phông chữ dễ đọc hơn. Khuyên dùng cho chứng khó đọc: khoảng cách dòng 1,5, chữ + 12 %, từ + 16 %. ¦ Lebih lega, dengan fon yang lebih mudah dibaca. Disarankan untuk disleksia: jarak baris 1,5, huruf + 12%, kata + 16%.
+Lettres alourdies en bas, pour qu’elles ne se retournent pas. Toujours disponible. ¦ Chữ đậm hơn ở phần dưới, để chúng không bị lật ngược. Luôn có sẵn. ¦ Huruf diberi bobot di bagian bawah, agar tidak terbalik. Selalu tersedia.
+« Atkinson Hyperlegible » et « OpenDyslexic » sont rangées dans l’app (polices libres, licence SIL OFL) : rien à installer, et elles marchent sans internet. ¦ “Atkinson Hyperlegible” và “OpenDyslexic” có sẵn trong ứng dụng (phông chữ miễn phí, giấy phép SIL OFL): không cần cài gì, và chúng hoạt động không cần internet. ¦ “Atkinson Hyperlegible” dan “OpenDyslexic” sudah ada di aplikasi (fon bebas, lisensi SIL OFL): tidak perlu menginstal apa pun, dan bisa dipakai tanpa internet.
+Textes gris passés en noir (ou en blanc en mode sombre), bordures plus marquées, fonds unis sans quadrillage. Marche en clair et en sombre. ¦ Chữ xám chuyển thành đen (hoặc trắng ở chế độ tối), viền rõ hơn, nền trơn không kẻ ô. Dùng được ở chế độ sáng và tối. ¦ Teks abu-abu menjadi hitam (atau putih di mode gelap), tepi lebih tegas, latar polos tanpa kisi. Berfungsi di mode terang dan gelap.
+🧩 Une chose à la fois ¦ 🧩 Mỗi lần một việc ¦ 🧩 Satu hal setiap kali
+Une chose à la fois ¦ Mỗi lần một việc ¦ Satu hal setiap kali
+Mode « une chose à la fois » ¦ Chế độ “mỗi lần một việc” ¦ Mode “satu hal setiap kali”
+Une interface plus calme : moins de boutons, de chiffres et de décorations, les actions principales plus grandes, et un seul panneau à la fois (le tableau de bord sans sa colonne de réglages, les fiches sur une seule colonne, pas d’écran divisé). Rien n’est supprimé : le petit bandeau « 🧩 Une chose à la fois — Tout afficher », en bas à droite, remet tout d’un clic. ¦ Giao diện yên tĩnh hơn: ít nút, con số và đồ trang trí hơn, các thao tác chính to hơn, và mỗi lần chỉ một bảng (bảng điều khiển không có cột cài đặt, hồ sơ trên một cột, không chia đôi màn hình). Không có gì bị xoá: dải nhỏ “🧩 Mỗi lần một việc — Hiện tất cả” ở góc dưới bên phải khôi phục mọi thứ chỉ với một cú bấm. ¦ Antarmuka yang lebih tenang: lebih sedikit tombol, angka, dan hiasan, aksi utama lebih besar, dan satu panel setiap kali (dasbor tanpa kolom pengaturannya, profil dalam satu kolom, tanpa layar terbagi). Tidak ada yang dihapus: spanduk kecil “🧩 Satu hal setiap kali — Tampilkan semua” di kanan bawah mengembalikan semuanya dengan sekali klik.
+Moins de choses à l’écran pour se concentrer sur l’essentiel. Les outils cachés reviennent avec « Tout afficher », en bas à droite de l’écran. ¦ Ít thứ trên màn hình hơn để tập trung vào điều cốt yếu. Các công cụ bị ẩn sẽ trở lại với “Hiện tất cả”, ở góc dưới bên phải màn hình. ¦ Lebih sedikit hal di layar agar fokus pada yang penting. Alat yang tersembunyi muncul lagi lewat “Tampilkan semua”, di kanan bawah layar.
+Avec la touche Tab, un cadre épais bleu et jaune montre où tu es. Les boutons et les cases peuvent être plus grands (au moins 40 px), et la flèche de la souris plus grosse. ¦ Với phím Tab, một khung dày màu xanh và vàng cho thấy bạn đang ở đâu. Các nút và ô có thể to hơn (ít nhất 40 px), và con trỏ chuột to hơn. ¦ Dengan tombol Tab, bingkai tebal biru dan kuning menunjukkan posisimu. Tombol dan kotak bisa lebih besar (paling sedikit 40 px), dan penunjuk mouse lebih besar.
+Boutons, menus, champs et cases à cocher plus grands, plus faciles à toucher ou à cliquer. ¦ Nút, menu, ô nhập và ô đánh dấu to hơn, dễ chạm hoặc bấm hơn. ¦ Tombol, menu, kolom isian, dan kotak centang lebih besar, lebih mudah disentuh atau diklik.
+🔊 Lecture à voix haute ¦ 🔊 Đọc to ¦ 🔊 Membaca dengan suara
+Lecture à voix haute ¦ Đọc to ¦ Membaca dengan suara
+Sélectionne un texte avec la souris : un bouton 🔊 apparaît à côté, clique dessus pour l’entendre. Sur une fiche, le bouton « 🔊 Lire la fiche » (en bas à gauche) lit le nom puis les blocs affichés. ¦ Hãy chọn một đoạn chữ bằng chuột: một nút 🔊 hiện ra bên cạnh, bấm vào để nghe. Trên một hồ sơ, nút “🔊 Đọc hồ sơ” (góc dưới bên trái) đọc tên rồi đến các khối đang hiện. ¦ Pilih teks dengan mouse: tombol 🔊 muncul di sampingnya, klik untuk mendengarkannya. Di profil, tombol “🔊 Bacakan profil” (kiri bawah) membacakan nama lalu blok yang ditampilkan.
+Lire à voix haute le texte que je sélectionne ¦ Đọc to đoạn chữ tôi chọn ¦ Bacakan teks yang kupilih
+Chaque photo ou document de tes médias est décrit à voix haute : la « Description de l’image » écrite dans la fenêtre du média, sinon son titre, sa date, son lieu et les personnes rattachées. Les petites images à côté d’un nom et les décorations sont passées sous silence. ¦ Mỗi ảnh hoặc tài liệu trong tư liệu của bạn được mô tả bằng giọng nói: “Mô tả hình ảnh” ghi trong cửa sổ tư liệu, nếu không thì tiêu đề, ngày, địa điểm và những người được liên kết. Các hình nhỏ cạnh một cái tên và đồ trang trí sẽ được bỏ qua. ¦ Setiap foto atau dokumen di mediamu dideskripsikan dengan suara: “Deskripsi gambar” yang ditulis di jendela media, atau jika tidak ada, judul, tanggal, tempat, dan orang yang terhubung. Gambar kecil di samping nama dan hiasan dilewati.
+Le lecteur d’écran lit un texte à la place de chaque image. Pour l’écrire toi-même : ouvre un média, champ « Description de l’image (lue à voix haute) ». ¦ Trình đọc màn hình đọc một đoạn chữ thay cho mỗi hình ảnh. Để tự viết: hãy mở một tư liệu, ô “Mô tả hình ảnh (được đọc to)”. ¦ Pembaca layar membacakan teks sebagai ganti setiap gambar. Untuk menulisnya sendiri: buka sebuah media, kolom “Deskripsi gambar (dibacakan)”.
+🎬 Vidéos et montages ¦ 🎬 Video và dựng phim ¦ 🎬 Video dan suntingan
+Les vidéos qui ont des sous-titres les montrent d’office (en français s’il y en a). Dans le montage, la piste « Sous-titres » se voit à la lecture même si tu l’as cachée (l’œil) ; la vidéo exportée, elle, ne change pas. ¦ Các video có phụ đề sẽ hiện phụ đề mặc định (bằng tiếng Pháp nếu có). Trong dựng phim, rãnh “Phụ đề” hiện khi phát ngay cả khi bạn đã ẩn nó (con mắt); còn video đã xuất thì không thay đổi. ¦ Video yang punya subtitel langsung menampilkannya (dalam bahasa Prancis jika ada). Saat menyunting, trek “Subtitel” tampil saat diputar meski kamu menyembunyikannya (ikon mata); video yang diekspor tidak berubah.
+Pour lire ce qui est dit sans devoir allumer les sous-titres à chaque fois. ¦ Để đọc những gì được nói mà không phải bật phụ đề mỗi lần. ¦ Untuk membaca apa yang diucapkan tanpa harus menyalakan subtitel setiap kali.
+ou un nouveau clic sur 🎤 arrête. ¦ hoặc bấm 🎤 lần nữa để dừng. ¦ atau klik 🎤 sekali lagi untuk berhenti.
+Le navigateur écoute le micro seulement quand tu cliques sur 🎤. La première fois, il demande la permission d’utiliser le micro. ¦ Trình duyệt chỉ nghe micrô khi bạn bấm vào 🎤. Lần đầu tiên, nó sẽ xin phép dùng micrô. ¦ Browser hanya mendengarkan mikrofon saat kamu mengeklik 🎤. Pertama kali, browser meminta izin memakai mikrofon.
+Plus de gris pâle : le texte est noir sur blanc (ou blanc sur noir en mode sombre). ¦ Không còn xám nhạt: chữ đen trên nền trắng (hoặc trắng trên nền đen ở chế độ tối). ¦ Tidak ada lagi abu-abu pucat: teks hitam di atas putih (atau putih di atas hitam di mode gelap).
+Utilise la voix de l’ordinateur ; rien n’est envoyé sur internet par l’app. ¦ Dùng giọng của máy tính; ứng dụng không gửi gì lên internet. ¦ Memakai suara komputer; aplikasi tidak mengirim apa pun ke internet.
+Cache ce qui sert rarement pour garder l’essentiel, en plus grand. « Tout afficher » (en bas à droite) remet tout. ¦ Ẩn những gì ít dùng để giữ lại điều cốt yếu, to hơn. “Hiện tất cả” (góc dưới bên phải) khôi phục mọi thứ. ¦ Menyembunyikan yang jarang dipakai agar yang penting tetap ada, lebih besar. “Tampilkan semua” (kanan bawah) mengembalikan semuanya.
+Donne un texte à chaque image de tes médias. Le mieux : écrire toi-même ce qu’on voit, dans la fenêtre du média. ¦ Gán một đoạn chữ cho mỗi hình ảnh trong tư liệu của bạn. Tốt nhất: tự viết những gì nhìn thấy, trong cửa sổ tư liệu. ¦ Memberi teks pada setiap gambar di mediamu. Paling baik: tulis sendiri apa yang terlihat, di jendela media.
+Utilise la reconnaissance de la voix du navigateur (Chrome et Edge passent par internet ; Safari peut le faire sur l’ordinateur). Dans l’app de bureau, utilise la dictée du système : sur Mac, touche 🎤 ou deux fois Fn ; sur Windows, touche Windows + H. ¦ Dùng tính năng nhận dạng giọng nói của trình duyệt (Chrome và Edge đi qua internet; Safari có thể làm trên máy tính). Trong ứng dụng máy tính, hãy dùng tính năng đọc chính tả của hệ thống: trên Mac, phím 🎤 hoặc nhấn Fn hai lần; trên Windows, phím Windows + H. ¦ Memakai pengenalan suara browser (Chrome dan Edge lewat internet; Safari bisa melakukannya di komputer). Di aplikasi desktop, gunakan dikte sistem: di Mac, tombol 🎤 atau Fn dua kali; di Windows, tombol Windows + H.
+Ces réglages sont gardés avec ta généalogie (comme l’apparence) : ils suivent sa sauvegarde et la retrouvent sur un autre ordinateur. ¦ Các cài đặt này được giữ cùng gia phả của bạn (như giao diện): chúng đi theo bản sao lưu và có lại trên máy tính khác. ¦ Pengaturan ini disimpan bersama silsilahmu (seperti tampilan): ikut dalam cadangannya dan muncul lagi di komputer lain.
+De très gros boutons pour regarder l’arbre, les photos et les fiches, sans rien pouvoir modifier ni supprimer par erreur — pour une personne âgée, un enfant, ou n’importe qui qui veut juste regarder. ¦ Những nút rất to để xem cây, ảnh và hồ sơ, không thể sửa hay xoá gì do nhầm lẫn — cho người lớn tuổi, trẻ em, hoặc bất kỳ ai chỉ muốn xem. ¦ Tombol sangat besar untuk melihat pohon, foto, dan profil, tanpa bisa mengubah atau menghapus apa pun karena keliru — untuk orang lanjut usia, anak-anak, atau siapa saja yang hanya ingin melihat.
+Montrer le bouton « 🧓 Mode simple » en haut de l’app ¦ Hiện nút “🧓 Chế độ đơn giản” ở trên cùng ứng dụng ¦ Tampilkan tombol “🧓 Mode sederhana” di bagian atas aplikasi
+Taille du texte (Thème et couleurs) ¦ Cỡ chữ (Chủ đề và màu sắc) ¦ Ukuran teks (Tema dan warna)
+Un clic applique tout d’un coup : couleurs, police et tailles. Tu peux ensuite retoucher chaque réglage plus bas. ¦ Một cú bấm áp dụng mọi thứ cùng lúc: màu sắc, phông chữ và kích thước. Sau đó bạn có thể chỉnh lại từng cài đặt bên dưới. ¦ Sekali klik menerapkan semuanya sekaligus: warna, fon, dan ukuran. Lalu kamu bisa menyesuaikan setiap pengaturan di bawah.
+Toute la famille, de case en case ¦ Cả gia đình, từ ô này sang ô khác ¦ Seluruh keluarga, dari kotak ke kotak
+Fond sombre et texte clair, n’éblouit pas le soir ¦ Nền tối và chữ sáng, không chói mắt vào buổi tối ¦ Latar gelap dan teks terang, tidak menyilaukan di malam hari
+Noir sur blanc pur, traits épais, 21:1 ¦ Đen trên nền trắng tinh, nét dày, 21:1 ¦ Hitam di atas putih murni, garis tebal, 21:1
+Un cadre par ligne, large et facile à viser ¦ Mỗi dòng một khung, rộng và dễ nhắm ¦ Satu kotak per baris, lebar dan mudah dikenai
+Plus de cadres d’un coup d’œil, sur un grand écran ¦ Nhiều khung hơn trong một cái nhìn, trên màn hình lớn ¦ Lebih banyak kotak sekilas pandang, di layar besar
+Chacun touche sa photo, et les liens s’écrivent pour lui. ¦ Mỗi người chạm vào ảnh của mình, và các mối quan hệ được ghi ra cho họ. ¦ Setiap orang menyentuh fotonya, dan hubungannya dituliskan untuknya.
+Fond, texte et boutons ¦ Nền, chữ và nút ¦ Latar, teks, dan tombol
+Une couleur de fond douce et un texte très foncé fatiguent moins. ¦ Màu nền dịu và chữ rất đậm sẽ ít gây mỏi mắt hơn. ¦ Warna latar yang lembut dan teks yang sangat gelap tidak terlalu melelahkan.
+Le texte sur le fond ¦ Chữ trên nền ¦ Teks di atas latar
+On vise 7:1 au moins (le plus haut niveau des règles d’accessibilité). « Corriger » garde la teinte et change seulement sa clarté. ¦ Mục tiêu là ít nhất 7:1 (mức cao nhất của quy tắc trợ năng). “Sửa” giữ sắc màu và chỉ đổi độ sáng. ¦ Targetnya paling sedikit 7:1 (tingkat tertinggi aturan aksesibilitas). “Perbaiki” mempertahankan rona dan hanya mengubah kecerahannya.
+À 24 px on lit sans lunettes à 50 cm ; à 30 px et plus, de loin. ¦ Với 24 px có thể đọc không cần kính ở 50 cm; với 30 px trở lên, đọc được từ xa. ¦ Pada 24 px bisa dibaca tanpa kacamata dari jarak 50 cm; pada 30 px atau lebih, dari jauh.
+Atkinson Hyperlegible et Luciole sont dessinées pour les personnes qui voient mal : les lettres qui se ressemblent (I l 1, O 0, b d) ne se confondent pas. OpenDyslexic aide certaines personnes dyslexiques. Atkinson et OpenDyslexic sont rangées dans l’app ; Luciole est prise si elle est sur l’ordinateur, sinon une police proche (Atkinson Hyperlegible). ¦ Atkinson Hyperlegible và Luciole được thiết kế cho người nhìn kém: các chữ giống nhau (I l 1, O 0, b d) không bị lẫn. OpenDyslexic giúp một số người mắc chứng khó đọc. Atkinson và OpenDyslexic có sẵn trong ứng dụng; Luciole được dùng nếu có trên máy tính, nếu không thì dùng một phông chữ gần giống (Atkinson Hyperlegible). ¦ Atkinson Hyperlegible dan Luciole dirancang untuk orang dengan penglihatan kurang: huruf yang mirip (I l 1, O 0, b d) tidak tertukar. OpenDyslexic membantu sebagian penyandang disleksia. Atkinson dan OpenDyslexic sudah ada di aplikasi; Luciole dipakai jika ada di komputer, jika tidak, fon yang mirip (Atkinson Hyperlegible).
+Les capitales repèrent le nom de famille, comme dans l’app ; en minuscules, c’est plus doux à lire. ¦ Chữ in hoa đánh dấu họ, như trong ứng dụng; chữ thường thì đọc dịu hơn. ¦ Huruf kapital menandai nama keluarga, seperti di aplikasi; dengan huruf kecil, lebih lembut dibaca.
+Pareil que l’app : la voix et la vitesse de « ♿ Toute l’app ». ¦ Giống ứng dụng: giọng và tốc độ của “♿ Toàn ứng dụng”. ¦ Sama seperti aplikasi: suara dan kecepatan “♿ Seluruh aplikasi”.
+Un peu plus lent que d’habitude (80 à 90 %) se suit mieux. ¦ Chậm hơn bình thường một chút (80 đến 90 %) sẽ dễ theo dõi hơn. ¦ Sedikit lebih lambat dari biasanya (80 sampai 90%) lebih mudah diikuti.
+＋ Ajouter un cadre ¦ ＋ Thêm một khung ¦ ＋ Tambah kotak
+Sa fiche, en phrases ¦ Hồ sơ của người đó, bằng câu văn ¦ Profilnya, dalam kalimat
+Son numéro en grand ¦ Số của người đó, cỡ to ¦ Nomornya, ukuran besar
+Ses photos, en diaporama ¦ Ảnh của người đó, dạng trình chiếu ¦ Foto-fotonya, sebagai tayangan slide
+Une surprise à chaque fois ¦ Mỗi lần một bất ngờ ¦ Kejutan setiap kali
+À regarder en grand ¦ Để xem cỡ to ¦ Untuk dilihat dalam ukuran besar
+La regarder en 3D, étage par étage ¦ Xem dạng 3D, từng tầng một ¦ Lihat dalam 3D, lantai demi lantai
+À lire et à écouter ¦ Để đọc và để nghe ¦ Untuk dibaca dan didengarkan
+Un cadre par ligne se vise sans peine sur une tablette ; trois ou quatre par ligne montrent tout d’un coup sur un grand écran. Sur un téléphone, il n’y en a jamais plus de deux. ¦ Mỗi dòng một khung thì dễ nhắm trên máy tính bảng; ba hoặc bốn khung mỗi dòng cho thấy mọi thứ cùng lúc trên màn hình lớn. Trên điện thoại, không bao giờ có quá hai. ¦ Satu kotak per baris mudah dikenai di tablet; tiga atau empat per baris menampilkan semuanya sekaligus di layar besar. Di ponsel, tidak pernah lebih dari dua.
+La personne qui regarde, sa famille proche et ses descendants restent toujours visibles. ¦ Người đang xem, gia đình gần và con cháu của họ luôn được hiện. ¦ Orang yang sedang melihat, keluarga dekatnya, dan keturunannya selalu tampil.
+🖼 Choisir les photos à retirer… ¦ 🖼 Chọn ảnh cần bỏ ra… ¦ 🖼 Pilih foto yang akan dilepas…
+Montrer aussi les actes et documents ¦ Hiện cả giấy tờ và tài liệu ¦ Tampilkan juga akta dan dokumen
+Souvent difficiles à lire. ¦ Thường khó đọc. ¦ Sering sulit dibaca.
+Une écriture ancienne ou une page dense découragent ; les photos parlent à tout le monde. ¦ Chữ viết tay cổ hoặc một trang dày chữ làm người ta nản; ảnh thì ai cũng hiểu. ¦ Tulisan tangan lama atau halaman yang padat membuat orang enggan; foto bisa dipahami semua orang.
+Le temps de regarder, et de dire « Oh, c’est ta tante ! ». ¦ Đủ thời gian để xem, và để nói “Ồ, đó là dì của con!”. ¦ Waktu untuk melihat, dan berkata “Oh, itu bibimu!”.
+Faire défiler tout seul en ouvrant le diaporama ¦ Tự chạy khi mở trình chiếu ¦ Putar otomatis saat membuka tayangan slide
+La tablette posée sur le buffet devient un cadre photo de famille. ¦ Chiếc máy tính bảng đặt trên tủ trở thành khung ảnh gia đình. ¦ Tablet di atas bufet menjadi bingkai foto keluarga.
+Garder le doigt sur « 🔒 Quitter le mode simple » (sur l’accueil seulement). ¦ Giữ ngón tay trên “🔒 Thoát chế độ đơn giản” (chỉ ở màn hình chính). ¦ Tahan jarimu di “🔒 Keluar dari mode sederhana” (hanya di beranda).
+Code à 4 chiffres ¦ Mã 4 chữ số ¦ Kode 4 digit
+Tape 4 chiffres : le code est gardé caché, jamais en clair. ¦ Hãy nhập 4 chữ số: mã được giữ kín, không bao giờ lưu dạng chữ thường. ¦ Ketik 4 digit: kodenya disimpan tersembunyi, tidak pernah dalam teks biasa.
+Ouvrir l’app directement en mode simple ¦ Mở ứng dụng thẳng vào chế độ đơn giản ¦ Buka aplikasi langsung dalam mode sederhana
+Sur la tablette de Mamie, l’app s’ouvre toute seule sur les gros boutons. Ajoute l’adresse à l’écran d’accueil de la tablette. ¦ Trên máy tính bảng của Bà, ứng dụng tự mở ra với các nút to. Hãy thêm địa chỉ vào màn hình chính của máy tính bảng. ¦ Di tablet Nenek, aplikasi terbuka sendiri dengan tombol-tombol besar. Tambahkan alamatnya ke layar utama tablet.
+Ces réglages servent de base sur tous les appareils ¦ Các cài đặt này làm nền cho mọi thiết bị ¦ Pengaturan ini menjadi dasar di semua perangkat
+Tu prépares une fois, et chaque tablette ou ordinateur de la famille démarre pareil. ¦ Bạn chuẩn bị một lần, và mọi máy tính bảng hay máy tính trong gia đình đều khởi động giống nhau. ¦ Kamu menyiapkannya sekali, dan setiap tablet atau komputer di keluarga dimulai dengan cara yang sama.
+Pensé et designé par Victor Baissait. Codé par Codex (ChatGPT) et Claude, sous la supervision de Victor Baissait. ¦ Được Victor Baissait nghĩ ra và thiết kế. Được Codex (ChatGPT) và Claude viết mã, dưới sự giám sát của Victor Baissait. ¦ Digagas dan dirancang oleh Victor Baissait. Dikodekan oleh Codex (ChatGPT) dan Claude, di bawah pengawasan Victor Baissait.
+Cartes, chronologie et statistiques ¦ Bản đồ, dòng thời gian và thống kê ¦ Peta, kronologi, dan statistik
+Communes, lieux-dits et villes du monde : ¦ Xã, địa danh nhỏ và thành phố trên thế giới: ¦ Kota, dusun, dan kota-kota dunia:
+Communes de Suisse et du Liechtenstein : swissBOUNDARIES3D © ¦ Xã của Thuỵ Sĩ và Liechtenstein: swissBOUNDARIES3D © ¦ Kota di Swiss dan Liechtenstein: swissBOUNDARIES3D ©
+Communes du Luxembourg : Administration du cadastre et de la topographie, ¦ Xã của Luxembourg: Administration du cadastre et de la topographie, ¦ Kota di Luksemburg: Administration du cadastre et de la topographie,
+Elle prend la couleur principale de l’Apparence (un rouge devient rouge pâle). La couleur pleine ne peut pas se rater ; la couleur pâle laisse lire les gris et les badges. ¦ Nó lấy màu chính của Giao diện (màu đỏ thành đỏ nhạt). Màu đậm thì không thể bỏ sót; màu nhạt để lộ ra các màu xám và huy hiệu. ¦ Warnanya mengikuti warna utama Tampilan (merah menjadi merah pucat). Warna penuh tidak mungkin terlewat; warna pucat membiarkan abu-abu dan lencana tetap terbaca.
+Le cadre du haut (nom, badges, boutons carrés) de toutes les fiches de personnes et d’animaux. Glisse les boutons pour changer leur ordre ; décoche un bouton pour le masquer. ¦ Khung phía trên (tên, huy hiệu, nút vuông) của mọi hồ sơ người và con vật. Kéo các nút để đổi thứ tự; bỏ đánh dấu một nút để ẩn nó. ¦ Bingkai atas (nama, lencana, tombol persegi) semua profil orang dan hewan. Seret tombol untuk mengubah urutannya; hapus centang tombol untuk menyembunyikannya.
+Fiche épurée, pour un diaporama : ni nom, ni badges, ni boutons en haut. ¦ Hồ sơ tối giản, cho trình chiếu: không tên, không huy hiệu, không nút ở trên. ¦ Profil bersih, untuk tayangan slide: tanpa nama, tanpa lencana, tanpa tombol di atas.
+Les boutons côte à côte, en deux rangées. ¦ Các nút cạnh nhau, thành hai hàng. ¦ Tombol berdampingan, dalam dua baris.
+Il est caché au départ : coche « 🧩 » dans la liste des boutons pour le montrer (décoche-le pour le cacher à nouveau). Pas sur les fiches d’animaux. ¦ Lúc đầu nó bị ẩn: đánh dấu “🧩” trong danh sách nút để hiện nó (bỏ đánh dấu để ẩn lại). Không có trên hồ sơ con vật. ¦ Awalnya tersembunyi: centang “🧩” di daftar tombol untuk menampilkannya (hapus centang untuk menyembunyikannya lagi). Tidak ada di profil hewan.
+Écrire sur cette personne (traitement de texte) ¦ Viết về người này (soạn thảo văn bản) ¦ Tulis tentang orang ini (pengolah kata)
+Gardé tout seul. Alt + ↑ / ↓ au clavier. « 👁＋ » n’apparaît que sur les fiches d’animaux. ¦ Tự động lưu. Alt + ↑ / ↓ trên bàn phím. “👁＋” chỉ hiện trên hồ sơ con vật. ¦ Tersimpan otomatis. Alt + ↑ / ↓ di keyboard. “👁＋” hanya muncul di profil hewan.
+Ce qui s’affiche sous le nom et à côté du statut. Glisse pour changer l’ordre ; décoche pour masquer. Gardé tout de suite. ¦ Những gì hiện dưới tên và cạnh trạng thái. Kéo để đổi thứ tự; bỏ đánh dấu để ẩn. Được lưu ngay. ¦ Yang tampil di bawah nama dan di samping status. Seret untuk mengubah urutan; hapus centang untuk menyembunyikan. Langsung tersimpan.
+La forme de l’en-tête et la place des pastilles (à droite ou sous le nom) : « Forme de l’en-tête », plus bas sur cette page. ¦ Hình dạng phần đầu và vị trí của các nhãn tròn (bên phải hoặc dưới tên): “Hình dạng phần đầu”, ở phía dưới trang này. ¦ Bentuk kepala dan letak lencana (di kanan atau di bawah nama): “Bentuk kepala”, lebih ke bawah di halaman ini.
+Montrer le lieu et la personne ¦ Hiện địa điểm và người ¦ Tampilkan tempat dan orang
+« Pas revu au bout de… » sert aussi au bloc « Animaux à retrouver » du Suivi : un seul seuil. ¦ “Không thấy lại sau…” cũng dùng cho khối “Con vật cần tìm lại” của Theo dõi: chỉ một ngưỡng. ¦ “Tidak terlihat lagi setelah…” juga dipakai blok “Hewan yang perlu dicari” di Pelacakan: satu ambang saja.
+Place de « ＋ Nouvelle observation » ¦ Vị trí của “＋ Quan sát mới” ¦ Letak “＋ Pengamatan baru”
+Le bouton pour noter qu’on a vu l’animal. Seulement sur les fiches d’animaux. ¦ Nút để ghi lại rằng đã thấy con vật. Chỉ có trên hồ sơ con vật. ¦ Tombol untuk mencatat bahwa hewan itu terlihat. Hanya di profil hewan.
+Carré 👁＋ en premier dans la grille des boutons ¦ Ô vuông 👁＋ đứng đầu trong lưới nút ¦ Kotak 👁＋ pertama di kisi tombol
+en bas à droite de la fiche ¦ ở góc dưới bên phải hồ sơ ¦ di kanan bawah profil
+Le carré suit aussi « Ordre et visibilité des boutons » plus haut (ligne 01). ¦ Ô vuông cũng theo “Thứ tự và hiển thị của các nút” ở phía trên (dòng 01). ¦ Kotak ini juga mengikuti “Urutan dan visibilitas tombol” di atas (baris 01).

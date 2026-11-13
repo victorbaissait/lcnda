@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE database PUBLIC "-//Gramps//DTD Gramps XML 1.7.1//EN"
+"http://gramps-project.org/xml/1.7.1/grampsxml.dtd">
+<database xmlns="http://gramps-project.org/xml/1.7.1/">
+  <!-- Famille inventée pour les tests de LCNDA : aucune personne réelle. -->
+  <header>
+    <created date="2026-10-02" version="5.2.3"/>
+    <researcher><resname>Testeur Imaginaire</resname></researcher>
+    <mediapath>/home/testeur/photos-de-famille</mediapath>
+  </header>
+  <tags>
+    <tag handle="_TAG1" change="1700000000" name="À vérifier" color="#ffff00000000" priority="0"/>
+    <tag handle="_TAG2" change="1700000000" name="Branche Morvan" color="#00008080ffff" priority="1"/>
+  </tags>
+  <events>
+    <event handle="_E1" change="1700000000" id="E0001">
+      <type>Birth</type>
+      <dateval val="1852-03-14"/>
+      <place hlink="_P_HAM"/>
+      <description>Birth of Morvan, Yves</description>
+      <citationref hlink="_C1"/>
+      <noteref hlink="_N3"/>
+    </event>
+    <event handle="_E2" change="1700000000" id="E0002">
+      <type>Baptism</type>
+      <dateval val="1852-03-15"/>
+      <place hlink="_P_PLOU"/>
+      <citationref hlink="_C1"/>
+    </event>
+    <event handle="_E3" change="1700000000" id="E0003">
+      <type>Death</type>
+      <dateval val="1921" type="about"/>
+      <place hlink="_P_BREST"/>
+      <attribute type="Cause" value="Fluxion de poitrine"/>
+      <attribute type="Age" value="69"/>
+    </event>
+    <event handle="_E4" change="1700000000" id="E0004">
+      <type>Birth</type>
+      <daterange start="1855" stop="1857"/>
+      <place hlink="_P_PLOU"/>
+    </event>
+    <event handle="_E5" change="1700000000" id="E0005">
+      <type>Marriage</type>
+      <dateval val="1878-11-20" cformat="Julian"/>
+      <place hlink="_P_PLOU"/>
+      <description>Mariage à l'église Saint-Pierre</description>
+      <tagref hlink="_TAG1"/>
+    </event>
+    <event handle="_E6" change="1700000000" id="E0006">
+      <type>Occupation</type>
+      <datespan start="1880" stop="1910"/>
+      <description>Goémonier</description>
+    </event>
+    <event handle="_E7" change="1700000000" id="E0007">
+      <type>Birth</type>
+      <dateval val="1880-06"/>
+      <place hlink="_P_PLOU"/>
+    </event>
+    <event handle="_E8" change="1700000000" id="E0008">
+      <type>Military Service</type>
+      <datestr val="pendant la guerre de 1870"/>
+      <description>Mobile du Finistère</description>
+    </event>
+    <event handle="_E9" change="1700000000" id="E0009">
+      <type>Christening</type>
+      <dateval val="1880-06-10"/>
+      <place hlink="_P_PLOU"/>
+    </event>
+  </events>
+  <people home="_I1">
+    <person handle="_I1" change="1700000000" id="I0001">
+      <gender>M</gender>
+      <name type="Birth Name">
+        <first>Yves Marie</first>
+        <call>Yves</call>
+        <surname>Morvan</surname>
+        <nick>Le Grand</nick>
+      </name>
+      <name alt="1" type="Also Known As">
+        <first>Yvon</first>
+        <surname>Morvan</surname>
+      </name>
+      <eventref hlink="_E1" role="Primary"/>
+      <eventref hlink="_E2" role="Primary"/>
+      <eventref hlink="_E3" role="Primary"/>
+      <eventref hlink="_E6" role="Primary"/>
+      <eventref hlink="_E8" role="Primary"/>
+      <eventref hlink="_E9" role="Godfather"/>
+      <objref hlink="_O1"/>
+      <attribute type="Description" value="Grand, yeux bleus"/>
+      <attribute type="Couleur des cheveux" value="Roux"/>
+      <parentin hlink="_F1"/>
+      <url href="https://exemple.invalid/morvan" description="Page de la famille"/>
+      <noteref hlink="_N1"/>
+      <tagref hlink="_TAG2"/>
+    </person>
+    <person handle="_I2" change="1700000000" id="I0002">
+      <gender>F</gender>
+      <name type="Birth Name">
+        <first>Anne</first>
+        <surname prefix="Le">Goff</surname>
+      </name>
+      <name alt="1" type="Married Name">
+        <first>Anne</first>
+        <surname>Morvan</surname>
+        <dateval val="1878-11-20"/>
+      </name>
+      <eventref hlink="_E4" role="Primary"/>
+      <eventref hlink="_E2" role="Godmother"/>
+      <parentin hlink="_F1"/>
+      <citationref hlink="_C2"/>
+    </person>
+    <person handle="_I3" change="1700000000" id="I0003">
+      <gender>F</gender>
+      <name type="Birth Name">
+        <first>Marie-Jeanne</first>
+        <surname>Morvan</surname>
+      </name>
+      <eventref hlink="_E7" role="Primary"/>
+      <eventref hlink="_E9" role="Primary"/>
+      <childof hlink="_F1"/>
+      <personref hlink="_I4" rel="Godfather"/>
+    </person>
+    <person handle="_I4" change="1700000000" id="I0004" priv="1">
+      <gender>M</gender>
+      <name type="Birth Name">
+        <first>Hervé</first>
+        <surname>Kerjean</surname>
+      </name>
+      <eventref hlink="_E5" role="Witness"/>
+      <childof hlink="_F1"/>
+    </person>
+  </people>
+  <families>
+    <family handle="_F1" change="1700000000" id="F0001">
+      <rel type="Married"/>
+      <father hlink="_I1"/>
+      <mother hlink="_I2"/>
+      <eventref hlink="_E5" role="Family"/>
+      <childref hlink="_I3"/>
+      <childref hlink="_I4" frel="Adopted" mrel="Adopted"/>
+      <noteref hlink="_N2"/>
+    </family>
+  </families>
+  <citations>
+    <citation handle="_C1" change="1700000000" id="C0001">
+      <page>Registre 1852, folio 12, acte n° 34</page>
+      <confidence>3</confidence>
+      <sourceref hlink="_S1"/>
+    </citation>
+    <citation handle="_C2" change="1700000000" id="C0002">
+      <dateval val="1855"/>
+      <page>Vue 45</page>
+      <confidence>4</confidence>
+      <srcattribute type="Transcripteur" value="Testeur Imaginaire"/>
+      <sourceref hlink="_S1"/>
+    </citation>
+  </citations>
+  <sources>
+    <source handle="_S1" change="1700000000" id="S0001">
+      <stitle>Registres paroissiaux de Plouvien (exemple)</stitle>
+      <sauthor>Paroisse Saint-Pierre</sauthor>
+      <spubinfo>Archives imaginaires, en ligne</spubinfo>
+      <reporef hlink="_R1" callno="3 E 999/12" medium="Book"/>
+    </source>
+  </sources>
+  <places>
+    <placeobj handle="_P_FR" change="1700000000" id="P0001" type="Country">
+      <pname value="France"/>
+    </placeobj>
+    <placeobj handle="_P_BZH" change="1700000000" id="P0002" type="Region">
+      <pname value="Bretagne"/>
+      <placeref hlink="_P_FR"/>
+    </placeobj>
+    <placeobj handle="_P_29" change="1700000000" id="P0003" type="Department">
+      <pname value="Finistère"/>
+      <placeref hlink="_P_BZH"/>
+    </placeobj>
+    <placeobj handle="_P_PLOU" change="1700000000" id="P0004" type="City">
+      <pname value="Plouvien"/>
+      <pname value="Ploe-Wien"/>
+      <code>29860</code>
+      <coord long="-4.4167" lat="48.5333"/>
+      <placeref hlink="_P_29"/>
+      <noteref hlink="_N4"/>
+    </placeobj>
+    <placeobj handle="_P_HAM" change="1700000000" id="P0005" type="Hamlet">
+      <pname value="Kerguélen"/>
+      <coord long="4°25'30&quot;W" lat="48°32'N"/>
+      <placeref hlink="_P_PLOU"/>
+    </placeobj>
+    <placeobj handle="_P_BREST" change="1700000000" id="P0006" type="City">
+      <pname value="Brest"/>
+      <coord long="-4.4861" lat="48.3904"/>
+      <placeref hlink="_P_29"/>
+    </placeobj>
+  </places>
+  <objects>
+    <object handle="_O1" change="1700000000" id="O0001">
+      <file src="photos/yves-morvan.jpg" mime="image/jpeg" description="Yves Morvan vers 1900"/>
+      <dateval val="1900" type="about"/>
+    </object>
+    <object handle="_O2" change="1700000000" id="O0002">
+      <file src="../../etc/passwd.jpg" mime="image/jpeg" description="Chemin interdit"/>
+    </object>
+  </objects>
+  <repositories>
+    <repository handle="_R1" change="1700000000" id="R0001">
+      <rname>Archives départementales imaginaires</rname>
+      <type>Archive</type>
+      <address><street>1 rue des Registres</street><city>Quimper</city><postal>29000</postal></address>
+      <url href="https://archives.exemple.invalid" type="Web Home"/>
+    </repository>
+  </repositories>
+  <notes>
+    <note handle="_N1" change="1700000000" id="N0001" type="Person Note">
+      <text>Patron pêcheur, il possédait deux barques.
+Sa femme tenait une épicerie. Courriel du cousin : cousin@exemple.invalid</text>
+    </note>
+    <note handle="_N2" change="1700000000" id="N0002" type="Family Note">
+      <text>Mariage célébré par l'abbé Le Bris.</text>
+    </note>
+    <note handle="_N3" change="1700000000" id="N0003" type="Event Note">
+      <text>Né à la ferme de Kerguélen, au bord de l'Aber.</text>
+    </note>
+    <note handle="_N4" change="1700000000" id="N0004" type="Place Note">
+      <text>Commune du pays des Abers.</text>
+    </note>
+  </notes>
+</database>

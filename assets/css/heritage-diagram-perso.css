@@ -1,0 +1,46 @@
+/* LCNDA — 📊 Diagrammes, onglet « ⚙️ Personnaliser » (assets/js/heritage-diagram-perso.js) : style, annotations, lignes de
+ * repère, petits multiples, lecture dans le temps ; poignées des annotations sur l'aperçu ; curseur ▶ des années.
+ * Couleurs de l'app (variables) : suit le mode sombre tout seul. */
+.h-dg-tabs{flex-wrap:wrap}
+.h-dgp{display:grid;gap:8px}
+.h-dgp-sec{border:1px solid var(--line,#d9dde3);border-radius:10px;background:var(--panel-soft,transparent);min-width:0}
+.h-dgp-sec>summary{cursor:pointer;padding:9px 12px;font-weight:700;list-style:none;display:flex;align-items:center;gap:6px}
+.h-dgp-sec>summary::-webkit-details-marker{display:none}
+.h-dgp-sec>summary::after{content:'▸';margin-left:auto;color:var(--muted,#6b7280);font-weight:400}
+.h-dgp-sec[open]>summary::after{content:'▾'}
+.h-dgp-body{display:grid;gap:9px;padding:0 12px 12px;min-width:0}
+.h-dgp-body .ui-hint{margin:0}
+.h-dgp-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:6px}
+.h-dgp-card{display:grid;gap:4px;justify-items:start;text-align:left;padding:7px 8px;border:1.5px solid var(--line,#d9dde3);border-radius:8px;background:var(--white,#fff);color:inherit;cursor:pointer;font:inherit;font-size:13px;min-width:0}
+.h-dgp-card b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.h-dgp-card small{color:var(--muted,#6b7280);font-size:11px}
+.h-dgp-card:hover{border-color:var(--blue,#0066cc)}
+.h-dgp-card.is-active{border-color:var(--blue,#0066cc);box-shadow:0 0 0 2px var(--blue-soft,#dbe7ff)}
+.h-dgp-sw{display:flex;gap:2px;min-height:12px}.h-dgp-sw i{display:block;width:12px;height:12px;border-radius:3px;border:1px solid rgba(0,0,0,.12)}
+.h-dgp-grid{display:grid;gap:8px;min-width:0}
+.h-dgp-row{display:grid;grid-template-columns:minmax(110px,38%) 1fr;align-items:center;gap:8px;font-size:13px;min-width:0}
+.h-dgp-row>span:first-child{color:var(--muted,#6b7280)}
+.h-dgp-row select,.h-dgp-row input:not([type=color]):not([type=range]){min-width:0;max-width:100%}
+.h-dgp-row .ui-range,.h-dgp-row input[type=range]{min-width:0;width:100%}
+.h-dgp-pal{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.h-dgp-pc{display:inline-flex;align-items:center}
+.h-dgp-acts{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.h-dgp-adds{display:flex;flex-wrap:wrap;gap:5px}
+.h-dgp-notes{list-style:none;margin:0;padding:0;display:grid;gap:5px}
+.h-dgp-note{display:flex;flex-wrap:wrap;gap:5px;align-items:center;padding:5px 6px;border:1px solid var(--line,#d9dde3);border-radius:8px;background:var(--white,#fff);min-width:0}
+.h-dgp-note>input:not([type=color]){flex:1 1 120px;min-width:0;padding:4px 6px}
+.h-dgp-note>input.h-dgp-date{flex:0 1 92px}
+.h-dgp-note>select{flex:0 1 auto;min-width:0;max-width:100%}
+.h-dgp-ic{width:22px;text-align:center;font-weight:700;color:var(--muted,#6b7280)}
+/* sur l'aperçu de l'éditeur : les annotations se prennent à la souris ; les poignées n'apparaissent qu'ici (invisibles à l'export) */
+.h-dg-dlg [data-dg-preview] .dg-note{cursor:move;outline:none}
+.h-dg-dlg [data-dg-preview] .dg-note:hover>:not(.dgn-h),.h-dg-dlg [data-dg-preview] .dg-note.is-sel>:not(.dgn-h),.h-dg-dlg [data-dg-preview] .dg-note:focus-visible>:not(.dgn-h){filter:drop-shadow(0 0 2px var(--blue,#0066cc))}
+.h-dg-dlg [data-dg-preview] .dgn-h{fill:#fff;stroke:var(--blue,#0066cc);stroke-width:1.5;cursor:nwse-resize;opacity:0}
+.h-dg-dlg [data-dg-preview] .dg-note:hover .dgn-h,.h-dg-dlg [data-dg-preview] .dg-note.is-sel .dgn-h,.h-dg-dlg [data-dg-preview] .dgn-h.is-drag{opacity:1}
+/* ▶ le curseur des années, sous le dessin */
+.h-dgp-play{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:8px;padding:6px 8px;border:1px solid var(--line,#d9dde3);border-radius:10px;background:var(--white,#fff);font-size:13px}
+.h-dgp-play input[type=range]{flex:1 1 160px;min-width:100px}
+.h-dgp-play output{font-weight:700;min-width:3.2em;color:var(--blue,#0066cc)}
+.h-dgp-play select{max-width:9em}
+.h-dgp-loop{white-space:nowrap}
+@media (max-width:560px){.h-dgp-row{grid-template-columns:1fr}.h-dgp-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}

@@ -1,0 +1,1800 @@
+fr ¦ hr ¦ sl
+Règle un diagramme puis enregistre-le comme vue pour le retrouver ici. ¦ Podesi dijagram, a zatim ga spremi kao prikaz da ga ovdje pronađeš. ¦ Nastavi diagram in ga nato shrani kot pogled, da ga najdeš tukaj.
+Vue enregistrée supprimée ¦ Spremljeni prikaz izbrisan ¦ Shranjeni pogled izbrisan
+Première personne ¦ Prva osoba ¦ Prva oseba
+Deuxième personne ¦ Druga osoba ¦ Druga oseba
+Afficher le lien ¦ Prikaži srodstvo ¦ Prikaži sorodstvo
+Année non renseignée ¦ Godina nije upisana ¦ Leto ni vpisano
+Adresse non renseignée ¦ Adresa nije upisana ¦ Naslov ni vpisan
+Membre du foyer ¦ Član kućanstva ¦ Član gospodinjstva
+Aucun membre relevé. ¦ Nijedan član nije zabilježen. ¦ Noben član ni zabeležen.
+Aucune maisonnée recensée pour cette personne. ¦ Za ovu osobu nije popisano nijedno kućanstvo. ¦ Za to osebo ni popisano nobeno gospodinjstvo.
+Ajoute des recensements depuis sa fiche. ¦ Dodaj popise stanovništva iz njezinog zapisa. ¦ Dodaj popise prebivalstva iz njenega zapisa.
+Aucun déplacement entre deux lieux géocodés n’est encore disponible pour cette branche. ¦ Za ovu granu još nema nijednog preseljenja između dva geokodirana mjesta. ¦ Za to vejo še ni nobene selitve med dvema geokodiranima krajema.
+Pas encore assez de liens renseignés pour dessiner ce graphe. ¦ Još nema dovoljno upisanih veza za crtanje ovog grafa. ¦ Še ni dovolj vpisanih povezav za risanje tega grafa.
+Réseau social ¦ Društvena mreža ¦ Družbeno omrežje
+Métiers transmis ¦ Preneseni zanati ¦ Preneseni poklici
+Migrations de la branche ¦ Migracije grane ¦ Selitve veje
+Réseau ¦ Mreža ¦ Omrežje
+=nœud ¦ čvor|čvora|čvorova ¦ vozlišče|vozlišči|vozlišča|vozlišč
+{nodes} · {links}. Survole un lien pour voir sa nature et clique sur une personne pour ouvrir sa fiche. ¦ {nodes} · {links}. Zadrži pokazivač na vezi da vidiš o čemu se radi i klikni na osobu da otvoriš njezin zapis. ¦ {nodes} · {links}. Pomakni kazalec na povezavo, da vidiš, za kaj gre, in klikni osebo, da odpreš njen zapis.
+Tous les actes ¦ Svi matični zapisi ¦ Vsi matični vpisi
+Actes rattachés ¦ Pripojeni matični zapisi ¦ Pripeti matični vpisi
+Actes liés ¦ Povezani matični zapisi ¦ Povezani matični vpisi
+Sépultures ¦ Pokopi ¦ Pokopi
+Aucun acte pour ces filtres. ¦ Nema matičnih zapisa za ove filtre. ¦ Za te filtre ni matičnih vpisov.
+Sans précision ¦ Bez pojedinosti ¦ Brez podrobnosti
+Aucun recensement pour ces filtres. ¦ Nema popisa stanovništva za ove filtre. ¦ Za te filtre ni popisov prebivalstva.
+Aucun dépouillement enregistré pour ces filtres. ¦ Nema spremljenog indeksa zapisa za ove filtre. ¦ Za te filtre ni shranjenega indeksa vpisov.
+GRAPHIQUES · LIEUX ¦ GRAFIKONI · MJESTA ¦ GRAFI · KRAJI
+SYNTHÈSE LOCALE ¦ LOKALNI PREGLED ¦ LOKALNI PREGLED
+Regroupe les sources et recherches déjà rattachées à un même lieu. ¦ Okuplja izvore i istraživanja već povezana s istim mjestom. ¦ Združi vire in raziskave, ki so že povezani z istim krajem.
+Choisis une commune pour afficher les actes, dépouillements, battues et sépultures liés à ce lieu. ¦ Odaberi općinu da prikažeš matične zapise, indekse zapisa, sustavne pretrage i pokope povezane s tim mjestom. ¦ Izberi občino, da prikažeš matične vpise, indekse vpisov, sistematična iskanja in pokope, povezane s tem krajem.
+génération {list} ¦ generacija {list} ¦ rod {list}
+générations {list} ¦ generacije {list} ¦ rodovi {list}
+est {list} ¦ je {list} ¦ je {list}
+(… {n} places en tout) ¦ (… ukupno mjesta: {n}) ¦ (… vseh mest: {n})
+Ancêtres répétés de {name} ¦ Ponovljeni preci osobe {name} ¦ Ponovljeni predniki osebe {name}
+Voir aussi leurs ancêtres répétés ({n}) ¦ Vidi i njihove ponovljene pretke ({n}) ¦ Poglej tudi njihove ponovljene prednike ({n})
+Quand deux ancêtres sont cousins, leurs propres ancêtres apparaissent plusieurs fois dans l’arbre : c’est l’implexe. Seules les filiations biologiques comptent. Le taux = 1 − personnes différentes ÷ places connues. ¦ Kad su dva pretka bratići, njihovi vlastiti preci pojavljuju se više puta u stablu: to je implex. Računaju se samo biološka podrijetla. Stopa = 1 − različite osobe ÷ poznata mjesta. ¦ Ko sta dva prednika bratranca, se njuni lastni predniki v drevesu pojavijo večkrat: to je implex. Štejejo samo biološka porekla. Stopnja = 1 − različne osebe ÷ znana mesta.
+Places théoriques ¦ Teorijska mjesta ¦ Teoretična mesta
+Places connues ¦ Poznata mjesta ¦ Znana mesta
+places connues ¦ poznata mjesta ¦ znana mesta
+Personnes différentes ¦ Različite osobe ¦ Različne osebe
+Implexe ¦ Implex ¦ Implex
+IMPLEXE ¦ IMPLEX ¦ IMPLEX
+Implexe cumulé ¦ Kumulativni implex ¦ Kumulativni implex
+implexe global ¦ ukupni implex ¦ skupni implex
+ancêtres différents ¦ različiti preci ¦ različni predniki
+ancêtres répétés ¦ ponovljeni preci ¦ ponovljeni predniki
+Calcul arrêté : arbre trop grand. ¦ Izračun zaustavljen: stablo je preveliko. ¦ Izračun ustavljen: drevo je preveliko.
+Les couples communs les plus proches ¦ Najbliži zajednički parovi ¦ Najbližji skupni pari
+C’est ici que les branches se rejoignent ; leurs ancêtres sont répétés à leur suite. ¦ Ovdje se grane spajaju; njihovi preci ponavljaju se iza njih. ¦ Tukaj se veje združijo; njihovi predniki se ponovijo za njimi.
+Aucun ancêtre répété : chaque ancêtre connu n’apparaît qu’une fois. ¦ Nema ponovljenih predaka: svaki poznati predak pojavljuje se samo jednom. ¦ Ni ponovljenih prednikov: vsak znan prednik se pojavi samo enkrat.
+LIENS DE PARENTÉ ¦ SRODSTVO ¦ SORODSTVO
+Choisis deux personnes ¦ Odaberi dvije osobe ¦ Izberi dve osebi
+Recherche les deux individus dans la colonne de gauche pour afficher le chemin familial le plus court. ¦ Potraži dvije osobe u lijevom stupcu da prikažeš najkraći obiteljski put. ¦ Poišči obe osebi v levem stolpcu, da prikažeš najkrajšo družinsko pot.
+lié à ¦ povezan s ¦ povezan z
+{links} entre les deux personnes. ¦ {links} između dviju osoba. ¦ {links} med osebama.
+Aucun chemin familial trouvé entre ces deux personnes. ¦ Nije pronađen obiteljski put između ovih dviju osoba. ¦ Med tema osebama ni bila najdena nobena družinska pot.
+Aucune relation disponible. ¦ Nema dostupnih odnosa. ¦ Ni razpoložljivih odnosov.
+Ajoute des parents, conjoints ou enfants sur la fiche. ¦ Dodaj roditelje, supružnike ili djecu u zapis. ¦ Dodaj starše, zakonce ali otroke v zapis.
+Molette : zoomer · Maj + molette ou glisser : déplacer ¦ Kotačić: zumiranje · Shift + kotačić ili povlačenje: pomicanje ¦ Kolesce: povečava · Shift + kolesce ali vlečenje: premikanje
+Choisir dans Personnes ¦ Odaberi u Osobama ¦ Izberi v Osebah
+Aucune ascendance disponible. ¦ Nema dostupnih predaka. ¦ Ni razpoložljivih prednikov.
+Ajoute des parents sur la fiche pour voir l’arbre. ¦ Dodaj roditelje u zapis da vidiš stablo. ¦ Dodaj starše v zapis, da vidiš drevo.
+♂ Masculin ¦ ♂ Muško ¦ ♂ Moški
+♀ Féminin ¦ ♀ Žensko ¦ ♀ Ženski
+□ Masculin ¦ □ Muško ¦ □ Moški
+○ Féminin ¦ ○ Žensko ¦ ○ Ženski
+◇ Sexe non renseigné ¦ ◇ Spol nije upisan ¦ ◇ Spol ni vpisan
+Les traits relient les générations connues. ¦ Crte povezuju poznate generacije. ¦ Črte povezujejo znane rodove.
+Distribution des noms ¦ Raspodjela prezimena ¦ Porazdelitev priimkov
+DISTRIBUTION ¦ RASPODJELA ¦ PORAZDELITEV
+=naissance regroupée ¦ grupirano rođenje|grupirana rođenja|grupiranih rođenja ¦ združeno rojstvo|združeni rojstvi|združena rojstva|združenih rojstev
+{births} par année et patronyme. ¦ {births} po godini i prezimenu. ¦ {births} po letu in priimku.
+Vivant·e ¦ Živ/živa ¦ Živ/živa
+Décédé·e ¦ Preminuo/preminula ¦ Pokojni/pokojna
+D’autres générations existent ¦ Postoje i druge generacije ¦ Obstajajo še drugi rodovi
+Côte à côte ¦ Jedno uz drugo ¦ Drug ob drugem
+Dessus / dessous ¦ Gore / dolje ¦ Zgoraj / spodaj
+Aucune vue enregistrée pour l’instant ¦ Zasad nema spremljenih prikaza ¦ Zaenkrat ni shranjenih pogledov
+Montrer les animaux de chacun à côté de leur maître (trait pointillé) ¦ Prikaži životinje svake osobe pokraj njihovog vlasnika (isprekidana crta) ¦ Prikaži živali vsake osebe ob njihovem lastniku (črtkana črta)
+Couleur et épaisseur des traits selon la solidité de chaque lien parent-enfant ¦ Boja i debljina crta prema pouzdanosti svake veze roditelj-dijete ¦ Barva in debelina črt glede na zanesljivost vsake povezave starš–otrok
+🛡 Vue solidité ¦ 🛡 Prikaz pouzdanosti ¦ 🛡 Pogled zanesljivosti
+Tableau des chiffres ¦ Tablica brojeva ¦ Tabela številk
+Graphique d’une statistique de l’app ¦ Grafikon statistike aplikacije ¦ Graf statistike aplikacije
+Ce graphique n’existe plus. ¦ Ovaj grafikon više ne postoji. ¦ Ta graf ne obstaja več.
+Un de mes graphiques ¦ Jedan od mojih grafikona ¦ Eden od mojih grafov
+📈 Un de mes graphiques ¦ 📈 Jedan od mojih grafikona ¦ 📈 Eden od mojih grafov
+Un graphique de l’Éditeur de graphiques, tenu à jour ¦ Grafikon iz Uređivača grafikona, uvijek ažuran ¦ Graf iz Urejevalnika grafov, vedno posodobljen
+Données de l’app ¦ Podaci aplikacije ¦ Podatki aplikacije
+🔄 Données de l’app ¦ 🔄 Podaci aplikacije ¦ 🔄 Podatki aplikacije
+✍️ Mes chiffres ¦ ✍️ Moji brojevi ¦ ✍️ Moje številke
+Mon diagramme ¦ Moj dijagram ¦ Moj diagram
+Posé : {where} ¦ Postavljeno: {where} ¦ Postavljeno: {where}
+LISTES · GRAPHIQUES ¦ POPISI · GRAFIKONI ¦ SEZNAMI · GRAFI
+📈 Graphiques et diagrammes ¦ 📈 Grafikoni i dijagrami ¦ 📈 Grafi in diagrami
+Tous tes graphiques (faits dans <b>Réglages → Éditeur de graphiques</b>, avec tes propres chiffres ou ceux de l’app) et tes diagrammes (hémicycle, frise d’un groupe, camembert…). Chacun se pose partout : un widget du tableau de bord, une Fiche, une enquête, l’Atelier, la page d’une personne, la mise en page — bouton « ＋ Diagramme », puis « 📈 Un de mes graphiques ». ¦ Svi tvoji grafikoni (napravljeni u <b>Postavke → Uređivač grafikona</b>, s tvojim vlastitim brojevima ili onima iz aplikacije) i tvoji dijagrami (polukrug, vremenska crta grupe, tortni grafikon…). Svaki se može postaviti bilo gdje: widget na nadzornoj ploči, Zapis, istraga, Radionica, stranica osobe, prijelom — gumb „＋ Dijagram”, zatim „📈 Jedan od mojih grafikona”. ¦ Vsi tvoji grafi (narejeni v <b>Nastavitve → Urejevalnik grafov</b>, s tvojimi lastnimi številkami ali s številkami aplikacije) in tvoji diagrami (polkrog, časovnica skupine, tortni graf…). Vsakega lahko postaviš kamorkoli: gradnik na nadzorni plošči, Zapis, preiskava, Delavnica, stran osebe, postavitev — gumb »＋ Diagram«, nato »📈 Eden od mojih grafov«.
+＋ Nouveau diagramme ¦ ＋ Novi dijagram ¦ ＋ Nov diagram
+Aucun graphique ni diagramme pour l’instant ¦ Zasad nema grafikona ni dijagrama ¦ Zaenkrat ni grafov ali diagramov
+Un graphique compte ce que tu veux (tes propres chiffres, des personnes, des événements, une statistique de l’app) ; un diagramme dessine une assemblée, une frise, un organigramme… ¦ Grafikon broji što god želiš (tvoje vlastite brojeve, osobe, događaje, statistiku aplikacije); dijagram crta skupštinu, vremensku crtu, organigram… ¦ Graf šteje, kar želiš (tvoje lastne številke, osebe, dogodke, statistiko aplikacije); diagram nariše skupščino, časovnico, organigram…
+Rien ne correspond : retire un filtre ou change la recherche. ¦ Ništa ne odgovara: ukloni filtar ili promijeni pretragu. ¦ Nič se ne ujema: odstrani filter ali spremeni iskanje.
+Chercher un graphique, un diagramme… (ex. naissances, Rennes) ¦ Traži grafikon, dijagram… (npr. rođenja, Rennes) ¦ Išči graf, diagram… (npr. rojstva, Rennes)
+Seulement ceux posés quelque part ¦ Samo oni koji su negdje postavljeni ¦ Samo tisti, ki so nekje postavljeni
+Posés quelque part ¦ Negdje postavljeni ¦ Nekje postavljeni
+Posé nulle part pour l’instant ¦ Zasad nigdje postavljen ¦ Zaenkrat nikjer postavljen
+Courbe ¦ Krivulja ¦ Krivulja
+Aire ¦ Površina ¦ Ploščina
+Anneau ¦ Prsten ¦ Kolobar
+Camembert ¦ Tortni grafikon ¦ Tortni graf
+Barres ¦ Stupci ¦ Stolpci
+Revenir à la personne ¦ Vrati se na osobu ¦ Nazaj na osebo
+Prénom contient ¦ Ime sadrži ¦ Ime vsebuje
+Statut (vivant, décédé) ¦ Status (živ, preminuo) ¦ Status (živ, pokojni)
+Métier contient ¦ Zanimanje sadrži ¦ Poklic vsebuje
+Dans mes favoris ¦ U mojim favoritima ¦ Med mojimi priljubljenimi
+Naissance entre (années) ¦ Rođenje između (godine) ¦ Rojstvo med (leta)
+Naissance entre deux dates précises ¦ Rođenje između dva točna datuma ¦ Rojstvo med dvema točnima datumoma
+Naissance en (mois) ¦ Rođenje u (mjesec) ¦ Rojstvo v (mesec)
+Décès entre (années) ¦ Smrt između (godine) ¦ Smrt med (leta)
+Âge à un événement entre ¦ Dob pri događaju između ¦ Starost ob dogodku med
+A vécu entre … ans ¦ Živio/živjela između … godina ¦ Živel/živela med … leti
+Lieu de naissance (contient) ¦ Mjesto rođenja (sadrži) ¦ Kraj rojstva (vsebuje)
+Lieu de décès ou d’inhumation (contient) ¦ Mjesto smrti ili pokopa (sadrži) ¦ Kraj smrti ali pokopa (vsebuje)
+A un événement à (lieu contient) ¦ Ima događaj u (mjesto sadrži) ¦ Ima dogodek v (kraj vsebuje)
+A un événement dans le département, la région ou le pays ¦ Ima događaj u departmanu, regiji ili zemlji ¦ Ima dogodek v departmaju, regiji ali državi
+A un événement à moins de … km de ¦ Ima događaj na manje od … km od ¦ Ima dogodek manj kot … km od
+A eu un événement (mariage, divorce, voyage…) ¦ Imao/imala je događaj (vjenčanje, razvod, putovanje…) ¦ Imel/imela je dogodek (poroka, ločitev, potovanje…)
+Nombre d’événements d’un type entre ¦ Broj događaja jedne vrste između ¦ Število dogodkov ene vrste med
+Nombre d’unions (mariages) entre ¦ Broj zajednica (vjenčanja) između ¦ Število zvez (porok) med
+Nombre d’enfants entre ¦ Broj djece između ¦ Število otrok med
+Conjoint : nom ou prénom contient ¦ Supružnik: prezime ili ime sadrži ¦ Zakonec: priimek ali ime vsebuje
+Parent : nom ou prénom contient ¦ Roditelj: prezime ili ime sadrži ¦ Starš: priimek ali ime vsebuje
+Cause de décès contient ¦ Uzrok smrti sadrži ¦ Vzrok smrti vsebuje
+Seulement mes ancêtres (Sosa) ¦ Samo moji preci (Sosa) ¦ Samo moji predniki (Sosa)
+Par rapport à la personne de la fiche (ses ancêtres, sa famille…) ¦ U odnosu na osobu iz zapisa (njezini preci, njezina obitelj…) ¦ Glede na osebo iz zapisa (njeni predniki, njena družina…)
+Génération Sosa entre ¦ Sosa generacija između ¦ Rod Sosa med
+Sans source ¦ Bez izvora ¦ Brez vira
+Nombre de sources entre ¦ Broj izvora između ¦ Število virov med
+A une photo ou un document ¦ Ima fotografiju ili dokument ¦ Ima fotografijo ali dokument
+Les filtres ci-dessus (années, limite, sexe et critères) peuvent devenir ceux de départ de ¦ Gornji filtri (godine, ograničenje, spol i kriteriji) mogu postati početni filtri za ¦ Zgornji filtri (leta, omejitev, spol in merila) lahko postanejo začetni filtri za
+les distributions. ¦ raspodjele. ¦ porazdelitve.
+Usage des noms de famille dans la base. ¦ Upotreba prezimena u bazi. ¦ Uporaba priimkov v zbirki.
+Années de naissance (par décennie) ¦ Godine rođenja (po desetljećima) ¦ Leta rojstva (po desetletjih)
+Années de décès (par décennie) ¦ Godine smrti (po desetljećima) ¦ Leta smrti (po desetletjih)
+Mes ancêtres par siècle ¦ Moji preci po stoljećima ¦ Moji predniki po stoletjih
+Métiers les plus fréquents ¦ Najčešća zanimanja ¦ Najpogostejši poklici
+Femmes et hommes ¦ Žene i muškarci ¦ Ženske in moški
+Ancêtres à sourcer ¦ Preci bez izvora ¦ Predniki brez vira
+Toutes les personnes récentes ont au moins une source. ¦ Sve nedavne osobe imaju barem jedan izvor. ¦ Vse nedavne osebe imajo vsaj en vir.
+Tous les événements récents ont un média. ¦ Svi nedavni događaji imaju medij. ¦ Vsi nedavni dogodki imajo medij.
+Aucun média. ¦ Nema medija. ¦ Ni medijev.
+Aucun média isolé. ¦ Nema nepovezanih medija. ¦ Ni nepovezanih medijev.
+Toutes les images récentes ont au moins une zone identifiée. ¦ Sve nedavne slike imaju barem jedno označeno područje. ¦ Vse nedavne slike imajo vsaj eno označeno območje.
+Aucune fiche récente avec parent manquant. ¦ Nema nedavnih zapisa s roditeljem koji nedostaje. ¦ Ni nedavnih zapisov z manjkajočim staršem.
+Aucun baptême récent sans parrain/marraine. ¦ Nema nedavnog krštenja bez kuma/kume. ¦ Ni nedavnega krsta brez botra/botre.
+✎ Modifier l’onglet ¦ ✎ Uredi karticu ¦ ✎ Uredi zavihek
+Aucun widget affiché ¦ Nijedan widget nije prikazan ¦ Noben gradnik ni prikazan
+Onglet vide ¦ Prazna kartica ¦ Prazen zavihek
+Ajoute des widgets, tes listes ou tes graphiques depuis la colonne de gauche. ¦ Dodaj widgete, svoje popise ili grafikone iz lijevog stupca. ¦ Dodaj gradnike, svoje sezname ali grafe iz levega stolpca.
+Ajoute-en depuis la colonne de gauche, ou crée le tien. ¦ Dodaj ih iz lijevog stupca ili stvori svoj. ¦ Dodaj jih iz levega stolpca ali ustvari svojega.
+Widget « {name} » retiré du tableau de bord. ¦ Widget „{name}” uklonjen s nadzorne ploče. ¦ Gradnik »{name}« odstranjen z nadzorne plošče.
+Widget retiré du tableau de bord. ¦ Widget uklonjen s nadzorne ploče. ¦ Gradnik odstranjen z nadzorne plošče.
+Widget supprimé du tableau de bord. ¦ Widget izbrisan s nadzorne ploče. ¦ Gradnik izbrisan z nadzorne plošče.
+Widget modifié. ¦ Widget izmijenjen. ¦ Gradnik spremenjen.
+Revenir au widget ¦ Vrati se na widget ¦ Nazaj na gradnik
+Enquêtes ouvertes ¦ Otvorene istrage ¦ Odprte preiskave
+Battues ouvertes ¦ Otvorene sustavne pretrage ¦ Odprta sistematična iskanja
+Rappels proches ¦ Bliski podsjetnici ¦ Bližnji opomniki
+Incohérences ¦ Nedosljednosti ¦ Nedoslednosti
+Seulement les SOSA ¦ Samo SOSA ¦ Samo SOSA
+Types d’évènements ¦ Vrste događaja ¦ Vrste dogodkov
+Ex : trouver la date de naissance de Jean Dupont ¦ Npr.: pronaći datum rođenja Jeana Duponta ¦ Npr.: najti datum rojstva Jeana Duponta
+Personne liée (facultatif) ¦ Povezana osoba (neobavezno) ¦ Povezana oseba (neobvezno)
+Réglages du widget ¦ Postavke widgeta ¦ Nastavitve gradnika
+Statistique affichée ¦ Prikazana statistika ¦ Prikazana statistika
+Dernière fiche consultée ¦ Posljednji pregledani zapis ¦ Zadnji ogledani zapis
+Les descendants ¦ Potomci ¦ Potomci
+Les ascendants ¦ Preci ¦ Predniki
+Sites affichés ¦ Prikazane stranice ¦ Prikazana spletna mesta
+Prendre cette image ¦ Uzmi ovu sliku ¦ Vzemi to sliko
+Provenance affichée ¦ Prikazano podrijetlo ¦ Prikazan izvor
+Ex : Jean Dupont · Enquête ¦ Npr.: Jean Dupont · Istraga ¦ Npr.: Jean Dupont · Preiskava
+Personne affichée ¦ Prikazana osoba ¦ Prikazana oseba
+Aléatoire ¦ Nasumično ¦ Naključno
+Personne précise ¦ Određena osoba ¦ Določena oseba
+📁 ou glisse une image ici, ou colle-la (⌘V). ¦ 📁 ili povuci sliku ovamo ili je zalijepi (⌘V). ¦ 📁 ali povleci sliko sem ali jo prilepi (⌘V).
+Pages du suivi ¦ Stranice praćenja ¦ Strani spremljanja
+Pages du tableau de bord ¦ Stranice nadzorne ploče ¦ Strani nadzorne plošče
+Chaque page a ses widgets ; les boutons des pages sont en haut du Suivi des animaux. La page cochée s’affiche à l’ouverture. ¦ Svaka stranica ima svoje widgete; gumbi stranica nalaze se na vrhu Praćenja životinja. Označena stranica prikazuje se pri otvaranju. ¦ Vsaka stran ima svoje gradnike; gumbi strani so na vrhu Spremljanja živali. Označena stran se prikaže ob odprtju.
+Chaque page a ses widgets ; les boutons des pages sont en haut du tableau de bord. La page cochée s’affiche à l’ouverture. ¦ Svaka stranica ima svoje widgete; gumbi stranica nalaze se na vrhu nadzorne ploče. Označena stranica prikazuje se pri otvaranju. ¦ Vsaka stran ima svoje gradnike; gumbi strani so na vrhu nadzorne plošče. Označena stran se prikaže ob odprtju.
+Ranger ses widgets ¦ Posloži svoje widgete ¦ Razvrsti svoje gradnike
+✎ en cours ¦ ✎ u tijeku ¦ ✎ v teku
+Titre de l’ensemble ¦ Naslov skupine ¦ Naslov skupine
+Un niveau plus haut ¦ Jednu razinu više ¦ Eno raven višje
+Sous-ensemble (un niveau plus bas) ¦ Podskupina (jednu razinu niže) ¦ Podskupina (eno raven nižje)
+SUIVI DES ANIMAUX ¦ PRAĆENJE ŽIVOTINJA ¦ SPREMLJANJE ŽIVALI
+MON ONGLET ¦ MOJA KARTICA ¦ MOJ ZAVIHEK
+Son widget sera supprimé avec elle. ¦ Njezin widget bit će izbrisan zajedno s njom. ¦ Njen gradnik bo izbrisan skupaj z njo.
+Ses {widgets} seront supprimés avec elle. ¦ Njezini {widgets} bit će izbrisani zajedno s njom. ¦ Njeni {widgets} bodo izbrisani skupaj z njo.
+=widget ¦ widget|widgeta|widgeta ¦ gradnik|gradnika|gradniki|gradnikov
+Supprimer la page « {name} » ? ¦ Izbrisati stranicu „{name}”? ¦ Želiš izbrisati stran »{name}«?
+Page ¦ Stranica ¦ Stran
+Pages du suivi enregistrées. ¦ Stranice praćenja spremljene. ¦ Strani spremljanja shranjene.
+Tableau de bord enregistré. ¦ Nadzorna ploča spremljena. ¦ Nadzorna plošča shranjena.
+=fiche créée ¦ stvoreni zapis|stvorena zapisa|stvorenih zapisa ¦ ustvarjen zapis|ustvarjena zapisa|ustvarjeni zapisi|ustvarjenih zapisov
+=événement ajouté ¦ dodani događaj|dodana događaja|dodanih događaja ¦ dodan dogodek|dodana dogodka|dodani dogodki|dodanih dogodkov
+=source ajoutée ¦ dodani izvor|dodana izvora|dodanih izvora ¦ dodan vir|dodana vira|dodani viri|dodanih virov
+=recensement ajouté ¦ dodani popis stanovništva|dodana popisa stanovništva|dodanih popisa stanovništva ¦ dodan popis prebivalstva|dodana popisa prebivalstva|dodani popisi prebivalstva|dodanih popisov prebivalstva
+=nouvel ancêtre Sosa ¦ novi Sosa predak|nova Sosa pretka|novih Sosa predaka ¦ nov prednik Sosa|nova prednika Sosa|novi predniki Sosa|novih prednikov Sosa
+=battue terminée ¦ završena sustavna pretraga|završene sustavne pretrage|završenih sustavnih pretraga ¦ končano sistematično iskanje|končani sistematični iskanji|končana sistematična iskanja|končanih sistematičnih iskanj
+=enquête terminée ¦ završena istraga|završene istrage|završenih istraga ¦ končana preiskava|končani preiskavi|končane preiskave|končanih preiskav
+=évènement ¦ događaj|događaja|događaja ¦ dogodek|dogodka|dogodki|dogodkov
+=doublon ¦ duplikat|duplikata|duplikata ¦ dvojnik|dvojnika|dvojniki|dvojnikov
+pas encore de modification ce mois-ci ¦ ovaj mjesec još nema izmjena ¦ ta mesec še ni sprememb
+rien pour l’instant ¦ zasad ništa ¦ zaenkrat nič
+En {month} : ¦ U mjesecu {month}: ¦ V mesecu {month}:
+En {year} : ¦ U {year}.: ¦ Leta {year}:
+{days} de recherche. ¦ {days} istraživanja. ¦ {days} raziskovanja.
+{days} de recherche, {changes}. ¦ {days} istraživanja, {changes}. ¦ {days} raziskovanja, {changes}.
+↑ plus actif que le mois dernier ¦ ↑ aktivnije nego prošli mjesec ¦ ↑ bolj dejavno kot prejšnji mesec
+Modifications par mois sur un an ¦ Izmjene po mjesecima tijekom godine ¦ Spremembe po mesecih v enem letu
+D’après le journal des modifications : le travail fait à la main (les imports de fichiers ne comptent pas comme fiches créées). ¦ Prema dnevniku izmjena: posao napravljen ručno (uvozi datoteka ne računaju se kao stvoreni zapisi). ¦ Glede na dnevnik sprememb: delo, opravljeno ročno (uvozi datotek se ne štejejo kot ustvarjeni zapisi).
+Bilan indisponible. ¦ Pregled nije dostupan. ¦ Pregled ni na voljo.
+dernière fiche consultée ¦ posljednji pregledani zapis ¦ zadnji ogledani zapis
+Aucun anniversaire aujourd’hui. ¦ Danas nema rođendana. ¦ Danes ni rojstnih dni.
+Aucune personne verrouillée récemment. ¦ Nijedna osoba nije nedavno zaključana. ¦ Nobena oseba ni bila nedavno zaklenjena.
+Aucune personne disponible pour ce widget. ¦ Nema dostupnih osoba za ovaj widget. ¦ Za ta gradnik ni razpoložljivih oseb.
+Aucun événement renseigné. ¦ Nijedan događaj nije upisan. ¦ Noben dogodek ni vpisan.
+Aucune note. ¦ Nema bilježaka. ¦ Ni zapiskov.
+Aucun recensement. ¦ Nema popisa stanovništva. ¦ Ni popisov prebivalstva.
+Aucune source ou citation. ¦ Nema izvora ni citata. ¦ Ni virov ali navedkov.
+Bloc surtout utile pour une fiche féminine. ¦ Blok koristan uglavnom za žensku osobu. ¦ Blok, uporaben predvsem za žensko osebo.
+Aucune enquête ou battue liée. ¦ Nema povezanih istraga ni sustavnih pretraga. ¦ Ni povezanih preiskav ali sistematičnih iskanj.
+Aucun détail ¦ Nema pojedinosti ¦ Brez podrobnosti
+Décision ¦ Odluka ¦ Odločitev
+Bureau ¦ Ured ¦ Urad
+Œuvre ¦ Djelo ¦ Delo
+Ouvrir fiche ¦ Otvori zapis ¦ Odpri zapis
+Tous les événements récents ont une source. ¦ Svi nedavni događaji imaju izvor. ¦ Vsi nedavni dogodki imajo vir.
+Aucun lieu prioritaire à compléter. ¦ Nema prioritetnih mjesta za dopunu. ¦ Ni prednostnih krajev za dopolnitev.
+Coordonnées ou pays à compléter ¦ Koordinate ili zemlju treba dopuniti ¦ Koordinate ali državo je treba dopolniti
+Aucun couple prioritaire sans mariage. ¦ Nema prioritetnih parova bez vjenčanja. ¦ Ni prednostnih parov brez poroke.
+Personne 1 ¦ Osoba 1 ¦ Oseba 1
+Personne 2 ¦ Osoba 2 ¦ Oseba 2
+Aucune incohérence de dates détectée. ¦ Nisu otkrivene nedosljednosti datuma. ¦ Ni zaznanih nedoslednosti datumov.
+Incohérences et conflits ¦ Nedosljednosti i sukobi ¦ Nedoslednosti in nasprotja
+Vérifier ¦ Provjeri ¦ Preveri
+Aucun SOSA manquant proche. ¦ Nema bliskih SOSA koji nedostaju. ¦ Ni bližnjih manjkajočih SOSA.
+Aucune battue prioritaire. ¦ Nema prioritetnih sustavnih pretraga. ¦ Ni prednostnih sistematičnih iskanj.
+Commune de départ inconnue ¦ Polazna općina nepoznata ¦ Izhodiščna občina neznana
+Aucune action prioritaire pour le moment. ¦ Zasad nema prioritetnih radnji. ¦ Zaenkrat ni prednostnih dejanj.
+À traiter ¦ Za obradu ¦ Za obdelavo
+Liste de travail quotidienne ¦ Dnevni popis zadataka ¦ Dnevni seznam opravil
+Aucune archive disponible. ¦ Nema dostupnih arhiva. ¦ Ni razpoložljivih arhivov.
+Aucune racine SOSA définie. ¦ Nije postavljen SOSA korijen. ¦ Korenska oseba SOSA ni določena.
+Aucun doublon probable repéré. ¦ Nisu pronađeni vjerojatni duplikati. ¦ Ni najdenih verjetnih dvojnikov.
+Aucun point géographique exploitable. ¦ Nema upotrebljivih zemljopisnih točaka. ¦ Ni uporabnih geografskih točk.
+Aperçu cartographique ¦ Pregled karte ¦ Predogled zemljevida
+Aucune personne avec lieux datés. ¦ Nema osoba s datiranim mjestima. ¦ Ni oseb z datiranimi kraji.
+Aucune personne disponible. ¦ Nema dostupnih osoba. ¦ Ni razpoložljivih oseb.
+Aucun événement daté. ¦ Nema datiranih događaja. ¦ Ni datiranih dogodkov.
+Éléments datés ou localisés ¦ Datirani ili locirani elementi ¦ Datirani ali locirani elementi
+Documents et images ¦ Dokumenti i slike ¦ Dokumenti in slike
+Sources enregistrées ¦ Spremljeni izvori ¦ Shranjeni viri
+En cours ou en pause ¦ U tijeku ili pauzirano ¦ V teku ali zaustavljeno
+Recherches commune par commune ¦ Istraživanja općinu po općinu ¦ Raziskave občino za občino
+À vérifier dans maintenance ¦ Za provjeru u održavanju ¦ Za preverjanje pri vzdrževanju
+100 fiches ¦ 100 zapisa ¦ 100 zapisov
+Au moins 100 personnes enregistrées ¦ Najmanje 100 spremljenih osoba ¦ Vsaj 100 shranjenih oseb
+100 médias ¦ 100 medija ¦ 100 medijev
+Au moins 100 documents conservés ¦ Najmanje 100 sačuvanih dokumenata ¦ Vsaj 100 shranjenih dokumentov
+Au moins la moitié des fiches sourcées ¦ Najmanje polovica zapisa ima izvor ¦ Vsaj polovica zapisov ima vir
+Illustrée ¦ Ilustrirano ¦ Ilustrirano
+Au moins la moitié des fiches avec un média ¦ Najmanje polovica zapisa ima medij ¦ Vsaj polovica zapisov ima medij
+5 générations SOSA ¦ 5 SOSA generacija ¦ 5 rodov SOSA
+Cinq générations complètes ¦ Pet potpunih generacija ¦ Pet popolnih rodov
+Au moins une battue créée ¦ Stvorena najmanje jedna sustavna pretraga ¦ Ustvarjeno vsaj eno sistematično iskanje
+Aucune suppression récente. ¦ Nema nedavnih brisanja. ¦ Ni nedavnih izbrisov.
+Aucune modification récente. ¦ Nema nedavnih izmjena. ¦ Ni nedavnih sprememb.
+Aucun événement exploitable pour ce quiz avec les filtres choisis. ¦ Nema upotrebljivih događaja za ovaj kviz s odabranim filtrima. ¦ Za ta kviz z izbranimi filtri ni uporabnih dogodkov.
+Pas assez de dates distinctes pour générer des propositions. ¦ Nema dovoljno različitih datuma za stvaranje ponuda. ¦ Ni dovolj različnih datumov za pripravo možnosti.
+Quelle est la date de <strong>{what}</strong> de <strong>{name}</strong> ? ¦ Koji je datum <strong>{what}</strong> za <strong>{name}</strong>? ¦ Kateri je datum <strong>{what}</strong> za <strong>{name}</strong>?
+Aucune image disponible. ¦ Nema dostupnih slika. ¦ Ni razpoložljivih slik.
+Choisis une image dans les réglages du widget. ¦ Odaberi sliku u postavkama widgeta. ¦ Izberi sliko v nastavitvah gradnika.
+Choisis deux personnes dans les réglages du widget. ¦ Odaberi dvije osobe u postavkama widgeta. ¦ Izberi dve osebi v nastavitvah gradnika.
+Personne liée ¦ Povezana osoba ¦ Povezana oseba
+Ouvre Comparaison pour analyser le lien. ¦ Otvori Usporedbu da analiziraš vezu. ¦ Odpri Primerjavo, da analiziraš povezavo.
+Aucune personne favorite. ¦ Nema omiljenih osoba. ¦ Ni priljubljenih oseb.
+Rappels à traiter ¦ Podsjetnici za obradu ¦ Opomniki za obdelavo
+Alertes cohérence ¦ Upozorenja o dosljednosti ¦ Opozorila o doslednosti
+Naissance renseignée ¦ Rođenje upisano ¦ Rojstvo vpisano
+Décès renseigné ¦ Smrt upisana ¦ Smrt vpisana
+Au moins un média ¦ Najmanje jedan medij ¦ Vsaj en medij
+Au moins une source ¦ Najmanje jedan izvor ¦ Vsaj en vir
+Aucun lieu renseigné. ¦ Nijedno mjesto nije upisano. ¦ Noben kraj ni vpisan.
+Ajoute un objectif dans les réglages du widget. ¦ Dodaj cilj u postavkama widgeta. ¦ Dodaj cilj v nastavitvah gradnika.
+Ajouter {what} ¦ Dodaj {what} ¦ Dodaj {what}
+Aucun rappel à venir. ¦ Nema nadolazećih podsjetnika. ¦ Ni prihajajočih opomnikov.
+Aucune fiche consultée sur ce navigateur. ¦ U ovom pregledniku nije pregledan nijedan zapis. ¦ V tem brskalniku ni bil ogledan noben zapis.
+Aucun média à transcrire. ¦ Nema medija za prijepis. ¦ Ni medijev za prepis.
+Aucune signature identifiée à comparer. ¦ Nema prepoznatih potpisa za usporedbu. ¦ Ni prepoznanih podpisov za primerjavo.
+Aucune commune de battue à reprendre. ¦ Nema općina sustavne pretrage za nastavak. ¦ Ni občin sistematičnega iskanja za nadaljevanje.
+Aucune source ou piste à vérifier. ¦ Nema izvora ni tragova za provjeru. ¦ Ni virov ali sledi za preverjanje.
+Rien à relire pour le moment. ¦ Zasad nema ničega za ponovno čitanje. ¦ Zaenkrat ni ničesar za ponovni pregled.
+Aucun départ enregistré : coche « Départs / émigration » sur une fiche. ¦ Nema spremljenih odlazaka: označi „Odlasci / iseljavanje” u zapisu. ¦ Ni shranjenih odhodov: označi »Odhodi / izseljevanje« v zapisu.
+Aucun enfant placé enregistré. ¦ Nema spremljene smještene djece. ¦ Ni shranjenih nameščenih otrok.
+Aucune armoirie. ¦ Nema grbova. ¦ Ni grbov.
+Ajouter des armoiries ¦ Dodaj grb ¦ Dodaj grb
+Aucun poilu : coche « Poilu 14-18 » sur une fiche. ¦ Nema vojnika iz Prvog svjetskog rata: označi „Poilu 14-18” u zapisu. ¦ Ni vojakov iz prve svetovne vojne: označi »Poilu 14-18« v zapisu.
+Aucune recherche enregistrée (Recherche → Recherche multicritère). ¦ Nema spremljenih pretraga (Istraživanje → Višekriterijska pretraga). ¦ Ni shranjenih iskanj (Raziskovanje → Iskanje po več merilih).
+Aucun circuit à faire. ¦ Nema obilazaka za napraviti. ¦ Ni krožnih poti za izvedbo.
+Préparer un circuit ¦ Pripremi obilazak ¦ Pripravi krožno pot
+⚠ Aucun dossier hors de cet ordinateur n’est réglé : si le Mac est volé ou tombe en panne, tout part avec lui. ¦ ⚠ Nije postavljena nijedna mapa izvan ovog računala: ako Mac bude ukraden ili se pokvari, sve nestaje s njim. ¦ ⚠ Nobena mapa zunaj tega računalnika ni nastavljena: če bo Mac ukraden ali se pokvari, gre vse z njim.
+Régler ¦ Podesi ¦ Nastavi
+Aucun dossier surveillé pour l’instant ¦ Zasad nema praćenih mapa ¦ Zaenkrat ni nadzorovanih map
+Choisir un dossier ¦ Odaberi mapu ¦ Izberi mapo
+Aucun nom indexé dans les transcriptions. ¦ U prijepisima nema indeksiranih imena. ¦ V prepisih ni indeksiranih imen.
+Rien de prévu sur les 7 prochains jours. ¦ Ništa nije planirano u sljedećih 7 dana. ¦ V naslednjih 7 dneh ni ničesar načrtovanega.
+Aucune date récurrente repérée dans les 7 prochains jours. ¦ U sljedećih 7 dana nije pronađen nijedan ponavljajući datum. ¦ V naslednjih 7 dneh ni najdenega ponavljajočega se datuma.
+Texte vide : écris-le avec le crayon ✎. ¦ Prazan tekst: napiši ga olovkom ✎. ¦ Prazno besedilo: napiši ga s svinčnikom ✎.
+↗ Ouvrir mon agenda ¦ ↗ Otvori moj kalendar ¦ ↗ Odpri moj koledar
+Ce mois-ci ¦ Ovaj mjesec ¦ Ta mesec
+Voir le mois ¦ Vidi mjesec ¦ Poglej mesec
+Qui ¦ Tko ¦ Kdo
+Entrée : calculer · ↑ : reprendre le dernier ¦ Enter: izračunaj · ↑: vrati posljednje ¦ Enter: izračunaj · ↑: vrni zadnje
+⛶ Ouvrir la calculette ¦ ⛶ Otvori kalkulator ¦ ⛶ Odpri kalkulator
+Fond de carte indisponible (pas d’Internet ?) : les photos restent à leur place. ¦ Podloga karte nije dostupna (nema interneta?): fotografije ostaju na svom mjestu. ¦ Podlaga zemljevida ni na voljo (ni interneta?): fotografije ostanejo na svojem mestu.
+Pas précédent ¦ Prethodni korak ¦ Prejšnji korak
+Pas suivant ¦ Sljedeći korak ¦ Naslednji korak
+Aucune date pour l’instant. ¦ Zasad nema datuma. ¦ Zaenkrat ni datumov.
+Frise : glisse pour choisir une période, molette pour zoomer, double-clic pour tout voir ¦ Vremenska crta: povuci da odabereš razdoblje, kotačić za zumiranje, dvostruki klik da vidiš sve ¦ Časovnica: povleci, da izbereš obdobje, kolesce za povečavo, dvoklik, da vidiš vse
+Choisis une carte dans les réglages du widget (✎). ¦ Odaberi kartu u postavkama widgeta (✎). ¦ Izberi zemljevid v nastavitvah gradnika (✎).
+Des barres ou un camembert : par métier, par lieu, par décennie, par siècle… ¦ Stupci ili tortni grafikon: po zanimanju, po mjestu, po desetljeću, po stoljeću… ¦ Stolpci ali tortni graf: po poklicu, po kraju, po desetletju, po stoletju…
+Écran de l’app ¦ Zaslon aplikacije ¦ Zaslon aplikacije
+Une liste, un diagramme, une statistique, la fiche d’une personne, la carte… tel quel. ¦ Popis, dijagram, statistika, zapis osobe, karta… onakvi kakvi jesu. ¦ Seznam, diagram, statistika, zapis osebe, zemljevid… takšni, kot so.
+Un pense-bête, une citation, une consigne, avec des émojis. ¦ Podsjetnik, citat, uputa, s emojijima. ¦ Opomnik, navedek, navodilo, z emojiji.
+Raccourcis ¦ Prečaci ¦ Bližnjice
+Des boutons vers les écrans, les listes ou des sites que tu utilises souvent. ¦ Gumbi prema zaslonima, popisima ili stranicama koje često koristiš. ¦ Gumbi do zaslonov, seznamov ali spletnih mest, ki jih pogosto uporabljaš.
+Parcours jour par jour ¦ Pregled dan po dan ¦ Pregled dan za dnem
+Widget de l’app habillé ¦ Uređeni widget aplikacije ¦ Oblikovan gradnik aplikacije
+Widget de l’app ¦ Widget aplikacije ¦ Gradnik aplikacije
+toute la largeur ¦ cijela širina ¦ celotna širina
+Mosaïque (carrés proportionnels) ¦ Mozaik (proporcionalni kvadrati) ¦ Mozaik (sorazmerni kvadrati)
+Aire (courbe remplie) ¦ Površina (ispunjena krivulja) ¦ Ploščina (zapolnjena krivulja)
+cliquer pour voir qui ¦ klikni da vidiš tko ¦ klikni, da vidiš, kdo
+Tout voir ({n}) ¦ Vidi sve ({n}) ¦ Poglej vse ({n})
+{n} autres valeurs ¦ Ostalih vrijednosti: {n} ¦ Drugih vrednosti: {n}
+Aucune ligne. ¦ Nema redaka. ¦ Ni vrstic.
+Personne ne correspond. ¦ Nitko ne odgovara. ¦ Nihče se ne ujema.
+=personne différente ¦ različita osoba|različite osobe|različitih osoba ¦ različna oseba|različni osebi|različne osebe|različnih oseb
+{people} pour {n} comptés (les 3 000 premières lignes seulement). ¦ {people} za {n} prebrojanih (samo prvih 3 000 redaka). ¦ {people} za {n} preštetih (samo prvih 3 000 vrstic).
+{people} pour {n} comptés : une même personne peut compter plusieurs fois (deux événements, deux étiquettes…). ¦ {people} za {n} prebrojanih: ista osoba može se računati više puta (dva događaja, dvije oznake…). ¦ {people} za {n} preštetih: ista oseba se lahko šteje večkrat (dva dogodka, dve oznaki…).
+Chercher un nom, un métier… ¦ Traži ime, zanimanje… ¦ Išči ime, poklic…
+Par nom, A → Z ¦ Po imenu, A → Z ¦ Po imenu, A → Ž
+Par nom, Z → A ¦ Po imenu, Z → A ¦ Po imenu, Ž → A
+Par naissance, les plus anciennes ¦ Po rođenju, najstarije ¦ Po rojstvu, najstarejše
+Par naissance, les plus récentes ¦ Po rođenju, najnovije ¦ Po rojstvu, najnovejše
+Aucun raccourci. ¦ Nema prečaca. ¦ Ni bližnjic.
+Frise verticale ¦ Okomita vremenska crta ¦ Navpična časovnica
+Frise horizontale (défile) ¦ Vodoravna vremenska crta (pomiče se) ¦ Vodoravna časovnica (se premika)
+Cartes en grille ¦ Kartice u mreži ¦ Kartice v mreži
+Liste compacte ¦ Sažeti popis ¦ Strnjen seznam
+jusqu’au… (facultatif) ¦ do… (neobavezno) ¦ do… (neobvezno)
+Titre de l’étape ¦ Naslov etape ¦ Naslov postanka
+Couleur de l’étape ¦ Boja etape ¦ Barva postanka
+Ce qui s’est passé ce jour-là ¦ Što se dogodilo toga dana ¦ Kaj se je zgodilo tisti dan
+Aucun événement daté pour cette personne. ¦ Za ovu osobu nema datiranih događaja. ¦ Za to osebo ni datiranih dogodkov.
+Étape ¦ Etapa ¦ Postanek
+Ancêtres trouvés (Sosa) ¦ Pronađeni preci (Sosa) ¦ Najdeni predniki (Sosa)
+Ancêtres sans source ¦ Preci bez izvora ¦ Predniki brez vira
+décès avant 1800 ¦ smrti prije 1800. ¦ smrti pred 1800
+Pense-bête ¦ Podsjetnik ¦ Opomnik
+Crée tes propres graphiques, sans rien programmer : avec ¦ Stvori vlastite grafikone bez ikakvog programiranja: s ¦ Ustvari lastne grafe brez programiranja: s
+tes propres chiffres ¦ tvojim vlastitim brojevima ¦ tvojimi lastnimi številkami
+＋ Nouveau widget ¦ ＋ Novi widget ¦ ＋ Nov gradnik
+Importer un widget reçu ¦ Uvezi primljeni widget ¦ Uvozi prejeti gradnik
+Un fichier « .lcnda-widget.json » envoyé par un proche : seul le modèle du widget est partagé, jamais les données. ¦ Datoteka „.lcnda-widget.json” koju ti je poslala bliska osoba: dijeli se samo predložak widgeta, nikad podaci. ¦ Datoteka ».lcnda-widget.json«, ki ti jo je poslal bližnji: deli se samo predloga gradnika, nikoli podatki.
+sur le tableau de bord ¦ na nadzornoj ploči ¦ na nadzorni plošči
+↗ Ouvrir dans Graphiques ¦ ↗ Otvori u Grafikonima ¦ ↗ Odpri v Grafih
+＋ Ajouter au tableau de bord ¦ ＋ Dodaj na nadzornu ploču ¦ ＋ Dodaj na nadzorno ploščo
+Widget supprimé. ¦ Widget izbrisan. ¦ Gradnik izbrisan.
+Mon widget ¦ Moj widget ¦ Moj gradnik
+Supprimer le widget ¦ Izbriši widget ¦ Izbriši gradnik
+Supprimer le widget « {name} » ? Il disparaît aussi du tableau de bord. ¦ Izbrisati widget „{name}”? Nestat će i s nadzorne ploče. ¦ Želiš izbrisati gradnik »{name}«? Izginil bo tudi z nadzorne plošče.
+Supprimer le widget « {name} » ? Il disparaît aussi du tableau de bord et de tous les endroits où ce graphique est posé (fiches, enquêtes, mise en page…). ¦ Izbrisati widget „{name}”? Nestat će i s nadzorne ploče i sa svih mjesta gdje je ovaj grafikon postavljen (zapisi, istrage, prijelom…). ¦ Želiš izbrisati gradnik »{name}«? Izginil bo tudi z nadzorne plošče in z vseh mest, kjer je ta graf postavljen (zapisi, preiskave, postavitev…).
+« {name} » importé : il est dans Graphiques → « Mes graphiques ». ¦ „{name}” uvezen: nalazi se u Grafikoni → „Moji grafikoni”. ¦ »{name}« uvožen: je v Grafi → »Moji grafi«.
+Widget « {name} » importé : ajoute-le au tableau de bord. ¦ Widget „{name}” uvezen: dodaj ga na nadzornu ploču. ¦ Gradnik »{name}« uvožen: dodaj ga na nadzorno ploščo.
+📌 Le poser aussi sur… ¦ 📌 Postavi ga i na… ¦ 📌 Postavi ga tudi na…
+(à l’enregistrement) ¦ (pri spremanju) ¦ (ob shranjevanju)
+Posé nulle part pour l’instant. ¦ Zasad nigdje postavljen. ¦ Zaenkrat nikjer postavljen.
+La page d’une personne, une enquête… ¦ Stranica osobe, istraga… ¦ Stran osebe, preiskava…
+Graphique posé : {name}. ¦ Grafikon postavljen: {name}. ¦ Graf postavljen: {name}.
+Graphique retiré de cet endroit ¦ Grafikon uklonjen s ovog mjesta ¦ Graf odstranjen s tega mesta
+L’ouvrir dans Graphiques ¦ Otvori ga u Grafikonima ¦ Odpri ga v Grafih
+… et {n} autres (Listes → Graphiques et diagrammes) ¦ … i još {n} (Popisi → Grafikoni i dijagrami) ¦ … in še {n} (Seznami → Grafi in diagrami)
+Widget ajouté au tableau de bord. ¦ Widget dodan na nadzornu ploču. ¦ Gradnik dodan na nadzorno ploščo.
+NOUVEAU WIDGET ¦ NOVI WIDGET ¦ NOV GRADNIK
+NOUVEAU GRAPHIQUE ¦ NOVI GRAFIKON ¦ NOV GRAF
+Par quoi commencer ? ¦ Čime početi? ¦ S čim začeti?
+Partir de rien ¦ Kreni od nule ¦ Začni iz nič
+Partir d’un élément de l’app ¦ Kreni od elementa aplikacije ¦ Začni iz elementa aplikacije
+N’importe quel écran devient un widget : une liste (fiche d’un village, recensements, rappels…), un diagramme, une statistique, une de tes listes, la fiche d’une personne, la carte, un outil des Réglages. ¦ Bilo koji zaslon postaje widget: popis (zapis sela, popisi stanovništva, podsjetnici…), dijagram, statistika, jedan od tvojih popisa, zapis osobe, karta, alat iz Postavki. ¦ Vsak zaslon postane gradnik: seznam (zapis vasi, popisi prebivalstva, opomniki…), diagram, statistika, eden od tvojih seznamov, zapis osebe, zemljevid, orodje iz Nastavitev.
+Créer ce widget ¦ Stvori ovaj widget ¦ Ustvari ta gradnik
+Partir d’un widget de l’app ¦ Kreni od widgeta aplikacije ¦ Začni iz gradnika aplikacije
+Partir d’un de mes widgets ¦ Kreni od jednog od mojih widgeta ¦ Začni iz enega od mojih gradnikov
+Avec mes propres chiffres ¦ S mojim vlastitim brojevima ¦ Z mojimi lastnimi številkami
+Un tableau à remplir (des noms et des chiffres, en une ou plusieurs séries), collé d’un tableur ou importé d’un fichier CSV. ¦ Tablica za ispunjavanje (nazivi i brojevi, u jednoj ili više serija), zalijepljena iz proračunske tablice ili uvezena iz CSV datoteke. ¦ Tabela za izpolnjevanje (imena in številke, v eni ali več serijah), prilepljena iz preglednice ali uvožena iz datoteke CSV.
+Mes propres chiffres ¦ Moji vlastiti brojevi ¦ Moje lastne številke
+Un diagramme ¦ Dijagram ¦ Diagram
+Hémicycle d’une assemblée, frise des membres d’un groupe, organigramme, flux, nuage de mots… (Mes diagrammes). ¦ Polukrug skupštine, vremenska crta članova grupe, organigram, tokovi, oblak riječi… (Moji dijagrami). ¦ Polkrog skupščine, časovnica članov skupine, organigram, tokovi, oblak besed… (Moji diagrami).
+Partir de rien, avec les données de l’app ¦ Kreni od nule, s podacima aplikacije ¦ Začni iz nič, s podatki aplikacije
+Un ou plusieurs nombres : combien de personnes, d’événements, de lieux… répondent à tes critères. ¦ Jedan ili više brojeva: koliko osoba, događaja, mjesta… odgovara tvojim kriterijima. ¦ Ena ali več številk: koliko oseb, dogodkov, krajev… ustreza tvojim merilom.
+Les premières lignes d’une liste, avec les colonnes et l’ordre que tu veux. ¦ Prvi retci popisa, sa stupcima i redoslijedom koje želiš. ¦ Prve vrstice seznama, s stolpci in vrstnim redom, ki ga želiš.
+Partir d’une statistique de l’app ¦ Kreni od statistike aplikacije ¦ Začni iz statistike aplikacije
+Les mêmes chiffres que dans Graphiques → Statistiques, avec ton dessin (barres, camembert, courbe, mosaïque…), tes couleurs, et autant de critères que tu veux : métier, lieu et rayon en km, dates précises, mariage, nombre d’enfants, durée de vie, divorce, voyage… ¦ Isti brojevi kao u Grafikoni → Statistika, s tvojim crtežom (stupci, tortni grafikon, krivulja, mozaik…), tvojim bojama i koliko god želiš kriterija: zanimanje, mjesto i polumjer u km, točni datumi, vjenčanje, broj djece, trajanje života, razvod, putovanje… ¦ Iste številke kot v Grafi → Statistika, s tvojo risbo (stolpci, tortni graf, krivulja, mozaik…), tvojimi barvami in poljubnim številom meril: poklic, kraj in polmer v km, točni datumi, poroka, število otrok, dolžina življenja, ločitev, potovanje…
+D’une statistique de l’app ¦ Iz statistike aplikacije ¦ Iz statistike aplikacije
+Partir d’un de mes widgets ou de mes graphiques ¦ Kreni od jednog od mojih widgeta ili grafikona ¦ Začni iz enega od mojih gradnikov ali grafov
+── ou des données de l’app ── ¦ ── ili od podataka aplikacije ── ¦ ── ali iz podatkov aplikacije ──
+Listes de l’app ¦ Popisi aplikacije ¦ Seznami aplikacije
+Aucun critère : toute la base. ¦ Nema kriterija: cijela baza. ¦ Brez meril: celotna zbirka.
+Toutes les lignes de cette liste de l’app. ¦ Svi retci ovog popisa aplikacije. ¦ Vse vrstice tega seznama aplikacije.
+(ce que montre cette partie, affichée dessous) ¦ (ono što prikazuje ovaj dio, prikazano ispod) ¦ (kar prikazuje ta del, prikazano spodaj)
+Ex. : Les baptêmes de la paroisse, du plus ancien au plus récent ¦ Npr.: Krštenja u župi, od najstarijeg do najnovijeg ¦ Npr.: Krsti v župniji, od najstarejšega do najnovejšega
+✨ Proposer une légende d’après les critères ¦ ✨ Predloži opis prema kriterijima ¦ ✨ Predlagaj opis glede na merila
+Tableau vide : « ＋ Ligne » ou « 📋 Coller un tableau ». ¦ Prazna tablica: „＋ Redak” ili „📋 Zalijepi tablicu”. ¦ Prazna tabela: »＋ Vrstica« ali »📋 Prilepi tabelo«.
+＋ Série (colonne de chiffres) ¦ ＋ Serija (stupac brojeva) ¦ ＋ Serija (stolpec številk)
+Recopier les chiffres d’un graphique (à toi, un exemple, ou une statistique de l’app) pour les retoucher ¦ Prepiši brojeve iz grafikona (tvojeg, primjera ili statistike aplikacije) da ih doradiš ¦ Prepiši številke iz grafa (tvojega, primera ali statistike aplikacije), da jih dodelaš
+📋 Coller un tableau ¦ 📋 Zalijepi tablicu ¦ 📋 Prilepi tabelo
+📊 Partir d’un graphique ¦ 📊 Kreni od grafikona ¦ 📊 Začni iz grafa
+🧾 Modifier les données ¦ 🧾 Uredi podatke ¦ 🧾 Uredi podatke
+Fichier trop gros (5 Mo au plus). ¦ Datoteka je prevelika (najviše 5 MB). ¦ Datoteka je prevelika (največ 5 MB).
+Ligne retirée ¦ Redak uklonjen ¦ Vrstica odstranjena
+Tableau vidé ¦ Tablica ispražnjena ¦ Tabela izpraznjena
+Remplacer le tableau ¦ Zamijeni tablicu ¦ Zamenjaj tabelo
+La première ligne ¦ Prvi redak ¦ Prva vrstica
+à deviner ¦ pogoditi ¦ uganiti
+donne les titres (noms des séries) ¦ daje naslove (nazive serija) ¦ daje naslove (imena serij)
+est une ligne de chiffres ¦ je redak brojeva ¦ je vrstica številk
+Aucun graphique disponible. ¦ Nema dostupnih grafikona. ¦ Ni razpoložljivih grafov.
+Recopier ces chiffres ¦ Prepiši ove brojeve ¦ Prepiši te številke
+Aucun chiffre pour ce graphique. ¦ Nema brojeva za ovaj grafikon. ¦ Za ta graf ni številk.
+=valeur recopiée ¦ prepisana vrijednost|prepisane vrijednosti|prepisanih vrijednosti ¦ prepisana vrednost|prepisani vrednosti|prepisane vrednosti|prepisanih vrednosti
+=série ¦ serija|serije|serija ¦ serija|seriji|serije|serij
+Série {num} ¦ Serija {num} ¦ Serija {num}
+Nom de la série {num} ¦ Naziv serije {num} ¦ Ime serije {num}
+Tableau importé ({rows}) ¦ Tablica uvezena ({rows}) ¦ Tabela uvožena ({rows})
+Série « {name} » retirée ¦ Serija „{name}” uklonjena ¦ Serija »{name}« odstranjena
+Chiffres repris du tableur ({rows}) ¦ Brojevi preuzeti iz proračunske tablice ({rows}) ¦ Številke prevzete iz preglednice ({rows})
+Tableau collé ({rows}) ¦ Tablica zalijepljena ({rows}) ¦ Tabela prilepljena ({rows})
+Retirer cette série ¦ Ukloni ovu seriju ¦ Odstrani to serijo
+(type masqué) ¦ (skrivena vrsta) ¦ (skrita vrsta)
+Dessins simples ¦ Jednostavni crteži ¦ Preproste risbe
+Sépia (photos anciennes) ¦ Sepija (stare fotografije) ¦ Sepija (stare fotografije)
+Une couleur en dégradé ¦ Jedna boja u prijelazu ¦ Ena barva v prelivu
+Couleur du dégradé ¦ Boja prijelaza ¦ Barva preliva
+Les valeurs apparaissent ici après le calcul de l’aperçu. ¦ Vrijednosti se ovdje pojavljuju nakon izračuna pregleda. ¦ Vrednosti se tukaj prikažejo po izračunu predogleda.
+Valeurs les plus fréquentes ¦ Najčešće vrijednosti ¦ Najpogostejše vrednosti
+Écrans indisponibles. ¦ Zasloni nisu dostupni. ¦ Zasloni niso na voljo.
+(date précise ou année, facultatif) ¦ (točan datum ili godina, neobavezno) ¦ (točen datum ali leto, neobvezno)
+Nés à partir du ¦ Rođeni od ¦ Rojeni od
+12 mars 1750 ou 1700 ¦ 12 mars 1750 ili 1700 ¦ 12 mars 1750 ali 1700
+jusqu’au ¦ do ¦ do
+31/12/1850 ou 1900 ¦ 31/12/1850 ili 1900 ¦ 31/12/1850 ali 1900
+Cette statistique garde ses seuls filtres (années, sexe, lignée). ¦ Ova statistika zadržava samo svoje filtre (godine, spol, loza). ¦ Ta statistika ohrani samo svoje filtre (leta, spol, rodovna linija).
+ne pas montrer les valeurs vides ¦ ne prikazuj prazne vrijednosti ¦ ne prikaži praznih vrednosti
+Libellé ¦ Oznaka ¦ Oznaka
+retirer ce chiffre ¦ ukloni ovaj broj ¦ odstrani to številko
+ordre de la liste ¦ redoslijed popisa ¦ vrstni red seznama
+croissant ¦ uzlazno ¦ naraščajoče
+décroissant ¦ silazno ¦ padajoče
+Compter par ¦ Broji po ¦ Štej po
+Regrouper ¦ Grupiraj ¦ Združi
+par valeur ¦ po vrijednosti ¦ po vrednosti
+par année ¦ po godini ¦ po letu
+par décennie ¦ po desetljeću ¦ po desetletju
+par tranche (de … ans, ou de … pour un nombre) ¦ po rasponu (od … godina ili od … za broj) ¦ po razponu (po … let ali po … za število)
+par siècle ¦ po stoljeću ¦ po stoletju
+par mois de l’année ¦ po mjesecu u godini ¦ po mesecu v letu
+Tranche de ¦ Raspon od ¦ Razpon
+Seulement du ¦ Samo od ¦ Samo od
+12 mars 1750 ou 1750 ¦ 12 mars 1750 ili 1750 ¦ 12 mars 1750 ali 1750
+au ¦ do ¦ do
+31/12/1800 ou 1800 ¦ 31/12/1800 ili 1800 ¦ 31/12/1800 ali 1800
+ne pas compter les cases vides ¦ ne broji prazna polja ¦ ne štej praznih polj
+Les étapes viennent ¦ Etape dolaze ¦ Postanki prihajajo
+écrites à la main ¦ napisane ručno ¦ napisani ročno
+des événements d’une personne ¦ iz događaja jedne osobe ¦ iz dogodkov ene osebe
+Présentation ¦ Prikaz ¦ Prikaz
+par date ¦ po datumu ¦ po datumu
+dans l’ordre écrit ¦ redoslijedom kako su napisane ¦ v zapisanem vrstnem redu
+Hauteur de la carte ¦ Visina karte ¦ Višina zemljevida
+Carte du parcours ¦ Karta puta ¦ Zemljevid poti
+« Jour 1, Jour 2… » ¦ „Dan 1, Dan 2…” ¦ »Dan 1, Dan 2…«
+Textes des étapes ¦ Tekstovi etapa ¦ Besedila postankov
+Seulement les événements avec un lieu ¦ Samo događaji s mjestom ¦ Samo dogodki s krajem
+✎ Modifier ce diagramme ¦ ✎ Uredi ovaj dijagram ¦ ✎ Uredi ta diagram
+Le widget montre toujours la dernière version du diagramme (Graphiques → Mes diagrammes). ¦ Widget uvijek prikazuje posljednju verziju dijagrama (Grafikoni → Moji dijagrami). ¦ Gradnik vedno prikazuje zadnjo različico diagrama (Grafi → Moji diagrami).
+Un pense-bête, une citation… Les émojis marchent 🌳 ¦ Podsjetnik, citat… Emojiji rade 🌳 ¦ Opomnik, navedek… Emojiji delujejo 🌳
+Un site internet… ¦ Internetska stranica… ¦ Spletno mesto…
+Texte du bouton ¦ Tekst gumba ¦ Besedilo gumba
+Sous-titre de cette partie ¦ Podnaslov ovog dijela ¦ Podnaslov tega dela
+Ex. : À faire, Mes chiffres, Liens utiles ¦ Npr.: Za napraviti, Moji brojevi, Korisne poveznice ¦ Npr.: Za narediti, Moje številke, Uporabne povezave
+ÉDITEUR DE GRAPHIQUES ¦ UREĐIVAČ GRAFIKONA ¦ UREJEVALNIK GRAFOV
+ÉDITEUR DE WIDGETS ¦ UREĐIVAČ WIDGETA ¦ UREJEVALNIK GRADNIKOV
+Nouveau widget ¦ Novi widget ¦ Nov gradnik
+Règle ton widget à gauche ; l’aperçu se met à jour à droite. ¦ Podesi svoj widget lijevo; pregled se ažurira desno. ¦ Nastavi svoj gradnik levo; predogled se posodobi desno.
+1. Le widget ¦ 1. Widget ¦ 1. Gradnik
+Mes ancêtres bretons ¦ Moji bretonski preci ¦ Moji bretonski predniki
+Texte en haut du widget ¦ Tekst na vrhu widgeta ¦ Besedilo na vrhu gradnika
+Une phrase pour expliquer ce widget ¦ Rečenica koja objašnjava ovaj widget ¦ Stavek, ki pojasni ta gradnik
+Où l’afficher ¦ Gdje ga prikazati ¦ Kje ga prikazati
+Enregistrer et ouvrir dans Graphiques ¦ Spremi i otvori u Grafikonima ¦ Shrani in odpri v Grafih
+Enregistrer et ajouter au tableau de bord ¦ Spremi i dodaj na nadzornu ploču ¦ Shrani in dodaj na nadzorno ploščo
+la courbe ¦ krivulja ¦ krivulja
+Aucune valeur. ¦ Nema vrijednosti. ¦ Ni vrednosti.
+remettre les couleurs de la palette ¦ vrati boje palete ¦ vrni barve palete
+Donne un titre au widget. ¦ Daj naslov widgetu. ¦ Daj gradniku naslov.
+Widget enregistré : ajoute-le depuis la colonne de gauche du tableau de bord. ¦ Widget spremljen: dodaj ga iz lijevog stupca nadzorne ploče. ¦ Gradnik shranjen: dodaj ga iz levega stolpca nadzorne plošče.
+Graphique enregistré : il est dans Graphiques → Statistiques, rubrique « Mes graphiques ». ¦ Grafikon spremljen: nalazi se u Grafikoni → Statistika, rubrika „Moji grafikoni”. ¦ Graf shranjen: je v Grafi → Statistika, rubrika »Moji grafi«.
+ce n’est pas un widget LCNDA. ¦ ovo nije LCNDA widget. ¦ to ni gradnik LCNDA.
+Liste absente de ta base ({name}) : remplacée par « Personnes ». ¦ Popis ne postoji u tvojoj bazi ({name}): zamijenjen s „Osobe”. ¦ Seznama ni v tvoji zbirki ({name}): zamenjan z »Osebe«.
+Widget importé ¦ Widget uvezen ¦ Gradnik uvožen
+Ce widget n’existe plus. ¦ Ovaj widget više ne postoji. ¦ Ta gradnik ne obstaja več.
+Statistiques de l’app ¦ Statistika aplikacije ¦ Statistika aplikacije
+Source introuvable (graphique supprimé ?). ¦ Izvor nije pronađen (grafikon izbrisan?). ¦ Vira ni mogoče najti (graf izbrisan?).
+MES GRAPHIQUES ¦ MOJI GRAFIKONI ¦ MOJI GRAFI
+Graphique introuvable ¦ Grafikon nije pronađen ¦ Grafa ni mogoče najti
+Il a peut-être été supprimé. ¦ Možda je izbrisan. ¦ Morda je bil izbrisan.
+Image PNG ou JPG, PDF, impression, tableau CSV ¦ Slika PNG ili JPG, PDF, ispis, CSV tablica ¦ Slika PNG ali JPG, PDF, tiskanje, tabela CSV
+léger, pour un courriel ¦ lagano, za e-poštu ¦ lahko, za e-pošto
+les chiffres, pour un tableur ¦ brojevi, za proračunsku tablicu ¦ številke, za preglednico
+Fenêtre d’impression bloquée. ¦ Prozor za ispis je blokiran. ¦ Okno za tiskanje je blokirano.
+Une photo de tes médias, une nouvelle chaque jour. ¦ Fotografija iz tvojih medija, svaki dan nova. ¦ Fotografija iz tvojih medijev, vsak dan nova.
+Compte à rebours ¦ Odbrojavanje ¦ Odštevanje
+Les jours qui restent avant une date : la cousinade, un anniversaire, un voyage aux archives… ¦ Dani koji su preostali do datuma: obiteljsko okupljanje, rođendan, put u arhiv… ¦ Dnevi, ki so ostali do datuma: družinsko srečanje, rojstni dan, obisk arhiva…
+Le widget n’a pas pu être fabriqué. ¦ Widget nije moguće napraviti. ¦ Gradnika ni bilo mogoče izdelati.
+Widget prêt : {file}. Ouvre-le d’un double-clic et garde l’onglet ouvert (ou épingle-le) : il change tout seul chaque jour. ¦ Widget je spreman: {file}. Otvori ga dvostrukim klikom i drži karticu otvorenom (ili je prikvači): sam se mijenja svaki dan. ¦ Gradnik je pripravljen: {file}. Odpri ga z dvoklikom in pusti zavihek odprt (ali ga pripni): sam se spremeni vsak dan.
+La cousinade ¦ Obiteljsko okupljanje ¦ Družinsko srečanje
+ton ordinateur ¦ tvoje računalo ¦ tvoj računalnik
+Toujours au-dessus ¦ Uvijek na vrhu ¦ Vedno na vrhu
+× Retirer du bureau ¦ × Ukloni s radne površine ¦ × Odstrani z namizja
+⤓ Télécharger le widget (.html) ¦ ⤓ Preuzmi widget (.html) ¦ ⤓ Prenesi gradnik (.html)
+Démarrer avec l’ordinateur (les widgets s’ouvrent seuls, sans la grande fenêtre) ¦ Pokreni s računalom (widgeti se otvaraju sami, bez velikog prozora) ¦ Zaženi z računalnikom (gradniki se odprejo sami, brez velikega okna)
+⛔ Je ne comprends pas cette date : écris par exemple « 14 juillet 2027 » ou « 14/07/2027 ». ¦ ⛔ Ne razumijem ovaj datum: napiši na primjer „14 juillet 2027” ili „14/07/2027”. ¦ ⛔ Tega datuma ne razumem: napiši na primer »14 juillet 2027« ali »14/07/2027«.
+⛔ Donne la date du compte à rebours. ¦ ⛔ Upiši datum odbrojavanja. ¦ ⛔ Vpiši datum odštevanja.
+Donne la date. ¦ Upiši datum. ¦ Vpiši datum.
+Le widget n’a pas pu s’ouvrir. ¦ Widget se nije mogao otvoriti. ¦ Gradnika ni bilo mogoče odpreti.
+Retiré du bureau. ¦ Uklonjeno s radne površine. ¦ Odstranjeno z namizja.
+« {name} » retiré du bureau ¦ „{name}” uklonjen s radne površine ¦ »{name}« odstranjen z namizja
+Les widgets démarreront avec l’ordinateur. ¦ Widgeti će se pokretati s računalom. ¦ Gradniki se bodo zagnali z računalnikom.
+Les widgets ne démarreront plus avec l’ordinateur. ¦ Widgeti se više neće pokretati s računalom. ¦ Gradniki se ne bodo več zagnali z računalnikom.
+🪟 Mettre sur le bureau (« {name} », une petite fenêtre à part) ¦ 🪟 Stavi na radnu površinu („{name}”, mali zaseban prozor) ¦ 🪟 Postavi na namizje (»{name}«, majhno ločeno okno)
+🪟 Mettre sur le bureau (« {name} » : un fichier .html autonome dans un navigateur) ¦ 🪟 Stavi na radnu površinu („{name}”: samostalna .html datoteka u pregledniku) ¦ 🪟 Postavi na namizje (»{name}«: samostojna datoteka .html v brskalniku)
+Retirer {name} ¦ Ukloni {name} ¦ Odstrani {name}
+Aucune personne ¦ Nema osoba ¦ Ni oseb
+Flèches ¦ Strelice ¦ Puščice
+▶ Carte de la vie animée ¦ ▶ Animirana karta života ¦ ▶ Animiran zemljevid življenja
+Ajoute une personne. ¦ Dodaj osobu. ¦ Dodaj osebo.
+Aucun lieu daté. ¦ Nema datiranih mjesta. ¦ Ni datiranih krajev.
+Comparer avec ¦ Usporedi s ¦ Primerjaj z
+Opacité ¦ Neprozirnost ¦ Prekrivnost
+Année de ¦ Godina ¦ Leto
+Âge de ¦ Dob ¦ Starost
+Famille / groupe ¦ Obitelj / grupa ¦ Družina / skupina
+Fond ¦ Pozadina ¦ Ozadje
+Recentrer ¦ Ponovno centriraj ¦ Ponovno usredini
+carte|sépulture ¦ pokop ¦ pokop
+carte|évt ¦ dog. ¦ dog.
+contributeurs OpenStreetMap ¦ suradnici OpenStreetMapa ¦ sodelavci OpenStreetMap
+· connexion requise pour les tuiles ¦ · za pločice je potrebna veza ¦ · za ploščice je potrebna povezava
+connexion requise pour les tuiles ¦ za pločice je potrebna veza ¦ za ploščice je potrebna povezava
+Aucun événement dans cette zone ¦ Nema događaja u ovom području ¦ Na tem območju ni dogodkov
+⤢ Voir tout ¦ ⤢ Vidi sve ¦ ⤢ Poglej vse
+Lieu non précisé ¦ Mjesto nije navedeno ¦ Kraj ni naveden
+Voir la tombe ¦ Vidi grob ¦ Poglej grob
+Événement non rattaché ¦ Nepovezani događaj ¦ Nepovezan dogodek
+🚢 voyage ¦ 🚢 putovanje ¦ 🚢 potovanje
+👶 placement ¦ 👶 smještaj ¦ 👶 namestitev
+🎖 armée ¦ 🎖 vojska ¦ 🎖 vojska
+💞 conjoint ¦ 💞 supružnik ¦ 💞 zakonec
+👶 enfant ¦ 👶 dijete ¦ 👶 otrok
+🏫 école ¦ 🏫 škola ¦ 🏫 šola
+École ¦ Škola ¦ Šola
+Les étapes ¦ Etape ¦ Postanki
+📍 Lieux sans position ¦ 📍 Mjesta bez položaja ¦ 📍 Kraji brez položaja
+🗓 Sans lieu ¦ 🗓 Bez mjesta ¦ 🗓 Brez kraja
+CARTE · LA VIE D’UNE PERSONNE ¦ KARTA · ŽIVOT OSOBE ¦ ZEMLJEVID · ŽIVLJENJE OSEBE
+Carte de sa vie ¦ Karta njezinog života ¦ Zemljevid njenega življenja
+👪 Avec la famille (le couple, les enfants) ¦ 👪 S obitelji (par, djeca) ¦ 👪 Z družino (par, otroci)
+Les étapes l’une après l’autre, en vidéo (MP4 ou WebM) ¦ Etape jedna za drugom, u videu (MP4 ili WebM) ¦ Postanki drug za drugim, v videu (MP4 ali WebM)
+Ce navigateur ne sait pas enregistrer de vidéo ¦ Ovaj preglednik ne može snimati video ¦ Ta brskalnik ne zna snemati videa
+🎬 Exporter en vidéo ¦ 🎬 Izvezi kao video ¦ 🎬 Izvozi kot video
+Chargement de la carte… ¦ Učitavanje karte… ¦ Nalaganje zemljevida…
+La carte de sa vie se remplit avec ses événements, ses résidences, ses recensements, ses voyages… ¦ Karta života popunjava se njezinim događajima, prebivalištima, popisima stanovništva, putovanjima… ¦ Zemljevid življenja se zapolni z njenimi dogodki, bivališči, popisi prebivalstva, potovanji…
+🗺 La vie de {name} ¦ 🗺 Život osobe {name} ¦ 🗺 Življenje osebe {name}
+La vie de {name} ¦ Život osobe {name} ¦ Življenje osebe {name}
+Aucun lieu dans cette vie ¦ Nema mjesta u ovom životu ¦ V tem življenju ni krajev
+Ajoute un lieu à ses événements (naissance, mariage, résidence…) pour voir sa vie sur la carte. ¦ Dodaj mjesto njezinim događajima (rođenje, vjenčanje, prebivalište…) da vidiš njezin život na karti. ¦ Dodaj kraj njenim dogodkom (rojstvo, poroka, bivališče…), da vidiš njeno življenje na zemljevidu.
+Le moteur vidéo n’est pas chargé. ¦ Video pokretač nije učitan. ¦ Video pogon ni naložen.
+Durée d’une étape ¦ Trajanje etape ¦ Trajanje postanka
+aucune étape avec un lieu. ¦ nema etapa s mjestom. ¦ ni postankov s krajem.
+🎬 Vidéo {file} ¦ 🎬 Video {file} ¦ 🎬 Video {file}
+les étapes animées ¦ animirane etape ¦ animirani postanki
+⤓ Exporter la vidéo en {file} ¦ ⤓ Izvezi video kao {file} ¦ ⤓ Izvozi video kot {file}
+Vidéo exportée, mais pas rangée dans les médias : {err} ¦ Video je izvezen, ali nije spremljen u medije: {err} ¦ Video je izvožen, vendar ni shranjen med medije: {err}
+✓ Vidéo exportée ({file}). ¦ ✓ Video izvezen ({file}). ¦ ✓ Video izvožen ({file}).
+Montrer la même vie, étape par étape, avec la lecture ▶ et la vidéo ¦ Prikaži isti život, etapu po etapu, s reprodukcijom ▶ i videom ¦ Prikaži isto življenje, postanek za postankom, s predvajanjem ▶ in videom
+Comparer deux époques ¦ Usporedi dva razdoblja ¦ Primerjaj dve obdobji
+Fermer la comparaison ¦ Zatvori usporedbu ¦ Zapri primerjavo
+Glisse le trait (← →) ¦ Povuci crtu (← →) ¦ Povleci črto (← →)
+Transparence ¦ Prozirnost ¦ Prosojnost
+Deux fonds sur la même zone : un trait à glisser, côte à côte ou en transparence ¦ Dvije podloge na istom području: crta za povlačenje, jedna uz drugu ili prozirno ¦ Dve podlagi na istem območju: črta za vlečenje, drug ob drugem ali prosojno
+Fond des départements introuvable. ¦ Podloga departmana nije pronađena. ¦ Podlage departmajev ni mogoče najti.
+supprimée (partagée entre ses voisines) ¦ ukinuta (podijeljena među susjedima) ¦ ukinjena (razdeljena med sosednje)
+fusionnée ¦ spojena ¦ združena
+fusionnée (fusion-association) ¦ spojena (spajanje-udruživanje) ¦ združena (združitev-povezava)
+disparue ¦ nestala ¦ izginula
+renommée ¦ preimenovana ¦ preimenovana
+renommée « {name} » le {date} ¦ preimenovana u „{name}” dana {date} ¦ preimenovana v »{name}« dne {date}
+{what} le {date} ¦ {what} dana {date} ¦ {what} dne {date}
+dans {name} ¦ u {name} ¦ v {name}
+(devenue commune {name}) ¦ (postala općina {name}) ¦ (postala občina {name})
+Aujourd’hui : <b>{name}</b> ¦ Danas: <b>{name}</b> ¦ Danes: <b>{name}</b>
+Rétablie le {date}. ¦ Ponovno uspostavljena {date}. ¦ Ponovno ustanovljena {date}.
+Position approximative : le centre de la commune d’aujourd’hui. ¦ Približan položaj: središte današnje općine. ¦ Približen položaj: središče današnje občine.
+Source : INSEE, Code officiel géographique (depuis 1943). ¦ Izvor: INSEE, Code officiel géographique (od 1943.). ¦ Vir: INSEE, Code officiel géographique (od leta 1943).
+{name}, commune renommée ¦ {name}, preimenovana općina ¦ {name}, preimenovana občina
+{name}, commune disparue ¦ {name}, nestala općina ¦ {name}, izginula občina
+{name} — renommée en {year} ¦ {name} — preimenovana {year}. ¦ {name} — preimenovana leta {year}
+{name} — disparue en {year} ¦ {name} — nestala {year}. ¦ {name} — izginula leta {year}
+🏛 Frontières ▾ ¦ 🏛 Granice ▾ ¦ 🏛 Meje ▾
+Provinces, départements de 1790, communes disparues ¦ Pokrajine, departmani iz 1790., nestale općine ¦ Pokrajine, departmaji iz leta 1790, izginule občine
+Tracé approximatif, d’après les départements d’aujourd’hui ¦ Približna crta, prema današnjim departmanima ¦ Približna črta, po današnjih departmajih
+Frontières anciennes ¦ Stare granice ¦ Stare meje
+Provinces d’Ancien Régime (≈ 1789) ¦ Pokrajine Starog režima (≈ 1789.) ¦ Pokrajine starega režima (≈ 1789)
+Approximatif : d’après les départements d’aujourd’hui. ¦ Približno: prema današnjim departmanima. ¦ Približno: po današnjih departmajih.
+Départements de 1790 ¦ Departmani iz 1790. ¦ Departmaji iz leta 1790
+Les 83 départements, noms d’alors ; approximatif. ¦ 83 departmana, nazivi iz tog vremena; približno. ¦ 83 departmajev, takratna imena; približno.
+Communes disparues ou fusionnées ¦ Nestale ili spojene općine ¦ Izginule ali združene občine
+🏚 Communes disparues ou fusionnées ¦ 🏚 Nestale ili spojene općine ¦ 🏚 Izginule ali združene občine
+Depuis 1943 (INSEE). Zoome sur une région. ¦ Od 1943. (INSEE). Zumiraj na regiju. ¦ Od leta 1943 (INSEE). Povečaj na regijo.
+Avec les communes renommées ¦ S preimenovanim općinama ¦ S preimenovanimi občinami
+Les communes disparues se téléchargent une fois : ¦ Nestale općine preuzimaju se jednom: ¦ Izginule občine se prenesejo enkrat:
+Réglages → Frontières anciennes ↗ ¦ Postavke → Stare granice ↗ ¦ Nastavitve → Stare meje ↗
+Pas encore téléchargé ¦ Još nije preuzeto ¦ Še ni preneseno
+Téléchargé ¦ Preuzeto ¦ Preneseno
+Installé ¦ Instalirano ¦ Nameščeno
+Pas installé ¦ Nije instalirano ¦ Ni nameščeno
+=commune disparue ¦ nestala općina|nestale općine|nestalih općina ¦ izginula občina|izginuli občini|izginule občine|izginulih občin
+=commune renommée ¦ preimenovana općina|preimenovane općine|preimenovanih općina ¦ preimenovana občina|preimenovani občini|preimenovane občine|preimenovanih občin
+=placée sur la carte ¦ postavljena na kartu|postavljene na kartu|postavljenih na kartu ¦ postavljena na zemljevid|postavljeni na zemljevid|postavljene na zemljevid|postavljenih na zemljevid
+L’historique officiel des communes de l’INSEE (depuis 1943) : chaque commune disparue avec sa date et sa commune d’aujourd’hui. Livré avec l’app (5,5 Mo, Licence Ouverte 2.0 de l’INSEE) : installé tout seul, sans Internet. Les anciens noms aident aussi le menu de choix des lieux (« anc. « … » »). ¦ Službena povijest općina INSEE-a (od 1943.): svaka nestala općina s datumom i današnjom općinom. Isporučuje se s aplikacijom (5,5 MB, Licence Ouverte 2.0 INSEE-a): instalira se samo, bez interneta. Stari nazivi pomažu i izborniku za odabir mjesta („nekad „…””). ¦ Uradna zgodovina občin INSEE (od leta 1943): vsaka izginula občina z datumom in današnjo občino. Priložena aplikaciji (5,5 MB, Licence Ouverte 2.0 INSEE): namesti se sama, brez interneta. Stara imena pomagajo tudi meniju za izbiro krajev (»nekdaj »…««).
+⤓ Télécharger de nouveau (mise à jour) ¦ ⤓ Preuzmi ponovno (ažuriranje) ¦ ⤓ Prenesi znova (posodobitev)
+🗑 Retirer ¦ 🗑 Ukloni ¦ 🗑 Odstrani
+⤓ Installer les frontières anciennes ¦ ⤓ Instaliraj stare granice ¦ ⤓ Namesti stare meje
+(taille…) ¦ (veličina…) ¦ (velikost…)
+dossier des données ¦ mapa podataka ¦ mapa s podatki
+Rangé dans le {name}, commun à toutes tes généalogies. ¦ Spremljeno u {name}, zajedničko svim tvojim rodoslovljima. ¦ Shranjeno v {name}, skupno vsem tvojim rodoslovjem.
+Téléchargement et vérification… ¦ Preuzimanje i provjera… ¦ Prenos in preverjanje…
+Frontières anciennes retirées ¦ Stare granice uklonjene ¦ Stare meje odstranjene
+pas d’Internet ¦ nema interneta ¦ ni interneta
+Adresse de téléchargement injoignable pour l’instant ({err}). ¦ Adresa za preuzimanje zasad nije dostupna ({err}). ¦ Naslov za prenos zaenkrat ni dosegljiv ({err}).
+✓ Frontières anciennes installées : {n}. ¦ ✓ Stare granice instalirane: {n}. ¦ ✓ Stare meje nameščene: {n}.
+Départ, voyage ¦ Odlazak, putovanje ¦ Odhod, potovanje
+Tous les autres ¦ Svi ostali ¦ Vsi drugi
+Couvert ¦ Oblačno ¦ Oblačno
+Pluie toute la journée ¦ Kiša cijeli dan ¦ Dež ves dan
+Pluie faible ¦ Slaba kiša ¦ Rahel dež
+Matin de brouillard glacé ¦ Jutro s ledenom maglom ¦ Jutro z ledeno meglo
+Brouillard le matin ¦ Magla ujutro ¦ Megla zjutraj
+Il faisait très froid ¦ Bilo je jako hladno ¦ Bilo je zelo mrzlo
+Grand soleil et chaleur ¦ Jako sunce i vrućina ¦ Močno sonce in vročina
+Gris et frais ¦ Sivo i svježe ¦ Sivo in sveže
+Nuages et éclaircies ¦ Oblaci i razvedravanja ¦ Oblaki in razjasnitve
+Froid mais ensoleillé ¦ Hladno, ali sunčano ¦ Mrzlo, a sončno
+Beau temps ¦ Lijepo vrijeme ¦ Lepo vreme
+Neige ¦ Snijeg ¦ Sneg
+Orage ¦ Oluja ¦ Nevihta
+Mesuré ¦ Izmjereno ¦ Izmerjeno
+Station à moins de 15 km (et moins de 150 m d’écart d’altitude) ¦ Postaja na manje od 15 km (i manje od 150 m razlike u nadmorskoj visini) ¦ Postaja na manj kot 15 km (in manj kot 150 m razlike v nadmorski višini)
+Station à {n} km ¦ Postaja na {n} km ¦ Postaja na {n} km
+Station entre 15 et 40 km : indicatif (la pluie change vite d’un village à l’autre) ¦ Postaja između 15 i 40 km: okvirno (kiša se brzo mijenja od sela do sela) ¦ Postaja med 15 in 40 km: okvirno (dež se hitro spreminja od vasi do vasi)
+Estimé (carreau ≈ 30 km) ¦ Procijenjeno (kvadrat ≈ 30 km) ¦ Ocenjeno (kvadrat ≈ 30 km)
+Réanalyse ERA5 : aucune station à moins de 40 km ¦ Reanaliza ERA5: nijedna postaja na manje od 40 km ¦ Reanaliza ERA5: nobene postaje na manj kot 40 km
+Reconstitution grossière (≈ 100 km) ¦ Gruba rekonstrukcija (≈ 100 km) ¦ Groba rekonstrukcija (≈ 100 km)
+Réanalyse 20CR (1836–1939) : une idée du temps, pas une mesure ¦ Reanaliza 20CR (1836.–1939.): predodžba o vremenu, ne mjerenje ¦ Reanaliza 20CR (1836–1939): predstava o vremenu, ne meritev
+Les données météo ne sont pas installées. ¦ Meteorološki podaci nisu instalirani. ¦ Vremenski podatki niso nameščeni.
+Le lieu n’a pas de coordonnées : place-le sur la carte pour avoir sa météo. ¦ Mjesto nema koordinate: postavi ga na kartu da dobiješ njegovo vrijeme. ¦ Kraj nima koordinat: postavi ga na zemljevid, da dobiš njegovo vreme.
+La date n’est pas connue au jour près. ¦ Datum nije poznat na dan točno. ¦ Datum ni znan na dan natančno.
+Pas de météo pour ce lieu : les données installées couvrent la France, la Belgique, la Suisse et le Luxembourg (le pack Europe ajoute le reste). ¦ Nema vremena za ovo mjesto: instalirani podaci pokrivaju Francusku, Belgiju, Švicarsku i Luksemburg (paket Europa dodaje ostalo). ¦ Za ta kraj ni vremena: nameščeni podatki pokrivajo Francijo, Belgijo, Švico in Luksemburg (paket Evropa doda ostalo).
+Pas de relevé connu près d’ici avant {year} (première station : {name}). ¦ Nema poznatih mjerenja u blizini prije {year}. (prva postaja: {name}). ¦ V bližini ni znanih meritev pred letom {year} (prva postaja: {name}).
+Pas de relevé connu près d’ici avant {year}. ¦ Nema poznatih mjerenja u blizini prije {year}. ¦ V bližini ni znanih meritev pred letom {year}.
+Cliquer pour le détail ¦ Klikni za pojedinosti ¦ Klikni za podrobnosti
+À propos des données ¦ O podacima ¦ O podatkih
+🙈 Météo masquée pour cet événement ¦ 🙈 Vrijeme skriveno za ovaj događaj ¦ 🙈 Vreme skrito za ta dogodek
+🙈 Météo masquée pour cette personne ¦ 🙈 Vrijeme skriveno za ovu osobu ¦ 🙈 Vreme skrito za to osebo
+{what} (la retrouver : Réglages → 🌦 Météo d’autrefois) ¦ {what} (pronađi ga: Postavke → 🌦 Vrijeme iz prošlosti) ¦ {what} (najdeš ga: Nastavitve → 🌦 Vreme iz preteklosti)
+Ton lieu ¦ Tvoje mjesto ¦ Tvoj kraj
+(carte du relief) ¦ (reljefna karta) ¦ (reliefni zemljevid)
+Fiabilité ¦ Pouzdanost ¦ Zanesljivost
+3 jours avant · 3 jours après ¦ 3 dana prije · 3 dana poslije ¦ 3 dni prej · 3 dni pozneje
+Tout le détail… ¦ Sve pojedinosti… ¦ Vse podrobnosti…
+⛰ Altitude du lieu ¦ ⛰ Nadmorska visina mjesta ¦ ⛰ Nadmorska višina kraja
+Lecture des données météo… ¦ Čitanje meteoroloških podataka… ¦ Branje vremenskih podatkov…
+Météo ¦ Vrijeme ¦ Vreme
+🌦 MÉTÉO D’AUTREFOIS ¦ 🌦 VRIJEME IZ PROŠLOSTI ¦ 🌦 VREME IZ PRETEKLOSTI
+Le lieu, la station et le carreau ¦ Mjesto, postaja i kvadrat ¦ Kraj, postaja in kvadrat
+↺ Altitude remise à celle de la carte ¦ ↺ Nadmorska visina vraćena na onu s karte ¦ ↺ Nadmorska višina ponastavljena na tisto z zemljevida
+⛰ Altitude enregistrée : {n} ¦ ⛰ Nadmorska visina spremljena: {n} ¦ ⛰ Nadmorska višina shranjena: {n}
+⛰ LIEU ¦ ⛰ MJESTO ¦ ⛰ KRAJ
+Altitude de {name} ¦ Nadmorska visina mjesta {name} ¦ Nadmorska višina kraja {name}
+ce lieu ¦ ovo mjesto ¦ ta kraj
+Ce qu’elle donne ¦ Što daje ¦ Kaj daje
+Licence et mention ¦ Licencija i navod ¦ Licenca in navedba
+Une météo ancienne reste une estimation : elle aide à imaginer la journée, elle ne remplace pas ce que dit l’acte ou un journal de l’époque. ¦ Staro vrijeme ostaje procjena: pomaže zamisliti dan, ne zamjenjuje ono što kaže matični zapis ili novine iz tog vremena. ¦ Staro vreme ostaja ocena: pomaga si predstavljati dan, ne nadomesti pa tistega, kar pravi matični vpis ali časopis iz tistega časa.
+Rien n’est envoyé sur Internet : toutes ces données sont dans l’app ou dans les packs importés. Les règles de fiabilité : station à moins de 15 km et moins de 150 m d’écart d’altitude → « Mesuré » ; de 15 à 40 km → « Station à … km » ; sinon la réanalyse ERA5 (1940 →) → « Estimé » ; de 1836 à 1939 la reconstitution 20CR → « Reconstitution grossière ». ¦ Ništa se ne šalje na internet: svi su ti podaci u aplikaciji ili u uvezenim paketima. Pravila pouzdanosti: postaja na manje od 15 km i manje od 150 m razlike u nadmorskoj visini → „Izmjereno”; od 15 do 40 km → „Postaja na … km”; inače reanaliza ERA5 (1940. →) → „Procijenjeno”; od 1836. do 1939. rekonstrukcija 20CR → „Gruba rekonstrukcija”. ¦ Nič se ne pošlje na internet: vsi ti podatki so v aplikaciji ali v uvoženih paketih. Pravila zanesljivosti: postaja na manj kot 15 km in manj kot 150 m razlike v nadmorski višini → »Izmerjeno«; od 15 do 40 km → »Postaja na … km«; sicer reanaliza ERA5 (1940 →) → »Ocenjeno«; od 1836 do 1939 rekonstrukcija 20CR → »Groba rekonstrukcija«.
+Comment les obtenir ¦ Kako ih dobiti ¦ Kako jih dobiti
+Comment l’obtenir ¦ Kako ga dobiti ¦ Kako ga dobiti
+(avant 1940, la météo montre la journée) ¦ (prije 1940. vrijeme prikazuje dan) ¦ (pred letom 1940 vreme prikazuje dan)
+Socle inclus ¦ Osnovni paket uključen ¦ Osnovni paket vključen
+Pack complet ¦ Potpuni paket ¦ Celotni paket
+Pack Europe ¦ Paket Europa ¦ Paket Evropa
+Pack ¦ Paket ¦ Paket
+1836 à 2025 · France, Belgique, Suisse, Luxembourg · ≈ 300 stations chaque jour, 4 heures par jour depuis 1940 · ≈ 550 Mo ¦ 1836. do 2025. · Francuska, Belgija, Švicarska, Luksemburg · ≈ 300 postaja svaki dan, 4 sata dnevno od 1940. · ≈ 550 MB ¦ 1836 do 2025 · Francija, Belgija, Švica, Luksemburg · ≈ 300 postaj vsak dan, 4 ure na dan od leta 1940 · ≈ 550 MB
+Toutes les stations (≈ 14 700), heure par heure depuis 1950 · ≈ 3 Go ¦ Sve postaje (≈ 14 700), sat po sat od 1950. · ≈ 3 GB ¦ Vse postaje (≈ 14 700), uro za uro od leta 1950 · ≈ 3 GB
+🗑 Supprimer le pack ¦ 🗑 Izbriši paket ¦ 🗑 Izbriši paket
+⤒ Importer le fichier… ¦ ⤒ Uvezi datoteku… ¦ ⤒ Uvozi datoteko…
+🗑 {name} supprimé ¦ 🗑 {name} izbrisan ¦ 🗑 {name} izbrisan
+Le temps qu’il faisait le jour de chaque événement, sans Internet. ¦ Vrijeme na dan svakog događaja, bez interneta. ¦ Vreme na dan vsakega dogodka, brez interneta.
+Météo sur les fiches ¦ Vrijeme u zapisima ¦ Vreme v zapisih
+Au survol ¦ Pri prelasku mišem ¦ Ob prehodu z miško
+Au clic sur la pastille ¦ Klikom na značku ¦ S klikom na značko
+Fenêtre ¦ Prozor ¦ Okno
+Sous l’événement ¦ Ispod događaja ¦ Pod dogodkom
+Températures ¦ Temperature ¦ Temperature
+Pluie ¦ Kiša ¦ Dež
+pouces ¦ inči ¦ palci
+La phrase simple ¦ Jednostavna rečenica ¦ Preprost stavek
+« Il faisait froid : −4 °C au matin… » ¦ „Bilo je hladno: −4 °C ujutro…” ¦ »Bilo je mrzlo: −4 °C zjutraj…«
+Comparer à la normale ¦ Usporedi s prosjekom ¦ Primerjaj s povprečjem
+Ligne des sources sous le détail ¦ Redak izvora ispod pojedinosti ¦ Vrstica virov pod podrobnostmi
+Obligatoire pour certaines licences : elle reste dans le détail et à l’export. ¦ Obavezno za neke licencije: ostaje u pojedinostima i pri izvozu. ¦ Obvezno za nekatere licence: ostane v podrobnostih in pri izvozu.
+Bloc « 🌦 Météo de sa vie » sur les fiches ¦ Blok „🌦 Vrijeme njezinog života” u zapisima ¦ Blok »🌦 Vreme njenega življenja« v zapisih
+Phrases curieuses (« Né le jour le plus froid… ») ¦ Zanimljive rečenice („Rođen/rođena najhladnijeg dana…”) ¦ Zanimivi stavki (»Rojen/rojena na najhladnejši dan…«)
+Dans « Ce jour-là » et le tableau de bord ¦ U „Toga dana” i na nadzornoj ploči ¦ V »Tisti dan« in na nadzorni plošči
+Montrer aussi les reconstitutions grossières (avant 1940) ¦ Prikaži i grube rekonstrukcije (prije 1940.) ¦ Prikaži tudi grobe rekonstrukcije (pred letom 1940)
+Pour quels événements ¦ Za koje događaje ¦ Za katere dogodke
+Tous les types d’événements de ta base (avec leur nombre). Décoche ceux qui n’ont pas besoin de la météo. ¦ Sve vrste događaja u tvojoj bazi (s njihovim brojem). Odznači one kojima vrijeme nije potrebno. ¦ Vse vrste dogodkov v tvoji zbirki (z njihovim številom). Odznači tiste, ki vremena ne potrebujejo.
+Météo masquée ¦ Skriveno vrijeme ¦ Skrito vreme
+Remontrer la météo ¦ Ponovno prikaži vrijeme ¦ Znova prikaži vreme
+Rien n’est masqué. ¦ Ništa nije skriveno. ¦ Nič ni skrito.
+Sur une fiche : clic droit sur la pastille météo (ou ⋯ du détail) → « Masquer la météo ». ¦ U zapisu: desni klik na značku vremena (ili ⋯ u pojedinostima) → „Sakrij vrijeme”. ¦ V zapisu: desni klik na značko vremena (ali ⋯ v podrobnostih) → »Skrij vreme«.
+Les données dans l’app ¦ Podaci u aplikaciji ¦ Podatki v aplikaciji
+Le téléchargement se fait une fois, depuis n’importe quel ordinateur. Ensuite on importe le fichier ici et l’app n’a plus besoin d’Internet. ¦ Preuzimanje se radi jednom, s bilo kojeg računala. Zatim uvezeš datoteku ovdje i aplikaciji više ne treba internet. ¦ Prenos opraviš enkrat, s katerega koli računalnika. Nato datoteko uvoziš tukaj in aplikacija ne potrebuje več interneta.
+le socle ¦ osnovni paket ¦ osnovni paket
+le pack complet ¦ potpuni paket ¦ celotni paket
+le pack Europe ¦ paket Europa ¦ paket Evropa
+le pack ¦ paket ¦ paket
+Obtenir {name} ¦ Nabavi {name} ¦ Pridobi {name}
+Importer un pack météo ¦ Uvezi meteorološki paket ¦ Uvozi vremenski paket
+aucun fichier ¦ nema datoteke ¦ ni datoteke
+l’en-tête du pack est abîmé. ¦ zaglavlje paketa je oštećeno. ¦ glava paketa je poškodovana.
+le fichier est incomplet (téléchargement interrompu ?). ¦ datoteka je nepotpuna (prekinuto preuzimanje?). ¦ datoteka je nepopolna (prekinjen prenos?).
+heure par heure ¦ sat po sat ¦ uro za uro
+sur le disque ¦ na disku ¦ na disku
+Le socle reste : le pack s’ajoute par-dessus. ¦ Osnovni paket ostaje: paket se dodaje povrh njega. ¦ Osnovni paket ostane: paket se doda nanj.
+Vérifié ¦ Provjereno ¦ Preverjeno
+Envoi du fichier… ¦ Slanje datoteke… ¦ Pošiljanje datoteke…
+Envoi du fichier… {n} % ¦ Slanje datoteke… {n} % ¦ Pošiljanje datoteke… {n} %
+réponse illisible ¦ nečitljiv odgovor ¦ neberljiv odgovor
+Vérification du pack… ¦ Provjera paketa… ¦ Preverjanje paketa…
+La météo est masquée ici (Réglages → 🌦 Météo d’autrefois). ¦ Vrijeme je ovdje skriveno (Postavke → 🌦 Vrijeme iz prošlosti). ¦ Vreme je tukaj skrito (Nastavitve → 🌦 Vreme iz preteklosti).
+Aucun anniversaire rond avec une météo connue aujourd’hui. ¦ Danas nema okrugle godišnjice s poznatim vremenom. ¦ Danes ni okrogle obletnice z znanim vremenom.
+Bague métal lue ¦ Metalni prsten pročitan ¦ Kovinski obroček prebran
+Photo-identifié ¦ Foto-identificirano ¦ Foto-identificirano
+(pas tout lu) ¦ (nije sve pročitano) ¦ (ni vse prebrano)
+Éloigner ¦ Udalji ¦ Oddalji
+Le temps ¦ Vrijeme ¦ Čas
+1 heure par seconde ¦ 1 sat u sekundi ¦ 1 ura na sekundo
+1 jour par seconde ¦ 1 dan u sekundi ¦ 1 dan na sekundo
+1 semaine par seconde ¦ 1 tjedan u sekundi ¦ 1 teden na sekundo
+1 mois par seconde ¦ 1 mjesec u sekundi ¦ 1 mesec na sekundo
+↗ Ouvrir l’observation ¦ ↗ Otvori opažanje ¦ ↗ Odpri opazovanje
+cette année ¦ ova godina ¦ to leto
+période choisie ¦ odabrano razdoblje ¦ izbrano obdobje
+La journée (ou la nuit) d’un animal qui porte une balise ou un collier GPS. ¦ Dan (ili noć) životinje koja nosi GPS odašiljač ili ogrlicu. ¦ Dan (ali noč) živali, ki nosi oddajnik ali ovratnico GPS.
+Animaux vus par mois, distance parcourue, zone fréquentée, jamais revus. ¦ Životinje viđene po mjesecima, prijeđena udaljenost, posjećeno područje, nikad ponovno viđene. ¦ Živali, videne po mesecih, prehojena razdalja, obiskano območje, nikoli več videne.
+Une case pour retrouver un animal par ses couleurs, un code gravé, une bague métal, une puce, un tatouage ou une boucle. ¦ Polje za pronalaženje životinje po bojama, ugraviranom kodu, metalnom prstenu, čipu, tetovaži ili ušnoj markici. ¦ Polje za iskanje živali po barvah, vgravirani kodi, kovinskem obročku, čipu, tetovaži ali ušesni znamki.
+Déposer un fichier GPX, KML ou CSV d’une balise ou d’un collier. ¦ Ubaci GPX, KML ili CSV datoteku s odašiljača ili ogrlice. ¦ Spusti datoteko GPX, KML ali CSV z oddajnika ali ovratnice.
+Le suivi n’a pas pu se charger. ¦ Praćenje se nije moglo učitati. ¦ Spremljanja ni bilo mogoče naložiti.
+dernière position GPS ¦ posljednji GPS položaj ¦ zadnji položaj GPS
+Aucune observation pour l’instant. ¦ Zasad nema opažanja. ¦ Zaenkrat ni opazovanj.
+Tous ont été revus récemment. ¦ Sve su nedavno ponovno viđene. ¦ Vse so bile nedavno znova videne.
+Tous ont été revus. ¦ Sve su ponovno viđene. ¦ Vse so bile znova videne.
+pas encore vu ¦ još nije viđena ¦ še ni videna
+Aucun animal suivi pour l’instant. ¦ Zasad nema praćenih životinja. ¦ Zaenkrat ni spremljanih živali.
+Ouvre la fiche d’un animal (Listes → Animaux) et ajoute-lui une marque ou une observation. ¦ Otvori zapis životinje (Popisi → Životinje) i dodaj joj oznaku ili opažanje. ¦ Odpri zapis živali (Seznami → Živali) in ji dodaj oznako ali opazovanje.
+Le plus suivi ¦ Najpraćenija ¦ Najbolj spremljana
+Code, couleurs ou numéro ¦ Kod, boje ili broj ¦ Koda, barve ali številka
+Chercher… (« 7K », « vert rouge », n° de puce) ¦ Traži… („7K”, „zelena crvena”, broj čipa) ¦ Išči… (»7K«, »zelena rdeča«, številka čipa)
+Couleurs (« vert rouge »), code gravé, bague métal, puce, tatouage, boucle. « ? » = pas lu, [K|X] = j’hésite. ¦ Boje („zelena crvena”), ugravirani kod, metalni prsten, čip, tetovaža, ušna markica. „?” = nije pročitano, [K|X] = dvojim. ¦ Barve (»zelena rdeča«), vgravirana koda, kovinski obroček, čip, tetovaža, ušesna znamka. »?« = ni prebrano, [K|X] = omahujem.
+Aucun trajet GPS pour l’instant. ¦ Zasad nema GPS putova. ¦ Zaenkrat ni poti GPS.
+＋ Nouveau site ¦ ＋ Novo mjesto ¦ ＋ Nova lokacija
+＋ Nouveau site de suivi ¦ ＋ Novo mjesto praćenja ¦ ＋ Nova lokacija spremljanja
+Nouveau site de suivi ¦ Novo mjesto praćenja ¦ Nova lokacija spremljanja
+Aucun site de suivi pour l’instant. ¦ Zasad nema mjesta praćenja. ¦ Zaenkrat ni lokacij spremljanja.
+Aucun comptage. ¦ Nema brojanja. ¦ Ni štetij.
+↗ Le site ¦ ↗ Mjesto ¦ ↗ Lokacija
+La météo… ¦ Vrijeme… ¦ Vreme…
+Dernier événement ¦ Posljednji događaj ¦ Zadnji dogodek
+Aucun groupe pour l’instant. ¦ Zasad nema grupa. ¦ Zaenkrat ni skupin.
+🪺 Nids occupés ¦ 🪺 Zauzeta gnijezda ¦ 🪺 Zasedena gnezda
+🐣 Poussins bagués ¦ 🐣 Prstenovani ptići ¦ 🐣 Obročkani mladiči
+Courbe des comptages ¦ Krivulja brojanja ¦ Krivulja štetij
+Cette année ¦ Ove godine ¦ Letos
+Montrer les trajets GPS ¦ Prikaži GPS putove ¦ Prikaži poti GPS
+Pas revus depuis ¦ Nisu ponovno viđene od ¦ Niso bile znova videne od
+Le même seuil que « 👁 Vu la dernière fois » des fiches d’animaux. ¦ Isti prag kao „👁 Posljednji put viđeno” u zapisima životinja. ¦ Isti prag kot »👁 Nazadnje videno« v zapisih živali.
+Seulement ceux qui ne vont pas bien ¦ Samo one kojima nije dobro ¦ Samo tiste, ki jim ni dobro
+Réglages du bloc remis comme au départ. ¦ Postavke bloka vraćene na početno. ¦ Nastavitve bloka ponastavljene na začetno.
+un site ¦ mjesto ¦ lokacija
+⤒ Recevoir un suivi partagé… ¦ ⤒ Primi podijeljeno praćenje… ¦ ⤒ Prejmi deljeno spremljanje…
+Toutes les espèces ¦ Sve vrste ¦ Vse vrste
+Corneilles, Hérissons, Chats du quartier… ¦ Vrane, ježevi, mačke iz susjedstva… ¦ Vrane, ježi, mačke iz soseske…
+Corneille noire, Hérisson d’Europe… ¦ Crna vrana, europski jež… ¦ Črna vrana, navadni jež…
+Renommer la page ¦ Preimenuj stranicu ¦ Preimenuj stran
+Un émoji : 🐦 🦔 🐈 🐬 🐺… ¦ Emoji: 🐦 🦔 🐈 🐬 🐺… ¦ Emoji: 🐦 🦔 🐈 🐬 🐺…
+Icône changée. ¦ Ikona promijenjena. ¦ Ikona spremenjena.
+Espèce et site par défaut… ¦ Zadana vrsta i mjesto… ¦ Privzeta vrsta in lokacija…
+Dupliquer la page ¦ Dupliciraj stranicu ¦ Podvoji stran
+Bloc dupliqué. ¦ Blok dupliciran. ¦ Blok podvojen.
+Copier vers une autre page… ¦ Kopiraj na drugu stranicu… ¦ Kopiraj na drugo stran…
+Copier vers la page… ¦ Kopiraj na stranicu… ¦ Kopiraj na stran…
+Pages rangées. ¦ Stranice posložene. ¦ Strani razvrščene.
+📁 Glisse ici un trajet (GPX, KML, CSV), colle-le (⌘V) ou choisis-le ¦ 📁 Povuci ovamo put (GPX, KML, CSV), zalijepi ga (⌘V) ili ga odaberi ¦ 📁 Povleci sem pot (GPX, KML, CSV), jo prilepi (⌘V) ali jo izberi
+Balises de la faune sauvage (Movebank…) ou colliers (Tractive, Weenect, Invoxia, Kippy…). ¦ Odašiljači divljih životinja (Movebank…) ili ogrlice (Tractive, Weenect, Invoxia, Kippy…). ¦ Oddajniki prostoživečih živali (Movebank…) ali ovratnice (Tractive, Weenect, Invoxia, Kippy…).
+Aucune observation datée et placée. ¦ Nema datiranih i smještenih opažanja. ¦ Ni datiranih in umeščenih opazovanj.
+Aucun événement de santé pour l’instant. ¦ Zasad nema zdravstvenih događaja. ¦ Zaenkrat ni zdravstvenih dogodkov.
+Aucun passage sur cette période. ¦ Nema prolazaka u ovom razdoblju. ¦ V tem obdobju ni prehodov.
+Ce mois ¦ Ovaj mjesec ¦ Ta mesec
+Météo trouvée ¦ Vrijeme pronađeno ¦ Vreme najdeno
+=animal trouvé ¦ pronađena životinja|pronađene životinje|pronađenih životinja ¦ najdena žival|najdeni živali|najdene živali|najdenih živali
+SUIVI DES ANIMAUX · EN GRAND ¦ PRAĆENJE ŽIVOTINJA · U VELIKOM ¦ SPREMLJANJE ŽIVALI · V VELIKEM
+SUIVI DES ANIMAUX · CHIFFRES ¦ PRAĆENJE ŽIVOTINJA · BROJEVI ¦ SPREMLJANJE ŽIVALI · ŠTEVILKE
+Par animal ¦ Po životinji ¦ Po živali
+Par année ¦ Po godini ¦ Po letu
+relié dans l’ordre ¦ povezano redom ¦ povezano po vrsti
+Les chiffres… ¦ Brojevi… ¦ Številke…
+Tous les animaux ¦ Sve životinje ¦ Vse živali
+Par site · observations ¦ Po mjestu · opažanja ¦ Po lokaciji · opazovanja
+Aucune observation. ¦ Nema opažanja. ¦ Ni opazovanj.
+Zone fréquentée ¦ Posjećeno područje ¦ Obiskano območje
+enveloppe des points vus ¦ omotnica viđenih točaka ¦ ovojnica videnih točk
+Il faut au moins 3 points pour une zone. ¦ Za područje su potrebne najmanje 3 točke. ¦ Za območje so potrebne vsaj 3 točke.
+Délai ¦ Rok ¦ Rok
+Ce qu’il faisait ¦ Što je radila ¦ Kaj je počela
+Vu par ¦ Vidio/vidjela ¦ Videl/videla
+Avec qui ¦ S kim ¦ S kom
+Chaque caractère du code ¦ Svaki znak koda ¦ Vsak znak kode
+Pas lu : clique pour dire « j’hésite entre… » ¦ Nije pročitano: klikni da kažeš „dvojim između…” ¦ Ni prebrano: klikni, da poveš »omahujem med…«
+J’hésite : clique pour dire que c’est sûr ¦ Dvojim: klikni da kažeš da je sigurno ¦ Omahujem: klikni, da poveš, da je zanesljivo
+Sûr : clique pour dire « pas lu » ¦ Sigurno: klikni da kažeš „nije pročitano” ¦ Zanesljivo: klikni, da poveš »ni prebrano«
+un clic : sûr → pas lu → j’hésite entre… ¦ jedan klik: sigurno → nije pročitano → dvojim između… ¦ en klik: zanesljivo → ni prebrano → omahujem med…
+Modifier l’observation ¦ Uredi opažanje ¦ Uredi opazovanje
+Nouvelle observation ¦ Novo opažanje ¦ Novo opazovanje
+Retrouver l’animal · selon l’espèce : ¦ Pronađi životinju · prema vrsti: ¦ Poišči žival · glede na vrsto:
+Photos, sons ou vidéos ¦ Fotografije, zvukovi ili videozapisi ¦ Fotografije, zvoki ali videi
+Dis quand tu l’as vu. ¦ Reci kada si je vidio/vidjela. ¦ Povej, kdaj si jo videl/videla.
+Dis où tu l’as vu (un lieu, un site, ou 📍 Ma position). ¦ Reci gdje si je vidio/vidjela (mjesto, lokacija ili 📍 Moj položaj). ¦ Povej, kje si jo videl/videla (kraj, lokacija ali 📍 Moj položaj).
+Observation enregistrée. ¦ Opažanje spremljeno. ¦ Opazovanje shranjeno.
+Observation créée. ¦ Opažanje stvoreno. ¦ Opazovanje ustvarjeno.
+🌊 En mer ¦ 🌊 Na moru ¦ 🌊 Na morju
+Taille du groupe ¦ Veličina grupe ¦ Velikost skupine
+📷 Piège photo ¦ 📷 Foto-zamka ¦ 📷 Foto past
+Vu par un piège photo ¦ Viđena foto-zamkom ¦ Videna s foto pastjo
+Piège n° ¦ Zamka br. ¦ Past št.
+mise toute seule d’après ce que tu as cliqué ¦ postavljeno automatski prema onome što si kliknuo/kliknula ¦ nastavljeno samodejno glede na to, kar si kliknil/kliknila
+＋ Créer la fiche d’un nouvel animal ¦ ＋ Stvori zapis nove životinje ¦ ＋ Ustvari zapis nove živali
+✎ Garder sans fiche ¦ ✎ Zadrži bez zapisa ¦ ✎ Obdrži brez zapisa
+Deux animaux correspondent autant : la lecture sera marquée « Doute ». ¦ Dvije životinje jednako odgovaraju: čitanje će biti označeno „Dvojba”. ¦ Dve živali se enako ujemata: branje bo označeno kot »Dvom«.
+Couleurs des bagues ¦ Boje prstenova ¦ Barve obročkov
+Bague vue mais couleur pas sûre ¦ Prsten viđen, ali boja nije sigurna ¦ Obroček viden, a barva ni zanesljiva
+Une autre couleur (pipette, code #…) ¦ Druga boja (pipeta, kod #…) ¦ Druga barva (kapalka, koda #…)
+Pas regardé ¦ Nije gledano ¦ Ni pregledano
+J’hésite entre… ¦ Dvojim između… ¦ Omahujem med…
+L’observation sera gardée sans fiche, avec la lecture. ¦ Opažanje će biti zadržano bez zapisa, s čitanjem. ¦ Opazovanje bo shranjeno brez zapisa, z branjem.
+Son nom (ou un code : « 7K », « Sans nom 2C9 ») ¦ Njezino ime (ili kod: „7K”, „Bez imena 2C9”) ¦ Njeno ime (ali koda: »7K«, »Brez imena 2C9«)
+En quelques mots (« se baigne », « chasse un goéland »…) ¦ U nekoliko riječi („kupa se”, „lovi galeba”…) ¦ Z nekaj besedami (»se kopa«, »lovi galeba«…)
+Cet appareil ne donne pas sa position. ¦ Ovaj uređaj ne daje svoj položaj. ¦ Ta naprava ne sporoča svojega položaja.
+La fenêtre d’import n’est pas chargée. ¦ Prozor za uvoz nije učitan. ¦ Okno za uvoz ni naloženo.
+Un trajet GPS ¦ GPS put ¦ Pot GPS
+Fichier trop gros (40 Mo au plus). ¦ Datoteka je prevelika (najviše 40 MB). ¦ Datoteka je prevelika (največ 40 MB).
+Fichier trop gros (200 Mo au plus). ¦ Datoteka je prevelika (najviše 200 MB). ¦ Datoteka je prevelika (največ 200 MB).
+{rows} sans date ou sans position seront sautées. ¦ Bit će preskočeno (bez datuma ili položaja): {rows}. ¦ Preskočeno bo (brez datuma ali položaja): {rows}.
+{rows} sans date ou sans position sera sautée. ¦ Bit će preskočeno (bez datuma ili položaja): {rows}. ¦ Preskočeno bo (brez datuma ali položaja): {rows}.
+=point importé ¦ uvezena točka|uvezene točke|uvezenih točaka ¦ uvožena točka|uvoženi točki|uvožene točke|uvoženih točk
+{points} pour {name} ¦ {points} za {name} ¦ {points} za {name}
+({n} déjà là, sautés) ¦ (već postoji: {n}, preskočeno) ¦ (že obstaja: {n}, preskočeno)
+({n} déjà là, sauté) ¦ (već postoji: {n}, preskočeno) ¦ (že obstaja: {n}, preskočeno)
+{points} en tout ¦ {points} ukupno ¦ {points} skupaj
+{name} a déjà {points} : ils restent, ce fichier s’y ajoute (un instant déjà là n’est pas repris deux fois). ¦ {name} već ima {points}: one ostaju, ova se datoteka dodaje (trenutak koji već postoji ne preuzima se dvaput). ¦ {name} že ima {points}: te ostanejo, ta datoteka se doda (trenutek, ki že obstaja, se ne prevzame dvakrat).
+l’animal ¦ životinja ¦ žival
+Ne va pas bien ¦ Nije joj dobro ¦ Ni ji dobro
+Chercher… (nom, code « 7K », bague EA…, lieu, observateur) ¦ Traži… (ime, kod „7K”, prsten EA…, mjesto, promatrač) ¦ Išči… (ime, koda »7K«, obroček EA…, kraj, opazovalec)
+Chercher… (nom, code « 7K », puce…) ¦ Traži… (ime, kod „7K”, čip…) ¦ Išči… (ime, koda »7K«, čip…)
+Vus récemment ¦ Nedavno viđene ¦ Nedavno videne
+＋ Nouveau comptage ¦ ＋ Novo brojanje ¦ ＋ Novo štetje
+Nouveau comptage ¦ Novo brojanje ¦ Novo štetje
+＋ Nouvelle observation ici ¦ ＋ Novo opažanje ovdje ¦ ＋ Novo opazovanje tukaj
+🗑 Supprimer le site ¦ 🗑 Izbriši mjesto ¦ 🗑 Izbriši lokacijo
+Aucun comptage pour l’instant. ¦ Zasad nema brojanja. ¦ Zaenkrat ni štetij.
+? Non identifiés ¦ ? Neidentificirane ¦ ? Neidentificirane
+Personne encore. ¦ Još nikoga. ¦ Še nikogar.
+contour du site ¦ obris mjesta ¦ obris lokacije
+Site enregistré. ¦ Mjesto spremljeno. ¦ Lokacija shranjena.
+Site créé. ¦ Mjesto stvoreno. ¦ Lokacija ustvarjena.
+île, colonie nord… ¦ otok, sjeverna kolonija… ¦ otok, severna kolonija…
+Ce qu’on compte ¦ Što se broji ¦ Kaj se šteje
+Donne la date du comptage. ¦ Upiši datum brojanja. ¦ Vpiši datum štetja.
+Comptage enregistré. ¦ Brojanje spremljeno. ¦ Štetje shranjeno.
+Comptage supprimé. ¦ Brojanje izbrisano. ¦ Štetje izbrisano.
+＋ Ajouter un membre ¦ ＋ Dodaj člana ¦ ＋ Dodaj člana
+Aucun membre pour l’instant. ¦ Zasad nema članova. ¦ Zaenkrat ni članov.
+Membres passés ¦ Bivši članovi ¦ Nekdanji člani
+Personne n’est parti. ¦ Nitko nije otišao. ¦ Nihče ni odšel.
+Frise du groupe ¦ Vremenska crta grupe ¦ Časovnica skupine
+🗑 Supprimer le groupe ¦ 🗑 Izbriši grupu ¦ 🗑 Izbriši skupino
+Loup gris, chimpanzé, orque… ¦ Sivi vuk, čimpanza, orka… ¦ Sivi volk, šimpanz, orka…
+Territoire ¦ Teritorij ¦ Ozemlje
+Donne un nom au groupe. ¦ Daj grupi ime. ¦ Daj skupini ime.
+Groupe enregistré. ¦ Grupa spremljena. ¦ Skupina shranjena.
+Groupe créé. ¦ Grupa stvorena. ¦ Skupina ustvarjena.
+Groupe supprimé (son histoire aussi). ¦ Grupa izbrisana (i njezina povijest). ¦ Skupina izbrisana (tudi njena zgodovina).
+✓ Onglet « 🐾 Suivi des animaux » affiché ¦ ✓ Kartica „🐾 Praćenje životinja” prikazana ¦ ✓ Zavihek »🐾 Spremljanje živali« prikazan
+Tu suis des animaux sauvages ou un chat avec un collier GPS ? ¦ Pratiš divlje životinje ili mačku s GPS ogrlicom? ¦ Spremljaš prostoživeče živali ali mačko z ovratnico GPS?
+L’onglet « 🐾 Suivi des animaux » est caché. Pour l’afficher : Réglages → Apparence → Onglets du haut. ¦ Kartica „🐾 Praćenje životinja” je skrivena. Da je prikažeš: Postavke → Izgled → Kartice na vrhu. ¦ Zavihek »🐾 Spremljanje živali« je skrit. Da ga prikažeš: Nastavitve → Videz → Zavihki na vrhu.
+↗ Afficher l’onglet ¦ ↗ Prikaži karticu ¦ ↗ Prikaži zavihek
+Observation dupliquée. ¦ Opažanje duplicirano. ¦ Opazovanje podvojeno.
+Observation supprimée. ¦ Opažanje izbrisano. ¦ Opazovanje izbrisano.
+Voir les {n} autres médias ¦ Vidi ostale medije ({n}) ¦ Poglej druge medije ({n})
+{n} sans bague ¦ Bez prstena: {n} ¦ Brez obročka: {n}
+Animal sans fiche ¦ Životinja bez zapisa ¦ Žival brez zapisa
+pas revus depuis {days} ¦ nisu ponovno viđene već {days} ¦ niso bile znova videne že {days}
+Suivi des animaux · Page « {name} » ¦ Praćenje životinja · Stranica „{name}” ¦ Spremljanje živali · Stran »{name}«
+Cette page montre seulement : <b>{what}</b>. Tous ses blocs s’y règlent d’office (un bloc peut garder son propre choix). ¦ Ova stranica prikazuje samo: <b>{what}</b>. Svi se njezini blokovi automatski prilagođavaju (blok može zadržati vlastiti odabir). ¦ Ta stran prikazuje samo: <b>{what}</b>. Vsi njeni bloki se samodejno prilagodijo (blok lahko obdrži svojo izbiro).
+Cette page montre seulement : <b>{what}</b> · tous les sites. Tous ses blocs s’y règlent d’office (un bloc peut garder son propre choix). ¦ Ova stranica prikazuje samo: <b>{what}</b> · sva mjesta. Svi se njezini blokovi automatski prilagođavaju (blok može zadržati vlastiti odabir). ¦ Ta stran prikazuje samo: <b>{what}</b> · vse lokacije. Vsi njeni bloki se samodejno prilagodijo (blok lahko obdrži svojo izbiro).
+Nouvelle page ¦ Nova stranica ¦ Nova stran
+Espèce et site de la page « {name} » ¦ Vrsta i mjesto stranice „{name}” ¦ Vrsta in lokacija strani »{name}«
+Page « {name} » créée. ¦ Stranica „{name}” stvorena. ¦ Stran »{name}« ustvarjena.
+Page « {name} » supprimée (ses blocs, pas les animaux). ¦ Stranica „{name}” izbrisana (njezini blokovi, ne životinje). ¦ Stran »{name}« izbrisana (njeni bloki, ne živali).
+Bloc copié vers « {name} ». ¦ Blok kopiran na „{name}”. ¦ Blok kopiran na »{name}«.
+Aucun animal pour « {q} ». ¦ Nema životinja za „{q}”. ¦ Za »{q}« ni živali.
+première observation ¦ prvo opažanje ¦ prvo opazovanje
+dernière : {date} ¦ posljednje: {date} ¦ zadnje: {date}
+parcourus par {name} ({from} → {to}) ¦ prijeđeno: {name} ({from} → {to}) ¦ prepotoval/-a: {name} ({from} → {to})
+pas de trajet GPS ¦ nema GPS puta ¦ ni poti GPS
+Fiche de « {name} » créée. ¦ Zapis „{name}” stvoren. ¦ Zapis »{name}« ustvarjen.
+vu sur {sites} ¦ viđena na {sites} ¦ videna na {sites}
+Pas revu depuis {when} ¦ Nije ponovno viđena od {when} ¦ Ni bila znova videna od {when}
+Jamais vu ¦ Nikad viđena ¦ Nikoli videna
+Suivi en cours ¦ Praćenje u tijeku ¦ Spremljanje v teku
+Ce qu’on partage ¦ Što se dijeli ¦ Kaj se deli
+Des animaux choisis ¦ Odabrane životinje ¦ Izbrane živali
+Tous les animaux d’une espèce ¦ Sve životinje jedne vrste ¦ Vse živali ene vrste
+Les animaux d’un site ¦ Životinje jednog mjesta ¦ Živali ene lokacije
+Les points GPS ¦ GPS točke ¦ Točke GPS
+Choisis au moins un animal. ¦ Odaberi barem jednu životinju. ¦ Izberi vsaj eno žival.
+Choisis l’espèce. ¦ Odaberi vrstu. ¦ Izberi vrsto.
+📤 Fichier prêt : {animals}. ¦ 📤 Datoteka je spremna: {animals}. ¦ 📤 Datoteka je pripravljena: {animals}.
+📤 Fichier prêt : {animals} (sans les noms des observateurs). ¦ 📤 Datoteka je spremna: {animals} (bez imena promatrača). ¦ 📤 Datoteka je pripravljena: {animals} (brez imen opazovalcev).
+Ce fichier n’est pas un suivi partagé (suivi.json manque). ¦ Ova datoteka nije podijeljeno praćenje (nedostaje suivi.json). ¦ Ta datoteka ni deljeno spremljanje (manjka suivi.json).
+Fichier abîmé : il ne se lit pas. ¦ Datoteka je oštećena: ne može se pročitati. ¦ Datoteka je poškodovana: ni je mogoče prebrati.
+Ce fichier n’est pas un suivi d’animaux partagé (format inconnu). ¦ Ova datoteka nije podijeljeno praćenje životinja (nepoznat format). ¦ Ta datoteka ni deljeno spremljanje živali (neznana oblika).
+Un suivi partagé ¦ Podijeljeno praćenje ¦ Deljeno spremljanje
+=nouvel animal ¦ nova životinja|nove životinje|novih životinja ¦ nova žival|novi živali|nove živali|novih živali
+=animal déjà là ¦ životinja koja već postoji|životinje koje već postoje|životinja koje već postoje ¦ žival, ki že obstaja|živali, ki že obstajata|živali, ki že obstajajo|živali, ki že obstajajo
+=ligne nouvelle ¦ novi redak|nova retka|novih redaka ¦ nova vrstica|novi vrstici|nove vrstice|novih vrstic
+=ligne déjà là, écartée ¦ redak koji već postoji, izostavljen|retka koja već postoje, izostavljena|redaka koji već postoje, izostavljeno ¦ vrstica, ki že obstaja, izpuščena|vrstici, ki že obstajata, izpuščeni|vrstice, ki že obstajajo, izpuščene|vrstic, ki že obstajajo, izpuščenih
+=conflit ¦ sukob|sukoba|sukoba ¦ konflikt|konflikta|konflikti|konfliktov
+<b>{new}</b>, {known} (à compléter), <b>{rows}</b> (observations, marques, santé, groupes) ¦ <b>{new}</b>, {known} (za dopunu), <b>{rows}</b> (opažanja, oznake, zdravlje, grupe) ¦ <b>{new}</b>, {known} (za dopolnitev), <b>{rows}</b> (opazovanja, oznake, zdravje, skupine)
+{n} points GPS ¦ GPS točke: {n} ¦ Točke GPS: {n}
+{rows} (doublons exacts). ¦ {rows} (točni duplikati). ¦ {rows} (natančni dvojniki).
+{conflicts} : tu choisiras pour chacun, à l’étape suivante. ¦ {conflicts}: za svaki ćeš odlučiti u sljedećem koraku. ¦ {conflicts}: za vsakega se boš odločil/odločila v naslednjem koraku.
+{name} chez toi (reconnu par {how}) ¦ {name} kod tebe (prepoznato po: {how}) ¦ {name} pri tebi (prepoznano po: {how})
+reçu · chez toi : {name} (reconnu par {how}) ¦ primljeno · kod tebe: {name} (prepoznato po: {how}) ¦ prejeto · pri tebi: {name} (prepoznano po: {how})
+Comparer et fusionner… ¦ Usporedi i spoji… ¦ Primerjaj in združi…
+⤒ Importer {animals} ¦ ⤒ Uvezi {animals} ¦ ⤒ Uvozi {animals}
+Suivi reçu : {what} ¦ Praćenje primljeno: {what} ¦ Spremljanje prejeto: {what}
+conflit restant ¦ preostali sukob ¦ preostali konflikt
+conflits restants ¦ preostali sukobi ¦ preostali konflikti
+nouveaux ¦ novi ¦ novi
+lignes nouvelles ¦ novi retci ¦ nove vrstice
+doublons écartés ¦ izostavljeni duplikati ¦ izpuščeni dvojniki
+média reçu non importé ¦ primljeni medij nije uvezen ¦ prejeti medij ni uvožen
+Fusionner avec ma fiche ¦ Spoji s mojim zapisom ¦ Združi z mojim zapisom
+En faire une nouvelle fiche ¦ Napravi od toga novi zapis ¦ Naredi iz tega nov zapis
+Ne pas le prendre ¦ Ne uzimaj ga ¦ Ne prevzemi ga
+Le mien : ¦ Moj: ¦ Moj:
+Le sien : ¦ Njegov: ¦ Njegov:
+Observation modifiée ¦ Opažanje izmijenjeno ¦ Opazovanje spremenjeno
+Marque modifiée ¦ Oznaka izmijenjena ¦ Oznaka spremenjena
+Événement de santé modifié ¦ Zdravstveni događaj izmijenjen ¦ Zdravstveni dogodek spremenjen
+Rôle dans le groupe ¦ Uloga u grupi ¦ Vloga v skupini
+Choisis d’abord pour chaque conflit ¦ Najprije odaberi za svaki sukob ¦ Najprej izberi za vsak konflikt
+Fusionner ¦ Spoji ¦ Združi
+vert foncé ¦ tamnozelena ¦ temno zelena
+bleu foncé ¦ tamnoplava ¦ temno modra
+métal ¦ metal ¦ kovina
+👥 En groupe ¦ 👥 U grupi ¦ 👥 V skupini
+💤 Au dortoir ¦ 💤 Na spavalištu ¦ 💤 Na prenočišču
+🕊 En vol ¦ 🕊 U letu ¦ 🕊 V letu
+💞 En couple ¦ 💞 U paru ¦ 💞 V paru
+🏠 Rentré ¦ 🏠 Vratila se ¦ 🏠 Vrnila se je
+🐄 En troupeau ¦ 🐄 U stadu ¦ 🐄 V čredi
+😴 Au repos ¦ 😴 Odmara se ¦ 😴 Počiva
+🌊 En surface ¦ 🌊 Na površini ¦ 🌊 Na površini
+⛵ À la proue ¦ ⛵ Na pramcu ¦ ⛵ Na premcu
+🧭 Marque son territoire ¦ 🧭 Označava svoj teritorij ¦ 🧭 Označuje svoje ozemlje
+🍼 Avec des jeunes ¦ 🍼 S mladuncima ¦ 🍼 Z mladiči
+🪵 Utilise un outil ¦ 🪵 Koristi alat ¦ 🪵 Uporablja orodje
+🔖 Bague changée ¦ 🔖 Prsten zamijenjen ¦ 🔖 Obroček zamenjan
+🪤 Piège ¦ 🪤 Zamka ¦ 🪤 Past
+🚧 Clôture ¦ 🚧 Ograda ¦ 🚧 Ograja
+🌬 Éolienne ¦ 🌬 Vjetroelektrana ¦ 🌬 Vetrnica
+🏖 Échouage ¦ 🏖 Nasukavanje ¦ 🏖 Nasedanje
+⚔️ Conflit avec un autre ¦ ⚔️ Sukob s drugom životinjom ¦ ⚔️ Spopad z drugo živaljo
+Bonne santé ¦ Dobro zdravlje ¦ Dobro zdravje
+Blessé ¦ Ozlijeđena ¦ Poškodovana
+En soins ¦ Na liječenju ¦ Na zdravljenju
+Relâché ¦ Puštena ¦ Izpuščena
+Mammifère sauvage ¦ Divlji sisavac ¦ Prostoživeči sesalec
+Vache, mouton, chèvre ¦ Krava, ovca, koza ¦ Krava, ovca, koza
+Format inconnu : GPX, KML, GeoJSON ou CSV. ¦ Nepoznat format: GPX, KML, GeoJSON ili CSV. ¦ Neznana oblika: GPX, KML, GeoJSON ali CSV.
+Le tableau est vide. ¦ Tablica je prazna. ¦ Tabela je prazna.
+Fichier refusé : il contient une déclaration DOCTYPE ou ENTITY. ¦ Datoteka odbijena: sadrži deklaraciju DOCTYPE ili ENTITY. ¦ Datoteka zavrnjena: vsebuje deklaracijo DOCTYPE ali ENTITY.
+3 février 2026 ¦ 3 février 2026 ¦ 3 février 2026
+⚖️ Mise en garde : en France, les tests ADN « récréatifs » ne sont pas légaux ¦ ⚖️ Upozorenje: u Francuskoj „rekreativni” DNK testovi nisu zakoniti ¦ ⚖️ Opozorilo: v Franciji »rekreativni« testi DNK niso zakoniti
+En France, l’examen des caractéristiques génétiques d’une personne n’est permis <b>qu’à des fins médicales ou de recherche scientifique</b>, avec son <b>consentement écrit</b> (Code civil, article 16-10). L’identification par empreintes génétiques est réservée à la justice et à quelques cas prévus par la loi (article 16-11). <b>Demander</b> un tel examen hors de ces cas — par exemple commander un test généalogique sur internet — est puni d’une <b>amende de 3 750 €</b> (Code pénal, article 226-28-1), même si le laboratoire est à l’étranger. ¦ U Francuskoj je ispitivanje genetskih obilježja osobe dopušteno <b>samo u medicinske svrhe ili za znanstvena istraživanja</b>, uz njezin <b>pisani pristanak</b> (Code civil, članak 16-10). Identifikacija genetskim otiscima rezervirana je za pravosuđe i nekoliko slučajeva predviđenih zakonom (članak 16-11). <b>Zatražiti</b> takvo ispitivanje izvan tih slučajeva — na primjer naručiti rodoslovni test na internetu — kažnjava se <b>novčanom kaznom od 3 750 €</b> (Code pénal, članak 226-28-1), čak i ako je laboratorij u inozemstvu. ¦ V Franciji je preiskava genetskih značilnosti osebe dovoljena <b>samo v medicinske namene ali za znanstvene raziskave</b>, z njenim <b>pisnim soglasjem</b> (Code civil, člen 16-10). Identifikacija z genetskimi prstnimi odtisi je pridržana za sodstvo in nekaj primerov, ki jih določa zakon (člen 16-11). <b>Zahtevati</b> tako preiskavo zunaj teh primerov — na primer naročiti rodoslovni test na internetu — se kaznuje z <b>globo 3 750 €</b> (Code pénal, člen 226-28-1), tudi če je laboratorij v tujini.
+<b>Vérifie toujours le texte en vigueur</b> sur Légifrance : la loi peut changer (les débats sur la généalogie génétique sont réguliers). Cet onglet ne donne pas de conseil juridique. ¦ <b>Uvijek provjeri važeći tekst</b> na Légifranceu: zakon se može promijeniti (rasprave o genetskom rodoslovlju su redovite). Ova kartica ne daje pravne savjete. ¦ <b>Vedno preveri veljavno besedilo</b> na Légifrance: zakon se lahko spremeni (razprave o genetskem rodoslovju so redne). Ta zavihek ne daje pravnih nasvetov.
+<b>Ce que fait LCNDA</b> : rien n’est analysé ni envoyé. L’onglet sert à <b>ranger des informations</b> (par exemple des résultats obtenus légalement à l’étranger, par un parent résidant hors de France, dans un cadre médical ou de recherche, ou des renseignements donnés par d’autres personnes) et à <b>comprendre</b> ce que signifient des cM, des segments, un haplogroupe. ¦ <b>Što radi LCNDA</b>: ništa se ne analizira ni ne šalje. Kartica služi za <b>spremanje informacija</b> (na primjer rezultata zakonito dobivenih u inozemstvu, preko rođaka koji živi izvan Francuske, u medicinskom ili istraživačkom okviru, ili podataka koje su dale druge osobe) i za <b>razumijevanje</b> što znače cM, segmenti, haplogrupa. ¦ <b>Kaj počne LCNDA</b>: nič se ne analizira in ne pošilja. Zavihek je namenjen <b>shranjevanju podatkov</b> (na primer rezultatov, zakonito pridobljenih v tujini, prek sorodnika, ki živi zunaj Francije, v medicinskem ali raziskovalnem okviru, ali podatkov, ki so jih dale druge osebe) in <b>razumevanju</b>, kaj pomenijo cM, segmenti, haploskupina.
+<b>Données sensibles</b> : l’ADN révèle des choses sur toi <i>et sur ta famille</i> (parents, frères et sœurs, enfants, cousins), qui n’ont pas consenti. Il peut révéler un secret de famille : naissance hors mariage, adoption, don de gamètes, parent inconnu. Prends le temps d’y penser avant de partager. ¦ <b>Osjetljivi podaci</b>: DNK otkriva stvari o tebi <i>i o tvojoj obitelji</i> (roditelji, braća i sestre, djeca, rođaci), koji nisu dali pristanak. Može otkriti obiteljsku tajnu: rođenje izvan braka, posvojenje, doniranje spolnih stanica, nepoznatog roditelja. Odvoji vremena da razmisliš prije dijeljenja. ¦ <b>Občutljivi podatki</b>: DNK razkrije stvari o tebi <i>in o tvoji družini</i> (starši, bratje in sestre, otroci, bratranci in sestrične), ki niso dali soglasja. Lahko razkrije družinsko skrivnost: rojstvo zunaj zakona, posvojitev, darovanje spolnih celic, neznanega starša. Vzemi si čas za razmislek, preden deliš.
+<b>Les sociétés de test</b> gardent les données selon leurs conditions (vente de société, fuites de données, demandes de la justice dans certains pays). Lis leurs conditions, choisis ce que tu partages, supprime ce que tu ne veux plus voir conservé. ¦ <b>Tvrtke za testiranje</b> čuvaju podatke prema svojim uvjetima (prodaja tvrtke, curenje podataka, zahtjevi pravosuđa u nekim zemljama). Pročitaj njihove uvjete, odaberi što dijeliš, izbriši ono što više ne želiš da se čuva. ¦ <b>Podjetja za testiranje</b> hranijo podatke po svojih pogojih (prodaja podjetja, uhajanje podatkov, zahteve sodstva v nekaterih državah). Preberi njihove pogoje, izberi, kaj deliš, izbriši tisto, česar ne želiš več hraniti.
+<b>Personnes vivantes</b> : les noms, cM et contacts de correspondances sont des données personnelles. Garde-les pour ta recherche, ne les publie pas sans accord. ¦ <b>Žive osobe</b>: imena, cM i kontakti podudaranja osobni su podaci. Čuvaj ih za svoje istraživanje, ne objavljuj ih bez pristanka. ¦ <b>Žive osebe</b>: imena, cM in stiki ujemanj so osebni podatki. Hrani jih za svoje raziskovanje, ne objavljaj jih brez soglasja.
+Textes officiels ¦ Službeni tekstovi ¦ Uradna besedila
+Lire la mise en garde complète et les textes officiels → ¦ Pročitaj cijelo upozorenje i službene tekstove → ¦ Preberi celotno opozorilo in uradna besedila →
+Commencer ¦ Počni ¦ Začni
+Lis la <button type="button" class="link-button" data-dna-go="law">mise en garde sur la loi française</button>. ¦ Pročitaj <button type="button" class="link-button" data-dna-go="law">upozorenje o francuskom zakonu</button>. ¦ Preberi <button type="button" class="link-button" data-dna-go="law">opozorilo o francoskem zakonu</button>.
+« 🧬 Mes tests » : ajoute le test d’une personne (société, type, haplogroupes, origines). ¦ „🧬 Moji testovi”: dodaj test osobe (tvrtka, vrsta, haplogrupe, podrijetlo). ¦ »🧬 Moji testi«: dodaj test osebe (podjetje, vrsta, haploskupine, poreklo).
+« 👥 Correspondances » : importe le fichier CSV de la société, ou ajoute-les à la main. ¦ „👥 Podudaranja”: uvezi CSV datoteku tvrtke ili ih dodaj ručno. ¦ »👥 Ujemanja«: uvozi datoteko CSV podjetja ali jih dodaj ročno.
+Le calculateur de cM, la méthode de Leeds et le navigateur de chromosomes t’aident à placer chacun dans l’arbre. ¦ Kalkulator cM, metoda Leeds i preglednik kromosoma pomažu ti smjestiti svakoga u stablo. ¦ Kalkulator cM, metoda Leeds in brskalnik kromosomov ti pomagajo umestiti vsakogar v drevo.
+Tes tests, tes correspondances et où tu en es. Tout se règle dans « ⚙️ Réglages » (rubriques montrées, ordre, colonnes, couleurs). ¦ Tvoji testovi, tvoja podudaranja i dokle si stigao/stigla. Sve se podešava u „⚙️ Postavke” (prikazane rubrike, redoslijed, stupci, boje). ¦ Tvoji testi, tvoja ujemanja in kje si. Vse se nastavi v »⚙️ Nastavitve« (prikazane rubrike, vrstni red, stolpci, barve).
+🧬 Synthèse ¦ 🧬 Sažetak ¦ 🧬 Povzetek
+Loi et mises en garde ¦ Zakon i upozorenja ¦ Zakon in opozorila
+⚖️ Loi et mises en garde ¦ ⚖️ Zakon i upozorenja ¦ ⚖️ Zakon in opozorila
+À lire avant d’utiliser cet onglet. ¦ Pročitaj prije korištenja ove kartice. ¦ Preberi, preden uporabiš ta zavihek.
+Mes tests ¦ Moji testovi ¦ Moji testi
+Correspondances ¦ Podudaranja ¦ Ujemanja
+Groupes (méthode de Leeds) ¦ Grupe (metoda Leeds) ¦ Skupine (metoda Leeds)
+🗂️ Groupes (méthode de Leeds) ¦ 🗂️ Grupe (metoda Leeds) ¦ 🗂️ Skupine (metoda Leeds)
+Groupes automatiques ¦ Automatske grupe ¦ Samodejne skupine
+Placer un cousin ¦ Smjesti rođaka ¦ Umesti sorodnika
+📍 Placer un cousin ¦ 📍 Smjesti rođaka ¦ 📍 Umesti sorodnika
+Chromosomes et segments ¦ Kromosomi i segmenti ¦ Kromosomi in segmenti
+🧩 Chromosomes et segments ¦ 🧩 Kromosomi i segmenti ¦ 🧩 Kromosomi in segmenti
+Calculateur de cM ¦ Kalkulator cM ¦ Kalkulator cM
+📐 Calculateur de cM ¦ 📐 Kalkulator cM ¦ 📐 Kalkulator cM
+Lignées Y, mt et X ¦ Loze Y, mt i X ¦ Linije Y, mt in X
+🌳 Lignées Y, mt et X ¦ 🌳 Loze Y, mt i X ¦ 🌳 Linije Y, mt in X
+Origines estimées ¦ Procijenjeno podrijetlo ¦ Ocenjeno poreklo
+🌍 Origines estimées ¦ 🌍 Procijenjeno podrijetlo ¦ 🌍 Ocenjeno poreklo
+Comprendre l’ADN ¦ Razumjeti DNK ¦ Razumeti DNK
+📚 Comprendre l’ADN ¦ 📚 Razumjeti DNK ¦ 📚 Razumeti DNK
+cM partagés ¦ Zajednički cM ¦ Skupni cM
+% partagé ¦ % zajedničkog ¦ % skupnega
+Plus long segment ¦ Najduži segment ¦ Najdaljši segment
+Relation (société) ¦ Srodstvo (tvrtka) ¦ Sorodstvo (podjetje)
+Relation probable ¦ Vjerojatno srodstvo ¦ Verjetno sorodstvo
+Fiche liée ¦ Povezani zapis ¦ Povezani zapis
+Ancêtre commun ¦ Zajednički predak ¦ Skupni prednik
+Noms en commun ¦ Zajednička prezimena ¦ Skupni priimki
+Des deux côtés ¦ S obje strane ¦ Z obeh strani
+Contacté ¦ Kontaktiran ¦ Kontaktiran
+A répondu ¦ Odgovorio ¦ Odgovoril
+Arbre échangé ¦ Stablo razmijenjeno ¦ Drevo izmenjano
+Placé dans l’arbre ✓ ¦ Smješten u stablo ✓ ¦ Umeščen v drevo ✓
+À ignorer ¦ Zanemari ¦ Prezri
+Placées dans l’arbre ¦ Smještena u stablo ¦ Umeščena v drevo
+Tests ¦ Testovi ¦ Testi
+Correspondances par nombre de cM ¦ Podudaranja po broju cM ¦ Ujemanja po številu cM
+Par côté ¦ Po strani ¦ Po strani
+Les plus proches ¦ Najbliži ¦ Najbližji
+Autosomal (atDNA) : tous les ancêtres récents ¦ Autosomni (atDNA): svi nedavni preci ¦ Avtosomni (atDNA): vsi nedavni predniki
+ADN-Y : lignée paternelle directe ¦ Y-DNK: izravna očinska loza ¦ Y-DNK: neposredna očetovska linija
+ADN mitochondrial : lignée maternelle directe ¦ Mitohondrijska DNK: izravna majčinska loza ¦ Mitohondrijska DNK: neposredna materina linija
+Nebula / séquençage complet ¦ Nebula / potpuno sekvenciranje ¦ Nebula / celotno sekvenciranje
+Labo médical ¦ Medicinski laboratorij ¦ Medicinski laboratorij
+Parent / enfant ¦ Roditelj / dijete ¦ Starš / otrok
+Frère ou sœur ¦ Brat ili sestra ¦ Brat ali sestra
+Demi-frère ou demi-sœur ¦ Polubrat ili polusestra ¦ Polbrat ali polsestra
+Grand-parent / petit-enfant ¦ Djed ili baka / unuk ili unuka ¦ Stari starš / vnuk ali vnukinja
+Oncle, tante / neveu, nièce ¦ Ujak, stric, tetka / nećak, nećakinja ¦ Stric, teta / nečak, nečakinja
+Arrière-grand-parent ¦ Pradjed ili prabaka ¦ Prastari starš
+Grand-oncle, grand-tante ¦ Prastric, prateta ¦ Prastric, prateta
+Cousin germain (1C) ¦ Prvi rođak (1C) ¦ Bratranec ali sestrična (1C)
+Cousin germain, une génération d’écart (1C1R) ¦ Prvi rođak, jedna generacija razlike (1C1R) ¦ Bratranec ali sestrična, en rod razlike (1C1R)
+Cousin germain, deux générations d’écart (1C2R) ¦ Prvi rođak, dvije generacije razlike (1C2R) ¦ Bratranec ali sestrična, dva rodova razlike (1C2R)
+Demi-cousin germain ¦ Prvi polurođak ¦ Polbratranec ali polsestrična
+Demi-cousin germain, une génération d’écart ¦ Prvi polurođak, jedna generacija razlike ¦ Polbratranec ali polsestrična, en rod razlike
+Cousin issu de germain (2C) ¦ Drugi rođak (2C) ¦ Bratranec ali sestrična v drugem kolenu (2C)
+Cousin issu de germain, une génération d’écart (2C1R) ¦ Drugi rođak, jedna generacija razlike (2C1R) ¦ V drugem kolenu, en rod razlike (2C1R)
+Cousin issu de germain, deux générations d’écart (2C2R) ¦ Drugi rođak, dvije generacije razlike (2C2R) ¦ V drugem kolenu, dva rodova razlike (2C2R)
+Demi-cousin issu de germain ¦ Drugi polurođak ¦ Pol-sorodnik v drugem kolenu
+Cousin au 3e degré (3C, issu d’issu de germain) ¦ Treći rođak (3C) ¦ Bratranec ali sestrična v tretjem kolenu (3C)
+Demi-cousin au 3e degré ¦ Treći polurođak ¦ Pol-sorodnik v tretjem kolenu
+Cousin au 4e degré (4C) ¦ Četvrti rođak (4C) ¦ Sorodnik v četrtem kolenu (4C)
+Cousin au 5e degré (5C) ¦ Peti rođak (5C) ¦ Sorodnik v petem kolenu (5C)
+Cousin au 6e degré ou plus ¦ Šesti rođak ili dalji ¦ Sorodnik v šestem kolenu ali dlje
+Noté. ¦ Zabilježeno. ¦ Zabeleženo.
+Nouveau test ¦ Novi test ¦ Nov test
+Personne testée ¦ Testirana osoba ¦ Testirana oseba
+Nom du test ¦ Naziv testa ¦ Ime testa
+(si la personne n’est pas dans l’arbre) ¦ (ako osoba nije u stablu) ¦ (če osebe ni v drevesu)
+Test supprimé. ¦ Test izbrisan. ¦ Test izbrisan.
+Test enregistré. ¦ Test spremljen. ¦ Test shranjen.
+les voir ¦ vidi ih ¦ poglej jih
+Tous les tests ¦ Svi testovi ¦ Vsi testi
+Tous les côtés ¦ Sve strane ¦ Vse strani
+Tout suivi ¦ Svi statusi praćenja ¦ Vsa stanja spremljanja
+Tous les groupes ¦ Sve grupe ¦ Vse skupine
+Sans groupe ¦ Bez grupe ¦ Brez skupine
+Côté… ¦ Strana… ¦ Stran…
+Étoiles ¦ Zvjezdice ¦ Zvezdice
+Afficher la suite ¦ Prikaži nastavak ¦ Prikaži nadaljevanje
+Ajoute d’abord un test (« 🧬 Mes tests »). ¦ Najprije dodaj test („🧬 Moji testovi”). ¦ Najprej dodaj test (»🧬 Moji testi«).
+Ajoute d’abord un test. ¦ Najprije dodaj test. ¦ Najprej dodaj test.
+Nouvelle correspondance ¦ Novo podudaranje ¦ Novo ujemanje
+Fiche dans l’arbre ¦ Zapis u stablu ¦ Zapis v drevesu
+Si tu sais qui c’est… ¦ Ako znaš tko je to… ¦ Če veš, kdo je to…
+Tape les cM partagés : la relation probable s’affiche ici. ¦ Upiši zajedničke cM: vjerojatno srodstvo prikazuje se ovdje. ¦ Vpiši skupne cM: verjetno sorodstvo se prikaže tukaj.
+Supprimée. ¦ Izbrisano. ¦ Izbrisano.
+Correspondance enregistrée. ¦ Podudaranje spremljeno. ¦ Ujemanje shranjeno.
+Importer des segments ADN ¦ Uvezi DNK segmente ¦ Uvozi segmente DNK
+Importer des correspondances ADN ¦ Uvezi DNK podudaranja ¦ Uvozi ujemanja DNK
+Fichier vide ou illisible. ¦ Datoteka je prazna ili nečitljiva. ¦ Datoteka je prazna ali neberljiva.
+Colonnes reconnues (à vérifier) ¦ Prepoznati stupci (provjeri) ¦ Prepoznani stolpci (preveri)
+— ne pas prendre — ¦ — ne uzimaj — ¦ — ne prevzemi —
+=correspondance ajoutée ¦ dodano podudaranje|dodana podudaranja|dodanih podudaranja ¦ dodano ujemanje|dodani ujemanji|dodana ujemanja|dodanih ujemanj
+=segment importé ¦ uvezeni segment|uvezena segmenta|uvezenih segmenata ¦ uvožen segment|uvožena segmenta|uvoženi segmenti|uvoženih segmentov
+=groupe créé ¦ stvorena grupa|stvorene grupe|stvorenih grupa ¦ ustvarjena skupina|ustvarjeni skupini|ustvarjene skupine|ustvarjenih skupin
+=cochée ¦ označeno|označena|označenih ¦ označeno|označeni|označena|označenih
+=ancêtre possible ¦ mogući predak|moguća pretka|mogućih predaka ¦ možni prednik|možna prednika|možni predniki|možnih prednikov
+Un groupe range ensemble les correspondances d’une même branche. ¦ Grupa okuplja podudaranja iste grane. ¦ Skupina združuje ujemanja iste veje.
+arrière-grands-parents ¦ pradjedovi i prabake ¦ prastari starši
+🎯 Ancêtres communs ¦ 🎯 Zajednički preci ¦ 🎯 Skupni predniki
+🤔 Ancêtres probables ¦ 🤔 Vjerojatni preci ¦ 🤔 Verjetni predniki
+Ancêtre commun encore inconnu ¦ Zajednički predak još nepoznat ¦ Skupni prednik še neznan
+📍 Placer un cousin dans l’arbre ¦ 📍 Smjesti rođaka u stablo ¦ 📍 Umesti sorodnika v drevo
+Hors des valeurs connues. ¦ Izvan poznatih vrijednosti. ¦ Zunaj znanih vrednosti.
+Probabilité ¦ Vjerojatnost ¦ Verjetnost
+Couple d’ancêtres ¦ Par predaka ¦ Par prednikov
+(un seul des deux : demi-cousin) ¦ (samo jedan od njih: polurođak) ¦ (samo eden od njiju: pol-sorodnik)
+Choisis une correspondance ou entre des cM. ¦ Odaberi podudaranje ili upiši cM. ¦ Izberi ujemanje ali vpiši cM.
+Aucun test ¦ Nema testova ¦ Ni testov
+Couleur par correspondance ¦ Boja po podudaranju ¦ Barva po ujemanju
+Par groupe ¦ Po grupi ¦ Po skupini
+Aucun segment. ¦ Nema segmenata. ¦ Ni segmentov.
+Nouveau segment ¦ Novi segment ¦ Nov segment
+Ancêtre supposé ¦ Pretpostavljeni predak ¦ Domnevni prednik
+♂ ADN-Y — lignée paternelle directe ¦ ♂ Y-DNK — izravna očinska loza ¦ ♂ Y-DNK — neposredna očetovska linija
+♀ ADN mitochondrial — lignée maternelle directe ¦ ♀ Mitohondrijska DNK — izravna majčinska loza ¦ ♀ Mitohondrijska DNK — neposredna materina linija
+✕ ADN-X — ancêtres possibles ¦ ✕ X-DNK — mogući preci ¦ ✕ X-DNK — možni predniki
+Endogamie et implexe ¦ Endogamija i implex ¦ Endogamija in implex
+Placer une correspondance ¦ Smjesti podudaranje ¦ Umesti ujemanje
+Confidentialité et éthique ¦ Privatnost i etika ¦ Zasebnost in etika
+Colonnes du tableau des correspondances ¦ Stupci tablice podudaranja ¦ Stolpci tabele ujemanj
+Chiffres et couleurs ¦ Brojevi i boje ¦ Številke in barve
+⤓ Exporter tout l’ADN (JSON) ¦ ⤓ Izvezi sav DNK (JSON) ¦ ⤓ Izvozi vso DNK (JSON)
+Ouvrir l’onglet ADN → ¦ Otvori karticu DNK → ¦ Odpri zavihek DNK →
+Nouveau diagramme ¦ Novi dijagram ¦ Nov diagram
+Choisis un dessin : il arrive avec un exemple que tu remplaces par tes chiffres (à la main, collés d’un tableur, d’un CSV, ou pris dans l’app). ¦ Odaberi crtež: dolazi s primjerom koji zamjenjuješ svojim brojevima (ručno, zalijepljenima iz proračunske tablice, iz CSV-a ili uzetima iz aplikacije). ¦ Izberi risbo: pride s primerom, ki ga zamenjaš s svojimi številkami (ročno, prilepljenimi iz preglednice, iz CSV ali vzetimi iz aplikacije).
+Ordre, types montrés ou cachés, groupes à toi ¦ Redoslijed, prikazane ili skrivene vrste, tvoje grupe ¦ Vrstni red, prikazane ali skrite vrste, tvoje skupine
+⚙️ Ranger les types ¦ ⚙️ Posloži vrste ¦ ⚙️ Razvrsti vrste
+Assemblées ¦ Skupštine ¦ Skupščine
+Parlement, assemblée, conseil ¦ Parlament, skupština, vijeće ¦ Parlament, skupščina, svet
+Arc élargi (Assemblée en éventail) ¦ Prošireni luk (skupština u lepezi) ¦ Razširjen lok (skupščina v pahljači)
+Fer à cheval ¦ Potkova ¦ Podkev
+Westminster (bancs face à face) ¦ Westminster (klupe jedna nasuprot drugoj) ¦ Westminster (klopi druga nasproti drugi)
+Salle face à la tribune (conseil municipal…) ¦ Dvorana okrenuta prema govornici (gradsko vijeće…) ¦ Dvorana, obrnjena proti govorniškemu odru (občinski svet…)
+Frise des membres (groupe de musique, association…) ¦ Vremenska crta članova (glazbena grupa, udruga…) ¦ Časovnica članov (glasbena skupina, društvo…)
+Frise de vies (des personnes de la base) ¦ Vremenska crta života (osobe iz baze) ¦ Časovnica življenj (osebe iz zbirke)
+Planning (tâches d’une enquête, Gantt) ¦ Plan (zadaci istrage, Gantt) ¦ Načrt (naloge preiskave, Gantt)
+Frise chronologique (dates clés) ¦ Kronološka vremenska crta (ključni datumi) ¦ Kronološka časovnica (ključni datumi)
+Calendrier coloré (jour par jour) ¦ Obojeni kalendar (dan po dan) ¦ Barvni koledar (dan za dnem)
+Rose des mois (12 parts) ¦ Ruža mjeseci (12 dijelova) ¦ Roža mesecev (12 delov)
+Spirale du temps (une spire par siècle) ¦ Spirala vremena (jedan zavoj po stoljeću) ¦ Spirala časa (en zavoj na stoletje)
+Arbre en frise (vies par génération) ¦ Stablo kao vremenska crta (životi po generacijama) ¦ Drevo kot časovnica (življenja po rodovih)
+Naissances, décès et crises ¦ Rođenja, smrti i krize ¦ Rojstva, smrti in krize
+Âges comparés d’une fratrie ¦ Usporedba dobi braće i sestara ¦ Primerjava starosti bratov in sester
+Pyramide « qui vivait en … » ¦ Piramida „tko je živio …” ¦ Piramida »kdo je živel …«
+Les vies de plusieurs générations superposées : qui a connu son arrière-petit-enfant, et combien d’années. ¦ Životi više generacija jedan preko drugoga: tko je upoznao svoje praunuče i koliko godina. ¦ Življenja več rodov, eno čez drugo: kdo je poznal svojega pravnuka in koliko let.
+Qui a connu qui (vies de plusieurs générations) ¦ Tko je koga poznavao (životi nekoliko generacija) ¦ Kdo je koga poznal (življenja več rodov)
+Les mariages et les conceptions (naissance − 9 mois) mois par mois, avec le Carême et l’Avent repérés. ¦ Vjenčanja i začeća (rođenje − 9 mjeseci) mjesec po mjesec, s označenom korizmom i došašćem. ¦ Poroke in spočetja (rojstvo − 9 mesecev) mesec za mesecem, z označenim postom in adventom.
+Mois des mariages et des conceptions (Carême, Avent) ¦ Mjeseci vjenčanja i začeća (korizma, došašće) ¦ Meseci porok in spočetij (post, advent)
+Une ligne par mère : ses enfants à l’âge qu’elle avait, l’écart entre deux naissances et les enfants morts jeunes. ¦ Jedan redak po majci: njezina djeca prema dobi koju je imala, razmak između dva rođenja i djeca umrla mlada. ¦ Ena vrstica na mater: njeni otroci glede na njeno starost, razmik med dvema rojstvoma in otroci, ki so umrli mladi.
+Espacement des naissances (les enfants de chaque mère) ¦ Razmak između rođenja (djeca svake majke) ¦ Razmiki med rojstvi (otroci vsake matere)
+Une bande par personne, colorée selon la commune (ou le département, le pays) où elle vivait à chaque époque. ¦ Jedna traka po osobi, obojena prema općini (ili departmanu, državi) u kojoj je živjela u svakom razdoblju. ¦ En trak na osebo, obarvan glede na občino (ali departma, državo), kjer je živela v posameznem obdobju.
+Frise des lieux de vie (une bande par personne) ¦ Vremenska crta mjesta života (jedna traka po osobi) ¦ Časovnica krajev bivanja (en trak na osebo)
+Une ligne par tâche, de sa date de début à sa date de fin, avec ce qui est déjà fait. ¦ Jedan redak po zadatku, od datuma početka do datuma završetka, s onim što je već napravljeno. ¦ Ena vrstica na nalogo, od datuma začetka do datuma konca, s tem, kar je že narejeno.
+Diagramme de Gantt (tâches, chantiers de recherche) ¦ Ganttov dijagram (zadaci, istraživački projekti) ¦ Ganttov diagram (naloge, raziskovalni projekti)
+Les anniversaires, mariages, décès et fêtes des prénoms autour d’un cercle de douze mois. ¦ Rođendani, vjenčanja, smrti i imendani oko kruga od dvanaest mjeseci. ¦ Rojstni dnevi, poroke, smrti in godovi okoli kroga dvanajstih mesecev.
+Roue de l’année (anniversaires et fêtes de la famille) ¦ Kotač godine (obiteljski rođendani i slavlja) ¦ Kolo leta (družinski rojstni dnevi in praznovanja)
+Colonnes empilées ¦ Složeni stupci ¦ Naloženi stolpci
+Colonnes empilées à 100 % ¦ Složeni stupci do 100 % ¦ Naloženi stolpci do 100 %
+Pyramide (des âges…) ¦ Piramida (dobna…) ¦ Piramida (starostna…)
+Carte de chaleur (tableau coloré) ¦ Toplinska karta (obojena tablica) ¦ Toplotni zemljevid (obarvana tabela)
+Classement qui évolue (prénoms par décennie…) ¦ Poredak koji se mijenja (imena po desetljećima…) ¦ Razvrstitev, ki se spreminja (imena po desetletjih…)
+Courants empilés (métiers sur 200 ans…) ¦ Složeni tokovi (zanimanja kroz 200 godina…) ¦ Naloženi tokovi (poklici v 200 letih…)
+Histogramme (valeurs rangées en tranches) ¦ Histogram (vrijednosti razvrstane u raspone) ¦ Histogram (vrednosti, razvrščene v razrede)
+Boîte à moustaches (médiane, quartiles) ¦ Kutijasti dijagram (medijan, kvartili) ¦ Škatla z brki (mediana, kvartili)
+Haltères (deux valeurs par ligne) ¦ Bučice (dvije vrijednosti po retku) ¦ Ročke (dve vrednosti na vrstico)
+Pente avant / après ¦ Nagib prije / poslije ¦ Naklon pred / po
+Cascade (un total qui monte et descend) ¦ Vodopad (zbroj koji raste i pada) ¦ Slap (vsota, ki narašča in pada)
+Sucettes couchées ¦ Vodoravne lizalice ¦ Ležeče lizike
+Essaim de points (une personne = un point) ¦ Roj točaka (jedna osoba = jedna točka) ¦ Roj pik (ena oseba = ena pika)
+Petites courbes en grille ¦ Male krivulje u mreži ¦ Majhne krivulje v mreži
+Violon (répartition par catégorie) ¦ Violina (raspodjela po kategoriji) ¦ Violina (porazdelitev po kategorijah)
+Pour chaque âge, la part des personnes encore en vie : une courbe par siècle, par sexe ou par branche. ¦ Za svaku dob, udio osoba koje su još žive: jedna krivulja po stoljeću, spolu ili grani. ¦ Za vsako starost delež oseb, ki so še žive: ena krivulja na stoletje, spol ali vejo.
+Courbe de survie (part encore en vie à chaque âge) ¦ Krivulja preživljavanja (udio još živih u svakoj dobi) ¦ Krivulja preživetja (delež še živih pri vsaki starosti)
+Vagues (une répartition par siècle…) ¦ Valovi (jedna raspodjela po stoljeću…) ¦ Valovi (ena porazdelitev na stoletje…)
+Échelle de points (Cleveland) ¦ Ljestvica točaka (Cleveland) ¦ Lestvica pik (Cleveland)
+Tableau de mobilité (métier du père × métier de l’enfant) ¦ Tablica mobilnosti (zanimanje oca × zanimanje djeteta) ¦ Tabela mobilnosti (poklic očeta × poklic otroka)
+Barres en cercle (classement qui s’enroule) ¦ Stupci u krugu (poredak koji se zavija) ¦ Stolpci v krogu (razvrstitev, ki se zvije)
+Des barres sur l’axe de gauche et une courbe sur un deuxième axe à droite, pour comparer deux sortes de chiffres. ¦ Stupci na lijevoj osi i krivulja na drugoj osi desno, za usporedbu dviju vrsta brojeva. ¦ Stolpci na levi osi in krivulja na drugi osi desno, za primerjavo dveh vrst števil.
+Barres + courbe (deuxième axe à droite) ¦ Stupci + krivulja (druga os desno) ¦ Stolpci + krivulja (druga os desno)
+Deux chiffres face à face de chaque côté d’un trait (décès et naissances, femmes et hommes), ou un chiffre au-dessus et en dessous d’un centre. ¦ Dva broja jedan nasuprot drugome sa svake strane crte (smrti i rođenja, žene i muškarci) ili broj iznad i ispod središta. ¦ Dve števili drugo proti drugemu na vsaki strani črte (smrti in rojstva, ženske in moški) ali število nad in pod središčem.
+Barres divergentes (gauche / droite d’un centre) ¦ Divergentni stupci (lijevo / desno od središta) ¦ Razhajajoči se stolpci (levo / desno od središča)
+Une colline par série (un nom de famille, un prénom, une commune…), l’une derrière l’autre, au fil du temps. ¦ Jedan brežuljak po nizu (prezime, ime, općina…), jedan iza drugoga, kroz vrijeme. ¦ En grič na niz (priimek, ime, občina…), drug za drugim, skozi čas.
+Collines empilées (une courbe par série, décalées) ¦ Složeni brežuljci (jedna krivulja po nizu, pomaknute) ¦ Naloženi griči (ena krivulja na niz, zamaknjene)
+Chaque personne est une ligne qui passe par plusieurs axes (âge au mariage, enfants, âge au décès…) : les profils se voient d’un coup d’œil. ¦ Svaka osoba je crta koja prolazi kroz nekoliko osi (dob pri vjenčanju, djeca, dob pri smrti…): profili se vide na prvi pogled. ¦ Vsaka oseba je črta, ki gre skozi več osi (starost ob poroki, otroci, starost ob smrti…): profili so vidni na prvi pogled.
+Coordonnées parallèles (plusieurs chiffres par personne) ¦ Paralelne koordinate (nekoliko brojeva po osobi) ¦ Vzporedne koordinate (več števil na osebo)
+Une courbe qui avance par marches : le chiffre reste le même jusqu’au prochain changement (vivants de la famille, ancêtres trouvés…). ¦ Krivulja koja napreduje u stepenicama: broj ostaje isti do sljedeće promjene (živi članovi obitelji, pronađeni preci…). ¦ Krivulja, ki napreduje po stopnicah: število ostane enako do naslednje spremembe (živi družinski člani, najdeni predniki…).
+Courbe en escalier (ex. combien de vivants, année par année) ¦ Stepenasta krivulja (npr. koliko živih, godinu po godinu) ¦ Stopničasta krivulja (npr. koliko živih, leto za letom)
+Mosaïque (100 carrés) ¦ Mozaik (100 kvadrata) ¦ Mozaik (100 kvadratov)
+Carte proportionnelle (rectangles) ¦ Proporcionalna karta (pravokutnici) ¦ Sorazmerni zemljevid (pravokotniki)
+Pictogrammes (symboles répétés) ¦ Piktogrami (ponovljeni simboli) ¦ Piktogrami (ponovljeni simboli)
+Mosaïque à largeur variable (Marimekko) ¦ Mozaik promjenjive širine (Marimekko) ¦ Mozaik spremenljive širine (Marimekko)
+Bulles groupées (noms, métiers, lieux) ¦ Grupirani mjehurići (imena, zanimanja, mjesta) ¦ Združeni mehurčki (imena, poklici, kraji)
+Flux (Sankey) : migrations, métiers… ¦ Tok (Sankey): selidbe, zanimanja… ¦ Tok (Sankey): selitve, poklici…
+Diagramme d’accord (mariages entre villages) ¦ Tetivni dijagram (vjenčanja između sela) ¦ Tetivni diagram (poroke med vasmi)
+Une idée au centre, des branches autour, et les idées de chaque branche. ¦ Jedna ideja u sredini, grane oko nje i ideje svake grane. ¦ Ena ideja na sredini, veje okoli nje in ideje vsake veje.
+Carte mentale (une idée, ses branches) ¦ Umna mapa (ideja, njezine grane) ¦ Miselni vzorec (ideja, njene veje)
+Éventail d’ascendance (mes chiffres) ¦ Lepeza predaka (moji brojevi) ¦ Pahljača prednikov (moja števila)
+Soleil des lignées (anneaux) ¦ Sunce loza (prstenovi) ¦ Sonce rodbinskih linij (obroči)
+Réseau de relations (témoins, parrains…) ¦ Mreža odnosa (svjedoci, kumovi…) ¦ Mreža odnosov (priče, botri…)
+Diagramme de Venn (2 à 4 ensembles) ¦ Vennov dijagram (2 do 4 skupa) ¦ Vennov diagram (2 do 4 množice)
+Arbre en accordéon (cousins) ¦ Stablo u obliku harmonike (bratići i sestrične) ¦ Drevo v obliki harmonike (bratranci in sestrične)
+Graphe des cousinages ¦ Graf bratića i sestrična ¦ Graf bratrancev in sestričen
+Matrice de parenté (qui est quoi pour qui) ¦ Matrica srodstva (tko je kome što) ¦ Matrika sorodstva (kdo je komu kaj)
+Arbre des patronymes (transmission du nom) ¦ Stablo prezimena (prenošenje prezimena) ¦ Drevo priimkov (prenos priimka)
+Quadrillage des ancêtres (une case par Sosa) ¦ Mreža predaka (jedno polje po Sosa broju) ¦ Mreža prednikov (eno polje na Sosa številko)
+Les métiers d’une génération à l’autre : chaque bande suit des lignées, du trisaïeul au fils. ¦ Zanimanja iz generacije u generaciju: svaka traka prati loze, od pradjedova oca do sina. ¦ Poklici iz roda v rod: vsak trak sledi rodbinskim linijam, od prapradeda do sina.
+Métiers de père en fils (flux sur plusieurs générations) ¦ Zanimanja s oca na sina (tok kroz nekoliko generacija) ¦ Poklici z očeta na sina (tok skozi več rodov)
+Chaque couple est un point : sa distance au centre est celle qui séparait les lieux de naissance des deux époux. ¦ Svaki par je točka: njegova udaljenost od središta jednaka je udaljenosti između mjesta rođenja dvoje supružnika. ¦ Vsak par je pika: njena oddaljenost od središča je razdalja med krajema rojstva obeh zakoncev.
+Rayon des mariages (distance entre les villages des époux) ¦ Polumjer vjenčanja (udaljenost između sela supružnika) ¦ Polmer porok (razdalja med vasmi zakoncev)
+Par génération : les ancêtres qu’on devrait avoir (2, 4, 8…), les places trouvées et les personnes différentes. ¦ Po generaciji: preci koje bismo trebali imati (2, 4, 8…), pronađena mjesta i različite osobe. ¦ Po rodovih: predniki, ki bi jih morali imeti (2, 4, 8…), najdena mesta in različne osebe.
+Implexe (ancêtres théoriques et réels) ¦ Implex (teorijski i stvarni preci) ¦ Implex (teoretični in dejanski predniki)
+Descendance en rectangles (icicle) ¦ Potomstvo u pravokutnicima (icicle) ¦ Potomstvo v pravokotnikih (icicle)
+Prénoms transmis (parrain, marraine → filleul) ¦ Prenesena imena (kum, kuma → kumče) ¦ Prenesena imena (boter, botra → krščenec)
+Causes de décès en anneaux (familles puis détail) ¦ Uzroci smrti u prstenovima (skupine, zatim pojedinosti) ¦ Vzroki smrti v obročih (skupine, nato podrobnosti)
+Une personne au milieu ; ses parents, grands-parents… au-dessus ; ses enfants, petits-enfants… au-dessous. ¦ Osoba u sredini; njezini roditelji, djedovi i bake… iznad; njezina djeca, unuci… ispod. ¦ Oseba na sredini; njeni starši, stari starši… zgoraj; njeni otroci, vnuki… spodaj.
+Sablier (ascendants et descendants d’une personne) ¦ Pješčani sat (preci i potomci osobe) ¦ Peščena ura (predniki in potomci osebe)
+Le plus court chemin entre deux personnes, étape par étape, et la phrase qui dit le lien (« cousin issu de germains », « beau-frère »…). ¦ Najkraći put između dviju osoba, korak po korak, i rečenica koja kaže vezu („bratić u drugom koljenu”, „šogor”…). ¦ Najkrajša pot med dvema osebama, korak za korakom, in stavek, ki pove sorodstvo (»bratranec v drugem kolenu«, »svak«…).
+Chemin de parenté entre deux personnes ¦ Put srodstva između dviju osoba ¦ Pot sorodstva med dvema osebama
+La part des ancêtres connus à chaque génération (1, 2, 4, 8… possibles), en barres ou en éventail. ¦ Udio poznatih predaka u svakoj generaciji (1, 2, 4, 8… mogućih), u stupcima ili u lepezi. ¦ Delež znanih prednikov v vsakem rodu (1, 2, 4, 8… mogočih), v stolpcih ali v pahljači.
+Complétude de l’arbre (ancêtres connus par génération) ¦ Potpunost stabla (poznati preci po generaciji) ¦ Popolnost drevesa (znani predniki po rodovih)
+La liste des ancêtres par numéro Sosa, génération par génération, prête à imprimer. ¦ Popis predaka po Sosa broju, generaciju po generaciju, spreman za ispis. ¦ Seznam prednikov po Sosa številki, rod za rodom, pripravljen za tiskanje.
+Tableau d’ascendance (ahnentafel, une ligne par Sosa) ¦ Tablica predaka (ahnentafel, jedan redak po Sosa broju) ¦ Tabela prednikov (ahnentafel, ena vrstica na Sosa številko)
+Cartes de chiffres (KPI) ¦ Kartice s brojevima (KPI) ¦ Kartice s števili (KPI)
+Barre d’objectif (valeur, objectif, zones) ¦ Traka cilja (vrijednost, cilj, zone) ¦ Trak cilja (vrednost, cilj, območja)
+Un anneau par objectif : plein quand c’est fini (ancêtres trouvés, actes sourcés, photos identifiées…). ¦ Jedan prsten po cilju: pun kad je gotovo (pronađeni preci, matični zapisi s izvorom, prepoznate fotografije…). ¦ En obroč na cilj: poln, ko je končano (najdeni predniki, matični vpisi z virom, prepoznane fotografije…).
+Anneaux d’avancement (objectifs de recherche) ¦ Prstenovi napretka (istraživački ciljevi) ¦ Obroči napredka (raziskovalni cilji)
+Carte colorée par zones (départements, régions, pays…) ¦ Karta obojena po područjima (departmani, regije, države…) ¦ Zemljevid, obarvan po območjih (departmaji, regije, države…)
+Carte des migrations (flèches d’un lieu à un autre) ¦ Karta selidbi (strelice od jednog mjesta do drugog) ¦ Zemljevid selitev (puščice od enega kraja do drugega)
+Carte à symboles proportionnels (ronds par lieu) ¦ Karta s proporcionalnim simbolima (krugovi po mjestu) ¦ Zemljevid s sorazmernimi simboli (krogi po krajih)
+Carte en points (un point par événement) ¦ Karta s točkama (jedna točka po događaju) ¦ Točkovni zemljevid (ena pika na dogodek)
+Carte en hexagones (densité en alvéoles) ¦ Karta u šesterokutima (gustoća u ćelijama) ¦ Zemljevid s šestkotniki (gostota v celicah)
+Carte déformée (zones grossies selon leur chiffre) ¦ Deformirana karta (područja uvećana prema broju) ¦ Kartogram (območja, povečana glede na število)
+Carte qui raconte (une vie étape par étape) ¦ Karta koja pripovijeda (život korak po korak) ¦ Pripovedni zemljevid (življenje korak za korakom)
+Carte des patronymes (siècle par siècle) ¦ Karta prezimena (stoljeće po stoljeće) ¦ Zemljevid priimkov (stoletje za stoletjem)
+Carte de chaleur dans le temps (décennie par décennie) ¦ Toplinska karta kroz vrijeme (desetljeće po desetljeće) ¦ Toplotni zemljevid skozi čas (desetletje za desetletjem)
+Carte des cousins ADN (lieux des ancêtres communs) ¦ Karta DNK rođaka (mjesta zajedničkih predaka) ¦ Zemljevid DNK sorodnikov (kraji skupnih prednikov)
+Carte de tes recherches (vu, en partie, trous) ¦ Karta tvojih istraživanja (pregledano, djelomično, praznine) ¦ Zemljevid tvojih raziskovanj (pregledano, delno, vrzeli)
+Le point moyen des lieux de naissance de chaque génération, et le chemin qu’il a fait jusqu’à toi. ¦ Prosječna točka mjesta rođenja svake generacije i put koji je prešla do tebe. ¦ Povprečna točka krajev rojstva vsakega rodu in pot, ki jo je prehodila do tebe.
+Centre de gravité de la famille par génération ¦ Težište obitelji po generaciji ¦ Težišče družine po rodovih
+Les lieux de naissance des ancêtres, une couleur par génération : on voit la famille venir de plus loin. ¦ Mjesta rođenja predaka, jedna boja po generaciji: vidi se kako obitelj dolazi iz sve veće daljine. ¦ Kraji rojstva prednikov, ena barva na rod: vidi se, kako družina prihaja od vse dlje.
+Carte des générations (une couleur par génération) ¦ Karta generacija (jedna boja po generaciji) ¦ Zemljevid rodov (ena barva na rod)
+Vie et mort ¦ Život i smrt ¦ Življenje in smrt
+La part des enfants morts avant 1 an et avant 5 ans, période par période. ¦ Udio djece umrle prije 1. i prije 5. godine, razdoblje po razdoblje. ¦ Delež otrok, umrlih pred 1. in pred 5. letom, obdobje za obdobjem.
+Mortalité des enfants (avant 1 an, avant 5 ans) ¦ Smrtnost djece (prije 1. godine, prije 5. godine) ¦ Umrljivost otrok (pred 1. letom, pred 5. letom)
+Pour chaque couple, ses enfants : arrivés à l’âge adulte, morts jeunes, ou dont on ne sait pas. ¦ Za svaki par, njegova djeca: doživjela odraslu dob, umrla mlada ili nepoznato. ¦ Za vsak par njegovi otroci: dočakali odraslost, umrli mladi ali neznano.
+Fratries qui survivent (enfants nés, arrivés adultes) ¦ Braća i sestre koji prežive (rođena djeca, doživjela odraslu dob) ¦ Sorojenci, ki preživijo (rojeni otroci, ki so dočakali odraslost)
+Un damier : chaque mois de l’année, pour chaque époque. Plus c’est foncé, plus il y a de naissances (ou de décès). ¦ Šahovnica: svaki mjesec u godini, za svako razdoblje. Što je tamnije, to je više rođenja (ili smrti). ¦ Šahovnica: vsak mesec v letu za vsako obdobje. Temnejše ko je, več je rojstev (ali smrti).
+Saisons des naissances et des décès (mois × époque) ¦ Godišnja doba rođenja i smrti (mjesec × razdoblje) ¦ Letni časi rojstev in smrti (mesec × obdobje)
+Couples et familles ¦ Parovi i obitelji ¦ Pari in družine
+Combien de temps attendaient les veufs et les veuves avant de se remarier. ¦ Koliko su dugo udovci i udovice čekali prije ponovnog braka. ¦ Koliko časa so vdovci in vdove čakali pred ponovno poroko.
+Veuvage et remariage (délai avant de se remarier) ¦ Udovištvo i ponovni brak (vrijeme do ponovnog braka) ¦ Vdovstvo in ponovna poroka (čas do ponovne poroke)
+Combien d’années duraient les mariages, de la noce à la mort du premier des deux. ¦ Koliko su godina trajali brakovi, od svadbe do smrti prvoga od dvoje supružnika. ¦ Koliko let so trajali zakoni, od svatbe do smrti prvega od obeh.
+Durée des mariages (jusqu’à la mort d’un époux) ¦ Trajanje brakova (do smrti jednog supružnika) ¦ Trajanje zakonov (do smrti enega od zakoncev)
+Chaque naissance est un point : l’âge du père (et celui de la mère) selon l’année. ¦ Svako rođenje je točka: dob oca (i majke) prema godini. ¦ Vsako rojstvo je pika: starost očeta (in matere) glede na leto.
+Âge des parents à chaque naissance (nuage de points) ¦ Dob roditelja pri svakom rođenju (raspršeni dijagram) ¦ Starost staršev ob vsakem rojstvu (razsevni diagram)
+La part des premiers enfants nés avant le mariage, ou moins de 8 mois après. ¦ Udio prve djece rođene prije vjenčanja ili manje od 8 mjeseci nakon njega. ¦ Delež prvih otrok, rojenih pred poroko ali manj kot 8 mesecev po njej.
+Conceptions avant mariage (premier enfant « trop tôt ») ¦ Začeća prije vjenčanja (prvo dijete „prerano”) ¦ Spočetja pred poroko (prvi otrok »prezgodaj«)
+À gauche les couples où le mari est plus âgé, à droite ceux où la femme est plus âgée, par tranches d’écart. ¦ Lijevo parovi u kojima je muž stariji, desno oni u kojima je žena starija, po rasponima razlike. ¦ Levo pari, kjer je mož starejši, desno tisti, kjer je žena starejša, po razponih razlike.
+Écart d’âge entre époux (pyramide) ¦ Razlika u dobi između supružnika (piramida) ¦ Starostna razlika med zakoncema (piramida)
+À chaque génération d’ancêtres, la distance moyenne entre leur lieu de naissance et le lieu de référence. ¦ Za svaku generaciju predaka, prosječna udaljenost između njihova mjesta rođenja i referentnog mjesta. ¦ Za vsak rod prednikov povprečna razdalja med njihovim krajem rojstva in referenčnim krajem.
+Loin du berceau (distance par génération) ¦ Daleko od kolijevke (udaljenost po generaciji) ¦ Daleč od zibelke (razdalja po rodovih)
+La part de ceux qui ont signé l’acte (époux, épouses, témoins), période par période. ¦ Udio onih koji su potpisali matični zapis (mladoženje, nevjeste, svjedoci), razdoblje po razdoblje. ¦ Delež tistih, ki so podpisali matični vpis (ženini, neveste, priče), obdobje za obdobjem.
+Savoir signer (époux, épouses, témoins) ¦ Znati se potpisati (mladoženje, nevjeste, svjedoci) ¦ Znati se podpisati (ženini, neveste, priče)
+Pour chaque génération d’ancêtres : naissances, mariages et décès prouvés par une source (vert), sans source (jaune) ou manquants (gris). ¦ Za svaku generaciju predaka: rođenja, vjenčanja i smrti dokazani izvorom (zeleno), bez izvora (žuto) ili nedostaju (sivo). ¦ Za vsak rod prednikov: rojstva, poroke in smrti, dokazani z virom (zeleno), brez vira (rumeno) ali manjkajoči (sivo).
+Ce que tu as prouvé (actes sourcés par génération) ¦ Što si dokazao/dokazala (matični zapisi s izvorom po generaciji) ¦ Kaj si dokazal/dokazala (matični vpisi z virom po rodovih)
+Pour chaque commune, une frise des années : dépouillées, vues sans rien trouver, à faire, actes trouvés ; en rouge pâle, les trous. ¦ Za svaku općinu, vremenska crta godina: indeksirane, pregledane bez nalaza, za napraviti, pronađeni matični zapisi; blijedocrveno, praznine. ¦ Za vsako občino časovnica let: indeksirana, pregledana brez najdbe, za narediti, najdeni matični vpisi; bledo rdeče vrzeli.
+Registres consultés (années vues et trous) ¦ Pregledane matične knjige (pregledane godine i praznine) ¦ Pregledane matične knjige (pregledana leta in vrzeli)
+Peinture des chromosomes (segments ADN par branche) ¦ Bojenje kromosoma (DNK segmenti po grani) ¦ Barvanje kromosomov (segmenti DNK po vejah)
+Règle des cM (parentés possibles) ¦ Ravnalo cM (moguća srodstva) ¦ Ravnilo cM (mogoča sorodstva)
+Les correspondances ADN qui se correspondent entre elles, rangées en groupes de couleur (souvent un par grand-parent). ¦ DNK podudaranja koja se podudaraju i međusobno, razvrstana u skupine boja (često jedna po djedu ili baki). ¦ Ujemanja DNK, ki se ujemajo tudi med seboj, razvrščena v barvne skupine (pogosto ena na starega starša).
+Matrice des correspondances ADN (méthode de Leeds) ¦ Matrica DNK podudaranja (Leedsova metoda) ¦ Matrika ujemanj DNK (Leedsova metoda)
+Chargement du diagramme… ¦ Učitavanje dijagrama… ¦ Nalaganje diagrama…
+Diagramme introuvable (supprimé ?). ¦ Dijagram nije pronađen (izbrisan?). ¦ Diagrama ni mogoče najti (izbrisan?).
+la fenêtre « Imprimer » n’est pas chargée ¦ prozor „Ispis” nije učitan ¦ okno »Natisni« ni naloženo
+Titre et légende ¦ Naslov i legenda ¦ Naslov in legenda
+Tableau des données dessous ¦ Tablica podataka ispod ¦ Tabela podatkov spodaj
+Taille réelle ¦ Stvarna veličina ¦ Dejanska velikost
+Image copiée : colle-la où tu veux (⌘V). ¦ Slika je kopirana: zalijepi je gdje želiš (⌘V). ¦ Slika je kopirana: prilepi jo, kamor želiš (⌘V).
+Copie impossible ici : utilise « Image PNG ». ¦ Ovdje nije moguće kopirati: upotrijebi „Slika PNG”. ¦ Tukaj ni mogoče kopirati: uporabi »Slika PNG«.
+image trop grande : baisse la qualité ¦ slika je prevelika: smanji kvalitetu ¦ slika je prevelika: znižaj kakovost
+📋 Copier l’image ¦ 📋 Kopiraj sliku ¦ 📋 Kopiraj sliko
+🧾 Prendre un classeur du Tableur ¦ 🧾 Uzmi radnu knjigu iz Proračunske tablice ¦ 🧾 Vzemi delovni zvezek iz Preglednice
+Prendre un classeur du Tableur ¦ Uzmi radnu knjigu iz Proračunske tablice ¦ Vzemi delovni zvezek iz Preglednice
+Nom du diagramme ¦ Naziv dijagrama ¦ Ime diagrama
+PNG, JPG, SVG, PDF, impression, CSV, fichier du diagramme ¦ PNG, JPG, SVG, PDF, ispis, CSV, datoteka dijagrama ¦ PNG, JPG, SVG, PDF, tiskanje, CSV, datoteka diagrama
+Depuis l’app ¦ Iz aplikacije ¦ Iz aplikacije
+Personnaliser n’est pas chargé. ¦ Prilagodba nije učitana. ¦ Prilagajanje ni naloženo.
+Dans l’ordre du tableau ¦ Redoslijedom tablice ¦ V vrstnem redu tabele
+Prendre ces données ¦ Uzmi ove podatke ¦ Vzemi te podatke
+Prendre ces chiffres ¦ Uzmi ove brojeve ¦ Vzemi ta števila
+🧮 Refaire avec « Compter dans ma base » ¦ 🧮 Ponovi s „Prebroji u mojoj bazi” ¦ 🧮 Ponovi s »Preštej v moji bazi«
+🧮 Compter dans ma base ¦ 🧮 Prebroji u mojoj bazi ¦ 🧮 Preštej v moji bazi
+Une personne, une enquête… ¦ Osoba, istraga… ¦ Oseba, preiskava…
+Tableau importé. ¦ Tablica je uvezena. ¦ Tabela je uvožena.
+Vider ce tableau ? ¦ Isprazniti ovu tablicu? ¦ Izpraznim to tabelo?
+Coller un tableau ¦ Zalijepi tablicu ¦ Prilepi tabelo
+Données reprises du tableur. ¦ Podaci preuzeti iz proračunske tablice. ¦ Podatki, prevzeti iz preglednice.
+Fermer sans enregistrer les changements ? ¦ Zatvoriti bez spremanja promjena? ¦ Zaprem brez shranjevanja sprememb?
+Changements non enregistrés ¦ Nespremljene promjene ¦ Neshranjene spremembe
+Remplacer mes données ¦ Zamijeni moje podatke ¦ Zamenjaj moje podatke
+Choisir un diagramme ¦ Odaberi dijagram ¦ Izberi diagram
+Importer (fichier, tableau, Wikipédia, image) ¦ Uvezi (datoteka, tablica, Wikipedija, slika) ¦ Uvozi (datoteka, tabela, Wikipedija, slika)
+un classeur du Tableur ¦ radna knjiga iz Proračunske tablice ¦ delovni zvezek iz Preglednice
+Copie créée. ¦ Kopija je stvorena. ¦ Kopija je ustvarjena.
+Diagramme supprimé. ¦ Dijagram je izbrisan. ¦ Diagram je izbrisan.
+Ce fichier n’est pas un diagramme. ¦ Ova datoteka nije dijagram. ¦ Ta datoteka ni diagram.
+Diagramme importé ¦ Uvezeni dijagram ¦ Uvoženi diagram
+Diagramme importé. ¦ Dijagram je uvezen. ¦ Diagram je uvožen.
+Naissances (ou baptêmes) ¦ Rođenja (ili krštenja) ¦ Rojstva (ali krsti)
+Baptêmes ¦ Krštenja ¦ Krsti
+Décès (ou sépultures) ¦ Smrti (ili pokopi) ¦ Smrti (ali pokopi)
+Rien (un seul total) ¦ Ništa (samo jedan zbroj) ¦ Nič (samo ena vsota)
+Âge (par 5 ans) ¦ Dob (po 5 godina) ¦ Starost (po 5 let)
+Âge (par 10 ans) ¦ Dob (po 10 godina) ¦ Starost (po 10 let)
+Nombre d’enfants ¦ Broj djece ¦ Število otrok
+Âge au mariage (par 5 ans) ¦ Dob pri vjenčanju (po 5 godina) ¦ Starost ob poroki (po 5 let)
+Âge au premier enfant (par 5 ans) ¦ Dob pri prvom djetetu (po 5 godina) ¦ Starost ob prvem otroku (po 5 let)
+Nombre d’unions ¦ Broj zajednica ¦ Število zvez
+Branche (côté père, côté mère) ¦ Grana (očeva strana, majčina strana) ¦ Veja (očetova stran, materina stran)
+En vie ou décédé ¦ Živ ili preminuo ¦ Živ ali umrl
+En vie ou décédés ¦ Živi ili preminuli ¦ Živi ali umrli
+Avec ou sans source ¦ S izvorom ili bez njega ¦ Z virom ali brez
+par nom ¦ po prezimenu ¦ po priimku
+par prénom ¦ po imenu ¦ po imenu
+par sexe ¦ po spolu ¦ po spolu
+par métier ¦ po zanimanju ¦ po poklicu
+par génération ¦ po generaciji ¦ po rodovih
+par commune ¦ po općini ¦ po občinah
+par département ¦ po departmanu ¦ po departmajih
+par région ¦ po regiji ¦ po regijah
+par pays ¦ po državi ¦ po državah
+par âge (5 ans) ¦ po dobi (5 godina) ¦ po starosti (5 let)
+par âge (10 ans) ¦ po dobi (10 godina) ¦ po starosti (10 let)
+par nombre d’enfants ¦ po broju djece ¦ po številu otrok
+par âge au mariage ¦ po dobi pri vjenčanju ¦ po starosti ob poroki
+par âge au premier enfant ¦ po dobi pri prvom djetetu ¦ po starosti ob prvem otroku
+par nombre d’unions ¦ po broju zajednica ¦ po številu zvez
+par branche ¦ po grani ¦ po vejah
+par cause ¦ po uzroku ¦ po vzrokih
+par sorte d’événement ¦ po vrsti događaja ¦ po vrsti dogodka
+Mes ancêtres ¦ Moji preci ¦ Moji predniki
+Branche paternelle (côté père) ¦ Očeva grana (očeva strana) ¦ Očetova veja (očetova stran)
+Branche maternelle (côté mère) ¦ Majčina grana (majčina strana) ¦ Materina veja (materina stran)
+Une étiquette ¦ Oznaka ¦ Oznaka
+Une recherche dans les noms ¦ Pretraga u imenima ¦ Iskanje po imenih
+Les personnes que je choisis ¦ Osobe koje odaberem ¦ Osebe, ki jih izberem
+Une seule série ¦ Samo jedan niz ¦ Samo en niz
+Une série par sexe ¦ Jedan niz po spolu ¦ En niz na spol
+Une série par siècle ¦ Jedan niz po stoljeću ¦ En niz na stoletje
+Une série par branche (côté père / mère) ¦ Jedan niz po grani (očeva / majčina strana) ¦ En niz na vejo (očetova / materina stran)
+Une série par génération ¦ Jedan niz po generaciji ¦ En niz na rod
+Une série par département ¦ Jedan niz po departmanu ¦ En niz na departma
+Une série par pays ¦ Jedan niz po državi ¦ En niz na državo
+Du plus grand au plus petit ¦ Od najvećeg prema najmanjem ¦ Od največjega do najmanjšega
+Du plus petit au plus grand ¦ Od najmanjeg prema najvećem ¦ Od najmanjšega do največjega
+Dans l’ordre (temps, âges…) ¦ Redom (vrijeme, dobi…) ¦ Po vrsti (čas, starosti…)
+Médiane ¦ Medijan ¦ Mediana
+Ce que chaque barre (ou part) compte : des personnes, des naissances, des mariages, des lieux, des médias… ¦ Što broji svaki stupac (ili dio): osobe, rođenja, vjenčanja, mjesta, medije… ¦ Kaj šteje vsak stolpec (ali izsek): osebe, rojstva, poroke, kraje, medije…
+Seulement les fiches qui portent cette étiquette. ¦ Samo zapisi koji imaju ovu oznaku. ¦ Samo zapisi s to oznako.
+Seulement les personnes que tu choisis ici, une par une. ¦ Samo osobe koje ovdje odabereš, jednu po jednu. ¦ Samo osebe, ki jih izbereš tukaj, eno za drugo.
+Comment on range ce qu’on compte : par nom, par lieu (commune, département, pays), par siècle, décennie ou année, par âge, par génération… ¦ Kako se grupira ono što se broji: po imenu, po mjestu (općina, departman, država), po stoljeću, desetljeću ili godini, po dobi, po generaciji… ¦ Kako se združuje to, kar se šteje: po imenu, po kraju (občina, departma, država), po stoletju, desetletju ali letu, po starosti, po rodu…
+Prénoms, par siècle ¦ Imena, po stoljeću ¦ Imena po stoletjih
+Âge au décès (par 5 ans) ¦ Dob pri smrti (po 5 godina) ¦ Starost ob smrti (po 5 let)
+Mariages par décennie ¦ Vjenčanja po desetljeću ¦ Poroke po desetletjih
+Nombre d’unions par personne ¦ Broj zajednica po osobi ¦ Število zvez na osebo
+Nombre moyen d’enfants par famille, par siècle ¦ Prosječan broj djece po obitelji, po stoljeću ¦ Povprečno število otrok na družino po stoletjih
+Naissances par département ¦ Rođenja po departmanu ¦ Rojstva po departmajih
+Mariages par département, par siècle ¦ Vjenčanja po departmanu, po stoljeću ¦ Poroke po departmajih in stoletjih
+Lieux par département ¦ Mjesta po departmanu ¦ Kraji po departmajih
+Métiers, par siècle ¦ Zanimanja, po stoljeću ¦ Poklici po stoletjih
+Âge moyen au décès, par métier ¦ Prosječna dob pri smrti, po zanimanju ¦ Povprečna starost ob smrti po poklicih
+Décès par décennie ¦ Smrti po desetljeću ¦ Smrti po desetletjih
+Événements par siècle ¦ Događaji po stoljeću ¦ Dogodki po stoletjih
+Mes ancêtres par génération ¦ Moji preci po generaciji ¦ Moji predniki po rodovih
+Fiches avec ou sans source ¦ Zapisi s izvorom ili bez njega ¦ Zapisi z virom ali brez
+Mes ancêtres avec ou sans source ¦ Moji preci s izvorom ili bez njega ¦ Moji predniki z virom ali brez
+Événements par sorte ¦ Događaji po vrsti ¦ Dogodki po vrstah
+Médias par sorte ¦ Mediji po vrsti ¦ Mediji po vrstah
+Médias par décennie ¦ Mediji po desetljeću ¦ Mediji po desetletjih
+Seulement les personnes… ¦ Samo osobe… ¦ Samo osebe…
+tous ces critères (ET) ¦ svi ovi kriteriji (I) ¦ vsi ti pogoji (IN)
+choisir… (métier, enfants, lieu, période…) ¦ odaberi… (zanimanje, djeca, mjesto, razdoblje…) ¦ izberi… (poklic, otroci, kraj, obdobje…)
+Compter chaque personne une seule fois ¦ Broji svaku osobu samo jednom ¦ Štej vsako osebo samo enkrat
+Jusqu’à (générations, 0 = toutes) ¦ Do (generacija, 0 = sve) ¦ Do (rodov, 0 = vsi)
+Nom ou prénom qui contient ¦ Prezime ili ime koje sadrži ¦ Priimek ali ime, ki vsebuje
+Chercher… (Martin, Jean) ¦ Traži… (Martin, Jean) ¦ Išči… (Martin, Jean)
+Nées entre (période) ¦ Rođeni između (razdoblje) ¦ Rojeni med (obdobje)
+Regrouper par ¦ Grupiraj po ¦ Združi po
+Garder les premiers (0 = tous) ¦ Zadrži prve (0 = sve) ¦ Obdrži prve (0 = vse)
+Le reste dans « Autres » ¦ Ostatak u „Ostalo” ¦ Ostalo v »Drugo«
+Montrer « Inconnu » (les valeurs vides) ¦ Prikaži „Nepoznato” (prazne vrijednosti) ¦ Prikaži »Neznano« (prazne vrednosti)
+De quoi ¦ Čega ¦ Česa
+Écris une année (ex. 1800, vers 1850). ¦ Upiši godinu (npr. 1800, vers 1850). ¦ Vpiši leto (npr. 1800, vers 1850).
+Choisis une étiquette. ¦ Odaberi oznaku. ¦ Izberi oznako.
+Écris au moins 2 lettres. ¦ Upiši barem 2 slova. ¦ Vpiši vsaj 2 črki.
+Choisis au moins une personne. ¦ Odaberi barem jednu osobu. ¦ Izberi vsaj eno osebo.
+=siège ¦ mjesto|mjesta|mjesta ¦ sedež|sedeža|sedeži|sedežev
+Ajoute des valeurs positives. ¦ Dodaj pozitivne vrijednosti. ¦ Dodaj pozitivne vrednosti.
+Il faut au moins 3 lignes (les axes). ¦ Potrebna su barem 3 retka (osi). ¦ Potrebne so vsaj 3 vrstice (osi).
+Ajoute des valeurs. ¦ Dodaj vrijednosti. ¦ Dodaj vrednosti.
+Ajoute des flux : de, vers, combien. ¦ Dodaj tokove: od, prema, koliko. ¦ Dodaj tokove: od, do, koliko.
+Il faut 2 ou 3 ensembles. ¦ Potrebna su 2 ili 3 skupa. ¦ Potrebni sta 2 ali 3 množice.
+Ajoute une jauge : un nom, une valeur, un maximum. ¦ Dodaj mjerač: naziv, vrijednost, maksimum. ¦ Dodaj merilnik: ime, vrednost, največja vrednost.
+Ajoute des lignes : un nom, un nombre, un symbole (👤, 👶, ⚓…). ¦ Dodaj retke: naziv, broj, simbol (👤, 👶, ⚓…). ¦ Dodaj vrstice: ime, število, simbol (👤, 👶, ⚓…).
+Majorité (banc du haut) ¦ Većina (gornja klupa) ¦ Večina (zgornja klop)
+Opposition (banc du bas) ¦ Oporba (donja klupa) ¦ Opozicija (spodnja klop)
+Non-inscrits (bout) ¦ Nezavisni (kraj) ¦ Nepovezani (konec)
+Présidence ¦ Predsjedništvo ¦ Predsedstvo
+Les chiffres ¦ Brojevi ¦ Števila
+Afficher les valeurs ¦ Prikaži vrijednosti ¦ Prikaži vrednosti
+Hauteur du dessin ¦ Visina crteža ¦ Višina risbe
+Unité (ex. : personnes, €) ¦ Jedinica (npr. osobe, €) ¦ Enota (npr. osebe, €)
+Trou au centre ¦ Rupa u sredini ¦ Luknja na sredini
+Sièges ¦ Mjesta ¦ Sedeži
+Hémicycle (demi-cercle) ¦ Polukrug (hemiciklus) ¦ Polkrog (hemicikel)
+Arc élargi (angle au choix) ¦ Prošireni luk (kut po izboru) ¦ Razširjen lok (kot po izbiri)
+Longueur des bancs droits ¦ Duljina ravnih klupa ¦ Dolžina ravnih klopi
+Forme des sièges ¦ Oblik mjesta ¦ Oblika sedežev
+Carrés ¦ Kvadrati ¦ Kvadrati
+Carrés arrondis ¦ Zaobljeni kvadrati ¦ Zaobljeni kvadrati
+Espace entre les sièges ¦ Razmak između mjesta ¦ Razmik med sedeži
+Contour des sièges ¦ Obrub mjesta ¦ Obroba sedežev
+Majorité absolue ¦ Apsolutna većina ¦ Absolutna večina
+Ne pas montrer ¦ Ne prikazuj ¦ Ne prikaži
+En texte ¦ Kao tekst ¦ Kot besedilo
+Sièges dans la légende ¦ Mjesta u legendi ¦ Sedeži v legendi
+Assemblée ¦ Skupština ¦ Skupščina
+Les membres (une ligne par période ; même nom = même ligne) ¦ Članovi (jedan redak po razdoblju; isto ime = isti redak) ¦ Člani (ena vrstica na obdobje; isto ime = ista vrstica)
+Rôles (séparés par des virgules) ¦ Uloge (odvojene zarezima) ¦ Vloge (ločene z vejicami)
+1987 ou 03/1987 ¦ 1987 ili 03/1987 ¦ 1987 ali 03/1987
+Fin (vide = aujourd’hui) ¦ Kraj (prazno = danas) ¦ Konec (prazno = danes)
+Les traits verticaux (albums, tournées, événements) ¦ Okomite crte (albumi, turneje, događaji) ¦ Navpične črte (albumi, turneje, dogodki)
+Tournée (rouge, pointillés) ¦ Turneja (crveno, točkasto) ¦ Turneja (rdeče, pikčasto)
+Autre (bleu, pointillés) ¦ Ostalo (plavo, točkasto) ¦ Drugo (modro, pikčasto)
+Un repère tous les … ans (vide = auto) ¦ Oznaka svakih … godina (prazno = automatski) ¦ Oznaka vsakih … let (prazno = samodejno)
+Épaisseur des barres ¦ Debljina stupaca ¦ Debelina stolpcev
+Espace entre les lignes ¦ Razmak između redaka ¦ Razmik med vrsticami
+Ordre des lignes ¦ Redoslijed redaka ¦ Vrstni red vrstic
+Par date d’arrivée ¦ Po datumu dolaska ¦ Po datumu prihoda
+Rôle par défaut (si vide) ¦ Zadana uloga (ako je prazno) ¦ Privzeta vloga (če je prazno)
+Les événements ¦ Događaji ¦ Dogodki
+En alternance dessus / dessous ¦ Naizmjence iznad / ispod ¦ Izmenično nad / pod
+Tous au-dessus ¦ Svi iznad ¦ Vsi nad
+Étages au plus (pour éviter les chevauchements) ¦ Najviše razina (da se izbjegnu preklapanja) ¦ Največ ravni (da se izognemo prekrivanju)
+Carrés par ligne ¦ Kvadrata po retku ¦ Kvadratov na vrstico
+Personnes trouvées ¦ Pronađene osobe ¦ Najdene osebe
+Avec un acte ¦ S matičnim zapisom ¦ Z matičnim vpisom
+Acte vérifié ¦ Provjeren matični zapis ¦ Preverjen matični vpis
+Sourcées ¦ S izvorom ¦ Z virom
+Complétude par branche ¦ Potpunost po grani ¦ Popolnost po vejah
+Couleur des petites valeurs ¦ Boja malih vrijednosti ¦ Barva majhnih vrednosti
+Couleur des grandes valeurs ¦ Boja velikih vrijednosti ¦ Barva velikih vrednosti
+Les points ¦ Točke ¦ Točke
+Une seule couleur ¦ Samo jedna boja ¦ Samo ena barva
+Les flux ¦ Tokovi ¦ Tokovi
+D’où venaient les conjoints ¦ Odakle su dolazili supružnici ¦ Od kod so prihajali zakonci
+Les cases ¦ Polja ¦ Polja
+Largeur des cases (vide = auto) ¦ Širina polja (prazno = automatski) ¦ Širina polj (prazno = samodejno)
+Les ensembles (2 ou 3) ¦ Skupovi (2 ili 3) ¦ Množice (2 ali 3)
+Ce qu’on écrit dans chaque zone ¦ Što se piše u svako područje ¦ Kaj se piše v vsako območje
+Texte ou nombre ¦ Tekst ili broj ¦ Besedilo ali število
+Les mots ¦ Riječi ¦ Besede
+Taille du plus gros mot ¦ Veličina najveće riječi ¦ Velikost največje besede
+Les jauges ¦ Mjerači ¦ Merilniki
+Les lignes ¦ Retci ¦ Vrstice
+Un symbole vaut ¦ Jedan simbol vrijedi ¦ En simbol je vreden
+Taille des symboles ¦ Veličina simbola ¦ Velikost simbolov
+Légende ¦ Legenda ¦ Legenda
+En bas ¦ Dolje ¦ Spodaj
+Couleurs par défaut ¦ Zadane boje ¦ Privzete barve
+Sépia (ancien) ¦ Sepija (staro) ¦ Sepija (staro)
+Taille des textes ¦ Veličina tekstova ¦ Velikost besedil
+Couleur du fond ¦ Boja pozadine ¦ Barva ozadja
+Couleur des textes ¦ Boja tekstova ¦ Barva besedil
+Types remis comme au départ. ¦ Vrste su vraćene na početno. ¦ Vrste so ponastavljene na začetno.
+Nom du groupe (ex. « Mes favoris », « Pour la famille ») : ¦ Naziv skupine (npr. „Moji favoriti”, „Za obitelj”): ¦ Ime skupine (npr. »Moji priljubljeni«, »Za družino«):
+Un tableau ¦ Tablica ¦ Tabela
+Un fichier CSV ¦ Datoteka CSV ¦ Datoteka CSV
+Une page Wikipédia ¦ Stranica Wikipedije ¦ Stran Wikipedije
+Un graphique partagé ¦ Dijeljeni grafikon ¦ Deljeni graf
+📊 D’un graphique ¦ 📊 Iz grafikona ¦ 📊 Iz grafa
+Avec quel dessin ? ¦ S kojim crtežom? ¦ S katero risbo?
+🖼️ Image d’un graphique ¦ 🖼️ Slika grafikona ¦ 🖼️ Slika grafa
+Un diagramme LCNDA (.json), un graphique partagé (.lcnda-widget.json) ou un tableau CSV. ¦ Dijagram LCNDA (.json), dijeljeni grafikon (.lcnda-widget.json) ili tablica CSV. ¦ Diagram LCNDA (.json), deljeni graf (.lcnda-widget.json) ali tabela CSV.
+Lire la page ¦ Pročitaj stranicu ¦ Preberi stran
+Comment faire mon propre graphique avec des données d’ailleurs ? ¦ Kako napraviti vlastiti grafikon s podacima iz drugih izvora? ¦ Kako naredim svoj graf s podatki od drugod?
+Ce fichier JSON n’est ni un diagramme ni un graphique LCNDA. ¦ Ova datoteka JSON nije ni dijagram ni grafikon LCNDA. ¦ Ta datoteka JSON ni ne diagram ne graf LCNDA.
+Colle un tableau. ¦ Zalijepi tablicu. ¦ Prilepi tabelo.
+Tableau collé ¦ Zalijepljena tablica ¦ Prilepljena tabela
+Clique « Lire la page », puis choisis un tableau ou une image. ¦ Klikni „Pročitaj stranicu”, zatim odaberi tablicu ili sliku. ¦ Klikni »Preberi stran«, nato izberi tabelo ali sliko.
+Colle l’adresse d’une page Wikipédia (https://xx.wikipedia.org/wiki/…). ¦ Zalijepi adresu stranice Wikipedije (https://xx.wikipedia.org/wiki/…). ¦ Prilepi naslov strani Wikipedije (https://xx.wikipedia.org/wiki/…).
+Aucun tableau. ¦ Nema tablice. ¦ Ni tabele.
+＋ Une ligne ¦ ＋ Jedan redak ¦ ＋ Ena vrstica
+Je ne sais pas (barres ou colonnes) ¦ Ne znam (vodoravni ili okomiti stupci) ¦ Ne vem (vodoravni ali navpični stolpci)
+Hémicycle (sièges) ¦ Polukrug (mjesta) ¦ Polkrog (sedeži)
+Valeur du haut (la plus grande barre, ou 100 %) ¦ Gornja vrijednost (najveći stupac ili 100 %) ¦ Zgornja vrednost (največji stolpec ali 100 %)
+D’après une image ¦ Prema slici ¦ Po sliki
+Président ¦ Predsjednik ¦ Predsednik
+Majorité ¦ Većina ¦ Večina
+Indépendants ¦ Nezavisni ¦ Neodvisni
+Liste du maire ¦ Lista gradonačelnika ¦ Županova lista
+Sens de l’arbre ¦ Smjer stabla ¦ Smer drevesa
+Chercher un métier… (tisserand, laboureur) ¦ Traži zanimanje… (tkalac, orač) ¦ Išči poklic… (tkalec, orač)
+Chercher un métier ¦ Traži zanimanje ¦ Išči poklic
+Pour montrer ou imprimer l’arbre : les vivants et les fiches confidentielles n’apparaissent plus ¦ Za prikaz ili ispis stabla: živi i povjerljivi zapisi više se ne pojavljuju ¦ Za prikaz ali tiskanje drevesa: živi in zaupni zapisi se ne prikažejo več
+🔒 Sans les vivants ni les fiches confidentielles ¦ 🔒 Bez živih i povjerljivih zapisa ¦ 🔒 Brez živih in zaupnih zapisov
+ARBRE DES MÉTIERS ¦ STABLO ZANIMANJA ¦ DREVO POKLICEV
+Les métiers des ancêtres de {name} ¦ Zanimanja predaka osobe {name} ¦ Poklici prednikov osebe {name}
+🧬 Les métiers des ancêtres de {name} ¦ 🧬 Zanimanja predaka osobe {name} ¦ 🧬 Poklici prednikov osebe {name}
+métier inconnu ¦ nepoznato zanimanje ¦ neznan poklic
+Aucun métier noté dans cet arbre. ¦ U ovom stablu nije zabilježeno nijedno zanimanje. ¦ V tem drevesu ni zapisan noben poklic.
+Même métier que le parent ¦ Isto zanimanje kao roditelj ¦ Isti poklic kot starš
+Changement de métier ¦ Promjena zanimanja ¦ Sprememba poklica
+Métier inconnu pour l’un des deux ¦ Zanimanje nepoznato za jednog od dvoje ¦ Poklic neznan za enega od obeh
+📊 La transmission du métier ¦ 📊 Prenošenje zanimanja ¦ 📊 Prenos poklica
+Un enfant « reprend » le métier quand au moins un de ses métiers est aussi celui du parent (mêmes mots du dictionnaire des métiers anciens : « laboureur » et « laboureur à bras » comptent pareil). ¦ Dijete „preuzima” zanimanje kad je barem jedno od njegovih zanimanja ujedno i roditeljevo (iste riječi iz rječnika starih zanimanja: „laboureur” i „laboureur à bras” računaju se jednako). ¦ Otrok »prevzame« poklic, ko je vsaj eden od njegovih poklicev tudi poklic starša (iste besede iz slovarja starih poklicev: »laboureur« in »laboureur à bras« štejeta enako).
+Pas encore de quoi compter : il faut le métier d’un parent et celui de son enfant du même sexe. ¦ Još nema što brojiti: potrebno je zanimanje roditelja i njegova djeteta istog spola. ¦ Še ni česa šteti: potreben je poklic starša in njegovega otroka istega spola.
+Arrivée au bagne ¦ Dolazak u kaznionicu ¦ Prihod v kazensko kolonijo
+Autre événement ¦ Drugi događaj ¦ Drug dogodek
+Décoration ¦ Odlikovanje ¦ Odlikovanje
+Décès en déportation ¦ Smrt u deportaciji ¦ Smrt v deportaciji
+Déportation ¦ Deportacija ¦ Deportacija
+Fusillé ¦ Strijeljan ¦ Ustreljen
+Libération ou décès au bagne ¦ Oslobađanje ili smrt u kaznionici ¦ Izpustitev ali smrt v kazenski koloniji
+Lieu de résidence ¦ Mjesto prebivališta ¦ Kraj bivališča
+Obsèques ¦ Sprovod ¦ Pogreb
+Séparation ¦ Rastava ¦ Ločitev
+{name} : {n} — voir les personnes ¦ {name}: {n} — vidi osobe ¦ {name}: {n} — glej osebe
+Personne de ta base n’est né ou baptisé un {date}. ¦ Nitko iz tvoje baze nije rođen ni kršten na dan {date}. ¦ Nihče iz tvoje baze ni bil rojen ali krščen na dan {date}.
+{n} coïncidences dans l’arbre ¦ Podudarnosti u stablu: {n} ¦ Naključja v drevesu: {n}
+Aucune bougie allumée cette semaine. ¦ Ovaj tjedan nije upaljena nijedna svijeća. ¦ Ta teden ni prižgana nobena sveča.
+Aucune lettre scellée. ¦ Nema zapečaćenog pisma. ¦ Ni zapečatenega pisma.
+Le détail ¦ Pojedinosti ¦ Podrobnosti
+Prochain à voir : ¦ Sljedeće za pogledati: ¦ Naslednje za ogled:
+L’ambiance ¦ Ugođaj ¦ Vzdušje
+La veillée au coin du feu (vers 1880) ¦ Sijelo uz ognjište (oko 1880.) ¦ Večer ob ognjišču (okoli 1880)
+Le village un dimanche matin ¦ Selo u nedjelju ujutro ¦ Vas v nedeljo zjutraj
+L’atelier du forgeron ¦ Kovačnica ¦ Kovačnica
+La gare (vers 1900) ¦ Željeznički kolodvor (oko 1900.) ¦ Železniška postaja (okoli 1900)
+Le moulin au bord de l’eau ¦ Mlin uz vodu ¦ Mlin ob vodi
+La nuit d’orage ¦ Olujna noć ¦ Nevihtna noč
+Le port ¦ Luka ¦ Pristanišče
+La ferme au petit matin ¦ Seosko gospodarstvo u zoru ¦ Kmetija ob zori
+Une nuit d’été à la campagne ¦ Ljetna noć na selu ¦ Poletna noč na podeželju
+Le lavoir ¦ Praonica ¦ Perišče
+Le jour de marché ¦ Sajmeni dan ¦ Tržni dan
+Le café du village ¦ Seoska kavana ¦ Vaška gostilna
+Le bal musette ¦ Ples uz harmoniku ¦ Ples ob harmoniki
+La messe à l’église ¦ Misa u crkvi ¦ Maša v cerkvi
+L’atelier de couture ¦ Krojačka radionica ¦ Šivalnica
+La filature et le tissage ¦ Predionica i tkanje ¦ Predilnica in tkanje
+La veillée des fileuses ¦ Prelje na sijelu ¦ Večer predic
+L’atelier du menuisier ¦ Stolarska radionica ¦ Mizarska delavnica
+La classe (vers 1900) ¦ Razred (oko 1900.) ¦ Razred (okoli 1900)
+L’étude du notaire ¦ Bilježnički ured ¦ Notarska pisarna
+Les moissons ¦ Žetva ¦ Žetev
+Le rucher ¦ Pčelinjak ¦ Čebelnjak
+La route en diligence ¦ Cesta poštanske kočije ¦ Pot s poštno kočijo
+Sons fabriqués par l’ordinateur, libres de droits. ¦ Zvukovi koje je napravilo računalo, bez autorskih prava. ¦ Zvoki, ki jih je ustvaril računalnik, brez avtorskih pravic.
+Montrer les cartes postales anciennes à l’endroit qu’elles montrent (avec la direction de la vue) ¦ Prikaži stare razglednice na mjestu koje prikazuju (sa smjerom pogleda) ¦ Prikaži stare razglednice na kraju, ki ga prikazujejo (s smerjo pogleda)
+＋ Nouvelle couche ¦ ＋ Novi sloj ¦ ＋ Nova plast
+Départements ¦ Departmani ¦ Departmaji
+Grandes régions ¦ Velike regije ¦ Velike regije
+Grandes régions (NUTS 1) ¦ Velike regije (NUTS 1) ¦ Velike regije (NUTS 1)
+Régions (NUTS 2) ¦ Regije (NUTS 2) ¦ Regije (NUTS 2)
+Le monde entier ¦ Cijeli svijet ¦ Ves svet
+France et voisins ¦ Francuska i susjedi ¦ Francija in sosede
+France entière ¦ Cijela Francuska ¦ Vsa Francija
+Ajoute des flux : départ, arrivée, combien. ¦ Dodaj tokove: polazak, dolazak, koliko. ¦ Dodaj tokove: odhod, prihod, koliko.
+📍 Zoomer sur ¦ 📍 Zumiraj na ¦ 📍 Povečaj na
+✋ Mon cadrage (souris ou cadre tracé) ¦ ✋ Moje kadriranje (miš ili nacrtani okvir) ¦ ✋ Moj izrez (miška ali narisan okvir)
+Mon cadrage : ouest, sud, est, nord (degrés) ¦ Moje kadriranje: zapad, jug, istok, sjever (stupnjevi) ¦ Moj izrez: zahod, jug, vzhod, sever (stopinje)
+Dégradé continu ¦ Neprekinuti prijelaz ¦ Zvezni preliv
+Par classes (tranches) ¦ Po razredima (rasponi) ¦ Po razredih (razponi)
+Du jaune au rouge ¦ Od žute do crvene ¦ Od rumene do rdeče
+Du bleu au rouge (écarts) ¦ Od plave do crvene (odstupanja) ¦ Od modre do rdeče (odstopanja)
+Couleur des petits chiffres ¦ Boja malih brojeva ¦ Barva majhnih števil
+Couleur des grands chiffres ¦ Boja velikih brojeva ¦ Barva velikih števil
+Découpage des classes ¦ Podjela razreda ¦ Meje razredov
+Couleur des zones sans chiffre ¦ Boja područja bez broja ¦ Barva območij brez števila
+Couleur des limites ¦ Boja granica ¦ Barva meja
+Automatiques (là où il y a la place) ¦ Automatski (gdje ima mjesta) ¦ Samodejno (kjer je prostor)
+Noms des zones ¦ Nazivi područja ¦ Imena območij
+Noms et chiffres ¦ Nazivi i brojevi ¦ Imena in števila
+Taille des étiquettes ¦ Veličina oznaka ¦ Velikost oznak
+Unité (ex. : naissances, %) ¦ Jedinica (npr. rođenja, %) ¦ Enota (npr. rojstva, %)
+Courbure des flèches ¦ Zakrivljenost strelica ¦ Ukrivljenost puščic
+Opacité des flèches ¦ Neprozirnost strelica ¦ Prekrivnost puščic
+Couleur des flèches ¦ Boja strelica ¦ Barva puščic
+Taille des ronds ¦ Veličina krugova ¦ Velikost krogov
+Couleur du tour des ronds ¦ Boja obruba krugova ¦ Barva obrobe krogov
+Tous (sans se chevaucher) ¦ Svi (bez preklapanja) ¦ Vsi (brez prekrivanja)
+Les 12 plus importants ¦ 12 najvažnijih ¦ 12 najpomembnejših
+Taille des noms ¦ Veličina naziva ¦ Velikost imen
+Couleur des terres ¦ Boja kopna ¦ Barva kopnega
+Unité (ex. : personnes) ¦ Jedinica (npr. osobe) ¦ Enota (npr. osebe)
+Signaler les lieux sans position ¦ Upozori na mjesta bez položaja ¦ Opozori na kraje brez položaja
+Couleur des ronds ¦ Boja krugova ¦ Barva krogov
+Opacité des ronds ¦ Neprozirnost krugova ¦ Prekrivnost krogov
+Les 15 plus gros (sans se chevaucher) ¦ 15 najvećih (bez preklapanja) ¦ 15 največjih (brez prekrivanja)
+Unité (ex. : naissances) ¦ Jedinica (npr. rođenja) ¦ Enota (npr. rojstva)
+Où sont nés mes ancêtres ¦ Gdje su rođeni moji preci ¦ Kje so se rodili moji predniki
+Baptêmes seuls ¦ Samo krštenja ¦ Samo krsti
+Sépultures seules ¦ Samo pokopi ¦ Samo pokopi
+Recensements (personnes recensées) ¦ Popisi stanovništva (popisane osobe) ¦ Popisi prebivalstva (popisane osebe)
+Métiers (lieux où on les exerçait) ¦ Zanimanja (mjesta gdje su se obavljala) ¦ Poklici (kraji, kjer so jih opravljali)
+Départs (nés ici, morts ailleurs) ¦ Odlasci (rođeni ovdje, umrli drugdje) ¦ Odhodi (rojeni tukaj, umrli drugje)
+Arrivées (nés ailleurs, morts ici) ¦ Dolasci (rođeni drugdje, umrli ovdje) ¦ Prihodi (rojeni drugje, umrli tukaj)
+Familles (patronymes différents) ¦ Obitelji (različita prezimena) ¦ Družine (različni priimki)
+Une sorte d’événement ¦ Vrsta događaja ¦ Vrsta dogodka
+▭ Tracer un cadre ¦ ▭ Nacrtaj okvir ¦ ▭ Nariši okvir
+Chargement des sortes d’événements… ¦ Učitavanje vrsta događaja… ¦ Nalaganje vrst dogodkov…
+Quelle sorte d’événement ¦ Koja vrsta događaja ¦ Katera vrsta dogodka
+Seulement mes ancêtres (lignée Sosa) ¦ Samo moji preci (linija Sosa) ¦ Samo moji predniki (linija Sosa)
+Jusqu’à l’année ¦ Do godine ¦ Do leta
+Départ ¦ Polazak ¦ Odhod
+Arrivée ¦ Dolazak ¦ Prihod
+📍 Les lieux du tableau ¦ 📍 Mjesta u tablici ¦ 📍 Kraji v tabeli
+🔎 Retrouver les lieux sans position ¦ 🔎 Pronađi mjesta bez položaja ¦ 🔎 Poišči kraje brez položaja
+Choisis d’abord une sorte d’événement. ¦ Najprije odaberi vrstu događaja. ¦ Najprej izberi vrsto dogodka.
+Choisis une sorte d’événement. ¦ Odaberi vrstu događaja. ¦ Izberi vrsto dogodka.
+Aucun lieu retrouvé : choisis-les un par un. ¦ Nijedno mjesto nije pronađeno: odaberi ih jedno po jedno. ¦ Noben kraj ni najden: izberi jih enega za drugim.
+Colorer les villes elles-mêmes ¦ Oboji same gradove ¦ Pobarvaj sama mesta
+Zones proposées ¦ Predložena područja ¦ Predlagana območja
+Tape un nom ou un code… ¦ Upiši naziv ili kod… ¦ Vpiši ime ali kodo…
+Note (dans la bulle) ¦ Bilješka (u oblačiću) ¦ Opomba (v oblačku)
+Les flux (départ → arrivée) ¦ Tokovi (polazak → dolazak) ¦ Tokovi (odhod → prihod)
+Départ (lieu) ¦ Polazak (mjesto) ¦ Odhod (kraj)
+Arrivée (lieu) ¦ Dolazak (mjesto) ¦ Prihod (kraj)
+Hauteur au plus ¦ Najveća visina ¦ Največja višina
+Clic : ouvrir la fiche ¦ Klik: otvori zapis ¦ Klik: odpri zapis
+Oncle ou tante ¦ Stric/ujak ili teta ¦ Stric ali teta
+Père ou mère ¦ Otac ili majka ¦ Oče ali mati
+Autre lien (ou inconnu) ¦ Druga veza (ili nepoznata) ¦ Druga vez (ali neznana)
+Autre prénom ¦ Drugo ime ¦ Drugo ime
+Trait plein : même premier prénom ¦ Puna crta: isto prvo ime ¦ Polna črta: isto prvo ime
+Guerre et violence ¦ Rat i nasilje ¦ Vojna in nasilje
+Poumons et respiration ¦ Pluća i disanje ¦ Pljuča in dihanje
+Cœur et vaisseaux ¦ Srce i krvne žile ¦ Srce in ožilje
+Cancers et tumeurs ¦ Rak i tumori ¦ Rak in tumorji
+Ventre et digestion ¦ Trbuh i probava ¦ Trebuh in prebava
+Nerfs et cerveau ¦ Živci i mozak ¦ Živci in možgani
+Autres et inconnues ¦ Ostalo i nepoznato ¦ Drugo in neznano
+Où vivait la famille ¦ Gdje je obitelj živjela ¦ Kje je živela družina
+Ancêtres ¦ Preci ¦ Predniki
+De quoi sont morts mes ancêtres ¦ Od čega su umrli moji preci ¦ Za čim so umrli moji predniki
+Tous les lieux ont une position. ¦ Sva mjesta imaju položaj. ¦ Vsi kraji imajo položaj.
+Résidences et recensements ¦ Prebivališta i popisi stanovništva ¦ Bivališča in popisi prebivalstva
+Prendre ces événements ¦ Uzmi ove događaje ¦ Vzemi te dogodke
+📖 La vie d’une personne ¦ 📖 Život jedne osobe ¦ 📖 Življenje osebe
+Prendre sa vie ¦ Uzmi njezin/njegov život ¦ Vzemi njeno/njegovo življenje
+🧱 Une descendance ¦ 🧱 Potomstvo ¦ 🧱 Potomstvo
+Prendre la descendance ¦ Uzmi potomstvo ¦ Vzemi potomstvo
+Ces personnes ¦ Te osobe ¦ Te osebe
+Toute la vie ¦ Cijeli život ¦ Celo življenje
+Voir toute la vie ¦ Prikaži cijeli život ¦ Prikaži celo življenje
+Lecture : les étapes défilent ¦ Reprodukcija: postaje se izmjenjuju ¦ Predvajanje: postaje se vrstijo
+⤢ Toute la vie ¦ ⤢ Cijeli život ¦ ⤢ Celo življenje
+Les événements (un point par ligne) ¦ Događaji (jedna točka po retku) ¦ Dogodki (ena pika na vrstico)
+Date ou année ¦ Datum ili godina ¦ Datum ali leto
+Couleur des points ¦ Boja točaka ¦ Barva pik
+Selon la sorte d’événement ¦ Prema vrsti događaja ¦ Glede na vrsto dogodka
+Taille des points ¦ Veličina točaka ¦ Velikost pik
+Opacité des points ¦ Neprozirnost točaka ¦ Prekrivnost pik
+Les 10 plus remplis ¦ 10 najpunijih ¦ 10 najbolj polnih
+Opacité des alvéoles ¦ Neprozirnost ćelija ¦ Prekrivnost celic
+Traits blancs entre les alvéoles ¦ Bijele crte između ćelija ¦ Bele črte med celicami
+Des ronds (Dorling) ¦ Krugovi (Dorling) ¦ Krogi (Dorling)
+Des carrés (Demers) ¦ Kvadrati (Demers) ¦ Kvadrati (Demers)
+Couleur des formes ¦ Boja oblika ¦ Barva oblik
+Nom et chiffre (là où il y a la place) ¦ Naziv i broj (gdje ima mjesta) ¦ Ime in število (kjer je prostor)
+Légende des tailles ¦ Legenda veličina ¦ Legenda velikosti
+Unité (ex. : ancêtres) ¦ Jedinica (npr. preci) ¦ Enota (npr. predniki)
+Signaler les zones pas trouvées ¦ Upozori na područja koja nisu pronađena ¦ Opozori na območja, ki niso najdena
+Les étapes, dans l’ordre ¦ Postaje, redom ¦ Postaje po vrsti
+Détail (dans la bulle) ¦ Pojedinost (u oblačiću) ¦ Podrobnost (v oblačku)
+La carte ¦ Karta ¦ Zemljevid
+Montre toute la vie (fixe) ¦ Prikazuje cijeli život (nepomično) ¦ Prikaže celo življenje (mirujoče)
+Couleur du chemin ¦ Boja puta ¦ Barva poti
+Oui (sans se chevaucher) ¦ Da (bez preklapanja) ¦ Da (brez prekrivanja)
+Les personnes (parent → enfant) ¦ Osobe (roditelj → dijete) ¦ Osebe (starš → otrok)
+Parent (vide = l’ancêtre) ¦ Roditelj (prazno = predak) ¦ Starš (prazno = prednik)
+Le chiffre (ou la somme) ¦ Broj (ili zbroj) ¦ Število (ali vsota)
+Une par génération ¦ Jedna po generaciji ¦ Ena na rod
+Hauteur d’une génération ¦ Visina jedne generacije ¦ Višina enega rodu
+Dans les cases ¦ U poljima ¦ V poljih
+Ordre des enfants ¦ Redoslijed djece ¦ Vrstni red otrok
+Les plus grandes familles d’abord ¦ Najprije najveće obitelji ¦ Najprej največje družine
+Traits blancs entre les cases ¦ Bijele crte između polja ¦ Bele črte med polji
+Traits blancs entre les parts ¦ Bijele crte između dijelova ¦ Bele črte med izseki
+Seulement les prénoms transmis ¦ Samo prenesena imena ¦ Samo prenesena imena
+Aussi les filleuls au prénom différent ¦ I kumčad s drugačijim imenom ¦ Tudi krščenci z drugačnim imenom
+Hauteur d’une ligne ¦ Visina retka ¦ Višina vrstice
+Noms sous les ronds ¦ Imena ispod krugova ¦ Imena pod krogi
+Quand il y a la place ¦ Kad ima mjesta ¦ Ko je prostor
+Les noms ¦ Imena ¦ Imena
+Qui a connu qui dans la famille ¦ Tko je koga poznavao u obitelji ¦ Kdo je koga poznal v družini
+Autres métiers ¦ Ostala zanimanja ¦ Drugi poklici
+Métier différent ¦ Drugačije zanimanje ¦ Drugačen poklic
+Même lieu ¦ Isto mjesto ¦ Isti kraj
+Tout près ¦ Sasvim blizu ¦ Čisto blizu
+Ancêtres possibles (2, 4, 8…) ¦ Mogući preci (2, 4, 8…) ¦ Mogoči predniki (2, 4, 8…)
+Places trouvées ¦ Pronađena mjesta ¦ Najdena mesta
+Carême et Avent ¦ Korizma i došašće ¦ Post in advent
+Si tout était égal ¦ Kad bi sve bilo jednako ¦ Če bi bilo vse enako
+Garçon ¦ Dječak ¦ Deček
+Autres lieux ¦ Ostala mjesta ¦ Drugi kraji
+Prendre dans ma base ¦ Uzmi iz moje baze ¦ Vzemi iz moje baze
+Personnes comptées ¦ Prebrojene osobe ¦ Preštete osebe
+🤝 Les vies autour d’une personne ¦ 🤝 Životi oko jedne osobe ¦ 🤝 Življenja okoli osebe
+Une courbe par ¦ Jedna krivulja po ¦ Ena krivulja na
+Une seule courbe ¦ Samo jedna krivulja ¦ Samo ena krivulja
+Lignées ¦ Loze ¦ Rodbinske linije
+Père → fils (lignées d’hommes) ¦ Otac → sin (muške loze) ¦ Oče → sin (moške linije)
+Rayon des mariages ¦ Polumjer vjenčanja ¦ Polmer porok
+🧮 L’ascendance d’une personne ¦ 🧮 Preci jedne osobe ¦ 🧮 Predniki osebe
+De (année) ¦ Od (godina) ¦ Od (leto)
+Quelles mères ¦ Koje majke ¦ Katere matere
+Une seule mère ¦ Samo jedna majka ¦ Samo ena mati
+Espacement des naissances ¦ Razmak između rođenja ¦ Razmiki med rojstvi
+Quelles personnes ¦ Koje osobe ¦ Katere osebe
+Générations d’ancêtres ¦ Generacije predaka ¦ Rodovi prednikov
+Début (année, vide = auto) ¦ Početak (godina, prazno = automatski) ¦ Začetek (leto, prazno = samodejno)
+Fin (année, vide = auto) ¦ Kraj (godina, prazno = automatski) ¦ Konec (leto, prazno = samodejno)
+Les personnes (une ligne chacune) ¦ Osobe (svaka u jednom retku) ¦ Osebe (vsaka v svoji vrstici)
+Ordre des groupes ¦ Redoslijed skupina ¦ Vrstni red skupin
+Les plus nombreux d’abord ¦ Najprije najbrojniji ¦ Najprej najštevilnejši
+Couleur des bandes ¦ Boja traka ¦ Barva trakov
+Cacher les métiers inconnus ¦ Sakrij nepoznata zanimanja ¦ Skrij neznane poklice
+Les couples ¦ Parovi ¦ Pari
+Année du mariage ¦ Godina vjenčanja ¦ Leto poroke
+Par siècle du mariage ¦ Po stoljeću vjenčanja ¦ Po stoletju poroke
+Selon la distance ¦ Prema udaljenosti ¦ Glede na razdaljo
+Où allait-on chercher son conjoint ? ¦ Gdje se tražio supružnik? ¦ Kje so iskali zakonca?
+Montrer les ancêtres possibles ¦ Prikaži moguće pretke ¦ Prikaži mogoče prednike
+Mon implexe, génération par génération ¦ Moj implex, generaciju po generaciju ¦ Moj implex, rod za rodom
+En % du total ¦ U % ukupnog ¦ V % celote
+Les années ¦ Godine ¦ Leta
+Ordre des mères ¦ Redoslijed majki ¦ Vrstni red mater
+Le plus d’enfants d’abord ¦ Najprije najviše djece ¦ Najprej največ otrok
+Chargement des personnes… ¦ Učitavanje osoba… ¦ Nalaganje oseb…
+Aucune fiche trouvée. ¦ Nije pronađen nijedan zapis. ¦ Ni najdenega zapisa.
+Frères et sœurs ¦ Braća i sestre ¦ Bratje in sestre
+Plier cette branche ¦ Sklopi ovu granu ¦ Zloži to vejo

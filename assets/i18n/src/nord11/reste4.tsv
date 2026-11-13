@@ -1,0 +1,238 @@
+fr ¦ vi ¦ id
+# ═════ zone « reste4 » : vietnamien (vi), indonésien (id) ═════
+Mesures anciennes par région ¦ Đơn vị đo xưa theo vùng ¦ Satuan lama per wilayah
+Les mesures changeaient d’une province, parfois d’un village à l’autre. Choisis la région, la valeur et l’unité : l’app donne l’équivalent en mètres, ares ou litres, et dans les autres mesures du lieu. ¦ Đơn vị đo thay đổi từ tỉnh này sang tỉnh khác, đôi khi từ làng này sang làng khác. Chọn vùng, giá trị và đơn vị: ứng dụng cho ra giá trị tương đương bằng mét, a hoặc lít, và theo các đơn vị khác của nơi đó. ¦ Satuan ukur berbeda dari satu provinsi ke provinsi lain, kadang dari satu desa ke desa lain. Pilih wilayah, nilai, dan satuannya: aplikasi memberi padanannya dalam meter, are, atau liter, dan dalam satuan lain di tempat itu.
+Région / ville ¦ Vùng / thành phố ¦ Wilayah / kota
+Entre une valeur. ¦ Hãy nhập một giá trị. ¦ Masukkan sebuah nilai.
+Longueurs ¦ Độ dài ¦ Panjang
+Grains (matières sèches) ¦ Hạt (hàng khô) ¦ Biji-bijian (barang kering)
+Liquides (vin, cidre, huile) ¦ Chất lỏng (rượu vang, rượu táo, dầu) ¦ Cairan (anggur, sari apel, minyak)
+kilomètre ¦ ki-lô-mét ¦ kilometer
+mètre carré ¦ mét vuông ¦ meter persegi
+are ¦ a ¦ are
+hectare ¦ héc-ta ¦ hektare
+litre ¦ lít ¦ liter
+hectolitre ¦ héc-tô-lít ¦ hektoliter
+Paris, Île-de-France (mesures du roi) ¦ Paris, Île-de-France (đơn vị của nhà vua) ¦ Paris, Île-de-France (satuan raja)
+Lyon, Lyonnais ¦ Lyon, Lyonnais ¦ Lyon, Lyonnais
+Bretagne (Rennes) ¦ Bretagne (Rennes) ¦ Bretagne (Rennes)
+Normandie (Rouen) ¦ Normandie (Rouen) ¦ Normandia (Rouen)
+Bourgogne (Dijon, Beaune) ¦ Bourgogne (Dijon, Beaune) ¦ Bourgogne (Dijon, Beaune)
+Provence (Marseille) ¦ Provence (Marseille) ¦ Provence (Marseille)
+Lorraine (Nancy) ¦ Lorraine (Nancy) ¦ Lorraine (Nancy)
+Alsace (Strasbourg) ¦ Alsace (Strasbourg) ¦ Alsace (Strasbourg)
+Flandre (Lille) ¦ Flandre (Lille) ¦ Flandria (Lille)
+très variable ¦ rất khác nhau ¦ sangat bervariasi
+très variable d’une ville à l’autre ¦ rất khác nhau giữa các thành phố ¦ sangat bervariasi dari kota ke kota
+très variable (de 1 500 à 3 000 m² selon le lieu) ¦ rất khác nhau (từ 1.500 đến 3.000 m² tùy nơi) ¦ sangat bervariasi (1.500 sampai 3.000 m² tergantung tempat)
+de 45 à 50 litres selon le lieu ¦ từ 45 đến 50 lít tùy nơi ¦ 45 sampai 50 liter tergantung tempat
+≈ : valeur approchée ou variable selon la ville. Sources : loi du 19 frimaire an VIII (pied du roi, toise) et « Tables de comparaison entre les mesures anciennes et celles qui les remplacent » publiées par département (an X – 1812). Pour une commune précise, cherche la table de ton département aux archives départementales. ¦ ≈: giá trị gần đúng hoặc thay đổi theo thành phố. Nguồn: luật ngày 19 frimaire năm VIII (pied du roi, toise) và “Tables de comparaison entre les mesures anciennes et celles qui les remplacent” xuất bản theo từng tỉnh (năm X – 1812). Với một xã cụ thể, hãy tìm bảng của tỉnh bạn tại lưu trữ cấp tỉnh. ¦ ≈: nilai perkiraan atau berbeda menurut kota. Sumber: undang-undang 19 Frimaire tahun VIII (pied du roi, toise) dan “Tables de comparaison entre les mesures anciennes et celles qui les remplacent” yang diterbitkan per departemen (tahun X – 1812). Untuk kota tertentu, cari tabel departemenmu di arsip departemen.
+Âge ↔ date de naissance ¦ Tuổi ↔ ngày sinh ¦ Usia ↔ tanggal lahir
+Les actes donnent souvent l’âge plutôt que la date de naissance. « 32 ans au décès le 12/03/1790 » → né entre deux dates. Ou l’inverse : l’âge exact à une date. ¦ Giấy tờ thường ghi tuổi thay vì ngày sinh. “32 tuổi khi mất ngày 12/03/1790” → sinh trong khoảng giữa hai ngày. Hoặc ngược lại: tuổi chính xác vào một ngày. ¦ Akta sering mencantumkan usia, bukan tanggal lahir. “32 tahun saat meninggal pada 12/03/1790” → lahir di antara dua tanggal. Atau sebaliknya: usia tepat pada suatu tanggal.
+exact (ans révolus) ¦ chính xác (tuổi tròn) ¦ tepat (tahun genap)
+« environ » (± 2 ans) ¦ “khoảng” (± 2 năm) ¦ “sekitar” (± 2 tahun)
+arrondi (± 5 ans) ¦ làm tròn (± 5 năm) ¦ dibulatkan (± 5 tahun)
+très vague (± 10 ans) ¦ rất mơ hồ (± 10 năm) ¦ sangat kabur (± 10 tahun)
+À la date de ¦ Vào ngày ¦ Pada tanggal
+Entre un âge et la date de l’acte. ¦ Hãy nhập tuổi và ngày của giấy tờ. ¦ Masukkan usia dan tanggal akta.
+Âge le ¦ Tuổi vào ngày ¦ Usia pada
+Entre une date de naissance et une autre date. ¦ Hãy nhập ngày sinh và một ngày khác. ¦ Masukkan tanggal lahir dan tanggal lain.
+Date non reconnue : écris par exemple 12/03/1790, 12 mars 1790, mars 1790 ou 1790. ¦ Không nhận ra ngày: hãy viết ví dụ 12/03/1790, 12 mars 1790, mars 1790 hoặc 1790. ¦ Tanggal tidak dikenali: tulis misalnya 12/03/1790, 12 mars 1790, mars 1790 atau 1790.
+Naissance entre le {from} et le {to} ¦ Sinh trong khoảng từ {from} đến {to} ¦ Lahir antara {from} dan {to}
+soit vers {when} (entre {lo} et {hi} révolus) ¦ tức là khoảng {when} (từ {lo} đến {hi} tuổi tròn) ¦ yaitu sekitar {when} (antara {lo} dan {hi} genap)
+soit vers {when} ¦ tức là khoảng {when} ¦ yaitu sekitar {when}
+Date non reconnue : écris par exemple 13/03/1757. ¦ Không nhận ra ngày: hãy viết ví dụ 13/03/1757. ¦ Tanggal tidak dikenali: tulis misalnya 13/03/1757.
+La seconde date est avant la naissance. ¦ Ngày thứ hai ở trước ngày sinh. ¦ Tanggal kedua sebelum kelahiran.
+soit {days} de vie ¦ tức là {days} của cuộc đời ¦ yaitu {days} hidup
+Entre {min} et {max} ¦ Từ {min} đến {max} ¦ Antara {min} dan {max}
+Une des dates est incomplète. ¦ Một trong hai ngày chưa đầy đủ. ¦ Salah satu tanggal tidak lengkap.
+Écart entre deux dates ¦ Khoảng cách giữa hai ngày ¦ Selisih antara dua tanggal
+Combien de temps entre deux actes ? Années, mois, jours, nombre total de jours et de semaines. Une date incomplète (« mars 1790 », « 1802 ») donne un écart minimum et maximum. ¦ Giữa hai giấy tờ cách nhau bao lâu? Năm, tháng, ngày, tổng số ngày và số tuần. Một ngày chưa đầy đủ (“mars 1790”, “1802”) cho khoảng cách tối thiểu và tối đa. ¦ Berapa lama antara dua akta? Tahun, bulan, hari, jumlah total hari dan minggu. Tanggal yang tidak lengkap (“mars 1790”, “1802”) memberi selisih minimum dan maksimum.
+9 novembre 1799 ¦ 9 novembre 1799 ¦ 9 novembre 1799
+Entre deux dates. ¦ Hãy nhập hai ngày. ¦ Masukkan dua tanggal.
+Date non reconnue : écris par exemple 14/07/1789, 14 juillet 1789, juillet 1789 ou 1789. ¦ Không nhận ra ngày: hãy viết ví dụ 14/07/1789, 14 juillet 1789, juillet 1789 hoặc 1789. ¦ Tanggal tidak dikenali: tulis misalnya 14/07/1789, 14 juillet 1789, juillet 1789 atau 1789.
+(la seconde date est la plus ancienne : écart compté à l’envers) ¦ (ngày thứ hai là ngày cũ hơn: khoảng cách được tính ngược) ¦ (tanggal kedua yang lebih lama: selisih dihitung mundur)
+{weeks} et {days} ¦ {weeks} và {days} ¦ {weeks} dan {days}
+Du {a} au {b} : une date est incomplète. ¦ Từ {a} đến {b}: có một ngày chưa đầy đủ. ¦ Dari {a} sampai {b}: satu tanggal tidak lengkap.
+=semaine ¦ tuần ¦ minggu
+Jour de la semaine ¦ Thứ trong tuần ¦ Hari dalam seminggu
+Quel jour tombait une date ? Avant 1582, le calendrier julien s’applique : choisis l’usage. ¦ Một ngày rơi vào thứ mấy? Trước năm 1582, áp dụng lịch Julius: hãy chọn cách dùng. ¦ Hari apa sebuah tanggal jatuh? Sebelum 1582, kalender Julian berlaku: pilih penggunaannya.
+France (julien jusqu’au 9 déc. 1582) ¦ Pháp (lịch Julius đến 9 thg 12 1582) ¦ Prancis (Julian sampai 9 Des. 1582)
+Rome (julien jusqu’au 4 oct. 1582) ¦ Rôma (lịch Julius đến 4 thg 10 1582) ¦ Roma (Julian sampai 4 Okt. 1582)
+Toujours grégorien ¦ Luôn theo lịch Gregory ¦ Selalu Gregorian
+Toujours julien ¦ Luôn theo lịch Julius ¦ Selalu Julian
+Indices pour la recherche (baptêmes, mariages…) ¦ Gợi ý cho việc nghiên cứu (rửa tội, kết hôn…) ¦ Petunjuk untuk riset (baptis, pernikahan…)
+Entre une date complète. ¦ Hãy nhập một ngày đầy đủ. ¦ Masukkan tanggal lengkap.
+Il faut une date complète : jour, mois et année (ex. 14/07/1789). ¦ Cần một ngày đầy đủ: ngày, tháng và năm (vd. 14/07/1789). ¦ Perlu tanggal lengkap: hari, bulan, dan tahun (mis. 14/07/1789).
+Ce jour n’a pas existé en France : le 9 décembre 1582 a été suivi du 20 décembre. ¦ Ngày này chưa từng có ở Pháp: sau ngày 9 tháng 12 năm 1582 là ngày 20 tháng 12. ¦ Hari ini tidak pernah ada di Prancis: 9 Desember 1582 langsung disusul 20 Desember.
+Ce jour n’a pas existé à Rome : le 4 octobre 1582 a été suivi du 15 octobre. ¦ Ngày này chưa từng có ở Rôma: sau ngày 4 tháng 10 năm 1582 là ngày 15 tháng 10. ¦ Hari ini tidak pernah ada di Roma: 4 Oktober 1582 langsung disusul 15 Oktober.
+soit le {date} dans le calendrier grégorien ¦ tức là ngày {date} theo lịch Gregory ¦ yaitu {date} dalam kalender Gregorian
+soit le {date} dans le calendrier julien ¦ tức là ngày {date} theo lịch Julius ¦ yaitu {date} dalam kalender Julian
+C’était un {day} ¦ Hôm đó là {day} ¦ Hari itu {day}
+julien ¦ lịch Julius ¦ Julian
+Jour du Seigneur : beaucoup de baptêmes (souvent le jour même ou le lendemain de la naissance) ; mariages rares. ¦ Ngày của Chúa: nhiều lễ rửa tội (thường ngay ngày sinh hoặc hôm sau); ít đám cưới. ¦ Hari Tuhan: banyak pembaptisan (sering pada hari kelahiran atau sehari sesudahnya); jarang pernikahan.
+Jour courant des mariages à la campagne sous l’Ancien Régime. ¦ Ngày cưới phổ biến ở nông thôn thời Chế độ cũ. ¦ Hari pernikahan yang umum di pedesaan pada masa Ancien Régime.
+Jour préféré des mariages dans bien des paroisses sous l’Ancien Régime. ¦ Ngày cưới được ưa chuộng ở nhiều giáo xứ thời Chế độ cũ. ¦ Hari pernikahan favorit di banyak paroki pada masa Ancien Régime.
+Jour maigre dans certains diocèses : mariages moins fréquents. ¦ Ngày kiêng thịt ở một số giáo phận: ít đám cưới hơn. ¦ Hari pantang di beberapa keuskupan: pernikahan lebih jarang.
+Jour ordinaire ; fêtes de l’Ascension et de la Fête-Dieu. ¦ Ngày thường; lễ Thăng Thiên và lễ Mình Thánh Chúa. ¦ Hari biasa; hari raya Kenaikan dan Tubuh dan Darah Kristus.
+Jour maigre (souvenir de la Passion) : on évitait de s’y marier. ¦ Ngày kiêng thịt (tưởng nhớ cuộc Khổ nạn): người ta tránh cưới vào ngày này. ¦ Hari pantang (mengenang Sengsara Kristus): orang menghindari menikah pada hari itu.
+Jour maigre jusqu’au XVIIIe siècle dans beaucoup de diocèses ; au XIXe, jour fréquent des mariages civils. ¦ Ngày kiêng thịt đến thế kỷ XVIII ở nhiều giáo phận; sang thế kỷ XIX, là ngày thường tổ chức hôn lễ dân sự. ¦ Hari pantang sampai abad ke-18 di banyak keuskupan; pada abad ke-19, hari yang sering dipakai untuk pernikahan sipil.
+Saint du jour et fêtes mobiles ¦ Thánh trong ngày và các lễ di động ¦ Santo hari ini dan hari raya bergerak
+Les fêtes mobiles dépendent de Pâques. Le saint du jour aide à comprendre un prénom : on donnait souvent celui du saint de la naissance ou du baptême. ¦ Các lễ di động phụ thuộc vào lễ Phục Sinh. Thánh trong ngày giúp hiểu một cái tên: người ta thường đặt tên theo vị thánh của ngày sinh hoặc ngày rửa tội. ¦ Hari raya bergerak bergantung pada Paskah. Santo hari itu membantu memahami sebuah nama depan: anak sering diberi nama santo hari kelahiran atau baptisnya.
+Comput ¦ Phép tính lịch ¦ Komputus
+auto (julien avant 1583) ¦ tự động (lịch Julius trước 1583) ¦ otomatis (Julian sebelum 1583)
+date|Mois ¦ Tháng ¦ Bulan
+Entre une année entre 400 et 2400. ¦ Hãy nhập một năm từ 400 đến 2400. ¦ Masukkan tahun antara 400 dan 2400.
+Dates dans le calendrier julien. ¦ Ngày tháng theo lịch Julius. ¦ Tanggal dalam kalender Julian.
+Ce jour n’existe pas. ¦ Ngày này không tồn tại. ¦ Hari ini tidak ada.
+Dans ta base, nés ou baptisés ce jour : ¦ Trong dữ liệu của bạn, những người sinh hoặc rửa tội vào ngày này: ¦ Di basis datamu, yang lahir atau dibaptis pada hari ini:
+porte le prénom du saint du jour ¦ mang tên vị thánh của ngày ¦ memakai nama santo hari itu
+Saint du jour indisponible. ¦ Không có thông tin thánh trong ngày. ¦ Santo hari ini tidak tersedia.
+Saints : calendrier usuel des almanachs français (celui du widget « Prénom et saint du jour ») ; il a varié selon les époques et les diocèses. ¦ Các thánh: lịch thông dụng trong niên lịch Pháp (lịch của tiện ích “Tên và thánh trong ngày”); lịch này đã thay đổi theo thời kỳ và giáo phận. ¦ Santo: kalender umum almanak Prancis (yang dipakai widget “Nama depan dan santo hari ini”); kalender ini berubah menurut zaman dan keuskupan.
+dimanche, début du temps de la Septuagésime ¦ Chủ nhật, bắt đầu mùa Septuagesima ¦ Minggu, awal masa Septuagesima
+dimanche ¦ Chủ nhật ¦ Minggu
+dimanche gras ¦ Chủ nhật trước Mùa Chay ¦ Minggu sebelum Prapaskah
+veille des Cendres, fin du carnaval ¦ hôm trước Thứ Tư Lễ Tro, kết thúc lễ hội hóa trang ¦ sehari sebelum Rabu Abu, akhir karnaval
+début du Carême : plus de mariages jusqu’à Pâques ¦ bắt đầu Mùa Chay: không còn đám cưới cho đến lễ Phục Sinh ¦ awal Prapaskah: tidak ada pernikahan sampai Paskah
+dimanche des Brandons ¦ Chủ nhật đốt lửa (Brandons) ¦ Minggu Brandons (api unggun)
+jeudi ¦ thứ Năm ¦ Kamis
+Pâques fleuries ¦ Chủ nhật Lễ Lá ¦ Minggu Palma
+baptêmes solennels ¦ lễ rửa tội long trọng ¦ pembaptisan meriah
+dimanche, fin du temps pascal des mariages interdits ¦ Chủ nhật, kết thúc mùa Phục Sinh không được cưới ¦ Minggu, akhir masa Paskah tanpa pernikahan
+lundi, processions dans les champs ¦ thứ Hai, rước kiệu ngoài đồng ¦ Senin, prosesi di ladang
+jeudi (fêtée le dimanche suivant après 1802) ¦ thứ Năm (từ sau 1802 mừng vào Chủ nhật kế tiếp) ¦ Kamis (dirayakan Minggu berikutnya sesudah 1802)
+vendredi ¦ thứ Sáu ¦ Jumat
+Heures canoniques ¦ Giờ kinh phụng vụ ¦ Jam kanonik
+Les actes datent parfois à « l’heure de vêpres » ou « à l’issue de la grand-messe ». Les heures de l’Église suivaient le soleil : le jour était coupé en 12 heures, plus longues en été qu’en hiver. ¦ Giấy tờ đôi khi ghi giờ “vào giờ kinh chiều” hoặc “sau thánh lễ trọng”. Giờ của Giáo hội theo mặt trời: ban ngày chia làm 12 giờ, mùa hè dài hơn mùa đông. ¦ Akta kadang mencatat waktu “pada jam ibadat sore” atau “sesudah misa agung”. Jam Gereja mengikuti matahari: siang hari dibagi menjadi 12 jam, lebih panjang di musim panas daripada di musim dingin.
+(équinoxe) ¦ (điểm phân) ¦ (ekuinoks)
+(jours les plus longs) ¦ (những ngày dài nhất) ¦ (hari-hari terpanjang)
+(jours les plus courts) ¦ (những ngày ngắn nhất) ¦ (hari-hari terpendek)
+vers {time} ¦ khoảng {time} ¦ sekitar {time}
+{winter} en hiver, {summer} en été ¦ {winter} vào mùa đông, {summer} vào mùa hè ¦ {winter} di musim dingin, {summer} di musim panas
+Écris la mention (« à l’heure de vêpres », « après complies »…) ou lis le tableau. ¦ Viết ghi chú bằng tiếng Pháp (“à l’heure de vêpres”, “après complies”…) hoặc xem bảng. ¦ Tulis keterangannya dalam bahasa Prancis (“à l’heure de vêpres”, “après complies”…) atau baca tabelnya.
+{hour} en {month} : {time} ¦ {hour} vào {month}: {time} ¦ {hour} pada {month}: {time}
+entre {dec} en décembre et {jun} en juin ¦ từ {dec} vào tháng 12 đến {jun} vào tháng 6 ¦ antara {dec} di bulan Desember dan {jun} di bulan Juni
+Heure non reconnue : matines, laudes, prime, tierce, sexte, none, vêpres, complies ou angélus. ¦ Không nhận ra giờ: matines, laudes, prime, tierce, sexte, none, vêpres, complies hoặc angélus. ¦ Jam tidak dikenali: matines, laudes, prime, tierce, sexte, none, vêpres, complies atau angélus.
+office de la nuit (dans les paroisses, souvent chanté la veille au soir ou au petit matin) ¦ kinh đêm (ở giáo xứ, thường hát tối hôm trước hoặc sáng sớm) ¦ ibadat malam (di paroki, sering dinyanyikan malam sebelumnya atau dini hari)
+à l’aube, avant le lever du soleil ¦ lúc rạng đông, trước khi mặt trời mọc ¦ saat fajar, sebelum matahari terbit
+6e heure, midi ¦ giờ thứ 6, giữa trưa ¦ jam ke-6, tengah hari
+à la tombée du jour (le dimanche, à la paroisse, souvent dès le début de l’après-midi) ¦ lúc chiều tà (Chủ nhật, ở giáo xứ, thường từ đầu buổi chiều) ¦ menjelang petang (pada hari Minggu, di paroki, sering sejak awal siang)
+à la nuit, avant le coucher ¦ ban đêm, trước khi đi ngủ ¦ malam hari, sebelum tidur
+cloche du matin, de midi et du soir ¦ chuông sáng, trưa và tối ¦ lonceng pagi, siang, dan sore
+Heure solaire (midi = soleil au plus haut), calculée pour le centre de la France ; l’heure légale n’existe qu’à partir de 1891. Les horaires réels variaient selon les paroisses et les couvents. ¦ Giờ mặt trời (giữa trưa = mặt trời lên cao nhất), tính cho miền trung nước Pháp; giờ chính thức chỉ có từ năm 1891. Giờ thực tế khác nhau tùy giáo xứ và tu viện. ¦ Waktu matahari (tengah hari = matahari di titik tertinggi), dihitung untuk Prancis bagian tengah; waktu resmi baru ada sejak 1891. Jam sebenarnya berbeda-beda menurut paroki dan biara.
+Monnaies étrangères anciennes ¦ Tiền nước ngoài xưa ¦ Mata uang asing lama
+Dans les contrats et inventaires, on trouve des pistoles, ducats, florins ou piastres. Leur valeur en livres tournois, monnaie de compte du royaume, selon l’époque. ¦ Trong các hợp đồng và bản kiểm kê, có thể gặp pistole, ducat, florin hoặc piastre. Giá trị của chúng tính bằng livre tournois, đơn vị tiền tệ kế toán của vương quốc, theo từng thời kỳ. ¦ Dalam kontrak dan inventaris, ditemukan pistole, dukat, florin, atau piaster. Nilainya dalam livre tournois, satuan hitung kerajaan, menurut zamannya.
+Monnaie ¦ Đồng tiền ¦ Mata uang
+XVIIe siècle (1640-1700) ¦ Thế kỷ XVII (1640-1700) ¦ Abad ke-17 (1640-1700)
+XVIIIe siècle (1726-1789) ¦ Thế kỷ XVIII (1726-1789) ¦ Abad ke-18 (1726-1789)
+Toutes les monnaies à cette époque ¦ Tất cả các đồng tiền thời đó ¦ Semua mata uang pada zaman itu
+soit ≈ {n} livres ¦ tức là ≈ {n} livre ¦ yaitu ≈ {n} livre
+Cette monnaie n’avait pas cours en France à cette époque. ¦ Đồng tiền này không được lưu hành ở Pháp vào thời đó. ¦ Mata uang ini tidak berlaku di Prancis pada zaman itu.
+Louis d’or (France) ¦ Louis d’or (Pháp) ¦ Louis d’or (Prancis)
+Écu d’or au soleil (France) ¦ Écu d’or au soleil (Pháp) ¦ Écu d’or au soleil (Prancis)
+Écu blanc ou louis d’argent (France) ¦ Écu blanc hoặc louis bạc (Pháp) ¦ Écu blanc atau louis perak (Prancis)
+Pistole (Espagne, Italie) ¦ Pistole (Tây Ban Nha, Ý) ¦ Pistole (Spanyol, Italia)
+Ducat d’or (Venise, Hollande, Empire) ¦ Ducat vàng (Venezia, Hà Lan, Đế quốc) ¦ Dukat emas (Venesia, Belanda, Kekaisaran)
+Florin de Hollande (gulden) ¦ Florin Hà Lan (gulden) ¦ Florin Belanda (gulden)
+Gulden ou florin du Rhin (Allemagne, Alsace, Suisse) ¦ Gulden hoặc florin sông Rhine (Đức, Alsace, Thụy Sĩ) ¦ Gulden atau florin Rhein (Jerman, Alsace, Swiss)
+Thaler, rixdale (Empire, Saxe, Prusse) ¦ Thaler, rixdale (Đế quốc, Sachsen, Phổ) ¦ Thaler, rixdale (Kekaisaran, Sachsen, Prusia)
+Piastre ou réal de huit (Espagne) ¦ Piastre hoặc real tám (Tây Ban Nha) ¦ Piaster atau real delapan (Spanyol)
+Livre sterling (Angleterre) ¦ Bảng Anh (Anh) ¦ Pound sterling (Inggris)
+Livre de Lorraine ¦ Livre Lorraine ¦ Livre Lorraine
+créé en 1640 à 10 livres ; 24 livres de 1726 à la Révolution ¦ ra đời năm 1640 với giá 10 livre; 24 livre từ 1726 đến Cách mạng ¦ dibuat tahun 1640 senilai 10 livre; 24 livre dari 1726 sampai Revolusi
+plus frappé après 1640 ¦ không còn được đúc sau 1640 ¦ tidak dicetak lagi sesudah 1640
+3 livres en 1641 ; gros écu de 6 livres (et petit écu de 3 livres) au XVIIIe ¦ 3 livre năm 1641; écu lớn 6 livre (và écu nhỏ 3 livre) vào thế kỷ XVIII ¦ 3 livre pada 1641; écu besar 6 livre (dan écu kecil 3 livre) pada abad ke-18
+souvent une monnaie de compte valant 10 livres ¦ thường là đơn vị tiền kế toán trị giá 10 livre ¦ sering berupa satuan hitung senilai 10 livre
+« piastre gourde » des colonies ¦ “piastre gourde” của các thuộc địa ¦ “piastre gourde” dari daerah koloni
+monnaie de compte, d’après le cours du change ¦ đơn vị tiền kế toán, theo tỷ giá hối đoái ¦ satuan hitung, berdasarkan kurs
+15 sols 6 deniers tournois ¦ 15 sol 6 denier tournois ¦ 15 sol 6 denier tournois
+Valeurs approchées (≈), d’après les ordonnances monétaires de Louis XIII à Louis XVI, le poids d’or ou d’argent fin des pièces et le cours du change à Paris (Savary, « Dictionnaire universel de commerce »). Les cours bougeaient souvent, surtout de 1689 à 1726 : c’est un ordre de grandeur. ¦ Giá trị gần đúng (≈), dựa trên các sắc lệnh tiền tệ từ Louis XIII đến Louis XVI, trọng lượng vàng hoặc bạc ròng của đồng tiền và tỷ giá hối đoái ở Paris (Savary, “Dictionnaire universel de commerce”). Tỷ giá thay đổi thường xuyên, nhất là từ 1689 đến 1726: đây chỉ là con số ước lượng. ¦ Nilai perkiraan (≈), berdasarkan peraturan moneter dari Louis XIII sampai Louis XVI, berat emas atau perak murni koin, dan kurs di Paris (Savary, “Dictionnaire universel de commerce”). Kurs sering berubah, terutama dari 1689 sampai 1726: ini hanya gambaran kasar.
+Calculateur de générations ¦ Máy tính thế hệ ¦ Kalkulator generasi
+Combien de générations entre deux années ? En moyenne 25 à 33 ans par génération : environ 30 ans en lignée masculine, 27 ans en lignée féminine. ¦ Giữa hai năm có bao nhiêu thế hệ? Trung bình 25 đến 33 năm mỗi thế hệ: khoảng 30 năm theo dòng nam, 27 năm theo dòng nữ. ¦ Berapa generasi di antara dua tahun? Rata-rata 25 sampai 33 tahun per generasi: sekitar 30 tahun di garis laki-laki, 27 tahun di garis perempuan.
+Année (ta naissance) ¦ Năm (năm sinh của bạn) ¦ Tahun (kelahiranmu)
+Année (l’ancêtre) ¦ Năm (của tổ tiên) ¦ Tahun (leluhur)
+Entre deux années. ¦ Hãy nhập hai năm. ¦ Masukkan dua tahun.
+Générations en arrière ¦ Số thế hệ lùi lại ¦ Generasi ke belakang
+Depuis l’année ¦ Từ năm ¦ Sejak tahun
+Entre deux années différentes. ¦ Hãy nhập hai năm khác nhau. ¦ Masukkan dua tahun yang berbeda.
+Environ {min} à {max} générations ¦ Khoảng {min} đến {max} thế hệ ¦ Sekitar {min} sampai {max} generasi
+{years} : ≈ {male} générations en lignée masculine (30 ans), ≈ {female} en lignée féminine (27 ans) ¦ {years}: ≈ {male} thế hệ theo dòng nam (30 năm), ≈ {female} theo dòng nữ (27 năm) ¦ {years}: ≈ {male} generasi di garis laki-laki (30 tahun), ≈ {female} di garis perempuan (27 tahun)
+Entre un nombre de générations (1 à 40) et une année. ¦ Hãy nhập số thế hệ (1 đến 40) và một năm. ¦ Masukkan jumlah generasi (1 sampai 40) dan sebuah tahun.
+ancêtres de la génération {n} ¦ tổ tiên ở thế hệ {n} ¦ leluhur generasi {n}
+{gens} en arrière → nés vers {from}–{to} ¦ lùi {gens} → sinh khoảng {from}–{to} ¦ {gens} ke belakang → lahir sekitar {from}–{to}
+≈ {male} en lignée masculine, ≈ {female} en lignée féminine ¦ ≈ {male} theo dòng nam, ≈ {female} theo dòng nữ ¦ ≈ {male} di garis laki-laki, ≈ {female} di garis perempuan
+{at} {label} en théorie (Sosa {from} à {to}) ; {total} ancêtres en tout jusqu’à cette génération ¦ {at} {label} theo lý thuyết (Sosa {from} đến {to}); tổng cộng {total} tổ tiên tính đến thế hệ này ¦ {at} {label} secara teori (Sosa {from} sampai {to}); total {total} leluhur sampai generasi ini
+Le nombre d’ancêtres double à chaque génération en théorie ; en pratique il y en a moins, car des cousins se sont mariés entre eux (l’implexe). ¦ Theo lý thuyết, số tổ tiên tăng gấp đôi sau mỗi thế hệ; thực tế thì ít hơn, vì có những người anh em họ kết hôn với nhau (sự trùng lặp tổ tiên). ¦ Secara teori, jumlah leluhur berlipat dua setiap generasi; kenyataannya lebih sedikit, karena ada sepupu yang saling menikah (implex).
+le jour de la Pentecôte 1754 ¦ le jour de la Pentecôte 1754 ¦ le jour de la Pentecôte 1754
+/Documents/Scans généalogie ¦ /Documents/Ảnh quét gia phả ¦ /Documents/Pindaian silsilah
+Saint-Martin de Brive ¦ Saint-Martin de Brive ¦ Saint-Martin de Brive
+Paroisse érigée en 1792 ; voir aussi la chapelle de… ¦ Giáo xứ thành lập năm 1792; xem thêm nhà nguyện… ¦ Paroki didirikan pada 1792; lihat juga kapel…
+Religion et noblesse ¦ Tôn giáo và quý tộc ¦ Agama dan bangsawan
+Travail et société ¦ Lao động và xã hội ¦ Pekerjaan dan masyarakat
+Voyages et lieux ¦ Du lịch và địa điểm ¦ Perjalanan dan tempat
+Temps et nature ¦ Thời tiết và thiên nhiên ¦ Cuaca dan alam
+Formes et repères ¦ Hình dạng và dấu mốc ¦ Bentuk dan penanda
+Artistique ¦ Nghệ thuật ¦ Artistik
+Voyages ¦ Du lịch ¦ Perjalanan
+Tous les emojis ¦ Tất cả emoji ¦ Semua emoji
+Autres emojis ¦ Emoji khác ¦ Emoji lain
+Choisir un fond ¦ Chọn nền ¦ Pilih latar
+Choisir un fond… ¦ Chọn nền… ¦ Pilih latar…
+Choisir un fond de carte ¦ Chọn nền bản đồ ¦ Pilih peta dasar
+Choisir une icône… ¦ Chọn biểu tượng… ¦ Pilih ikon…
+Aucune icône ¦ Không có biểu tượng ¦ Tanpa ikon
+Aucun fond ¦ Không có nền ¦ Tanpa latar
+choisir ¦ chọn ¦ pilih
+valider ¦ xác nhận ¦ konfirmasi
+fermer ¦ đóng ¦ tutup
+Chercher une icône ¦ Tìm biểu tượng ¦ Cari ikon
+Chercher un fond ¦ Tìm nền ¦ Cari latar
+Chercher un fond… (ex. Cassini, relief, 1850) ¦ Tìm nền… (vd. Cassini, địa hình, 1850) ¦ Cari latar… (mis. Cassini, relief, 1850)
+Chercher… (ex. coeur, bateau, chien) ¦ Tìm… (bằng tiếng Pháp, vd. coeur, bateau, chien) ¦ Cari… (dalam bahasa Prancis, mis. coeur, bateau, chien)
+Chercher… (ex. église, mariage, étoile) ¦ Tìm… (vd. nhà thờ, đám cưới, ngôi sao) ¦ Cari… (mis. gereja, pernikahan, bintang)
+Utiliser « {x} » ¦ Dùng “{x}” ¦ Gunakan “{x}”
+1 icône pour « {q} » ¦ 1 biểu tượng cho “{q}” ¦ 1 ikon untuk “{q}”
+{n} icônes pour « {q} » ¦ {n} biểu tượng cho “{q}” ¦ {n} ikon untuk “{q}”
+1 fond pour « {q} » ¦ 1 nền cho “{q}” ¦ 1 latar untuk “{q}”
+{n} fonds pour « {q} » ¦ {n} nền cho “{q}” ¦ {n} latar untuk “{q}”
+Rien pour « {q} ». Vérifie l’orthographe, ou essaie un autre mot. ¦ Không có gì cho “{q}”. Hãy kiểm tra chính tả, hoặc thử từ khác. ¦ Tidak ada untuk “{q}”. Periksa ejaannya, atau coba kata lain.
+Retirer l’icône ¦ Gỡ biểu tượng ¦ Lepas ikon
+Retirer le fond ¦ Gỡ nền ¦ Lepas latar
+Allemand et alsacien ¦ Tiếng Đức và tiếng Alsace ¦ Bahasa Jerman dan Alsace
+Néerlandais / flamand ¦ Tiếng Hà Lan / Flemish ¦ Bahasa Belanda / Flam
+Croate / serbe en lettres latines ¦ Tiếng Croatia / Serbia chữ Latinh ¦ Bahasa Kroasia / Serbia huruf Latin
+Slovène ¦ Tiếng Slovenia ¦ Bahasa Slovenia
+Gaélique irlandais ¦ Tiếng Gael Ireland ¦ Bahasa Gaelik Irlandia
+Biélorusse ¦ Tiếng Belarus ¦ Bahasa Belarus
+Serbe en cyrillique ¦ Tiếng Serbia chữ Kirin ¦ Bahasa Serbia huruf Kiril
+Hébreu ¦ Tiếng Do Thái ¦ Bahasa Ibrani
+Dates du calendrier grégorien. Les âges des actes anciens sont souvent approximatifs : « environ 40 ans » peut cacher 35 ou 45 ans. ¦ Ngày tháng theo lịch Gregory. Tuổi trong giấy tờ xưa thường chỉ gần đúng: “khoảng 40 tuổi” có thể là 35 hoặc 45 tuổi. ¦ Tanggal dalam kalender Gregorian. Usia dalam akta lama sering hanya perkiraan: “sekitar 40 tahun” bisa berarti 35 atau 45 tahun.
+Changer dans l’onglet Personnes ¦ Đổi trong thẻ Người ¦ Ubah di tab Orang
+Mode de chronologie parallèle ¦ Chế độ dòng thời gian song song ¦ Mode linimasa paralel
+Les événements sans année restent sur les fiches. ¦ Các sự kiện không có năm vẫn nằm trên hồ sơ. ¦ Peristiwa tanpa tahun tetap ada di profil.
+Modifier la frise historique ¦ Sửa dòng thời gian lịch sử ¦ Ubah linimasa sejarah
+Les grands événements livrés avec l’app, et les tiens (histoire locale) ¦ Các sự kiện lớn có sẵn trong ứng dụng, và sự kiện của bạn (lịch sử địa phương) ¦ Peristiwa besar bawaan aplikasi, dan milikmu (sejarah lokal)
+Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z ou en 📁 dossiers), la fiche à droite. ¦ Tư liệu và hiện vật lưu trữ trong dữ liệu của bạn, bày như với người: danh sách bên trái (A → Z hoặc theo 📁 thư mục), hồ sơ bên phải. ¦ Media dan dokumen arsip di basis datamu, ditata seperti orang: daftar di kiri (A → Z atau dalam 📁 folder), profil di kanan.
+Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche (en ce moment : {n}) ¦ Các thư mục báu vật (đổi tên, tạo, xoá, chọn những gì cho vào), thứ tự, những gì được hiển thị (hiện tại: {n}) ¦ Folder harta (mengganti nama, membuat, menghapus, memilih isinya), urutan, apa yang ditampilkan (saat ini: {n})
+Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche ¦ Các thư mục báu vật (đổi tên, tạo, xoá, chọn những gì cho vào), thứ tự, những gì được hiển thị ¦ Folder harta (mengganti nama, membuat, menghapus, memilih isinya), urutan, apa yang ditampilkan
+Me le rappeler (la veille, une semaine avant…) ¦ Nhắc tôi (hôm trước, một tuần trước…) ¦ Ingatkan saya (sehari sebelumnya, seminggu sebelumnya…)
+choses à vérifier ¦ điều cần kiểm tra ¦ hal yang perlu dicek
+Pour montrer l’arbre à quelqu’un qui n’est pas à l’aise avec l’ordinateur : de très gros boutons, seulement l’arbre, les photos et les fiches, et rien qu’on puisse modifier par erreur. ¦ Để cho người không quen dùng máy tính xem cây gia phả: nút rất to, chỉ có cây, ảnh và hồ sơ, và không có gì có thể bị sửa nhầm. ¦ Untuk menunjukkan pohon kepada orang yang kurang terbiasa dengan komputer: tombol sangat besar, hanya pohon, foto, dan profil, dan tidak ada yang bisa terubah tanpa sengaja.
+Aucune hypothèse : une question à trancher (« né à Naves ou à Tulle ? »), avec les preuves pour et contre. ¦ Chưa có giả thuyết nào: một câu hỏi cần giải đáp (“sinh ở Naves hay ở Tulle?”), với các bằng chứng ủng hộ và phản bác. ¦ Belum ada hipotesis: sebuah pertanyaan untuk diputuskan (“lahir di Naves atau di Tulle?”), dengan bukti yang mendukung dan menentang.
+Détaillée ¦ Chi tiết ¦ Terperinci
+Ce qu’on inclut ¦ Những gì được đưa vào ¦ Yang disertakan
+Texte de l’app ¦ Văn bản của ứng dụng ¦ Teks aplikasi
+Regénérer ¦ Tạo lại ¦ Buat ulang
+Une journée… ¦ Một ngày trong đời… ¦ Sehari dalam hidup…
+Réécrire le texte d’après la fiche et voir ce qui a changé ¦ Viết lại văn bản theo hồ sơ và xem những gì đã thay đổi ¦ Tulis ulang teks berdasarkan profil dan lihat apa yang berubah
+Un petit récit d’un jour de sa vie : âge, famille, village, métier, calendrier, météo, contexte ¦ Một câu chuyện ngắn về một ngày trong đời người ấy: tuổi, gia đình, làng, nghề nghiệp, lịch, thời tiết, bối cảnh ¦ Cerita pendek tentang satu hari dalam hidupnya: usia, keluarga, desa, pekerjaan, kalender, cuaca, konteks
+Ajouter un événement local ¦ Thêm một sự kiện địa phương ¦ Tambah peristiwa lokal
+Rien dans cette sorte pendant sa vie. ¦ Không có gì thuộc loại này trong cuộc đời người ấy. ¦ Tidak ada jenis ini selama hidupnya.
+Voir toute la liste et ses sources ¦ Xem toàn bộ danh sách và nguồn ¦ Lihat seluruh daftar dan sumbernya
+Une fête, une inondation, un incendie au village… rattaché à une commune ¦ Một lễ hội, một trận lụt, một vụ cháy trong làng… gắn với một xã ¦ Sebuah pesta, banjir, kebakaran di desa… terkait dengan sebuah kota
+Sortes d’événements ¦ Loại sự kiện ¦ Jenis peristiwa
+Un article, une interview à la radio, une émission de télé, un avis de naissance ou une nécrologie, une photo publiée… ¦ Một bài báo, một cuộc phỏng vấn trên đài, một chương trình truyền hình, một thông báo sinh hoặc cáo phó, một bức ảnh được đăng… ¦ Sebuah artikel, wawancara radio, acara TV, pengumuman kelahiran atau obituari, foto yang diterbitkan…
+Ajouter un passage ¦ Thêm một lần xuất hiện ¦ Tambah penampilan
+La revue de presse de cette personne ¦ Điểm báo về người này ¦ Kliping media orang ini
+Modifier l’identifiant Wikidata ¦ Sửa mã định danh Wikidata ¦ Ubah ID Wikidata
+Plus de détails ¦ Thêm chi tiết ¦ Detail lainnya

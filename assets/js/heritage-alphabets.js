@@ -8,6 +8,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => { const I = (typeof window !== 'undefined' ? window : globalThis).LCNDA_I18N; if (v) v = Object.fromEntries(Object.entries(v).map(([k, x]) => [k, typeof x === 'number' ? String(x) : x])); return I ? I.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m)) : s); }; // 🌐 textes traduits (docs/I18N.md) ; nombres gardés tels quels
     const A = () => window.LCNDA_APP;
     const D = () => window.LCNDA_ALPHABETS || {languages: [], keyboard: {}, names: {}, keyTr: {}, scripts: {}};
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
@@ -191,7 +192,7 @@
     const translit = (text, o = {}) => translitGreek(translitCyrillic(text, o), o);
 
     /* ═════════════ Rendu ═════════════ */
-    const TABS = [['lang', '🔤 Une langue'], ['guess', '🔎 Quelle langue ?'], ['keys', '⌨\uFE0F Cyrillique et grec']];
+    const TABS = [['lang', `🔤 ${i18n('Une langue')}`], ['guess', `🔎 ${i18n('Quelle langue ?')}`], ['keys', `⌨\uFE0F ${i18n('Cyrillique et grec')}`]];
     const RTL = new Set(['hebrew', 'arabic']);
     const trText = (l, c) => { const t = l.tr?.[c] || D().keyTr?.[c]; if (!t) return ''; return t[0] === t[1] || !t[1] ? t[0] : `${t[0]} · ${t[1]}`; };
     const cell = (l, c, i, special) => {
@@ -204,33 +205,33 @@
     function langHtml(id) {
         const {langs, byId} = build();
         const l = byId[id] || langs[0];
-        if (!l) return '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔤</span><span class="empty-line-text">Aucune langue.</span></p>';
+        if (!l) return `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔤</span><span class="empty-line-text">${i18n('Aucune langue.')}</span></p>`;
         const specials = new Set(l.special || []);
-        const trLegend = l.tr ? `<p class="h-abc-legend">Sous chaque lettre : sa translittération (${esc((l.trLabels || ['usuelle', 'savante']).join(' · '))}).</p>` : '';
-        const alpha = `<h4>L’alphabet <small>(${plural(l.alphabet.length, 'lettre')})</small></h4>${trLegend}${specials.size && l.alphabet.some(c => specials.has(c)) ? '<p class="h-abc-legend"><span class="h-abc-dot"></span> lettres à accents ou propres à la langue</p>' : ''}
+        const trLegend = l.tr ? `<p class="h-abc-legend">${i18n('Sous chaque lettre : sa translittération ({x}).', {x: esc((l.trLabels || ['usuelle', 'savante']).join(' · '))})}</p>` : '';
+        const alpha = `<h4>${i18n('L’alphabet')} <small>(${plural(l.alphabet.length, 'lettre')})</small></h4>${trLegend}${specials.size && l.alphabet.some(c => specials.has(c)) ? `<p class="h-abc-legend"><span class="h-abc-dot"></span> ${i18n('lettres à accents ou propres à la langue')}</p>` : ''}
             <div class="h-abc-grid">${l.alphabet.map((c, i) => cell(l, c, i, specials.has(c))).join('')}</div>`;
-        const sp = l.special?.length ? `<h4>Lettres à accents et lettres spéciales</h4><div class="h-abc-grid">${l.special.map(c => cell(l, c, -1, true)).join('')}</div>`
-            : '<h4>Lettres à accents et lettres spéciales</h4><p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔤</span><span class="empty-line-text">Aucune : cette langue n’a pas de lettres à accents.</span></p>';
-        const extra = l.extra?.length ? `<p class="h-abc-extra"><strong>${frText(l.extraLabel || 'Seulement dans les mots et les noms étrangers :')}</strong> ${l.extra.map(c => `<span class="h-abc-mini" lang="${esc(l.id)}">${esc(c)}</span>`).join(' ')}</p>` : '';
-        const old = l.old?.length ? `<h4>Lettres anciennes et abréviations des actes</h4><ul class="h-abc-old">${l.old.map(([c, note]) => `<li><span class="h-abc-oldglyph" lang="${esc(l.id)}"${RTL.has(l.script) ? ' dir="rtl"' : ''}>${esc(c)}</span><span>${frText(note)}</span></li>`).join('')}</ul>` : '';
-        const hints = `<h4>Comment la reconnaître</h4><ul class="h-abc-hints">${(l.hints || []).map(h => `<li>${frText(h)}</li>`).join('')}</ul>`;
-        const words = l.words?.length ? `<p class="h-abc-words"><strong>Mots fréquents dans les actes :</strong> ${l.words.slice(0, 12).map(w => `<span class="h-abc-word" lang="${esc(l.id)}"${RTL.has(l.script) ? ' dir="rtl"' : ''}>${esc(w)}</span>`).join(' ')}</p>` : '';
+        const sp = l.special?.length ? `<h4>${i18n('Lettres à accents et lettres spéciales')}</h4><div class="h-abc-grid">${l.special.map(c => cell(l, c, -1, true)).join('')}</div>`
+            : `<h4>${i18n('Lettres à accents et lettres spéciales')}</h4><p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔤</span><span class="empty-line-text">${i18n('Aucune : cette langue n’a pas de lettres à accents.')}</span></p>`;
+        const extra = l.extra?.length ? `<p class="h-abc-extra"><strong>${frText(l.extraLabel || i18n('Seulement dans les mots et les noms étrangers :'))}</strong> ${l.extra.map(c => `<span class="h-abc-mini" lang="${esc(l.id)}">${esc(c)}</span>`).join(' ')}</p>` : '';
+        const old = l.old?.length ? `<h4>${i18n('Lettres anciennes et abréviations des actes')}</h4><ul class="h-abc-old">${l.old.map(([c, note]) => `<li><span class="h-abc-oldglyph" lang="${esc(l.id)}"${RTL.has(l.script) ? ' dir="rtl"' : ''}>${esc(c)}</span><span>${frText(note)}</span></li>`).join('')}</ul>` : '';
+        const hints = `<h4>${i18n('Comment la reconnaître')}</h4><ul class="h-abc-hints">${(l.hints || []).map(h => `<li>${frText(h)}</li>`).join('')}</ul>`;
+        const words = l.words?.length ? `<p class="h-abc-words"><strong>${i18n('Mots fréquents dans les actes :')}</strong> ${l.words.slice(0, 12).map(w => `<span class="h-abc-word" lang="${esc(l.id)}"${RTL.has(l.script) ? ' dir="rtl"' : ''}>${esc(w)}</span>`).join(' ')}</p>` : '';
         return `<div class="h-abc-lang" data-abc-current="${esc(l.id)}">${alpha}${sp}${extra}${old}${hints}${words}</div>`;
     }
-    const LEVEL = {3: ['très probable', 'is-high'], 2: ['probable', 'is-mid'], 1: ['possible', 'is-low']};
+    const LEVEL = {3: [i18n('très probable'), 'is-high'], 2: ['probable', 'is-mid'], 1: ['possible', 'is-low']};
     function guessHtml(text) {
-        if (!String(text || '').trim()) return '<p class="muted">Tape une lettre (ł, ő, ж, ω…) ou un mot entier de l’acte : les langues possibles s’affichent, les plus probables d’abord.</p>';
+        if (!String(text || '').trim()) return `<p class="muted">${i18n('Tape une lettre (ł, ő, ж, ω…) ou un mot entier de l’acte : les langues possibles s’affichent, les plus probables d’abord.')}</p>`;
         const r = identify(text), {byId} = build();
         const chips = ids => ids.map(id => `<button type="button" class="h-abc-chip" data-abc-open="${esc(id)}">${esc(byId[id]?.name || id)}</button>`).join('');
         const msg = (kind, icon, t) => `<p class="h-abc-msg is-${kind}" role="status"><span aria-hidden="true">${icon}</span> ${esc(t)}</p>`;
         let head;
-        if (!r.chars.length) head = msg('info', 'ℹ\uFE0F', 'Tape des lettres : les chiffres, les espaces et la ponctuation ne comptent pas.');
-        else if (!r.results.length) head = msg('warn', '⚠\uFE0F', r.chars.every(c => c.unknown) ? 'Ce caractère n’est dans aucune des langues de la liste.' : 'Aucune langue de la liste n’a tous ces caractères ensemble : regarde lettre par lettre ci-dessous.');
-        else head = `<p class="h-abc-count">${esc(plural(r.results.length, 'langue possible', 'langues possibles'))}${r.onlyBasic ? ' — que des lettres simples (a à z) : tape une lettre à accent ou un mot entier pour départager.' : ''}</p>
-            <ol class="h-abc-results">${r.results.map(x => { const [label, cls] = LEVEL[x.level]; const why = [x.exclusive.length ? `${x.exclusive.join(', ')} : seulement dans cette langue` : '', x.words.length ? `mot des actes : « ${x.words.join(' », « ')} »` : ''].filter(Boolean).join(' · ');
+        if (!r.chars.length) head = msg('info', 'ℹ\uFE0F', i18n('Tape des lettres : les chiffres, les espaces et la ponctuation ne comptent pas.'));
+        else if (!r.results.length) head = msg('warn', '⚠\uFE0F', r.chars.every(c => c.unknown) ? i18n('Ce caractère n’est dans aucune des langues de la liste.') : i18n('Aucune langue de la liste n’a tous ces caractères ensemble : regarde lettre par lettre ci-dessous.'));
+        else head = `<p class="h-abc-count">${esc(plural(r.results.length, 'langue possible', 'langues possibles'))}${r.onlyBasic ? ` ${i18n('— que des lettres simples (a à z) : tape une lettre à accent ou un mot entier pour départager.')}` : ''}</p>
+            <ol class="h-abc-results">${r.results.map(x => { const [label, cls] = LEVEL[x.level]; const why = [x.exclusive.length ? i18n('{x} : seulement dans cette langue', {x: x.exclusive.join(', ')}) : '', x.words.length ? i18n('mot des actes : « {x} »', {x: x.words.join(' », « ')}) : ''].filter(Boolean).join(' · ');
                 return `<li><button type="button" class="h-abc-result" data-abc-open="${esc(x.id)}"><span class="h-abc-rname">${esc(x.name)}</span><span class="h-abc-level ${cls}">${esc(label)}</span>${why ? `<small>${esc(why)}</small>` : ''}</button></li>`; }).join('')}</ol>`;
-        const per = r.chars.length ? `<h4>Lettre par lettre</h4><ul class="h-abc-per">${r.chars.map(c => `<li><span class="h-abc-pchar">${esc(c.raw)}</span><span class="h-abc-pwhere">${c.unknown ? '<em>ce caractère n’est dans aucune des langues de la liste</em>'
-            : c.basic ? `<em>lettre simple : dans ${esc(plural(c.langs.length, 'langue'))} en lettres latines</em>` : chips(c.langs)}</span></li>`).join('')}</ul>` : '';
+        const per = r.chars.length ? `<h4>${i18n('Lettre par lettre')}</h4><ul class="h-abc-per">${r.chars.map(c => `<li><span class="h-abc-pchar">${esc(c.raw)}</span><span class="h-abc-pwhere">${c.unknown ? `<em>${i18n('ce caractère n’est dans aucune des langues de la liste')}</em>`
+            : c.basic ? `<em>${i18n('lettre simple : dans {x} en lettres latines', {x: esc(plural(c.langs.length, 'langue'))})}</em>` : chips(c.langs)}</span></li>`).join('')}</ul>` : '';
         return head + per;
     }
     function keysHtml(upper) {
@@ -239,7 +240,7 @@
         const group = (g, script) => `<div class="h-abc-kgroup"><span class="h-abc-ktitle">${esc(g.title)}</span><div class="h-abc-keys" role="group" aria-label="${esc(g.title)}">${
             g.marks ? g.marks.map(([m, name, shown]) => `<button type="button" class="h-abc-key is-mark" data-abc-mark="${esc(m)}" title="${esc(name)}" aria-label="${esc(name)}"><span lang="grc">${esc(shown || '◌' + m)}</span></button>`).join('')
                 : g.keys.map(c => { const v = upper ? upperOf(c) : c; return `<button type="button" class="h-abc-key" data-abc-key="${esc(v)}" title="${esc(keyTitle(c))}" aria-label="${esc(keyTitle(c))}"><span lang="${script === 'greek' ? 'el' : 'ru'}">${esc(v)}</span></button>`; }).join('')}</div></div>`;
-        return `<div class="h-abc-kbar"><button type="button" class="button small secondary h-abc-shift${upper ? ' is-on' : ''}" data-abc-shift aria-pressed="${upper ? 'true' : 'false'}" title="Majuscules (cliquer encore pour revenir aux minuscules)">⇧ Majuscules</button></div>
+        return `<div class="h-abc-kbar"><button type="button" class="button small secondary h-abc-shift${upper ? ' is-on' : ''}" data-abc-shift aria-pressed="${upper ? 'true' : 'false'}" title="${esc(i18n('Majuscules (cliquer encore pour revenir aux minuscules)'))}">⇧ Majuscules</button></div>
             <h4>Cyrillique</h4>${(K.cyrillic || []).map(g => group(g, 'cyrillic')).join('')}
             <h4>Grec</h4>${(K.greek || []).map(g => group(g, 'greek')).join('')}`;
     }
@@ -251,23 +252,23 @@
         const options = Object.keys(S).map(s => { const ls = langs.filter(l => l.script === s); return ls.length ? `<optgroup label="${esc(S[s])}">${ls.map(l => `<option value="${esc(l.id)}"${l.id === cur ? ' selected' : ''}>${esc(l.name)}</option>`).join('')}</optgroup>` : ''; }).join('');
         const t = k => TABS.find(x => x[0] === k) ? k : 'lang';
         const active = t(tab);
-        return `<section class="maintenance-panel h-abc-panel" id="h-abc-panel"><h3>Alphabets et langues des actes</h3>
-            <p>Pour lire un acte écrit dans une autre langue : l’alphabet de chaque langue, ses lettres à accents, les lettres anciennes, et comment la reconnaître.</p>
+        return `<section class="maintenance-panel h-abc-panel" id="h-abc-panel"><h3>${i18n('Alphabets et langues des actes')}</h3>
+            <p>${i18n('Pour lire un acte écrit dans une autre langue : l’alphabet de chaque langue, ses lettres à accents, les lettres anciennes, et comment la reconnaître.')}</p>
             <div class="ui-tabs h-abc-tabs" role="tablist" aria-label="Alphabets">${TABS.map(([k, label]) => `<button type="button" role="tab" id="h-abc-tab-${k}" aria-controls="h-abc-pane-${k}" data-abc-tab="${k}" class="${k === active ? 'is-active' : ''}" aria-selected="${k === active}" tabindex="${k === active ? 0 : -1}">${esc(label)}</button>`).join('')}</div>
             <div class="h-abc-pane" role="tabpanel" id="h-abc-pane-lang" aria-labelledby="h-abc-tab-lang"${active === 'lang' ? '' : ' hidden'}>
                 <label class="h-abc-pick">Langue <select data-abc-lang>${options}</select></label>
                 <div data-abc-lang-out>${langHtml(cur)}</div></div>
             <div class="h-abc-pane" role="tabpanel" id="h-abc-pane-guess" aria-labelledby="h-abc-tab-guess"${active === 'guess' ? '' : ' hidden'}>
-                <label class="h-abc-guess-label">Lettres ou mot de l’acte<input type="search" data-ui-search data-abc-guess placeholder="Chercher… (ł, ő, ж, ω, natus, урожденный)" autocomplete="off" spellcheck="false"></label>
+                <label class="h-abc-guess-label">${i18n('Lettres ou mot de l’acte')}<input type="search" data-ui-search data-abc-guess placeholder="${esc(i18n('Chercher… (ł, ő, ж, ω, natus, урожденный)'))}" autocomplete="off" spellcheck="false"></label>
                 <div data-abc-guess-out aria-live="polite">${guessHtml('')}</div></div>
             <div class="h-abc-pane" role="tabpanel" id="h-abc-pane-keys" aria-labelledby="h-abc-tab-keys"${active === 'keys' ? '' : ' hidden'}>
                 <div data-abc-keys-out>${keysHtml(false)}</div>
-                <label class="h-abc-text-label">Texte<textarea data-abc-text rows="3" dir="auto" spellcheck="false" placeholder="Clique sur les lettres, ou tape ici"></textarea></label>
-                <div class="h-abc-actions"><button type="button" class="button small" data-abc-copy>📋 Copier</button><button type="button" class="button small secondary" data-abc-back title="Effacer la dernière lettre" aria-label="Effacer la dernière lettre">⌫</button><button type="button" class="button small secondary" data-abc-clear>Vider</button></div>
-                <div class="h-abc-trbar"><label>Cyrillique en <select data-abc-sys><option value="fr">français courant</option><option value="iso">ISO 9 (savante)</option></select></label>
-                    <label>Langue <select data-abc-cyrlang><option value="auto">automatique</option><option value="ru">russe</option><option value="uk">ukrainien</option><option value="be">biélorusse</option><option value="bg">bulgare</option><option value="sr">serbe</option></select></label>
+                <label class="h-abc-text-label">Texte<textarea data-abc-text rows="3" dir="auto" spellcheck="false" placeholder="${esc(i18n('Clique sur les lettres, ou tape ici'))}"></textarea></label>
+                <div class="h-abc-actions"><button type="button" class="button small" data-abc-copy>📋 ${i18n('Copier')}</button><button type="button" class="button small secondary" data-abc-back title="${esc(i18n('Effacer la dernière lettre'))}" aria-label="${esc(i18n('Effacer la dernière lettre'))}">⌫</button><button type="button" class="button small secondary" data-abc-clear>Vider</button></div>
+                <div class="h-abc-trbar"><label>${i18n('Cyrillique en')} <select data-abc-sys><option value="fr">${i18n('français courant')}</option><option value="iso">ISO 9 (savante)</option></select></label>
+                    <label>Langue <select data-abc-cyrlang><option value="auto">automatique</option><option value="ru">russe</option><option value="uk">ukrainien</option><option value="be">${i18n('biélorusse')}</option><option value="bg">bulgare</option><option value="sr">serbe</option></select></label>
                     <label>Grec <select data-abc-grmode><option value="auto">automatique</option><option value="modern">moderne</option><option value="ancient">ancien</option></select></label></div>
-                <div class="h-abc-trout"><span>En lettres latines :</span> <output data-abc-tr></output><small data-abc-trinfo class="muted"></small></div>
+                <div class="h-abc-trout"><span>${i18n('En lettres latines :')}</span> <output data-abc-tr></output><small data-abc-trinfo class="muted"></small></div>
             </div></section>`;
     }
 
@@ -317,7 +318,7 @@
             const o = opts(), v = ta.value;
             trOut.textContent = translit(v, o);
             const bits = [];
-            if (CYR.test(v)) bits.push(o.system === 'iso' ? 'cyrillique en ISO 9' : `lu comme du ${{ru: 'russe', uk: 'ukrainien', be: 'biélorusse', bg: 'bulgare', sr: 'serbe'}[o.lang === 'auto' ? cyrLanguage(v) : o.lang]}`);
+            if (CYR.test(v)) bits.push(o.system === 'iso' ? i18n('cyrillique en ISO 9') : i18n('lu comme du {x}', {x: {ru: 'russe', uk: 'ukrainien', be: i18n('biélorusse'), bg: 'bulgare', sr: 'serbe'}[o.lang === 'auto' ? cyrLanguage(v) : o.lang]}));
             if (/[\u0370-\u03FF\u1F00-\u1FFF]/.test(v)) bits.push(o.mode === 'ancient' || (o.mode === 'auto' && GR_POLY.test(v.normalize('NFD'))) ? 'grec ancien' : 'grec moderne');
             trInfo.textContent = bits.length ? ` (${bits.join(' · ')})` : '';
         };
@@ -334,7 +335,7 @@
         function addMark(m) {
             const [a] = sel(), before = ta.value.slice(0, a), gs = graphemes(before), last = gs[gs.length - 1] || '';
             const d = last.normalize('NFD'), base = d.charAt(0);
-            if (!/[\u0391-\u03A9\u03B1-\u03C9\u03DA-\u03E1]/.test(base)) { toast('Clique d’abord sur une lettre grecque, puis sur l’accent ou l’esprit.'); return; }
+            if (!/[\u0391-\u03A9\u03B1-\u03C9\u03DA-\u03E1]/.test(base)) { toast(i18n('Clique d’abord sur une lettre grecque, puis sur l’accent ou l’esprit.')); return; }
             let marks = [...d.slice(1)];
             if (marks.includes(m)) marks = marks.filter(x => x !== m); else marks = marks.filter(x => ORDER[x] !== ORDER[m]).concat(m);
             marks.sort((x, y) => (ORDER[x] ?? 9) - (ORDER[y] ?? 9));
@@ -351,16 +352,16 @@
         function clear() {
             const old = ta.value; if (!old) return;
             setText('', 0);
-            const u = A()?.undoToast; if (u) u('Texte vidé', {undo: () => setText(old, old.length), redo: () => setText('', 0)}); else toast('Texte vidé.');
+            const u = A()?.undoToast; if (u) u(i18n('Texte vidé'), {undo: () => setText(old, old.length), redo: () => setText('', 0)}); else toast(i18n('Texte vidé.'));
         }
         async function copy() {
             const v = ta.value;
-            if (!v) { toast('Rien à copier : clique d’abord sur des lettres.'); return; }
+            if (!v) { toast(i18n('Rien à copier : clique d’abord sur des lettres.')); return; }
             let ok = false;
             try { await navigator.clipboard.writeText(v); ok = true; } catch (_) {
                 try { ta.select(); ok = document.execCommand('copy'); } catch (_) { ok = false; }
             }
-            toast(ok ? 'Texte copié : colle-le où tu veux (⌘V).' : 'Copie impossible : sélectionne le texte et fais ⌘C.', ok ? 'success' : 'error');
+            toast(ok ? i18n('Texte copié : colle-le où tu veux (⌘V).') : i18n('Copie impossible : sélectionne le texte et fais ⌘C.'), ok ? 'success' : 'error');
         }
         drawTr();
     }

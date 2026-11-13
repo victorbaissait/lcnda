@@ -1,0 +1,1013 @@
+fr ¦ sk ¦ nb
+TABLEUR · BASE ¦ TABUĽKOVÝ EDITOR · DATABÁZA ¦ REGNEARK · DATABASE
+⤒ Remplir depuis l’app ¦ ⤒ Vyplniť z aplikácie ¦ ⤒ Fyll ut fra appen
+1 · Ce qu’on prend ¦ 1 · Čo sa vezme ¦ 1 · Hva som hentes
+(comme l’export pour partager) ¦ (ako export na zdieľanie) ¦ (som eksporten for deling)
+2 · Les colonnes ¦ 2 · Stĺpce ¦ 2 · Kolonnene
+(glisse ⠿ pour ranger) ¦ (potiahni ⠿ na zoradenie) ¦ (dra ⠿ for å ordne)
+＋ Une colonne tirée des données ¦ ＋ Stĺpec z údajov ¦ ＋ En kolonne fra dataene
+3 · Aperçu ¦ 3 · Náhľad ¦ 3 · Forhåndsvisning
+🔗 Tenir à jour ¦ 🔗 Udržiavať aktuálne ¦ 🔗 Hold oppdatert
+— les lignes changent quand la base change (à l’ouverture, ou avec ↻). Tes colonnes ajoutées à droite (formules, notes) restent sur la bonne ligne. ¦ — riadky sa menia, keď sa zmení databáza (pri otvorení alebo cez ↻). Tvoje stĺpce pridané vpravo (vzorce, poznámky) zostanú na správnom riadku. ¦ — radene endres når databasen endres (ved åpning eller med ↻). Kolonnene du har lagt til til høyre (formler, notater) blir værende på riktig rad.
+Où : ¦ Kam: ¦ Hvor:
+à la même place (remplace la plage liée) ¦ na rovnaké miesto (nahradí prepojenú oblasť) ¦ på samme sted (erstatter det koblede området)
+à partir de A1 dans une nouvelle feuille ¦ od A1 na novom hárku ¦ fra A1 i et nytt ark
+à partir de {cell} dans cette feuille ¦ od {cell} na tomto hárku ¦ fra {cell} i dette arket
+⤒ Remplir ¦ ⤒ Vyplniť ¦ ⤒ Fyll ut
+Commune ¦ Obec ¦ Sted
+Pas encore de dépouillement : Listes → 📜 Dépouillements. ¦ Zatiaľ žiadny výpis: Zoznamy → 📜 Výpisy. ¦ Ingen registrering ennå: Lister → 📜 Registreringer.
+Statistique ¦ Štatistika ¦ Statistikk
+Hommes et femmes à part ¦ Muži a ženy zvlášť ¦ Menn og kvinner hver for seg
+Pas encore de liste à toi : Listes → Mes listes. ¦ Zatiaľ nemáš vlastný zoznam: Zoznamy → Moje zoznamy. ¦ Ingen egne lister ennå: Lister → Mine lister.
+Hommes ¦ Muži ¦ Menn
+Femmes ¦ Ženy ¦ Kvinner
+Inconnu ¦ Neznáme ¦ Ukjent
+Lignée ¦ Línia ¦ Slektslinje
+Né(e) à ¦ Narodený(á) v ¦ Født i
+Nés à partir de ¦ Narodení od ¦ Født fra
+Nés jusqu’à ¦ Narodení do ¦ Født til
+Nés avant ¦ Narodení pred ¦ Født før
+Sorte ¦ Druh ¦ Type
+Chercher… (nom, prénom) ¦ Hľadať… (priezvisko, meno) ¦ Søk… (etternavn, fornavn)
+Chercher… (nom, sorte, lieu) ¦ Hľadať… (názov, druh, miesto) ¦ Søk… (navn, type, sted)
+👤 personne ¦ 👤 osoba ¦ 👤 person
+📍 lieu ¦ 📍 miesto ¦ 📍 sted
+📅 date d’acte ¦ 📅 dátum záznamu ¦ 📅 dokumentets dato
+nombre ¦ číslo ¦ tall
+Monter ¦ Posunúť hore ¦ Flytt opp
+Descendre ¦ Posunúť dole ¦ Flytt ned
+Retirer la colonne ¦ Odobrať stĺpec ¦ Fjern kolonnen
+Aucune colonne : ajoute-en une. ¦ Žiadny stĺpec: nejaký pridaj. ¦ Ingen kolonner: legg til en.
+Lecture de la base… ¦ Čítam databázu… ¦ Leser databasen…
+Lecture… ¦ Čítam… ¦ Leser…
+({shown} premières lignes sur {n}) ¦ (prvých {shown} riadkov z {n}) ¦ (de første {shown} radene av {n})
+Rien ne correspond : change les filtres. ¦ Nič nezodpovedá: zmeň filtre. ¦ Ingenting passer: endre filtrene.
+{n} de côté (personnes vivantes ou fiches confidentielles). ¦ Vynechané: {n} (žijúce osoby alebo dôverné karty). ¦ {n} utelatt (levende personer eller konfidensielle oppføringer).
+Seules les {n} premières lignes sont prises : précise les filtres. ¦ Berie sa len prvých {n} riadkov: spresni filtre. ¦ Bare de første {n} radene tas med: snevre inn filtrene.
+⤒ Remplir {n} ¦ ⤒ Vyplniť {n} ¦ ⤒ Fyll ut {n}
+Toutes les colonnes sont déjà là. ¦ Všetky stĺpce už sú tu. ¦ Alle kolonnene er her allerede.
+Une colonne tirée des données ¦ Stĺpec z údajov ¦ En kolonne fra dataene
+Cette feuille n’est pas liée à la base : Données → « ⤒ Remplir depuis l’app… ». ¦ Tento hárok nie je prepojený s databázou: Údaje → „⤒ Vyplniť z aplikácie…“. ¦ Arket er ikke koblet til databasen: Data → «⤒ Fyll ut fra appen…».
+Impossible de relire la base : {error} ¦ Databázu nemožno znova načítať: {error} ¦ Kunne ikke lese databasen på nytt: {error}
+🔗 Déjà à jour : rien n’a changé dans la base. ¦ 🔗 Už aktuálne: v databáze sa nič nezmenilo. ¦ 🔗 Allerede oppdatert: ingenting er endret i databasen.
+{n} de plus ¦ o {n} viac ¦ {n} flere
+{n} de moins ¦ o {n} menej ¦ {n} færre
+valeurs mises à jour ¦ aktualizované hodnoty ¦ verdier oppdatert
+🔗 « {name} » relue : {what} ({lost}) ¦ 🔗 „{name}“ znova načítaný: {what} ({lost}) ¦ 🔗 «{name}» lest på nytt: {what} ({lost})
+🔗 « {name} » relue : {what} ¦ 🔗 „{name}“ znova načítaný: {what} ¦ 🔗 «{name}» lest på nytt: {what}
+<b>Relevé de recensement</b> · les colonnes de l’année : ¦ <b>Výpis zo sčítania obyvateľov</b> · stĺpce daného roka: ¦ <b>Avskrift av folketelling</b> · årets kolonner:
+Année du recensement ¦ Rok sčítania ¦ Folketellingens år
+📤 Envoyer vers la base… ¦ 📤 Poslať do databázy… ¦ 📤 Send til databasen…
+🔗 Tenue à jour : <b>{what}</b> · {n} · relue {when} ¦ 🔗 Udržiavané aktuálne: <b>{what}</b> · {n} · načítané {when} ¦ 🔗 Holdes oppdatert: <b>{what}</b> · {n} · lest {when}
+la base ¦ databáza ¦ databasen
+Relire depuis la base ¦ Znova načítať z databázy ¦ Les på nytt fra databasen
+↻ Relire ¦ ↻ Znova načítať ¦ ↻ Les på nytt
+Changer la source ou les colonnes… ¦ Zmeniť zdroj alebo stĺpce… ¦ Endre kilden eller kolonnene…
+Envoyer vers la base… ¦ Poslať do databázy… ¦ Send til databasen…
+Ne plus tenir à jour (garder les valeurs) ¦ Prestať udržiavať aktuálne (ponechať hodnoty) ¦ Ikke hold oppdatert lenger (behold verdiene)
+« {name} » n’est plus tenue à jour ¦ „{name}“ sa už neudržiava aktuálne ¦ «{name}» holdes ikke lenger oppdatert
+Relevé : colonnes de {year} ¦ Výpis: stĺpce roka {year} ¦ Avskrift: kolonner for {year}
+Mode consultation : rien ne peut être envoyé vers la base. ¦ Režim prehliadania: do databázy nemožno nič poslať. ¦ Visningsmodus: ingenting kan sendes til databasen.
+Choisis le tableau à envoyer (sa ligne de titres et ses lignes), puis recommence. ¦ Vyber tabuľku na odoslanie (riadok nadpisov aj riadky) a skús to znova. ¦ Merk tabellen som skal sendes (overskriftsraden og radene), og prøv igjen.
+📤 Envoyer vers la base — {name}, lignes {from} à {to} ¦ 📤 Poslať do databázy — {name}, riadky {from} až {to} ¦ 📤 Send til databasen — {name}, rad {from} til {to}
+1. Les colonnes ¦ 1. Stĺpce ¦ 1. Kolonnene
+2. Voilà ce qui va entrer ¦ 2. Toto vstúpi do databázy ¦ 2. Dette kommer inn
+3. Envoyer ¦ 3. Odoslať ¦ 3. Send
+Voir ce qui va entrer ¦ Ukázať, čo vstúpi ¦ Se hva som kommer inn
+Ce que ça crée : ¦ Čo sa vytvorí: ¦ Dette opprettes:
+Colonne ¦ Stĺpec ¦ Kolonne
+Exemple ¦ Príklad ¦ Eksempel
+Va dans ¦ Ide do ¦ Går til
+(sans titre) ¦ (bez názvu) ¦ (uten tittel)
+Champ pour la colonne {col} ¦ Pole pre stĺpec {col} ¦ Felt for kolonne {col}
+Colonnes : {list} ¦ Stĺpce: {list} ¦ Kolonner: {list}
+aucune pour l’instant ¦ zatiaľ žiadny ¦ ingen ennå
+Déjà dans la base ¦ Už v databáze ¦ Allerede i databasen
+Problème ¦ Problém ¦ Problem
+Laissée de côté ¦ Vynechané ¦ Utelatt
+📤 Créer {n} ¦ 📤 Vytvoriť {n} ¦ 📤 Opprett {n}
+📤 Rien de nouveau ¦ 📤 Nič nové ¦ 📤 Ingenting nytt
+📤 Créer {n} et en relier {m} ¦ 📤 Vytvoriť {n} a prepojiť {m} ¦ 📤 Opprett {n} og koble {m}
+📤 Relier {m} ¦ 📤 Prepojiť {m} ¦ 📤 Koble {m}
+📤 Envoyer ¦ 📤 Odoslať ¦ 📤 Send
+Choisis au moins une colonne à envoyer (le nom, par exemple). ¦ Vyber aspoň jeden stĺpec na odoslanie (napríklad meno). ¦ Velg minst én kolonne som skal sendes (for eksempel navnet).
+Choisis au moins une colonne. ¦ Vyber aspoň jeden stĺpec. ¦ Velg minst én kolonne.
+Donne l’année du recensement. ¦ Zadaj rok sčítania. ¦ Angi folketellingens år.
+Il faut une colonne pour le nom (ou « Nom et prénom »). ¦ Je potrebný stĺpec pre meno (alebo „Priezvisko a meno“). ¦ Det må være en kolonne for navnet (eller «Etternavn og fornavn»).
+Il faut une colonne pour le nom. ¦ Je potrebný stĺpec pre meno. ¦ Det må være en kolonne for navnet.
+Choisis la colonne qui dit la sorte d’événement (Baptême, Décès…). ¦ Vyber stĺpec, ktorý udáva druh udalosti (Krst, Úmrtie…). ¦ Velg kolonnen som angir hendelsestypen (Dåp, Død…).
+Il manque la sorte d’événement. ¦ Chýba druh udalosti. ¦ Hendelsestypen mangler.
+Ces lignes sont vides. ¦ Tieto riadky sú prázdne. ¦ Disse radene er tomme.
+Je compare avec ta base… ¦ Porovnávam s tvojou databázou… ¦ Sammenligner med databasen din…
+Comparaison… ¦ Porovnávam… ¦ Sammenligner…
+Choisir la fiche de la ligne {row} ¦ Vybrať kartu pre riadok {row} ¦ Velg oppføringen for rad {row}
+choisis ▾ ¦ vyber ▾ ¦ velg ▾
+Relier à {name} ({meta}) ¦ Prepojiť s {name} ({meta}) ¦ Koble til {name} ({meta})
+Laisser de côté ¦ Vynechať ¦ Utelat
+Des lignes ressemblent à plusieurs fiches : choisis la bonne (sinon elles sont laissées de côté). ¦ Niektoré riadky sa podobajú na viac kariet: vyber tú správnu (inak sa vynechajú). ¦ Noen rader ligner flere oppføringer: velg den riktige (ellers utelates de).
+Ligne ¦ Riadok ¦ Rad
+Ce qui va se passer ¦ Čo sa stane ¦ Hva som skjer
+Impossible d’envoyer : {error} ¦ Nemožno odoslať: {error} ¦ Kunne ikke sende: {error}
+contient « {text} » : compté comme {n} ¦ obsahuje „{text}“: počíta sa ako {n} ¦ inneholder «{text}»: telles som {n}
+contient l’erreur « {text} » : laissée vide ¦ obsahuje chybu „{text}“: ponechané prázdne ¦ inneholder feilen «{text}»: latt stå tom
+« {text} » n’est pas un nombre : laissé vide ¦ „{text}“ nie je číslo: ponechané prázdne ¦ «{text}» er ikke et tall: latt stå tomt
+à trouver ¦ treba nájsť ¦ må finnes
+L’éditeur de diagrammes n’est pas chargé. ¦ Editor diagramov nie je načítaný. ¦ Skjemaeditoren er ikke lastet inn.
+L’éditeur de graphiques n’est pas chargé. ¦ Editor grafov nie je načítaný. ¦ Diagrameditoren er ikke lastet inn.
+Graphique « {name} » ajouté à Mes graphiques (Graphiques, tableau de bord…). ¦ Graf „{name}“ pridaný do Mojich grafov (Grafy, prehľad…). ¦ Diagrammet «{name}» er lagt til i Mine diagrammer (Diagrammer, oversikt…).
+Le navigateur refuse de copier ici : sélectionne la plage et fais {key}. ¦ Prehliadač tu odmieta kopírovať: vyber oblasť a stlač {key}. ¦ Nettleseren nekter å kopiere her: merk området og trykk {key}.
+Copié : dans un tableau (Enquêtes → 🧩 Tableaux), colle-le ({key}) : il devient un objet ▦ Tableur, formules comprises. ¦ Skopírované: v tabuli (Pátrania → 🧩 Tabule) ho vlož ({key}): stane sa z neho objekt ▦ Tabuľkový editor aj so vzorcami. ¦ Kopiert: lim det inn ({key}) på en tavle (Undersøkelser → 🧩 Tavler): det blir et ▦ Regneark-objekt, med formler.
+Copié : dans la page d’un recueil, clique une case du tableau et colle ({key}). ¦ Skopírované: na stránke zborníka klikni do bunky tabuľky a vlož ({key}). ¦ Kopiert: på en side i en samling, klikk i en tabellcelle og lim inn ({key}).
+La présentation n’est pas chargée. ¦ Prezentácia nie je načítaná. ¦ Presentasjonen er ikke lastet inn.
+… et {n} ¦ … a {n} ¦ … og {n}
+Colonnes attendues : {list} ¦ Očakávané stĺpce: {list} ¦ Forventede kolonner: {list}
+(une ou plusieurs) ¦ (jeden alebo viac) ¦ (én eller flere)
+(facultatif) ¦ (nepovinné) ¦ (valgfritt)
+Les données de « {name} » ¦ Údaje z „{name}“ ¦ Dataene fra «{name}»
+l’outil ¦ nástroj ¦ verktøyet
+{name} (données) ¦ {name} (údaje) ¦ {name} (data)
+Renvoyer les données là d’où elles viennent ¦ Vrátiť údaje tam, odkiaľ prišli ¦ Send dataene tilbake dit de kom fra
+Formules, tri, coller depuis Excel… « Fichier → Enregistrer une copie… » garde aussi ce classeur dans le Tableur. ¦ Vzorce, zoraďovanie, vkladanie z Excelu… „Súbor → Uložiť kópiu…“ si tento zošit ponechá aj v Tabuľkovom editore. ¦ Formler, sortering, lime inn fra Excel… «Fil → Lagre en kopi…» beholder også denne arbeidsboken i Regnearket.
+Rien à ouvrir : la liste est vide. ¦ Nie je čo otvoriť: zoznam je prázdny. ¦ Ingenting å åpne: listen er tom.
+🧾 Tableur ¦ 🧾 Tabuľkový editor ¦ 🧾 Regneark
+ouvrir dans le tableur ¦ otvoriť v tabuľkovom editore ¦ åpne i regnearket
+🧾 Ouvrir dans le tableur ¦ 🧾 Otvoriť v tabuľkovom editore ¦ 🧾 Åpne i regnearket
+La feuille est vide : écris ou colle un tableau, puis choisis-le. ¦ Hárok je prázdny: napíš alebo vlož tabuľku, potom ju vyber. ¦ Arket er tomt: skriv eller lim inn en tabell, og merk den.
+TABLEUR · PRÉPARER POUR… ¦ TABUĽKOVÝ EDITOR · PRIPRAVIŤ PRE… ¦ REGNEARK · FORBERED FOR…
+🎯 Préparer pour… ({range}) ¦ 🎯 Pripraviť pre… ({range}) ¦ 🎯 Forbered for… ({range})
+Le tableur sait ce que chaque endroit de l’app attend : choisis où vont ces données. Il vérifie les colonnes de la plage <b>{range}</b> et les range comme il faut. ¦ Tabuľkový editor vie, čo ktoré miesto aplikácie očakáva: vyber, kam tieto údaje pôjdu. Skontroluje stĺpce oblasti <b>{range}</b> a usporiada ich, ako treba. ¦ Regnearket vet hva hver del av appen forventer: velg hvor dataene skal. Det sjekker kolonnene i området <b>{range}</b> og ordner dem som de skal.
+Dessin ¦ Kresba ¦ Tegning
+▦ Un tableau ¦ ▦ Tabuľka ¦ ▦ En tabell
+Il faut une colonne de chiffres ¦ Je potrebný stĺpec s číslami ¦ Det må være en kolonne med tall
+📊 Un graphique ¦ 📊 Graf ¦ 📊 Et diagram
+Dans la plage ¦ V oblasti ¦ I området
+, une ou plusieurs ¦ , jeden alebo viac ¦ , én eller flere
+, facultatif ¦ , nepovinné ¦ , valgfritt
+Voir la cellule ¦ Ukázať bunku ¦ Vis cellen
+… et {n} à vérifier. ¦ … a {n} na kontrolu. ¦ … og {n} å kontrollere.
+Il manque une colonne : ajoute-la dans la plage, ou choisis une autre plage. ¦ Chýba stĺpec: pridaj ho do oblasti alebo vyber inú oblasť. ¦ En kolonne mangler: legg den til i området, eller velg et annet område.
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) ¦ Zachovať prepojenie: diagram sleduje tabuľkový editor (aktualizuje sa, keď sa oblasť zmení) ¦ Behold koblingen: skjemaet følger regnearket (oppdateres når området endres)
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) — le classeur sera enregistré dans le Tableur ¦ Zachovať prepojenie: diagram sleduje tabuľkový editor (aktualizuje sa, keď sa oblasť zmení) — zošit sa uloží v Tabuľkovom editore ¦ Behold koblingen: skjemaet følger regnearket (oppdateres når området endres) — arbeidsboken lagres i Regnearket
+← Autre endroit ¦ ← Iné miesto ¦ ← Et annet sted
+La première ligne donne les titres ¦ Prvý riadok obsahuje nadpisy ¦ Første rad inneholder overskriftene
+Pas d’aperçu. ¦ Bez náhľadu. ¦ Ingen forhåndsvisning.
+🎤 Créer la présentation ¦ 🎤 Vytvoriť prezentáciu ¦ 🎤 Opprett presentasjonen
+Corrige la cellule, puis rouvre « 🎯 Préparer pour… ». ¦ Oprav bunku a potom znova otvor „🎯 Pripraviť pre…“. ¦ Rett cellen, og åpne så «🎯 Forbered for…» igjen.
+Ces données reviennent dans leur outil : le diagramme est fait d’une copie (pas de lien). ¦ Tieto údaje sa vracajú do svojho nástroja: diagram vznikne z kópie (bez prepojenia). ¦ Dataene går tilbake til verktøyet sitt: skjemaet lages av en kopi (ingen kobling).
+Choisis une plage avec des nombres (par exemple : Décennie, Hommes, Femmes). ¦ Vyber oblasť s číslami (napríklad: Desaťročie, Muži, Ženy). ¦ Merk et område med tall (for eksempel: Tiår, Menn, Kvinner).
+Tous les types de diagrammes… ¦ Všetky typy diagramov… ¦ Alle skjematyper…
+Conseillés pour {range} ¦ Odporúčané pre {range} ¦ Foreslått for {range}
+🔗 Données : « {name} » ! {range} ¦ 🔗 Údaje: „{name}“ ! {range} ¦ 🔗 Data: «{name}» ! {range}
+Classeur ¦ Zošit ¦ Arbeidsbok
+(feuille « {name} ») ¦ (hárok „{name}“) ¦ (arket «{name}»)
+tenu à jour ¦ udržiavané aktuálne ¦ holdes oppdatert
+Les figer ¦ Zmraziť ich ¦ Frys dem
+⚠️ Classeur introuvable (supprimé ?) : le dessin garde les derniers chiffres lus. ¦ ⚠️ Zošit sa nenašiel (vymazaný?): kresba si ponechá naposledy načítané čísla. ¦ ⚠️ Fant ikke arbeidsboken (slettet?): tegningen beholder de sist leste tallene.
+TABLEUR ¦ TABUĽKOVÝ EDITOR ¦ REGNEARK
+Nom du classeur… ¦ Názov zošita… ¦ Navn på arbeidsboken…
+Plage illisible : écris par exemple A1:C12. ¦ Nečitateľná oblasť: napíš napríklad A1:C12. ¦ Uleselig område: skriv for eksempel A1:C12.
+Feuille ¦ Hárok ¦ Ark
+Plage ¦ Oblasť ¦ Område
+Copier une fois (les chiffres ne bougent plus) ¦ Skopírovať raz (čísla sa už nemenia) ¦ Kopier én gang (tallene endres ikke lenger)
+Garder le lien : le diagramme suit le classeur (tenu à jour) ¦ Zachovať prepojenie: diagram sleduje zošit (udržiava sa aktuálny) ¦ Behold koblingen: skjemaet følger arbeidsboken (holdes oppdatert)
+Lecture du classeur… ¦ Čítam zošit… ¦ Leser arbeidsboken…
+Choisis un classeur. ¦ Vyber zošit. ¦ Velg en arbeidsbok.
+Écris une plage, par exemple A1:C12. ¦ Napíš oblasť, napríklad A1:C12. ¦ Skriv et område, for eksempel A1:C12.
+Écris le résultat voulu dans la première case de la colonne (par exemple « Jean D. »), puis relance ✨ Remplissage instantané. ¦ Napíš požadovaný výsledok do prvej bunky stĺpca (napríklad „Jean D.“) a znova spusti ✨ Okamžité dopĺňanie. ¦ Skriv ønsket resultat i kolonnens første celle (for eksempel «Jean D.»), og kjør ✨ Hurtigutfylling igjen.
+Je ne trouve pas de règle qui marche pour tous les exemples : écris-en un de plus, ou un plus simple. ¦ Nenachádzam pravidlo, ktoré by sedelo na všetky príklady: napíš ešte jeden alebo jednoduchší. ¦ Jeg finner ingen regel som passer for alle eksemplene: skriv ett til, eller et enklere.
+Rien à remplir : la colonne est déjà pleine. ¦ Nie je čo vyplniť: stĺpec je už plný. ¦ Ingenting å fylle ut: kolonnen er allerede full.
+{what} de {col} ¦ {what} z {col} ¦ {what} av {col}
+{what} n°{n} de {col} ¦ {what} č. {n} z {col} ¦ {what} nr. {n} av {col}
+{what} n°{n} depuis la fin de {col} ¦ {what} č. {n} od konca {col} ¦ {what} nr. {n} fra slutten av {col}
+✨ {n} (règle : {rule}). ↶ pour annuler. ¦ ✨ {n} (pravidlo: {rule}). ↶ na vrátenie späť. ¦ ✨ {n} (regel: {rule}). ↶ for å angre.
+Choisis un tableau avec une ligne de titres et des lignes de données. ¦ Vyber tabuľku s riadkom nadpisov a riadkami údajov. ¦ Merk en tabell med en overskriftsrad og datarader.
+Colonne {col} ¦ Stĺpec {col} ¦ Kolonne {col}
+DONNÉES ¦ ÚDAJE ¦ DATA
+Σ Sous-totaux ¦ Σ Medzisúčty ¦ Σ Delsummer
+Créer les sous-totaux ¦ Vytvoriť medzisúčty ¦ Opprett delsummene
+D’après <b>{range}</b>. Une nouvelle feuille : les lignes rangées par groupe, un total sous chaque groupe (formules), puis le total général. « ⊟ Plan » (menu Données) replie le détail. ¦ Podľa <b>{range}</b>. Nový hárok: riadky zoradené po skupinách, súčet pod každou skupinou (vzorce), potom celkový súčet. „⊟ Osnova“ (ponuka Údaje) skryje podrobnosti. ¦ Ut fra <b>{range}</b>. Et nytt ark: radene gruppert, en sum under hver gruppe (formler), deretter totalsummen. «⊟ Disposisjon» (Data-menyen) slår sammen detaljene.
+À chaque changement de ¦ Pri každej zmene v ¦ Ved hver endring i
+Calcul ¦ Výpočet ¦ Beregning
+Sur les colonnes ¦ Na stĺpcoch ¦ På kolonnene
+Coche au moins une colonne à calculer. ¦ Zaškrtni aspoň jeden stĺpec na výpočet. ¦ Kryss av for minst én kolonne som skal beregnes.
+Σ {n}. « ⊟ Plan » (menu Données) replie le détail. ¦ Σ {n}. „⊟ Osnova“ (ponuka Údaje) skryje podrobnosti. ¦ Σ {n}. «⊟ Disposisjon» (Data-menyen) slår sammen detaljene.
+Cette feuille n’a pas de sous-totaux : Données → Σ Sous-totaux… d’abord. ¦ Tento hárok nemá medzisúčty: najprv Údaje → Σ Medzisúčty…. ¦ Arket har ingen delsummer: først Data → Σ Delsummer….
+⊟ Détail replié : seuls les totaux restent. ¦ ⊟ Podrobnosti skryté: zostávajú len súčty. ¦ ⊟ Detaljer slått sammen: bare summene står igjen.
+⊞ Détail déplié. ¦ ⊞ Podrobnosti rozbalené. ¦ ⊞ Detaljer utvidet.
+🎯 Valeur cible ¦ 🎯 Hľadanie riešenia ¦ 🎯 Målsøking
+L’app essaie des valeurs dans « la case à changer » jusqu’à ce que la formule donne le résultat voulu. Ex. : à quel âge s’est-il marié pour que la différence d’âge soit 7 ans ? ¦ Aplikácia skúša hodnoty v „meniacej sa bunke“, kým vzorec nedá požadovaný výsledok. Napr.: v koľkých rokoch sa oženil, aby bol vekový rozdiel 7 rokov? ¦ Appen prøver verdier i «cellen som endres» til formelen gir ønsket resultat. F.eks.: hvor gammel var han da han giftet seg, hvis aldersforskjellen skal være 7 år?
+La formule de la case ¦ Vzorec v bunke ¦ Cellens formel
+Doit donner ¦ Má dať ¦ Skal gi
+En changeant la case ¦ Zmenou bunky ¦ Ved å endre cellen
+Écris une adresse de case (ex. C5, B2). ¦ Napíš adresu bunky (napr. C5, B2). ¦ Skriv en celleadresse (f.eks. C5, B2).
+Écris le résultat voulu. ¦ Napíš požadovaný výsledok. ¦ Skriv ønsket resultat.
+La première case doit contenir une formule. ¦ Prvá bunka musí obsahovať vzorec. ¦ Den første cellen må inneholde en formel.
+Pas de valeur trouvée : la formule ne dépend peut-être pas de cette case, ou ne peut pas atteindre ce résultat. ¦ Hodnota sa nenašla: vzorec možno od tejto bunky nezávisí, alebo tento výsledok nemôže dosiahnuť. ¦ Fant ingen verdi: formelen avhenger kanskje ikke av denne cellen, eller kan ikke nå dette resultatet.
+🎯 {cell} = {value} : la formule donne {target}. ↶ pour annuler. ¦ 🎯 {cell} = {value}: vzorec dáva {target}. ↶ na vrátenie späť. ¦ 🎯 {cell} = {value}: formelen gir {target}. ↶ for å angre.
+INSERTION ¦ VLOŽIŤ ¦ SETT INN
+📈 Mini-graphique ¦ 📈 Minigraf ¦ 📈 Minidiagram
+Poser ¦ Vložiť ¦ Sett inn
+Un petit graphique dans la case, qui suit les chiffres. Plusieurs lignes choisies : un graphique par ligne (la plage descend avec elles). ¦ Malý graf v bunke, ktorý sleduje čísla. Ak vyberieš viac riadkov: jeden graf na riadok (oblasť sa posúva s nimi). ¦ Et lite diagram i cellen som følger tallene. Flere rader merket: ett diagram per rad (området flytter seg nedover med dem).
+Les nombres (plage de la 1re ligne) ¦ Čísla (oblasť 1. riadka) ¦ Tallene (område for 1. rad)
+Gagné / perdu ¦ Výhra / prehra ¦ Gevinst / tap
+Couleur ¦ Farba ¦ Farge
+Écris une plage, par exemple B2:F2. ¦ Napíš oblasť, napríklad B2:F2. ¦ Skriv et område, for eksempel B2:F2.
+🧮 Solveur ¦ 🧮 Riešiteľ ¦ 🧮 Problemløser
+Résoudre ¦ Vyriešiť ¦ Løs
+Comme la valeur cible, mais en changeant plusieurs cases à la fois, avec des conditions. Ex. : répartir un héritage entre trois branches pour que chacune ait au moins 1 000 € et que l’écart soit le plus petit possible. ¦ Ako hľadanie riešenia, ale mení viac buniek naraz a s podmienkami. Napr.: rozdeliť dedičstvo medzi tri vetvy tak, aby každá dostala aspoň 1 000 € a rozdiel bol čo najmenší. ¦ Som målsøking, men flere celler endres samtidig, med betingelser. F.eks.: fordel en arv mellom tre grener slik at hver får minst 1 000 € og forskjellen blir så liten som mulig.
+La formule (case objectif) ¦ Vzorec (cieľová bunka) ¦ Formelen (målcelle)
+Doit être ¦ Má byť ¦ Skal være
+la plus grande possible ¦ čo najväčší ¦ så stor som mulig
+la plus petite possible ¦ čo najmenší ¦ så liten som mulig
+égale à… ¦ rovný… ¦ lik…
+Valeur (si « égale à ») ¦ Hodnota (ak „rovný“) ¦ Verdi (hvis «lik»)
+En changeant les cases ¦ Zmenou buniek ¦ Ved å endre cellene
+B2:B4 ou B2;C3 ¦ B2:B4 alebo B2;C3 ¦ B2:B4 eller B2;C3
+Conditions (une par ligne : {examples}) ¦ Podmienky (jedna na riadok: {examples}) ¦ Betingelser (én per linje: {examples})
+Nombres entiers seulement ¦ Len celé čísla ¦ Bare hele tall
+La case objectif doit contenir une formule (ex. D5). ¦ Cieľová bunka musí obsahovať vzorec (napr. D5). ¦ Målcellen må inneholde en formel (f.eks. D5).
+Trente cases à changer au plus. ¦ Najviac tridsať meniacich sa buniek. ¦ Høyst tretti celler som skal endres.
+Écris les cases à changer (ex. B2:B4). ¦ Napíš bunky, ktoré sa majú meniť (napr. B2:B4). ¦ Skriv cellene som skal endres (f.eks. B2:B4).
+Condition illisible : « {text} » (ex. B2 >= 0). ¦ Nečitateľná podmienka: „{text}“ (napr. B2 >= 0). ¦ Uleselig betingelse: «{text}» (f.eks. B2 >= 0).
+Écris la valeur voulue. ¦ Napíš požadovanú hodnotu. ¦ Skriv ønsket verdi.
+Pas de solution qui respecte toutes les conditions (vérifie-les, ou change le départ). ¦ Žiadne riešenie nespĺňa všetky podmienky (skontroluj ich alebo zmeň východiskový stav). ¦ Ingen løsning oppfyller alle betingelsene (sjekk dem, eller endre utgangspunktet).
+🧮 Trouvé : {cell} = {value} ({n}). ↶ pour annuler. ¦ 🧮 Nájdené: {cell} = {value} ({n}). ↶ na vrátenie späť. ¦ 🧮 Funnet: {cell} = {value} ({n}). ↶ for å angre.
+📋 Tableau de scénarios ¦ 📋 Tabuľka scenárov ¦ 📋 Scenariotabell
+Et si cette case valait 20, 25, 30… ? Le tableau montre ce que donnent les formules pour chaque valeur. Il est posé à partir de la case choisie ({cell}) ; rien d’autre ne change. ¦ Čo keby táto bunka mala hodnotu 20, 25, 30…? Tabuľka ukáže, čo vzorce dajú pre každú hodnotu. Vloží sa od vybranej bunky ({cell}); nič iné sa nezmení. ¦ Hva om denne cellen var 20, 25, 30…? Tabellen viser hva formlene gir for hver verdi. Den plasseres fra den merkede cellen ({cell}); ingenting annet endres.
+La case qui change ¦ Meniaca sa bunka ¦ Cellen som endres
+Ses valeurs (séparées par « ; », ou une plage) ¦ Jej hodnoty (oddelené „;“ alebo oblasť) ¦ Verdiene (skilt med «;», eller et område)
+20;25;30 ou A10:A15 ¦ 20;25;30 alebo A10:A15 ¦ 20;25;30 eller A10:A15
+Les formules à suivre ¦ Sledované vzorce ¦ Formlene som følges
+Écris la case qui change (ex. B2). ¦ Napíš meniacu sa bunku (napr. B2). ¦ Skriv cellen som endres (f.eks. B2).
+Écris au moins une formule (ex. C5). ¦ Napíš aspoň jeden vzorec (napr. C5). ¦ Skriv minst én formel (f.eks. C5).
+Écris des valeurs (500 au plus). ¦ Napíš hodnoty (najviac 500). ¦ Skriv noen verdier (høyst 500).
+📋 {n} (valeurs fixes : refais-le si les données changent). ¦ 📋 {n} (pevné hodnoty: keď sa údaje zmenia, urob to znova). ¦ 📋 {n} (faste verdier: gjør det igjen hvis dataene endres).
+Rien n’a été enregistré. ¦ Nič sa nenahralo. ¦ Ingenting ble tatt opp.
+⏺ Nommer l’action ¦ ⏺ Pomenovať akciu ¦ ⏺ Gi handlingen et navn
+Mon action ¦ Moja akcia ¦ Min handling
+Garder ¦ Ponechať ¦ Behold
+⏺ Action « {name} » gardée : Données → ▶ Actions enregistrées. ¦ ⏺ Akcia „{name}“ ponechaná: Údaje → ▶ Nahrané akcie. ¦ ⏺ Handlingen «{name}» er beholdt: Data → ▶ Innspilte handlinger.
+⏺ Enregistrement : fais tes manipulations (menus, boutons, formats), puis Données → ⏹ Arrêter l’enregistrement. ¦ ⏺ Nahrávanie: urob svoje kroky (ponuky, tlačidlá, formáty), potom Údaje → ⏹ Zastaviť nahrávanie. ¦ ⏺ Opptak: gjør stegene dine (menyer, knapper, formater), deretter Data → ⏹ Stopp opptaket.
+Aucune action enregistrée : Données → ⏺ Enregistrer une action. ¦ Žiadna nahraná akcia: Údaje → ⏺ Nahrať akciu. ¦ Ingen innspilte handlinger: Data → ⏺ Spill inn en handling.
+▶ Actions enregistrées ¦ ▶ Nahrané akcie ¦ ▶ Innspilte handlinger
+Elles se refont sur la sélection du moment. ¦ Vykonajú sa znova na aktuálnom výbere. ¦ De spilles av på det som er merket nå.
+▶ Refaire ¦ ▶ Vykonať znova ¦ ▶ Spill av
+▶ « {name} » refaite. ¦ ▶ „{name}“ vykonaná znova. ¦ ▶ «{name}» spilt av.
+Colonne {n} ¦ Stĺpec {n} ¦ Kolonne {n}
+{what} de « {col} » ¦ {what} z „{col}“ ¦ {what} av «{col}»
+Lignes ¦ Riadky ¦ Rader
+Total ¦ Spolu ¦ Totalt
+{title} · par « {rows} » et « {cols} » — d’après {src} ¦ {title} · podľa „{rows}“ a „{cols}“ — z {src} ¦ {title} · etter «{rows}» og «{cols}» — fra {src}
+{title} · par « {rows} » — d’après {src} ¦ {title} · podľa „{rows}“ — z {src} ¦ {title} · etter «{rows}» — fra {src}
+Choisis une plage avec une ligne de titres et des lignes de données (par exemple : Nom, Commune, Année, Âge). ¦ Vyber oblasť s riadkom nadpisov a riadkami údajov (napríklad: Meno, Obec, Rok, Vek). ¦ Merk et område med en overskriftsrad og datarader (for eksempel: Navn, Sted, År, Alder).
+🔀 Tableau croisé dynamique ¦ 🔀 Kontingenčná tabuľka ¦ 🔀 Pivottabell
+Créer le tableau croisé ¦ Vytvoriť kontingenčnú tabuľku ¦ Opprett pivottabellen
+D’après <b>{range}</b> ({n}). Le résultat va dans une nouvelle feuille ; « ↻ Actualiser le tableau croisé » (menu Données) le refait si les données changent. ¦ Podľa <b>{range}</b> ({n}). Výsledok ide na nový hárok; „↻ Aktualizovať kontingenčnú tabuľku“ (ponuka Údaje) ju vytvorí znova, keď sa údaje zmenia. ¦ Ut fra <b>{range}</b> ({n}). Resultatet havner i et nytt ark; «↻ Oppdater pivottabellen» (Data-menyen) lager den på nytt hvis dataene endres.
+En lignes ¦ V riadkoch ¦ Som rader
+En colonnes (facultatif) ¦ V stĺpcoch (nepovinné) ¦ Som kolonner (valgfritt)
+— rien — ¦ — nič — ¦ — ingenting —
+Sur la colonne ¦ Na stĺpci ¦ På kolonnen
+— (compter les lignes) — ¦ — (počítať riadky) — ¦ — (tell radene) —
+Totaux ¦ Súčty ¦ Summer
+Aperçu : {rows} × {cols} ¦ Náhľad: {rows} × {cols} ¦ Forhåndsvisning: {rows} × {cols}
+Tableau croisé créé : {rows} × {cols}. Données → « ↻ Actualiser le tableau croisé » pour le refaire. ¦ Kontingenčná tabuľka vytvorená: {rows} × {cols}. Údaje → „↻ Aktualizovať kontingenčnú tabuľku“ ju vytvorí znova. ¦ Pivottabell opprettet: {rows} × {cols}. Data → «↻ Oppdater pivottabellen» for å lage den på nytt.
+Cette feuille n’est pas un tableau croisé : va sur sa feuille « TCD … ». ¦ Tento hárok nie je kontingenčná tabuľka: prejdi na jej hárok „TCD …“. ¦ Arket er ikke en pivottabell: gå til arket «TCD …».
+La feuille des données n’existe plus. ¦ Hárok s údajmi už neexistuje. ¦ Dataarket finnes ikke lenger.
+Tableau croisé actualisé ({rows} × {cols}). ¦ Kontingenčná tabuľka aktualizovaná ({rows} × {cols}). ¦ Pivottabellen er oppdatert ({rows} × {cols}).
+Graphique vivant ¦ Živý graf ¦ Levende diagram
+Type de graphique ¦ Typ grafu ¦ Diagramtype
+En faire un diagramme lié à la plage ¦ Urobiť z toho diagram prepojený s oblasťou ¦ Gjør det til et skjema koblet til området
+Choisis des cases avec des nombres (et leurs noms à gauche ou en haut) : le graphique se dessine ici. ¦ Vyber bunky s číslami (a ich názvy vľavo alebo hore): graf sa nakreslí tu. ¦ Merk celler med tall (og navnene deres til venstre eller øverst): diagrammet tegnes her.
+Plage {range} · suit la sélection ¦ Oblasť {range} · sleduje výber ¦ Område {range} · følger markeringen
+Le moteur du tableur n’est pas chargé. ¦ Jadro tabuľkového editora nie je načítané. ¦ Regnearkmotoren er ikke lastet inn.
+Mon classeur ¦ Môj zošit ¦ Min arbeidsbok
+Rien à rétablir. ¦ Nie je čo obnoviť. ¦ Ingenting å gjøre om.
+d’autres changements ont suivi : utilise ↶ ({key}) ¦ nasledovali ďalšie zmeny: použi ↶ ({key}) ¦ andre endringer har kommet etter: bruk ↶ ({key})
+Barre d’outils · {group} ¦ Panel nástrojov · {group} ¦ Verktøylinje · {group}
+Barre d’outils ¦ Panel nástrojov ¦ Verktøylinje
+Police et gras ¦ Písmo a tučné ¦ Skrift og fet
+Police (E5) ¦ Písmo (E5) ¦ Skrift (E5)
+Police ¦ Písmo ¦ Skrift
+Gras ¦ Tučné ¦ Fet
+Italique ¦ Kurzíva ¦ Kursiv
+Souligné ¦ Podčiarknuté ¦ Understreket
+Renvoi à la ligne ¦ Zalomiť text ¦ Bryt tekst
+Fusionner / séparer ¦ Zlúčiť / rozdeliť ¦ Slå sammen / del opp
+Aligner à gauche ¦ Zarovnať doľava ¦ Venstrejuster
+Centrer ¦ Na stred ¦ Midtstill
+Aligner à droite ¦ Zarovnať doprava ¦ Høyrejuster
+Couleurs (C2) ¦ Farby (C2) ¦ Farger (C2)
+Couleur du texte ¦ Farba textu ¦ Tekstfarge
+Format de cellule ¦ Formát bunky ¦ Celleformat
+Format de la cellule ¦ Formát bunky ¦ Cellens format
+Une décimale de moins ¦ O desatinné miesto menej ¦ Én desimal mindre
+Une décimale de plus ¦ O desatinné miesto viac ¦ Én desimal mer
+Bordures ¦ Orámovanie ¦ Kantlinjer
+Bordures : tout ¦ Orámovanie: všetko ¦ Kantlinjer: alle
+Bordures : contour ¦ Orámovanie: obrys ¦ Kantlinjer: omriss
+Bordure du bas ¦ Dolné orámovanie ¦ Nederste kantlinje
+Sans bordure ¦ Bez orámovania ¦ Ingen kantlinje
+Graphique ¦ Graf ¦ Diagram
+Un diagramme avec les chiffres de la sélection : les types conseillés pour cette plage ¦ Diagram s číslami z výberu: odporúčané typy pre túto oblasť ¦ Et skjema med tallene fra markeringen: de foreslåtte typene for dette området
+Choisir une fonction ¦ Vybrať funkciu ¦ Velg en funksjon
+Fonction ¦ Funkcia ¦ Funksjon
+XLSX, ODS, CSV, TSV, JSON, PDF, impression ¦ XLSX, ODS, CSV, TSV, JSON, PDF, tlač ¦ XLSX, ODS, CSV, TSV, JSON, PDF, utskrift
+✓ Enregistrer et revenir ¦ ✓ Uložiť a vrátiť sa ¦ ✓ Lagre og gå tilbake
+Plein écran (⛶) ¦ Celá obrazovka (⛶) ¦ Fullskjerm (⛶)
+Données d’un autre outil ¦ Údaje z iného nástroja ¦ Data fra et annet verktøy
+Adresse (tape D12 ou un nom pour y aller) ¦ Adresa (napíš D12 alebo názov a prejdeš tam) ¦ Adresse (skriv D12 eller et navn for å gå dit)
+Tape une adresse (D12, B2:C9) ou un nom pour y aller ¦ Napíš adresu (D12, B2:C9) alebo názov a prejdeš tam ¦ Skriv en adresse (D12, B2:C9) eller et navn for å gå dit
+Contenu ou formule de la cellule ¦ Obsah alebo vzorec bunky ¦ Cellens innhold eller formel
+Feuille de calcul ¦ Hárok ¦ Regneark
+Feuille de calcul : tape pour écrire dans la cellule choisie ¦ Hárok: píš a zapíše sa to do vybranej bunky ¦ Regneark: skriv for å fylle ut den merkede cellen
+Écrire dans la cellule ¦ Písať do bunky ¦ Skriv i cellen
+Panneau de droite ¦ Pravý panel ¦ Høyre panel
+Feuilles ¦ Hárky ¦ Ark
+Clique pour choisir ce qu’on y voit (somme, moyenne…) ¦ Klikni a vyber, čo sa tu zobrazí (súčet, priemer…) ¦ Klikk for å velge hva som vises her (sum, gjennomsnitt…)
+Enregistrer une copie dans le Tableur… ¦ Uložiť kópiu do Tabuľkového editora… ¦ Lagre en kopi i Regnearket…
+Enregistrer une copie… ¦ Uložiť kópiu… ¦ Lagre en kopi…
+Enregistrer comme modèle… ¦ Uložiť ako šablónu… ¦ Lagre som mal…
+Exporter (XLSX, ODS, CSV, PDF…)… ¦ Exportovať (XLSX, ODS, CSV, PDF…)… ¦ Eksporter (XLSX, ODS, CSV, PDF…)…
+Feuille « {name} » ¦ Hárok „{name}“ ¦ Arket «{name}»
+Pas encore relié à une fiche ¦ Zatiaľ neprepojené s kartou ¦ Ikke koblet til en oppføring ennå
+Tire pour recopier ou continuer une suite ¦ Ťahaj a skopíruj alebo pokračuj v rade ¦ Dra for å kopiere eller fortsette en serie
+« {text} » n’est pas dans la liste : {list} ¦ „{text}“ nie je v zozname: {list} ¦ «{text}» står ikke på listen: {list}
+Il faut un nombre d’au moins {min} et au plus {max}. ¦ Je potrebné číslo od {min} do {max}. ¦ Det må være et tall på minst {min} og høyst {max}.
+Il faut un nombre d’au moins {min}. ¦ Je potrebné číslo aspoň {min}. ¦ Det må være et tall på minst {min}.
+Il faut un nombre et au plus {max}. ¦ Je potrebné číslo najviac {max}. ¦ Det må være et tall på høyst {max}.
+Il faut un nombre. ¦ Je potrebné číslo. ¦ Det må være et tall.
+Je ne comprends pas cette date ({why}). ¦ Tomuto dátumu nerozumiem ({why}). ¦ Jeg forstår ikke denne datoen ({why}).
+exemples : 7 mai 1925, vers 1784, an II ¦ príklady: 7 mai 1925, vers 1784, an II ¦ eksempler: 7 mai 1925, vers 1784, an II
+Tab = compléter ¦ Tab = doplniť ¦ Tab = fullfør
+✓ Compris comme une date d’acte : <b>{date}</b> (approximative : les calculs montreront ≈) ¦ ✓ Rozumiem ako dátum záznamu: <b>{date}</b> (približný: výpočty ukážu ≈) ¦ ✓ Forstått som en dokumentdato: <b>{date}</b> (omtrentlig: beregningene viser ≈)
+✓ Compris comme une date d’acte : <b>{date}</b> ¦ ✓ Rozumiem ako dátum záznamu: <b>{date}</b> ¦ ✓ Forstått som en dokumentdato: <b>{date}</b>
+Texte ou nombre. Commence par <b>=</b> pour calculer. ¦ Text alebo číslo. Na výpočet začni <b>=</b>. ¦ Tekst eller tall. Begynn med <b>=</b> for å regne.
+ƒ Formule : clique ou glisse sur des cellules pour les mettre, ou tape le nom d’une fonction (en français ou en anglais). <kbd>F4</kbd> : $A$1. ¦ ƒ Vzorec: klikni alebo ťahaj cez bunky a vložíš ich, alebo napíš názov funkcie (po francúzsky alebo po anglicky). <kbd>F4</kbd>: $A$1. ¦ ƒ Formel: klikk eller dra over celler for å sette dem inn, eller skriv navnet på en funksjon (på fransk eller engelsk). <kbd>F4</kbd>: $A$1.
+Corriger en {name} ¦ Opraviť na {name} ¦ Rett til {name}
+Résultat approché : une des dates est approximative (« vers », « avant », « an … » sans jour). ¦ Približný výsledok: jeden z dátumov je približný („vers“, „avant“, „an …“ bez dňa). ¦ Omtrentlig resultat: en av datoene er omtrentlig («vers», «avant», «an …» uten dag).
+« {text} » : ni une adresse (D12, B2:C9), ni un nom du classeur. ¦ „{text}“: nie je to adresa (D12, B2:C9) ani názov v zošite. ¦ «{text}»: verken en adresse (D12, B2:C9) eller et navn i arbeidsboken.
+Pas de feuille « {name} ». ¦ Hárok „{name}“ neexistuje. ¦ Det finnes ikke noe ark «{name}».
+Utilise {key} dans la grille (le navigateur ne laisse pas un bouton écrire dans le presse-papiers). ¦ Použi {key} v mriežke (prehliadač nedovolí tlačidlu zapisovať do schránky). ¦ Bruk {key} i rutenettet (nettleseren lar ikke en knapp skrive til utklippstavlen).
+En pixels (6 à 72) : ¦ V pixeloch (6 až 72): ¦ I piksler (6 til 72):
+Lignes masquées (Format → Tout remontrer) ¦ Skryté riadky (Formát → Znova zobraziť všetko) ¦ Skjulte rader (Format → Vis alle igjen)
+Colonnes masquées (Format → Tout remontrer) ¦ Skryté stĺpce (Formát → Znova zobraziť všetko) ¦ Skjulte kolonner (Format → Vis alle igjen)
+Trier A → Z (sur la colonne choisie) ¦ Zoradiť A → Z (podľa vybraného stĺpca) ¦ Sorter A → Å (etter den merkede kolonnen)
+Trier Z → A ¦ Zoradiť Z → A ¦ Sorter Å → A
+Trier sur plusieurs colonnes… ¦ Zoradiť podľa viacerých stĺpcov… ¦ Sorter etter flere kolonner…
+Espaces en trop retirés. ¦ Nadbytočné medzery odstránené. ¦ Overflødige mellomrom fjernet.
+Rien à retirer. ¦ Nie je čo odobrať. ¦ Ingenting å fjerne.
+Police des cellules ¦ Písmo buniek ¦ Cellenes skrift
+Cette police a un nom que le tableur ne sait pas garder. ¦ Toto písmo má názov, ktorý tabuľkový editor nevie uložiť. ¦ Denne skriften har et navn regnearket ikke kan ta vare på.
+Une taille entre 6 et 72 px (« {value} » ne va pas). ¦ Veľkosť medzi 6 a 72 px („{value}“ nejde). ¦ En størrelse mellom 6 og 72 px («{value}» går ikke).
+Une taille entre 6 et 72 px. ¦ Veľkosť medzi 6 a 72 px. ¦ En størrelse mellom 6 og 72 px.
+Choisis d’abord plusieurs cases à fusionner. ¦ Najprv vyber niekoľko buniek na zlúčenie. ¦ Merk først flere celler som skal slås sammen.
+Cases fusionnées : {n} ¦ Zlúčené bunky: {n} ¦ Sammenslåtte celler: {n}
+Largeur de colonne ¦ Šírka stĺpca ¦ Kolonnebredde
+Hauteur de ligne ¦ Výška riadka ¦ Radhøyde
+En pixels (16 à 1200) : ¦ V pixeloch (16 až 1200): ¦ I piksler (16 til 1200):
+En pixels (12 à 600) : ¦ V pixeloch (12 až 600): ¦ I piksler (12 til 600):
+Un nom commence par une lettre, sans espace (ex. Total, Âges_1836). ¦ Názov začína písmenom, bez medzier (napr. Total, Vek_1836). ¦ Et navn begynner med en bokstav, uten mellomrom (f.eks. Total, Alder_1836).
+Nom « {name} » = {ref} : tape =SOMME({name}) dans une formule. ¦ Názov „{name}“ = {ref}: napíš =SOMME({name}) vo vzorci. ¦ Navnet «{name}» = {ref}: skriv =SOMME({name}) i en formel.
+Nom pour la plage ¦ Názov oblasti ¦ Navn på området
+Un nom pour {ref} (pour écrire =SOMME(Total) au lieu de =SOMME(D2:D40)) : ¦ Názov pre {ref} (aby si mohol písať =SOMME(Total) namiesto =SOMME(D2:D40)): ¦ Et navn for {ref} (for å skrive =SOMME(Total) i stedet for =SOMME(D2:D40)):
+💬 Note sur {cell} ¦ 💬 Poznámka k {cell} ¦ 💬 Notat til {cell}
+La note s’affiche au survol de la case (un petit coin orange). Vide = pas de note. ¦ Poznámka sa zobrazí po prejdení myšou nad bunkou (malý oranžový roh). Prázdne = žiadna poznámka. ¦ Notatet vises når du holder musen over cellen (et lite oransje hjørne). Tomt = ingen notat.
+⌨️ Raccourcis du tableur ¦ ⌨️ Skratky tabuľkového editora ¦ ⌨️ Hurtigtaster i regnearket
+Raccourcis indisponibles. ¦ Skratky nie sú k dispozícii. ¦ Hurtigtastene er ikke tilgjengelige.
+⚙️ Réglages du tableur ¦ ⚙️ Nastavenia tabuľkového editora ¦ ⚙️ Innstillinger for regnearket
+Après la touche Entrée, aller ¦ Po stlačení Enter prejsť ¦ Etter Enter-tasten, gå
+vers le bas ¦ nadol ¦ ned
+vers la droite (saisie de relevés en ligne) ¦ doprava (zápis výpisov po riadkoch) ¦ til høyre (registrering av avskrifter rad for rad)
+Séparateur des fichiers CSV ¦ Oddeľovač súborov CSV ¦ Skilletegn i CSV-filer
+point-virgule « ; » (Excel en français) ¦ bodkočiarka „;“ (Excel vo francúzštine) ¦ semikolon «;» (Excel på fransk)
+virgule « , » ¦ čiarka „,“ ¦ komma «,»
+tabulation ¦ tabulátor ¦ tabulator
+Largeur des colonnes d’une feuille neuve ¦ Šírka stĺpcov nového hárka ¦ Kolonnebredde i et nytt ark
+Dans la barre du bas, pour les cellules choisies ¦ V spodnej lište, pre vybrané bunky ¦ I den nederste linjen, for de merkede cellene
+Réglages du tableur ¦ Nastavenia tabuľkového editora ¦ Innstillinger for regnearket
+Trop de lignes ou de colonnes d’un coup. ¦ Príliš veľa riadkov alebo stĺpcov naraz. ¦ For mange rader eller kolonner på én gang.
+Trié {dir} sur la colonne {col} (la 1re ligne, ce sont les titres). ¦ Zoradené {dir} podľa stĺpca {col} (1. riadok sú nadpisy). ¦ Sortert {dir} etter kolonne {col} (1. rad er overskrifter).
+Trié {dir} sur la colonne {col}. ¦ Zoradené {dir} podľa stĺpca {col}. ¦ Sortert {dir} etter kolonne {col}.
+A → Z (croissant) ¦ A → Z (vzostupne) ¦ A → Å (stigende)
+Z → A (décroissant) ¦ Z → A (zostupne) ¦ Å → A (synkende)
+Plage {range} · les dates d’actes (« vers 1784 », « an II ») se rangent à leur date. ¦ Oblasť {range} · dátumy záznamov („vers 1784“, „an II“) sa zoradia podľa svojho dátumu. ¦ Område {range} · dokumentdatoer («vers 1784», «an II») sorteres etter datoen sin.
+La première ligne, ce sont les titres ¦ Prvý riadok sú nadpisy ¦ Første rad er overskrifter
+Puis par ¦ Potom podľa ¦ Deretter etter
+Choisis un tableau avec une ligne de titres et des lignes en dessous. ¦ Vyber tabuľku s riadkom nadpisov a riadkami pod ním. ¦ Merk en tabell med en overskriftsrad og rader under den.
+(vide) ¦ (prázdne) ¦ (tom)
+Chercher dans le tableau… (nom, métier) ¦ Hľadať v tabuľke… (meno, povolanie) ¦ Søk i tabellen… (navn, yrke)
+{n} sur {total} ¦ {n} z {total} ¦ {n} av {total}
+Supprimer les doublons ¦ Vymazať duplicity ¦ Slett duplikater
+Plage {range} · la 1re ligne, ce sont les titres. La première ligne de chaque groupe reste. ¦ Oblasť {range} · 1. riadok sú nadpisy. Zostane prvý riadok každej skupiny. ¦ Område {range} · 1. rad er overskrifter. Den første raden i hver gruppe blir værende.
+Plage {range}. La première ligne de chaque groupe reste. ¦ Oblasť {range}. Zostane prvý riadok každej skupiny. ¦ Område {range}. Den første raden i hver gruppe blir værende.
+Compare les colonnes : ¦ Porovnať stĺpce: ¦ Sammenlign kolonnene:
+{n} en double (lignes {rows}). ¦ Duplicitné: {n} (riadky {rows}). ¦ {n} duplikater (rad {rows}).
+{n} en double (ligne {rows}). ¦ Duplicitné: {n} (riadok {rows}). ¦ {n} duplikat (rad {rows}).
+Aucune ligne en double. ¦ Žiadne duplicitné riadky. ¦ Ingen dupliserte rader.
+Supprimer {n} ¦ Vymazať {n} ¦ Slett {n}
+Coche au moins une colonne. ¦ Zaškrtni aspoň jeden stĺpec. ¦ Kryss av for minst én kolonne.
+Choisis des cases de texte dans une colonne (ex. « MARTIN Jean, 34 ans, laboureur »). ¦ Vyber textové bunky v stĺpci (napr. „MARTIN Jean, 34 ans, laboureur“). ¦ Merk tekstceller i en kolonne (f.eks. «MARTIN Jean, 34 ans, laboureur»).
+Convertir le texte en colonnes ¦ Previesť text na stĺpce ¦ Konverter tekst til kolonner
+Convertir ¦ Previesť ¦ Konverter
+Couper à : ¦ Rozdeliť pri: ¦ Del ved:
+« 34 ans » devient 34 ¦ „34 ans“ sa zmení na 34 ¦ «34 ans» blir til 34
+Le nom en capitales devient une colonne à part (« MARTIN Jean » → MARTIN | Jean) ¦ Priezvisko veľkými písmenami bude samostatný stĺpec („MARTIN Jean“ → MARTIN | Jean) ¦ Etternavnet med store bokstaver blir en egen kolonne («MARTIN Jean» → MARTIN | Jean)
+Les morceaux vont dans la colonne {col} et les suivantes (ce qui s’y trouve est remplacé ; ↶ pour revenir). ¦ Časti idú do stĺpca {col} a ďalších (čo tam je, sa nahradí; ↶ na návrat). ¦ Delene havner i kolonne {col} og de neste (det som står der, erstattes; ↶ for å gå tilbake).
+Validation des données ¦ Overenie údajov ¦ Datavalidering
+Pour {range} : ce qu’on peut écrire dans ces cases. ¦ Pre {range}: čo sa smie do týchto buniek napísať. ¦ For {range}: hva som kan skrives i disse cellene.
+Autoriser ¦ Povoliť ¦ Tillat
+Une liste de choix (menu ▾) ¦ Zoznam možností (ponuka ▾) ¦ En liste med valg (meny ▾)
+👤 Une personne de la base (menu de choix) ¦ 👤 Osoba z databázy (výberová ponuka) ¦ 👤 En person fra databasen (velger)
+📍 Un lieu de la base (menu de choix) ¦ 📍 Miesto z databázy (výberová ponuka) ¦ 📍 Et sted fra databasen (velger)
+Un nombre entre… ¦ Číslo medzi… ¦ Et tall mellom…
+Une date d’acte (vers 1784, an II…) ¦ Dátum záznamu (vers 1784, an II…) ¦ En dokumentdato (vers 1784, an II…)
+Les choix (un par ligne) ¦ Možnosti (jedna na riadok) ¦ Valgene (ett per linje)
+Entre ¦ Medzi ¦ Mellom
+Garder aussi un texte libre (sans fiche, ou hors de la liste) ¦ Povoliť aj voľný text (bez karty alebo mimo zoznamu) ¦ Behold også fritekst (uten oppføring, eller utenfor listen)
+Écris au moins un choix. ¦ Napíš aspoň jednu možnosť. ¦ Skriv minst ett valg.
+FORMAT ¦ FORMÁT ¦ FORMAT
+Mise en forme conditionnelle ¦ Podmienené formátovanie ¦ Betinget formatering
+Ajouter la règle ¦ Pridať pravidlo ¦ Legg til regelen
+Une couleur quand la valeur le demande : l’erreur ou la valeur étrange saute aux yeux. ¦ Farba, keď to hodnota vyžaduje: chyba alebo zvláštna hodnota hneď padne do oka. ¦ En farge når verdien krever det: feilen eller den rare verdien springer i øynene.
+Prêtes à l’emploi : ¦ Pripravené: ¦ Klare til bruk:
+« âge > 100 ans » ¦ „vek > 100 rokov“ ¦ «alder > 100 år»
+« date impossible » ¦ „nemožný dátum“ ¦ «umulig dato»
+« doublons » ¦ „duplicity“ ¦ «duplikater»
+« barres » ¦ „pruhy“ ¦ «søyler»
+Si la valeur ¦ Ak hodnota ¦ Hvis verdien
+alors ¦ potom ¦ så
+en gras ¦ tučne ¦ med fet
+Une plage comme D2:D40. ¦ Oblasť ako D2:D40. ¦ Et område som D2:D40.
+Écris un nombre. ¦ Napíš číslo. ¦ Skriv et tall.
+ÉDITION ¦ ÚPRAVY ¦ REDIGER
+🔍 Rechercher et remplacer ¦ 🔍 Nájsť a nahradiť ¦ 🔍 Søk og erstatt
+Remplacer tout ¦ Nahradiť všetko ¦ Erstatt alle
+Remplacer par ¦ Nahradiť čím ¦ Erstatt med
+Dans toutes les feuilles ¦ Vo všetkých hárkoch ¦ I alle ark
+Respecter les capitales ¦ Rozlišovať veľké písmená ¦ Skill mellom store og små bokstaver
+Chercher le suivant ¦ Nájsť ďalší ¦ Finn neste
+Trouvé en {cell} ¦ Nájdené v {cell} ¦ Funnet i {cell}
+Écris ce qu’il faut chercher. ¦ Napíš, čo treba hľadať. ¦ Skriv hva du vil søke etter.
+Aucune fonction ne correspond. ¦ Žiadna funkcia nezodpovedá. ¦ Ingen funksjon passer.
+ƒ Choisir une fonction ¦ ƒ Vybrať funkciu ¦ ƒ Velg en funksjon
+Chercher… (âge, somme, recherche) ¦ Hľadať… (vek, súčet, vyhľadanie) ¦ Søk… (alder, sum, oppslag)
+Le menu de choix n’est pas chargé. ¦ Výberová ponuka nie je načítaná. ¦ Velgeren er ikke lastet inn.
+📍 Un lieu pour {cell} ¦ 📍 Miesto pre {cell} ¦ 📍 Et sted for {cell}
+👤 Une personne pour {cell} ¦ 👤 Osoba pre {cell} ¦ 👤 En person for {cell}
+📍 Lieu de la base ¦ 📍 Miesto z databázy ¦ 📍 Sted fra databasen
+auto ¦ auto ¦ auto
+Décimales ¦ Desatinné miesta ¦ Desimaler
+✓ « {text} » est comprise (≈) ¦ ✓ „{text}“ rozumiem (≈) ¦ ✓ «{text}» forstått (≈)
+✓ « {text} » est comprise ¦ ✓ „{text}“ rozumiem ¦ ✓ «{text}» forstått
+Noir ¦ Čierna ¦ Svart
+Contour ¦ Obrys ¦ Omriss
+Retirer la règle ¦ Odobrať pravidlo ¦ Fjern regelen
+Aucune règle sur cette feuille. ¦ Na tomto hárku nie je žiadne pravidlo. ¦ Ingen regel i dette arket.
+＋ Ajouter une règle… ¦ ＋ Pridať pravidlo… ¦ ＋ Legg til en regel…
+Une liste : {list} ¦ Zoznam: {list} ¦ En liste: {list}
+👤 Une personne de la base ¦ 👤 Osoba z databázy ¦ 👤 En person fra databasen
+📍 Un lieu de la base ¦ 📍 Miesto z databázy ¦ 📍 Et sted fra databasen
+Un nombre ¦ Číslo ¦ Et tall
+Une date d’acte ¦ Dátum záznamu ¦ En dokumentdato
+Garder le texte ¦ Ponechať text ¦ Behold teksten
+Pas de validation ici. ¦ Tu nie je žiadne overenie. ¦ Ingen validering her.
+Validation des données… ¦ Overenie údajov… ¦ Datavalidering…
+Enregistre d’abord le classeur (💾), puis ouvre la fiche. ¦ Najprv ulož zošit (💾), potom otvor kartu. ¦ Lagre arbeidsboken først (💾), og åpne så oppføringen.
+{name} : lieu n° {id} de ta base. ¦ {name}: miesto č. {id} v tvojej databáze. ¦ {name}: sted nr. {id} i databasen din.
+Règle « {range} » retirée ¦ Pravidlo „{range}“ odobrané ¦ Regelen «{range}» er fjernet
+Police (E5) : {font} ¦ Písmo (E5): {font} ¦ Skrift (E5): {font}
+celle de départ ¦ východiskové ¦ standard
+Panneau de droite : montrer ¦ Pravý panel: zobraziť ¦ Høyre panel: vis
+Panneau de droite : cacher ¦ Pravý panel: skryť ¦ Høyre panel: skjul
+Double-clic : renommer · clic droit : plus d’actions ¦ Dvojklik: premenovať · pravé tlačidlo: ďalšie akcie ¦ Dobbeltklikk: gi nytt navn · høyreklikk: flere handlinger
+Ajouter une feuille ¦ Pridať hárok ¦ Legg til et ark
+Feuille {n} ¦ Hárok {n} ¦ Ark {n}
+Renommer la feuille ¦ Premenovať hárok ¦ Gi arket nytt navn
+Un classeur garde au moins une feuille. ¦ Zošit si ponechá aspoň jeden hárok. ¦ En arbeidsbok beholder minst ett ark.
+Feuille « {name} » supprimée ¦ Hárok „{name}“ vymazaný ¦ Arket «{name}» er slettet
+Couleur de l’onglet… ¦ Farba záložky… ¦ Fanefarge…
+Déplacer à gauche ¦ Posunúť doľava ¦ Flytt til venstre
+Déplacer à droite ¦ Posunúť doprava ¦ Flytt til høyre
+Somme <b>{v}</b> ¦ Súčet <b>{v}</b> ¦ Sum <b>{v}</b>
+Moyenne <b>{v}</b> ¦ Priemer <b>{v}</b> ¦ Gjennomsnitt <b>{v}</b>
+Nb <b>{v}</b> ¦ Počet <b>{v}</b> ¦ Antall <b>{v}</b>
+Min <b>{v}</b> ¦ Min <b>{v}</b> ¦ Min <b>{v}</b>
+Max <b>{v}</b> ¦ Max <b>{v}</b> ¦ Maks <b>{v}</b>
+Dans la barre d’état ¦ V stavovom riadku ¦ I statuslinjen
+Utilise {key} : le navigateur ne laisse pas un menu écrire dans le presse-papiers. ¦ Použi {key}: prehliadač nedovolí ponuke zapisovať do schránky. ¦ Bruk {key}: nettleseren lar ikke en meny skrive til utklippstavlen.
+Sélection trop grande pour le presse-papiers. ¦ Výber je pre schránku príliš veľký. ¦ Markeringen er for stor for utklippstavlen.
+Coupé : choisis où coller, puis {key}. ¦ Vystrihnuté: vyber, kam vložiť, potom {key}. ¦ Klippet ut: velg hvor det skal limes inn, deretter {key}.
+Utilise {key} dans la grille pour coller. ¦ Na vloženie použi {key} v mriežke. ¦ Bruk {key} i rutenettet for å lime inn.
+Trop de cellules à coller. ¦ Príliš veľa buniek na vloženie. ¦ For mange celler å lime inn.
+{n} (avec le gras et les couleurs). ¦ {n} (s tučným písmom a farbami). ¦ {n} (med fet skrift og farger).
+Série {n} ¦ Rad {n} ¦ Serie {n}
+Colonnes groupées ¦ Zoskupené stĺpce ¦ Grupperte søyler
+Barres horizontales ¦ Vodorovné pruhy ¦ Liggende søyler
+TSV (tabulations) ¦ TSV (tabulátory) ¦ TSV (tabulatorer)
+⤒ Importer un tableau ¦ ⤒ Importovať tabuľku ¦ ⤒ Importer en tabell
+Séparateur deviné : {sep} · Encodage : {enc} ¦ Odhadnutý oddeľovač: {sep} · Kódovanie: {enc} ¦ Gjettet skilletegn: {sep} · Koding: {enc}
+point-virgule (;) ¦ bodkočiarka (;) ¦ semikolon (;)
+virgule (,) ¦ čiarka (,) ¦ komma (,)
+✓ Accents corrects : « {list} ». ¦ ✓ Diakritika v poriadku: „{list}“. ¦ ✓ Aksenter riktige: «{list}».
+<b>{rows}</b> dans {sheets} ¦ <b>{rows}</b> v {sheets} ¦ <b>{rows}</b> i {sheets}
+CSV et TSV : la feuille ouverte. Les autres : tout le classeur. Une cellule qui commence par « = » est protégée dans un CSV (pas de formule glissée). ¦ CSV a TSV: otvorený hárok. Ostatné: celý zošit. Bunka začínajúca „=“ je v CSV chránená (žiadny podstrčený vzorec). ¦ CSV og TSV: det åpne arket. De andre: hele arbeidsboken. En celle som begynner med «=», beskyttes i en CSV (ingen innsmuglet formel).
+tout tableur ¦ akýkoľvek tabuľkový editor ¦ alle regnearkprogrammer
+tabulations ¦ tabulátory ¦ tabulatorer
+données ¦ údaje ¦ data
+à lire ¦ na čítanie ¦ til lesing
+💾 Fichier de l’outil ¦ 💾 Súbor nástroja ¦ 💾 Verktøyets fil
+Exporté : {name} ¦ Exportované: {name} ¦ Eksportert: {name}
+(feuille vide) ¦ (prázdny hárok) ¦ (tomt ark)
+Toutes les feuilles ¦ Všetky hárky ¦ Alle ark
+Quadrillage ¦ Mriežka ¦ Rutenett
+Rangé dans Listes → Outils de modification → 🧾 Tableur. ¦ Nájdeš v Zoznamy → Nástroje na úpravy → 🧾 Tabuľkový editor. ¦ Ligger i Lister → Redigeringsverktøy → 🧾 Regneark.
+Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles). ¦ Šablóna „{name}“ uložená (Začať zo šablóny → Moje šablóny). ¦ Malen «{name}» er lagret (Start fra en mal → Mine maler).
+Copie « {name} » enregistrée. ¦ Kópia „{name}“ uložená. ¦ Kopien «{name}» er lagret.
+Ce classeur ¦ Tento zošit ¦ Denne arbeidsboken
+Impossible d’enregistrer : {error} ¦ Nemožno uložiť: {error} ¦ Kunne ikke lagre: {error}
+Enregistrer comme modèle ¦ Uložiť ako šablónu ¦ Lagre som mal
+Enregistrer une copie ¦ Uložiť kópiu ¦ Lagre en kopi
+Le nom du modèle (les données restent : vide-les avant si tu veux un modèle vierge) : ¦ Názov šablóny (údaje zostanú: ak chceš prázdnu šablónu, najprv ich vymaž): ¦ Navnet på malen (dataene blir værende: tøm dem først hvis du vil ha en tom mal):
+Le nom de la copie : ¦ Názov kópie: ¦ Navnet på kopien:
+{name} (copie) ¦ {name} (kópia) ¦ {name} (kopi)
+Les changements faits depuis le dernier enregistrement seront perdus. ¦ Zmeny od posledného uloženia sa stratia. ¦ Endringene siden sist du lagret, går tapt.
+📋 Partir d’un modèle ¦ 📋 Začať zo šablóny ¦ 📋 Start fra en mal
+Mes modèles ¦ Moje šablóny ¦ Mine maler
+Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Zatiaľ nemáš vlastnú šablónu: v zošite Súbor → „Uložiť ako šablónu…“. ¦ Ingen egne maler ennå: i en arbeidsbok, Fil → «Lagre som mal…».
+séparateur « {sep} » ¦ oddeľovač „{sep}“ ¦ skilletegn «{sep}»
+Classeur importé ¦ Importovaný zošit ¦ Importert arbeidsbok
+Classeur « {name} » créé ({rows}) ¦ Zošit „{name}“ vytvorený ({rows}) ¦ Arbeidsboken «{name}» er opprettet ({rows})
+classeur ¦ zošit ¦ arbeidsbok
+＋ Nouveau classeur ¦ ＋ Nový zošit ¦ ＋ Ny arbeidsbok
+Relevé de recensement, registre paroissial, budget de la recherche, suivi des courriers… ¦ Výpis zo sčítania obyvateľov, farská matrika, rozpočet výskumu, evidencia korešpondencie… ¦ Avskrift av folketelling, kirkebok, forskningsbudsjett, oppfølging av brev…
+Tu divises par zéro : {ref} est vide ou vaut 0. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Delíš nulou: {ref} je prázdna alebo rovná 0. Tip: =SI.ERREUR(…;"") nechá bunku prázdnu. ¦ Du deler på null: {ref} er tom eller lik 0. Tips: =SI.ERREUR(…;"") lar cellen stå tom.
+Tu divises par zéro : {why}. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Delíš nulou: {why}. Tip: =SI.ERREUR(…;"") nechá bunku prázdnu. ¦ Du deler på null: {why}. Tips: =SI.ERREUR(…;"") lar cellen stå tom.
+Tu divises par zéro. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Delíš nulou. Tip: =SI.ERREUR(…;"") nechá bunku prázdnu. ¦ Du deler på null. Tips: =SI.ERREUR(…;"") lar cellen stå tom.
+Je ne connais pas « {name} ». Voulais-tu dire {sugg} ? ¦ „{name}“ nepoznám. Mal si na mysli {sugg}? ¦ Jeg kjenner ikke «{name}». Mente du {sugg}?
+Je ne connais pas « {name} ». Tape les premières lettres : la liste des fonctions s’ouvre. ¦ „{name}“ nepoznám. Napíš prvé písmená: otvorí sa zoznam funkcií. ¦ Jeg kjenner ikke «{name}». Skriv de første bokstavene: listen over funksjoner åpnes.
+Un nom inconnu dans la formule. ¦ Neznámy názov vo vzorci. ¦ Et ukjent navn i formelen.
+« {text} » n’est pas un nombre (cellule {cell}) : on ne peut pas faire de calcul avec. ¦ „{text}“ nie je číslo (bunka {cell}): nedá sa s ním počítať. ¦ «{text}» er ikke et tall (celle {cell}): det kan ikke brukes i en beregning.
+« {text} » n’est pas un nombre : on ne peut pas faire de calcul avec. ¦ „{text}“ nie je číslo: nedá sa s ním počítať. ¦ «{text}» er ikke et tall: det kan ikke brukes i en beregning.
+Une valeur ne convient pas ¦ Hodnota sa nehodí ¦ En verdi passer ikke
+{what} (cellule {cell}). ¦ {what} (bunka {cell}). ¦ {what} (celle {cell}).
+La formule montre quelque chose qui n’existe pas : {what}. ¦ Vzorec odkazuje na niečo, čo neexistuje: {what}. ¦ Formelen viser til noe som ikke finnes: {what}.
+La formule montre une cellule qui a été supprimée. ¦ Vzorec odkazuje na bunku, ktorá bola vymazaná. ¦ Formelen viser til en celle som er slettet.
+Valeur introuvable ¦ Hodnota sa nenašla ¦ Fant ikke verdien
+La recherche ¦ Vyhľadávanie ¦ Oppslaget
+{fn} n’a pas trouvé « {what} » dans {where}. ¦ {fn} nenašla „{what}“ v {where}. ¦ {fn} fant ikke «{what}» i {where}.
+{fn} n’a pas trouvé « {what} ». ¦ {fn} nenašla „{what}“. ¦ {fn} fant ikke «{what}».
+{path} : la formule tourne en rond. ¦ {path}: vzorec sa točí v kruhu. ¦ {path}: formelen går i ring.
+La formule a besoin d’elle-même : elle tourne en rond. ¦ Vzorec potrebuje sám seba: točí sa v kruhu. ¦ Formelen trenger seg selv: den går i ring.
+« {text} » : {why}. ¦ „{text}“: {why}. ¦ «{text}»: {why}.
+cette date ¦ tento dátum ¦ denne datoen
+Je ne comprends pas {what} (« {text} »). Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Nerozumiem {what} („{text}“). Príklady: 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Jeg forstår ikke {what} («{text}»). Eksempler: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas {what}. Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Nerozumiem {what}. Príklady: 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Jeg forstår ikke {what}. Eksempler: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas la formule près de « {near} » : {why}. ¦ Nerozumiem vzorcu pri „{near}“: {why}. ¦ Jeg forstår ikke formelen nær «{near}»: {why}.
+Je ne comprends pas la formule : {why}. ¦ Nerozumiem vzorcu: {why}. ¦ Jeg forstår ikke formelen: {why}.
+Je ne comprends pas la formule près de « {near} » : vérifie les parenthèses, les guillemets et les « ; ». ¦ Nerozumiem vzorcu pri „{near}“: skontroluj zátvorky, úvodzovky a „;“. ¦ Jeg forstår ikke formelen nær «{near}»: sjekk parentesene, anførselstegnene og «;».
+Je ne comprends pas la formule : vérifie les parenthèses, les guillemets et les « ; ». ¦ Nerozumiem vzorcu: skontroluj zátvorky, úvodzovky a „;“. ¦ Jeg forstår ikke formelen: sjekk parentesene, anførselstegnene og «;».
+Nombre impossible ¦ Nemožné číslo ¦ Umulig tall
+Le résultat a besoin de {size} vers le bas et la droite, mais {cell} n’est pas vide : vide-la pour voir tout le résultat. ¦ Výsledok potrebuje {size} nadol a doprava, ale {cell} nie je prázdna: vyprázdni ju a uvidíš celý výsledok. ¦ Resultatet trenger {size} nedover og til høyre, men {cell} er ikke tom: tøm den for å se hele resultatet.
+plusieurs cases ¦ niekoľko buniek ¦ flere celler
+une case ¦ jednu bunku ¦ én celle
+Trop gros pour être calculé : {why}. ¦ Príliš veľké na výpočet: {why}. ¦ For stort til å beregnes: {why}.
+réduis la plage ¦ zmenši oblasť ¦ gjør området mindre
+Erreur dans la formule. ¦ Chyba vo vzorci. ¦ Feil i formelen.
+Astuce : =SI.ERREUR(A4/B4;"") ¦ Tip: =SI.ERREUR(A4/B4;"") ¦ Tips: =SI.ERREUR(A4/B4;"")
+fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un document de bureau n’utilise pas ¦ súbor odmietnutý: obsahuje deklarácie XML (DOCTYPE alebo ENTITY), ktoré kancelársky dokument nepoužíva ¦ filen er avvist: den inneholder XML-deklarasjoner (DOCTYPE eller ENTITY) som et kontordokument ikke bruker
+fichier XML abîmé ¦ poškodený súbor XML ¦ skadet XML-fil
+fichier refusé : trop d’éléments ¦ súbor odmietnutý: príliš veľa prvkov ¦ filen er avvist: for mange elementer
+fichier refusé : XML trop imbriqué ¦ súbor odmietnutý: XML je príliš vnorené ¦ filen er avvist: XML er nestet for dypt
+fichier trop gros (plus de {n} Mo) ¦ súbor je príliš veľký (viac ako {n} MB) ¦ filen er for stor (over {n} MB)
+ce n’est pas un fichier zip valide ¦ nie je to platný súbor zip ¦ dette er ikke en gyldig zip-fil
+fichier refusé : trop d’éléments dans le zip ¦ súbor odmietnutý: príliš veľa položiek v zipe ¦ filen er avvist: for mange elementer i zip-filen
+fichier chiffré : ouvre-le d’abord dans son tableur et enregistre-le sans mot de passe ¦ šifrovaný súbor: najprv ho otvor v jeho tabuľkovom programe a ulož bez hesla ¦ kryptert fil: åpne den først i regnearkprogrammet sitt og lagre den uten passord
+fichier zip abîmé ¦ poškodený súbor zip ¦ skadet zip-fil
+fichier refusé : trop gros une fois décompressé ¦ súbor odmietnutý: po rozbalení príliš veľký ¦ filen er avvist: for stor når den er pakket ut
+fichier refusé : il se décompresse en beaucoup trop gros (bombe zip) ¦ súbor odmietnutý: rozbalí sa do príliš veľkej veľkosti (zip bomba) ¦ filen er avvist: den pakkes ut til noe altfor stort (zip-bombe)
+ce navigateur ne sait pas ouvrir les fichiers zip (mets-le à jour) ¦ tento prehliadač nevie otvárať súbory zip (aktualizuj ho) ¦ denne nettleseren kan ikke åpne zip-filer (oppdater den)
+compression inconnue dans le fichier ¦ neznáma kompresia v súbore ¦ ukjent komprimering i filen
+ce n’est pas un fichier Excel (.xlsx) : xl/workbook.xml manque ¦ nie je to súbor Excel (.xlsx): chýba xl/workbook.xml ¦ dette er ikke en Excel-fil (.xlsx): xl/workbook.xml mangler
+fichier refusé : trop de feuilles ¦ súbor odmietnutý: príliš veľa hárkov ¦ filen er avvist: for mange ark
+fichier refusé : trop de cellules ¦ súbor odmietnutý: príliš veľa buniek ¦ filen er avvist: for mange celler
+ce n’est pas un fichier LibreOffice (.ods) : content.xml manque ¦ nie je to súbor LibreOffice (.ods): chýba content.xml ¦ dette er ikke en LibreOffice-fil (.ods): content.xml mangler
+ce fichier n’est pas un JSON valide ¦ tento súbor nie je platný JSON ¦ filen er ikke gyldig JSON
+je ne trouve pas de tableau dans ce JSON (il faut une liste de lignes ou d’objets) ¦ v tomto JSON nenachádzam tabuľku (je potrebný zoznam riadkov alebo objektov) ¦ jeg finner ingen tabell i denne JSON-filen (det må være en liste med rader eller objekter)
+les anciens fichiers Excel (.xls) ne sont pas lus : ouvre-le dans Excel ou LibreOffice et enregistre-le en .xlsx ¦ staré súbory Excel (.xls) sa nečítajú: otvor ho v Exceli alebo LibreOffice a ulož ako .xlsx ¦ gamle Excel-filer (.xls) leses ikke: åpne den i Excel eller LibreOffice og lagre den som .xlsx
+ce fichier compressé n’est ni un .xlsx ni un .ods ¦ tento komprimovaný súbor nie je .xlsx ani .ods ¦ denne komprimerte filen er verken en .xlsx eller en .ods
+Nombre 0,00 ¦ Číslo 0,00 ¦ Tall 0,00
+Nombre entier ¦ Celé číslo ¦ Heltall
+Monnaie (€) ¦ Mena (€) ¦ Valuta (€)
+Pourcentage ¦ Percentá ¦ Prosent
+Date courte ¦ Krátky dátum ¦ Kort dato
+Date d’acte ¦ Dátum záznamu ¦ Dokumentdato
+Texte ¦ Text ¦ Tekst
+Relevé de recensement ¦ Výpis zo sčítania obyvateľov ¦ Avskrift av folketelling
+colonnes de l’année · foyers · « Né(e) vers » calculé ¦ stĺpce roka · domácnosti · vypočítané „Narodený(á) okolo“ ¦ årets kolonner · husstander · beregnet «Født omkring»
+Registre paroissial ¦ Farská matrika ¦ Kirkebok
+baptêmes, mariages, sépultures ¦ krsty, sobáše, pohreby ¦ dåp, vielser, begravelser
+Budget de la recherche ¦ Rozpočet výskumu ¦ Forskningsbudsjett
+actes, déplacements, abonnements ¦ záznamy, cesty, predplatné ¦ dokumenter, reiser, abonnementer
+Suivi des courriers ¦ Evidencia korešpondencie ¦ Oppfølging av brev
+envoyé, relancé, réponse ¦ odoslané, urgované, odpoveď ¦ sendt, purret, svar
+Arbre en tableau ¦ Strom ako tabuľka ¦ Tre som tabell
+Sosa, génération, côté, âge ¦ Sosa, generácia, strana, vek ¦ Sosa, generasjon, side, alder
+objets, prix, total en livres ¦ predmety, ceny, súčet v livrách ¦ gjenstander, priser, sum i livres
+Registre matricule ¦ Vojenská kmeňová kniha ¦ Militærrulle
+classe, signalement, campagnes ¦ ročník, osobný popis, ťaženia ¦ årsklasse, signalement, felttog
+📋 Partir d’un modèle… ¦ 📋 Začať zo šablóny… ¦ 📋 Start fra en mal…
+⤒ Importer un tableau… ¦ ⤒ Importovať tabuľku… ¦ ⤒ Importer en tabell…
+⤓ Exporter… ¦ ⤓ Exportovať… ¦ ⤓ Eksporter…
+🖨 Imprimer… ¦ 🖨 Tlačiť… ¦ 🖨 Skriv ut…
+⚙️ Réglages du tableur… ¦ ⚙️ Nastavenia tabuľkového editora… ¦ ⚙️ Innstillinger for regnearket…
+Insertion ¦ Vložiť ¦ Sett inn
+Coller les valeurs seulement ¦ Vložiť len hodnoty ¦ Lim inn bare verdier
+Effacer le contenu ¦ Vymazať obsah ¦ Tøm innholdet
+Effacer tout (contenu et mise en forme) ¦ Vymazať všetko (obsah aj formátovanie) ¦ Tøm alt (innhold og formatering)
+Recopier vers le bas ¦ Vyplniť nadol ¦ Fyll ned
+Recopier vers la droite ¦ Vyplniť doprava ¦ Fyll til høyre
+🔍 Rechercher et remplacer… ¦ 🔍 Nájsť a nahradiť… ¦ 🔍 Søk og erstatt…
+Ligne au-dessus ¦ Riadok nad ¦ Rad over
+Ligne en dessous ¦ Riadok pod ¦ Rad under
+＋ Nouvelle feuille ¦ ＋ Nový hárok ¦ ＋ Nytt ark
+ƒ Fonction… ¦ ƒ Funkcia… ¦ ƒ Funksjon…
+Σ Somme automatique ¦ Σ Automatický súčet ¦ Σ Autosummer
+📅 Date du jour ¦ 📅 Dnešný dátum ¦ 📅 Dagens dato
+Nom pour la plage… ¦ Názov oblasti… ¦ Navn på området…
+💬 Note sur la cellule… ¦ 💬 Poznámka k bunke… ¦ 💬 Notat til cellen…
+📊 Graphique depuis la sélection ¦ 📊 Graf z výberu ¦ 📊 Diagram fra markeringen
+Barré ¦ Prečiarknuté ¦ Gjennomstreket
+Aa Police… ¦ Aa Písmo… ¦ Aa Skrift…
+Taille du texte… ¦ Veľkosť textu… ¦ Tekststørrelse…
+↵ Renvoi à la ligne ¦ ↵ Zalomiť text ¦ ↵ Bryt tekst
+⊞ Fusionner / séparer ¦ ⊞ Zlúčiť / rozdeliť ¦ ⊞ Slå sammen / del opp
+▦ Bordures : tout ¦ ▦ Orámovanie: všetko ¦ ▦ Kantlinjer: alle
+▭ Bordures : contour ¦ ▭ Orámovanie: obrys ¦ ▭ Kantlinjer: omriss
+▁ Bordure du bas ¦ ▁ Dolné orámovanie ¦ ▁ Nederste kantlinje
+Largeur de colonne… ¦ Šírka stĺpca… ¦ Kolonnebredde…
+Hauteur de ligne… ¦ Výška riadka… ¦ Radhøyde…
+Ajuster la largeur au contenu ¦ Prispôsobiť šírku obsahu ¦ Tilpass bredden til innholdet
+Masquer les lignes ¦ Skryť riadky ¦ Skjul rader
+Masquer les colonnes ¦ Skryť stĺpce ¦ Skjul kolonner
+Tout remontrer ¦ Znova zobraziť všetko ¦ Vis alle igjen
+Mise en forme conditionnelle… ¦ Podmienené formátovanie… ¦ Betinget formatering…
+Une ligne sur deux ¦ Striedavé riadky ¦ Annenhver rad
+Effacer la mise en forme ¦ Vymazať formátovanie ¦ Fjern formatering
+↕ Trier A → Z ¦ ↕ Zoradiť A → Z ¦ ↕ Sorter A → Å
+↕ Trier Z → A ¦ ↕ Zoradiť Z → A ¦ ↕ Sorter Å → A
+⚲ Filtrer ¦ ⚲ Filtrovať ¦ ⚲ Filtrer
+Supprimer les doublons… ¦ Vymazať duplicity… ¦ Slett duplikater…
+Convertir le texte en colonnes… ¦ Previesť text na stĺpce… ¦ Konverter tekst til kolonner…
+Retirer les espaces en trop ¦ Odobrať nadbytočné medzery ¦ Fjern overflødige mellomrom
+Figer la 1re ligne ¦ Ukotviť 1. riadok ¦ Frys 1. rad
+Figer la 1re colonne ¦ Ukotviť 1. stĺpec ¦ Frys 1. kolonne
+Figer jusqu’à la cellule choisie ¦ Ukotviť po vybranú bunku ¦ Frys til og med den merkede cellen
+Libérer les volets ¦ Uvoľniť priečky ¦ Frigjør ruter
+Montrer les formules ¦ Zobraziť vzorce ¦ Vis formler
+⤢ Ajuster à la fenêtre ¦ ⤢ Prispôsobiť oknu ¦ ⤢ Tilpass til vinduet
+100 % (taille réelle) ¦ 100 % (skutočná veľkosť) ¦ 100 % (faktisk størrelse)
+⌨️ Raccourcis du tableur… ¦ ⌨️ Skratky tabuľkového editora… ¦ ⌨️ Hurtigtaster i regnearket…
+Rechercher et remplacer ¦ Nájsť a nahradiť ¦ Søk og erstatt
+Filtrer (barre de recherche et filtres au-dessus) ¦ Filtrovať (vyhľadávacia lišta a filtre hore) ¦ Filtrer (søkefelt og filtre over)
+Trier la plage ¦ Zoradiť oblasť ¦ Sorter området
+Somme, moyenne, nombre… ¦ Súčet, priemer, počet… ¦ Sum, gjennomsnitt, antall…
+Une personne de la base dans la cellule ¦ Osoba z databázy v bunke ¦ En person fra databasen i cellen
+Un lieu de la base dans la cellule ¦ Miesto z databázy v bunke ¦ Et sted fra databasen i cellen
+Note sur la cellule ¦ Poznámka k bunke ¦ Notat til cellen
+Graphique avec les chiffres de la sélection ¦ Graf s číslami z výberu ¦ Diagram med tallene fra markeringen
+Tape pour écrire · = pour calculer · double-clic pour modifier · clic droit pour les actions · glisse le petit carré pour recopier ¦ Píš a zapíšeš · = na výpočet · dvojklik na úpravu · pravé tlačidlo na akcie · ťahaj malý štvorček na kopírovanie ¦ Skriv for å fylle ut · = for å regne · dobbeltklikk for å redigere · høyreklikk for handlinger · dra den lille firkanten for å kopiere
+Entrée valide · Tab : case à droite · Échap annule · pendant une formule, clique ou glisse sur des cellules pour les y mettre ¦ Enter potvrdí · Tab: bunka vpravo · Esc zruší · pri písaní vzorca klikni alebo ťahaj cez bunky a vložíš ich ¦ Enter bekrefter · Tab: cellen til høyre · Esc avbryter · mens du skriver en formel, klikk eller dra over celler for å sette dem inn
+Σ Somme ¦ Σ Súčet ¦ Σ Sum
+Nombre ¦ Počet ¦ Antall
+Minimum ¦ Minimum ¦ Minimum
+Maximum ¦ Maximum ¦ Maksimum
+Somme ¦ Súčet ¦ Sum
+Panneau de droite ouvert ¦ Pravý panel otvorený ¦ Høyre panel åpent
+, virgule ¦ , čiarka ¦ , komma
+; point-virgule ¦ ; bodkočiarka ¦ ; semikolon
+espace ¦ medzera ¦ mellomrom
+Autre… ¦ Iné… ¦ Annet…
+plus grande que ¦ väčšia ako ¦ større enn
+plus petite que ¦ menšia ako ¦ mindre enn
+au moins ¦ aspoň ¦ minst
+au plus ¦ najviac ¦ høyst
+égale à ¦ rovná ¦ lik
+différente de ¦ iná ako ¦ forskjellig fra
+entre ¦ medzi ¦ mellom
+contient le texte ¦ obsahuje text ¦ inneholder teksten
+est vide ¦ je prázdna ¦ er tom
+n’est pas vide ¦ nie je prázdna ¦ er ikke tom
+est en double ¦ je duplicitná ¦ er et duplikat
+est une date impossible ¦ je nemožný dátum ¦ er en umulig dato
+barres dans la cellule ¦ pruhy v bunke ¦ søyler i cellen
+fond jaune ¦ žlté pozadie ¦ gul bakgrunn
+fond rouge ¦ červené pozadie ¦ rød bakgrunn
+fond vert ¦ zelené pozadie ¦ grønn bakgrunn
+fond bleu ¦ modré pozadie ¦ blå bakgrunn
+fond orange ¦ oranžové pozadie ¦ oransje bakgrunn
+fond violet ¦ fialové pozadie ¦ lilla bakgrunn
+règle|plus grande que ¦ väčšia ako ¦ større enn
+règle|plus petite que ¦ menšia ako ¦ mindre enn
+règle|au moins ¦ aspoň ¦ minst
+règle|au plus ¦ najviac ¦ høyst
+règle|égale à ¦ rovná ¦ lik
+règle|différente de ¦ iná ako ¦ forskjellig fra
+règle|entre ¦ medzi ¦ mellom
+règle|contient ¦ obsahuje ¦ inneholder
+règle|vide ¦ prázdna ¦ tom
+règle|pas vide ¦ neprázdna ¦ ikke tom
+règle|en double ¦ duplicitná ¦ duplikat
+règle|date impossible ¦ nemožný dátum ¦ umulig dato
+règle|barres ¦ pruhy ¦ søyler
+Cellule ¦ Bunka ¦ Celle
+Nombre et date ¦ Číslo a dátum ¦ Tall og dato
+Couleur et bordures ¦ Farba a orámovanie ¦ Farge og kantlinjer
+Validation ¦ Overenie ¦ Validering
+Adresse ¦ Adresa ¦ Adresse
+Valeur ¦ Hodnota ¦ Verdi
+Formule ¦ Vzorec ¦ Formel
+Autorise ¦ Povoľuje ¦ Tillater
+Sinon ¦ Inak ¦ Ellers
+Insérer une ligne au-dessus ¦ Vložiť riadok nad ¦ Sett inn en rad over
+Insérer une ligne en dessous ¦ Vložiť riadok pod ¦ Sett inn en rad under
+Insérer une colonne à gauche ¦ Vložiť stĺpec vľavo ¦ Sett inn en kolonne til venstre
+Insérer une colonne à droite ¦ Vložiť stĺpec vpravo ¦ Sett inn en kolonne til høyre
+Trier A → Z ¦ Zoradiť A → Z ¦ Sorter A → Å
+Retirer le filtre ¦ Odobrať filter ¦ Fjern filteret
+Note… ¦ Poznámka… ¦ Notat…
+Ajuster la largeur ¦ Prispôsobiť šírku ¦ Tilpass bredden
+Supprimer les lignes ¦ Vymazať riadky ¦ Slett rader
+Supprimer les colonnes ¦ Vymazať stĺpce ¦ Slett kolonner
+Windows (vieil Excel) ¦ Windows (starý Excel) ¦ Windows (gammel Excel)
+👤 Des fiches ¦ 👤 Karty ¦ 👤 Oppføringer
+🏠 Un recensement (foyers) ¦ 🏠 Sčítanie obyvateľov (domácnosti) ¦ 🏠 En folketelling (husstander)
+📅 Des événements ¦ 📅 Udalosti ¦ 📅 Hendelser
+— ne pas envoyer — ¦ — neposielať — ¦ — ikke send —
+Nom et prénom ¦ Priezvisko a meno ¦ Etternavn og fornavn
+Sexe ¦ Pohlavie ¦ Kjønn
+Naissance (date ou année) ¦ Narodenie (dátum alebo rok) ¦ Fødsel (dato eller år)
+Décès (date) ¦ Úmrtie (dátum) ¦ Død (dato)
+N° de foyer (ménage) ¦ Č. domácnosti ¦ Husstandsnr.
+N° de maison ¦ Č. domu ¦ Husnr.
+Rue, quartier ¦ Ulica, štvrť ¦ Gate, bydel
+Patron, employeur ¦ Gazda, zamestnávateľ ¦ Husbonde, arbeidsgiver
+Situation (marié, veuf…) ¦ Stav (ženatý, ovdovený…) ¦ Sivilstand (gift, enke/enkemann…)
+Observations, notes ¦ Poznámky ¦ Merknader, notater
+Sorte d’événement (acte) ¦ Druh udalosti (záznam) ¦ Hendelsestype (dokument)
+Date de l’événement ¦ Dátum udalosti ¦ Hendelsens dato
+Lieu de l’événement ¦ Miesto udalosti ¦ Hendelsens sted
+colonnes de l’année (1836 → 1936) · foyers · 📤 vers la base ¦ stĺpce roka (1836 → 1936) · domácnosti · 📤 do databázy ¦ årets kolonner (1836 → 1936) · husstander · 📤 til databasen
+⤒ Remplir depuis l’app… ¦ ⤒ Vyplniť z aplikácie… ¦ ⤒ Fyll ut fra appen…
+↻ Relire depuis la base ¦ ↻ Znova načítať z databázy ¦ ↻ Les på nytt fra databasen
+catégorie + séries ¦ kategória + rady ¦ kategori + serier
+📊 Créer le diagramme ¦ 📊 Vytvoriť diagram ¦ 📊 Opprett skjemaet
+Un graphique ¦ Graf ¦ Et diagram
+📈 Créer le graphique ¦ 📈 Vytvoriť graf ¦ 📈 Opprett diagrammet
+objet ▦ Tableur ¦ objekt ▦ Tabuľkový editor ¦ ▦ Regneark-objekt
+📋 Copier pour un tableau ¦ 📋 Kopírovať pre tabuľu ¦ 📋 Kopier til en tavle
+Un recueil ¦ Zborník ¦ En samling
+tableur d’une page ¦ tabuľka na stránke ¦ regneark på en side
+📋 Copier pour un recueil ¦ 📋 Kopírovať pre zborník ¦ 📋 Kopier til en samling
+tableau ou graphique ¦ tabuľka alebo graf ¦ tabell eller diagram
+Ce que le diagramme attend ¦ Čo diagram očakáva ¦ Hva skjemaet forventer
+Ce que le graphique attend ¦ Čo graf očakáva ¦ Hva diagrammet forventer
+Ce que le tableau attend ¦ Čo tabuľa očakáva ¦ Hva tavlen forventer
+Ce que le recueil attend ¦ Čo zborník očakáva ¦ Hva samlingen forventer
+Pyramide des âges ¦ Veková pyramída ¦ Alderspyramide
+Courbes ¦ Krivky ¦ Kurver
+Radar ¦ Radar ¦ Radar
+Barres groupées ¦ Zoskupené pruhy ¦ Grupperte søyler
+Camembert (une seule série) ¦ Koláč (len jeden rad) ¦ Kakediagram (bare én serie)
+Rectangles proportionnels ¦ Stromová mapa ¦ Trekart
+🎯 Préparer pour… (diagramme, graphique, présentation…) ¦ 🎯 Pripraviť pre… (diagram, graf, prezentácia…) ¦ 🎯 Forbered for… (skjema, diagram, presentasjon…)
+initiale ¦ iniciála ¦ forbokstav
+MAJUSCULES ¦ VEĽKÉ PÍSMENÁ ¦ STORE BOKSTAVER
+minuscules ¦ malé písmená ¦ små bokstaver
+Capitale ¦ Veľké začiatočné ¦ Stor forbokstav
+Plus petit ¦ Najmenší ¦ Minste
+Plus grand ¦ Najväčší ¦ Største
+✨ Remplissage instantané ¦ ✨ Okamžité dopĺňanie ¦ ✨ Hurtigutfylling
+Σ Sous-totaux… ¦ Σ Medzisúčty… ¦ Σ Delsummer…
+⊟ Plan : replier / déplier le détail ¦ ⊟ Osnova: skryť / zobraziť podrobnosti ¦ ⊟ Disposisjon: slå sammen / utvid detaljene
+🎯 Valeur cible… ¦ 🎯 Hľadanie riešenia… ¦ 🎯 Målsøking…
+🧮 Solveur… ¦ 🧮 Riešiteľ… ¦ 🧮 Problemløser…
+📋 Tableau de scénarios (et si…)… ¦ 📋 Tabuľka scenárov (čo keby…)… ¦ 📋 Scenariotabell (hva om…)…
+⏺ Enregistrer une action / ⏹ arrêter ¦ ⏺ Nahrať akciu / ⏹ zastaviť ¦ ⏺ Spill inn en handling / ⏹ stopp
+▶ Actions enregistrées… ¦ ▶ Nahrané akcie… ¦ ▶ Innspilte handlinger…
+📈 Mini-graphique… ¦ 📈 Minigraf… ¦ 📈 Minidiagram…
+Nombre de lignes ¦ Počet riadkov ¦ Antall rader
+Nombre de valeurs différentes ¦ Počet rôznych hodnôt ¦ Antall ulike verdier
+En % de la ligne ¦ V % riadka ¦ I % av raden
+En % de la colonne ¦ V % stĺpca ¦ I % av kolonnen
+En % du tout ¦ V % celku ¦ I % av helheten
+🔀 Tableau croisé dynamique… ¦ 🔀 Kontingenčná tabuľka… ¦ 🔀 Pivottabell…
+↻ Actualiser le tableau croisé ¦ ↻ Aktualizovať kontingenčnú tabuľku ¦ ↻ Oppdater pivottabellen
+📊 Graphique vivant (suit la sélection) ¦ 📊 Živý graf (sleduje výber) ¦ 📊 Levende diagram (følger markeringen)
+📊 Graphique vivant ¦ 📊 Živý graf ¦ 📊 Levende diagram
+Vide ¦ Prázdne ¦ Tom
+⛔ Formule en erreur ¦ ⛔ Vzorec s chybou ¦ ⛔ Formel med feil
+ƒ Formule ¦ ƒ Vzorec ¦ ƒ Formel
+VRAI / FAUX ¦ PRAVDA / NEPRAVDA ¦ SANN / USANN
+⚠️ Date impossible ¦ ⚠️ Nemožný dátum ¦ ⚠️ Umulig dato
+📅 Date d’acte ¦ 📅 Dátum záznamu ¦ 📅 Dokumentdato
+Conditions ¦ Podmienky ¦ Betingelser
+Logique ¦ Logika ¦ Logikk
+Conjoint ¦ Manžel/manželka ¦ Ektefelle
+Parents ¦ Rodičia ¦ Foreldre
+N° de fiche ¦ Č. karty ¦ Oppføringsnr.
+Date ¦ Dátum ¦ Dato
+Personne(s) ¦ Osoba/osoby ¦ Person(er)
+Description ¦ Popis ¦ Beskrivelse
+N° d’événement ¦ Č. udalosti ¦ Hendelsesnr.
+Foyer ¦ Domácnosť ¦ Husstand
+Employeur ¦ Zamestnávateľ ¦ Arbeidsgiver
+Situation ¦ Stav ¦ Sivilstand
+Rue ¦ Ulica ¦ Gate
+N° ¦ Č. ¦ Nr.
+Adresse entière ¦ Celá adresa ¦ Hele adressen
+Deuxième prénom ¦ Druhé meno ¦ Mellomnavn
+Titre ¦ Titul ¦ Tittel
+Suffixe ¦ Prípona ¦ Suffiks
+FamilySearch ¦ FamilySearch ¦ FamilySearch
+Description physique ¦ Opis postavy ¦ Fysisk beskrivelse
+Teint ¦ Pleť ¦ Hudfarge
+Origine ¦ Pôvod ¦ Opprinnelse
+Vivant ? ¦ Žije? ¦ Lever?
+Modifié le ¦ Zmenené ¦ Endret
+Cause ¦ Príčina ¦ Årsak
+Autorité ¦ Autorita ¦ Autoritet
+Confiance ¦ Dôveryhodnosť ¦ Pålitelighet
+Date convertie ¦ Prevedený dátum ¦ Omregnet dato
+Autre date ¦ Iný dátum ¦ Annen dato
+Informations en plus ¦ Ďalšie informácie ¦ Tilleggsopplysninger
+Calendrier ¦ Kalendár ¦ Kalender
+Relevés de dépouillement ¦ Výpisy ¦ Registreringer
+Noms de famille ¦ Priezviská ¦ Etternavn
+Âges au décès ¦ Vek pri úmrtí ¦ Alder ved død
+Décès par siècle ¦ Úmrtia podľa storočí ¦ Dødsfall per århundre
+Communes de naissance ¦ Obce narodenia ¦ Fødesteder
+Départements de naissance ¦ Departementy narodenia ¦ Fødedepartementer
+Naissances par mois ¦ Narodenia podľa mesiacov ¦ Fødsler per måned
+Personnes par génération ¦ Osoby podľa generácií ¦ Personer per generasjon
+Additionne des nombres ou des plages. ¦ Sčíta čísla alebo oblasti. ¦ Legger sammen tall eller områder.
+La moyenne des nombres. ¦ Priemer čísel. ¦ Gjennomsnittet av tallene.
+Le plus petit nombre. ¦ Najmenšie číslo. ¦ Det minste tallet.
+Le plus grand nombre. ¦ Najväčšie číslo. ¦ Det største tallet.
+Compte les cellules qui contiennent un nombre. ¦ Spočíta bunky, ktoré obsahujú číslo. ¦ Teller cellene som inneholder et tall.
+Compte les cellules qui ne sont pas vides. ¦ Spočíta bunky, ktoré nie sú prázdne. ¦ Teller cellene som ikke er tomme.
+Compte les cellules vides. ¦ Spočíta prázdne bunky. ¦ Teller de tomme cellene.
+Multiplie des nombres. ¦ Vynásobí čísla. ¦ Multipliserer tall.
+Arrondit au plus proche. ¦ Zaokrúhli na najbližšie. ¦ Runder av til nærmeste.
+Arrondit vers zéro. ¦ Zaokrúhli smerom k nule. ¦ Runder av mot null.
+Arrondit en s’éloignant de zéro. ¦ Zaokrúhli smerom od nuly. ¦ Runder av bort fra null.
+La partie entière (arrondi vers le bas). ¦ Celá časť (zaokrúhlenie nadol). ¦ Heltallsdelen (rundet ned).
+Le nombre sans son signe. ¦ Číslo bez znamienka. ¦ Tallet uten fortegn.
+Le reste d’une division. ¦ Zvyšok po delení. ¦ Resten ved en divisjon.
+Un nombre élevé à une puissance. ¦ Číslo umocnené na mocninu. ¦ Et tall opphøyd i en potens.
+La racine carrée. ¦ Druhá odmocnina. ¦ Kvadratroten.
+La valeur du milieu. ¦ Prostredná hodnota. ¦ Den midterste verdien.
+L’écart type (sur un échantillon). ¦ Smerodajná odchýlka (výberová). ¦ Standardavviket (for et utvalg).
+La place d’un nombre dans une liste (1 = le plus grand ; ordre 1 = le plus petit d’abord). ¦ Poradie čísla v zozname (1 = najväčšie; poradie 1 = najmenšie prvé). ¦ Et talls plassering i en liste (1 = størst; rekkefølge 1 = minst først).
+La k-ième plus grande valeur. ¦ k-ta najväčšia hodnota. ¦ Den k-te største verdien.
+La k-ième plus petite valeur. ¦ k-ta najmenšia hodnota. ¦ Den k-te minste verdien.
+Une valeur si le test est vrai, une autre sinon. ¦ Jedna hodnota, keď je test pravdivý, inak iná. ¦ Én verdi hvis testen er sann, ellers en annen.
+La valeur du premier test vrai. ¦ Hodnota prvého pravdivého testu. ¦ Verdien for den første sanne testen.
+La valeur, ou autre chose s’il y a une erreur. ¦ Hodnota, alebo niečo iné, keď nastane chyba. ¦ Verdien, eller noe annet hvis det er en feil.
+La valeur, ou autre chose si elle n’est pas trouvée (#N/A). ¦ Hodnota, alebo niečo iné, keď sa nenájde (#N/A). ¦ Verdien, eller noe annet hvis den ikke finnes (#N/A).
+VRAI si tous les tests sont vrais. ¦ VRAI (pravda), keď sú všetky testy pravdivé. ¦ VRAI (sann) hvis alle testene er sanne.
+VRAI si au moins un test est vrai. ¦ VRAI (pravda), keď je aspoň jeden test pravdivý. ¦ VRAI (sann) hvis minst én test er sann.
+La valeur VRAI (comme le mot VRAI). ¦ Hodnota VRAI (pravda), ako slovo VRAI. ¦ Verdien VRAI (sann), som ordet VRAI.
+La valeur FAUX (comme le mot FAUX). ¦ Hodnota FAUX (nepravda), ako slovo FAUX. ¦ Verdien FAUX (usann), som ordet FAUX.
+Inverse un test. ¦ Obráti test. ¦ Snur en test.
+Compte les cellules qui remplissent une condition (">60", "laboureur", "lab*"). ¦ Spočíta bunky, ktoré spĺňajú podmienku (">60", "laboureur", "lab*"). ¦ Teller cellene som oppfyller en betingelse (">60", "laboureur", "lab*").
+Compte les lignes qui remplissent toutes les conditions. ¦ Spočíta riadky, ktoré spĺňajú všetky podmienky. ¦ Teller radene som oppfyller alle betingelsene.
+Additionne les cellules qui remplissent une condition. ¦ Sčíta bunky, ktoré spĺňajú podmienku. ¦ Legger sammen cellene som oppfyller en betingelse.
+Additionne les lignes qui remplissent toutes les conditions. ¦ Sčíta riadky, ktoré spĺňajú všetky podmienky. ¦ Legger sammen radene som oppfyller alle betingelsene.
+La moyenne des cellules qui remplissent une condition. ¦ Priemer buniek, ktoré spĺňajú podmienku. ¦ Gjennomsnittet av cellene som oppfyller en betingelse.
+Cherche dans la 1re colonne d’un tableau et rend la valeur d’une autre colonne. ¦ Hľadá v 1. stĺpci tabuľky a vráti hodnotu z iného stĺpca. ¦ Søker i tabellens 1. kolonne og gir verdien fra en annen kolonne.
+Cherche dans la 1re ligne d’un tableau. ¦ Hľadá v 1. riadku tabuľky. ¦ Søker i tabellens 1. rad.
+Cherche une valeur et rend celle d’à côté. ¦ Hľadá hodnotu a vráti tú vedľa nej. ¦ Søker etter en verdi og gir den ved siden av.
+La valeur à une ligne et une colonne de la plage. ¦ Hodnota v danom riadku a stĺpci oblasti. ¦ Verdien i en rad og kolonne i området.
+La position d’une valeur dans une plage (type 0 = exactement). ¦ Pozícia hodnoty v oblasti (typ 0 = presne). ¦ En verdis posisjon i et område (type 0 = nøyaktig).
+La n-ième valeur de la liste. ¦ n-tá hodnota zoznamu. ¦ Den n-te verdien i listen.
+Les valeurs sans doublons (déborde sur les cases du dessous). ¦ Hodnoty bez duplicít (pretečú do buniek pod nimi). ¦ Verdiene uten duplikater (fyller cellene nedenfor).
+La plage triée (ordre 1 = croissant, -1 = décroissant). ¦ Zoradená oblasť (poradie 1 = vzostupne, -1 = zostupne). ¦ Det sorterte området (rekkefølge 1 = stigende, -1 = synkende).
+Les lignes de la plage qui remplissent la condition (ex. =FILTRE(A2:C9; C2:C9>30)). ¦ Riadky oblasti, ktoré spĺňajú podmienku (napr. =FILTRE(A2:C9; C2:C9>30)). ¦ Radene i området som oppfyller betingelsen (f.eks. =FILTRE(A2:C9; C2:C9>30)).
+Met des textes bout à bout. ¦ Spojí texty za sebou. ¦ Setter sammen tekster.
+Met des textes bout à bout avec un séparateur. ¦ Spojí texty za sebou s oddeľovačom. ¦ Setter sammen tekster med et skilletegn.
+Les premiers caractères. ¦ Prvé znaky. ¦ De første tegnene.
+Les derniers caractères. ¦ Posledné znaky. ¦ De siste tegnene.
+Un morceau au milieu d’un texte. ¦ Časť zo stredu textu. ¦ Et stykke midt i en tekst.
+Le nombre de caractères. ¦ Počet znakov. ¦ Antall tegn.
+En capitales. ¦ Veľkými písmenami. ¦ Med store bokstaver.
+En minuscules. ¦ Malými písmenami. ¦ Med små bokstaver.
+Une capitale au début de chaque mot. ¦ Veľké písmeno na začiatku každého slova. ¦ Stor bokstav i begynnelsen av hvert ord.
+Retire les espaces en trop. ¦ Odoberie nadbytočné medzery. ¦ Fjerner overflødige mellomrom.
+Remplace un morceau de texte. ¦ Nahradí časť textu. ¦ Erstatter et stykke tekst.
+La position d’un texte dans un autre (sans tenir compte des capitales). ¦ Pozícia textu v inom texte (bez ohľadu na veľké písmená). ¦ Posisjonen til en tekst i en annen (uten hensyn til store bokstaver).
+Un nombre ou une date écrits avec un format ("0,00", "0 %", "jj/mm/aaaa"). ¦ Číslo alebo dátum zapísané podľa formátu ("0,00", "0 %", "jj/mm/aaaa"). ¦ Et tall eller en dato skrevet med et format ("0,00", "0 %", "jj/mm/aaaa").
+Le nombre écrit dans un texte. ¦ Číslo zapísané v texte. ¦ Tallet skrevet i en tekst.
+Fabrique une date. ¦ Vytvorí dátum. ¦ Lager en dato.
+L’année d’une date (date d’acte comprise). ¦ Rok dátumu (rozumie aj dátumom záznamov). ¦ Året for en dato (dokumentdatoer forstås).
+Le mois d’une date (1 à 12). ¦ Mesiac dátumu (1 až 12). ¦ Måneden for en dato (1 til 12).
+Le jour du mois. ¦ Deň v mesiaci. ¦ Dagen i måneden.
+Le jour de la semaine (type 1 : 1 = dimanche ; type 2 : 1 = lundi … 7 = dimanche ; type 3 : 0 = lundi). ¦ Deň v týždni (typ 1: 1 = nedeľa; typ 2: 1 = pondelok … 7 = nedeľa; typ 3: 0 = pondelok). ¦ Ukedagen (type 1: 1 = søndag; type 2: 1 = mandag … 7 = søndag; type 3: 0 = mandag).
+La date du jour. ¦ Dnešný dátum. ¦ Dagens dato.
+La date et l’heure. ¦ Dátum a čas. ¦ Dato og klokkeslett.
+L’écart entre deux dates, en années, mois ou jours (« AM » : mois en plus des années, « MJ » : jours en plus des mois, « AJ » : jours en plus des années ; « Y », « D », « YM », « MD », « YD » d’Excel compris). ¦ Rozdiel medzi dvoma dátumami v rokoch, mesiacoch alebo dňoch („AM“: mesiace navyše k rokom, „MJ“: dni navyše k mesiacom, „AJ“: dni navyše k rokom; rozumie aj excelovským „Y“, „D“, „YM“, „MD“, „YD“). ¦ Forskjellen mellom to datoer i år, måneder eller dager («AM»: måneder utover årene, «MJ»: dager utover månedene, «AJ»: dager utover årene; Excels «Y», «D», «YM», «MD», «YD» forstås).
+L’âge entre deux dates d’acte (« vers 1784 », « an II » compris) ; « ≈ » si une date est approximative. Unité : « ans », « mois » ou « jours ». ¦ Vek medzi dvoma dátumami záznamov (rozumie „vers 1784“, „an II“); „≈“, ak je dátum približný. Jednotka: „ans“, „mois“ alebo „jours“. ¦ Alderen mellom to dokumentdatoer («vers 1784», «an II» forstås); «≈» hvis en dato er omtrentlig. Enhet: «ans», «mois» eller «jours».
+L’année trouvée dans un texte d’acte, même républicain (« baptisé le 3 frimaire an XII » → 1803). ¦ Rok nájdený v texte záznamu, aj republikánsky („baptisé le 3 frimaire an XII“ → 1803). ¦ Året funnet i en dokumenttekst, også republikansk («baptisé le 3 frimaire an XII» → 1803).
+La date comprise, écrite proprement (comme « ✓ Compris : » des champs de date). ¦ Pochopený dátum, úhľadne zapísaný (ako „✓ Rozumiem:“ pri dátumových poliach). ¦ Den forståtte datoen, pent skrevet (som «✓ Forstått:» i datofeltene).
+« jour », « mois », « année », « vers », « avant », « après » ou « entre ». ¦ „jour“, „mois“, „année“, „vers“, „avant“, „après“ alebo „entre“. ¦ «jour», «mois», «année», «vers», «avant», «après» eller «entre».
+La date dans le calendrier républicain. ¦ Dátum v republikánskom kalendári. ¦ Datoen i den republikanske kalenderen.
+La génération d’un numéro Sosa (1 = toi, 2 et 3 = tes parents…). ¦ Generácia čísla Sosa (1 = ty, 2 a 3 = tvoji rodičia…). ¦ Generasjonen for et anenummer (Sosa) (1 = deg, 2 og 3 = foreldrene dine…).
+Le numéro Sosa du père (2 × n). ¦ Číslo Sosa otca (2 × n). ¦ Farens anenummer (Sosa) (2 × n).
+Le numéro Sosa de la mère (2 × n + 1). ¦ Číslo Sosa matky (2 × n + 1). ¦ Morens anenummer (Sosa) (2 × n + 1).
+« paternel » ou « maternel » (le côté du Sosa 1). ¦ „paternel“ alebo „maternel“ (strana Sosy 1). ¦ «paternel» eller «maternel» (siden til Sosa 1).
+Un petit graphique dans la case : "courbe", "barres" ou "gagné" (au-dessus ou au-dessous de zéro). ¦ Malý graf v bunke: "courbe" (krivka), "barres" (pruhy) alebo "gagné" (nad nulou alebo pod ňou). ¦ Et lite diagram i cellen: "courbe" (kurve), "barres" (søyler) eller "gagné" (over eller under null).
+Donne un nom à une valeur pour l’utiliser dans le calcul. ¦ Pomenuje hodnotu, aby sa dala použiť vo výpočte. ¦ Gir en verdi et navn slik at den kan brukes i beregningen.
+Une petite fonction à soi, à utiliser dans LET, MAP, PAR.LIGNE… ¦ Malá vlastná funkcia na použitie v LET, MAP, PAR.LIGNE… ¦ En liten egen funksjon til bruk i LET, MAP, PAR.LIGNE…
+Applique la LAMBDA à chaque case de la plage. ¦ Použije LAMBDA na každú bunku oblasti. ¦ Bruker LAMBDA på hver celle i området.
+Un résultat par ligne de la plage. ¦ Jeden výsledok na riadok oblasti. ¦ Ett resultat per rad i området.
+Un résultat par colonne de la plage. ¦ Jeden výsledok na stĺpec oblasti. ¦ Ett resultat per kolonne i området.
+Cumule les cases une à une (un total qui avance). ¦ Postupne sčítava bunky (priebežný súčet). ¦ Samler opp cellene én etter én (en løpende sum).
+Comme REDUCE, avec chaque étape du total. ¦ Ako REDUCE, s každým krokom súčtu. ¦ Som REDUCE, med hvert trinn i summen.
+=ligne laissée ¦ vynechaný riadok|vynechané riadky|vynechaných riadkov ¦ utelatt rad|utelatte rader
+=ligne remplie depuis l’app (tenue à jour) ¦ riadok vyplnený z aplikácie (udržiavaný aktuálny)|riadky vyplnené z aplikácie (udržiavané aktuálne)|riadkov vyplnených z aplikácie (udržiavaných aktuálne) ¦ rad fylt ut fra appen (holdes oppdatert)|rader fylt ut fra appen (holdes oppdatert)
+=ligne remplie depuis l’app ¦ riadok vyplnený z aplikácie|riadky vyplnené z aplikácie|riadkov vyplnených z aplikácie ¦ rad fylt ut fra appen|rader fylt ut fra appen
+=ligne à toi sans fiche : retirée ¦ tvoj riadok bez karty: odobratý|tvoje riadky bez karty: odobraté|tvojich riadkov bez karty: odobratých ¦ din rad uten oppføring: fjernet|dine rader uten oppføring: fjernet
+=nouvelle fiche ¦ nová karta|nové karty|nových kariet ¦ ny oppføring|nye oppføringer
+=reliée ¦ prepojená|prepojené|prepojených ¦ koblet|koblede
+=laissée ¦ vynechaná|vynechané|vynechaných ¦ utelatt|utelatte
+=autre ligne ¦ ďalší riadok|ďalšie riadky|ďalších riadkov ¦ annen rad|andre rader
+=case ¦ bunka|bunky|buniek ¦ celle|celler
+=autre case ¦ ďalšia bunka|ďalšie bunky|ďalších buniek ¦ annen celle|andre celler
+=case remplie ¦ vyplnená bunka|vyplnené bunky|vyplnených buniek ¦ utfylt celle|utfylte celler
+=groupe ¦ skupina|skupiny|skupín ¦ gruppe|grupper
+=case changée ¦ zmenená bunka|zmenené bunky|zmenených buniek ¦ endret celle|endrede celler
+=scénario calculé ¦ vypočítaný scenár|vypočítané scenáre|vypočítaných scenárov ¦ beregnet scenario|beregnede scenarioer
+=commande ¦ príkaz|príkazy|príkazov ¦ kommando|kommandoer
+=fonction ¦ funkcia|funkcie|funkcií ¦ funksjon|funksjoner
+=valeur en plus de la première retirée ¦ odobratá hodnota navyše k prvej|odobraté hodnoty navyše k prvej|odobratých hodnôt navyše k prvej ¦ verdi utover den første fjernet|verdier utover den første fjernet
+=ligne supprimée ¦ vymazaný riadok|vymazané riadky|vymazaných riadkov ¦ slettet rad|slettede rader
+=colonne supprimée ¦ vymazaný stĺpec|vymazané stĺpce|vymazaných stĺpcov ¦ slettet kolonne|slettede kolonner
+=ligne en double supprimée ¦ vymazaný duplicitný riadok|vymazané duplicitné riadky|vymazaných duplicitných riadkov ¦ slettet duplikatrad|slettede duplikatrader
+=ligne coupée en colonnes ¦ riadok rozdelený do stĺpcov|riadky rozdelené do stĺpcov|riadkov rozdelených do stĺpcov ¦ rad delt opp i kolonner|rader delt opp i kolonner
+=case modifiée ¦ upravená bunka|upravené bunky|upravených buniek ¦ endret celle|endrede celler
+=cellule ¦ bunka|bunky|buniek ¦ celle|celler
+=cellule copiée ¦ skopírovaná bunka|skopírované bunky|skopírovaných buniek ¦ kopiert celle|kopierte celler
+=feuille importée ¦ importovaný hárok|importované hárky|importovaných hárkov ¦ importert ark|importerte ark
+{sheets} ({rows}) ¦ {sheets} ({rows}) ¦ {sheets} ({rows})
+la date ¦ dátum ¦ datoen
+le début ¦ začiatok ¦ starten
+la fin ¦ koniec ¦ slutten
+il manque un guillemet « " » à la fin d’un texte ¦ na konci textu chýbajú úvodzovky „"“ ¦ et anførselstegn «"» mangler på slutten av en tekst
+il manque une apostrophe à la fin du nom de feuille ¦ na konci názvu hárka chýba apostrof ¦ en apostrof mangler på slutten av arknavnet
+après le nom de la feuille, il faut « ! » puis la cellule ¦ za názvom hárka musí byť „!“ a potom bunka ¦ etter arknavnet må det stå «!» og så cellen
+la formule s’arrête trop tôt ¦ vzorec končí príliš skoro ¦ formelen slutter for tidlig
+il manque une parenthèse « ) » ¦ chýba zátvorka „)“ ¦ en parentes «)» mangler
+une parenthèse « ) » de trop ¦ zátvorka „)“ navyše ¦ én parentes «)» for mye
+un « ; » à une place inattendue ¦ „;“ na nečakanom mieste ¦ et «;» på et uventet sted
+un numéro Sosa est un nombre entier qui commence à 1 ¦ číslo Sosa je celé číslo začínajúce od 1 ¦ et anenummer (Sosa) er et heltall som begynner på 1
+il n’y a aucun nombre dans la plage ¦ v oblasti nie je žiadne číslo ¦ det er ingen tall i området
+le diviseur de MOD vaut 0 ¦ deliteľ MOD je 0 ¦ divisoren i MOD er 0
+pas de racine carrée d’un nombre négatif ¦ druhá odmocnina záporného čísla neexistuje ¦ ingen kvadratrot av et negativt tall
+aucun nombre ¦ žiadne číslo ¦ ingen tall
+il faut au moins deux nombres ¦ sú potrebné aspoň dve čísla ¦ det må være minst to tall
+aucun test n’est vrai ¦ žiadny test nie je pravdivý ¦ ingen test er sann
+les plages n’ont pas la même taille ¦ oblasti nemajú rovnakú veľkosť ¦ områdene har ikke samme størrelse
+aucune cellule ne remplit la condition ¦ žiadna bunka nespĺňa podmienku ¦ ingen celle oppfyller betingelsen
+le 2e morceau doit être une plage, par exemple A2:C40 ¦ 2. časť musí byť oblasť, napríklad A2:C40 ¦ den 2. delen må være et område, for eksempel A2:C40
+le 2e morceau doit être une plage ¦ 2. časť musí byť oblasť ¦ den 2. delen må være et område
+la plage est vide ¦ oblasť je prázdna ¦ området er tomt
+la condition doit avoir autant de lignes que la plage ¦ podmienka musí mať toľko riadkov ako oblasť ¦ betingelsen må ha like mange rader som området
+aucune ligne ne remplit la condition ¦ žiadny riadok nespĺňa podmienku ¦ ingen rad oppfyller betingelsen
+le début compte à partir de 1 ¦ začiatok sa počíta od 1 ¦ starten telles fra 1
+cette date n’a pas de mois ¦ tento dátum nemá mesiac ¦ denne datoen har ingen måned
+cette date n’a pas de jour ¦ tento dátum nemá deň ¦ denne datoen har ingen dag
+il faut le jour ¦ je potrebný deň ¦ dagen må angis
+le type de JOURSEM va de 1 à 3 (ou 11 à 17) ¦ typ JOURSEM je od 1 do 3 (alebo 11 až 17) ¦ typen for JOURSEM går fra 1 til 3 (eller 11 til 17)
+la fin est avant le début ¦ koniec je pred začiatkom ¦ slutten ligger før starten
+la seconde date est avant la première ¦ druhý dátum je pred prvým ¦ den andre datoen ligger før den første
+il faut une date au jour près ¦ je potrebný dátum presný na deň ¦ det må være en dato som er nøyaktig på dagen
+le calendrier républicain va du 22 septembre 1792 à 1805 ¦ republikánsky kalendár platí od 22. septembra 1792 do roku 1805 ¦ den republikanske kalenderen gjelder fra 22. september 1792 til 1805
+il faut des nombres dans la plage ¦ v oblasti musia byť čísla ¦ området må inneholde tall
+il faut une LAMBDA(…) ¦ je potrebná LAMBDA(…) ¦ det må være en LAMBDA(…)
+trop de LAMBDA imbriquées ¦ príliš veľa vnorených LAMBDA ¦ for mange nestede LAMBDA
+des paires « nom; valeur » puis le calcul ¦ dvojice „názov; hodnota“ a potom výpočet ¦ par av «navn; verdi», deretter beregningen
+un nom (lettres) avant chaque valeur ¦ názov (písmená) pred každou hodnotou ¦ et navn (bokstaver) foran hver verdi
+il faut au moins le calcul ¦ je potrebný aspoň výpočet ¦ minst beregningen må være med
+les paramètres sont des noms ¦ parametre sú názvy ¦ parameterne er navn
+le calcul n’a pas de résultat ¦ výpočet nemá výsledok ¦ beregningen har ikke noe resultat
+le résultat est trop grand pour être calculé ¦ výsledok je príliš veľký na výpočet ¦ resultatet er for stort til å beregnes
+une feuille supprimée ¦ vymazaný hárok ¦ et slettet ark
+une plage entière ne tient pas dans une case : utilise SOMME(…), INDEX(…)… ¦ celá oblasť sa nezmestí do jednej bunky: použi SOMME(…), INDEX(…)… ¦ et helt område får ikke plass i én celle: bruk SOMME(…), INDEX(…)…
+puissance impossible ¦ nemožná mocnina ¦ umulig potens
+une LAMBDA seule ne donne pas de valeur : utilise-la dans LET, MAP… ¦ samotná LAMBDA nedáva hodnotu: použi ju v LET, MAP… ¦ en LAMBDA alene gir ingen verdi: bruk den i LET, MAP…
+la formule est trop longue ¦ vzorec je príliš dlhý ¦ formelen er for lang
+la formule est trop imbriquée ¦ vzorec je príliš vnorený ¦ formelen er nestet for dypt
+trop de morceaux dans une fonction ¦ príliš veľa častí vo funkcii ¦ for mange deler i en funksjon
+la formule demande trop de calculs ¦ vzorec vyžaduje príliš veľa výpočtov ¦ formelen krever for mange beregninger
+le résultat est trop grand ¦ výsledok je príliš veľký ¦ resultatet er for stort
+la plage est trop grande ¦ oblasť je príliš veľká ¦ området er for stort
+le fichier a trop de cellules ¦ súbor má príliš veľa buniek ¦ filen har for mange celler

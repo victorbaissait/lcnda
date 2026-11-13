@@ -1,0 +1,4 @@
+Name,Match name,Chromosome,Start Location,End Location,Start RSID,End RSID,Centimorgans,SNPs
+Testeur Imaginaire,Camille Imaginaire,3,45120333,98543221,rs1000001,rs1000002,58.1,14200
+Testeur Imaginaire,Camille Imaginaire,11,2003000,30100500,rs1000003,rs1000004,41.2,9800
+Testeur Imaginaire,Lucas Fictif,7,120000000,141000000,rs1000005,rs1000006,22.0,5100

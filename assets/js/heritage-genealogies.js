@@ -39,7 +39,7 @@
         dl.innerHTML = `<div class="modal-head"><div><span class="eyebrow">MES GÉNÉALOGIES</span><h2>Changer de généalogie</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
             <p class="muted">Chaque généalogie est complètement séparée : ses personnes, ses photos et documents, ses réglages, ses sauvegardes.</p>
             <ol class="h-gen-list">${data.genealogies.map(g => `<li class="${g.active ? 'is-active' : ''}" data-id="${esc(g.id)}">
-                <span class="h-gen-ic">🌳</span><div><strong>${esc(g.name)}</strong><small>${g.main ? 'principale · ' : ''}${size(g.size)}${g.active ? ' · ouverte' : ''}</small></div>
+                <span class="h-gen-ic">${g.example ? '🧪' : '🌳'}</span><div><strong>${esc(g.name)}</strong><small>${g.main ? 'principale · ' : ''}${size(g.size)}${g.active ? ' · ouverte' : ''}</small></div>
                 <span class="h-gen-acts">${g.active ? '<b class="h-gen-on">✓ Ouverte</b>' : '<button type="button" class="button small" data-open>Ouvrir</button>'}<button type="button" class="icon-button" data-ren title="Renommer">✎</button>${!g.main && !g.active ? '<button type="button" class="icon-button danger" data-aside title="Mettre de côté (le dossier est gardé, rien n’est effacé)">🗑</button>' : ''}</span></li>`).join('')}</ol>
             <form class="h-gen-new" data-new><label>Nouvelle généalogie<input name="name" maxlength="80" placeholder="Famille de mon conjoint, une étude de village…" required></label><button type="submit" class="button">＋ Créer et ouvrir</button></form>
             <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Fermer</button></div>`;

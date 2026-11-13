@@ -1,0 +1,782 @@
+fr ¦ sk ¦ nb
+menu|Affichage ¦ Zobrazenie ¦ Vis
+Insertion ¦ Vložiť ¦ Sett inn
+Format ¦ Formát ¦ Format
+Tableau ¦ Tabuľka ¦ Tabell
+Champ (page, nombre de pages, titre, auteur)… ¦ Pole (strana, počet strán, názov, autor)… ¦ Felt (side, antall sider, tittel, forfatter)…
+N° de page ¦ Č. strany ¦ Sidenr.
+(celle de Normal) ¦ (podľa štýlu Normálny) ¦ (den fra Normal)
+(titre vide) ¦ (prázdny nadpis) ¦ (tom overskrift)
+* = des lettres, ? = une lettre, # = un chiffre ¦ * = niekoľko písmen, ? = jedno písmeno, # = jedna číslica ¦ * = flere bokstaver, ? = én bokstav, # = ett siffer
+.lcnda-texte (tout est gardé) ¦ .lcnda-texte (zachová sa všetko) ¦ .lcnda-texte (alt beholdes)
+1 (retirer les colonnes) ¦ 1 (odobrať stĺpce) ¦ 1 (fjern kolonnene)
+1. Liste numérotée ¦ 1. Číslovaný zoznam ¦ 1. Nummerert liste
+1re ligne ¦ 1. riadok ¦ 1. linje
+1re ligne (négatif : en saillie) ¦ 1. riadok (záporne: predsadenie) ¦ 1. linje (negativ: hengende)
+60 onglets au plus. ¦ Najviac 60 kariet. ¦ Høyst 60 faner.
+A Couleur… ¦ A Farba… ¦ A Farge…
+Accentuation ¦ Zvýraznenie ¦ Utheving
+Adresse ¦ Adresa ¦ Adresse
+Afficher : nom, dates, naissance… ¦ Zobraziť: meno, dátumy, narodenie… ¦ Vis: navn, datoer, fødsel…
+Ajoute au moins une personne. ¦ Pridaj aspoň jednu osobu. ¦ Legg til minst én person.
+Ajoute d’abord des champs : Insertion → « 📨 Champ de fusion » (Prénom, Nom, Date de naissance…). ¦ Najprv pridaj polia: Vložiť → „📨 Pole hromadnej korešpondencie“ (Meno, Priezvisko, Dátum narodenia…). ¦ Legg først til felter: Sett inn → «📨 Flettefelt» (Fornavn, Etternavn, Fødselsdato…).
+Ajouter la citation ¦ Pridať citáciu ¦ Legg til sitatet
+Ajouter les personnes d’une liste ¦ Pridať osoby zo zoznamu ¦ Legg til personene fra en liste
+Ajouter une légende ¦ Pridať popis ¦ Legg til en bildetekst
+Album photo (21,6 × 28 cm) ¦ Fotoalbum (21,6 × 28 cm) ¦ Fotoalbum (21,6 × 28 cm)
+Alignement ¦ Zarovnanie ¦ Justering
+Aligner à droite ¦ Zarovnať doprava ¦ Høyrejuster
+Aligner à gauche ¦ Zarovnať doľava ¦ Venstrejuster
+Aligné sur le texte (seul sur sa ligne) ¦ V riadku s textom (samo na riadku) ¦ På linje med teksten (alene på linjen)
+Allemand ¦ Nemčina ¦ Tysk
+Aller ¦ Prejsť ¦ Gå
+Aller à la page ¦ Prejsť na stranu ¦ Gå til side
+Anglais ¦ Angličtina ¦ Engelsk
+Années (1850 – 1920) ¦ Roky (1850 – 1920) ¦ År (1850 – 1920)
+Aperçu avec {name} : ¦ Náhľad s {name}: ¦ Forhåndsvisning med {name}:
+Apostrophe typographique ’ ¦ Typografický apostrof ’ ¦ Typografisk apostrof ’
+Au moins une ligne. ¦ Aspoň jeden riadok. ¦ Minst én rad.
+Aucun champ à mettre à jour. ¦ Žiadne pole na aktualizáciu. ¦ Ingen felt å oppdatere.
+Aucune modification suivie dans le document. ¦ V dokumente nie sú žiadne sledované zmeny. ¦ Ingen sporede endringer i dokumentet.
+Aucune modification suivie. ¦ Žiadne sledované zmeny. ¦ Ingen sporede endringer.
+Aucune modification suivie. « ✍ Suivre les modifications » garde la trace de chaque ajout et de chaque suppression. ¦ Žiadne sledované zmeny. „✍ Sledovať zmeny“ zaznamená každé pridanie aj každé vymazanie. ¦ Ingen sporede endringer. «✍ Spor endringer» registrerer hvert tillegg og hver sletting.
+Augmenter le retrait ¦ Zväčšiť odsadenie ¦ Øk innrykk
+Auteur ¦ Autor ¦ Forfatter
+Autre ¦ Iné ¦ Annet
+Avis de recherche (lettre aux cousins, remplie) ¦ Pátracia výzva (list bratrancom a sesterniciam, vyplnený) ¦ Etterlysning (brev til søskenbarn, utfylt)
+Barre d’outils ¦ Panel nástrojov ¦ Verktøylinje
+Barre d’outils en ruban (avec les noms) ¦ Panel nástrojov ako pás s kartami (s názvami) ¦ Båndverktøylinje (med navn)
+Barre d’outils · {what} ¦ Panel nástrojov · {what} ¦ Verktøylinje · {what}
+Barré ¦ Prečiarknuté ¦ Gjennomstreket
+Bas ¦ Dole ¦ Bunn
+Biographie ajoutée (écrite par l’app d’après la fiche) : modifie-la librement. ¦ Životopis pridaný (napísala ho aplikácia podľa karty): pokojne ho uprav. ¦ Biografi lagt til (skrevet av appen ut fra oppføringen): rediger den fritt.
+Bordure et trame ¦ Orámovanie a tieňovanie ¦ Kantlinjer og skyggelegging
+Bordure et trame… ¦ Orámovanie a tieňovanie… ¦ Kantlinjer og skyggelegging…
+Bordures ¦ Orámovanie ¦ Kantlinjer
+Bordures du tableau ¦ Orámovanie tabuľky ¦ Tabellens kantlinjer
+Breton ¦ Bretónčina ¦ Bretonsk
+COMPARER ¦ POROVNAŤ ¦ SAMMENLIGN
+Cacher dans le texte ¦ Skryť v texte ¦ Skjul i teksten
+Caractères (espaces compris) ¦ Znaky (vrátane medzier) ¦ Tegn (med mellomrom)
+Caractères (sans les espaces) ¦ Znaky (bez medzier) ¦ Tegn (uten mellomrom)
+Caractères spéciaux ¦ Špeciálne znaky ¦ Spesialtegn
+Carré (le texte autour) ¦ Štvorec (text okolo) ¦ Firkant (teksten rundt)
+Carré 15 × 15 cm ¦ Štvorec 15 × 15 cm ¦ Kvadrat 15 × 15 cm
+Carré 21 × 21 cm ¦ Štvorec 21 × 21 cm ¦ Kvadrat 21 × 21 cm
+Carré 30 × 30 cm ¦ Štvorec 30 × 30 cm ¦ Kvadrat 30 × 30 cm
+Carte de visite ¦ Vizitka ¦ Visittkort
+Cartes et livres ¦ Pohľadnice a knihy ¦ Kort og bøker
+Carton DL (faire-part) ¦ Karta DL (oznámenie) ¦ DL-kort (kunngjøring)
+Case séparée ¦ Bunka rozdelená ¦ Cellen er delt
+Cases fusionnées ¦ Bunky zlúčené ¦ Cellene er slått sammen
+Casse ¦ Veľkosť písmen ¦ Store/små bokstaver
+Ce diagramme est vide. ¦ Tento diagram je prázdny. ¦ Dette skjemaet er tomt.
+Ce document n’a pas encore de champ de fusion (Insertion → « 📨 Champ de fusion »). Insérer d’abord une petite fiche d’identité à l’endroit du curseur ? ¦ Tento dokument zatiaľ nemá žiadne pole hromadnej korešpondencie (Vložiť → „📨 Pole hromadnej korešpondencie“). Vložiť najprv na miesto kurzora malú identifikačnú kartu? ¦ Dokumentet har ikke noe flettefelt ennå (Sett inn → «📨 Flettefelt»). Sette inn et lite identitetskort ved markøren først?
+Ce livre n’a pas de styles de paragraphe. ¦ Táto kniha nemá štýly odsekov. ¦ Denne boken har ingen avsnittsstiler.
+Ce passage a changé : relance la relecture. ¦ Táto pasáž sa zmenila: spusti korektúru znova. ¦ Dette avsnittet er endret: kjør korrekturlesingen på nytt.
+Ce que montre l’image, en une phrase (ex. « Mariage de Jean et Marie devant l’église, 1923 ») ¦ Čo obrázok ukazuje, jednou vetou (napr. „Svadba Jeana a Marie pred kostolom, 1923“) ¦ Hva bildet viser, i én setning (f.eks. «Bryllupet til Jean og Marie foran kirken, 1923»)
+Ce texte suit la fiche : il se met à jour à l’ouverture du document (Outils → Mettre à jour les champs). ¦ Tento text sleduje kartu: aktualizuje sa pri otvorení dokumentu (Nástroje → Aktualizovať polia). ¦ Denne teksten følger oppføringen: den oppdateres når dokumentet åpnes (Verktøy → Oppdater felter).
+Centrer ¦ Na stred ¦ Midtstill
+Certaines images, trop lourdes, n’ont pas été reprises. ¦ Niektoré obrázky boli príliš veľké a neboli prevzaté. ¦ Noen bilder var for store og ble ikke tatt med.
+Cette case n’est pas fusionnée. ¦ Táto bunka nie je zlúčená. ¦ Denne cellen er ikke slått sammen.
+Cette feuille est vide. ¦ Tento hárok je prázdny. ¦ Dette arket er tomt.
+Cette image n’a pas de fichier. ¦ Tento obrázok nemá súbor. ¦ Dette bildet har ingen fil.
+Champ ¦ Pole ¦ Felt
+Changer l’image ¦ Zmeniť obrázok ¦ Bytt bilde
+Changer l’image… ¦ Zmeniť obrázok… ¦ Bytt bilde…
+Chaque Mot ¦ Každé Slovo ¦ Hvert Ord
+Chaque Mot Avec Une Majuscule ¦ Každé Slovo S Veľkým Písmenom ¦ Hvert Ord Med Stor Forbokstav
+Cherche un mot avec 🔍 : chaque endroit trouvé s’affiche ici. ¦ Hľadaj slovo pomocou 🔍: každé nájdené miesto sa zobrazí tu. ¦ Søk etter et ord med 🔍: hvert sted som blir funnet, vises her.
+Chercher… (un mot, un nom) ¦ Hľadať… (slovo, meno) ¦ Søk… (et ord, et navn)
+Choisir un classeur du Tableur ¦ Vybrať zošit z Tabuľkového editora ¦ Velg en arbeidsbok fra Regnearket
+Choisir un média (lien) ¦ Vybrať médium (odkaz) ¦ Velg en mediefil (lenke)
+Choisis d’abord du texte. ¦ Najprv vyber nejaký text. ¦ Merk litt tekst først.
+Choisis d’abord le texte à changer. ¦ Najprv vyber text, ktorý chceš zmeniť. ¦ Merk først teksten som skal endres.
+Choisis le passage à commenter. ¦ Vyber pasáž, ktorú chceš okomentovať. ¦ Merk avsnittet du vil kommentere.
+Choisis les paragraphes à mettre en colonnes. ¦ Vyber odseky, ktoré chceš dať do stĺpcov. ¦ Merk avsnittene som skal settes i kolonner.
+Choisis un mot (double-clic) ou mets le curseur dedans, puis 🔁 Synonymes. ¦ Vyber slovo (dvojklik) alebo doň daj kurzor, potom 🔁 Synonymá. ¦ Merk et ord (dobbeltklikk) eller sett markøren i det, deretter 🔁 Synonymer.
+Choisis un rectangle de cases (sans morceau d’une autre fusion). ¦ Vyber obdĺžnik buniek (bez časti iného zlúčenia). ¦ Merk et rektangel av celler (uten en del av en annen sammenslåing).
+Classique ¦ Klasický ¦ Klassisk
+Classique (à la française) ¦ Klasický (po francúzsky) ¦ Klassisk (fransk stil)
+Clic sur un mot : il remplace « {word} » (↶ pour revenir). ¦ Klikni na slovo: nahradí „{word}“ (↶ na návrat). ¦ Klikk på et ord: det erstatter «{word}» (↶ for å gå tilbake).
+Clique pour l’ajouter au texte (la fenêtre reste ouverte). ¦ Klikni a pridá sa do textu (okno zostane otvorené). ¦ Klikk for å legge det til i teksten (vinduet forblir åpent).
+Coche deux versions (ou « Maintenant ») pour les comparer. ¦ Zaškrtni dve verzie (alebo „Teraz“) a porovnaj ich. ¦ Kryss av for to versjoner (eller «Nå») for å sammenligne dem.
+Coller depuis Word ou le web ¦ Vložiť z Wordu alebo z webu ¦ Lim inn fra Word eller nettet
+Coller sans la mise en forme ¦ Vložiť bez formátovania ¦ Lim inn uten formatering
+Colonne ajoutée ¦ Stĺpec pridaný ¦ Kolonne lagt til
+Colonne supprimée ¦ Stĺpec vymazaný ¦ Kolonne slettet
+Commande inconnue : {cmd} ¦ Neznámy príkaz: {cmd} ¦ Ukjent kommando: {cmd}
+Commencer sur une nouvelle page ¦ Začať na novej strane ¦ Start på en ny side
+Commentaire supprimé ¦ Komentár vymazaný ¦ Kommentar slettet
+Commentaires ¦ Komentáre ¦ Kommentarer
+Commentaires (panneau) ¦ Komentáre (panel) ¦ Kommentarer (panel)
+Commenter ¦ Okomentovať ¦ Kommenter
+Compte rendu de visite ¦ Správa z návštevy ¦ Besøksrapport
+Conjoint ¦ Manžel/manželka ¦ Ektefelle
+Copie enregistrée : « {name} ». ¦ Kópia uložená: „{name}“. ¦ Kopi lagret: «{name}».
+Copie impossible : {error} ¦ Kopírovanie zlyhalo: {error} ¦ Kopieringen mislyktes: {error}
+Copie rangée dans les médias ({format}). ¦ Kópia uložená v médiách ({format}). ¦ Kopi lagret i mediene ({format}).
+Copie « {name} » enregistrée. ¦ Kópia „{name}“ uložená. ¦ Kopien «{name}» er lagret.
+Corriger ¦ Opraviť ¦ Rett
+Couleur du texte ¦ Farba textu ¦ Tekstfarge
+Couleur du texte… ¦ Farba textu… ¦ Tekstfarge…
+Couleur et surlignage (C2) ¦ Farba a zvýraznenie (C2) ¦ Farge og utheving (C2)
+Couper ici ¦ Zalomiť tu ¦ Bryt her
+Créer le lien ¦ Vytvoriť odkaz ¦ Opprett lenken
+Créer le style ¦ Vytvoriť štýl ¦ Opprett stilen
+Créer le tableau ¦ Vytvoriť tabuľku ¦ Opprett tabellen
+Créer les copies ¦ Vytvoriť kópie ¦ Opprett kopiene
+Cyrillique ¦ Cyrilika ¦ Kyrillisk
+Dans la sélection : mots ¦ Vo výbere: slová ¦ I markeringen: ord
+Dans le texte, entre parenthèses ¦ V texte, v zátvorkách ¦ I teksten, i parentes
+Date (mise à jour à chaque ouverture) ¦ Dátum (aktualizuje sa pri každom otvorení) ¦ Dato (oppdateres hver gang det åpnes)
+Date du jour ¦ Dnešný dátum ¦ Dagens dato
+Date du mariage ¦ Dátum sobáša ¦ Vielsesdato
+Demande d’acte (remplie avec une fiche) ¦ Žiadosť o matričný záznam (vyplnená z karty) ¦ Bestilling av dokument (utfylt fra en oppføring)
+Demande d’acte d’état civil ¦ Žiadosť o matričný doklad ¦ Bestilling av attest fra folkeregisteret
+Design ¦ Vzhľad ¦ Design
+Diminuer le retrait ¦ Zmenšiť odsadenie ¦ Reduser innrykk
+Document ¦ Dokument ¦ Dokument
+Document importé ¦ Dokument importovaný ¦ Dokument importert
+Document modifié ailleurs ¦ Dokument bol zmenený inde ¦ Dokumentet er endret et annet sted
+Document « {name} » importé ({words}) ¦ Dokument „{name}“ importovaný ({words}) ¦ Dokumentet «{name}» er importert ({words})
+Donne un nom au style. ¦ Pomenuj štýl. ¦ Gi stilen et navn.
+Double (2) ¦ Dvojité (2) ¦ Dobbel (2)
+Double-clic : modifier le pied de page ¦ Dvojklik: upraviť pätu ¦ Dobbeltklikk: rediger bunnteksten
+Double-clic : modifier l’en-tête ¦ Dvojklik: upraviť hlavičku ¦ Dobbeltklikk: rediger topptekst
+Double-clic : renommer · clic droit : plus ¦ Dvojklik: premenovať · pravé tlačidlo: viac ¦ Dobbeltklikk: gi nytt navn · høyreklikk: mer
+Droite ¦ Vpravo ¦ Høyre
+Déplacer à droite ¦ Posunúť doprava ¦ Flytt til høyre
+Déplacer à gauche ¦ Posunúť doľava ¦ Flytt til venstre
+D’après le paragraphe du curseur : change ce que tu veux, puis il sera proposé dans la liste des styles. ¦ Podľa odseku pri kurzore: zmeň, čo chceš, a potom sa ponúkne v zozname štýlov. ¦ Ut fra avsnittet ved markøren: endre det du vil, så blir den tilbudt i listen over stiler.
+Effacer la mise en forme ¦ Vymazať formátovanie ¦ Fjern formatering
+Elle sert à l’orthographe (mots soulignés en rouge, corrections au clic droit) et à la lecture à voix haute. ¦ Slúži na kontrolu pravopisu (slová podčiarknuté červeno, opravy pravým tlačidlom) a na čítanie nahlas. ¦ Det brukes til stavekontroll (ord understreket med rødt, rettinger ved høyreklikk) og til opplesning.
+En note de bas de page ¦ Ako poznámka pod čiarou ¦ Som fotnote
+En note de fin ¦ Ako vysvetlivka na konci ¦ Som sluttnote
+En-tête (en haut de chaque page) ¦ Hlavička (hore na každej strane) ¦ Topptekst (øverst på hver side)
+En-tête de la première page ¦ Hlavička prvej strany ¦ Topptekst på første side
+En-tête et pied de page ¦ Hlavička a päta ¦ Topptekst og bunntekst
+En-tête et pied de page… ¦ Hlavička a päta… ¦ Topptekst og bunntekst…
+En-tête et pied… ¦ Hlavička a päta… ¦ Topp- og bunntekst…
+Enregistre d’abord le document (💾) : ses versions seront gardées avec lui. ¦ Najprv ulož dokument (💾): jeho verzie sa uložia s ním. ¦ Lagre dokumentet først (💾): versjonene lagres sammen med det.
+Enregistrer comme modèle ¦ Uložiť ako šablónu ¦ Lagre som mal
+Enregistrer comme modèle… ¦ Uložiť ako šablónu… ¦ Lagre som mal…
+Enregistrer comme nouvelle version ¦ Uložiť ako novú verziu ¦ Lagre som ny versjon
+Enregistrer tout seul ¦ Ukladať automaticky ¦ Lagre automatisk
+Enregistrer une copie ¦ Uložiť kópiu ¦ Lagre en kopi
+Envoi des images indisponible. ¦ Odosielanie obrázkov nie je k dispozícii. ¦ Opplasting av bilder er ikke tilgjengelig.
+Envoyer ¦ Odoslať ¦ Send
+Envoyer vers la mise en page… ¦ Poslať do sadzby… ¦ Send til oppsettet…
+Espace après ¦ Medzera za ¦ Avstand etter
+Espace après le paragraphe ¦ Medzera za odsekom ¦ Avstand etter avsnittet
+Espace avant ¦ Medzera pred ¦ Avstand før
+Espace avant le paragraphe ¦ Medzera pred odsekom ¦ Avstand før avsnittet
+Espace fine avant ; ! ? ¦ Úzka medzera pred ; ! ? (francúzske pravidlo) ¦ Smalt mellomrom før ; ! ? (fransk regel)
+Espace insécable avant les deux-points ¦ Nezlomiteľná medzera pred dvojbodkou (francúzske pravidlo) ¦ Hardt mellomrom før kolon (fransk regel)
+Espaces en trop ¦ Nadbytočné medzery ¦ Overflødige mellomrom
+Espagnol ¦ Španielčina ¦ Spansk
+Et {n} de plus (« Tout corriger » les prend aussi). ¦ A ďalších {n} („Opraviť všetko“ ich vezme tiež). ¦ Og {n} til («Rett alle» tar dem også).
+Exporté : {name} ¦ Exportované: {name} ¦ Eksportert: {name}
+Exposant ¦ Horný index ¦ Hevet skrift
+Expressions simples ¦ Jednoduché vzory ¦ Enkle mønstre
+FORMAT ¦ FORMÁT ¦ FORMAT
+Famille et vie ¦ Rodina a život ¦ Familie og liv
+Feuille trop grande pour un document (plus de 20 000 cases) : choisis une plage plus petite dans le Tableur. ¦ Hárok je na dokument príliš veľký (viac ako 20 000 buniek): vyber v Tabuľkovom editore menšiu oblasť. ¦ Arket er for stort for et dokument (mer enn 20 000 celler): velg et mindre område i Regnearket.
+Fiche d’identité d’un ancêtre (remplie) ¦ Identifikačná karta predka (vyplnená) ¦ Identitetskort for en ane (utfylt)
+Fiche ouverte derrière le document (ferme-le ou réduis-le pour la voir). ¦ Karta je otvorená za dokumentom (zatvor ho alebo zmenši, aby si ju videl). ¦ Oppføringen er åpnet bak dokumentet (lukk eller minimer det for å se den).
+Filigrane ¦ Vodoznak ¦ Vannmerke
+Garder avec le paragraphe suivant ¦ Zviazať s nasledujúcim odsekom ¦ Hold sammen med neste avsnitt
+Garder avec le suivant ¦ Zviazať s nasledujúcim ¦ Hold sammen med neste
+Garder la mise en forme (nettoyée) ¦ Zachovať formátovanie (vyčistené) ¦ Behold formateringen (renset)
+Garder ma version ¦ Ponechať moju verziu ¦ Behold min versjon
+Gauche ¦ Vľavo ¦ Venstre
+Glisse la souris d’une case à l’autre pour en choisir plusieurs, puis « Fusionner ». ¦ Ťahaj myšou z bunky do bunky a vyber ich viac, potom „Zlúčiť“. ¦ Dra musen fra én celle til en annen for å merke flere, deretter «Slå sammen».
+Gras ¦ Tučné ¦ Fet
+Gras, italique… ¦ Tučné, kurzíva… ¦ Fet, kursiv…
+Grec ¦ Gréčtina ¦ Gresk
+Groupe de caractères ¦ Skupina znakov ¦ Tegngruppe
+Guillemets français « » ¦ Francúzske úvodzovky « » ¦ Franske anførselstegn « »
+Haut ¦ Hore ¦ Topp
+Hauteur ¦ Výška ¦ Høyde
+Histoire d’une maison ou d’un village ¦ História domu alebo dediny ¦ Historien til et hus eller en bygd
+IMAGE ¦ OBRÁZOK ¦ BILDE
+Image ¦ Obrázok ¦ Bilde
+Image ajoutée (et rangée dans les médias). ¦ Obrázok pridaný (a uložený v médiách). ¦ Bilde lagt til (og lagret i mediene).
+Image choisie : tire un coin pour la taille, clic droit pour l’habillage, ⌫ pour la supprimer. ¦ Obrázok vybraný: ťahaním za roh zmeníš veľkosť, pravým tlačidlom obtekanie, ⌫ ho vymaže. ¦ Bilde merket: dra i et hjørne for å endre størrelse, høyreklikk for tekstbryting, ⌫ for å slette det.
+Image posée : clic pour la taille, clic droit pour l’habillage (carré, haut et bas) et la légende. ¦ Obrázok vložený: klikni pre veľkosť, pravým tlačidlom obtekanie (štvorec, hore a dole) a popis. ¦ Bilde plassert: klikk for størrelsen, høyreklikk for tekstbryting (firkant, over og under) og bildetekst.
+Image rangée dans les médias… ¦ Ukladám obrázok do médií… ¦ Lagrer bildet i mediene…
+Image sans description (lue à voix haute aux personnes qui ne voient pas) ¦ Obrázok bez opisu (číta sa nahlas nevidiacim) ¦ Bilde uten beskrivelse (leses opp for personer som ikke ser)
+Image supprimée ¦ Obrázok vymazaný ¦ Bilde slettet
+Impossible d’enregistrer : {error} ¦ Nemožno uložiť: {error} ¦ Kunne ikke lagre: {error}
+Indice ¦ Dolný index ¦ Senket skrift
+Insérer la fiche d’identité ¦ Vložiť identifikačnú kartu ¦ Sett inn identitetskortet
+Interligne ¦ Riadkovanie ¦ Linjeavstand
+Interligne et espacement ¦ Riadkovanie a medzery ¦ Linje- og avsnittsavstand
+Interligne {n} ¦ Riadkovanie {n} ¦ Linjeavstand {n}
+Italien ¦ Taliančina ¦ Italiensk
+Italique ¦ Kurzíva ¦ Kursiv
+Jeu de styles ¦ Sada štýlov ¦ Stilsett
+Jeu de styles des nouveaux documents ¦ Sada štýlov pre nové dokumenty ¦ Stilsett for nye dokumenter
+Jeu de styles « {name} » ¦ Sada štýlov „{name}“ ¦ Stilsett «{name}»
+Jeu de styles… ¦ Sada štýlov… ¦ Stilsett…
+Justifier ¦ Zarovnať do bloku ¦ Juster
+Justifié ¦ Do bloku ¦ Justert
+La bibliographie (Insertion → 📚) reprend toute seule les sources citées. ¦ Zoznam literatúry (Vložiť → 📚) sám prevezme citované pramene. ¦ Litteraturlisten (Sett inn → 📚) tar selv med de siterte kildene.
+La biographie de qui ? ¦ Čí životopis? ¦ Hvem sin biografi?
+La demande d’acte pour qui ? ¦ Žiadosť o záznam pre koho? ¦ Bestilling av dokument for hvem?
+La fenêtre des images n’est pas chargée. ¦ Okno obrázkov nie je načítané. ¦ Bildevinduet er ikke lastet inn.
+La fenêtre des versions n’est pas chargée. ¦ Okno verzií nie je načítané. ¦ Versjonsvinduet er ikke lastet inn.
+La fiche de qui ? ¦ Čia karta? ¦ Hvem sin oppføring?
+La lecture à voix haute n’existe pas dans ce navigateur. ¦ Čítanie nahlas v tomto prehliadači nie je k dispozícii. ¦ Opplesning finnes ikke i denne nettleseren.
+La naissance : date et lieu ¦ Narodenie: dátum a miesto ¦ Fødsel: dato og sted
+La première ligne est répétée en haut de chaque page ¦ Prvý riadok sa opakuje hore na každej strane ¦ Første rad gjentas øverst på hver side
+La suite du document commence sur une nouvelle page, avec son propre format : par exemple un grand tableau ou un arbre en paysage, puis on revient en portrait. ¦ Zvyšok dokumentu začína na novej strane s vlastným formátom: napríklad veľká tabuľka alebo strom na šírku, potom späť na výšku. ¦ Resten av dokumentet begynner på en ny side med sitt eget format: for eksempel en stor tabell eller et tre i liggende format, og så tilbake til stående.
+La touche Tab avance jusqu’au prochain arrêt. Dans un tableau, Tab passe à la case suivante ; dans une liste, elle décale d’un niveau. ¦ Kláves Tab skočí na ďalšiu zarážku. V tabuľke Tab prejde na ďalšiu bunku; v zozname posunie o úroveň. ¦ Tab-tasten går til neste tabulatorstopp. I en tabell går Tab til neste celle; i en liste flytter den ett nivå.
+La vérification n’est pas chargée. ¦ Kontrola nie je načítaná. ¦ Kontrollen er ikke lastet inn.
+Langue ¦ Jazyk ¦ Språk
+Langue des nouveaux documents ¦ Jazyk nových dokumentov ¦ Språk for nye dokumenter
+Langue du document (orthographe, lecture à voix haute) ¦ Jazyk dokumentu (pravopis, čítanie nahlas) ¦ Dokumentets språk (stavekontroll, opplesning)
+Largeur ¦ Šírka ¦ Bredde
+Latin ¦ Latinčina ¦ Latin
+Le décès : date et lieu ¦ Úmrtie: dátum a miesto ¦ Død: dato og sted
+Le livre dont reprendre les styles ¦ Kniha, z ktorej prevziať štýly ¦ Boken stilene skal hentes fra
+Le mot entier seulement ¦ Len celé slovo ¦ Bare hele ord
+Le mot tel qu’il apparaîtra dans l’index : ¦ Slovo tak, ako sa objaví v registri: ¦ Ordet slik det vil stå i registeret:
+Le moteur du tableur n’est pas chargé. ¦ Jadro tabuľkového editora nie je načítané. ¦ Regnearkmotoren er ikke lastet inn.
+Le nom (lien vers la fiche) ¦ Meno (odkaz na kartu) ¦ Navnet (lenke til oppføringen)
+Le nom de la copie : ¦ Názov kópie: ¦ Navnet på kopien:
+Le nom du modèle (le texte reste : vide-le avant si tu veux un modèle vierge) : ¦ Názov šablóny (text zostane: ak chceš prázdnu šablónu, najprv ho vymaž): ¦ Navnet på malen (teksten blir værende: tøm den først hvis du vil ha en tom mal):
+Le nom du nouvel onglet ¦ Názov novej karty ¦ Navn på den nye fanen
+Le nom et les années (1850 – 1920) ¦ Meno a roky (1850 – 1920) ¦ Navnet og årene (1850 – 1920)
+Le nom, la naissance et le décès ¦ Meno, narodenie a úmrtie ¦ Navnet, fødsel og død
+Le petit arbre de qui ? ¦ Čí malý strom? ¦ Hvem sitt lille tre?
+Le récit de qui ? ¦ Čie rozprávanie? ¦ Hvem sin fortelling?
+Le texte devient des pages d’un livre (Mise en page) : les titres 1 deviennent des chapitres, les images des pages d’images avec leur légende, les notes une partie « Notes » à la fin. Ton document reste tel quel ici. ¦ Text sa stane stranami knihy (Sadzba): nadpisy 1 budú kapitoly, obrázky strany s obrázkami a popismi, poznámky časť „Poznámky“ na konci. Tvoj dokument tu zostane, ako je. ¦ Teksten blir sider i en bok (Oppsett): overskrifter 1 blir kapitler, bilder blir bildesider med bildetekst, notater en del «Notater» til slutt. Dokumentet ditt blir værende som det er her.
+Le texte seul ¦ Len text ¦ Bare teksten
+Le tri ne marche pas avec des cases fusionnées : sépare-les d’abord. ¦ Zoraďovanie nefunguje so zlúčenými bunkami: najprv ich rozdeľ. ¦ Sortering virker ikke med sammenslåtte celler: del dem opp først.
+Lecture arrêtée. ¦ Čítanie zastavené. ¦ Opplesningen er stoppet.
+Legal US ¦ US Legal ¦ US Legal
+Les champs « » prennent les valeurs d’une fiche : Fichier → « 👤 Remplir avec une fiche… », ou une copie par personne avec Outils → « 📨 Publipostage… ». ¦ Polia „ “ preberajú hodnoty karty: Súbor → „👤 Vyplniť z karty…“, alebo kópia pre každú osobu cez Nástroje → „📨 Hromadná korešpondencia…“. ¦ Feltene « » henter verdiene fra en oppføring: Fil → «👤 Fyll ut fra en oppføring…», eller én kopi per person med Verktøy → «📨 Brevfletting…».
+Les changements faits depuis le dernier enregistrement seront perdus. ¦ Zmeny od posledného uloženia sa stratia. ¦ Endringene siden sist du lagret, går tapt.
+Les dates et les lieux écrits à côté d’un nom de la base sont comparés à sa fiche (naissance, baptême, mariage, décès, inhumation, âges, numéros Sosa). Rien n’est changé tout seul. ¦ Dátumy a miesta napísané vedľa mena z databázy sa porovnajú s jeho kartou (narodenie, krst, sobáš, úmrtie, pohreb, vek, čísla Sosa). Nič sa nezmení samo. ¦ Datoer og steder skrevet ved siden av et navn fra databasen sammenlignes med oppføringen (fødsel, dåp, vielse, død, begravelse, aldre, anenumre). Ingenting endres av seg selv.
+Les macros du fichier sont ignorées (elles ne sont jamais lancées). ¦ Makrá v súbore sa ignorujú (nikdy sa nespustia). ¦ Makroene i filen ignoreres (de kjøres aldri).
+Les modifications ne sont plus suivies. ¦ Zmeny sa už nesledujú. ¦ Endringer spores ikke lenger.
+Les modifications sont suivies ¦ Zmeny sa sledujú ¦ Endringer spores
+Les mots mal écrits sont soulignés en rouge (clic droit pour les corrections). ¦ Zle napísané slová sú podčiarknuté červeno (opravy pravým tlačidlom). ¦ Feilstavede ord er understreket med rødt (høyreklikk for rettinger).
+Les paragraphes choisis se partagent en colonnes équilibrées (comme dans un journal). ¦ Vybrané odseky sa rozdelia do vyrovnaných stĺpcov (ako v novinách). ¦ De merkede avsnittene deles i like lange kolonner (som i en avis).
+Les personnes du publipostage ¦ Osoby pre hromadnú korešpondenciu ¦ Personene til brevflettingen
+Les raccourcis à soi ne sont pas chargés. ¦ Vlastné skratky nie sú načítané. ¦ Egne hurtigtaster er ikke lastet inn.
+Les titres et le texte changent ensemble de police et de couleur ; tes propres styles restent. ¦ Nadpisy a text menia písmo a farbu spoločne; tvoje vlastné štýly zostanú. ¦ Overskrifter og tekst bytter skrift og farge sammen; dine egne stiler blir værende.
+Lettre US ¦ US Letter ¦ US Letter
+Lettre aux archives ¦ List archívu ¦ Brev til arkivet
+Lettre aux archives, demande d’acte, récit d’un ancêtre, compte rendu de visite, rapport de recherche… ¦ List archívu, žiadosť o záznam, rozprávanie o predkovi, správa z návštevy, správa o výskume… ¦ Brev til arkivet, bestilling av dokument, fortelling om en ane, besøksrapport, forskningsrapport…
+Lettre à la famille ¦ List rodine ¦ Brev til familien
+Lettres accentuées ¦ Písmená s diakritikou ¦ Bokstaver med aksent
+Lettres et abréviations anciennes ¦ Staré písmená a skratky ¦ Gamle bokstaver og forkortelser
+Lettrine ¦ Iniciála ¦ Innfelt initial
+LibreOffice, OpenOffice ¦ LibreOffice, OpenOffice ¦ LibreOffice, OpenOffice
+Lien « {text} » : écris plutôt où il mène ¦ Odkaz „{text}“: napíš radšej, kam vedie ¦ Lenke «{text}»: skriv heller hvor den fører
+Lieu du mariage ¦ Miesto sobáša ¦ Vielsessted
+Ligne ajoutée ¦ Riadok pridaný ¦ Rad lagt til
+Ligne au-dessus ¦ Riadok nad ¦ Rad over
+Ligne d’en-tête (répétée sur chaque page) ¦ Riadok hlavičky (opakuje sa na každej strane) ¦ Overskriftsrad (gjentas på hver side)
+Ligne en dessous ¦ Riadok pod ¦ Rad under
+Ligne supprimée ¦ Riadok vymazaný ¦ Rad slettet
+Lire à voix haute ¦ Čítať nahlas ¦ Les opp
+Liste numérotée ¦ Číslovaný zoznam ¦ Nummerert liste
+Liste à puces ¦ Zoznam s odrážkami ¦ Punktliste
+Livre (15,6 × 23,4 cm) ¦ Kniha (15,6 × 23,4 cm) ¦ Bok (15,6 × 23,4 cm)
+Livre US (6 × 9 in) ¦ Americká kniha (6 × 9 in) ¦ Amerikansk bok (6 × 9 in)
+Livre ancien ¦ Stará kniha ¦ Gammel bok
+Louise Borie, née en 1850 ¦ Louise Borie, narodená v roku 1850 ¦ Louise Borie, født i 1850
+L’onglet « {name} » et son texte seront supprimés. ¦ Karta „{name}“ a jej text budú vymazané. ¦ Fanen «{name}» og teksten i den slettes.
+MAJUSCULES ¦ VEĽKÉ PÍSMENÁ ¦ STORE BOKSTAVER
+Majuscule en début de phrase ¦ Veľké písmeno na začiatku vety ¦ Stor forbokstav i setningen
+Majuscules et minuscules comptent ¦ Rozlišovať veľké a malé písmená ¦ Skill mellom store og små bokstaver
+Marquer ¦ Označiť ¦ Merk
+Marquer pour l’index ¦ Označiť pre register ¦ Merk for registeret
+Marques de mise en forme ¦ Formátovacie značky ¦ Formateringsmerker
+Marques de mise en forme ¶ ¦ Formátovacie značky ¶ ¦ Formateringsmerker ¶
+Mathématiques ¦ Matematika ¦ Matematikk
+Mes modèles ¦ Moje šablóny ¦ Mine maler
+Mettre à jour les champs (personnes, dates) ¦ Aktualizovať polia (osoby, dátumy) ¦ Oppdater felter (personer, datoer)
+Mise en forme ¦ Formátovanie ¦ Formatering
+Mise en forme (panneau de droite) ¦ Formátovanie (pravý panel) ¦ Formatering (høyre panel)
+Mise en évidence ¦ Silné zvýraznenie ¦ Sterk utheving
+Moderne ¦ Moderný ¦ Moderne
+Modification acceptée ¦ Zmena prijatá ¦ Endring godtatt
+Modification précédente ¦ Predchádzajúca zmena ¦ Forrige endring
+Modification refusée ¦ Zmena odmietnutá ¦ Endring avvist
+Modification suivante ¦ Ďalšia zmena ¦ Neste endring
+Modifications suivies ¦ Sledované zmeny ¦ Sporede endringer
+Modifier le lien… ¦ Upraviť odkaz… ¦ Rediger lenken…
+Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles). ¦ Šablóna „{name}“ uložená (Začať zo šablóny → Moje šablóny). ¦ Malen «{name}» er lagret (Start fra en mal → Mine maler).
+Moi ¦ Ja ¦ Meg
+Mon document ¦ Môj dokument ¦ Mitt dokument
+Mon nom (pour le suivi des modifications et les commentaires) ¦ Moje meno (pre sledovanie zmien a komentáre) ¦ Mitt navn (for sporede endringer og kommentarer)
+Monnaies et chiffres ¦ Meny a číslice ¦ Valutaer og tall
+Montrer dans le texte ¦ Ukázať v texte ¦ Vis i teksten
+Montrer les marques de mise en forme ¶ ¦ Ukázať formátovacie značky ¶ ¦ Vis formateringsmerker ¶
+Montrer les modifications ¦ Ukázať zmeny ¦ Vis endringer
+Montrer les modifications… ¦ Ukázať zmeny… ¦ Vis endringer…
+Montrer ▾ ¦ Ukázať ▾ ¦ Vis ▾
+Mot ancien ¦ Staré slovo ¦ Gammelt ord
+Mot entier ¦ Celé slovo ¦ Helt ord
+Mot répété ¦ Opakované slovo ¦ Gjentatt ord
+Mots ¦ Slová ¦ Ord
+NOTE DE BAS DE PAGE ¦ POZNÁMKA POD ČIAROU ¦ FOTNOTE
+NOTE DE FIN ¦ VYSVETLIVKA ¦ SLUTTNOTE
+Naissance et décès ¦ Narodenie a úmrtie ¦ Fødsel og død
+Nom de famille ¦ Priezvisko ¦ Etternavn
+Nombre de colonnes ¦ Počet stĺpcov ¦ Antall kolonner
+Nombre de mots, de caractères, de paragraphes ¦ Počet slov, znakov, odsekov ¦ Antall ord, tegn, avsnitt
+Nombre de pages ¦ Počet strán ¦ Antall sider
+Non (avec 💾 ou ⌘S) ¦ Nie (s 💾 alebo ⌘S) ¦ Nei (med 💾 eller ⌘S)
+Normal ¦ Normálny ¦ Normal
+Normal, A4, marges de 2,5 cm ¦ Normálny, A4, okraje 2,5 cm ¦ Normal, A4, marger på 2,5 cm
+Note de bas de page ¦ Poznámka pod čiarou ¦ Fotnote
+Note de fin (à la fin du document) ¦ Vysvetlivka (na konci dokumentu) ¦ Sluttnote (sist i dokumentet)
+Note {n} ¦ Poznámka {n} ¦ Note {n}
+Nouveau commentaire ¦ Nový komentár ¦ Ny kommentar
+Nouvel onglet ¦ Nová karta ¦ Ny fane
+Nouvelle section en paysage. ¦ Nový oddiel na šírku. ¦ Ny seksjon i liggende format.
+Nouvelle section en portrait. ¦ Nový oddiel na výšku. ¦ Ny seksjon i stående format.
+Numéro de la page (1 à {n}) : ¦ Číslo strany (1 až {n}): ¦ Sidenummer (1 til {n}):
+Néerlandais ¦ Holandčina ¦ Nederlandsk
+OUTILS ¦ NÁSTROJE ¦ VERKTØY
+Occitan ¦ Okcitánčina ¦ Oksitansk
+Onglet renommé ¦ Karta premenovaná ¦ Fane omdøpt
+Onglet supprimé ¦ Karta vymazaná ¦ Fane slettet
+Onglet {n} ¦ Karta {n} ¦ Fane {n}
+Onglets du document ¦ Karty dokumentu ¦ Dokumentets faner
+Onglets rangés ¦ Karty zoradené ¦ Fanene er omorganisert
+Orientation ¦ Orientácia ¦ Retning
+Orientation de la suite ¦ Orientácia ďalšieho textu ¦ Retning for det som følger
+Ouvrir le lieu ¦ Otvoriť miesto ¦ Åpne stedet
+Ouvrir le panneau de navigation ¦ Otvoriť navigačný panel ¦ Åpne navigasjonspanelet
+Page blanche ¦ Prázdna strana ¦ Tom side
+Page {n} ¦ Strana {n} ¦ Side {n}
+Page {page} / {total} ¦ Strana {page} / {total} ¦ Side {page} / {total}
+Panneau de droite ¦ Pravý panel ¦ Høyre panel
+Panneau de navigation : titres, pages, résultats ¦ Navigačný panel: nadpisy, strany, výsledky ¦ Navigasjonspanel: overskrifter, sider, resultater
+Paragraphe ¦ Odsek ¦ Avsnitt
+Paragraphes ¦ Odseky ¦ Avsnitt
+Paragraphe… ¦ Odsek… ¦ Avsnitt…
+Pas de personne dans cette liste. ¦ V tomto zozname nie je žiadna osoba. ¦ Ingen personer i denne listen.
+Pas de synonyme connu pour « {word} ». Le dictionnaire intégré compte {n} groupes de mots, surtout ceux d’un récit de famille. ¦ Pre „{word}“ nepoznám žiadne synonymum. Vstavaný slovník (francúzsky) má {n} skupín slov, hlavne z rodinného rozprávania. ¦ Ingen kjente synonymer for «{word}». Den innebygde ordboken (på fransk) har {n} ordgrupper, mest fra familiefortellinger.
+Pas d’espace avant la virgule ou le point ¦ Žiadna medzera pred čiarkou ani bodkou ¦ Ikke mellomrom foran komma eller punktum
+Pas encore de commentaire : choisis un passage, puis « 💬 Nouveau commentaire ». ¦ Zatiaľ žiadny komentár: vyber pasáž, potom „💬 Nový komentár“. ¦ Ingen kommentarer ennå: merk et avsnitt, deretter «💬 Ny kommentar».
+Pas encore de modèle à toi : dans un document, Fichier → « Enregistrer comme modèle… ». ¦ Zatiaľ nemáš vlastnú šablónu: v dokumente Súbor → „Uložiť ako šablónu…“. ¦ Ingen egne maler ennå: i et dokument, Fil → «Lagre som mal…».
+Pas encore de titre : choisis le style « Titre 1 » (ou Titre 2, 3…) pour un paragraphe, il apparaîtra ici. ¦ Zatiaľ žiadny nadpis: daj odseku štýl „Nadpis 1“ (alebo Nadpis 2, 3…) a objaví sa tu. ¦ Ingen overskrifter ennå: velg stilen «Overskrift 1» (eller Overskrift 2, 3…) for et avsnitt, så vises den her.
+Personne pour l’instant. ¦ Zatiaľ nikto. ¦ Ingen ennå.
+Petites capitales ¦ Kapitálky ¦ Kapitéler
+Pied de la première page ¦ Päta prvej strany ¦ Bunntekst på første side
+Pied de page (en bas de chaque page) ¦ Päta (dole na každej strane) ¦ Bunntekst (nederst på hver side)
+Place d’abord le curseur dans le texte. ¦ Najprv daj kurzor do textu. ¦ Sett markøren i teksten først.
+Place le curseur dans un paragraphe. ¦ Daj kurzor do odseku. ¦ Sett markøren i et avsnitt.
+Place le curseur dans un tableau. ¦ Daj kurzor do tabuľky. ¦ Sett markøren i en tabell.
+Place le curseur dans une modification (texte vert ou barré rouge). ¦ Daj kurzor do zmeny (zelený text alebo červeno prečiarknutý). ¦ Sett markøren i en endring (grønn tekst eller rød gjennomstreking).
+Place le curseur à l’endroit de la coupure. ¦ Daj kurzor na miesto zlomu. ¦ Sett markøren der skiftet skal være.
+Plein écran (⛶) ¦ Celá obrazovka (⛶) ¦ Fullskjerm (⛶)
+Plus de ligne d’en-tête ¦ Zrušiť riadok hlavičky ¦ Ingen overskriftsrad lenger
+Points de suspension en un seul signe ¦ Tri bodky ako jeden znak ¦ Ellipse som ett tegn
+Police ¦ Písmo ¦ Skrift
+Police (E5) ¦ Písmo (E5) ¦ Skrift (E5)
+Police et taille (E5) ¦ Písmo a veľkosť (E5) ¦ Skrift og størrelse (E5)
+Police… ¦ Písmo… ¦ Skrift…
+Polonais ¦ Poľština ¦ Polsk
+Portugais ¦ Portugalčina ¦ Portugisisk
+Pour que le document se lise bien avec un lecteur d’écran, à voix haute ou en grand. ¦ Aby sa dokument dobre čítal čítačkou obrazovky, nahlas alebo vo veľkom písme. ¦ Slik at dokumentet kan leses godt med skjermleser, høyt eller med stor skrift.
+Pour une fiche ou un lieu de la base : Insertion → 👤 Une personne, 📍 Un lieu. ¦ Pre kartu alebo miesto z databázy: Vložiť → 👤 Osoba, 📍 Miesto. ¦ For en oppføring eller et sted fra databasen: Sett inn → 👤 En person, 📍 Et sted.
+Première page différente (pour une page de titre ou une lettre) ¦ Iná prvá strana (pre titulnú stranu alebo list) ¦ Annerledes første side (for en tittelside eller et brev)
+Précédent (⇧ Entrée) ¦ Predchádzajúci (⇧ Enter) ¦ Forrige (⇧ Enter)
+Quelle feuille ? ¦ Ktorý hárok? ¦ Hvilket ark?
+Ranger une copie dans les médias ¦ Uložiť kópiu do médií ¦ Lagre en kopi i mediene
+Rangé dans Listes → 🛠️ Outils de modification → 📝 Traitement de texte. ¦ Nájdeš v Zoznamy → 🛠️ Nástroje na úpravy → 📝 Textový editor. ¦ Ligger i Lister → 🛠️ Redigeringsverktøy → 📝 Tekstbehandling.
+Rapport de recherche ¦ Správa o výskume ¦ Forskningsrapport
+Rechercher et remplacer ¦ Nájsť a nahradiť ¦ Søk og erstatt
+Relecture ¦ Revízia ¦ Gjennomgang
+Remplacer par ¦ Nahradiť čím ¦ Erstatt med
+Remplacer par… ¦ Nahradiť čím… ¦ Erstatt med…
+Remplir avec la fiche de qui ? ¦ Vyplniť čou kartou? ¦ Fyll ut med hvem sin oppføring?
+Renommer l’onglet ¦ Premenovať kartu ¦ Gi fanen nytt navn
+Renommer… ¦ Premenovať… ¦ Gi nytt navn…
+Retirer la légende ¦ Odobrať popis ¦ Fjern bildeteksten
+Retirer le lien (garder le texte) ¦ Odobrať odkaz (ponechať text) ¦ Fjern lenken (behold teksten)
+Retirer l’espace après ¦ Odobrať medzeru za ¦ Fjern avstand etter
+Retirer l’espace avant ¦ Odobrať medzeru pred ¦ Fjern avstand før
+Retrait gauche ¦ Ľavé odsadenie ¦ Venstre innrykk
+Retrait à droite ¦ Odsadenie vpravo ¦ Innrykk til høyre
+Retrait à gauche ¦ Odsadenie vľavo ¦ Innrykk til venstre
+Rien (le texte comme s’il était accepté) ¦ Nič (text, akoby bol prijatý) ¦ Ingenting (teksten som om den var godtatt)
+Rien de changé depuis : ce que tu tapes ou effaces apparaîtra ici. ¦ Odvtedy bez zmeny: čo napíšeš alebo vymažeš, sa objaví tu. ¦ Ingenting endret siden da: det du skriver eller sletter, vises her.
+Rien à remplacer. ¦ Nie je čo nahradiť. ¦ Ingenting å erstatte.
+Récents ¦ Nedávne ¦ Nylige
+Récit d’un ancêtre ¦ Rozprávanie o predkovi ¦ Fortelling om en ane
+Récit — {name} ¦ Rozprávanie — {name} ¦ Fortelling — {name}
+Répondre ¦ Odpovedať ¦ Svar
+Répondre… ¦ Odpovedať… ¦ Svar…
+STYLES ¦ ŠTÝLY ¦ STILER
+Saut de page : la suite commence en haut de la page suivante. ¦ Zlom strany: ďalší text začne hore na nasledujúcej strane. ¦ Sideskift: det som følger, begynner øverst på neste side.
+Section {n} sur {total} (comme le document). ¦ Oddiel {n} z {total} (ako dokument). ¦ Seksjon {n} av {total} (som dokumentet).
+Section {n} sur {total} (format à elle). ¦ Oddiel {n} z {total} (vlastný formát). ¦ Seksjon {n} av {total} (eget format).
+Seulement un trait dessous ¦ Len čiara dole ¦ Bare en strek under
+Signature ¦ Podpis ¦ Signatur
+Simple (1) ¦ Jednoduché (1) ¦ Enkel (1)
+Simple (une marge à côté des ajouts) ¦ Jednoduché (okraj vedľa pridaného textu) ¦ Enkel (en marg ved siden av tilleggene)
+Souligné ¦ Podčiarknuté ¦ Understreket
+Sous-titre ¦ Podtitul ¦ Undertittel
+Style ¦ Štýl ¦ Stil
+Style de caractère (quelques mots) ¦ Znakový štýl (niekoľko slov) ¦ Tegnstil (noen få ord)
+Style de paragraphe ¦ Štýl odseku ¦ Avsnittsstil
+Style du paragraphe ¦ Štýl tohto odseku ¦ Avsnittets stil
+Style « {name} » ¦ Štýl „{name}“ ¦ Stil «{name}»
+Style « {name} » créé. ¦ Štýl „{name}“ vytvorený. ¦ Stilen «{name}» er opprettet.
+Style « {name} » supprimé ¦ Štýl „{name}“ vymazaný ¦ Stilen «{name}» er slettet
+Styles ¦ Štýly ¦ Stiler
+Styles de paragraphe ¦ Štýly odsekov ¦ Avsnittsstiler
+Suivant ¦ Ďalší ¦ Neste
+Suivant (Entrée) ¦ Ďalší (Enter) ¦ Neste (Enter)
+Suivre les modifications ¦ Sledovať zmeny ¦ Spor endringer
+Sujet ¦ Predmet ¦ Emne
+Supprimer la colonne ¦ Vymazať stĺpec ¦ Slett kolonnen
+Supprimer le tableau ¦ Vymazať tabuľku ¦ Slett tabellen
+Supprimer l’image ¦ Vymazať obrázok ¦ Slett bildet
+Supprimer l’onglet ? ¦ Vymazať kartu? ¦ Slette fanen?
+Supprimer… ¦ Vymazať… ¦ Slett…
+Surlignage ¦ Zvýraznenie textu ¦ Markering
+Surlignage… ¦ Zvýraznenie textu… ¦ Markering…
+Symboles et flèches ¦ Symboly a šípky ¦ Symboler og piler
+Séparer la cellule ¦ Rozdeliť bunku ¦ Del opp cellen
+T Titre ¦ T Nadpis ¦ T Tittel
+TRAITEMENT DE TEXTE ¦ TEXTOVÝ EDITOR ¦ TEKSTBEHANDLING
+Retrait − ¦ Odsadenie − ¦ Innrykk −
+Tableau de « {name} » ¦ Tabuľka z „{name}“ ¦ Tabell fra «{name}»
+Tableau sans ligne de titres (Tableau → « Ligne d’en-tête ») ¦ Tabuľka bez riadka nadpisov (Tabuľka → „Riadok hlavičky“) ¦ Tabell uten overskriftsrad (Tabell → «Overskriftsrad»)
+Tableau supprimé ¦ Tabuľka vymazaná ¦ Tabell slettet
+Tableau trié de A à Z ¦ Tabuľka zoradená od A po Z ¦ Tabellen er sortert A til Å
+Tableau trié de Z à A ¦ Tabuľka zoradená od Z po A ¦ Tabellen er sortert Å til A
+Tableau « {name} » ajouté ({n}). ¦ Tabuľka „{name}“ pridaná ({n}). ¦ Tabellen «{name}» er lagt til ({n}).
+Tabloïd US ¦ US Tabloid ¦ US Tabloid
+Tabulations… ¦ Tabulátory… ¦ Tabulatorer…
+Taille de l’image ¦ Veľkosť obrázka ¦ Bildestørrelse
+Taille… ¦ Veľkosť… ¦ Størrelse…
+Temps de lecture : environ {n} min. ¦ Čas čítania: asi {n} min. ¦ Lesetid: omtrent {n} min.
+Texte affiché ¦ Zobrazený text ¦ Vist tekst
+Texte de la note ¦ Text poznámky ¦ Notens tekst
+Texte du commentaire ¦ Text komentára ¦ Kommentarens tekst
+Texte du document ¦ Text dokumentu ¦ Dokumentets tekst
+Texte très petit (moins de 8 points) ¦ Veľmi malý text (menej ako 8 bodov) ¦ Svært liten tekst (under 8 punkter)
+Titre 1 ¦ Nadpis 1 ¦ Overskrift 1
+Titre 2 ¦ Nadpis 2 ¦ Overskrift 2
+Titre 3 ¦ Nadpis 3 ¦ Overskrift 3
+Titre 4 ¦ Nadpis 4 ¦ Overskrift 4
+Titre 5 ¦ Nadpis 5 ¦ Overskrift 5
+Titre 6 ¦ Nadpis 6 ¦ Overskrift 6
+Titre de niveau {n} juste après un niveau {last} : un niveau est sauté ¦ Nadpis úrovne {n} hneď po úrovni {last}: jedna úroveň je preskočená ¦ Overskrift på nivå {n} rett etter nivå {last}: et nivå er hoppet over
+Titre en {head}, texte en {body} ¦ Nadpis písmom {head}, text písmom {body} ¦ Overskrifter i {head}, tekst i {body}
+Titre vide ¦ Prázdny nadpis ¦ Tom overskrift
+Titres ¦ Nadpisy ¦ Overskrifter
+Ton commentaire… ¦ Tvoj komentár… ¦ Kommentaren din…
+Tous les paragraphes de ce style changent ensemble. ¦ Všetky odseky tohto štýlu sa zmenia spoločne. ¦ Alle avsnitt med denne stilen endres sammen.
+Tout accepter ¦ Prijať všetko ¦ Godta alle
+Tout concorde avec les fiches. ¦ Všetko zodpovedá kartám. ¦ Alt stemmer med oppføringene.
+Tout corriger ¦ Opraviť všetko ¦ Rett alle
+Tout est déjà à jour. ¦ Všetko je už aktuálne. ¦ Alt er allerede oppdatert.
+Tout montrer (ajouts et suppressions) ¦ Ukázať všetko (pridania aj vymazania) ¦ Vis alt (tillegg og slettinger)
+Tout refuser ¦ Odmietnuť všetko ¦ Avvis alle
+Tout remplacer ¦ Nahradiť všetko ¦ Erstatt alle
+Tout retirer ¦ Odobrať všetko ¦ Fjern alle
+Toute la largeur du texte : {n} px. La hauteur suit (pas de déformation). ¦ Celá šírka textu: {n} px. Výška sa prispôsobí (bez deformácie). ¦ Hele tekstbredden: {n} px. Høyden følger med (ingen forvrengning).
+Toutes les 10 minutes ¦ Každých 10 minút ¦ Hvert 10. minutt
+Toutes les 5 minutes ¦ Každých 5 minút ¦ Hvert 5. minutt
+Toutes les minutes ¦ Každú minútu ¦ Hvert minutt
+Trame (fond) ¦ Tieňovanie (pozadie) ¦ Skyggelegging (bakgrunn)
+Trame de la cellule… ¦ Tieňovanie bunky… ¦ Celleskyggelegging…
+Transcription (machine à écrire) ¦ Prepis (písací stroj) ¦ Transkripsjon (skrivemaskin)
+Transcription d’acte mise au propre ¦ Načisto prepísaný matričný záznam ¦ Renskrevet transkripsjon av et dokument
+Triple (3) ¦ Trojité (3) ¦ Tredobbel (3)
+Tu cherches des renseignements sur qui ? ¦ O kom hľadáš informácie? ¦ Hvem leter du etter opplysninger om?
+Typographie française ¦ Francúzska typografia ¦ Fransk typografi
+Un arrêt tous les ¦ Zarážka každých ¦ Et stopp for hver
+Un cadre autour du paragraphe ¦ Rámček okolo odseku ¦ En ramme rundt avsnittet
+Un champ vide s’écrit ¦ Prázdne pole sa zapíše ako ¦ Et tomt felt skrives som
+Un compte rendu de cette visite dans le traitement de texte (cotes, résultats, la suite) ¦ Správa o tejto návšteve v textovom editore (signatúry, výsledky, čo ďalej) ¦ En rapport om dette besøket i tekstbehandlingen (signaturer, resultater, veien videre)
+Un document garde au moins un onglet. ¦ Dokument si ponechá aspoň jednu kartu. ¦ Et dokument beholder minst én fane.
+Un lieu de la base ¦ Miesto z databázy ¦ Et sted fra databasen
+Un nom pour cette version (facultatif) : ¦ Názov tejto verzie (nepovinný): ¦ Et navn på denne versjonen (valgfritt):
+Un style porte déjà ce nom. ¦ Štýl s týmto názvom už existuje. ¦ En stil har allerede dette navnet.
+Une adresse qui commence par https:// (ou mailto:). ¦ Adresa začínajúca https:// (alebo mailto:). ¦ En adresse som begynner med https:// (eller mailto:).
+Une autre fenêtre a enregistré ce document entre-temps. Garder ta version effacera la sienne. ¦ Medzitým tento dokument uložilo iné okno. Ak ponecháš svoju verziu, tá druhá sa vymaže. ¦ Et annet vindu har lagret dokumentet i mellomtiden. Hvis du beholder din versjon, slettes den andre.
+Une copie de ce document par personne, chaque champ « » rempli avec sa fiche ; les copies se suivent dans un nouveau document (une nouvelle page pour chacune). Champs utilisés : {list}. ¦ Jedna kópia tohto dokumentu na osobu, každé pole „ “ vyplnené z jej karty; kópie idú za sebou v novom dokumente (každá na novej strane). Použité polia: {list}. ¦ Én kopi av dokumentet per person, hvert felt « » fylt ut fra personens oppføring; kopiene følger etter hverandre i et nytt dokument (en ny side for hver). Brukte felter: {list}.
+Une espace après la virgule ¦ Medzera za čiarkou ¦ Et mellomrom etter kommaet
+Une image du web n’a pas été reprise : enregistre-la sur l’ordinateur, puis glisse-la ici. ¦ Obrázok z webu nebol prevzatý: ulož ho do počítača a potom ho sem pretiahni. ¦ Et bilde fra nettet ble ikke tatt med: lagre det på datamaskinen, og dra det så hit.
+Une image d’une sorte que le navigateur ne montre pas (EMF, WMF, TIFF…) a été laissée de côté. ¦ Obrázok typu, ktorý prehliadač nevie zobraziť (EMF, WMF, TIFF…), bol vynechaný. ¦ Et bilde av en type nettleseren ikke kan vise (EMF, WMF, TIFF…), er utelatt.
+Une image d’une sorte que le navigateur ne montre pas (SVG, EMF, WMF…) a été laissée de côté. ¦ Obrázok typu, ktorý prehliadač nevie zobraziť (SVG, EMF, WMF…), bol vynechaný. ¦ Et bilde av en type nettleseren ikke kan vise (SVG, EMF, WMF…), er utelatt.
+Une largeur de 16 px au moins. ¦ Šírka aspoň 16 px. ¦ En bredde på minst 16 px.
+Une ligne d’en-tête (répétée sur chaque page) ¦ Riadok hlavičky (opakuje sa na každej strane) ¦ En overskriftsrad (gjentas på hver side)
+Une personne de la base ¦ Osoba z databázy ¦ En person fra databasen
+Utilise {key} dans le texte. ¦ Použi {key} v texte. ¦ Bruk {key} i teksten.
+Utilise {key}. ¦ Použi {key}. ¦ Bruk {key}.
+Version du {date} ¦ Verzia z {date} ¦ Versjon fra {date}
+Version enregistrée (Fichier → 🕘 Versions…). ¦ Verzia uložená (Súbor → 🕘 Verzie…). ¦ Versjon lagret (Fil → 🕘 Versjoner…).
+Vitesse de lecture à voix haute ¦ Rýchlosť čítania nahlas ¦ Opplesningshastighet
+Voir ¦ Zobraziť ¦ Vis
+Vérification de l’orthographe arrêtée. ¦ Kontrola pravopisu vypnutá. ¦ Stavekontroll slått av.
+Vérification impossible. ¦ Kontrola zlyhala. ¦ Kontrollen mislyktes.
+Vérifier avec les fiches ¦ Overiť podľa kariet ¦ Kontroller mot oppføringene
+Vérifier l’orthographe pendant la frappe ¦ Kontrolovať pravopis pri písaní ¦ Kontroller stavingen mens du skriver
+Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, texte, HTML, impression ¦ Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, text, HTML, tlač ¦ Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, tekst, HTML, utskrift
+Word, Pages, Google Docs ¦ Word, Pages, Google Docs ¦ Word, Pages, Google Docs
+a ajouté ¦ pridal(a) ¦ la til
+a supprimé ¦ vymazal(a) ¦ slettet
+automatique ¦ automaticky ¦ automatisk
+aux archives : cotes vues, trouvailles, suite ¦ v archíve: prezreté signatúry, nálezy, čo ďalej ¦ i arkivet: signaturer som er sett, funn, veien videre
+ce fichier .{ext} est abîmé (ce n’est pas un zip) ¦ tento súbor .{ext} je poškodený (nie je to zip) ¦ denne .{ext}-filen er skadet (det er ikke en zip)
+ce fichier LibreOffice n’est pas un texte (c’est un classeur ou une présentation) ¦ tento súbor LibreOffice nie je text (je to zošit alebo prezentácia) ¦ denne LibreOffice-filen er ikke en tekst (det er et regneark eller en presentasjon)
+ce fichier zip n’est ni un document Word (.docx) ni un document LibreOffice (.odt) ¦ tento súbor zip nie je dokument Word (.docx) ani dokument LibreOffice (.odt) ¦ denne zip-filen er verken et Word-dokument (.docx) eller et LibreOffice-dokument (.odt)
+ce n’est pas un document LibreOffice (.odt) ¦ nie je to dokument LibreOffice (.odt) ¦ dette er ikke et LibreOffice-dokument (.odt)
+ce n’est pas un document Word (.docx) : il manque son texte ¦ nie je to dokument Word (.docx): chýba v ňom text ¦ dette er ikke et Word-dokument (.docx): teksten mangler
+ce n’est pas un fichier RTF ¦ nie je to súbor RTF ¦ dette er ikke en RTF-fil
+ce n’est pas un fichier du traitement de texte ¦ nie je to súbor textového editora ¦ dette er ikke en fil fra tekstbehandlingen
+ces réglages du traitement de texte ¦ tieto nastavenia textového editora ¦ disse innstillingene for tekstbehandlingen
+demande de recherche à un service d’archives ¦ žiadosť o pátranie pre archív ¦ forespørsel om søk til et arkiv
+divorcé ¦ rozvedený ¦ skilt
+droite ¦ vpravo ¦ høyre
+décédé (croix) ¦ zomrel(a) (krížik) ¦ død (kors)
+d’autres changements ont suivi : utilise ↶ ({key}) ¦ nasledovali ďalšie zmeny: použi ↶ ({key}) ¦ andre endringer har kommet etter: bruk ↶ ({key})
+d’autres changements ont suivi : utilise ↶ dans le document ¦ nasledovali ďalšie zmeny: použi ↶ v dokumente ¦ andre endringer har kommet etter: bruk ↶ i dokumentet
+espace fine insécable (avant ; : ! ? ») ¦ úzka nezlomiteľná medzera (pred ; : ! ? ») ¦ smalt hardt mellomrom (før ; : ! ? »)
+espace insécable ¦ nezlomiteľná medzera ¦ hardt mellomrom
+et (note tironienne) ¦ a (tirónska nota) ¦ og (tironsk note)
+ex. BROUILLON, COPIE ¦ napr. KONCEPT, KÓPIA ¦ f.eks. UTKAST, KOPI
+fichier RTF trop imbriqué ¦ súbor RTF je príliš vnorený ¦ RTF-filen er nestet for dypt
+fichier du traitement de texte ¦ súbor textového editora ¦ fil fra tekstbehandlingen
+fichier refusé : beaucoup trop de paragraphes ¦ súbor odmietnutý: príliš veľa odsekov ¦ filen er avvist: altfor mange avsnitt
+fichier refusé : trop compliqué ¦ súbor odmietnutý: príliš zložitý ¦ filen er avvist: for komplisert
+fichier refusé : trop gros ¦ súbor odmietnutý: príliš veľký ¦ filen er avvist: for stor
+fichier trop gros (plus de {n} Mo) ¦ súbor je príliš veľký (viac ako {n} MB) ¦ filen er for stor (over {n} MB)
+https://…, mailto:… ¦ https://…, mailto:… ¦ https://…, mailto:…
+il / elle ¦ on / ona ¦ han / hun
+inhumé ¦ pochovaný(á) ¦ begravet
+je cherche des renseignements sur cette personne ¦ hľadám informácie o tejto osobe ¦ jeg leter etter opplysninger om denne personen
+la biographie F5 de la fiche, à compléter ¦ životopis F5 z karty, na doplnenie ¦ oppføringens F5-biografi, til å bygge videre på
+le texte seul ¦ len text ¦ bare teksten
+le texte à l’écran ¦ text na obrazovke ¦ teksten på skjermen
+les anciens fichiers Word (.doc) ne se lisent pas : ouvre-le dans Word ou LibreOffice et enregistre-le en .docx ¦ staré súbory Word (.doc) sa nedajú prečítať: otvor ho vo Worde alebo LibreOffice a ulož ako .docx ¦ gamle Word-filer (.doc) kan ikke leses: åpne den i Word eller LibreOffice og lagre den som .docx
+marié ¦ ženatý / vydatá ¦ gift
+marié (autre signe) ¦ ženatý / vydatá (iná značka) ¦ gift (annet tegn)
+minuscules ¦ malé písmená ¦ små bokstaver
+naissance, mariage ou décès : la personne, les dates et les lieux déjà écrits ¦ narodenie, sobáš alebo úmrtie: osoba, dátumy a miesta, ktoré už sú zapísané ¦ fødsel, vielse eller død: personen, datoene og stedene som allerede er skrevet
+nom, naissance, parents, métier, mariage, décès ¦ meno, narodenie, rodičia, povolanie, sobáš, úmrtie ¦ navn, fødsel, foreldre, yrke, vielse, død
+numéro ¦ číslo ¦ nummer
+né / née ¦ narodený / narodená ¦ født
+p barré (par) ¦ prečiarknuté p (per) ¦ overstreket p (per)
+p à crosse (pro) ¦ p s kľučkou (pro) ¦ p med krøll (pro)
+page web ¦ webová stránka ¦ nettside
+pour partager une découverte ¦ na zdieľanie objavu ¦ for å dele en oppdagelse
+question, sources, analyse, conclusion ¦ otázka, pramene, rozbor, záver ¦ spørsmål, kilder, analyse, konklusjon
+ruban|Caractères ¦ Znaky ¦ Tegn
+ruban|Centre ¦ Na stred ¦ Midtstill
+ruban|Couleur ¦ Farba ¦ Farge
+ruban|Effacer ¦ Vymazať ¦ Fjern
+ruban|Interligne ¦ Riadkovanie ¦ Linjeavstand
+ruban|Note ¦ Poznámka ¦ Note
+ruban|Numéros ¦ Čísla ¦ Numre
+ruban|Petites ¦ Kapitálky ¦ Kapitéler
+ruban|Puces ¦ Odrážky ¦ Punkter
+ruban|Retrait + ¦ Odsadenie + ¦ Innrykk +
+ruban|Retrait − ¦ Odsadenie − ¦ Innrykk −
+ruban|Suivi ¦ Sledovanie ¦ Sporing
+ruban|Surligner ¦ Zvýrazniť ¦ Marker
+récit en parties, images, notes ¦ rozprávanie po častiach, obrázky, poznámky ¦ fortelling i deler, bilder, notater
+texte avec les titres ¦ text s nadpismi ¦ tekst med overskrifter
+texte de l’acte, notes, références ¦ text záznamu, poznámky, odkazy ¦ dokumentets tekst, notater, referanser
+tous les traitements de texte ¦ všetky textové editory ¦ alle tekstbehandlingsprogrammer
+un PDF ne se transforme pas en texte modifiable ici : ouvre la Transcription d’actes pour le recopier ¦ PDF tu nemožno previesť na upraviteľný text: otvor Prepis záznamov a prepíš ho ¦ en PDF kan ikke gjøres om til redigerbar tekst her: åpne Transkripsjon av dokumenter for å skrive den av
+un ancêtre ¦ predok ¦ en ane
+{added} ajouté, {removed} retiré. ¦ Pridané: {added}, odobrané: {removed}. ¦ {added} lagt til, {removed} fjernet.
+{added} ajouté, {removed} retirés. ¦ Pridané: {added}, odobrané: {removed}. ¦ {added} lagt til, {removed} fjernet.
+{added} ajoutés, {removed} retiré. ¦ Pridané: {added}, odobrané: {removed}. ¦ {added} lagt til, {removed} fjernet.
+{added} ajoutés, {removed} retirés. ¦ Pridané: {added}, odobrané: {removed}. ¦ {added} lagt til, {removed} fjernet.
+{name} (copie) ¦ {name} (kópia) ¦ {name} (kopi)
+{name} — publipostage ({n}) ¦ {name} — hromadná korešpondencia ({n}) ¦ {name} — brevfletting ({n})
+{name} — que faut-il écrire ? ¦ {name} — čo treba napísať? ¦ {name} — hva skal skrives?
+{n} avec la fiche de {name} (↶ pour revenir). ¦ {n} podľa karty {name} (↶ na návrat). ¦ {n} med oppføringen for {name} (↶ for å gå tilbake).
+{n} du fichier (scripts, formulaires, cadres…) retiré : ils ne sont jamais lancés. ¦ Zo súboru odobrané: {n} (skripty, formuláre, rámce…): nikdy sa nespúšťajú. ¦ {n} fjernet fra filen (skript, skjemaer, rammer…): de kjøres aldri.
+{n} du fichier (scripts, formulaires, cadres…) retirés : ils ne sont jamais lancés. ¦ Zo súboru odobrané: {n} (skripty, formuláre, rámce…): nikdy sa nespúšťajú. ¦ {n} fjernet fra filen (skript, skjemaer, rammer…): de kjøres aldri.
+{n} du web non reprise. ¦ Z webu neprevzaté: {n}. ¦ {n} fra nettet ble ikke tatt med.
+{n} du web non reprises. ¦ Z webu neprevzaté: {n}. ¦ {n} fra nettet ble ikke tatt med.
+{n} envoyé vers la mise en page : vérifie, puis enregistre le livre. ¦ Poslané do sadzby: {n}. Skontroluj a potom ulož knihu. ¦ {n} sendt til oppsettet: sjekk, og lagre så boken.
+{n} envoyés vers la mise en page : vérifie, puis enregistre le livre. ¦ Poslané do sadzby: {n}. Skontroluj a potom ulož knihu. ¦ {n} sendt til oppsettet: sjekk, og lagre så boken.
+{n} images du web n’ont pas été reprises : enregistre-la sur l’ordinateur, puis glisse-la ici. ¦ Obrázky z webu neboli prevzaté ({n}): ulož ich do počítača a potom ich sem pretiahni. ¦ {n} bilder fra nettet ble ikke tatt med: lagre dem på datamaskinen, og dra dem så hit.
+{n} mis à jour d’après les fiches. ¦ Aktualizované podľa kariet: {n}. ¦ {n} oppdatert ut fra oppføringene.
+{n} modifications acceptées ¦ Prijaté zmeny: {n} ¦ {n} endringer godtatt
+{n} modifications refusées ¦ Odmietnuté zmeny: {n} ¦ {n} endringer avvist
+{n} rangée dans les médias. ¦ Uložené v médiách: {n}. ¦ {n} lagret i mediene.
+{n} rangées dans les médias. ¦ Uložené v médiách: {n}. ¦ {n} lagret i mediene.
+{n} repris de « {name} » ¦ Prevzaté z „{name}“: {n} ¦ {n} hentet fra «{name}»
+{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies. ¦ {pages} · {words}. Word a LibreOffice zachovajú štýly, zoznamy, tabuľky, obrázky, poznámky, hlavičku a pätu, komentáre aj sledované zmeny. ¦ {pages} · {words}. Word og LibreOffice beholder stiler, lister, tabeller, bilder, notater, topptekst og bunntekst, kommentarer og sporede endringer.
+« ________ » (à remplir à la main) ¦ „________“ (vyplniť ručne) ¦ «________» (fylles ut for hånd)
+« … » (pour le voir) ¦ „…“ (aby bolo vidieť) ¦ «…» (for å se det)
+¶ Marques de mise en forme ¦ ¶ Formátovacie značky ¦ ¶ Formateringsmerker
+¶ Paragraphe ¦ ¶ Odsek ¦ ¶ Avsnitt
+¶ Paragraphe (espacements, retraits, interligne)… ¦ ¶ Odsek (medzery, odsadenie, riadkovanie)… ¦ ¶ Avsnitt (avstand, innrykk, linjeavstand)…
+¹ Note de bas de page ¦ ¹ Poznámka pod čiarou ¦ ¹ Fotnote
+À quoi ça sert ? ¦ Na čo to je? ¦ Hva brukes det til?
+Écrire sur cette personne ¦ Písať o tejto osobe ¦ Skriv om denne personen
+Écris le texte du lien. ¦ Napíš text odkazu. ¦ Skriv lenketeksten.
+Écris, choisis un style à gauche de la barre ; clic droit pour les actions. ¦ Píš, štýl vyber vľavo na lište; pravým tlačidlom akcie. ¦ Skriv, velg en stil til venstre på linjen; høyreklikk for handlinger.
+à lire, à envoyer ¦ na čítanie, na odoslanie ¦ til å lese, til å sende
+à ouvrir dans un navigateur ¦ na otvorenie v prehliadači ¦ til å åpne i en nettleser
+à une mairie : naissance, mariage, décès ¦ na matričný úrad: narodenie, sobáš, úmrtie ¦ til en kommune: fødsel, vielse, død
+Ω Caractères spéciaux ¦ Ω Špeciálne znaky ¦ Ω Spesialtegn
+Ω Caractères spéciaux… ¦ Ω Špeciálne znaky… ¦ Ω Spesialtegn…
+― Ligne horizontale ¦ ― Vodorovná čiara ¦ ― Vannrett linje
+• Liste à puces ¦ • Zoznam s odrážkami ¦ • Punktliste
+ⁱ Note de fin ¦ ⁱ Vysvetlivka ¦ ⁱ Sluttnote
+ℹ️ Propriétés du document… ¦ ℹ️ Vlastnosti dokumentu… ¦ ℹ️ Dokumentegenskaper…
+↕ Trier A → Z (cette colonne) ¦ ↕ Zoradiť A → Z (tento stĺpec) ¦ ↕ Sorter A → Å (denne kolonnen)
+↕ Trier Z → A (cette colonne) ¦ ↕ Zoradiť Z → A (tento stĺpec) ¦ ↕ Sorter Å → A (denne kolonnen)
+↶ Annulé ¦ ↶ Vrátené späť ¦ ↶ Angret
+↷ Rétabli ¦ ↷ Znova vykonané ¦ ↷ Gjort om
+↺ Rouvrir ¦ ↺ Znova otvoriť ¦ ↺ Åpne igjen
+⇄ Comparer deux versions… ¦ ⇄ Porovnať dve verzie… ¦ ⇄ Sammenlign to versjoner…
+⇥ Tabulations ¦ ⇥ Tabulátory ¦ ⇥ Tabulatorer
+⇥ Tabulations… ¦ ⇥ Tabulátory… ¦ ⇥ Tabulatorer…
+∑ Nombre de pages ¦ ∑ Počet strán ¦ ∑ Antall sider
+⊞ Fusionner les cellules ¦ ⊞ Zlúčiť bunky ¦ ⊞ Slå sammen celler
+⌨️ Raccourcis du traitement de texte ¦ ⌨️ Skratky textového editora ¦ ⌨️ Hurtigtaster i tekstbehandlingen
+⌨️ Raccourcis du traitement de texte… ¦ ⌨️ Skratky textového editora… ¦ ⌨️ Hurtigtaster i tekstbehandlingen…
+▢ Bordure et trame… ¦ ▢ Orámovanie a tieňovanie… ¦ ▢ Kantlinjer og skyggelegging…
+▥ Colonnes ¦ ▥ Stĺpce ¦ ▥ Kolonner
+▥ Colonnes… ¦ ▥ Stĺpce… ¦ ▥ Kolonner…
+▦ Insérer un tableau… ¦ ▦ Vložiť tabuľku… ¦ ▦ Sett inn en tabell…
+▦ Nouveau tableau ¦ ▦ Nová tabuľka ¦ ▦ Ny tabell
+▦ Tableau… ¦ ▦ Tabuľka… ¦ ▦ Tabell…
+▭ Paysage ¦ ▭ Na šírku ¦ ▭ Liggende
+▯ Portrait ¦ ▯ Na výšku ¦ ▯ Stående
+♿ Accessibilité : {n} point ¦ ♿ Prístupnosť: vecí na riešenie: {n} ¦ ♿ Tilgjengelighet: {n} punkt
+♿ Accessibilité : {n} points ¦ ♿ Prístupnosť: vecí na riešenie: {n} ¦ ♿ Tilgjengelighet: {n} punkter
+♿ Rien à signaler : images décrites, titres en ordre, tableaux avec titres, liens clairs. ¦ ♿ Nič na hlásenie: obrázky opísané, nadpisy v poradí, tabuľky s hlavičkou, jasné odkazy. ¦ ♿ Ingenting å melde: bilder beskrevet, overskrifter i rekkefølge, tabeller med overskrifter, tydelige lenker.
+♿ Vérifier l’accessibilité… ¦ ♿ Skontrolovať prístupnosť… ¦ ♿ Kontroller tilgjengeligheten…
+⚙️ Personnaliser ¦ ⚙️ Prispôsobiť ¦ ⚙️ Tilpass
+⚙️ Réglages du traitement de texte ¦ ⚙️ Nastavenia textového editora ¦ ⚙️ Innstillinger for tekstbehandlingen
+⚙️ Réglages du traitement de texte… ¦ ⚙️ Nastavenia textového editora… ¦ ⚙️ Innstillinger for tekstbehandlingen…
+✍ Les modifications sont suivies : chaque ajout et chaque suppression restent visibles. ¦ ✍ Zmeny sa sledujú: každé pridanie aj vymazanie zostane vidieť. ¦ ✍ Endringer spores: hvert tillegg og hver sletting forblir synlig.
+✍ Suivi ¦ ✍ Sledovanie ¦ ✍ Sporing
+✍ Suivre les modifications ¦ ✍ Sledovať zmeny ¦ ✍ Spor endringer
+✍ modifications à relire ¦ ✍ zmeny na kontrolu ¦ ✍ endringer som skal gjennomgås
+✎ Auteur ¦ ✎ Autor ¦ ✎ Forfatter
+✎ Le style « {name} » ¦ ✎ Štýl „{name}“ ¦ ✎ Stilen «{name}»
+✎ Modifier le style ¦ ✎ Upraviť štýl ¦ ✎ Rediger stilen
+✏️ À mes mesures ¦ ✏️ Vlastný rozmer ¦ ✏️ Egen størrelse
+✓ Accepter ¦ ✓ Prijať ¦ ✓ Godta
+✓ Accepter la modification ¦ ✓ Prijať zmenu ¦ ✓ Godta endringen
+✓ En-tête et pied de page repris. ¦ ✓ Hlavička a päta prevzaté. ¦ ✓ Topptekst og bunntekst hentet.
+✓ Repris : {list}. ¦ ✓ Prevzaté: {list}. ¦ ✓ Hentet: {list}.
+✓ Résolu ¦ ✓ Vyriešené ¦ ✓ Løst
+✓ Tout accepter ¦ ✓ Prijať všetko ¦ ✓ Godta alle
+✓ Tout concorde avec les fiches. ¦ ✓ Všetko zodpovedá kartám. ¦ ✓ Alt stemmer med oppføringene.
+✗ Refuser ¦ ✗ Odmietnuť ¦ ✗ Avvis
+✗ Refuser la modification ¦ ✗ Odmietnuť zmenu ¦ ✗ Avvis endringen
+✗ Tout refuser ¦ ✗ Odmietnuť všetko ¦ ✗ Avvis alle
+✳️ Markdown (.md) ¦ ✳️ Markdown (.md) ¦ ✳️ Markdown (.md)
+❝ Citer une source ¦ ❝ Citovať prameň ¦ ❝ Siter en kilde
+❝ Source citée… ¦ ❝ Citovaný prameň… ¦ ❝ Sitert kilde…
+⤒ Importer (Word, LibreOffice…)… ¦ ⤒ Importovať (Word, LibreOffice…)… ¦ ⤒ Importer (Word, LibreOffice…)…
+⤒ Importer le document ¦ ⤒ Importovať dokument ¦ ⤒ Importer dokumentet
+⤒ Importer un document ¦ ⤒ Importovať dokument ¦ ⤒ Importer et dokument
+⤓ Exporter… ¦ ⤓ Exportovať… ¦ ⤓ Eksporter…
+⤓ Saut de page ¦ ⤓ Zlom strany ¦ ⤓ Sideskift
+＋ Ajouter des personnes… ¦ ＋ Pridať osoby… ¦ ＋ Legg til personer…
+＋ Description… ¦ ＋ Opis… ¦ ＋ Beskrivelse…
+＋ Les personnes d’une de mes listes… ¦ ＋ Osoby z jedného z mojich zoznamov… ¦ ＋ Personene fra en av listene mine…
+＋ Nouveau commentaire ¦ ＋ Nový komentár ¦ ＋ Ny kommentar
+＋ Nouveau document ¦ ＋ Nový dokument ¦ ＋ Nytt dokument
+＋ Nouveau style ¦ ＋ Nový štýl ¦ ＋ Ny stil
+＋ Nouveau style d’après la sélection… ¦ ＋ Nový štýl podľa výberu… ¦ ＋ Ny stil ut fra markeringen…
+🌐 Langue du document ¦ 🌐 Jazyk dokumentu ¦ 🌐 Dokumentets språk
+🌐 Langue… ¦ 🌐 Jazyk… ¦ 🌐 Språk…
+🌐 Page web (.html) ¦ 🌐 Webová stránka (.html) ¦ 🌐 Nettside (.html)
+🌳 Un petit arbre… ¦ 🌳 Malý strom… ¦ 🌳 Et lite tre…
+🎞 Un média (lien)… ¦ 🎞 Médium (odkaz)… ¦ 🎞 En mediefil (lenke)…
+🎨 Choisir… ¦ 🎨 Vybrať… ¦ 🎨 Velg…
+🎨 Couleur de page… ¦ 🎨 Farba strany… ¦ 🎨 Sidefarge…
+🎨 Forme ¦ 🎨 Vzhľad ¦ 🎨 Formatering
+🎨 Styles… ¦ 🎨 Štýly… ¦ 🎨 Stiler…
+👤 Remplir avec une fiche ¦ 👤 Vyplniť z karty ¦ 👤 Fyll ut fra en oppføring
+👤 Remplir avec une fiche… ¦ 👤 Vyplniť z karty… ¦ 👤 Fyll ut fra en oppføring…
+👤 Une personne de la base… ¦ 👤 Osoba z databázy… ¦ 👤 En person fra databasen…
+💬 Montrer les commentaires ¦ 💬 Ukázať komentáre ¦ 💬 Vis kommentarer
+💬 Nouveau commentaire ¦ 💬 Nový komentár ¦ 💬 Ny kommentar
+💾 Fichier de l’outil ¦ 💾 Súbor nástroja ¦ 💾 Verktøyets fil
+📁 Ranger une copie dans les médias ¦ 📁 Uložiť kópiu do médií ¦ 📁 Lagre en kopi i mediene
+📄 Format, marges et orientation… ¦ 📄 Formát, okraje a orientácia… ¦ 📄 Format, marger og retning…
+📄 PDF ¦ 📄 PDF ¦ 📄 PDF
+📄 Pages ¦ 📄 Strany ¦ 📄 Sider
+📄 Saut de section ¦ 📄 Zlom oddielu ¦ 📄 Seksjonsskift
+📄 Saut de section (autre orientation)… ¦ 📄 Zlom oddielu (iná orientácia)… ¦ 📄 Seksjonsskift (annen retning)…
+📅 Date ¦ 📅 Dátum ¦ 📅 Dato
+📅 Date du jour ¦ 📅 Dnešný dátum ¦ 📅 Dagens dato
+📊 Un diagramme… ¦ 📊 Diagram… ¦ 📊 Et skjema…
+📋 Partir d’un modèle ¦ 📋 Začať zo šablóny ¦ 📋 Start fra en mal
+📋 Partir d’un modèle… ¦ 📋 Začať zo šablóny… ¦ 📋 Start fra en mal…
+📍 Un lieu de la base… ¦ 📍 Miesto z databázy… ¦ 📍 Et sted fra databasen…
+📐 Envoyer vers la mise en page ¦ 📐 Poslať do sadzby ¦ 📐 Send til oppsettet
+📐 Envoyer vers la mise en page… ¦ 📐 Poslať do sadzby… ¦ 📐 Send til oppsettet…
+📐 Reprendre les styles d’un livre… ¦ 📐 Prevziať štýly z knihy… ¦ 📐 Hent stilene fra en bok…
+📐 Styles d’un livre… ¦ 📐 Štýly z knihy… ¦ 📐 Stiler fra en bok…
+📑 Sommaire ¦ 📑 Obsah ¦ 📑 Innholdsfortegnelse
+📖 La biographie d’une personne… ¦ 📖 Životopis osoby… ¦ 📖 En persons biografi…
+📗 LibreOffice (.odt) ¦ 📗 LibreOffice (.odt) ¦ 📗 LibreOffice (.odt)
+📘 Word (.docx) ¦ 📘 Word (.docx) ¦ 📘 Word (.docx)
+📚 Bibliographie ¦ 📚 Zoznam literatúry ¦ 📚 Litteraturliste
+📜 Brouillon (sans les pages) ¦ 📜 Koncept (bez strán) ¦ 📜 Utkast (uten sider)
+📝 Compte rendu ¦ 📝 Správa ¦ 📝 Rapport
+📝 RTF ¦ 📝 RTF ¦ 📝 RTF
+📝 Écrire sur cette personne : un document du traitement de texte, avec sa biographie déjà posée ¦ 📝 Písať o tejto osobe: dokument textového editora s už vloženým životopisom ¦ 📝 Skriv om denne personen: et dokument i tekstbehandlingen med biografien allerede satt inn
+📨 Champ de fusion ¦ 📨 Pole hromadnej korešpondencie ¦ 📨 Flettefelt
+📨 Champ de fusion (prénom, dates…) ¦ 📨 Pole hromadnej korešpondencie (meno, dátumy…) ¦ 📨 Flettefelt (fornavn, datoer…)
+📨 Publipostage ¦ 📨 Hromadná korešpondencia ¦ 📨 Brevfletting
+📨 Publipostage… ¦ 📨 Hromadná korešpondencia… ¦ 📨 Brevfletting…
+🔁 Synonymes de « {word} » ¦ 🔁 Synonymá k „{word}“ ¦ 🔁 Synonymer for «{word}»
+🔁 Synonymes… ¦ 🔁 Synonymá… ¦ 🔁 Synonymer…
+🔊 Lecture… (Échap ou Outils → ⏹ Arrêter la lecture) ¦ 🔊 Čítam… (Esc alebo Nástroje → ⏹ Zastaviť čítanie) ¦ 🔊 Leser opp… (Esc eller Verktøy → ⏹ Stopp opplesningen)
+🔊 Lire à voix haute ¦ 🔊 Čítať nahlas ¦ 🔊 Les opp
+🔍 Rechercher ¦ 🔍 Nájsť ¦ 🔍 Søk
+🔎 Corrigé dans {n} passage (↶ pour revenir). ¦ 🔎 Opravené v pasážach: {n} (↶ na návrat). ¦ 🔎 Rettet i {n} avsnitt (↶ for å gå tilbake).
+🔎 Corrigé dans {n} passages (↶ pour revenir). ¦ 🔎 Opravené v pasážach: {n} (↶ na návrat). ¦ 🔎 Rettet i {n} avsnitt (↶ for å gå tilbake).
+🔎 Relecture (typographie, répétitions)… ¦ 🔎 Korektúra (typografia, opakovania)… ¦ 🔎 Korrekturlesing (typografi, gjentakelser)…
+🔎 Rien à reprendre : typographie et répétitions sont bonnes. ¦ 🔎 Nič na opravu: typografia aj opakovania sú v poriadku. ¦ 🔎 Ingenting å rette: typografi og gjentakelser er i orden.
+🔎 Vérification avec les fiches… ¦ 🔎 Overovanie podľa kariet… ¦ 🔎 Kontrollerer mot oppføringene…
+🔎 Vérifier avec les fiches ¦ 🔎 Overiť podľa kariet ¦ 🔎 Kontroller mot oppføringene
+🔎 {n} à regarder. ¦ 🔎 Na prezretie: {n}. ¦ 🔎 {n} å se på.
+🔗 Lien… ¦ 🔗 Odkaz… ¦ 🔗 Lenke…
+🔗 Modifier le lien ¦ 🔗 Upraviť odkaz ¦ 🔗 Rediger lenken
+🔗 Nouveau lien ¦ 🔗 Nový odkaz ¦ 🔗 Ny lenke
+🔢 Nombre de mots ¦ 🔢 Počet slov ¦ 🔢 Antall ord
+🔢 Nombre de mots… ¦ 🔢 Počet slov… ¦ 🔢 Antall ord…
+🔤 Index ¦ 🔤 Register ¦ 🔤 Register
+🕘 Enregistrer comme nouvelle version ¦ 🕘 Uložiť ako novú verziu ¦ 🕘 Lagre som ny versjon
+🕘 Nouvelle version ¦ 🕘 Nová verzia ¦ 🕘 Ny versjon
+🕘 Versions… ¦ 🕘 Verzie… ¦ 🕘 Versjoner…
+🖍 Surlignage… ¦ 🖍 Zvýraznenie textu… ¦ 🖍 Markering…
+🖨 Imprimer… ¦ 🖨 Tlačiť… ¦ 🖨 Skriv ut…
+🖼 Image… ¦ 🖼 Obrázok… ¦ 🖼 Bilde…
+🧭 Panneau de navigation ¦ 🧭 Navigačný panel ¦ 🧭 Navigasjonspanel
+🧾 Ouvrir ce tableau dans le Tableur ¦ 🧾 Otvoriť túto tabuľku v Tabuľkovom editore ¦ 🧾 Åpne denne tabellen i Regnearket
+🧾 Tableau venu du Tableur… ¦ 🧾 Tabuľka z Tabuľkového editora… ¦ 🧾 Tabell fra Regnearket…
+🧾 Texte (.txt) ¦ 🧾 Text (.txt) ¦ 🧾 Tekst (.txt)
+=remplacement ¦ náhrada|náhrady|náhrad ¦ erstatning|erstatninger
+=commentaire ¦ komentár|komentáre|komentárov ¦ kommentar|kommentarer
+=modification suivie ¦ sledovaná zmena|sledované zmeny|sledovaných zmien ¦ sporet endring|sporede endringer
+=tableau ¦ tabuľka|tabuľky|tabuliek ¦ tabell|tabeller
+=style ¦ štýl|štýly|štýlov ¦ stil|stiler
+=paragraphe ¦ odsek|odseky|odsekov ¦ avsnitt|avsnitt
+=champ rempli ¦ vyplnené pole|vyplnené polia|vyplnených polí ¦ utfylt felt|utfylte felter
+texte|Caractère ¦ Znak ¦ Tegn
+icone-gras|G ¦ B ¦ F
+icone-italique|I ¦ I ¦ K
+icone-souligne|S ¦ U ¦ U
+icone-petites-capitales|Pᴄ ¦ Kᴀ ¦ Kᴀ

@@ -8,6 +8,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s); // 🌐 docs/I18N.md
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
@@ -25,7 +26,7 @@
     const ls = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v ?? d; } catch (_) { return d; } };
     const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
 
-    const SORTS = {dates: ['📅', 'Dates'], ages: ['🎂', 'Âges'], parents: ['👪', 'Parents'], doublons: ['👥', 'Doublons'], lieux: ['📍', 'Lieux']};
+    const SORTS = {dates: ['📅', 'Dates'], ages: ['🎂', 'Âges'], parents: ['👪', 'Parents'], doublons: ['👥', 'Doublons'], lieux: ['📍', 'Lieux'], socface: ['🧾', 'Recensement SocFace']};
     const LEVELS = {red: ['🔴', 'Impossible'], orange: ['🟠', 'À vérifier'], yellow: ['🟡', 'Curieux']};
     const SUBS = {misplaced: 'Lieux mal placés', journeys: 'Voyages impossibles', baptism: 'Baptême loin', conflicting: 'Lieux contradictoires'};
     const FKEY = 'lcnda-controle-filtres';
@@ -55,12 +56,16 @@
         'long-date': 'une note ou une phrase de l’acte collée dans la case de la date : garde la date seule, mets le reste en note.',
         'negative-date': 'un tiret tapé par erreur devant l’année.',
         'spouse-ancestor': 'un homonyme pris pour le conjoint, ou une fiche rattachée une génération trop haut ou trop bas.',
+        'socface-birth': 'un chiffre mal lu par la machine (1/7, 3/8, 5/6), ou un âge déclaré au hasard par la famille : regarde l’image du recensement.',
+        'socface-place': 'un nom de commune mal lu ou abrégé (« St » pour Saint) : regarde l’image du recensement.',
+        'socface-gender': 'la case du genre mal lue, ou une autre personne du ménage : regarde l’image du recensement.',
+        'socface-relation': 'un lien mal lu (fils / fille), un ménage mal découpé, ou une fiche pas encore reliée : regarde l’image du recensement.',
         'animal-link': 'un ancien import où l’animal était relié comme une personne : relie-le à son maître dans sa fiche (Propriétaire).',
     };
     /** Raisons proposées dans « Ce n'est pas une erreur », selon la sorte */
     const REASONS = {
         common: ['J’ai vérifié dans l’acte : c’est bien ça', 'C’est rare, mais c’est vrai (cas connu dans la famille)', 'La date est approximative (« vers… »)'],
-        doublons: ['Ce sont deux personnes différentes'], lieux: ['Le lieu est juste'], journeys: ['Ce sont bien les mêmes dates et lieux'], parents: ['Enfant posthume'], ages: ['Remariage tardif'],
+        doublons: ['Ce sont deux personnes différentes'], lieux: ['Le lieu est juste'], socface: ['J’ai regardé l’image : ma fiche est juste, SocFace a mal lu', 'Ce n’est pas la même personne (homonyme)', 'L’âge déclaré au recensement était approximatif'], journeys: ['Ce sont bien les mêmes dates et lieux'], parents: ['Enfant posthume'], ages: ['Remariage tardif'],
     };
 
     /* ─── petits morceaux ─── */
@@ -123,7 +128,7 @@
         return list.filter(a => (f.sort === 'all' || a.sort === f.sort) && (!f.level || a.level === f.level) && (!f.sub || a.sub === f.sub));
     }
     function sorted(list, sort) {
-        const lv = {red: 0, orange: 1, yellow: 2}, so = {parents: 0, dates: 1, ages: 2, doublons: 3, lieux: 4};
+        const lv = {red: 0, orange: 1, yellow: 2}, so = {parents: 0, dates: 1, ages: 2, doublons: 3, lieux: 4, socface: 5};
         const name = a => nm(DATA.people[a.people[0]]) || a.place?.name || a.title;
         const out = list.slice();
         if (sort === 'sort') out.sort((x, y) => so[x.sort] - so[y.sort] || lv[x.level] - lv[y.level]);
@@ -147,6 +152,7 @@
         const fixBtn = a.sort === 'doublons' ? `<button type="button" class="button small secondary" data-ctl-compare="${i}">⚖️ Comparer</button>`
             : a.check === 'misplaced' ? `<button type="button" class="button small secondary" data-ctl-place="${i}">✎ ${a.suggest ? 'Corriger' : 'Placer sur la carte'}</button>`
             : a.fix?.event_id ? `<button type="button" class="button small secondary" data-ctl-fix="${i}">✎ Corriger</button>`
+            : a.socface?.census_id && window.LCNDA_EXT?.socface ? `<button type="button" class="button small secondary" data-sf-verify-census="${Number(a.socface.census_id)}" data-sf-member="${Number(a.socface.member_id)}">🔍 Vérifier la ligne</button>${a.socface.image_url ? `<a class="button small secondary" href="${esc(a.socface.image_url)}" target="_blank" rel="noopener noreferrer">${esc(window.LCNDA_SOCFACE?.imageLabel ? window.LCNDA_SOCFACE.imageLabel(a.socface.image_url) : '🖼 Image ↗')}</a>` : ''}${a.people[0] ? `<button type="button" class="button small secondary" data-open-person="${a.people[0]}">↗ Fiche</button>` : ''}`
             : a.people[0] ? `<button type="button" class="button small secondary" data-open-person="${a.people[0]}">↗ Ouvrir</button>` : '';
         return `<article class="ctl-row is-${esc(a.level)}" data-ctl-i="${i}" data-ctx-menu>
             <div class="ctl-row-main"><h3><span class="ctl-lvl" title="${esc(levelOf(a.level)[1])}">${ic}</span> ${esc(a.title)} ${sortBadge(a.sort)}${a.score ? ` ${UI().badge(a.score + ' %', 'yellow')}` : ''}${a.returned ? ` ${UI().badge('Dates changées', 'yellow', {title: 'Tu l’avais écartée, mais une des dates en cause a changé'})}` : ''}</h3>
@@ -158,7 +164,7 @@
         const p = e.people.map(id => DATA.people[id]).filter(Boolean);
         const open = e.sort === 'doublons' && p.length > 1 ? `<button type="button" class="button small secondary" data-ctl-ecompare="${i}">⚖️ Comparer</button>` : p[0] ? `<button type="button" class="button small secondary" data-open-person="${p[0].id}">↗ Fiche</button>` : '';
         return `<article class="ctl-row is-exc" data-ctl-e="${i}" data-ctx-menu><div class="ctl-row-main"><h3>${esc(e.title)} ${UI().badge('Écartée', 'grey')}${e.status === 'changed' ? ' ' + UI().badge('Dates changées', 'yellow') : e.status === 'gone' ? ' ' + UI().badge('Plus d’alerte', 'green', {title: 'Le contrôle ne trouve plus ce problème'}) : ''}</h3>
-            <p class="ctl-detail">« ${esc(e.reason)} »${e.note ? ` · ${esc(e.note)}` : ''} · ${UI().when ? UI().when(e.at) : esc(e.at)}</p>
+            <p class="ctl-detail">« ${esc(i18n(e.reason))} »${e.note ? ` · ${esc(e.note)}` : ''} · ${UI().when ? UI().when(e.at) : esc(e.at)}</p>
             ${p.length || e.place ? `<div class="ctl-chips">${p.map(x => personChip(x)).join('')}${placeChip(e.place)}</div>` : ''}</div>
             <div class="ctl-row-acts">${open}<button type="button" class="button small secondary" data-ctl-again="${i}">↺ Signaler de nouveau</button></div></article>`;
     }
@@ -189,7 +195,7 @@
             onChange: async (st, {what}) => { if (what === 'filter' || what === 'clear') { await setScope(st); } shown = 20; draw(); }});
         A().$('[data-ctl-bar]').appendChild(bar);
         void prev;
-        A().$('[data-ctl-checked]').innerHTML = `Contrôlé ${UI().when ? UI().when(DATA.checked_at) : esc(DATA.checked_at)}`;
+        A().$('[data-ctl-checked]').innerHTML = i18n('Contrôlé {when}', {when: UI().when ? UI().when(DATA.checked_at) : esc(DATA.checked_at)});
         setScope(bar.state).then(draw);
         bindPage(ws, token);
         function draw() {
@@ -283,11 +289,11 @@
         const pl = a.place; if (!pl) return;
         const apply = async (lat, lon, insee, label) => {
             await api('fix_place', {}, {method: 'POST', body: {id: pl.id, lat, lon, insee: insee || ''}});
-            A().undoToast(`Lieu corrigé : ${pl.name} (${label})`, {undo: async () => { await api('fix_place', {}, {method: 'POST', body: {id: pl.id, lat: pl.lat, lon: pl.lon}}); after?.(); }, redo: async () => { await api('fix_place', {}, {method: 'POST', body: {id: pl.id, lat, lon, insee: insee || ''}}); after?.(); }});
+            A().undoToast(i18n('Lieu corrigé : {name} ({what})', {name: pl.name, what: label}), {undo: async () => { await api('fix_place', {}, {method: 'POST', body: {id: pl.id, lat: pl.lat, lon: pl.lon}}); after?.(); }, redo: async () => { await api('fix_place', {}, {method: 'POST', body: {id: pl.id, lat, lon, insee: insee || ''}}); after?.(); }});
             after?.();
         };
         if (a.suggest) { try { await apply(a.suggest.lat, a.suggest.lon, a.suggest.insee, a.suggest.why); } catch (error) { toast(error.message, 'error'); } return; }
-        const it = await A().openPicker({kind: 'place', title: `La bonne commune pour « ${pl.name} »`, eyebrow: 'PLACER SUR LA CARTE', label: 'Choisis la commune : ses coordonnées seront reprises'});
+        const it = await A().openPicker({kind: 'place', title: i18n('La bonne commune pour « {name} »', {name: pl.name}), eyebrow: 'PLACER SUR LA CARTE', label: 'Choisis la commune : ses coordonnées seront reprises'});
         if (!it) return;
         if (it.lat == null || it.lon == null) return toast('Ce lieu n’a pas de coordonnées : choisis une commune de la liste.', 'error');
         try { await apply(it.lat, it.lon, '', it.title || it.name || ''); } catch (error) { toast(error.message, 'error'); }
@@ -296,8 +302,8 @@
     /** « Ce n'est pas une erreur » : une raison selon la sorte, une note, « me le signaler à nouveau si une date change ». */
     function dismiss(a, after) {
         if (!a) return;
-        const extra = a.check === 'journey' ? REASONS.journeys : a.sort === 'doublons' || a.check === 'misplaced' ? REASONS[a.sort] : a.check === 'old-marriage' ? REASONS.ages : a.check === 'after-father-death' ? REASONS.parents : [];
-        const reasons = a.sort === 'doublons' || a.check === 'misplaced' ? extra : [...REASONS.common, ...extra];
+        const extra = a.check === 'journey' ? REASONS.journeys : a.sort === 'socface' ? REASONS.socface : a.sort === 'doublons' || a.check === 'misplaced' ? REASONS[a.sort] : a.check === 'old-marriage' ? REASONS.ages : a.check === 'after-father-death' ? REASONS.parents : [];
+        const reasons = a.sort === 'doublons' || a.check === 'misplaced' || a.sort === 'socface' ? extra : [...REASONS.common, ...extra];
         const people = a.people.map(id => nm(DATA?.people?.[id] || {})).join(' → ');
         const dlg = document.createElement('dialog'); dlg.className = 'modal small-modal ctl-dismiss';
         dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">CONTRÔLE DE LA BASE</span><h2>Ce n’est pas une erreur ?</h2></div><button class="icon-button" type="button" data-x aria-label="Fermer">×</button></div>
@@ -305,7 +311,7 @@
             <fieldset class="ctl-reasons"><legend>Pourquoi ?</legend>${reasons.map((r, i) => `<label class="ctl-reason"><input type="radio" name="reason" value="${esc(r)}"${i === 0 ? ' checked' : ''}> ${esc(r)}</label>`).join('')}<label class="ctl-reason"><input type="radio" name="reason" value=""> Autre raison…</label></fieldset>
             <input name="other" placeholder="Ta raison" hidden maxlength="200">
             <label class="ctl-note">Note (facultatif)<input name="note" maxlength="1000" placeholder="acte n° 42, registre de Naves 1863"></label>
-            ${a.dates?.length || a.sort === 'lieux' || a.sort === 'doublons' ? `<label class="checkbox-line"><input type="checkbox" name="watch" checked> Me le signaler à nouveau si une de ces ${a.sort === 'lieux' ? 'coordonnées' : 'dates'} change</label>` : ''}</div>
+            ${a.dates?.length || a.sort === 'lieux' || a.sort === 'doublons' ? `<label class="checkbox-line"><input type="checkbox" name="watch" checked> ${i18n(a.sort === 'lieux' ? 'Me le signaler à nouveau si une de ces coordonnées change' : 'Me le signaler à nouveau si une de ces dates change')}</label>` : ''}</div>
             <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Annuler</button><button type="submit" class="button">Ne plus signaler</button></div></form>`;
         document.body.appendChild(dlg);
         const form = dlg.querySelector('form');
@@ -321,7 +327,7 @@
                 const r = await api('controle_dismiss', {}, {method: 'POST', body});
                 dlg.close();
                 const prev = r.result?.before;
-                A().undoToast(`Exception gardée : ${a.title}`, {undo: async () => { await api('controle_undismiss', {}, {method: 'POST', body: {key: a.key}}); if (prev) await api('controle_dismiss', {}, {method: 'POST', body: {key: a.key, reason: prev.reason, note: prev.note || '', watch: prev.watch}}); after?.(); },
+                A().undoToast(i18n('Exception gardée : {what}', {what: a.title}), {undo: async () => { await api('controle_undismiss', {}, {method: 'POST', body: {key: a.key}}); if (prev) await api('controle_dismiss', {}, {method: 'POST', body: {key: a.key, reason: prev.reason, note: prev.note || '', watch: prev.watch}}); after?.(); },
                     redo: async () => { await api('controle_dismiss', {}, {method: 'POST', body}); after?.(); }});
                 after?.();
             } catch (error) { toast(error.message, 'error'); }
@@ -333,7 +339,7 @@
         try {
             const r = await api('controle_undismiss', {}, {method: 'POST', body: {key: x.key}});
             const b = r.result?.before;
-            A().undoToast(`Signalée de nouveau : ${x.title}`, {undo: async () => { if (b) await api('controle_dismiss', {}, {method: 'POST', body: {key: x.key, reason: b.reason, note: b.note || '', watch: b.watch}}); after?.(); },
+            A().undoToast(i18n('Signalée de nouveau : {what}', {what: x.title}), {undo: async () => { if (b) await api('controle_dismiss', {}, {method: 'POST', body: {key: x.key, reason: b.reason, note: b.note || '', watch: b.watch}}); after?.(); },
                 redo: async () => { await api('controle_undismiss', {}, {method: 'POST', body: {key: x.key}}); after?.(); }});
             after?.();
         } catch (error) { toast(error.message, 'error'); }
@@ -385,7 +391,7 @@
         }).join('') + (a.place ? `<div class="ctl-one-person">${placeChip(a.place)}</div>` : '');
         ws.innerHTML = `<section class="page ctl-page ctl-one">${UI().pageHeader({title: 'Une à une', icon: '▶', attrs: 'data-ph-title', help: 'Une alerte à la fois, avec la famille à côté. Les dates se corrigent ici ; l’alerte se recalcule tout de suite.',
             primary: '<button type="button" class="button secondary" data-ctl-list-back>☰ Liste</button>', actions: ['<button type="button" class="icon-button" data-ctl-one-close aria-label="Fermer" title="Fermer (Échap)">×</button>']})}
-            <div class="ctl-progress"><b>Alerte ${oneIdx + 1} sur ${oneQueue.length}</b><span class="ctl-progress-bar"><i style="width:${pct}%"></i></span><small>✓ ${oneStats.fixed} corrigée${oneStats.fixed > 1 ? 's' : ''} · 🙈 ${oneStats.dismissed} écartée${oneStats.dismissed > 1 ? 's' : ''} · ⏭ ${oneStats.later} plus tard</small></div>
+            <div class="ctl-progress"><b>${i18n('Alerte {i} sur {n}', {i: oneIdx + 1, n: oneQueue.length})}</b><span class="ctl-progress-bar"><i style="width:${pct}%"></i></span><small>✓ ${plural(oneStats.fixed, 'corrigée', 'corrigées')} · 🙈 ${plural(oneStats.dismissed, 'écartée', 'écartées')} · ⏭ ${i18n('{n} plus tard', {n: oneStats.later})}</small></div>
             <div class="ctl-one-grid"><article class="ctl-one-card is-${esc(a.level)}"><div>${UI().badge(`${ic} ${lvl}`, a.level === 'red' ? 'red' : a.level === 'orange' ? 'yellow' : 'grey', {html: false})} ${sortBadge(a.sort)}${a.score ? ' ' + UI().badge(a.score + ' %', 'yellow') : ''}</div>
                 <h2>${esc(a.title)}</h2>${a.rule ? `<p class="ctl-rule">${esc(a.rule)}</p>` : ''}<p class="ctl-detail">${esc(a.detail || '')}</p>
                 ${a.checks ? `<div class="ctl-checks">${a.checks.map(([k, t]) => `<span class="ctl-check is-${k === 'ok' ? 'ok' : k === 'no' ? 'no' : 'q'}">${k === 'ok' ? '✓' : k === 'no' ? '✗' : '?'} ${esc(t)}</span>`).join('')}</div>` : ''}
@@ -408,7 +414,7 @@
                     inp.dataset.was = v; oneStats.fixed++;
                     const before = DATA.alerts.length; await load();
                     const still = DATA.alerts.some(x => x.key === a.key);
-                    A().undoToast(still ? `Date enregistrée : ${v}` : `✓ Alerte réglée (${v})`, {undo: async () => { await api('controle_fix_date', {}, {method: 'POST', body: {event_id: eid, date_text: was}}); await after(); }, redo: async () => { await api('controle_fix_date', {}, {method: 'POST', body: {event_id: eid, date_text: v}}); await after(); }});
+                    A().undoToast(still ? i18n('Date enregistrée : {date}', {date: v}) : i18n('✓ Alerte réglée ({date})', {date: v}), {undo: async () => { await api('controle_fix_date', {}, {method: 'POST', body: {event_id: eid, date_text: was}}); await after(); }, redo: async () => { await api('controle_fix_date', {}, {method: 'POST', body: {event_id: eid, date_text: v}}); await after(); }});
                     void before;
                     renderOne(S().workspaceToken);
                 } catch (error) { toast(error.message, 'error'); }
@@ -441,6 +447,7 @@
         ['👪 Parents', [['father_death_days', 'Délai après la mort du père', '🔴 naissance plus tard que', 'jours'], ['birth_gap_months', 'Écart entre deux naissances', '🔴 moins de', 'mois'], ['sibling_span', 'Fratrie étalée', '🟠 sur plus de', 'ans']]],
         ['📅 Dates', [['baptism_days', 'Baptême tardif (avant 1900)', '🟡 plus de', 'jours'], ['burial_days', 'Inhumation tardive (avant 1900)', '🟡 plus de', 'jours']]],
         ['📍 Lieux et 👥 Doublons', [['baptism_km', 'Baptême loin de la naissance', '🟠 au-delà de', 'km'], ['dup_min', 'Ressemblance des doublons', 'montrer à partir de', '%']]],
+        ['🧾 Recensement SocFace', [['socface_years', 'Année de naissance lue par SocFace', '🟡 écart de plus de', 'ans']]],
     ];
     const label = k => SEUILS.flatMap(s => s[1]).find(r => r[0] === k)?.[1] || k;
     ext.maintenance.controle_seuils = async token => {
@@ -466,7 +473,7 @@
             if (v === Number(prev[k])) return;
             clearTimeout(timer); timer = setTimeout(() => save({[k]: v}, `${label(k)} : ${String(prev[k]).replace('.', ',')} → ${String(v).replace('.', ',')} ${bounds[k] ? (SEUILS.flatMap(s => s[1]).find(r => r[0] === k)?.[3] || '') : ''}`, {[k]: prev[k]}), 150); // seulement ce seuil : un autre onglet garde les siens
         }));
-        ws.querySelector('[data-ctl-banner]').addEventListener('change', e => { const prev = {banner: vals.banner}; save({banner: e.target.value}, `Bandeau sur la fiche : ${e.target.selectedOptions[0].textContent}`, prev); });
+        ws.querySelector('[data-ctl-banner]').addEventListener('change', e => { const prev = {banner: vals.banner}; save({banner: e.target.value}, i18n('Bandeau sur la fiche : {what}', {what: e.target.selectedOptions[0].textContent}), prev); });
         ws.querySelector('[data-ctl-reset]').addEventListener('click', async () => { const prev = {...vals}; const def = Object.fromEntries(Object.entries(bounds).map(([k, b]) => [k, b[0]])); await save({...def, banner: 'all'}, 'Seuils remis comme au départ', prev); ext.maintenance.controle_seuils(++S().workspaceToken); });
         ws.querySelector('[data-ctl-go]').addEventListener('click', e => { e.preventDefault(); goControle(filt()); });
     };
@@ -482,8 +489,8 @@
         if (!d) return A().card(index, 'Contrôle de la base', '', A().empty('Contrôle impossible pour l’instant.', {icon: '✅'}), span);
         const total = Number(d.total || 0);
         const body = `<div class="ctl-widget"><div class="ctl-widget-top"><button type="button" class="ctl-widget-big" data-ctl-w-go="all"><strong>${fmt(total)}</strong><span>${total > 1 ? 'choses à vérifier' : total ? 'chose à vérifier' : 'rien à vérifier'}</span></button>
-            <div class="ctl-widget-pct" title="${esc(`${d.persons_ok} fiches sur ${d.persons_total} n’ont aucune alerte (les exceptions ne comptent pas)`)}"><strong>${d.pct_ok} %</strong><span>des fiches sans alerte</span><i><b style="width:${Math.max(0, Math.min(100, d.pct_ok))}%"></b></i></div></div>
-            <div class="ctl-widget-line">${Object.entries(LEVELS).map(([k, [ic, l]]) => `<button type="button" data-ctl-w-level="${k}" title="${esc(l)}">${ic} ${fmt(d.by_level?.[k])}</button>`).join(' · ')} · <button type="button" data-ctl-w-go="exceptions">🙈 ${fmt(d.exceptions)} écartée${d.exceptions > 1 ? 's' : ''}</button></div>
+            <div class="ctl-widget-pct" title="${esc(i18n('{a} fiches sur {b} n’ont aucune alerte (les exceptions ne comptent pas)', {a: d.persons_ok, b: d.persons_total}))}"><strong>${d.pct_ok} %</strong><span>des fiches sans alerte</span><i><b style="width:${Math.max(0, Math.min(100, d.pct_ok))}%"></b></i></div></div>
+            <div class="ctl-widget-line">${Object.entries(LEVELS).map(([k, [ic, l]]) => `<button type="button" data-ctl-w-level="${k}" title="${esc(l)}">${ic} ${fmt(d.by_level?.[k])}</button>`).join(' · ')} · <button type="button" data-ctl-w-go="exceptions">🙈 ${plural(d.exceptions, 'écartée', 'écartées')}</button></div>
             <div class="ctl-widget-line">${Object.entries(SORTS).map(([k, [ic, l]]) => `<button type="button" data-ctl-w-go="${k}" title="${esc(l)}">${ic} ${fmt(d.by_sort?.[k])}</button>`).join(' · ')}</div>
             ${(d.top || []).slice(0, Math.max(1, Math.min(5, Number(w?.limit) || 3))).map(t => `<div class="ctl-widget-row">${levelOf(t.level)[0]} ${t.people?.[0] && d.people?.[t.people[0]] ? `<b>${esc(nm(d.people[t.people[0]]))}</b> · ` : ''}${esc(t.title)}</div>`).join('')}</div>`;
         return A().card(index, '✅ Contrôle de la base', '', body, span, '<button class="button small secondary" type="button" data-ctl-w-go="all">Tout voir</button>');
@@ -532,7 +539,7 @@
         if (token !== S().workspaceToken || S().module !== 'graphiques') return;
         const f1 = v => v === null || v === undefined ? '—' : Number(v).toLocaleString('fr-FR', {maximumFractionDigits: 1});
         A().$('#workspace').innerHTML = `<section class="page">${UI().pageHeader({where: 'Graphiques · Statistiques', title: 'Moyennes de la famille', icon: '📊', help: 'Âge au mariage et écart entre les naissances, par quart de siècle. Repères en France : au XVIIIe siècle, les femmes se marient vers 25-26 ans et les hommes vers 27-28 ans ; un enfant naît en moyenne tous les 24 à 30 mois.'})}
-            ${(d.periods || []).length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Période</th><th>Âge au mariage des hommes</th><th>des femmes</th><th>Mariages</th><th>Écart entre naissances</th></tr></thead><tbody>${d.periods.map(r => `<tr><td>${esc(r.period)}</td><td>${r.men !== null ? f1(r.men) + ' ans' : '—'}</td><td>${r.women !== null ? f1(r.women) + ' ans' : '—'}</td><td>${fmt(r.n)}</td><td>${r.spacing !== null ? f1(r.spacing) + ' mois' : '—'}${r.spacing_n ? ` <small class="muted">(${r.spacing_n})</small>` : ''}</td></tr>`).join('')}</tbody></table></div>` : A().emptyState({icon: '📊', text: 'Pas assez de dates', hint: 'Il faut des mariages et des naissances datés pour calculer ces moyennes.'})}</section>`;
+            ${(d.periods || []).length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Période</th><th>Âge au mariage des hommes</th><th>des femmes</th><th>Mariages</th><th>Écart entre naissances</th></tr></thead><tbody>${d.periods.map(r => `<tr><td>${esc(r.period)}</td><td>${r.men !== null ? i18n('{n} ans', {n: f1(r.men)}) : '—'}</td><td>${r.women !== null ? i18n('{n} ans', {n: f1(r.women)}) : '—'}</td><td>${fmt(r.n)}</td><td>${r.spacing !== null ? i18n('{n} mois', {n: f1(r.spacing)}) : '—'}${r.spacing_n ? ` <small class="muted">(${r.spacing_n})</small>` : ''}</td></tr>`).join('')}</tbody></table></div>` : A().emptyState({icon: '📊', text: 'Pas assez de dates', hint: 'Il faut des mariages et des naissances datés pour calculer ces moyennes.'})}</section>`;
     };
 
     /* ═══════════ Entretien : « Supprimer les familles vides » (venu de l'ancien écran Incohérences) ═══════════ */
@@ -540,10 +547,10 @@
         let g; try { g = await api('ghost_families'); } catch (_) { return; }
         const page = document.querySelector('#workspace .upkeep-page'); if (!page || !g?.empty || page.querySelector('[data-ctl-empty-fam]')) return;
         const n = Number(g.empty);
-        page.insertAdjacentHTML('beforeend', `<section class="maintenance-panel" data-ctl-empty-fam><h3>Familles vides</h3><p><b>${plural(n, 'famille vide', 'familles vides')}</b> : ni conjoint, ni enfant, ni événement, ni note, ni média, ni source (souvent laissées par un ancien logiciel ou un import). Une copie de sécurité de la base est faite juste avant.</p><div class="page-actions"><button class="button" type="button" data-ctl-del-empty>${n < 2 ? 'Supprimer la famille vide' : `Supprimer les ${fmt(n)} familles vides`}</button></div></section>`);
+        page.insertAdjacentHTML('beforeend', `<section class="maintenance-panel" data-ctl-empty-fam><h3>Familles vides</h3><p><b>${plural(n, 'famille vide', 'familles vides')}</b> : ni conjoint, ni enfant, ni événement, ni note, ni média, ni source (souvent laissées par un ancien logiciel ou un import). Une copie de sécurité de la base est faite juste avant.</p><div class="page-actions"><button class="button" type="button" data-ctl-del-empty>${n < 2 ? 'Supprimer la famille vide' : i18n('Supprimer les {n} familles vides', {n})}</button></div></section>`);
         page.querySelector('[data-ctl-del-empty]').addEventListener('click', async ev => {
             const btn = ev.currentTarget;
-            if (!await A().confirmBox('Elles ne contiennent aucune information. Une copie de sécurité de la base est faite juste avant.', {title: n < 2 ? 'Supprimer la famille vide ?' : `Supprimer les ${fmt(n)} familles vides ?`, okLabel: 'Supprimer les familles vides'})) return;
+            if (!await A().confirmBox('Elles ne contiennent aucune information. Une copie de sécurité de la base est faite juste avant.', {title: n < 2 ? 'Supprimer la famille vide ?' : i18n('Supprimer les {n} familles vides ?', {n}), okLabel: 'Supprimer les familles vides'})) return;
             btn.disabled = true;
             try { const r = await api('delete_empty_families', {}, {method: 'POST', body: {}}); toast(`${plural(Number(r.deleted), 'famille vide supprimée', 'familles vides supprimées')}. Copie de sécurité : ${r.backup}`); page.querySelector('[data-ctl-empty-fam]')?.remove(); }
             catch (error) { toast(error.message, 'error'); btn.disabled = false; }

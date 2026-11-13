@@ -18,6 +18,7 @@
     const post = (action, body) => api(action, {}, {method: 'POST', body});
     const toast = (...a) => A().toast(...a);
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? v[k] : m))); // 🌐 docs/I18N.md
     const TEST = () => (window.LCNDA_FACES_TEST && typeof window.LCNDA_FACES_TEST === 'object' ? window.LCNDA_FACES_TEST : null);
     const MODES = [['side', '◫', 'Côte à côte'], ['fade', '◐', 'Fondu'], ['curtain', '⇹', 'Rideau']];
     const FACE_CDN = 'https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.15/';
@@ -71,8 +72,12 @@
 
     /* ═════════ L'outil, posé dans une fenêtre (plein écran) ou dans la page Comparaison ═════════ */
     function mount(root, opts = {}) {
+        // 📍 « Hier et aujourd'hui » (images de lieux, heritage-place-photos.js) : le même outil, sans visages ; deux repères
+        // par photo (clocher, coin de toit…) calent la photo d'aujourd'hui sur l'ancienne, puis on l'ajuste à la main.
+        const place = opts.purpose === 'place' || opts.record?.settings?.purpose === 'place';
         const st = {
-            id: Number(opts.record?.id || 0), title: opts.record?.title || '', notes: opts.record?.notes || '', mode: opts.record?.mode || 'side',
+            id: Number(opts.record?.id || 0), title: opts.record?.title || '', notes: opts.record?.notes || '', mode: opts.record?.mode || (place ? 'curtain' : 'side'),
+            adjX: 0, adjY: 0, adjK: 100, adjR: 0, moveB: false,
             mix: 50, sync: true, aligned: false, gray: false, contrast: 100, bright: 100,
             a: {item: null, img: null, eyes: null, desc: null, faces: null}, b: {item: null, img: null, eyes: null, desc: null, faces: null},
             views: [{s: 1, tx: 0, ty: 0}, {s: 1, tx: 0, ty: 0}], placing: null, beforePlacing: '', verdict: null, people: (opts.record?.people || []).map(p => Number(p.id)),
@@ -81,11 +86,12 @@
         const S0 = opts.record?.settings || {};
         Object.assign(st, {mix: Number(S0.mix ?? 50), sync: S0.sync !== false, aligned: !!S0.aligned, gray: !!S0.gray, contrast: Number(S0.contrast ?? 100), bright: Number(S0.bright ?? 100)});
         if (S0.eyes?.a) st.a.eyes = S0.eyes.a; if (S0.eyes?.b) st.b.eyes = S0.eyes.b;
+        if (S0.adj && typeof S0.adj === 'object') Object.assign(st, {adjX: Number(S0.adj.x) || 0, adjY: Number(S0.adj.y) || 0, adjK: clamp(Number(S0.adj.k) || 100, 20, 300), adjR: clamp(Number(S0.adj.r) || 0, -180, 180)});
         if (!MODES.some(m => m[0] === st.mode)) st.mode = 'side';
         const U = UI(), inline = !!opts.inline;
         root.classList.add('h-pc');
-        const top = U.editorTopbar ? U.editorTopbar({icon: '🔍', name: st.title || 'Comparer deux photos', nameAttrs: 'data-pc-name placeholder="Nom de la comparaison"', undo: false, status: st.id ? 'saved' : '',
-            buttons: {save: {attrs: 'data-pc-cmd="save"', title: 'Enregistrer la comparaison (reliée aux deux photos et aux personnes)'}, full: inline ? null : (ext.fullButton ? {html: '⛶', attrs: 'data-full-toggle="photocmp"', title: 'Plein écran'} : null), close: inline ? null : {attrs: 'data-pc-cmd="close"', title: 'Fermer'}}})
+        const top = U.editorTopbar ? U.editorTopbar({icon: place ? '🏘' : '🔍', name: st.title || (place ? i18n('Hier et aujourd’hui') : i18n('Comparer deux photos')), nameAttrs: `data-pc-name placeholder="${esc(i18n('Nom de la comparaison'))}"`, undo: false, status: st.id ? 'saved' : '',
+            buttons: {save: {attrs: 'data-pc-cmd="save"', title: i18n('Enregistrer la comparaison (reliée aux deux photos et aux personnes)')}, full: inline ? null : (ext.fullButton ? {html: '⛶', attrs: 'data-full-toggle="photocmp"', title: 'Plein écran'} : null), close: inline ? null : {attrs: 'data-pc-cmd="close"', title: 'Fermer'}}})
             : `<header class="ui-topbar"><span>🔍</span><input class="ui-topbar-name" data-pc-name value="${esc(st.title)}"><span class="ui-topbar-spacer"></span><span data-ui-status></span><button type="button" class="button small" data-pc-cmd="save">💾 Enregistrer</button>${inline ? '' : '<button type="button" class="icon-button" data-pc-cmd="close">×</button>'}</header>`;
         const sec = (title, key, body, open = true) => (U.panelSection ? U.panelSection({title, key, open, body}) : `<details open><summary>${esc(title)}</summary><div>${body}</div></details>`);
         root.innerHTML = `${top}
@@ -103,15 +109,22 @@
                         <div class="h-pc-empty" data-pc-empty hidden></div></div>
                 </section>
                 <aside class="h-pc-side">
-                    ${sec('Les deux photos', 'pc-photos', `<div class="h-pc-pick"><span class="pk-lab">Photo A</span><div data-pc-mf="a"></div></div><div class="h-pc-pick"><span class="pk-lab">Photo B</span><div data-pc-mf="b"></div></div><button type="button" class="button small secondary" data-pc-swap title="Mettre A à la place de B et B à la place de A">⇄ Échanger A et B</button>`)}
-                    ${sec('Les yeux (alignement)', 'pc-eyes', `<p class="muted small">Les deux visages sont mis à la même taille, les yeux à la même hauteur : la comparaison est bien plus juste.</p>
+                    ${sec('Les deux photos', 'pc-photos', `<div class="h-pc-pick"><span class="pk-lab">${place ? i18n('A — l’image ancienne') : i18n('Photo A')}</span><div data-pc-mf="a"></div></div><div class="h-pc-pick"><span class="pk-lab">${place ? i18n('B — la photo d’aujourd’hui') : i18n('Photo B')}</span><div data-pc-mf="b"></div></div><button type="button" class="button small secondary" data-pc-swap title="Mettre A à la place de B et B à la place de A">⇄ Échanger A et B</button>`)}
+                    ${place ? sec('Caler la photo d’aujourd’hui', 'pc-recal', `<p class="muted small">Clique deux mêmes repères sur chaque photo (le haut du clocher, le coin d’un toit…) : la photo d’aujourd’hui est tournée et mise à la même taille.</p>
+                        <div class="h-pc-row"><button type="button" class="button small" data-pc-place title="Deux clics sur la photo A, puis les deux mêmes repères sur la photo B">📌 Poser 2 repères par photo</button></div>
+                        <label class="ui-toggle"><input type="checkbox" data-pc-aligned ${st.aligned ? 'checked' : ''}><i></i>Caler sur les repères</label>
+                        <div class="h-pc-row"><button type="button" class="link-button" data-pc-clear-eyes>✕ Retirer les repères</button></div>
+                        <span class="pk-lab">Ajuster à la main</span>
+                        <label class="ui-toggle" title="Glisser sur l’image déplace seulement la photo d’aujourd’hui"><input type="checkbox" data-pc-moveb ${st.moveB ? 'checked' : ''}><i></i>Glisser déplace la photo B</label>
+                        <div data-pc-adj></div><div class="h-pc-row"><button type="button" class="link-button" data-pc-adj-reset>↺ Remettre comme au départ</button></div>`) : ''}
+                    ${place ? '' : sec('Les yeux (alignement)', 'pc-eyes', `<p class="muted small">Les deux visages sont mis à la même taille, les yeux à la même hauteur : la comparaison est bien plus juste.</p>
                         <div class="h-pc-row"><button type="button" class="button small" data-pc-auto>✨ Repérer les yeux tout seul</button><button type="button" class="button small secondary" data-pc-place title="Clique l’œil gauche puis l’œil droit sur chaque photo">👁 Poser les yeux (2 clics par photo)</button></div>
                         <div data-pc-modelinfo class="h-pc-modelinfo"></div>
                         <label class="ui-toggle"><input type="checkbox" data-pc-aligned ${st.aligned ? 'checked' : ''}><i></i>Aligner sur les yeux</label>
                         <div class="h-pc-row"><button type="button" class="link-button" data-pc-clear-eyes>✕ Retirer les yeux posés</button></div>`)}
                     ${sec('Couleur', 'pc-color', `<label class="ui-toggle"><input type="checkbox" data-pc-gray ${st.gray ? 'checked' : ''}><i></i>Noir et blanc</label><div data-pc-ranges></div>`)}
-                    ${sec('Ressemblance', 'pc-score', '<div data-pc-score class="h-pc-score"></div>')}
-                    ${sec('Personnes', 'pc-people', '<div data-pc-people></div><p class="muted small">Prises sur les deux photos ; ajoute ou retire qui tu veux.</p>')}
+                    ${place ? '' : sec('Ressemblance', 'pc-score', '<div data-pc-score class="h-pc-score"></div>')}
+                    ${place ? '' : sec('Personnes', 'pc-people', '<div data-pc-people></div><p class="muted small">Prises sur les deux photos ; ajoute ou retire qui tu veux.</p>')}
                     ${sec('Notes', 'pc-notes', `<textarea data-pc-notes rows="5" placeholder="Ce que tu remarques : forme du nez, des oreilles, implantation des cheveux, grain de beauté, âge supposé…">${esc(st.notes)}</textarea>`)}
                 </aside>
             </div>`;
@@ -122,23 +135,26 @@
 
         /* ─── les curseurs (C3) ─── */
         const ranges = $('[data-pc-ranges]');
-        const addRange = (key, label, min, max, unit) => {
-            if (!U.rangeField) { ranges.insertAdjacentHTML('beforeend', `<label>${esc(label)} <input type="range" min="${min}" max="${max}" value="${st[key]}" data-pc-r="${key}"></label>`); return; }
-            const f = U.rangeField({label, min, max, value: st[key], unit, default: key === 'mix' ? 50 : 100}); f.input.dataset.pcR = key; return f;
+        const addRange = (key, label, min, max, unit, host = ranges, dflt = key === 'mix' ? 50 : 100) => {
+            if (!U.rangeField) { host.insertAdjacentHTML('beforeend', `<label>${esc(label)} <input type="range" min="${min}" max="${max}" value="${st[key]}" data-pc-r="${key}"></label>`); return; }
+            const f = U.rangeField({label, min, max, value: st[key], unit, default: dflt}); f.input.dataset.pcR = key; return f;
         };
+        const adjHost = $('[data-pc-adj]');
+        const adjF = adjHost ? [addRange('adjR', 'Tourner', -180, 180, '°', adjHost, 0), addRange('adjK', 'Taille', 20, 300, '%', adjHost, 100)] : [];
+        adjF.forEach(f => f && adjHost.append(f));
         ranges.append(addRange('contrast', 'Contraste', 20, 300, '%') || '', addRange('bright', 'Luminosité', 20, 300, '%') || '');
         const mixF = addRange('mix', 'B', 0, 100, '%'); if (mixF) { mixF.classList.add('h-pc-mix'); mixF.title = 'Fondu : part de la photo B ; rideau : place du rideau'; $('[data-pc-mixwrap]').append(mixF); }
         root.addEventListener('input', e => { const k = e.target.dataset?.pcR; if (!k) return; st[k] = Number(e.target.value); touch(); draw(); }, sig);
 
         /* ─── les photos A et B : la fenêtre unique des médias, dans un champ ─── */
-        const field = (side, value) => { $(`[data-pc-mf="${side}"]`).innerHTML = P().mediaField ? P().mediaField({name: '', types: ['image'], value: value ? {id: value.id, title: value.title, filename: value.filename, thumb: value.thumb || mediaSrc(value)} : null, title: side === 'a' ? 'La photo A' : 'La photo B', okLabel: 'Comparer', person: st.people[0] || null}) : ''; };
+        const field = (side, value) => { $(`[data-pc-mf="${side}"]`).innerHTML = P().mediaField ? P().mediaField({name: '', types: ['image'], value: value ? {id: value.id, title: value.title, filename: value.filename, thumb: value.thumb || mediaSrc(value)} : null, title: side === 'a' ? i18n('La photo A') : i18n('La photo B'), okLabel: i18n('Comparer'), person: st.people[0] || null}) : ''; };
         async function setSide(side, it, {quiet = false, keepEyes = false} = {}) {
             const S = st[side]; S.item = it ? await mediaInfo(it) : null; S.img = null; S.desc = null; S.faces = null; if (!keepEyes) S.eyes = null;
             if (!keepEyes) st.aligned = st.aligned && !!(st.a.eyes && st.b.eyes);
             if (S.item && !isPhoto(S.item)) { toast('Choisis une photo (image).', 'error'); S.item = null; }
             if (S.item) {
                 S.img = await new Promise(ok => { const im = new Image(); im.onload = () => ok(im); im.onerror = () => ok(null); im.src = mediaSrc(S.item); });
-                if (!S.img) toast(`La photo « ${S.item.title || ''} » n’a pas pu être ouverte.`, 'error');
+                if (!S.img) toast(i18n('La photo « {name} » n’a pas pu être ouverte.', {name: S.item.title || ''}), 'error');
                 // les personnes de la photo rejoignent la comparaison
                 (S.item.people_ids || []).map(Number).filter(Boolean).forEach(id => { if (!st.people.includes(id)) st.people.push(id); });
                 drawPeople();
@@ -156,9 +172,26 @@
         const rects = () => (st.mode === 'side' ? [{x: 0, y: 0, w: W / 2 - 3, h: H}, {x: W / 2 + 3, y: 0, w: W / 2 - 3, h: H}] : [{x: 0, y: 0, w: W, h: H}, {x: 0, y: 0, w: W, h: H}]);
         const viewOf = i => (st.sync || st.mode !== 'side' ? st.views[0] : st.views[i]);
         const canAlign = () => st.aligned && st.a.eyes && st.b.eyes && st.a.img && st.b.img;
+        const fitM = (img, r) => { const s = Math.min(r.w / img.naturalWidth, r.h / img.naturalHeight) * 0.96; return new DOMMatrix().translate(r.x + (r.w - img.naturalWidth * s) / 2, r.y + (r.h - img.naturalHeight * s) / 2).scale(s); };
         function baseM(S, r) {
             const img = S.img; if (!img) return new DOMMatrix();
             const iw = img.naturalWidth, ih = img.naturalHeight;
+            if (place) {
+                // A : posée dans sa case ; B : calée sur les repères de A (même case en fondu / rideau), puis l'ajustement à la main
+                let m = fitM(img, r);
+                if (S === st.b && canAlign() && st.mode !== 'side') {
+                    const am = fitM(st.a.img, r), [a1, a2] = st.a.eyes.map(([x, y]) => am.transformPoint(new DOMPoint(x * st.a.img.naturalWidth, y * st.a.img.naturalHeight)));
+                    const [b1, b2] = S.eyes.map(([x, y]) => [x * iw, y * ih]);
+                    const la = Math.hypot(a2.x - a1.x, a2.y - a1.y) || 1, lb = Math.hypot(b2[0] - b1[0], b2[1] - b1[1]) || 1;
+                    const ang = (Math.atan2(a2.y - a1.y, a2.x - a1.x) - Math.atan2(b2[1] - b1[1], b2[0] - b1[0])) * 180 / Math.PI;
+                    m = new DOMMatrix().translate(a1.x, a1.y).rotate(ang).scale(la / lb).translate(-b1[0], -b1[1]);
+                }
+                if (S === st.b && (st.adjX || st.adjY || st.adjK !== 100 || st.adjR)) {
+                    const cx = r.x + r.w / 2, cy = r.y + r.h / 2;
+                    m = new DOMMatrix().translate(cx + st.adjX, cy + st.adjY).rotate(st.adjR).scale(st.adjK / 100).translate(-cx, -cy).multiply(m);
+                }
+                return m;
+            }
             if (canAlign()) {
                 const [p1, p2] = S.eyes.map(([x, y]) => [x * iw, y * ih]), L = Math.min(r.w, r.h) * 0.22;
                 const q1 = [r.x + r.w / 2 - L / 2, r.y + r.h * 0.42];
@@ -200,7 +233,7 @@
                 [st.a, st.b].forEach((S, i) => {
                     const r = st.mode === 'side' ? R[i] : R[0]; if (st.mode !== 'side' && !S.img) return;
                     ctx.save(); ctx.beginPath(); ctx.rect(r.x, r.y, r.w, r.h); ctx.clip();
-                    if (!S.img) { ctx.fillStyle = dark() ? '#9aa3b5' : '#5b6474'; ctx.font = '600 15px system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.fillText(i ? 'Choisis la photo B à droite →' : 'Choisis la photo A à droite →', r.x + r.w / 2, r.y + r.h / 2); }
+                    if (!S.img) { ctx.fillStyle = dark() ? '#9aa3b5' : '#5b6474'; ctx.font = '600 15px system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.fillText(i ? i18n('Choisis la photo B à droite →') : i18n('Choisis la photo A à droite →'), r.x + r.w / 2, r.y + r.h / 2); }
                     else { drawImg(st.mode === 'side' ? i : 0, S); drawEyes(st.mode === 'side' ? i : 0, S, i ? '#f59ab0' : '#7cc4f0'); }
                     ctx.restore();
                     if (st.mode === 'side') { ctx.fillStyle = 'rgba(0,0,0,.6)'; ctx.fillRect(r.x + 8, r.y + 8, 26, 22); ctx.fillStyle = '#fff'; ctx.font = '700 13px system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.fillText(i ? 'B' : 'A', r.x + 21, r.y + 24); }
@@ -214,7 +247,7 @@
                 ctx.fillStyle = '#1f6feb'; ctx.font = '700 13px system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.fillText('⇹', x, H / 2 + 5);
                 ctx.fillStyle = 'rgba(0,0,0,.6)'; ctx.fillRect(8, 8, 26, 22); ctx.fillRect(W - 34, 8, 26, 22); ctx.fillStyle = '#fff'; ctx.fillText('A', 21, 24); ctx.fillText('B', W - 21, 24); ctx.restore();
             }
-            if (canAlign()) { ctx.save(); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.strokeStyle = 'rgba(31,111,235,.55)'; ctx.setLineDash([6, 6]); const v = viewOf(0), r = R[0], y = r.y + r.h / 2 + v.ty + (r.h * 0.42 - r.h / 2) * v.s; ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); ctx.restore(); }
+            if (canAlign() && !place) { ctx.save(); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.strokeStyle = 'rgba(31,111,235,.55)'; ctx.setLineDash([6, 6]); const v = viewOf(0), r = R[0], y = r.y + r.h / 2 + v.ty + (r.h * 0.42 - r.h / 2) * v.s; ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); ctx.restore(); }
         }
 
         /* ─── souris, molette, clavier ─── */
@@ -227,6 +260,7 @@
             if (e.button !== 0) return; const [x, y] = local(e);
             if (st.placing) { placeAt(x, y); return; }
             if (st.mode === 'curtain' && st.a.img && st.b.img && Math.abs(x - W * st.mix / 100) < 16) { drag = {curtain: true}; }
+            else if (place && st.moveB && st.b.img && (st.mode !== 'side' || sideAt(x) === 1)) drag = {b: true, x, y, ax: st.adjX, ay: st.adjY};
             else { const i = sideAt(x), v = viewOf(i); drag = {i, x, y, tx: v.tx, ty: v.ty}; }
             canvas.setPointerCapture(e.pointerId); stage.classList.add('is-dragging');
         }, sig);
@@ -234,9 +268,10 @@
             const [x, y] = local(e);
             if (!drag) { canvas.style.cursor = st.placing ? 'crosshair' : st.mode === 'curtain' && Math.abs(x - W * st.mix / 100) < 16 ? 'ew-resize' : 'grab'; return; }
             if (drag.curtain) { st.mix = Math.round(clamp(x / W * 100, 0, 100)); if (mixF) { mixF.input.value = st.mix; mixF.input.dispatchEvent(new Event('input', {bubbles: true})); } else draw(); return; }
+            if (drag.b) { const v = viewOf(st.mode === 'side' ? 1 : 0); st.adjX = drag.ax + (x - drag.x) / v.s; st.adjY = drag.ay + (y - drag.y) / v.s; st.dirty = true; draw(); return; }
             const v = viewOf(drag.i); v.tx = drag.tx + x - drag.x; v.ty = drag.ty + y - drag.y; draw();
         }, sig);
-        const endDrag = () => { if (drag?.curtain) touch(); drag = null; stage.classList.remove('is-dragging'); };
+        const endDrag = () => { if (drag?.curtain || drag?.b) touch(); drag = null; stage.classList.remove('is-dragging'); };
         canvas.addEventListener('pointerup', endDrag, sig); canvas.addEventListener('pointercancel', endDrag, sig);
         canvas.addEventListener('dblclick', () => { resetViews(); draw(); }, sig);
         stage.addEventListener('keydown', e => {
@@ -256,6 +291,7 @@
             else if (b.hasAttribute('data-pc-auto')) autoEyes();
             else if (b.hasAttribute('data-pc-clear-eyes')) { st.a.eyes = st.b.eyes = null; st.aligned = false; touch(); syncUi(); resetViews(); draw(); computeScore(); }
             else if (b.hasAttribute('data-pc-score-run')) autoEyes();
+            else if (b.hasAttribute('data-pc-adj-reset')) { Object.assign(st, {adjX: 0, adjY: 0, adjK: 100, adjR: 0}); adjF.forEach(f => { if (f) { f.input.value = f.input.dataset.pcR === 'adjK' ? 100 : 0; f.input.dispatchEvent(new Event('input', {bubbles: true})); } }); touch(); draw(); }
             else if (b.dataset.pcCmd === 'save') save();
             else if (b.dataset.pcCmd === 'close') opts.onRequestClose?.();
         }, sig);
@@ -263,30 +299,33 @@
             const t = e.target;
             if (t.matches('[data-pc-sync]')) { st.sync = t.checked; if (st.sync) st.views[1] = {...st.views[0]}; touch(); draw(); }
             else if (t.matches('[data-pc-gray]')) { st.gray = t.checked; touch(); draw(); }
-            else if (t.matches('[data-pc-aligned]')) { if (t.checked && !(st.a.eyes && st.b.eyes)) { t.checked = false; toast('Pose d’abord les yeux sur les deux photos (✨ tout seul, ou 👁 deux clics par photo).', 'error'); return; } st.aligned = t.checked; touch(); resetViews(); draw(); }
+            else if (t.matches('[data-pc-moveb]')) { st.moveB = t.checked; }
+            else if (t.matches('[data-pc-aligned]')) { if (t.checked && !(st.a.eyes && st.b.eyes)) { t.checked = false; toast(place ? 'Pose d’abord deux repères sur chaque photo (📌).' : 'Pose d’abord les yeux sur les deux photos (✨ tout seul, ou 👁 deux clics par photo).', 'error'); return; } st.aligned = t.checked; touch(); resetViews(); draw(); }
         }, sig);
         $('[data-pc-notes]').addEventListener('input', e => { st.notes = e.target.value; touch(); }, sig);
         $('[data-pc-name]')?.addEventListener('input', e => { st.title = e.target.value; touch(); }, sig);
         root.addEventListener('keydown', e => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); save(); } }, sig);
 
         /* ─── poser les yeux : deux clics par photo (côte à côte le temps de les poser) ─── */
-        const STEPS = [['a', 'l’œil de gauche de la photo A'], ['a', 'l’œil de droite de la photo A'], ['b', 'l’œil de gauche de la photo B'], ['b', 'l’œil de droite de la photo B']];
+        const STEPS = (place ? [['a', 'le repère 1 sur l’image ancienne (A)'], ['a', 'le repère 2 sur l’image ancienne (A)'], ['b', 'le même repère 1 sur la photo d’aujourd’hui (B)'], ['b', 'le même repère 2 sur la photo d’aujourd’hui (B)']]
+            : [['a', 'l’œil de gauche de la photo A'], ['a', 'l’œil de droite de la photo A'], ['b', 'l’œil de gauche de la photo B'], ['b', 'l’œil de droite de la photo B']]).map(([s, t]) => [s, i18n(t)]);
+        const order = pts => (place ? pts.slice() : pts.slice().sort((p1, p2) => p1[0] - p2[0])); // les repères gardent leur ordre
         const hint = txt => { const h = $('[data-pc-hint]'); h.hidden = !txt; h.innerHTML = txt || ''; };
         function startPlacing() {
             if (!st.a.img || !st.b.img) return toast('Choisis d’abord les deux photos.', 'error');
             st.beforePlacing = st.mode; st.mode = 'side'; st.aligned = false; st.placing = {n: 0, pts: {a: [], b: []}}; syncUi(); resetViews(); draw();
-            hint(`👁 Clique <b>${STEPS[0][1]}</b> (à ta gauche sur l’écran). <span class="muted">Échap pour arrêter.</span>`); stage.focus();
+            hint(`${place ? '📌' : '👁'} ${i18n('Clique <b>{what}</b> (à ta gauche sur l’écran).', {what: STEPS[0][1]})} <span class="muted">${i18n('Échap pour arrêter.')}</span>`); stage.focus();
         }
-        function stopPlacing(cancel = false) { if (!st.placing) return; st.mode = st.beforePlacing || 'side'; st.placing = null; hint(''); syncUi(); resetViews(); draw(); if (cancel) toast('Yeux non posés : rien n’a changé.'); }
+        function stopPlacing(cancel = false) { if (!st.placing) return; st.mode = st.beforePlacing || 'side'; st.placing = null; hint(''); syncUi(); resetViews(); draw(); if (cancel) toast(place ? 'Repères non posés : rien n’a changé.' : 'Yeux non posés : rien n’a changé.'); }
         function placeAt(x, y) {
             const [side] = STEPS[st.placing.n], i = side === 'a' ? 0 : 1;
-            if (sideAt(x) !== i) { hint(`👁 Clique sur la photo <b>${side.toUpperCase()}</b> : ${STEPS[st.placing.n][1]}. <span class="muted">Échap pour arrêter.</span>`); return; }
+            if (sideAt(x) !== i) { hint(`${place ? '📌' : '👁'} ${i18n('Clique sur la photo <b>{side}</b> : {what}.', {side: side.toUpperCase(), what: STEPS[st.placing.n][1]})} <span class="muted">${i18n('Échap pour arrêter.')}</span>`); return; }
             const S = st[side], p = fullM(i, S).inverse().transformPoint(new DOMPoint(x, y));
             const fx = p.x / S.img.naturalWidth, fy = p.y / S.img.naturalHeight; if (fx < 0 || fx > 1 || fy < 0 || fy > 1) return;
-            st.placing.pts[side].push([fx, fy]); S.eyes = st.placing.pts[side].length === 2 ? st.placing.pts[side].slice().sort((p1, p2) => p1[0] - p2[0]) : null;
+            st.placing.pts[side].push([fx, fy]); S.eyes = st.placing.pts[side].length === 2 ? order(st.placing.pts[side]) : null;
             st.placing.n++; draw();
-            if (st.placing.n >= STEPS.length) { st.a.eyes = st.placing.pts.a.slice().sort((p1, p2) => p1[0] - p2[0]); st.b.eyes = st.placing.pts.b.slice().sort((p1, p2) => p1[0] - p2[0]); st.aligned = true; stopPlacing(); touch(); toast('Yeux posés : les deux visages sont alignés.'); computeScore(); return; }
-            hint(`👁 Clique <b>${STEPS[st.placing.n][1]}</b>. <span class="muted">Échap pour arrêter.</span>`);
+            if (st.placing.n >= STEPS.length) { st.a.eyes = order(st.placing.pts.a); st.b.eyes = order(st.placing.pts.b); st.aligned = true; stopPlacing(); touch(); toast(place ? 'Repères posés : la photo d’aujourd’hui est calée sur l’ancienne.' : 'Yeux posés : les deux visages sont alignés.'); computeScore(); return; }
+            hint(`${place ? '📌' : '👁'} Clique <b>${STEPS[st.placing.n][1]}</b>. <span class="muted">Échap pour arrêter.</span>`);
         }
 
         /* ─── tout seul : le modèle local de visages ─── */
@@ -304,12 +343,12 @@
                 for (const side of ['a', 'b']) {
                     btn.textContent = `Photo ${side.toUpperCase()}…`;
                     const r = await detectFace(st[side].img, side, s => { btn.textContent = `${s}`; });
-                    if (!r) { toast(`Aucun visage trouvé sur la photo ${side.toUpperCase()} : pose les yeux en deux clics.`, 'error'); return; }
+                    if (!r) { toast(i18n('Aucun visage trouvé sur la photo {side} : pose les yeux en deux clics.', {side: side.toUpperCase()}), 'error'); return; }
                     st[side].eyes = r.eyes; st[side].desc = r.d ? (r.d instanceof Float32Array ? r.d : Float32Array.from(r.d)) : null;
                 }
                 st.aligned = true; touch(); syncUi(); resetViews(); draw(); computeScore(); toast('Visages trouvés : les yeux sont alignés.');
             } catch (err) {
-                toast(`${err.message || 'Le modèle de visages n’a pas pu être chargé.'} Pose les yeux en deux clics par photo.`, 'error');
+                toast(`${err.message || i18n('Le modèle de visages n’a pas pu être chargé.')} ${i18n('Pose les yeux en deux clics par photo.')}`, 'error');
                 const box = $('[data-pc-modelinfo]'); if (box && U.notice) box.innerHTML = U.notice('warn', 'Le modèle de visages n’a pas pu être chargé (il faut internet la première fois) : pose les yeux en deux clics par photo.');
             } finally { btn.disabled = false; btn.textContent = label; paintModelInfo(); }
         }
@@ -336,14 +375,14 @@
             if (n !== scoreSeq) return;
             if (d == null) {
                 st.verdict = null;
-                box.innerHTML = `<p class="small">Pas encore de ressemblance calculée pour ces deux photos.</p><p class="muted small">« ✨ Repérer les yeux tout seul » la calcule (modèle de visages sur cet ordinateur), ou lance <b>👤 Visages</b> sur ces photos (Listes → Médias).</p>`;
+                box.innerHTML = `<p class="small">${i18n('Pas encore de ressemblance calculée pour ces deux photos.')}</p><p class="muted small">${i18n('« ✨ Repérer les yeux tout seul » la calcule (modèle de visages sur cet ordinateur), ou lance <b>👤 Visages</b> sur ces photos (Listes → Médias).')}</p>`;
                 return;
             }
             st.verdict = verdictOf(d);
             const v = st.verdict, badge = U.badge ? U.badge(`${v.score} %`, v.kind) : `<b>${v.score} %</b>`;
-            box.innerHTML = `<div class="h-pc-verdict" data-pc-verdict="${v.level}">${badge} <b>${esc(v.text)}</b></div>
+            box.innerHTML = `<div class="h-pc-verdict" data-pc-verdict="${v.level}">${badge} <b>${esc(i18n(v.text))}</b></div>
                 <div class="h-pc-meter" aria-hidden="true"><i style="width:${v.score}%"></i></div>
-                <p class="muted small">Calculée par le modèle de visages, sur cet ordinateur (${from === 'model' ? 'visages repérés à l’instant' : 'visages trouvés par 👤 Visages'}). L’âge, la lumière, l’angle et la qualité des photos changent beaucoup le résultat ; un air de famille (parent, frère, sœur) peut aussi donner une ressemblance forte. À confirmer par les actes.</p>`;
+                <p class="muted small">${i18n('Calculée par le modèle de visages, sur cet ordinateur ({from}). L’âge, la lumière, l’angle et la qualité des photos changent beaucoup le résultat ; un air de famille (parent, frère, sœur) peut aussi donner une ressemblance forte. À confirmer par les actes.', {from: from === 'model' ? i18n('visages repérés à l’instant') : i18n('visages trouvés par 👤 Visages')})}</p>`;
         }
 
         /* ─── enregistrer ─── */
@@ -353,7 +392,8 @@
             st.saving = true; status('saving');
             try {
                 const body = {op: 'save', id: st.id, title: st.title, media_a: st.a.item.id, media_b: st.b.item.id, people: st.people, notes: st.notes, mode: st.mode,
-                    settings: {eyes: {...(st.a.eyes ? {a: st.a.eyes} : {}), ...(st.b.eyes ? {b: st.b.eyes} : {})}, gray: st.gray, contrast: st.contrast, bright: st.bright, mix: st.mix, sync: st.sync, aligned: st.aligned},
+                    settings: {eyes: {...(st.a.eyes ? {a: st.a.eyes} : {}), ...(st.b.eyes ? {b: st.b.eyes} : {})}, gray: st.gray, contrast: st.contrast, bright: st.bright, mix: st.mix, sync: st.sync, aligned: st.aligned,
+                        ...(place ? {purpose: 'place', adj: {x: Math.round(st.adjX * 10) / 10, y: Math.round(st.adjY * 10) / 10, k: st.adjK, r: st.adjR}} : {})},
                     score: st.verdict ? st.verdict.score : null, verdict: st.verdict ? st.verdict.text : ''};
                 const r = await post('photo_comparison_write', body), c = r.comparison;
                 st.id = c.id; if (!st.title) { st.title = c.title; const n = $('[data-pc-name]'); if (n) n.value = c.title; }
@@ -366,7 +406,7 @@
             root.querySelectorAll('[data-pc-mode]').forEach(b => { const on = b.dataset.pcMode === st.mode; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
             const both = st.a.img && st.b.img;
             const mw = $('[data-pc-mixwrap]'); if (mw) mw.hidden = st.mode === 'side';
-            if (mixF) { const lab = mixF.querySelector('.ui-range-lab'); if (lab) lab.textContent = st.mode === 'curtain' ? 'Rideau' : 'Part de B'; }
+            if (mixF) { const lab = mixF.querySelector('.ui-range-lab'); if (lab) lab.textContent = st.mode === 'curtain' ? i18n('Rideau') : i18n('Part de B'); }
             const al = $('[data-pc-aligned]'); if (al) al.checked = !!st.aligned;
             const sy = $('[data-pc-sync]'); if (sy) sy.closest('label').hidden = st.mode !== 'side';
             ['[data-pc-place]', '[data-pc-auto]'].forEach(s => { const b = $(s); if (b && !b.dataset.busy) b.disabled = !both || (s === '[data-pc-auto]' && b.dataset.absent === '1'); });
@@ -418,7 +458,7 @@
         const item = await mediaInfo(a);
         if (!item) return open({person});
         const pid = Number(person || (item.people_ids || [])[0] || 0) || null;
-        const b = await P().openMediaPicker?.({types: ['image'], person: pid, eyebrow: 'COMPARER DEUX PHOTOS', title: 'Comparer avec…', intro: `La photo B, à poser à côté de « ${item.title || 'la photo A'} ».`, okLabel: 'Comparer', portraits: true});
+        const b = await P().openMediaPicker?.({types: ['image'], person: pid, eyebrow: 'COMPARER DEUX PHOTOS', title: i18n('Comparer avec…'), intro: i18n('La photo B, à poser à côté de « {name} ».', {name: item.title || i18n('la photo A')}), okLabel: i18n('Comparer'), portraits: true});
         if (!b) return null;
         if (Number(b.id) === Number(item.id)) { toast('C’est la même photo : choisis-en une autre.', 'error'); return null; }
         return open({a: item, b, person: pid});
@@ -441,7 +481,7 @@
         const b = e.target.closest?.('[data-photo-compare-person]'); if (!b) return;
         e.preventDefault(); const pid = Number(b.dataset.photoComparePerson) || null;
         (async () => {
-            const a = await P().openMediaPicker?.({types: ['image'], person: pid, portraits: true, eyebrow: 'COMPARER DEUX PHOTOS', title: 'La photo A', intro: 'Une photo de cette personne ; ensuite, la photo à comparer.', okLabel: 'Suivant'});
+            const a = await P().openMediaPicker?.({types: ['image'], person: pid, portraits: true, eyebrow: 'COMPARER DEUX PHOTOS', title: i18n('La photo A'), intro: i18n('Une photo de cette personne ; ensuite, la photo à comparer.'), okLabel: i18n('Suivant')});
             if (a) compareWith(a, {person: pid});
         })();
     });
@@ -450,7 +490,7 @@
         document.querySelectorAll('[data-add-media-inline]').forEach(add => {
             const head = add.parentElement; if (!head || head.querySelector('[data-photo-compare-person]')) return;
             const b = document.createElement('button'); b.type = 'button'; b.className = 'icon-action'; b.dataset.photoComparePerson = add.dataset.addMediaInline || S.currentPersonId;
-            b.title = 'Comparer deux photos (ressemblance, même personne à deux âges…)'; b.setAttribute('aria-label', b.title); b.textContent = '🔍';
+            b.title = i18n('Comparer deux photos (ressemblance, même personne à deux âges…)'); b.setAttribute('aria-label', b.title); b.textContent = '🔍';
             add.before(b);
         });
     };

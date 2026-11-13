@@ -1,0 +1,111 @@
+fr ¦ sq ¦ mt
+# ═════ zone « premier » : albanais (sq), maltais (mt) ═════
+INSTALLATION ¦ INSTALIMI ¦ INSTALLAZZJONI
+La base généalogique doit être importée. ¦ Baza gjenealogjike duhet importuar. ¦ Id-database ġenealoġika trid tiġi importata.
+Choisis comment démarrer : importer un fichier existant, ou créer une première personne pour partir d'une base vide. ¦ Zgjidh si të fillosh: importo një skedar ekzistues, ose krijo një person të parë për të nisur nga një bazë bosh. ¦ Agħżel kif tibda: importa fajl eżistenti, jew oħloq l-ewwel persuna biex tibda minn database vojta.
+GEDCOM (.ged, aussi d’Ancestry, MyHeritage, Geneanet), Gramps (.gramps ou paquet .gpkg avec les photos), Hérédis (.hmw ou .heredis), MacFamilyTree (.mftpkg), base LCNDA (.db) ou sauvegarde complète LCNDA (.zip, base + médias). Les fichiers JSON et CSV sont analysés mais pas encore importés. ¦ GEDCOM (.ged, edhe nga Ancestry, MyHeritage, Geneanet), Gramps (.gramps ose paketë .gpkg me fotot), Hérédis (.hmw ose .heredis), MacFamilyTree (.mftpkg), bazë LCNDA (.db) ose kopje rezervë e plotë LCNDA (.zip, baza + mediat). Skedarët JSON dhe CSV analizohen, por ende nuk importohen. ¦ GEDCOM (.ged, anke minn Ancestry, MyHeritage, Geneanet), Gramps (.gramps jew pakkett .gpkg bir-ritratti), Hérédis (.hmw jew .heredis), MacFamilyTree (.mftpkg), database LCNDA (.db) jew backup sħiħ LCNDA (.zip, database + midja). Il-fajls JSON u CSV jiġu analizzati iżda għadhom ma jiġux importati.
+Fichier ¦ Skedari ¦ Fajl
+Créer une première personne ¦ Krijo një person të parë ¦ Oħloq l-ewwel persuna
+Initialise une base vide avec une première fiche, à compléter ensuite. ¦ Nis një bazë bosh me një kartelë të parë, për ta plotësuar më pas. ¦ Tibda database vojta b’l-ewwel skeda, biex timliha wara.
+Prénom ¦ Emri ¦ Isem
+Nom ¦ Mbiemri ¦ Kunjom
+Créer et ouvrir la base ¦ Krijo dhe hap bazën ¦ Oħloq u iftaħ id-database
+Je veux faire autre chose ▾ ¦ Dua të bëj diçka tjetër ▾ ¦ Irrid nagħmel xi ħaġa oħra ▾
+▴ Replier ¦ ▴ Palos ¦ ▴ Ingħalaq
+Qu’est-ce que tu veux faire avec l’app ? ¦ Çfarë do të bësh me aplikacionin? ¦ X’trid tagħmel bl-app?
+Choisis ce qui te ressemble : l’app s’ouvre avec les bons onglets et le bon premier écran. Tu pourras tout changer après. ¦ Zgjidh atë që të ngjan: aplikacioni hapet me skedat e duhura dhe ekranin e parë të duhur. Mund t’i ndryshosh të gjitha më pas. ¦ Agħżel dak li jaqbillek: l-app tiftaħ bit-tabs it-tajba u bl-ewwel skrin it-tajjeb. Tista’ tbiddel kollox wara.
+Ta famille, tes ancêtres, leurs actes et leurs photos. ¦ Familja jote, të parët e tu, aktet dhe fotot e tyre. ¦ Il-familja tiegħek, l-antenati tiegħek, l-atti u r-ritratti tagħhom.
+Une lignée d’animaux ¦ Një linjë kafshësh ¦ Nisel ta’ annimali
+Un élevage, le pedigree de tes chiens, chats, chevaux… ¦ Një mbarështim, pedigreja e qenve, maceve, kuajve të tu… ¦ Trobbija, il-pedigree tal-klieb, qtates, żwiemel tiegħek…
+Recenser des animaux ¦ Regjistro kafshë ¦ Irreġistra annimali
+Suivre des animaux : baguage, puces, observations, trajets. ¦ Ndiq kafshë: unazime, çipa, vëzhgime, shtigje. ¦ Segwi annimali: ċrieki, ċipep, osservazzjonijiet, rotot.
+L’histoire d’une maison ou d’un village ¦ Historia e një shtëpie ose e një fshati ¦ L-istorja ta’ dar jew ta’ raħal
+Maison ou village ¦ Shtëpi ose fshat ¦ Dar jew raħal
+Qui a vécu où, de génération en génération, pièce par pièce. ¦ Kush jetoi ku, brez pas brezi, dhomë pas dhome. ¦ Min għex fejn, minn ġenerazzjoni għal oħra, kamra b’kamra.
+Le catalogue d’un artiste ou d’une collection ¦ Katalogu i një artisti ose i një koleksioni ¦ Il-katalgu ta’ artist jew ta’ kollezzjoni
+Artiste ou collection ¦ Artist ose koleksion ¦ Artist jew kollezzjoni
+Ses œuvres, ses expositions, son catalogue raisonné. ¦ Veprat e tij, ekspozitat, katalogu i arsyetuar. ¦ Ix-xogħlijiet, l-esibizzjonijiet, il-katalgu raġunat.
+Un fonds d’archives ou un musée familial ¦ Një fond arkivi ose një muze familjar ¦ Fond tal-arkivju jew mużew tal-familja
+Archives ou musée ¦ Arkiva ose muze ¦ Arkivji jew mużew
+Des photos, des lettres, des objets à classer et à décrire. ¦ Foto, letra, objekte për t’u renditur dhe përshkruar. ¦ Ritratti, ittri, oġġetti biex tikklassifika u tiddeskrivi.
+L’étude d’un nom de famille ¦ Studimi i një mbiemri ¦ L-istudju ta’ kunjom
+Un nom de famille ¦ Një mbiemër ¦ Kunjom
+Tous les porteurs d’un nom, ses variantes, d’où ils viennent. ¦ Të gjithë bartësit e një emri, variantet e tij, nga vijnë. ¦ Dawk kollha li għandhom isem, il-varjanti tiegħu, minn fejn ġejjin.
+L’histoire d’une entreprise ou d’une association ¦ Historia e një ndërmarrjeje ose e një shoqate ¦ L-istorja ta’ kumpanija jew ta’ assoċjazzjoni
+Entreprise ou association ¦ Ndërmarrje ose shoqatë ¦ Kumpanija jew assoċjazzjoni
+Ses lieux, ses dirigeants, ses salariés ou ses membres. ¦ Vendet e saj, drejtuesit, punonjësit ose anëtarët. ¦ Il-postijiet, il-mexxejja, l-impjegati jew il-membri tagħha.
+Transmettre des souvenirs ¦ Trashëgo kujtime ¦ Għaddi l-memorji
+Des lettres à ouvrir plus tard, des recettes, des chansons, des souvenirs à laisser. ¦ Letra për t’u hapur më vonë, receta, këngë, kujtime për t’i lënë. ¦ Ittri biex jinfetħu aktar tard, riċetti, kanzunetti, memorji biex tħalli warajk.
+Ce qui change ¦ Çfarë ndryshon ¦ X’jinbidel
+Commencer avec une base vide ¦ Fillo me një bazë bosh ¦ Ibda b’database vojta
+🧪 Essayer avec une base d’exemple ¦ 🧪 Provo me një bazë shembull ¦ 🧪 Ipprova b’database ta’ eżempju
+🧪 Base d’exemple ¦ 🧪 Bazë shembull ¦ 🧪 Database ta’ eżempju
+Une famille imaginaire pour essayer l’app : ta généalogie n’est pas touchée. ¦ Një familje imagjinare për të provuar aplikacionin: gjenealogjia jote nuk preket. ¦ Familja immaġinarja biex tipprova l-app: il-ġenealoġija tiegħek ma tintmissx.
+Revenir à ma généalogie ¦ Kthehu te gjenealogjia ime ¦ Lura għall-ġenealoġija tiegħi
+Repartir d’une base vide ¦ Rifillo nga një bazë bosh ¦ Erġa’ ibda minn database vojta
+Ou bien : ¦ Ose: ¦ Jew:
+🐾 Créer le premier animal ¦ 🐾 Krijo kafshën e parë ¦ 🐾 Oħloq l-ewwel annimal
+Créer le premier animal ¦ Krijo kafshën e parë ¦ Oħloq l-ewwel annimal
+Espèce ¦ Lloji ¦ Speċi
+Création de la base… ¦ Po krijohet baza… ¦ Qed tinħoloq id-database…
+Préparation de la base d’exemple… ¦ Po përgatitet baza shembull… ¦ Qed titħejja d-database ta’ eżempju…
+✓ Base créée ¦ ✓ Baza u krijua ¦ ✓ Id-database inħolqot
+ℹ️ Rien n’est figé : Réglages → Apparence → « 🧭 Usage de l’app ». ¦ ℹ️ Asgjë nuk është e ngurtë: Cilësimet → Pamja → «🧭 Përdorimi i aplikacionit». ¦ ℹ️ Xejn mhu fiss: Issettjar → Dehra → “🧭 Użu tal-app”.
+🧭 Usage de l’app ¦ 🧭 Përdorimi i aplikacionit ¦ 🧭 Użu tal-app
+🧭 Revoir le premier lancement ¦ 🧭 Shiko sërish nisjen e parë ¦ 🧭 Ara mill-ġdid l-ewwel tnedija
+Premier écran à l’ouverture ¦ Ekrani i parë në hapje ¦ L-ewwel skrin meta tiftaħ
+Le dernier écran ouvert (comme avant) ¦ Ekrani i fundit i hapur (si më parë) ¦ L-aħħar skrin miftuħ (bħal qabel)
+Usage enregistré. ¦ Përdorimi u ruajt. ¦ L-użu ġie ssejvjat.
+(la page va se recharger) ¦ (faqja do të ringarkohet) ¦ (il-paġna se terġa’ titgħabba)
+Langue · Language ¦ Gjuha · Language ¦ Lingwa · Language
+Une petite visite ? ¦ Një vizitë e shkurtër? ¦ Żjara qasira?
+En {n} étapes, l’app te montre où créer une fiche, ajouter un parent, une photo, un événement, faire une sauvegarde et trouver l’aide. Ça prend deux minutes. ¦ Në {n} hapa, aplikacioni të tregon ku të krijosh një kartelë, të shtosh një prind, një foto, një ngjarje, të bësh një kopje rezervë dhe të gjesh ndihmë. Zgjat dy minuta. ¦ F’{n} passi, l-app turik fejn toħloq skeda, iżżid ġenitur, ritratt, avveniment, tagħmel backup u ssib l-għajnuna. Tieħu żewġ minuti.
+▶ Commencer ¦ ▶ Fillo ¦ ▶ Ibda
+Plus tard ¦ Më vonë ¦ Aktar tard
+Ne plus proposer ¦ Mos e propozo më ¦ Toffrix aktar
+Passer la visite ¦ Kapërce vizitën ¦ Aqbeż iż-żjara
+← Précédent ¦ ← Mëparshmi ¦ ← Ta’ qabel
+Suivant → ¦ Tjetri → ¦ Li jmiss →
+✓ Terminer ¦ ✓ Përfundo ¦ ✓ Lest
+Étape {i} sur {n} ¦ Hapi {i} nga {n} ¦ Pass {i} minn {n}
+Visite guidée, étape {i} sur {n} : {what} ¦ Vizitë e udhëhequr, hapi {i} nga {n}: {what} ¦ Żjara gwidata, pass {i} minn {n}: {what}
+Tu peux cliquer le bouton entouré pour le faire pour de vrai, ou juste avancer. ¦ Mund të klikosh butonin e rrethuar për ta bërë vërtet, ose thjesht të ecësh përpara. ¦ Tista’ tikklikkja l-buttuna mdawra biex tagħmilha tassew, jew sempliċement tkompli.
+Ajouter un parent ¦ Shto një prind ¦ Żid ġenitur
+Ajouter une photo ¦ Shto një foto ¦ Żid ritratt
+Un événement et son lieu ¦ Një ngjarje dhe vendi i saj ¦ Avveniment u l-post tiegħu
+Faire une sauvegarde ¦ Bëj një kopje rezervë ¦ Agħmel backup
+Les Réglages et l’aide ¦ Cilësimet dhe ndihma ¦ L-issettjar u l-għajnuna
+Chaque personne a sa fiche. Ce bouton en crée une : un prénom, un nom, et c’est parti. ¦ Çdo person ka kartelën e vet. Ky buton krijon një: një emër, një mbiemër, dhe u nisëm. ¦ Kull persuna għandha l-iskeda tagħha. Din il-buttuna toħloq waħda: isem, kunjom, u nibdew.
+Sur une fiche, le « ＋ » de « Parents » relie un père ou une mère : choisis une fiche qui existe, ou crée-la. C’est comme ça que l’arbre se construit. ¦ Në një kartelë, «＋» te «Prindërit» lidh një baba ose një nënë: zgjidh një kartelë që ekziston, ose krijoje. Kështu ndërtohet pema. ¦ Fuq skeda, il-“＋” ta’ “Ġenituri” jgħaqqad missier jew omm: agħżel skeda li teżisti, jew oħloqha. Hekk tinbena s-siġra.
+Ici, tu ajoutes des photos et des actes à la fiche : prends-les dans tes médias, ou glisse-les depuis l’ordinateur. ¦ Këtu shton foto dhe akte në kartelë: merri nga mediat e tua, ose tërhiqi nga kompjuteri. ¦ Hawn iżżid ritratti u atti mal-iskeda: ħudhom mill-midja tiegħek, jew kaxkarhom mill-kompjuter.
+Naissance, mariage, décès… Ajoute un événement avec sa date et son lieu : tape les premières lettres de la commune, l’app la trouve. ¦ Lindje, martesë, vdekje… Shto një ngjarje me datën dhe vendin e saj: shkruaj shkronjat e para të komunës, aplikacioni e gjen. ¦ Twelid, żwieġ, mewt… Żid avveniment bid-data u l-post tiegħu: ikteb l-ewwel ittri tal-lokalità, l-app issibha.
+De temps en temps, fais une sauvegarde : ce fichier garde toute ta généalogie et tes photos. Range-le sur une clé USB ou un autre disque. ¦ Herë pas here, bëj një kopje rezervë: ky skedar ruan gjithë gjenealogjinë dhe fotot e tua. Ruaje në një USB ose në një disk tjetër. ¦ Minn żmien għal żmien, agħmel backup: dan il-fajl iżomm il-ġenealoġija kollha u r-ritratti tiegħek. Żommu fuq USB jew disk ieħor.
+Tout se règle ici : apparence, import, sauvegardes… Dans les Réglages, la page « FAQ / tuto » répond à tes questions ; tu peux aussi y relancer cette visite. ¦ Gjithçka rregullohet këtu: pamja, importi, kopjet rezervë… Te Cilësimet, faqja «FAQ / udhëzues» u përgjigjet pyetjeve të tua; aty mund ta nisësh sërish këtë vizitë. ¦ Kollox jiġi rranġat hawn: dehra, importazzjoni, backups… Fl-Issettjar, il-paġna “FAQ / gwida” twieġeb il-mistoqsijiet tiegħek; hemm tista’ terġa’ tibda din iż-żjara.
+✓ Visite terminée. Pour la revoir : Réglages → FAQ / tuto → « ▶ Relancer la visite guidée ». ¦ ✓ Vizita përfundoi. Për ta parë sërish: Cilësimet → FAQ / udhëzues → «▶ Nis sërish vizitën e udhëhequr». ¦ ✓ Iż-żjara spiċċat. Biex terġa’ taraha: Issettjar → FAQ / gwida → “▶ Erġa’ ibda ż-żjara gwidata”.
+Visite guidée fermée. Tu la retrouves dans Réglages → FAQ / tuto. ¦ Vizita e udhëhequr u mbyll. E gjen te Cilësimet → FAQ / udhëzues. ¦ Iż-żjara gwidata ngħalqet. Issibha f’Issettjar → FAQ / gwida.
+Une petite visite guidée de l’app est proposée. Commencer, plus tard, ou ne plus proposer. ¦ Propozohet një vizitë e shkurtër e udhëhequr e aplikacionit. Fillo, më vonë, ose mos e propozo më. ¦ Hija offruta żjara gwidata qasira tal-app. Ibda, aktar tard, jew toffrix aktar.
+Rien à montrer sur cet écran pour l’instant. ¦ Asgjë për të treguar në këtë ekran tani për tani. ¦ Xejn x’turi f’dan l-iskrin għalissa.
+Pas de visite guidée en mode consultation. ¦ Nuk ka vizitë të udhëhequr në mënyrën e leximit. ¦ M’hemmx żjara gwidata fil-modalità ta’ qari.
+La visite guidée n’est pas possible ici. ¦ Vizita e udhëhequr nuk është e mundur këtu. ¦ Iż-żjara gwidata mhix possibbli hawn.
+🐞 Signaler un problème ¦ 🐞 Raporto një problem ¦ 🐞 Irrapporta problema
+AIDE ¦ NDIHMË ¦ GĦAJNUNA
+Ce qui s’est passé ¦ Çfarë ndodhi ¦ X’ġara
+Ce que j’attendais ¦ Çfarë prisja ¦ X’kont qed nistenna
+Écris avec tes mots. Évite les noms de ta famille si tu ne veux pas qu’ils soient lus. ¦ Shkruaj me fjalët e tua. Shmang emrat e familjes sate nëse nuk do që të lexohen. ¦ Ikteb bi kliemek. Evita l-ismijiet tal-familja tiegħek jekk ma tridhomx jinqraw.
+Joindre le rapport technique ¦ Bashkëngjit raportin teknik ¦ Waħħal ir-rapport tekniku
+Joindre le rapport technique ({x}) ¦ Bashkëngjit raportin teknik ({x}) ¦ Waħħal ir-rapport tekniku ({x})
+aucune erreur captée ¦ asnjë gabim i kapur ¦ l-ebda żball maqbud
+Rapport technique ¦ Raport teknik ¦ Rapport tekniku
+🗑 Vider le journal ¦ 🗑 Zbraz ditarin ¦ 🗑 Battal il-ġurnal
+Vider le journal des erreurs captées sur cet ordinateur ¦ Zbraz ditarin e gabimeve të kapura në këtë kompjuter ¦ Battal il-ġurnal tal-iżbalji maqbuda f’dan il-kompjuter
+✉️ Écrire un e-mail ¦ ✉️ Shkruaj një e-mail ¦ ✉️ Ikteb email
+Ouvrir une demande sur GitHub ¦ Hap një kërkesë në GitHub ¦ Iftaħ talba fuq GitHub
+Journal des erreurs vidé ¦ Ditari i gabimeve u zbraz ¦ Il-ġurnal tal-iżbalji tbattal
+✓ Message copié : colle-le où tu veux (e-mail, forum, GitHub). ¦ ✓ Mesazhi u kopjua: ngjite ku të duash (e-mail, forum, GitHub). ¦ ✓ Il-messaġġ ġie kkupjat: waħħlu fejn trid (email, forum, GitHub).
+La copie n’a pas marché : sélectionne le texte et copie-le à la main. ¦ Kopjimi nuk funksionoi: përzgjidh tekstin dhe kopjoje me dorë. ¦ L-ikkupjar ma ħadimx: agħżel it-test u kkupjah bl-idejn.
+Dis en quelques mots ce qui s’est passé. ¦ Thuaj me pak fjalë çfarë ndodhi. ¦ Għid fi ftit kliem x’ġara.
+Ex. : j’ai cliqué sur « Enregistrer » dans la fiche, et la fenêtre est restée grise. ¦ P.sh.: klikova «Ruaj» në kartelë dhe dritarja mbeti gri. ¦ Eż.: ikklikkjajt “Issejvja” fl-iskeda, u t-tieqa baqgħet griża.
+Ex. : que la fiche soit enregistrée et que la fenêtre se ferme. ¦ P.sh.: që kartela të ruhet dhe dritarja të mbyllet. ¦ Eż.: li l-iskeda tiġi ssejvjata u t-tieqa tingħalaq.
+Pour écrire un e-mail plutôt qu’ouvrir une demande sur GitHub : règle une adresse dans Réglages → « 🔄 Mises à jour ». ¦ Për të shkruar një e-mail në vend që të hapësh një kërkesë në GitHub: vendos një adresë te Cilësimet → «🔄 Përditësime». ¦ Biex tikteb email minflok ma tiftaħ talba fuq GitHub: issettja indirizz f’Issettjar → “🔄 Aġġornamenti”.
+La base d’exemple est une famille imaginaire (5 générations, des photos d’époque dessinées) rangée à part dans « Mes généalogies » : ta généalogie n’est jamais touchée. ¦ Baza shembull është një familje imagjinare (5 breza, foto të vjetra të vizatuara) e ruajtur veçmas te «Gjenealogjitë e mia»: gjenealogjia jote nuk preket kurrë. ¦ Id-database ta’ eżempju hija familja immaġinarja (5 ġenerazzjonijiet, ritratti tal-epoka mpinġija) miżmuma għaliha f’“Il-ġenealoġiji tiegħi”: il-ġenealoġija tiegħek qatt ma tintmiss.
+Aucun fichier choisi ¦ Asnjë skedar i zgjedhur ¦ L-ebda fajl magħżul

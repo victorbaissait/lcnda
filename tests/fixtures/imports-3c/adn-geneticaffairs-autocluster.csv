@@ -1,0 +1,6 @@
+Cluster,Name,Total cM,Longest segment,Number of segments,Predicted relationship,Camille Imaginaire,Lucas Fictif,Inès Inventée,Paul Exemple,Rose Essai
+1,Camille Imaginaire,212.4,58.1,9,2nd cousin,,X,,,
+1,Lucas Fictif,148.7,22.0,6,2nd - 3rd cousin,X,,,,
+2,Inès Inventée,321.5,98.3,11,1st cousin twice removed,,,,X,
+2,Paul Exemple,166.0,41.2,7,2nd cousin once removed,,,X,,
+0,Rose Essai,61.3,19.4,3,3rd - 4th cousin,,,,,

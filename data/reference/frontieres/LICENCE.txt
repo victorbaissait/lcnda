@@ -1,0 +1,16 @@
+Frontières anciennes de LCNDA — fichiers de l'INSEE livrés avec l'application
+
+mvt.csv : « Liste des événements survenus aux communes, arrondissements municipaux,
+          communes associées et communes déléguées depuis 1943 » (fichier v_mvt_commune_2026.csv)
+com.csv : « Communes depuis 1943 » (fichier v_commune_depuis_1943.csv)
+
+Source : INSEE, Code officiel géographique (COG), millésime 2026.
+         https://www.insee.fr/fr/information/2560452
+         https://www.data.gouv.fr/datasets/code-officiel-geographique-cog/
+Licence : Licence Ouverte / Open Licence version 2.0 (Etalab).
+         https://www.etalab.gouv.fr/licence-ouverte-open-licence/
+Fichiers repris tels quels (seuls les noms des fichiers changent), récupérés le 9 novembre 2026.
+Empreintes : voir SHA256SUMS.
+
+Les contours des provinces d'Ancien Régime et des départements de 1790 ne viennent pas de
+ces fichiers : ils sont tracés par LCNDA à partir des départements actuels (approximatifs).

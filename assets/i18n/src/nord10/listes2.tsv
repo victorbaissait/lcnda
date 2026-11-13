@@ -1,0 +1,429 @@
+fr ¦ sq ¦ mt
+=invité ¦ i ftuar|të ftuar ¦ mistieden|mistednin|mistednin|mistieden|mistieden
+=descendant vivant ¦ pasardhës i gjallë|pasardhës të gjallë ¦ dixxendent ħaj|dixxendenti ħajjin|dixxendenti ħajjin|dixxendent ħaj|dixxendent ħaj
+=conjoint ¦ bashkëshort|bashkëshortë ¦ konjuġi|konjuġi|konjuġi|konjuġi|konjuġi
+=fiche confidentielle ¦ kartelë konfidenciale|kartela konfidenciale ¦ skeda kunfidenzjali|skedi kunfidenzjali|skedi kunfidenzjali|skeda kunfidenzjali|skeda kunfidenzjali
+=invité trouvé ¦ i ftuar i gjetur|të ftuar të gjetur ¦ mistieden misjub|mistednin misjuba|mistednin misjuba|mistieden misjub|mistieden misjub
+=nouvel invité ¦ i ftuar i ri|të ftuar të rinj ¦ mistieden ġdid|mistednin ġodda|mistednin ġodda|mistieden ġdid|mistieden ġdid
+=invitée ¦ e ftuar|të ftuara ¦ mistiedna|mistednin|mistednin|mistiedna|mistiedna
+=invité déjà là ¦ i ftuar tashmë aty|të ftuar tashmë aty ¦ mistieden diġà hemm|mistednin diġà hemm|mistednin diġà hemm|mistieden diġà hemm|mistieden diġà hemm
+=colonne ¦ kolonë|kolona ¦ kolonna|kolonni|kolonni|kolonna|kolonna
+=invité ajouté ¦ i ftuar i shtuar|të ftuar të shtuar ¦ mistieden miżjud|mistednin miżjuda|mistednin miżjuda|mistieden miżjud|mistieden miżjud
+=invité complété ¦ i ftuar i plotësuar|të ftuar të plotësuar ¦ mistieden ikkompletat|mistednin ikkompletati|mistednin ikkompletati|mistieden ikkompletat|mistieden ikkompletat
+=foyer ¦ familje|familje ¦ dar|djar|djar|dar|dar
+=avec adresse ¦ me adresë|me adresë ¦ b’indirizz|b’indirizz|b’indirizz|b’indirizz|b’indirizz
+=avec courriel ¦ me email|me email ¦ b’email|b’email|b’email|b’email|b’email
+=badge ¦ distinktiv|distinktivë ¦ badge|badges|badges|badge|badge
+=présent ¦ i pranishëm|të pranishëm ¦ preżenti|preżenti|preżenti|preżenti|preżenti
+=personne attendue ¦ person i pritur|persona të pritur ¦ persuna mistennija|persuni mistennija|persuni mistennija|persuna mistennija|persuna mistennija
+=table ¦ tavolinë|tavolina ¦ mejda|mejdiet|mejdiet|mejda|mejda
+=personne placée ¦ person i vendosur|persona të vendosur ¦ persuna mqiegħda|persuni mqiegħda|persuni mqiegħda|persuna mqiegħda|persuna mqiegħda
+=photo ajoutée ¦ foto e shtuar|foto të shtuara ¦ ritratt miżjud|ritratti miżjuda|ritratti miżjuda|ritratt miżjud|ritratt miżjud
+=personne présente ¦ person i pranishëm|persona të pranishëm ¦ persuna preżenti|persuni preżenti|persuni preżenti|persuna preżenti|persuna preżenti
+Sans réponse ¦ Pa përgjigje ¦ Bla tweġiba
+👥 Invités ¦ 👥 Të ftuarit ¦ 👥 Mistednin
+✉️ Invitations ¦ ✉️ Ftesat ¦ ✉️ Stediniet
+🏷 Badges ¦ 🏷 Distinktivët ¦ 🏷 Badges
+🌳 Grand arbre ¦ 🌳 Pema e madhe ¦ 🌳 Siġra kbira
+📅 Jour J ¦ 📅 Dita e madhe ¦ 📅 Il-jum il-kbir
+Réunir les descendants d’un ancêtre : invités, invitations, badges, grand arbre, jour J. ¦ Mblidh pasardhësit e një paraardhësi: të ftuar, ftesa, distinktivë, pemë e madhe, dita e madhe. ¦ Iġbor id-dixxendenti ta’ antenat: mistednin, stediniet, badges, siġra kbira, il-jum il-kbir.
+＋ Nouvelle cousinade ¦ ＋ Takim i ri kushërinjsh ¦ ＋ Laqgħa tal-familja ġdida
+Nouvelle cousinade ¦ Takim i ri kushërinjsh ¦ Laqgħa tal-familja ġdida
+Lecture des cousinades… ¦ Po ngarkohen takimet e kushërinjve… ¦ Qed jitgħabbew il-laqgħat tal-familja…
+Aucune cousinade pour l’instant ¦ Asnjë takim kushërinjsh deri tani ¦ L-ebda laqgħa tal-familja s’issa
+Choisis un ancêtre (ou un couple) : l’app trouve ses descendants vivants, branche par branche, et prépare la liste des invités. ¦ Zgjidh një paraardhës (ose një çift): aplikacioni gjen pasardhësit e tij të gjallë, degë pas dege, dhe përgatit listën e të ftuarve. ¦ Agħżel antenat (jew koppja): l-app issib id-dixxendenti ħajjin tiegħu, fergħa b’fergħa, u tipprepara l-lista tal-mistednin.
+Chercher… (ex. Martin, 2026, Tulle) ¦ Kërko… (p.sh. Martin, 2026, Tulle) ¦ Fittex… (eż. Martin, 2026, Tulle)
+{n} oui ¦ {n} po ¦ {n} iva
+{n} sans réponse ¦ {n} pa përgjigje ¦ {n} bla tweġiba
+Aucune cousinade ne correspond. ¦ Asnjë takim kushërinjsh nuk përputhet. ¦ L-ebda laqgħa tal-familja ma taqbel.
+Renommer la cousinade ¦ Riemërto takimin e kushërinjve ¦ Ibdel l-isem tal-laqgħa tal-familja
+Cousinade renommée. ¦ Takimi i kushërinjve u riemërtua. ¦ Il-laqgħa tal-familja ngħatat isem ġdid.
+Cousinade supprimée : « {name} » ¦ Takimi i kushërinjve u fshi: «{name}» ¦ Il-laqgħa tal-familja tħassret: “{name}”
+Modifier la cousinade ¦ Ndrysho takimin e kushërinjve ¦ Editja l-laqgħa tal-familja
+L’ancêtre dont on réunit les descendants ¦ Paraardhësi, pasardhësit e të cilit mblidhen ¦ L-antenat li qed jinġabru d-dixxendenti tiegħu
+Avec son conjoint (le couple) — facultatif ¦ Me bashkëshortin (çifti) — opsionale ¦ Mal-konjuġi (il-koppja) — mhux obbligatorju
+Seulement les enfants du couple. Vide : tous les enfants de l’ancêtre. ¦ Vetëm fëmijët e çiftit. Bosh: të gjithë fëmijët e paraardhësit. ¦ It-tfal tal-koppja biss. Vojt: it-tfal kollha tal-antenat.
+Nom de la cousinade ¦ Emri i takimit të kushërinjve ¦ Isem il-laqgħa tal-familja
+Personne de référence pour les liens de parenté ¦ Personi i referimit për lidhjet farefisnore ¦ Persuna ta’ referenza għar-rabtiet tal-familja
+Chaque invité aura son lien avec elle (« cousin issu de germains de … »). Toi, le plus souvent. ¦ Çdo i ftuar do të ketë lidhjen e tij me të («kushëri i dytë i …»). Ti, zakonisht. ¦ Kull mistieden se jkollu r-rabta tiegħu ma’ din il-persuna (“kuġin tat-tieni grad ta’ …”). Normalment int.
+Inviter aussi les conjoints des descendants ¦ Fto edhe bashkëshortët e pasardhësve ¦ Stieden ukoll il-konjuġi tad-dixxendenti
+🔒 Les fiches confidentielles ne sont jamais montrées. Les adresses des vivants restent dans ce projet. ¦ 🔒 Kartelat konfidenciale nuk shfaqen kurrë. Adresat e të gjallëve mbeten në këtë projekt. ¦ 🔒 L-iskedi kunfidenzjali qatt ma jintwerew. L-indirizzi tal-ħajjin jibqgħu f’dan il-proġett.
+Choisis l’ancêtre : l’app cherche ses descendants vivants. ¦ Zgjidh paraardhësin: aplikacioni kërkon pasardhësit e tij të gjallë. ¦ Agħżel l-antenat: l-app tfittex id-dixxendenti ħajjin tiegħu.
+Recherche des descendants vivants… ¦ Po kërkohen pasardhësit e gjallë… ¦ Qed jinstabu d-dixxendenti ħajjin…
+{who} dans {branches}, et {spouses}. ¦ {who} në {branches}, dhe {spouses}. ¦ {who} f’{branches}, u {spouses}.
+{who} dans {branches}. ¦ {who} në {branches}. ¦ {who} f’{branches}.
+{n} sans décès noté, née il y a moins de 100 ans : marquée « vivant ? ». ¦ {n} pa vdekje të shënuar, të lindur më pak se 100 vjet më parë: shënuar «gjallë?». ¦ {n} bla mewt irreġistrata, imwielda inqas minn 100 sena ilu: immarkati “ħaj?”.
+{n} laissées de côté. ¦ {n} të lëna mënjanë. ¦ {n} imwarrba.
+{n} laissée de côté. ¦ {n} e lënë mënjanë. ¦ {n} imwarrba.
+Choisis l’ancêtre dont on réunit les descendants. ¦ Zgjidh paraardhësin, pasardhësit e të cilit mblidhen. ¦ Agħżel l-antenat li se jinġabru d-dixxendenti tiegħu.
+Cousinade créée : {n}. ¦ Takimi i kushërinjve u krijua: {n}. ¦ Il-laqgħa tal-familja nħolqot: {n}.
+Cousinade enregistrée : {n}. ¦ Takimi i kushërinjve u ruajt: {n}. ¦ Il-laqgħa tal-familja ġiet issejvjata: {n}.
+Cousinade enregistrée. ¦ Takimi i kushërinjve u ruajt. ¦ Il-laqgħa tal-familja ġiet issejvjata.
+Lecture de la cousinade… ¦ Po ngarkohet takimi i kushërinjve… ¦ Qed titgħabba l-laqgħa tal-familja…
+← Toutes les cousinades ¦ ← Të gjitha takimet e kushërinjve ¦ ← Il-laqgħat tal-familja kollha
+↻ Chercher les nouveaux descendants ¦ ↻ Kërko pasardhësit e rinj ¦ ↻ Fittex dixxendenti ġodda
+Chercher les nouveaux descendants ¦ Kërko pasardhësit e rinj ¦ Fittex dixxendenti ġodda
+↗ Fiche de l’ancêtre ¦ ↗ Kartela e paraardhësit ¦ ↗ L-iskeda tal-antenat
+{n} n’apparaissent plus : sa fiche est devenue confidentielle (ou a été supprimée). ¦ {n} nuk shfaqen më: kartela e tyre u bë konfidenciale (ose u fshi). ¦ {n} ma jidhrux iktar: l-iskeda saret kunfidenzjali (jew tħassret).
+{n} n’apparaît plus : sa fiche est devenue confidentielle (ou a été supprimée). ¦ {n} nuk shfaqet më: kartela e tij/saj u bë konfidenciale (ose u fshi). ¦ {n} ma jidhirx iktar: l-iskeda saret kunfidenzjali (jew tħassret).
+la personne de référence ¦ personi i referimit ¦ il-persuna ta’ referenza
+Liens de parenté avec ¦ Lidhjet farefisnore me ¦ Rabtiet tal-familja ma’
+＋ Ajouter un invité ¦ ＋ Shto një të ftuar ¦ ＋ Żid mistieden
+⤒ Importer une liste… ¦ ⤒ Importo një listë… ¦ ⤒ Importa lista…
+Aucun invité pour l’instant ¦ Asnjë i ftuar deri tani ¦ L-ebda mistieden s’issa
+Aucun descendant vivant trouvé. Ajoute les invités à la main, importe une liste, ou complète l’arbre puis « ↻ Chercher les nouveaux descendants ». ¦ Asnjë pasardhës i gjallë nuk u gjet. Shto të ftuarit me dorë, importo një listë, ose plotëso pemën pastaj «↻ Kërko pasardhësit e rinj». ¦ L-ebda dixxendent ħaj ma nstab. Żid il-mistednin bl-idejn, importa lista, jew ikkompleta s-siġra imbagħad “↻ Fittex dixxendenti ġodda”.
+Chercher… (ex. Martin, Brive, végétarien) ¦ Kërko… (p.sh. Martin, Brive, vegjetarian) ¦ Fittex… (eż. Martin, Brive, veġetarjan)
+Invités (cochés) ¦ Të ftuarit (të shënuar) ¦ Mistednin (immarkati)
+Pas invités ¦ Të paftuar ¦ Mhux mistednin
+Seulement « vivant ? » ¦ Vetëm «gjallë?» ¦ “Ħaj?” biss
+Par branche et par foyer ¦ Sipas degës dhe familjes ¦ Skont il-fergħa u d-dar
+Par génération ¦ Sipas brezit ¦ Skont il-ġenerazzjoni
+Par réponse ¦ Sipas përgjigjes ¦ Skont it-tweġiba
+{n} · {inv} en tout ¦ {n} · {inv} gjithsej ¦ {n} · {inv} b’kollox
+Aucun invité ne correspond. ¦ Asnjë i ftuar nuk përputhet. ¦ L-ebda mistieden ma jaqbel.
+Pas invité ¦ I paftuar ¦ Mhux mistieden
+Invité (coché) ¦ I ftuar (i shënuar) ¦ Mistieden (immarkat)
+Régime ¦ Dieta ¦ Dieta
+Rien de noté sur son décès, née il y a moins de 100 ans : vérifie avant d’inviter ¦ Asgjë e shënuar për vdekjen, i/e lindur më pak se 100 vjet më parë: kontrollo para se të ftosh ¦ Xejn irreġistrat dwar il-mewt, imwieled inqas minn 100 sena ilu: iċċekkja qabel ma tistieden
+Sans fiche ¦ Pa kartelë ¦ Bla skeda
+Pas d’adresse ¦ Pa adresë ¦ Bla indirizz
+Nombre de personnes ¦ Numri i personave ¦ Numru ta’ persuni
+{name} est invitée. ¦ {name} është e ftuar. ¦ {name} hija mistiedna.
+{name} est invité. ¦ {name} është i ftuar. ¦ {name} huwa mistieden.
+{name} n’est plus invitée. ¦ {name} nuk është më e ftuar. ¦ {name} m’għadhiex mistiedna.
+{name} n’est plus invité. ¦ {name} nuk është më i ftuar. ¦ {name} m’għadux mistieden.
+Réponse de {name} : {answer}. ¦ Përgjigjja e {name}: {answer}. ¦ It-tweġiba ta’ {name}: {answer}.
+Inviter les {n} affichées ¦ Fto {n} të shfaqurit ¦ Stieden il-{n} murija
+{n} invitées. ¦ {n} të ftuar. ¦ {n} mistednin.
+{n} invitée. ¦ {n} e ftuar. ¦ {n} mistieden.
+Ne plus inviter les personnes affichées ¦ Mos i fto më personat e shfaqur ¦ Tibqax tistieden il-persuni murija
+{n} retirées des invitations. ¦ {n} u hoqën nga ftesat. ¦ {n} tneħħew mill-istediniet.
+{n} retirée des invitations. ¦ {n} u hoq nga ftesat. ¦ {n} tneħħa mill-istediniet.
+Tableau des invités (CSV)… ¦ Tabela e të ftuarve (CSV)… ¦ Tabella tal-mistednin (CSV)…
+Imprimer la liste des invités… ¦ Printo listën e të ftuarve… ¦ Ipprintja l-lista tal-mistednin…
+Écrire un courriel ¦ Shkruaj një email ¦ Ikteb email
+Retirer de la liste ¦ Hiq nga lista ¦ Neħħi mil-lista
+🗑 Retirer de la liste ¦ 🗑 Hiq nga lista ¦ 🗑 Neħħi mil-lista
+{name} retirée de la liste. ¦ {name} u hoq nga lista. ¦ {name} tneħħiet mil-lista.
+{name} retiré de la liste. ¦ {name} u hoq nga lista. ¦ {name} tneħħa mil-lista.
+Aucun nouveau descendant vivant : la liste est à jour. ¦ Asnjë pasardhës i ri i gjallë: lista është e përditësuar. ¦ L-ebda dixxendent ħaj ġdid: il-lista aġġornata.
+{n} ajoutés. ¦ {n} u shtuan. ¦ {n} miżjuda.
+{n} ajouté. ¦ {n} u shtua. ¦ {n} miżjud.
+Son propre foyer ¦ Familja e vet ¦ Id-dar tiegħu stess
+Garder son foyer ¦ Mbaj familjen e vet ¦ Żomm id-dar tiegħu
+🎉 COUSINADE · INVITÉ ¦ 🎉 TAKIM KUSHËRINJSH · I FTUAR ¦ 🎉 LAQGĦA TAL-FAMILJA · MISTIEDEN
+🎉 COUSINADE ¦ 🎉 TAKIM KUSHËRINJSH ¦ 🎉 LAQGĦA TAL-FAMILJA
+Nouvel invité ¦ I ftuar i ri ¦ Mistieden ġdid
+Une fiche de ta généalogie (facultatif) ¦ Një kartelë e gjenealogjisë sate (opsionale) ¦ Skeda mill-ġenealoġija tiegħek (mhux obbligatorju)
+Sinon, écris le prénom et le nom ci-dessous. ¦ Përndryshe, shkruaj emrin dhe mbiemrin më poshtë. ¦ Inkella, ikteb l-isem u l-kunjom hawn taħt.
+Foyer (une invitation par foyer) ¦ Familja (një ftesë për familje) ¦ Dar (stedina waħda għal kull dar)
+12 rue des Écoles ¦ 12 rue des Écoles ¦ 12 rue des Écoles
+Régime, allergies ¦ Dieta, alergji ¦ Dieta, allerġiji
+végétarien, sans gluten… ¦ vegjetarian, pa gluten… ¦ veġetarjan, mingħajr glutina…
+Mettre aussi l’adresse, le courriel et le téléphone dans le répertoire des vivants (sa fiche) ¦ Vendos edhe adresën, emailin dhe telefonin në regjistrin e të gjallëve (kartela e tij) ¦ Poġġi wkoll l-indirizz, l-email u t-telefon fid-direttorju tal-ħajjin (l-iskeda tiegħu)
+Décoché : seulement dans cette cousinade. ¦ Pa shenjë: vetëm në këtë takim kushërinjsh. ¦ Mhux immarkat: f’din il-laqgħa tal-familja biss.
+Écris au moins un prénom ou un nom (ou choisis une fiche). ¦ Shkruaj të paktën një emër ose një mbiemër (ose zgjidh një kartelë). ¦ Ikteb mill-inqas isem jew kunjom (jew agħżel skeda).
+Ce courriel n’a pas la bonne forme (exemple : prenom.nom@exemple.fr). ¦ Ky email nuk ka formën e duhur (shembull: emer.mbiemer@shembull.al). ¦ Din l-email m’għandhiex il-forma t-tajba (eżempju: isem.kunjom@eżempju.mt).
+Invité ajouté. ¦ I ftuari u shtua. ¦ Il-mistieden ġie miżjud.
+Enregistré, et aussi dans le répertoire des vivants. ¦ U ruajt, dhe gjithashtu në regjistrin e të gjallëve. ¦ Issejvjat, u wkoll fid-direttorju tal-ħajjin.
+Le lecteur de tableaux n’est pas chargé. ¦ Lexuesi i tabelave nuk është ngarkuar. ¦ Il-qarrej tat-tabelli mhuwiex mgħobbi.
+Importer une liste d’invités ¦ Importo një listë të ftuarish ¦ Importa lista ta’ mistednin
+Un tableau avec une ligne de titres : Prénom, Nom, Courriel, Téléphone, Adresse, Code postal, Ville, Réponse (oui / non / peut-être), Nombre, Régime, Note. ¦ Një tabelë me një rresht titujsh: Emri, Mbiemri, Email, Telefoni, Adresa, Kodi postar, Qyteti, Përgjigjja (po / jo / ndoshta), Numri, Dieta, Shënim. ¦ Tabella b’ringiela ta’ titli: Isem, Kunjom, Email, Telefon, Indirizz, Kodiċi postali, Belt, Tweġiba (iva / le / forsi), Numru, Dieta, Nota.
+Je ne trouve ni prénom ni nom : la première ligne doit donner les titres des colonnes (Prénom, Nom, Courriel…). ¦ Nuk gjej as emër as mbiemër: rreshti i parë duhet të japë titujt e kolonave (Emri, Mbiemri, Email…). ¦ Ma nsib la isem u lanqas kunjom: l-ewwel ringiela trid tagħti t-titli tal-kolonni (Isem, Kunjom, Email…).
+{n} (coordonnées et réponse complétées) ¦ {n} (të dhënat e kontaktit dhe përgjigjja u plotësuan) ¦ {n} (dettalji ta’ kuntatt u tweġiba kkompletati)
+{n} non reconnues : laissées de côté. ¦ {n} të panjohura: të lëna mënjanë. ¦ {n} mhux magħrufa: imwarrba.
+{n} non reconnue : laissée de côté. ¦ {n} e panjohur: e lënë mënjanë. ¦ {n} mhux magħrufa: imwarrba.
+⤓ Exporter le tableau des invités ¦ ⤓ Eksporto tabelën e të ftuarve ¦ ⤓ Esporta t-tabella tal-mistednin
+Un fichier CSV (tableur) avec les invités, leur branche, leur lien de parenté et leur réponse. ¦ Një skedar CSV (fletë llogaritëse) me të ftuarit, degën e tyre, lidhjen farefisnore dhe përgjigjen e tyre. ¦ Fajl CSV (folja elettronika) bil-mistednin, il-fergħa tagħhom, ir-rabta tal-familja u t-tweġiba tagħhom.
+Avec les adresses, courriels et téléphones ¦ Me adresat, emailet dhe telefonat ¦ Bl-indirizzi, l-emails u t-telefowns
+🔒 Ce sont des données de personnes vivantes : ne partage ce fichier qu’avec ceux qui organisent. ¦ 🔒 Këto janë të dhëna të personave të gjallë: ndaje këtë skedar vetëm me ata që organizojnë. ¦ 🔒 Din hija data ta’ persuni ħajjin: aqsam dan il-fajl biss ma’ dawk li qed jorganizzaw.
+Seulement les invités cochés ¦ Vetëm të ftuarit e shënuar ¦ Il-mistednin immarkati biss
+Lien avec l’ancêtre ¦ Lidhja me paraardhësin ¦ Rabta mal-antenat
+Lien avec la référence ¦ Lidhja me personin e referimit ¦ Rabta mal-persuna ta’ referenza
+Tableau exporté, avec les coordonnées. ¦ Tabela u eksportua, me të dhënat e kontaktit. ¦ It-tabella ġiet esportata, bid-dettalji ta’ kuntatt.
+Tableau exporté, sans les coordonnées. ¦ Tabela u eksportua, pa të dhënat e kontaktit. ¦ It-tabella ġiet esportata, mingħajr id-dettalji ta’ kuntatt.
+Invités — {name} ¦ Të ftuarit — {name} ¦ Mistednin — {name}
+Liste des invités ¦ Lista e të ftuarve ¦ Lista tal-mistednin
+Les invités cochés ¦ Të ftuarit e shënuar ¦ Il-mistednin immarkati
+Ceux qui viennent ¦ Ata që vijnë ¦ Dawk li ġejjin
+Avec les coordonnées ¦ Me të dhënat e kontaktit ¦ Bid-dettalji ta’ kuntatt
+Le texte de l’invitation ¦ Teksti i ftesës ¦ It-test tal-istedina
+Une invitation par foyer. Ces mots se remplacent tout seuls : ¦ Një ftesë për familje. Këto fjalë zëvendësohen vetë: ¦ Stedina waħda għal kull dar. Dawn il-kliem jinbidlu waħedhom:
+Répondre avant le ¦ Përgjigju para datës ¦ Wieġeb sa
+Contact pour répondre ¦ Kontakti për përgjigje ¦ Kuntatt għat-tweġibiet
+Objet du courriel ¦ Subjekti i emailit ¦ Suġġett tal-email
+🖨 Imprimer les invitations… ¦ 🖨 Printo ftesat… ¦ 🖨 Ipprintja l-istediniet…
+📝 Dans le traitement de texte ¦ 📝 Në përpunuesin e tekstit ¦ 📝 Fil-proċessur tal-kliem
+📁 Copie dans les médias ¦ 📁 Kopje te mediat ¦ 📁 Kopja fil-midja
+{n} à inviter ¦ {n} për t’u ftuar ¦ {n} biex tistieden
+✉️ Un courriel à tous (en copie cachée) ¦ ✉️ Një email për të gjithë (në kopje të fshehtë) ¦ ✉️ Email wieħed lil kulħadd (f’BCC)
+Ta messagerie s’ouvre avec le texte prêt : rien n’est envoyé par l’app. ¦ Programi yt i emailit hapet me tekstin gati: aplikacioni nuk dërgon asgjë. ¦ Il-programm tal-email tiegħek jiftaħ bit-test lest: l-app ma tibgħat xejn.
+✉️ Courriel prêt ¦ ✉️ Emaili gati ¦ ✉️ Email lest
+Aucun invité coché : coche des invités dans l’onglet « 👥 Invités ». ¦ Asnjë i ftuar i shënuar: shëno të ftuar te skeda «👥 Të ftuarit». ¦ L-ebda mistieden immarkat: immarka mistednin fit-tab “👥 Mistednin”.
+Aucun foyer à inviter : coche des invités d’abord. ¦ Asnjë familje për t’u ftuar: shëno fillimisht të ftuar. ¦ L-ebda dar x’tistieden: immarka mistednin l-ewwel.
+L’adresse du foyer en haut à droite (enveloppe à fenêtre) ¦ Adresa e familjes lart djathtas (zarf me dritare) ¦ L-indirizz tad-dar fuq il-lemin (envelopp bit-tieqa)
+Le traitement de texte n’est pas chargé. ¦ Përpunuesi i tekstit nuk është ngarkuar. ¦ Il-proċessur tal-kliem mhuwiex mgħobbi.
+Les faire-part ne sont pas chargés. ¦ Lajmëruesit nuk janë ngarkuar. ¦ L-avviżi mhumiex mgħobbija.
+Tous les descendants de {name} ¦ Të gjithë pasardhësit e {name} ¦ Id-dixxendenti kollha ta’ {name}
+Réponse avant le {date} ¦ Përgjigju para {date} ¦ Wieġeb sa {date}
+Envoi vers les médias indisponible. ¦ Dërgimi te mediat nuk është i disponueshëm. ¦ Il-bgħit lill-midja mhux disponibbli.
+Une copie de l’invitation est rangée dans les médias. ¦ Një kopje e ftesës u ruajt te mediat. ¦ Kopja tal-istedina tqiegħdet fil-midja.
+Copie non rangée dans les médias : {err} ¦ Kopja nuk u ruajt te mediat: {err} ¦ Il-kopja ma tqiegħditx fil-midja: {err}
+Le lien écrit sous le nom ¦ Lidhja e shkruar nën emër ¦ Ir-rabta miktuba taħt l-isem
+Avec l’ancêtre ¦ Me paraardhësin ¦ Mal-antenat
+Avec la référence ¦ Me personin e referimit ¦ Mal-persuna ta’ referenza
+Pour qui ¦ Për kë ¦ Għal min
+Invités cochés ¦ Të ftuarit e shënuar ¦ Mistednin immarkati
+Qui viennent ¦ Ata që vijnë ¦ Ġejjin
+Présents ¦ Të pranishmit ¦ Preżenti
+Par page A4 ¦ Për faqe A4 ¦ Għal kull paġna A4
+Petite photo (si la fiche en a une) ¦ Foto e vogël (nëse kartela ka një) ¦ Ritratt żgħir (jekk l-iskeda għandha wieħed)
+QR code (nom, branche et lien, lu par un téléphone) ¦ Kod QR (emri, dega dhe lidhja, lexohet nga telefoni) ¦ Kodiċi QR (isem, fergħa u rabta, jinqara mit-telefon)
+Chaque branche a sa couleur (onglet « 📊 Chiffres » pour la changer). ¦ Çdo degë ka ngjyrën e saj (skeda «📊 Shifrat» për ta ndryshuar). ¦ Kull fergħa għandha l-kulur tagħha (tab “📊 Ċifri” biex tibdlu).
+Personne à qui faire un badge. ¦ Asnjë person për t’i bërë distinktiv. ¦ L-ebda persuna li trid tagħmlilha badge.
+L’arbre décoratif n’est pas chargé. ¦ Pema dekorative nuk është ngarkuar. ¦ Is-siġra dekorattiva mhix mgħobbija.
+Toute la descendance de {name}, en grand, une couleur par branche, à afficher le jour de la cousinade. Le dessin s’ouvre ensuite pour tout retoucher, puis « ⤓ Exporter » (PDF pour l’imprimeur, avec fond perdu et traits de coupe, PNG, SVG…). ¦ Gjithë pasardhësit e {name}, në format të madh, një ngjyrë për degë, për t’u varur ditën e takimit të kushërinjve. Vizatimi hapet pastaj për të ndrequr gjithçka, pastaj «⤓ Eksporto» (PDF për shtypshkronjën, me hapësirë prerjeje dhe shenja prerjeje, PNG, SVG…). ¦ Id-dixxendenti kollha ta’ {name}, kbar, kulur wieħed għal kull fergħa, biex jitwaħħlu fil-jum tal-laqgħa tal-familja. It-tpinġija mbagħad tiftaħ biex tirtokka kollox, imbagħad “⤓ Esporta” (PDF għall-istampatur, b’bleed u marki tal-qtugħ, PNG, SVG…).
+l’ancêtre ¦ paraardhësi ¦ l-antenat
+Les conjoints sous chaque nom ¦ Bashkëshortët nën çdo emër ¦ Il-konjuġi taħt kull isem
+Une place pour coller les photos du jour (à côté des vivants) ¦ Një vend për të ngjitur fotot e ditës (pranë të gjallëve) ¦ Spazju biex twaħħal ir-ritratti tal-ġurnata (ħdejn il-ħajjin)
+🌳 Fabriquer le grand arbre ¦ 🌳 Ndërto pemën e madhe ¦ 🌳 Agħmel is-siġra l-kbira
+Fabrication du grand arbre… ¦ Po ndërtohet pema e madhe… ¦ Qed issir is-siġra l-kbira…
+Aucune descendance pour cet ancêtre. ¦ Asnjë pasardhës për këtë paraardhës. ¦ L-ebda dixxendent għal dan l-antenat.
+Cet ancêtre est confidentiel. ¦ Ky paraardhës është konfidencial. ¦ Dan l-antenat huwa kunfidenzjali.
+Photos du jour ¦ Fotot e ditës ¦ Ritratti tal-ġurnata
+✅ Présence ¦ ✅ Prania ¦ ✅ Attendenza
+{here} sur {n} ¦ {here} nga {n} ¦ {here} minn {n}
+🖨 Imprimer la liste de présence… ¦ 🖨 Printo listën e pranisë… ¦ 🖨 Ipprintja l-lista tal-attendenza…
+Personne n’a encore dit oui : les réponses se notent dans « 👥 Invités ». ¦ Askush nuk ka thënë ende po: përgjigjet shënohen te «👥 Të ftuarit». ¦ Ħadd għadu ma qal iva: it-tweġibiet jiġu nnutati f’“👥 Mistednin”.
+{name} est là. ¦ {name} është këtu. ¦ {name} qiegħed hawn.
+{name} n’est plus notée présente. ¦ {name} nuk shënohet më e pranishme. ¦ {name} m’għadhiex immarkata preżenti.
+{name} n’est plus noté présent. ¦ {name} nuk shënohet më i pranishëm. ¦ {name} m’għadux immarkat preżenti.
+Présence — {name} ¦ Prania — {name} ¦ Attendenza — {name}
+{name} — présence ¦ {name} — prania ¦ {name} — attendenza
+Liste de présence ¦ Lista e pranisë ¦ Lista tal-attendenza
+Places par table ¦ Vende për tavolinë ¦ Postijiet għal kull mejda
+Compter aussi les « peut-être » ¦ Numëro edhe «ndoshta»-t ¦ Għodd ukoll il-“forsi”
+Les petites branches partagent une table ¦ Degët e vogla ndajnë një tavolinë ¦ Il-friegħi ż-żgħar jaqsmu mejda
+✨ Faire le plan par branche ¦ ✨ Bëj planin sipas degës ¦ ✨ Agħmel il-pjan skont il-fergħa
+🖨 Imprimer le plan… ¦ 🖨 Printo planin… ¦ 🖨 Ipprintja l-pjan…
+Un foyer n’est jamais séparé. Change la table d’une personne avec sa case ; ↶ Annuler défait le plan. ¦ Një familje nuk ndahet kurrë. Ndrysho tavolinën e një personi me kutinë e tij; ↶ Zhbëj e zhbën planin. ¦ Dar qatt ma tinqasam. Ibdel il-mejda ta’ persuna bil-kaxxa tagħha; ↶ Erġa’ lura jneħħi l-pjan.
+Pas encore de plan de table : note les réponses, puis « ✨ Faire le plan par branche ». ¦ Ende pa plan tavolinash: shëno përgjigjet, pastaj «✨ Bëj planin sipas degës». ¦ Għad m’hemmx pjan tal-imwejjed: innota t-tweġibiet, imbagħad “✨ Agħmel il-pjan skont il-fergħa”.
+{name} va à la table {no}. ¦ {name} shkon në tavolinën {no}. ¦ {name} imur fil-mejda {no}.
+Personne ne vient encore : note les réponses « Oui » d’abord. ¦ Askush nuk vjen ende: shëno fillimisht përgjigjet «Po». ¦ Ħadd għadu ġej: innota t-tweġibiet “Iva” l-ewwel.
+＋ Ajouter des photos… ¦ ＋ Shto foto… ¦ ＋ Żid ritratti…
+Retirer de l’album ¦ Hiq nga albumi ¦ Neħħi mill-album
+L’album est vide ¦ Albumi është bosh ¦ L-album huwa vojt
+Les photos du jour : importe-les depuis l’ordinateur ou choisis-les dans les médias. ¦ Fotot e ditës: importoji nga kompjuteri ose zgjidhi te mediat. ¦ Ir-ritratti tal-ġurnata: importahom mill-kompjuter jew agħżilhom mill-midja.
+＋ Ajouter des photos ¦ ＋ Shto foto ¦ ＋ Żid ritratti
+Les photos de la cousinade ¦ Fotot e takimit të kushërinjve ¦ Ir-ritratti tal-laqgħa tal-familja
+Ajouter à l’album ¦ Shto në album ¦ Żid mal-album
+{n} à l’album. ¦ {n} në album. ¦ {n} fl-album.
+Photo retirée de l’album (elle reste dans les médias). ¦ Fotoja u hoq nga albumi (mbetet te mediat). ¦ Ir-ritratt tneħħa mill-album (jibqa’ fil-midja).
+invités ¦ të ftuar ¦ mistednin
+oui ¦ po ¦ iva
+peut-être ¦ ndoshta ¦ forsi
+non ¦ jo ¦ le
+sans réponse ¦ pa përgjigje ¦ bla tweġiba
+personnes attendues ¦ persona të pritur ¦ persuni mistennija
+Par branche ¦ Sipas degës ¦ Skont il-fergħa
+Invités ¦ Të ftuarit ¦ Mistednin
+Réponses ¦ Përgjigjet ¦ Tweġibiet
+Couleur de la branche {name} ¦ Ngjyra e degës {name} ¦ Kulur tal-fergħa {name}
+{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse ¦ {yes} po, {maybe} ndoshta, {no} jo, {wait} pa përgjigje ¦ {yes} iva, {maybe} forsi, {no} le, {wait} bla tweġiba
+Régimes et allergies (de ceux qui viennent) ¦ Dietat dhe alergjitë (e atyre që vijnë) ¦ Dieti u allerġiji (ta’ dawk ġejjin)
+Le jour J : {n}. ¦ Dita e madhe: {n}. ¦ Il-jum il-kbir: {n}.
+Couleur de la branche enregistrée. ¦ Ngjyra e degës u ruajt. ¦ Il-kulur tal-fergħa ġie issejvjat.
+Organiser une cousinade… ¦ Organizo një takim kushërinjsh… ¦ Organizza laqgħa tal-familja…
+Descendants de {name} · {n} ¦ Pasardhësit e {name} · {n} ¦ Dixxendenti ta’ {name} · {n}
+=passage dans les médias ¦ paraqitje në media|paraqitje në media ¦ dehra fil-mezzi tax-xandir|dehriet fil-mezzi tax-xandir|dehriet fil-mezzi tax-xandir|dehra fil-mezzi tax-xandir|dehra fil-mezzi tax-xandir
+passages dans les médias ¦ paraqitje në media ¦ dehriet fil-mezzi tax-xandir
+1980 et après ¦ 1980 e më pas ¦ 1980 u wara
+avant 1900 ¦ para 1900 ¦ qabel l-1900
+Ajoute un fichier MP3, M4A, WAV, AIFF ou OGG sur une fiche, une battue, une enquête… (ou glisse-le ici) et il apparaîtra ici. ¦ Shto një skedar MP3, M4A, WAV, AIFF ose OGG në një kartelë, një kërkim në terren, një hetim… (ose tërhiqe këtu) dhe do të shfaqet këtu. ¦ Żid fajl MP3, M4A, WAV, AIFF jew OGG ma’ skeda, tfittxija fuq il-post, investigazzjoni… (jew kaxkru hawn) u se jidher hawn.
+Ajoute un fichier MP4, MOV ou WEBM sur une fiche, une battue, une enquête… (ou glisse-le ici) et elle apparaîtra ici. ¦ Shto një skedar MP4, MOV ose WEBM në një kartelë, një kërkim në terren, një hetim… (ose tërhiqe këtu) dhe do të shfaqet këtu. ¦ Żid fajl MP4, MOV jew WEBM ma’ skeda, tfittxija fuq il-post, investigazzjoni… (jew kaxkru hawn) u se jidher hawn.
+Ajoute une carte : l’image de la vue, celle du dos, puis le lieu montré pour la retrouver sur la Carte. ¦ Shto një kartolinë: imazhin e pamjes, atë të pasme, pastaj vendin që tregohet për ta gjetur në Hartë. ¦ Żid kartolina: l-istampa tal-veduta, dik tad-dahar, imbagħad il-post muri biex issibha fuq il-Mappa.
+Ajoute-les sur la fiche d’une personne (bloc 🛂 Passeports) ou dans ✨ Trésors → Les passeports, où l’on peut aussi importer un relevé. ¦ Shtoji në kartelën e një personi (blloku 🛂 Pasaportat) ose te ✨ Thesaret → Pasaportat, ku mund të importosh edhe një regjistrim. ¦ Żidhom fuq l-iskeda ta’ persuna (blokk 🛂 Passaporti) jew f’✨ Teżori → Il-passaporti, fejn tista’ timporta wkoll traskrizzjoni.
+Allume-en une dans ✨ Trésors → Allumer une bougie. ¦ Ndiz një te ✨ Thesaret → Ndiz një qiri. ¦ Ixgħel waħda f’✨ Teżori → Ixgħel xemgħa.
+Amérique du Nord ¦ Amerika e Veriut ¦ L-Amerika ta’ Fuq
+Assembler et retoucher des sons ¦ Bashko dhe ndreq tinguj ¦ Għaqqad u rtokka ħsejjes
+Aucun acte pour l’instant ¦ Asnjë akt deri tani ¦ L-ebda att s’issa
+Aucun dossier de preuve ¦ Asnjë dosje prove ¦ L-ebda fajl ta’ provi
+Aucun lieu dans l’arbre pour l’instant ¦ Asnjë vend në pemë deri tani ¦ L-ebda post fis-siġra s’issa
+Aucun livret pour l’instant ¦ Asnjë broshurë deri tani ¦ L-ebda ktejjeb s’issa
+Aucun nom indexé pour l’instant ¦ Asnjë emër i indeksuar deri tani ¦ L-ebda isem indiċjat s’issa
+Aucun partage pour l’instant ¦ Asnjë ndarje deri tani ¦ L-ebda qsim s’issa
+Aucun passage dans les médias pour l’instant ¦ Asnjë paraqitje në media deri tani ¦ L-ebda dehra fil-mezzi tax-xandir s’issa
+Aucun passeport pour l’instant ¦ Asnjë pasaportë deri tani ¦ L-ebda passaport s’issa
+Aucun projet de montage pour l’instant ¦ Asnjë projekt montazhi deri tani ¦ L-ebda proġett ta’ editjar s’issa
+Aucun questionnaire pour l’instant ¦ Asnjë pyetësor deri tani ¦ L-ebda kwestjonarju s’issa
+Aucun rattachement pour l’instant ¦ Asnjë lidhje famullie deri tani ¦ L-ebda rabta tal-parroċċa s’issa
+Aucun recueil pour l’instant ¦ Asnjë përmbledhje deri tani ¦ L-ebda ġabra s’issa
+Aucun son pour l’instant ¦ Asnjë tingull deri tani ¦ L-ebda ħoss s’issa
+Aucune annonce pour l’instant ¦ Asnjë njoftim deri tani ¦ L-ebda reklam s’issa
+Aucune bougie au registre ¦ Asnjë qiri në regjistër ¦ L-ebda xemgħa fir-reġistru
+Aucune carte d’électeur pour l’instant ¦ Asnjë kartë votuesi deri tani ¦ L-ebda karta tal-votant s’issa
+Aucune carte postale pour l’instant ¦ Asnjë kartolinë deri tani ¦ L-ebda kartolina s’issa
+Aucune création ni carrière pour l’instant ¦ Asnjë krijim apo karrierë deri tani ¦ L-ebda ħolqien jew karriera s’issa
+Aucune demande : ouvre une photo et clique « 📤 Demander qui c’est ». ¦ Asnjë kërkesë: hap një foto dhe kliko «📤 Pyet kush është». ¦ L-ebda talba: iftaħ ritratt u kklikkja “📤 Staqsi min hu”.
+Aucune demande pour l’instant ¦ Asnjë kërkesë deri tani ¦ L-ebda talba s’issa
+Aucune gazette pour l’instant ¦ Asnjë gazetë deri tani ¦ L-ebda gazzetta s’issa
+Aucune image de lieu pour l’instant ¦ Asnjë imazh vendi deri tani ¦ L-ebda stampa ta’ post s’issa
+Aucune langue notée pour l’instant ¦ Asnjë gjuhë e shënuar deri tani ¦ L-ebda lingwa rreġistrata s’issa
+Aucune lettre pour l’instant ¦ Asnjë letër deri tani ¦ L-ebda ittra s’issa
+Aucune maison pour l’instant : « ＋ Nouvelle maison ». ¦ Asnjë shtëpi deri tani: «＋ Shtëpi e re». ¦ L-ebda dar s’issa: “＋ Dar ġdida”.
+Aucune personne n’a encore de profil ¦ Askush nuk ka ende profil ¦ Ħadd għad m’għandu profil
+Aucune règle pour l’instant ¦ Asnjë rregull deri tani ¦ L-ebda regola s’issa
+Aucune récompense pour l’instant ¦ Asnjë çmim deri tani ¦ L-ebda premju s’issa
+Aucune transcription d’acte pour l’instant ¦ Asnjë transkriptim akti deri tani ¦ L-ebda traskrizzjoni ta’ att s’issa
+Aucune vidéo pour l’instant ¦ Asnjë video deri tani ¦ L-ebda vidjo s’issa
+Auteur, réalisation ¦ Autori, regjia ¦ Awtur, direzzjoni
+Bravo ! L’assistant peut chercher plus loin (jusqu’à 12 générations). ¦ Të lumtë! Asistenti mund të kërkojë më larg (deri në 12 breza). ¦ Prosit! L-assistent jista’ jfittex iktar ’il bogħod (sa 12-il ġenerazzjoni).
+Carte du droit de vote ¦ Harta e të drejtës së votës ¦ Mappa tad-dritt tal-vot
+Cette liste est cachée ¦ Kjo listë është e fshehur ¦ Din il-lista hija moħbija
+Ce que tu notes ici reprend les actes : ce n’est pas un conseil juridique. ¦ Ajo që shënon këtu ndjek aktet: nuk është këshillë juridike. ¦ Dak li tinnota hawn jimxi mal-atti: mhuwiex parir legali.
+Ce sont des informations privées : montre-les d’abord dans les Réglages. ¦ Këto janë të dhëna private: shfaqi fillimisht te Cilësimet. ¦ Din hija informazzjoni privata: uriha l-ewwel fl-Issettjar.
+Chercher un nom, une commune… ¦ Kërko një emër, një komunë… ¦ Fittex isem, komun…
+Chercher un projet… (nom, photo, détails) ¦ Kërko një projekt… (emër, foto, detaje) ¦ Fittex proġett… (isem, ritratt, dettalji)
+Chercher un questionnaire… (ex. Anne, guerre, Marie) ¦ Kërko një pyetësor… (p.sh. Anne, luftë, Marie) ¦ Fittex kwestjonarju… (eż. Anne, gwerra, Marie)
+Chercher une carte… (ex. Bretagne, 1978, Lucie) ¦ Kërko një hartë… (p.sh. Bretagne, 1978, Lucie) ¦ Fittex mappa… (eż. Bretagne, 1978, Lucie)
+Chercher une maison… (nom, lieu, époque, personne, recensement) ¦ Kërko një shtëpi… (emër, vend, epokë, person, regjistrim popullsie) ¦ Fittex dar… (isem, post, żmien, persuna, ċensiment)
+Chercher une personne… (ex. Martin, maire, sportif) ¦ Kërko një person… (p.sh. Martin, kryetar bashkie, sportist) ¦ Fittex persuna… (eż. Martin, sindku, atleta)
+Chercher… (commune, cote, année, service d’archives) ¦ Kërko… (komunë, shenjë arkivi, vit, shërbim arkivi) ¦ Fittex… (komun, numru tal-arkivju, sena, servizz tal-arkivji)
+Chercher… (commune, section, numéro, lieu-dit, propriétaire) ¦ Kërko… (komunë, seksion, numër, toponim, pronar) ¦ Fittex… (komun, sezzjoni, numru, lokalità, sid)
+Chercher… (personne, bien, notaire, lieu, cote) ¦ Kërko… (person, pronë, noter, vend, shenjë arkivi) ¦ Fittex… (persuna, proprjetà, nutar, post, numru tal-arkivju)
+Chercher… (titre, auteur, lieu, nom cité, ce qu’on voit, notes) ¦ Kërko… (titull, autor, vend, emër i përmendur, çfarë shihet, shënime) ¦ Fittex… (titlu, awtur, post, isem imsemmi, x’jidher, noti)
+Chercher… (titre, lieu) ¦ Kërko… (titull, vend) ¦ Fittex… (titlu, post)
+Chercher… (titre, personne, lieu, année) ¦ Kërko… (titull, person, vend, vit) ¦ Fittex… (titlu, persuna, post, sena)
+Chercher… (titre, texte, personne, lieu, cote) ¦ Kërko… (titull, tekst, person, vend, shenjë arkivi) ¦ Fittex… (titlu, test, persuna, post, numru tal-arkivju)
+Choisir la personne, puis la sorte de fiche ¦ Zgjidh personin, pastaj llojin e kartelës ¦ Agħżel il-persuna, imbagħad it-tip ta’ daħla
+Choisir les colonnes (« ⚙️ Champs affichés », onglet « La liste ») ¦ Zgjidh kolonat («⚙️ Fushat e shfaqura», skeda «Lista») ¦ Agħżel il-kolonni (“⚙️ Oqsma murija”, tab “Il-lista”)
+Choisir une personne, puis cocher ce qu’elle était (artiste, sportif, élu…) ¦ Zgjidh një person, pastaj shëno çfarë ishte (artist, sportist, i zgjedhur…) ¦ Agħżel persuna, imbagħad immarka x’kienet (artist, atleta, eletta…)
+Choisis la personne de départ (Sosa 1) et ajoute ses parents. ¦ Zgjidh personin e nisjes (Sosa 1) dhe shto prindërit e tij. ¦ Agħżel il-persuna tat-tluq (Sosa 1) u żid il-ġenituri tagħha.
+Choisis la personne, puis la sorte de fiche : elle se range sur sa page et apparaît ici. ¦ Zgjidh personin, pastaj llojin e kartelës: ajo vendoset në faqen e tij dhe shfaqet këtu. ¦ Agħżel il-persuna, imbagħad it-tip ta’ daħla: titqiegħed fil-paġna tagħha u tidher hawn.
+Choisis l’image d’un acte (baptême, mariage, sépulture…) et transcris-le à côté. ¦ Zgjidh imazhin e një akti (pagëzim, martesë, varrim…) dhe transkriptoje anash. ¦ Agħżel l-istampa ta’ att (magħmudija, żwieġ, dfin…) u ittraskrivih ħdejha.
+Clique sur un pays pour voir ses dates (et les cantons suisses, les provinces canadiennes…). ¦ Kliko mbi një vend për të parë datat e tij (dhe kantonet zvicerane, provincat kanadeze…). ¦ Ikklikkja fuq pajjiż biex tara d-dati tiegħu (u l-kantuni Żvizzeri, il-provinċji Kanadiżi…).
+Clubs et équipes, résultats, records, saisons. ¦ Klube dhe ekipe, rezultate, rekorde, sezone. ¦ Klabbs u timijiet, riżultati, rekords, staġuni.
+Commence par « ＋ Numéro », « ＋ Livre » ou « ＋ Documentaire », en haut de la page. ¦ Fillo me «＋ Numër», «＋ Libër» ose «＋ Dokumentar», në krye të faqes. ¦ Ibda b’“＋ Ħarġa”, “＋ Ktieb” jew “＋ Dokumentarju”, fuq nett tal-paġna.
+Commence-en un : il apparaîtra ici, avec les autres, pour le rouvrir plus tard. ¦ Fillo një: do të shfaqet këtu, me të tjerët, për ta rihapur më vonë. ¦ Ibda wieħed: se jidher hawn, mal-oħrajn, biex terġa’ tiftħu iktar tard.
+Commune, section, numéro ¦ Komuna, seksioni, numri ¦ Komun, sezzjoni, numru
+Crée d’abord ton type (« ＋ Créer mon propre type… » dans « ＋ Nouvelle œuvre »), puis ses fiches. ¦ Krijo fillimisht llojin tënd («＋ Krijo llojin tim…» te «＋ Vepër e re»), pastaj kartelat e tij. ¦ Oħloq it-tip tiegħek l-ewwel (“＋ Oħloq it-tip tiegħi…” f’“＋ Xogħol ġdid”), imbagħad id-daħliet tiegħu.
+Crée le recueil (registre, liste, cahier…), puis ajoute tes photos : chaque photo devient une page. ¦ Krijo përmbledhjen (regjistër, listë, fletore…), pastaj shto fotot e tua: çdo foto bëhet një faqe. ¦ Oħloq il-ġabra (reġistru, lista, kwadern…), imbagħad żid ir-ritratti tiegħek: kull ritratt isir paġna.
+Crée une carte, puis ajoute des photos de l’app ou importe-les : celles qui ont des coordonnées GPS se placent toutes seules. ¦ Krijo një hartë, pastaj shto foto nga aplikacioni ose importoji: ato që kanë koordinata GPS vendosen vetë. ¦ Oħloq mappa, imbagħad żid ritratti mill-app jew importahom: dawk li għandhom koordinati GPS jitpoġġew waħedhom.
+Créer ce jour-là ¦ Krijo në atë ditë ¦ Oħloq f’dak il-jum
+Date (récent d’abord) ¦ Data (më të rejat së pari) ¦ Data (l-iktar riċenti l-ewwel)
+Date de l’acte ¦ Data e aktit ¦ Data tal-att
+Date pour les femmes ¦ Data për gratë ¦ Data għan-nisa
+Date pour les hommes ¦ Data për burrat ¦ Data għall-irġiel
+Décennie ¦ Dekada ¦ Għaxar snin
+Siècle ¦ Shekulli ¦ Seklu
+Précédent ¦ I mëparshmi ¦ Ta’ qabel
+Elles s’ajoutent sur la fiche d’une personne (bloc Cartes d’électeur). ¦ Shtohen në kartelën e një personi (blloku Kartat e votuesit). ¦ Jiżdiedu fuq l-iskeda ta’ persuna (blokk Karti tal-votant).
+Ensuite par ¦ Pastaj sipas ¦ Imbagħad skont
+Grouper par catégorie ¦ Grupo sipas kategorisë ¦ Iġbor skont il-kategorija
+Héritages et successions ¦ Trashëgimi dhe pasuri të trashëguara ¦ Wirt u suċċessjonijiet
+Il faut des dates dans l’arbre : une naissance, un mariage, un décès… ¦ Duhen data në pemë: një lindje, një martesë, një vdekje… ¦ Is-siġra għandha bżonn dati: twelid, żwieġ, mewt…
+Index des noms ¦ Indeksi i emrave ¦ Indiċi tal-ismijiet
+Inventions et leurs brevets, découvertes (espèce, comète, site…), publications scientifiques. ¦ Shpikje dhe patentat e tyre, zbulime (lloj, kometë, vendndodhje…), botime shkencore. ¦ Invenzjonijiet u l-privattivi tagħhom, skoperti (speċi, kometa, sit…), pubblikazzjonijiet xjentifiċi.
+La liste « Palmarès » ¦ Lista «Palmaresi» ¦ Il-lista “Unuri”
+La liste « Revue de presse » ¦ Lista «Rishikimi i shtypit» ¦ Il-lista “Rassenja tal-istampa”
+Palmarès ¦ Palmaresi ¦ Unuri
+🏆 Palmarès ¦ 🏆 Palmaresi ¦ 🏆 Unuri
+Langue des actes et des documents ¦ Gjuha e akteve dhe e dokumenteve ¦ Lingwa tal-atti u tad-dokumenti
+Le cercle autour des ancêtres ¦ Rrethi rreth paraardhësve ¦ Iċ-ċirku madwar l-antenati
+Le plus de fiches ¦ Më shumë kartela ¦ L-iktar daħliet
+Le plus de photos ¦ Më shumë foto ¦ L-iktar ritratti
+Le plus de profils ¦ Më shumë profile ¦ L-iktar profili
+Les autres listes ¦ Listat e tjera ¦ Il-listi l-oħra
+Les lieux viennent des naissances, mariages et décès de l’arbre. ¦ Vendet vijnë nga lindjet, martesat dhe vdekjet e pemës. ¦ Il-postijiet ġejjin mit-twelidiet, iż-żwiġijiet u l-imwiet tas-siġra.
+Les plus grandes ¦ Më të mëdhatë ¦ L-akbar l-ewwel
+Lettres aux descendants ¦ Letra për pasardhësit ¦ Ittri lid-dixxendenti
+L’ordre des outils, et ceux qu’on montre ¦ Rendi i mjeteve, dhe ato që shfaqen ¦ L-ordni tal-għodod, u liema jintwerew
+Marquer dans les transcriptions ¦ Shëno në transkriptime ¦ Immarka fit-traskrizzjonijiet
+Mes annonces et courriers ¦ Njoftimet dhe letrat e mia ¦ Ir-reklami u l-ittri tiegħi
+Mettre ce qui est affiché dans un projet de l’Atelier ¦ Vendos atë që shfaqet në një projekt të Punishtes ¦ Poġġi dak li jidher fi proġett tal-Workshop
+Modifiés récemment ¦ Ndryshuar së fundi ¦ Editjati riċentement
+Monter des vidéos : morceaux, titres, fondus, incrustations, musiques ¦ Monto video: copa, tituj, shuarje, mbivendosje, muzikë ¦ Editja vidjows: siltiet, titli, fades, overlays, mużika
+Morceaux, albums et disques, enregistrements, concerts, tournées, œuvres de musique savante. ¦ Këngë, albume dhe disqe, regjistrime, koncerte, turne, vepra të muzikës klasike. ¦ Kanzunetti, albums u diski, reġistrazzjonijiet, kunċerti, tours, xogħlijiet tal-mużika klassika.
+Note de quelle paroisse dépendait chaque hameau ou village avant la Révolution. ¦ Shëno nga cila famulli varej çdo fshat ose katund para Revolucionit. ¦ Innota għal liema parroċċa kien jagħmel kull raħal jew villaġġ qabel ir-Rivoluzzjoni.
+Numéro, tome, épisode ¦ Numri, vëllimi, episodi ¦ Ħarġa, volum, episodju
+Ou « 📷 Lire une capture des règles » pour les remplir toutes seules. ¦ Ose «📷 Lexo një pamje të rregullave» për t’i plotësuar vetë. ¦ Jew “📷 Aqra screenshot tar-regoli” biex jimtlew waħedhom.
+Où j’en suis ¦ Ku jam ¦ Fejn wasalt
+Par commune ¦ Sipas komunës ¦ Skont il-komun
+Par date de l’œuvre ¦ Sipas datës së veprës ¦ Skont id-data tax-xogħol
+Par date, récentes d’abord ¦ Sipas datës, më të rejat së pari ¦ Skont id-data, l-iktar riċenti l-ewwel
+Par personne ¦ Sipas personit ¦ Skont il-persuna
+Par période ¦ Sipas periudhës ¦ Skont il-perjodu
+Partage une branche dans ✨ Trésors → Partager une branche (pour un temps). ¦ Ndaj një degë te ✨ Thesaret → Ndaj një degë (për një kohë). ¦ Aqsam fergħa f’✨ Teżori → Aqsam fergħa (għal xi żmien).
+Pas encore de lignée ¦ Ende asnjë linjë ¦ L-ebda nisel s’issa
+Passeport des lieux ¦ Pasaporta e vendeve ¦ Passaport tal-postijiet
+Peintures, dessins, gravures, sculptures et fontes, photographies, affiches, expositions… ¦ Piktura, vizatime, gravura, skulptura dhe derdhje, fotografi, afishe, ekspozita… ¦ Pitturi, tpinġijiet, inċiżjonijiet, skulturi u kastijiet, ritratti, posters, wirjiet…
+Plus anciens ¦ Më të vjetrat ¦ L-eqdem
+Priorité d’achat ¦ Përparësia e blerjes ¦ Prijorità tax-xiri
+Précisions ¦ Saktësime ¦ Dettalji
+Ranger les fiches par sorte, avec un intertitre pour chacune ¦ Rendit kartelat sipas llojit, me një nëntitull për secilin ¦ Irranġa d-daħliet skont it-tip, b’sottotitlu għal kull wieħed
+Ranger par sorte ¦ Rendit sipas llojit ¦ Irranġa skont it-tip
+Revenir sur un son en cours de travail ¦ Kthehu te një tingull që po punon ¦ Erġa’ lura għal ħoss li qed taħdem fuqu
+Revue, collection, série ¦ Revistë, koleksion, seri ¦ Rivista, kollezzjoni, serje
+＋ Revue, collection, série ¦ ＋ Revistë, koleksion, seri ¦ ＋ Rivista, kollezzjoni, serje
+Rien ne manque sur 5 générations ¦ Asgjë nuk mungon në 5 breza ¦ Xejn ma jonqos fuq 5 ġenerazzjonijiet
+Règles des journaux ¦ Rregullat e gazetave ¦ Regoli tal-gazzetti
+Région, puis pays ¦ Rajoni, pastaj vendi ¦ Reġjun, imbagħad pajjiż
+Pays (A → Z) ¦ Vendi (A → Z) ¦ Pajjiż (A → Z)
+Tous les pays, dans l’ordre que tu veux ¦ Të gjitha vendet, në rendin që do ¦ Il-pajjiżi kollha, fl-ordni li trid
+Un fichier .ics à ouvrir dans ton calendrier (Apple, Google, Outlook…) ¦ Një skedar .ics për ta hapur në kalendarin tënd (Apple, Google, Outlook…) ¦ Fajl .ics biex tiftħu fil-kalendarju tiegħek (Apple, Google, Outlook…)
+Un son de la base ou de l’ordinateur, à travailler et à garder comme projet ¦ Një tingull nga baza ose nga kompjuteri, për ta punuar dhe ruajtur si projekt ¦ Ħoss mid-database jew mill-kompjuter, biex taħdem fuqu u żżommu bħala proġett
+Une fiche rassemble texte, images, personnes, cartes et listes sur un sujet. ¦ Një fletë shënimesh mbledh tekst, imazhe, persona, harta dhe lista për një temë. ¦ Nota tiġbor test, stampi, persuni, mapep u listi fuq suġġett.
+Voir qui pouvait voter en ¦ Shiko kush mund të votonte në ¦ Ara min seta’ jivvota fl-
+pas de date ¦ pa datë ¦ bla data
+Écart ¦ Diferenca ¦ Differenza
+↔ Écart ¦ ↔ Diferenca ¦ ↔ Differenza
+Écart hommes / femmes ¦ Diferenca burra / gra ¦ Differenza rġiel / nisa
+Écoles, études et apprentissages, diplômes, établissements. ¦ Shkolla, studime dhe mësim zanati, diploma, institucione. ¦ Skejjel, studji u apprendistati, diplomi, istituzzjonijiet.
+Écris ton annonce et vois tout de suite combien elle coûtera d’après les règles du journal. ¦ Shkruaj njoftimin tënd dhe shiko menjëherë sa do të kushtojë sipas rregullave të gazetës. ¦ Ikteb ir-reklam tiegħek u ara minnufih kemm se jiswa skont ir-regoli tal-gazzetta.
+Écris ton annonce, vois tout de suite combien elle coûtera d’après les règles du journal, et suis ce qu’elle devient. ¦ Shkruaj njoftimin tënd, shiko menjëherë sa do të kushtojë sipas rregullave të gazetës, dhe ndiq çfarë ndodh me të. ¦ Ikteb ir-reklam tiegħek, ara minnufih kemm se jiswa skont ir-regoli tal-gazzetta, u segwi x’jiġri minnu.
+Écris-en une dans ✨ Trésors → Lettres aux descendants : « pour les 18 ans de Léa », « en 2050 ». ¦ Shkruaj një te ✨ Thesaret → Letra për pasardhësit: «për 18-vjetorin e Léa-s», «në 2050». ¦ Ikteb waħda f’✨ Teżori → Ittri lid-dixxendenti: “għat-18-il sena ta’ Léa”, “fl-2050”.
+↗ Ouvrir dans Recherche ¦ ↗ Hap te Kërkime ¦ ↗ Iftaħ fir-Riċerka
+⚙️ Ouvrir les Réglages ¦ ⚙️ Hap Cilësimet ¦ ⚙️ Iftaħ l-Issettjar
+⚙️ Ranger les outils ¦ ⚙️ Rendit mjetet ¦ ⚙️ Irranġa l-għodod
+✅ Tâches de l’Atelier ¦ ✅ Detyrat e Punishtes ¦ ✅ Kompiti tal-Workshop
+✉️ Courriers envoyés ¦ ✉️ Letrat e dërguara ¦ ✉️ Ittri mibgħuta
+✉️ Ouvrir les lettres dans ✨ Trésors ¦ ✉️ Hap letrat te ✨ Thesaret ¦ ✉️ Iftaħ l-ittri f’✨ Teżori
+✝️ Décès, sépultures ¦ ✝️ Vdekje, varrime ¦ ✝️ Imwiet, dfin
+👶 Naissances, baptêmes ¦ 👶 Lindje, pagëzime ¦ 👶 Twelidiet, magħmudijiet
+❓ Ce qu’on peut récupérer (licences) ¦ ❓ Çfarë mund të merret (licencat) ¦ ❓ X’jista’ jinġieb (liċenzji)
+❓ Comment noter un héritage ? ¦ ❓ Si shënohet një trashëgimi? ¦ ❓ Kif tinnota wirt?
+⤒ Importer des relevés ¦ ⤒ Importo zbërthime ¦ ⤒ Importa indiċijiet
+⤒ Importer les réponses ¦ ⤒ Importo përgjigjet ¦ ⤒ Importa t-tweġibiet
+⤓ Exporter les anniversaires (.ics) ¦ ⤓ Eksporto përvjetorët (.ics) ¦ ⤓ Esporta l-anniversarji (.ics)
+＋ Ajouter une image ¦ ＋ Shto një imazh ¦ ＋ Żid stampa
+＋ Ajouter une parcelle ¦ ＋ Shto një parcelë ¦ ＋ Żid biċċa art
+＋ Annonce ou courrier ¦ ＋ Njoftim ose letër ¦ ＋ Reklam jew ittra
+＋ Nouveau dossier de preuve ¦ ＋ Dosje e re prove ¦ ＋ Fajl ġdid ta’ provi
+＋ Nouveau livret ¦ ＋ Broshurë e re ¦ ＋ Ktejjeb ġdid
+＋ Nouveau montage ¦ ＋ Montazh i ri ¦ ＋ Editjar ġdid
+＋ Nouveau passage dans les médias ¦ ＋ Paraqitje e re në media ¦ ＋ Dehra ġdida fil-mezzi tax-xandir
+＋ Nouveau passeport ¦ ＋ Pasaportë e re ¦ ＋ Passaport ġdid
+＋ Nouveau projet son ¦ ＋ Projekt i ri tingulli ¦ ＋ Proġett ġdid tal-ħoss
+＋ Nouveau questionnaire ¦ ＋ Pyetësor i ri ¦ ＋ Kwestjonarju ġdid
+＋ Nouveau recueil ¦ ＋ Përmbledhje e re ¦ ＋ Ġabra ġdida
+＋ Nouvelle carte ¦ ＋ Hartë e re ¦ ＋ Mappa ġdida
+＋ Nouvelle carte postale ¦ ＋ Kartolinë e re ¦ ＋ Kartolina ġdida
+＋ Nouvelle demande… ¦ ＋ Kërkesë e re… ¦ ＋ Talba ġdida…
+＋ Nouvelle maison ¦ ＋ Shtëpi e re ¦ ＋ Dar ġdida
+＋ Nouvelle transcription ¦ ＋ Transkriptim i ri ¦ ＋ Traskrizzjoni ġdida
+＋ Règles d’un journal ¦ ＋ Rregullat e një gazete ¦ ＋ Ir-regoli ta’ gazzetta
+＋ Épisode ¦ ＋ Episod ¦ ＋ Episodju
+🌍 Le droit de vote dans le monde ¦ 🌍 E drejta e votës në botë ¦ 🌍 Id-dritt tal-vot madwar id-dinja
+📂 Projets son ¦ 📂 Projektet e tingullit ¦ 📂 Proġetti tal-ħoss
+📚 Vers l’Atelier ¦ 📚 Drejt Punishtes ¦ 📚 Lejn il-Workshop
+📷 Lire une capture des règles ¦ 📷 Lexo një pamje të rregullave ¦ 📷 Aqra screenshot tar-regoli
+🔍 Ouvrir l’assistant ¦ 🔍 Hap asistentin ¦ 🔍 Iftaħ l-assistent
+🔍 Ouvrir l’assistant « Que manque-t-il ? » ¦ 🔍 Hap asistentin «Çfarë mungon?» ¦ 🔍 Iftaħ l-assistent “X’inhu nieqes?”
+🔍 Qui est sur cette photo ? ¦ 🔍 Kush është në këtë foto? ¦ 🔍 Min hemm f’dan ir-ritratt?
+🔍 Rappels d’enquête ¦ 🔍 Kujtesat e hetimeve ¦ 🔍 Tfakkiriet tal-investigazzjoni
+🔗 Partager une branche ¦ 🔗 Ndaj një degë ¦ 🔗 Aqsam fergħa
+🕯️ Allumer une bougie ¦ 🕯️ Ndiz një qiri ¦ 🕯️ Ixgħel xemgħa
+🖼️ Tous les médias ¦ 🖼️ Të gjitha mediat ¦ 🖼️ Il-midja kollha
+🗺 Toutes mes cartes ¦ 🗺 Të gjitha hartat e mia ¦ 🗺 Il-mapep kollha tiegħi
+🛂 Ouvrir dans ✨ Trésors ¦ 🛂 Hap te ✨ Thesaret ¦ 🛂 Iftaħ f’✨ Teżori
+🛡 Les règles ¦ 🛡 Rregullat ¦ 🛡 Ir-regoli

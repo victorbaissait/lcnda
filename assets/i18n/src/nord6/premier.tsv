@@ -1,0 +1,111 @@
+fr ¦ lt ¦ lv ¦ et
+# ═════ zone « premier » : lituanien (lt), letton (lv) et estonien (et) ═════
+INSTALLATION ¦ DIEGIMAS ¦ UZSTĀDĪŠANA ¦ PAIGALDAMINE
+La base généalogique doit être importée. ¦ Reikia importuoti genealoginę duomenų bazę. ¦ Jāimportē ģenealoģijas datubāze. ¦ Sugupuu andmebaas tuleb importida.
+Choisis comment démarrer : importer un fichier existant, ou créer une première personne pour partir d'une base vide. ¦ Pasirink, kaip pradėti: importuok esamą failą arba sukurk pirmą asmenį ir pradėk nuo tuščios bazės. ¦ Izvēlies, kā sākt: importē esošu failu vai izveido pirmo personu, lai sāktu ar tukšu datubāzi. ¦ Vali, kuidas alustada: impordi olemasolev fail või loo esimene isik, et alustada tühjast andmebaasist.
+GEDCOM (.ged, aussi d’Ancestry, MyHeritage, Geneanet), Gramps (.gramps ou paquet .gpkg avec les photos), Hérédis (.hmw ou .heredis), MacFamilyTree (.mftpkg), base LCNDA (.db) ou sauvegarde complète LCNDA (.zip, base + médias). Les fichiers JSON et CSV sont analysés mais pas encore importés. ¦ GEDCOM (.ged, taip pat iš Ancestry, MyHeritage, Geneanet), Gramps (.gramps arba .gpkg paketas su nuotraukomis), Hérédis (.hmw arba .heredis), MacFamilyTree (.mftpkg), LCNDA bazė (.db) arba visa LCNDA atsarginė kopija (.zip, bazė + medija). JSON ir CSV failai analizuojami, bet dar neimportuojami. ¦ GEDCOM (.ged, arī no Ancestry, MyHeritage, Geneanet), Gramps (.gramps vai .gpkg pakotne ar fotogrāfijām), Hérédis (.hmw vai .heredis), MacFamilyTree (.mftpkg), LCNDA datubāze (.db) vai pilna LCNDA rezerves kopija (.zip, datubāze + mediji). JSON un CSV faili tiek analizēti, bet vēl netiek importēti. ¦ GEDCOM (.ged, ka Ancestryst, MyHeritage’ist, Geneanetist), Gramps (.gramps või fotodega .gpkg-pakett), Hérédis (.hmw või .heredis), MacFamilyTree (.mftpkg), LCNDA andmebaas (.db) või LCNDA täielik varukoopia (.zip, andmebaas + meedia). JSON- ja CSV-faile analüüsitakse, kuid veel ei impordita.
+Fichier ¦ Failas ¦ Fails ¦ Fail
+Créer une première personne ¦ Sukurti pirmą asmenį ¦ Izveidot pirmo personu ¦ Loo esimene isik
+Initialise une base vide avec une première fiche, à compléter ensuite. ¦ Sukuria tuščią bazę su pirma kortele, kurią vėliau papildysi. ¦ Izveido tukšu datubāzi ar pirmo kartīti, ko vēlāk papildināt. ¦ Loob tühja andmebaasi esimese kaardiga, mida saad hiljem täiendada.
+Prénom ¦ Vardas ¦ Vārds ¦ Eesnimi
+Nom ¦ Pavardė ¦ Uzvārds ¦ Perekonnanimi
+Créer et ouvrir la base ¦ Sukurti ir atidaryti bazę ¦ Izveidot un atvērt datubāzi ¦ Loo ja ava andmebaas
+Je veux faire autre chose ▾ ¦ Noriu daryti ką nors kita ▾ ¦ Gribu darīt ko citu ▾ ¦ Tahan teha midagi muud ▾
+▴ Replier ¦ ▴ Suskleisti ¦ ▴ Sakļaut ¦ ▴ Ahenda
+Qu’est-ce que tu veux faire avec l’app ? ¦ Ką nori daryti su programėle? ¦ Ko tu vēlies darīt ar lietotni? ¦ Mida sa rakendusega teha tahad?
+Choisis ce qui te ressemble : l’app s’ouvre avec les bons onglets et le bon premier écran. Tu pourras tout changer après. ¦ Pasirink, kas tau tinka: programėlė atsidarys su tinkamomis kortelėmis ir tinkamu pirmu ekranu. Vėliau viską galėsi pakeisti. ¦ Izvēlies, kas tev atbilst: lietotne atvērsies ar piemērotām cilnēm un piemērotu pirmo ekrānu. Vēlāk visu varēsi mainīt. ¦ Vali, mis sulle sobib: rakendus avaneb õigete vahekaartide ja õige esimese ekraaniga. Hiljem saad kõike muuta.
+Ta famille, tes ancêtres, leurs actes et leurs photos. ¦ Tavo šeima, tavo protėviai, jų dokumentai ir nuotraukos. ¦ Tava ģimene, tavi senči, viņu dokumenti un fotogrāfijas. ¦ Sinu pere, sinu esivanemad, nende dokumendid ja fotod.
+Une lignée d’animaux ¦ Gyvūnų linija ¦ Dzīvnieku līnija ¦ Loomade liin
+Un élevage, le pedigree de tes chiens, chats, chevaux… ¦ Veislynas, tavo šunų, kačių, arklių kilmės knyga… ¦ Audzētava, tavu suņu, kaķu, zirgu ciltsraksti… ¦ Kasvandus, sinu koerte, kasside, hobuste põlvnemine…
+Recenser des animaux ¦ Gyvūnų apskaita ¦ Dzīvnieku uzskaite ¦ Loomade loendamine
+Suivre des animaux : baguage, puces, observations, trajets. ¦ Stebėti gyvūnus: žiedavimas, mikroschemos, stebėjimai, maršrutai. ¦ Sekot dzīvniekiem: gredzenošana, mikročipi, novērojumi, maršruti. ¦ Jälgi loomi: rõngastamine, kiibid, vaatlused, teekonnad.
+L’histoire d’une maison ou d’un village ¦ Namo ar kaimo istorija ¦ Mājas vai ciema vēsture ¦ Maja või küla ajalugu
+Maison ou village ¦ Namas ar kaimas ¦ Māja vai ciems ¦ Maja või küla
+Qui a vécu où, de génération en génération, pièce par pièce. ¦ Kas kur gyveno, iš kartos į kartą, kambarys po kambario. ¦ Kas kur dzīvoja, no paaudzes paaudzē, istabu pa istabai. ¦ Kes kus elas, põlvest põlve, tuba toa haaval.
+Le catalogue d’un artiste ou d’une collection ¦ Menininko ar kolekcijos katalogas ¦ Mākslinieka vai kolekcijas katalogs ¦ Kunstniku või kollektsiooni kataloog
+Artiste ou collection ¦ Menininkas ar kolekcija ¦ Mākslinieks vai kolekcija ¦ Kunstnik või kollektsioon
+Ses œuvres, ses expositions, son catalogue raisonné. ¦ Jo kūriniai, parodos, katalogas raisonné. ¦ Darbi, izstādes, catalogue raisonné. ¦ Teosed, näitused, catalogue raisonné.
+Un fonds d’archives ou un musée familial ¦ Archyvo fondas ar šeimos muziejus ¦ Arhīva fonds vai ģimenes muzejs ¦ Arhiivifond või perekonnamuuseum
+Archives ou musée ¦ Archyvas ar muziejus ¦ Arhīvs vai muzejs ¦ Arhiiv või muuseum
+Des photos, des lettres, des objets à classer et à décrire. ¦ Nuotraukos, laiškai, daiktai, kuriuos reikia sutvarkyti ir aprašyti. ¦ Fotogrāfijas, vēstules, priekšmeti, kas jāsakārto un jāapraksta. ¦ Fotod, kirjad, esemed, mida korrastada ja kirjeldada.
+L’étude d’un nom de famille ¦ Pavardės tyrimas ¦ Uzvārda izpēte ¦ Perekonnanime uurimine
+Un nom de famille ¦ Pavardė ¦ Uzvārds ¦ Perekonnanimi
+Tous les porteurs d’un nom, ses variantes, d’où ils viennent. ¦ Visi pavardės nešiotojai, jos variantai, iš kur jie kilę. ¦ Visi uzvārda nesēji, tā varianti, no kurienes viņi nāk. ¦ Kõik nime kandjad, selle variandid, kust nad pärit on.
+L’histoire d’une entreprise ou d’une association ¦ Įmonės ar asociacijos istorija ¦ Uzņēmuma vai biedrības vēsture ¦ Ettevõtte või ühingu ajalugu
+Entreprise ou association ¦ Įmonė ar asociacija ¦ Uzņēmums vai biedrība ¦ Ettevõte või ühing
+Ses lieux, ses dirigeants, ses salariés ou ses membres. ¦ Jos vietos, vadovai, darbuotojai ar nariai. ¦ Tā vietas, vadītāji, darbinieki vai biedri. ¦ Selle kohad, juhid, töötajad või liikmed.
+Transmettre des souvenirs ¦ Perduoti prisiminimus ¦ Nodot atmiņas ¦ Mälestuste edasiandmine
+Des lettres à ouvrir plus tard, des recettes, des chansons, des souvenirs à laisser. ¦ Laiškai, kuriuos atidaryti vėliau, receptai, dainos, prisiminimai, kuriuos palikti. ¦ Vēstules, ko atvērt vēlāk, receptes, dziesmas, atmiņas, ko atstāt. ¦ Hiljem avatavad kirjad, retseptid, laulud, mälestused, mida maha jätta.
+Ce qui change ¦ Kas pasikeičia ¦ Kas mainās ¦ Mis muutub
+Commencer avec une base vide ¦ Pradėti nuo tuščios bazės ¦ Sākt ar tukšu datubāzi ¦ Alusta tühjast andmebaasist
+🧪 Essayer avec une base d’exemple ¦ 🧪 Išbandyti su pavyzdine baze ¦ 🧪 Izmēģināt ar parauga datubāzi ¦ 🧪 Proovi näidisandmebaasiga
+🧪 Base d’exemple ¦ 🧪 Pavyzdinė bazė ¦ 🧪 Parauga datubāze ¦ 🧪 Näidisandmebaas
+Une famille imaginaire pour essayer l’app : ta généalogie n’est pas touchée. ¦ Išgalvota šeima programėlei išbandyti: tavo genealogija neliečiama. ¦ Izdomāta ģimene lietotnes izmēģināšanai: tava ģenealoģija netiek skarta. ¦ Väljamõeldud pere rakenduse proovimiseks: sinu sugupuud ei puudutata.
+Revenir à ma généalogie ¦ Grįžti į mano genealogiją ¦ Atgriezties pie manas ģenealoģijas ¦ Tagasi minu sugupuu juurde
+Repartir d’une base vide ¦ Pradėti iš naujo nuo tuščios bazės ¦ Sākt no jauna ar tukšu datubāzi ¦ Alusta uuesti tühjast andmebaasist
+Ou bien : ¦ Arba: ¦ Vai arī: ¦ Või:
+🐾 Créer le premier animal ¦ 🐾 Sukurti pirmą gyvūną ¦ 🐾 Izveidot pirmo dzīvnieku ¦ 🐾 Loo esimene loom
+Créer le premier animal ¦ Sukurti pirmą gyvūną ¦ Izveidot pirmo dzīvnieku ¦ Loo esimene loom
+Espèce ¦ Rūšis ¦ Suga ¦ Liik
+Création de la base… ¦ Kuriama bazė… ¦ Veido datubāzi… ¦ Andmebaasi loomine…
+Préparation de la base d’exemple… ¦ Ruošiama pavyzdinė bazė… ¦ Sagatavo parauga datubāzi… ¦ Näidisandmebaasi ettevalmistamine…
+✓ Base créée ¦ ✓ Bazė sukurta ¦ ✓ Datubāze izveidota ¦ ✓ Andmebaas loodud
+ℹ️ Rien n’est figé : Réglages → Apparence → « 🧭 Usage de l’app ». ¦ ℹ️ Niekas nėra galutinai nustatyta: Nustatymai → Išvaizda → „🧭 Programėlės naudojimas“. ¦ ℹ️ Nekas nav nemainīgs: Iestatījumi → Izskats → „🧭 Lietotnes lietojums“. ¦ ℹ️ Miski pole lõplik: Seaded → Välimus → „🧭 Rakenduse kasutus“.
+🧭 Usage de l’app ¦ 🧭 Programėlės naudojimas ¦ 🧭 Lietotnes lietojums ¦ 🧭 Rakenduse kasutus
+🧭 Revoir le premier lancement ¦ 🧭 Peržiūrėti pirmą paleidimą iš naujo ¦ 🧭 Vēlreiz apskatīt pirmo palaišanu ¦ 🧭 Vaata esmakäivitust uuesti
+Premier écran à l’ouverture ¦ Pirmas ekranas atidarius ¦ Pirmais ekrāns pēc atvēršanas ¦ Esimene ekraan avamisel
+Le dernier écran ouvert (comme avant) ¦ Paskutinis atidarytas ekranas (kaip anksčiau) ¦ Pēdējais atvērtais ekrāns (kā iepriekš) ¦ Viimati avatud ekraan (nagu varem)
+Usage enregistré. ¦ Naudojimas išsaugotas. ¦ Lietojums saglabāts. ¦ Kasutus salvestatud.
+(la page va se recharger) ¦ (puslapis bus įkeltas iš naujo) ¦ (lapa tiks pārlādēta) ¦ (leht laaditakse uuesti)
+Langue · Language ¦ Kalba · Language ¦ Valoda · Language ¦ Keel · Language
+Une petite visite ? ¦ Trumpa ekskursija? ¦ Īsa ekskursija? ¦ Väike ringkäik?
+En {n} étapes, l’app te montre où créer une fiche, ajouter un parent, une photo, un événement, faire une sauvegarde et trouver l’aide. Ça prend deux minutes. ¦ Per {n} žingsnius programėlė parodys, kur sukurti kortelę, pridėti tėvą ar motiną, nuotrauką, įvykį, padaryti atsarginę kopiją ir rasti pagalbą. Tai užtrunka dvi minutes. ¦ {n} soļos lietotne parādīs, kur izveidot kartīti, pievienot vecāku, fotogrāfiju, notikumu, izveidot rezerves kopiju un atrast palīdzību. Tas aizņem divas minūtes. ¦ {n} sammuga näitab rakendus, kus luua kaart, lisada vanem, foto, sündmus, teha varukoopia ja leida abi. See võtab kaks minutit.
+▶ Commencer ¦ ▶ Pradėti ¦ ▶ Sākt ¦ ▶ Alusta
+Plus tard ¦ Vėliau ¦ Vēlāk ¦ Hiljem
+Ne plus proposer ¦ Daugiau nesiūlyti ¦ Vairs nepiedāvāt ¦ Ära enam paku
+Passer la visite ¦ Praleisti ekskursiją ¦ Izlaist ekskursiju ¦ Jäta ringkäik vahele
+← Précédent ¦ ← Ankstesnis ¦ ← Iepriekšējais ¦ ← Eelmine
+Suivant → ¦ Kitas → ¦ Nākamais → ¦ Järgmine →
+✓ Terminer ¦ ✓ Baigti ¦ ✓ Pabeigt ¦ ✓ Lõpeta
+Étape {i} sur {n} ¦ {i} žingsnis iš {n} ¦ {i}. solis no {n} ¦ Samm {i}/{n}
+Visite guidée, étape {i} sur {n} : {what} ¦ Ekskursija su gidu, {i} žingsnis iš {n}: {what} ¦ Gida ekskursija, {i}. solis no {n}: {what} ¦ Juhendatud ringkäik, samm {i}/{n}: {what}
+Tu peux cliquer le bouton entouré pour le faire pour de vrai, ou juste avancer. ¦ Gali spustelėti apibrėžtą mygtuką ir tai padaryti iš tikrųjų arba tiesiog eiti toliau. ¦ Vari noklikšķināt uz apvilktās pogas, lai to izdarītu pa īstam, vai vienkārši doties tālāk. ¦ Võid klõpsata ümbritsetud nupul, et seda päriselt teha, või lihtsalt edasi minna.
+Ajouter un parent ¦ Pridėti tėvą ar motiną ¦ Pievienot vecāku ¦ Lisa vanem
+Ajouter une photo ¦ Pridėti nuotrauką ¦ Pievienot fotogrāfiju ¦ Lisa foto
+Un événement et son lieu ¦ Įvykis ir jo vieta ¦ Notikums un tā vieta ¦ Sündmus ja selle koht
+Faire une sauvegarde ¦ Padaryti atsarginę kopiją ¦ Izveidot rezerves kopiju ¦ Tee varukoopia
+Les Réglages et l’aide ¦ Nustatymai ir pagalba ¦ Iestatījumi un palīdzība ¦ Seaded ja abi
+Chaque personne a sa fiche. Ce bouton en crée une : un prénom, un nom, et c’est parti. ¦ Kiekvienas asmuo turi savo kortelę. Šis mygtukas ją sukuria: vardas, pavardė – ir pirmyn. ¦ Katrai personai ir sava kartīte. Šī poga to izveido: vārds, uzvārds – un aiziet. ¦ Igal isikul on oma kaart. See nupp loob selle: eesnimi, perekonnanimi – ja lähebki.
+Sur une fiche, le « ＋ » de « Parents » relie un père ou une mère : choisis une fiche qui existe, ou crée-la. C’est comme ça que l’arbre se construit. ¦ Kortelėje „＋“ prie „Tėvai“ susieja tėvą ar motiną: pasirink esamą kortelę arba ją sukurk. Taip auga medis. ¦ Kartītē „＋“ pie „Vecāki“ sasaista tēvu vai māti: izvēlies esošu kartīti vai izveido to. Tā aug koks. ¦ Kaardil seob „＋“ jaotises „Vanemad“ isa või ema: vali olemasolev kaart või loo see. Nii puu kasvabki.
+Ici, tu ajoutes des photos et des actes à la fiche : prends-les dans tes médias, ou glisse-les depuis l’ordinateur. ¦ Čia prie kortelės pridedi nuotraukų ir dokumentų: paimk juos iš savo medijos arba nutempk iš kompiuterio. ¦ Šeit kartītei pievieno fotogrāfijas un dokumentus: ņem tos no saviem medijiem vai ievelc no datora. ¦ Siin lisad kaardile fotosid ja dokumente: võta need oma meediast või lohista arvutist.
+Naissance, mariage, décès… Ajoute un événement avec sa date et son lieu : tape les premières lettres de la commune, l’app la trouve. ¦ Gimimas, santuoka, mirtis… Pridėk įvykį su data ir vieta: įvesk pirmąsias gyvenvietės raides, programėlė ją suras. ¦ Dzimšana, laulība, nāve… Pievieno notikumu ar datumu un vietu: ieraksti pirmos apdzīvotās vietas burtus, lietotne to atradīs. ¦ Sünd, abielu, surm… Lisa sündmus koos kuupäeva ja kohaga: kirjuta asula esimesed tähed, rakendus leiab selle.
+De temps en temps, fais une sauvegarde : ce fichier garde toute ta généalogie et tes photos. Range-le sur une clé USB ou un autre disque. ¦ Retkarčiais padaryk atsarginę kopiją: šiame faile saugoma visa tavo genealogija ir nuotraukos. Laikyk jį USB atmintinėje ar kitame diske. ¦ Ik pa laikam izveido rezerves kopiju: šajā failā glabājas visa tava ģenealoģija un fotogrāfijas. Glabā to USB zibatmiņā vai citā diskā. ¦ Tee aeg-ajalt varukoopia: selles failis on kogu sinu sugupuu ja fotod. Hoia seda USB-mälupulgal või teisel kettal.
+Tout se règle ici : apparence, import, sauvegardes… Dans les Réglages, la page « FAQ / tuto » répond à tes questions ; tu peux aussi y relancer cette visite. ¦ Čia viskas nustatoma: išvaizda, importas, atsarginės kopijos… Nustatymuose puslapis „DUK / vadovas“ atsako į tavo klausimus; ten taip pat gali iš naujo paleisti šią ekskursiją. ¦ Šeit viss tiek iestatīts: izskats, imports, rezerves kopijas… Iestatījumos lapa „BUJ / pamācība“ atbild uz taviem jautājumiem; tur vari arī atkārtoti palaist šo ekskursiju. ¦ Siin seadistatakse kõik: välimus, import, varukoopiad… Seadetes vastab leht „KKK / juhend“ sinu küsimustele; seal saad ka selle ringkäigu uuesti käivitada.
+✓ Visite terminée. Pour la revoir : Réglages → FAQ / tuto → « ▶ Relancer la visite guidée ». ¦ ✓ Ekskursija baigta. Norėdamas peržiūrėti dar kartą: Nustatymai → DUK / vadovas → „▶ Paleisti ekskursiją su gidu iš naujo“. ¦ ✓ Ekskursija pabeigta. Lai to apskatītu vēlreiz: Iestatījumi → BUJ / pamācība → „▶ Palaist gida ekskursiju vēlreiz“. ¦ ✓ Ringkäik lõpetatud. Uuesti vaatamiseks: Seaded → KKK / juhend → „▶ Käivita juhendatud ringkäik uuesti“.
+Visite guidée fermée. Tu la retrouves dans Réglages → FAQ / tuto. ¦ Ekskursija su gidu uždaryta. Ją rasi skiltyje Nustatymai → DUK / vadovas. ¦ Gida ekskursija aizvērta. To atradīsi sadaļā Iestatījumi → BUJ / pamācība. ¦ Juhendatud ringkäik suletud. Leiad selle jaotisest Seaded → KKK / juhend.
+Une petite visite guidée de l’app est proposée. Commencer, plus tard, ou ne plus proposer. ¦ Siūloma trumpa programėlės ekskursija su gidu. Pradėti, vėliau arba daugiau nesiūlyti. ¦ Tiek piedāvāta īsa lietotnes gida ekskursija. Sākt, vēlāk vai vairs nepiedāvāt. ¦ Pakutakse rakenduse väikest juhendatud ringkäiku. Alusta, hiljem või ära enam paku.
+Rien à montrer sur cet écran pour l’instant. ¦ Šiame ekrane kol kas nėra ką rodyti. ¦ Šajā ekrānā pagaidām nav ko rādīt. ¦ Sellel ekraanil pole praegu midagi näidata.
+Pas de visite guidée en mode consultation. ¦ Peržiūros režime ekskursijos su gidu nėra. ¦ Skatīšanās režīmā gida ekskursijas nav. ¦ Vaatamisrežiimis juhendatud ringkäiku pole.
+La visite guidée n’est pas possible ici. ¦ Čia ekskursija su gidu negalima. ¦ Šeit gida ekskursija nav iespējama. ¦ Juhendatud ringkäik pole siin võimalik.
+🐞 Signaler un problème ¦ 🐞 Pranešti apie problemą ¦ 🐞 Ziņot par problēmu ¦ 🐞 Teata probleemist
+AIDE ¦ PAGALBA ¦ PALĪDZĪBA ¦ ABI
+Ce qui s’est passé ¦ Kas nutiko ¦ Kas notika ¦ Mis juhtus
+Ce que j’attendais ¦ Ko tikėjausi ¦ Ko es gaidīju ¦ Mida ma ootasin
+Écris avec tes mots. Évite les noms de ta famille si tu ne veux pas qu’ils soient lus. ¦ Rašyk savais žodžiais. Venk savo šeimos vardų, jei nenori, kad jie būtų perskaityti. ¦ Raksti saviem vārdiem. Izvairies no savas ģimenes vārdiem, ja nevēlies, lai tos lasa. ¦ Kirjuta oma sõnadega. Väldi oma pere nimesid, kui sa ei taha, et neid loetaks.
+Joindre le rapport technique ¦ Pridėti techninę ataskaitą ¦ Pievienot tehnisko ziņojumu ¦ Lisa tehniline aruanne
+Joindre le rapport technique ({x}) ¦ Pridėti techninę ataskaitą ({x}) ¦ Pievienot tehnisko ziņojumu ({x}) ¦ Lisa tehniline aruanne ({x})
+aucune erreur captée ¦ klaidų neužfiksuota ¦ kļūdas nav fiksētas ¦ vigu pole tabatud
+Rapport technique ¦ Techninė ataskaita ¦ Tehniskais ziņojums ¦ Tehniline aruanne
+🗑 Vider le journal ¦ 🗑 Išvalyti žurnalą ¦ 🗑 Notīrīt žurnālu ¦ 🗑 Tühjenda logi
+Vider le journal des erreurs captées sur cet ordinateur ¦ Išvalyti šiame kompiuteryje užfiksuotų klaidų žurnalą ¦ Notīrīt šajā datorā fiksēto kļūdu žurnālu ¦ Tühjenda selles arvutis tabatud vigade logi
+✉️ Écrire un e-mail ¦ ✉️ Parašyti el. laišką ¦ ✉️ Rakstīt e-pastu ¦ ✉️ Kirjuta e-kiri
+Ouvrir une demande sur GitHub ¦ Atidaryti užklausą GitHub ¦ Atvērt pieteikumu GitHub ¦ Ava GitHubis teade
+Journal des erreurs vidé ¦ Klaidų žurnalas išvalytas ¦ Kļūdu žurnāls notīrīts ¦ Vigade logi tühjendatud
+✓ Message copié : colle-le où tu veux (e-mail, forum, GitHub). ¦ ✓ Pranešimas nukopijuotas: įklijuok jį kur nori (el. paštas, forumas, GitHub). ¦ ✓ Ziņojums nokopēts: ielīmē to, kur vēlies (e-pasts, forums, GitHub). ¦ ✓ Sõnum kopeeritud: kleebi see, kuhu soovid (e-kiri, foorum, GitHub).
+La copie n’a pas marché : sélectionne le texte et copie-le à la main. ¦ Nukopijuoti nepavyko: pažymėk tekstą ir nukopijuok jį rankiniu būdu. ¦ Kopēšana neizdevās: atlasi tekstu un nokopē to manuāli. ¦ Kopeerimine ei õnnestunud: vali tekst ja kopeeri see käsitsi.
+Dis en quelques mots ce qui s’est passé. ¦ Keliais žodžiais papasakok, kas nutiko. ¦ Dažos vārdos pastāsti, kas notika. ¦ Ütle mõne sõnaga, mis juhtus.
+Ex. : j’ai cliqué sur « Enregistrer » dans la fiche, et la fenêtre est restée grise. ¦ Pvz.: kortelėje spustelėjau „Išsaugoti“, ir langas liko pilkas. ¦ Piem.: kartītē noklikšķināju „Saglabāt“, un logs palika pelēks. ¦ Nt: klõpsasin kaardil „Salvesta“ ja aken jäi halliks.
+Ex. : que la fiche soit enregistrée et que la fenêtre se ferme. ¦ Pvz.: kad kortelė būtų išsaugota ir langas užsidarytų. ¦ Piem.: lai kartīte tiktu saglabāta un logs aizvērtos. ¦ Nt: et kaart salvestataks ja aken sulguks.
+Pour écrire un e-mail plutôt qu’ouvrir une demande sur GitHub : règle une adresse dans Réglages → « 🔄 Mises à jour ». ¦ Norėdamas parašyti el. laišką, o ne atidaryti užklausą GitHub: nustatyk adresą skiltyje Nustatymai → „🔄 Atnaujinimai“. ¦ Lai rakstītu e-pastu, nevis atvērtu pieteikumu GitHub: iestati adresi sadaļā Iestatījumi → „🔄 Atjauninājumi“. ¦ Et kirjutada e-kiri, mitte avada GitHubis teadet: määra aadress jaotises Seaded → „🔄 Uuendused“.
+La base d’exemple est une famille imaginaire (5 générations, des photos d’époque dessinées) rangée à part dans « Mes généalogies » : ta généalogie n’est jamais touchée. ¦ Pavyzdinė bazė – tai išgalvota šeima (5 kartos, pieštos senovinės nuotraukos), laikoma atskirai skiltyje „Mano genealogijos“: tavo genealogija niekada neliečiama. ¦ Parauga datubāze ir izdomāta ģimene (5 paaudzes, zīmētas senlaicīgas fotogrāfijas), kas glabājas atsevišķi sadaļā „Manas ģenealoģijas“: tava ģenealoģija nekad netiek skarta. ¦ Näidisandmebaas on väljamõeldud pere (5 põlvkonda, joonistatud ajastufotod), mida hoitakse eraldi jaotises „Minu sugupuud“: sinu sugupuud ei puudutata kunagi.
+Aucun fichier choisi ¦ Failas nepasirinktas ¦ Nav izvēlēts neviens fails ¦ Faili pole valitud

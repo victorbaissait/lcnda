@@ -47,6 +47,9 @@ function mode_simple_data(PDO $pdo): array
             COALESCE(p.occupation,'') AS occupation, COALESCE(p.is_start,0) AS is_start, {$kind} AS kind,
             m.filename AS pf, m.thumbnail AS pt
         FROM persons p LEFT JOIN media m ON m.id=p.portrait_media_id ORDER BY p.id")->fetchAll(PDO::FETCH_ASSOC);
+    $respect = function_exists('so2_respect_ids') ? so2_respect_ids($pdo) : []; // 🕯 déporté(e) ou fusillé(e) : « mem » → jamais dans un jeu (lib/sources_ouvertes_2.php)
+    if (function_exists('so5_respect_ids')) { $respect += so5_respect_ids($pdo); } // 🕯 victime de la répression en URSS (Memorial, lib/sources_ouvertes_5.php) : jamais dans un jeu non plus
+    if (function_exists('so7_respect_ids')) { $respect += so7_respect_ids($pdo); } // 🕯 « Juste parmi les nations » (lib/sources_ouvertes_7.php) : jamais dans un jeu
     foreach ($rows as $r) {
         if ($r['kind'] === 'animal') { continue; }
         $src = ms_media_src($r['pf'], $r['pt']);
@@ -54,7 +57,7 @@ function mode_simple_data(PDO $pdo): array
         $persons[(int) $r['id']] = [
             'id' => (int) $r['id'], 'first' => trim((string) $r['first_name']), 'last' => trim((string) $r['last_name']),
             'g' => $g === 'male' ? 'm' : ($g === 'female' ? 'f' : 'u'), 'status' => (string) $r['living_status'],
-            'priv' => (int) $r['is_private'] ? 1 : 0, 'start' => (int) $r['is_start'] ? 1 : 0,
+            'priv' => (int) $r['is_private'] ? 1 : 0, 'start' => (int) $r['is_start'] ? 1 : 0, 'mem' => isset($respect[(int) $r['id']]) ? 1 : 0,
             'job' => trim((string) $r['occupation']), 'photo' => $r['portrait_media_id'] ? $src['thumb'] : '',
             'birth' => null, 'bapt' => null, 'death' => null, 'burial' => null,
         ];

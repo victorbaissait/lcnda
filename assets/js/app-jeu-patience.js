@@ -1,4 +1,4 @@
-/* LCNDA — 🂠 Patiences (Jeux de la famille, app-jeu-famille.js) : l'écran de jeu des 108 patiences.
+/* LCNDA — 🂠 Patiences (Jeux de la famille, app-jeu-famille.js) : l'écran de jeu des 131 patiences.
  * Les règles sont dans app-jeu-patience-regles.js (LCNDA_PATIENCES, sans écran) ; ici : la table, les cartes, la souris et le clavier.
  * Jouer : glisser une carte (ou une suite) sur une autre pile, ou cliquer la carte puis la pile où la poser ; double-clic : sur une
  * fondation ; clic sur la pioche : piocher. Jeux à paires (Pyramide, Onze, Monte-Carlo…) : cliquer les cartes qui vont ensemble.
@@ -8,6 +8,11 @@
     'use strict';
     const J = () => window.LCNDA_JEUX_FAMILLE, P = () => window.LCNDA_PATIENCES;
     if (!J() || !P()) return;
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s);
+    // 🌐 dans une autre langue : les noms, règles et familles des patiences (app-jeu-patience-regles.js) traduits une fois, ici (le moteur reste en français dans Node)
+    (() => { const I = window.LCNDA_I18N; if (!I || !I.lang || I.lang === 'fr') return;
+        P().GAMES.forEach(g => ['name', 'desc', 'stockLabel'].forEach(k => { if (typeof g[k] === 'string') g[k] = i18n(g[k]); }));
+        P().FAMILIES.forEach(f => { f[1] = i18n(f[1]); f[2] = i18n(f[2]); }); })();
     const SUIT = ['♥', '♦', '♠', '♣'], SUIT_NAME = ['cœur', 'carreau', 'pique', 'trèfle'];
     const RANK = ['', 'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'V', 'D', 'R'], RANK_NAME = ['', 'As', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Valet', 'Dame', 'Roi'];
     const BACKS = [['bleu', 'Bleu'], ['rouge', 'Rouge'], ['vert', 'Vert'], ['sepia', 'Sépia']];
@@ -15,7 +20,7 @@
     /** une partie relue (localStorage, ↶ Annuler) : JSON écrit « Infinity » (pioche sans limite) comme null */
     const revive = st => { if (st && (st.redeals == null || Number.isNaN(st.redeals))) st.redeals = Infinity; return st; };
     const stars = n => '★'.repeat(n) + '☆'.repeat(Math.max(0, 5 - n));
-    const cardName = c => `${RANK_NAME[c.r]} de ${SUIT_NAME[c.s]}`;
+    const cardName = c => i18n('{rank} de {suit}', {rank: i18n(RANK_NAME[c.r], {ctx: 'carte'}), suit: i18n(SUIT_NAME[c.s], {ctx: 'carte'})});
     const gameOf = k => P().get(k) || P().get('klondike1');
     const BEST_KEY = 'lcnda-patiences-records';
     const bests = () => { try { const v = JSON.parse(localStorage.getItem(BEST_KEY) || '{}'); return v && typeof v === 'object' ? v : {}; } catch (_) { return {}; } };
@@ -23,11 +28,11 @@
 
     /** la liste des jeux, rangés par famille */
     const gameOptions = (esc, cur) => P().FAMILIES.map(([f, label]) => `<optgroup label="${esc(label)}">${P().GAMES.filter(g => g.fam === f).map(g => `<option value="${esc(g.k)}"${g.k === cur ? ' selected' : ''}>${esc(g.name)} · ${stars(g.diff)}</option>`).join('')}</optgroup>`).join('');
-    const descHtml = (esc, k) => { const g = gameOf(k), fam = P().FAMILIES.find(f => f[0] === g.fam); return `<b>${esc(g.name)}</b> <span class="jfp-stars" title="Difficulté ${g.diff} sur 5">${stars(g.diff)}</span><br>${esc(g.desc || '')}${fam ? `<br><span class="muted">${esc(fam[1])} : ${esc(fam[2])}</span>` : ''}`; };
+    const descHtml = (esc, k) => { const g = gameOf(k), fam = P().FAMILIES.find(f => f[0] === g.fam); return `<b>${esc(g.name)}</b> <span class="jfp-stars" title="${esc(i18n('Difficulté {n} sur 5', {n: g.diff}))}">${stars(g.diff)}</span><br>${esc(g.desc || '')}${fam ? `<br><span class="muted">${esc(fam[1])} : ${esc(fam[2])}</span>` : ''}`; };
 
     J().register({
         key: 'patience', short: 'Patience', icon: '🂠', label: '🂠 Patiences (jeux de cartes)', title: 'Patiences', eyebrow: 'PATIENCES',
-        desc: `${P().GAMES.length} jeux de cartes qui se jouent seul : Klondike, FreeCell, Araignée, Yukon, Pyramide, Golf, La Belle Lucie…`,
+        desc: i18n('{n} jeux de cartes qui se jouent seul : Klondike, FreeCell, Araignée, Yukon, Pyramide, Golf, La Belle Lucie…', {n: P().GAMES.length}),
         rulesHint: 'Glisser une carte, ou la cliquer puis cliquer où la poser ; double-clic : sur une fondation. Ctrl+Z : annuler.',
         namePh: 'Ex : Ma patience du soir', fieldsTitle: 'Le jeu',
         scope: false, players: {min: 1, max: 1, def: 1},
@@ -36,10 +41,10 @@
         ready: [{k: 'kl', name: 'Klondike', hint: 'le classique, pioche d’une carte', cfg: {game: 'klondike1'}}, {k: 'fc', name: 'FreeCell', hint: 'tout est visible, 4 cases libres', cfg: {game: 'freecell'}},
             {k: 'sp', name: 'Araignée', hint: 'une couleur, pour commencer', cfg: {game: 'spider1'}}, {k: 'yk', name: 'Yukon', hint: 'on déplace tout groupe visible', cfg: {game: 'yukon'}},
             {k: 'py', name: 'La pyramide', hint: 'des paires qui font 13', cfg: {game: 'pyramid'}}, {k: 'gf', name: 'Golf', hint: 'au plus ou au moins un', cfg: {game: 'golf'}}],
-        fieldsHtml: (c, h) => `<label class="jfp-pick">Le jeu (${P().GAMES.length} patiences)<select data-jfp-game>${gameOptions(h.esc, c.game)}</select></label>
+        fieldsHtml: (c, h) => `<label class="jfp-pick">${h.esc(i18n('Le jeu ({n} patiences)', {n: P().GAMES.length}))}<select data-jfp-game>${gameOptions(h.esc, c.game)}</select></label>
             <p class="jfp-desc" data-jfp-desc>${descHtml(h.esc, c.game)}</p>
-            <div class="jf-checks">${h.toggle('data-jfp-auto', c.auto, '⬆ À la fin, monter tout seul les cartes sur les fondations')}</div>
-            <div class="jfp-backs"><span>Dos des cartes</span>${h.seg('back', BACKS, c.back)}</div>`,
+            <div class="jf-checks">${h.toggle('data-jfp-auto', c.auto, i18n('⬆ À la fin, monter tout seul les cartes sur les fondations'))}</div>
+            <div class="jfp-backs"><span>${h.esc(i18n('Dos des cartes'))}</span>${h.seg('back', BACKS.map(([k, l]) => [k, h.esc(i18n(l))]), c.back)}</div>`,
         onChange(t, c, form) {
             if (t.matches('[data-jfp-game]')) { c.game = P().get(t.value) ? t.value : 'klondike1'; const d = form.querySelector('[data-jfp-desc]'); if (d) d.innerHTML = descHtml(escH, c.game); }
             if (t.matches('[data-jfp-auto]')) c.auto = t.checked;
@@ -109,25 +114,25 @@
                     const isPick = multi && picks.includes(p.id) && i === p.cards.length - 1;
                     const isHint = hintFrom === p.id && i >= hintMv.idx;
                     const red = card.s < 2;
-                    cards.push(`<div class="pc-card${card.up ? (red ? ' is-red' : '') : ' is-back'}${isSel || isPick ? ' is-sel' : ''}${isHint ? ' is-hint' : ''}" data-p="${esc(p.id)}" data-i="${i}" role="button" tabindex="${card.up ? 0 : -1}" aria-label="${card.up ? esc(cardName(card)) : 'Carte retournée'}" style="left:${at.x}px;top:${at.y}px;z-index:${z++}">${card.up ? faceHtml(card) : ''}</div>`);
+                    cards.push(`<div class="pc-card${card.up ? (red ? ' is-red' : '') : ' is-back'}${isSel || isPick ? ' is-sel' : ''}${isHint ? ' is-hint' : ''}" data-p="${esc(p.id)}" data-i="${i}" role="button" tabindex="${card.up ? 0 : -1}" aria-label="${card.up ? esc(cardName(card)) : esc(i18n('Carte retournée'))}" style="left:${at.x}px;top:${at.y}px;z-index:${z++}">${card.up ? faceHtml(card) : ''}</div>`);
                 }));
-                if (S.hand) cards.push(`<div class="pc-card pc-hand${S.hand.s < 2 ? ' is-red' : ''}" style="left:${(S.width || 6) * cw - cw}px;top:${ch * 4.2}px;z-index:900" aria-label="En main : ${esc(cardName(S.hand))}">${faceHtml(S.hand)}</div>`);
+                if (S.hand) cards.push(`<div class="pc-card pc-hand${S.hand.s < 2 ? ' is-red' : ''}" style="left:${(S.width || 6) * cw - cw}px;top:${ch * 4.2}px;z-index:900" aria-label="${esc(i18n('En main : {card}', {card: cardName(S.hand)}))}">${faceHtml(S.hand)}</div>`);
                 const limited = !def.mode && Number.isFinite(P().norm(def).stock.redeals) && ['waste', 'shuffle'].includes(P().norm(def).stock.to); // les passes ne comptent que pour une pioche qui repasse
-                const redeals = limited || (def.mode && Number.isFinite(S.redeals) && S.redeals > 0 && S.redeals < 50) ? ` · ${api.plural(Math.max(0, S.redeals), 'passe restante', 'passes restantes')}` : '';
+                const redeals = limited || (def.mode && Number.isFinite(S.redeals) && S.redeals > 0 && S.redeals < 50) ? ` · ${esc(api.plural(Math.max(0, S.redeals), 'passe restante', 'passes restantes'))}` : '';
                 const B = bests()[S.k];
-                host.innerHTML = `<div class="goose-game-layout jfp${stacked ? ' is-stacked' : ''}" data-back="${esc(c.back)}"><div class="goose-board-wrap"><div class="pc-board${S.won ? ' is-won' : ''}" style="width:${W}px;height:${Math.max(H, S.hand ? ch * 5.4 : 0)}px;--cw:${cw}px;--ch:${ch}px" role="application" aria-label="La table : ${esc(def.name)}">${slots}${cards.join('')}</div></div>
-                  <aside class="goose-panel"><p class="goose-status jf-big" role="status">${S.won ? `🎉 Gagné en ${api.plural(S.moves, 'coup')} et ${fmt(g.ms)} !` : stuck ? '😕 Plus aucun coup possible' : `${inFound()} / ${total()} cartes montées`}</p>
-                    <p>${api.plural(S.moves, 'coup')} · ⏱ <span data-jfp-time>${fmt(S.won ? g.ms : g.ms + Date.now() - g.startAt)}</span>${redeals}${B ? `<br><span class="muted">Record : ${fmt(B.ms)}, ${api.plural(B.moves, 'coup')}</span>` : ''}</p>
-                    ${stuck ? `<div class="jfp-stuck">${api.notice('warn', 'La partie est bloquée : annule quelques coups, ou rejoue la même donne.')}</div>` : ''}
+                host.innerHTML = `<div class="goose-game-layout jfp${stacked ? ' is-stacked' : ''}" data-back="${esc(c.back)}"><div class="goose-board-wrap"><div class="pc-board${S.won ? ' is-won' : ''}" style="width:${W}px;height:${Math.max(H, S.hand ? ch * 5.4 : 0)}px;--cw:${cw}px;--ch:${ch}px" role="application" aria-label="${esc(i18n('La table : {name}', {name: def.name}))}">${slots}${cards.join('')}</div></div>
+                  <aside class="goose-panel"><p class="goose-status jf-big" role="status">${esc(S.won ? i18n('🎉 Gagné en {moves} et {time} !', {moves: api.plural(S.moves, 'coup'), time: fmt(g.ms)}) : stuck ? i18n('😕 Plus aucun coup possible') : i18n('{a} / {b} cartes montées', {a: inFound(), b: total()}))}</p>
+                    <p>${api.plural(S.moves, 'coup')} · ⏱ <span data-jfp-time>${fmt(S.won ? g.ms : g.ms + Date.now() - g.startAt)}</span>${redeals}${B ? `<br><span class="muted">${esc(i18n('Record : {time}, {moves}', {time: fmt(B.ms), moves: api.plural(B.moves, 'coup')}))}</span>` : ''}</p>
+                    ${stuck ? `<div class="jfp-stuck">${api.notice('warn', i18n('La partie est bloquée : annule quelques coups, ou rejoue la même donne.'))}</div>` : ''}
                     <div class="jfp-tools">
-                      <button type="button" class="button small secondary" data-jfp-undo ${hist.length ? '' : 'disabled'} title="Ctrl+Z">↶ Annuler</button>
-                      ${S.won ? '' : `<button type="button" class="button small secondary" data-jfp-hint>💡 Un coup possible</button>`}
-                      ${!S.won && !multi && !def.mode ? '<button type="button" class="button small secondary" data-jfp-auto>⬆ Tout monter</button>' : ''}
-                      ${!S.won && !pile('stock') && def.mode ? `<button type="button" class="button small" data-jfp-stock>${S.hand ? '🂠 Poser la carte en main' : '🂠 Retourner une carte'}</button>` : ''}
-                      <button type="button" class="button small secondary" data-jfp-same title="Les mêmes cartes, depuis le début">⟲ Même donne</button>
+                      <button type="button" class="button small secondary" data-jfp-undo ${hist.length ? '' : 'disabled'} title="Ctrl+Z">↶ ${esc(i18n('Annuler'))}</button>
+                      ${S.won ? '' : `<button type="button" class="button small secondary" data-jfp-hint>💡 ${esc(i18n('Un coup possible'))}</button>`}
+                      ${!S.won && !multi && !def.mode ? `<button type="button" class="button small secondary" data-jfp-auto>⬆ ${esc(i18n('Tout monter'))}</button>` : ''}
+                      ${!S.won && !pile('stock') && def.mode && !def.nostock ? `<button type="button" class="button small" data-jfp-stock>${esc(S.hand ? i18n('🂠 Poser la carte en main') : def.stockLabel || i18n('🂠 Retourner une carte'))}</button>` : ''}
+                      <button type="button" class="button small secondary" data-jfp-same title="${esc(i18n('Les mêmes cartes, depuis le début'))}">⟲ ${esc(i18n('Même donne'))}</button>
                     </div>
-                    <details class="jfp-rules"><summary>📖 Les règles de ${esc(def.name)}</summary><p class="jf-small">${esc(def.desc || '')}</p></details>
-                    <p class="muted jf-small">${multi ? 'Clique les cartes qui vont ensemble ; elles s’en vont toutes seules.' : 'Glisse une carte, ou clique-la puis clique où la poser. Double-clic : sur une fondation.'} Clic sur la pioche : piocher.</p></aside></div>`;
+                    <details class="jfp-rules"><summary>📖 ${esc(i18n('Les règles de {name}', {name: def.name}))}</summary><p class="jf-small">${esc(def.desc || '')}</p></details>
+                    <p class="muted jf-small">${esc(multi ? i18n('Clique les cartes qui vont ensemble ; elles s’en vont toutes seules. Clic sur la pioche : piocher.') : i18n('Glisse une carte, ou clique-la puis clique où la poser. Double-clic : sur une fondation. Clic sur la pioche : piocher.'))}</p></aside></div>`;
                 bind();
                 // la largeur réelle de la table (colonne de droite, marges) : on redessine une fois si elle diffère
                 const wrap = host.querySelector('.goose-board-wrap'); if (wrap) { const cs = getComputedStyle(wrap), w = Math.floor(wrap.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)) - 2, k = stacked ? 1 : 0, d = w - estimate(host.clientWidth || 900, stacked); if (w > 100 && Math.abs(d - fix[k]) > 6 && !redrawn) { fix[k] = d; redrawn = true; draw(); redrawn = false; } }
@@ -137,14 +142,14 @@
                 const S = st();
                 if (!S.won && c.auto && !def.mode && !S.piles.some(p => p.cards.some(x => !x.up)) && !(pile('stock')?.cards.length) && !(pile('waste')?.cards.length)) P().autoAll(S);
                 if (S.won && !g.won) {
-                    g.won = true; g.finished = true; g.ms += Date.now() - g.startAt; g.startAt = Date.now(); g.status = `Gagné en ${fmt(g.ms)}`;
+                    g.won = true; g.finished = true; g.ms += Date.now() - g.startAt; g.startAt = Date.now(); g.status = i18n('Gagné en {time}', {time: fmt(g.ms)});
                     const B = bests()[S.k]; if (!B || g.ms < B.ms) saveBest(S.k, {ms: g.ms, moves: S.moves});
-                    api.toast?.(`🎉 ${def.name} : gagné !`); api.sidebar();
-                } else if (!S.won) g.status = `${inFound()} / ${total()} cartes montées`;
+                    api.toast?.(i18n('🎉 {name} : gagné !', {name: def.name})); api.sidebar();
+                } else if (!S.won) g.status = i18n('{a} / {b} cartes montées', {a: inFound(), b: total()});
                 api.save(); draw();
             };
             const act = fn => { const before = JSON.stringify({st: g.st}); const ok = fn(); if (ok) { hist.push(before); if (hist.length > 500) hist.shift(); sel = null; picks = []; hintMv = null; after(); } return ok; };
-            const doStock = () => { const before = JSON.stringify({st: g.st}); const r = P().stock(st()); if (r?.ok) { hist.push(before); sel = null; picks = []; hintMv = null; after(); } else if (r?.msg) { api.toast?.(r.msg); } };
+            const doStock = () => { const before = JSON.stringify({st: g.st}); const r = P().stock(st()); if (r?.ok) { hist.push(before); sel = null; picks = []; hintMv = null; after(); } else if (r?.msg) { api.toast?.(i18n(r.msg)); } };
             const undo = () => { const s = hist.pop(); if (!s) return; g.st = revive(JSON.parse(s).st); sel = null; picks = []; hintMv = null; g.won = false; g.finished = false; api.save(); draw(); };
             const fail = el => { el?.classList.add('is-no'); setTimeout(() => el?.classList.remove('is-no'), 350); };
 
@@ -188,8 +193,8 @@
                 board.addEventListener('keydown', e => { if (e.key !== 'Enter' && e.key !== ' ') return; const t = target(e); if (!t) return; e.preventDefault(); clickPile(t.pid, t.idx, t.el); host.querySelector(`[data-p="${CSS.escape(t.pid)}"][data-i="${t.idx}"]`)?.focus(); }, sig);
                 host.querySelector('[data-jfp-undo]')?.addEventListener('click', undo, sig);
                 host.querySelector('[data-jfp-stock]')?.addEventListener('click', doStock, sig);
-                host.querySelector('[data-jfp-hint]')?.addEventListener('click', () => { hintMv = P().hint(st()); sel = null; picks = []; if (!hintMv) api.toast?.('Aucun coup possible.'); draw(); }, sig);
-                host.querySelector('[data-jfp-auto]')?.addEventListener('click', () => { if (!act(() => P().autoAll(st()) > 0)) api.toast?.('Aucune carte ne peut monter pour l’instant.'); }, sig);
+                host.querySelector('[data-jfp-hint]')?.addEventListener('click', () => { hintMv = P().hint(st()); sel = null; picks = []; if (!hintMv) api.toast?.(i18n('Aucun coup possible.')); draw(); }, sig);
+                host.querySelector('[data-jfp-auto]')?.addEventListener('click', () => { if (!act(() => P().autoAll(st()) > 0)) api.toast?.(i18n('Aucune carte ne peut monter pour l’instant.')); }, sig);
                 host.querySelector('[data-jfp-same]')?.addEventListener('click', () => { snap(); g.st = P().deal(g.st.k, g.dealSeed || g.st.seed); g.won = false; g.finished = false; g.ms = 0; g.startAt = Date.now(); sel = null; picks = []; hintMv = null; api.save(); draw(); }, sig);
             }
             // glisser : une seule fois pour toute la partie (la table est redessinée à chaque coup)

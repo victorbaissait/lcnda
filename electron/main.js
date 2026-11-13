@@ -7,13 +7,14 @@
  *   npm run start:local     données = dossiers data/ et media/ du projet (pour tester avec tes copies)
  *   GENEALOGY_DATA_DIR=… GENEALOGY_MEDIA_DIR=… npm start     dossiers de ton choix
  */
-const { app, BrowserWindow, Menu, Notification, dialog, ipcMain, session, shell } = require('electron');
+const { app, BrowserWindow, Menu, Notification, dialog, ipcMain, net, session, shell } = require('electron');
 const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
 const { PhpServer, findPhp, checkPhp, devBundledPhp, SECRET_HEADER } = require('./php-server');
 const desk = require('./desk-widgets'); // 🪟 widgets sur le bureau
 const browsers = require('./browsers'); // 🌐 ouvrir l'aperçu d'un site dans un navigateur précis
+const updates = require('./updates'); // 🔄 mises à jour (dernière version publiée sur GitHub)
 
 const APP_TITLE = 'Carnet numérique des ancêtres';
 app.setName(APP_TITLE);
@@ -108,7 +109,8 @@ function buildMenu(p) {
     ...(isMac ? [{
       label: 'LCNDA',
       submenu: [
-        { role: 'about', label: 'À propos de LCNDA' }, { type: 'separator' },
+        { role: 'about', label: 'À propos de LCNDA' },
+        { label: 'Rechercher une mise à jour…', click: () => sendToPage('check-updates') }, { type: 'separator' },
         sk('settings', 'Réglages…'), { type: 'separator' },
         { role: 'hide', label: 'Masquer LCNDA' }, { role: 'hideOthers', label: 'Masquer les autres' },
         { role: 'unhide', label: 'Tout afficher' }, { type: 'separator' },
@@ -193,6 +195,9 @@ function buildMenu(p) {
       submenu: [
         sk('help', 'Raccourcis clavier'),
         { label: 'Personnaliser les raccourcis…', click: () => sendShortcut('customize_shortcuts') },
+        { type: 'separator' },
+        { label: '🐞 Signaler un problème…', click: () => sendToPage('report-problem') },
+        ...(isMac ? [] : [{ label: 'Rechercher une mise à jour…', click: () => sendToPage('check-updates') }]),
       ],
     },
   ];
@@ -379,7 +384,7 @@ ipcMain.handle('lcnda:choose-import-file', async (event) => {
     // Sur Mac, un fichier Hérédis (.hmw) est un dossier : on autorise aussi le choix d'un dossier.
     properties: process.platform === 'darwin' ? ['openFile', 'openDirectory'] : ['openFile'],
     filters: [
-      { name: 'Généalogies (GEDCOM, Hérédis, MacFamilyTree, sauvegarde LCNDA)', extensions: ['ged', 'gedcom', 'hmw', 'heredis', 'mftpkg', 'zip', 'gdz', 'db', 'sqlite'] },
+      { name: 'Généalogies (GEDCOM, Gramps, Hérédis, MacFamilyTree, sauvegarde LCNDA)', extensions: ['ged', 'gedcom', 'gramps', 'gpkg', 'hmw', 'heredis', 'mftpkg', 'zip', 'gdz', 'db', 'sqlite'] },
       { name: 'Tous les fichiers', extensions: ['*'] },
     ],
   });
@@ -445,6 +450,75 @@ ipcMain.handle('lcnda:download-reference', async (event, country) => {
   return job;
 });
 
+/**
+ * 🔄 Mises à jour (Réglages → « 🔄 Mises à jour », menu Aide) : la page demande seulement « regarde », « télécharge »,
+ * « ouvre » ; l'adresse (GitHub, dépôt de l'app), le fichier choisi et le dossier (Téléchargements) sont décidés ici.
+ * Rien n'est envoyé à GitHub à part la requête elle-même ; l'installateur n'est jamais lancé tout seul.
+ */
+const UPDATE_TEST = !app.isPackaged && process.env.LCNDA_UPDATE_API ? process.env.LCNDA_UPDATE_API : ''; // essais seulement
+const updateUrls = () => (UPDATE_TEST ? { apiUrl: UPDATE_TEST, downloadPrefix: new URL('/download/', UPDATE_TEST).href, pagePrefix: new URL('/page/', UPDATE_TEST).href } : {});
+const updateFetch = (url, opts) => (typeof net.fetch === 'function' ? net.fetch(url, opts) : fetch(url, opts));
+const updateSys = () => ({ platform: process.platform, arch: app.runningUnderARM64Translation ? 'arm64' : process.arch, format: updates.currentFormat() });
+const updatePrefs = () => updates.cleanPrefs(readConfig(paths().configFile).updates);
+function saveUpdatePrefs(p) { const f = paths().configFile; const cfg = readConfig(f); cfg.updates = updates.cleanPrefs(p); writeConfig(f, cfg); }
+const updateState = { job: null, ctrl: null, file: '' };
+ipcMain.handle('lcnda:updates', async (event, cmd, arg) => {
+  if (!fromApp(event)) return { ok: false, error: 'Refusé' };
+  const a = arg && typeof arg === 'object' ? arg : {};
+  const prefs = updatePrefs();
+  const pub = (p) => ({ auto: p.auto, skip: p.skip, laterUntil: p.laterUntil, lastCheck: p.lastCheck });
+  if (cmd === 'info') {
+    return { ok: true, version: app.getVersion(), ...updateSys(), prefs: pub(prefs), downloading: !!updateState.job, file: updateState.file ? path.basename(updateState.file) : '' };
+  }
+  if (cmd === 'check') {
+    const r = await updates.check({ fetchImpl: updateFetch, current: app.getVersion(), prefs, force: a.force === true, sys: updateSys(), ...updateUrls() });
+    saveUpdatePrefs(r.prefs);
+    return { ...r.info, fromCache: r.fromCache, notify: updates.shouldNotify(r.info, r.prefs), prefs: pub(r.prefs) };
+  }
+  if (cmd === 'prefs') {
+    const next = { ...prefs };
+    if (typeof a.auto === 'boolean') next.auto = a.auto;
+    if (typeof a.skip === 'string') next.skip = updates.parseVersion(a.skip) ? a.skip.replace(/^v/, '') : '';
+    if (a.later === true) next.laterUntil = Date.now() + updates.DAY;
+    if (a.later === false) next.laterUntil = 0;
+    saveUpdatePrefs(next);
+    return { ok: true, prefs: pub(updates.cleanPrefs(next)) };
+  }
+  if (cmd === 'download') {
+    if (updateState.job) return updateState.job;
+    const sender = event.sender;
+    updateState.ctrl = new AbortController();
+    updateState.job = (async () => {
+      const r = await updates.download({ fetchImpl: updateFetch, release: prefs.release, sys: updateSys(), dir: app.getPath('downloads'), signal: updateState.ctrl.signal,
+        downloadPrefix: updateUrls().downloadPrefix,
+        onProgress: (received, total) => { try { if (!sender.isDestroyed()) sender.send('lcnda:update-progress', { received, total }); } catch { /* fenêtre fermée */ } } });
+      if (r.ok) {
+        updateState.file = r.file;
+        if (/\.AppImage$/.test(r.file)) { try { fs.chmodSync(r.file, 0o755); } catch { /* rien */ } }
+        return { ok: true, name: r.name, size: r.size, sha256: r.sha256 };
+      }
+      return r;
+    })().finally(() => { updateState.job = null; updateState.ctrl = null; });
+    return updateState.job;
+  }
+  if (cmd === 'cancel') { try { updateState.ctrl?.abort(); } catch { /* rien */ } return { ok: true }; }
+  if (cmd === 'open' || cmd === 'show') {
+    const f = updateState.file;
+    if (!f || !fs.existsSync(f)) return { ok: false, error: 'Le fichier téléchargé n’est plus là.' };
+    if (cmd === 'show' || /\.AppImage$/.test(f)) { shell.showItemInFolder(f); return { ok: true, shown: true }; }
+    const err = await shell.openPath(f);
+    return err ? { ok: false, error: err } : { ok: true };
+  }
+  if (cmd === 'page') {
+    const page = prefs.release?.page;
+    const prefix = updateUrls().pagePrefix || updates.PAGE_PREFIX;
+    if (!updates.okPage(page, prefix)) return { ok: false, error: 'Recherche d’abord la mise à jour.' };
+    await shell.openExternal(page);
+    return { ok: true };
+  }
+  return { ok: false, error: 'Commande inconnue' };
+});
+
 /** Même origine que le serveur de l'application (pas « http://127.0.0.1:port@autre-site/ », qui commence pareil). */
 function sameOrigin(url, origin) {
   try { return new URL(String(url)).origin === new URL(origin).origin; } catch { return false; }
@@ -471,7 +545,7 @@ function openSideWindow(url) {
 
 /** La fenêtre ne peut afficher que l'application ; tout lien externe s'ouvre dans le navigateur. */
 function lockNavigation(webContents, origin) {
-  const external = (url) => { if (/^https?:/i.test(url)) shell.openExternal(url); };
+  const external = (url) => { if (/^https?:/i.test(url) || /^mailto:[\w.+-]*@?[\w.-]*\?/i.test(url)) shell.openExternal(url); }; // ✉️ mailto : « Signaler un problème » (app-signaler.js)
   const sideSafe = (url) => /^https?:/i.test(url) && !sameOrigin(url, origin);
   webContents.setWindowOpenHandler(({ url, frameName }) => {
     // dans la fenêtre « à côté » : un lien « nouvel onglet » s'ouvre dans cette même fenêtre (jamais l'app, jamais d'onglets en rafale)
@@ -696,6 +770,6 @@ if (!app.requestSingleInstanceLock()) {
     quitting = true;
     clearInterval(reminderTimer);
     try { app.setBadgeCount(0); } catch { /* ignore */ }
-    server.stop().finally(() => app.quit());
+    server.closeBackup().finally(() => server.stop().finally(() => app.quit())); // 🗓 sauvegarde « à la fermeture » si elle est réglée
   });
 }

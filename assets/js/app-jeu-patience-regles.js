@@ -116,7 +116,7 @@
         {k: 'golf', fam: 'pairs', name: 'Golf', diff: 3, mode: 'golf', desc: '7 colonnes de 5 cartes : envoie sur la défausse une carte d’une valeur juste au-dessus ou au-dessous. Rien ne va sur un Roi.'},
         {k: 'golfwrap', fam: 'pairs', name: 'Golf (le Roi et l’As se suivent)', diff: 2, mode: 'golf', wrap: true, desc: 'Golf, mais l’As suit le Roi et le Roi suit l’As : la partie se prolonge.'},
         {k: 'tripeaks', fam: 'pairs', name: 'Les trois sommets', diff: 2, mode: 'tripeaks', desc: 'Trois montagnes de cartes : envoie sur la défausse une carte découverte juste au-dessus ou au-dessous ; le Roi et l’As se suivent.'},
-        {k: 'blackhole', fam: 'pairs', name: 'Le trou noir', diff: 3, mode: 'blackhole', desc: '17 éventails de 3 autour du trou : envoie dans le trou une carte juste au-dessus ou au-dessous de la dernière avalée.'},
+        {k: 'blackhole', fam: 'pairs', name: 'Le trou noir', diff: 3, mode: 'blackhole', nostock: true, desc: '17 éventails de 3 autour du trou : envoie dans le trou une carte juste au-dessus ou au-dessous de la dernière avalée.'},
         {k: 'pyramid', fam: 'pairs', name: 'La pyramide', diff: 4, mode: 'pyramid', desc: 'Enlève les paires qui font 13 (Valet 11, Dame 12 ; un Roi s’en va seul). Une carte se prend quand plus rien ne la couvre. La pioche ne passe qu’une fois.'},
         {k: 'pyramid3', fam: 'pairs', name: 'La pyramide en 3 passes', diff: 3, mode: 'pyramid', redeals: 2, desc: 'La pyramide, et la pioche repasse deux fois.'},
         {k: 'acesup', fam: 'pairs', name: 'As en haut', diff: 3, mode: 'acesup', desc: '4 colonnes : enlève une carte quand une autre colonne montre une carte plus forte de la même couleur de carte (l’As est le plus fort). Gagné s’il ne reste que les 4 As.'},
@@ -125,7 +125,7 @@
         {k: 'elevens', fam: 'pairs', name: 'Onze', diff: 2, mode: 'sum', sum: 11, grid: [3, 3], faces: true, desc: 'Une grille de 9 cartes : enlève deux cartes qui font 11, ou un Valet, une Dame et un Roi ensemble.'},
         {k: 'quatorze', fam: 'pairs', name: 'Quatorze', diff: 2, mode: 'sum', sum: 14, grid: [5, 5], desc: 'Une grille de 25 cartes : enlève deux cartes qui font 14 (Valet 11, Dame 12, Roi 13).'},
         {k: 'dix', fam: 'pairs', name: 'Dix', diff: 2, mode: 'sum', sum: 10, grid: [3, 4], faces: 'four', desc: 'Une grille de 12 cartes : enlève deux cartes qui font 10, ou quatre figures de même valeur (4 Valets, 4 Dames, 4 Rois ou quatre 10).'},
-        {k: 'accordion', fam: 'pairs', name: 'L’accordéon', diff: 5, mode: 'accordion', desc: 'Toutes les cartes en ligne : pose un tas sur son voisin de gauche, ou sur le 3ᵉ à gauche, s’ils ont la même valeur ou la même couleur de carte. Gagné s’il ne reste qu’un tas.'},
+        {k: 'accordion', fam: 'pairs', name: 'L’accordéon', diff: 5, mode: 'accordion', nostock: true, desc: 'Toutes les cartes en ligne : pose un tas sur son voisin de gauche, ou sur le 3ᵉ à gauche, s’ils ont la même valeur ou la même couleur de carte. Gagné s’il ne reste qu’un tas.'},
         {k: 'calculation', fam: 'pairs', name: 'Le calcul', diff: 4, mode: 'calc', desc: 'Quatre fondations montent de 1 en 1, de 2 en 2, de 3 en 3 et de 4 en 4. Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente.'},
         // ── ajoutées en 0.9.0 (mêmes règles de base, d'autres réglages)
         {k: 'klondike2c', fam: 'klondike', name: 'Klondike (2 cartes)', diff: 2, desc: 'Klondike, la pioche se retourne deux cartes à la fois : seule la dernière se joue.', tab: {n: 7}, stock: {draw: 2}},
@@ -167,6 +167,30 @@
         {k: 'castlesspain', fam: 'builder', name: 'Les châteaux en Espagne', diff: 3, desc: '13 colonnes de 4 cartes dont 3 cachées, pas de pioche ; on descend en alternant rouge et noir.', tab: {n: 13, deal: even(13, 4), down: even(13, 3), build: 'alt', move: 'one', empty: 'any'}, stock: {to: 'none'}},
         {k: 'fan', fam: 'builder', name: 'L’éventail', diff: 3, desc: 'Comme La Belle Lucie, sans redistribution, et seul un Roi va dans une place vide.', tab: {n: 18, deal: [...even(17, 3), 1], down: 'none', build: 'suit', move: 'one', empty: 'king', grid: 6}, stock: {to: 'none'}},
         {k: 'pyramid2', fam: 'pairs', name: 'La pyramide en 2 passes', diff: 3, mode: 'pyramid', redeals: 1, desc: 'La pyramide, et la pioche repasse une fois.'},
+        // ── ajoutées en 0.9.2 : 23 patiences de plus (règles différentes de celles d'avant)
+        {k: 'agnessorel', fam: 'klondike', name: 'Agnès Sorel', diff: 4, desc: '7 colonnes en escalier. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend dans la même teinte (rouge sur rouge, noir sur noir), le Roi passe sur l’As. La pioche pose une carte sur chaque colonne ; une colonne vide prend la carte juste sous la valeur de départ.', tab: {n: 7, build: 'color', wrap: true, move: 'seq', empty: 'king'}, found: {base: 'first', wrap: true}, stock: {to: 'tab'}},
+        {k: 'whitehorse', fam: 'klondike', name: 'Le cheval blanc', diff: 2, desc: 'Une seule carte sur chacune des 7 colonnes au départ ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche se retourne une carte à la fois, sans limite.', tab: {n: 7, deal: even(7, 1), down: 'none', empty: 'any'}, stock: {draw: 1}},
+        {k: 'fourseasons', fam: 'klondike', name: 'Les quatre saisons', diff: 3, desc: '5 cartes en croix et une fondation de départ qui donne la valeur des quatre. On descend sans s’occuper des couleurs (le Roi passe sur l’As), une carte à la fois. La pioche ne passe qu’une fois.', tab: {n: 5, deal: even(5, 1), down: 'none', build: 'any', wrap: true, move: 'one', empty: 'any'}, found: {base: 'first', wrap: true}, stock: {draw: 1, redeals: 0}},
+        {k: 'chameleon', fam: 'klondike', name: 'Le caméléon', diff: 3, desc: 'Canfield à 3 colonnes et 12 cartes en réserve : on descend sans s’occuper des couleurs, le Roi passe sur l’As. La pioche ne passe qu’une fois.', reserve: {n: 12, kind: 'canfield'}, tab: {n: 3, deal: even(3, 1), down: 'none', build: 'any', wrap: true, empty: 'reserve'}, found: {base: 'first', wrap: true}, stock: {draw: 1, redeals: 0}},
+        {k: 'canfield2', fam: 'klondike', name: 'Canfield double', diff: 3, desc: 'Canfield avec deux jeux : une réserve de 13 cartes, 5 colonnes, 8 fondations qui partent de la première carte posée.', decks: 2, reserve: {n: 13, kind: 'canfield'}, tab: {n: 5, deal: even(5, 1), down: 'none', wrap: true, empty: 'reserve'}, found: {base: 'first', wrap: true}, stock: {draw: 1}},
+        {k: 'forecell', fam: 'freecell', name: 'ForeCell', diff: 3, desc: '8 colonnes de 6 cartes ; les 4 cases libres sont déjà remplies au départ. On descend en alternant les couleurs ; une colonne vide ne prend qu’un Roi.', cells: 4, cellsFill: 4, tab: {n: 8, deal: even(8, 6), down: 'none', move: 'one', empty: 'king'}, stock: {to: 'none'}},
+        {k: 'freefan', fam: 'freecell', name: 'L’éventail aux cases', diff: 2, desc: '17 éventails de 3 cartes et 2 cases libres ; on descend dans la même couleur de carte, une carte à la fois ; seul un Roi va dans une place vide.', cells: 2, tab: {n: 18, deal: [...even(17, 3), 1], down: 'none', build: 'suit', move: 'one', empty: 'king', grid: 6}, stock: {to: 'none'}},
+        {k: 'mrsmop', fam: 'spider', name: 'Madame Mop', diff: 3, desc: 'Deux jeux, 13 colonnes de 8 cartes toutes visibles, pas de pioche. On descend sans s’occuper des couleurs ; seules les suites d’une même couleur de carte se déplacent ensemble ; une suite complète du Roi à l’As s’en va.', decks: 2, tab: {n: 13, deal: even(13, 8), down: 'none', build: 'any', move: 'suitseq', empty: 'any'}, found: {spider: true}, stock: {to: 'none'}},
+        {k: 'blackwidow', fam: 'spider', name: 'La veuve noire', diff: 3, desc: 'L’araignée à quatre couleurs, mais toute suite qui descend se déplace d’un coup, même mélangée. Une suite complète du Roi à l’As dans une même couleur de carte s’en va.', decks: 2, tab: {n: 10, deal: [6, 6, 6, 6, 5, 5, 5, 5, 5, 5], build: 'any', move: 'seq', empty: 'any'}, found: {spider: true}, stock: {to: 'tab', needFull: true}},
+        {k: 'threeblindmice', fam: 'spider', name: 'Les trois souris', diff: 3, desc: '10 colonnes de 5 (les trois premières cachent 3 cartes) et 2 cartes en réserve dans des cases libres. On descend dans la même couleur de carte et on déplace n’importe quel groupe visible ; une colonne vide ne prend qu’un Roi.', cells: 2, cellsFill: 2, tab: {n: 10, deal: even(10, 5), down: [3, 3, 3, 0, 0, 0, 0, 0, 0, 0], build: 'suit', move: 'any', empty: 'king'}, found: {spider: true}, stock: {to: 'none'}},
+        {k: 'gypsy', fam: 'spider', name: 'La gitane', diff: 3, desc: 'Deux jeux, 8 colonnes de 3 cartes (deux cachées). On descend en alternant rouge et noir, on déplace des suites entières ; la pioche pose une carte sur chaque colonne. Les fondations montent de l’As au Roi.', decks: 2, tab: {n: 8, deal: even(8, 3), down: even(8, 2), build: 'alt', move: 'seq', empty: 'any'}, stock: {to: 'tab'}},
+        {k: 'irmgard', fam: 'spider', name: 'Irmgard', diff: 3, desc: 'Deux jeux, 9 colonnes en pyramide (1, 2, 3, 4, 5, 4, 3, 2, 1 cartes). On descend en alternant rouge et noir ; une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne.', decks: 2, tab: {n: 9, deal: [1, 2, 3, 4, 5, 4, 3, 2, 1], build: 'alt', move: 'seq', empty: 'king'}, stock: {to: 'tab'}},
+        {k: 'queenie', fam: 'yukon', name: 'Queenie', diff: 3, desc: '7 colonnes en escalier comme Klondike, mais on déplace n’importe quel groupe de cartes visibles (comme au Yukon) ; la pioche pose une carte sur chaque colonne.', tab: {n: 7, move: 'any'}, stock: {to: 'tab'}},
+        {k: 'brisbane', fam: 'yukon', name: 'Brisbane', diff: 2, desc: 'Yukon où l’on descend sans s’occuper des couleurs : n’importe quel groupe de cartes visibles se déplace, pourvu que la première aille bien.', tab: {n: 7, deal: [1, 6, 7, 8, 9, 10, 11], down: klDown(7), build: 'any', move: 'any'}, stock: {to: 'none'}},
+        {k: 'blockade', fam: 'forty', name: 'Le blocus', diff: 3, desc: 'Deux jeux, 12 colonnes d’une carte. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche pose une carte sur chaque colonne.', decks: 2, tab: {n: 12, deal: even(12, 1), down: 'none', build: 'suit', move: 'seq', empty: 'any'}, stock: {to: 'tab'}},
+        {k: 'fortunesfavor', fam: 'forty', name: 'La bonne fortune', diff: 1, desc: 'Les As sont posés d’avance ; 12 colonnes d’une carte. On descend dans la même couleur de carte, une carte à la fois ; la pioche ne passe qu’une fois.', found: {out: [1]}, tab: {n: 12, deal: even(12, 1), down: 'none', build: 'suit', move: 'one', empty: 'any'}, stock: {draw: 1, redeals: 0}},
+        {k: 'midshipman', fam: 'forty', name: 'L’aspirant', diff: 3, desc: 'Un seul jeu, 9 colonnes de 4 cartes (deux cachées). On descend sans s’occuper des couleurs et on déplace des suites entières ; la pioche ne passe qu’une fois.', tab: {n: 9, deal: even(9, 4), down: even(9, 2), build: 'any', move: 'seq', empty: 'any'}, stock: {draw: 1, redeals: 0}},
+        {k: 'martha', fam: 'builder', name: 'Martha', diff: 3, desc: 'Les As sont posés d’avance ; 12 colonnes de 4 cartes (deux cachées), pas de pioche. On descend en alternant rouge et noir et on déplace des suites entières.', found: {out: [1]}, tab: {n: 12, deal: even(12, 4), down: even(12, 2), build: 'alt', move: 'seq', empty: 'any'}, stock: {to: 'none'}},
+        {k: 'morehead', fam: 'builder', name: 'Morehead', diff: 4, desc: 'Comme Somerset (10 colonnes de 1 à 8 cartes, puis 8 et 8), mais on descend sur n’importe quelle couleur de carte sauf la sienne, une carte à la fois.', tab: {n: 10, deal: [1, 2, 3, 4, 5, 6, 7, 8, 8, 8], down: 'none', build: 'notown', move: 'one', empty: 'any'}, stock: {to: 'none'}},
+        {k: 'montana', fam: 'pairs', name: 'Montana (les trous)', diff: 3, mode: 'montana', stockLabel: '🔀 Redistribuer', desc: '4 rangées de 13 cartes ; on enlève les As, ce qui fait 4 trous. Un trou prend la carte de même couleur juste au-dessus de sa voisine de gauche ; un trou au début d’une rangée prend un 2. Il faut ranger chaque rangée du 2 au Roi dans une même couleur. Deux fois, on peut ramasser ce qui n’est pas rangé et redistribuer.'},
+        {k: 'nestor', fam: 'pairs', name: 'Nestor', diff: 3, mode: 'nestor', nostock: true, desc: '8 colonnes de 6 cartes et 4 cartes en réserve : enlève deux cartes de même valeur prises en bas des colonnes ou dans la réserve.'},
+        {k: 'simplepairs', fam: 'pairs', name: 'Les paires', diff: 1, mode: 'sum', same: true, grid: [3, 3], desc: 'Une grille de 9 cartes : enlève deux cartes de même valeur ; la pioche remplit les trous. Un jeu de pure chance, pour se détendre.'},
+        {k: 'allinarow', fam: 'pairs', name: 'Tout en ligne', diff: 3, mode: 'allinarow', nostock: true, desc: '13 colonnes de 4 cartes : la première carte va où tu veux sur la défausse, puis chaque carte du bas d’une colonne qui est juste au-dessus ou au-dessous ; le Roi et l’As se suivent.'},
     ];
     const BY = new Map(GAMES.map(g => [g.k, g]));
     /** les réglages complets d'un jeu (valeurs par défaut) */
@@ -517,6 +541,7 @@
             if (def.faces === 'four' && cs.length === 4) return cs.every(c => c.r >= 10) && cs.every(c => c.r === cs[0].r);
             if (def.single && cs.length === 1) return cs[0].r === def.single; // Treize : le Roi s'en va seul
             if (cs.length !== 2) return false;
+            if (def.same) return cs[0].r === cs[1].r; // Les paires : deux cartes de même valeur
             if (def.faces && cs.some(face)) return false;
             return cs[0].r + cs[1].r === def.sum;
         },
@@ -652,6 +677,75 @@
         end(st) { st.won = st.piles.filter(p => p.type === 'found').every(p => p.cards.length === 13); },
         moves(st, def) { const out = []; st.piles.filter(p => (p.type === 'waste' || p.type === 'tab') && p.cards.length).forEach(p => st.piles.filter(q => q.type === 'found').forEach(q => { if (this.canDrop(st, def, [top(p)], q.id, p.id)) out.push({from: p.id, idx: p.cards.length - 1, to: q.id, score: 10}); })); return out; },
         canStock: st => !pileOf(st, 'waste').cards.length && !!pileOf(st, 'stock').cards.length,
+    };
+
+    // 🕳 tout en ligne : le trou noir sans carte de départ, 13 colonnes de 4
+    MODES.allinarow = {
+        ...MODES.blackhole,
+        deal(def, seed) {
+            const st = mkState(def.k, seed), d = fullDeck(seed); st.width = 13 * U * 0.82;
+            for (let t = 0; t < 13; t++) { const p = addPile(st, 't' + t, 'tab', t * U * 0.82, 0, 'down'); for (let j = 0; j < 4; j++) { const c = d.shift(); c.up = true; p.cards.push(c); } }
+            addPile(st, 'waste', 'found', 6 * U * 0.82, 2.4); return st;
+        },
+        ok(st, def, c) { const w = top(pileOf(st, 'waste')); return !w || near(c, w, true); },
+    };
+    // 🕳 Montana : 4 rangées de 13, les As enlevés font des trous
+    const mtId = (r, c) => `m${r}_${c}`;
+    MODES.montana = {
+        deal(def, seed) {
+            const st = mkState(def.k, seed), d = fullDeck(seed); st.width = 13 * U * 0.86; st.redeals = 2;
+            const out = addPile(st, 'out', 'found', 0, 4 * 1.42);
+            for (let r = 0; r < 4; r++) for (let c = 0; c < 13; c++) { const p = addPile(st, mtId(r, c), 'slot', c * U * 0.86, r * 1.42); const x = d.shift(); x.up = true; if (x.r === 1) out.cards.push(x); else p.cards.push(x); }
+            return st;
+        },
+        /** la carte qui va dans ce trou (null si aucune) : la voisine de gauche + 1, même couleur ; un 2 au début d'une rangée */
+        wants(st, id) {
+            const [r, c] = id.slice(1).split('_').map(Number); if (pileOf(st, id).cards.length) return null;
+            if (c === 0) return {r: 2, any: true};
+            const left = top(pileOf(st, mtId(r, c - 1))); if (!left || left.r === 13) return null;
+            return {r: left.r + 1, s: left.s};
+        },
+        fits(st, id, card) { const w = this.wants(st, id); return !!w && card.r === w.r && (w.any || card.s === w.s); },
+        canPick: (st, def, pid) => { const p = pileOf(st, pid); return p?.type === 'slot' && !!p.cards.length; },
+        canDrop(st, def, cards, toId, fromId) { const to = pileOf(st, toId); return !!to && to.type === 'slot' && cards.length === 1 && toId !== fromId && this.fits(st, toId, cards[0]); },
+        move(st, def, fromId, idx, toId) { const from = pileOf(st, fromId); if (!from?.cards.length || !this.canDrop(st, def, [top(from)], toId, fromId)) return false; pileOf(st, toId).cards.push(from.cards.pop()); st.moves++; this.end(st); return true; },
+        tap(st, def, pid) { const p = pileOf(st, pid); if (!p?.cards.length) return false; const gap = st.piles.find(q => q.type === 'slot' && this.fits(st, q.id, top(p))); return gap ? this.move(st, def, pid, 0, gap.id) : false; },
+        /** les cartes déjà rangées au début d'une rangée (2, 3, 4… dans une même couleur) */
+        sorted(st, r) { let n = 0; const first = top(pileOf(st, mtId(r, 0))); if (!first || first.r !== 2) return 0; for (let c = 0; c < 12; c++) { const x = top(pileOf(st, mtId(r, c))); if (x && x.r === c + 2 && x.s === first.s) n++; else break; } return n; },
+        stock(st) {
+            if (st.redeals <= 0) return {ok: false, msg: 'Plus de redistribution possible.'};
+            const keep = [0, 1, 2, 3].map(r => this.sorted(st, r)), loose = [];
+            for (let r = 0; r < 4; r++) for (let c = keep[r]; c < 13; c++) loose.push(...pileOf(st, mtId(r, c)).cards.splice(0));
+            const mixed = shuffle(loose, rng(st.seed + ':m' + st.redeals));
+            for (let r = 0; r < 4; r++) for (let c = keep[r] + 1; c < 13; c++) { const x = mixed.shift(); if (x) { x.up = true; pileOf(st, mtId(r, c)).cards.push(x); } }
+            st.redeals--; st.moves++; this.end(st); return {ok: true, msg: 'Ramassé, mélangé et redistribué.'};
+        },
+        end(st) { st.won = [0, 1, 2, 3].every(r => this.sorted(st, r) === 12); },
+        moves(st) { const out = []; st.piles.filter(q => q.type === 'slot' && !q.cards.length).forEach(gap => st.piles.forEach(p => { if (p.type === 'slot' && p.cards.length && p !== gap && this.fits(st, gap.id, top(p))) out.push({from: p.id, idx: 0, to: gap.id, score: 10}); })); return out; },
+        canStock: st => st.redeals > 0,
+    };
+    // 🏛 Nestor : des paires de même valeur, en bas des colonnes ou dans la réserve
+    MODES.nestor = {
+        multi: true,
+        deal(def, seed) {
+            const st = mkState(def.k, seed); let d = fullDeck(seed); st.width = 8 * U; st.gone = 0;
+            const cols = Array.from({length: 8}, (_, t) => addPile(st, 't' + t, 'tab', t * U, 0, 'down'));
+            // comme à la main : pas deux cartes de même valeur dans une colonne (si on peut)
+            cols.forEach(p => { for (let j = 0; j < 6; j++) { let k = d.findIndex(c => !p.cards.some(x => x.r === c.r)); if (k < 0) k = 0; const [c] = d.splice(k, 1); c.up = true; p.cards.push(c); } });
+            d.forEach((c, j) => { c.up = true; addPile(st, 'r' + j, 'slot', (2 + j) * U, 3.4).cards.push(c); });
+            addPile(st, 'out', 'found', 7 * U, 3.4); return st;
+        },
+        canPick: (st, def, pid) => { const p = pileOf(st, pid); return !!p && (p.type === 'tab' || p.type === 'slot') && !!p.cards.length; },
+        canDrop: none, move: none, tap: () => false,
+        trySet(st, def, refs) {
+            if (refs.length !== 2 || refs[0] === refs[1]) return false; const [a, b] = refs.map(id => pileOf(st, id));
+            if (!a || !b || !this.canPick(st, def, a.id) || !this.canPick(st, def, b.id) || top(a).r !== top(b).r) return false;
+            pileOf(st, 'out').cards.push(a.cards.pop(), b.cards.pop()); st.moves++; this.end(st); return true;
+        },
+        stock: () => ({ok: false, msg: 'Pas de pioche dans ce jeu.'}),
+        end(st) { st.won = st.piles.every(p => p.type === 'found' || !p.cards.length); },
+        moves(st, def) { const fr = st.piles.filter(p => this.canPick(st, def, p.id)), out = []; fr.forEach((a, i) => fr.slice(i + 1).forEach(b => { if (top(a).r === top(b).r) out.push({set: [a.id, b.id], score: 10}); })); return out; },
+        canStock: () => false,
     };
 
     /** un ensemble de cartes (jeux à paires) → vrai si enlevé */

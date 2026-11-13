@@ -1,0 +1,80 @@
+/* 🧭 Premier lancement (assets/js/app-premier.js, maquette docs/design/premier-lancement.html).
+ * Les couleurs suivent l'Apparence (variables) ; le reste du mode sombre est écrit par scripts/build-dark-css.py. */
+
+/* P1 · le lien discret sous « Créer et ouvrir la base » */
+.pl-other { display: inline-flex; align-items: center; gap: 5px; margin-top: 12px; padding: 4px 0; border: 0; background: none; font: 600 13px var(--font-family); color: #555; text-decoration: underline dotted; text-underline-offset: 3px; cursor: pointer; min-height: 32px; }
+.pl-other.is-on { color: var(--blue); text-decoration-style: solid; }
+.pl-alt h3 { margin: 0 0 10px; font-size: 1.05rem; }
+.pl-alt-what { font-size: 12.5px; color: var(--muted); border-top: 1px dashed var(--line-color); padding-top: 8px; margin: 8px 0 14px; line-height: 1.45; }
+.pl-alt .ui-hint { margin-top: 8px; }
+.pl-row2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.pl-field { display: flex; flex-direction: column; gap: 6px; font-size: .85rem; }
+.pl-lab { color: #555; }
+.pl-seg { display: flex; flex-wrap: nowrap; }
+.pl-seg button { flex: 1 1 auto; }
+
+/* les 9 grandes cartes d'usages */
+.pl-fold { border-top: var(--line); margin-top: 28px; padding-top: 20px; text-align: left; }
+.pl-fold > h3 { margin: 0 0 2px; font-size: 1.15rem; }
+.pl-fold > p { margin: 0 0 14px; font-size: 13px; color: var(--muted); }
+.pl-usages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.pl-uz { position: relative; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 2px 8px; align-content: start; min-width: 0; padding: 11px 11px 10px; border: var(--line); background: var(--white); cursor: pointer; text-align: left; }
+.pl-uz:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.pl-uz .pl-ui { grid-row: span 3; width: 34px; height: 34px; line-height: 34px; font-size: 22px; text-align: center; background: #f4f5f7; border: 1.5px solid #c9ccd3; }
+.pl-uz b { font-size: 14px; line-height: 1.25; padding-right: 18px; }
+.pl-uz .pl-pp { font-size: 12.5px; color: #444; line-height: 1.4; }
+.pl-uz small { display: block; font-size: 11.5px; color: #777; line-height: 1.4; margin-top: 5px; border-top: 1px dashed #d5d8de; padding-top: 5px; }
+.pl-uz small em { display: block; font: 800 10px var(--font-family); font-style: normal; letter-spacing: .08em; text-transform: uppercase; color: #999; }
+.pl-uz.is-on { border-color: var(--blue); background: var(--blue-soft); box-shadow: 0 0 0 3px rgba(5, 93, 255, .18); }
+.pl-uz.is-on .pl-ui { background: var(--blue); border-color: var(--blue); }
+.pl-uz .pl-rk { position: absolute; right: 8px; top: 8px; width: 16px; height: 16px; border: 2px solid var(--ink); border-radius: 50%; background: var(--white); }
+.pl-uz.is-on .pl-rk { background: var(--blue); border-color: var(--blue); box-shadow: inset 0 0 0 2px var(--white); }
+.pl-uz.is-def b::after { content: " · comme d’habitude"; font-weight: 500; color: #888; font-size: 12px; }
+.pl-ofoot { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 12px; font-size: 12.5px; color: #555; }
+.pl-lnk { margin-left: auto; border: 0; background: none; padding: 4px 0; color: var(--blue); font: 700 13px var(--font-family); cursor: pointer; min-height: 32px; }
+
+/* « Ou bien : Commencer avec une base vide · 🧪 Essayer avec une base d'exemple » */
+.pl-start { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 26px; padding-top: 18px; border-top: 1px dashed var(--line-color); text-align: left; }
+.pl-start-t { font-weight: 700; font-size: 13px; }
+.pl-start .ui-hint { flex-basis: 100%; margin: 0; }
+
+/* 🧪 bandeau de la base d'exemple (discret, comme celui du mode consultation) */
+#example-banner { position: sticky; top: 0; z-index: 199; display: flex; flex-wrap: wrap; gap: .4rem 1rem; align-items: center; justify-content: center; padding: .3rem 1rem; background: #fff8e1; border-bottom: 1.5px solid #e1a500; color: #4a3a00; font-size: .85em; }
+#example-banner .pl-ex-badge { font-weight: 800; }
+#example-banner .button { min-height: 28px; }
+body.is-kiosk #example-banner .button { display: none; }
+html.ms-open #example-banner { display: none; }
+
+/* P5 · Réglages → Apparence → « 🧭 Usage de l'app » */
+.pl-usage-panel { position: relative; }
+.pl-usage-head { display: flex; justify-content: flex-end; margin-bottom: 6px; }
+.pl-urow { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 8px 4px; border-bottom: 1px solid var(--line-color); font-size: 13px; }
+.pl-urow .pl-uic { font-size: 20px; text-align: center; }
+.pl-urow small { display: block; color: var(--muted); font-size: 11.5px; line-height: 1.35; }
+.pl-urow.is-on { background: var(--blue-soft); }
+.pl-startsel { display: flex; flex-direction: column; gap: 4px; margin-top: 14px; font-size: .85rem; max-width: 420px; }
+.pl-dlg-more { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+
+@media (max-width: 900px) { .pl-usages { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) {
+    .pl-usages { grid-template-columns: minmax(0, 1fr); }
+    .pl-uz { min-height: 44px; }
+    .pl-uz small { display: none; }
+    .pl-uz.is-on small { display: block; }
+    .pl-row2 { grid-template-columns: minmax(0, 1fr); }
+    .pl-urow { grid-template-columns: 26px minmax(0, 1fr) auto; }
+    #example-banner .pl-ex-text { display: none; }
+}
+
+:root[data-theme="dark"] .pl-other.is-on { color: var(--blue); }
+:root[data-theme="dark"] .pl-uz.is-on { box-shadow: 0 0 0 3px rgba(85, 153, 255, .25); }
+:root[data-theme="dark"] .pl-uz.is-on .pl-rk { box-shadow: inset 0 0 0 2px var(--white); }
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+:root[data-theme="dark"] .pl-other{color:#c7c7c7}
+:root[data-theme="dark"] .pl-lab{color:#c7c7c7}
+:root[data-theme="dark"] .pl-uz .pl-ui{background:#222429;border:1.5px solid #494b50}
+:root[data-theme="dark"] .pl-uz .pl-pp{color:#c7c7c7}
+:root[data-theme="dark"] .pl-uz small{border-top:1px dashed #484b51}
+:root[data-theme="dark"] .pl-ofoot{color:#c7c7c7}
+:root[data-theme="dark"] #example-banner{background:#3e3412;color:#f8edc3}
+/* ═════ fin du mode sombre automatique ═════ */

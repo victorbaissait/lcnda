@@ -8,6 +8,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s).replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? String(v[k]) : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const PALETTE = ['#4e79a7', '#f28e2b', '#e15759', '#76b7b2', '#59a14f', '#edc948', '#b07aa1', '#ff9da7', '#9c755f', '#bab0ac', '#1f77b4', '#d62728', '#2ca02c', '#9467bd', '#17becf', '#bcbd22'];
@@ -17,6 +18,8 @@
         sepia: ['#4b3621', '#6f4e37', '#8b6f47', '#a0826d', '#b5967a', '#c8ad8d', '#d9c3a5', '#704214', '#5c4033', '#987654', '#c19a6b', '#e0cda9'],
         gris: ['#222222', '#444444', '#666666', '#888888', '#aaaaaa', '#cccccc']};
     const FONT = 'Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif';
+    /** la police du dessin : celle d'un style (o.font, choisie avec la liste des polices E5), sinon celle de l'app ; rien qui puisse sortir de l'attribut */
+    const fontOf = o => { const f = String(o?.font || '').replace(/[^\p{L}\p{N} _\-]/gu, '').trim().slice(0, 60); return f ? `'${f}', ${FONT}` : FONT; };
 
     /* ─── Petits outils ─── */
     const num = v => { if (typeof v === 'number') return Number.isFinite(v) ? v : 0; const n = parseFloat(String(v ?? '').replace(/[\s  ]/g, '').replace(',', '.')); return Number.isFinite(n) ? n : 0; };
@@ -25,7 +28,9 @@
     const r2 = v => Math.round(v * 100) / 100;
     /** une couleur sûre (rien qui puisse sortir de l'attribut) */
     const color = (c, fb = '#888') => { const t = String(c || '').trim(); return /^#[0-9a-f]{3,8}$/i.test(t) || /^[a-z]{3,20}$/i.test(t) || /^(rgb|hsl)a?\([\d\s.,%]+\)$/i.test(t) ? t : fb; };
-    const pal = spec => PALETTES[spec.o?.palette] || PALETTE;
+    // ⚙️ Personnaliser (heritage-diagram-perso.js) : une palette à soi (o.colors, celle d'un style enregistré) passe devant les palettes nommées
+    const ownColors = spec => { const c = spec.o?.colors; if (!Array.isArray(c)) return null; const l = c.map(x => color(x, '')).filter(Boolean).slice(0, 24); return l.length ? l : null; };
+    const pal = spec => ownColors(spec) || PALETTES[spec.o?.palette] || PALETTE;
     const pick = (spec, i, c) => color(c, pal(spec)[i % pal(spec).length]);
     const textW = (s, fs) => [...String(s ?? '')].reduce((w, ch) => w + (/[ilI.,:;'!|]/.test(ch) ? .28 : /[mwMW@]/.test(ch) ? .85 : /[A-Z]/.test(ch) ? .66 : /\s/.test(ch) ? .3 : .55), 0) * fs;
     const contrast = c => { const m = String(c).match(/^#([0-9a-f]{6}|[0-9a-f]{3})\b/i); if (!m) return '#fff'; let h = m[1]; if (h.length === 3) h = h.replace(/./g, x => x + x); const [r, g, b] = [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16)); return (r * 299 + g * 587 + b * 114) / 1000 > 150 ? '#1d1d1f' : '#fff'; };
@@ -73,6 +78,7 @@
     }
 
     /* ─── Assemblage : titre, sous-titre, dessin, légende, source ─── */
+    let styleSeq = 0;
     function compose(spec, kind, W) {
         const o = spec.o || {}, fs = 12 * clamp(num(o.scale) || 1, .5, 3), pad = 16;
         const fg = color(o.fg, '#1d1d1f'), bgv = o.bg === 'transparent' ? '' : color(o.bg === 'custom' ? o.bgColor : '#ffffff', '#ffffff');
@@ -95,7 +101,13 @@
         }
         if (o.source) { out += T(pad, bottom + fs * 1.3, o.source, {size: fs * .85, fill: fg, style: 'italic'}); bottom += fs * 2; }
         const H = Math.ceil(bottom + pad);
-        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${Math.ceil(W)} ${H}" width="${Math.ceil(W)}" height="${H}" font-family="${FONT}" color="${fg}" style="color:${fg}" role="img" aria-label="${esc(o.title || kind.label || 'Diagramme')}">${o.subtitle || o.source || body.desc ? `<desc>${esc([o.subtitle, body.desc, o.source].filter(Boolean).join(' — '))}</desc>` : ''}${bgv ? `<rect width="100%" height="100%" fill="${bgv}"/>` : ''}${head}${out}</svg>`; // titre et description pour les lecteurs d'écran
+        // ⚙️ Personnaliser (heritage-diagram-perso.js) : les axes du dessin (lignes de repère, annotations à une date), puis ce qu'on pose dessus
+        const shift = a => a && {...a, x0: a.x0 + pad, y0: a.y0 + y, ...(Array.isArray(a.points) ? {points: a.points.map(([t, x]) => [t, x + pad])} : {})};
+        const R0 = ext.diagramRender, ctx = {W: Math.ceil(W), H, fs, pad, top: y, axis: shift(body.axis), time: shift(body.time)};
+        let deco = ''; if (typeof R0?.overlay === 'function') { try { deco = R0.overlay(spec, ctx) || ''; } catch (e) { console.error(e); } }
+        const scope = 'dgs' + (++styleSeq), css = typeof R0?.styleCss === 'function' ? R0.styleCss(o, scope) : '';
+        out += deco;
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${Math.ceil(W)} ${H}" width="${Math.ceil(W)}" height="${H}" font-family="${fontOf(o)}"${css ? ` class="${scope}"` : ''} color="${fg}" style="color:${fg}" role="img" aria-label="${esc(o.title || kind.label || 'Diagramme')}">${o.subtitle || o.source || body.desc ? `<desc>${esc([o.subtitle, body.desc, o.source].filter(Boolean).join(' — '))}</desc>` : ''}${css ? `<style>${css}</style>` : ''}${bgv ? `<rect class="dg-bg" width="100%" height="100%" fill="${bgv}"/>` : ''}${head}${out}</svg>`; // titre et description pour les lecteurs d'écran
     }
 
     /* ═════════ 🏛️ Parlements ═════════ */
@@ -160,7 +172,7 @@
         const shape = o.shape || 'circle';
         const colorAt = []; parties.forEach(p => { for (let k = 0; k < p.n; k++) colorAt.push(p); });
         const legend = parties.filter(p => p.n > 0 || o.showEmpty).map(p => ({label: o.legendSeats === false ? p.name : `${p.name} (${fmt(p.n, 0)})`, color: p.color}));
-        if (!N) return {h: 60, svg: T(W / 2, 30, 'Ajoute des groupes et leur nombre de sièges.', {anchor: 'middle', size: fs, fill: '#888'}), legend};
+        if (!N) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des groupes et leur nombre de sièges.'), {anchor: 'middle', size: fs, fill: '#888'}), legend};
         const seatSvg = (x, y, d, p, extra = '') => { const s = d * (1 - gap), tip = `<title>${esc(p.name)} — ${fmt(p.n, 0)} siège${p.n > 1 ? 's' : ''}</title>`;
             if (shape === 'square' || shape === 'rounded') return `<rect x="${r2(x - s / 2)}" y="${r2(y - s / 2)}" width="${r2(s)}" height="${r2(s)}" rx="${shape === 'rounded' ? r2(s * .25) : 0}" fill="${p.color}"${extra}>${tip}</rect>`;
             return `<circle cx="${r2(x)}" cy="${r2(y)}" r="${r2(s / 2)}" fill="${p.color}"${extra}>${tip}</circle>`; };
@@ -205,15 +217,15 @@
             sS.forEach((p, i) => { svg += seatSvg(s / 2, totalH / 2 + (i - (count('speaker') - 1) / 2) * s, s, p, stroke); });
             if (count('cross')) { const cx0 = sp + colsMain * s + s * 1.5, cr = Math.ceil(count('cross') / crossC); sC.forEach((p, i) => { svg += seatSvg(cx0 + (i % crossC) * s + s / 2, totalH / 2 - cr * s / 2 + Math.floor(i / crossC) * s + s / 2, s, p, stroke); }); }
             h = totalH;
-            if (o.total !== false) svg += T(sp + colsMain * s / 2, gov.h + s * .8, o.centerText || `${fmt(N, 0)} sièges`, {size: fs * 1.1, anchor: 'middle', weight: 700});
+            if (o.total !== false) svg += T(sp + colsMain * s / 2, gov.h + s * .8, o.centerText || i18n('{n} sièges', {n: fmt(N, 0)}), {size: fs * 1.1, anchor: 'middle', weight: 700});
         } else { // salle de classe / amphithéâtre droit, face à la tribune
             const R = clamp(Math.round(num(o.rows)) || Math.max(1, Math.round(Math.sqrt(N / 2.4))), 1, 80), C = Math.ceil(N / R);
             const s = Math.min(W / C, fs * 3), x0 = (W - C * s) / 2, top = s * 2.2;
-            svg += `<rect x="${r2(W / 2 - s * 3)}" y="0" width="${r2(s * 6)}" height="${r2(s * 1.1)}" rx="${r2(s * .2)}" fill="none" stroke="currentColor" stroke-width="1.2"/>` + T(W / 2, s * .58, o.centerText || `Tribune · ${fmt(N, 0)} sièges`, {size: Math.min(fs, s * .55), anchor: 'middle'});
+            svg += `<rect x="${r2(W / 2 - s * 3)}" y="0" width="${r2(s * 6)}" height="${r2(s * 1.1)}" rx="${r2(s * .2)}" fill="none" stroke="currentColor" stroke-width="1.2"/>` + T(W / 2, s * .58, o.centerText || i18n('Tribune · {n} sièges', {n: fmt(N, 0)}), {size: Math.min(fs, s * .55), anchor: 'middle'});
             for (let i = 0; i < N; i++) { const c = Math.floor(i / R), rr = i % R; svg += seatSvg(x0 + c * s + s / 2, top + rr * s + s / 2, s, colorAt[i], stroke); }
             h = top + R * s;
         }
-        if (o.majority && o.majority !== 'none') { svg += T(W / 2, h + fs * 1.2, `Majorité absolue : ${fmt(majority, 0)} sièges`, {size: fs, anchor: 'middle'}); h += fs * 2; }
+        if (o.majority && o.majority !== 'none') { svg += T(W / 2, h + fs * 1.2, i18n('Majorité absolue : {n} sièges', {n: fmt(majority, 0)}), {size: fs, anchor: 'middle'}); h += fs * 2; }
         return {h, svg, legend};
     }
 
@@ -234,7 +246,7 @@
         if (o.order === 'start') lines.sort((x, y) => Math.min(...x.stints.map(s => s.a)) - Math.min(...y.stints.map(s => s.a)));
         const evs = rows(spec, 'events').map(e => ({at: when(e.date, false), label: String(e.label || ''), kind: e.kind || 'album', color: e.color})).filter(e => e.at !== null);
         const all = [...lines.flatMap(l => l.stints.flatMap(s => [s.a, s.b])), ...evs.map(e => e.at)];
-        if (!all.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des lignes : un nom, des rôles, une date de début et de fin.', {anchor: 'middle', size: fs, fill: '#888'}), legend: []};
+        if (!all.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des lignes : un nom, des rôles, une date de début et de fin.'), {anchor: 'middle', size: fs, fill: '#888'}), legend: []};
         let from = when(o.from, false) ?? Math.floor(Math.min(...all)), to = when(o.to, false) ?? Math.ceil(Math.max(...all) + .001);
         if (to <= from) to = from + 1;
         const nameW = Math.min(W * .35, Math.max(...lines.map(l => textW(l.name, fs)), 20) + 12);
@@ -264,14 +276,15 @@
         const KL = {album: 'Album studio', live: 'Album live', single: 'Single', tour: 'Tournée', autre: 'Autre événement'};
         const legend = [...roles.filter(r => lines.some(l => l.stints.some(s => s.roles.includes(r)))).map(r => ({label: r.name, color: r.color})),
             ...[...new Set(evs.map(e => e.kind))].map(k => ({label: (o.kindLabels || {})[k] || KL[k] || k, color: (KIND[k] || KIND.autre)[0], type: (KIND[k] || KIND.autre)[2] ? 'dash' : 'line', width: 2}))];
-        return {h: y0 + plotH + fs * 1.8, svg, legend};
+        return {h: y0 + plotH + fs * 1.8, svg, legend, time: {x0, y0, w: pw, h: plotH, from, to}}; // time : l'axe des années (annotations à une date, heritage-diagram-perso.js)
     }
 
     /* ═════════ 📅 Frise chronologique ═════════ */
     function chrono(spec, W, fs) {
         const o = spec.o || {}, evs = rows(spec).map((e, i) => ({at: when(e.date, false), date: String(e.date || ''), label: String(e.label || ''), color: pick(spec, i, e.color)})).filter(e => e.at !== null).sort((a, b) => a.at - b.at);
-        if (!evs.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des dates et ce qui s’est passé.', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!evs.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des dates et ce qui s’est passé.'), {anchor: 'middle', size: fs, fill: '#888'})};
         let from = evs[0].at, to = evs[evs.length - 1].at; if (to - from < 1) { from -= .5; to += .5; }
+        if (Number.isFinite(o.__t0) && Number.isFinite(o.__t1) && o.__t1 > o.__t0) { from = o.__t0; to = o.__t1; } // ▶ lecture dans le temps : la frise garde toute sa longueur
         const padX = Math.min(W * .12, 80), X = v => padX + (v - from) / (to - from) * (W - 2 * padX);
         const lanes = clamp(Math.round(num(o.lanes) || 3), 1, 8), laneH = fs * 3.2, mid = lanes * laneH + 10;
         let svg = `<line x1="0" y1="${mid}" x2="${W}" y2="${mid}" stroke="currentColor" stroke-width="2"/>`;
@@ -286,7 +299,7 @@
             svg += `<line x1="${r2(x)}" y1="${mid}" x2="${r2(x)}" y2="${r2(up ? ly - fs * .5 : ly + fs * 1.6)}" stroke="${e.color}" stroke-width="1.2"/><circle cx="${r2(x)}" cy="${mid}" r="5" fill="${e.color}"/>`;
             svg += T(x, ly, e.date, {size: fs * .85, anchor: 'middle', weight: 700, fill: e.color}) + T(x, ly + fs * 1.1, e.label, {size: fs, anchor: 'middle'});
         });
-        return {h: maxY - minY + 4, svg: `<g transform="translate(0 ${r2(4 - minY)})">${svg}</g>`};
+        return {h: maxY - minY + 4, svg: `<g transform="translate(0 ${r2(4 - minY)})">${svg}</g>`, time: {x0: padX, y0: 0, w: W - 2 * padX, h: maxY - minY + 4, from, to}};
     }
 
     /* ═════════ 📊 Tableaux de chiffres (catégories × séries) ═════════ */
@@ -294,66 +307,95 @@
         const series = (Array.isArray(spec.series) && spec.series.length ? spec.series : [{name: 'Valeur'}]).map((s, j) => ({name: String(s?.name || `Série ${j + 1}`), color: pick(spec, j, s?.color)}));
         // ids / ids0, ids1… : les personnes derrière une barre ou une part (« Compter dans ma base ») → un clic ouvre leur liste (heritage-diagram-famille.js)
         const idl = v => String(v ?? '').split(',').map(x => Math.floor(Number(x))).filter(x => x > 0 && x < 1e9).slice(0, 400);
-        const cats = rows(spec).map((r, i) => ({label: String(r.label ?? ''), color: pick(spec, i, r.color), v: series.map((_, j) => num(r['s' + j])), ids: series.map((_, j) => idl(r['ids' + j] ?? (j === 0 ? r.ids : '')))}));
+        // __off : une catégorie gardée à sa place mais pas encore dessinée (▶ lecture dans le temps, heritage-diagram-perso.js)
+        const cats = rows(spec).map((r, i) => ({label: String(r.label ?? ''), color: pick(spec, i, r.color), v: series.map((_, j) => num(r['s' + j])), ids: series.map((_, j) => idl(r['ids' + j] ?? (j === 0 ? r.ids : ''))), off: r.__off === true}));
         return {series, cats};
     }
     const pidAttr = (c, j, label) => (c.ids?.[j]?.length ? ` data-dfa-pids="${c.ids[j].join(',')}" data-dfa-t="${esc(label)}" style="cursor:pointer"` : '');
     const seriesLegend = (series, cats, single) => single ? cats.map(c => ({label: c.label, color: c.color})) : series.map(s => ({label: s.name, color: s.color}));
+    /** les repères d'une échelle logarithmique (puissances de 10, et 2 et 5 quand il y a peu de décades) */
+    function logTicks(lo, hi) {
+        const a = Math.floor(Math.log10(lo) + 1e-9), b = Math.ceil(Math.log10(hi) - 1e-9), out = [], few = b - a <= 2;
+        for (let e = a; e <= Math.max(b, a + 1) && out.length < 60; e++) [1, ...(few ? [2, 5] : [])].forEach(m => { const v = m * 10 ** e; if (v <= 10 ** Math.max(b, a + 1) + 1e-9) out.push(+v.toPrecision(12)); });
+        return {lo: 10 ** a, hi: 10 ** Math.max(b, a + 1), ticks: out};
+    }
     function cartesian(spec, W, fs, mode) {
         const o = spec.o || {}, {series, cats} = table(spec), horiz = mode === 'bars', stacked = mode === 'stacked' || mode === 'stacked100', pct = mode === 'stacked100';
-        if (!cats.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des lignes de chiffres.', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!cats.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des lignes de chiffres.'), {anchor: 'middle', size: fs, fill: '#888'})};
         const single = series.length === 1 && !['line', 'area'].includes(mode);
         const vals = cats.map(c => pct ? c.v.map(v => { const t = c.v.reduce((a, b) => a + Math.max(0, b), 0) || 1; return Math.max(0, v) / t * 100; }) : c.v);
+        // ⚙️ deuxième axe (à droite) : une série dessinée en courbe, avec sa propre échelle (colonnes, courbe, aire)
+        const y2 = !horiz && !stacked && series.length > 1 && o.y2 !== undefined && o.y2 !== '' && o.y2 !== null && Number.isInteger(Number(o.y2)) ? clamp(Number(o.y2), 0, series.length - 1) : -1;
+        const main = (v, j) => j !== y2, live = cats.map(c => !c.off);
+        const flatMain = vals.flatMap((v, i) => live[i] ? v.filter((_, j) => main(v, j)) : []);
         const sums = vals.map(v => v.reduce((a, b) => a + Math.max(0, b), 0)), negs = vals.map(v => v.reduce((a, b) => a + Math.min(0, b), 0));
-        let lo = Math.min(0, ...(stacked ? negs : vals.flat())), hi = Math.max(0, ...(stacked ? sums : vals.flat()));
+        let lo = Math.min(0, ...(stacked ? negs : flatMain)), hi = Math.max(0, ...(stacked ? sums : flatMain));
         if (num(o.min) || o.min === '0') lo = num(o.min); if (o.max !== undefined && o.max !== '') hi = num(o.max) || hi;
+        // ⚙️ même échelle imposée (petits multiples, lecture dans le temps) : l'axe ne bouge pas d'un dessin à l'autre
+        if (Number.isFinite(o.__lo) && Number.isFinite(o.__hi) && o.__hi > o.__lo) { lo = o.__lo; hi = o.__hi; }
         if (pct) { lo = 0; hi = 100; }
-        const tk = ticks(lo, hi, 5); lo = tk.lo; hi = tk.hi;
+        // ⚙️ échelle logarithmique : seulement pour des valeurs toutes positives, sans empilement
+        const pos = flatMain.filter(v => v > 0), log = !!o.log && !stacked && !pct && pos.length > 0 && flatMain.every(v => v > 0);
+        const tk = log ? logTicks(Math.min(...pos, Number.isFinite(o.__lo) && o.__lo > 0 ? o.__lo : Infinity), Math.max(...pos, Number.isFinite(o.__hi) ? o.__hi : 0)) : ticks(lo, hi, 5); lo = tk.lo; hi = tk.hi;
         const unit = o.unit ? ' ' + o.unit : '', tl = v => fmt(v) + (pct ? ' %' : '');
+        const V = log ? v => (Math.log10(Math.max(v, lo)) - Math.log10(lo)) / (Math.log10(hi) - Math.log10(lo) || 1) : v => (v - lo) / (hi - lo || 1);
+        let tk2 = null, V2 = null;
+        if (y2 >= 0) { const v2 = vals.filter((_, i) => live[i]).map(v => v[y2]); tk2 = ticks(Math.min(0, ...v2), Math.max(0, ...v2), 5); V2 = v => (v - tk2.lo) / (tk2.hi - tk2.lo || 1); }
         const catLab = horiz ? Math.min(W * .32, Math.max(...cats.map(c => textW(c.label, fs))) + 10) : Math.max(...tk.ticks.map(v => textW(tl(v), fs * .85))) + 10;
-        const plotW = W - catLab - 6, n = cats.length;
+        const right = tk2 ? Math.max(...tk2.ticks.map(v => textW(fmt(v), fs * .85))) + 12 : 0;
+        const plotW = W - catLab - 6 - right, n = cats.length;
         const slot = (horiz ? 0 : plotW) / n;
         const rot = !horiz && Math.max(...cats.map(c => textW(c.label, fs * .9))) > slot * .95;
         const bottom = horiz ? fs * 1.6 : rot ? Math.min(140, Math.max(...cats.map(c => textW(c.label, fs * .9))) * .72 + fs) : fs * 1.8;
         const plotH = horiz ? n * clamp(fs * 2.2 * Math.max(1, stacked ? 1 : series.length * .7), 14, 80) : clamp(num(o.height) || W * .45, 120, 1600);
-        const x0 = catLab, y0 = 6, V = v => (v - lo) / (hi - lo || 1);
+        const x0 = catLab, y0 = 6, lw = clamp(num(o.lineW) || 2.5, .5, 12);
         let svg = '';
-        tk.ticks.forEach(v => { if (horiz) { const x = x0 + V(v) * plotW; svg += `<line x1="${r2(x)}" y1="${y0}" x2="${r2(x)}" y2="${r2(y0 + plotH)}" stroke="currentColor" stroke-opacity="${v === 0 ? .5 : .12}"/>` + T(x, y0 + plotH + fs, tl(v), {size: fs * .85, anchor: 'middle'}); }
-            else { const y = y0 + plotH - V(v) * plotH; svg += `<line x1="${x0}" y1="${r2(y)}" x2="${r2(x0 + plotW)}" y2="${r2(y)}" stroke="currentColor" stroke-opacity="${v === 0 ? .5 : .12}"/>` + T(x0 - 6, y, tl(v), {size: fs * .85, anchor: 'end'}); } });
+        tk.ticks.forEach(v => { const grid = v === 0 ? '' : ' class="dg-grid"'; if (horiz) { const x = x0 + V(v) * plotW; svg += `<line${grid} x1="${r2(x)}" y1="${y0}" x2="${r2(x)}" y2="${r2(y0 + plotH)}" stroke="currentColor" stroke-opacity="${v === 0 ? .5 : .12}"/>` + T(x, y0 + plotH + fs, tl(v), {size: fs * .85, anchor: 'middle'}); }
+            else { const y = y0 + plotH - V(v) * plotH; svg += `<line${grid} x1="${x0}" y1="${r2(y)}" x2="${r2(x0 + plotW)}" y2="${r2(y)}" stroke="currentColor" stroke-opacity="${v === 0 ? .5 : .12}"/>` + T(x0 - 6, y, tl(v), {size: fs * .85, anchor: 'end'}); } });
+        if (tk2) tk2.ticks.forEach(v => { const y = y0 + plotH - V2(v) * plotH; svg += T(x0 + plotW + 6, y, fmt(v), {size: fs * .85, fill: series[y2].color}); });
         const band = (horiz ? plotH : plotW) / n;
         const showV = o.values !== false;
-        if (mode === 'line' || mode === 'area') {
-            series.forEach((s, j) => {
-                const pts = cats.map((c, i) => [x0 + band * (i + .5), y0 + plotH - V(vals[i][j]) * plotH]);
-                const d = pts.map((p, i) => (i ? 'L' : 'M') + r2(p[0]) + ' ' + r2(p[1])).join(' ');
-                if (mode === 'area') svg += `<path d="${d} L${r2(pts[pts.length - 1][0])} ${r2(y0 + plotH - V(Math.max(lo, 0)) * plotH)} L${r2(pts[0][0])} ${r2(y0 + plotH - V(Math.max(lo, 0)) * plotH)} Z" fill="${s.color}" fill-opacity=".25"/>`;
-                svg += `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="2.5" stroke-linejoin="round"/>`;
-                pts.forEach((p, i) => { svg += `<circle cx="${r2(p[0])}" cy="${r2(p[1])}" r="3.5" fill="${s.color}"${pidAttr(cats[i], j, cats[i].label)}><title>${esc(cats[i].label)} — ${esc(s.name)} : ${fmt(vals[i][j])}${esc(unit)}</title></circle>`; if (showV && n <= 24) svg += T(p[0], p[1] - fs * .8, fmt(vals[i][j]), {size: fs * .8, anchor: 'middle'}); });
-            });
-        } else {
+        const curve = (s, j, VV) => {
+            const pts = cats.map((c, i) => c.off ? null : [x0 + band * (i + .5), y0 + plotH - VV(vals[i][j]) * plotH]);
+            let d = '', pen = false; pts.forEach(p => { if (!p) { pen = false; return; } d += (pen ? 'L' : 'M') + r2(p[0]) + ' ' + r2(p[1]) + ' '; pen = true; });
+            const on = pts.filter(Boolean), base = r2(y0 + plotH - VV(Math.max(VV === V ? lo : tk2.lo, 0)) * plotH);
+            if (mode === 'area' && VV === V && on.length) svg += `<path d="${d}L${r2(on[on.length - 1][0])} ${base} L${r2(on[0][0])} ${base} Z" fill="${s.color}" fill-opacity=".25"/>`;
+            if (d) svg += `<path d="${d.trim()}" fill="none" stroke="${s.color}" stroke-width="${lw}" stroke-linejoin="round"${VV !== V ? ' stroke-dasharray="6 3"' : ''}/>`;
+            pts.forEach((p, i) => { if (!p) return; svg += `<circle cx="${r2(p[0])}" cy="${r2(p[1])}" r="3.5" fill="${s.color}"${pidAttr(cats[i], j, cats[i].label)}><title>${esc(cats[i].label)} — ${esc(s.name)} : ${fmt(vals[i][j])}${esc(unit)}</title></circle>`; if (showV && n <= 24) svg += T(p[0], p[1] - fs * .8, fmt(vals[i][j]), {size: fs * .8, anchor: 'middle'}); });
+        };
+        if (mode === 'line' || mode === 'area') series.forEach((s, j) => { if (j !== y2) curve(s, j, V); });
+        else {
+            const bars = series.map((s, j) => [s, j]).filter(([, j]) => j !== y2);
             cats.forEach((c, i) => {
+                if (c.off) return;
                 let accP = 0, accN = 0;
-                const gw = band * .78, bw = stacked ? gw : gw / series.length;
-                series.forEach((s, j) => {
+                const gw = band * .78, bw = stacked ? gw : gw / bars.length;
+                bars.forEach(([s, j], jj) => {
                     const v = vals[i][j]; let a, b;
                     if (stacked) { if (v >= 0) { a = accP; b = accP += v; } else { a = accN; b = accN += v; } } else { a = 0; b = v; }
                     const pa = V(Math.max(lo, Math.min(a, b))), pb = V(Math.min(hi, Math.max(a, b))), fill = single ? c.color : s.color;
                     const tip = `<title>${esc(c.label)}${single ? '' : ' — ' + esc(s.name)} : ${fmt(c.v[j])}${esc(unit)}${pct ? ` (${fmt(v, 1)} %)` : ''}</title>`;
-                    if (horiz) { const y = y0 + band * i + (band - gw) / 2 + (stacked ? 0 : j * bw); svg += `<rect x="${r2(x0 + pa * plotW)}" y="${r2(y)}" width="${r2(Math.max(0, (pb - pa) * plotW))}" height="${r2(bw * .92)}" fill="${fill}"${pidAttr(c, j, c.label)}>${tip}</rect>`;
+                    if (horiz) { const y = y0 + band * i + (band - gw) / 2 + (stacked ? 0 : jj * bw); svg += `<rect x="${r2(x0 + pa * plotW)}" y="${r2(y)}" width="${r2(Math.max(0, (pb - pa) * plotW))}" height="${r2(bw * .92)}" fill="${fill}"${pidAttr(c, j, c.label)}>${tip}</rect>`;
                         if (showV && !stacked && v) svg += T(x0 + pb * plotW + 4, y + bw * .46, fmt(v) + unit, {size: fs * .8}); }
-                    else { const x = x0 + band * i + (band - gw) / 2 + (stacked ? 0 : j * bw); svg += `<rect x="${r2(x)}" y="${r2(y0 + plotH - pb * plotH)}" width="${r2(bw * .92)}" height="${r2(Math.max(0, (pb - pa) * plotH))}" fill="${fill}"${pidAttr(c, j, c.label)}>${tip}</rect>`;
+                    else { const x = x0 + band * i + (band - gw) / 2 + (stacked ? 0 : jj * bw); svg += `<rect x="${r2(x)}" y="${r2(y0 + plotH - pb * plotH)}" width="${r2(bw * .92)}" height="${r2(Math.max(0, (pb - pa) * plotH))}" fill="${fill}"${pidAttr(c, j, c.label)}>${tip}</rect>`;
                         if (showV && v && (stacked ? (pb - pa) * plotH > fs * 1.2 : true) && bw > fs * 1.2) svg += stacked ? T(x + bw * .46, y0 + plotH - (pa + pb) / 2 * plotH, fmt(v, pct ? 0 : 2), {size: fs * .75, anchor: 'middle', fill: contrast(fill)}) : T(x + bw * .46, y0 + plotH - pb * plotH - fs * .6, fmt(v), {size: fs * .78, anchor: 'middle'}); }
                 });
             });
         }
+        if (y2 >= 0) curve(series[y2], y2, V2);
         cats.forEach((c, i) => { if (horiz) svg += T(x0 - 6, y0 + band * (i + .5), cut(c.label, catLab - 8, fs), {size: fs, anchor: 'end'});
             else svg += rot ? T(x0 + band * (i + .5), y0 + plotH + 8, cut(c.label, 130, fs * .9), {size: fs * .9, anchor: 'end', rotate: -40, baseline: 'hanging'}) : T(x0 + band * (i + .5), y0 + plotH + fs, cut(c.label, band, fs * .9), {size: fs * .9, anchor: 'middle'}); });
         if (o.yLabel) svg += T(horiz ? x0 + plotW / 2 : 2, horiz ? y0 + plotH + fs * 2.4 : y0 - 2, o.yLabel, {size: fs * .85, anchor: horiz ? 'middle' : 'start', weight: 600});
-        return {h: y0 + plotH + bottom + (o.yLabel && horiz ? fs * 1.4 : 0), svg, legend: single ? [] : seriesLegend(series, cats, false)};
+        // ⚙️ les axes, pour ce qu'on pose dessus (lignes de repère, annotations à une date) : heritage-diagram-perso.js
+        const perSeries = series.map((s, j) => ({name: s.name, color: s.color, values: vals.filter((_, i) => live[i]).map(v => v[j])}));
+        const axis = {dir: horiz ? 'x' : 'y', x0, y0, w: plotW, h: plotH, lo, hi, log, unit: pct ? '%' : o.unit || '', series: perSeries.map((s, j) => (j === y2 ? {...s, right: true} : s)), totals: stacked && !pct ? sums.filter((_, i) => live[i]) : null};
+        const yrs = horiz ? [] : cats.map((c, i) => (/^\s*-?\d{3,4}(?!\d)/.test(c.label) ? [when(c.label, false), x0 + band * (i + .5)] : null)).filter(p => p && p[0] !== null);
+        const time = yrs.length >= 2 && yrs.length === cats.length && yrs.every((p, i) => !i || p[0] > yrs[i - 1][0]) ? {x0, y0, w: plotW, h: plotH, points: yrs} : null;
+        return {h: y0 + plotH + bottom + (o.yLabel && horiz ? fs * 1.4 : 0), svg, legend: single ? [] : seriesLegend(series, cats, false).map((l, j) => j === y2 ? {...l, label: l.label + ' (axe de droite)', type: 'dash', width: 2} : l), axis, time};
     }
     function pie(spec, W, fs, mode) {
         const o = spec.o || {}, {cats} = table(spec), items = cats.filter(c => c.v[0] > 0), tot = items.reduce((a, c) => a + c.v[0], 0);
-        if (!tot) return {h: 60, svg: T(W / 2, 30, 'Ajoute des valeurs positives.', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!tot) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des valeurs positives.'), {anchor: 'middle', size: fs, fill: '#888'})};
         const half = mode === 'halfdonut', R = Math.min(W / 2 - 4, (num(o.height) || W * (half ? .3 : .42)) / (half ? 1 : 2)), cx = W / 2, cy = half ? R + 4 : R + 4;
         const hole = mode === 'pie' ? 0 : clamp(num(o.hole ?? 55), 10, 90) / 100 * R, span = half ? Math.PI : 2 * Math.PI;
         let a = half ? Math.PI : -Math.PI / 2, svg = '';
@@ -371,7 +413,7 @@
     }
     function waffle(spec, W, fs) {
         const o = spec.o || {}, {cats} = table(spec), items = cats.filter(c => c.v[0] > 0), tot = items.reduce((a, c) => a + c.v[0], 0);
-        if (!tot) return {h: 60, svg: T(W / 2, 30, 'Ajoute des valeurs positives.', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!tot) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des valeurs positives.'), {anchor: 'middle', size: fs, fill: '#888'})};
         const cols = clamp(Math.round(num(o.cols) || 10), 2, 50), cells = cols * clamp(Math.round(num(o.cellRows) || 10), 1, 50);
         const per = apportion(cells, items.map(c => c.v[0])), s = Math.min(W / cols, fs * 3.2);
         let k = 0, svg = '';
@@ -392,7 +434,7 @@
     }
     function funnel(spec, W, fs) {
         const {cats} = table(spec), max = Math.max(0, ...cats.map(c => c.v[0]));
-        if (!max) return {h: 60, svg: T(W / 2, 30, 'Ajoute des valeurs.', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!max) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des valeurs.'), {anchor: 'middle', size: fs, fill: '#888'})};
         const h = fs * 2.6, cx = W / 2; let svg = '';
         cats.forEach((c, i) => { const w = Math.max(4, c.v[0] / max * W * .9), nw = i < cats.length - 1 ? Math.max(4, cats[i + 1].v[0] / max * W * .9) : w * .8, y = i * (h + 3);
             svg += `<path d="M${r2(cx - w / 2)} ${r2(y)}H${r2(cx + w / 2)}L${r2(cx + nw / 2)} ${r2(y + h)}H${r2(cx - nw / 2)}Z" fill="${c.color}"><title>${esc(c.label)} : ${fmt(c.v[0])}</title></path>` ; const lab = `${c.label} — ${fmt(c.v[0])}${i ? ` (${fmt(c.v[0] / (cats[0].v[0] || 1) * 100, 0)} %)` : ''}`;
@@ -413,7 +455,7 @@
     }
     function treemap(spec, W, fs) {
         const o = spec.o || {}, {cats} = table(spec), items = cats.filter(c => c.v[0] > 0).map(c => ({...c, v: c.v[0]})).sort((a, b) => b.v - a.v), tot = items.reduce((a, b) => a + b.v, 0);
-        if (!tot) return {h: 60, svg: T(W / 2, 30, 'Ajoute des valeurs positives.', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!tot) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des valeurs positives.'), {anchor: 'middle', size: fs, fill: '#888'})};
         const H = clamp(num(o.height) || W * .55, 100, 2000); let svg = '';
         squarify(items, 0, 0, W, H).forEach(r => { svg += `<rect x="${r2(r.x + 1)}" y="${r2(r.y + 1)}" width="${r2(Math.max(0, r.w - 2))}" height="${r2(Math.max(0, r.h - 2))}" fill="${r.color}"><title>${esc(r.label)} : ${fmt(r.v)} (${fmt(r.v / tot * 100, 1)} %)</title></rect>`;
             if (r.w > fs * 3 && r.h > fs * 2.4) svg += T(r.x + 6, r.y + fs, cut(r.label, r.w - 10, fs), {size: fs, weight: 600, fill: contrast(r.color)}) + T(r.x + 6, r.y + fs * 2.2, `${fmt(r.v)} · ${fmt(r.v / tot * 100, 0)} %`, {size: fs * .85, fill: contrast(r.color)}); });
@@ -421,7 +463,7 @@
     }
     function pyramid(spec, W, fs) {
         const o = spec.o || {}, {series, cats} = table(spec);
-        if (!cats.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des tranches (âges…) et deux séries (hommes, femmes…).', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!cats.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des tranches (âges…) et deux séries (hommes, femmes…).'), {anchor: 'middle', size: fs, fill: '#888'})};
         const list = o.firstBottom === false ? cats : [...cats].reverse();
         const max = ticks(0, Math.max(1, ...cats.flatMap(c => [c.v[0], c.v[1] || 0])), 3).hi, labW = Math.max(...cats.map(c => textW(c.label, fs))) + 14;
         const half = (W - labW) / 2, bh = clamp(fs * 1.7, 10, 30); let svg = '';
@@ -435,7 +477,7 @@
     }
     function heatmap(spec, W, fs) {
         const o = spec.o || {}, {series, cats} = table(spec);
-        if (!cats.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des lignes et des colonnes de chiffres.', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!cats.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des lignes et des colonnes de chiffres.'), {anchor: 'middle', size: fs, fill: '#888'})};
         const all = cats.flatMap(c => c.v), mn = Math.min(...all), mx = Math.max(...all);
         const hex = h => { const m = color(h, '#000').match(/^#([0-9a-f]{6})$/i); return m ? [0, 2, 4].map(i => parseInt(m[1].slice(i, i + 2), 16)) : [0, 0, 0]; };
         const lo = hex(color(o.lowColor, '#eef3ff').length === 7 ? color(o.lowColor, '#eef3ff') : '#eef3ff'), hi = hex(color(o.highColor, '#1e4fd8').length === 7 ? color(o.highColor, '#1e4fd8') : '#1e4fd8');
@@ -450,7 +492,7 @@
     }
     function scatter(spec, W, fs) {
         const o = spec.o || {}, pts = rows(spec).map((r, i) => ({label: String(r.label || ''), x: num(r.x), y: num(r.y), s: Math.max(0, num(r.size)), color: pick(spec, o.oneColor ? 0 : i, r.color)}));
-        if (!pts.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des points : X, Y (et une taille pour des bulles).', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!pts.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des points : X, Y (et une taille pour des bulles).'), {anchor: 'middle', size: fs, fill: '#888'})};
         const tx = ticks(Math.min(...pts.map(p => p.x)), Math.max(...pts.map(p => p.x)), 6), ty = ticks(Math.min(...pts.map(p => p.y)), Math.max(...pts.map(p => p.y)), 5);
         const left = Math.max(...ty.ticks.map(v => textW(fmt(v), fs * .85))) + 12, H = clamp(num(o.height) || W * .5, 120, 1600), plotW = W - left - 10;
         const X = v => left + (v - tx.lo) / (tx.hi - tx.lo || 1) * plotW, Y = v => H - (v - ty.lo) / (ty.hi - ty.lo || 1) * H;
@@ -467,7 +509,7 @@
     /* ═════════ 🔀 Flux (Sankey) ═════════ */
     function sankey(spec, W, fs) {
         const o = spec.o || {}, links = rows(spec).map(r => ({s: String(r.from || '').trim(), t: String(r.to || '').trim(), v: Math.max(0, num(r.value)), color: r.color})).filter(l => l.s && l.t && l.v > 0 && l.s !== l.t).slice(0, 400);
-        if (!links.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des flux : de, vers, combien.', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!links.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des flux : de, vers, combien.'), {anchor: 'middle', size: fs, fill: '#888'})};
         const names = [...new Set(links.flatMap(l => [l.s, l.t]))], N = new Map(names.map((n, i) => [n, {name: n, i, col: 0, inV: 0, outV: 0, color: pick(spec, i)}]));
         links.forEach(l => { N.get(l.s).outV += l.v; N.get(l.t).inV += l.v; });
         for (let pass = 0; pass < names.length; pass++) { let moved = false; links.forEach(l => { const a = N.get(l.s), b = N.get(l.t); if (b.col < a.col + 1 && a.col + 1 < names.length) { b.col = a.col + 1; moved = true; } }); if (!moved) break; } // une boucle s'arrête d'elle-même
@@ -487,7 +529,7 @@
     /* ═════════ 🧭 Organigramme / arbre ═════════ */
     function orgchart(spec, W, fs) {
         const o = spec.o || {}, list = rows(spec).map((r, i) => ({name: String(r.name || '').trim(), parent: String(r.parent || '').trim(), detail: String(r.detail || ''), color: pick(spec, o.oneColor ? 0 : i, r.color), kids: []})).filter(n => n.name);
-        if (!list.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des cases : un nom et, pour chacune, sa case « au-dessus ».', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!list.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des cases : un nom et, pour chacune, sa case « au-dessus ».'), {anchor: 'middle', size: fs, fill: '#888'})};
         const by = new Map(); list.forEach(n => { if (!by.has(n.name)) by.set(n.name, n); });
         const roots = [];
         list.forEach(n => { const p = n.parent && n.parent !== n.name ? by.get(n.parent) : null; let a = p, safe = 0; while (a && a !== n && safe++ < 500) a = a.parent ? by.get(a.parent) : null; (p && a !== n ? p.kids : roots).push(n); });
@@ -523,7 +565,7 @@
     /* ═════════ ☁️ Nuage de mots ═════════ */
     function wordcloud(spec, W, fs) {
         const o = spec.o || {}, words = rows(spec).map((r, i) => ({w: String(r.word || '').trim(), v: Math.max(0, num(r.weight) || 1), color: pick(spec, i, r.color)})).filter(x => x.w).sort((a, b) => b.v - a.v).slice(0, 200);
-        if (!words.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des mots (noms, prénoms, lieux…) et leur poids.', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!words.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des mots (noms, prénoms, lieux…) et leur poids.'), {anchor: 'middle', size: fs, fill: '#888'})};
         const H = clamp(num(o.height) || W * .5, 100, 1600), max = words[0].v, min = words[words.length - 1].v, placed = []; let svg = '';
         const big = clamp(num(o.maxFont) || W / 9, 12, 140), small = Math.max(9, big / 7);
         words.forEach((x, i) => {
@@ -538,7 +580,7 @@
     /* ═════════ ⏱️ Jauges ═════════ */
     function gauges(spec, W, fs) {
         const list = rows(spec).map((r, i) => ({label: String(r.label || ''), v: num(r.value), max: num(r.max) || 100, color: pick(spec, i, r.color)})).slice(0, 24);
-        if (!list.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute une jauge : un nom, une valeur, un maximum.', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!list.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute une jauge : un nom, une valeur, un maximum.'), {anchor: 'middle', size: fs, fill: '#888'})};
         const per = clamp(Math.floor(W / Math.max(140, fs * 12)), 1, list.length), w = W / per, R = Math.min(w * .42, 140); let svg = '';
         list.forEach((g, i) => { const cx = w * (i % per) + w / 2, cy = Math.floor(i / per) * (R * 1.5 + fs * 2) + R + 4, f = clamp(g.v / g.max, 0, 1);
             const arc = (a0, a1, col, sw) => { const p = a => [cx + R * Math.cos(Math.PI + a * Math.PI), cy + R * Math.sin(Math.PI + a * Math.PI)], [x1, y1] = p(a0), [x2, y2] = p(a1); return `<path d="M${r2(x1)} ${r2(y1)}A${r2(R)} ${r2(R)} 0 0 1 ${r2(x2)} ${r2(y2)}" fill="none" stroke="${col}" stroke-width="${sw}" stroke-linecap="round"/>`; };
@@ -548,7 +590,7 @@
     /* ═════════ 👤 Pictogrammes ═════════ */
     function pictogram(spec, W, fs) {
         const o = spec.o || {}, list = rows(spec).map((r, i) => ({label: String(r.label || ''), v: Math.max(0, num(r.value)), icon: String(r.icon || '●').slice(0, 4), color: pick(spec, i, r.color)})).slice(0, 60);
-        if (!list.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des lignes : un nom, un nombre, un symbole (👤, 👶, ⚓…).', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!list.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des lignes : un nom, un nombre, un symbole (👤, 👶, ⚓…).'), {anchor: 'middle', size: fs, fill: '#888'})};
         const unit = num(o.unit) > 0 ? num(o.unit) : 1, s = clamp(num(o.iconSize) || fs * 1.8, 8, 60), labW = Math.min(W * .32, Math.max(...list.map(x => textW(x.label, fs))) + 12);
         const perRow = Math.max(1, Math.floor((W - labW - 60) / s)); let y = 0, svg = '';
         list.forEach(x => { const n = Math.min(2000, x.v / unit), whole = Math.floor(n), part = n - whole, lines = Math.max(1, Math.ceil(Math.ceil(n) / perRow));
@@ -591,13 +633,13 @@
                 {key: 'events', label: 'Les traits verticaux (albums, tournées, événements)', cols: [C('date', 'Date'), C('label', 'Nom'), C('kind', 'Sorte', 'select', {choices: [['album', 'Album studio (noir)'], ['live', 'Album live (gris)'], ['single', 'Single (gris clair)'], ['tour', 'Tournée (rouge, pointillés)'], ['autre', 'Autre (bleu, pointillés)']]}), C('color', 'Couleur', 'color')]}],
             options: [C('from', 'Début de la frise (vide = auto)'), C('to', 'Fin de la frise (vide = auto)'), C('step', 'Un repère tous les … ans (vide = auto)', 'number'), C('barHeight', 'Épaisseur des barres', 'range', {min: 6, max: 60, def: 18}), C('rowGap', 'Espace entre les lignes', 'range', {min: 0, max: 40, def: 6}),
                 C('order', 'Ordre des lignes', 'select', {choices: [['', 'Comme dans le tableau'], ['start', 'Par date d’arrivée']]}), C('eventLabels', 'Écrire le nom des traits verticaux', 'check'), C('defaultRole', 'Rôle par défaut (si vide)')],
-            sample: () => ({o: {title: 'Les Cousins — membres'}, rows: [{name: 'Paul', roles: 'Chant, Guitare rythmique', start: '1978', end: ''}, {name: 'Marc', roles: 'Guitare solo', start: '1978', end: '1986'}, {name: 'Marc', roles: 'Guitare solo, Chœurs', start: '1994', end: ''}, {name: 'Léa', roles: 'Basse', start: '1980', end: '2001'}, {name: 'Hugo', roles: 'Basse', start: '2001', end: ''}, {name: 'Jean', roles: 'Batterie', start: '1978', end: '1990'}, {name: 'Sam', roles: 'Batterie', start: '1990', end: ''}],
+            sample: () => ({o: {title: i18n('Les Cousins — membres')}, rows: [{name: 'Paul', roles: 'Chant, Guitare rythmique', start: '1978', end: ''}, {name: 'Marc', roles: 'Guitare solo', start: '1978', end: '1986'}, {name: 'Marc', roles: 'Guitare solo, Chœurs', start: '1994', end: ''}, {name: 'Léa', roles: 'Basse', start: '1980', end: '2001'}, {name: 'Hugo', roles: 'Basse', start: '2001', end: ''}, {name: 'Jean', roles: 'Batterie', start: '1978', end: '1990'}, {name: 'Sam', roles: 'Batterie', start: '1990', end: ''}],
                 roles: [{role: 'Chant', color: '#e15759'}, {role: 'Guitare rythmique', color: '#59a14f'}, {role: 'Guitare solo', color: '#76b7b2'}, {role: 'Chœurs', color: '#f2c94c'}, {role: 'Basse', color: '#4e79a7'}, {role: 'Batterie', color: '#b07aa1'}],
                 events: [{date: '1981', label: 'Premier album', kind: 'album'}, {date: '1984', label: 'Deuxième', kind: 'album'}, {date: '1988', label: 'Live à l’Olympia', kind: 'live'}, {date: '1996', label: 'Retour', kind: 'album'}, {date: '2005', label: 'Tournée', kind: 'tour'}, {date: '2012', label: 'Dernier album', kind: 'album'}]})},
         chrono: {icon: '📅', label: 'Frise chronologique (dates clés)', group: 'Frises', render: chrono, noLegend: true,
             grids: [{key: 'rows', label: 'Les événements', cols: [C('date', 'Date'), C('label', 'Ce qui s’est passé'), C('color', 'Couleur', 'color')]}],
             options: [C('side', 'Textes', 'select', {choices: [['', 'En alternance dessus / dessous'], ['above', 'Tous au-dessus'], ['below', 'Tous en dessous']]}), C('lanes', 'Étages au plus (pour éviter les chevauchements)', 'range', {min: 1, max: 8, def: 3})],
-            sample: () => ({o: {title: 'La famille Martin'}, rows: [{date: '1792', label: 'Naissance de Jean'}, {date: '1815', label: 'Mariage à Rennes'}, {date: '1832', label: 'Départ pour Nantes'}, {date: '1848', label: 'Achat de la ferme'}, {date: '1870', label: 'Guerre'}, {date: '1889', label: 'Décès de Jean'}]})},
+            sample: () => ({o: {title: i18n('La famille Martin')}, rows: [{date: '1792', label: 'Naissance de Jean'}, {date: '1815', label: 'Mariage à Rennes'}, {date: '1832', label: 'Départ pour Nantes'}, {date: '1848', label: 'Achat de la ferme'}, {date: '1870', label: 'Guerre'}, {date: '1889', label: 'Décès de Jean'}]})},
         columns: {icon: '📊', label: 'Colonnes', group: 'Chiffres', render: (s, W, fs) => cartesian(s, W, fs, 'columns'), grids: [TABLE_GRID], options: [O.values, O.height, O.unit, O.yLabel, C('min', 'Axe : minimum'), C('max', 'Axe : maximum')], sample: () => sampleTable(true)},
         bars: {icon: '📶', label: 'Barres horizontales', group: 'Chiffres', render: (s, W, fs) => cartesian(s, W, fs, 'bars'), grids: [TABLE_GRID], options: [O.values, O.unit, O.yLabel], sample: () => sampleTable(false)},
         stacked: {icon: '🧱', label: 'Colonnes empilées', group: 'Chiffres', render: (s, W, fs) => cartesian(s, W, fs, 'stacked'), grids: [TABLE_GRID], options: [O.values, O.height, O.unit, O.yLabel], sample: () => sampleTable(true)},
@@ -608,30 +650,30 @@
         donut: {icon: '🍩', label: 'Anneau', group: 'Parts', render: (s, W, fs) => pie(s, W, fs, 'donut'), grids: [ONE_SERIES], legend: 'right', options: [O.values, O.hole, O.total, O.centerText, O.height], sample: () => sampleParts()},
         halfdonut: {icon: '🌗', label: 'Demi-anneau', group: 'Parts', render: (s, W, fs) => pie(s, W, fs, 'halfdonut'), grids: [ONE_SERIES], options: [O.values, O.hole, O.total, O.centerText, O.height], sample: () => sampleParts()},
         waffle: {icon: '🧇', label: 'Mosaïque (100 carrés)', group: 'Parts', render: waffle, grids: [ONE_SERIES], options: [C('cols', 'Carrés par ligne', 'range', {min: 2, max: 50, def: 10}), C('cellRows', 'Nombre de lignes', 'range', {min: 1, max: 50, def: 10})], sample: () => sampleParts()},
-        treemap: {icon: '🟪', label: 'Carte proportionnelle (rectangles)', group: 'Parts', render: treemap, noLegend: true, grids: [ONE_SERIES], options: [O.height], sample: () => ({o: {title: 'Lieux de naissance'}, series: [{name: 'Naissances'}], rows: [['Rennes', 42], ['Nantes', 25], ['Vitré', 14], ['Fougères', 9], ['Redon', 7], ['Saint-Malo', 5], ['Paris', 3]].map(([label, s0]) => ({label, s0}))})},
-        funnel: {icon: '🔻', label: 'Entonnoir', group: 'Parts', render: funnel, noLegend: true, grids: [ONE_SERIES], options: [], sample: () => ({o: {title: 'Où en sont mes recherches'}, series: [{name: 'Personnes'}], rows: [['Personnes trouvées', 820], ['Avec une date de naissance', 610], ['Avec un acte', 402], ['Acte vérifié', 255], ['Sourcées', 140]].map(([label, s0]) => ({label, s0}))})},
-        radar: {icon: '🕸️', label: 'Radar (toile)', group: 'Chiffres', render: radar, grids: [TABLE_GRID], options: [C('max', 'Maximum de l’échelle (vide = auto)'), O.height], sample: () => ({o: {title: 'Complétude par branche'}, series: [{name: 'Paternelle'}, {name: 'Maternelle'}], rows: [['Naissances', 90, 70], ['Mariages', 80, 85], ['Décès', 60, 75], ['Recensements', 40, 55], ['Militaire', 30, 20], ['Photos', 50, 35]].map(([label, s0, s1]) => ({label, s0, s1}))})},
-        pyramid: {icon: '🔺', label: 'Pyramide (des âges…)', group: 'Chiffres', render: pyramid, grids: [{...TABLE_GRID, series: 2}], options: [O.values, C('firstBottom', 'Première ligne en bas', 'check', {def: true})], sample: () => ({o: {title: 'Âge au décès'}, series: [{name: 'Hommes', color: '#4e79a7'}, {name: 'Femmes', color: '#e15759'}], rows: [['0-9', 31, 28], ['10-19', 6, 7], ['20-29', 9, 12], ['30-39', 10, 13], ['40-49', 11, 10], ['50-59', 13, 12], ['60-69', 15, 16], ['70-79', 12, 15], ['80+', 6, 9]].map(([label, s0, s1]) => ({label, s0, s1}))})},
+        treemap: {icon: '🟪', label: 'Carte proportionnelle (rectangles)', group: 'Parts', render: treemap, noLegend: true, grids: [ONE_SERIES], options: [O.height], sample: () => ({o: {title: i18n('Lieux de naissance')}, series: [{name: 'Naissances'}], rows: [['Rennes', 42], ['Nantes', 25], ['Vitré', 14], ['Fougères', 9], ['Redon', 7], ['Saint-Malo', 5], ['Paris', 3]].map(([label, s0]) => ({label, s0}))})},
+        funnel: {icon: '🔻', label: 'Entonnoir', group: 'Parts', render: funnel, noLegend: true, grids: [ONE_SERIES], options: [], sample: () => ({o: {title: i18n('Où en sont mes recherches')}, series: [{name: 'Personnes'}], rows: [['Personnes trouvées', 820], ['Avec une date de naissance', 610], ['Avec un acte', 402], ['Acte vérifié', 255], ['Sourcées', 140]].map(([label, s0]) => ({label, s0}))})},
+        radar: {icon: '🕸️', label: 'Radar (toile)', group: 'Chiffres', render: radar, grids: [TABLE_GRID], options: [C('max', 'Maximum de l’échelle (vide = auto)'), O.height], sample: () => ({o: {title: i18n('Complétude par branche')}, series: [{name: 'Paternelle'}, {name: 'Maternelle'}], rows: [['Naissances', 90, 70], ['Mariages', 80, 85], ['Décès', 60, 75], ['Recensements', 40, 55], ['Militaire', 30, 20], ['Photos', 50, 35]].map(([label, s0, s1]) => ({label, s0, s1}))})},
+        pyramid: {icon: '🔺', label: 'Pyramide (des âges…)', group: 'Chiffres', render: pyramid, grids: [{...TABLE_GRID, series: 2}], options: [O.values, C('firstBottom', 'Première ligne en bas', 'check', {def: true})], sample: () => ({o: {title: i18n('Âge au décès')}, series: [{name: 'Hommes', color: '#4e79a7'}, {name: 'Femmes', color: '#e15759'}], rows: [['0-9', 31, 28], ['10-19', 6, 7], ['20-29', 9, 12], ['30-39', 10, 13], ['40-49', 11, 10], ['50-59', 13, 12], ['60-69', 15, 16], ['70-79', 12, 15], ['80+', 6, 9]].map(([label, s0, s1]) => ({label, s0, s1}))})},
         heatmap: {icon: '🟧', label: 'Carte de chaleur (tableau coloré)', group: 'Chiffres', render: heatmap, noLegend: true, grids: [TABLE_GRID], options: [O.values, C('lowColor', 'Couleur des petites valeurs', 'color', {def: '#eef3ff'}), C('highColor', 'Couleur des grandes valeurs', 'color', {def: '#1e4fd8'})],
-            sample: () => ({o: {title: 'Naissances par mois et par siècle'}, series: ['XVIIe', 'XVIIIe', 'XIXe'].map(name => ({name})), rows: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'].map((label, i) => ({label, s0: 3 + (i * 7) % 9, s1: 8 + (i * 5) % 11, s2: 12 + (i * 3) % 10}))})},
+            sample: () => ({o: {title: i18n('Naissances par mois et par siècle')}, series: ['XVIIe', 'XVIIIe', 'XIXe'].map(name => ({name})), rows: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'].map(m => i18n(m)).map((label, i) => ({label, s0: 3 + (i * 7) % 9, s1: 8 + (i * 5) % 11, s2: 12 + (i * 3) % 10}))})},
         scatter: {icon: '🫧', label: 'Nuage de points / bulles', group: 'Chiffres', render: scatter, noLegend: true, grids: [{key: 'rows', label: 'Les points', cols: [C('label', 'Nom'), C('x', 'X', 'number'), C('y', 'Y', 'number'), C('size', 'Taille (bulles)', 'number'), C('color', 'Couleur', 'color')]}],
             options: [O.values, O.height, C('xLabel', 'Nom de l’axe X'), C('yLabel', 'Nom de l’axe Y'), C('maxBubble', 'Taille de la plus grosse bulle', 'range', {min: 4, max: 120, def: 30}), C('oneColor', 'Une seule couleur', 'check')],
-            sample: () => ({o: {title: 'Âge au mariage et nombre d’enfants', xLabel: 'Âge au mariage', yLabel: 'Enfants'}, rows: [['Jean', 24, 8, 3], ['Marie', 19, 11, 2], ['Pierre', 31, 4, 1], ['Anne', 22, 9, 4], ['Louis', 27, 6, 2], ['Rose', 35, 2, 1]].map(([label, x, y, size]) => ({label, x, y, size}))})},
+            sample: () => ({o: {title: i18n('Âge au mariage et nombre d’enfants'), xLabel: 'Âge au mariage', yLabel: 'Enfants'}, rows: [['Jean', 24, 8, 3], ['Marie', 19, 11, 2], ['Pierre', 31, 4, 1], ['Anne', 22, 9, 4], ['Louis', 27, 6, 2], ['Rose', 35, 2, 1]].map(([label, x, y, size]) => ({label, x, y, size}))})},
         sankey: {icon: '🔀', label: 'Flux (Sankey) : migrations, métiers…', group: 'Liens', render: sankey, noLegend: true, grids: [{key: 'rows', label: 'Les flux', cols: [C('from', 'De'), C('to', 'Vers'), C('value', 'Combien', 'number'), C('color', 'Couleur', 'color')]}], options: [O.values, O.height],
-            sample: () => ({o: {title: 'D’où venaient les conjoints'}, rows: [['Bretagne', 'Rennes', 30], ['Bretagne', 'Nantes', 12], ['Normandie', 'Rennes', 8], ['Normandie', 'Paris', 10], ['Anjou', 'Nantes', 9], ['Rennes', 'Paris', 6]].map(([from, to, value]) => ({from, to, value}))})},
+            sample: () => ({o: {title: i18n('D’où venaient les conjoints')}, rows: [['Bretagne', 'Rennes', 30], ['Bretagne', 'Nantes', 12], ['Normandie', 'Rennes', 8], ['Normandie', 'Paris', 10], ['Anjou', 'Nantes', 9], ['Rennes', 'Paris', 6]].map(([from, to, value]) => ({from, to, value}))})},
         orgchart: {icon: '🧭', label: 'Organigramme / arbre', group: 'Liens', render: orgchart, noLegend: true, grids: [{key: 'rows', label: 'Les cases', cols: [C('name', 'Nom (unique)'), C('parent', 'Au-dessus (nom de la case)'), C('detail', 'Détail'), C('color', 'Couleur', 'color')]}],
             options: [C('direction', 'Sens', 'select', {choices: [['', 'De haut en bas'], ['right', 'De gauche à droite']]}), C('boxWidth', 'Largeur des cases (vide = auto)', 'number'), C('oneColor', 'Une seule couleur', 'check')],
-            sample: () => ({o: {title: 'Association des Amis du village', oneColor: true}, rows: [['Présidente', '', 'Marie Durand'], ['Trésorier', 'Présidente', 'Paul Martin'], ['Secrétaire', 'Présidente', 'Anne Petit'], ['Archives', 'Secrétaire', '3 bénévoles'], ['Fêtes', 'Trésorier', '5 bénévoles']].map(([name, parent, detail]) => ({name, parent, detail}))})},
+            sample: () => ({o: {title: i18n('Association des Amis du village'), oneColor: true}, rows: [['Présidente', '', 'Marie Durand'], ['Trésorier', 'Présidente', 'Paul Martin'], ['Secrétaire', 'Présidente', 'Anne Petit'], ['Archives', 'Secrétaire', '3 bénévoles'], ['Fêtes', 'Trésorier', '5 bénévoles']].map(([name, parent, detail]) => ({name, parent, detail}))})},
         venn: {icon: '⭕', label: 'Diagramme de Venn (2 ou 3 ensembles)', group: 'Liens', render: venn, noLegend: true,
             grids: [{key: 'sets', label: 'Les ensembles (2 ou 3)', max: 3, cols: [C('name', 'Nom'), C('color', 'Couleur', 'color')]}, {key: 'rows', label: 'Ce qu’on écrit dans chaque zone', fixed: ['A', 'B', 'C', 'AB', 'AC', 'BC', 'ABC'], cols: [C('region', 'Zone', 'readonly'), C('value', 'Texte ou nombre')]}],
-            options: [O.height], sample: () => ({o: {title: 'Mes sources'}, sets: [{name: 'État civil'}, {name: 'Registres paroissiaux'}, {name: 'Notaires'}], rows: [['A', '120'], ['B', '85'], ['C', '30'], ['AB', '40'], ['AC', '12'], ['BC', '9'], ['ABC', '5']].map(([region, value]) => ({region, value}))})},
+            options: [O.height], sample: () => ({o: {title: i18n('Mes sources')}, sets: [{name: 'État civil'}, {name: 'Registres paroissiaux'}, {name: 'Notaires'}], rows: [['A', '120'], ['B', '85'], ['C', '30'], ['AB', '40'], ['AC', '12'], ['BC', '9'], ['ABC', '5']].map(([region, value]) => ({region, value}))})},
         wordcloud: {icon: '☁️', label: 'Nuage de mots', group: 'Liens', render: wordcloud, noLegend: true, grids: [{key: 'rows', label: 'Les mots', cols: [C('word', 'Mot'), C('weight', 'Poids', 'number'), C('color', 'Couleur', 'color')]}], options: [O.height, C('maxFont', 'Taille du plus gros mot', 'range', {min: 12, max: 140, def: 80})],
-            sample: () => ({o: {title: 'Les noms de famille'}, rows: [['Martin', 40], ['Durand', 28], ['Petit', 22], ['Lefèvre', 18], ['Moreau', 15], ['Garnier', 12], ['Roux', 10], ['Fournier', 9], ['Girard', 8], ['Bonnet', 7], ['Lambert', 6], ['Fontaine', 5], ['Chevalier', 5], ['Robin', 4], ['Masson', 3]].map(([word, weight]) => ({word, weight}))})},
+            sample: () => ({o: {title: i18n('Les noms de famille')}, rows: [['Martin', 40], ['Durand', 28], ['Petit', 22], ['Lefèvre', 18], ['Moreau', 15], ['Garnier', 12], ['Roux', 10], ['Fournier', 9], ['Girard', 8], ['Bonnet', 7], ['Lambert', 6], ['Fontaine', 5], ['Chevalier', 5], ['Robin', 4], ['Masson', 3]].map(([word, weight]) => ({word, weight}))})},
         gauge: {icon: '⏱️', label: 'Jauges (objectifs)', group: 'Parts', render: gauges, noLegend: true, grids: [{key: 'rows', label: 'Les jauges', cols: [C('label', 'Nom'), C('value', 'Valeur', 'number'), C('max', 'Maximum', 'number'), C('color', 'Couleur', 'color')]}], options: [],
-            sample: () => ({o: {title: 'Mes objectifs'}, rows: [['Ancêtres trouvés (8 générations)', 180, 255], ['Actes numérisés', 320, 500], ['Photos légendées', 90, 120]].map(([label, value, max]) => ({label, value, max}))})},
+            sample: () => ({o: {title: i18n('Mes objectifs')}, rows: [['Ancêtres trouvés (8 générations)', 180, 255], ['Actes numérisés', 320, 500], ['Photos légendées', 90, 120]].map(([label, value, max]) => ({label, value, max}))})},
         pictogram: {icon: '👤', label: 'Pictogrammes (symboles répétés)', group: 'Parts', render: pictogram, grids: [{key: 'rows', label: 'Les lignes', cols: [C('label', 'Nom'), C('value', 'Nombre', 'number'), C('icon', 'Symbole (👤 👶 ⚓ ✝…)'), C('color', 'Couleur', 'color')]}],
             options: [C('unit', 'Un symbole vaut', 'number', {def: 1}), C('iconSize', 'Taille des symboles', 'range', {min: 8, max: 60, def: 22})],
-            sample: () => ({o: {title: 'Enfants par couple'}, rows: [['Jean et Marie', 11, '👶'], ['Pierre et Anne', 7, '👶'], ['Louis et Rose', 3, '👶']].map(([label, value, icon]) => ({label, value, icon}))})},
+            sample: () => ({o: {title: i18n('Enfants par couple')}, rows: [['Jean et Marie', 11, '👶'], ['Pierre et Anne', 7, '👶'], ['Louis et Rose', 3, '👶']].map(([label, value, icon]) => ({label, value, icon}))})},
     };
     function sampleTable(time) {
         return time ? {o: {title: 'Baptêmes et sépultures'}, series: [{name: 'Baptêmes'}, {name: 'Sépultures'}], rows: [['1700', 32, 25], ['1710', 28, 41], ['1720', 35, 22], ['1730', 38, 27], ['1740', 30, 36], ['1750', 41, 24]].map(([label, s0, s1]) => ({label, s0, s1}))}
@@ -645,9 +687,11 @@
         C('bg', 'Fond', 'select', {choices: [['', 'Blanc'], ['transparent', 'Transparent'], ['custom', 'Couleur…']]}), C('bgColor', 'Couleur du fond', 'color', {def: '#fdf8ee', when: s => s.o?.bg === 'custom'}), C('fg', 'Couleur des textes', 'color', {def: '#1d1d1f'})];
 
     function svg(spec, width) {
-        const kind = KINDS[spec?.kind] || KINDS.columns, s = {...spec, o: {...(spec?.o || {})}};
+        let kind = KINDS[spec?.kind] || KINDS.columns, s = {...spec, o: {...(spec?.o || {})}};
         const W = clamp(num(width || s.o.width) || 900, 200, 4000);
+        // ⚙️ Personnaliser (heritage-diagram-perso.js) : le style par défaut, les petits multiples → prepare(spec, sorte, largeur) = {spec, kind} ou rien
+        const R0 = ext.diagramRender; if (typeof R0?.prepare === 'function') { try { const p = R0.prepare(s, kind, W); if (p) { s = p.spec || s; kind = p.kind || kind; } } catch (e) { console.error(e); } }
         try { return compose(s, kind, W); } catch (e) { console.error(e); return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} 60" width="${W}" height="60"><text x="10" y="35" font-size="14" fill="#c00">Dessin impossible : ${esc(e.message)}</text></svg>`; }
     }
-    ext.diagramRender = {svg, KINDS, COMMON, PALETTES, when, num, ticks, apportion, arcSeats, horseshoeSeats, squarify, color};
+    ext.diagramRender = {svg, KINDS, COMMON, PALETTES, when, num, ticks, logTicks, apportion, arcSeats, horseshoeSeats, squarify, color, textW, FONT};
 })();

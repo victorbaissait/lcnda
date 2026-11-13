@@ -1,0 +1,1607 @@
+fr ¦ tr
+son importé ¦ içe aktarılan ses
+⚠ fichier de travail introuvable ¦ ⚠ çalışma dosyası bulunamadı
+Une vieille cassette ou un dictaphone : souffle, bourdonnement, voix, volume, début et fin, pas à pas ¦ Eski bir kaset ya da ses kayıt cihazı: hışırtı, uğultu, ses, ses düzeyi, başlangıç ve bitiş, adım adım
+Sauver une vieille cassette ¦ Eski bir kaseti kurtar
+Une lettre lue, un souvenir raconté : le son entre dans les médias puis s’ouvre dans le Studio son ¦ Okunan bir mektup, anlatılan bir anı: ses medyaya girer, sonra Ses stüdyosunda açılır
+Un son de la base, nettoyé en deux minutes ¦ Veritabanından bir ses, iki dakikada temizlenir
+Son rapide… ¦ Hızlı ses…
+⚠ photo de départ introuvable ¦ ⚠ başlangıç fotoğrafı bulunamadı
+Une image vide (blanche, transparente ou d’une couleur), à la taille voulue, pour dessiner, écrire ou assembler des calques ¦ Boş bir görüntü (beyaz, saydam ya da tek renk), istediğin boyutta; çizmek, yazmak ya da katmanları birleştirmek için
+Canevas vide ¦ Boş tuval
+Une vieille photo abîmée : redresser, couleurs, taches, déchirures, visages, colorisation, pas à pas ¦ Hasarlı eski bir fotoğraf: düzeltme, renkler, lekeler, yırtıklar, yüzler, renklendirme, adım adım
+Restaurer une vieille photo ¦ Eski bir fotoğrafı onar
+Le portrait de plusieurs fiches recadré au même format (yeux à la même hauteur), puis utilisé comme portrait ¦ Birkaç kartın portresi aynı biçimde kırpılır (gözler aynı yükseklikte), sonra portre olarak kullanılır
+Portraits d’identité ¦ Vesikalık portreler
+Nouveau blason ¦ Yeni arma
+Blason ¦ Arma
+Livre vide ¦ Boş kitap
+Ouvrir l’atelier ¦ Atölyeyi aç
+OUTILS DE MODIFICATION ¦ DÜZENLEME ARAÇLARI
+Ranger les outils ¦ Araçları düzenle
+Range les onglets avec la poignée ⠿ (ou Alt + ↑ / ↓) et décoche ceux que tu ne veux pas voir. ¦ Sekmeleri ⠿ tutamacıyla (ya da Alt + ↑ / ↓) sırala ve görmek istemediklerinin işaretini kaldır.
+Garde au moins un outil : coche celui que tu veux voir. ¦ En az bir araç bırak: görmek istediğini işaretle.
+Garde au moins un outil. ¦ En az bir araç bırak.
+{shown} sur {n} ¦ {shown} / {n}
+Aucun projet pour « {q} » ¦ “{q}” için proje yok
+Vérifie l’orthographe, ou cherche un autre mot (nom, photo, détails). ¦ Yazımı kontrol et ya da başka bir sözcük ara (ad, fotoğraf, ayrıntılar).
+Effacer la recherche ¦ Aramayı temizle
+Aucun projet de {what} pour l’instant ¦ Şimdilik proje yok: {what}
+projet|montage ¦ video kurgusu
+projet|son ¦ ses
+projet|retouche ¦ fotoğraf rötuşu
+projet|dessin ¦ çizim
+projet|livre ¦ kitap
+projet|tableau ¦ pano
+projet|cousinade ¦ aile buluşması
+projet|maison ¦ ev
+projet|traitement par lot ¦ toplu işlem
+projet|comparaison de photos ¦ fotoğraf karşılaştırması
+projet|site ¦ web sitesi
+projet|présentation ou de diaporama ¦ sunum ya da slayt gösterisi
+projet|document ¦ belge
+projet|transcription ¦ transkripsiyon
+projet|faire-part ¦ duyuru kartı
+projet|carte ¦ harita
+projet|signature ou sceau ¦ imza ya da mühür
+projet|arbre ¦ ağaç
+Les projets des outils de l’app : choisis un outil, puis ouvre, cherche, trie, renomme ou commence un projet. ¦ Uygulamanın araçlarına ait projeler: bir araç seç, sonra bir projeyi aç, ara, sırala, yeniden adlandır ya da yeni bir proje başlat.
+Une calculette flottante (simple, scientifique, courbes, mesures anciennes, dates des actes), qui reste ouverte au-dessus de l’app ¦ Uygulamanın üstünde açık kalan yüzen bir hesap makinesi (basit, bilimsel, eğriler, eski ölçüler, belge tarihleri)
+projets ¦ projeler
+Projet renommé. ¦ Proje yeniden adlandırıldı.
+Les photos, vidéos et sons restent dans les Médias. ¦ Fotoğraflar, videolar ve sesler Medya’da kalır.
+=projet ¦ proje|proje
+＋ Nouvelle retouche ¦ ＋ Yeni rötuş
+＋ Nouveau dessin ¦ ＋ Yeni çizim
+＋ Nouveau livre ¦ ＋ Yeni kitap
+＋ Nouveau traitement ¦ ＋ Yeni toplu işlem
+＋ Nouvelle comparaison ¦ ＋ Yeni karşılaştırma
+Ce calcul est trop long : je m’arrête là. ¦ Bu hesap çok uzun: burada duruyorum.
+Essaie avec des nombres plus petits ou moins d’étapes. ¦ Daha küçük sayılarla ya da daha az adımla dene.
+Division par zéro : on ne peut pas diviser par 0. ¦ Sıfıra bölme: 0’a bölünemez.
+Nombre trop grand pour être calculé. ¦ Sayı hesaplanamayacak kadar büyük.
+Liste trop longue (plus de {list} nombres). ¦ Liste çok uzun ({list} sayıdan fazla).
+Matrice trop grande (au plus {mat} × {mat2}). ¦ Matris çok büyük (en çok {mat} × {mat2}).
+{what} : il faut des nombres ici{x}. ¦ {what}: burada sayı gerekiyor{x}.
+(« {text} » est un résultat écrit en mots) ¦ (“{text}” sözcüklerle yazılmış bir sonuç)
+Les deux listes n’ont pas la même longueur ({n} et {n2}). ¦ İki listenin uzunluğu aynı değil ({n} ve {n2}).
+On ne peut pas ajouter un nombre et une matrice. ¦ Bir sayı ile bir matris toplanamaz.
+Pour multiplier chaque case, utilise « × ». ¦ Her hücreyi çarpmak için “×” kullan.
+Les deux matrices n’ont pas la même taille ({r} × {c} et {r2} × {c2}). ¦ İki matrisin boyutu aynı değil ({r} × {c} ve {r2} × {c2}).
+Signe moins ¦ Eksi işareti
+Addition ¦ Toplama
+Multiplication ¦ Çarpma
+Division ¦ Bölme
+Produit impossible : la 1re matrice a {cols}, la 2e a {rows}. ¦ Çarpım olanaksız: 1. matriste {cols}, 2. matriste {rows} var.
+Pour multiplier deux matrices, il faut autant de colonnes dans la 1re que de lignes dans la 2e. ¦ İki matrisi çarpmak için 1. matristeki sütun sayısı 2. matristeki satır sayısına eşit olmalı.
+Produit impossible : la matrice a {c} colonnes et la liste {n} nombres. ¦ Çarpım olanaksız: matriste {c} sütun, listede {n} sayı var.
+ln(0) n’existe pas (il part vers −∞). ¦ ln(0) yoktur (−∞’a gider).
+Une matrice ne peut être élevée qu’à une puissance entière. ¦ Bir matrisin yalnızca tam sayı kuvveti alınabilir.
+Seule une matrice carrée peut être élevée à une puissance. ¦ Yalnızca kare matrisin kuvveti alınabilir.
+Puissance trop grande pour une matrice. ¦ Bir matris için kuvvet çok büyük.
+Division par zéro : 0 ne peut pas être élevé à une puissance négative. ¦ Sıfıra bölme: 0’ın negatif kuvveti alınamaz.
+Ce calcul n’a pas de résultat. ¦ Bu hesabın sonucu yok.
+{what} : il faut un nombre réel (sans i). ¦ {what}: gerçel bir sayı gerekiyor (i olmadan).
+{what} : il faut un nombre entier. ¦ {what}: tam sayı gerekiyor.
+{what} : il faut une matrice, par exemple [[1 ; 2] ; [3 ; 4]]. ¦ {what}: bir matris gerekiyor, örneğin [[1 ; 2] ; [3 ; 4]].
+Déterminant ¦ Determinant
+Le déterminant demande une matrice carrée (celle-ci fait {r} × {c}). ¦ Determinant için kare matris gerekir (bu matris {r} × {c}).
+Inverse ¦ Ters
+Seule une matrice carrée a un inverse (celle-ci fait {r} × {c}). ¦ Yalnızca kare matrisin tersi vardır (bu matris {r} × {c}).
+Cette matrice n’a pas d’inverse (son déterminant vaut 0). ¦ Bu matrisin tersi yok (determinantı 0).
+Transposée ¦ Devrik
+Ce système n’a aucune solution (les équations se contredisent). ¦ Bu sistemin hiç çözümü yok (denklemler birbiriyle çelişiyor).
+Ce système a une infinité de solutions (des équations disent la même chose). ¦ Bu sistemin sonsuz sayıda çözümü var (bazı denklemler aynı şeyi söylüyor).
+Ce nombre est trop dur à décomposer. ¦ Bu sayıyı çarpanlarına ayırmak çok zor.
+Ce nombre est trop grand pour être décomposé (au plus 30 chiffres). ¦ Bu sayı çarpanlarına ayrılamayacak kadar büyük (en çok 30 basamak).
+{n} n’a pas de facteur premier. ¦ Asal çarpanı yok: {n}
+{x} est un nombre premier. ¦ Asal sayı: {x}
+Factorielle trop grande : au plus {fact}!. ¦ Faktöriyel çok büyük: en çok {fact}!.
+Factorielle ¦ Faktöriyel
+La factorielle n’existe pas pour un entier négatif. ¦ Negatif bir tam sayının faktöriyeli yoktur.
+n! = 1 × 2 × … × n, pour n = 0, 1, 2… ¦ n! = 1 × 2 × … × n, n = 0, 1, 2… için
+Changement de base ¦ Taban değiştirme
+La base va de 2 à 36. ¦ Taban 2 ile 36 arasında olur.
+{n} écrit en base {b} ¦ {n}, {b} tabanında yazılmış hâli
+(à retaper : {x}{pre}{x2}) ¦ (yeniden yazmak için: {x}{pre}{x2})
+{what} : la liste est vide. ¦ {what}: liste boş.
+L’écart-type d’un échantillon demande au moins 2 nombres. ¦ Örneklem standart sapması için en az 2 sayı gerekir.
+Ce calcul n’a pas de résultat fini. ¦ Bu hesabın sonlu bir sonucu yok.
+Calcul trop long (plus de {input} signes). ¦ Hesap çok uzun ({input} karakterden fazla).
+« {x} » n’est pas un nombre en base {base}. ¦ “{x}”, {base} tabanında bir sayı değil.
+Je ne comprends pas le signe « {c} ». ¦ “{c}” işaretini anlamıyorum.
+Les signes compris : + − × ÷ ^ ! % ( ) [ ] ; = et les noms des fonctions. ¦ Anlaşılan işaretler: + − × ÷ ^ ! % ( ) [ ] ; = ve fonksiyon adları.
+Tape un calcul. ¦ Bir hesap yaz.
+Trop de parenthèses imbriquées. ¦ İç içe çok fazla parantez var.
+Il manque un nombre après « {x} ». ¦ “{x}” sonrasında bir sayı eksik.
+Il manque un nombre à la fin. ¦ Sonda bir sayı eksik.
+Il manque un nombre après « {x} », avant « ) ». ¦ “{x}” sonrasında, “)” öncesinde bir sayı eksik.
+Il y a une parenthèse fermante « ) » de trop, ou il manque un nombre avant elle. ¦ Fazladan bir kapama parantezi “)” var ya da öncesinde bir sayı eksik.
+Il manque un nombre avant « {x} ». ¦ “{x}” öncesinde bir sayı eksik.
+Le signe « {v} » sépare les nombres d’une fonction, comme pgcd(12 ; 18). ¦ “{v}” işareti bir fonksiyonun sayılarını ayırır, örneğin pgcd(12 ; 18).
+Pour un nombre à virgule, colle la virgule aux chiffres : 2,5. ¦ Ondalıklı bir sayıda virgülü rakamlara bitişik yaz: 2,5.
+Je ne comprends pas « {raw} » ici. ¦ Burada “{raw}” ifadesini anlamıyorum.
+Il manque un signe entre « {raw} » et « {raw2} ». ¦ “{raw}” ile “{raw2}” arasında bir işaret eksik.
+Par exemple « × » ou « + ». ¦ Örneğin “×” ya da “+”.
+Il manque une parenthèse fermante « ) » après {name}(…). ¦ {name}(…) sonrasında bir kapama parantezi “)” eksik.
+Ajoute « ) » à la fin. ¦ Sona “)” ekle.
+Je ne comprends pas « {raw} » dans {name}(…). ¦ {name}(…) içinde “{raw}” ifadesini anlamıyorum.
+Les parenthèses sont vides. ¦ Parantezlerin içi boş.
+Le signe « ; » sépare les nombres d’une fonction, comme pgcd(12 ; 18) — il n’a pas sa place ici. ¦ “;” işareti bir fonksiyonun sayılarını ayırır, örneğin pgcd(12 ; 18) — burada yeri yok.
+Il manque une parenthèse fermante « ) ». ¦ Bir kapama parantezi “)” eksik.
+Il manque un crochet fermant « ] ». ¦ Bir kapama köşeli parantezi “]” eksik.
+Je ne comprends pas « {raw} » dans la liste. ¦ Listede “{raw}” ifadesini anlamıyorum.
+Une liste s’écrit [1 ; 2 ; 3]. ¦ Bir liste [1 ; 2 ; 3] biçiminde yazılır.
+Il manque la barre fermante « | » de la valeur absolue. ¦ Mutlak değerin kapama çizgisi “|” eksik.
+Il manque le nombre de {x}. ¦ Sayı eksik: {x}
+Par exemple {name}(30). ¦ Örneğin {name}(30).
+Il y a une parenthèse fermante « ) » de trop. ¦ Fazladan bir kapama parantezi “)” var.
+Retire-la, ou ajoute « ( » avant. ¦ Onu sil ya da önüne “(” ekle.
+Il y a un crochet fermant « ] » de trop. ¦ Fazladan bir kapama köşeli parantezi “]” var.
+Il manque un signe avant « {raw} ». ¦ “{raw}” öncesinde bir işaret eksik.
+Une équation ne peut pas contenir un autre signe « = ». ¦ Bir denklem başka bir “=” işareti içeremez.
+Je ne sais comparer avec « = » que des nombres. ¦ “=” ile yalnızca sayıları karşılaştırabilirim.
+Je ne comprends pas ce calcul. ¦ Bu hesabı anlamıyorum.
+L’infini (∞) n’est pas un nombre : je ne peux pas calculer avec. ¦ Sonsuz (∞) bir sayı değil: onunla hesap yapamam.
+Il n’y a pas encore de résultat précédent (ans). ¦ Henüz önceki bir sonuç yok (ans).
+{n} est une fonction : écris {n2}(…) avec son nombre entre parenthèses. ¦ {n} bir fonksiyon: {n2}(…) yaz, sayısını parantez içine koy.
+La lettre « {n} » n’a pas de valeur. ¦ “{n}” harfinin değeri yok.
+Pour une équation, ajoute « = … » (x² = 4) ; pour une courbe, ouvre l’onglet 📈 Courbes. ¦ Bir denklem için “= …” ekle (x² = 4); bir eğri için 📈 Eğriler sekmesini aç.
+Je ne connais pas « {n} ». ¦ “{n}” ifadesini tanımıyorum.
+Voulais-tu dire « {s} » ? ¦ Bunu mu demek istedin: “{s}”?
+La liste des fonctions est dans le mode 🧪 Scientifique (rubriques en haut des touches). ¦ Fonksiyonların listesi 🧪 Bilimsel modda (tuşların üstündeki bölümler).
+Je ne connais pas la fonction « {name} ». ¦ “{name}” fonksiyonunu tanımıyorum.
+au moins {n} ¦ en az {n}
+{min} à {max} nombres ¦ {min} ile {max} arası sayı
+, séparés par « ; » ¦ , “;” ile ayrılmış
+La virgule sert aux nombres à virgule (2,5) : sépare les nombres avec « ; », par exemple {x}. ¦ Virgül ondalıklı sayılar içindir (2,5): sayıları “;” ile ayır, örneğin {x}.
+Par exemple : {ex} ¦ Örneğin: {ex}
+Je résous les équations jusqu’au degré 4. ¦ 4. dereceye kadar denklemleri çözerim.
+Plusieurs lettres inconnues ({x}) : pour un système, écris toutes les équations dans resoudre(… ; …). ¦ Birkaç bilinmeyen harf var ({x}): bir sistem için tüm denklemleri resoudre(… ; …) içine yaz.
+Aucune solution ¦ Çözüm yok
+Toujours vrai : tout nombre {name} convient. ¦ Her zaman doğru: her {name} sayısı uyar.
+(l’égalité est toujours fausse) ¦ (eşitlik her zaman yanlış)
+entre {x} et {x2} ¦ {x} ile {x2} arasında
+, solutions entre {x} et {x2} ¦ , çözümler {x} ile {x2} arasında
+entre {a} et {b} ¦ {a} ile {b} arasında
+Solutions cherchées entre {a} et {b}{x}. ¦ Çözümler {a} ile {b} arasında arandı{x}.
+(valeurs approchées) ¦ (yaklaşık değerler)
+Ce système n’a pas d’inconnue (x, y, z…). ¦ Bu sistemde bilinmeyen yok (x, y, z…).
+Je résous les systèmes jusqu’à 6 inconnues. ¦ En çok 6 bilinmeyenli sistemleri çözerim.
+Ce système n’est pas du premier degré : je sais résoudre les systèmes où les inconnues ne sont ni multipliées entre elles, ni au carré. ¦ Bu sistem birinci dereceden değil: yalnızca bilinmeyenlerin birbiriyle çarpılmadığı ve karesinin alınmadığı sistemleri çözebilirim.
+Système de {eq} à {unk}. ¦ Sistem: {eq}, {unk}.
+Équation du 1er degré{x2}. ¦ Birinci dereceden denklem{x2}.
+Équation du {x}e degré{x2}. ¦ Derece {x} denklemi{x2}.
+=nb|équation ¦ denklem|denklem
+=nb|inconnue ¦ bilinmeyen|bilinmeyen
+=nb|colonne ¦ sütun|sütun
+=nb|ligne ¦ satır|satır
+=nb|nombre ¦ sayı|sayı
+=nb|jour ¦ gün|gün
+=nb|semaine ¦ hafta|hafta
+=nb|an ¦ yıl|yıl
+=nb|mois ¦ ay|ay
+La dérivée n’existe pas en {name} = {x}. ¦ Türev yok: {name} = {x}.
+Les bornes de l’intégrale doivent être des nombres. ¦ İntegralin sınırları sayı olmalı.
+L’intégrale ne converge pas (la fonction part à l’infini entre les bornes). ¦ İntegral yakınsamıyor (fonksiyon sınırlar arasında sonsuza gidiyor).
+Trop de termes (au plus {sum}). ¦ Terim çok fazla (en çok {sum}).
+Sinus (dans l’unité d’angle choisie) ¦ Sinüs (seçilen açı biriminde)
+Cosinus ¦ Kosinüs
+Tangente ¦ Tanjant
+tan({x}{x2}) n’existe pas (le cosinus vaut 0). ¦ tan({x}{x2}) yoktur (kosinüs 0).
+Cette tangente n’existe pas (le cosinus vaut 0). ¦ Bu tanjant yoktur (kosinüs 0).
+{nm}(…) demande un nombre entre −1 et 1. ¦ {nm}(…) için −1 ile 1 arasında bir sayı gerekir.
+Arc sinus (angle dont le sinus vaut x) ¦ Ark sinüs (sinüsü x olan açı)
+Arc cosinus ¦ Ark kosinüs
+Arc tangente ¦ Ark tanjant
+Angle du point (x ; y) : atan2(y ; x) ¦ Noktanın açısı (x ; y): atan2(y ; x)
+Sinus hyperbolique ¦ Hiperbolik sinüs
+Cosinus hyperbolique ¦ Hiperbolik kosinüs
+Tangente hyperbolique ¦ Hiperbolik tanjant
+Argument sinus hyperbolique ¦ Ters hiperbolik sinüs
+Argument cosinus hyperbolique ¦ Ters hiperbolik kosinüs
+Argument tangente hyperbolique ¦ Ters hiperbolik tanjant
+Le logarithme demande un nombre plus grand que 0. ¦ Logaritma için 0’dan büyük bir sayı gerekir.
+Logarithme népérien (base e) ¦ Doğal logaritma (e tabanı)
+Logarithme décimal ; log(x ; b) en base b ¦ Onluk logaritma; log(x ; b) b tabanında
+La base d’un logarithme ne peut pas valoir 1. ¦ Logaritmanın tabanı 1 olamaz.
+Logarithme en base 2 ¦ 2 tabanında logaritma
+Exponentielle : e puissance x ¦ Üstel: e üzeri x
+Racine carrée ; racine(x ; n) : racine n-ième ¦ Karekök; racine(x ; n): n’inci kök
+Racine cubique ¦ Küpkök
+Racine 4e ¦ 4. kök
+Racine n-ième : root(x ; n) ¦ n’inci kök: root(x ; n)
+Racine ¦ Kök
+La racine 0-ième n’existe pas. ¦ 0’ıncı kök yoktur.
+Valeur absolue (ou module d’un complexe) : |x| ¦ Mutlak değer (ya da bir karmaşık sayının modülü): |x|
+Factorielle : n! = 1 × 2 × … × n ¦ Faktöriyel: n! = 1 × 2 × … × n
+Fonction Γ : Γ(n) = (n − 1)! ¦ Γ fonksiyonu: Γ(n) = (n − 1)!
+Partie réelle ¦ Gerçel kısım
+Partie imaginaire ¦ Sanal kısım
+Module |z| = √(a² + b²) ¦ Modül |z| = √(a² + b²)
+Argument (angle) d’un complexe ¦ Bir karmaşık sayının argümanı (açısı)
+L’argument de 0 n’existe pas. ¦ 0’ın argümanı yoktur.
+Conjugué : a − bi ¦ Eşlenik: a − bi
+Arrondi (au plus proche) ; arrondi(x ; n) avec n chiffres après la virgule ¦ Yuvarlama (en yakına); arrondi(x ; n) virgülden sonra n basamakla
+Partie entière (vers le bas) ¦ Tam kısım (aşağı doğru)
+Arrondi vers le haut ¦ Yukarı yuvarla
+Coupe les chiffres après la virgule (vers 0) ¦ Virgülden sonraki basamakları atar (0’a doğru)
+Tronque ¦ Kes
+Écrit un nombre à virgule en fraction ¦ Ondalıklı bir sayıyı kesir olarak yazar
+Je ne trouve pas de fraction simple pour ce nombre. ¦ Bu sayı için basit bir kesir bulamıyorum.
+Écrit le nombre en décimal ¦ Sayıyı ondalık olarak yazar
+Signe : −1, 0 ou 1 ¦ İşaret: −1, 0 ya da 1
+Signe ¦ İşaret
+Reste de la division : 17 mod 5 ¦ Bölmeden kalan: 17 mod 5
+Quotient entier ¦ Tam bölüm
+Plus grand commun diviseur ¦ En büyük ortak bölen
+Plus petit commun multiple ¦ En küçük ortak kat
+Combinaisons : C(n ; k) façons de choisir k parmi n ¦ Kombinasyon: C(n ; k), n içinden k seçmenin yolları
+Arrangements : A(n ; k) (l’ordre compte) ¦ Permütasyon: A(n ; k) (sıra önemli)
+Est-ce un nombre premier ? ¦ Asal sayı mı?
+Oui, {n} est premier ✓ ¦ Evet, {n} asal ✓
+Non, {n} n’est pas premier ¦ Hayır, {n} asal değil
+Décomposition en facteurs premiers ¦ Asal çarpanlara ayırma
+Le nombre premier suivant ¦ Sonraki asal sayı
+Écrit un entier en binaire (base 2) ¦ Bir tam sayıyı ikilik tabanda (2 tabanı) yazar
+Écrit un entier en octal (base 8) ¦ Bir tam sayıyı sekizlik tabanda (8 tabanı) yazar
+Écrit un entier en hexadécimal (base 16) ¦ Bir tam sayıyı onaltılık tabanda (16 tabanı) yazar
+Écrit un entier dans une base de 2 à 36 ¦ Bir tam sayıyı 2 ile 36 arasında bir tabanda yazar
+calc|Moyenne ¦ Ortalama
+Médiane (la valeur du milieu) ¦ Medyan (ortadaki değer)
+Variance (de la population) ¦ Varyans (popülasyon)
+Variance ¦ Varyans
+Écart-type σ (de la population, comme au lycée) ¦ Standart sapma σ (popülasyon, lisedeki gibi)
+Écart-type ¦ Standart sapma
+Écart-type d’un échantillon (divisé par n − 1) ¦ Örneklem standart sapması (n − 1’e bölünür)
+Somme d’une liste ; somme(k² ; k ; 1 ; 10) : somme d’une suite ¦ Bir listenin toplamı; somme(k² ; k ; 1 ; 10): bir dizinin toplamı
+Produit d’une liste ; produit(k ; k ; 1 ; 5) ¦ Bir listenin çarpımı; produit(k ; k ; 1 ; 5)
+Le plus petit ¦ En küçük
+Le plus grand ¦ En büyük
+Étendue : max − min ¦ Açıklık: max − min
+calc|Étendue ¦ Açıklık
+1er quartile ¦ 1. çeyrek
+Quartile ¦ Çeyrek
+3e quartile ¦ 3. çeyrek
+Combien de nombres dans la liste ¦ Listede kaç sayı var
+Effectif ¦ Sayı
+Range la liste du plus petit au plus grand ¦ Listeyi küçükten büyüğe sıralar
+Tri ¦ Sıralama
+Déterminant d’une matrice carrée ¦ Kare matrisin determinantı
+Matrice inverse ¦ Ters matris
+Transposée (lignes ↔ colonnes) ¦ Devrik (satırlar ↔ sütunlar)
+Trace : somme de la diagonale ¦ İz: köşegenin toplamı
+Trace ¦ İz
+La trace demande une matrice carrée. ¦ İz için kare matris gerekir.
+Matrice identité n × n ¦ n × n birim matris
+La taille va de 1 à {mat}. ¦ Boyut 1 ile {mat} arasında olur.
+Rang d’une matrice ¦ Bir matrisin rankı
+Rang ¦ Rank
+Résout A·X = B (matrice A, liste B) ¦ A·X = B çözer (A matrisi, B listesi)
+La matrice a {r} lignes et la liste {n} nombres : il en faut autant. ¦ Matriste {r} satır, listede {n} sayı var: ikisi eşit olmalı.
+Le système doit avoir autant d’équations que d’inconnues. ¦ Sistemde bilinmeyen sayısı kadar denklem olmalı.
+Résout une équation (jusqu’au 4e degré exactement, ou approchée) ou un système ¦ Bir denklemi (4. dereceye kadar tam ya da yaklaşık olarak) ya da bir sistemi çözer
+Écris l’équation dans resoudre(…), par exemple resoudre(x^2 = 4). ¦ Denklemi resoudre(…) içine yaz, örneğin resoudre(x^2 = 4).
+Intervalle ¦ Aralık
+resoudre(équation ; lettre ; début ; fin) : je n’ai pas compris les nombres en plus. ¦ resoudre(denklem ; harf ; başlangıç ; bitiş): fazladan yazılan sayıları anlamadım.
+Racines d’un polynôme : ses coefficients, du plus haut degré au plus bas ¦ Bir polinomun kökleri: katsayıları, en yüksek dereceden en düşüğe
+Nombre dérivé de f en a : derivee(f(x) ; a) ¦ f’nin a noktasındaki türevi: derivee(f(x) ; a)
+calc|Dérivée ¦ Türev
+Intégrale de f entre a et b : integrale(f(x) ; a ; b) ¦ f’nin a ile b arasındaki integrali: integrale(f(x) ; a ; b)
+Intégrale ¦ İntegral
+Valeur approchée de la limite en a ¦ a noktasındaki limitin yaklaşık değeri
+Je ne trouve pas de limite (à gauche et à droite ce n’est pas pareil, ou ça part à l’infini). ¦ Limit bulamıyorum (soldan ve sağdan aynı değil ya da sonsuza gidiyor).
+pas un nombre ¦ sayı değil
+longueur ¦ uzunluk
+surface ¦ alan
+volume ¦ hacim
+poids ¦ ağırlık
+monnaie ¦ para birimi
+durée ¦ süre
+température ¦ sıcaklık
+valeur approchée : la mesure changeait d’un lieu à l’autre ¦ yaklaşık değer: ölçü bir yerden ötekine değişirdi
+mesure de {region} ¦ yöresel ölçü: {region}
+valeur approchée ¦ yaklaşık değer
+Le calendrier républicain n’est pas chargé. ¦ Fransız Cumhuriyet takvimi yüklenmedi.
+Le calendrier républicain n’a servi que du 22 septembre 1792 (1er vendémiaire an I) au 31 décembre 1805. ¦ Fransız Cumhuriyet takvimi yalnızca 22 Eylül 1792 (1er vendémiaire an I) ile 31 Aralık 1805 arasında kullanıldı.
+Cette date est hors du calendrier républicain. ¦ Bu tarih Cumhuriyet takviminin dışında.
+date approchée ¦ yaklaşık tarih
+Le calcul des écarts de dates n’est pas chargé. ¦ Tarih farkı hesabı yüklenmedi.
+Je ne sais pas calculer l’écart entre ces deux dates. ¦ Bu iki tarih arasındaki farkı hesaplayamıyorum.
+soit {days} ({weeks}) ¦ yani {days} ({weeks})
+la 2e date est la plus ancienne ¦ 2. tarih daha eski
+du {from} au {to} ¦ {from} – {to}
+{n} environ ¦ yaklaşık {n}
+entre {years} et {x} ¦ {years} ile {x} arası
+une date n’est pas complète (jour, mois et année) : de {x} à {x2} ¦ bir tarih eksik (gün, ay ve yıl): {x} – {x2}
+Je ne comprends pas la date « {x} ». ¦ “{x}” tarihini anlamıyorum.
+Écris-la comme dans un acte : 7 mai 1925, 14/07/1789, 3 frimaire an XII. ¦ Onu bir belgedeki gibi Fransızca yaz: 7 mai 1925, 14/07/1789, 3 frimaire an XII.
+Il faut une date complète (jour, mois, année). ¦ Tam bir tarih gerekir (gün, ay, yıl).
+« {x} » est une mesure de {label} : choisis cette région dans ⚙️ Réglages → Mesures anciennes. ¦ “{x}” şu yörenin ölçüsü: {label}. Bu yöreyi ⚙️ Ayarlar → Eski ölçüler bölümünden seç.
+Je ne connais pas l’unité « {right} ». ¦ “{right}” birimini tanımıyorum.
+Les unités comprises sont dans la rubrique « Unités » du mode 🧪 Scientifique. ¦ Anlaşılan birimler 🧪 Bilimsel moddaki “Birimler” bölümünde.
+On ne peut pas convertir une {x} en {x2} ({right}). ¦ Dönüştürülemez: {x} → {x2} ({right}).
+Je ne connais pas l’unité de « {left} ». ¦ Birimini tanımıyorum: “{left}”.
+angle en {x} : passe en RAD pour calculer avec π ¦ açı birimi: {x}; π ile hesap yapmak için RAD’a geç
+degrés ¦ derece
+grades ¦ grad
+Ce calcul est trop gros pour être fait. ¦ Bu hesap yapılamayacak kadar büyük.
+La lettre « {x} » n’a pas de valeur : une courbe s’écrit avec x seulement, par exemple sin(x). ¦ “{x}” harfinin değeri yok: bir eğri yalnızca x ile yazılır, örneğin sin(x).
+Écris seulement la formule de y, par exemple x^2 − 1 (sans « = »). ¦ Yalnızca y’nin formülünü yaz, örneğin x^2 − 1 (“=” olmadan).
+Trigonométrie ¦ Trigonometri
+Hyperboliques ¦ Hiperbolik
+Logarithmes et exponentielle ¦ Logaritmalar ve üstel
+Puissances et racines ¦ Kuvvetler ve kökler
+Nombres complexes ¦ Karmaşık sayılar
+Arithmétique et arrondis ¦ Aritmetik ve yuvarlama
+Bases (binaire, hexadécimal…) ¦ Tabanlar (ikilik, onaltılık…)
+Matrices ¦ Matrisler
+Équations ¦ Denklemler
+Dérivées et intégrales ¦ Türevler ve integraller
+Degrés (un tour = 360°) ¦ Derece (bir tur = 360°)
+Radians (un tour = 2π) ¦ Radyan (bir tur = 2π)
+Grades (un tour = 400 gr) ¦ Grad (bir tur = 400 gr)
+Fonctions ¦ Fonksiyonlar
+Sinus ¦ Sinüs
+Au carré ¦ Karesi
+Puissance ¦ Kuvvet
+Racine carrée ¦ Karekök
+Arc sinus ¦ Ark sinüs
+Au cube ¦ Küpü
+Logarithme népérien ¦ Doğal logaritma
+Exponentielle ¦ Üstel
+Valeur absolue ¦ Mutlak değer
+Pi = 3,14159… ¦ Pi = 3,14159…
+Nombre d’or = 1,61803… ¦ Altın oran = 1,61803…
+Puissance de 10 ¦ 10’un kuvveti
+Reste de la division ¦ Bölmeden kalan
+Pour cent (200 + 10 % = 220) ¦ Yüzde (200 + 10 % = 220)
+Degrés, même en mode RAD ¦ Derece, RAD modunda bile
+Sépare les nombres d’une fonction ¦ Bir fonksiyonun sayılarını ayırır
+Le résultat précédent ¦ Önceki sonuç
+Complexes ¦ Karmaşık
+Module |z| ¦ Modül |z|
+Argument (angle) ¦ Argüman (açı)
+Conjugué ¦ Eşlenik
+Écris un complexe a + bi : (3 + 4i) × 2, √(−9), i^2. ¦ Bir karmaşık sayıyı a + bi biçiminde yaz: (3 + 4i) × 2, √(−9), i^2.
+Arithmétique ¦ Aritmetik
+Combinaisons : C(n ; k) ¦ Kombinasyon: C(n ; k)
+Arrangements : A(n ; k) ¦ Permütasyon: A(n ; k)
+Arrondi à 2 chiffres après la virgule ¦ Virgülden sonra 2 basamağa yuvarlanmış
+Partie entière ¦ Tam kısım
+En fraction ¦ Kesir olarak
+En nombre à virgule ¦ Ondalıklı sayı olarak
+Bases ¦ Tabanlar
+En binaire ¦ İkilik tabanda
+En octal ¦ Sekizlik tabanda
+En hexadécimal ¦ Onaltılık tabanda
+Dans une base de 2 à 36 ¦ 2 ile 36 arasında bir tabanda
+Un nombre binaire : 0b1010 ¦ İkilik bir sayı: 0b1010
+Un nombre hexadécimal : 0xFF ¦ Onaltılık bir sayı: 0xFF
+Une liste : [12 ; 15 ; 9] ¦ Bir liste: [12 ; 15 ; 9]
+Sépare les nombres ¦ Sayıları ayırır
+Écart-type (population) ¦ Standart sapma (popülasyon)
+Écart-type d’un échantillon ¦ Örneklem standart sapması
+Mets tes nombres entre crochets, séparés par « ; ». ¦ Sayılarını köşeli parantez içine koy, “;” ile ayır.
+Écrire une matrice dans une grille ¦ Bir matrisi tabloya yaz
+Une matrice : [[1 ; 2] ; [3 ; 4]] ¦ Bir matris: [[1 ; 2] ; [3 ; 4]]
+Matrice identité ¦ Birim matris
+Produit de deux matrices ¦ İki matrisin çarpımı
+Une matrice = des lignes entre crochets : [[1 ; 2] ; [3 ; 4]]. ¦ Bir matris = köşeli parantez içinde satırlar: [[1 ; 2] ; [3 ; 4]].
+Le signe égal d’une équation ¦ Bir denklemin eşittir işareti
+Résout une équation ou un système ¦ Bir denklemi ya da bir sistemi çözer
+Racines d’un polynôme : ses coefficients ¦ Bir polinomun kökleri: katsayıları
+Système A·X = B ¦ A·X = B sistemi
+Tape l’équation avec « = » : la calculette la résout (jusqu’au 4e degré exactement). ¦ Denklemi “=” ile yaz: hesap makinesi onu çözer (4. dereceye kadar tam olarak).
+Analyse ¦ Analiz
+Nombre dérivé : derivee(f(x) ; a) ¦ Türev: derivee(f(x) ; a)
+Intégrale : integrale(f(x) ; a ; b) ¦ İntegral: integrale(f(x) ; a ; b)
+Limite : limite(f(x) ; a) ¦ Limit: limite(f(x) ; a)
+Somme d’une suite ¦ Bir dizinin toplamı
+Les dérivées, intégrales et limites se calculent en radians. ¦ Türevler, integraller ve limitler radyan cinsinden hesaplanır.
+Unités ¦ Birimler
+Écris « 3 toises en m » ; les mesures anciennes suivent la région choisie dans ⚙️. ¦ “3 toises en m” yaz; eski ölçüler ⚙️ içinde seçilen yöreye göre hesaplanır.
+Les dates s’écrivent comme dans un acte (C4) : 7 mai 1925, 14/07/1789, vers 1784, 3 frimaire an XII. ¦ Tarihler bir belgedeki gibi Fransızca yazılır (C4): 7 mai 1925, 14/07/1789, vers 1784, 3 frimaire an XII.
+Tout effacer (Échap) ¦ Tümünü sil (Esc)
+Effacer le dernier signe ¦ Son işareti sil
+Pour cent ¦ Yüzde
+Changer le signe ¦ İşareti değiştir
+Calculer (Entrée) ¦ Hesapla (Enter)
+Glisser pour déplacer la calculette ¦ Hesap makinesini taşımak için sürükle
+Mode de la calculette ¦ Hesap makinesi modu
+Grosses touches, ruban, mémoire ¦ Büyük tuşlar, şerit, bellek
+Fonctions, complexes, matrices, équations, unités, dates ¦ Fonksiyonlar, karmaşık sayılar, matrisler, denklemler, birimler, tarihler
+Tracer des courbes y = f(x) ¦ y = f(x) eğrileri çiz
+Réglages de la calculette ¦ Hesap makinesi ayarları
+Fermer la calculette ¦ Hesap makinesini kapat
+Vider le ruban (on peut l’annuler juste après) ¦ Şeridi temizle (hemen ardından geri alabilirsin)
+Calculs déjà faits : un clic reprend le résultat ¦ Yapılmış hesaplar: bir tıklama sonucu geri alır
+Calcul à faire ¦ Yapılacak hesap
+Tape un calcul… ¦ Bir hesap yaz…
+Copier le résultat ¦ Sonucu kopyala
+Effacer la mémoire ¦ Belleği temizle
+Reprendre le nombre gardé en mémoire ¦ Bellekteki sayıyı geri al
+Ajouter le résultat à la mémoire ¦ Sonucu belleğe ekle
+Retirer le résultat de la mémoire ¦ Sonucu bellekten çıkar
+Unité des angles ¦ Açı birimi
+Ajouter une courbe ¦ Eğri ekle
+Exporter l’image du graphique (PNG) ¦ Grafiğin görüntüsünü dışa aktar (PNG)
+Exporter en PNG ¦ PNG olarak dışa aktar
+Graphique des courbes ¦ Eğrilerin grafiği
+Glisse pour te déplacer · molette pour zoomer · survole une courbe pour lire ses valeurs · x en radians. ¦ Kaymak için sürükle · yakınlaştırmak için tekerlek · değerlerini okumak için bir eğrinin üstüne gel · x radyan cinsinden.
+Glisser pour agrandir ou réduire ¦ Büyütmek ya da küçültmek için sürükle
+Point décimal ¦ Ondalık nokta
+Par exemple 12 × 3,5, ou 1/3 + 1/6. ¦ Örneğin 12 × 3,5 ya da 1/3 + 1/6.
+Reprendre ce résultat dans le calcul ¦ Bu sonucu hesaba al
+Reprendre ce calcul pour le modifier ¦ Düzenlemek için bu hesabı geri al
+Reprendre ce calcul ¦ Bu hesabı geri al
+Copier ce résultat ¦ Bu sonucu kopyala
+Tes calculs s’écriront ici. ¦ Hesapların buraya yazılacak.
+Ruban de la calculette vidé ¦ Hesap makinesi şeridi temizlendi
+Résultat copié ¦ Sonuç kopyalandı
+Il n’y a pas encore de résultat à copier. ¦ Henüz kopyalanacak bir sonuç yok.
+La copie n’a pas marché : choisis le résultat et copie-le à la main. ¦ Kopyalama olmadı: sonucu seç ve elle kopyala.
+Nombre gardé en mémoire ¦ Bellekte tutulan sayı
+Calcule d’abord un nombre à garder en mémoire. ¦ Önce bellekte tutulacak bir sayı hesapla.
+Ajouter au calcul ¦ Hesaba ekle
+Mesures anciennes : {label} (à changer dans ⚙️). Pour les mesures et monnaies d’autres régions : Réglages → Calendrier / mesures. ¦ Eski ölçüler: {label} (⚙️ içinden değiştir). Başka yörelerin ölçüleri ve paraları için: Ayarlar → Takvim / ölçüler.
+Âge ou écart entre deux dates ¦ Yaş ya da iki tarih arasındaki fark
+Calculer l’écart ¦ Farkı hesapla
+Calendrier républicain ↔ grégorien ¦ Cumhuriyet takvimi ↔ Gregoryen takvim
+3 frimaire an XII ou 14/07/1794 ¦ 3 frimaire an XII ya da 14/07/1794
+Retirer cette courbe ¦ Bu eğriyi çıkar
+Aucune courbe. ¦ Eğri yok.
+Revenir à la vue de départ ¦ Başlangıç görünümüne dön
+Image « {name} » téléchargée. ¦ “{name}” görüntüsü indirildi.
+Ce résultat ne se reprend pas dans un calcul (c’est un texte). ¦ Bu sonuç bir hesapta kullanılamaz (bir metin).
+Courbe retirée. ¦ Eğri çıkarıldı.
+Écris la première date. ¦ İlk tarihi yaz.
+Écris la deuxième date. ¦ İkinci tarihi yaz.
+Écris une date. ¦ Bir tarih yaz.
+{d} en grégorien ¦ Gregoryen takvimde: {d}
+{d} en républicain ¦ Cumhuriyet takviminde: {d}
+Comme l’app (clair ou sombre) ¦ Uygulama gibi (açık ya da koyu)
+Chiffres affichés ¦ Gösterilen basamaklar
+Séparateur décimal ¦ Ondalık ayırıcı
+Virgule : 2,5 (et « ; » entre les nombres) ¦ Virgül: 2,5 (sayılar arasında “;”)
+Point : 2.5 (et « , » ou « ; » entre les nombres) ¦ Nokta: 2.5 (sayılar arasında “,” ya da “;”)
+Fractions exactes quand c’est possible (1/3 au lieu de 0,333…) ¦ Olanaklıysa tam kesirler (0,333… yerine 1/3)
+Fractions exactes ¦ Tam kesirler
+Bouton 🧮 dans la barre du haut ¦ Üst çubukta 🧮 düğmesi
+La calculette s’ouvre aussi avec {x} (à changer dans Réglages → Raccourcis). Sa place parmi les boutons du haut : Réglages → Apparence → « Boutons en haut à droite ». ¦ Hesap makinesi şu tuşla da açılır: {x} (Ayarlar → Kısayollar bölümünden değiştir). Üstteki düğmeler arasındaki yeri: Ayarlar → Görünüm → “Sağ üstteki düğmeler”.
+Réglage de la calculette ¦ Hesap makinesi ayarı
+les réglages de la calculette (thème, mode, angle, précision) ¦ hesap makinesi ayarları (tema, mod, açı, duyarlık)
+Réglage « {nom} » importé : clique « Appliquer » pour t’en servir. ¦ “{nom}” ayarı içe aktarıldı: kullanmak için “Uygula”ya tıkla.
+La calculette n’est pas encore chargée. Réessaie dans un instant. ¦ Hesap makinesi henüz yüklenmedi. Birazdan yeniden dene.
+Ouvrir la calculette ¦ Hesap makinesini aç
+CALCULETTE ¦ HESAP MAKİNESİ
+Mesures anciennes ¦ Eski ölçüler
+date|De ¦ Başlangıç
+date|À ¦ Bitiş
+=calcul ¦ hesap|hesap
+Français + latin ¦ Fransızca + Latince
+Titre de l’acte (ex. Baptême de Jean Martin, 1790) ¦ Belgenin başlığı (örn. Jean Martin’in vaftizi, 1790)
+Genre d’acte ¦ Belge türü
+Source (AD, cote, vue) ¦ Kaynak (arşiv, arşiv numarası, görüntü)
+Archives, cote, numéro de vue ¦ Arşiv, arşiv numarası, görüntü numarası
+Où en est cette transcription (pour la liste « Transcriptions d’actes ») ¦ Bu transkripsiyon ne durumda (“Belge transkripsiyonları” listesi için)
+Le texte (.txt), l’impression ou un PDF (image + texte) ¦ Metin (.txt), baskı ya da bir PDF (görüntü + metin)
+Exporter ▾ ¦ Dışa aktar ▾
+Plus ▾ ¦ Daha fazla ▾
+Déplacer l’image, ou barre d’espace ¦ Görüntüyü kaydır ya da boşluk tuşu
+Déplacer l’image ¦ Görüntüyü kaydır
+Dessiner une zone : choisis un passage dans le texte, puis dessine son rectangle sur l’image (les deux restent liés) ¦ Bir alan çiz: metinde bir bölüm seç, sonra görüntü üzerinde dikdörtgenini çiz (ikisi bağlı kalır)
+Dessiner une zone ¦ Bir alan çiz
+Loupe qui suit la souris (la molette change le grossissement) ¦ Fareyi izleyen büyüteç (tekerlek büyütmeyi değiştirir)
+Tourner l’image de 90° ¦ Görüntüyü 90° döndür
+Tourner de 90° ¦ 90° döndür
+Choisir l’image de l’acte (base ou ordinateur) ¦ Belgenin görüntüsünü seç (veritabanı ya da bilgisayar)
+Choisis l’image de l’acte : « 🖼️ Image… » (une photo de la base, ou un fichier de l’ordinateur). ¦ Belgenin görüntüsünü seç: “🖼️ Görüntü…” (veritabanından bir fotoğraf ya da bilgisayardan bir dosya).
+Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne) ¦ Basılı ya da daktiloyla yazılmış bir metni oku (alanları da satır satır yerleştirir)
+Lire (imprimé) ¦ Oku (basılı)
+Lire l’écriture à la main : toute la page, ou seulement la zone choisie (▭). Le texte est proposé ligne par ligne, à relire. ¦ El yazısını oku: tüm sayfa ya da yalnızca seçilen alan (▭). Metin satır satır önerilir, gözden geçirmen gerekir.
+Lire l’acte ¦ Belgeyi oku
+Arrêter la lecture ¦ Okumayı durdur
+Langue du texte : sert à la lecture automatique, et « 📜 Aide à la lecture » s’ouvre sur cette langue ¦ Metnin dili: otomatik okumada kullanılır ve “📜 Okuma yardımı” bu dilde açılır
+Un modèle d’acte à compléter ¦ Doldurulacak bir belge şablonu
+Le latin des registres, les abréviations, les anciennes lettres (ſ, ꝑ…) et des exercices : choisis d’abord un mot dans le texte pour le chercher ¦ Kayıtların Latincesi, kısaltmalar, eski harfler (ſ, ꝑ…) ve alıştırmalar: aramak için önce metinde bir sözcük seç
+Aide à la lecture ¦ Okuma yardımı
+Repérer les noms, dates, lieux et métiers ¦ Adları, tarihleri, yerleri ve meslekleri bul
+Repérer ¦ Bul
+Mettre le texte dans le média ¦ Metni medyaya koy
+Copier le texte ¦ Metni kopyala
+La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine ¦ Okuma (basılı ve el yazısı) ve dışa aktarma, görüntüyü “Daha iyi gör” ayarlarıyla (karşıtlık, netlik, kanal, eşik…) kullanır; yoksa özgün görüntüyü kullanır
+Lire et exporter l’image améliorée ¦ İyileştirilmiş görüntüyü oku ve dışa aktar
+Insérer {c} ¦ Ekle: {c}
+La transcription, ligne à ligne comme sur l’acte. Choisis un passage, puis dessine sa zone sur l’image (▭ Zone) : les deux restent liés. ¦ Transkripsiyon, belgedeki gibi satır satır. Bir bölüm seç, sonra görüntü üzerinde alanını çiz (▭ Alan): ikisi bağlı kalır.
+Elles étaient posées pour l’ancienne image. ¦ Bunlar önceki görüntü için yerleştirilmişti.
+Garder les zones déjà posées ? ¦ Önceden yerleştirilen alanlar kalsın mı?
+Garder les zones ¦ Alanları koru
+Les retirer ¦ Onları çıkar
+L’image est dans les Médias et devient l’image de l’acte. ¦ Görüntü Medya’da ve belgenin görüntüsü oluyor.
+Largeur (l’image prend toute la largeur, le mieux pour lire) ¦ Genişlik (görüntü tüm genişliği kaplar, okumak için en iyisi)
+Taille réelle (100 %) ¦ Gerçek boyut (%100)
+« Mieux voir » : cette image n’a pas pu être préparée (trop grande ou abîmée) ; seuls contraste, luminosité, négatif et gris s’appliquent. ¦ “Daha iyi gör”: bu görüntü hazırlanamadı (çok büyük ya da bozuk); yalnızca karşıtlık, parlaklık, negatif ve gri uygulanır.
+Ce navigateur ne sait pas calculer ces réglages : seuls contraste, luminosité, négatif et gris s’appliquent. ¦ Bu tarayıcı bu ayarları hesaplayamıyor: yalnızca karşıtlık, parlaklık, negatif ve gri uygulanır.
+Image de l’acte illisible. ¦ Belgenin görüntüsü okunamıyor.
+Zone non reliée ¦ Bağlanmamış alan
+— glisse pour la déplacer, tire une poignée pour la redimensionner (flèches, Maj + flèches) ¦ — taşımak için sürükle, boyutunu değiştirmek için bir tutamacı çek (oklar, Shift + oklar)
+Tirer pour redimensionner ¦ Boyutlandırmak için çek
+pas encore reliée au texte ¦ henüz metne bağlanmadı
+Relier cette zone au passage choisi dans le texte ¦ Bu alanı metinde seçilen bölüme bağla
+Au passage choisi ¦ Seçilen bölüme
+Lire l’écriture à la main dans cette zone seulement ¦ Yalnızca bu alandaki el yazısını oku
+Lire cette zone ¦ Bu alanı oku
+Supprimer la zone (Suppr) — « ↶ Annuler » la remet ¦ Alanı sil (Del) — “↶ Geri al” onu geri getirir
+Glisse la zone pour la déplacer, tire une des 8 poignées pour changer sa taille ¦ Taşımak için alanı sürükle, boyutunu değiştirmek için 8 tutamaçtan birini çek
+glisser · poignées · flèches · Maj + flèches · ⌘Z ¦ sürükle · tutamaçlar · oklar · Shift + oklar · ⌘Z
+Rétabli ¦ Yinelendi
+Annulé ¦ Geri alındı
+Zone supprimée ¦ Alan silindi
+Zone déplacée (⌘Z pour annuler) ¦ Alan taşındı (geri almak için ⌘Z)
+Zone redimensionnée (⌘Z pour annuler) ¦ Alan yeniden boyutlandırıldı (geri almak için ⌘Z)
+Zone reliée au passage choisi ¦ Alan seçilen bölüme bağlandı
+Zone posée : choisis son passage dans le texte, puis « 🔗 Au passage choisi » ¦ Alan yerleştirildi: metinde bölümünü seç, sonra “🔗 Seçilen bölüme”
+Glisse pour déplacer l’image (ou barre d’espace) · molette : zoomer · clic sur une zone : la choisir ¦ Görüntüyü kaydırmak için sürükle (ya da boşluk tuşu) · tekerlek: yakınlaştır · bir alana tıkla: onu seç
+Choisis un passage dans le texte, puis dessine son rectangle sur l’image : les deux restent liés ¦ Metinde bir bölüm seç, sonra görüntü üzerinde dikdörtgenini çiz: ikisi bağlı kalır
+Pas encore d’image ¦ Henüz görüntü yok
+Personnes de l’acte ¦ Belgedeki kişiler
+Rôle dans l’acte ¦ Belgedeki rolü
+— rôle — ¦ — rol —
+role|sujet ¦ kişinin kendisi
+role|parent ¦ ebeveyn
+role|conjoint ¦ eş
+role|conjoint défunt ¦ ölmüş eş
+role|défunt ¦ ölen
+role|parrain ¦ vaftiz babası
+role|marraine ¦ vaftiz annesi
+role|témoin ¦ tanık
+role|déclarant ¦ bildiren
+role|officiant ¦ töreni yöneten
+role|officier ¦ nüfus memuru
+role|notaire ¦ noter
+role|autre ¦ diğer
+fiche n° {person_id} ¦ kart no. {person_id}
+Fiche… ¦ Kart…
+Noms repérés ¦ Bulunan adlar
+tout garder ¦ tümünü koru
+Garder et relier à cette fiche ¦ Koru ve bu karta bağla
+Garder dans les personnes de l’acte ¦ Belgedeki kişiler arasında koru
+Ouvrir dans 📜 Aide à la lecture ¦ 📜 Okuma yardımında aç
+« 🧭 Repérer » cherche dans le texte les noms (et leur rôle : parrain, témoin, fils de…), les dates (même en toutes lettres, ou au calendrier républicain), les lieux et les métiers, et propose les fiches de ta base qui leur ressemblent. ¦ “🧭 Bul” metinde adları (ve rollerini: vaftiz babası, tanık, … oğlu), tarihleri (yazıyla yazılmış olsalar ya da Cumhuriyet takviminde olsalar bile), yerleri ve meslekleri arar; soy ağacında bunlara benzeyen kartları önerir.
+Relier « {name} » à une fiche ¦ “{name}” adını bir karta bağla
+Choisis une fiche. ¦ Bir kart seç.
+Personne gardée et reliée à sa fiche. ¦ Kişi korundu ve kartına bağlandı.
+La transcription non enregistrée sera perdue (💾 d’abord). ¦ Kaydedilmemiş transkripsiyon kaybolacak (önce 💾).
+« Mieux voir » : cette image n’a pas pu être préparée. ¦ “Daha iyi gör”: bu görüntü hazırlanamadı.
+Chargement du lecteur… ¦ Okuyucu yükleniyor…
+Aucun texte lu sur cette image (essaie le contraste, ou « Lire (manuscrit) »). ¦ Bu görüntüde metin okunamadı (karşıtlığı dene ya da “Oku (el yazısı)”).
+Texte lu (à relire) ¦ Okunan metin (gözden geçir)
+Texte lu et zones posées ligne par ligne : relis et corrige. ¦ Metin okundu ve alanlar satır satır yerleştirildi: gözden geçir ve düzelt.
+Lecture arrêtée ¦ Okuma durduruldu
+Une lecture est déjà en cours. ¦ Zaten bir okuma sürüyor.
+La lecture d’écriture manuscrite n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR) (une seule fois, l’assistant explique tout). ¦ El yazısı okuma henüz kurulu değil: Ayarlar → El yazısı tanıma (HTR) (yalnızca bir kez, yardımcı her şeyi anlatır).
+Lecture de la zone… ¦ Alan okunuyor…
+Lecture de l’acte… ¦ Belge okunuyor…
+Lecture de la zone ¦ Alan okunuyor
+Lecture de l’acte ¦ Belge okunuyor
+La lecture n’a pas abouti. ¦ Okuma sonuç vermedi.
+Aucune ligne d’écriture trouvée : essaie « 🎚️ Mieux voir » (contraste), ou une zone plus serrée. ¦ Yazı satırı bulunamadı: “🎚️ Daha iyi gör”ü (karşıtlık) ya da daha dar bir alanı dene.
+Sûr à {x} % — clique pour le corriger ¦ %{x} emin — düzeltmek için tıkla
+LECTURE AUTOMATIQUE · À RELIRE ¦ OTOMATİK OKUMA · GÖZDEN GEÇİR
+Le texte lu, ligne par ligne ¦ Okunan metin, satır satır
+Mettre {x} dans le texte ¦ Metne koy: {x}
+les {n} lignes ¦ {n} satırın tümü
+mots peu sûrs ¦ emin olunmayan sözcükler
+=mot peu sûr ¦ emin olunmayan sözcük|emin olunmayan sözcük
+(sûrs à moins de {x} %) ¦ (%{x} altında eminlik)
+aucun mot peu sûr ¦ emin olunmayan sözcük yok
+Relire avec ce modèle ¦ Bu modelle yeniden oku
+Garder cette ligne ¦ Bu satırı koru
+Ligne {x} sur l’image ¦ Görüntüde {x}. satır
+pas d’image pour cette ligne ¦ bu satır için görüntü yok
+Corrige directement dans les lignes (clique un mot surligné pour le remplacer) · Entrée : ligne suivante · décoche une ligne pour la laisser de côté. Lu par « {x} », sur cet ordinateur. Ensuite, « 🧭 Repérer » cherche tout seul les noms, dates et lieux. ¦ Doğrudan satırlarda düzelt (değiştirmek için vurgulanan bir sözcüğe tıkla) · Enter: sonraki satır · bir satırı dışarıda bırakmak için işaretini kaldır. Okuyan: “{x}”, bu bilgisayarda. Ardından “🧭 Bul” adları, tarihleri ve yerleri kendiliğinden arar.
+Lectures à vérifier ¦ Kontrol edilecek okumalar
+Utiliser « {value} » ¦ Kullan: “{value}”
+Aucune ligne gardée. ¦ Hiç satır korunmadı.
+Lu automatiquement (sûr à {x} %) ¦ Otomatik okundu (%{x} emin)
+{x} (à relire) ¦ {x} (gözden geçir)
+Texte mis dans la transcription, zones posées ligne par ligne ; noms, dates et lieux repérés à droite. ¦ Metin transkripsiyona kondu, alanlar satır satır yerleştirildi; bulunan adlar, tarihler ve yerler sağda.
+Clique sur l’image de l’acte. Une image de l’ordinateur est ajoutée aux Médias. ¦ Belgenin görüntüsüne tıkla. Bilgisayardan bir görüntü Medya’ya eklenir.
+Enregistré, et le texte est dans la transcription du média. ¦ Kaydedildi; metin medyanın transkripsiyonunda.
+Image + texte côte à côte ¦ Görüntü + metin yan yana
+Image améliorée ¦ İyileştirilmiş görüntü
+Choisis d’abord un passage dans le texte. ¦ Önce metinde bir bölüm seç.
+Il n’y a pas d’image de la base. ¦ Veritabanından görüntü yok.
+Loupe : la molette change le grossissement ¦ Büyüteç: tekerlek büyütmeyi değiştirir
+Réglages de l’image retenus pour cet acte : ils reviennent à la prochaine ouverture. ¦ Görüntü ayarları bu belge için saklandı: bir sonraki açılışta geri gelir.
+L’image est déjà d’origine ¦ Görüntü zaten özgün hâlinde
+Image remise d’origine ¦ Görüntü özgün hâline döndü
+L’aide à la lecture n’est pas chargée. ¦ Okuma yardımı yüklenmedi.
+Pas de modèle pour ce genre d’acte. ¦ Bu belge türü için şablon yok.
+Le texte déjà écrit est gardé. ¦ Önceden yazılmış metin korunur.
+Ajouter le modèle à la fin du texte ? ¦ Şablon metnin sonuna eklensin mi?
+Ajouter le modèle ¦ Şablonu ekle
+avec l’image de l’acte ¦ belgenin görüntüsüyle
+le texte seul (.txt) ¦ yalnızca metin (.txt)
+image + texte (« Enregistrer en PDF ») ¦ görüntü + metin (“PDF olarak kaydet”)
+Les dernières modifications de la transcription seront perdues. ¦ Transkripsiyondaki son değişiklikler kaybolacak.
+Fermer sans enregistrer la transcription ? ¦ Transkripsiyon kaydedilmeden kapatılsın mı?
+Exporter (texte, PDF, imprimer)… ¦ Dışa aktar (metin, PDF, yazdır)…
+Image de l’acte… ¦ Belge görüntüsü…
+Modèle d’acte ¦ Belge şablonu
+Repérer les noms, dates, lieux ¦ Adları, tarihleri, yerleri bul
+Lire l’acte (écriture à la main) ¦ Belgeyi oku (el yazısı)
+Aide à la lecture… ¦ Okuma yardımı…
+Toute la largeur (pour lire) ¦ Tüm genişlik (okumak için)
+Image d’origine ¦ Özgün görüntü
+Toute la transcription, en grand (et les actes transcrits dans l’outil) ¦ Tüm transkripsiyon, büyük boyutta (ve araçta transkripsiyonu yapılan belgeler)
+Lire en entier ¦ Tamamını oku
+Ouvrir l’outil Transcription d’actes sur cette image (zones, noms, dates) ¦ Bu görüntüde Belge transkripsiyonu aracını aç (alanlar, adlar, tarihler)
+Nouvelle ¦ Yeni
+Transcrire dans l’outil ¦ Araçta transkripsiyon yap
+Ouvrir dans Transcription d’actes ¦ Belge transkripsiyonunda aç
+Aucun acte transcrit dans l’outil pour cette image. ¦ Bu görüntü için araçta transkripsiyonu yapılmış belge yok.
+Rien d’écrit pour l’instant dans la visionneuse. ¦ Görüntüleyicide şimdilik hiçbir şey yazılmadı.
+Personnes : ¦ Kişiler:
+Le calcul de l’image s’est arrêté (image trop grande ?). ¦ Görüntü hesaplaması durdu (görüntü çok mu büyük?).
+Calcul impossible ici. ¦ Burada hesaplama yapılamıyor.
+Outil fermé. ¦ Araç kapatıldı.
+Faire ressortir l’encre ¦ Mürekkebi belirginleştir
+{label} — double-clic : valeur de départ ¦ {label} — çift tıklama: başlangıç değeri
+Netteté (et son rayon) ¦ Netlik (ve yarıçapı)
+Canal de couleur ¦ Renk kanalı
+Un seul canal : l’encre ferro-gallique ressort souvent mieux sur le rouge ou le bleu ¦ Tek bir kanal: demir-mazı mürekkebi çoğu zaman kırmızı ya da mavi kanalda daha iyi görünür
+Toutes les couleurs ¦ Tüm renkler
+Effacer le fond ¦ Arka planı sil
+Jaunissement et taches : le papier redevient blanc, l’encre reste ¦ Sararma ve lekeler: kâğıt yeniden beyaz olur, mürekkep kalır
+Seuil noir et blanc ¦ Siyah beyaz eşiği
+Redresser (au degré près) ¦ Düzelt (derece hassasiyetinde)
+Négatif : encre claire sur fond sombre ¦ Negatif: koyu arka planda açık mürekkep
+Retourner l’image : pour lire un texte vu par transparence (le verso) ¦ Görüntüyü ters çevir: kâğıdın arkasından görünen bir metni (arka yüz) okumak için
+Retenir pour cet acte ¦ Bu belge için sakla
+Ces réglages de l’image sont enregistrés avec l’acte et reviennent à la prochaine ouverture ¦ Bu görüntü ayarları belgeyle birlikte kaydedilir ve bir sonraki açılışta geri gelir
+Remettre l’image d’origine (tous les réglages de l’image à zéro) ¦ Özgün görüntüye dön (tüm görüntü ayarları sıfırlanır)
+Plus de place pour garder ce réglage. ¦ Bu ayarı saklamak için yer kalmadı.
+Les autres réglages de l’image : contraste local, netteté, canal, seuil, niveaux, redresser… ¦ Diğer görüntü ayarları: yerel karşıtlık, netlik, kanal, eşik, düzeyler, düzeltme…
+Écran étroit : les réglages sont rangés dans « 🎚️ Mieux voir » ¦ Dar ekran: ayarlar “🎚️ Daha iyi gör” içinde
+Ranger, montrer ou cacher les boutons de cette barre ; disposition A ou B (aussi dans Réglages → Montage, retouche, mise en page et son) ¦ Bu çubuğun düğmelerini sırala, göster ya da gizle; A ya da B düzeni (Ayarlar → Kurgu, rötuş, sayfa düzeni ve ses bölümünde de)
+Personnaliser la barre ¦ Çubuğu özelleştir
+Montrer dans la barre ¦ Çubukta göster
+Où va {label} ¦ Nereye gider: {label}
+Dans la barre, ou dans le panneau « 🎚️ Mieux voir » ¦ Çubuğa ya da “🎚️ Daha iyi gör” paneline
+Dans la barre ¦ Çubukta
+Dans « Mieux voir » ¦ “Daha iyi gör” içinde
+Disposition de la barre ¦ Çubuk düzeni
+Tous les réglages dans la barre ; elle passe à la ligne s’il le faut ¦ Tüm ayarlar çubukta; gerekirse çubuk alt satıra geçer
+A · Tout dans la barre ¦ A · Her şey çubukta
+Une barre courte ; les autres réglages dans le panneau « 🎚️ Mieux voir », rangés en trois rubriques ¦ Kısa bir çubuk; diğer ayarlar “🎚️ Daha iyi gör” panelinde, üç bölümde
+B · Barre courte + « 🎚️ Mieux voir » ¦ B · Kısa çubuk + “🎚️ Daha iyi gör”
+Coche ce qu’on montre (👁), range avec ↑ ↓ (ou en glissant ⠿){x}. Gardé aussitôt ; l’outil ouvert suit tout de suite. ¦ Gösterilecekleri işaretle (👁), ↑ ↓ ile (ya da ⠿ ile sürükleyerek) sırala{x}. Hemen saklanır; açık araç anında uyar.
+, et choisis ce qui va dans la barre ou dans le panneau « 🎚️ Mieux voir » ¦ , ve neyin çubukta, neyin “🎚️ Daha iyi gör” panelinde olacağını seç
+cette barre (disposition, ordre, boutons montrés) ¦ bu çubuk (düzen, sıra, gösterilen düğmeler)
+Réglages « {nom} » importés : « Appliquer » pour les utiliser. ¦ “{nom}” ayarları içe aktarıldı: kullanmak için “Uygula”.
+Barre de la transcription remise comme au départ ¦ Transkripsiyon çubuğu başlangıçtaki gibi yapıldı
+Barre de la transcription ¦ Transkripsiyon çubuğu
+={n} réglages actifs dans « Mieux voir » ¦ “Daha iyi gör” içinde {n} etkin ayar|“Daha iyi gör” içinde {n} etkin ayar
+{n} réglage actif dans « Mieux voir » ¦ “Daha iyi gör” içinde {n} etkin ayar
+={n} éléments repérés ¦ {n} öğe bulundu|{n} öğe bulundu
+{n} élément repéré ¦ {n} öğe bulundu
+={n} lignes lues (à relire) ¦ {n} satır okundu (gözden geçir)|{n} satır okundu (gözden geçir)
+{n} ligne lue (à relire) ¦ {n} satır okundu (gözden geçir)
+Nouvelle transcription ¦ Yeni transkripsiyon
+le tilde remplace un m ou un n ¦ tilde bir m ya da n yerine geçer
+æ = ae ¦ æ = ae
+& = et ¦ & = et (ve)
+7bre = septembre, 8bre = octobre, 9bre = novembre, Xbre = décembre ¦ 7bre = septembre (Eylül), 8bre = octobre (Ekim), 9bre = novembre (Kasım), Xbre = décembre (Aralık)
+« {s} » est une abréviation de « {exp} » ¦ “{s}”, “{exp}” sözcüğünün kısaltması
+on lit « {x} » ¦ okunuşu: “{x}”
+« u » et « n » ont les mêmes jambages ¦ “u” ile “n” aynı dikey çizgilerden oluşur
+« m » et « rn » se ressemblent ¦ “m” ile “rn” birbirine benzer
+« m » et « nn » ont le même nombre de jambages ¦ “m” ile “nn” aynı sayıda dikey çizgiden oluşur
+« m » et « in » ont le même nombre de jambages ¦ “m” ile “in” aynı sayıda dikey çizgiden oluşur
+« n » et « ri » se ressemblent ¦ “n” ile “ri” birbirine benzer
+« u » et « ii » se ressemblent ¦ “u” ile “ii” birbirine benzer
+« a » et « o » se confondent quand la boucle est fermée ¦ ilmek kapalıyken “a” ile “o” karışır
+« e » et « c » se confondent quand la boucle est petite ¦ ilmek küçükken “e” ile “c” karışır
+« i » sans point ressemble à « l » ¦ noktasız “i”, “l” harfine benzer
+« i » et « t » sans barre se confondent ¦ çizgisiz “t” ile “i” karışır
+« l » et « t » sans barre se confondent ¦ çizgisiz “t” ile “l” karışır
+le s long « ſ » ressemble à « f » ¦ uzun s “ſ”, “f” harfine benzer
+« v » et « r » se confondent ¦ “v” ile “r” karışır
+« cl » collé ressemble à « d » ¦ bitişik “cl”, “d” harfine benzer
+« h » et « b » se confondent ¦ “h” ile “b” karışır
+« h » et « k » se confondent ¦ “h” ile “k” karışır
+les majuscules anciennes « S » et « L » se ressemblent ¦ eski büyük harfler “S” ile “L” birbirine benzer
+les majuscules anciennes « I » et « J » sont la même lettre ¦ eski büyük harfler “I” ile “J” aynı harftir
+les majuscules anciennes « T » et « F » se ressemblent ¦ eski büyük harfler “T” ile “F” birbirine benzer
+« g » et « q » se confondent ¦ “g” ile “q” karışır
+« y » et « g » se confondent ¦ “y” ile “g” karışır
+« e » et « o » se confondent ¦ “e” ile “o” karışır
+« o » ouvert ressemble à « u » ¦ açık “o”, “u” harfine benzer
+« c » et « o » se confondent ¦ “c” ile “o” karışır
+« {x} » lu au lieu de « {y} » : {x2} ¦ “{y}” yerine “{x}” okundu: {x2}
+« {p} » lu au lieu de « {q} » : {x} ¦ “{q}” yerine “{p}” okundu: {x}
+« {y} » oublié à la lecture ¦ Okumada atlandı: “{y}”
+« {x} » en trop ¦ Fazladan: “{x}”
+« {x} » lu au lieu de « {y} » ¦ “{y}” yerine “{x}” okundu
+« {x} » lu au lieu de « {r} » ¦ “{r}” yerine “{x}” okundu
+« {x} » veut dire « idem » : la même chose qu’à la ligne au-dessus. ¦ “{x}”, “idem” anlamına gelir: üstteki satırla aynı şey.
+la valeur de la ligne {x} ¦ {x}. satırın değeri
+« {role} » est la nationalité ¦ “{role}” uyrukluk bilgisi
+« {occupation} » est le lien avec le chef ¦ “{occupation}” hane reisiyle olan bağ
+« {employer} » est sans doute la profession ¦ “{employer}” büyük olasılıkla meslek
+Colonnes décalées : « {role} » dans la case du lien ressemble à la nationalité{x}. Remets chaque valeur dans sa colonne. ¦ Sütunlar kaymış: bağ kutusundaki “{role}” uyrukluğa benziyor{x}. Her değeri kendi sütununa geri koy.
+, et « {occupation} » dans la case de la profession est un lien de parenté ¦ , meslek kutusundaki “{occupation}” ise bir akrabalık bağı
+« {occupation} » dans la case de la profession est un lien de parenté : la colonne a glissé. ¦ Meslek kutusundaki “{occupation}” bir akrabalık bağı: sütun kaymış.
+c’est le lien avec le chef ¦ bu, hane reisiyle olan bağ
+la case suivante est sans doute la profession ¦ sonraki kutu büyük olasılıkla meslek
+« {civil_status} » dans la case de l’état civil est un lien de parenté : mal rangé. ¦ Medeni hâl kutusundaki “{civil_status}” bir akrabalık bağı: yanlış yere yazılmış.
+« {civil_status} » veut dire « veuve » (ou « veuf ») : abréviation non développée. ¦ “{civil_status}”, “veuve” (dul kadın) ya da “veuf” (dul erkek) anlamına gelir: kısaltma açılmamış.
+« {x} » devant le nom veut dire « veuve » : le nom est « {x2} ». ¦ Adın önündeki “{x}”, “veuve” (dul kadın) anlamına gelir: ad “{x2}”.
+le nom sans « veuve » ¦ “veuve” olmadan ad
+« {x} » = veuve ¦ “{x}” = veuve (dul kadın)
+« {v} » est sans doute « {joined} » mal lu (lettres qui se ressemblent). ¦ “{v}” büyük olasılıkla yanlış okunmuş “{joined}” (birbirine benzeyen harfler).
+forme connue la plus proche ¦ bilinen en yakın biçim
+« {u} » ressemble à « {x} » ¦ “{u}”, “{x}” biçimine benziyor
+« {v} » ne ressemble à aucun métier connu : lecture sans doute illisible, regarde l’image. ¦ “{v}” bilinen hiçbir mesleğe benzemiyor: büyük olasılıkla okunamıyor, görüntüye bak.
+Employeur « {employer} » : lecture douteuse, regarde l’image. ¦ İşveren “{employer}”: şüpheli okuma, görüntüye bak.
+(non développée par la lecture automatique). ¦ (otomatik okuma tarafından açılmadı).
+« {first} » ressemble à une profession : la colonne a pu être décalée. ¦ “{first}” bir mesleğe benziyor: sütun kaymış olabilir.
+« {last} » est aussi le nom d’une commune : la colonne du lieu a pu glisser dans celle du nom. ¦ “{last}” aynı zamanda bir yerleşim yerinin adı: yer sütunu ad sütununa kaymış olabilir.
+Le mari s’appelle « {last} », l’épouse « {last2} » : au recensement, l’épouse est en général inscrite sous le nom du mari (lettres mal lues ?). ¦ Kocanın adı “{last}”, karısının “{last2}”: nüfus sayımında kadın genellikle kocasının soyadıyla yazılır (harfler yanlış mı okundu?).
+le nom du chef du ménage ¦ hane reisinin adı
+Le chef du ménage s’appelle « {last} » : {x}. ¦ Hane reisinin adı “{last}”: {x}.
+Le chef du ménage s’appelle « {last} », ici « {last2} » : les membres d’un ménage portent en général le même nom (lettres mal lues ?). ¦ Hane reisinin adı “{last}”, burada “{last2}”: bir hanenin üyeleri genellikle aynı soyadını taşır (harfler yanlış mı okundu?).
+« {last} » n’est pas dans ta base, mais {x} oui : {x2}. ¦ “{last}” soy ağacında yok, ama {x} var: {x2}.
+Prénom peu courant « {w} » : {x} ? ({x2}) ¦ Az rastlanan ad “{w}”: {x} mi? ({x2})
+la forme lue {x} fois sur la page ¦ sayfada {x} kez okunan biçim
+la commune connue la plus proche ¦ bilinen en yakın yerleşim yeri
+« {commune} » : sur la même page, ce lieu est lu « {best} » {x}{x2} — sans doute le même lieu mal lu. ¦ “{commune}”: aynı sayfada bu yer “{best}” olarak okunuyor {x}{x2} — büyük olasılıkla aynı yer yanlış okunmuş.
+aussi ¦ de
+commune connue ¦ bilinen yerleşim yeri
+Commune inconnue « {birth_place} » : peut-être {x} (à vérifier, plusieurs choix possibles). ¦ Bilinmeyen yerleşim yeri “{birth_place}”: belki {x} (kontrol et, birkaç seçenek var).
+Âge illisible « {age} ». ¦ Okunamayan yaş “{age}”.
+{age} ans en {year} veut dire né vers {x}, pas {by} : un des deux chiffres a été mal lu. ¦ {year} yılında {age} yaş: doğum yaklaşık {x} olur, {by} değil: iki sayıdan biri yanlış okunmuş.
+{age} ans : âge très rare, un chiffre a pu être mal lu. ¦ {age} yaş: çok ender bir yaş, bir rakam yanlış okunmuş olabilir.
+{role} de {age} ans pour un chef de {chefAge} ans : impossible, un âge a pu être mal lu. ¦ {role}, {age} yaşında; hane reisi {chefAge} yaşında: olanaksız, bir yaş yanlış okunmuş olabilir.
+{role} de {age} ans : impossible, un chiffre a été mal lu. ¦ {role}, {age} yaşında: olanaksız, bir rakam yanlış okunmuş.
+{x} ans d’écart entre les époux : c’est rare, vérifie les âges. ¦ Eşler arasında {x} yaş fark: bu ender görülür, yaşları kontrol et.
+Lien avec le chef de ménage vide : la case a pu être sautée. ¦ Hane reisiyle bağ boş: kutu atlanmış olabilir.
+Née en {by}, après le recensement de {year} : un chiffre a été mal lu. ¦ Doğum: {by}, yani {year} nüfus sayımından sonra: bir rakam yanlış okunmuş.
+Né en {by}, après le recensement de {year} : un chiffre a été mal lu. ¦ Doğum: {by}, yani {year} nüfus sayımından sonra: bir rakam yanlış okunmuş.
+{role} de {age} ans, plus âgée que le chef du ménage ({chefAge} ans) : un âge a pu être mal lu. ¦ {role}, {age} yaşında, hane reisinden ({chefAge} yaş) büyük: bir yaş yanlış okunmuş olabilir.
+{role} de {age} ans, plus âgé que le chef du ménage ({chefAge} ans) : un âge a pu être mal lu. ¦ {role}, {age} yaşında, hane reisinden ({chefAge} yaş) büyük: bir yaş yanlış okunmuş olabilir.
+Au recensement de {year}, née vers {ob} ; ici vers {mine}. ¦ {year} nüfus sayımında doğum yaklaşık {ob}; burada yaklaşık {mine}.
+Au recensement de {year}, né vers {ob} ; ici vers {mine}. ¦ {year} nüfus sayımında doğum yaklaşık {ob}; burada yaklaşık {mine}.
+« {role} » pour « {x} », un prénom {x2} : le lien ou le prénom a été mal lu. ¦ “{x}” için “{role}”, ama bu bir {x2} adı: bağ ya da ad yanlış okunmuş.
+de femme ¦ kadın
+d’homme ¦ erkek
+« {role} » pour {x} : le lien ou le genre a été mal lu. ¦ “{role}”, {x} için: bağ ya da cinsiyet yanlış okunmuş.
+une femme ¦ bir kadın
+un homme ¦ bir erkek
+le lien qui va avec le genre ¦ cinsiyete uyan bağ
+« {role} » d’un chef de ménage {x} : le lien ou le genre a été mal lu. ¦ “{role}”, hane reisi: {x}: bağ ya da cinsiyet yanlış okunmuş.
+« {last} » et « {x} » dans le même ménage : sans doute le même nom mal lu. ¦ Aynı hanede “{last}” ve “{x}”: büyük olasılıkla aynı ad yanlış okunmuş.
+lu {x} fois dans le ménage ¦ hanede {x} kez okundu
+le nom d’un autre membre du ménage ¦ hanenin başka bir üyesinin adı
+Deux « chef » dans le même ménage : deux ménages ont pu être mis ensemble, ou le lien a été mal lu. ¦ Aynı hanede iki “reis”: iki hane birleştirilmiş ya da bağ yanlış okunmuş olabilir.
+Même nom, même prénom que la ligne {x} : la même personne lue deux fois ? ¦ Soyadı ve adı {x}. satırla aynı: aynı kişi iki kez mi okundu?
+Ce ménage commence en haut d’une page sans chef : c’est sans doute la suite du ménage de la page d’avant (ménage coupé au changement de page). ¦ Bu hane bir sayfanın başında reissiz başlıyor: büyük olasılıkla önceki sayfadaki hanenin devamı (sayfa değişiminde bölünmüş hane).
+Ce ménage n’a pas de chef : il a pu être coupé en deux (changement de page) ou mal découpé. ¦ Bu hanenin reisi yok: ikiye bölünmüş (sayfa değişimi) ya da yanlış ayrılmış olabilir.
+{role} « {last} » dans le ménage de {last2}, mais le ménage d’avant s’appelle {last3} : rattaché au mauvais ménage ? ¦ {role} “{last}”, hane: {last2}; ama önceki hanenin adı {last3}: yanlış haneye mi bağlandı?
+« {w} » ressemble à {x} : {x2} ¦ “{w}” şuna benziyor: {x}: {x2}
+Copié. ¦ Kopyalandı.
+Un nombre en lettres ou en chiffres ¦ Yazıyla ya da rakamla bir sayı
+Écris « {x} » ou « 1852 ». ¦ “{x}” ya da “1852” yaz.
+Un nombre entre 1 et 999 999. ¦ 1 ile 999 999 arasında bir sayı.
+Ce ne sont pas des lettres-nombres connues (exemples : {x}). ¦ Bunlar bilinen harf-sayılar değil (örnekler: {x}).
+L’alphabet ({n} lettres) ¦ Alfabe ({n} harf)
+Sources : {x}. ¦ Kaynaklar: {x}.
+L’aide à la lecture n’a pas pu se charger (fichier app-aide-lecture.js manquant ?). ¦ Okuma yardımı yüklenemedi (app-aide-lecture.js dosyası eksik mi?).
+Chercher… ex. vve, feu, filius, ſ, cult., d° ¦ Ara… örn. vve, feu, filius, ſ, cult., d°
+Chercher dans l’aide à la lecture ¦ Okuma yardımında ara
+Toutes les langues ¦ Tüm diller
+Moins de langues ¦ Daha az dil
+Rien pour « {q} »{x}. Vérifie l’orthographe, cherche un morceau du mot (« vv », « legit »…), ou choisis « Toutes les langues ». ¦ “{q}” için sonuç yok{x}. Yazımı kontrol et, sözcüğün bir parçasını ara (“vv”, “legit”…) ya da “Tüm diller”i seç.
+en {lang} ¦ dil: {lang}
+Rien dans cette rubrique. ¦ Bu bölümde bir şey yok.
+mots et formules ¦ sözcükler ve kalıplar
+Repris de {src} ¦ Kaynak: {src}
+Copier « {t} » ¦ Kopyala: “{t}”
+Aucune lettre pour « {q} ». Essaie « s long », « r rond », « u n », « ligature », « kurrent ». ¦ “{q}” için harf yok. “s long”, “r rond”, “u n”, “ligature”, “kurrent” dene.
+Pas encore de lettres dessinées pour cette langue : elle s’écrit comme le français. Regarde ses mots dans 🔍 Dictionnaire. ¦ Bu dil için henüz çizilmiş harf yok: Fransızca gibi yazılır. Sözcüklerine 🔍 Sözlük içinden bak.
+on voit ¦ görünen
+à ne pas confondre ¦ karıştırılmamalı
+Pas encore d’exercice dans cette langue : choisis « Toutes les langues ». ¦ Bu dilde henüz alıştırma yok: “Tüm diller”i seç.
+Textes modèles écrits pour l’app, sur le modèle des registres de l’époque (formules authentiques, personnes d’exemple, toutes nées bien avant 1950). ¦ Uygulama için yazılmış örnek metinler, dönemin kayıtları örnek alındı (gerçek kalıplar, örnek kişiler, hepsi 1950’den çok önce doğmuş).
+Aucun exercice pour « {q} ». ¦ “{q}” için alıştırma yok.
+Tous les exercices ¦ Tüm alıştırmalar
+Le texte comme sur le registre ¦ Metin, kayıttaki gibi
+Ta lecture ¦ Senin okuman
+(développe les abréviations : « par. » → paroisse) ¦ (kısaltmaları aç: “par.” → paroisse)
+Écris ici ce que tu lis, mot après mot… ¦ Okuduğunu buraya sözcük sözcük yaz…
+exercice|Un indice ¦ Bir ipucu
+Voir la solution ¦ Çözümü gör
+{miss} à revoir ¦ Gözden geçirilecek: {miss}
+bravo ! ¦ aferin!
+{extra} en trop ¦ Fazladan: {extra}
+oublié ¦ atlandı
+en trop ¦ fazladan
+— passe la souris sur un mot à revoir pour l’explication. ¦ — açıklama için gözden geçirilecek bir sözcüğün üstüne gel.
+Ce mot n’est pas dans le texte ¦ Bu sözcük metinde yok
+On lit « {exp} » ¦ Okunuşu: “{exp}”
+Écris d’abord ta lecture du texte. ¦ Önce metni okuyup yaz.
+La fenêtre n’est pas encore prête : réessaie dans un instant. ¦ Pencere henüz hazır değil: birazdan yeniden dene.
+AIDE · LECTURE DES ACTES ¦ YARDIM · BELGE OKUMA
+Aide à la lecture des actes anciens ¦ Eski belgeleri okuma yardımı
+Le convertisseur n’a pas pu se charger (fichier app-autrefois-engine.js manquant ?). ¦ Dönüştürücü yüklenemedi (app-autrefois-engine.js dosyası eksik mi?).
+La mesure ¦ Ölçü
+Région, ville ¦ Yöre, şehir
+Les mesures changeaient d’une province à l’autre : choisis celle de l’acte. ¦ Ölçüler bir eyaletten ötekine değişirdi: belgedekini seç.
+La date (républicaine ou de tous les jours) ¦ Tarih (Cumhuriyet takvimi ya da günlük)
+Tout est calculé ici, sans internet. Argent : {x} à partir de 1901 ; avant, un ordre de grandeur. Les résultats sont des repères (≈), pas des valeurs exactes. ¦ Her şey burada, internetsiz hesaplanır. Para: 1901’den itibaren {x}; öncesi için kabaca bir büyüklük. Sonuçlar kesin değer değil, fikir verir (≈).
+(année républicaine) ¦ (Cumhuriyet yılı)
+une année d’aujourd’hui ou d’avant (jusqu’à 2025) ¦ bugünden ya da daha önceden bir yıl (2025’e kadar)
+une année entre 1300 et 2025 (exemples : 1780, an X, 1955) ¦ 1300 ile 2025 arasında bir yıl (örnekler: 1780, an X, 1955)
+Écris une somme et son année : « 300 livres » en « 1780 ». ¦ Bir tutar ve yılını yaz: “1780” yılında “300 livres”.
+Écris aussi l’année de la somme. ¦ Tutarın yılını da yaz.
+Corrige la case marquée ⚠️ ci-dessus. ¦ Yukarıda ⚠️ ile işaretli kutuyu düzelt.
+{label} en {y} {x} d’aujourd’hui ({x2}) ¦ {label} ({y} yılında) = bugünün parasıyla {x} ({x2})
+indice des prix de l’INSEE ¦ INSEE fiyat endeksi
+ordre de grandeur ¦ kabaca büyüklük
+Ordre de grandeur ¦ Kabaca büyüklük
+Dans la monnaie de {y} ¦ {y} yılının parasıyla
+Le calcul, pas à pas ¦ Hesap, adım adım
+(mesure de {fromRegion}) ¦ (yöresel ölçü: {fromRegion})
+Écris une mesure : « 3 arpents », « 12 toises 3 pieds », « 2 boisseaux »… ou « 1,5 ha » pour l’inverse. ¦ Bir ölçü yaz: “3 arpents”, “12 toises 3 pieds”, “2 boisseaux”… ya da tersi için “1,5 ha”.
+Valeur approchée ¦ Yaklaşık değer
+Dans les autres mesures de la région ¦ Yörenin diğer ölçüleriyle
+La même mesure ailleurs (pour 1) ¦ Aynı ölçü başka yerlerde (1 için)
+Écris une date républicaine (« 12 thermidor an II ») ou de tous les jours (« 14 juillet 1794 ») : la conversion se fait dans les deux sens. ¦ Bir Cumhuriyet tarihi (“12 thermidor an II”) ya da günlük bir tarih (“14 juillet 1794”) yaz: dönüşüm iki yönde de yapılır.
+Dans notre calendrier ¦ Bizim takvimimizde
+Dans le calendrier républicain ¦ Cumhuriyet takviminde
+{decade} (jour {x} de la décade) ¦ {decade} (décade’ın {x}. günü)
+L’an {x} mois par mois ¦ an {x}, ay ay
+={n} formes de lettres · trait dessiné à la main, comme dans les registres ¦ {n} harf biçimi · kayıtlardaki gibi elle çizilmiş|{n} harf biçimi · kayıtlardaki gibi elle çizilmiş
+{n} forme de lettres · trait dessiné à la main, comme dans les registres ¦ {n} harf biçimi · kayıtlardaki gibi elle çizilmiş
+={n} exercices · lis le texte comme sur le registre, écris ta lecture (abréviations développées), puis « ✓ Corriger » ¦ {n} alıştırma · metni kayıttaki gibi oku, okuduğunu yaz (kısaltmaları açarak), sonra “✓ Düzelt”|{n} alıştırma · metni kayıttaki gibi oku, okuduğunu yaz (kısaltmaları açarak), sonra “✓ Düzelt”
+{n} exercice · lis le texte comme sur le registre, écris ta lecture (abréviations développées), puis « ✓ Corriger » ¦ {n} alıştırma · metni kayıttaki gibi oku, okuduğunu yaz (kısaltmaları açarak), sonra “✓ Düzelt”
+={ok} mots justes sur {total} ({score} %) ¦ {total} sözcükten {ok} doğru (%{score})|{total} sözcükten {ok} doğru (%{score})
+{ok} mot juste sur {total} ({score} %) ¦ {total} sözcükten {ok} doğru (%{score})
+Plus de place pour enregistrer cette recette. ¦ Bu tarifi kaydetmek için yer kalmadı.
+aucune action ¦ işlem yok
+nouvelle version ¦ yeni sürüm
+copie dans les médias ¦ medyada kopya
+« {name} » : fichier introuvable dans le dossier des médias ¦ “{name}”: dosya medya klasöründe bulunamadı
+le navigateur n’a pas pu écrire l’image ¦ tarayıcı görüntüyü yazamadı
+qualité baissée à {x} % pour tenir dans {x2} Ko ¦ {x2} KB içine sığması için kalite %{x} düzeyine düşürüldü
+image réduite à {width} × {height} px pour tenir dans {x} Ko ¦ {x} KB içine sığması için görüntü {width} × {height} px boyutuna küçültüldü
+{x} : plus lourd que {x2} Ko ¦ {x}: {x2} KB’tan ağır
+le moteur du son n’est pas chargé ¦ ses motoru yüklenmedi
+Ne pas tourner ¦ Döndürme
+¼ de tour à droite ¦ Sağa ¼ tur
+¼ de tour à gauche ¦ Sola ¼ tur
+Modèle du nom ¦ Ad şablonu
+Ajouter au modèle ¦ Şablona ekle
+Ajouter {t} au modèle ¦ Şablona ekle: {t}
+Séquence sur ¦ Sıra numarası basamağı
+Comme tapé ¦ Yazıldığı gibi
+Une Majuscule Par Mot ¦ Her Sözcükte Bir Büyük Harf
+Garder les espaces ¦ Boşlukları koru
+Des tirets (-) ¦ Tire (-)
+Des soulignés (_) ¦ Alt çizgi (_)
+Sans accents (é → e) ¦ Aksansız (é → e)
+Changer aussi le titre dans les médias ¦ Medyadaki başlığı da değiştir
+Le plus grand côté ¦ En uzun kenar
+La largeur ¦ Genişlik
+La hauteur ¦ Yükseklik
+Un cadre largeur × hauteur ¦ Genişlik × yükseklik çerçevesi
+Un pourcentage ¦ Bir yüzde
+Plus grand côté ¦ En uzun kenar
+Garder les proportions ¦ Oranları koru
+Ne pas agrandir les petites images ¦ Küçük görüntüleri büyütme
+Couper les bords ¦ Kenarları kes
+Recadrer au format ¦ Biçime göre kırp
+Sépia (photo ancienne) ¦ Sepya (eski fotoğraf)
+Taille (de la largeur) ¦ Boyut (genişliğin)
+AVIF (récent, très léger) ¦ AVIF (yeni, çok hafif)
+Poids au plus (0 = pas de limite) ¦ En fazla boyut (0 = sınır yok)
+JPG, WebP et AVIF. Pour un PNG, le poids baisse en réduisant l’image. ¦ JPG, WebP ve AVIF. PNG için boyut, görüntü küçültülerek azalır.
+L’appareil, la date de prise, la position GPS, les mots-clés… sont effacés. Pour un JPG ou un PNG sans autre retouche : sans perte (l’image ne change pas). ¦ Fotoğraf makinesi, çekim tarihi, GPS konumu, anahtar sözcükler… silinir. Başka bir rötuş yapılmamış JPG ya da PNG için: kayıpsız (görüntü değişmez).
+Étiquettes à ajouter ¦ Eklenecek etiketler
+Relier à une personne ¦ Bir kişiye bağla
+Fiche n° {person} ¦ Kart no. {person}
+Seulement pour ce qui va dans la base (nouvelle version ou copie), pas pour un ZIP. ¦ Yalnızca veritabanına girenler için (yeni sürüm ya da kopya), ZIP için değil.
+Nom du PDF ¦ PDF’nin adı
+A4 (l’image centrée) ¦ A4 (görüntü ortada)
+À la taille de chaque image ¦ Her görüntünün kendi boyutunda
+Garder aussi chaque image à part ¦ Her görüntüyü ayrıca da sakla
+Glisse pour ranger (ou Alt + ↑ / ↓) ¦ Sıralamak için sürükle (ya da Alt + ↑ / ↓)
+Ranger « {label} » (Alt + flèche haut ou bas) ¦ Taşı: “{label}” (Alt + yukarı ya da aşağı ok)
+Déplier les réglages ¦ Ayarları aç
+Replier les réglages ¦ Ayarları kapat
+Éteindre cette étape (elle reste dans la chaîne) ¦ Bu adımı kapat (zincirde kalır)
+Rallumer cette étape ¦ Bu adımı yeniden aç
+Étape active ¦ Adım etkin
+Retirer de la chaîne ¦ Zincirden çıkar
+Le moteur des traitements par lot n’est pas chargé : recharge la page. ¦ Toplu işlem motoru yüklenmedi: sayfayı yeniden yükle.
+Les fichiers ¦ Dosyalar
+Photos, documents, classeurs et sons de la base : filtres, recherche, plusieurs à la fois ¦ Veritabanındaki fotoğraflar, belgeler, tablolar ve sesler: filtreler, arama, aynı anda birkaç tane
+Choisir dans les médias… ¦ Medyadan seç…
+Fichiers du lot ¦ Toplu işlemdeki dosyalar
+Les actions ¦ İşlemler
+Ajouter une action ▾ ¦ İşlem ekle ▾
+Voilà ce qui va se passer ¦ Olacaklar şunlar
+Le résultat ¦ Sonuç
+Nouvelle version du média ¦ Medyanın yeni sürümü
+l’original reste dans ses versions ¦ özgün dosya sürümleri arasında kalır
+Copie dans les médias ¦ Medyada kopya
+reliée aux mêmes fiches ¦ aynı kartlara bağlı
+Un ZIP à télécharger ¦ İndirilecek bir ZIP
+rien ne change dans la base ¦ veritabanında hiçbir şey değişmez
+Images, documents (Word, LibreOffice, RTF, Markdown, texte, page web, PDF), classeurs (Excel, LibreOffice, CSV) et sons. ¦ Görüntüler, belgeler (Word, LibreOffice, RTF, Markdown, metin, web sayfası, PDF), tablolar (Excel, LibreOffice, CSV) ve sesler.
+{name} (prêt) ¦ {name} (hazır)
+Recettes enregistrées ¦ Kayıtlı tarifler
+cette chaîne d’actions et la sortie ¦ bu işlem zinciri ve çıktısı
+Recette « {name} » appliquée. ¦ “{name}” tarifi uygulandı.
+Une recette prête ne se remplace pas : enregistre-la sous un autre nom. ¦ Hazır bir tarifin yerine yazılamaz: onu başka bir adla kaydet.
+Une recette prête ne se supprime pas. ¦ Hazır bir tarif silinemez.
+Recette « {name} » supprimée ¦ “{name}” tarifi silindi
+Ce fichier n’est pas une recette LCNDA. ¦ Bu dosya bir LCNDA tarifi değil.
+Ce fichier n’est pas une recette des traitements par lot. ¦ Bu dosya bir toplu işlem tarifi değil.
+Recette importée ¦ Tarif içe aktarıldı
+Retirer du lot ¦ Toplu işlemden çıkar
+Retirer « {name} » du lot ¦ Toplu işlemden çıkar: “{name}”
+Aucun fichier pour l’instant ¦ Şimdilik dosya yok
+500 fichiers au plus par lot : {x} de côté. ¦ Bir toplu işlemde en çok 500 dosya: {x} dışarıda kaldı.
+Aucune action : ajoute-en une ¦ İşlem yok: bir tane ekle
+Ajouter une action ¦ İşlem ekle
+Lancer sur {x} ¦ Başlat: {x}
+Choisis d’abord des fichiers : chaque changement s’affichera ici avant de lancer. ¦ Önce dosya seç: her değişiklik başlatmadan önce burada görünecek.
+Nouvelle version ¦ Yeni sürüm
+Titre et liens ¦ Başlık ve bağlantılar
+Nouveau média ¦ Yeni medya
+Dans le ZIP ¦ ZIP içinde
+Dans le PDF ¦ PDF içinde
+Rien ne change ¦ Hiçbir şey değişmez
+Laissé de côté ¦ Dışarıda bırakıldı
+à la taille des images ¦ görüntülerin boyutunda
+, dans le ZIP ¦ , ZIP içinde
+, rangé dans les médias ¦ , medyaya kondu
+position GPS dans la photo ¦ fotoğraftaki GPS konumu
+Lecture des fichiers… ({waiting}) ¦ Dosyalar okunuyor… ({waiting})
+On commence… ¦ Başlıyoruz…
+copie rangée ¦ kopya kondu
+rangé dans les médias ¦ medyaya kondu
+titre et liens ¦ başlık ve bağlantılar
+le fabricant de PDF n’est pas chargé ¦ PDF oluşturucu yüklenmedi
+Le ZIP… ¦ ZIP…
+traitement-par-lot-{x}.zip ¦ toplu-islem-{x}.zip
+Le lot ¦ Toplu işlem
+(arrêté) ¦ (durduruldu)
+{what} · ⤓ le ZIP est téléchargé. ¦ {what} · ⤓ ZIP indirildi.
+{what} · rangé dans les médias. ¦ {what} · medyaya kondu.
+Traitement par lot : {what} ¦ Toplu işlem: {what}
+{what} · ⤓ ZIP téléchargé. ¦ {what} · ⤓ ZIP indirildi.
+TRAITEMENTS PAR LOT ¦ TOPLU İŞLEMLER
+Les fichiers à traiter ¦ İşlenecek dosyalar
+Action « {x} » retirée ¦ “{x}” işlemi çıkarıldı
+traitement par lot ¦ toplu işlem
+Nouveau traitement ¦ Yeni toplu işlem
+1 600 px au plus, JPG 82 %, sans la position GPS : prêtes à envoyer ou à mettre en ligne ¦ En çok 1 600 px, JPG %82, GPS konumu olmadan: göndermeye ya da internete koymaya hazır
+Photos pour le web ¦ Web için fotoğraflar
+photo-001, photo-002… (et le titre dans les médias) ¦ photo-001, photo-002… (ve medyadaki başlık)
+Renommer en séquence ¦ Sıra numarasıyla yeniden adlandır
+Des scans ou des photos d’actes réunis dans un seul PDF, une page par image ¦ Belgelerin taramaları ya da fotoğrafları tek bir PDF’de, her görüntü için bir sayfa
+Scans en PDF ¦ Taramaları PDF’ye
+=change ¦ değişir|değişir
+={files} traités ¦ {files} işlendi|{files} işlendi
+{files} traité ¦ {files} işlendi
+={files} retirés du lot ¦ {files} toplu işlemden çıkarıldı|{files} toplu işlemden çıkarıldı
+{files} retiré du lot ¦ {files} toplu işlemden çıkarıldı
+Garder le format ¦ Biçimi koru
+Un nom fixe, une séquence 001, 002…, la date, le titre, la personne ou le lieu. ¦ Sabit bir ad, 001, 002… gibi bir sıra, tarih, başlık, kişi ya da yer.
+Plus grand côté, largeur, hauteur, cadre ou pourcentage. ¦ En uzun kenar, genişlik, yükseklik, çerçeve ya da yüzde.
+Couper les bords, recadrer au format voulu (centré), tourner d’un quart de tour, retourner. ¦ Kenarları kes, istediğin biçime kırp (ortalanmış), çeyrek tur döndür, ters çevir.
+Gris ou sépia. ¦ Gri ya da sepya.
+Un texte posé dans un coin, au milieu ou répété. ¦ Bir köşeye, ortaya konan ya da yinelenen bir metin.
+Changer de format ¦ Biçim değiştir
+Images, documents, classeurs et sons : chacun vers un format de sa sorte. ¦ Görüntüler, belgeler, tablolar ve sesler: her biri kendi türünden bir biçime.
+Qualité et poids ¦ Kalite ve boyut
+Qualité JPG / WebP / AVIF et un poids à ne pas dépasser. ¦ JPG / WebP / AVIF kalitesi ve aşılmayacak bir boyut.
+Effacer les métadonnées ¦ Üst verileri sil
+Appareil, date de prise, position GPS… : effacés (sans perte pour un JPG ou un PNG). ¦ Fotoğraf makinesi, çekim tarihi, GPS konumu…: silinir (JPG ya da PNG için kayıpsız).
+Étiquettes et personne ¦ Etiketler ve kişi
+Ajouter des étiquettes, relier à une personne (dans la base seulement). ¦ Etiket ekle, bir kişiye bağla (yalnızca veritabanında).
+Assembler en un PDF ¦ Tek bir PDF’de birleştir
+Toutes les images dans un seul PDF, une page par image. ¦ Tüm görüntüler tek bir PDF’de, her görüntü için bir sayfa.
+Ne pas recadrer ¦ Kırpma
+Répété en biais ¦ Çapraz yinelenen
+Nom d’origine ¦ Özgün ad
+1 600 px au plus, JPG 82 %, sans GPS ¦ En çok 1 600 px, JPG %82, GPS’siz
+les images dans un seul PDF A4 ¦ görüntüler tek bir A4 PDF’de
+carré 1:1, 400 px, JPG ¦ kare 1:1, 400 px, JPG
+Partager sans la position GPS ¦ GPS konumu olmadan paylaş
+métadonnées effacées ¦ üst veriler silindi
+Documents en Word ¦ Belgeleri Word’e
+tous en .docx ¦ hepsi .docx olarak
+Classeurs en CSV ¦ Tabloları CSV’ye
+la 1re feuille en CSV ¦ 1. sayfa CSV olarak
+{x} : pas pour un {x2} ¦ {x}: şunun için değil: {x2}
+{x} : rien à changer ¦ {x}: değişecek bir şey yok
+Ton navigateur ne sait pas écrire l’AVIF : WebP à la place ¦ Tarayıcın AVIF yazamıyor: yerine WebP
+{x} ne s’écrit pas ici : PNG à la place ¦ {x} burada yazılamıyor: yerine PNG
+Un GIF n’a pas de position GPS à effacer ¦ GIF dosyasında silinecek GPS konumu yok
+PNG : le poids baisse en réduisant la taille de l’image ¦ PNG: boyut, görüntü küçültülerek azalır
+CSV : seulement la 1re feuille, sans mise en forme ¦ CSV: yalnızca 1. sayfa, biçimlendirme olmadan
+{x} : le texte seul, sans images ni mise en forme ¦ {x}: yalnızca metin, görüntü ve biçimlendirme olmadan
+PDF : en lecture seule (seulement renommé, étiqueté ou relié) ¦ PDF: salt okunur (yalnızca yeniden adlandırılır, etiketlenir ya da bağlanır)
+{x} : seulement renommé, étiqueté ou relié ¦ {x}: yalnızca yeniden adlandırılır, etiketlenir ya da bağlanır
+Étiquettes et personne : seulement dans la base (pas dans un ZIP) ¦ Etiketler ve kişi: yalnızca veritabanında (ZIP içinde değil)
+Venu de l’ordinateur : rangé comme nouveau média ¦ Bilgisayardan geldi: yeni medya olarak kondu
+« Assembler en un PDF » : aucune image dans le lot ¦ “Tek bir PDF’de birleştir”: toplu işlemde görüntü yok
+Une action en double : seule la dernière carte compte pour « Renommer » et « Changer de format » ¦ Yinelenen bir işlem: “Yeniden adlandır” ve “Biçim değiştir” için yalnızca son kart sayılır
+plus grand côté {long} px ¦ en uzun kenar {long} px
+tête en bas ¦ baş aşağı
+rien à faire ¦ yapılacak bir şey yok
+sépia ¦ sepya
+rien ne change ¦ hiçbir şey değişmez
+Ko au plus ¦ KB en çok
+rien de choisi ¦ hiçbir şey seçilmedi
+.{ext} ne se range pas dans les médias : ⤓ ZIP seulement ¦ .{ext} medyaya konamaz: yalnızca ⤓ ZIP
+Ouvrir la fiche Employeurs ¦ İşverenler kartını aç
+Fiche Employeurs ¦ İşverenler kartı
+Revues et magazines ¦ Dergiler ve mecmualar
+Nouvelle fiche Employeurs : « {title} ». ¦ Yeni İşverenler kartı: “{title}”.
+La fiche de {name} n’est pas encore cochée « {icon} {label} ». La cocher pour y ranger cette {x2} ? ¦ {name} adlı kişinin kartında henüz “{icon} {label}” işaretli değil. Bu {x2} oraya konsun diye işaretlensin mi?
+La fiche de {name} n’est pas encore cochée « {icon} {label} ». La cocher pour y ranger ce {x2} ? ¦ {name} adlı kişinin kartında henüz “{icon} {label}” işaretli değil. Bu {x2} oraya konsun diye işaretlensin mi?
+Cocher « {label} » ? ¦ “{label}” işaretlensin mi?
+Cocher « {label} » ¦ İşaretle: “{label}”
+Tchécoslovaquie ¦ Çekoslovakya
+Brevet européen ¦ Avrupa patenti
+déposé ¦ başvuruldu
+en examen ¦ inceleniyor
+délivré ¦ verildi
+en vigueur ¦ yürürlükte
+tombé (domaine public) ¦ düştü (kamu malı)
+expiré ¦ süresi doldu
+abandonné ¦ vazgeçildi
+annulé ¦ iptal edildi
+idée, croquis ¦ fikir, taslak
+breveté ¦ patentli
+fabriqué, vendu ¦ üretildi, satıldı
+on ne sait pas ¦ bilinmiyor
+donné ¦ verildi (hediye)
+cassé ¦ kırık
+détruit ¦ yok edildi
+antériorité opposée ¦ önceki teknik ileri sürüldü
+contrefaçon ¦ taklit
+action en nullité ¦ hükümsüzlük davası
+procès ¦ dava
+gagné ¦ kazanıldı
+brevet refusé ¦ patent reddedildi
+invention dérivée ¦ türetilmiş buluş
+perfectionnement de ¦ şunun geliştirilmesi:
+issue de la découverte ¦ şu keşiften doğdu:
+a mené à ¦ şuna yol açtı:
+fabriquée sous forme de ¦ şu biçimde üretildi:
+publiée dans ¦ şurada yayımlandı:
+liée à ¦ şuna bağlı:
+Figure du brevet ¦ Patent çizimi
+Objet fabriqué ¦ Üretilmiş nesne
+Publicité, notice ¦ Reklam, broşür
+tombé ¦ düştü
+Annuités ¦ Yıllık ücretler
+Publié ¦ Yayımlandı
+Cité par ¦ Atıf yapanlar
+brevet ultérieur ¦ sonraki patent
+brevets ultérieurs ¦ sonraki patentler
+Voir en ligne ¦ İnternette gör
+Ajouter un brevet ¦ Patent ekle
+Délivrance ¦ Verilme
+Déposant ¦ Başvuru sahibi
+Fabriqués ¦ Üretilen
+(aussi dans « 🏆 Concours et récompenses » de la personne) ¦ (kişinin “🏆 Yarışmalar ve ödüller” bölümünde de)
+conçu en {dt} ¦ tasarlandığı yıl: {dt}
+conçu le {dt} ¦ tasarlandığı tarih: {dt}
+conçu {dt} ¦ tasarlandı: {dt}
+L’invention ¦ Buluş
+Nom de l’invention ¦ Buluşun adı
+Première idée ¦ İlk fikir
+Où l’idée est notée ¦ Fikrin yazıldığı yer
+D’après, inspirée de ¦ Kaynak, esinlenilen
+Carnet, plan (média) ¦ Defter, plan (medya)
+Figures du brevet, prototypes, objets fabriqués ¦ Patent çizimleri, prototipler, üretilmiş nesneler
+Un inventeur ¦ Bir mucit
+Un brevet ¦ Bir patent
+Titre du brevet ¦ Patentin başlığı
+Revendications (une par ligne) ¦ İstemler (her satıra bir tane)
+Publié (BOPI…) ¦ Yayımlandı (BOPI…)
+Famille de brevets ¦ Patent ailesi
+Pièce (brevet complet, 4 p.…) ¦ Belge (tam patent, 4 s.…)
+Adresse en ligne ¦ İnternet adresi
+Un prototype ¦ Bir prototip
+Présenté ¦ Sunuldu
+Licences et exploitation ¦ Lisanslar ve kullanım
+Antériorités et procès ¦ Önceki teknikler ve davalar
+Une antériorité, un procès ¦ Bir önceki teknik, bir dava
+Objets fabriqués ¦ Üretilmiş nesneler
+Un objet ¦ Bir nesne
+Modèle, objet ¦ Model, nesne
+Fiche de l’exemplaire ¦ Kopyanın kartı
+Note sur les objets ¦ Nesneler hakkında not
+Inventions et découvertes liées ¦ Bağlı buluşlar ve keşifler
+Liées ¦ Bağlı
+ex. sécateur, FR 1 054 321, Lépine, 1952 ¦ örn. budama makası, FR 1 054 321, Lépine, 1952
+Breveté en ¦ Patent ülkesi
+Avec au moins un brevet ¦ En az bir patenti olan
+Brevet encore en vigueur ¦ Patenti hâlâ yürürlükte
+Exploitée (licence) ¦ Kullanılıyor (lisans)
+Le plus de brevets ¦ En çok patent
+Espèce nouvelle (plante) ¦ Yeni tür (bitki)
+Espèce nouvelle (animal) ¦ Yeni tür (hayvan)
+Comète ¦ Kuyruklu yıldız
+Astéroïde, petite planète ¦ Asteroit, küçük gezegen
+Étoile, exoplanète, galaxie ¦ Yıldız, ötegezegen, gökada
+Gène ¦ Gen
+Molécule, élément chimique ¦ Molekül, kimyasal element
+Minéral ¦ Mineral
+Site archéologique ¦ Arkeolojik alan
+Épave ¦ Batık
+Manuscrit, archive, trésor ¦ El yazması, arşiv, hazine
+Loi, théorème, méthode ¦ Yasa, teorem, yöntem
+Source, gisement ¦ Kaynak, yatak
+Lieu (col, lac, île, sommet…) ¦ Yer (geçit, göl, ada, zirve…)
+Autre découverte ¦ Başka keşif
+espèce, sous-espèce, variété ¦ tür, alt tür, çeşit
+Holotype (spécimen type) ¦ Holotip (tip örneği)
+N° de collection ¦ Koleksiyon no.
+Désignation ¦ Adlandırma
+Éclat (magnitude) ¦ Parlaklık (kadir)
+Système cristallin ¦ Kristal sistemi
+Localité type ¦ Tip lokalitesi
+Objets trouvés ¦ Bulunan nesneler
+Musée, dépôt ¦ Müze, depo
+Développement, profondeur ¦ Uzunluk, derinlik
+Ornée, remplissage ¦ Süslü, dolgu
+Objets remontés ¦ Çıkarılan nesneler
+Fonds, bibliothèque ¦ Fon, kütüphane
+Énoncé ¦ İfade
+Preuve, démonstration ¦ Kanıt, ispat
+Débit, réserve ¦ Debi, rezerv
+Sorte (col, lac, île…) ¦ Tür (geçit, göl, ada…)
+Quoi exactement ¦ Tam olarak ne
+Ces champs changent avec la « Sorte » : comète (désignation, orbite, observatoire), gène (organisme, chromosome, n° GenBank), site archéologique (période, fouilles, musée), fossile (âge, couche, gisement)… ¦ Bu alanlar “Tür” seçimine göre değişir: kuyruklu yıldız (adlandırma, yörünge, gözlemevi), gen (organizma, kromozom, GenBank no.), arkeolojik alan (dönem, kazılar, müze), fosil (yaş, katman, yatak)…
+publié ¦ yayımlandı
+accepté ¦ kabul edildi
+rétrogradé (sous-espèce…) ¦ alt basamağa indirildi (alt tür…)
+en attente ¦ beklemede
+contestée ¦ tartışmalı
+rétrogradée ¦ alt basamağa indirildi
+réfutée ¦ çürütüldü
+priorité contestée ¦ önceliği tartışmalı
+critiquée ¦ eleştirildi
+Première description ¦ İlk tanım
+Révision ¦ Gözden geçirme
+découverte en même temps que ¦ şununla aynı anda keşfedildi:
+nommée d’après ¦ şunun adı verildi:
+fabriquée ¦ üretildi
+Lieu, station ¦ Yer, istasyon
+Ce lieu n’a pas encore ses coordonnées (fiche du lieu, ou « Coordonnées » ici). ¦ Bu yerin henüz koordinatları yok (yer kartı ya da burada “Koordinatlar”).
+Nommée d’après ¦ Adını aldığı
+Liens possibles : « publiée dans », « a mené à », « confirme », « contredit », « découverte en même temps que », « nommée d’après ». ¦ Olası bağlantılar: “şurada yayımlandı”, “şuna yol açtı”, “doğrular”, “çürütür”, “şununla aynı anda keşfedildi”, “şunun adı verildi”.
+Découvertes ¦ Keşifler
+La découverte ¦ Keşif
+Nom de la découverte ¦ Keşfin adı
+Découvreurs ¦ Kâşifler
+Un découvreur ¦ Bir kâşif
+a trouvé la plante, a décrit l’espèce… ¦ bitkiyi buldu, türü tanımladı…
+découvreur ¦ kâşif
+Spécimen type ¦ Tip örneği
+Reconnue ou contestée ¦ Tanınmış ya da tartışmalı
+Auteur et année du nom ¦ Adın yazarı ve yılı
+En l’honneur de ¦ Onuruna
+nommée en son honneur ¦ onun onuruna adlandırıldı
+Pourquoi ce nom ¦ Neden bu ad
+Statut du nom ¦ Adın durumu
+Précision du statut ¦ Durumun ayrıntısı
+Spécimen, lieu, planche, étiquette ¦ Örnek, yer, levha, etiket
+Les images de la découverte ¦ Keşfin görselleri
+Lieu de la découverte ¦ Keşfin yeri
+Endroit précis ¦ Tam yer
+Publication (fiche ou texte) ¦ Yayın (kart ya da metin)
+Reconnaissance et controverses ¦ Tanınma ve tartışmalar
+Liens entre découvertes et inventions ¦ Keşifler ve buluşlar arasındaki bağlar
+ex. ophrys, comète, Laguenne, 1956 ¦ örn. ophrys, kuyruklu yıldız, Laguenne, 1956
+Porte le nom de quelqu’un ¦ Birinin adını taşıyor
+Article de revue ¦ Dergi makalesi
+Communication, congrès ¦ Bildiri, kongre
+Chapitre de livre ¦ Kitap bölümü
+La publication ¦ Yayın
+Auteurs (dans l’ordre) ¦ Yazarlar (sırayla)
+rôle (facultatif) : dernier auteur, correspondant… ¦ rol (isteğe bağlı): son yazar, sorumlu yazar…
+Éditeur, congrès ¦ Yayıncı, kongre
+PDF, tiré à part ¦ PDF, ayrı basım
+Découvertes et inventions ¦ Keşifler ve buluşlar
+Fiches liées ¦ Bağlı kartlar
+Avec un DOI ¦ DOI ile
+Avec le PDF ¦ PDF ile
+Les plus citées ¦ En çok atıf alanlar
+=famille de brevets ¦ patent ailesi|patent ailesi
+=autre brevet détaillé ¦ ayrıntılı diğer patent|ayrıntılı diğer patent
+=brevet ¦ patent|patent
+=prototype ¦ prototip|prototip
+élève, stagiaire ¦ öğrenci, stajyer
+maître, patron ¦ usta, hoca
+conférence invitée ¦ davetli konuşma
+congrès ¦ kongre
+séjour de recherche ¦ araştırma ziyareti
+espèce ¦ tür
+astéroïde ¦ asteroit
+minéral ¦ mineral
+école, lycée ¦ okul, lise
+laboratoire, bâtiment ¦ laboratuvar, bina
+carnets de laboratoire ¦ laboratuvar defterleri
+carnets de terrain ¦ saha defterleri
+notes de cours ¦ ders notları
+Profil de scientifique ¦ Bilim insanı profili
+Profils de scientifique ¦ Bilim insanı profilleri
+Le scientifique ¦ Bilim insanı
+Sujets de recherche ¦ Araştırma konuları
+Plus haut diplôme ¦ En yüksek diploma
+Publications en tout ¦ Toplam yayın
+(si toutes ne sont pas notées ici) ¦ (hepsi burada yazılı değilse)
+Citations en tout ¦ Toplam atıf
+Directeur de thèse ¦ Tez danışmanı
+codirecteur de thèse ¦ tez eş danışmanı
+Un membre du jury ¦ Bir jüri üyesi
+président, rapporteur… ¦ başkan, raportör…
+jury de thèse ¦ tez jürisi
+Laboratoires et postes ¦ Laboratuvarlar ve pozisyonlar
+Filiation académique ¦ Akademik soy
+Un maître ¦ Bir hoca
+Pour elle, lui ¦ Onun için
+Élèves, doctorants ¦ Öğrenciler, doktora öğrencileri
+Un élève ¦ Bir öğrenci
+Thèse en ¦ Tez:
+Doctorants en tout ¦ Toplam doktora öğrencisi
+Un collaborateur ¦ Bir iş arkadaşı
+Missions et conférences ¦ Görevler ve konferanslar
+Missions · conférences ¦ Görevler · konferanslar
+Une mission, une conférence ¦ Bir görev, bir konferans
+Expédition ¦ Keşif gezisi
+Académies, sociétés, distinctions ¦ Akademiler, dernekler, ödüller
+Académies, sociétés ¦ Akademiler, dernekler
+Une académie, une société ¦ Bir akademi, bir dernek
+Académie, société ¦ Akademi, dernek
+Une distinction ¦ Bir ödül
+Porte son nom ¦ Onun adını taşıyor
+Une chose à son nom ¦ Onun adını taşıyan bir şey
+Fiche de la découverte ¦ Keşif kartı
+Carnets de laboratoire ¦ Laboratuvar defterleri
+Des carnets ¦ Defterler
+Un financement ¦ Bir finansman
+Récit de carrière ¦ Kariyer öyküsü
+Profil d’inventeur ¦ Mucit profili
+Profils d’inventeur ¦ Mucit profilleri
+L’inventeur ¦ Mucit
+Lieu de l’atelier ¦ Atölyenin yeri
+Associations d’inventeurs ¦ Mucit dernekleri
+thèse, postes, publications, élèves, académies, missions, nommages, découvertes ¦ tez, pozisyonlar, yayınlar, öğrenciler, akademiler, görevler, adlandırmalar, keşifler
+découverte ¦ keşif
+inventions, brevets pays par pays, prototypes, licences, objets fabriqués, concours ¦ buluşlar, ülke ülke patentler, prototipler, lisanslar, üretilen nesneler, yarışmalar
+expéditions sur la carte, membres, premières, collectes, récits, toponymes, sociétés ¦ haritada keşif gezileri, üyeler, ilkler, toplamalar, anlatılar, yer adları, dernekler
+Disciplines et domaines ¦ Disiplinler ve alanlar
+Disciplines, sujets, ORCID, IdRef… : « … » pour les écrire. ¦ Disiplinler, konular, ORCID, IdRef…: yazmak için “…”.
+Titre, date, université, directeur, jury : « … » pour l’écrire. ¦ Başlık, tarih, üniversite, danışman, jüri: yazmak için “…”.
+les institutions sont des fiches Employeurs ¦ kurumlar İşverenler kartlarıdır
+Aucun poste noté. ¦ Pozisyon yazılmadı.
+… et {x} de plus (« Tout voir »). ¦ … ve {x} tane daha (“Tümünü gör”).
+Aucune publication pour l’instant : importe-les par DOI, ORCID ou HAL, ou écris-les une par une. ¦ Henüz yayın yok: DOI, ORCID ya da HAL ile içe aktar ya da tek tek yaz.
+Importer (DOI, ORCID, HAL) ¦ İçe aktar (DOI, ORCID, HAL)
+Aucune invention pour l’instant. ¦ Henüz buluş yok.
+Nouvelle invention ¦ Yeni buluş
+Aucune découverte pour l’instant. ¦ Henüz keşif yok.
+Nouvelle découverte ¦ Yeni keşif
+son directeur de thèse ¦ tez danışmanı
+l’a eu(e) pour élève ¦ onu öğrenci olarak aldı
+Son directeur de thèse, ses maîtres, ses élèves : « … » pour les écrire. Les fiches de la base qui la, le citent comme directeur de thèse s’ajoutent toutes seules. ¦ Tez danışmanı, hocaları, öğrencileri: yazmak için “…”. Veritabanında onu tez danışmanı olarak gösteren kartlar kendiliğinden eklenir.
+maîtres de ¦ hocaları:
+directeur de thèse de ¦ tez danışmanı olduğu kişi:
+thèse {x} ¦ tez: {x}
+{x} de thèse de ({ns}) ¦ tez {x}: ({ns})
+Les co-auteurs de ses publications s’ajoutent tout seuls. ¦ Yayınlarının ortak yazarları kendiliğinden eklenir.
+Aucun financement noté. ¦ Finansman yazılmadı.
+conférence ¦ konferans
+séjour ¦ ziyaret
+Missions, terrains, conférences invitées : « … » pour les écrire. ¦ Görevler, saha çalışmaları, davetli konuşmalar: yazmak için “…”.
+Académies, distinctions ¦ Akademiler, ödüller
+Aucune académie notée. ¦ Akademi yazılmadı.
+nommée par {other} ¦ adlandıran: {other}
+Espèces, astéroïdes, rues, prix à son nom : « … » pour les écrire. Les découvertes de la base « en l’honneur de » cette personne s’ajoutent toutes seules. ¦ Onun adını taşıyan türler, asteroitler, sokaklar, ödüller: yazmak için “…”. Veritabanında bu kişinin “onuruna” yapılan keşifler kendiliğinden eklenir.
+Carnets de laboratoire ou de terrain : « … » pour les noter (les scans vont dans les médias). ¦ Laboratuvar ya da saha defterleri: not etmek için “…” (taramalar medyaya gider).
+« … » pour l’écrire. ¦ Yazmak için “…”.
+L’inventeur et son atelier ¦ Mucit ve atölyesi
+Métier, atelier, domaines : « … » pour les écrire. ¦ Meslek, atölye, alanlar: yazmak için “…”.
+Tous ses brevets ¦ Tüm patentleri
+Aucun brevet : sur la fiche d’une invention, « 📜 Brevets » → une ligne par pays. ¦ Patent yok: bir buluşun kartında “📜 Patentler” → her ülke için bir satır.
+Aucune licence notée. ¦ Lisans yazılmadı.
+Concours d’inventeurs ¦ Mucit yarışmaları
+Concours Lépine, foires, expositions : sur la fiche de chaque invention. ¦ Concours Lépine, fuarlar, sergiler: her buluşun kartında.
+Aucun objet noté. ¦ Nesne yazılmadı.
+Importer les publications de {name} ¦ Yayınları içe aktar: {name}
+Importer les publications cochées ¦ İşaretli yayınları içe aktar
+Ne pas reprendre celles qui sont déjà là (même DOI ou même titre) ¦ Zaten olanları yeniden alma (aynı DOI ya da aynı başlık)
+Relier {name} comme auteur quand son nom y est ¦ Adı geçtiğinde yazar olarak bağla: {name}
+Compléter par Crossref (auteurs, pages, citations) quand il y a un DOI ¦ DOI varsa Crossref ile tamamla (yazarlar, sayfalar, atıflar)
+Colle un ou plusieurs DOI (un par ligne), ou leurs adresses https://doi.org/… : titre, revue, auteurs, pages et citations viennent de Crossref. ¦ Bir ya da birkaç DOI yapıştır (satır başına bir tane) ya da https://doi.org/… adreslerini: başlık, dergi, yazarlar, sayfalar ve atıflar Crossref’ten gelir.
+L’identifiant ORCID (16 chiffres, ex. 0000-0002-1825-0097) ou l’adresse orcid.org/… : toute la liste des travaux déclarés. ¦ ORCID kimliği (16 rakam, örn. 0000-0002-1825-0097) ya da orcid.org/… adresi: bildirilen tüm çalışmaların listesi.
+Le nom de l’auteur (ex. Anne Martin) ou son identifiant HAL (idHal, ex. anne-martin) : les dépôts de l’archive ouverte HAL. ¦ Yazarın adı (örn. Anne Martin) ya da HAL kimliği (idHal, örn. anne-martin): HAL açık arşivindeki kayıtlar.
+Écris d’abord ce qu’il faut chercher. ¦ Önce neyi arayacağını yaz.
+Coche les publications à importer. ¦ İçe aktarılacak yayınları işaretle.
+expédition ¦ keşif gezisi
+Ouvrir sa page ¦ Sayfasını aç
+=publication ¦ yayın|yayın
+=invention ¦ buluş|buluş
+=discovery ¦ keşif|keşif
+=doctorant ¦ doktora öğrencisi|doktora öğrencisi
+=expédition ¦ keşif gezisi|keşif gezisi
+=élève ¦ öğrenci|öğrenci
+=mission ¦ görev|görev
+=cours ¦ ders|ders
+=publication importée ¦ yayın içe aktarıldı|yayın içe aktarıldı
+=membre ¦ üye|üye
+géographique, cartographie ¦ coğrafi, haritacılık
+maritime, océanographique ¦ denizcilik, oşinografi
+spéléologie ¦ mağaracılık
+archéologique ¦ arkeolojik
+aérienne ¦ havadan
+raid, traversée ¦ ralli, geçiş
+Conférences ¦ Konferanslar
+Radio, télévision ¦ Radyo, televizyon
+nom donné, non officiel ¦ verilen ad, resmî olmayan
+disparu, remplacé ¦ kaybolmuş, değiştirilmiş
+Ajouter une étape ¦ Bir etap ekle
+Les lieux de l’itinéraire n’ont pas encore leurs coordonnées (fiche du lieu, ou colonne « Coordonnées »). ¦ Güzergâhtaki yerlerin henüz koordinatları yok (yerin kartı ya da “Koordinatlar” sütunu).
+L’expédition ¦ Keşif gezisi
+Nom de l’expédition ¦ Keşif gezisinin adı
+Coordonnées (si le lieu n’en a pas) ¦ Koordinatlar (yerin koordinatı yoksa)
+Une première ¦ Bir ilk
+Un membre ¦ Bir üye
+chef, médecin, botaniste, guide… ¦ lider, doktor, botanikçi, rehber…
+Un moyen ¦ Bir ulaşım aracı
+Véhicule, animaux, matériel ¦ Taşıt, hayvanlar, malzeme
+Un carnet, des photos… ¦ Bir defter, fotoğraflar…
+Collectes — où elles sont aujourd’hui ¦ Toplamalar — bugün neredeler
+Une collecte ¦ Bir toplama
+Où aujourd’hui ¦ Bugün nerede
+Un incident ¦ Bir olay
+Les photos de l’expédition ¦ Keşif gezisinin fotoğrafları
+Récits et conférences ¦ Anlatılar ve konferanslar
+Un récit, des conférences ¦ Bir anlatı, konferanslar
+Fiche (livre…) ¦ Kart (kitap…)
+Cartes tracées ¦ Çizilen haritalar
+Toponymes donnés ¦ Verilen yer adları
+Un nom donné ¦ Verilen bir ad
+Passée par ¦ Geçtiği yerler
+Avec une première ¦ İlk içeren
+Profil d’explorateur ¦ Kâşif profili
+Profils d’explorateur ¦ Kâşif profilleri
+L’explorateur ¦ Kâşif
+Régions parcourues ¦ Dolaşılan bölgeler
+Sociétés ¦ Dernekler
+Une société ¦ Bir dernek
+Société, club ¦ Dernek, kulüp
+Lieux à son nom ¦ Onun adını taşıyan yerler
+Un lieu à son nom ¦ Onun adını taşıyan bir yer
+Des conférences ¦ Konferanslar
+Récit de vie ¦ Yaşam öyküsü
+Aucune expédition pour l’instant. ¦ Henüz keşif gezisi yok.
+Nouvelle expédition ¦ Yeni keşif gezisi
+Carte de toutes ses expéditions ¦ Tüm keşif gezilerinin haritası
+Aucun itinéraire : sur la fiche d’une expédition, « 🗺 Itinéraire » → une ligne par étape. ¦ Güzergâh yok: bir keşif gezisinin kartında “🗺 Güzergâh” → her etap için bir satır.
+Frise des expéditions ¦ Keşif gezileri zaman çizelgesi
+Les expéditions sans date n’ont pas de place sur la frise. ¦ Tarihsiz keşif gezilerinin zaman çizelgesinde yeri yok.
+Aucune première notée. ¦ İlk yazılmadı.
+Toponymes donnés ou à son nom ¦ Verilen ya da onun adını taşıyan yer adları
+Noms donnés ¦ Verilen adlar
+À son nom ¦ Onun adını taşıyan
+Aucun nom de lieu noté. ¦ Yer adı yazılmadı.
+Collectes et où elles sont ¦ Toplamalar ve nerede oldukları
+Aucune collecte notée. ¦ Toplama yazılmadı.
+Aucun récit noté. ¦ Anlatı yazılmadı.
+Sociétés et distinctions ¦ Dernekler ve ödüller
+Société de géographie, Explorers Club, médailles… : « … » pour les écrire. ¦ Société de géographie, Explorers Club, madalyalar…: yazmak için “…”.
+Compagnons d’expédition ¦ Keşif gezisi arkadaşları
+Personne d’autre noté dans ses expéditions. ¦ Keşif gezilerinde başka kimse yazılmadı.
+Découverte ¦ Keşif
+<strong>Mode consultation</strong> : parcours la généalogie librement, rien ne peut être modifié ni supprimé. ¦ <strong>Görüntüleme modu</strong>: soy ağacında özgürce gezin, hiçbir şey değiştirilemez ya da silinemez.
+Quitter la consultation ¦ Görüntüleme modundan çık
+Quitter le mode consultation (mot de passe) ¦ Görüntüleme modundan çık (parola)
+Encore une fois ¦ Bir kez daha
+Les deux mots de passe sont différents. ¦ İki parola farklı.
+Donne le mot de passe choisi en entrant dans ce mode. ¦ Bu moda girerken seçtiğin parolayı gir.
+Mode consultation terminé. ¦ Görüntüleme modu sona erdi.
+Passer en mode consultation ¦ Görüntüleme moduna geç
+La famille pourra parcourir ta généalogie sur cet ordinateur sans rien pouvoir modifier ni supprimer. <b>Choisis un mot de passe</b> : il sera demandé pour sortir de ce mode. (Oublié ? Supprime le fichier <code>consultation.json</code> du dossier des données.) ¦ Aile, bu bilgisayarda soy ağacında hiçbir şeyi değiştiremeden ya da silemeden gezinebilecek. <b>Bir parola seç</b>: bu moddan çıkmak için sorulacak. (Unuttun mu? Veri klasöründeki <code>consultation.json</code> dosyasını sil.)
+Mode consultation activé. ¦ Görüntüleme modu açıldı.
+Aucune fête reconnue (il faut le nom de la fête et l’année, ex. « le jour de la Pentecôte 1754 »). ¦ Yortu tanınmadı (yortunun adı ve yılı Fransızca gerekli, örn. “le jour de la Pentecôte 1754”).
+(calendrier julien, en usage en France avant décembre 1582 ; soit le {gregorian} dans le calendrier grégorien) ¦ (Jülyen takvimi, Fransa’da Aralık 1582’den önce kullanılıyordu; Gregoryen takvimde: {gregorian})
+Pâques {x} : {easter}. ¦ Paskalya {x}: {easter}.
+Écrit : « {original} ». ¦ Yazılan: “{original}”.
+Fêtes religieuses → date exacte ¦ Dini yortular → kesin tarih
+Les curés écrivaient souvent « le jour de la Pentecôte 1754 », « le lendemain de la Saint-Martin », « le lundi après la Saint-Martin 1650 » ou « trois jours avant Pâques 1702 ». Écris la mention : l’app calcule la vraie date (Pâques selon le comput julien avant 1583, grégorien ensuite). ¦ Rahipler sık sık “le jour de la Pentecôte 1754”, “le lendemain de la Saint-Martin”, “le lundi après la Saint-Martin 1650” ya da “trois jours avant Pâques 1702” yazardı. İfadeyi (Fransızca) yaz: uygulama gerçek tarihi hesaplar (Paskalya, 1583’ten önce Jülyen hesabına, sonra Gregoryen hesaba göre).
+Mention de l’acte ¦ Belgedeki ifade
+Toutes les fêtes mobiles d’une année (Septuagésime, Cendres, Pâques, Pentecôte, Fête-Dieu…) : cadre « Saint du jour et fêtes mobiles ». ¦ Bir yılın tüm hareketli yortuları (Septuagésime, Cendres, Pâques, Pentecôte, Fête-Dieu…): “Günün azizi ve hareketli yortular” kutusu.
+Utiliser cette date ¦ Bu tarihi kullan
+Date écrite dans l’acte : « {original} » ¦ Belgede yazılan tarih: “{original}”
+Date calculée d’après « {original} »{x}. ¦ Şu ifadeden hesaplanan tarih: “{original}”{x}.
+(mention gardée dans la description) ¦ (ifade açıklamada saklandı)
+{x} par le dossier Scans : à identifier dans les médias. ¦ Scans klasörü ile gelen: {x} — medyada tanımlanacak.
+Choisis un dossier sur ton ordinateur. Chaque fichier qui y arrive (depuis le scanner, le téléphone ou AirDrop) entre tout seul dans l’app, dans les médias à identifier. Plus besoin d’importer tes photos d’archives une par une. ¦ Bilgisayarında bir klasör seç. Oraya gelen her dosya (tarayıcıdan, telefondan ya da AirDrop ile) kendiliğinden uygulamaya, tanımlanacak medyanın arasına girer. Arşiv fotoğraflarını tek tek içe aktarmana artık gerek yok.
+Dossier surveillé ¦ İzlenen klasör
+Surveiller ce dossier (toutes les 20 secondes, tant que l’app est ouverte) ¦ Bu klasörü izle (uygulama açık olduğu sürece 20 saniyede bir)
+Ranger les fichiers importés dans le sous-dossier « Importés dans LCNDA » ¦ İçe aktarılan dosyaları “Importés dans LCNDA” alt klasörüne taşı
+Formats : JPEG, PNG, WebP, GIF, PDF{x}. Conseil : un dossier réservé aux scans (AirDrop dépose dans « Téléchargements », où il y a de tout). Un même fichier n’est jamais importé deux fois. ¦ Biçimler: JPEG, PNG, WebP, GIF, PDF{x}. İpucu: taramalara ayrılmış bir klasör kullan (AirDrop, her şeyin bulunduğu “İndirilenler” klasörüne bırakır). Aynı dosya asla iki kez içe aktarılmaz.
+, et HEIC (iPhone) ou TIFF, convertis en JPEG ¦ , ayrıca JPEG’e dönüştürülen HEIC (iPhone) ya da TIFF
+(les photos HEIC de l’iPhone et les TIFF ne sont pas convertibles sur cet ordinateur : règle l’iPhone sur « Le plus compatible ») ¦ (iPhone’un HEIC fotoğrafları ve TIFF dosyaları bu bilgisayarda dönüştürülemez: iPhone’u “En Uyumlu” olarak ayarla)
+Vérifier maintenant ¦ Şimdi kontrol et
+{x} · {x2} en tout ¦ {x} · toplam {x2}
+Rien en attente ¦ Bekleyen bir şey yok
+dossier introuvable (disque débranché ?) ¦ klasör bulunamadı (disk çıkarıldı mı?)
+Derniers arrivés ¦ Son gelenler
+Voir les médias à identifier ¦ Tanımlanacak medyayı gör
+Rien d’arrivé pour l’instant ¦ Henüz bir şey gelmedi
+Dossier surveillé. ¦ Klasör izleniyor.
+Surveillé ¦ İzleniyor
+Pas surveillé ¦ İzlenmiyor
+Avant {until}, chercher dans les registres de la paroisse de ¦ {until} yılından önce şu kilise bölgesinin kayıtlarında ara:
+Beaucoup de hameaux et de villages dépendaient de la paroisse d’à côté : les baptêmes, mariages et sépultures d’avant la Révolution sont alors dans les registres d’une autre commune. Note ces rattachements au fil de tes trouvailles : l’app l’indique sur les événements des fiches, dans les battues et dans les registres en ligne. ¦ Birçok mezra ve köy komşu kilise bölgesine bağlıydı: Devrim öncesi vaftizler, evlilikler ve defin kayıtları bu durumda başka bir yerleşim yerinin kayıtlarındadır. Bu bağlılıkları buldukça not et: uygulama bunu kartların olaylarında, taramalarda ve çevrimiçi kayıtlarda gösterir.
+Modifier le rattachement ¦ Bağlılığı düzenle
+Nouveau rattachement ¦ Yeni bağlılık
+Lieu (hameau, village, commune actuelle) ¦ Yer (mezra, köy, bugünkü yerleşim yeri)
+Dépendait de la paroisse de ¦ Bağlı olduğu kilise bölgesi
+Nom de la paroisse (tel que dans les registres) ¦ Kilise bölgesinin adı (kayıtlardaki gibi)
+Note, source ¦ Not, kaynak
+Chercher… (lieu, paroisse, note) ¦ Ara… (yer, kilise bölgesi, not)
+Avec des événements concernés ({withEv}) ¦ İlgili olayları olanlar ({withEv})
+Avec des événements concernés ¦ İlgili olayları olanlar
+Jusqu’en (année) ¦ Şu yıla kadar
+Événements concernés ¦ İlgili olaylar
+Modifier ce rattachement ¦ Bu bağlılığı düzenle
+Supprimer ce rattachement ¦ Bu bağlılığı sil
+Aucun rattachement ne correspond ¦ Eşleşen bağlılık yok
+Supprimer ce rattachement ? ¦ Bu bağlılık silinsin mi?
+Supprimer le rattachement ¦ Bağlılığı sil
+Rattachement enregistré. ¦ Bağlılık kaydedildi.
+Les témoins, voisins, curés, parrains qui n’ont pas de fiche. Par exemple : « Pierre Martin, tisserand, apparaît dans 7 actes entre 1781 et 1803 ». Ce cercle (famille, amis, voisins) débloque souvent une recherche. ¦ Kartı olmayan tanıklar, komşular, rahipler, vaftiz ebeveynleri. Örneğin: “Pierre Martin, dokumacı, 1781 ile 1803 arasında 7 belgede geçiyor”. Bu çevre (aile, arkadaşlar, komşular) çoğu zaman tıkanmış bir araştırmayı açar.
+Ouvre « Marquer dans les transcriptions » : sélectionne un nom dans le texte d’un acte, ou accepte les noms repérés par l’app. ¦ “Transkripsiyonlarda işaretle” bölümünü aç: bir belgenin metninde bir ad seç ya da uygulamanın bulduğu adları kabul et.
+Aucune transcription pour l’instant ¦ Henüz transkripsiyon yok
+Transcris d’abord un acte : visionneuse des médias → transcription. ¦ Önce bir belgeyi yazıya dök: medya görüntüleyici → transkripsiyon.
+Chercher… (nom, métier, lieu) ¦ Ara… (ad, meslek, yer)
+Lieu : ¦ Yer:
+Avec une fiche ¦ Kartı olan
+Le plus de mentions ¦ En çok geçen
+Chercher… (titre, texte, cote) ¦ Ara… (başlık, metin, arşiv numarası)
+Noms marqués ¦ İşaretli adlar
+Aucun nom marqué ¦ İşaretli ad yok
+Au moins un nom marqué ¦ En az bir işaretli ad
+{x} — apparaît dans ¦ {x} — şuralarda geçiyor:
+entre {from} et {to} ¦ {from} ile {to} arasında
+Fiche : {x} ¦ Kart: {x}
+Les {n} mentions ¦ {n} geçiş
+nom marqué ¦ işaretli ad
+noms marqués ¦ işaretli adlar
+aucun nom ¦ ad yok
+Début de la transcription ¦ Transkripsiyonun başı
+Aucun nom ne correspond ¦ Eşleşen ad yok
+Aucune transcription ne correspond ¦ Eşleşen transkripsiyon yok
+NOMS CITÉS ¦ ANILAN ADLAR
+Sélectionne un nom dans le texte avec la souris : un bouton « Ajouter » apparaît. ¦ Metinde fareyle bir ad seç: bir “Ekle” düğmesi çıkar.
+Noms marqués ({n}) ¦ İşaretli adlar ({n})
+Noms repérés par l’app ¦ Uygulamanın bulduğu adlar
+À vérifier : la détection automatique n’est pas parfaite. ¦ Kontrol et: otomatik algılama kusursuz değildir.
+Ajouter… ¦ Ekle…
+Ajouter ce nom ¦ Bu adı ekle
+NOM CITÉ ¦ ANILAN AD
+Ajouter au cercle ¦ Çevreye ekle
+Demeurant à… ¦ İkamet yeri…
+C’est quelqu’un de la base ? ¦ Veritabanından biri mi?
+Nom ajouté au cercle. ¦ Ad çevreye eklendi.
+à appliquer ¦ uygulanacak
+tu as aussi modifié ¦ sen de değiştirdin
+déjà identique ¦ zaten aynı
+absent chez toi ¦ sende yok
+Toi et un cousin, chacun sur son ordinateur, sur la même généalogie. L’app échange des « paquets de modifications » : tu reçois les siens, tu acceptes ou refuses chaque changement. On ne partage jamais la base elle-même par iCloud ou Dropbox (risque de fichier abîmé). ¦ Sen ve bir kuzen, her biri kendi bilgisayarında, aynı soy ağacı üzerinde. Uygulama “değişiklik paketleri” alıp verir: onunkileri alırsın, her değişikliği kabul eder ya da reddedersin. Veritabanının kendisini asla iCloud ya da Dropbox ile paylaşma (dosya bozulma riski).
+Comment ça marche ¦ Nasıl çalışır
+<b>Commencer</b> ici : chaque fiche reçoit un identifiant commun. ¦ Buradan <b>başla</b>: her kart ortak bir kimlik alır.
+Donner <b>une copie de ta base</b> à ton cousin (bouton ci-dessous) : il l’ouvre dans son LCNDA (Réglages → Import → ouvrir une base .db). ¦ Kuzenine <b>veritabanının bir kopyasını</b> ver (aşağıdaki düğme): o da kendi LCNDA uygulamasında açar (Ayarlar → İçe aktarma → bir .db veritabanı aç).
+Ensuite, chacun travaille de son côté et envoie de temps en temps <b>un paquet de ses modifications</b> (un petit fichier, par e-mail par exemple). ¦ Sonra herkes kendi tarafında çalışır ve zaman zaman <b>değişikliklerinin bir paketini</b> gönderir (küçük bir dosya, örneğin e-postayla).
+À la réception, tu <b>acceptes ou refuses</b> chaque changement. Une copie de sécurité est faite avant. ¦ Paketi alınca her değişikliği <b>kabul eder ya da reddedersin</b>. Önce bir güvenlik kopyası alınır.
+Ton prénom (ex. Victor) ¦ Adın (örn. Victor)
+Commencer le travail à deux ¦ Birlikte çalışmaya başla
+Ce qui est échangé : fiches, unions, liens parents-enfants, événements, lieux, notes, sources et citations, fiches des médias et leurs liens. Les fichiers des photos et des scans voyagent seulement avec 🔄 Deux ordinateurs (dossier partagé). ¦ Alınıp verilenler: kartlar, birliktelikler, ebeveyn-çocuk bağları, olaylar, yerler, notlar, kaynaklar ve alıntılar, medya kartları ve bağları. Fotoğraf ve tarama dosyaları yalnızca 🔄 İki bilgisayar (paylaşılan klasör) ile taşınır.
+depuis le dernier paquet. ¦ son paketten bu yana.
+Préparer le paquet ¦ Paketi hazırla
+Copie de la base pour un cousin ¦ Bir kuzen için veritabanı kopyası
+Le paquet est un fichier « .lcnda-changes.json » à envoyer à ton cousin. Une fois préparé, ces modifications ne seront plus remises dans le paquet suivant : garde-le jusqu’à ce qu’il l’ait reçu. ¦ Paket, kuzenine gönderilecek bir “.lcnda-changes.json” dosyasıdır. Hazırlandıktan sonra bu değişiklikler bir sonraki pakete yeniden konmaz: kuzenin alana kadar sakla.
+Je signe mes paquets ¦ Paketlerimi imzalıyorum
+Recevoir un paquet ¦ Bir paket al
+Lire le paquet ¦ Paketi oku
+Paquets échangés ¦ Alınıp verilen paketler
+envoyé ¦ gönderildi
+reçu ¦ alındı
+({accepted_count}/{change_count} acceptés) ¦ ({accepted_count}/{change_count} kabul edildi)
+Travail à deux commencé. Donne maintenant une copie de ta base à ton cousin. ¦ Birlikte çalışma başladı. Şimdi kuzenine veritabanının bir kopyasını ver.
+Aucun changement coché. ¦ İşaretli değişiklik yok.
+Appliquer {x} ? Une copie de sécurité de ta base est faite avant. ¦ Uygulansın mı: {x}? Önce veritabanının bir güvenlik kopyası alınır.
+Appliquer les changements ¦ Değişiklikleri uygula
+; {x} (fiche verrouillée) ¦ ; {x} (kart kilitli)
+Paquet de {x} ¦ Paketi gönderen: {x}
+Ce paquet a déjà été reçu une fois. ¦ Bu paket zaten bir kez alındı.
+, dont {x} déjà identiques chez toi (ignorés) ¦ , bunlardan sende zaten aynı olanlar: {x} (yok sayıldı)
+Tout cocher / décocher ¦ Tümünü işaretle / işareti kaldır
+Rien de nouveau. ¦ Yeni bir şey yok.
+Appliquer les changements cochés ¦ İşaretli değişiklikleri uygula
+=fichier arrivé ¦ dosya geldi|dosya geldi
+=fichier en attente ¦ dosya bekliyor|dosya bekliyor
+=rattachement ¦ bağlılık|bağlılık
+=changement appliqué ¦ değişiklik uygulandı|değişiklik uygulandı
+=changement ignoré ¦ değişiklik yok sayıldı|değişiklik yok sayıldı
+Une langue ¦ Bir dil
+Quelle langue ? ¦ Hangi dil?
+Cyrillique et grec ¦ Kiril ve Yunan
+Aucune langue. ¦ Dil yok.
+Sous chaque lettre : sa translittération ({x}). ¦ Her harfin altında: harf çevirisi ({x}).
+L’alphabet ¦ Alfabe
+lettres à accents ou propres à la langue ¦ aksanlı ya da dile özgü harfler
+Lettres à accents et lettres spéciales ¦ Aksanlı harfler ve özel harfler
+Aucune : cette langue n’a pas de lettres à accents. ¦ Yok: bu dilde aksanlı harf yok.
+Seulement dans les mots et les noms étrangers : ¦ Yalnızca yabancı kelimelerde ve adlarda:
+Lettres anciennes et abréviations des actes ¦ Eski harfler ve belgelerdeki kısaltmalar
+Comment la reconnaître ¦ Nasıl tanınır
+Mots fréquents dans les actes : ¦ Belgelerde sık geçen kelimeler:
+très probable ¦ çok olası
+Tape une lettre (ł, ő, ж, ω…) ou un mot entier de l’acte : les langues possibles s’affichent, les plus probables d’abord. ¦ Bir harf (ł, ő, ж, ω…) ya da belgeden bir kelimenin tamamını yaz: olası diller görünür, en olası olanlar önce.
+Tape des lettres : les chiffres, les espaces et la ponctuation ne comptent pas. ¦ Harf yaz: rakamlar, boşluklar ve noktalama sayılmaz.
+Ce caractère n’est dans aucune des langues de la liste. ¦ Bu karakter listedeki dillerin hiçbirinde yok.
+Aucune langue de la liste n’a tous ces caractères ensemble : regarde lettre par lettre ci-dessous. ¦ Listedeki hiçbir dilde bu karakterlerin hepsi birlikte yok: aşağıda harf harf bak.
+— que des lettres simples (a à z) : tape une lettre à accent ou un mot entier pour départager. ¦ — yalnızca düz harfler (a’dan z’ye): karar vermek için aksanlı bir harf ya da bir kelimenin tamamını yaz.
+{x} : seulement dans cette langue ¦ {x}: yalnızca bu dilde
+mot des actes : « {x} » ¦ belgelerden kelime: “{x}”
+Lettre par lettre ¦ Harf harf
+ce caractère n’est dans aucune des langues de la liste ¦ bu karakter listedeki dillerin hiçbirinde yok
+lettre simple : dans {x} en lettres latines ¦ düz harf: Latin harfleriyle — {x}
+Majuscules (cliquer encore pour revenir aux minuscules) ¦ Büyük harfler (küçük harflere dönmek için yeniden tıkla)
+Alphabets et langues des actes ¦ Belgelerin alfabeleri ve dilleri
+Pour lire un acte écrit dans une autre langue : l’alphabet de chaque langue, ses lettres à accents, les lettres anciennes, et comment la reconnaître. ¦ Başka bir dilde yazılmış bir belgeyi okumak için: her dilin alfabesi, aksanlı harfleri, eski harfler ve nasıl tanınacağı.
+Lettres ou mot de l’acte ¦ Belgeden harfler ya da kelime
+Chercher… (ł, ő, ж, ω, natus, урожденный) ¦ Ara… (ł, ő, ж, ω, natus, урожденный)
+Clique sur les lettres, ou tape ici ¦ Harflere tıkla ya da buraya yaz
+Effacer la dernière lettre ¦ Son harfi sil
+Cyrillique en ¦ Kiril yazımı:
+français courant ¦ günlük Fransızca
+biélorusse ¦ Beyaz Rusça
+En lettres latines : ¦ Latin harfleriyle:
+cyrillique en ISO 9 ¦ Kiril, ISO 9 ile
+lu comme du {x} ¦ {x} gibi okunur
+Clique d’abord sur une lettre grecque, puis sur l’accent ou l’esprit. ¦ Önce bir Yunan harfine, sonra aksana ya da nefes işaretine tıkla.
+Texte vidé ¦ Metin temizlendi
+Texte vidé. ¦ Metin temizlendi.
+Rien à copier : clique d’abord sur des lettres. ¦ Kopyalanacak bir şey yok: önce harflere tıkla.
+Texte copié : colle-le où tu veux (⌘V). ¦ Metin kopyalandı: istediğin yere yapıştır (⌘V).
+Copie impossible : sélectionne le texte et fais ⌘C. ¦ Kopyalanamadı: metni seç ve ⌘C tuşuna bas.
+=lettre ¦ harf|harf
+=langue possible ¦ olası dil|olası dil
+=langue ¦ dil|dil
+La lecture d’une écriture à la main (HTR), sur cet ordinateur : le texte est proposé ligne par ligne à côté de l’image, les mots peu sûrs surlignés. Elle s’installe une fois dans les Réglages. Relis toujours : elle se trompe sur les noms. ¦ El yazısı okuma (HTR), bu bilgisayarda: metin görüntünün yanında satır satır önerilir, emin olunmayan kelimeler vurgulanır. Ayarlar’dan bir kez kurulur. Her zaman yeniden oku: adlarda yanılır.
+Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches. ¦ Metinde adları (rolleriyle: vaftiz babası, tanık…), tarihleri (yazıyla ya da Cumhuriyet takvimiyle yazılmış olsalar bile), yerleri ve meslekleri arar, kartlara bağlamak için.
+Mots des actes ¦ Belgelerdeki kelimeler
+Abréviations ¦ Kısaltmalar
+Mois ¦ Aylar
+Nombres et âges ¦ Sayılar ve yaşlar
+Parenté ¦ Akrabalık
+Vieux mots ¦ Eski kelimeler
+Décès, sépulture ¦ Ölüm, defin
+Notaire ¦ Noter

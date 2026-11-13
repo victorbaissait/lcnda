@@ -1,0 +1,127 @@
+fr ¦ sk ¦ nb
+# ═════ zone « reglages » : slovaque (sk) et norvégien bokmål (nb) — docs/I18N.md, « Ajouter une langue » ═════
+Look ¦ Vzhľad ¦ Utseende
+Navigation ¦ Navigácia ¦ Navigasjon
+Écrans ¦ Obrazovky ¦ Skjermer
+Outils ¦ Nástroje ¦ Verktøy
+Construire (éditeurs) ¦ Tvoriť (editory) ¦ Bygg (redigeringsprogrammer)
+Qualité des données ¦ Kvalita údajov ¦ Datakvalitet
+Données : import, export, sauvegarde ¦ Údaje: import, export, záloha ¦ Data: import, eksport, sikkerhetskopi
+Données ¦ Údaje ¦ Data
+Référentiels ¦ Číselníky ¦ Referanselister
+Apparence et affichage ¦ Vzhľad a zobrazenie ¦ Utseende og visning
+Apparence ¦ Vzhľad ¦ Utseende
+Thème et couleurs ¦ Motív a farby ¦ Tema og farger
+Portraits et avatars ¦ Portréty a avatary ¦ Portretter og avatarer
+Notifications et boutons ¦ Oznámenia a tlačidlá ¦ Meldinger og knapper
+Menus, colonne et listes ¦ Ponuky, stĺpec a zoznamy ¦ Menyer, kolonne og lister
+Fiches personnes et animaux ¦ Karty osôb a zvierat ¦ Oppføringer for personer og dyr
+Cartes et fonds de carte ¦ Mapy a podkladové mapy ¦ Kart og bakgrunnskart
+🏛 Frontières anciennes ¦ 🏛 Historické hranice ¦ 🏛 Historiske grenser
+Accessibilité ¦ Prístupnosť ¦ Tilgjengelighet
+⚙️ Seuils du contrôle ¦ ⚙️ Prahy kontroly ¦ ⚙️ Terskler for kontrollen
+Seuils du contrôle ¦ Prahy kontroly ¦ Terskler for kontrollen
+Fusion de doublons ¦ Zlúčenie duplicít ¦ Slå sammen duplikater
+Branches ¦ Vetvy ¦ Grener
+Modifications groupées ¦ Hromadné úpravy ¦ Masseendringer
+Journal des modifications ¦ Denník zmien ¦ Endringslogg
+Export propre ¦ Čistý export ¦ Ren eksport
+Import ¦ Import ¦ Import
+Types d'événements ¦ Typy udalostí ¦ Hendelsestyper
+Calendrier / mesures ¦ Kalendár / miery ¦ Kalender / mål
+Glossaire ¦ Slovníček ¦ Ordliste
+FAQ / tuto ¦ Časté otázky / návod ¦ FAQ / veiledning
+❓ FAQ / tuto ¦ ❓ Časté otázky / návod ¦ ❓ FAQ / veiledning
+Infos ¦ Informácie ¦ Om appen
+🔄 Mises à jour ¦ 🔄 Aktualizácie ¦ 🔄 Oppdateringer
+Mises à jour ¦ Aktualizácie ¦ Oppdateringer
+Sécurité & comparaison ¦ Bezpečnosť a porovnanie ¦ Sikkerhet og sammenligning
+Entretien ¦ Údržba ¦ Vedlikehold
+Fusionner un arbre ¦ Zlúčiť strom ¦ Slå sammen et tre
+Raccourcis clavier ¦ Klávesové skratky ¦ Hurtigtaster
+Dossier « Scans » surveillé ¦ Sledovaný priečinok „Skeny“ ¦ Overvåket mappe «Skanninger»
+Travail à deux ¦ Práca vo dvojici ¦ Arbeid to sammen
+Harmoniser les variantes ¦ Zjednotiť varianty ¦ Samordne varianter
+Copie chez un cousin ¦ Kópia u bratranca ¦ Kopi hos en fetter
+Éditeur de blocs ¦ Editor blokov ¦ Blokkredigering
+Montage, retouche, mise en page et son ¦ Strih, retuš, sadzba a zvuk ¦ Redigering, retusjering, layout og lyd
+🩺 Santé de la famille ¦ 🩺 Zdravie rodiny ¦ 🩺 Familiens helse
+Santé de la famille ¦ Zdravie rodiny ¦ Familiens helse
+Visionneuse d’images ¦ Prehliadač obrázkov ¦ Bildeviser
+Éditeur de widgets ¦ Editor widgetov ¦ Widgetredigering
+Éditeur de graphiques ¦ Editor grafov ¦ Diagramredigering
+Éditeur d’onglets ¦ Editor záložiek ¦ Faneredigering
+Reconnaissance d’écriture (HTR) ¦ Rozpoznávanie rukopisu (HTR) ¦ Håndskriftgjenkjenning (HTR)
+Éditeur de listes ¦ Editor zoznamov ¦ Listeredigering
+Atelier de recherche ¦ Výskumná dielňa ¦ Forskningsverksted
+Sauvegarde automatique ¦ Automatická záloha ¦ Automatisk sikkerhetskopi
+Le preset, la couleur principale, la police, la taille du texte, le prénom et le nom du logo, la langue, le calendrier et le lecteur ; tes thèmes ; remettre comme au départ. ¦ Predvoľba, hlavná farba, písmo, veľkosť textu, meno a priezvisko v logu, jazyk, kalendár a prehrávač; tvoje motívy; obnovenie východiskového stavu. ¦ Forhåndsvalget, hovedfargen, skrifttypen, tekststørrelsen, fornavn og etternavn i logoen, språket, kalenderen og avspilleren; temaene dine; tilbakestill som fra start.
+Le dessin des personnes partout dans l’app : une seule forme (et les tiennes, personnalisées), puis le portrait. ¦ Ako sa osoby kreslia v celej aplikácii: jeden tvar (a tvoje vlastné), potom portrét. ¦ Hvordan personer tegnes overalt i appen: én form (og dine egne), deretter portrettet.
+Les messages après une action (coin de l’écran, durée, couleurs de chaque sorte de message), puis la forme des boutons. ¦ Správy po akcii (roh obrazovky, trvanie, farby každého druhu správy), potom tvar tlačidiel. ¦ Meldinger etter en handling (hjørnet av skjermen, varighet, farger for hver type melding), deretter knappenes form.
+Garder tous tes réglages d’un coup, pour l’Apparence ou pour toute l’app, et y revenir. ¦ Uložiť všetky nastavenia naraz, pre Vzhľad alebo celú aplikáciu, a vrátiť sa k nim. ¦ Lagre alle innstillingene dine på én gang, for Utseende eller hele appen, og gå tilbake til dem.
+L’ordre, les noms et ce qui est caché ; et la colonne de gauche. Un onglet par sujet. ¦ Poradie, názvy a čo je skryté; a ľavý stĺpec. Jedna záložka na tému. ¦ Rekkefølgen, navnene og hva som er skjult; og venstre kolonne. Én fane per emne.
+L’en-tête, les sections et les blocs, ce qu’on y voit, la numérotation, la recherche sur internet et les exceptions. ¦ Záhlavie, oddiely a bloky, čo je v nich vidieť, číslovanie, hľadanie na internete a výnimky. ¦ Toppen, seksjonene og blokkene, hva som vises, nummereringen, søk på internett og unntakene.
+Le fond de carte et la position par défaut, l’ordre des cartes et les fonds de carte proposés. ¦ Podkladová mapa a východisková poloha, poradie máp a ponúkané podkladové mapy. ¦ Bakgrunnskartet og standardposisjonen, rekkefølgen på kartene og bakgrunnskartene som tilbys.
+Ce qu’on voit à droite quand on ouvre une image, dans quel ordre, et les calendriers proposés pour une date. ¦ Čo vidíš vpravo, keď otvoríš obrázok, v akom poradí, a kalendáre ponúkané pre dátum. ¦ Hva du ser til høyre når du åpner et bilde, i hvilken rekkefølge, og kalenderne som tilbys for en dato.
+Repères rapides pour utiliser l’outil, et les questions fréquentes : pose ta question dans la recherche. ¦ Rýchle tipy na používanie nástroja a časté otázky: napíš svoju otázku do hľadania. ¦ Raske tips for å bruke verktøyet og ofte stilte spørsmål: skriv spørsmålet ditt i søket.
+Ta version de LCNDA, les nouvelles versions, et comment signaler un problème. ¦ Tvoja verzia LCNDA, nové verzie a ako nahlásiť problém. ¦ Din versjon av LCNDA, nye versjoner og hvordan du rapporterer et problem.
+▶ Relancer la visite guidée ¦ ▶ Znova spustiť prehliadku ¦ ▶ Start omvisningen på nytt
+📖 Glossaire ¦ 📖 Slovníček ¦ 📖 Ordliste
+Preset ¦ Predvoľba ¦ Forhåndsvalg
+Couleur principale ¦ Hlavná farba ¦ Hovedfarge
+Police de caractères ¦ Písmo ¦ Skrifttype
+Taille typographique ¦ Veľkosť textu ¦ Tekststørrelse
+Fond des blocs ¦ Pozadie blokov ¦ Blokkenes bakgrunn
+Prénom affiché ¦ Zobrazené meno ¦ Vist fornavn
+Nom affiché ¦ Zobrazené priezvisko ¦ Vist etternavn
+Calendrier par défaut ¦ Predvolený kalendár ¦ Standardkalender
+Langue de l'interface ¦ Jazyk rozhrania ¦ Grensesnittets språk
+Portfolio ¦ Portfólio ¦ Portefølje
+Blanc ¦ Biela ¦ Hvit
+Thème ¦ Motív ¦ Tema
+Mes thèmes ¦ Moje motívy ¦ Mine temaer
+Définir comme défaut du site ¦ Nastaviť ako predvolené pre web ¦ Angi som standard for nettstedet
+Appliquer les défauts du site ¦ Použiť predvolené nastavenia webu ¦ Bruk nettstedets standard
+Portfolio actuel ¦ Súčasné portfólio ¦ Nåværende portefølje
+Couleur : {x} ¦ Farba: {x} ¦ Farge: {x}
+Menu des onglets ¦ Ponuka záložiek ¦ Fanemeny
+En haut (défaut) ¦ Hore (predvolené) ¦ Øverst (standard)
+En bas de l’écran ¦ Dole na obrazovke ¦ Nederst på skjermen
+Logo « MA FAMILLE · GÉNÉALOGIE » ¦ Logo „MOJA RODINA · RODOKMEŇ“ ¦ Logo «MIN FAMILIE · SLEKTSFORSKNING»
+Afficher (défaut) ¦ Zobraziť (predvolené) ¦ Vis (standard)
+Masquer (onglets plus larges) ¦ Skryť (širšie záložky) ¦ Skjul (bredere faner)
+Très compacte (13px) ¦ Veľmi kompaktná (13px) ¦ Svært kompakt (13px)
+Compacte (14px) ¦ Kompaktná (14px) ¦ Kompakt (14px)
+Resserrée (15px) ¦ Zhustená (15px) ¦ Tett (15px)
+Normale (16px) ¦ Normálna (16px) ¦ Normal (16px)
+Confortable (17px) ¦ Pohodlná (17px) ¦ Komfortabel (17px)
+Grande (18px) ¦ Veľká (18px) ¦ Stor (18px)
+Très grande (19px) ¦ Veľmi veľká (19px) ¦ Svært stor (19px)
+Police système (auto) ¦ Systémové písmo (auto) ¦ Systemskrift (auto)
+Choisir la police (celles de l’app et de l’ordinateur) ¦ Vybrať písmo (z aplikácie a z počítača) ¦ Velg skrifttype (appens og datamaskinens)
+Fond des blocs de fiche ¦ Pozadie blokov karty ¦ Bakgrunn for oppføringens blokker
+Selon le preset ¦ Podľa predvoľby ¦ Etter forhåndsvalget
+Couleur bleutée ¦ Modrastá farba ¦ Blålig farge
+Noir et blanc ¦ Čiernobielo ¦ Svart-hvitt
+Papier archive ¦ Archívny papier ¦ Arkivpapir
+Vert doux ¦ Jemná zelená ¦ Mild grønn
+Lecteur audio / vidéo : avancer et reculer de ¦ Prehrávač zvuku / videa: posun vpred a vzad o ¦ Lyd- / videoavspiller: hopp fram og tilbake med
+Lecteur audio / vidéo : avancer et reculer de {x} ¦ Prehrávač zvuku / videa: posun vpred a vzad o {x} ¦ Lyd- / videoavspiller: hopp fram og tilbake med {x}
+✎ Mes thèmes ¦ ✎ Moje motívy ¦ ✎ Mine temaer
+⚙️ Gérer les presets ({n}) ¦ ⚙️ Spravovať predvoľby ({n}) ¦ ⚙️ Administrer forhåndsvalg ({n})
+Toujours proposé ¦ Vždy ponúkať ¦ Tilbys alltid
+Proposer dans la liste ¦ Ponúkať v zozname ¦ Tilby i listen
+🧩 Fond des pages ¦ 🧩 Pozadie stránok ¦ 🧩 Sidenes bakgrunn
+Intensité ¦ Intenzita ¦ Intensitet
+Une couleur à moi ¦ Vlastná farba ¦ En egen farge
+Personnes et fiches ¦ Osoby a karty ¦ Personer og oppføringer
+Graphiques et arbres ¦ Grafy a stromy ¦ Diagrammer og trær
+Listes et recherche ¦ Zoznamy a výskum ¦ Lister og forskning
+Enquêtes et tableaux ¦ Pátrania a tabule ¦ Undersøkelser og tavler
+✍️ Accord des mots ¦ ✍️ Zhoda slov ¦ ✍️ Bøying av ord
+Chercher dans cette page… (ex. sosa, imprimer, ⌘P) ¦ Hľadať na tejto stránke… (napr. sosa, tlač, ⌘P) ¦ Søk på denne siden… (f.eks. sosa, skriv ut, ⌘P)
+Chercher dans cette page ¦ Hľadať na tejto stránke ¦ Søk på denne siden
+🔍 Chercher dans tous les Réglages ¦ 🔍 Hľadať vo všetkých Nastaveniach ¦ 🔍 Søk i alle Innstillinger
+Tout montrer ¦ Zobraziť všetko ¦ Vis alt
+Widgets et bibliothèque ¦ Widgety a knižnica ¦ Widgeter og bibliotek
+Widgets posés sur le tableau de bord ¦ Widgety umiestnené na prehľade ¦ Widgeter plassert på oversikten

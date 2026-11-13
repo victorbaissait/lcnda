@@ -1,0 +1,1060 @@
+fr ¦ fi ¦ hu
+Format de la page ¦ Sivun koko ¦ Oldalméret
+Celui du design ¦ Mallin oma ¦ A dizájn saját mérete
+✏️ Personnalisé (à mes mesures) ¦ ✏️ Mukautettu (omat mitat) ¦ ✏️ Egyéni (saját méretek)
+Portrait (plus haut que large) ¦ Pysty (korkeampi kuin leveä) ¦ Álló (magasabb, mint széles)
+Paysage (plus large que haut) ¦ Vaaka (leveämpi kuin korkea) ¦ Fekvő (szélesebb, mint magas)
+Supprimer ce format à moi ¦ Poista tämä oma koko ¦ Saját méret törlése
+＋ Enregistrer ce format ¦ ＋ Tallenna tämä koko ¦ ＋ Méret mentése
+La page garde le format du design. ¦ Sivu säilyttää mallin koon. ¦ Az oldal megtartja a dizájn méretét.
+carré ¦ neliö ¦ négyzet
+⚠️ Entre 3 cm et 1,5 m de côté. ¦ ⚠️ Sivun pituus 3 cm – 1,5 m. ¦ ⚠️ Oldalanként 3 cm és 1,5 m között.
+Format entre 3 cm et 1,5 m de côté. ¦ Koko 3 cm – 1,5 m sivua kohden. ¦ Méret oldalanként 3 cm és 1,5 m között.
+Nom de ce format (ex. Mon carnet 17 × 24) : ¦ Tämän koon nimi (esim. Oma vihko 17 × 24): ¦ A méret neve (pl. Saját füzetem 17 × 24):
+Format « {name} » enregistré : il est proposé pour les prochains documents. ¦ Koko ”{name}” tallennettu: sitä tarjotaan seuraaville asiakirjoille. ¦ A(z) „{name}” méret mentve: a következő dokumentumoknál is felajánljuk.
+Format « {name} » supprimé ¦ Koko ”{name}” poistettu ¦ A(z) „{name}” méret törölve
+Superposition (écran) ¦ Rasteri ¦ Szita
+Lumière tamisée ¦ Pehmeä valo ¦ Lágy fény
+Lumière crue ¦ Kova valo ¦ Kemény fény
+Éclaircir ¦ Vaalenna ¦ Világosítás
+Densité couleur − ¦ Värin tummennus ¦ Színégetés
+Densité couleur + ¦ Värilisäys ¦ Színfakítás
+Différence ¦ Erotus ¦ Különbség
+Luminosité ¦ Kirkkaus ¦ Fényesség
+Pointillés ¦ Pisteviiva ¦ Pontozott
+Aucun habillage ¦ Ei tekstin rivitystä ¦ Nincs szöveg körbefuttatás
+Autour du cadre ¦ Kehyksen ympäri ¦ A keret körül
+Autour de la forme (ellipse) ¦ Muodon ympäri (ellipsi) ¦ Az alakzat körül (ellipszis)
+Saut d’objet (rien à côté) ¦ Hyppäävä objekti (ei mitään vieressä) ¦ Átugró objektum (semmi mellette)
+Remplir le cadre proportionnellement ¦ Täytä kehys suhteessa ¦ Keret kitöltése arányosan
+Ajuster le contenu proportionnellement ¦ Sovita sisältö suhteessa ¦ Tartalom igazítása arányosan
+Ajuster le contenu au cadre (déformé) ¦ Sovita sisältö kehykseen (venytetty) ¦ Tartalom igazítása a kerethez (torzítva)
+Taille d’origine (centrée) ¦ Alkuperäinen koko (keskitetty) ¦ Eredeti méret (középre)
+Titre du livre ¦ Kirjan nimi ¦ A könyv címe
+Nom d’une personne ¦ Henkilön nimi ¦ Egy személy neve
+Dates et numéro ¦ Päivämäärät ja numero ¦ Dátumok és szám
+Folio (numéro de page) ¦ Sivunumero ¦ Oldalszám
+Couleur du livre ¦ Kirjan väri ¦ A könyv színe
+Fond léger ¦ Vaalea tausta ¦ Világos háttér
+Dégradé du livre ¦ Kirjan liukuväri ¦ A könyv színátmenete
+Dégradé ¦ Liukuväri ¦ Színátmenet
+Ascendance (les ancêtres) ¦ Esipolvet (esivanhemmat) ¦ Felmenők (az ősök)
+Descendance (les enfants, petits-enfants…) ¦ Jälkipolvet (lapset, lastenlapset…) ¦ Leszármazottak (gyerekek, unokák…)
+Sablier (ancêtres en haut, descendants en bas) ¦ Tiimalasi (esivanhemmat ylhäällä, jälkeläiset alhaalla) ¦ Homokóra (fent az ősök, lent a leszármazottak)
+Éventail (roue des ancêtres) ¦ Viuhka (esivanhempien pyörä) ¦ Legyező (ősök kereke)
+Classique (cases arrondies, couleur du livre) ¦ Klassinen (pyöristetyt laatikot, kirjan väri) ¦ Klasszikus (lekerekített dobozok, a könyv színe)
+Couleurs (bleu les hommes, rose les femmes) ¦ Värit (miehet sinisellä, naiset vaaleanpunaisella) ¦ Színek (férfiak kékkel, nők rózsaszínnel)
+Élégant ¦ Tyylikäs ¦ Elegáns
+Sépia ¦ Seepia ¦ Szépia
+Comme le site ¦ Kuten sivusto ¦ Mint az oldal
+Un chapitre commence ici. Change les styles dans l’onglet « Texte » : tout le livre suit. ¦ Luku alkaa tästä. Muuta tyylejä välilehdellä ”Teksti”: koko kirja seuraa. ¦ Itt kezdődik egy fejezet. A stílusokat a „Szöveg” lapon módosíthatod: az egész könyv követi.
+📜 Biographie d’un ancêtre ¦ 📜 Esivanhemman elämäkerta ¦ 📜 Egy ős életrajza
+Page de titre, portrait, repères en frise, sa vie racontée, ses sources. ¦ Nimiösivu, muotokuva, virstanpylväät aikajanalla, hänen elämäntarinansa, lähteet. ¦ Címoldal, portré, mérföldkövek idővonalon, az élete elbeszélve, a forrásai.
+🌳 Arbre en double page ¦ 🌳 Sukupuu aukeamalla ¦ 🌳 Családfa dupla oldalon
+Son arbre étalé sur deux pages en vis-à-vis. ¦ Hänen sukupuunsa levitettynä kahdelle vastakkaiselle sivulle. ¦ A családfája két egymással szemközti oldalon.
+Des pages de photos, remplies avec celles de la personne ou de sa famille proche. ¦ Kuvasivuja, täytettynä henkilön tai hänen lähiperheensä kuvilla. ¦ Fényképes oldalak a személy vagy közeli családja képeivel.
+Le couple, les enfants, et les événements de la famille au fil des années. ¦ Pariskunta, lapset ja perheen tapahtumat vuosien varrella. ¦ A pár, a gyerekek és a család eseményei az évek során.
+L’ancêtre commun, ses descendants branche par branche, « qui est qui », des pages de souvenirs. ¦ Yhteinen esivanhempi, hänen jälkeläisensä haara kerrallaan, ”kuka on kuka”, muistosivuja. ¦ A közös ős, leszármazottai áganként, „ki kicsoda”, emlékoldalak.
+📚 Un livre de famille prêt à l’emploi ¦ 📚 Valmis sukukirja ¦ 📚 Kész családi könyv
+Nom du document ¦ Asiakirjan nimi ¦ A dokumentum neve
+de la personne ¦ henkilön ¦ a személyé
+de la personne et de sa famille proche ¦ henkilön ja hänen lähiperheensä ¦ a személyé és közeli családjáé
+Tout se modifie ensuite. Les textes des fiches sont des objets dynamiques : « ↻ Mettre à jour » les refait si la fiche change. ¦ Kaikkea voi muokata jälkeenpäin. Korttien tekstit ovat dynaamisia objekteja: ”↻ Päivitä” tekee ne uudelleen, jos kortti muuttuu. ¦ Utána minden módosítható. Az adatlapok szövegei dinamikus objektumok: a „↻ Frissítés” újra elkészíti őket, ha az adatlap változik.
+L’ancêtre commun ¦ Yhteinen esivanhempi ¦ A közös ős
+Le chef de famille (ou l’un des époux) ¦ Perheen pää (tai toinen puolisoista) ¦ A családfő (vagy az egyik házastárs)
+Le livre se prépare… ¦ Kirjaa valmistellaan… ¦ A könyv készül…
+Sélection (V) ¦ Valinta (V) ¦ Kijelölés (V)
+Cadre d’image (F) ¦ Kuvakehys (F) ¦ Képkeret (F)
+Étoile (E) ¦ Tähti (E) ¦ Csillag (E)
+Plume (P) : clic = point, double-clic ou Entrée = fini ¦ Kynä (P): napsautus = piste, kaksoisnapsautus tai Enter = valmis ¦ Toll (P): kattintás = pont, dupla kattintás vagy Enter = kész
+Zoom (Z) — Alt pour reculer ¦ Zoomaus (Z) — Alt loitontaa ¦ Nagyítás (Z) — Alt a kicsinyítéshez
+Clic : choisir (⇧ : en plus) · glisser : déplacer · poignées : agrandir · double-clic : écrire ou placer une image ¦ Napsautus: valitse (⇧: lisää) · vedä: siirrä · kahvat: muuta kokoa · kaksoisnapsautus: kirjoita tai sijoita kuva ¦ Kattintás: kijelölés (⇧: továbbiak) · húzás: mozgatás · fogantyúk: átméretezés · dupla kattintás: írás vagy kép elhelyezése
+Glisse pour tracer un bloc de texte, puis écris ¦ Piirrä tekstikehys vetämällä ja kirjoita ¦ Húzással rajzolj egy szövegkeretet, majd írj
+Glisse pour tracer un cadre, puis double-clic pour y placer une image ¦ Piirrä kehys vetämällä ja sijoita siihen kuva kaksoisnapsautuksella ¦ Húzással rajzolj egy keretet, majd dupla kattintással helyezz bele képet
+Glisse pour dessiner (⇧ : un carré) ¦ Piirrä vetämällä (⇧: neliö) ¦ Rajzolj húzással (⇧: négyzet)
+Glisse pour dessiner (⇧ : un cercle) ¦ Piirrä vetämällä (⇧: ympyrä) ¦ Rajzolj húzással (⇧: kör)
+Glisse pour dessiner un polygone ¦ Piirrä monikulmio vetämällä ¦ Rajzolj húzással sokszöget
+Glisse pour dessiner une étoile ¦ Piirrä tähti vetämällä ¦ Rajzolj húzással csillagot
+Glisse pour tracer une ligne (⇧ : droite ou à 45°) ¦ Piirrä viiva vetämällä (⇧: suora tai 45°) ¦ Rajzolj húzással vonalat (⇧: egyenes vagy 45°-os)
+Clic : un point · glisser : une courbe · double-clic ou Entrée : fini ¦ Napsautus: piste · vedä: käyrä · kaksoisnapsautus tai Enter: valmis ¦ Kattintás: pont · húzás: görbe · dupla kattintás vagy Enter: kész
+Glisse pour déplacer la vue (ou barre d’espace) ¦ Siirrä näkymää vetämällä (tai välilyönnillä) ¦ Húzással mozgasd a nézetet (vagy szóköz)
+Choisir la police dans la liste ¦ Valitse fontti luettelosta ¦ Válaszd ki a betűtípust a listából
+Menus du haut ¦ Ylävalikot ¦ Felső menük
+🎨 Enregistrer comme design… ¦ 🎨 Tallenna mallina… ¦ 🎨 Mentés dizájnként…
+📐 Format du document… ¦ 📐 Asiakirjan koko… ¦ 📐 Dokumentumméret…
+ℹ️ Informations du document… ¦ ℹ️ Asiakirjan tiedot… ¦ ℹ️ Dokumentum adatai…
+⤓ Exporter (PDF, ePub, HTML, fichier)… ¦ ⤓ Vie (PDF, ePub, HTML, tiedosto)… ¦ ⤓ Exportálás (PDF, ePub, HTML, fájl)…
+✅ Contrôle avant impression… ¦ ✅ Tarkistus ennen tulostusta… ¦ ✅ Nyomtatás előtti ellenőrzés…
+↻ Mettre à jour les objets dynamiques (photos, fiches, arbres) ¦ ↻ Päivitä dynaamiset objektit (kuvat, kortit, sukupuut) ¦ ↻ Dinamikus objektumok frissítése (fényképek, adatlapok, családfák)
+🎨 Mes styles (pour tous mes documents)… ¦ 🎨 Omat tyylit (kaikkiin asiakirjoihini)… ¦ 🎨 Saját stílusok (minden dokumentumomhoz)…
+Arrière-plan ¦ Taimmaiseksi ¦ Hátra küldés
+Ajuster le cadre au contenu ¦ Sovita kehys sisältöön ¦ Keret igazítása a tartalomhoz
+🖼️ Placer une image (liée si elle vient de l’app)… ¦ 🖼️ Sijoita kuva (linkitetty, jos se tulee sovelluksesta)… ¦ 🖼️ Kép elhelyezése (csatolva, ha az alkalmazásból jön)…
+➜ Chaîner le bloc de texte vers un autre… ¦ ➜ Ketjuta tekstikehys toiseen… ¦ ➜ Szövegkeret összefűzése egy másikkal…
+⤵ Faire couler le texte sur de nouvelles pages ¦ ⤵ Valuta teksti uusille sivuille ¦ ⤵ Szöveg folytatása új oldalakon
+Couper le chaînage ¦ Katkaise ketju ¦ Összefűzés megszakítása
+📑 Insérer une table des matières ¦ 📑 Lisää sisällysluettelo ¦ 📑 Tartalomjegyzék beszúrása
+🔤 Insérer un index des noms ¦ 🔤 Lisää nimihakemisto ¦ 🔤 Névmutató beszúrása
+📍 Insérer un index des lieux ¦ 📍 Lisää paikkahakemisto ¦ 📍 Helymutató beszúrása
+🔨 Insérer un index des métiers ¦ 🔨 Lisää ammattihakemisto ¦ 🔨 Foglalkozásmutató beszúrása
+¹ Insérer une note de bas de page… ¦ ¹ Lisää alaviite… ¦ ¹ Lábjegyzet beszúrása…
+📚 Citer une source (en note)… ¦ 📚 Viittaa lähteeseen (viitteenä)… ¦ 📚 Forrás idézése (jegyzetben)…
+🗒 Insérer les notes du chapitre ¦ 🗒 Lisää luvun viitteet ¦ 🗒 A fejezet jegyzeteinek beszúrása
+📚 Insérer la bibliographie ¦ 📚 Lisää lähdeluettelo ¦ 📚 Irodalomjegyzék beszúrása
+🌳 Insérer un arbre généalogique (objet dynamique)… ¦ 🌳 Lisää sukupuu (dynaaminen objekti)… ¦ 🌳 Családfa beszúrása (dinamikus objektum)…
+👤 Insérer le texte d’une fiche (objet dynamique)… ¦ 👤 Lisää kortin teksti (dynaaminen objekti)… ¦ 👤 Adatlap szövegének beszúrása (dinamikus objektum)…
+🌦 Encadré météo d’un événement… ¦ 🌦 Tapahtuman säälaatikko… ¦ 🌦 Egy esemény időjárás-doboza…
+📊 Insérer un diagramme (objet dynamique)… ¦ 📊 Lisää kaavio (dynaaminen objekti)… ¦ 📊 Diagram beszúrása (dinamikus objektum)…
+▦ Insérer un QR code (fiche, adresse, texte)… ¦ ▦ Lisää QR-koodi (kortti, osoite, teksti)… ¦ ▦ QR-kód beszúrása (adatlap, cím, szöveg)…
+＋ Ajouter une page à la fin ¦ ＋ Lisää sivu loppuun ¦ ＋ Oldal hozzáadása a végére
+＋ Insérer des pages… ¦ ＋ Lisää sivuja… ¦ ＋ Oldalak beszúrása…
+📨 Publipostage : une page par personne… ¦ 📨 Joukkokirje: yksi sivu henkilöä kohden… ¦ 📨 Körlevél: személyenként egy oldal…
+📨 Page modèle de publipostage (avec des champs) ¦ 📨 Joukkokirjeen mallisivu (kenttineen) ¦ 📨 Körlevél-sablonoldal (mezőkkel)
+Aller à la page… ¦ Siirry sivulle… ¦ Ugrás oldalra…
+⏮ Première page ¦ ⏮ Ensimmäinen sivu ¦ ⏮ Első oldal
+‹ Page précédente ¦ ‹ Edellinen sivu ¦ ‹ Előző oldal
+Dernière page ⏭ ¦ Viimeinen sivu ⏭ ¦ Utolsó oldal ⏭
+💬 Commenter le passage ou l’objet choisi… ¦ 💬 Kommentoi valittua kohtaa tai objektia… ¦ 💬 Megjegyzés a kijelölt részhez vagy objektumhoz…
+✎ Suggérer une modification du texte choisi… ¦ ✎ Ehdota muutosta valittuun tekstiin… ¦ ✎ Módosítás javaslása a kijelölt szöveghez…
+🗂 Voir les commentaires ¦ 🗂 Näytä kommentit ¦ 🗂 Megjegyzések megtekintése
+📨 Envoyer à un cousin (fichier de relecture)… ¦ 📨 Lähetä serkulle (tarkastustiedosto)… ¦ 📨 Küldés egy unokatestvérnek (lektorálási fájl)…
+⤒ Importer les commentaires d’un cousin… ¦ ⤒ Tuo serkun kommentit… ¦ ⤒ Egy unokatestvér megjegyzéseinek importálása…
+📝 PDF annoté (avec les commentaires)… ¦ 📝 Kommentoitu PDF (kommentteineen)… ¦ 📝 Jegyzetelt PDF (a megjegyzésekkel)…
+📏 Repères et marges ¦ 📏 Apuviivat ja marginaalit ¦ 📏 Segédvonalak és margók
+Aperçu (sans repères) ¦ Esikatselu (ilman apuviivoja) ¦ Előnézet (segédvonalak nélkül)
+Annuler / rétablir (en haut) ¦ Kumoa / tee uudelleen (ylhäällä) ¦ Visszavonás / újra (fent)
+Annuler (⌘Z) ¦ Kumoa (⌘Z) ¦ Visszavonás (⌘Z)
+Rétablir (⇧⌘Z) ¦ Tee uudelleen (⇧⌘Z) ¦ Újra (⇧⌘Z)
+Exporter : PDF, ePub, HTML, impression, fichier du document ¦ Vie: PDF, ePub, HTML, tulostus, asiakirjatiedosto ¦ Exportálás: PDF, ePub, HTML, nyomtatás, dokumentumfájl
+Fond et contour de l’objet choisi : clic = choisir la couleur ¦ Valitun objektin täyttö ja ääriviiva: napsautus = valitse väri ¦ A kijelölt objektum kitöltése és körvonala: kattintás = szín kiválasztása
+Fond : clic pour choisir la couleur ¦ Täyttö: valitse väri napsauttamalla ¦ Kitöltés: kattints a szín kiválasztásához
+Contour : clic pour choisir la couleur ¦ Ääriviiva: valitse väri napsauttamalla ¦ Körvonal: kattints a szín kiválasztásához
+Intervertir fond et contour (⇧X) ¦ Vaihda täyttö ja ääriviiva keskenään (⇧X) ¦ Kitöltés és körvonal felcserélése (⇧X)
+Aucune couleur pour le fond ou le contour choisi (/) ¦ Ei väriä valitulle täytölle tai ääriviivalle (/) ¦ Nincs szín a kijelölt kitöltéshez vagy körvonalhoz (/)
+Barre du bas ¦ Alapalkki ¦ Alsó sáv
+Première page ¦ Ensimmäinen sivu ¦ Első oldal
+Numéro de la page ¦ Sivunumero ¦ Oldalszám
+Dernière page ¦ Viimeinen sivu ¦ Utolsó oldal
+Position du pointeur (mm) ¦ Osoittimen sijainti ¦ A mutató helyzete
+Voyant des erreurs (contrôle en direct) ¦ Virhevalo (tarkistus reaaliajassa) ¦ Hibajelző (élő ellenőrzés)
+Contrôle en direct ¦ Reaaliaikainen tarkistus ¦ Élő ellenőrzés
+Ouverture du document ¦ Asiakirja avattu ¦ Dokumentum megnyitva
+Rétabli : {x} ¦ Tehty uudelleen: {x} ¦ Újra: {x}
+la mise en page est fermée ¦ taitto on suljettu ¦ a tördelő be van zárva
+d’autres changements ont suivi : utilise ↶ dans la barre de l’outil ¦ muita muutoksia tuli perään: käytä työkalun palkin ↶-painiketta ¦ azóta más módosítások is történtek: használd az eszköz sávjában a ↶ gombot
+Annuler : {x} (⌘Z) ¦ Kumoa: {x} (⌘Z) ¦ Visszavonás: {x} (⌘Z)
+Rien à annuler ¦ Ei kumottavaa ¦ Nincs mit visszavonni
+Rétablir : {x} (⇧⌘Z) ¦ Tee uudelleen: {x} (⇧⌘Z) ¦ Újra: {x} (⇧⌘Z)
+Rien à rétablir ¦ Ei uudelleen tehtävää ¦ Nincs mit újra végrehajtani
+Gabarit « {name} » — ce qui est posé ici apparaît sur toutes ses pages. ¦ Mallisivu ”{name}” — tähän sijoitettu näkyy kaikilla sen sivuilla. ¦ „{name}” mesteroldal — ami ide kerül, minden oldalán megjelenik.
+＋ Numéro de page ¦ ＋ Sivunumero ¦ ＋ Oldalszám
+＋ Titre du livre en haut ¦ ＋ Kirjan nimi ylös ¦ ＋ A könyv címe fent
+＋ Chapitre en cours en haut ¦ ＋ Nykyinen luku ylös ¦ ＋ Az aktuális fejezet fent
+Revenir aux pages ¦ Takaisin sivuihin ¦ Vissza az oldalakhoz
+Aimanter : les objets se collent aux marges, aux repères et aux autres objets ¦ Magneettikohdistus: objektit tarttuvat marginaaleihin, apuviivoihin ja muihin objekteihin ¦ Mágneses igazítás: az objektumok a margókhoz, segédvonalakhoz és más objektumokhoz tapadnak
+Repères et marges : montrer ou cacher ¦ Apuviivat ja marginaalit: näytä tai piilota ¦ Segédvonalak és margók: megjelenítés vagy elrejtés
+{what} se remplit tout seul (réglages dans Objet). ¦ {what} täyttyy itsestään (asetukset valikossa Objekti). ¦ {what}: magától töltődik ki (beállítások az Objektum menüben).
+Le sommaire ¦ Sisällysluettelo ¦ A tartalomjegyzék
+L’index des noms ¦ Nimihakemisto ¦ A névmutató
+L’index des lieux ¦ Paikkahakemisto ¦ A helymutató
+L’index des métiers ¦ Ammattihakemisto ¦ A foglalkozásmutató
+Le bloc des notes ¦ Viitelohko ¦ A jegyzetblokk
+La bibliographie ¦ Lähdeluettelo ¦ Az irodalomjegyzék
+Ce bloc ¦ Tämä lohko ¦ Ez a blokk
+Ce bloc est la suite d’un sommaire ou d’un index automatique. ¦ Tämä lohko jatkaa sisällysluetteloa tai automaattista hakemistoa. ¦ Ez a blokk egy tartalomjegyzék vagy automatikus mutató folytatása.
+Texte chaîné : il s’écrit dans son premier bloc (la suite se remplit toute seule). ¦ Ketjutettu teksti: se kirjoitetaan ensimmäiseen lohkoonsa (jatko täyttyy itsestään). ¦ Összefűzött szöveg: az első blokkjába írod (a folytatás magától kitöltődik).
+Ce texte suit une fiche de la généalogie (objet dynamique). L’écrire à la main le détache de la fiche. ¦ Tämä teksti seuraa sukututkimuksen korttia (dynaaminen objekti). Käsin kirjoittaminen irrottaa sen kortista. ¦ Ez a szöveg a családfa egy adatlapját követi (dinamikus objektum). Ha kézzel írsz bele, leválik az adatlapról.
+Détacher le texte de la fiche ? ¦ Irrotetaanko teksti kortista? ¦ Leválasztod a szöveget az adatlapról?
+Détacher et écrire ¦ Irrota ja kirjoita ¦ Leválasztás és írás
+Texte détaché de la fiche ¦ Teksti irrotettu kortista ¦ Szöveg leválasztva az adatlapról
+Objet verrouillé. ¦ Objekti lukittu. ¦ Az objektum zárolva.
+Texte modifié ¦ Tekstiä muokattu ¦ Szöveg módosítva
+Choisis un bloc de texte (ou du texte dedans). ¦ Valitse tekstikehys (tai siinä olevaa tekstiä). ¦ Jelölj ki egy szövegkeretet (vagy benne szöveget).
+Choisis un bloc de texte. ¦ Valitse tekstikehys. ¦ Jelölj ki egy szövegkeretet.
+Chaînage annulé. ¦ Ketjutus peruttu. ¦ Összefűzés megszakítva.
+Objet verrouillé (Objet → Verrouiller pour le libérer). ¦ Objekti lukittu (Objekti → Lukitse vapauttaaksesi sen). ¦ Az objektum zárolva (Objektum → Zárolás a feloldáshoz).
+Élément du gabarit : Pages → gabarit → « Modifier », ou « Détacher les éléments du gabarit ». ¦ Mallisivun osa: Sivut → mallisivu → ”Muokkaa”, tai ”Irrota mallisivun osat”. ¦ Mesteroldal eleme: Oldalak → mesteroldal → „Szerkesztés”, vagy „Mesteroldal elemeinek leválasztása”.
+Copie déplacée ¦ Kopio siirretty ¦ Másolat áthelyezve
+Déplacement ({what}) ¦ Siirto ({what}) ¦ Áthelyezés ({what})
+Taille changée ¦ Kokoa muutettu ¦ Méret módosítva
+Nouveau : {x} ¦ Uusi: {x} ¦ Új: {x}
+cadre d’image ¦ kuvakehys ¦ képkeret
+étoile ¦ tähti ¦ csillag
+Cadre d’image : double-clic pour y placer une image. ¦ Kuvakehys: sijoita siihen kuva kaksoisnapsautuksella. ¦ Képkeret: dupla kattintással helyezz bele képet.
+Tracé à la plume ¦ Kynäpolku ¦ Tollal rajzolt útvonal
+Objet verrouillé : déverrouille-le d’abord (Objet → 🔒 Verrouiller / déverrouiller). ¦ Objekti lukittu: avaa lukitus ensin (Objekti → 🔒 Lukitse / avaa lukitus). ¦ Az objektum zárolva: előbb oldd fel (Objektum → 🔒 Zárolás / feloldás).
+{n} objets supprimés ¦ {n} objektia poistettu ¦ {n} objektum törölve
+Objet supprimé ¦ Objekti poistettu ¦ Objektum törölve
+objets copiés ¦ objektia kopioitu ¦ objektum másolva
+Rien à coller. ¦ Ei liitettävää. ¦ Nincs mit beilleszteni.
+pages ajoutées ¦ sivua lisätty ¦ oldal hozzáadva
+Insérer des pages ¦ Lisää sivuja ¦ Oldalak beszúrása
+Insérer ¦ Lisää ¦ Beszúrás
+après la page ¦ sivun jälkeen ¦ ez az oldal után:
+avant la page ¦ ennen sivua ¦ ez az oldal elé:
+au début du document ¦ asiakirjan alkuun ¦ a dokumentum elejére
+à la fin du document ¦ asiakirjan loppuun ¦ a dokumentum végére
+La liste des formats n’est pas chargée. ¦ Kokoluetteloa ei ole ladattu. ¦ A méretek listája nincs betöltve.
+📐 Format du document ¦ 📐 Asiakirjan koko ¦ 📐 Dokumentumméret
+Pages en vis-à-vis (livre) ¦ Aukeamat (kirja) ¦ Szemközti oldalak (könyv)
+Appliquer le format à ¦ Käytä kokoa ¦ A méret alkalmazása
+Toutes les pages ({what}) ¦ Kaikkiin sivuihin ({what}) ¦ Minden oldalra ({what})
+La page {n} seulement ¦ Vain sivuun {n} ¦ Csak a(z) {n}. oldalra
+Numéros des pages ¦ Sivunumerot ¦ Oldalszámok
+Les pages : ¦ Sivut: ¦ Az oldalak:
+Les marges, colonnes et le fond perdu valent pour tout le document. ¦ Marginaalit, palstat ja leikkuuvara koskevat koko asiakirjaa. ¦ A margók, hasábok és a kifutó az egész dokumentumra vonatkoznak.
+Les objets ¦ Objektit ¦ Az objektumok
+Restent en place ¦ Pysyvät paikallaan ¦ A helyükön maradnak
+Sont remis à l’échelle (agrandis ou réduits avec la page) ¦ Skaalataan (suurennetaan tai pienennetään sivun mukana) ¦ Átméreteződnek (az oldallal együtt nőnek vagy kisebbednek)
+Petit fond (intérieur) ¦ Sisämarginaali ¦ Belső margó
+Grand fond (extérieur) ¦ Ulkomarginaali ¦ Külső margó
+Colonnes et fond perdu ¦ Palstat ja leikkuuvara ¦ Hasábok és kifutó
+Gouttière ¦ Palstaväli ¦ Hasábköz
+↶ Annuler (⌘Z) revient au format d’avant. ¦ ↶ Kumoa (⌘Z) palauttaa edellisen koon. ¦ ↶ Visszavonás (⌘Z): visszaáll az előző méret.
+Choisis une page entre 3 cm et 1,5 m de côté. ¦ Valitse sivu, jonka sivut ovat 3 cm – 1,5 m. ¦ Válassz oldalanként 3 cm és 1,5 m közötti méretet.
+Écris les numéros des pages, par exemple « {a}-{b}, {c} ». ¦ Kirjoita sivunumerot, esimerkiksi ”{a}-{b}, {c}”. ¦ Írd be az oldalszámokat, például „{a}-{b}, {c}”.
+Format du document : {f} ¦ Asiakirjan koko: {f} ¦ Dokumentumméret: {f}
+Format du document : {f} ({what}) ¦ Asiakirjan koko: {f} ({what}) ¦ Dokumentumméret: {f} ({what})
+Ces informations vont dans le PDF (titre du fichier, auteur, sujet, mots-clés) et dans l’ePub exportés (la description aussi). ¦ Nämä tiedot menevät vietyyn PDF:ään (tiedoston nimi, tekijä, aihe, avainsanat) ja ePubiin (myös kuvaus). ¦ Ezek az adatok az exportált PDF-be (fájlcím, szerző, tárgy, kulcsszavak) és ePubba (a leírás is) kerülnek.
+Informations du document ¦ Asiakirjan tiedot ¦ Dokumentum adatai
+Mettre le gabarit ¦ Käytä mallisivua ¦ Mesteroldal alkalmazása
+Aucun (enlever le gabarit) ¦ Ei mitään (poista mallisivu) ¦ Nincs (mesteroldal eltávolítása)
+Sur ¦ Kohde ¦ Hová
+la page {n} seulement ¦ vain sivu {n} ¦ csak a(z) {n}. oldal
+les pages de … à … ¦ sivut … – … ¦ a(z) … – … oldalak
+les pages qui ont le gabarit… (remplacer) ¦ sivut, joilla on mallisivu… (korvaa) ¦ az oldalak, amelyeken ez a mesteroldal van… (csere)
+les pages de gauche ¦ vasemmanpuoleiset sivut ¦ a bal oldalak
+les pages de droite ¦ oikeanpuoleiset sivut ¦ a jobb oldalak
+Gabarit à remplacer ¦ Korvattava mallisivu ¦ Lecserélendő mesteroldal
+les pages sans gabarit ¦ sivut ilman mallisivua ¦ a mesteroldal nélküli oldalak
+Rien à changer : ces pages ont déjà ce gabarit. ¦ Ei muutettavaa: näillä sivuilla on jo tämä mallisivu. ¦ Nincs mit módosítani: ezeken az oldalakon már ez a mesteroldal van.
+Gabarit « {name} » sur {what} ¦ Mallisivu ”{name}”: {what} ¦ „{name}” mesteroldal: {what}
+Gabarit enlevé de {what} ¦ Mallisivu poistettu: {what} ¦ Mesteroldal eltávolítva: {what}
+Aller à la page (1 à {n}) : ¦ Siirry sivulle (1 – {n}): ¦ Ugrás oldalra (1 – {n}):
+Il faut garder au moins une page. ¦ Vähintään yksi sivu on säilytettävä. ¦ Legalább egy oldalnak maradnia kell.
+Page {n} supprimée ¦ Sivu {n} poistettu ¦ A(z) {n}. oldal törölve
+Choisis un autre bloc. ¦ Valitse toinen lohko. ¦ Válassz másik blokkot.
+Un sommaire ou un index ne peut pas recevoir la suite d’un texte. ¦ Sisällysluettelo tai hakemisto ei voi ottaa vastaan tekstin jatkoa. ¦ Tartalomjegyzék vagy mutató nem fogadhatja egy szöveg folytatását.
+Ce bloc reçoit déjà la suite d’un autre texte. ¦ Tämä lohko ottaa jo vastaan toisen tekstin jatkon. ¦ Ez a blokk már egy másik szöveg folytatását fogadja.
+Ce chaînage ferait une boucle. ¦ Tämä ketjutus tekisi silmukan. ¦ Ez az összefűzés hurkot okozna.
+Ce bloc contient déjà du texte : il sera ajouté à la fin du texte chaîné. ¦ Tässä lohkossa on jo tekstiä: se lisätään ketjutetun tekstin loppuun. ¦ Ebben a blokkban már van szöveg: az összefűzött szöveg végére kerül.
+Chaîner vers ce bloc ? ¦ Ketjutetaanko tähän lohkoon? ¦ Összefűzöd ezzel a blokkal?
+Chaîner ¦ Ketjuta ¦ Összefűzés
+Blocs de texte chaînés ¦ Tekstikehykset ketjutettu ¦ Szövegkeretek összefűzve
+➜ Chaîné : la suite va dans le bloc de la page {n}. ¦ ➜ Ketjutettu: jatko menee sivun {n} lohkoon. ¦ ➜ Összefűzve: a folytatás a(z) {n}. oldal blokkjába kerül.
+Choisis d’abord un bloc de texte. ¦ Valitse ensin tekstikehys. ¦ Előbb jelölj ki egy szövegkeretet.
+Je répartis le texte… ¦ Jaan tekstiä… ¦ A szöveg elosztása…
+Suite du texte ¦ Tekstin jatko ¦ A szöveg folytatása
+Le texte tient déjà dans ses blocs. ¦ Teksti mahtuu jo lohkoihinsa. ¦ A szöveg már elfér a blokkjaiban.
+Texte réparti sur {what} ¦ Teksti jaettu: {what} ¦ Szöveg elosztva: {what}
+{what} : le texte continue de bloc en bloc. ¦ {what}: teksti jatkuu lohkosta lohkoon. ¦ {what}: a szöveg blokkról blokkra folytatódik.
+Ouvre d’abord un gabarit (Pages → Modifier). ¦ Avaa ensin mallisivu (Sivut → Muokkaa). ¦ Előbb nyiss meg egy mesteroldalt (Oldalak → Szerkesztés).
+Table des matières ¦ Sisällysluettelo ¦ Tartalomjegyzék
+Index des lieux ¦ Paikkahakemisto ¦ Helymutató
+Index des métiers ¦ Ammattihakemisto ¦ Foglalkozásmutató
+Notes du chapitre ¦ Luvun viitteet ¦ A fejezet jegyzetei
+Pas dans un gabarit : sur une page. ¦ Ei mallisivulle: sivulle. ¦ Nem mesteroldalra: oldalra.
+Les notes du chapitre se rangeront dans ce bloc au lieu du bas de chaque texte (Document → Notes de bas de page). ¦ Luvun viitteet sijoitetaan tähän lohkoon kunkin tekstin alareunan sijaan (Asiakirja → Alaviitteet). ¦ A fejezet jegyzetei ebbe a blokkba kerülnek az egyes szövegek alja helyett (Dokumentum → Lábjegyzetek).
+Mettre les notes en fin de chapitre ? ¦ Siirretäänkö viitteet luvun loppuun? ¦ A jegyzetek a fejezet végére kerüljenek?
+Oui, en fin de chapitre ¦ Kyllä, luvun loppuun ¦ Igen, a fejezet végére
+Non, garder en bas des blocs ¦ Ei, pidä lohkojen alareunassa ¦ Nem, maradjanak a blokkok alján
+🗒 Les notes du chapitre se rangent ici toutes seules. ¦ 🗒 Luvun viitteet asettuvat tähän itsestään. ¦ 🗒 A fejezet jegyzetei maguktól ide kerülnek.
+📚 La bibliographie se remplit avec les sources citées en note. ¦ 📚 Lähdeluettelo täyttyy viitteissä mainituilla lähteillä. ¦ 📚 Az irodalomjegyzék a jegyzetekben idézett forrásokkal töltődik fel.
+Lieu à indexer ¦ Hakemistoon tuleva paikka ¦ Mutatóba veendő hely
+Métier à indexer ¦ Hakemistoon tuleva ammatti ¦ Mutatóba veendő foglalkozás
+Sinon : seulement les mots marqués avec le style de caractère « {name} ». ¦ Muuten: vain sanat, jotka on merkitty merkkityylillä ”{name}”. ¦ Különben: csak a(z) „{name}” karakterstílussal jelölt szavak.
+Chercher aussi les lieux de ta généalogie ? ¦ Haetaanko myös sukututkimuksesi paikat? ¦ A családfád helyeit is keressük?
+Chercher aussi les métiers de ta généalogie ? ¦ Haetaanko myös sukututkimuksesi ammatit? ¦ A családfád foglalkozásait is keressük?
+Oui, les chercher ¦ Kyllä, hae ne ¦ Igen, keresd őket
+Non, seulement les mots marqués ¦ Ei, vain merkityt sanat ¦ Nem, csak a jelölt szavakat
+{what} : rangé de A à Z, avec les pages. S’il est long : Objet → Faire couler le texte. ¦ {what}: aakkosjärjestyksessä A–Ö, sivunumeroineen. Jos se on pitkä: Objekti → Valuta teksti. ¦ {what}: A-tól Z-ig rendezve, az oldalszámokkal. Ha hosszú: Objektum → Szöveg folytatása.
+Nom à indexer ¦ Hakemistoon tuleva nimi ¦ Mutatóba veendő név
+Sinon : seulement les noms marqués avec le style de caractère « Nom à indexer ». ¦ Muuten: vain nimet, jotka on merkitty merkkityylillä ”Hakemistoon tuleva nimi”. ¦ Különben: csak a „Mutatóba veendő név” karakterstílussal jelölt nevek.
+Chercher aussi les noms des personnes de la généalogie ? ¦ Haetaanko myös sukututkimuksen henkilöiden nimet? ¦ A családfa személyeinek nevét is keressük?
+Oui, chercher les noms ¦ Kyllä, hae nimet ¦ Igen, keresd a neveket
+Non, seulement les noms marqués ¦ Ei, vain merkityt nimet ¦ Nem, csak a jelölt neveket
+Sommaire : il suit les paragraphes en style « Chapitre » (d’autres styles dans Objet). S’il est long : Objet → Faire couler le texte. ¦ Sisällysluettelo: se seuraa ”Luku”-tyylisiä kappaleita (muut tyylit valikossa Objekti). Jos se on pitkä: Objekti → Valuta teksti. ¦ Tartalomjegyzék: a „Fejezet” stílusú bekezdéseket követi (más stílusok az Objektum menüben). Ha hosszú: Objektum → Szöveg folytatása.
+Index : rangé par nom, avec les pages. S’il est long : Objet → Faire couler le texte. ¦ Hakemisto: nimen mukaan järjestetty, sivunumeroineen. Jos se on pitkä: Objekti → Valuta teksti. ¦ Mutató: név szerint rendezve, az oldalszámokkal. Ha hosszú: Objektum → Szöveg folytatása.
+Termine d’abord le texte en cours (Échap), puis recommence. ¦ Lopeta ensin nykyinen teksti (Esc) ja yritä uudelleen. ¦ Előbb fejezd be az aktuális szöveget (Esc), aztán kezdd újra.
+Aucun objet dynamique dans ce document (photos liées, textes de fiches, diagrammes, arbres). ¦ Tässä asiakirjassa ei ole dynaamisia objekteja (linkitetyt kuvat, korttien tekstit, kaaviot, sukupuut). ¦ Ebben a dokumentumban nincs dinamikus objektum (csatolt fényképek, adatlapszövegek, diagramok, családfák).
+Objets dynamiques mis à jour ¦ Dynaamiset objektit päivitetty ¦ Dinamikus objektumok frissítve
+{n} mis à jour ¦ {n} päivitetty ¦ {n} frissítve
+tout est à jour ¦ kaikki on ajan tasalla ¦ minden naprakész
+Cette image n’est pas liée à une photo de l’app. ¦ Tätä kuvaa ei ole linkitetty sovelluksen kuvaan. ¦ Ez a kép nincs összekapcsolva az alkalmazás egyik fényképével.
+Photo introuvable dans l’app. ¦ Kuvaa ei löydy sovelluksesta. ¦ A fénykép nem található az alkalmazásban.
+Insérer un diagramme ¦ Lisää kaavio ¦ Diagram beszúrása
+Diagramme inséré ¦ Kaavio lisätty ¦ Diagram beszúrva
+La météo d’autrefois n’est pas prête. ¦ Menneiden aikojen sää ei ole valmis. ¦ A régi idők időjárása nem áll készen.
+Encadré météo ¦ Säälaatikko ¦ Időjárás-doboz
+Insérer un encadré météo ¦ Lisää säälaatikko ¦ Időjárás-doboz beszúrása
+Mettre à jour ¦ Päivitä ¦ Frissítés
+L’encadré dit le temps qu’il faisait le jour de l’événement (icône, phrase et source, qui suit à l’export). « ↻ Mettre à jour les objets dynamiques » le refait. ¦ Laatikko kertoo, millainen sää oli tapahtuman päivänä (kuvake, lause ja lähde, joka säilyy viennissä). ”↻ Päivitä dynaamiset objektit” tekee sen uudelleen. ¦ A doboz megmondja, milyen idő volt az esemény napján (ikon, mondat és forrás, ami az exportban is megmarad). A „↻ Dinamikus objektumok frissítése” újra elkészíti.
+Choisis un événement. ¦ Valitse tapahtuma. ¦ Válassz egy eseményt.
+Texte lié à une fiche ¦ Korttiin linkitetty teksti ¦ Adatlaphoz kötött szöveg
+Insérer le texte d’une fiche ¦ Lisää kortin teksti ¦ Adatlap szövegének beszúrása
+Le texte suit la fiche : si elle change dans la généalogie, « 🔗 Mettre à jour les liens » (ou la réouverture du document) le refait. ¦ Teksti seuraa korttia: jos se muuttuu sukututkimuksessa, ”🔗 Päivitä linkit” (tai asiakirjan avaaminen uudelleen) tekee sen uudelleen. ¦ A szöveg követi az adatlapot: ha az a családfában változik, a „🔗 Kapcsolatok frissítése” (vagy a dokumentum újbóli megnyitása) újra elkészíti.
+Ce qu’il faut montrer ¦ Mitä näytetään ¦ Mit mutassunk
+Coche au moins une chose à montrer. ¦ Valitse vähintään yksi näytettävä asia. ¦ Jelölj be legalább egy megjelenítendő dolgot.
+Le générateur de QR codes n’est pas encore prêt. ¦ QR-koodien luonti ei ole vielä valmis. ¦ A QR-kód-készítő még nem áll készen.
+▦ Modifier le QR code ¦ ▦ Muokkaa QR-koodia ¦ ▦ QR-kód szerkesztése
+▦ Insérer un QR code ¦ ▦ Lisää QR-koodi ¦ ▦ QR-kód beszúrása
+Ce que le QR code ouvre ¦ Mitä QR-koodi avaa ¦ Mit nyit meg a QR-kód
+👤 Une fiche de la généalogie ¦ 👤 Sukututkimuksen kortti ¦ 👤 A családfa egy adatlapja
+🌐 Une adresse web ¦ 🌐 Verkko-osoite ¦ 🌐 Egy webcím
+🔤 Un texte ¦ 🔤 Teksti ¦ 🔤 Egy szöveg
+Le contenu ¦ Sisältö ¦ A tartalom
+(choisis d’abord la personne) ¦ (valitse ensin henkilö) ¦ (előbb válaszd ki a személyt)
+Les fiches de l’app restent sur cet ordinateur : le QR code mène aux fiches en ligne de la personne (Geneanet, Filae…, notées dans sa fiche) ou à FamilySearch ; sinon, il contient son identité en texte (lisible par n’importe quel téléphone). ¦ Sovelluksen kortit pysyvät tällä tietokoneella: QR-koodi vie henkilön verkkokortteihin (Geneanet, Filae…, merkitty hänen korttiinsa) tai FamilySearchiin; muuten se sisältää hänen henkilötietonsa tekstinä (luettavissa millä tahansa puhelimella). ¦ Az alkalmazás adatlapjai ezen a számítógépen maradnak: a QR-kód a személy online adatlapjaira vezet (Geneanet, Filae…, az adatlapján feljegyezve) vagy a FamilySearchre; különben a személyazonosságát tartalmazza szövegként (bármely telefon el tudja olvasni).
+Rien à coder pour l’instant. ¦ Ei vielä mitään koodattavaa. ¦ Még nincs mit kódolni.
+{n} octets · version {v} ({s} × {s} modules) · correction d’erreurs M ¦ {n} tavua · versio {v} ({s} × {s} moduulia) · virheenkorjaus M ¦ {n} bájt · {v}. verzió ({s} × {s} modul) · M hibajavítás
+Choisis la personne (et ce que le QR code contient). ¦ Valitse henkilö (ja mitä QR-koodi sisältää). ¦ Válaszd ki a személyt (és hogy mit tartalmazzon a QR-kód).
+Écris ce que le QR code doit contenir. ¦ Kirjoita, mitä QR-koodin pitää sisältää. ¦ Írd be, mit tartalmazzon a QR-kód.
+QR code modifié ¦ QR-koodia muokattu ¦ QR-kód módosítva
+QR code inséré ¦ QR-koodi lisätty ¦ QR-kód beszúrva
+▦ QR code : tire un coin pour la taille (il reste carré) ; double-clic pour le modifier. ¦ ▦ QR-koodi: muuta kokoa vetämällä kulmasta (se pysyy neliönä); muokkaa kaksoisnapsauttamalla. ¦ ▦ QR-kód: a méretéhez húzd a sarkát (négyzet marad); dupla kattintással szerkesztheted.
+🪪 Son identité en texte : « {x} » ¦ 🪪 Hänen henkilötietonsa tekstinä: ”{x}” ¦ 🪪 A személyazonossága szövegként: „{x}”
+Repères ¦ Virstanpylväät ¦ Mérföldkövek
+Page modèle de publipostage ¦ Joukkokirjeen mallisivu ¦ Körlevél-sablonoldal
+📨 Page modèle posée : change la mise en forme à ton goût, puis Page → « Publipostage ». ¦ 📨 Mallisivu lisätty: muuta muotoilua mieleiseksesi ja valitse sitten Sivu → ”Joukkokirje”. ¦ 📨 Sablonoldal elhelyezve: alakítsd kedvedre a formázást, majd Oldal → „Körlevél”.
+Gabarit « {name} » ¦ Mallisivu ”{name}” ¦ „{name}” mesteroldal
+📨 Une page par personne ¦ 📨 Yksi sivu henkilöä kohden ¦ 📨 Személyenként egy oldal
+Créer les pages ¦ Luo sivut ¦ Oldalak létrehozása
+Page modèle ¦ Mallisivu ¦ Sablonoldal
+les ancêtres de… ¦ henkilön … esivanhemmat ¦ … felmenői
+les descendants de… ¦ henkilön … jälkeläiset ¦ … leszármazottai
+ancêtres et descendants de… ¦ henkilön … esivanhemmat ja jälkeläiset ¦ … felmenői és leszármazottai
+une liste de fiches ¦ korttiluettelo ¦ adatlapok listája
+les fiches d’une étiquette ¦ tunnisteen kortit ¦ egy címke adatlapjai
+Les fiches ¦ Kortit ¦ Az adatlapok
+celui de l’arbre (Sosa, d’Aboville) ¦ sukupuun järjestys (Sosa, d’Aboville) ¦ a fa sorrendje (Sosa, d’Aboville)
+par naissance ¦ syntymän mukaan ¦ születés szerint
+après la page modèle ¦ mallisivun jälkeen ¦ a sablonoldal után
+retirer la page modèle ensuite ¦ poista mallisivu sen jälkeen ¦ utána a sablonoldal törlése
+Champs trouvés : {list} ¦ Löydetyt kentät: {list} ¦ Talált mezők: {list}
+⚠️ Aucun champ sur cette page : Page → « Page modèle de publipostage » en pose une toute prête. ¦ ⚠️ Tällä sivulla ei ole kenttiä: Sivu → ”Joukkokirjeen mallisivu” lisää valmiin sivun. ¦ ⚠️ Ezen az oldalon nincs mező: az Oldal → „Körlevél-sablonoldal” elhelyez egy kész oldalt.
+→ {what} (seulement les {n} premières). ¦ → {what} (vain {n} ensimmäistä). ¦ → {what} (csak az első {n}).
+=page sera créée ¦ sivu luodaan|sivua luodaan ¦ oldal jön létre|oldal jön létre
+pages seront créées ¦ sivua luodaan ¦ oldal jön létre
+Choisis les personnes. ¦ Valitse henkilöt. ¦ Válaszd ki a személyeket.
+(aucune étiquette) ¦ (ei tunnistetta) ¦ (nincs címke)
+Aucune personne dans ce choix. ¦ Tässä valinnassa ei ole ketään. ¦ Ebben a választásban nincs senki.
+📨 {what} (une par personne). ↶ pour tout défaire. ¦ 📨 {what} (yksi henkilöä kohden). ↶ kumoaa kaiken. ¦ 📨 {what} (személyenként egy). ↶ az egész visszavonásához.
+=page créée ¦ sivu luotu|sivua luotu ¦ oldal létrehozva|oldal létrehozva
+pages créées ¦ sivua luotu ¦ oldal létrehozva
+Double-clic dans un bloc de texte, place le curseur où va l’appel de note, puis recommence. ¦ Kaksoisnapsauta tekstikehystä, vie kohdistin viitteen merkin kohtaan ja yritä uudelleen. ¦ Kattints duplán egy szövegkeretbe, tedd a kurzort oda, ahová a jegyzetszám kerül, majd kezdd újra.
+¹ Note ajoutée : tous les numéros se remettent dans l’ordre quand tu sors du texte (Échap). ¦ ¹ Viite lisätty: kaikki numerot järjestyvät uudelleen, kun poistut tekstistä (Esc). ¦ ¹ Jegyzet hozzáadva: minden szám újra sorba áll, amikor kilépsz a szövegből (Esc).
+Texte de la note (il s’écrit en bas du bloc, ou en fin de chapitre) : ¦ Viitteen teksti (se tulee lohkon alareunaan tai luvun loppuun): ¦ A jegyzet szövege (a blokk aljára vagy a fejezet végére kerül):
+Ajouter la note ¦ Lisää viite ¦ Jegyzet hozzáadása
+Comme les archives (« AD Corrèze, 3 E 123, f° 12 ») ¦ Kuten arkistot (”AD Corrèze, 3 E 123, f° 12”) ¦ Ahogy a levéltárak („AD Corrèze, 3 E 123, f° 12”)
+NOTE · SOURCE ¦ VIITE · LÄHDE ¦ JEGYZET · FORRÁS
+📚 Citer une source ¦ 📚 Viittaa lähteeseen ¦ 📚 Forrás idézése
+Écrire la note ¦ Kirjoita viite ¦ Jegyzet megírása
+La référence s’écrit en note, à l’endroit du curseur, dans le style choisi ; la source entre dans la bibliographie (Objet → Insérer la bibliographie). ¦ Viittaus kirjoitetaan viitteeksi kohdistimen kohtaan valitulla tyylillä; lähde menee lähdeluetteloon (Objekti → Lisää lähdeluettelo). ¦ A hivatkozás jegyzetként kerül a kurzor helyére, a választott stílusban; a forrás az irodalomjegyzékbe kerül (Objektum → Irodalomjegyzék beszúrása).
+AD Corrèze ¦ AD Corrèze ¦ AD Corrèze
+acte de baptême de Jean ¦ Jeanin kastemerkintä ¦ Jean keresztelési bejegyzése
+Dépôt (archives) ¦ Säilytyspaikka (arkisto) ¦ Őrzőhely (levéltár)
+Folio, page ou vue ¦ Lehti, sivu tai kuva ¦ Fólió, oldal vagy kép
+À ajouter (facultatif) ¦ Lisättävää (vapaaehtoinen) ¦ Kiegészítés (nem kötelező)
+Choisis une source : la note s’écrit ici. ¦ Valitse lähde: viite kirjoitetaan tähän. ¦ Válassz forrást: a jegyzet ide kerül.
+Choisis une source. ¦ Valitse lähde. ¦ Válassz forrást.
+📚 Citation ajoutée en note (et dans la bibliographie). ¦ 📚 Lähdeviittaus lisätty viitteeksi (ja lähdeluetteloon). ¦ 📚 Idézet hozzáadva jegyzetként (és az irodalomjegyzékhez).
+Note retirée ¦ Viite irrotettu ¦ Jegyzet eltávolítva
+¹ Modifier la note ¦ ¹ Muokkaa viitettä ¦ ¹ Jegyzet szerkesztése
+Texte de la note : ¦ Viitteen teksti: ¦ A jegyzet szövege:
+Note modifiée ¦ Viitettä muokattu ¦ Jegyzet módosítva
+🌳 Modifier l’arbre ¦ 🌳 Muokkaa sukupuuta ¦ 🌳 Családfa szerkesztése
+🌳 Insérer un arbre généalogique ¦ 🌳 Lisää sukupuu ¦ 🌳 Családfa beszúrása
+Mettre à jour l’arbre ¦ Päivitä sukupuu ¦ Családfa frissítése
+Insérer l’arbre ¦ Lisää sukupuu ¦ Családfa beszúrása
+L’arbre est dessiné d’après la base : il se refait tout seul à l’ouverture du document et avec « ↻ Mettre à jour les objets dynamiques ». Il s’imprime et passe dans le PDF comme une image nette. ¦ Sukupuu piirretään tietokannan perusteella: se piirtyy uudelleen itsestään, kun asiakirja avataan, ja komennolla ”↻ Päivitä dynaamiset objektit”. Se tulostuu ja menee PDF:ään terävänä kuvana. ¦ A családfa az adatbázis alapján készül: magától újrarajzolódik a dokumentum megnyitásakor és a „↻ Dinamikus objektumok frissítése” paranccsal. Éles képként nyomtatódik és kerül a PDF-be.
+Style des cases ¦ Laatikoiden tyyli ¦ A dobozok stílusa
+Photos des fiches ¦ Korttien kuvat ¦ Az adatlapok fényképei
+Choisis la personne de l’arbre. ¦ Valitse sukupuun henkilö. ¦ Válaszd ki a családfa személyét.
+🌳 Je dessine l’arbre… ¦ 🌳 Piirrän sukupuuta… ¦ 🌳 A családfa rajzolása…
+Arbre modifié ¦ Sukupuuta muokattu ¦ Családfa módosítva
+Arbre inséré ¦ Sukupuu lisätty ¦ Családfa beszúrva
+💬 Ton nom ¦ 💬 Nimesi ¦ 💬 A neved
+Ton prénom (il signe tes commentaires) : ¦ Etunimesi (se allekirjoittaa kommenttisi): ¦ A keresztneved (ezzel írod alá a megjegyzéseidet):
+Choisis d’abord les mots à changer : double-clic dans le texte, puis sélectionne-les. ¦ Valitse ensin muutettavat sanat: kaksoisnapsauta tekstiä ja valitse ne. ¦ Előbb jelöld ki a módosítandó szavakat: kattints duplán a szövegbe, majd jelöld ki őket.
+Choisis un objet, ou des mots dans un texte (double-clic), puis « 💬 Commenter ». ¦ Valitse objekti tai sanoja tekstistä (kaksoisnapsautus) ja sitten ”💬 Kommentoi”. ¦ Jelölj ki egy objektumot vagy szavakat egy szövegben (dupla kattintás), majd „💬 Megjegyzés”.
+✎ Suggérer une modification ¦ ✎ Ehdota muutosta ¦ ✎ Módosítás javaslása
+Remplacer « {x} » par : ¦ Korvaa ”{x}” tekstillä: ¦ „{x}” cseréje erre:
+Suggérer ¦ Ehdota ¦ Javaslat
+Ton commentaire sur « {x} » : ¦ Kommenttisi kohdasta ”{x}”: ¦ Megjegyzésed ehhez: „{x}”:
+Ton commentaire sur cet objet : ¦ Kommenttisi tästä objektista: ¦ Megjegyzésed ehhez az objektumhoz:
+Ajouter le commentaire ¦ Lisää kommentti ¦ Megjegyzés hozzáadása
+Suggestion ajoutée ¦ Ehdotus lisätty ¦ Javaslat hozzáadva
+Commentaire ajouté ¦ Kommentti lisätty ¦ Megjegyzés hozzáadva
+✎ Suggestion notée : elle s’accepte ou se refuse dans Relecture. ¦ ✎ Ehdotus merkitty: se hyväksytään tai hylätään Tarkastuksessa. ¦ ✎ Javaslat feljegyezve: a Lektorálásban fogadható el vagy utasítható el.
+💬 Commentaire ajouté. ¦ 💬 Kommentti lisätty. ¦ 💬 Megjegyzés hozzáadva.
+Le passage a changé depuis : la suggestion ne peut plus s’appliquer toute seule. Change le texte à la main, puis « Résoudre ». ¦ Kohta on muuttunut sen jälkeen: ehdotusta ei voi enää soveltaa itsestään. Muuta tekstiä käsin ja valitse sitten ”Ratkaise”. ¦ A szakasz azóta megváltozott: a javaslat már nem alkalmazható magától. Módosítsd kézzel a szöveget, majd „Megoldva”.
+Suggestion acceptée ¦ Ehdotus hyväksytty ¦ Javaslat elfogadva
+Suggestion refusée ¦ Ehdotus hylätty ¦ Javaslat elutasítva
+remplacer « {a} » par « {b} » ¦ korvaa ”{a}” tekstillä ”{b}” ¦ „{a}” cseréje erre: „{b}”
+📨 Fichier de relecture prêt : envoie-le à ton cousin. Il l’importe dans 📐 Mise en page, commente, puis te renvoie le sien (Relecture → Importer). ¦ 📨 Tarkastustiedosto valmis: lähetä se serkullesi. Hän tuo sen kohtaan 📐 Taitto, kommentoi ja lähettää omansa takaisin (Tarkastus → Tuo). ¦ 📨 A lektorálási fájl kész: küldd el az unokatestvérednek. Ő importálja a 📐 Tördelésbe, megjegyzéseket fűz hozzá, majd visszaküldi a sajátját (Lektorálás → Importálás).
+Ce fichier n’est pas un fichier de relecture LCNDA. ¦ Tämä tiedosto ei ole LCNDA-tarkastustiedosto. ¦ Ez a fájl nem LCNDA lektorálási fájl.
+C’est un fichier de réglage, pas un fichier de relecture. ¦ Tämä on asetustiedosto, ei tarkastustiedosto. ¦ Ez beállításfájl, nem lektorálási fájl.
+Ce fichier n’est pas un fichier de relecture LCNDA (📨 Envoyer à un cousin). ¦ Tämä tiedosto ei ole LCNDA-tarkastustiedosto (📨 Lähetä serkulle). ¦ Ez a fájl nem LCNDA lektorálási fájl (📨 Küldés egy unokatestvérnek).
+Ce fichier de relecture a été fait pour un autre document. Importer quand même ses commentaires ? ¦ Tämä tarkastustiedosto tehtiin toiselle asiakirjalle. Tuodaanko sen kommentit silti? ¦ Ez a lektorálási fájl egy másik dokumentumhoz készült. Mégis importálod a megjegyzéseit?
+Un autre document ? ¦ Toinen asiakirja? ¦ Másik dokumentum?
+Rien de nouveau dans ce fichier : ses commentaires sont déjà là. ¦ Tiedostossa ei ole mitään uutta: sen kommentit ovat jo täällä. ¦ Nincs új a fájlban: a megjegyzései már itt vannak.
+Commentaires importés ¦ Kommentit tuotu ¦ Megjegyzések importálva
+=commentaire ajouté ¦ kommentti lisätty|kommenttia lisätty ¦ megjegyzés hozzáadva|megjegyzés hozzáadva
+commentaires ajoutés ¦ kommenttia lisätty ¦ megjegyzés hozzáadva
+=réponse ajoutée ¦ vastaus lisätty|vastausta lisätty ¦ válasz hozzáadva|válasz hozzáadva
+réponses ajoutées ¦ vastausta lisätty ¦ válasz hozzáadva
+✓ acceptée ¦ ✓ hyväksytty ¦ ✓ elfogadva
+✕ refusée ¦ ✕ hylätty ¦ ✕ elutasítva
+sur un objet de la page ¦ sivun objektissa ¦ az oldal egy objektumán
+✎ Remplacer par « <b>{x}</b> » ¦ ✎ Korvaa tekstillä ”<b>{x}</b>” ¦ ✎ Csere erre: „<b>{x}</b>”
+↩ Répondre ¦ ↩ Vastaa ¦ ↩ Válasz
+✓ Résoudre ¦ ✓ Ratkaise ¦ ✓ Megoldva
+Supprimer le commentaire ¦ Poista kommentti ¦ Megjegyzés törlése
+Choisis des mots (double-clic dans un texte) ou un objet, puis « 💬 Commenter » ou « ✎ Suggérer ». Les bulles au bord des pages montrent où ils sont. ¦ Valitse sanoja (kaksoisnapsautus tekstissä) tai objekti ja sitten ”💬 Kommentoi” tai ”✎ Ehdota”. Sivujen reunan kuplat näyttävät, missä ne ovat. ¦ Jelölj ki szavakat (dupla kattintás egy szövegben) vagy egy objektumot, majd „💬 Megjegyzés” vagy „✎ Javaslat”. Az oldalak szélén lévő buborékok mutatják, hol vannak.
+✎ Suggérer ¦ ✎ Ehdota ¦ ✎ Javaslat
+Résolus ¦ Ratkaistut ¦ Megoldottak
+Aucun commentaire résolu ¦ Ei ratkaistuja kommentteja ¦ Nincs megoldott megjegyzés
+Aucun commentaire ¦ Ei kommentteja ¦ Nincs megjegyzés
+Choisis des mots dans un texte, puis « 💬 Commenter ». ¦ Valitse sanoja tekstistä ja sitten ”💬 Kommentoi”. ¦ Jelölj ki szavakat egy szövegben, majd „💬 Megjegyzés”.
+Aucun commentaire. ¦ Ei kommentteja. ¦ Nincs megjegyzés.
+Envoyer à un cousin ¦ Lähetä serkulle ¦ Küldés egy unokatestvérnek
+Le fichier de relecture contient le livre : ton cousin l’importe dans son LCNDA (📐 Mise en page → Importer), ajoute ses commentaires, puis te renvoie le sien. Ou envoie-lui le PDF annoté, à lire sur papier. ¦ Tarkastustiedosto sisältää kirjan: serkkusi tuo sen omaan LCNDA:hansa (📐 Taitto → Tuo), lisää kommenttinsa ja lähettää omansa takaisin. Tai lähetä hänelle kommentoitu PDF paperilla luettavaksi. ¦ A lektorálási fájl tartalmazza a könyvet: az unokatestvéred importálja a saját LCNDA-jába (📐 Tördelés → Importálás), hozzáfűzi a megjegyzéseit, majd visszaküldi a sajátját. Vagy küldd el neki a jegyzetelt PDF-et, hogy papíron olvassa.
+⤒ Importer ses commentaires… ¦ ⤒ Tuo hänen kommenttinsa… ¦ ⤒ Megjegyzéseinek importálása…
+📝 PDF annoté… ¦ 📝 Kommentoitu PDF… ¦ 📝 Jegyzetelt PDF…
+Ton nom ¦ Nimesi ¦ A neved
+il signe tes commentaires ¦ se allekirjoittaa kommenttisi ¦ ezzel írod alá a megjegyzéseidet
+L’envoi des images n’est pas encore prêt. Réessaie dans un instant. ¦ Kuvien lähetys ei ole vielä valmis. Yritä hetken päästä uudelleen. ¦ A képek feltöltése még nem áll készen. Próbáld újra egy pillanat múlva.
+Seules les images se posent sur la page. ¦ Sivulle voi pudottaa vain kuvia. ¦ Csak képeket lehet az oldalra ejteni.
+Envoi de {what} dans les médias… ¦ Lähetetään {what} mediaan… ¦ {what} feltöltése a médiába…
+=image déposée ¦ kuva pudotettu|kuvaa pudotettu ¦ kép behúzva|kép behúzva
+images déposées ¦ kuvaa pudotettu ¦ kép behúzva
+🖼️ {what} dans les médias et sur la page (liées). ¦ 🖼️ {what} mediassa ja sivulla (linkitetty). ¦ 🖼️ {what} a médiában és az oldalon (csatolva).
+🖼️ {what} dans les médias et sur la page (liée). ¦ 🖼️ {what} mediassa ja sivulla (linkitetty). ¦ 🖼️ {what} a médiában és az oldalon (csatolva).
+Plus de place : supprime un ensemble. ¦ Tila loppui: poista jokin sarja. ¦ Nincs több hely: törölj egy készletet.
+les styles de ce document ¦ tämän asiakirjan tyylit ¦ a dokumentum stílusai
+{a} de paragraphe · {b} de caractère ¦ {a} kappaletyyliä · {b} merkkityyliä ¦ {a} bekezdésstílus · {b} karakterstílus
+Styles « {name} » mis dans le document ¦ Tyylit ”{name}” lisätty asiakirjaan ¦ A(z) „{name}” stílusok a dokumentumba kerültek
+Styles mis dans le document : tout le texte qui les utilise suit. ¦ Tyylit lisätty asiakirjaan: kaikki niitä käyttävä teksti seuraa. ¦ Stílusok a dokumentumban: minden szöveg, amely használja őket, követi.
+Copie « {name} » créée. ¦ Kopio ”{name}” luotu. ¦ „{name}” másolat létrehozva.
+Styles « {name} » supprimés ¦ Tyylit ”{name}” poistettu ¦ A(z) „{name}” stílusok törölve
+les styles de la mise en page ¦ taiton tyylit ¦ a tördelés stílusai
+Ce réglage ne contient aucun style. ¦ Tämä asetus ei sisällä tyylejä. ¦ Ez a beállítás nem tartalmaz stílust.
+Réglage « {name} » importé. ¦ Asetus ”{name}” tuotu. ¦ A(z) „{name}” beállítás importálva.
+🎨 Mes styles, pour tous mes documents ¦ 🎨 Omat tyylit kaikkiin asiakirjoihini ¦ 🎨 Saját stílusok minden dokumentumomhoz
+Garde les styles de paragraphe et de caractère (et les couleurs du nuancier qu’ils utilisent) de ce document, pour les remettre dans un autre (« Appliquer »). Les styles du même nom sont remplacés, les autres ajoutés. ¦ Säilyttää tämän asiakirjan kappale- ja merkkityylit (ja niiden käyttämät värimallit), jotta voit lisätä ne toiseen (”Käytä”). Samannimiset tyylit korvataan, muut lisätään. ¦ Megőrzi a dokumentum bekezdés- és karakterstílusait (és az általuk használt színmintákat), hogy egy másikba is betehesd őket („Alkalmazás”). Az azonos nevű stílusokat lecseréli, a többit hozzáadja.
+=texte qui déborde ¦ yli valuva teksti|yli valuvaa tekstiä ¦ kilógó szöveg|kilógó szöveg
+textes qui débordent ¦ yli valuvaa tekstiä ¦ kilógó szöveg
+=fait contredit par les fiches ¦ korttien kanssa ristiriitainen tieto|korttien kanssa ristiriitaista tietoa ¦ az adatlapoknak ellentmondó tény|az adatlapoknak ellentmondó tény
+faits contredits par les fiches ¦ korttien kanssa ristiriitaista tietoa ¦ az adatlapoknak ellentmondó tény
+{n} à vérifier ¦ {n} tarkistettavaa ¦ {n} ellenőrizendő
+Aucune erreur ¦ Ei virheitä ¦ Nincs hiba
+Aucun texte ne déborde, aucun fait contredit par les fiches ¦ Mikään teksti ei valu yli, mikään tieto ei ole ristiriidassa korttien kanssa ¦ Nincs kilógó szöveg, nincs az adatlapoknak ellentmondó tény
+Contrôle en cours… ¦ Tarkistetaan… ¦ Ellenőrzés folyamatban…
+Texte qui déborde (alors qu’il est chaîné : vérifie le bloc suivant). ¦ Teksti valuu yli (vaikka se on ketjutettu: tarkista seuraava lohko). ¦ Kilógó szöveg (pedig össze van fűzve: ellenőrizd a következő blokkot).
+Texte qui déborde de son bloc (⊞) : agrandis le bloc, chaîne-le, ou « Faire couler le texte ». ¦ Teksti valuu yli lohkostaan (⊞): suurenna lohkoa, ketjuta se tai ”Valuta teksti”. ¦ A szöveg kilóg a blokkjából (⊞): nagyítsd a blokkot, fűzd össze, vagy „Szöveg folytatása”.
+Texte hors des marges : il risque d’être coupé ou trop près du bord. ¦ Teksti marginaalien ulkopuolella: se voi leikkautua tai olla liian lähellä reunaa. ¦ A szöveg a margókon kívül van: levágódhat vagy túl közel lehet a szélhez.
+Cadre d’image vide. ¦ Tyhjä kuvakehys. ¦ Üres képkeret.
+Photo liée introuvable dans l’app. ¦ Linkitettyä kuvaa ei löydy sovelluksesta. ¦ A csatolt fénykép nem található az alkalmazásban.
+Image trop petite pour l’impression : {n} points par pouce à cette taille (il en faut 300 pour une belle impression, 150 au minimum). ¦ Kuva liian pieni tulostettavaksi: {n} pistettä tuumalle tässä koossa (hyvään tulosteeseen tarvitaan 300, vähintään 150). ¦ A kép túl kicsi a nyomtatáshoz: ebben a méretben {n} pont/hüvelyk (szép nyomathoz 300 kell, legalább 150).
+Touche le bord de la page sans aller jusqu’au fond perdu ({n} mm) : un liseré blanc peut apparaître à la coupe. ¦ Koskettaa sivun reunaa ulottumatta leikkuuvaraan ({n} mm): leikatessa voi näkyä valkoinen reuna. ¦ Eléri az oldal szélét, de a kifutóig nem ér ({n} mm): vágáskor fehér csík jelenhet meg.
+Vérification des faits impossible pour le moment (la base ne répond pas). ¦ Tietojen tarkistus ei ole nyt mahdollista (tietokanta ei vastaa). ¦ A tények ellenőrzése most nem lehetséges (az adatbázis nem válaszol).
+Appel de note sans texte : Texte → « Notes de ce bloc » pour l’écrire. ¦ Viitemerkki ilman tekstiä: Teksti → ”Tämän lohkon viitteet” kirjoittaaksesi sen. ¦ Jegyzetszám szöveg nélkül: Szöveg → „A blokk jegyzetei” a megírásához.
+Les notes vont « en fin de chapitre », mais aucun bloc ne les reçoit : Objet → « Insérer les notes du chapitre » (ou Document → Notes : en bas du bloc). ¦ Viitteet menevät ”luvun loppuun”, mutta mikään lohko ei ota niitä vastaan: Objekti → ”Lisää luvun viitteet” (tai Asiakirja → Viitteet: lohkon alareunaan). ¦ A jegyzetek „a fejezet végére” kerülnek, de egy blokk sem fogadja őket: Objektum → „A fejezet jegyzeteinek beszúrása” (vagy Dokumentum → Jegyzetek: a blokk alján).
+{what} pas encore résolus (onglet 💬 Relecture). Ils ne s’impriment pas. ¦ {what} ratkaisematta (välilehti 💬 Tarkastus). Niitä ei tulosteta. ¦ {what} még nincs megoldva (💬 Lektorálás lap). Nem nyomtatódnak ki.
+{what} pas encore résolu (onglet 💬 Relecture). Ils ne s’impriment pas. ¦ {what} ratkaisematta (välilehti 💬 Tarkastus). Niitä ei tulosteta. ¦ {what} még nincs megoldva (💬 Lektorálás lap). Nem nyomtatódnak ki.
+Police « {name} » absente de cet ordinateur : une autre la remplace à l’impression. ¦ Fonttia ”{name}” ei ole tällä tietokoneella: toinen korvaa sen tulostettaessa. ¦ A(z) „{name}” betűtípus nincs ezen a számítógépen: nyomtatáskor egy másik helyettesíti.
+Pas de fond perdu (Document → Fond perdu, 3 à 5 mm) : nécessaire si des images ou couleurs vont jusqu’au bord. ¦ Ei leikkuuvaraa (Asiakirja → Leikkuuvara, 3–5 mm): tarvitaan, jos kuvat tai värit ulottuvat reunaan asti. ¦ Nincs kifutó (Dokumentum → Kifutó, 3–5 mm): szükséges, ha képek vagy színek a szélig érnek.
+CONTRÔLE AVANT IMPRESSION ¦ TARKISTUS ENNEN TULOSTUSTA ¦ NYOMTATÁS ELŐTTI ELLENŐRZÉS
+{what} à corriger ¦ {what} korjattavaa ¦ {what} javítandó
+=problème ¦ ongelma|ongelmaa ¦ probléma|probléma
+Prêt pour l’impression ({what}) ¦ Valmis tulostettavaksi ({what}) ¦ Nyomtatásra kész ({what})
+Prêt pour l’impression ¦ Valmis tulostettavaksi ¦ Nyomtatásra kész
+{a} · {b} · {c}. Clique sur « Aller » pour voir l’objet. Pour l’imprimeur : Fichier → « PDF avec fond perdu et traits de coupe ». ¦ {a} · {b} · {c}. Napsauta ”Siirry” nähdäksesi objektin. Painolle: Tiedosto → ”PDF leikkuuvaroineen ja leikkuumerkkeineen”. ¦ {a} · {b} · {c}. Kattints az „Ugrás” gombra az objektum megtekintéséhez. A nyomdának: Fájl → „PDF kifutóval és vágójelekkel”.
+✅ Rien à signaler. ¦ ✅ Ei huomautettavaa. ¦ ✅ Nincs jelentenivaló.
+Ajuster le cadre ¦ Sovita kehys ¦ Keret igazítása
+Placer une image ¦ Sijoita kuva ¦ Kép elhelyezése
+Page ajoutée à la fin ¦ Sivu lisätty loppuun ¦ Oldal hozzáadva a végére
+Pages insérées ¦ Sivut lisätty ¦ Oldalak beszúrva
+Page dupliquée ¦ Sivu monistettu ¦ Oldal megkettőzve
+Page supprimée ¦ Sivu poistettu ¦ Oldal törölve
+🧲 Aimanter : oui. ¦ 🧲 Magneettikohdistus: päällä. ¦ 🧲 Mágneses igazítás: be.
+🧲 Aimanter : arrêté. ¦ 🧲 Magneettikohdistus: pois. ¦ 🧲 Mágneses igazítás: ki.
+Ce bloc est déjà chaîné (« Couper le chaînage » d’abord). ¦ Tämä lohko on jo ketjutettu (”Katkaise ketju” ensin). ¦ Ez a blokk már össze van fűzve (előbb „Összefűzés megszakítása”).
+➜ Clique sur le bloc de texte qui reçoit la suite (sur n’importe quelle page). Échap : annuler. ¦ ➜ Napsauta tekstikehystä, joka ottaa vastaan jatkon (millä tahansa sivulla). Esc: peruuta. ¦ ➜ Kattints arra a szövegkeretre, amely a folytatást fogadja (bármelyik oldalon). Esc: mégse.
+Ce bloc n’est pas chaîné vers un autre. ¦ Tätä lohkoa ei ole ketjutettu toiseen. ¦ Ez a blokk nincs összefűzve másikkal.
+Chaînage coupé ¦ Ketju katkaistu ¦ Összefűzés megszakítva
+Choisis un objet. ¦ Valitse objekti. ¦ Jelölj ki egy objektumot.
+Déplacement au clavier ¦ Siirto näppäimistöllä ¦ Mozgatás billentyűzettel
+Nom du design (il sera proposé pour les prochains livres) : ¦ Mallin nimi (sitä tarjotaan seuraaville kirjoille): ¦ A dizájn neve (a következő könyveknél is felajánljuk):
+Nom de la copie : ¦ Kopion nimi: ¦ A másolat neve:
+Design « {name} » enregistré : il est proposé pour les nouveaux livres. ¦ Malli ”{name}” tallennettu: sitä tarjotaan uusille kirjoille. ¦ A(z) „{name}” dizájn mentve: az új könyveknél felajánljuk.
+Les dernières modifications seront perdues. ¦ Viimeisimmät muutokset menetetään. ¦ A legutóbbi módosítások elvesznek.
+{what} · {w} × {h} mm. Dans la fenêtre du navigateur, garde « Taille réelle (100 %) ». ¦ {what} · {w} × {h} mm. Pidä selainikkunassa ”Todellinen koko (100 %)”. ¦ {what} · {w} × {h} mm. A böngészőablakban hagyd meg a „Tényleges méret (100 %)” beállítást.
+Planches (pages en vis-à-vis) ¦ Aukeamat (vastakkaiset sivut) ¦ Kiterített oldalpárok (szemközti oldalak)
+Livret plié ¦ Taitettu vihkonen ¦ Hajtogatott füzet
+(pages remises dans l’ordre, 2 par face) ¦ (sivut järjestetty uudelleen, 2 per puoli) ¦ (oldalak újrarendezve, oldalanként 2)
+Notes et commentaires ({n}) ¦ Viitteet ja kommentit ({n}) ¦ Jegyzetek és megjegyzések ({n})
+Notes et commentaires ¦ Viitteet ja kommentit ¦ Jegyzetek és megjegyzések
+Préparation du fichier HTML (les images sont intégrées)… ¦ Valmistellaan HTML-tiedostoa (kuvat upotetaan)… ¦ A HTML-fájl készül (a képek beágyazva)…
+Préparation du livre numérique (ePub)… ¦ Valmistellaan e-kirjaa (ePub)… ¦ Az e-könyv (ePub) készül…
+📱 ePub prêt ({n} Ko) : il s’ouvre dans Livres, Kobo, Calibre… ¦ 📱 ePub valmis ({n} kt): se aukeaa sovelluksissa Kirjat, Kobo, Calibre… ¦ 📱 Az ePub kész ({n} KB): megnyílik a Könyvek, Kobo, Calibre… alkalmazásban
+🗄️ PDF/A : dessin des pages… ¦ 🗄️ PDF/A: piirretään sivuja… ¦ 🗄️ PDF/A: oldalak rajzolása…
+🗄️ PDF/A : dessin des pages… {n} % ¦ 🗄️ PDF/A: piirretään sivuja… {n} % ¦ 🗄️ PDF/A: oldalak rajzolása… {n} %
+🗄️ PDF/A prêt ({n} Mo) : fait pour être gardé longtemps (archives, notaire, dépôt). ¦ 🗄️ PDF/A valmis ({n} Mt): tehty säilytettäväksi pitkään (arkistot, notaari, talletus). ¦ 🗄️ A PDF/A kész ({n} MB): hosszú távú megőrzésre készült (levéltár, közjegyző, letét).
+par l’impression ¦ tulostuksen kautta ¦ nyomtatáson keresztül
+📖 Livret à plier ¦ 📖 Taitettava vihkonen ¦ 📖 Hajtogatható füzet
+pages remises dans l’ordre, 2 par face ¦ sivut järjestetty uudelleen, 2 per puoli ¦ oldalak újrarendezve, oldalanként 2
+archivage (ISO 19005), pages en image ¦ arkistointi (ISO 19005), sivut kuvina ¦ archiválás (ISO 19005), oldalak képként
+liseuse, téléphone, tablette ¦ lukulaite, puhelin, tabletti ¦ e-könyv-olvasó, telefon, táblagép
+une page, photos comprises ¦ yksi sivu, kuvat mukaan lukien ¦ egy oldal, a fényképekkel együtt
+📝 PDF annoté ¦ 📝 Kommentoitu PDF ¦ 📝 Jegyzetelt PDF
+avec les commentaires ¦ kommentteineen ¦ a megjegyzésekkel
+à envoyer à un cousin ¦ lähetettäväksi serkulle ¦ unokatestvérnek küldéshez
+le document (.json) ¦ asiakirja (.json) ¦ a dokumentum (.json)
+Aucun gabarit ¦ Ei mallisivua ¦ Nincs mesteroldal
+Le gabarit est un fond commun à plusieurs pages (numéro de page, titre courant, filets) : ce qui est posé sur le gabarit apparaît sur toutes ses pages. ¦ Mallisivu on usean sivun yhteinen tausta (sivunumero, juokseva otsikko, viivat): mallisivulle sijoitettu näkyy kaikilla sen sivuilla. ¦ A mesteroldal több oldal közös háttere (oldalszám, élőfej, vonalak): ami a mesteroldalra kerül, minden oldalán megjelenik.
+Ajouter, enlever ou remplacer le gabarit de cette page ¦ Lisää, poista tai korvaa tämän sivun mallisivu ¦ Az oldal mesteroldalának hozzáadása, eltávolítása vagy cseréje
+Mettre, enlever ou remplacer un gabarit sur plusieurs pages ¦ Lisää, poista tai korvaa mallisivu useilla sivuilla ¦ Mesteroldal alkalmazása, eltávolítása vagy cseréje több oldalon
+Appliquer à la page {n} ¦ Käytä sivulla {n} ¦ Alkalmazás a(z) {n}. oldalra
+Les éléments du gabarit deviennent modifiables sur cette page ¦ Mallisivun osista tulee muokattavia tällä sivulla ¦ A mesteroldal elemei szerkeszthetővé válnak ezen az oldalon
+＋ Nouveau gabarit ¦ ＋ Uusi mallisivu ¦ ＋ Új mesteroldal
+Détacher les éléments ¦ Irrota osat ¦ Elemek leválasztása
+Avancer la page ¦ Siirrä sivua eteenpäin ¦ Oldal előrébb
+Reculer la page ¦ Siirrä sivua taaksepäin ¦ Oldal hátrébb
+＋ Page à la fin ¦ ＋ Sivu loppuun ¦ ＋ Oldal a végére
+＋ Insérer… ¦ ＋ Lisää… ¦ ＋ Beszúrás…
+Aller à ¦ Siirry ¦ Ugrás
+Le calque du haut est devant. Nouveaux objets : calque choisi (●). ¦ Ylin taso on edessä. Uudet objektit: valittu taso (●). ¦ A legfelső réteg van elöl. Új objektumok: a kiválasztott réteg (●).
+Double-clic : renommer ¦ Kaksoisnapsautus: nimeä uudelleen ¦ Dupla kattintás: átnevezés
+Sélection vers ¦ Siirrä valinta kohteeseen ¦ Kijelölés áthelyezése ide:
+Objets de la page ¦ Sivun objektit ¦ Az oldal objektumai
+Cadre d’image ¦ Kuvakehys ¦ Képkeret
+Tracé ¦ Polku ¦ Útvonal
+Forme composée ¦ Yhdistetty muoto ¦ Összetett alakzat
+Aucun objet sur cette page. ¦ Tällä sivulla ei ole objekteja. ¦ Ezen az oldalon nincs objektum.
+Choisis un objet sur la page (outil ➤). Double-clic sur un texte pour l’écrire, sur un cadre pour y placer une image. ¦ Valitse sivulta objekti (työkalu ➤). Kaksoisnapsauta tekstiä kirjoittaaksesi siihen tai kehystä sijoittaaksesi siihen kuvan. ¦ Jelölj ki egy objektumot az oldalon (➤ eszköz). Dupla kattintás egy szövegen az íráshoz, egy kereten kép elhelyezéséhez.
+🖼️ Placer une image ¦ 🖼️ Sijoita kuva ¦ 🖼️ Kép elhelyezése
+Position et taille ¦ Sijainti ja koko ¦ Pozíció és méret
+(dans Calques) ¦ (kohdassa Tasot) ¦ (a Rétegekben)
+Biseautés ¦ Viistetyt ¦ Letört sarkú
+Comment la couleur de l’objet se mélange à ce qui est dessous : « Produit » assombrit, « Superposition » éclaircit. ¦ Miten objektin väri sekoittuu alla olevaan: ”Kertova” tummentaa, ”Rasteri” vaalentaa. ¦ Hogyan keveredik az objektum színe az alatta lévővel: a „Szorzás” sötétít, a „Szita” világosít.
+Adoucit les bords de l’objet sur cette largeur, comme un flou du pourtour. ¦ Pehmentää objektin reunoja tällä leveydellä, kuin ääriviivan sumennus. ¦ Ennyi szélességben lágyítja az objektum széleit, mint egy elmosás a körvonal mentén.
+Ombre portée ¦ Varjo ¦ Vetett árnyék
+Décalage X ¦ X-siirtymä ¦ X eltolás
+Décalage Y ¦ Y-siirtymä ¦ Y eltolás
+Côtés ¦ Sivut ¦ Oldalak
+Convertir la forme ¦ Muunna muoto ¦ Alakzat átalakítása
+Habillage du texte ¦ Tekstin rivitys ¦ Szöveg körbefuttatása
+Le texte voisin ¦ Lähellä oleva teksti ¦ A szomszédos szöveg
+Les blocs de texte posés sous cet objet le contournent au lieu de passer dessous. ¦ Tämän objektin alle sijoitetut tekstikehykset kiertävät sen sen sijaan, että menisivät alta. ¦ Az objektum alá helyezett szövegkeretek megkerülik, ahelyett hogy alatta haladnának.
+Les blocs de texte de la page contournent cet objet. ¦ Sivun tekstikehykset kiertävät tämän objektin. ¦ Az oldal szövegkeretei megkerülik ezt az objektumot.
+mis à jour ¦ päivitetty ¦ frissítve
+personne introuvable ¦ henkilöä ei löydy ¦ a személy nem található
+Il suit la base : il se refait à l’ouverture du document et avec « ↻ Mettre à jour ». ¦ Se seuraa tietokantaa: se tehdään uudelleen, kun asiakirja avataan, ja komennolla ”↻ Päivitä”. ¦ Az adatbázist követi: a dokumentum megnyitásakor és a „↻ Frissítés” paranccsal újra elkészül.
+L’arbre reste tel quel et ne suit plus la base ¦ Sukupuu jää sellaiseksi eikä enää seuraa tietokantaa ¦ A családfa így marad, és többé nem követi az adatbázist
+✎ Modifier l’arbre… ¦ ✎ Muokkaa sukupuuta… ¦ ✎ Családfa szerkesztése…
+↻ Mettre à jour ¦ ↻ Päivitä ¦ ↻ Frissítés
+Détacher ¦ Irrota ¦ Leválasztás
+Il contient : « {x} ». Il se redessine net à toutes les tailles (PDF, ePub, HTML). ¦ Se sisältää: ”{x}”. Se piirtyy terävänä kaikissa koissa (PDF, ePub, HTML). ¦ Tartalma: „{x}”. Minden méretben élesen rajzolódik újra (PDF, ePub, HTML).
+▦ Modifier le QR code… ¦ ▦ Muokkaa QR-koodia… ¦ ▦ QR-kód szerkesztése…
+lié ¦ linkitetty ¦ csatolva
+✎ Modifier le diagramme ¦ ✎ Muokkaa kaaviota ¦ ✎ Diagram szerkesztése
+liée ¦ linkitetty ¦ csatolva
+mise à jour ¦ päivitetty ¦ frissítve
+L’image ne suit plus la photo de l’app ¦ Kuva ei enää seuraa sovelluksen kuvaa ¦ A kép többé nem követi az alkalmazás fényképét
+✎ Modifier l’original (retouche) ¦ ✎ Muokkaa alkuperäistä (kuvankäsittely) ¦ ✎ Az eredeti szerkesztése (retusálás)
+Incorporer (ne plus suivre) ¦ Upota (älä enää seuraa) ¦ Beágyazás (követés vége)
+Image incorporée au document. Pour qu’elle suive une photo de l’app (et ses retouches) : « Remplacer l’image » et choisis-la dans la base. ¦ Kuva upotettu asiakirjaan. Jotta se seuraisi sovelluksen kuvaa (ja sen muokkauksia): ”Korvaa kuva” ja valitse se tietokannasta. ¦ A kép beágyazva a dokumentumba. Hogy kövesse az alkalmazás egyik fényképét (és annak retusálását): „Kép cseréje”, és válaszd ki az adatbázisból.
+🖼️ Remplacer l’image ¦ 🖼️ Korvaa kuva ¦ 🖼️ Kép cseréje
+🖼️ Placer l’image ¦ 🖼️ Sijoita kuva ¦ 🖼️ Kép elhelyezése
+Cadre au contenu ¦ Kehys sisältöön ¦ Keret a tartalomhoz
+Marge intérieure ¦ Sisämarginaali ¦ Belső margó
+En haut ¦ Ylhäällä ¦ Fent
+Au milieu ¦ Keskellä ¦ Középen
+Ajuster la hauteur au texte ¦ Sovita korkeus tekstiin ¦ Magasság igazítása a szöveghez
+➜ Texte chaîné ¦ ➜ Ketjutettu teksti ¦ ➜ Összefűzött szöveg
+Bloc {a} sur {b} : ¦ Lohko {a}/{b}: ¦ {a}/{b}. blokk:
+Un texte peut continuer d’un bloc à l’autre, sur d’autres pages : il passe tout seul à la suite quand le premier est plein. ¦ Teksti voi jatkua lohkosta toiseen, muillakin sivuilla: se siirtyy itsestään jatkoon, kun ensimmäinen on täynnä. ¦ Egy szöveg blokkról blokkra folytatódhat, más oldalakon is: magától továbbmegy, amikor az első megtelt.
+Couper après ce bloc ¦ Katkaise tämän lohkon jälkeen ¦ Megszakítás e blokk után
+➜ Chaîner vers un bloc… ¦ ➜ Ketjuta lohkoon… ¦ ➜ Összefűzés egy blokkal…
+Ajoute des pages (même gabarit) et des blocs chaînés jusqu’à ce que tout le texte tienne ¦ Lisää sivuja (sama mallisivu) ja ketjutettuja lohkoja, kunnes koko teksti mahtuu ¦ Oldalakat (azonos mesteroldallal) és összefűzött blokkokat ad hozzá, amíg az egész szöveg el nem fér
+⤵ Faire couler sur de nouvelles pages ¦ ⤵ Valuta uusille sivuille ¦ ⤵ Folytatás új oldalakon
+📍 Index des lieux ¦ 📍 Paikkahakemisto ¦ 📍 Helymutató
+🔨 Index des métiers ¦ 🔨 Ammattihakemisto ¦ 🔨 Foglalkozásmutató
+métiers ¦ ammattia ¦ foglalkozás
+Mots marqués avec le style de caractère « Lieu à indexer », et {what} de ta base cherchés dans le texte. Rangé de A à Z, avec les pages. ¦ Sanat, jotka on merkitty merkkityylillä ”Hakemistoon tuleva paikka”, sekä tietokantasi {what}, joita haetaan tekstistä. Järjestetty A–Ö, sivunumeroineen. ¦ A „Mutatóba veendő hely” karakterstílussal jelölt szavak, valamint az adatbázisod {what}, a szövegben keresve. A-tól Z-ig rendezve, az oldalszámokkal.
+Mots marqués avec le style de caractère « Lieu à indexer », et {what} de ta base cherché dans le texte. Rangé de A à Z, avec les pages. ¦ Sanat, jotka on merkitty merkkityylillä ”Hakemistoon tuleva paikka”, sekä tietokantasi {what}, jota haetaan tekstistä. Järjestetty A–Ö, sivunumeroineen. ¦ A „Mutatóba veendő hely” karakterstílussal jelölt szavak, valamint az adatbázisod {what}, a szövegben keresve. A-tól Z-ig rendezve, az oldalszámokkal.
+Mots marqués avec le style de caractère « Lieu à indexer ». Rangé de A à Z, avec les pages. ¦ Sanat, jotka on merkitty merkkityylillä ”Hakemistoon tuleva paikka”. Järjestetty A–Ö, sivunumeroineen. ¦ A „Mutatóba veendő hely” karakterstílussal jelölt szavak. A-tól Z-ig rendezve, az oldalszámokkal.
+Mots marqués avec le style de caractère « Métier à indexer », et {what} de ta base cherchés dans le texte. Rangé de A à Z, avec les pages. ¦ Sanat, jotka on merkitty merkkityylillä ”Hakemistoon tuleva ammatti”, sekä tietokantasi {what}, joita haetaan tekstistä. Järjestetty A–Ö, sivunumeroineen. ¦ A „Mutatóba veendő foglalkozás” karakterstílussal jelölt szavak, valamint az adatbázisod {what}, a szövegben keresve. A-tól Z-ig rendezve, az oldalszámokkal.
+Mots marqués avec le style de caractère « Métier à indexer », et {what} de ta base cherché dans le texte. Rangé de A à Z, avec les pages. ¦ Sanat, jotka on merkitty merkkityylillä ”Hakemistoon tuleva ammatti”, sekä tietokantasi {what}, jota haetaan tekstistä. Järjestetty A–Ö, sivunumeroineen. ¦ A „Mutatóba veendő foglalkozás” karakterstílussal jelölt szavak, valamint az adatbázisod {what}, a szövegben keresve. A-tól Z-ig rendezve, az oldalszámokkal.
+Mots marqués avec le style de caractère « Métier à indexer ». Rangé de A à Z, avec les pages. ¦ Sanat, jotka on merkitty merkkityylillä ”Hakemistoon tuleva ammatti”. Järjestetty A–Ö, sivunumeroineen. ¦ A „Mutatóba veendő foglalkozás” karakterstílussal jelölt szavak. A-tól Z-ig rendezve, az oldalszámokkal.
+Style des lignes ¦ Rivien tyyli ¦ A sorok stílusa
+↻ Recharger ceux de la base ¦ ↻ Lataa tietokannan omat uudelleen ¦ ↻ Az adatbázisban lévők újratöltése
+＋ Chercher ceux de la base ¦ ＋ Hae tietokannan omat ¦ ＋ Az adatbázisban lévők keresése
+Seulement les mots marqués ¦ Vain merkityt sanat ¦ Csak a jelölt szavak
+🗒 Notes du chapitre ¦ 🗒 Luvun viitteet ¦ 🗒 A fejezet jegyzetei
+Les notes appelées dans le chapitre où se trouve ce bloc s’y rangent toutes seules, numérotées (Document → Notes de bas de page). ¦ Tämän lohkon luvussa merkityt viitteet asettuvat tähän itsestään numeroituina (Asiakirja → Alaviitteet). ¦ A blokk fejezetében hivatkozott jegyzetek maguktól ide kerülnek, számozva (Dokumentum → Lábjegyzetek).
+Les sources citées en note (« 📚 Citer une source ») s’y rangent toutes seules, de A à Z. ¦ Viitteissä mainitut lähteet (”📚 Viittaa lähteeseen”) asettuvat tähän itsestään, A–Ö. ¦ A jegyzetekben idézett források („📚 Forrás idézése”) maguktól ide kerülnek, A-tól Z-ig.
+📑 Table des matières ¦ 📑 Sisällysluettelo ¦ 📑 Tartalomjegyzék
+Elle reprend, dans l’ordre des pages, les paragraphes de ces styles (le 1er au premier niveau, les suivants en retrait) : ¦ Se poimii sivujärjestyksessä näiden tyylien kappaleet (1. ensimmäiselle tasolle, seuraavat sisennettyinä): ¦ Az oldalak sorrendjében átveszi az alábbi stílusú bekezdéseket (az 1. az első szinten, a többi beljebb):
+Noms marqués avec le style de caractère « Nom à indexer », et {what} de la généalogie cherchées dans le texte. Rangé par nom de famille, avec les pages. ¦ Nimet, jotka on merkitty merkkityylillä ”Hakemistoon tuleva nimi”, sekä sukututkimuksen {what}, joita haetaan tekstistä. Järjestetty sukunimen mukaan, sivunumeroineen. ¦ A „Mutatóba veendő név” karakterstílussal jelölt nevek, valamint a családfa {what}, a szövegben keresve. Családnév szerint rendezve, az oldalszámokkal.
+Noms marqués avec le style de caractère « Nom à indexer », et {what} de la généalogie cherchée dans le texte. Rangé par nom de famille, avec les pages. ¦ Nimet, jotka on merkitty merkkityylillä ”Hakemistoon tuleva nimi”, sekä sukututkimuksen {what}, jota haetaan tekstistä. Järjestetty sukunimen mukaan, sivunumeroineen. ¦ A „Mutatóba veendő név” karakterstílussal jelölt nevek, valamint a családfa {what}, a szövegben keresve. Családnév szerint rendezve, az oldalszámokkal.
+Noms marqués avec le style de caractère « Nom à indexer ». Rangé par nom de famille, avec les pages. ¦ Nimet, jotka on merkitty merkkityylillä ”Hakemistoon tuleva nimi”. Järjestetty sukunimen mukaan, sivunumeroineen. ¦ A „Mutatóba veendő név” karakterstílussal jelölt nevek. Családnév szerint rendezve, az oldalszámokkal.
+↻ Recharger les noms de la généalogie ¦ ↻ Lataa sukututkimuksen nimet uudelleen ¦ ↻ A családfa neveinek újratöltése
+＋ Chercher les noms de la généalogie ¦ ＋ Hae sukututkimuksen nimet ¦ ＋ A családfa neveinek keresése
+Seulement les noms marqués ¦ Vain merkityt nimet ¦ Csak a jelölt nevek
+🌦 Objet dynamique : météo ¦ 🌦 Dynaaminen objekti: sää ¦ 🌦 Dinamikus objektum: időjárás
+Cet encadré suit la météo d’un événement ({when}). L’écrire à la main le détache. ¦ Tämä laatikko seuraa tapahtuman säätä ({when}). Käsin kirjoittaminen irrottaa sen. ¦ Ez a doboz egy esemény időjárását követi ({when}). Ha kézzel írsz bele, leválik.
+Cet encadré suit la météo d’un événement. L’écrire à la main le détache. ¦ Tämä laatikko seuraa tapahtuman säätä. Käsin kirjoittaminen irrottaa sen. ¦ Ez a doboz egy esemény időjárását követi. Ha kézzel írsz bele, leválik.
+Changer l’événement… ¦ Vaihda tapahtuma… ¦ Esemény cseréje…
+👤 Objet dynamique : fiche ¦ 👤 Dynaaminen objekti: kortti ¦ 👤 Dinamikus objektum: adatlap
+Ce texte suit une fiche de la généalogie ({when}). L’écrire à la main le détache. ¦ Tämä teksti seuraa sukututkimuksen korttia ({when}). Käsin kirjoittaminen irrottaa sen. ¦ Ez a szöveg a családfa egy adatlapját követi ({when}). Ha kézzel írsz bele, leválik.
+Ce texte suit une fiche de la généalogie. L’écrire à la main le détache. ¦ Tämä teksti seuraa sukututkimuksen korttia. Käsin kirjoittaminen irrottaa sen. ¦ Ez a szöveg a családfa egy adatlapját követi. Ha kézzel írsz bele, leválik.
+Changer la fiche ou ce qu’on montre… ¦ Vaihda kortti tai näytettävä sisältö… ¦ Az adatlap vagy a megjelenített tartalom cseréje…
+Aligner et répartir ¦ Tasaa ja jaa ¦ Igazítás és elosztás
+Par rapport à ¦ Suhteessa ¦ Mihez képest
+la sélection ¦ valintaan ¦ a kijelöléshez
+aux marges ¦ marginaaleihin ¦ a margókhoz
+Répartir ↔ ¦ Jaa ↔ ¦ Elosztás ↔
+Répartir ↕ ¦ Jaa ↕ ¦ Elosztás ↕
+Soustraire : les formes de devant découpent celle du fond. ¦ Vähennä: edessä olevat muodot leikkaavat takimmaisen. ¦ Kivonás: az elöl lévő alakzatok kivágják a hátsót.
+Décomposer ¦ Pura ¦ Szétbontás
+Choisis au moins deux formes (Maj + clic). ¦ Valitse vähintään kaksi muotoa (Vaihto + napsautus). ¦ Jelölj ki legalább két alakzatot (Shift + kattintás).
+Toutes capitales ¦ Kaikki isoin kirjaimin ¦ Csupa nagybetű
+Crénage ¦ Välistys ¦ Alágörgetés
+Enlever la mise en forme ¦ Poista muotoilu ¦ Formázás törlése
+Choisir n’importe quelle couleur ¦ Valitse mikä tahansa väri ¦ Bármilyen szín választása
+Justifié, dernière ligne aussi ¦ Tasattu, myös viimeinen rivi ¦ Sorkizárt, az utolsó sor is
+Césure ¦ Tavutus ¦ Elválasztás
+Une note numérotée toute seule, à l’endroit du curseur ¦ Itsestään numeroitu viite kohdistimen kohtaan ¦ Magától számozott jegyzet a kurzor helyén
+La référence d’une source de ta base, en note ¦ Tietokantasi lähteen viittaus viitteenä ¦ Az adatbázisod egy forrásának hivatkozása jegyzetként
+Un commentaire de relecture sur les mots choisis ¦ Tarkastuskommentti valituista sanoista ¦ Lektori megjegyzés a kijelölt szavakhoz
+Proposer un autre texte à la place des mots choisis ¦ Ehdota toista tekstiä valittujen sanojen tilalle ¦ Másik szöveg javaslása a kijelölt szavak helyett
+1. Liste ¦ 1. Luettelo ¦ 1. Lista
+Insérer : ¦ Lisää: ¦ Beszúrás:
+Modifier le style (tout le livre suit) ¦ Muokkaa tyyliä (koko kirja seuraa) ¦ Stílus módosítása (az egész könyv követi)
+Styles de caractère ¦ Merkkityylit ¦ Karakterstílusok
+Aucun (enlever) ¦ Ei mitään (poista) ¦ Nincs (eltávolítás)
+✏️ Tu écris dans un bloc : les réglages s’appliquent au texte choisi (sinon au paragraphe ou à tout le bloc). Échap pour sortir. ¦ ✏️ Kirjoitat lohkoon: asetukset koskevat valittua tekstiä (muuten kappaletta tai koko lohkoa). Esc poistuu. ¦ ✏️ Egy blokkba írsz: a beállítások a kijelölt szövegre vonatkoznak (különben a bekezdésre vagy az egész blokkra). Esc a kilépéshez.
+Bloc choisi : les réglages s’appliquent à tout son texte. Double-clic pour écrire dedans. ¦ Lohko valittu: asetukset koskevat sen koko tekstiä. Kaksoisnapsauta kirjoittaaksesi siihen. ¦ Blokk kijelölve: a beállítások az egész szövegére vonatkoznak. Dupla kattintással írhatsz bele.
+Choisis un bloc de texte (outil T pour en tracer un). ¦ Valitse tekstikehys (T-työkalulla voit piirtää sellaisen). ¦ Jelölj ki egy szövegkeretet (a T eszközzel rajzolhatsz egyet).
+Notes de ce bloc ({n}) ¦ Tämän lohkon viitteet ({n}) ¦ A blokk jegyzetei ({n})
+Modifier la note ¦ Muokkaa viitettä ¦ Jegyzet szerkesztése
+Retirer la note ¦ Irrota viite ¦ Jegyzet eltávolítása
+Modifier le dégradé ¦ Muokkaa liukuväriä ¦ Színátmenet szerkesztése
+Changer la couleur (tout le livre suit) ¦ Vaihda väri (koko kirja seuraa) ¦ Szín módosítása (az egész könyv követi)
+＋ Ajouter la couleur ¦ ＋ Lisää väri ¦ ＋ Szín hozzáadása
+＋ Nouveau dégradé ¦ ＋ Uusi liukuväri ¦ ＋ Új színátmenet
+Dégradé « {name} » ¦ Liukuväri ”{name}” ¦ „{name}” színátmenet
+＋ Arrêt de couleur ¦ ＋ Värin pysähdyskohta ¦ ＋ Színpont
+pour l’objet choisi, sans l’ajouter au nuancier ¦ valitulle objektille, lisäämättä sitä värimalleihin ¦ a kijelölt objektumhoz, a színminták közé felvétel nélkül
+↻ Mettre à jour les objets dynamiques ¦ ↻ Päivitä dynaamiset objektit ¦ ↻ Dinamikus objektumok frissítése
+⛔ personne introuvable ¦ ⛔ henkilöä ei löydy ¦ ⛔ a személy nem található
+suit la base ¦ seuraa tietokantaa ¦ követi az adatbázist
+Textes liés à des fiches ({n}) ¦ Kortteihin linkitetyt tekstit ({n}) ¦ Adatlapokhoz kötött szövegek ({n})
+⛔ fiche introuvable ¦ ⛔ korttia ei löydy ¦ ⛔ az adatlap nem található
+suit la fiche ¦ seuraa korttia ¦ követi az adatlapot
+Liens — images placées ({n}) ¦ Linkit — sijoitetut kuvat ({n}) ¦ Kapcsolatok — elhelyezett képek ({n})
+Image intégrée ¦ Upotettu kuva ¦ Beágyazott kép
+intégrée au document ¦ upotettu asiakirjaan ¦ beágyazva a dokumentumba
+🔗 liée · mise à jour ¦ 🔗 linkitetty · päivitetty ¦ 🔗 csatolva · frissítve
+🔗 liée · à jour ¦ 🔗 linkitetty · ajan tasalla ¦ 🔗 csatolva · naprakész
+photo de la base ¦ tietokannan kuva ¦ fénykép az adatbázisból
+Retoucher la photo de l’app ¦ Muokkaa sovelluksen kuvaa ¦ Az alkalmazás fényképének retusálása
+Aucun cadre d’image : outil ⊠ ou Objet → Placer une image. ¦ Ei kuvakehystä: työkalu ⊠ tai Objekti → Sijoita kuva. ¦ Nincs képkeret: ⊠ eszköz vagy Objektum → Kép elhelyezése.
+Clique sur une étape pour revenir à ce moment-là. Les étapes d’après restent (en gris) tant que tu ne modifies rien d’autre. ¦ Napsauta vaihetta palataksesi siihen hetkeen. Myöhemmät vaiheet jäävät (harmaina), kunnes muutat jotain muuta. ¦ Kattints egy lépésre, hogy visszatérj abba a pillanatba. A későbbi lépések megmaradnak (szürkén), amíg mást nem módosítasz.
+Format du document ¦ Asiakirjan koko ¦ Dokumentumméret
+Titre du livre ({titre}) ¦ Kirjan nimi ({titre}) ¦ A könyv címe ({titre})
+Personnalisé ¦ Mukautettu ¦ Egyéni
+La marge de 3 à 5 mm autour de la page, coupée par l’imprimeur : les images qui vont jusqu’au bord doivent la remplir. ¦ 3–5 mm:n reunus sivun ympärillä, jonka paino leikkaa pois: reunaan asti ulottuvien kuvien on täytettävä se. ¦ Az oldal körüli 3–5 mm-es sáv, amelyet a nyomda levág: a szélig érő képeknek ki kell tölteniük.
+Une bande en dehors du fond perdu pour les notes à l’imprimeur (titre, date) ; elle ne s’imprime qu’avec les traits de coupe. ¦ Leikkuuvaran ulkopuolinen kaista painolle tarkoitettuja merkintöjä varten (nimi, päivämäärä); se tulostuu vain leikkuumerkkien kanssa. ¦ A kifutón kívüli sáv a nyomdának szóló megjegyzésekhez (cím, dátum); csak a vágójelekkel együtt nyomtatódik.
+Les nouveaux documents partent des <button type="button" class="link-button" data-ly-defaults>réglages par défaut</button>. ¦ Uudet asiakirjat alkavat <button type="button" class="link-button" data-ly-defaults>oletusasetuksista</button>. ¦ Az új dokumentumok az <button type="button" class="link-button" data-ly-defaults>alapértelmezett beállításokból</button> indulnak.
+réglages par défaut ¦ oletusasetukset ¦ alapértelmezett beállítások
+Les notes vont ¦ Viitteet menevät ¦ A jegyzetek helye
+En bas du bloc : chaque note s’écrit sous le texte qui l’appelle. En fin de chapitre : toutes les notes du chapitre se rangent dans le bloc « Notes du chapitre » (Objet → Insérer les notes du chapitre). ¦ Lohkon alareunassa: jokainen viite kirjoitetaan siihen viittaavan tekstin alle. Luvun lopussa: kaikki luvun viitteet sijoittuvat lohkoon ”Luvun viitteet” (Objekti → Lisää luvun viitteet). ¦ A blokk alján: minden jegyzet az őt hivatkozó szöveg alá kerül. A fejezet végén: a fejezet összes jegyzete „A fejezet jegyzetei” blokkba kerül (Objektum → A fejezet jegyzeteinek beszúrása).
+en bas du bloc de texte ¦ tekstikehyksen alareunaan ¦ a szövegkeret aljára
+en fin de chapitre ¦ luvun loppuun ¦ a fejezet végére
+qui se suivent dans tout le livre ¦ juoksevasti koko kirjassa ¦ folyamatosan az egész könyvben
+qui recommencent à 1 à chaque chapitre ¦ alkaen 1:stä jokaisessa luvussa ¦ fejezetenként 1-től újrakezdve
+qui recommencent à 1 à chaque page ¦ alkaen 1:stä jokaisella sivulla ¦ oldalanként 1-től újrakezdve
+{what} dans le document. Pour en ajouter une : double-clic dans un texte, place le curseur, puis Texte → « ¹ Note » ou « 📚 Citer une source ». ¦ {what} asiakirjassa. Lisätäksesi viitteen: kaksoisnapsauta tekstiä, vie kohdistin paikalleen ja valitse Teksti → ”¹ Viite” tai ”📚 Viittaa lähteeseen”. ¦ {what} a dokumentumban. Új hozzáadásához: kattints duplán egy szövegbe, tedd a kurzort a helyére, majd Szöveg → „¹ Jegyzet” vagy „📚 Forrás idézése”.
+Notes de bas de page : réglage ¦ Alaviitteet: asetus ¦ Lábjegyzetek: beállítás
+Gabarit « {name} » sur la page {n} ¦ Mallisivu ”{name}” sivulla {n} ¦ „{name}” mesteroldal a(z) {n}. oldalon
+Gabarit enlevé de la page {n} ¦ Mallisivu poistettu sivulta {n} ¦ Mesteroldal eltávolítva a(z) {n}. oldalról
+{what} changé ¦ {what} muutettu ¦ {what} módosítva
+Une adresse commence par https:// ou mailto: ¦ Osoite alkaa https:// tai mailto: ¦ A cím https:// vagy mailto: kezdetű
+Code couleur : # suivi de 6 chiffres ou lettres (ex. #7a2e2e). ¦ Värikoodi: # ja 6 numeroa tai kirjainta (esim. #7a2e2e). ¦ Színkód: # és utána 6 számjegy vagy betű (pl. #7a2e2e).
+Image incorporée ¦ Kuva upotettu ¦ Kép beágyazva
+Texte de la fiche mis à jour ¦ Kortin teksti päivitetty ¦ Az adatlap szövege frissítve
+Les dernières modifications ne sont pas enregistrées (enregistre d’abord si besoin). ¦ Viimeisimpiä muutoksia ei ole tallennettu (tallenna ensin tarvittaessa). ¦ A legutóbbi módosítások nincsenek mentve (ha kell, előbb ments).
+Fermer la mise en page pour ouvrir la fiche ? ¦ Suljetaanko taitto kortin avaamiseksi? ¦ Bezárod a tördelést az adatlap megnyitásához?
+Index : noms de la généalogie ¦ Hakemisto: sukututkimuksen nimet ¦ Mutató: a családfa nevei
+Index : noms marqués seulement ¦ Hakemisto: vain merkityt nimet ¦ Mutató: csak a jelölt nevek
+Index : mots de la base ¦ Hakemisto: tietokannan sanat ¦ Mutató: az adatbázis szavai
+Index : mots marqués seulement ¦ Hakemisto: vain merkityt sanat ¦ Mutató: csak a jelölt szavak
+🌳 Je redessine l’arbre… ¦ 🌳 Piirrän sukupuun uudelleen… ¦ 🌳 A családfa újrarajzolása…
+Arbre mis à jour ¦ Sukupuu päivitetty ¦ Családfa frissítve
+🌳 Arbre à jour d’après la base. ¦ 🌳 Sukupuu ajan tasalla tietokannan mukaan. ¦ 🌳 A családfa naprakész az adatbázis alapján.
+Arbre détaché de la base ¦ Sukupuu irrotettu tietokannasta ¦ Családfa leválasztva az adatbázisról
+Ta réponse à {name} : ¦ Vastauksesi käyttäjälle {name}: ¦ Válaszod neki: {name}:
+Réponse ajoutée ¦ Vastaus lisätty ¦ Válasz hozzáadva
+Commentaire résolu ¦ Kommentti ratkaistu ¦ Megjegyzés megoldva
+Nom du calque : ¦ Tason nimi: ¦ A réteg neve:
+Choisis du texte, puis le bouton. ¦ Valitse tekstiä ja sitten painike. ¦ Jelölj ki szöveget, majd a gombot.
+Choisis du texte dans un bloc. ¦ Valitse tekstiä lohkosta. ¦ Jelölj ki szöveget egy blokkban.
+Adresse du lien (https://…) : ¦ Linkin osoite (https://…): ¦ A hivatkozás címe (https://…):
+Double-clic dans un bloc de texte d’abord. ¦ Kaksoisnapsauta ensin tekstikehystä. ¦ Előbb kattints duplán egy szövegkeretbe.
+Choisis des mots dans un bloc de texte. ¦ Valitse sanoja tekstikehyksestä. ¦ Jelölj ki szavakat egy szövegkeretben.
+Ce navigateur ne sait pas lister les polices de l’ordinateur : tape le nom de la police. ¦ Tämä selain ei osaa luetella tietokoneen fontteja: kirjoita fontin nimi. ¦ Ez a böngésző nem tudja listázni a számítógép betűtípusait: írd be a betűtípus nevét.
+{what} de l’ordinateur ajoutées à la liste. ¦ {what} tietokoneelta lisätty luetteloon. ¦ {what} a számítógépről hozzáadva a listához.
+{what} de l’ordinateur ajoutée à la liste. ¦ {what} tietokoneelta lisätty luetteloon. ¦ {what} a számítógépről hozzáadva a listához.
+(niveau {n}) ¦ (taso {n}) ¦ ({n}. szint)
+Accès aux polices refusé. ¦ Pääsy fontteihin estetty. ¦ A betűtípusokhoz való hozzáférés megtagadva.
+Nom de la couleur : ¦ Värin nimi: ¦ A szín neve:
+Nuance supprimée ¦ Värimalli poistettu ¦ Színminta törölve
+Nuance supprimée ({n} objets passent en noir) ¦ Värimalli poistettu ({n} objektia muuttuu mustaksi) ¦ Színminta törölve ({n} objektum feketére vált)
+Nuance supprimée ({n} objet passe en noir) ¦ Värimalli poistettu ({n} objekti muuttuu mustaksi) ¦ Színminta törölve ({n} objektum feketére vált)
+Nom du gabarit : ¦ Mallisivun nimi: ¦ A mesteroldal neve:
+Supprimer « {name} » ¦ Poista ”{name}” ¦ „{name}” törlése
+Supprimer le gabarit ¦ Poista mallisivu ¦ Mesteroldal törlése
+{n} pages utilisent ce gabarit. ¦ {n} sivua käyttää tätä mallisivua. ¦ {n} oldal használja ezt a mesteroldalt.
+{n} page utilise ce gabarit. ¦ {n} sivu käyttää tätä mallisivua. ¦ {n} oldal használja ezt a mesteroldalt.
+Aucune page n’utilise ce gabarit. ¦ Mikään sivu ei käytä tätä mallisivua. ¦ Egy oldal sem használja ezt a mesteroldalt.
+Ces pages prennent à la place ¦ Nämä sivut saavat tilalle ¦ Ezek az oldalak helyette ezt kapják
+Gabarit « {name} » supprimé ¦ Mallisivu ”{name}” poistettu ¦ „{name}” mesteroldal törölve
+Cette page n’a pas de gabarit. ¦ Tällä sivulla ei ole mallisivua. ¦ Ennek az oldalnak nincs mesteroldala.
+Éléments du gabarit détachés : modifiables sur cette page. ¦ Mallisivun osat irrotettu: muokattavissa tällä sivulla. ¦ A mesteroldal elemei leválasztva: ezen az oldalon szerkeszthetők.
+Il faut au moins un calque. ¦ Vähintään yksi taso tarvitaan. ¦ Legalább egy réteg kell.
+Calque « {name} » supprimé ¦ Taso ”{name}” poistettu ¦ „{name}” réteg törölve
+Choisis un objet pour intervertir son fond et son contour. ¦ Valitse objekti vaihtaaksesi sen täytön ja ääriviivan keskenään. ¦ Jelölj ki egy objektumot a kitöltés és a körvonal felcseréléséhez.
+Nouveau style ¦ Uusi tyyli ¦ Új stílus
+Nouveau style de caractère ¦ Uusi merkkityyli ¦ Új karakterstílus
+STYLE DE CARACTÈRE ¦ MERKKITYYLI ¦ KARAKTERSTÍLUS
+Enregistrer le style ¦ Tallenna tyyli ¦ Stílus mentése
+Justifié (tout) ¦ Tasattu (kaikki) ¦ Sorkizárt (mind)
+Lettrine (lignes, 0 = aucune) ¦ Anfangi (riviä, 0 = ei mitään) ¦ Iniciálé (sorok, 0 = nincs)
+Tous les paragraphes (mots) qui ont ce style changent dans tout le livre. ¦ Kaikki kappaleet (sanat), joilla on tämä tyyli, muuttuvat koko kirjassa. ¦ Minden ilyen stílusú bekezdés (szó) megváltozik az egész könyvben.
+Tous les paragraphes qui ont ce style changent dans tout le livre. ¦ Kaikki kappaleet, joilla on tämä tyyli, muuttuvat koko kirjassa. ¦ Minden ilyen stílusú bekezdés megváltozik az egész könyvben.
+La fenêtre des images n’est pas encore prête. Réessaie dans un instant. ¦ Kuvaikkuna ei ole vielä valmis. Yritä hetken päästä uudelleen. ¦ A képablak még nem áll készen. Próbáld újra egy pillanat múlva.
+PLACER UNE IMAGE ¦ SIJOITA KUVA ¦ KÉP ELHELYEZÉSE
+Placer cette image ¦ Sijoita tämä kuva ¦ A kép elhelyezése
+Elle reste liée (objet dynamique) : retouchée dans l’app, elle se met à jour ici. ¦ Se pysyy linkitettynä (dynaaminen objekti): kun sitä muokataan sovelluksessa, se päivittyy tänne. ¦ Csatolva marad (dinamikus objektum): ha az alkalmazásban retusálod, itt is frissül.
+Naissance et décès (dates et lieux) ¦ Syntymä ja kuolema (päivämäärät ja paikat) ¦ Születés és halál (dátumok és helyek)
+acceptée ¦ hyväksytty ¦ elfogadva
+refusée ¦ hylätty ¦ elutasítva
+✎ Remplacer « {a} » par « {b} » ¦ ✎ Korvaa ”{a}” tekstillä ”{b}” ¦ ✎ „{a}” cseréje erre: „{b}”
+(page {w} × {h} + fond perdu {b} mm et traits de coupe) ¦ (sivu {w} × {h} + leikkuuvara {b} mm ja leikkuumerkit) ¦ (oldal {w} × {h} + {b} mm kifutó és vágójelek)
+🖨 Imprimer / enregistrer en PDF ¦ 🖨 Tulosta / tallenna PDF:nä ¦ 🖨 Nyomtatás / mentés PDF-ként
+Fichier trop gros pour un réglage. ¦ Tiedosto on liian suuri asetukseksi. ¦ A fájl túl nagy egy beállításhoz.
+Ce réglage vient d’un autre outil (« {tool} ») : il ne va pas dans {label}. ¦ Tämä asetus on peräisin toisesta työkalusta (”{tool}”): se ei sovi kohteeseen {label}. ¦ Ez a beállítás egy másik eszközből jön („{tool}”): nem illik ide: {label}.
+Tu as déjà un réglage « {name} ». Nom pour celui-ci : ¦ Sinulla on jo asetus ”{name}”. Nimi tälle: ¦ Már van „{name}” nevű beállításod. Ennek a neve:
+{name} (importé) ¦ {name} (tuotu) ¦ {name} (importált)
+Réglages par défaut des nouveaux documents ¦ Uusien asiakirjojen oletusasetukset ¦ Az új dokumentumok alapértelmezett beállításai
+Petit fond / intérieur ¦ Sisämarginaali ¦ Belső margó
+Grand fond / extérieur ¦ Ulkomarginaali ¦ Külső margó
+Police des titres ¦ Otsikoiden fontti ¦ A címek betűtípusa
+Police du texte ¦ Leipätekstin fontti ¦ A szöveg betűtípusa
+Corps du texte ¦ Leipätekstin koko ¦ Szövegméret
+Numéro de la 1re page ¦ 1. sivun numero ¦ Az 1. oldal száma
+Folio et titre courant sur le gabarit ¦ Sivunumero ja juokseva otsikko mallisivulla ¦ Oldalszám és élőfej a mesteroldalon
+Réglages par défaut des livres ¦ Kirjojen oletusasetukset ¦ A könyvek alapértelmezett beállításai
+Un atelier façon InDesign : pages, gabarits, calques, textes, formes, images, nuancier… Pars d’une page blanche, des données de la famille ou d’un design. ¦ InDesign-tyylinen työpaja: sivut, mallisivut, tasot, tekstit, muodot, kuvat, värimallit… Aloita tyhjästä sivusta, perheen tiedoista tai mallista. ¦ InDesign-szerű műhely: oldalak, mesteroldalak, rétegek, szövegek, alakzatok, képek, színminták… Kezdd üres oldallal, a család adataival vagy egy dizájnnal.
+＋ Nouveau livre d’après la famille ¦ ＋ Uusi kirja perheen pohjalta ¦ ＋ Új könyv a család alapján
+📚 Livre prêt à l’emploi ¦ 📚 Valmis kirja ¦ 📚 Kész könyv
+＋ Nouveau depuis un design ¦ ＋ Uusi mallista ¦ ＋ Új dizájnból
+⚙️ Réglages par défaut ¦ ⚙️ Oletusasetukset ¦ ⚙️ Alapértelmezett beállítások
+📚 Livres de famille prêts à l’emploi ¦ 📚 Valmiit sukukirjat ¦ 📚 Kész családi könyvek
+Aucun livre pour l’instant ¦ Ei vielä kirjoja ¦ Még nincs könyv
+Commence par un livre fait d’après la famille : il se remplit avec les fiches. ¦ Aloita perheen pohjalta tehdyllä kirjalla: se täyttyy korteilla. ¦ Kezdd egy, a család alapján készült könyvvel: az adatlapokból töltődik fel.
+Un design est un modèle : ouvre un livre, puis Fichier → « Enregistrer comme design ». Les designs de l’app (ci-dessous) peuvent aussi être modifiés et enregistrés à ton nom. ¦ Malli on pohja: avaa kirja ja valitse Tiedosto → ”Tallenna mallina”. Sovelluksen malleja (alla) voi myös muokata ja tallentaa omalla nimelläsi. ¦ A dizájn egy sablon: nyiss meg egy könyvet, majd Fájl → „Mentés dizájnként”. Az alkalmazás dizájnjai (lent) is szerkeszthetők és a saját neveden menthetők.
+✨ Designs de l’app ¦ ✨ Sovelluksen mallit ¦ ✨ Az alkalmazás dizájnjai
+Modifier (à mon nom) ¦ Muokkaa (omalla nimelläni) ¦ Szerkesztés (a saját nevemen)
+Exporte-le d’abord si tu veux le garder. ¦ Vie se ensin, jos haluat säilyttää sen. ¦ Előbb exportáld, ha meg akarod tartani.
+Supprimer ce document ? ¦ Poistetaanko tämä asiakirja? ¦ Törlöd ezt a dokumentumot?
+Supprimer le document ¦ Poista asiakirja ¦ Dokumentum törlése
+Document supprimé. ¦ Asiakirja poistettu. ¦ Dokumentum törölve.
+Ce fichier n’est pas un document de mise en page LCNDA. ¦ Tämä tiedosto ei ole LCNDA-taittoasiakirja. ¦ Ez a fájl nem LCNDA tördelési dokumentum.
+Livre à relire importé (de {name}) : ouvre-le, commente (menu Relecture), puis « 📨 Envoyer à un cousin » pour renvoyer tes commentaires. ¦ Tarkastettava kirja tuotu (lähettäjä {name}): avaa se, kommentoi (valikko Tarkastus) ja valitse sitten ”📨 Lähetä serkulle” palauttaaksesi kommenttisi. ¦ Lektorálandó könyv importálva (tőle: {name}): nyisd meg, fűzz hozzá megjegyzéseket (Lektorálás menü), majd a „📨 Küldés egy unokatestvérnek” gombbal küldd vissza őket.
+Livre à relire importé : ouvre-le, commente (menu Relecture), puis « 📨 Envoyer à un cousin » pour renvoyer tes commentaires. ¦ Tarkastettava kirja tuotu: avaa se, kommentoi (valikko Tarkastus) ja valitse sitten ”📨 Lähetä serkulle” palauttaaksesi kommenttisi. ¦ Lektorálandó könyv importálva: nyisd meg, fűzz hozzá megjegyzéseket (Lektorálás menü), majd a „📨 Küldés egy unokatestvérnek” gombbal küldd vissza őket.
+C’est un fichier de réglage : il s’importe dans le document ouvert, Fichier → « Mes styles » → « Importer un réglage ». ¦ Tämä on asetustiedosto: se tuodaan avoimeen asiakirjaan, Tiedosto → ”Omat tyylit” → ”Tuo asetus”. ¦ Ez beállításfájl: a megnyitott dokumentumba importálható, Fájl → „Saját stílusok” → „Beállítás importálása”.
+Document importé. ¦ Asiakirja tuotu. ¦ Dokumentum importálva.
+La famille en chiffres ¦ Perhe lukuina ¦ A család számokban
+Une page par personne ¦ Yksi sivu henkilöä kohden ¦ Személyenként egy oldal
+Les lieux ¦ Paikat ¦ A helyek
+Mot de la fin ¦ Loppusanat ¦ Zárszó
+👪 Un livre d’après la famille ¦ 👪 Kirja perheen pohjalta ¦ 👪 Könyv a család alapján
+🎨 Depuis un design ¦ 🎨 Mallista ¦ 🎨 Dizájnból
+Créer le document ¦ Luo asiakirja ¦ Dokumentum létrehozása
+Pages, marges et colonnes ¦ Sivut, marginaalit ja palstat ¦ Oldalak, margók és hasábok
+Marges en millimètres. Le fond perdu (trait rouge) dépasse de la page pour les images à bord perdu ; la ligne-bloc (trait bleu) garde la place des notes pour l’imprimeur. Les deux s’impriment avec « PDF avec fond perdu et traits de coupe ». ¦ Marginaalit millimetreinä. Leikkuuvara (punainen viiva) ulottuu sivun yli reunaan asti ulottuvia kuvia varten; infoalue (sininen viiva) varaa tilaa painolle tarkoitetuille merkinnöille. Molemmat tulostuvat valinnalla ”PDF leikkuuvaroineen ja leikkuumerkkeineen”. ¦ Margók milliméterben. A kifutó (piros vonal) túlnyúlik az oldalon a szélig érő képek miatt; az információs sáv (kék vonal) helyet hagy a nyomdának szóló megjegyzéseknek. Mindkettő kinyomtatódik a „PDF kifutóval és vágójelekkel” beállítással.
+Ordre des fiches ¦ Korttien järjestys ¦ Az adatlapok sorrendje
+celui de l’arbre ¦ sukupuun järjestys ¦ a fa sorrendje
+Photos par personne ¦ Kuvia henkilöä kohden ¦ Fényképek személyenként
+Le design est copié : couverture, pages d’exemple, gabarits, styles et couleurs — tout se modifie. ¦ Malli kopioidaan: kansi, esimerkkisivut, mallisivut, tyylit ja värit — kaikkea voi muokata. ¦ A dizájn átmásolódik: borító, mintaoldalak, mesteroldalak, stílusok és színek — minden módosítható.
+Le livre est fait page par page (les textes trop longs continuent sur la page suivante) ; tout se modifie ensuite. Les personnes cachées à l’export restent cachées. ¦ Kirja tehdään sivu sivulta (liian pitkät tekstit jatkuvat seuraavalla sivulla); kaikkea voi muokata jälkeenpäin. Viennistä piilotetut henkilöt pysyvät piilossa. ¦ A könyv oldalanként készül (a túl hosszú szövegek a következő oldalon folytatódnak); utána minden módosítható. Az exportból elrejtett személyek rejtve maradnak.
+Choisis la personne de départ. ¦ Valitse lähtöhenkilö. ¦ Válaszd ki a kiinduló személyt.
+Les livres faits dans l’atelier de mise en page (façon InDesign) et tes designs : ouvre-les, crée-en un, règle les réglages par défaut. ¦ Taittotyöpajassa (InDesign-tyyliin) tehdyt kirjat ja mallisi: avaa niitä, luo uusi, säädä oletusasetuksia. ¦ A tördelőműhelyben (InDesign-szerűen) készült könyvek és a dizájnjaid: nyisd meg őket, hozz létre újat, állítsd be az alapértelmezéseket.
+↗ Ouvrir l’atelier ¦ ↗ Avaa työpaja ¦ ↗ Műhely megnyitása
+Aucun livre pour « {q} ». ¦ Ei kirjaa haulle ”{q}”. ¦ Nincs könyv erre: „{q}”.
+Aucun livre pour l’instant : « ＋ Nouveau livre d’après la famille ». ¦ Ei vielä kirjoja: ”＋ Uusi kirja perheen pohjalta”. ¦ Még nincs könyv: „＋ Új könyv a család alapján”.
+Aucun design pour « {q} ». ¦ Ei mallia haulle ”{q}”. ¦ Nincs dizájn erre: „{q}”.
+Aucun design à toi : dans un livre, Fichier → « Enregistrer comme design », ou « ↗ Ouvrir l’atelier » → Designs de l’app → « Modifier (à mon nom) ». ¦ Ei omia malleja: kirjassa Tiedosto → ”Tallenna mallina” tai ”↗ Avaa työpaja” → Sovelluksen mallit → ”Muokkaa (omalla nimelläni)”. ¦ Nincs saját dizájnod: egy könyvben Fájl → „Mentés dizájnként”, vagy „↗ Műhely megnyitása” → Az alkalmazás dizájnjai → „Szerkesztés (a saját nevemen)”.
+Chercher un livre ou un design… (nom) ¦ Hae kirjaa tai mallia… (nimi) ¦ Könyv vagy dizájn keresése… (név)
+↻ Objets dynamiques : {a}, {b}. ¦ ↻ Dynaamiset objektit: {a}, {b}. ¦ ↻ Dinamikus objektumok: {a}, {b}.
+↻ Objets dynamiques : {a}. ¦ ↻ Dynaamiset objektit: {a}. ¦ ↻ Dinamikus objektumok: {a}.
+Page {n} (celle-ci) ¦ Sivu {n} (tämä) ¦ {n}. oldal (ez)
+La page modèle contient des champs entre accolades, remplacés pour chaque personne : {list}. Un cadre d’image nommé <code>{portrait}</code> (onglet Objet → Nom) reçoit son portrait. ¦ Mallisivulla on aaltosulkeissa kenttiä, jotka korvataan jokaiselle henkilölle: {list}. Kuvakehys, jonka nimi on <code>{portrait}</code> (välilehti Objekti → Nimi), saa hänen muotokuvansa. ¦ A sablonoldalon kapcsos zárójeles mezők vannak, ezeket személyenként kicseréljük: {list}. A <code>{portrait}</code> nevű képkeret (Objektum lap → Név) a portréját kapja.
+· cadre {portrait} ¦ · kehys {portrait} ¦ · {portrait} keret
+→ {what}. ¦ → {what}. ¦ → {what}.
+Publipostage : {what} ¦ Joukkokirje: {what} ¦ Körlevél: {what}
+📊 Diagramme <b>lié</b>{state} : modifié dans Graphiques → Mes diagrammes, il se redessine ici (« Mettre à jour »). ¦ 📊 Kaavio <b>linkitetty</b>{state}: kun sitä muokataan kohdassa Kaaviot → Omat kaaviot, se piirtyy tänne uudelleen (”Päivitä”). ¦ 📊 <b>Csatolt</b> diagram{state}: ha a Grafikonok → Saját diagramok részben módosítod, itt újrarajzolódik („Frissítés”).
+Image <b>liée</b> à une photo de l’app{state} : elle reste en pleine qualité (rien n’est réduit), et toute retouche faite dans l’app arrive ici. ¦ Kuva <b>linkitetty</b> sovelluksen kuvaan{state}: se pysyy täysilaatuisena (mitään ei pienennetä), ja kaikki sovelluksessa tehdyt muokkaukset tulevat tänne. ¦ Az alkalmazás egyik fényképéhez <b>csatolt</b> kép{state}: teljes minőségű marad (semmit nem kicsinyítünk), és az alkalmazásban végzett minden retusálás ide is megérkezik.
+Historique ({what}) ¦ Historia ({what}) ¦ Előzmények ({what})
+📖 Livres ({n}) ¦ 📖 Kirjat ({n}) ¦ 📖 Könyvek ({n})
+🎨 Mes designs ({n}) ¦ 🎨 Omat mallit ({n}) ¦ 🎨 Saját dizájnok ({n})
+{y} n’est pas une année bissextile (février n’a que 28 jours) ¦ {y} ei ole karkausvuosi (helmikuussa on vain 28 päivää) ¦ {y} nem szökőév (a februárnak csak 28 napja van)
+il n’y a pas de jour 0 ¦ päivää 0 ei ole ¦ nincs 0. nap
+{month} n’a que {n} jours ¦ {month}: vain {n} päivää ¦ {month}: csak {n} napos
+il n’y a que 12 mois ¦ kuukausia on vain 12 ¦ csak 12 hónap van
+{month} {y} n’a que {n} jours ¦ {month} {y}: vain {n} päivää ¦ {y}. {month}: csak {n} napos
+📅 Date impossible : « {said} » — {why}. ¦ 📅 Mahdoton päivämäärä: ”{said}” — {why}. ¦ 📅 Lehetetlen dátum: „{said}” — {why}.
+✍️ « {said} » : aucune fiche à ce nom. Tu voulais écrire « {fix} » ? ¦ ✍️ ”{said}”: tällä nimellä ei ole korttia. Tarkoititko ”{fix}”? ¦ ✍️ „{said}”: nincs ilyen nevű adatlap. Úgy értetted: „{fix}”?
+🎂 Âge impossible : « {said} » (personne n’a vécu plus de 122 ans). ¦ 🎂 Mahdoton ikä: ”{said}” (kukaan ei ole elänyt yli 122-vuotiaaksi). ¦ 🎂 Lehetetlen életkor: „{said}” (senki sem élt 122 évnél tovább).
+🎂 Âge impossible pour un mariage : « {said} ». ¦ 🎂 Mahdoton ikä avioliitolle: ”{said}”. ¦ 🎂 Lehetetlen életkor egy házasságkötéshez: „{said}”.
+{a} ou {b} ans ¦ {a} tai {b} vuotta ¦ {a} vagy {b} éves
+🎂 {name} : le texte dit « {said} », d’après la fiche (° {b}, {ev} {e}) elle avait {age}{multi}. ¦ 🎂 {name}: tekstissä lukee ”{said}”, kortin mukaan (° {b}, {ev} {e}) hän oli {age}{multi}. ¦ 🎂 {name}: a szöveg szerint „{said}”, az adatlap szerint (° {b}, {ev} {e}) {age} volt{multi}.
+🎂 {name} : le texte dit « {said} », d’après la fiche (° {b}, {ev} {e}) il avait {age}{multi}. ¦ 🎂 {name}: tekstissä lukee ”{said}”, kortin mukaan (° {b}, {ev} {e}) hän oli {age}{multi}. ¦ 🎂 {name}: a szöveg szerint „{said}”, az adatlap szerint (° {b}, {ev} {e}) {age} volt{multi}.
+({n} fiches portent ce nom) ¦ ({n} korttia tällä nimellä) ¦ ({n} adatlap viseli ezt a nevet)
+🔎 {name} : le texte place {event} à « {place} », la fiche dit {fiche}{multi}. ¦ 🔎 {name}: teksti sijoittaa tapahtuman {event} paikkaan ”{place}”, kortissa lukee {fiche}{multi}. ¦ 🔎 {name}: a szöveg szerint {event} helye „{place}”, az adatlap szerint {fiche}{multi}.
+🔎 {name} : le texte dit « {said} », la fiche dit {what} {fiche}{multi}. ¦ 🔎 {name}: tekstissä lukee ”{said}”, kortissa {what} {fiche}{multi}. ¦ 🔎 {name}: a szöveg szerint „{said}”, az adatlap szerint {what} {fiche}{multi}.
+🔎 {name} : le texte parle d’{event} (« {said} ») que la fiche n’a pas encore{multi} — à ajouter ? ¦ 🔎 {name}: teksti mainitsee tapahtuman {event} (”{said}”), jota kortissa ei vielä ole{multi} — lisätäänkö? ¦ 🔎 {name}: a szöveg említ egy eseményt: {event} („{said}”), ami még nincs az adatlapon{multi} — hozzáadod?
+📍 « {place} » n’est pas un lieu de ta base : tu voulais dire « {near} » ? ¦ 📍 ”{place}” ei ole tietokantasi paikka: tarkoititko ”{near}”? ¦ 📍 „{place}” nem szerepel az adatbázisod helyei között: úgy értetted, „{near}”?
+📍 « {place} » n’est pas encore dans les lieux de ta base. ¦ 📍 ”{place}” ei ole vielä tietokantasi paikoissa. ¦ 📍 „{place}” még nincs az adatbázisod helyei között.
+🔢 {name} : le texte dit « {said} », la fiche a le Sosa {nums}{who}{multi}. ¦ 🔢 {name}: tekstissä lukee ”{said}”, kortin Sosa-numero on {nums}{who}{multi}. ¦ 🔢 {name}: a szöveg szerint „{said}”, az adatlap Sosa-száma {nums}{who}{multi}.
+(ancêtres de {name}) ¦ (henkilön {name} esivanhemmat) ¦ ({name} felmenői)
+🔢 {name} : le texte dit « {said} », mais la fiche n’a pas de numéro Sosa{who}{multi}. ¦ 🔢 {name}: tekstissä lukee ”{said}”, mutta kortilla ei ole Sosa-numeroa{who}{multi}. ¦ 🔢 {name}: a szöveg szerint „{said}”, de az adatlapnak nincs Sosa-száma{who}{multi}.
+(ce n’est pas un ancêtre direct de {name}) ¦ (ei ole henkilön {name} suora esivanhempi) ¦ (nem egyenes ági őse ennek: {name})
+Pages remises dans l’ordre du pliage ¦ Sivut taittojärjestyksessä ¦ Oldalak a hajtogatás sorrendjében
+L’imprimante retourne la feuille ¦ Tulostin kääntää arkin ¦ A nyomtató megfordítja a lapot
+Retourner sur le côté ¦ Käännä sivusuunnassa ¦ Fordítás oldalirányban
+(petit côté, le plus courant) ¦ (lyhyt reuna, yleisin) ¦ (rövid él, a leggyakoribb)
+Retourner par le haut ¦ Käännä yläreunasta ¦ Fordítás felfelé
+{n} feuilles pliées ({p} pages) : imprime en recto verso, puis plie et agrafe au milieu. ¦ {n} taitettua arkkia ({p} sivua): tulosta kaksipuolisena, taita ja nido keskeltä. ¦ {n} hajtogatott lap ({p} oldal): nyomtass kétoldalasan, majd hajtsd félbe és tűzd össze középen.
+{n} feuille pliée ({p} pages) : imprime en recto verso, puis plie et agrafe au milieu. ¦ {n} taitettu arkki ({p} sivua): tulosta kaksipuolisena, taita ja nido keskeltä. ¦ {n} hajtogatott lap ({p} oldal): nyomtass kétoldalasan, majd hajtsd félbe és tűzd össze középen.
+{name} — livret ¦ {name} — vihkonen ¦ {name} — füzet
+la mise en page n’est pas chargée ¦ taittoa ei ole ladattu ¦ a tördelés nincs betöltve
+la page {n} n’a pas pu être dessinée ¦ sivua {n} ei voitu piirtää ¦ a(z) {n}. oldalt nem sikerült megrajzolni
+=objet copié ¦ objekti kopioitu|objektia kopioitu ¦ objektum másolva|objektum másolva
+=page ajoutée ¦ sivu lisätty|sivua lisätty ¦ oldal hozzáadva|oldal hozzáadva
+=objet ¦ objekti|objektia ¦ objektum|objektum
+=introuvable ¦ ei löydy|ei löydy ¦ nem található|nem található
+=commentaire de relecture ¦ tarkastuskommentti|tarkastuskommenttia ¦ lektori megjegyzés|lektori megjegyzés
+=avertissement ¦ varoitus|varoitusta ¦ figyelmeztetés|figyelmeztetés
+=remarque ¦ huomautus|huomautusta ¦ megjegyzés|megjegyzés
+=police ¦ fontti|fonttia ¦ betűtípus|betűtípus
+ly|Relecture ¦ Tarkastus ¦ Lektorálás
+ly|Objet ¦ Objekti ¦ Objektum
+ly|Calques ¦ Tasot ¦ Rétegek
+ly|Texte ¦ Teksti ¦ Szöveg
+ly|Liens ¦ Linkit ¦ Kapcsolatok
+ly|Historique ¦ Historia ¦ Előzmények
+ly|Affichage ¦ Näytä ¦ Nézet
+ly|Édition ¦ Muokkaa ¦ Szerkesztés
+Menu {name} ¦ Valikko {name} ¦ {name} menü
+Plume : clic = point, double-clic ou Entrée = fini ¦ Kynä: napsautus = piste, kaksoisnapsautus tai Enter = valmis ¦ Toll: kattintás = pont, dupla kattintás vagy Enter = kész
+Zoom — Alt pour reculer ¦ Zoomaus — Alt loitontaa ¦ Nagyítás — Alt a kicsinyítéshez
+Rectangle ¦ Suorakulmio ¦ Téglalap
+Ellipse ¦ Ellipsi ¦ Ellipszis
+Polygone ¦ Monikulmio ¦ Sokszög
+Main ¦ Käsi ¦ Kéz
+bloc de texte ¦ tekstikehys ¦ szövegkeret
+rectangle ¦ suorakulmio ¦ téglalap
+ellipse ¦ ellipsi ¦ ellipszis
+polygone ¦ monikulmio ¦ sokszög
+mois|janvier ¦ tammikuu ¦ január
+mois|février ¦ helmikuu ¦ február
+mois|mars ¦ maaliskuu ¦ március
+mois|avril ¦ huhtikuu ¦ április
+mois|mai ¦ toukokuu ¦ május
+mois|juin ¦ kesäkuu ¦ június
+mois|juillet ¦ heinäkuu ¦ július
+mois|août ¦ elokuu ¦ augusztus
+mois|septembre ¦ syyskuu ¦ szeptember
+mois|octobre ¦ lokakuu ¦ október
+mois|novembre ¦ marraskuu ¦ november
+mois|décembre ¦ joulukuu ¦ december
+la naissance ¦ syntymä ¦ a születés
+le baptême ¦ kaste ¦ a keresztelő
+le décès ¦ kuolema ¦ a halál
+la inhumation ¦ hautaus ¦ a temetés
+le mariage ¦ avioliitto ¦ a házasságkötés
+une naissance ¦ syntymä ¦ egy születés
+un baptême ¦ kaste ¦ egy keresztelő
+un décès ¦ kuolema ¦ egy halál
+une inhumation ¦ hautaus ¦ egy temetés
+un mariage ¦ avioliitto ¦ egy házasságkötés
+Produit ¦ Kertova ¦ Szorzás
+Incrustation ¦ Sulautus ¦ Átfedés
+Obscurcir ¦ Tummenna ¦ Sötétítés
+Exclusion ¦ Poisto ¦ Kizárás
+Teinte ¦ Sävy ¦ Színárnyalat
+Saturation ¦ Kylläisyys ¦ Telítettség
+Plein ¦ Yhtenäinen ¦ Folytonos
+Tirets ¦ Katkoviiva ¦ Szaggatott
+Tiret-point ¦ Piste-viiva ¦ Pont-vonal
+Tirets longs ¦ Pitkä katkoviiva ¦ Hosszú szaggatott
+Sobre (simple trait) ¦ Pelkistetty (yksi viiva) ¦ Egyszerű (egy vonal)
+Cartouche (double filet) ¦ Kartussi (kaksoisviiva) ¦ Kartus (dupla vonal)
+Calques ¦ Tasot ¦ Rétegek
+Objet ¦ Objekti ¦ Objektum
+Liens ¦ Linkit ¦ Kapcsolatok
+Historique ¦ Historia ¦ Előzmények
+Premier plan ¦ Päällimmäiseksi ¦ Előtérbe
+Avancer ¦ Tuo eteenpäin ¦ Előrébb
+Reculer ¦ Vie taaksepäin ¦ Hátrébb
+🙈 Masquer ¦ 🙈 Piilota ¦ 🙈 Elrejtés
+Masquer ¦ Piilota ¦ Elrejtés
+Outils (colonne de gauche) ¦ Työkalut (vasen sarake) ¦ Eszközök (bal oszlop)
+Messages ¦ Viestit ¦ Üzenetek
+＋ Pied de page ¦ ＋ Alatunniste ¦ ＋ Lábléc
+Pied de page ¦ Alatunniste ¦ Lábléc
+Faire tourner ¦ Kierrä ¦ Forgatás
+Rotation ¦ Kierto ¦ Elforgatás
+PAGES ¦ SIVUT ¦ OLDALAK
+DOCUMENT ¦ ASIAKIRJA ¦ DOKUMENTUM
+GABARITS ¦ MALLISIVUT ¦ MESTEROLDALAK
+OBJET DYNAMIQUE ¦ DYNAAMINEN OBJEKTI ¦ DINAMIKUS OBJEKTUM
+QR CODE ¦ QR-KOODI ¦ QR-KÓD
+PUBLIPOSTAGE ¦ JOUKKOKIRJE ¦ KÖRLEVÉL
+STYLE DE PARAGRAPHE ¦ KAPPALETYYLI ¦ BEKEZDÉSSTÍLUS
+LIVRE DE FAMILLE ¦ SUKUKIRJA ¦ CSALÁDI KÖNYV
+Format de page ¦ Sivun koko ¦ Oldalméret
+Marges ¦ Marginaalit ¦ Margók
+Fond perdu ¦ Leikkuuvara ¦ Kifutó
+Maintenant ¦ Nyt ¦ Most
+Gabarit de plusieurs pages ¦ Mallisivu useille sivuille ¦ Mesteroldal több oldalra
+📄 Gabarit de plusieurs pages… ¦ 📄 Mallisivu useille sivuille… ¦ 📄 Mesteroldal több oldalra…
+Appliquer ¦ Käytä ¦ Alkalmazás
+Chapitre courant ¦ Nykyinen luku ¦ Aktuális fejezet
+Diagrammes indisponibles. ¦ Kaaviot eivät ole käytettävissä. ¦ A diagramok nem érhetők el.
+Diagramme ¦ Kaavio ¦ Diagram
+📊 Diagramme ¦ 📊 Kaavio ¦ 📊 Diagram
+Marge (modules) ¦ Marginaali (moduuleina) ¦ Margó (modulban)
+QR code ¦ QR-koodi ¦ QR-kód
+▦ QR code ¦ ▦ QR-koodi ¦ ▦ QR-kód
+Ordre ¦ Järjestys ¦ Sorrend
+Valider ¦ Vahvista ¦ Jóváhagyás
+Forme ¦ Muoto ¦ Alakzat
+💬 Commentaire ¦ 💬 Kommentti ¦ 💬 Megjegyzés
+✕ Refuser ¦ ✕ Hylkää ¦ ✕ Elutasítás
+Ouverts ¦ Avoimet ¦ Nyitottak
+Page vide. ¦ Tyhjä sivu. ¦ Üres oldal.
+Bloc de texte vide. ¦ Tyhjä tekstikehys. ¦ Üres szövegkeret.
+Pages simples ¦ Yksittäiset sivut ¦ Egyes oldalak
+Traits de coupe ¦ Leikkuumerkit ¦ Vágójelek
+Gabarits ¦ Mallisivut ¦ Mesteroldalak
+Page sans gabarit ¦ Sivu ilman mallisivua ¦ Oldal mesteroldal nélkül
+↑ Avancer ¦ ↑ Eteenpäin ¦ ↑ Előrébb
+↓ Reculer ¦ ↓ Taaksepäin ¦ ↓ Hátrébb
+Cacher ¦ Piilota ¦ Elrejtés
+Montrer ¦ Näytä ¦ Megjelenítés
+Angle ¦ Kulma ¦ Szög
+⇋ Miroir H ¦ ⇋ Peilaa vaakasuunnassa ¦ ⇋ Vízszintes tükrözés
+⇵ Miroir V ¦ ⇵ Peilaa pystysuunnassa ¦ ⇵ Függőleges tükrözés
+Bouts ¦ Päät ¦ Végek
+Droits ¦ Suorat ¦ Szögletes
+Arrondis ¦ Pyöristetyt ¦ Lekerekített
+Angles ¦ Kulmat ¦ Sarkok
+Pointus ¦ Terävät ¦ Hegyes
+Angles arrondis ¦ Pyöristetyt kulmat ¦ Lekerekített sarkok
+Effets ¦ Efektit ¦ Effektusok
+Fusion ¦ Sekoitus ¦ Keverés
+Flou ¦ Sumennus ¦ Elmosás
+Creux ¦ Upotettu ¦ Belső
+Courbe douce ¦ Pehmeä käyrä ¦ Lágy görbe
+Distance ¦ Etäisyys ¦ Távolság
+🌳 Arbre (objet dynamique) ¦ 🌳 Sukupuu (dynaaminen objekti) ¦ 🌳 Családfa (dinamikus objektum)
+🔗 Objet dynamique ¦ 🔗 Dynaaminen objekti ¦ 🔗 Dinamikus objektum
+Vider ¦ Tyhjennä ¦ Ürítés
+Ajustement ¦ Sovitus ¦ Igazítás
+Bloc de texte ¦ Tekstikehys ¦ Szövegkeret
+Vertical ¦ Pystysuunta ¦ Függőleges
+Pathfinder ¦ Pathfinder ¦ Pathfinder
+⊖ Soustraire ¦ ⊖ Vähennä ¦ ⊖ Kivonás
+⊗ Intersection ¦ ⊗ Leikkaus ¦ ⊗ Metszet
+⊘ Exclure ¦ ⊘ Poissulje ¦ ⊘ Kizárás
+Disposition ¦ Järjestely ¦ Elrendezés
+Graisse ¦ Lihavuus ¦ Vastagság
+Romain ¦ Antiikva ¦ Antikva
+Corps ¦ Koko ¦ Betűméret
+Interlignage ¦ Riviväli ¦ Sorköz
+Approche ¦ Merkkiväli ¦ Betűköz
+Ligne de base ¦ Peruslinja ¦ Alapvonal
+Capitales ¦ Isot kirjaimet ¦ Nagybetűk
+Normales ¦ Tavalliset ¦ Normál
+Couleur libre ¦ Vapaa väri ¦ Szabad szín
+Retrait droit ¦ Oikea sisennys ¦ Jobb behúzás
+Nuancier ¦ Värimallit ¦ Színminták
+Cadre vide ¦ Tyhjä kehys ¦ Üres keret
+Petit fond ¦ Sisämarginaali ¦ Belső margó
+Grand fond ¦ Ulkomarginaali ¦ Külső margó
+Ligne-bloc ¦ Infoalue ¦ Információs sáv
+Notes de bas de page ¦ Alaviitteet ¦ Lábjegyzetek
+Commentaire rouvert ¦ Kommentti avattu uudelleen ¦ Megjegyzés újranyitva
+Ascendance ¦ Esipolvet ¦ Felmenők
+Descendance ¦ Jälkipolvet ¦ Leszármazottak
+Copie faite. ¦ Kopio tehty. ¦ Másolat elkészült.
+Marge gauche ¦ Vasen marginaali ¦ Bal margó
+Marge droite ¦ Oikea marginaali ¦ Jobb margó
+📐 Livres de famille ¦ 📐 Sukukirjat ¦ 📐 Családi könyvek
+📖 Livres ¦ 📖 Kirjat ¦ 📖 Könyvek
+🎨 Designs ¦ 🎨 Mallit ¦ 🎨 Dizájnok
+Traits de pli ¦ Taittoviivat ¦ Hajtásvonalak
+Album photo ¦ Valokuva-albumi ¦ Fotóalbum
+Sobre ¦ Pelkistetty ¦ Egyszerű
+🖼️ Galerie de photos ¦ 🖼️ Kuvagalleria ¦ 🖼️ Fotógaléria
+📗 Livret de famille / chronique ¦ 📗 Perhekirja / kronikka ¦ 📗 Családi füzet / krónika
+🎉 Carnet de cousinade ¦ 🎉 Sukukokouksen vihko ¦ 🎉 Családi találkozó füzete
+Gabarit : {name} ¦ Mallisivu: {name} ¦ Mesteroldal: {name}
+Publipostage : {what}. ¦ Joukkokirje: {what}. ¦ Körlevél: {what}.
+Note : {x} ¦ Viite: {x} ¦ Jegyzet: {x}
+Page {n} : ¦ Sivu {n}: ¦ {n}. oldal:
+Pages ({n}) ¦ Sivut ({n}) ¦ Oldalak ({n})
+Arbres ({n}) ¦ Sukupuut ({n}) ¦ Családfák ({n})
+📚 Mes livres ({n}) ¦ 📚 Omat kirjat ({n}) ¦ 📚 Saját könyveim ({n})
+💬 Commentaires de relecture ({n}) ¦ 💬 Tarkastuskommentit ({n}) ¦ 💬 Lektori megjegyzések ({n})
+(Le sommaire se remplit avec les paragraphes en style « Chapitre », ou ceux choisis dans Objet.) ¦ (Sisällysluettelo täyttyy ”Luku”-tyylisillä kappaleilla tai valikossa Objekti valituilla.) ¦ (A tartalomjegyzék a „Fejezet” stílusú bekezdésekkel töltődik fel, vagy az Objektum menüben választottakkal.)
+(Les notes sont en bas de chaque bloc de texte. Pour les avoir ici, en fin de chapitre : Document → Notes de bas de page.) ¦ (Viitteet ovat kunkin tekstikehyksen alareunassa. Saadaksesi ne tänne luvun loppuun: Asiakirja → Alaviitteet.) ¦ (A jegyzetek minden szövegkeret alján vannak. Ha ide, a fejezet végére szeretnéd őket: Dokumentum → Lábjegyzetek.)
+(Aucune note dans ce chapitre : elles se rangent ici toutes seules.) ¦ (Tässä luvussa ei ole viitteitä: ne asettuvat tähän itsestään.) ¦ (Ebben a fejezetben nincs jegyzet: maguktól ide kerülnek.)
+(La bibliographie se remplit avec les sources citées en note : Texte → « 📚 Citer une source ».) ¦ (Lähdeluettelo täyttyy viitteissä mainituilla lähteillä: Teksti → ”📚 Viittaa lähteeseen”.) ¦ (Az irodalomjegyzék a jegyzetekben idézett forrásokkal töltődik fel: Szöveg → „📚 Forrás idézése”.)
+(L’index se remplit avec les noms marqués en style de caractère « Nom à indexer », et les personnes de la généalogie trouvées dans le texte.) ¦ (Hakemisto täyttyy nimillä, jotka on merkitty merkkityylillä ”Hakemistoon tuleva nimi”, ja tekstistä löytyvillä sukututkimuksen henkilöillä.) ¦ (A mutató a „Mutatóba veendő név” karakterstílussal jelölt nevekkel és a szövegben talált családfabeli személyekkel töltődik fel.)
+(L’index des lieux se remplit avec les mots marqués « Lieu à indexer », et les lieux de ta base trouvés dans le texte.) ¦ (Paikkahakemisto täyttyy sanoilla, jotka on merkitty ”Hakemistoon tuleva paikka”, ja tekstistä löytyvillä tietokantasi paikoilla.) ¦ (A helymutató a „Mutatóba veendő hely” jelölésű szavakkal és a szövegben talált, adatbázisodban lévő helyekkel töltődik fel.)
+(L’index des métiers se remplit avec les mots marqués « Métier à indexer », et les métiers de ta base trouvés dans le texte.) ¦ (Ammattihakemisto täyttyy sanoilla, jotka on merkitty ”Hakemistoon tuleva ammatti”, ja tekstistä löytyvillä tietokantasi ammateilla.) ¦ (A foglalkozásmutató a „Mutatóba veendő foglalkozás” jelölésű szavakkal és a szövegben talált, adatbázisodban lévő foglalkozásokkal töltődik fel.)
+Historique ({n} étapes) ¦ Historia ({n} vaihetta) ¦ Előzmények ({n} lépés)
+Historique ({n} étape) ¦ Historia ({n} vaihe) ¦ Előzmények ({n} lépés)
+Clic : le contrôle détaillé. ¦ Napsautus: yksityiskohtainen tarkistus. ¦ Kattintás: részletes ellenőrzés.
+https://… (cliquable dans le PDF et le HTML) ¦ https://… (napsautettava PDF:ssä ja HTML:ssä) ¦ https://… (kattintható a PDF-ben és a HTML-ben)
+Garder les styles de ce document sous un nom ¦ Säilytä tämän asiakirjan tyylit nimellä ¦ A dokumentum stílusainak megőrzése egy néven
+tout de suite ¦ heti ¦ azonnal
+Largeur et hauteur ¦ Leveys ja korkeus ¦ Szélesség és magasság
+mariage, Brive, 1925 (séparés par des virgules) ¦ avioliitto, Brive, 1925 (pilkuilla erotettuina) ¦ házasság, Brive, 1925 (vesszővel elválasztva)
+La marge claire autour du code : 4 modules d’après la norme, pour que les téléphones le lisent bien. ¦ Koodin ympärillä oleva vaalea marginaali: standardin mukaan 4 moduulia, jotta puhelimet lukevat sen hyvin. ¦ A kód körüli világos margó: a szabvány szerint 4 modul, hogy a telefonok jól olvassák.
+Le numéro de la feuille (f° 12, f° 12 v° pour le verso), de la page ou de la vue en ligne. ¦ Lehden numero (f° 12, f° 12 v° kääntöpuolelle), sivu tai verkkokuvan numero. ¦ A lap száma (f° 12, a hátoldalé f° 12 v°), az oldal vagy az online kép száma.
+Combien de rangées : 2 = la personne et ses parents (ou ses enfants), 4 = jusqu’aux arrière-grands-parents. Au-delà de 6, les cases deviennent petites. ¦ Montako riviä: 2 = henkilö ja hänen vanhempansa (tai lapsensa), 4 = isovanhempien vanhempiin asti. Yli 6:lla laatikot pienenevät. ¦ Hány sor: 2 = a személy és a szülei (vagy gyermekei), 4 = a dédszülőkig. 6 fölött a dobozok kicsik lesznek.
+La marge de 3 à 5 mm qui sera coupée par l’imprimeur, pour que les images aillent jusqu’au bord. ¦ 3–5 mm:n marginaali, jonka paino leikkaa pois, jotta kuvat ulottuvat reunaan asti. ¦ A 3–5 mm-es sáv, amelyet a nyomda levág, hogy a képek a szélig érjenek.
+1re page n° ¦ 1. sivun nro ¦ 1. oldal száma
+paysage ¦ vaaka ¦ fekvő
+portrait ¦ pysty ¦ álló
+Papier ¦ Paperi ¦ Papír
+Marge haut ¦ Ylämarginaali ¦ Felső margó
+Marge bas ¦ Alamarginaali ¦ Alsó margó
+fond transparent ¦ läpinäkyvä tausta ¦ átlátszó háttér
+📨 Fichier de relecture… ¦ 📨 Tarkastustiedosto… ¦ 📨 Lektorálási fájl…
+Plusieurs pages… ¦ Useita sivuja… ¦ Több oldal…
+Points de conduite (……… 12) ¦ Johdepisteet (……… 12) ¦ Vezetőpontok (……… 12)
+¹ Note ¦ ¹ Viite ¦ ¹ Jegyzet
+Approche (‰) ¦ Merkkiväli (‰) ¦ Betűköz (‰)
+Retrait 1re ligne ¦ Ensimmäisen rivin sisennys ¦ Első sor behúzása
+💿 Discographie ¦ 💿 Diskografia ¦ 💿 Diszkográfia
+Livre de famille ¦ Sukukirja ¦ Családi könyv
+Aide : La marge de 3 à 5 mm qui sera coupée par l’imprimeur, pour que les images aillent jusqu’au bord. ¦ Ohje: 3–5 mm:n marginaali, jonka paino leikkaa pois, jotta kuvat ulottuvat reunaan asti. ¦ Súgó: A 3–5 mm-es sáv, amelyet a nyomda levág, hogy a képek a szélig érjenek.

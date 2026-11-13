@@ -13,6 +13,7 @@
  */
 (function (root) {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s)); // 🌐 traduction (docs/I18N.md)
     const ext = root.LCNDA_EXT = root.LCNDA_EXT || {};
 
     /* ═════════ 📢 La sonie intégrée (LUFS), selon UIT-R BS.1770-4 ═════════ */
@@ -50,7 +51,7 @@
         (P.v2 || []).forEach(c => { if (!c.mute && (c.vol ?? 1) > 0 && P.sources[c.s]?.kind === 'video') items.push({c, at: c.at, vol: c.vol ?? 1}); });
         (P.audio || []).forEach(c => { if ((c.vol ?? 1) > 0) items.push({c, at: c.at, vol: c.vol ?? 1, fade: true}); });
         const end = Math.max(0.1, ...items.map(x => x.at + clen(x.c)), ...(P.texts || []).map(x => x.at + x.dur)), N = Math.ceil(end * sr);
-        const out = [new Float32Array(N), new Float32Array(N)], cache = new Map(), OAC = root.OfflineAudioContext || root.webkitOfflineAudioContext;
+        const AE = ext.audioEngine, out = [new Float32Array(N), new Float32Array(N)], cache = new Map(), OAC = root.OfflineAudioContext || root.webkitOfflineAudioContext;
         const decode = async src => { if (cache.has(src)) return cache.get(src); let b = null; try { const ab = await (await fetch(src)).arrayBuffer(); b = await new OAC(2, 1, sr).decodeAudioData(ab); } catch (_) { b = null; } cache.set(src, b); return b; };
         for (const [n, it] of items.entries()) {
             onStep?.(n / items.length); const so = P.sources[it.c.s]; if (!so || so.kind === 'image') continue;
@@ -58,7 +59,8 @@
             const ch = [0, 1].map(i => b.getChannelData(Math.min(i, b.numberOfChannels - 1))), s = spd(it.c), len = clen(it.c), i0 = Math.round(it.at * sr), m = Math.min(N - i0, Math.round(len * sr));
             for (let i = 0; i < m; i++) {
                 const j = Math.floor((it.c.from + i / sr * s) * b.sampleRate); if (j >= ch[0].length) break; let v = it.vol;
-                if (it.fade) { const x = i / sr; if (it.c.fadeIn && x < it.c.fadeIn) v *= x / it.c.fadeIn; if (it.c.fadeOut && len - x < it.c.fadeOut) v *= Math.max(0, (len - x) / it.c.fadeOut); }
+                const x = i / sr; if (AE?.clipGain) v *= AE.clipGain(it.c, x, len, it.c.from + x * s); // fondus et courbe du volume : le calcul du moteur son commun
+                else if (it.fade) { if (it.c.fadeIn && x < it.c.fadeIn) v *= x / it.c.fadeIn; if (it.c.fadeOut && len - x < it.c.fadeOut) v *= Math.max(0, (len - x) / it.c.fadeOut); }
                 out[0][i0 + i] += ch[0][j] * v; out[1][i0 + i] += ch[1][j] * v;
             }
         }
@@ -231,7 +233,7 @@
         return pts.map(([x, y], i) => ({t: times[i], fx: x / W, fy: y / H}));
     }
     const trackHtml = c => `<details class="h-mt-isec h-mt-trk" ${c.track?.length ? 'open' : ''}><summary><b>🎯 Suivre ce qui bouge</b></summary><p class="muted">L’élément suit un point de la vidéo de la piste 1 (un visage, une voiture, un bateau) : clique « Choisir le point », puis sur ce point dans l’image.</p>
-        <div class="h-mt-quick"><button type="button" data-mt-trk="pick">🎯 Choisir le point à suivre</button>${c.track?.length ? '<button type="button" data-mt-trk="off">✕ Ne plus suivre</button>' : ''}</div>${c.track?.length ? `<p class="muted">Suivi sur ${c.track.length} positions.</p>` : ''}</details>`;
+        <div class="h-mt-quick"><button type="button" data-mt-trk="pick">🎯 Choisir le point à suivre</button>${c.track?.length ? '<button type="button" data-mt-trk="off">✕ Ne plus suivre</button>' : ''}</div>${c.track?.length ? `<p class="muted">${i18n('Suivi sur {n} positions.', {n: c.track.length})}</p>` : ''}</details>`;
     ext.montageTrack = {trackAt, trackPoints, trackVideo, html: trackHtml};
 
     /* ═════════ 🎥 Plusieurs caméras : synchronisées par le son, puis montées en passant de l'une à l'autre ═════════ */

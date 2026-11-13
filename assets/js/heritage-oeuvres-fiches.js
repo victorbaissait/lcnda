@@ -9,6 +9,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ART = window.LCNDA_ART, OE = ART?.oeuvres; if (!OE?.make) return;
     const A = () => window.LCNDA_APP, X = () => window.LCNDA_EXT || {};
     const U = ART.util, esc = U.esc, G = OE.G, F = OE.F, lab = OE.lab;
@@ -50,13 +51,13 @@
         listExtra: [{key: '_ncasts', label: 'Fontes', type: 'computed', view: 'o_ncasts'}],
         filters: [store => [{id: 'post', label: 'Avec une fonte posthume', group: 'Fontes', type: 'check', test: (it, v) => !v || OE.childrenOf(store, it, 'o_cast', 'sculpture').some(c => c.data.posthumous)}]]});
     ART.views.o_ncasts = {read: (ctx, it) => String(OE.childrenOf(ctx.store, it, 'o_cast', 'sculpture').length || ''), text: (ctx, it) => String(OE.childrenOf(ctx.store, it, 'o_cast', 'sculpture').length || '')};
-    ART.views.o_legal = {read: (ctx, it) => { const p = it.data?.edition_plan; return p ? `${esc(p)} <small class="ar-g">(limite légale : 8 + 4 EA = 12)</small>` : ''; }, text: (ctx, it) => it.data?.edition_plan || ''};
+    ART.views.o_legal = {read: (ctx, it) => { const p = it.data?.edition_plan; return p ? `${esc(p)} <small class="ar-g">${i18n('(limite légale : 8 + 4 EA = 12)')}</small>` : ''; }, text: (ctx, it) => it.data?.edition_plan || ''};
     ART.views.o_versions = {read: (ctx, it, f, v) => (v || []).map(r => `<div class="oe-vline">${r.w ? U.refChip(r.w, '🗿') : ''} <span class="ar-g">${esc([lab(VERS, r.rel), r.material, r.size, r.year, r.maker, r.n].filter(Boolean).join(' · '))}</span></div>`).join('')};
     const castSort = l => [...l].sort((a, b) => { const n = x => { const s = String(x.data?.no || x.title || ''); if (/^EA|^E\.?A/i.test(s)) return 1000 + (Number(s.match(/\d+/)?.[0]) || 0); return Number(s.match(/^(\d+)/)?.[1]) || 999; }; return n(a) - n(b) || a.sort - b.sort; });
     ART.views.o_casts = {
         meta: (ctx, it) => { const l = OE.childrenOf(ctx.store, it, 'o_cast', 'sculpture'); return esc(l.length ? `${U.plural(l.length, 'exemplaire')} · ${U.plural(l.filter(c => c.data.location || c.data.holder || c.data.owner).length, 'localisé')}` : ''); },
         actions: (ctx, it) => { const l = OE.childrenOf(ctx.store, it, 'o_cast', 'sculpture'), p = l.filter(c => c.data.posthumous).length;
-            return `${l.length ? `<span class="ui-filters oe-castf"><button type="button" class="is-active" data-oe-castf="all">Toutes ${l.length}</button><button type="button" data-oe-castf="0">Du vivant ${l.length - p}</button><button type="button" data-oe-castf="1">Posthumes ${p}</button></span>` : ''}${OE.newChildBtn(it, 'o_cast', 'sculpture', 'Ajouter une fonte')}`; },
+            return `${l.length ? `<span class="ui-filters oe-castf"><button type="button" class="is-active" data-oe-castf="all">${i18n('Toutes {n}', {n: l.length})}</button><button type="button" data-oe-castf="0">${i18n('Du vivant {n}', {n: l.length - p})}</button><button type="button" data-oe-castf="1">${i18n('Posthumes {n}', {n: p})}</button></span>` : ''}${OE.newChildBtn(it, 'o_cast', 'sculpture', 'Ajouter une fonte')}`; },
         text: (ctx, it) => U.plural(OE.childrenOf(ctx.store, it, 'o_cast', 'sculpture').length, 'fonte'),
         read: (ctx, it) => {
             if (!it.id) return '<p class="muted">Enregistre d’abord la sculpture, puis ajoute ses fontes.</p>';
@@ -73,7 +74,7 @@
     const CAST_PROC = [['', '—'], ['cire', 'cire perdue'], ['sable', 'au sable'], ['galvano', 'galvanoplastie'], ['resine', 'tirage en résine'], ['platre', 'tirage en plâtre'], ['autre', 'autre']];
     OE.make({key: 'o_cast', icon: '🔥', label: 'Fonte, tirage', many: 'Fontes et tirages', fem: true, fam: 'visual', hidden: true, quiet: true, parentField: 'sculpture', titleLabel: 'Nom de l’exemplaire', titlePh: 'Fonte 1/8', dateLabel: 'Fondue',
         eyebrow: it => ['Fonte', it.data?.no, U.refTitle(it.data?.sculpture)].filter(Boolean).join(' · '),
-        crumbExtra: (ctx, it) => { const s = U.ref(it.data?.sculpture); return s?.iid ? ` · de la sculpture « <button type="button" class="ar-linkbtn u" data-ar-open="${s.iid}">${esc(s.title)}</button> »` : ''; },
+        crumbExtra: (ctx, it) => { const s = U.ref(it.data?.sculpture); return s?.iid ? ' · ' + i18n('de la sculpture « {nm} »', {nm: `<button type="button" class="ar-linkbtn u" data-ar-open="${s.iid}">${esc(s.title)}</button>`}) : ''; },
         badges: (ctx, it) => badges([it.data?.posthumous ? badge('posthume', 'w') : '', it.data?.ours ? badge('⭐ la nôtre', 'b') : '']),
         main: [['sculpture', 'Sculpture', 'item', {kinds: ['o_sculpture'], free: false}], ['no', 'N° gravé', 'text', {ph: '1/8, EA I, HC…'}], ['founder', 'Fondeur', 'employer', {icon: '🏭'}], ['process', 'Procédé', 'select', {choices: CAST_PROC}],
             ['patina', 'Patine', 'text', {ph: 'brun nuancé, vert antique…'}], ['patineur', 'Patineur', 'person'], ['mark', 'Cachet et numéro gravés', 'text'], ['weight', 'Poids', 'measure', {unit: 'kg'}],
@@ -83,7 +84,7 @@
         prizes: false, list: ['photos', 'no', 'founder', 'date', 'process', 'patina', 'owner'], card: ['no', 'date', 'founder'],
         sorts: [['perso', 'Mon ordre'], ['year', 'Par année'], ['az', 'A → Z']]});
     OE.childPreset = OE.childPreset || {};
-    OE.childPreset.o_cast = (parent, n) => ({title: `${parent.title} — fonte ${n + 1}`, no: `${n + 1}/${String(parent.data?.edition_plan || '').match(/^\s*(\d+)/)?.[1] || '?'}`, technique: parent.data?.technique || ''});
+    OE.childPreset.o_cast = (parent, n) => ({title: i18n('{nm} — fonte {x2}', {nm: parent.title, x2: n + 1}), no: `${n + 1}/${String(parent.data?.edition_plan || '').match(/^\s*(\d+)/)?.[1] || '?'}`, technique: parent.data?.technique || ''});
 
     /* ═════════ J. 🪧 Affiche · graphisme ═════════ */
     const PROC = [['', '—'], ['litho', 'lithographie'], ['offset', 'offset'], ['serigraphie', 'sérigraphie'], ['typo', 'typographie'], ['bois', 'gravure sur bois'], ['pochoir', 'pochoir'], ['numerique', 'impression numérique'], ['main', 'peinte à la main']];
@@ -101,7 +102,7 @@
             G.rows('copies', 'Exemplaires connus', [['where', 'Où (archives, musée, chez nous…)', 'text', {w: 'l'}], ['cote', 'Cote', 'text', {w: 's', ph: '6 Fi 1952/4'}], ['state', 'État', 'text', {w: 's', ph: 'plié, bon état'}], ['ours', 'Le nôtre', 'bool', {w: 's'}]], {add: 'Un exemplaire', zone: 'right', icon: '📍', view: 'o_copies'}),
             G.side('elec', 'Aussi pour les élections', '🗳', [['_elec', 'Élection', 'computed', {view: 'o_elec'}]]), G.expos(), G.biblio()],
         list: ['photos', 'title', 'date', 'printer', 'process', 'format', 'print_run'], card: ['date', 'printer'], export: ['photos', 'title', 'date', 'sponsor', 'printer', 'process', 'format', 'print_run', 'posted', 'mentions', 'copies']});
-    ART.views.o_copies = {read: (ctx, it, f, v) => (v || []).map(r => `<div>${r.ours ? '<b>Le nôtre :</b> ' : ''}${esc(r.where || '')}${r.cote ? ` <small class="ar-g">cote ${esc(r.cote)}</small>` : ''}${r.state ? ` <small class="ar-g">· ${esc(r.state)}</small>` : ''}</div>`).join('')};
+    ART.views.o_copies = {read: (ctx, it, f, v) => (v || []).map(r => `<div>${r.ours ? `<b>${i18n('Le nôtre :')}</b> ` : ''}${esc(r.where || '')}${r.cote ? ` <small class="ar-g">${i18n('cote {c}', {c: esc(r.cote)})}</small>` : ''}${r.state ? ` <small class="ar-g">· ${esc(r.state)}</small>` : ''}</div>`).join('')};
     ART.views.o_elec = {read: (ctx, it) => it.data?.election ? `<p style="margin:0">Affiche de campagne · ${esc(it.data.election)}</p>` : '', text: (ctx, it) => it.data?.election || ''};
 
     /* ═════════ K. 🎻 Concerto (et toute la musique savante : OE.savante) ═════════ */
@@ -153,9 +154,9 @@
         list: ['photos', 'title', 'date', 'author', 'genre', 'acts', '_nmes'], card: ['date', 'genre'], listExtra: [{key: '_nmes', label: 'Mises en scène', type: 'computed', view: 'o_nmes'}]});
     ART.views.o_nchar = {read: (ctx, it) => { const l = it.data?.characters || []; if (!l.length) return ''; const f = l.filter(c => c.sex === 'f').length, h = l.filter(c => c.sex === 'h').length; return esc(`${l.length}${f || h ? ` (${[f && `${f} F`, h && `${h} H`].filter(Boolean).join(', ')})` : ''}`); }, text: (ctx, it) => String(ART.arr(it.data?.characters).length || '')};
     ART.views.o_nmes = {read: (ctx, it) => String(OE.childrenOf(ctx.store, it, 'o_mes', 'play').length || ''), text: (ctx, it) => String(OE.childrenOf(ctx.store, it, 'o_mes', 'play').length || '')};
-    OE.childPreset.o_mes = (p, n) => ({title: `${p.title} — ${n ? `mise en scène ${n + 1}` : 'création'}`, mkind: n ? 'reprise' : 'creation'});
+    OE.childPreset.o_mes = (p, n) => ({title: `${p.title} — ${n ? i18n('mise en scène {nm}', {nm: n + 1}) : i18n('création')}`, mkind: n ? 'reprise' : 'creation'});
     OE.childPreset[REP()] = OE.childPreset.o_representation = p => ({title: U.refTitle(p.data?.play) || p.title});
-    OE.childPreset[TOUR()] = OE.childPreset.o_tournee = (p, n) => ({title: `${U.refTitle(p.data?.play) || p.title} — tournée ${n + 1}`});
+    OE.childPreset[TOUR()] = OE.childPreset.o_tournee = (p, n) => ({title: i18n('{nm} — tournée {x2}', {nm: U.refTitle(p.data?.play) || p.title, x2: n + 1})});
     const MODE = {};
     const calHtml = (dates, y, m) => { const first = new Date(y, m, 1), off = (first.getDay() + 6) % 7, n = new Date(y, m + 1, 0).getDate(), on = new Set(dates.filter(d => d.y === y && d.m === m).map(d => d.d));
         return `<div class="oe-cal">${['L', 'M', 'M', 'J', 'V', 'S', 'D'].map(x => `<span class="h">${x}</span>`).join('')}${'<span></span>'.repeat(off)}${Array.from({length: n}, (_, i) => `<span class="${on.has(i + 1) ? 'on' : ''}">${i + 1}</span>`).join('')}</div><small class="ar-g">${esc(MONTHS[m])} ${y}</small>`; };
@@ -174,9 +175,9 @@
             const cast = (d.cast || []), first = frDate(reps[0]?.data?.date || '');
             return `<div class="oe-lvl l2"><span class="oe-lt">Mise en scène ${i + 1} · ${esc(lab(MESK, d.mkind || 'creation').toLowerCase())}</span>
                 <div class="oe-hd"><span class="oe-kind k-mes">${esc(lab(MESK, d.mkind || 'creation').toLocaleUpperCase('fr-FR'))}</span><button type="button" class="ar-linkbtn" data-ar-open="${m.id}"><b>${esc([d.company?.title || d.company?.txt || '', d.date || m.year].filter(Boolean).join(' · ') || m.title)}</b></button>
-                <small class="ar-g">${[d.director ? `mise en scène ${U.personChip(d.director, '', x)}` : '', ...ART.normPeople(d.team).slice(0, 3).map(p => `${esc(p.role || '')} ${esc(p.title || p.txt)}`), (d.music || []).map(r => U.refChip(r, '🎵')).join('')].filter(Boolean).join(' · ')}</small></div>
-                ${cast.length ? `<div class="ar-scroll"><table class="ar-t"><thead><tr><th>Personnage</th><th>Interprète</th><th>Qui remplace</th></tr></thead><tbody>${cast.slice(0, 3).map(r => `<tr><td>${esc(r.role || '')}</td><td>${r.actor ? U.personChip(r.actor, '', x) : ''}</td><td>${r.under ? U.personChip(r.under, '', x) : '—'}${r.under_n ? ` <small class="ar-g">(${esc(r.under_n)})</small>` : ''}</td></tr>`).join('')}${cast.length > 3 ? `<tr><td colspan="3"><button type="button" class="ar-linkbtn" data-ar-open="${m.id}">▸ voir toute la distribution (${cast.length})</button></td></tr>` : ''}</tbody></table></div>` : ''}
-                <div class="oe-lvl l3"><span class="oe-lt">Représentations · ${reps.length}</span>${reps.length ? `<div class="oe-repgrid">${repTable(st, reps.slice(0, 6))}<div>${first ? calHtml(reps.map(r => frDate(r.data?.date || '')).filter(Boolean), first.y, first.m) : ''}</div></div>${reps.length > 6 ? `<button type="button" class="ar-linkbtn" data-oe-mode="table">▸ les ${reps.length} représentations (Tableau)</button>` : ''}` : ''}
+                <small class="ar-g">${[d.director ? i18n('mise en scène {nm}', {nm: U.personChip(d.director, '', x)}) : '', ...ART.normPeople(d.team).slice(0, 3).map(p => `${esc(p.role || '')} ${esc(p.title || p.txt)}`), (d.music || []).map(r => U.refChip(r, '🎵')).join('')].filter(Boolean).join(' · ')}</small></div>
+                ${cast.length ? `<div class="ar-scroll"><table class="ar-t"><thead><tr><th>Personnage</th><th>Interprète</th><th>Qui remplace</th></tr></thead><tbody>${cast.slice(0, 3).map(r => `<tr><td>${esc(r.role || '')}</td><td>${r.actor ? U.personChip(r.actor, '', x) : ''}</td><td>${r.under ? U.personChip(r.under, '', x) : '—'}${r.under_n ? ` <small class="ar-g">(${esc(r.under_n)})</small>` : ''}</td></tr>`).join('')}${cast.length > 3 ? `<tr><td colspan="3"><button type="button" class="ar-linkbtn" data-ar-open="${m.id}">▸ ${i18n('voir toute la distribution ({n})', {n: cast.length})}</button></td></tr>` : ''}</tbody></table></div>` : ''}
+                <div class="oe-lvl l3"><span class="oe-lt">${i18n('Représentations')} · ${reps.length}</span>${reps.length ? `<div class="oe-repgrid">${repTable(st, reps.slice(0, 6))}<div>${first ? calHtml(reps.map(r => frDate(r.data?.date || '')).filter(Boolean), first.y, first.m) : ''}</div></div>${reps.length > 6 ? `<button type="button" class="ar-linkbtn" data-oe-mode="table">${i18n('▸ les {n} représentations (Tableau)', {n: reps.length})}</button>` : ''}` : ''}
                     <div class="ar-row">${OE.newChildBtn({id: m.id}, REP(), 'staging', 'Ajouter une représentation').replace('data-oe-newchild', `data-oe-parent="${m.id}" data-oe-newchild`)}</div></div>
                 <div class="oe-lvl l4"><span class="oe-lt">Tournées</span>${tours.map(t => { const tr = repsOf(st, m).filter(r => U.ref(r.data?.tour)?.iid === t.id), sp = tr.reduce((a, r) => a + (U.num(r.data?.spectators) || 0), 0), towns = new Set(tr.map(r => U.placeTitle(r.data?.place)).filter(Boolean)).size;
                     return `<div><span class="oe-kind k-tour">TOURNÉE</span> <button type="button" class="ar-linkbtn" data-ar-open="${t.id}"><b>${esc(t.title)}</b></button> <small class="ar-g">· ${esc([tr.length && U.plural(tr.length, 'date'), towns && U.plural(towns, 'ville'), sp && `${sp.toLocaleString('fr-FR')} spectateurs`, t.data?.date].filter(Boolean).join(' · '))}</small></div>`; }).join('')}
@@ -206,7 +207,7 @@
     });
     OE.make({key: 'o_mes', icon: '🎭', label: 'Mise en scène', many: 'Mises en scène', fem: true, fam: 'stage', hidden: true, quiet: true, parentField: 'play', dateLabel: 'Année', chain: 'Mise en scène → représentations → tournées',
         eyebrow: it => ['Mise en scène', lab(MESK, it.data?.mkind || 'creation'), U.refTitle(it.data?.play)].filter(Boolean).join(' · '),
-        crumbExtra: (ctx, it) => { const s = U.ref(it.data?.play); return s?.iid ? ` · de la pièce « <button type="button" class="ar-linkbtn u" data-ar-open="${s.iid}">${esc(s.title)}</button> »` : ''; },
+        crumbExtra: (ctx, it) => { const s = U.ref(it.data?.play); return s?.iid ? ' · ' + i18n('de la pièce « {nm} »', {nm: `<button type="button" class="ar-linkbtn u" data-ar-open="${s.iid}">${esc(s.title)}</button>`}) : ''; },
         main: [['play', 'Pièce', 'item', {kinds: ['o_piece', 'o_opera', 'o_ballet', 'o_comedie_musicale']}], ['mkind', 'Sorte', 'select', {choices: MESK}], ['company', 'Compagnie, théâtre', 'employer', {icon: '🎭'}], ['place', 'Ville', 'place'], ['venue', 'Salle', 'text'],
             ['director', 'Mise en scène', 'person', {roleWord: 'metteur en scène'}], ['team', 'Équipe', 'people', {rolePh: 'décors, costumes, lumières, musique…', addLabel: 'Une personne'}], ['music', 'Musique', 'items', {kinds: ['track_work', 'o_musscene']}],
             ['capture', 'Captation', 'text', {ph: 'captation FR3, 1979', h: 1}], ['program', 'Programme', 'document', {h: 1}]],
@@ -221,7 +222,7 @@
     // la représentation : seulement si le domaine « scène » n'a pas déjà la sienne (fiche avec setlist)
     if (!ART.defs.performance && !ART.defs.show && !ART.defs.representation) OE.make({key: 'o_representation', icon: '🎟', label: 'Représentation', many: 'Représentations', fem: true, fam: 'stage', quiet: true, parentField: 'staging', titlePh: 'La Veillée, Tulle', dateShown: true,
         eyebrow: it => ['Représentation', U.refTitle(it.data?.staging)].filter(Boolean).join(' · '),
-        crumbExtra: (ctx, it) => { const s = U.ref(it.data?.staging); return s?.iid ? ` · de la mise en scène « <button type="button" class="ar-linkbtn u" data-ar-open="${s.iid}">${esc(s.title)}</button> »` : ''; },
+        crumbExtra: (ctx, it) => { const s = U.ref(it.data?.staging); return s?.iid ? ' · ' + i18n('de la mise en scène « {nm} »', {nm: `<button type="button" class="ar-linkbtn u" data-ar-open="${s.iid}">${esc(s.title)}</button>`}) : ''; },
         main: [['staging', 'Mise en scène, spectacle', 'item', {kinds: ['o_mes', 'o_opera_prod', 'o_ballet', 'o_comedie_musicale', 'o_seul_en_scene', 'o_cirque', 'o_marionnettes', 'o_cabaret', 'o_magie', 'o_conte', 'o_lecture', 'o_rue']}], ['tour', 'Tournée', 'item', {kinds: ['o_tournee']}], ['place', 'Ville', 'place'], ['venue', 'Salle', 'text', {ph: 'Théâtre municipal'}],
             ['spectators', 'Spectateurs', 'number'], ['tag', 'Note', 'select', {choices: REPTAG}], ['note', 'Précision', 'text', {ph: 'joué en plein air'}], ['night_cast', 'Distribution du soir', 'people', {h: 1, rolePh: 'rôle'}], ['takings', 'Recette', 'money', {h: 1}]],
         groups: [G.side('setlist', 'Setlist', '📋', [['_sl', 'Setlist', 'computed', {view: 'o_setlist_hint'}]])], prizes: false,
@@ -244,7 +245,7 @@
     OE.craft = spec => OE.make({fam: 'design', fem: true, object: false, ...spec,
         eyebrow: spec.eyebrow || (it => [spec.label, lab(spec.kinds || [], it.data?.piece_kind), it.data?.protection && ['inscrit', 'classe'].includes(it.data.protection) ? 'MH' : ''].filter(Boolean).join(' · ')),
         heading: (ctx, it) => { const sub = [it.data?.date, String(it.data?.[spec.matKey || 'material'] || '').split(',')[0].trim()].filter(Boolean); return `<h2 class="ar-h2">${esc(it.title)}${sub.length ? ` <small>· ${esc(sub.join(' · '))}</small>` : ''}</h2>`; },
-        badges: (ctx, it) => { const d = it.data || {}; return badges([['inscrit', 'classe'].includes(d.protection) ? badge(`${d.protection === 'classe' ? 'Classée' : 'Inscrite'} MH${d.prot_date && U.yearOf(d.prot_date) ? ` ${U.yearOf(d.prot_date)}` : ''}`, 'b') : '', d.situation ? badge(lab(SITU, d.situation), d.situation === 'place' ? 'ok' : 'w') : '', d.condition ? badge(`État : ${lab(COND, d.condition)}`) : '']); },
+        badges: (ctx, it) => { const d = it.data || {}; return badges([['inscrit', 'classe'].includes(d.protection) ? badge(`${d.protection === 'classe' ? 'Classée' : 'Inscrite'} MH${d.prot_date && U.yearOf(d.prot_date) ? ` ${U.yearOf(d.prot_date)}` : ''}`, 'b') : '', d.situation ? badge(lab(SITU, d.situation), d.situation === 'place' ? 'ok' : 'w') : '', d.condition ? badge(i18n('État : {nm}', {nm: lab(COND, d.condition)})) : '']); },
         main: [...(spec.kinds ? [['piece_kind', 'Sorte de pièce', 'select', {choices: [['', '—'], ...spec.kinds]}]] : []),
             ['metier', 'Métier', 'text', {ph: spec.metierPh || 'Ferronnier d’art', h: !spec.showMetier}], ['metier_domain', 'Domaine des métiers d’art', 'text', {h: 1}],
             ['sponsor', 'Commanditaire', 'employer', {icon: '🏛', join: {key: 'sponsor_note'}}], ['sponsor_note', 'Décision, commande', 'text', {ph: 'délibération du 3 mars 1927'}], ['sponsor_people', 'Pour le commanditaire', 'o_ppl', {rolePh: 'maire, curé, client…', h: !spec.sponsorPeople}],

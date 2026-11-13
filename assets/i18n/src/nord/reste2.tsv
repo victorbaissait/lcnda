@@ -1,0 +1,710 @@
+fr ¦ cs ¦ sv ¦ da
+=grappe ¦ shluk|shluky|shluků ¦ kluster|kluster ¦ klynge|klynger
+=chevauchement ¦ překryv|překryvy|překryvů ¦ överlappning|överlappningar ¦ overlap|overlap
+adn|Nom ¦ Jméno ¦ Namn ¦ Navn
+Test ¦ Test ¦ Test ¦ Test
+Segments ¦ Segmenty ¦ Segment ¦ Segmenter
+Groupes ¦ Skupiny ¦ Grupper ¦ Grupper
+Paternel ¦ Otcovská ¦ Fädernet ¦ Fædrene
+Maternel ¦ Mateřská ¦ Mödernet ¦ Mødrene
+Pas de réponse ¦ Bez odpovědi ¦ Inget svar ¦ Intet svar
+ADN-X ¦ X-DNA ¦ X-DNA ¦ X-DNA
+ADN-Y ¦ Y-DNA ¦ Y-DNA ¦ Y-DNA
+ADNmt ¦ mtDNA ¦ mtDNA ¦ mtDNA
+Autosomal (atDNA) ¦ Autozomální (atDNA) ¦ Autosomalt (atDNA) ¦ Autosomalt (atDNA)
+ADN mitochondrial ¦ Mitochondriální DNA ¦ Mitokondriellt DNA ¦ Mitokondrielt DNA
+Demi-oncle, demi-tante ¦ Nevlastní strýc, nevlastní teta ¦ Halvfarbror/halvmorbror, halvfaster/halvmoster ¦ Halvonkel, halvtante
+vous ¦ ty ¦ du ¦ dig
+grands-parents ¦ prarodiče ¦ far- och morföräldrar ¦ bedsteforældre
+arrière-arrière-grands-parents (4e génération) ¦ prapraprarodiče (4. generace) ¦ farfars far- och morföräldrar (4:e generationen) ¦ tipoldeforældre (4. generation)
+5e génération ¦ 5. generace ¦ 5:e generationen ¦ 5. generation
+6e génération ¦ 6. generace ¦ 6:e generationen ¦ 6. generation
+7e génération ¦ 7. generace ¦ 7:e generationen ¦ 7. generation
+8e génération ¦ 8. generace ¦ 8:e generationen ¦ 8. generation
+Relation proposée ¦ Navržený vztah ¦ Föreslagen släktskap ¦ Foreslået slægtskab
+Correspondances en commun ¦ Společné shody ¦ Gemensamma matchningar ¦ Fælles match
+Taille de l’arbre ¦ Velikost rodokmenu ¦ Släktträdets storlek ¦ Slægtstræets størrelse
+Arbre (adresse) ¦ Rodokmen (adresa) ¦ Släktträd (adress) ¦ Slægtstræ (adresse)
+Contact ¦ Kontakt ¦ Kontakt ¦ Kontakt
+cM sur le X ¦ cM na X ¦ cM på X ¦ cM på X
+Pays ¦ Země ¦ Land ¦ Land
+Fiche sur le site (adresse) ¦ Profil na webu (adresa) ¦ Profil på webbplatsen (adress) ¦ Profil på webstedet (adresse)
+Identifiant chez la société ¦ Identifikátor u společnosti ¦ Id hos företaget ¦ Id hos firmaet
+Haplogroupe Y ¦ Haploskupina Y ¦ Y-haplogrupp ¦ Y-haplogruppe
+Haplogroupe mt ¦ Haploskupina mt ¦ mt-haplogrupp ¦ mt-haplogruppe
+Haplogroupe mitochondrial ¦ Mitochondriální haploskupina ¦ Mitokondriell haplogrupp ¦ Mitokondriel haplogruppe
+% d’ADN partagé ¦ % sdílené DNA ¦ % delat DNA ¦ % delt DNA
+Grappe (Genetic Affairs) ¦ Shluk (Genetic Affairs) ¦ Kluster (Genetic Affairs) ¦ Klynge (Genetic Affairs)
+Nom de la correspondance ¦ Jméno shody ¦ Matchningens namn ¦ Matchets navn
+Chromosome ¦ Chromozom ¦ Kromosom ¦ Kromosom
+SNP ¦ SNP ¦ SNP ¦ SNP
+Groupe ou ancêtre ¦ Skupina nebo předek ¦ Grupp eller ana ¦ Gruppe eller ane
+n° {n} ¦ č. {n} ¦ nr {n} ¦ nr. {n}
+{n} sur {total}. Clic sur un nom : sa fiche (cM, ancêtre commun, arbre, suivi). Le calculateur propose la relation la plus probable. ¦ {n} z {total}. Klik na jméno: jeho karta (cM, společný předek, rodokmen, sledování). Kalkulačka navrhne nejpravděpodobnější vztah. ¦ {n} av {total}. Klicka på ett namn: dess post (cM, gemensam ana, släktträd, uppföljning). Kalkylatorn föreslår den troligaste släktskapen. ¦ {n} af {total}. Klik på et navn: dets post (cM, fælles ane, slægtstræ, opfølgning). Beregneren foreslår det mest sandsynlige slægtskab.
+Supprimer {n} correspondances et leurs segments ? ¦ Smazat shody ({n}) a jejich segmenty? ¦ Radera {n} matchningar och deras segment? ¦ Slet {n} match og deres segmenter?
+Supprimer cette correspondance et ses segments ? ¦ Smazat tuto shodu a její segmenty? ¦ Radera den här matchningen och dess segment? ¦ Slet dette match og dets segmenter?
+Le centiMorgan (cM) mesure l’ADN que vous avez en commun : environ 3 400 cM avec un parent, 850 avec un cousin germain, 200 avec un cousin issu de germain. Recopie le chiffre donné par le site du test. ¦ CentiMorgan (cM) měří DNA, kterou máte společnou: asi 3 400 cM s rodičem, 850 s bratrancem či sestřenicí, 200 se vzdálenějším bratrancem. Opiš číslo, které uvádí web testu. ¦ CentiMorgan (cM) mäter det DNA ni har gemensamt: ungefär 3 400 cM med en förälder, 850 med en kusin, 200 med en tremänning. Skriv av siffran som testets webbplats anger. ¦ CentiMorgan (cM) måler det DNA, I har til fælles: omkring 3 400 cM med en forælder, 850 med en fætter/kusine, 200 med en halvfætter/halvkusine. Skriv tallet af fra testens websted.
+Un long morceau d’ADN en commun (plus de 20 cM) montre souvent une parenté proche et sûre ; beaucoup de petits morceaux peuvent venir d’ancêtres très anciens. ¦ Dlouhý společný úsek DNA (přes 20 cM) často ukazuje blízké a jisté příbuzenství; mnoho malých úseků může pocházet od velmi starých předků. ¦ En lång gemensam DNA-bit (över 20 cM) visar ofta ett nära och säkert släktskap; många små bitar kan komma från mycket gamla anor. ¦ Et langt fælles stykke DNA (over 20 cM) viser ofte et nært og sikkert slægtskab; mange små stykker kan stamme fra meget gamle aner.
+Relation probable ({cm} cM, {pct} %) ¦ Pravděpodobný vztah ({cm} cM, {pct} %) ¦ Trolig släktskap ({cm} cM, {pct} %) ¦ Sandsynligt slægtskab ({cm} cM, {pct} %)
+fichier de <b>{name}</b> ¦ soubor od <b>{name}</b> ¦ fil från <b>{name}</b> ¦ fil fra <b>{name}</b>
+{n} de {tool} : chacune devient un groupe (« {tool} 1 »…), retrouvé dans « 🗂️ Groupes ». ¦ {n} z {tool}: každý se stane skupinou („{tool} 1“…), najdeš ji v „🗂️ Skupiny“. ¦ {n} från {tool}: var och en blir en grupp (”{tool} 1”…), som finns i ”🗂️ Grupper”. ¦ {n} fra {tool}: hver bliver en gruppe (»{tool} 1«…), som findes i »🗂️ Grupper«.
+⤓ {file} : {n} pour DNA Painter. ¦ ⤓ {file}: {n} pro DNA Painter. ¦ ⤓ {file}: {n} för DNA Painter. ¦ ⤓ {file}: {n} til DNA Painter.
+Branche Martin (Bretagne) ¦ Větev Martin (Bretaň) ¦ Grenen Martin (Bretagne) ¦ Grenen Martin (Bretagne)
+Supprimer le groupe « {name} » ? (les correspondances restent) ¦ Smazat skupinu „{name}“? (shody zůstanou) ¦ Radera gruppen ”{name}”? (matchningarna finns kvar) ¦ Slet gruppen »{name}«? (matchene bliver)
+{n} entre {lo} et {hi} cM (bornes dans ⚙️ Réglages) ¦ {n} mezi {lo} a {hi} cM (meze v ⚙️ Nastavení) ¦ {n} mellan {lo} och {hi} cM (gränser i ⚙️ Inställningar) ¦ {n} mellem {lo} og {hi} cM (grænser i ⚙️ Indstillinger)
+{n} entre {lo} et {hi} cM pour ce test (bornes dans ⚙️ Réglages) ¦ {n} mezi {lo} a {hi} cM pro tento test (meze v ⚙️ Nastavení) ¦ {n} mellan {lo} och {hi} cM för det här testet (gränser i ⚙️ Inställningar) ¦ {n} mellem {lo} og {hi} cM for denne test (grænser i ⚙️ Indstillinger)
+{base} ; {n} sans « correspondances en commun » notées, donc ignorées. ¦ {base}; {n} bez zapsaných „společných shod“, proto vynechány. ¦ {base}; {n} utan noterade ”gemensamma matchningar”, alltså ignorerade. ¦ {base}; {n} uden noterede »fælles match«, derfor ignoreret.
+Créer {n} avec ces couleurs ¦ Vytvořit {n} s těmito barvami ¦ Skapa {n} med de här färgerna ¦ Opret {n} med disse farver
+Créé par la méthode de Leeds autour de {name} ({cm} cM). ¦ Vytvořeno Leedsovou metodou kolem {name} ({cm} cM). ¦ Skapad med Leeds-metoden kring {name} ({cm} cM). ¦ Oprettet med Leeds-metoden omkring {name} ({cm} cM).
+masculin|inconnu ¦ neznámý ¦ okänd ¦ ukendt
+Les groupes (clusters) rassemblent les correspondances qui se partagent entre elles : chaque groupe a souvent un même couple d’ancêtres. Garde de 30 à 600 cM pour éviter les parents trop proches et le bruit. ¦ Skupiny (clustery) sdružují shody, které se shodují i mezi sebou: každá skupina má často stejný pár předků. Drž se 30 až 600 cM, abys vynechal příliš blízké příbuzné a šum. ¦ Grupperna (kluster) samlar matchningar som också matchar varandra: varje grupp har ofta samma anpar. Håll dig till 30–600 cM för att undvika alltför nära släktingar och brus. ¦ Grupperne (klynger) samler match, der også matcher hinanden: hver gruppe har ofte det samme anepar. Hold dig til 30–600 cM for at undgå for nære slægtninge og støj.
+{n} entre {lo} et {hi} cM ; {shared} avec des correspondances en commun, {links} de segments. Les très proches parents (au-delà de {hi} cM) sont écartés : ils correspondent à tout le monde. ¦ {n} mezi {lo} a {hi} cM; {shared} se společnými shodami, {links} segmentů. Velmi blízcí příbuzní (nad {hi} cM) jsou vynecháni: shodují se se všemi. ¦ {n} mellan {lo} och {hi} cM; {shared} med gemensamma matchningar, {links} av segment. Mycket nära släktingar (över {hi} cM) utesluts: de matchar alla. ¦ {n} mellem {lo} og {hi} cM; {shared} med fælles match, {links} af segmenter. Meget nære slægtninge (over {hi} cM) udelades: de matcher alle.
+Grappe {n} ¦ Shluk {n} ¦ Kluster {n} ¦ Klynge {n}
+{n} correspondances · {lo}–{hi} cM · liens {pct} % ¦ Shody: {n} · {lo}–{hi} cM · vazby {pct} % ¦ {n} matchningar · {lo}–{hi} cM · kopplingar {pct} % ¦ {n} match · {lo}–{hi} cM · forbindelser {pct} %
+Ancêtre commun encore inconnu (côté {side}) : place une de ces correspondances dans l’arbre (fiche liée), ou ajoute ses noms de famille. ¦ Společný předek zatím neznámý (strana: {side}): umísti jednu z těchto shod do rodokmenu (propojená karta), nebo přidej její příjmení. ¦ Gemensam ana ännu okänd (sida: {side}): placera en av de här matchningarna i släktträdet (kopplad post), eller lägg till dess släktnamn. ¦ Fælles ane endnu ukendt (side: {side}): placér et af disse match i slægtstræet (forbundet post), eller tilføj dets efternavne.
+Ancêtre commun encore inconnu : place une de ces correspondances dans l’arbre (fiche liée), ou ajoute ses noms de famille. ¦ Společný předek zatím neznámý: umísti jednu z těchto shod do rodokmenu (propojená karta), nebo přidej její příjmení. ¦ Gemensam ana ännu okänd: placera en av de här matchningarna i släktträdet (kopplad post), eller lägg till dess släktnamn. ¦ Fælles ane endnu ukendt: placér et af disse match i slægtstræet (forbundet post), eller tilføj dets efternavne.
+Groupe automatique : {n} correspondances qui se correspondent entre elles. ¦ Automatická skupina: shody ({n}), které se shodují i mezi sebou. ¦ Automatisk grupp: {n} matchningar som matchar varandra. ¦ Automatisk gruppe: {n} match, der matcher hinanden.
+{n} groupes créés ou mis à jour. ¦ Vytvořené nebo aktualizované skupiny: {n}. ¦ {n} grupper skapade eller uppdaterade. ¦ {n} grupper oprettet eller opdateret.
+{n} groupe créé ou mis à jour. ¦ {n} skupina vytvořena nebo aktualizována. ¦ {n} grupp skapad eller uppdaterad. ¦ {n} gruppe oprettet eller opdateret.
+noms : {list} ¦ jména: {list} ¦ namn: {list} ¦ navne: {list}
+lieux : {list} ¦ místa: {list} ¦ platser: {list} ¦ steder: {list}
+grappe {n} ¦ shluk {n} ¦ kluster {n} ¦ klynge {n}
+plus long segment {cm} cM ¦ nejdelší segment {cm} cM ¦ längsta segment {cm} cM ¦ længste segment {cm} cM
+À {pct} % une parenté en ligne directe (parent, grand-parent, arrière-grand-parent) : regarde d’abord ta proche famille. ¦ Na {pct} % příbuzenství v přímé linii (rodič, prarodič, praprarodič): podívej se nejdřív do blízké rodiny. ¦ Till {pct} % ett släktskap i rakt nedstigande led (förälder, far-/morförälder, gammelförälder): titta först i din närmaste familj. ¦ Med {pct} % et slægtskab i lige linje (forælder, bedsteforælder, oldeforælder): se først i din nære familie.
+Dans la <b>grappe {n}</b>. ¦ Ve <b>shluku {n}</b>. ¦ I <b>kluster {n}</b>. ¦ I <b>klynge {n}</b>.
+Dans la <b>grappe {n}</b> — ancêtres communs de la grappe : {couple}. ¦ Ve <b>shluku {n}</b> — společní předkové shluku: {couple}. ¦ I <b>kluster {n}</b> — klustrets gemensamma anor: {couple}. ¦ I <b>klynge {n}</b> — klyngens fælles aner: {couple}.
+Dans la <b>grappe {n}</b> — ancêtres probables de la grappe : {couple}. ¦ Ve <b>shluku {n}</b> — pravděpodobní předkové shluku: {couple}. ¦ I <b>kluster {n}</b> — klustrets troliga anor: {couple}. ¦ I <b>klynge {n}</b> — klyngens sandsynlige aner: {couple}.
+🎯 Déjà placée dans l’arbre : ancêtres communs {couple}. ¦ 🎯 Už umístěno v rodokmenu: společní předkové {couple}. ¦ 🎯 Redan placerad i släktträdet: gemensamma anor {couple}. ¦ 🎯 Allerede placeret i slægtstræet: fælles aner {couple}.
+{couple} (probable) ¦ {couple} (pravděpodobně) ¦ {couple} (troligt) ¦ {couple} (sandsynligt)
+{name} — chr {c} : {a}–{b} Mb, {cm} cM ¦ {name} — chr {c}: {a}–{b} Mb, {cm} cM ¦ {name} — kr {c}: {a}–{b} Mb, {cm} cM ¦ {name} — kr {c}: {a}–{b} Mb, {cm} cM
+{pct} % de l’ADN (sur {total} cM) ¦ {pct} % DNA (z {total} cM) ¦ {pct} % av DNA (av {total} cM) ¦ {pct} % af DNA (af {total} cM)
+Pour aller plus loin (outils externes, en anglais) : <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. L’endogamie (villages isolés, communautés fermées) et l’implexe gonflent les cM : une relation paraît alors plus proche qu’elle ne l’est. ¦ Pro pokročilé (externí nástroje, anglicky): <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. Endogamie (odlehlé vesnice, uzavřené komunity) a implex zvyšují cM: vztah pak vypadá bližší, než je. ¦ För att gå vidare (externa verktyg, på engelska): <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. Endogami (isolerade byar, slutna samhällen) och anförlust blåser upp cM: en släktskap ser då närmare ut än den är. ¦ For at gå videre (eksterne værktøjer, på engelsk): <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. Endogami (isolerede landsbyer, lukkede samfund) og anetab puster cM op: et slægtskab ser så tættere ud, end det er.
+Les « origines ethniques » données par les sociétés : des <b>estimations</b>, qui changent d’une société à l’autre et d’une mise à jour à l’autre. Elles ne remplacent pas les registres. ¦ „Etnický původ“ od společností: jsou to <b>odhady</b>, které se liší mezi společnostmi i mezi aktualizacemi. Nenahrazují matriky. ¦ ”Etniskt ursprung” från företagen: <b>uppskattningar</b> som skiljer sig mellan företag och mellan uppdateringar. De ersätter inte kyrkböckerna. ¦ »Etnisk oprindelse« fra firmaerne: <b>skøn</b>, der ændrer sig fra firma til firma og fra opdatering til opdatering. De erstatter ikke kirkebøgerne.
+Couleur « {name} » ¦ Barva „{name}“ ¦ Färg ”{name}” ¦ Farve »{name}«
+👥 Correspondance ADN « {name} » : <b>{cm} cM</b> ¦ 👥 Shoda DNA „{name}“: <b>{cm} cM</b> ¦ 👥 DNA-matchning ”{name}”: <b>{cm} cM</b> ¦ 👥 DNA-match »{name}«: <b>{cm} cM</b>
+ancêtre commun : {name} ¦ společný předek: {name} ¦ gemensam ana: {name} ¦ fælles ane: {name}
+Code civil, article 16-10 (examen des caractéristiques génétiques : seulement à des fins médicales ou de recherche scientifique, avec consentement écrit) ¦ Francouzský občanský zákoník, článek 16-10 (vyšetření genetických znaků: jen pro lékařské účely nebo vědecký výzkum, s písemným souhlasem) ¦ Franska civillagen, artikel 16-10 (undersökning av genetiska egenskaper: endast i medicinskt eller vetenskapligt forskningssyfte, med skriftligt samtycke) ¦ Den franske civillov, artikel 16-10 (undersøgelse af genetiske egenskaber: kun til medicinske formål eller videnskabelig forskning, med skriftligt samtykke)
+Code pénal, article 226-28-1 (demander un examen génétique hors des cas prévus par la loi : 3 750 € d’amende) ¦ Francouzský trestní zákoník, článek 226-28-1 (žádost o genetické vyšetření mimo případy stanovené zákonem: pokuta 3 750 €) ¦ Franska strafflagen, artikel 226-28-1 (att begära en genetisk undersökning utanför de fall lagen medger: böter på 3 750 €) ¦ Den franske straffelov, artikel 226-28-1 (at bestille en genetisk undersøgelse uden for de tilfælde, loven tillader: bøde på 3 750 €)
+Loi n° 2021-1017 du 2 août 2021 relative à la bioéthique, article 16 (nouvelle rédaction de l’article 16-10) ¦ Zákon č. 2021-1017 ze 2. srpna 2021 o bioetice, článek 16 (nové znění článku 16-10) ¦ Lag nr 2021-1017 av den 2 augusti 2021 om bioetik, artikel 16 (ny lydelse av artikel 16-10) ¦ Lov nr. 2021-1017 af 2. august 2021 om bioetik, artikel 16 (ny affattelse af artikel 16-10)
+Code civil sur Légifrance (articles 16-10 à 16-13 : examen génétique, empreintes génétiques, filiation) ¦ Občanský zákoník na Légifrance (články 16-10 až 16-13: genetické vyšetření, genetické otisky, původ) ¦ Civillagen på Légifrance (artiklarna 16-10 till 16-13: genetisk undersökning, genetiska fingeravtryck, härstamning) ¦ Civilloven på Légifrance (artikel 16-10 til 16-13: genetisk undersøgelse, genetiske fingeraftryk, afstamning)
+Code pénal sur Légifrance (articles 226-25 à 226-30) ¦ Trestní zákoník na Légifrance (články 226-25 až 226-30) ¦ Strafflagen på Légifrance (artiklarna 226-25 till 226-30) ¦ Straffeloven på Légifrance (artikel 226-25 til 226-30)
+Code de la santé publique sur Légifrance (articles L1131-1 et suivants : examens génétiques) ¦ Zákoník o veřejném zdraví na Légifrance (články L1131-1 a násl.: genetická vyšetření) ¦ Folkhälsolagen på Légifrance (artikel L1131-1 och följande: genetiska undersökningar) ¦ Folkesundhedsloven på Légifrance (artikel L1131-1 og følgende: genetiske undersøgelser)
+CNIL : les données génétiques sont des données « sensibles » (RGPD, article 9) ¦ CNIL: genetické údaje jsou „citlivé“ údaje (GDPR, článek 9) ¦ CNIL: genetiska uppgifter är ”känsliga” uppgifter (GDPR, artikel 9) ¦ CNIL: genetiske data er »følsomme« data (GDPR, artikel 9)
+Personne : mets « À contacter » dans le suivi d’une correspondance. ¦ Nikdo: nastav „Kontaktovat“ ve sledování shody. ¦ Ingen: sätt ”Att kontakta” i uppföljningen av en matchning. ¦ Ingen: sæt »Skal kontaktes« i opfølgningen af et match.
+J’ai lu cette mise en garde (elle ne s’affichera plus en haut des autres pages). ¦ Toto upozornění jsem četl (už se nebude zobrazovat nahoře na ostatních stránkách). ¦ Jag har läst den här varningen (den visas inte längre överst på de andra sidorna). ¦ Jeg har læst denne advarsel (den vises ikke længere øverst på de andre sider).
+La mise en garde reviendra en haut des pages. ¦ Upozornění se vrátí nahoru na stránky. ¦ Varningen kommer tillbaka överst på sidorna. ¦ Advarslen kommer tilbage øverst på siderne.
+Modifier le test ¦ Upravit test ¦ Redigera testet ¦ Rediger testen
+Société / origine ¦ Společnost / původ ¦ Företag / ursprung ¦ Firma / oprindelse
+Géré par ¦ Spravuje ¦ Hanteras av ¦ Administreres af
+Fichier brut (où il est rangé) ¦ Surový soubor (kde je uložen) ¦ Råfil (var den finns) ¦ Råfil (hvor den ligger)
+(qui a accepté quoi, cadre médical ou de recherche, pays…) ¦ (kdo s čím souhlasil, lékařský nebo výzkumný rámec, země…) ¦ (vem som godkände vad, medicinskt eller forskningssammanhang, land…) ¦ (hvem der accepterede hvad, medicinsk eller forskningsmæssig ramme, land…)
+(une ligne par région : « Bretagne ; 42 ») ¦ (jeden řádek na region: „Bretaň; 42“) ¦ (en rad per region: ”Bretagne; 42”) ¦ (én linje pr. region: »Bretagne; 42«)
+Supprimer ce test, ses correspondances et ses segments ? ¦ Smazat tento test, jeho shody a segmenty? ¦ Radera det här testet, dess matchningar och segment? ¦ Slet denne test, dens match og segmenter?
+Supprimer le test ¦ Smazat test ¦ Radera testet ¦ Slet testen
+Un test par personne et par société : type, haplogroupes, origines estimées, marqueurs. ¦ Jeden test na osobu a společnost: typ, haploskupiny, odhadovaný původ, markery. ¦ Ett test per person och företag: typ, haplogrupper, uppskattat ursprung, markörer. ¦ Én test pr. person og firma: type, haplogrupper, anslået oprindelse, markører.
+Aucun test ADN pour l’instant ¦ Zatím žádný test DNA ¦ Inga DNA-tester än ¦ Ingen DNA-test endnu
+Ajoute ton test (Ancestry, MyHeritage, 23andMe…) pour y ranger tes correspondances. ¦ Přidej svůj test (Ancestry, MyHeritage, 23andMe…) a ukládej k němu své shody. ¦ Lägg till ditt test (Ancestry, MyHeritage, 23andMe…) för att samla dina matchningar där. ¦ Tilføj din test (Ancestry, MyHeritage, 23andMe…) for at samle dine match der.
+⤒ Importer (CSV) ¦ ⤒ Importovat (CSV) ¦ ⤒ Importera (CSV) ¦ ⤒ Importér (CSV)
+Ajoute d’abord un test dans « 🧬 Mes tests » : les correspondances s’y rattachent. ¦ Nejdřív přidej test v „🧬 Moje testy“: shody se k němu připojí. ¦ Lägg först till ett test i ”🧬 Mina tester”: matchningarna hör till det. ¦ Tilføj først en test i »🧬 Mine test«: matchene hører til den.
+Nom, nom de famille, lieu, note… ¦ Jméno, příjmení, místo, poznámka… ¦ Namn, släktnamn, plats, anteckning… ¦ Navn, efternavn, sted, note…
+cM min ¦ cM min ¦ cM min ¦ cM min
+cM max ¦ cM max ¦ cM max ¦ cM maks
+Ajouter au groupe… ¦ Přidat do skupiny… ¦ Lägg till i gruppen… ¦ Tilføj til gruppen…
+Retirer du groupe… ¦ Odebrat ze skupiny… ¦ Ta bort från gruppen… ¦ Fjern fra gruppen…
+Aucune correspondance pour ces filtres. ¦ Pro tyto filtry žádná shoda. ¦ Inga matchningar för de här filtren. ¦ Ingen match med disse filtre.
+cM : les plus nombreux ¦ cM: nejvíc ¦ cM: flest ¦ cM: flest
+cM : les moins nombreux ¦ cM: nejméně ¦ cM: minst ¦ cM: færrest
+Nom : A → Z ¦ Jméno: A → Z ¦ Namn: A → Ö ¦ Navn: A → Å
+Nom : Z → A ¦ Jméno: Z → A ¦ Namn: Ö → A ¦ Navn: Å → A
+Segments : les plus nombreux ¦ Segmenty: nejvíc ¦ Segment: flest ¦ Segmenter: flest
+Les plus récemment modifiées ¦ Naposledy upravené ¦ Senast ändrade ¦ Senest ændrede
+Les plus anciennement modifiées ¦ Nejdéle neupravené ¦ Längst sedan ändrade ¦ Længst siden ændrede
+Supprimer les correspondances ¦ Smazat shody ¦ Radera matchningarna ¦ Slet matchene
+Nom (tel que sur le site) ¦ Jméno (jak je na webu) ¦ Namn (som på webbplatsen) ¦ Navn (som på webstedet)
+Relation proposée par la société ¦ Vztah navržený společností ¦ Släktskap som företaget föreslår ¦ Slægtskab foreslået af firmaet
+Ancêtre(s) commun(s) (MRCA) ¦ Společný předek/předkové (MRCA) ¦ Gemensam(ma) ana/anor (MRCA) ¦ Fælles ane(r) (MRCA)
+Jean Martin et Marie Durand ¦ Jean Martin a Marie Durand ¦ Jean Martin och Marie Durand ¦ Jean Martin og Marie Durand
+Étoiles (0 à 5) ¦ Hvězdičky (0 až 5) ¦ Stjärnor (0 till 5) ¦ Stjerner (0 til 5)
+Aucun groupe (« 🗂️ Groupes »). ¦ Žádná skupina („🗂️ Skupiny“). ¦ Inga grupper (”🗂️ Grupper”). ¦ Ingen grupper (»🗂️ Grupper«).
+Noms de famille en commun ¦ Společná příjmení ¦ Gemensamma släktnamn ¦ Fælles efternavne
+Lieux en commun ¦ Společná místa ¦ Gemensamma platser ¦ Fælles steder
+Arbre en ligne (adresse) ¦ Online rodokmen (adresa) ¦ Släktträd på nätet (adress) ¦ Online slægtstræ (adresse)
+Taille de son arbre ¦ Velikost jeho rodokmenu ¦ Storlek på hens släktträd ¦ Størrelse på personens slægtstræ
+(une par ligne ou séparées par ; — sert à la méthode de Leeds) ¦ (jedna na řádek nebo oddělené ; — slouží pro Leedsovu metodu) ¦ (en per rad eller åtskilda med ; — används för Leeds-metoden) ¦ (én pr. linje eller adskilt med ; — bruges til Leeds-metoden)
+Supprimer la correspondance ¦ Smazat shodu ¦ Radera matchningen ¦ Slet matchet
+CSV de la société ¦ CSV od společnosti ¦ CSV från företaget ¦ CSV fra firmaet
+Le fichier CSV exporté par la société (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch, LivingDNA) ou par un outil (DNA Painter, Genetic Affairs : AutoCluster, AutoTree) : la liste des correspondances ou les segments. Les colonnes sont reconnues toutes seules. Un fichier ADN brut (tes SNP) n’est jamais importé. ¦ Soubor CSV exportovaný společností (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch, LivingDNA) nebo nástrojem (DNA Painter, Genetic Affairs: AutoCluster, AutoTree): seznam shod nebo segmenty. Sloupce se rozpoznají samy. Surový soubor DNA (tvé SNP) se nikdy neimportuje. ¦ CSV-filen som exporterats av företaget (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch, LivingDNA) eller av ett verktyg (DNA Painter, Genetic Affairs: AutoCluster, AutoTree): listan över matchningar eller segmenten. Kolumnerna känns igen automatiskt. En rå DNA-fil (dina SNP) importeras aldrig. ¦ CSV-filen, der er eksporteret af firmaet (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch, LivingDNA) eller af et værktøj (DNA Painter, Genetic Affairs: AutoCluster, AutoTree): listen over match eller segmenterne. Kolonnerne genkendes automatisk. En rå DNA-fil (dine SNP) importeres aldrig.
+Fichier compressé : ouvre-le d’abord sur l’ordinateur et choisis le fichier .csv qu’il contient. (Un fichier ADN brut, lui, ne s’importe jamais.) ¦ Komprimovaný soubor: nejdřív ho otevři v počítači a vyber soubor .csv, který obsahuje. (Surový soubor DNA se nikdy neimportuje.) ¦ Komprimerad fil: öppna den först på datorn och välj .csv-filen den innehåller. (En rå DNA-fil importeras däremot aldrig.) ¦ Komprimeret fil: åbn den først på computeren, og vælg den .csv-fil, den indeholder. (En rå DNA-fil importeres derimod aldrig.)
+C’est un fichier compressé (.zip) : ouvre-le d’abord et choisis le .csv qu’il contient. ¦ Je to komprimovaný soubor (.zip): nejdřív ho otevři a vyber .csv, který obsahuje. ¦ Det är en komprimerad fil (.zip): öppna den först och välj .csv-filen den innehåller. ¦ Det er en komprimeret fil (.zip): åbn den først, og vælg den .csv, den indeholder.
+Colonnes non reconnues : il faut au moins le nom et les cM (correspondances), ou le chromosome, le début et la fin (segments). ¦ Sloupce nerozpoznány: je potřeba aspoň jméno a cM (shody), nebo chromozom, začátek a konec (segmenty). ¦ Kolumnerna känns inte igen: det behövs minst namn och cM (matchningar), eller kromosom, början och slut (segment). ¦ Kolonnerne blev ikke genkendt: der skal mindst være navn og cM (match), eller kromosom, start og slut (segmenter).
+Une correspondance déjà présente (même nom, même test) est mise à jour : tes notes, groupes, suivi et fiche liée sont gardés. ¦ Už existující shoda (stejné jméno, stejný test) se aktualizuje: tvé poznámky, skupiny, sledování a propojená karta zůstanou. ¦ En matchning som redan finns (samma namn, samma test) uppdateras: dina anteckningar, grupper, uppföljning och kopplade post behålls. ¦ Et match, der allerede findes (samme navn, samme test), opdateres: dine noter, grupper, opfølgning og forbundne post bevares.
+Remplacer tous les segments de ce test ¦ Nahradit všechny segmenty tohoto testu ¦ Ersätt alla segment i det här testet ¦ Erstat alle segmenter i denne test
+Choisis au moins la colonne du nom (« Colonnes reconnues »). ¦ Vyber aspoň sloupec se jménem („Rozpoznané sloupce“). ¦ Välj minst namnkolumnen (”Igenkända kolumner”). ¦ Vælg mindst navnekolonnen (»Genkendte kolonner«).
+Choisis les colonnes du chromosome, du début et de la fin (« Colonnes reconnues »). ¦ Vyber sloupce chromozomu, začátku a konce („Rozpoznané sloupce“). ¦ Välj kolumnerna för kromosom, början och slut (”Igenkända kolumner”). ¦ Vælg kolonnerne for kromosom, start og slut (»Genkendte kolonner«).
+Ce test n’a pas encore de segments à exporter : importe-les d’abord (⤒ Importer des segments). ¦ Tento test zatím nemá segmenty k exportu: nejdřív je importuj (⤒ Importovat segmenty). ¦ Det här testet har inga segment att exportera än: importera dem först (⤒ Importera segment). ¦ Denne test har endnu ingen segmenter at eksportere: importér dem først (⤒ Importér segmenter).
+Modifier le groupe ¦ Upravit skupinu ¦ Redigera gruppen ¦ Rediger gruppen
+Couple d’ancêtres supposé ¦ Předpokládaný pár předků ¦ Förmodat anpar ¦ Formodet anepar
+Supprimer le groupe ¦ Smazat skupinu ¦ Radera gruppen ¦ Slet gruppen
+Groupes et méthode de Leeds ¦ Skupiny a Leedsova metoda ¦ Grupper och Leeds-metoden ¦ Grupper og Leeds-metoden
+Range tes correspondances par branche. La méthode de Leeds regroupe les cousins de 2e et 3e degré (≈ 90 à 400 cM) qui se correspondent entre eux : chaque groupe pointe souvent vers un de tes 8 arrière-grands-parents… à condition d’avoir noté leurs « correspondances en commun ». ¦ Roztřiď své shody podle větví. Leedsova metoda seskupí bratrance 2. a 3. stupně (≈ 90 až 400 cM), kteří se shodují mezi sebou: každá skupina často ukazuje na jednoho z tvých 8 praprarodičů… pokud sis zapsal jejich „společné shody“. ¦ Ordna dina matchningar efter gren. Leeds-metoden grupperar tremänningar och fyrmänningar (≈ 90–400 cM) som matchar varandra: varje grupp pekar ofta mot en av dina 8 gammelföräldrar… förutsatt att du har noterat deras ”gemensamma matchningar”. ¦ Sortér dine match efter gren. Leeds-metoden grupperer halvfætre og tremmenninger (≈ 90–400 cM), der matcher hinanden: hver gruppe peger ofte mod en af dine 8 oldeforældre… forudsat at du har noteret deres »fælles match«.
+Aucun groupe pour l’instant ¦ Zatím žádná skupina ¦ Inga grupper än ¦ Ingen grupper endnu
+Méthode de Leeds automatique ¦ Automatická Leedsova metoda ¦ Automatisk Leeds-metod ¦ Automatisk Leeds-metode
+Pas encore de groupe trouvé : ouvre tes correspondances proches et remplis « Correspondances en commun » (ou importe une colonne « Shared matches »). ¦ Zatím nenalezena žádná skupina: otevři své blízké shody a vyplň „Společné shody“ (nebo importuj sloupec „Shared matches“). ¦ Inga grupper hittade än: öppna dina nära matchningar och fyll i ”Gemensamma matchningar” (eller importera en kolumn ”Shared matches”). ¦ Ingen grupper fundet endnu: åbn dine nære match, og udfyld »Fælles match« (eller importér en kolonne »Shared matches«).
+Les correspondances qui se correspondent entre elles forment des grappes : chaque grappe descend en général d’un même couple d’ancêtres. Le calcul utilise les « correspondances en commun » notées ou importées, et les segments qui se chevauchent sur un même chromosome. ¦ Shody, které se shodují mezi sebou, tvoří shluky: každý shluk obvykle pochází od stejného páru předků. Výpočet využívá zapsané nebo importované „společné shody“ a segmenty, které se překrývají na stejném chromozomu. ¦ Matchningar som matchar varandra bildar kluster: varje kluster härstammar i regel från samma anpar. Beräkningen använder noterade eller importerade ”gemensamma matchningar” och segment som överlappar på samma kromosom. ¦ Match, der matcher hinanden, danner klynger: hver klynge nedstammer som regel fra det samme anepar. Beregningen bruger noterede eller importerede »fælles match« og segmenter, der overlapper på samme kromosom.
+(ou mettre à jour ceux déjà créés) ¦ (nebo aktualizovat ty už vytvořené) ¦ (eller uppdatera dem som redan skapats) ¦ (eller opdatér dem, der allerede er oprettet)
+Pas encore de grappe : il faut des « correspondances en commun » (fiche d’une correspondance, ou colonne « Shared matches » à l’import) ou des segments (🧩 Chromosomes). ¦ Zatím žádný shluk: jsou potřeba „společné shody“ (karta shody, nebo sloupec „Shared matches“ při importu) nebo segmenty (🧩 Chromozomy). ¦ Inga kluster än: det behövs ”gemensamma matchningar” (en matchnings post, eller kolumnen ”Shared matches” vid import) eller segment (🧩 Kromosomer). ¦ Ingen klynger endnu: der skal »fælles match« til (et matchs post, eller kolonnen »Shared matches« ved import) eller segmenter (🧩 Kromosomer).
+Pour une correspondance (ou un nombre de cM), les relations possibles et les couples d’ancêtres de ton arbre par lesquels elle descend probablement, du plus au moins probable. On s’appuie sur les cM (Shared cM Project), le côté, les noms et lieux en commun, la grappe et l’âge : c’est une piste à vérifier, jamais une preuve. ¦ Pro shodu (nebo počet cM) možné vztahy a páry předků z tvého rodokmenu, od kterých pravděpodobně pochází, od nejpravděpodobnějšího. Vychází se z cM (Shared cM Project), strany, společných jmen a míst, shluku a věku: je to stopa k ověření, nikdy důkaz. ¦ För en matchning (eller ett antal cM): möjliga släktskap och de anpar i ditt släktträd som den troligen härstammar från, från mest till minst troligt. Det bygger på cM (Shared cM Project), sidan, gemensamma namn och platser, klustret och åldern: det är ett spår att kontrollera, aldrig ett bevis. ¦ For et match (eller et antal cM): mulige slægtskaber og de anepar i dit slægtstræ, det sandsynligvis nedstammer fra, fra mest til mindst sandsynligt. Det bygger på cM (Shared cM Project), siden, fælles navne og steder, klyngen og alderen: det er et spor at tjekke, aldrig et bevis.
+Placer un cousin dans l’arbre ¦ Umístit bratrance do rodokmenu ¦ Placera en kusin i släktträdet ¦ Placér en fætter i slægtstræet
+— ou les cM à la main ci-dessous — ¦ — nebo cM ručně níže — ¦ — eller cM för hand nedan — ¦ — eller cM i hånden herunder —
+Ce test n’est relié à aucune fiche : relie-le à la personne testée (🧬 Mes tests) pour que l’arbre serve au placement. ¦ Tento test není propojen s žádnou kartou: propoj ho s testovanou osobou (🧬 Moje testy), aby se rodokmen dal použít k umístění. ¦ Det här testet är inte kopplat till någon post: koppla det till den testade personen (🧬 Mina tester) så att släktträdet kan användas för placeringen. ¦ Denne test er ikke forbundet med nogen post: forbind den med den testede person (🧬 Mine test), så slægtstræet kan bruges til placeringen.
+Lecture de l’arbre… ¦ Čtení rodokmenu… ¦ Läser släktträdet… ¦ Læser slægtstræet…
+Ensuite : cherche les descendants de ce couple (« Descendance » dans Graphiques), compare avec l’arbre de la correspondance, et note-la dans la fiche (Ancêtre commun, Fiche liée). ¦ Potom: hledej potomky tohoto páru („Rozrod“ v Grafech), porovnej s rodokmenem shody a zapiš ji do karty (Společný předek, Propojená karta). ¦ Sedan: leta efter parets ättlingar (”Ättlingar” i Diagram), jämför med matchningens släktträd och notera den i posten (Gemensam ana, Kopplad post). ¦ Derefter: find parrets efterkommere (»Efterslægt« i Diagrammer), sammenlign med matchets slægtstræ, og notér det i posten (Fælles ane, Forbundet post).
+Indices ¦ Vodítka ¦ Ledtrådar ¦ Spor
+Retenir ¦ Zapamatovat ¦ Spara ¦ Gem
+Noté dans la correspondance (Ancêtre commun, côté). ¦ Zapsáno ve shodě (Společný předek, strana). ¦ Noterat i matchningen (Gemensam ana, sida). ¦ Noteret i matchet (Fælles ane, side).
+Le « navigateur de chromosomes » : où chaque correspondance partage de l’ADN avec toi. Des segments qui se chevauchent viennent peut-être du même ancêtre (triangulation — à confirmer : chacun doit aussi correspondre avec l’autre sur ce segment). ¦ „Prohlížeč chromozomů“: kde s tebou každá shoda sdílí DNA. Překrývající se segmenty možná pocházejí od stejného předka (triangulace — k potvrzení: každý se musí na tomto segmentu shodovat i s tím druhým). ¦ ”Kromosomläsaren”: var varje matchning delar DNA med dig. Segment som överlappar kommer kanske från samma ana (triangulering — att bekräfta: var och en måste också matcha den andra på det segmentet). ¦ »Kromosombrowseren«: hvor hvert match deler DNA med dig. Segmenter, der overlapper, stammer måske fra samme ane (triangulering — skal bekræftes: hver skal også matche den anden på det segment).
+Le fichier CSV que DNA Painter sait lire (« Paint a new match » → importer) ¦ Soubor CSV, který umí přečíst DNA Painter („Paint a new match“ → import) ¦ CSV-filen som DNA Painter kan läsa (”Paint a new match” → importera) ¦ CSV-filen, som DNA Painter kan læse (»Paint a new match« → importér)
+⤒ Importer des segments (CSV) ¦ ⤒ Importovat segmenty (CSV) ¦ ⤒ Importera segment (CSV) ¦ ⤒ Importér segmenter (CSV)
+⤓ Exporter pour DNA Painter ¦ ⤓ Exportovat pro DNA Painter ¦ ⤓ Exportera för DNA Painter ¦ ⤓ Eksportér til DNA Painter
+Segment ¦ Segment ¦ Segment ¦ Segment
+Chevauchements (triangulation possible) ¦ Překryvy (možná triangulace) ¦ Överlappningar (möjlig triangulering) ¦ Overlap (mulig triangulering)
+Chr ¦ Chr ¦ Kr ¦ Kr
+De (Mb) ¦ Od (Mb) ¦ Från (Mb) ¦ Fra (Mb)
+À (Mb) ¦ Do (Mb) ¦ Till (Mb) ¦ Til (Mb)
+Correspondance 1 ¦ Shoda 1 ¦ Matchning 1 ¦ Match 1
+Correspondance 2 ¦ Shoda 2 ¦ Matchning 2 ¦ Match 2
+Aucun pour l’instant. ¦ Zatím žádný. ¦ Inga än. ¦ Ingen endnu.
+Segment refusé : vérifie le chromosome, et que la fin est après le début. ¦ Segment odmítnut: zkontroluj chromozom a že konec je za začátkem. ¦ Segmentet avvisades: kontrollera kromosomen, och att slutet kommer efter början. ¦ Segmentet blev afvist: tjek kromosomet, og at slutningen ligger efter starten.
+Combien de centimorgans partagés pour quelle relation ? Valeurs indicatives d’après le Shared cM Project (Blaine Bettinger, version 4, 2020) : une moyenne et une fourchette observées sur des milliers de cas réels. Une même valeur peut convenir à plusieurs relations. ¦ Kolik sdílených centimorganů pro jaký vztah? Orientační hodnoty podle Shared cM Project (Blaine Bettinger, verze 4, 2020): průměr a rozpětí zjištěné na tisících skutečných případů. Stejná hodnota může odpovídat více vztahům. ¦ Hur många delade centimorgan för vilken släktskap? Riktvärden enligt Shared cM Project (Blaine Bettinger, version 4, 2020): ett medelvärde och ett intervall observerade i tusentals verkliga fall. Samma värde kan passa flera släktskap. ¦ Hvor mange delte centimorgan for hvilket slægtskab? Vejledende værdier ifølge Shared cM Project (Blaine Bettinger, version 4, 2020): et gennemsnit og et interval observeret i tusindvis af virkelige tilfælde. Den samme værdi kan passe til flere slægtskaber.
+Ex. 230 ¦ Např. 230 ¦ T.ex. 230 ¦ Fx 230
+Aucune relation connue pour cette valeur (au-delà de 3 720 cM, c’est soi-même ou un vrai jumeau). ¦ Pro tuto hodnotu není znám žádný vztah (nad 3 720 cM jde o tebe samotného nebo jednovaječné dvojče). ¦ Ingen känd släktskap för det här värdet (över 3 720 cM är det en själv eller en enäggstvilling). ¦ Intet kendt slægtskab for denne værdi (over 3 720 cM er det en selv eller en enægget tvilling).
+Tableau de référence ¦ Referenční tabulka ¦ Referenstabell ¦ Referencetabel
+Fourchette ¦ Rozpětí ¦ Intervall ¦ Interval
+D’après ton arbre : de qui viennent l’ADN-Y (père du père du père…), l’ADN mitochondrial (mère de la mère…) et l’ADN-X d’une personne. Utile pour savoir qui faire tester, et pour lire un haplogroupe ou une correspondance sur le X. ¦ Podle tvého rodokmenu: od koho pochází Y-DNA (otec otce otce…), mitochondriální DNA (matka matky…) a X-DNA osoby. Užitečné pro rozhodnutí, koho nechat otestovat, a pro čtení haploskupiny nebo shody na X. ¦ Enligt ditt släktträd: varifrån en persons Y-DNA (far till far till far…), mitokondriella DNA (mor till mor…) och X-DNA kommer. Användbart för att veta vem man ska låta testa, och för att tolka en haplogrupp eller en matchning på X. ¦ Ifølge dit slægtstræ: hvorfra en persons Y-DNA (far til far til far…), mitokondrielle DNA (mor til mor…) og X-DNA kommer. Nyttigt for at vide, hvem man skal lade teste, og for at læse en haplogruppe eller et match på X.
+Seuls les hommes ont un ADN-Y. Une femme n’a pas d’ADN-Y : ce sont ceux de son père, de ses frères ou d’un cousin du même nom qui le portent. ¦ Y-DNA mají jen muži. Žena Y-DNA nemá: nese ji její otec, bratři nebo bratranec se stejným příjmením. ¦ Bara män har Y-DNA. En kvinna har inget Y-DNA: det bärs av hennes far, hennes bröder eller en kusin med samma namn. ¦ Kun mænd har Y-DNA. En kvinde har intet Y-DNA: det bæres af hendes far, hendes brødre eller en fætter med samme navn.
+Pas de père connu dans l’arbre. ¦ V rodokmenu není znám otec. ¦ Ingen känd far i släktträdet. ¦ Ingen kendt far i slægtstræet.
+Tous ces hommes ont (presque) le même chromosome Y : un homme vivant de cette lignée peut le faire tester. ¦ Všichni tito muži mají (téměř) stejný chromozom Y: žijící muž z této linie si ho může nechat otestovat. ¦ Alla de här männen har (nästan) samma Y-kromosom: en levande man i den här linjen kan låta testa den. ¦ Alle disse mænd har (næsten) det samme Y-kromosom: en levende mand i denne linje kan få det testet.
+Pas de mère connue dans l’arbre. ¦ V rodokmenu není známa matka. ¦ Ingen känd mor i släktträdet. ¦ Ingen kendt mor i slægtstræet.
+Transmis par les mères à tous leurs enfants ; seules les filles le transmettent à leur tour. ¦ Předávají ji matky všem svým dětem; dál ji předávají jen dcery. ¦ Förs vidare av mödrarna till alla deras barn; bara döttrarna för den i sin tur vidare. ¦ Gives videre af mødrene til alle deres børn; kun døtrene giver det videre i deres tur.
+Un homme reçoit son X de sa mère seulement. Un père ne transmet que le X qu’il tient de sa mère : certains ancêtres ne peuvent donc pas avoir donné d’X. {n} : ¦ Muž dostává X jen od matky. Otec předává jen X, které má od své matky: někteří předkové proto X předat nemohli. {n}: ¦ En man får sitt X bara från sin mor. En far för bara vidare det X han har från sin mor: vissa anor kan alltså inte ha gett något X. {n}: ¦ En mand får kun sit X fra sin mor. En far giver kun det X videre, som han har fra sin mor: visse aner kan derfor ikke have givet noget X. {n}:
+Une femme reçoit un X de chaque parent. Un père ne transmet que le X qu’il tient de sa mère : certains ancêtres ne peuvent donc pas avoir donné d’X. {n} : ¦ Žena dostává X od každého rodiče. Otec předává jen X, které má od své matky: někteří předkové proto X předat nemohli. {n}: ¦ En kvinna får ett X från vardera föräldern. En far för bara vidare det X han har från sin mor: vissa anor kan alltså inte ha gett något X. {n}: ¦ En kvinde får et X fra hver forælder. En far giver kun det X videre, som han har fra sin mor: visse aner kan derfor ikke have givet noget X. {n}:
+Aucune estimation : ajoute-les dans un test (« 🧬 Mes tests » → Origines estimées). ¦ Žádný odhad: přidej ho do testu („🧬 Moje testy“ → Odhadovaný původ). ¦ Inga uppskattningar: lägg till dem i ett test (”🧬 Mina tester” → Uppskattat ursprung). ¦ Ingen skøn: tilføj dem i en test (»🧬 Mine test« → Anslået oprindelse).
+Ce que montre l’onglet, dans l’ordre voulu, et comment. ¦ Co karta ukazuje, v jakém pořadí a jak. ¦ Vad fliken visar, i önskad ordning, och hur. ¦ Hvad fanen viser, i den ønskede rækkefølge, og hvordan.
+Rubriques de la colonne de gauche ¦ Oddíly levého sloupce ¦ Avsnitt i vänsterkolumnen ¦ Afsnit i venstre kolonne
+Coche ce que tu veux voir ; ↑ ↓ pour l’ordre (ou glisse la poignée). ¦ Zaškrtni, co chceš vidět; ↑ ↓ pro pořadí (nebo přetáhni úchyt). ¦ Markera det du vill se; ↑ ↓ för ordningen (eller dra i handtaget). ¦ Sæt hak ved det, du vil se; ↑ ↓ for rækkefølgen (eller træk i håndtaget).
+Ne montrer que les correspondances d’au moins ¦ Zobrazit jen shody s aspoň ¦ Visa bara matchningar på minst ¦ Vis kun match på mindst
+Lignes affichées à la fois ¦ Řádků zobrazených najednou ¦ Rader som visas åt gången ¦ Linjer vist ad gangen
+Méthode de Leeds : de ¦ Leedsova metoda: od ¦ Leeds-metoden: från ¦ Leeds-metoden: fra
+Total de cM pour les % (6 800 Ancestry/MyHeritage, 7 400 23andMe) ¦ Celkem cM pro % (6 800 Ancestry/MyHeritage, 7 400 23andMe) ¦ Totalt antal cM för % (6 800 Ancestry/MyHeritage, 7 400 23andMe) ¦ Samlet antal cM til % (6 800 Ancestry/MyHeritage, 7 400 23andMe)
+Sauvegarde de l’onglet ¦ Záloha karty ¦ Säkerhetskopia av fliken ¦ Sikkerhedskopi af fanen
+Les tests, correspondances, segments et groupes sont dans la base (et ses sauvegardes). Tu peux aussi les exporter à part. ¦ Testy, shody, segmenty a skupiny jsou v databázi (a jejích zálohách). Můžeš je také exportovat zvlášť. ¦ Tester, matchningar, segment och grupper finns i databasen (och dess säkerhetskopior). Du kan också exportera dem separat. ¦ Test, match, segmenter og grupper ligger i databasen (og dens sikkerhedskopier). Du kan også eksportere dem separat.
+Fait. ¦ Hotovo. ¦ Klart. ¦ Færdig.
+C’est un fichier ADN brut (tes SNP, c’est-à-dire ton génome lettre par lettre) : il n’est jamais importé. Par prudence pour ta vie privée et celle de ta famille, et parce qu’en France un test génétique hors cadre médical ou de recherche est interdit, l’app ne garde que les listes de correspondances et de segments. Exporte plutôt depuis la société la liste des correspondances (matches) ou le navigateur de chromosomes. ¦ Je to surový soubor DNA (tvé SNP, tedy tvůj genom písmeno po písmenu): nikdy se neimportuje. Z opatrnosti kvůli tvému soukromí a soukromí tvé rodiny, a protože ve Francii je genetický test mimo lékařský nebo výzkumný rámec zakázán, aplikace ukládá jen seznamy shod a segmentů. Exportuj raději ze společnosti seznam shod (matches) nebo prohlížeč chromozomů. ¦ Det är en rå DNA-fil (dina SNP, alltså ditt genom bokstav för bokstav): den importeras aldrig. Av hänsyn till ditt och din familjs privatliv, och eftersom ett gentest utanför medicinskt eller forskningssammanhang är förbjudet i Frankrike, sparar appen bara listor över matchningar och segment. Exportera hellre listan över matchningar (matches) eller kromosomläsaren från företaget. ¦ Det er en rå DNA-fil (dine SNP, altså dit genom bogstav for bogstav): den importeres aldrig. Af hensyn til dit og din families privatliv, og fordi en gentest uden for en medicinsk eller forskningsmæssig ramme er forbudt i Frankrig, gemmer appen kun lister over match og segmenter. Eksportér hellere listen over match (matches) eller kromosombrowseren fra firmaet.
+=analysée ¦ analyzovaná|analyzované|analyzovaných ¦ analyserad|analyserade ¦ analyseret|analyserede
+=visage à nommer ¦ tvář k pojmenování|tváře k pojmenování|tváří k pojmenování ¦ ansikte att namnge|ansikten att namnge ¦ ansigt at navngive|ansigter at navngive
+=photo restante ¦ zbývající fotka|zbývající fotky|zbývajících fotek ¦ återstående foto|återstående foton ¦ resterende foto|resterende fotos
+=photo sautée ¦ přeskočená fotka|přeskočené fotky|přeskočených fotek ¦ överhoppat foto|överhoppade foton ¦ sprunget foto over|sprungne fotos over
+=visage ignoré ¦ ignorovaná tvář|ignorované tváře|ignorovaných tváří ¦ ignorerat ansikte|ignorerade ansikten ¦ ignoreret ansigt|ignorerede ansigter
+Impossible de charger le modèle de reconnaissance (connexion internet requise la première fois, ou fichier modifié refusé). ¦ Model rozpoznávání nelze načíst (napoprvé je potřeba připojení k internetu, nebo byl odmítnut upravený soubor). ¦ Det gick inte att ladda igenkänningsmodellen (internetanslutning krävs första gången, eller en ändrad fil avvisades). ¦ Genkendelsesmodellen kunne ikke indlæses (internetforbindelse kræves første gang, eller en ændret fil blev afvist).
+Bibliothèque… ¦ Knihovna… ¦ Bibliotek… ¦ Bibliotek…
+Bibliothèque illisible. ¦ Knihovna je nečitelná. ¦ Biblioteket kan inte läsas. ¦ Biblioteket kan ikke læses.
+Bibliothèque de reconnaissance indisponible. ¦ Knihovna rozpoznávání není k dispozici. ¦ Igenkänningsbiblioteket är inte tillgängligt. ¦ Genkendelsesbiblioteket er ikke tilgængeligt.
+Repérage des visages… ¦ Hledání tváří… ¦ Letar efter ansikten… ¦ Finder ansigter…
+Points du visage… ¦ Body obličeje… ¦ Ansiktspunkter… ¦ Ansigtspunkter…
+Empreintes des visages… ¦ Otisky tváří… ¦ Ansiktsavtryck… ¦ Ansigtsaftryk…
+Analyse arrêtée. ¦ Analýza zastavena. ¦ Analysen stoppad. ¦ Analysen stoppet.
+Fil de calcul impossible : {err} ¦ Výpočetní vlákno nelze spustit: {err} ¦ Beräkningstråden gick inte att starta: {err} ¦ Beregningstråden kunne ikke startes: {err}
+Le modèle met trop de temps à se charger. ¦ Model se načítá příliš dlouho. ¦ Modellen tar för lång tid att ladda. ¦ Modellen er for længe om at indlæse.
+le calcul a planté ¦ výpočet spadl ¦ beräkningen kraschade ¦ beregningen gik ned
+Fil de calcul en erreur. ¦ Chyba výpočetního vlákna. ¦ Fel i beräkningstråden. ¦ Fejl i beregningstråden.
+Calcul sur la page (plus lent)… ¦ Výpočet na stránce (pomalejší)… ¦ Beräknar på sidan (långsammare)… ¦ Beregner på siden (langsommere)…
+Redémarrage du calcul… ¦ Restart výpočtu… ¦ Startar om beräkningen… ¦ Genstarter beregningen…
+trop longue à analyser (plus de {n} s) ¦ analýza trvá příliš dlouho (přes {n} s) ¦ tar för lång tid att analysera (över {n} s) ¦ for lang tid at analysere (over {n} s)
+Étape 1 : l’app repère les visages sur les photos choisies. Étape 2 : elle propose un nom d’après les visages déjà identifiés. Tout se calcule sur cet ordinateur. ¦ Krok 1: aplikace najde tváře na vybraných fotkách. Krok 2: navrhne jméno podle již identifikovaných tváří. Vše se počítá na tomto počítači. ¦ Steg 1: appen hittar ansiktena på de valda fotona. Steg 2: den föreslår ett namn utifrån ansikten som redan identifierats. Allt beräknas på den här datorn. ¦ Trin 1: appen finder ansigterne på de valgte fotos. Trin 2: den foreslår et navn ud fra allerede identificerede ansigter. Alt beregnes på denne computer.
+MÉDIAS · VISAGES ¦ MÉDIA · TVÁŘE ¦ MEDIA · ANSIKTEN ¦ MEDIER · ANSIGTER
+Visages ¦ Tváře ¦ Ansikten ¦ Ansigter
+Chargement des photos… ¦ Načítání fotek… ¦ Laddar foton… ¦ Indlæser fotos…
+≈ {time} sur cet ordinateur ¦ ≈ {time} na tomto počítači ¦ ≈ {time} på den här datorn ¦ ≈ {time} på denne computer
+environ 1 à 3 s par photo, selon l’ordinateur ¦ asi 1 až 3 s na fotku, podle počítače ¦ ungefär 1–3 s per foto, beroende på datorn ¦ cirka 1–3 s pr. foto, afhængigt af computeren
+<b>{n}</b> identifiés ¦ Identifikováno: <b>{n}</b> ¦ <b>{n}</b> identifierade ¦ <b>{n}</b> identificeret
+<b>{n}</b> identifié ¦ <b>{n}</b> identifikovaný ¦ <b>{n}</b> identifierad ¦ <b>{n}</b> identificeret
+{n} identifiés ¦ Identifikováno: {n} ¦ {n} identifierade ¦ {n} identificeret
+{n} identifié ¦ {n} identifikovaný ¦ {n} identifierad ¦ {n} identificeret
+① Trouver les visages ¦ ① Najít tváře ¦ ① Hitta ansiktena ¦ ① Find ansigterne
+② Qui est-ce ? ¦ ② Kdo to je? ¦ ② Vem är det? ¦ ② Hvem er det?
+Les {n} plus récentes ¦ {n} nejnovějších ¦ De {n} senaste ¦ De {n} nyeste
+{n} à analyser ¦ K analýze: {n} ¦ {n} att analysera ¦ {n} at analysere
+<b>Analyse en pause</b> : {n} sur {total} ({what}). ¦ <b>Analýza pozastavena</b>: {n} z {total} ({what}). ¦ <b>Analysen pausad</b>: {n} av {total} ({what}). ¦ <b>Analysen sat på pause</b>: {n} af {total} ({what}).
+analyse|Abandonner ¦ Vzdát ¦ Avbryt ¦ Opgiv
+Quelles photos analyser ? ¦ Které fotky analyzovat? ¦ Vilka foton ska analyseras? ¦ Hvilke fotos skal analyseres?
+Sauter les photos déjà analysées ¦ Přeskočit už analyzované fotky ¦ Hoppa över redan analyserade foton ¦ Spring allerede analyserede fotos over
+Analyser {n} ¦ Analyzovat {n} ¦ Analysera {n} ¦ Analysér {n}
+Rien à analyser ici ¦ Tady není co analyzovat ¦ Inget att analysera här ¦ Intet at analysere her
+↻ Réessayer {n} ¦ ↻ Zkusit znovu {n} ¦ ↻ Försök igen {n} ¦ ↻ Prøv igen {n}
+Photos avec des visages à nommer ¦ Fotky s tvářemi k pojmenování ¦ Foton med ansikten att namnge ¦ Fotos med ansigter at navngive
+Ouvrir {name} ¦ Otevřít {name} ¦ Öppna {name} ¦ Åbn {name}
+détection simple ¦ jednoduchá detekce ¦ enkel detektering ¦ enkel registrering
+Ouvrir et identifier ¦ Otevřít a identifikovat ¦ Öppna och identifiera ¦ Åbn og identificér
+Tous les visages trouvés ont un nom ou ont été ignorés. 👍 ¦ Všechny nalezené tváře mají jméno nebo byly ignorovány. 👍 ¦ Alla hittade ansikten har ett namn eller har ignorerats. 👍 ¦ Alle fundne ansigter har et navn eller er ignoreret. 👍
+Lance une analyse : les photos où l’app trouve des visages apparaîtront ici. ¦ Spusť analýzu: fotky, na kterých aplikace najde tváře, se objeví tady. ¦ Starta en analys: foton där appen hittar ansikten visas här. ¦ Start en analyse: fotos, hvor appen finder ansigter, vises her.
+entre 1900 et 1950, vers 1925, 1960… ¦ mezi 1900 a 1950, kolem 1925, 1960… ¦ mellan 1900 och 1950, omkring 1925, 1960… ¦ mellem 1900 og 1950, omkring 1925, 1960…
+Les photos marquées avec des visages ¦ Fotky označené tvářemi ¦ Foton markerade med ansikten ¦ Fotos markeret med ansigter
+photo de la personne, portrait d’une fiche, visages déjà identifiés, étiquette « portrait » ou « visage » ¦ fotka osoby, portrét karty, už identifikované tváře, štítek „portrét“ nebo „tvář“ ¦ personens foto, porträtt i en post, redan identifierade ansikten, etikett ”porträtt” eller ”ansikte” ¦ personens foto, portræt i en post, allerede identificerede ansigter, etiket »portræt« eller »ansigt«
+Les photos affichées dans la liste Médias ¦ Fotky zobrazené v seznamu Média ¦ Foton som visas i listan Media ¦ Fotos vist på listen Medier
+avec ta recherche et tes filtres actuels ¦ s tvým současným hledáním a filtry ¦ med din nuvarande sökning och dina filter ¦ med din nuværende søgning og dine filtre
+Les photos d’une personne ¦ Fotky osoby ¦ En persons foton ¦ En persons fotos
+rattachées à sa fiche ou où elle est identifiée ¦ připojené k její kartě nebo kde je identifikována ¦ kopplade till hens post eller där hen är identifierad ¦ forbundet med personens post eller hvor personen er identificeret
+Les photos d’une étiquette ¦ Fotky se štítkem ¦ Foton med en etikett ¦ Fotos med en etiket
+Un album ou un dossier ¦ Album nebo složka ¦ Ett album eller en mapp ¦ Et album eller en mappe
+Une période ¦ Období ¦ En period ¦ En periode
+d’après la date de la photo, sinon sa date d’ajout ¦ podle data fotky, jinak data přidání ¦ enligt fotots datum, annars datumet då det lades till ¦ efter fotoets dato, ellers datoen, det blev tilføjet
+les dernières ajoutées ¦ naposledy přidané ¦ de senast tillagda ¦ de senest tilføjede
+Toutes les photos ¦ Všechny fotky ¦ Alla foton ¦ Alle fotos
+peut être long : tu peux mettre en pause et reprendre plus tard ¦ může to trvat dlouho: můžeš pozastavit a pokračovat později ¦ kan ta lång tid: du kan pausa och fortsätta senare ¦ kan tage lang tid: du kan holde pause og fortsætte senere
+En attendant, nomme les inconnus regroupés (👥). ¦ Mezitím pojmenuj seskupené neznámé (👥). ¦ Under tiden kan du namnge de grupperade okända (👥). ¦ I mellemtiden kan du navngive de grupperede ukendte (👥).
+Pour avoir des propositions : ouvre quelques photos et identifie les visages à la main (bouton « Identifier » de la visionneuse, ou « Ouvrir et identifier » à l’étape ①), au moins une fois par personne. ¦ Pro návrhy: otevři několik fotek a identifikuj tváře ručně (tlačítko „Identifikovat“ v prohlížeči, nebo „Otevřít a identifikovat“ v kroku ①), aspoň jednou u každé osoby. ¦ För att få förslag: öppna några foton och identifiera ansiktena för hand (knappen ”Identifiera” i visaren, eller ”Öppna och identifiera” i steg ①), minst en gång per person. ¦ For at få forslag: åbn nogle fotos, og identificér ansigterne i hånden (knappen »Identificér« i fremviseren, eller »Åbn og identificér« i trin ①), mindst én gang pr. person.
+Aucun visage trouvé pour l’instant. Commence par l’étape ① : choisis quelques photos et lance l’analyse. ¦ Zatím nenalezena žádná tvář. Začni krokem ①: vyber několik fotek a spusť analýzu. ¦ Inga ansikten hittade än. Börja med steg ①: välj några foton och starta analysen. ¦ Ingen ansigter fundet endnu. Start med trin ①: vælg nogle fotos, og start analysen.
+💡 Propositions ¦ 💡 Návrhy ¦ 💡 Förslag ¦ 💡 Forslag
+👥 Inconnus regroupés ¦ 👥 Seskupení neznámí ¦ 👥 Grupperade okända ¦ 👥 Grupperede ukendte
+❔ Autres inconnus ¦ ❔ Další neznámí ¦ ❔ Andra okända ¦ ❔ Andre ukendte
+✓ Identifiés ¦ ✓ Identifikovaní ¦ ✓ Identifierade ¦ ✓ Identificerede
+✓ Accepter les {n} très probables ¦ ✓ Přijmout velmi pravděpodobné ({n}) ¦ ✓ Godta de {n} mycket troliga ¦ ✓ Acceptér de {n} meget sandsynlige
+visage|probable ¦ pravděpodobné ¦ trolig ¦ sandsynlig
+ressemblance {pct} % ¦ podobnost {pct} % ¦ likhet {pct} % ¦ lighed {pct} %
+ou {name} ? ¦ nebo {name}? ¦ eller {name}? ¦ eller {name}?
+✓ Oui ¦ ✓ Ano ¦ ✓ Ja ¦ ✓ Ja
+Quelqu’un d’autre… ¦ Někdo jiný… ¦ Någon annan… ¦ En anden…
+Pas un visage, ou personne à ne pas nommer ¦ Není to tvář, nebo osoba, která se nemá jmenovat ¦ Inte ett ansikte, eller en person som inte ska namnges ¦ Ikke et ansigt, eller en person, der ikke skal navngives
+Aucune proposition pour l’instant : analyse plus de photos, ou identifie plus de visages à la main. ¦ Zatím žádný návrh: analyzuj víc fotek, nebo identifikuj víc tváří ručně. ¦ Inga förslag än: analysera fler foton, eller identifiera fler ansikten för hand. ¦ Ingen forslag endnu: analysér flere fotos, eller identificér flere ansigter i hånden.
+<b>{n} visages</b> qui se ressemblent, sur {p} photos. ¦ <b>Podobné tváře: {n}</b>, na fotkách: {p}. ¦ <b>{n} ansikten</b> som liknar varandra, på {p} foton. ¦ <b>{n} ansigter</b>, der ligner hinanden, på {p} fotos.
+Nommer… ¦ Pojmenovat… ¦ Namnge… ¦ Navngiv…
+Demander à la famille ¦ Zeptat se rodiny ¦ Fråga släkten ¦ Spørg familien
+Personne n’est encore identifié. ¦ Zatím nikdo není identifikován. ¦ Ingen är identifierad än. ¦ Ingen er identificeret endnu.
+⏸ En pause (la photo en cours se termine) ¦ ⏸ Pozastaveno (rozpracovaná fotka se dokončí) ¦ ⏸ Pausad (det pågående fotot slutförs) ¦ ⏸ På pause (det igangværende foto gøres færdigt)
+{s} s par photo · reste ≈ {left} ¦ {s} s na fotku · zbývá ≈ {left} ¦ {s} s per foto · återstår ≈ {left} ¦ {s} s pr. foto · tilbage ≈ {left}
+vitesse : on mesure… ¦ rychlost: měří se… ¦ hastighet: mäts… ¦ hastighed: måles…
+■ Arrêter ¦ ■ Zastavit ¦ ■ Stoppa ¦ ■ Stop
+Calcul sur la page (le fil à part n’a pas pu démarrer) : un peu plus lent. ¦ Výpočet na stránce (samostatné vlákno se nepodařilo spustit): o něco pomalejší. ¦ Beräkning på sidan (den separata tråden kunde inte starta): lite långsammare. ¦ Beregning på siden (den separate tråd kunne ikke starte): lidt langsommere.
+Modèle de reconnaissance indisponible ({why}). Détection simple du navigateur : les visages sont repérés, mais sans proposition de nom. ¦ Model rozpoznávání není k dispozici ({why}). Jednoduchá detekce prohlížeče: tváře se najdou, ale bez návrhu jména. ¦ Igenkänningsmodellen är inte tillgänglig ({why}). Webbläsarens enkla detektering: ansiktena hittas, men utan namnförslag. ¦ Genkendelsesmodellen er ikke tilgængelig ({why}). Browserens enkle registrering: ansigterne findes, men uden navneforslag.
+Chargement du modèle… ¦ Načítání modelu… ¦ Laddar modellen… ¦ Indlæser modellen…
+Chargement du modèle : {step} ¦ Načítání modelu: {step} ¦ Laddar modellen: {step} ¦ Indlæser modellen: {step}
+■ Analyse arrêtée : {n}{more}. ¦ ■ Analýza zastavena: {n}{more}. ¦ ■ Analysen stoppad: {n}{more}. ¦ ■ Analysen stoppet: {n}{more}.
+✓ Analyse finie : {n}{more}. ¦ ✓ Analýza dokončena: {n}{more}. ¦ ✓ Analysen klar: {n}{more}. ¦ ✓ Analysen færdig: {n}{more}.
+Il reste {n} : « ▶ Reprendre » quand tu veux. ¦ Zbývá {n}: „▶ Pokračovat“, kdy budeš chtít. ¦ {n} återstår: ”▶ Fortsätt” när du vill. ¦ {n} tilbage: »▶ Fortsæt«, når du vil.
+■ Analyse arrêtée. ¦ ■ Analýza zastavena. ¦ ■ Analysen stoppad. ¦ ■ Analysen stoppet.
+{n} : tu pourras reprendre. ¦ {n}: můžeš pokračovat později. ¦ {n}: du kan fortsätta senare. ¦ {n}: du kan fortsætte senere.
+Visage ignoré ¦ Tvář ignorována ¦ Ansiktet ignoreras ¦ Ansigtet ignoreres
+photos de {name} ¦ fotky {name} ¦ foton av {name} ¦ fotos af {name}
+photos sautées ¦ přeskočené fotky ¦ överhoppade foton ¦ sprungne fotos over
+Identifié : {name} ¦ Identifikováno: {name} ¦ Identifierad: {name} ¦ Identificeret: {name}
+{n} (certitude « probable ») ¦ {n} (jistota „pravděpodobné“) ¦ {n} (säkerhet ”trolig”) ¦ {n} (sikkerhed »sandsynlig«)
+Qui est-ce ? ({n} visages) ¦ Kdo to je? (tváře: {n}) ¦ Vem är det? ({n} ansikten) ¦ Hvem er det? ({n} ansigter)
+Certitude ¦ Jistota ¦ Säkerhet ¦ Sikkerhed
+Certaine ¦ Jistá ¦ Säker ¦ Sikker
+Possible ¦ Možná ¦ Möjlig ¦ Mulig
+Choisis… ¦ Vyber… ¦ Välj… ¦ Vælg…
+Hier et aujourd’hui ¦ Včera a dnes ¦ Då och nu ¦ Dengang og nu
+Nom de la comparaison ¦ Název porovnání ¦ Jämförelsens namn ¦ Sammenligningens navn
+Enregistrer la comparaison (reliée aux deux photos et aux personnes) ¦ Uložit porovnání (propojené s oběma fotkami a s osobami) ¦ Spara jämförelsen (kopplad till båda fotona och personerna) ¦ Gem sammenligningen (forbundet med begge fotos og personerne)
+A — l’image ancienne ¦ A — starý obrázek ¦ A — den gamla bilden ¦ A — det gamle billede
+B — la photo d’aujourd’hui ¦ B — dnešní fotka ¦ B — dagens foto ¦ B — dagens foto
+Photo A ¦ Fotka A ¦ Foto A ¦ Foto A
+Photo B ¦ Fotka B ¦ Foto B ¦ Foto B
+La photo A ¦ Fotka A ¦ Foto A ¦ Foto A
+La photo B ¦ Fotka B ¦ Foto B ¦ Foto B
+la photo A ¦ fotka A ¦ foto A ¦ foto A
+La photo « {name} » n’a pas pu être ouverte. ¦ Fotku „{name}“ se nepodařilo otevřít. ¦ Fotot ”{name}” kunde inte öppnas. ¦ Fotoet »{name}« kunne ikke åbnes.
+Choisis la photo B à droite → ¦ Vyber fotku B vpravo → ¦ Välj foto B till höger → ¦ Vælg foto B til højre →
+Choisis la photo A à droite → ¦ Vyber fotku A vpravo → ¦ Välj foto A till höger → ¦ Vælg foto A til højre →
+Clique <b>{what}</b> (à ta gauche sur l’écran). ¦ Klikni na <b>{what}</b> (vlevo od tebe na obrazovce). ¦ Klicka på <b>{what}</b> (till vänster på skärmen, sett från dig). ¦ Klik på <b>{what}</b> (til venstre på skærmen, set fra dig).
+Échap pour arrêter. ¦ Esc pro ukončení. ¦ Esc för att avbryta. ¦ Esc for at stoppe.
+Clique sur la photo <b>{side}</b> : {what}. ¦ Klikni na fotku <b>{side}</b>: {what}. ¦ Klicka på foto <b>{side}</b>: {what}. ¦ Klik på foto <b>{side}</b>: {what}.
+Aucun visage trouvé sur la photo {side} : pose les yeux en deux clics. ¦ Na fotce {side} nenalezena žádná tvář: označ oči dvěma kliky. ¦ Inget ansikte hittades på foto {side}: placera ögonen med två klick. ¦ Intet ansigt fundet på foto {side}: placér øjnene med to klik.
+Le modèle de visages n’a pas pu être chargé. ¦ Model tváří se nepodařilo načíst. ¦ Ansiktsmodellen kunde inte laddas. ¦ Ansigtsmodellen kunne ikke indlæses.
+Pose les yeux en deux clics par photo. ¦ Označ oči dvěma kliky na každé fotce. ¦ Placera ögonen med två klick per foto. ¦ Placér øjnene med to klik pr. foto.
+Pas encore de ressemblance calculée pour ces deux photos. ¦ Pro tyto dvě fotky zatím není spočítaná podobnost. ¦ Ingen likhet beräknad än för de här två fotona. ¦ Ingen lighed beregnet endnu for disse to fotos.
+« ✨ Repérer les yeux tout seul » la calcule (modèle de visages sur cet ordinateur), ou lance <b>👤 Visages</b> sur ces photos (Listes → Médias). ¦ „✨ Najít oči automaticky“ ji spočítá (model tváří na tomto počítači), nebo spusť <b>👤 Tváře</b> na těchto fotkách (Seznamy → Média). ¦ ”✨ Hitta ögonen automatiskt” beräknar den (ansiktsmodell på den här datorn), eller starta <b>👤 Ansikten</b> på de här fotona (Listor → Media). ¦ »✨ Find øjnene automatisk« beregner den (ansigtsmodel på denne computer), eller start <b>👤 Ansigter</b> på disse fotos (Lister → Medier).
+Calculée par le modèle de visages, sur cet ordinateur ({from}). L’âge, la lumière, l’angle et la qualité des photos changent beaucoup le résultat ; un air de famille (parent, frère, sœur) peut aussi donner une ressemblance forte. À confirmer par les actes. ¦ Spočítáno modelem tváří na tomto počítači ({from}). Věk, světlo, úhel a kvalita fotek výsledek hodně mění; rodinná podoba (rodič, bratr, sestra) může také dát silnou podobnost. Potvrď to záznamy. ¦ Beräknad av ansiktsmodellen på den här datorn ({from}). Ålder, ljus, vinkel och fotonas kvalitet påverkar resultatet mycket; ett släktdrag (förälder, bror, syster) kan också ge en stark likhet. Bekräfta med handlingar. ¦ Beregnet af ansigtsmodellen på denne computer ({from}). Alder, lys, vinkel og fotoenes kvalitet ændrer resultatet meget; et familietræk (forælder, bror, søster) kan også give en stærk lighed. Bekræft med dokumenter.
+visages repérés à l’instant ¦ tváře nalezené právě teď ¦ ansikten hittade just nu ¦ ansigter fundet lige nu
+visages trouvés par 👤 Visages ¦ tváře nalezené přes 👤 Tváře ¦ ansikten hittade av 👤 Ansikten ¦ ansigter fundet af 👤 Ansigter
+Rideau ¦ Opona ¦ Ridå ¦ Tæppe
+Part de B ¦ Podíl B ¦ Andel B ¦ Andel B
+La photo B, à poser à côté de « {name} ». ¦ Fotka B, kterou položíš vedle „{name}“. ¦ Foto B, som läggs bredvid ”{name}”. ¦ Foto B, som lægges ved siden af »{name}«.
+Une photo de cette personne ; ensuite, la photo à comparer. ¦ Fotka této osoby; potom fotka k porovnání. ¦ Ett foto av den här personen; sedan fotot att jämföra. ¦ Et foto af denne person; derefter fotoet, der skal sammenlignes.
+Comparer deux photos (ressemblance, même personne à deux âges…) ¦ Porovnat dvě fotky (podobnost, stejná osoba ve dvou věcích…) ¦ Jämför två foton (likhet, samma person i två åldrar…) ¦ Sammenlign to fotos (lighed, samme person i to aldre…)
+Ressemblance très forte — ce n’est pas une preuve ¦ Velmi silná podobnost — není to důkaz ¦ Mycket stark likhet — det är inget bevis ¦ Meget stærk lighed — det er ikke et bevis
+Ressemblance forte — ce n’est pas une preuve ¦ Silná podobnost — není to důkaz ¦ Stark likhet — det är inget bevis ¦ Stærk lighed — det er ikke et bevis
+Ressemblance moyenne — ce n’est pas une preuve ¦ Střední podobnost — není to důkaz ¦ Medelstark likhet — det är inget bevis ¦ Middel lighed — det er ikke et bevis
+Ressemblance faible — ce n’est pas une preuve ¦ Slabá podobnost — není to důkaz ¦ Svag likhet — det är inget bevis ¦ Svag lighed — det er ikke et bevis
+Affichage des deux photos ¦ Zobrazení obou fotek ¦ Visning av båda fotona ¦ Visning af begge fotos
+Zoomer et déplacer les deux photos ensemble ¦ Přibližovat a posouvat obě fotky současně ¦ Zooma och flytta båda fotona samtidigt ¦ Zoom og flyt begge fotos samtidig
+Zoomer ¦ Přiblížit ¦ Zooma ¦ Zoom
+Toute la photo ¦ Celá fotka ¦ Hela fotot ¦ Hele fotoet
+Toute la photo (double-clic) ¦ Celá fotka (dvojklik) ¦ Hela fotot (dubbelklick) ¦ Hele fotoet (dobbeltklik)
+Les deux photos : molette pour zoomer, glisser pour déplacer, double-clic pour revoir toute la photo ¦ Obě fotky: kolečkem přiblížíš, tažením posuneš, dvojklikem uvidíš celou fotku ¦ Båda fotona: hjulet för att zooma, dra för att flytta, dubbelklicka för att se hela fotot igen ¦ Begge fotos: hjulet for at zoome, træk for at flytte, dobbeltklik for at se hele fotoet igen
+Les deux photos ¦ Obě fotky ¦ Båda fotona ¦ Begge fotos
+Mettre A à la place de B et B à la place de A ¦ Dát A na místo B a B na místo A ¦ Sätt A i stället för B och B i stället för A ¦ Sæt A i stedet for B og B i stedet for A
+⇄ Échanger A et B ¦ ⇄ Prohodit A a B ¦ ⇄ Byt plats på A och B ¦ ⇄ Byt om på A og B
+Caler la photo d’aujourd’hui ¦ Zarovnat dnešní fotku ¦ Passa in dagens foto ¦ Tilpas dagens foto
+Clique deux mêmes repères sur chaque photo (le haut du clocher, le coin d’un toit…) : la photo d’aujourd’hui est tournée et mise à la même taille. ¦ Klikni na dva stejné body na každé fotce (vrchol věže, roh střechy…): dnešní fotka se otočí a upraví na stejnou velikost. ¦ Klicka på två likadana referenspunkter på varje foto (kyrktornets topp, hörnet av ett tak…): dagens foto vrids och får samma storlek. ¦ Klik på to ens referencepunkter på hvert foto (toppen af kirketårnet, hjørnet af et tag…): dagens foto drejes og får samme størrelse.
+Deux clics sur la photo A, puis les deux mêmes repères sur la photo B ¦ Dva kliky na fotku A, pak stejné dva body na fotce B ¦ Två klick på foto A, sedan samma två punkter på foto B ¦ To klik på foto A, derefter de samme to punkter på foto B
+📌 Poser 2 repères par photo ¦ 📌 Označit 2 body na každé fotce ¦ 📌 Sätt 2 referenspunkter per foto ¦ 📌 Sæt 2 referencepunkter pr. foto
+Caler sur les repères ¦ Zarovnat podle bodů ¦ Passa in efter punkterna ¦ Tilpas efter punkterne
+✕ Retirer les repères ¦ ✕ Odebrat body ¦ ✕ Ta bort punkterna ¦ ✕ Fjern punkterne
+Ajuster à la main ¦ Upravit ručně ¦ Justera för hand ¦ Justér i hånden
+Glisser sur l’image déplace seulement la photo d’aujourd’hui ¦ Tažení po obrázku posune jen dnešní fotku ¦ Att dra på bilden flyttar bara dagens foto ¦ Træk på billedet flytter kun dagens foto
+Glisser déplace la photo B ¦ Tažení posune fotku B ¦ Dra flyttar foto B ¦ Træk flytter foto B
+Les yeux (alignement) ¦ Oči (zarovnání) ¦ Ögonen (justering) ¦ Øjnene (justering)
+Les deux visages sont mis à la même taille, les yeux à la même hauteur : la comparaison est bien plus juste. ¦ Obě tváře se upraví na stejnou velikost, oči do stejné výšky: porovnání je mnohem přesnější. ¦ Båda ansiktena får samma storlek, ögonen på samma höjd: jämförelsen blir mycket rättvisare. ¦ Begge ansigter får samme størrelse, øjnene i samme højde: sammenligningen bliver meget mere præcis.
+✨ Repérer les yeux tout seul ¦ ✨ Najít oči automaticky ¦ ✨ Hitta ögonen automatiskt ¦ ✨ Find øjnene automatisk
+Clique l’œil gauche puis l’œil droit sur chaque photo ¦ Klikni na levé a pak pravé oko na každé fotce ¦ Klicka på vänster öga och sedan höger öga på varje foto ¦ Klik på venstre øje og derefter højre øje på hvert foto
+👁 Poser les yeux (2 clics par photo) ¦ 👁 Označit oči (2 kliky na fotku) ¦ 👁 Placera ögonen (2 klick per foto) ¦ 👁 Placér øjnene (2 klik pr. foto)
+Aligner sur les yeux ¦ Zarovnat podle očí ¦ Justera efter ögonen ¦ Justér efter øjnene
+✕ Retirer les yeux posés ¦ ✕ Odebrat označené oči ¦ ✕ Ta bort de placerade ögonen ¦ ✕ Fjern de placerede øjne
+Prises sur les deux photos ; ajoute ou retire qui tu veux. ¦ Převzato z obou fotek; přidej nebo odeber, koho chceš. ¦ Hämtade från båda fotona; lägg till eller ta bort vem du vill. ¦ Hentet fra begge fotos; tilføj eller fjern, hvem du vil.
+Ce que tu remarques : forme du nez, des oreilles, implantation des cheveux, grain de beauté, âge supposé… ¦ Čeho si všimneš: tvar nosu, uší, linie vlasů, mateřské znaménko, předpokládaný věk… ¦ Vad du lägger märke till: näsans form, öronen, hårfästet, födelsemärke, antagen ålder… ¦ Hvad du bemærker: næsens form, ørerne, hårgrænsen, modermærke, formodet alder…
+Fondu : part de la photo B ; rideau : place du rideau ¦ Prolnutí: podíl fotky B; opona: poloha opony ¦ Övertoning: andel av foto B; ridå: ridåns läge ¦ Overtoning: andel af foto B; tæppe: tæppets placering
+Choisis une photo (image). ¦ Vyber fotku (obrázek). ¦ Välj ett foto (bild). ¦ Vælg et foto (billede).
+C’est déjà l’autre photo : choisis-en une autre. ¦ To už je ta druhá fotka: vyber jinou. ¦ Det är redan det andra fotot: välj ett annat. ¦ Det er allerede det andet foto: vælg et andet.
+Choisis les deux photos à comparer ¦ Vyber dvě fotky k porovnání ¦ Välj de två fotona att jämföra ¦ Vælg de to fotos, der skal sammenlignes
+Deux portraits : la même personne à deux âges, deux personnes qu’on croit parentes… ¦ Dva portréty: stejná osoba ve dvou věcích, dvě osoby, o kterých si myslíme, že jsou příbuzné… ¦ Två porträtt: samma person i två åldrar, två personer som man tror är släkt… ¦ To portrætter: samme person i to aldre, to personer, man tror er i familie…
+🖼 Choisir la photo A ¦ 🖼 Vybrat fotku A ¦ 🖼 Välj foto A ¦ 🖼 Vælg foto A
+Pose d’abord deux repères sur chaque photo (📌). ¦ Nejdřív označ dva body na každé fotce (📌). ¦ Sätt först två referenspunkter på varje foto (📌). ¦ Sæt først to referencepunkter på hvert foto (📌).
+Pose d’abord les yeux sur les deux photos (✨ tout seul, ou 👁 deux clics par photo). ¦ Nejdřív označ oči na obou fotkách (✨ automaticky, nebo 👁 dva kliky na fotku). ¦ Placera först ögonen på båda fotona (✨ automatiskt, eller 👁 två klick per foto). ¦ Placér først øjnene på begge fotos (✨ automatisk, eller 👁 to klik pr. foto).
+le repère 1 sur l’image ancienne (A) ¦ bod 1 na starém obrázku (A) ¦ referenspunkt 1 på den gamla bilden (A) ¦ referencepunkt 1 på det gamle billede (A)
+le repère 2 sur l’image ancienne (A) ¦ bod 2 na starém obrázku (A) ¦ referenspunkt 2 på den gamla bilden (A) ¦ referencepunkt 2 på det gamle billede (A)
+le même repère 1 sur la photo d’aujourd’hui (B) ¦ stejný bod 1 na dnešní fotce (B) ¦ samma referenspunkt 1 på dagens foto (B) ¦ samme referencepunkt 1 på dagens foto (B)
+le même repère 2 sur la photo d’aujourd’hui (B) ¦ stejný bod 2 na dnešní fotce (B) ¦ samma referenspunkt 2 på dagens foto (B) ¦ samme referencepunkt 2 på dagens foto (B)
+l’œil de gauche de la photo A ¦ levé oko na fotce A ¦ vänster öga på foto A ¦ venstre øje på foto A
+l’œil de droite de la photo A ¦ pravé oko na fotce A ¦ höger öga på foto A ¦ højre øje på foto A
+l’œil de gauche de la photo B ¦ levé oko na fotce B ¦ vänster öga på foto B ¦ venstre øje på foto B
+l’œil de droite de la photo B ¦ pravé oko na fotce B ¦ höger öga på foto B ¦ højre øje på foto B
+Choisis d’abord les deux photos. ¦ Nejdřív vyber obě fotky. ¦ Välj först de två fotona. ¦ Vælg først de to fotos.
+Repères non posés : rien n’a changé. ¦ Body neoznačeny: nic se nezměnilo. ¦ Referenspunkterna inte placerade: inget har ändrats. ¦ Referencepunkterne ikke sat: intet er ændret.
+Yeux non posés : rien n’a changé. ¦ Oči neoznačeny: nic se nezměnilo. ¦ Ögonen inte placerade: inget har ändrats. ¦ Øjnene ikke placeret: intet er ændret.
+Repères posés : la photo d’aujourd’hui est calée sur l’ancienne. ¦ Body označeny: dnešní fotka je zarovnána na starou. ¦ Referenspunkterna placerade: dagens foto är inpassat efter det gamla. ¦ Referencepunkterne sat: dagens foto er tilpasset det gamle.
+Yeux posés : les deux visages sont alignés. ¦ Oči označeny: obě tváře jsou zarovnané. ¦ Ögonen placerade: båda ansiktena är justerade. ¦ Øjnene placeret: begge ansigter er justeret.
+Le modèle de visages n’est pas disponible ici : pose les yeux en deux clics par photo. ¦ Model tváří tu není k dispozici: označ oči dvěma kliky na každé fotce. ¦ Ansiktsmodellen är inte tillgänglig här: placera ögonen med två klick per foto. ¦ Ansigtsmodellen er ikke tilgængelig her: placér øjnene med to klik pr. foto.
+Le modèle de visages (≈ 13 Mo, sur cet ordinateur seulement) se charge une fois, au premier clic. ¦ Model tváří (≈ 13 MB, jen na tomto počítači) se načte jednou, při prvním kliknutí. ¦ Ansiktsmodellen (≈ 13 MB, bara på den här datorn) laddas en gång, vid första klicket. ¦ Ansigtsmodellen (≈ 13 MB, kun på denne computer) indlæses én gang, ved første klik.
+Visages trouvés : les yeux sont alignés. ¦ Tváře nalezeny: oči jsou zarovnané. ¦ Ansikten hittade: ögonen är justerade. ¦ Ansigter fundet: øjnene er justeret.
+Le modèle de visages n’a pas pu être chargé (il faut internet la première fois) : pose les yeux en deux clics par photo. ¦ Model tváří se nepodařilo načíst (napoprvé je potřeba internet): označ oči dvěma kliky na každé fotce. ¦ Ansiktsmodellen kunde inte laddas (internet behövs första gången): placera ögonen med två klick per foto. ¦ Ansigtsmodellen kunne ikke indlæses (internet kræves første gang): placér øjnene med to klik pr. foto.
+Choisis les deux photos. ¦ Vyber obě fotky. ¦ Välj de två fotona. ¦ Vælg de to fotos.
+Choisis les deux photos avant d’enregistrer. ¦ Před uložením vyber obě fotky. ¦ Välj de två fotona innan du sparar. ¦ Vælg de to fotos, før du gemmer.
+Les derniers changements de la comparaison ne sont pas enregistrés. ¦ Poslední změny porovnání nejsou uložené. ¦ De senaste ändringarna i jämförelsen är inte sparade. ¦ De seneste ændringer i sammenligningen er ikke gemt.
+C’est la même photo : choisis-en une autre. ¦ Je to stejná fotka: vyber jinou. ¦ Det är samma foto: välj ett annat. ¦ Det er det samme foto: vælg et andet.
+comparaison de photos ¦ porovnání fotek ¦ jämförelse av foton ¦ sammenligning af fotos
+Deux photos ¦ Dvě fotky ¦ Två foton ¦ To fotos
+=autre déplacement ¦ další cesta|další cesty|dalších cest ¦ annan förflyttning|andra förflyttningar ¦ anden rejse|andre rejser
+=déplacement ¦ cesta|cesty|cest ¦ förflyttning|förflyttningar ¦ rejse|rejser
+=personne vivante ou confidentielle ¦ žijící nebo důvěrná osoba|žijící nebo důvěrné osoby|žijících nebo důvěrných osob ¦ levande eller konfidentiell person|levande eller konfidentiella personer ¦ levende eller fortrolig person|levende eller fortrolige personer
+=lieu de la famille ¦ rodinné místo|rodinná místa|rodinných míst ¦ plats i släkten|platser i släkten ¦ sted i familien|steder i familien
+=couche importée ¦ importovaná vrstva|importované vrstvy|importovaných vrstev ¦ importerat lager|importerade lager ¦ importeret lag|importerede lag
+=couche ¦ vrstva|vrstvy|vrstev ¦ lager|lager ¦ lag|lag
+{n} jours ({w} semaines) ¦ dní: {n} (týdnů: {w}) ¦ {n} dagar ({w} veckor) ¦ {n} dage ({w} uger)
+Il faut environ {dur} pour aller de {from} à {to} ({how}, ≈ {what}). ¦ Cesta z {from} do {to} trvá asi {dur} ({how}, ≈ {what}). ¦ Det tar ungefär {dur} att ta sig från {from} till {to} ({how}, ≈ {what}). ¦ Det tager omkring {dur} at komme fra {from} til {to} ({how}, ≈ {what}).
+Il faut environ {dur} pour aller de {from} à {to} en {year} ({how}, ≈ {what}). ¦ Cesta z {from} do {to} trvá v roce {year} asi {dur} ({how}, ≈ {what}). ¦ Det tar ungefär {dur} att ta sig från {from} till {to} år {year} ({how}, ≈ {what}). ¦ Det tager omkring {dur} at komme fra {from} til {to} i {year} ({how}, ≈ {what}).
+Il fallait environ {dur} pour aller de {from} à {to} en {year} ({how}, ≈ {what}). ¦ Cesta z {from} do {to} trvala v roce {year} asi {dur} ({how}, ≈ {what}). ¦ Det tog ungefär {dur} att ta sig från {from} till {to} år {year} ({how}, ≈ {what}). ¦ Det tog omkring {dur} at komme fra {from} til {to} i {year} ({how}, ≈ {what}).
+{km} sur l’eau ¦ {km} po vodě ¦ {km} på vattnet ¦ {km} på vandet
+{km} de voie ¦ {km} po trati ¦ {km} järnväg ¦ {km} jernbane
+{km} de route ¦ {km} po silnici ¦ {km} väg ¦ {km} vej
+À pied ¦ Pěšky ¦ Till fots ¦ Til fods
+à pied ¦ pěšky ¦ till fots ¦ til fods
+À cheval ¦ Na koni ¦ Till häst ¦ Til hest
+à cheval ¦ na koni ¦ till häst ¦ til hest
+En diligence ¦ Dostavníkem ¦ Med diligens ¦ Med diligence
+en diligence ¦ dostavníkem ¦ med diligens ¦ med diligence
+Bateau (rivière) ¦ Loď (řeka) ¦ Båt (flod) ¦ Båd (flod)
+en bateau sur la rivière ¦ lodí po řece ¦ med båt på floden ¦ med båd på floden
+Bateau (mer) ¦ Loď (moře) ¦ Båt (hav) ¦ Båd (hav)
+en bateau ¦ lodí ¦ med båt ¦ med båd
+En train ¦ Vlakem ¦ Med tåg ¦ Med tog
+en train ¦ vlakem ¦ med tåg ¦ med tog
+4 à 5 km/h, 8 heures de marche par jour ¦ 4 až 5 km/h, 8 hodin chůze denně ¦ 4–5 km/h, 8 timmars gång per dag ¦ 4–5 km/t, 8 timers gang om dagen
+au pas et au trot, en ménageant sa monture (un courrier qui change de cheval aux relais va deux fois plus loin) ¦ krokem a klusem, s ohledem na koně (kurýr, který na přepřahacích stanicích mění koně, dojede dvakrát dál) ¦ i skritt och trav, varsamt med hästen (en kurir som byter häst vid gästgiverierna kommer dubbelt så långt) ¦ i skridt og trav, skånsomt med hesten (en kurer, der skifter hest ved skiftestederne, kommer dobbelt så langt)
+coches puis diligences et malles-poste ; on roule de plus en plus la nuit ¦ kočáry, pak dostavníky a poštovní vozy; stále víc se jezdí i v noci ¦ vagnar, sedan diligenser och postvagnar; man kör allt oftare på natten ¦ karosser, derefter diligencer og postvogne; man kører mere og mere om natten
+coche d’eau, halage, puis bateaux à vapeur ¦ říční osobní lodě, vlečení lodí, pak parníky ¦ passagerpråmar, bogsering från land, sedan ångbåtar ¦ passagerpramme, trækning fra land, derefter dampskibe
+à la voile jusque vers 1840, puis à la vapeur ¦ pod plachtami zhruba do roku 1840, pak parou ¦ med segel fram till omkring 1840, sedan med ånga ¦ for sejl til omkring 1840, derefter med damp
+selon les lignes ouvertes : grandes lignes de 1840 à 1860, petites lignes jusque vers 1910 ¦ podle otevřených tratí: hlavní tratě 1840 až 1860, místní tratě zhruba do roku 1910 ¦ beroende på öppnade linjer: stambanor 1840–1860, mindre banor fram till omkring 1910 ¦ afhængigt af åbnede linjer: hovedbaner 1840–1860, mindre baner til omkring 1910
+par la route ¦ po silnici ¦ landvägen ¦ ad landevejen
+par la rivière ¦ po řece ¦ via floden ¦ ad floden
+par la mer ¦ po moři ¦ sjövägen ¦ ad søvejen
+par le rail ¦ po železnici ¦ med järnväg ¦ med jernbane
+Fernand Braudel, « Civilisation matérielle, économie et capitalisme » (1979) et « L’identité de la France » (1986) : à pied, 30 à 40 km par jour ; à cheval, 50 à 60 km par jour pour un voyageur qui garde sa monture. ¦ Fernand Braudel, „Civilisation matérielle, économie et capitalisme“ (1979) a „L’identité de la France“ (1986): pěšky 30 až 40 km denně; na koni 50 až 60 km denně pro cestovatele, který si ponechá svého koně. ¦ Fernand Braudel, ”Civilisation matérielle, économie et capitalisme” (1979) och ”L’identité de la France” (1986): till fots 30–40 km per dag; till häst 50–60 km per dag för en resenär som behåller sin häst. ¦ Fernand Braudel, »Civilisation matérielle, économie et capitalisme« (1979) og »L’identité de la France« (1986): til fods 30–40 km om dagen; til hest 50–60 km om dagen for en rejsende, der beholder sin hest.
+Règlements militaires (XVIIIᵉ–XIXᵉ s.) : l’étape ordinaire d’une troupe à pied est de 24 à 28 km par jour ; un marcheur seul fait davantage. ¦ Vojenské předpisy (18.–19. stol.): běžný denní pochod pěšího vojska je 24 až 28 km; osamělý chodec ujde víc. ¦ Militära reglementen (1700–1800-talen): en fottrupps vanliga dagsetapp är 24–28 km; en ensam vandrare går längre. ¦ Militære reglementer (1700–1800-tallet): en fodtrops almindelige dagsetape er 24–28 km; en enlig vandrer går længere.
+Guy Arbellot, « La grande mutation des routes de France au milieu du XVIIIᵉ siècle », Annales ESC, 1973, et « Atlas de la Révolution française », t. 1 « Routes et communications » (1987) : les temps de parcours depuis Paris sont presque divisés par deux entre 1765 et 1780 (turgotines). ¦ Guy Arbellot, „La grande mutation des routes de France au milieu du XVIIIᵉ siècle“, Annales ESC, 1973, a „Atlas de la Révolution française“, sv. 1 „Routes et communications“ (1987): doba cesty z Paříže se mezi lety 1765 a 1780 zkrátila skoro na polovinu (turgotiny). ¦ Guy Arbellot, ”La grande mutation des routes de France au milieu du XVIIIᵉ siècle”, Annales ESC, 1973, och ”Atlas de la Révolution française”, bd 1 ”Routes et communications” (1987): restiderna från Paris halverades nästan mellan 1765 och 1780 (turgotiner). ¦ Guy Arbellot, »La grande mutation des routes de France au milieu du XVIIIᵉ siècle«, Annales ESC, 1973, og »Atlas de la Révolution française«, bd. 1 »Routes et communications« (1987): rejsetiderne fra Paris blev næsten halveret mellem 1765 og 1780 (turgotiner).
+Christophe Studeny, « L’invention de la vitesse. France, XVIIIᵉ–XXᵉ siècle » (Gallimard, 1995) : diligences des Messageries roulant jour et nuit vers 1830, malles-poste à près de 10 km/h vers 1845. ¦ Christophe Studeny, „L’invention de la vitesse. France, XVIIIᵉ–XXᵉ siècle“ (Gallimard, 1995): dostavníky Messageries jezdící ve dne v noci kolem roku 1830, poštovní vozy téměř 10 km/h kolem roku 1845. ¦ Christophe Studeny, ”L’invention de la vitesse. France, XVIIIᵉ–XXᵉ siècle” (Gallimard, 1995): Messageries diligenser som körde dag och natt omkring 1830, postvagnar i nästan 10 km/h omkring 1845. ¦ Christophe Studeny, »L’invention de la vitesse. France, XVIIIᵉ–XXᵉ siècle« (Gallimard, 1995): Messageries’ diligencer, der kørte dag og nat omkring 1830, postvogne med næsten 10 km/t omkring 1845.
+François Caron, « Histoire des chemins de fer en France », t. 1 (1997) : première ligne de voyageurs en 1837 (Paris – Saint-Germain), grandes lignes ouvertes de 1840 à 1860, environ 40 km/h de moyenne arrêts compris vers 1860. ¦ François Caron, „Histoire des chemins de fer en France“, sv. 1 (1997): první osobní trať v roce 1837 (Paříž – Saint-Germain), hlavní tratě otevřené 1840 až 1860, kolem roku 1860 průměrně asi 40 km/h včetně zastávek. ¦ François Caron, ”Histoire des chemins de fer en France”, bd 1 (1997): första persontrafiklinjen 1837 (Paris – Saint-Germain), stambanor öppnade 1840–1860, omkring 40 km/h i snitt inklusive uppehåll kring 1860. ¦ François Caron, »Histoire des chemins de fer en France«, bd. 1 (1997): første passagerlinje i 1837 (Paris – Saint-Germain), hovedbaner åbnet 1840–1860, omkring 40 km/t i gennemsnit inklusive stop omkring 1860.
+Traversées de l’Atlantique Nord : 30 à 45 jours à la voile ; 12 à 14 jours en vapeur vers 1860 ; 6 à 7 jours vers 1900 ; 4 à 5 jours pour les grands paquebots des années 1930. ¦ Plavby přes severní Atlantik: 30 až 45 dní pod plachtami; 12 až 14 dní parníkem kolem roku 1860; 6 až 7 dní kolem roku 1900; 4 až 5 dní velkými zaoceánskými loděmi ve 30. letech. ¦ Överfarter över Nordatlanten: 30–45 dagar med segel; 12–14 dagar med ånga omkring 1860; 6–7 dagar omkring 1900; 4–5 dagar för de stora oceanångarna på 1930-talet. ¦ Overfarter over Nordatlanten: 30–45 dage for sejl; 12–14 dage med damp omkring 1860; 6–7 dage omkring 1900; 4–5 dage for de store oceandampere i 1930’erne.
+Coches d’eau et halage : 20 à 40 km par jour en remontant, davantage en descendant ; premiers bateaux à vapeur sur la Saône et le Rhône vers 1830. ¦ Říční osobní lodě a vlečení: 20 až 40 km denně proti proudu, víc po proudu; první parníky na Saôně a Rhôně kolem roku 1830. ¦ Passagerpråmar och bogsering: 20–40 km per dag uppströms, mer nedströms; de första ångbåtarna på Saône och Rhône omkring 1830. ¦ Passagerpramme og trækning: 20–40 km om dagen mod strømmen, mere med strømmen; de første dampskibe på Saône og Rhône omkring 1830.
+réglé ¦ nastaveno ¦ inställd ¦ indstillet
+Vitesse réglée par toi ¦ Rychlost nastavená tebou ¦ Hastighet inställd av dig ¦ Hastighed indstillet af dig
+Pas avant {year} ¦ Ne před rokem {year} ¦ Inte före {year} ¦ Ikke før {year}
+km/j ¦ km/den ¦ km/dag ¦ km/dag
+{name} : kilomètres par jour ¦ {name}: kilometrů za den ¦ {name}: kilometer per dag ¦ {name}: kilometer om dagen
+Détour {how} ¦ Zajížďka {how} ¦ Omväg {how} ¦ Omvej {how}
+Vitesses de trajet enregistrées ¦ Rychlosti cesty uloženy ¦ Reshastigheter sparade ¦ Rejsehastigheder gemt
+Vitesses remises comme au départ ¦ Rychlosti obnoveny na výchozí ¦ Hastigheterna återställda som från början ¦ Hastighederne nulstillet som fra start
+Tulle, Brive… ¦ Tulle, Brive… ¦ Tulle, Brive… ¦ Tulle, Brive…
+Paris… ¦ Paříž… ¦ Paris… ¦ Paris…
+Un des deux lieux n’a pas de position sur la carte ({name}) : place-le d’abord. ¦ Jedno z obou míst nemá polohu na mapě ({name}): nejdřív ho umísti. ¦ En av de två platserna har ingen position på kartan ({name}): placera den först. ¦ Et af de to steder har ingen position på kortet ({name}): placér det først.
+À vol d’oiseau : <b>{km}</b> ¦ Vzdušnou čarou: <b>{km}</b> ¦ Fågelvägen: <b>{km}</b> ¦ I luftlinje: <b>{km}</b>
+Je relis ses événements… ¦ Pročítám jeho události… ¦ Läser igenom hens händelser… ¦ Gennemgår personens begivenheder…
+Au total, environ <b>{km}</b> à vol d’oiseau d’un lieu de vie à l’autre ({n}). ¦ Celkem asi <b>{km}</b> vzdušnou čarou z jednoho místa pobytu do druhého ({n}). ¦ Totalt ungefär <b>{km}</b> fågelvägen från en bostadsort till en annan ({n}). ¦ I alt omkring <b>{km}</b> i luftlinje fra et bosted til et andet ({n}).
+Distance parcourue ¦ Ujetá vzdálenost ¦ Tillryggalagd sträcka ¦ Tilbagelagt afstand
+Par jour ¦ Za den ¦ Per dag ¦ Om dagen
+⚙️ Vitesses et sources ¦ ⚙️ Rychlosti a prameny ¦ ⚙️ Hastigheter och källor ¦ ⚙️ Hastigheder og kilder
+Les vitesses suivent l’époque (ordres de grandeur pour la France et l’Europe de l’Ouest). Écris une autre distance par jour pour un moyen ; vide = selon l’époque. ¦ Rychlosti odpovídají době (řádové hodnoty pro Francii a západní Evropu). Napiš jinou vzdálenost za den pro dopravní prostředek; prázdné = podle doby. ¦ Hastigheterna följer epoken (storleksordningar för Frankrike och Västeuropa). Skriv en annan sträcka per dag för ett färdsätt; tomt = enligt epoken. ¦ Hastighederne følger tiden (størrelsesordener for Frankrig og Vesteuropa). Skriv en anden afstand om dagen for et transportmiddel; tomt = efter tiden.
+Le détour : la route n’est jamais droite. 1,25 = 25 % de plus que la distance à vol d’oiseau. ¦ Zajížďka: cesta nikdy není rovná. 1,25 = o 25 % víc než vzdušnou čarou. ¦ Omvägen: vägen är aldrig rak. 1,25 = 25 % längre än fågelvägen. ¦ Omvejen: vejen er aldrig lige. 1,25 = 25 % længere end i luftlinje.
+📍 Entre deux lieux ¦ 📍 Mezi dvěma místy ¦ 📍 Mellan två platser ¦ 📍 Mellem to steder
+👤 Le long d’une vie ¦ 👤 Během života ¦ 👤 Under ett liv ¦ 👤 Gennem et liv
+Année du voyage ¦ Rok cesty ¦ Resans år ¦ Rejsens år
+Distances et temps de trajet ¦ Vzdálenosti a doby cesty ¦ Avstånd och restider ¦ Afstande og rejsetider
+Distances et temps de trajet… ¦ Vzdálenosti a doby cesty… ¦ Avstånd och restider… ¦ Afstande og rejsetider…
+Choisis le lieu de départ et le lieu d’arrivée ¦ Vyber místo odjezdu a místo příjezdu ¦ Välj avreseort och ankomstort ¦ Vælg afrejsested og ankomststed
+Choisis une personne pour suivre ses déplacements ¦ Vyber osobu a sleduj její cesty ¦ Välj en person för att följa hens förflyttningar ¦ Vælg en person for at følge personens rejser
+Pas de déplacement : il faut au moins deux lieux placés sur la carte ¦ Žádná cesta: jsou potřeba aspoň dvě místa umístěná na mapě ¦ Ingen förflyttning: det behövs minst två platser utplacerade på kartan ¦ Ingen rejser: der skal mindst være to steder placeret på kortet
+Pas de déplacement entre deux lieux placés ¦ Žádná cesta mezi dvěma umístěnými místy ¦ Ingen förflyttning mellan två utplacerade platser ¦ Ingen rejser mellem to placerede steder
+🧭 Ses déplacements ¦ 🧭 Jeho cesty ¦ 🧭 Hens förflyttningar ¦ 🧭 Personens rejser
+🧭 Calculer un trajet… ¦ 🧭 Spočítat cestu… ¦ 🧭 Beräkna en resa… ¦ 🧭 Beregn en rejse…
+📜 Ancienne (parchemin) ¦ 📜 Stará (pergamen) ¦ 📜 Gammal (pergament) ¦ 📜 Gammel (pergament)
+🎖 État-major (XIXᵉ) ¦ 🎖 Vojenská mapa (19. stol.) ¦ 🎖 Generalstabskarta (1800-tal) ¦ 🎖 Generalstabskort (1800-tal)
+🌙 Bleu nuit et or ¦ 🌙 Noční modrá a zlatá ¦ 🌙 Nattblått och guld ¦ 🌙 Natblå og guld
+🎯 Autour des lieux ¦ 🎯 Kolem míst ¦ 🎯 Runt platserna ¦ 🎯 Omkring stederne
+CARTE · À IMPRIMER ¦ MAPA · K TISKU ¦ KARTA · ATT SKRIVA UT ¦ KORT · TIL UDSKRIFT
+Grande carte à imprimer ¦ Velká mapa k tisku ¦ Stor karta att skriva ut ¦ Stort kort til udskrift
+Grande carte à imprimer… ¦ Velká mapa k tisku… ¦ Stor karta att skriva ut… ¦ Stort kort til udskrift…
+Grande carte ¦ Velká mapa ¦ Stor karta ¦ Stort kort
+Cartouche ¦ Kartuš ¦ Kartusch ¦ Kartouche
+Les BORIE ¦ Rod BORIE ¦ Släkten BORIE ¦ Slægten BORIE
+Ce qu’on met dessus ¦ Co na ni dát ¦ Vad som ska vara på den ¦ Hvad der skal være på det
+● Lieux de naissance ¦ ● Místa narození ¦ ● Födelseorter ¦ ● Fødesteder
+◆ Lieux de mariage ¦ ◆ Místa sňatku ¦ ◆ Vigselorter ¦ ◆ Vielsessteder
+✝ Lieux de décès ¦ ✝ Místa úmrtí ¦ ✝ Dödsorter ¦ ✝ Dødssteder
+Migrations (naissance → décès) ¦ Migrace (narození → úmrtí) ¦ Flyttningar (födelse → död) ¦ Flytninger (fødsel → død)
+➜ Migrations (naissance → décès) ¦ ➜ Migrace (narození → úmrtí) ¦ ➜ Flyttningar (födelse → död) ¦ ➜ Flytninger (fødsel → død)
+👤 Portraits en médaillon ¦ 👤 Portréty v medailonu ¦ 👤 Porträtt i medaljong ¦ 👤 Portrætter i medaljon
+Une branche (ses ancêtres seulement) ¦ Jedna větev (jen její předkové) ¦ En gren (bara hens anor) ¦ En gren (kun personens aner)
+Toute la famille ¦ Celá rodina ¦ Hela släkten ¦ Hele familien
+Habillage ¦ Vzhled ¦ Utseende ¦ Udseende
+Cartouche (titre, famille, dates) ¦ Kartuš (název, rodina, data) ¦ Kartusch (titel, släkt, datum) ¦ Kartouche (titel, familie, datoer)
+Jamais de personne vivante ni de fiche confidentielle sur cette carte. Le fond est dessiné par l’app (Natural Earth, IGN), sans tuiles d’Internet : il reste net à toutes les tailles. ¦ Na této mapě nikdy není žijící osoba ani důvěrná karta. Podklad kreslí aplikace (Natural Earth, IGN), bez dlaždic z internetu: zůstane ostrý v každé velikosti. ¦ Aldrig några levande personer eller konfidentiella poster på den här kartan. Bakgrunden ritas av appen (Natural Earth, IGN), utan rutor från internet: den förblir skarp i alla storlekar. ¦ Aldrig levende personer eller fortrolige poster på dette kort. Baggrunden tegnes af appen (Natural Earth, IGN), uden fliser fra internettet: den forbliver skarp i alle størrelser.
+Les {name} ¦ Rod {name} ¦ Släkten {name} ¦ Slægten {name}
+Notre famille ¦ Naše rodina ¦ Vår släkt ¦ Vores familie
+Les lieux de la famille ¦ Místa rodiny ¦ Släktens platser ¦ Familiens steder
+Fond : {src} ¦ Podklad: {src} ¦ Bakgrund: {src} ¦ Baggrund: {src}
+Natural Earth (domaine public) · IGN Admin Express (Licence Ouverte) ¦ Natural Earth (volné dílo) · IGN Admin Express (Licence Ouverte) ¦ Natural Earth (allmän egendom) · IGN Admin Express (Licence Ouverte) ¦ Natural Earth (offentlig ejendom) · IGN Admin Express (Licence Ouverte)
+Natural Earth (domaine public) ¦ Natural Earth (volné dílo) ¦ Natural Earth (allmän egendom) ¦ Natural Earth (offentlig ejendom)
+dessin impossible ¦ kreslení není možné ¦ kan inte ritas ¦ kan ikke tegnes
+image trop grande pour ce navigateur ¦ obrázek je pro tento prohlížeč příliš velký ¦ bilden är för stor för den här webbläsaren ¦ billedet er for stort til denne browser
+{n} laissées de côté ¦ Vynecháno: {n} ¦ {n} utelämnade ¦ {n} udeladt
+{n} laissée de côté ¦ {n} vynechaná ¦ {n} utelämnad ¦ {n} udeladt
+image : jusqu’à {w} × {h} px ({dpi} ppp) ¦ obrázek: až {w} × {h} px ({dpi} dpi) ¦ bild: upp till {w} × {h} px ({dpi} dpi) ¦ billede: op til {w} × {h} px ({dpi} dpi)
+Aucun lieu placé sur la carte pour ces choix : place les lieux de la famille (fiche du lieu → position) ou coche d’autres événements. ¦ Pro tento výběr není na mapě umístěno žádné místo: umísti místa rodiny (karta místa → poloha) nebo zaškrtni jiné události. ¦ Inga platser utplacerade på kartan för de här valen: placera släktens platser (platsens post → position) eller markera andra händelser. ¦ Ingen steder placeret på kortet for disse valg: placér familiens steder (stedets post → position), eller sæt hak ved andre begivenheder.
+Qualité ramenée à {dpi} ppp (taille de l’affiche, mémoire du navigateur). ¦ Kvalita snížena na {dpi} dpi (velikost plakátu, paměť prohlížeče). ¦ Kvaliteten sänkt till {dpi} dpi (affischens storlek, webbläsarens minne). ¦ Kvaliteten sænket til {dpi} dpi (plakatens størrelse, browserens hukommelse).
+{paper}, prêt pour l’imprimeur ¦ {paper}, připraveno pro tiskárnu ¦ {paper}, klar för tryckeriet ¦ {paper}, klar til trykkeriet
+haute définition ¦ vysoké rozlišení ¦ hög upplösning ¦ høj opløsning
+📍 Lieux de la famille en épingles ¦ 📍 Místa rodiny jako špendlíky ¦ 📍 Släktens platser som nålar ¦ 📍 Familiens steder som nåle
+Glisse pour tourner, molette pour zoomer. Au clavier : ← → pour tourner, ↑ ↓ pour pencher, + et − pour zoomer, 0 pour revenir. ¦ Tažením otáčíš, kolečkem přibližuješ. Na klávesnici: ← → otočení, ↑ ↓ naklonění, + a − přiblížení, 0 návrat. ¦ Dra för att vrida, hjulet för att zooma. Med tangentbordet: ← → för att vrida, ↑ ↓ för att luta, + och − för att zooma, 0 för att återgå. ¦ Træk for at dreje, hjulet for at zoome. Med tastaturet: ← → for at dreje, ↑ ↓ for at hælde, + og − for at zoome, 0 for at vende tilbage.
+Relief en 3D ¦ Reliéf ve 3D ¦ Terräng i 3D ¦ Terræn i 3D
+Relief 3D ¦ 3D reliéf ¦ 3D-terräng ¦ 3D-terræn
+Relief 3D… ¦ 3D reliéf… ¦ 3D-terräng… ¦ 3D-terræn…
+CARTE · RELIEF ¦ MAPA · RELIÉF ¦ KARTA · TERRÄNG ¦ KORT · TERRÆN
+Exagération du relief ¦ Převýšení reliéfu ¦ Överdrift av terrängen ¦ Overdrivelse af terrænet
+Choisis le lieu du centre (un lieu placé sur la carte) ¦ Vyber místo ve středu (místo umístěné na mapě) ¦ Välj platsen i mitten (en plats utplacerad på kartan) ¦ Vælg stedet i midten (et sted placeret på kortet)
+Je lis les altitudes… ¦ Čtu nadmořské výšky… ¦ Läser höjderna… ¦ Læser højderne…
+La carte du relief n’est pas installée : elle vient avec la Météo d’autrefois (Réglages → 🌦 Météo d’autrefois). ¦ Mapa reliéfu není nainstalovaná: je součástí Počasí z dávných dob (Nastavení → 🌦 Počasí z dávných dob). ¦ Terrängkartan är inte installerad: den följer med Forna tiders väder (Inställningar → 🌦 Forna tiders väder). ¦ Terrænkortet er ikke installeret: det følger med Fortidens vejr (Indstillinger → 🌦 Fortidens vejr).
+Pas d’altitude pour cette zone : la carte du relief couvre {n} pays ({list}). ¦ Pro tuto oblast není nadmořská výška: mapa reliéfu pokrývá země ({n}): {list}. ¦ Ingen höjd för det här området: terrängkartan täcker {n} länder ({list}). ¦ Ingen højde for dette område: terrænkortet dækker {n} lande ({list}).
+Pas d’altitude pour cette zone : la carte du relief couvre seulement quelques pays. ¦ Pro tuto oblast není nadmořská výška: mapa reliéfu pokrývá jen několik zemí. ¦ Ingen höjd för det här området: terrängkartan täcker bara några länder. ¦ Ingen højde for dette område: terrænkortet dækker kun nogle få lande.
+{km} de côté ¦ strana {km} ¦ {km} per sida ¦ {km} pr. side
+Altitudes : {min} m à {max} m ¦ Nadmořské výšky: {min} m až {max} m ¦ Höjder: {min} m till {max} m ¦ Højder: {min} m til {max} m
+{pct} % sans altitude (mer ou hors de la carte) ¦ {pct} % bez nadmořské výšky (moře nebo mimo mapu) ¦ {pct} % utan höjd (hav eller utanför kartan) ¦ {pct} % uden højde (hav eller uden for kortet)
+{n} dans la zone ¦ {n} v oblasti ¦ {n} i området ¦ {n} i området
+Altitudes : Copernicus DEM GLO-90 (grille de 30″), © DLR / Airbus, Copernicus. ¦ Nadmořské výšky: Copernicus DEM GLO-90 (mřížka 30″), © DLR / Airbus, Copernicus. ¦ Höjder: Copernicus DEM GLO-90 (rutnät på 30″), © DLR / Airbus, Copernicus. ¦ Højder: Copernicus DEM GLO-90 (gitter på 30″), © DLR / Airbus, Copernicus.
+Le moteur 3D ne se charge pas. ¦ 3D modul se nenačítá. ¦ 3D-motorn laddas inte. ¦ 3D-motoren indlæses ikke.
+Ce navigateur ne sait pas dessiner en 3D (WebGL éteint). ¦ Tento prohlížeč neumí kreslit ve 3D (WebGL je vypnuté). ¦ Den här webbläsaren kan inte rita i 3D (WebGL avstängt). ¦ Denne browser kan ikke tegne i 3D (WebGL slået fra).
+Ma couche ¦ Moje vrstva ¦ Mitt lager ¦ Mit lag
+Mes couches ¦ Moje vrstvy ¦ Mina lager ¦ Mine lag
+Mes couches (dessiner) ¦ Moje vrstvy (kreslení) ¦ Mina lager (rita) ¦ Mine lag (tegn)
+Cacher mes couches ¦ Skrýt moje vrstvy ¦ Dölj mina lager ¦ Skjul mine lag
+Clique sur la carte pour poser le point. Échap pour arrêter. ¦ Klikni na mapu a polož bod. Esc pro ukončení. ¦ Klicka på kartan för att sätta ut punkten. Esc för att avbryta. ¦ Klik på kortet for at sætte punktet. Esc for at stoppe.
+Clique point par point. ¦ Klikej bod po bodu. ¦ Klicka punkt för punkt. ¦ Klik punkt for punkt.
+Entrée ou double-clic pour finir, ⌫ pour retirer le dernier, Échap pour arrêter. ¦ Enter nebo dvojklik pro dokončení, ⌫ pro odebrání posledního, Esc pro ukončení. ¦ Enter eller dubbelklick för att avsluta, ⌫ för att ta bort den sista, Esc för att avbryta. ¦ Enter eller dobbeltklik for at afslutte, ⌫ for at fjerne det sidste, Esc for at stoppe.
+Couleur de la couche ¦ Barva vrstvy ¦ Lagrets färg ¦ Lagets farve
+Dessiner dans cette couche ¦ Kreslit do této vrstvy ¦ Rita i det här lagret ¦ Tegn i dette lag
+Aucune couche pour l’instant ¦ Zatím žádná vrstva ¦ Inga lager än ¦ Ingen lag endnu
+Importer des couches ¦ Importovat vrstvy ¦ Importera lager ¦ Importér lag
+GeoJSON ou KML ¦ GeoJSON nebo KML ¦ GeoJSON eller KML ¦ GeoJSON eller KML
+Aucune forme lisible dans ce fichier. ¦ V tomto souboru není žádný čitelný tvar. ¦ Inga läsbara former i den här filen. ¦ Ingen læsbare former i denne fil.
+⬠ Nom de la zone ¦ ⬠ Název oblasti ¦ ⬠ Områdets namn ¦ ⬠ Områdets navn
+〰 Nom de l’itinéraire ¦ 〰 Název trasy ¦ 〰 Ruttens namn ¦ 〰 Rutens navn
+Facultatif. ¦ Nepovinné. ¦ Valfritt. ¦ Valgfrit.
+Les terres de la famille ¦ Pozemky rodiny ¦ Släktens marker ¦ Familiens jorder
+Le chemin de l’école ¦ Cesta do školy ¦ Skolvägen ¦ Skolevejen
+📝 La note ¦ 📝 Poznámka ¦ 📝 Anteckningen ¦ 📝 Noten
+📍 Nom du point ¦ 📍 Název bodu ¦ 📍 Punktens namn ¦ 📍 Punktets navn
+Ce que tu veux noter à cet endroit. ¦ Co chceš na tomto místě poznamenat. ¦ Det du vill anteckna på den här platsen. ¦ Det, du vil notere på dette sted.
+Ici se trouvait le moulin ¦ Tady stál mlýn ¦ Här låg kvarnen ¦ Her lå møllen
+〰 Itinéraire ¦ 〰 Trasa ¦ 〰 Rutt ¦ 〰 Rute
+⬠ Zone ¦ ⬠ Oblast ¦ ⬠ Område ¦ ⬠ Område
+📍 Point ¦ 📍 Bod ¦ 📍 Punkt ¦ 📍 Punkt
+📝 Note ¦ 📝 Poznámka ¦ 📝 Anteckning ¦ 📝 Note
+Zone ajoutée à « {name} » ¦ Oblast přidána do „{name}“ ¦ Område tillagt i ”{name}” ¦ Område tilføjet til »{name}«
+Itinéraire ajouté à « {name} » ¦ Trasa přidána do „{name}“ ¦ Rutt tillagd i ”{name}” ¦ Rute tilføjet til »{name}«
+Note ajoutée à « {name} » ¦ Poznámka přidána do „{name}“ ¦ Anteckning tillagd i ”{name}” ¦ Note tilføjet til »{name}«
+Point ajouté à « {name} » ¦ Bod přidán do „{name}“ ¦ Punkt tillagd i ”{name}” ¦ Punkt tilføjet til »{name}«
+{dur} aujourd’hui ¦ dnes {dur} ¦ {dur} i dag ¦ {dur} i dag
+« {name} » supprimé de la couche ¦ „{name}“ smazáno z vrstvy ¦ ”{name}” raderad ur lagret ¦ »{name}« slettet fra laget
+« {name} » modifié ¦ „{name}“ upraveno ¦ ”{name}” ändrad ¦ »{name}« ændret
+« Aucune » = la couleur de la couche ¦ „Žádná“ = barva vrstvy ¦ ”Ingen” = lagrets färg ¦ »Ingen« = lagets farve
+MES COUCHES ¦ MOJE VRSTVY ¦ MINA LAGER ¦ MINE LAG
+Renommer la couche ¦ Přejmenovat vrstvu ¦ Byt namn på lagret ¦ Omdøb laget
+Couche renommée « {name} » ¦ Vrstva přejmenována na „{name}“ ¦ Lagret har fått namnet ”{name}” ¦ Laget omdøbt til »{name}«
+Exporter en GeoJSON ¦ Exportovat do GeoJSON ¦ Exportera som GeoJSON ¦ Eksportér som GeoJSON
+Exporter en KML ¦ Exportovat do KML ¦ Exportera som KML ¦ Eksportér som KML
+Supprimer la couche ¦ Smazat vrstvu ¦ Radera lagret ¦ Slet laget
+Couche « {name} » supprimée ¦ Vrstva „{name}“ smazána ¦ Lagret ”{name}” raderat ¦ Laget »{name}« slettet
+Couleur de la couche changée ¦ Barva vrstvy změněna ¦ Lagrets färg ändrad ¦ Lagets farve ændret
+Couche « {name} » créée ¦ Vrstva „{name}“ vytvořena ¦ Lagret ”{name}” skapat ¦ Laget »{name}« oprettet
+Toutes en GeoJSON ¦ Všechny do GeoJSON ¦ Alla som GeoJSON ¦ Alle som GeoJSON
+Toutes en KML ¦ Všechny do KML ¦ Alla som KML ¦ Alle som KML
+Zone ¦ Oblast ¦ Område ¦ Område
+{n} Ko ¦ {n} kB ¦ {n} kB ¦ {n} kB
+Fond à comparer ¦ Podklad k porovnání ¦ Bakgrund att jämföra ¦ Baggrund at sammenligne
+Façon de comparer ¦ Způsob porovnání ¦ Sätt att jämföra ¦ Måde at sammenligne
+▏ Trait ¦ ▏ Čára ¦ ▏ Linje ¦ ▏ Streg
+◐ Transparence ¦ ◐ Průhlednost ¦ ◐ Genomskinlighet ¦ ◐ Gennemsigtighed
+Transparence du fond à comparer ¦ Průhlednost podkladu k porovnání ¦ Genomskinlighet för bakgrunden att jämföra ¦ Gennemsigtighed for baggrunden at sammenligne
+Transparence en % ¦ Průhlednost v % ¦ Genomskinlighet i % ¦ Gennemsigtighed i %
+Trait de comparaison : glisse-le, ou flèches gauche et droite ¦ Porovnávací čára: přetáhni ji, nebo šipky vlevo a vpravo ¦ Jämförelselinje: dra den, eller vänster- och högerpil ¦ Sammenligningsstreg: træk den, eller venstre- og højrepil
+(approximatif) ¦ (přibližné) ¦ (ungefärlig) ¦ (omtrentlig)
+Frontières ¦ Hranice ¦ Gränser ¦ Grænser
+🏛 Province : {name} ¦ 🏛 Provincie: {name} ¦ 🏛 Provins: {name} ¦ 🏛 Provins: {name}
+🏛 Département de 1790 : {name} ¦ 🏛 Departement z roku 1790: {name} ¦ 🏛 Departement från 1790: {name} ¦ 🏛 Departement fra 1790: {name}
+Tracé approximatif, d’après les départements d’aujourd’hui ({list}). ¦ Přibližné hranice podle dnešních departementů ({list}). ¦ Ungefärlig gräns, utifrån dagens departement ({list}). ¦ Omtrentlig grænse, ud fra nutidens departementer ({list}).
+Tracé approximatif, d’après les départements d’aujourd’hui. ¦ Přibližné hranice podle dnešních departementů. ¦ Ungefärlig gräns, utifrån dagens departement. ¦ Omtrentlig grænse, ud fra nutidens departementer.
+🏚 Communes disparues : à télécharger une fois (Réglages → 🏛 Frontières anciennes). ¦ 🏚 Zaniklé obce: stáhnout jednou (Nastavení → 🏛 Staré hranice). ¦ 🏚 Försvunna kommuner: laddas ner en gång (Inställningar → 🏛 Gamla gränser). ¦ 🏚 Forsvundne kommuner: hentes én gang (Indstillinger → 🏛 Gamle grænser).
+🏚 Zoome sur une région pour voir les communes disparues. ¦ 🏚 Přibliž region a uvidíš zaniklé obce. ¦ 🏚 Zooma in på en region för att se försvunna kommuner. ¦ 🏚 Zoom ind på en region for at se forsvundne kommuner.
+Pas français en 1789 : royaume de Sardaigne (français en 1860). L’ouest (Grasse) était en Provence. ¦ V roce 1789 nebyl francouzský: Sardinské království (francouzský od 1860). Západ (Grasse) patřil k Provence. ¦ Inte franskt 1789: kungariket Sardinien (franskt 1860). Västra delen (Grasse) låg i Provence. ¦ Ikke fransk i 1789: kongeriget Sardinien (fransk i 1860). Den vestlige del (Grasse) lå i Provence.
+Pas française en 1789 : royaume de Sardaigne (française en 1860). ¦ V roce 1789 nebyla francouzská: Sardinské království (francouzská od 1860). ¦ Inte fransk 1789: kungariket Sardinien (fransk 1860). ¦ Ikke fransk i 1789: kongeriget Sardinien (fransk i 1860).
+Pas français en 1789 : Avignon et le Comtat appartenaient au pape (réunis en 1791). ¦ V roce 1789 nebyl francouzský: Avignon a Comtat patřily papeži (připojeny 1791). ¦ Inte franskt 1789: Avignon och Comtat tillhörde påven (anslutna 1791). ¦ Ikke fransk i 1789: Avignon og Comtat tilhørte paven (indlemmet i 1791).
+Mulhouse était une république alliée des Suisses (réunie en 1798). ¦ Mulhouse byla republika spojená se Švýcary (připojena 1798). ¦ Mulhouse var en republik allierad med schweizarna (ansluten 1798). ¦ Mulhouse var en republik allieret med schweizerne (indlemmet i 1798).
+Montbéliard appartenait au Wurtemberg (réuni en 1793). ¦ Montbéliard patřil Württembersku (připojen 1793). ¦ Montbéliard tillhörde Württemberg (anslutet 1793). ¦ Montbéliard tilhørte Württemberg (indlemmet i 1793).
+Coupé en Rhône et Loire en 1793. ¦ V roce 1793 rozdělen na Rhône a Loire. ¦ Delat i Rhône och Loire 1793. ¦ Delt i Rhône og Loire i 1793.
+Le département de Paris (puis de la Seine, 1795). ¦ Departement Paříž (potom Seine, 1795). ¦ Departementet Paris (sedan Seine, 1795). ¦ Departementet Paris (derefter Seine, 1795).
+Partagé en 1968 (Yvelines, Essonne, Val-d’Oise…). ¦ Rozdělen v roce 1968 (Yvelines, Essonne, Val-d’Oise…). ¦ Delat 1968 (Yvelines, Essonne, Val-d’Oise…). ¦ Delt i 1968 (Yvelines, Essonne, Val-d’Oise…).
+Le Tarn-et-Garonne n’existe qu’en 1808 (pris au Lot surtout, et à 5 départements voisins) : ici rangé avec le Lot. ¦ Tarn-et-Garonne vznikl až v roce 1808 (hlavně z Lotu a z 5 sousedních departementů): zde zařazen k Lotu. ¦ Tarn-et-Garonne finns först 1808 (taget mest från Lot och från 5 granndepartement): här räknat till Lot. ¦ Tarn-et-Garonne findes først i 1808 (taget mest fra Lot og fra 5 nabodepartementer): her regnet med til Lot.
+Un seul département en 1790 (coupé en deux de 1793 à 1811, puis en 1976). ¦ V roce 1790 jediný departement (rozdělen na dva 1793 až 1811 a znovu 1976). ¦ Ett enda departement 1790 (delat i två 1793–1811 och sedan 1976). ¦ Ét enkelt departement i 1790 (delt i to 1793–1811 og igen i 1976).
+Devenu Maine-et-Loire en 1791. ¦ V roce 1791 se stal Maine-et-Loire. ¦ Blev Maine-et-Loire 1791. ¦ Blev til Maine-et-Loire i 1791.
+Limites changées en 1871 (Meurthe-et-Moselle). ¦ Hranice změněny v roce 1871 (Meurthe-et-Moselle). ¦ Gränserna ändrade 1871 (Meurthe-et-Moselle). ¦ Grænserne ændret i 1871 (Meurthe-et-Moselle).
+Limites changées en 1871. ¦ Hranice změněny v roce 1871. ¦ Gränserna ändrade 1871. ¦ Grænserne ændret i 1871.
+Belfort en faisait partie jusqu’en 1871. ¦ Belfort k němu patřil do roku 1871. ¦ Belfort ingick i det fram till 1871. ¦ Belfort var en del af det indtil 1871.
+Devenu Alpes-de-Haute-Provence en 1970. ¦ V roce 1970 se stal Alpes-de-Haute-Provence. ¦ Blev Alpes-de-Haute-Provence 1970. ¦ Blev til Alpes-de-Haute-Provence i 1970.
+Comté de Nice (royaume de Sardaigne) : pas français en 1790 ¦ Hrabství Nice (Sardinské království): v roce 1790 nebylo francouzské ¦ Grevskapet Nice (kungariket Sardinien): inte franskt 1790 ¦ Grevskabet Nice (kongeriget Sardinien): ikke fransk i 1790
+Savoie (royaume de Sardaigne) : pas française en 1790 ¦ Savojsko (Sardinské království): v roce 1790 nebylo francouzské ¦ Savojen (kungariket Sardinien): inte franskt 1790 ¦ Savoyen (kongeriget Sardinien): ikke fransk i 1790
+Avignon et Comtat Venaissin (au pape) : réunis en 1791 ¦ Avignon a Comtat Venaissin (papežské): připojeny 1791 ¦ Avignon och Comtat Venaissin (påvens): anslutna 1791 ¦ Avignon og Comtat Venaissin (pavens): indlemmet i 1791
+Pas en France en 1790. ¦ V roce 1790 nebylo ve Francii. ¦ Inte i Frankrike 1790. ¦ Ikke i Frankrig i 1790.
+réunie en commune nouvelle ¦ sloučena do nové obce ¦ sammanslagen till en ny kommun ¦ lagt sammen til en ny kommune
+Réglages · Cartes ¦ Nastavení · Mapy ¦ Inställningar · Kartor ¦ Indstillinger · Kort
+Provinces, départements de 1790 et communes disparues, sur la Carte (bouton « 🏛 Frontières »). ¦ Provincie, departementy z roku 1790 a zaniklé obce na Mapě (tlačítko „🏛 Hranice“). ¦ Provinser, departement från 1790 och försvunna kommuner, på Kartan (knappen ”🏛 Gränser”). ¦ Provinser, departementer fra 1790 og forsvundne kommuner, på Kortet (knappen »🏛 Grænser«).
+↗ Voir sur la Carte ¦ ↗ Zobrazit na Mapě ¦ ↗ Visa på Kartan ¦ ↗ Vis på Kortet
+🏛 Provinces (≈ 1789) et départements de 1790 ¦ 🏛 Provincie (≈ 1789) a departementy z roku 1790 ¦ 🏛 Provinser (≈ 1789) och departement från 1790 ¦ 🏛 Provinser (≈ 1789) og departementer fra 1790
+Livrés avec l’app : rien à télécharger. Ce sont des tracés <b>approximatifs</b>, faits d’après les départements d’aujourd’hui (chaque département rangé dans la province qui en couvre la plus grande partie). Aucune source libre et officielle de leurs vrais contours n’a été trouvée. ¦ Dodávají se s aplikací: nic se nestahuje. Jsou to <b>přibližné</b> hranice podle dnešních departementů (každý departement je zařazen do provincie, která pokrývá jeho největší část). Nebyl nalezen žádný volný a oficiální zdroj jejich skutečných obrysů. ¦ Följer med appen: inget att ladda ner. Det är <b>ungefärliga</b> gränser, gjorda utifrån dagens departement (varje departement räknas till den provins som täcker största delen av det). Ingen fri och officiell källa till deras verkliga konturer har hittats. ¦ Følger med appen: intet at hente. Det er <b>omtrentlige</b> grænser, lavet ud fra nutidens departementer (hvert departement regnes til den provins, der dækker den største del af det). Der er ikke fundet nogen fri og officiel kilde til deres virkelige omrids.
+{size} ({bytes} octets) · empreinte sha256 {hash}… · vérifié : {when} ¦ {size} ({bytes} bajtů) · otisk sha256 {hash}… · ověřeno: {when} ¦ {size} ({bytes} byte) · sha256-avtryck {hash}… · kontrollerad: {when} ¦ {size} ({bytes} byte) · sha256-aftryk {hash}… · kontrolleret: {when}
+taille inconnue ¦ neznámá velikost ¦ okänd storlek ¦ ukendt størrelse
+enfants ¦ děti ¦ barn ¦ børn
+Grand-parent ¦ Prarodič ¦ Far-/morförälder ¦ Bedsteforælder
+Parrain ou marraine ¦ Kmotr nebo kmotra ¦ Gudfar eller gudmor ¦ Gudfar eller gudmor
+Frère ou sœur mort avant ¦ Dříve zemřelý sourozenec ¦ Bror eller syster som dog tidigare ¦ Bror eller søster, der døde før
+Choisi à la main ¦ Vybráno ručně ¦ Vald för hand ¦ Valgt i hånden
+choisi à la main ¦ vybráno ručně ¦ vald för hand ¦ valgt i hånden
+vérifié ¦ ověřeno ¦ kontrollerad ¦ kontrolleret
+Corrigé ou confirmé à la main ¦ Ručně opraveno nebo potvrzeno ¦ Rättad eller bekräftad för hand ¦ Rettet eller bekræftet i hånden
+Indice de confiance : {n} sur 100 ¦ Míra důvěry: {n} ze 100 ¦ Tillförlitlighet: {n} av 100 ¦ Pålidelighed: {n} af 100
+Ma branche paternelle ¦ Moje otcovská větev ¦ Min fäderneslinje ¦ Min fædrene gren
+Ma branche maternelle ¦ Moje mateřská větev ¦ Min möderneslinje ¦ Min mødrene gren
+D’où vient le prénom, par époque ¦ Odkud pochází křestní jméno, podle období ¦ Varifrån förnamnet kommer, per epok ¦ Hvor fornavnet kommer fra, efter periode
+Enfants qui portent le prénom de leur parrain ou marraine ¦ Děti, které nesou jméno svého kmotra nebo kmotry ¦ Barn som bär sin gudfars eller gudmors förnamn ¦ Børn, der bærer deres gudfars eller gudmors fornavn
+% des enfants qui ont un parrain ou une marraine notés ¦ % dětí se zapsaným kmotrem nebo kmotrou ¦ % av barnen som har en gudfar eller gudmor noterad ¦ % af børnene, der har en gudfar eller gudmor noteret
+Tous les prénoms ¦ Všechna křestní jména ¦ Alla förnamn ¦ Alle fornavne
+Pour chaque enfant, d’où vient probablement son prénom : parrain, marraine, grand-parent, frère ou sœur mort avant (prénom « relevé »), oncle, tante, saint du jour. Chaque piste a sa règle et un indice de confiance ; tu peux la corriger sur la fiche ou ici avec ⋯. Sans les personnes en vie ni les fiches confidentielles. ¦ U každého dítěte, odkud pravděpodobně pochází jeho jméno: kmotr, kmotra, prarodič, dříve zemřelý sourozenec („převzaté“ jméno), strýc, teta, světec dne. Každá stopa má své pravidlo a míru důvěry; můžeš ji opravit na kartě nebo tady přes ⋯. Bez žijících osob a důvěrných karet. ¦ För varje barn: varifrån förnamnet troligen kommer: gudfar, gudmor, far-/morförälder, bror eller syster som dog tidigare (”upptaget” namn), farbror/morbror, faster/moster, dagens helgon. Varje spår har sin regel och en tillförlitlighet; du kan rätta det i posten eller här med ⋯. Utan levande personer och konfidentiella poster. ¦ For hvert barn: hvor fornavnet sandsynligvis kommer fra: gudfar, gudmor, bedsteforælder, bror eller søster, der døde før (»genoptaget« navn), onkel, tante, dagens helgen. Hvert spor har sin regel og en pålidelighed; du kan rette det i posten eller her med ⋯. Uden levende personer og fortrolige poster.
+prénoms expliqués sur {n} ¦ vysvětlených jmen z {n} ¦ förnamn förklarade av {n} ¦ fornavne forklaret af {n}
+prénom expliqué sur {n} ¦ vysvětlené jméno z {n} ¦ förnamn förklarat av {n} ¦ fornavn forklaret af {n}
+des enfants qui ont un parrain ou une marraine notés portent son prénom ({n} sur {total}) ¦ dětí se zapsaným kmotrem nebo kmotrou nese jeho jméno ({n} z {total}) ¦ av barnen med en noterad gudfar eller gudmor bär dennes förnamn ({n} av {total}) ¦ af børnene med en noteret gudfar eller gudmor bærer dennes fornavn ({n} af {total})
+🌳 Les flèches de transmission ¦ 🌳 Šipky předávání ¦ 🌳 Pilarna för vidareförande ¦ 🌳 Pilene for videregivelse
+Une ligne par prénom, les années en travers : chaque flèche va de la personne qui transmet à l’enfant. Clique sur un rond pour ouvrir la fiche. ¦ Jeden řádek na jméno, roky napříč: každá šipka vede od osoby, která jméno předává, k dítěti. Klikni na kolečko a otevře se karta. ¦ En rad per förnamn, åren på tvären: varje pil går från personen som för namnet vidare till barnet. Klicka på en rund markering för att öppna posten. ¦ Én linje pr. fornavn, årene på tværs: hver pil går fra personen, der giver navnet videre, til barnet. Klik på en cirkel for at åbne posten.
+Chaque enfant ¦ Každé dítě ¦ Varje barn ¦ Hvert barn
+Prénom reçu de ¦ Jméno po ¦ Förnamn efter ¦ Fornavn efter
+La liste s’arrête à {n} enfants (les prénoms les plus transmis d’abord) ; les chiffres du haut comptent tout le monde. Choisis un prénom pour voir les autres. ¦ Seznam končí u {n} dětí (nejčastěji předávaná jména první); čísla nahoře počítají všechny. Vyber jméno a uvidíš ostatní. ¦ Listan slutar vid {n} barn (de mest vidareförda förnamnen först); siffrorna överst räknar alla. Välj ett förnamn för att se de andra. ¦ Listen stopper ved {n} børn (de mest videregivne fornavne først); tallene øverst tæller alle. Vælg et fornavn for at se de andre.
+Aucun enfant prénommé {name} ¦ Žádné dítě se jménem {name} ¦ Inga barn med förnamnet {name} ¦ Ingen børn med fornavnet {name}
+Rien à comparer pour l’instant ¦ Zatím není co porovnat ¦ Inget att jämföra än ¦ Intet at sammenligne endnu
+Il faut des enfants reliés à leurs parents (ou des parrains et marraines notés comme témoins « parrain », « marraine » de la naissance ou du baptême). ¦ Jsou potřeba děti propojené s rodiči (nebo kmotři a kmotry zapsaní jako svědci „kmotr“, „kmotra“ u narození nebo křtu). ¦ Det behövs barn kopplade till sina föräldrar (eller gudföräldrar noterade som vittnen ”gudfar”, ”gudmor” vid födelsen eller dopet). ¦ Der skal være børn forbundet med deres forældre (eller gudforældre noteret som vidner »gudfar«, »gudmor« ved fødslen eller dåben).
+Les plus sûrs d’abord ¦ Nejjistější první ¦ De säkraste först ¦ De sikreste først
+Les moins sûrs d’abord ¦ Nejméně jisté první ¦ De minst säkra först ¦ De mindst sikre først
+Aucune transmission entre deux fiches datées (le saint du jour n’a pas de flèche). ¦ Žádné předání mezi dvěma datovanými kartami (světec dne nemá šipku). ¦ Inget vidareförande mellan två daterade poster (dagens helgon har ingen pil). ¦ Ingen videregivelse mellem to daterede poster (dagens helgen har ingen pil).
+{name} ({year}) : ouvrir la fiche ¦ {name} ({year}): otevřít kartu ¦ {name} ({year}): öppna posten ¦ {name} ({year}): åbn posten
+Les {n} prénoms les plus transmis ; choisis un prénom dans « Prénom » pour le voir seul. ¦ {n} nejčastěji předávaných jmen; vyber jméno v „Křestní jméno“ a uvidíš ho samotné. ¦ De {n} mest vidareförda förnamnen; välj ett förnamn i ”Förnamn” för att se det ensamt. ¦ De {n} mest videregivne fornavne; vælg et fornavn i »Fornavn« for at se det alene.
+Flèches de transmission des prénoms ¦ Šipky předávání křestních jmen ¦ Pilar för förnamnens vidareförande ¦ Pile for videregivelse af fornavne
+C’est bien ça ¦ Je to tak ¦ Det stämmer ¦ Det passer
+Garder cette piste comme sûre ¦ Ponechat tuto stopu jako jistou ¦ Behåll det här spåret som säkert ¦ Behold dette spor som sikkert
+Prénom reçu de {name} : confirmé. ¦ Jméno po {name}: potvrzeno. ¦ Förnamn efter {name}: bekräftat. ¦ Fornavn efter {name}: bekræftet.
+Ce n’est pas ça ¦ Není to tak ¦ Det stämmer inte ¦ Det passer ikke
+Écarter cette piste ¦ Vyřadit tuto stopu ¦ Avfärda det här spåret ¦ Afvis dette spor
+Piste écartée. ¦ Stopa vyřazena. ¦ Spåret avfärdat. ¦ Sporet afvist.
+Plutôt : {who} ¦ Spíš: {who} ¦ Snarare: {who} ¦ Snarere: {who}
+Prénom reçu de {name}. ¦ Jméno po {name}. ¦ Förnamn efter {name}. ¦ Fornavn efter {name}.
+Celle dont il ou elle tient son prénom ¦ Osoba, po které má své jméno ¦ Den hen har fått sitt förnamn efter ¦ Den, personen har sit fornavn efter
+De qui tient-il son prénom ? ¦ Po kom má své jméno? ¦ Vem har hen fått sitt förnamn efter? ¦ Hvem har personen sit fornavn efter?
+la personne choisie ¦ vybraná osoba ¦ den valda personen ¦ den valgte person
+Oublier les corrections à la main ¦ Zapomenout ruční opravy ¦ Glöm rättelserna för hand ¦ Glem rettelserne i hånden
+Corrections oubliées : le calcul de l’app revient. ¦ Opravy zapomenuty: vrací se výpočet aplikace. ¦ Rättelserna glömda: appens beräkning gäller igen. ¦ Rettelserne glemt: appens beregning gælder igen.
+Voir la transmission de ce prénom ¦ Zobrazit předávání tohoto jména ¦ Visa det här förnamnets vidareförande ¦ Vis videregivelsen af dette fornavn
+Prénom reçu de… ¦ Jméno po… ¦ Förnamn efter… ¦ Fornavn efter…
+saint du jour : ¦ světec dne: ¦ dagens helgon: ¦ dagens helgen:
+Prénom reçu de {who} ¦ Jméno po {who} ¦ Förnamn efter {who} ¦ Fornavn efter {who}
+indice {n} sur 100 ¦ míra {n} ze 100 ¦ tillförlitlighet {n} av 100 ¦ pålidelighed {n} af 100
+Ta famille ¦ Tvoje rodina ¦ Din släkt ¦ Din familie
+France ≈ ¦ Francie ≈ ¦ Frankrike ≈ ¦ Frankrig ≈
+personnes {who} ¦ osoby {who} ¦ personer {who} ¦ personer {who}
+pas de données ¦ žádná data ¦ inga data ¦ ingen data
+Moins de 10 : à lire avec prudence ¦ Méně než 10: čti opatrně ¦ Färre än 10: läs med försiktighet ¦ Færre end 10: læs med forsigtighed
+Aucune époque dans cette période ¦ V tomto období žádná epocha ¦ Ingen epok i den här perioden ¦ Ingen epoke i denne periode
+Les repères français vont de 1686 à 1999 : élargis la période. ¦ Francouzské srovnávací údaje sahají od 1686 do 1999: rozšiř období. ¦ De franska referenserna gäller 1686–1999: vidga perioden. ¦ De franske referencer går fra 1686 til 1999: udvid perioden.
+Les moyennes de ta famille à côté des moyennes françaises de la même époque (≈ : des ordres de grandeur, avec leur source). Une famille compte quelques dizaines d’actes : la comparaison se lit en gros. Sans les personnes en vie ni les fiches confidentielles. ¦ Průměry tvé rodiny vedle francouzských průměrů ze stejné doby (≈: řádové hodnoty se zdrojem). Rodina má jen pár desítek záznamů: srovnání ber jen zhruba. Bez žijících osob a důvěrných karet. ¦ Din släkts medelvärden bredvid de franska medelvärdena från samma epok (≈: storleksordningar, med källa). En släkt har några tiotal handlingar: jämförelsen ska läsas grovt. Utan levande personer och konfidentiella poster. ¦ Din families gennemsnit ved siden af de franske gennemsnit fra samme tid (≈: størrelsesordener, med kilde). En familie har nogle få snese dokumenter: sammenligningen skal læses groft. Uden levende personer og fortrolige poster.
+📚 D’où viennent les chiffres de la France ¦ 📚 Odkud pocházejí čísla za Francii ¦ 📚 Varifrån Frankrikes siffror kommer ¦ 📚 Hvor tallene for Frankrig kommer fra
+TA FAMILLE ET LA FRANCE ¦ TVOJE RODINA A FRANCIE ¦ DIN SLÄKT OCH FRANKRIKE ¦ DIN FAMILIE OG FRANKRIG
+Lecture impossible. ¦ Čtení není možné. ¦ Kan inte läsas. ¦ Kan ikke læses.
+Simple ¦ Jednoduchý ¦ Enkel ¦ Enkel
+Scientifique ¦ Vědecký ¦ Vetenskaplig ¦ Videnskabelig
+Ruban ¦ Stuha ¦ Band ¦ Bånd
+RUBAN ¦ STUHA ¦ BAND ¦ BÅND
+chiffres ¦ číslice ¦ siffror ¦ cifre
+ex. mariage-1925 ¦ např. svatba-1925 ¦ t.ex. vigsel-1925 ¦ fx vielse-1925
+Janv. ¦ Led. ¦ Jan. ¦ Jan.
+Juil. ¦ Čvc. ¦ Juli ¦ Jul.
+Sept. ¦ Zář. ¦ Sep. ¦ Sep.
+Oct. ¦ Říj. ¦ Okt. ¦ Okt.
+Nov. ¦ Lis. ¦ Nov. ¦ Nov.
+Archive ¦ Archiv ¦ Arkiv ¦ Arkiv
+{n} vie à raconter : {list} ¦ {n} život k vyprávění: {list} ¦ {n} liv att berätta om: {list} ¦ {n} liv at fortælle om: {list}
+JEU ¦ HRA ¦ SPEL ¦ SPIL
+côté ¦ strana ¦ sida ¦ side
+Comparer avec… ¦ Porovnat s… ¦ Jämför med… ¦ Sammenlign med…
+Choisir la personne… ¦ Vybrat osobu… ¦ Välj personen… ¦ Vælg personen…
+Âge moyen au premier mariage ¦ Průměrný věk při prvním sňatku ¦ Medelålder vid första vigseln ¦ Gennemsnitsalder ved første vielse
+L’âge de chaque époux à son premier mariage (date de naissance et date du mariage connues). ¦ Věk každého z manželů při prvním sňatku (známé datum narození a datum sňatku). ¦ Varje makes ålder vid första vigseln (känt födelsedatum och vigseldatum). ¦ Hver ægtefælles alder ved første vielse (kendt fødselsdato og vielsesdato).
+Le nombre d’enfants connus des couples mariés pendant la période (couples qui ont au moins un enfant dans ta base). En France : enfants par femme (indicateur de fécondité), qui se compare seulement en gros. ¦ Počet známých dětí párů sezdaných v daném období (páry, které mají ve tvé databázi aspoň jedno dítě). Ve Francii: dětí na ženu (úhrnná plodnost), srovnatelné jen zhruba. ¦ Antalet kända barn till par som gifte sig under perioden (par som har minst ett barn i din databas). I Frankrike: barn per kvinna (fruktsamhetstal), som bara kan jämföras grovt. ¦ Antallet kendte børn for par, der blev gift i perioden (par, der har mindst ét barn i din database). I Frankrig: børn pr. kvinde (fertilitetskvotient), som kun kan sammenlignes groft.
+baby-boom (1946-1964) ¦ baby boom (1946-1964) ¦ babyboom (1946-1964) ¦ babyboom (1946-1964)
+Mortalité infantile (morts avant 1 an) ¦ Kojenecká úmrtnost (úmrtí před 1. rokem) ¦ Spädbarnsdödlighet (döda före 1 års ålder) ¦ Spædbørnsdødelighed (døde før 1 år)
+Sur 1 000 enfants nés pendant la période dont on connaît le décès (ou qui ont vécu), combien sont morts avant 1 an. Les bébés morts manquent souvent dans les arbres : le chiffre de la famille est souvent trop bas. ¦ Kolik z 1 000 dětí narozených v daném období, u nichž známe úmrtí (nebo že přežily), zemřelo před 1. rokem. Zemřelá miminka v rodokmenech často chybějí: číslo rodiny bývá příliš nízké. ¦ Av 1 000 barn födda under perioden vars död är känd (eller som levde), hur många dog före 1 års ålder. Döda spädbarn saknas ofta i släktträd: släktens siffra är ofta för låg. ¦ Af 1 000 børn født i perioden, hvis død kendes (eller som overlevede), hvor mange døde før 1 år. Døde spædbørn mangler ofte i slægtstræer: familiens tal er ofte for lavt.
+Espérance de vie à la naissance ¦ Naděje dožití při narození ¦ Medellivslängd vid födseln ¦ Middellevetid ved fødslen
+L’âge moyen au décès des personnes nées pendant la période (naissance et décès connus). Les bébés morts manquent souvent dans les arbres : le chiffre de la famille est souvent trop haut. ¦ Průměrný věk při úmrtí osob narozených v daném období (známé narození i úmrtí). Zemřelá miminka v rodokmenech často chybějí: číslo rodiny bývá příliš vysoké. ¦ Medelåldern vid döden för personer födda under perioden (känd födelse och död). Döda spädbarn saknas ofta i släktträd: släktens siffra är ofta för hög. ¦ Gennemsnitsalderen ved død for personer født i perioden (kendt fødsel og død). Døde spædbørn mangler ofte i slægtstræer: familiens tal er ofte for højt.
+Savoir signer son acte de mariage ¦ Umět podepsat svůj oddací záznam ¦ Kunna skriva under sitt vigselbevis ¦ Kunne underskrive sin vielsesattest
+La part des époux et des épouses qui ont signé leur acte de mariage (case « a signé » des mariages). En France : mesuré sur les années indiquées ; ta famille : sur les années autour. ¦ Podíl ženichů a nevěst, kteří podepsali svůj oddací záznam (políčko „podepsal“ u sňatků). Ve Francii: měřeno v uvedených letech; tvoje rodina: v letech kolem. ¦ Andelen brudgummar och brudar som skrev under sitt vigselbevis (rutan ”skrev under” vid vigslar). I Frankrike: mätt de angivna åren; din släkt: åren runt omkring. ¦ Andelen af brudgomme og bruder, der underskrev deres vielsesattest (feltet »underskrev« ved vielser). I Frankrig: målt i de angivne år; din familie: i årene omkring.
+Part des métiers de la terre (agriculture, forêt) ¦ Podíl zemědělských povolání (zemědělství, les) ¦ Andel jordbruksyrken (jordbruk, skog) ¦ Andel landbrugserhverv (landbrug, skov)
+Parmi les personnes de la famille en âge de travailler à cette date (20 à 60 ans) et dont le métier est reconnu, la part des métiers de la terre et de la forêt (laboureur, cultivateur, journalier agricole, bûcheron…). ¦ Mezi osobami z rodiny v produktivním věku k tomuto datu (20 až 60 let) se známým povoláním podíl zemědělských a lesních povolání (sedlák, rolník, zemědělský nádeník, dřevorubec…). ¦ Bland släktens personer i arbetsför ålder vid den tidpunkten (20–60 år) med igenkänt yrke: andelen jordbruks- och skogsyrken (bonde, odlare, jordbruksdagsverkare, skogshuggare…). ¦ Blandt familiens personer i arbejdsdygtig alder på det tidspunkt (20–60 år) med genkendt erhverv: andelen af landbrugs- og skovbrugserhverv (gårdmand, dyrker, landbrugsdaglejer, skovhugger…).
+Ordres de grandeur arrondis, toujours précédés de « ≈ ». Une fourchette quand les travaux donnent des chiffres un peu différents selon l’échantillon ou les années. Un chiffre dont on n’était pas sûr n’a pas été mis : il vaut mieux une case vide qu’un chiffre inventé. Les moyennes d’une famille (quelques dizaines d’actes) ne se comparent qu’en gros à celles de toute la France. ¦ Zaokrouhlené řádové hodnoty, vždy se znakem „≈“. Rozpětí, když práce uvádějí podle vzorku nebo let trochu odlišná čísla. Nejisté číslo nebylo uvedeno: lepší prázdné políčko než vymyšlené číslo. Průměry jedné rodiny (pár desítek záznamů) lze s celou Francií srovnávat jen zhruba. ¦ Avrundade storleksordningar, alltid föregångna av ”≈”. Ett intervall när studierna ger något olika siffror beroende på urval eller år. En siffra man inte var säker på har inte tagits med: hellre en tom ruta än en påhittad siffra. En släkts medelvärden (några tiotal handlingar) kan bara jämföras grovt med hela Frankrikes. ¦ Afrundede størrelsesordener, altid med »≈« foran. Et interval, når undersøgelserne giver lidt forskellige tal afhængigt af stikprøve eller år. Et tal, man ikke var sikker på, er ikke medtaget: hellere et tomt felt end et opdigtet tal. En families gennemsnit (nogle få snese dokumenter) kan kun sammenlignes groft med hele Frankrigs.
+nées entre 1846 et 1886 ¦ narozené mezi 1846 a 1886 ¦ födda mellan 1846 och 1886 ¦ født mellem 1846 og 1886
+{type} publiée par {from} ¦ {type} zveřejněno: {from} ¦ {type} publicerad av {from} ¦ {type} udgivet af {from}
+LCNDA (fichiers livrés avec l’app) ¦ LCNDA (soubory dodávané s aplikací) ¦ LCNDA (filer som följer med appen) ¦ LCNDA (filer, der følger med appen)
+Événements survenus aux communes depuis 1943 (INSEE) ¦ Změny obcí od roku 1943 (INSEE) ¦ Händelser i kommunerna sedan 1943 (INSEE) ¦ Begivenheder i kommunerne siden 1943 (INSEE)
+Communes depuis 1943 (INSEE) ¦ Obce od roku 1943 (INSEE) ¦ Kommuner sedan 1943 (INSEE) ¦ Kommuner siden 1943 (INSEE)

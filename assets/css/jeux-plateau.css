@@ -1,0 +1,221 @@
+/* LCNDA — 🎲 Jeux de plateau : ♟ Échecs, ⛀ Dames, 🁫 Dominos, 🎲 Yams (assets/js/app-jeu-plateau.js et app-jeu-echecs|dames|dominos|yams.js).
+ * Même allure noir et blanc que les autres jeux (jeux-famille.css) ; la barre de partie L2 en haut. */
+
+/* ── la barre de la partie : qui joue · scores · chrono · ↶ · 💡 · ⏸ · ? · ⋯ ── */
+.jp-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; border: 3px solid #000; background: #fff; padding: 8px 10px; margin-bottom: 14px; }
+.jp-who { display: flex; flex-wrap: wrap; gap: 6px; flex: 1 1 260px; min-width: 0; }
+.jp-pl { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border: 2px solid transparent; font-weight: 800; min-width: 0; flex-wrap: wrap; }
+.jp-pl > i { width: 14px; height: 14px; border-radius: 50%; background: var(--pc, #000); box-shadow: 0 0 0 1.5px #000; flex: none; }
+.jp-pl-n { overflow-wrap: anywhere; }
+.jp-pl-n small, .jp-pl-x small { font-weight: 600; color: #555; }
+.jp-pl > b { font-size: 18px; font-variant-numeric: tabular-nums; }
+.jp-pl.is-on { border-color: #000; background: #f2f2f2; }
+.jp-pl.is-out { opacity: .5; }
+.jp-time { font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.jp-tools { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; }
+.jp-hint b { font-variant-numeric: tabular-nums; }
+.jp-help { width: 32px; height: 32px; }
+.jp-wrap { position: relative; }
+.jp-panel { align-content: start; }
+.jp-side { font-weight: 800; align-self: center; margin-bottom: 10px; white-space: nowrap; }
+.jp-rec { color: #333; border-top: 2px solid #000; padding-top: 8px; }
+.jp-newrec { margin: 0; font-weight: 900; color: #0b5d2e; }
+.jp-pause { position: absolute; inset: 0; z-index: 5; display: grid; place-content: center; justify-items: center; gap: 10px; text-align: center; background: rgba(255, 255, 255, .94); padding: 16px; }
+.jp-hide { visibility: hidden; }
+.jp-veil { margin-top: 0; }
+.jp-rules ul { padding-left: 20px; }
+.jp-rules li { margin-bottom: 6px; }
+.jpe-news { border-left: 4px solid #000; padding-left: 8px; }
+
+/* ── ♟ échiquier ── */
+.jpe-board, .jpd-board { display: grid; width: max-content; margin: 0 auto; border: 3px solid #000; user-select: none; -webkit-user-select: none; touch-action: none; }
+.jpe-board { grid-template-columns: repeat(8, var(--cell)); grid-template-rows: repeat(8, var(--cell)); }
+.jpe-sq, .jpd-sq { position: relative; width: var(--cell); height: var(--cell); padding: 0; border: 0; margin: 0; display: grid; place-items: center; font: inherit; cursor: pointer; }
+.jpe-sq.is-light { background: #efe6d2; }
+.jpe-sq.is-dark { background: #a9845d; }
+.jpe-sq:focus-visible, .jpd-sq:focus-visible { outline: 3px solid #1d4ed8; outline-offset: -3px; z-index: 2; }
+.jpe-sq.is-last { box-shadow: inset 0 0 0 999px rgba(242, 194, 48, .38); }
+.jpe-sq.is-sel, .jpd-sq.is-sel { box-shadow: inset 0 0 0 4px #1d4ed8; }
+.jpe-sq.is-check { box-shadow: inset 0 0 0 999px rgba(217, 54, 54, .55); }
+.jpe-sq.is-hint, .jpd-sq.is-hint { box-shadow: inset 0 0 0 4px #198754; }
+.jpe-sq.is-take { box-shadow: inset 0 0 0 4px rgba(29, 78, 216, .7); }
+.jpe-pc { font-size: calc(var(--cell) * .78); line-height: 1; pointer-events: none; font-family: "Segoe UI Symbol", "DejaVu Sans", "Noto Sans Symbols 2", sans-serif; }
+.jpe-pc.is-w { color: #fff; -webkit-text-stroke: 1.2px #111; text-shadow: 0 1px 0 #111, 0 -1px 0 #111, 1px 0 0 #111, -1px 0 0 #111; }
+.jpe-pc.is-b { color: #111; text-shadow: 0 0 1px #fff; }
+.jpe-dot { position: absolute; width: 28%; height: 28%; border-radius: 50%; background: rgba(29, 78, 216, .55); pointer-events: none; }
+.jpe-rk, .jpe-fl { position: absolute; font-style: normal; font-size: 10.5px; font-weight: 800; color: rgba(0, 0, 0, .55); pointer-events: none; }
+.jpe-rk { top: 2px; left: 3px; }
+.jpe-fl { bottom: 1px; right: 3px; }
+.jpe-caps { min-height: 24px; display: flex; flex-wrap: wrap; gap: 0; justify-content: center; font-size: 20px; line-height: 1.1; margin: 4px 0; }
+.jpe-cap { font-family: "Segoe UI Symbol", "DejaVu Sans", sans-serif; }
+.jpe-cap.is-w { color: #fff; -webkit-text-stroke: 1px #111; }
+.jpe-cap.is-b { color: #111; }
+.jpe-clock { display: inline-flex; gap: 4px; padding: 1px 6px; border: 2px solid #000; font-variant-numeric: tabular-nums; }
+.jpe-clock.is-on { background: #000; color: #fff; }
+.jpe-clock.is-low b { color: #d93636; }
+.jpe-chk { color: #b42318; }
+.jpe-moves { max-height: 260px; overflow: auto; margin: 0; padding: 6px 8px 6px 4px; list-style: none; border: 2px solid #000; columns: 2; column-gap: 14px; font-variant-numeric: tabular-nums; font-size: 14px; }
+.jpe-moves:empty { display: none; }
+.jpe-moves li { break-inside: avoid; }
+.jpe-moves b { display: inline-block; min-width: 26px; color: #555; }
+.jpe-promo { display: flex; flex-wrap: wrap; gap: 6px; border: 3px solid #1d4ed8; padding: 10px; }
+.jpe-promo p { flex-basis: 100%; margin: 0; }
+.jpe-promo .jpe-pc { font-size: 22px; }
+
+/* ── ⛀ damier ── */
+.jpd-board { grid-template-columns: repeat(var(--n), var(--cell)); grid-template-rows: repeat(var(--n), var(--cell)); }
+.jpd-sq.is-light { background: #efe6d2; display: block; }
+.jpd-sq.is-dark { background: #6f4e37; }
+.jpd-sq.is-last { box-shadow: inset 0 0 0 999px rgba(242, 194, 48, .3); }
+.jpd-sq.is-path { box-shadow: inset 0 0 0 4px #1d4ed8; background: #4f6fa8; }
+.jpd-sq.is-must { box-shadow: inset 0 0 0 3px #f2c230; }
+.jpd-sq.is-taken .jpd-pc { opacity: .4; }
+.jpd-num { position: absolute; top: 1px; left: 3px; font-style: normal; font-size: 9px; font-weight: 700; color: rgba(255, 255, 255, .5); pointer-events: none; }
+.jpd-pc { width: 78%; height: 78%; border-radius: 50%; display: grid; place-items: center; pointer-events: none; font-size: calc(var(--cell) * .42); line-height: 1; }
+.jpd-pc.is-w { background: radial-gradient(circle at 40% 35%, #fff, #e6dfd0 60%, #c9bfa9); color: #6f4e37; box-shadow: 0 2px 0 #8b7d62, inset 0 0 0 3px rgba(0, 0, 0, .08); }
+.jpd-pc.is-b { background: radial-gradient(circle at 40% 35%, #555, #222 60%, #000); color: #f2c230; box-shadow: 0 2px 0 #000, inset 0 0 0 3px rgba(255, 255, 255, .08); }
+.jpd-pc.is-king { box-shadow: 0 2px 0 #000, 0 0 0 3px #f2c230; }
+.jpd-dot { position: absolute; width: 26%; height: 26%; border-radius: 50%; background: rgba(255, 255, 255, .55); pointer-events: none; }
+.jpd-dot.is-final { background: #8fd3a5; }
+
+/* ── 🁫 dominos ── */
+.jpm-table { display: grid; gap: 14px; min-width: 0; }
+.jpm-others { display: flex; flex-wrap: wrap; gap: 10px; }
+.jpm-other { display: grid; gap: 4px; border: 2px solid #000; padding: 6px 10px; min-width: 0; }
+.jpm-other.is-on { background: #f2f2f2; box-shadow: inset 0 0 0 2px #000; }
+.jpm-other small { color: #555; font-weight: 600; }
+.jpm-backs { display: flex; flex-wrap: wrap; gap: 3px; }
+.jpm-backs > i { width: 12px; height: 22px; background: #222; border-radius: 3px; display: block; }
+.jpm-chain { display: flex; flex-wrap: wrap; align-items: center; gap: 3px; padding: 12px; min-height: 76px; background: #0f5132; border: 3px solid #000; }
+.jpm-chain.is-empty { justify-content: center; }
+.jpm-chain.is-empty .muted { color: #e7f5ec; }
+.jpm-tile { display: inline-grid; place-items: center; padding: 0; border: 0; background: none; flex: none; }
+.jpm-tile svg { display: block; }
+.jpm-tile svg rect { fill: #fffdf6; stroke: #111; stroke-width: 2.5; }
+.jpm-tile svg line { stroke: #111; stroke-width: 2; }
+.jpm-tile svg circle { fill: #111; }
+.jpm-chain .jpm-tile svg { width: 52px; height: 26px; }
+.jpm-chain .jpm-tile.is-double svg { width: 26px; height: 52px; }
+.jpm-chain .jpm-tile.is-last svg rect { fill: #fff3c4; }
+.jpm-end, .jpm-endv { min-width: 44px; min-height: 44px; display: inline-grid; place-items: center; font-weight: 900; font-size: 16px; color: #fff; }
+.jpm-end { border: 3px dashed #fff; background: #1d4ed8; cursor: pointer; padding: 0 10px; font: inherit; font-weight: 900; color: #fff; }
+.jpm-end:focus-visible { outline: 3px solid #f2c230; outline-offset: 2px; }
+.jpm-endv { border: 2px solid rgba(255, 255, 255, .35); }
+.jpm-stock { margin: 0; font-weight: 800; }
+.jpm-hand-wrap { display: grid; gap: 8px; border-top: 3px solid #000; padding-top: 10px; }
+.jpm-hand-t { margin: 0; }
+.jpm-hand { display: flex; flex-wrap: wrap; gap: 8px; }
+.jpm-h { cursor: pointer; padding: 3px; border: 3px solid transparent; border-radius: 9px; }
+.jpm-h svg { width: 40px; height: 80px; }
+.jpm-h.is-ok { border-color: #198754; }
+.jpm-h.is-no { opacity: .55; }
+.jpm-h.is-sel { border-color: #1d4ed8; background: #dbe7ff; transform: translateY(-6px); }
+.jpm-h.is-hint, .button.is-hint { box-shadow: 0 0 0 3px #198754; }
+.jpm-h:focus-visible { outline: 3px solid #1d4ed8; outline-offset: 2px; }
+.jpm-h.is-shake { animation: jp-shake .3s; }
+.jpm-act { display: flex; gap: 8px; flex-wrap: wrap; }
+.jpm-mini svg { width: 30px; height: 15px; display: inline-block; vertical-align: middle; margin: 1px; }
+.jpm-mini svg rect { fill: #fffdf6; stroke: #111; stroke-width: 3; }
+.jpm-mini svg line { stroke: #111; stroke-width: 3; }
+.jpm-mini svg circle { fill: #111; }
+.jpm-end-box { display: grid; gap: 10px; border: 3px solid #000; padding: 12px; background: #fafafa; }
+.jpm-count, .jpm-score { border-collapse: collapse; width: 100%; }
+.jpm-count th, .jpm-count td, .jpm-score td { border-bottom: 1px solid #ccc; padding: 5px 6px; text-align: left; vertical-align: middle; }
+.jpm-count td:last-child, .jpm-score td:last-child { text-align: right; font-weight: 900; font-variant-numeric: tabular-nums; }
+.jpm-count tr.is-win { background: #d8f3dc; }
+.jpm-score caption { text-align: left; font-weight: 900; padding-bottom: 4px; }
+.jpm-score tr.is-on { background: #f2f2f2; }
+.jpm-score i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--pc, #000); box-shadow: 0 0 0 1.5px #000; margin-right: 6px; }
+
+/* ── 🎲 Yams ── */
+.jpy-table { display: grid; gap: 12px; min-width: 0; }
+.jpy-dice { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.jpy-die { width: 64px; height: 78px; padding: 0; border: 0; background: none; display: grid; justify-items: center; align-content: start; gap: 2px; cursor: pointer; font: inherit; }
+.jpy-die svg { width: 60px; height: 60px; }
+.jpy-die svg rect { fill: #fff; stroke: #111; stroke-width: 3; }
+.jpy-die svg circle { fill: #111; }
+.jpy-die small { font-size: 11px; font-weight: 800; color: #1d4ed8; min-height: 14px; }
+.jpy-die.is-keep svg rect { fill: #dbe7ff; stroke: #1d4ed8; stroke-width: 5; }
+.jpy-die.is-hint svg rect { stroke: #198754; stroke-width: 5; }
+.jpy-die:disabled { cursor: default; opacity: 1; }
+.jpy-die.is-empty { display: block; width: 60px; height: 60px; border: 3px dashed #bbb; border-radius: 11px; }
+.jpy-die.is-rolling svg { animation: jp-roll .42s ease-out; }
+.jpy-die:focus-visible { outline: 3px solid #1d4ed8; outline-offset: 2px; }
+.jpy-act { display: flex; align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.jpy-act .button { min-width: 160px; min-height: 46px; font-size: 16px; }
+.jpy-left { font-weight: 700; color: #555; }
+.jpy-hint { margin: 0; border: 2px solid #198754; padding: 6px 10px; font-weight: 700; }
+.jpy-flash { text-align: center; }
+.jpy-sheet-wrap { overflow-x: auto; }
+.jpy-sheet { border-collapse: collapse; width: 100%; min-width: 0; font-variant-numeric: tabular-nums; }
+.jpy-sheet th, .jpy-sheet td { border: 1px solid #000; padding: 3px 6px; text-align: center; height: 34px; }
+.jpy-sheet thead th { font-size: 13px; overflow-wrap: anywhere; }
+.jpy-sheet thead th.is-on { background: #000; color: #fff; }
+.jpy-sheet thead th i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--pc, #000); box-shadow: 0 0 0 1.5px currentColor; margin-right: 5px; }
+.jpy-sheet tbody th { text-align: left; font-weight: 800; white-space: nowrap; }
+.jpy-sheet td.is-done { font-weight: 900; }
+.jpy-sheet tr.is-sum td, .jpy-sheet tr.is-sum th { background: #f2f2f2; }
+.jpy-sheet tr.is-total td, .jpy-sheet tr.is-total th { background: #000; color: #fff; font-size: 16px; font-weight: 900; }
+.jpy-sheet small { font-size: 11px; color: #555; }
+.jpy-cell { width: 100%; min-height: 30px; border: 2px dashed #1d4ed8; background: #eef3ff; color: #1d4ed8; font: inherit; font-weight: 900; cursor: pointer; padding: 0 4px; }
+.jpy-cell.is-zero { color: #777; border-color: #999; background: #f6f6f6; }
+.jpy-cell.is-hint { border-style: solid; border-color: #198754; background: #e6f6ec; color: #0b5d2e; }
+.jpy-cell:focus-visible { outline: 3px solid #1d4ed8; outline-offset: 1px; }
+.jpy-pot { color: #999; }
+.jpy-rules th { text-align: left; padding-right: 12px; white-space: nowrap; }
+.jpy-rules td, .jpy-rules th { padding: 3px 6px; border-bottom: 1px solid #ddd; }
+
+@keyframes jp-roll { 0% { transform: rotate(-40deg) scale(.7); } 60% { transform: rotate(15deg) scale(1.08); } 100% { transform: none; } }
+@keyframes jp-shake { 0%, 100% { transform: none; } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+@media (prefers-reduced-motion: reduce) { .jpy-die.is-rolling svg, .jpm-h.is-shake { animation: none; } .jpm-h.is-sel { transform: none; } }
+html.a11y-calm .jpm-h.is-sel { transform: none; }
+@media (max-width: 640px) {
+    .jp-bar { padding: 6px; gap: 6px 10px; }
+    .jp-tools { margin-left: 0; }
+    .jpd-num { display: none; }
+    .jpy-dice { gap: 4px; }
+    .jpy-die { width: 52px; height: 68px; }
+    .jpy-die svg { width: 48px; height: 48px; }
+    .jpy-die.is-empty { width: 48px; height: 48px; }
+    .jpy-sheet th, .jpy-sheet td { padding: 2px 3px; font-size: 13px; }
+    .jpy-sheet tbody th { white-space: normal; }
+    .jpm-h svg { width: 32px; height: 64px; }
+    .jpe-moves { columns: 1; }
+}
+
+/* ── mode sombre (écrit à la main) : le plateau et les dominos gardent leurs couleurs de bois et d'ivoire ── */
+:root[data-theme="dark"] .jp-bar { background: #212121; border-color: #8a8a8a; }
+:root[data-theme="dark"] .jp-pl.is-on { background: #2c2c2c; border-color: #ddd; }
+:root[data-theme="dark"] .jp-pl-n small, :root[data-theme="dark"] .jp-pl-x small, :root[data-theme="dark"] .jpm-other small, :root[data-theme="dark"] .jpy-left, :root[data-theme="dark"] .jpe-moves b, :root[data-theme="dark"] .jpy-sheet small { color: #c7c7c7; }
+:root[data-theme="dark"] .jp-pause { background: rgba(20, 20, 20, .94); }
+:root[data-theme="dark"] .jp-rec { color: #ddd; border-color: #8a8a8a; }
+:root[data-theme="dark"] .jp-newrec { color: #7ee2a1; }
+:root[data-theme="dark"] .jpe-moves, :root[data-theme="dark"] .jpm-other, :root[data-theme="dark"] .jpm-end-box, :root[data-theme="dark"] .jpe-news { border-color: #8a8a8a; }
+:root[data-theme="dark"] .jpm-end-box { background: #1b1b1b; }
+:root[data-theme="dark"] .jpm-other.is-on, :root[data-theme="dark"] .jpm-score tr.is-on { background: #2c2c2c; }
+:root[data-theme="dark"] .jpm-count tr.is-win { background: #16351f; }
+:root[data-theme="dark"] .jpm-h.is-sel { background: #1e2c4d; }
+:root[data-theme="dark"] .jpy-sheet th, :root[data-theme="dark"] .jpy-sheet td { border-color: #8a8a8a; }
+:root[data-theme="dark"] .jpy-sheet tr.is-sum td, :root[data-theme="dark"] .jpy-sheet tr.is-sum th { background: #2a2a2a; }
+:root[data-theme="dark"] .jpy-sheet thead th.is-on, :root[data-theme="dark"] .jpy-sheet tr.is-total td, :root[data-theme="dark"] .jpy-sheet tr.is-total th { background: #f2f2f2; color: #111; }
+:root[data-theme="dark"] .jpy-cell { background: #1e2c4d; color: #a9c4ff; border-color: #6b8fe0; }
+:root[data-theme="dark"] .jpy-cell.is-zero { background: #262626; color: #aaa; border-color: #777; }
+:root[data-theme="dark"] .jpy-cell.is-hint { background: #16351f; color: #7ee2a1; border-color: #3fae6a; }
+:root[data-theme="dark"] .jpy-hint { border-color: #3fae6a; }
+:root[data-theme="dark"] .jpe-chk { color: #ff8a80; }
+:root[data-theme="dark"] .jpy-die small { color: #a9c4ff; }
+:root[data-theme="dark"] .jpe-clock { border-color: #ddd; }
+:root[data-theme="dark"] .jpe-clock.is-on { background: #f2f2f2; color: #111; }
+:root[data-theme="dark"] .jpy-die.is-empty { border-color: #555; }
+:root[data-theme="dark"] .jpe-sq.is-light, :root[data-theme="dark"] .jpd-sq.is-light { background: #d9cdb2; }
+:root[data-theme="dark"] .jpe-pc.is-b, :root[data-theme="dark"] .jpe-cap.is-b { color: #111; }
+:root[data-theme="dark"] .jpe-cap.is-b { text-shadow: 0 0 2px #fff; }
+:root[data-theme="dark"] .jpe-rk, :root[data-theme="dark"] .jpe-fl { color: rgba(0, 0, 0, .6); }
+:root[data-theme="dark"] .jpd-pc.is-w { background: radial-gradient(circle at 40% 35%, #fff, #e6dfd0 60%, #c9bfa9); color: #6f4e37; }
+:root[data-theme="dark"] .jpd-dot { background: rgba(255, 255, 255, .55); }
+:root[data-theme="dark"] .jpm-end { border: 3px dashed #fff; }
+:root[data-theme="dark"] .jpm-endv { border: 2px solid rgba(255, 255, 255, .35); }
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+:root[data-theme="dark"] .jpm-count th,:root[data-theme="dark"] .jpm-count td,:root[data-theme="dark"] .jpm-score td{border-bottom:1px solid #4c4c4c}
+:root[data-theme="dark"] .jpy-rules td,:root[data-theme="dark"] .jpy-rules th{border-bottom:1px solid #4c4c4c}
+/* ═════ fin du mode sombre automatique ═════ */

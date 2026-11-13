@@ -14,6 +14,7 @@
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const F = ext.tresorFeatures = ext.tresorFeatures || [];
     const A = () => window.LCNDA_APP;
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const AC = () => window.AudioContext || window.webkitAudioContext;
 
     /* ── 🕯️ La bougie ── */
@@ -30,30 +31,30 @@
     }
     const flame = (lit, big = false) => `<span class="h-tr-candle${lit ? ' is-lit' : ''}${big ? ' is-big' : ''}" aria-hidden="true"><i class="fl"></i><i class="wax"></i></span>`;
     function lightDialog(T, pid, after) {
-        ext.openDialog({eyebrow: 'UNE BOUGIE', title: '🕯️ Allumer une bougie', submitLabel: '🕯️ Allumer', body: `<div class="form-grid"><div class="span-2"><span class="pk-lab">Pour</span>${T.personField('who', pid)}</div>
-            <label class="span-2">Un mot (facultatif)<textarea name="msg" rows="3" maxlength="500" placeholder="On pense à toi."></textarea></label><label class="span-2">De la part de<input name="from" maxlength="120" placeholder="Léa"></label></div>`,
-            onSubmit: async form => { const id = Number(form.elements.who.value) || 0; if (!id) return T.fail(form.elements.who, 'Choisis pour qui.');
+        ext.openDialog({eyebrow: i18n('UNE BOUGIE'), title: i18n('🕯️ Allumer une bougie'), submitLabel: i18n('🕯️ Allumer'), body: `<div class="form-grid"><div class="span-2"><span class="pk-lab">${i18n('Pour')}</span>${T.personField('who', pid)}</div>
+            <label class="span-2">${i18n('Un mot (facultatif)')}<textarea name="msg" rows="3" maxlength="500" placeholder="${i18n('On pense à toi.')}"></textarea></label><label class="span-2">${i18n('De la part de')}<input name="from" maxlength="120" placeholder="Léa"></label></div>`,
+            onSubmit: async form => { const id = Number(form.elements.who.value) || 0; if (!id) return T.fail(form.elements.who, i18n('Choisis pour qui.'));
                 const tr = await T.tree(), p = tr.byId.get(id);
-                await T.save({kind: 'candle', person_id: id, title: `Pour ${T.name(p)}`, body: form.elements.msg.value.trim(), data: {from: form.elements.from.value.trim()}});
-                T.toast(`🕯️ Une bougie brûle pour ${T.name(p)} pendant ${LIT_DAYS} jours.`, 'success'); after?.(); }});
+                await T.save({kind: 'candle', person_id: id, title: i18n('Pour {name}', {name: T.name(p)}), body: form.elements.msg.value.trim(), data: {from: form.elements.from.value.trim()}});
+                T.toast(i18n('🕯️ Une bougie brûle pour {name} pendant {n} jours.', {name: T.name(p), n: String(LIT_DAYS)}), 'success'); after?.(); }});
     }
     async function renderCandles(host, T) {
         const tr = await T.tree();
         const draw = async () => {
             const list = await T.items('candle'), lit = list.filter(c => ageDays(c.created_at) < LIT_DAYS), ann = anniversaries(T, tr, 30);
-            host.innerHTML = `<div class="h-tr-row h-tr-noprint"><span class="h-tr-muted">${lit.length} bougie${lit.length > 1 ? 's' : ''} allumée${lit.length > 1 ? 's' : ''} · ${list.length} au registre</span></div>
-                ${lit.length ? `<div class="h-tr-candles">${lit.map(c => { const p = tr.byId.get(c.person_id); return `<figure class="h-tr-cd">${flame(true, true)}<figcaption><b>${T.esc(p ? T.name(p) : c.title)}</b><small>${T.esc(p ? T.life(p) : '')}</small>${c.body ? `<q>${T.esc(c.body)}</q>` : ''}<small>${c.data?.from ? `de ${T.esc(c.data.from)} · ` : ''}encore ${Math.max(1, Math.ceil(LIT_DAYS - ageDays(c.created_at)))} j</small><button type="button" class="h-tr-link h-tr-noprint" data-cd-del="${c.id}" title="Éteindre et retirer cette bougie">🗑 Supprimer</button></figcaption></figure>`; }).join('')}</div>` : T.empty('Aucune bougie allumée en ce moment')}
-                ${ann.length ? `<h3>📅 Dans les trente jours</h3><ul class="h-tr-list">${ann.map(a => `<li class="h-tr-item"><span class="h-tr-ic">${a.what === 'décès' ? '🕯️' : '🎂'}</span><div class="h-tr-grow"><b>${T.esc(T.name(a.p))}</b> — ${a.n === 0 ? 'aujourd’hui' : a.n === 1 ? 'demain' : `dans ${a.n} jours`} : ${a.years} ans de sa ${a.what} (${T.esc(T.dateFr(a.d))})</div><button type="button" class="button small secondary" data-cd-for="${a.p.id}">🕯️ Allumer</button></li>`).join('')}</ul>` : ''}
-                ${list.length > lit.length ? `<h3>📖 Le registre</h3><ul class="h-tr-list">${list.filter(c => !lit.includes(c)).map(c => { const p = tr.byId.get(c.person_id); return `<li class="h-tr-item">${flame(false)}<div class="h-tr-grow"><b>${T.esc(p ? T.name(p) : c.title)}</b> <small>· ${T.when(c.created_at, {label: 'allumée'})}${c.data?.from ? ` par ${T.esc(c.data.from)}` : ''}</small>${c.body ? `<br><q>${T.esc(c.body)}</q>` : ''}</div><button type="button" class="h-tr-link" data-cd-for="${c.person_id || ''}">Rallumer</button><button type="button" class="h-tr-link" data-cd-del="${c.id}" title="Retirer du registre">🗑 Supprimer</button></li>`; }).join('')}</ul>` : ''}`;
+            host.innerHTML = `<div class="h-tr-row h-tr-noprint"><span class="h-tr-muted">${i18n(lit.length > 1 ? '{n} bougies allumées' : '{n} bougie allumée', {n: String(lit.length)})} · ${i18n('{n} au registre', {n: String(list.length)})}</span></div>
+                ${lit.length ? `<div class="h-tr-candles">${lit.map(c => { const p = tr.byId.get(c.person_id); return `<figure class="h-tr-cd">${flame(true, true)}<figcaption><b>${T.esc(p ? T.name(p) : c.title)}</b><small>${T.esc(p ? T.life(p) : '')}</small>${c.body ? `<q>${T.esc(c.body)}</q>` : ''}<small>${c.data?.from ? `${i18n('de {name}', {name: T.esc(c.data.from)})} · ` : ''}${i18n('encore {n} j', {n: String(Math.max(1, Math.ceil(LIT_DAYS - ageDays(c.created_at))))})}</small><button type="button" class="h-tr-link h-tr-noprint" data-cd-del="${c.id}" title="${i18n('Éteindre et retirer cette bougie')}">${i18n('🗑 Supprimer')}</button></figcaption></figure>`; }).join('')}</div>` : T.empty(i18n('Aucune bougie allumée en ce moment'))}
+                ${ann.length ? `<h3>${i18n('📅 Dans les trente jours')}</h3><ul class="h-tr-list">${ann.map(a => `<li class="h-tr-item"><span class="h-tr-ic">${a.what === 'décès' ? '🕯️' : '🎂'}</span><div class="h-tr-grow"><b>${T.esc(T.name(a.p))}</b> — ${a.n === 0 ? i18n('aujourd’hui') : a.n === 1 ? i18n('demain') : i18n('dans {n} jours', {n: String(a.n)})} : ${i18n(a.what === 'décès' ? '{n} ans de son décès ({date})' : '{n} ans de sa naissance ({date})', {n: String(a.years), date: T.esc(T.dateFr(a.d))})}</div><button type="button" class="button small secondary" data-cd-for="${a.p.id}">${i18n('🕯️ Allumer')}</button></li>`).join('')}</ul>` : ''}
+                ${list.length > lit.length ? `<h3>${i18n('📖 Le registre')}</h3><ul class="h-tr-list">${list.filter(c => !lit.includes(c)).map(c => { const p = tr.byId.get(c.person_id); return `<li class="h-tr-item">${flame(false)}<div class="h-tr-grow"><b>${T.esc(p ? T.name(p) : c.title)}</b> <small>· ${T.when(c.created_at, {label: i18n('allumée')})}${c.data?.from ? ` ${i18n('par {name}', {name: T.esc(c.data.from)})}` : ''}</small>${c.body ? `<br><q>${T.esc(c.body)}</q>` : ''}</div><button type="button" class="h-tr-link" data-cd-for="${c.person_id || ''}">${i18n('Rallumer')}</button><button type="button" class="h-tr-link" data-cd-del="${c.id}" title="${i18n('Retirer du registre')}">${i18n('🗑 Supprimer')}</button></li>`; }).join('')}</ul>` : ''}`;
         };
         host.addEventListener('click', async e => {
             // 🗑 supprimer une bougie (avec « ↶ Annuler » : elle est remise telle quelle)
             const del = e.target.closest('[data-cd-del]');
             if (del) { const c = (await T.items('candle')).find(x => String(x.id) === del.dataset.cdDel); if (!c) return; await T.remove(c.id); await draw();
                 const back = async () => { await T.save({kind: 'candle', person_id: c.person_id, title: c.title, body: c.body, data: c.data}); await draw(); };
-                if (window.LCNDA_APP?.undoToast) window.LCNDA_APP.undoToast('Bougie supprimée', {undo: back}); else T.toast('Bougie supprimée.'); return; }
+                if (window.LCNDA_APP?.undoToast) window.LCNDA_APP.undoToast(i18n('Bougie supprimée'), {undo: back}); else T.toast(i18n('Bougie supprimée.')); return; }
             const f = e.target.closest('[data-cd-for]'); if (f) lightDialog(T, Number(f.dataset.cdFor) || null, draw); });
-        T.actions(host, {primary: {label: '🕯️ Allumer une bougie', attrs: 'data-cd-new', run: () => lightDialog(T, null, draw)}});
+        T.actions(host, {primary: {label: i18n('🕯️ Allumer une bougie'), attrs: 'data-cd-new', run: () => lightDialog(T, null, draw)}});
         await draw();
     }
     F.push({key: 'bougie', group: 'memoire', icon: '🕯️', title: 'Allumer une bougie', desc: 'Une bougie pour un ancêtre, avec un mot : elle brûle sept jours. Les anniversaires de naissance et de décès à venir.', render: renderCandles});
@@ -154,19 +155,19 @@
     }
     async function renderAmbiance(host, T) {
         const tr = await T.tree(), withOcc = tr.people.filter(p => p.occ && !p.living);
-        host.innerHTML = `<div class="h-tr-panel h-tr-row"><label>L’ambiance<select data-am-s>${Object.entries(SCENES).map(([k, [l]]) => `<option value="${k}">${T.esc(l)}</option>`).join('')}</select></label>
-            ${withOcc.length ? `<label>Ou celle du métier de<select data-am-p><option value="">—</option>${withOcc.map(p => `<option value="${p.id}">${T.esc(T.name(p))} (${T.esc(p.occ)})</option>`).join('')}</select></label>` : ''}
-            <button type="button" class="button" data-am-play>▶ Écouter</button><button type="button" class="button secondary" data-am-stop>⏹ Arrêter</button></div>
-            <div class="h-tr-panel h-tr-row"><label>🔈 Volume<input type="range" min="0" max="100" value="80" data-am-vol></label>
-                <label>⏲️ S’arrêter après<select data-am-timer><option value="0">jamais</option><option value="5">5 min</option><option value="15">15 min</option><option value="30">30 min</option><option value="60">1 h</option></select></label>
-                <button type="button" class="button secondary" data-am-rand title="Un mélange au hasard de 3 à 5 couches">🎲 Au hasard</button><button type="button" class="button secondary" data-am-zero>Tout à zéro</button>
-                <label>Durée du fichier son<select data-am-reclen><option value="30">30 s</option><option value="60" selected>1 min</option><option value="180">3 min</option><option value="600">10 min</option></select></label></div>
-            <div class="h-tr-panel h-tr-row"><label>⭐ Mes ambiances<select data-am-mine><option value="">—</option></select></label><button type="button" class="button secondary" data-am-save>💾 Garder ce mélange</button><button type="button" class="button secondary" data-am-del>🗑 Supprimer</button></div>
-            <div class="h-tr-panel"><p class="h-tr-muted">Tout est fabriqué par l’ordinateur, à partir de bruit et de sons purs : une évocation, pas un enregistrement. Règle chaque couche à ton goût (${Object.keys(LAYERS).length} couches).</p><input type="search" class="h-tr-am-find" data-am-find placeholder="Chercher une couche (cloches, eau, atelier…)" aria-label="Chercher une couche"><div class="h-tr-mixer" data-am-mix>${Object.entries(LAYERS).map(([k, [l]]) => `<label>${T.esc(l)}<input type="range" min="0" max="100" value="0" data-am-l="${k}"></label>`).join('')}</div></div>
-            <details class="h-tr-panel h-tr-credits"><summary><b>© Crédits et droits des sons</b></summary>
-                <p>Aucun enregistrement n’est utilisé : <b>chaque son est calculé par ton navigateur</b> au moment où tu l’écoutes (Web Audio), à partir de bruit et de sons purs. Il n’y a donc aucun auteur à créditer en dehors de LCNDA, et rien n’est téléchargé.</p>
-                <p><b>Libres de droits</b> : tu peux les écouter, les enregistrer, les mettre dans un montage ou une présentation, même les partager, sans rien demander (comme le domaine public, CC0).</p>
-                <ul>${Object.entries(AMBIANCE_HOW).map(([k, how]) => `<li>${T.esc(LAYERS[k]?.[0] || k)} — ${T.esc(how)}</li>`).join('')}</ul></details>`;
+        host.innerHTML = `<div class="h-tr-panel h-tr-row"><label>${i18n('L’ambiance')}<select data-am-s>${Object.entries(SCENES).map(([k, [l]]) => `<option value="${k}">${T.esc(i18n(l))}</option>`).join('')}</select></label>
+            ${withOcc.length ? `<label>${i18n('Ou celle du métier de')}<select data-am-p><option value="">—</option>${withOcc.map(p => `<option value="${p.id}">${T.esc(T.name(p))} (${T.esc(p.occ)})</option>`).join('')}</select></label>` : ''}
+            <button type="button" class="button" data-am-play>${i18n('▶ Écouter')}</button><button type="button" class="button secondary" data-am-stop>${i18n('⏹ Arrêter')}</button></div>
+            <div class="h-tr-panel h-tr-row"><label>${i18n('🔈 Volume')}<input type="range" min="0" max="100" value="80" data-am-vol></label>
+                <label>${i18n('⏲️ S’arrêter après')}<select data-am-timer><option value="0">${i18n('jamais')}</option><option value="5">5 min</option><option value="15">15 min</option><option value="30">30 min</option><option value="60">1 h</option></select></label>
+                <button type="button" class="button secondary" data-am-rand title="${i18n('Un mélange au hasard de 3 à 5 couches')}">${i18n('🎲 Au hasard')}</button><button type="button" class="button secondary" data-am-zero>${i18n('Tout à zéro')}</button>
+                <label>${i18n('Durée du fichier son')}<select data-am-reclen><option value="30">30 s</option><option value="60" selected>1 min</option><option value="180">3 min</option><option value="600">10 min</option></select></label></div>
+            <div class="h-tr-panel h-tr-row"><label>${i18n('⭐ Mes ambiances')}<select data-am-mine><option value="">—</option></select></label><button type="button" class="button secondary" data-am-save>${i18n('💾 Garder ce mélange')}</button><button type="button" class="button secondary" data-am-del>${i18n('🗑 Supprimer')}</button></div>
+            <div class="h-tr-panel"><p class="h-tr-muted">${i18n('Tout est fabriqué par l’ordinateur, à partir de bruit et de sons purs : une évocation, pas un enregistrement. Règle chaque couche à ton goût ({n} couches).', {n: String(Object.keys(LAYERS).length)})}</p><input type="search" class="h-tr-am-find" data-am-find placeholder="${i18n('Chercher une couche (cloches, eau, atelier…)')}" aria-label="${i18n('Chercher une couche')}"><div class="h-tr-mixer" data-am-mix>${Object.entries(LAYERS).map(([k, [l]]) => `<label>${T.esc(i18n(l))}<input type="range" min="0" max="100" value="0" data-am-l="${k}"></label>`).join('')}</div></div>
+            <details class="h-tr-panel h-tr-credits"><summary><b>${i18n('© Crédits et droits des sons')}</b></summary>
+                <p>${i18n('Aucun enregistrement n’est utilisé : <b>chaque son est calculé par ton navigateur</b> au moment où tu l’écoutes (Web Audio), à partir de bruit et de sons purs. Il n’y a donc aucun auteur à créditer en dehors de LCNDA, et rien n’est téléchargé.')}</p>
+                <p>${i18n('<b>Libres de droits</b> : tu peux les écouter, les enregistrer, les mettre dans un montage ou une présentation, même les partager, sans rien demander (comme le domaine public, CC0).')}</p>
+                <ul>${Object.entries(AMBIANCE_HOW).map(([k, how]) => `<li>${T.esc(i18n(LAYERS[k]?.[0] || k))} — ${T.esc(i18n(how))}</li>`).join('')}</ul></details>`;
         let player = null;
         const mix = () => Object.fromEntries([...host.querySelectorAll('[data-am-l]')].map(i => [i.dataset.amL, Number(i.value) / 100]));
         const setScene = k => { const m = SCENES[k][1]; host.querySelectorAll('[data-am-l]').forEach(i => { i.value = Math.round((m[i.dataset.amL] || 0) * 100); player?.set(i.dataset.amL, Number(i.value) / 100); }); host.querySelector('[data-am-s]').value = k; };
@@ -175,8 +176,8 @@
         host.querySelector('[data-am-mix]').addEventListener('input', e => { const i = e.target.closest('[data-am-l]'); if (i) player?.set(i.dataset.amL, Number(i.value) / 100); });
         const vol = () => Number(host.querySelector('[data-am-vol]').value) / 100;
         let timer = null, rec = null;
-        const armTimer = () => { clearTimeout(timer); const m = Number(host.querySelector('[data-am-timer]').value); if (m && player) timer = setTimeout(() => { stop(); T.toast('Ambiance arrêtée (minuterie).'); }, m * 60000); };
-        const play = () => { if (!AC()) { T.toast('Ce navigateur ne sait pas jouer de sons.', 'error'); return false; } player?.stop(); player = playScene(mix(), vol()); host.dataset.playing = '1'; armTimer(); return true; };
+        const armTimer = () => { clearTimeout(timer); const m = Number(host.querySelector('[data-am-timer]').value); if (m && player) timer = setTimeout(() => { stop(); T.toast(i18n('Ambiance arrêtée (minuterie).')); }, m * 60000); };
+        const play = () => { if (!AC()) { T.toast(i18n('Ce navigateur ne sait pas jouer de sons.'), 'error'); return false; } player?.stop(); player = playScene(mix(), vol()); host.dataset.playing = '1'; armTimer(); return true; };
         host.querySelector('[data-am-play]').addEventListener('click', play);
         const stop = () => { clearTimeout(timer); try { rec?.stop(); } catch (_) {} player?.stop(); player = null; delete host.dataset.playing; };
         host.querySelector('[data-am-vol]').addEventListener('input', () => player?.volume(vol()));
@@ -184,30 +185,30 @@
         const setMix = m => host.querySelectorAll('[data-am-l]').forEach(i => { i.value = Math.round((m[i.dataset.amL] || 0) * 100); player?.set(i.dataset.amL, Number(i.value) / 100); });
         host.querySelector('[data-am-zero]').addEventListener('click', () => setMix({}));
         host.querySelector('[data-am-rand]').addEventListener('click', () => { const ks = Object.keys(LAYERS).sort(() => Math.random() - 0.5).slice(0, 3 + Math.floor(Math.random() * 3)); setMix(Object.fromEntries(ks.map((k, i) => [k, i ? 0.2 + Math.random() * 0.4 : 0.7]))); });
-        host.querySelector('[data-am-find]').addEventListener('input', e => { const q = e.target.value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); host.querySelectorAll('[data-am-l]').forEach(i => { const l = i.closest('label'); l.hidden = !!q && !(l.textContent + ' ' + (AMBIANCE_HOW[i.dataset.amL] || '')).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(q); }); });
+        host.querySelector('[data-am-find]').addEventListener('input', e => { const q = e.target.value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); host.querySelectorAll('[data-am-l]').forEach(i => { const l = i.closest('label'); l.hidden = !!q && !(l.textContent + ' ' + i18n(AMBIANCE_HOW[i.dataset.amL] || '')).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(q); }); });
         // ⭐ mes ambiances (sur cet ordinateur)
         const MKEY = 'lcnda-ambiances', mine = () => { try { const v = JSON.parse(localStorage.getItem(MKEY) || '[]'); return Array.isArray(v) ? v : []; } catch (_) { return []; } };
         const fillMine = sel => { const l = mine(); host.querySelector('[data-am-mine]').innerHTML = '<option value="">—</option>' + l.map((m, i) => `<option value="${i}">${T.esc(m.name)}</option>`).join(''); if (sel != null) host.querySelector('[data-am-mine]').value = String(sel); };
         fillMine();
         host.querySelector('[data-am-mine]').addEventListener('change', e => { const m = mine()[Number(e.target.value)]; if (m) { setMix(m.mix); if (m.vol != null) { host.querySelector('[data-am-vol]').value = Math.round(m.vol * 100); player?.volume(m.vol); } } });
-        host.querySelector('[data-am-save]').addEventListener('click', async () => { const m = mix(); if (!Object.values(m).some(v => v > 0)) return T.toast('Monte au moins une couche.', 'error');
-            const name = await (A().askText ? A().askText({title: 'Garder ce mélange', message: 'Son nom :', value: SCENES[host.querySelector('[data-am-s]').value]?.[0].replace(/^\S+\s/, '') + ' (à moi)', okLabel: 'Garder'}) : prompt('Le nom de ce mélange')); if (!name || !String(name).trim()) return;
-            const l = mine(); l.push({name: String(name).slice(0, 60), mix: Object.fromEntries(Object.entries(m).filter(([, v]) => v > 0)), vol: vol()}); try { localStorage.setItem(MKEY, JSON.stringify(l)); } catch (_) {} fillMine(l.length - 1); T.toast('Mélange gardé.'); });
-        host.querySelector('[data-am-del]').addEventListener('click', async () => { const i = host.querySelector('[data-am-mine]').value; if (i === '') return T.toast('Choisis d’abord un de tes mélanges.', 'error');
+        host.querySelector('[data-am-save]').addEventListener('click', async () => { const m = mix(); if (!Object.values(m).some(v => v > 0)) return T.toast(i18n('Monte au moins une couche.'), 'error');
+            const name = await (A().askText ? A().askText({title: i18n('Garder ce mélange'), message: i18n('Son nom :'), value: i18n('{name} (à moi)', {name: i18n(SCENES[host.querySelector('[data-am-s]').value]?.[0] || '').replace(/^\S+\s/, '')}), okLabel: i18n('Garder')}) : prompt(i18n('Le nom de ce mélange'))); if (!name || !String(name).trim()) return;
+            const l = mine(); l.push({name: String(name).slice(0, 60), mix: Object.fromEntries(Object.entries(m).filter(([, v]) => v > 0)), vol: vol()}); try { localStorage.setItem(MKEY, JSON.stringify(l)); } catch (_) {} fillMine(l.length - 1); T.toast(i18n('Mélange gardé.')); });
+        host.querySelector('[data-am-del]').addEventListener('click', async () => { const i = host.querySelector('[data-am-mine]').value; if (i === '') return T.toast(i18n('Choisis d’abord un de tes mélanges.'), 'error');
             const l = mine(), [gone] = l.splice(Number(i), 1); try { localStorage.setItem(MKEY, JSON.stringify(l)); } catch (_) {} fillMine();
-            A().undoToast(`« ${gone.name} » supprimé.`, {undo: () => { const k = mine(); k.splice(Number(i), 0, gone); try { localStorage.setItem(MKEY, JSON.stringify(k)); } catch (_) {} fillMine(i); }}); });
+            A().undoToast(i18n('« {name} » supprimé.', {name: gone.name}), {undo: () => { const k = mine(); k.splice(Number(i), 0, gone); try { localStorage.setItem(MKEY, JSON.stringify(k)); } catch (_) {} fillMine(i); }}); });
         // ⏺ un fichier son : ce qu'on entend, pendant la durée choisie
         const record = () => new Promise(res => {
             if (rec) { rec.stop(); return res(null); } // déjà en route : on le finit plus tôt (le fichier arrive tout de suite)
-            if (!window.MediaRecorder) { T.toast('Ce navigateur ne sait pas enregistrer.', 'error'); return res(null); }
+            if (!window.MediaRecorder) { T.toast(i18n('Ce navigateur ne sait pas enregistrer.'), 'error'); return res(null); }
             if (!player && !play()) return res(null);
             const dest = player.ac.createMediaStreamDestination(); player.master.connect(dest); const chunks = [], secs = Number(host.querySelector('[data-am-reclen]').value) || 60;
             rec = new MediaRecorder(dest.stream); rec.ondataavailable = ev => ev.data.size && chunks.push(ev.data);
             rec.onstop = () => { clearTimeout(rec._t); rec = null; try { player?.master.disconnect(dest); } catch (_) {} res(chunks.length ? new Blob(chunks, {type: 'audio/webm'}) : null); };
-            rec.start(); rec._t = setTimeout(() => rec?.stop(), secs * 1000); T.toast(`Enregistrement de ${secs < 60 ? secs + ' s' : secs / 60 + ' min'} : le fichier arrive à la fin (⤓ Exporter → fichier son, de nouveau, pour finir plus tôt).`); });
+            rec.start(); rec._t = setTimeout(() => rec?.stop(), secs * 1000); T.toast(i18n('Enregistrement de {d} : le fichier arrive à la fin (⤓ Exporter → fichier son, de nouveau, pour finir plus tôt).', {d: secs < 60 ? secs + ' s' : secs / 60 + ' min'})); });
         const fname = () => `ambiance-${host.querySelector('[data-am-s]').value}.webm`;
-        T.actions(host, {exports: [{icon: '🎧', label: 'Fichier son (WebM)', help: 'Ce qu’on entend, pendant la durée choisie', name: fname, make: record}],
-            media: {title: () => `Ambiance — ${SCENES[host.querySelector('[data-am-s]').value]?.[0] || 'mélange'}`, kind: 'audio', make: async () => { const b = await record(); return b ? {blob: b, name: fname()} : null; }}});
+        T.actions(host, {exports: [{icon: '🎧', label: i18n('Fichier son (WebM)'), help: i18n('Ce qu’on entend, pendant la durée choisie'), name: fname, make: record}],
+            media: {title: () => i18n('Ambiance — {name}', {name: i18n(SCENES[host.querySelector('[data-am-s]').value]?.[0] || 'mélange')}), kind: 'audio', make: async () => { const b = await record(); return b ? {blob: b, name: fname()} : null; }}});
         host.querySelector('[data-am-stop]').addEventListener('click', stop);
         const obs = new MutationObserver(() => { if (!host.isConnected) { stop(); obs.disconnect(); } }); obs.observe(document.getElementById('workspace') || document.body, {childList: true, subtree: true});
         setScene('veillee');
@@ -220,7 +221,9 @@
     function oldestRoot(T, tr) {
         const st = T.start(tr); if (!st) return null;
         const anc = T.ancestors(tr, st.id, 30); if (!anc.length) return st;
-        const top = Math.max(...anc.map(a => a.gen)); return anc.filter(a => a.gen === top).map(a => tr.byId.get(a.id)).sort((a, b) => T.descendants(tr, [b.id]).length - T.descendants(tr, [a.id]).length || (a.by || 9999) - (b.by || 9999))[0];
+        // le nombre de descendants de chaque candidat, compté une fois (le tri le redemandait à chaque comparaison : plusieurs secondes sur une très grosse base)
+        const nDesc = new Map(), n = p => { if (!nDesc.has(p.id)) nDesc.set(p.id, T.descendants(tr, [p.id]).length); return nDesc.get(p.id); };
+        const top = Math.max(...anc.map(a => a.gen)); return anc.filter(a => a.gen === top).map(a => tr.byId.get(a.id)).sort((a, b) => n(b) - n(a) || (a.by || 9999) - (b.by || 9999))[0];
     }
     /** la mise en place : chaque descendant, sa génération, sa place (x) ; les feuilles réparties, les parents au milieu de leurs enfants */
     function growLayout(T, tr, rootId) {
@@ -235,9 +238,9 @@
     }
     async function renderGrow(host, T) {
         const tr = await T.tree(), r0 = oldestRoot(T, tr);
-        if (!r0) { host.innerHTML = T.empty('L’arbre est vide'); return; }
-        host.innerHTML = `<div class="h-tr-row h-tr-noprint"><div style="min-width:260px"><span class="pk-lab">À partir de</span>${T.personField('root', r0.id)}</div><button type="button" class="button" data-gr-play>▶ Faire pousser</button>
-            <label>Vitesse<select data-gr-v><option value="4">lente</option><option value="8" selected>normale</option><option value="16">rapide</option></select></label><span class="h-tr-big" data-gr-y></span></div>
+        if (!r0) { host.innerHTML = T.empty(i18n('L’arbre est vide')); return; }
+        host.innerHTML = `<div class="h-tr-row h-tr-noprint"><div style="min-width:260px"><span class="pk-lab">${i18n('À partir de')}</span>${T.personField('root', r0.id)}</div><button type="button" class="button" data-gr-play>${i18n('▶ Faire pousser')}</button>
+            <label>${i18n('Vitesse')}<select data-gr-v><option value="4">${i18n('lente')}</option><option value="8" selected>${i18n('normale')}</option><option value="16">${i18n('rapide')}</option></select></label><span class="h-tr-big" data-gr-y></span></div>
             <div class="h-tr-grow-box" data-gr-box></div><input type="range" data-gr-r style="width:100%" step="0.1">`;
         const box = host.querySelector('[data-gr-box]'), range = host.querySelector('[data-gr-r]'), yEl = host.querySelector('[data-gr-y]'), rootEl = host.querySelector('[name=root]');
         let L = null, els = [], raf = 0, y0 = 0, y1 = 0;
@@ -287,10 +290,10 @@
         return new Blob([data], {type: 'audio/wav'}); }
     async function renderMusic(host, T) {
         const tr = await T.tree(), st = T.start(tr);
-        host.innerHTML = `<div class="h-tr-row h-tr-noprint"><div style="min-width:240px"><span class="pk-lab">Autour de</span>${T.personField('root', st?.id)}</div><label>Qui<select data-mu-s><option value="all">tout l’arbre</option><option value="anc">ses ancêtres</option><option value="desc">ses descendants</option></select></label>
-            <label>Tempo<select data-mu-t><option value="0.3">lent</option><option value="0.18" selected>normal</option><option value="0.1">vif</option></select></label>
-            <button type="button" class="button" data-mu-play>▶ Écouter</button><button type="button" class="button secondary" data-mu-stop title="Arrêter" aria-label="Arrêter">⏹</button></div>
-            <p class="h-tr-muted">Chaque naissance est une note : plus aiguë pour les générations proches, plus longue pour une longue vie, au timbre plus doux pour les femmes ; chaque mariage, un accord ; chaque décès, une note grave.</p>
+        host.innerHTML = `<div class="h-tr-row h-tr-noprint"><div style="min-width:240px"><span class="pk-lab">${i18n('Autour de')}</span>${T.personField('root', st?.id)}</div><label>${i18n('Qui')}<select data-mu-s><option value="all">${i18n('tout l’arbre')}</option><option value="anc">${i18n('ses ancêtres')}</option><option value="desc">${i18n('ses descendants')}</option></select></label>
+            <label>${i18n('Tempo')}<select data-mu-t><option value="0.3">${i18n('lent')}</option><option value="0.18" selected>${i18n('normal')}</option><option value="0.1">${i18n('vif')}</option></select></label>
+            <button type="button" class="button" data-mu-play>${i18n('▶ Écouter')}</button><button type="button" class="button secondary" data-mu-stop title="${i18n('Arrêter')}" aria-label="${i18n('Arrêter')}">⏹</button></div>
+            <p class="h-tr-muted">${i18n('Chaque naissance est une note : plus aiguë pour les générations proches, plus longue pour une longue vie, au timbre plus doux pour les femmes ; chaque mariage, un accord ; chaque décès, une note grave.')}</p>
             <canvas class="h-tr-canvas" data-mu-c width="1200" height="320"></canvas><p class="h-tr-muted" data-mu-info></p>`;
         const cv = host.querySelector('[data-mu-c]'), x = cv.getContext('2d'), info = host.querySelector('[data-mu-info]');
         let S = null, ac = null, raf = 0;
@@ -300,16 +303,16 @@
             S.notes.forEach(n => { x.fillStyle = n.death ? '#7d8597' : n.wed ? '#f2c14e' : n.kind === 'triangle' ? '#f28cb1' : '#6cb6ff'; x.globalAlpha = pos >= 0 && n.t > pos ? 0.35 : 0.95; x.fillRect(n.t * sx, H - (n.m - 30) * 5, Math.max(3, n.d * sx), 6); }); x.globalAlpha = 1;
             x.fillStyle = '#aab'; x.font = '13px system-ui'; for (let y = Math.ceil(S.y0 / 50) * 50; (y - S.y0) * S.spy < S.length; y += 50) { const px = (y - S.y0) * S.spy * sx; x.fillRect(px, H - 14, 1, 14); x.fillText(String(y), px + 3, H - 3); }
             if (pos >= 0) { x.fillStyle = '#fff'; x.fillRect(pos * sx, 0, 2, H); x.font = 'bold 22px system-ui'; x.fillText(String(Math.floor(S.y0 + pos / S.spy)), 12, 28); }
-            info.textContent = `${S.notes.filter(n => !n.death && !n.wed).length} naissances, ${S.notes.filter(n => n.wed).length / 3} mariages, ${S.notes.filter(n => n.death).length} décès — ${Math.round(S.length)} secondes`; };
+            info.textContent = i18n('{b} naissances, {m} mariages, {d} décès — {s} secondes', {b: String(S.notes.filter(n => !n.death && !n.wed).length), m: String(S.notes.filter(n => n.wed).length / 3), d: String(S.notes.filter(n => n.death).length), s: String(Math.round(S.length))}); };
         const stop = () => { cancelAnimationFrame(raf); if (ac) { const a = ac; ac = null; a.close().catch(() => {}); } draw(); };
-        host.querySelector('[data-mu-play]').addEventListener('click', () => { if (!AC()) return T.toast('Ce navigateur ne sait pas jouer de sons.', 'error'); stop(); draw(); ac = new (AC())(); const out = ac.createGain(); out.gain.value = 0.8; out.connect(ac.destination); const t0 = ac.currentTime + 0.2, me = ac;
+        host.querySelector('[data-mu-play]').addEventListener('click', () => { if (!AC()) return T.toast(i18n('Ce navigateur ne sait pas jouer de sons.'), 'error'); stop(); draw(); ac = new (AC())(); const out = ac.createGain(); out.gain.value = 0.8; out.connect(ac.destination); const t0 = ac.currentTime + 0.2, me = ac;
             S.notes.forEach(n => voice(ac, out, n, t0 + n.t)); const step = () => { if (ac !== me) return; const p = ac.currentTime - t0; draw(p); if (p < S.length) raf = requestAnimationFrame(step); else stop(); }; raf = requestAnimationFrame(step); });
         host.querySelector('[data-mu-stop]').addEventListener('click', stop);
-        const wavFile = async () => { draw(); const OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext; if (!OAC) { T.toast('Ce navigateur ne sait pas fabriquer de fichier son.', 'error'); return null; }
+        const wavFile = async () => { draw(); const OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext; if (!OAC) { T.toast(i18n('Ce navigateur ne sait pas fabriquer de fichier son.'), 'error'); return null; }
             const sr = 22050, len = Math.min(600, S.length + 1), oc = new OAC(2, Math.ceil(sr * len), sr), out = oc.createGain(); out.gain.value = 0.8; out.connect(oc.destination); S.notes.filter(n => n.t < len).forEach(n => voice(oc, out, n, n.t));
-            info.textContent = 'Je fabrique le fichier son…'; const buf = await oc.startRendering(), blob = wav(buf); draw(); ext.tresorMusic.last = blob.size; return blob; };
-        T.actions(host, {exports: [{icon: '🎧', label: 'Fichier son (WAV)', name: 'la-musique-de-l-arbre.wav', make: wavFile}],
-            media: {title: 'La musique de l’arbre', kind: 'audio', make: async () => { const b = await wavFile(); return b ? {blob: b, name: 'la-musique-de-l-arbre.wav'} : null; }}});
+            info.textContent = i18n('Je fabrique le fichier son…'); const buf = await oc.startRendering(), blob = wav(buf); draw(); ext.tresorMusic.last = blob.size; return blob; };
+        T.actions(host, {exports: [{icon: '🎧', label: i18n('Fichier son (WAV)'), name: 'la-musique-de-l-arbre.wav', make: wavFile}],
+            media: {title: i18n('La musique de l’arbre'), kind: 'audio', make: async () => { const b = await wavFile(); return b ? {blob: b, name: 'la-musique-de-l-arbre.wav'} : null; }}});
         host.querySelectorAll('[name=root],[data-mu-s],[data-mu-t]').forEach(el => el.addEventListener('change', () => { stop(); }));
         const obs = new MutationObserver(() => { if (!host.isConnected) { stop(); obs.disconnect(); } }); obs.observe(document.getElementById('workspace') || document.body, {childList: true, subtree: true});
         draw();

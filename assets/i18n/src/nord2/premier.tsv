@@ -1,0 +1,111 @@
+fr ¦ sk ¦ nb
+# ═════ zone « premier » : slovaque (sk) et norvégien bokmål (nb) — docs/I18N.md, « Ajouter une langue » ═════
+INSTALLATION ¦ INŠTALÁCIA ¦ INSTALLASJON
+La base généalogique doit être importée. ¦ Je potrebné importovať genealogickú databázu. ¦ Slektsdatabasen må importeres.
+Choisis comment démarrer : importer un fichier existant, ou créer une première personne pour partir d'une base vide. ¦ Vyber si, ako začať: importuj existujúci súbor, alebo vytvor prvú osobu a začni s prázdnou databázou. ¦ Velg hvordan du vil begynne: importer en eksisterende fil, eller opprett en første person og start med en tom database.
+GEDCOM (.ged, aussi d’Ancestry, MyHeritage, Geneanet), Gramps (.gramps ou paquet .gpkg avec les photos), Hérédis (.hmw ou .heredis), MacFamilyTree (.mftpkg), base LCNDA (.db) ou sauvegarde complète LCNDA (.zip, base + médias). Les fichiers JSON et CSV sont analysés mais pas encore importés. ¦ GEDCOM (.ged, aj z Ancestry, MyHeritage, Geneanet), Gramps (.gramps alebo balík .gpkg s fotkami), Hérédis (.hmw alebo .heredis), MacFamilyTree (.mftpkg), databáza LCNDA (.db) alebo úplná záloha LCNDA (.zip, databáza + médiá). Súbory JSON a CSV sa analyzujú, ale zatiaľ sa neimportujú. ¦ GEDCOM (.ged, også fra Ancestry, MyHeritage, Geneanet), Gramps (.gramps eller .gpkg-pakke med bilder), Hérédis (.hmw eller .heredis), MacFamilyTree (.mftpkg), LCNDA-database (.db) eller full LCNDA-sikkerhetskopi (.zip, database + medier). JSON- og CSV-filer analyseres, men importeres ikke ennå.
+Fichier ¦ Súbor ¦ Fil
+Créer une première personne ¦ Vytvoriť prvú osobu ¦ Opprett en første person
+Initialise une base vide avec une première fiche, à compléter ensuite. ¦ Založí prázdnu databázu s prvou kartou, ktorú doplníš neskôr. ¦ Oppretter en tom database med en første oppføring, som du fyller ut senere.
+Prénom ¦ Meno ¦ Fornavn
+Nom ¦ Priezvisko ¦ Etternavn
+Créer et ouvrir la base ¦ Vytvoriť a otvoriť databázu ¦ Opprett og åpne databasen
+Je veux faire autre chose ▾ ¦ Chcem robiť niečo iné ▾ ¦ Jeg vil gjøre noe annet ▾
+▴ Replier ¦ ▴ Zbaliť ¦ ▴ Fold sammen
+Qu’est-ce que tu veux faire avec l’app ? ¦ Čo chceš s aplikáciou robiť? ¦ Hva vil du gjøre med appen?
+Choisis ce qui te ressemble : l’app s’ouvre avec les bons onglets et le bon premier écran. Tu pourras tout changer après. ¦ Vyber, čo ti sedí: aplikácia sa otvorí so správnymi kartami a správnou prvou obrazovkou. Všetko môžeš neskôr zmeniť. ¦ Velg det som passer deg: appen åpner med de riktige fanene og den riktige første skjermen. Du kan endre alt etterpå.
+Ta famille, tes ancêtres, leurs actes et leurs photos. ¦ Tvoja rodina, tvoji predkovia, ich matričné záznamy a fotky. ¦ Familien din, anene dine, kirkebokinnføringene deres og bildene deres.
+Une lignée d’animaux ¦ Línia zvierat ¦ En dyrelinje
+Un élevage, le pedigree de tes chiens, chats, chevaux… ¦ Chov, rodokmeň tvojich psov, mačiek, koní… ¦ Et oppdrett, stamtavlen til hundene, kattene, hestene dine…
+Recenser des animaux ¦ Sledovať zvieratá ¦ Registrere dyr
+Suivre des animaux : baguage, puces, observations, trajets. ¦ Sledovanie zvierat: krúžkovanie, čipy, pozorovania, trasy. ¦ Følge dyr: ringmerking, chiper, observasjoner, ruter.
+L’histoire d’une maison ou d’un village ¦ História domu alebo dediny ¦ Historien om et hus eller en bygd
+Maison ou village ¦ Dom alebo dedina ¦ Hus eller bygd
+Qui a vécu où, de génération en génération, pièce par pièce. ¦ Kto kde žil, z generácie na generáciu, miestnosť po miestnosti. ¦ Hvem som bodde hvor, generasjon etter generasjon, rom for rom.
+Le catalogue d’un artiste ou d’une collection ¦ Katalóg umelca alebo zbierky ¦ Katalogen over en kunstner eller en samling
+Artiste ou collection ¦ Umelec alebo zbierka ¦ Kunstner eller samling
+Ses œuvres, ses expositions, son catalogue raisonné. ¦ Diela, výstavy, súpis diela. ¦ Verkene, utstillingene, verkfortegnelsen.
+Un fonds d’archives ou un musée familial ¦ Archívny fond alebo rodinné múzeum ¦ Et arkiv eller et familiemuseum
+Archives ou musée ¦ Archív alebo múzeum ¦ Arkiv eller museum
+Des photos, des lettres, des objets à classer et à décrire. ¦ Fotky, listy, predmety na roztriedenie a opísanie. ¦ Bilder, brev og gjenstander som skal ordnes og beskrives.
+L’étude d’un nom de famille ¦ Štúdium priezviska ¦ Studiet av et etternavn
+Un nom de famille ¦ Priezvisko ¦ Et etternavn
+Tous les porteurs d’un nom, ses variantes, d’où ils viennent. ¦ Všetci nositelia priezviska, jeho varianty, odkiaľ pochádzajú. ¦ Alle som bærer navnet, variantene, hvor de kommer fra.
+L’histoire d’une entreprise ou d’une association ¦ História firmy alebo spolku ¦ Historien om en bedrift eller en forening
+Entreprise ou association ¦ Firma alebo spolok ¦ Bedrift eller forening
+Ses lieux, ses dirigeants, ses salariés ou ses membres. ¦ Ich miesta, vedenie, zamestnanci alebo členovia. ¦ Steder, ledere, ansatte eller medlemmer.
+Transmettre des souvenirs ¦ Odovzdávať spomienky ¦ Gi minner videre
+Des lettres à ouvrir plus tard, des recettes, des chansons, des souvenirs à laisser. ¦ Listy na otvorenie neskôr, recepty, piesne, spomienky, ktoré chceš zanechať. ¦ Brev som skal åpnes senere, oppskrifter, sanger, minner å etterlate.
+Ce qui change ¦ Čo sa zmení ¦ Hva som endres
+Commencer avec une base vide ¦ Začať s prázdnou databázou ¦ Start med en tom database
+🧪 Essayer avec une base d’exemple ¦ 🧪 Vyskúšať s ukážkovou databázou ¦ 🧪 Prøv med en eksempeldatabase
+🧪 Base d’exemple ¦ 🧪 Ukážková databáza ¦ 🧪 Eksempeldatabase
+Une famille imaginaire pour essayer l’app : ta généalogie n’est pas touchée. ¦ Vymyslená rodina na vyskúšanie aplikácie: tvojho rodokmeňa sa to nedotkne. ¦ En oppdiktet familie for å prøve appen: slektsforskningen din blir ikke rørt.
+Revenir à ma généalogie ¦ Späť k môjmu rodokmeňu ¦ Tilbake til min slektsforskning
+Repartir d’une base vide ¦ Začať znova s prázdnou databázou ¦ Start på nytt med en tom database
+Ou bien : ¦ Alebo: ¦ Eller:
+🐾 Créer le premier animal ¦ 🐾 Vytvoriť prvé zviera ¦ 🐾 Opprett det første dyret
+Créer le premier animal ¦ Vytvoriť prvé zviera ¦ Opprett det første dyret
+Espèce ¦ Druh ¦ Art
+Création de la base… ¦ Vytvára sa databáza… ¦ Databasen opprettes…
+Préparation de la base d’exemple… ¦ Pripravuje sa ukážková databáza… ¦ Eksempeldatabasen klargjøres…
+✓ Base créée ¦ ✓ Databáza vytvorená ¦ ✓ Databasen er opprettet
+ℹ️ Rien n’est figé : Réglages → Apparence → « 🧭 Usage de l’app ». ¦ ℹ️ Nič nie je napevno: Nastavenia → Vzhľad → „🧭 Použitie aplikácie“. ¦ ℹ️ Ingenting er låst: Innstillinger → Utseende → «🧭 Bruk av appen».
+🧭 Usage de l’app ¦ 🧭 Použitie aplikácie ¦ 🧭 Bruk av appen
+🧭 Revoir le premier lancement ¦ 🧭 Znova zobraziť prvé spustenie ¦ 🧭 Se første oppstart igjen
+Premier écran à l’ouverture ¦ Prvá obrazovka po otvorení ¦ Første skjerm ved åpning
+Le dernier écran ouvert (comme avant) ¦ Posledná otvorená obrazovka (ako predtým) ¦ Den sist åpnede skjermen (som før)
+Usage enregistré. ¦ Použitie uložené. ¦ Bruken er lagret.
+(la page va se recharger) ¦ (stránka sa znova načíta) ¦ (siden lastes inn på nytt)
+Langue · Language ¦ Jazyk · Language ¦ Språk · Language
+Une petite visite ? ¦ Krátka prehliadka? ¦ En liten omvisning?
+En {n} étapes, l’app te montre où créer une fiche, ajouter un parent, une photo, un événement, faire une sauvegarde et trouver l’aide. Ça prend deux minutes. ¦ V {n} krokoch ti aplikácia ukáže, kde vytvoriť kartu, pridať rodiča, fotku, udalosť, urobiť zálohu a nájsť pomocníka. Zaberie to dve minúty. ¦ I {n} trinn viser appen deg hvor du oppretter en oppføring, legger til en forelder, et bilde, en hendelse, tar en sikkerhetskopi og finner hjelpen. Det tar to minutter.
+▶ Commencer ¦ ▶ Začať ¦ ▶ Start
+Plus tard ¦ Neskôr ¦ Senere
+Ne plus proposer ¦ Už neponúkať ¦ Ikke foreslå igjen
+Passer la visite ¦ Preskočiť prehliadku ¦ Hopp over omvisningen
+← Précédent ¦ ← Predchádzajúci ¦ ← Forrige
+Suivant → ¦ Ďalší → ¦ Neste →
+✓ Terminer ¦ ✓ Dokončiť ¦ ✓ Fullfør
+Étape {i} sur {n} ¦ Krok {i} z {n} ¦ Trinn {i} av {n}
+Visite guidée, étape {i} sur {n} : {what} ¦ Prehliadka so sprievodcom, krok {i} z {n}: {what} ¦ Guidet omvisning, trinn {i} av {n}: {what}
+Tu peux cliquer le bouton entouré pour le faire pour de vrai, ou juste avancer. ¦ Môžeš kliknúť na zakrúžkované tlačidlo a urobiť to naozaj, alebo len pokračovať. ¦ Du kan klikke på den markerte knappen for å gjøre det på ordentlig, eller bare gå videre.
+Ajouter un parent ¦ Pridať rodiča ¦ Legg til en forelder
+Ajouter une photo ¦ Pridať fotku ¦ Legg til et bilde
+Un événement et son lieu ¦ Udalosť a jej miesto ¦ En hendelse og stedet for den
+Faire une sauvegarde ¦ Urobiť zálohu ¦ Ta en sikkerhetskopi
+Les Réglages et l’aide ¦ Nastavenia a pomocník ¦ Innstillinger og hjelp
+Chaque personne a sa fiche. Ce bouton en crée une : un prénom, un nom, et c’est parti. ¦ Každá osoba má svoju kartu. Toto tlačidlo ju vytvorí: meno, priezvisko a môžeš začať. ¦ Hver person har sin oppføring. Denne knappen oppretter en: et fornavn, et etternavn, og så er du i gang.
+Sur une fiche, le « ＋ » de « Parents » relie un père ou une mère : choisis une fiche qui existe, ou crée-la. C’est comme ça que l’arbre se construit. ¦ Na karte „＋“ pri „Rodičoch“ prepojí otca alebo matku: vyber existujúcu kartu, alebo ju vytvor. Tak sa strom stavia. ¦ På en oppføring kobler «＋» ved «Foreldre» til en far eller en mor: velg en eksisterende oppføring, eller opprett den. Slik bygges treet.
+Ici, tu ajoutes des photos et des actes à la fiche : prends-les dans tes médias, ou glisse-les depuis l’ordinateur. ¦ Tu ku karte pridávaš fotky a záznamy: vezmi ich zo svojich médií, alebo ich pretiahni z počítača. ¦ Her legger du til bilder og dokumenter på oppføringen: ta dem fra mediene dine, eller dra dem inn fra datamaskinen.
+Naissance, mariage, décès… Ajoute un événement avec sa date et son lieu : tape les premières lettres de la commune, l’app la trouve. ¦ Narodenie, sobáš, úmrtie… Pridaj udalosť s dátumom a miestom: napíš prvé písmená obce a aplikácia ju nájde. ¦ Fødsel, vielse, død… Legg til en hendelse med dato og sted: skriv de første bokstavene i stedsnavnet, så finner appen det.
+De temps en temps, fais une sauvegarde : ce fichier garde toute ta généalogie et tes photos. Range-le sur une clé USB ou un autre disque. ¦ Občas urob zálohu: tento súbor uchová celý tvoj rodokmeň aj fotky. Ulož ho na USB kľúč alebo iný disk. ¦ Ta en sikkerhetskopi innimellom: filen tar vare på hele slektsforskningen din og bildene dine. Legg den på en minnepinne eller en annen disk.
+Tout se règle ici : apparence, import, sauvegardes… Dans les Réglages, la page « FAQ / tuto » répond à tes questions ; tu peux aussi y relancer cette visite. ¦ Všetko sa nastavuje tu: vzhľad, import, zálohy… V Nastaveniach odpovie stránka „FAQ / návod“ na tvoje otázky; môžeš tam túto prehliadku aj znova spustiť. ¦ Alt stilles inn her: utseende, import, sikkerhetskopier… I Innstillinger svarer siden «FAQ / veiledning» på spørsmålene dine; der kan du også starte omvisningen på nytt.
+✓ Visite terminée. Pour la revoir : Réglages → FAQ / tuto → « ▶ Relancer la visite guidée ». ¦ ✓ Prehliadka skončila. Ak ju chceš vidieť znova: Nastavenia → FAQ / návod → „▶ Znova spustiť prehliadku so sprievodcom“. ¦ ✓ Omvisningen er ferdig. For å se den igjen: Innstillinger → FAQ / veiledning → «▶ Start den guidede omvisningen på nytt».
+Visite guidée fermée. Tu la retrouves dans Réglages → FAQ / tuto. ¦ Prehliadka zatvorená. Nájdeš ju v Nastaveniach → FAQ / návod. ¦ Omvisningen er lukket. Du finner den i Innstillinger → FAQ / veiledning.
+Une petite visite guidée de l’app est proposée. Commencer, plus tard, ou ne plus proposer. ¦ Ponúka sa krátka prehliadka aplikácie so sprievodcom. Začať, neskôr, alebo už neponúkať. ¦ En kort guidet omvisning i appen tilbys. Start, senere, eller ikke foreslå igjen.
+Rien à montrer sur cet écran pour l’instant. ¦ Na tejto obrazovke zatiaľ nie je čo ukázať. ¦ Ingenting å vise på denne skjermen foreløpig.
+Pas de visite guidée en mode consultation. ¦ V režime prehliadania nie je prehliadka so sprievodcom. ¦ Ingen guidet omvisning i visningsmodus.
+La visite guidée n’est pas possible ici. ¦ Prehliadka so sprievodcom tu nie je možná. ¦ Den guidede omvisningen er ikke mulig her.
+🐞 Signaler un problème ¦ 🐞 Nahlásiť problém ¦ 🐞 Rapporter et problem
+AIDE ¦ POMOCNÍK ¦ HJELP
+Ce qui s’est passé ¦ Čo sa stalo ¦ Hva som skjedde
+Ce que j’attendais ¦ Čo som čakal(a) ¦ Hva jeg forventet
+Écris avec tes mots. Évite les noms de ta famille si tu ne veux pas qu’ils soient lus. ¦ Píš vlastnými slovami. Vyhni sa menám svojej rodiny, ak nechceš, aby ich niekto čítal. ¦ Skriv med dine egne ord. Unngå navnene i familien din hvis du ikke vil at de skal bli lest.
+Joindre le rapport technique ¦ Priložiť technickú správu ¦ Legg ved den tekniske rapporten
+Joindre le rapport technique ({x}) ¦ Priložiť technickú správu ({x}) ¦ Legg ved den tekniske rapporten ({x})
+aucune erreur captée ¦ žiadna zachytená chyba ¦ ingen fangede feil
+Rapport technique ¦ Technická správa ¦ Teknisk rapport
+🗑 Vider le journal ¦ 🗑 Vyprázdniť záznam ¦ 🗑 Tøm loggen
+Vider le journal des erreurs captées sur cet ordinateur ¦ Vyprázdniť záznam chýb zachytených na tomto počítači ¦ Tøm loggen over feil fanget på denne datamaskinen
+✉️ Écrire un e-mail ¦ ✉️ Napísať e-mail ¦ ✉️ Skriv en e-post
+Ouvrir une demande sur GitHub ¦ Založiť požiadavku na GitHube ¦ Opprett en sak på GitHub
+Journal des erreurs vidé ¦ Záznam chýb vyprázdnený ¦ Feilloggen er tømt
+✓ Message copié : colle-le où tu veux (e-mail, forum, GitHub). ¦ ✓ Správa skopírovaná: vlož ju, kam chceš (e-mail, fórum, GitHub). ¦ ✓ Meldingen er kopiert: lim den inn hvor du vil (e-post, forum, GitHub).
+La copie n’a pas marché : sélectionne le texte et copie-le à la main. ¦ Kopírovanie nefungovalo: označ text a skopíruj ho ručne. ¦ Kopieringen virket ikke: merk teksten og kopier den manuelt.
+Dis en quelques mots ce qui s’est passé. ¦ Napíš pár slovami, čo sa stalo. ¦ Fortell med noen få ord hva som skjedde.
+Ex. : j’ai cliqué sur « Enregistrer » dans la fiche, et la fenêtre est restée grise. ¦ Napr.: klikol(a) som na „Uložiť“ v karte a okno zostalo sivé. ¦ F.eks.: jeg klikket på «Lagre» i oppføringen, og vinduet forble grått.
+Ex. : que la fiche soit enregistrée et que la fenêtre se ferme. ¦ Napr.: aby sa karta uložila a okno sa zatvorilo. ¦ F.eks.: at oppføringen blir lagret og at vinduet lukkes.
+Pour écrire un e-mail plutôt qu’ouvrir une demande sur GitHub : règle une adresse dans Réglages → « 🔄 Mises à jour ». ¦ Ak chceš namiesto požiadavky na GitHube napísať e-mail: nastav adresu v Nastaveniach → „🔄 Aktualizácie“. ¦ For å skrive en e-post i stedet for å opprette en sak på GitHub: angi en adresse i Innstillinger → «🔄 Oppdateringer».
+La base d’exemple est une famille imaginaire (5 générations, des photos d’époque dessinées) rangée à part dans « Mes généalogies » : ta généalogie n’est jamais touchée. ¦ Ukážková databáza je vymyslená rodina (5 generácií, kreslené dobové fotky) uložená zvlášť v „Mojich rodokmeňoch“: tvojho rodokmeňa sa to nikdy nedotkne. ¦ Eksempeldatabasen er en oppdiktet familie (5 generasjoner, tegnede tidsriktige bilder) som lagres for seg i «Mine slektstrær»: slektsforskningen din blir aldri rørt.
+Aucun fichier choisi ¦ Nie je vybraný žiadny súbor ¦ Ingen fil valgt

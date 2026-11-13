@@ -1,0 +1,11 @@
+fr ¦ lt ¦ lv ¦ et
+# ═════ zone « signaler » : lituanien (lt), letton (lv) et estonien (et) ═════
+Signaler un bug ¦ Pranešti apie klaidą ¦ Ziņot par kļūdu ¦ Teata veast
+Signaler un bug : décris ce qui ne marche pas, un rapport technique sans ta généalogie est préparé ¦ Pranešti apie klaidą: aprašyk, kas neveikia, bus paruošta techninė ataskaita be tavo genealogijos ¦ Ziņot par kļūdu: apraksti, kas nedarbojas, tiks sagatavots tehnisks ziņojums bez tavas ģenealoģijas ¦ Teata veast: kirjelda, mis ei tööta, valmistatakse tehniline aruanne ilma sinu sugupuuta
+Ouvre « 🐞 Signaler un problème » : un rapport technique, sans ta généalogie, est préparé. ¦ Atidaro „🐞 Pranešti apie problemą“: paruošiama techninė ataskaita be tavo genealogijos. ¦ Atver „🐞 Ziņot par problēmu“: tiek sagatavots tehnisks ziņojums bez tavas ģenealoģijas. ¦ Avab „🐞 Teata probleemist“: valmistatakse tehniline aruanne ilma sinu sugupuuta.
+Quelque chose n’a pas marché. Tu veux le signaler ? ¦ Kažkas nepavyko. Nori apie tai pranešti? ¦ Kaut kas neizdevās. Vai vēlies par to ziņot? ¦ Midagi läks valesti. Kas soovid sellest teatada?
+Signaler ¦ Pranešti ¦ Ziņot ¦ Teata
+Sur l’écran « {where} », un message d’erreur est apparu : {err} ¦ Ekrane „{where}“ pasirodė klaidos pranešimas: {err} ¦ Ekrānā „{where}“ parādījās kļūdas ziņojums: {err} ¦ Ekraanil „{where}“ ilmus veateade: {err}
+Ce que je faisais juste avant : ¦ Ką dariau prieš pat tai: ¦ Ko es darīju tieši pirms tam: ¦ Mida ma tegin vahetult enne:
+Proposer de signaler quand quelque chose ne marche pas ¦ Siūlyti pranešti, kai kažkas neveikia ¦ Piedāvāt ziņot, kad kaut kas nedarbojas ¦ Paku teatamist, kui midagi ei tööta
+Quand l’app rencontre une erreur, un petit bandeau « 🐞 Quelque chose n’a pas marché » apparaît en bas à droite, avec « Signaler ». Rien n’est envoyé sans toi. ¦ Kai programėlėje įvyksta klaida, apačioje dešinėje pasirodo nedidelė juosta „🐞 Kažkas nepavyko“ su mygtuku „Pranešti“. Be tavęs niekas nesiunčiama. ¦ Kad lietotnē rodas kļūda, apakšā pa labi parādās neliela josla „🐞 Kaut kas neizdevās“ ar pogu „Ziņot“. Bez tevis nekas netiek nosūtīts. ¦ Kui rakenduses tekib viga, ilmub paremale alla väike riba „🐞 Midagi läks valesti“ nupuga „Teata“. Ilma sinuta ei saadeta midagi.

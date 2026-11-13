@@ -1,0 +1,238 @@
+fr ¦ tr
+# ═════ zone « reste4 » : turc (tr) ═════
+Mesures anciennes par région ¦ Bölgelere göre eski ölçüler
+Les mesures changeaient d’une province, parfois d’un village à l’autre. Choisis la région, la valeur et l’unité : l’app donne l’équivalent en mètres, ares ou litres, et dans les autres mesures du lieu. ¦ Ölçüler bir eyaletten ötekine, bazen bir köyden ötekine değişirdi. Bölgeyi, değeri ve birimi seç: uygulama metre, ar ya da litre cinsinden ve yerin öteki ölçülerindeki karşılığını verir.
+Région / ville ¦ Bölge / şehir
+Entre une valeur. ¦ Bir değer gir.
+Longueurs ¦ Uzunluklar
+Grains (matières sèches) ¦ Tahıl (kuru maddeler)
+Liquides (vin, cidre, huile) ¦ Sıvılar (şarap, elma şarabı, yağ)
+kilomètre ¦ kilometre
+mètre carré ¦ metrekare
+are ¦ ar
+hectare ¦ hektar
+litre ¦ litre
+hectolitre ¦ hektolitre
+Paris, Île-de-France (mesures du roi) ¦ Paris, Île-de-France (kralın ölçüleri)
+Lyon, Lyonnais ¦ Lyon, Lyonnais
+Bretagne (Rennes) ¦ Bretanya (Rennes)
+Normandie (Rouen) ¦ Normandiya (Rouen)
+Bourgogne (Dijon, Beaune) ¦ Burgonya (Dijon, Beaune)
+Provence (Marseille) ¦ Provence (Marsilya)
+Lorraine (Nancy) ¦ Lorraine (Nancy)
+Alsace (Strasbourg) ¦ Alsace (Strasbourg)
+Flandre (Lille) ¦ Flandre (Lille)
+très variable ¦ çok değişken
+très variable d’une ville à l’autre ¦ bir şehirden ötekine çok değişken
+très variable (de 1 500 à 3 000 m² selon le lieu) ¦ çok değişken (yere göre 1 500 ile 3 000 m² arası)
+de 45 à 50 litres selon le lieu ¦ yere göre 45 ile 50 litre arası
+≈ : valeur approchée ou variable selon la ville. Sources : loi du 19 frimaire an VIII (pied du roi, toise) et « Tables de comparaison entre les mesures anciennes et celles qui les remplacent » publiées par département (an X – 1812). Pour une commune précise, cherche la table de ton département aux archives départementales. ¦ ≈ : yaklaşık ya da şehre göre değişen değer. Kaynaklar: VIII. yıl 19 Frimaire yasası (pied du roi, toise) ve her département için yayımlanan “Tables de comparaison entre les mesures anciennes et celles qui les remplacent” (X. yıl – 1812). Belirli bir yerleşim yeri için département’ının tablosunu département arşivlerinde ara.
+Âge ↔ date de naissance ¦ Yaş ↔ doğum tarihi
+Les actes donnent souvent l’âge plutôt que la date de naissance. « 32 ans au décès le 12/03/1790 » → né entre deux dates. Ou l’inverse : l’âge exact à une date. ¦ Belgeler çoğu zaman doğum tarihi yerine yaşı verir. « 32 ans au décès le 12/03/1790 » → iki tarih arasında doğmuş. Ya da tersi: bir tarihteki tam yaş.
+exact (ans révolus) ¦ tam (dolmuş yıllar)
+« environ » (± 2 ans) ¦ “yaklaşık” (± 2 yıl)
+arrondi (± 5 ans) ¦ yuvarlanmış (± 5 yıl)
+très vague (± 10 ans) ¦ çok belirsiz (± 10 yıl)
+À la date de ¦ Şu tarihte
+Entre un âge et la date de l’acte. ¦ Bir yaş ve belgenin tarihini gir.
+Âge le ¦ Şu tarihteki yaş
+Entre une date de naissance et une autre date. ¦ Bir doğum tarihi ve başka bir tarih gir.
+Date non reconnue : écris par exemple 12/03/1790, 12 mars 1790, mars 1790 ou 1790. ¦ Tarih anlaşılmadı: örneğin 12/03/1790, 12 mars 1790, mars 1790 ya da 1790 yaz.
+Naissance entre le {from} et le {to} ¦ Doğum: {from} ile {to} arası
+soit vers {when} (entre {lo} et {hi} révolus) ¦ yani {when} civarı (dolmuş {lo} ile {hi} arası)
+soit vers {when} ¦ yani {when} civarı
+Date non reconnue : écris par exemple 13/03/1757. ¦ Tarih anlaşılmadı: örneğin 13/03/1757 yaz.
+La seconde date est avant la naissance. ¦ İkinci tarih doğumdan önce.
+soit {days} de vie ¦ yani {days} yaşam
+Entre {min} et {max} ¦ {min} ile {max} arası
+Une des dates est incomplète. ¦ Tarihlerden biri eksik.
+Écart entre deux dates ¦ İki tarih arasındaki süre
+Combien de temps entre deux actes ? Années, mois, jours, nombre total de jours et de semaines. Une date incomplète (« mars 1790 », « 1802 ») donne un écart minimum et maximum. ¦ İki belge arasında ne kadar zaman var? Yıllar, aylar, günler, toplam gün ve hafta sayısı. Eksik bir tarih (« mars 1790 », « 1802 ») en az ve en çok bir süre verir.
+9 novembre 1799 ¦ 9 novembre 1799
+Entre deux dates. ¦ İki tarih gir.
+Date non reconnue : écris par exemple 14/07/1789, 14 juillet 1789, juillet 1789 ou 1789. ¦ Tarih anlaşılmadı: örneğin 14/07/1789, 14 juillet 1789, juillet 1789 ya da 1789 yaz.
+(la seconde date est la plus ancienne : écart compté à l’envers) ¦ (ikinci tarih daha eski: süre tersine sayıldı)
+{weeks} et {days} ¦ {weeks} ve {days}
+Du {a} au {b} : une date est incomplète. ¦ {a} – {b}: tarihlerden biri eksik.
+=semaine ¦ hafta|hafta
+Jour de la semaine ¦ Haftanın günü
+Quel jour tombait une date ? Avant 1582, le calendrier julien s’applique : choisis l’usage. ¦ Bir tarih hangi güne denk geliyordu? 1582’den önce Jülyen takvimi geçerlidir: kullanımı seç.
+France (julien jusqu’au 9 déc. 1582) ¦ Fransa (9 Ara. 1582’ye kadar Jülyen)
+Rome (julien jusqu’au 4 oct. 1582) ¦ Roma (4 Eki. 1582’ye kadar Jülyen)
+Toujours grégorien ¦ Her zaman Gregoryen
+Toujours julien ¦ Her zaman Jülyen
+Indices pour la recherche (baptêmes, mariages…) ¦ Araştırma için ipuçları (vaftizler, evlilikler…)
+Entre une date complète. ¦ Tam bir tarih gir.
+Il faut une date complète : jour, mois et année (ex. 14/07/1789). ¦ Tam bir tarih gerekli: gün, ay ve yıl (örn. 14/07/1789).
+Ce jour n’a pas existé en France : le 9 décembre 1582 a été suivi du 20 décembre. ¦ Bu gün Fransa’da hiç var olmadı: 9 Aralık 1582’yi 20 Aralık izledi.
+Ce jour n’a pas existé à Rome : le 4 octobre 1582 a été suivi du 15 octobre. ¦ Bu gün Roma’da hiç var olmadı: 4 Ekim 1582’yi 15 Ekim izledi.
+soit le {date} dans le calendrier grégorien ¦ yani Gregoryen takvimde {date}
+soit le {date} dans le calendrier julien ¦ yani Jülyen takvimde {date}
+C’était un {day} ¦ Günlerden {day} idi
+julien ¦ Jülyen
+Jour du Seigneur : beaucoup de baptêmes (souvent le jour même ou le lendemain de la naissance) ; mariages rares. ¦ Rab’bin günü: çok vaftiz (çoğu zaman doğum günü ya da ertesi gün); evlilikler seyrek.
+Jour courant des mariages à la campagne sous l’Ancien Régime. ¦ Eski Rejim döneminde kırsalda yaygın bir düğün günü.
+Jour préféré des mariages dans bien des paroisses sous l’Ancien Régime. ¦ Eski Rejim döneminde birçok kilise bölgesinde en sevilen düğün günü.
+Jour maigre dans certains diocèses : mariages moins fréquents. ¦ Bazı piskoposluk bölgelerinde perhiz günü: evlilikler daha seyrek.
+Jour ordinaire ; fêtes de l’Ascension et de la Fête-Dieu. ¦ Sıradan bir gün; Göğe Yükseliş ve Corpus Christi bayramları.
+Jour maigre (souvenir de la Passion) : on évitait de s’y marier. ¦ Perhiz günü (Çarmıh acısının anısına): o gün evlenmekten kaçınılırdı.
+Jour maigre jusqu’au XVIIIe siècle dans beaucoup de diocèses ; au XIXe, jour fréquent des mariages civils. ¦ Birçok piskoposluk bölgesinde 18. yüzyıla kadar perhiz günü; 19. yüzyılda resmî nikâhların sık görüldüğü gün.
+Saint du jour et fêtes mobiles ¦ Günün azizi ve oynak bayramlar
+Les fêtes mobiles dépendent de Pâques. Le saint du jour aide à comprendre un prénom : on donnait souvent celui du saint de la naissance ou du baptême. ¦ Oynak bayramlar Paskalya’ya bağlıdır. Günün azizi bir adı anlamaya yardım eder: çoğu zaman doğum ya da vaftiz gününün azizinin adı verilirdi.
+Comput ¦ Computus
+auto (julien avant 1583) ¦ otomatik (1583’ten önce Jülyen)
+date|Mois ¦ Ay
+Entre une année entre 400 et 2400. ¦ 400 ile 2400 arasında bir yıl gir.
+Dates dans le calendrier julien. ¦ Tarihler Jülyen takviminde.
+Ce jour n’existe pas. ¦ Bu gün yok.
+Dans ta base, nés ou baptisés ce jour : ¦ Veritabanında bu gün doğanlar ya da vaftiz edilenler:
+porte le prénom du saint du jour ¦ günün azizinin adını taşıyor
+Saint du jour indisponible. ¦ Günün azizi bulunamadı.
+Saints : calendrier usuel des almanachs français (celui du widget « Prénom et saint du jour ») ; il a varié selon les époques et les diocèses. ¦ Azizler: Fransız almanaklarının alışılmış takvimi (“Günün adı ve azizi” widget’ınınki); dönemlere ve piskoposluk bölgelerine göre değişmiştir.
+dimanche, début du temps de la Septuagésime ¦ pazar, Septuagesima döneminin başı
+dimanche ¦ pazar
+dimanche gras ¦ yağlı pazar
+veille des Cendres, fin du carnaval ¦ Kül Çarşambası arifesi, karnavalın sonu
+début du Carême : plus de mariages jusqu’à Pâques ¦ Büyük Perhiz’in başı: Paskalya’ya kadar evlilik yok
+dimanche des Brandons ¦ Brandons pazarı (şenlik ateşleri)
+jeudi ¦ perşembe
+Pâques fleuries ¦ Palmiye Pazarı
+baptêmes solennels ¦ törenli vaftizler
+dimanche, fin du temps pascal des mariages interdits ¦ pazar, evliliklerin yasak olduğu Paskalya döneminin sonu
+lundi, processions dans les champs ¦ pazartesi, tarlalarda alaylar
+jeudi (fêtée le dimanche suivant après 1802) ¦ perşembe (1802’den sonra sonraki pazar kutlanır)
+vendredi ¦ cuma
+Heures canoniques ¦ Kanonik saatler
+Les actes datent parfois à « l’heure de vêpres » ou « à l’issue de la grand-messe ». Les heures de l’Église suivaient le soleil : le jour était coupé en 12 heures, plus longues en été qu’en hiver. ¦ Belgeler bazen « à l’heure de vêpres » ya da « à l’issue de la grand-messe » diye tarihlenir. Kilisenin saatleri güneşi izlerdi: gün 12 saate bölünürdü, yazın kıştan daha uzun.
+(équinoxe) ¦ (ekinoks)
+(jours les plus longs) ¦ (en uzun günler)
+(jours les plus courts) ¦ (en kısa günler)
+vers {time} ¦ {time} civarı
+{winter} en hiver, {summer} en été ¦ kışın {winter}, yazın {summer}
+Écris la mention (« à l’heure de vêpres », « après complies »…) ou lis le tableau. ¦ İbareyi Fransızca yaz (« à l’heure de vêpres », « après complies »…) ya da tabloyu oku.
+{hour} en {month} : {time} ¦ {hour}, {month}: {time}
+entre {dec} en décembre et {jun} en juin ¦ aralıkta {dec} ile haziranda {jun} arası
+Heure non reconnue : matines, laudes, prime, tierce, sexte, none, vêpres, complies ou angélus. ¦ Saat anlaşılmadı: matines, laudes, prime, tierce, sexte, none, vêpres, complies ya da angélus.
+office de la nuit (dans les paroisses, souvent chanté la veille au soir ou au petit matin) ¦ gece ayini (kilise bölgelerinde çoğu zaman önceki akşam ya da sabah erkenden okunur)
+à l’aube, avant le lever du soleil ¦ şafakta, güneş doğmadan önce
+6e heure, midi ¦ 6. saat, öğle
+à la tombée du jour (le dimanche, à la paroisse, souvent dès le début de l’après-midi) ¦ akşam karanlığında (pazar günleri kilisede çoğu zaman öğleden sonranın başından itibaren)
+à la nuit, avant le coucher ¦ gece, yatmadan önce
+cloche du matin, de midi et du soir ¦ sabah, öğle ve akşam çanı
+Heure solaire (midi = soleil au plus haut), calculée pour le centre de la France ; l’heure légale n’existe qu’à partir de 1891. Les horaires réels variaient selon les paroisses et les couvents. ¦ Güneş saati (öğle = güneş en yüksekte), Fransa’nın ortası için hesaplanmış; yasal saat ancak 1891’den itibaren vardır. Gerçek saatler kiliseden kiliseye ve manastırdan manastıra değişirdi.
+Monnaies étrangères anciennes ¦ Eski yabancı paralar
+Dans les contrats et inventaires, on trouve des pistoles, ducats, florins ou piastres. Leur valeur en livres tournois, monnaie de compte du royaume, selon l’époque. ¦ Sözleşmelerde ve envanterlerde pistole, duka, florin ya da piastre geçer. Dönemlere göre, krallığın hesap parası olan livre tournois cinsinden değerleri.
+Monnaie ¦ Para
+XVIIe siècle (1640-1700) ¦ 17. yüzyıl (1640-1700)
+XVIIIe siècle (1726-1789) ¦ 18. yüzyıl (1726-1789)
+Toutes les monnaies à cette époque ¦ Bu dönemdeki tüm paralar
+soit ≈ {n} livres ¦ yani ≈ {n} livre
+Cette monnaie n’avait pas cours en France à cette époque. ¦ Bu para o dönemde Fransa’da geçerli değildi.
+Louis d’or (France) ¦ Louis d’or (Fransa)
+Écu d’or au soleil (France) ¦ Écu d’or au soleil (Fransa)
+Écu blanc ou louis d’argent (France) ¦ Écu blanc ya da gümüş louis (Fransa)
+Pistole (Espagne, Italie) ¦ Pistole (İspanya, İtalya)
+Ducat d’or (Venise, Hollande, Empire) ¦ Altın duka (Venedik, Hollanda, İmparatorluk)
+Florin de Hollande (gulden) ¦ Hollanda florini (gulden)
+Gulden ou florin du Rhin (Allemagne, Alsace, Suisse) ¦ Ren guldeni ya da florini (Almanya, Alsace, İsviçre)
+Thaler, rixdale (Empire, Saxe, Prusse) ¦ Taler, rixdale (İmparatorluk, Saksonya, Prusya)
+Piastre ou réal de huit (Espagne) ¦ Piastre ya da sekizlik real (İspanya)
+Livre sterling (Angleterre) ¦ Sterlin (İngiltere)
+Livre de Lorraine ¦ Lorraine livre’i
+créé en 1640 à 10 livres ; 24 livres de 1726 à la Révolution ¦ 1640’ta 10 livre olarak yaratıldı; 1726’dan Devrim’e kadar 24 livre
+plus frappé après 1640 ¦ 1640’tan sonra artık basılmadı
+3 livres en 1641 ; gros écu de 6 livres (et petit écu de 3 livres) au XVIIIe ¦ 1641’de 3 livre; 18. yüzyılda 6 livrelik büyük écu (ve 3 livrelik küçük écu)
+souvent une monnaie de compte valant 10 livres ¦ çoğu zaman 10 livre değerinde bir hesap parası
+« piastre gourde » des colonies ¦ sömürgelerin “piastre gourde”u
+monnaie de compte, d’après le cours du change ¦ kambiyo kuruna göre hesap parası
+15 sols 6 deniers tournois ¦ 15 sols 6 deniers tournois
+Valeurs approchées (≈), d’après les ordonnances monétaires de Louis XIII à Louis XVI, le poids d’or ou d’argent fin des pièces et le cours du change à Paris (Savary, « Dictionnaire universel de commerce »). Les cours bougeaient souvent, surtout de 1689 à 1726 : c’est un ordre de grandeur. ¦ Yaklaşık değerler (≈), XIII. Louis’den XVI. Louis’ye para buyrultularına, paraların saf altın ya da gümüş ağırlığına ve Paris’teki kambiyo kuruna göre (Savary, “Dictionnaire universel de commerce”). Kurlar sık değişirdi, özellikle 1689’dan 1726’ya: bu bir büyüklük fikridir.
+Calculateur de générations ¦ Kuşak hesaplayıcı
+Combien de générations entre deux années ? En moyenne 25 à 33 ans par génération : environ 30 ans en lignée masculine, 27 ans en lignée féminine. ¦ İki yıl arasında kaç kuşak var? Kuşak başına ortalama 25 ile 33 yıl: erkek soyunda yaklaşık 30 yıl, kadın soyunda 27 yıl.
+Année (ta naissance) ¦ Yıl (senin doğumun)
+Année (l’ancêtre) ¦ Yıl (ata)
+Entre deux années. ¦ İki yıl gir.
+Générations en arrière ¦ Geriye doğru kuşaklar
+Depuis l’année ¦ Şu yıldan
+Entre deux années différentes. ¦ İki farklı yıl gir.
+Environ {min} à {max} générations ¦ Yaklaşık {min} ile {max} kuşak
+{years} : ≈ {male} générations en lignée masculine (30 ans), ≈ {female} en lignée féminine (27 ans) ¦ {years}: erkek soyunda ≈ {male} kuşak (30 yıl), kadın soyunda ≈ {female} (27 yıl)
+Entre un nombre de générations (1 à 40) et une année. ¦ Bir kuşak sayısı (1 ile 40 arası) ve bir yıl gir.
+ancêtres de la génération {n} ¦ {n}. kuşağın ataları
+{gens} en arrière → nés vers {from}–{to} ¦ {gens} geriye → {from}–{to} civarında doğmuş
+≈ {male} en lignée masculine, ≈ {female} en lignée féminine ¦ erkek soyunda ≈ {male}, kadın soyunda ≈ {female}
+{at} {label} en théorie (Sosa {from} à {to}) ; {total} ancêtres en tout jusqu’à cette génération ¦ Teoride {at} {label} (Sosa {from} ile {to} arası); bu kuşağa kadar toplam {total} ata
+Le nombre d’ancêtres double à chaque génération en théorie ; en pratique il y en a moins, car des cousins se sont mariés entre eux (l’implexe). ¦ Teoride ataların sayısı her kuşakta iki katına çıkar; uygulamada daha azdır, çünkü kuzenler birbirleriyle evlenmiştir (implex).
+le jour de la Pentecôte 1754 ¦ le jour de la Pentecôte 1754
+/Documents/Scans généalogie ¦ /Belgeler/Soy ağacı taramaları
+Saint-Martin de Brive ¦ Saint-Martin de Brive
+Paroisse érigée en 1792 ; voir aussi la chapelle de… ¦ 1792’de kurulan kilise bölgesi; ayrıca bkz. şu şapel…
+Religion et noblesse ¦ Din ve soyluluk
+Travail et société ¦ Çalışma ve toplum
+Voyages et lieux ¦ Yolculuklar ve yerler
+Temps et nature ¦ Zaman ve doğa
+Formes et repères ¦ Biçimler ve işaretler
+Artistique ¦ Sanatsal
+Voyages ¦ Yolculuklar
+Tous les emojis ¦ Tüm emojiler
+Autres emojis ¦ Diğer emojiler
+Choisir un fond ¦ Bir zemin seç
+Choisir un fond… ¦ Bir zemin seç…
+Choisir un fond de carte ¦ Bir harita altlığı seç
+Choisir une icône… ¦ Bir simge seç…
+Aucune icône ¦ Simge yok
+Aucun fond ¦ Zemin yok
+choisir ¦ seç
+valider ¦ onayla
+fermer ¦ kapat
+Chercher une icône ¦ Bir simge ara
+Chercher un fond ¦ Bir zemin ara
+Chercher un fond… (ex. Cassini, relief, 1850) ¦ Bir zemin ara… (örn. Cassini, rölyef, 1850)
+Chercher… (ex. coeur, bateau, chien) ¦ Ara… (Fransızca, örn. coeur, bateau, chien)
+Chercher… (ex. église, mariage, étoile) ¦ Ara… (örn. kilise, evlilik, yıldız)
+Utiliser « {x} » ¦ “{x}” kullan
+1 icône pour « {q} » ¦ “{q}” için 1 simge
+{n} icônes pour « {q} » ¦ “{q}” için {n} simge
+1 fond pour « {q} » ¦ “{q}” için 1 zemin
+{n} fonds pour « {q} » ¦ “{q}” için {n} zemin
+Rien pour « {q} ». Vérifie l’orthographe, ou essaie un autre mot. ¦ “{q}” için bir şey yok. Yazımı kontrol et ya da başka bir kelime dene.
+Retirer l’icône ¦ Simgeyi çıkar
+Retirer le fond ¦ Zemini çıkar
+Allemand et alsacien ¦ Almanca ve Alsasça
+Néerlandais / flamand ¦ Felemenkçe / Flamanca
+Croate / serbe en lettres latines ¦ Latin harfleriyle Hırvatça / Sırpça
+Slovène ¦ Slovence
+Gaélique irlandais ¦ İrlanda Galcesi
+Biélorusse ¦ Belarusça
+Serbe en cyrillique ¦ Kiril harfleriyle Sırpça
+Hébreu ¦ İbranice
+Dates du calendrier grégorien. Les âges des actes anciens sont souvent approximatifs : « environ 40 ans » peut cacher 35 ou 45 ans. ¦ Gregoryen takvimdeki tarihler. Eski belgelerdeki yaşlar çoğu zaman yaklaşıktır: “yaklaşık 40 yaşında” 35 ya da 45’i gizleyebilir.
+Changer dans l’onglet Personnes ¦ Kişiler sekmesinde değiştir
+Mode de chronologie parallèle ¦ Paralel kronoloji modu
+Les événements sans année restent sur les fiches. ¦ Yılı olmayan olaylar kartlarda kalır.
+Modifier la frise historique ¦ Tarih şeridini düzenle
+Les grands événements livrés avec l’app, et les tiens (histoire locale) ¦ Uygulamayla gelen büyük olaylar ve seninkiler (yerel tarih)
+Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z ou en 📁 dossiers), la fiche à droite. ¦ Veritabanındaki medya ve arşiv parçaları, kişiler gibi: solda liste (A → Z ya da 📁 klasörler hâlinde), sağda kart.
+Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche (en ce moment : {n}) ¦ Hazinelerin klasörleri (yeniden adlandır, oluştur, sil, içine ne gireceğini seç), sıra, gösterilenler (şu anda: {n})
+Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche ¦ Hazinelerin klasörleri (yeniden adlandır, oluştur, sil, içine ne gireceğini seç), sıra, gösterilenler
+Me le rappeler (la veille, une semaine avant…) ¦ Bana hatırlat (bir gün önce, bir hafta önce…)
+choses à vérifier ¦ kontrol edilecek şeyler
+Pour montrer l’arbre à quelqu’un qui n’est pas à l’aise avec l’ordinateur : de très gros boutons, seulement l’arbre, les photos et les fiches, et rien qu’on puisse modifier par erreur. ¦ Ağacı bilgisayarla rahat olmayan birine göstermek için: çok büyük düğmeler, yalnızca ağaç, fotoğraflar ve kartlar, ve yanlışlıkla değiştirilebilecek hiçbir şey.
+Aucune hypothèse : une question à trancher (« né à Naves ou à Tulle ? »), avec les preuves pour et contre. ¦ Varsayım yok: karara bağlanacak bir soru (“Naves’da mı Tulle’de mi doğdu?”), lehte ve aleyhte kanıtlarla.
+Détaillée ¦ Ayrıntılı
+Ce qu’on inclut ¦ Neler dahil edilir
+Texte de l’app ¦ Uygulamanın metni
+Regénérer ¦ Yeniden oluştur
+Une journée… ¦ Bir gün…
+Réécrire le texte d’après la fiche et voir ce qui a changé ¦ Metni karta göre yeniden yaz ve neyin değiştiğini gör
+Un petit récit d’un jour de sa vie : âge, famille, village, métier, calendrier, météo, contexte ¦ Hayatından bir günün kısa öyküsü: yaş, aile, köy, meslek, takvim, hava durumu, bağlam
+Ajouter un événement local ¦ Yerel bir olay ekle
+Rien dans cette sorte pendant sa vie. ¦ Hayatı boyunca bu türden bir şey yok.
+Voir toute la liste et ses sources ¦ Tüm listeyi ve kaynaklarını gör
+Une fête, une inondation, un incendie au village… rattaché à une commune ¦ Bir şenlik, bir sel, köyde bir yangın… bir yerleşim yerine bağlı
+Sortes d’événements ¦ Olay türleri
+Un article, une interview à la radio, une émission de télé, un avis de naissance ou une nécrologie, une photo publiée… ¦ Bir makale, bir radyo röportajı, bir televizyon programı, bir doğum ilanı ya da bir ölüm ilanı, yayımlanmış bir fotoğraf…
+Ajouter un passage ¦ Bir geçiş ekle
+La revue de presse de cette personne ¦ Bu kişinin basın özeti
+Modifier l’identifiant Wikidata ¦ Wikidata kimliğini düzenle
+Plus de détails ¦ Daha fazla ayrıntı

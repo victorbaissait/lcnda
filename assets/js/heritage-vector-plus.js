@@ -12,6 +12,7 @@
  */
 (function (root) {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s); // 🌐 docs/I18N.md
     const ext = root.LCNDA_EXT = root.LCNDA_EXT || {};
     const MM = 96 / 25.4, n2 = v => Math.round(v * 100) / 100;
     const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d), clamp = (v, a, b) => Math.max(a, Math.min(b, v));
@@ -70,7 +71,7 @@
         const p0 = cleanPersp(doc.persp), p = {...p0, on: true}, rng = (k, l, a, b, s, v, f) => `<label class="vx-pp"><span>${l} <output data-pp-o="${k}">${f(v)}</output></span><input type="range" name="${k}" min="${a}" max="${b}" step="${s}" value="${v}"></label>`;
         const pct = v => `${Math.round(v * 100)} %`; let ok = false;
         ext.openDialog({eyebrow: 'AFFICHAGE', title: '📐 Grille de perspective', submitLabel: 'OK',
-            body: `<p class="muted">Des lignes de fuite par-dessus le dessin (elles ne s’impriment pas). Avec ╱ Ligne et 📏 Cote, le trait s’aligne sur la ligne de fuite, la verticale ou l’horizontale la plus proche (⌘ ou Ctrl : sans).</p>
+            body: `<p class="muted">${i18n('Des lignes de fuite par-dessus le dessin (elles ne s’impriment pas). Avec ╱ Ligne et 📏 Cote, le trait s’aligne sur la ligne de fuite, la verticale ou l’horizontale la plus proche (⌘ ou Ctrl : sans).')}</p>
                 <div class="vx-pp-row"><label class="ui-toggle"><input type="checkbox" name="on" checked><i></i>Montrer la grille</label>
                 <label><input type="radio" name="n" value="1" ${p.n === 1 ? 'checked' : ''}> 1 point de fuite (une rue vue de face)</label><label><input type="radio" name="n" value="2" ${p.n === 2 ? 'checked' : ''}> 2 points (une maison vue de l’angle)</label></div>
                 ${rng('hy', 'Ligne d’horizon (hauteur)', -0.5, 1.5, 0.01, p.hy, pct)}${rng('v1', 'Point de fuite gauche', -2, 3, 0.01, p.v1, pct)}${rng('v2', 'Point de fuite droit', -2, 3, 0.01, p.v2, pct)}${rng('k', 'Nombre de lignes', 4, 60, 1, p.k, v => String(v))}`,

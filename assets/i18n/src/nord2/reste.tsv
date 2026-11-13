@@ -1,0 +1,492 @@
+fr ¦ sk ¦ nb
+14 juillet 2027 ¦ 14. júla 2027 ¦ 14. juli 2027
+↻ Remettre à jour ¦ ↻ Aktualizovať ¦ ↻ Oppdater
+Les widgets se posent sur le bureau de {os}, dans une petite fenêtre sans cadre : glisse-la par son titre, elle retient sa place. Lecture seule : rien ne s’y modifie. Clic droit sur un widget : toujours au-dessus, ouvrir LCNDA, fermer. ¦ Widgety sa umiestnia na plochu systému {os}, do malého okna bez rámčeka: potiahni ho za názov, zapamätá si svoje miesto. Len na čítanie: nič sa v ňom nemení. Pravé tlačidlo na widgete: vždy navrchu, otvoriť LCNDA, zavrieť. ¦ Widgetene legges på skrivebordet i {os}, i et lite vindu uten ramme: dra det etter tittelen, det husker plassen sin. Skrivebeskyttet: ingenting kan endres der. Høyreklikk på en widget: alltid øverst, åpne LCNDA, lukk.
+Tu utilises LCNDA dans un navigateur : les vrais widgets de bureau (petite fenêtre sans cadre, toujours au-dessus, au démarrage de l’ordinateur) demandent l’application de bureau LCNDA (PC, Mac, Linux). À la place, télécharge le widget : un fichier .html autonome, à ouvrir d’un double-clic et à garder dans un onglet ; sans personne vivante ni fiche confidentielle. ¦ Používaš LCNDA v prehliadači: skutočné widgety na plochu (malé okno bez rámčeka, vždy navrchu, pri spustení počítača) vyžadujú desktopovú aplikáciu LCNDA (PC, Mac, Linux). Namiesto toho si stiahni widget: samostatný súbor .html, ktorý otvoríš dvojklikom a necháš na karte; bez žijúcich osôb a bez dôverných kariet. ¦ Du bruker LCNDA i en nettleser: ekte skrivebordswidgeter (lite vindu uten ramme, alltid øverst, når datamaskinen starter) krever skrivebordsappen LCNDA (PC, Mac, Linux). Last i stedet ned widgeten: en frittstående .html-fil som du åpner med et dobbeltklikk og holder åpen i en fane; uten levende personer og uten konfidensielle oppføringer.
+Widgets sur le bureau ¦ Widgety na ploche ¦ Widgeter på skrivebordet
+Widgets sur le bureau… ¦ Widgety na ploche… ¦ Widgeter på skrivebordet…
+{icon} « {name} » est sur le bureau. ¦ {icon} „{name}“ je na ploche. ¦ {icon} «{name}» er på skrivebordet.
+Ce réglage n’a pas pu être changé sur cet ordinateur. ¦ Toto nastavenie sa na tomto počítači nepodarilo zmeniť. ¦ Denne innstillingen kunne ikke endres på denne datamaskinen.
+🪟 Mettre la calculette sur le bureau (une petite fenêtre à part) ¦ 🪟 Dať kalkulačku na plochu (malé samostatné okno) ¦ 🪟 Legg kalkulatoren på skrivebordet (et lite eget vindu)
+🪟 Mettre la calculette sur le bureau (un fichier .html autonome) ¦ 🪟 Dať kalkulačku na plochu (samostatný súbor .html) ¦ 🪟 Legg kalkulatoren på skrivebordet (en frittstående .html-fil)
+Les anniversaires du jour et des 7 jours qui viennent, et ce qui s’est passé ce jour-là dans ta famille. ¦ Dnešné narodeniny a narodeniny nasledujúcich 7 dní a čo sa v tento deň stalo v tvojej rodine. ¦ Dagens bursdager og bursdagene de neste 7 dagene, og hva som skjedde denne dagen i familien din.
+Un de tes ancêtres, un nouveau chaque jour (↻ pour en voir un autre) : son portrait, ses dates, ses lieux. ¦ Jeden z tvojich predkov, každý deň nový (↻ pre ďalšieho): jeho portrét, dátumy a miesta. ¦ En av anene dine, en ny hver dag (↻ for å se en annen): portrett, datoer og steder.
+La calculette de l’app (fractions, pourcentages, dates des actes, unités…) toujours à portée de main. ¦ Kalkulačka aplikácie (zlomky, percentá, dátumy záznamov, jednotky…) vždy poruke. ¦ Appens kalkulator (brøker, prosenter, datoer i dokumenter, enheter…) alltid for hånden.
+Je fais l’histoire de notre famille. Sur ces photos, il y a des visages que je ne sais pas nommer : peut-être que toi, tu les reconnais ? ¦ Spisujem históriu našej rodiny. Na týchto fotkách sú tváre, ktoré neviem pomenovať: možno ich spoznáš ty? ¦ Jeg skriver familiens historie. På disse bildene er det ansikter jeg ikke kan sette navn på: kanskje du kjenner dem igjen?
+En mode consultation, on ne prépare pas de demande. ¦ V režime prehliadania sa žiadosť nepripravuje. ¦ I visningsmodus kan du ikke forberede en forespørsel.
+Qui est sur cette photo ? ¦ Kto je na tejto fotke? ¦ Hvem er på dette bildet?
+QUI EST SUR CETTE PHOTO ? ¦ KTO JE NA TEJTO FOTKE? ¦ HVEM ER PÅ DETTE BILDET?
+Nouvelle demande « Qui est sur cette photo ? » ¦ Nová žiadosť „Kto je na tejto fotke?“ ¦ Ny forespørsel «Hvem er på dette bildet?»
+Les photos et les visages ¦ Fotky a tváre ¦ Bilder og ansikter
+Clique sur un cadre pour le mettre (bleu) ou l’enlever (gris) de la demande. Pour un visage oublié, trace un cadre sur la photo avec la souris. ¦ Klikni na rámček, aby si ho do žiadosti pridal (modrý) alebo z nej odobral (sivý). Pre vynechanú tvár nakresli rámček na fotku myšou. ¦ Klikk på en ramme for å ta den med (blå) eller fjerne den (grå) fra forespørselen. For et ansikt som ble oversett: tegn en ramme på bildet med musen.
+Les noms à proposer ¦ Navrhované mená ¦ Navn å foreslå
+Le cousin les voit dans une liste ; il peut aussi écrire un autre nom. Aucune fiche confidentielle n’est jamais proposée. ¦ Bratranec ich uvidí v zozname; môže aj napísať iné meno. Dôverná karta sa nikdy nenavrhuje. ¦ Fetteren ser dem i en liste; han kan også skrive et annet navn. Ingen konfidensiell oppføring blir noen gang foreslått.
+Proposer aussi des personnes vivantes ¦ Navrhovať aj žijúce osoby ¦ Foreslå også levende personer
+⚠️ Les vivants cochés seront proposés au cousin : vérifie qu’ils sont d’accord. ¦ ⚠️ Začiarknuté žijúce osoby budú bratrancovi navrhnuté: over, že s tým súhlasia. ¦ ⚠️ De levende personene som er krysset av, blir foreslått for fetteren: sjekk at de er enige.
+{n} personnes sans doute vivantes ne seront pas proposées (coche la case pour les garder). ¦ Pravdepodobne žijúce osoby ({n}) nebudú navrhnuté (začiarkni políčko, ak ich chceš ponechať). ¦ {n} personer som trolig lever, blir ikke foreslått (kryss av i boksen for å beholde dem).
+{n} personne sans doute vivante ne sera pas proposée (coche la case pour la garder). ¦ {n} pravdepodobne žijúca osoba nebude navrhnutá (začiarkni políčko, ak ju chceš ponechať). ¦ {n} person som trolig lever, blir ikke foreslått (kryss av i boksen for å beholde den).
+Déjà identifié : {name} ¦ Už identifikované: {name} ¦ Allerede identifisert: {name}
+Visage sans nom ¦ Tvár bez mena ¦ Ansikt uten navn
+Aucune photo pour l’instant. ¦ Zatiaľ žiadna fotka. ¦ Ingen bilder ennå.
+La reconnaissance des visages, sur cet ordinateur (rien n’est envoyé) ¦ Rozpoznávanie tvárí na tomto počítači (nič sa neodosiela) ¦ Ansiktsgjenkjenning på denne datamaskinen (ingenting sendes)
+Repérer les visages ¦ Nájsť tváre ¦ Finn ansiktene
+Retirer cette photo de la demande ¦ Odobrať túto fotku zo žiadosti ¦ Fjern dette bildet fra forespørselen
+12 photos au plus dans une demande. ¦ V jednej žiadosti najviac 12 fotiek. ¦ Høyst 12 bilder i en forespørsel.
+La reconnaissance des visages n’est pas disponible : trace les cadres à la main. ¦ Rozpoznávanie tvárí nie je k dispozícii: nakresli rámčeky ručne. ¦ Ansiktsgjenkjenning er ikke tilgjengelig: tegn rammene for hånd.
+Je cherche les visages… ¦ Hľadám tváre… ¦ Leter etter ansikter…
+Aucun visage trouvé : trace les cadres à la main. ¦ Nenašla sa žiadna tvár: nakresli rámčeky ručne. ¦ Ingen ansikter funnet: tegn rammene for hånd.
+Visages non repérés : {err}. Trace les cadres à la main. ¦ Tváre sa nenašli: {err}. Nakresli rámčeky ručne. ¦ Ansiktene ble ikke funnet: {err}. Tegn rammene for hånd.
+Choisis au moins un visage (clique sur un cadre, ou trace-le sur la photo). ¦ Vyber aspoň jednu tvár (klikni na rámček alebo ho nakresli na fotku). ¦ Velg minst ett ansikt (klikk på en ramme, eller tegn den på bildet).
+{n} vivants non proposés ¦ Nenavrhnuté žijúce osoby: {n} ¦ {n} levende ikke foreslått
+{n} vivant non proposé ¦ {n} nenavrhnutá žijúca osoba ¦ {n} levende ikke foreslått
+{n} fiches confidentielles non proposées ¦ Nenavrhnuté dôverné karty: {n} ¦ {n} konfidensielle oppføringer ikke foreslått
+{n} fiche confidentielle non proposée ¦ {n} nenavrhnutá dôverná karta ¦ {n} konfidensiell oppføring ikke foreslått
+Ta demande est prête ¦ Tvoja žiadosť je pripravená ¦ Forespørselen din er klar
+{faces} sur {photos}, {names}. ¦ {faces} na {photos}, {names}. ¦ {faces} på {photos}, {names}.
+Préparer un courriel ¦ Pripraviť e-mail ¦ Forbered en e-post
+Message à envoyer avec le fichier ¦ Správa na odoslanie so súborom ¦ Melding som sendes med filen
+Rien n’est envoyé par l’app : c’est toi qui joins le fichier à ton courriel. Le fichier ne contient que les photos, les cadres des visages et les noms proposés. ¦ Aplikácia nič neodosiela: súbor k e-mailu priložíš sám. Súbor obsahuje len fotky, rámčeky tvárí a navrhnuté mená. ¦ Appen sender ingenting: det er du som legger ved filen i e-posten din. Filen inneholder bare bildene, rammene rundt ansiktene og de foreslåtte navnene.
+Fichier téléchargé ({n} photos n’ont pas pu être jointes). ¦ Súbor stiahnutý (fotky, ktoré sa nepodarilo priložiť: {n}). ¦ Filen er lastet ned ({n} bilder kunne ikke legges ved).
+Fichier téléchargé ({n} photo n’a pas pu être jointe). ¦ Súbor stiahnutý ({n} fotku sa nepodarilo priložiť). ¦ Filen er lastet ned ({n} bilde kunne ikke legges ved).
+Fichier téléchargé : joins-le à un courriel. ¦ Súbor stiahnutý: prilož ho k e-mailu. ¦ Filen er lastet ned: legg den ved en e-post.
+Ce que verra ton cousin ¦ Čo uvidí tvoj bratranec ¦ Dette ser fetteren din
+Aperçu du fichier ¦ Náhľad súboru ¦ Forhåndsvisning av filen
+Accord ¦ Zhoda ¦ Enighet
+Un autre cousin a donné la même réponse ¦ Iný bratranec odpovedal rovnako ¦ En annen fetter ga samme svar
+Désaccord ¦ Nezhoda ¦ Uenighet
+Un autre cousin a répondu autre chose ¦ Iný bratranec odpovedal niečo iné ¦ En annen fetter svarte noe annet
+selon {who} ¦ podľa: {who} ¦ ifølge {who}
+ton cousin ¦ tvoj bratranec ¦ fetteren din
+✓ Pareil pour {list} ¦ ✓ Rovnako pre {list} ¦ ✓ Det samme for {list}
+un cousin ¦ bratranec ¦ en fetter
+Un cousin ¦ Bratranec ¦ En fetter
+Aujourd’hui sur la photo : <b>{name}</b> ¦ Teraz na fotke: <b>{name}</b> ¦ Nå på bildet: <b>{name}</b>
+Peut-être : ¦ Možno: ¦ Kanskje:
+Que faire de cette réponse ? ¦ Čo s touto odpoveďou? ¦ Hva skal skje med dette svaret?
+Importer les réponses « Qui est sur cette photo ? » ¦ Importovať odpovede „Kto je na tejto fotke?“ ¦ Importer svarene «Hvem er på dette bildet?»
+le fichier « reponses-visages.json » ¦ súbor „reponses-visages.json“ ¦ filen «reponses-visages.json»
+Le fichier que ton cousin t’a renvoyé (il s’appelle « reponses-visages.json »). ¦ Súbor, ktorý ti bratranec poslal späť (volá sa „reponses-visages.json“). ¦ Filen som fetteren din sendte tilbake (den heter «reponses-visages.json»).
+ce fichier est trop gros pour un fichier de réponses (300 Ko au plus). ¦ tento súbor je na súbor s odpoveďami príliš veľký (najviac 300 kB). ¦ denne filen er for stor for en svarfil (høyst 300 kB).
+Ces réponses ont <b>déjà été importées</b> ¦ Tieto odpovede už <b>boli importované</b> ¦ Disse svarene er <b>allerede importert</b>
+<b>{answers}</b> de <b>{who}</b> à « {title} » ({date}), comparées aux {before} déjà reçues. Pour chaque visage : accepte, refuse ou garde pour plus tard ¦ <b>{answers}</b> od <b>{who}</b> k „{title}“ ({date}), porovnané s už prijatými ({before}). Pri každej tvári: prijmi, odmietni alebo odlož na neskôr ¦ <b>{answers}</b> fra <b>{who}</b> til «{title}» ({date}), sammenlignet med de {before} som allerede er mottatt. For hvert ansikt: godta, avvis eller behold til senere
+<b>{answers}</b> de <b>{who}</b> à « {title} » ({date}). Pour chaque visage : accepte, refuse ou garde pour plus tard ¦ <b>{answers}</b> od <b>{who}</b> k „{title}“ ({date}). Pri každej tvári: prijmi, odmietni alebo odlož na neskôr ¦ <b>{answers}</b> fra <b>{who}</b> til «{title}» ({date}). For hvert ansikt: godta, avvis eller behold til senere
+Aucun nom écrit dans ce fichier ¦ V tomto súbore nie je napísané žiadne meno ¦ Ingen navn skrevet i denne filen
+Des cousins ne sont pas d’accord sur certains visages (⚠️) : regarde bien avant d’accepter. ¦ Pri niektorých tvárach sa bratranci nezhodujú (⚠️): skôr než prijmeš, dobre sa pozri. ¦ Fettere er uenige om noen ansikter (⚠️): se nøye etter før du godtar.
+Choisis la fiche de cette personne (ou « Plus tard »). ¦ Vyber kartu tejto osoby (alebo „Neskôr“). ¦ Velg oppføringen til denne personen (eller «Senere»).
+{faces} (réponses de {who}) ¦ {faces} (odpovede od {who}) ¦ {faces} (svar fra {who})
+Réponses de {who} gardées avec la demande. ¦ Odpovede od {who} uložené so žiadosťou. ¦ Svarene fra {who} er beholdt sammen med forespørselen.
+cousins ¦ bratranci ¦ fettere
+Envoyé, en attente des réponses ¦ Odoslané, čaká sa na odpovede ¦ Sendt, venter på svar
+Demande « {title} » supprimée ¦ Žiadosť „{title}“ vymazaná ¦ Forespørselen «{title}» er slettet
+Demander qui c’est ¦ Opýtať sa, kto to je ¦ Spør hvem det er
+Un petit fichier à envoyer à un cousin : il clique sur les visages et écrit qui c’est ¦ Malý súbor na poslanie bratrancovi: klikne na tváre a napíše, kto to je ¦ En liten fil å sende til en fetter: han klikker på ansiktene og skriver hvem det er
+=visage trouvé ¦ nájdená tvár|nájdené tváre|nájdených tvárí ¦ ansikt funnet|ansikter funnet
+=nom proposé ¦ navrhnuté meno|navrhnuté mená|navrhnutých mien ¦ foreslått navn|foreslåtte navn
+=visage identifié ¦ identifikovaná tvár|identifikované tváre|identifikovaných tvárí ¦ identifisert ansikt|identifiserte ansikter
+Média n° {n} ¦ Médium č. {n} ¦ Medie nr. {n}
+Identique ¦ Zhodná ¦ Identisk
+＝ Identique (même fichier) ¦ ＝ Zhodná (rovnaký súbor) ¦ ＝ Identisk (samme fil)
+Zoomée ¦ Priblížená ¦ Zoomet
+Recadrée ¦ Orezaná ¦ Beskåret
+Très proche ¦ Veľmi podobná ¦ Svært lik
+très proche ¦ veľmi podobná ¦ svært lik
+Ressemblante ¦ Podobná ¦ Lignende
+Recadrée / zoomée ¦ Orezaná / priblížená ¦ Beskåret / zoomet
+même fichier ¦ rovnaký súbor ¦ samme fil
+autre format ¦ iný formát ¦ annet format
+redimensionnée ¦ zmenená veľkosť ¦ endret størrelse
+retouchée ¦ upravená ¦ retusjert
+ré-enregistrée ¦ znovu uložená ¦ lagret på nytt
+zoomée ¦ priblížená ¦ zoomet
+recadrée ¦ orezaná ¦ beskåret
+en partie la même ¦ sčasti rovnaká ¦ delvis den samme
+autre prise ¦ iný záber ¦ et annet opptak
+autres couleurs ¦ iné farby ¦ andre farger
+Le calcul des empreintes s’est arrêté : {err} ¦ Výpočet odtlačkov sa zastavil: {err} ¦ Beregningen av fingeravtrykk stoppet: {err}
+Empreintes des photos : <b>{done} / {total}</b> (calcul sur cet ordinateur, par petits paquets — tu peux fermer, ça reprendra). Les résultats se complètent tout seuls. ¦ Odtlačky fotiek: <b>{done} / {total}</b> (výpočet na tomto počítači, po malých dávkach — môžeš zavrieť, bude sa pokračovať). Výsledky sa doplnia samy. ¦ Bildenes fingeravtrykk: <b>{done} / {total}</b> (beregnes på denne datamaskinen, i små porsjoner — du kan lukke, det fortsetter senere). Resultatene fylles ut av seg selv.
+« Comparer deux photos » marche avec deux photos de la base. ¦ „Porovnať dve fotky“ funguje s dvoma fotkami z databázy. ¦ «Sammenlign to bilder» fungerer med to bilder fra databasen.
+L’outil « Comparer deux photos » n’est pas encore chargé : réessaie dans un instant. ¦ Nástroj „Porovnať dve fotky“ ešte nie je načítaný: skús to o chvíľu znova. ¦ Verktøyet «Sammenlign to bilder» er ikke lastet inn ennå: prøv igjen om litt.
+Le moteur des images n’est pas encore chargé : réessaie dans un instant. ¦ Obrazový modul ešte nie je načítaný: skús to o chvíľu znova. ¦ Bildemotoren er ikke lastet inn ennå: prøv igjen om litt.
+Chercher une image semblable ¦ Hľadať podobný obrázok ¦ Søk etter et lignende bilde
+CHERCHER UNE IMAGE SEMBLABLE ¦ HĽADAŤ PODOBNÝ OBRÁZOK ¦ SØK ETTER ET LIGNENDE BILDE
+Retrouve une photo de la base, même recadrée, zoomée, retouchée ou dans un autre format. Tout se calcule sur cet ordinateur. ¦ Nájdi fotku z databázy, aj orezanú, priblíženú, upravenú alebo v inom formáte. Všetko sa počíta na tomto počítači. ¦ Finn et bilde i databasen, også beskåret, zoomet, retusjert eller i et annet format. Alt beregnes på denne datamaskinen.
+Elle sert seulement à chercher : elle n’entre pas dans les médias. ¦ Slúži len na hľadanie: do médií sa nepridá. ¦ Det brukes bare til å søke: det havner ikke i medier.
+Photo de la base ¦ Fotka z databázy ¦ Bilde fra databasen
+Image de ton ordinateur ¦ Obrázok z tvojho počítača ¦ Bilde fra datamaskinen din
+Choisis une photo dans les médias, ou dépose une image de ton ordinateur : l’app cherche les photos qui lui ressemblent. ¦ Vyber fotku v médiách alebo pretiahni obrázok zo svojho počítača: aplikácia nájde fotky, ktoré sa mu podobajú. ¦ Velg et bilde i medier, eller slipp et bilde fra datamaskinen din: appen leter etter bilder som ligner på det.
+＝ Identiques ¦ ＝ Zhodné ¦ ＝ Identiske
+≈ Très proches ¦ ≈ Veľmi podobné ¦ ≈ Svært like
+⬚ Recadrées / zoomées ¦ ⬚ Orezané / priblížené ¦ ⬚ Beskårne / zoomede
+～ Ressemblantes ¦ ～ Podobné ¦ ～ Lignende
+Ressemblance ¦ Podobnosť ¦ Likhet
+Chercher depuis celle-ci ¦ Hľadať od tejto ¦ Søk ut fra dette
+Recherche des photos semblables… ¦ Hľadám podobné fotky… ¦ Søker etter lignende bilder…
+{found} parmi {ready} (la recherche continue) ¦ {found} z {ready} (hľadanie pokračuje) ¦ {found} blant {ready} (søket fortsetter)
+{found} parmi {ready} ¦ {found} z {ready} ¦ {found} blant {ready}
+Aucune photo de cette sorte ¦ Žiadna fotka tohto druhu ¦ Ingen bilder av denne typen
+Aucune photo semblable ¦ Žiadna podobná fotka ¦ Ingen lignende bilder
+Les empreintes ne sont pas toutes prêtes : la recherche se complète toute seule. ¦ Ešte nie sú pripravené všetky odtlačky: hľadanie sa doplní samo. ¦ Ikke alle fingeravtrykk er klare ennå: søket fylles ut av seg selv.
+Parmi {list}. ¦ Z: {list}. ¦ Blant {list}.
+Clique sur « Voir » pour poser les deux images côte à côte. ¦ Klikni na „Zobraziť“ a oba obrázky sa položia vedľa seba. ¦ Klikk på «Vis» for å legge de to bildene side om side.
+Ton image ¦ Tvoj obrázok ¦ Bildet ditt
+Trouvée ¦ Nájdená ¦ Funnet
+Cette photo est un morceau de ton image (environ {pct} % de sa surface), cadre en bleu. ¦ Táto fotka je výrez tvojho obrázka (asi {pct} % jeho plochy), rámček je modrý. ¦ Dette bildet er et utsnitt av bildet ditt (omtrent {pct} % av flaten), rammen i blått.
+Ton image est un morceau de cette photo (environ {pct} % de sa surface), cadre en bleu. ¦ Tvoj obrázok je výrez tejto fotky (asi {pct} % jej plochy), rámček je modrý. ¦ Bildet ditt er et utsnitt av dette bildet (omtrent {pct} % av flaten), rammen i blått.
+Exactement le même fichier. ¦ Presne rovnaký súbor. ¦ Nøyaktig den samme filen.
+La même image ({how}). ¦ Rovnaký obrázok ({how}). ¦ Det samme bildet ({how}).
+Elles se ressemblent : même scène ou même document, peut-être une autre prise. ¦ Sú si podobné: rovnaká scéna alebo rovnaký dokument, možno iný záber. ¦ De ligner på hverandre: samme motiv eller samme dokument, kanskje et annet opptak.
+Cette image n’a pas pu être lue ({err}). ¦ Tento obrázok sa nepodarilo načítať ({err}). ¦ Dette bildet kunne ikke leses ({err}).
+Choisis une image (JPG, PNG, WebP…). ¦ Vyber obrázok (JPG, PNG, WebP…). ¦ Velg et bilde (JPG, PNG, WebP…).
+Image collée ¦ Vložený obrázok ¦ Innlimt bilde
+La photo de départ ¦ Východisková fotka ¦ Utgangsbildet
+Doublons d’images ¦ Duplicitné obrázky ¦ Bildeduplikater
+Les mêmes photos rangées plusieurs fois, même retouchées, recadrées, zoomées ou dans un autre format. Garde la meilleure : ses liens réunissent ceux des autres. ¦ Tie isté fotky uložené viackrát, aj upravené, orezané, priblížené alebo v inom formáte. Ponechaj tú najlepšiu: jej prepojenia spoja prepojenia ostatných. ¦ De samme bildene lagret flere ganger, også retusjert, beskåret, zoomet eller i et annet format. Behold det beste: koblingene samler de andres koblinger.
+Ce qu’on fait des autres photos ¦ Čo sa stane s ostatnými fotkami ¦ Hva som skjer med de andre bildene
+Les autres photos : ¦ Ostatné fotky: ¦ De andre bildene:
+À la corbeille ¦ Do koša ¦ I papirkurven
+En versions ¦ Ako verzie ¦ Som versjoner
+Corbeille : les autres photos sont retirées de la liste des médias (le fichier reste sur le disque) et reviennent avec « ↶ Remettre ». Versions : leur fichier devient une version de la photo gardée (visionneuse → versions). ¦ Kôš: ostatné fotky sa odoberú zo zoznamu médií (súbor zostane na disku) a vrátia sa cez „↶ Vrátiť“. Verzie: ich súbor sa stane verziou ponechanej fotky (prehliadač → verzie). ¦ Papirkurv: de andre bildene fjernes fra medielisten (filen blir liggende på disken) og kommer tilbake med «↶ Legg tilbake». Versjoner: filen deres blir en versjon av bildet som beholdes (visningen → versjoner).
+Plus haut : l’app propose aussi des photos plus retouchées ou plus recadrées (plus de fausses alertes). Plus bas : seulement les doublons évidents. ¦ Vyššie: aplikácia navrhne aj viac upravené alebo viac orezané fotky (viac falošných poplachov). Nižšie: len zjavné duplikáty. ¦ Høyere: appen foreslår også mer retusjerte eller mer beskårne bilder (flere falske alarmer). Lavere: bare åpenbare duplikater.
+Pas des doublons ¦ Nie sú duplikáty ¦ Ikke duplikater
+Corbeille des doublons ¦ Kôš duplikátov ¦ Papirkurv for duplikater
+＝ Parfaits ¦ ＝ Dokonalé ¦ ＝ Perfekte
+🎨 Retouchés ¦ 🎨 Upravené ¦ 🎨 Retusjerte
+⬚ Recadrés / zoomés ¦ ⬚ Orezané / priblížené ¦ ⬚ Beskårne / zoomede
+↔ Redimensionnés ¦ ↔ So zmenenou veľkosťou ¦ ↔ Endret størrelse
+🗂 Autre format ¦ 🗂 Iný formát ¦ 🗂 Annet format
+Gardée ¦ Ponechaná ¦ Beholdt
+La plus grande ¦ Najväčšia ¦ Det største
+Garder celle-ci à la place ¦ Ponechať namiesto toho túto ¦ Behold dette i stedet
+Comparer avec la photo gardée ¦ Porovnať s ponechanou fotkou ¦ Sammenlign med bildet som beholdes
+Pas un doublon des autres ¦ Nie je duplikát ostatných ¦ Ikke et duplikat av de andre
+Ce n’est pas un doublon ¦ Nie je to duplikát ¦ Det er ikke et duplikat
+Garder ★ et fusionner {others} ¦ Ponechať ★ a zlúčiť {others} ¦ Behold ★ og slå sammen {others}
+Tu as dit : ce n’est pas un doublon. ¦ Povedal si: nie je to duplikát. ¦ Du sa: det er ikke et duplikat.
+Signaler de nouveau ¦ Znova upozorniť ¦ Merk på nytt
+Aucune paire écartée. ¦ Žiadna vyradená dvojica. ¦ Ingen par lagt til side.
+Gardées en versions de la photo gardée ¦ Ponechané ako verzie ponechanej fotky ¦ Beholdt som versjoner av bildet som beholdes
+Le fichier est toujours sur le disque ¦ Súbor je stále na disku ¦ Filen ligger fortsatt på disken
+Fusionné ¦ Zlúčené ¦ Slått sammen
+Remettre ¦ Vrátiť ¦ Legg tilbake
+La corbeille des doublons est vide. ¦ Kôš duplikátov je prázdny. ¦ Papirkurven for duplikater er tom.
+Comparaison des photos… {pct} % ¦ Porovnávanie fotiek… {pct} % ¦ Sammenligner bilder… {pct} %
+Comparaison des photos… ¦ Porovnávanie fotiek… ¦ Sammenligner bilder…
+{groups} parmi {media} — comparaison en cours… ¦ {groups} z {media} — porovnávanie prebieha… ¦ {groups} blant {media} — sammenligning pågår…
+{groups} parmi {media} ¦ {groups} z {media} ¦ {groups} blant {media}
+Aucun groupe de cette sorte ¦ Žiadna skupina tohto druhu ¦ Ingen grupper av denne typen
+Aucun doublon trouvé ¦ Nenašiel sa žiadny duplikát ¦ Ingen duplikater funnet
+Les empreintes ne sont pas toutes prêtes : la liste se complète toute seule. ¦ Ešte nie sú pripravené všetky odtlačky: zoznam sa doplní sám. ¦ Ikke alle fingeravtrykk er klare ennå: listen fylles ut av seg selv.
+Parmi {list}. Monte la sensibilité pour voir les photos plus différentes. ¦ Z: {list}. Zvýš citlivosť, aby si videl aj viac odlišné fotky. ¦ Blant {list}. Øk følsomheten for å se bilder som er mer forskjellige.
+Groupe de {list} : ce ne sont pas des doublons ¦ Skupina {list}: nie sú to duplikáty ¦ Gruppe med {list}: det er ikke duplikater
+« {title} » n’est pas un doublon des autres ¦ „{title}“ nie je duplikát ostatných ¦ «{title}» er ikke et duplikat av de andre
+Paire signalée de nouveau ¦ Dvojica znova označená ¦ Paret er merket på nytt
+Fusion annulée : les photos sont revenues avec leurs liens. ¦ Zlúčenie vrátené späť: fotky sa vrátili aj so svojimi prepojeniami. ¦ Sammenslåingen er angret: bildene er tilbake med koblingene sine.
+=photo trouvée ¦ nájdená fotka|nájdené fotky|nájdených fotiek ¦ bilde funnet|bilder funnet
+=photo prête ¦ pripravená fotka|pripravené fotky|pripravených fotiek ¦ bilde klart|bilder klare
+=photo de la base ¦ fotka z databázy|fotky z databázy|fotiek z databázy ¦ bilde fra databasen|bilder fra databasen
+=groupe de doublons ¦ skupina duplikátov|skupiny duplikátov|skupín duplikátov ¦ gruppe med duplikater|grupper med duplikater
+=média comparé ¦ porovnané médium|porovnané médiá|porovnaných médií ¦ sammenlignet medie|sammenlignede medier
+Comparer deux arbres ¦ Porovnať dva rodokmene ¦ Sammenlign to slektstrær
+Masquer comparaison ¦ Skryť porovnanie ¦ Skjul sammenligningen
+avec les animaux ¦ so zvieratami ¦ med dyrene
+MON SITE WEB ¦ MOJA WEBSTRÁNKA ¦ NETTSTEDET MITT
+Page vide ¦ Prázdna stránka ¦ Tom side
+Ma famille ¦ Moja rodina ¦ Familien min
+Mon village ¦ Moja dedina ¦ Bygda mi
+Calque 1 ¦ Vrstva 1 ¦ Lag 1
+Calque {n} ¦ Vrstva {n} ¦ Lag {n}
+Nom inscrit ¦ Zapísané meno ¦ Innført navn
+Groupe patronymique ¦ Skupina priezvisk ¦ Slektsnavngruppe
+Couleur de peau ¦ Farba pleti ¦ Hudfarge
+ex : Dupont ¦ napr. Dupont ¦ f.eks. Dupont
+« {name} » n’est ni une image, ni un son, ni une vidéo. ¦ „{name}“ nie je obrázok, zvuk ani video. ¦ «{name}» er verken et bilde, en lyd eller en video.
+Ici, il faut une image. ¦ Sem patrí obrázok. ¦ Her trengs det et bilde.
+Ici, il faut un son. ¦ Sem patrí zvuk. ¦ Her trengs det en lyd.
+Ici, il faut une vidéo. ¦ Sem patrí video. ¦ Her trengs det en video.
+Fichier importé ¦ Importovaný súbor ¦ Importert fil
+assez grande pour imprimer en {f} ¦ dosť veľký na tlač vo formáte {f} ¦ stort nok til utskrift i {f}
+petite : écran seulement ¦ malý: len na obrazovku ¦ lite: bare for skjerm
+{n} choisies ¦ Vybrané: {n} ¦ {n} valgt
+{n} choisie ¦ {n} vybraná ¦ {n} valgt
+{n} choisis ¦ Vybrané: {n} ¦ {n} valgt
+{n} choisi ¦ {n} vybraný ¦ {n} valgt
+MÉDIAS DE L’APP ¦ MÉDIÁ APLIKÁCIE ¦ APPENS MEDIER
+Seulement ses médias ¦ Len jeho médiá ¦ Bare personens medier
+Montrer seulement ses médias ¦ Zobraziť len jeho médiá ¦ Vis bare personens medier
+Retirer le filtre de la personne ¦ Odobrať filter osoby ¦ Fjern personfilteret
+Voir ses médias ¦ Zobraziť jeho médiá ¦ Se personens medier
+Recherche impossible ¦ Hľadanie zlyhalo ¦ Søket mislyktes
+La suite arrive en descendant… ¦ Ďalšie sa načíta pri posúvaní nadol… ¦ Flere lastes inn når du ruller ned…
+Aucune image dans le presse-papiers. Copie une image, puis réessaie. ¦ V schránke nie je žiadny obrázok. Skopíruj obrázok a skús to znova. ¦ Ikke noe bilde på utklippstavlen. Kopier et bilde, og prøv igjen.
+Appuie sur ⌘V (ou Ctrl+V) pour coller l’image ici. ¦ Stlač ⌘V (alebo Ctrl+V) a vlož sem obrázok. ¦ Trykk ⌘V (eller Ctrl+V) for å lime inn bildet her.
+Les médias de quelle personne ? ¦ Médiá ktorej osoby? ¦ Hvilken persons medier?
+📝 Pas encore transcrites ¦ 📝 Ešte neprepísané ¦ 📝 Ikke transkribert ennå
+✅ Déjà transcrites ¦ ✅ Už prepísané ¦ ✅ Allerede transkribert
+✍ Avec une signature repérée ¦ ✍ S nájdeným podpisom ¦ ✍ Med en funnet signatur
+images ¦ obrázky ¦ bilder
+sons ¦ zvuky ¦ lyder
+documents ¦ dokumenty ¦ dokumenter
+médias ¦ médiá ¦ medier
+=son ¦ zvuk|zvuky|zvukov ¦ lyd|lyder
+Choisir des images ¦ Vybrať obrázky ¦ Velg bilder
+Choisir des sons ¦ Vybrať zvuky ¦ Velg lyder
+Choisir un son ¦ Vybrať zvuk ¦ Velg en lyd
+Choisir des vidéos ¦ Vybrať videá ¦ Velg videoer
+Choisir une vidéo ¦ Vybrať video ¦ Velg en video
+Choisir des documents ¦ Vybrať dokumenty ¦ Velg dokumenter
+Choisir un document ¦ Vybrať dokument ¦ Velg et dokument
+Choisir des médias ¦ Vybrať médiá ¦ Velg medier
+Choisir un média ¦ Vybrať médium ¦ Velg et medie
+Utiliser cette image ¦ Použiť tento obrázok ¦ Bruk dette bildet
+Utiliser ces sons ¦ Použiť tieto zvuky ¦ Bruk disse lydene
+Utiliser ce son ¦ Použiť tento zvuk ¦ Bruk denne lyden
+Utiliser ces vidéos ¦ Použiť tieto videá ¦ Bruk disse videoene
+Utiliser cette vidéo ¦ Použiť toto video ¦ Bruk denne videoen
+Utiliser ces documents ¦ Použiť tieto dokumenty ¦ Bruk disse dokumentene
+Utiliser ce document ¦ Použiť tento dokument ¦ Bruk dette dokumentet
+Utiliser ces médias ¦ Použiť tieto médiá ¦ Bruk disse mediene
+Utiliser ce média ¦ Použiť toto médium ¦ Bruk dette mediet
+Glisse une image ici, colle-la (⌘V) ou <button>importe-la depuis l’ordinateur</button> : elle entre dans les médias et se coche. ¦ Potiahni sem obrázok, vlož ho (⌘V) alebo <button>ho importuj z počítača</button>: pridá sa do médií a začiarkne sa. ¦ Dra et bilde hit, lim det inn (⌘V) eller <button>importer det fra datamaskinen</button>: det havner i medier og blir krysset av.
+Glisse un son ici, colle-le (⌘V) ou <button>importe-le depuis l’ordinateur</button> : il entre dans les médias et se coche. ¦ Potiahni sem zvuk, vlož ho (⌘V) alebo <button>ho importuj z počítača</button>: pridá sa do médií a začiarkne sa. ¦ Dra en lyd hit, lim den inn (⌘V) eller <button>importer den fra datamaskinen</button>: den havner i medier og blir krysset av.
+Glisse une vidéo ici, colle-la (⌘V) ou <button>importe-la depuis l’ordinateur</button> : elle entre dans les médias et se coche. ¦ Potiahni sem video, vlož ho (⌘V) alebo <button>ho importuj z počítača</button>: pridá sa do médií a začiarkne sa. ¦ Dra en video hit, lim den inn (⌘V) eller <button>importer den fra datamaskinen</button>: den havner i medier og blir krysset av.
+Glisse un média ici, colle-le (⌘V) ou <button>importe-le depuis l’ordinateur</button> : il entre dans les médias et se coche. ¦ Potiahni sem médium, vlož ho (⌘V) alebo <button>ho importuj z počítača</button>: pridá sa do médií a začiarkne sa. ¦ Dra et medie hit, lim det inn (⌘V) eller <button>importer det fra datamaskinen</button>: det havner i medier og blir krysset av.
+« {title} » est entrée dans tes médias. ¦ „{title}“ je teraz v tvojich médiách. ¦ «{title}» er lagt til i mediene dine.
+« {title} » est entré dans tes médias. ¦ „{title}“ je teraz v tvojich médiách. ¦ «{title}» er lagt til i mediene dine.
+Aucune image pour « {q} ». ¦ Žiadny obrázok pre „{q}“. ¦ Ingen bilder for «{q}».
+Aucune image avec ces filtres. ¦ S týmito filtrami žiadny obrázok. ¦ Ingen bilder med disse filtrene.
+Aucune image dans tes médias pour l’instant. ¦ V tvojich médiách zatiaľ nie je žiadny obrázok. ¦ Ingen bilder i mediene dine ennå.
+Aucun son pour « {q} ». ¦ Žiadny zvuk pre „{q}“. ¦ Ingen lyder for «{q}».
+Aucun son avec ces filtres. ¦ S týmito filtrami žiadny zvuk. ¦ Ingen lyder med disse filtrene.
+Aucun son dans tes médias pour l’instant. ¦ V tvojich médiách zatiaľ nie je žiadny zvuk. ¦ Ingen lyder i mediene dine ennå.
+Aucune vidéo pour « {q} ». ¦ Žiadne video pre „{q}“. ¦ Ingen videoer for «{q}».
+Aucune vidéo avec ces filtres. ¦ S týmito filtrami žiadne video. ¦ Ingen videoer med disse filtrene.
+Aucune vidéo dans tes médias pour l’instant. ¦ V tvojich médiách zatiaľ nie je žiadne video. ¦ Ingen videoer i mediene dine ennå.
+Aucun document pour « {q} ». ¦ Žiadny dokument pre „{q}“. ¦ Ingen dokumenter for «{q}».
+Aucun document avec ces filtres. ¦ S týmito filtrami žiadny dokument. ¦ Ingen dokumenter med disse filtrene.
+Aucun document dans tes médias pour l’instant. ¦ V tvojich médiách zatiaľ nie je žiadny dokument. ¦ Ingen dokumenter i mediene dine ennå.
+Aucun média pour « {q} ». ¦ Žiadne médium pre „{q}“. ¦ Ingen medier for «{q}».
+Aucun média avec ces filtres. ¦ S týmito filtrami žiadne médium. ¦ Ingen medier med disse filtrene.
+Aucun média dans tes médias pour l’instant. ¦ V tvojich médiách zatiaľ nič nie je. ¦ Ingen medier ennå.
+Importe-la depuis l’ordinateur. ¦ Importuj ho z počítača. ¦ Importer det fra datamaskinen.
+Importe-le depuis l’ordinateur. ¦ Importuj ho z počítača. ¦ Importer den fra datamaskinen.
+Vérifie l’orthographe, enlève un filtre, ou importe-la depuis l’ordinateur. ¦ Skontroluj pravopis, odober filter alebo ho importuj z počítača. ¦ Sjekk stavemåten, fjern et filter, eller importer det fra datamaskinen.
+Vérifie l’orthographe, enlève un filtre, ou importe-le depuis l’ordinateur. ¦ Skontroluj pravopis, odober filter alebo ho importuj z počítača. ¦ Sjekk stavemåten, fjern et filter, eller importer den fra datamaskinen.
+Retire le filtre de la personne, ou importe-la depuis l’ordinateur. ¦ Odober filter osoby alebo ho importuj z počítača. ¦ Fjern personfilteret, eller importer det fra datamaskinen.
+Retire le filtre de la personne, ou importe-le depuis l’ordinateur. ¦ Odober filter osoby alebo ho importuj z počítača. ¦ Fjern personfilteret, eller importer den fra datamaskinen.
+Vérifie l’orthographe, enlève un filtre. ¦ Skontroluj pravopis, odober filter. ¦ Sjekk stavemåten, fjern et filter.
+Retire le filtre de la personne. ¦ Odober filter osoby. ¦ Fjern personfilteret.
+Clique sur une image pour la voir ici en grand. ¦ Klikni na obrázok a uvidíš ho tu vo veľkom. ¦ Klikk på et bilde for å se det i stort format her.
+Clique sur une image pour la voir ici. ¦ Klikni na obrázok a uvidíš ho tu. ¦ Klikk på et bilde for å se det her.
+Clique sur un son pour le voir ici en grand. ¦ Klikni na zvuk a uvidíš ho tu vo veľkom. ¦ Klikk på en lyd for å se den i stort format her.
+Clique sur un son pour le voir ici. ¦ Klikni na zvuk a uvidíš ho tu. ¦ Klikk på en lyd for å se den her.
+Clique sur une vidéo pour la voir ici en grand. ¦ Klikni na video a uvidíš ho tu vo veľkom. ¦ Klikk på en video for å se den i stort format her.
+Clique sur une vidéo pour la voir ici. ¦ Klikni na video a uvidíš ho tu. ¦ Klikk på en video for å se den her.
+Clique sur un document pour le voir ici en grand. ¦ Klikni na dokument a uvidíš ho tu vo veľkom. ¦ Klikk på et dokument for å se det i stort format her.
+Clique sur un document pour le voir ici. ¦ Klikni na dokument a uvidíš ho tu. ¦ Klikk på et dokument for å se det her.
+Clique sur un média pour le voir ici en grand. ¦ Klikni na médium a uvidíš ho tu vo veľkom. ¦ Klikk på et medie for å se det i stort format her.
+Clique sur un média pour le voir ici. ¦ Klikni na médium a uvidíš ho tu. ¦ Klikk på et medie for å se det her.
+design ¦ dizajn ¦ design
+menus ¦ ponuky ¦ menyer
+listes ¦ zoznamy ¦ lister
+blocs des fiches ¦ bloky kariet ¦ blokker i oppføringer
+tableau de bord ¦ prehľad ¦ oversikt
+fonds de carte ¦ podkladové mapy ¦ bakgrunnskart
+couleurs ¦ farby ¦ farger
+portraits ¦ portréty ¦ portretter
+colonne de gauche ¦ ľavý stĺpec ¦ venstre kolonne
+accord des mots ¦ zhoda slov ¦ ordbøyning
+designs au choix ¦ dizajny na výber ¦ design å velge mellom
+réglages de départ ¦ východiskové nastavenia ¦ startinnstillinger
+La base n’a pas pu enregistrer la mise en page : réessaie. ¦ Databáza nemohla rozloženie uložiť: skús to znova. ¦ Databasen kunne ikke lagre oppsettet: prøv igjen.
+APPARENCE ¦ VZHĽAD ¦ UTSEENDE
+Réglages enregistrés : l’Apparence ¦ Uložené nastavenia: Vzhľad ¦ Lagrede innstillinger: Utseende
+Garde <b>tous</b> les réglages de l’Apparence sous un nom : design, designs au choix, portraits, colonne de gauche, menus affichés ou masqués et leur ordre, listes, cartes, graphiques, blocs des fiches et du tableau de bord, couleurs, fonds de carte. Tu peux y revenir en un clic, ou envoyer le fichier à un autre utilisateur de LCNDA. ¦ Ulož <b>všetky</b> nastavenia Vzhľadu pod jedným názvom: dizajn, dizajny na výber, portréty, ľavý stĺpec, zobrazené či skryté ponuky a ich poradie, zoznamy, karty, grafy, bloky kariet a prehľadu, farby, podkladové mapy. Môžeš sa k nim vrátiť jedným klikom alebo poslať súbor inému používateľovi LCNDA. ¦ Lagre <b>alle</b> innstillingene for Utseende under ett navn: design, design å velge mellom, portretter, venstre kolonne, viste eller skjulte menyer og rekkefølgen deres, lister, kort, diagrammer, blokker i oppføringer og oversikten, farger, bakgrunnskart. Du kan gå tilbake til dem med ett klikk, eller sende filen til en annen LCNDA-bruker.
+tous les réglages de l’Apparence ¦ všetky nastavenia Vzhľadu ¦ alle innstillingene for Utseende
+reçue de ¦ prijaté od ¦ mottatt fra
+reçu de ¦ prijaté od ¦ mottatt fra
+Mise en page « {name} » supprimée ¦ Rozloženie „{name}“ vymazané ¦ Oppsettet «{name}» er slettet
+Tous les réglages de l’Apparence seront remplacés (pense à enregistrer la mise en page actuelle si tu veux la garder). L’écran va se recharger. ¦ Všetky nastavenia Vzhľadu budú nahradené (nezabudni uložiť súčasné rozloženie, ak ho chceš zachovať). Obrazovka sa znova načíta. ¦ Alle innstillingene for Utseende blir erstattet (husk å lagre det nåværende oppsettet hvis du vil beholde det). Skjermen lastes inn på nytt.
+Appliquer la mise en page « {name} » ? ¦ Použiť rozloženie „{name}“? ¦ Bruke oppsettet «{name}»?
+Mise en page « {name} » appliquée. ¦ Rozloženie „{name}“ použité. ¦ Oppsettet «{name}» er tatt i bruk.
+Fichier prêt : envoie-le à l’autre personne, elle l’importe dans Réglages → Apparence. ¦ Súbor je pripravený: pošli ho druhej osobe, ona ho importuje v Nastavenia → Vzhľad. ¦ Filen er klar: send den til den andre personen, som importerer den i Innstillinger → Utseende.
+Ce fichier n’est pas une mise en page LCNDA. ¦ Tento súbor nie je rozloženie LCNDA. ¦ Denne filen er ikke et LCNDA-oppsett.
+Mise en page « {name} » importée : clique sur « Appliquer » pour l’utiliser. ¦ Rozloženie „{name}“ importované: klikni na „Použiť“. ¦ Oppsettet «{name}» er importert: klikk på «Bruk» for å ta det i bruk.
+({n} réglages illisibles laissés de côté) ¦ (vynechané nečitateľné nastavenia: {n}) ¦ ({n} uleselige innstillinger utelatt)
+(1 réglage illisible laissé de côté) ¦ (vynechané 1 nečitateľné nastavenie) ¦ (1 uleselig innstilling utelatt)
+Trop de réglages enregistrés pour la place disponible : supprimes-en un. ¦ Príliš veľa uložených nastavení na dostupné miesto: jedno vymaž. ¦ For mange lagrede innstillinger for den ledige plassen: slett én.
+Tes graphiques n’ont pas pu être remis : {err} ¦ Tvoje grafy sa nepodarilo obnoviť: {err} ¦ Diagrammene dine kunne ikke gjenopprettes: {err}
+La base n’a pas pu enregistrer ces réglages : réessaie. ¦ Databáza nemohla tieto nastavenia uložiť: skús to znova. ¦ Databasen kunne ikke lagre disse innstillingene: prøv igjen.
+TOUS LES RÉGLAGES ¦ VŠETKY NASTAVENIA ¦ ALLE INNSTILLINGER
+Réglages enregistrés : toute l’app ¦ Uložené nastavenia: celá aplikácia ¦ Lagrede innstillinger: hele appen
+Garde <b>l’intégralité</b> des réglages de l’app sous un nom : l’Apparence, mais aussi les listes et leurs colonnes, les graphiques et onglets à soi, les widgets, les tableaux, les animaux, les livrets, les raccourcis, la recherche sur internet… Tu peux y revenir en un clic, ou les passer à un autre ordinateur avec un fichier. Ne sont pas gardés : tes données, ce qui vise une fiche précise (de cujus, exceptions d’une fiche), le code pour quitter le mode simple et la personne qui regarde, et ce qui est propre à cet ordinateur. ¦ Ulož <b>úplne všetky</b> nastavenia aplikácie pod jedným názvom: Vzhľad, ale aj zoznamy a ich stĺpce, vlastné grafy a karty, widgety, tabuľky, zvieratá, brožúry, skratky, hľadanie na internete… Môžeš sa k nim vrátiť jedným klikom alebo ich preniesť na iný počítač súborom. Neukladajú sa: tvoje dáta, čo sa týka konkrétnej karty (probant, výnimky karty), kód na opustenie jednoduchého režimu a osoba, ktorá sa pozerá, a čo patrí len tomuto počítaču. ¦ Lagre <b>samtlige</b> innstillinger i appen under ett navn: Utseende, men også lister og kolonnene deres, egne diagrammer og faner, widgeter, tabeller, dyr, hefter, snarveier, søk på internett… Du kan gå tilbake til dem med ett klikk, eller flytte dem til en annen datamaskin med en fil. Lagres ikke: dataene dine, det som gjelder en bestemt oppføring (probanden, unntak for én oppføring), koden for å forlate enkel modus og personen som ser på, og det som hører til akkurat denne datamaskinen.
+Mes réglages ¦ Moje nastavenia ¦ Mine innstillinger
+Fichier prêt : il s’importe ici, sur un autre ordinateur. ¦ Súbor je pripravený: importuje sa tu, na inom počítači. ¦ Filen er klar: den importeres her, på en annen datamaskin.
+tous les réglages de l’app ¦ všetky nastavenia aplikácie ¦ alle innstillingene i appen
+Tous les réglages de l’app seront remplacés (pense à enregistrer les réglages actuels si tu veux les garder). Tes données ne bougent pas. L’écran va se recharger. ¦ Všetky nastavenia aplikácie budú nahradené (nezabudni uložiť súčasné nastavenia, ak ich chceš zachovať). Tvoje dáta sa nezmenia. Obrazovka sa znova načíta. ¦ Alle innstillingene i appen blir erstattet (husk å lagre de nåværende innstillingene hvis du vil beholde dem). Dataene dine endres ikke. Skjermen lastes inn på nytt.
+Appliquer l’ensemble « {name} » ? ¦ Použiť sadu „{name}“? ¦ Bruke settet «{name}»?
+Fichier prêt : il s’importe dans Réglages → Apparence → « Mes ensembles de réglages ». ¦ Súbor je pripravený: importuje sa v Nastavenia → Vzhľad → „Moje sady nastavení“. ¦ Filen er klar: den importeres i Innstillinger → Utseende → «Mine innstillingssett».
+Ce fichier n’est pas un fichier de réglages LCNDA. ¦ Tento súbor nie je súbor nastavení LCNDA. ¦ Denne filen er ikke en LCNDA-innstillingsfil.
+Réglages importés ¦ Importované nastavenia ¦ Importerte innstillinger
+Ensemble « {name} » importé : clique sur « Appliquer » pour l’utiliser. ¦ Sada „{name}“ importovaná: klikni na „Použiť“. ¦ Settet «{name}» er importert: klikk på «Bruk» for å ta det i bruk.
+1≡ Liste numérotée ¦ 1≡ Číslovaný zoznam ¦ 1≡ Nummerert liste
+A Couleur du texte ¦ A Farba textu ¦ A Tekstfarge
+S Souligné ¦ P Podčiarknuté ¦ U Understreket
+ab Barré ¦ ab Prečiarknuté ¦ ab Gjennomstreket
+Trier, filtrer, Σ ¦ Zoradiť, filtrovať, Σ ¦ Sorter, filtrer, Σ
+Menu Édition ¦ Ponuka Úpravy ¦ Menyen Rediger
+Sélection directe (points et poignées) (A) ¦ Priamy výber (body a úchyty) (A) ¦ Direkte markering (punkter og håndtak) (A)
+Crayon (à main levée) (N) ¦ Ceruzka (voľnou rukou) (N) ¦ Blyant (frihånd) (N)
+Étoile (S) ¦ Hviezda (S) ¦ Stjerne (S)
+Spirale (glisser depuis le centre) (O) ¦ Špirála (ťahaj od stredu) (O) ¦ Spiral (dra fra midten) (O)
+Pipette (prend la couleur d’un objet) (I) ¦ Kvapkadlo (prevezme farbu objektu) (I) ¦ Pipette (tar fargen fra et objekt) (I)
+Main (déplacer la vue) (H) ¦ Ruka (posun pohľadu) (H) ¦ Hånd (flytt visningen) (H)
+Loupe (⌥ : dézoomer) (Z) ¦ Lupa (⌥: oddialiť) (Z) ¦ Lupe (⌥: zoom ut) (Z)
+Remplissage et contour de la sélection ¦ Výplň a obrys výberu ¦ Fyll og kontur for markeringen
+Contour blanc du texte ¦ Biely obrys textu ¦ Hvit tekstkontur
+Polices de l’ordi ¦ Písma počítača ¦ Datamaskinens skrifter
+Clic sur la courbe : ajouter un point ¦ Klik na krivku: pridať bod ¦ Klikk på kurven: legg til et punkt
+glisser : le déplace ¦ ťahanie: posunie ho ¦ dra: flytter det
+Temps (où on en est / durée) ¦ Čas (kde sme / dĺžka) ¦ Tid (posisjon / lengde)
+✒︎ Plume (P) : clic = point, double-clic ou Entrée = fini ¦ ✒︎ Pero (P): klik = bod, dvojklik alebo Enter = hotovo ¦ ✒︎ Penn (P): klikk = punkt, dobbeltklikk eller Enter = ferdig
+Comprendre l’ADN en généalogie ¦ Porozumieť DNA v genealógii ¦ Forstå DNA i slektsforskning
+L’essentiel, en clair. ¦ To podstatné, zrozumiteľne. ¦ Det viktigste, i klartekst.
+Les types de tests ¦ Druhy testov ¦ Testtyper
+<p><b>Autosomal</b> (atDNA) : les 22 paires de chromosomes non sexuels, reçues pour moitié de chaque parent. Il retrouve des cousins de tous les côtés jusqu’à 5 à 8 générations environ. C’est le test « généalogique » le plus courant.</p><p><b>ADN-Y</b> : transmis de père en fils presque sans changement. Il suit une seule lignée, celle du nom de famille dans beaucoup de cas, sur des centaines d’années. On l’étudie par ses marqueurs (Y-STR : 37, 67, 111 marqueurs…) et ses mutations (SNP) qui donnent l’<b>haplogroupe</b>.</p><p><b>ADN mitochondrial</b> (ADNmt) : transmis par la mère à tous ses enfants, seules les filles le transmettent. Très stable : utile pour des questions anciennes ou pour départager deux lignées maternelles.</p><p><b>ADN-X</b> : son mode de transmission particulier élimine des ancêtres (voir « Lignées Y, mt et X »).</p> ¦ <p><b>Autozomálny</b> (atDNA): 22 párov nepohlavných chromozómov, z polovice od každého rodiča. Nájde bratrancov a sesternice zo všetkých strán zhruba do 5 až 8 generácií. Je to najbežnejší „genealogický“ test.</p><p><b>Y-DNA</b>: odovzdáva sa z otca na syna takmer bez zmeny. Sleduje jedinú líniu, v mnohých prípadoch líniu priezviska, po stovky rokov. Skúma sa podľa markerov (Y-STR: 37, 67, 111 markerov…) a mutácií (SNP), ktoré určujú <b>haploskupinu</b>.</p><p><b>Mitochondriálna DNA</b> (mtDNA): odovzdáva ju matka všetkým deťom, ďalej ju odovzdávajú len dcéry. Veľmi stála: užitočná pri starých otázkach alebo na rozlíšenie dvoch materských línií.</p><p><b>X-DNA</b>: jej zvláštny spôsob dedičnosti vylučuje niektorých predkov (pozri „Línie Y, mt a X“).</p> ¦ <p><b>Autosomalt</b> (atDNA): de 22 parene med ikke-kjønnskromosomer, halvparten fra hver forelder. Det finner fettere og kusiner på alle sider tilbake til omtrent 5 til 8 generasjoner. Det er den vanligste «slektstesten».</p><p><b>Y-DNA</b>: går fra far til sønn nesten uendret. Det følger én enkelt linje, i mange tilfeller slektsnavnets, gjennom hundrevis av år. Det undersøkes ut fra markørene (Y-STR: 37, 67, 111 markører…) og mutasjonene (SNP), som gir <b>haplogruppen</b>.</p><p><b>Mitokondrielt DNA</b> (mtDNA): går fra moren til alle barna hennes, men bare døtrene fører det videre. Svært stabilt: nyttig for gamle spørsmål eller for å skille mellom to morslinjer.</p><p><b>X-DNA</b>: den spesielle måten det arves på, utelukker visse aner (se «Linjer Y, mt og X»).</p>
+Centimorgans (cM) et segments ¦ Centimorgany (cM) a segmenty ¦ Centimorgan (cM) og segmenter
+<p>Le <b>centimorgan</b> mesure une longueur d’ADN « génétique ». On partage environ 3 400 à 3 700 cM avec un parent, 850 en moyenne avec un cousin germain, 230 avec un cousin issu de germain… Le total et la <b>longueur du plus long segment</b> aident à deviner la relation (« 📐 Calculateur »). Les petits segments (moins de 7 à 8 cM) sont souvent du « bruit » ou très anciens.</p> ¦ <p><b>Centimorgan</b> meria „genetickú“ dĺžku DNA. S rodičom zdieľaš asi 3 400 až 3 700 cM, s bratrancom či sesternicou v priemere 850, so vzdialenejším bratrancom (druhého stupňa) 230… Súčet a <b>dĺžka najdlhšieho segmentu</b> pomáhajú odhadnúť vzťah („📐 Kalkulačka“). Malé segmenty (pod 7 až 8 cM) sú často „šum“ alebo veľmi staré.</p> ¦ <p><b>Centimorgan</b> måler en «genetisk» lengde av DNA. Man deler omtrent 3 400 til 3 700 cM med en forelder, i snitt 850 med en fetter eller kusine, 230 med en tremenning… Summen og <b>lengden på det lengste segmentet</b> hjelper deg å gjette slektskapet («📐 Kalkulator»). Små segmenter (under 7 til 8 cM) er ofte «støy» eller svært gamle.</p>
+Haplogroupes ¦ Haploskupiny ¦ Haplogrupper
+<p>Un <b>haplogroupe</b> (R-M269, I-M253, H1, U5b…) regroupe tous ceux qui descendent d’un même lointain ancêtre en ligne Y ou mt, souvent il y a des milliers d’années. Deux personnes du même haplogroupe ne sont pas forcément proches : il faut des sous-clades fines ou une correspondance de marqueurs.</p> ¦ <p><b>Haploskupina</b> (R-M269, I-M253, H1, U5b…) združuje všetkých, ktorí pochádzajú od toho istého vzdialeného predka v línii Y alebo mt, často pred tisíckami rokov. Dve osoby z rovnakej haploskupiny nemusia byť blízki príbuzní: sú potrebné jemné podskupiny (subklady) alebo zhoda markerov.</p> ¦ <p>En <b>haplogruppe</b> (R-M269, I-M253, H1, U5b…) samler alle som nedstammer fra den samme fjerne anen i Y- eller mt-linjen, ofte for tusenvis av år siden. To personer i samme haplogruppe er ikke nødvendigvis nært beslektet: det trengs fine undergrupper (subklader) eller samsvar på markører.</p>
+Triangulation ¦ Triangulácia ¦ Triangulering
+<p>Si A correspond avec toi, B correspond avec toi, <b>et</b> A et B correspondent entre eux <b>sur le même segment</b>, ce segment vient très probablement d’un ancêtre commun aux trois. C’est la meilleure preuve génétique d’une branche. Le « 🧩 navigateur de chromosomes » montre les chevauchements à vérifier.</p> ¦ <p>Keď sa A zhoduje s tebou, B sa zhoduje s tebou <b>a</b> A a B sa zhodujú navzájom <b>na rovnakom segmente</b>, tento segment veľmi pravdepodobne pochádza od predka spoločného všetkým trom. Je to najlepší genetický dôkaz vetvy. „🧩 Prehliadač chromozómov“ ukazuje prekryvy na overenie.</p> ¦ <p>Hvis A matcher deg, B matcher deg, <b>og</b> A og B matcher hverandre <b>på det samme segmentet</b>, kommer segmentet svært sannsynlig fra en ane som er felles for alle tre. Det er det beste genetiske beviset for en gren. «🧩 Kromosomleseren» viser overlappene som må sjekkes.</p>
+La méthode de Leeds ¦ Leedsova metóda ¦ Leeds-metoden
+<p>Mise au point par Dana Leeds : on prend les correspondances de 90 à 400 cM (cousins de 2e et 3e degré), et on colore ensemble celles qui se correspondent entre elles. On obtient souvent 4 groupes (tes 4 grands-parents) ou 8 (tes arrière-grands-parents). Il faut noter les « correspondances en commun » de chacun (« 🗂️ Groupes »).</p> ¦ <p>Vyvinula ju Dana Leeds: vezmú sa zhody od 90 do 400 cM (bratranci 2. a 3. stupňa) a rovnakou farbou sa označia tie, ktoré sa zhodujú navzájom. Často vzniknú 4 skupiny (tvoji 4 starí rodičia) alebo 8 (tvoji prastarí rodičia). Pri každej treba zapísať „spoločné zhody“ („🗂️ Skupiny“).</p> ¦ <p>Utviklet av Dana Leeds: man tar matchene på 90 til 400 cM (tremenninger og firmenninger) og farger dem som matcher hverandre, med samme farge. Ofte får man 4 grupper (de 4 besteforeldrene dine) eller 8 (oldeforeldrene dine). Man må notere hver enkelts «felles matcher» («🗂️ Grupper»).</p>
+<p>Dans un village isolé, une île, une communauté fermée, on descend plusieurs fois des mêmes ancêtres (<b>implexe</b>). On partage alors plus d’ADN qu’attendu, en beaucoup de petits segments : les relations paraissent plus proches qu’elles ne sont. Méfie-toi des estimations, regarde le plus long segment.</p> ¦ <p>V odľahlej dedine, na ostrove, v uzavretej komunite pochádzame niekoľkokrát od tých istých predkov (<b>implex</b>). Vtedy zdieľame viac DNA, než sa čaká, v mnohých malých segmentoch: vzťahy vyzerajú bližšie, než sú. Na odhady sa nespoliehaj, pozeraj sa na najdlhší segment.</p> ¦ <p>I en isolert bygd, på en øy eller i et lukket samfunn nedstammer man flere ganger fra de samme anene (<b>anetap</b>). Da deler man mer DNA enn forventet, i mange små segmenter: slektskapene ser nærmere ut enn de er. Vær forsiktig med anslagene, se på det lengste segmentet.</p>
+<ol><li>Regarde les cM et le plus long segment, la relation probable.</li><li>Regarde les correspondances en commun : de quel côté ? de quel groupe ?</li><li>Compare les noms et les lieux de son arbre avec les tiens.</li><li>Construis son arbre vers le passé jusqu’à trouver le couple commun (MRCA).</li><li>Vérifie que les cM collent avec la relation trouvée.</li><li>Note l’ancêtre commun, lie sa fiche, mets « Placé dans l’arbre ✓ ».</li></ol> ¦ <ol><li>Pozri sa na cM a najdlhší segment, pravdepodobný vzťah.</li><li>Pozri sa na spoločné zhody: z ktorej strany? z ktorej skupiny?</li><li>Porovnaj mená a miesta v jeho rodokmeni so svojimi.</li><li>Buduj jeho rodokmeň do minulosti, kým nenájdeš spoločný pár (MRCA).</li><li>Over, že cM zodpovedajú nájdenému vzťahu.</li><li>Zapíš spoločného predka, prepoj jeho kartu, nastav „Umiestnené v rodokmeni ✓“.</li></ol> ¦ <ol><li>Se på cM og det lengste segmentet, det sannsynlige slektskapet.</li><li>Se på de felles matchene: på hvilken side? i hvilken gruppe?</li><li>Sammenlign navnene og stedene i personens slektstre med dine.</li><li>Bygg personens slektstre bakover i tid til du finner det felles paret (MRCA).</li><li>Sjekk at cM passer med slektskapet du fant.</li><li>Noter den felles anen, koble personens oppføring, sett «Plassert i slektstreet ✓».</li></ol>
+<ul><li>Demande l’accord de la personne avant de tester, et explique ce qu’on peut découvrir.</li><li>Ne publie pas les noms et les cM de personnes vivantes sans leur accord.</li><li>Prépare-toi aux surprises (parent biologique inconnu, adoption, don de gamètes) et sois délicat avec les personnes concernées.</li><li>Dans les sociétés de test, choisis les options de partage, de recherche et d’usage par la justice qui te conviennent.</li><li>En France : voir « ⚖️ Loi et mises en garde ».</li></ul> ¦ <ul><li>Pred testom požiadaj osobu o súhlas a vysvetli, čo sa dá zistiť.</li><li>Nezverejňuj mená a cM žijúcich osôb bez ich súhlasu.</li><li>Priprav sa na prekvapenia (neznámy biologický rodič, adopcia, darcovstvo gamét) a buď ohľaduplný k dotknutým osobám.</li><li>V testovacích spoločnostiach si vyber možnosti zdieľania, vyhľadávania a použitia justíciou, ktoré ti vyhovujú.</li><li>Vo Francúzsku: pozri „⚖️ Zákon a upozornenia“.</li></ul> ¦ <ul><li>Be om personens samtykke før testen, og forklar hva man kan oppdage.</li><li>Ikke publiser navn og cM for levende personer uten deres samtykke.</li><li>Vær forberedt på overraskelser (ukjent biologisk forelder, adopsjon, donasjon av kjønnsceller), og vær hensynsfull overfor dem det gjelder.</li><li>Hos testselskapene: velg de alternativene for deling, søk og bruk i rettsvesenet som passer deg.</li><li>I Frankrike: se «⚖️ Lov og advarsler».</li></ul>
+Petit glossaire ¦ Malý slovníček ¦ Liten ordliste
+<dl class="h-dna-gloss"><dt>SNP</dt><dd>Une « lettre » de l’ADN qui varie d’une personne à l’autre ; les puces en lisent des centaines de milliers.</dd><dt>STR</dt><dd>Un motif répété (ADN-Y), compté pour comparer deux hommes.</dd><dt>MRCA</dt><dd>Most Recent Common Ancestor : l’ancêtre commun le plus récent.</dd><dt>ICW</dt><dd>In Common With : les correspondances que deux personnes partagent.</dd><dt>1C1R</dt><dd>Cousin germain une génération d’écart (« issu de germain »).</dd><dt>GRCh37</dt><dd>La « carte » du génome sur laquelle sont donnés les débuts et fins de segments.</dd><dt>Fichier brut</dt><dd>Le fichier de tes SNP que certaines sociétés laissent télécharger.</dd></dl> ¦ <dl class="h-dna-gloss"><dt>SNP</dt><dd>„Písmeno“ DNA, ktoré sa líši od človeka k človeku; čipy ich čítajú stovky tisíc.</dd><dt>STR</dt><dd>Opakovaný motív (Y-DNA), ktorý sa počíta pri porovnaní dvoch mužov.</dd><dt>MRCA</dt><dd>Most Recent Common Ancestor: najbližší spoločný predok.</dd><dt>ICW</dt><dd>In Common With: zhody, ktoré majú dve osoby spoločné.</dd><dt>1C1R</dt><dd>Bratranec či sesternica posunutí o jednu generáciu.</dd><dt>GRCh37</dt><dd>„Mapa“ genómu, podľa ktorej sa udávajú začiatky a konce segmentov.</dd><dt>Surový súbor</dt><dd>Súbor tvojich SNP, ktorý niektoré spoločnosti dovolia stiahnuť.</dd></dl> ¦ <dl class="h-dna-gloss"><dt>SNP</dt><dd>En «bokstav» i DNA som varierer fra person til person; brikkene leser hundretusener av dem.</dd><dt>STR</dt><dd>Et gjentatt mønster (Y-DNA), som telles for å sammenligne to menn.</dd><dt>MRCA</dt><dd>Most Recent Common Ancestor: den nærmeste felles anen.</dd><dt>ICW</dt><dd>In Common With: matchene som to personer deler.</dd><dt>1C1R</dt><dd>Fetter eller kusine med én generasjons forskyvning (fetterens eller kusinens barn).</dd><dt>GRCh37</dt><dd>Det «kartet» over genomet der segmentenes start og slutt oppgis.</dd><dt>Råfil</dt><dd>Filen med dine SNP-er, som noen selskaper lar deg laste ned.</dd></dl>
+=club ¦ klub|kluby|klubov ¦ klubb|klubber
+Lire une table décennale ¦ Čítať desaťročný register ¦ Les et tiårsregister
+DÉPOUILLEMENTS · TABLE DÉCENNALE ¦ VÝPISY · DESAŤROČNÝ REGISTER ¦ REGISTRERINGER · TIÅRSREGISTER
+L’image ¦ Obrázok ¦ Bildet
+La lecture ¦ Čítanie ¦ Lesingen
+La relecture ¦ Kontrola ¦ Gjennomlesingen
+Relire → ¦ Skontrolovať → ¦ Les gjennom →
+Suivant : créer → ¦ Ďalej: vytvoriť → ¦ Neste: opprett →
+Ce qui a été lu ou saisi n’est pas encore dans un dépouillement. ¦ Čo bolo prečítané alebo zadané, ešte nie je vo výpise. ¦ Det som er lest eller skrevet inn, er ennå ikke i en registrering.
+Fermer l’assistant ? ¦ Zavrieť sprievodcu? ¦ Lukke veiviseren?
+Fermer sans créer ¦ Zavrieť bez vytvorenia ¦ Lukk uten å opprette
+L’image n’a pas pu être ouverte. ¦ Obrázok sa nepodarilo otvoriť. ¦ Bildet kunne ikke åpnes.
+Choisis la photo de la table. ¦ Vyber fotku registra. ¦ Velg bildet av registeret.
+Choisis la photo de la table ¦ Vyber fotku registra ¦ Velg bildet av registeret
+Je ne trouve pas d’année : écris par exemple « 1853-1862 ». ¦ Nenachádzam rok: napíš napríklad „1853-1862“. ¦ Jeg finner ikke noe år: skriv for eksempel «1853-1862».
+⚠️ Je ne trouve pas d’année. ¦ ⚠️ Nenachádzam rok. ¦ ⚠️ Jeg finner ikke noe år.
+Donne au moins une colonne « Nom » ou « Prénoms ». ¦ Zadaj aspoň jeden stĺpec „Priezvisko“ alebo „Mená“. ¦ Angi minst én kolonne «Etternavn» eller «Fornavn».
+Aucune ligne avec un nom : saisis au moins un nom, ou reviens à la lecture. ¦ Žiadny riadok s menom: zadaj aspoň jedno meno alebo sa vráť k čítaniu. ¦ Ingen linjer med navn: skriv inn minst ett navn, eller gå tilbake til lesingen.
+Aucune ligne avec un nom. ¦ Žiadny riadok s menom. ¦ Ingen linjer med navn.
+La photo de la table ¦ Fotka registra ¦ Bildet av registeret
+La photo de la table décennale ¦ Fotka desaťročného registra ¦ Bildet av tiårsregisteret
+La table décennale ¦ Desaťročný register ¦ Tiårsregisteret
+Une page (ou une double page) photographiée bien à plat ; une image de l’ordinateur entre dans les Médias. ¦ Strana (alebo dvojstrana) odfotená pekne naplocho; obrázok z počítača sa pridá do Médií. ¦ En side (eller et oppslag) fotografert helt flatt; et bilde fra datamaskinen havner i Medier.
+Période de la table ¦ Obdobie registra ¦ Registerets periode
+Sorte d’actes ¦ Druh záznamov ¦ Type dokumenter
+L’écriture de la table ¦ Písmo registra ¦ Registerets håndskrift
+Imprimée ou tapée ¦ Tlačené alebo písané na stroji ¦ Trykt eller maskinskrevet
+Dans tes médias, ou depuis l’ordinateur (glisser, coller, importer). ¦ Z tvojich médií alebo z počítača (potiahnuť, vložiť, importovať). ¦ Fra mediene dine, eller fra datamaskinen (dra, lim inn, importer).
+Choisir la photo ¦ Vybrať fotku ¦ Velg bildet
+Facultatif : sert à compléter les dates sans année et à repérer celles qui sortent de la table. ¦ Nepovinné: slúži na doplnenie dátumov bez roku a na nájdenie tých, ktoré sú mimo registra. ¦ Valgfritt: brukes til å fylle ut datoer uten år og finne dem som faller utenfor registeret.
+✓ Compris : de {a} à {b} ¦ ✓ Rozumiem: od {a} do {b} ¦ ✓ Forstått: fra {a} til {b}
+Mes réglages (glissés) ¦ Moje nastavenia (potiahnuté) ¦ Mine innstillinger (dratt)
+Couper la colonne la plus large en deux ¦ Rozdeliť najširší stĺpec na dva ¦ Del den bredeste kolonnen i to
+Retirer la dernière colonne ¦ Odobrať posledný stĺpec ¦ Fjern den siste kolonnen
+Garder ces colonnes pour une prochaine table (sur cet ordinateur) ¦ Ponechať tieto stĺpce pre ďalší register (na tomto počítači) ¦ Behold disse kolonnene til et neste register (på denne datamaskinen)
+Garder ce gabarit ¦ Uložiť túto šablónu ¦ Behold denne malen
+Chercher les lignes d’écriture entre le trait du haut et celui du bas ¦ Hľadať riadky písma medzi hornou a dolnou čiarou ¦ Finn skrivelinjer mellom den øverste og den nederste streken
+Repérer les lignes ¦ Nájsť riadky ¦ Finn linjene
+Nombre de lignes : la zone est coupée en parts égales ¦ Počet riadkov: oblasť sa rozdelí na rovnaké diely ¦ Antall linjer: området deles i like store deler
+Glisse les <b class="h-td-k-col">traits bleus</b> pour séparer les colonnes et choisis ce que contient chacune ; les <b class="h-td-k-band">traits orange</b> bornent la zone à lire (sous les titres, au-dessus du bas de page). Puis « ↧ Repérer les lignes ». ¦ Potiahni <b class="h-td-k-col">modré čiary</b>, aby si oddelil stĺpce, a vyber, čo ktorý obsahuje; <b class="h-td-k-band">oranžové čiary</b> ohraničujú oblasť na čítanie (pod nadpismi, nad pätou strany). Potom „↧ Nájsť riadky“. ¦ Dra de <b class="h-td-k-col">blå strekene</b> for å skille kolonnene, og velg hva hver av dem inneholder; de <b class="h-td-k-band">oransje strekene</b> avgrenser området som skal leses (under overskriftene, over bunnteksten). Deretter «↧ Finn linjene».
+Séparation de colonne {n} ¦ Oddelenie stĺpca {n} ¦ Kolonneskille {n}
+Haut de la zone à lire ¦ Horný okraj oblasti na čítanie ¦ Øverste kant av området som skal leses
+Bas de la zone à lire ¦ Dolný okraj oblasti na čítanie ¦ Nederste kant av området som skal leses
+{lines} : vérifie qu’elles tombent bien sur l’écriture. ¦ {lines}: over, že sedia presne na písme. ¦ {lines}: sjekk at de treffer skriften riktig.
+Aucune ligne repérée : ajuste les traits orange, ou indique le nombre de lignes. ¦ Nenašiel sa žiadny riadok: uprav oranžové čiary alebo zadaj počet riadkov. ¦ Ingen linjer funnet: juster de oransje strekene, eller angi antall linjer.
+Son nom (il sera proposé pour tes prochaines tables, sur cet ordinateur) : ¦ Jej názov (ponúkne sa pri tvojich ďalších registroch, na tomto počítači): ¦ Navnet (det foreslås for de neste registrene dine, på denne datamaskinen):
+Gabarit « {name} » gardé. ¦ Šablóna „{name}“ uložená. ¦ Malen «{name}» er beholdt.
+✍ Saisir les lignes à la main ¦ ✍ Zadať riadky ručne ¦ ✍ Skriv inn linjene for hånd
+{lines} : passe à la relecture, ou relis l’image. ¦ {lines}: prejdi ku kontrole alebo obrázok prečítaj znova. ¦ {lines}: gå videre til gjennomlesingen, eller les bildet på nytt.
+↻ Relire l’image ¦ ↻ Prečítať obrázok znova ¦ ↻ Les bildet på nytt
+Le lecteur d’écriture manuscrite (HTR) n’est pas installé sur cet ordinateur : la saisie se fait à la main, dans une grille rapide, la bande de chaque ligne sous les yeux. (Pour l’installer : Réglages → Reconnaissance d’écriture.) ¦ Čítačka rukopisu (HTR) nie je na tomto počítači nainštalovaná: zadáva sa ručne, v rýchlej mriežke, s pásom každého riadka pred očami. (Inštalácia: Nastavenia → Rozpoznávanie písma.) ¦ Håndskriftleseren (HTR) er ikke installert på denne datamaskinen: du skriver inn for hånd, i et raskt rutenett, med stripen for hver linje foran deg. (For å installere den: Innstillinger → Håndskriftgjenkjenning.)
+{lines} à lire avec le lecteur d’écriture manuscrite (HTR) : chaque case est envoyée au lecteur installé sur cet ordinateur. C’est plus lent, et à relire attentivement. ¦ {lines} na čítanie čítačkou rukopisu (HTR): každé políčko sa pošle čítačke nainštalovanej na tomto počítači. Je to pomalšie a treba to starostlivo skontrolovať. ¦ {lines} som skal leses med håndskriftleseren (HTR): hver celle sendes til leseren som er installert på denne datamaskinen. Det går tregere og må leses nøye gjennom.
+▶ Lire les lignes ¦ ▶ Prečítať riadky ¦ ▶ Les linjene
+{lines} à lire, {cols}. La lecture se fait sur cet ordinateur (le moteur est téléchargé une fois, et vérifié). ¦ {lines} na čítanie, {cols}. Číta sa na tomto počítači (modul sa stiahne raz a overí). ¦ {lines} som skal leses, {cols}. Lesingen skjer på denne datamaskinen (motoren lastes ned én gang og kontrolleres).
+Chargement du moteur de lecture… ¦ Načítava sa modul na čítanie… ¦ Laster inn lesemotoren…
+Lecture de la table… ¦ Číta sa register… ¦ Leser registeret…
+{lines} sur {n} : relis et corrige. ¦ {lines} z {n}: skontroluj a oprav. ¦ {lines} av {n}: les gjennom og rett.
+▶ Reprendre la lecture ¦ ▶ Pokračovať v čítaní ¦ ▶ Fortsett lesingen
+Le lecteur d’écriture manuscrite n’a pas pu lire la table ({err}). ¦ Čítačka rukopisu nemohla register prečítať ({err}). ¦ Håndskriftleseren kunne ikke lese registeret ({err}).
+Le moteur de lecture n’a pas pu être chargé. ¦ Modul na čítanie sa nepodarilo načítať. ¦ Lesemotoren kunne ikke lastes inn.
+La saisie à la main reste possible : la bande de chaque ligne s’affiche au-dessus de la grille. ¦ Ručné zadanie je stále možné: pás každého riadka sa zobrazí nad mriežkou. ¦ Det går fortsatt an å skrive inn for hånd: stripen for hver linje vises over rutenettet.
+hors de la période de la table ({years}) ¦ mimo obdobia registra ({years}) ¦ utenfor registerets periode ({years})
+date à vérifier ¦ dátum na overenie ¦ dato som må sjekkes
+année à préciser ¦ rok na upresnenie ¦ år som må presiseres
+La ligne sur l’image ¦ Riadok na obrázku ¦ Linjen på bildet
+La ligne {n} sur l’image ¦ Riadok {n} na obrázku ¦ Linje {n} på bildet
+Saisis chaque ligne en regardant la bande au-dessus. ¦ Zadaj každý riadok podľa pásu nad ním. ¦ Skriv inn hver linje mens du ser på stripen over.
+Ce que l’app a lu : corrige ce qui est faux (les cases peu sûres sont en jaune). ¦ Čo aplikácia prečítala: oprav, čo je zle (neisté políčka sú žlté). ¦ Det appen har lest: rett det som er feil (usikre celler er gule).
+Entrée ou ↓ : ligne suivante ; ↑ : ligne d’avant. Les dates sans année prennent l’année de la ligne d’avant (table de {a} à {b}). ¦ Enter alebo ↓: ďalší riadok; ↑: predchádzajúci riadok. Dátumy bez roku prevezmú rok z predchádzajúceho riadka (register od {a} do {b}). ¦ Enter eller ↓: neste linje; ↑: forrige linje. Datoer uten år får året fra linjen før (register fra {a} til {b}).
+Entrée ou ↓ : ligne suivante ; ↑ : ligne d’avant. Les dates sans année prennent l’année de la ligne d’avant. ¦ Enter alebo ↓: ďalší riadok; ↑: predchádzajúci riadok. Dátumy bez roku prevezmú rok z predchádzajúceho riadka. ¦ Enter eller ↓: neste linje; ↑: forrige linje. Datoer uten år får året fra linjen før.
+N° / notes ¦ Č. / poznámky ¦ Nr. / notater
+Nom, ligne {n} ¦ Priezvisko, riadok {n} ¦ Etternavn, linje {n}
+Prénoms, ligne {n} ¦ Mená, riadok {n} ¦ Fornavn, linje {n}
+Année, ligne {n} ¦ Rok, riadok {n} ¦ År, linje {n}
+Date, ligne {n} ¦ Dátum, riadok {n} ¦ Dato, linje {n}
+Sorte d’acte, ligne {n} ¦ Druh záznamu, riadok {n} ¦ Type dokument, linje {n}
+Notes, ligne {n} ¦ Poznámky, riadok {n} ¦ Notater, linje {n}
+12 mars, 12/03/1855… ¦ 12. marca, 12/03/1855… ¦ 12. mars, 12/03/1855…
+Retirer cette ligne ¦ Odobrať tento riadok ¦ Fjern denne linjen
+Retirer la ligne {n} ¦ Odobrať riadok {n} ¦ Fjern linje {n}
+Aucune ligne : « ＋ Ajouter une ligne ». ¦ Žiadny riadok: „＋ Pridať riadok“. ¦ Ingen linjer: «＋ Legg til en linje».
+{lines} sur {n} ¦ {lines} z {n} ¦ {lines} av {n}
+Ligne {n} ¦ Riadok {n} ¦ Linje {n}
+Voilà ce qui va entrer ¦ Toto sa pridá ¦ Dette blir lagt inn
+Un dépouillement <b>« {title} »</b> (modèle « Table décennale »), dans Listes → Dépouillements et Recherche → Dépouillement d’archive ; ¦ Výpis <b>„{title}“</b> (šablóna „Desaťročný register“) v Zoznamy → Výpisy a Výskum → Výpis z archívu; ¦ En registrering <b>«{title}»</b> (malen «Tiårsregister»), i Lister → Registreringer og Forskning → Arkivregistrering;
+<b>{lines}</b> relevées (nom, prénoms, date, sorte d’acte), chacune avec sa zone sur l’image ; ¦ <b>{lines}</b> zapísaných (priezvisko, mená, dátum, druh záznamu), každý so svojou oblasťou na obrázku; ¦ <b>{lines}</b> skrevet av (etternavn, fornavn, dato, type dokument), hver med sitt område på bildet;
+<b>{lines}</b> relevée (nom, prénoms, date, sorte d’acte), chacune avec sa zone sur l’image ; ¦ <b>{lines}</b> zapísaný (priezvisko, mená, dátum, druh záznamu), so svojou oblasťou na obrázku; ¦ <b>{lines}</b> skrevet av (etternavn, fornavn, dato, type dokument), med sitt område på bildet;
+la photo de la table, reliée au dépouillement (page 1). ¦ fotka registra, prepojená s výpisom (strana 1). ¦ bildet av registeret, koblet til registreringen (side 1).
+{dates} à vérifier : elles sont gardées telles qu’écrites. ¦ {dates} na overenie: ponechajú sa tak, ako sú napísané. ¦ {dates} som må sjekkes: de beholdes slik de er skrevet.
+Ensuite, l’app te propose les fiches qui correspondent : relier ou créer, ligne par ligne. ¦ Potom ti aplikácia ponúkne zodpovedajúce karty: prepojiť alebo vytvoriť, riadok po riadku. ¦ Deretter foreslår appen oppføringene som passer: koble eller opprett, linje for linje.
+Création du dépouillement… ¦ Vytvára sa výpis… ¦ Oppretter registreringen…
+Création… ¦ Vytvára sa… ¦ Oppretter…
+Le dépouillement n’a pas pu être créé. ¦ Výpis sa nepodarilo vytvoriť. ¦ Registreringen kunne ikke opprettes.
+Dépouillement créé : {lines} ¦ Výpis vytvorený: {lines} ¦ Registreringen er opprettet: {lines}
+Dépouillement créé. ¦ Výpis vytvorený. ¦ Registreringen er opprettet.
+＋ Fiche créée ¦ ＋ Karta vytvorená ¦ ＋ Oppføring opprettet
+🔗 Reliée ¦ 🔗 Prepojené ¦ 🔗 Koblet
+Relier la ligne à la fiche choisie ¦ Prepojiť riadok s vybranou kartou ¦ Koble linjen til den valgte oppføringen
+Créer la fiche {name} avec son événement ¦ Vytvoriť kartu {name} s jej udalosťou ¦ Opprett oppføringen {name} med hendelsen
+Créer la fiche {name} ¦ Vytvoriť kartu {name} ¦ Opprett oppføringen {name}
+fiche proposée ¦ navrhnutá karta ¦ foreslått oppføring
+Le dépouillement « {title} » est créé avec {lines}. ¦ Výpis „{title}“ je vytvorený s {lines}. ¦ Registreringen «{title}» er opprettet med {lines}.
+Ouvrir le dépouillement ¦ Otvoriť výpis ¦ Åpne registreringen
+Relier les fiches proposées ¦ Prepojiť navrhnuté karty ¦ Koble de foreslåtte oppføringene
+Pour chaque ligne : relie-la à une fiche de ta base (menu de choix), ou crée la fiche. Rien n’est obligatoire : la ligne reste dans le dépouillement. ¦ Pri každom riadku: prepoj ho s kartou vo svojej databáze (ponuka výberu) alebo kartu vytvor. Nič nie je povinné: riadok zostane vo výpise. ¦ For hver linje: koble den til en oppføring i databasen din (valgmenyen), eller opprett oppføringen. Ingenting er obligatorisk: linjen blir værende i registreringen.
+La fiche n’a pas pu être créée. ¦ Kartu sa nepodarilo vytvoriť. ¦ Oppføringen kunne ikke opprettes.
+{lines} à sa fiche ¦ {lines} k jej karte ¦ {lines} til oppføringen sin
+Choisis la fiche dans la liste (ou « ＋ Créer la fiche »). ¦ Vyber kartu v zozname (alebo „＋ Vytvoriť kartu“). ¦ Velg oppføringen i listen (eller «＋ Opprett oppføringen»).
+Choisis la fiche dans la liste. ¦ Vyber kartu v zozname. ¦ Velg oppføringen i listen.
+Ligne reliée à {name} ¦ Riadok prepojený s {name} ¦ Linjen er koblet til {name}
+Fiche créée : {name} ¦ Karta vytvorená: {name} ¦ Oppføring opprettet: {name}
+Plusieurs sortes (colonne « sorte d’acte ») ¦ Viac druhov (stĺpec „druh záznamu“) ¦ Flere typer (kolonnen «type dokument»)
+Nom · Prénoms · Date (la plus courante) ¦ Priezvisko · Mená · Dátum (najbežnejšie) ¦ Etternavn · Fornavn · Dato (vanligst)
+Nom · Prénoms · Date · Sorte d’acte (table mixte) ¦ Priezvisko · Mená · Dátum · Druh záznamu (zmiešaný register) ¦ Etternavn · Fornavn · Dato · Type dokument (blandet register)
+N° · Nom · Prénoms · Date ¦ Č. · Priezvisko · Mená · Dátum ¦ Nr. · Etternavn · Fornavn · Dato
+Année · Nom · Prénoms · Date ¦ Rok · Priezvisko · Mená · Dátum ¦ År · Etternavn · Fornavn · Dato
+Nom · Prénoms · Date · Observations ¦ Priezvisko · Mená · Dátum · Poznámky ¦ Etternavn · Fornavn · Dato · Merknader
+=ligne déjà lue ¦ už prečítaný riadok|už prečítané riadky|už prečítaných riadkov ¦ linje som allerede er lest|linjer som allerede er lest
+=ligne avec un nom ¦ riadok s menom|riadky s menom|riadkov s menom ¦ linje med navn|linjer med navn
+=ligne reliée ¦ prepojený riadok|prepojené riadky|prepojených riadkov ¦ koblet linje|koblede linjer
+=date reste ¦ dátum zostáva|dátumy zostávajú|dátumov zostáva ¦ dato gjenstår|datoer gjenstår
+Les photos à montrer ¦ Fotky na zobrazenie ¦ Bilder som skal vises
+{faces} sur {photos}. ¦ {faces} na {photos}. ¦ {faces} på {photos}.
+=visage choisi ¦ vybraná tvár|vybrané tváre|vybraných tvárí ¦ valgt ansikt|valgte ansikter
+Ajouter une ligne ¦ Pridať riadok ¦ Legg til en linje

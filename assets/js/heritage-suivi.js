@@ -11,6 +11,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? v[k] : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     for (const k of ['dashboard', 'dashboardConfig', 'lists']) ext[k] = ext[k] || {};
     const A = () => window.LCNDA_APP, UI = () => window.LCNDA_UI || {}, P = () => window.LCNDA_PICKER, C = () => window.LCNDA_SUIVI;
@@ -98,7 +99,7 @@
     function obsMediaHtml(o, {max = 3} = {}) {
         const ids = obsMediaIds(o); if (!ids.length) return '';
         const all = ids.join(','), shown = ids.slice(0, max), more = ids.length - shown.length;
-        return `<span class="sv-mstrip">${shown.map((id, i) => `<button type="button" class="sv-mthumb" data-sv-media="${all}" data-sv-media-i="${i}" data-sv-mid="${id}" aria-label="Voir le média ${i + 1} sur ${ids.length}"><span aria-hidden="true">📷</span></button>`).join('')}${more > 0 ? `<button type="button" class="sv-mthumb is-more" data-sv-media="${all}" data-sv-media-i="${max}" aria-label="Voir les ${more} autres médias">+${more}</button>` : ''}</span>`;
+        return `<span class="sv-mstrip">${shown.map((id, i) => `<button type="button" class="sv-mthumb" data-sv-media="${all}" data-sv-media-i="${i}" data-sv-mid="${id}" aria-label="Voir le média ${i + 1} sur ${ids.length}"><span aria-hidden="true">📷</span></button>`).join('')}${more > 0 ? `<button type="button" class="sv-mthumb is-more" data-sv-media="${all}" data-sv-media-i="${max}" aria-label="${esc(i18n('Voir les {n} autres médias', {n: more}))}">+${more}</button>` : ''}</span>`;
     }
     const mediaCache = new Map();
     async function mediaItems(ids) {
@@ -157,6 +158,7 @@
             ${o.bgPicker !== false && app.mapBackgroundSelectHtml ? `<label class="sv-map-bgsel" title="Fond de la carte">🗺 <select data-sv-mapbg aria-label="Fond de la carte">${app.mapBackgroundSelectHtml(o.bg || defaultBg())}</select></label>` : ''}
             <div class="sv-map-pop" hidden></div></div>`;
         const root = host.firstElementChild, tilesEl = root.querySelector('.sv-map-tiles'), svg = root.querySelector('svg'), pop = root.querySelector('.sv-map-pop');
+        let cmp = null; // ⇆ Comparer deux époques (heritage-cartes-plus.js), posé une fois les variables prêtes, plus bas
         let series = o.series || [], polygons = o.polygons || [], bg = o.bg || defaultBg(), z = 12, cx = 0, cy = 0, T = null;
         const W = () => root.clientWidth || 600, H = () => root.clientHeight || 300;
         const all = () => [...series.flatMap(s => s.points), ...polygons.flatMap(p => p.coords.map(c => ({lat: c[0], lon: c[1]}))), ...(o.home ? [o.home] : [])].filter(p => Number.isFinite(p.lat) && Number.isFinite(p.lon));
@@ -177,6 +179,7 @@
                 tiles += `<img alt="" draggable="false" referrerpolicy="no-referrer" src="${esc(app.mapTileUrl(bg, z, ((tx % world) + world) % world, ty))}" style="left:${Math.round(tx * 256 - left)}px;top:${Math.round(ty * 256 - top)}px">`;
             }
             tilesEl.innerHTML = tiles;
+            cmp?.draw({left, top, z, width: w, height: h});
             svg.setAttribute('viewBox', `0 0 ${w} ${h}`); svg.setAttribute('width', w); svg.setAttribute('height', h);
             let out = '';
             polygons.forEach(pg => { if (pg.coords.length < 2) return; const pts = pg.coords.map(c => px(c[0], c[1]).map(v => v.toFixed(1)).join(',')).join(' '); out += `<polygon points="${pts}" fill="${esc(pg.color || '#1a8a3a')}" fill-opacity=".14" stroke="${esc(pg.color || '#1a8a3a')}" stroke-width="2" stroke-dasharray="${pg.dashed === false ? '' : '6 4'}"><title>${esc(pg.label || '')}</title></polygon>`; });
@@ -207,6 +210,7 @@
         });
         function zoomBy(d, ax, ay) { const nz = Math.max(2, Math.min(19, z + d)); if (nz === z) return; const k = 2 ** (nz - z); const wx = cx - W() / 2 + ax, wy = cy - H() / 2 + ay; cx = wx * k - ax + W() / 2; cy = wy * k - ay + H() / 2; z = nz; }
         let drag = null, moved = false;
+        if (o.compare !== false) cmp = window.LCNDA_EXT?.mapCompare?.mount(root, {key: 'lcnda-map-compare-suivi', bar: root.querySelector('.sv-map-zoom'), after: tilesEl, baseBg: () => bg, redraw: () => draw()}) || null;
         root.addEventListener('pointerdown', e => { if (e.target.closest('button, select, label, .sv-map-pt, .sv-map-pop')) return; drag = {x: e.clientX, y: e.clientY, cx, cy}; moved = false; });
         window.addEventListener('pointermove', e => { if (!drag) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (Math.abs(dx) + Math.abs(dy) > 3) moved = true; cx = drag.cx - dx; cy = drag.cy - dy; requestAnimationFrame(draw); });
         window.addEventListener('pointerup', () => { drag = null; setTimeout(() => { moved = false; }, 0); });
@@ -333,8 +337,8 @@
         const s = pick(D, widget), lim = Math.max(1, Number(widget.limit) || 6);
         const gpsRows = s.animals.filter(a => a.gps?.t1 && (!s.from || tIso(a.gps.t1) >= s.from)).map(a => ({gps: true, iso: tIso(a.gps.t1), time: tTime(a.gps.t1), pet_id: a.id, source: 'gps', place: 'dernière position GPS', id: 0}));
         const rows = [...s.obs, ...gpsRows].sort((x, y) => `${y.iso} ${y.time}`.localeCompare(`${x.iso} ${x.time}`));
-        const html = rows.slice(0, lim).map(o => { const a = animalById(D, o.pet_id); return `<div class="sv-row"${o.id ? ` data-sv-obs="${o.id}" role="button" tabindex="0"` : a ? ` data-sv-pet="${a.id}" role="button" tabindex="0"` : ''}><b class="sv-when">${esc(whenShort(o.iso, o.time))}</b><span class="sv-what">${o.gps ? '📡' : esc(speciesIcon(a?.species))} ${esc(a?.title || (o.count ? `${o.count} sans bague` : 'Animal sans fiche'))} · ${esc(placeOfObs(o, D))}</span>${o.gps ? '' : obsMediaHtml(o)}${relBadge(o)}</div>`; }).join('');
-        const more = rows.length > lim ? `<button type="button" class="link-button sv-more" data-sv-more="${esc(widget.id)}">Voir les ${Math.min(20, rows.length - lim)} suivantes ↓</button>` : '';
+        const html = rows.slice(0, lim).map(o => { const a = animalById(D, o.pet_id); return `<div class="sv-row"${o.id ? ` data-sv-obs="${o.id}" role="button" tabindex="0"` : a ? ` data-sv-pet="${a.id}" role="button" tabindex="0"` : ''}><b class="sv-when">${esc(whenShort(o.iso, o.time))}</b><span class="sv-what">${o.gps ? '📡' : esc(speciesIcon(a?.species))} ${esc(a?.title || (o.count ? i18n('{n} sans bague', {n: o.count}) : i18n('Animal sans fiche')))} · ${esc(placeOfObs(o, D))}</span>${o.gps ? '' : obsMediaHtml(o)}${relBadge(o)}</div>`; }).join('');
+        const more = rows.length > lim ? `<button type="button" class="link-button sv-more" data-sv-more="${esc(widget.id)}">${i18n('Voir les {n} suivantes ↓', {n: Math.min(20, rows.length - lim)})}</button>` : '';
         return card(index, widget, 'Dernières observations', '', rows.length ? `<div class="sv-rows">${html}</div>${more}` : A().empty('Aucune observation pour l’instant.', {icon: '👁', action: RO() ? null : {label: '＋ Nouvelle observation', attrs: 'data-sv-new-obs'}}), span);
     }};
     ext.dashboard.sv_missing = {load, render: (index, widget, span, D) => {
@@ -342,7 +346,7 @@
         const days = Math.max(1, Number(ext.sheetHead?.().red) || Number(widget.config?.days) || 30), s = pick(D, widget) /* un seul seuil : « Pas revu au bout de… » (Fiches personnes et animaux → Éléments de l’en-tête) */, lim = Math.max(1, Number(widget.limit) || 6);
         const rows = s.animals.filter(a => !a.deceased).map(a => ({a, l: lastSeen(a)})).filter(x => !x.l || (daysSince(x.l.iso) ?? 9999) >= days).sort((x, y) => (x.l?.iso || '').localeCompare(y.l?.iso || ''));
         const html = rows.slice(0, lim).map(({a, l}) => `<div class="sv-row" data-sv-pet="${a.id}" role="button" tabindex="0"><span class="sv-what"><b>${esc(a.title)}</b>${l?.place ? ` · ${esc(l.place)}` : ''}</span>${badge(l ? ago(l.iso) : 'jamais vu', (daysSince(l?.iso) ?? 999) > 90 ? 'grey' : 'yellow')}${RO() ? '' : `<button type="button" class="icon-button small" data-sv-new-obs="${a.id}" title="Je viens de le revoir : ＋ Nouvelle observation" aria-label="＋ Nouvelle observation">＋</button>`}</div>`).join('');
-        return card(index, widget, 'Animaux à retrouver', `<span class="sv-per">pas revus depuis ${esc(plural(days, 'jour'))}</span>`, rows.length ? `<div class="sv-rows">${html}</div>` : A().empty('Tous ont été revus récemment.', {icon: '✓'}), span);
+        return card(index, widget, 'Animaux à retrouver', `<span class="sv-per">${i18n('pas revus depuis {days}', {days: esc(plural(days, 'jour'))})}</span>`, rows.length ? `<div class="sv-rows">${html}</div>` : A().empty('Tous ont été revus récemment.', {icon: '✓'}), span);
     }};
     ext.dashboard.sv_animals = {load, render: (index, widget, span, D) => {
         if (!D) return card(index, widget, 'Animaux suivis', '', noData(), span);
@@ -474,13 +478,13 @@
     ext.suivi.headerHtml = (page, pages) => {
         const f = page.filter || {}, sp = f.species ? (ext.speciesLabel?.(f.species) || f.species) : '';
         const filterTxt = [f.taxon || sp, f.siteTitle || (f.site ? 'un site' : '')].filter(Boolean);
-        return `${UI().pageHeader({where: `Suivi des animaux · Page « ${page.name || 'Page'} »`, icon: page.icon || '🐾', title: page.name || 'Suivi des animaux',
+        return `${UI().pageHeader({where: i18n('Suivi des animaux · Page « {name} »', {name: page.name || i18n('Page')}), icon: page.icon || '🐾', title: page.name || 'Suivi des animaux',
             help: 'Tes animaux suivis, ce qu’on a vu d’eux et leurs trajets.',
             primary: RO() ? '' : '<button type="button" class="button" data-sv-new-obs>＋ Nouvelle observation</button>',
             actions: RO() ? [] : ['<button type="button" class="button secondary" data-sv-import>⤒ Importer un trajet…</button>'],
             more: ['<button type="button" data-sv-census>🐾 Recensement</button>', '<button type="button" data-sv-stats-big>📊 Chiffres</button>', ...(RO() ? [] : ['<button type="button" data-sv-share>📤 Partager…</button>', '<button type="button" data-sv-receive>⤒ Recevoir un suivi partagé…</button>', '<button type="button" data-sv-page-new>＋ Nouvelle page</button>', '<button type="button" data-sv-site-new>＋ Nouveau site de suivi</button>', '<button type="button" data-sv-group-new>＋ Nouveau groupe</button>', '<button type="button" data-sv-reorder>⠿ Réordonner les widgets</button>'])]})}
             <div class="sv-pagebar"><div class="segmented sv-pages" role="tablist">${pages.map(p => `<button type="button" role="tab" draggable="${RO() ? 'false' : 'true'}" data-dash-page="${esc(p.id)}" data-sv-page="${esc(p.id)}" class="${p.id === page.id ? 'is-active' : ''}" aria-selected="${p.id === page.id}">${esc(p.icon || '🐾')} ${esc(p.name || 'Page')}</button>`).join('')}</div>${RO() ? '' : `<button type="button" class="button small secondary" data-sv-page-new>＋ Nouvelle page</button><button type="button" class="icon-button small" data-sv-page-more="${esc(page.id)}" title="La page « ${esc(page.name)} »" aria-label="Plus d’actions">⋯</button>`}</div>
-            ${filterTxt.length ? `<div class="sv-pagefilter">${esc(page.icon || '🐾')} Cette page montre seulement : <b>${esc(filterTxt.join(' · '))}</b>${f.site ? '' : ' · tous les sites'}. Tous ses blocs s’y règlent d’office (un bloc peut garder son propre choix).${RO() ? '' : ` <button type="button" class="link-button" data-sv-page-filter="${esc(page.id)}">✎ Changer</button>`}</div>` : ''}`;
+            ${filterTxt.length ? `<div class="sv-pagefilter">${esc(page.icon || '🐾')} ${i18n(f.site ? 'Cette page montre seulement : <b>{what}</b>. Tous ses blocs s’y règlent d’office (un bloc peut garder son propre choix).' : 'Cette page montre seulement : <b>{what}</b> · tous les sites. Tous ses blocs s’y règlent d’office (un bloc peut garder son propre choix).', {what: esc(filterTxt.join(' · '))})}${RO() ? '' : ` <button type="button" class="link-button" data-sv-page-filter="${esc(page.id)}">✎ Changer</button>`}</div>` : ''}`;
     };
     function pagesWork() { const {pages, defaultPage} = A().dashboardPages(); return {pages: clone(pages), defaultPage}; }
     function savePages(pages, defaultPage, message, after) {
@@ -493,7 +497,7 @@
     function pageDialog(page = null) {
         const isNew = !page, f = page?.filter || {};
         let siteTitle = f.siteTitle || '';
-        ext.openDialog({onOpen: d => d.addEventListener('picker-change', e => { siteTitle = e.detail.item?.title || ''; }),eyebrow: 'SUIVI DES ANIMAUX', title: isNew ? 'Nouvelle page' : `Espèce et site de la page « ${page.name} »`,
+        ext.openDialog({onOpen: d => d.addEventListener('picker-change', e => { siteTitle = e.detail.item?.title || ''; }),eyebrow: 'SUIVI DES ANIMAUX', title: isNew ? i18n('Nouvelle page') : i18n('Espèce et site de la page « {name} »', {name: page.name}),
             body: `<div class="form-grid sv-form">${isNew ? `<label>Nom de la page<input name="name" required maxlength="40" placeholder="Corneilles, Hérissons, Chats du quartier…"></label><label>Icône<input name="icon" maxlength="8" value="🐾" placeholder="🐦"></label>` : ''}
                 <label>Espèce<select name="species">${SPECIES_OPTS().map(([k, l]) => `<option value="${esc(k)}" ${f.species === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
                 <label>Nom de l’espèce (facultatif)<input name="taxon" maxlength="80" value="${esc(f.taxon || '')}" placeholder="Corneille noire, Hérisson d’Europe…"></label>
@@ -509,7 +513,7 @@
                     const prof = filter.species ? C().guessProfile(filter.species, filter.taxon) : 'oiseau';
                     const id = 'pg_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
                     W.pages.push({id, name: name.slice(0, 40), icon: String(v.get('icon') || '🐾').trim().slice(0, 8) || '🐾', filter, widgets: proposedWidgets(prof)});
-                    A().state.suiviPage = id; savePages(W.pages, W.defaultPage, `Page « ${name} » créée.`);
+                    A().state.suiviPage = id; savePages(W.pages, W.defaultPage, i18n('Page « {name} » créée.', {name}));
                 } else {
                     const p = W.pages.find(x => x.id === page.id); if (p) p.filter = filter;
                     savePages(W.pages, W.defaultPage, 'Espèce et site de la page enregistrés.');
@@ -527,7 +531,7 @@
             {icon: '⧉', label: 'Dupliquer la page', run: () => { const id = 'pg_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5); W.pages.splice(W.pages.indexOf(p) + 1, 0, {...clone(p), id, name: `${p.name} (copie)`.slice(0, 40), widgets: (p.widgets || []).map(w => ({...clone(w), id: `${w.type}-${Math.random().toString(36).slice(2, 10)}`}))}); savePages(W.pages, W.defaultPage, 'Page dupliquée.'); }},
             {icon: '⭐', label: 'Page affichée à l’ouverture', disabled: W.defaultPage === pageId, run: () => savePages(W.pages, pageId, `« ${p.name} » s’affichera à l’ouverture.`)},
             '-',
-            {icon: '🗑', label: 'Supprimer la page', danger: true, disabled: !others.length, run: () => { const np = others; savePages(np, W.defaultPage === pageId ? np[0].id : W.defaultPage, `Page « ${p.name} » supprimée (ses blocs, pas les animaux).`); if (A().state.suiviPage === pageId) A().state.suiviPage = ''; }},
+            {icon: '🗑', label: 'Supprimer la page', danger: true, disabled: !others.length, run: () => { const np = others; savePages(np, W.defaultPage === pageId ? np[0].id : W.defaultPage, i18n('Page « {name} » supprimée (ses blocs, pas les animaux).', {name: p.name})); if (A().state.suiviPage === pageId) A().state.suiviPage = ''; }},
         ];
         return ev ? UI().contextMenu(ev, items, {title: `Page « ${p.name} »`}) : UI().menuAt(anchor, items, {title: `Page « ${p.name} »`});
     }
@@ -558,7 +562,7 @@
     async function copyToPage(w, curId) {
         const W = pagesWork(), others = W.pages.filter(p => p.id !== curId);
         const box = document.createElement('div');
-        UI().menuAt(document.querySelector(`[data-dashboard-widget="${CSS.escape(w.id)}"] [data-dash-widget-more]`) || document.body, others.map(p => ({icon: p.icon || '🐾', label: p.name, run: () => { p.widgets = [...(Array.isArray(p.widgets) ? p.widgets : []), A().dashboardNewWidget(w.type, {...clone(w), id: undefined})]; savePages(W.pages, W.defaultPage, `Bloc copié vers « ${p.name} ».`); }})), {title: 'Copier vers la page…'});
+        UI().menuAt(document.querySelector(`[data-dashboard-widget="${CSS.escape(w.id)}"] [data-dash-widget-more]`) || document.body, others.map(p => ({icon: p.icon || '🐾', label: p.name, run: () => { p.widgets = [...(Array.isArray(p.widgets) ? p.widgets : []), A().dashboardNewWidget(w.type, {...clone(w), id: undefined})]; savePages(W.pages, W.defaultPage, i18n('Bloc copié vers « {name} ».', {name: p.name})); }})), {title: 'Copier vers la page…'});
         void box;
     }
     function bindPageBar(ws) {
@@ -628,7 +632,7 @@
                 const byName = (D.animals || []).filter(a => a.title.toLowerCase().includes(t.toLowerCase()) && !list.some(c => c.animal.id === a.id)).map(a => ({animal: a, pct: null}));
                 list = [...list, ...byName];
             }
-            res.innerHTML = list.length ? `<small class="muted">${esc(plural(list.length, 'animal trouvé', 'animaux trouvés'))}</small>${list.slice(0, 8).map(c => `<button type="button" class="sv-find-row" data-sv-pet="${c.animal.id}">${animalThumb(c.animal, 30)}<span><b>${esc(c.animal.title)}</b><small class="muted">${esc(codeOf(c.animal))}</small></span>${c.pct != null && c.pct < 100 ? `<small>${c.pct} %</small>` : ''}</button>`).join('')}` : A().empty(`Aucun animal pour « ${t} ».`, {icon: '🔍'});
+            res.innerHTML = list.length ? `<small class="muted">${esc(plural(list.length, 'animal trouvé', 'animaux trouvés'))}</small>${list.slice(0, 8).map(c => `<button type="button" class="sv-find-row" data-sv-pet="${c.animal.id}">${animalThumb(c.animal, 30)}<span><b>${esc(c.animal.title)}</b><small class="muted">${esc(codeOf(c.animal))}</small></span>${c.pct != null && c.pct < 100 ? `<small>${c.pct} %</small>` : ''}</button>`).join('')}` : A().empty(i18n('Aucun animal pour « {q} ».', {q: t}), {icon: '🔍'});
         };
         q.addEventListener('input', run);
     }
@@ -657,7 +661,7 @@
         let view = null, rep = null;
         const draw = async () => {
             const animals = (D.animals || []).filter(a => chosen.includes(a.id));
-            dlg.querySelector('[data-chips]').innerHTML = animals.map((a, i) => `<span class="sv-chip" style="--c:${COLORS[i % COLORS.length]}"><i></i>${esc(a.title)} (${fmtN(a.obs_count + (a.gps?.n || 0))})<button type="button" class="icon-button small" data-rm="${a.id}" aria-label="Retirer ${esc(a.title)}">×</button></span>`).join('');
+            dlg.querySelector('[data-chips]').innerHTML = animals.map((a, i) => `<span class="sv-chip" style="--c:${COLORS[i % COLORS.length]}"><i></i>${esc(a.title)} (${fmtN(a.obs_count + (a.gps?.n || 0))})<button type="button" class="icon-button small" data-rm="${a.id}" aria-label="${esc(i18n('Retirer {name}', {name: a.title}))}">×</button></span>`).join('');
             const series = await mapSeries(D, animals, D.observations || [], {link, by});
             const host = dlg.querySelector('[data-big]');
             if (!view) view = mapView(host, {series, polygons: sitePolygons(D), height: Math.max(320, Math.min(620, innerHeight - 300)), wheel: true, bgPicker: false}); else view.setSeries(series);
@@ -701,7 +705,7 @@
             const sites = Object.entries(bySite).sort((a, b) => b[1] - a[1]).slice(0, 8), smx = sites[0]?.[1] || 1;
             const never = s.animals.map(a => ({a, l: lastSeen(a)})).filter(x => x.a.deceased || !x.l || (daysSince(x.l.iso) ?? 0) >= delay).sort((p, q) => (p.l?.iso || '').localeCompare(q.l?.iso || ''));
             dlg.querySelector('[data-out]').innerHTML = `<div class="sv-kpis is-big"><div><b>${fmtN(s.animals.length)}</b><small>animaux suivis</small></div><div><b>${fmtN(s.obs.length)}</b><small>observations · ${esc(plural(observers.size, 'observateur'))}</small></div>
-                <div><b>${esc(dates[0] ? dateFr(dates[0]) : '—')}</b><small>première observation${dates.length ? ` · dernière : ${esc(dateFr(dates[dates.length - 1]))}` : ''}</small></div><div><b>${esc(far?.km ? kmText(far.km) : '—')}</b><small>${far?.km ? `parcourus par ${esc(far.a.title)} (${esc(dateFr(tIso(far.t0)))} → ${esc(dateFr(tIso(far.t1)))})` : 'pas de trajet GPS'}</small></div></div>
+                <div><b>${esc(dates[0] ? dateFr(dates[0]) : '—')}</b><small>${i18n('première observation')}${dates.length ? ` · ${i18n('dernière : {date}', {date: esc(dateFr(dates[dates.length - 1]))})}` : ''}</small></div><div><b>${esc(far?.km ? kmText(far.km) : '—')}</b><small>${far?.km ? i18n('parcourus par {name} ({from} → {to})', {name: esc(far.a.title), from: esc(dateFr(tIso(far.t0))), to: esc(dateFr(tIso(far.t1)))}) : i18n('pas de trajet GPS')}</small></div></div>
                 <div class="sv-stats-grid"><section><h4>Animaux vus par mois · ${y}</h4><div class="sv-bars is-big">${per.map((v, i) => `<span class="sv-bar" title="${esc(MONTHS_L[i])} : ${v}"><i style="height:${Math.round(4 + 90 * v / mx)}px"></i><small>${MONTHS[i][0].toUpperCase()}</small></span>`).join('')}</div></section>
                 <section><h4>Par site · observations</h4>${sites.map(([k, v]) => `<div class="sv-cause"><span>${esc(k)}</span><i style="width:${Math.round(100 * v / smx)}%"></i><b>${v}</b></div>`).join('') || A().empty('Aucune observation.', {icon: '📍'})}</section>
                 <section><h4>Zone fréquentée${zoneOf ? ` · ${esc(zoneOf.title)}` : ''}</h4>${zone.hull.length > 2 ? `<div class="sv-map-host" data-zone></div><p><b>≈ ${esc(zone.km2 < 1 ? `${(zone.km2 * 100).toLocaleString('fr-FR', {maximumFractionDigits: 1})} ha` : `${zone.km2.toLocaleString('fr-FR', {maximumFractionDigits: 1})} km²`)}</b> <small class="muted">enveloppe des points vus</small></p>` : A().empty('Il faut au moins 3 points pour une zone.', {icon: '▱'})}</section>
@@ -863,7 +867,7 @@
                     const colors = {L: seen.L.map(ring), R: seen.R.map(ring)}; const code = C().parseReading(reading); if (code.chars.length && !code.unknown && !code.doubtful) { const slot = ['R', 'L'].flatMap(l => [1, 0].map(i => [l, i])).find(([l, i]) => colors[l][i] && !colors[l][i].metal); if (slot) colors[slot[0]][slot[1]].code = code.text; }
                     await write('save_mark', {pet_id: r.id, kind: 'color_rings', colors, start_date: form.elements.date.value});
                 } else if (prof !== 'oiseau' && number && !/[?\[…*]/.test(number)) await write('save_mark', {pet_id: r.id, kind: (C().PROFILES[prof]?.marks || ['other'])[0], code: number});
-                D.animals = (await overview(true)).animals; chosen = r.id; P().pickerSet(form.querySelector('[data-pet-field] .pk'), r.id); toast(`Fiche de « ${r.title} » créée.`); drawCands(); return;
+                D.animals = (await overview(true)).animals; chosen = r.id; P().pickerSet(form.querySelector('[data-pet-field] .pk'), r.id); toast(i18n('Fiche de « {name} » créée.', {name: r.title})); drawCands(); return;
             }
             const b = e.target.closest('[data-b]'); if (b) { const k = b.dataset.b; beh.has(k) ? beh.delete(k) : beh.add(k); drawBeh(); return; }
             if (e.target.closest('[data-b-other]')) { const t = await A().askText({title: 'Ce qu’il faisait', message: 'En quelques mots (« se baigne », « chasse un goéland »…)', okLabel: 'Ajouter'}); if (t && t.trim()) { beh.add(t.trim().slice(0, 40)); drawBeh(); } return; }
@@ -902,8 +906,8 @@
                 const hint = parsed.format.split(' ')[0];
                 return {count: pts.length, noun: 'point', parsed, data: parsed,
                     summaryHtml: `<b>${esc(plural(pts.length, 'point'))}</b> du ${esc(dateFr(tIso(pts[0][0])))} au ${esc(dateFr(tIso(pts[pts.length - 1][0])))}, <b>${esc(kmText(km))}</b> · ${esc(parsed.format)}`,
-                    notices: [...(parsed.ignored ? [{kind: 'warn', text: `${plural(parsed.ignored, 'ligne')} sans date ou sans position ${parsed.ignored > 1 ? 'seront sautées' : 'sera sautée'}.`}] : []),
-                        ...(animalById(D, pet)?.gps?.n ? [{kind: 'info', text: `${animalById(D, pet).title} a déjà ${plural(animalById(D, pet).gps.n, 'point')} : ils restent, ce fichier s’y ajoute (un instant déjà là n’est pas repris deux fois).`}] : [])],
+                    notices: [...(parsed.ignored ? [{kind: 'warn', text: i18n(parsed.ignored > 1 ? '{rows} sans date ou sans position seront sautées.' : '{rows} sans date ou sans position sera sautée.', {rows: plural(parsed.ignored, 'ligne')})}] : []),
+                        ...(animalById(D, pet)?.gps?.n ? [{kind: 'info', text: i18n('{name} a déjà {points} : ils restent, ce fichier s’y ajoute (un instant déjà là n’est pas repris deux fois).', {name: animalById(D, pet).title, points: plural(animalById(D, pet).gps.n, 'point')})}] : [])],
                     extra: `<div class="sv-imp"><fieldset><legend>Points à garder</legend><label class="checkbox-line"><input type="radio" name="svkeep" value="all" ${interval ? '' : 'checked'}> Tous les points (${fmtN(pts.length)})</label><label class="checkbox-line"><input type="radio" name="svkeep" value="thin" ${interval ? 'checked' : ''}> Un toutes les <input type="number" min="1" max="1440" value="${interval || 15}" data-unit="min" data-every aria-label="Minutes"> → <b data-thin-n></b></label></fieldset>
                         ${UI().checkHtml ? UI().checkHtml('Couper en nuits (une sortie = un trajet)', {attrs: 'data-nights', checked: /tractive|weenect|invoxia|kippy/i.test(hint)}) : '<label class="checkbox-line"><input type="checkbox" data-nights> Couper en nuits (une sortie = un trajet)</label>'}
                         <div><span class="pk-lab">Pour l’animal</span>${P().pickerField({name: '', hiddenName: false, kind: 'pet', value: pet || null})}</div><div data-skip></div></div>`,
@@ -918,7 +922,7 @@
                 let imp = 0, added = 0, skipped = 0, total = 0;
                 for (let i = 0; i < pts.length; i += 5000) { const r = await write('gps_import', {pet_id: pid, import_id: imp, filename: fs[0].name, format: parsed.format, points: pts.slice(i, i + 5000), km, nights}); imp = r.import_id; added += r.added; skipped += r.skipped || 0; }
                 const a = animalById(D, pid); total = (a?.gps?.n || 0) + added; refreshView();
-                return {message: `${plural(added, 'point importé', 'points importés')} pour ${a?.title || 'l’animal'}${skipped ? ` (${plural(skipped, 'déjà là', 'déjà là')}, ${skipped > 1 ? 'sautés' : 'sauté'})` : ''}${a?.gps?.n ? ` · ${plural(total, 'point')} en tout` : ''}`, undo: async () => { await write('gps_undo', {import_id: imp}); refreshView(); }};
+                return {message: `${i18n('{points} pour {name}', {points: plural(added, 'point importé', 'points importés'), name: a?.title || i18n('l’animal')})}${skipped ? ` ${i18n(skipped > 1 ? '({n} déjà là, sautés)' : '({n} déjà là, sauté)', {n: skipped})}` : ''}${a?.gps?.n ? ` · ${i18n('{points} en tout', {points: plural(total, 'point')})}` : ''}`, undo: async () => { await write('gps_undo', {import_id: imp}); refreshView(); }};
             }});
         function keep(body) { const all = parsed?.points || []; return body.querySelector('[name="svkeep"]:checked')?.value === 'thin' ? C().thin(all, Number(body.querySelector('[data-every]')?.value) || 15) : all; }
     }
@@ -964,7 +968,7 @@
                 let rows = (D.observations || []).filter(o => { const a = animalById(D, o.pet_id); return (!sp || (a && matchA(a))) && (!site || o.site_id === site) && (!f.year || (o.iso || '').startsWith(f.year)) && (!(f.rel || []).length || f.rel.includes(o.reliability))
                     && (!q || [a?.title, placeOfObs(o, D), o.observer, o.note, o.reading, codeOf(a)].join(' ').toLowerCase().includes(q) || C().norm(codeOf(a)).includes(C().norm(q))); });
                 rows = UI().sortItems ? UI().sortItems(rows, sort, {name: o => animalById(D, o.pet_id)?.title || '', date: o => `${o.iso} ${o.time}`}) : rows;
-                bar.setCount?.(`${plural(rows.length, 'observation')} · vu sur ${plural(new Set(rows.map(o => o.site_id || o.place_id || placeOfObs(o, D))).size, 'site')}`);
+                bar.setCount?.(`${plural(rows.length, 'observation')} · ${i18n('vu sur {sites}', {sites: plural(new Set(rows.map(o => o.site_id || o.place_id || placeOfObs(o, D))).size, 'site')})}`);
                 list.innerHTML = rows.length ? (view === 'cards' && UI().cardsHtml ? UI().cardsHtml(rows.slice(0, 300).map(o => { const a = animalById(D, o.pet_id); return {thumb: animalThumb(a, 60), name: a?.title || 'Animal sans fiche', open: `data-sv-obs="${o.id}"`, lines: [`${dateFr(o.iso || o.date)}${o.time ? ', ' + timeFr(o.time) : ''} · ${placeOfObs(o, D)}`, (o.behaviors || []).map(b => (C().BEHAVIORS[b] || b)).join(' ')], badges: [relBadge(o)].filter(Boolean), menu: RO() ? [] : [`<button type="button" data-sv-obs-edit="${o.id}">✎ Modifier</button>`, `<button type="button" data-sv-obs-dup="${o.id}">⧉ Dupliquer</button>`, `<button type="button" class="danger" data-sv-obs-del="${o.id}">🗑 Supprimer</button>`]}; })) : obsTableHtml(D, rows.slice(0, 500))) : A().emptyState({icon: '👁', text: q || sp || site ? 'Aucune observation ne correspond.' : 'Aucune observation pour l’instant', hint: 'Une observation : quand, où, quel animal, et si la bague a été bien lue.', action: RO() ? null : {label: '＋ Nouvelle observation', attrs: 'data-sv-new-obs'}});
             } else if (tab === 'animals') {
                 let rows = (D.animals || []).filter(a => a.tracked && matchA(a) && (!site || (D.observations || []).some(o => o.pet_id === a.id && o.site_id === site)) && (!q || [a.title, a.taxon, codeOf(a), ...(a.marks || []).map(m => m.code)].join(' ').toLowerCase().includes(q) || (a.marks || []).some(m => C().norm(m.code).includes(C().norm(q)) && C().norm(q))));
@@ -976,7 +980,7 @@
                 bar.setCount?.(plural(rows.length, 'animal', 'animaux'));
                 const item = a => { const l = lastSeen(a), gone = (daysSince(l?.iso) ?? 9999) >= 182; return {thumb: animalThumb(a, 60), name: `${a.gps?.n ? '📡 ' : ''}${a.title}${a.sex === 'M' ? ' ♂' : a.sex === 'F' ? ' ♀' : ''}`, open: `data-sv-pet="${a.id}"`,
                     lines: [codeOf(a) || a.taxon || ext.speciesLabel?.(a.species) || '', [a.obs_count ? plural(a.obs_count, 'observation') : '', a.sites ? plural(a.sites, 'site') : '', a.gps?.n ? `${fmtN(a.gps.n)} points GPS` : ''].filter(Boolean).join(' · ')],
-                    badges: [a.deceased ? {text: '† Mort', kind: 'black'} : gone ? {text: l ? `Pas revu depuis ${ago(l.iso)}` : 'Jamais vu', kind: 'grey'} : {text: a.gps?.n ? 'Émet' : 'Suivi en cours', kind: 'blue'}, a.health && ['blesse', 'malade', 'soins'].includes(a.health.state) ? {text: HS()[a.health.state][0], kind: HS()[a.health.state][1]} : null, (a.last_obs?.reliability === 'partial' || a.last_obs?.reliability === 'doubt') ? {text: 'Lecture à vérifier', kind: 'yellow'} : null].filter(Boolean),
+                    badges: [a.deceased ? {text: '† Mort', kind: 'black'} : gone ? {text: l ? i18n('Pas revu depuis {when}', {when: ago(l.iso)}) : i18n('Jamais vu'), kind: 'grey'} : {text: i18n(a.gps?.n ? 'Émet' : 'Suivi en cours'), kind: 'blue'}, a.health && ['blesse', 'malade', 'soins'].includes(a.health.state) ? {text: HS()[a.health.state][0], kind: HS()[a.health.state][1]} : null, (a.last_obs?.reliability === 'partial' || a.last_obs?.reliability === 'doubt') ? {text: 'Lecture à vérifier', kind: 'yellow'} : null].filter(Boolean),
                     date: l ? `Vu ${whenShort(l.iso, l.time).replace(/^auj\./, 'aujourd’hui à').replace(/^hier /, 'hier à ')}` : ''}; };
                 list.innerHTML = rows.length ? (view === 'cards' ? UI().cardsHtml(rows.map(item)) : UI().rowsHtml(rows.map(item))) : A().emptyState({icon: '🐾', text: 'Aucun animal suivi pour l’instant', hint: 'Ouvre la fiche d’un animal et ajoute-lui une marque, une observation ou un trajet GPS.'});
             } else if (tab === 'sites') {
@@ -1024,7 +1028,7 @@
     }
     function siteDialog(site = null) {
         let outline = clone(site?.outline || []);
-        const dlg = ext.openDialog({eyebrow: '🏞 SITE DE SUIVI', title: site ? `Modifier « ${site.name} »` : 'Nouveau site de suivi', wide: true,
+        const dlg = ext.openDialog({eyebrow: '🏞 SITE DE SUIVI', title: site ? i18n('Modifier « {name} »', {name: site.name}) : i18n('Nouveau site de suivi'), wide: true,
             body: `<div class="sv-obs-2"><div class="form-grid"><label>Nom<input name="name" required maxlength="160" value="${esc(site?.name || '')}" placeholder="Parc des Buttes-Chaumont, dortoir de l’île…"></label>
                 <label>Sorte<input name="kind" maxlength="60" value="${esc(site?.kind || '')}" placeholder="Parc, dortoir, colonie, quartier, zone en mer…"></label>
                 <div><span class="pk-lab">Lieu</span>${P().pickerField({name: 'place_id', kind: 'place', value: site?.place_id || null})}</div>
@@ -1073,7 +1077,7 @@
         ws.querySelector('[data-sv-back]')?.addEventListener('click', () => { st.svGroup = 0; ext.lists.recensement(++st.workspaceToken); });
     }
     function groupDialog(g = null, {after = null} = {}) {
-        ext.openDialog({eyebrow: '👥 GROUPE', title: g?.id ? `Modifier « ${g.name} »` : 'Nouveau groupe',
+        ext.openDialog({eyebrow: '👥 GROUPE', title: g?.id ? i18n('Modifier « {name} »', {name: g.name}) : i18n('Nouveau groupe'),
             body: `<div class="form-grid"><label>Nom<input name="name" required maxlength="160" value="${esc(g?.name || '')}" placeholder="Meute du Vercors, troupe de Kasekela, pod J…"></label>
                 <label>Sorte<select name="kind">${C().GROUP_KINDS.map(k => `<option ${g?.kind === k ? 'selected' : ''}>${k}</option>`).join('')}</select></label>
                 <label>Espèce<input name="species" maxlength="120" value="${esc(g?.species || '')}" placeholder="Loup gris, chimpanzé, orque…"></label><label>Territoire<input name="territory" maxlength="300" value="${esc(g?.territory || '')}"></label>

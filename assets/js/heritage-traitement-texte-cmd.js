@@ -6,6 +6,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s);
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI;
     const T = () => window.LCNDA_TEXT;
@@ -139,10 +140,10 @@
                 const h = a.getAttribute('href') || ''; if (/^https?:\/\/|^mailto:/i.test(h)) window.open(h, '_blank', 'noopener');
             },
             linkMenu(a, e) {
-                const items = [{icon: '↗', label: a.dataset.wpPerson ? 'Ouvrir la fiche' : a.dataset.wpPlace ? 'Ouvrir le lieu' : 'Ouvrir le lien', shortcut: '⌘Clic', run: () => this.openLink(a)}];
-                if (!a.dataset.wpPerson && !a.dataset.wpPlace) items.push({icon: '✎', label: 'Modifier le lien…', run: () => { const r = document.createRange(); r.selectNodeContents(a); getSelection().removeAllRanges(); getSelection().addRange(r); this.lastRange = r; this.run('link'); }});
-                if (a.dataset.wpPerson) items.push({icon: '#', label: 'Afficher : nom, dates, naissance…', run: () => ext.textDocTools?.personPart?.(this, a)});
-                items.push('-', {icon: '×', label: 'Retirer le lien (garder le texte)', run: () => { a.replaceWith(...a.childNodes); this.commit(); }});
+                const items = [{icon: '↗', label: i18n(a.dataset.wpPerson ? 'Ouvrir la fiche' : a.dataset.wpPlace ? 'Ouvrir le lieu' : 'Ouvrir le lien'), shortcut: '⌘Clic', run: () => this.openLink(a)}];
+                if (!a.dataset.wpPerson && !a.dataset.wpPlace) items.push({icon: '✎', label: i18n('Modifier le lien…'), run: () => { const r = document.createRange(); r.selectNodeContents(a); getSelection().removeAllRanges(); getSelection().addRange(r); this.lastRange = r; this.run('link'); }});
+                if (a.dataset.wpPerson) items.push({icon: '#', label: i18n('Afficher : nom, dates, naissance…'), run: () => ext.textDocTools?.personPart?.(this, a)});
+                items.push('-', {icon: '×', label: i18n('Retirer le lien (garder le texte)'), run: () => { a.replaceWith(...a.childNodes); this.commit(); }});
                 UI().contextMenu({clientX: e.clientX, clientY: e.clientY, preventDefault() {}}, items, {title: a.textContent.trim().slice(0, 40)});
             },
             onContext(e) {
@@ -152,17 +153,17 @@
                 const wrap = w => () => { if (f.tagName !== 'FIGURE') return; f.dataset.wrap = w; if (w === 'square' && f.dataset.align === 'center') f.dataset.align = 'left'; this.commit(); this.layoutSoon(0); };
                 const al = a => () => { if (f.tagName !== 'FIGURE') return; f.dataset.align = a; this.commit(); this.layoutSoon(0); };
                 UI().contextMenu(e, [
-                    {icon: '▣', label: 'Aligné sur le texte (seul sur sa ligne)', disabled: f.tagName !== 'FIGURE', run: wrap('topbottom')}, {icon: '◧', label: 'Carré (le texte autour)', disabled: f.tagName !== 'FIGURE', run: wrap('square')},
-                    {icon: '⟸', label: 'À gauche', run: al('left')}, {icon: '≡', label: 'Centré', run: al('center')}, {icon: '⟹', label: 'À droite', run: al('right')}, '-',
-                    {icon: '✎', label: f.querySelector?.('figcaption') ? 'Retirer la légende' : 'Ajouter une légende', disabled: f.tagName !== 'FIGURE', run: () => { const c = f.querySelector('figcaption'); if (c) c.remove(); else { const fc = document.createElement('figcaption'); fc.setAttribute('contenteditable', 'true'); fc.textContent = 'Légende'; f.appendChild(fc); } this.commit(); this.layoutSoon(0); }},
-                    {icon: '↔', label: 'Taille…', run: () => this.imageSize(f)}, {icon: '🖼', label: 'Changer l’image…', run: () => ext.textDocTools?.run(this, 'image', {replace: f})}, '-',
-                    {icon: '🗑', label: 'Supprimer l’image', danger: true, shortcut: '⌫', run: () => { this.unpick(); f.remove(); this.commit(); this.layoutSoon(0); this.undoable('Image supprimée'); }}]);
+                    {icon: '▣', label: i18n('Aligné sur le texte (seul sur sa ligne)'), disabled: f.tagName !== 'FIGURE', run: wrap('topbottom')}, {icon: '◧', label: i18n('Carré (le texte autour)'), disabled: f.tagName !== 'FIGURE', run: wrap('square')},
+                    {icon: '⟸', label: i18n('À gauche'), run: al('left')}, {icon: '≡', label: i18n('Centré'), run: al('center')}, {icon: '⟹', label: i18n('À droite'), run: al('right')}, '-',
+                    {icon: '✎', label: f.querySelector?.('figcaption') ? i18n('Retirer la légende') : i18n('Ajouter une légende'), disabled: f.tagName !== 'FIGURE', run: () => { const c = f.querySelector('figcaption'); if (c) c.remove(); else { const fc = document.createElement('figcaption'); fc.setAttribute('contenteditable', 'true'); fc.textContent = i18n('Légende'); f.appendChild(fc); } this.commit(); this.layoutSoon(0); }},
+                    {icon: '↔', label: i18n('Taille…'), run: () => this.imageSize(f)}, {icon: '🖼', label: i18n('Changer l’image…'), run: () => ext.textDocTools?.run(this, 'image', {replace: f})}, '-',
+                    {icon: '🗑', label: i18n('Supprimer l’image'), danger: true, shortcut: '⌫', run: () => { this.unpick(); f.remove(); this.commit(); this.layoutSoon(0); this.undoable(i18n('Image supprimée')); }}]);
             },
             /** une image choisie : poignées pour la taille (carrés blancs au bord bleu, K20) */
             pick(f) {
                 this.unpick(); this.picked = f; f.classList.add('is-picked');
                 if (f.tagName === 'FIGURE') { ['se', 'sw', 'e'].forEach(h => { const d = document.createElement('span'); d.className = 'wp-h'; d.dataset.h = h; d.contentEditable = 'false'; f.appendChild(d); }); }
-                this.status?.flash('Image choisie : tire un coin pour la taille, clic droit pour l’habillage, ⌫ pour la supprimer.');
+                this.status?.flash(i18n('Image choisie : tire un coin pour la taille, clic droit pour l’habillage, ⌫ pour la supprimer.'));
             },
             unpick() { const f = this.picked; if (!f) return; f.classList.remove('is-picked'); f.querySelectorAll?.('.wp-h').forEach(x => x.remove()); if (!f.getAttribute('class')) f.removeAttribute('class'); this.picked = null; },
             onDown(e) {
@@ -188,7 +189,7 @@
                     const src = /urn:schemas-microsoft-com:office|class="?Mso|mso-/i.test(html) ? 'word' : /docs-internal-guid|id="docs-internal/i.test(html) ? 'gdocs' : /data-st="|class="wp-/.test(html) ? '' : /<meta name="?generator"? content="?LibreOffice/i.test(html) ? 'gdocs' : 'web';
                     const c = cleanHtml(html.replace(/<!--\[if[\s\S]*?<!\[endif\]-->/gi, '').replace(/^[\s\S]*?<body[^>]*>|<\/body>[\s\S]*$/gi, ''), {paste: src});
                     this.insertHtml(c.html);
-                    if (c.extImg) toast(`${c.extImg > 1 ? `${c.extImg} images du web n’ont pas été reprises` : 'Une image du web n’a pas été reprise'} : enregistre-la sur l’ordinateur, puis glisse-la ici.`);
+                    if (c.extImg) toast(c.extImg > 1 ? i18n('{n} images du web n’ont pas été reprises : enregistre-la sur l’ordinateur, puis glisse-la ici.', {n: c.extImg}) : i18n('Une image du web n’a pas été reprise : enregistre-la sur l’ordinateur, puis glisse-la ici.'));
                 } else this.insertText(text);
                 this.commit(); this.layoutSoon(0);
                 ext.textDocTools?.adoptImages?.(this);
@@ -238,22 +239,22 @@
                     case 'bold': return exec('bold'); case 'italic': return exec('italic'); case 'underline': return exec('underline'); case 'strike': return exec('strikeThrough');
                     case 'sup': return exec('superscript'); case 'sub': return exec('subscript');
                     case 'smallcaps': return this.styleRange(sp => { sp.style.fontVariant = sp.style.fontVariant === 'small-caps' ? '' : 'small-caps'; }, {toggle: 'fontVariant'});
-                    case 'cut': this.focusBack(); return document.execCommand('cut') || toast(`Utilise ${kbd('⌘X')}.`);
-                    case 'copy': this.focusBack(); return document.execCommand('copy') || toast(`Utilise ${kbd('⌘C')}.`);
-                    case 'paste': case 'pasteplain': this.focusBack(); return navigator.clipboard?.readText ? navigator.clipboard.readText().then(t => { this.commit(); this.insertText(t); this.commit(); this.layoutSoon(0); }).catch(() => toast(`Utilise ${kbd(c === 'paste' ? '⌘V' : '⇧⌘V')} dans le texte.`)) : toast(`Utilise ${kbd('⌘V')}.`);
+                    case 'cut': this.focusBack(); return document.execCommand('cut') || toast(i18n('Utilise {key}.', {key: kbd('⌘X')}));
+                    case 'copy': this.focusBack(); return document.execCommand('copy') || toast(i18n('Utilise {key}.', {key: kbd('⌘C')}));
+                    case 'paste': case 'pasteplain': this.focusBack(); return navigator.clipboard?.readText ? navigator.clipboard.readText().then(t => { this.commit(); this.insertText(t); this.commit(); this.layoutSoon(0); }).catch(() => toast(i18n('Utilise {key} dans le texte.', {key: kbd(c === 'paste' ? '⌘V' : '⇧⌘V')}))) : toast(i18n('Utilise {key}.', {key: kbd('⌘V')}));
                     case 'selectall': { this.focusBack(); const b = this.curBody(); const r = document.createRange(); r.selectNodeContents(b); getSelection().removeAllRanges(); getSelection().addRange(r); return; }
                     case 'al': return this.paraStyle(p => { p.style.textAlign = v === 'left' ? '' : v; });
                     case 'ul': case 'ol': return this.toggleList(c);
                     case 'indent': case 'outdent': { const bs = this.selBlocks(); if (bs.some(b => b.tagName === 'LI')) { const pos = this.selPos(); bs.filter(b => b.tagName === 'LI').forEach(li => (c === 'indent' ? this.indentLi(li) : this.outdentLi(li))); this.normalize(this.curBody() || this.secs[0].body); this.setSelPos(pos); this.commit(); return this.layoutSoon(0); } return this.paraStyle(p => { const m = parseFloat(p.style.marginLeft) || 0, mm = p.style.marginLeft.endsWith('mm') ? m : m / K().MM; const n = Math.max(0, Math.round((mm + (c === 'indent' ? 12.5 : -12.5)) * 10) / 10); p.style.marginLeft = n ? `${n}mm` : ''; }); }
                     case 'style': return this.setStyle(v || arg);
                     case 'clearfmt': { this.restoreSel(); this.focusBack(); document.execCommand('removeFormat'); const r = this.sel(); if (r) this.secOf(r.startContainer).body.querySelectorAll('span[data-cs], span[style]').forEach(s => { if (r.intersectsNode(s) && !s.matches('.wp-field, .wp-cm')) s.replaceWith(...s.childNodes); }); this.selBlocks().forEach(p => { p.removeAttribute('style'); p.removeAttribute('data-drop'); }); this.commit(); this.layoutSoon(); this.syncTools(); return; }
-                    case 'font': return UI().openFontPicker({value: this.curFont(), sample: this.sel()?.toString().trim().slice(0, 40) || 'Louise Borie, née en 1850'}).then(f => { if (!f) return; this.focusBack(); this.styleRange(sp => { sp.style.fontFamily = `'${T().fontOk(f)}'`; }); });
+                    case 'font': return UI().openFontPicker({value: this.curFont(), sample: this.sel()?.toString().trim().slice(0, 40) || i18n('Louise Borie, née en 1850')}).then(f => { if (!f) return; this.focusBack(); this.styleRange(sp => { sp.style.fontFamily = `'${T().fontOk(f)}'`; }); });
                     case 'color': case 'highlight': return this.colorBox(c, arg);
                     case 'case': return this.changeCase(v);
                     case 'dropcap': return this.paraStyle(p => { if (p.dataset.drop) p.removeAttribute('data-drop'); else p.dataset.drop = '1'; });
-                    case 'linemenu': return UI().menuAt(arg && arg.isConnected ? arg : this.$('[data-wp-cmd="linemenu"]'), [...[1, 1.15, 1.4, 1.5, 2, 2.5, 3].map(n => ({icon: ' ', label: `Interligne ${String(n).replace('.', ',')}`, run: () => this.paraStyle(p => { p.style.lineHeight = String(n); })})), '-', {icon: '＋', label: 'Espace avant le paragraphe', run: () => this.paraStyle(p => { p.style.marginTop = `${(parseFloat(p.style.marginTop) || 0) + 6}pt`; })}, {icon: '−', label: 'Retirer l’espace avant', run: () => this.paraStyle(p => { p.style.marginTop = '0pt'; })}, {icon: '＋', label: 'Espace après le paragraphe', run: () => this.paraStyle(p => { p.style.marginBottom = `${(parseFloat(p.style.marginBottom) || 6) + 6}pt`; })}, {icon: '−', label: 'Retirer l’espace après', run: () => this.paraStyle(p => { p.style.marginBottom = '0pt'; })}, '-', {icon: '¶', label: 'Paragraphe…', run: () => this.run('paragraph')}], {title: 'Interligne et espacement'});
-                    case 'track': this.doc.track = !this.doc.track; this.applyView(); this.touch(); this.paintPanel?.(); this.status?.flash(this.doc.track ? '✍ Les modifications sont suivies : chaque ajout et chaque suppression restent visibles.' : 'Les modifications ne sont plus suivies.'); return;
-                    case 'tcshow': return UI().menuAt(arg && arg.isConnected ? arg : {x: innerWidth / 2, y: 140}, [['all', 'Tout montrer (ajouts et suppressions)'], ['simple', 'Simple (une marge à côté des ajouts)'], ['none', 'Rien (le texte comme s’il était accepté)']].map(([k, l]) => ({icon: this.tcShow === k ? '✓' : ' ', label: l, run: () => { this.tcShow = k; setPrefs({...prefs(), tcShow: k}); this.layout(); }})), {title: 'Montrer les modifications'});
+                    case 'linemenu': return UI().menuAt(arg && arg.isConnected ? arg : this.$('[data-wp-cmd="linemenu"]'), [...[1, 1.15, 1.4, 1.5, 2, 2.5, 3].map(n => ({icon: ' ', label: i18n('Interligne {n}', {n}), run: () => this.paraStyle(p => { p.style.lineHeight = String(n); })})), '-', {icon: '＋', label: i18n('Espace avant le paragraphe'), run: () => this.paraStyle(p => { p.style.marginTop = `${(parseFloat(p.style.marginTop) || 0) + 6}pt`; })}, {icon: '−', label: i18n('Retirer l’espace avant'), run: () => this.paraStyle(p => { p.style.marginTop = '0pt'; })}, {icon: '＋', label: i18n('Espace après le paragraphe'), run: () => this.paraStyle(p => { p.style.marginBottom = `${(parseFloat(p.style.marginBottom) || 6) + 6}pt`; })}, {icon: '−', label: i18n('Retirer l’espace après'), run: () => this.paraStyle(p => { p.style.marginBottom = '0pt'; })}, '-', {icon: '¶', label: i18n('Paragraphe…'), run: () => this.run('paragraph')}], {title: i18n('Interligne et espacement')});
+                    case 'track': this.doc.track = !this.doc.track; this.applyView(); this.touch(); this.paintPanel?.(); this.status?.flash(this.doc.track ? i18n('✍ Les modifications sont suivies : chaque ajout et chaque suppression restent visibles.') : i18n('Les modifications ne sont plus suivies.')); return;
+                    case 'tcshow': return UI().menuAt(arg && arg.isConnected ? arg : {x: innerWidth / 2, y: 140}, [['all', 'Tout montrer (ajouts et suppressions)'], ['simple', 'Simple (une marge à côté des ajouts)'], ['none', 'Rien (le texte comme s’il était accepté)']].map(([k, l]) => ({icon: this.tcShow === k ? '✓' : ' ', label: i18n(l), run: () => { this.tcShow = k; setPrefs({...prefs(), tcShow: k}); this.layout(); }})), {title: i18n('Montrer les modifications')});
                     case 'accept': case 'reject': return this.resolveChange(c === 'accept', false);
                     case 'acceptall': case 'rejectall': return this.resolveChange(c === 'acceptall', true);
                     case 'tcnext': case 'tcprev': return this.gotoChange(c === 'tcnext' ? 1 : -1);
@@ -264,7 +265,7 @@
                     case 'ribbon': setPrefs({...prefs(), ribbon: !pref('ribbon', false)}); this.$('.wp').classList.toggle('is-ribbon', !!pref('ribbon', false)); this.applyView(); return this.layoutSoon(0);
                     case 'marks': setPrefs({...prefs(), marks: !pref('marks', false)}); this.applyView(); return this.layout();
                     case 'showcm': setPrefs({...prefs(), showcm: pref('showcm', true) === false}); this.applyView(); return this.layout();
-                    case 'spell': setPrefs({...prefs(), spell: pref('spell', true) === false}); this.bodies().forEach(b => this.spellOn(b)); this.applyView(); return this.status?.flash(pref('spell', true) !== false ? 'Les mots mal écrits sont soulignés en rouge (clic droit pour les corrections).' : 'Vérification de l’orthographe arrêtée.');
+                    case 'spell': setPrefs({...prefs(), spell: pref('spell', true) === false}); this.bodies().forEach(b => this.spellOn(b)); this.applyView(); return this.status?.flash(pref('spell', true) !== false ? i18n('Les mots mal écrits sont soulignés en rouge (clic droit pour les corrections).') : i18n('Vérification de l’orthographe arrêtée.'));
                     case 'zoomfit': return this.setZoom(0, 'fit'); case 'zoom100': return this.setZoom(1, 'manual');
                     case 'help': return ext.faqPopup?.('traitement de texte document Word') || UI().openFaq?.('traitement de texte');
                     case 'close': return this.close();
@@ -279,7 +280,7 @@
             /** • ou 1. sur les paragraphes choisis, sans le navigateur (qui laissait un paragraphe vide et des tailles écrites en dur) :
              *  des paragraphes → une liste (qui continue la liste d'à côté) ; une liste de l'autre sorte → elle change ; la même → les éléments en sortent */
             toggleList(kind) {
-                this.restoreSel(); const tag = kind === 'ol' ? 'OL' : 'UL', bs = this.selBlocks().filter(b => b.closest('.wp-body')); if (!bs.length) return toast('Place le curseur dans un paragraphe.');
+                this.restoreSel(); const tag = kind === 'ol' ? 'OL' : 'UL', bs = this.selBlocks().filter(b => b.closest('.wp-body')); if (!bs.length) return toast(i18n('Place le curseur dans un paragraphe.'));
                 const body = this.secOf(bs[0])?.body; if (!body) return; const pos = this.selPos(); this.commit();
                 const lis = bs.filter(b => b.tagName === 'LI');
                 if (lis.length === bs.length && lis.every(li => li.parentElement?.tagName === tag)) lis.forEach(li => { let x = li, n = 0; while (x?.tagName === 'LI' && n++ < 10) x = this.outdentLi(x); });
@@ -314,7 +315,7 @@
             curFont() { const r = this.sel() || this.lastRange; const el = r ? (r.startContainer.nodeType === 1 ? r.startContainer : r.startContainer.parentElement) : null; return el ? getComputedStyle(el).fontFamily.split(',')[0].replace(/["']/g, '') : 'Georgia'; },
             /** une forme posée sur les lettres choisies (police, taille, couleur…) : des <span> autour de chaque morceau de texte */
             styleRange(fn, {toggle = ''} = {}) {
-                this.restoreSel(); const r = this.sel() || this.lastRange; if (!r) return toast('Choisis d’abord du texte.');
+                this.restoreSel(); const r = this.sel() || this.lastRange; if (!r) return toast(i18n('Choisis d’abord du texte.'));
                 const body = this.secOf(r.startContainer)?.body; if (!body) return;
                 if (r.collapsed) { // rien de choisi : ce qui sera tapé ensuite
                     const sp = document.createElement('span'); fn(sp); sp.textContent = '​'; r.insertNode(sp); const rr = document.createRange(); rr.setStart(sp.firstChild, 1); rr.collapse(true); getSelection().removeAllRanges(); getSelection().addRange(rr); this.lastRange = rr; return;
@@ -332,7 +333,7 @@
             },
             charStyle(id) { this.styleRange(sp => { if (sp.dataset.cs === id) delete sp.dataset.cs; else sp.dataset.cs = id; }); },
             changeCase(how) {
-                this.restoreSel(); const r = this.sel() || this.lastRange; if (!r || r.collapsed) return toast('Choisis d’abord le texte à changer.');
+                this.restoreSel(); const r = this.sel() || this.lastRange; if (!r || r.collapsed) return toast(i18n('Choisis d’abord le texte à changer.'));
                 const w = document.createTreeWalker(r.commonAncestorContainer.nodeType === 3 ? r.commonAncestorContainer.parentNode : r.commonAncestorContainer, NodeFilter.SHOW_TEXT), nodes = []; let n;
                 while ((n = w.nextNode())) if (r.intersectsNode(n)) nodes.push(n);
                 let startSentence = true, startWord = true;
@@ -343,12 +344,12 @@
                 this.commit();
             },
             /** une forme posée sur les paragraphes choisis */
-            paraStyle(fn) { this.restoreSel(); const bs = this.selBlocks(); if (!bs.length) return toast('Place le curseur dans un paragraphe.'); bs.forEach(p => { fn(p); if (!p.getAttribute('style')) p.removeAttribute('style'); }); this.commit(); this.layoutSoon(); this.syncTools(); this.syncPanel?.(); },
+            paraStyle(fn) { this.restoreSel(); const bs = this.selBlocks(); if (!bs.length) return toast(i18n('Place le curseur dans un paragraphe.')); bs.forEach(p => { fn(p); if (!p.getAttribute('style')) p.removeAttribute('style'); }); this.commit(); this.layoutSoon(); this.syncTools(); this.syncPanel?.(); },
             setStyle(id) {
                 this.restoreSel(); const st = this.doc.styles.find(s => s.id === id && s.kind !== 'c'); if (!st) return;
                 const bs = this.selBlocks(); if (!bs.length) return;
                 bs.forEach(p => { let el = p; if (p.tagName !== 'LI' && !/^(TD|TH)$/.test(p.tagName)) { const want = /^h[1-6]$/.test(id) ? id.toUpperCase() : 'P'; if (p.tagName !== want) el = this.retag(p, want); } el.dataset.st = id; if (st.keep) el.dataset.keep = '1'; else el.removeAttribute('data-keep'); });
-                this.commit(); this.layoutSoon(0); this.syncTools(); this.status?.flash(`Style « ${st.name} »`);
+                this.commit(); this.layoutSoon(0); this.syncTools(); this.status?.flash(i18n('Style « {name} »', {name: T().styleLabel(st)}));
             },
             colorBox(which, anchor) {
                 this.restoreSel(); const r = this.sel() || this.lastRange; const b = anchor && anchor.isConnected ? anchor : this.$(`[data-wp-cmd="${which}"]`);
@@ -371,11 +372,11 @@
             },
             paintStatus() {
                 if (!this.status) return;
-                const words = this.wordCount(), lang = (LANGS.find(l => l[0] === this.doc.lang) || ['', this.doc.lang])[1];
+                const words = this.wordCount(), lang = i18n((LANGS.find(l => l[0] === this.doc.lang) || ['', this.doc.lang])[1]);
                 const sc = this.scroll, mid = sc.scrollTop + sc.clientHeight / 3; let page = 1, acc = 24 * this.zoom;
                 for (const s of this.secs) { const h = (parseFloat(s.el.style.height) || 0) * this.zoom, ppx = ((s.geo?.H || 1000) + K().GAP) * this.zoom; if (mid < acc + h + 24 * this.zoom) { page = s.first + 1 + Math.max(0, Math.min(s.pages - 1, Math.floor((mid - acc) / ppx))); break; } acc += h + 24 * this.zoom; page = s.first + s.pages; }
                 const box = document.createElement('span'); box.className = 'wp-where';
-                box.innerHTML = `<span>Page ${page} / ${this.totalPages || 1}</span><button type="button" data-wp-cmd="words" title="Nombre de mots, de caractères, de paragraphes">${esc(A().plural ? A().plural(words, 'mot') : words + ' mots')}</button><button type="button" data-wp-cmd="lang" title="Langue du document (orthographe, lecture à voix haute)">${esc(lang)}</button>${this.doc.track ? '<span title="Les modifications sont suivies">✍ Suivi</span>' : ''}`;
+                box.innerHTML = `<span>${esc(i18n('Page {page} / {total}', {page: String(page), total: String(this.totalPages || 1)}))}</span><button type="button" data-wp-cmd="words" title="${esc(i18n('Nombre de mots, de caractères, de paragraphes'))}">${esc(A().plural ? A().plural(words, 'mot') : words + ' mots')}</button><button type="button" data-wp-cmd="lang" title="${esc(i18n('Langue du document (orthographe, lecture à voix haute)'))}">${esc(lang)}</button>${this.doc.track ? `<span title="${esc(i18n('Les modifications sont suivies'))}">${esc(i18n('✍ Suivi'))}</span>` : ''}`;
                 const key = box.innerHTML; if (this.whereKey !== key) { this.whereKey = key; this.status.setWhere(box); }
             },
             wordCount() { clearTimeout(this.wcT); if (this.wcCache && Date.now() - this.wcAt < 800) { this.wcT = setTimeout(() => this.paintStatus(), 900); return this.wcCache; } let n = 0; this.bodies().forEach(b => { const c = b.cloneNode(true); c.querySelectorAll('del, .wp-endnotes, sup.wp-fn, .wp-gen').forEach(x => x.remove()); n += T().wordCount(c.textContent); }); this.wcCache = n; this.wcAt = Date.now(); return n; },
@@ -429,14 +430,14 @@
                 let list;
                 if (all) list = this.changes();
                 else { const r = this.sel() || this.lastRange; list = r ? this.changes().filter(x => r.intersectsNode(x) || x.contains(r.startContainer)) : []; }
-                if (!list.length) return toast(all ? 'Aucune modification suivie dans le document.' : 'Place le curseur dans une modification (texte vert ou barré rouge).');
+                if (!list.length) return toast(all ? i18n('Aucune modification suivie dans le document.') : i18n('Place le curseur dans une modification (texte vert ou barré rouge).'));
                 list.forEach(x => { const keep = (x.tagName === 'INS') === accept; if (keep) x.replaceWith(...x.childNodes); else x.remove(); });
                 this.bodies().forEach(b => b.normalize());
                 this.commit(); this.layoutSoon(0); this.paintPanel?.();
-                this.undoable(`${list.length > 1 ? `${list.length} modifications` : 'Modification'} ${accept ? (list.length > 1 ? 'acceptées' : 'acceptée') : (list.length > 1 ? 'refusées' : 'refusée')}`);
+                this.undoable(list.length > 1 ? (accept ? i18n('{n} modifications acceptées', {n: list.length}) : i18n('{n} modifications refusées', {n: list.length})) : (accept ? i18n('Modification acceptée') : i18n('Modification refusée')));
             },
             gotoChange(dir) {
-                const list = this.changes(); if (!list.length) return toast('Aucune modification suivie.');
+                const list = this.changes(); if (!list.length) return toast(i18n('Aucune modification suivie.'));
                 const r = this.sel() || this.lastRange; let i = list.findIndex(x => r && (x.compareDocumentPosition(r.startContainer) & Node.DOCUMENT_POSITION_PRECEDING ? false : true) && !(x.contains(r.startContainer)));
                 if (dir > 0) { i = list.findIndex(x => r && (r.startContainer.compareDocumentPosition(x) & Node.DOCUMENT_POSITION_FOLLOWING) && !x.contains(r.startContainer)); if (i < 0) i = 0; }
                 else { const before = list.filter(x => r && (x.compareDocumentPosition(r.startContainer) & Node.DOCUMENT_POSITION_FOLLOWING) && !x.contains(r.startContainer)); i = before.length ? list.indexOf(before[before.length - 1]) : list.length - 1; }
@@ -446,9 +447,9 @@
 
             /* ═════════ Commentaires ═════════ */
             addComment() {
-                this.restoreSel(); let r = this.sel() || this.lastRange; if (!r) return toast('Choisis le passage à commenter.');
+                this.restoreSel(); let r = this.sel() || this.lastRange; if (!r) return toast(i18n('Choisis le passage à commenter.'));
                 if (r.collapsed) { const s = getSelection(); s.modify('move', 'backward', 'word'); s.modify('extend', 'forward', 'word'); r = s.getRangeAt(0); }
-                if (r.collapsed || !r.toString().trim()) return toast('Choisis le passage à commenter.');
+                if (r.collapsed || !r.toString().trim()) return toast(i18n('Choisis le passage à commenter.'));
                 const id = nid('c');
                 if (r.startContainer.nodeType === 3 && r.startOffset > 0) { const t = r.startContainer.splitText(r.startOffset); r.setStart(t, 0); }
                 if (r.endContainer.nodeType === 3 && r.endOffset < r.endContainer.data.length) r.endContainer.splitText(r.endOffset);
@@ -464,7 +465,7 @@
                 if (act === 'text') c.text = String(val || '').slice(0, 4000);
                 if (act === 'reply' && String(val || '').trim()) c.replies = [...(c.replies || []), {text: String(val).trim().slice(0, 4000), author: this.author, at: now()}];
                 if (act === 'done') { c.done = !c.done; this.docEl.querySelectorAll(`.wp-cm[data-cm="${CSS.escape(id)}"]`).forEach(x => x.classList.toggle('is-done', c.done)); }
-                if (act === 'delete') { this.docEl.querySelectorAll(`.wp-cm[data-cm="${CSS.escape(id)}"]`).forEach(x => x.replaceWith(...x.childNodes)); this.doc.comments = this.doc.comments.filter(x => x.id !== id); this.commit(); this.paintPanel(); this.undoable('Commentaire supprimé'); return; }
+                if (act === 'delete') { this.docEl.querySelectorAll(`.wp-cm[data-cm="${CSS.escape(id)}"]`).forEach(x => x.replaceWith(...x.childNodes)); this.doc.comments = this.doc.comments.filter(x => x.id !== id); this.commit(); this.paintPanel(); this.undoable(i18n('Commentaire supprimé')); return; }
                 this.commit(); this.paintPanel();
             },
 
@@ -478,7 +479,7 @@
                 if (!n) return; const rr = document.createRange(); rr.selectNodeContents(n); getSelection().removeAllRanges(); getSelection().addRange(rr); this.lastRange = rr;
             },
             tableCmd(cmd, arg) {
-                this.restoreSel(); const c = this.cell(); if (!c) return toast('Place le curseur dans un tableau.');
+                this.restoreSel(); const c = this.cell(); if (!c) return toast(i18n('Place le curseur dans un tableau.'));
                 const t = c.closest('table'), {g, pos, w} = this.grid(t), p = pos.get(c), mk = (tag = 'td') => { const x = document.createElement(tag); x.innerHTML = '<br>'; return x; };
                 // le curseur reste dans la case (déplacer une ligne ou changer th ↔ td le ferait tomber hors du tableau : la commande suivante ne trouverait plus la case)
                 const keepCaret = () => { if (!t.isConnected) return; const x = c.isConnected && c.closest('table') === t ? c : t.rows[Math.min(p.r, t.rows.length - 1)]?.cells[Math.min(p.c, (t.rows[Math.min(p.r, t.rows.length - 1)]?.cells.length || 1) - 1)]; if (!x) return; const r = document.createRange(); r.selectNodeContents(x); r.collapse(true); const s = getSelection(); s.removeAllRanges(); s.addRange(r); this.lastRange = r.cloneRange(); };
@@ -486,66 +487,66 @@
                 if (cmd === 'rowabove' || cmd === 'rowbelow') {
                     const at = cmd === 'rowabove' ? p.r : p.r + c.rowSpan, tr = document.createElement('tr'), ref = t.rows[at] || null;
                     for (let ci = 0; ci < w; ci++) { const above = g[at - 1]?.[ci], here = g[at]?.[ci]; if (above && above === here) { if (pos.get(above).c === ci) above.rowSpan++; continue; } tr.appendChild(mk(ref?.parentElement?.tagName === 'THEAD' ? 'th' : 'td')); }
-                    if (ref) ref.before(tr); else (t.tBodies[0] || t).appendChild(tr); return done('Ligne ajoutée');
+                    if (ref) ref.before(tr); else (t.tBodies[0] || t).appendChild(tr); return done(i18n('Ligne ajoutée'));
                 }
                 if (cmd === 'colleft' || cmd === 'colright') {
                     const at = cmd === 'colleft' ? p.c : p.c + c.colSpan;
                     [...t.rows].forEach((tr, ri) => { const left = g[ri][at - 1], here = g[ri][at]; if (left && left === here) { if (pos.get(left).r === ri) left.colSpan++; return; } const cell = mk(tr.parentElement.tagName === 'THEAD' ? 'th' : 'td'); const next = [...tr.cells].find(x => pos.get(x).c >= at); if (next) next.before(cell); else tr.appendChild(cell); });
-                    t.querySelectorAll('col').forEach(x => x.remove()); return done('Colonne ajoutée');
+                    t.querySelectorAll('col').forEach(x => x.remove()); return done(i18n('Colonne ajoutée'));
                 }
                 if (cmd === 'delrow') { if (t.rows.length < 2) return this.tableCmd('deltable'); const ri = p.r, tr = t.rows[ri];
                     for (let ci = 0; ci < w; ci++) { const x = g[ri][ci]; if (!x || (ci > 0 && g[ri][ci - 1] === x)) continue; const ps = pos.get(x); if (ps.r < ri) x.rowSpan--; else if (x.rowSpan > 1) { x.rowSpan--; const nr = t.rows[ri + 1]; const next = [...nr.cells].find(y => pos.get(y).c > ci); if (next) next.before(x); else nr.appendChild(x); } }
-                    tr.remove(); return done('Ligne supprimée'); }
-                if (cmd === 'delcol') { if (w < 2) return this.tableCmd('deltable'); const ci = p.c; [...t.rows].forEach((tr, ri) => { const x = g[ri][ci]; if (!x || (ri > 0 && g[ri - 1][ci] === x)) return; if (x.colSpan > 1) x.colSpan--; else x.remove(); }); t.querySelectorAll('col').forEach(x => x.remove()); return done('Colonne supprimée'); }
-                if (cmd === 'deltable') { const p2 = document.createElement('p'); p2.dataset.st = 'normal'; p2.innerHTML = '<br>'; t.after(p2); t.remove(); done(); return this.undoable('Tableau supprimé'); }
-                if (cmd === 'merge') { const sel = [...t.querySelectorAll('.is-sel')]; if (sel.length < 2) return toast('Glisse la souris d’une case à l’autre pour en choisir plusieurs, puis « Fusionner ».');
+                    tr.remove(); return done(i18n('Ligne supprimée')); }
+                if (cmd === 'delcol') { if (w < 2) return this.tableCmd('deltable'); const ci = p.c; [...t.rows].forEach((tr, ri) => { const x = g[ri][ci]; if (!x || (ri > 0 && g[ri - 1][ci] === x)) return; if (x.colSpan > 1) x.colSpan--; else x.remove(); }); t.querySelectorAll('col').forEach(x => x.remove()); return done(i18n('Colonne supprimée')); }
+                if (cmd === 'deltable') { const p2 = document.createElement('p'); p2.dataset.st = 'normal'; p2.innerHTML = '<br>'; t.after(p2); t.remove(); done(); return this.undoable(i18n('Tableau supprimé')); }
+                if (cmd === 'merge') { const sel = [...t.querySelectorAll('.is-sel')]; if (sel.length < 2) return toast(i18n('Glisse la souris d’une case à l’autre pour en choisir plusieurs, puis « Fusionner ».'));
                     const ps = sel.map(x => pos.get(x)), r0 = Math.min(...ps.map(q => q.r)), c0 = Math.min(...ps.map(q => q.c)), r1 = Math.max(...sel.map(x => pos.get(x).r + x.rowSpan - 1)), c1 = Math.max(...sel.map(x => pos.get(x).c + x.colSpan - 1));
                     const first = g[r0][c0]; const all = new Set(); for (let r = r0; r <= r1; r++) for (let cc = c0; cc <= c1; cc++) all.add(g[r][cc]);
-                    if ([...all].some(x => { const q = pos.get(x); return q.r < r0 || q.c < c0 || q.r + x.rowSpan - 1 > r1 || q.c + x.colSpan - 1 > c1; })) return toast('Choisis un rectangle de cases (sans morceau d’une autre fusion).');
+                    if ([...all].some(x => { const q = pos.get(x); return q.r < r0 || q.c < c0 || q.r + x.rowSpan - 1 > r1 || q.c + x.colSpan - 1 > c1; })) return toast(i18n('Choisis un rectangle de cases (sans morceau d’une autre fusion).'));
                     all.forEach(x => { if (x !== first) { if (x.textContent.trim()) { first.appendChild(document.createElement('br')); first.append(...x.childNodes); } x.remove(); } });
-                    first.colSpan = c1 - c0 + 1; first.rowSpan = r1 - r0 + 1; first.classList.remove('is-sel'); t.querySelectorAll('.is-sel').forEach(x => x.classList.remove('is-sel')); [...t.rows].forEach(tr => { if (!tr.cells.length) tr.remove(); }); return done('Cases fusionnées'); }
-                if (cmd === 'split') { if (c.colSpan < 2 && c.rowSpan < 2) return toast('Cette case n’est pas fusionnée.'); const cs = c.colSpan, rs = c.rowSpan; c.colSpan = 1; c.rowSpan = 1;
-                    for (let y = 0; y < rs; y++) { const tr = t.rows[p.r + y]; for (let x = (y ? 0 : 1); x < cs; x++) { const cell = mk(c.tagName.toLowerCase()); const next = [...tr.cells].find(z => z !== c && pos.get(z)?.c > p.c + x - (y ? 0 : 0)); if (y === 0) c.after(cell); else if (next) next.before(cell); else tr.appendChild(cell); } } return done('Case séparée'); }
-                if (cmd === 'headrow') { if (t.tHead) { const tb = t.tBodies[0] || t.createTBody(); [...t.tHead.rows].reverse().forEach(tr => { [...tr.cells].forEach(x => { if (x.tagName === 'TH') { const td = document.createElement('td'); [...x.attributes].forEach(a => td.setAttribute(a.name, a.value)); td.append(...x.childNodes); x.replaceWith(td); } }); tb.prepend(tr); }); t.tHead.remove(); return done('Plus de ligne d’en-tête'); }
-                    const tr = t.rows[0], th = t.createTHead(); [...tr.cells].forEach(x => { const h = document.createElement('th'); [...x.attributes].forEach(a => h.setAttribute(a.name, a.value)); h.append(...x.childNodes); x.replaceWith(h); }); th.appendChild(tr); return done('La première ligne est répétée en haut de chaque page'); }
+                    first.colSpan = c1 - c0 + 1; first.rowSpan = r1 - r0 + 1; first.classList.remove('is-sel'); t.querySelectorAll('.is-sel').forEach(x => x.classList.remove('is-sel')); [...t.rows].forEach(tr => { if (!tr.cells.length) tr.remove(); }); return done(i18n('Cases fusionnées')); }
+                if (cmd === 'split') { if (c.colSpan < 2 && c.rowSpan < 2) return toast(i18n('Cette case n’est pas fusionnée.')); const cs = c.colSpan, rs = c.rowSpan; c.colSpan = 1; c.rowSpan = 1;
+                    for (let y = 0; y < rs; y++) { const tr = t.rows[p.r + y]; for (let x = (y ? 0 : 1); x < cs; x++) { const cell = mk(c.tagName.toLowerCase()); const next = [...tr.cells].find(z => z !== c && pos.get(z)?.c > p.c + x - (y ? 0 : 0)); if (y === 0) c.after(cell); else if (next) next.before(cell); else tr.appendChild(cell); } } return done(i18n('Case séparée')); }
+                if (cmd === 'headrow') { if (t.tHead) { const tb = t.tBodies[0] || t.createTBody(); [...t.tHead.rows].reverse().forEach(tr => { [...tr.cells].forEach(x => { if (x.tagName === 'TH') { const td = document.createElement('td'); [...x.attributes].forEach(a => td.setAttribute(a.name, a.value)); td.append(...x.childNodes); x.replaceWith(td); } }); tb.prepend(tr); }); t.tHead.remove(); return done(i18n('Plus de ligne d’en-tête')); }
+                    const tr = t.rows[0], th = t.createTHead(); [...tr.cells].forEach(x => { const h = document.createElement('th'); [...x.attributes].forEach(a => h.setAttribute(a.name, a.value)); h.append(...x.childNodes); x.replaceWith(h); }); th.appendChild(tr); return done(i18n('La première ligne est répétée en haut de chaque page')); }
                 if (cmd === 'tborders') { if (t.dataset.bd === '0') delete t.dataset.bd; else t.dataset.bd = '0'; return done(); }
                 if (cmd === 'cellbg') { const sel = t.querySelectorAll('.is-sel').length ? [...t.querySelectorAll('.is-sel')] : [c]; return UI().openColorBox(arg && arg.isConnected ? arg : c, {allowNone: true, get: () => c.style.backgroundColor ? T().col(c.style.backgroundColor) : '#eef2f8', set: (val, fin) => { sel.forEach(x => { x.style.backgroundColor = val || ''; if (!x.getAttribute('style')) x.removeAttribute('style'); }); if (fin) done(); }}); }
-                if (cmd === 'sortaz' || cmd === 'sortza') { const tb = t.tBodies[0]; if (!tb) return; const rows = [...tb.rows]; if (rows.some(tr => [...tr.cells].some(x => x.rowSpan > 1 || x.colSpan > 1))) return toast('Le tri ne marche pas avec des cases fusionnées : sépare-les d’abord.');
-                    const ci = p.c, key = tr => tr.cells[ci]?.textContent.trim() || ''; const sorted = rows.slice().sort((a, b) => key(a).localeCompare(key(b), 'fr', {numeric: true, sensitivity: 'base'}) * (cmd === 'sortaz' ? 1 : -1)); sorted.forEach(tr => tb.appendChild(tr)); done(); return this.undoable(`Tableau trié ${cmd === 'sortaz' ? 'de A à Z' : 'de Z à A'}`); }
+                if (cmd === 'sortaz' || cmd === 'sortza') { const tb = t.tBodies[0]; if (!tb) return; const rows = [...tb.rows]; if (rows.some(tr => [...tr.cells].some(x => x.rowSpan > 1 || x.colSpan > 1))) return toast(i18n('Le tri ne marche pas avec des cases fusionnées : sépare-les d’abord.'));
+                    const ci = p.c, key = tr => tr.cells[ci]?.textContent.trim() || ''; const sorted = rows.slice().sort((a, b) => key(a).localeCompare(key(b), 'fr', {numeric: true, sensitivity: 'base'}) * (cmd === 'sortaz' ? 1 : -1)); sorted.forEach(tr => tb.appendChild(tr)); done(); return this.undoable(cmd === 'sortaz' ? i18n('Tableau trié de A à Z') : i18n('Tableau trié de Z à A')); }
             },
             imageSize(f) {
                 const cw = f.closest('.wp-body').clientWidth;
-                ext.openDialog({eyebrow: 'IMAGE', title: 'Taille de l’image', submitLabel: 'Enregistrer', body: `<div class="form-grid one-column"><label>Largeur<input type="number" name="w" data-unit="px" min="16" max="${Math.round(cw)}" value="${Math.round(parseFloat(f.style.width) || f.getBoundingClientRect().width / this.zoom)}"></label><p class="muted">Toute la largeur du texte : ${Math.round(cw)} px. La hauteur suit (pas de déformation).</p><div class="wp-row"><button type="button" class="button small secondary" data-w="${Math.round(cw / 4)}">¼</button><button type="button" class="button small secondary" data-w="${Math.round(cw / 3)}">⅓</button><button type="button" class="button small secondary" data-w="${Math.round(cw / 2)}">½</button><button type="button" class="button small secondary" data-w="${Math.round(cw)}">Toute la largeur</button></div></div>`,
+                ext.openDialog({eyebrow: i18n('IMAGE'), title: i18n('Taille de l’image'), submitLabel: i18n('Enregistrer'), body: `<div class="form-grid one-column"><label>${esc(i18n('Largeur'))}<input type="number" name="w" data-unit="px" min="16" max="${Math.round(cw)}" value="${Math.round(parseFloat(f.style.width) || f.getBoundingClientRect().width / this.zoom)}"></label><p class="muted">${esc(i18n('Toute la largeur du texte : {n} px. La hauteur suit (pas de déformation).', {n: Math.round(cw)}))}</p><div class="wp-row"><button type="button" class="button small secondary" data-w="${Math.round(cw / 4)}">¼</button><button type="button" class="button small secondary" data-w="${Math.round(cw / 3)}">⅓</button><button type="button" class="button small secondary" data-w="${Math.round(cw / 2)}">½</button><button type="button" class="button small secondary" data-w="${Math.round(cw)}">${esc(i18n('Toute la largeur'))}</button></div></div>`,
                     onOpen: d => d.addEventListener('click', e => { const b = e.target.closest('[data-w]'); if (b) d.querySelector('[name=w]').value = b.dataset.w; }),
-                    onSubmit: form => { const v = Number(form.elements.w.value); if (!(v >= 16)) return UI().fail(form.elements.w, 'Une largeur de 16 px au moins.'); f.style.width = `${Math.round(clamp(v, 16, cw))}px`; this.commit(); this.layoutSoon(0); }});
+                    onSubmit: form => { const v = Number(form.elements.w.value); if (!(v >= 16)) return UI().fail(form.elements.w, i18n('Une largeur de 16 px au moins.')); f.style.width = `${Math.round(clamp(v, 16, cw))}px`; this.commit(); this.layoutSoon(0); }});
             },
             editNote(s) {
                 const end = s.dataset.kind === 'end';
-                ext.openDialog({eyebrow: end ? 'NOTE DE FIN' : 'NOTE DE BAS DE PAGE', title: `Note ${s.textContent}`, submitLabel: 'Enregistrer',
-                    body: `<label class="field">Texte de la note<textarea name="t" rows="4" spellcheck="true" lang="${esc(this.doc.lang)}">${esc(s.dataset.note || '')}</textarea></label><label class="checkbox-line"><input type="checkbox" name="end" ${end ? 'checked' : ''}> Note de fin (à la fin du document)</label>`,
-                    onDelete: () => { s.remove(); this.commit(); this.layoutSoon(0); this.undoable('Note supprimée'); },
+                ext.openDialog({eyebrow: end ? i18n('NOTE DE FIN') : i18n('NOTE DE BAS DE PAGE'), title: i18n('Note {n}', {n: String(s.textContent)}), submitLabel: i18n('Enregistrer'),
+                    body: `<label class="field">${esc(i18n('Texte de la note'))}<textarea name="t" rows="4" spellcheck="true" lang="${esc(this.doc.lang)}">${esc(s.dataset.note || '')}</textarea></label><label class="checkbox-line"><input type="checkbox" name="end" ${end ? 'checked' : ''}> ${esc(i18n('Note de fin (à la fin du document)'))}</label>`,
+                    onDelete: () => { s.remove(); this.commit(); this.layoutSoon(0); this.undoable(i18n('Note supprimée')); },
                     onSubmit: form => { s.dataset.note = form.elements.t.value.trim().slice(0, 4000); s.dataset.kind = form.elements.end.checked ? 'end' : 'foot'; this.commit(); this.layoutSoon(0); }});
             },
             paraDialog() {
-                this.restoreSel(); const p = this.selBlocks()[0]; if (!p) return toast('Place le curseur dans un paragraphe.'); const cs = getComputedStyle(p), r1 = v => Math.round(v * 10) / 10;
+                this.restoreSel(); const p = this.selBlocks()[0]; if (!p) return toast(i18n('Place le curseur dans un paragraphe.')); const cs = getComputedStyle(p), r1 = v => Math.round(v * 10) / 10;
                 const pt = v => r1(parseFloat(v) / K().PT), mm = v => r1(parseFloat(v) / K().MM), lh = /^[\d.]+$/.test(p.style.lineHeight) ? p.style.lineHeight : r1(parseFloat(cs.lineHeight) / parseFloat(cs.fontSize)) || 1.4;
                 const ranges = this.selBlocks();
-                ext.openDialog({eyebrow: 'FORMAT', title: '¶ Paragraphe', submitLabel: 'Enregistrer', body: `<div class="form-grid">
-                    <label>Alignement<select name="al">${[['left', 'À gauche'], ['center', 'Centré'], ['right', 'À droite'], ['justify', 'Justifié']].map(([k, l]) => `<option value="${k}" ${(cs.textAlign === k || (k === 'left' && cs.textAlign === 'start')) ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
-                    <label>Interligne<input type="number" name="lh" step="0.05" min="0.6" max="4" value="${lh}"></label>
-                    <label>Espace avant<input type="number" name="sb" data-unit="pt" step="1" min="0" value="${pt(cs.marginTop)}"></label><label>Espace après<input type="number" name="sa" data-unit="pt" step="1" min="0" value="${pt(cs.marginBottom)}"></label>
-                    <label>Retrait à gauche<input type="number" name="il" data-unit="mm" step="1" value="${mm(cs.marginLeft)}"></label><label>Retrait à droite<input type="number" name="ir" data-unit="mm" step="1" value="${mm(cs.marginRight)}"></label>
-                    <label>1re ligne (négatif : en saillie)<input type="number" name="fi" data-unit="mm" step="1" value="${mm(cs.textIndent)}"></label>
-                    <label class="checkbox-line"><input type="checkbox" name="keep" ${p.dataset.keep ? 'checked' : ''}> Garder avec le paragraphe suivant</label>
-                    <label class="checkbox-line"><input type="checkbox" name="pb" ${p.style.breakBefore === 'page' ? 'checked' : ''}> Commencer sur une nouvelle page</label></div>`,
+                ext.openDialog({eyebrow: i18n('FORMAT'), title: i18n('¶ Paragraphe'), submitLabel: i18n('Enregistrer'), body: `<div class="form-grid">
+                    <label>${esc(i18n('Alignement'))}<select name="al">${[['left', 'À gauche'], ['center', 'Centré'], ['right', 'À droite'], ['justify', 'Justifié']].map(([k, l]) => `<option value="${k}" ${(cs.textAlign === k || (k === 'left' && cs.textAlign === 'start')) ? 'selected' : ''}>${esc(i18n(l))}</option>`).join('')}</select></label>
+                    <label>${esc(i18n('Interligne'))}<input type="number" name="lh" step="0.05" min="0.6" max="4" value="${lh}"></label>
+                    <label>${esc(i18n('Espace avant'))}<input type="number" name="sb" data-unit="pt" step="1" min="0" value="${pt(cs.marginTop)}"></label><label>${esc(i18n('Espace après'))}<input type="number" name="sa" data-unit="pt" step="1" min="0" value="${pt(cs.marginBottom)}"></label>
+                    <label>${esc(i18n('Retrait à gauche'))}<input type="number" name="il" data-unit="mm" step="1" value="${mm(cs.marginLeft)}"></label><label>${esc(i18n('Retrait à droite'))}<input type="number" name="ir" data-unit="mm" step="1" value="${mm(cs.marginRight)}"></label>
+                    <label>${esc(i18n('1re ligne (négatif : en saillie)'))}<input type="number" name="fi" data-unit="mm" step="1" value="${mm(cs.textIndent)}"></label>
+                    <label class="checkbox-line"><input type="checkbox" name="keep" ${p.dataset.keep ? 'checked' : ''}> ${esc(i18n('Garder avec le paragraphe suivant'))}</label>
+                    <label class="checkbox-line"><input type="checkbox" name="pb" ${p.style.breakBefore === 'page' ? 'checked' : ''}> ${esc(i18n('Commencer sur une nouvelle page'))}</label></div>`,
                     onSubmit: form => { const v = n => form.elements[n].value; ranges.forEach(b => { b.style.textAlign = v('al') === 'left' ? '' : v('al'); b.style.lineHeight = v('lh'); b.style.marginTop = `${clamp(v('sb'), 0, 200)}pt`; b.style.marginBottom = `${clamp(v('sa'), 0, 200)}pt`; b.style.marginLeft = Number(v('il')) ? `${clamp(v('il'), -50, 200)}mm` : ''; b.style.marginRight = Number(v('ir')) ? `${clamp(v('ir'), 0, 200)}mm` : ''; b.style.textIndent = Number(v('fi')) ? `${clamp(v('fi'), -100, 100)}mm` : ''; if (form.elements.keep.checked) b.dataset.keep = '1'; else b.removeAttribute('data-keep'); });
                         if (form.elements.pb.checked && ranges[0] && ranges[0].previousElementSibling && !ranges[0].previousElementSibling.matches('hr.wp-pb')) { const hr = document.createElement('hr'); hr.className = 'wp-pb'; hr.dataset.break = 'page'; hr.setAttribute('contenteditable', 'false'); ranges[0].before(hr); }
                         this.commit(); this.layoutSoon(0); }});
             },
             borderDialog() {
-                this.restoreSel(); const ps = this.selBlocks(); if (!ps.length) return toast('Place le curseur dans un paragraphe.'); const p = ps[0];
-                ext.openDialog({eyebrow: 'FORMAT', title: 'Bordure et trame', submitLabel: 'Enregistrer', body: `<div class="form-grid one-column"><label class="checkbox-line"><input type="checkbox" name="bd" ${p.style.border ? 'checked' : ''}> Un cadre autour du paragraphe</label><label class="checkbox-line"><input type="checkbox" name="bot" ${/solid/.test(p.style.borderBottom) && !p.style.borderTop ? 'checked' : ''}> Seulement un trait dessous</label><div class="wp-row"><span class="wp-lab">Trame (fond)</span><button type="button" class="button small secondary" data-bg>🎨 Choisir…</button><span data-bgv>${esc(p.style.backgroundColor ? T().col(p.style.backgroundColor) : 'Aucune')}</span></div></div>`,
-                    onOpen: d => { let bg = p.style.backgroundColor ? T().col(p.style.backgroundColor) : ''; d._bg = () => bg; d.querySelector('[data-bg]').addEventListener('click', e => UI().openColorBox(e.target, {allowNone: true, get: () => bg || '#fff3c4', set: (v) => { bg = v || ''; d.querySelector('[data-bgv]').textContent = bg || 'Aucune'; }})); },
+                this.restoreSel(); const ps = this.selBlocks(); if (!ps.length) return toast(i18n('Place le curseur dans un paragraphe.')); const p = ps[0];
+                ext.openDialog({eyebrow: i18n('FORMAT'), title: i18n('Bordure et trame'), submitLabel: i18n('Enregistrer'), body: `<div class="form-grid one-column"><label class="checkbox-line"><input type="checkbox" name="bd" ${p.style.border ? 'checked' : ''}> ${esc(i18n('Un cadre autour du paragraphe'))}</label><label class="checkbox-line"><input type="checkbox" name="bot" ${/solid/.test(p.style.borderBottom) && !p.style.borderTop ? 'checked' : ''}> ${esc(i18n('Seulement un trait dessous'))}</label><div class="wp-row"><span class="wp-lab">${esc(i18n('Trame (fond)'))}</span><button type="button" class="button small secondary" data-bg>${esc(i18n('🎨 Choisir…'))}</button><span data-bgv>${esc(p.style.backgroundColor ? T().col(p.style.backgroundColor) : i18n('Aucune'))}</span></div></div>`,
+                    onOpen: d => { let bg = p.style.backgroundColor ? T().col(p.style.backgroundColor) : ''; d._bg = () => bg; d.querySelector('[data-bg]').addEventListener('click', e => UI().openColorBox(e.target, {allowNone: true, get: () => bg || '#fff3c4', set: (v) => { bg = v || ''; d.querySelector('[data-bgv]').textContent = bg || i18n('Aucune'); }})); },
                     onSubmit: form => { const bg = form.closest('dialog')._bg(); ps.forEach(b => { b.style.border = ''; b.style.borderBottom = ''; b.style.padding = ''; if (form.elements.bd.checked) { b.style.border = '1px solid #444'; b.style.padding = '4pt 6pt'; } else if (form.elements.bot.checked) { b.style.borderBottom = '1px solid #444'; } b.style.backgroundColor = bg || ''; if (!b.getAttribute('style')) b.removeAttribute('style'); }); this.commit(); this.layoutSoon(0); }});
             },
         });

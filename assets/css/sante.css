@@ -1,0 +1,77 @@
+/* LCNDA — 🩺 Santé de la famille (assets/js/heritage-sante.js, lib/sante.php).
+ * Couleurs : variables de l'app (--ink, --muted, --blue-soft, --card-bg…) ; l'éventail a ses propres couleurs (clair et sombre).
+ * Le reste du sombre : scripts/build-dark-css.py. Privé : le bloc n'est jamais imprimé avec la fiche. */
+:root { --hs-hit: #c2410c; --hs-hit-ink: #fff; --hs-other: #d9dee6; --hs-known: #ffffff; --hs-line: #c8ccd3; --hs-empty: #f3f4f6; }
+:root[data-theme="dark"] { --hs-hit: #fb923c; --hs-hit-ink: #1b1206; --hs-other: #3b4250; --hs-known: #1f2329; --hs-line: #4a505a; --hs-empty: #16191d; }
+
+/* ── le bloc de la fiche ── */
+.h-sante .ui-rows { margin: 0; }
+.h-sante-note { white-space: pre-line; }
+.h-sante-epi { margin-top: 12px; }
+.h-sante-epi > summary { cursor: pointer; }
+.h-sante-epi-list { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.h-sante-epi-list li { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; align-items: start; padding: 6px 0; border-bottom: 1px solid var(--line, #e5e7eb); }
+.h-sante-epi-list li:last-child { border-bottom: 0; }
+.h-sante-epi-act { grid-column: 2; grid-row: 1 / span 3; align-self: center; }
+.h-sante-hint { color: var(--muted); font-style: italic; }
+
+/* ── la fenêtre ── */
+.h-sante-form { display: flex; flex-direction: column; gap: 12px; }
+.h-sante-form > label, .h-sante-2 > label { display: flex; flex-direction: column; gap: 4px; }
+.h-sante-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+.h-sante-kinds { display: flex; flex-wrap: wrap; gap: 6px; }
+.h-sante-sugg { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: -6px; }
+.h-sante-sugg small { opacity: .75; }
+
+/* ── la liste ── */
+.h-sante-tabs { margin: 0 0 14px; }
+.h-sante-top { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 8px 0 10px; }
+.h-sante-chip { display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
+.h-sante-chip small { color: var(--muted); }
+
+/* ── par branches ── */
+.h-sante-ctl { display: grid; grid-template-columns: minmax(220px, 1.3fr) minmax(220px, 1.3fr) 120px auto; gap: 12px; align-items: end; margin-bottom: 12px; }
+.h-sante-ctl > label { display: flex; flex-direction: column; gap: 4px; }
+.h-sante-sum { margin: 6px 0; }
+.h-sante-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12.5px; color: var(--muted); margin: 4px 0 10px; }
+.h-sante-legend span { display: inline-flex; gap: 6px; align-items: center; }
+.h-sante-legend i { width: 14px; height: 14px; border: 1.5px solid var(--hs-line); display: inline-block; }
+.h-sante-legend i.is-hit { background: var(--hs-hit); border-color: var(--hs-hit); }
+.h-sante-legend i.is-other { background: var(--hs-other); }
+.h-sante-legend i.is-known { background: var(--hs-known); }
+.h-sante-legend i.is-empty { background: var(--hs-empty); border-style: dashed; }
+.h-sante-fan-wrap { overflow-x: auto; }
+.h-sante-fan { display: block; width: 100%; max-width: 860px; height: auto; margin: 0 auto; }
+.h-sante-seg path, .h-sante-seg circle { fill: var(--hs-known); stroke: var(--hs-line); stroke-width: 1.2; }
+.h-sante-seg.is-other path, .h-sante-seg.is-other circle { fill: var(--hs-other); }
+.h-sante-seg.is-hit path, .h-sante-seg.is-hit circle { fill: var(--hs-hit); }
+.h-sante-seg.is-empty path { fill: var(--hs-empty); stroke-dasharray: 3 3; }
+.h-sante-seg text { font-size: 11px; fill: var(--ink); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+.h-sante-seg.is-hit text { fill: var(--hs-hit-ink); font-weight: 700; }
+.h-sante-seg.is-root text { font-size: 13px; font-weight: 700; }
+.h-sante-seg[data-h-person] { cursor: pointer; }
+.h-sante-seg[data-h-person]:hover path, .h-sante-seg[data-h-person]:hover circle, .h-sante-seg:focus-visible path, .h-sante-seg:focus-visible circle { stroke: var(--blue-bright, #055dff); stroke-width: 2.5; }
+.h-sante-seg:focus { outline: none; }
+.h-sante-sides { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.h-sante-side { border: 1.5px solid var(--hs-line); padding: 10px 12px; background: var(--card-bg, #fff); }
+.h-sante-side h4 { margin: 0 0 4px; }
+.h-sante-center { margin: 6px 0 12px; }
+.h-sante-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.h-sante-pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px 3px 3px; border: 1.5px solid var(--hs-line); border-radius: 999px; background: var(--card-bg, #fff); color: var(--ink); cursor: pointer; font: inherit; font-size: 13px; }
+.h-sante-pill:hover, .h-sante-pill:focus-visible { border-color: var(--blue-bright, #055dff); }
+.h-sante-pill small { color: var(--muted); }
+.h-sante-pill .pk-av { width: 22px; height: 22px; font-size: 10px; }
+
+/* ── les réglages ── */
+.h-sante-set-card { padding: 14px 16px; margin-bottom: 14px; display: flex; flex-direction: column; gap: 10px; }
+.h-sante-set-card h3 { margin: 0; }
+.h-sante-private { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; }
+
+@media (max-width: 760px) {
+    .h-sante-ctl { grid-template-columns: 1fr; }
+    .h-sante-2, .h-sante-sides { grid-template-columns: 1fr; }
+}
+/* privé : jamais imprimé avec la fiche (impression et « Exports fiche ») */
+@media print { .h-sante-card, .h-sante-epi { display: none !important; } }
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+/* ═════ fin du mode sombre automatique ═════ */

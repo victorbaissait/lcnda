@@ -14,6 +14,8 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function (G) {
     'use strict';
 
+    const i18n = (s, v) => { const I = (typeof window !== 'undefined' ? window : globalThis).LCNDA_I18N; if (v) v = Object.fromEntries(Object.entries(v).map(([k, x]) => [k, typeof x === 'number' ? String(x) : x])); return I ? I.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m)) : s); }; // 🌐 textes traduits (docs/I18N.md) ; nombres gardés tels quels
+    const PL = (n, one, many) => { const I = (typeof window !== 'undefined' ? window : G).LCNDA_I18N, v = Number(n); if (!I || I.lang === 'fr' || !I.t) return `${v.toLocaleString('fr-FR')} ${Math.abs(v) < 2 ? one : (many || (/[sxz]$/.test(one) ? one : one + 's'))}`; return `${I.fmtNumber(v)} ${I.t(one, {ctx: 'nb', n: v})}`; }; // 🌐 « 3 colonnes » : le mot accordé (clés « =nb|mot »)
     /* ═════════ Limites : un calcul fou ne bloque rien ═════════ */
     const LIMITS = {input: 2000, tokens: 1500, depth: 80, bits: 60000, list: 10000, mat: 20, fact: 5000, evals: 400000, sum: 100000, digits: 400};
     class CalcError extends Error { constructor(msg, o = {}) { super(msg); this.hint = o.hint || ''; this.pos = o.pos ?? -1; this.calc = true; } }
@@ -23,7 +25,7 @@
     const sheet = () => G.LCNDA_SHEET || null;
     const calMore = () => G.LCNDA_EXT?.calendarMore || null;
     let budget = 0; // nombre d'opérations du calcul en cours
-    const tick = (n = 1) => { budget += n; if (budget > LIMITS.evals * 10) fail('Ce calcul est trop long : je m’arrête là.', {hint: 'Essaie avec des nombres plus petits ou moins d’étapes.'}); };
+    const tick = (n = 1) => { budget += n; if (budget > LIMITS.evals * 10) fail(i18n('Ce calcul est trop long : je m’arrête là.'), {hint: i18n('Essaie avec des nombres plus petits ou moins d’étapes.')}); };
 
     /* ═════════ Entiers et fractions exactes (BigInt) ═════════ */
     const babs = a => (a < 0n ? -a : a);
@@ -34,10 +36,10 @@
     /** une fraction réduite ; trop grande → nombre à virgule (approché) */
     function fr(n, d = 1n) {
         if (typeof n === 'number') n = BigInt(n); if (typeof d === 'number') d = BigInt(d);
-        if (d === 0n) fail('Division par zéro : on ne peut pas diviser par 0.');
+        if (d === 0n) fail(i18n('Division par zéro : on ne peut pas diviser par 0.'));
         if (d < 0n) { n = -n; d = -d; }
         const g = bgcd(n, d); if (g > 1n) { n /= g; d /= g; }
-        if (blen(n) > LIMITS.bits || blen(d) > LIMITS.bits) { const f = bToF(n, d); if (!Number.isFinite(f)) fail('Nombre trop grand pour être calculé.'); return f; }
+        if (blen(n) > LIMITS.bits || blen(d) > LIMITS.bits) { const f = bToF(n, d); if (!Number.isFinite(f)) fail(i18n('Nombre trop grand pour être calculé.')); return f; }
         return new Frac(n, d);
     }
     const ZERO = new Frac(0n, 1n), ONE = new Frac(1n, 1n);
@@ -81,8 +83,8 @@
     const parts = x => (isC(x) ? [x.re, x.im] : [toF(x), 0]);
 
     /* ═════════ Listes, matrices, textes ═════════ */
-    class List { constructor(items) { if (items.length > LIMITS.list) fail(`Liste trop longue (plus de ${LIMITS.list} nombres).`); this.items = items; } }
-    class Mat { constructor(a) { this.a = a; this.r = a.length; this.c = a[0]?.length || 0; if (this.r > LIMITS.mat || this.c > LIMITS.mat) fail(`Matrice trop grande (au plus ${LIMITS.mat} × ${LIMITS.mat}).`); } }
+    class List { constructor(items) { if (items.length > LIMITS.list) fail(i18n('Liste trop longue (plus de {list} nombres).', {list: LIMITS.list})); this.items = items; } }
+    class Mat { constructor(a) { this.a = a; this.r = a.length; this.c = a[0]?.length || 0; if (this.r > LIMITS.mat || this.c > LIMITS.mat) fail(i18n('Matrice trop grande (au plus {mat} × {mat2}).', {mat: LIMITS.mat, mat2: LIMITS.mat})); } }
     /** un résultat déjà mis en mots (décomposition, base, solutions…) : on ne calcule plus avec */
     class Txt { constructor(text, html, extra = {}) { this.text = text; this.html = html ?? esc(text); Object.assign(this, extra); } }
     const isList = x => x instanceof List, isMat = x => x instanceof Mat, isTxt = x => x instanceof Txt;
@@ -94,10 +96,10 @@
     }
 
     /* ═════════ Les quatre opérations, la puissance (exactes quand c'est possible) ═════════ */
-    const NEED_NUM = (what, x) => fail(`${what} : il faut des nombres ici${isTxt(x) ? ` (« ${x.text} » est un résultat écrit en mots)` : ''}.`);
+    const NEED_NUM = (what, x) => fail(`${i18n('{what} : il faut des nombres ici{x}.', {what, x: isTxt(x) ? ` ${i18n('(« {text} » est un résultat écrit en mots)', {text: x.text})}` : ''})}`);
     function lift2(a, b, f, name) {
         if (isList(a) || isList(b)) {
-            if (isList(a) && isList(b)) { if (a.items.length !== b.items.length) fail(`Les deux listes n’ont pas la même longueur (${a.items.length} et ${b.items.length}).`); return new List(a.items.map((x, i) => f(x, b.items[i]))); }
+            if (isList(a) && isList(b)) { if (a.items.length !== b.items.length) fail(i18n('Les deux listes n’ont pas la même longueur ({n} et {n2}).', {n: a.items.length, n2: b.items.length})); return new List(a.items.map((x, i) => f(x, b.items[i]))); }
             return isList(a) ? new List(a.items.map(x => f(x, b))) : new List(b.items.map(y => f(a, y)));
         }
         return null;
@@ -105,7 +107,7 @@
     function add(a, b) {
         tick();
         const l = lift2(a, b, add); if (l) return l;
-        if (isMat(a) || isMat(b)) { if (!isMat(a) || !isMat(b)) fail('On ne peut pas ajouter un nombre et une matrice.', {hint: 'Pour multiplier chaque case, utilise « × ».'}); if (a.r !== b.r || a.c !== b.c) fail(`Les deux matrices n’ont pas la même taille (${a.r} × ${a.c} et ${b.r} × ${b.c}).`); return new Mat(a.a.map((row, i) => row.map((x, j) => add(x, b.a[i][j])))); }
+        if (isMat(a) || isMat(b)) { if (!isMat(a) || !isMat(b)) fail(i18n('On ne peut pas ajouter un nombre et une matrice.'), {hint: i18n('Pour multiplier chaque case, utilise « × ».')}); if (a.r !== b.r || a.c !== b.c) fail(i18n('Les deux matrices n’ont pas la même taille ({r} × {c} et {r2} × {c2}).', {r: a.r, c: a.c, r2: b.r, c2: b.c})); return new Mat(a.a.map((row, i) => row.map((x, j) => add(x, b.a[i][j])))); }
         if (!isNum(a)) NEED_NUM('Addition', a); if (!isNum(b)) NEED_NUM('Addition', b);
         if (isF(a) && isF(b)) return fr(a.n * b.d + b.n * a.d, a.d * b.d);
         if (isC(a) || isC(b)) { const [ar, ai] = parts(a), [br, bi] = parts(b); return cx(ar + br, ai + bi); }
@@ -113,17 +115,17 @@
     }
     function neg(a) {
         if (isList(a)) return new List(a.items.map(neg)); if (isMat(a)) return new Mat(a.a.map(r => r.map(neg)));
-        if (!isNum(a)) NEED_NUM('Signe moins', a);
+        if (!isNum(a)) NEED_NUM(i18n('Signe moins'), a);
         if (isF(a)) return new Frac(-a.n, a.d); if (isC(a)) return new Cx(-a.re, -a.im); return -a;
     }
     const sub = (a, b) => add(a, neg(b));
     function mul(a, b) {
         tick();
         if (isMat(a) && isMat(b)) {
-            if (a.c !== b.r) fail(`Produit impossible : la 1re matrice a ${a.c} colonne${a.c > 1 ? 's' : ''}, la 2e a ${b.r} ligne${b.r > 1 ? 's' : ''}.`, {hint: 'Pour multiplier deux matrices, il faut autant de colonnes dans la 1re que de lignes dans la 2e.'});
+            if (a.c !== b.r) fail(i18n('Produit impossible : la 1re matrice a {cols}, la 2e a {rows}.', {cols: PL(a.c, 'colonne'), rows: PL(b.r, 'ligne')}), {hint: i18n('Pour multiplier deux matrices, il faut autant de colonnes dans la 1re que de lignes dans la 2e.')});
             return new Mat(a.a.map(row => b.a[0].map((_, j) => row.reduce((s, x, k) => add(s, mul(x, b.a[k][j])), ZERO))));
         }
-        if (isMat(a) && isList(b)) { if (a.c !== b.items.length) fail(`Produit impossible : la matrice a ${a.c} colonnes et la liste ${b.items.length} nombres.`); return new List(a.a.map(row => row.reduce((s, x, k) => add(s, mul(x, b.items[k])), ZERO))); }
+        if (isMat(a) && isList(b)) { if (a.c !== b.items.length) fail(i18n('Produit impossible : la matrice a {c} colonnes et la liste {n} nombres.', {c: a.c, n: b.items.length})); return new List(a.a.map(row => row.reduce((s, x, k) => add(s, mul(x, b.items[k])), ZERO))); }
         if (isMat(a) || isMat(b)) { const m = isMat(a) ? a : b, k = isMat(a) ? b : a; if (!isNum(k)) NEED_NUM('Multiplication', k); return new Mat(m.a.map(r => r.map(x => mul(x, k)))); }
         const l = lift2(a, b, mul); if (l) return l;
         if (!isNum(a)) NEED_NUM('Multiplication', a); if (!isNum(b)) NEED_NUM('Multiplication', b);
@@ -132,7 +134,7 @@
         return toF(a) * toF(b);
     }
     function inv1(b) {
-        if (isZero(b)) fail('Division par zéro : on ne peut pas diviser par 0.');
+        if (isZero(b)) fail(i18n('Division par zéro : on ne peut pas diviser par 0.'));
         if (isF(b)) return fr(b.d, b.n);
         if (isC(b)) { const q = b.re * b.re + b.im * b.im; return cx(b.re / q, -b.im / q); }
         return 1 / toF(b);
@@ -143,20 +145,20 @@
         if (isMat(a)) { if (!isNum(b)) NEED_NUM('Division', b); return mul(a, inv1(b)); }
         const l = lift2(a, b, div); if (l) return l;
         if (!isNum(a)) NEED_NUM('Division', a); if (!isNum(b)) NEED_NUM('Division', b);
-        if (isZero(b)) fail('Division par zéro : on ne peut pas diviser par 0.');
+        if (isZero(b)) fail(i18n('Division par zéro : on ne peut pas diviser par 0.'));
         if (isF(a) && isF(b)) return fr(a.n * b.d, a.d * b.n);
         return mul(a, inv1(b));
     }
     /* complexes : exp, log, puissance */
     const cexp = z => { const [r, i] = parts(z), e = Math.exp(r); return cx(e * Math.cos(i), e * Math.sin(i)); };
-    const clog = z => { const [r, i] = parts(z); if (r === 0 && i === 0) fail('ln(0) n’existe pas (il part vers −∞).'); return cx(Math.log(Math.hypot(r, i)), Math.atan2(i, r)); };
+    const clog = z => { const [r, i] = parts(z); if (r === 0 && i === 0) fail(i18n('ln(0) n’existe pas (il part vers −∞).')); return cx(Math.log(Math.hypot(r, i)), Math.atan2(i, r)); };
     const cabs = z => { const [r, i] = parts(z); return Math.hypot(r, i); };
     function pow(a, b) {
         tick();
         if (isMat(a)) {
-            if (!isInt(b)) fail('Une matrice ne peut être élevée qu’à une puissance entière.');
-            if (a.r !== a.c) fail('Seule une matrice carrée peut être élevée à une puissance.');
-            let e = b.n, base = a; if (e < 0n) { base = matInverse(a); e = -e; } if (e > 10000n) fail('Puissance trop grande pour une matrice.');
+            if (!isInt(b)) fail(i18n('Une matrice ne peut être élevée qu’à une puissance entière.'));
+            if (a.r !== a.c) fail(i18n('Seule une matrice carrée peut être élevée à une puissance.'));
+            let e = b.n, base = a; if (e < 0n) { base = matInverse(a); e = -e; } if (e > 10000n) fail(i18n('Puissance trop grande pour une matrice.'));
             let res = new Mat(a.a.map((r, i) => r.map((_, j) => (i === j ? ONE : ZERO))));
             while (e > 0n) { if (e & 1n) res = mul(res, base); base = mul(base, base); e >>= 1n; }
             return res;
@@ -165,11 +167,11 @@
         if (!isNum(a)) NEED_NUM('Puissance', a); if (!isNum(b)) NEED_NUM('Puissance', b);
         if (isF(a) && isInt(b)) {
             const e = b.n;
-            if (a.n === 0n) { if (e < 0n) fail('Division par zéro : 0 ne peut pas être élevé à une puissance négative.'); return e === 0n ? ONE : ZERO; }
+            if (a.n === 0n) { if (e < 0n) fail(i18n('Division par zéro : 0 ne peut pas être élevé à une puissance négative.')); return e === 0n ? ONE : ZERO; }
             if (babs(a.n) === a.d) return (e % 2n === 0n || a.n > 0n) ? ONE : new Frac(-1n, 1n);
             const est = Math.max(blen(a.n), blen(a.d)) * Number(babs(e));
             if (est <= LIMITS.bits) return e >= 0n ? fr(a.n ** e, a.d ** e) : fr(a.d ** -e, a.n ** -e);
-            const f = Math.pow(toF(a), Number(e)); if (!Number.isFinite(f)) fail('Nombre trop grand pour être calculé.'); return f;
+            const f = Math.pow(toF(a), Number(e)); if (!Number.isFinite(f)) fail(i18n('Nombre trop grand pour être calculé.')); return f;
         }
         if (isF(a) && isF(b) && b.d <= 1000n) { // racine exacte : (p/q)^(m/n)
             const k = Number(b.d), neg = a.n < 0n;
@@ -184,7 +186,7 @@
             if (isZero(a)) return ZERO;
             return cexp(mul(b, clog(a)));
         }
-        const r = Math.pow(toF(a), toF(b)); if (!Number.isFinite(r)) fail(Number.isNaN(r) ? 'Ce calcul n’a pas de résultat.' : 'Nombre trop grand pour être calculé.'); return r;
+        const r = Math.pow(toF(a), toF(b)); if (!Number.isFinite(r)) fail(Number.isNaN(r) ? i18n('Ce calcul n’a pas de résultat.') : i18n('Nombre trop grand pour être calculé.')); return r;
     }
     function sqrt(a) {
         if (isList(a)) return new List(a.items.map(sqrt));
@@ -196,13 +198,13 @@
         if (isC(a)) { const m = cabs(a), re = Math.sqrt((m + a.re) / 2), im = Math.sign(a.im || 1) * Math.sqrt((m - a.re) / 2); return cx(re, im); }
         NEED_NUM('Racine', a);
     }
-    const real = (x, what) => { if (isC(x)) { if (Math.abs(x.im) < 1e-14 * Math.max(1, Math.abs(x.re))) return x.re; fail(`${what} : il faut un nombre réel (sans i).`); } if (!isF(x) && !isR(x)) NEED_NUM(what, x); return x; };
+    const real = (x, what) => { if (isC(x)) { if (Math.abs(x.im) < 1e-14 * Math.max(1, Math.abs(x.re))) return x.re; fail(i18n('{what} : il faut un nombre réel (sans i).', {what})); } if (!isF(x) && !isR(x)) NEED_NUM(what, x); return x; };
     const cmp = (a, b) => { if (isF(a) && isF(b)) { const d = a.n * b.d - b.n * a.d; return d < 0n ? -1 : d > 0n ? 1 : 0; } const x = toF(a), y = toF(b); return x < y ? -1 : x > y ? 1 : 0; };
-    const intOf = (x, what) => { x = real(x, what); if (isF(x) && x.d === 1n) return x.n; if (isR(x) && Number.isInteger(x) && Math.abs(x) < 2 ** 53) return BigInt(x); fail(`${what} : il faut un nombre entier.`); };
+    const intOf = (x, what) => { x = real(x, what); if (isF(x) && x.d === 1n) return x.n; if (isR(x) && Number.isInteger(x) && Math.abs(x) < 2 ** 53) return BigInt(x); fail(i18n('{what} : il faut un nombre entier.', {what})); };
 
     /* ═════════ Matrices : déterminant, inverse, systèmes (exacts avec des fractions) ═════════ */
     const absNum = x => (isF(x) ? Math.abs(toF(x)) : cabs(x));
-    const matOf = (x, what) => { if (isMat(x)) return x; if (isList(x) && x.items.every(isNum)) return new Mat([x.items]); fail(`${what} : il faut une matrice, par exemple [[1 ; 2] ; [3 ; 4]].`); };
+    const matOf = (x, what) => { if (isMat(x)) return x; if (isList(x) && x.items.every(isNum)) return new Mat([x.items]); fail(i18n('{what} : il faut une matrice, par exemple [[1 ; 2] ; [3 ; 4]].', {what})); };
     /** élimination de Gauss : {rank, det, rows} ; exacte pour des fractions, pivot le plus grand sinon */
     function gauss(A, B = null) {
         const n = A.r, m = A.c, a = A.a.map((row, i) => [...row, ...(B ? B.a[i] : [])]);
@@ -219,21 +221,21 @@
         }
         return {rank: r, det: r < Math.min(n, m) ? ZERO : det, rows: a};
     }
-    function matDet(x) { const A = matOf(x, 'Déterminant'); if (A.r !== A.c) fail(`Le déterminant demande une matrice carrée (celle-ci fait ${A.r} × ${A.c}).`); return gauss(A).det; }
+    function matDet(x) { const A = matOf(x, i18n('Déterminant')); if (A.r !== A.c) fail(i18n('Le déterminant demande une matrice carrée (celle-ci fait {r} × {c}).', {r: A.r, c: A.c})); return gauss(A).det; }
     function matInverse(x) {
-        const A = matOf(x, 'Inverse'); if (A.r !== A.c) fail(`Seule une matrice carrée a un inverse (celle-ci fait ${A.r} × ${A.c}).`);
+        const A = matOf(x, i18n('Inverse')); if (A.r !== A.c) fail(i18n('Seule une matrice carrée a un inverse (celle-ci fait {r} × {c}).', {r: A.r, c: A.c}));
         const I = new Mat(A.a.map((r, i) => r.map((_, j) => (i === j ? ONE : ZERO)))), g = gauss(A, I);
-        if (g.rank < A.r || isZero(g.det)) fail('Cette matrice n’a pas d’inverse (son déterminant vaut 0).');
+        if (g.rank < A.r || isZero(g.det)) fail(i18n('Cette matrice n’a pas d’inverse (son déterminant vaut 0).'));
         return new Mat(g.rows.map(row => row.slice(A.c)));
     }
-    const transpose = x => { const A = matOf(x, 'Transposée'); return new Mat(A.a[0].map((_, j) => A.a.map(r => r[j]))); };
+    const transpose = x => { const A = matOf(x, i18n('Transposée')); return new Mat(A.a[0].map((_, j) => A.a.map(r => r[j]))); };
     function solveLinear(A, b) {
         const B = new Mat(b.map(v => [v])), g = gauss(A, B);
         if (g.rank < A.c) {
             const bad = g.rows.slice(g.rank).some(row => !isZero(row[A.c]) && row.slice(0, A.c).every(isZero));
-            fail(bad ? 'Ce système n’a aucune solution (les équations se contredisent).' : 'Ce système a une infinité de solutions (des équations disent la même chose).');
+            fail(bad ? i18n('Ce système n’a aucune solution (les équations se contredisent).') : i18n('Ce système a une infinité de solutions (des équations disent la même chose).'));
         }
-        if (g.rows.slice(A.c).some(row => !isZero(row[A.c]))) fail('Ce système n’a aucune solution (les équations se contredisent).');
+        if (g.rows.slice(A.c).some(row => !isZero(row[A.c]))) fail(i18n('Ce système n’a aucune solution (les équations se contredisent).'));
         return g.rows.slice(0, A.c).map(row => row[A.c]);
     }
 
@@ -269,24 +271,24 @@
             const m = stack.pop(); if (m === 1n) continue;
             if (isPrime(m)) { addF(m); continue; }
             const r = bSqrtFloor(m); if (r * r === m) { stack.push(r, r); continue; }
-            const d = rho(m); if (!d) fail('Ce nombre est trop dur à décomposer.'); stack.push(d, m / d);
+            const d = rho(m); if (!d) fail(i18n('Ce nombre est trop dur à décomposer.')); stack.push(d, m / d);
         }
         return new Map([...out.entries()].sort((a, b) => (a[0] < b[0] ? -1 : 1)));
     }
     const SUP = {'0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹', '-': '⁻'};
     const sup = s => String(s).split('').map(c => SUP[c] || c).join('');
     function factorsTxt(n) {
-        if (babs(n) > 10n ** 30n) fail('Ce nombre est trop grand pour être décomposé (au plus 30 chiffres).');
-        if (babs(n) < 2n) return new Txt(String(n), esc(String(n)), {note: `${n} n’a pas de facteur premier.`});
+        if (babs(n) > 10n ** 30n) fail(i18n('Ce nombre est trop grand pour être décomposé (au plus 30 chiffres).'));
+        if (babs(n) < 2n) return new Txt(String(n), esc(String(n)), {note: i18n('{n} n’a pas de facteur premier.', {n})});
         const f = factorize(n), sgn = n < 0n ? '−' : '';
         const text = sgn + [...f].map(([p, k]) => (k > 1 ? `${p}^${k}` : `${p}`)).join(' × ');
         const html = sgn + [...f].map(([p, k]) => (k > 1 ? `${p}<sup>${k}</sup>` : `${p}`)).join(' × ');
         const prime = f.size === 1 && [...f.values()][0] === 1;
-        return new Txt(text.replace(/\^(\d+)/g, (_, d) => sup(d)), html, {note: prime ? `${babs(n)} est un nombre premier.` : `${[...f].reduce((s, [, k]) => s * (k + 1), 1)} diviseurs.`});
+        return new Txt(text.replace(/\^(\d+)/g, (_, d) => sup(d)), html, {note: prime ? i18n('{x} est un nombre premier.', {x: babs(n)}) : `${[...f].reduce((s, [, k]) => s * (k + 1), 1)} diviseurs.`});
     }
-    const fact = n => { if (n > BigInt(LIMITS.fact)) fail(`Factorielle trop grande : au plus ${LIMITS.fact}!.`); let r = 1n; for (let k = 2n; k <= n; k++) r *= k; return r; };
-    const nCk = (n, k) => { if (k < 0n || k > n) return 0n; if (k > n - k) k = n - k; if (k > 100000n) fail('Nombre trop grand pour être calculé.'); let r = 1n; for (let i = 1n; i <= k; i++) r = r * (n - k + i) / i; return r; };
-    const nAk = (n, k) => { if (k < 0n || k > n) return 0n; if (k > 100000n) fail('Nombre trop grand pour être calculé.'); let r = 1n; for (let i = 0n; i < k; i++) r *= n - i; return r; };
+    const fact = n => { if (n > BigInt(LIMITS.fact)) fail(i18n('Factorielle trop grande : au plus {fact}!.', {fact: LIMITS.fact})); let r = 1n; for (let k = 2n; k <= n; k++) r *= k; return r; };
+    const nCk = (n, k) => { if (k < 0n || k > n) return 0n; if (k > n - k) k = n - k; if (k > 100000n) fail(i18n('Nombre trop grand pour être calculé.')); let r = 1n; for (let i = 1n; i <= k; i++) r = r * (n - k + i) / i; return r; };
+    const nAk = (n, k) => { if (k < 0n || k > n) return 0n; if (k > 100000n) fail(i18n('Nombre trop grand pour être calculé.')); let r = 1n; for (let i = 0n; i < k; i++) r *= n - i; return r; };
     function gamma(x) { // Lanczos
         if (x < 0.5) return Math.PI / (Math.sin(Math.PI * x) * gamma(1 - x));
         const g = 607 / 128, c = [0.99999999999999709182, 57.156235665862923517, -59.597960355475491248, 14.136097974741747174, -0.49191381609762019978, 0.33994649984811888699e-4, 0.46523628927048575665e-4, -0.98374475304879564677e-4, 0.15808870322491248884e-3, -0.21026444172410488319e-3, 0.21743961811521264320e-3, -0.16431810653676389022e-3, 0.84418223983852743293e-4, -0.26190838401581408670e-4, 0.36899182659531622704e-5]; // précision 10⁻¹⁵
@@ -294,27 +296,27 @@
         return Math.sqrt(2 * Math.PI) * Math.pow(t, x + 0.5) * Math.exp(-t) * a;
     }
     function factorial(x) {
-        x = real(x, 'Factorielle');
-        if (isInt(x)) { if (x.n < 0n) fail('La factorielle n’existe pas pour un entier négatif.', {hint: 'n! = 1 × 2 × … × n, pour n = 0, 1, 2…'}); return fr(fact(x.n)); }
-        const v = toF(x); if (Number.isInteger(v)) { if (v < 0) fail('La factorielle n’existe pas pour un entier négatif.'); return fr(fact(BigInt(v))); }
-        const r = gamma(v + 1); if (!Number.isFinite(r)) fail('Nombre trop grand pour être calculé.'); return r;
+        x = real(x, i18n('Factorielle'));
+        if (isInt(x)) { if (x.n < 0n) fail(i18n('La factorielle n’existe pas pour un entier négatif.'), {hint: i18n('n! = 1 × 2 × … × n, pour n = 0, 1, 2…')}); return fr(fact(x.n)); }
+        const v = toF(x); if (Number.isInteger(v)) { if (v < 0) fail(i18n('La factorielle n’existe pas pour un entier négatif.')); return fr(fact(BigInt(v))); }
+        const r = gamma(v + 1); if (!Number.isFinite(r)) fail(i18n('Nombre trop grand pour être calculé.')); return r;
     }
     const DIGITS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     function toBase(x, b) {
-        const n = intOf(x, 'Changement de base'); if (b < 2 || b > 36) fail('La base va de 2 à 36.');
+        const n = intOf(x, i18n('Changement de base')); if (b < 2 || b > 36) fail(i18n('La base va de 2 à 36.'));
         const s = (n < 0n ? '-' : '') + babs(n).toString(b).toUpperCase();
         const pre = {2: '0b', 8: '0o', 16: '0x'}[b] || '';
         const grouped = b === 2 ? s.replace(/\B(?=(\d{4})+(?!\d))/g, ' ') : s;
-        return new Txt(pre ? (n < 0n ? '-' : '') + pre + s.replace('-', '') : s, `${esc(grouped)}<sub>${b}</sub>`, {note: `${n} écrit en base ${b}${pre ? ` (à retaper : ${n < 0n ? '-' : ''}${pre}${s.replace('-', '')})` : ''}`});
+        return new Txt(pre ? (n < 0n ? '-' : '') + pre + s.replace('-', '') : s, `${esc(grouped)}<sub>${b}</sub>`, {note: `${i18n('{n} écrit en base {b}', {n, b})}${pre ? ` ${i18n('(à retaper : {x}{pre}{x2})', {x: n < 0n ? '-' : '', pre, x2: s.replace('-', '')})}` : ''}`});
     }
 
     /* ═════════ Statistiques sur une liste ═════════ */
-    const flatNums = (args, what) => { const v = args.flatMap(vecOf); if (!v.length) fail(`${what} : la liste est vide.`); v.forEach(x => { if (!isNum(x)) NEED_NUM(what, x); }); return v; };
+    const flatNums = (args, what) => { const v = args.flatMap(vecOf); if (!v.length) fail(i18n('{what} : la liste est vide.', {what})); v.forEach(x => { if (!isNum(x)) NEED_NUM(what, x); }); return v; };
     const sortReal = (v, what) => v.map(x => real(x, what)).sort(cmp);
     const sum = v => v.reduce((s, x) => add(s, x), ZERO);
     const mean = v => div(sum(v), fr(v.length));
-    const variance = (v, sample) => { if (sample && v.length < 2) fail('L’écart-type d’un échantillon demande au moins 2 nombres.'); const m = mean(v), s = v.reduce((t, x) => { const d = sub(x, m); return add(t, mul(d, d)); }, ZERO); return div(s, fr(v.length - (sample ? 1 : 0))); };
-    const median = v => { const s = sortReal(v, 'Médiane'), n = s.length; return n % 2 ? s[(n - 1) >> 1] : div(add(s[n / 2 - 1], s[n / 2]), fr(2)); };
+    const variance = (v, sample) => { if (sample && v.length < 2) fail(i18n('L’écart-type d’un échantillon demande au moins 2 nombres.')); const m = mean(v), s = v.reduce((t, x) => { const d = sub(x, m); return add(t, mul(d, d)); }, ZERO); return div(s, fr(v.length - (sample ? 1 : 0))); };
+    const median = v => { const s = sortReal(v, i18n('Médiane')), n = s.length; return n % 2 ? s[(n - 1) >> 1] : div(add(s[n / 2 - 1], s[n / 2]), fr(2)); };
     const quart = (v, q) => { const s = sortReal(v, 'Quartile'), n = s.length, k = Math.ceil(q * n) - 1; return s[Math.max(0, Math.min(n - 1, k))]; }; // définition du lycée en France
 
     /* ═════════ Les angles ═════════ */
@@ -339,7 +341,7 @@
     const catan = z => mul(new Cx(0, 0.5), sub(clog(sub(ONE, mul(I, z))), clog(add(ONE, mul(I, z)))));
     const mapNum = (x, f) => (isList(x) ? new List(x.items.map(y => mapNum(y, f))) : isMat(x) ? new Mat(x.a.map(r => r.map(y => mapNum(y, f)))) : isNum(x) ? f(x) : NEED_NUM('Fonction', x));
     /** f réel (si x réel et dans le domaine), sinon cf complexe */
-    const rc = (x, rf, cf, inDom = () => true) => mapNum(x, v => { if (!isC(v) && inDom(toF(v))) { const r = rf(toF(v)); if (Number.isFinite(r)) return fracOfFloat(r); fail('Ce calcul n’a pas de résultat fini.'); } return cf(v); });
+    const rc = (x, rf, cf, inDom = () => true) => mapNum(x, v => { if (!isC(v) && inDom(toF(v))) { const r = rf(toF(v)); if (Number.isFinite(r)) return fracOfFloat(r); fail(i18n('Ce calcul n’a pas de résultat fini.')); } return cf(v); });
     function roundTo(x, n, mode = 'round') {
         return mapNum(x, v => {
             if (isC(v)) return cx(toF(roundTo(v.re, n, mode)), toF(roundTo(v.im, n, mode)));
@@ -360,7 +362,7 @@
     const IS_LETTER = /[A-Za-zÀ-ɏπφθ_]/;
     function tokenize(src, {dec = ','} = {}) {
         const s = prepare(src), toks = []; let i = 0;
-        if (s.length > LIMITS.input) fail(`Calcul trop long (plus de ${LIMITS.input} signes).`);
+        if (s.length > LIMITS.input) fail(i18n('Calcul trop long (plus de {input} signes).', {input: LIMITS.input}));
         const push = (t, v, pos, raw) => { toks.push({t, v, pos, raw}); if (toks.length > LIMITS.tokens) fail('Calcul trop long.'); };
         while (i < s.length) {
             const c = s[i];
@@ -368,7 +370,7 @@
             // nombres : 0x1F, 0b101, 0o17, 12,5 ou 12.5, 1,5e-3 ; « 1 234 » (espace des milliers)
             if (/[0-9]/.test(c) || ((c === '.' || (c === ',' && dec === ',')) && /[0-9]/.test(s[i + 1] || ''))) {
                 const m0 = /^0([xob])([0-9a-f]+)/i.exec(s.slice(i));
-                if (m0) { const base = {x: 16, o: 8, b: 2}[m0[1].toLowerCase()], digits = m0[2].toLowerCase(), ok = [...digits].every(ch => parseInt(ch, 36) < base); if (!ok) fail(`« ${m0[0]} » n’est pas un nombre en base ${base}.`, {pos: i}); push('num', fr(BigInt((base === 16 ? '0x' : base === 8 ? '0o' : '0b') + digits)), i, m0[0]); i += m0[0].length; continue; }
+                if (m0) { const base = {x: 16, o: 8, b: 2}[m0[1].toLowerCase()], digits = m0[2].toLowerCase(), ok = [...digits].every(ch => parseInt(ch, 36) < base); if (!ok) fail(i18n('« {x} » n’est pas un nombre en base {base}.', {x: m0[0], base}), {pos: i}); push('num', fr(BigInt((base === 16 ? '0x' : base === 8 ? '0o' : '0b') + digits)), i, m0[0]); i += m0[0].length; continue; }
                 let j = i, int = '';
                 while (j < s.length && /[0-9]/.test(s[j])) int += s[j++];
                 while (/^ [0-9]{3}(?![0-9])/.test(s.slice(j)) && int.length && int.length <= 3 + 4 * 6 && !/[0-9]/.test(s[j + 4] || '') && (toks.length === 0 || toks[toks.length - 1].t !== 'num')) { // milliers « 1 234 567 »
@@ -381,7 +383,7 @@
                 let exp = 0n; const em = /^[eE]([+-]?\d{1,6})(?![A-Za-z])/.exec(s.slice(j));
                 if (em) { exp = BigInt(em[1]); j += em[0].length; }
                 let n = BigInt((int || '0') + fracPart), d = 10n ** BigInt(fracPart.length);
-                if (babs(exp) > 5000n) fail('Nombre trop grand pour être calculé.', {pos: i});
+                if (babs(exp) > 5000n) fail(i18n('Nombre trop grand pour être calculé.'), {pos: i});
                 if (exp > 0n) n *= 10n ** exp; else if (exp < 0n) d *= 10n ** -exp;
                 push('num', fr(n, d), i, s.slice(i, j)); i = j; continue;
             }
@@ -401,7 +403,7 @@
             if (c === '|') { push('bar', c, i, c); i++; continue; }
             if (c === '°') { push('deg', c, i, c); i++; continue; }
             if (c === '∞') { push('id', 'inf', i, c); i++; continue; }
-            fail(`Je ne comprends pas le signe « ${c} ».`, {pos: i, hint: 'Les signes compris : + − × ÷ ^ ! % ( ) [ ] ; = et les noms des fonctions.'});
+            fail(i18n('Je ne comprends pas le signe « {c} ».', {c}), {pos: i, hint: i18n('Les signes compris : + − × ÷ ^ ! % ( ) [ ] ; = et les noms des fonctions.')});
         }
         return toks;
     }
@@ -428,19 +430,19 @@
     function parse(src, opts = {}) {
         const toks0 = tokenize(src, opts), toks = [];
         toks0.forEach(t => { if (t.t === 'id' && !t.prefix) splitIdent(t.v).forEach((v, k, a) => toks.push({...t, v, raw: v, split: a.length > 1, pos: t.pos + a.slice(0, k).join('').length})); else toks.push(t); });
-        if (!toks.length) fail('Tape un calcul.');
+        if (!toks.length) fail(i18n('Tape un calcul.'));
         let p = 0, depth = 0, inAbs = 0;
         const peek = () => toks[p], next = () => toks[p++];
         const isOp = (t, v) => t && t.t === 'op' && (v === undefined || t.v === v);
-        const deeper = () => { if (++depth > LIMITS.depth) fail('Trop de parenthèses imbriquées.'); };
+        const deeper = () => { if (++depth > LIMITS.depth) fail(i18n('Trop de parenthèses imbriquées.')); };
         const endPos = () => { const t = toks[Math.min(p, toks.length) - 1]; return t ? t.pos + String(t.raw).length : 0; };
         const missing = (after) => {
             const t = peek();
-            if (!t) return fail(after ? `Il manque un nombre après « ${OPNAME[after.v] || after.raw} ».` : 'Il manque un nombre à la fin.', {pos: endPos()});
-            if (t.t === 'rp') return fail(after ? `Il manque un nombre après « ${OPNAME[after.v] || after.raw} », avant « ) ».` : 'Il y a une parenthèse fermante « ) » de trop, ou il manque un nombre avant elle.', {pos: t.pos});
-            if (t.t === 'op') return fail(`Il manque un nombre avant « ${OPNAME[t.v] || t.raw} ».`, {pos: t.pos});
-            if (t.t === 'sep') return fail(`Le signe « ${t.v} » sépare les nombres d’une fonction, comme pgcd(12 ; 18).`, {pos: t.pos, hint: opts.dec === ',' ? 'Pour un nombre à virgule, colle la virgule aux chiffres : 2,5.' : ''});
-            return fail(`Je ne comprends pas « ${t.raw} » ici.`, {pos: t.pos});
+            if (!t) return fail(after ? i18n('Il manque un nombre après « {x} ».', {x: OPNAME[after.v] || after.raw}) : i18n('Il manque un nombre à la fin.'), {pos: endPos()});
+            if (t.t === 'rp') return fail(after ? i18n('Il manque un nombre après « {x} », avant « ) ».', {x: OPNAME[after.v] || after.raw}) : i18n('Il y a une parenthèse fermante « ) » de trop, ou il manque un nombre avant elle.'), {pos: t.pos});
+            if (t.t === 'op') return fail(i18n('Il manque un nombre avant « {x} ».', {x: OPNAME[t.v] || t.raw}), {pos: t.pos});
+            if (t.t === 'sep') return fail(i18n('Le signe « {v} » sépare les nombres d’une fonction, comme pgcd(12 ; 18).', {v: t.v}), {pos: t.pos, hint: opts.dec === ',' ? i18n('Pour un nombre à virgule, colle la virgule aux chiffres : 2,5.') : ''});
+            return fail(i18n('Je ne comprends pas « {raw} » ici.', {raw: t.raw}), {pos: t.pos});
         };
         const startsPrimary = t => t && (t.t === 'num' || t.t === 'id' || t.t === 'lp' || t.t === 'lb' || (t.t === 'bar' && !inAbs));
         function expr() { deeper(); const e = equation(); depth--; return e; }
@@ -470,7 +472,7 @@
             for (;;) {
                 const t = peek(); if (!startsPrimary(t) || (t.t === 'id' && fold(t.v) === 'mod')) break;
                 const prev = toks[p - 1];
-                if (t.t === 'num' && prev && (prev.t === 'num' || prev.t === 'rp' && false)) fail(`Il manque un signe entre « ${prev.raw} » et « ${t.raw} ».`, {pos: t.pos, hint: 'Par exemple « × » ou « + ».'});
+                if (t.t === 'num' && prev && (prev.t === 'num' || prev.t === 'rp' && false)) fail(i18n('Il manque un signe entre « {raw} » et « {raw2} ».', {raw: prev.raw, raw2: t.raw}), {pos: t.pos, hint: i18n('Par exemple « × » ou « + ».')});
                 if (t.t === 'id' && fold(t.v) === 'en') break;
                 const b = power(); a = {k: 'bin', op: '*', a, b, implicit: true, pos: t.pos};
             }
@@ -495,13 +497,13 @@
             const out = []; deeper();
             if (peek() && peek().t === 'rp') { next(); depth--; return out; }
             for (;;) {
-                if (!peek()) fail(`Il manque une parenthèse fermante « ) » après ${name}(…).`, {pos: endPos(), hint: 'Ajoute « ) » à la fin.'});
+                if (!peek()) fail(i18n('Il manque une parenthèse fermante « ) » après {name}(…).', {name}), {pos: endPos(), hint: i18n('Ajoute « ) » à la fin.')});
                 out.push(expr());
                 const t = peek();
                 if (t && t.t === 'sep') { next(); continue; }
                 if (t && t.t === 'rp') { next(); break; }
-                if (!t) fail(`Il manque une parenthèse fermante « ) » après ${name}(…).`, {pos: endPos(), hint: 'Ajoute « ) » à la fin.'});
-                fail(`Je ne comprends pas « ${t.raw} » dans ${name}(…).`, {pos: t.pos});
+                if (!t) fail(i18n('Il manque une parenthèse fermante « ) » après {name}(…).', {name}), {pos: endPos(), hint: i18n('Ajoute « ) » à la fin.')});
+                fail(i18n('Je ne comprends pas « {raw} » dans {name}(…).', {raw: t.raw, name}), {pos: t.pos});
             }
             depth--; return out;
         }
@@ -510,39 +512,39 @@
             if (!t) { p--; return missing(toks[p - 1]); }
             if (t.t === 'num') return {k: 'num', v: t.v, raw: t.raw, pos: t.pos};
             if (t.t === 'lp') {
-                if (peek() && peek().t === 'rp') fail('Les parenthèses sont vides.', {pos: t.pos});
+                if (peek() && peek().t === 'rp') fail(i18n('Les parenthèses sont vides.'), {pos: t.pos});
                 const e = expr(); const c = next();
-                if (!c || c.t !== 'rp') { if (c && c.t === 'sep') fail('Le signe « ; » sépare les nombres d’une fonction, comme pgcd(12 ; 18) — il n’a pas sa place ici.', {pos: c.pos}); fail('Il manque une parenthèse fermante « ) ».', {pos: c ? c.pos : endPos(), hint: 'Ajoute « ) » à la fin.'}); }
+                if (!c || c.t !== 'rp') { if (c && c.t === 'sep') fail(i18n('Le signe « ; » sépare les nombres d’une fonction, comme pgcd(12 ; 18) — il n’a pas sa place ici.'), {pos: c.pos}); fail(i18n('Il manque une parenthèse fermante « ) ».'), {pos: c ? c.pos : endPos(), hint: i18n('Ajoute « ) » à la fin.')}); }
                 return {...e, paren: true};
             }
             if (t.t === 'lb') {
                 const items = []; deeper();
                 if (peek() && peek().t === 'rb') { next(); depth--; return {k: 'list', items, pos: t.pos}; }
-                for (;;) { if (!peek()) fail('Il manque un crochet fermant « ] ».', {pos: endPos()}); items.push(expr()); const c = next(); if (c && c.t === 'sep') continue; if (c && c.t === 'rb') break; fail(c ? `Je ne comprends pas « ${c.raw} » dans la liste.` : 'Il manque un crochet fermant « ] ».', {pos: c ? c.pos : endPos(), hint: 'Une liste s’écrit [1 ; 2 ; 3].'}); }
+                for (;;) { if (!peek()) fail(i18n('Il manque un crochet fermant « ] ».'), {pos: endPos()}); items.push(expr()); const c = next(); if (c && c.t === 'sep') continue; if (c && c.t === 'rb') break; fail(c ? i18n('Je ne comprends pas « {raw} » dans la liste.', {raw: c.raw}) : i18n('Il manque un crochet fermant « ] ».'), {pos: c ? c.pos : endPos(), hint: i18n('Une liste s’écrit [1 ; 2 ; 3].')}); }
                 depth--; return {k: 'list', items, pos: t.pos};
             }
-            if (t.t === 'bar') { inAbs++; const e = expr(); inAbs--; const c = next(); if (!c || c.t !== 'bar') fail('Il manque la barre fermante « | » de la valeur absolue.', {pos: c ? c.pos : endPos()}); return {k: 'call', name: 'abs', args: [e], bars: true, pos: t.pos}; }
+            if (t.t === 'bar') { inAbs++; const e = expr(); inAbs--; const c = next(); if (!c || c.t !== 'bar') fail(i18n('Il manque la barre fermante « | » de la valeur absolue.'), {pos: c ? c.pos : endPos()}); return {k: 'call', name: 'abs', args: [e], bars: true, pos: t.pos}; }
             if (t.t === 'id') {
                 const name = t.v;
                 if (isFn(name) && !(VAR_LETTERS.test(name) && !(peek() && peek().t === 'lp') && !t.prefix)) {
                     if (peek() && peek().t === 'lp') { const lp = next(); return {k: 'call', name, args: args(name, lp), pos: t.pos}; }
-                    if (!peek() || !startsPrimary(peek()) && !isOp(peek(), '-')) fail(`Il manque le nombre de ${t.prefix ? `« ${t.raw} »` : `${name}(…)`}.`, {pos: endPos(), hint: t.prefix ? '' : `Par exemple ${name}(30).`});
+                    if (!peek() || !startsPrimary(peek()) && !isOp(peek(), '-')) fail(`${i18n('Il manque le nombre de {x}.', {x: t.prefix ? `« ${t.raw} »` : `${name}(…)`})}`, {pos: endPos(), hint: t.prefix ? '' : i18n('Par exemple {name}(30).', {name})});
                     const a = isOp(peek(), '-') ? unary() : power();
                     return {k: 'call', name, args: [a], bare: true, pos: t.pos};
                 }
                 return {k: 'id', name, pos: t.pos, split: t.split};
             }
-            if (t.t === 'rp') fail('Il y a une parenthèse fermante « ) » de trop.', {pos: t.pos, hint: 'Retire-la, ou ajoute « ( » avant.'});
-            if (t.t === 'rb') fail('Il y a un crochet fermant « ] » de trop.', {pos: t.pos});
+            if (t.t === 'rp') fail(i18n('Il y a une parenthèse fermante « ) » de trop.'), {pos: t.pos, hint: i18n('Retire-la, ou ajoute « ( » avant.')});
+            if (t.t === 'rb') fail(i18n('Il y a un crochet fermant « ] » de trop.'), {pos: t.pos});
             p--; return missing(toks[p - 1]);
         }
         const tree = expr();
         if (p < toks.length) {
             const t = toks[p];
-            if (t.t === 'rp') fail('Il y a une parenthèse fermante « ) » de trop.', {pos: t.pos, hint: 'Retire-la, ou ajoute « ( » avant.'});
-            if (t.t === 'sep') fail(`Le signe « ${t.v} » sépare les nombres d’une fonction, comme pgcd(12 ; 18).`, {pos: t.pos, hint: opts.dec === ',' ? 'Pour un nombre à virgule, colle la virgule aux chiffres : 2,5.' : ''});
-            if (t.t === 'num') fail(`Il manque un signe avant « ${t.raw} ».`, {pos: t.pos, hint: 'Par exemple « × » ou « + ».'});
-            fail(`Je ne comprends pas « ${t.raw} » ici.`, {pos: t.pos});
+            if (t.t === 'rp') fail(i18n('Il y a une parenthèse fermante « ) » de trop.'), {pos: t.pos, hint: i18n('Retire-la, ou ajoute « ( » avant.')});
+            if (t.t === 'sep') fail(i18n('Le signe « {v} » sépare les nombres d’une fonction, comme pgcd(12 ; 18).', {v: t.v}), {pos: t.pos, hint: opts.dec === ',' ? i18n('Pour un nombre à virgule, colle la virgule aux chiffres : 2,5.') : ''});
+            if (t.t === 'num') fail(i18n('Il manque un signe avant « {raw} ».', {raw: t.raw}), {pos: t.pos, hint: i18n('Par exemple « × » ou « + ».')});
+            fail(i18n('Je ne comprends pas « {raw} » ici.', {raw: t.raw}), {pos: t.pos});
         }
         return tree;
     }
@@ -580,28 +582,28 @@
                 const b = evaluateNode(node.b, env);
                 return node.op === '+' ? add(a, b) : node.op === '-' ? sub(a, b) : node.op === '*' ? mul(a, b) : node.op === '/' ? div(a, b) : pow(a, b);
             }
-            case 'cmp': { const a = real(evaluateNode(node.a, env), 'Comparaison'), b = real(evaluateNode(node.b, env), 'Comparaison'), c = cmp(a, b), ok = {'<': c < 0, '>': c > 0, '<=': c <= 0, '>=': c >= 0, '<>': c !== 0}[node.op]; return new Txt(ok ? 'VRAI' : 'FAUX', ok ? 'Vrai ✓' : 'Faux', {bool: ok}); }
+            case 'cmp': { const a = real(evaluateNode(node.a, env), i18n('Comparaison')), b = real(evaluateNode(node.b, env), i18n('Comparaison')), c = cmp(a, b), ok = {'<': c < 0, '>': c > 0, '<=': c <= 0, '>=': c >= 0, '<>': c !== 0}[node.op]; return new Txt(ok ? 'VRAI' : 'FAUX', ok ? 'Vrai ✓' : 'Faux', {bool: ok}); }
             case 'eq': {
-                if (env.inEq) fail('Une équation ne peut pas contenir un autre signe « = ».');
+                if (env.inEq) fail(i18n('Une équation ne peut pas contenir un autre signe « = ».'));
                 const a = evaluateNode(node.a, env), b = evaluateNode(node.b, env);
                 if (isNum(a) && isNum(b)) { const d = sub(a, b), ok = isF(d) ? d.n === 0n : cabs(d) < 1e-12 * Math.max(1, cabs(a)); return new Txt(ok ? 'VRAI' : 'FAUX', ok ? 'Vrai ✓' : 'Faux', {bool: ok}); }
-                fail('Je ne sais comparer avec « = » que des nombres.');
+                fail(i18n('Je ne sais comparer avec « = » que des nombres.'));
             }
             case 'call': return callFn(node, env);
         }
-        fail('Je ne comprends pas ce calcul.');
+        fail(i18n('Je ne comprends pas ce calcul.'));
     }
     function lookup(node, env) {
         const n = node.name;
         if (env.vars && Object.prototype.hasOwnProperty.call(env.vars, n)) return env.vars[n];
         const c = CONSTS[n] ?? CONSTS[fold(n)];
         if (c === 'π') return Math.PI; if (c === 'e') return Math.E; if (c === 'φ') return (1 + Math.sqrt(5)) / 2; if (c === 'i') return new Cx(0, 1);
-        if (c === '∞') fail('L’infini (∞) n’est pas un nombre : je ne peux pas calculer avec.');
-        if (c === 'ans') { if (env.ans === undefined || env.ans === null) fail('Il n’y a pas encore de résultat précédent (ans).'); return env.ans; }
-        if (isFn(n)) fail(`${n} est une fonction : écris ${n}(…) avec son nombre entre parenthèses.`, {pos: node.pos});
-        if (VAR_LETTERS.test(n)) fail(`La lettre « ${n} » n’a pas de valeur.`, {pos: node.pos, hint: env.top ? `Pour une équation, ajoute « = … » (x² = 4) ; pour une courbe, ouvre l’onglet 📈 Courbes.` : ''});
+        if (c === '∞') fail(i18n('L’infini (∞) n’est pas un nombre : je ne peux pas calculer avec.'));
+        if (c === 'ans') { if (env.ans === undefined || env.ans === null) fail(i18n('Il n’y a pas encore de résultat précédent (ans).')); return env.ans; }
+        if (isFn(n)) fail(i18n('{n} est une fonction : écris {n2}(…) avec son nombre entre parenthèses.', {n, n2: n}), {pos: node.pos});
+        if (VAR_LETTERS.test(n)) fail(i18n('La lettre « {n} » n’a pas de valeur.', {n}), {pos: node.pos, hint: env.top ? i18n('Pour une équation, ajoute « = … » (x² = 4) ; pour une courbe, ouvre l’onglet 📈 Courbes.') : ''});
         const s = suggest(n);
-        fail(`Je ne connais pas « ${n} ».${s ? ` Voulais-tu dire « ${s} » ?` : ''}`, {pos: node.pos, hint: 'La liste des fonctions est dans le mode 🧪 Scientifique (rubriques en haut des touches).'});
+        fail(`${i18n('Je ne connais pas « {n} ».', {n})}${s ? ` ${i18n('Voulais-tu dire « {s} » ?', {s})}` : ''}`, {pos: node.pos, hint: i18n('La liste des fonctions est dans le mode 🧪 Scientifique (rubriques en haut des touches).')});
     }
     /** distance entre deux mots (une lettre en trop, en moins, changée ou deux lettres inversées = 1) */
     const lev = (a, b) => { const m = a.length, n = b.length, d = Array.from({length: m + 1}, (_, i) => [i]); for (let j = 1; j <= n; j++) d[0][j] = j; for (let i = 1; i <= m; i++) for (let j = 1; j <= n; j++) { d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1); } return d[m][n]; };
@@ -612,12 +614,12 @@
     }
     function callFn(node, env) {
         const key = fnKey(node.name), def = FN[key];
-        if (!def) fail(`Je ne connais pas la fonction « ${node.name} ».`, {pos: node.pos});
+        if (!def) fail(i18n('Je ne connais pas la fonction « {name} ».', {name: node.name}), {pos: node.pos});
         const n = node.args.length, show = def.show || key;
         if (n < def.min || n > def.max) {
-            const need = def.min === def.max ? `${def.min} nombre${def.min > 1 ? 's' : ''}` : def.max === Infinity ? `au moins ${def.min} nombre${def.min > 1 ? 's' : ''}` : `${def.min} à ${def.max} nombres`;
+            const need = def.min === def.max ? PL(def.min, 'nombre') : def.max === Infinity ? i18n('au moins {n}', {n: PL(def.min, 'nombre')}) : i18n('{min} à {max} nombres', {min: def.min, max: def.max});
             const commaNum = env.dec === ',' && node.args.some(a => a.k === 'num' && /,/.test(a.raw || ''));
-            fail(`${show}(…) demande ${need}${def.min > 1 || def.max > 1 ? ', séparés par « ; »' : ''}.`, {pos: node.pos, hint: commaNum ? `La virgule sert aux nombres à virgule (2,5) : sépare les nombres avec « ; », par exemple ${def.ex || show + '(12 ; 18)'}.` : def.ex ? `Par exemple : ${def.ex}` : ''});
+            fail(`${show}(…) demande ${need}${def.min > 1 || def.max > 1 ? i18n(', séparés par « ; »') : ''}.`, {pos: node.pos, hint: commaNum ? i18n('La virgule sert aux nombres à virgule (2,5) : sépare les nombres avec « ; », par exemple {x}.', {x: def.ex || show + '(12 ; 18)'}) : def.ex ? i18n('Par exemple : {ex}', {ex: def.ex}) : ''});
         }
         if (def.lazy) return def.f(node.args, env, node);
         const vals = node.args.map(a => evaluateNode(a, env));
@@ -690,7 +692,7 @@
     function polyRoots(coefs) {
         let c = coefs.slice(); while (c.length > 1 && isZero(c[0])) c.shift();
         const deg = c.length - 1; if (deg < 1) return {deg, roots: []};
-        if (deg > 4) fail('Je résous les équations jusqu’au degré 4.');
+        if (deg > 4) fail(i18n('Je résous les équations jusqu’au degré 4.'));
         const roots = []; const exact = c.every(isF);
         let rest = c;
         if (exact) { const rr = rationalRoots(c); rr.roots.forEach(v => roots.push({v})); rest = rr.rest; }
@@ -768,10 +770,10 @@
         const list = [...fv].filter(v => VAR_LETTERS.test(v));
         if (list.length === 1) return list[0];
         if (!list.length) return 'x';
-        fail(`Plusieurs lettres inconnues (${list.join(', ')}) : pour un système, écris toutes les équations dans resoudre(… ; …).`);
+        fail(i18n('Plusieurs lettres inconnues ({x}) : pour un système, écris toutes les équations dans resoudre(… ; …).', {x: list.join(', ')}));
     }
     function solveTxt(name, roots, extra = {}) {
-        if (!roots.length) return new Txt(`Aucune solution${extra.none ? ' ' + extra.none : ''}`, `Aucune solution${extra.none ? ' ' + esc(extra.none) : ''}`, {solve: true, roots: [], ...extra});
+        if (!roots.length) return new Txt(`${i18n('Aucune solution')}${extra.none ? ' ' + extra.none : ''}`, `${i18n('Aucune solution')}${extra.none ? ' ' + esc(extra.none) : ''}`, {solve: true, roots: [], ...extra});
         const item = r => { const f = formatValue(r.v, extra.fmt || {}); const m = r.mult > 1 ? ` (${['', '', 'double', 'triple', 'quadruple'][r.mult] || r.mult + ' fois'})` : ''; return {text: `${name} = ${f.text}${m}`, html: `<i>${esc(name)}</i> = ${f.html}${esc(m)}`}; };
         const its = roots.map(item);
         const formTxt = roots.find(r => r.form) ? `${name} = ${roots.find(r => r.form).form}` : '';
@@ -785,31 +787,31 @@
             if (poly) {
                 if (poly.deg === 0 || poly.coefs.length === 1 || poly.coefs.every((c, i) => i === poly.coefs.length - 1 || isZero(c))) {
                     const c0 = poly.coefs[poly.coefs.length - 1];
-                    return isZero(c0) ? new Txt('Toujours vrai', `Toujours vrai : tout nombre ${esc(name)} convient.`, {solve: true, roots: []}) : solveTxt(name, [], {none: '(l’égalité est toujours fausse)'});
+                    return isZero(c0) ? new Txt('Toujours vrai', i18n('Toujours vrai : tout nombre {name} convient.', {name: esc(name)}), {solve: true, roots: []}) : solveTxt(name, [], {none: i18n('(l’égalité est toujours fausse)')});
                 }
                 const r = polyRoots(poly.coefs);
                 const inRange = range ? r.roots.filter(x => !isC(x.v) && toF(x.v) >= range[0] && toF(x.v) <= range[1]) : r.roots;
-                return solveTxt(name, inRange, {fmt: env.fmt, none: range ? `entre ${range[0]} et ${range[1]}` : '', note: `Équation du ${r.deg === 1 ? '1er' : r.deg + 'e'} degré${range ? `, solutions entre ${range[0]} et ${range[1]}` : ''}.`});
+                return solveTxt(name, inRange, {fmt: env.fmt, none: range ? i18n('entre {x} et {x2}', {x: range[0], x2: range[1]}) : '', note: i18n(r.deg === 1 ? 'Équation du 1er degré{x2}.' : 'Équation du {x}e degré{x2}.', {x: r.deg, x2: range ? i18n(', solutions entre {x} et {x2}', {x: range[0], x2: range[1]}) : ''})});
             }
             const [a, b] = range || [-100, 100];
             const f = realFn(e, {...env, inEq: true}, name), roots = numericRoots(f, a, b);
-            return solveTxt(name, roots.map(v => ({v: snap(v)})), {fmt: env.fmt, none: `entre ${a} et ${b}`, note: `Solutions cherchées entre ${a} et ${b}${roots.length ? ' (valeurs approchées)' : ''}.`});
+            return solveTxt(name, roots.map(v => ({v: snap(v)})), {fmt: env.fmt, none: i18n('entre {a} et {b}', {a, b}), note: `${i18n('Solutions cherchées entre {a} et {b}{x}.', {a, b, x: roots.length ? ` ${i18n('(valeurs approchées)')}` : ''})}`});
         }
         // système du 1er degré
         const fv = new Set(); exprs.forEach(n => freeVars(n, new Set(), fv));
         const vars = [...fv].filter(v => VAR_LETTERS.test(v)).sort((p, q) => 'xyztuvw'.indexOf(p) - 'xyztuvw'.indexOf(q) || p.localeCompare(q));
-        if (!vars.length) fail('Ce système n’a pas d’inconnue (x, y, z…).');
-        if (vars.length > 6) fail('Je résous les systèmes jusqu’à 6 inconnues.');
+        if (!vars.length) fail(i18n('Ce système n’a pas d’inconnue (x, y, z…).'));
+        if (vars.length > 6) fail(i18n('Je résous les systèmes jusqu’à 6 inconnues.'));
         const at = (e, vals) => evaluateNode(e, {...env, inEq: true, vars: {...(env.vars || {}), ...Object.fromEntries(vars.map((v, i) => [v, vals[i]]))}});
         const z = vars.map(() => ZERO), A = [], B = [];
         exprs.forEach(e => {
             const c0 = at(e, z); const row = vars.map((_, j) => sub(at(e, vars.map((__, k) => (k === j ? ONE : ZERO))), c0));
-            for (const test of [vars.map((_, k) => fr(k + 2)), vars.map((_, k) => fr(1, k + 3))]) { const pred = row.reduce((s, a, k) => add(s, mul(a, test[k])), c0), got = at(e, test), d = sub(pred, got); if (isF(d) ? !isZero(d) : absNum(d) > 1e-9 * Math.max(1, absNum(got))) fail('Ce système n’est pas du premier degré : je sais résoudre les systèmes où les inconnues ne sont ni multipliées entre elles, ni au carré.'); }
+            for (const test of [vars.map((_, k) => fr(k + 2)), vars.map((_, k) => fr(1, k + 3))]) { const pred = row.reduce((s, a, k) => add(s, mul(a, test[k])), c0), got = at(e, test), d = sub(pred, got); if (isF(d) ? !isZero(d) : absNum(d) > 1e-9 * Math.max(1, absNum(got))) fail(i18n('Ce système n’est pas du premier degré : je sais résoudre les systèmes où les inconnues ne sont ni multipliées entre elles, ni au carré.')); }
             A.push(row); B.push(neg(c0));
         });
         const sol = solveLinear(new Mat(A), B);
         const its = vars.map((v, i) => { const f = formatValue(sol[i], env.fmt || {}); return {text: `${v} = ${f.text}`, html: `<i>${esc(v)}</i> = ${f.html}`}; });
-        return new Txt(its.map(x => x.text).join(' ; '), its.map(x => x.html).join(' <span class="cm-or">;</span> '), {solve: true, system: true, roots: sol, note: `Système de ${exprs.length} équations à ${vars.length} inconnue${vars.length > 1 ? 's' : ''}.`});
+        return new Txt(its.map(x => x.text).join(' ; '), its.map(x => x.html).join(' <span class="cm-or">;</span> '), {solve: true, system: true, roots: sol, note: i18n('Système de {eq} à {unk}.', {eq: PL(exprs.length, 'équation'), unk: PL(vars.length, 'inconnue')})});
     }
     function derivative(node, env, name, a) {
         const poly = polyOf(node, env, name, 12);
@@ -822,26 +824,26 @@
             for (let j = 1; j <= i; j++) { t[i][j] = (t[i][j - 1] * fac - t[i - 1][j - 1]) / (fac - 1); fac *= 1.96; const e = Math.max(Math.abs(t[i][j] - t[i][j - 1]), Math.abs(t[i][j] - t[i - 1][j - 1])); if (e <= err) { err = e; best = t[i][j]; } }
             if (Math.abs(t[i][i] - t[i - 1][i - 1]) >= 2 * err) break;
         }
-        if (!Number.isFinite(best)) fail(`La dérivée n’existe pas en ${name} = ${formatValue(a).text}.`);
+        if (!Number.isFinite(best)) fail(i18n('La dérivée n’existe pas en {name} = {x}.', {name, x: formatValue(a).text}));
         return snap(best);
     }
     function integral(node, env, name, a, b) {
         const poly = polyOf(node, env, name, 12);
         if (poly && poly.exact && isF(a) && isF(b)) { const n = poly.coefs.length - 1, P = [...poly.coefs.map((c, i) => div(c, fr(n - i + 1))), ZERO]; return sub(polyEval(P, b), polyEval(P, a)); }
         const f = realFn(node, env, name), A = toF(a), B = toF(b);
-        if (!Number.isFinite(A) || !Number.isFinite(B)) fail('Les bornes de l’intégrale doivent être des nombres.');
+        if (!Number.isFinite(A) || !Number.isFinite(B)) fail(i18n('Les bornes de l’intégrale doivent être des nombres.'));
         let evals = 0;
         const XK = [0.991455371120813, 0.949107912342759, 0.864864423359769, 0.741531185599394, 0.586087235467691, 0.405845151377397, 0.207784955007898, 0];
         const WK = [0.022935322010529, 0.063092092629979, 0.104790010322250, 0.140653259715525, 0.169004726639267, 0.190350578064785, 0.204432940075298, 0.209482141084728];
         const WG = [0.129484966168870, 0.279705391489277, 0.381830050505119, 0.417959183673469];
         const gk = (lo, hi) => { const c = (lo + hi) / 2, hl = (hi - lo) / 2; let k = 0, g = 0; for (let i = 0; i < 8; i++) { const dx = hl * XK[i], y = i === 7 ? f(c) : f(c - dx) + f(c + dx); evals += i === 7 ? 1 : 2; k += WK[i] * y; if (i % 2 === 1) g += WG[(i - 1) / 2] * y; } return [k * hl, Math.abs((k - g) * hl)]; };
-        const rec = (lo, hi, tol, depth) => { const [v, e] = gk(lo, hi); if (!Number.isFinite(v)) fail('L’intégrale ne converge pas (la fonction part à l’infini entre les bornes).'); if (e <= tol || depth > 40 || evals > 200000) return v; const m = (lo + hi) / 2; return rec(lo, m, tol / 2, depth + 1) + rec(m, hi, tol / 2, depth + 1); };
+        const rec = (lo, hi, tol, depth) => { const [v, e] = gk(lo, hi); if (!Number.isFinite(v)) fail(i18n('L’intégrale ne converge pas (la fonction part à l’infini entre les bornes).')); if (e <= tol || depth > 40 || evals > 200000) return v; const m = (lo + hi) / 2; return rec(lo, m, tol / 2, depth + 1) + rec(m, hi, tol / 2, depth + 1); };
         const v = rec(A, B, 1e-11 * Math.max(1, Math.abs(B - A)), 0);
         return snap(v);
     }
     function seriesSum(node, env, name, a, b, product = false) {
-        const lo = intOf(a, 'Somme'), hi = intOf(b, 'Somme');
-        if (hi - lo > BigInt(LIMITS.sum)) fail(`Trop de termes (au plus ${LIMITS.sum}).`);
+        const lo = intOf(a, i18n('Somme')), hi = intOf(b, i18n('Somme'));
+        if (hi - lo > BigInt(LIMITS.sum)) fail(i18n('Trop de termes (au plus {sum}).', {sum: LIMITS.sum}));
         let s = product ? ONE : ZERO; for (let k = lo; k <= hi; k++) { const v = evalAt(node, env, name, fr(k)); s = product ? mul(s, v) : add(s, v); }
         return s;
     }
@@ -856,120 +858,120 @@
     const one = f => (v, env) => f(v[0], env);
     const asDec = x => mapNum(x, v => (isF(v) && v.d !== 1n ? toF(v) : v)); // un arrondi s'écrit avec une virgule (3,14), pas en fraction
     const trig = (rf, cf, ex, exName) => one((x, env) => mapNum(x, v => { if (ex) { const e = ex(v, env); if (e !== null) return e; } return isC(v) ? cf(v) : fracOfFloat(rf(toF(toRad(v, env)))); }));
-    def('sin', {group: 'trig', desc: 'Sinus (dans l’unité d’angle choisie)', ex: 'sin(30)'}, trig(Math.sin, csin, exactSin));
-    def('cos', {group: 'trig', desc: 'Cosinus', ex: 'cos(60)'}, trig(Math.cos, ccos, exactCos));
-    def('tan', {group: 'trig', desc: 'Tangente', ex: 'tan(45)'}, one((x, env) => mapNum(x, v => { const s = exactSin(v, env), c = exactCos(v, env); if (c !== null && isZero(c)) fail(`tan(${formatValue(v).text}${env.angle === 'deg' ? '°' : ''}) n’existe pas (le cosinus vaut 0).`); if (s !== null && c !== null) return div(s, c); if (isC(v)) return div(csin(v), ccos(v)); const r = toF(toRad(v, env)), cr = Math.cos(r); if (Math.abs(cr) < 1e-15) fail('Cette tangente n’existe pas (le cosinus vaut 0).'); if (env.angle === 'deg' && isInt(v) && Number(((v.n % 180n) + 180n) % 180n) === 45) return Number(((v.n % 180n) + 180n) % 180n) === 45 ? ONE : new Frac(-1n, 1n); if (env.angle === 'deg' && isInt(v) && Number(((v.n % 180n) + 180n) % 180n) === 135) return new Frac(-1n, 1n); return fracOfFloat(Math.tan(r)); })));
-    const inverse = (rf, cf, dom, nm) => one((x, env) => mapNum(x, v => { if (!isC(v) && !dom(toF(v))) fail(`${nm}(…) demande un nombre entre −1 et 1.`); if (!isC(v) && dom(toF(v))) { const r = rf(toF(v)); const out = fromRad(r, env); return isR(out) ? snap(out) : out; } const z = cf(v); return env.angle === 'rad' ? z : div(z, ANGLE[env.angle]); }));
-    def('asin arcsin', {group: 'trig', desc: 'Arc sinus (angle dont le sinus vaut x)', ex: 'asin(0,5)'}, inverse(Math.asin, casin, v => v >= -1 && v <= 1, 'asin'));
-    def('acos arccos', {group: 'trig', desc: 'Arc cosinus', ex: 'acos(0,5)'}, inverse(Math.acos, cacos, v => v >= -1 && v <= 1, 'acos'));
-    def('atan arctan', {group: 'trig', desc: 'Arc tangente', ex: 'atan(1)'}, inverse(Math.atan, catan, () => true, 'atan'));
-    def('atan2', {group: 'trig', min: 2, max: 2, desc: 'Angle du point (x ; y) : atan2(y ; x)', ex: 'atan2(1 ; 1)'}, (v, env) => { const r = Math.atan2(toF(real(v[0], 'atan2')), toF(real(v[1], 'atan2'))); return snap(toF(fromRad(r, env))); });
+    def('sin', {group: 'trig', desc: i18n('Sinus (dans l’unité d’angle choisie)'), ex: 'sin(30)'}, trig(Math.sin, csin, exactSin));
+    def('cos', {group: 'trig', desc: i18n('Cosinus'), ex: 'cos(60)'}, trig(Math.cos, ccos, exactCos));
+    def('tan', {group: 'trig', desc: i18n('Tangente'), ex: 'tan(45)'}, one((x, env) => mapNum(x, v => { const s = exactSin(v, env), c = exactCos(v, env); if (c !== null && isZero(c)) fail(i18n('tan({x}{x2}) n’existe pas (le cosinus vaut 0).', {x: formatValue(v).text, x2: env.angle === 'deg' ? '°' : ''})); if (s !== null && c !== null) return div(s, c); if (isC(v)) return div(csin(v), ccos(v)); const r = toF(toRad(v, env)), cr = Math.cos(r); if (Math.abs(cr) < 1e-15) fail(i18n('Cette tangente n’existe pas (le cosinus vaut 0).')); if (env.angle === 'deg' && isInt(v) && Number(((v.n % 180n) + 180n) % 180n) === 45) return Number(((v.n % 180n) + 180n) % 180n) === 45 ? ONE : new Frac(-1n, 1n); if (env.angle === 'deg' && isInt(v) && Number(((v.n % 180n) + 180n) % 180n) === 135) return new Frac(-1n, 1n); return fracOfFloat(Math.tan(r)); })));
+    const inverse = (rf, cf, dom, nm) => one((x, env) => mapNum(x, v => { if (!isC(v) && !dom(toF(v))) fail(i18n('{nm}(…) demande un nombre entre −1 et 1.', {nm})); if (!isC(v) && dom(toF(v))) { const r = rf(toF(v)); const out = fromRad(r, env); return isR(out) ? snap(out) : out; } const z = cf(v); return env.angle === 'rad' ? z : div(z, ANGLE[env.angle]); }));
+    def('asin arcsin', {group: 'trig', desc: i18n('Arc sinus (angle dont le sinus vaut x)'), ex: 'asin(0,5)'}, inverse(Math.asin, casin, v => v >= -1 && v <= 1, 'asin'));
+    def('acos arccos', {group: 'trig', desc: i18n('Arc cosinus'), ex: 'acos(0,5)'}, inverse(Math.acos, cacos, v => v >= -1 && v <= 1, 'acos'));
+    def('atan arctan', {group: 'trig', desc: i18n('Arc tangente'), ex: 'atan(1)'}, inverse(Math.atan, catan, () => true, 'atan'));
+    def('atan2', {group: 'trig', min: 2, max: 2, desc: i18n('Angle du point (x ; y) : atan2(y ; x)'), ex: 'atan2(1 ; 1)'}, (v, env) => { const r = Math.atan2(toF(real(v[0], 'atan2')), toF(real(v[1], 'atan2'))); return snap(toF(fromRad(r, env))); });
     const hyp = (rf, cf) => one(x => rc(x, rf, cf));
-    def('sinh sh', {group: 'hyp', desc: 'Sinus hyperbolique', ex: 'sinh(1)'}, hyp(Math.sinh, z => mul(0.5, sub(cexp(z), cexp(neg(z))))));
-    def('cosh ch', {group: 'hyp', desc: 'Cosinus hyperbolique', ex: 'cosh(1)'}, hyp(Math.cosh, z => mul(0.5, add(cexp(z), cexp(neg(z))))));
-    def('tanh th', {group: 'hyp', desc: 'Tangente hyperbolique', ex: 'tanh(1)'}, hyp(Math.tanh, z => { const a = cexp(z), b = cexp(neg(z)); return div(sub(a, b), add(a, b)); }));
-    def('asinh argsh arcsinh', {group: 'hyp', desc: 'Argument sinus hyperbolique', ex: 'asinh(1)'}, hyp(Math.asinh, z => clog(add(z, sqrt(add(mul(z, z), ONE))))));
-    def('acosh argch arccosh', {group: 'hyp', desc: 'Argument cosinus hyperbolique', ex: 'acosh(2)'}, one(x => rc(x, Math.acosh, z => clog(add(z, mul(sqrt(add(z, ONE)), sqrt(sub(z, ONE))))), v => v >= 1)));
-    def('atanh argth arctanh', {group: 'hyp', desc: 'Argument tangente hyperbolique', ex: 'atanh(0,5)'}, one(x => rc(x, Math.atanh, z => mul(0.5, sub(clog(add(ONE, z)), clog(sub(ONE, z)))), v => v > -1 && v < 1)));
-    const lnE = x => mapNum(x, v => { if (isZero(v)) fail('ln(0) n’existe pas (il part vers −∞).', {hint: 'Le logarithme demande un nombre plus grand que 0.'}); if (isInt(v) && v.n === 1n) return ZERO; if (!isC(v) && toF(v) > 0) return fracOfFloat(Math.log(toF(v))); return clog(v); });
-    def('ln', {group: 'log', desc: 'Logarithme népérien (base e)', ex: 'ln(e)'}, one(lnE));
-    def('log lg', {group: 'log', max: 2, desc: 'Logarithme décimal ; log(x ; b) en base b', ex: 'log(1000)'}, v => {
+    def('sinh sh', {group: 'hyp', desc: i18n('Sinus hyperbolique'), ex: 'sinh(1)'}, hyp(Math.sinh, z => mul(0.5, sub(cexp(z), cexp(neg(z))))));
+    def('cosh ch', {group: 'hyp', desc: i18n('Cosinus hyperbolique'), ex: 'cosh(1)'}, hyp(Math.cosh, z => mul(0.5, add(cexp(z), cexp(neg(z))))));
+    def('tanh th', {group: 'hyp', desc: i18n('Tangente hyperbolique'), ex: 'tanh(1)'}, hyp(Math.tanh, z => { const a = cexp(z), b = cexp(neg(z)); return div(sub(a, b), add(a, b)); }));
+    def('asinh argsh arcsinh', {group: 'hyp', desc: i18n('Argument sinus hyperbolique'), ex: 'asinh(1)'}, hyp(Math.asinh, z => clog(add(z, sqrt(add(mul(z, z), ONE))))));
+    def('acosh argch arccosh', {group: 'hyp', desc: i18n('Argument cosinus hyperbolique'), ex: 'acosh(2)'}, one(x => rc(x, Math.acosh, z => clog(add(z, mul(sqrt(add(z, ONE)), sqrt(sub(z, ONE))))), v => v >= 1)));
+    def('atanh argth arctanh', {group: 'hyp', desc: i18n('Argument tangente hyperbolique'), ex: 'atanh(0,5)'}, one(x => rc(x, Math.atanh, z => mul(0.5, sub(clog(add(ONE, z)), clog(sub(ONE, z)))), v => v > -1 && v < 1)));
+    const lnE = x => mapNum(x, v => { if (isZero(v)) fail(i18n('ln(0) n’existe pas (il part vers −∞).'), {hint: i18n('Le logarithme demande un nombre plus grand que 0.')}); if (isInt(v) && v.n === 1n) return ZERO; if (!isC(v) && toF(v) > 0) return fracOfFloat(Math.log(toF(v))); return clog(v); });
+    def('ln', {group: 'log', desc: i18n('Logarithme népérien (base e)'), ex: 'ln(e)'}, one(lnE));
+    def('log lg', {group: 'log', max: 2, desc: i18n('Logarithme décimal ; log(x ; b) en base b'), ex: 'log(1000)'}, v => {
         const b = v[1] ?? fr(10), x = v[0];
         if (isF(x) && isF(b) && x.n > 0n && b.n > 0n && !(b.n === b.d)) { // puissance exacte : log(1000) = 3, log(8 ; 2) = 3, log(1/100) = −2
             for (let k = -200; k <= 200; k++) { if (k === 0) continue; const p = pow(b, fr(k)); if (isF(p) && cmp(p, x) === 0) return fr(k); if (Math.abs(k) > 3 && Math.abs(Math.log(toF(x)) / Math.log(toF(b)) - k) > 2) { if (k > 0) break; } }
             if (x.n === x.d) return ZERO;
         }
-        if (isF(b) && b.n === b.d) fail('La base d’un logarithme ne peut pas valoir 1.');
+        if (isF(b) && b.n === b.d) fail(i18n('La base d’un logarithme ne peut pas valoir 1.'));
         return div(lnE(x), lnE(b));
     });
-    def('log2', {group: 'log', desc: 'Logarithme en base 2', ex: 'log2(1024)'}, v => FN.log.f([v[0], fr(2)]));
-    def('exp', {group: 'log', desc: 'Exponentielle : e puissance x', ex: 'exp(1)'}, one(x => mapNum(x, v => (isZero(v) ? ONE : isC(v) ? cexp(v) : fracOfFloat(Math.exp(toF(v)))))));
-    def('sqrt racine rac', {group: 'pow', max: 2, desc: 'Racine carrée ; racine(x ; n) : racine n-ième', ex: 'racine(2)', show: 'racine'}, v => (v.length === 2 ? FN.root.f(v) : sqrt(v[0])));
-    def('cbrt', {group: 'pow', desc: 'Racine cubique', ex: 'cbrt(27)', show: 'cbrt'}, v => FN.root.f([v[0], fr(3)]));
-    def('root4', {group: 'pow', desc: 'Racine 4e', show: '∜'}, v => FN.root.f([v[0], fr(4)]));
-    def('root nroot', {group: 'pow', min: 2, max: 2, desc: 'Racine n-ième : root(x ; n)', ex: 'root(32 ; 5)'}, v => { const n = intOf(v[1], 'Racine'); if (n === 0n) fail('La racine 0-ième n’existe pas.'); const x = real(v[0], 'Racine'); if (cmp(x, ZERO) < 0 && n % 2n === 0n) return pow(x, fr(1n, n)); if (cmp(x, ZERO) < 0) return neg(pow(neg(x), fr(1n, n))); return pow(x, fr(1n, n)); });
-    def('abs valeurabsolue', {group: 'pow', desc: 'Valeur absolue (ou module d’un complexe) : |x|', ex: 'abs(-5)'}, one(x => mapNum(x, v => (isF(v) ? babs2(v) : isC(v) ? fracOfFloat(cabs(v)) : Math.abs(v)))));
-    def('fact factorielle', {group: 'arith', desc: 'Factorielle : n! = 1 × 2 × … × n', ex: '10!'}, one(x => mapNum(x, factorial)));
-    def('gamma', {group: 'arith', desc: 'Fonction Γ : Γ(n) = (n − 1)!', ex: 'gamma(0,5)'}, one(x => mapNum(x, v => factorial(sub(v, ONE)))));
+    def('log2', {group: 'log', desc: i18n('Logarithme en base 2'), ex: 'log2(1024)'}, v => FN.log.f([v[0], fr(2)]));
+    def('exp', {group: 'log', desc: i18n('Exponentielle : e puissance x'), ex: 'exp(1)'}, one(x => mapNum(x, v => (isZero(v) ? ONE : isC(v) ? cexp(v) : fracOfFloat(Math.exp(toF(v)))))));
+    def('sqrt racine rac', {group: 'pow', max: 2, desc: i18n('Racine carrée ; racine(x ; n) : racine n-ième'), ex: 'racine(2)', show: 'racine'}, v => (v.length === 2 ? FN.root.f(v) : sqrt(v[0])));
+    def('cbrt', {group: 'pow', desc: i18n('Racine cubique'), ex: 'cbrt(27)', show: 'cbrt'}, v => FN.root.f([v[0], fr(3)]));
+    def('root4', {group: 'pow', desc: i18n('Racine 4e'), show: '∜'}, v => FN.root.f([v[0], fr(4)]));
+    def('root nroot', {group: 'pow', min: 2, max: 2, desc: i18n('Racine n-ième : root(x ; n)'), ex: 'root(32 ; 5)'}, v => { const n = intOf(v[1], i18n('Racine')); if (n === 0n) fail(i18n('La racine 0-ième n’existe pas.')); const x = real(v[0], i18n('Racine')); if (cmp(x, ZERO) < 0 && n % 2n === 0n) return pow(x, fr(1n, n)); if (cmp(x, ZERO) < 0) return neg(pow(neg(x), fr(1n, n))); return pow(x, fr(1n, n)); });
+    def('abs valeurabsolue', {group: 'pow', desc: i18n('Valeur absolue (ou module d’un complexe) : |x|'), ex: 'abs(-5)'}, one(x => mapNum(x, v => (isF(v) ? babs2(v) : isC(v) ? fracOfFloat(cabs(v)) : Math.abs(v)))));
+    def('fact factorielle', {group: 'arith', desc: i18n('Factorielle : n! = 1 × 2 × … × n'), ex: '10!'}, one(x => mapNum(x, factorial)));
+    def('gamma', {group: 'arith', desc: i18n('Fonction Γ : Γ(n) = (n − 1)!'), ex: 'gamma(0,5)'}, one(x => mapNum(x, v => factorial(sub(v, ONE)))));
     // complexes
-    def('re reel', {group: 'cx', desc: 'Partie réelle', ex: 're(3+4i)'}, one(x => mapNum(x, v => (isC(v) ? fracOfFloat(v.re) : v))));
-    def('im imag imaginaire', {group: 'cx', desc: 'Partie imaginaire', ex: 'im(3+4i)'}, one(x => mapNum(x, v => (isC(v) ? fracOfFloat(v.im) : ZERO))));
-    def('module mod_ norme', {group: 'cx', desc: 'Module |z| = √(a² + b²)', ex: 'module(3+4i)'}, one(x => mapNum(x, v => (isC(v) ? snap(cabs(v)) : babs2(isF(v) ? v : fracOfFloat(Math.abs(v)))))));
-    def('arg argument', {group: 'cx', desc: 'Argument (angle) d’un complexe', ex: 'arg(1+i)'}, one((x, env) => mapNum(x, v => { const [r, i] = parts(v); if (r === 0 && i === 0) fail('L’argument de 0 n’existe pas.'); return snap(toF(fromRad(Math.atan2(i, r), env))); })));
-    def('conj conjugue', {group: 'cx', desc: 'Conjugué : a − bi', ex: 'conj(3+4i)'}, one(x => mapNum(x, v => (isC(v) ? cx(v.re, -v.im) : v))));
+    def('re reel', {group: 'cx', desc: i18n('Partie réelle'), ex: 're(3+4i)'}, one(x => mapNum(x, v => (isC(v) ? fracOfFloat(v.re) : v))));
+    def('im imag imaginaire', {group: 'cx', desc: i18n('Partie imaginaire'), ex: 'im(3+4i)'}, one(x => mapNum(x, v => (isC(v) ? fracOfFloat(v.im) : ZERO))));
+    def('module mod_ norme', {group: 'cx', desc: i18n('Module |z| = √(a² + b²)'), ex: 'module(3+4i)'}, one(x => mapNum(x, v => (isC(v) ? snap(cabs(v)) : babs2(isF(v) ? v : fracOfFloat(Math.abs(v)))))));
+    def('arg argument', {group: 'cx', desc: i18n('Argument (angle) d’un complexe'), ex: 'arg(1+i)'}, one((x, env) => mapNum(x, v => { const [r, i] = parts(v); if (r === 0 && i === 0) fail(i18n('L’argument de 0 n’existe pas.')); return snap(toF(fromRad(Math.atan2(i, r), env))); })));
+    def('conj conjugue', {group: 'cx', desc: i18n('Conjugué : a − bi'), ex: 'conj(3+4i)'}, one(x => mapNum(x, v => (isC(v) ? cx(v.re, -v.im) : v))));
     // arrondis
-    def('arrondi round', {group: 'arith', max: 2, desc: 'Arrondi (au plus proche) ; arrondi(x ; n) avec n chiffres après la virgule', ex: 'arrondi(3,14159 ; 2)'}, v => asDec(roundTo(v[0], v[1] ? Number(intOf(v[1], 'Arrondi')) : 0)));
-    def('ent floor plancher', {group: 'arith', desc: 'Partie entière (vers le bas)', ex: 'ent(-2,5)'}, one(x => roundTo(x, 0, 'floor')));
-    def('plafond ceil', {group: 'arith', desc: 'Arrondi vers le haut', ex: 'plafond(2,1)'}, one(x => roundTo(x, 0, 'ceil')));
-    def('tronque trunc', {group: 'arith', max: 2, desc: 'Coupe les chiffres après la virgule (vers 0)', ex: 'tronque(-2,7)'}, v => asDec(roundTo(v[0], v[1] ? Number(intOf(v[1], 'Tronque')) : 0, 'trunc')));
-    def('frac fraction', {group: 'arith', desc: 'Écrit un nombre à virgule en fraction', ex: 'frac(0,75)'}, one(x => mapNum(x, v => { if (isF(v)) return v; const q = approxFrac(toF(v), 1e7); if (!q) fail('Je ne trouve pas de fraction simple pour ce nombre.'); return q; })));
-    def('dec decimal', {group: 'arith', desc: 'Écrit le nombre en décimal', ex: 'dec(1/3)'}, one(x => mapNum(x, v => (isF(v) && v.d !== 1n ? toF(v) : v))));
-    def('signe sign', {group: 'arith', desc: 'Signe : −1, 0 ou 1', ex: 'signe(-3)'}, one(x => fr(cmp(real(x, 'Signe'), ZERO))));
-    def('mod modulo', {group: 'arith', min: 2, max: 2, desc: 'Reste de la division : 17 mod 5', ex: '17 mod 5', show: 'mod'}, v => { const a = real(v[0], 'mod'), b = real(v[1], 'mod'); if (isZero(b)) fail('Division par zéro : on ne peut pas diviser par 0.'); return sub(a, mul(b, roundTo(div(a, b), 0, 'floor'))); });
-    def('quotient div', {group: 'arith', min: 2, max: 2, desc: 'Quotient entier', ex: 'quotient(17 ; 5)'}, v => roundTo(div(real(v[0], 'quotient'), real(v[1], 'quotient')), 0, 'floor'));
-    def('pgcd gcd', {group: 'arith', min: 2, max: Infinity, desc: 'Plus grand commun diviseur', ex: 'pgcd(12 ; 18)'}, v => fr(v.flatMap(vecOf).map(x => intOf(x, 'pgcd')).reduce(bgcd)));
-    def('ppcm lcm', {group: 'arith', min: 2, max: Infinity, desc: 'Plus petit commun multiple', ex: 'ppcm(4 ; 6)'}, v => fr(v.flatMap(vecOf).map(x => babs(intOf(x, 'ppcm'))).reduce((a, b) => (a === 0n || b === 0n ? 0n : a / bgcd(a, b) * b))));
-    def('C comb ncr combinaison', {group: 'arith', min: 2, max: 2, desc: 'Combinaisons : C(n ; k) façons de choisir k parmi n', ex: 'C(5 ; 2)', show: 'C'}, v => fr(nCk(intOf(v[0], 'C'), intOf(v[1], 'C'))));
-    def('A arr npr arrangement', {group: 'arith', min: 2, max: 2, desc: 'Arrangements : A(n ; k) (l’ordre compte)', ex: 'A(5 ; 2)', show: 'A'}, v => fr(nAk(intOf(v[0], 'A'), intOf(v[1], 'A'))));
-    def('premier isprime estpremier', {group: 'arith', desc: 'Est-ce un nombre premier ?', ex: 'premier(97)'}, one(x => { const n = intOf(x, 'premier'); const ok = isPrime(n); return new Txt(ok ? 'VRAI' : 'FAUX', ok ? `Oui, ${n} est premier ✓` : `Non, ${n} n’est pas premier`, {bool: ok, note: ok ? '' : n > 1n ? `${n} = ${factorsTxt(n).text}` : ''}); }));
-    def('facteurs factor decomposition', {group: 'arith', desc: 'Décomposition en facteurs premiers', ex: 'facteurs(360)'}, one(x => factorsTxt(intOf(x, 'facteurs'))));
-    def('premiersuivant nextprime', {group: 'arith', desc: 'Le nombre premier suivant', ex: 'premiersuivant(100)'}, one(x => { let n = intOf(x, 'premiersuivant') + 1n; let k = 0; while (!isPrime(n)) { n++; if (++k > 100000) fail('Trop loin.'); } return fr(n); }));
-    def('bin', {group: 'base', desc: 'Écrit un entier en binaire (base 2)', ex: 'bin(10)'}, one(x => toBase(x, 2)));
-    def('oct', {group: 'base', desc: 'Écrit un entier en octal (base 8)', ex: 'oct(64)'}, one(x => toBase(x, 8)));
-    def('hex', {group: 'base', desc: 'Écrit un entier en hexadécimal (base 16)', ex: 'hex(255)'}, one(x => toBase(x, 16)));
-    def('base', {group: 'base', min: 2, max: 2, desc: 'Écrit un entier dans une base de 2 à 36', ex: 'base(100 ; 3)'}, v => toBase(v[0], Number(intOf(v[1], 'base'))));
+    def('arrondi round', {group: 'arith', max: 2, desc: i18n('Arrondi (au plus proche) ; arrondi(x ; n) avec n chiffres après la virgule'), ex: 'arrondi(3,14159 ; 2)'}, v => asDec(roundTo(v[0], v[1] ? Number(intOf(v[1], i18n('Arrondi'))) : 0)));
+    def('ent floor plancher', {group: 'arith', desc: i18n('Partie entière (vers le bas)'), ex: 'ent(-2,5)'}, one(x => roundTo(x, 0, 'floor')));
+    def('plafond ceil', {group: 'arith', desc: i18n('Arrondi vers le haut'), ex: 'plafond(2,1)'}, one(x => roundTo(x, 0, 'ceil')));
+    def('tronque trunc', {group: 'arith', max: 2, desc: i18n('Coupe les chiffres après la virgule (vers 0)'), ex: 'tronque(-2,7)'}, v => asDec(roundTo(v[0], v[1] ? Number(intOf(v[1], i18n('Tronque'))) : 0, 'trunc')));
+    def('frac fraction', {group: 'arith', desc: i18n('Écrit un nombre à virgule en fraction'), ex: 'frac(0,75)'}, one(x => mapNum(x, v => { if (isF(v)) return v; const q = approxFrac(toF(v), 1e7); if (!q) fail(i18n('Je ne trouve pas de fraction simple pour ce nombre.')); return q; })));
+    def('dec decimal', {group: 'arith', desc: i18n('Écrit le nombre en décimal'), ex: 'dec(1/3)'}, one(x => mapNum(x, v => (isF(v) && v.d !== 1n ? toF(v) : v))));
+    def('signe sign', {group: 'arith', desc: i18n('Signe : −1, 0 ou 1'), ex: 'signe(-3)'}, one(x => fr(cmp(real(x, i18n('Signe')), ZERO))));
+    def('mod modulo', {group: 'arith', min: 2, max: 2, desc: i18n('Reste de la division : 17 mod 5'), ex: '17 mod 5', show: 'mod'}, v => { const a = real(v[0], 'mod'), b = real(v[1], 'mod'); if (isZero(b)) fail(i18n('Division par zéro : on ne peut pas diviser par 0.')); return sub(a, mul(b, roundTo(div(a, b), 0, 'floor'))); });
+    def('quotient div', {group: 'arith', min: 2, max: 2, desc: i18n('Quotient entier'), ex: 'quotient(17 ; 5)'}, v => roundTo(div(real(v[0], 'quotient'), real(v[1], 'quotient')), 0, 'floor'));
+    def('pgcd gcd', {group: 'arith', min: 2, max: Infinity, desc: i18n('Plus grand commun diviseur'), ex: 'pgcd(12 ; 18)'}, v => fr(v.flatMap(vecOf).map(x => intOf(x, 'pgcd')).reduce(bgcd)));
+    def('ppcm lcm', {group: 'arith', min: 2, max: Infinity, desc: i18n('Plus petit commun multiple'), ex: 'ppcm(4 ; 6)'}, v => fr(v.flatMap(vecOf).map(x => babs(intOf(x, 'ppcm'))).reduce((a, b) => (a === 0n || b === 0n ? 0n : a / bgcd(a, b) * b))));
+    def('C comb ncr combinaison', {group: 'arith', min: 2, max: 2, desc: i18n('Combinaisons : C(n ; k) façons de choisir k parmi n'), ex: 'C(5 ; 2)', show: 'C'}, v => fr(nCk(intOf(v[0], 'C'), intOf(v[1], 'C'))));
+    def('A arr npr arrangement', {group: 'arith', min: 2, max: 2, desc: i18n('Arrangements : A(n ; k) (l’ordre compte)'), ex: 'A(5 ; 2)', show: 'A'}, v => fr(nAk(intOf(v[0], 'A'), intOf(v[1], 'A'))));
+    def('premier isprime estpremier', {group: 'arith', desc: i18n('Est-ce un nombre premier ?'), ex: 'premier(97)'}, one(x => { const n = intOf(x, 'premier'); const ok = isPrime(n); return new Txt(ok ? 'VRAI' : 'FAUX', ok ? i18n('Oui, {n} est premier ✓', {n}) : i18n('Non, {n} n’est pas premier', {n}), {bool: ok, note: ok ? '' : n > 1n ? `${n} = ${factorsTxt(n).text}` : ''}); }));
+    def('facteurs factor decomposition', {group: 'arith', desc: i18n('Décomposition en facteurs premiers'), ex: 'facteurs(360)'}, one(x => factorsTxt(intOf(x, 'facteurs'))));
+    def('premiersuivant nextprime', {group: 'arith', desc: i18n('Le nombre premier suivant'), ex: 'premiersuivant(100)'}, one(x => { let n = intOf(x, 'premiersuivant') + 1n; let k = 0; while (!isPrime(n)) { n++; if (++k > 100000) fail('Trop loin.'); } return fr(n); }));
+    def('bin', {group: 'base', desc: i18n('Écrit un entier en binaire (base 2)'), ex: 'bin(10)'}, one(x => toBase(x, 2)));
+    def('oct', {group: 'base', desc: i18n('Écrit un entier en octal (base 8)'), ex: 'oct(64)'}, one(x => toBase(x, 8)));
+    def('hex', {group: 'base', desc: i18n('Écrit un entier en hexadécimal (base 16)'), ex: 'hex(255)'}, one(x => toBase(x, 16)));
+    def('base', {group: 'base', min: 2, max: 2, desc: i18n('Écrit un entier dans une base de 2 à 36'), ex: 'base(100 ; 3)'}, v => toBase(v[0], Number(intOf(v[1], 'base'))));
     // statistiques
     const many = {group: 'stat', min: 1, max: Infinity};
-    def('moyenne mean avg', {...many, desc: 'Moyenne', ex: 'moyenne([12 ; 15 ; 9])'}, v => mean(flatNums(v, 'Moyenne')));
-    def('mediane median', {...many, desc: 'Médiane (la valeur du milieu)', ex: 'mediane([3 ; 1 ; 4 ; 1 ; 5])'}, v => median(flatNums(v, 'Médiane')));
-    def('variance var varp', {...many, desc: 'Variance (de la population)', ex: 'variance([2 ; 4 ; 4 ; 4 ; 5 ; 5 ; 7 ; 9])'}, v => variance(flatNums(v, 'Variance'), false));
-    def('ecarttype stdevp sigma', {...many, desc: 'Écart-type σ (de la population, comme au lycée)', ex: 'ecarttype([2 ; 4 ; 4 ; 4 ; 5 ; 5 ; 7 ; 9])'}, v => sqrt(variance(flatNums(v, 'Écart-type'), false)));
-    def('ecarttypee stdev ecarttypeechantillon', {...many, desc: 'Écart-type d’un échantillon (divisé par n − 1)', ex: 'ecarttype_e([1 ; 2 ; 3 ; 4])', show: 'ecarttype_e'}, v => sqrt(variance(flatNums(v, 'Écart-type'), true)));
-    def('somme sum', {group: 'stat', min: 1, max: Infinity, lazy: true, binds: a => (a.length === 4 && a[1].k === 'id' ? a[1].name : null), varArg: 1, desc: 'Somme d’une liste ; somme(k² ; k ; 1 ; 10) : somme d’une suite', ex: 'somme([1 ; 2 ; 3])'}, (args, env) => {
+    def('moyenne mean avg', {...many, desc: i18n('Moyenne', {ctx: 'calc'}), ex: 'moyenne([12 ; 15 ; 9])'}, v => mean(flatNums(v, i18n('Moyenne', {ctx: 'calc'}))));
+    def('mediane median', {...many, desc: i18n('Médiane (la valeur du milieu)'), ex: 'mediane([3 ; 1 ; 4 ; 1 ; 5])'}, v => median(flatNums(v, i18n('Médiane'))));
+    def('variance var varp', {...many, desc: i18n('Variance (de la population)'), ex: 'variance([2 ; 4 ; 4 ; 4 ; 5 ; 5 ; 7 ; 9])'}, v => variance(flatNums(v, i18n('Variance')), false));
+    def('ecarttype stdevp sigma', {...many, desc: i18n('Écart-type σ (de la population, comme au lycée)'), ex: 'ecarttype([2 ; 4 ; 4 ; 4 ; 5 ; 5 ; 7 ; 9])'}, v => sqrt(variance(flatNums(v, i18n('Écart-type')), false)));
+    def('ecarttypee stdev ecarttypeechantillon', {...many, desc: i18n('Écart-type d’un échantillon (divisé par n − 1)'), ex: 'ecarttype_e([1 ; 2 ; 3 ; 4])', show: 'ecarttype_e'}, v => sqrt(variance(flatNums(v, i18n('Écart-type')), true)));
+    def('somme sum', {group: 'stat', min: 1, max: Infinity, lazy: true, binds: a => (a.length === 4 && a[1].k === 'id' ? a[1].name : null), varArg: 1, desc: i18n('Somme d’une liste ; somme(k² ; k ; 1 ; 10) : somme d’une suite'), ex: 'somme([1 ; 2 ; 3])'}, (args, env) => {
         if (args.length === 4 && args[1].k === 'id') return seriesSum(args[0], env, args[1].name, evaluateNode(args[2], env), evaluateNode(args[3], env));
         return sum(flatNums(args.map(a => evaluateNode(a, env)), 'Somme'));
     });
-    def('produit product', {group: 'stat', min: 1, max: Infinity, lazy: true, binds: a => (a.length === 4 && a[1].k === 'id' ? a[1].name : null), varArg: 1, desc: 'Produit d’une liste ; produit(k ; k ; 1 ; 5)', ex: 'produit([2 ; 3 ; 4])'}, (args, env) => {
+    def('produit product', {group: 'stat', min: 1, max: Infinity, lazy: true, binds: a => (a.length === 4 && a[1].k === 'id' ? a[1].name : null), varArg: 1, desc: i18n('Produit d’une liste ; produit(k ; k ; 1 ; 5)'), ex: 'produit([2 ; 3 ; 4])'}, (args, env) => {
         if (args.length === 4 && args[1].k === 'id') return seriesSum(args[0], env, args[1].name, evaluateNode(args[2], env), evaluateNode(args[3], env), true);
         return flatNums(args.map(a => evaluateNode(a, env)), 'Produit').reduce((s, x) => mul(s, x), ONE);
     });
-    def('min', {...many, desc: 'Le plus petit', ex: 'min(4 ; 2 ; 8)'}, v => sortReal(flatNums(v, 'min'), 'min')[0]);
-    def('max', {...many, desc: 'Le plus grand', ex: 'max(4 ; 2 ; 8)'}, v => sortReal(flatNums(v, 'max'), 'max').at(-1));
-    def('etendue range', {...many, desc: 'Étendue : max − min', ex: 'etendue([4 ; 2 ; 8])'}, v => { const s = sortReal(flatNums(v, 'Étendue'), 'Étendue'); return sub(s.at(-1), s[0]); });
-    def('q1 quartile1', {...many, desc: '1er quartile', ex: 'q1([1 ; 2 ; 3 ; 4 ; 5 ; 6 ; 7 ; 8])'}, v => quart(flatNums(v, 'Quartile'), 0.25));
-    def('q3 quartile3', {...many, desc: '3e quartile', ex: 'q3([1 ; 2 ; 3 ; 4 ; 5 ; 6 ; 7 ; 8])'}, v => quart(flatNums(v, 'Quartile'), 0.75));
-    def('effectif count nombre', {...many, desc: 'Combien de nombres dans la liste', ex: 'effectif([4 ; 2 ; 8])'}, v => fr(flatNums(v, 'Effectif').length));
-    def('tri sort', {...many, desc: 'Range la liste du plus petit au plus grand', ex: 'tri([3 ; 1 ; 2])'}, v => new List(sortReal(flatNums(v, 'Tri'), 'Tri')));
+    def('min', {...many, desc: i18n('Le plus petit'), ex: 'min(4 ; 2 ; 8)'}, v => sortReal(flatNums(v, 'min'), 'min')[0]);
+    def('max', {...many, desc: i18n('Le plus grand'), ex: 'max(4 ; 2 ; 8)'}, v => sortReal(flatNums(v, 'max'), 'max').at(-1));
+    def('etendue range', {...many, desc: i18n('Étendue : max − min'), ex: 'etendue([4 ; 2 ; 8])'}, v => { const s = sortReal(flatNums(v, i18n('Étendue', {ctx: 'calc'})), i18n('Étendue', {ctx: 'calc'})); return sub(s.at(-1), s[0]); });
+    def('q1 quartile1', {...many, desc: i18n('1er quartile'), ex: 'q1([1 ; 2 ; 3 ; 4 ; 5 ; 6 ; 7 ; 8])'}, v => quart(flatNums(v, i18n('Quartile')), 0.25));
+    def('q3 quartile3', {...many, desc: i18n('3e quartile'), ex: 'q3([1 ; 2 ; 3 ; 4 ; 5 ; 6 ; 7 ; 8])'}, v => quart(flatNums(v, i18n('Quartile')), 0.75));
+    def('effectif count nombre', {...many, desc: i18n('Combien de nombres dans la liste'), ex: 'effectif([4 ; 2 ; 8])'}, v => fr(flatNums(v, i18n('Effectif')).length));
+    def('tri sort', {...many, desc: i18n('Range la liste du plus petit au plus grand'), ex: 'tri([3 ; 1 ; 2])'}, v => new List(sortReal(flatNums(v, i18n('Tri')), 'Tri')));
     // matrices
-    def('det determinant', {group: 'mat', desc: 'Déterminant d’une matrice carrée', ex: 'det([[1 ; 2] ; [3 ; 4]])'}, one(matDet));
-    def('inv inverse', {group: 'mat', desc: 'Matrice inverse', ex: 'inverse([[1 ; 2] ; [3 ; 4]])'}, one(x => (isNum(x) ? inv1(x) : matInverse(x))));
-    def('transp transpose transposee', {group: 'mat', desc: 'Transposée (lignes ↔ colonnes)', ex: 'transp([[1 ; 2 ; 3]])'}, one(transpose));
-    def('trace', {group: 'mat', desc: 'Trace : somme de la diagonale', ex: 'trace([[1 ; 2] ; [3 ; 4]])'}, one(x => { const A = matOf(x, 'Trace'); if (A.r !== A.c) fail('La trace demande une matrice carrée.'); return A.a.reduce((s, r, i) => add(s, r[i]), ZERO); }));
-    def('identite id eye', {group: 'mat', desc: 'Matrice identité n × n', ex: 'identite(3)'}, one(x => { const n = Number(intOf(x, 'identite')); if (n < 1 || n > LIMITS.mat) fail(`La taille va de 1 à ${LIMITS.mat}.`); return new Mat(Array.from({length: n}, (_, i) => Array.from({length: n}, (__, j) => (i === j ? ONE : ZERO)))); }));
-    def('rang rank', {group: 'mat', desc: 'Rang d’une matrice', ex: 'rang([[1 ; 2] ; [2 ; 4]])'}, one(x => fr(gauss(matOf(x, 'Rang')).rank)));
-    def('systeme linsolve', {group: 'eq', min: 2, max: 2, desc: 'Résout A·X = B (matrice A, liste B)', ex: 'systeme([[2 ; 1] ; [1 ; -1]] ; [3 ; 0])'}, v => { const A = matOf(v[0], 'Système'), b = vecOf(v[1]); if (A.r !== b.length) fail(`La matrice a ${A.r} lignes et la liste ${b.length} nombres : il en faut autant.`); if (A.r !== A.c) fail('Le système doit avoir autant d’équations que d’inconnues.'); return new List(solveLinear(A, b)); });
+    def('det determinant', {group: 'mat', desc: i18n('Déterminant d’une matrice carrée'), ex: 'det([[1 ; 2] ; [3 ; 4]])'}, one(matDet));
+    def('inv inverse', {group: 'mat', desc: i18n('Matrice inverse'), ex: 'inverse([[1 ; 2] ; [3 ; 4]])'}, one(x => (isNum(x) ? inv1(x) : matInverse(x))));
+    def('transp transpose transposee', {group: 'mat', desc: i18n('Transposée (lignes ↔ colonnes)'), ex: 'transp([[1 ; 2 ; 3]])'}, one(transpose));
+    def('trace', {group: 'mat', desc: i18n('Trace : somme de la diagonale'), ex: 'trace([[1 ; 2] ; [3 ; 4]])'}, one(x => { const A = matOf(x, i18n('Trace')); if (A.r !== A.c) fail(i18n('La trace demande une matrice carrée.')); return A.a.reduce((s, r, i) => add(s, r[i]), ZERO); }));
+    def('identite id eye', {group: 'mat', desc: i18n('Matrice identité n × n'), ex: 'identite(3)'}, one(x => { const n = Number(intOf(x, 'identite')); if (n < 1 || n > LIMITS.mat) fail(i18n('La taille va de 1 à {mat}.', {mat: LIMITS.mat})); return new Mat(Array.from({length: n}, (_, i) => Array.from({length: n}, (__, j) => (i === j ? ONE : ZERO)))); }));
+    def('rang rank', {group: 'mat', desc: i18n('Rang d’une matrice'), ex: 'rang([[1 ; 2] ; [2 ; 4]])'}, one(x => fr(gauss(matOf(x, i18n('Rang'))).rank)));
+    def('systeme linsolve', {group: 'eq', min: 2, max: 2, desc: i18n('Résout A·X = B (matrice A, liste B)'), ex: 'systeme([[2 ; 1] ; [1 ; -1]] ; [3 ; 0])'}, v => { const A = matOf(v[0], i18n('Système')), b = vecOf(v[1]); if (A.r !== b.length) fail(i18n('La matrice a {r} lignes et la liste {n} nombres : il en faut autant.', {r: A.r, n: b.length})); if (A.r !== A.c) fail(i18n('Le système doit avoir autant d’équations que d’inconnues.')); return new List(solveLinear(A, b)); });
     // équations, analyse
-    def('resoudre solve', {group: 'eq', min: 1, max: 6, lazy: true, desc: 'Résout une équation (jusqu’au 4e degré exactement, ou approchée) ou un système', ex: 'resoudre(x^2 - 3x + 2 = 0)'}, (args, env) => {
+    def('resoudre solve', {group: 'eq', min: 1, max: 6, lazy: true, desc: i18n('Résout une équation (jusqu’au 4e degré exactement, ou approchée) ou un système'), ex: 'resoudre(x^2 - 3x + 2 = 0)'}, (args, env) => {
         const eqs = [], extra = [];
         args.forEach(a => (a.k === 'eq' || (a.k !== 'id' && a.k !== 'num' && a.k !== 'neg' && !extra.length && !eqs.length) ? eqs.push(a) : extra.push(a)));
-        if (!eqs.length) fail('Écris l’équation dans resoudre(…), par exemple resoudre(x^2 = 4).');
+        if (!eqs.length) fail(i18n('Écris l’équation dans resoudre(…), par exemple resoudre(x^2 = 4).'));
         let name = null, range = null;
         if (extra[0] && extra[0].k === 'id' && VAR_LETTERS.test(extra[0].name)) { name = extra[0].name; extra.shift(); }
-        if (extra.length === 2) range = extra.map(e => toF(real(evaluateNode(e, env), 'Intervalle')));
-        else if (extra.length) fail('resoudre(équation ; lettre ; début ; fin) : je n’ai pas compris les nombres en plus.');
+        if (extra.length === 2) range = extra.map(e => toF(real(evaluateNode(e, env), i18n('Intervalle'))));
+        else if (extra.length) fail(i18n('resoudre(équation ; lettre ; début ; fin) : je n’ai pas compris les nombres en plus.'));
         return solveEquations(eqs, env, name, range);
     });
-    def('racines roots', {group: 'eq', min: 2, max: 5, desc: 'Racines d’un polynôme : ses coefficients, du plus haut degré au plus bas', ex: 'racines(1 ; -3 ; 2)'}, (v, env) => { const c = v.map(x => { if (!isNum(x)) NEED_NUM('racines', x); return x; }); const r = polyRoots(c); return solveTxt('x', r.roots, {fmt: env.fmt}); });
-    def('derivee deriv diff', {group: 'ana', min: 2, max: 3, lazy: true, binds: a => (a.length === 3 && a[1].k === 'id' ? a[1].name : varOf([a[0]])), desc: 'Nombre dérivé de f en a : derivee(f(x) ; a)', ex: 'derivee(x^3 ; 2)'}, (args, env) => {
-        const name = args.length === 3 && args[1].k === 'id' ? args[1].name : varOf([args[0]]); const a = evaluateNode(args.at(-1), env); return derivative(args[0], {...env, angle: 'rad'}, name, real(a, 'Dérivée'));
+    def('racines roots', {group: 'eq', min: 2, max: 5, desc: i18n('Racines d’un polynôme : ses coefficients, du plus haut degré au plus bas'), ex: 'racines(1 ; -3 ; 2)'}, (v, env) => { const c = v.map(x => { if (!isNum(x)) NEED_NUM('racines', x); return x; }); const r = polyRoots(c); return solveTxt('x', r.roots, {fmt: env.fmt}); });
+    def('derivee deriv diff', {group: 'ana', min: 2, max: 3, lazy: true, binds: a => (a.length === 3 && a[1].k === 'id' ? a[1].name : varOf([a[0]])), desc: i18n('Nombre dérivé de f en a : derivee(f(x) ; a)'), ex: 'derivee(x^3 ; 2)'}, (args, env) => {
+        const name = args.length === 3 && args[1].k === 'id' ? args[1].name : varOf([args[0]]); const a = evaluateNode(args.at(-1), env); return derivative(args[0], {...env, angle: 'rad'}, name, real(a, i18n('Dérivée', {ctx: 'calc'})));
     });
-    def('integrale integral integ', {group: 'ana', min: 3, max: 4, lazy: true, binds: a => (a.length === 4 && a[1].k === 'id' ? a[1].name : varOf([a[0]])), desc: 'Intégrale de f entre a et b : integrale(f(x) ; a ; b)', ex: 'integrale(x^2 ; 0 ; 3)'}, (args, env) => {
-        const name = args.length === 4 && args[1].k === 'id' ? args[1].name : varOf([args[0]]); const a = evaluateNode(args.at(-2), env), b = evaluateNode(args.at(-1), env); return integral(args[0], {...env, angle: 'rad'}, name, real(a, 'Intégrale'), real(b, 'Intégrale'));
+    def('integrale integral integ', {group: 'ana', min: 3, max: 4, lazy: true, binds: a => (a.length === 4 && a[1].k === 'id' ? a[1].name : varOf([a[0]])), desc: i18n('Intégrale de f entre a et b : integrale(f(x) ; a ; b)'), ex: 'integrale(x^2 ; 0 ; 3)'}, (args, env) => {
+        const name = args.length === 4 && args[1].k === 'id' ? args[1].name : varOf([args[0]]); const a = evaluateNode(args.at(-2), env), b = evaluateNode(args.at(-1), env); return integral(args[0], {...env, angle: 'rad'}, name, real(a, i18n('Intégrale')), real(b, i18n('Intégrale')));
     });
-    def('limite limit lim', {group: 'ana', min: 2, max: 3, lazy: true, binds: a => (a.length === 3 && a[1].k === 'id' ? a[1].name : varOf([a[0]])), desc: 'Valeur approchée de la limite en a', ex: 'limite(sin(x)/x ; 0)'}, (args, env) => {
+    def('limite limit lim', {group: 'ana', min: 2, max: 3, lazy: true, binds: a => (a.length === 3 && a[1].k === 'id' ? a[1].name : varOf([a[0]])), desc: i18n('Valeur approchée de la limite en a'), ex: 'limite(sin(x)/x ; 0)'}, (args, env) => {
         const name = args.length === 3 && args[1].k === 'id' ? args[1].name : varOf([args[0]]); const a = toF(real(evaluateNode(args.at(-1), env), 'Limite')); const f = realFn(args[0], {...env, angle: 'rad'}, name);
         const vals = [1e-4, 1e-5, 1e-6].map(h => [f(a + h), f(a - h)]); const l = vals[2], ok = Number.isFinite(l[0]) && Number.isFinite(l[1]) && Math.abs(l[0] - l[1]) < 1e-4 * Math.max(1, Math.abs(l[0]));
-        if (!ok) fail('Je ne trouve pas de limite (à gauche et à droite ce n’est pas pareil, ou ça part à l’infini).'); return snap((l[0] + l[1]) / 2);
+        if (!ok) fail(i18n('Je ne trouve pas de limite (à gauche et à droite ce n’est pas pareil, ou ça part à l’infini).')); return snap((l[0] + l[1]) / 2);
     });
 
     /* ═════════ Affichage des valeurs ═════════ */
@@ -978,7 +980,7 @@
     const minus = s => String(s).replace(/^-/, '−');
     /** un nombre à virgule → texte (digits chiffres significatifs, virgule française) : {text, html, approx, sci} */
     function fmtFloat(x, {digits = 10, dec = ','} = {}) {
-        if (Number.isNaN(x)) return {text: 'NaN', html: 'pas un nombre', approx: false};
+        if (Number.isNaN(x)) return {text: 'NaN', html: i18n('pas un nombre'), approx: false};
         if (!Number.isFinite(x)) return {text: x > 0 ? '∞' : '-∞', html: x > 0 ? '∞' : '−∞', approx: false};
         if (x === 0) return {text: '0', html: '0', approx: false};
         const a = Math.abs(x), e = Math.floor(Math.log10(a));
@@ -1098,7 +1100,7 @@
         [['s', 'seconde', 'secondes', 'sec'], 'time', '1', 1], [['min', 'minute', 'minutes'], 'time', '60', 1], [['h', 'heure', 'heures'], 'time', '3600', 1],
         [['j', 'jour', 'jours'], 'time', '86400', 1], [['semaine', 'semaines'], 'time', '604800', 1], [['mois'], 'time', '2629746', 1], [['an', 'ans', 'annee', 'annees', 'année', 'années'], 'time', '31556952', 1], [['siecle', 'siecles', 'siècle', 'siècles'], 'time', '3155695200', 1],
     ];
-    const KIND_LABEL = {long: 'longueur', surf: 'surface', vol: 'volume', mass: 'poids', money: 'monnaie', time: 'durée', temp: 'température'};
+    const KIND_LABEL = {long: i18n('longueur'), surf: i18n('surface'), vol: i18n('volume'), mass: i18n('poids'), money: i18n('monnaie'), time: i18n('durée'), temp: i18n('température')};
     const KIND_BASE = {long: 'm', surf: 'm²', vol: 'l', mass: 'g', money: 'denier', time: 's'};
     /** le pluriel d'un nom d'unité : toise → toises, boisseau → boisseaux, journal → journaux */
     const plur = w => (/[sxz]$/.test(w) ? w : /(eau|au|eu)$/.test(w) ? w + 'x' : /al$/.test(w) && !/^(bal|cal|chacal|festival|carnaval|val)$/.test(w) ? w.slice(0, -2) + 'aux' : w + 's');
@@ -1181,8 +1183,8 @@
             return new Txt(t, esc(t), {convert: true, value: val, kind: 'money', note: `≈ ${dv.text} ${tName} · 1 livre = 20 sols = 240 deniers`});
         }
         const notes = [];
-        if (q.unit.approx || target.approx) notes.push('≈ valeur approchée : la mesure changeait d’un lieu à l’autre');
-        if (q.unit.region && q.unit.region !== target.region) notes.push(`mesure de ${q.unit.region}`); else if (target.region) notes.push(`mesure de ${target.region}`);
+        if (q.unit.approx || target.approx) notes.push(`≈ ${i18n('valeur approchée : la mesure changeait d’un lieu à l’autre')}`);
+        if (q.unit.region && q.unit.region !== target.region) notes.push(i18n('mesure de {region}', {region: q.unit.region})); else if (target.region) notes.push(i18n('mesure de {region}', {region: target.region}));
         if (q.kind === 'money' && lsdText(q.base) !== `${f.text} ${tName}`) notes.push(lsdText(q.base));
         if (q.unit.note) notes.push(q.unit.note); if (target.note) notes.push(target.note);
         return new Txt(`${f.text} ${tName}`, `${f.html}${NNBSP}<span class="cm-unit">${esc(tName)}</span>`, {convert: true, value: val, note: notes.filter(Boolean).join(' · '), kind: q.kind, unitLabel: label(target)});
@@ -1196,7 +1198,7 @@
         else if (k === 'vol' && Math.abs(v) >= 100) { unit = 'hl'; val = v / 100; } else if (k === 'mass' && Math.abs(v) >= 1000) { unit = 'kg'; val = v / 1000; }
         else if (k === 'time') { const d = v / 86400; if (Math.abs(d) >= 1) { unit = 'jours'; val = d; } else if (Math.abs(v) >= 3600) { unit = 'h'; val = v / 3600; } else if (Math.abs(v) >= 60) { unit = 'min'; val = v / 60; } }
         const f = formatValue(q.unit.exact && isF(b) && unit === KIND_BASE[k] ? b : val, {...fmt, frac: false, digits: q.unit.exact === false ? Math.min(fmt.digits || 10, 6) : fmt.digits});
-        return new Txt(`${f.text} ${unit}`, `${f.html}${NNBSP}<span class="cm-unit">${esc(unit)}</span>`, {convert: true, value: val, note: [q.unit.approx ? '≈ valeur approchée' : '', q.unit.region ? `mesure de ${q.unit.region}` : '', q.unit.note || ''].filter(Boolean).join(' · ')});
+        return new Txt(`${f.text} ${unit}`, `${f.html}${NNBSP}<span class="cm-unit">${esc(unit)}</span>`, {convert: true, value: val, note: [q.unit.approx ? `≈ ${i18n('valeur approchée')}` : '', q.unit.region ? i18n('mesure de {region}', {region: q.unit.region}) : '', q.unit.note || ''].filter(Boolean).join(' · ')});
     }
 
     /* ═════════ Dates des actes (C4) : calendrier républicain, jour de la semaine, âge entre deux dates ═════════ */
@@ -1210,9 +1212,9 @@
     function weekdayOf(o) { const cm = calMore(); if (cm?.weekday) { try { return cm.weekday(o.y, o.m, o.d).weekday; } catch (_) {} } return WEEK[((jdnG(o.y, o.m, o.d) % 7) + 7) % 7]; }
     function repLabel(r) { if (r.mo === 13) return `${r.d === 1 ? '1er' : r.d} jour complémentaire (jour ${SANSC[r.d - 1] || ''}) an ${ROMAN[r.an]}`; return `${r.d === 1 ? '1er' : r.d} ${REP_FR[r.mo - 1]} an ${ROMAN[r.an]}`; }
     function toRepublican(o) {
-        const S = sheet(); if (!S) fail('Le calendrier républicain n’est pas chargé.');
-        if (jdnG(o.y, o.m, o.d) < jdnG(1792, 9, 22) || jdnG(o.y, o.m, o.d) > jdnG(1805, 12, 31)) fail('Le calendrier républicain n’a servi que du 22 septembre 1792 (1er vendémiaire an I) au 31 décembre 1805.');
-        const r = S.gregorianToRepublican(o.y, o.m, o.d); if (!r) fail('Cette date est hors du calendrier républicain.'); return r;
+        const S = sheet(); if (!S) fail(i18n('Le calendrier républicain n’est pas chargé.'));
+        if (jdnG(o.y, o.m, o.d) < jdnG(1792, 9, 22) || jdnG(o.y, o.m, o.d) > jdnG(1805, 12, 31)) fail(i18n('Le calendrier républicain n’a servi que du 22 septembre 1792 (1er vendémiaire an I) au 31 décembre 1805.'));
+        const r = S.gregorianToRepublican(o.y, o.m, o.d); if (!r) fail(i18n('Cette date est hors du calendrier républicain.')); return r;
     }
     function readDate(text) {
         const S = sheet(); if (!S) return null;
@@ -1228,26 +1230,26 @@
             const g = longDate(d), wd = weekdayOf(d);
             if (d.rep) { main = `${g}`; lines.push(`${wd}`, `= ${d.label}`); }
             else { main = `${d.kind ? d.kind + ' ' : ''}${g}`; lines.push(wd); try { if (!d.kind && jdnG(d.y, d.m, d.d) >= jdnG(1792, 9, 22) && jdnG(d.y, d.m, d.d) <= jdnG(1805, 12, 31)) lines.push(`= ${repLabel(toRepublican(d))}`); } catch (_) {} }
-        } else { main = d.label; if (d.approx) lines.push('date approchée'); }
+        } else { main = d.label; if (d.approx) lines.push(i18n('date approchée')); }
         return new Txt(main, esc(main), {date: d, note: lines.join(' · ')});
     }
     function diffTxt(a, b) {
-        const cm = calMore(); if (!cm?.dateDiff) fail('Le calcul des écarts de dates n’est pas chargé.');
+        const cm = calMore(); if (!cm?.dateDiff) fail(i18n('Le calcul des écarts de dates n’est pas chargé.'));
         const obj = d => ({y: d.y, m: d.m || 0, d: d.d || 0});
-        const r = cm.dateDiff(obj(a), obj(b)); if (!r) fail('Je ne sais pas calculer l’écart entre ces deux dates.');
-        const pl = (n, one, many) => `${n.toLocaleString('fr-FR')} ${n > 1 ? (many || one + 's') : one}`;
-        const ymd = x => [x.years ? pl(x.years, 'an') : '', x.months ? `${x.months} mois` : '', x.days || (!x.years && !x.months) ? pl(x.days, 'jour') : ''].filter(Boolean).join(', ').replace(/, ([^,]*)$/, ' et $1');
-        if (r.exact) { const t = ymd(r); return new Txt(t, esc(t), {age: true, value: fr(r.years), note: `soit ${pl(r.totalDays, 'jour')} (${pl(r.weeks, 'semaine')}${r.weekDays ? ` et ${pl(r.weekDays, 'jour')}` : ''})${r.swapped ? ' · la 2e date est la plus ancienne' : ''} · du ${a.label} au ${b.label}`}); }
-        const t = r.min.years === r.max.years ? `${pl(r.min.years, 'an')} environ` : `entre ${r.min.years} et ${pl(r.max.years, 'an')}`;
-        return new Txt(t, esc(t), {age: true, value: fr(r.min.years), note: `une date n’est pas complète (jour, mois et année) : de ${ymd(r.min)} à ${ymd(r.max)}`});
+        const r = cm.dateDiff(obj(a), obj(b)); if (!r) fail(i18n('Je ne sais pas calculer l’écart entre ces deux dates.'));
+        const pl = (n, one, many) => PL(n, one, many);
+        const ymd = x => [x.years ? pl(x.years, 'an') : '', x.months ? pl(x.months, 'mois', 'mois') : '', x.days || (!x.years && !x.months) ? pl(x.days, 'jour') : ''].filter(Boolean).reduce((s, p, i, all) => (!i ? p : i === all.length - 1 ? i18n('{a} et {b}', {a: s, b: p}) : `${s}, ${p}`), '');
+        if (r.exact) { const t = ymd(r); return new Txt(t, esc(t), {age: true, value: fr(r.years), note: [i18n('soit {days} ({weeks})', {days: pl(r.totalDays, 'jour'), weeks: r.weekDays ? i18n('{a} et {b}', {a: pl(r.weeks, 'semaine'), b: pl(r.weekDays, 'jour')}) : pl(r.weeks, 'semaine')}), r.swapped ? i18n('la 2e date est la plus ancienne') : '', i18n('du {from} au {to}', {from: a.label, to: b.label})].filter(Boolean).join(' · ')}); }
+        const t = r.min.years === r.max.years ? i18n('{n} environ', {n: pl(r.min.years, 'an')}) : i18n('entre {years} et {x}', {years: r.min.years, x: pl(r.max.years, 'an')});
+        return new Txt(t, esc(t), {age: true, value: fr(r.min.years), note: i18n('une date n’est pas complète (jour, mois et année) : de {x} à {x2}', {x: ymd(r.min), x2: ymd(r.max)})});
     }
     function tryDates(input, env) {
         const t = input.trim();
         // conversion : « 3 frimaire an XII en grégorien », « 14/07/1789 en républicain »
         let m = /^(.+?)\s+(?:en|vers|->|→)\s+(?:calendrier\s+)?(r[ée]publicain|r[ée]volutionnaire|gr[ée]gorien|jour de la semaine|jour)\s*$/i.exec(t);
         if (m) {
-            const d = readDate(m[1]); if (!d) fail(`Je ne comprends pas la date « ${m[1]} ».`, {hint: 'Écris-la comme dans un acte : 7 mai 1925, 14/07/1789, 3 frimaire an XII.'});
-            if (!d.d) fail('Il faut une date complète (jour, mois, année).');
+            const d = readDate(m[1]); if (!d) fail(i18n('Je ne comprends pas la date « {x} ».', {x: m[1]}), {hint: i18n('Écris-la comme dans un acte : 7 mai 1925, 14/07/1789, 3 frimaire an XII.')});
+            if (!d.d) fail(i18n('Il faut une date complète (jour, mois, année).'));
             const w = fold(m[2]);
             if (w.startsWith('jour')) { const wd = weekdayOf(d); return new Txt(wd, esc(wd), {date: d, note: longDate(d)}); }
             if (w.startsWith('gr')) { const g = longDate(d); return new Txt(g, esc(g), {date: d, note: weekdayOf(d)}); }
@@ -1270,7 +1272,7 @@
     function otherRegionHint(text) {
         const cm = calMore(); if (!cm?.REGIONS) return '';
         const words = fold(text).split(/\s+/).filter(w => /^[a-z]{3,}$/.test(w));
-        for (const r of cm.REGIONS) for (const u of r.units) { const n = fold(u[1]).replace(/\s*\(.*$/, ''), id = fold(u[0]); if (words.some(w => w === id || w === plur(id) || n.startsWith(w) && w.length >= 4)) return `« ${String(u[1]).replace(/\s*\(.*$/, '')} » est une mesure de ${r.label} : choisis cette région dans ⚙️ Réglages → Mesures anciennes.`; }
+        for (const r of cm.REGIONS) for (const u of r.units) { const n = fold(u[1]).replace(/\s*\(.*$/, ''), id = fold(u[0]); if (words.some(w => w === id || w === plur(id) || n.startsWith(w) && w.length >= 4)) return i18n('« {x} » est une mesure de {label} : choisis cette région dans ⚙️ Réglages → Mesures anciennes.', {x: String(u[1]).replace(/\s*\(.*$/, ''), label: r.label}); }
         return '';
     }
     const BASES = {bin: 2, binaire: 2, oct: 8, octal: 8, hex: 16, hexa: 16, hexadecimal: 16, decimal: 10};
@@ -1285,14 +1287,14 @@
         if (/^(facteurs|facteurs premiers|nombres premiers)$/.test(rf)) return FN.facteurs.f([evaluateNode(parse(left, env), env)]);
         if (/^(lsd|livres sols deniers|livres sous deniers)$/.test(rf)) { const q = parseQuantity(left, env, 'money'); if (!q) return null; return baseText(q, fmt); }
         const targets = unitsByName(right, env.region);
-        if (!targets.length) { if (parseQuantity(left, env) || tryAmount(left, env) !== null) fail(`Je ne connais pas l’unité « ${right} ».`, {hint: otherRegionHint(right) || 'Les unités comprises sont dans la rubrique « Unités » du mode 🧪 Scientifique.'}); return null; }
+        if (!targets.length) { if (parseQuantity(left, env) || tryAmount(left, env) !== null) fail(i18n('Je ne connais pas l’unité « {right} ».', {right}), {hint: otherRegionHint(right) || i18n('Les unités comprises sont dans la rubrique « Unités » du mode 🧪 Scientifique.')}); return null; }
         for (const tu of targets) {
             const q = parseQuantity(left, env, tu.kind);
             if (q && q.kind === tu.kind) return convertText(q, tu, {...env, typedTarget: right.replace(/\s+/g, ' ')}, fmt);
         }
         const q = parseQuantity(left, env);
-        if (q) fail(`On ne peut pas convertir une ${KIND_LABEL[q.kind]} en ${KIND_LABEL[targets[0].kind]} (${right}).`);
-        if (/[a-zA-Zé]/.test(left)) fail(`Je ne connais pas l’unité de « ${left} ».`, {hint: otherRegionHint(left) || 'Les unités comprises sont dans la rubrique « Unités » du mode 🧪 Scientifique.'});
+        if (q) fail(i18n('On ne peut pas convertir une {x} en {x2} ({right}).', {x: KIND_LABEL[q.kind], x2: KIND_LABEL[targets[0].kind], right}));
+        if (/[a-zA-Zé]/.test(left)) fail(i18n('Je ne connais pas l’unité de « {left} ».', {left}), {hint: otherRegionHint(left) || i18n('Les unités comprises sont dans la rubrique « Unités » du mode 🧪 Scientifique.')});
         return null;
     }
     const DEFAULTS = {angle: 'deg', digits: 10, dec: ',', frac: true, region: 'paris'};
@@ -1309,14 +1311,14 @@
         const typedFrac = /\/|÷|:|frac|fraction|\^\s*\(?\s*-|\^-|inv|systeme|resoudre|solve|racines/i.test(src);
         const decOnly = v => { if (!isF(v) || v.d === 1n || typedFrac) return false; let d = v.d; while (d % 2n === 0n) d /= 2n; while (d % 5n === 0n) d /= 5n; return d === 1n; };
         const done = (v, kind, inputHtml) => {
-            if (isNum(v) && !isFinite(toF(isC(v) ? v.re : v)) && !isC(v)) fail('Nombre trop grand pour être calculé.');
+            if (isNum(v) && !isFinite(toF(isC(v) ? v.re : v)) && !isC(v)) fail(i18n('Nombre trop grand pour être calculé.'));
             const f = formatValue(v, decOnly(v) ? {...fmt, frac: false} : fmt);
-            if (o.angle !== 'rad' && /(sin|cos|tan)\s*\(?[^)]*(pi|π)/i.test(src)) f.alt = [f.alt, `angle en ${o.angle === 'deg' ? 'degrés' : 'grades'} : passe en RAD pour calculer avec π`].filter(Boolean).join(' · ');
+            if (o.angle !== 'rad' && /(sin|cos|tan)\s*\(?[^)]*(pi|π)/i.test(src)) f.alt = [f.alt, i18n('angle en {x} : passe en RAD pour calculer avec π', {x: o.angle === 'deg' ? i18n('degrés') : 'grades'})].filter(Boolean).join(' · ');
             return {ok: true, value: v, kind: kind || (isTxt(v) ? (v.solve ? 'solve' : v.convert ? 'convert' : v.date || v.age ? 'date' : v.bool !== undefined ? 'bool' : 'text') : isMat(v) ? 'matrix' : isList(v) ? 'list' : isC(v) ? 'complex' : 'number'), text: f.text, html: f.html, alt: f.alt || '', approx: !!f.approx, exact: isF(v), inputHtml: inputHtml ?? esc(src), canReuse: isNum(v) || isList(v) || isMat(v) || (isTxt(v) && isNum(v.value))};
         };
         try {
-            if (!src) fail('Tape un calcul.');
-            if (src.length > LIMITS.input) fail(`Calcul trop long (plus de ${LIMITS.input} signes).`);
+            if (!src) fail(i18n('Tape un calcul.'));
+            if (src.length > LIMITS.input) fail(i18n('Calcul trop long (plus de {input} signes).', {input: LIMITS.input}));
             const d = /[a-zA-Zéû→]|->/.test(src) ? tryDates(src, env) : null; if (d) return done(d, 'date');
             if (/\s(en|in|vers)\s|->|→|=>/i.test(src)) { const c = tryConvert(src, env, fmt); if (c) return done(c, isTxt(c) && c.convert ? 'convert' : null); }
             let tree;
@@ -1332,7 +1334,7 @@
             catch (e) { if (e.calc && /n’a pas de valeur|Je ne connais pas/.test(e.message)) { const q = parseQuantity(src, env); if (q) return done(baseText(q, fmt), 'convert'); } throw e; }
             return done(v, null, inputHtml);
         } catch (e) {
-            if (!e.calc) { if (e instanceof RangeError) return {ok: false, error: 'Ce calcul est trop gros pour être fait.', hint: '', pos: -1, inputHtml: esc(src)}; throw e; }
+            if (!e.calc) { if (e instanceof RangeError) return {ok: false, error: i18n('Ce calcul est trop gros pour être fait.'), hint: '', pos: -1, inputHtml: esc(src)}; throw e; }
             return {ok: false, error: e.message, hint: e.hint || '', pos: e.pos, inputHtml: esc(src)};
         }
     }
@@ -1341,15 +1343,15 @@
         let src = String(text || '').trim().replace(/^\s*(?:y|f\s*\(\s*x\s*\))\s*=\s*/i, '');
         const tree = parse(src, {dec});
         const fv = [...freeVars(tree)].filter(v => v !== 'x');
-        if (fv.length) fail(`La lettre « ${fv[0]} » n’a pas de valeur : une courbe s’écrit avec x seulement, par exemple sin(x).`);
-        if (tree.k === 'eq' || tree.k === 'cmp') fail('Écris seulement la formule de y, par exemple x^2 − 1 (sans « = »).');
+        if (fv.length) fail(i18n('La lettre « {x} » n’a pas de valeur : une courbe s’écrit avec x seulement, par exemple sin(x).', {x: fv[0]}));
+        if (tree.k === 'eq' || tree.k === 'cmp') fail(i18n('Écris seulement la formule de y, par exemple x^2 − 1 (sans « = »).'));
         const env = {angle, float: true, vars: {...vars}, fmt: {}};
         const fn = x => { budget = 0; try { env.vars.x = x; const v = evaluateNode(tree, env); if (isC(v)) return Math.abs(v.im) < 1e-12 * Math.max(1, Math.abs(v.re)) ? v.re : NaN; const r = toF(v); return Number.isFinite(r) ? r : NaN; } catch (_) { return NaN; } };
         fn.html = toHtml(tree, {dec}); fn.tree = tree;
         return fn;
     }
     /** la liste des fonctions pour l'aide : [{name, group, desc, ex}] */
-    const GROUPS = {trig: 'Trigonométrie', hyp: 'Hyperboliques', log: 'Logarithmes et exponentielle', pow: 'Puissances et racines', cx: 'Nombres complexes', arith: 'Arithmétique et arrondis', base: 'Bases (binaire, hexadécimal…)', stat: 'Statistiques', mat: 'Matrices', eq: 'Équations', ana: 'Dérivées et intégrales'};
+    const GROUPS = {trig: i18n('Trigonométrie'), hyp: i18n('Hyperboliques'), log: i18n('Logarithmes et exponentielle'), pow: i18n('Puissances et racines'), cx: i18n('Nombres complexes'), arith: i18n('Arithmétique et arrondis'), base: i18n('Bases (binaire, hexadécimal…)'), stat: i18n('Statistiques'), mat: i18n('Matrices'), eq: i18n('Équations'), ana: i18n('Dérivées et intégrales')};
     const functionList = () => Object.entries(FN).filter(([k]) => k !== 'root4').map(([k, d]) => ({name: d.show || k, key: k, group: d.group, groupLabel: GROUPS[d.group] || '', desc: d.desc || '', ex: d.ex || '', aliases: Object.entries(ALIAS).filter(([, v]) => v === k).map(([a]) => a)}));
     const unitList = (region = 'paris') => { const seen = new Set(), out = []; unitTable(region).forEach(list => list.forEach(u => { if (seen.has(u.id)) return; seen.add(u.id); out.push({id: u.id, label: String(u.label).replace(/\s*\(.*$/, ''), full: u.label, kind: u.kind, kindLabel: KIND_LABEL[u.kind], region: u.region || '', approx: !!u.approx, exact: !!u.exact, name: u.names ? u.names[0] : fold(String(u.label).replace(/\s*\(.*$/, ''))}); })); return out; };
     /** le nombre à reprendre dans un autre calcul (« ans », la mémoire) : une valeur, ou null */

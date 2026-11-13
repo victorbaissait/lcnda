@@ -1,0 +1,1616 @@
+fr ¦ ro
+Action inconnue ¦ Acțiune necunoscută
+Action inconnue. ¦ Acțiune necunoscută.
+Demande inconnue. ¦ Cerere necunoscută.
+Fichier non reçu. ¦ Fișierul nu a fost primit.
+Personne introuvable ¦ Persoană negăsită
+Personne introuvable. ¦ Persoană negăsită.
+Source introuvable. ¦ Sursă negăsită.
+Version introuvable. ¦ Versiune negăsită.
+ID manquant ¦ ID lipsă
+POST requis ¦ POST necesar
+Refusé. ¦ Refuzat.
+Mot de passe incorrect. ¦ Parolă greșită.
+ZIP illisible. ¦ ZIP ilizibil.
+Export impossible : l’extension PHP zip manque. ¦ Export imposibil: lipsește extensia PHP zip.
+Une autre généalogie a été ouverte dans une autre fenêtre : recharge la page. ¦ O altă genealogie a fost deschisă în altă fereastră: reîncarcă pagina.
+Session expirée, ou une autre généalogie a été ouverte entre-temps (autre fenêtre) : recharge la page. ¦ Sesiune expirată sau o altă genealogie a fost deschisă între timp (altă fereastră): reîncarcă pagina.
+L’enregistrement n’a pas pu se faire (une donnée reçue n’a pas la forme attendue). Rien n’a été modifié. Réessaie ; si ça recommence, recharge la page et signale-le. ¦ Salvarea nu a reușit (o dată primită nu are forma așteptată). Nu s-a modificat nimic. Încearcă din nou; dacă se repetă, reîncarcă pagina și semnalează problema.
+Mode consultation : pas de copie de la base vers un autre dossier. ¦ Mod consultare: nicio copie a bazei în alt dosar.
+{n} jour ¦ {n} zi
+{n} jours ¦ {n} zile
+{n} an ¦ {n} an
+Date qui n’existe pas : « {date} » ¦ Dată care nu există: „{date}”
+{event} le « {date} » : ce jour n’existe pas dans le calendrier julien. ¦ {event} pe „{date}”: această zi nu există în calendarul iulian.
+{event} le « {date} » : ce jour n’existe pas dans le calendrier grégorien. ¦ {event} pe „{date}”: această zi nu există în calendarul gregorian.
+Date trop longue ({n} signes) ¦ Dată prea lungă ({n} semne)
+{event} : « {text}… » — une note a sans doute été collée dans la case de la date. ¦ {event}: „{text}…” — probabil o notă a fost lipită în căsuța datei.
+Dates à l’envers : « {date} » ¦ Date inversate: „{date}”
+{event} : la première année ({a}) vient après la seconde ({b}). Sans doute « entre {b} et {a} ». ¦ {event}: primul an ({a}) vine după al doilea ({b}). Probabil „entre {b} et {a}”.
+Date « {date} » lue comme l’an {y} ¦ Data „{date}” citită ca anul {y}
+{event} : un signe moins devant l’année. Pour une date avant Jésus-Christ, écris « 5 av. J.-C. »; sinon corrige l’année. ¦ {event}: un semn minus înaintea anului. Pentru o dată înainte de Hristos, scrie „5 av. J.-C.”; altfel corectează anul.
+Décès avant la naissance ¦ Deces înainte de naștere
+Naissance {b} · décès {d} ¦ Naștere {b} · deces {d}
+Décès ({d}) avant sa naissance ({b}) ¦ Deces ({d}) înainte de nașterea sa ({b})
+inhumation ¦ înmormântare
+baptême ¦ botez
+Mort à {n} ans ¦ Mort la {n} ani
+Morte à {n} ans ¦ Moartă la {n} ani
+Mort(e) à {n} ans ¦ Mort(ă) la {n} ani
+Naissance {b} · décès {d} (seuil : {n} ans) ¦ Naștere {b} · deces {d} (prag: {n} ani)
+Très peu de gens dépassent {a} ans ; au-delà de {b} ans, c’est presque toujours une erreur. ¦ Foarte puțini oameni depășesc {a} ani; peste {b} ani, e aproape mereu o greșeală.
+Naissance dans le futur ¦ Naștere în viitor
+Naissance {b} ¦ Naștere {b}
+Dates de naissance contradictoires ¦ Date de naștere contradictorii
+Dates de décès contradictoires ¦ Date de deces contradictorii
+Inhumation avant le décès ¦ Înmormântare înainte de deces
+Décès {d} · inhumation {i} ¦ Deces {d} · înmormântare {i}
+Inhumation {span} après le décès ¦ Înmormântare la {span} după deces
+Décès {d} · inhumation {i} (seuil : {n} jours) ¦ Deces {d} · înmormântare {i} (prag: {n} zile)
+Baptême {span} après la naissance ¦ Botez la {span} după naștere
+Naissance {b} · baptême {t} (seuil : {n} jours) ¦ Naștere {b} · botez {t} (prag: {n} zile)
+{event} avant la naissance ¦ {event} înainte de naștere
+{event} {date} · naissance {b} ¦ {event} {date} · naștere {b}
+{event} après le décès ¦ {event} după deces
+{event} {date} · décès {d} ¦ {event} {date} · deces {d}
+Marié après son décès ¦ Căsătorit după deces
+Mariée après son décès ¦ Căsătorită după deces
+Marié(e) après son décès ¦ Căsătorit(ă) după deces
+Mariage {m} · décès {d} ¦ Căsătorie {m} · deces {d}
+Marié le {m}, après sa mort ¦ Căsătorit pe {m}, după moartea sa
+Mariée le {m}, après sa mort ¦ Căsătorită pe {m}, după moartea sa
+Marié(e) le {m}, après sa mort ¦ Căsătorit(ă) pe {m}, după moartea sa
+Mariage avant la naissance ¦ Căsătorie înainte de naștere
+Mariage {m} · naissance {b} ¦ Căsătorie {m} · naștere {b}
+Marié à {n} ans ¦ Căsătorit la {n} ani
+Mariée à {n} ans ¦ Căsătorită la {n} ani
+Marié(e) à {n} ans ¦ Căsătorit(ă) la {n} ani
+Mariage {m} · naissance {b} (seuil : {n} ans) ¦ Căsătorie {m} · naștere {b} (prag: {n} ani)
+Avant {n} ans, un mariage est presque impossible. ¦ Sub {n} ani, o căsătorie este aproape imposibilă.
+Mère née après son enfant ¦ Mamă născută după copilul ei
+Père né après son enfant ¦ Tată născut după copilul lui
+Parent né après son enfant ¦ Părinte născut după copilul său
+Naissance de {child} {cb} · mère née {pb} ¦ Nașterea lui {child} {cb} · mamă născută {pb}
+Naissance de {child} {cb} · père né {pb} ¦ Nașterea lui {child} {cb} · tată născut {pb}
+Naissance de {child} {cb} · parent né {pb} ¦ Nașterea lui {child} {cb} · părinte născut {pb}
+Née après son enfant {child} ({cb}) ¦ Născută după copilul ei {child} ({cb})
+Né après son enfant {child} ({cb}) ¦ Născut după copilul lui {child} ({cb})
+Sa mère est née après sa naissance ({pb}) ¦ Mama sa s-a născut după nașterea sa ({pb})
+Son père est né après sa naissance ({pb}) ¦ Tatăl său s-a născut după nașterea sa ({pb})
+Son parent est né après sa naissance ({pb}) ¦ Părintele său s-a născut după nașterea sa ({pb})
+naiss. {name} ¦ naștere {name}
+décès {name} ¦ deces {name}
+Mère de {n} ans à la naissance ¦ Mamă de {n} ani la naștere
+Père de {n} ans à la naissance ¦ Tată de {n} ani la naștere
+Parent de {n} ans à la naissance ¦ Părinte de {n} ani la naștere
+Mère de {n} an à la naissance ¦ Mamă de {n} an la naștere
+Père de {n} an à la naissance ¦ Tată de {n} an la naștere
+Parent de {n} an à la naissance ¦ Părinte de {n} an la naștere
+Naissance {cb} · mère née {pb} (seuil : {n} ans) ¦ Naștere {cb} · mamă născută {pb} (prag: {n} ani)
+Naissance {cb} · père né {pb} (seuil : {n} ans) ¦ Naștere {cb} · tată născut {pb} (prag: {n} ani)
+Naissance {cb} · parent né {pb} (seuil : {n} ans) ¦ Naștere {cb} · părinte născut {pb} (prag: {n} ani)
+Mère de {child} à {n} ans ¦ Mama lui {child} la {n} ani
+Père de {child} à {n} ans ¦ Tatăl lui {child} la {n} ani
+Parent de {child} à {n} ans ¦ Părintele lui {child} la {n} ani
+Sa mère n’avait que {n} ans à sa naissance ¦ Mama sa avea doar {n} ani la nașterea sa
+Son père n’avait que {n} ans à sa naissance ¦ Tatăl său avea doar {n} ani la nașterea sa
+Son parent n’avait que {n} ans à sa naissance ¦ Părintele său avea doar {n} ani la nașterea sa
+Sa mère avait {n} ans à sa naissance ¦ Mama sa avea {n} ani la nașterea sa
+Son père avait {n} ans à sa naissance ¦ Tatăl său avea {n} ani la nașterea sa
+Une naissance après {a} ans est presque impossible ; à partir de {b} ans, c’est à vérifier. ¦ O naștere după {a} ani este aproape imposibilă; de la {b} ani, e de verificat.
+Naissance {cb} · décès de la mère {pd} ¦ Naștere {cb} · decesul mamei {pd}
+Naissance {cb} · décès du père {pd} (seuil : {n} jours) ¦ Naștere {cb} · decesul tatălui {pd} (prag: {n} zile)
+Naissance {cb} · décès du parent {pd} (seuil : {n} jours) ¦ Naștere {cb} · decesul părintelui {pd} (prag: {n} zile)
+Un enfant ne peut pas naître après la mort de sa mère. ¦ Un copil nu se poate naște după moartea mamei sale.
+Un enfant naît au plus 9 à 10 mois après la mort du père (seuil : {n} jours). ¦ Un copil se naște cel mult la 9–10 luni după moartea tatălui (prag: {n} zile).
+Né {span} après la mort de sa mère ¦ Născut la {span} după moartea mamei sale
+Né {span} après la mort de son père ¦ Născut la {span} după moartea tatălui său
+Né {span} après la mort de son parent ¦ Născut la {span} după moartea părintelui său
+Née {span} après la mort de sa mère ¦ Născută la {span} după moartea mamei sale
+Née {span} après la mort de son père ¦ Născută la {span} după moartea tatălui său
+Née {span} après la mort de son parent ¦ Născută la {span} după moartea părintelui său
+Né(e) {span} après la mort de sa mère ¦ Născut(ă) la {span} după moartea mamei sale
+Né(e) {span} après la mort de son père ¦ Născut(ă) la {span} după moartea tatălui său
+Né(e) {span} après la mort de son parent ¦ Născut(ă) la {span} după moartea părintelui său
+Né après la mort de sa mère ¦ Născut după moartea mamei sale
+Né après la mort de son père ¦ Născut după moartea tatălui său
+Né après la mort de son parent ¦ Născut după moartea părintelui său
+Née après la mort de sa mère ¦ Născută după moartea mamei sale
+Née après la mort de son père ¦ Născută după moartea tatălui său
+Née après la mort de son parent ¦ Născută după moartea părintelui său
+Né(e) après la mort de sa mère ¦ Născut(ă) după moartea mamei sale
+Né(e) après la mort de son père ¦ Născut(ă) după moartea tatălui său
+Né(e) après la mort de son parent ¦ Născut(ă) după moartea părintelui său
+Son fils {child} naît {span} après sa mort ¦ Fiul său {child} se naște la {span} după moartea sa
+Son fils {child} naît après sa mort ¦ Fiul său {child} se naște după moartea sa
+Sa fille {child} naît {span} après sa mort ¦ Fiica sa {child} se naște la {span} după moartea sa
+Sa fille {child} naît après sa mort ¦ Fiica sa {child} se naște după moartea sa
+Son enfant {child} naît {span} après sa mort ¦ Copilul său {child} se naște la {span} după moartea sa
+Son enfant {child} naît après sa mort ¦ Copilul său {child} se naște după moartea sa
+Seulement {n} mois après son frère ¦ Doar la {n} luni după fratele său
+Seulement {n} mois après sa sœur ¦ Doar la {n} luni după sora sa
+Seulement {n} mois après son aîné ¦ Doar la {n} luni după fratele mai mare
+Naissances {a} et {b} (seuil : {n} mois) ¦ Nașteri {a} și {b} (prag: {n} luni)
+Deux enfants de la même mère naissent au moins 8 à 9 mois l’un après l’autre (sauf jumeaux). ¦ Doi copii ai aceleiași mame se nasc la cel puțin 8–9 luni unul după altul (în afară de gemeni).
+Deux enfants la même année ¦ Doi copii în același an
+{a} et {b} : naissance en {y} (jumeaux, doublon ou date approximative ?) ¦ {a} și {b}: născuți în {y} (gemeni, dublură sau dată aproximativă?)
+Né bien avant le mariage des parents ¦ Născut cu mult înainte de căsătoria părinților
+Née bien avant le mariage des parents ¦ Născută cu mult înainte de căsătoria părinților
+Né(e) bien avant le mariage des parents ¦ Născut(ă) cu mult înainte de căsătoria părinților
+Naissance {b} · mariage {m} ¦ Naștere {b} · căsătorie {m}
+Fratrie étalée sur {n} ans ¦ Frați răspândiți pe {n} ani
+Aîné(e) {a} {ad}, cadet(te) {b} {bd} (seuil : {n} ans) : deux générations mélangées ? ¦ Cel mai mare {a} {ad}, cel mai mic {b} {bd} (prag: {n} ani): două generații amestecate?
+Rattaché à {n} familles de parents ¦ Legat de {n} familii de părinți
+Rattachée à {n} familles de parents ¦ Legată de {n} familii de părinți
+Cela peut être voulu (adoption, famille recomposée) ou être une erreur. ¦ Poate fi voit (adopție, familie recompusă) sau o greșeală.
+Famille n° {n} sans conjoint ¦ Familia nr. {n} fără soț/soție
+Enfants : {names} : il manque le père et la mère. ¦ Copii: {names}: lipsesc tatăl și mama.
+Un mariage, sans les époux : il manque le père et la mère. ¦ O căsătorie fără soți: lipsesc tatăl și mama.
+Sosa {n} notée femme ¦ Sosa {n} notată femeie
+Sosa {n} noté homme ¦ Sosa {n} notat bărbat
+Un Sosa pair est un père : le sexe de la fiche, ou sa place dans l’arbre, est à vérifier. ¦ Un număr Sosa par este un tată: sexul fișei sau locul ei în arbore trebuie verificat.
+Un Sosa impair est une mère : le sexe de la fiche, ou sa place dans l’arbre, est à vérifier. ¦ Un număr Sosa impar este o mamă: sexul fișei sau locul ei în arbore trebuie verificat.
+Sosa {s} : {n} ans pour {k} générations ¦ Sosa {s}: {n} ani pentru {k} generații
+Né(e) {b}, son descendant Sosa {s} {d} : une génération en trop (homonyme pris pour son père) ? ¦ Născut(ă) {b}, descendentul său Sosa {s} {d}: o generație în plus (un omonim luat drept tatăl său)?
+Né(e) {b}, son descendant Sosa {s} {d} : une génération oubliée ? ¦ Născut(ă) {b}, descendentul său Sosa {s} {d}: o generație uitată?
+même nom ¦ același nume
+même prénom ¦ același prenume
+prénom proche ¦ prenume apropiat
+même sexe ¦ același sex
+sexe ¦ sex
+même naissance ¦ aceeași naștere
+nés à {n} an près ¦ născuți la {n} an diferență
+nés la même année ¦ născuți în același an
+nés {a} / {b} ¦ născuți {a} / {b}
+même décès ¦ același deces
+morts {a} / {b} ¦ morți {a} / {b}
+mêmes parents ¦ aceiași părinți
+parents ¦ părinți
+même conjoint ¦ același soț/soție
+autres conjoints ¦ alți soți
+nés au même endroit ¦ născuți în același loc
+nés à {n} km ¦ născuți la {n} km
+né {b} / mort {d} ¦ născut {b} / mort {d}
+né {b} ¦ născut {b}
+né ? / mort {d} ¦ născut ? / mort {d}
+né ? ¦ născut ?
+Ressemble à la fiche n° {n} ({pct} %) ¦ Seamănă cu fișa nr. {n} ({pct} %)
+kin|sa mère ¦ mama sa
+kin|son père ¦ tatăl său
+kin|son parent ¦ părintele său
+kin|sa grand-mère ¦ bunica sa
+kin|son grand-père ¦ bunicul său
+kin|son grand-parent ¦ bunicul/bunica sa
+kin|son ancêtre ({n} générations) ¦ strămoșul său ({n} generații)
+kin|sa fille ¦ fiica sa
+kin|son fils ¦ fiul său
+kin|son enfant ¦ copilul său
+kin|sa petite-fille ¦ nepoata sa
+kin|son petit-fils ¦ nepotul său
+kin|son petit-enfant ¦ nepotul/nepoata sa
+kin|son descendant ({n} générations) ¦ descendentul său ({n} generații)
+{name} marié à {kin} ¦ {name} căsătorit cu {kin}
+{name} mariée à {kin} ¦ {name} căsătorită cu {kin}
+{name} marié(e) à {kin} ¦ {name} căsătorit(ă) cu {kin}
+{name} est {kin} et aussi son conjoint (famille n° {n}) : une fiche rattachée à la mauvaise génération, ou deux homonymes confondus. ¦ {name} este {kin} și totodată soțul/soția sa (familia nr. {n}): o fișă legată de generația greșită sau doi omonimi confundați.
+Animal noté conjoint d’une personne : {name} ¦ Animal notat ca soț/soție al unei persoane: {name}
+Animal noté parent d’une personne : {name} ¦ Animal notat ca părinte al unei persoane: {name}
+Animal noté enfant d’une personne : {name} ¦ Animal notat ca copil al unei persoane: {name}
+Famille n° {n} : {animals} avec {people}. Un animal se relie à son maître dans sa fiche (Propriétaire), pas comme parent ou conjoint. ¦ Familia nr. {n}: {animals} cu {people}. Un animal se leagă de stăpânul său în fișa lui (Proprietar), nu ca părinte sau soț.
+{n} événement à cet endroit ¦ {n} eveniment în acest loc
+{n} événements à cet endroit ¦ {n} evenimente în acest loc
+À {km} km en {n} jours ¦ La {km} km în {n} zile
+À {km} km en {n} jour ¦ La {km} km în {n} zi
+À {km} km en moins d’un jour ¦ La {km} km în mai puțin de o zi
+{a} {ad} à {ap} · {b} {bd} à {bp} (au plus ≈ {n} km par jour à cette époque) ¦ {a} {ad} la {ap} · {b} {bd} la {bp} (cel mult ≈ {n} km pe zi în acea epocă)
+Une même personne ne peut pas être à deux endroits aussi éloignés en si peu de temps : souvent deux homonymes confondus dans une seule fiche. ¦ Aceeași persoană nu poate fi în două locuri atât de îndepărtate într-un timp atât de scurt: adesea doi omonimi confundați într-o singură fișă.
+Lieux de naissance contradictoires ¦ Locuri de naștere contradictorii
+Lieux de décès contradictoires ¦ Locuri de deces contradictorii
+Baptême à {n} km du lieu de naissance ¦ Botez la {n} km de locul nașterii
+Naissance à {b} · baptême à {t} (seuil : {n} km). Souvent : une commune homonyme. ¦ Naștere la {b} · botez la {t} (prag: {n} km). Adesea: o comună cu același nume.
+Coordonnées 0, 0 (en plein océan, au large de l’Afrique) ¦ Coordonate 0, 0 (în mijlocul oceanului, în largul Africii)
+Hors de {country} alors que le pays indiqué est {country} ¦ În afara {country}, deși țara indicată este {country}
+Latitude et longitude probablement inversées ¦ Latitudine și longitudine probabil inversate
+Inverser latitude et longitude ¦ Inversează latitudinea și longitudinea
+Longitude probablement de mauvais signe (est / ouest) ¦ Longitudine probabil cu semnul greșit (est / vest)
+Corriger le signe de la longitude ¦ Corectează semnul longitudinii
+Une autre commune « {name} » est beaucoup plus près du reste de la famille ({a} km au lieu de {b} km) : département {dep} ¦ O altă comună „{name}” este mult mai aproape de restul familiei ({a} km în loc de {b} km): departamentul {dep}
+Prendre la commune du département {dep} ¦ Ia comuna din departamentul {dep}
+À {n} km du reste de la famille ¦ La {n} km de restul familiei
+la commune ¦ comuna
+Commence par les tables décennales (un index alphabétique par décennie), puis le registre de l’année trouvée. ¦ Începe cu tabelele decenale (un index alfabetic pe deceniu), apoi registrul anului găsit.
+Registres paroissiaux (BMS) ¦ Registre parohiale (BMS)
+Les baptêmes de la paroisse de {commune} (collection communale, série E dépôt ou GG ; ou celle du greffe). Le baptême suit la naissance de 0 à 3 jours. ¦ Botezurile parohiei {commune} (colecția comunală, seria E dépôt sau GG; sau cea a grefei). Botezul urmează nașterea la 0–3 zile.
+État civil — naissances ¦ Stare civilă — nașteri
+Les registres de naissances de {commune}. {td} ¦ Registrele de nașteri din {commune}. {td}
+Mairie ¦ Primărie
+Un acte de naissance de moins de 75 ans n’est pas en ligne : copie intégrale à demander à la mairie (avec la preuve de ta filiation). ¦ Un act de naștere mai nou de 75 de ani nu este online: copia integrală se cere la primărie (cu dovada filiației tale).
+Les mariages de la paroisse de {commune}, d’ordinaire celle de l’épouse ; regarde aussi les bans dans la paroisse de l’époux. ¦ Căsătoriile parohiei {commune}, de obicei cea a miresei; uită-te și la vestiri în parohia mirelui.
+État civil — mariages ¦ Stare civilă — căsătorii
+Les registres de mariages de {commune} (commune de l’épouse le plus souvent). {td} Les publications de bans sont parfois dans un registre à part. ¦ Registrele de căsătorii din {commune} (cel mai adesea comuna miresei). {td} Vestirile sunt uneori într-un registru separat.
+Notaires (série E) et contrôle des actes (2 C) ¦ Notari (seria E) și controlul actelor (2 C)
+Minutes notariales (série 3 E) ¦ Minute notariale (seria 3 E)
+Le contrat de mariage, signé chez un notaire quelques jours ou semaines avant ; depuis 1850 l’acte de mariage dit s’il y en a un, et chez quel notaire. Le registre du contrôle des actes (série 2 C) donne le notaire et la date. ¦ Contractul de căsătorie, semnat la un notar cu câteva zile sau săptămâni înainte; din 1850 actul de căsătorie spune dacă există unul și la ce notar. Registrul controlului actelor (seria 2 C) dă notarul și data.
+Le contrat de mariage, signé chez un notaire quelques jours ou semaines avant ; depuis 1850 l’acte de mariage dit s’il y en a un, et chez quel notaire. Les registres de l’enregistrement (série 3 Q, actes civils publics) le retrouvent aussi. ¦ Contractul de căsătorie, semnat la un notar cu câteva zile sau săptămâni înainte; din 1850 actul de căsătorie spune dacă există unul și la ce notar. Registrele de înregistrare (seria 3 Q, acte civile publice) îl regăsesc și ele.
+Un acte de mariage de moins de 75 ans n’est pas en ligne : copie à demander à la mairie. ¦ Un act de căsătorie mai nou de 75 de ani nu este online: copia se cere la primărie.
+Les sépultures de la paroisse de {commune} (inhumation le lendemain du décès, en général). ¦ Înmormântările parohiei {commune} (înmormântarea a doua zi după deces, în general).
+État civil — décès ¦ Stare civilă — decese
+Les décès de {commune}, mais aussi de la commune d’un enfant chez qui la personne a pu finir sa vie, ou de l’hospice voisin. {td} ¦ Decesele din {commune}, dar și din comuna unui copil la care persoana și-a putut încheia viața, sau din azilul din apropiere. {td}
+Enregistrement (série 3 Q) ¦ Înregistrare (seria 3 Q)
+Les tables des successions et absences du bureau de l’enregistrement du canton : la date et le lieu du décès, les héritiers, parfois les biens. ¦ Tabelele succesiunilor și absențelor de la biroul de înregistrare al cantonului: data și locul decesului, moștenitorii, uneori bunurile.
+Pour un homme mort entre 1914 et 1921 : la base des « morts pour la France » (ministère des Armées). ¦ Pentru un bărbat mort între 1914 și 1921: baza „morts pour la France” (Ministerul Forțelor Armate al Franței).
+Son acte de mariage nomme ses parents (et dit s’ils sont vivants) ; à défaut, son acte de baptême. Avant 1792, les actes de mariage nomment souvent les parents, pas toujours. ¦ Actul său de căsătorie îi numește părinții (și spune dacă sunt în viață); în lipsa lui, actul de botez. Înainte de 1792, actele de căsătorie numesc adesea părinții, nu întotdeauna.
+Son acte de mariage nomme ses parents (et dit s’ils sont vivants) ; à défaut, son acte de naissance. Avant 1792, les actes de mariage nomment souvent les parents, pas toujours. ¦ Actul său de căsătorie îi numește părinții (și spune dacă sunt în viață); în lipsa lui, actul de naștere. Înainte de 1792, actele de căsătorie numesc adesea părinții, nu întotdeauna.
+Recensements (série 6 M), à partir de 1836 ¦ Recensăminte (seria 6 M), din 1836
+La famille sous le même toit, avec les âges : pour trouver la commune et l’année de naissance. ¦ Familia sub același acoperiș, cu vârstele: ca să găsești comuna și anul nașterii.
+Recensements (série 6 M) ¦ Recensăminte (seria 6 M)
+Les listes nominatives de {commune}, tous les 5 ans de 1836 à 1936 (avec l’âge, le métier, toute la maisonnée) ; beaucoup sont en ligne. Dans une grande ville, il faut l’adresse (rue). ¦ Listele nominale din {commune}, la fiecare 5 ani între 1836 și 1936 (cu vârsta, meseria, toată gospodăria); multe sunt online. Într-un oraș mare, e nevoie de adresă (stradă).
+Recrutement militaire (série 1 R) ¦ Recrutare militară (seria 1 R)
+Le registre matricule de sa classe (année de naissance + 20), au bureau de recrutement du département où il habitait à 20 ans : signalement (taille, yeux, cheveux), adresses successives, campagnes, blessures. Index alphabétique par classe. ¦ Registrul matricol al contingentului său (anul nașterii + 20), la biroul de recrutare al departamentului unde locuia la 20 de ani: semnalmente (înălțime, ochi, păr), adrese succesive, campanii, răni. Index alfabetic pe contingent.
+Les tables des successions et absences puis les registres des mutations après décès, au bureau de l’enregistrement du canton du décès : héritiers, biens, valeur. Souvent dans les 6 mois après le décès. ¦ Tabelele succesiunilor și absențelor, apoi registrele mutațiilor după deces, la biroul de înregistrare al cantonului decesului: moștenitori, bunuri, valoare. Adesea în cele 6 luni de după deces.
+Le contrat de mariage chez le notaire du bourg ou du canton, peu avant le mariage : la dot, les témoins, la famille élargie. ¦ Contractul de căsătorie la notarul din târg sau din canton, cu puțin înainte de căsătorie: zestrea, martorii, familia extinsă.
+Le contrat de mariage chez le notaire du bourg ou du canton, peu avant le mariage : la dot, les témoins, la famille élargie. L’acte de mariage (après 1850) dit s’il y a un contrat et chez quel notaire. ¦ Contractul de căsătorie la notarul din târg sau din canton, cu puțin înainte de căsătorie: zestrea, martorii, familia extinsă. Actul de căsătorie (după 1850) spune dacă există un contract și la ce notar.
+Hors de France : les registres sont aux archives de la région ou de la paroisse ; FamilySearch en a numérisé beaucoup. ¦ În afara Franței: registrele sunt la arhivele regiunii sau ale parohiei; FamilySearch a digitizat multe dintre ele.
+Les Archives nationales d’outre-mer gardent les doubles des registres (état civil en ligne). ¦ Archives nationales d’outre-mer păstrează duplicatele registrelor (stare civilă online).
+État civil reconstitué ¦ Stare civilă reconstituită
+L’état civil parisien d’avant 1860 a brûlé en 1871 : chercher dans les fichiers de l’état civil reconstitué (Archives de Paris). ¦ Starea civilă pariziană de dinainte de 1860 a ars în 1871: caută în fișierele stării civile reconstituite (Archives de Paris).
+vivante aux recensements de {a} à {b} ({n}) ¦ în viață la recensămintele din {a} până în {b} ({n})
+vivant aux recensements de {a} à {b} ({n}) ¦ în viață la recensămintele din {a} până în {b} ({n})
+vivante aux recensements de {years} ¦ în viață la recensămintele din {years}
+vivant aux recensements de {years} ¦ în viață la recensămintele din {years}
+classe {c} (né en {y}) ¦ contingentul {c} (născut în {y})
+décès en {y} ¦ deces în {y}
+mariage en {y} ¦ căsătorie în {y}
+enfant né en {y} ¦ copil născut în {y}
+enfant né en {y} ; souvent dans la paroisse de l’épouse ¦ copil născut în {y}; adesea în parohia miresei
+dernière mention en {y} ¦ ultima mențiune în {y}
+née vers {y} ¦ născută pe la {y}
+né vers {y} ¦ născut pe la {y}
+son acte de mariage ({y}) nomme ses parents ¦ actul său de căsătorie ({y}) îi numește părinții
+son acte de baptême ({y}) nomme ses parents ¦ actul său de botez ({y}) îi numește părinții
+Même nom, née {n} ans avant à {place} : sa mère ? ¦ Același nume, născută cu {n} ani înainte la {place}: mama sa?
+Même nom, né {n} ans avant à {place} : son père ? ¦ Același nume, născut cu {n} ani înainte la {place}: tatăl său?
+Même nom, née {n} ans avant : sa mère ? ¦ Același nume, născută cu {n} ani înainte: mama sa?
+Même nom, né {n} ans avant : son père ? ¦ Același nume, născut cu {n} ani înainte: tatăl său?
+Même nom, née en {y} à {place} : un frère, une sœur, un cousin ? ¦ Același nume, născută în {y} la {place}: un frate, o soră, un văr?
+Même nom, né en {y} à {place} : un frère, une sœur, un cousin ? ¦ Același nume, născut în {y} la {place}: un frate, o soră, un văr?
+Même nom, née en {y} : un frère, une sœur, un cousin ? ¦ Același nume, născută în {y}: un frate, o soră, un văr?
+Même nom, né en {y} : un frère, une sœur, un cousin ? ¦ Același nume, născut în {y}: un frate, o soră, un văr?
+Même nom, même lieu (née en {y}) ¦ Același nume, același loc (născută în {y})
+Même nom, même lieu (né en {y}) ¦ Același nume, același loc (născut în {y})
+Même nom, même lieu ¦ Același nume, același loc
+{act} de {y} ¦ {act} din {y}
+même nom : de la famille ? ¦ același nume: din familie?
+souvent un proche ¦ adesea o rudă apropiată
+Quelqu’un ¦ Cineva
+Dans le même foyer en {y} à {place}{pos} : un parent âgé, un beau-parent ? ¦ În aceeași gospodărie în {y} la {place}{pos}: un părinte în vârstă, un socru?
+Dans le même foyer en {y}{pos} : un parent âgé, un beau-parent ? ¦ În aceeași gospodărie în {y}{pos}: un părinte în vârstă, un socru?
+Correspondance ADN{details} : son arbre a peut-être la suite ¦ Potrivire ADN{details}: arborele ei are poate continuarea
+🧩 Mur de la semaine ¦ 🧩 Fundătura săptămânii
+Mur de brique : {name} — chercher ses deux parents ¦ Fundătură: {name} — caută ambii părinți
+Mur de brique : {name} — chercher son père ¦ Fundătură: {name} — caută tatăl
+Mur de brique : {name} — chercher sa mère ¦ Fundătură: {name} — caută mama
+Mur de brique : {name} — chercher ce qui manque ¦ Fundătură: {name} — caută ce lipsește
+génération {n} ¦ generația {n}
+🌍 Où chercher ? te propose les sites à consulter ¦ 🌍 Unde să cauți? îți propune site-urile de consultat
+Piste faite ¦ Pistă făcută
+Commune inconnue : choisis la commune du dépouillement (avec son code INSEE) dans Recherche. ¦ Comună necunoscută: alege comuna indexării (cu codul ei INSEE) în Cercetare.
+Département inconnu. ¦ Departament necunoscut.
+Téléchargement impossible : PHP n’a pas l’extension curl. ¦ Descărcare imposibilă: PHP nu are extensia curl.
+Le fichier des adresses du département n’est pas encore téléchargé. ¦ Fișierul de adrese al departamentului nu este încă descărcat.
+Fichier des adresses illisible. ¦ Fișier de adrese ilizibil.
+Indique l’ancien nom de la rue. ¦ Indică vechiul nume al străzii.
+Les services d’archives ne sont pas encore prêts : relance l’app. ¦ Serviciile de arhivă nu sunt încă gata: repornește aplicația.
+Cette suppression n’a pas été trouvée dans le journal. ¦ Această ștergere nu a fost găsită în jurnal.
+Ce service existe déjà. ¦ Acest serviciu există deja.
+Artiste introuvable : cette fiche n’existe pas, ou plus (supprimée ?). ¦ Artist negăsit: această fișă nu există sau nu mai există (ștearsă?).
+Sorte de fiche inconnue. ¦ Tip de fișă necunoscut.
+Cette fiche n’est pas cochée « Artiste » : coche « Artiste » sur la fiche (Modifier la fiche) avant d’y ranger un élément du catalogue. ¦ Această fișă nu este bifată „Artist”: bifează „Artist” pe fișă (Modifică fișa) înainte de a pune acolo un element din catalog.
+Élément trop volumineux. ¦ Element prea mare.
+Élément introuvable : il a peut-être été supprimé ou rangé chez un autre artiste. ¦ Element negăsit: poate a fost șters sau pus la alt artist.
+Élément introuvable : il a peut-être déjà été supprimé. ¦ Element negăsit: poate a fost deja șters.
+Rangement impossible : un des éléments n’existe plus (recharge le catalogue). ¦ Ordonare imposibilă: unul dintre elemente nu mai există (reîncarcă catalogul).
+Rien à remettre. ¦ Nimic de restabilit.
+La fiche de la personne n’existe plus : impossible de remettre cet élément. ¦ Fișa persoanei nu mai există: acest element nu poate fi restabilit.
+Donne un nom à cette sorte de fiche. ¦ Dă un nume acestui tip de fișă.
+Cette sorte a trop de réglages. ¦ Acest tip are prea multe setări.
+Des fiches de cette sorte existent encore : supprime-les d’abord. ¦ Încă există fișe de acest tip: șterge-le mai întâi.
+Réglage inconnu. ¦ Setare necunoscută.
+Réglages trop volumineux. ¦ Setări prea mari.
+Import impossible : PHP n’a pas l’extension curl. ¦ Import imposibil: PHP nu are extensia curl.
+Le site demande de patienter (trop de demandes) : réessaie dans une minute. ¦ Site-ul cere să aștepți (prea multe cereri): încearcă din nou peste un minut.
+Le site refuse la demande : une clé ou un jeton est nécessaire (ou il n’est pas bon). ¦ Site-ul refuză cererea: e nevoie de o cheie sau de un token (sau nu este corect).
+Rien trouvé à cette adresse (identifiant inconnu). ¦ Nimic găsit la această adresă (identificator necunoscut).
+Réponse illisible du site. ¦ Răspuns ilizibil de la site.
+La recherche par nom sur Discogs demande un jeton personnel (gratuit : discogs.com → Paramètres → Développeurs). Sans jeton, colle l’adresse d’un artiste, d’un album ou d’un disque. ¦ Căutarea după nume pe Discogs cere un token personal (gratuit: discogs.com → Settings → Developers). Fără token, lipește adresa unui artist, a unui album sau a unui disc.
+Ce n’est pas une image (JPEG, PNG, WebP ou GIF). ¦ Nu este o imagine (JPEG, PNG, WebP sau GIF).
+Image refusée : seules les images de Discogs, MusicBrainz/Cover Art Archive, Open Library, Wikimedia, TMDb et Apple sont rapatriées. ¦ Imagine refuzată: sunt aduse doar imaginile de pe Discogs, MusicBrainz/Cover Art Archive, Open Library, Wikimedia, TMDb și Apple.
+Trop de redirections. ¦ Prea multe redirecționări.
+Donne un titre au projet. ¦ Dă un titlu proiectului.
+Ce dossier n’est pas dans ce projet. ¦ Acest dosar nu este în acest proiect.
+Un dossier ne peut pas aller dans lui-même ni dans un de ses sous-dossiers. ¦ Un dosar nu poate intra în el însuși sau în unul dintre subdosarele lui.
+Donne un nom au dossier. ¦ Dă un nume dosarului.
+Élément introuvable. ¦ Element negăsit.
+Donne un titre à cet élément. ¦ Dă un titlu acestui element.
+Rien de reconnu : le fichier doit être un export Zotero RDF (.rdf), CSL JSON (.json), EndNote XML (.xml), BibTeX (.bib) ou RIS (.ris). ¦ Nimic recunoscut: fișierul trebuie să fie un export Zotero RDF (.rdf), CSL JSON (.json), EndNote XML (.xml), BibTeX (.bib) sau RIS (.ris).
+Fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un export de bibliographie n’utilise pas. ¦ Fișier refuzat: conține declarații XML (DOCTYPE sau ENTITY) pe care un export de bibliografie nu le folosește.
+Donne un nom au projet. ¦ Dă un nume proiectului.
+Projet trop gros (4 Mo au plus pour les réglages). ¦ Proiect prea mare (cel mult 4 MB pentru setări).
+Réglages du projet illisibles. ¦ Setările proiectului sunt ilizibile.
+Ce média n’est pas un son. ¦ Acest fișier media nu este un sunet.
+Ce fichier n’est pas une version de ce son. ¦ Acest fișier nu este o versiune a acestui sunet.
+Trop de zones (500 au plus). ¦ Prea multe zone (cel mult 500).
+Le mot de passe doit faire au moins 8 caractères. ¦ Parola trebuie să aibă cel puțin 8 caractere.
+Le chiffrement des sauvegardes n’est pas disponible sur cet ordinateur. ¦ Criptarea copiilor de siguranță nu este disponibilă pe acest calculator.
+Impossible de créer le dossier temporaire de la sauvegarde. ¦ Dosarul temporar al copiei de siguranță nu a putut fi creat.
+Impossible de créer l’archive. ¦ Arhiva nu a putut fi creată.
+Écriture de l’archive impossible. ¦ Arhiva nu a putut fi scrisă.
+Ce fichier n’est pas une base SQLite lisible. ¦ Acest fișier nu este o bază SQLite lizibilă.
+Cette base vient d’une version plus récente de l’application : mets LCNDA à jour pour l’ouvrir. ¦ Această bază vine dintr-o versiune mai nouă a aplicației: actualizează LCNDA ca s-o deschizi.
+Une généalogie est déjà ouverte : elle ne sera pas remplacée. Ouvre ce fichier sur l’écran de démarrage d’une installation vide. ¦ O genealogie este deja deschisă: nu va fi înlocuită. Deschide acest fișier din ecranul de pornire al unei instalări goale.
+Impossible de créer le dossier de la base. ¦ Dosarul bazei nu a putut fi creat.
+Lecture de la base impossible dans l’archive. ¦ Baza din arhivă nu a putut fi citită.
+Impossible d’enregistrer le fichier reçu. ¦ Fișierul primit nu a putut fi salvat.
+Impossible de créer le dossier des médias. ¦ Dosarul media nu a putut fi creat.
+Impossible de remplacer la base vide. ¦ Baza goală nu a putut fi înlocuită.
+Impossible de mettre la base en place. ¦ Baza nu a putut fi pusă la locul ei.
+Import par chemin réservé à l’application de bureau. ¦ Importul după cale este rezervat aplicației desktop.
+Ce dossier n’est ni un paquet MacFamilyTree (.mftpkg), ni un fichier Hérédis (.hmw). ¦ Acest dosar nu este nici un pachet MacFamilyTree (.mftpkg), nici un fișier Hérédis (.hmw).
+« Une journée dans la vie » est faite pour les personnes. ¦ „O zi din viață” este făcută pentru persoane.
+Cette fiche n’est pas montrée en mode consultation. ¦ Această fișă nu este afișată în modul consultare.
+Cet événement n’est pas dans la vie de cette personne. ¦ Acest eveniment nu este în viața acestei persoane.
+Cet événement n’a pas de date : choisis-en un autre, ou écris une date. ¦ Acest eveniment nu are dată: alege altul sau scrie o dată.
+Choisis un événement de sa vie, ou écris une date. ¦ Alege un eveniment din viața sa sau scrie o dată.
+Je ne comprends pas cette date (exemples : 7 mai 1925, vers 1784, 12 thermidor an II). ¦ Nu înțeleg această dată (exemple: 7 mai 1925, vers 1784, 12 thermidor an II).
+Personne introuvable : choisis d’abord à qui se rattache cette fiche. ¦ Persoană negăsită: alege mai întâi cui îi aparține această fișă.
+Fiche verrouillée. Déverrouille-la avant de modifier ou supprimer cette personne. ¦ Fișă blocată. Deblocheaz-o înainte de a modifica sau șterge această persoană.
+Fiche introuvable : elle a peut-être été supprimée. ¦ Fișă negăsită: poate a fost ștearsă.
+Fiche introuvable : elle a peut-être déjà été supprimée. ¦ Fișă negăsită: poate a fost deja ștearsă.
+Ce tableau a été modifié dans une autre fenêtre depuis que tu l’as ouvert. ¦ Acest tabel a fost modificat în altă fereastră de când l-ai deschis.
+Instantané introuvable. ¦ Instantaneu negăsit.
+Donne un nom à l’instantané. ¦ Dă un nume instantaneului.
+La base locale n'a pas encore été importée. ¦ Baza locală nu a fost încă importată.
+Parcelle introuvable (supprimée ?). ¦ Parcelă negăsită (ștearsă?).
+Lien de sorte inconnue. ¦ Legătură de tip necunoscut.
+La section s’écrit avec 1 ou 2 lettres ou chiffres (ex. « AB », « B », « 0A »). ¦ Secțiunea se scrie cu 1 sau 2 litere sau cifre (ex. „AB”, „B”, „0A”).
+Le numéro de parcelle est un nombre de 1 à 9999. ¦ Numărul parcelei este un număr de la 1 la 9999.
+Code de commune (INSEE) inconnu : 5 chiffres, ex. 19272. ¦ Cod de comună (INSEE) necunoscut: 5 cifre, ex. 19272.
+Donne au moins la section et le numéro de la parcelle (ou un lieu-dit). ¦ Dă cel puțin secțiunea și numărul parcelei (sau un loc numit).
+La surface est un nombre de mètres carrés. ¦ Suprafața este un număr de metri pătrați.
+Parcelle introuvable (déjà supprimée ?). ¦ Parcelă negăsită (deja ștearsă?).
+Cette fiche n’existe pas (supprimée ?). ¦ Această fișă nu există (ștearsă?).
+Beaucoup de demandes au cadastre en une minute : attends un petit moment et réessaie. ¦ Multe cereri către cadastru într-un minut: așteaptă puțin și încearcă din nou.
+Le cadastre en ligne ne répond pas pour l’instant. ¦ Cadastrul online nu răspunde deocamdată.
+Le cadastre en ligne ne répond pas (pas d’Internet ?). Tu peux remplir la parcelle à la main. ¦ Cadastrul online nu răspunde (fără internet?). Poți completa parcela de mână.
+Recherche impossible : PHP n’a pas l’extension curl. ¦ Căutare imposibilă: PHP nu are extensia curl.
+La réponse du service est trop grosse : précise la recherche (section et numéro). ¦ Răspunsul serviciului este prea mare: restrânge căutarea (secțiune și număr).
+Choisis d’abord une commune de France (avec son code INSEE). ¦ Alege mai întâi o comună din Franța (cu codul ei INSEE).
+Point de la carte incompris. ¦ Punct de pe hartă neînțeles.
+Écris la section (1 ou 2 lettres, ex. « AB » ou « B »). ¦ Scrie secțiunea (1 sau 2 litere, ex. „AB” sau „B”).
+Il faut une parcelle avec sa commune, sa section et son numéro. ¦ E nevoie de o parcelă cu comuna, secțiunea și numărul ei.
+Les ventes (DVF) n’ont pas pu être lues : pas d’Internet, ou service indisponible. ¦ Vânzările (DVF) nu au putut fi citite: fără internet sau serviciu indisponibil.
+Demande de carte inconnue. ¦ Cerere de hartă necunoscută.
+Opération de carte inconnue. ¦ Operație de hartă necunoscută.
+Action de carte inconnue. ¦ Acțiune de hartă necunoscută.
+Zone illisible : il faut un sud, un ouest, un nord et un est. ¦ Zonă ilizibilă: e nevoie de un sud, un vest, un nord și un est.
+Carte trop longue à décrire. ¦ Hartă prea lungă de descris.
+Adresse refusée. ¦ Adresă refuzată.
+Fichier impossible à écrire. ¦ Fișierul nu poate fi scris.
+Fichier trop gros : ce n’est pas celui attendu. ¦ Fișier prea mare: nu este cel așteptat.
+Dossier des frontières impossible à créer. ¦ Dosarul granițelor nu poate fi creat.
+Aucune commune ancienne lue dans ces fichiers : rien n’a été installé. ¦ Nicio comună veche citită în aceste fișiere: nu s-a instalat nimic.
+Fichier impossible à ranger. ¦ Fișierul nu poate fi păstrat.
+Choisis un nom de famille. ¦ Alege un nume de familie.
+Rien à citer : choisis une source. ¦ Nimic de citat: alege o sursă.
+Donne un nom à l’objet (ex. « Horloge comtoise »). ¦ Dă un nume obiectului (ex. „Ceasul cu pendul”).
+Donne un titre (ex. « La tarte aux pommes de mémé »). ¦ Dă un titlu (ex. „Plăcinta cu mere a bunicii”).
+Lieu introuvable (les adresses ont peut-être changé). ¦ Loc negăsit (poate adresele s-au schimbat).
+Donne un nom (ex. « Salon de généalogie de Paris »). ¦ Dă un nume (ex. „Salonul de genealogie de la Paris”).
+Réglages illisibles. ¦ Setări ilizibile.
+Événement introuvable. ¦ Eveniment negăsit.
+Donnée incorrecte : un texte est attendu. ¦ Dată incorectă: se așteaptă un text.
+Opération inconnue. ¦ Operație necunoscută.
+Choisis l’ancêtre (ou le couple) dont on réunit les descendants. ¦ Alege strămoșul (sau cuplul) ai cărui descendenți îi reunim.
+Invité introuvable. ¦ Invitat negăsit.
+Réponse inconnue. ¦ Răspuns necunoscut.
+Le nombre de personnes va de 0 à 99. ¦ Numărul de persoane merge de la 0 la 99.
+SocFace lit « née en {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace citește „née en {sf}”, fișa ta spune {p} — IA poate a citit greșit: verifică pe imagine.
+SocFace lit « né en {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace citește „né en {sf}”, fișa ta spune {p} — IA poate a citit greșit: verifică pe imagine.
+SocFace lit « née vers {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace citește „née vers {sf}”, fișa ta spune {p} — IA poate a citit greșit: verifică pe imagine.
+SocFace lit « né vers {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace citește „né vers {sf}”, fișa ta spune {p} — IA poate a citit greșit: verifică pe imagine.
+SocFace lit « née à {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace citește „née à {sf}”, fișa ta spune {p} — IA poate a citit greșit: verifică pe imagine.
+SocFace lit « né à {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace citește „né à {sf}”, fișa ta spune {p} — IA poate a citit greșit: verifică pe imagine.
+SocFace lit « femme », ta fiche dit homme — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace citește „femeie”, fișa ta spune bărbat — IA poate a citit greșit: verifică pe imagine.
+SocFace lit « homme », ta fiche dit femme — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace citește „bărbat”, fișa ta spune femeie — IA poate a citit greșit: verifică pe imagine.
+SocFace lit « {role} » du chef de ménage, ta fiche dit enfant — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace citește „{role}” al capului gospodăriei, fișa ta spune copil — IA poate a citit greșit: verifică pe imagine.
+SocFace lit « {role} » du chef de ménage, ta fiche dit conjoint — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace citește „{role}” al capului gospodăriei, fișa ta spune soț/soție — IA poate a citit greșit: verifică pe imagine.
+SocFace lit « {role} » du chef de ménage, ta fiche dit parent — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace citește „{role}” al capului gospodăriei, fișa ta spune părinte — IA poate a citit greșit: verifică pe imagine.
+SocFace lit « {role} » du chef de ménage, ta fiche ne les relie pas — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace citește „{role}” al capului gospodăriei, fișa ta nu îi leagă — IA poate a citit greșit: verifică pe imagine.
+SocFace lit « {role} » du chef de ménage, ta fiche dit rien — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace citește „{role}” al capului gospodăriei, fișa ta nu spune nimic — IA poate a citit greșit: verifică pe imagine.
+vivante en {y}, à {place} vers {y} d’après un événement de la même année ¦ în viață în {y}, la {place} pe la {y} după un eveniment din același an
+vivant en {y}, à {place} vers {y} d’après un événement de la même année ¦ în viață în {y}, la {place} pe la {y} după un eveniment din același an
+vivante en {y}, à {place} vers {y} d’après un événement proche ¦ în viață în {y}, la {place} pe la {y} după un eveniment apropiat
+vivant en {y}, à {place} vers {y} d’après un événement proche ¦ în viață în {y}, la {place} pe la {y} după un eveniment apropiat
+Recensement de {y} à {place} (SocFace) : {what} ¦ Recensământul din {y} de la {place} (SocFace): {what}
+Recensement de {y} (SocFace) : {what} ¦ Recensământul din {y} (SocFace): {what}
+socface|année de naissance ¦ anul nașterii
+socface|lieu de naissance ¦ locul nașterii
+socface|genre ¦ sex
+socface|lien de parenté ¦ legătură de rudenie
+{text} (foyer coché « Vérifié sur l’image ») ¦ {text} (gospodărie bifată „Verificat pe imagine”)
+Le numéro de table va de 1 à 500. ¦ Numărul mesei merge de la 1 la 500.
+Donne au moins un prénom ou un nom. ¦ Dă cel puțin un prenume sau un nume.
+Cette fiche est introuvable (ou confidentielle). ¦ Această fișă nu poate fi găsită (sau este confidențială).
+Cette personne est déjà dans la liste des invités. ¦ Această persoană este deja în lista invitaților.
+Aucun invité. ¦ Niciun invitat.
+Aucune ligne à importer. ¦ Niciun rând de importat.
+Réglage trop long. ¦ Setare prea lungă.
+Mode consultation : les cousinades (adresses des vivants) ne se montrent pas. ¦ Mod consultare: reuniunile de familie (adresele celor în viață) nu sunt afișate.
+Choisis l’ancêtre. ¦ Alege strămoșul.
+Donnée inconnue. ¦ Dată necunoscută.
+Données inconnues. ¦ Date necunoscute.
+Diagramme trop gros (plus de 1,5 Mo de données). ¦ Diagramă prea mare (peste 1,5 MB de date).
+Indique le numéro de la page (ou de la vue). ¦ Indică numărul paginii (sau al imaginii).
+Choisis la personne testée (ou donne un nom au test). ¦ Alege persoana testată (sau dă un nume testului).
+Choisis d’abord le test (kit) auquel rattacher les correspondances. ¦ Alege mai întâi testul (kitul) de care să legi potrivirile.
+Donne le nom de la correspondance. ¦ Dă numele potrivirii.
+Ce fichier ressemble à un fichier ADN brut (des SNP « rs… ») : il n’est jamais importé, par prudence pour la vie privée et la loi française. Importe plutôt la liste des correspondances ou des segments. ¦ Acest fișier pare a fi un fișier ADN brut (SNP-uri „rs…”): nu este importat niciodată, din prudență pentru viața privată și pentru legea franceză. Importă mai bine lista potrivirilor sau a segmentelor.
+Coche au moins une sorte d’anniversaire. ¦ Bifează cel puțin un fel de aniversare.
+Coche au moins une sorte de contacts. ¦ Bifează cel puțin un fel de contacte.
+Aucun contact à exporter : ton répertoire, tes services d’archives et tes cousins ADN sont vides. ¦ Niciun contact de exportat: agenda ta, serviciile tale de arhivă și verii tăi ADN sunt goale.
+Aucune personne n°1 (Sosa) : choisis-la d’abord (Réglages → Apparence). ¦ Nicio persoană nr. 1 (Sosa): alege-o mai întâi (Setări → Aspect).
+Choisis la personne de la branche. ¦ Alege persoana ramurii.
+Aucune personne à exporter. ¦ Nicio persoană de exportat.
+Création du fichier ZIP impossible. ¦ Fișierul ZIP nu a putut fi creat.
+Donne un nom à l’employeur. ¦ Dă un nume angajatorului.
+La base d’exemple a déjà des fiches. ¦ Baza de exemplu are deja fișe.
+Dossier des médias impossible à créer. ¦ Dosarul media nu poate fi creat.
+Copie d’une image d’exemple impossible. ¦ O imagine de exemplu nu a putut fi copiată.
+Les médias font plus de 4 Go : le paquet serait trop gros. Fais plutôt une branche (une personne et ses ancêtres), ou une sauvegarde complète. ¦ Fișierele media depășesc 4 GB: pachetul ar fi prea mare. Fă mai bine o ramură (o persoană și strămoșii ei) sau o copie de siguranță completă.
+Pas assez de place libre sur l’ordinateur pour fabriquer ce paquet. ¦ Nu este destul spațiu liber pe calculator pentru a face acest pachet.
+Le paquet GedZip n’a pas pu être fabriqué. ¦ Pachetul GedZip nu a putut fi făcut.
+Le paquet GedZip n’a pas pu être écrit. ¦ Pachetul GedZip nu a putut fi scris.
+Le paquet Gramps n’a pas pu être fabriqué. ¦ Pachetul Gramps nu a putut fi făcut.
+Contrôle : le nom d’une personne cachée restait dans la copie. Rien n’a été fabriqué. ¦ Verificare: numele unei persoane ascunse rămăsese în copie. Nu s-a făcut nimic.
+Contrôle : une personne vivante avait encore des renseignements. Rien n’a été fabriqué. ¦ Verificare: o persoană în viață mai avea informații. Nu s-a făcut nimic.
+Une des personnes choisies pour les branches n’existe plus. ¦ Una dintre persoanele alese pentru ramuri nu mai există.
+Impossible de préparer le fichier. ¦ Fișierul nu a putut fi pregătit.
+Lecture du fichier GEDCOM impossible ¦ Fișierul GEDCOM nu a putut fi citit
+Ce fichier n’est pas un GEDCOM : aucune personne ni en-tête « HEAD » trouvé. ¦ Acest fișier nu este un GEDCOM: nu s-a găsit nicio persoană și niciun antet „HEAD”.
+Graphique illisible (trop de champs). ¦ Grafic ilizibil (prea multe câmpuri).
+Graphique illisible (trop imbriqué). ¦ Grafic ilizibil (prea imbricat).
+Sorte de graphique inconnue. ¦ Tip de grafic necunoscut.
+Graphique trop gros pour être enregistré (2 Mo au plus). ¦ Grafic prea mare pentru a fi salvat (cel mult 2 MB).
+Liste de graphiques illisible. ¦ Listă de grafice ilizibilă.
+Vignette refusée. ¦ Miniatură refuzată.
+Opération inconnue sur les graphiques. ¦ Operație necunoscută pe grafice.
+Action inconnue sur les graphiques. ¦ Acțiune necunoscută pe grafice.
+Fichier Hérédis introuvable. ¦ Fișier Hérédis negăsit.
+Aucun fichier .heredis dans ce dossier Hérédis. ¦ Niciun fișier .heredis în acest dosar Hérédis.
+Ce fichier n’est pas un fichier Hérédis lisible (Hérédis 2019 ou plus récent). ¦ Acest fișier nu este un fișier Hérédis lizibil (Hérédis 2019 sau mai nou).
+Média introuvable ¦ Fișier media negăsit
+Donne un nom aux armoiries (ex. « Armes de la famille de Montferrand »). ¦ Dă un nume stemei (ex. „Stema familiei de Montferrand”).
+Donne un nom au circuit (ex. « Sur les traces des Dupont en Corrèze »). ¦ Dă un nume circuitului (ex. „Pe urmele familiei Dupont în Corrèze”).
+Étape introuvable ¦ Etapă negăsită
+Choisis au moins une personne (ou une branche) pour préparer le circuit. ¦ Alege cel puțin o persoană (sau o ramură) ca să pregătești circuitul.
+Donne un titre au document (ex. « Livret de famille Dupont-Martin »). ¦ Dă un titlu documentului (ex. „Livretul de familie Dupont-Martin”).
+Donne un nom à la carte (ex. « Cadastre napoléonien de Saint-Yrieix, 1834 »). ¦ Dă un nume hărții (ex. „Cadastrul napoleonian din Saint-Yrieix, 1834”).
+Indique au moins un critère. ¦ Indică cel puțin un criteriu.
+Donne un nom à la recherche (ex. « Les Dupont du Nord avant 1800 »). ¦ Dă un nume căutării (ex. „Familia Dupont din Nord înainte de 1800”).
+Décompresse d’abord le fichier ZIP, puis importe le fichier CSV. ¦ Dezarhivează mai întâi fișierul ZIP, apoi importă fișierul CSV.
+dossier introuvable (disque ou clé débranché ?) ¦ dosar negăsit (disc sau stick deconectat?)
+dossier non accessible en écriture ¦ dosarul nu permite scrierea
+impossible de créer le sous-dossier de cette généalogie ¦ subdosarul acestei genealogii nu a putut fi creat
+Aucun dossier hors de l’ordinateur n’est réglé. ¦ Niciun dosar din afara calculatorului nu este setat.
+Je n’ai pas compris la date ou l’âge de la question, alors je ne liste pas tout. Exemples : « Qui est né le 7 mai 1950 ? », « nés en 1924 », « nés en l’an II », « nés un 15 brumaire », « morts à 70 ans », « morts avant leur naissance ». ¦ Nu am înțeles data sau vârsta din întrebare, așa că nu listez tot. Exemple (în franceză): „Qui est né le 7 mai 1950 ?”, „nés en 1924”, „nés en l’an II”, „nés un 15 brumaire”, „morts à 70 ans”, „morts avant leur naissance”.
+Je n’ai pas compris la question. Exemples : « Quels ancêtres étaient boulangers à Lille avant 1850 ? », « Qui est né le même jour que moi ? », « les Dupont mariés dans le Nord au XVIIIe siècle ». ¦ Nu am înțeles întrebarea. Exemple (în franceză): „Quels ancêtres étaient boulangers à Lille avant 1850 ?”, „Qui est né le même jour que moi ?”, „les Dupont mariés dans le Nord au XVIIIe siècle”.
+Indique la langue. ¦ Indică limba.
+Acte introuvable (ou de plus de 100 ans : il est sans doute en ligne aux archives). ¦ Act negăsit (sau mai vechi de 100 de ani: probabil este online la arhive).
+Cet acte est déjà ouvert au public. ¦ Acest act este deja deschis publicului.
+Cette copie demande Argon2id, que le PHP de cet ordinateur ne connaît pas : ouvre-la sur un Mac ou sous Linux. ¦ Această copie cere Argon2id, pe care PHP-ul acestui calculator nu îl cunoaște: deschide-o pe un Mac sau pe Linux.
+Copie chiffrée abîmée. ¦ Copie criptată deteriorată.
+Écriture impossible (disque plein ?) : la copie n’a pas été faite. ¦ Scriere imposibilă (disc plin?): copia nu a fost făcută.
+Fichier temporaire impossible à créer. ¦ Fișierul temporar nu poate fi creat.
+Lecture de la base impossible. ¦ Baza nu a putut fi citită.
+Ce fichier n’est pas une copie chiffrée LCNDA. ¦ Acest fișier nu este o copie criptată LCNDA.
+Copie chiffrée incomplète. ¦ Copie criptată incompletă.
+Mot de passe incorrect, ou fichier abîmé. ¦ Parolă greșită sau fișier deteriorat.
+Fichier de sortie impossible à créer. ¦ Fișierul de ieșire nu poate fi creat.
+Choisis un mot de passe d’au moins 12 caractères, par exemple une phrase de quelques mots (à garder précieusement : sans lui, la copie est illisible, même pour toi). ¦ Alege o parolă de cel puțin 12 caractere, de exemplu o frază din câteva cuvinte (păstreaz-o cu grijă: fără ea, copia nu poate fi citită, nici măcar de tine).
+Ce fichier n’a pas la taille d’une copie chiffrée LCNDA. ¦ Acest fișier nu are mărimea unei copii criptate LCNDA.
+Impossible de ranger la copie. ¦ Copia nu a putut fi păstrată.
+La copie déchiffrée n’est pas une base lisible. ¦ Copia decriptată nu este o bază lizibilă.
+Rien à harmoniser. ¦ Nimic de armonizat.
+Cette harmonisation ne peut pas être annulée. ¦ Această armonizare nu poate fi anulată.
+Coordonnées invalides. ¦ Coordonate nevalide.
+Donne un nom au bloc. ¦ Dă un nume blocului.
+Ajoute au moins un champ. ¦ Adaugă cel puțin un câmp.
+Ce fichier n’est pas un bloc LCNDA. ¦ Acest fișier nu este un bloc LCNDA.
+Cette fiche n’appartient pas à ce bloc. ¦ Această fișă nu aparține acestui bloc.
+Mode consultation : rien ne peut être modifié. Pour en sortir, clique sur « Quitter la consultation » et donne le mot de passe. ¦ Mod consultare: nu se poate modifica nimic. Ca să ieși, fă clic pe „Ieși din consultare” și dă parola.
+Choisis un mot de passe d’au moins 4 caractères. ¦ Alege o parolă de cel puțin 4 caractere.
+Impossible d’activer le mode consultation (dossier des données en lecture seule ?). ¦ Modul consultare nu a putut fi pornit (dosarul de date este doar pentru citire?).
+Choisis le lieu (hameau, village) dans les suggestions. ¦ Alege locul (cătun, sat) din sugestii.
+Indique la paroisse (ex. « Saint-Martin de Brive »). ¦ Indică parohia (ex. „Saint-Martin de Brive”).
+Indique le nom. ¦ Indică numele.
+Indique ton prénom (il apparaît dans les paquets que tu envoies). ¦ Indică prenumele tău (apare în pachetele pe care le trimiți).
+Le travail à deux n’est pas commencé sur cette base. ¦ Lucrul în doi nu a început pe această bază.
+Aucune modification depuis le dernier paquet. ¦ Nicio modificare de la ultimul pachet.
+Paquet introuvable : recharge-le. ¦ Pachet negăsit: încarcă-l din nou.
+Paquet illisible : recharge-le. ¦ Pachet ilizibil: încarcă-l din nou.
+Cette demande doit être un envoi. ¦ Această cerere trebuie să fie o trimitere.
+Donne un nom à l’objet. ¦ Dă un nume obiectului.
+Image refusée : une image PNG, JPEG ou WebP de moins de 300 Ko. ¦ Imagine refuzată: o imagine PNG, JPEG sau WebP sub 300 KB.
+Modèle trop gros (30 Mo au plus) ou vide. ¦ Model prea mare (cel mult 30 MB) sau gol.
+Adresse refusée (seules les adresses de la bibliothèque en ligne sont permises). ¦ Adresă refuzată (sunt permise doar adresele bibliotecii online).
+Fichier trop gros pour être téléchargé. ¦ Fișier prea mare pentru a fi descărcat.
+La bibliothèque en ligne ne répond pas : vérifie la connexion à internet (ou réessaie plus tard). ¦ Biblioteca online nu răspunde: verifică conexiunea la internet (sau încearcă mai târziu).
+La bibliothèque demande de patienter (trop de demandes) : réessaie dans une minute. ¦ Biblioteca cere să aștepți (prea multe cereri): încearcă din nou peste un minut.
+Modèle introuvable dans la bibliothèque. ¦ Model negăsit în bibliotecă.
+Réponse illisible de la bibliothèque en ligne. ¦ Răspuns ilizibil de la biblioteca online.
+Identifiant de modèle incorrect. ¦ Identificator de model incorect.
+Ce n’est pas un modèle 3D. ¦ Nu este un model 3D.
+Ce modèle n’existe pas en glTF. ¦ Acest model nu există în glTF.
+Modèle trop lourd (plus de 40 Mo avec ses textures). ¦ Model prea greu (peste 40 MB cu texturile lui).
+Modèle trop compliqué (trop de fichiers). ¦ Model prea complicat (prea multe fișiere).
+Fichier abîmé pendant le téléchargement (empreinte différente) : réessaie. ¦ Fișier deteriorat la descărcare (amprentă diferită): încearcă din nou.
+Modèle trop lourd. ¦ Model prea greu.
+Ce glTF est illisible. ¦ Acest glTF este ilizibil.
+Données intégrées illisibles. ¦ Date integrate ilizibile.
+Chemin de fichier refusé dans le modèle. ¦ Cale de fișier refuzată în model.
+Une texture du modèle n’est pas une image PNG, JPEG ou WebP. ¦ O textură a modelului nu este o imagine PNG, JPEG sau WebP.
+Modèle trop gros (30 Mo au plus). ¦ Model prea mare (cel mult 30 MB).
+Conversion du modèle impossible. ¦ Modelul nu a putut fi convertit.
+Le pack n’est plus là : renvoie le fichier ZIP. ¦ Pachetul nu mai este aici: trimite din nou fișierul ZIP.
+PHP n’a pas l’extension zip : impossible d’ouvrir un pack. ¦ PHP nu are extensia zip: un pachet nu poate fi deschis.
+Aucun fichier ZIP reçu (ou trop gros pour le serveur). ¦ Niciun fișier ZIP primit (sau prea mare pentru server).
+Ce fichier n’est pas un ZIP. ¦ Acest fișier nu este un ZIP.
+Aucun modèle 3D (GLB, glTF, OBJ, STL) dans ce ZIP. ¦ Niciun model 3D (GLB, glTF, OBJ, STL) în acest ZIP.
+Choisis au moins un modèle. ¦ Alege cel puțin un model.
+Indique la licence du pack (CC0, domaine public…). ¦ Indică licența pachetului (CC0, domeniu public…).
+Rien à rattacher. ¦ Nimic de legat.
+Plan trop lourd (6 Mo au plus) : un plan scanné plus petit ? ¦ Plan prea greu (cel mult 6 MB): un plan scanat mai mic?
+Le plan contient un contenu refusé. ¦ Planul conține un conținut refuzat.
+Aucun fichier reçu. ¦ Niciun fișier primit.
+Formats 3D acceptés : OBJ, STL, GLB, glTF (et MTL pour les couleurs d’un OBJ). ¦ Formate 3D acceptate: OBJ, STL, GLB, glTF (și MTL pentru culorile unui OBJ).
+Fichier plus gros que prévu : refusé. ¦ Fișier mai mare decât era prevăzut: refuzat.
+Écriture impossible dans le dossier des données. ¦ Scriere imposibilă în dosarul de date.
+Téléchargement interrompu : réessaie. ¦ Descărcare întreruptă: încearcă din nou.
+Dossier hors des données de la reconnaissance d’écriture : rien n’est effacé. ¦ Dosar în afara datelor recunoașterii scrisului: nu se șterge nimic.
+Ce modèle ne se télécharge pas tout seul : ajoute son fichier à la main. ¦ Acest model nu se descarcă singur: adaugă-i fișierul de mână.
+Une installation est en cours : attends qu’elle finisse. ¦ O instalare este în curs: așteaptă să se termine.
+Nom de modèle refusé. ¦ Nume de model refuzat.
+Impossible de déplacer le modèle. ¦ Modelul nu a putut fi mutat.
+Il faut un fichier de modèle Kraken (.mlmodel). ¦ E nevoie de un fișier de model Kraken (.mlmodel).
+Ce fichier est trop petit pour être un modèle. ¦ Acest fișier este prea mic pentru a fi un model.
+Impossible de ranger le modèle. ¦ Modelul nu a putut fi păstrat.
+Deux lectures sont déjà en cours : attends qu’une se termine. ¦ Două citiri sunt deja în curs: așteaptă să se termine una.
+Choisis d’abord l’image de l’acte. ¦ Alege mai întâi imaginea actului.
+La lecture d’écriture marche seulement sur les images. ¦ Citirea scrisului funcționează doar pe imagini.
+La lecture d’écriture manuscrite n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR). ¦ Citirea scrisului de mână nu este încă instalată: Setări → Recunoașterea scrisului (HTR).
+Modèle inconnu. ¦ Model necunoscut.
+Ce modèle d’écriture n’est pas installé : Réglages → Reconnaissance d’écriture (HTR), étape ②. ¦ Acest model de scris nu este instalat: Setări → Recunoașterea scrisului (HTR), pasul ②.
+Image améliorée trop lourde. ¦ Imagine îmbunătățită prea grea.
+Image améliorée illisible. ¦ Imagine îmbunătățită ilizibilă.
+Image améliorée trop grande. ¦ Imagine îmbunătățită prea mare.
+Nom de fichier média invalide. ¦ Nume de fișier media nevalid.
+Fichier média introuvable. ¦ Fișier media negăsit.
+Cette image ne peut pas être lue (format). ¦ Această imagine nu poate fi citită (format).
+Copie de l’image impossible. ¦ Imaginea nu a putut fi copiată.
+Hypothèse introuvable. ¦ Ipoteză negăsită.
+La comparaison des hypothèses n’est pas encore prête : relance l’app. ¦ Compararea ipotezelor nu este încă gata: repornește aplicația.
+Réponse introuvable. ¦ Răspuns negăsit.
+Lieu introuvable : choisis-le dans la liste. ¦ Loc negăsit: alege-l din listă.
+Donne un nom à cette réponse (ex. « Naves »). ¦ Dă un nume acestui răspuns (ex. „Naves”).
+Huit réponses au plus : retires-en une avant d’en ajouter. ¦ Cel mult opt răspunsuri: scoate unul înainte de a adăuga altul.
+C’est la réponse retenue : reviens d’abord sur la conclusion (↶). ¦ Acesta este răspunsul reținut: anulează mai întâi concluzia (↶).
+Choisis une source, un média ou un dépouillement, ou écris la preuve. ¦ Alege o sursă, un fișier media sau o indexare, ori scrie dovada.
+Sorte de preuve inconnue. ¦ Tip de dovadă necunoscut.
+Cet élément n’existe pas (ou plus) dans la base. ¦ Acest element nu există (sau nu mai există) în bază.
+Soixante preuves au plus pour une hypothèse. ¦ Cel mult șaizeci de dovezi pentru o ipoteză.
+Cette preuve est déjà dans la colonne. ¦ Această dovadă este deja în coloană.
+Cette réponse existe déjà. ¦ Acest răspuns există deja.
+Cette preuve existe déjà. ¦ Această dovadă există deja.
+La réponse de cette preuve a été retirée. ¦ Răspunsul acestei dovezi a fost scos.
+Choisis une des réponses de cette hypothèse. ¦ Alege unul dintre răspunsurile acestei ipoteze.
+Cette hypothèse est déjà conclue : reviens d’abord sur la conclusion (↶). ¦ Această ipoteză are deja o concluzie: anulează mai întâi concluzia (↶).
+Cette réponse n’a pas de lieu : choisis le lieu (📍) avant de la retenir. ¦ Acest răspuns nu are loc: alege locul (📍) înainte de a-l reține.
+Cette réponse n’a pas de date : écris-la avant de la retenir. ¦ Acest răspuns nu are dată: scrie-o înainte de a-l reține.
+Il n’y a pas de conclusion à défaire. ¦ Nu există nicio concluzie de anulat.
+L’événement a été modifié depuis la conclusion : remets-le à la main si besoin. ¦ Evenimentul a fost modificat după concluzie: refă-l de mână dacă e nevoie.
+Version des empreintes incorrecte. ¦ Versiune de amprente incorectă.
+Donnée incorrecte (« items ») : une liste est attendue. ¦ Dată incorectă („items”): se așteaptă o listă.
+Trop d’empreintes envoyées d’un coup. ¦ Prea multe amprente trimise odată.
+Donnée incorrecte (« paires »). ¦ Dată incorectă („perechi”).
+Choisis ce qu’on fait des autres photos : corbeille ou versions. ¦ Alege ce faci cu celelalte fotografii: coș sau versiuni.
+La photo à garder est introuvable. ¦ Fotografia de păstrat nu poate fi găsită.
+Choisis au moins une photo à fusionner avec celle qu’on garde. ¦ Alege cel puțin o fotografie de unit cu cea păstrată.
+Trop de photos dans ce groupe : fusionne-les en plusieurs fois. ¦ Prea multe fotografii în acest grup: unește-le în mai multe etape.
+Une des photos du groupe est introuvable (déjà fusionnée ?). ¦ Una dintre fotografiile grupului nu poate fi găsită (deja unită?).
+Cette fusion est déjà annulée. ¦ Această unire a fost deja anulată.
+La photo écartée n’a pas été trouvée dans le journal. ¦ Fotografia lăsată deoparte nu a fost găsită în jurnal.
+Action inconnue sur les images semblables. ¦ Acțiune necunoscută pe imaginile asemănătoare.
+C’est une sauvegarde de RootsMagic (.rmbackup) : ouvre-la dans RootsMagic (Fichier → Restaurer), puis importe ici le fichier .rmtree. ¦ Este o copie de siguranță RootsMagic (.rmbackup): deschide-o în RootsMagic (File → Restore), apoi importă aici fișierul .rmtree.
+C’est une base GeneWeb (.gwb), illisible hors de GeneWeb. Dans GeneWeb, fais « gwu » (ou exporte la base en .gw) puis importe ici le fichier .gw. ¦ Este o bază GeneWeb (.gwb), ilizibilă în afara GeneWeb. În GeneWeb, rulează „gwu” (sau exportă baza în .gw), apoi importă aici fișierul .gw.
+Le paquet GEDCOM-X (.gedx) n’est pas encore lu : importe plutôt le fichier GEDCOM-X en JSON ou en XML (ou un GEDCOM). ¦ Pachetul GEDCOM-X (.gedx) nu este încă citit: importă mai bine fișierul GEDCOM-X în JSON sau XML (sau un GEDCOM).
+Ce fichier RootsMagic est trop gros (plus de 1 Go). ¦ Acest fișier RootsMagic este prea mare (peste 1 GB).
+Ce fichier n’est pas une base RootsMagic lisible (il est abîmé, ou ce n’est pas un .rmtree). ¦ Acest fișier nu este o bază RootsMagic lizibilă (este deteriorat sau nu este un .rmtree).
+Ce fichier RootsMagic est abîmé : il ne s’ouvre pas. ¦ Acest fișier RootsMagic este deteriorat: nu se deschide.
+Ce fichier RootsMagic est abîmé : une table ne se lit pas. ¦ Acest fișier RootsMagic este deteriorat: un tabel nu poate fi citit.
+Ce fichier GEDCOM-X contient un « DOCTYPE » ou des « ENTITY » XML : il est refusé par prudence. ¦ Acest fișier GEDCOM-X conține un „DOCTYPE” sau „ENTITY” XML: este refuzat din prudență.
+Le XML de ce fichier GEDCOM-X est abîmé (ou ce n’est pas du GEDCOM-X). ¦ XML-ul acestui fișier GEDCOM-X este deteriorat (sau nu este GEDCOM-X).
+Ce fichier GEDCOM-X est trop gros (plus de 300 Mo). ¦ Acest fișier GEDCOM-X este prea mare (peste 300 MB).
+Le JSON de ce fichier GEDCOM-X est abîmé : il ne peut pas être lu. ¦ JSON-ul acestui fișier GEDCOM-X este deteriorat: nu poate fi citit.
+Ce fichier n’est pas du GEDCOM-X. ¦ Acest fișier nu este GEDCOM-X.
+Ce fichier GeneWeb est trop gros (plus de 300 Mo). ¦ Acest fișier GeneWeb este prea mare (peste 300 MB).
+Ce fichier n’est pas un fichier texte GeneWeb (.gw) : il contient des données binaires. Une base GeneWeb (.gwb) ne se lit pas : dans GeneWeb, fais « gwu » (ou « Exporter en .gw ») puis importe ce fichier. ¦ Acest fișier nu este un fișier text GeneWeb (.gw): conține date binare. O bază GeneWeb (.gwb) nu poate fi citită: în GeneWeb, rulează „gwu” (sau „Exportă în .gw”), apoi importă acel fișier.
+Ce fichier GeneWeb a trop de lignes. ¦ Acest fișier GeneWeb are prea multe rânduri.
+Ce fichier n’est pas un fichier GeneWeb (.gw) : aucun bloc « fam », « pevt » ou « notes » trouvé. ¦ Acest fișier nu este un fișier GeneWeb (.gw): nu s-a găsit niciun bloc „fam”, „pevt” sau „notes”.
+Lecture du fichier Gramps impossible. ¦ Fișierul Gramps nu a putut fi citit.
+Ce fichier Gramps compressé est abîmé. ¦ Acest fișier Gramps comprimat este deteriorat.
+Ce fichier contient des « ENTITY » XML : il est refusé par prudence. ¦ Acest fișier conține „ENTITY” XML: este refuzat din prudență.
+Ce fichier contient un « DOCTYPE » XML inattendu : il est refusé par prudence. ¦ Acest fișier conține un „DOCTYPE” XML neașteptat: este refuzat din prudență.
+Ce fichier n’est pas un fichier Gramps (balise « database » absente). ¦ Acest fișier nu este un fișier Gramps (lipsește eticheta „database”).
+Le XML de ce fichier Gramps est abîmé : il ne peut pas être lu. ¦ XML-ul acestui fișier Gramps este deteriorat: nu poate fi citit.
+Impossible d’ouvrir le paquet Gramps (.gpkg). ¦ Pachetul Gramps (.gpkg) nu a putut fi deschis.
+Ce paquet Gramps contient trop de fichiers : il n’est pas ouvert. ¦ Acest pachet Gramps conține prea multe fișiere: nu este deschis.
+Ce paquet Gramps est trop gros une fois ouvert pour la place libre de l’ordinateur. ¦ Acest pachet Gramps este prea mare, odată deschis, pentru spațiul liber al calculatorului.
+Ce paquet Gramps est anormal (beaucoup trop gros une fois ouvert) : il n’est pas ouvert. ¦ Acest pachet Gramps este anormal (mult prea mare odată deschis): nu este deschis.
+Dossier temporaire impossible à créer. ¦ Dosarul temporar nu poate fi creat.
+Fichier temporaire impossible à écrire. ¦ Fișierul temporar nu poate fi scris.
+Ce paquet Gramps est incomplet (fichier coupé). ¦ Acest pachet Gramps este incomplet (fișier tăiat).
+Aucun fichier « data.gramps » dans ce paquet : ce n’est pas un paquet Gramps. ¦ Niciun fișier „data.gramps” în acest pachet: nu este un pachet Gramps.
+Ce format n’est pas un arbre : choisis un fichier GEDCOM (.ged), Gramps (.gramps, .gpkg), GedZip (.zip), Hérédis (.heredis) ou MacFamilyTree (.mftpkg). ¦ Acest format nu este un arbore: alege un fișier GEDCOM (.ged), Gramps (.gramps, .gpkg), GedZip (.zip), Hérédis (.heredis) sau MacFamilyTree (.mftpkg).
+C’est une sauvegarde complète de LCNDA : elle remplacerait toute ta base. Ouvre-la plutôt depuis Réglages → Sauvegarde. ¦ Este o copie de siguranță completă LCNDA: ar înlocui toată baza ta. Deschide-o mai bine din Setări → Copie de siguranță.
+Cette archive .zip est abîmée. ¦ Această arhivă .zip este deteriorată.
+Ni fichier GEDCOM, ni Hérédis, ni MacFamilyTree dans cette archive. ¦ Niciun fișier GEDCOM, Hérédis sau MacFamilyTree în această arhivă.
+Le fichier n’a pas pu être gardé pour l’import. ¦ Fișierul nu a putut fi păstrat pentru import.
+Fichier à importer introuvable : recommence. ¦ Fișierul de importat nu a fost găsit: începe din nou.
+Le fichier à importer a été oublié (plus d’un jour) : recommence. ¦ Fișierul de importat a fost uitat (mai mult de o zi): începe din nou.
+Annulation impossible : cet import a déjà été annulé ou oublié. ¦ Anulare imposibilă: acest import a fost deja anulat sau uitat.
+Des fiches importées ont déjà été reliées à d’autres : l’import ne peut plus être annulé d’un coup. ¦ Unele fișe importate au fost deja legate de altele: importul nu mai poate fi anulat dintr-odată.
+Aucun acte reçu. ¦ Niciun act primit.
+Aucun acte lisible dans ce fichier : vérifie le choix des colonnes. ¦ Niciun act lizibil în acest fișier: verifică alegerea coloanelor.
+Annulation impossible : ce n’est pas un import de relevés. ¦ Anulare imposibilă: nu este un import de extrase.
+Aucune personne dans ce tableau : choisis au moins la colonne du nom ou du prénom. ¦ Nicio persoană în acest tabel: alege cel puțin coloana numelui sau a prenumelui.
+Aucune source à exporter. ¦ Nicio sursă de exportat.
+Ce fichier n’est ni du RIS (.ris) ni du BibTeX (.bib). ¦ Acest fișier nu este nici RIS (.ris), nici BibTeX (.bib).
+Aucune référence reconnue dans ce fichier. ¦ Nicio referință recunoscută în acest fișier.
+Fichier GeoJSON abîmé : il ne peut pas être lu. ¦ Fișier GeoJSON deteriorat: nu poate fi citit.
+Fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un fichier KML n’utilise pas. ¦ Fișier refuzat: conține declarații XML (DOCTYPE sau ENTITY) pe care un fișier KML nu le folosește.
+Fichier KML abîmé : il ne peut pas être lu. ¦ Fișier KML deteriorat: nu poate fi citit.
+Ce fichier XML n’est pas un KML (Google Earth). ¦ Acest fișier XML nu este un KML (Google Earth).
+Ce fichier n’est ni un KML (Google Earth) ni un GeoJSON. ¦ Acest fișier nu este nici KML (Google Earth), nici GeoJSON.
+Aucun lieu avec des coordonnées dans ce fichier. ¦ Niciun loc cu coordonate în acest fișier.
+Trop de lieux d’un coup. ¦ Prea multe locuri odată.
+Aucune ligne cochée : rien à faire. ¦ Niciun rând bifat: nimic de făcut.
+Adresse refusée : seuls les fichiers de data.gouv.fr sont téléchargés. ¦ Adresă refuzată: sunt descărcate doar fișierele de pe data.gouv.fr.
+Création du fichier temporaire impossible. ¦ Fișierul temporar nu a putut fi creat.
+Ce fichier n’est pas un fichier des décès de l’INSEE. ¦ Acest fișier nu este un fișier de decese INSEE.
+Donne un nom au document. ¦ Dă un nume documentului.
+Trop de pages (2 000 au plus). ¦ Prea multe pagini (cel mult 2 000).
+Document trop lourd (24 Mo au plus) : utilise des photos de la base plutôt que des photos importées, ou des photos plus petites. ¦ Document prea greu (cel mult 24 MB): folosește fotografii din bază în loc de fotografii importate, sau fotografii mai mici.
+Ce document a été modifié dans une autre fenêtre depuis que tu l’as ouvert. ¦ Acest document a fost modificat în altă fereastră de când l-ai deschis.
+Impossible de créer le dossier des traitements par lot. ¦ Dosarul pentru prelucrări în serie nu a putut fi creat.
+Lot inconnu ou trop ancien : recommence le traitement. ¦ Lot necunoscut sau prea vechi: reia prelucrarea.
+Ce lot est trop grand. ¦ Acest lot este prea mare.
+Impossible de ranger le fichier dans les médias. ¦ Fișierul nu a putut fi pus în media.
+Média introuvable (il a peut-être été supprimé entre-temps). ¦ Fișier media negăsit (poate a fost șters între timp).
+Ce fichier n’est pas encore dans les médias. ¦ Acest fișier nu este încă în media.
+Fiche verrouillée : on n’y relie pas de nouveau média. Déverrouille-la d’abord. ¦ Fișă blocată: nu i se poate lega un fișier media nou. Deblocheaz-o mai întâi.
+Nom du fichier manquant. ¦ Numele fișierului lipsește.
+Ce lot a déjà été annulé, ou il est trop ancien. ¦ Acest lot a fost deja anulat sau este prea vechi.
+Analyse expirée : envoie de nouveau le fichier. ¦ Analiză expirată: trimite din nou fișierul.
+Choisis un fichier GEDCOM (.ged) ou Gramps (.gramps, .gpkg). ¦ Alege un fișier GEDCOM (.ged) sau Gramps (.gramps, .gpkg).
+Impossible de créer le dossier de sauvegarde. ¦ Dosarul copiei de siguranță nu a putut fi creat.
+La base doit d’abord être mise à jour (structure n° 64). ¦ Baza trebuie mai întâi actualizată (structura nr. 64).
+Coordonnées impossibles. ¦ Coordonate imposibile.
+Dossier des données météo impossible à créer. ¦ Dosarul datelor meteo nu poate fi creat.
+Ce fichier est trop petit pour être un pack météo. ¦ Acest fișier este prea mic pentru a fi un pachet meteo.
+Ce fichier est trop gros pour être un pack météo (16 Go au plus). ¦ Acest fișier este prea mare pentru a fi un pachet meteo (cel mult 16 GB).
+Envoi inconnu ou expiré : recommence l’import. ¦ Trimitere necunoscută sau expirată: reia importul.
+Morceau du fichier hors de place : recommence l’import. ¦ O bucată din fișier nu este la locul ei: reia importul.
+Le fichier envoyé dépasse la taille annoncée : recommence l’import. ¦ Fișierul trimis depășește mărimea anunțată: reia importul.
+Ce n’est pas un pack météo de LCNDA (fichier .lcmeteo). ¦ Nu este un pachet meteo LCNDA (fișier .lcmeteo).
+En-tête du pack abîmé. ¦ Antetul pachetului este deteriorat.
+Le fichier est incomplet (téléchargement interrompu ?) : rien n’a été installé. ¦ Fișierul este incomplet (descărcare întreruptă?): nu s-a instalat nimic.
+Le fichier est abîmé (empreinte différente) : rien n’a été installé. ¦ Fișierul este deteriorat (amprentă diferită): nu s-a instalat nimic.
+Le pack ne peut pas être lu : rien n’a été installé. ¦ Pachetul nu poate fi citit: nu s-a instalat nimic.
+Pack impossible à ranger. ¦ Pachetul nu poate fi păstrat.
+Sorte de pack inconnue. ¦ Tip de pachet necunoscut.
+Ce pack n’est pas dans le dossier des données (le socle livré avec l’app ne se supprime pas). ¦ Acest pachet nu este în dosarul de date (pachetul de bază livrat cu aplicația nu se șterge).
+Pack impossible à retirer. ¦ Pachetul nu poate fi scos.
+Un autre pack de cette sorte a été importé entre-temps. ¦ Un alt pachet de acest tip a fost importat între timp.
+Action météo inconnue. ¦ Acțiune meteo necunoscută.
+Métier introuvable. ¦ Meserie negăsită.
+la structure de la base ne se stabilise pas après 5 passages ¦ structura bazei nu se stabilizează după 5 treceri
+Donne un titre à l’événement. ¦ Dă un titlu evenimentului.
+Donne l’année de l’événement (entre 1000 et 2100). ¦ Dă anul evenimentului (între 1000 și 2100).
+L’année de fin doit venir après celle du début. ¦ Anul de sfârșit trebuie să vină după cel de început.
+Choisis la commune de l’événement. ¦ Alege comuna evenimentului.
+L’adresse du lien doit commencer par http:// ou https://. ¦ Adresa linkului trebuie să înceapă cu http:// sau https://.
+Trop de rushes dans le projet (500 au plus). ¦ Prea multe clipuri în proiect (cel mult 500).
+Un rush du projet n’est pas un média de la base. ¦ Un clip din proiect nu este un fișier media din bază.
+Impossible de créer le dossier du musée. ¦ Dosarul muzeului nu a putut fi creat.
+Musée introuvable. ¦ Muzeu negăsit.
+Un musée reçu ne se modifie pas. ¦ Un muzeu primit nu se modifică.
+Ordre impossible : éléments de salles différentes. ¦ Ordonare imposibilă: elemente din săli diferite.
+Impossible de ranger le fichier. ¦ Fișierul nu a putut fi păstrat.
+Ce musée n’a pas de livre d’or. ¦ Acest muzeu nu are carte de oaspeți.
+Il faut un nom et un message. ¦ E nevoie de un nume și de un mesaj.
+Seul un musée reçu peut être supprimé ; le tien se vide salle par salle. ¦ Doar un muzeu primit poate fi șters; al tău se golește sală cu sală.
+Ce fichier n’est pas un musée LCNDA (.lcnda-musee.zip). ¦ Acest fișier nu este un muzeu LCNDA (.lcnda-musee.zip).
+Ce fichier n’est pas un musée LCNDA. ¦ Acest fișier nu este un muzeu LCNDA.
+Donne un nom à la liste. ¦ Dă un nume listei.
+Ajoute au moins une colonne à remplir. ¦ Adaugă cel puțin o coloană de completat.
+Ajoute au moins un champ au formulaire. ¦ Adaugă cel puțin un câmp în formular.
+Ce fichier n’est pas une liste LCNDA. ¦ Acest fișier nu este o listă LCNDA.
+Cette fiche n’est pas dans cette liste. ¦ Această fișă nu este în această listă.
+Document introuvable : il n’existe pas, ou plus. ¦ Document negăsit: nu există sau nu mai există.
+Intitulé obligatoire. ¦ Titlul este obligatoriu.
+Donne le nom de la revue. ¦ Dă numele revistei.
+Revue, collection ou série introuvable. ¦ Revistă, colecție sau serie negăsită.
+Choisis la revue de ce numéro. ¦ Alege revista acestui număr.
+Numéro introuvable. ¦ Număr negăsit.
+Donne un titre (quelques mots suffisent). ¦ Dă un titlu (câteva cuvinte sunt de ajuns).
+Donne un nom à ces règles (le journal, la rubrique). ¦ Dă un nume acestor reguli (ziarul, rubrica).
+Règles introuvables. ¦ Reguli negăsite.
+Boucle dans le pedigree : un animal ne peut pas être son propre ancêtre. ¦ Buclă în pedigree: un animal nu poate fi propriul său strămoș.
+Le père et la mère sont le même animal. ¦ Tatăl și mama sunt același animal.
+Cet animal existe déjà. ¦ Acest animal există deja.
+Cette suppression est trop ancienne : elle ne contient pas de quoi rendre l’animal. ¦ Această ștergere este prea veche: nu conține ce trebuie ca să readucă animalul.
+Donne un titre à la demande. ¦ Dă un titlu cererii.
+Choisis au moins une photo (une image JPEG, PNG, GIF ou WebP). ¦ Alege cel puțin o fotografie (o imagine JPEG, PNG, GIF sau WebP).
+Choisis au moins un visage à faire reconnaître (ou trace-le sur la photo). ¦ Alege cel puțin un chip de recunoscut (sau desenează-l pe fotografie).
+Fichier de réponses manquant. ¦ Fișierul de răspunsuri lipsește.
+Ce fichier n’est pas un fichier de réponses (il est illisible). ¦ Acest fișier nu este un fișier de răspunsuri (este ilizibil).
+Ce fichier n’est pas un fichier de réponses de « Qui est sur cette photo ? ». ¦ Acest fișier nu este un fișier de răspunsuri de la „Cine e în această fotografie?”.
+Version de fichier de réponses inconnue. ¦ Versiune necunoscută a fișierului de răspunsuri.
+Fichier de réponses refusé : identifiant incorrect. ¦ Fișier de răspunsuri refuzat: identificator incorect.
+Ce fichier répond à une demande qui n’est pas dans cette généalogie. ¦ Acest fișier răspunde unei cereri care nu este în această genealogie.
+Fichier de réponses refusé : il ne correspond à aucune version envoyée de cette demande (somme de contrôle). ¦ Fișier de răspunsuri refuzat: nu corespunde niciunei versiuni trimise a acestei cereri (sumă de control).
+Fichier de réponses refusé : la liste des réponses manque. ¦ Fișier de răspunsuri refuzat: lipsește lista răspunsurilor.
+Fichier de réponses refusé : plus de réponses que de visages. ¦ Fișier de răspunsuri refuzat: mai multe răspunsuri decât chipuri.
+Fichier de réponses refusé : une réponse est mal formée. ¦ Fișier de răspunsuri refuzat: un răspuns este greșit format.
+Fichier de réponses refusé : une réponse contient des données inattendues. ¦ Fișier de răspunsuri refuzat: un răspuns conține date neașteptate.
+Fichier de réponses refusé : visage inconnu. ¦ Fișier de răspunsuri refuzat: chip necunoscut.
+Fichier de réponses refusé : deux réponses pour le même visage. ¦ Fișier de răspunsuri refuzat: două răspunsuri pentru același chip.
+Fichier de réponses refusé : nom proposé inconnu. ¦ Fișier de răspunsuri refuzat: nume propus necunoscut.
+Ces réponses ont déjà été importées. ¦ Aceste răspunsuri au fost deja importate.
+Aucune réponse à importer dans ce fichier. ¦ Niciun răspuns de importat în acest fișier.
+Rien à annuler. ¦ Nimic de anulat.
+Donnée incorrecte (« personnes ») : une liste est attendue. ¦ Dată incorectă („persoane”): se așteaptă o listă.
+La base n’est pas encore à jour : relance l’app. ¦ Baza nu este încă actualizată: repornește aplicația.
+Choisis deux photos de tes médias. ¦ Alege două fotografii din fișierele tale media.
+Choisis deux photos différentes. ¦ Alege două fotografii diferite.
+Donne un nom à la comparaison. ¦ Dă un nume comparației.
+Opération inconnue sur les comparaisons de photos. ¦ Operație necunoscută pe comparațiile de fotografii.
+Action inconnue sur les comparaisons de photos. ¦ Acțiune necunoscută pe comparațiile de fotografii.
+Enquête introuvable. ¦ Investigație negăsită.
+Carte de photos introuvable dans cette généalogie. ¦ Harta de fotografii nu a fost găsită în această genealogie.
+Période incomprise : écris par exemple « été 2023 » → « juillet 2023 », « 1950 », « entre 1950 et 1960 ». ¦ Perioadă neînțeleasă: scrie de exemplu „été 2023” → „juillet 2023”, „1950”, „entre 1950 et 1960”.
+Photo introuvable sur cette carte (retirée entre-temps ?). ¦ Fotografie negăsită pe această hartă (scoasă între timp?).
+Date incomprise : écris par exemple « 14 juillet 2023 », « vers 1950 », « entre 1880 et 1885 ». ¦ Dată neînțeleasă: scrie de exemplu „14 juillet 2023”, „vers 1950”, „entre 1880 et 1885”.
+Fiche verrouillée : déverrouille-la avant d’y rattacher ou d’en détacher une photo. ¦ Fișă blocată: deblocheaz-o înainte de a-i lega sau de a-i dezlega o fotografie.
+Cette photo n’a pas de position GPS d’origine. ¦ Această fotografie nu are poziție GPS originală.
+200 fichiers au plus à la fois. ¦ Cel mult 200 de fișiere odată.
+Opération inconnue sur les cartes de photos. ¦ Operație necunoscută pe hărțile de fotografii.
+Action inconnue sur les cartes de photos. ¦ Acțiune necunoscută pe hărțile de fotografii.
+Carte de photos illisible. ¦ Hartă de fotografii ilizibilă.
+Ville introuvable dans la liste des villes du monde. ¦ Oraș negăsit în lista orașelor lumii.
+La zone dessinée n’est pas lisible. ¦ Zona desenată nu este lizibilă.
+Le cercle doit avoir un centre et un rayon entre 5 m et 50 km. ¦ Cercul trebuie să aibă un centru și o rază între 5 m și 50 km.
+Un sommet de la zone n’est pas lisible. ¦ Un vârf al zonei nu este lizibil.
+Un sommet de la zone n’a pas de coordonnées valides. ¦ Un vârf al zonei nu are coordonate valide.
+Une zone a besoin d’au moins 3 points différents. ¦ O zonă are nevoie de cel puțin 3 puncte diferite.
+La zone est toute plate : ses points sont alignés. ¦ Zona este complet plată: punctele ei sunt aliniate.
+Sorte de zone inconnue (cercle ou polygone). ¦ Tip de zonă necunoscut (cerc sau poligon).
+Ce média n’est pas une image. ¦ Acest fișier media nu este o imagine.
+Cette image n’existe plus dans les Médias. ¦ Această imagine nu mai există în Media.
+Choisis une image (photo, carte postale, gravure, plan). ¦ Alege o imagine (fotografie, carte poștală, gravură, plan).
+La photo d’aujourd’hui doit être une autre image. ¦ Fotografia de azi trebuie să fie o altă imagine.
+Ce lieu n’existe plus dans la base. ¦ Acest loc nu mai există în bază.
+Le point précis a besoin de la latitude et de la longitude. ¦ Punctul exact are nevoie de latitudine și longitudine.
+Donne au moins un lieu, un point sur la carte ou une zone. ¦ Dă cel puțin un loc, un punct pe hartă sau o zonă.
+Choisis où demander de l’aide (entraide ou petite annonce). ¦ Alege unde să ceri ajutor (întrajutorare sau mic anunț).
+Qui a répondu ? Donne un nom ou un pseudo. ¦ Cine a răspuns? Dă un nume sau un pseudonim.
+Opération inconnue sur les images de lieux. ¦ Operație necunoscută pe imaginile locurilor.
+Action inconnue sur les images de lieux. ¦ Acțiune necunoscută pe imaginile locurilor.
+Cette personne n’existe plus dans la base. ¦ Această persoană nu mai există în bază.
+Choisis l’image du recto. ¦ Alege imaginea feței (recto).
+L’image du verso n’existe plus. ¦ Imaginea versoului nu mai există.
+Le recto et le verso doivent être deux images différentes. ¦ Fața și versoul trebuie să fie două imagini diferite.
+Cette image a déjà sa fiche de carte postale. ¦ Această imagine are deja fișa ei de carte poștală.
+Le verso choisi appartient déjà à une autre carte postale. ¦ Versoul ales aparține deja altei cărți poștale.
+L’image du recto a été supprimée entre-temps : la carte ne peut pas revenir. ¦ Imaginea feței a fost ștearsă între timp: cartea nu mai poate reveni.
+Opération inconnue sur les cartes postales. ¦ Operație necunoscută pe cărțile poștale.
+Action inconnue sur les cartes postales. ¦ Acțiune necunoscută pe cărțile poștale.
+Cette généalogie a déjà des données : rien n’a été changé. ¦ Această genealogie are deja date: nu s-a schimbat nimic.
+Donne un nom à ton animal. ¦ Dă un nume animalului tău.
+La base d’exemple est déjà ouverte. ¦ Baza de exemplu este deja deschisă.
+Ce n’est pas la base d’exemple : rien n’a été fait. ¦ Nu este baza de exemplu: nu s-a făcut nimic.
+Ce n’est pas la base d’exemple. ¦ Nu este baza de exemplu.
+Numéro de fiche de mauvaise forme. ¦ Număr de fișă greșit format.
+Cette fiche n’existe pas. ¦ Această fișă nu există.
+La personne choisie n’existe pas. ¦ Persoana aleasă nu există.
+Choisis une autre personne que l’enfant. ¦ Alege altă persoană decât copilul.
+Choisis la personne dont il tient son prénom. ¦ Alege persoana de la care și-a primit prenumele.
+Les dossiers de preuve ne sont pas encore prêts : relance l’app. ¦ Dosarele de dovezi nu sunt încă gata: repornește aplicația.
+Dossier de preuve introuvable. ¦ Dosar de dovezi negăsit.
+Choisis la personne du dossier. ¦ Alege persoana dosarului.
+Choisis une autre personne. ¦ Alege altă persoană.
+Cet événement n’est pas sur la fiche de cette personne. ¦ Acest eveniment nu este pe fișa acestei persoane.
+Ce dossier est déjà supprimé. ¦ Acest dosar este deja șters.
+Ligne du dossier introuvable. ¦ Rândul dosarului nu a fost găsit.
+La source ou la citation choisie n’existe plus. ¦ Sursa sau citarea aleasă nu mai există.
+Ce lien parent-enfant n’existe pas. ¦ Această legătură părinte–copil nu există.
+Donne un nom à ce profil. ¦ Dă un nume acestui profil.
+Ce profil a trop de réglages. ¦ Acest profil are prea multe setări.
+Partie de puzzle inconnue. ¦ Partidă de puzzle necunoscută.
+Image du puzzle absente. ¦ Imaginea puzzle-ului lipsește.
+Image du puzzle refusée. ¦ Imaginea puzzle-ului a fost refuzată.
+Taille d’image du puzzle invalide. ¦ Mărime nevalidă a imaginii puzzle-ului.
+Partie de puzzle illisible. ¦ Partidă de puzzle ilizibilă.
+Nombre de pièces invalide (4 à 1000). ¦ Număr de piese nevalid (de la 4 la 1000).
+On ne peut pas changer le nombre de pièces d’une partie commencée. ¦ Nu poți schimba numărul de piese al unei partide începute.
+Pièces du puzzle illisibles. ¦ Piesele puzzle-ului sunt ilizibile.
+Pièces du puzzle abîmées (order). ¦ Piesele puzzle-ului sunt deteriorate (order).
+Partie de puzzle introuvable dans cette généalogie. ¦ Partida de puzzle nu a fost găsită în această genealogie.
+Pièces du puzzle absentes. ¦ Piesele puzzle-ului lipsesc.
+Partie trop grosse pour être enregistrée (2 Mo au plus). ¦ Partidă prea mare pentru a fi salvată (cel mult 2 MB).
+Opération de puzzle inconnue. ¦ Operație de puzzle necunoscută.
+Action de puzzle inconnue. ¦ Acțiune de puzzle necunoscută.
+Date incorrecte : écris-la comme le calendrier la propose. ¦ Dată incorectă: scrie-o așa cum o propune calendarul.
+Liste de questions incorrecte. ¦ Listă de întrebări incorectă.
+Donne un titre au questionnaire. ¦ Dă un titlu chestionarului.
+Ce contact n’est plus dans le Répertoire des vivants. ¦ Acest contact nu mai este în Agenda celor în viață.
+État inconnu. ¦ Stare necunoscută.
+Réponse collée incorrecte. ¦ Răspuns lipit incorect.
+Ce fichier n’est pas un fichier de réponses de « Questions aux proches ». ¦ Acest fișier nu este un fișier de răspunsuri de la „Întrebări pentru cei apropiați”.
+Ce fichier répond à un questionnaire qui n’est pas dans cette généalogie. ¦ Acest fișier răspunde unui chestionar care nu este în această genealogie.
+Fichier de réponses refusé : il ne correspond à aucune version envoyée de ce questionnaire (somme de contrôle). ¦ Fișier de răspunsuri refuzat: nu corespunde niciunei versiuni trimise a acestui chestionar (sumă de control).
+Trop de réponses dans ce fichier. ¦ Prea multe răspunsuri în acest fișier.
+Fichier de réponses refusé : numéro de question incorrect. ¦ Fișier de răspunsuri refuzat: număr de întrebare incorect.
+Fichier de réponses refusé : une question doit être un texte. ¦ Fișier de răspunsuri refuzat: o întrebare trebuie să fie un text.
+Écris la question. ¦ Scrie întrebarea.
+500 questions à toi au plus. ¦ Cel mult 500 de întrebări proprii.
+Opération inconnue sur les questionnaires. ¦ Operație necunoscută pe chestionare.
+Action inconnue sur les questionnaires. ¦ Acțiune necunoscută pe chestionare.
+Donne un nom au recueil. ¦ Dă un nume culegerii.
+Choisis une image pour la couverture. ¦ Alege o imagine pentru copertă.
+Donne un nom à la version (ex. « Photos 2015 »). ¦ Dă un nume versiunii (ex. „Fotografii 2015”).
+Un recueil garde au moins une version. ¦ O culegere păstrează cel puțin o versiune.
+Choisis la version où ranger ces photos. ¦ Alege versiunea în care să pui aceste fotografii.
+Cette photo n’est pas sur cette page. ¦ Această fotografie nu este pe această pagină.
+Cette page est dans un autre recueil. ¦ Această pagină este în altă culegere.
+Version du recueil introuvable. ¦ Versiunea culegerii nu a fost găsită.
+Le média n’existe plus. ¦ Fișierul media nu mai există.
+Choisis à quoi rattacher le recueil. ¦ Alege de ce să legi culegerea.
+Page d’un autre recueil. ¦ Pagină din altă culegere.
+Recherche de battue introuvable. ¦ Căutarea amplă nu a fost găsită.
+Choisis où rattacher l’image. ¦ Alege unde să legi imaginea.
+Pays inconnu du catalogue. ¦ Țară necunoscută în catalog.
+Dossier de téléchargement impossible à créer. ¦ Dosarul de descărcare nu poate fi creat.
+Données de ce pays introuvables. ¦ Datele acestei țări nu au fost găsite.
+La France ne peut pas être retirée. ¦ Franța nu poate fi scoasă.
+Des battues utilisent des communes de ce pays : retire-les d’abord de ces battues (rien n’a été supprimé). ¦ Unele căutări ample folosesc comune din această țară: scoate-le mai întâi din acele căutări (nu s-a șters nimic).
+Personne ou sens de la branche manquant. ¦ Lipsește persoana sau sensul ramurii.
+Feuille de mission introuvable. ¦ Foaia de misiune nu a fost găsită.
+Date de visite invalide. ¦ Dată de vizită nevalidă.
+Cote de visite introuvable. ¦ Cota vizitei nu a fost găsită.
+La photo de départ n’est plus dans les médias. ¦ Fotografia de pornire nu mai este în media.
+Masque illisible dans le projet. ¦ Mască ilizibilă în proiect.
+Projet trop lourd (40 Mo au plus) : retire des sélections ou des masques. ¦ Proiect prea greu (cel mult 40 MB): scoate niște selecții sau măști.
+Choisis d’abord la personne du centre. ¦ Alege mai întâi persoana din centru.
+Personne introuvable : choisis d’abord à qui se rattache cette information. ¦ Persoană negăsită: alege mai întâi cui îi aparține această informație.
+Fiche verrouillée. Déverrouille-la avant de la modifier. ¦ Fișă blocată. Deblocheaz-o înainte de a o modifica.
+Cette information n’existe plus : elle a peut-être été supprimée. ¦ Această informație nu mai există: poate a fost ștearsă.
+Trop de lignes de santé (50 000 au plus). ¦ Prea multe rânduri de sănătate (cel mult 50 000).
+Cette information a déjà été supprimée. ¦ Această informație a fost deja ștearsă.
+Impossible d’enregistrer les réglages de la sauvegarde. ¦ Setările copiei de siguranță nu au putut fi salvate.
+Écris le chemin complet du dossier (par exemple /Volumes/MaCle/LCNDA ou ~/Dropbox/LCNDA). ¦ Scrie calea completă a dosarului (de exemplu /Volumes/StickulMeu/LCNDA sau ~/Dropbox/LCNDA).
+impossible de nommer la copie ¦ copia nu a putut fi numită
+Une sauvegarde est déjà en cours. ¦ O copie de siguranță este deja în curs.
+Impossible de lire la copie. ¦ Copia nu a putut fi citită.
+Impossible de créer le dossier des sauvegardes. ¦ Dosarul copiilor de siguranță nu a putut fi creat.
+Impossible de remplacer la base (est-elle ouverte ailleurs ?). ¦ Baza nu a putut fi înlocuită (este deschisă în altă parte?).
+Impossible de mettre la copie en place. ¦ Copia nu a putut fi pusă la locul ei.
+Identifiant ORCID incorrect : 16 chiffres par groupes de 4 (ex. 0000-0002-1825-0097). ¦ Identificator ORCID incorect: 16 cifre în grupuri de 4 (ex. 0000-0002-1825-0097).
+Écris le nom de l’auteur (ex. Anne Martin) ou son identifiant HAL. ¦ Scrie numele autorului (ex. Anne Martin) sau identificatorul său HAL.
+Les recensements SocFace ne sont pas installés. ¦ Recensămintele SocFace nu sunt instalate.
+Demande de remplissage de mauvaise forme. ¦ Cerere de completare greșit formată.
+Demande de remplissage illisible. ¦ Cerere de completare ilizibilă.
+Liste de fiches de mauvaise forme. ¦ Listă de fișe greșit formată.
+Je ne sais pas prendre cela dans la base. ¦ Nu știu să iau asta din bază.
+Choisis un dépouillement. ¦ Alege o indexare.
+Ce dépouillement n’existe plus. ¦ Această indexare nu mai există.
+Choisis une de tes listes. ¦ Alege una dintre listele tale.
+Il n’y a pas de lignes à envoyer. ¦ Nu există rânduri de trimis.
+Donnée incorrecte dans une ligne. ¦ Dată incorectă într-un rând.
+Je ne sais pas envoyer cela vers la base. ¦ Nu știu să trimit asta în bază.
+Donne l’année du recensement (par exemple 1836). ¦ Dă anul recensământului (de exemplu 1836).
+Rien à envoyer : toutes les lignes sont laissées de côté. ¦ Nimic de trimis: toate rândurile sunt lăsate deoparte.
+Jeton d’annulation de mauvaise forme. ¦ Token de anulare greșit format.
+Cet envoi est introuvable. ¦ Această trimitere nu poate fi găsită.
+Cet envoi a déjà été annulé. ¦ Această trimitere a fost deja anulată.
+La dernière modification a changé entre-temps : rien n’a été annulé. ¦ Ultima modificare s-a schimbat între timp: nu s-a anulat nimic.
+Rien à importer. ¦ Nimic de importat.
+Trop de ménages d’un coup (400 au plus) : coupe le fichier. ¦ Prea multe gospodării odată (cel mult 400): împarte fișierul.
+Rien à importer : aucun ménage avec une année de recensement. ¦ Nimic de importat: nicio gospodărie cu an de recensământ.
+Cet import est déjà annulé, ou introuvable. ¦ Acest import a fost deja anulat sau nu poate fi găsit.
+Ici, on range une image (JPG, PNG, WebP, GIF), un PDF ou un texte (.txt). ¦ Aici poți păstra o imagine (JPG, PNG, WebP, GIF), un PDF sau un text (.txt).
+Choisis d’abord la fiche à qui ce document se rapporte. ¦ Alege mai întâi fișa la care se referă acest document.
+Il faut un fichier, un lien ou au moins le texte du document. ¦ E nevoie de un fișier, un link sau cel puțin textul documentului.
+Données de l’import illisibles. ¦ Datele importului sunt ilizibile.
+Cet ajout ne correspond pas à ce document. ¦ Această adăugare nu corespunde acestui document.
+Il faut un fichier, un lien, le texte du document ou au moins une ligne à ajouter. ¦ E nevoie de un fișier, un link, textul documentului sau cel puțin un rând de adăugat.
+Choisis d’abord la commune. ¦ Alege mai întâi comuna.
+Choisis le lieu (ou la fiche) que ce document complète. ¦ Alege locul (sau fișa) pe care îl completează acest document.
+Impossible d’enregistrer l’image retouchée. ¦ Imaginea retușată nu a putut fi salvată.
+Seuls les images, les sons et les vidéos se modifient. ¦ Doar imaginile, sunetele și videoclipurile se pot modifica.
+Le fichier de cette version n’est plus dans le dossier des médias. ¦ Fișierul acestei versiuni nu mai este în dosarul media.
+Donne un nom à la version. ¦ Dă un nume versiunii.
+L’original ne se supprime pas. ¦ Originalul nu se șterge.
+L’original n’est plus dans le dossier des médias : affiche d’abord une autre version. ¦ Originalul nu mai este în dosarul media: afișează mai întâi altă versiune.
+Acte introuvable (supprimé ?). ¦ Act negăsit (șters?).
+Sorte de bien inconnue. ¦ Tip de bun necunoscut.
+La valeur d’un bien est un nombre (ex. 1200). ¦ Valoarea unui bun este un număr (ex. 1200).
+Donne au moins le défunt (ou le donateur), un héritier ou un bien. ¦ Dă cel puțin defunctul (sau donatorul), un moștenitor sau un bun.
+Acte introuvable (déjà supprimé ?). ¦ Act negăsit (deja șters?).
+Acte introuvable (rien à remettre). ¦ Act negăsit (nimic de restabilit).
+Mode consultation : pas de partage. ¦ Mod consultare: fără partajare.
+Un numéro de puce n’a que des chiffres (15 en général). ¦ Un număr de cip are doar cifre (de obicei 15).
+Rien à supprimer. ¦ Nimic de șters.
+Déjà supprimé. ¦ Deja șters.
+Trop de points d’un coup (5 000 au plus par envoi). ¦ Prea multe puncte odată (cel mult 5 000 pe trimitere).
+Trop d’animaux d’un coup (5 000 au plus). ¦ Prea multe animale odată (cel mult 5 000).
+Fichier trop gros : trop de points GPS (500 000 au plus). ¦ Fișier prea mare: prea multe puncte GPS (cel mult 500 000).
+Fichier trop gros : trop de lignes. ¦ Fișier prea mare: prea multe rânduri.
+Écris le chemin complet du dossier partagé (par exemple /Volumes/MaCle ou ~/Dropbox). ¦ Scrie calea completă a dosarului partajat (de exemplu /Volumes/StickulMeu sau ~/Dropbox).
+Impossible de créer le rangement dans le dossier partagé. ¦ Spațiul de păstrare din dosarul partajat nu a putut fi creat.
+Impossible d’écrire la copie de départ. ¦ Copia de pornire nu a putut fi scrisă.
+Impossible d’écrire dans le dossier partagé. ¦ Nu se poate scrie în dosarul partajat.
+Choisis d’abord le dossier partagé. ¦ Alege mai întâi dosarul partajat.
+Aucun dossier partagé n’est choisi sur cet ordinateur. ¦ Niciun dosar partajat nu este ales pe acest calculator.
+Cette fusion est déjà annulée, ou introuvable. ¦ Această unire a fost deja anulată sau nu poate fi găsită.
+Paquet introuvable dans le dossier partagé. ¦ Pachet negăsit în dosarul partajat.
+Ce conflit est déjà réglé. ¦ Acest conflict este deja rezolvat.
+« Garder les deux » marche pour une note. ¦ „Păstrează-le pe amândouă” funcționează pentru o notă.
+La fiche est verrouillée : déverrouille-la d’abord. ¦ Fișa este blocată: deblocheaz-o mai întâi.
+Ce conflit n’est pas réglé. ¦ Acest conflict nu este rezolvat.
+Document trop lourd : partage-le en plusieurs documents. ¦ Document prea greu: împarte-l în mai multe documente.
+Document trop lourd (plus de 30 Mo) : range les images dans les médias, ou partage-le en plusieurs documents. ¦ Document prea greu (peste 30 MB): pune imaginile în media sau împarte-l în mai multe documente.
+Ce document a été modifié ailleurs (autre onglet ou autre fenêtre) depuis que tu l’as ouvert. ¦ Acest document a fost modificat în altă parte (altă filă sau altă fereastră) de când l-ai deschis.
+Document introuvable : enregistre-le d’abord. ¦ Document negăsit: salvează-l mai întâi.
+Fichier manquant ou trop lourd (plus de 30 Mo). ¦ Fișier lipsă sau prea greu (peste 30 MB).
+Donne un titre à la fiche. ¦ Dă un titlu fișei.
+Image de l’acte introuvable. ¦ Imaginea actului nu a fost găsită.
+Zones ou personnes de l’acte illisibles : rien n’a été changé. ¦ Zonele sau persoanele actului sunt ilizibile: nu s-a schimbat nimic.
+Les Trésors ne sont pas encore prêts sur cette base. ¦ Comorile nu sunt încă gata pe această bază.
+Média ou fiche introuvable. ¦ Fișier media sau fișă negăsită.
+Dessin trop lourd (plus de 8 Mo) : retire des images importées. ¦ Desen prea greu (peste 8 MB): scoate niște imagini importate.
+Cadre de carte invalide. ¦ Cadru de hartă nevalid.
+Réponse de Wikipédia illisible. ¦ Răspuns ilizibil de la Wikipedia.
+Une page est trop lourde (plus de 2 Mo) : range les images dans les médias, ou partage-la en deux pages. ¦ O pagină este prea grea (peste 2 MB): pune imaginile în media sau împarte-o în două pagini.
+Les fichiers en plus sont trop lourds (8 Mo en tout au plus). ¦ Fișierele suplimentare sunt prea grele (cel mult 8 MB în total).
+La feuille de styles ou le script est trop lourd (600 ko au plus). ¦ Foaia de stiluri sau scriptul este prea greu (cel mult 600 KB).
+Site trop lourd (plus de 20 Mo) : range les images dans les médias plutôt que dans les pages. ¦ Site prea greu (peste 20 MB): pune imaginile în media mai degrabă decât în pagini.
+Ce site a été modifié ailleurs (autre onglet ou autre fenêtre) depuis que tu l’as ouvert. ¦ Acest site a fost modificat în altă parte (altă filă sau altă fereastră) de când l-ai deschis.
+Site introuvable : enregistre-le d’abord. ¦ Site negăsit: salvează-l mai întâi.
+PHP est introuvable pour exécuter la page (indique son chemin dans la variable GENEALOGY_PHP). ¦ PHP nu a fost găsit pentru a rula pagina (indică-i calea în variabila GENEALOGY_PHP).
+Impossible de préparer le dossier d’exécution. ¦ Dosarul de rulare nu a putut fi pregătit.
+PHP n’a pas pu être lancé pour exécuter la page. ¦ PHP nu a putut fi pornit pentru a rula pagina.
+Impossible de garder l’aperçu en direct. ¦ Previzualizarea în direct nu a putut fi păstrată.
+Aperçu expiré. ¦ Previzualizare expirată.
+Impossible de garder les réglages de publication (dossier des données en lecture seule ?). ¦ Setările de publicare nu au putut fi păstrate (dosarul de date este doar pentru citire?).
+Le service demande de patienter (trop de demandes) : réessaie dans une minute. ¦ Serviciul cere să aștepți (prea multe cereri): încearcă din nou peste un minut.
+Le nom du serveur FTP n’est pas bon (exemple : ftp.mon-hebergeur.fr). ¦ Numele serverului FTP nu este corect (exemplu: ftp.gazda-mea.ro).
+Dossier du site incorrect. ¦ Dosarul site-ului este incorect.
+Donne le mot de passe FTP. ¦ Dă parola FTP.
+Trop de fichiers pour une publication. ¦ Prea multe fișiere pentru o publicare.
+Le site est trop lourd pour être publié d’un coup (plus de 50 Mo). ¦ Site-ul este prea greu pentru a fi publicat dintr-odată (peste 50 MB).
+Impossible de préparer le site. ¦ Site-ul nu a putut fi pregătit.
+Réponse de Netlify illisible. ¦ Răspuns ilizibil de la Netlify.
+Netlify n’a pas pu recevoir le site. ¦ Netlify nu a putut primi site-ul.
+Réponse de GitHub illisible. ¦ Răspuns ilizibil de la GitHub.
+Le dépôt GitHub doit s’écrire « nom » ou « compte/nom ». ¦ Depozitul GitHub trebuie scris „nume” sau „cont/nume”.
+Le FTP sécurisé n’est pas disponible avec ce PHP (curl sans FTPS). ¦ FTP-ul securizat nu este disponibil cu acest PHP (curl fără FTPS).
+Donne d’abord le serveur, l’identifiant et le mot de passe FTP. ¦ Dă mai întâi serverul, numele de utilizator și parola FTP.
+Le serveur FTP ne répond pas : vérifie son nom et ta connexion. ¦ Serverul FTP nu răspunde: verifică-i numele și conexiunea ta.
+Le serveur FTP refuse l’identifiant ou le mot de passe. ¦ Serverul FTP refuză numele de utilizator sau parola.
+Le serveur FTP n’a pas de connexion chiffrée valable (TLS) : par sûreté, rien n’est envoyé en clair. ¦ Serverul FTP nu are o conexiune criptată valabilă (TLS): din siguranță, nu se trimite nimic necriptat.
+Un identifiant Wikidata commence par Q suivi de chiffres (« Q7186 »). ¦ Un identificator Wikidata începe cu Q urmat de cifre („Q7186”).
+Coche au moins une chose à ajouter. ¦ Bifează cel puțin un lucru de adăugat.
+Classeur trop grand : plus de 2 millions de cellules. ¦ Registru de calcul prea mare: peste 2 milioane de celule.
+Classeur trop lourd (plus de 40 Mo) : partage-le en plusieurs classeurs. ¦ Registru de calcul prea greu (peste 40 MB): împarte-l în mai multe registre.
+Ce classeur a été modifié dans une autre fenêtre depuis que tu l’as ouvert. ¦ Acest registru de calcul a fost modificat în altă fereastră de când l-ai deschis.
+Base SQLite introuvable ou non autorisée. ¦ Bază SQLite negăsită sau nepermisă.
+Impossible de créer le dossier de configuration. ¦ Dosarul de configurare nu a putut fi creat.
+Impossible de supprimer la base active. ¦ Baza activă nu poate fi ștearsă.
+Réglages invalides. ¦ Setări nevalide.
+Un réglage est trop volumineux. ¦ O setare este prea mare.
+Impossible d’enregistrer les défauts du site. ¦ Valorile implicite ale site-ului nu au putut fi salvate.
+Import ZIP impossible : l'extension PHP ZipArchive n'est pas disponible. ¦ Import ZIP imposibil: extensia PHP ZipArchive nu este disponibilă.
+Aucun fichier .csv ou .txt trouvé dans le ZIP ¦ Niciun fișier .csv sau .txt găsit în ZIP
+Lecture du fichier INSEE dans le ZIP impossible ¦ Fișierul INSEE din ZIP nu a putut fi citit
+Création du fichier temporaire impossible ¦ Fișierul temporar nu a putut fi creat
+Écriture du fichier temporaire impossible ¦ Fișierul temporar nu a putut fi scris
+Lecture du fichier impossible ¦ Fișierul nu a putut fi citit
+Colonnes non reconnues : ce fichier ne ressemble pas au fichier des personnes décédées de l'INSEE (colonnes attendues, avec ou sans en-tête : nom, prenom (ou nomprenom combiné), sexe, datenaiss, lieunaiss, commnaiss, paysnaiss, datedeces, lieudeces, commdeces, actedeces). ¦ Coloane nerecunoscute: acest fișier nu seamănă cu fișierul persoanelor decedate al INSEE (coloane așteptate, cu sau fără antet: nom, prenom (sau nomprenom combinat), sexe, datenaiss, lieunaiss, commnaiss, paysnaiss, datedeces, lieudeces, commdeces, actedeces).
+Impossible d’enregistrer la liste des généalogies. ¦ Lista genealogiilor nu a putut fi salvată.
+Donne un nom à la nouvelle généalogie. ¦ Dă un nume noii genealogii.
+Impossible de créer le dossier de la généalogie. ¦ Dosarul genealogiei nu a putut fi creat.
+Généalogie introuvable. ¦ Genealogie negăsită.
+Le nom ne peut pas être vide. ¦ Numele nu poate fi gol.
+La généalogie principale ne peut pas être mise de côté. ¦ Genealogia principală nu poate fi pusă deoparte.
+Ouvre d’abord une autre généalogie. ¦ Deschide mai întâi altă genealogie.
+Impossible de créer le dossier des généalogies mises de côté. ¦ Dosarul genealogiilor puse deoparte nu a putut fi creat.
+Impossible de déplacer le dossier de la généalogie. ¦ Dosarul genealogiei nu a putut fi mutat.
+Seules les quinze dernières suppressions sont restaurables. ¦ Doar ultimele cincisprezece ștergeri pot fi restabilite.
+Cette suppression ne peut pas être restaurée proprement. ¦ Această ștergere nu poate fi restabilită corect.
+Type de restauration non pris en charge. ¦ Tip de restabilire neacceptat.
+Événement introuvable dans le snapshot. ¦ Eveniment negăsit în instantaneu.
+Cet événement existe déjà. ¦ Acest eveniment există deja.
+La personne liée à cet événement n’existe plus. ¦ Persoana legată de acest eveniment nu mai există.
+La famille liée à cet événement n’existe plus. ¦ Familia legată de acest eveniment nu mai există.
+Média introuvable dans le snapshot. ¦ Fișier media negăsit în instantaneu.
+Ce média existe déjà. ¦ Acest fișier media există deja.
+Un rattachement du média n’existe plus. ¦ O legătură a fișierului media nu mai există.
+Note introuvable dans le snapshot. ¦ Notă negăsită în instantaneu.
+Cette note existe déjà. ¦ Această notă există deja.
+Le rattachement de la note n’existe plus. ¦ Legătura notei nu mai există.
+Source introuvable dans le snapshot. ¦ Sursă negăsită în instantaneu.
+Un rattachement de la source n’existe plus. ¦ O legătură a sursei nu mai există.
+Cette source existe déjà. ¦ Această sursă există deja.
+La source liée à cette citation n’existe plus. ¦ Sursa legată de această citare nu mai există.
+Battue introuvable dans le snapshot. ¦ Căutare amplă negăsită în instantaneu.
+Cette battue existe déjà. ¦ Această căutare amplă există deja.
+La commune de départ n’existe plus. ¦ Comuna de pornire nu mai există.
+Annotation de battue introuvable dans le snapshot. ¦ Adnotarea căutării ample nu a fost găsită în instantaneu.
+Cette annotation existe déjà. ¦ Această adnotare există deja.
+La battue liée à cette annotation n’existe plus. ¦ Căutarea amplă legată de această adnotare nu mai există.
+Commune liée introuvable dans le snapshot. ¦ Comună legată negăsită în instantaneu.
+Cette commune liée existe déjà. ¦ Această comună legată există deja.
+La battue liée à cette commune n’existe plus. ¦ Căutarea amplă legată de această comună nu mai există.
+Enquête introuvable dans le snapshot. ¦ Investigație negăsită în instantaneu.
+Cette enquête existe déjà. ¦ Această investigație există deja.
+La personne principale de l’enquête n’existe plus. ¦ Persoana principală a investigației nu mai există.
+Piste introuvable dans le snapshot. ¦ Pistă negăsită în instantaneu.
+Cette piste existe déjà. ¦ Această pistă există deja.
+L’enquête liée à cette piste n’existe plus. ¦ Investigația legată de această pistă nu mai există.
+Média d’enquête introuvable dans le snapshot. ¦ Fișierul media al investigației nu a fost găsit în instantaneu.
+Ce média d’enquête existe déjà. ¦ Acest fișier media al investigației există deja.
+L’enquête liée à ce média n’existe plus. ¦ Investigația legată de acest fișier media nu mai există.
+Le média lié n’existe plus. ¦ Fișierul media legat nu mai există.
+Impossible de créer le fichier temporaire d’export. ¦ Fișierul temporar de export nu a putut fi creat.
+Fichier de base introuvable ¦ Fișierul bazei nu a fost găsit
+Impossible de créer le dossier des bases de test. ¦ Dosarul bazelor de test nu a putut fi creat.
+Impossible de créer la copie temporaire de restauration. ¦ Copia temporară de restabilire nu a putut fi creată.
+Média ou fichier manquant. ¦ Fișier media sau fișier lipsă.
+Le fichier choisi n’existe pas dans le dossier media. ¦ Fișierul ales nu există în dosarul media.
+Base ou sauvegarde de comparaison introuvable. ¦ Baza sau copia de siguranță de comparat nu a fost găsită.
+Source de comparaison manquante. ¦ Sursa de comparație lipsește.
+Impossible d'ouvrir le paquet .mftpkg (format inattendu) ¦ Pachetul .mftpkg nu a putut fi deschis (format neașteptat)
+Format d'archive non reconnu : ni fichier GEDCOM (.ged), ni base MacFamilyTree ('database'), ni fichier Hérédis (.heredis) dans le paquet. ¦ Format de arhivă nerecunoscut: niciun fișier GEDCOM (.ged), nicio bază MacFamilyTree („database”) și niciun fișier Hérédis (.heredis) în pachet.
+Cette archive contient trop de fichiers : elle n’est pas ouverte. ¦ Această arhivă conține prea multe fișiere: nu este deschisă.
+Cette archive est trop grosse une fois ouverte pour la place libre de l’ordinateur. ¦ Această arhivă este prea mare, odată deschisă, pentru spațiul liber al calculatorului.
+Impossible de créer un dossier temporaire pour l'extraction ¦ Nu s-a putut crea un dosar temporar pentru extragere
+Base MacFamilyTree introuvable dans le paquet (fichier 'database' absent). ¦ Baza MacFamilyTree nu a fost găsită în pachet (lipsește fișierul „database”).
+Le nom du type est obligatoire ¦ Numele tipului este obligatoriu
+Événement manquant ¦ Eveniment lipsă
+Événement introuvable ¦ Eveniment negăsit
+Coordonnées manquantes ¦ Coordonate lipsă
+Enquête introuvable ¦ Investigație negăsită
+Indique le centre d’archives à visiter. ¦ Indică centrul de arhive de vizitat.
+URL générale du centre invalide. ¦ URL general al centrului nevalid.
+URL d’information du centre invalide. ¦ URL de informații al centrului nevalid.
+Dépouillement d’archive introuvable. ¦ Indexarea de arhivă nu a fost găsită.
+Indique une cote à consulter. ¦ Indică o cotă de consultat.
+Dépouillement introuvable ¦ Indexare negăsită
+Indique la lacune constatée. ¦ Indică lacuna constatată.
+Indique l’acte ou le document à consulter. ¦ Indică actul sau documentul de consultat.
+Ce média n’est pas lié au dépouillement. ¦ Acest fișier media nu este legat de indexare.
+Indique le texte de la ligne. ¦ Indică textul rândului.
+Ajoute au moins une ligne avant de créer une version. ¦ Adaugă cel puțin un rând înainte de a crea o versiune.
+Dépouillement manquant ¦ Indexare lipsă
+Média ou dépouillement manquant ¦ Fișier media sau indexare lipsă
+Choisis une personne existante ¦ Alege o persoană existentă
+Indique un prénom ou un nom pour créer la personne ¦ Indică un prenume sau un nume ca să creezi persoana
+Indique au moins un prénom ou un nom relevé ¦ Indică cel puțin un prenume sau un nume extras
+Personne relevée introuvable ¦ Persoana extrasă nu a fost găsită
+Action d’écriture inconnue ¦ Acțiune de scriere necunoscută
+Nom d’étiquette obligatoire. ¦ Numele etichetei este obligatoriu.
+Étiquette introuvable. ¦ Etichetă negăsită.
+Cible d’étiquette invalide. ¦ Țintă de etichetă nevalidă.
+Portée non prise en charge ¦ Domeniu neacceptat
+Relation incomplète ¦ Relație incompletă
+Une personne ne peut pas être liée à elle-même ¦ O persoană nu poate fi legată de ea însăși
+Impossible : une personne et un animal ne peuvent pas être parents ou conjoints l’un de l’autre. ¦ Imposibil: o persoană și un animal nu pot fi părinte sau soț unul al celuilalt.
+Impossible : cette personne serait à la fois l’ancêtre et le descendant de l’autre. Vérifie le sens du lien (parent ou enfant). ¦ Imposibil: această persoană ar fi în același timp strămoșul și descendentul celeilalte. Verifică sensul legăturii (părinte sau copil).
+Événement lié introuvable pour cette personne. ¦ Evenimentul legat nu a fost găsit pentru această persoană.
+Hypothèse introuvable ¦ Ipoteză negăsită
+Année de recensement invalide ¦ An de recensământ nevalid
+Personne liée introuvable ¦ Persoana legată nu a fost găsită
+Nom du membre obligatoire ¦ Numele membrului este obligatoriu
+Cette personne est déjà le membre principal de ce foyer : modifie plutôt sa ligne. ¦ Această persoană este deja membrul principal al acestei gospodării: modifică mai bine rândul ei.
+Le membre principal se modifie depuis le recensement, il ne se retire pas ici. ¦ Membrul principal se modifică din recensământ, nu se scoate aici.
+Type de rattachement invalide ¦ Tip de legătură nevalid
+Référence ou personne manquante ¦ Referință sau persoană lipsă
+Cet événement n’est pas lié à cette personne ¦ Acest eveniment nu este legat de această persoană
+Cette sépulture n’est pas liée à cette personne ¦ Acest mormânt nu este legat de această persoană
+Choisis au moins un média ¦ Alege cel puțin un fișier media
+Aucun nouveau média à lier ¦ Niciun fișier media nou de legat
+Ce recensement n’est pas lié à cette personne ¦ Acest recensământ nu este legat de această persoană
+Entrée introuvable ¦ Intrare negăsită
+Fusion impossible : on ne fusionne pas une personne avec un animal. ¦ Unire imposibilă: o persoană nu se unește cu un animal.
+Type Décès introuvable ¦ Tipul Deces nu a fost găsit
+Personne et titre de l’enquête obligatoires ¦ Persoana și titlul investigației sunt obligatorii
+Enquête manquante ¦ Investigație lipsă
+Un suivi de registre choisi n’existe plus. ¦ O urmărire de registru aleasă nu mai există.
+Lien de suivi invalide. ¦ Legătură de urmărire nevalidă.
+Enquête et intitulé obligatoires ¦ Investigația și titlul sunt obligatorii
+Cette piste n’a pas de rappel. ¦ Această pistă nu are memento.
+Date du rappel obligatoire. ¦ Data mementoului este obligatorie.
+Titre du rappel obligatoire. ¦ Titlul mementoului este obligatoriu.
+Titre de budget obligatoire. ¦ Titlul bugetului este obligatoriu.
+Ligne de budget introuvable. ¦ Rândul de buget nu a fost găsit.
+Ligne de budget manquante. ¦ Rândul de buget lipsește.
+Le destinataire (mairie, archives, greffe…) est obligatoire. ¦ Destinatarul (primărie, arhive, grefă…) este obligatoriu.
+L’objet du courrier est obligatoire. ¦ Obiectul scrisorii este obligatoriu.
+La personne liée est introuvable. ¦ Persoana legată nu poate fi găsită.
+Titre et commune de départ obligatoires. ¦ Titlul și comuna de pornire sunt obligatorii.
+Commune de départ introuvable dans les contours. ¦ Comuna de pornire nu a fost găsită în contururi.
+Commune liée manquante. ¦ Comună legată lipsă.
+Commune liée introuvable. ¦ Comună legată negăsită.
+Commune liée invalide. ¦ Comună legată nevalidă.
+Dossier introuvable pour cette enquête. ¦ Dosar negăsit pentru această investigație.
+Média évalué introuvable ¦ Fișierul media evaluat nu a fost găsit
+Média d’enquête manquant. ¦ Fișierul media al investigației lipsește.
+Média d’enquête introuvable. ¦ Fișierul media al investigației nu a fost găsit.
+Paramètres manquants ¦ Parametri lipsă
+Événement invalide. ¦ Eveniment nevalid.
+Donne un nom au dossier ¦ Dă un nume dosarului
+Choisis au moins un média à déplacer ¦ Alege cel puțin un fișier media de mutat
+Dossier de destination invalide ¦ Dosar de destinație nevalid
+Statut invalide : choisis Vivant, Décédé ou Inconnu. ¦ Stare nevalidă: alege În viață, Decedat sau Necunoscut.
+Cette fiche a été modifiée dans une autre fenêtre depuis que tu l’as ouverte : recharge-la pour voir les changements (tes modifications ne sont pas perdues : elles restent dans cette fenêtre ; copie-les avant de recharger, ou choisis « Enregistrer quand même » pour remplacer l’autre version). ¦ Această fișă a fost modificată în altă fereastră de când ai deschis-o: reîncarc-o ca să vezi schimbările (modificările tale nu sunt pierdute: rămân în această fereastră; copiază-le înainte de reîncărcare sau alege „Salvează oricum” ca să înlocuiești cealaltă versiune).
+Cette suppression est trop ancienne : elle ne contient pas de quoi restaurer la fiche. ¦ Această ștergere este prea veche: nu conține ce trebuie ca să restabilească fișa.
+Cette fiche existe déjà. ¦ Această fișă există deja.
+Personne introuvable : la fiche a peut-être été supprimée. ¦ Persoană negăsită: poate fișa a fost ștearsă.
+Cette image source n’est pas liée à la fiche. ¦ Această imagine sursă nu este legată de fișă.
+Média de preuve introuvable ¦ Fișierul media de dovadă nu a fost găsit
+Famille ou type d’événement manquant ¦ Lipsește familia sau tipul de eveniment
+Personne ou type d’événement manquant ¦ Lipsește persoana sau tipul de eveniment
+Type d’événement introuvable : choisis-en un dans la liste. ¦ Tip de eveniment negăsit: alege unul din listă.
+Événement ou type manquant ¦ Lipsește evenimentul sau tipul
+Personne ou nom de la fiche manquant ¦ Lipsește persoana sau numele fișei
+Choisis l’événement à sourcer ¦ Alege evenimentul de documentat cu surse
+Média manquant ¦ Fișier media lipsă
+Rotation disponible uniquement pour les images. ¦ Rotirea este disponibilă doar pentru imagini.
+Rotation impossible : l’extension PHP GD n’est pas disponible. ¦ Rotire imposibilă: extensia PHP GD nu este disponibilă.
+Format image non pris en charge pour la rotation. ¦ Format de imagine neacceptat pentru rotire.
+Impossible de lire l’image. ¦ Imaginea nu a putut fi citită.
+Impossible d’enregistrer l’image tournée. ¦ Imaginea rotită nu a putut fi salvată.
+Modèle HTR inconnu ¦ Model HTR necunoscut
+La reconnaissance manuscrite est disponible uniquement sur les images. ¦ Recunoașterea scrisului de mână este disponibilă doar pe imagini.
+Image améliorée : écriture impossible. ¦ Imagine îmbunătățită: scriere imposibilă.
+La reconnaissance d’écriture n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR) → « Installer » (une seule fois). ¦ Recunoașterea scrisului nu este încă instalată: Setări → Recunoașterea scrisului (HTR) → „Instalează” (o singură dată).
+Impossible de lancer le service HTR local. ¦ Serviciul HTR local nu a putut fi pornit.
+Cette image n’est pas rattachée à la personne ¦ Această imagine nu este legată de persoană
+Ordre des médias manquant ¦ Ordinea fișierelor media lipsește
+Type de média invalide. ¦ Tip de fișier media nevalid.
+Référence ou personne manquante. ¦ Referință sau persoană lipsă.
+Cet événement n’est pas lié à cette personne. ¦ Acest eveniment nu este legat de această persoană.
+Choisis au moins deux médias pour créer un document groupé. ¦ Alege cel puțin două fișiere media ca să creezi un document grupat.
+Un des médias choisis n’est pas lié à cet élément. ¦ Unul dintre fișierele media alese nu este legat de acest element.
+Document groupé manquant. ¦ Document grupat lipsă.
+Document groupé introuvable. ¦ Document grupat negăsit.
+Ordre des médias manquant. ¦ Ordinea fișierelor media lipsește.
+Nom de branche obligatoire. ¦ Numele ramurii este obligatoriu.
+Nom de vue obligatoire ¦ Numele vizualizării este obligatoriu
+Le terme est requis ¦ Termenul este obligatoriu
+Sépulture introuvable ¦ Mormânt negăsit
+Cette personne est déjà rattachée à une sépulture ¦ Această persoană este deja legată de un mormânt
+Sépulture manquante ¦ Mormânt lipsă
+Cette personne est déjà rattachée à une autre sépulture ¦ Această persoană este deja legată de alt mormânt
+Cette personne est déjà associée à cette sépulture ¦ Această persoană este deja legată de acest mormânt
+Référence manquante ¦ Referință lipsă
+Cette personne n’est pas rattachée à cette sépulture ¦ Această persoană nu este legată de acest mormânt
+Impossible de retirer la dernière personne : supprime la sépulture si besoin ¦ Ultima persoană nu poate fi scoasă: șterge mormântul dacă e nevoie
+Ce média n’est pas accessible depuis cette fiche ¦ Acest fișier media nu este accesibil din această fișă
+Ce rattachement existe déjà ¦ Această legătură există deja
+Données manquantes ¦ Date lipsă
+Impossible de retirer le dernier rattachement — supprime le média si tu veux le retirer complètement ¦ Ultima legătură nu poate fi scoasă — șterge fișierul media dacă vrei să-l scoți complet
+Méthode refusée ¦ Metodă refuzată
+Personne, annotation de battue ou dépouillement manquant ¦ Lipsește persoana, adnotarea căutării ample sau indexarea
+Aucun fichier reçu ¦ Niciun fișier primit
+Une carte postale recto/verso doit contenir exactement deux images : recto puis verso. ¦ O carte poștală față/verso trebuie să conțină exact două imagini: fața, apoi versoul.
+Dossier d’enquête introuvable. ¦ Dosarul investigației nu a fost găsit.
+Annotation de battue introuvable. ¦ Adnotarea căutării ample nu a fost găsită.
+Choisis le type de l’événement à créer. ¦ Alege tipul evenimentului de creat.
+Ce recensement n’est pas rattaché à cette personne. ¦ Acest recensământ nu este legat de această persoană.
+Aucun fichier reçu : choisis-le à nouveau. ¦ Niciun fișier primit: alege-l din nou.
+Une carte postale recto/verso doit contenir uniquement deux images. ¦ O carte poștală față/verso trebuie să conțină doar două imagini.
+Ce fichier semble déjà avoir été importé (« {file} » le {date}, {n} ligne(s)). Confirme si tu veux l'importer quand même. ¦ Acest fișier pare să fi fost deja importat („{file}” pe {date}, {n} rând(uri)). Confirmă dacă vrei să-l imporți totuși.
+Fiche verrouillée ({name}). Déverrouille-la avant de modifier ce couple. ¦ Fișă blocată ({name}). Deblocheaz-o înainte de a modifica acest cuplu.
+Fusion impossible : {a} et {b} forment un couple. Deux conjoints ne sont pas la même personne. ¦ Unire imposibilă: {a} și {b} formează un cuplu. Doi soți nu sunt aceeași persoană.
+Fusion impossible : {a} est un ancêtre de {b}. Un ancêtre et son descendant ne sont pas la même personne. ¦ Unire imposibilă: {a} este un strămoș al lui {b}. Un strămoș și descendentul său nu sunt aceeași persoană.
+Cette parcelle est déjà dans ta liste (fiche n° {n}) : ouvre-la plutôt que d’en créer une deuxième. ¦ Această parcelă este deja în lista ta (fișa nr. {n}): deschide-o în loc să creezi a doua.
+Tu as déjà {n} cartes de photos : supprimes-en une pour en créer une autre. ¦ Ai deja {n} hărți de fotografii: șterge una ca să creezi alta.
+Les {n} puzzles en cours sont gardés : termine ou supprime-en un pour en commencer un autre. ¦ Cele {n} puzzle-uri în curs sunt păstrate: termină sau șterge unul ca să începi altul.
+Les {n} graphiques et widgets sont gardés : supprime-en un pour en créer un autre. ¦ Cele {n} grafice și widgeturi sunt păstrate: șterge unul ca să creezi altul.
+Le champ « {label} » est obligatoire. ¦ Câmpul „{label}” este obligatoriu.
+Le champ « {label} » est à remplir. ¦ Câmpul „{label}” trebuie completat.
+« {name} » est une femelle : elle ne peut pas être le père. ¦ „{name}” este o femelă: nu poate fi tatăl.
+« {name} » est un mâle : il ne peut pas être la mère. ¦ „{name}” este un mascul: nu poate fi mama.
+Dossier introuvable : {dir} (clé ou disque débranché ?). La sauvegarde se fera dès qu’il sera de retour. ¦ Dosar negăsit: {dir} (stick sau disc deconectat?). Copia de siguranță se va face imediat ce revine.
+Dossier introuvable : {dir} (clé débranchée ?). ¦ Dosar negăsit: {dir} (stick deconectat?).
+Dossier partagé introuvable : {dir} (clé débranchée ?). Rien n’est perdu : tes changements partiront la prochaine fois. ¦ Dosar partajat negăsit: {dir} (stick deconectat?). Nu se pierde nimic: schimbările tale vor pleca data viitoare.
+Cette généalogie est déjà ouverte sur l’ordinateur « {name} ». Ferme-la là-bas d’abord : deux ordinateurs qui écrivent dans le même fichier peuvent l’abîmer. ¦ Această genealogie este deja deschisă pe calculatorul „{name}”. Închide-o mai întâi acolo: două calculatoare care scriu în același fișier îl pot deteriora.
+Ce type de fichier ne se range pas dans les médias (.{ext}). ¦ Acest tip de fișier nu se poate păstra în media (.{ext}).
+Ce type de fichier ne se range pas dans les médias (sans extension). ¦ Acest tip de fișier nu se poate păstra în media (fără extensie).
+Le contenu du fichier ne correspond pas à son extension (.{ext}). ¦ Conținutul fișierului nu corespunde extensiei sale (.{ext}).
+Pas assez de place sur le disque pour ouvrir cette sauvegarde (il faut environ {n} Mo libres). ¦ Nu este destul spațiu pe disc pentru a deschide această copie de siguranță (e nevoie de aproximativ {n} MB liberi).
+Pas assez d’espace disque pour préparer la sauvegarde complète (il faut environ {n} Mo libres). ¦ Nu este destul spațiu pe disc pentru a pregăti copia de siguranță completă (e nevoie de aproximativ {n} MB liberi).
+Ce dossier a déjà {n} lignes : ouvre-en un autre. ¦ Acest dosar are deja {n} rânduri: deschide altul.
+Choisis la fiche de la personne pour le visage {n} (ou « Plus tard »). ¦ Alege fișa persoanei pentru chipul {n} (sau „Mai târziu”).
+Choisis la personne concernée pour le témoignage « {q} ». ¦ Alege persoana vizată pentru mărturia „{q}”.
+La page {n} existe déjà. ¦ Pagina {n} există deja.
+Cette date est avant sa naissance ({date}) ¦ Această dată este înainte de nașterea sa ({date})
+Cette date est après son décès ({date}) ¦ Această dată este după decesul său ({date})
+La date de naissance exacte de {name} n’est pas connue. ¦ Data exactă a nașterii lui {name} nu este cunoscută.
+Commune inconnue. ¦ Comună necunoscută.
+Adresse inconnue. ¦ Adresă necunoscută.
+Position impossible. ¦ Poziție imposibilă.
+Service d’archives introuvable. ¦ Serviciu de arhivă negăsit.
+Adresse e-mail invalide. ¦ Adresă de e-mail nevalidă.
+Cette fiche n’existe plus. ¦ Această fișă nu mai există.
+Fiche introuvable. ¦ Fișă negăsită.
+Fiche introuvable ¦ Fișă negăsită
+Profil inconnu. ¦ Profil necunoscut.
+Sorte inconnue. ¦ Tip necunoscut.
+Sorte introuvable. ¦ Tip negăsit.
+Demande Discogs inconnue. ¦ Cerere Discogs necunoscută.
+Demande MusicBrainz inconnue. ¦ Cerere MusicBrainz necunoscută.
+Demande Open Library inconnue. ¦ Cerere Open Library necunoscută.
+Demande Wikidata inconnue. ¦ Cerere Wikidata necunoscută.
+Demande TMDb inconnue. ¦ Cerere TMDb necunoscută.
+Demande iTunes inconnue. ¦ Cerere iTunes necunoscută.
+Source d’import inconnue. ¦ Sursă de import necunoscută.
+Impossible d’enregistrer l’image. ¦ Imaginea nu a putut fi salvată.
+Image illisible. ¦ Imagine ilizibilă.
+Image trop lourde (15 Mo au plus). ¦ Imagine prea grea (cel mult 15 MB).
+Projet introuvable. ¦ Proiect negăsit.
+Dossier introuvable. ¦ Dosar negăsit.
+Dossier introuvable ¦ Dosar negăsit
+Fichier trop gros. ¦ Fișier prea mare.
+Fichier Zotero RDF illisible. ¦ Fișier Zotero RDF ilizibil.
+Fichier JSON illisible. ¦ Fișier JSON ilizibil.
+Fichier EndNote XML illisible. ¦ Fișier EndNote XML ilizibil.
+Son introuvable. ¦ Sunet negăsit.
+Zones illisibles. ¦ Zone ilizibile.
+Transcription illisible. ¦ Transcriere ilizibilă.
+Transcription trop longue (5 000 lignes au plus). ¦ Transcriere prea lungă (cel mult 5 000 de rânduri).
+Cette base ne contient aucune personne. ¦ Această bază nu conține nicio persoană.
+Impossible d’ouvrir l’archive. ¦ Arhiva nu a putut fi deschisă.
+Aucune base (.db) dans cette archive. ¦ Nicio bază (.db) în această arhivă.
+Fichier introuvable ou illisible. ¦ Fișier negăsit sau ilizibil.
+Fiche trop volumineuse. ¦ Fișă prea mare.
+Tableau introuvable. ¦ Tablă negăsită.
+Tableau trop lourd : retire quelques dessins. ¦ Tablă prea grea: scoate câteva desene.
+Tableau parent introuvable. ¦ Tabla-părinte nu a fost găsită.
+Parcelle introuvable. ¦ Parcelă negăsită.
+Lieu introuvable. ¦ Loc negăsit.
+Couche illisible. ¦ Strat ilizibil.
+Couche trop lourde (8 Mo au plus). ¦ Strat prea greu (cel mult 8 MB).
+Couche introuvable. ¦ Strat negăsit.
+Carte illisible. ¦ Hartă ilizibilă.
+Fichier d’essai introuvable. ¦ Fișier de test negăsit.
+Copie impossible. ¦ Copiere imposibilă.
+Fichier illisible. ¦ Fișier ilizibil.
+Citation introuvable. ¦ Citare negăsită.
+Citation introuvable ¦ Citare negăsită
+Objet introuvable ¦ Obiect negăsit
+Objet introuvable. ¦ Obiect negăsit.
+Souvenir introuvable ¦ Amintire negăsită
+Type inconnu ¦ Tip necunoscut
+Adresse invalide ¦ Adresă nevalidă
+Salon introuvable ¦ Salon negăsit
+Alerte inconnue. ¦ Alertă necunoscută.
+Texte illisible. ¦ Text ilizibil.
+Date d’envoi incorrecte. ¦ Dată de trimitere incorectă.
+Courrier introuvable. ¦ Scrisoare negăsită.
+Cousinade introuvable. ¦ Reuniune de familie negăsită.
+Champ inconnu. ¦ Câmp necunoscut.
+Champ inconnu ¦ Câmp necunoscut
+Valeur hors limites. ¦ Valoare în afara limitelor.
+Liste inconnue. ¦ Listă necunoscută.
+Widget inconnu. ¦ Widget necunoscut.
+Ensemble inconnu. ¦ Set necunoscut.
+Choisis au moins 2 ensembles. ¦ Alege cel puțin 2 seturi.
+Choisis au moins deux personnes. ¦ Alege cel puțin două persoane.
+Choisis deux personnes. ¦ Alege două persoane.
+Diagramme introuvable. ¦ Diagramă negăsită.
+Foyer inconnu. ¦ Gospodărie necunoscută.
+Test introuvable. ¦ Test negăsit.
+Correspondance introuvable. ¦ Potrivire negăsită.
+Groupe introuvable. ¦ Grup negăsit.
+Format d’export inconnu. ¦ Format de export necunoscut.
+Export impossible : l’extension PHP ZipArchive manque sur cet ordinateur. ¦ Export imposibil: extensia PHP ZipArchive lipsește pe acest calculator.
+Fichier temporaire impossible. ¦ Fișier temporar imposibil.
+Employeur sans nom. ¦ Angajator fără nume.
+Photo introuvable. ¦ Fotografie negăsită.
+Visage introuvable. ¦ Chip negăsit.
+ePub impossible : l’extension PHP ZipArchive manque. ¦ ePub imposibil: lipsește extensia PHP ZipArchive.
+Document impossible : l’extension PHP ZipArchive manque. ¦ Document imposibil: lipsește extensia PHP ZipArchive.
+Livret introuvable. ¦ Livret negăsit.
+Graphique inconnu (identifiant invalide). ¦ Grafic necunoscut (identificator nevalid).
+Graphique illisible. ¦ Grafic ilizibil.
+Graphique illisible (champ inconnu). ¦ Grafic ilizibil (câmp necunoscut).
+Graphique illisible (parties). ¦ Grafic ilizibil (părți).
+Graphique introuvable. ¦ Grafic negăsit.
+Lien impossible ¦ Legătură imposibilă
+Voyage introuvable ¦ Călătorie negăsită
+Placement introuvable ¦ Plasare negăsită
+Armoiries introuvables ¦ Stemă negăsită
+Circuit introuvable ¦ Circuit negăsit
+Ligne introuvable ¦ Rând negăsit
+Ligne introuvable. ¦ Rând negăsit.
+Circuit manquant ¦ Circuit lipsă
+Aucun fichier CSV dans ce ZIP. ¦ Niciun fișier CSV în acest ZIP.
+Aucune ligne utilisable dans ce fichier. ¦ Niciun rând utilizabil în acest fișier.
+Acte ou document manquant ¦ Act sau document lipsă
+Chiffrement impossible. ¦ Criptare imposibilă.
+Copie introuvable ¦ Copie negăsită
+Copie introuvable. ¦ Copie negăsită.
+Harmonisation introuvable. ¦ Armonizare negăsită.
+Bloc introuvable ¦ Bloc negăsit
+Nom manquant. ¦ Nume lipsă.
+Enregistrement impossible. ¦ Salvare imposibilă.
+Source inconnue. ¦ Sursă necunoscută.
+Pack inconnu. ¦ Pachet necunoscut.
+Pack trop gros (150 Mo au plus). ¦ Pachet prea mare (cel mult 150 MB).
+GLB illisible. ¦ GLB ilizibil.
+OBJ illisible. ¦ OBJ ilizibil.
+Maison introuvable. ¦ Casă negăsită.
+Recensement introuvable. ¦ Recensământ negăsit.
+Recensement introuvable ¦ Recensământ negăsit
+Fichier 3D trop gros (30 Mo au plus). ¦ Fișier 3D prea mare (cel mult 30 MB).
+Programme d’installation introuvable (scripts/htr_install.php). ¦ Programul de instalare nu a fost găsit (scripts/htr_install.php).
+Demande d’installation inconnue. ¦ Cerere de instalare necunoscută.
+Lecture inconnue. ¦ Citire necunoscută.
+Lecture inconnue (ou trop ancienne). ¦ Citire necunoscută (sau prea veche).
+Preuve introuvable. ¦ Dovadă negăsită.
+Preuve introuvable ¦ Dovadă negăsită
+Empreinte d’image incorrecte. ¦ Amprentă de imagine incorectă.
+Empreinte d’image incorrecte (couleurs). ¦ Amprentă de imagine incorectă (culori).
+Empreinte d’image incorrecte (points). ¦ Amprentă de imagine incorectă (puncte).
+Fusion impossible ici. ¦ Unire imposibilă aici.
+Fusion inconnue. ¦ Unire necunoscută.
+Fusion introuvable. ¦ Unire negăsită.
+Fusion impossible ¦ Unire imposibilă
+Annulation impossible ici. ¦ Anulare imposibilă aici.
+Fichier RootsMagic introuvable. ¦ Fișier RootsMagic negăsit.
+Aucune personne dans ce fichier GEDCOM-X. ¦ Nicio persoană în acest fișier GEDCOM-X.
+Annulation impossible : import inconnu. ¦ Anulare imposibilă: import necunoscut.
+Fichier trop gros (20 Mo au plus). ¦ Fișier prea mare (cel mult 20 MB).
+Aucun point dans ce GeoJSON. ¦ Niciun punct în acest GeoJSON.
+Document introuvable. ¦ Document negăsit.
+Document illisible. ¦ Document ilizibil.
+Cette action s’envoie en POST. ¦ Această acțiune se trimite prin POST.
+Lot inconnu. ¦ Lot necunoscut.
+Fichier vide. ¦ Fișier gol.
+Fichier vide ¦ Fișier gol
+Sortie inconnue. ¦ Ieșire necunoscută.
+Analyse introuvable. ¦ Analiză negăsită.
+Altitude impossible : entre −450 et 8 900 m. ¦ Altitudine imposibilă: între −450 și 8 900 m.
+Envoi inconnu. ¦ Trimitere necunoscută.
+Projet illisible. ¦ Proiect ilizibil.
+Rush illisible. ¦ Clip ilizibil.
+Projet trop lourd (4 Mo au plus). ¦ Proiect prea greu (cel mult 4 MB).
+Salle introuvable. ¦ Sală negăsită.
+Fichier trop lourd. ¦ Fișier prea greu.
+Salle ou œuvre introuvable. ¦ Sală sau operă negăsită.
+Import impossible : l’extension PHP zip manque. ¦ Import imposibil: lipsește extensia PHP zip.
+Liste introuvable. ¦ Listă negăsită.
+Ligne invalide. ¦ Rând nevalid.
+Cette liste n’existe plus. ¦ Această listă nu mai există.
+Personne manquante. ¦ Persoană lipsă.
+Personne manquante ¦ Persoană lipsă
+Adresse Internet invalide ¦ Adresă de internet nevalidă
+Adresse Internet invalide. ¦ Adresă de internet nevalidă.
+Statut inconnu. ¦ Stare necunoscută.
+Revue introuvable. ¦ Revistă negăsită.
+Article introuvable. ¦ Articol negăsit.
+Quoi supprimer ? ¦ Ce să ștergi?
+Annonce introuvable. ¦ Anunț negăsit.
+Animal introuvable. ¦ Animal negăsit.
+Demande introuvable. ¦ Cerere negăsită.
+Visage incorrect. ¦ Chip incorect.
+Choix incorrect. ¦ Alegere incorectă.
+Comparaison introuvable. ¦ Comparație negăsită.
+Image introuvable. ¦ Imagine negăsită.
+Latitude entre -90 et 90, longitude entre -180 et 180. ¦ Latitudine între -90 și 90, longitudine între -180 și 180.
+Cette demande d’entraide n’existe plus. ¦ Această cerere de întrajutorare nu mai există.
+Cette annonce n’existe plus. ¦ Acest anunț nu mai există.
+Carte postale introuvable. ¦ Carte poștală negăsită.
+Choix inconnu. ¦ Alegere necunoscută.
+Niveau inconnu. ¦ Nivel necunoscut.
+Seuls tes propres profils se modifient ici. ¦ Aici se modifică doar profilurile tale proprii.
+Seuls tes propres profils se suppriment. ¦ Se pot șterge doar profilurile tale proprii.
+Profil introuvable. ¦ Profil negăsit.
+Questionnaire introuvable. ¦ Chestionar negăsit.
+Question incorrecte. ¦ Întrebare incorectă.
+Choix incorrects. ¦ Alegeri incorecte.
+Question introuvable. ¦ Întrebare negăsită.
+Recueil introuvable. ¦ Culegere negăsită.
+Aucune photo. ¦ Nicio fotografie.
+Page introuvable. ¦ Pagină negăsită.
+Rattachement inconnu. ¦ Legătură necunoscută.
+Bloc inconnu. ¦ Bloc necunoscut.
+Village introuvable. ¦ Sat negăsit.
+Pays non disponible. ¦ Țară indisponibilă.
+Branche introuvable ¦ Ramură negăsită
+Branche introuvable. ¦ Ramură negăsită.
+Import indisponible. ¦ Import indisponibil.
+Aucun DOI reconnu : il commence par « 10. » (ex. 10.1038/251123a0), ou colle l’adresse https://doi.org/… ¦ Niciun DOI recunoscut: începe cu „10.” (ex. 10.1038/251123a0), sau lipește adresa https://doi.org/…
+Source inconnue (DOI, ORCID ou HAL). ¦ Sursă necunoscută (DOI, ORCID sau HAL).
+Ligne inconnue. ¦ Rând necunoscut.
+Report inconnu. ¦ Amânare necunoscută.
+Rappel introuvable. ¦ Memento negăsit.
+Piste introuvable. ¦ Pistă negăsită.
+Statistique inconnue. ¦ Statistică necunoscută.
+Ligne illisible. ¦ Rând ilizibil.
+Diaporama introuvable. ¦ Prezentare de diapozitive negăsită.
+Diaporama trop lourd. ¦ Prezentare de diapozitive prea grea.
+Foyer SocFace introuvable. ¦ Gospodărie SocFace negăsită.
+Ligne SocFace introuvable. ¦ Rând SocFace negăsit.
+Sorte d’import inconnue. ¦ Tip de import necunoscut.
+Import inconnu. ¦ Import necunoscut.
+Ce lieu n’existe plus. ¦ Acest loc nu mai există.
+L’original garde son nom. ¦ Originalul își păstrează numele.
+Bien inconnu. ¦ Bun necunoscut.
+Acte introuvable. ¦ Act negăsit.
+Site introuvable. ¦ Site negăsit.
+Marque introuvable. ¦ Marcaj negăsit.
+Observation introuvable. ¦ Observație negăsită.
+Comptage introuvable. ¦ Numărătoare negăsită.
+Appartenance introuvable. ¦ Apartenență negăsită.
+Import introuvable. ¦ Import negăsit.
+Import introuvable ¦ Import negăsit
+Fichier trop gros : trop d’observations. ¦ Fișier prea mare: prea multe observații.
+Conflit illisible. ¦ Conflict ilizibil.
+Document illisible : il manque son texte. ¦ Document ilizibil: îi lipsește textul.
+Partie illisible. ¦ Parte ilizibilă.
+Document trop lourd : partage ses onglets en plusieurs documents. ¦ Document prea greu: împarte-i filele în mai multe documente.
+Version trop lourde. ¦ Versiune prea grea.
+Transcription introuvable. ¦ Transcriere negăsită.
+Dessin introuvable. ¦ Desen negăsit.
+Commune introuvable. ¦ Comună negăsită.
+Site illisible : il manque ses pages. ¦ Site ilizibil: îi lipsesc paginile.
+Page illisible. ¦ Pagină ilizibilă.
+Service inconnu. ¦ Serviciu necunoscut.
+Adresse non permise. ¦ Adresă nepermisă.
+Publication impossible : l’extension PHP curl manque. ¦ Publicare imposibilă: lipsește extensia PHP curl.
+Donne l’identifiant FTP. ¦ Dă numele de utilizator FTP.
+Colle d’abord ton jeton Netlify. ¦ Lipește mai întâi tokenul tău Netlify.
+Colle d’abord ton jeton GitHub. ¦ Lipește mai întâi tokenul tău GitHub.
+Identifiant Wikidata incorrect. ¦ Identificator Wikidata incorect.
+Classeur illisible : il manque ses feuilles. ¦ Registru de calcul ilizibil: îi lipsesc foile.
+Feuille illisible. ¦ Foaie ilizibilă.
+Classeur introuvable. ¦ Registru de calcul negăsit.
+Import manquant ¦ Import lipsă
+Archive ZIP illisible ¦ Arhivă ZIP ilizibilă
+Modification introuvable. ¦ Modificare negăsită.
+Sauvegarde introuvable. ¦ Copie de siguranță negăsită.
+Lecture impossible ¦ Citire imposibilă
+JSON invalide ou non-objet ¦ JSON nevalid sau care nu este obiect
+Impossible d'ouvrir l'archive (format inattendu) ¦ Arhiva nu a putut fi deschisă (format neașteptat)
+Impossible d'ouvrir l'archive GedZip (format inattendu) ¦ Arhiva GedZip nu a putut fi deschisă (format neașteptat)
+Fichier GEDCOM (.ged) introuvable dans l'archive. ¦ Fișierul GEDCOM (.ged) nu a fost găsit în arhivă.
+Type introuvable ¦ Tip negăsit
+Identifiant manquant ¦ Identificator lipsă
+Battue introuvable ¦ Căutare amplă negăsită
+Battue introuvable. ¦ Căutare amplă negăsită.
+Lacune introuvable. ¦ Lacună negăsită.
+Lien direct vers l’archive invalide. ¦ Link direct către arhivă nevalid.
+Mention familiale invalide ¦ Mențiune de familie nevalidă
+Titre obligatoire ¦ Titlul este obligatoriu
+Recensement manquant ¦ Recensământ lipsă
+Membre manquant ¦ Membru lipsă
+Membre introuvable ¦ Membru negăsit
+Dossier militaire invalide ¦ Dosar militar nevalid
+Recensement ou personne manquante ¦ Lipsește recensământul sau persoana
+Journal introuvable ¦ Jurnal negăsit
+Confirmation requise ¦ Confirmare necesară
+Piste manquante. ¦ Pistă lipsă.
+Rappel manquant. ¦ Memento lipsă.
+Courrier manquant. ¦ Scrisoare lipsă.
+Contact introuvable. ¦ Contact negăsit.
+Contact manquant. ¦ Contact lipsă.
+Battue manquante. ¦ Căutare amplă lipsă.
+Battue, commune et nom obligatoires. ¦ Căutarea amplă, comuna și numele sunt obligatorii.
+Battue et commune obligatoires. ¦ Căutarea amplă și comuna sunt obligatorii.
+Annotation manquante. ¦ Adnotare lipsă.
+Annotation introuvable. ¦ Adnotare negăsită.
+Dossier parent invalide ¦ Dosar părinte nevalid
+Dossier manquant ¦ Dosar lipsă
+Sexe invalide : choisis Homme, Femme, Non binaire ou Inconnu. ¦ Sex nevalid: alege Bărbat, Femeie, Non-binar sau Necunoscut.
+Variante manquante ¦ Variantă lipsă
+Variante introuvable ¦ Variantă negăsită
+Famille introuvable ¦ Familie negăsită
+Fiche en ligne introuvable ¦ Fișa online nu a fost găsită
+Fiche en ligne manquante ¦ Fișa online lipsește
+Personne ou contenu manquant ¦ Lipsește persoana sau conținutul
+Note ou contenu manquant ¦ Lipsește nota sau conținutul
+Note introuvable ¦ Notă negăsită
+Note manquante ¦ Notă lipsă
+Personne et titre obligatoires ¦ Persoana și titlul sunt obligatorii
+Source et titre obligatoires ¦ Sursa și titlul sunt obligatorii
+Source introuvable ¦ Sursă negăsită
+Source manquante ¦ Sursă lipsă
+Rotation impossible. ¦ Rotire imposibilă.
+Script HTR local introuvable. ¦ Scriptul HTR local nu a fost găsit.
+Fiche individuelle invalide. ¦ Fișă individuală nevalidă.
+Alerte manquante ¦ Alertă lipsă
+Patronyme et groupe obligatoires ¦ Numele de familie și grupul sunt obligatorii
+Personne racine introuvable. ¦ Persoana-rădăcină nu a fost găsită.
+Vue introuvable ¦ Vizualizare negăsită
+Cible manquante ¦ Țintă lipsă
+Identification manquante ¦ Identificare lipsă
+Identification introuvable ¦ Identificare negăsită
+Objet ou souvenir manquant ¦ Lipsește obiectul sau amintirea
+À faire le {date} ¦ De făcut pe {date}
+Avant le {date} ¦ Înainte de {date}
+Après le {date} ¦ După {date}
+Rappel libre ¦ Memento liber
+Enquête « {title} » ¦ Investigația „{title}”
+Pas encore envoyé ¦ Încă netrimis
+Envoyé aujourd’hui ¦ Trimis astăzi
+Réponse attendue depuis {n} jours ¦ Răspuns așteptat de {n} zile
+Réponse attendue depuis {n} jour ¦ Răspuns așteptat de {n} zi
+relance prévue le {date} : à relancer ¦ revenire prevăzută pe {date}: de revenit
+relance le {date} ¦ revenire pe {date}
+Visite ¦ Vizită
+Prévue le {date} : note-la comme faite ¦ Prevăzută pe {date}: noteaz-o ca făcută
+Le {date} ¦ Pe {date}
+{n} cotes à consulter ¦ {n} cote de consultat
+{n} cote à consulter ¦ {n} cotă de consultat
+Piste ¦ Pistă
+À explorer ¦ De explorat
+Hypothèse : {title} ¦ Ipoteză: {title}
+Hypothèse : sans titre ¦ Ipoteză: fără titlu
+confiance faible ¦ încredere slabă
+confiance moyenne ¦ încredere medie
+confiance forte ¦ încredere mare
+Vu ¦ Văzut
+Recensement de {y} à {place} : chercher sur SocFace ¦ Recensământul din {y} de la {place}: caută pe SocFace
+Recensement de {y} : chercher sur SocFace ¦ Recensământul din {y}: caută pe SocFace
+Cherché sur SocFace ¦ Căutat pe SocFace
+{act} : {name}, chercher à {place} ¦ {act}: {name}, caută la {place}
+{act} : {name} ¦ {act}: {name}
+acte|Parents ¦ Părinți
+acte|Contrat de mariage ¦ Contract de căsătorie
+acte|Succession ¦ Succesiune
+acte|Registre matricule ¦ Registru matricol
+Foyer de {name} ¦ Gospodăria lui {name}
+{n} personnes ¦ {n} persoane
+{n} personne ¦ {n} persoană
+Demande d’entraide ¦ Cerere de întrajutorare
+Une réponse t’attend ¦ Te așteaptă un răspuns
+Brouillon à publier ¦ Ciornă de publicat
+Publiée il y a {n} jours ¦ Publicată acum {n} zile
+Publiée il y a {n} jour ¦ Publicată acum {n} zi
+Rappel fait ¦ Memento făcut
+Demande résolue ¦ Cerere rezolvată
+Piste explorée ¦ Pistă explorată
+Hypothèse revue ¦ Ipoteză revăzută
+Recherche faite ¦ Căutare făcută
+Alerte revue ¦ Alertă revăzută
+Piste du mur faite ¦ Pista fundăturii făcută
+Lien vérifié ¦ Legătură verificată
+🛡 Lien à consolider ¦ 🛡 Legătură de consolidat
+Lien à consolider : {child}, le fils de {parent} ¦ Legătură de consolidat: {child}, fiul lui {parent}
+Lien à consolider : {child}, la fille de {parent} ¦ Legătură de consolidat: {child}, fiica lui {parent}
+Lien à consolider : {child}, l’enfant de {parent} ¦ Legătură de consolidat: {child}, copilul lui {parent}
+cherche l’acte de naissance ou de baptême qui le nomme ¦ caută actul de naștere sau de botez care îl numește

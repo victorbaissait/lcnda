@@ -1,0 +1,1629 @@
+fr ¦ hr ¦ sl
+Lien hypertexte ¦ Hiperveza ¦ Hiperpovezava
+Abréviation ¦ Kratica ¦ Okrajšava
+Coordonnées de contact d’une page ou d’un élément article ¦ Kontaktni podaci stranice ili elementa article ¦ Kontaktni podatki strani ali elementa article
+Lien ou zone inactive sur une image cliquable (map) ¦ Poveznica ili neaktivno područje na slici s klikom (map) ¦ Povezava ali nedejavno območje na sliki s kliki (map)
+Composition autonome, qu’on peut diffuser ou réutiliser seule ¦ Samostalna cjelina koja se može objaviti ili ponovno upotrijebiti zasebno ¦ Samostojna celota, ki jo lahko objaviš ali znova uporabiš posebej
+Encadré pour un contenu en marge du sujet ¦ Okvir za sadržaj sa strane glavne teme ¦ Okvir za vsebino ob strani glavne teme
+Lecteur audio ¦ Audio player ¦ Predvajalnik zvoka
+Mots-clés (mis en avant sans importance particulière) ¦ Ključne riječi (istaknute bez posebne važnosti) ¦ Ključne besede (poudarjene brez posebne pomembnosti)
+Adresse de base et cible par défaut des liens et formulaires ¦ Osnovna adresa i zadani cilj poveznica i obrazaca ¦ Osnovni naslov in privzeti cilj povezav in obrazcev
+Isole le sens d’écriture d’un texte ¦ Izdvaja smjer pisanja teksta ¦ Izolira smer pisanja besedila
+Impose le sens d’écriture d’un texte ¦ Nameće smjer pisanja teksta ¦ Vsili smer pisanja besedila
+Passage cité d’une autre source ¦ Odlomak citiran iz drugog izvora ¦ Odlomek, citiran iz drugega vira
+Corps du document ¦ Tijelo dokumenta ¦ Telo dokumenta
+Retour à la ligne (dans un poème, une adresse postale…) ¦ Prijelom retka (u pjesmi, poštanskoj adresi…) ¦ Prelom vrstice (v pesmi, poštnem naslovu …)
+Bouton ¦ Gumb ¦ Gumb
+Zone de dessin pilotée par script ¦ Područje za crtanje kojim upravlja skripta ¦ Risalna površina, ki jo upravlja skripta
+Titre d’un tableau ¦ Naslov tablice ¦ Naslov tabele
+Titre d’une œuvre ¦ Naslov djela ¦ Naslov dela
+Code informatique ¦ Računalni kod ¦ Računalniška koda
+Colonne de tableau ¦ Stupac tablice ¦ Stolpec tabele
+Groupe de colonnes d’un tableau ¦ Skupina stupaca tablice ¦ Skupina stolpcev tabele
+Équivalent lisible par une machine ¦ Strojno čitljiv ekvivalent ¦ Strojno berljiva ustreznica
+Liste de propositions pour un champ à saisie libre ¦ Popis prijedloga za polje sa slobodnim unosom ¦ Seznam predlogov za polje s prostim vnosom
+Contenu du ou des termes dt correspondants ¦ Sadržaj pripadajućeg pojma ili pojmova dt ¦ Vsebina pripadajočega izraza ali izrazov dt
+Suppression dans le document ¦ Brisanje u dokumentu ¦ Izbris v dokumentu
+Bloc dépliable pour cacher des détails ¦ Blok koji se rasklapa za skrivanje pojedinosti ¦ Razširljiv blok za skrivanje podrobnosti
+Définition d’un terme (première occurrence) ¦ Definicija pojma (prvo pojavljivanje) ¦ Definicija izraza (prva pojavitev)
+Boîte de dialogue ou fenêtre ¦ Dijaloški okvir ili prozor ¦ Pogovorno okno ali okno
+Conteneur générique (bloc), ou groupe nom-valeur dans un dl ¦ Generički spremnik (blok) ili skupina ime-vrijednost u dl ¦ Splošni vsebnik (blok) ali skupina ime-vrednost v dl
+Liste d’associations : zéro ou plusieurs groupes nom-valeur ¦ Popis pridruživanja: nula ili više skupina ime-vrijednost ¦ Seznam povezav: nič ali več skupin ime-vrednost
+Intitulé du ou des éléments dd correspondants ¦ Naziv pripadajućeg elementa ili elemenata dd ¦ Naziv pripadajočega elementa ali elementov dd
+Accent d’insistance ¦ Naglasak za isticanje ¦ Poudarek
+Module externe (plugin) ¦ Vanjski modul (plugin) ¦ Zunanji modul (vtičnik)
+Groupe de champs de formulaire ¦ Skupina polja obrasca ¦ Skupina polj obrazca
+Légende d’une figure ¦ Opis slike ¦ Napis slike
+Figure, avec une légende facultative ¦ Slika, s neobaveznim opisom ¦ Slika z neobveznim napisom
+Pied d’une page ou d’une section ¦ Podnožje stranice ili odjeljka ¦ Noga strani ali razdelka
+Formulaire à envoyer ¦ Obrazac za slanje ¦ Obrazec za pošiljanje
+Titre (niveau 1) ¦ Naslov (razina 1) ¦ Naslov (raven 1)
+Titre (niveau 2) ¦ Naslov (razina 2) ¦ Naslov (raven 2)
+Titre (niveau 3) ¦ Naslov (razina 3) ¦ Naslov (raven 3)
+Titre (niveau 4) ¦ Naslov (razina 4) ¦ Naslov (raven 4)
+Titre (niveau 5) ¦ Naslov (razina 5) ¦ Naslov (raven 5)
+Titre (niveau 6) ¦ Naslov (razina 6) ¦ Naslov (raven 6)
+Conteneur des métadonnées du document ¦ Spremnik metapodataka dokumenta ¦ Vsebnik metapodatkov dokumenta
+Introduction ou aides à la navigation d’une page ou d’une section ¦ Uvod ili pomagala za navigaciju stranice ili odjeljka ¦ Uvod ali pripomočki za navigacijo strani ali razdelka
+Groupe de titres (titre et sous-titre) ¦ Skupina naslova (naslov i podnaslov) ¦ Skupina naslovov (naslov in podnaslov)
+Rupture thématique (changement de sujet) ¦ Tematski prijelom (promjena teme) ¦ Tematski prelom (sprememba teme)
+Élément racine ¦ Korijenski element ¦ Korenski element
+Autre voix (terme étranger, pensée, nom d’œuvre…) ¦ Drugi glas (strani izraz, misao, naziv djela…) ¦ Drug glas (tuj izraz, misel, ime dela …)
+Page incluse dans la page (cadre) ¦ Stranica uključena u stranicu (okvir) ¦ Stran, vključena v stran (okvir)
+Champ de formulaire ¦ Polje obrasca ¦ Polje obrazca
+Ajout dans le document ¦ Dodavanje u dokument ¦ Dodatek v dokumentu
+Saisie de l’utilisateur (touches) ¦ Unos korisnika (tipke) ¦ Vnos uporabnika (tipke)
+Libellé d’un champ de formulaire ¦ Oznaka polja obrasca ¦ Oznaka polja obrazca
+Légende d’un fieldset ¦ Naslov skupine fieldset ¦ Naslov skupine fieldset
+Élément de liste ¦ Stavka popisa ¦ Element seznama
+Lien de métadonnées (feuille de styles, icône…) ¦ Poveznica metapodataka (stilska tablica, ikona…) ¦ Povezava metapodatkov (slogovna predloga, ikona …)
+Conteneur du contenu principal du document ¦ Spremnik glavnog sadržaja dokumenta ¦ Vsebnik glavne vsebine dokumenta
+Image cliquable (zones) ¦ Slika s klikom (područja) ¦ Slika s kliki (območja)
+Racine MathML (formules) ¦ Korijen MathML (formule) ¦ Koren MathML (formule)
+Menu de commandes ¦ Izbornik naredbi ¦ Meni ukazov
+Métadonnée en texte ¦ Metapodatak u tekstu ¦ Metapodatek v besedilu
+Jauge ¦ Mjerač ¦ Merilnik
+Section de liens de navigation ¦ Odjeljak navigacijskih poveznica ¦ Razdelek navigacijskih povezav
+Contenu de secours quand les scripts ne tournent pas ¦ Zamjenski sadržaj kad skripte ne rade ¦ Nadomestna vsebina, ko skripte ne delujejo
+Image, page incluse ou module externe ¦ Slika, uključena stranica ili vanjski modul ¦ Slika, vključena stran ali zunanji modul
+Groupe d’options dans une liste ¦ Skupina opcija u popisu ¦ Skupina možnosti na seznamu
+Option d’une liste ou d’un champ à choix ¦ Opcija popisa ili polja s izborom ¦ Možnost seznama ali polja z izbiro
+Résultat d’un calcul ¦ Rezultat izračuna ¦ Rezultat izračuna
+Image (avec plusieurs sources) ¦ Slika (s više izvora) ¦ Slika (z več viri)
+Bloc de texte préformaté ¦ Blok unaprijed oblikovanog teksta ¦ Blok vnaprej oblikovanega besedila
+Barre de progression ¦ Traka napretka ¦ Vrstica napredka
+Citation courte ¦ Kratki citat ¦ Kratek citat
+Parenthèse pour une annotation ruby ¦ Zagrada za ruby napomenu ¦ Oklepaj za opombo ruby
+Texte d’une annotation ruby ¦ Tekst ruby napomene ¦ Besedilo opombe ruby
+Annotation(s) ruby (prononciation au-dessus du texte) ¦ Ruby napomena/napomene (izgovor iznad teksta) ¦ Opomba/opombe ruby (izgovorjava nad besedilom)
+Texte qui n’est plus exact ¦ Tekst koji više nije točan ¦ Besedilo, ki ni več točno
+Sortie d’un programme ¦ Izlaz programa ¦ Izhod programa
+Script intégré ¦ Ugrađena skripta ¦ Vdelana skripta
+Conteneur des champs de recherche ¦ Spremnik polja za pretraživanje ¦ Vsebnik iskalnih polj
+Section générique d’un document ou d’une application ¦ Generički odjeljak dokumenta ili aplikacije ¦ Splošni razdelek dokumenta ali aplikacije
+Liste déroulante ¦ Padajući popis ¦ Spustni seznam
+Reprend le contenu de l’option choisie ¦ Preuzima sadržaj odabrane opcije ¦ Prevzame vsebino izbrane možnosti
+Emplacement dans un arbre « shadow » ¦ Mjesto u „shadow” stablu ¦ Mesto v drevesu »shadow«
+Remarque en marge (petits caractères) ¦ Napomena sa strane (sitna slova) ¦ Opomba ob strani (drobni znaki)
+Source d’une image (img) ou d’un média (video, audio) ¦ Izvor slike (img) ili medija (video, audio) ¦ Vir slike (img) ali medija (video, audio)
+Conteneur générique (dans le texte) ¦ Generički spremnik (u tekstu) ¦ Splošni vsebnik (v besedilu)
+Importance ¦ Važnost ¦ Pomembnost
+Styles intégrés ¦ Ugrađeni stilovi ¦ Vdelani slogi
+Intitulé d’un details ¦ Naslov elementa details ¦ Naslov elementa details
+Racine SVG (dessin vectoriel) ¦ Korijen SVG (vektorski crtež) ¦ Koren SVG (vektorska risba)
+Groupe de lignes d’un tableau ¦ Skupina redaka tablice ¦ Skupina vrstic tabele
+Cellule de tableau ¦ Ćelija tablice ¦ Celica tabele
+Modèle (contenu inerte, à copier par script) ¦ Predložak (neaktivan sadržaj, za kopiranje skriptom) ¦ Predloga (nedejavna vsebina za kopiranje s skripto)
+Zone de texte sur plusieurs lignes ¦ Tekstno polje u više redaka ¦ Besedilno polje v več vrsticah
+Groupe de lignes de pied d’un tableau ¦ Skupina redaka podnožja tablice ¦ Skupina vrstic noge tabele
+Cellule d’en-tête de tableau ¦ Ćelija zaglavlja tablice ¦ Celica glave tabele
+Groupe de lignes d’en-tête d’un tableau ¦ Skupina redaka zaglavlja tablice ¦ Skupina vrstic glave tabele
+Date ou heure, lisible par une machine ¦ Datum ili vrijeme, strojno čitljivo ¦ Datum ali čas, strojno berljiv
+Titre du document (onglet du navigateur) ¦ Naslov dokumenta (kartica preglednika) ¦ Naslov dokumenta (zavihek brskalnika)
+Ligne de tableau ¦ Redak tablice ¦ Vrstica tabele
+Piste de texte minutée (sous-titres) ¦ Vremenski usklađena tekstna staza (titlovi) ¦ Časovno usklajena besedilna sled (podnapisi)
+Annotation non exprimée (souligné) ¦ Neizrečena napomena (podcrtano) ¦ Neizražena opomba (podčrtano)
+Variable ¦ Varijabla ¦ Spremenljivka
+Lecteur vidéo ¦ Video player ¦ Predvajalnik videa
+Possibilité de coupure de ligne ¦ Mogućnost prijeloma retka ¦ Možnost preloma vrstice
+texte courant ¦ tekući tekst ¦ tekoče besedilo
+interactif ¦ interaktivno ¦ interaktivno
+palpable ¦ opipljivo ¦ otipljivo
+transparent ¦ prozirno ¦ prosojno
+vide ¦ prazno ¦ prazno
+intégré ¦ ugrađeno ¦ vdelano
+métadonnées ¦ metapodaci ¦ metapodatki
+listé ¦ navedeno ¦ navedeno
+avec libellé ¦ s oznakom ¦ z oznako
+envoyable ¦ može se poslati ¦ lahko se pošlje
+associé à un formulaire ¦ pridruženo obrascu ¦ povezano z obrazcem
+éléments de soutien aux scripts ¦ elementi za podršku skriptama ¦ elementi za podporo skriptam
+contenu de métadonnées ¦ sadržaj metapodataka ¦ vsebina metapodatkov
+réinitialisable ¦ može se vratiti na početno ¦ ponastavljivo
+contenu de titre ¦ sadržaj naslova ¦ vsebina naslova
+selon MathML ¦ prema MathML-u ¦ po MathML
+un img ¦ element img ¦ element img
+soutien aux scripts ¦ podrška skriptama ¦ podpora skriptam
+script, data, ou documentation du script ¦ skripta, podaci ili dokumentacija skripte ¦ skripta, podatki ali dokumentacija skripte
+selon SVG ¦ prema SVG-u ¦ po SVG
+flux ¦ tok ¦ tok
+tous les éléments ¦ svi elementi ¦ vsi elementi
+voir chaque propriété ¦ pogledaj svako svojstvo ¦ poglej vsako lastnost
+éléments positionnés ¦ pozicionirani elementi ¦ pozicionirani elementi
+tous les éléments et le texte ¦ svi elementi i tekst ¦ vsi elementi in besedilo
+éléments d’un flex ¦ elementi flexa ¦ elementi flexa
+conteneurs flex ¦ flex spremnici ¦ vsebniki flex
+conteneurs de grille ¦ spremnici mreže ¦ vsebniki mreže
+éléments remplacés (img, video…) ¦ zamijenjeni elementi (img, video…) ¦ nadomeščeni elementi (img, video …)
+éléments transformables ¦ elementi koji se mogu transformirati ¦ elementi, ki jih je mogoče preoblikovati
+conteneurs de blocs ¦ blokovski spremnici ¦ blokovni vsebniki
+éléments personnalisés de formulaire ¦ prilagođeni elementi obrasca ¦ elementi obrazca po meri
+présent ou absent ¦ prisutno ili odsutno ¦ prisotno ali odsotno
+mots séparés par des espaces ¦ riječi odvojene razmacima ¦ besede, ločene s presledki
+adresse (URL) ¦ adresa (URL) ¦ naslov (URL)
+chaîne vide ¦ prazan niz ¦ prazen niz
+nombre entier ¦ cijeli broj ¦ celo število
+un id ¦ id ¦ id
+nombres ¦ brojevi ¦ števila
+date (et heure) ¦ datum (i vrijeme) ¦ datum (in čas)
+date, heure, durée… ¦ datum, vrijeme, trajanje… ¦ datum, čas, trajanje …
+nom de cadre ou _blank, _self, _parent, _top ¦ naziv okvira ili _blank, _self, _parent, _top ¦ ime okvirja ali _blank, _self, _parent, _top
+nombre entier between 0 and 8 ¦ cijeli broj između 0 i 8 ¦ celo število med 0 in 8
+code de langue (fr, en…) ¦ kod jezika (fr, en…) ¦ koda jezika (fr, en …)
+code de langue (fr, en…) or chaîne vide ¦ kod jezika (fr, en…) ili prazan niz ¦ koda jezika (fr, en …) ali prazen niz
+tailles (sizes) ¦ veličine (sizes) ¦ velikosti (sizes)
+liste d’images (srcset) ¦ popis slika (srcset) ¦ seznam slik (srcset)
+requête @media ¦ upit @media ¦ poizvedba @media
+expression régulière ¦ regularni izraz ¦ regularni izraz
+déclarations CSS ¦ CSS deklaracije ¦ deklaracije CSS
+type MIME (image/png…) ¦ MIME vrsta (image/png…) ¦ vrsta MIME (image/png …)
+un type de champ (text, email, date, number…) ¦ vrsta polja (text, email, date, number…) ¦ vrsta polja (text, email, date, number …)
+liste séparée par des virgules consisting of valid MIME type strings with no parameters or audio/*, video/*, or image/* ¦ popis odvojen zarezima koji se sastoji od valjanih MIME vrsta bez parametara ili audio/*, video/* ili image/* ¦ seznam, ločen z vejicami, iz veljavnih vrst MIME brez parametrov ali audio/*, video/* ali image/*
+nombre greater than zero, or "any" ¦ broj veći od nule ili "any" ¦ število, večje od nič, ali "any"
+Couleur des cases, boutons radio, curseurs ¦ Boja kućica, izbornih gumba, klizača ¦ Barva potrditvenih polj, izbirnih gumbov, drsnikov
+Répartition des lignes (flex à plusieurs lignes, grid) ¦ Raspodjela redaka (flex s više redaka, grid) ¦ Razporeditev vrstic (flex v več vrsticah, grid)
+Alignement des éléments sur l’axe secondaire ¦ Poravnanje elemenata na poprečnoj osi ¦ Poravnava elementov na prečni osi
+Alignement de cet élément seul ¦ Poravnanje samo ovog elementa ¦ Poravnava samo tega elementa
+Raccourci d’une animation (@keyframes) ¦ Skraćeni zapis animacije (@keyframes) ¦ Okrajšava animacije (@keyframes)
+Délai avant l’animation ¦ Odgoda prije animacije ¦ Zamik pred animacijo
+Sens de l’animation ¦ Smjer animacije ¦ Smer animacije
+Durée de l’animation ¦ Trajanje animacije ¦ Trajanje animacije
+État avant et après l’animation ¦ Stanje prije i nakon animacije ¦ Stanje pred animacijo in po njej
+Nombre de répétitions (infinite) ¦ Broj ponavljanja (infinite) ¦ Število ponovitev (infinite)
+Nom de l’animation (@keyframes) ¦ Naziv animacije (@keyframes) ¦ Ime animacije (@keyframes)
+Rythme de l’animation ¦ Ritam animacije ¦ Ritem animacije
+Apparence native d’un champ ou d’un bouton ¦ Izvorni izgled polja ili gumba ¦ Izvorni videz polja ali gumba
+Proportions largeur / hauteur (16 / 9…) ¦ Omjer širine i visine (16 / 9…) ¦ Razmerje širina / višina (16 / 9 …)
+Effets sur ce qu’il y a derrière (verre dépoli) ¦ Efekti na ono što je iza (mutno staklo) ¦ Učinki na tisto, kar je zadaj (motno steklo)
+Raccourci : couleur, image, position et taille du fond ¦ Skraćeni zapis: boja, slika, položaj i veličina pozadine ¦ Okrajšava: barva, slika, položaj in velikost ozadja
+Le fond défile avec la page ou reste fixe ¦ Pozadina se pomiče sa stranicom ili ostaje fiksna ¦ Ozadje se premika s stranjo ali ostane pritrjeno
+Jusqu’où va le fond (bordure, marges intérieures, texte) ¦ Dokle seže pozadina (obrub, unutarnje margine, tekst) ¦ Do kod sega ozadje (obroba, notranji odmiki, besedilo)
+Image(s) ou dégradé(s) du fond ¦ Slika/slike ili prijelaz/prijelazi pozadine ¦ Slika/slike ali preliv/prelivi ozadja
+Point de départ de l’image de fond ¦ Početna točka slike pozadine ¦ Izhodišče slike ozadja
+Place de l’image de fond ¦ Položaj slike pozadine ¦ Položaj slike ozadja
+Répétition de l’image de fond ¦ Ponavljanje slike pozadine ¦ Ponavljanje slike ozadja
+Taille de l’image de fond (cover, contain, 100px…) ¦ Veličina slike pozadine (cover, contain, 100px…) ¦ Velikost slike ozadja (cover, contain, 100px …)
+Hauteur (selon le sens d’écriture) ¦ Visina (prema smjeru pisanja) ¦ Višina (glede na smer pisanja)
+Raccourci : épaisseur, style et couleur de la bordure ¦ Skraćeni zapis: debljina, stil i boja obruba ¦ Okrajšava: debelina, slog in barva obrobe
+Bordures de tableau fusionnées ou séparées ¦ Spojeni ili odvojeni obrubi tablice ¦ Združene ali ločene obrobe tabele
+Couleur de la bordure ¦ Boja obruba ¦ Barva obrobe
+Image utilisée comme bordure ¦ Slika upotrijebljena kao obrub ¦ Slika, uporabljena kot obroba
+Bordure de gauche ¦ Lijevi obrub ¦ Leva obroba
+Bordure de droite ¦ Desni obrub ¦ Desna obroba
+Espace entre les cellules ¦ Razmak između ćelija ¦ Razmik med celicami
+Style de la bordure (solid, dashed, dotted…) ¦ Stil obruba (solid, dashed, dotted…) ¦ Slog obrobe (solid, dashed, dotted …)
+Bordure du haut ¦ Gornji obrub ¦ Zgornja obroba
+Épaisseur de la bordure ¦ Debljina obruba ¦ Debelina obrobe
+Décalage depuis le bas (avec position) ¦ Pomak od dna (s position) ¦ Odmik od dna (s position)
+Ombre autour de la boîte ¦ Sjena oko okvira ¦ Senca okoli okvirja
+La largeur compte-t-elle les bordures et l’espace intérieur (border-box) ? ¦ Uključuje li širina obrube i unutarnji razmak (border-box)? ¦ Ali širina vključuje obrobe in notranji razmik (border-box)?
+Saut (page, colonne) après ¦ Prijelom (stranica, stupac) nakon ¦ Prelom (stran, stolpec) za
+Saut (page, colonne) avant ¦ Prijelom (stranica, stupac) prije ¦ Prelom (stran, stolpec) pred
+Éviter de couper l’élément ¦ Izbjegavaj prijelom elementa ¦ Izogibaj se prelomu elementa
+Titre du tableau en haut ou en bas ¦ Naslov tablice gore ili dolje ¦ Naslov tabele zgoraj ali spodaj
+Couleur du curseur de saisie ¦ Boja kursora za unos ¦ Barva kazalke za vnos
+Passe sous les éléments flottants ¦ Prelazi ispod plutajućih elemenata ¦ Gre pod plavajoče elemente
+Découpe en forme (cercle, polygone…) ¦ Izrezivanje u obliku (krug, mnogokut…) ¦ Izrez v obliki (krog, mnogokotnik …)
+Nombre de colonnes de texte ¦ Broj stupaca teksta ¦ Število stolpcev besedila
+Espace entre les colonnes ¦ Razmak između stupaca ¦ Razmik med stolpci
+Trait entre les colonnes de texte ¦ Crta između stupaca teksta ¦ Črta med stolpci besedila
+Largeur des colonnes de texte ¦ Širina stupaca teksta ¦ Širina stolpcev besedila
+Texte en plusieurs colonnes ¦ Tekst u više stupaca ¦ Besedilo v več stolpcih
+Isole l’élément pour accélérer l’affichage ¦ Izdvaja element radi bržeg prikaza ¦ Izolira element za hitrejši prikaz
+Nom du conteneur (@container) ¦ Naziv spremnika (@container) ¦ Ime vsebnika (@container)
+Fait de l’élément un conteneur (@container) ¦ Pretvara element u spremnik (@container) ¦ Spremeni element v vsebnik (@container)
+Contenu généré (::before, ::after) ¦ Generirani sadržaj (::before, ::after) ¦ Ustvarjena vsebina (::before, ::after)
+Augmente un compteur ¦ Povećava brojač ¦ Poveča števec
+Remet un compteur à zéro ¦ Vraća brojač na nulu ¦ Ponastavi števec na nič
+Forme du pointeur de la souris ¦ Oblik pokazivača miša ¦ Oblika kazalca miške
+Sens du texte (ltr, rtl) ¦ Smjer teksta (ltr, rtl) ¦ Smer besedila (ltr, rtl)
+Façon d’afficher la boîte : block, inline, flex, grid, none… ¦ Način prikaza okvira: block, inline, flex, grid, none… ¦ Način prikaza okvirja: block, inline, flex, grid, none …
+Bordures des cellules vides ¦ Obrubi praznih ćelija ¦ Obrobe praznih celic
+Effets : flou, noir et blanc, luminosité… ¦ Efekti: zamućenje, crno-bijelo, svjetlina… ¦ Učinki: zameglitev, črno-belo, svetlost …
+Raccourci : capacité à grandir, rétrécir, taille de départ (flexbox) ¦ Skraćeni zapis: rast, smanjivanje, početna veličina (flexbox) ¦ Okrajšava: rast, krčenje, začetna velikost (flexbox)
+Taille de départ dans un flex ¦ Početna veličina u flexu ¦ Začetna velikost v flexu
+Sens des éléments d’un flex : ligne ou colonne ¦ Smjer elemenata flexa: redak ili stupac ¦ Smer elementov flexa: vrstica ali stolpec
+Raccourci de flex-direction et flex-wrap ¦ Skraćeni zapis za flex-direction i flex-wrap ¦ Okrajšava za flex-direction in flex-wrap
+Part de la place libre prise par l’élément ¦ Udio slobodnog prostora koji element zauzima ¦ Delež prostega prostora, ki ga zavzame element
+Capacité à rétrécir ¦ Sposobnost smanjivanja ¦ Zmožnost krčenja
+Les éléments d’un flex passent à la ligne ou non ¦ Prelaze li elementi flexa u novi redak ¦ Ali se elementi flexa prelomijo v novo vrstico
+Fait flotter à gauche ou à droite (le texte l’entoure) ¦ Postavlja element da pluta lijevo ili desno (tekst ga obavija) ¦ Element plava levo ali desno (besedilo ga obliva)
+Raccourci : style, graisse, taille, interligne et police ¦ Skraćeni zapis: stil, debljina, veličina, prored i font ¦ Okrajšava: slog, debelina, velikost, razmik vrstic in pisava
+Police (et polices de secours) ¦ Font (i zamjenski fontovi) ¦ Pisava (in nadomestne pisave)
+Fonctions OpenType de la police ¦ OpenType funkcije fonta ¦ Funkcije OpenType pisave
+Italique ou droit ¦ Kurziv ili uspravno ¦ Ležeče ali pokončno
+Variantes (petites capitales…) ¦ Varijante (mala velika slova…) ¦ Različice (pomanjšane velike črke …)
+Graisse du texte (400 normal, 700 gras) ¦ Debljina teksta (400 normalno, 700 podebljano) ¦ Debelina besedila (400 navadno, 700 krepko)
+Espace entre les éléments (flex, grid, colonnes) ¦ Razmak između elemenata (flex, grid, stupci) ¦ Razmik med elementi (flex, grid, stolpci)
+Raccourci de toute la grille ¦ Skraćeni zapis cijele mreže ¦ Okrajšava celotne mreže
+Zone de la grille occupée par l’élément ¦ Područje mreže koje zauzima element ¦ Območje mreže, ki ga zavzame element
+Taille des colonnes créées automatiquement ¦ Veličina automatski stvorenih stupaca ¦ Velikost samodejno ustvarjenih stolpcev
+Comment la grille place les éléments sans place précise ¦ Kako mreža postavlja elemente bez točno određenog mjesta ¦ Kako mreža postavi elemente brez natančnega mesta
+Taille des lignes créées automatiquement ¦ Veličina automatski stvorenih redaka ¦ Velikost samodejno ustvarjenih vrstic
+Colonnes occupées par l’élément ¦ Stupci koje zauzima element ¦ Stolpci, ki jih zavzame element
+Lignes occupées par l’élément ¦ Redci koje zauzima element ¦ Vrstice, ki jih zavzame element
+Zones nommées de la grille ¦ Imenovana područja mreže ¦ Poimenovana območja mreže
+Colonnes de la grille (1fr 1fr, repeat(3, 1fr)…) ¦ Stupci mreže (1fr 1fr, repeat(3, 1fr)…) ¦ Stolpci mreže (1fr 1fr, repeat(3, 1fr) …)
+Lignes de la grille ¦ Redci mreže ¦ Vrstice mreže
+Césure automatique (avec lang) ¦ Automatsko rastavljanje riječi (s lang) ¦ Samodejno deljenje besed (z lang)
+Agrandissement d’une image (net, lissé) ¦ Povećanje slike (oštro, zaglađeno) ¦ Povečava slike (ostro, zglajeno)
+Largeur (selon le sens d’écriture) ¦ Širina (prema smjeru pisanja) ¦ Širina (glede na smer pisanja)
+Raccourci de top, right, bottom, left ¦ Skraćeni zapis za top, right, bottom, left ¦ Okrajšava za top, right, bottom, left
+Crée un nouveau groupe d’empilement ¦ Stvara novu skupinu slaganja ¦ Ustvari nov kontekst nalaganja
+Répartition des éléments sur l’axe principal (flex, grid) ¦ Raspodjela elemenata na glavnoj osi (flex, grid) ¦ Razporeditev elementov na glavni osi (flex, grid)
+Alignement des éléments dans leur case (grid) ¦ Poravnanje elemenata u njihovoj ćeliji (grid) ¦ Poravnava elementov v njihovi celici (grid)
+Alignement de cet élément dans sa case ¦ Poravnanje ovog elementa u njegovoj ćeliji ¦ Poravnava tega elementa v njegovi celici
+Décalage depuis la gauche (avec position) ¦ Pomak od lijeve strane (s position) ¦ Odmik od leve (s position)
+Raccourci du style des puces ¦ Skraćeni zapis stila grafičkih oznaka ¦ Okrajšava sloga oznak seznama
+Image de puce ¦ Slika grafičke oznake ¦ Slika oznake seznama
+Puces dedans ou dehors ¦ Grafičke oznake unutra ili vani ¦ Oznake seznama znotraj ali zunaj
+Forme des puces ou numéros ¦ Oblik grafičkih oznaka ili brojeva ¦ Oblika oznak seznama ali številk
+Marge extérieure (les 4 côtés) ¦ Vanjska margina (sve 4 strane) ¦ Zunanji rob (vse 4 strani)
+Marges extérieures haut et bas (selon le sens d’écriture) ¦ Vanjske margine gore i dolje (prema smjeru pisanja) ¦ Zunanji robovi zgoraj in spodaj (glede na smer pisanja)
+Marge extérieure en bas ¦ Vanjska margina dolje ¦ Zunanji rob spodaj
+Marges extérieures des côtés (selon le sens d’écriture) ¦ Vanjske margine sa strane (prema smjeru pisanja) ¦ Zunanji robovi ob straneh (glede na smer pisanja)
+Marge extérieure à gauche ¦ Vanjska margina lijevo ¦ Zunanji rob levo
+Marge extérieure à droite ¦ Vanjska margina desno ¦ Zunanji rob desno
+Marge extérieure en haut ¦ Vanjska margina gore ¦ Zunanji rob zgoraj
+Masque (image ou dégradé) ¦ Maska (slika ili prijelaz) ¦ Maska (slika ali preliv)
+Hauteur maximale ¦ Najveća visina ¦ Največja višina
+Largeur maximale ¦ Najveća širina ¦ Največja širina
+Hauteur minimale ¦ Najmanja visina ¦ Najmanjša višina
+Largeur minimale ¦ Najmanja širina ¦ Najmanjša širina
+Mélange avec ce qu’il y a dessous ¦ Stapanje s onim što je ispod ¦ Mešanje s tistim, kar je spodaj
+Image ou vidéo dans sa boîte : cover, contain… ¦ Slika ili video u svom okviru: cover, contain… ¦ Slika ali video v svojem okvirju: cover, contain …
+Place de l’image dans sa boîte ¦ Položaj slike u njezinu okviru ¦ Položaj slike v njenem okvirju
+Transparence de tout l’élément (0 : invisible, 1 : opaque) ¦ Prozirnost cijelog elementa (0: nevidljivo, 1: neprozirno) ¦ Prosojnost celotnega elementa (0: nevidno, 1: neprosojno)
+Ordre d’affichage dans un flex ou une grille ¦ Redoslijed prikaza u flexu ili mreži ¦ Vrstni red prikaza v flexu ali mreži
+Lignes minimum en bas de page ¦ Najmanji broj redaka na dnu stranice ¦ Najmanjše število vrstic na dnu strani
+Contour (n’occupe pas de place), utile pour le focus clavier ¦ Kontura (ne zauzima prostor), korisna za fokus tipkovnice ¦ Obris (ne zavzema prostora), uporaben za fokus tipkovnice
+Écart entre le contour et la bordure ¦ Razmak između konture i obruba ¦ Razmik med obrisom in obrobo
+Ce qui dépasse : visible, caché, barre de défilement ¦ Ono što prelazi rub: vidljivo, skriveno, traka za pomicanje ¦ Kar sega čez: vidno, skrito, drsni trak
+Couper un mot trop long pour qu’il tienne ¦ Prelomi predugu riječ da stane ¦ Prelomi predolgo besedo, da se prilega
+Ce qui dépasse en largeur ¦ Ono što prelazi u širinu ¦ Kar sega čez po širini
+Ce qui dépasse en hauteur ¦ Ono što prelazi u visinu ¦ Kar sega čez po višini
+Espace intérieur (les 4 côtés) ¦ Unutarnji razmak (sve 4 strane) ¦ Notranji razmik (vse 4 strani)
+Espaces intérieurs haut et bas ¦ Unutarnji razmaci gore i dolje ¦ Notranji razmiki zgoraj in spodaj
+Espace intérieur en bas ¦ Unutarnji razmak dolje ¦ Notranji razmik spodaj
+Espaces intérieurs des côtés ¦ Unutarnji razmaci sa strane ¦ Notranji razmiki ob straneh
+Espace intérieur à gauche ¦ Unutarnji razmak lijevo ¦ Notranji razmik levo
+Espace intérieur à droite ¦ Unutarnji razmak desno ¦ Notranji razmik desno
+Espace intérieur en haut ¦ Unutarnji razmak gore ¦ Notranji razmik zgoraj
+Raccourci de align-content et justify-content ¦ Skraćeni zapis za align-content i justify-content ¦ Okrajšava za align-content in justify-content
+Raccourci de align-items et justify-items ¦ Skraćeni zapis za align-items i justify-items ¦ Okrajšava za align-items in justify-items
+L’élément réagit-il à la souris ? ¦ Reagira li element na miš? ¦ Ali se element odziva na miško?
+Placement : static, relative, absolute, fixed, sticky ¦ Pozicioniranje: static, relative, absolute, fixed, sticky ¦ Postavitev: static, relative, absolute, fixed, sticky
+Guillemets utilisés par <q> ¦ Navodnici koje koristi <q> ¦ Narekovaji, ki jih uporablja <q>
+L’utilisateur peut-il redimensionner (textarea…) ¦ Može li korisnik mijenjati veličinu (textarea…) ¦ Ali lahko uporabnik spremeni velikost (textarea …)
+Décalage depuis la droite (avec position) ¦ Pomak od desne strane (s position) ¦ Odmik od desne (s position)
+Tourner ¦ Okreni ¦ Zavrti
+Agrandir ou réduire ¦ Povećaj ili smanji ¦ Povečaj ali pomanjšaj
+Défilement doux vers une ancre ¦ Glatko pomicanje do sidra ¦ Gladko pomikanje do sidra
+Marge gardée quand on fait défiler jusqu’à l’élément ¦ Margina koja se zadržava pri pomicanju do elementa ¦ Rob, ki ostane pri pomikanju do elementa
+Défilement qui s’arrête sur des éléments ¦ Pomicanje koje se zaustavlja na elementima ¦ Pomikanje, ki se ustavi na elementih
+Calcul de la largeur des colonnes d’un tableau ¦ Izračun širine stupaca tablice ¦ Izračun širine stolpcev tabele
+Alignement du texte (gauche, centré, droite, justifié) ¦ Poravnanje teksta (lijevo, centrirano, desno, obostrano) ¦ Poravnava besedila (levo, sredinsko, desno, obojestransko)
+Soulignement, barré… ¦ Podcrtavanje, precrtavanje… ¦ Podčrtano, prečrtano …
+Couleur du soulignement ¦ Boja podcrtavanja ¦ Barva podčrtaja
+Épaisseur du soulignement ¦ Debljina podcrtavanja ¦ Debelina podčrtaja
+Retrait de la première ligne ¦ Uvlaka prvog retka ¦ Zamik prve vrstice
+Texte coupé : « … » à la fin ¦ Odrezani tekst: „…” na kraju ¦ Odrezano besedilo: »…« na koncu
+Majuscules, minuscules, capitales ¦ Velika slova, mala slova, kapitalke ¦ Velike črke, male črke, kapitelke
+Écart du soulignement ¦ Razmak podcrtavanja ¦ Razmik podčrtaja
+Façon de couper les lignes (balance, pretty…) ¦ Način prelamanja redaka (balance, pretty…) ¦ Način prelamljanja vrstic (balance, pretty …)
+Décalage depuis le haut (avec position) ¦ Pomak od vrha (s position) ¦ Odmik od vrha (s position)
+Déplacer, tourner, agrandir, incliner ¦ Pomakni, okreni, povećaj, nagni ¦ Premakni, zavrti, povečaj, nagni
+Point d’appui des transformations ¦ Uporišna točka transformacija ¦ Oporišče preoblikovanj
+Changement progressif d’une valeur à l’autre ¦ Postupna promjena s jedne vrijednosti na drugu ¦ Postopna sprememba iz ene vrednosti v drugo
+Délai avant la transition ¦ Odgoda prije prijelaza ¦ Zamik pred prehodom
+Durée de la transition ¦ Trajanje prijelaza ¦ Trajanje prehoda
+Propriétés qui changent en douceur ¦ Svojstva koja se mijenjaju glatko ¦ Lastnosti, ki se spreminjajo gladko
+Rythme de la transition (ease, linear…) ¦ Ritam prijelaza (ease, linear…) ¦ Ritem prehoda (ease, linear …)
+Le texte peut-il être sélectionné ? ¦ Može li se tekst označiti? ¦ Ali je besedilo mogoče izbrati?
+Alignement vertical dans la ligne ou une cellule ¦ Okomito poravnanje u retku ili ćeliji ¦ Navpična poravnava v vrstici ali celici
+Visible ou caché (en gardant la place) ¦ Vidljivo ili skriveno (uz zadržavanje mjesta) ¦ Vidno ali skrito (prostor ostane)
+Gestion des espaces et des retours à la ligne ¦ Upravljanje razmacima i prijelomima redaka ¦ Ravnanje s presledki in prelomi vrstic
+Lignes minimum en haut de page ¦ Najmanji broj redaka na vrhu stranice ¦ Najmanjše število vrstic na vrhu strani
+Prévient le navigateur d’un changement (animations) ¦ Najavljuje pregledniku promjenu (animacije) ¦ Brskalnik vnaprej obvesti o spremembi (animacije)
+Coupure des mots longs ¦ Prelamanje dugih riječi ¦ Prelamljanje dolgih besed
+Sens d’écriture (horizontal, vertical) ¦ Smjer pisanja (vodoravno, okomito) ¦ Smer pisanja (vodoravno, navpično)
+Ordre d’empilement (qui passe devant) ¦ Redoslijed slaganja (što ide naprijed) ¦ Vrstni red nalaganja (kaj je spredaj)
+Trouve le premier élément qui correspond à un sélecteur CSS ¦ Pronalazi prvi element koji odgovara CSS selektoru ¦ Najde prvi element, ki ustreza izbirniku CSS
+Trouve tous les éléments qui correspondent (une liste) ¦ Pronalazi sve elemente koji odgovaraju (popis) ¦ Najde vse ustrezne elemente (seznam)
+Trouve l’élément qui a cet id ¦ Pronalazi element s tim id-om ¦ Najde element s tem id
+Réagit à un évènement (click, input, submit…) ¦ Reagira na događaj (click, input, submit…) ¦ Se odzove na dogodek (click, input, submit …)
+Arrête de réagir à un évènement ¦ Prestaje reagirati na događaj ¦ Se preneha odzivati na dogodek
+Empêche l’action habituelle (suivre un lien, envoyer un formulaire) ¦ Sprječava uobičajenu radnju (praćenje poveznice, slanje obrasca) ¦ Prepreči običajno dejanje (sledenje povezavi, pošiljanje obrazca)
+Ajouter, retirer, basculer une classe ¦ Dodaj, ukloni, prebaci klasu ¦ Dodaj, odstrani, preklopi razred
+Le texte d’un élément (sans HTML) ¦ Tekst elementa (bez HTML-a) ¦ Besedilo elementa (brez HTML)
+Le HTML à l’intérieur d’un élément (attention aux textes venus d’ailleurs) ¦ HTML unutar elementa (oprez s tekstovima iz drugih izvora) ¦ HTML znotraj elementa (pozor pri besedilih od drugod)
+Donne une valeur à un attribut ¦ Daje vrijednost atributu ¦ Nastavi vrednost atributa
+Lit la valeur d’un attribut ¦ Čita vrijednost atributa ¦ Prebere vrednost atributa
+Les attributs data-… d’un élément ¦ Atributi data-… elementa ¦ Atributi data-… elementa
+Les styles écrits sur l’élément (style="…") ¦ Stilovi napisani na elementu (style="…") ¦ Slogi, zapisani na elementu (style="…")
+Crée un nouvel élément ¦ Stvara novi element ¦ Ustvari nov element
+Ajoute à la fin d’un élément ¦ Dodaje na kraj elementa ¦ Doda na konec elementa
+Retire l’élément de la page ¦ Uklanja element sa stranice ¦ Odstrani element s strani
+Le plus proche parent qui correspond au sélecteur ¦ Najbliži roditelj koji odgovara selektoru ¦ Najbližji nadrejeni element, ki ustreza izbirniku
+L’élément correspond-il au sélecteur ? ¦ Odgovara li element selektoru? ¦ Ali element ustreza izbirniku?
+Fait défiler jusqu’à l’élément ¦ Pomiče do elementa ¦ Pomakne se do elementa
+Lance une fonction après un délai (en ms) ¦ Pokreće funkciju nakon odgode (u ms) ¦ Zažene funkcijo po zamiku (v ms)
+Lance une fonction à intervalles réguliers ¦ Pokreće funkciju u pravilnim razmacima ¦ Zažene funkcijo v rednih presledkih
+Garde des petites données dans le navigateur ¦ Čuva male podatke u pregledniku ¦ Hrani majhne podatke v brskalniku
+Charge un fichier ou des données (JSON…) ¦ Učitava datoteku ili podatke (JSON…) ¦ Naloži datoteko ali podatke (JSON …)
+Texte JSON ↔ objet JavaScript ¦ JSON tekst ↔ JavaScript objekt ¦ Besedilo JSON ↔ objekt JavaScript
+Écrit dans la console du navigateur (pour vérifier) ¦ Piše u konzolu preglednika (za provjeru) ¦ Piše v konzolo brskalnika (za preverjanje)
+Évènement : la page est prête (HTML lu) ¦ Događaj: stranica je spremna (HTML pročitan) ¦ Dogodek: stran je pripravljena (HTML prebran)
+Évènements courants : clic, saisie, changement, envoi ¦ Uobičajeni događaji: klik, unos, promjena, slanje ¦ Pogosti dogodki: klik, vnos, sprememba, pošiljanje
+Prévient quand un élément entre à l’écran (apparitions au défilement) ¦ Javlja kad element uđe na zaslon (pojavljivanje pri pomicanju) ¦ Sporoči, ko element pride na zaslon (pojavljanje pri pomikanju)
+Teste une requête @media en JS ¦ Testira upit @media u JS-u ¦ Preizkusi poizvedbo @media v JS
+Déclare une variable (const : ne change plus) ¦ Deklarira varijablu (const: više se ne mijenja) ¦ Deklarira spremenljivko (const: se ne spreminja več)
+Déclare une fonction (=> : écriture courte) ¦ Deklarira funkciju (=>: kratki zapis) ¦ Deklarira funkcijo (=>: kratek zapis)
+Fait une chose ou une autre selon une condition ¦ Radi jedno ili drugo ovisno o uvjetu ¦ Naredi eno ali drugo glede na pogoj
+Parcourt une liste ¦ Prolazi kroz popis ¦ Gre skozi seznam
+Transforme, trie ou parcourt un tableau ¦ Pretvara, sortira ili prolazi kroz polje ¦ Preoblikuje, razvrsti ali gre skozi tabelo
+Attend un résultat (fetch…) sans bloquer la page ¦ Čeka rezultat (fetch…) bez blokiranja stranice ¦ Počaka na rezultat (fetch …), ne da bi blokiral stran
+Attrape une erreur pour l’afficher proprement ¦ Hvata pogrešku da je uredno prikaže ¦ Ujame napako, da jo lepo prikaže
+Texte avec des valeurs dedans ¦ Tekst s vrijednostima u sebi ¦ Besedilo z vrednostmi v njem
+Dates et heures ¦ Datumi i vremena ¦ Datumi in časi
+Nombre au hasard, arrondi ¦ Slučajan broj, zaokruživanje ¦ Naključno število, zaokroževanje
+Chercher, couper, remplacer dans un texte ¦ Traženje, rezanje, zamjena u tekstu ¦ Iskanje, rezanje, zamenjava v besedilu
+Autre libellé de la cellule d’en-tête, quand on y renvoie ailleurs ¦ Drugi naziv ćelije zaglavlja kad se na nju upućuje drugdje ¦ Drug naziv celice glave, ko se nanjo sklicuješ drugje
+Types de fichiers attendus dans un champ d’envoi de fichier ¦ Očekivane vrste datoteka u polju za slanje datoteke ¦ Pričakovane vrste datotek v polju za pošiljanje datoteke
+Codages de caractères pour l’envoi du formulaire ¦ Kodiranja znakova za slanje obrasca ¦ Kodiranja znakov za pošiljanje obrazca
+Raccourci clavier pour activer ou atteindre l’élément ¦ Tipkovnički prečac za aktiviranje elementa ili dolazak do njega ¦ Bližnjica na tipkovnici za aktiviranje elementa ali skok nanj
+Adresse où envoyer le formulaire ¦ Adresa na koju se šalje obrazac ¦ Naslov, kamor se pošlje obrazec
+Permissions données au contenu de l’iframe ¦ Dopuštenja dana sadržaju iframea ¦ Dovoljenja za vsebino iframe
+Le contenu de l’iframe peut-il passer en plein écran ¦ Može li sadržaj iframea prijeći na cijeli zaslon ¦ Ali lahko vsebina iframe preklopi na celozaslonski način
+Permet de choisir la transparence (alpha) de la couleur ¦ Omogućuje odabir prozirnosti (alfa) boje ¦ Omogoča izbiro prosojnosti (alfa) barve
+Texte de remplacement quand l’image ne s’affiche pas (essentiel pour l’accessibilité) ¦ Zamjenski tekst kad se slika ne prikazuje (ključno za pristupačnost) ¦ Nadomestno besedilo, ko se slika ne prikaže (ključno za dostopnost)
+Sorte de ressource à précharger (avec rel="preload" ou "modulepreload") ¦ Vrsta resursa za prethodno učitavanje (s rel="preload" ili "modulepreload") ¦ Vrsta vira za vnaprejšnje nalaganje (z rel="preload" ali "modulepreload")
+Lance le script dès qu’il est prêt, sans bloquer la page ¦ Pokreće skriptu čim je spremna, bez blokiranja stranice ¦ Zažene skripto, takoj ko je pripravljena, ne da bi blokiral stran
+Majuscules automatiques conseillées (claviers qui le gèrent) ¦ Preporučena automatska velika slova (tipkovnice koje to podržavaju) ¦ Priporočene samodejne velike črke (tipkovnice, ki to podpirajo)
+Remplissage automatique par défaut des champs du formulaire ¦ Zadano automatsko ispunjavanje polja obrasca ¦ Privzeto samodejno izpolnjevanje polj obrazca
+Indice pour le remplissage automatique (email, nom, adresse…) ¦ Naznaka za automatsko ispunjavanje (e-pošta, ime, adresa…) ¦ Namig za samodejno izpolnjevanje (e-pošta, ime, naslov …)
+Correction automatique conseillée (claviers qui le gèrent) ¦ Preporučeni automatski ispravak (tipkovnice koje to podržavaju) ¦ Priporočeno samodejno popravljanje (tipkovnice, ki to podpirajo)
+Met le curseur dans l’élément à l’ouverture de la page ¦ Postavlja kursor u element pri otvaranju stranice ¦ Postavi kazalko v element ob odprtju strani
+Le média peut démarrer tout seul à l’ouverture de la page ¦ Medij se može sam pokrenuti pri otvaranju stranice ¦ Medij se lahko sam zažene ob odprtju strani
+L’élément peut-il retarder l’affichage de la page ¦ Može li element odgoditi prikaz stranice ¦ Ali lahko element zadrži prikaz strani
+Codage des caractères du document (UTF-8) ¦ Kodiranje znakova dokumenta (UTF-8) ¦ Kodiranje znakov dokumenta (UTF-8)
+La case est-elle cochée ¦ Je li kućica označena ¦ Ali je polje označeno
+Lien vers la source de la citation ou vers des précisions sur la modification ¦ Poveznica na izvor citata ili na pojedinosti o izmjeni ¦ Povezava na vir citata ali na podrobnosti o spremembi
+Classes de l’élément (pour le CSS) ¦ Klase elementa (za CSS) ¦ Razredi elementa (za CSS)
+Ce qui ferme la boîte de dialogue ¦ Što zatvara dijaloški okvir ¦ Kaj zapre pogovorno okno
+Couleur de l’icône du site (rel="mask-icon") ¦ Boja ikone stranice (rel="mask-icon") ¦ Barva ikone spletnega mesta (rel="mask-icon")
+Espace colorimétrique de la couleur choisie ¦ Prostor boja odabrane boje ¦ Barvni prostor izbrane barve
+Nombre de caractères par ligne ¦ Broj znakova po retku ¦ Število znakov v vrstici
+Nombre de colonnes couvertes par la cellule ¦ Broj stupaca koje ćelija obuhvaća ¦ Število stolpcev, ki jih zajema celica
+Action à faire sur l’élément visé ¦ Radnja koju treba izvršiti na ciljanom elementu ¦ Dejanje, ki ga je treba izvesti na ciljnem elementu
+Élément visé par le bouton ¦ Element na koji cilja gumb ¦ Element, na katerega cilja gumb
+Valeur de la métadonnée ¦ Vrijednost metapodatka ¦ Vrednost metapodatka
+L’élément est-il modifiable par le visiteur ¦ Može li posjetitelj mijenjati element ¦ Ali lahko obiskovalec ureja element
+Montrer les boutons de lecture du navigateur ¦ Prikaži gumbe za reprodukciju preglednika ¦ Prikaži gumbe brskalnika za predvajanje
+Coordonnées de la zone dans une image cliquable ¦ Koordinate područja na slici s klikom ¦ Koordinate območja na sliki s kliki
+Façon de traiter les demandes vers un autre site (CORS) ¦ Način obrade zahtjeva prema drugoj stranici (CORS) ¦ Način obravnave zahtev do drugega spletnega mesta (CORS)
+Adresse de la ressource ¦ Adresa resursa ¦ Naslov vira
+Date (et heure) de la modification ¦ Datum (i vrijeme) izmjene ¦ Datum (in čas) spremembe
+Valeur lisible par une machine ¦ Strojno čitljiva vrijednost ¦ Strojno berljiva vrednost
+Indice de décodage de l’image pour l’affichage ¦ Naznaka za dekodiranje slike za prikaz ¦ Namig za dekodiranje slike za prikaz
+Active cette piste si aucune autre ne convient mieux ¦ Aktivira ovu stazu ako nijedna druga ne odgovara bolje ¦ Vklopi to sled, če nobena druga ne ustreza bolje
+Lance le script après la lecture de la page ¦ Pokreće skriptu nakon čitanja stranice ¦ Zažene skripto po branju strani
+Sens d’écriture de l’élément ¦ Smjer pisanja elementa ¦ Smer pisanja elementa
+Nom du champ qui envoie le sens d’écriture avec le formulaire ¦ Naziv polja koje šalje smjer pisanja s obrascem ¦ Ime polja, ki z obrazcem pošlje smer pisanja
+Le champ est-il désactivé ¦ Je li polje onemogućeno ¦ Ali je polje onemogočeno
+Les champs à l’intérieur sont-ils désactivés (sauf dans legend) ¦ Jesu li polja unutra onemogućena (osim u legend) ¦ Ali so polja znotraj onemogočena (razen v legend)
+Le lien est-il désactivé ¦ Je li poveznica onemogućena ¦ Ali je povezava onemogočena
+Télécharger le fichier au lieu de l’ouvrir, et sous quel nom ¦ Preuzmi datoteku umjesto otvaranja, i pod kojim imenom ¦ Prenesi datoteko namesto odpiranja in pod katerim imenom
+L’élément peut-il être glissé ¦ Može li se element povlačiti ¦ Ali je element mogoče vleči
+Codage des données à l’envoi du formulaire ¦ Kodiranje podataka pri slanju obrasca ¦ Kodiranje podatkov ob pošiljanju obrazca
+Libellé conseillé pour la touche Entrée du clavier ¦ Preporučeni naziv za tipku Enter na tipkovnici ¦ Priporočena oznaka za tipko Enter na tipkovnici
+Priorité du chargement lancé par l’élément ¦ Prioritet učitavanja koje pokreće element ¦ Prednost nalaganja, ki ga sproži element
+Relie le libellé à un champ (son id) ¦ Povezuje oznaku s poljem (njegov id) ¦ Poveže oznako s poljem (njegov id)
+Champs dont dépend le résultat ¦ Polja o kojima ovisi rezultat ¦ Polja, od katerih je odvisen rezultat
+Met à jour un contenu existant ¦ Ažurira postojeći sadržaj ¦ Posodobi obstoječo vsebino
+Rattache l’élément à un formulaire (son id) ¦ Povezuje element s obrascem (njegov id) ¦ Poveže element z obrazcem (njegov id)
+Adresse d’envoi (pour ce bouton) ¦ Adresa slanja (za ovaj gumb) ¦ Naslov pošiljanja (za ta gumb)
+Codage de l’envoi (pour ce bouton) ¦ Kodiranje slanja (za ovaj gumb) ¦ Kodiranje pošiljanja (za ta gumb)
+Méthode d’envoi : GET ou POST (pour ce bouton) ¦ Metoda slanja: GET ili POST (za ovaj gumb) ¦ Način pošiljanja: GET ali POST (za ta gumb)
+Envoyer sans vérifier les champs (pour ce bouton) ¦ Pošalji bez provjere polja (za ovaj gumb) ¦ Pošlji brez preverjanja polj (za ta gumb)
+Où ouvrir la réponse (pour ce bouton) ¦ Gdje otvoriti odgovor (za ovaj gumb) ¦ Kje odpreti odgovor (za ta gumb)
+Cellules d’en-tête de cette cellule ¦ Ćelije zaglavlja ove ćelije ¦ Celice glave te celice
+Décale les niveaux des titres à l’intérieur ¦ Pomiče razine naslova unutra ¦ Zamakne ravni naslovov znotraj
+Empêche le décalage des niveaux de titres d’aller plus loin ¦ Sprječava daljnje pomicanje razina naslova ¦ Prepreči nadaljnje zamikanje ravni naslovov
+Caché (l’élément ne compte pas pour l’instant) ¦ Skriveno (element se zasad ne računa) ¦ Skrito (element zaenkrat ne šteje)
+Début de la zone haute de la jauge ¦ Početak gornjeg područja mjerača ¦ Začetek zgornjega območja merilnika
+Adresse du lien ¦ Adresa poveznice ¦ Naslov povezave
+Adresse de la ressource liée ¦ Adresa povezanog resursa ¦ Naslov povezanega vira
+Adresse de base du document ¦ Osnovna adresa dokumenta ¦ Osnovni naslov dokumenta
+Langue de la page liée ¦ Jezik povezane stranice ¦ Jezik povezane strani
+Instruction pour le navigateur (http-equiv) ¦ Uputa za preglednik (http-equiv) ¦ Navodilo za brskalnik (http-equiv)
+Identifiant unique de l’élément (pour le CSS, le JS et les ancres #) ¦ Jedinstveni identifikator elementa (za CSS, JS i sidra #) ¦ Enolični identifikator elementa (za CSS, JS in sidra #)
+Tailles d’image selon la mise en page (préchargement) ¦ Veličine slike prema prijelomu (prethodno učitavanje) ¦ Velikosti slike glede na postavitev (vnaprejšnje nalaganje)
+Images selon l’écran (préchargement) ¦ Slike prema zaslonu (prethodno učitavanje) ¦ Slike glede na zaslon (vnaprejšnje nalaganje)
+Rend l’élément inerte (ni clic ni focus) ¦ Čini element neaktivnim (ni klik ni fokus) ¦ Naredi element nedejaven (ne klik ne fokus)
+Clavier conseillé sur mobile (chiffres, email…) ¦ Preporučena tipkovnica na mobitelu (brojke, e-pošta…) ¦ Priporočena tipkovnica na mobilniku (številke, e-pošta …)
+Empreinte pour vérifier que le fichier n’a pas été modifié (SRI) ¦ Otisak za provjeru da datoteka nije izmijenjena (SRI) ¦ Prstni odtis za preverjanje, da datoteka ni bila spremenjena (SRI)
+Crée un élément personnalisé à partir d’un élément existant ¦ Stvara prilagođeni element od postojećeg elementa ¦ Ustvari element po meri iz obstoječega elementa
+Image cliquable gérée par le serveur ¦ Slika s klikom kojom upravlja poslužitelj ¦ Slika s kliki, ki jo upravlja strežnik
+Identifiant global d’un objet de microdonnées ¦ Globalni identifikator objekta mikropodataka ¦ Globalni identifikator objekta mikropodatkov
+Propriétés de microdonnées ¦ Svojstva mikropodataka ¦ Lastnosti mikropodatkov
+Éléments rattachés (microdonnées) ¦ Povezani elementi (mikropodaci) ¦ Povezani elementi (mikropodatki)
+Commence un objet de microdonnées ¦ Započinje objekt mikropodataka ¦ Začne objekt mikropodatkov
+Type d’un objet de microdonnées (schema.org…) ¦ Vrsta objekta mikropodataka (schema.org…) ¦ Vrsta objekta mikropodatkov (schema.org …)
+Sorte de piste de texte (sous-titres, chapitres…) ¦ Vrsta tekstne staze (titlovi, poglavlja…) ¦ Vrsta besedilne sledi (podnapisi, poglavja …)
+Libellé visible ¦ Vidljiva oznaka ¦ Vidna oznaka
+Langue de l’élément (fr, en…) ¦ Jezik elementa (fr, en…) ¦ Jezik elementa (fr, en …)
+Liste de propositions (id d’un datalist) ¦ Popis prijedloga (id elementa datalist) ¦ Seznam predlogov (id elementa datalist)
+Chargement différé : lazy ou eager ¦ Odgođeno učitavanje: lazy ili eager ¦ Odloženo nalaganje: lazy ali eager
+Lecture en boucle ¦ Ponavljanje u petlji ¦ Predvajanje v zanki
+Fin de la zone basse de la jauge ¦ Kraj donjeg područja mjerača ¦ Konec spodnjega območja merilnika
+Valeur maximale ¦ Najveća vrijednost ¦ Največja vrednost
+Borne haute ¦ Gornja granica ¦ Zgornja meja
+Longueur maximale ¦ Najveća duljina ¦ Največja dolžina
+Média concerné (requête @media) ¦ Medij na koji se odnosi (upit @media) ¦ Zadevni medij (poizvedba @media)
+Méthode d’envoi : GET ou POST ¦ Metoda slanja: GET ili POST ¦ Način pošiljanja: GET ali POST
+Valeur minimale ¦ Najmanja vrijednost ¦ Najmanjša vrednost
+Borne basse ¦ Donja granica ¦ Spodnja meja
+Longueur minimale ¦ Najmanja duljina ¦ Najmanjša dolžina
+Plusieurs valeurs permises ¦ Dopušteno više vrijednosti ¦ Dovoljenih več vrednosti
+Son coupé au départ ¦ Zvuk isključen na početku ¦ Zvok na začetku izklopljen
+Nom du champ pour l’envoi du formulaire ¦ Naziv polja za slanje obrasca ¦ Ime polja za pošiljanje obrazca
+Nom d’un groupe de details (un seul ouvert à la fois) ¦ Naziv skupine details (samo jedan otvoren odjednom) ¦ Ime skupine details (naenkrat odprt samo eden)
+Nom du formulaire (document.forms) ¦ Naziv obrasca (document.forms) ¦ Ime obrazca (document.forms)
+Nom du cadre (cible des liens) ¦ Naziv okvira (cilj poveznica) ¦ Ime okvirja (cilj povezav)
+Nom de l’image cliquable (pour usemap) ¦ Naziv slike s klikom (za usemap) ¦ Ime slike s kliki (za usemap)
+Nom de la métadonnée (description, viewport…) ¦ Naziv metapodatka (description, viewport…) ¦ Ime metapodatka (description, viewport …)
+Nom de l’emplacement (shadow DOM) ¦ Naziv mjesta (shadow DOM) ¦ Ime mesta (shadow DOM)
+Ignoré par les navigateurs qui lisent les modules ¦ Zanemaruju ga preglednici koji čitaju module ¦ Brskalniki, ki berejo module, ga prezrejo
+Jeton unique pour la politique de sécurité (CSP) ¦ Jedinstveni token za sigurnosnu politiku (CSP) ¦ Enolični žeton za varnostni pravilnik (CSP)
+Envoyer sans vérifier les champs ¦ Pošalji bez provjere polja ¦ Pošlji brez preverjanja polj
+Le details est-il ouvert ¦ Je li details otvoren ¦ Ali je details odprt
+La boîte de dialogue est-elle affichée ¦ Je li dijaloški okvir prikazan ¦ Ali je pogovorno okno prikazano
+Valeur idéale de la jauge ¦ Idealna vrijednost mjerača ¦ Idealna vrednost merilnika
+Motif que la saisie doit suivre (expression régulière) ¦ Uzorak koji unos mora slijediti (regularni izraz) ¦ Vzorec, ki mu mora vnos slediti (regularni izraz)
+Adresses à prévenir quand on suit le lien ¦ Adrese koje treba obavijestiti kad se slijedi poveznica ¦ Naslovi, ki jih je treba obvestiti, ko se sledi povezavi
+Texte d’exemple dans le champ vide ¦ Primjer teksta u praznom polju ¦ Primer besedila v praznem polju
+Lire la vidéo dans la page (pas en plein écran sur mobile) ¦ Reproduciraj video na stranici (ne preko cijelog zaslona na mobitelu) ¦ Predvajaj video na strani (ne celozaslonsko na mobilniku)
+Fait de l’élément une fenêtre surgissante (popover) ¦ Pretvara element u skočni prozor (popover) ¦ Spremeni element v pojavno okno (popover)
+Fenêtre surgissante visée par le bouton ¦ Skočni prozor na koji cilja gumb ¦ Pojavno okno, na katerega cilja gumb
+Montrer, cacher ou basculer la fenêtre surgissante ¦ Prikaži, sakrij ili prebaci skočni prozor ¦ Prikaži, skrij ali preklopi pojavno okno
+Image montrée avant la lecture de la vidéo ¦ Slika prikazana prije reprodukcije videa ¦ Slika, prikazana pred predvajanjem videa
+Quantité de média à charger à l’avance ¦ Količina medija za unaprijed učitavanje ¦ Količina medija za vnaprejšnje nalaganje
+Le champ est-il en lecture seule ¦ Je li polje samo za čitanje ¦ Ali je polje samo za branje
+Lecture seule (éléments personnalisés) ¦ Samo za čitanje (prilagođeni elementi) ¦ Samo za branje (elementi po meri)
+Informations de provenance envoyées lors des chargements ¦ Podaci o podrijetlu koji se šalju pri učitavanju ¦ Podatki o izvoru, poslani ob nalaganju
+Relation du lien (noopener, nofollow…) ¦ Odnos poveznice (noopener, nofollow…) ¦ Razmerje povezave (noopener, nofollow …)
+Relation du document lié (stylesheet, icon…) ¦ Odnos povezanog dokumenta (stylesheet, icon…) ¦ Razmerje povezanega dokumenta (stylesheet, icon …)
+Champ obligatoire ¦ Obavezno polje ¦ Obvezno polje
+Numérotation à l’envers ¦ Obrnuto numeriranje ¦ Obratno številčenje
+Nombre de lignes visibles ¦ Broj vidljivih redaka ¦ Število vidnih vrstic
+Nombre de lignes couvertes par la cellule ¦ Broj redaka koje ćelija obuhvaća ¦ Število vrstic, ki jih zajema celica
+Règles de sécurité du contenu intégré ¦ Sigurnosna pravila ugrađenog sadržaja ¦ Varnostna pravila vdelane vsebine
+Cellules concernées par l’en-tête (row, col…) ¦ Ćelije na koje se odnosi zaglavlje (row, col…) ¦ Celice, na katere se nanaša glava (row, col …)
+Option choisie au départ ¦ Opcija odabrana na početku ¦ Možnost, izbrana na začetku
+Shadow root clonable ¦ Shadow root koji se može klonirati ¦ Shadow root, ki ga je mogoče klonirati
+Shadow root avec registre d’éléments personnalisés ¦ Shadow root s registrom prilagođenih elemenata ¦ Shadow root z registrom elementov po meri
+Shadow root qui transmet le focus ¦ Shadow root koji prenosi fokus ¦ Shadow root, ki prenaša fokus
+Shadow root déclaratif (open ou closed) ¦ Deklarativni shadow root (open ili closed) ¦ Deklarativni shadow root (open ali closed)
+Shadow root sérialisable ¦ Shadow root koji se može serijalizirati ¦ Shadow root, ki ga je mogoče serializirati
+Répartition des emplacements du shadow root ¦ Raspodjela mjesta shadow roota ¦ Razporeditev mest shadow roota
+Forme de la zone (rect, circle, poly) ¦ Oblik područja (rect, circle, poly) ¦ Oblika območja (rect, circle, poly)
+Taille du champ ¦ Veličina polja ¦ Velikost polja
+Tailles des icônes (rel="icon") ¦ Veličine ikona (rel="icon") ¦ Velikosti ikon (rel="icon")
+Tailles d’image selon la mise en page ¦ Veličine slike prema prijelomu ¦ Velikosti slike glede na postavitev
+Emplacement voulu (shadow DOM) ¦ Željeno mjesto (shadow DOM) ¦ Želeno mesto (shadow DOM)
+Nombre de colonnes couvertes ¦ Broj obuhvaćenih stupaca ¦ Število zajetih stolpcev
+Vérifier l’orthographe et la grammaire ¦ Provjeri pravopis i gramatiku ¦ Preveri črkovanje in slovnico
+Adresse du fichier ¦ Adresa datoteke ¦ Naslov datoteke
+Page à afficher dans l’iframe (HTML) ¦ Stranica za prikaz u iframeu (HTML) ¦ Stran za prikaz v iframe (HTML)
+Langue de la piste de texte ¦ Jezik tekstne staze ¦ Jezik besedilne sledi
+Images selon l’écran (haute définition, petit écran…) ¦ Slike prema zaslonu (visoka razlučivost, mali zaslon…) ¦ Slike glede na zaslon (visoka ločljivost, majhen zaslon …)
+Premier numéro de la liste ¦ Prvi broj popisa ¦ Prva številka seznama
+Pas de la valeur (1, 0.5…) ¦ Korak vrijednosti (1, 0.5…) ¦ Korak vrednosti (1, 0.5 …)
+Styles écrits sur l’élément ¦ Stilovi napisani na elementu ¦ Slogi, zapisani na elementu
+Ordre et possibilité d’atteindre l’élément au clavier (Tab) ¦ Redoslijed i mogućnost dolaska do elementa tipkovnicom (Tab) ¦ Vrstni red in možnost dostopa do elementa s tipkovnico (Tab)
+Où ouvrir le lien (_blank : nouvel onglet) ¦ Gdje otvoriti poveznicu (_blank: nova kartica) ¦ Kje odpreti povezavo (_blank: nov zavihek)
+Cible par défaut des liens et formulaires ¦ Zadani cilj poveznica i obrazaca ¦ Privzeti cilj povezav in obrazcev
+Où ouvrir la réponse du formulaire ¦ Gdje otvoriti odgovor obrasca ¦ Kje odpreti odgovor obrazca
+Infobulle (information en plus) ¦ Oblačić (dodatna informacija) ¦ Namig (dodatna informacija)
+Forme complète de l’abréviation ¦ Puni oblik kratice ¦ Polna oblika okrajšave
+Explication du motif attendu ¦ Objašnjenje očekivanog uzorka ¦ Razlaga pričakovanega vzorca
+Titre du lien ¦ Naslov poveznice ¦ Naslov povezave
+Nom d’un jeu de feuilles de styles ¦ Naziv skupa stilskih tablica ¦ Ime nabora slogovnih predlog
+Faut-il traduire l’élément quand la page est traduite (yes, no) ¦ Treba li prevesti element kad se stranica prevodi (yes, no) ¦ Ali je treba element prevesti, ko se stran prevaja (yes, no)
+Type de la ressource liée ¦ Vrsta povezanog resursa ¦ Vrsta povezanega vira
+Type de bouton (submit, button, reset) ¦ Vrsta gumba (submit, button, reset) ¦ Vrsta gumba (submit, button, reset)
+Type de la ressource intégrée ¦ Vrsta ugrađenog resursa ¦ Vrsta vdelanega vira
+Type de champ (text, email, date…) ¦ Vrsta polja (text, email, date…) ¦ Vrsta polja (text, email, date …)
+Forme des numéros de la liste (1, a, A, i, I) ¦ Oblik brojeva popisa (1, a, A, i, I) ¦ Oblika številk seznama (1, a, A, i, I)
+Type de script (module…) ¦ Vrsta skripte (module…) ¦ Vrsta skripte (module …)
+Image cliquable à utiliser (#nom) ¦ Slika s klikom koju treba upotrijebiti (#naziv) ¦ Slika s kliki, ki naj se uporabi (#ime)
+Valeur envoyée avec le formulaire ¦ Vrijednost koja se šalje s obrascem ¦ Vrednost, poslana z obrazcem
+Valeur du champ ¦ Vrijednost polja ¦ Vrednost polja
+Numéro de cet élément de liste ¦ Broj ove stavke popisa ¦ Številka tega elementa seznama
+Valeur actuelle ¦ Trenutačna vrijednost ¦ Trenutna vrednost
+Retour à la ligne du texte envoyé (soft, hard) ¦ Prijelom retka poslanog teksta (soft, hard) ¦ Prelom vrstic poslanega besedila (soft, hard)
+Suggestions d’écriture permises ou non ¦ Dopušteni ili nedopušteni prijedlozi pisanja ¦ Predlogi pri pisanju dovoljeni ali ne
+{tag} ferme une balise qui n’est pas ouverte. ¦ {tag} zatvara oznaku koja nije otvorena. ¦ {tag} zapira oznako, ki ni odprta.
+{tag} n’est pas fermée ({end}). ¦ {tag} nije zatvorena ({end}). ¦ {tag} ni zaprta ({end}).
+L’id « {id} » est donné deux fois. ¦ Id „{id}” dodijeljen je dvaput. ¦ Id »{id}« je dodeljen dvakrat.
+Une image sans alt (texte pour ceux qui ne la voient pas). ¦ Slika bez alt (teksta za one koji je ne vide). ¦ Slika brez alt (besedila za tiste, ki je ne vidijo).
+Des guillemets ne sont pas fermés. ¦ Neki navodnici nisu zatvoreni. ¦ Nekateri narekovaji niso zaprti.
+« {ch} » en trop. ¦ „{ch}” je suvišan. ¦ »{ch}« je odveč.
+« {ch} » ferme « {open} » (ligne {n}). ¦ „{ch}” zatvara „{open}” (redak {n}). ¦ »{ch}« zapira »{open}« (vrstica {n}).
+Un commentaire /* … */ n’est pas fermé. ¦ Komentar /* … */ nije zatvoren. ¦ Komentar /* … */ ni zaprt.
+« {ch} » n’est pas fermé. ¦ „{ch}” nije zatvoren. ¦ »{ch}« ni zaprt.
+Il manque sans doute un « ; » au bout de la ligne. ¦ Na kraju retka vjerojatno nedostaje „;”. ¦ Na koncu vrstice verjetno manjka »;«.
+Ligne {line}, colonne {col} ¦ Redak {line}, stupac {col} ¦ Vrstica {line}, stolpec {col}
+Le numéro de la ligne (1 à {n}), ou ligne:colonne : ¦ Broj retka (1 do {n}) ili redak:stupac: ¦ Številka vrstice (1 do {n}) ali vrstica:stolpec:
+Aller à la ligne (1 à {n}) ¦ Idi na redak (1 do {n}) ¦ Pojdi na vrstico (1 do {n})
+Déjà en forme. ¦ Već je oblikovano. ¦ Že oblikovano.
+Code remis en forme. ¦ Kod je ponovno oblikovan. ¦ Koda je znova oblikovana.
+Retour au début. ¦ Povratak na početak. ¦ Nazaj na začetek.
+Sur PC et Linux : Ctrl au lieu de ⌘, Alt au lieu de ⌥. ¦ Na PC-u i Linuxu: Ctrl umjesto ⌘, Alt umjesto ⌥. ¦ Na PC in Linuxu: Ctrl namesto ⌘, Alt namesto ⌥.
+jumelle ligne {n} ¦ par zagrade u retku {n} ¦ par oklepaja v vrstici {n}
+✓ Rien à signaler ¦ ✓ Nema ništa za prijaviti ¦ ✓ Ni ničesar za poročati
+Ligne {n} : {msg} ¦ Redak {n}: {msg} ¦ Vrstica {n}: {msg}
+Le code a l’air bien formé. ¦ Kod izgleda ispravno oblikovan. ¦ Koda je videti pravilno oblikovana.
+Rien à signaler. ¦ Nema ništa za prijaviti. ¦ Ni ničesar za poročati.
+=remplacé ¦ zamjena|zamjene|zamjena ¦ zamenjava|zamenjavi|zamenjave|zamenjav
+=caractère choisi ¦ odabrani znak|odabrana znaka|odabranih znakova ¦ izbran znak|izbrana znaka|izbrani znaki|izbranih znakov
+pas sur {name} ¦ ne u {name} ¦ ne v {name}
+pas sur {name} avant {v} ¦ ne u {name} prije {v} ¦ ne v {name} pred {v}
+Aller à la ligne {n} de {file} ¦ Idi na redak {n} datoteke {file} ¦ Pojdi na vrstico {n} datoteke {file}
+partout chez les navigateurs visés ¦ posvuda u ciljanim preglednicima ¦ povsod v ciljnih brskalnikih
+ligne {n} de {file} ¦ redak {n} datoteke {file} ¦ vrstica {n} datoteke {file}
+Navigateurs visés : {list}. ¦ Ciljani preglednici: {list}. ¦ Ciljni brskalniki: {list}.
+✅ Rien à signaler : ton site devrait marcher sur tous les navigateurs visés. ¦ ✅ Nema ništa za prijaviti: tvoja bi stranica trebala raditi u svim ciljanim preglednicima. ¦ ✅ Ni ničesar za poročati: tvoje spletno mesto bi moralo delovati v vseh ciljnih brskalnikih.
+{what} : certains visiteurs verront ton site un peu différemment. ¦ {what}: neki će posjetitelji vidjeti tvoju stranicu malo drukčije. ¦ {what}: nekateri obiskovalci bodo tvoje spletno mesto videli nekoliko drugače.
+=fonction récente, bien prise en charge ¦ novija funkcija, dobro podržana|novije funkcije, dobro podržane|novijih funkcija, dobro podržanih ¦ novejša funkcija, dobro podprta|novejši funkciji, dobro podprti|novejše funkcije, dobro podprte|novejših funkcij, dobro podprtih
+=point à vérifier ¦ stavka za provjeru|stavke za provjeru|stavki za provjeru ¦ točka za preverjanje|točki za preverjanje|točke za preverjanje|točk za preverjanje
+=autre fonction récente, sans souci ¦ druga novija funkcija, bez problema|druge novije funkcije, bez problema|drugih novijih funkcija, bez problema ¦ druga novejša funkcija, brez težav|drugi novejši funkciji, brez težav|druge novejše funkcije, brez težav|drugih novejših funkcij, brez težav
+swref|Sur ¦ Na ¦ Na
+Imiter {name} ¦ Oponašaj {name} ¦ Posnemaj {name}
+Carte : {err} ¦ Karta: {err} ¦ Zemljevid: {err}
+Ce lien mène hors du site ({url}) : il marchera dans le site exporté. ¦ Ova poveznica vodi izvan stranice ({url}): radit će na izvezenoj stranici. ¦ Ta povezava vodi zunaj spletnega mesta ({url}): delovala bo na izvoženem spletnem mestu.
+Comme dans {name} : {what} à vérifier (🧭 Navigateurs). ¦ Kao u {name}: {what} za provjeru (🧭 Preglednici). ¦ Kot v {name}: {what} za preverjanje (🧭 Brskalniki).
+Comme dans {name} : rien à signaler. ¦ Kao u {name}: nema ništa za prijaviti. ¦ Kot v {name}: ni ničesar za poročati.
+L’aperçu reste celui de l’app : pour voir le vrai, ↗ Aperçu dans ce navigateur. ¦ Pregled ostaje onaj iz aplikacije: da vidiš pravi, ↗ Pregled u ovom pregledniku. ¦ Predogled ostane tisti iz aplikacije: za pravega ↗ Predogled v tem brskalniku.
+Largeur en px ¦ Širina u px ¦ Širina v px
+aperçu {w} ¦ pregled {w} ¦ predogled {w}
+{a} et {b} ¦ {a} i {b} ¦ {a} in {b}
+{what} dans le CSS ¦ {what} u CSS-u ¦ {what} v CSS
+pas encore de CSS ¦ još nema CSS-a ¦ še ni CSS
+ces blocs suivront la nouvelle requête ¦ ovi će blokovi slijediti novi upit ¦ ti bloki bodo sledili novi poizvedbi
+l’aperçu le montre même si ton appareil ne l’est pas ¦ pregled to prikazuje čak i ako tvoj uređaj nije takav ¦ predogled to prikaže, tudi če tvoja naprava ni taka
+Chaque écran est un bouton au-dessus de l’aperçu, et un choix « Écran » quand tu règles un élément : ses styles vont dans son bloc {code} du CSS du site. ¦ Svaki je zaslon gumb iznad pregleda i izbor „Zaslon” kad podešavaš element: njegovi stilovi idu u njegov blok {code} CSS-a stranice. ¦ Vsak zaslon je gumb nad predogledom in izbira »Zaslon«, ko nastavljaš element: njegovi slogi gredo v njegov blok {code} v CSS spletnega mesta.
+Dans le CSS, sans écran : ¦ U CSS-u, bez zaslona: ¦ V CSS, brez zaslona:
+Cette page : « {name} » ¦ Ova stranica: „{name}” ¦ Ta stran: »{name}«
+Titre dans l’onglet du navigateur ¦ Naslov na kartici preglednika ¦ Naslov v zavihku brskalnika
+Description (pour les moteurs de recherche) ¦ Opis (za tražilice) ¦ Opis (za iskalnike)
+Ces réglages remplissent les variables {code} de ta feuille de styles (onglet CSS). ¦ Ove postavke ispunjavaju varijable {code} tvoje stilske tablice (kartica CSS). ¦ Te nastavitve izpolnijo spremenljivke {code} tvoje slogovne predloge (zavihek CSS).
+titres ¦ naslovi ¦ naslovi
+Ta règle {rule} passe devant ce curseur : change-la, ou retire sa ligne. ¦ Tvoje pravilo {rule} ima prednost pred ovim klizačem: promijeni ga ili ukloni njegov redak. ¦ Tvoje pravilo {rule} ima prednost pred tem drsnikom: spremeni ga ali odstrani njegovo vrstico.
+ligne {n} ¦ redak {n} ¦ vrstica {n}
+Écrit dans {code} : seulement sur cet écran. ¦ Upisano u {code}: samo na ovom zaslonu. ¦ Zapisano v {code}: samo na tem zaslonu.
+Écrit dans le CSS du site, pour tous les écrans. ¦ Upisano u CSS stranice, za sve zaslone. ¦ Zapisano v CSS spletnega mesta, za vse zaslone.
+Pour un seul élément : clique-le, section « Marges, espace intérieur et taille ». ¦ Za samo jedan element: klikni ga, odjeljak „Margine, unutarnji razmak i veličina”. ¦ Za en sam element: klikni ga, razdelek »Robovi, notranji razmik in velikost«.
+la racine du site ¦ korijen stranice ¦ koren spletnega mesta
+Dans {dir} : ¦ U {dir}: ¦ V {dir}:
+{dir} : glisses-y des fichiers, ou ＋ pour en créer un dedans (un dossier vide n’est pas gardé à l’enregistrement). ¦ {dir}: povuci ovamo datoteke ili ＋ da stvoriš jednu unutra (prazna mapa ne zadržava se pri spremanju). ¦ {dir}: povleci sem datoteke ali ＋, da ustvariš eno v njej (prazna mapa se pri shranjevanju ne ohrani).
+Page « {name} » supprimée ¦ Stranica „{name}” je izbrisana ¦ Stran »{name}« je izbrisana
+Page « {name} » créée : elle est dans le menu de toutes les pages. ¦ Stranica „{name}” je stvorena: nalazi se u izborniku svih stranica. ¦ Stran »{name}« je ustvarjena: je v meniju vseh strani.
+C’est ton {what} : {tag}, nommé « {name} ». ¦ Ovo je tvoj {what}: {tag}, nazvan „{name}”. ¦ To je tvoj {what}: {tag}, imenovan »{name}«.
+{what}. Valeur : {value}. ¦ {what}. Vrijednost: {value}. ¦ {what}. Vrednost: {value}.
+Sa valeur : ¦ Njegova vrijednost: ¦ Njegova vrednost:
+{what} · valeur : {value} ¦ {what} · vrijednost: {value} ¦ {what} · vrednost: {value}
+Attribut sans description dans la norme (data-…, aria-…, ou propre à ton site) ¦ Atribut bez opisa u normi (data-…, aria-… ili svojstven tvojoj stranici) ¦ Atribut brez opisa v standardu (data-…, aria-… ali značilen za tvoje spletno mesto)
+Attributs HTML ¦ HTML atributi ¦ Atributi HTML
+＋ Ajouter un attribut… ¦ ＋ Dodaj atribut… ¦ ＋ Dodaj atribut …
+Propres à {tag} ¦ Svojstveni za {tag} ¦ Značilni za {tag}
+Pour tous les éléments ¦ Za sve elemente ¦ Za vse elemente
+Autre (data-…, aria-…)… ¦ Drugo (data-…, aria-…)… ¦ Drugo (data-…, aria-…) …
+Source : {link}, © {by}, licence {lic} ; {changes}. ¦ Izvor: {link}, © {by}, licenca {lic}; {changes}. ¦ Vir: {link}, © {by}, licenca {lic}; {changes}.
+traduit en français et adapté ¦ prevedeno na francuski i prilagođeno ¦ prevedeno v francoščino in prilagojeno
+Syntaxe, valeur de départ, héritage : {link} (relevées dans w3c/webref), © World Wide Web Consortium, {lic} ; seuls quelques champs sont repris, « héritée » et certains « s’applique à » sont traduits. Descriptions en français : écrites pour LCNDA. ¦ Sintaksa, početna vrijednost, nasljeđivanje: {link} (preuzeto iz w3c/webref), © World Wide Web Consortium, {lic}; preuzeto je samo nekoliko polja, a „nasljeđuje se” i neka „primjenjuje se na” su prevedena. Opisi na francuskom: napisani za LCNDA. ¦ Sintaksa, začetna vrednost, dedovanje: {link} (prevzeto iz w3c/webref), © World Wide Web Consortium, {lic}; prevzetih je le nekaj polj, »podedovano« in nekateri »velja za« so prevedeni. Opisi v francoščini: napisani za LCNDA.
+normes CSS du W3C ¦ CSS norme W3C-a ¦ standardi CSS konzorcija W3C
+Notice de la licence W3C ¦ Napomena o licenci W3C ¦ Obvestilo o licenci W3C
+Les plus utiles ; cherche pour voir les {n}. ¦ Najkorisniji; traži da vidiš svih {n}. ¦ Najbolj uporabni; išči, da vidiš vseh {n}.
+{x} copié. ¦ {x} kopirano. ¦ {x} kopirano.
+Astuces ¦ Savjeti ¦ Nasveti
+{b} : clique dans un texte pour le changer, le code suit tout seul. ¦ {b}: klikni u tekst da ga promijeniš, kod se sam prilagođava. ¦ {b}: klikni v besedilo, da ga spremeniš, koda sledi sama.
+T Écrire ¦ T Piši ¦ T Piši
+Dans le code, {key} déplie une abréviation : {ex}. ¦ U kodu {key} proširuje kraticu: {ex}. ¦ V kodi {key} razširi okrajšavo: {ex}.
+{b} fait tourner tes scripts (JS) dans l’aperçu isolé. ¦ {b} pokreće tvoje skripte (JS) u izoliranom pregledu. ¦ {b} zažene tvoje skripte (JS) v izoliranem predogledu.
+▶ Tester ¦ ▶ Isprobaj ¦ ▶ Preizkusi
+La carte est faite en image avec ce fond (et sa mention : {credit}), redessinée à chaque ouverture. ¦ Karta je napravljena kao slika s ovom podlogom (i njezinom napomenom: {credit}), ponovno iscrtanom pri svakom otvaranju. ¦ Zemljevid je narejen kot slika s to podlago (in njeno navedbo: {credit}), ki se ob vsakem odprtju znova nariše.
+🌳 Bloc de la généalogie : {what} ¦ 🌳 Blok rodoslovlja: {what} ¦ 🌳 Blok rodoslovja: {what}
+Texte de remplacement (pour qui ne voit pas l’image) ¦ Zamjenski tekst (za one koji ne vide sliku) ¦ Nadomestno besedilo (za tiste, ki ne vidijo slike)
+Ceci est ¦ Ovo je ¦ To je
+Ceci est… ¦ Ovo je… ¦ To je …
+{tag}, nommé « {name} » ¦ {tag}, nazvan „{name}” ¦ {tag}, imenovan »{name}«
+Nom (pour toi) ¦ Naziv (za tebe) ¦ Ime (zate)
+Balise ¦ Oznaka ¦ Oznaka
+Classe(s) ¦ Klasa/klase ¦ Razred(i)
+{x} en px ¦ {x} u px ¦ {x} v px
+marge ¦ margina ¦ rob
+espace intérieur ¦ unutarnji razmak ¦ notranji razmik
+style="…" de l’élément ¦ style="…" elementa ¦ style="…" elementa
+dans @media {q} ¦ u @media {q} ¦ v @media {q}
+Appliquer à ¦ Primijeni na ¦ Uporabi za
+Tous les éléments {cls} ¦ Svi elementi {cls} ¦ Vsi elementi {cls}
+Écrit dans : {where} ¦ Upisano u: {where} ¦ Zapisano v: {where}
+CSS du site ¦ CSS stranice ¦ CSS spletnega mesta
+modifié le {date} ¦ izmijenjeno {date} ¦ spremenjeno {date}
+{kb} Ko · dans une page : {html} · dans le CSS : {css} ¦ {kb} KB · na stranici: {html} · u CSS-u: {css} ¦ {kb} KB · na strani: {html} · v CSS: {css}
+depuis css/ ¦ iz css/ ¦ iz css/
+page « {name} » ¦ stranica „{name}” ¦ stran »{name}«
+Fichiers du site ({n}) ¦ Datoteke stranice ({n}) ¦ Datoteke spletnega mesta ({n})
+{name} garde son nom : c’est le fichier principal du site. ¦ {name} zadržava svoje ime: to je glavna datoteka stranice. ¦ {name} obdrži svoje ime: to je glavna datoteka spletnega mesta.
+tu peux y écrire du PHP, par exemple {code} ¦ u nju možeš pisati PHP, na primjer {code} ¦ vanjo lahko pišeš PHP, na primer {code}
+aujourd’hui : {where} ¦ danas: {where} ¦ danes: {where}
+la racine ¦ korijen ¦ koren
+Déplacer {name} ¦ Premjesti {name} ¦ Premakni {name}
+{x} supprimé ¦ {x} izbrisano ¦ {x} izbrisano
+PHP exécuté ({ms} ms) ¦ PHP izvršen ({ms} ms) ¦ PHP izveden ({ms} ms)
+L’aperçu remplace seulement les include. ¦ Pregled zamjenjuje samo include. ¦ Predogled zamenja samo include.
+lié après style.css sur {what} ¦ povezano nakon style.css na {what} ¦ povezano za style.css na {what}
+lié après style.css ¦ povezano nakon style.css ¦ povezano za style.css
+clic droit sur l’onglet : ses pages ¦ desni klik na karticu: njezine stranice ¦ desni klik na zavihek: njegove strani
+lié après script.js, tourne en ▶ Tester ¦ povezano nakon script.js, radi u ▶ Isprobaj ¦ povezano za script.js, teče v ▶ Preizkusi
+à inclure dans une page PHP : {code} ¦ za uključivanje u PHP stranicu: {code} ¦ za vključitev v stran PHP: {code}
+PHP de « {name} » · {code} pour un en-tête commun ¦ PHP od „{name}” · {code} za zajedničko zaglavlje ¦ PHP od »{name}« · {code} za skupno glavo
+HTML de « {name} » · Tab : Emmet (ul>li*3) · les blocs data-lc-block sont remplis tout seuls ¦ HTML od „{name}” · Tab: Emmet (ul>li*3) · blokovi data-lc-block ispunjavaju se sami ¦ HTML od »{name}« · Tab: Emmet (ul>li*3) · bloki data-lc-block se izpolnijo sami
+CSS de tout le site · Tab : m10 → margin: 10px; · les couleurs de 🎨 : var(--lc-principale)… ¦ CSS cijele stranice · Tab: m10 → margin: 10px; · boje iz 🎨: var(--lc-principale)… ¦ CSS celotnega spletnega mesta · Tab: m10 → margin: 10px; · barve iz 🎨: var(--lc-principale) …
+JS de tout le site · il tourne seulement en ▶ Tester, dans l’aperçu isolé, et dans le site exporté ¦ JS cijele stranice · radi samo u ▶ Isprobaj, u izoliranom pregledu i na izvezenoj stranici ¦ JS celotnega spletnega mesta · teče samo v ▶ Preizkusi, v izoliranem predogledu in na izvoženem spletnem mestu
+🎨 CSS de {what} ¦ 🎨 CSS za {what} ¦ 🎨 CSS za {what}
+aucune règle ¦ nijedno pravilo ¦ nobenega pravila
+modifie ici, le fichier suit ¦ uredi ovdje, datoteka se prilagođava ¦ uredi tukaj, datoteka sledi
+＋ Règle {sel} ¦ ＋ Pravilo {sel} ¦ ＋ Pravilo {sel}
+Règle {n} ¦ Pravilo {n} ¦ Pravilo {n}
+{what} du HTML (scripts, cadres, attributs on…, liens javascript:) : mets ton JavaScript dans l’onglet JS. ¦ {what} iz HTML-a (skripte, okviri, atributi on…, poveznice javascript:): stavi svoj JavaScript na karticu JS. ¦ {what} iz HTML (skripte, okvirji, atributi on…, povezave javascript:): svoj JavaScript daj v zavihek JS.
+=chose retirée ¦ uklonjena stvar|uklonjene stvari|uklonjenih stvari ¦ odstranjena stvar|odstranjeni stvari|odstranjene stvari|odstranjenih stvari
+Impossible d’enregistrer : {err} ¦ Spremanje nije moguće: {err} ¦ Shranjevanje ni mogoče: {err}
+Copie enregistrée : « {name} » (Mes sites…). ¦ Kopija je spremljena: „{name}” (Moje stranice…). ¦ Kopija je shranjena: »{name}« (Moja spletna mesta …).
+Site prêt : {name}. Décompresse-le et ouvre index.html (ou pose le dossier dans MAMP, WAMP, chez ton hébergeur) : le mode d’emploi est dans LISEZ-MOI.html. ¦ Stranica je spremna: {name}. Raspakiraj je i otvori index.html (ili stavi mapu u MAMP, WAMP, kod svog pružatelja usluge): upute su u LISEZ-MOI.html. ¦ Spletno mesto je pripravljeno: {name}. Razširi ga in odpri index.html (ali postavi mapo v MAMP, WAMP, pri svojem ponudniku gostovanja): navodila so v LISEZ-MOI.html.
+Page prête : {name} (tout est dedans, à ouvrir d’un double-clic). ¦ Stranica je spremna: {name} (sve je unutra, otvara se dvoklikom). ¦ Stran je pripravljena: {name} (vse je v njej, odpre se z dvoklikom).
+{what} (sans GPS ni appareil) ¦ {what} (bez GPS-a i uređaja) ¦ {what} (brez GPS in naprave)
+=image réduite ¦ smanjena slika|smanjene slike|smanjenih slika ¦ pomanjšana slika|pomanjšani sliki|pomanjšane slike|pomanjšanih slik
+=image pas mise ¦ neumetnuta slika|neumetnute slike|neumetnutih slika ¦ nevstavljena slika|nevstavljeni sliki|nevstavljene slike|nevstavljenih slik
+=nom de personne vivante remplacé ¦ zamijenjeno ime žive osobe|zamijenjena imena živih osoba|zamijenjenih imena živih osoba ¦ zamenjano ime žive osebe|zamenjani imeni živih oseb|zamenjana imena živih oseb|zamenjanih imen živih oseb
+=image introuvable ¦ nedostajuća slika|nedostajuće slike|nedostajućih slika ¦ manjkajoča slika|manjkajoči sliki|manjkajoče slike|manjkajočih slik
+{what} (une personne vivante ou confidentielle dessus : {list}) ¦ {what} (na njoj je živa ili povjerljiva osoba: {list}) ¦ {what} (na njej je živa ali zaupna oseba: {list})
+{what} (une personne vivante ou confidentielle dessus) ¦ {what} (na njoj je živa ili povjerljiva osoba) ¦ {what} (na njej je živa ali zaupna oseba)
+{what} par « [nom retiré] » ¦ {what} s „[ime uklonjeno]” ¦ {what} z »[ime odstranjeno]«
+{what} vers une page qui n’existe plus ¦ {what} prema stranici koja više ne postoji ¦ {what} na stran, ki ne obstaja več
+{what} dans tes médias ¦ {what} u tvojim medijima ¦ {what} v tvojih medijih
+Le site a sa politique de sécurité (CSP) : ses scripts viennent seulement de ses fichiers. ¦ Stranica ima svoju sigurnosnu politiku (CSP): njezine skripte dolaze samo iz njezinih datoteka. ¦ Spletno mesto ima svoj varnostni pravilnik (CSP): njegove skripte prihajajo samo iz njegovih datotek.
+Déjà en ligne : ¦ Već na mreži: ¦ Že na spletu:
+Jeton Netlify ¦ Netlify token ¦ Žeton Netlify
+Jeton GitHub ¦ GitHub token ¦ Žeton GitHub
+Dépôt ¦ Repozitorij ¦ Repozitorij
+Serveur ¦ Poslužitelj ¦ Strežnik
+Port ¦ Port ¦ Vrata
+Identifiant ¦ Korisničko ime ¦ Uporabniško ime
+Dossier du site sur le serveur ¦ Mapa stranice na poslužitelju ¦ Mapa spletnega mesta na strežniku
+Ton site est en ligne ({n} fichiers). Il peut falloir une minute avant qu’il s’affiche. ¦ Tvoja je stranica na mreži (datoteka: {n}). Može proći minuta prije nego što se prikaže. ¦ Tvoje spletno mesto je na spletu (datotek: {n}). Lahko traja minuto, preden se prikaže.
+Ton site est envoyé ({n} fichiers). ¦ Tvoja je stranica poslana (datoteka: {n}). ¦ Tvoje spletno mesto je poslano (datotek: {n}).
+↗ Ouvrir {url} ¦ ↗ Otvori {url} ¦ ↗ Odpri {url}
+« {name} » illisible. ¦ „{name}” nije čitljiv. ¦ »{name}« ni berljiv.
+« {name} » : {pages}, {files} ; laissé de côté : {list}. Enregistre (💾) pour le garder. ¦ „{name}”: {pages}, {files}; izostavljeno: {list}. Spremi (💾) da ga zadržiš. ¦ »{name}«: {pages}, {files}; izpuščeno: {list}. Shrani (💾), da ga obdržiš.
+« {name} » : {pages}, {files}. Enregistre (💾) pour le garder. ¦ „{name}”: {pages}, {files}. Spremi (💾) da ga zadržiš. ¦ »{name}«: {pages}, {files}. Shrani (💾), da ga obdržiš.
+Rempli depuis la fiche de {name} : relis et complète. ¦ Ispunjeno iz zapisa osobe {name}: pročitaj i dopuni. ¦ Izpolnjeno iz zapisa osebe {name}: preberi in dopolni.
+Mon dessin : {what} ¦ Moj crtež: {what} ¦ Moja risba: {what}
+celui déjà enregistré ¦ onaj već spremljeni ¦ tisto, ki je že shranjeno
+ce qui est choisi dans le dessin ({what}) ¦ ono što je odabrano u crtežu ({what}) ¦ kar je izbrano v risbi ({what})
+choisis d’abord des formes dans le dessin (outil Sélection), puis « ＋ Créer un élément » ¦ najprije odaberi oblike u crtežu (alat Odabir), zatim „＋ Stvori element” ¦ najprej izberi oblike v risbi (orodje Izbor), nato »＋ Ustvari element«
+Le remplacer par ce qui est choisi dans le dessin ({n}) ¦ Zamijeni ga onim što je odabrano u crtežu ({n}) ¦ Zamenjaj ga s tem, kar je izbrano v risbi ({n})
+Choisis ce que tu dessines, puis : {a} — un clic par point, double-clic ou Entrée pour finir (les courbes se lissent toutes seules) ; {b} — glisse un rectangle ; {c} — un clic. ¦ Odaberi što crtaš, zatim: {a} — jedan klik po točki, dvoklik ili Enter za kraj (krivulje se same zaglađuju); {b} — povuci pravokutnik; {c} — jedan klik. ¦ Izberi, kaj rišeš, nato: {a} — en klik na točko, dvoklik ali Enter za konec (krivulje se zgladijo same); {b} — povleci pravokotnik; {c} — en klik.
+traits et zones ¦ crte i područja ¦ črte in območja
+bâtiment ¦ zgrada ¦ stavba
+symbole, nom ¦ simbol, naziv ¦ simbol, ime
+Plan situé : {place} — il couvre {size} (1 px ≈ {m} m). Les lieux de ta base se posent à leur vraie place (📍). ¦ Plan je smješten: {place} — pokriva {size} (1 px ≈ {m} m). Mjesta iz tvoje baze postavljaju se na svoje pravo mjesto (📍). ¦ Načrt je umeščen: {place} — pokriva {size} (1 px ≈ {m} m). Kraji iz tvoje baze se postavijo na svoje pravo mesto (📍).
+Pour une carte juste et pas déformée, commence par {b} (plus bas) : l’échelle se règle toute seule. Sinon, dis combien vaut un pixel : ¦ Za točnu kartu bez izobličenja počni s {b} (niže): mjerilo se podešava samo. Inače reci koliko vrijedi jedan piksel: ¦ Za natančen zemljevid brez popačenja začni z {b} (spodaj): merilo se nastavi samo. Sicer povej, koliko meri en piksel:
+🗺️ Fond de carte d’un lieu ¦ 🗺️ Podloga karte mjesta ¦ 🗺️ Podlaga zemljevida kraja
+1 pixel = … mètres ¦ 1 piksel = … metara ¦ 1 piksel = … metrov
+Longueur réelle : {v} ¦ Stvarna duljina: {v} ¦ Dejanska dolžina: {v}
+Surface : {v} · tour : {t} ¦ Površina: {v} · opseg: {t} ¦ Površina: {v} · obseg: {t}
+Taille réelle : {v} ¦ Stvarna veličina: {v} ¦ Dejanska velikost: {v}
+(échelle à régler) ¦ (mjerilo treba podesiti) ¦ (merilo je treba nastaviti)
+Centré sur le lieu ¦ Centrirano na mjesto ¦ Središčeno na kraj
+Décalé de {what} ¦ Pomaknuto za {what} ¦ Zamaknjeno za {what}
+{d} vers le nord ¦ {d} prema sjeveru ¦ {d} proti severu
+{d} vers le sud ¦ {d} prema jugu ¦ {d} proti jugu
+{d} vers l’est ¦ {d} prema istoku ¦ {d} proti vzhodu
+{d} vers l’ouest ¦ {d} prema zapadu ¦ {d} proti zahodu
+=lieu posé ¦ postavljeno mjesto|postavljena mjesta|postavljenih mjesta ¦ postavljen kraj|postavljena kraja|postavljeni kraji|postavljenih krajev
+Choisis l’image d’un acte, puis {b} en glissant. Le papier, les taches et les lignes s’effacent ; l’encre devient un tracé net, à agrandir sans perte, à imprimer ou à graver. ¦ Odaberi sliku matičnog zapisa, zatim {b} povlačenjem. Papir, mrlje i crte nestaju; tinta postaje čist obris koji se može povećavati bez gubitka, ispisati ili gravirati. ¦ Izberi sliko matičnega vpisa, nato {b} z vlečenjem. Papir, madeži in črte izginejo; črnilo postane čista sled, ki jo lahko povečaš brez izgube, natisneš ali vgraviraš.
+encadre la signature ¦ uokviri potpis ¦ uokviri podpis
+Pas rangée dans les médias : {err} ¦ Nije spremljeno u medije: {err} ¦ Ni shranjeno med medije: {err}
+Image non rangée : {err} ¦ Slika nije spremljena: {err} ¦ Slika ni shranjena: {err}
+Signature rangée dans les médias d’{name}. ¦ Potpis je spremljen u medije osobe {name}. ¦ Podpis je shranjen med medije osebe {name}.
+Signature rangée dans les médias de {name}. ¦ Potpis je spremljen u medije osobe {name}. ¦ Podpis je shranjen med medije osebe {name}.
+Supprimer « {name} » ? ¦ Izbrisati „{name}”? ¦ Izbrišem »{name}«?
+cet élément ¦ ovaj element ¦ ta element
+{n} générations ({c} cases) ¦ Generacija: {n} (polja: {c}) ¦ Rodov: {n} (polj: {c})
+Établi par … en {y} ¦ Sastavio … {y}. ¦ Sestavil … leta {y}
+{file} enregistré dans Téléchargements. ¦ {file} spremljen u Preuzimanja. ¦ {file} shranjeno v Prenose.
+Ce fichier est un réglage d’un autre outil (« {other} ») : il ne va pas dans {tool}. ¦ Ova je datoteka postavka drugog alata („{other}”): ne ide u {tool}. ¦ Ta datoteka je nastavitev drugega orodja (»{other}«): ne spada v {tool}.
+cet outil ¦ ovaj alat ¦ to orodje
+le dessin vectoriel ¦ vektorski crtež ¦ vektorska risba
+le faire-part ¦ obavijest ¦ obvestilo
+les signatures et sceaux ¦ potpisi i pečati ¦ podpisi in pečati
+l’arbre décoratif ¦ ukrasno stablo ¦ okrasno drevo
+la palette du plan ¦ paleta plana ¦ paleta načrta
+les réglages du document ¦ postavke dokumenta ¦ nastavitve dokumenta
+ces réglages du faire-part ¦ ove postavke obavijesti ¦ te nastavitve obvestila
+cette palette du plan ¦ ova paleta plana ¦ ta paleta načrta
+ces réglages du sceau ¦ ove postavke pečata ¦ te nastavitve pečata
+ces réglages de l’arbre ¦ ove postavke stabla ¦ te nastavitve drevesa
+Un réglage « {name} » existe déjà. Quel nom donner à celui-ci ? ¦ Postavka „{name}” već postoji. Koje ime dati ovoj? ¦ Nastavitev »{name}« že obstaja. Kako naj se imenuje ta?
+« {name} » est tourné : remets sa rotation à 0, ou dissocie-le, pour travailler dedans. ¦ „{name}” je zakrenut: vrati mu rotaciju na 0 ili ga razgrupiraj da bi radio/radila unutar njega. ¦ »{name}« je zasukan: ponastavi njegovo vrtenje na 0 ali ga razdruži, da boš lahko delal/delala v njem.
+Ce groupe ¦ Ova skupina ¦ Ta skupina
+Tu es dans « {name} » : le reste est pâli. Échap ou ⤴ pour en sortir. ¦ Nalaziš se u „{name}”: ostalo je izblijeđeno. Esc ili ⤴ za izlaz. ¦ Si v »{name}«: ostalo je zbledelo. Esc ali ⤴ za izhod.
+le groupe ¦ skupina ¦ skupina
+Sortir de ce calque ¦ Izađi iz ovog sloja ¦ Zapusti ta sloj
+Sortir de ce groupe ¦ Izađi iz ove skupine ¦ Zapusti to skupino
+Travailler dans ce calque : les nouveaux dessins y vont ¦ Radi u ovom sloju: novi crteži idu u njega ¦ Delaj v tem sloju: nove risbe gredo vanj
+Travailler dans ce groupe : les nouveaux dessins y vont ¦ Radi u ovoj skupini: novi crteži idu u nju ¦ Delaj v tej skupini: nove risbe gredo vanjo
+Retirer le masque : la forme revient tout en haut, rien n’est perdu ¦ Ukloni masku: oblik se vraća na sam vrh, ništa se ne gubi ¦ Odstrani masko: oblika se vrne čisto na vrh, nič se ne izgubi
+Masquer avec la forme du dessus : la forme la plus haute de ce calque le découpe (on ne voit que ce qui est dedans) ¦ Maskiraj gornjim oblikom: najviši oblik ovog sloja ga izrezuje (vidi se samo ono što je unutra) ¦ Maskiraj z zgornjo obliko: najvišja oblika tega sloja ga izreže (vidi se le, kar je znotraj)
+Masquer avec la forme du dessus : la forme la plus haute de ce groupe le découpe (on ne voit que ce qui est dedans) ¦ Maskiraj gornjim oblikom: najviši oblik ove skupine je izrezuje (vidi se samo ono što je unutra) ¦ Maskiraj z zgornjo obliko: najvišja oblika te skupine jo izreže (vidi se le, kar je znotraj)
+le dessin (hors calque) ¦ crtež (izvan sloja) ¦ risba (zunaj sloja)
+Range la sélection dans un groupe ¦ Spremi odabir u skupinu ¦ Postavi izbor v skupino
+Un groupe vide dans le calque actuel ¦ Prazna skupina u trenutačnom sloju ¦ Prazna skupina v trenutnem sloju
+Grouper la sélection ¦ Grupiraj odabir ¦ Združi izbor
+Tu dessines dans : {where} ¦ Crtaš u: {where} ¦ Rišeš v: {where}
+au moins 3 objets ¦ najmanje 3 objekta ¦ vsaj 3 predmeti
+{w} × {h} cm à l’impression (96 points par pouce). ¦ {w} × {h} cm pri ispisu (96 točaka po inču). ¦ {w} × {h} cm pri tisku (96 točk na palec).
+=volet ¦ krilo|krila|krila ¦ krilo|krili|krila|kril
+{name} — clic : au centre ; glisser : où tu veux ¦ {name} — klik: u sredinu; povlačenje: kamo želiš ¦ {name} — klik: na sredino; vlečenje: kamor želiš
+Aucun ornement pour « {q} ». ¦ Nema ukrasa za „{q}”. ¦ Ni okraskov za »{q}«.
+Ornement : {name} ¦ Ukras: {name} ¦ Okrasek: {name}
+{what} en hachures : prêt pour une impression en noir et blanc. ¦ {what} šrafirano: spremno za crno-bijeli ispis. ¦ {what} s šrafuro: pripravljeno za črno-beli tisk.
+Couleur {n} ¦ Boja {n} ¦ Barva {n}
+Masque retiré : la forme est revenue tout en haut du calque. ¦ Maska je uklonjena: oblik se vratio na sam vrh sloja. ¦ Maska je odstranjena: oblika se je vrnila čisto na vrh sloja.
+Masque retiré : la forme est revenue tout en haut du groupe. ¦ Maska je uklonjena: oblik se vratio na sam vrh skupine. ¦ Maska je odstranjena: oblika se je vrnila čisto na vrh skupine.
+Pose d’abord une forme (rond, ovale, rectangle, tracé…) tout en haut de ce calque : elle servira de découpe. ¦ Najprije postavi oblik (krug, oval, pravokutnik, putanju…) na sam vrh ovog sloja: poslužit će kao izrez. ¦ Najprej postavi obliko (krog, oval, pravokotnik, pot …) čisto na vrh tega sloja: služila bo kot izrez.
+Pose d’abord une forme (rond, ovale, rectangle, tracé…) tout en haut de ce groupe : elle servira de découpe. ¦ Najprije postavi oblik (krug, oval, pravokutnik, putanju…) na sam vrh ove skupine: poslužit će kao izrez. ¦ Najprej postavi obliko (krog, oval, pravokotnik, pot …) čisto na vrh te skupine: služila bo kot izrez.
+Il faut quelque chose à découper sous la forme, dans ce calque. ¦ Ispod oblika, u ovom sloju, mora biti nešto za izrezivanje. ¦ Pod obliko mora biti v tem sloju nekaj za izrez.
+Il faut quelque chose à découper sous la forme, dans ce groupe. ¦ Ispod oblika, u ovoj skupini, mora biti nešto za izrezivanje. ¦ Pod obliko mora biti v tej skupini nekaj za izrez.
+Masque posé : on ne voit plus que ce qui est dans « {name} ». ¦ Maska je postavljena: vidi se samo ono što je u „{name}”. ¦ Maska je postavljena: vidi se le še, kar je v »{name}«.
+la forme ¦ oblik ¦ oblika
+« {name} » supprimé avec ce qu’il contient ¦ „{name}” je izbrisan sa svime što sadrži ¦ »{name}« je izbrisan z vsem, kar vsebuje
+Émail : {name} ¦ Tinktura: {name} ¦ Tinktura: {name}
+Le blasonnement est écrit en français héraldique. ¦ Opis grba napisan je na francuskom heraldičkom jeziku. ¦ Opis grba je napisan v francoskem heraldičnem jeziku.
+Ajoute un meuble {name} seul, à placer où tu veux ¦ Dodaj sam lik {name}, za postavljanje kamo želiš ¦ Dodaj samostojen lik {name}, ki ga postaviš, kamor želiš
+{a} → {b} points. ¦ {a} → {b} točaka. ¦ {a} → {b} točk.
+Plans de travail ({n}) ¦ Radne površine ({n}) ¦ Delovne površine ({n})
+Ce dessin a plusieurs pages ({what}) : leur taille vient du pliage choisi. Tu peux changer ici le fond, l’unité et la résolution. ¦ Ovaj crtež ima više stranica ({what}): njihova veličina ovisi o odabranom presavijanju. Ovdje možeš promijeniti pozadinu, jedinicu i razlučivost. ¦ Ta risba ima več strani ({what}): njihova velikost je odvisna od izbranega zgiba. Tu lahko spremeniš ozadje, enoto in ločljivost.
+Vectorisé : {what} ¦ Vektorizirano: {what} ¦ Vektorizirano: {what}
+{n} pages, une par face ¦ Stranica: {n}, jedna po strani lista ¦ Strani: {n}, ena na stran lista
+Image : {name} ¦ Slika: {name} ¦ Slika: {name}
+« {name} » rangée dans les médias ¦ „{name}” spremljena u medije ¦ »{name}« shranjena med medije
+Pas rangée dans les médias ({err}) : l’image est posée dans le dessin seulement. ¦ Nije spremljena u medije ({err}): slika je postavljena samo u crtež. ¦ Ni shranjena med medije ({err}): slika je postavljena samo v risbo.
+Ouvrir « {name} » à la place ? ¦ Otvoriti „{name}” umjesto toga? ¦ Odprem raje »{name}«?
+Ma forme ¦ Moj oblik ¦ Moja oblika
+Remplacer « {name} » ¦ Zamijeni „{name}” ¦ Zamenjaj »{name}«
+Forme « {name} » enregistrée : elle est dans « Mes formes ». ¦ Oblik „{name}” je spremljen: nalazi se u „Mojim oblicima”. ¦ Oblika »{name}« je shranjena: je v »Mojih oblikah«.
+Image ajoutée aux armoiries « {name} ». ¦ Slika je dodana grbu „{name}”. ¦ Slika je dodana grbu »{name}«.
+L’image (PNG, nette, fond transparent) y est ajoutée. ¦ Slika (PNG, oštra, prozirna pozadina) dodana je u njega. ¦ Slika (PNG, ostra, prosojno ozadje) je dodana vanj.
+L’image (PNG, nette, fond compris) y est ajoutée. ¦ Slika (PNG, oštra, s pozadinom) dodana je u njega. ¦ Slika (PNG, ostra, z ozadjem) je dodana vanj.
+=copié ¦ kopiran|kopirana|kopiranih ¦ kopiran|kopirana|kopirani|kopiranih
+=copie transformée ¦ preoblikovana kopija|preoblikovane kopije|preoblikovanih kopija ¦ preoblikovana kopija|preoblikovani kopiji|preoblikovane kopije|preoblikovanih kopij
+=bloc @media ¦ blok @media|bloka @media|blokova @media ¦ blok @media|bloka @media|bloki @media|blokov @media
+=règle ¦ pravilo|pravila|pravila ¦ pravilo|pravili|pravila|pravil
+=calque de plan créé ¦ stvoreni sloj plana|stvorena sloja plana|stvorenih slojeva plana ¦ ustvarjen sloj načrta|ustvarjena sloja načrta|ustvarjeni sloji načrta|ustvarjenih slojev načrta
+Mot de passe ¦ Lozinka ¦ Geslo
+Écrans enregistrés ; {what} du CSS ont suivi. ¦ Zasloni su spremljeni; u CSS-u je prilagođeno: {what}. ¦ Zasloni so shranjeni; v CSS je prilagojeno: {what}.
+Écrans enregistrés ; {what} du CSS a suivi. ¦ Zasloni su spremljeni; u CSS-u je prilagođeno: {what}. ¦ Zasloni so shranjeni; v CSS je prilagojeno: {what}.
+(accordéon exclusif) ¦ (isključiva harmonika) ¦ (izključujoča harmonika)
+(celle de la fiche, ou à choisir) ¦ (ona iz zapisa ili po izboru) ¦ (tista iz zapisa ali po izbiri)
+(réglé tout seul) ¦ (podešava se samo) ¦ (nastavi se samo)
+(se remplit avec ce qui est dessiné) ¦ (ispunjava se onim što je nacrtano) ¦ (izpolni se s tem, kar je narisano)
+* : avec des conditions, voir la norme. ¦ *: uz uvjete, pogledaj normu. ¦ *: s pogoji, glej standard.
+1 point de fuite (une rue vue de face) ¦ 1 točka nestajanja (ulica gledana sprijeda) ¦ 1 bežišče (ulica od spredaj)
+2 points (une maison vue de l’angle) ¦ 2 točke (kuća gledana s ugla) ¦ 2 bežišči (hiša z vogala)
+60 styles au plus. ¦ Najviše 60 stilova. ¦ Največ 60 slogov.
+ARBRE DÉCORATIF ¦ UKRASNO STABLO ¦ OKRASNO DREVO
+Aa Choisir… ¦ Aa Odaberi… ¦ Aa Izberi …
+Abbaye, prieuré ¦ Opatija, priorat ¦ Opatija, priorat
+Accueil, notre arbre, la famille en chiffres, nous écrire ¦ Početna, naše stablo, obitelj u brojkama, piši nam ¦ Domov, naše drevo, družina v številkah, piši nam
+Afficher ce champ sur le faire-part (décoché : gardé ici, mais pas imprimé) ¦ Prikaži ovo polje na obavijesti (odznačeno: zadržano ovdje, ali se ne ispisuje) ¦ Prikaži to polje na obvestilu (odznačeno: ostane tu, a se ne natisne)
+Affiché ¦ Prikazano ¦ Prikazano
+Aimanter : en glissant, les objets se collent aux bords et aux centres des autres (⌘ pour s’en passer) ¦ Privlačenje: pri povlačenju se objekti lijepe uz rubove i središta drugih (⌘ da se isključi) ¦ Pripenjanje: pri vlečenju se predmeti pripnejo na robove in središča drugih (⌘ za izklop)
+Aimanter à la grille ¦ Privlačenje na mrežu ¦ Pripenjanje na mrežo
+Ajoute un vrai bouton « Fermer ». ¦ Dodaje pravi gumb „Zatvori”. ¦ Doda pravi gumb »Zapri«.
+Aligner en bas ¦ Poravnaj dolje ¦ Poravnaj spodaj
+Aligner en haut ¦ Poravnaj gore ¦ Poravnaj zgoraj
+Aligner par rapport au plan de travail ¦ Poravnaj u odnosu na radnu površinu ¦ Poravnaj glede na delovno površino
+Aligner par rapport à la sélection ¦ Poravnaj u odnosu na odabir ¦ Poravnaj glede na izbor
+Aligné ¦ Poravnato ¦ Poravnano
+Aller à un bloc @media du CSS ¦ Idi na blok @media u CSS-u ¦ Pojdi na blok @media v CSS
+Allongé 11 × 22 cm ¦ Duguljasta 11 × 22 cm ¦ Podolgovata 11 × 22 cm
+Allongé DL 10 × 21 cm ¦ Duguljasta DL 10 × 21 cm ¦ Podolgovata DL 10 × 21 cm
+Allongés ¦ Duguljasti ¦ Podolgovati
+Alt + flèches dans une case : ±10 px. Les valeurs vont là où dit « Appliquer à » (élément, classe, écran). ¦ Alt + strelice u polju: ±10 px. Vrijednosti idu tamo gdje kaže „Primijeni na” (element, klasa, zaslon). ¦ Alt + puščice v polju: ±10 px. Vrednosti gredo tja, kamor kaže »Uporabi za« (element, razred, zaslon).
+Anglaise entrelacée ¦ Engleski kurziv s preplitanjem ¦ Angleška pisava s prepleti
+Animations réduites ¦ Smanjene animacije ¦ Zmanjšane animacije
+Années 50 ¦ Pedesete ¦ Petdeseta leta
+Aperçu du fond ¦ Pregled pozadine ¦ Predogled ozadja
+Aperçu du site ¦ Pregled stranice ¦ Predogled spletnega mesta
+Aperçu indisponible. ¦ Pregled nije dostupan. ¦ Predogled ni na voljo.
+Arbre dessiné (tronc et branches) ¦ Nacrtano stablo (deblo i grane) ¦ Narisano drevo (deblo in veje)
+Arbre en cases (de bas en haut) ¦ Stablo u poljima (odozdo prema gore) ¦ Drevo v poljih (od spodaj navzgor)
+Au centre (horizontal) ¦ U sredini (vodoravno) ¦ Na sredini (vodoravno)
+Au milieu (vertical) ¦ U sredini (okomito) ¦ Na sredini (navpično)
+Au naturel (brun) ¦ Prirodno (smeđe) ¦ Naravno (rjavo)
+Au plus ¦ Najviše ¦ Največ
+Auberge, café ¦ Gostionica, kavana ¦ Gostilna, kavarna
+Aucun (l’aperçu seul) ¦ Nijedan (samo pregled) ¦ Brez (samo predogled)
+Aucun ancêtre trouvé. ¦ Nije pronađen nijedan predak. ¦ Ni najdenega nobenega prednika.
+Aucun attribut ne correspond. ¦ Nijedan atribut ne odgovara. ¦ Noben atribut se ne ujema.
+Aucun dessin enregistré. ¦ Nema spremljenih crteža. ¦ Ni shranjenih risb.
+Aucun élément ne correspond. ¦ Nijedan element ne odgovara. ¦ Noben element se ne ujema.
+Aucune propriété ne correspond. ¦ Nijedno svojstvo ne odgovara. ¦ Nobena lastnost se ne ujema.
+Autour du centre de la sélection. Avec des copies, chaque copie reprend la transformation de la précédente (une frise, un dégradé de tailles…). ¦ Oko središta odabira. S kopijama svaka kopija preuzima transformaciju prethodne (friz, postupno smanjivanje veličina…). ¦ Okoli središča izbora. Pri kopijah vsaka kopija prevzame preoblikovanje prejšnje (friz, postopno spreminjanje velikosti …).
+Avancé ¦ Napredno ¦ Napredno
+Bannière 150 × 50 ¦ Banner 150 × 50 ¦ Pasica 150 × 50
+Bien plus épais ¦ Mnogo deblje ¦ Veliko debelejše
+Blason créé ¦ Grb je stvoren ¦ Grb je ustvarjen
+Blocs @media du CSS ¦ Blokovi @media u CSS-u ¦ Bloki @media v CSS
+Bourg, quartier bâti ¦ Mjesto, izgrađena četvrt ¦ Trg, pozidana četrt
+Bâtiment ou symbole ¦ Zgrada ili simbol ¦ Stavba ali simbol
+CALLIGRAPHIE ET SCEAUX ¦ KALIGRAFIJA I PEČATI ¦ KALIGRAFIJA IN PEČATI
+CSS de la classe ou de l’id (édition rapide) ¦ CSS klase ili id-a (brzo uređivanje) ¦ CSS razreda ali id (hitro urejanje)
+Cacher ce panneau (la languette sur le bord, ou ◧, le remet) ¦ Sakrij ovu ploču (jezičac na rubu ili ◧ vraća je) ¦ Skrij to ploščo (jeziček na robu ali ◧ jo vrne)
+Cacher ce panneau (la languette sur le bord, ou ◨, le remet) ¦ Sakrij ovu ploču (jezičac na rubu ili ◨ vraća je) ¦ Skrij to ploščo (jeziček na robu ali ◨ jo vrne)
+Cacher le panneau Ceci est ¦ Sakrij ploču Ovo je ¦ Skrij ploščo To je
+Cacher le panneau de gauche ¦ Sakrij lijevu ploču ¦ Skrij levo ploščo
+Cadastre napoléonien ¦ Napoleonski katastar ¦ Napoleonski kataster
+Cadre Art déco ¦ Art déco okvir ¦ Okvir art deco
+Cadre Art nouveau ¦ Secesijski okvir ¦ Secesijski okvir
+Cadre Belle Époque ¦ Okvir Belle Époque ¦ Okvir Belle Époque
+Cadre du salon, toile 80 × 120… ¦ Okvir za salon, platno 80 × 120… ¦ Okvir za dnevno sobo, platno 80 × 120 …
+Cadre et ornements ¦ Okvir i ukrasi ¦ Okvir in okraski
+Cadre à filets ¦ Okvir s linijama ¦ Okvir s črtami
+Calques déjà là ¦ Već postojeći slojevi ¦ Že obstoječi sloji
+Carré 100 × 100 ¦ Kvadrat 100 × 100 ¦ Kvadrat 100 × 100
+Carré 12 × 12 cm ¦ Kvadrat 12 × 12 cm ¦ Kvadrat 12 × 12 cm
+Carré 14 × 14 cm ¦ Kvadrat 14 × 14 cm ¦ Kvadrat 14 × 14 cm
+Carré 17 × 17 cm ¦ Kvadrat 17 × 17 cm ¦ Kvadrat 17 × 17 cm
+Carré 30 × 30 ¦ Kvadrat 30 × 30 ¦ Kvadrat 30 × 30
+Carré 60 × 60 ¦ Kvadrat 60 × 60 ¦ Kvadrat 60 × 60
+Carrée 14 × 14 cm ¦ Kvadratna 14 × 14 cm ¦ Kvadratna 14 × 14 cm
+Carrée 16 × 16 cm ¦ Kvadratna 16 × 16 cm ¦ Kvadratna 16 × 16 cm
+Carrée 17 × 17 cm ¦ Kvadratna 17 × 17 cm ¦ Kvadratna 17 × 17 cm
+Carrée 22 × 22 cm ¦ Kvadratna 22 × 22 cm ¦ Kvadratna 22 × 22 cm
+Carte 10 × 15 cm ¦ Kartica 10 × 15 cm ¦ Karta 10 × 15 cm
+Carte 12 × 17 cm ¦ Kartica 12 × 17 cm ¦ Karta 12 × 17 cm
+Carte 13 × 18 cm ¦ Kartica 13 × 18 cm ¦ Karta 13 × 18 cm
+Carte 15 × 21 cm ¦ Kartica 15 × 21 cm ¦ Karta 15 × 21 cm
+Carte 16 × 22 cm ¦ Kartica 16 × 22 cm ¦ Karta 16 × 22 cm
+Carte des lieux ¦ Karta mjesta ¦ Zemljevid krajev
+Carte moderne ¦ Moderna karta ¦ Sodoben zemljevid
+Carte simple ¦ Jednostavna karta ¦ Preprost zemljevid
+Cartouche à enroulements ¦ Kartuša sa svicima ¦ Kartuša z zvitki
+Cases vides (ancêtres à trouver) ¦ Prazna polja (preci koje treba pronaći) ¦ Prazna polja (predniki, ki jih je treba najti)
+Ce fichier n’est pas un SVG lisible. ¦ Ova datoteka nije čitljiv SVG. ¦ Ta datoteka ni berljiv SVG.
+Ce navigateur n’a pas pu s’ouvrir. ¦ Ovaj se preglednik nije mogao otvoriti. ¦ Tega brskalnika ni bilo mogoče odpreti.
+Ce qui n’est pas enregistré sera perdu. ¦ Ono što nije spremljeno bit će izgubljeno. ¦ Kar ni shranjeno, bo izgubljeno.
+Ceci est… (nom, balise, classe, id) ¦ Ovo je… (naziv, oznaka, klasa, id) ¦ To je … (ime, oznaka, razred, id)
+Centrer sur le plan de travail ¦ Centriraj na radnoj površini ¦ Postavi na sredino delovne površine
+Ces formes ne se mélangent pas. ¦ Ovi se oblici ne miješaju. ¦ Te oblike se ne mešajo.
+Cet élément seulement ¦ Samo ovaj element ¦ Samo ta element
+Cette adresse n’est pas permise (data:…). ¦ Ova adresa nije dopuštena (data:…). ¦ Ta naslov ni dovoljen (data:…).
+Cette adresse n’est pas permise (javascript:, data:…). ¦ Ova adresa nije dopuštena (javascript:, data:…). ¦ Ta naslov ni dovoljen (javascript:, data:…).
+Cette adresse n’est pas permise (javascript:…). ¦ Ova adresa nije dopuštena (javascript:…). ¦ Ta naslov ni dovoljen (javascript:…).
+Changer l’affichage des fichiers ¦ Promijeni prikaz datoteka ¦ Spremeni prikaz datotek
+Chercher : titre, lien, tableau, h2… ¦ Traži: naslov, poveznica, tablica, h2… ¦ Išči: naslov, povezava, tabela, h2 …
+Chercher dans l’aide-mémoire ¦ Traži u podsjetniku ¦ Išči v opomniku
+Chercher un ornement ¦ Traži ukras ¦ Išči okrasek
+Chercher une signature ¦ Traži potpis ¦ Išči podpis
+Chercher… (fleuron, coin, déco) ¦ Traži… (cvjetni ukras, kut, ukras) ¦ Išči … (cvetni okrasek, vogal, okras)
+Choisir le parent ¦ Odaberi roditelja ¦ Izberi nadrejeni element
+Choisir l’élément qui le contient ¦ Odaberi element koji ga sadrži ¦ Izberi element, ki ga vsebuje
+Choisir un élément de la page ¦ Odaberi element stranice ¦ Izberi element strani
+Choisis au moins deux formes. ¦ Odaberi barem dva oblika. ¦ Izberi vsaj dve obliki.
+Choisis au moins deux objets. ¦ Odaberi barem dva objekta. ¦ Izberi vsaj dva predmeta.
+Choisis d’abord des objets. ¦ Najprije odaberi objekte. ¦ Najprej izberi predmete.
+Choisis d’abord l’image d’un acte. ¦ Najprije odaberi sliku matičnog zapisa. ¦ Najprej izberi sliko matičnega vpisa.
+Choisis d’abord un objet. ¦ Najprije odaberi objekt. ¦ Najprej izberi predmet.
+Choisis d’abord un ou plusieurs objets. ¦ Najprije odaberi jedan ili više objekata. ¦ Najprej izberi enega ali več predmetov.
+Choisis exactement deux formes (rectangle, ellipse, étoile, tracé…). ¦ Odaberi točno dva oblika (pravokutnik, elipsa, zvijezda, putanja…). ¦ Izberi natanko dve obliki (pravokotnik, elipsa, zvezda, pot …).
+Choisis un fichier ou une image. ¦ Odaberi datoteku ili sliku. ¦ Izberi datoteko ali sliko.
+Choisis un lieu : la carte s’affiche ici. ¦ Odaberi mjesto: karta se prikazuje ovdje. ¦ Izberi kraj: zemljevid se prikaže tukaj.
+Choisis un modèle : tu pourras tout changer ensuite, en glissant des blocs ou dans le code. ¦ Odaberi predložak: kasnije možeš sve promijeniti, povlačenjem blokova ili u kodu. ¦ Izberi predlogo: pozneje lahko vse spremeniš, z vlečenjem blokov ali v kodi.
+Choisis un objet (outil Sélection) pour changer ses couleurs, son trait, sa taille. Les couleurs ci-dessous seront celles des prochaines formes. ¦ Odaberi objekt (alat Odabir) da promijeniš njegove boje, crtu, veličinu. Boje ispod bit će boje sljedećih oblika. ¦ Izberi predmet (orodje Izbor), da spremeniš njegove barve, črto, velikost. Spodnje barve bodo barve naslednjih oblik.
+Choisis un objet qui a un contour. ¦ Odaberi objekt koji ima obris. ¦ Izberi predmet, ki ima obris.
+Château ¦ Dvorac ¦ Grad
+Clic : choisir un élément (« Ceci est… ») · double-clic sur un texte : l’écrire · glisse un bloc depuis ＋ Blocs ¦ Klik: odaberi element („Ovo je…”) · dvoklik na tekst: piši ga · povuci blok iz ＋ Blokovi ¦ Klik: izberi element (»To je …«) · dvoklik na besedilo: piši ga · povleci blok iz ＋ Bloki
+Clique sur un élément de l’aperçu (ou dans le code) : il dira ce qu’il est, par exemple « header.site-entete ». Tu pourras lui donner un nom, une classe, un id, des couleurs. ¦ Klikni na element u pregledu (ili u kodu): reći će što je, na primjer „header.site-entete”. Moći ćeš mu dati naziv, klasu, id, boje. ¦ Klikni element v predogledu (ali v kodi): povedal bo, kaj je, na primer »header.site-entete«. Lahko mu boš dal/dala ime, razred, id, barve.
+Coche ou décoche un champ pour l’afficher ou le masquer, ↑ ↓ pour le ranger, 🗑 pour l’enlever. Le faire-part s’ouvre ensuite dans le dessin vectoriel : tout se retouche (textes, couleurs, polices, ornements), puis « ⤓ Exporter » (PDF, image, impression, recto-verso sur A4). ¦ Označi ili odznači polje da ga prikažeš ili sakriješ, ↑ ↓ da ga posložiš, 🗑 da ga ukloniš. Obavijest se zatim otvara u vektorskom crtežu: sve se može doraditi (tekstovi, boje, fontovi, ukrasi), zatim „⤓ Izvezi” (PDF, slika, ispis, obostrano na A4). ¦ Označi ali odznači polje, da ga prikažeš ali skriješ, ↑ ↓, da ga razvrstiš, 🗑, da ga odstraniš. Obvestilo se nato odpre v vektorski risbi: vse lahko dodelaš (besedila, barve, pisave, okraske), nato »⤓ Izvozi« (PDF, slika, tisk, obojestransko na A4).
+Code du site ¦ Kod stranice ¦ Koda spletnega mesta
+Coin Art déco ¦ Art déco kut ¦ Vogal art deco
+Coin Art nouveau ¦ Secesijski kut ¦ Secesijski vogal
+Coin fleuronné ¦ Kut s cvjetnim ukrasom ¦ Vogal s cvetnim okraskom
+Coin perlé ¦ Kut s biserima ¦ Vogal z biseri
+Coin à filet arrondi ¦ Kut sa zaobljenom linijom ¦ Vogal z zaobljeno črto
+Coin à volutes ¦ Kut s volutama ¦ Vogal z volutami
+Colle ton jeton ici ¦ Zalijepi svoj token ovdje ¦ Prilepi svoj žeton sem
+Collé ¦ Zalijepljeno ¦ Prilepljeno
+Comme Tailwind, en montant (640, 768, 1024, 1280) ¦ Kao Tailwind, rastuće (640, 768, 1024, 1280) ¦ Kot Tailwind, naraščajoče (640, 768, 1024, 1280)
+Comme l’original ¦ Kao izvornik ¦ Kot izvirnik
+Commencer un nouveau dessin ? ¦ Započeti novi crtež? ¦ Začnem novo risbo?
+Comment colorer les cases : côté du père et côté de la mère, hommes et femmes, une teinte qui pâlit à chaque génération, ou une seule couleur (pour imprimer). ¦ Kako obojiti polja: očeva i majčina strana, muškarci i žene, nijansa koja blijedi sa svakom generacijom ili jedna boja (za ispis). ¦ Kako obarvati polja: očetova in materina stran, moški in ženske, odtenek, ki z vsakim rodom bledi, ali ena sama barva (za tisk).
+Commenter, décommenter ¦ Komentiraj, ukloni komentar ¦ Komentiraj, odkomentiraj
+Contour du trait → forme ¦ Obris crte → oblik ¦ Obris črte → oblika
+Contour par défaut ¦ Zadani obris ¦ Privzeti obris
+Convertir en tracé ¦ Pretvori u putanju ¦ Pretvori v pot
+Convertir en tracé (points modifiables) ¦ Pretvori u putanju (točke koje se mogu mijenjati) ¦ Pretvori v pot (točke, ki jih je mogoče spreminjati)
+Copie impossible ici. ¦ Kopiranje ovdje nije moguće. ¦ Kopiranje tukaj ni mogoče.
+Couleur libre : n’importe quelle couleur ¦ Slobodna boja: bilo koja boja ¦ Prosta barva: katera koli barva
+Coupé ¦ Izrezano ¦ Izrezano
+Courbes lissées ¦ Zaglađene krivulje ¦ Zglajene krivulje
+Cours d’eau, lac ¦ Vodotok, jezero ¦ Vodotok, jezero
+Croix fleuronnée ¦ Križ s cvjetnim ukrasima ¦ Križ s cvetnimi okraski
+Créer et ouvrir dans le dessin ¦ Stvori i otvori u crtežu ¦ Ustvari in odpri v risbi
+Créer la page ¦ Stvori stranicu ¦ Ustvari stran
+Créer l’arbre ¦ Stvori stablo ¦ Ustvari drevo
+Créer l’élément ¦ Stvori element ¦ Ustvari element
+Créer un style (à partir de celui choisi) ¦ Stvori stil (na temelju odabranog) ¦ Ustvari slog (na podlagi izbranega)
+Cul-de-lampe en triangle ¦ Trokutasta završna vinjeta ¦ Trikotna zaključna vinjeta
+Cérémonie ¦ Svečanost ¦ Slovesnost
+Cérémonie, réception ¦ Svečanost, prijem ¦ Slovesnost, sprejem
+Côte à côte ou l’un au-dessus de l’autre ¦ Jedan pokraj drugog ili jedan iznad drugog ¦ Drug ob drugem ali drug nad drugim
+Côte, rivage ¦ Obala, žal ¦ Obala, breg
+Cœur fleuronné ¦ Srce s cvjetnim ukrasima ¦ Srce s cvetnimi okraski
+Dans l’export ¦ U izvozu ¦ V izvozu
+Date et lieu ¦ Datum i mjesto ¦ Datum in kraj
+Date, heure, lieu ¦ Datum, vrijeme, mjesto ¦ Datum, čas, kraj
+Dates complètes ¦ Potpuni datumi ¦ Popolni datumi
+De qui est cette signature ? ¦ Čiji je ovo potpis? ¦ Čigav je ta podpis?
+Des copies tournent autour d’un centre (une rosace, une couronne de meubles autour d’un écu…). Le tout devient un groupe. ¦ Kopije se okreću oko središta (rozeta, vijenac likova oko štita…). Sve postaje skupina. ¦ Kopije se vrtijo okoli središča (rozeta, venec likov okoli ščita …). Vse skupaj postane skupina.
+Descendre l’élément ¦ Spusti element ¦ Premakni element navzdol
+Deux fichiers (côte à côte ou l’un au-dessus de l’autre) ¦ Dvije datoteke (jedna pokraj druge ili jedna iznad druge) ¦ Dve datoteki (druga ob drugi ali druga nad drugo)
+Deux fichiers : côte à côte ou l’un au-dessus de l’autre ¦ Dvije datoteke: jedna pokraj druge ili jedna iznad druge ¦ Dve datoteki: druga ob drugi ali druga nad drugo
+Deuxième fichier ¦ Druga datoteka ¦ Druga datoteka
+Dis ce que c’est : « c’est mon en-tête, mon menu… » ¦ Reci što je to: „to je moje zaglavlje, moj izbornik…” ¦ Povej, kaj je to: »to je moja glava, moj meni …«
+Dissocié ¦ Razgrupirano ¦ Razdruženo
+Distance au centre (si « sous la sélection ») ¦ Udaljenost od središta (ako je „ispod odabira”) ¦ Razdalja od središča (če je »pod izborom«)
+Donne un nom aux armoiries. ¦ Daj ime grbu. ¦ Poimenuj grb.
+Dossier css/ — déposer un fichier ici pour l’y ranger ¦ Mapa css/ — ispusti datoteku ovdje da je spremiš u nju ¦ Mapa css/ — spusti datoteko sem, da jo shraniš vanjo
+Dossier js/ — déposer un fichier ici pour l’y ranger ¦ Mapa js/ — ispusti datoteku ovdje da je spremiš u nju ¦ Mapa js/ — spusti datoteko sem, da jo shraniš vanjo
+Dupliquer la ligne ¦ Udvostruči redak ¦ Podvoji vrstico
+Dupliquer l’élément ¦ Udvostruči element ¦ Podvoji element
+Décalage ¦ Pomak ¦ Zamik
+Décaler le fond (d’un dixième de sa largeur) ¦ Pomakni pozadinu (za desetinu njezine širine) ¦ Zamakni ozadje (za desetino njegove širine)
+Déplacé dedans ¦ Premješteno unutra ¦ Premaknjeno noter
+Déplier / replier ¦ Rasklopi / sklopi ¦ Razširi / strni
+Déverrouillé ¦ Otključano ¦ Odklenjeno
+D’après la norme HTML du WHATWG (CC BY 4.0), traduit. ¦ Prema HTML normi WHATWG-a (CC BY 4.0), prevedeno. ¦ Po standardu HTML organizacije WHATWG (CC BY 4.0), prevedeno.
+D’après la norme HTML du WHATWG (CC BY 4.0), traduit. Les on… (onclick) vont dans le JS du site. ¦ Prema HTML normi WHATWG-a (CC BY 4.0), prevedeno. Atributi on… (onclick) idu u JS stranice. ¦ Po standardu HTML organizacije WHATWG (CC BY 4.0), prevedeno. Atributi on… (onclick) gredo v JS spletnega mesta.
+D’après une personne ¦ Prema osobi ¦ Po osebi
+Effacer les lignes du registre ¦ Izbriši crte knjige ¦ Izbriši črte knjige
+Effacer les petites taches ¦ Izbriši male mrlje ¦ Izbriši majhne madeže
+Effilé aux deux bouts ¦ Sužen na oba kraja ¦ Zožen na obeh koncih
+Elle montre tout seul ce qui est dessiné. ¦ Sama prikazuje ono što je nacrtano. ¦ Sama prikaže, kar je narisano.
+En bas de chaque page ¦ Na dnu svake stranice ¦ Na dnu vsake strani
+En déplaçant, en agrandissant ou en dessinant, l’objet s’aimante aux bords et aux centres des autres objets, du plan de travail et des pages ; un trait rose le montre. ⌘ (ou Ctrl) maintenu : sans aimant. ¦ Pri premještanju, povećavanju ili crtanju objekt se privlači uz rubove i središta drugih objekata, radne površine i stranica; ružičasta crta to pokazuje. ⌘ (ili Ctrl) držano: bez privlačenja. ¦ Pri premikanju, povečevanju ali risanju se predmet pripne na robove in središča drugih predmetov, delovne površine in strani; to kaže rožnata črta. Držan ⌘ (ali Ctrl): brez pripenjanja.
+En faire un écran ¦ Napravi od toga zaslon ¦ Naredi iz tega zaslon
+En-tête, carte de la famille… ¦ Zaglavlje, karta obitelji… ¦ Glava, zemljevid družine …
+Encre sépia ¦ Sepija tinta ¦ Sepija črnilo
+Enlever ce champ ¦ Ukloni ovo polje ¦ Odstrani to polje
+Enregistrer ce site avant d’en ouvrir un autre ? ¦ Spremiti ovu stranicu prije otvaranja druge? ¦ Shranim to spletno mesto, preden odprem drugo?
+Enregistrer comme forme ¦ Spremi kao oblik ¦ Shrani kot obliko
+Enregistrer comme image d’armoiries ¦ Spremi kao sliku grba ¦ Shrani kot sliko grba
+Enregistrer dans les médias d’une fiche ¦ Spremi u medije zapisa ¦ Shrani med medije zapisa
+Enregistrer le dessin ¦ Spremi crtež ¦ Shrani risbo
+Envoi dans les médias… ¦ Slanje u medije… ¦ Pošiljanje med medije …
+Espace en haut et en bas des sections ¦ Razmak na vrhu i dnu odjeljaka ¦ Razmik zgoraj in spodaj v razdelkih
+Espace entre colonnes et photos ¦ Razmak između stupaca i fotografija ¦ Razmik med stolpci in fotografijami
+Espace intérieur des cartes ¦ Unutarnji razmak kartica ¦ Notranji razmik kartic
+Espace intérieur, les 4 côtés d’un coup ¦ Unutarnji razmak, sve 4 strane odjednom ¦ Notranji razmik, vse 4 strani hkrati
+Espace sous les paragraphes ¦ Razmak ispod odlomaka ¦ Razmik pod odstavki
+Espace sous les titres ¦ Razmak ispod naslova ¦ Razmik pod naslovi
+Espacement des lettres ¦ Razmak između slova ¦ Razmik med črkami
+Existe depuis (année) ¦ Postoji od (godina) ¦ Obstaja od (leto)
+Exporter : PDF, images, SVG, impression, fichier du dessin ¦ Izvoz: PDF, slike, SVG, ispis, datoteka crteža ¦ Izvoz: PDF, slike, SVG, tisk, datoteka risbe
+Expression régulière ¦ Regularni izraz ¦ Regularni izraz
+Expéditeur ¦ Pošiljatelj ¦ Pošiljatelj
+Expéditeur (en haut à gauche) ¦ Pošiljatelj (gore lijevo) ¦ Pošiljatelj (zgoraj levo)
+FAIRE-PART ET AFFICHES ¦ OBAVIJESTI I PLAKATI ¦ OBVESTILA IN PLAKATI
+FTP sécurisé ¦ Sigurni FTP ¦ Varni FTP
+Fermer la recherche ¦ Zatvori pretraživanje ¦ Zapri iskanje
+Fermer l’onglet ¦ Zatvori karticu ¦ Zapri zavihek
+Fermer l’onglet (le fichier reste dans le site) ¦ Zatvori karticu (datoteka ostaje na stranici) ¦ Zapri zavihek (datoteka ostane na spletnem mestu)
+Fermer sans enregistrer le dessin ? ¦ Zatvoriti bez spremanja crteža? ¦ Zaprem brez shranjevanja risbe?
+Feuillage (arbre dessiné) ¦ Lišće (nacrtano stablo) ¦ Listje (narisano drevo)
+Feuille d’acanthe ¦ Akantov list ¦ Akantov list
+Fiche affichée ¦ Prikazani zapis ¦ Prikazani zapis
+Fichier du deuxième éditeur ¦ Datoteka drugog uređivača ¦ Datoteka drugega urejevalnika
+Fichier trop gros (25 Mo au plus). ¦ Datoteka je prevelika (najviše 25 MB). ¦ Datoteka je prevelika (največ 25 MB).
+Fichiers du site ¦ Datoteke stranice ¦ Datoteke spletnega mesta
+Fichiers en onglets (comme Phoenix Code) ¦ Datoteke u karticama (kao Phoenix Code) ¦ Datoteke v zavihkih (kot Phoenix Code)
+Fichiers en trois boutons (HTML / CSS / JS) ¦ Datoteke u tri gumba (HTML / CSS / JS) ¦ Datoteke v treh gumbih (HTML / CSS / JS)
+Filet Art déco ¦ Art déco linija ¦ Črta art deco
+Filet au fleuron ¦ Linija s cvjetnim ukrasom ¦ Črta s cvetnim okraskom
+Filet au losange ¦ Linija s rombom ¦ Črta z rombom
+Filet ondulé ¦ Valovita linija ¦ Valovita črta
+Filet perlé ¦ Linija s biserima ¦ Črta z biseri
+Filet à volutes ¦ Linija s volutama ¦ Črta z volutami
+Fleurons, cadres Belle Époque, Art nouveau, Art déco, coins, filets, culs-de-lampe, lettrines. Clique pour poser au centre, ou glisse sur le dessin ; la palette « Couleur » les recolore ensuite. ¦ Cvjetni ukrasi, okviri Belle Époque, secesija, art déco, kutovi, linije, završne vinjete, inicijali. Klikni da postaviš u sredinu ili povuci na crtež; paleta „Boja” ih zatim ponovno oboji. ¦ Cvetni okraski, okvirji Belle Époque, secesija, art deco, vogali, črte, zaključne vinjete, inicialke. Klikni, da postaviš na sredino, ali povleci na risbo; paleta »Barva« jih nato znova obarva.
+Fond du plan ¦ Pozadina plana ¦ Ozadje načrta
+Fond décalé ¦ Pomaknuta pozadina ¦ Zamaknjeno ozadje
+Format de l’enveloppe ¦ Format omotnice ¦ Format ovojnice
+Format d’image non lu par ce navigateur. ¦ Ovaj preglednik ne čita format slike. ¦ Tega formata slike ta brskalnik ne bere.
+Forme au départ ¦ Početni oblik ¦ Začetna oblika
+Forme, format, style, cases… reviennent comme au départ. ¦ Oblik, format, stil, polja… vraćaju se na početno. ¦ Oblika, format, slog, polja … se ponastavijo na začetno.
+Forêt, bois ¦ Šuma, gaj ¦ Gozd, gozdiček
+Frontière ¦ Granica ¦ Meja
+Garde-en au moins un. ¦ Zadrži barem jedan. ¦ Obdrži vsaj enega.
+Gironné ¦ Klinasto razdijeljen ¦ Klinasto deljen
+GitHub Pages met ton site à l’adresse « ton-compte.github.io/nom-du-depot ». Crée un jeton dans GitHub → Settings → Developer settings → « Fine-grained tokens », avec les droits « Contents » et « Pages » en lecture et écriture (et « Administration » si le dépôt n’existe pas encore). ¦ GitHub Pages stavlja tvoju stranicu na adresu „tvoj-racun.github.io/naziv-repozitorija”. Stvori token u GitHub → Settings → Developer settings → „Fine-grained tokens”, s pravima „Contents” i „Pages” za čitanje i pisanje (i „Administration” ako repozitorij još ne postoji). ¦ GitHub Pages postavi tvoje spletno mesto na naslov »tvoj-racun.github.io/ime-repozitorija«. Ustvari žeton v GitHub → Settings → Developer settings → »Fine-grained tokens«, s pravicami »Contents« in »Pages« za branje in pisanje (in »Administration«, če repozitorij še ne obstaja).
+Glisse pour dessiner la forme · ⇧ : carré, cercle, angle droit ¦ Povuci da nacrtaš oblik · ⇧: kvadrat, krug, pravi kut ¦ Povleci, da narišeš obliko · ⇧: kvadrat, krog, pravi kot
+Glisse un bloc dans l’aperçu, ou clique pour l’ajouter après l’élément choisi. ¦ Povuci blok u pregled ili klikni da ga dodaš nakon odabranog elementa. ¦ Povleci blok v predogled ali klikni, da ga dodaš za izbranim elementom.
+Glisse une ligne sur un groupe pour l’y ranger (il devient bleu), entre deux lignes pour changer l’ordre ; ou sélectionne puis « 📁 Ranger dans… ». Double-clic sur un nom pour le renommer. ✂️ : la forme la plus haute du groupe ou du calque le découpe (masque), 2e clic pour le retirer. ○ : travailler dans ce calque ou ce groupe. Dans le dessin : double-clic sur un groupe pour y entrer, Échap pour en sortir. ¦ Povuci redak na skupinu da ga spremiš u nju (postaje plava), između dva retka da promijeniš redoslijed; ili odaberi pa „📁 Spremi u…”. Dvoklik na naziv da ga preimenuješ. ✂️: najviši oblik skupine ili sloja ga izrezuje (maska), 2. klik da je ukloniš. ○: radi u ovom sloju ili ovoj skupini. U crtežu: dvoklik na skupinu da uđeš u nju, Esc da izađeš. ¦ Povleci vrstico na skupino, da jo postaviš vanjo (postane modra), med dve vrstici, da spremeniš vrstni red; ali izberi in nato »📁 Postavi v …«. Dvoklik na ime, da ga preimenuješ. ✂️: najvišja oblika skupine ali sloja ga izreže (maska), 2. klik, da jo odstraniš. ○: delaj v tem sloju ali tej skupini. V risbi: dvoklik na skupino, da vstopiš vanjo, Esc, da izstopiš.
+Glisser pour élargir ou rétrécir le panneau (double-clic : taille d’origine) ¦ Povuci da proširiš ili suziš ploču (dvoklik: izvorna veličina) ¦ Povleci, da razširiš ali zožiš ploščo (dvoklik: izvirna velikost)
+Goutte et volutes ¦ Kap i volute ¦ Kaplja in volute
+Grand téléphone ¦ Veliki telefon ¦ Velik telefon
+Grand écran ¦ Veliki zaslon ¦ Velik zaslon
+Grille d’échelle ¦ Mreža mjerila ¦ Mreža merila
+Grille d’échelle pendant le dessin ¦ Mreža mjerila tijekom crtanja ¦ Mreža merila med risanjem
+Grille et repères ¦ Mreža i vodilice ¦ Mreža in vodila
+Groupé ¦ Grupirano ¦ Združeno
+Gérer les écrans ¦ Upravljaj zaslonima ¦ Upravljaj zaslone
+Gérer les écrans (@media)… ¦ Upravljaj zaslonima (@media)… ¦ Upravljaj zaslone (@media) …
+Gérer les écrans : points de rupture et @media (largeurs, orientation, mode sombre, impression…) ¦ Upravljaj zaslonima: točke prijeloma i @media (širine, orijentacija, tamni način, ispis…) ¦ Upravljaj zaslone: prelomne točke in @media (širine, usmerjenost, temni način, tisk …)
+Gérer les écrans… ¦ Upravljaj zaslonima… ¦ Upravljaj zaslone …
+Hachures héraldiques ¦ Heraldičko šrafiranje ¦ Heraldična šrafura
+Hameau, lieu-dit ¦ Zaselak, lokalitet ¦ Zaselek, ledinsko ime
+Héritée ¦ Nasljeđuje se ¦ Podedovano
+Il faut au moins trois objets. ¦ Potrebna su barem tri objekta. ¦ Potrebni so vsaj trije predmeti.
+Il faut des formes ou des tracés (pas seulement du texte ou des images). ¦ Potrebni su oblici ili putanje (ne samo tekst ili slike). ¦ Potrebne so oblike ali poti (ne samo besedilo ali slike).
+Image ajustée ¦ Slika je prilagođena ¦ Slika je prilagojena
+Image copiée. ¦ Slika je kopirana. ¦ Slika je kopirana.
+Image refusée. ¦ Slika je odbijena. ¦ Slika je zavrnjena.
+Importe d’abord une image (Fichier → Importer), puis choisis-la. ¦ Najprije uvezi sliku (Datoteka → Uvezi), zatim je odaberi. ¦ Najprej uvozi sliko (Datoteka → Uvozi), nato jo izberi.
+Intervertir remplissage et contour (⇧X) ¦ Zamijeni ispunu i obris (⇧X) ¦ Zamenjaj polnilo in obris (⇧X)
+Intérieur 1 ¦ Unutrašnjost 1 ¦ Notranjost 1
+Intérieur 2 ¦ Unutrašnjost 2 ¦ Notranjost 2
+Intérieur 3 ¦ Unutrašnjost 3 ¦ Notranjost 3
+Intérieur 4 ¦ Unutrašnjost 4 ¦ Notranjost 4
+Intérieur droit ¦ Unutrašnjost desno ¦ Notranjost desno
+Intérieur gauche ¦ Unutrašnjost lijevo ¦ Notranjost levo
+Intérieur milieu ¦ Unutrašnjost sredina ¦ Notranjost sredina
+Inverser l’aperçu et le code ¦ Zamijeni pregled i kod ¦ Zamenjaj predogled in kodo
+JS du site ¦ JS stranice ¦ JS spletnega mesta
+La bibliothèque d’ornements n’est pas chargée. ¦ Knjižnica ukrasa nije učitana. ¦ Knjižnica okraskov ni naložena.
+La carte du lieu se pose sous le dessin, en transparence, à la taille du plan de travail : décalque les rues, les rivières, les maisons. Le plan est alors « situé » : l’échelle est juste et les lieux de ta base peuvent s’y placer. ¦ Karta mjesta postavlja se ispod crteža, prozirno, u veličini radne površine: precrtaj ulice, rijeke, kuće. Plan je tada „smješten”: mjerilo je točno i mjesta iz tvoje baze mogu se na njega postaviti. ¦ Zemljevid kraja se postavi pod risbo, prosojno, v velikosti delovne površine: prerisuj ulice, reke, hiše. Načrt je tedaj »umeščen«: merilo je pravilno in kraje iz tvoje baze lahko postaviš nanj.
+La fenêtre d’export n’est pas chargée. ¦ Prozor za izvoz nije učitan. ¦ Okno za izvoz ni naloženo.
+La largeur de l’aperçu quand on choisit cet écran ¦ Širina pregleda kad se odabere ovaj zaslon ¦ Širina predogleda, ko izbereš ta zaslon
+La lettre du nom au milieu, plus grande (3 initiales) ¦ Slovo prezimena u sredini, veće (3 inicijala) ¦ Črka priimka na sredini, večja (3 začetnice)
+La lettrine ¦ Inicijal ¦ Inicialka
+La page ¦ Stranica ¦ Stran
+La photo du faire-part ¦ Fotografija obavijesti ¦ Fotografija obvestila
+La racine du site ¦ Korijen stranice ¦ Koren spletnega mesta
+La taille, le fond, la grille et les couleurs par défaut, gardés sous un nom. ¦ Veličina, pozadina, mreža i zadane boje, spremljeni pod jednim imenom. ¦ Velikost, ozadje, mreža in privzete barve, shranjeni pod enim imenom.
+La vérification des navigateurs n’est pas chargée. ¦ Provjera preglednika nije učitana. ¦ Preverjanje brskalnikov ni naloženo.
+Lac, étang, mare ¦ Jezero, ribnjak, lokva ¦ Jezero, ribnik, mlaka
+Largeur au plus (0 = toute) ¦ Najveća širina (0 = cijela) ¦ Največja širina (0 = celotna)
+Largeur du contenu ¦ Širina sadržaja ¦ Širina vsebine
+Le nombre de rangées d’ancêtres, la personne comptant pour la première. Au-delà de 7, choisis un grand format (A2, A1…) pour que les noms restent lisibles. ¦ Broj redova predaka, pri čemu se osoba računa kao prvi. Iznad 7 odaberi veliki format (A2, A1…) da imena ostanu čitljiva. ¦ Število vrst prednikov, pri čemer oseba šteje kot prva. Nad 7 izberi velik format (A2, A1 …), da ostanejo imena berljiva.
+Les ancêtres d’une personne (2 à 5 générations) ¦ Preci osobe (2 do 5 generacija) ¦ Predniki osebe (2 do 5 rodov)
+Les blocs « Ma généalogie » sont remplis par l’app et figés à l’export : jamais de personne vivante ni de fiche confidentielle. ¦ Blokove „Moje rodoslovlje” ispunjava aplikacija i zamrzavaju se pri izvozu: nikad žive osobe ni povjerljivi zapisi. ¦ Bloke »Moje rodoslovje« izpolni aplikacija in se ob izvozu zamrznejo: nikoli žive osebe ali zaupni zapisi.
+Les liens vers les pages, tenus à jour ¦ Poveznice na stranice, uvijek ažurne ¦ Povezave na strani, sproti posodobljene
+Les lieux d’une personne (ou de ses ancêtres) ¦ Mjesta osobe (ili njezinih predaka) ¦ Kraji osebe (ali njenih prednikov)
+Les noms, dates, lieux et parents de la fiche remplissent les champs ; relis-les et complète avant de créer. ¦ Imena, datumi, mjesta i roditelji iz zapisa ispunjavaju polja; pročitaj ih i dopuni prije stvaranja. ¦ Imena, datumi, kraji in starši iz zapisa izpolnijo polja; preberi jih in dopolni, preden ustvariš.
+Les objets s’alignent entre eux ¦ Objekti se poravnavaju međusobno ¦ Predmeti se poravnajo med seboj
+Les objets s’alignent sur le plan de travail (ou la page, le volet où ils sont) ¦ Objekti se poravnavaju s radnom površinom (ili stranicom, krilom na kojem su) ¦ Predmeti se poravnajo z delovno površino (ali stranjo, krilom, na katerem so)
+Les points d’encre plus petits que cette taille sont effacés (poussières, piqûres du papier). ¦ Točkice tinte manje od ove veličine brišu se (prašina, mrlje na papiru). ¦ Pike črnila, manjše od te velikosti, se izbrišejo (prah, pegice na papirju).
+Les raccourcis ¦ Prečaci ¦ Bližnjice
+Les versions viennent d’une liste intégrée à l’app (comme caniuse.com, sans internet). Pour voir le site en vrai : ↗ Aperçu, puis ouvre l’adresse dans le navigateur voulu. ¦ Verzije dolaze iz popisa ugrađenog u aplikaciju (kao caniuse.com, bez interneta). Da vidiš stranicu uživo: ↗ Pregled, zatim otvori adresu u željenom pregledniku. ¦ Različice prihajajo s seznama, vgrajenega v aplikacijo (kot caniuse.com, brez interneta). Za ogled spletnega mesta v živo: ↗ Predogled, nato odpri naslov v želenem brskalniku.
+Lettrine Art déco ¦ Art déco inicijal ¦ Inicialka art deco
+Lettrine Art nouveau ¦ Secesijski inicijal ¦ Secesijska inicialka
+Lettrine au feuillage ¦ Inicijal s lišćem ¦ Inicialka z listjem
+Lettrine carrée ¦ Kvadratni inicijal ¦ Kvadratna inicialka
+Lettrine cerclée ¦ Inicijal u krugu ¦ Inicialka v krogu
+Lettrine médiévale ¦ Srednjovjekovni inicijal ¦ Srednjeveška inicialka
+Lien retiré ¦ Poveznica je uklonjena ¦ Povezava je odstranjena
+Lieu important ¦ Važno mjesto ¦ Pomemben kraj
+Lieux de ¦ Mjesta od ¦ Kraji od
+Ligne d’horizon (hauteur) ¦ Linija horizonta (visina) ¦ Črta obzorja (višina)
+Lisser les courbes ¦ Zagladi krivulje ¦ Zgladi krivulje
+Légende du bas ¦ Donji natpis ¦ Spodnji napis
+Légende du haut ¦ Gornji natpis ¦ Zgornji napis
+Légende sous la signature (facultatif) ¦ Natpis ispod potpisa (neobavezno) ¦ Napis pod podpisom (neobvezno)
+L’aperçu de la signature s’affiche ici. ¦ Pregled potpisa prikazuje se ovdje. ¦ Predogled podpisa se prikaže tukaj.
+L’arbre est fabriqué comme un dessin : il s’ouvre ensuite dans l’outil de dessin vectoriel pour changer les couleurs, les polices, les textes, ajouter des ornements, un blason… puis l’exporter en PDF ou en image, à la taille voulue. ¦ Stablo se izrađuje kao crtež: zatim se otvara u alatu za vektorsko crtanje da promijeniš boje, fontove, tekstove, dodaš ukrase, grb… a zatim ga izvezeš u PDF ili sliku, u željenoj veličini. ¦ Drevo je narejeno kot risba: nato se odpre v orodju za vektorsko risanje, da spremeniš barve, pisave, besedila, dodaš okraske, grb … in ga nato izvoziš v PDF ali sliko, v želeni velikosti.
+L’image d’un acte ¦ Slika matičnog zapisa ¦ Slika matičnega vpisa
+L’objet du dessus doit être une forme ou un tracé. ¦ Gornji objekt mora biti oblik ili putanja. ¦ Zgornji predmet mora biti oblika ali pot.
+L’un au-dessus de l’autre ¦ Jedan iznad drugog ¦ Drug nad drugim
+L’écran de base : son CSS s’applique partout, sans @media. Les autres écrans le complètent. ¦ Osnovni zaslon: njegov se CSS primjenjuje posvuda, bez @media. Ostali ga zasloni dopunjuju. ¦ Osnovni zaslon: njegov CSS velja povsod, brez @media. Drugi zasloni ga dopolnjujejo.
+L’écrire dans le HTML de la page, là où est le curseur ¦ Upiši ga u HTML stranice, tamo gdje je kursor ¦ Zapiši ga v HTML strani, tja, kjer je kazalka
+Ma généalogie (rempli tout seul) ¦ Moje rodoslovlje (ispunjava se samo) ¦ Moje rodoslovje (izpolni se samo)
+Marche partout depuis 2023 ; mets une couleur simple juste avant pour les plus vieux. ¦ Radi posvuda od 2023.; za najstarije stavi jednostavnu boju neposredno prije. ¦ Deluje povsod od leta 2023; za najstarejše postavi preprosto barvo tik pred tem.
+Marge des côtés du contenu ¦ Bočna margina sadržaja ¦ Stranski rob vsebine
+Marges et espace intérieur ¦ Margine i unutarnji razmak ¦ Robovi in notranji razmik
+Marges, espace intérieur et taille ¦ Margine, unutarnji razmak i veličina ¦ Robovi, notranji razmik in velikost
+Mariés le… ¦ Vjenčani… ¦ Poročena …
+Masque d’écrêtage ¦ Maska za izrezivanje ¦ Maska za obrezovanje
+Masque d’écrêtage (l’objet du dessus découpe les autres) ¦ Maska za izrezivanje (gornji objekt izrezuje ostale) ¦ Maska za obrezovanje (zgornji predmet obreže ostale)
+Masqué ¦ Skriveno ¦ Skrito
+Mes formats ; ranger, montrer ou cacher ¦ Moji formati; posloži, prikaži ili sakrij ¦ Moji formati; razvrsti, prikaži ali skrij
+Mes sites : en ouvrir un autre, en créer un, ouvrir un dossier ¦ Moje stranice: otvori drugu, stvori novu, otvori mapu ¦ Moja spletna mesta: odpri drugo, ustvari novo, odpri mapo
+Mes styles ; ranger, montrer ou cacher ¦ Moji stilovi; posloži, prikaži ili sakrij ¦ Moji slogi; razvrsti, prikaži ali skrij
+Mettre le site en ligne : Netlify, GitHub Pages ou ton hébergement (FTP sécurisé) ¦ Objavi stranicu na mreži: Netlify, GitHub Pages ili tvoj hosting (sigurni FTP) ¦ Objavi spletno mesto: Netlify, GitHub Pages ali tvoje gostovanje (varni FTP)
+Mettre l’un au-dessus de l’autre ¦ Stavi jedan iznad drugog ¦ Postavi drugega nad drugega
+Mine, carrière ¦ Rudnik, kamenolom ¦ Rudnik, kamnolom
+Mode Blason désactivé ¦ Način Grb isključen ¦ Način Grb izklopljen
+Mode Carte ¦ Način Karta ¦ Način Zemljevid
+Mode Carte désactivé ¦ Način Karta isključen ¦ Način Zemljevid izklopljen
+Mode Plan (cartes), fond de carte, image de référence ¦ Način Plan (karte), podloga karte, referentna slika ¦ Način Načrt (zemljevidi), podlaga zemljevida, referenčna slika
+Mode Plan désactivé ¦ Način Plan isključen ¦ Način Načrt izklopljen
+Moderne épuré ¦ Moderno i čisto ¦ Sodobno in čisto
+Modifier mon style ¦ Uredi moj stil ¦ Uredi moj slog
+Mon ancêtre ¦ Moj predak ¦ Moj prednik
+Monter l’élément ¦ Podigni element ¦ Premakni element navzgor
+Montre l’onglet Plan et ses outils (routes, rivières…) ¦ Prikazuje karticu Plan i njezine alate (ceste, rijeke…) ¦ Prikaže zavihek Načrt in njegova orodja (ceste, reke …)
+Montre l’onglet et le menu Blason ¦ Prikazuje karticu i izbornik Grb ¦ Prikaže zavihek in meni Grb
+Montrer dans la liste ¦ Prikaži u popisu ¦ Prikaži na seznamu
+Montrer la grille ¦ Prikaži mrežu ¦ Prikaži mrežo
+Montrer l’année ¦ Prikaži godinu ¦ Prikaži leto
+Montrer ou cacher le panneau de gauche (Blocs, Pages, Styles) ¦ Prikaži ili sakrij lijevu ploču (Blokovi, Stranice, Stilovi) ¦ Prikaži ali skrij levo ploščo (Bloki, Strani, Slogi)
+Montrer ou cacher le panneau des réglages ¦ Prikaži ili sakrij ploču postavki ¦ Prikaži ali skrij ploščo nastavitev
+Montrer ou cacher le panneau « Ceci est… » ¦ Prikaži ili sakrij ploču „Ovo je…” ¦ Prikaži ali skrij ploščo »To je …«
+Monument aux morts, obélisque ¦ Spomenik palima, obelisk ¦ Spomenik padlim, obelisk
+Médaillon perlé ¦ Medaljon s biserima ¦ Medaljon z biseri
+Mélanger ¦ Pomiješaj ¦ Premešaj
+Naissance, décès, parents, événements ¦ Rođenje, smrt, roditelji, događaji ¦ Rojstvo, smrt, starši, dogodki
+Naissances par décennie, prénoms les plus portés ¦ Rođenja po desetljećima, najčešća imena ¦ Rojstva po desetletjih, najpogostejša imena
+Navigateur par défaut ¦ Zadani preglednik ¦ Privzeti brskalnik
+Navigateurs : vérifier le site… ¦ Preglednici: provjeri stranicu… ¦ Brskalniki: preveri spletno mesto …
+Navigateurs visés (versions les plus anciennes à prendre en charge) ¦ Ciljani preglednici (najstarije verzije koje treba podržati) ¦ Ciljni brskalniki (najstarejše različice, ki jih je treba podpreti)
+Ne rien sélectionner ¦ Ne odabiri ništa ¦ Ne izberi ničesar
+Netlify héberge ton site gratuitement, à une adresse en …netlify.app. 1. Crée un compte sur netlify.com. 2. Dans « User settings → Applications → Personal access tokens », crée un jeton (« New access token »). 3. Colle-le ici. ¦ Netlify besplatno hostira tvoju stranicu, na adresi …netlify.app. 1. Stvori račun na netlify.com. 2. U „User settings → Applications → Personal access tokens” stvori token („New access token”). 3. Zalijepi ga ovdje. ¦ Netlify brezplačno gosti tvoje spletno mesto na naslovu …netlify.app. 1. Ustvari račun na netlify.com. 2. V »User settings → Applications → Personal access tokens« ustvari žeton (»New access token«). 3. Prilepi ga sem.
+Nom de lieu (ville, village, rivière… déjà mis en forme pour une carte ; T = texte libre) ¦ Naziv mjesta (grad, selo, rijeka… već oblikovan za kartu; T = slobodni tekst) ¦ Ime kraja (mesto, vas, reka … že oblikovano za zemljevid; T = prosto besedilo)
+Nom de l’écran ¦ Naziv zaslona ¦ Ime zaslona
+Nom du dessin ¦ Naziv crteža ¦ Ime risbe
+Nom placé ¦ Postavljeni naziv ¦ Postavljeno ime
+Nombre (avec l’original) ¦ Broj (s izvornikom) ¦ Število (z izvirnikom)
+Nombre d’étapes ¦ Broj koraka ¦ Število korakov
+Noms des générations ¦ Nazivi generacija ¦ Imena rodov
+Note, légende ¦ Bilješka, natpis ¦ Opomba, napis
+Nouveau dessin ¦ Novi crtež ¦ Nova risba
+Nouveau fichier ¦ Nova datoteka ¦ Nova datoteka
+Nouveau fichier : page HTML ou PHP, CSS, JS, morceau PHP (en-tête…) ¦ Nova datoteka: HTML ili PHP stranica, CSS, JS, PHP dio (zaglavlje…) ¦ Nova datoteka: stran HTML ali PHP, CSS, JS, del PHP (glava …)
+Nouveau fichier dans css/ ¦ Nova datoteka u css/ ¦ Nova datoteka v css/
+Nouveau fichier dans js/ ¦ Nova datoteka u js/ ¦ Nova datoteka v js/
+Nouveau fichier ici ¦ Nova datoteka ovdje ¦ Nova datoteka tukaj
+Nouveau fichier… ¦ Nova datoteka… ¦ Nova datoteka …
+Nouveau sans enregistrer ¦ Nova bez spremanja ¦ Nova brez shranjevanja
+Nouveau site… ¦ Novo web-mjesto… ¦ Novo spletno mesto…
+Nouveau sous-dossier… ¦ Nova podmapa… ¦ Nova podmapa…
+Nouvel écran ¦ Novi zaslon ¦ Nov zaslon
+Orangé ¦ Narančasto ¦ Oranžno
+Outils du mode Plan ¦ Alati načina Plan ¦ Orodja načina Načrt
+Ouvrir cette page dans un onglet du navigateur, comme un visiteur (isolée de l’app) ¦ Otvori ovu stranicu u kartici preglednika, kao posjetitelj (odvojeno od aplikacije) ¦ Odpri to stran v zavihku brskalnika, kot obiskovalec (ločeno od aplikacije)
+Ouvrir l’aperçu dans le navigateur ¦ Otvori pregled u pregledniku ¦ Odpri predogled v brskalniku
+Ouvrir un autre dessin ? ¦ Otvoriti drugi crtež? ¦ Odprem drugo risbo?
+Ouvrir un dessin ¦ Otvori crtež ¦ Odpri risbo
+Ouvrir un dessin… ¦ Otvori crtež… ¦ Odpri risbo…
+Ouvrir un dossier… ¦ Otvori mapu… ¦ Odpri mapo…
+Pages où il est lié… ¦ Stranice na koje je povezan… ¦ Strani, na katere je povezan…
+Palette du plan (routes, rivières, bâtiments…) ¦ Paleta plana (ceste, rijeke, zgrade…) ¦ Paleta načrta (ceste, reke, stavbe…)
+Panneau Ceci est ¦ Panel Ovo je ¦ Podokno To je
+Panneau « Ceci est… » ¦ Panel „Ovo je…” ¦ Podokno »To je …«
+Parents, frères et sœurs ¦ Roditelji, braća i sestre ¦ Starši, bratje in sestre
+Part du tracé occupée ¦ Zauzeti dio putanje ¦ Zasedeni del poti
+Pas de la grille (0 = aucune) ¦ Korak mreže (0 = bez mreže) ¦ Korak mreže (0 = brez mreže)
+Pas d’autre attribut que la classe et l’id. ¦ Nema drugih atributa osim klase i id-a. ¦ Ni drugih atributov razen razreda in id-ja.
+Pas encore de version. ¦ Još nema verzija. ¦ Še ni različic.
+Passer aux trois boutons HTML / CSS / JS ¦ Prijeđi na tri gumba HTML / CSS / JS ¦ Preklopi na tri gumbe HTML / CSS / JS
+Passer aux onglets de fichiers (comme Phoenix Code) ¦ Prijeđi na kartice datoteka (kao u Phoenix Codeu) ¦ Preklopi na zavihke datotek (kot v Phoenix Code)
+Personne au centre (ou au pied de l’arbre) ¦ Osoba u sredini (ili u podnožju stabla) ¦ Oseba v sredini (ali ob vznožju drevesa)
+Peut se mettre dans ¦ Može se staviti u ¦ Lahko se postavi v
+Peut contenir ¦ Može sadržavati ¦ Lahko vsebuje
+Photos d’une personne ¦ Fotografije osobe ¦ Fotografije osebe
+Phrase d’ouverture ¦ Uvodna rečenica ¦ Uvodni stavek
+Pipette (prend la couleur d’un objet) ¦ Pipeta (uzima boju objekta) ¦ Kapalka (vzame barvo predmeta)
+Place du titre ¦ Položaj naslova ¦ Položaj naslova
+Plus : déplacer, format, pages où il est lié, dupliquer, supprimer ¦ Više: premjesti, format, stranice na koje je povezan, dupliciraj, izbriši ¦ Več: premakni, oblika, strani, na katere je povezan, podvoji, izbriši
+Plus fin ¦ Tanje ¦ Tanjše
+Plus à droite : plus de gris devient de l’encre (un trait pâle réapparaît) ; plus à gauche : seulement l’encre la plus foncée (les taches disparaissent). Réglé tout seul au départ. ¦ Više udesno: više sive postaje tinta (blijeda crta se vraća); više ulijevo: samo najtamnija tinta (mrlje nestaju). Na početku se namješta samo. ¦ Bolj desno: več sive postane črnilo (bleda črta se vrne); bolj levo: samo najtemnejše črnilo (madeži izginejo). Na začetku se nastavi samodejno.
+Plus épais ¦ Deblje ¦ Debelejše
+Plusieurs images en vignettes ¦ Više slika kao sličice ¦ Več slik kot sličice
+Point modifié ¦ Točka izmijenjena ¦ Točka spremenjena
+Portfolio d’artiste ¦ Umjetnički portfelj ¦ Umetniški portfolio
+Portraits (arbre dessiné) ¦ Portreti (nacrtano stablo) ¦ Portreti (narisano drevo)
+Pose un texte qui suit ce tracé ¦ Postavlja tekst koji prati ovu putanju ¦ Postavi besedilo, ki sledi tej poti
+Poser le fond ¦ Postavi pozadinu ¦ Postavi ozadje
+Poser l’image ¦ Postavi sliku ¦ Postavi sliko
+Propriété changée ¦ Svojstvo promijenjeno ¦ Lastnost spremenjena
+Pré, prairie ¦ Livada, pašnjak ¦ Travnik, pašnik
+Prénom (grand) ¦ Ime (veliko) ¦ Ime (veliko)
+Prénom, puis NOM dessous ¦ Ime, a ispod PREZIME ¦ Ime, pod njim PRIIMEK
+Prénoms les plus portés ¦ Najčešća imena ¦ Najpogostejša imena
+Préparer l’impression ¦ Pripremi ispis ¦ Pripravi tiskanje
+Présentation, œuvres en galerie, expositions, contact ¦ Predstavljanje, djela u galeriji, izložbe, kontakt ¦ Predstavitev, dela v galeriji, razstave, stik
+Prévois un polygon() juste avant. ¦ Predvidi polygon() neposredno prije. ¦ Predvidi polygon() tik pred tem.
+Publier en ligne… ¦ Objavi na mreži… ¦ Objavi na spletu…
+Quel lieu ? ¦ Koje mjesto? ¦ Kateri kraj?
+Qui est né, s’est marié ou est mort là ¦ Tko se ondje rodio, vjenčao ili umro ¦ Kdo se je tam rodil, poročil ali umrl
+Raccourcis du code ¦ Prečaci koda ¦ Bližnjice kode
+Ranger aussi l’image (fond transparent) dans les médias de la personne ¦ Spremi sliku (prozirna pozadina) i u medije osobe ¦ Shrani sliko (prozorno ozadje) tudi med medije osebe
+Ranger la sélection dans un groupe ou un calque, sans glisser ¦ Smjesti odabir u grupu ili sloj, bez povlačenja ¦ Postavi izbor v skupino ali plast, brez vlečenja
+Ranger tout seul ¦ Razmjesti automatski ¦ Razporedi samodejno
+Rangé dans un groupe ¦ Smješteno u grupu ¦ Postavljeno v skupino
+Recto-verso : deux faces. Pliée en 2, 3 ou 4 : la carte a plusieurs volets ; le dessin montre les plis (traits roses) et s’imprime face par face, ou sur A4 avec les traits de coupe et de pli (⤓ Exporter → Recto-verso sur A4). ¦ Obostrano: dvije strane. Presavijena na 2, 3 ili 4: karta ima više krila; crtež pokazuje pregibe (ružičaste crte) i ispisuje se stranu po stranu ili na A4 s oznakama za rezanje i savijanje (⤓ Izvezi → Obostrano na A4). ¦ Obojestransko: dve strani. Prepognjena na 2, 3 ali 4: kartica ima več kril; risba kaže pregibe (rožnate črte) in se natisne stran za stranjo ali na A4 z oznakami za rez in pregib (⤓ Izvozi → Obojestransko na A4).
+Reculé ¦ Pomaknuto unatrag ¦ Pomaknjeno nazaj
+Redimensionné ¦ Promijenjena veličina ¦ Spremenjena velikost
+Relief, Eau, Végétation, Parcelles, Routes, Bâti, Limites, Noms, Généalogie, Habillage ¦ Reljef, Voda, Vegetacija, Čestice, Ceste, Izgrađeno, Granice, Imena, Rodoslovlje, Ukrasi ¦ Relief, Voda, Rastje, Parcele, Ceste, Pozidano, Meje, Imena, Rodoslovje, Okrasje
+Relire les blocs de la généalogie ¦ Ponovno učitaj blokove rodoslovlja ¦ Znova preberi bloke rodoslovja
+Remettre un champ enlevé… ¦ Vrati uklonjeno polje… ¦ Vrni odstranjeno polje…
+Remplir depuis une fiche ¦ Ispuni iz zapisa ¦ Izpolni iz zapisa
+Remplissage : clic pour choisir la couleur ¦ Ispuna: klikni za odabir boje ¦ Polnilo: klikni za izbiro barve
+Remplissage par défaut ¦ Zadana ispuna ¦ Privzeto polnilo
+Reprendre les couleurs du style ¦ Preuzmi boje stila ¦ Prevzemi barve sloga
+Repères de pli et noms des pages : oui / non ¦ Oznake pregiba i nazivi stranica: da / ne ¦ Oznake pregibov in imena strani: da / ne
+Requête @media ¦ Upit @media ¦ Poizvedba @media
+Retire les longues lignes droites imprimées ou tracées du registre qui traversent la signature. ¦ Uklanja duge ravne tiskane ili povučene crte matične knjige koje prelaze preko potpisa. ¦ Odstrani dolge ravne natisnjene ali potegnjene črte matične knjige, ki prečkajo podpis.
+Retirer cette couleur ¦ Ukloni ovu boju ¦ Odstrani to barvo
+Retirer l’attribut ¦ Ukloni atribut ¦ Odstrani atribut
+Retourné ¦ Okrenuto ¦ Obrnjeno
+Revenir au niveau du dessus (Échap) ¦ Vrati se na razinu iznad (Esc) ¦ Vrni se na raven višje (Esc)
+Revenir aux champs d’origine de ce modèle ¦ Vrati izvorna polja ovog predloška ¦ Vrni izvirna polja te predloge
+Rosace à six pétales ¦ Rozeta sa šest latica ¦ Rozeta s šestimi cvetnimi listi
+Rose des vents ¦ Ruža vjetrova ¦ Vetrovnica
+Récent. ¦ Novo. ¦ Novo.
+Région, pays ¦ Regija, zemlja ¦ Regija, država
+Réglages appliqués ¦ Postavke primijenjene ¦ Nastavitve uporabljene
+Réparti ¦ Raspoređeno ¦ Razporejeno
+Répartir horizontalement ¦ Rasporedi vodoravno ¦ Razporedi vodoravno
+Répartir horizontalement (même écart) ¦ Rasporedi vodoravno (jednak razmak) ¦ Razporedi vodoravno (enak razmik)
+Répartir verticalement ¦ Rasporedi okomito ¦ Razporedi navpično
+Répartir verticalement (même écart) ¦ Rasporedi okomito (jednak razmak) ¦ Razporedi navpično (enak razmik)
+Réponse souhaitée ¦ Željeni odgovor ¦ Želeni odgovor
+Répétition en cercle ¦ Ponavljanje u krugu ¦ Ponavljanje v krogu
+Répétition en cercle… ¦ Ponavljanje u krugu… ¦ Ponavljanje v krogu…
+Répétition en grille… ¦ Ponavljanje u mreži… ¦ Ponavljanje v mreži…
+Sa fiche, sa vie en frise, son arbre, ses lieux, ses photos ¦ Njezin/njegov zapis, život na vremenskoj crti, stablo, mjesta, fotografije ¦ Zapis osebe, življenje na časovnici, drevo, kraji, fotografije
+Sa vie, année par année ¦ Život, godinu po godinu ¦ Življenje, leto za letom
+Sable, grève ¦ Pijesak, žal ¦ Pesek, prod
+Sans grille d’échelle ¦ Bez mjerne mreže ¦ Brez merilne mreže
+Selon la forme ¦ Prema obliku ¦ Glede na obliko
+Ses photos publiables, toutes seules ¦ Fotografije za objavu, same od sebe ¦ Fotografije za objavo, samodejno
+Simple : tablette et téléphone ¦ Jednostavno: tablet i telefon ¦ Preprosto: tablica in telefon
+Simplifier le tracé… ¦ Pojednostavi putanju… ¦ Poenostavi pot…
+Simplifiée ¦ Pojednostavljeno ¦ Poenostavljeno
+Site modifié ailleurs ¦ Web-mjesto izmijenjeno negdje drugdje ¦ Spletno mesto spremenjeno drugje
+Situer la carte tout de suite (conseillé) : le lieu et la largeur couverte donnent la bonne échelle, et la carte n’est pas déformée ¦ Odmah smjesti kartu (preporučeno): mjesto i pokrivena širina daju ispravno mjerilo, a karta nije izobličena ¦ Takoj umesti zemljevid (priporočeno): kraj in pokrita širina dajo pravo merilo, zemljevid pa ni popačen
+Son CSS ¦ Njegov CSS ¦ Njegov CSS
+Son nouveau chemin : ¦ Njegova nova putanja: ¦ Njegova nova pot:
+Sortir d’un niveau (Échap) ¦ Izađi za jednu razinu (Esc) ¦ Pojdi eno raven ven (Esc)
+Style du plan ¦ Stil plana ¦ Slog načrta
+Suivant / précédent ¦ Sljedeće / prethodno ¦ Naslednje / prejšnje
+Supprimer l’élément ¦ Izbriši element ¦ Izbriši element
+Survenu le… ¦ Dogodilo se… ¦ Zgodilo se…
+Symbole, bâtiment ¦ Simbol, zgrada ¦ Simbol, stavba
+S’applique à ¦ Primjenjuje se na ¦ Velja za
+S’épaississant ¦ Sve deblje ¦ Vse debelejše
+Tableau d’ascendance (de gauche à droite) ¦ Tablica predaka (slijeva nadesno) ¦ Tabela prednikov (z leve na desno)
+Taille de l’écran ¦ Veličina zaslona ¦ Velikost zaslona
+Taille des meubles ¦ Veličina likova ¦ Velikost likov
+Taille du nom ¦ Veličina imena ¦ Velikost imena
+Taillé ¦ Kosolijevo podijeljeno ¦ Levo poševno deljeno
+Tes éléments sont gardés. ¦ Tvoji su elementi sačuvani. ¦ Tvoji elementi so ohranjeni.
+Ton hébergeur (OVH, o2switch, Infomaniak…) te donne un serveur FTP. La connexion est toujours chiffrée (FTPS) et son certificat vérifié : un serveur sans chiffrement est refusé. ¦ Tvoj pružatelj hostinga (OVH, o2switch, Infomaniak…) daje ti FTP poslužitelj. Veza je uvijek šifrirana (FTPS), a njezin certifikat provjeren: poslužitelj bez šifriranja se odbija. ¦ Tvoj ponudnik gostovanja (OVH, o2switch, Infomaniak…) ti da strežnik FTP. Povezava je vedno šifrirana (FTPS) in njeno potrdilo preverjeno: strežnik brez šifriranja je zavrnjen.
+Ton site est envoyé tel qu’à l’export (.zip) : sans personne vivante ni fiche confidentielle. Le jeton ou le mot de passe reste sur cet ordinateur : il n’est jamais montré, ni mis dans une sauvegarde ou dans le site. ¦ Tvoje web-mjesto šalje se kao pri izvozu (.zip): bez živih osoba i povjerljivih zapisa. Token ili lozinka ostaju na ovom računalu: nikad se ne prikazuju niti stavljaju u sigurnosnu kopiju ili na web-mjesto. ¦ Tvoje spletno mesto se pošlje kot pri izvozu (.zip): brez živih oseb in zaupnih zapisov. Žeton ali geslo ostane na tem računalniku: nikoli ni prikazano niti shranjeno v varnostno kopijo ali na spletno mesto.
+Tous les fichiers ¦ Sve datoteke ¦ Vse datoteke
+Tous les fichiers du site ¦ Sve datoteke web-mjesta ¦ Vse datoteke spletnega mesta
+Tous les écrans ¦ Svi zasloni ¦ Vsi zasloni
+Tout affiché ¦ Sve prikazano ¦ Vse prikazano
+Tracé fermé ¦ Zatvorena putanja ¦ Zaprta pot
+Tracé simplifié ¦ Pojednostavljena putanja ¦ Poenostavljena pot
+Trait au crayon ¦ Crta olovkom ¦ Črta s svinčnikom
+Tranché ¦ Kosodesno podijeljeno ¦ Desno poševno deljeno
+Transformer… (échelle, inclinaison, copies) ¦ Preoblikuj… (mjerilo, nagib, kopije) ¦ Preoblikuj … (merilo, nagib, kopije)
+Transformé ¦ Preoblikovano ¦ Preoblikovano
+Trois cartes côte à côte (une seule sur téléphone) ¦ Tri kartice jedna do druge (samo jedna na telefonu) ¦ Tri kartice druga ob drugi (na telefonu samo ena)
+Très fine ¦ Vrlo tanko ¦ Zelo tanko
+Très simplifiée ¦ Vrlo pojednostavljeno ¦ Zelo poenostavljeno
+Téléphone couché ¦ Položeni telefon ¦ Ležeči telefon
+Un bouton pour écrire un courriel ¦ Gumb za pisanje e-pošte ¦ Gumb za pisanje e-pošte
+Un calque vide, au-dessus des autres : tu dessines dedans ¦ Prazan sloj, iznad ostalih: u njemu crtaš ¦ Prazna plast nad drugimi: vanjo rišeš
+Un de tes diagrammes (Graphiques → Mes diagrammes), ou un nouveau ; redessiné à chaque ouverture, figé à l’export ¦ Jedan od tvojih dijagrama (Grafikoni → Moji dijagrami) ili novi; ponovno se crta pri svakom otvaranju, zamrznut pri izvozu ¦ Eden od tvojih diagramov (Grafi → Moji diagrami) ali nov; ob vsakem odprtju se nariše znova, ob izvozu je zamrznjen
+Un en-tête, un texte, un pied de page : à toi de jouer ¦ Zaglavlje, tekst, podnožje: na tebi je ¦ Glava, besedilo, noga: zdaj si na vrsti ti
+Un grand titre et une phrase ¦ Veliki naslov i rečenica ¦ Velik naslov in stavek
+Un objet seul s’aligne sur le plan de travail (ou sur la page, le volet où il se trouve). Plusieurs : entre eux, ou sur le plan si « Plan de travail » est choisi. En déplaçant ou en agrandissant, des repères roses aimantent aux bords et aux centres des autres objets (⌘ ou Ctrl pour s’en passer). ¦ Jedan objekt poravnava se s radnom površinom (ili sa stranicom, krilom na kojem se nalazi). Više njih: međusobno, ili s radnom površinom ako je odabrana „Radna površina”. Pri pomicanju ili povećavanju ružičaste vodilice privlače rubove i središta drugih objekata (⌘ ili Ctrl za isključivanje). ¦ Posamezen predmet se poravna z delovno površino (ali s stranjo, krilom, na katerem je). Več predmetov: med seboj ali z delovno površino, če je izbrana »Delovna površina«. Pri premikanju ali povečevanju rožnata vodila pripenjajo na robove in središča drugih predmetov (⌘ ali Ctrl za izklop).
+Un quadrillage bleu en kilomètres (ou mètres) aide à dessiner aux bonnes distances ; il ne s’imprime jamais. ¦ Plava mreža u kilometrima (ili metrima) pomaže crtati na ispravnim udaljenostima; nikad se ne ispisuje. ¦ Modra mreža v kilometrih (ali metrih) pomaga risati na pravih razdaljah; nikoli se ne natisne.
+Un titre et un paragraphe ¦ Naslov i odlomak ¦ Naslov in odstavek
+Une autre fenêtre a enregistré ce site entre-temps. Garder ta version effacera la sienne. ¦ Drugi prozor je u međuvremenu spremio ovo web-mjesto. Zadržiš li svoju verziju, njegova će se izbrisati. ¦ Drugo okno je medtem shranilo to spletno mesto. Če obdržiš svojo različico, bo njegova izbrisana.
+Une autre image ¦ Druga slika ¦ Druga slika
+Une carte sur mesure (Carte → 🗺 Mes cartes), mise en image sans personne vivante ni fiche confidentielle ¦ Karta po mjeri (Karta → 🗺 Moje karte), pretvorena u sliku bez živih osoba i povjerljivih zapisa ¦ Zemljevid po meri (Zemljevid → 🗺 Moji zemljevidi), pretvorjen v sliko brez živih oseb in zaupnih zapisov
+Une image de tes médias ¦ Slika iz tvojih medija ¦ Slika iz tvojih medijev
+Une page de plus dans le document : l’enveloppe au bon format (C6, DL, C5 ou carrée, selon la carte), dans le même style, avec l’adresse du destinataire et l’expéditeur. Elle s’imprime à sa taille. ¦ Još jedna stranica u dokumentu: omotnica u pravom formatu (C6, DL, C5 ili kvadratna, ovisno o karti), u istom stilu, s adresom primatelja i pošiljatelja. Ispisuje se u svojoj veličini. ¦ Še ena stran v dokumentu: ovojnica prave oblike (C6, DL, C5 ali kvadratna, glede na kartico), v istem slogu, z naslovom prejemnika in pošiljatelja. Natisne se v svoji velikosti.
+Une phrase mise en valeur ¦ Istaknuta rečenica ¦ Poudarjen stavek
+Une signature déjà encadrée dans la visionneuse (Signatures identifiées) ¦ Potpis već uokviren u pregledniku (Prepoznati potpisi) ¦ Podpis, že uokvirjen v pregledovalniku (Prepoznani podpisi)
+Unité montrée ¦ Prikazana jedinica ¦ Prikazana enota
+Variante du bord de cire ¦ Varijanta ruba voska ¦ Različica roba voska
+Le bord d’un cachet de cire est irrégulier : chaque variante l’écrase autrement. ¦ Rub voštanog pečata nepravilan je: svaka ga varijanta drukčije gnječi. ¦ Rob voščenega pečata je nepravilen: vsaka različica ga stisne drugače.
+Le site entier (.zip, à mettre en ligne) ou une page seule (.html) ¦ Cijelo web-mjesto (.zip, za postavljanje na mrežu) ili samo jedna stranica (.html) ¦ Celotno spletno mesto (.zip, za objavo na spletu) ali ena sama stran (.html)
+Le village, son histoire, les familles qui y ont vécu ¦ Selo, njegova povijest, obitelji koje su ondje živjele ¦ Vas, njena zgodovina, družine, ki so tam živele
+🧭 Le site dans les navigateurs ¦ 🧭 Web-mjesto u preglednicima ¦ 🧭 Spletno mesto v brskalnikih
+Imiter dans l’aperçu : ¦ Oponašaj u pregledu: ¦ Posnemaj v predogledu:
+pour l’export en image (PNG, JPG) ; 300 ppp pour imprimer ¦ za izvoz kao slika (PNG, JPG); 300 ppi za ispis ¦ za izvoz kot slika (PNG, JPG); 300 ppi za tiskanje
+Verrouillé ¦ Zaključano ¦ Zaklenjeno
+Vers le bas ¦ Prema dolje ¦ Navzdol
+Vers le haut ¦ Prema gore ¦ Navzgor
+Vers le nord ¦ Prema sjeveru ¦ Proti severu
+Vers le sud ¦ Prema jugu ¦ Proti jugu
+Vers l’est ¦ Prema istoku ¦ Proti vzhodu
+Vers l’ouest ¦ Prema zapadu ¦ Proti zahodu
+Vide : ne pas vérifier ce navigateur ¦ Prazno: ne provjeravaj ovaj preglednik ¦ Prazno: ne preverjaj tega brskalnika
+Voie ferrée ¦ Željeznička pruga ¦ Železniška proga
+Voie, rivière, limite (un clic par point) ¦ Put, rijeka, granica (jedan klik po točki) ¦ Pot, reka, meja (en klik na točko)
+Voir dans le code ¦ Prikaži u kodu ¦ Pokaži v kodi
+Voir et modifier le CSS de cette classe ou de cet id (⌘E), comme l’édition rapide de Phoenix Code ¦ Prikaži i uredi CSS ove klase ili ovog id-a (⌘E), kao brzo uređivanje u Phoenix Codeu ¦ Pokaži in uredi CSS tega razreda ali tega id-ja (⌘E), kot hitro urejanje v Phoenix Code
+Voir l’élément dans le code ¦ Prikaži element u kodu ¦ Pokaži element v kodi
+Végétation ¦ Vegetacija ¦ Rastje
+Zone : forêt, champ, lac, bourg… ¦ Područje: šuma, polje, jezero, naselje… ¦ Območje: gozd, njiva, jezero, trg…
+animations liées au défilement ¦ animacije vezane uz pomicanje ¦ animacije, vezane na drsenje
+biseautés ¦ zakošeni ¦ prirezani
+carrés ¦ kvadratni ¦ kvadratni
+chaînage optionnel ?. ¦ opcionalno ulančavanje ?. ¦ izbirno veriženje ?.
+délier ¦ razdvoji ¦ razveži
+gap en flexbox ¦ gap u flexboxu ¦ gap v flexboxu
+la personne seule ¦ samo osoba ¦ samo oseba
+la personne et ses ancêtres ¦ osoba i njezini preci ¦ oseba in njeni predniki
+lié après script.js ¦ povezan nakon script.js ¦ povezan za script.js
+liée après style.css ¦ povezan nakon style.css ¦ povezan za style.css
+margin-left et margin-right : auto ¦ margin-left i margin-right: auto ¦ margin-left in margin-right: auto
+Retirer margin et padding posés ici ¦ Ukloni margin i padding postavljene ovdje ¦ Odstrani margin in padding, nastavljena tukaj
+mon-site (ou compte/mon-site) ¦ moje-mjesto (ili racun/moje-mjesto) ¦ moje-mesto (ali racun/moje-mesto)
+opérateur ?? ¦ operator ?? ¦ operator ??
+ouvrir la fiche ¦ otvori zapis ¦ odpri zapis
+principal · tout le site ¦ glavni · cijelo web-mjesto ¦ glavni · celotno spletno mesto
+script.js · le script de tout le site ¦ script.js · skripta cijelog web-mjesta ¦ script.js · skript celotnega spletnega mesta
+style.css · la feuille de styles de tout le site ¦ style.css · list stilova cijelog web-mjesta ¦ style.css · slogovna predloga celotnega spletnega mesta
+translate, rotate, scale séparés ¦ odvojeni translate, rotate, scale ¦ ločeni translate, rotate, scale
+un seul fichier .html ¦ jedna jedina datoteka .html ¦ ena sama datoteka .html
+une face par feuille ¦ jedna strana po listu ¦ ena stran na list
+unités cqw, cqh, cqi, cqb ¦ jedinice cqw, cqh, cqi, cqb ¦ enote cqw, cqh, cqi, cqb
+unités dvh, svh, lvh ¦ jedinice dvh, svh, lvh ¦ enote dvh, svh, lvh
+unités lh, rlh ¦ jedinice lh, rlh ¦ enote lh, rlh
+évènement scrollend ¦ događaj scrollend ¦ dogodek scrollend
+Écart horizontal ¦ Vodoravni razmak ¦ Vodoravni razmik
+Écart vertical ¦ Okomiti razmak ¦ Navpični razmik
+Écartelé ¦ Četvrtinjeno ¦ Četrtinjeno
+Échelle, rose des vents, cartouche, légende ¦ Mjerilo, ruža vjetrova, kartuša, legenda ¦ Merilo, vetrovnica, kartuša, legenda
+Échiqueté ¦ Šahirano ¦ Šahirano
+Écran 16:9 ¦ Zaslon 16:9 ¦ Zaslon 16:9
+Écrans enregistrés. ¦ Zasloni spremljeni. ¦ Zasloni shranjeni.
+Écrire ¦ Piši ¦ Piši
+Écrire le texte dans la page ¦ Napiši tekst na stranici ¦ Napiši besedilo na strani
+Écu ¦ Štit ¦ Ščit
+Écu (5 × 6) ¦ Štit (5 × 6) ¦ Ščit (5 × 6)
+Écu français moderne ¦ Moderni francuski štit ¦ Sodobni francoski ščit
+Écu suisse ¦ Švicarski štit ¦ Švicarski ščit
+Élément incomplet. ¦ Element nije potpun. ¦ Element ni popoln.
+Émail des meubles ¦ Tinktura likova ¦ Tinktura likov
+Émail du champ ¦ Tinktura polja ¦ Tinktura polja
+Étendue ¦ Opseg ¦ Obseg
+Éventail (demi-cercle) ¦ Lepeza (polukrug) ¦ Pahljača (polkrog)
+Éventail Art déco ¦ Art déco lepeza ¦ Pahljača art deco
+Éventail ouvert (240°) ¦ Otvorena lepeza (240°) ¦ Odprta pahljača (240°)
+Éventail trois-quarts (270°) ¦ Lepeza tri četvrtine (270°) ¦ Tričetrtinska pahljača (270°)
+× Oublier cet accès FTP ¦ × Zaboravi ovaj FTP pristup ¦ × Pozabi ta dostop FTP
+× Oublier le jeton Netlify ¦ × Zaboravi Netlify token ¦ × Pozabi žeton Netlify
+× Oublier le jeton GitHub ¦ × Zaboravi GitHub token ¦ × Pozabi žeton GitHub
+à la taille exacte ¦ u točnoj veličini ¦ v natančni velikosti
+à ouvrir partout : double-clic, MAMP, WAMP, hébergeur ¦ otvara se svugdje: dvostruki klik, MAMP, WAMP, hosting ¦ odpre se povsod: dvoklik, MAMP, WAMP, gostovanje
+à rouvrir ici ¦ za ponovno otvaranje ovdje ¦ za ponovno odpiranje tukaj
+↗ Ouvrir le site dans : ¦ ↗ Otvori web-mjesto u: ¦ ↗ Odpri spletno mesto v:
+↗ Ouvrir là ¦ ↗ Otvori ondje ¦ ↗ Odpri tam
+↺ Les 2 dernières années ¦ ↺ Posljednje 2 godine ¦ ↺ Zadnji 2 leti
+↺ Marges de départ ¦ ↺ Početne margine ¦ ↺ Začetni robovi
+↺ Remettre comme au départ (retire cette règle) ¦ ↺ Vrati na početno (uklanja ovo pravilo) ¦ ↺ Ponastavi na začetno (odstrani to pravilo)
+↻ La personne affichée ¦ ↻ Prikazana osoba ¦ ↻ Prikazana oseba
+↻ Remplacer l’image… ¦ ↻ Zamijeni sliku… ¦ ↻ Zamenjaj sliko…
+▶ Tester : comme un visiteur (tes scripts tournent, les liens marchent) ¦ ▶ Testiraj: kao posjetitelj (tvoje skripte rade, poveznice rade) ¦ ▶ Preizkusi: kot obiskovalec (tvoji skripti tečejo, povezave delujejo)
+◎ Exclure (là où ils se croisent) ¦ ◎ Isključi (gdje se preklapaju) ¦ ◎ Izključi (kjer se prekrivajo)
+◐ Soustraire (le dessous moins le reste) ¦ ◐ Oduzmi (donji minus ostalo) ¦ ◐ Odštej (spodnji minus ostalo)
+◫ Visuel et code ¦ ◫ Vizualno i kod ¦ ◫ Vizualno in koda
+⚙ Les écrans du site (@media) ¦ ⚙ Zasloni web-mjesta (@media) ¦ ⚙ Zasloni spletnega mesta (@media)
+⚙️ Les formats ¦ ⚙️ Formati ¦ ⚙️ Oblike
+⚙️ Les éléments du plan ¦ ⚙️ Elementi plana ¦ ⚙️ Elementi načrta
+⚙️ Ranger les éléments ¦ ⚙️ Razmjesti elemente ¦ ⚙️ Razporedi elemente
+⚜️ Ajouter un meuble (fleur de lys, lion, étoile…)… ¦ ⚜️ Dodaj lik (ljiljan, lav, zvijezda…)… ¦ ⚜️ Dodaj lik (lilija, lev, zvezda …)…
+⚜️ Ajouter un meuble seul ¦ ⚜️ Dodaj samo lik ¦ ⚜️ Dodaj samostojen lik
+⛔ Colle ton jeton GitHub. ¦ ⛔ Zalijepi svoj GitHub token. ¦ ⛔ Prilepi svoj žeton GitHub.
+⛔ Colle ton jeton Netlify. ¦ ⛔ Zalijepi svoj Netlify token. ¦ ⛔ Prilepi svoj žeton Netlify.
+✍️ La signature d’un acte ¦ ✍️ Potpis iz matičnog zapisa ¦ ✍️ Podpis iz matičnega vpisa
+✍️ Une signature déjà repérée ¦ ✍️ Već pronađen potpis ¦ ✍️ Že najden podpis
+✍️ Une signature déjà repérée… ¦ ✍️ Već pronađen potpis… ¦ ✍️ Že najden podpis…
+✎ Mon élément ¦ ✎ Moj element ¦ ✎ Moj element
+✒ La sélection seule en SVG ¦ ✒ Samo odabir u SVG-u ¦ ✒ Samo izbor v SVG
+➰ Texte sur une courbe… ¦ ➰ Tekst na krivulji… ¦ ➰ Besedilo na krivulji…
+➰ Un texte qui suit une courbe ¦ ➰ Tekst koji prati krivulju ¦ ➰ Besedilo, ki sledi krivulji
+➰ Un texte sur ce tracé ¦ ➰ Tekst na ovoj putanji ¦ ➰ Besedilo na tej poti
+⤒ Importer de l’ordinateur (SVG, PNG, JPG, WEBP, GIF, BMP, fichier du dessin…) ¦ ⤒ Uvezi s računala (SVG, PNG, JPG, WEBP, GIF, BMP, datoteka crteža…) ¦ ⤒ Uvozi iz računalnika (SVG, PNG, JPG, WEBP, GIF, BMP, datoteka risbe …)
+⤓ Exporter le site ¦ ⤓ Izvezi web-mjesto ¦ ⤓ Izvozi spletno mesto
+⤓ Exporter tout le site (.zip) ¦ ⤓ Izvezi cijelo web-mjesto (.zip) ¦ ⤓ Izvozi celotno spletno mesto (.zip)
+⤓ Exporter la page (.html) ¦ ⤓ Izvezi stranicu (.html) ¦ ⤓ Izvozi stran (.html)
+⧉ Copier l’exemple ¦ ⧉ Kopiraj primjer ¦ ⧉ Kopiraj primer
+⧉ Mélange de deux formes (étapes)… ¦ ⧉ Mješavina dvaju oblika (koraci)… ¦ ⧉ Mešanica dveh oblik (koraki)…
+⧉ Mélange de deux formes ¦ ⧉ Mješavina dvaju oblika ¦ ⧉ Mešanica dveh oblik
+⬤ Réunir ¦ ⬤ Spoji ¦ ⬤ Združi
+◑ Intersection ¦ ◑ Presjek ¦ ◑ Presek
+⭕ Médaillon rond ¦ ⭕ Okrugli medaljon ¦ ⭕ Okrogel medaljon
+〰 Largeur du trait ¦ 〰 Debljina crte ¦ 〰 Debelina črte
+＋ Blocs : glisse-les dans la page ¦ ＋ Blokovi: povuci ih na stranicu ¦ ＋ Bloki: povleci jih na stran
+＋ Créer un style ¦ ＋ Stvori stil ¦ ＋ Ustvari slog
+＋ Créer un élément ¦ ＋ Stvori element ¦ ＋ Ustvari element
+＋ Enregistrer la version actuelle ¦ ＋ Spremi trenutačnu verziju ¦ ＋ Shrani trenutno različico
+＋ Nouveau faire-part ¦ ＋ Nova obavijest ¦ ＋ Novo naznanilo
+＋ Nouveau site : par où commencer ? ¦ ＋ Novo web-mjesto: odakle početi? ¦ ＋ Novo spletno mesto: kje začeti?
+＋ Nouvel arbre décoratif ¦ ＋ Novo ukrasno stablo ¦ ＋ Novo okrasno drevo
+＋ Signature ou sceau ¦ ＋ Potpis ili pečat ¦ ＋ Podpis ali pečat
+＋ Un écran ¦ ＋ Zaslon ¦ ＋ Zaslon
+📱 Téléphone couché ¦ 📱 Položeni telefon ¦ 📱 Ležeči telefon
+👆 Écran tactile ¦ 👆 Zaslon na dodir ¦ 👆 Zaslon na dotik
+🖨 Impression ¦ 🖨 Ispis ¦ 🖨 Tiskanje
+🌐 Cette page seule ¦ 🌐 Samo ova stranica ¦ 🌐 Samo ta stran
+🌳 Un arbre à imprimer en grand ¦ 🌳 Stablo za ispis u velikom formatu ¦ 🌳 Drevo za tiskanje v velikem formatu
+🎨 Couleurs, polices, largeur du site ¦ 🎨 Boje, fontovi, širina web-mjesta ¦ 🎨 Barve, pisave, širina spletnega mesta
+🎨 Les styles ¦ 🎨 Stilovi ¦ 🎨 Slogi
+🎨 Remettre les émaux en couleur ¦ 🎨 Vrati tinkture u boji ¦ 🎨 Vrni tinkture v barvi
+🎨 Son CSS : les règles de ses classes et de son id, modifiables (⌘E) ¦ 🎨 Njegov CSS: pravila njegovih klasa i id-a, mogu se uređivati (⌘E) ¦ 🎨 Njegov CSS: pravila njegovih razredov in id-ja, ki jih lahko urejaš (⌘E)
+💻 De l’ordinateur ¦ 💻 S računala ¦ 💻 Iz računalnika
+💾 Fichier du dessin ¦ 💾 Datoteka crteža ¦ 💾 Datoteka risbe
+💾 Fichier du dessin… ¦ 💾 Datoteka crteža… ¦ 💾 Datoteka risbe…
+📄 Les pages du site ¦ 📄 Stranice web-mjesta ¦ 📄 Strani spletnega mesta
+📋 Copier le code SVG ¦ 📋 Kopiraj SVG kod ¦ 📋 Kopiraj kodo SVG
+📍 Lieux de la base sur le plan… ¦ 📍 Mjesta iz baze na planu… ¦ 📍 Kraji iz baze na načrtu…
+📐 Format du document / plans de travail… ¦ 📐 Format dokumenta / radne površine… ¦ 📐 Oblika dokumenta / delovne površine…
+📖 Aide-mémoire ¦ 📖 Kratki podsjetnik ¦ 📖 Kratek vodnik
+📤 Publier en ligne ¦ 📤 Objavi na mreži ¦ 📤 Objavi na spletu
+📤 Publier le site ¦ 📤 Objavi web-mjesto ¦ 📤 Objavi spletno mesto
+📤 Publier ¦ 📤 Objavi ¦ 📤 Objavi
+📤 Site publié. ¦ 📤 Web-mjesto objavljeno. ¦ 📤 Spletno mesto objavljeno.
+📦 Tout le site en .zip ¦ 📦 Cijelo web-mjesto kao .zip ¦ 📦 Celotno spletno mesto kot .zip
+📰 Avis dans le journal ¦ 📰 Obavijest u novinama ¦ 📰 Obvestilo v časopisu
+📰 Un faire-part, une affiche ¦ 📰 Obavijest, plakat ¦ 📰 Naznanilo, plakat
+📷 Un acte des médias… ¦ 📷 Matični zapis iz medija… ¦ 📷 Matični vpis iz medijev…
+🔗 Objets reliés ¦ 🔗 Povezani objekti ¦ 🔗 Povezani predmeti
+🔗 Objets reliés à la famille… ¦ 🔗 Objekti povezani s obitelji… ¦ 🔗 Predmeti, povezani z družino…
+🔷 Enregistrer comme forme (Mes formes)… ¦ 🔷 Spremi kao oblik (Moji oblici)… ¦ 🔷 Shrani kot obliko (Moje oblike)…
+🔷 Enregistrer la forme ¦ 🔷 Spremi oblik ¦ 🔷 Shrani obliko
+🖨 Hachures héraldiques ¦ 🖨 Heraldičko šrafiranje ¦ 🖨 Heraldično šrafiranje
+🖨 Hachures héraldiques (noir et blanc) ¦ 🖨 Heraldičko šrafiranje (crno-bijelo) ¦ 🖨 Heraldično šrafiranje (črno-belo)
+🖼 Choisir la photo… ¦ 🖼 Odaberi fotografiju… ¦ 🖼 Izberi fotografijo…
+🖼 Une image de la base… ¦ 🖼 Slika iz baze… ¦ 🖼 Slika iz baze…
+🖼️ Enregistrer dans les médias d’une fiche… ¦ 🖼️ Spremi u medije zapisa… ¦ 🖼️ Shrani med medije zapisa…
+🖼️ Image de référence (en transparence)… ¦ 🖼️ Referentna slika (prozirna)… ¦ 🖼️ Referenčna slika (prosojna)…
+🗂 Créer les calques d’un plan ¦ 🗂 Stvori slojeve plana ¦ 🗂 Ustvari plasti načrta
+🗺️ Mode Plan (cartes) : oui / non ¦ 🗺️ Način Plan (karte): da / ne ¦ 🗺️ Način Načrt (zemljevidi): da / ne
+🗺️ Plan : la palette des routes, rivières, bâtiments… ¦ 🗺️ Plan: paleta cesta, rijeka, zgrada… ¦ 🗺️ Načrt: paleta cest, rek, stavb …
+🗺️ Une nouvelle carte ¦ 🗺️ Nova karta ¦ 🗺️ Nov zemljevid
+🛡️ Créer ce blason ¦ 🛡️ Stvori ovaj grb ¦ 🛡️ Ustvari ta grb
+🛡️ Créer un blason… ¦ 🛡️ Stvori grb… ¦ 🛡️ Ustvari grb…
+🛡️ Dans ces armoiries ¦ 🛡️ U ovom grbu ¦ 🛡️ V tem grbu
+🛡️ Enregistrer comme image d’armoiries… ¦ 🛡️ Spremi kao sliku grba… ¦ 🛡️ Shrani kot sliko grba…
+🛡️ Écu ¦ 🛡️ Štit ¦ 🛡️ Ščit
+🥚 Médaillon ovale ¦ 🥚 Ovalni medaljon ¦ 🥚 Ovalni medaljon
+🧭 Navigateurs : ce qui pourrait ne pas marcher sur Safari, Firefox, un vieux téléphone… et imiter un navigateur ¦ 🧭 Preglednici: što možda neće raditi u Safariju, Firefoxu, na starom telefonu… i oponašanje preglednika ¦ 🧭 Brskalniki: kaj morda ne bo delovalo v Safariju, Firefoxu, na starem telefonu … in posnemanje brskalnika
+🧲 Aimanter (bords et centres des objets) : oui / non ¦ 🧲 Privlačenje (rubovi i središta objekata): da / ne ¦ 🧲 Pripenjanje (robovi in središča predmetov): da / ne
+🧲 Aimanter aux autres objets (traits roses) ¦ 🧲 Privlačenje drugim objektima (ružičaste crte) ¦ 🧲 Pripenjanje na druge predmete (rožnate črte)
+🪄 Vectoriser cette image ¦ 🪄 Vektoriziraj ovu sliku ¦ 🪄 Vektoriziraj to sliko
+🪄 Vectoriser une image (refaire un blason scanné)… ¦ 🪄 Vektoriziraj sliku (ponovno izradi skenirani grb)… ¦ 🪄 Vektoriziraj sliko (znova izdelaj skeniran grb)…
+Prévois un style correct sans :has() (il sera ignoré sur les vieux Firefox). ¦ Predvidi ispravan stil bez :has() (u starim Firefoxima bit će zanemaren). ¦ Predvidi pravilen slog brez :has() (v starih Firefoxih bo prezrt).
+@container (requêtes de conteneur) ¦ @container (upiti spremnika) ¦ @container (poizvedbe vsebnika)
+Marche partout depuis 2023 ; garde une mise en page lisible sans. ¦ Radi svugdje od 2023.; zadrži čitljiv prijelom i bez toga. ¦ Deluje povsod od leta 2023; ohrani berljivo postavitev tudi brez tega.
+@container style() (requêtes de style) ¦ @container style() (upiti stila) ¦ @container style() (poizvedbe sloga)
+Pas sur Firefox : utilise une classe à la place. ¦ Ne u Firefoxu: umjesto toga koristi klasu. ¦ Ne v Firefoxu: namesto tega uporabi razred.
+Seulement Chrome et Edge : ne compte pas dessus. ¦ Samo Chrome i Edge: ne računaj na to. ¦ Samo Chrome in Edge: ne računaj na to.
+Marche partout depuis 2023. ¦ Radi svugdje od 2023. ¦ Deluje povsod od leta 2023.
+CSS imbriqué (nesting) ¦ Ugniježđeni CSS (nesting) ¦ Gnezdeni CSS (nesting)
+Marche partout depuis fin 2023 ; pour les plus vieux navigateurs, écris les sélecteurs en entier. ¦ Radi svugdje od kraja 2023.; za starije preglednike piši selektore u cijelosti. ¦ Deluje povsod od konca leta 2023; za starejše brskalnike piši selektorje v celoti.
+Marche partout depuis 2023 ; mets une couleur #hex juste avant pour les plus vieux. ¦ Radi svugdje od 2023.; za starije stavi boju #hex neposredno prije. ¦ Deluje povsod od leta 2023; za starejše postavi barvo #hex tik pred tem.
+Récent : mets une couleur fixe juste avant. ¦ Novo: stavi fiksnu boju neposredno prije. ¦ Novo: postavi stalno barvo tik pred tem.
+Marche partout depuis 2022. ¦ Radi svugdje od 2022. ¦ Deluje povsod od leta 2022.
+Récent : mets une couleur fixe juste avant, ou utilise @media (prefers-color-scheme). ¦ Novo: stavi fiksnu boju neposredno prije ili koristi @media (prefers-color-scheme). ¦ Novo: postavi stalno barvo tik pred tem ali uporabi @media (prefers-color-scheme).
+Sans risque : les vieux navigateurs coupent les titres comme avant. ¦ Bez rizika: stari preglednici lome naslove kao prije. ¦ Brez tveganja: stari brskalniki lomijo naslove kot prej.
+Sans risque : ignoré là où ça ne marche pas. ¦ Bez rizika: zanemaruje se ondje gdje ne radi. ¦ Brez tveganja: prezrto tam, kjer ne deluje.
+Récent sur Firefox : préfère des classes bien nommées si tu vises de vieux Firefox. ¦ Novo u Firefoxu: radije koristi dobro imenovane klase ako ciljaš stare Firefoxe. ¦ Novo v Firefoxu: raje uporabi dobro poimenovane razrede, če ciljaš na stare Firefoxe.
+@property (variables typées) ¦ @property (tipizirane varijable) ¦ @property (tipizirane spremenljivke)
+Marche partout depuis 2024 ; donne une valeur de départ à la variable. ¦ Radi svugdje od 2024.; daj varijabli početnu vrijednost. ¦ Deluje povsod od leta 2024; spremenljivki določi začetno vrednost.
+Très récent : prévois une position de repli (position: absolute classique). ¦ Vrlo novo: predvidi rezervni položaj (klasični position: absolute). ¦ Zelo novo: predvidi nadomestni položaj (klasični position: absolute).
+Sans risque : les pages changent sans animation là où ça ne marche pas. ¦ Bez rizika: stranice se mijenjaju bez animacije ondje gdje ne radi. ¦ Brez tveganja: strani se zamenjajo brez animacije tam, kjer ne deluje.
+Pas sur Firefox : le contenu doit rester visible sans l'animation. ¦ Ne u Firefoxu: sadržaj mora ostati vidljiv bez animacije. ¦ Ne v Firefoxu: vsebina mora ostati vidna brez animacije.
+Marche partout depuis 2023 ; mets 100vh juste avant pour les plus vieux. ¦ Radi svugdje od 2023.; za starije stavi 100vh neposredno prije. ¦ Deluje povsod od leta 2023; za starejše postavi 100vh tik pred tem.
+backdrop-filter sans -webkit- ¦ backdrop-filter bez -webkit- ¦ backdrop-filter brez -webkit-
+Ajoute aussi -webkit-backdrop-filter (Safari avant 18). ¦ Dodaj i -webkit-backdrop-filter (Safari prije 18). ¦ Dodaj tudi -webkit-backdrop-filter (Safari pred 18).
+mask / mask-image sans -webkit- ¦ mask / mask-image bez -webkit- ¦ mask / mask-image brez -webkit-
+Ajoute aussi -webkit-mask-image pour les Chrome un peu anciens. ¦ Dodaj i -webkit-mask-image za malo starije Chromeove. ¦ Dodaj tudi -webkit-mask-image za nekoliko starejše Chrome.
+user-select sans -webkit- ¦ user-select bez -webkit- ¦ user-select brez -webkit-
+Ajoute -webkit-user-select : Safari n'a toujours que celui-là. ¦ Dodaj -webkit-user-select: Safari i dalje ima samo njega. ¦ Dodaj -webkit-user-select: Safari še vedno pozna samo tega.
+Marche partout depuis 2021. ¦ Radi svugdje od 2021. ¦ Deluje povsod od leta 2021.
+Pas sur Firefox ni Safari : donne une hauteur normale au champ. ¦ Ne u Firefoxu ni Safariju: daj polju normalnu visinu. ¦ Ne v Firefoxu in Safariju: polju določi običajno višino.
+Sans risque : pas d'animation d'entrée là où ça ne marche pas. ¦ Bez rizika: nema ulazne animacije ondje gdje ne radi. ¦ Brez tveganja: brez vstopne animacije tam, kjer ne deluje.
+Sans risque : l'élément apparaît sans transition ailleurs. ¦ Bez rizika: drugdje se element pojavljuje bez prijelaza. ¦ Brez tveganja: drugje se element pojavi brez prehoda.
+Seulement Chrome et Edge : l'ouverture se fera sans animation ailleurs. ¦ Samo Chrome i Edge: drugdje će se otvaranje odvijati bez animacije. ¦ Samo Chrome in Edge: drugje se bo odprlo brez animacije.
+Marche partout depuis fin 2023. ¦ Radi svugdje od kraja 2023. ¦ Deluje povsod od konca leta 2023.
+Pas sur Firefox : sans risque, juste un peu plus d'espace. ¦ Ne u Firefoxu: bez rizika, samo malo više prostora. ¦ Ne v Firefoxu: brez tveganja, le malo več prostora.
+Marche partout depuis 2020. ¦ Radi svugdje od 2020. ¦ Deluje povsod od leta 2020.
+Récent sur Chrome : mets une valeur fixe juste avant. ¦ Novo u Chromeu: stavi fiksnu vrijednost neposredno prije. ¦ Novo v Chromu: postavi stalno vrednost tik pred tem.
+Pas sur Safari : sans risque. ¦ Ne u Safariju: bez rizika. ¦ Ne v Safariju: brez tveganja.
+Pas sur Firefox : prévois une lettrine avec ::first-letter et float. ¦ Ne u Firefoxu: predvidi inicijal s ::first-letter i float. ¦ Ne v Firefoxu: predvidi inicialko s ::first-letter in float.
+Marche partout depuis 2024 ; sinon [dir="rtl"]. ¦ Radi svugdje od 2024.; inače [dir="rtl"]. ¦ Deluje povsod od leta 2024; sicer [dir="rtl"].
+Marche partout depuis 2024. ¦ Radi svugdje od 2024. ¦ Deluje povsod od leta 2024.
+Sans risque : ignoré ailleurs. ¦ Bez rizika: drugdje se zanemaruje. ¦ Brez tveganja: drugje prezrto.
+Firefox ne le gère que depuis 2024 : préfère transform: scale() si besoin. ¦ Firefox ga podržava tek od 2024.: ako treba, radije koristi transform: scale(). ¦ Firefox ga podpira šele od leta 2024: po potrebi raje uporabi transform: scale().
+Récent : le contenu s'ouvrira sans animation ailleurs. ¦ Novo: drugdje će se sadržaj otvoriti bez animacije. ¦ Novo: drugje se bo vsebina odprla brez animacije.
+appearance: base-select (menus stylés) ¦ appearance: base-select (stilizirani izbornici) ¦ appearance: base-select (oblikovani meniji)
+Seulement Chrome et Edge : le menu reste normal ailleurs (sans risque). ¦ Samo Chrome i Edge: drugdje izbornik ostaje običan (bez rizika). ¦ Samo Chrome in Edge: drugje meni ostane običajen (brez tveganja).
+Seulement Chrome et Edge : mets une valeur fixe juste avant. ¦ Samo Chrome i Edge: stavi fiksnu vrijednost neposredno prije. ¦ Samo Chrome in Edge: postavi stalno vrednost tik pred tem.
+Seulement Chrome et Edge. ¦ Samo Chrome i Edge. ¦ Samo Chrome in Edge.
+Récent sur Firefox : le texte ne sera pas surligné ailleurs. ¦ Novo u Firefoxu: drugdje tekst neće biti istaknut. ¦ Novo v Firefoxu: drugje besedilo ne bo označeno.
+Seulement Chrome et Edge : garde un ordre du code logique. ¦ Samo Chrome i Edge: zadrži logičan redoslijed koda. ¦ Samo Chrome in Edge: ohrani logičen vrstni red kode.
+popover (bulles sans JavaScript) ¦ popover (oblačići bez JavaScripta) ¦ popover (oblački brez JavaScripta)
+Marche partout depuis 2024 ; sur les plus vieux, la bulle reste cachée. ¦ Radi svugdje od 2024.; u starijima oblačić ostaje skriven. ¦ Deluje povsod od leta 2024; v starejših ostane oblaček skrit.
+<details name=…> (accordéon exclusif) ¦ <details name=…> (isključiva harmonika) ¦ <details name=…> (izključujoča harmonika)
+loading="lazy" sur les images ¦ loading="lazy" na slikama ¦ loading="lazy" na slikah
+loading="lazy" sur les cadres (iframe) ¦ loading="lazy" na okvirima (iframe) ¦ loading="lazy" na okvirjih (iframe)
+Sans risque : chargé tout de suite ailleurs. ¦ Bez rizika: drugdje se učitava odmah. ¦ Brez tveganja: drugje se naloži takoj.
+Ajoute role="search" pour les plus vieux. ¦ Za starije dodaj role="search". ¦ Za starejše dodaj role="search".
+commandfor / command (boutons sans JS) ¦ commandfor / command (gumbi bez JS-a) ¦ commandfor / command (gumbi brez JS)
+Très récent : garde un petit script de repli. ¦ Vrlo novo: zadrži malu rezervnu skriptu. ¦ Zelo novo: ohrani majhen nadomestni skript.
+Pas sur Safari : le texte restera caché à la recherche. ¦ Ne u Safariju: tekst će ostati skriven pri pretraživanju. ¦ Ne v Safariju: besedilo bo pri iskanju ostalo skrito.
+Seulement Safari : ailleurs c'est une case à cocher normale. ¦ Samo Safari: drugdje je to običan potvrdni okvir. ¦ Samo Safari: drugje je to navadno potrditveno polje.
+Marche partout depuis 2023 ; garde une version JPEG dans un <picture>. ¦ Radi svugdje od 2023.; zadrži JPEG verziju u <picture>. ¦ Deluje povsod od leta 2023; ohrani različico JPEG v <picture>.
+règles de préchargement (speculationrules) ¦ pravila predučitavanja (speculationrules) ¦ pravila prednalaganja (speculationrules)
+Marche partout. ¦ Radi svugdje. ¦ Deluje povsod.
+Marche partout depuis 2023 ; sinon [...t].sort(). ¦ Radi svugdje od 2023.; inače [...t].sort(). ¦ Deluje povsod od leta 2023; sicer [...t].sort().
+Marche partout depuis 2024 ; sinon new Promise((res, rej) => …). ¦ Radi svugdje od 2024.; inače new Promise((res, rej) => …). ¦ Deluje povsod od leta 2024; sicer new Promise((res, rej) => …).
+Récent : sinon new Promise(r => r(f())). ¦ Novo: inače new Promise(r => r(f())). ¦ Novo: sicer new Promise(r => r(f())).
+Seulement dans un <script type="module"> ; marche partout depuis 2022. ¦ Samo u <script type="module">; radi svugdje od 2022. ¦ Samo v <script type="module">; deluje povsod od leta 2022.
+Firefox ne l'a que depuis 2024. ¦ Firefox ga ima tek od 2024. ¦ Firefox ga ima šele od leta 2024.
+Récent : écris la durée à la main pour les plus vieux. ¦ Novo: za starije napiši trajanje ručno. ¦ Novo: za starejše vpiši trajanje ročno.
+Très récent sur Firefox et Safari : garde des liens normaux. ¦ Vrlo novo u Firefoxu i Safariju: zadrži obične poveznice. ¦ Zelo novo v Firefoxu in Safariju: ohrani navadne povezave.
+Vérifie que document.startViewTransition existe avant de l'appeler. ¦ Provjeri postoji li document.startViewTransition prije nego što ga pozoveš. ¦ Preveri, ali document.startViewTransition obstaja, preden ga pokličeš.
+Firefox ne l'a que depuis l'été 2024. ¦ Firefox ga ima tek od ljeta 2024. ¦ Firefox ga ima šele od poletja 2024.
+Récent sur Safari : passe par [...it] pour les plus vieux. ¦ Novo u Safariju: za starije prođi kroz [...it]. ¦ Novo v Safariju: za starejše uporabi [...it].
+Récent : sinon s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'). ¦ Novo: inače s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'). ¦ Novo: sicer s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').
+Pas sur Safari : utilise Date ou une petite bibliothèque. ¦ Ne u Safariju: koristi Date ili malu biblioteku. ¦ Ne v Safariju: uporabi Date ali majhno knjižnico.
+Récent : sinon btoa() / atob(). ¦ Novo: inače btoa() / atob(). ¦ Novo: sicer btoa() / atob().
+champs privés de classe (#x) ¦ privatna polja klase (#x) ¦ zasebna polja razreda (#x)
+Pas sur Safari : vérifie qu'il existe, sinon setTimeout(f, 1). ¦ Ne u Safariju: provjeri postoji li, inače setTimeout(f, 1). ¦ Ne v Safariju: preveri, ali obstaja, sicer setTimeout(f, 1).
+Récent sur Firefox. ¦ Novo u Firefoxu. ¦ Novo v Firefoxu.
+Pas sur Safari : garde un minuteur après scroll. ¦ Ne u Safariju: zadrži mjerač vremena nakon scrolla. ¦ Ne v Safariju: ohrani časovnik po scrollu.
+Seulement Chrome et Edge sur ordinateur : vérifie qu'il existe. ¦ Samo Chrome i Edge na računalu: provjeri postoji li. ¦ Samo Chrome in Edge na računalniku: preveri, ali obstaja.
+Récent : sinon try { new URL(…) } catch. ¦ Novo: inače try { new URL(…) } catch. ¦ Novo: sicer try { new URL(…) } catch.
+Pas sur Safari : vérifie qu'il existe. ¦ Ne u Safariju: provjeri postoji li. ¦ Ne v Safariju: preveri, ali obstaja.
+Marche partout depuis 2022 (seulement en https). ¦ Radi svugdje od 2022. (samo preko https). ¦ Deluje povsod od leta 2022 (samo prek https).
+Sélection directe (points et poignées) ¦ Izravni odabir (točke i ručice) ¦ Neposredni izbor (točke in ročice)
+Plume (clic : point, glisser : courbe) ¦ Pero (klik: točka, povlačenje: krivulja) ¦ Pero (klik: točka, vlečenje: krivulja)
+Crayon (à main levée) ¦ Olovka (prostoručno) ¦ Svinčnik (prostoročno)
+Spirale (glisser depuis le centre) ¦ Spirala (povuci iz središta) ¦ Spirala (vleci iz središča)
+Cote (mesure entre deux points) ¦ Kota (mjera između dviju točaka) ¦ Kota (mera med dvema točkama)
+Main (déplacer la vue) ¦ Ruka (pomicanje prikaza) ¦ Roka (premikanje pogleda)
+Loupe (⌥ : dézoomer) ¦ Povećalo (⌥: smanji) ¦ Lupa (⌥: pomanjšaj)
+Clic : choisir (⇧ : en plus) · glisser : déplacer · poignées : agrandir, ⇧ garde les proportions · rond du haut : tourner (⇧ : par 15°) ¦ Klik: odaberi (⇧: dodatno) · povuci: premjesti · ručice: povećaj, ⇧ čuva omjer · krug na vrhu: okreni (⇧: po 15°) ¦ Klik: izberi (⇧: dodatno) · vleci: premakni · ročice: povečaj, ⇧ ohrani razmerje · krog na vrhu: zavrti (⇧: po 15°)
+Glisse les points et leurs poignées · ⌥ clic sur un point : angle ↔ courbe · ⌫ : supprimer le point · double-clic sur un tracé : ajouter un point ¦ Povlači točke i njihove ručice · ⌥ klik na točku: kut ↔ krivulja · ⌫: izbriši točku · dvostruki klik na putanju: dodaj točku ¦ Vleci točke in njihove ročice · ⌥ klik na točko: kot ↔ krivulja · ⌫: izbriši točko · dvoklik na pot: dodaj točko
+Clic : un point · glisser : une courbe (⌥ : casser la poignée) · ⇧ : angles de 45° · clic sur le 1er point : fermer · ⌫ : retirer le dernier point · Entrée, Échap ou double-clic : terminer · clic sur le bout d’un tracé ouvert choisi : le reprendre ¦ Klik: točka · povlačenje: krivulja (⌥: prelomi ručicu) · ⇧: kutovi od 45° · klik na 1. točku: zatvori · ⌫: ukloni posljednju točku · Enter, Esc ili dvostruki klik: završi · klik na kraj odabrane otvorene putanje: nastavi je ¦ Klik: točka · vlečenje: krivulja (⌥: prelomi ročico) · ⇧: koti po 45° · klik na 1. točko: zapri · ⌫: odstrani zadnjo točko · Enter, Esc ali dvoklik: končaj · klik na konec izbrane odprte poti: nadaljuj jo
+Dessine à main levée : le trait est lissé ¦ Crtaj prostoručno: crta se zaglađuje ¦ Riši prostoročno: črta se zgladi
+Clic : nouveau texte (écris-le dans « Propriétés ») ¦ Klik: novi tekst (napiši ga u „Svojstva”) ¦ Klik: novo besedilo (napiši ga v »Lastnosti«)
+Clic sur un objet : sa couleur et son trait vont à la sélection ¦ Klik na objekt: njegova boja i crta prenose se na odabir ¦ Klik na predmet: njegova barva in črta se preneseta na izbor
+Glisser : déplacer la vue (ou barre d’espace, ou la molette) ¦ Povlačenje: pomakni prikaz (ili razmaknica, ili kotačić) ¦ Vlečenje: premakni pogled (ali preslednica ali kolešček)
+Clic : zoomer · ⌥ clic : dézoomer · ⌘ molette partout ¦ Klik: povećaj · ⌥ klik: smanji · ⌘ kotačić svugdje ¦ Klik: povečaj · ⌥ klik: pomanjšaj · ⌘ kolešček povsod
+Glisse depuis le centre : la taille et le départ de la spirale ¦ Povuci iz središta: veličina i početak spirale ¦ Vleci iz središča: velikost in začetek spirale
+Des lignes de fuite par-dessus le dessin (elles ne s’impriment pas). Avec ╱ Ligne et 📏 Cote, le trait s’aligne sur la ligne de fuite, la verticale ou l’horizontale la plus proche (⌘ ou Ctrl : sans). ¦ Linije bijega preko crteža (ne ispisuju se). S ╱ Linijom i 📏 Kotom crta se poravnava s najbližom linijom bijega, okomicom ili vodoravnicom (⌘ ili Ctrl: bez toga). ¦ Bežišne črte čez risbo (ne natisnejo se). Z ╱ Črto in 📏 Koto se črta poravna z najbližjo bežišno črto, navpičnico ali vodoravnico (⌘ ali Ctrl: brez tega).
+Aucune image pour l’instant : choisis un acte, ou glisse une image ici (⌘V pour la coller). ¦ Zasad nema slike: odaberi matični zapis ili ovamo povuci sliku (⌘V za lijepljenje). ¦ Zaenkrat ni slike: izberi matični vpis ali sem povleci sliko (⌘V, da jo prilepiš).
+Gens d’un lieu ¦ Ljudi iz jednog mjesta ¦ Ljudje iz kraja
+</> Écrire dans le code ¦ </> Piši u kodu ¦ </> Piši v kodi
+</> Écrire dans le CSS ¦ </> Piši u CSS-u ¦ </> Piši v CSS
+</> Écrire dans le JS ¦ </> Piši u JS-u ¦ </> Piši v JS
+</> Montrer ou cacher le code ¦ </> Prikaži ili sakrij kod ¦ </> Pokaži ali skrij kodo
+le site à l’écran ¦ web-mjesto na zaslonu ¦ spletno mesto na zaslonu
+Plan du village en 1850 ¦ Plan sela 1850. ¦ Načrt vasi leta 1850

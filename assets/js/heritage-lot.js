@@ -12,6 +12,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => { const I = (typeof window !== 'undefined' ? window : globalThis).LCNDA_I18N; if (v) v = Object.fromEntries(Object.entries(v).map(([k, x]) => [k, typeof x === 'number' ? String(x) : x])); return I ? I.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m)) : s); }; // 🌐 textes traduits (docs/I18N.md) ; nombres gardés tels quels
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const UI = () => window.LCNDA_UI;
@@ -28,9 +29,9 @@
 
     /* ═════ Les recettes gardées (💾 Réglages enregistrés) ═════ */
     const userRecipes = () => { try { const v = JSON.parse(ls(USER_KEY, '[]')); return Array.isArray(v) ? v.filter(x => x && typeof x.name === 'string').slice(0, 80).map(x => ({name: String(x.name).slice(0, 60), date: x.date || '', recipe: B().cleanRecipe(x.recipe)})) : []; } catch (_) { return []; } };
-    const saveRecipes = list => { if (!lsSet(USER_KEY, JSON.stringify(list.slice(0, 80)))) { toast('Plus de place pour enregistrer cette recette.', 'error'); return false; } return true; };
-    const recipeInfo = r => { const c = (r.cards || []).filter(x => x.on); return c.length ? c.map(x => `${B().ACTIONS[x.type].icon} ${B().ACTIONS[x.type].label}`).join(' → ') : 'aucune action'; };
-    const outLabel = o => ({version: 'nouvelle version', copy: 'copie dans les médias', zip: 'ZIP'}[o] || '');
+    const saveRecipes = list => { if (!lsSet(USER_KEY, JSON.stringify(list.slice(0, 80)))) { toast(i18n('Plus de place pour enregistrer cette recette.'), 'error'); return false; } return true; };
+    const recipeInfo = r => { const c = (r.cards || []).filter(x => x.on); return c.length ? c.map(x => `${B().ACTIONS[x.type].icon} ${B().ACTIONS[x.type].label}`).join(' → ') : i18n('aucune action'); };
+    const outLabel = o => ({version: i18n('nouvelle version'), copy: i18n('copie dans les médias'), zip: 'ZIP'}[o] || '');
 
     /* ═════ Ce que le navigateur sait écrire ═════ */
     let avifOk = null;
@@ -58,7 +59,7 @@
     async function blobOf(it) {
         if (it.file) return it.file;
         const r = await fetch(`media/${encodeURIComponent(it.filename)}`, {cache: 'no-cache'});
-        if (!r.ok) throw new Error(`« ${it.name} » : fichier introuvable dans le dossier des médias`);
+        if (!r.ok) throw new Error(i18n('« {name} » : fichier introuvable dans le dossier des médias', {name: it.name}));
         return r.blob();
     }
     /** taille, dimensions, Exif (orientation, GPS) : pour l'aperçu */
@@ -122,17 +123,17 @@
         const pos = {br: [c.width - w - m, c.height - m], bl: [m, c.height - m], tr: [c.width - w - m, m + px], tl: [m, m + px], c: [(c.width - w) / 2, (c.height + px * .7) / 2]}[p.pos] || [m, c.height - m];
         x.fillText(text, pos[0], pos[1]); return c;
     }
-    const toBlob = (c, mime, q) => new Promise((res, rej) => c.toBlob(b => (b ? res(b) : rej(new Error('le navigateur n’a pas pu écrire l’image'))), mime, q));
+    const toBlob = (c, mime, q) => new Promise((res, rej) => c.toBlob(b => (b ? res(b) : rej(new Error(i18n('le navigateur n’a pas pu écrire l’image')))), mime, q));
     /** une image (canvas) → fichier, en tenant un poids max : la qualité baisse d'abord, puis la taille */
     async function encodeCanvas(c, e, q, maxKb, notes) {
         const mime = B().MIME[e] || 'image/png', lossy = ['jpg', 'webp', 'avif'].includes(e);
         if (e === 'jpg') { const w = canvas(c.width, c.height), x = w.getContext('2d'); x.fillStyle = '#ffffff'; x.fillRect(0, 0, w.width, w.height); x.drawImage(c, 0, 0); c = w; } // pas de transparence dans un JPG
         let blob = await toBlob(c, mime, lossy ? q : undefined);
         if (!maxKb || blob.size <= maxKb * 1024) return blob;
-        if (lossy) { let lo = 0.3, hi = q, best = null; for (let k = 0; k < 7; k++) { const mid = (lo + hi) / 2, b = await toBlob(c, mime, mid); if (b.size <= maxKb * 1024) { best = b; lo = mid; } else hi = mid; } if (best) { notes.push(`qualité baissée à ${Math.round(lo * 100)} % pour tenir dans ${maxKb.toLocaleString('fr-FR')} Ko`); return best; } }
+        if (lossy) { let lo = 0.3, hi = q, best = null; for (let k = 0; k < 7; k++) { const mid = (lo + hi) / 2, b = await toBlob(c, mime, mid); if (b.size <= maxKb * 1024) { best = b; lo = mid; } else hi = mid; } if (best) { notes.push(i18n('qualité baissée à {x} % pour tenir dans {x2} Ko', {x: Math.round(lo * 100), x2: maxKb.toLocaleString('fr-FR')})); return best; } }
         let cur = c;
         for (let k = 0; k < 8 && blob.size > maxKb * 1024 && cur.width > 64; k++) { cur = opResize(cur, {by: 'pct', pct: 85, keep: true, noUp: true}); blob = await toBlob(cur, mime, lossy ? 0.3 : undefined); }
-        notes.push(blob.size <= maxKb * 1024 ? `image réduite à ${cur.width} × ${cur.height} px pour tenir dans ${maxKb.toLocaleString('fr-FR')} Ko` : `⚠️ ${B().sizeText(blob.size)} : plus lourd que ${maxKb.toLocaleString('fr-FR')} Ko`);
+        notes.push(blob.size <= maxKb * 1024 ? i18n('image réduite à {width} × {height} px pour tenir dans {x} Ko', {width: cur.width, height: cur.height, x: maxKb.toLocaleString('fr-FR')}) : `⚠️ ${i18n('{x} : plus lourd que {x2} Ko', {x: B().sizeText(blob.size), x2: maxKb.toLocaleString('fr-FR')})}`);
         return blob;
     }
     /** le canvas d'une image après les retouches de la chaîne (rogner, redimensionner, noir et blanc, filigrane), dans l'ordre */
@@ -196,62 +197,62 @@
     }
     async function runAudio(it, row) {
         const blob = await blobOf(it); if (!row.encode) return blob;
-        const E = ext.audioEngine; if (!E?.decode) throw new Error('le moteur du son n’est pas chargé');
+        const E = ext.audioEngine; if (!E?.decode) throw new Error(i18n('le moteur du son n’est pas chargé'));
         const buf = await E.decode(await blob.arrayBuffer());
         const out = await E.encode(row.after.ext, buf, {kbps: 192, tags: {title: row.after.base}});
         return out instanceof Blob ? out : new Blob([out], {type: B().MIME[row.after.ext]});
     }
 
     /* ═════ La fenêtre ═════ */
-    const ROT = [[0, 'Ne pas tourner'], [90, '¼ de tour à droite'], [180, 'Demi-tour'], [270, '¼ de tour à gauche']];
+    const ROT = [[0, i18n('Ne pas tourner')], [90, i18n('¼ de tour à droite')], [180, 'Demi-tour'], [270, i18n('¼ de tour à gauche')]];
     const opt = (list, v) => list.map(([k, l]) => `<option value="${esc(k)}"${String(k) === String(v) ? ' selected' : ''}>${esc(l)}</option>`).join('');
     const num = (k, v, unit, {min = 0, max = 99999, step = 1, label = ''} = {}) => `<label>${esc(label)}<input type="number" data-k="${k}" value="${esc(v)}" min="${min}" max="${max}" step="${step}"${unit ? ` data-unit="${esc(unit)}"` : ''}></label>`;
     const check = (k, v, label) => `<label class="checkbox-line"><input type="checkbox" data-k="${k}"${v ? ' checked' : ''}> ${esc(label)}</label>`;
     function cardFields(c) {
         const p = c.p, Bx = B();
         switch (c.type) {
-            case 'rename': return `<label class="h-lot-wide">Modèle du nom<input type="text" data-k="pattern" value="${esc(p.pattern)}" maxlength="200" spellcheck="false" aria-describedby="h-lot-tk-${c.id}"></label>
-                <div class="h-lot-tokens" id="h-lot-tk-${c.id}" role="group" aria-label="Ajouter au modèle">${Bx.TOKENS.map(([t, l]) => `<button type="button" class="ui-badge is-date h-lot-token" data-token="${esc(t)}" title="Ajouter ${esc(t)} au modèle">＋ ${esc(l)}</button>`).join('')}</div>
-                <label>Texte<input type="text" data-k="text" value="${esc(p.text)}" maxlength="80" placeholder="ex. mariage-1925"></label>
-                ${num('start', p.start, '', {label: 'Commencer à', max: 999999})}${num('step', p.step, '', {label: 'De', min: 1, max: 1000})}${num('digits', p.digits, 'chiffres', {label: 'Séquence sur', min: 1, max: 6})}
-                <label>Chercher<input type="text" data-k="find" value="${esc(p.find)}" maxlength="80" placeholder="ex. IMG_"></label><label>Remplacer par<input type="text" data-k="repl" value="${esc(p.repl)}" maxlength="80" placeholder="(rien)"></label>
-                <label>Lettres<select data-k="cas">${opt([['keep', 'Comme tapé'], ['upper', 'MAJUSCULES'], ['lower', 'minuscules'], ['title', 'Une Majuscule Par Mot']], p.cas)}</select></label>
-                <label>Espaces<select data-k="spaces">${opt([['keep', 'Garder les espaces'], ['dash', 'Des tirets (-)'], ['under', 'Des soulignés (_)']], p.spaces)}</select></label>
-                ${check('noAccents', p.noAccents, 'Sans accents (é → e)')}${check('title', p.title, 'Changer aussi le titre dans les médias')}`;
-            case 'resize': return `<label>Selon<select data-k="by">${opt([['long', 'Le plus grand côté'], ['width', 'La largeur'], ['height', 'La hauteur'], ['box', 'Un cadre largeur × hauteur'], ['pct', 'Un pourcentage']], p.by)}</select></label>
-                <span data-show="long">${num('long', p.long, 'px', {label: 'Plus grand côté', min: 16, max: 16000})}</span>
+            case 'rename': return `<label class="h-lot-wide">${i18n('Modèle du nom')}<input type="text" data-k="pattern" value="${esc(p.pattern)}" maxlength="200" spellcheck="false" aria-describedby="h-lot-tk-${c.id}"></label>
+                <div class="h-lot-tokens" id="h-lot-tk-${c.id}" role="group" aria-label="${esc(i18n('Ajouter au modèle'))}">${Bx.TOKENS.map(([t, l]) => `<button type="button" class="ui-badge is-date h-lot-token" data-token="${esc(t)}" title="${esc(i18n('Ajouter {t} au modèle', {t: esc(t)}))}">＋ ${esc(l)}</button>`).join('')}</div>
+                <label>Texte<input type="text" data-k="text" value="${esc(p.text)}" maxlength="80" placeholder="${esc(i18n('ex. mariage-1925'))}"></label>
+                ${num('start', p.start, '', {label: i18n('Commencer à'), max: 999999})}${num('step', p.step, '', {label: 'De', min: 1, max: 1000})}${num('digits', p.digits, i18n('chiffres'), {label: i18n('Séquence sur'), min: 1, max: 6})}
+                <label>${i18n('Chercher')}<input type="text" data-k="find" value="${esc(p.find)}" maxlength="80" placeholder="ex. IMG_"></label><label>${i18n('Remplacer par')}<input type="text" data-k="repl" value="${esc(p.repl)}" maxlength="80" placeholder="(rien)"></label>
+                <label>Lettres<select data-k="cas">${opt([['keep', i18n('Comme tapé')], ['upper', 'MAJUSCULES'], ['lower', 'minuscules'], ['title', i18n('Une Majuscule Par Mot')]], p.cas)}</select></label>
+                <label>Espaces<select data-k="spaces">${opt([['keep', i18n('Garder les espaces')], ['dash', i18n('Des tirets (-)')], ['under', i18n('Des soulignés (_)')]], p.spaces)}</select></label>
+                ${check('noAccents', p.noAccents, i18n('Sans accents (é → e)'))}${check('title', p.title, i18n('Changer aussi le titre dans les médias'))}`;
+            case 'resize': return `<label>Selon<select data-k="by">${opt([['long', i18n('Le plus grand côté')], ['width', i18n('La largeur')], ['height', i18n('La hauteur')], ['box', i18n('Un cadre largeur × hauteur')], ['pct', i18n('Un pourcentage')]], p.by)}</select></label>
+                <span data-show="long">${num('long', p.long, 'px', {label: i18n('Plus grand côté'), min: 16, max: 16000})}</span>
                 <span data-show="width box">${num('w', p.w, 'px', {label: 'Largeur', min: 16, max: 16000})}</span><span data-show="height box">${num('h', p.h, 'px', {label: 'Hauteur', min: 16, max: 16000})}</span>
                 <span data-show="pct">${num('pct', p.pct, '%', {label: 'Pourcentage', min: 1, max: 400})}</span>
-                ${check('keep', p.keep, 'Garder les proportions')}${check('noUp', p.noUp, 'Ne pas agrandir les petites images')}`;
-            case 'crop': return `${num('margin', p.margin, '%', {label: 'Couper les bords', max: 40, step: .5})}<label>Recadrer au format<select data-k="ratio">${opt(Bx.RATIOS, p.ratio)}</select></label>
+                ${check('keep', p.keep, i18n('Garder les proportions'))}${check('noUp', p.noUp, i18n('Ne pas agrandir les petites images'))}`;
+            case 'crop': return `${num('margin', p.margin, '%', {label: i18n('Couper les bords'), max: 40, step: .5})}<label>${i18n('Recadrer au format')}<select data-k="ratio">${opt(Bx.RATIOS, p.ratio)}</select></label>
                 <label>Tourner<select data-k="rotate">${opt(ROT, p.rotate)}</select></label>${check('flipH', p.flipH, 'Miroir (gauche ↔ droite)')}${check('flipV', p.flipV, 'Retourner (haut ↕ bas)')}`;
-            case 'gray': return `<label>Teinte<select data-k="mode">${opt([['gray', 'Gris'], ['sepia', 'Sépia (photo ancienne)']], p.mode)}</select></label>`;
+            case 'gray': return `<label>Teinte<select data-k="mode">${opt([['gray', 'Gris'], ['sepia', i18n('Sépia (photo ancienne)')]], p.mode)}</select></label>`;
             case 'watermark': return `<label class="h-lot-wide">Texte<input type="text" data-k="text" value="${esc(p.text)}" maxlength="120"></label><label>Place<select data-k="pos">${opt(Bx.POSITIONS, p.pos)}</select></label>
-                ${num('size', p.size, '%', {label: 'Taille (de la largeur)', min: 1, max: 30, step: .5})}<label>Opacité<input type="range" data-k="opacity" min="5" max="100" value="${esc(p.opacity)}" data-unit="%" data-default="60"></label><label>Couleur<input type="color" data-k="color" value="${esc(p.color)}"></label>`;
-            case 'format': return Object.keys(Bx.FORMATS).map(k => `<label>${esc({image: 'Images', doc: 'Documents', sheet: 'Classeurs', audio: 'Sons'}[k])}<select data-k="${k}">${opt(Bx.FORMATS[k].filter(f => f[0] !== 'avif' || avifOk !== false).map(f => (f[0] === 'avif' ? [f[0], 'AVIF (récent, très léger)'] : f)), p[k])}</select></label>`).join('');
-            case 'quality': return `<label>Qualité<input type="range" data-k="q" min="10" max="100" value="${esc(p.q)}" data-unit="%" data-default="85"></label>${num('maxKb', p.maxKb, 'Ko', {label: 'Poids au plus (0 = pas de limite)', max: 50000, step: 10})}
-                <p class="h-lot-hint">JPG, WebP et AVIF. Pour un PNG, le poids baisse en réduisant l’image.</p>`;
-            case 'strip': return '<p class="h-lot-hint">L’appareil, la date de prise, la position GPS, les mots-clés… sont effacés. Pour un JPG ou un PNG sans autre retouche : sans perte (l’image ne change pas).</p>';
-            case 'tags': return `<span class="pk-lab">Étiquettes à ajouter</span>${P().pickerField({name: '', hiddenName: false, kind: 'label', multiple: true, value: p.labels, inline: true})}
-                <span class="pk-lab">Relier à une personne</span>${P().pickerField({name: '', hiddenName: false, kind: 'person', value: p.person ? {id: p.person, title: p.personName || `Fiche n° ${p.person}`} : null, inline: true})}
-                <p class="h-lot-hint">Seulement pour ce qui va dans la base (nouvelle version ou copie), pas pour un ZIP.</p>`;
-            case 'pdf': return `<label class="h-lot-wide">Nom du PDF<input type="text" data-k="name" value="${esc(p.name)}" maxlength="80"></label><label>Pages<select data-k="page">${opt([['a4', 'A4 (l’image centrée)'], ['image', 'À la taille de chaque image']], p.page)}</select></label>
-                ${num('margin', p.margin, 'mm', {label: 'Marge', max: 40})}${check('keep', p.keep, 'Garder aussi chaque image à part')}`;
+                ${num('size', p.size, '%', {label: i18n('Taille (de la largeur)'), min: 1, max: 30, step: .5})}<label>${i18n('Opacité')}<input type="range" data-k="opacity" min="5" max="100" value="${esc(p.opacity)}" data-unit="%" data-default="60"></label><label>Couleur<input type="color" data-k="color" value="${esc(p.color)}"></label>`;
+            case 'format': return Object.keys(Bx.FORMATS).map(k => `<label>${esc({image: 'Images', doc: 'Documents', sheet: 'Classeurs', audio: 'Sons'}[k])}<select data-k="${k}">${opt(Bx.FORMATS[k].filter(f => f[0] !== 'avif' || avifOk !== false).map(f => (f[0] === 'avif' ? [f[0], i18n('AVIF (récent, très léger)')] : f)), p[k])}</select></label>`).join('');
+            case 'quality': return `<label>${i18n('Qualité')}<input type="range" data-k="q" min="10" max="100" value="${esc(p.q)}" data-unit="%" data-default="85"></label>${num('maxKb', p.maxKb, 'Ko', {label: i18n('Poids au plus (0 = pas de limite)'), max: 50000, step: 10})}
+                <p class="h-lot-hint">${i18n('JPG, WebP et AVIF. Pour un PNG, le poids baisse en réduisant l’image.')}</p>`;
+            case 'strip': return `<p class="h-lot-hint">${i18n('L’appareil, la date de prise, la position GPS, les mots-clés… sont effacés. Pour un JPG ou un PNG sans autre retouche : sans perte (l’image ne change pas).')}</p>`;
+            case 'tags': return `<span class="pk-lab">${i18n('Étiquettes à ajouter')}</span>${P().pickerField({name: '', hiddenName: false, kind: 'label', multiple: true, value: p.labels, inline: true})}
+                <span class="pk-lab">${i18n('Relier à une personne')}</span>${P().pickerField({name: '', hiddenName: false, kind: 'person', value: p.person ? {id: p.person, title: p.personName || i18n('Fiche n° {person}', {person: p.person})} : null, inline: true})}
+                <p class="h-lot-hint">${i18n('Seulement pour ce qui va dans la base (nouvelle version ou copie), pas pour un ZIP.')}</p>`;
+            case 'pdf': return `<label class="h-lot-wide">${i18n('Nom du PDF')}<input type="text" data-k="name" value="${esc(p.name)}" maxlength="80"></label><label>Pages<select data-k="page">${opt([['a4', i18n('A4 (l’image centrée)')], ['image', i18n('À la taille de chaque image')]], p.page)}</select></label>
+                ${num('margin', p.margin, 'mm', {label: 'Marge', max: 40})}${check('keep', p.keep, i18n('Garder aussi chaque image à part'))}`;
         }
         return '';
     }
     function cardHtml(c, i) { // data-i : heritage-dnd.js y retrouve la ligne pour Alt + ↑ / ↓ (il rejoue le glisser-déposer)
         const a = B().ACTIONS[c.type];
         return `<article class="h-lot-card${c.on ? '' : ' is-off'}${c.fold ? ' is-folded' : ''}" data-cid="${esc(c.id)}" data-i="${i}" data-type="${esc(c.type)}">
-            <header class="h-lot-chead"><button type="button" class="dnd-grip h-lot-grip" title="Glisse pour ranger (ou Alt + ↑ / ↓)" aria-label="Ranger « ${esc(a.label)} » (Alt + flèche haut ou bas)">⠿</button>
-                <button type="button" class="h-lot-fold" data-fold aria-expanded="${c.fold ? 'false' : 'true'}" title="${c.fold ? 'Déplier les réglages' : 'Replier les réglages'}"><span class="h-lot-cico" aria-hidden="true">${a.icon}</span><span class="h-lot-ctitle"><b>${esc(a.label)}</b><small data-sum>${esc(B().summary(c))}</small></span><span class="h-lot-car" aria-hidden="true">${c.fold ? '▸' : '▾'}</span></button>
-                <label class="ui-toggle h-lot-on" title="${c.on ? 'Éteindre cette étape (elle reste dans la chaîne)' : 'Rallumer cette étape'}"><input type="checkbox" data-on${c.on ? ' checked' : ''} aria-label="Étape active"><i></i></label>
-                <button type="button" class="icon-button small" data-dup title="Dupliquer" aria-label="Dupliquer">⧉</button><button type="button" class="icon-button small" data-del title="Retirer de la chaîne" aria-label="Retirer de la chaîne">×</button></header>
+            <header class="h-lot-chead"><button type="button" class="dnd-grip h-lot-grip" title="${esc(i18n('Glisse pour ranger (ou Alt + ↑ / ↓)'))}" aria-label="${esc(i18n('Ranger « {label} » (Alt + flèche haut ou bas)', {label: esc(a.label)}))}">⠿</button>
+                <button type="button" class="h-lot-fold" data-fold aria-expanded="${c.fold ? 'false' : 'true'}" title="${c.fold ? i18n('Déplier les réglages') : i18n('Replier les réglages')}"><span class="h-lot-cico" aria-hidden="true">${a.icon}</span><span class="h-lot-ctitle"><b>${esc(a.label)}</b><small data-sum>${esc(B().summary(c))}</small></span><span class="h-lot-car" aria-hidden="true">${c.fold ? '▸' : '▾'}</span></button>
+                <label class="ui-toggle h-lot-on" title="${c.on ? i18n('Éteindre cette étape (elle reste dans la chaîne)') : i18n('Rallumer cette étape')}"><input type="checkbox" data-on${c.on ? ' checked' : ''} aria-label="${esc(i18n('Étape active'))}"><i></i></label>
+                <button type="button" class="icon-button small" data-dup title="${esc(i18n('Dupliquer'))}" aria-label="${esc(i18n('Dupliquer'))}">⧉</button><button type="button" class="icon-button small" data-del title="${esc(i18n('Retirer de la chaîne'))}" aria-label="${esc(i18n('Retirer de la chaîne'))}">×</button></header>
             <div class="h-lot-cbody" data-ui-scope>${cardFields(c)}</div></article>`;
     }
 
     function openBatch(o = {}) {
-        if (!B()) { toast('Le moteur des traitements par lot n’est pas chargé : recharge la page.', 'error'); return null; }
+        if (!B()) { toast(i18n('Le moteur des traitements par lot n’est pas chargé : recharge la page.'), 'error'); return null; }
         let recipe = B().cleanRecipe(o.recipe || (() => { try { return JSON.parse(ls(LAST_KEY, 'null')); } catch (_) { return null; } })() || {out: 'zip', cards: [{type: 'rename'}]});
         if (!recipe.cards.length && !o.recipe) recipe.cards.push(B().newCard('rename'));
         let files = [], planNow = null, running = false, stop = false, timer = 0, dragId = '';
@@ -259,47 +260,47 @@
         const dlg = document.createElement('dialog');
         dlg.className = 'modal modal-xl h-lot';
         dlg.setAttribute('aria-labelledby', 'h-lot-title');
-        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">OUTILS DE MODIFICATION</span><h2 id="h-lot-title">⚙️ Traitements par lot</h2></div><button type="button" class="icon-button modal-close" data-lot-close aria-label="Fermer">×</button></div>
+        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">${i18n('OUTILS DE MODIFICATION')}</span><h2 id="h-lot-title">⚙️ ${i18n('Traitements par lot')}</h2></div><button type="button" class="icon-button modal-close" data-lot-close aria-label="${esc(i18n('Fermer'))}">×</button></div>
             <div class="h-lot-body">
-                <section class="h-lot-col" aria-labelledby="h-lot-s1"><h3 id="h-lot-s1"><span class="h-lot-num">1</span> Les fichiers <small data-lot-count></small></h3>
-                    <div class="h-lot-row"><button type="button" class="button secondary" data-lot-media title="Photos, documents, classeurs et sons de la base : filtres, recherche, plusieurs à la fois">🖼 Choisir dans les médias…</button><button type="button" class="button secondary small" data-lot-clear hidden>× Tout retirer</button></div>
+                <section class="h-lot-col" aria-labelledby="h-lot-s1"><h3 id="h-lot-s1"><span class="h-lot-num">1</span> ${i18n('Les fichiers')} <small data-lot-count></small></h3>
+                    <div class="h-lot-row"><button type="button" class="button secondary" data-lot-media title="${esc(i18n('Photos, documents, classeurs et sons de la base : filtres, recherche, plusieurs à la fois'))}">🖼 ${i18n('Choisir dans les médias…')}</button><button type="button" class="button secondary small" data-lot-clear hidden>× ${i18n('Tout retirer')}</button></div>
                     <div data-lot-drop></div>
-                    <ul class="h-lot-flist" data-lot-flist aria-label="Fichiers du lot"></ul></section>
-                <section class="h-lot-col" aria-labelledby="h-lot-s2"><h3 id="h-lot-s2"><span class="h-lot-num">2</span> Les actions <small>dans l’ordre</small></h3>
+                    <ul class="h-lot-flist" data-lot-flist aria-label="${esc(i18n('Fichiers du lot'))}"></ul></section>
+                <section class="h-lot-col" aria-labelledby="h-lot-s2"><h3 id="h-lot-s2"><span class="h-lot-num">2</span> ${i18n('Les actions')} <small>${i18n('dans l’ordre')}</small></h3>
                     <div class="h-lot-cards" data-lot-cards data-dnd-off></div>
-                    <button type="button" class="button secondary h-lot-addcard" data-lot-add aria-haspopup="menu">＋ Ajouter une action ▾</button>
+                    <button type="button" class="button secondary h-lot-addcard" data-lot-add aria-haspopup="menu">＋ ${i18n('Ajouter une action ▾')}</button>
                     <div data-lot-presets></div></section>
-                <section class="h-lot-col" aria-labelledby="h-lot-s3"><h3 id="h-lot-s3"><span class="h-lot-num">3</span> Voilà ce qui va se passer</h3>
-                    <fieldset class="h-lot-out"><legend>Le résultat</legend>
-                        <label class="checkbox-line"><input type="radio" name="h-lot-out" value="version"> 🗂 Nouvelle version du média <small>l’original reste dans ses versions</small></label>
-                        <label class="checkbox-line"><input type="radio" name="h-lot-out" value="copy"> ⧉ Copie dans les médias <small>reliée aux mêmes fiches</small></label>
-                        <label class="checkbox-line"><input type="radio" name="h-lot-out" value="zip"> ⤓ Un ZIP à télécharger <small>rien ne change dans la base</small></label></fieldset>
+                <section class="h-lot-col" aria-labelledby="h-lot-s3"><h3 id="h-lot-s3"><span class="h-lot-num">3</span> ${i18n('Voilà ce qui va se passer')}</h3>
+                    <fieldset class="h-lot-out"><legend>${i18n('Le résultat')}</legend>
+                        <label class="checkbox-line"><input type="radio" name="h-lot-out" value="version"> 🗂 ${i18n('Nouvelle version du média')} <small>${i18n('l’original reste dans ses versions')}</small></label>
+                        <label class="checkbox-line"><input type="radio" name="h-lot-out" value="copy"> ⧉ ${i18n('Copie dans les médias')} <small>${i18n('reliée aux mêmes fiches')}</small></label>
+                        <label class="checkbox-line"><input type="radio" name="h-lot-out" value="zip"> ⤓ ${i18n('Un ZIP à télécharger')} <small>${i18n('rien ne change dans la base')}</small></label></fieldset>
                     <div data-lot-plan aria-live="polite"></div></section>
             </div>
-            <div class="modal-actions"><span class="h-lot-status" data-lot-status aria-live="polite"></span><span class="spacer"></span><button type="button" class="button secondary" data-lot-cancel>Annuler</button><button type="button" class="button" data-lot-run data-shortcut="⌘↩">▶ Lancer</button></div>`;
+            <div class="modal-actions"><span class="h-lot-status" data-lot-status aria-live="polite"></span><span class="spacer"></span><button type="button" class="button secondary" data-lot-cancel>${i18n('Annuler')}</button><button type="button" class="button" data-lot-run data-shortcut="⌘↩">▶ Lancer</button></div>`;
         document.body.appendChild(dlg);
         const $ = s => dlg.querySelector(s);
         const U = UI();
         // E4 : glisser-déposer, coller, choisir sur l'ordinateur
         const ACCEPT = 'image/*,.jpg,.jpeg,.png,.webp,.avif,.gif,.bmp,.docx,.odt,.rtf,.md,.txt,.html,.htm,.pdf,.xlsx,.ods,.csv,.tsv,.mp3,.wav,.ogg,.flac,.m4a,.aiff';
-        if (U?.dropZone) $('[data-lot-drop]').appendChild(U.dropZone({accept: ACCEPT, multiple: true, text: '', hint: 'Images, documents (Word, LibreOffice, RTF, Markdown, texte, page web, PDF), classeurs (Excel, LibreOffice, CSV) et sons.', onFiles: fl => addFiles([...fl].map(fromFile))}));
+        if (U?.dropZone) $('[data-lot-drop]').appendChild(U.dropZone({accept: ACCEPT, multiple: true, text: window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? i18n('📁 Glisse ici les fichiers, colle-les (⌘V) ou choisis-les sur l’ordinateur') : '', hint: i18n('Images, documents (Word, LibreOffice, RTF, Markdown, texte, page web, PDF), classeurs (Excel, LibreOffice, CSV) et sons.'), onFiles: fl => addFiles([...fl].map(fromFile))}));
         // 💾 les recettes
         const builtinN = () => B().BUILTIN.length;
-        const all = () => [...B().BUILTIN.map(b => ({name: `${b.name} (prêt)`, date: '', recipe: b.recipe, builtin: true})), ...userRecipes()];
+        const all = () => [...B().BUILTIN.map(b => ({name: i18n('{name} (prêt)', {name: b.name}), date: '', recipe: b.recipe, builtin: true})), ...userRecipes()];
         if (U?.presetsFrame) {
             const today = () => new Date().toISOString();
-            const fr = U.presetsFrame({id: 'traitements-lot', title: 'Recettes enregistrées', what: 'cette chaîne d’actions et la sortie', quietApply: true, list: () => all().map(x => ({name: x.name, date: x.date})),
-                apply: i => { const x = all()[i]; if (!x) return false; recipe = B().cleanRecipe(JSON.parse(JSON.stringify(x.recipe))); recipe.cards.forEach(c => { c.id = B().newCard(c.type).id; }); drawCards(); drawOut(); schedule(); remember(); toast(`Recette « ${x.name} » appliquée.`); return false; },
+            const fr = U.presetsFrame({id: 'traitements-lot', title: i18n('Recettes enregistrées'), what: i18n('cette chaîne d’actions et la sortie'), quietApply: true, list: () => all().map(x => ({name: x.name, date: x.date})),
+                apply: i => { const x = all()[i]; if (!x) return false; recipe = B().cleanRecipe(JSON.parse(JSON.stringify(x.recipe))); recipe.cards.forEach(c => { c.id = B().newCard(c.type).id; }); drawCards(); drawOut(); schedule(); remember(); toast(i18n('Recette « {name} » appliquée.', {name: x.name})); return false; },
                 save: name => { const l = userRecipes(), it = {name, date: today(), recipe: B().cleanRecipe(recipe)}, k = l.findIndex(x => x.name === name); if (k >= 0) l[k] = it; else l.push(it); return saveRecipes(l); },
-                replace: i => { if (i < builtinN()) { toast('Une recette prête ne se remplace pas : enregistre-la sous un autre nom.', 'error'); return false; } const l = userRecipes(); l[i - builtinN()] = {...l[i - builtinN()], date: today(), recipe: B().cleanRecipe(recipe)}; return saveRecipes(l); },
+                replace: i => { if (i < builtinN()) { toast(i18n('Une recette prête ne se remplace pas : enregistre-la sous un autre nom.'), 'error'); return false; } const l = userRecipes(); l[i - builtinN()] = {...l[i - builtinN()], date: today(), recipe: B().cleanRecipe(recipe)}; return saveRecipes(l); },
                 rename: (i, name) => { if (i < builtinN()) return false; const l = userRecipes(); l[i - builtinN()].name = name; return saveRecipes(l); },
                 duplicate: i => { const x = all()[i]; if (!x) return false; const l = userRecipes(); l.push({name: U.freeName(x.name.replace(/ \(prêt\)$/, '').replace(/^\S+\s/, x.builtin ? '' : '$&'), l.map(y => y.name)), date: today(), recipe: x.recipe}); return saveRecipes(l); },
                 exportOne: i => { const x = all()[i]; if (!x) return false; const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify({lcnda: 'reglage', outil: 'traitements-lot', nom: x.name, version: 1, donnees: x.recipe}, null, 1)], {type: 'application/json'})); a.download = `lcnda-reglage-traitements-lot-${B().noAccents(x.name).replace(/[^A-Za-z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase().slice(0, 40) || 'recette'}.json`; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); return false; },
-                remove: i => { if (i < builtinN()) { toast('Une recette prête ne se supprime pas.', 'error'); return false; } const l = userRecipes(), it = l[i - builtinN()]; A().undoLocalChange(`Recette « ${it.name} » supprimée`, [USER_KEY], () => { l.splice(i - builtinN(), 1); saveRecipes(l); }, () => fr.isConnected && fr.refresh()); },
+                remove: i => { if (i < builtinN()) { toast(i18n('Une recette prête ne se supprime pas.'), 'error'); return false; } const l = userRecipes(), it = l[i - builtinN()]; A().undoLocalChange(i18n('Recette « {name} » supprimée', {name: it.name}), [USER_KEY], () => { l.splice(i - builtinN(), 1); saveRecipes(l); }, () => fr.isConnected && fr.refresh()); },
                 importOne: async () => { const f = await new Promise(ok => { const inp = document.createElement('input'); inp.type = 'file'; inp.accept = '.json,application/json'; inp.dataset.kDirect = ''; inp.addEventListener('change', () => ok(inp.files?.[0] || null), {once: true}); inp.click(); }); if (!f) return false;
-                    let d; try { d = JSON.parse(await f.text()); } catch (_) { toast('Ce fichier n’est pas une recette LCNDA.', 'error'); return false; }
-                    if (d?.lcnda !== 'reglage' || d.outil !== 'traitements-lot' || !d.donnees) { toast('Ce fichier n’est pas une recette des traitements par lot.', 'error'); return false; }
-                    const l = userRecipes(), name = String(d.nom || 'Recette importée').replace(/[<>"`]/g, '').replace(/ \(prêt\)$/, '').slice(0, 60); l.push({name: l.some(x => x.name === name) ? U.freeName(name, l.map(x => x.name)) : name, date: today(), recipe: B().cleanRecipe(d.donnees)}); return saveRecipes(l); }});
+                    let d; try { d = JSON.parse(await f.text()); } catch (_) { toast(i18n('Ce fichier n’est pas une recette LCNDA.'), 'error'); return false; }
+                    if (d?.lcnda !== 'reglage' || d.outil !== 'traitements-lot' || !d.donnees) { toast(i18n('Ce fichier n’est pas une recette des traitements par lot.'), 'error'); return false; }
+                    const l = userRecipes(), name = String(d.nom || i18n('Recette importée')).replace(/[<>"`]/g, '').replace(/ \(prêt\)$/, '').slice(0, 60); l.push({name: l.some(x => x.name === name) ? U.freeName(name, l.map(x => x.name)) : name, date: today(), recipe: B().cleanRecipe(d.donnees)}); return saveRecipes(l); }});
             $('[data-lot-presets]').appendChild(fr);
         }
 
@@ -310,14 +311,14 @@
             $('[data-lot-clear]').hidden = n < 2;
             ul.innerHTML = n ? files.map(f => `<li class="h-lot-file${f.bad ? ' is-bad' : ''}" data-uid="${f.uid}" tabindex="0" aria-label="${esc(f.name)}"><span class="h-lot-fth">${f.thumb ? `<img src="${esc(f.thumb)}" alt="" loading="lazy">` : `<span aria-hidden="true">${B().KIND_ICON[f.kind] || '📁'}</span>`}</span>
                 <span class="h-lot-fname"><b>${esc(f.name)}</b><small>${esc([f.base ? '🗂 base' : '💻 ordinateur', B().KIND_LABEL[f.kind], f.w ? `${f.w} × ${f.h} px` : '', B().sizeText(f.bytes), f.bad || (f.ready ? '' : '…')].filter(Boolean).join(' · '))}</small></span>
-                <button type="button" class="icon-button small" data-lot-rm="${f.uid}" title="Retirer du lot" aria-label="Retirer « ${esc(f.name)} » du lot">×</button></li>`).join('')
-                : `<li class="h-lot-empty">${A().empty('Aucun fichier pour l’instant', {icon: '🗂', action: {label: '🖼 Choisir dans les médias…', attrs: 'data-empty-click="[data-lot-media]"'}})}</li>`;
+                <button type="button" class="icon-button small" data-lot-rm="${f.uid}" title="${esc(i18n('Retirer du lot'))}" aria-label="${esc(i18n('Retirer « {name} » du lot', {name: esc(f.name)}))}">×</button></li>`).join('')
+                : `<li class="h-lot-empty">${A().empty(i18n('Aucun fichier pour l’instant'), {icon: '🗂', action: {label: `🖼 ${i18n('Choisir dans les médias…')}`, attrs: 'data-empty-click="[data-lot-media]"'}})}</li>`;
         }
         async function addFiles(list) {
             const seen = new Set(files.map(f => (f.base ? `b${f.id}` : `p${f.file.name}${f.file.size}${f.file.lastModified}`)));
             const fresh = list.filter(f => { const k = f.base ? `b${f.id}` : `p${f.file.name}${f.file.size}${f.file.lastModified}`; if (seen.has(k)) return false; seen.add(k); return true; });
             const room = 500 - files.length;
-            if (fresh.length > room) toast(`500 fichiers au plus par lot : ${plural(fresh.length - Math.max(0, room), 'fichier')} de côté.`, 'error');
+            if (fresh.length > room) toast(i18n('500 fichiers au plus par lot : {x} de côté.', {x: plural(fresh.length - Math.max(0, room), 'fichier')}), 'error');
             files.push(...fresh.slice(0, Math.max(0, room)));
             drawFiles(); schedule();
             await namePeople(fresh);
@@ -330,7 +331,7 @@
         /* — la chaîne — */
         function drawCards() {
             const box = $('[data-lot-cards]');
-            box.innerHTML = recipe.cards.length ? recipe.cards.map(cardHtml).join('') : A().empty('Aucune action : ajoute-en une', {icon: '⚙️', action: {label: '＋ Ajouter une action', attrs: 'data-empty-click="[data-lot-add]"'}});
+            box.innerHTML = recipe.cards.length ? recipe.cards.map(cardHtml).join('') : A().empty(i18n('Aucune action : ajoute-en une'), {icon: '⚙️', action: {label: `＋ ${i18n('Ajouter une action')}`, attrs: 'data-empty-click="[data-lot-add]"'}});
             box.querySelectorAll('.h-lot-card').forEach(showFields);
         }
         const cardOf = el => recipe.cards.find(c => c.id === el.closest('[data-cid]')?.dataset.cid);
@@ -354,21 +355,21 @@
             const box = $('[data-lot-plan]'), run = $('[data-lot-run]');
             const pl = planNow = B().plan(files, recipe, {out: recipe.out, avif: avifOk !== false});
             const act = pl.rows.filter(r => r.todo), chg = pl.rows.filter(r => r.changed && r.todo);
-            run.textContent = act.length ? `▶ Lancer sur ${plural(act.length, 'fichier')}` : '▶ Lancer';
+            run.textContent = act.length ? `▶ ${i18n('Lancer sur {x}', {x: plural(act.length, 'fichier')})}` : '▶ Lancer';
             run.disabled = !act.length || files.some(f => !f.ready);
-            if (!files.length) { box.innerHTML = A().empty('Choisis d’abord des fichiers : chaque changement s’affichera ici avant de lancer.', {icon: '👀'}); setStatus(''); return; }
-            const badge = r => ({version: U.badge('Nouvelle version', 'blue'), meta: U.badge('Titre et liens', 'blue'), copy: U.badge('Copie', 'green'), new: U.badge('Nouveau média', 'green'), zip: U.badge('Dans le ZIP', 'grey'), pdf: U.badge('Dans le PDF', 'grey'), none: U.badge('Rien ne change', 'grey'), skip: U.badge('Laissé de côté', 'yellow')}[r.mode] || '');
+            if (!files.length) { box.innerHTML = A().empty(i18n('Choisis d’abord des fichiers : chaque changement s’affichera ici avant de lancer.'), {icon: '👀'}); setStatus(''); return; }
+            const badge = r => ({version: U.badge(i18n('Nouvelle version'), 'blue'), meta: U.badge(i18n('Titre et liens'), 'blue'), copy: U.badge('Copie', 'green'), new: U.badge(i18n('Nouveau média'), 'green'), zip: U.badge(i18n('Dans le ZIP'), 'grey'), pdf: U.badge(i18n('Dans le PDF'), 'grey'), none: U.badge(i18n('Rien ne change'), 'grey'), skip: U.badge(i18n('Laissé de côté'), 'yellow')}[r.mode] || '');
             const arrow = (a, b) => (a === b ? `<span>${esc(a)}</span>` : `<span class="h-lot-was">${esc(a)}</span> → <b>${esc(b)}</b>`);
-            box.innerHTML = `${pl.warnings.map(w => U.notice('warn', w)).join('')}${pl.pdf ? U.notice('info', `📄 « ${pl.pdf.name} » : ${plural(pl.pdf.pages, 'page')} (${pl.pdf.page === 'a4' ? 'A4' : 'à la taille des images'})${recipe.out === 'zip' ? ', dans le ZIP' : ', rangé dans les médias'}.`) : ''}
-                <p class="h-lot-sum">${esc(plural(files.length, 'fichier'))} · <b>${esc(plural(chg.length, 'change', 'changent'))}</b>${recipe.out === 'zip' ? ' · rien ne change dans la base' : ''}</p>
+            box.innerHTML = `${pl.warnings.map(w => U.notice('warn', w)).join('')}${pl.pdf ? U.notice('info', `📄 « ${pl.pdf.name} » : ${plural(pl.pdf.pages, 'page')} (${pl.pdf.page === 'a4' ? 'A4' : i18n('à la taille des images')})${recipe.out === 'zip' ? i18n(', dans le ZIP') : i18n(', rangé dans les médias')}.`) : ''}
+                <p class="h-lot-sum">${esc(plural(files.length, 'fichier'))} · <b>${esc(plural(chg.length, 'change', 'changent'))}</b>${recipe.out === 'zip' ? ` · ${i18n('rien ne change dans la base')}` : ''}</p>
                 <ol class="h-lot-plan">${pl.rows.map(r => { const f = files[r.i];
                     const dims = r.kind === 'image' && r.before.w ? arrow(`${r.before.w} × ${r.before.h}`, `${r.after.w} × ${r.after.h}`) + ' px' : '';
                     return `<li class="h-lot-prow${r.changed ? '' : ' is-same'}"><span class="h-lot-pth">${f.thumb ? `<img src="${esc(f.thumb)}" alt="" loading="lazy">` : `<span aria-hidden="true">${B().KIND_ICON[r.kind] || '📁'}</span>`}</span>
                         <span class="h-lot-pmain"><span class="h-lot-pname">${arrow(r.before.name, r.after.name)}</span>
-                        <small>${[dims, arrow(r.before.fmt, r.after.fmt), r.before.bytes ? B().sizeText(r.before.bytes) : '', r.gps && !r.ops.includes('strip') ? '📍 position GPS dans la photo' : ''].filter(Boolean).join(' · ')}</small>
+                        <small>${[dims, arrow(r.before.fmt, r.after.fmt), r.before.bytes ? B().sizeText(r.before.bytes) : '', r.gps && !r.ops.includes('strip') ? `📍 ${i18n('position GPS dans la photo')}` : ''].filter(Boolean).join(' · ')}</small>
                         ${r.notes.length ? `<small class="h-lot-notes">${r.notes.map(esc).join(' · ')}</small>` : ''}</span>${badge(r)}</li>`; }).join('')}</ol>`;
             const waiting = files.filter(f => !f.ready).length;
-            setStatus(waiting ? `${U.spinner(`Lecture des fichiers… (${waiting})`)}` : '', true);
+            setStatus(waiting ? `${U.spinner(i18n('Lecture des fichiers… ({waiting})', {waiting}))}` : '', true);
         }
         const setStatus = (t, html = false) => { const s = $('[data-lot-status]'); if (html) s.innerHTML = t; else s.textContent = t; };
 
@@ -380,8 +381,8 @@
             if (!todo.length && !pl.pdf) return;
             running = true; stop = false; const total = todo.filter(r => r.mode !== 'pdf').length + (pl.pdf ? 1 : 0);
             const box = $('[data-lot-plan]'), run = $('[data-lot-run]'), cancel = $('[data-lot-cancel]');
-            dlg.classList.add('is-running'); run.disabled = true; cancel.textContent = '■ Arrêter';
-            box.innerHTML = `<div class="h-lot-prog"><progress max="${total}" value="0" data-lot-bar></progress><div data-lot-now>${U.spinner('On commence…')}</div></div><ol class="h-lot-plan h-lot-done" data-lot-done></ol>`;
+            dlg.classList.add('is-running'); run.disabled = true; cancel.textContent = `■ ${i18n('Arrêter')}`;
+            box.innerHTML = `<div class="h-lot-prog"><progress max="${total}" value="0" data-lot-bar></progress><div data-lot-now>${U.spinner(i18n('On commence…'))}</div></div><ol class="h-lot-plan h-lot-done" data-lot-done></ol>`;
             const bar = $('[data-lot-bar]'), now = $('[data-lot-now]'), done = $('[data-lot-done]');
             const zip = [], pages = [], tg = [...recipe.cards].reverse().find(c => c.on && c.type === 'tags');
             let token = '', ok = 0, bad = 0, k = 0;
@@ -391,7 +392,7 @@
                 Object.entries(fields).forEach(([key, v]) => fd.append(key, v == null ? '' : String(v)));
                 if (blob) fd.append('file', blob, fname);
                 const r = await fetch('api.php?action=lot_item', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}});
-                const j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'})); if (!r.ok || j.error) throw new Error(j.error || `Erreur ${r.status}`); return j.result;
+                const j = await r.json().catch(() => ({error: i18n('Réponse illisible du serveur')})); if (!r.ok || j.error) throw new Error(j.error || `Erreur ${r.status}`); return j.result;
             };
             const tagFields = () => (tg ? {label_ids: tg.p.labels.join(','), person_id: tg.p.person || ''} : {});
             try {
@@ -415,7 +416,7 @@
                                 it.title = res.title || it.title; it.name = `${B().safeName(it.title)}.${B().extOf(it.filename) || r.after.ext}`;
                                 if (it.kind === 'image') it.thumb = `media/${encodeURIComponent(it.filename)}`;
                             }
-                            line(`${r.before.name} → ${r.after.name}`, true, [{version: 'nouvelle version', copy: 'copie rangée', new: 'rangé dans les médias', meta: 'titre et liens'}[r.mode], blob ? B().sizeText(blob.size) : '', ...notes].filter(Boolean).join(' · '));
+                            line(`${r.before.name} → ${r.after.name}`, true, [{version: i18n('nouvelle version'), copy: i18n('copie rangée'), new: i18n('rangé dans les médias'), meta: i18n('titre et liens')}[r.mode], blob ? B().sizeText(blob.size) : '', ...notes].filter(Boolean).join(' · '));
                         }
                         ok++;
                     } catch (err) { bad++; line(r.before.name, false, err.message || String(err)); }
@@ -423,28 +424,28 @@
                 }
                 if (pl.pdf && pages.length && !stop) {
                     now.innerHTML = U.spinner(`${pl.pdf.name} : ${plural(pages.length, 'page')}…`);
-                    const mk = ext.vectorInternals?.makePdf; if (!mk) throw new Error('le fabricant de PDF n’est pas chargé');
+                    const mk = ext.vectorInternals?.makePdf; if (!mk) throw new Error(i18n('le fabricant de PDF n’est pas chargé'));
                     const pdf = mk(pages, pl.pdf.name.replace(/\.pdf$/, ''));
                     if (recipe.out === 'zip') zip.push({name: pl.pdf.name, data: new Uint8Array(await pdf.arrayBuffer()), store: true});
                     else await sendItem({mode: 'new', media_id: 0, name: pl.pdf.name, title: pl.pdf.name.replace(/\.pdf$/, ''), ...tagFields()}, pdf, pl.pdf.name);
                     line(`📄 ${pl.pdf.name}`, true, `${plural(pages.length, 'page')} · ${B().sizeText(pdf.size)}`); ok++; bar.value = ++k;
                 }
                 if (zip.length) {
-                    now.innerHTML = U.spinner('Le ZIP…');
+                    now.innerHTML = U.spinner(i18n('Le ZIP…'));
                     const blob = await window.LCNDA_SHEET.makeZip(uniqueZip(zip));
-                    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `traitement-par-lot-${B().today()}.zip`; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+                    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = i18n('traitement-par-lot-{x}.zip', {x: B().today()}); document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
                     dlg.dataset.zipSize = String(blob.size); dlg._lastZip = blob;
                 }
-            } catch (err) { bad++; line('Le lot', false, err.message || String(err)); }
-            running = false; dlg.classList.remove('is-running'); cancel.textContent = 'Fermer'; run.disabled = false; run.textContent = '▶ Relancer';
-            const what = `${plural(ok, 'fichier')} traité${ok > 1 ? 's' : ''}${bad ? `, ${plural(bad, 'erreur')}` : ''}${stop ? ' (arrêté)' : ''}`;
-            now.innerHTML = U.notice(bad ? 'warn' : 'ok', recipe.out === 'zip' ? `${what} · ⤓ le ZIP est téléchargé.` : `${what} · rangé dans les médias.`);
+            } catch (err) { bad++; line(i18n('Le lot'), false, err.message || String(err)); }
+            running = false; dlg.classList.remove('is-running'); cancel.textContent = i18n('Fermer'); run.disabled = false; run.textContent = '▶ Relancer';
+            const what = `${i18n(ok > 1 ? '{files} traités' : '{files} traité', {files: plural(ok, 'fichier'), n: ok})}${bad ? `, ${plural(bad, 'erreur')}` : ''}${stop ? ` ${i18n('(arrêté)')}` : ''}`;
+            now.innerHTML = U.notice(bad ? 'warn' : 'ok', recipe.out === 'zip' ? i18n('{what} · ⤓ le ZIP est téléchargé.', {what}) : i18n('{what} · rangé dans les médias.', {what}));
             setStatus('');
             if (token && ok) {
                 const tok = token;
-                A().undoToast(`⚙️ ${what}`, {undo: async () => { await post('lot_undo', {token: tok}); A().refreshMediaViews?.(); if (dlg.isConnected) { files.forEach(f => { f.ready = false; }); await Promise.all(files.filter(f => f.base).map(async f => { try { const r = await api('picker_search', {kind: 'media', ids: String(f.id), limit: 1}); const m = (r.groups || [])[0]?.items?.[0]; if (m) { f.filename = m.filename; f.title = m.title; } } catch (_) {} await analyse(f); })); drawFiles(); drawPlan(); } }, undoneText: `Traitement par lot : ${what}`});
+                A().undoToast(`⚙️ ${what}`, {undo: async () => { await post('lot_undo', {token: tok}); A().refreshMediaViews?.(); if (dlg.isConnected) { files.forEach(f => { f.ready = false; }); await Promise.all(files.filter(f => f.base).map(async f => { try { const r = await api('picker_search', {kind: 'media', ids: String(f.id), limit: 1}); const m = (r.groups || [])[0]?.items?.[0]; if (m) { f.filename = m.filename; f.title = m.title; } } catch (_) {} await analyse(f); })); drawFiles(); drawPlan(); } }, undoneText: i18n('Traitement par lot : {what}', {what})});
                 if (ok) o.onDone?.();
-            } else if (recipe.out === 'zip' && ok) toast(`⚙️ ${what} · ⤓ ZIP téléchargé.`, 'success');
+            } else if (recipe.out === 'zip' && ok) toast(`⚙️ ${i18n('{what} · ⤓ ZIP téléchargé.', {what})}`, 'success');
             dlg.dataset.lotDone = String(ok); dlg.dataset.lotBad = String(bad); dlg.dataset.lotToken = token;
             // les fichiers de la base ont changé de version : l'aperçu repart de là
             for (const f of files.filter(x => x.base)) { f.ready = false; }
@@ -461,22 +462,22 @@
             if (b.matches('[data-lot-close]')) return close();
             if (b.matches('[data-lot-cancel]')) return close();
             if (b.matches('[data-lot-run]')) return runAll();
-            if (b.matches('[data-lot-clear]')) { const keep = files; files = []; drawFiles(); schedule(); A().undoToast(`${plural(keep.length, 'fichier')} retiré${keep.length > 1 ? 's' : ''} du lot`, {undo: () => { files = keep; drawFiles(); schedule(); }}); return; }
+            if (b.matches('[data-lot-clear]')) { const keep = files; files = []; drawFiles(); schedule(); A().undoToast(i18n(keep.length > 1 ? '{files} retirés du lot' : '{files} retiré du lot', {files: plural(keep.length, 'fichier'), n: keep.length}), {undo: () => { files = keep; drawFiles(); schedule(); }}); return; }
             if (b.matches('[data-lot-rm]')) return removeFile(b.dataset.lotRm);
             if (b.matches('[data-lot-media]')) {
-                const list = await P().openMediaPicker?.({multiple: true, types: ['image', 'document', 'audio'], eyebrow: 'TRAITEMENTS PAR LOT', title: 'Les fichiers à traiter', value: files.filter(f => f.base).map(f => f.id)});
+                const list = await P().openMediaPicker?.({multiple: true, types: ['image', 'document', 'audio'], eyebrow: i18n('TRAITEMENTS PAR LOT'), title: i18n('Les fichiers à traiter'), value: files.filter(f => f.base).map(f => f.id)});
                 if (list?.length) addFiles(list.map(fromMedia));
                 return;
             }
             if (b.matches('[data-lot-add]')) {
                 const items = B().ORDER.map(t => ({icon: B().ACTIONS[t].icon, label: B().ACTIONS[t].label, help: B().ACTIONS[t].help, run: () => addCard(t)}));
-                return U.menuAt(b, items, {title: 'Ajouter une action'});
+                return U.menuAt(b, items, {title: i18n('Ajouter une action')});
             }
             const card = b.closest('.h-lot-card'); if (!card) return;
             const c = cardOf(card);
-            if (b.matches('[data-fold]')) { c.fold = !c.fold; card.classList.toggle('is-folded', c.fold); b.setAttribute('aria-expanded', String(!c.fold)); b.title = c.fold ? 'Déplier les réglages' : 'Replier les réglages'; b.querySelector('.h-lot-car').textContent = c.fold ? '▸' : '▾'; return; }
+            if (b.matches('[data-fold]')) { c.fold = !c.fold; card.classList.toggle('is-folded', c.fold); b.setAttribute('aria-expanded', String(!c.fold)); b.title = c.fold ? i18n('Déplier les réglages') : i18n('Replier les réglages'); b.querySelector('.h-lot-car').textContent = c.fold ? '▸' : '▾'; return; }
             if (b.matches('[data-dup]')) { const i = recipe.cards.indexOf(c), copy = {...JSON.parse(JSON.stringify(c)), id: B().newCard(c.type).id}; recipe.cards.splice(i + 1, 0, copy); drawCards(); remember(); schedule(); return; }
-            if (b.matches('[data-del]')) { const i = recipe.cards.indexOf(c); recipe.cards.splice(i, 1); drawCards(); remember(); schedule(); A().undoToast(`Action « ${B().ACTIONS[c.type].label} » retirée`, {undo: () => { recipe.cards.splice(i, 0, c); drawCards(); remember(); schedule(); }}); return; }
+            if (b.matches('[data-del]')) { const i = recipe.cards.indexOf(c); recipe.cards.splice(i, 1); drawCards(); remember(); schedule(); A().undoToast(i18n('Action « {x} » retirée', {x: B().ACTIONS[c.type].label}), {undo: () => { recipe.cards.splice(i, 0, c); drawCards(); remember(); schedule(); }}); return; }
             if (b.matches('[data-token]')) { const inp = card.querySelector('[data-k=pattern]'); const s = inp.selectionStart ?? inp.value.length, en = inp.selectionEnd ?? s; inp.value = inp.value.slice(0, s) + b.dataset.token + inp.value.slice(en); inp.focus(); inp.setSelectionRange(s + b.dataset.token.length, s + b.dataset.token.length); readCard(card); }
         });
         dlg.addEventListener('input', e => { const card = e.target.closest('.h-lot-card'); if (card && e.target.matches('[data-k]')) readCard(card); });
@@ -525,12 +526,12 @@
 
     /* ═════ Dans 🛠️ Outils de modification : les recettes gardées ═════ */
     ext.editToolsExtra = ext.editToolsExtra || [];
-    ext.editToolsExtra.push({key: 'lot', icon: '⚙️', label: 'Traitements par lot', what: 'traitement par lot',
+    ext.editToolsExtra.push({key: 'lot', icon: '⚙️', label: i18n('Traitements par lot'), what: i18n('traitement par lot'),
         load: async () => userRecipes().map((x, i) => ({id: i + 1, name: x.name, date: x.date, thumb: `<span class="h-et-ico">${esc(B().ACTIONS[x.recipe.cards.find(c => c.on)?.type || 'rename'].icon)}</span>`, info: `${recipeInfo(x.recipe)} · ${outLabel(x.recipe.out)}`})),
         open: (id, again) => { const x = userRecipes()[id - 1]; if (x) openBatch({recipe: x.recipe, onClose: again}); },
         create: again => openBatch({onClose: again}),
         rename: (id, name) => { const l = userRecipes(); if (!l[id - 1]) return; l[id - 1].name = name.slice(0, 60); saveRecipes(l); },
-        remove: id => { const l = userRecipes(); l.splice(id - 1, 1); saveRecipes(l); }, createLabel: '＋ Nouveau traitement',
-        extra: '<button type="button" class="button secondary" data-et-x="web" title="1 600 px au plus, JPG 82 %, sans la position GPS : prêtes à envoyer ou à mettre en ligne">🌐 Photos pour le web</button><button type="button" class="button secondary" data-et-x="seq" title="photo-001, photo-002… (et le titre dans les médias)">🔢 Renommer en séquence</button><button type="button" class="button secondary" data-et-x="pdf" title="Des scans ou des photos d’actes réunis dans un seul PDF, une page par image">📄 Scans en PDF</button>',
+        remove: id => { const l = userRecipes(); l.splice(id - 1, 1); saveRecipes(l); }, createLabel: `＋ ${i18n('Nouveau traitement')}`,
+        extra: `<button type="button" class="button secondary" data-et-x="web" title="${esc(i18n('1 600 px au plus, JPG 82 %, sans la position GPS : prêtes à envoyer ou à mettre en ligne'))}">🌐 ${i18n('Photos pour le web')}</button><button type="button" class="button secondary" data-et-x="seq" title="${esc(i18n('photo-001, photo-002… (et le titre dans les médias)'))}">🔢 ${i18n('Renommer en séquence')}</button><button type="button" class="button secondary" data-et-x="pdf" title="${esc(i18n('Des scans ou des photos d’actes réunis dans un seul PDF, une page par image'))}">📄 ${i18n('Scans en PDF')}</button>`,
         onExtra: (k, again) => { const b = B().BUILTIN[{web: 0, seq: 1, pdf: 2}[k]]; if (b) openBatch({recipe: b.recipe, onClose: again}); }});
 })();

@@ -1,0 +1,56 @@
+encoding: utf-8
+gwplus
+
+fam DUPONT Jean_Pierre #occu Laboureur 12/3/1780 #bp Saint-Martin-de-Ré,_17 !13/3/1780 #pp Saint-Martin-de-Ré,_17 k~1815 #dp Waterloo,_Belgique #buri 1815 +25/11/1805 #mp La_Rochelle,_17 #ms Registre_paroissial MARTIN Marie_Anne.1 {Marianne} #occu Couturière ~1785 #bp Ars-en-Ré 4/2/1850 #dp La_Rochelle
+wit m: BERNARD Louis #occu Tonnelier 1770
+src Archives départementales de Charente-Maritime, 2 E 291
+csrc Registres de Saint-Martin
+comm Mariage célébré en présence des deux familles
+fevt
+#marr 25/11/1805 #p La_Rochelle,_17 #s Registre_paroissial
+wit: #offi BERNARD Louis
+wnote curé de la paroisse
+note Contrat passé devant notaire la veille.
+#marc 24/11/1805 #p La_Rochelle,_17
+end fevt
+beg
+- h Pierre 1/8/1806 #bp Saint-Martin-de-Ré,_17 1880
+- f Jeanne 5/1808 <1890
+- h Louis_Auguste 1/1/14F #bs Acte_n°12 0(au_printemps_1870)
+end
+
+fam DUPONT Pierre + #nm DURAND Rose 1810|1811 #bp Nieul
+beg
+- f Rose LEGRAND 1835..1836 od
+end
+
+fam ? ? + ? ?
+beg
+- h Enfant_trouvé 1820
+end
+
+notes DUPONT Jean_Pierre
+beg
+Soldat de la Grande Armée.
+Mort au combat selon la tradition familiale.
+end notes
+
+pevt DUPONT Jean_Pierre
+#birt 12/3/1780 #p Saint-Martin-de-Ré,_17 #s Registre_BMS
+wit: #godp DUPONT Paul.2 1750
+#mser 1803 #p Boulogne-sur-Mer
+note Grenadier au 3e régiment.
+#Légion_d'honneur 1810
+end pevt
+
+rel DUPONT Pierre
+beg
+- godp fath: BERNARD Louis
+- adop: GIRAUD Paul + LEBLANC Anne
+end
+
+notes-db
+Base de démonstration
+end notes-db
+
+fam DUPONT Paul.2 1750 + MARTIN Lucie 1755 2/1/1812J

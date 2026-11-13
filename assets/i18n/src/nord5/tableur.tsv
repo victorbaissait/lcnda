@@ -1,0 +1,1013 @@
+fr ¦ hr ¦ sl
+TABLEUR · BASE ¦ PRORAČUNSKA TABLICA · BAZA ¦ PREGLEDNICA · BAZA
+⤒ Remplir depuis l’app ¦ ⤒ Popuni iz aplikacije ¦ ⤒ Izpolni iz aplikacije
+1 · Ce qu’on prend ¦ 1 · Što se uzima ¦ 1 · Kaj vzamemo
+(comme l’export pour partager) ¦ (kao izvoz za dijeljenje) ¦ (kot izvoz za deljenje)
+2 · Les colonnes ¦ 2 · Stupci ¦ 2 · Stolpci
+(glisse ⠿ pour ranger) ¦ (povuci ⠿ za redoslijed) ¦ (povleci ⠿ za razvrščanje)
+＋ Une colonne tirée des données ¦ ＋ Stupac iz podataka ¦ ＋ Stolpec iz podatkov
+3 · Aperçu ¦ 3 · Pregled ¦ 3 · Predogled
+🔗 Tenir à jour ¦ 🔗 Održavaj ažurnim ¦ 🔗 Sproti posodabljaj
+— les lignes changent quand la base change (à l’ouverture, ou avec ↻). Tes colonnes ajoutées à droite (formules, notes) restent sur la bonne ligne. ¦ — retci se mijenjaju kad se baza promijeni (pri otvaranju ili s ↻). Tvoji stupci dodani desno (formule, bilješke) ostaju u pravom retku. ¦ — vrstice se spremenijo, ko se spremeni baza (ob odpiranju ali z ↻). Tvoji stolpci, dodani na desni (formule, zapiski), ostanejo v pravi vrstici.
+Où : ¦ Gdje: ¦ Kam:
+à la même place (remplace la plage liée) ¦ na isto mjesto (zamjenjuje povezani raspon) ¦ na isto mesto (zamenja povezan obseg)
+à partir de A1 dans une nouvelle feuille ¦ od A1 u novom listu ¦ od A1 na novem listu
+à partir de {cell} dans cette feuille ¦ od {cell} u ovom listu ¦ od {cell} na tem listu
+⤒ Remplir ¦ ⤒ Popuni ¦ ⤒ Izpolni
+Commune ¦ Općina ¦ Občina
+Pas encore de dépouillement : Listes → 📜 Dépouillements. ¦ Još nema indeksa zapisa: Popisi → 📜 Indeksi zapisa. ¦ Indeksa vpisov še ni: Seznami → 📜 Indeksi vpisov.
+Statistique ¦ Statistika ¦ Statistika
+Hommes et femmes à part ¦ Muškarci i žene odvojeno ¦ Moški in ženske ločeno
+Pas encore de liste à toi : Listes → Mes listes. ¦ Još nemaš svoj popis: Popisi → Moji popisi. ¦ Svojega seznama še nimaš: Seznami → Moji seznami.
+Hommes ¦ Muškarci ¦ Moški
+Femmes ¦ Žene ¦ Ženske
+Inconnu ¦ Nepoznato ¦ Neznano
+Lignée ¦ Loza ¦ Rodovna linija
+Né(e) à ¦ Rođen(a) u ¦ Rojen(a) v
+Nés à partir de ¦ Rođeni od ¦ Rojeni od
+Nés jusqu’à ¦ Rođeni do ¦ Rojeni do
+Nés avant ¦ Rođeni prije ¦ Rojeni pred
+Sorte ¦ Vrsta ¦ Vrsta
+Chercher… (nom, prénom) ¦ Traži… (prezime, ime) ¦ Išči … (priimek, ime)
+Chercher… (nom, sorte, lieu) ¦ Traži… (naziv, vrsta, mjesto) ¦ Išči … (ime, vrsta, kraj)
+👤 personne ¦ 👤 osoba ¦ 👤 oseba
+📍 lieu ¦ 📍 mjesto ¦ 📍 kraj
+📅 date d’acte ¦ 📅 datum isprave ¦ 📅 datum vpisa
+nombre ¦ broj ¦ število
+Monter ¦ Pomakni gore ¦ Premakni gor
+Descendre ¦ Pomakni dolje ¦ Premakni dol
+Retirer la colonne ¦ Ukloni stupac ¦ Odstrani stolpec
+Aucune colonne : ajoute-en une. ¦ Nema stupaca: dodaj jedan. ¦ Ni stolpcev: dodaj enega.
+Lecture de la base… ¦ Čitanje baze… ¦ Branje baze …
+Lecture… ¦ Čitanje… ¦ Branje …
+({shown} premières lignes sur {n}) ¦ (prvih {shown} redaka od {n}) ¦ (prvih {shown} vrstic od {n})
+Rien ne correspond : change les filtres. ¦ Ništa ne odgovara: promijeni filtre. ¦ Nič se ne ujema: spremeni filtre.
+{n} de côté (personnes vivantes ou fiches confidentielles). ¦ Izostavljeno: {n} (žive osobe ili povjerljivi zapisi). ¦ Izpuščeno: {n} (žive osebe ali zaupni zapisi).
+Seules les {n} premières lignes sont prises : précise les filtres. ¦ Uzima se samo prvih {n} redaka: suzi filtre. ¦ Vzame se samo prvih {n} vrstic: zoži filtre.
+⤒ Remplir {n} ¦ ⤒ Popuni ({n}) ¦ ⤒ Izpolni ({n})
+Toutes les colonnes sont déjà là. ¦ Svi su stupci već tu. ¦ Vsi stolpci so že tu.
+Une colonne tirée des données ¦ Stupac iz podataka ¦ Stolpec iz podatkov
+Cette feuille n’est pas liée à la base : Données → « ⤒ Remplir depuis l’app… ». ¦ Ovaj list nije povezan s bazom: Podaci → „⤒ Popuni iz aplikacije…”. ¦ Ta list ni povezan z bazo: Podatki → »⤒ Izpolni iz aplikacije …«.
+Impossible de relire la base : {error} ¦ Baza se ne može ponovno pročitati: {error} ¦ Baze ni mogoče znova prebrati: {error}
+🔗 Déjà à jour : rien n’a changé dans la base. ¦ 🔗 Već ažurno: u bazi se ništa nije promijenilo. ¦ 🔗 Že posodobljeno: v bazi se ni nič spremenilo.
+{n} de plus ¦ još {n} ¦ še {n}
+{n} de moins ¦ {n} manje ¦ {n} manj
+valeurs mises à jour ¦ vrijednosti ažurirane ¦ vrednosti posodobljene
+🔗 « {name} » relue : {what} ({lost}) ¦ 🔗 „{name}” ponovno pročitan: {what} ({lost}) ¦ 🔗 »{name}« znova prebran: {what} ({lost})
+🔗 « {name} » relue : {what} ¦ 🔗 „{name}” ponovno pročitan: {what} ¦ 🔗 »{name}« znova prebran: {what}
+<b>Relevé de recensement</b> · les colonnes de l’année : ¦ <b>Prijepis popisa stanovništva</b> · stupci te godine: ¦ <b>Prepis popisa prebivalstva</b> · stolpci tistega leta:
+Année du recensement ¦ Godina popisa stanovništva ¦ Leto popisa prebivalstva
+📤 Envoyer vers la base… ¦ 📤 Pošalji u bazu… ¦ 📤 Pošlji v bazo …
+🔗 Tenue à jour : <b>{what}</b> · {n} · relue {when} ¦ 🔗 Održava se ažurnim: <b>{what}</b> · {n} · pročitano {when} ¦ 🔗 Sproti posodobljeno: <b>{what}</b> · {n} · prebrano {when}
+la base ¦ baza ¦ baza
+Relire depuis la base ¦ Ponovno pročitaj iz baze ¦ Znova preberi iz baze
+↻ Relire ¦ ↻ Ponovno pročitaj ¦ ↻ Znova preberi
+Changer la source ou les colonnes… ¦ Promijeni izvor ili stupce… ¦ Spremeni vir ali stolpce …
+Envoyer vers la base… ¦ Pošalji u bazu… ¦ Pošlji v bazo …
+Ne plus tenir à jour (garder les valeurs) ¦ Više ne održavaj ažurnim (zadrži vrijednosti) ¦ Ne posodabljaj več (obdrži vrednosti)
+« {name} » n’est plus tenue à jour ¦ „{name}” se više ne održava ažurnim ¦ »{name}« se ne posodablja več
+Relevé : colonnes de {year} ¦ Prijepis: stupci iz godine {year} ¦ Prepis: stolpci iz leta {year}
+Mode consultation : rien ne peut être envoyé vers la base. ¦ Način pregledavanja: ništa se ne može poslati u bazu. ¦ Način ogleda: v bazo ni mogoče poslati ničesar.
+Choisis le tableau à envoyer (sa ligne de titres et ses lignes), puis recommence. ¦ Odaberi tablicu za slanje (redak s naslovima i njezine retke), pa pokušaj ponovno. ¦ Izberi tabelo za pošiljanje (vrstico z naslovi in njene vrstice), nato poskusi znova.
+📤 Envoyer vers la base — {name}, lignes {from} à {to} ¦ 📤 Pošalji u bazu — {name}, retci {from} do {to} ¦ 📤 Pošlji v bazo — {name}, vrstice od {from} do {to}
+1. Les colonnes ¦ 1. Stupci ¦ 1. Stolpci
+2. Voilà ce qui va entrer ¦ 2. Evo što će ući ¦ 2. To bo vstopilo
+3. Envoyer ¦ 3. Pošalji ¦ 3. Pošlji
+Voir ce qui va entrer ¦ Pogledaj što će ući ¦ Poglej, kaj bo vstopilo
+Ce que ça crée : ¦ Što se time stvara: ¦ Kaj se ustvari:
+Colonne ¦ Stupac ¦ Stolpec
+Exemple ¦ Primjer ¦ Primer
+Va dans ¦ Ide u ¦ Gre v
+(sans titre) ¦ (bez naslova) ¦ (brez naslova)
+Champ pour la colonne {col} ¦ Polje za stupac {col} ¦ Polje za stolpec {col}
+Colonnes : {list} ¦ Stupci: {list} ¦ Stolpci: {list}
+aucune pour l’instant ¦ zasad nijedan ¦ zaenkrat nobenega
+Déjà dans la base ¦ Već u bazi ¦ Že v bazi
+Problème ¦ Problem ¦ Težava
+Laissée de côté ¦ Izostavljeno ¦ Izpuščeno
+📤 Créer {n} ¦ 📤 Stvori ({n}) ¦ 📤 Ustvari ({n})
+📤 Rien de nouveau ¦ 📤 Ništa novo ¦ 📤 Nič novega
+📤 Créer {n} et en relier {m} ¦ 📤 Stvori ({n}) i poveži ({m}) ¦ 📤 Ustvari ({n}) in poveži ({m})
+📤 Relier {m} ¦ 📤 Poveži ({m}) ¦ 📤 Poveži ({m})
+📤 Envoyer ¦ 📤 Pošalji ¦ 📤 Pošlji
+Choisis au moins une colonne à envoyer (le nom, par exemple). ¦ Odaberi barem jedan stupac za slanje (na primjer ime). ¦ Izberi vsaj en stolpec za pošiljanje (na primer ime).
+Choisis au moins une colonne. ¦ Odaberi barem jedan stupac. ¦ Izberi vsaj en stolpec.
+Donne l’année du recensement. ¦ Upiši godinu popisa stanovništva. ¦ Vpiši leto popisa prebivalstva.
+Il faut une colonne pour le nom (ou « Nom et prénom »). ¦ Potreban je stupac za prezime (ili „Prezime i ime”). ¦ Potreben je stolpec za priimek (ali »Priimek in ime«).
+Il faut une colonne pour le nom. ¦ Potreban je stupac za prezime. ¦ Potreben je stolpec za priimek.
+Choisis la colonne qui dit la sorte d’événement (Baptême, Décès…). ¦ Odaberi stupac koji kaže vrstu događaja (Krštenje, Smrt…). ¦ Izberi stolpec, ki pove vrsto dogodka (Krst, Smrt …).
+Il manque la sorte d’événement. ¦ Nedostaje vrsta događaja. ¦ Manjka vrsta dogodka.
+Ces lignes sont vides. ¦ Ovi su retci prazni. ¦ Te vrstice so prazne.
+Je compare avec ta base… ¦ Uspoređujem s tvojom bazom… ¦ Primerjam s tvojo bazo …
+Comparaison… ¦ Usporedba… ¦ Primerjava …
+Choisir la fiche de la ligne {row} ¦ Odaberi zapis za redak {row} ¦ Izberi zapis za vrstico {row}
+choisis ▾ ¦ odaberi ▾ ¦ izberi ▾
+Relier à {name} ({meta}) ¦ Poveži sa: {name} ({meta}) ¦ Poveži z: {name} ({meta})
+Laisser de côté ¦ Izostavi ¦ Izpusti
+Des lignes ressemblent à plusieurs fiches : choisis la bonne (sinon elles sont laissées de côté). ¦ Neki retci nalikuju na više zapisa: odaberi pravi (inače se izostavljaju). ¦ Nekatere vrstice so podobne več zapisom: izberi pravega (sicer bodo izpuščene).
+Ligne ¦ Redak ¦ Vrstica
+Ce qui va se passer ¦ Što će se dogoditi ¦ Kaj se bo zgodilo
+Impossible d’envoyer : {error} ¦ Slanje nije uspjelo: {error} ¦ Pošiljanje ni uspelo: {error}
+contient « {text} » : compté comme {n} ¦ sadrži „{text}”: računa se kao {n} ¦ vsebuje »{text}«: šteje se kot {n}
+contient l’erreur « {text} » : laissée vide ¦ sadrži pogrešku „{text}”: ostavljeno prazno ¦ vsebuje napako »{text}«: ostane prazno
+« {text} » n’est pas un nombre : laissé vide ¦ „{text}” nije broj: ostavljeno prazno ¦ »{text}« ni število: ostane prazno
+à trouver ¦ treba pronaći ¦ treba najti
+L’éditeur de diagrammes n’est pas chargé. ¦ Uređivač dijagrama nije učitan. ¦ Urejevalnik diagramov ni naložen.
+L’éditeur de graphiques n’est pas chargé. ¦ Uređivač grafikona nije učitan. ¦ Urejevalnik grafov ni naložen.
+Graphique « {name} » ajouté à Mes graphiques (Graphiques, tableau de bord…). ¦ Grafikon „{name}” dodan u Moje grafikone (Grafikoni, nadzorna ploča…). ¦ Graf »{name}« je dodan med Moje grafe (Grafi, nadzorna plošča …).
+Le navigateur refuse de copier ici : sélectionne la plage et fais {key}. ¦ Preglednik ovdje ne dopušta kopiranje: označi raspon i pritisni {key}. ¦ Brskalnik tukaj ne dovoli kopiranja: označi obseg in pritisni {key}.
+Copié : dans un tableau (Enquêtes → 🧩 Tableaux), colle-le ({key}) : il devient un objet ▦ Tableur, formules comprises. ¦ Kopirano: u ploči (Istrage → 🧩 Ploče) zalijepi ({key}): postaje objekt ▦ Proračunska tablica, zajedno s formulama. ¦ Kopirano: na tabli (Preiskave → 🧩 Table) prilepi ({key}): postane predmet ▦ Preglednica, skupaj s formulami.
+Copié : dans la page d’un recueil, clique une case du tableau et colle ({key}). ¦ Kopirano: na stranici zbirke klikni ćeliju tablice i zalijepi ({key}). ¦ Kopirano: na strani zbirke klikni celico tabele in prilepi ({key}).
+La présentation n’est pas chargée. ¦ Prezentacija nije učitana. ¦ Predstavitev ni naložena.
+… et {n} ¦ … i još {n} ¦ … in še {n}
+Colonnes attendues : {list} ¦ Očekivani stupci: {list} ¦ Pričakovani stolpci: {list}
+(une ou plusieurs) ¦ (jedan ili više) ¦ (eden ali več)
+(facultatif) ¦ (neobavezno) ¦ (neobvezno)
+Les données de « {name} » ¦ Podaci iz „{name}” ¦ Podatki iz »{name}«
+l’outil ¦ alat ¦ orodje
+{name} (données) ¦ {name} (podaci) ¦ {name} (podatki)
+Renvoyer les données là d’où elles viennent ¦ Vrati podatke tamo odakle su došli ¦ Vrni podatke tja, od koder so prišli
+Formules, tri, coller depuis Excel… « Fichier → Enregistrer une copie… » garde aussi ce classeur dans le Tableur. ¦ Formule, sortiranje, lijepljenje iz Excela… „Datoteka → Spremi kopiju…” čuva i ovu radnu knjigu u Proračunskoj tablici. ¦ Formule, razvrščanje, lepljenje iz Excela … »Datoteka → Shrani kopijo …« ohrani ta delovni zvezek tudi v Preglednici.
+Rien à ouvrir : la liste est vide. ¦ Nema se što otvoriti: popis je prazan. ¦ Ni kaj odpreti: seznam je prazen.
+🧾 Tableur ¦ 🧾 Proračunska tablica ¦ 🧾 Preglednica
+ouvrir dans le tableur ¦ otvori u proračunskoj tablici ¦ odpri v preglednici
+🧾 Ouvrir dans le tableur ¦ 🧾 Otvori u proračunskoj tablici ¦ 🧾 Odpri v preglednici
+La feuille est vide : écris ou colle un tableau, puis choisis-le. ¦ List je prazan: upiši ili zalijepi tablicu, pa je označi. ¦ List je prazen: vpiši ali prilepi tabelo, nato jo označi.
+TABLEUR · PRÉPARER POUR… ¦ PRORAČUNSKA TABLICA · PRIPREMI ZA… ¦ PREGLEDNICA · PRIPRAVI ZA …
+🎯 Préparer pour… ({range}) ¦ 🎯 Pripremi za… ({range}) ¦ 🎯 Pripravi za … ({range})
+Le tableur sait ce que chaque endroit de l’app attend : choisis où vont ces données. Il vérifie les colonnes de la plage <b>{range}</b> et les range comme il faut. ¦ Proračunska tablica zna što svaki dio aplikacije očekuje: odaberi kamo idu ovi podaci. Provjerit će stupce raspona <b>{range}</b> i rasporediti ih kako treba. ¦ Preglednica ve, kaj pričakuje vsak del aplikacije: izberi, kam gredo ti podatki. Preverila bo stolpce obsega <b>{range}</b> in jih uredila, kot je treba.
+Dessin ¦ Crtež ¦ Risba
+▦ Un tableau ¦ ▦ Tablica ¦ ▦ Tabela
+Il faut une colonne de chiffres ¦ Potreban je stupac s brojkama ¦ Potreben je stolpec s številkami
+📊 Un graphique ¦ 📊 Grafikon ¦ 📊 Graf
+Dans la plage ¦ U rasponu ¦ V obsegu
+, une ou plusieurs ¦ , jedan ili više ¦ , eden ali več
+, facultatif ¦ , neobavezno ¦ , neobvezno
+Voir la cellule ¦ Pogledaj ćeliju ¦ Poglej celico
+… et {n} à vérifier. ¦ … i još {n} za provjeru. ¦ … in še {n} za preverjanje.
+Il manque une colonne : ajoute-la dans la plage, ou choisis une autre plage. ¦ Nedostaje stupac: dodaj ga u raspon ili odaberi drugi raspon. ¦ Manjka stolpec: dodaj ga v obseg ali izberi drug obseg.
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) ¦ Zadrži vezu: dijagram prati proračunsku tablicu (ažurira se kad se raspon promijeni) ¦ Ohrani povezavo: diagram sledi preglednici (posodobi se, ko se obseg spremeni)
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) — le classeur sera enregistré dans le Tableur ¦ Zadrži vezu: dijagram prati proračunsku tablicu (ažurira se kad se raspon promijeni) — radna knjiga bit će spremljena u Proračunskoj tablici ¦ Ohrani povezavo: diagram sledi preglednici (posodobi se, ko se obseg spremeni) — delovni zvezek bo shranjen v Preglednici
+← Autre endroit ¦ ← Drugo mjesto ¦ ← Drugo mesto
+La première ligne donne les titres ¦ Prvi redak sadrži naslove ¦ Prva vrstica vsebuje naslove
+Pas d’aperçu. ¦ Nema pregleda. ¦ Ni predogleda.
+🎤 Créer la présentation ¦ 🎤 Stvori prezentaciju ¦ 🎤 Ustvari predstavitev
+Corrige la cellule, puis rouvre « 🎯 Préparer pour… ». ¦ Ispravi ćeliju, pa ponovno otvori „🎯 Pripremi za…”. ¦ Popravi celico, nato znova odpri »🎯 Pripravi za …«.
+Ces données reviennent dans leur outil : le diagramme est fait d’une copie (pas de lien). ¦ Ovi se podaci vraćaju u svoj alat: dijagram je napravljen od kopije (bez veze). ¦ Ti podatki se vrnejo v svoje orodje: diagram je narejen iz kopije (brez povezave).
+Choisis une plage avec des nombres (par exemple : Décennie, Hommes, Femmes). ¦ Odaberi raspon s brojevima (na primjer: Desetljeće, Muškarci, Žene). ¦ Izberi obseg s števili (na primer: Desetletje, Moški, Ženske).
+Tous les types de diagrammes… ¦ Sve vrste dijagrama… ¦ Vse vrste diagramov …
+Conseillés pour {range} ¦ Preporučeno za {range} ¦ Priporočeno za {range}
+🔗 Données : « {name} » ! {range} ¦ 🔗 Podaci: „{name}” ! {range} ¦ 🔗 Podatki: »{name}« ! {range}
+Classeur ¦ Radna knjiga ¦ Delovni zvezek
+(feuille « {name} ») ¦ (list „{name}”) ¦ (list »{name}«)
+tenu à jour ¦ održava se ažurnim ¦ sproti posodobljeno
+Les figer ¦ Zamrzni ih ¦ Zamrzni jih
+⚠️ Classeur introuvable (supprimé ?) : le dessin garde les derniers chiffres lus. ¦ ⚠️ Radna knjiga nije pronađena (izbrisana?): crtež zadržava zadnje pročitane brojke. ¦ ⚠️ Delovnega zvezka ni mogoče najti (izbrisan?): risba ohrani zadnje prebrane številke.
+TABLEUR ¦ PRORAČUNSKA TABLICA ¦ PREGLEDNICA
+Nom du classeur… ¦ Naziv radne knjige… ¦ Ime delovnega zvezka …
+Plage illisible : écris par exemple A1:C12. ¦ Nečitljiv raspon: upiši na primjer A1:C12. ¦ Neberljiv obseg: vpiši na primer A1:C12.
+Feuille ¦ List ¦ List
+Plage ¦ Raspon ¦ Obseg
+Copier une fois (les chiffres ne bougent plus) ¦ Kopiraj jednom (brojke se više ne mijenjaju) ¦ Kopiraj enkrat (številke se ne spreminjajo več)
+Garder le lien : le diagramme suit le classeur (tenu à jour) ¦ Zadrži vezu: dijagram prati radnu knjigu (održava se ažurnim) ¦ Ohrani povezavo: diagram sledi delovnemu zvezku (sproti posodobljeno)
+Lecture du classeur… ¦ Čitanje radne knjige… ¦ Branje delovnega zvezka …
+Choisis un classeur. ¦ Odaberi radnu knjigu. ¦ Izberi delovni zvezek.
+Écris une plage, par exemple A1:C12. ¦ Upiši raspon, na primjer A1:C12. ¦ Vpiši obseg, na primer A1:C12.
+Écris le résultat voulu dans la première case de la colonne (par exemple « Jean D. »), puis relance ✨ Remplissage instantané. ¦ Upiši željeni rezultat u prvu ćeliju stupca (na primjer „Jean D.”), pa ponovno pokreni ✨ Trenutačno popunjavanje. ¦ Vpiši želeni rezultat v prvo celico stolpca (na primer »Jean D.«), nato znova zaženi ✨ Hitro izpolnjevanje.
+Je ne trouve pas de règle qui marche pour tous les exemples : écris-en un de plus, ou un plus simple. ¦ Ne nalazim pravilo koje vrijedi za sve primjere: upiši još jedan ili jednostavniji. ¦ Ne najdem pravila, ki bi veljalo za vse primere: vpiši še enega ali preprostejšega.
+Rien à remplir : la colonne est déjà pleine. ¦ Nema se što popuniti: stupac je već pun. ¦ Ni kaj izpolniti: stolpec je že poln.
+{what} de {col} ¦ {what} iz {col} ¦ {what} iz {col}
+{what} n°{n} de {col} ¦ {what} br. {n} iz {col} ¦ {what} št. {n} iz {col}
+{what} n°{n} depuis la fin de {col} ¦ {what} br. {n} od kraja {col} ¦ {what} št. {n} od konca {col}
+✨ {n} (règle : {rule}). ↶ pour annuler. ¦ ✨ {n} (pravilo: {rule}). ↶ za poništavanje. ¦ ✨ {n} (pravilo: {rule}). ↶ za razveljavitev.
+Choisis un tableau avec une ligne de titres et des lignes de données. ¦ Odaberi tablicu s retkom naslova i retcima podataka. ¦ Izberi tabelo z vrstico naslovov in vrsticami podatkov.
+Colonne {col} ¦ Stupac {col} ¦ Stolpec {col}
+DONNÉES ¦ PODACI ¦ PODATKI
+Σ Sous-totaux ¦ Σ Međuzbrojevi ¦ Σ Vmesne vsote
+Créer les sous-totaux ¦ Stvori međuzbrojeve ¦ Ustvari vmesne vsote
+D’après <b>{range}</b>. Une nouvelle feuille : les lignes rangées par groupe, un total sous chaque groupe (formules), puis le total général. « ⊟ Plan » (menu Données) replie le détail. ¦ Prema <b>{range}</b>. Novi list: retci razvrstani po skupinama, zbroj ispod svake skupine (formule), zatim ukupni zbroj. „⊟ Struktura” (izbornik Podaci) sažima pojedinosti. ¦ Glede na <b>{range}</b>. Nov list: vrstice, razvrščene po skupinah, vsota pod vsako skupino (formule), nato skupna vsota. »⊟ Oris« (meni Podatki) strne podrobnosti.
+À chaque changement de ¦ Pri svakoj promjeni u ¦ Ob vsaki spremembi v
+Calcul ¦ Izračun ¦ Izračun
+Sur les colonnes ¦ Na stupcima ¦ Na stolpcih
+Coche au moins une colonne à calculer. ¦ Označi barem jedan stupac za izračun. ¦ Označi vsaj en stolpec za izračun.
+Σ {n}. « ⊟ Plan » (menu Données) replie le détail. ¦ Σ {n}. „⊟ Struktura” (izbornik Podaci) sažima pojedinosti. ¦ Σ {n}. »⊟ Oris« (meni Podatki) strne podrobnosti.
+Cette feuille n’a pas de sous-totaux : Données → Σ Sous-totaux… d’abord. ¦ Ovaj list nema međuzbrojeve: najprije Podaci → Σ Međuzbrojevi…. ¦ Ta list nima vmesnih vsot: najprej Podatki → Σ Vmesne vsote ….
+⊟ Détail replié : seuls les totaux restent. ¦ ⊟ Pojedinosti sažete: ostaju samo zbrojevi. ¦ ⊟ Podrobnosti strnjene: ostanejo samo vsote.
+⊞ Détail déplié. ¦ ⊞ Pojedinosti proširene. ¦ ⊞ Podrobnosti razširjene.
+🎯 Valeur cible ¦ 🎯 Traženje cilja ¦ 🎯 Iskanje cilja
+L’app essaie des valeurs dans « la case à changer » jusqu’à ce que la formule donne le résultat voulu. Ex. : à quel âge s’est-il marié pour que la différence d’âge soit 7 ans ? ¦ Aplikacija isprobava vrijednosti u „ćeliji za promjenu” dok formula ne da željeni rezultat. Npr.: s koliko se godina oženio da bi razlika u godinama bila 7 godina? ¦ Aplikacija preizkuša vrednosti v »celici za spremembo«, dokler formula ne da želenega rezultata. Npr.: pri koliko letih se je poročil, da bi bila starostna razlika 7 let?
+La formule de la case ¦ Formula ćelije ¦ Formula celice
+Doit donner ¦ Mora dati ¦ Mora dati
+En changeant la case ¦ Mijenjanjem ćelije ¦ S spreminjanjem celice
+Écris une adresse de case (ex. C5, B2). ¦ Upiši adresu ćelije (npr. C5, B2). ¦ Vpiši naslov celice (npr. C5, B2).
+Écris le résultat voulu. ¦ Upiši željeni rezultat. ¦ Vpiši želeni rezultat.
+La première case doit contenir une formule. ¦ Prva ćelija mora sadržavati formulu. ¦ Prva celica mora vsebovati formulo.
+Pas de valeur trouvée : la formule ne dépend peut-être pas de cette case, ou ne peut pas atteindre ce résultat. ¦ Nije pronađena vrijednost: formula možda ne ovisi o toj ćeliji ili ne može doći do tog rezultata. ¦ Vrednosti ni bilo mogoče najti: formula morda ni odvisna od te celice ali ne more doseči tega rezultata.
+🎯 {cell} = {value} : la formule donne {target}. ↶ pour annuler. ¦ 🎯 {cell} = {value}: formula daje {target}. ↶ za poništavanje. ¦ 🎯 {cell} = {value}: formula da {target}. ↶ za razveljavitev.
+INSERTION ¦ UMETANJE ¦ VSTAVLJANJE
+📈 Mini-graphique ¦ 📈 Mini-grafikon ¦ 📈 Mini graf
+Poser ¦ Umetni ¦ Vstavi
+Un petit graphique dans la case, qui suit les chiffres. Plusieurs lignes choisies : un graphique par ligne (la plage descend avec elles). ¦ Mali grafikon u ćeliji koji prati brojke. Više odabranih redaka: jedan grafikon po retku (raspon se spušta s njima). ¦ Majhen graf v celici, ki sledi številkam. Več izbranih vrstic: en graf na vrstico (obseg se pomika navzdol z njimi).
+Les nombres (plage de la 1re ligne) ¦ Brojevi (raspon 1. retka) ¦ Števila (obseg 1. vrstice)
+Gagné / perdu ¦ Dobitak / gubitak ¦ Zmaga / poraz
+Couleur ¦ Boja ¦ Barva
+Écris une plage, par exemple B2:F2. ¦ Upiši raspon, na primjer B2:F2. ¦ Vpiši obseg, na primer B2:F2.
+🧮 Solveur ¦ 🧮 Rješavač ¦ 🧮 Reševalec
+Résoudre ¦ Riješi ¦ Reši
+Comme la valeur cible, mais en changeant plusieurs cases à la fois, avec des conditions. Ex. : répartir un héritage entre trois branches pour que chacune ait au moins 1 000 € et que l’écart soit le plus petit possible. ¦ Kao traženje cilja, ali mijenja više ćelija odjednom, uz uvjete. Npr.: podijeli nasljedstvo na tri grane tako da svaka dobije barem 1 000 € i da razlika bude što manja. ¦ Kot iskanje cilja, a spreminja več celic hkrati, s pogoji. Npr.: razdeli dediščino med tri veje tako, da vsaka dobi vsaj 1 000 € in da je razlika čim manjša.
+La formule (case objectif) ¦ Formula (ciljna ćelija) ¦ Formula (ciljna celica)
+Doit être ¦ Mora biti ¦ Mora biti
+la plus grande possible ¦ što veća ¦ čim večja
+la plus petite possible ¦ što manja ¦ čim manjša
+égale à… ¦ jednaka… ¦ enaka …
+Valeur (si « égale à ») ¦ Vrijednost (ako je „jednaka”) ¦ Vrednost (če je »enaka«)
+En changeant les cases ¦ Mijenjanjem ćelija ¦ S spreminjanjem celic
+B2:B4 ou B2;C3 ¦ B2:B4 ili B2;C3 ¦ B2:B4 ali B2;C3
+Conditions (une par ligne : {examples}) ¦ Uvjeti (jedan po retku: {examples}) ¦ Pogoji (en na vrstico: {examples})
+Nombres entiers seulement ¦ Samo cijeli brojevi ¦ Samo cela števila
+La case objectif doit contenir une formule (ex. D5). ¦ Ciljna ćelija mora sadržavati formulu (npr. D5). ¦ Ciljna celica mora vsebovati formulo (npr. D5).
+Trente cases à changer au plus. ¦ Najviše trideset ćelija za promjenu. ¦ Največ trideset celic za spremembo.
+Écris les cases à changer (ex. B2:B4). ¦ Upiši ćelije za promjenu (npr. B2:B4). ¦ Vpiši celice za spremembo (npr. B2:B4).
+Condition illisible : « {text} » (ex. B2 >= 0). ¦ Nečitljiv uvjet: „{text}” (npr. B2 >= 0). ¦ Neberljiv pogoj: »{text}« (npr. B2 >= 0).
+Écris la valeur voulue. ¦ Upiši željenu vrijednost. ¦ Vpiši želeno vrednost.
+Pas de solution qui respecte toutes les conditions (vérifie-les, ou change le départ). ¦ Nema rješenja koje zadovoljava sve uvjete (provjeri ih ili promijeni početnu točku). ¦ Ni rešitve, ki bi izpolnila vse pogoje (preveri jih ali spremeni izhodišče).
+🧮 Trouvé : {cell} = {value} ({n}). ↶ pour annuler. ¦ 🧮 Pronađeno: {cell} = {value} ({n}). ↶ za poništavanje. ¦ 🧮 Najdeno: {cell} = {value} ({n}). ↶ za razveljavitev.
+📋 Tableau de scénarios ¦ 📋 Tablica scenarija ¦ 📋 Tabela scenarijev
+Et si cette case valait 20, 25, 30… ? Le tableau montre ce que donnent les formules pour chaque valeur. Il est posé à partir de la case choisie ({cell}) ; rien d’autre ne change. ¦ Što ako bi ova ćelija iznosila 20, 25, 30…? Tablica pokazuje što formule daju za svaku vrijednost. Postavlja se od odabrane ćelije ({cell}); ništa se drugo ne mijenja. ¦ Kaj če bi bila ta celica 20, 25, 30 …? Tabela pokaže, kaj dajo formule za vsako vrednost. Postavi se od izbrane celice ({cell}); nič drugega se ne spremeni.
+La case qui change ¦ Ćelija koja se mijenja ¦ Celica, ki se spreminja
+Ses valeurs (séparées par « ; », ou une plage) ¦ Njezine vrijednosti (odvojene s „;” ili raspon) ¦ Njene vrednosti (ločene z »;« ali obseg)
+20;25;30 ou A10:A15 ¦ 20;25;30 ili A10:A15 ¦ 20;25;30 ali A10:A15
+Les formules à suivre ¦ Formule koje treba pratiti ¦ Formule, ki jim slediš
+Écris la case qui change (ex. B2). ¦ Upiši ćeliju koja se mijenja (npr. B2). ¦ Vpiši celico, ki se spreminja (npr. B2).
+Écris au moins une formule (ex. C5). ¦ Upiši barem jednu formulu (npr. C5). ¦ Vpiši vsaj eno formulo (npr. C5).
+Écris des valeurs (500 au plus). ¦ Upiši vrijednosti (najviše 500). ¦ Vpiši vrednosti (največ 500).
+📋 {n} (valeurs fixes : refais-le si les données changent). ¦ 📋 {n} (fiksne vrijednosti: ponovi ako se podaci promijene). ¦ 📋 {n} (stalne vrednosti: ponovi, če se podatki spremenijo).
+Rien n’a été enregistré. ¦ Ništa nije snimljeno. ¦ Nič ni bilo posneto.
+⏺ Nommer l’action ¦ ⏺ Imenuj radnju ¦ ⏺ Poimenuj dejanje
+Mon action ¦ Moja radnja ¦ Moje dejanje
+Garder ¦ Zadrži ¦ Obdrži
+⏺ Action « {name} » gardée : Données → ▶ Actions enregistrées. ¦ ⏺ Radnja „{name}” zadržana: Podaci → ▶ Snimljene radnje. ¦ ⏺ Dejanje »{name}« je shranjeno: Podatki → ▶ Posneta dejanja.
+⏺ Enregistrement : fais tes manipulations (menus, boutons, formats), puis Données → ⏹ Arrêter l’enregistrement. ¦ ⏺ Snimanje: napravi svoje korake (izbornici, gumbi, formati), pa Podaci → ⏹ Zaustavi snimanje. ¦ ⏺ Snemanje: naredi svoje korake (meniji, gumbi, oblike), nato Podatki → ⏹ Ustavi snemanje.
+Aucune action enregistrée : Données → ⏺ Enregistrer une action. ¦ Nema snimljenih radnji: Podaci → ⏺ Snimi radnju. ¦ Ni posnetih dejanj: Podatki → ⏺ Posnemi dejanje.
+▶ Actions enregistrées ¦ ▶ Snimljene radnje ¦ ▶ Posneta dejanja
+Elles se refont sur la sélection du moment. ¦ Ponavljaju se na trenutačnom odabiru. ¦ Ponovijo se na trenutni izbiri.
+▶ Refaire ¦ ▶ Ponovi ¦ ▶ Ponovi
+▶ « {name} » refaite. ¦ ▶ „{name}” ponovljena. ¦ ▶ »{name}« ponovljeno.
+Colonne {n} ¦ Stupac {n} ¦ Stolpec {n}
+{what} de « {col} » ¦ {what} iz „{col}” ¦ {what} iz »{col}«
+Lignes ¦ Retci ¦ Vrstice
+Total ¦ Ukupno ¦ Skupaj
+{title} · par « {rows} » et « {cols} » — d’après {src} ¦ {title} · po „{rows}” i „{cols}” — prema {src} ¦ {title} · po »{rows}« in »{cols}« — glede na {src}
+{title} · par « {rows} » — d’après {src} ¦ {title} · po „{rows}” — prema {src} ¦ {title} · po »{rows}« — glede na {src}
+Choisis une plage avec une ligne de titres et des lignes de données (par exemple : Nom, Commune, Année, Âge). ¦ Odaberi raspon s retkom naslova i retcima podataka (na primjer: Ime, Općina, Godina, Dob). ¦ Izberi obseg z vrstico naslovov in vrsticami podatkov (na primer: Ime, Občina, Leto, Starost).
+🔀 Tableau croisé dynamique ¦ 🔀 Zaokretna tablica ¦ 🔀 Vrtilna tabela
+Créer le tableau croisé ¦ Stvori zaokretnu tablicu ¦ Ustvari vrtilno tabelo
+D’après <b>{range}</b> ({n}). Le résultat va dans une nouvelle feuille ; « ↻ Actualiser le tableau croisé » (menu Données) le refait si les données changent. ¦ Prema <b>{range}</b> ({n}). Rezultat ide u novi list; „↻ Osvježi zaokretnu tablicu” (izbornik Podaci) ponovno je izrađuje ako se podaci promijene. ¦ Glede na <b>{range}</b> ({n}). Rezultat gre na nov list; »↻ Osveži vrtilno tabelo« (meni Podatki) jo znova izdela, če se podatki spremenijo.
+En lignes ¦ U retcima ¦ V vrsticah
+En colonnes (facultatif) ¦ U stupcima (neobavezno) ¦ V stolpcih (neobvezno)
+— rien — ¦ — ništa — ¦ — nič —
+Sur la colonne ¦ Na stupcu ¦ Na stolpcu
+— (compter les lignes) — ¦ — (prebroji retke) — ¦ — (preštej vrstice) —
+Totaux ¦ Zbrojevi ¦ Vsote
+Aperçu : {rows} × {cols} ¦ Pregled: {rows} × {cols} ¦ Predogled: {rows} × {cols}
+Tableau croisé créé : {rows} × {cols}. Données → « ↻ Actualiser le tableau croisé » pour le refaire. ¦ Zaokretna tablica stvorena: {rows} × {cols}. Podaci → „↻ Osvježi zaokretnu tablicu” za ponovnu izradu. ¦ Vrtilna tabela ustvarjena: {rows} × {cols}. Podatki → »↻ Osveži vrtilno tabelo« za ponovno izdelavo.
+Cette feuille n’est pas un tableau croisé : va sur sa feuille « TCD … ». ¦ Ovaj list nije zaokretna tablica: idi na njezin list „TCD …”. ¦ Ta list ni vrtilna tabela: pojdi na njen list »TCD …«.
+La feuille des données n’existe plus. ¦ List s podacima više ne postoji. ¦ List s podatki ne obstaja več.
+Tableau croisé actualisé ({rows} × {cols}). ¦ Zaokretna tablica osvježena ({rows} × {cols}). ¦ Vrtilna tabela osvežena ({rows} × {cols}).
+Graphique vivant ¦ Živi grafikon ¦ Živ graf
+Type de graphique ¦ Vrsta grafikona ¦ Vrsta grafa
+En faire un diagramme lié à la plage ¦ Napravi od njega dijagram povezan s rasponom ¦ Naredi iz njega diagram, povezan z obsegom
+Choisis des cases avec des nombres (et leurs noms à gauche ou en haut) : le graphique se dessine ici. ¦ Odaberi ćelije s brojevima (i njihove nazive lijevo ili gore): grafikon se crta ovdje. ¦ Izberi celice s števili (in njihova imena na levi ali zgoraj): graf se nariše tukaj.
+Plage {range} · suit la sélection ¦ Raspon {range} · prati odabir ¦ Obseg {range} · sledi izbiri
+Le moteur du tableur n’est pas chargé. ¦ Pogon proračunske tablice nije učitan. ¦ Pogon preglednice ni naložen.
+Mon classeur ¦ Moja radna knjiga ¦ Moj delovni zvezek
+Rien à rétablir. ¦ Nema se što ponoviti. ¦ Ni česa uveljaviti.
+d’autres changements ont suivi : utilise ↶ ({key}) ¦ uslijedile su druge promjene: koristi ↶ ({key}) ¦ sledile so druge spremembe: uporabi ↶ ({key})
+Barre d’outils · {group} ¦ Alatna traka · {group} ¦ Orodna vrstica · {group}
+Barre d’outils ¦ Alatna traka ¦ Orodna vrstica
+Police et gras ¦ Font i podebljano ¦ Pisava in krepko
+Police (E5) ¦ Font (E5) ¦ Pisava (E5)
+Police ¦ Font ¦ Pisava
+Gras ¦ Podebljano ¦ Krepko
+Italique ¦ Kurziv ¦ Ležeče
+Souligné ¦ Podcrtano ¦ Podčrtano
+Renvoi à la ligne ¦ Prijelom teksta ¦ Prelom besedila
+Fusionner / séparer ¦ Spoji / razdvoji ¦ Združi / razdruži
+Aligner à gauche ¦ Poravnaj lijevo ¦ Poravnaj levo
+Centrer ¦ Centriraj ¦ Na sredino
+Aligner à droite ¦ Poravnaj desno ¦ Poravnaj desno
+Couleurs (C2) ¦ Boje (C2) ¦ Barve (C2)
+Couleur du texte ¦ Boja teksta ¦ Barva besedila
+Format de cellule ¦ Format ćelije ¦ Oblika celice
+Format de la cellule ¦ Format ćelije ¦ Oblika celice
+Une décimale de moins ¦ Jedna decimala manje ¦ Eno decimalno mesto manj
+Une décimale de plus ¦ Jedna decimala više ¦ Eno decimalno mesto več
+Bordures ¦ Obrubi ¦ Obrobe
+Bordures : tout ¦ Obrubi: sve ¦ Obrobe: vse
+Bordures : contour ¦ Obrubi: vanjski ¦ Obrobe: zunanje
+Bordure du bas ¦ Donji obrub ¦ Spodnja obroba
+Sans bordure ¦ Bez obruba ¦ Brez obrobe
+Graphique ¦ Grafikon ¦ Graf
+Un diagramme avec les chiffres de la sélection : les types conseillés pour cette plage ¦ Dijagram s brojkama iz odabira: preporučene vrste za ovaj raspon ¦ Diagram s številkami iz izbire: priporočene vrste za ta obseg
+Choisir une fonction ¦ Odaberi funkciju ¦ Izberi funkcijo
+Fonction ¦ Funkcija ¦ Funkcija
+XLSX, ODS, CSV, TSV, JSON, PDF, impression ¦ XLSX, ODS, CSV, TSV, JSON, PDF, ispis ¦ XLSX, ODS, CSV, TSV, JSON, PDF, tiskanje
+✓ Enregistrer et revenir ¦ ✓ Spremi i vrati se ¦ ✓ Shrani in se vrni
+Plein écran (⛶) ¦ Cijeli zaslon (⛶) ¦ Celozaslonski način (⛶)
+Données d’un autre outil ¦ Podaci iz drugog alata ¦ Podatki iz drugega orodja
+Adresse (tape D12 ou un nom pour y aller) ¦ Adresa (upiši D12 ili naziv da odeš tamo) ¦ Naslov (vpiši D12 ali ime, da greš tja)
+Tape une adresse (D12, B2:C9) ou un nom pour y aller ¦ Upiši adresu (D12, B2:C9) ili naziv da odeš tamo ¦ Vpiši naslov (D12, B2:C9) ali ime, da greš tja
+Contenu ou formule de la cellule ¦ Sadržaj ili formula ćelije ¦ Vsebina ali formula celice
+Feuille de calcul ¦ Radni list ¦ Delovni list
+Feuille de calcul : tape pour écrire dans la cellule choisie ¦ Radni list: tipkaj za pisanje u odabranu ćeliju ¦ Delovni list: tipkaj za pisanje v izbrano celico
+Écrire dans la cellule ¦ Piši u ćeliju ¦ Piši v celico
+Panneau de droite ¦ Desna ploča ¦ Desna plošča
+Feuilles ¦ Listovi ¦ Listi
+Clique pour choisir ce qu’on y voit (somme, moyenne…) ¦ Klikni da odabereš što se ovdje prikazuje (zbroj, prosjek…) ¦ Klikni, da izbereš, kaj je prikazano tukaj (vsota, povprečje …)
+Enregistrer une copie dans le Tableur… ¦ Spremi kopiju u Proračunsku tablicu… ¦ Shrani kopijo v Preglednico …
+Enregistrer une copie… ¦ Spremi kopiju… ¦ Shrani kopijo …
+Enregistrer comme modèle… ¦ Spremi kao predložak… ¦ Shrani kot predlogo …
+Exporter (XLSX, ODS, CSV, PDF…)… ¦ Izvezi (XLSX, ODS, CSV, PDF…)… ¦ Izvozi (XLSX, ODS, CSV, PDF …) …
+Feuille « {name} » ¦ List „{name}” ¦ List »{name}«
+Pas encore relié à une fiche ¦ Još nije povezano sa zapisom ¦ Še ni povezano z zapisom
+Tire pour recopier ou continuer une suite ¦ Povuci za kopiranje ili nastavak niza ¦ Povleci za kopiranje ali nadaljevanje niza
+« {text} » n’est pas dans la liste : {list} ¦ „{text}” nije na popisu: {list} ¦ »{text}« ni na seznamu: {list}
+Il faut un nombre d’au moins {min} et au plus {max}. ¦ Potreban je broj od najmanje {min} do najviše {max}. ¦ Potrebno je število od najmanj {min} do največ {max}.
+Il faut un nombre d’au moins {min}. ¦ Potreban je broj od najmanje {min}. ¦ Potrebno je število najmanj {min}.
+Il faut un nombre et au plus {max}. ¦ Potreban je broj od najviše {max}. ¦ Potrebno je število največ {max}.
+Il faut un nombre. ¦ Potreban je broj. ¦ Potrebno je število.
+Je ne comprends pas cette date ({why}). ¦ Ne razumijem ovaj datum ({why}). ¦ Tega datuma ne razumem ({why}).
+exemples : 7 mai 1925, vers 1784, an II ¦ primjeri: 7 mai 1925, vers 1784, an II ¦ primeri: 7 mai 1925, vers 1784, an II
+Tab = compléter ¦ Tab = dovrši ¦ Tab = dopolni
+✓ Compris comme une date d’acte : <b>{date}</b> (approximative : les calculs montreront ≈) ¦ ✓ Shvaćeno kao datum isprave: <b>{date}</b> (približno: izračuni će prikazati ≈) ¦ ✓ Razumljeno kot datum vpisa: <b>{date}</b> (približno: izračuni bodo prikazali ≈)
+✓ Compris comme une date d’acte : <b>{date}</b> ¦ ✓ Shvaćeno kao datum isprave: <b>{date}</b> ¦ ✓ Razumljeno kot datum vpisa: <b>{date}</b>
+Texte ou nombre. Commence par <b>=</b> pour calculer. ¦ Tekst ili broj. Započni s <b>=</b> za izračun. ¦ Besedilo ali število. Začni z <b>=</b> za izračun.
+ƒ Formule : clique ou glisse sur des cellules pour les mettre, ou tape le nom d’une fonction (en français ou en anglais). <kbd>F4</kbd> : $A$1. ¦ ƒ Formula: klikni ili povuci preko ćelija da ih umetneš ili upiši naziv funkcije (na francuskom ili engleskom). <kbd>F4</kbd>: $A$1. ¦ ƒ Formula: klikni ali povleci čez celice, da jih vstaviš, ali vpiši ime funkcije (v francoščini ali angleščini). <kbd>F4</kbd>: $A$1.
+Corriger en {name} ¦ Ispravi u {name} ¦ Popravi v {name}
+Résultat approché : une des dates est approximative (« vers », « avant », « an … » sans jour). ¦ Približan rezultat: jedan od datuma je približan („vers”, „avant”, „an …” bez dana). ¦ Približen rezultat: eden od datumov je približen (»vers«, »avant«, »an …« brez dneva).
+« {text} » : ni une adresse (D12, B2:C9), ni un nom du classeur. ¦ „{text}”: nije ni adresa (D12, B2:C9) ni naziv u radnoj knjizi. ¦ »{text}«: ni ne naslov (D12, B2:C9) ne ime v delovnem zvezku.
+Pas de feuille « {name} ». ¦ Nema lista „{name}”. ¦ Lista »{name}« ni.
+Utilise {key} dans la grille (le navigateur ne laisse pas un bouton écrire dans le presse-papiers). ¦ Koristi {key} u mreži (preglednik ne dopušta gumbu pisanje u međuspremnik). ¦ Uporabi {key} v mreži (brskalnik ne dovoli gumbu pisati v odložišče).
+En pixels (6 à 72) : ¦ U pikselima (6 do 72): ¦ V slikovnih pikah (6 do 72):
+Lignes masquées (Format → Tout remontrer) ¦ Skriveni retci (Format → Ponovno prikaži sve) ¦ Skrite vrstice (Oblika → Znova prikaži vse)
+Colonnes masquées (Format → Tout remontrer) ¦ Skriveni stupci (Format → Ponovno prikaži sve) ¦ Skriti stolpci (Oblika → Znova prikaži vse)
+Trier A → Z (sur la colonne choisie) ¦ Poredaj A → Z (po odabranom stupcu) ¦ Razvrsti A → Ž (po izbranem stolpcu)
+Trier Z → A ¦ Poredaj Z → A ¦ Razvrsti Ž → A
+Trier sur plusieurs colonnes… ¦ Poredaj po više stupaca… ¦ Razvrsti po več stolpcih …
+Espaces en trop retirés. ¦ Suvišni razmaci uklonjeni. ¦ Odvečni presledki odstranjeni.
+Rien à retirer. ¦ Nema se što ukloniti. ¦ Ni česa odstraniti.
+Police des cellules ¦ Font ćelija ¦ Pisava celic
+Cette police a un nom que le tableur ne sait pas garder. ¦ Ovaj font ima naziv koji proračunska tablica ne može zadržati. ¦ Ta pisava ima ime, ki ga preglednica ne more ohraniti.
+Une taille entre 6 et 72 px (« {value} » ne va pas). ¦ Veličina između 6 i 72 px („{value}” ne odgovara). ¦ Velikost med 6 in 72 px (»{value}« ne ustreza).
+Une taille entre 6 et 72 px. ¦ Veličina između 6 i 72 px. ¦ Velikost med 6 in 72 px.
+Choisis d’abord plusieurs cases à fusionner. ¦ Najprije odaberi više ćelija za spajanje. ¦ Najprej izberi več celic za združitev.
+Cases fusionnées : {n} ¦ Spojene ćelije: {n} ¦ Združene celice: {n}
+Largeur de colonne ¦ Širina stupca ¦ Širina stolpca
+Hauteur de ligne ¦ Visina retka ¦ Višina vrstice
+En pixels (16 à 1200) : ¦ U pikselima (16 do 1200): ¦ V slikovnih pikah (16 do 1200):
+En pixels (12 à 600) : ¦ U pikselima (12 do 600): ¦ V slikovnih pikah (12 do 600):
+Un nom commence par une lettre, sans espace (ex. Total, Âges_1836). ¦ Naziv počinje slovom, bez razmaka (npr. Total, Âges_1836). ¦ Ime se začne s črko, brez presledkov (npr. Total, Âges_1836).
+Nom « {name} » = {ref} : tape =SOMME({name}) dans une formule. ¦ Naziv „{name}” = {ref}: upiši =SOMME({name}) u formulu. ¦ Ime »{name}« = {ref}: vpiši =SOMME({name}) v formulo.
+Nom pour la plage ¦ Naziv raspona ¦ Ime obsega
+Un nom pour {ref} (pour écrire =SOMME(Total) au lieu de =SOMME(D2:D40)) : ¦ Naziv za {ref} (da pišeš =SOMME(Total) umjesto =SOMME(D2:D40)): ¦ Ime za {ref} (da pišeš =SOMME(Total) namesto =SOMME(D2:D40)):
+💬 Note sur {cell} ¦ 💬 Bilješka uz {cell} ¦ 💬 Opomba k {cell}
+La note s’affiche au survol de la case (un petit coin orange). Vide = pas de note. ¦ Bilješka se prikazuje kad prijeđeš mišem preko ćelije (mali narančasti kut). Prazno = bez bilješke. ¦ Opomba se prikaže, ko se z miško pomakneš nad celico (majhen oranžen kotiček). Prazno = brez opombe.
+⌨️ Raccourcis du tableur ¦ ⌨️ Prečaci proračunske tablice ¦ ⌨️ Bližnjice preglednice
+Raccourcis indisponibles. ¦ Prečaci nisu dostupni. ¦ Bližnjice niso na voljo.
+⚙️ Réglages du tableur ¦ ⚙️ Postavke proračunske tablice ¦ ⚙️ Nastavitve preglednice
+Après la touche Entrée, aller ¦ Nakon tipke Enter idi ¦ Po tipki Enter pojdi
+vers le bas ¦ prema dolje ¦ navzdol
+vers la droite (saisie de relevés en ligne) ¦ udesno (unos prijepisa redak po redak) ¦ v desno (vnos prepisov vrstico za vrstico)
+Séparateur des fichiers CSV ¦ Razdjelnik CSV datoteka ¦ Ločilo datotek CSV
+point-virgule « ; » (Excel en français) ¦ točka sa zarezom „;” (Excel na francuskom) ¦ podpičje »;« (Excel v francoščini)
+virgule « , » ¦ zarez „,” ¦ vejica »,«
+tabulation ¦ tabulator ¦ tabulator
+Largeur des colonnes d’une feuille neuve ¦ Širina stupaca novog lista ¦ Širina stolpcev novega lista
+Dans la barre du bas, pour les cellules choisies ¦ U donjoj traci, za odabrane ćelije ¦ V spodnji vrstici, za izbrane celice
+Réglages du tableur ¦ Postavke proračunske tablice ¦ Nastavitve preglednice
+Trop de lignes ou de colonnes d’un coup. ¦ Previše redaka ili stupaca odjednom. ¦ Preveč vrstic ali stolpcev hkrati.
+Trié {dir} sur la colonne {col} (la 1re ligne, ce sont les titres). ¦ Poredano {dir} po stupcu {col} (1. redak sadrži naslove). ¦ Razvrščeno {dir} po stolpcu {col} (1. vrstica vsebuje naslove).
+Trié {dir} sur la colonne {col}. ¦ Poredano {dir} po stupcu {col}. ¦ Razvrščeno {dir} po stolpcu {col}.
+A → Z (croissant) ¦ A → Z (uzlazno) ¦ A → Ž (naraščajoče)
+Z → A (décroissant) ¦ Z → A (silazno) ¦ Ž → A (padajoče)
+Plage {range} · les dates d’actes (« vers 1784 », « an II ») se rangent à leur date. ¦ Raspon {range} · datumi isprava („vers 1784”, „an II”) poredani su po svom datumu. ¦ Obseg {range} · datumi vpisov (»vers 1784«, »an II«) se razvrstijo po svojem datumu.
+La première ligne, ce sont les titres ¦ Prvi redak sadrži naslove ¦ Prva vrstica vsebuje naslove
+Puis par ¦ Zatim po ¦ Nato po
+Choisis un tableau avec une ligne de titres et des lignes en dessous. ¦ Odaberi tablicu s retkom naslova i retcima ispod. ¦ Izberi tabelo z vrstico naslovov in vrsticami pod njo.
+(vide) ¦ (prazno) ¦ (prazno)
+Chercher dans le tableau… (nom, métier) ¦ Traži u tablici… (ime, zanimanje) ¦ Išči v tabeli … (ime, poklic)
+{n} sur {total} ¦ {n} od {total} ¦ {n} od {total}
+Supprimer les doublons ¦ Izbriši duplikate ¦ Izbriši dvojnike
+Plage {range} · la 1re ligne, ce sont les titres. La première ligne de chaque groupe reste. ¦ Raspon {range} · 1. redak sadrži naslove. Prvi redak svake skupine ostaje. ¦ Obseg {range} · 1. vrstica vsebuje naslove. Prva vrstica vsake skupine ostane.
+Plage {range}. La première ligne de chaque groupe reste. ¦ Raspon {range}. Prvi redak svake skupine ostaje. ¦ Obseg {range}. Prva vrstica vsake skupine ostane.
+Compare les colonnes : ¦ Usporedi stupce: ¦ Primerjaj stolpce:
+{n} en double (lignes {rows}). ¦ Duplikata: {n} (retci {rows}). ¦ Dvojnikov: {n} (vrstice {rows}).
+{n} en double (ligne {rows}). ¦ Duplikata: {n} (redak {rows}). ¦ Dvojnikov: {n} (vrstica {rows}).
+Aucune ligne en double. ¦ Nema dupliciranih redaka. ¦ Ni podvojenih vrstic.
+Supprimer {n} ¦ Izbriši ({n}) ¦ Izbriši ({n})
+Coche au moins une colonne. ¦ Označi barem jedan stupac. ¦ Označi vsaj en stolpec.
+Choisis des cases de texte dans une colonne (ex. « MARTIN Jean, 34 ans, laboureur »). ¦ Odaberi tekstne ćelije u stupcu (npr. „MARTIN Jean, 34 ans, laboureur”). ¦ Izberi besedilne celice v stolpcu (npr. »MARTIN Jean, 34 ans, laboureur«).
+Convertir le texte en colonnes ¦ Pretvori tekst u stupce ¦ Pretvori besedilo v stolpce
+Convertir ¦ Pretvori ¦ Pretvori
+Couper à : ¦ Razdvoji na: ¦ Razdeli pri:
+« 34 ans » devient 34 ¦ „34 ans” postaje 34 ¦ »34 ans« postane 34
+Le nom en capitales devient une colonne à part (« MARTIN Jean » → MARTIN | Jean) ¦ Prezime velikim slovima postaje zaseban stupac („MARTIN Jean” → MARTIN | Jean) ¦ Priimek z velikimi črkami postane ločen stolpec (»MARTIN Jean« → MARTIN | Jean)
+Les morceaux vont dans la colonne {col} et les suivantes (ce qui s’y trouve est remplacé ; ↶ pour revenir). ¦ Dijelovi idu u stupac {col} i sljedeće (ono što je tamo zamjenjuje se; ↶ za povratak). ¦ Deli gredo v stolpec {col} in naslednje (kar je tam, se zamenja; ↶ za vrnitev).
+Validation des données ¦ Provjera valjanosti podataka ¦ Preverjanje veljavnosti podatkov
+Pour {range} : ce qu’on peut écrire dans ces cases. ¦ Za {range}: što se smije upisati u ove ćelije. ¦ Za {range}: kaj je dovoljeno vpisati v te celice.
+Autoriser ¦ Dopusti ¦ Dovoli
+Une liste de choix (menu ▾) ¦ Popis izbora (izbornik ▾) ¦ Seznam izbir (meni ▾)
+👤 Une personne de la base (menu de choix) ¦ 👤 Osoba iz baze (izbornik odabira) ¦ 👤 Oseba iz baze (meni za izbiro)
+📍 Un lieu de la base (menu de choix) ¦ 📍 Mjesto iz baze (izbornik odabira) ¦ 📍 Kraj iz baze (meni za izbiro)
+Un nombre entre… ¦ Broj između… ¦ Število med …
+Une date d’acte (vers 1784, an II…) ¦ Datum isprave (vers 1784, an II…) ¦ Datum vpisa (vers 1784, an II …)
+Les choix (un par ligne) ¦ Izbori (jedan po retku) ¦ Izbire (ena na vrstico)
+Entre ¦ Između ¦ Med
+Garder aussi un texte libre (sans fiche, ou hors de la liste) ¦ Zadrži i slobodan tekst (bez zapisa ili izvan popisa) ¦ Ohrani tudi prosto besedilo (brez zapisa ali zunaj seznama)
+Écris au moins un choix. ¦ Upiši barem jedan izbor. ¦ Vpiši vsaj eno izbiro.
+FORMAT ¦ FORMAT ¦ OBLIKA
+Mise en forme conditionnelle ¦ Uvjetno oblikovanje ¦ Pogojno oblikovanje
+Ajouter la règle ¦ Dodaj pravilo ¦ Dodaj pravilo
+Une couleur quand la valeur le demande : l’erreur ou la valeur étrange saute aux yeux. ¦ Boja kad je vrijednost traži: pogreška ili neobična vrijednost odmah upada u oči. ¦ Barva, ko jo vrednost zahteva: napaka ali nenavadna vrednost takoj pade v oči.
+Prêtes à l’emploi : ¦ Spremno za upotrebu: ¦ Pripravljeno za uporabo:
+« âge > 100 ans » ¦ „dob > 100 godina” ¦ »starost > 100 let«
+« date impossible » ¦ „nemoguć datum” ¦ »nemogoč datum«
+« doublons » ¦ „duplikati” ¦ »dvojniki«
+« barres » ¦ „trake” ¦ »stolpci«
+Si la valeur ¦ Ako je vrijednost ¦ Če je vrednost
+alors ¦ onda ¦ potem
+en gras ¦ podebljano ¦ krepko
+Une plage comme D2:D40. ¦ Raspon poput D2:D40. ¦ Obseg, kot je D2:D40.
+Écris un nombre. ¦ Upiši broj. ¦ Vpiši število.
+ÉDITION ¦ UREĐIVANJE ¦ UREJANJE
+🔍 Rechercher et remplacer ¦ 🔍 Traži i zamijeni ¦ 🔍 Najdi in zamenjaj
+Remplacer tout ¦ Zamijeni sve ¦ Zamenjaj vse
+Remplacer par ¦ Zamijeni s ¦ Zamenjaj z
+Dans toutes les feuilles ¦ U svim listovima ¦ Na vseh listih
+Respecter les capitales ¦ Razlikuj velika i mala slova ¦ Upoštevaj velike in male črke
+Chercher le suivant ¦ Traži sljedeće ¦ Najdi naslednje
+Trouvé en {cell} ¦ Pronađeno u {cell} ¦ Najdeno v {cell}
+Écris ce qu’il faut chercher. ¦ Upiši što treba tražiti. ¦ Vpiši, kaj iskati.
+Aucune fonction ne correspond. ¦ Nijedna funkcija ne odgovara. ¦ Nobena funkcija se ne ujema.
+ƒ Choisir une fonction ¦ ƒ Odaberi funkciju ¦ ƒ Izberi funkcijo
+Chercher… (âge, somme, recherche) ¦ Traži… (dob, zbroj, pretraživanje) ¦ Išči … (starost, vsota, iskanje)
+Le menu de choix n’est pas chargé. ¦ Izbornik odabira nije učitan. ¦ Meni za izbiro ni naložen.
+📍 Un lieu pour {cell} ¦ 📍 Mjesto za {cell} ¦ 📍 Kraj za {cell}
+👤 Une personne pour {cell} ¦ 👤 Osoba za {cell} ¦ 👤 Oseba za {cell}
+📍 Lieu de la base ¦ 📍 Mjesto iz baze ¦ 📍 Kraj iz baze
+auto ¦ auto ¦ samodejno
+Décimales ¦ Decimale ¦ Decimalna mesta
+✓ « {text} » est comprise (≈) ¦ ✓ „{text}” je shvaćeno (≈) ¦ ✓ »{text}« je razumljeno (≈)
+✓ « {text} » est comprise ¦ ✓ „{text}” je shvaćeno ¦ ✓ »{text}« je razumljeno
+Noir ¦ Crna ¦ Črna
+Contour ¦ Obris ¦ Obris
+Retirer la règle ¦ Ukloni pravilo ¦ Odstrani pravilo
+Aucune règle sur cette feuille. ¦ Nema pravila na ovom listu. ¦ Na tem listu ni pravil.
+＋ Ajouter une règle… ¦ ＋ Dodaj pravilo… ¦ ＋ Dodaj pravilo …
+Une liste : {list} ¦ Popis: {list} ¦ Seznam: {list}
+👤 Une personne de la base ¦ 👤 Osoba iz baze ¦ 👤 Oseba iz baze
+📍 Un lieu de la base ¦ 📍 Mjesto iz baze ¦ 📍 Kraj iz baze
+Un nombre ¦ Broj ¦ Število
+Une date d’acte ¦ Datum isprave ¦ Datum vpisa
+Garder le texte ¦ Zadrži tekst ¦ Ohrani besedilo
+Pas de validation ici. ¦ Ovdje nema provjere valjanosti. ¦ Tukaj ni preverjanja veljavnosti.
+Validation des données… ¦ Provjera valjanosti podataka… ¦ Preverjanje veljavnosti podatkov …
+Enregistre d’abord le classeur (💾), puis ouvre la fiche. ¦ Najprije spremi radnu knjigu (💾), pa otvori zapis. ¦ Najprej shrani delovni zvezek (💾), nato odpri zapis.
+{name} : lieu n° {id} de ta base. ¦ {name}: mjesto br. {id} u tvojoj bazi. ¦ {name}: kraj št. {id} v tvoji bazi.
+Règle « {range} » retirée ¦ Pravilo „{range}” uklonjeno ¦ Pravilo »{range}« odstranjeno
+Police (E5) : {font} ¦ Font (E5): {font} ¦ Pisava (E5): {font}
+celle de départ ¦ početni ¦ začetna
+Panneau de droite : montrer ¦ Desna ploča: prikaži ¦ Desna plošča: prikaži
+Panneau de droite : cacher ¦ Desna ploča: sakrij ¦ Desna plošča: skrij
+Double-clic : renommer · clic droit : plus d’actions ¦ Dvostruki klik: preimenuj · desni klik: više radnji ¦ Dvoklik: preimenuj · desni klik: več dejanj
+Ajouter une feuille ¦ Dodaj list ¦ Dodaj list
+Feuille {n} ¦ List {n} ¦ List {n}
+Renommer la feuille ¦ Preimenuj list ¦ Preimenuj list
+Un classeur garde au moins une feuille. ¦ Radna knjiga zadržava barem jedan list. ¦ Delovni zvezek ohrani vsaj en list.
+Feuille « {name} » supprimée ¦ List „{name}” izbrisan ¦ List »{name}« izbrisan
+Couleur de l’onglet… ¦ Boja kartice… ¦ Barva zavihka …
+Déplacer à gauche ¦ Pomakni ulijevo ¦ Premakni v levo
+Déplacer à droite ¦ Pomakni udesno ¦ Premakni v desno
+Somme <b>{v}</b> ¦ Zbroj <b>{v}</b> ¦ Vsota <b>{v}</b>
+Moyenne <b>{v}</b> ¦ Prosjek <b>{v}</b> ¦ Povprečje <b>{v}</b>
+Nb <b>{v}</b> ¦ Broj <b>{v}</b> ¦ Število <b>{v}</b>
+Min <b>{v}</b> ¦ Min <b>{v}</b> ¦ Min <b>{v}</b>
+Max <b>{v}</b> ¦ Maks <b>{v}</b> ¦ Maks <b>{v}</b>
+Dans la barre d’état ¦ U traci stanja ¦ V vrstici stanja
+Utilise {key} : le navigateur ne laisse pas un menu écrire dans le presse-papiers. ¦ Koristi {key}: preglednik ne dopušta izborniku pisanje u međuspremnik. ¦ Uporabi {key}: brskalnik ne dovoli meniju pisati v odložišče.
+Sélection trop grande pour le presse-papiers. ¦ Odabir je prevelik za međuspremnik. ¦ Izbira je prevelika za odložišče.
+Coupé : choisis où coller, puis {key}. ¦ Izrezano: odaberi gdje zalijepiti, pa {key}. ¦ Izrezano: izberi, kam prilepiti, nato {key}.
+Utilise {key} dans la grille pour coller. ¦ Koristi {key} u mreži za lijepljenje. ¦ Uporabi {key} v mreži za lepljenje.
+Trop de cellules à coller. ¦ Previše ćelija za lijepljenje. ¦ Preveč celic za lepljenje.
+{n} (avec le gras et les couleurs). ¦ {n} (s podebljanim i bojama). ¦ {n} (s krepkim in barvami).
+Série {n} ¦ Niz {n} ¦ Niz {n}
+Colonnes groupées ¦ Grupirani stupci ¦ Združeni stolpci
+Barres horizontales ¦ Vodoravne trake ¦ Vodoravni stolpci
+TSV (tabulations) ¦ TSV (tabulatori) ¦ TSV (tabulatorji)
+⤒ Importer un tableau ¦ ⤒ Uvezi tablicu ¦ ⤒ Uvozi tabelo
+Séparateur deviné : {sep} · Encodage : {enc} ¦ Pogođeni razdjelnik: {sep} · Kodiranje: {enc} ¦ Uganjeno ločilo: {sep} · Kodiranje: {enc}
+point-virgule (;) ¦ točka sa zarezom (;) ¦ podpičje (;)
+virgule (,) ¦ zarez (,) ¦ vejica (,)
+✓ Accents corrects : « {list} ». ¦ ✓ Dijakritički znakovi ispravni: „{list}”. ¦ ✓ Naglasi pravilni: »{list}«.
+<b>{rows}</b> dans {sheets} ¦ <b>{rows}</b> u {sheets} ¦ <b>{rows}</b> v {sheets}
+CSV et TSV : la feuille ouverte. Les autres : tout le classeur. Une cellule qui commence par « = » est protégée dans un CSV (pas de formule glissée). ¦ CSV i TSV: otvoreni list. Ostali: cijela radna knjiga. Ćelija koja počinje s „=” zaštićena je u CSV-u (bez podmetnute formule). ¦ CSV in TSV: odprti list. Ostali: cel delovni zvezek. Celica, ki se začne z »=«, je v CSV zaščitena (brez podtaknjene formule).
+tout tableur ¦ svaka proračunska tablica ¦ vsaka preglednica
+tabulations ¦ tabulatori ¦ tabulatorji
+données ¦ podaci ¦ podatki
+à lire ¦ za čitanje ¦ za branje
+💾 Fichier de l’outil ¦ 💾 Datoteka alata ¦ 💾 Datoteka orodja
+Exporté : {name} ¦ Izvezeno: {name} ¦ Izvoženo: {name}
+(feuille vide) ¦ (prazan list) ¦ (prazen list)
+Toutes les feuilles ¦ Svi listovi ¦ Vsi listi
+Quadrillage ¦ Linije mreže ¦ Mrežne črte
+Rangé dans Listes → Outils de modification → 🧾 Tableur. ¦ Spremljeno u Popisi → Alati za uređivanje → 🧾 Proračunska tablica. ¦ Shranjeno v Seznami → Orodja za urejanje → 🧾 Preglednica.
+Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles). ¦ Predložak „{name}” spremljen (Kreni od predloška → Moji predlošci). ¦ Predloga »{name}« shranjena (Začni s predlogo → Moje predloge).
+Copie « {name} » enregistrée. ¦ Kopija „{name}” spremljena. ¦ Kopija »{name}« shranjena.
+Ce classeur ¦ Ova radna knjiga ¦ Ta delovni zvezek
+Impossible d’enregistrer : {error} ¦ Spremanje nije uspjelo: {error} ¦ Shranjevanje ni uspelo: {error}
+Enregistrer comme modèle ¦ Spremi kao predložak ¦ Shrani kot predlogo
+Enregistrer une copie ¦ Spremi kopiju ¦ Shrani kopijo
+Le nom du modèle (les données restent : vide-les avant si tu veux un modèle vierge) : ¦ Naziv predloška (podaci ostaju: najprije ih isprazni ako želiš prazan predložak): ¦ Ime predloge (podatki ostanejo: najprej jih izprazni, če želiš prazno predlogo):
+Le nom de la copie : ¦ Naziv kopije: ¦ Ime kopije:
+{name} (copie) ¦ {name} (kopija) ¦ {name} (kopija)
+Les changements faits depuis le dernier enregistrement seront perdus. ¦ Promjene napravljene od posljednjeg spremanja bit će izgubljene. ¦ Spremembe od zadnjega shranjevanja bodo izgubljene.
+📋 Partir d’un modèle ¦ 📋 Kreni od predloška ¦ 📋 Začni s predlogo
+Mes modèles ¦ Moji predlošci ¦ Moje predloge
+Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Još nemaš svoj predložak: u radnoj knjizi, Datoteka → „Spremi kao predložak…”. ¦ Svoje predloge še nimaš: v delovnem zvezku Datoteka → »Shrani kot predlogo …«.
+séparateur « {sep} » ¦ razdjelnik „{sep}” ¦ ločilo »{sep}«
+Classeur importé ¦ Uvezena radna knjiga ¦ Uvožen delovni zvezek
+Classeur « {name} » créé ({rows}) ¦ Radna knjiga „{name}” stvorena ({rows}) ¦ Delovni zvezek »{name}« ustvarjen ({rows})
+classeur ¦ radna knjiga ¦ delovni zvezek
+＋ Nouveau classeur ¦ ＋ Nova radna knjiga ¦ ＋ Nov delovni zvezek
+Relevé de recensement, registre paroissial, budget de la recherche, suivi des courriers… ¦ Prijepis popisa stanovništva, župna matica, proračun istraživanja, praćenje pošte… ¦ Prepis popisa prebivalstva, župnijska matična knjiga, proračun raziskovanja, sledenje pošti …
+Tu divises par zéro : {ref} est vide ou vaut 0. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Dijeliš s nulom: {ref} je prazno ili iznosi 0. Savjet: =SI.ERREUR(…;"") ostavlja ćeliju praznom. ¦ Deliš z nič: {ref} je prazno ali je 0. Nasvet: =SI.ERREUR(…;"") pusti celico prazno.
+Tu divises par zéro : {why}. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Dijeliš s nulom: {why}. Savjet: =SI.ERREUR(…;"") ostavlja ćeliju praznom. ¦ Deliš z nič: {why}. Nasvet: =SI.ERREUR(…;"") pusti celico prazno.
+Tu divises par zéro. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Dijeliš s nulom. Savjet: =SI.ERREUR(…;"") ostavlja ćeliju praznom. ¦ Deliš z nič. Nasvet: =SI.ERREUR(…;"") pusti celico prazno.
+Je ne connais pas « {name} ». Voulais-tu dire {sugg} ? ¦ Ne poznajem „{name}”. Jesi li mislio/mislila {sugg}? ¦ Ne poznam »{name}«. Si mislil/mislila {sugg}?
+Je ne connais pas « {name} ». Tape les premières lettres : la liste des fonctions s’ouvre. ¦ Ne poznajem „{name}”. Upiši prva slova: otvorit će se popis funkcija. ¦ Ne poznam »{name}«. Vpiši prve črke: odpre se seznam funkcij.
+Un nom inconnu dans la formule. ¦ Nepoznat naziv u formuli. ¦ Neznano ime v formuli.
+« {text} » n’est pas un nombre (cellule {cell}) : on ne peut pas faire de calcul avec. ¦ „{text}” nije broj (ćelija {cell}): s njim se ne može računati. ¦ »{text}« ni število (celica {cell}): z njim ni mogoče računati.
+« {text} » n’est pas un nombre : on ne peut pas faire de calcul avec. ¦ „{text}” nije broj: s njim se ne može računati. ¦ »{text}« ni število: z njim ni mogoče računati.
+Une valeur ne convient pas ¦ Vrijednost ne odgovara ¦ Vrednost ni primerna
+{what} (cellule {cell}). ¦ {what} (ćelija {cell}). ¦ {what} (celica {cell}).
+La formule montre quelque chose qui n’existe pas : {what}. ¦ Formula pokazuje na nešto što ne postoji: {what}. ¦ Formula kaže na nekaj, kar ne obstaja: {what}.
+La formule montre une cellule qui a été supprimée. ¦ Formula pokazuje na ćeliju koja je izbrisana. ¦ Formula kaže na celico, ki je bila izbrisana.
+Valeur introuvable ¦ Vrijednost nije pronađena ¦ Vrednosti ni mogoče najti
+La recherche ¦ Pretraživanje ¦ Iskanje
+{fn} n’a pas trouvé « {what} » dans {where}. ¦ {fn} nije pronašla „{what}” u {where}. ¦ {fn} ni našla »{what}« v {where}.
+{fn} n’a pas trouvé « {what} ». ¦ {fn} nije pronašla „{what}”. ¦ {fn} ni našla »{what}«.
+{path} : la formule tourne en rond. ¦ {path}: formula se vrti u krug. ¦ {path}: formula se vrti v krogu.
+La formule a besoin d’elle-même : elle tourne en rond. ¦ Formula treba samu sebe: vrti se u krug. ¦ Formula potrebuje samo sebe: vrti se v krogu.
+« {text} » : {why}. ¦ „{text}”: {why}. ¦ »{text}«: {why}.
+cette date ¦ ovaj datum ¦ ta datum
+Je ne comprends pas {what} (« {text} »). Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Ne razumijem {what} („{text}”). Primjeri: 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Ne razumem {what} (»{text}«). Primeri: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas {what}. Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Ne razumijem {what}. Primjeri: 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Ne razumem {what}. Primeri: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas la formule près de « {near} » : {why}. ¦ Ne razumijem formulu blizu „{near}”: {why}. ¦ Ne razumem formule blizu »{near}«: {why}.
+Je ne comprends pas la formule : {why}. ¦ Ne razumijem formulu: {why}. ¦ Ne razumem formule: {why}.
+Je ne comprends pas la formule près de « {near} » : vérifie les parenthèses, les guillemets et les « ; ». ¦ Ne razumijem formulu blizu „{near}”: provjeri zagrade, navodnike i „;”. ¦ Ne razumem formule blizu »{near}«: preveri oklepaje, narekovaje in »;«.
+Je ne comprends pas la formule : vérifie les parenthèses, les guillemets et les « ; ». ¦ Ne razumijem formulu: provjeri zagrade, navodnike i „;”. ¦ Ne razumem formule: preveri oklepaje, narekovaje in »;«.
+Nombre impossible ¦ Nemoguć broj ¦ Nemogoče število
+Le résultat a besoin de {size} vers le bas et la droite, mais {cell} n’est pas vide : vide-la pour voir tout le résultat. ¦ Rezultat treba {size} prema dolje i udesno, ali {cell} nije prazna: isprazni je da vidiš cijeli rezultat. ¦ Rezultat potrebuje {size} navzdol in v desno, a {cell} ni prazna: izprazni jo, da vidiš ves rezultat.
+plusieurs cases ¦ više ćelija ¦ več celic
+une case ¦ jednu ćeliju ¦ eno celico
+Trop gros pour être calculé : {why}. ¦ Preveliko za izračun: {why}. ¦ Preveliko za izračun: {why}.
+réduis la plage ¦ smanji raspon ¦ zmanjšaj obseg
+Erreur dans la formule. ¦ Pogreška u formuli. ¦ Napaka v formuli.
+Astuce : =SI.ERREUR(A4/B4;"") ¦ Savjet: =SI.ERREUR(A4/B4;"") ¦ Nasvet: =SI.ERREUR(A4/B4;"")
+fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un document de bureau n’utilise pas ¦ datoteka odbijena: sadrži XML deklaracije (DOCTYPE ili ENTITY) koje uredski dokument ne koristi ¦ datoteka zavrnjena: vsebuje deklaracije XML (DOCTYPE ali ENTITY), ki jih pisarniški dokument ne uporablja
+fichier XML abîmé ¦ oštećena XML datoteka ¦ poškodovana datoteka XML
+fichier refusé : trop d’éléments ¦ datoteka odbijena: previše elemenata ¦ datoteka zavrnjena: preveč elementov
+fichier refusé : XML trop imbriqué ¦ datoteka odbijena: XML je previše ugniježđen ¦ datoteka zavrnjena: XML je pregloboko gnezden
+fichier trop gros (plus de {n} Mo) ¦ datoteka je prevelika (više od {n} MB) ¦ datoteka je prevelika (več kot {n} MB)
+ce n’est pas un fichier zip valide ¦ ovo nije valjana zip datoteka ¦ to ni veljavna datoteka zip
+fichier refusé : trop d’éléments dans le zip ¦ datoteka odbijena: previše stavki u zipu ¦ datoteka zavrnjena: preveč elementov v zipu
+fichier chiffré : ouvre-le d’abord dans son tableur et enregistre-le sans mot de passe ¦ šifrirana datoteka: najprije je otvori u njezinoj proračunskoj tablici i spremi bez lozinke ¦ šifrirana datoteka: najprej jo odpri v njeni preglednici in jo shrani brez gesla
+fichier zip abîmé ¦ oštećena zip datoteka ¦ poškodovana datoteka zip
+fichier refusé : trop gros une fois décompressé ¦ datoteka odbijena: prevelika nakon raspakiravanja ¦ datoteka zavrnjena: prevelika po razširjanju
+fichier refusé : il se décompresse en beaucoup trop gros (bombe zip) ¦ datoteka odbijena: raspakira se u nešto preveliko (zip bomba) ¦ datoteka zavrnjena: razširi se v nekaj veliko prevelikega (zip bomba)
+ce navigateur ne sait pas ouvrir les fichiers zip (mets-le à jour) ¦ ovaj preglednik ne može otvoriti zip datoteke (ažuriraj ga) ¦ ta brskalnik ne zna odpreti datotek zip (posodobi ga)
+compression inconnue dans le fichier ¦ nepoznata kompresija u datoteci ¦ neznano stiskanje v datoteki
+ce n’est pas un fichier Excel (.xlsx) : xl/workbook.xml manque ¦ ovo nije Excel datoteka (.xlsx): nedostaje xl/workbook.xml ¦ to ni datoteka Excel (.xlsx): manjka xl/workbook.xml
+fichier refusé : trop de feuilles ¦ datoteka odbijena: previše listova ¦ datoteka zavrnjena: preveč listov
+fichier refusé : trop de cellules ¦ datoteka odbijena: previše ćelija ¦ datoteka zavrnjena: preveč celic
+ce n’est pas un fichier LibreOffice (.ods) : content.xml manque ¦ ovo nije LibreOffice datoteka (.ods): nedostaje content.xml ¦ to ni datoteka LibreOffice (.ods): manjka content.xml
+ce fichier n’est pas un JSON valide ¦ ova datoteka nije valjani JSON ¦ ta datoteka ni veljaven JSON
+je ne trouve pas de tableau dans ce JSON (il faut une liste de lignes ou d’objets) ¦ ne nalazim tablicu u ovom JSON-u (potreban je popis redaka ili objekata) ¦ v tem JSON ne najdem tabele (potreben je seznam vrstic ali predmetov)
+les anciens fichiers Excel (.xls) ne sont pas lus : ouvre-le dans Excel ou LibreOffice et enregistre-le en .xlsx ¦ stare Excel datoteke (.xls) ne čitaju se: otvori je u Excelu ili LibreOfficeu i spremi kao .xlsx ¦ starih datotek Excel (.xls) ni mogoče brati: odpri jo v Excelu ali LibreOfficeu in jo shrani kot .xlsx
+ce fichier compressé n’est ni un .xlsx ni un .ods ¦ ova komprimirana datoteka nije ni .xlsx ni .ods ¦ ta stisnjena datoteka ni ne .xlsx ne .ods
+Nombre 0,00 ¦ Broj 0,00 ¦ Število 0,00
+Nombre entier ¦ Cijeli broj ¦ Celo število
+Monnaie (€) ¦ Valuta (€) ¦ Valuta (€)
+Pourcentage ¦ Postotak ¦ Odstotek
+Date courte ¦ Kratki datum ¦ Kratek datum
+Date d’acte ¦ Datum isprave ¦ Datum vpisa
+Texte ¦ Tekst ¦ Besedilo
+Relevé de recensement ¦ Prijepis popisa stanovništva ¦ Prepis popisa prebivalstva
+colonnes de l’année · foyers · « Né(e) vers » calculé ¦ stupci te godine · kućanstva · izračunato „Rođen(a) oko” ¦ stolpci tistega leta · gospodinjstva · izračunano »Rojen(a) okoli«
+Registre paroissial ¦ Župna matica ¦ Župnijska matična knjiga
+baptêmes, mariages, sépultures ¦ krštenja, vjenčanja, pokopi ¦ krsti, poroke, pokopi
+Budget de la recherche ¦ Proračun istraživanja ¦ Proračun raziskovanja
+actes, déplacements, abonnements ¦ isprave, putovanja, pretplate ¦ listine, poti, naročnine
+Suivi des courriers ¦ Praćenje pošte ¦ Sledenje pošti
+envoyé, relancé, réponse ¦ poslano, podsjetnik, odgovor ¦ poslano, opomnik, odgovor
+Arbre en tableau ¦ Stablo u tablici ¦ Drevo v tabeli
+Sosa, génération, côté, âge ¦ Sosa broj, generacija, strana, dob ¦ Sosa številka, rod, stran, starost
+objets, prix, total en livres ¦ predmeti, cijene, ukupno u livres ¦ predmeti, cene, skupaj v livres
+Registre matricule ¦ Vojni matični registar ¦ Vojaški matični register
+classe, signalement, campagnes ¦ godište, osobni opis, pohodi ¦ letnik, osebni opis, pohodi
+📋 Partir d’un modèle… ¦ 📋 Kreni od predloška… ¦ 📋 Začni s predlogo …
+⤒ Importer un tableau… ¦ ⤒ Uvezi tablicu… ¦ ⤒ Uvozi tabelo …
+⤓ Exporter… ¦ ⤓ Izvezi… ¦ ⤓ Izvozi …
+🖨 Imprimer… ¦ 🖨 Ispiši… ¦ 🖨 Natisni …
+⚙️ Réglages du tableur… ¦ ⚙️ Postavke proračunske tablice… ¦ ⚙️ Nastavitve preglednice …
+Insertion ¦ Umetanje ¦ Vstavljanje
+Coller les valeurs seulement ¦ Zalijepi samo vrijednosti ¦ Prilepi samo vrednosti
+Effacer le contenu ¦ Izbriši sadržaj ¦ Počisti vsebino
+Effacer tout (contenu et mise en forme) ¦ Izbriši sve (sadržaj i oblikovanje) ¦ Počisti vse (vsebino in oblikovanje)
+Recopier vers le bas ¦ Kopiraj prema dolje ¦ Zapolni navzdol
+Recopier vers la droite ¦ Kopiraj udesno ¦ Zapolni v desno
+🔍 Rechercher et remplacer… ¦ 🔍 Traži i zamijeni… ¦ 🔍 Najdi in zamenjaj …
+Ligne au-dessus ¦ Redak iznad ¦ Vrstica nad
+Ligne en dessous ¦ Redak ispod ¦ Vrstica pod
+＋ Nouvelle feuille ¦ ＋ Novi list ¦ ＋ Nov list
+ƒ Fonction… ¦ ƒ Funkcija… ¦ ƒ Funkcija …
+Σ Somme automatique ¦ Σ Automatski zbroj ¦ Σ Samodejna vsota
+📅 Date du jour ¦ 📅 Današnji datum ¦ 📅 Današnji datum
+Nom pour la plage… ¦ Naziv raspona… ¦ Ime obsega …
+💬 Note sur la cellule… ¦ 💬 Bilješka uz ćeliju… ¦ 💬 Opomba k celici …
+📊 Graphique depuis la sélection ¦ 📊 Grafikon iz odabira ¦ 📊 Graf iz izbire
+Barré ¦ Precrtano ¦ Prečrtano
+Aa Police… ¦ Aa Font… ¦ Aa Pisava …
+Taille du texte… ¦ Veličina teksta… ¦ Velikost besedila …
+↵ Renvoi à la ligne ¦ ↵ Prijelom teksta ¦ ↵ Prelom besedila
+⊞ Fusionner / séparer ¦ ⊞ Spoji / razdvoji ¦ ⊞ Združi / razdruži
+▦ Bordures : tout ¦ ▦ Obrubi: sve ¦ ▦ Obrobe: vse
+▭ Bordures : contour ¦ ▭ Obrubi: vanjski ¦ ▭ Obrobe: zunanje
+▁ Bordure du bas ¦ ▁ Donji obrub ¦ ▁ Spodnja obroba
+Largeur de colonne… ¦ Širina stupca… ¦ Širina stolpca …
+Hauteur de ligne… ¦ Visina retka… ¦ Višina vrstice …
+Ajuster la largeur au contenu ¦ Prilagodi širinu sadržaju ¦ Prilagodi širino vsebini
+Masquer les lignes ¦ Sakrij retke ¦ Skrij vrstice
+Masquer les colonnes ¦ Sakrij stupce ¦ Skrij stolpce
+Tout remontrer ¦ Ponovno prikaži sve ¦ Znova prikaži vse
+Mise en forme conditionnelle… ¦ Uvjetno oblikovanje… ¦ Pogojno oblikovanje …
+Une ligne sur deux ¦ Svaki drugi redak ¦ Vsaka druga vrstica
+Effacer la mise en forme ¦ Izbriši oblikovanje ¦ Počisti oblikovanje
+↕ Trier A → Z ¦ ↕ Poredaj A → Z ¦ ↕ Razvrsti A → Ž
+↕ Trier Z → A ¦ ↕ Poredaj Z → A ¦ ↕ Razvrsti Ž → A
+⚲ Filtrer ¦ ⚲ Filtriraj ¦ ⚲ Filtriraj
+Supprimer les doublons… ¦ Izbriši duplikate… ¦ Izbriši dvojnike …
+Convertir le texte en colonnes… ¦ Pretvori tekst u stupce… ¦ Pretvori besedilo v stolpce …
+Retirer les espaces en trop ¦ Ukloni suvišne razmake ¦ Odstrani odvečne presledke
+Figer la 1re ligne ¦ Zamrzni 1. redak ¦ Zamrzni 1. vrstico
+Figer la 1re colonne ¦ Zamrzni 1. stupac ¦ Zamrzni 1. stolpec
+Figer jusqu’à la cellule choisie ¦ Zamrzni do odabrane ćelije ¦ Zamrzni do izbrane celice
+Libérer les volets ¦ Odmrzni okna ¦ Odmrzni podokna
+Montrer les formules ¦ Prikaži formule ¦ Prikaži formule
+⤢ Ajuster à la fenêtre ¦ ⤢ Prilagodi prozoru ¦ ⤢ Prilagodi oknu
+100 % (taille réelle) ¦ 100 % (stvarna veličina) ¦ 100 % (dejanska velikost)
+⌨️ Raccourcis du tableur… ¦ ⌨️ Prečaci proračunske tablice… ¦ ⌨️ Bližnjice preglednice …
+Rechercher et remplacer ¦ Traži i zamijeni ¦ Najdi in zamenjaj
+Filtrer (barre de recherche et filtres au-dessus) ¦ Filtriraj (traka za pretraživanje i filtri iznad) ¦ Filtriraj (iskalna vrstica in filtri zgoraj)
+Trier la plage ¦ Poredaj raspon ¦ Razvrsti obseg
+Somme, moyenne, nombre… ¦ Zbroj, prosjek, broj… ¦ Vsota, povprečje, število …
+Une personne de la base dans la cellule ¦ Osoba iz baze u ćeliji ¦ Oseba iz baze v celici
+Un lieu de la base dans la cellule ¦ Mjesto iz baze u ćeliji ¦ Kraj iz baze v celici
+Note sur la cellule ¦ Bilješka uz ćeliju ¦ Opomba k celici
+Graphique avec les chiffres de la sélection ¦ Grafikon s brojkama iz odabira ¦ Graf s številkami iz izbire
+Tape pour écrire · = pour calculer · double-clic pour modifier · clic droit pour les actions · glisse le petit carré pour recopier ¦ Tipkaj za pisanje · = za izračun · dvostruki klik za uređivanje · desni klik za radnje · povuci mali kvadratić za kopiranje ¦ Tipkaj za pisanje · = za izračun · dvoklik za urejanje · desni klik za dejanja · povleci majhen kvadratek za kopiranje
+Entrée valide · Tab : case à droite · Échap annule · pendant une formule, clique ou glisse sur des cellules pour les y mettre ¦ Enter potvrđuje · Tab: ćelija desno · Esc poništava · tijekom formule klikni ili povuci preko ćelija da ih umetneš ¦ Enter potrdi · Tab: celica na desni · Esc prekliče · med pisanjem formule klikni ali povleci čez celice, da jih vstaviš
+Σ Somme ¦ Σ Zbroj ¦ Σ Vsota
+Nombre ¦ Broj ¦ Število
+Minimum ¦ Minimum ¦ Najmanj
+Maximum ¦ Maksimum ¦ Največ
+Somme ¦ Zbroj ¦ Vsota
+Panneau de droite ouvert ¦ Desna ploča otvorena ¦ Desna plošča odprta
+, virgule ¦ , zarez ¦ , vejica
+; point-virgule ¦ ; točka sa zarezom ¦ ; podpičje
+espace ¦ razmak ¦ presledek
+Autre… ¦ Drugo… ¦ Drugo …
+plus grande que ¦ veća od ¦ večja od
+plus petite que ¦ manja od ¦ manjša od
+au moins ¦ najmanje ¦ najmanj
+au plus ¦ najviše ¦ največ
+égale à ¦ jednaka ¦ enaka
+différente de ¦ različita od ¦ različna od
+entre ¦ između ¦ med
+contient le texte ¦ sadrži tekst ¦ vsebuje besedilo
+est vide ¦ je prazna ¦ je prazna
+n’est pas vide ¦ nije prazna ¦ ni prazna
+est en double ¦ je duplikat ¦ je dvojnik
+est une date impossible ¦ je nemoguć datum ¦ je nemogoč datum
+barres dans la cellule ¦ trake u ćeliji ¦ stolpci v celici
+fond jaune ¦ žuta pozadina ¦ rumeno ozadje
+fond rouge ¦ crvena pozadina ¦ rdeče ozadje
+fond vert ¦ zelena pozadina ¦ zeleno ozadje
+fond bleu ¦ plava pozadina ¦ modro ozadje
+fond orange ¦ narančasta pozadina ¦ oranžno ozadje
+fond violet ¦ ljubičasta pozadina ¦ vijolično ozadje
+règle|plus grande que ¦ veća od ¦ večja od
+règle|plus petite que ¦ manja od ¦ manjša od
+règle|au moins ¦ najmanje ¦ najmanj
+règle|au plus ¦ najviše ¦ največ
+règle|égale à ¦ jednaka ¦ enaka
+règle|différente de ¦ različita od ¦ različna od
+règle|entre ¦ između ¦ med
+règle|contient ¦ sadrži ¦ vsebuje
+règle|vide ¦ prazno ¦ prazno
+règle|pas vide ¦ nije prazno ¦ ni prazno
+règle|en double ¦ duplikat ¦ dvojnik
+règle|date impossible ¦ nemoguć datum ¦ nemogoč datum
+règle|barres ¦ trake ¦ stolpci
+Cellule ¦ Ćelija ¦ Celica
+Nombre et date ¦ Broj i datum ¦ Število in datum
+Couleur et bordures ¦ Boja i obrubi ¦ Barva in obrobe
+Validation ¦ Provjera valjanosti ¦ Preverjanje veljavnosti
+Adresse ¦ Adresa ¦ Naslov
+Valeur ¦ Vrijednost ¦ Vrednost
+Formule ¦ Formula ¦ Formula
+Autorise ¦ Dopušta ¦ Dovoli
+Sinon ¦ Inače ¦ Sicer
+Insérer une ligne au-dessus ¦ Umetni redak iznad ¦ Vstavi vrstico nad
+Insérer une ligne en dessous ¦ Umetni redak ispod ¦ Vstavi vrstico pod
+Insérer une colonne à gauche ¦ Umetni stupac lijevo ¦ Vstavi stolpec levo
+Insérer une colonne à droite ¦ Umetni stupac desno ¦ Vstavi stolpec desno
+Trier A → Z ¦ Poredaj A → Z ¦ Razvrsti A → Ž
+Retirer le filtre ¦ Ukloni filtar ¦ Odstrani filter
+Note… ¦ Bilješka… ¦ Opomba …
+Ajuster la largeur ¦ Prilagodi širinu ¦ Prilagodi širino
+Supprimer les lignes ¦ Izbriši retke ¦ Izbriši vrstice
+Supprimer les colonnes ¦ Izbriši stupce ¦ Izbriši stolpce
+Windows (vieil Excel) ¦ Windows (stari Excel) ¦ Windows (stari Excel)
+👤 Des fiches ¦ 👤 Zapisi ¦ 👤 Zapisi
+🏠 Un recensement (foyers) ¦ 🏠 Popis stanovništva (kućanstva) ¦ 🏠 Popis prebivalstva (gospodinjstva)
+📅 Des événements ¦ 📅 Događaji ¦ 📅 Dogodki
+— ne pas envoyer — ¦ — ne šalji — ¦ — ne pošlji —
+Nom et prénom ¦ Prezime i ime ¦ Priimek in ime
+Sexe ¦ Spol ¦ Spol
+Naissance (date ou année) ¦ Rođenje (datum ili godina) ¦ Rojstvo (datum ali leto)
+Décès (date) ¦ Smrt (datum) ¦ Smrt (datum)
+N° de foyer (ménage) ¦ Br. kućanstva ¦ Št. gospodinjstva
+N° de maison ¦ Kućni broj ¦ Hišna številka
+Rue, quartier ¦ Ulica, četvrt ¦ Ulica, četrt
+Patron, employeur ¦ Gospodar, poslodavac ¦ Gospodar, delodajalec
+Situation (marié, veuf…) ¦ Bračno stanje (oženjen, udovac…) ¦ Stan (poročen, vdovec …)
+Observations, notes ¦ Napomene, bilješke ¦ Opombe, zapiski
+Sorte d’événement (acte) ¦ Vrsta događaja (isprava) ¦ Vrsta dogodka (vpis)
+Date de l’événement ¦ Datum događaja ¦ Datum dogodka
+Lieu de l’événement ¦ Mjesto događaja ¦ Kraj dogodka
+colonnes de l’année (1836 → 1936) · foyers · 📤 vers la base ¦ stupci te godine (1836. → 1936.) · kućanstva · 📤 u bazu ¦ stolpci tistega leta (1836 → 1936) · gospodinjstva · 📤 v bazo
+⤒ Remplir depuis l’app… ¦ ⤒ Popuni iz aplikacije… ¦ ⤒ Izpolni iz aplikacije …
+↻ Relire depuis la base ¦ ↻ Ponovno pročitaj iz baze ¦ ↻ Znova preberi iz baze
+catégorie + séries ¦ kategorija + nizovi ¦ kategorija + nizi
+📊 Créer le diagramme ¦ 📊 Stvori dijagram ¦ 📊 Ustvari diagram
+Un graphique ¦ Grafikon ¦ Graf
+📈 Créer le graphique ¦ 📈 Stvori grafikon ¦ 📈 Ustvari graf
+objet ▦ Tableur ¦ objekt ▦ Proračunska tablica ¦ predmet ▦ Preglednica
+📋 Copier pour un tableau ¦ 📋 Kopiraj za ploču ¦ 📋 Kopiraj za tablo
+Un recueil ¦ Zbirka ¦ Zbirka
+tableur d’une page ¦ proračunska tablica na stranici ¦ preglednica na strani
+📋 Copier pour un recueil ¦ 📋 Kopiraj za zbirku ¦ 📋 Kopiraj za zbirko
+tableau ou graphique ¦ tablica ili grafikon ¦ tabela ali graf
+Ce que le diagramme attend ¦ Što dijagram očekuje ¦ Kaj pričakuje diagram
+Ce que le graphique attend ¦ Što grafikon očekuje ¦ Kaj pričakuje graf
+Ce que le tableau attend ¦ Što ploča očekuje ¦ Kaj pričakuje tabla
+Ce que le recueil attend ¦ Što zbirka očekuje ¦ Kaj pričakuje zbirka
+Pyramide des âges ¦ Dobna piramida ¦ Starostna piramida
+Courbes ¦ Krivulje ¦ Krivulje
+Radar ¦ Radar ¦ Radar
+Barres groupées ¦ Grupirane trake ¦ Združeni stolpci
+Camembert (une seule série) ¦ Tortni grafikon (samo jedan niz) ¦ Tortni graf (samo en niz)
+Rectangles proportionnels ¦ Proporcionalni pravokutnici ¦ Sorazmerni pravokotniki
+🎯 Préparer pour… (diagramme, graphique, présentation…) ¦ 🎯 Pripremi za… (dijagram, grafikon, prezentacija…) ¦ 🎯 Pripravi za … (diagram, graf, predstavitev …)
+initiale ¦ početno slovo ¦ začetnica
+MAJUSCULES ¦ VELIKA SLOVA ¦ VELIKE ČRKE
+minuscules ¦ mala slova ¦ male črke
+Capitale ¦ Veliko početno slovo ¦ Velika začetnica
+Plus petit ¦ Najmanje ¦ Najmanjše
+Plus grand ¦ Najveće ¦ Največje
+✨ Remplissage instantané ¦ ✨ Trenutačno popunjavanje ¦ ✨ Hitro izpolnjevanje
+Σ Sous-totaux… ¦ Σ Međuzbrojevi… ¦ Σ Vmesne vsote …
+⊟ Plan : replier / déplier le détail ¦ ⊟ Struktura: sažmi / proširi pojedinosti ¦ ⊟ Oris: strni / razširi podrobnosti
+🎯 Valeur cible… ¦ 🎯 Traženje cilja… ¦ 🎯 Iskanje cilja …
+🧮 Solveur… ¦ 🧮 Rješavač… ¦ 🧮 Reševalec …
+📋 Tableau de scénarios (et si…)… ¦ 📋 Tablica scenarija (što ako…)… ¦ 📋 Tabela scenarijev (kaj če …) …
+⏺ Enregistrer une action / ⏹ arrêter ¦ ⏺ Snimi radnju / ⏹ zaustavi ¦ ⏺ Posnemi dejanje / ⏹ ustavi
+▶ Actions enregistrées… ¦ ▶ Snimljene radnje… ¦ ▶ Posneta dejanja …
+📈 Mini-graphique… ¦ 📈 Mini-grafikon… ¦ 📈 Mini graf …
+Nombre de lignes ¦ Broj redaka ¦ Število vrstic
+Nombre de valeurs différentes ¦ Broj različitih vrijednosti ¦ Število različnih vrednosti
+En % de la ligne ¦ U % retka ¦ V % vrstice
+En % de la colonne ¦ U % stupca ¦ V % stolpca
+En % du tout ¦ U % ukupnog ¦ V % celote
+🔀 Tableau croisé dynamique… ¦ 🔀 Zaokretna tablica… ¦ 🔀 Vrtilna tabela …
+↻ Actualiser le tableau croisé ¦ ↻ Osvježi zaokretnu tablicu ¦ ↻ Osveži vrtilno tabelo
+📊 Graphique vivant (suit la sélection) ¦ 📊 Živi grafikon (prati odabir) ¦ 📊 Živ graf (sledi izbiri)
+📊 Graphique vivant ¦ 📊 Živi grafikon ¦ 📊 Živ graf
+Vide ¦ Prazno ¦ Prazno
+⛔ Formule en erreur ¦ ⛔ Formula s pogreškom ¦ ⛔ Formula z napako
+ƒ Formule ¦ ƒ Formula ¦ ƒ Formula
+VRAI / FAUX ¦ ISTINITO / LAŽNO ¦ DRŽI / NE DRŽI
+⚠️ Date impossible ¦ ⚠️ Nemoguć datum ¦ ⚠️ Nemogoč datum
+📅 Date d’acte ¦ 📅 Datum isprave ¦ 📅 Datum vpisa
+Conditions ¦ Uvjeti ¦ Pogoji
+Logique ¦ Logika ¦ Logika
+Conjoint ¦ Bračni drug ¦ Zakonec
+Parents ¦ Roditelji ¦ Starši
+N° de fiche ¦ Br. zapisa ¦ Št. zapisa
+Date ¦ Datum ¦ Datum
+Personne(s) ¦ Osoba/osobe ¦ Oseba/osebe
+Description ¦ Opis ¦ Opis
+N° d’événement ¦ Br. događaja ¦ Št. dogodka
+Foyer ¦ Kućanstvo ¦ Gospodinjstvo
+Employeur ¦ Poslodavac ¦ Delodajalec
+Situation ¦ Bračno stanje ¦ Stan
+Rue ¦ Ulica ¦ Ulica
+N° ¦ Br. ¦ Št.
+Adresse entière ¦ Cijela adresa ¦ Celoten naslov
+Deuxième prénom ¦ Drugo ime ¦ Drugo ime
+Titre ¦ Titula ¦ Naziv
+Suffixe ¦ Sufiks ¦ Pripona
+FamilySearch ¦ FamilySearch ¦ FamilySearch
+Description physique ¦ Fizički opis ¦ Telesni opis
+Teint ¦ Ten ¦ Polt
+Origine ¦ Podrijetlo ¦ Izvor
+Vivant ? ¦ Živ? ¦ Živ?
+Modifié le ¦ Izmijenjeno ¦ Spremenjeno
+Cause ¦ Uzrok ¦ Vzrok
+Autorité ¦ Ovlast ¦ Pristojnost
+Confiance ¦ Pouzdanost ¦ Zanesljivost
+Date convertie ¦ Pretvoreni datum ¦ Pretvorjen datum
+Autre date ¦ Drugi datum ¦ Drug datum
+Informations en plus ¦ Dodatne informacije ¦ Dodatne informacije
+Calendrier ¦ Kalendar ¦ Koledar
+Relevés de dépouillement ¦ Prijepisi indeksa zapisa ¦ Prepisi indeksa vpisov
+Noms de famille ¦ Prezimena ¦ Priimki
+Âges au décès ¦ Dob pri smrti ¦ Starost ob smrti
+Décès par siècle ¦ Smrti po stoljećima ¦ Smrti po stoletjih
+Communes de naissance ¦ Općine rođenja ¦ Občine rojstva
+Départements de naissance ¦ Departmani rođenja ¦ Departmaji rojstva
+Naissances par mois ¦ Rođenja po mjesecima ¦ Rojstva po mesecih
+Personnes par génération ¦ Osobe po generacijama ¦ Osebe po rodovih
+Additionne des nombres ou des plages. ¦ Zbraja brojeve ili raspone. ¦ Sešteje števila ali obsege.
+La moyenne des nombres. ¦ Prosjek brojeva. ¦ Povprečje števil.
+Le plus petit nombre. ¦ Najmanji broj. ¦ Najmanjše število.
+Le plus grand nombre. ¦ Najveći broj. ¦ Največje število.
+Compte les cellules qui contiennent un nombre. ¦ Broji ćelije koje sadrže broj. ¦ Prešteje celice, ki vsebujejo število.
+Compte les cellules qui ne sont pas vides. ¦ Broji ćelije koje nisu prazne. ¦ Prešteje celice, ki niso prazne.
+Compte les cellules vides. ¦ Broji prazne ćelije. ¦ Prešteje prazne celice.
+Multiplie des nombres. ¦ Množi brojeve. ¦ Zmnoži števila.
+Arrondit au plus proche. ¦ Zaokružuje na najbliže. ¦ Zaokroži na najbližje.
+Arrondit vers zéro. ¦ Zaokružuje prema nuli. ¦ Zaokroži proti nič.
+Arrondit en s’éloignant de zéro. ¦ Zaokružuje od nule. ¦ Zaokroži stran od nič.
+La partie entière (arrondi vers le bas). ¦ Cijeli dio (zaokruženo prema dolje). ¦ Celi del (zaokroženo navzdol).
+Le nombre sans son signe. ¦ Broj bez predznaka. ¦ Število brez predznaka.
+Le reste d’une division. ¦ Ostatak dijeljenja. ¦ Ostanek pri deljenju.
+Un nombre élevé à une puissance. ¦ Broj podignut na potenciju. ¦ Število, potencirano na eksponent.
+La racine carrée. ¦ Kvadratni korijen. ¦ Kvadratni koren.
+La valeur du milieu. ¦ Srednja vrijednost (medijan). ¦ Srednja vrednost (mediana).
+L’écart type (sur un échantillon). ¦ Standardna devijacija (uzorka). ¦ Standardni odklon (vzorca).
+La place d’un nombre dans une liste (1 = le plus grand ; ordre 1 = le plus petit d’abord). ¦ Mjesto broja na popisu (1 = najveći; redoslijed 1 = najprije najmanji). ¦ Mesto števila na seznamu (1 = največje; vrstni red 1 = najprej najmanjše).
+La k-ième plus grande valeur. ¦ k-ta najveća vrijednost. ¦ k-ta največja vrednost.
+La k-ième plus petite valeur. ¦ k-ta najmanja vrijednost. ¦ k-ta najmanjša vrednost.
+Une valeur si le test est vrai, une autre sinon. ¦ Jedna vrijednost ako je test istinit, inače druga. ¦ Ena vrednost, če test drži, sicer druga.
+La valeur du premier test vrai. ¦ Vrijednost prvog istinitog testa. ¦ Vrednost prvega testa, ki drži.
+La valeur, ou autre chose s’il y a une erreur. ¦ Vrijednost ili nešto drugo ako postoji pogreška. ¦ Vrednost ali nekaj drugega, če pride do napake.
+La valeur, ou autre chose si elle n’est pas trouvée (#N/A). ¦ Vrijednost ili nešto drugo ako nije pronađena (#N/A). ¦ Vrednost ali nekaj drugega, če je ni mogoče najti (#N/A).
+VRAI si tous les tests sont vrais. ¦ VRAI (istina) ako su svi testovi istiniti. ¦ VRAI (drži), če vsi testi držijo.
+VRAI si au moins un test est vrai. ¦ VRAI (istina) ako je barem jedan test istinit. ¦ VRAI (drži), če drži vsaj en test.
+La valeur VRAI (comme le mot VRAI). ¦ Vrijednost VRAI (istina), kao riječ VRAI. ¦ Vrednost VRAI (drži), kot beseda VRAI.
+La valeur FAUX (comme le mot FAUX). ¦ Vrijednost FAUX (laž), kao riječ FAUX. ¦ Vrednost FAUX (ne drži), kot beseda FAUX.
+Inverse un test. ¦ Obrće test. ¦ Obrne test.
+Compte les cellules qui remplissent une condition (">60", "laboureur", "lab*"). ¦ Broji ćelije koje ispunjavaju uvjet (">60", "laboureur", "lab*"). ¦ Prešteje celice, ki izpolnjujejo pogoj (">60", "laboureur", "lab*").
+Compte les lignes qui remplissent toutes les conditions. ¦ Broji retke koji ispunjavaju sve uvjete. ¦ Prešteje vrstice, ki izpolnjujejo vse pogoje.
+Additionne les cellules qui remplissent une condition. ¦ Zbraja ćelije koje ispunjavaju uvjet. ¦ Sešteje celice, ki izpolnjujejo pogoj.
+Additionne les lignes qui remplissent toutes les conditions. ¦ Zbraja retke koji ispunjavaju sve uvjete. ¦ Sešteje vrstice, ki izpolnjujejo vse pogoje.
+La moyenne des cellules qui remplissent une condition. ¦ Prosjek ćelija koje ispunjavaju uvjet. ¦ Povprečje celic, ki izpolnjujejo pogoj.
+Cherche dans la 1re colonne d’un tableau et rend la valeur d’une autre colonne. ¦ Traži u 1. stupcu tablice i vraća vrijednost iz drugog stupca. ¦ Išče v 1. stolpcu tabele in vrne vrednost iz drugega stolpca.
+Cherche dans la 1re ligne d’un tableau. ¦ Traži u 1. retku tablice. ¦ Išče v 1. vrstici tabele.
+Cherche une valeur et rend celle d’à côté. ¦ Traži vrijednost i vraća onu pokraj nje. ¦ Poišče vrednost in vrne tisto poleg nje.
+La valeur à une ligne et une colonne de la plage. ¦ Vrijednost u retku i stupcu raspona. ¦ Vrednost v vrstici in stolpcu obsega.
+La position d’une valeur dans une plage (type 0 = exactement). ¦ Položaj vrijednosti u rasponu (vrsta 0 = točno). ¦ Položaj vrednosti v obsegu (vrsta 0 = natančno).
+La n-ième valeur de la liste. ¦ n-ta vrijednost popisa. ¦ n-ta vrednost seznama.
+Les valeurs sans doublons (déborde sur les cases du dessous). ¦ Vrijednosti bez duplikata (prelijeva se u ćelije ispod). ¦ Vrednosti brez dvojnikov (prelije se v celice spodaj).
+La plage triée (ordre 1 = croissant, -1 = décroissant). ¦ Poredani raspon (redoslijed 1 = uzlazno, -1 = silazno). ¦ Razvrščen obseg (vrstni red 1 = naraščajoče, -1 = padajoče).
+Les lignes de la plage qui remplissent la condition (ex. =FILTRE(A2:C9; C2:C9>30)). ¦ Retci raspona koji ispunjavaju uvjet (npr. =FILTRE(A2:C9; C2:C9>30)). ¦ Vrstice obsega, ki izpolnjujejo pogoj (npr. =FILTRE(A2:C9; C2:C9>30)).
+Met des textes bout à bout. ¦ Spaja tekstove jedan za drugim. ¦ Združi besedila enega za drugim.
+Met des textes bout à bout avec un séparateur. ¦ Spaja tekstove jedan za drugim s razdjelnikom. ¦ Združi besedila enega za drugim z ločilom.
+Les premiers caractères. ¦ Prvi znakovi. ¦ Prvi znaki.
+Les derniers caractères. ¦ Posljednji znakovi. ¦ Zadnji znaki.
+Un morceau au milieu d’un texte. ¦ Dio iz sredine teksta. ¦ Del iz sredine besedila.
+Le nombre de caractères. ¦ Broj znakova. ¦ Število znakov.
+En capitales. ¦ Velikim slovima. ¦ Z velikimi črkami.
+En minuscules. ¦ Malim slovima. ¦ Z malimi črkami.
+Une capitale au début de chaque mot. ¦ Veliko slovo na početku svake riječi. ¦ Velika začetnica na začetku vsake besede.
+Retire les espaces en trop. ¦ Uklanja suvišne razmake. ¦ Odstrani odvečne presledke.
+Remplace un morceau de texte. ¦ Zamjenjuje dio teksta. ¦ Zamenja del besedila.
+La position d’un texte dans un autre (sans tenir compte des capitales). ¦ Položaj teksta unutar drugog (ne razlikuje velika i mala slova). ¦ Položaj besedila v drugem (ne upošteva velikih črk).
+Un nombre ou une date écrits avec un format ("0,00", "0 %", "jj/mm/aaaa"). ¦ Broj ili datum napisan u formatu ("0,00", "0 %", "jj/mm/aaaa"). ¦ Število ali datum, zapisan v obliki ("0,00", "0 %", "jj/mm/aaaa").
+Le nombre écrit dans un texte. ¦ Broj napisan u tekstu. ¦ Število, zapisano v besedilu.
+Fabrique une date. ¦ Stvara datum. ¦ Sestavi datum.
+L’année d’une date (date d’acte comprise). ¦ Godina datuma (uključujući datume isprava). ¦ Leto datuma (tudi datumi vpisov).
+Le mois d’une date (1 à 12). ¦ Mjesec datuma (1 do 12). ¦ Mesec datuma (1 do 12).
+Le jour du mois. ¦ Dan u mjesecu. ¦ Dan v mesecu.
+Le jour de la semaine (type 1 : 1 = dimanche ; type 2 : 1 = lundi … 7 = dimanche ; type 3 : 0 = lundi). ¦ Dan u tjednu (vrsta 1: 1 = nedjelja; vrsta 2: 1 = ponedjeljak … 7 = nedjelja; vrsta 3: 0 = ponedjeljak). ¦ Dan v tednu (vrsta 1: 1 = nedelja; vrsta 2: 1 = ponedeljek … 7 = nedelja; vrsta 3: 0 = ponedeljek).
+La date du jour. ¦ Današnji datum. ¦ Današnji datum.
+La date et l’heure. ¦ Datum i vrijeme. ¦ Datum in čas.
+L’écart entre deux dates, en années, mois ou jours (« AM » : mois en plus des années, « MJ » : jours en plus des mois, « AJ » : jours en plus des années ; « Y », « D », « YM », « MD », « YD » d’Excel compris). ¦ Razlika između dvaju datuma, u godinama, mjesecima ili danima („AM”: mjeseci povrh godina, „MJ”: dani povrh mjeseci, „AJ”: dani povrh godina; razumiju se i Excelovi „Y”, „D”, „YM”, „MD”, „YD”). ¦ Razlika med dvema datumoma v letih, mesecih ali dnevih (»AM«: meseci poleg let, »MJ«: dnevi poleg mesecev, »AJ«: dnevi poleg let; razume tudi Excelove »Y«, »D«, »YM«, »MD«, »YD«).
+L’âge entre deux dates d’acte (« vers 1784 », « an II » compris) ; « ≈ » si une date est approximative. Unité : « ans », « mois » ou « jours ». ¦ Dob između dvaju datuma isprava (razumije „vers 1784”, „an II”); „≈” ako je datum približan. Jedinica: „ans”, „mois” ili „jours”. ¦ Starost med dvema datumoma vpisov (razume »vers 1784«, »an II«); »≈«, če je datum približen. Enota: »ans«, »mois« ali »jours«.
+L’année trouvée dans un texte d’acte, même républicain (« baptisé le 3 frimaire an XII » → 1803). ¦ Godina pronađena u tekstu isprave, čak i republikanska („baptisé le 3 frimaire an XII” → 1803.). ¦ Leto, najdeno v besedilu vpisa, tudi republikansko (»baptisé le 3 frimaire an XII« → 1803).
+La date comprise, écrite proprement (comme « ✓ Compris : » des champs de date). ¦ Shvaćeni datum, uredno napisan (kao „✓ Shvaćeno:” u poljima za datum). ¦ Razumljeni datum, lepo zapisan (kot »✓ Razumljeno:« v poljih za datum).
+« jour », « mois », « année », « vers », « avant », « après » ou « entre ». ¦ „jour”, „mois”, „année”, „vers”, „avant”, „après” ili „entre”. ¦ »jour«, »mois«, »année«, »vers«, »avant«, »après« ali »entre«.
+La date dans le calendrier républicain. ¦ Datum u republikanskom kalendaru. ¦ Datum v republikanskem koledarju.
+La génération d’un numéro Sosa (1 = toi, 2 et 3 = tes parents…). ¦ Generacija Sosa broja (1 = ti, 2 i 3 = tvoji roditelji…). ¦ Rod Sosa številke (1 = ti, 2 in 3 = tvoja starša …).
+Le numéro Sosa du père (2 × n). ¦ Sosa broj oca (2 × n). ¦ Sosa številka očeta (2 × n).
+Le numéro Sosa de la mère (2 × n + 1). ¦ Sosa broj majke (2 × n + 1). ¦ Sosa številka matere (2 × n + 1).
+« paternel » ou « maternel » (le côté du Sosa 1). ¦ „paternel” ili „maternel” (strana Sose 1). ¦ »paternel« ali »maternel« (stran Sose 1).
+Un petit graphique dans la case : "courbe", "barres" ou "gagné" (au-dessus ou au-dessous de zéro). ¦ Mali grafikon u ćeliji: "courbe" (krivulja), "barres" (trake) ili "gagné" (iznad ili ispod nule). ¦ Majhen graf v celici: "courbe" (krivulja), "barres" (stolpci) ali "gagné" (nad ali pod ničlo).
+Donne un nom à une valeur pour l’utiliser dans le calcul. ¦ Daje vrijednosti naziv kako bi se koristila u izračunu. ¦ Vrednosti da ime, da jo uporabiš v izračunu.
+Une petite fonction à soi, à utiliser dans LET, MAP, PAR.LIGNE… ¦ Mala vlastita funkcija, za upotrebu u LET, MAP, PAR.LIGNE… ¦ Majhna lastna funkcija za uporabo v LET, MAP, PAR.LIGNE …
+Applique la LAMBDA à chaque case de la plage. ¦ Primjenjuje LAMBDA na svaku ćeliju raspona. ¦ Uporabi LAMBDA na vsaki celici obsega.
+Un résultat par ligne de la plage. ¦ Jedan rezultat po retku raspona. ¦ En rezultat na vrstico obsega.
+Un résultat par colonne de la plage. ¦ Jedan rezultat po stupcu raspona. ¦ En rezultat na stolpec obsega.
+Cumule les cases une à une (un total qui avance). ¦ Zbraja ćelije jednu po jednu (tekući zbroj). ¦ Sešteva celice eno za drugo (tekoča vsota).
+Comme REDUCE, avec chaque étape du total. ¦ Kao REDUCE, sa svakim korakom zbroja. ¦ Kot REDUCE, z vsakim korakom vsote.
+=ligne laissée ¦ izostavljeni redak|izostavljena retka|izostavljenih redaka ¦ izpuščena vrstica|izpuščeni vrstici|izpuščene vrstice|izpuščenih vrstic
+=ligne remplie depuis l’app (tenue à jour) ¦ redak popunjen iz aplikacije (održava se ažurnim)|retka popunjena iz aplikacije (održavaju se ažurnima)|redaka popunjenih iz aplikacije (održavaju se ažurnima) ¦ vrstica, izpolnjena iz aplikacije (sproti posodobljena)|vrstici, izpolnjeni iz aplikacije (sproti posodobljeni)|vrstice, izpolnjene iz aplikacije (sproti posodobljene)|vrstic, izpolnjenih iz aplikacije (sproti posodobljenih)
+=ligne remplie depuis l’app ¦ redak popunjen iz aplikacije|retka popunjena iz aplikacije|redaka popunjenih iz aplikacije ¦ vrstica, izpolnjena iz aplikacije|vrstici, izpolnjeni iz aplikacije|vrstice, izpolnjene iz aplikacije|vrstic, izpolnjenih iz aplikacije
+=ligne à toi sans fiche : retirée ¦ tvoj redak bez zapisa: uklonjen|tvoja retka bez zapisa: uklonjena|tvojih redaka bez zapisa: uklonjeno ¦ tvoja vrstica brez zapisa: odstranjena|tvoji vrstici brez zapisa: odstranjeni|tvoje vrstice brez zapisa: odstranjene|tvojih vrstic brez zapisa: odstranjenih
+=nouvelle fiche ¦ novi zapis|nova zapisa|novih zapisa ¦ nov zapis|nova zapisa|novi zapisi|novih zapisov
+=reliée ¦ povezan|povezana|povezanih ¦ povezan|povezana|povezani|povezanih
+=laissée ¦ izostavljen|izostavljena|izostavljenih ¦ izpuščena|izpuščeni|izpuščene|izpuščenih
+=autre ligne ¦ drugi redak|druga retka|drugih redaka ¦ druga vrstica|drugi vrstici|druge vrstice|drugih vrstic
+=case ¦ ćelija|ćelije|ćelija ¦ celica|celici|celice|celic
+=autre case ¦ druga ćelija|druge ćelije|drugih ćelija ¦ druga celica|drugi celici|druge celice|drugih celic
+=case remplie ¦ popunjena ćelija|popunjene ćelije|popunjenih ćelija ¦ izpolnjena celica|izpolnjeni celici|izpolnjene celice|izpolnjenih celic
+=groupe ¦ skupina|skupine|skupina ¦ skupina|skupini|skupine|skupin
+=case changée ¦ promijenjena ćelija|promijenjene ćelije|promijenjenih ćelija ¦ spremenjena celica|spremenjeni celici|spremenjene celice|spremenjenih celic
+=scénario calculé ¦ izračunat scenarij|izračunata scenarija|izračunatih scenarija ¦ izračunan scenarij|izračunana scenarija|izračunani scenariji|izračunanih scenarijev
+=commande ¦ naredba|naredbe|naredbi ¦ ukaz|ukaza|ukazi|ukazov
+=fonction ¦ funkcija|funkcije|funkcija ¦ funkcija|funkciji|funkcije|funkcij
+=valeur en plus de la première retirée ¦ uklonjena vrijednost osim prve|uklonjene vrijednosti osim prve|uklonjenih vrijednosti osim prve ¦ odstranjena vrednost poleg prve|odstranjeni vrednosti poleg prve|odstranjene vrednosti poleg prve|odstranjenih vrednosti poleg prve
+=ligne supprimée ¦ izbrisan redak|izbrisana retka|izbrisanih redaka ¦ izbrisana vrstica|izbrisani vrstici|izbrisane vrstice|izbrisanih vrstic
+=colonne supprimée ¦ izbrisan stupac|izbrisana stupca|izbrisanih stupaca ¦ izbrisan stolpec|izbrisana stolpca|izbrisani stolpci|izbrisanih stolpcev
+=ligne en double supprimée ¦ izbrisan duplicirani redak|izbrisana duplicirana retka|izbrisanih dupliciranih redaka ¦ izbrisana podvojena vrstica|izbrisani podvojeni vrstici|izbrisane podvojene vrstice|izbrisanih podvojenih vrstic
+=ligne coupée en colonnes ¦ redak razdvojen u stupce|retka razdvojena u stupce|redaka razdvojenih u stupce ¦ vrstica, razdeljena v stolpce|vrstici, razdeljeni v stolpce|vrstice, razdeljene v stolpce|vrstic, razdeljenih v stolpce
+=case modifiée ¦ izmijenjena ćelija|izmijenjene ćelije|izmijenjenih ćelija ¦ spremenjena celica|spremenjeni celici|spremenjene celice|spremenjenih celic
+=cellule ¦ ćelija|ćelije|ćelija ¦ celica|celici|celice|celic
+=cellule copiée ¦ kopirana ćelija|kopirane ćelije|kopiranih ćelija ¦ kopirana celica|kopirani celici|kopirane celice|kopiranih celic
+=feuille importée ¦ uvezen list|uvezena lista|uvezenih listova ¦ uvožen list|uvožena lista|uvoženi listi|uvoženih listov
+{sheets} ({rows}) ¦ {sheets} ({rows}) ¦ {sheets} ({rows})
+la date ¦ datum ¦ datum
+le début ¦ početak ¦ začetek
+la fin ¦ kraj ¦ konec
+il manque un guillemet « " » à la fin d’un texte ¦ nedostaje navodnik „"” na kraju teksta ¦ manjka narekovaj »"« na koncu besedila
+il manque une apostrophe à la fin du nom de feuille ¦ nedostaje apostrof na kraju naziva lista ¦ manjka opuščaj na koncu imena lista
+après le nom de la feuille, il faut « ! » puis la cellule ¦ nakon naziva lista potreban je „!” pa ćelija ¦ za imenom lista je potreben »!« in nato celica
+la formule s’arrête trop tôt ¦ formula prerano završava ¦ formula se konča prezgodaj
+il manque une parenthèse « ) » ¦ nedostaje zagrada „)” ¦ manjka zaklepaj »)«
+une parenthèse « ) » de trop ¦ jedna zagrada „)” previše ¦ en zaklepaj »)« preveč
+un « ; » à une place inattendue ¦ „;” na neočekivanom mjestu ¦ »;« na nepričakovanem mestu
+un numéro Sosa est un nombre entier qui commence à 1 ¦ Sosa broj je cijeli broj koji počinje od 1 ¦ Sosa številka je celo število, ki se začne pri 1
+il n’y a aucun nombre dans la plage ¦ u rasponu nema nijednog broja ¦ v obsegu ni nobenega števila
+le diviseur de MOD vaut 0 ¦ djelitelj u MOD iznosi 0 ¦ delitelj v MOD je 0
+pas de racine carrée d’un nombre négatif ¦ nema kvadratnog korijena negativnog broja ¦ kvadratnega korena negativnega števila ni
+aucun nombre ¦ nijedan broj ¦ nobeno število
+il faut au moins deux nombres ¦ potrebna su barem dva broja ¦ potrebni sta vsaj dve števili
+aucun test n’est vrai ¦ nijedan test nije istinit ¦ noben test ne drži
+les plages n’ont pas la même taille ¦ rasponi nisu iste veličine ¦ obsegi niso enake velikosti
+aucune cellule ne remplit la condition ¦ nijedna ćelija ne ispunjava uvjet ¦ nobena celica ne izpolnjuje pogoja
+le 2e morceau doit être une plage, par exemple A2:C40 ¦ 2. dio mora biti raspon, na primjer A2:C40 ¦ 2. del mora biti obseg, na primer A2:C40
+le 2e morceau doit être une plage ¦ 2. dio mora biti raspon ¦ 2. del mora biti obseg
+la plage est vide ¦ raspon je prazan ¦ obseg je prazen
+la condition doit avoir autant de lignes que la plage ¦ uvjet mora imati isto toliko redaka koliko i raspon ¦ pogoj mora imeti toliko vrstic kot obseg
+aucune ligne ne remplit la condition ¦ nijedan redak ne ispunjava uvjet ¦ nobena vrstica ne izpolnjuje pogoja
+le début compte à partir de 1 ¦ početak se broji od 1 ¦ začetek se šteje od 1
+cette date n’a pas de mois ¦ ovaj datum nema mjesec ¦ ta datum nima meseca
+cette date n’a pas de jour ¦ ovaj datum nema dan ¦ ta datum nima dneva
+il faut le jour ¦ potreban je dan ¦ potreben je dan
+le type de JOURSEM va de 1 à 3 (ou 11 à 17) ¦ vrsta za JOURSEM ide od 1 do 3 (ili od 11 do 17) ¦ vrsta za JOURSEM gre od 1 do 3 (ali od 11 do 17)
+la fin est avant le début ¦ kraj je prije početka ¦ konec je pred začetkom
+la seconde date est avant la première ¦ drugi datum je prije prvog ¦ drugi datum je pred prvim
+il faut une date au jour près ¦ potreban je datum s točnim danom ¦ potreben je datum z natančnim dnevom
+le calendrier républicain va du 22 septembre 1792 à 1805 ¦ republikanski kalendar traje od 22. rujna 1792. do 1805. ¦ republikanski koledar velja od 22. septembra 1792 do 1805
+il faut des nombres dans la plage ¦ u rasponu su potrebni brojevi ¦ v obsegu so potrebna števila
+il faut une LAMBDA(…) ¦ potrebna je LAMBDA(…) ¦ potrebna je LAMBDA(…)
+trop de LAMBDA imbriquées ¦ previše ugniježđenih LAMBDA ¦ preveč gnezdenih LAMBDA
+des paires « nom; valeur » puis le calcul ¦ parovi „naziv; vrijednost”, zatim izračun ¦ pari »ime; vrednost«, nato izračun
+un nom (lettres) avant chaque valeur ¦ naziv (slova) prije svake vrijednosti ¦ ime (črke) pred vsako vrednostjo
+il faut au moins le calcul ¦ potreban je barem izračun ¦ potreben je vsaj izračun
+les paramètres sont des noms ¦ parametri su nazivi ¦ parametri so imena
+le calcul n’a pas de résultat ¦ izračun nema rezultat ¦ izračun nima rezultata
+le résultat est trop grand pour être calculé ¦ rezultat je prevelik za izračun ¦ rezultat je prevelik za izračun
+une feuille supprimée ¦ izbrisani list ¦ izbrisan list
+une plage entière ne tient pas dans une case : utilise SOMME(…), INDEX(…)… ¦ cijeli raspon ne stane u jednu ćeliju: koristi SOMME(…), INDEX(…)… ¦ cel obseg ne gre v eno celico: uporabi SOMME(…), INDEX(…) …
+puissance impossible ¦ nemoguća potencija ¦ nemogoča potenca
+une LAMBDA seule ne donne pas de valeur : utilise-la dans LET, MAP… ¦ LAMBDA sama ne daje vrijednost: koristi je u LET, MAP… ¦ LAMBDA sama ne da vrednosti: uporabi jo v LET, MAP …
+la formule est trop longue ¦ formula je preduga ¦ formula je predolga
+la formule est trop imbriquée ¦ formula je previše ugniježđena ¦ formula je pregloboko gnezdena
+trop de morceaux dans une fonction ¦ previše dijelova u funkciji ¦ preveč delov v funkciji
+la formule demande trop de calculs ¦ formula zahtijeva previše izračuna ¦ formula zahteva preveč izračunov
+le résultat est trop grand ¦ rezultat je prevelik ¦ rezultat je prevelik
+la plage est trop grande ¦ raspon je prevelik ¦ obseg je prevelik
+le fichier a trop de cellules ¦ datoteka ima previše ćelija ¦ datoteka ima preveč celic

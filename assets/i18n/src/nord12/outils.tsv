@@ -1,0 +1,980 @@
+fr ¦ ru ¦ uk
+Génération {g} ¦ Поколение {g} ¦ Покоління {g}
+★ ancêtre commun ¦ ★ общий предок ¦ ★ спільний предок
+Comment sont-ils parents ? ¦ Как они связаны родством? ¦ Як вони пов’язані спорідненістю?
+cousins issus de germains aussi par {name} (implexe) ¦ троюродные также через {name} (импликс) ¦ троюрідні також через {name} (імплекс)
+⚠ Lieux sans position : {list} — écris « Nom 48.11, -1.68 » ¦ ⚠ Места без координат: {list} — напиши «Название 48.11, -1.68» ¦ ⚠ Місця без координат: {list} — напиши «Назва 48.11, -1.68»
+De la génération {a} à la génération {b}, le centre de la famille s’est déplacé de {km} km. ¦ С поколения {a} по поколение {b} центр семьи сместился на {km} км. ¦ Від покоління {a} до покоління {b} центр родини змістився на {km} км.
+Centre de gravité de {n} générations, {km} km parcourus. ¦ Центр тяжести поколений ({n}), пройдено {km} км. ¦ Центр ваги поколінь ({n}), пройдено {km} км.
+Centre de gravité de {n} générations. ¦ Центр тяжести поколений ({n}). ¦ Центр ваги поколінь ({n}).
+Ajoute des lieux avec leur génération (ou « Depuis l’app »). ¦ Добавь места с их поколением (или «Из приложения»). ¦ Додай місця з їхнім поколінням (або «Із застосунку»).
+Gén. {g} ({max}) ¦ Пок. {g} ({max}) ¦ Пок. {g} ({max})
+{found} ancêtres trouvés sur {max} possibles en {n} générations ({pct} %). ¦ Найдено предков: {found} из {max} возможных (поколений: {n}, {pct} %). ¦ Знайдено предків: {found} з {max} можливих (поколінь: {n}, {pct} %).
+Complétude : {pct} % des ancêtres sur {n} générations. ¦ Полнота: {pct} % предков (поколений: {n}). ¦ Повнота: {pct} % предків (поколінь: {n}).
+… et {n} lignes de plus (« 🖨 Imprimer le tableau » les met toutes) ¦ … и ещё строк: {n} («🖨 Печать таблицы» выводит их все) ¦ … і ще рядків: {n} («🖨 Друк таблиці» виводить їх усі)
+Tableau d’ascendance : {n} ancêtres. ¦ Таблица предков: {n}. ¦ Таблиця предків: {n}.
+Tableau d’ascendance ¦ Таблица предков ¦ Таблиця предків
+Ajoute des correspondances de {lo} à {hi} cM avec leurs correspondances en commun (ou « Depuis l’app »). ¦ Добавь совпадения от {lo} до {hi} cM с их общими совпадениями (или «Из приложения»). ¦ Додай збіги від {lo} до {hi} cM з їхніми спільними збігами (або «Із застосунку»).
+dates · surtout en {month} ¦ даты · чаще всего: {month} ¦ дати · найчастіше: {month}
+Roue de l’année : {n} dates, surtout en {month}. ¦ Колесо года: дат {n}, чаще всего: {month}. ¦ Колесо року: дат {n}, найчастіше: {month}.
+{name} (à gauche) ¦ {name} (слева) ¦ {name} (ліворуч)
+{name} (à droite) ¦ {name} (справа) ¦ {name} (праворуч)
+Barres et courbe : {n} lignes. ¦ Столбцы и линия: строк {n}. ¦ Стовпці та лінія: рядків {n}.
+Sous {v} ¦ Ниже {v} ¦ Нижче {v}
+Au-dessus de {v} ¦ Выше {v} ¦ Вище {v}
+Collines empilées : {s} séries sur {n} périodes. ¦ Сложенные холмы: рядов {s}, периодов {n}. ¦ Складені пагорби: серій {s}, періодів {n}.
+Coordonnées parallèles : {n} lignes sur {a} axes. ¦ Параллельные координаты: строк {n}, осей {a}. ¦ Паралельні координати: рядків {n}, осей {a}.
+Chemin trouvé en {n} étapes. ¦ Путь найден, шагов: {n}. ¦ Шлях знайдено, кроків: {n}.
+Chemin trouvé en 1 étape. ¦ Путь найден за 1 шаг. ¦ Шлях знайдено за 1 крок.
+Aucun ancêtre dont le lieu de naissance a des coordonnées ({n} sans lieu situé). ¦ Нет предков, у места рождения которых есть координаты (без размещённого места: {n}). ¦ Немає предків, місце народження яких має координати (без розміщеного місця: {n}).
+Aucun ancêtre dont le lieu de naissance a des coordonnées. ¦ Нет предков, у места рождения которых есть координаты. ¦ Немає предків, місце народження яких має координати.
+Le centre de la famille de {name} ¦ Центр семьи: {name} ¦ Центр родини: {name}
+Les générations de {name} ¦ Поколения: {name} ¦ Покоління: {name}
+{n} lieux de naissance pris dans ta base ({m} sans lieu situé). ¦ Мест рождения из твоей базы: {n} (без размещённого места: {m}). ¦ Місць народження з твоєї бази: {n} (без розміщеного місця: {m}).
+{n} lieux de naissance pris dans ta base. ¦ Мест рождения из твоей базы: {n}. ¦ Місць народження з твоєї бази: {n}.
+L’arbre de {name} : ce qu’on connaît ¦ Древо {name}: что известно ¦ Дерево {name}: що відомо
+Tableau d’ascendance de {name} ¦ Таблица предков: {name} ¦ Таблиця предків: {name}
+{n} ancêtres pris dans ta base (arrêt à 4 096 lignes). ¦ Предков из твоей базы: {n} (остановка на 4 096 строках). ¦ Предків із твоєї бази: {n} (зупинка на 4 096 рядках).
+{n} ancêtres pris dans ta base. ¦ Предков из твоей базы: {n}. ¦ Предків із твоєї бази: {n}.
+Aucune naissance ni aucun décès daté. ¦ Нет ни датированных рождений, ни смертей. ¦ Немає ні датованих народжень, ні смертей.
+Filles ¦ Девочки ¦ Дівчата
+Garçons ¦ Мальчики ¦ Хлопці
+{n} noms sur {p} périodes. ¦ Фамилий: {n}, периодов: {p}. ¦ Прізвищ: {n}, періодів: {p}.
+{n} personnes comptées, {y} années. ¦ Учтено людей: {n}, лет: {y}. ¦ Враховано людей: {n}, років: {y}.
+Arrière-arrière-grands-parents ¦ Прапрадедушки и прапрабабушки ¦ Прапрадідусі та прапрабабусі
+Arrière-arrière-arrière-grands-parents ¦ Прапрапрадедушки и прапрапрабабушки ¦ Прапрапрадідусі та прапрапрабабусі
+Les cartes ne sont pas chargées. ¦ Карты не загружены. ¦ Мапи не завантажено.
+Ancêtres connus ¦ Известные предки ¦ Відомі предки
+Grand-père paternel ¦ Дедушка по отцу ¦ Дідусь по батькові
+Grand-mère paternelle ¦ Бабушка по отцу ¦ Бабуся по батькові
+Grand-père maternel ¦ Дедушка по матери ¦ Дідусь по матері
+Grand-mère maternelle ¦ Бабушка по матери ¦ Бабуся по матері
+Fêtes des prénoms ¦ Именины ¦ Іменини
+Âge au 1er enfant ¦ Возраст при 1-м ребёнке ¦ Вік при 1-й дитині
+Les métiers ¦ Профессии ¦ Професії
+Un titre par génération ¦ Один заголовок на поколение ¦ Один заголовок на покоління
+Tous mes tests ¦ Все мои тесты ¦ Усі мої тести
+Par décennie ¦ По десятилетиям ¦ За десятиліттями
+Par demi-siècle ¦ По полувекам ¦ За півстоліттями
+Par siècle ¦ По векам ¦ За століттями
+Décès ↔ naissances ¦ Смерти ↔ рождения ¦ Смерті ↔ народження
+Périodes ¦ Периоды ¦ Періоди
+Personnes au plus ¦ Не более людей ¦ Не більше людей
+Âge au 1er mariage ¦ Возраст при 1-м браке ¦ Вік при 1-му шлюбі
+Aucune naissance datée. ¦ Нет датированных рождений. ¦ Немає датованих народжень.
+Un dégradé ¦ Градиент ¦ Градієнт
+Une couleur chacune ¦ Каждому свой цвет ¦ Кожному свій колір
+Lien avec la personne d’avant ¦ Связь с предыдущим человеком ¦ Зв’язок із попередньою людиною
+son époux / épouse ¦ его муж / её жена ¦ її чоловік / його дружина
+Selon la place ¦ По месту ¦ За місцем
+En liste, étape par étape ¦ Списком, шаг за шагом ¦ Списком, крок за кроком
+La phrase du lien ¦ Фраза о родстве ¦ Речення про спорідненість
+Une seule ¦ Только одна ¦ Лише одна
+Sens des flèches ¦ Направление стрелок ¦ Напрямок стрілок
+Des plus anciens vers toi ¦ От самых давних к тебе ¦ Від найдавніших до тебе
+De toi vers les plus anciens ¦ От тебя к самым давним ¦ Від тебе до найдавніших
+La trajectoire ¦ Траектория ¦ Траєкторія
+Taille des lieux ¦ Размер мест ¦ Розмір місць
+La phrase du déplacement ¦ Фраза о перемещении ¦ Речення про переміщення
+Écarter les points d’un même lieu ¦ Раздвигать точки одного места ¦ Розсувати точки одного місця
+Noms des lieux les plus remplis ¦ Названия самых заполненных мест ¦ Назви найзаповненіших місць
+D’où viennent mes ancêtres ¦ Откуда мои предки ¦ Звідки мої предки
+Trouvés ¦ Найдены ¦ Знайдені
+Longueur des barres ¦ Длина столбцов ¦ Довжина стовпців
+Écrire les % ¦ Писать % ¦ Писати %
+Les ancêtres ¦ Предки ¦ Предки
+Lignes montrées au plus ¦ Не более показанных строк ¦ Не більше показаних рядків
+Les correspondances ¦ Совпадения ¦ Збіги
+ADN partagé ¦ Общая ДНК ¦ Спільна ДНК
+Correspondances au plus ¦ Не более совпадений ¦ Не більше збігів
+Mes cousins ADN, par grand-parent ¦ Мои ДНК-родственники по дедушкам и бабушкам ¦ Мої ДНК-родичі за дідусями та бабусями
+La courbe = la colonne n° ¦ Линия = столбец № ¦ Лінія = стовпець №
+Largeur des barres ¦ Ширина столбцов ¦ Ширина стовпців
+Une colonne autour du centre ¦ Один столбец вокруг центра ¦ Один стовпець навколо центру
+Par écart ¦ По разнице ¦ За різницею
+Par total ¦ По сумме ¦ За сумою
+Écrire les chiffres ¦ Писать числа ¦ Писати числа
+Écart entre les collines ¦ Расстояние между холмами ¦ Відстань між пагорбами
+À l’envers ¦ В обратном порядке ¦ У зворотному порядку
+Une par série ¦ По одному на ряд ¦ По одному на серію
+Opacité des lignes ¦ Непрозрачность линий ¦ Непрозорість ліній
+La marche ¦ Ступенька ¦ Сходинка
+Carte des générations : {n} lieux de naissance. ¦ Карта поколений: мест рождения {n}. ¦ Мапа поколінь: місць народження {n}.
+Génération {g} ({name}) : {found} sur {max} possibles ¦ Поколение {g} ({name}): {found} из {max} возможных ¦ Покоління {g} ({name}): {found} з {max} можливих
+{n} personnes différentes (implexe) ¦ Разных людей: {n} (импликс) ¦ Різних людей: {n} (імплекс)
+Méthode de Leeds : {n} groupes de couleur. ¦ Метод Лидса: цветных групп {n}. ¦ Метод Лідса: кольорових груп {n}.
+{name} : {n} en tout, le plus en {peak} ({v}) ¦ {name}: всего {n}, больше всего в {peak} ({v}) ¦ {name}: усього {n}, найбільше в {peak} ({v})
+Courbe en escalier : {n} points. ¦ Ступенчатая линия: точек {n}. ¦ Ступінчаста лінія: точок {n}.
+n° de fiche ¦ № карточки ¦ № картки
+liens de sang par {n} branches (implexe) ¦ кровное родство через ветви: {n} (импликс) ¦ кровна спорідненість через гілки: {n} (імплекс)
+{n} générations prises dans ta base. ¦ Поколений из твоей базы: {n}. ¦ Поколінь із твоєї бази: {n}.
+{n} correspondances prises dans l’onglet ADN. ¦ Совпадений из вкладки ДНК: {n}. ¦ Збігів із вкладки ДНК: {n}.
+{n} dates prises dans ta base. ¦ Дат из твоей базы: {n}. ¦ Дат із твоєї бази: {n}.
+{n} périodes prises dans ta base. ¦ Периодов из твоей базы: {n}. ¦ Періодів із твоєї бази: {n}.
+{n} vies prises dans ta base. ¦ Жизней из твоей базы: {n}. ¦ Життів із твоєї бази: {n}.
+Choisis deux personnes (« Depuis l’app ») ou écris le chemin, une personne par ligne. ¦ Выбери двух людей («Из приложения») или напиши путь, по одному человеку на строку. ¦ Вибери двох людей («Із застосунку») або напиши шлях, по одній людині на рядок.
+{gen} : centre de {n} lieux de naissance ¦ {gen}: центр мест рождения ({n}) ¦ {gen}: центр місць народження ({n})
+{gen} : centre de {n} lieu de naissance ¦ {gen}: центр места рождения ({n}) ¦ {gen}: центр місця народження ({n})
+écart moyen {km} km ¦ среднее отклонение {km} км ¦ середнє відхилення {km} км
+Ajoute des lieux de naissance avec leur génération (ou « Depuis l’app »). ¦ Добавь места рождения с их поколением (или «Из приложения»). ¦ Додай місця народження з їхнім поколінням (або «Із застосунку»).
+Ajoute des générations : la génération et le nombre d’ancêtres trouvés. ¦ Добавь поколения: поколение и число найденных предков. ¦ Додай покоління: покоління та кількість знайдених предків.
+Encore à trouver ¦ Ещё не найдены ¦ Ще не знайдені
+Personnes différentes (implexe) ¦ Разные люди (импликс) ¦ Різні люди (імплекс)
+Ajoute des ancêtres : leur numéro Sosa et leur nom (ou « Depuis l’app »). ¦ Добавь предков: их номер Sosa и имя (или «Из приложения»). ¦ Додай предків: їхній номер Sosa та ім’я (або «Із застосунку»).
+Ajoute des dates (« 14/07 » ou « 07-14 »), une sorte et un nom (ou « Depuis l’app »). ¦ Добавь даты («14/07» или «07-14»), вид и имя (или «Из приложения»). ¦ Додай дати («14/07» або «07-14»), вид та ім’я (або «Із застосунку»).
+Il faut au moins deux colonnes de chiffres : des barres à gauche, une courbe à droite. ¦ Нужно не менее двух столбцов чисел: столбцы слева, линия справа. ¦ Потрібно щонайменше два стовпці чисел: стовпці ліворуч, лінія праворуч.
+Aucun chiffre dans le tableau. ¦ В таблице нет чисел. ¦ У таблиці немає чисел.
+Ajoute des lignes : un nom et deux chiffres (gauche, droite), ou un seul chiffre autour du centre. ¦ Добавь строки: название и два числа (слева, справа) или одно число вокруг центра. ¦ Додай рядки: назву та два числа (ліворуч, праворуч) або одне число навколо центру.
+Sous le centre ¦ Ниже центра ¦ Нижче центру
+Ajoute des lignes (années, décennies…) et une colonne de chiffres par colline. ¦ Добавь строки (годы, десятилетия…) и по столбцу чисел на каждый холм. ¦ Додай рядки (роки, десятиліття…) і по стовпцю чисел на кожен пагорб.
+Il faut au moins deux colonnes de chiffres (les axes) et une ligne par personne ou par chose. ¦ Нужно не менее двух столбцов чисел (оси) и по строке на человека или предмет. ¦ Потрібно щонайменше два стовпці чисел (осі) і по рядку на людину чи річ.
+Ajoute des lignes : une année (ou un nom) et un chiffre. ¦ Добавь строки: год (или название) и число. ¦ Додай рядки: рік (або назву) та число.
+🔒 Pour partager : sans les noms des personnes en vie ¦ 🔒 Чтобы поделиться: без имён живых людей ¦ 🔒 Щоб поділитися: без імен живих людей
+Les ancêtres de la personne de départ ¦ Предки исходного человека ¦ Предки вихідної людини
+Lecture de ta généalogie… ¦ Чтение твоей генеалогии… ¦ Читання твоєї генеалогії…
+Données prises dans ta base. ¦ Данные взяты из твоей базы. ¦ Дані взято з твоєї бази.
+🔗 Deux personnes de ma base ¦ 🔗 Два человека из моей базы ¦ 🔗 Дві людини з моєї бази
+L’app cherche le plus court chemin : on remonte jusqu’à l’ancêtre commun et on redescend ; avec les alliances, elle passe aussi par les époux (beau-frère, cousin de l’épouse…). Un même lien par plusieurs ancêtres (implexe) est signalé. ¦ Приложение ищет кратчайший путь: поднимаемся до общего предка и спускаемся обратно; со свойством оно проходит и через супругов (шурин, двоюродный брат жены…). Одна и та же связь через нескольких предков (импликс) отмечается. ¦ Застосунок шукає найкоротший шлях: піднімаємося до спільного предка й спускаємося назад; зі свояцтвом він проходить і через подружжя (шурин, двоюрідний брат дружини…). Той самий зв’язок через кількох предків (імплекс) позначається.
+Passer aussi par les alliances (époux, épouses) ¦ Проходить и через свойство (мужья, жёны) ¦ Проходити й через свояцтво (чоловіки, дружини)
+Trouver le chemin ¦ Найти путь ¦ Знайти шлях
+Choisis les deux personnes dans les menus. ¦ Выбери двух людей в меню. ¦ Вибери двох людей у меню.
+Aucun lien trouvé entre ces deux personnes dans ta base. ¦ В твоей базе не найдено связи между этими двумя людьми. ¦ У твоїй базі не знайдено зв’язку між цими двома людьми.
+Aucun ancêtre commun : essaie avec les alliances. ¦ Нет общего предка: попробуй со свойством. ¦ Немає спільного предка: спробуй зі свояцтвом.
+🎯 Les lieux de naissance de mes ancêtres ¦ 🎯 Места рождения моих предков ¦ 🎯 Місця народження моїх предків
+🌈 Les lieux de naissance de mes ancêtres ¦ 🌈 Места рождения моих предков ¦ 🌈 Місця народження моїх предків
+Chaque ancêtre (numéro Sosa) est placé à son lieu de naissance (ou de baptême), avec sa génération. Les lieux sans coordonnées sont laissés de côté. ¦ Каждый предок (номер Sosa) размещается в месте рождения (или крещения), с его поколением. Места без координат пропускаются. ¦ Кожного предка (номер Sosa) розміщено в місці народження (або хрещення), з його поколінням. Місця без координат пропускаються.
+🧩 L’ascendance d’une personne ¦ 🧩 Предки человека ¦ 🧩 Предки людини
+Pour chaque génération : les ancêtres possibles (1, 2, 4, 8…), les places trouvées et les personnes différentes (implexe). ¦ Для каждого поколения: возможные предки (1, 2, 4, 8…), найденные места и разные люди (импликс). ¦ Для кожного покоління: можливі предки (1, 2, 4, 8…), знайдені місця та різні люди (імплекс).
+Aucun ancêtre trouvé pour cette personne. ¦ Для этого человека не найдено предков. ¦ Для цієї людини не знайдено предків.
+📜 Les ancêtres d’une personne ¦ 📜 Предки человека ¦ 📜 Предки людини
+Une ligne par numéro Sosa : nom, naissance, mariage, décès (dates et lieux). Un ancêtre présent plusieurs fois (implexe) renvoie à son premier numéro. ¦ Одна строка на номер Sosa: имя, рождение, брак, смерть (даты и места). Предок, встречающийся несколько раз (импликс), отсылает к своему первому номеру. ¦ Один рядок на номер Sosa: ім’я, народження, шлюб, смерть (дати та місця). Предок, що трапляється кілька разів (імплекс), відсилає до свого першого номера.
+🖨 Imprimer le tableau… ¦ 🖨 Печать таблицы… ¦ 🖨 Друк таблиці…
+Depuis l’onglet ADN : les correspondances d’un test et leurs « correspondances en commun ». La méthode de Leeds range celles de 90 à 400 cM (cousins de 2e et 3e degré) en groupes de couleur, souvent un par grand-parent. ¦ Из вкладки ДНК: совпадения теста и их «общие совпадения». Метод Лидса раскладывает те, что от 90 до 400 cM (троюродные и четвероюродные), по цветным группам, часто по одной на дедушку или бабушку. ¦ Із вкладки ДНК: збіги тесту та їхні «спільні збіги». Метод Лідса розкладає ті, що від 90 до 400 cM (троюрідні й чотириюрідні), за кольоровими групами, часто по одній на дідуся чи бабусю.
+Aucune correspondance ADN dans ta base (onglet ADN → Correspondances). ¦ В твоей базе нет ДНК-совпадений (вкладка ДНК → Совпадения). ¦ У твоїй базі немає ДНК-збігів (вкладка ДНК → Збіги).
+Il manque les « correspondances en commun » : remplis-les dans l’onglet ADN (ou importe-les). ¦ Не хватает «общих совпадений»: заполни их во вкладке ДНК (или импортируй). ¦ Бракує «спільних збігів»: заповни їх у вкладці ДНК (або імпортуй).
+Méthode de Leeds ¦ Метод Лидса ¦ Метод Лідса
+🎡 Les dates de ma famille ¦ 🎡 Даты моей семьи ¦ 🎡 Дати моєї родини
+Les naissances, mariages et décès datés au jour près, et la fête du prénom de chacun (calendrier des saints). Les fiches confidentielles ne sont jamais prises. ¦ Рождения, браки и смерти с точностью до дня, а также именины каждого (календарь святых). Конфиденциальные карточки никогда не берутся. ¦ Народження, шлюби та смерті з точністю до дня, а також іменини кожного (календар святих). Конфіденційні картки ніколи не беруться.
+Les personnes en vie (et leurs mariages) ¦ Живые люди (и их браки) ¦ Живі люди (та їхні шлюби)
+Coche au moins une sorte de date. ¦ Отметь хотя бы один вид дат. ¦ Познач щонайменше один вид дат.
+Aucune date au jour près pour ce choix. ¦ Для этого выбора нет дат с точностью до дня. ¦ Для цього вибору немає дат із точністю до дня.
+L’année de la famille ¦ Год семьи ¦ Рік родини
+Par quart de siècle ¦ По четвертям века ¦ За чвертями століття
+📊 Naissances et âge au décès ¦ 📊 Рождения и возраст смерти ¦ 📊 Народження та вік смерті
+↔️ Naissances et décès ¦ ↔️ Рождения и смерти ¦ ↔️ Народження та смерті
+Les naissances de chaque période en barres (à gauche), l’âge moyen au décès en courbe (à droite). ¦ Рождения каждого периода столбцами (слева), средний возраст смерти линией (справа). ¦ Народження кожного періоду стовпцями (ліворуч), середній вік смерті лінією (праворуч).
+Les décès à gauche, les naissances à droite, période par période (ou les femmes et les hommes). ¦ Смерти слева, рождения справа, период за периодом (или женщины и мужчины). ¦ Смерті ліворуч, народження праворуч, період за періодом (або жінки та чоловіки).
+Face à face ¦ Лицом к лицу ¦ Віч-на-віч
+Naissances : filles ↔ garçons ¦ Рождения: девочки ↔ мальчики ¦ Народження: дівчата ↔ хлопці
+Âge moyen au décès ¦ Средний возраст смерти ¦ Середній вік смерті
+Naissances et âge moyen au décès ¦ Рождения и средний возраст смерти ¦ Народження та середній вік смерті
+Filles et garçons à la naissance ¦ Девочки и мальчики при рождении ¦ Дівчата та хлопці при народженні
+Décès et naissances ¦ Смерти и рождения ¦ Смерті та народження
+🏔 Les noms de famille au fil du temps ¦ 🏔 Фамилии с течением времени ¦ 🏔 Прізвища з плином часу
+Les noms les plus portés : une colline par nom, la hauteur = les naissances de chaque période. ¦ Самые распространённые фамилии: один холм на фамилию, высота = рождения каждого периода. ¦ Найпоширеніші прізвища: один пагорб на прізвище, висота = народження кожного періоду.
+Aucune naissance datée avec un nom de famille. ¦ Нет датированных рождений с фамилией. ¦ Немає датованих народжень із прізвищем.
+Les noms de famille au fil du temps ¦ Фамилии с течением времени ¦ Прізвища з плином часу
+🧵 Les vies de ma base ¦ 🧵 Жизни из моей базы ¦ 🧵 Життя з моєї бази
+Pour chaque personne (vies finies seulement) : l’âge au premier mariage, au premier enfant, le nombre d’enfants et l’âge au décès ; une couleur par siècle de naissance. ¦ Для каждого человека (только завершённые жизни): возраст при первом браке, при первом ребёнке, число детей и возраст смерти; один цвет на век рождения. ¦ Для кожної людини (лише завершені життя): вік при першому шлюбі, при першій дитині, кількість дітей і вік смерті; один колір на століття народження.
+Pas assez de vies datées (il faut au moins 3 des 4 chiffres). ¦ Недостаточно датированных жизней (нужно хотя бы 3 из 4 чисел). ¦ Недостатньо датованих життів (потрібно щонайменше 3 з 4 чисел).
+Les vies de la famille ¦ Жизни семьи ¦ Життя родини
+📶 Combien en vie, année par année ¦ 📶 Сколько живых, год за годом ¦ 📶 Скільки живих, рік за роком
+Une personne compte de sa naissance à son décès ; décès inconnu : en vie si elle est née il y a moins de 100 ans, sinon jusqu’à 60 ans (comme « Les vivants de l’arbre »). ¦ Человек учитывается от рождения до смерти; если смерть неизвестна — жив, если родился менее 100 лет назад, иначе до 60 лет (как в «Живые в древе»). ¦ Людина враховується від народження до смерті; якщо смерть невідома — жива, якщо народилася менш ніж 100 років тому, інакше до 60 років (як у «Живі в дереві»).
+Personnes en vie ¦ Живые люди ¦ Живі люди
+Combien de la famille étaient en vie ¦ Сколько членов семьи было в живых ¦ Скільки членів родини були живі
+Couleurs des générations ¦ Цвета поколений ¦ Кольори поколінь
+Dégradé : la plus proche ¦ Градиент: самое близкое ¦ Градієнт: найближче
+Dégradé : la plus ancienne ¦ Градиент: самое давнее ¦ Градієнт: найдавніше
+Les ancêtres (lieu de naissance « Nom 48.11, -1.68 » et génération : 2 = parents, 3 = grands-parents…) ¦ Предки (место рождения «Название 48.11, -1.68» и поколение: 2 = родители, 3 = дедушки и бабушки…) ¦ Предки (місце народження «Назва 48.11, -1.68» і покоління: 2 = батьки, 3 = дідусі та бабусі…)
+Le chemin (une personne par ligne, de la première à la seconde) ¦ Путь (по одному человеку на строку, от первого ко второму) ¦ Шлях (по одній людині на рядок, від першої до другої)
+son père / sa mère (on monte) ¦ его отец / его мать (вверх) ¦ її батько / її мати (вгору)
+son enfant (on descend) ¦ его ребёнок (вниз) ¦ її дитина (вниз)
+En V (montée puis descente) ¦ V-образно (вверх, затем вниз) ¦ V-подібно (вгору, потім вниз)
+Les autres liens (implexe) ¦ Другие связи (импликс) ¦ Інші зв’язки (імплекс)
+Couleur des cases ¦ Цвет ячеек ¦ Колір клітинок
+Cadrer tout seul sur les lieux ¦ Автоматически кадрировать по местам ¦ Автоматично кадрувати за місцями
+Montrer chaque lieu (pâle) ¦ Показывать каждое место (бледно) ¦ Показувати кожне місце (блідо)
+Cercle de l’écart moyen ¦ Круг среднего отклонения ¦ Коло середнього відхилення
+Couleur de la trajectoire ¦ Цвет траектории ¦ Колір траєкторії
+Le centre de la famille, génération par génération ¦ Центр семьи, поколение за поколением ¦ Центр родини, покоління за поколінням
+Nom écrit à partir de … ancêtres ¦ Имя пишется начиная с … предков ¦ Ім’я пишеться починаючи з … предків
+Les générations (1 = la personne) ¦ Поколения (1 = сам человек) ¦ Покоління (1 = сама людина)
+Éventail (une case par ancêtre) ¦ Веер (одна ячейка на предка) ¦ Віяло (одна клітинка на предка)
+Éventail : générations ¦ Веер: поколения ¦ Віяло: покоління
+Toutes pareilles (en %) ¦ Все одинаковые (в %) ¦ Усі однакові (у %)
+Selon le nombre possible ¦ По возможному числу ¦ За можливою кількістю
+Montrer les personnes différentes (implexe) ¦ Показывать разных людей (импликс) ¦ Показувати різних людей (імплекс)
+Phrase de résumé ¦ Итоговая фраза ¦ Підсумкове речення
+Couleur des connus ¦ Цвет известных ¦ Колір відомих
+Couleur des manquants ¦ Цвет недостающих ¦ Колір відсутніх
+Couleur de l’implexe ¦ Цвет импликса ¦ Колір імплексу
+Ce que je connais de mon arbre ¦ Что я знаю о своём древе ¦ Що я знаю про своє дерево
+Correspondances en commun (séparées par ;) ¦ Общие совпадения (через ;) ¦ Спільні збіги (через ;)
+Groupes de couleur au plus ¦ Не более цветных групп ¦ Не більше кольорових груп
+Noms des groupes (séparés par des virgules) ¦ Названия групп (через запятую) ¦ Назви груп (через кому)
+Noms en haut des colonnes ¦ Названия вверху столбцов ¦ Назви вгорі стовпців
+Jour (14/07 ou 07-14) ¦ День (14/07 или 07-14) ¦ День (14/07 або 07-14)
+Le trait « aujourd’hui » ¦ Линия «сегодня» ¦ Лінія «сьогодні»
+Le nombre au centre ¦ Число в центре ¦ Число в центрі
+Les chiffres (la dernière colonne = la courbe) ¦ Числа (последний столбец = линия) ¦ Числа (останній стовпець = лінія)
+Nom de l’axe de gauche ¦ Название левой оси ¦ Назва лівої осі
+Nom de l’axe de droite ¦ Название правой оси ¦ Назва правої осі
+Unité à gauche ¦ Единица слева ¦ Одиниця ліворуч
+Unité à droite ¦ Единица справа ¦ Одиниця праворуч
+Axe de droite à partir de zéro ¦ Правая ось от нуля ¦ Права вісь від нуля
+Épaisseur de la courbe ¦ Толщина линии ¦ Товщина лінії
+Points de la courbe ¦ Точки линии ¦ Точки лінії
+Écrire les chiffres de la courbe ¦ Писать числа линии ¦ Писати числа лінії
+Les lignes (1re colonne à gauche, 2e à droite) ¦ Строки (1-й столбец слева, 2-й справа) ¦ Рядки (1-й стовпець ліворуч, 2-й праворуч)
+Deux colonnes face à face ¦ Два столбца друг против друга ¦ Два стовпці один навпроти одного
+Le centre (une colonne) ¦ Центр (один столбец) ¦ Центр (один стовпець)
+Titre à gauche ¦ Заголовок слева ¦ Заголовок ліворуч
+Titre à droite ¦ Заголовок справа ¦ Заголовок праворуч
+Couleur à gauche ¦ Цвет слева ¦ Колір ліворуч
+Couleur à droite ¦ Цвет справа ¦ Колір праворуч
+Comme dans le tableau ¦ Как в таблице ¦ Як у таблиці
+Sur le trait du milieu ¦ На средней линии ¦ На середній лінії
+Décès et naissances dans la famille ¦ Смерти и рождения в семье ¦ Смерті та народження в родині
+Les chiffres (une ligne par période, une colonne par colline) ¦ Числа (одна строка на период, один столбец на холм) ¦ Числа (один рядок на період, один стовпець на пагорб)
+Chaque colline à sa hauteur ¦ Каждый холм своей высоты ¦ Кожен пагорб своєї висоти
+Même échelle pour toutes ¦ Один масштаб для всех ¦ Один масштаб для всіх
+Dégradé : première ¦ Градиент: первый ¦ Градієнт: перший
+Dégradé : dernière ¦ Градиент: последний ¦ Градієнт: останній
+Écrire le sommet ¦ Писать вершину ¦ Писати вершину
+Les lignes (une par personne ; une colonne par axe) ¦ Строки (одна на человека; один столбец на ось) ¦ Рядки (один на людину; один стовпець на вісь)
+Mettre en avant (un groupe ou un nom) ¦ Выделить (группу или имя) ¦ Виділити (групу або ім’я)
+Les chiffres (une année ou un nom par ligne) ¦ Числа (по году или названию на строку) ¦ Числа (по року або назві на рядок)
+Après le point ¦ После точки ¦ Після точки
+Avant le point ¦ До точки ¦ До точки
+Remplir dessous (une série) ¦ Закрасить снизу (один ряд) ¦ Зафарбувати знизу (одна серія)
+Axe à partir de zéro ¦ Ось от нуля ¦ Вісь від нуля
+Montrer le plus haut ¦ Показывать наибольшее ¦ Показувати найбільше
+Gén. {g} ¦ Пок. {g} ¦ Пок. {g}
+gén. {g} ¦ пок. {g} ¦ пок. {g}
+Arbre en frise : {n} vies sur {g} générations, de {from} à {to}. ¦ Древо-лента: жизней {n}, поколений {g}, с {from} по {to}. ¦ Дерево-стрічка: життів {n}, поколінь {g}, з {from} по {to}.
+{name} : décès inconnu ¦ {name}: смерть неизвестна ¦ {name}: смерть невідома
+{name} ({years}) : {age} ans (en vie) ¦ {name} ({years}): возраст {age} (жив(а)) ¦ {name} ({years}): вік {age} (живий(а))
+{name} ({years}) : {age} ans ¦ {name} ({years}): возраст {age} ¦ {name} ({years}): вік {age}
+Mariage à {age} ans ({year}) ¦ Брак в возрасте {age} ({year}) ¦ Шлюб у віці {age} ({year})
+Naissance d’un enfant à {age} ans ({year}) ¦ Рождение ребёнка в возрасте {age} ({year}) ¦ Народження дитини у віці {age} ({year})
+naissance d’un enfant ¦ рождение ребёнка ¦ народження дитини
+{n} ans et + ¦ {n} и старше ¦ {n} і старші
+{n} personnes en vie ¦ Живых людей: {n} ¦ Живих людей: {n}
+Pyramide des âges en {year} : {n} personnes en vie (sur {total}). ¦ Возрастная пирамида в {year} году: живых людей {n} (из {total}). ¦ Вікова піраміда в {year} році: живих людей {n} (з {total}).
+Degré {d} ¦ Степень {d} ¦ Ступінь {d}
+Déplier {name} ¦ Развернуть: {name} ¦ Розгорнути: {name}
+Plier {name} ¦ Свернуть: {name} ¦ Згорнути: {name}
+Déplier ({n} personnes) ¦ Развернуть (людей: {n}) ¦ Розгорнути (людей: {n})
+Graphe des cousinages : {n} personnes, {l} liens. ¦ Граф родства: людей {n}, связей {l}. ¦ Граф спорідненості: людей {n}, зв’язків {l}.
+{a} est {kin} de {b} ¦ {a} — {kin} для {b} ¦ {a} — {kin} для {b}
+(degré {d}) ¦ (степень {d}) ¦ (ступінь {d})
+{a} et {b} : pas de lien trouvé ¦ {a} и {b}: связь не найдена ¦ {a} і {b}: зв’язок не знайдено
+Degré 1 (parent, enfant) ¦ Степень 1 (родитель, ребёнок) ¦ Ступінь 1 (батьки, дитина)
+Degré 2 (frère, grand-parent) ¦ Степень 2 (брат, дедушка или бабушка) ¦ Ступінь 2 (брат, дідусь чи бабуся)
+Degré 4 (cousin germain) ¦ Степень 4 (двоюродный брат) ¦ Ступінь 4 (двоюрідний брат)
+Matrice de parenté de {n} personnes : {l} liens trouvés. ¦ Матрица родства (людей: {n}): найдено связей {l}. ¦ Матриця спорідненості (людей: {n}): знайдено зв’язків {l}.
+entre à la génération {g} par {who} ¦ появляется в поколении {g} через {who} ¦ з’являється в поколінні {g} через {who}
+entre à la génération {g} ¦ появляется в поколении {g} ¦ з’являється в поколінні {g}
+porteurs par génération : {list} ¦ носители по поколениям: {list} ¦ носії за поколіннями: {list}
+Entre à la génération {g} ¦ Появляется в поколении {g} ¦ З’являється в поколінні {g}
+Arbre des patronymes : {n} noms sur {g} générations. ¦ Древо фамилий: фамилий {n}, поколений {g}. ¦ Дерево прізвищ: прізвищ {n}, поколінь {g}.
+Aucun mariage entre ces lieux. ¦ Нет браков между этими местами. ¦ Немає шлюбів між цими місцями.
+Diagramme d’accord : {n} lieux, environ {v} {unit}. ¦ Хордовая диаграмма: мест {n}, около {v} {unit}. ¦ Хордова діаграма: місць {n}, близько {v} {unit}.
+mariages ¦ браки ¦ шлюби
+Violon : {c} catégories, {n} valeurs. ¦ Скрипичная диаграмма: категорий {c}, значений {n}. ¦ Скрипкова діаграма: категорій {c}, значень {n}.
+pas encore trouvé ¦ ещё не найден ¦ ще не знайдено
+Quadrillage de {g} générations : {found} ancêtres trouvés sur {total} places ({pct} %). ¦ Сетка поколений ({g}): найдено предков {found} из {total} мест ({pct} %). ¦ Сітка поколінь ({g}): знайдено предків {found} з {total} місць ({pct} %).
+Les vies de mes ancêtres ({name}) ¦ Жизни моих предков ({name}) ¦ Життя моїх предків ({name})
+Les vies de mes ancêtres ¦ Жизни моих предков ¦ Життя моїх предків
+Aucune naissance ni aucun décès daté à {place}. ¦ Нет ни датированных рождений, ни смертей в {place}. ¦ Немає ні датованих народжень, ні смертей у {place}.
+{n} années prises dans ta base. ¦ Лет из твоей базы: {n}. ¦ Років із твоєї бази: {n}.
+Qui vivait en … ? ¦ Кто жил в …? ¦ Хто жив у …?
+Qui vivait en {year} ? ¦ Кто жил в {year} году? ¦ Хто жив у {year} році?
+{n} personnes prises dans ta base. ¦ Людей из твоей базы: {n}. ¦ Людей із твоєї бази: {n}.
+Les cousins de {name} ¦ Родственники {name} ¦ Родичі {name}
+{n} personnes prises dans ta base (les 1 500 premières). ¦ Людей из твоей базы: {n} (первые 1 500). ¦ Людей із твоєї бази: {n} (перші 1 500).
+Les cousinages ¦ Родство ¦ Спорідненість
+{n} personnes et {l} liens pris dans ta base. ¦ Из твоей базы: людей {n}, связей {l}. ¦ З твоєї бази: людей {n}, зв’язків {l}.
+{n} personnes, {l} liens trouvés. ¦ Людей: {n}, найдено связей: {l}. ¦ Людей: {n}, знайдено зв’язків: {l}.
+Les noms de famille de {name} ¦ Фамилии {name} ¦ Прізвища {name}
+{n} noms pris dans ta base. ¦ Фамилий из твоей базы: {n}. ¦ Прізвищ із твоєї бази: {n}.
+Aucun mariage avec des lieux connus. ¦ Нет браков с известными местами. ¦ Немає шлюбів із відомими місцями.
+Où l’on venait se marier ¦ Откуда приезжали венчаться ¦ Звідки приїжджали вінчатися
+Mariages entre villages ¦ Браки между деревнями ¦ Шлюби між селами
+{n} paires de lieux prises dans ta base. ¦ Пар мест из твоей базы: {n}. ¦ Пар місць із твоєї бази: {n}.
+Aucune personne avec les deux dates. ¦ Нет людей с обеими датами. ¦ Немає людей з обома датами.
+{n} valeurs prises dans ta base. ¦ Значений из твоей базы: {n}. ¦ Значень із твоєї бази: {n}.
+{c}e siècle ¦ {c} век ¦ {c} століття
+Les enfants de {name} ¦ Дети {name} ¦ Діти {name}
+D’où viennent mes noms ¦ Откуда мои фамилии ¦ Звідки мої прізвища
+Âge au décès par siècle ¦ Возраст смерти по векам ¦ Вік смерті за століттями
+Âge au décès par sexe ¦ Возраст смерти по полу ¦ Вік смерті за статтю
+Âge au mariage par sexe ¦ Возраст при браке по полу ¦ Вік при шлюбі за статтю
+Âge au mariage par siècle ¦ Возраст при браке по векам ¦ Вік при шлюбі за століттями
+{name} : ferme l’éditeur et clique à nouveau pour ouvrir sa fiche. ¦ {name}: закрой редактор и нажми ещё раз, чтобы открыть карточку. ¦ {name}: закрий редактор і натисни ще раз, щоб відкрити картку.
+Ajoute des personnes : un nom, une génération (ou un n° Sosa), une naissance et un décès. ¦ Добавь людей: имя, поколение (или № Sosa), рождение и смерть. ¦ Додай людей: ім’я, покоління (або № Sosa), народження та смерть.
+Ajoute des années avec leurs naissances et leurs décès. ¦ Добавь годы с их рождениями и смертями. ¦ Додай роки з їхніми народженнями та смертями.
+Plus de décès que de naissances ¦ Смертей больше, чем рождений ¦ Смертей більше, ніж народжень
+{b} naissances et {d} décès de {from} à {to}, {c} crises marquées. ¦ С {from} по {to}: рождений {b}, смертей {d}, заметных кризисов {c}. ¦ З {from} по {to}: народжень {b}, смертей {d}, помітних криз {c}.
+{b} naissances et {d} décès de {from} à {to}, {c} crise marquée. ¦ С {from} по {to}: рождений {b}, смертей {d}, заметных кризисов {c}. ¦ З {from} по {to}: народжень {b}, смертей {d}, помітних криз {c}.
+Ajoute les enfants : un nom, une naissance, un décès (et leurs mariages, leurs enfants). ¦ Добавь детей: имя, рождение, смерть (и их браки, их детей). ¦ Додай дітей: ім’я, народження, смерть (і їхні шлюби, їхніх дітей).
+Ajoute des personnes (naissance, décès, sexe) ou prends celles de ta base (« Depuis l’app »). ¦ Добавь людей (рождение, смерть, пол) или возьми их из своей базы («Из приложения»). ¦ Додай людей (народження, смерть, стать) або візьми їх зі своєї бази («Із застосунку»).
+Issus d’issus de germains ¦ Четвероюродные ¦ Чотириюрідні
+Ligne directe ¦ Прямая линия ¦ Пряма лінія
+Oncles, tantes, neveux ¦ Дяди, тёти, племянники ¦ Дядьки, тітки, племінники
+Cousins germains ¦ Двоюродные ¦ Двоюрідні
+Cousins issus de germains ¦ Троюродные ¦ Троюрідні
+Sans lien de sang ¦ Без кровного родства ¦ Без кровної спорідненості
+Ajoute des personnes : un nom, la personne au-dessus (vide pour le haut), les années, le lien. ¦ Добавь людей: имя, человек выше (пусто для верхнего), годы, связь. ¦ Додай людей: ім’я, людина вище (порожньо для верхньої), роки, зв’язок.
+Arbre en accordéon : {n} personnes, {r} sommets. ¦ Древо-гармошка: людей {n}, вершин {r}. ¦ Дерево-гармошка: людей {n}, вершин {r}.
+Arbre en accordéon : {n} personnes, {r} sommet. ¦ Древо-гармошка: людей {n}, вершин {r}. ¦ Дерево-гармошка: людей {n}, вершин {r}.
+parente|arrière-grand-père ¦ прадедушка ¦ прадідусь
+parente|grand-père ¦ дедушка ¦ дідусь
+parente|père ¦ отец ¦ батько
+parente|moi ¦ я ¦ я
+parente|sœur ¦ сестра ¦ сестра
+parente|frère ¦ брат ¦ брат
+parente|tante ¦ тётя ¦ тітка
+parente|oncle ¦ дядя ¦ дядько
+parente|cousin germain ¦ двоюродный брат ¦ двоюрідний брат
+parente|cousine germaine ¦ двоюродная сестра ¦ двоюрідна сестра
+parente|grand-oncle ¦ двоюродный дедушка ¦ двоюрідний дідусь
+parente|cousin germain de mon père ¦ двоюродный брат моего отца ¦ двоюрідний брат мого батька
+parente|cousin issu de germains ¦ троюродный брат ¦ троюрідний брат
+parente|cousine issue de germains ¦ троюродная сестра ¦ троюрідна сестра
+parente|fils ¦ сын ¦ син
+parente|fille ¦ дочь ¦ дочка
+parente|petit-fils ¦ внук ¦ онук
+parente|petite-fille ¦ внучка ¦ онука
+parente|arrière-petit-fils ¦ правнук ¦ правнук
+parente|neveu ¦ племянник ¦ племінник
+parente|petit-neveu ¦ внучатый племянник ¦ внучатий племінник
+parente|parent ¦ родитель ¦ один із батьків
+parente|frères et sœurs ¦ братья и сёстры ¦ брати й сестри
+parente|cousins germains ¦ двоюродные братья и сёстры ¦ двоюрідні брати й сестри
+parente|cousins issus de germains ¦ троюродные братья и сёстры ¦ троюрідні брати й сестри
+parente|cousins issus d’issus de germains ¦ четвероюродные братья и сёстры ¦ чотириюрідні брати й сестри
+parente|parent et enfant ¦ родитель и ребёнок ¦ батько чи мати й дитина
+parente|oncle ou tante et neveu ou nièce ¦ дядя или тётя и племянник или племянница ¦ дядько чи тітка й племінник чи племінниця
+parente|à la mode de Bretagne ¦ «по-бретонски» (двойная связь) ¦ «по-бретонськи» (подвійний зв’язок)
+parente|époux ¦ супруг(а) ¦ чоловік / дружина
+Ajoute des liens : deux personnes et leur lien (cousins germains…), ou prends-les dans ta base. ¦ Добавь связи: двух людей и их родство (двоюродные…) или возьми их из своей базы. ¦ Додай зв’язки: двох людей і їхню спорідненість (двоюрідні…) або візьми їх зі своєї бази.
+Ajoute au moins deux personnes, puis ce que chacune est pour l’autre (ou prends-les dans ta base). ¦ Добавь хотя бы двух людей, затем кем каждый приходится другому (или возьми их из своей базы). ¦ Додай щонайменше двох людей, потім ким кожна доводиться іншій (або візьми їх зі своєї бази).
+Ajoute des noms : le nom, le nom d’où il vient (vide pour le premier), la génération où il entre. ¦ Добавь фамилии: фамилию, фамилию, от которой она идёт (пусто для первой), поколение, в котором она появляется. ¦ Додай прізвища: прізвище, прізвище, від якого воно походить (порожньо для першого), покоління, у якому воно з’являється.
+Ajoute des paires de lieux et combien de mariages les relient. ¦ Добавь пары мест и сколько браков их связывает. ¦ Додай пари місць і скільки шлюбів їх пов’язує.
+Ajoute des valeurs : une catégorie (siècle, sexe…) et un chiffre par ligne. ¦ Добавь значения: категорию (век, пол…) и число на строку. ¦ Додай значення: категорію (століття, стать…) і число на рядок.
+{name} : {n} valeurs, médiane {med}, la moitié entre {q1} et {q3}, de {min} à {max} ¦ {name}: значений {n}, медиана {med}, половина между {q1} и {q3}, от {min} до {max} ¦ {name}: значень {n}, медіана {med}, половина між {q1} і {q3}, від {min} до {max}
+{name} : {n} valeur, médiane {med}, la moitié entre {q1} et {q3}, de {min} à {max} ¦ {name}: значений {n}, медиана {med}, половина между {q1} и {q3}, от {min} до {max} ¦ {name}: значень {n}, медіана {med}, половина між {q1} і {q3}, від {min} до {max}
+Nom seulement ¦ Только имя ¦ Лише ім’я
+Une date ¦ Одна дата ¦ Одна дата
+Dates et lieux ¦ Даты и места ¦ Дати та місця
+Sourcé ¦ С источником ¦ З джерелом
+Ajoute des ancêtres : un n° Sosa, un nom et une valeur (ou prends-les dans ta base). ¦ Добавь предков: № Sosa, имя и значение (или возьми их из своей базы). ¦ Додай предків: № Sosa, ім’я та значення (або візьми їх зі своєї бази).
+🧬 Mes ancêtres, génération par génération ¦ 🧬 Мои предки, поколение за поколением ¦ 🧬 Мої предки, покоління за поколінням
+Chaque ancêtre devient une barre, de sa naissance à son décès ; les générations s’empilent, la couleur montre la branche (paternelle ou maternelle). ¦ Каждый предок становится полосой от рождения до смерти; поколения складываются стопкой, цвет показывает ветвь (отцовскую или материнскую). ¦ Кожен предок стає смугою від народження до смерті; покоління складаються стосом, колір показує гілку (батьківську чи материнську).
+Aucun ancêtre daté pour cette personne. ¦ Для этого человека нет датированных предков. ¦ Для цієї людини немає датованих предків.
+{n} enfants pris dans ta base. ¦ Детей из твоей базы: {n}. ¦ Дітей із твоєї бази: {n}.
+{n} enfant pris dans ta base. ¦ Детей из твоей базы: {n}. ¦ Дітей із твоєї бази: {n}.
+📉 Naissances et décès de ma base ¦ 📉 Рождения и смерти в моей базе ¦ 📉 Народження та смерті в моїй базі
+Compte les naissances (ou baptêmes) et les décès (ou sépultures) de chaque année. Laisse le lieu vide pour toute la base. ¦ Считает рождения (или крещения) и смерти (или захоронения) каждого года. Оставь место пустым для всей базы. ¦ Рахує народження (або хрещення) і смерті (або поховання) кожного року. Залиш місце порожнім для всієї бази.
+Un seul lieu (facultatif) ¦ Одно место (необязательно) ¦ Одне місце (необов’язково)
+Année par année ¦ Год за годом ¦ Рік за роком
+Par 5 ans ¦ По 5 лет ¦ По 5 років
+Par 10 ans ¦ По 10 лет ¦ По 10 років
+Naissances et décès ¦ Рождения и смерти ¦ Народження та смерті
+👨‍👩‍👧 Une fratrie de ma base ¦ 👨‍👩‍👧 Братья и сёстры из моей базы ¦ 👨‍👩‍👧 Брати й сестри з моєї бази
+Choisis une personne : ses frères et sœurs (ou ses enfants) deviennent des barres sur le même axe des âges, avec leurs mariages et la naissance de leurs enfants. ¦ Выбери человека: его братья и сёстры (или дети) становятся полосами на одной оси возраста, с их браками и рождением их детей. ¦ Вибери людину: її брати й сестри (або діти) стають смугами на одній осі віку, з їхніми шлюбами та народженням їхніх дітей.
+Sa fratrie (elle comprise) ¦ Братья и сёстры (включая его самого) ¦ Брати й сестри (включно з нею самою)
+Personne : aucun enfant trouvé. ¦ Человек: детей не найдено. ¦ Людина: дітей не знайдено.
+🔺 Toutes les personnes de ma base ¦ 🔺 Все люди моей базы ¦ 🔺 Усі люди моєї бази
+Chaque personne née, et pas encore morte, l’année choisie compte dans sa tranche d’âge. Ensuite : le curseur sous le dessin change l’année, ▶ fait défiler le temps. ¦ Каждый человек, родившийся и ещё не умерший в выбранном году, учитывается в своей возрастной группе. Затем: ползунок под рисунком меняет год, ▶ прокручивает время. ¦ Кожна людина, що народилася й ще не померла у вибраному році, враховується у своїй віковій групі. Потім: повзунок під малюнком змінює рік, ▶ прокручує час.
+Année de départ ¦ Начальный год ¦ Початковий рік
+Décès inconnu ¦ Смерть неизвестна ¦ Смерть невідома
+Ne pas compter la personne ¦ Не учитывать человека ¦ Не враховувати людину
+Supposer une vie de 60 ans ¦ Считать, что жизнь длилась 60 лет ¦ Вважати, що життя тривало 60 років
+Supposer une vie de 80 ans ¦ Считать, что жизнь длилась 80 лет ¦ Вважати, що життя тривало 80 років
+Aucune personne avec une date de naissance. ¦ Нет людей с датой рождения. ¦ Немає людей із датою народження.
+🪗 Mes ancêtres et leurs descendants ¦ 🪗 Мои предки и их потомки ¦ 🪗 Мої предки та їхні нащадки
+Les ancêtres de la personne sur quelques générations, puis tous leurs descendants jusqu’à sa génération : frères et sœurs, oncles, cousins germains, issus de germains… avec le lien de parenté de chacun. ¦ Предки человека на несколько поколений, затем все их потомки до его поколения: братья и сёстры, дяди, двоюродные, троюродные… с родством каждого. ¦ Предки людини на кілька поколінь, потім усі їхні нащадки до її покоління: брати й сестри, дядьки, двоюрідні, троюрідні… зі спорідненістю кожного.
+Pas assez de parents connus pour cette personne. ¦ Для этого человека известно недостаточно родственников. ¦ Для цієї людини відомо недостатньо родичів.
+🧶 Les cousins de ma base ¦ 🧶 Родственники из моей базы ¦ 🧶 Родичі з моєї бази
+Choisis des personnes (au moins deux), ou laisse vide : l’app prend la personne de départ et tous ses cousins de la même génération jusqu’à l’ancêtre commun choisi. ¦ Выбери людей (хотя бы двух) или оставь пусто: приложение возьмёт исходного человека и всех его родственников того же поколения до выбранного общего предка. ¦ Вибери людей (щонайменше двох) або залиш порожнім: застосунок візьме вихідну людину й усіх її родичів того самого покоління до вибраного спільного предка.
+Personnes (facultatif) ¦ Люди (необязательно) ¦ Люди (необов’язково)
+Ancêtre commun jusqu’à ¦ Общий предок до ¦ Спільний предок до
+Les plus proches (et de quoi tout relier) ¦ Самые близкие (и всё, что нужно для связи) ¦ Найближчі (і все, що потрібно для зв’язку)
+Aucun lien de parenté trouvé entre ces personnes. ¦ Между этими людьми родство не найдено. ¦ Між цими людьми спорідненості не знайдено.
+🔢 Des personnes de ma base ¦ 🔢 Люди из моей базы ¦ 🔢 Люди з моєї бази
+Choisis jusqu’à 20 personnes : chaque case dit ce que la personne de la colonne est pour celle de la ligne (père, oncle, cousin germain…), et se colore selon la proximité. ¦ Выбери до 20 человек: каждая ячейка говорит, кем человек из столбца приходится человеку из строки (отец, дядя, двоюродный брат…), и окрашивается по близости родства. ¦ Вибери до 20 людей: кожна клітинка каже, ким людина зі стовпця доводиться людині з рядка (батько, дядько, двоюрідний брат…), і забарвлюється за близькістю спорідненості.
+Qui est quoi pour qui ¦ Кто кем кому приходится ¦ Хто ким кому доводиться
+🌳 Les noms de mes ancêtres ¦ 🌳 Фамилии моих предков ¦ 🌳 Прізвища моїх предків
+Chaque nom de famille de l’ascendance : par qui et quand il entre dans l’arbre (une femme et son nom), ses variantes d’écriture regroupées, et combien d’ancêtres le portent à chaque génération. ¦ Каждая фамилия в родословной: через кого и когда она входит в древо (женщина и её фамилия), её варианты написания вместе и сколько предков носят её в каждом поколении. ¦ Кожне прізвище в родоводі: через кого й коли воно входить у дерево (жінка та її прізвище), його варіанти написання разом і скільки предків носять його в кожному поколінні.
+Aucun nom de famille dans cette ascendance. ¦ В этой родословной нет фамилий. ¦ У цьому родоводі немає прізвищ.
+🎼 Les mariages de ma base ¦ 🎼 Браки из моей базы ¦ 🎼 Шлюби з моєї бази
+Chaque mariage relie deux lieux : les lieux de naissance des deux époux, ou le lieu de naissance de chacun et le lieu du mariage. Les lieux les plus fréquents gardent leur nom, les autres vont dans « Autres ». ¦ Каждый брак связывает два места: места рождения обоих супругов или место рождения каждого и место брака. Самые частые места сохраняют своё название, остальные попадают в «Другие». ¦ Кожен шлюб пов’язує два місця: місця народження обох подружжя або місце народження кожного та місце шлюбу. Найчастіші місця зберігають свою назву, інші потрапляють до «Інші».
+Le village de l’époux et celui de l’épouse ¦ Деревня мужа и деревня жены ¦ Село чоловіка та село дружини
+Le village de chacun → le lieu du mariage ¦ Деревня каждого → место брака ¦ Село кожного → місце шлюбу
+Lieux gardés ¦ Сохраняемые места ¦ Збережені місця
+🎻 Des âges de ma base ¦ 🎻 Возрасты из моей базы ¦ 🎻 Вік із моєї бази
+Chaque personne donne une valeur (son âge au décès, ou au mariage), rangée dans une catégorie (son siècle, son sexe). ¦ Каждый человек даёт значение (возраст смерти или брака), отнесённое к категории (его век, его пол). ¦ Кожна людина дає значення (вік смерті або шлюбу), віднесене до категорії (її століття, її стать).
+🟩 Mes ancêtres (numéros Sosa) ¦ 🟩 Мои предки (номера Sosa) ¦ 🟩 Мої предки (номери Sosa)
+Une case par place d’ancêtre ; les cases grises sont les ancêtres pas encore trouvés. Clic sur une case (hors de l’éditeur) : sa fiche. ¦ Одна ячейка на место предка; серые ячейки — ещё не найденные предки. Щелчок по ячейке (вне редактора): его карточка. ¦ Одна клітинка на місце предка; сірі клітинки — ще не знайдені предки. Клік на клітинці (поза редактором): його картка.
+Ce que je sais (nom, dates, lieux, sources) ¦ Что я знаю (имя, даты, места, источники) ¦ Що я знаю (ім’я, дати, місця, джерела)
+Région de naissance ¦ Регион рождения ¦ Регіон народження
+Siècle de naissance ¦ Век рождения ¦ Століття народження
+Les personnes (une barre par vie) ¦ Люди (одна полоса на жизнь) ¦ Люди (одна смуга на життя)
+Génération (vide = d’après le n° Sosa) ¦ Поколение (пусто = по № Sosa) ¦ Покоління (порожньо = за № Sosa)
+Décès (vide = vivant ; ? = inconnu) ¦ Смерть (пусто = жив; ? = неизвестно) ¦ Смерть (порожньо = живий; ? = невідомо)
+Les événements historiques en fond (facultatif) ¦ Исторические события на фоне (необязательно) ¦ Історичні події на тлі (необов’язково)
+Couleur des barres ¦ Цвет полос ¦ Колір смуг
+Branche paternelle ou maternelle ¦ Отцовская или материнская ветвь ¦ Батьківська або материнська гілка
+Homme ou femme ¦ Мужчина или женщина ¦ Чоловік або жінка
+Colonne « Groupe » ¦ Столбец «Группа» ¦ Стовпець «Група»
+Serrée (noms dans les barres) ¦ Плотно (имена в полосах) ¦ Щільно (імена в смугах)
+Une ligne par personne (noms à gauche) ¦ Одна строка на человека (имена слева) ¦ Один рядок на людину (імена ліворуч)
+Les plus anciennes en haut ¦ Самые ранние сверху ¦ Найдавніші згори
+Les plus récentes en haut ¦ Самые поздние сверху ¦ Найпізніші згори
+Noms dans les barres ¦ Имена в полосах ¦ Імена в смугах
+Montrer les événements ¦ Показывать события ¦ Показувати події
+Les crises (à changer ou compléter) ¦ Кризисы (изменить или дополнить) ¦ Кризи (змінити або доповнити)
+Fin (vide = une année) ¦ Конец (пусто = один год) ¦ Кінець (порожньо = один рік)
+Lisser les courbes (moyenne sur … ans) ¦ Сглаживать линии (среднее за … лет) ¦ Згладжувати лінії (середнє за … років)
+Montrer les crises ¦ Показывать кризисы ¦ Показувати кризи
+Colorer quand les décès dépassent les naissances ¦ Окрашивать, когда смерти превышают рождения ¦ Забарвлювати, коли смерті перевищують народження
+Couleur des naissances ¦ Цвет рождений ¦ Колір народжень
+Couleur des décès ¦ Цвет смертей ¦ Колір смертей
+Nom de l’axe des valeurs ¦ Название оси значений ¦ Назва осі значень
+Naissances et décès au village ¦ Рождения и смерти в деревне ¦ Народження та смерті в селі
+Les enfants (dans l’ordre de naissance) ¦ Дети (в порядке рождения) ¦ Діти (у порядку народження)
+Prénom / nom ¦ Имя / фамилия ¦ Ім’я / прізвище
+Décès (vide = vivant ou inconnu) ¦ Смерть (пусто = жив или неизвестно) ¦ Смерть (порожньо = живий або невідомо)
+Mariages (dates, séparées par des virgules) ¦ Браки (даты через запятую) ¦ Шлюби (дати через кому)
+Naissance de ses enfants (dates) ¦ Рождение его детей (даты) ¦ Народження дітей (дати)
+Les âges (tous partent de 0) ¦ Возрасты (все начинаются с 0) ¦ Вік (усі починаються з 0)
+Les années (calendrier) ¦ Годы (календарь) ¦ Роки (календар)
+Par date de naissance ¦ По дате рождения ¦ За датою народження
+Les personnes (à la main ; celles de ta base : « Depuis l’app ») ¦ Люди (вручную; из твоей базы: «Из приложения») ¦ Люди (вручну; з твоєї бази: «Із застосунку»)
+Année montrée ¦ Показываемый год ¦ Показаний рік
+Tranches d’âge ¦ Возрастные группы ¦ Вікові групи
+Dernière tranche à partir de ¦ Последняя группа начиная с ¦ Остання група починаючи з
+Décès inconnu : supposer une vie de … ans (0 = ne pas compter) ¦ Смерть неизвестна: считать, что жизнь длилась … лет (0 = не учитывать) ¦ Смерть невідома: вважати, що життя тривало … років (0 = не враховувати)
+Même échelle pour toutes les années (lecture) ¦ Один масштаб для всех лет (воспроизведение) ¦ Один масштаб для всіх років (відтворення)
+Afficher les nombres ¦ Показывать числа ¦ Показувати числа
+Couleur des hommes ¦ Цвет мужчин ¦ Колір чоловіків
+Couleur des femmes ¦ Цвет женщин ¦ Колір жінок
+Hauteur des barres (px, au total) ¦ Высота полос (всего) ¦ Висота смуг (усього)
+Les personnes (même nom au-dessus = branche) ¦ Люди (одно имя выше = ветвь) ¦ Люди (одне ім’я вище = гілка)
+Au-dessus (nom ; vide pour le haut) ¦ Выше (имя; пусто для верхнего) ¦ Вище (ім’я; порожньо для верхньої)
+Lien de parenté ¦ Родство ¦ Спорідненість
+Degré (couleur) ¦ Степень (цвет) ¦ Ступінь (колір)
+Montrer le lien de parenté ¦ Показывать родство ¦ Показувати спорідненість
+Générations ouvertes au départ (0 = toutes) ¦ Поколения, открытые сначала (0 = все) ¦ Покоління, відкриті спочатку (0 = усі)
+Décalage d’une génération ¦ Отступ на поколение ¦ Відступ на покоління
+Les liens (deux personnes et leur lien) ¦ Связи (два человека и их родство) ¦ Зв’язки (дві людини та їхня спорідненість)
+Les personnes (facultatif : famille pour la couleur) ¦ Люди (необязательно: семья для цвета) ¦ Люди (необов’язково: родина для кольору)
+Noms des liens sur les traits ¦ Названия связей на линиях ¦ Назви зв’язків на лініях
+Si pas trop nombreux (60) ¦ Если их не слишком много (60) ¦ Якщо їх не забагато (60)
+Les cousinages de la famille ¦ Родство в семье ¦ Спорідненість у родині
+Les personnes (lignes et colonnes, 40 au plus) ¦ Люди (строки и столбцы, не более 40) ¦ Люди (рядки та стовпці, не більше 40)
+Les cases : ce que B est pour A ¦ Ячейки: кем B приходится A ¦ Клітинки: ким B доводиться A
+Lien (père, cousin germain…) ¦ Родство (отец, двоюродный брат…) ¦ Спорідненість (батько, двоюрідний брат…)
+Le lien ¦ Родство ¦ Спорідненість
+Le degré ¦ Степень ¦ Ступінь
+Rien (couleurs seules) ¦ Ничего (только цвета) ¦ Нічого (лише кольори)
+Les noms (d’où vient chacun) ¦ Фамилии (откуда каждая) ¦ Прізвища (звідки кожне)
+Arrive par (nom ; vide pour le premier) ¦ Приходит через (фамилия; пусто для первой) ¦ Приходить через (прізвище; порожньо для першого)
+Génération d’entrée ¦ Поколение появления ¦ Покоління появи
+Porteurs par génération (1,2,4…) ¦ Носители по поколениям (1,2,4…) ¦ Носії за поколіннями (1,2,4…)
+Les ancêtres (n° Sosa → valeur) ¦ Предки (№ Sosa → значение) ¦ Предки (№ Sosa → значення)
+Valeur (chiffre ou catégorie) ¦ Значение (число или категория) ¦ Значення (число або категорія)
+Les catégories et leur couleur (facultatif) ¦ Категории и их цвет (необязательно) ¦ Категорії та їхній колір (необов’язково)
+Une ligne par génération ¦ Одна строка на поколение ¦ Один рядок на покоління
+Un carré (cases dans l’ordre des numéros) ¦ Квадрат (ячейки в порядке номеров) ¦ Квадрат (клітинки в порядку номерів)
+Le nom (si la place le permet) ¦ Имя (если хватает места) ¦ Ім’я (якщо вистачає місця)
+Le n° Sosa ¦ № Sosa ¦ № Sosa
+Le nom et le n° Sosa ¦ Имя и № Sosa ¦ Ім’я та № Sosa
+Un dégradé (chiffres) ¦ Градиент (числа) ¦ Градієнт (числа)
+Une couleur par catégorie ¦ Один цвет на категорию ¦ Один колір на категорію
+Dégradé : minimum ¦ Градиент: минимум ¦ Градієнт: мінімум
+Dégradé : maximum ¦ Градиент: максимум ¦ Градієнт: максимум
+Couleur des ancêtres pas trouvés ¦ Цвет ненайденных предков ¦ Колір незнайдених предків
+Ce que je sais de mes ancêtres ¦ Что я знаю о своих предках ¦ Що я знаю про своїх предків
+Les paires de lieux ¦ Пары мест ¦ Пари місць
+Lieu A ¦ Место A ¦ Місце A
+Lieu B ¦ Место B ¦ Місце B
+Lieux gardés (les autres : « Autres ») ¦ Сохраняемые места (остальные: «Другие») ¦ Збережені місця (інші: «Інші»)
+Mariages dans le même lieu (boucles) ¦ Браки в одном месте (петли) ¦ Шлюби в одному місці (петлі)
+Opacité des rubans ¦ Непрозрачность лент ¦ Непрозорість стрічок
+Là où il y a la place ¦ Там, где есть место ¦ Там, де є місце
+Unité (ex. : mariages) ¦ Единица (напр.: браки) ¦ Одиниця (напр.: шлюби)
+Les valeurs (une par ligne) ¦ Значения (по одному на строку) ¦ Значення (по одному на рядок)
+Catégorie (siècle, sexe…) ¦ Категория (век, пол…) ¦ Категорія (століття, стать…)
+Médiane et quartiles ¦ Медиана и квартили ¦ Медіана та квартилі
+Écrire la médiane ¦ Писать медиану ¦ Писати медіану
+Par médiane ¦ По медиане ¦ За медіаною
+Unité (ex. : ans) ¦ Единица (напр.: лет) ¦ Одиниця (напр.: років)
+Nom de l’axe ¦ Название оси ¦ Назва осі
+Faire défiler les années ¦ Прокручивать годы ¦ Прокручувати роки
+=segment ¦ сегмент|сегмента|сегментов ¦ сегмент|сегменти|сегментів
+=correspondance ¦ совпадение|совпадения|совпадений ¦ збіг|збіги|збігів
+=valeur ¦ значение|значения|значений ¦ значення|значення|значень
+=couple ¦ пара|пары|пар ¦ пара|пари|пар
+Peint : {p} % côté père · {m} % côté mère ¦ Окрашено: {p} % со стороны отца · {m} % со стороны матери ¦ Зафарбовано: {p} % з боку батька · {m} % з боку матері
+Peint : {p} % du génome ¦ Окрашено: {p} % генома ¦ Зафарбовано: {p} % геному
+({n} petits segments non montrés) ¦ (не показано мелких сегментов: {n}) ¦ (не показано дрібних сегментів: {n})
+Chromosome {c} — copie reçue du père ({mb} Mb) ¦ Хромосома {c} — копия от отца ({mb} Мб) ¦ Хромосома {c} — копія від батька ({mb} Мб)
+Chromosome {c} — copie reçue de la mère ¦ Хромосома {c} — копия от матери ¦ Хромосома {c} — копія від матері
+Chromosome {c} ({mb} Mb) ¦ Хромосома {c} ({mb} Мб) ¦ Хромосома {c} ({mb} Мб)
+chromosome {c} : {a} à {b} Mb ¦ хромосома {c}: от {a} до {b} Мб ¦ хромосома {c}: від {a} до {b} Мб
+(clic : sa fiche) ¦ (щелчок: его карточка) ¦ (клік: картка)
+(clic : la liste) ¦ (щелчок: список) ¦ (клік: список)
+Côté père ¦ Со стороны отца ¦ З боку батька
+Côté mère ¦ Со стороны матери ¦ З боку матері
+Côté inconnu ¦ Сторона неизвестна ¦ Бік невідомий
+côté père ¦ со стороны отца ¦ з боку батька
+côté mère ¦ со стороны матери ¦ з боку матері
+des deux côtés ¦ с обеих сторон ¦ з обох боків
+côté inconnu ¦ сторона неизвестна ¦ бік невідомий
+Branche inconnue ¦ Ветвь неизвестна ¦ Гілка невідома
+Peinture des chromosomes : {s} de {m} ¦ Раскраска хромосом: {s} из {m} ¦ Розфарбування хромосом: {s} з {m}
+{p} % du génome côté père et {m} % côté mère ¦ {p} % генома со стороны отца и {m} % со стороны матери ¦ {p} % геному з боку батька та {m} % з боку матері
+Peinture des chromosomes — {name} ¦ Раскраска хромосом — {name} ¦ Розфарбування хромосом — {name}
+Correspondance {n} ¦ Совпадение {n} ¦ Збіг {n}
+parenté connue : {k} ¦ известное родство: {k} ¦ відома спорідненість: {k}
+parentés possibles : {k} ¦ возможное родство: {k} ¦ можлива спорідненість: {k}
+{rel} : en moyenne {avg} cM, de {min} à {max} cM — {n} de tes correspondances dans cette fourchette ¦ {rel}: в среднем {avg} cM, от {min} до {max} cM — твоих совпадений в этом диапазоне: {n} ¦ {rel}: у середньому {avg} cM, від {min} до {max} cM — твоїх збігів у цьому діапазоні: {n}
+pour {name} : {p} % ¦ для {name}: {p} % ¦ для {name}: {p} %
+{n} correspondances placées ¦ Размещено совпадений: {n} ¦ Розміщено збігів: {n}
+{n} correspondance placée ¦ Размещено совпадений: {n} ¦ Розміщено збігів: {n}
+Règle des cM : {n} sur une échelle logarithmique de {r} parentés (Shared cM Project). ¦ Линейка cM: {n} на логарифмической шкале из {r} видов родства (Shared cM Project). ¦ Лінійка cM: {n} на логарифмічній шкалі з {r} видів спорідненості (Shared cM Project).
+Règle des cM : {n} sur une échelle linéaire de {r} parentés (Shared cM Project). ¦ Линейка cM: {n} на линейной шкале из {r} видов родства (Shared cM Project). ¦ Лінійка cM: {n} на лінійній шкалі з {r} видів спорідненості (Shared cM Project).
+{name} : {n}, médiane {med}, moyenne {mean}, de {min} à {max} ¦ {name}: {n}, медиана {med}, среднее {mean}, от {min} до {max} ¦ {name}: {n}, медіана {med}, середнє {mean}, від {min} до {max}
+{name} : médiane {v} ¦ {name}: медиана {v} ¦ {name}: медіана {v}
+Vagues : {g}, {n} valeurs, de {min} à {max}. ¦ Волны: {g}, {n}, от {min} до {max}. ¦ Хвилі: {g}, {n}, від {min} до {max}.
+({p} % de {label}, {t} % du tout) ¦ ({p} % от {label}, {t} % от всего) ¦ ({p} % від {label}, {t} % від усього)
+Mosaïque de {c} colonnes (largeur = part du total {t}) et {s} séries. ¦ Мозаика: столбцов {c} (ширина = доля от итога {t}), рядов {s}. ¦ Мозаїка: стовпців {c} (ширина = частка від підсумку {t}), серій {s}.
+(écart {v}) ¦ (разница {v}) ¦ (різниця {v})
+Échelle de points : {n} lignes, {s}. ¦ Точечная шкала: строк {n}, {s}. ¦ Точкова шкала: рядків {n}, {s}.
+(total {v}) ¦ (итого {v}) ¦ (разом {v})
+Rose de Nightingale : {n} parts, {s}, l’aire de chaque part suit le chiffre. ¦ Роза Найтингейл: долей {n}, {s}, площадь каждой доли соответствует числу. ¦ Троянда Найтінгейл: часток {n}, {s}, площа кожної частки відповідає числу.
+Rose de Nightingale : {n} parts, {s}. ¦ Роза Найтингейл: долей {n}, {s}. ¦ Троянда Найтінгейл: часток {n}, {s}.
+Même métier que le père : {n} sur {t} ({p} %) ¦ Та же профессия, что у отца: {n} из {t} ({p} %) ¦ Та сама професія, що в батька: {n} з {t} ({p} %)
+Père {a} → {kid} {b} : {n} ¦ Отец {a} → {kid} {b}: {n} ¦ Батько {a} → {kid} {b}: {n}
+{p} % des enfants de {job}, {t} % du tout ¦ {p} % детей с профессией {job}, {t} % от всего ¦ {p} % дітей із професією {job}, {t} % від усього
+Père ↓ · {kid} → ¦ Отец ↓ · {kid} → ¦ Батько ↓ · {kid} →
+Chiffres en % des enfants de chaque métier du père ¦ Числа в % от детей каждой профессии отца ¦ Числа у % від дітей кожної професії батька
+Chiffres en % de chaque métier de {kid} ¦ Числа в % от каждой профессии: {kid} ¦ Числа у % від кожної професії: {kid}
+Chiffres en % du tout ¦ Числа в % от всего ¦ Числа у % від усього
+Chiffres en nombre ¦ Числа в количестве ¦ Числа в кількості
+cadre de couleur : même métier que le père. ¦ цветная рамка: та же профессия, что у отца. ¦ кольорова рамка: та сама професія, що в батька.
+Cadre de couleur : même métier que le père. ¦ Цветная рамка: та же профессия, что у отца. ¦ Кольорова рамка: та сама професія, що в батька.
+Tableau de mobilité : {t} couples père et {kid}, {n} métiers ; {p} % font le métier du père. ¦ Таблица мобильности: пар отец — {kid}: {t}, профессий: {n}; {p} % выбирают профессию отца. ¦ Таблиця мобільності: пар батько — {kid}: {t}, професій: {n}; {p} % обирають професію батька.
+, femmes et hommes ¦ , женщины и мужчины ¦ , жінки та чоловіки
+, par siècle du mariage ¦ , по векам брака ¦ , за століттями шлюбу
+, par siècle de naissance ¦ , по векам рождения ¦ , за століттями народження
+, par siècle ¦ , по векам ¦ , за століттями
+D’après {n} de l’arbre ¦ По данным древа: {n} ¦ За даними дерева: {n}
+largeur : le nombre de personnes de la période ; hauteur : la part de chacun ¦ ширина: число людей в периоде; высота: доля каждого ¦ ширина: кількість людей у періоді; висота: частка кожного
+D’après les fiches de l’arbre ¦ По карточкам древа ¦ За картками дерева
+femmes et hommes ¦ женщины и мужчины ¦ жінки та чоловіки
+D’après {n} au mois près ¦ По данным с точностью до месяца: {n} ¦ За даними з точністю до місяця: {n}
+D’après {n} père et {kid} dont les deux métiers sont connus ¦ По данным: {n} (отец и {kid}, у которых известны обе профессии) ¦ За даними: {n} (батько і {kid}, у яких відомі обидві професії)
+{n} pris dans l’onglet ADN. ¦ Из вкладки ДНК: {n}. ¦ Із вкладки ДНК: {n}.
+{n} prises dans l’onglet ADN. ¦ Из вкладки ДНК: {n}. ¦ Із вкладки ДНК: {n}.
+(les 300 premières) ¦ (первые 300) ¦ (перші 300)
+clic : la fiche. ¦ щелчок: карточка. ¦ клік: картка.
+Cette partie ¦ Эта часть ¦ Ця частина
+{name} : ferme l’éditeur et clique à nouveau pour voir la liste des personnes. ¦ {name}: закрой редактор и нажми ещё раз, чтобы увидеть список людей. ¦ {name}: закрий редактор і натисни ще раз, щоб побачити список людей.
+Aucun segment à montrer (vérifie le chromosome, le début et la fin, ou le minimum de cM). ¦ Нет сегментов для показа (проверь хромосому, начало и конец или минимум cM). ¦ Немає сегментів для показу (перевір хромосому, початок і кінець або мінімум cM).
+Ajoute des segments : chromosome, début, fin (en Mb ou en paires de bases), cM, correspondance. ¦ Добавь сегменты: хромосома, начало, конец (в Мб или парах оснований), cM, совпадение. ¦ Додай сегменти: хромосома, початок, кінець (у Мб або парах основ), cM, збіг.
+▲ père ▼ mère ¦ ▲ отец ▼ мать ¦ ▲ батько ▼ мати
+Ajoute tes correspondances (nom, cM) : elles se placent sur la règle. ¦ Добавь свои совпадения (имя, cM): они разместятся на линейке. ¦ Додай свої збіги (ім’я, cM): вони розмістяться на лінійці.
+Ajoute des valeurs avec leur groupe (siècle, sexe, branche…) : une vague par groupe. ¦ Добавь значения с их группой (век, пол, ветвь…): одна волна на группу. ¦ Додай значення з їхньою групою (століття, стать, гілка…): одна хвиля на групу.
+Ajoute des colonnes (lignes du tableau) et leurs parts (séries) : la largeur suit le total. ¦ Добавь столбцы (строки таблицы) и их доли (ряды): ширина соответствует итогу. ¦ Додай стовпці (рядки таблиці) та їхні частки (серії): ширина відповідає підсумку.
+Ajoute des lignes et leurs valeurs (une colonne par série, ex. femmes et hommes). ¦ Добавь строки и их значения (по столбцу на ряд, напр. женщины и мужчины). ¦ Додай рядки та їхні значення (по стовпцю на серію, напр. жінки та чоловіки).
+Ajoute des parts (mois, saisons…) et leurs chiffres (une colonne par série). ¦ Добавь доли (месяцы, времена года…) и их числа (по столбцу на ряд). ¦ Додай частки (місяці, пори року…) та їхні числа (по стовпцю на серію).
+Ajoute des lignes : métier du père, métier de l’enfant, combien. ¦ Добавь строки: профессия отца, профессия ребёнка, сколько. ¦ Додай рядки: професія батька, професія дитини, скільки.
+Aucune donnée dans l’arbre pour ce choix (dates manquantes ?). ¦ В древе нет данных для этого выбора (не хватает дат?). ¦ У дереві немає даних для цього вибору (бракує дат?).
+Aucune donnée dans l’arbre pour ce choix. ¦ В древе нет данных для этого выбора. ¦ У дереві немає даних для цього вибору.
+Les métiers de la famille, siècle par siècle ¦ Профессии семьи, век за веком ¦ Професії родини, століття за століттям
+Les communes de naissance, siècle par siècle ¦ Коммуны рождения, век за веком ¦ Комуни народження, століття за століттям
+Les noms de famille, siècle par siècle ¦ Фамилии, век за веком ¦ Прізвища, століття за століттям
+Pas assez de dates de naissance et de décès (ou de mariage) pour ce choix. ¦ Недостаточно дат рождения и смерти (или брака) для этого выбора. ¦ Недостатньо дат народження та смерті (або шлюбу) для цього вибору.
+Âge moyen au décès, par siècle de naissance ¦ Средний возраст смерти по векам рождения ¦ Середній вік смерті за століттями народження
+Âge moyen au mariage, par siècle ¦ Средний возраст при браке по векам ¦ Середній вік при шлюбі за століттями
+Âge moyen au décès, par commune de naissance ¦ Средний возраст смерти по коммунам рождения ¦ Середній вік смерті за комунами народження
+Âge moyen au décès, par nom de famille ¦ Средний возраст смерти по фамилиям ¦ Середній вік смерті за прізвищами
+Aucune date au mois près dans l’arbre pour ce choix. ¦ В древе нет дат с точностью до месяца для этого выбора. ¦ У дереві немає дат із точністю до місяця для цього вибору.
+Naissances, mariages et décès, mois par mois ¦ Рождения, браки и смерти, месяц за месяцем ¦ Народження, шлюби та смерті, місяць за місяцем
+Les naissances, mois par mois ¦ Рождения, месяц за месяцем ¦ Народження, місяць за місяцем
+Les mariages, mois par mois ¦ Браки, месяц за месяцем ¦ Шлюби, місяць за місяцем
+Les décès, mois par mois ¦ Смерти, месяц за месяцем ¦ Смерті, місяць за місяцем
+Les conceptions (naissance − 9 mois), mois par mois ¦ Зачатия (рождение − 9 месяцев), месяц за месяцем ¦ Зачаття (народження − 9 місяців), місяць за місяцем
+Aucun couple père / enfant dont les deux métiers sont connus. ¦ Нет пар отец / ребёнок с известными профессиями обоих. ¦ Немає пар батько / дитина з відомими професіями обох.
+Métier du père, métier de l’enfant ¦ Профессия отца, профессия ребёнка ¦ Професія батька, професія дитини
+Métier du père, métier du fils ¦ Профессия отца, профессия сына ¦ Професія батька, професія сина
+Métier du père, métier de la fille ¦ Профессия отца, профессия дочери ¦ Професія батька, професія дочки
+Âge au décès, par siècle de naissance ¦ Возраст смерти по векам рождения ¦ Вік смерті за століттями народження
+Âge au décès, femmes et hommes ¦ Возраст смерти, женщины и мужчины ¦ Вік смерті, жінки та чоловіки
+Âge au mariage, par siècle ¦ Возраст при браке по векам ¦ Вік при шлюбі за століттями
+Âge au mariage, femmes et hommes ¦ Возраст при браке, женщины и мужчины ¦ Вік при шлюбі, жінки та чоловіки
+Métiers, siècle par siècle ¦ Профессии, век за веком ¦ Професії, століття за століттям
+Communes de naissance, siècle par siècle ¦ Коммуны рождения, век за веком ¦ Комуни народження, століття за століттям
+Noms de famille, siècle par siècle ¦ Фамилии, век за веком ¦ Прізвища, століття за століттям
+Métiers, par 50 ans ¦ Профессии по 50 лет ¦ Професії по 50 років
+Âge moyen au décès (femmes, hommes), par siècle de naissance ¦ Средний возраст смерти (женщины, мужчины) по векам рождения ¦ Середній вік смерті (жінки, чоловіки) за століттями народження
+Âge moyen au mariage (femmes, hommes), par siècle ¦ Средний возраст при браке (женщины, мужчины) по векам ¦ Середній вік при шлюбі (жінки, чоловіки) за століттями
+Naissances, mariages et décès, par mois ¦ Рождения, браки и смерти по месяцам ¦ Народження, шлюби та смерті за місяцями
+Naissances par mois, par siècle ¦ Рождения по месяцам, по векам ¦ Народження за місяцями, за століттями
+Conceptions par mois (naissance − 9 mois), par siècle ¦ Зачатия по месяцам (рождение − 9 месяцев), по векам ¦ Зачаття за місяцями (народження − 9 місяців), за століттями
+Mariages par mois, par siècle ¦ Браки по месяцам, по векам ¦ Шлюби за місяцями, за століттями
+Décès par mois, par siècle ¦ Смерти по месяцам, по векам ¦ Смерті за місяцями, за століттями
+Métier du père → métier du fils ¦ Профессия отца → профессия сына ¦ Професія батька → професія сина
+Métier du père → métier de la fille ¦ Профессия отца → профессия дочери ¦ Професія батька → професія дочки
+Métier du père → métier de l’enfant (fils et filles) ¦ Профессия отца → профессия ребёнка (сыновья и дочери) ¦ Професія батька → професія дитини (сини й дочки)
+La personne qui a fait le test… ¦ Человек, сделавший тест… ¦ Людина, яка зробила тест…
+ℹ️ Aucun test ADN dans ta base : ajoute-le dans l’onglet ADN (🧬 Mes tests), ou remplis le tableau à la main. ¦ ℹ️ В твоей базе нет ДНК-тестов: добавь его во вкладке ДНК (🧬 Мои тесты) или заполни таблицу вручную. ¦ ℹ️ У твоїй базі немає ДНК-тестів: додай його у вкладці ДНК (🧬 Мої тести) або заповни таблицю вручну.
+ℹ️ Cette personne n’a pas de test : voici tous les tests de ta base. ¦ ℹ️ У этого человека нет теста: вот все тесты твоей базы. ¦ ℹ️ Ця людина не має тесту: ось усі тести твоєї бази.
+Lecture de tes données ADN… ¦ Чтение твоих данных ДНК… ¦ Читання твоїх даних ДНК…
+Aucun test ADN dans ta base. ¦ В твоей базе нет ДНК-тестов. ¦ У твоїй базі немає ДНК-тестів.
+🧬 Les segments d’un test ¦ 🧬 Сегменты теста ¦ 🧬 Сегменти тесту
+Les segments partagés avec chaque cousin (onglet ADN → 🧩 Chromosomes) sont peints sur ses chromosomes, colorés par branche (les groupes de l’onglet ADN, ou l’ancêtre noté sur le segment). ¦ Сегменты, общие с каждым родственником (вкладка ДНК → 🧩 Хромосомы), раскрашиваются на его хромосомах по ветвям (группы вкладки ДНК или предок, указанный на сегменте). ¦ Сегменти, спільні з кожним родичем (вкладка ДНК → 🧩 Хромосоми), розфарбовуються на його хромосомах за гілками (групи вкладки ДНК або предок, указаний на сегменті).
+Segments d’au moins ¦ Сегменты не менее ¦ Сегменти щонайменше
+Ce test n’a pas encore de segments : importe-les dans l’onglet ADN (🧩 Chromosomes → ⤒ Importer des segments). ¦ У этого теста ещё нет сегментов: импортируй их во вкладке ДНК (🧩 Хромосомы → ⤒ Импортировать сегменты). ¦ Цей тест ще не має сегментів: імпортуй їх у вкладці ДНК (🧩 Хромосоми → ⤒ Імпортувати сегменти).
+D’après l’onglet ADN (segments partagés) ¦ По вкладке ДНК (общие сегменты) ¦ За вкладкою ДНК (спільні сегменти)
+📏 Les correspondances d’un test ¦ 📏 Совпадения теста ¦ 📏 Збіги тесту
+Chaque correspondance se place sur la règle d’après ses cM partagés ; survole un point pour voir les parentés possibles. ¦ Каждое совпадение размещается на линейке по общим cM; наведи на точку, чтобы увидеть возможное родство. ¦ Кожен збіг розміщується на лінійці за спільними cM; наведи на точку, щоб побачити можливу спорідненість.
+Correspondances d’au moins ¦ Совпадения не менее ¦ Збіги щонайменше
+Combien au plus ¦ Сколько не более ¦ Скільки не більше
+Aucune correspondance avec des cM pour ce test (ou au-dessus du minimum choisi). ¦ Нет совпадений с cM для этого теста (или выше выбранного минимума). ¦ Немає збігів із cM для цього тесту (або вище вибраного мінімуму).
+segments partagés, colorés par branche ¦ общие сегменты, раскрашенные по ветвям ¦ спільні сегменти, розфарбовані за гілками
+Mes chromosomes peints ¦ Мои раскрашенные хромосомы ¦ Мої розфарбовані хромосоми
+Mes cousins ADN sur la règle des cM ¦ Мои ДНК-родственники на линейке cM ¦ Мої ДНК-родичі на лінійці cM
+par siècle de naissance ¦ по векам рождения ¦ за століттями народження
+Les métiers, siècle par siècle ¦ Профессии, век за веком ¦ Професії, століття за століттям
+largeur : nombre de personnes ; hauteur : part du métier ¦ ширина: число людей; высота: доля профессии ¦ ширина: кількість людей; висота: частка професії
+par commune de naissance, femmes et hommes ¦ по коммунам рождения, женщины и мужчины ¦ за комунами народження, жінки та чоловіки
+Les mois de la vie ¦ Месяцы жизни ¦ Місяці життя
+naissances, mariages et décès ¦ рождения, браки и смерти ¦ народження, шлюби та смерті
+Les segments partagés (un par ligne) ¦ Общие сегменты (по одному на строку) ¦ Спільні сегменти (по одному на рядок)
+Chromosome (1 à 22, X) ¦ Хромосома (1–22, X) ¦ Хромосома (1–22, X)
+Début (Mb ou paires de bases) ¦ Начало (Мб или пары оснований) ¦ Початок (Мб або пари основ)
+Branche (couple d’ancêtres) ¦ Ветвь (пара предков) ¦ Гілка (пара предків)
+Couleur (sinon celle de la branche) ¦ Цвет (иначе цвет ветви) ¦ Колір (інакше колір гілки)
+Les branches et leur couleur (facultatif) ¦ Ветви и их цвет (необязательно) ¦ Гілки та їхній колір (необов’язково)
+Deux copies par chromosome (père en haut, mère en bas) ¦ Две копии на хромосому (отец сверху, мать снизу) ¦ Дві копії на хромосому (батько згори, мати знизу)
+Une seule barre par chromosome ¦ Одна полоса на хромосому ¦ Одна смуга на хромосому
+Couleur des segments ¦ Цвет сегментов ¦ Колір сегментів
+Par correspondance ¦ По совпадению ¦ За збігом
+Par côté (père, mère) ¦ По стороне (отец, мать) ¦ За боком (батько, мати)
+Couleur du côté père ¦ Цвет стороны отца ¦ Колір боку батька
+Couleur du côté mère ¦ Цвет стороны матери ¦ Колір боку матері
+Cacher les segments de moins de ¦ Скрывать сегменты меньше ¦ Приховувати сегменти менші за
+Épaisseur des chromosomes ¦ Толщина хромосом ¦ Товщина хромосом
+Colonnes (0 = selon la largeur) ¦ Столбцы (0 = по ширине) ¦ Стовпці (0 = за шириною)
+Montrer le chromosome X ¦ Показывать X-хромосому ¦ Показувати X-хромосому
+Noms dans les segments (s’ils tiennent) ¦ Имена в сегментах (если помещаются) ¦ Імена в сегментах (якщо вміщуються)
+Parenté connue (facultatif) ¦ Известное родство (необязательно) ¦ Відома спорідненість (необов’язково)
+Montrer les parentés possibles de… (un nom) ¦ Показать возможное родство для… (имя) ¦ Показати можливу спорідненість для… (ім’я)
+Régulière ¦ Равномерная ¦ Рівномірна
+Parentés ¦ Родство ¦ Спорідненість
+Les principales ¦ Основные ¦ Основні
+Toutes (demi-parentés, générations d’écart…) ¦ Все (сводное родство, разница в поколениях…) ¦ Усі (зведена спорідненість, різниця в поколіннях…)
+Noms écrits (les plus proches d’abord) ¦ Подписанные имена (сначала самые близкие) ¦ Підписані імена (спочатку найближчі)
+Trait à la moyenne de chaque parenté ¦ Черта на среднем значении каждого родства ¦ Риска на середньому значенні кожної спорідненості
+Couleur des autres points ¦ Цвет остальных точек ¦ Колір інших точок
+Couleur des fourchettes ¦ Цвет диапазонов ¦ Колір діапазонів
+Fin de l’échelle ¦ Конец шкалы ¦ Кінець шкали
+Les valeurs et leur groupe (une vague par groupe) ¦ Значения и их группа (одна волна на группу) ¦ Значення та їхня група (одна хвиля на групу)
+Nom (personne…) ¦ Имя (человек…) ¦ Ім’я (людина…)
+Groupe (siècle, sexe…) ¦ Группа (век, пол…) ¦ Група (століття, стать…)
+Couleur du groupe ¦ Цвет группы ¦ Колір групи
+Chevauchement des vagues ¦ Наложение волн ¦ Накладання хвиль
+Écart entre les vagues ¦ Расстояние между волнами ¦ Відстань між хвилями
+Hauteur des vagues ¦ Высота волн ¦ Висота хвиль
+Chaque vague à sa hauteur ¦ Каждая волна своей высоты ¦ Кожна хвиля своєї висоти
+Selon le nombre de valeurs ¦ По числу значений ¦ За кількістю значень
+Par nombre de valeurs ¦ По числу значений ¦ За кількістю значень
+Une par groupe ¦ По одной на группу ¦ По одній на групу
+Dégradé : première couleur ¦ Градиент: первый цвет ¦ Градієнт: перший колір
+Dégradé : dernière couleur ¦ Градиент: последний цвет ¦ Градієнт: останній колір
+Montrer la médiane ¦ Показывать медиану ¦ Показувати медіану
+Écrire le nombre de valeurs ¦ Писать число значений ¦ Писати кількість значень
+Début de l’axe (vide = automatique) ¦ Начало оси (пусто = автоматически) ¦ Початок осі (порожньо = автоматично)
+Fin de l’axe (vide = automatique) ¦ Конец оси (пусто = автоматически) ¦ Кінець осі (порожньо = автоматично)
+Les colonnes (lignes) et leurs parts (séries) ¦ Столбцы (строки) и их доли (ряды) ¦ Стовпці (рядки) та їхні частки (серії)
+La part en % ¦ Доля в % ¦ Частка у %
+Le chiffre ¦ Число ¦ Число
+Part de chaque colonne sous l’axe ¦ Доля каждого столбца под осью ¦ Частка кожного стовпця під віссю
+Ordre des colonnes ¦ Порядок столбцов ¦ Порядок стовпців
+Les plus larges d’abord ¦ Сначала самые широкие ¦ Спочатку найширші
+Écart entre les colonnes ¦ Расстояние между столбцами ¦ Відстань між стовпцями
+Couleur des traits ¦ Цвет линий ¦ Колір ліній
+Les lignes et leurs valeurs (une colonne par série) ¦ Строки и их значения (по столбцу на ряд) ¦ Рядки та їхні значення (по стовпцю на серію)
+Par écart entre les deux séries ¦ По разнице между двумя рядами ¦ За різницею між двома серіями
+Pointillé sur toute la largeur ¦ Пунктир на всю ширину ¦ Пунктир на всю ширину
+Entre les points (écart) ¦ Между точками (разница) ¦ Між точками (різниця)
+Couleur des points (une seule série) ¦ Цвет точек (один ряд) ¦ Колір точок (одна серія)
+Écrire la valeur ¦ Писать значение ¦ Писати значення
+Écrire l’écart (deux séries) ¦ Писать разницу (два ряда) ¦ Писати різницю (дві серії)
+Mettre en avant (un nom ; les autres pâlissent) ¦ Выделить (имя; остальные бледнеют) ¦ Виділити (ім’я; інші бліднуть)
+Les parts (mois, saisons…) et leurs chiffres ¦ Доли (месяцы, времена года…) и их числа ¦ Частки (місяці, пори року…) та їхні числа
+Plusieurs séries ¦ Несколько рядов ¦ Кілька серій
+Empilées ¦ Стопкой ¦ Стосом
+Superposées (comme Florence Nightingale) ¦ Наложенные (как у Флоренс Найтингейл) ¦ Накладені (як у Флоренс Найтінгейл)
+L’aire suit le chiffre (sinon : la longueur) ¦ Площадь соответствует числу (иначе: длина) ¦ Площа відповідає числу (інакше: довжина)
+Départ (degrés, 0 = en haut) ¦ Начало (градусы, 0 = сверху) ¦ Початок (градуси, 0 = згори)
+Noms des parts ¦ Названия долей ¦ Назви часток
+Cercles de l’échelle ¦ Круги шкалы ¦ Кола шкали
+Couleur des traits entre les parts ¦ Цвет линий между долями ¦ Колір ліній між частками
+Les couples de métiers ¦ Пары профессий ¦ Пари професій
+Métier du père ¦ Профессия отца ¦ Професія батька
+Métier de l’enfant ¦ Профессия ребёнка ¦ Професія дитини
+Regrouper des métiers (facultatif : un mot → une famille de métiers) ¦ Группировать профессии (необязательно: слово → семейство профессий) ¦ Групувати професії (необов’язково: слово → родина професій)
+Métier (ou un morceau du mot) ¦ Профессия (или часть слова) ¦ Професія (або частина слова)
+Famille de métiers ¦ Семейство профессий ¦ Родина професій
+En % des enfants de chaque métier du père ¦ В % от детей каждой профессии отца ¦ У % від дітей кожної професії батька
+En % de chaque métier de l’enfant ¦ В % от каждой профессии ребёнка ¦ У % від кожної професії дитини
+En nombre ¦ В количестве ¦ У кількості
+Combien de métiers ¦ Сколько профессий ¦ Скільки професій
+Regrouper les autres dans « Autres » ¦ Объединить остальные в «Другие» ¦ Об’єднати інші в «Інші»
+Les plus fréquents d’abord ¦ Сначала самые частые ¦ Спочатку найчастіші
+Cadre « même métier que le père » ¦ Рамка «та же профессия, что у отца» ¦ Рамка «та сама професія, що в батька»
+Le mot pour l’enfant (ex. : le fils) ¦ Слово для ребёнка (напр.: сын) ¦ Слово для дитини (напр.: син)
+Ces personnes ne sont plus dans la base. ¦ Этих людей больше нет в базе. ¦ Цих людей більше немає в базі.
+Naissances ¦ Рождения ¦ Народження
+=lignée ¦ линия|линии|линий ¦ лінія|лінії|ліній
+=mère ¦ мать|матери|матерей ¦ мати|матері|матерів
+personne de départ ¦ исходный человек ¦ вихідна людина
+ancêtre ({k} générations) ¦ предок ({k} пок.) ¦ предок ({k} пок.)
+descendant ({k} générations) ¦ потомок ({k} пок.) ¦ нащадок ({k} пок.)
+descendante ({k} générations) ¦ потомок ({k} пок.) ¦ нащадок ({k} пок.)
+{k} générations au-dessus ¦ на {k} пок. выше ¦ на {k} пок. вище
+{k} générations en dessous ¦ на {k} пок. ниже ¦ на {k} пок. нижче
+Arrière-arrière-petits-enfants ¦ Праправнуки ¦ Праправнуки
+Arrière-arrière-arrière-petits-enfants ¦ Прапраправнуки ¦ Прапраправнуки
+parente|mère ¦ мать ¦ мати
+parente|grand-mère ¦ бабушка ¦ бабуся
+parente|grand-parent ¦ дедушка или бабушка ¦ дідусь або бабуся
+parente|enfant ¦ ребёнок ¦ дитина
+parente|petit-enfant ¦ внук или внучка ¦ онук або онука
+parente|arrière-grand-mère ¦ прабабушка ¦ прабабуся
+parente|arrière-grand-parent ¦ прадедушка или прабабушка ¦ прадідусь або прабабуся
+parente|arrière-arrière-grand-père ¦ прапрадедушка ¦ прапрадідусь
+parente|arrière-arrière-grand-mère ¦ прапрабабушка ¦ прапрабабуся
+parente|arrière-arrière-grand-parent ¦ прапрадедушка или прапрабабушка ¦ прапрадідусь або прапрабабуся
+parente|arrière-arrière-arrière-grand-père ¦ прапрапрадедушка ¦ прапрапрадідусь
+parente|arrière-arrière-arrière-grand-mère ¦ прапрапрабабушка ¦ прапрапрабабуся
+parente|arrière-arrière-arrière-grand-parent ¦ прапрапрадедушка или прапрапрабабушка ¦ прапрапрадідусь або прапрапрабабуся
+parente|arrière-petite-fille ¦ правнучка ¦ правнучка
+parente|arrière-petit-enfant ¦ правнук или правнучка ¦ правнук або правнучка
+parente|arrière-arrière-petit-fils ¦ праправнук ¦ праправнук
+parente|arrière-arrière-petite-fille ¦ праправнучка ¦ праправнучка
+parente|arrière-arrière-petit-enfant ¦ праправнук или праправнучка ¦ праправнук або праправнучка
+parente|arrière-arrière-arrière-petit-fils ¦ прапраправнук ¦ прапраправнук
+parente|arrière-arrière-arrière-petite-fille ¦ прапраправнучка ¦ прапраправнучка
+parente|arrière-arrière-arrière-petit-enfant ¦ прапраправнук или прапраправнучка ¦ прапраправнук або прапраправнучка
+{n} générations en vie en même temps : {a} – {b} ¦ Одновременно живших поколений: {n} ({a} – {b}) ¦ Одночасно живих поколінь: {n} ({a} – {b})
+(en vie) ¦ (жив(а)) ¦ (живий(а))
+(décès inconnu : vie supposée) ¦ (смерть неизвестна: предполагаемая жизнь) ¦ (смерть невідома: припущене життя)
+(décès inconnu) ¦ (смерть неизвестна) ¦ (смерть невідома)
+{a} ({ra}) a connu {b} ({rb}) pendant {years} ({period}). ¦ {a} ({ra}) знал(а) {b} ({rb}) — {years} ({period}). ¦ {a} ({ra}) знав(ла) {b} ({rb}) — {years} ({period}).
+{a} a connu {b} ({k} générations plus tard) pendant {years} ({period}). ¦ {a} знал(а) {b} (на {k} пок. позже) — {years} ({period}). ¦ {a} знав(ла) {b} (на {k} пок. пізніше) — {years} ({period}).
+Personne de ces vies ne se chevauche sur {n} générations ou plus. ¦ Ни одна из этих жизней не пересекается на протяжении {n} и более поколений. ¦ Жодне з цих життів не перетинається впродовж {n} і більше поколінь.
+Qui a connu qui : {n} vies sur {g} générations ; {s} rencontres racontées. ¦ Кто кого знал: жизней {n}, поколений {g}; описано встреч: {s}. ¦ Хто кого знав: життів {n}, поколінь {g}; описано зустрічей: {s}.
+Qui a connu qui : {n} vies sur {g} générations ; {s} rencontre racontée. ¦ Кто кого знал: жизней {n}, поколений {g}; описано встреч: {s}. ¦ Хто кого знав: життів {n}, поколінь {g}; описано зустрічей: {s}.
+Âge (ans) ¦ Возраст (лет) ¦ Вік (років)
+médiane {n} ans ¦ медиана: возраст {n} ¦ медіана: вік {n}
+{name} : la moitié a passé {n} ans ¦ {name}: половина пережила возраст {n} ¦ {name}: половина пережила вік {n}
+{name} : {p} % encore en vie à {a} ans ({n}) · {d} entre {a} et {b} ans ¦ {name}: {p} % ещё живы в возрасте {a} ({n}) · {d} в возрасте от {a} до {b} ¦ {name}: {p} % ще живі у віці {a} ({n}) · {d} у віці від {a} до {b}
+Courbe de survie : {n} personnes en {g} groupes. ¦ Кривая выживаемости: людей {n}, групп {g}. ¦ Крива виживання: людей {n}, груп {g}.
+Courbe de survie : {n} personnes en {g} groupe. ¦ Кривая выживаемости: людей {n}, групп {g}. ¦ Крива виживання: людей {n}, груп {g}.
+Même métier que la génération d’avant — {list} ¦ Та же профессия, что у предыдущего поколения — {list} ¦ Та сама професія, що в попереднього покоління — {list}
+Métiers sur {n} générations : {l}. ¦ Профессии по поколениям ({n}): {l}. ¦ Професії за поколіннями ({n}): {l}.
+{a} et {b} : {d} ¦ {a} и {b}: {d} ¦ {a} і {b}: {d}
+(né à {p}) ¦ (родился в {p}) ¦ (народився в {p})
+(née à {p}) ¦ (родилась в {p}) ¦ (народилася в {p})
+même lieu de naissance ¦ то же место рождения ¦ те саме місце народження
+mariage {y} ¦ брак {y} ¦ шлюб {y}
+(au-delà du cercle) ¦ (за пределами круга) ¦ (поза межами кола)
+le village de l’époux ¦ деревня мужа ¦ село чоловіка
+{n} du même lieu ¦ Из того же места: {n} ¦ З того самого місця: {n}
+{c} : la moitié des mariages à moins de {km} km ¦ {c}: половина браков ближе {km} км ¦ {c}: половина шлюбів ближче {km} км
+Rayon des mariages : {n}, médiane {km} km. ¦ Радиус браков: {n}, медиана {km} км. ¦ Радіус шлюбів: {n}, медіана {km} км.
+Génération {g} : {t} ancêtres possibles, {f} places trouvées ({p} %), {d} personnes différentes ¦ Поколение {g}: возможных предков {t}, найдено мест {f} ({p} %), разных людей {d} ¦ Покоління {g}: можливих предків {t}, знайдено місць {f} ({p} %), різних людей {d}
+implexe {p} % ¦ импликс {p} % ¦ імплекс {p} %
+Ancêtres présents plusieurs fois à la génération {g} ¦ Предки, встречающиеся несколько раз в поколении {g} ¦ Предки, що трапляються кілька разів у поколінні {g}
+Sur {n} générations : {t} ancêtres possibles, {f} places trouvées ({p} %), {d} personnes différentes (génération par génération) — implexe {i} %. ¦ Поколений ({n}): возможных предков {t}, найдено мест {f} ({p} %), разных людей {d} (поколение за поколением) — импликс {i} %. ¦ Поколінь ({n}): можливих предків {t}, знайдено місць {f} ({p} %), різних людей {d} (покоління за поколінням) — імплекс {i} %.
+Implexe sur {n} générations : {p} %. ¦ Импликс по поколениям ({n}): {p} %. ¦ Імплекс за поколіннями ({n}): {p} %.
+Mariages datés au jour près : {l} pendant le Carême et {a} pendant l’Avent, sur {t} ({p} %). ¦ Браки с точностью до дня: в Великий пост {l}, в Адвент {a}, из {t} ({p} %). ¦ Шлюби з точністю до дня: у Великий піст {l}, в Адвент {a}, з {t} ({p} %).
+Conceptions pendant le Carême : {n} sur {t} ({p} % ; {e} % si tout était égal). ¦ Зачатия в Великий пост: {n} из {t} ({p} %; {e} %, если бы всё было равномерно). ¦ Зачаття у Великий піст: {n} з {t} ({p} %; {e} %, якби все було рівномірно).
+En mars (Carême) : {a} % des {what} ; en décembre (Avent) : {b} % ; {e} % si tout était égal. ¦ В марте (Великий пост): {a} % от {what}; в декабре (Адвент): {b} %; {e} %, если бы всё было равномерно. ¦ У березні (Великий піст): {a} % від {what}; у грудні (Адвент): {b} %; {e} %, якби все було рівномірно.
+Mois des {a} et des {b} : {x} et {y}. ¦ Месяцы для {a} и {b}: {x} и {y}. ¦ Місяці для {a} і {b}: {x} і {y}.
+Mois des {a} : {x}. ¦ Месяцы для {a}: {x}. ¦ Місяці для {a}: {x}.
+nés en {month} ¦ родившиеся: {month} ¦ народжені: {month}
+Si {what} étaient répartis également sur l’année (selon le nombre de jours du mois) ¦ Если бы {what} распределялись по году равномерно (по числу дней в месяце) ¦ Якби {what} розподілялися протягом року рівномірно (за кількістю днів у місяці)
+(naissance inconnue : âges estimés) ¦ (рождение неизвестно: возраст оценочный) ¦ (народження невідоме: вік орієнтовний)
+{name} : née en {y} (mère : {age} ans, estimé) ¦ {name}: родилась в {y} (мать: возраст {age}, оценка) ¦ {name}: народилася в {y} (мати: вік {age}, оцінка)
+{name} : née en {y} (mère : {age} ans) ¦ {name}: родилась в {y} (мать: возраст {age}) ¦ {name}: народилася в {y} (мати: вік {age})
+{name} : né en {y} (mère : {age} ans, estimé) ¦ {name}: родился в {y} (мать: возраст {age}, оценка) ¦ {name}: народився в {y} (мати: вік {age}, оцінка)
+{name} : né en {y} (mère : {age} ans) ¦ {name}: родился в {y} (мать: возраст {age}) ¦ {name}: народився в {y} (мати: вік {age})
+{n} mois entre {a} et {b} ¦ {n} мес. между {a} и {b} ¦ {n} міс. між {a} і {b}
+le suivant ¦ следующий ¦ наступний
+{k} chez {m} ¦ {k} у {m} ¦ {k} у {m}
+écart médian entre deux naissances : {n} mois ¦ медианный интервал между двумя рождениями: {n} мес. ¦ медіанний інтервал між двома народженнями: {n} міс.
+{p} % morts avant {n} ans. ¦ {p} % умерли, не достигнув возраста {n}. ¦ {p} % померли, не досягнувши віку {n}.
+Espacement des naissances : {m}, {k}, écart médian {n} mois. ¦ Интервалы между рождениями: {m}, {k}, медианный интервал {n} мес. ¦ Інтервали між народженнями: {m}, {k}, медіанний інтервал {n} міс.
+Espacement des naissances : {m}, {k}. ¦ Интервалы между рождениями: {m}, {k}. ¦ Інтервали між народженнями: {m}, {k}.
+Lieux de vie de {n} : {l}. ¦ Места жизни ({n}): {l}. ¦ Місця життя ({n}): {l}.
+Qui a connu qui autour de {name} ¦ Кто кого знал в окружении {name} ¦ Хто кого знав в оточенні {name}
+Survie par {what} ¦ Выживаемость по: {what} ¦ Виживання за: {what}
+{n} personnes prises dans ta base ({u} sans date de décès laissées de côté). ¦ Людей из твоей базы: {n} (без даты смерти пропущено: {u}). ¦ Людей із твоєї бази: {n} (без дати смерті пропущено: {u}).
+{n} lignées prises dans ta base. ¦ Линий из твоей базы: {n}. ¦ Ліній із твоєї бази: {n}.
+Aucun couple dont les deux lieux de naissance ont des coordonnées ({n} couples sans lieu situé). ¦ Нет пар, у которых оба места рождения имеют координаты (пар без размещённого места: {n}). ¦ Немає пар, у яких обидва місця народження мають координати (пар без розміщеного місця: {n}).
+Aucun couple dont les deux lieux de naissance ont des coordonnées. ¦ Нет пар, у которых оба места рождения имеют координаты. ¦ Немає пар, у яких обидва місця народження мають координати.
+{n} couples pris dans ta base ({m} sans lieux situés). ¦ Пар из твоей базы: {n} (без размещённых мест: {m}). ¦ Пар із твоєї бази: {n} (без розміщених місць: {m}).
+{n} couples pris dans ta base. ¦ Пар из твоей базы: {n}. ¦ Пар із твоєї бази: {n}.
+{n} générations prises dans ta base (arrêt à 250 000 places). ¦ Поколений из твоей базы: {n} (остановка на 250 000 мест). ¦ Поколінь із твоєї бази: {n} (зупинка на 250 000 місць).
+{m} mariages et {c} naissances pris dans ta base. ¦ Из твоей базы: браков {m}, рождений {c}. ¦ З твоєї бази: шлюбів {m}, народжень {c}.
+Les naissances de {name} ¦ Рождения: {name} ¦ Народження: {name}
+{m} et {n} enfants pris dans ta base. ¦ Из твоей базы: {m}; детей: {n}. ¦ З твоєї бази: {m}; дітей: {n}.
+{n} personnes et {l} lieux pris dans ta base. ¦ Из твоей базы: людей {n}, мест {l}. ¦ З твоєї бази: людей {n}, місць {l}.
+Combien étaient encore en vie à chaque âge ¦ Сколько ещё были живы в каждом возрасте ¦ Скільки ще були живі в кожному віці
+Métiers de père en fils ¦ Профессии от отца к сыну ¦ Професії від батька до сина
+Mariages et conceptions par mois (Bretagne, XVIIIe s.) ¦ Браки и зачатия по месяцам (Бретань, XVIII в.) ¦ Шлюби та зачаття за місяцями (Бретань, XVIII ст.)
+Les naissances de quatre mères de la famille ¦ Рождения у четырёх матерей семьи ¦ Народження в чотирьох матерів родини
+Où vivait la famille Martin ¦ Где жила семья Martin ¦ Де жила родина Martin
+ferme l’éditeur pour ouvrir une fiche ¦ закрой редактор, чтобы открыть карточку ¦ закрий редактор, щоб відкрити картку
+un clic ouvre la fiche ¦ щелчок открывает карточку ¦ клік відкриває картку
+Ajoute des personnes : un nom, la naissance, le décès et la génération (0 = toi, −1 = parents, 1 = enfants…). ¦ Добавь людей: имя, рождение, смерть и поколение (0 = ты, −1 = родители, 1 = дети…). ¦ Додай людей: ім’я, народження, смерть і покоління (0 = ти, −1 = батьки, 1 = діти…).
+Ajoute des lignes : un groupe (siècle, sexe, branche…), un âge, et « décédé » ou « encore en vie ». ¦ Добавь строки: группа (век, пол, ветвь…), возраст и «умер» или «ещё жив». ¦ Додай рядки: група (століття, стать, гілка…), вік і «помер» або «ще живий».
+Aucune personne de la liste n’a une date de naissance et une date de décès. ¦ Ни у кого из списка нет и даты рождения, и даты смерти. ¦ Ніхто зі списку не має і дати народження, і дати смерті.
+Trisaïeul ¦ Прапрадед ¦ Прапрадід
+Trisaïeuls ¦ Прапрадеды ¦ Прапрадіди
+Arrière-grand-père ¦ Прадед ¦ Прадід
+Grand-père ¦ Дед ¦ Дід
+Ajoute des lignées : le métier de l’ancêtre, puis de son fils, de son petit-fils… et combien de fois. ¦ Добавь линии: профессия предка, затем его сына, внука… и сколько раз. ¦ Додай лінії: професія предка, потім його сина, онука… і скільки разів.
+Même métier que le père ¦ Та же профессия, что у отца ¦ Та сама професія, що в батька
+Ajoute des mariages : les deux époux, la distance entre leurs lieux de naissance (km) et l’année. ¦ Добавь браки: оба супруга, расстояние между их местами рождения (км) и год. ¦ Додай шлюби: обоє з подружжя, відстань між їхніми місцями народження (км) і рік.
+Ajoute des générations : le numéro, les places trouvées et les personnes différentes. ¦ Добавь поколения: номер, найденные места и разные люди. ¦ Додай покоління: номер, знайдені місця та різні люди.
+Ajoute les chiffres de chaque mois (janvier à décembre) : mariages, et conceptions ou naissances. ¦ Добавь числа каждого месяца (с января по декабрь): браки, а также зачатия или рождения. ¦ Додай числа кожного місяця (від січня до грудня): шлюби, а також зачаття або народження.
+Carême : du mercredi des Cendres (entre le 4 février et le 10 mars) à Pâques (entre le 22 mars et le 25 avril) — l’Église ne mariait pas ¦ Великий пост: с Пепельной среды (между 4 февраля и 10 марта) до Пасхи (между 22 марта и 25 апреля) — Церковь не венчала ¦ Великий піст: від Попільної середи (між 4 лютого та 10 березня) до Великодня (між 22 березня та 25 квітня) — Церква не вінчала
+Avent : du 4e dimanche avant Noël (entre le 27 novembre et le 3 décembre) au 24 décembre — pas de mariage non plus ¦ Адвент: с 4-го воскресенья перед Рождеством (между 27 ноября и 3 декабря) до 24 декабря — тоже без венчаний ¦ Адвент: від 4-ї неділі перед Різдвом (між 27 листопада та 3 грудня) до 24 грудня — теж без вінчань
+Aucune personne de la liste n’a un mois de naissance. ¦ Ни у кого из списка нет месяца рождения. ¦ Ніхто зі списку не має місяця народження.
+Ajoute des enfants : le nom de la mère, sa naissance, puis chaque enfant et sa date de naissance. ¦ Добавь детей: имя матери, её рождение, затем каждого ребёнка и его дату рождения. ¦ Додай дітей: ім’я матері, її народження, потім кожну дитину та її дату народження.
+Moins de 15 mois d’écart ¦ Интервал меньше 15 месяцев ¦ Інтервал менше 15 місяців
+Ajoute des lieux : la personne, le lieu, le début et la fin (années ou dates). ¦ Добавь места: человек, место, начало и конец (годы или даты). ¦ Додай місця: людина, місце, початок і кінець (роки або дати).
+Les descendants de la personne de départ ¦ Потомки исходного человека ¦ Нащадки вихідної людини
+Ses ancêtres et ses descendants, chacun sur sa ligne : l’app cherche ceux qui se sont connus à plusieurs générations d’écart. ¦ Его предки и потомки, каждый на своей строке: приложение ищет тех, кто знал друг друга через несколько поколений. ¦ Її предки та нащадки, кожен на своєму рядку: застосунок шукає тих, хто знав одне одного через кілька поколінь.
+Pas assez de personnes datées autour de cette personne. ¦ Недостаточно датированных людей вокруг этого человека. ¦ Недостатньо датованих людей навколо цієї людини.
+📉 Les âges de ma base ¦ 📉 Возрасты из моей базы ¦ 📉 Вік із моєї бази
+L’âge au décès de chacun ; les personnes encore en vie comptent jusqu’à leur âge d’aujourd’hui. Les décès inconnus sont laissés de côté. ¦ Возраст смерти каждого; живые учитываются до их сегодняшнего возраста. Неизвестные смерти пропускаются. ¦ Вік смерті кожного; живі враховуються до їхнього сьогоднішнього віку. Невідомі смерті пропускаються.
+Génération (ancêtres) ¦ Поколение (предки) ¦ Покоління (предки)
+Aucune personne avec une naissance et un décès (ou en vie). ¦ Нет людей с рождением и смертью (или живых). ¦ Немає людей із народженням і смертю (або живих).
+🔀 Les métiers de ma base ¦ 🔀 Профессии из моей базы ¦ 🔀 Професії з моєї бази
+Chaque lignée (père, grand-père… ou parents) donne un chemin de métiers ; le métier vient de la fiche ou du premier événement « Profession ». ¦ Каждая линия (отец, дед… или родители) даёт путь профессий; профессия берётся из карточки или из первого события «Профессия». ¦ Кожна лінія (батько, дід… або батьки) дає шлях професій; професія береться з картки або з першої події «Професія».
+Parents → enfants (pères et mères) ¦ Родители → дети (отцы и матери) ¦ Батьки → діти (батьки й матері)
+Aucune lignée avec au moins deux métiers connus. ¦ Нет линий хотя бы с двумя известными профессиями. ¦ Немає ліній щонайменше з двома відомими професіями.
+Aucun métier dans ta base (fiche ou événement « Profession »). ¦ В твоей базе нет профессий (карточка или событие «Профессия»). ¦ У твоїй базі немає професій (картка або подія «Професія»).
+Métiers de parents à enfants ¦ Профессии от родителей к детям ¦ Професії від батьків до дітей
+💍 Les couples de ma base ¦ 💍 Пары из моей базы ¦ 💍 Пари з моєї бази
+La distance entre les lieux de naissance des deux époux (les lieux ont besoin de leurs coordonnées), et la direction vue depuis le village de l’époux. ¦ Расстояние между местами рождения обоих супругов (местам нужны координаты) и направление, если смотреть из деревни мужа. ¦ Відстань між місцями народження обох із подружжя (місцям потрібні координати) і напрямок, якщо дивитися із села чоловіка.
+Génération par génération : les ancêtres possibles (2, 4, 8…), les places trouvées et les personnes différentes (un même ancêtre peut occuper plusieurs places). ¦ Поколение за поколением: возможные предки (2, 4, 8…), найденные места и разные люди (один и тот же предок может занимать несколько мест). ¦ Покоління за поколінням: можливі предки (2, 4, 8…), знайдені місця та різні люди (той самий предок може займати кілька місць).
+📅 Les mariages et les naissances de ma base ¦ 📅 Браки и рождения из моей базы ¦ 📅 Шлюби та народження з моєї бази
+Les mariages datés au mois près ; les conceptions = la naissance (ou le baptême) moins 9 mois. Carême et Avent sont comptés au jour près quand la date est complète. ¦ Браки с точностью до месяца; зачатия = рождение (или крещение) минус 9 месяцев. Великий пост и Адвент считаются с точностью до дня, когда дата полная. ¦ Шлюби з точністю до місяця; зачаття = народження (або хрещення) мінус 9 місяців. Великий піст і Адвент рахуються з точністю до дня, коли дата повна.
+À (année) ¦ До (год) ¦ До (рік)
+Aucun mariage ni aucune naissance datés au mois près. ¦ Нет ни браков, ни рождений с точностью до месяца. ¦ Немає ні шлюбів, ні народжень із точністю до місяця.
+Mariages et conceptions par mois ¦ Браки и зачатия по месяцам ¦ Шлюби та зачаття за місяцями
+👶 Les mères de ma base ¦ 👶 Матери из моей базы ¦ 👶 Матері з моєї бази
+Chaque mère sur une ligne, ses enfants à l’âge qu’elle avait à leur naissance, l’écart en mois entre deux naissances et les enfants morts jeunes. ¦ Каждая мать на своей строке, её дети — в том возрасте, который был у неё при их рождении, интервал в месяцах между двумя рождениями и дети, умершие в раннем возрасте. ¦ Кожна мати на своєму рядку, її діти — у тому віці, який був у неї при їхньому народженні, інтервал у місяцях між двома народженнями та діти, що померли в ранньому віці.
+Celles qui ont le plus d’enfants ¦ Те, у кого больше всего детей ¦ Ті, хто має найбільше дітей
+La mère (pour « une seule mère ») ¦ Мать (для «одной матери») ¦ Мати (для «однієї матері»)
+Personne de départ (pour les ancêtres) ¦ Исходный человек (для предков) ¦ Вихідна людина (для предків)
+Combien de mères au plus ¦ Не более матерей ¦ Не більше матерів
+Choisis la mère dans le menu. ¦ Выбери мать в меню. ¦ Вибери матір у меню.
+Aucune mère avec des enfants dans ta base. ¦ В твоей базе нет матерей с детьми. ¦ У твоїй базі немає матерів із дітьми.
+🏘️ Les lieux de vie de ma base ¦ 🏘️ Места жизни из моей базы ¦ 🏘️ Місця життя з моєї бази
+Pour chaque personne, ses lieux dans l’ordre du temps : naissance, baptême, domiciles, recensements, mariage, métier, décès… Une couleur par commune. ¦ Для каждого человека — его места по времени: рождение, крещение, места жительства, переписи, брак, профессия, смерть… Один цвет на коммуну. ¦ Для кожної людини — її місця за часом: народження, хрещення, місця проживання, переписи, шлюб, професія, смерть… Один колір на комуну.
+La personne de départ et ses ancêtres ¦ Исходный человек и его предки ¦ Вихідна людина та її предки
+Ses parents, elle et ses enfants ¦ Его родители, он сам и его дети ¦ Її батьки, вона сама та її діти
+Personnes (pour « que je choisis ») ¦ Люди (для «которых я выбираю») ¦ Люди (для «яких я вибираю»)
+Choisis au moins une personne dans le menu. ¦ Выбери хотя бы одного человека в меню. ¦ Вибери щонайменше одну людину в меню.
+Aucun événement avec un lieu pour ces personnes. ¦ Для этих людей нет событий с местом. ¦ Для цих людей немає подій із місцем.
+Les lieux de vie de la famille ¦ Места жизни семьи ¦ Місця життя родини
+Les personnes (génération : 0 = la personne de départ, −1 = parents, 1 = enfants…) ¦ Люди (поколение: 0 = исходный человек, −1 = родители, 1 = дети…) ¦ Люди (покоління: 0 = вихідна людина, −1 = батьки, 1 = діти…)
+Vers (son enfant ou parent du côté de la personne de départ) ¦ К (его ребёнку или родителю со стороны исходного человека) ¦ До (її дитини або одного з батьків з боку вихідної людини)
+Rencontres racontées ¦ Описанные встречи ¦ Описані зустрічі
+Écart de générations au moins ¦ Разница поколений не менее ¦ Різниця поколінь щонайменше
+Montrer quand le plus de générations vivaient ensemble ¦ Показать, когда вместе жило больше всего поколений ¦ Показати, коли разом жило найбільше поколінь
+Noms à gauche ¦ Имена слева ¦ Імена ліворуч
+Âge dans la barre ¦ Возраст в полосе ¦ Вік у смузі
+Décès inconnu : vie supposée (ans, 0 = non) ¦ Смерть неизвестна: предполагаемая жизнь (лет, 0 = нет) ¦ Смерть невідома: припущене життя (років, 0 = ні)
+Groupe (siècle, sexe, branche…) ¦ Группа (век, пол, ветвь…) ¦ Група (століття, стать, гілка…)
+À cet âge ¦ В этом возрасте ¦ У цьому віці
+Encore en vie ¦ Ещё жив(а) ¦ Ще живий(а)
+Montrer l’âge médian (la moitié encore en vie) ¦ Показывать медианный возраст (половина ещё жива) ¦ Показувати медіанний вік (половина ще жива)
+Lire la part en vie à l’âge de… ¦ Узнать долю живых в возрасте… ¦ Дізнатися частку живих у віці…
+Compter les vivants (jusqu’à leur âge d’aujourd’hui) ¦ Учитывать живых (до их сегодняшнего возраста) ¦ Враховувати живих (до їхнього сьогоднішнього віку)
+Lignes droites (au lieu des marches) ¦ Прямые линии (вместо ступенек) ¦ Прямі лінії (замість сходинок)
+Épaisseur des courbes ¦ Толщина линий ¦ Товщина ліній
+Âge au plus (vide = auto) ¦ Возраст не более (пусто = авто) ¦ Вік не більше (порожньо = авто)
+Éditeur de graphiques : une courbe par ¦ Редактор графиков: одна линия на ¦ Редактор графіків: одна лінія на
+Bulles au survol tous les … ans ¦ Подсказки при наведении каждые … лет ¦ Підказки при наведенні кожні … років
+Les lignées (métier à chaque génération, du plus ancien au plus jeune) ¦ Линии (профессия в каждом поколении, от самого старшего к самому младшему) ¦ Лінії (професія в кожному поколінні, від найстаршого до наймолодшого)
+Génération 1 ¦ Поколение 1 ¦ Покоління 1
+Génération 2 ¦ Поколение 2 ¦ Покоління 2
+Génération 3 ¦ Поколение 3 ¦ Покоління 3
+Génération 4 ¦ Поколение 4 ¦ Покоління 4
+Génération 5 ¦ Поколение 5 ¦ Покоління 5
+Combien de lignées ¦ Сколько линий ¦ Скільки ліній
+Couleur de chaque métier (facultatif) ¦ Цвет каждой профессии (необязательно) ¦ Колір кожної професії (необов’язково)
+Métiers montrés (les autres : « Autres métiers ») ¦ Показываемые профессии (остальные: «Другие профессии») ¦ Показані професії (інші: «Інші професії»)
+Le métier de départ ¦ Исходная профессия ¦ Вихідна професія
+Vert si le métier est gardé ¦ Зелёный, если профессия сохраняется ¦ Зелений, якщо професія зберігається
+Noms des colonnes (séparés par des virgules) ¦ Названия столбцов (через запятую) ¦ Назви стовпців (через кому)
+Noms des métiers ¦ Названия профессий ¦ Назви професій
+Nombres à côté des noms ¦ Числа рядом с названиями ¦ Числа поруч із назвами
+Phrase « même métier que la génération d’avant » ¦ Фраза «та же профессия, что у предыдущего поколения» ¦ Речення «та сама професія, що в попереднього покоління»
+Largeur des colonnes ¦ Ширина столбцов ¦ Ширина стовпців
+Espace entre les métiers ¦ Расстояние между профессиями ¦ Відстань між професіями
+Nom des métiers inconnus ¦ Название неизвестных профессий ¦ Назва невідомих професій
+Arrière-grand-père, Grand-père, Père, Fils ¦ Прадед, Дед, Отец, Сын ¦ Прадід, Дід, Батько, Син
+Née à ¦ Родилась в ¦ Народилася в
+Direction (N, NE… ou degrés) ¦ Направление (N, NE… или градусы) ¦ Напрямок (N, NE… або градуси)
+Couleur de chaque siècle (facultatif) ¦ Цвет каждого века (необязательно) ¦ Колір кожного століття (необов’язково)
+Siècle (ex. XIXe s.) ¦ Век (напр.: XIX в.) ¦ Століття (напр.: XIX ст.)
+Échelle des distances ¦ Шкала расстояний ¦ Шкала відстаней
+Douce (racine carrée) ¦ Мягкая (квадратный корень) ¦ М’яка (квадратний корінь)
+Logarithmique (le proche en grand) ¦ Логарифмическая (близкое крупно) ¦ Логарифмічна (близьке великим планом)
+Cercle extérieur (km, vide = auto) ¦ Внешний круг (км, пусто = авто) ¦ Зовнішнє коло (км, порожньо = авто)
+Cercle de la distance médiane de chaque siècle ¦ Круг медианного расстояния каждого века ¦ Коло медіанної відстані кожного століття
+Tableau par siècle ¦ Таблица по векам ¦ Таблиця за століттями
+Nom du centre ¦ Название центра ¦ Назва центру
+Les générations ¦ Поколения ¦ Покоління
+Génération (1 = la personne) ¦ Поколение (1 = сам человек) ¦ Покоління (1 = сама людина)
+Taux d’implexe à droite ¦ Доля импликса справа ¦ Частка імплексу праворуч
+Couleur des possibles ¦ Цвет возможных ¦ Колір можливих
+Couleur des places trouvées ¦ Цвет найденных мест ¦ Колір знайдених місць
+Couleur des personnes différentes ¦ Цвет разных людей ¦ Колір різних людей
+Les mois (janvier à décembre) ¦ Месяцы (с января по декабрь) ¦ Місяці (від січня до грудня)
+Deux bandeaux (l’un sous l’autre) ¦ Две полосы (одна под другой) ¦ Дві смуги (одна під одною)
+Seulement la première série ¦ Только первый ряд ¦ Лише перша серія
+Repérer le Carême et l’Avent ¦ Отмечать Великий пост и Адвент ¦ Позначати Великий піст і Адвент
+Ligne « si tout était égal » (selon les jours du mois) ¦ Линия «если бы всё было равномерно» (по дням месяца) ¦ Лінія «якби все було рівномірно» (за днями місяця)
+Écrire les nombres ¦ Писать числа ¦ Писати числа
+Les enfants (une ligne par enfant) ¦ Дети (одна строка на ребёнка) ¦ Діти (один рядок на дитину)
+Naissance de la mère ¦ Рождение матери ¦ Народження матері
+Décès de la mère ¦ Смерть матери ¦ Смерть матері
+Naissance de l’enfant ¦ Рождение ребёнка ¦ Народження дитини
+Décès de l’enfant ¦ Смерть ребёнка ¦ Смерть дитини
+L’âge de la mère ¦ Возраст матери ¦ Вік матері
+Écarts en mois entre deux naissances ¦ Интервалы в месяцах между двумя рождениями ¦ Інтервали в місяцях між двома народженнями
+Mères au plus ¦ Не более матерей ¦ Не більше матерів
+Les lieux (une ligne par lieu et par période) ¦ Места (одна строка на место и период) ¦ Місця (один рядок на місце й період)
+De (année ou date) ¦ С (год или дата) ¦ З (рік або дата)
+Couleur de chaque lieu (facultatif) ¦ Цвет каждого места (необязательно) ¦ Колір кожного місця (необов’язково)
+Une couleur par ¦ Один цвет на ¦ Один колір на
+Lieux en couleur (les autres en gris) ¦ Места в цвете (остальные серым) ¦ Місця в кольорі (інші сірим)
+Nom du lieu dans la bande ¦ Название места в полосе ¦ Назва місця в смузі
+Par date de début ¦ По дате начала ¦ За датою початку
+Épaisseur des bandes ¦ Толщина полос ¦ Товщина смуг
+{n} génération ¦ {n} пок. ¦ {n} пок.

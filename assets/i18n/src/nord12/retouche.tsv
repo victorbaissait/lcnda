@@ -1,0 +1,1565 @@
+fr ¦ ru ¦ uk
+Tu peins le masque de la personne : ⬛ cacher (du fond resté), ⬜ montrer (un bout de la personne oublié). ¦ Ты рисуешь маску человека: ⬛ скрыть (оставшийся фон), ⬜ показать (забытый кусочек человека). ¦ Ти малюєш маску людини: ⬛ сховати (залишки фону), ⬜ показати (забутий шматочок людини).
+Tu peins le masque du fond : ⬛ cacher (là c’est la personne), ⬜ montrer (là c’est du fond). ¦ Ты рисуешь маску фона: ⬛ скрыть (здесь человек), ⬜ показать (здесь фон). ¦ Ти малюєш маску фону: ⬛ сховати (тут людина), ⬜ показати (тут фон).
+Détourage : fond transparent ¦ Вырезание: прозрачный фон ¦ Вирізання: прозорий фон
+Détourage : fond flou ¦ Вырезание: размытый фон ¦ Вирізання: розмитий фон
+Détourage : fond uni ¦ Вырезание: однотонный фон ¦ Вирізання: однотонний фон
+Détourage : personne sur un calque ¦ Вырезание: человек на слое ¦ Вирізання: людина на шарі
+Fond rendu transparent (masque de la photo) : l’image sera enregistrée en PNG. ¦ Фон сделан прозрачным (маска фотографии): изображение будет сохранено в PNG. ¦ Фон зроблено прозорим (маска фотографії): зображення буде збережено в PNG.
+Détourage fait : tout est sur des calques, avec des masques à retoucher au besoin. ¦ Вырезание готово: всё на слоях, с масками, которые можно подправить при необходимости. ¦ Вирізання готове: усе на шарах, з масками, які можна підправити за потреби.
+Trace un rectangle autour de la personne (⬚), ou « ✂️ Détourer » directement pour toute la photo. ¦ Нарисуй прямоугольник вокруг человека (⬚) или нажми «✂️ Вырезать» сразу для всей фотографии. ¦ Намалюй прямокутник навколо людини (⬚) або натисни «✂️ Вирізати» одразу для всієї фотографії.
+Préparation de l’image en pleine taille… ¦ Подготовка изображения в полном размере… ¦ Підготовка зображення в повному розмірі…
+🔍 Agrandir l’image ¦ 🔍 Увеличить изображение ¦ 🔍 Збільшити зображення
+Netteté des contours ¦ Резкость контуров ¦ Різкість контурів
+Renforce les contours sans faire de halo ; les aplats (ciel, peau) restent doux. ¦ Усиливает контуры без ореолов; однородные участки (небо, кожа) остаются мягкими. ¦ Підсилює контури без ореолів; однорідні ділянки (небо, шкіра) лишаються м’якими.
+Clique pour choisir l’endroit de l’aperçu ¦ Нажми, чтобы выбрать место для предпросмотра ¦ Натисни, щоб вибрати місце для попереднього перегляду
+Lissage du grain ¦ Сглаживание зерна ¦ Згладжування зерна
+Avant (agrandi simplement) ¦ До (просто увеличено) ¦ До (просто збільшено)
+Après, à 100 % ¦ После, при 100 % ¦ Після, при 100 %
+Une nouvelle version de la photo, affichée partout (l’original reste) ¦ Новая версия фотографии, показывается везде (оригинал сохраняется) ¦ Нова версія фотографії, показується всюди (оригінал зберігається)
+Agrandir → nouvelle version ¦ Увеличить → новая версия ¦ Збільшити → нова версія
+→ copie séparée ¦ → отдельная копия ¦ → окрема копія
+Agrandir → dans les médias ¦ Увеличить → в медиафайлы ¦ Збільшити → у медіафайли
+Agrandir ne retrouve pas les détails qui n’ont jamais été photographiés : l’image est plus grande et plus nette, pas plus précise. ¦ Увеличение не восстанавливает детали, которые никогда не были сфотографированы: изображение становится больше и чётче, но не точнее. ¦ Збільшення не відновлює деталей, яких ніколи не було сфотографовано: зображення стає більшим і чіткішим, але не точнішим.
+Cette image est déjà trop grande pour être agrandie. ¦ Это изображение уже слишком большое для увеличения. ¦ Це зображення вже завелике для збільшення.
+Filtre : {what} ¦ Фильтр: {what} ¦ Фільтр: {what}
+🎨 Teinte/Saturation {num} ¦ 🎨 Цветовой тон/Насыщенность {num} ¦ 🎨 Відтінок/Насиченість {num}
+Motif {num} ¦ Узор {num} ¦ Візерунок {num}
+Bruit ¦ Шум ¦ Шум
+Artistiques ¦ Художественные ¦ Художні
+Pixellisation ¦ Пикселизация ¦ Пікселізація
+Rendu ¦ Рендеринг ¦ Рендеринг
+Autres ¦ Другие ¦ Інші
+Flou gaussien ¦ Размытие по Гауссу ¦ Розмиття за Гаусом
+Flou de mouvement ¦ Размытие в движении ¦ Розмиття в русі
+Flou radial (zoom) ¦ Радиальное размытие (зум) ¦ Радіальне розмиття (зум)
+Flou rotatif ¦ Размытие вращением ¦ Розмиття обертанням
+Accentuation (masque flou) ¦ Контурная резкость (нерезкая маска) ¦ Контурна різкість (нерізка маска)
+Estampage (relief) ¦ Тиснение (рельеф) ¦ Тиснення (рельєф)
+Solarisation ¦ Соляризация ¦ Соляризація
+Diffusion ¦ Диффузия ¦ Дифузія
+Vent ¦ Ветер ¦ Вітер
+Aquarelle ¦ Акварель ¦ Акварель
+Vieux film ¦ Старая плёнка ¦ Стара плівка
+Cristallisation ¦ Кристаллизация ¦ Кристалізація
+Pointillisme ¦ Пуантилизм ¦ Пуантилізм
+Nuages (texture) ¦ Облака (текстура) ¦ Хмари (текстура)
+Lueur diffuse ¦ Рассеянное свечение ¦ Розсіяне світіння
+Tourbillon ¦ Скручивание ¦ Закручування
+Onde ¦ Волна ¦ Хвиля
+Rayon ¦ Радиус ¦ Радіус
+Centre X ¦ Центр X ¦ Центр X
+Centre Y ¦ Центр Y ¦ Центр Y
+Seuil ¦ Порог ¦ Поріг
+Bande nette, hauteur ¦ Резкая полоса, высота ¦ Різка смуга, висота
+Points lumineux ¦ Яркие точки ¦ Яскраві точки
+Monochrome (0 / 1) ¦ Монохром (0 / 1) ¦ Монохром (0 / 1)
+Gain ¦ Сила ¦ Сила
+Niveaux ¦ Уровни ¦ Рівні
+Longueur ¦ Длина ¦ Довжина
+Contours ¦ Контуры ¦ Контури
+Trait ¦ Обводка ¦ Обведення
+Traits noirs ¦ Чёрные линии ¦ Чорні лінії
+Usure ¦ Износ ¦ Зношеність
+Position X ¦ Положение X ¦ Положення X
+Position Y ¦ Положение Y ¦ Положення Y
+Amplitude ¦ Амплитуда ¦ Амплітуда
+Horizontale (0) / verticale (1) ¦ Горизонтально (0) / вертикально (1) ¦ Горизонтально (0) / вертикально (1)
+Horizontal ¦ Горизонтально ¦ Горизонтально
+Contraste ¦ Контраст ¦ Контраст
+Ombres ¦ Тени ¦ Тіні
+Chaleur ¦ Теплота ¦ Теплота
+Rouge ¦ Красный ¦ Червоний
+Vert ¦ Зелёный ¦ Зелений
+Bleu ¦ Синий ¦ Синій
+RVB ¦ RGB ¦ RGB
+Assombrir ¦ Затемнить ¦ Затемнити
+Grain ¦ Зерно ¦ Зерно
+Vignette ¦ Виньетка ¦ Віньєтка
+Force ¦ Сила ¦ Сила
+Couleurs ¦ Цвета ¦ Кольори
+Auto ¦ Авто ¦ Авто
+Document lisible ¦ Читаемый документ ¦ Читабельний документ
+Niveaux : point noir, tons moyens, point blanc ¦ Уровни: чёрная точка, средние тона, белая точка ¦ Рівні: чорна точка, середні тони, біла точка
+Niveaux automatiques ¦ Автоуровни ¦ Авторівні
+Monter la courbe éclaircit, la creuser assombrit, un « S » donne du contraste. Rouge, vert, bleu : corriger une dominante de couleur. ¦ Если поднять кривую, станет светлее, если опустить — темнее, «S» добавляет контраст. Красный, зелёный, синий: исправить цветовой оттенок. ¦ Якщо підняти криву, стане світліше, якщо опустити — темніше, «S» додає контрасту. Червоний, зелений, синій: виправити колірний відтінок.
+✨ Menu ¦ ✨ Меню ¦ ✨ Меню
+Déplacer : glisse la poignée, ou Alt + ↑ / ↓ ¦ Переместить: потяни за ручку или Alt + ↑ / ↓ ¦ Перемістити: потягни за ручку або Alt + ↑ / ↓
+Auto : les points les plus sombres deviennent noirs et les plus clairs blancs ; cliquer une 2ᵉ fois revient à l’état d’avant. ¦ Авто: самые тёмные точки становятся чёрными, а самые светлые — белыми; второе нажатие возвращает как было. ¦ Авто: найтемніші точки стають чорними, а найсвітліші — білими; друге натискання повертає як було.
+Éclaircit seulement les parties sombres (ou les assombrit vers la gauche), sans toucher aux claires. ¦ Осветляет только тёмные участки (или затемняет их при сдвиге влево), не трогая светлые. ¦ Освітлює лише темні ділянки (або затемнює їх при зсуві ліворуч), не чіпаючи світлих.
+Cliquer à nouveau pour revenir à l’état d’avant ¦ Нажми ещё раз, чтобы вернуть как было ¦ Натисни ще раз, щоб повернути як було
+Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou la touche ⌫), ou le glisser hors du cadre. ¦ Нажатие на кривую: добавить точку · перетаскивание: переместить её · чтобы убрать: выбери её и нажми «Убрать точку» (или клавишу ⌫) либо вытащи её за рамку. ¦ Натискання на криву: додати точку · перетягування: перемістити її · щоб прибрати: вибери її й натисни «Прибрати точку» (або клавішу ⌫) чи витягни її за рамку.
+fx ¦ fx ¦ fx
+Normal italique ¦ Обычный курсив ¦ Звичайний курсив
+Extra-fin italique ¦ Сверхтонкий курсив ¦ Надтонкий курсив
+Ultra-léger italique ¦ Ультралёгкий курсив ¦ Ультралегкий курсив
+Léger italique ¦ Лёгкий курсив ¦ Легкий курсив
+Médium italique ¦ Средний курсив ¦ Середній курсив
+Demi-gras italique ¦ Полужирный курсив ¦ Напівжирний курсив
+Gras italique ¦ Жирный курсив ¦ Жирний курсив
+Extra-gras italique ¦ Сверхжирный курсив ¦ Наджирний курсив
+Noir italique ¦ Чёрный курсив ¦ Чорний курсив
+Unicode : Latin-1 ¦ Unicode: Latin-1 ¦ Unicode: Latin-1
+Unicode : grec ¦ Unicode: греческий ¦ Unicode: грецька
+Unicode : cyrillique ¦ Unicode: кириллица ¦ Unicode: кирилиця
+Unicode : ponctuation ¦ Unicode: пунктуация ¦ Unicode: пунктуація
+Unicode : monnaies ¦ Unicode: валюты ¦ Unicode: валюти
+Unicode : symboles de lettres ¦ Unicode: буквоподобные символы ¦ Unicode: буквоподібні символи
+Unicode : nombres ¦ Unicode: числа ¦ Unicode: числа
+Unicode : traits de tableau ¦ Unicode: рамки таблиц ¦ Unicode: рамки таблиць
+Unicode : symboles divers ¦ Unicode: разные символы ¦ Unicode: різні символи
+Unicode : casseau (dingbats) ¦ Unicode: дингбаты ¦ Unicode: дінгбати
+Unicode : ligatures ¦ Unicode: лигатуры ¦ Unicode: лігатури
+Grain de papier ¦ Зернистость бумаги ¦ Зернистість паперу
+Rond ¦ Круглая ¦ Кругла
+Plume calligraphique ¦ Каллиграфическое перо ¦ Каліграфічне перо
+Crayon ¦ Карандаш ¦ Олівець
+Pinceau sec ¦ Сухая кисть ¦ Сухий пензель
+Herbe ¦ Трава ¦ Трава
+Peau claire ¦ Светлая кожа ¦ Світла шкіра
+Peau hâlée ¦ Загорелая кожа ¦ Засмагла шкіра
+Peau mate ¦ Смуглая кожа ¦ Смаглява шкіра
+Joues, lèvres ¦ Щёки, губы ¦ Щоки, губи
+Cheveux bruns ¦ Каштановые волосы ¦ Каштанове волосся
+Cheveux blonds ¦ Светлые волосы ¦ Світле волосся
+Cheveux gris ¦ Седые волосы ¦ Сиве волосся
+Feuillage ¦ Листва ¦ Листя
+Uniforme, costume bleu ¦ Форма, синий костюм ¦ Форма, синій костюм
+Robe bordeaux ¦ Бордовое платье ¦ Бордова сукня
+Habit noir ¦ Чёрная одежда ¦ Чорний одяг
+Mur, pierre ¦ Стена, камень ¦ Стіна, камінь
+Brique, tuile ¦ Кирпич, черепица ¦ Цегла, черепиця
+Bois ¦ Дерево ¦ Деревина
+🩹 Correcteur ¦ 🩹 Корректор ¦ 🩹 Коректор
+🧬 Tampon (morceau manquant) ¦ 🧬 Штамп (недостающий кусок) ¦ 🧬 Штамп (відсутній шматок)
+Zoom : ajuster, 50 %, 100 %, 200 % ¦ Масштаб: по размеру, 50 %, 100 %, 200 % ¦ Масштаб: припасувати, 50 %, 100 %, 200 %
+photo|Restaurer ¦ Восстановить ¦ Відновити
+menu|Sélection ¦ Выделение ¦ Виділення
+retouche|Courbe ¦ Кривая ¦ Крива
+motif|D’après ¦ По образцу ¦ За зразком
+pinceau|Feuille ¦ Лист ¦ Листок
+pinceau|Étoile ¦ Звезда ¦ Зірка
+pinceau|Carré ¦ Квадрат ¦ Квадрат
+Glisse pour comparer ¦ Потяни, чтобы сравнить ¦ Потягни, щоб порівняти
+Rideau avant / après ¦ Шторка до / после ¦ Шторка до / після
+Image importée ¦ Импортированное изображение ¦ Імпортоване зображення
+La fenêtre d’export n’est pas encore prête. ¦ Окно экспорта ещё не готово. ¦ Вікно експорту ще не готове.
+Image téléchargée ; une copie est rangée dans les médias. ¦ Изображение скачано; копия сохранена в медиафайлах. ¦ Зображення завантажено; копію збережено в медіафайлах.
+Aperçu de l’avant / après ¦ Предпросмотр до / после ¦ Попередній перегляд до / після
+Rideau vertical (avant à gauche) ¦ Вертикальная шторка («до» слева) ¦ Вертикальна шторка («до» ліворуч)
+Rideau horizontal (avant en haut) ¦ Горизонтальная шторка («до» сверху) ¦ Горизонтальна шторка («до» вгорі)
+L’une sous l’autre ¦ Одна под другой ¦ Одна під одною
+Position du rideau ¦ Положение шторки ¦ Положення шторки
+ex. Mariage de Jean et Marie, 1925 ¦ напр. Свадьба Jean и Marie, 1925 ¦ напр. Весілля Jean і Marie, 1925
+Écrire « Avant » et « Après » ¦ Написать «До» и «После» ¦ Написати «До» і «Після»
+Avant / après téléchargé ; une copie est rangée dans les médias. ¦ До / после скачано; копия сохранена в медиафайлах. ¦ До / після завантажено; копію збережено в медіафайлах.
+Garder appuyé pour voir l’original ¦ Удерживай, чтобы увидеть оригинал ¦ Утримуй, щоб побачити оригінал
+👁 Avant / après ¦ 👁 До / после ¦ 👁 До / після
+◧ Rideau ¦ ◧ Шторка ¦ ◧ Шторка
+Comparer avec un rideau qu’on glisse sur la photo ¦ Сравнить со шторкой, которую двигаешь по фотографии ¦ Порівняти зі шторкою, яку посуваєш по фотографії
+Rideau vertical ou horizontal ¦ Вертикальная или горизонтальная шторка ¦ Вертикальна чи горизонтальна шторка
+Exporter l’avant / après en image (côte à côte ou rideau, avec légende) ¦ Экспортировать до / после как изображение (рядом или шторкой, с подписью) ¦ Експортувати до / після як зображення (поруч або шторкою, з підписом)
+Rideau horizontal ¦ Горизонтальная шторка ¦ Горизонтальна шторка
+Rideau vertical ¦ Вертикальная шторка ¦ Вертикальна шторка
+De combien le cadre dépasse autour du visage : petit = visage serré, grand = épaules et un peu de fond. ¦ Насколько рамка выходит за лицо: мало — лицо крупно, много — плечи и немного фона. ¦ Наскільки рамка виходить за обличчя: мало — обличчя крупно, багато — плечі й трохи фону.
+La hauteur des yeux dans le cadre, depuis le haut : la même pour tous les portraits, ils s’alignent quand on les met côte à côte. ¦ Высота глаз в рамке, считая сверху: одинаковая для всех портретов, чтобы они выстраивались в ряд, когда стоят рядом. ¦ Висота очей у рамці, рахуючи згори: однакова для всіх портретів, щоб вони вирівнювалися, коли стоять поруч.
+Faible : le bord du pinceau est doux et se fond ; forte : le bord est net. ¦ Слабая: край кисти мягкий и растворяется; сильная: край чёткий. ¦ Слабка: край пензля м’який і розчиняється; сильна: край чіткий.
+Filtres ¦ Фильтры ¦ Фільтри
+✨ Filtres ¦ ✨ Фильтры ¦ ✨ Фільтри
+Classique : comme avant. Perceptuel : un passage plus égal à l’œil, sans zone grise ni trop sombre au milieu. Par les teintes : en passant par les couleurs de l’arc-en-ciel. ¦ Классический: как раньше. Перцептивный: переход ровнее на глаз, без серой или слишком тёмной зоны посередине. Через оттенки: через цвета радуги. ¦ Класичний: як раніше. Перцептивний: перехід рівніший на око, без сірої чи надто темної зони посередині. Через відтінки: крізь кольори веселки.
+Plus haut : des lignes plus pâles ou plus courtes sont aussi prises. Trop haut, des détails de la photo (cheveux, écriture) peuvent l’être : regarde le rouge. ¦ Выше: захватываются и более бледные или короткие линии. Если слишком высоко, могут попасть детали фото (волосы, почерк): следи за красным. ¦ Вище: захоплюються й блідіші чи коротші лінії. Якщо занадто високо, можуть потрапити деталі фото (волосся, почерк): стеж за червоним.
+La force de toutes les étapes d’un coup : bas = une restauration discrète, haut = plus marquée (mais attention au « trop lisse »). ¦ Сила всех шагов сразу: низко — деликатная реставрация, высоко — более заметная (но осторожно со «слишком гладким»). ¦ Сила всіх кроків одразу: низько — делікатна реставрація, високо — помітніша (але обережно зі «занадто гладким»).
+Sens ¦ Направление ¦ Напрямок
+De combien ¦ Насколько ¦ Наскільки
+↻ Horaire ¦ ↻ По часовой ¦ ↻ За годинниковою
+↺ Antihoraire ¦ ↺ Против часовой ¦ ↺ Проти годинникової
+↻ Faire pivoter ¦ ↻ Повернуть ¦ ↻ Повернути
+Garde le plus grand rectangle droit dans la photo tournée : plus de coins vides. C’est un recadrage : « Annuler le recadrage » le retire. ¦ Оставляет самый большой прямой прямоугольник в повёрнутой фотографии: никаких пустых углов. Это кадрирование: «Отменить кадрирование» убирает его. ¦ Залишає найбільший прямий прямокутник у поверненій фотографії: жодних порожніх кутів. Це кадрування: «Скасувати кадрування» прибирає його.
+Enlever ¦ Убрать ¦ Прибрати
+Coché : le nombre de pixels change (l’image est recalculée). Décoché : seuls la résolution et la taille à l’impression changent, les pixels restent les mêmes. ¦ Отмечено: число пикселей меняется (изображение пересчитывается). Не отмечено: меняются только разрешение и размер при печати, пиксели остаются теми же. ¦ Позначено: кількість пікселів змінюється (зображення перераховується). Не позначено: змінюються лише роздільність і розмір під час друку, пікселі лишаються ті самі.
+Coché : tu écris ce qu’on ajoute (ou enlève, avec un nombre négatif) autour de l’image. ¦ Отмечено: ты пишешь, сколько добавить (или убрать — отрицательным числом) вокруг изображения. ¦ Позначено: ти пишеш, скільки додати (або прибрати — від’ємним числом) навколо зображення.
+Avant d’agrandir, adoucit le grain et le bruit (les contours restent) : utile pour une photo scannée granuleuse. ¦ Перед увеличением смягчает зерно и шум (контуры остаются): полезно для зернистой отсканированной фотографии. ¦ Перед збільшенням пом’якшує зерно й шум (контури лишаються): корисно для зернистої відсканованої фотографії.
+Pour un négatif photographié ou scanné : les clairs et les sombres s’échangent. ¦ Для сфотографированного или отсканированного негатива: светлое и тёмное меняются местами. ¦ Для сфотографованого чи відсканованого негатива: світле й темне міняються місцями.
+Nom de la photo retouchée ¦ Название отретушированной фотографии ¦ Назва відретушованої фотографії
+Le nom de la copie et des fichiers exportés ¦ Название копии и экспортируемых файлов ¦ Назва копії та експортованих файлів
+La retouche complète : calques, sélections, masques, texte, formes, filtres, projets ¦ Полная ретушь: слои, выделения, маски, текст, фигуры, фильтры, проекты ¦ Повна ретуш: шари, виділення, маски, текст, фігури, фільтри, проєкти
+Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup (dans la retouche complète) ¦ Шумоподавление, пыль, сгибы, контраст, резкость и раскрашивание за один раз (в полной ретуши) ¦ Шумозаглушення, пил, згини, контраст, різкість і розфарбовування за один раз (у повній ретуші)
+🎛️ Retouche complète ¦ 🎛️ Полная ретушь ¦ 🎛️ Повна ретуш
+Retouche complète ¦ Полная ретушь ¦ Повна ретуш
+Exporter : la photo retouchée (PNG, JPG, imprimer) ou l’avant / après ¦ Экспорт: отретушированная фотография (PNG, JPG, печать) или до / после ¦ Експорт: відретушована фотографія (PNG, JPG, друк) або до / після
+Enregistrer et afficher cette version de la photo (l’original est gardé) ¦ Сохранить и показывать эту версию фотографии (оригинал сохраняется) ¦ Зберегти й показувати цю версію фотографії (оригінал зберігається)
+🖼 La photo retouchée (PNG, JPG, imprimer)… ¦ 🖼 Отретушированная фотография (PNG, JPG, печать)… ¦ 🖼 Відретушована фотографія (PNG, JPG, друк)…
+Barre des outils ¦ Панель инструментов ¦ Панель інструментів
+Réglages : couleur, lumière, courbe ¦ Коррекция: цвет, свет, кривая ¦ Корекція: колір, світло, крива
+Correcteur de taches : clique sur une tache, une poussière, une rayure ¦ Корректор пятен: нажми на пятно, пылинку, царапину ¦ Коректор плям: натисни на пляму, порошинку, подряпину
+Tampon de duplication : {key} + clic sur l’endroit à recopier, puis peins sur la zone à couvrir ¦ Штамп: {key} + нажатие на место, которое нужно скопировать, затем закрась нужную область ¦ Штамп: {key} + натискання на місце, яке треба скопіювати, потім замалюй потрібну ділянку
+{key} + clic pour choisir l’endroit à recopier, puis peins sur la zone à couvrir. ¦ {key} + нажатие, чтобы выбрать место для копирования, затем закрась нужную область. ¦ {key} + натискання, щоб вибрати місце для копіювання, потім замалюй потрібну ділянку.
+Faire pivoter de 90° vers la gauche (antihoraire) ¦ Повернуть на 90° влево (против часовой стрелки) ¦ Повернути на 90° ліворуч (проти годинникової стрілки)
+Pivoter à gauche ¦ Повернуть влево ¦ Повернути ліворуч
+Faire pivoter de 90° vers la droite (horaire) ¦ Повернуть на 90° вправо (по часовой стрелке) ¦ Повернути на 90° праворуч (за годинниковою стрілкою)
+Pivoter à droite ¦ Повернуть вправо ¦ Повернути праворуч
+Retouche complète : calques, sélections, masques, texte, filtres ¦ Полная ретушь: слои, выделения, маски, текст, фильтры ¦ Повна ретуш: шари, виділення, маски, текст, фільтри
+Les corrections en cours seront perdues. ¦ Текущие исправления будут потеряны. ¦ Поточні виправлення буде втрачено.
+Passer à la retouche complète ? ¦ Перейти к полной ретуши? ¦ Перейти до повної ретуші?
+Passer à la retouche complète ¦ Перейти к полной ретуши ¦ Перейти до повної ретуші
+Règle la couleur et la lumière à droite · garde « 👁 Avant / après » appuyé pour comparer ¦ Настрой цвет и свет справа · удерживай «👁 До / после», чтобы сравнить ¦ Налаштуй колір і світло праворуч · утримуй «👁 До / після», щоб порівняти
+Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long. ¦ Нажми на пятно, пылинку или царапину: она заменится тем, что вокруг. Для царапины проведи вдоль неё. ¦ Натисни на пляму, порошинку чи подряпину: її буде замінено тим, що довкола. Для подряпини проведи вздовж неї.
+Choisis d’abord l’endroit à recopier : Alt + clic (⌥ + clic sur Mac). ¦ Сначала выбери место для копирования: Alt + нажатие (⌥ + нажатие на Mac). ¦ Спершу вибери місце для копіювання: Alt + натискання (⌥ + натискання на Mac).
+Versions de la photo ¦ Версии фотографии ¦ Версії фотографії
+Enregistrer sans l’afficher (gardée dans les versions) ¦ Сохранить, не показывая (хранится в версиях) ¦ Зберегти, не показуючи (зберігається у версіях)
+Copie séparée (un autre média, relié aux mêmes fiches) ¦ Отдельная копия (другой медиафайл, связанный с теми же карточками) ¦ Окрема копія (інший медіафайл, пов’язаний із тими самими картками)
+Exporter la photo retouchée (PNG, JPG, imprimer)… ¦ Экспортировать отретушированную фотографию (PNG, JPG, печать)… ¦ Експортувати відретушовану фотографію (PNG, JPG, друк)…
+Exporter l’avant / après… ¦ Экспортировать до / после… ¦ Експортувати до / після…
+Restaurer en une fois… ¦ Восстановить за один раз… ¦ Відновити за один раз…
+Pivoter de 90° à droite (horaire) ¦ Повернуть на 90° вправо (по часовой стрелке) ¦ Повернути на 90° праворуч (за годинниковою стрілкою)
+Pivoter de 90° à gauche (antihoraire) ¦ Повернуть на 90° влево (против часовой стрелки) ¦ Повернути на 90° ліворуч (проти годинникової стрілки)
+Avant / après en rideau ¦ До / после шторкой ¦ До / після шторкою
+La photo est ajoutée aux médias (sans fiche). Les réglages en cours sur cette photo-ci sont abandonnés. ¦ Фотография добавлена в медиафайлы (без карточки). Текущие настройки этой фотографии отменяются. ¦ Фотографію додано до медіафайлів (без картки). Поточні налаштування цієї фотографії скасовуються.
+Retoucher « {name} » à la place ? ¦ Ретушировать «{name}» вместо этого? ¦ Ретушувати «{name}» натомість?
+💧 Fluidité ¦ 💧 Пластика ¦ 💧 Пластика
+Fluidité ¦ Пластика ¦ Пластика
+Peins sur la photo pour la déformer, comme une pâte souple ¦ Рисуй по фотографии, чтобы деформировать её, как мягкое тесто ¦ Малюй по фотографії, щоб деформувати її, як м’яке тісто
+L’image suit la main ¦ Изображение следует за рукой ¦ Зображення йде за рукою
+Agrandit sous le pinceau (garder appuyé) ¦ Увеличивает под кистью (удерживай) ¦ Збільшує під пензлем (утримуй)
+Rétrécit sous le pinceau (garder appuyé) ¦ Уменьшает под кистью (удерживай) ¦ Зменшує під пензлем (утримуй)
+Fait tourner dans le sens des aiguilles d’une montre ¦ Закручивает по часовой стрелке ¦ Закручує за годинниковою стрілкою
+Fait tourner dans l’autre sens ¦ Закручивает в другую сторону ¦ Закручує в інший бік
+Ramène peu à peu l’image d’origine ¦ Понемногу возвращает исходное изображение ¦ Потроху повертає початкове зображення
+➡ Pousser ¦ ➡ Сдвиг ¦ ➡ Зсув
+⊕ Gonfler ¦ ⊕ Вздутие ¦ ⊕ Здуття
+⊖ Dégonfler ¦ ⊖ Сжатие ¦ ⊖ Стиснення
+Dégonfler ¦ Сжатие ¦ Стиснення
+Gonfler ¦ Вздутие ¦ Здуття
+Pousser ¦ Сдвиг ¦ Зсув
+↻ Tourbillon ¦ ↻ Скручивание ¦ ↻ Закручування
+↺ Tourbillon inverse ¦ ↺ Обратное скручивание ¦ ↺ Зворотне закручування
+Tourbillon inverse ¦ Обратное скручивание ¦ Зворотне закручування
+↩ Reconstruire ¦ ↩ Восстановить ¦ ↩ Відновити
+Reconstruire ¦ Восстановить ¦ Відновити
+Image trop grande pour la Fluidité. ¦ Изображение слишком большое для Пластики. ¦ Зображення завелике для Пластики.
+↶ Annuler le coup ¦ ↶ Отменить мазок ¦ ↶ Відмінити мазок
+✓ Appliquer (calque « Fluidité ») ¦ ✓ Применить (слой «Пластика») ¦ ✓ Застосувати (шар «Пластика»)
+Rien n’a été déformé. ¦ Ничего не деформировано. ¦ Нічого не деформовано.
+💧 Fluidité appliquée sur le calque « Fluidité » (la photo reste dessous : 👁 pour comparer). ¦ 💧 Пластика применена на слое «Пластика» (фотография остаётся под ним: 👁, чтобы сравнить). ¦ 💧 Пластику застосовано на шарі «Пластика» (фотографія лишається під ним: 👁, щоб порівняти).
+🪄 Gomme magique ¦ 🪄 Волшебный ластик ¦ 🪄 Чарівна гумка
+Clique sur le fond à rendre transparent (plusieurs clics s’ajoutent) ¦ Нажми на фон, который нужно сделать прозрачным (несколько нажатий суммируются) ¦ Натисни на фон, який треба зробити прозорим (кілька натискань додаються)
+Zone voisine seulement (sinon : cette couleur partout) ¦ Только соседняя область (иначе: этот цвет везде) ¦ Лише сусідня ділянка (інакше: цей колір усюди)
+↶ Annuler le clic ¦ ↶ Отменить нажатие ¦ ↶ Відмінити натискання
+✓ Appliquer (masque de la photo) ¦ ✓ Применить (маска фотографии) ¦ ✓ Застосувати (маска фотографії)
+La photo a déjà un masque : la gomme magique le remplace. ¦ У фотографии уже есть маска: волшебный ластик её заменит. ¦ Фотографія вже має маску: чарівна гумка її замінить.
+Remplacer le masque de la photo ? ¦ Заменить маску фотографии? ¦ Замінити маску фотографії?
+🪄 Fond rendu transparent (masque de la photo, à retoucher au pinceau) : l’image s’enregistre en PNG. ¦ 🪄 Фон сделан прозрачным (маска фотографии, можно подправить кистью): изображение сохраняется в PNG. ¦ 🪄 Фон зроблено прозорим (маска фотографії, можна підправити пензлем): зображення зберігається в PNG.
+Masque de « {name} » ¦ Маска «{name}» ¦ Маска «{name}»
+Il n’y a pas encore de masque : détoure (✂️), gomme le fond (🪄) ou ajoute un masque à un calque, puis affine son bord. ¦ Маски пока нет: вырежи (✂️), сотри фон (🪄) или добавь маску к слою, затем уточни её край. ¦ Маски поки немає: виріж (✂️), зітри фон (🪄) або додай маску до шару, потім уточни її край.
+✨ Affiner le bord ¦ ✨ Уточнить край ¦ ✨ Уточнити край
+Décaler le bord ¦ Сместить край ¦ Змістити край
+Voir le masque seul (blanc : gardé) ¦ Показать только маску (белое: сохраняется) ¦ Показати лише маску (біле: зберігається)
+Bord du masque affiné ¦ Край маски уточнён ¦ Край маски уточнено
+✨ Bord affiné (↶ pour revenir ; le pinceau corrige le reste). ¦ ✨ Край уточнён (↶, чтобы вернуть; кисть исправит остальное). ¦ ✨ Край уточнено (↶, щоб повернути; пензель виправить решту).
+Lissage du bord ¦ Сглаживание края ¦ Згладжування краю
+Contraste du bord ¦ Контраст края ¦ Контраст краю
+Image trop grande ({w} × {h} points) : réduis la taille des photos. ¦ Изображение слишком большое ({w} × {h} пикс.): уменьши размер фотографий. ¦ Зображення завелике ({w} × {h} пікс.): зменш розмір фотографій.
+Recherche… ({i}/{total}) ¦ Поиск… ({i}/{total}) ¦ Пошук… ({i}/{total})
+« {name} » : décalage {dx} × {dy} points, rotation {rot}°, ressemblance {pct} %. ¦ «{name}»: смещение {dx} × {dy} пикс., поворот {rot}°, сходство {pct} %. ¦ «{name}»: зсув {dx} × {dy} пікс., поворот {rot}°, схожість {pct} %.
+Pas de partie commune sûre pour {names} : place-la à la main (glisser, flèches ; « Mode différence » pour vérifier). ¦ Нет надёжной общей части для {names}: размести её вручную (перетаскивание, стрелки; «Режим разницы» для проверки). ¦ Немає надійної спільної частини для {names}: розмісти її вручну (перетягування, стрілки; «Режим різниці» для перевірки).
+Photos alignées : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement. ¦ Фотографии выровнены: проверь (перетаскивание, стрелки для подгонки). «Сгладить стыки» смягчает соединение при сохранении. ¦ Фотографії вирівняно: перевір (перетягування, стрілки для припасування). «Згладити стики» пом’якшує з’єднання під час збереження.
+Photo alignée : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement. ¦ Фотография выровнена: проверь (перетаскивание, стрелки для подгонки). «Сгладить стыки» смягчает соединение при сохранении. ¦ Фотографію вирівняно: перевір (перетягування, стрілки для припасування). «Згладити стики» пом’якшує з’єднання під час збереження.
+Image assemblée enregistrée, rattachée aux mêmes fiches que « {name} ». Les photos d’origine restent. ¦ Собранное изображение сохранено и связано с теми же карточками, что и «{name}». Исходные фотографии остаются. ¦ Складене зображення збережено й пов’язано з тими самими картками, що й «{name}». Початкові фотографії лишаються.
+Titre de l’image assemblée ¦ Название собранного изображения ¦ Назва складеного зображення
+Le titre de l’image assemblée (et le nom des fichiers exportés) ¦ Название собранного изображения (и имя экспортируемых файлов) ¦ Назва складеного зображення (та ім’я експортованих файлів)
+L’image assemblée : PNG, JPG ou imprimer ¦ Собранное изображение: PNG, JPG или печать ¦ Складене зображення: PNG, JPG або друк
+Enregistrer l’image assemblée dans les médias, rattachée aux mêmes fiches que la première photo de la base ¦ Сохранить собранное изображение в медиафайлах и связать с теми же карточками, что и первая фотография из базы ¦ Зберегти складене зображення в медіафайлах і пов’язати з тими самими картками, що й перша фотографія з бази
+Clique une photo pour la choisir, glisse pour la déplacer · Maj + molette : taille · Alt + molette : rotation · molette : zoom · flèches : 1 px (Maj : 10 px) · glisse ici une photo de l’ordinateur pour l’ajouter ¦ Нажми на фотографию, чтобы выбрать её, перетащи, чтобы переместить · Shift + колесо: размер · Alt + колесо: поворот · колесо: масштаб · стрелки: 1 px (Shift: 10 px) · перетащи сюда фотографию с компьютера, чтобы добавить её ¦ Натисни на фотографію, щоб вибрати її, перетягни, щоб перемістити · Shift + коліщатко: розмір · Alt + коліщатко: поворот · коліщатко: масштаб · стрілки: 1 px (Shift: 10 px) · перетягни сюди фотографію з комп’ютера, щоб додати її
+Fond blanc (sinon transparent en PNG) ¦ Белый фон (иначе прозрачный в PNG) ¦ Білий фон (інакше прозорий у PNG)
+Coché : le fond autour des photos est blanc. Décoché, il reste transparent (seulement en PNG ; le JPG met toujours du blanc). ¦ Отмечено: фон вокруг фотографий белый. Не отмечено: он остаётся прозрачным (только в PNG; в JPG всегда белый). ¦ Позначено: фон довкола фотографій білий. Не позначено: він лишається прозорим (лише в PNG; у JPG завжди білий).
+Ce qui se superpose bien devient noir : idéal pour aligner deux photos du même endroit ¦ То, что хорошо совпадает, становится чёрным: идеально, чтобы выровнять две фотографии одного места ¦ Те, що добре збігається, стає чорним: ідеально, щоб вирівняти дві фотографії одного місця
+Les parties identiques des deux photos deviennent noires : quand l’écriture disparaît presque, elles sont parfaitement alignées. ¦ Одинаковые части двух фотографий становятся чёрными: когда почерк почти исчезает, они выровнены идеально. ¦ Однакові частини двох фотографій стають чорними: коли почерк майже зникає, їх вирівняно ідеально.
+Mode différence ¦ Режим разницы ¦ Режим різниці
+Boutons des photos ¦ Кнопки фотографий ¦ Кнопки фотографій
+Panorama, page photographiée en deux fois : chaque photo est posée sur la précédente là où elles se recouvrent (décalage, petite rotation) ¦ Панорама, страница, сфотографированная в два приёма: каждая фотография накладывается на предыдущую там, где они перекрываются (смещение, небольшой поворот) ¦ Панорама, сторінка, сфотографована за два рази: кожну фотографію накладено на попередню там, де вони перекриваються (зсув, невеликий поворот)
+🪄 Aligner tout seul ¦ 🪄 Выровнять автоматически ¦ 🪄 Вирівняти автоматично
+Image enregistrée ¦ Сохранённое изображение ¦ Збережене зображення
+JPEG (léger) ¦ JPEG (лёгкий) ¦ JPEG (легкий)
+PNG (sans perte) ¦ PNG (без потерь) ¦ PNG (без втрат)
+Fondre les raccords ¦ Сгладить стыки ¦ Згладити стики
+Là où deux photos se recouvrent, le bord de celle du dessus s’efface en douceur : pas de marche visible au raccord. ¦ Там, где две фотографии перекрываются, край верхней мягко растворяется: на стыке не видно ступеньки. ¦ Там, де дві фотографії перекриваються, край верхньої м’яко розчиняється: на стику не видно сходинки.
+Largeur du fondu ¦ Ширина растушёвки ¦ Ширина розтушовування
+Rogner aux parties couvertes (sans coins vides) ¦ Обрезать по покрытым частям (без пустых углов) ¦ Обрізати за вкритими частинами (без порожніх кутів)
+Garde le plus grand rectangle entièrement couvert par les photos : plus de coins blancs autour d’un panorama. ¦ Оставляет самый большой прямоугольник, полностью покрытый фотографиями: никаких белых углов вокруг панорамы. ¦ Залишає найбільший прямокутник, повністю вкритий фотографіями: жодних білих кутів довкола панорами.
+L’assemblage non enregistré sera perdu. ¦ Несохранённая сборка будет потеряна. ¦ Незбережене складання буде втрачено.
+Fermer sans enregistrer l’assemblage ? ¦ Закрыть, не сохранив сборку? ¦ Закрити, не зберігши складання?
+Mettre devant ¦ На передний план ¦ На передній план
+Mettre derrière ¦ На задний план ¦ На задній план
+Aucune photo à assembler pour l’instant ¦ Пока нет фотографий для сборки ¦ Поки немає фотографій для складання
+« ＋ Photos », ou glisse une photo de l’ordinateur sur le plan de travail. ¦ «＋ Фотографии» или перетащи фотографию с компьютера на рабочую область. ¦ «＋ Фотографії» або перетягни фотографію з комп’ютера на робочу ділянку.
+＋ Photos ¦ ＋ Фотографии ¦ ＋ Фотографії
+Clique une photo pour la régler. ¦ Нажми на фотографию, чтобы настроить её. ¦ Натисни на фотографію, щоб налаштувати її.
+La taille de la photo par rapport à ses vrais points : pour mettre deux photos à la même échelle. ¦ Размер фотографии относительно её настоящих пикселей: чтобы привести две фотографии к одному масштабу. ¦ Розмір фотографії відносно її справжніх пікселів: щоб звести дві фотографії до одного масштабу.
+À moitié transparente, la photo du dessus laisse voir celle du dessous : on aligne les écritures. ¦ Полупрозрачная верхняя фотография позволяет видеть нижнюю: так выравнивают почерк. ¦ Напівпрозора верхня фотографія дає змогу бачити нижню: так вирівнюють почерк.
+À moitié transparente ¦ Полупрозрачная ¦ Напівпрозора
+Pour mettre deux photos à la même échelle : rends celle du dessus à moitié transparente (ou coche « Mode différence »), puis ajuste sa taille et sa rotation jusqu’à ce que les écritures se superposent. ¦ Чтобы привести две фотографии к одному масштабу: сделай верхнюю полупрозрачной (или отметь «Режим разницы»), затем подгоняй её размер и поворот, пока почерк не совпадёт. ¦ Щоб звести дві фотографії до одного масштабу: зроби верхню напівпрозорою (або познач «Режим різниці»), потім припасовуй її розмір і поворот, доки почерк не збіжиться.
+Opaque ¦ Непрозрачная ¦ Непрозора
+Aucune photo visible. ¦ Нет видимых фотографий. ¦ Немає видимих фотографій.
+Ajoute au moins deux photos qui se recouvrent (« ＋ Photos »). ¦ Добавь хотя бы две перекрывающиеся фотографии («＋ Фотографии»). ¦ Додай щонайменше дві фотографії, що перекриваються («＋ Фотографії»).
+Le navigateur n’a pas pu créer l’image. ¦ Браузеру не удалось создать изображение. ¦ Браузерові не вдалося створити зображення.
+Pour enregistrer dans la base, l’une des photos doit venir de la base (sinon : ⤓ Télécharger). ¦ Чтобы сохранить в базе, одна из фотографий должна быть из базы (иначе: ⤓ Скачать). ¦ Щоб зберегти в базі, одна з фотографій має бути з бази (інакше: ⤓ Завантажити).
+Création de l’image… ¦ Создание изображения… ¦ Створення зображення…
+ASSEMBLER ¦ СБОРКА ¦ СКЛАДАННЯ
+ce n’est pas un fichier PSD ¦ это не файл PSD ¦ це не файл PSD
+les très grands PSD (PSB) ne sont pas lus ¦ очень большие PSD (PSB) не читаются ¦ дуже великі PSD (PSB) не читаються
+version de PSD inconnue ¦ неизвестная версия PSD ¦ невідома версія PSD
+profondeur {n} bits non lue (seulement 8 bits) ¦ глубина {n} бит не читается (только 8 бит) ¦ глибина {n} біт не читається (лише 8 біт)
+seuls les PSD en RVB ou en niveaux de gris sont lus ¦ читаются только PSD в RGB или в оттенках серого ¦ читаються лише PSD в RGB або у відтінках сірого
+image trop grande ¦ изображение слишком большое ¦ зображення завелике
+compression ZIP non lue ¦ сжатие ZIP не читается ¦ стиснення ZIP не читається
+=🗂 PSD prêt : {n} calques, {w} × {h} px (les calques de réglage sont dans l’image aplatie). ¦ 🗂 PSD готов: {n} слой, {w} × {h} px (корректирующие слои входят в сведённое изображение).|🗂 PSD готов: {n} слоя, {w} × {h} px (корректирующие слои входят в сведённое изображение).|🗂 PSD готов: {n} слоёв, {w} × {h} px (корректирующие слои входят в сведённое изображение). ¦ 🗂 PSD готовий: {n} шар, {w} × {h} px (коригувальні шари входять у зведене зображення).|🗂 PSD готовий: {n} шари, {w} × {h} px (коригувальні шари входять у зведене зображення).|🗂 PSD готовий: {n} шарів, {w} × {h} px (коригувальні шари входять у зведене зображення).
+=🗂 PSD prêt : {n} calque, {w} × {h} px (les calques de réglage sont dans l’image aplatie). ¦ 🗂 PSD готов: {n} слой, {w} × {h} px (корректирующие слои входят в сведённое изображение).|🗂 PSD готов: {n} слоя, {w} × {h} px (корректирующие слои входят в сведённое изображение).|🗂 PSD готов: {n} слоёв, {w} × {h} px (корректирующие слои входят в сведённое изображение). ¦ 🗂 PSD готовий: {n} шар, {w} × {h} px (коригувальні шари входять у зведене зображення).|🗂 PSD готовий: {n} шари, {w} × {h} px (коригувальні шари входять у зведене зображення).|🗂 PSD готовий: {n} шарів, {w} × {h} px (коригувальні шари входять у зведене зображення).
+PSD illisible : {err}. ¦ PSD не читается: {err}. ¦ PSD не читається: {err}.
+Calque PSD ¦ Слой PSD ¦ Шар PSD
+PSD importé : {file} ¦ PSD импортирован: {file} ¦ PSD імпортовано: {file}
+=🗂 {n} calques importés de « {file} » (proportions différentes : ajusté à la photo). ¦ 🗂 {n} слой импортирован из «{file}» (другие пропорции: подогнано под фотографию).|🗂 {n} слоя импортировано из «{file}» (другие пропорции: подогнано под фотографию).|🗂 {n} слоёв импортировано из «{file}» (другие пропорции: подогнано под фотографию). ¦ 🗂 {n} шар імпортовано з «{file}» (інші пропорції: припасовано до фотографії).|🗂 {n} шари імпортовано з «{file}» (інші пропорції: припасовано до фотографії).|🗂 {n} шарів імпортовано з «{file}» (інші пропорції: припасовано до фотографії).
+=🗂 {n} calques importés de « {file} ». ¦ 🗂 {n} слой импортирован из «{file}».|🗂 {n} слоя импортировано из «{file}».|🗂 {n} слоёв импортировано из «{file}». ¦ 🗂 {n} шар імпортовано з «{file}».|🗂 {n} шари імпортовано з «{file}».|🗂 {n} шарів імпортовано з «{file}».
+=🗂 {n} calque importé de « {file} » (proportions différentes : ajusté à la photo). ¦ 🗂 {n} слой импортирован из «{file}» (другие пропорции: подогнано под фотографию).|🗂 {n} слоя импортировано из «{file}» (другие пропорции: подогнано под фотографию).|🗂 {n} слоёв импортировано из «{file}» (другие пропорции: подогнано под фотографию). ¦ 🗂 {n} шар імпортовано з «{file}» (інші пропорції: припасовано до фотографії).|🗂 {n} шари імпортовано з «{file}» (інші пропорції: припасовано до фотографії).|🗂 {n} шарів імпортовано з «{file}» (інші пропорції: припасовано до фотографії).
+=🗂 {n} calque importé de « {file} ». ¦ 🗂 {n} слой импортирован из «{file}».|🗂 {n} слоя импортировано из «{file}».|🗂 {n} слоёв импортировано из «{file}». ¦ 🗂 {n} шар імпортовано з «{file}».|🗂 {n} шари імпортовано з «{file}».|🗂 {n} шарів імпортовано з «{file}».
+Cocher pour comparer ¦ Отметь, чтобы сравнить ¦ Познач, щоб порівняти
+Coche deux versions pour les comparer. ¦ Отметь две версии, чтобы сравнить их. ¦ Познач дві версії, щоб порівняти їх.
+Plus ancien ¦ Более старые ¦ Старіші
+léger ¦ лёгкий ¦ легкий
+Taille des vignettes ¦ Размер миниатюр ¦ Розмір мініатюр
+Utiliser ces images ¦ Использовать эти изображения ¦ Використати ці зображення
+Chercher : titre, cote, personne, lieu, année ¦ Искать: название, шифр, человек, место, год ¦ Шукати: назва, шифр, людина, місце, рік
+Titre, cote, personne, lieu, année… ¦ Название, шифр, человек, место, год… ¦ Назва, шифр, людина, місце, рік…
+↑ ↓ ← → · Espace : cocher · Entrée : valider ¦ ↑ ↓ ← → · Пробел: отметить · Enter: подтвердить ¦ ↑ ↓ ← → · Пробіл: позначити · Enter: підтвердити
+↑ ↓ ← → · Entrée : valider ¦ ↑ ↓ ← → · Enter: подтвердить ¦ ↑ ↓ ← → · Enter: підтвердити
+Retouche ¦ Ретушь ¦ Ретуш
+RETOUCHE ¦ РЕТУШЬ ¦ РЕТУШ
+photo|Légende ¦ Подпись ¦ Підпис
+Propriétés ¦ Свойства ¦ Властивості
+Préréglage ¦ Пресет ¦ Пресет
+Aucun. ¦ Нет. ¦ Немає.
+trop petite pour imprimer en A5 ¦ слишком маленькое для печати в A5 ¦ замале для друку в A5
+assez grande pour imprimer en A5 ¦ достаточно большое для печати в A5 ¦ достатньо велике для друку в A5
+Écran 16:9 (1920 × 1080) ¦ Экран 16:9 (1920 × 1080) ¦ Екран 16:9 (1920 × 1080)
+Écran 4:3 (1600 × 1200) ¦ Экран 4:3 (1600 × 1200) ¦ Екран 4:3 (1600 × 1200)
+Carré 1:1 (1080 × 1080) ¦ Квадрат 1:1 (1080 × 1080) ¦ Квадрат 1:1 (1080 × 1080)
+Vertical 9:16 (1080 × 1920) ¦ Вертикально 9:16 (1080 × 1920) ¦ Вертикально 9:16 (1080 × 1920)
+photo|Exposition ¦ Экспозиция ¦ Експозиція
+photo|Luminosité ¦ Яркость ¦ Яскравість
+Colorisation : {what} ¦ Раскрашивание: {what} ¦ Розфарбовування: {what}
+{what} oui ¦ {what} вкл. ¦ {what} увімк.
+{what} non ¦ {what} выкл. ¦ {what} вимк.
+Courbe {what} ¦ Кривая {what} ¦ Крива {what}
+{layer} verrouillé ¦ {layer} заблокирован ¦ {layer} заблоковано
+{layer} déverrouillé ¦ {layer} разблокирован ¦ {layer} розблоковано
+« {name} » seulement sur l’élément dessous ¦ «{name}» только на элементе под ним ¦ «{name}» лише на елементі під ним
+« {name} » sur tout ce qui est dessous ¦ «{name}» на всём, что под ним ¦ «{name}» на всьому, що під ним
+Teinte/Saturation : {what} ¦ Цветовой тон/Насыщенность: {what} ¦ Відтінок/Насиченість: {what}
+{dpi} ppp ¦ {dpi} dpi ¦ {dpi} dpi
+Envoi ({w} × {h} points, {size} Mo)… ¦ Отправка ({w} × {h} пикс., {size} МБ)… ¦ Надсилання ({w} × {h} пікс., {size} МБ)…
+Barre du haut (groupes) ¦ Верхняя панель (группы) ¦ Верхня панель (групи)
+Les outils ¦ Инструменты ¦ Інструменти
+Options des outils (pinceau, texte…) ¦ Параметры инструментов (кисть, текст…) ¦ Параметри інструментів (пензель, текст…)
+Colonne d’outils ¦ Колонка инструментов ¦ Колонка інструментів
+Panneau Réglages ¦ Панель коррекции ¦ Панель корекції
+Préréglages ¦ Пресеты ¦ Пресети
+Import des réglages indisponible. ¦ Импорт настроек недоступен. ¦ Імпорт налаштувань недоступний.
+Espace de travail « {name} » appliqué. ¦ Рабочее пространство «{name}» применено. ¦ Робочий простір «{name}» застосовано.
+Réglages « {name} » importés : « Appliquer » pour les utiliser. ¦ Настройки «{name}» импортированы: нажми «Применить», чтобы их использовать. ¦ Налаштування «{name}» імпортовано: натисни «Застосувати», щоб їх використати.
+{layer} (avant / après) ¦ {layer} (до / после) ¦ {layer} (до / після)
+Avant / après — {name} ¦ До / после — {name} ¦ До / після — {name}
+Modèle des visages : {what} ¦ Модель лиц: {what} ¦ Модель облич: {what}
+Portrait de {name} (photo d’identité) ¦ Портрет: {name} (фото на документы) ¦ Портрет: {name} (фото на документи)
+Portrait (photo d’identité) ¦ Портрет (фото на документы) ¦ Портрет (фото на документи)
+Fiche {num} ¦ Карточка {num} ¦ Картка {num}
+⚠️ visage non trouvé sur « {name} » : cadrage au centre, à vérifier (ou identifie le visage dans la visionneuse) ¦ ⚠️ лицо не найдено на «{name}»: кадрирование по центру, проверь (или отметь лицо в просмотрщике) ¦ ⚠️ обличчя не знайдено на «{name}»: кадрування по центру, перевір (або познач обличчя в переглядачі)
+={n} portraits prêts : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ Готов {n} портрет: сними флажок, если он не подходит, затем «Использовать как портреты».|Готово {n} портрета: сними флажки с тех, что не подходят, затем «Использовать как портреты».|Готово {n} портретов: сними флажки с тех, что не подходят, затем «Использовать как портреты». ¦ Готовий {n} портрет: зніми позначку, якщо він не підходить, потім «Використати як портрети».|Готово {n} портрети: зніми позначки з тих, що не підходять, потім «Використати як портрети».|Готово {n} портретів: зніми позначки з тих, що не підходять, потім «Використати як портрети».
+={n} portrait prêt : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ Готов {n} портрет: сними флажок, если он не подходит, затем «Использовать как портреты».|Готово {n} портрета: сними флажки с тех, что не подходят, затем «Использовать как портреты».|Готово {n} портретов: сними флажки с тех, что не подходят, затем «Использовать как портреты». ¦ Готовий {n} портрет: зніми позначку, якщо він не підходить, потім «Використати як портрети».|Готово {n} портрети: зніми позначки з тих, що не підходять, потім «Використати як портрети».|Готово {n} портретів: зніми позначки з тих, що не підходять, потім «Використати як портрети».
+Aucun visage trouvé tout seul. ¦ Автоматически ни одного лица не найдено. ¦ Автоматично жодного обличчя не знайдено.
+={n} autres sont cadrés au centre : coche-les seulement s’ils vont. ¦ Ещё {n} кадрирован по центру: отметь его, только если он подходит.|Ещё {n} кадрированы по центру: отметь их, только если они подходят.|Ещё {n} кадрированы по центру: отметь их, только если они подходят. ¦ Ще {n} кадровано по центру: познач його, лише якщо він підходить.|Ще {n} кадровано по центру: познач їх, лише якщо вони підходять.|Ще {n} кадровано по центру: познач їх, лише якщо вони підходять.
+={n} autre est cadré au centre : coche-le seulement s’il va. ¦ Ещё {n} кадрирован по центру: отметь его, только если он подходит.|Ещё {n} кадрированы по центру: отметь их, только если они подходят.|Ещё {n} кадрированы по центру: отметь их, только если они подходят. ¦ Ще {n} кадровано по центру: познач його, лише якщо він підходить.|Ще {n} кадровано по центру: познач їх, лише якщо вони підходять.|Ще {n} кадровано по центру: познач їх, лише якщо вони підходять.
+Calque {num} ¦ Слой {num} ¦ Шар {num}
+Groupe {num} ¦ Группа {num} ¦ Група {num}
+calque|Réglages ¦ Коррекция ¦ Коригування
+Masque d’écrêtage : ne touche que « {name} » juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Обтравочная маска: действует только на «{name}» прямо под ней (⌥ Alt + щелчок между двумя слоями в Photoshop) ¦ Обтравна маска: діє лише на «{name}» просто під нею (⌥ Alt + клац між двома шарами в Photoshop)
+Masque d’écrêtage : ne touche que l’élément juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Обтравочная маска: действует только на элемент прямо под ней (⌥ Alt + щелчок между двумя слоями в Photoshop) ¦ Обтравна маска: діє лише на елемент просто під нею (⌥ Alt + клац між двома шарами в Photoshop)
+seulement sur « {name} » ¦ только на «{name}» ¦ лише на «{name}»
+seulement sur ce qui est juste dessous ¦ только на то, что прямо под ним ¦ лише на те, що просто під ним
+touche tout ce qui est dessous dans « {name} » ¦ действует на всё, что ниже, в «{name}» ¦ діє на все, що нижче, у «{name}»
+réglages, {n} corrections ¦ коррекция, исправлений: {n} ¦ коригування, виправлень: {n}
+réglages, {n} correction ¦ коррекция, исправлений: {n} ¦ коригування, виправлень: {n}
+« {name} » mis dans un groupe ¦ «{name}» помещён в группу ¦ «{name}» поміщено в групу
+{layer} montré ¦ {layer}: показано ¦ {layer}: показано
+{layer} masqué ¦ {layer}: скрыто ¦ {layer}: приховано
+Masque qui cache la sélection ajouté à {name} ¦ Маска, скрывающая выделение, добавлена к {name} ¦ Маску, що приховує виділення, додано до {name}
+Masque qui cache tout ajouté à {name} ¦ Маска, скрывающая всё, добавлена к {name} ¦ Маску, що приховує все, додано до {name}
+Masque ajouté à {name} ¦ Маска добавлена к {name} ¦ Маску додано до {name}
+Masque de {name} désactivé ¦ Маска {name} отключена ¦ Маску {name} вимкнено
+Masque de {name} réactivé ¦ Маска {name} снова включена ¦ Маску {name} знову ввімкнено
+Masque de {name} inversé ¦ Маска {name} инвертирована ¦ Маску {name} інвертовано
+Masque de {name} retiré ¦ Маска {name} убрана ¦ Маску {name} прибрано
+« {name} » à sa taille d’origine ¦ «{name}» в исходном размере ¦ «{name}» в початковому розмірі
+✨ Filtre sur « {name} » ¦ ✨ Фильтр на «{name}» ¦ ✨ Фільтр на «{name}»
+« {name} » pixellisé ¦ «{name}» растрирован ¦ «{name}» растеризовано
+« {name} » pixellisé : figé à sa taille actuelle (l’agrandir le rendra flou) ¦ «{name}» растрирован: закреплён в текущем размере (при увеличении станет размытым) ¦ «{name}» растеризовано: закріплено в поточному розмірі (при збільшенні стане розмитим)
+Groupe « {name} » supprimé (son contenu reste) ¦ Группа «{name}» удалена (её содержимое осталось) ¦ Групу «{name}» видалено (її вміст залишився)
+{layer} supprimé ¦ {layer}: удалено ¦ {layer}: видалено
+« {name} » retiré des calques ¦ «{name}» убран из слоёв ¦ «{name}» прибрано з шарів
+Calque « {name} » supprimé avec ce qui est dessus ¦ Слой «{name}» удалён вместе с тем, что на нём ¦ Шар «{name}» видалено разом із тим, що на ньому
+{layer} dupliquée ¦ {layer}: дублировано ¦ {layer}: дубльовано
+{layer} dupliqué ¦ {layer}: дублировано ¦ {layer}: дубльовано
+{layer} vidé ¦ {layer}: очищено ¦ {layer}: очищено
+{layer} déplacé ¦ {layer}: перемещено ¦ {layer}: переміщено
+Opacité de {name} : {n} % ¦ Непрозрачность {name}: {n} % ¦ Непрозорість {name}: {n} %
+Fond de {name} : {n} % ¦ Заливка {name}: {n} % ¦ Заливка {name}: {n} %
+Renommé « {name} » ¦ Переименовано: «{name}» ¦ Перейменовано: «{name}»
+Fusion de {name} : {what} ¦ Режим наложения {name}: {what} ¦ Режим накладання {name}: {what}
+« {name} » rangé dans « {group} » ¦ «{name}» перемещён в «{group}» ¦ «{name}» переміщено в «{group}»
+« {name} » sorti du groupe ¦ «{name}» вынесен из группы ¦ «{name}» винесено з групи
+« {name} » rangé tout en bas ¦ «{name}» перемещён в самый низ ¦ «{name}» переміщено в самий низ
+« {name} » rangé au-dessus de « {other} » ¦ «{name}» перемещён над «{other}» ¦ «{name}» переміщено над «{other}»
+« {name} » rangé sous « {other} » ¦ «{name}» перемещён под «{other}» ¦ «{name}» переміщено під «{other}»
+🎚 Calque de réglage {name} ¦ 🎚 Корректирующий слой {name} ¦ 🎚 Коригувальний шар {name}
+🖼 Réglages de <b>la photo</b> ¦ 🖼 Коррекция <b>фото</b> ¦ 🖼 Коригування <b>фото</b>
+Sur le masque, le pinceau ⬜ montre (fait revenir ce qui était caché) — X pour changer ¦ На маске кисть ⬜ показывает (возвращает скрытое) — X, чтобы переключить ¦ На масці пензель ⬜ показує (повертає приховане) — X, щоб перемкнути
+Sur le masque, le pinceau ⬛ cache — X pour changer ¦ На маске кисть ⬛ скрывает — X, чтобы переключить ¦ На масці пензель ⬛ приховує — X, щоб перемкнути
+Texte choisi : « {text} » ¦ Выбранный текст: «{text}» ¦ Вибраний текст: «{text}»
+Glyphe {what} ajouté ¦ Глиф {what} добавлен ¦ Гліф {what} додано
+« {what} » copié : colle-le dans un texte (⌘V). ¦ «{what}» скопировано: вставь в текст (⌘V). ¦ «{what}» скопійовано: встав у текст (⌘V).
+calque « {name} » (seulement l’élément dessous) ¦ слой «{name}» (только элемент под ним) ¦ шар «{name}» (лише елемент під ним)
+calque « {name} » ¦ слой «{name}» ¦ шар «{name}»
+Gamme : {a}° / {b}° — {c}° \ {d}° (glisse les repères) ¦ Диапазон: {a}° / {b}° — {c}° \ {d}° (перетаскивай метки) ¦ Діапазон: {a}° / {b}° — {c}° \ {d}° (перетягуй мітки)
+Propriétés de « {name} » ¦ Свойства «{name}» ¦ Властивості «{name}»
+🎨 Teinte/Saturation sur « {name} » ¦ 🎨 Цветовой тон/Насыщенность на «{name}» ¦ 🎨 Відтінок/Насиченість на «{name}»
+Motif « {what} » : calque « {name} » ¦ Узор «{what}»: слой «{name}» ¦ Візерунок «{what}»: шар «{name}»
+Motif de « {name} » ¦ Узор «{name}» ¦ Візерунок «{name}»
+Motif « {what} » sur « {name} » ¦ Узор «{what}» на «{name}» ¦ Візерунок «{what}» на «{name}»
+Motif « {what} » retiré de la bibliothèque (les calques qui l’utilisent le gardent) ¦ Узор «{what}» убран из библиотеки (слои, где он используется, его сохраняют) ¦ Візерунок «{what}» прибрано з бібліотеки (шари, де він використовується, його зберігають)
+le calque « {name} » ¦ слой «{name}» ¦ шар «{name}»
+🖌 {name} : peins sur un calque. ¦ 🖌 {name}: рисуй на слое. ¦ 🖌 {name}: малюй на шарі.
+Dégradé : {what} ¦ Градиент: {what} ¦ Градієнт: {what}
+Dégradé {num} ¦ Градиент {num} ¦ Градієнт {num}
+Calque « {name} » ¦ Слой «{name}» ¦ Шар «{name}»
+« {name} » · son masque (noir = caché, blanc = montré) : tout se voit tout de suite ¦ «{name}» · его маска (чёрное = скрыто, белое = видно): всё видно сразу ¦ «{name}» · його маска (чорне = приховано, біле = видно): усе видно одразу
+« {name} » : tout se voit tout de suite ¦ «{name}»: всё видно сразу ¦ «{name}»: усе видно одразу
+le prochain dégradé que tu traceras ¦ следующий градиент, который ты нарисуешь ¦ наступний градієнт, який ти намалюєш
+Préréglage « {name} » gardé : il reste dans cette liste. ¦ Набор настроек «{name}» сохранён: он остаётся в этом списке. ¦ Набір налаштувань «{name}» збережено: він лишається в цьому списку.
+Dégradé modifié sur « {name} » ¦ Градиент изменён на «{name}» ¦ Градієнт змінено на «{name}»
+Texte « {text} » ¦ Текст «{text}» ¦ Текст «{text}»
+Objet dynamique « {name} » : image remplacée ¦ Смарт-объект «{name}»: изображение заменено ¦ Смарт-об’єкт «{name}»: зображення замінено
+Image placée : « {name} » ¦ Изображение размещено: «{name}» ¦ Зображення розміщено: «{name}»
+Image placée, mais pas rangée dans les médias : {err} ¦ Изображение размещено, но не сохранено в медиафайлах: {err} ¦ Зображення розміщено, але не збережено в медіафайлах: {err}
+Élément supprimé de « {name} » ¦ Элемент удалён из «{name}» ¦ Елемент видалено з «{name}»
+Image tournée sur « {name} » ¦ Изображение повёрнуто на «{name}» ¦ Зображення повернуто на «{name}»
+Image agrandie / réduite sur « {name} » ¦ Изображение увеличено / уменьшено на «{name}» ¦ Зображення збільшено / зменшено на «{name}»
+Dégradé ajusté (masque) sur « {name} » ¦ Градиент настроен (маска) на «{name}» ¦ Градієнт налаштовано (маска) на «{name}»
+Dégradé ajusté sur « {name} » ¦ Градиент настроен на «{name}» ¦ Градієнт налаштовано на «{name}»
+Élément déplacé sur « {name} » ¦ Элемент перемещён на «{name}» ¦ Елемент переміщено на «{name}»
+Masque en dégradé sur « {name} » ¦ Градиентная маска на «{name}» ¦ Градієнтна маска на «{name}»
+Dégradé {what} : « {name} » ¦ Градиент {what}: «{name}» ¦ Градієнт {what}: «{name}»
+{what} sur « {name} » ¦ {what} на «{name}» ¦ {what} на «{name}»
+Masque : caché au pinceau ¦ Маска: скрыто кистью ¦ Маска: приховано пензлем
+Masque : montré au pinceau ¦ Маска: показано кистью ¦ Маска: показано пензлем
+Pli réparé ({n} touches) (calque ✨ Retouches) ¦ Залом исправлен (мазков: {n}) (слой ✨ Ретушь) ¦ Залом виправлено (мазків: {n}) (шар ✨ Ретуш)
+Pli réparé (calque ✨ Retouches) ¦ Залом исправлен (слой ✨ Ретушь) ¦ Залом виправлено (шар ✨ Ретуш)
+Recadrage enlevé ¦ Кадрирование убрано ¦ Кадрування прибрано
+Recadrage et redressement ({a}°) ¦ Кадрирование и выравнивание ({a}°) ¦ Кадрування і вирівнювання ({a}°)
+Recadrage ¦ Кадрирование ¦ Кадрування
+Filtre « {what} » (refait) ¦ Фильтр «{what}» (повторно) ¦ Фільтр «{what}» (повторно)
+« {what} » refait sur un nouveau calque. ¦ «{what}» повторено на новом слое. ¦ «{what}» повторено на новому шарі.
+limité à la sélection ¦ только в выделении ¦ лише у виділенні
+Filtre « {what} » ¦ Фильтр «{what}» ¦ Фільтр «{what}»
+Filtre « {what} » ajouté au calque ¦ Фильтр «{what}» добавлен к слою ¦ Фільтр «{what}» додано до шару
+Filtre « {what} » réglé ¦ Фильтр «{what}» настроен ¦ Фільтр «{what}» налаштовано
+Action « {name} » ¦ Операция «{name}» ¦ Операція «{name}»
+Action du {date} ¦ Операция от {date} ¦ Операція від {date}
+Action « {name} » enregistrée. ¦ Операция «{name}» сохранена. ¦ Операцію «{name}» збережено.
+Action « {name} » importée : « Sur cette photo » ou « Sur plusieurs photos… ». ¦ Операция «{name}» импортирована: «На этом фото» или «На нескольких фото…». ¦ Операцію «{name}» імпортовано: «На цьому фото» або «На кількох фото…».
+Action « {name} » supprimée ¦ Операция «{name}» удалена ¦ Операцію «{name}» видалено
+« {name} » sur plusieurs photos ¦ «{name}» на нескольких фото ¦ «{name}» на кількох фото
+Terminé : {n} photos sur {total}, nouvelle version affichée. ¦ Готово: фото {n} из {total}, показана новая версия. ¦ Готово: фото {n} з {total}, показано нову версію.
+Terminé : {n} photo sur {total}, nouvelle version affichée. ¦ Готово: фото {n} из {total}, показана новая версия. ¦ Готово: фото {n} з {total}, показано нову версію.
+Terminé : {n} photos sur {total}. ¦ Готово: фото {n} из {total}. ¦ Готово: фото {n} з {total}.
+Terminé : {n} photo sur {total}. ¦ Готово: фото {n} из {total}. ¦ Готово: фото {n} з {total}.
+{layer} (retouchée) ¦ {layer} (отретушировано) ¦ {layer} (відретушовано)
+« {name} » · comme le style de calque de Photoshop ¦ «{name}» · как стиль слоя в Photoshop ¦ «{name}» · як стиль шару в Photoshop
+Effets de {layer} enlevés ¦ Эффекты {layer} убраны ¦ Ефекти {layer} прибрано
+Effets de {layer} ¦ Эффекты {layer} ¦ Ефекти {layer}
+Les lignes fines, claires ou sombres, sont repérées en rouge (dans la sélection). Vérifie, puis « Réparer ces lignes ». ¦ Тонкие линии, светлые или тёмные, отмечены красным (в выделении). Проверь, затем «Исправить эти линии». ¦ Тонкі лінії, світлі чи темні, позначено червоним (у виділенні). Перевір, потім «Виправити ці лінії».
+Les lignes fines, claires ou sombres, sont repérées en rouge. Vérifie, puis « Réparer ces lignes ». ¦ Тонкие линии, светлые или тёмные, отмечены красным. Проверь, затем «Исправить эти линии». ¦ Тонкі лінії, світлі чи темні, позначено червоним. Перевір, потім «Виправити ці лінії».
+{what} (en rouge sur la photo). ¦ {what} (красным на фото). ¦ {what} (червоним на фото).
+Plis réparés ({what}) ¦ Заломы исправлены ({what}) ¦ Заломи виправлено ({what})
+{what} : compare avec 👁 ou ◧ ; ↶ pour revenir. ¦ {what}: сравни с помощью 👁 или ◧; ↶, чтобы вернуться. ¦ {what}: порівняй за допомогою 👁 або ◧; ↶, щоб повернутися.
+={n} lignes repérées puis comblées ¦ {n} линия найдена и заполнена|{n} линии найдены и заполнены|{n} линий найдено и заполнено ¦ {n} лінію знайдено й заповнено|{n} лінії знайдено й заповнено|{n} ліній знайдено й заповнено
+={n} ligne repérée puis comblée ¦ {n} линия найдена и заполнена|{n} линии найдены и заполнены|{n} линий найдено и заполнено ¦ {n} лінію знайдено й заповнено|{n} лінії знайдено й заповнено|{n} ліній знайдено й заповнено
+=pli|{n} lignes ¦ {n} линия|{n} линии|{n} линий ¦ {n} лінія|{n} лінії|{n} ліній
+=pli|{n} ligne ¦ {n} линия|{n} линии|{n} линий ¦ {n} лінія|{n} лінії|{n} ліній
+=retouche|{n} étapes ¦ {n} шаг|{n} шага|{n} шагов ¦ {n} крок|{n} кроки|{n} кроків
+=retouche|{n} étape ¦ {n} шаг|{n} шага|{n} шагов ¦ {n} крок|{n} кроки|{n} кроків
+=ligne repérée ¦ найденная линия|найденные линии|найденных линий ¦ знайдена лінія|знайдені лінії|знайдених ліній
+=ligne réparée ¦ исправленная линия|исправленные линии|исправленных линий ¦ виправлена лінія|виправлені лінії|виправлених ліній
+=calque de réglage ¦ корректирующий слой|корректирующих слоя|корректирующих слоёв ¦ коригувальний шар|коригувальні шари|коригувальних шарів
+=portrait mis à jour ¦ обновлённый портрет|обновлённых портрета|обновлённых портретов ¦ оновлений портрет|оновлені портрети|оновлених портретів
+✨ Restauration en une fois ({what}) ¦ ✨ Реставрация за один раз ({what}) ¦ ✨ Реставрація за один раз ({what})
+Restauration faite ({what}) : chaque étape est un calque « ✨ » (Calques) que tu peux cacher ou doser ; ↶ défait tout. ¦ Реставрация выполнена ({what}): каждый шаг — это слой «✨» (Слои), который можно скрыть или ослабить; ↶ отменяет всё. ¦ Реставрацію виконано ({what}): кожен крок — це шар «✨» (Шари), який можна приховати або послабити; ↶ скасовує все.
+Portrait de la fiche « {name} » mis à jour (la photo recadrée est dans ses médias). ¦ Портрет карточки «{name}» обновлён (кадрированное фото — в её медиафайлах). ¦ Портрет картки «{name}» оновлено (кадроване фото — в її медіафайлах).
+Portrait de la fiche mis à jour (la photo recadrée est dans ses médias). ¦ Портрет карточки обновлён (кадрированное фото — в её медиафайлах). ¦ Портрет картки оновлено (кадроване фото — в її медіафайлах).
+{w} × {h} px (recadrée) ¦ {w} × {h} px (кадрировано) ¦ {w} × {h} px (кадровано)
+Horizon redressé ({a}°) ¦ Горизонт выровнен ({a}°) ¦ Горизонт вирівняно ({a}°)
+Redressée de {a}° : ajuste le cadre puis « ✓ Valider ». ¦ Выровнено на {a}°: подгони рамку, затем «✓ Подтвердить». ¦ Вирівняно на {a}°: підлаштуй рамку, потім «✓ Підтвердити».
+Photo redressée de {a}° (et recadrée pour ne pas voir les coins). ⌗ Recadrer pour ajuster. ¦ Фото выровнено на {a}° (и обрезано, чтобы не было видно углов). ⌗ Кадрировать, чтобы подогнать. ¦ Фото вирівняно на {a}° (і обрізано, щоб не було видно кутів). ⌗ Кадрувати, щоб підлаштувати.
+Redressée automatiquement ({a}°) ¦ Выровнено автоматически ({a}°) ¦ Вирівняно автоматично ({a}°)
+Reflets retirés sur un calque à part (seulement dans la sélection : fais d’abord une sélection de la vitre pour limiter) : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Блики убраны на отдельном слое (только в выделении: сначала выдели стекло, чтобы ограничить): настрой силу и размер, непрозрачность ослабляет, 🎭 ограничивает, 👁 скрывает. Фото не затронуто. ¦ Відблиски прибрано на окремому шарі (лише у виділенні: спершу виділи скло, щоб обмежити): налаштуй силу й розмір, непрозорість послаблює, 🎭 обмежує, 👁 приховує. Фото не змінено.
+Reflets retirés sur un calque à part : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Блики убраны на отдельном слое: настрой силу и размер, непрозрачность ослабляет, 🎭 ограничивает, 👁 скрывает. Фото не затронуто. ¦ Відблиски прибрано на окремому шарі: налаштуй силу й розмір, непрозорість послаблює, 🎭 обмежує, 👁 приховує. Фото не змінено.
+Colorisation dans un calque de réglage (limitée à la sélection) : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Раскрашивание в корректирующем слое (только в выделении): выбери цвета и силу; 🎭 — чтобы ограничить, 👁 — чтобы скрыть. Фото не затронуто. ¦ Розфарбування в коригувальному шарі (лише у виділенні): вибери кольори й силу; 🎭 — щоб обмежити, 👁 — щоб приховати. Фото не змінено.
+Colorisation dans un calque de réglage : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Раскрашивание в корректирующем слое: выбери цвета и силу; 🎭 — чтобы ограничить, 👁 — чтобы скрыть. Фото не затронуто. ¦ Розфарбування в коригувальному шарі: вибери кольори й силу; 🎭 — щоб обмежити, 👁 — щоб приховати. Фото не змінено.
+={n} taches enlevées, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ Убрано пятен: {n}, на слое «{layer}» (фото не затронуто): скрой или ослабь его, чтобы сравнить; ↶, если слишком.|Убрано пятен: {n}, на слое «{layer}» (фото не затронуто): скрой или ослабь его, чтобы сравнить; ↶, если слишком.|Убрано пятен: {n}, на слое «{layer}» (фото не затронуто): скрой или ослабь его, чтобы сравнить; ↶, если слишком. ¦ Прибрано плям: {n}, на шарі «{layer}» (фото не змінено): приховай або послаб його, щоб порівняти; ↶, якщо забагато.|Прибрано плям: {n}, на шарі «{layer}» (фото не змінено): приховай або послаб його, щоб порівняти; ↶, якщо забагато.|Прибрано плям: {n}, на шарі «{layer}» (фото не змінено): приховай або послаб його, щоб порівняти; ↶, якщо забагато.
+={n} tache enlevée, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ Убрано пятен: {n}, на слое «{layer}» (фото не затронуто): скрой или ослабь его, чтобы сравнить; ↶, если слишком.|Убрано пятен: {n}, на слое «{layer}» (фото не затронуто): скрой или ослабь его, чтобы сравнить; ↶, если слишком.|Убрано пятен: {n}, на слое «{layer}» (фото не затронуто): скрой или ослабь его, чтобы сравнить; ↶, если слишком. ¦ Прибрано плям: {n}, на шарі «{layer}» (фото не змінено): приховай або послаб його, щоб порівняти; ↶, якщо забагато.|Прибрано плям: {n}, на шарі «{layer}» (фото не змінено): приховай або послаб його, щоб порівняти; ↶, якщо забагато.|Прибрано плям: {n}, на шарі «{layer}» (фото не змінено): приховай або послаб його, щоб порівняти; ↶, якщо забагато.
+✨ Taches enlevées ¦ ✨ Пятна убраны ¦ ✨ Плями прибрано
+Taches enlevées automatiquement ({n}) ¦ Пятна убраны автоматически ({n}) ¦ Плями прибрано автоматично ({n})
+Sélection remplie ({what}) ¦ Выделение залито ({what}) ¦ Виділення залито ({what})
+Sélection effacée sur « {name} » ¦ Выделение стёрто на «{name}» ¦ Виділення стерто на «{name}»
+Masque d’après la sélection ({name}) ¦ Маска по выделению ({name}) ¦ Маска за виділенням ({name})
+Préréglage « {name} » retiré ¦ Набор настроек «{name}» убран ¦ Набір налаштувань «{name}» прибрано
+Préréglage « {name} » ¦ Набор настроек «{name}» ¦ Набір налаштувань «{name}»
+Projet « {name} » (📂 Fichier → Ouvrir un projet pour le retrouver) ¦ Проект «{name}» (📂 Файл → Открыть проект, чтобы найти его снова) ¦ Проєкт «{name}» (📂 Файл → Відкрити проєкт, щоб знайти його знову)
+Versions de la photo ({n}) ¦ Версии фото ({n}) ¦ Версії фото ({n})
+{w} × {h} cm à {dpi} ppp ¦ {w} × {h} см при {dpi} dpi ¦ {w} × {h} см при {dpi} dpi
+≈ {size} Mo en mémoire ¦ ≈ {size} МБ в памяти ¦ ≈ {size} МБ у пам’яті
+Taille de l’image : {w} × {h} px ¦ Размер изображения: {w} × {h} px ¦ Розмір зображення: {w} × {h} px
+Zone de travail : {w} × {h} px ¦ Холст: {w} × {h} px ¦ Полотно: {w} × {h} px
+Zone de travail de départ ¦ Исходный холст ¦ Початкове полотно
+Cette image est très grande ({n} millions de points) : l’enregistrement peut être long, voire échouer. ¦ Это изображение очень большое ({n} млн точек): сохранение может занять много времени или даже не удаться. ¦ Це зображення дуже велике ({n} млн точок): збереження може тривати довго або навіть не вдатися.
+Enregistrer quand même ? ¦ Всё равно сохранить? ¦ Усе одно зберегти?
+Projet « {name} » rouvert ¦ Проект «{name}» снова открыт ¦ Проєкт «{name}» знову відкрито
+Projet en partie illisible : {err} ¦ Проект частично не читается: {err} ¦ Проєкт частково не читається: {err}
+photo de départ introuvable ¦ исходное фото не найдено ¦ початкове фото не знайдено
+Supprimer le projet « {name} » ? ¦ Удалить проект «{name}»? ¦ Видалити проєкт «{name}»?
+Quitter le plein écran ¦ Выйти из полноэкранного режима ¦ Вийти з повноекранного режиму
+Plus de place pour enregistrer : supprime un espace de travail. ¦ Больше нет места для сохранения: удали одно рабочее пространство. ¦ Більше немає місця для збереження: видали один робочий простір.
+Ranger, montrer ou cacher les boutons et les options ¦ Упорядочить, показать или скрыть кнопки и параметры ¦ Упорядкувати, показати або приховати кнопки й параметри
+⚙️ Boutons et options ¦ ⚙️ Кнопки и параметры ¦ ⚙️ Кнопки й параметри
+Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). Gardé pour la prochaine fois. Comme les espaces de travail de Photoshop : enregistre une disposition sous un nom (« Restauration », « Montage rapide »…) et passe de l’une à l’autre. ¦ Отметь, что показывать, упорядочи с помощью ↑ ↓ (или перетаскивая ⠿). Сохраняется на следующий раз. Как рабочие пространства в Photoshop: сохрани расположение под именем («Реставрация», «Быстрый монтаж»…) и переключайся между ними. ¦ Познач, що показувати, упорядкуй за допомогою ↑ ↓ (або перетягуючи ⠿). Зберігається на наступний раз. Як робочі простори в Photoshop: збережи розташування під назвою («Реставрація», «Швидкий монтаж»…) і перемикайся між ними.
+les boutons montrés, cachés et rangés ¦ показанные, скрытые и упорядоченные кнопки ¦ показані, приховані й упорядковані кнопки
+Boutons remis comme au départ (rouvre la fenêtre pour retrouver l’ordre de départ). ¦ Кнопки возвращены как было (открой окно снова, чтобы увидеть исходный порядок). ¦ Кнопки повернуто як було (відкрий вікно знову, щоб побачити початковий порядок).
+Boutons rangés. ¦ Кнопки упорядочены. ¦ Кнопки впорядковано.
+Hautes lumières ¦ Света ¦ Світла
+Vibrance (couleurs ternes d’abord) ¦ Сочность (сначала тусклые цвета) ¦ Соковитість (спершу тьмяні кольори)
+Teinte (tourner les couleurs) ¦ Цветовой тон (повернуть цвета) ¦ Відтінок (повернути кольори)
+Noir d’entrée ¦ Чёрная точка на входе ¦ Чорна точка на вході
+Blanc d’entrée ¦ Белая точка на входе ¦ Біла точка на вході
+Tons moyens (gamma ×100) ¦ Средние тона (гамма ×100) ¦ Середні тони (гамма ×100)
+Noir de sortie ¦ Чёрная точка на выходе ¦ Чорна точка на виході
+Blanc de sortie ¦ Белая точка на выходе ¦ Біла точка на виході
+Naturelle : ciel, verdure, peau, habits (conseillé) ¦ Естественная: небо, зелень, кожа, одежда (рекомендуется) ¦ Природна: небо, зелень, шкіра, одяг (рекомендовано)
+Sépia chaud ¦ Тёплая сепия ¦ Тепла сепія
+Autochrome (couleurs d’autrefois) ¦ Автохром (цвета былых времён) ¦ Автохром (кольори давніх часів)
+Portrait (peau rosée) ¦ Портрет (розоватая кожа) ¦ Портрет (рожевувата шкіра)
+Paysage : ciel en haut, terre en bas ¦ Пейзаж: небо вверху, земля внизу ¦ Пейзаж: небо вгорі, земля внизу
+Saturation augmentée ¦ Повышенная насыщенность ¦ Підвищена насиченість
+Saturation plus forte ¦ Более сильная насыщенность ¦ Сильніша насиченість
+Rouges plus saturés ¦ Более насыщенные красные ¦ Насиченіші червоні
+Jaune intensifié ¦ Усиленный жёлтый ¦ Посилений жовтий
+Ciel plus bleu ¦ Небо синее ¦ Небо синіше
+Peau plus douce ¦ Кожа мягче ¦ Шкіра м’якша
+Désaturer ¦ Обесцветить ¦ Знебарвити
+Verts d’automne ¦ Осенняя зелень ¦ Осіння зелень
+Reflets en moins (vitre, verre, vernis) ¦ Меньше бликов (стекло, лак) ¦ Менше відблисків (скло, лак)
+Taille des reflets (0 = moyenne) ¦ Размер бликов (0 = средний) ¦ Розмір відблисків (0 = середній)
+Poussière et rayures (automatique) ¦ Пыль и царапины (автоматически) ¦ Пил і подряпини (автоматично)
+Réduire le bruit ¦ Уменьшить шум ¦ Зменшити шум
+Netteté ¦ Резкость ¦ Різкість
+Clarté (contraste local) ¦ Чёткость (локальный контраст) ¦ Чіткість (локальний контраст)
+Flou de surface (garde les contours) ¦ Размытие по поверхности (сохраняет контуры) ¦ Розмиття поверхні (зберігає контури)
+Décentrement (maquette, tilt-shift) ¦ Наклон-сдвиг (макет, tilt-shift) ¦ Нахил-зсув (макет, tilt-shift)
+Largeur de la bande ¦ Ширина полосы ¦ Ширина смуги
+Flou de l’objectif (bokeh) ¦ Размытие объектива (боке) ¦ Розмиття об’єктива (боке)
+Ajouter du bruit ¦ Добавить шум ¦ Додати шум
+Poussière et rayures ¦ Пыль и царапины ¦ Пил і подряпини
+Passe-haut (pour accentuer en Incrustation) ¦ Цветовой контраст (для усиления в режиме «Перекрытие») ¦ Високочастотний фільтр (для підсилення в режимі «Перекриття»)
+Esthétiques ¦ Стилизация ¦ Стилізація
+Garder les couleurs (0 / 1) ¦ Сохранить цвета (0 / 1) ¦ Зберегти кольори (0 / 1)
+Tracé des contours ¦ Обводка контуров ¦ Обведення контурів
+Contours lumineux (néon) ¦ Светящиеся края (неон) ¦ Сяйливі краї (неон)
+Postérisation ¦ Постеризация ¦ Постеризація
+Seuil (noir et blanc pur) ¦ Порог (чистый чёрно-белый) ¦ Поріг (чисто чорно-білий)
+Vers la droite (1) / gauche (0) ¦ Вправо (1) / влево (0) ¦ Праворуч (1) / ліворуч (0)
+Peinture à l’huile ¦ Масляная живопись ¦ Олійний живопис
+Taille de la touche ¦ Размер мазка ¦ Розмір мазка
+Taille des taches ¦ Размер пятен ¦ Розмір плям
+Dessin au crayon ¦ Карандашный рисунок ¦ Олівцевий малюнок
+En couleur (0 / 1) ¦ В цвете (0 / 1) ¦ У кольорі (0 / 1)
+Taille des carreaux ¦ Размер плиток ¦ Розмір плиток
+Demi-teinte (points d’imprimerie) ¦ Полутон (типографские точки) ¦ Півтон (друкарські точки)
+Taille des cristaux ¦ Размер кристаллов ¦ Розмір кристалів
+Éclairage (projecteur) ¦ Освещение (прожектор) ¦ Освітлення (прожектор)
+Lumière X ¦ Свет X ¦ Світло X
+Lumière Y ¦ Свет Y ¦ Світло Y
+Lumière ambiante ¦ Рассеянный свет ¦ Розсіяне світло
+Halo de lumière (flare) ¦ Блик (flare) ¦ Відблиск (flare)
+À partir de (luminosité) ¦ Начиная с (яркость) ¦ Починаючи з (яскравість)
+Déformation ¦ Искажение ¦ Викривлення
+Pincement / sphérisation ¦ Сжатие / сферизация ¦ Стискання / сферизація
+Force (− sphère, + pincement) ¦ Сила (− сфера, + сжатие) ¦ Сила (− сфера, + стискання)
+Longueur d’onde ¦ Длина волны ¦ Довжина хвилі
+Ondulation (ronds dans l’eau) ¦ Рябь (круги на воде) ¦ Брижі (кола на воді)
+Écart des ronds ¦ Расстояние между кругами ¦ Відстань між колами
+Coordonnées polaires ¦ Полярные координаты ¦ Полярні координати
+Rectangle → polaire (0) / l’inverse (1) ¦ Прямоугольные → полярные (0) / наоборот (1) ¦ Прямокутні → полярні (0) / навпаки (1)
+Minimum (assombrit, épaissit le sombre) ¦ Минимум (затемняет, утолщает тёмное) ¦ Мінімум (затемнює, потовщує темне)
+Maximum (éclaircit, épaissit le clair) ¦ Максимум (осветляет, утолщает светлое) ¦ Максимум (освітлює, потовщує світле)
+Décalage (avec retour de l’autre côté) ¦ Сдвиг (с переносом на другую сторону) ¦ Зсув (з перенесенням на інший бік)
+Enlever les reflets (vitre) ¦ Убрать блики (стекло) ¦ Прибрати відблиски (скло)
+Reflets en moins ¦ Меньше бликов ¦ Менше відблисків
+Vieille photo ravivée ¦ Оживлённое старое фото ¦ Оживлене старе фото
+Négatif → positif ¦ Негатив → позитив ¦ Негатив → позитив
+🖌 Forme du panneau Formes ¦ 🖌 Фигура из панели «Фигуры» ¦ 🖌 Фігура з панелі «Фігури»
+Avec empattement ¦ С засечками ¦ Із зарубками
+Sans empattement ¦ Без засечек ¦ Без зарубок
+Manuscrite ¦ Рукописный ¦ Рукописний
+Extra-fin ¦ Сверхтонкий ¦ Надтонкий
+Ultra-léger ¦ Ультралёгкий ¦ Ультралегкий
+Léger ¦ Лёгкий ¦ Легкий
+Médium ¦ Средний ¦ Середній
+Demi-gras ¦ Полужирный ¦ Напівжирний
+Extra-gras ¦ Сверхжирный ¦ Наджирний
+Aligné à gauche ¦ По левому краю ¦ За лівим краєм
+Aligné à droite ¦ По правому краю ¦ За правим краєм
+Justifié, dernière ligne à gauche ¦ По ширине, последняя строка слева ¦ За шириною, останній рядок ліворуч
+Justifié, dernière ligne centrée ¦ По ширине, последняя строка по центру ¦ За шириною, останній рядок по центру
+Justifié, dernière ligne à droite ¦ По ширине, последняя строка справа ¦ За шириною, останній рядок праворуч
+Tout justifié ¦ Полностью по ширине ¦ Повністю за шириною
+Ligatures et formes ¦ Лигатуры и формы ¦ Лігатури й форми
+Unicode : Latin étendu A ¦ Unicode: латиница, расширенная A ¦ Unicode: латиниця, розширена A
+Unicode : Latin étendu B ¦ Unicode: латиница, расширенная B ¦ Unicode: латиниця, розширена B
+Unicode : hébreu ¦ Unicode: иврит ¦ Unicode: іврит
+Unicode : exposants et indices ¦ Unicode: верхние и нижние индексы ¦ Unicode: верхні й нижні індекси
+Unicode : flèches ¦ Unicode: стрелки ¦ Unicode: стрілки
+Unicode : mathématiques ¦ Unicode: математика ¦ Unicode: математика
+Unicode : formes géométriques ¦ Unicode: геометрические фигуры ¦ Unicode: геометричні фігури
+Unicode : latin étendu D (abréviations anciennes) ¦ Unicode: латиница, расширенная D (старые сокращения) ¦ Unicode: латиниця, розширена D (давні скорочення)
+espace fine ¦ тонкий пробел ¦ тонкий пробіл
+tiret conditionnel (césure) ¦ мягкий перенос ¦ м’яке перенесення
+mort au combat ¦ погиб в бою ¦ загинув у бою
+et (abréviation ancienne) ¦ и (старое сокращение) ¦ і (давнє скорочення)
+s long ¦ долгая s ¦ довга s
+Linéaire ¦ Линейный ¦ Лінійний
+Radial ¦ Радиальный ¦ Радіальний
+Angle (conique) ¦ Угловой (конический) ¦ Кутовий (конічний)
+Réfléchi ¦ Зеркальный ¦ Дзеркальний
+Losange ¦ Ромбовидный ¦ Ромбоподібний
+Premier plan → arrière-plan ¦ Передний план → фон ¦ Передній план → тло
+Hachures croisées ¦ Перекрёстная штриховка ¦ Перехресне штрихування
+Écailles ¦ Чешуя ¦ Луска
+Brin d’herbe ¦ Травинка ¦ Травинка
+Éclaboussure ¦ Брызги ¦ Бризки
+Ma forme (d’après une sélection) ¦ Моя фигура (по выделению) ¦ Моя фігура (за виділенням)
+Aérographe ¦ Аэрограф ¦ Аерограф
+Carré net ¦ Жёсткий квадрат ¦ Жорсткий квадрат
+Étoiles semées ¦ Рассыпанные звёзды ¦ Розсипані зірки
+Éclaboussures ¦ Брызги ¦ Бризки
+Superposition (Écran) ¦ Наложение (Экран) ¦ Накладання (Екран)
+⌗ Cadrer et redresser ¦ ⌗ Кадрировать и выровнять ¦ ⌗ Кадрувати й вирівняти
+Une photo scannée de travers, avec ses bords blancs ou abîmés : on la redresse, puis on garde ce qui compte. ¦ Фото, отсканированное криво, с белыми или повреждёнными краями: выравниваем его, затем оставляем главное. ¦ Фото, відскановане криво, з білими або пошкодженими краями: вирівнюємо його, потім залишаємо головне.
+📐 Redresser tout seul ¦ 📐 Выровнять автоматически ¦ 📐 Вирівняти автоматично
+⌗ Recadrer ¦ ⌗ Кадрировать ¦ ⌗ Кадрувати
+⧈ Photo prise de biais ¦ ⧈ Фото, снятое под углом ¦ ⧈ Фото, зняте під кутом
+🎨 Couleurs passées, photo jaunie ¦ 🎨 Выцветшие цвета, пожелтевшее фото ¦ 🎨 Вицвілі кольори, пожовкле фото
+Le temps jaunit, pâlit ou rosit les photos. « Enlever le jaunissement » remet chaque couleur à sa place ; « Raviver » redonne du contraste. ¦ Со временем фото желтеют, бледнеют или розовеют. «Убрать желтизну» возвращает каждый цвет на место; «Оживить» возвращает контраст. ¦ З часом фото жовтіють, бліднуть або рожевіють. «Прибрати жовтизну» повертає кожен колір на місце; «Оживити» повертає контраст.
+🟨 Enlever le jaunissement ¦ 🟨 Убрать желтизну ¦ 🟨 Прибрати жовтизну
+✨ Raviver une vieille photo ¦ ✨ Оживить старое фото ¦ ✨ Оживити старе фото
+Réglage automatique ¦ Автонастройка ¦ Автоналаштування
+🧹 Poussières et petites taches ¦ 🧹 Пыль и мелкие пятна ¦ 🧹 Пил і дрібні плями
+Les points blancs ou noirs, les piqûres : l’app les cherche et les enlève une par une (avec le correcteur). Pour ne traiter qu’une partie, sélectionne-la d’abord. Ce qui reste : le correcteur 🩹 à la main. ¦ Белые или чёрные точки, крапинки: приложение находит их и убирает по одной (корректором). Чтобы обработать только часть, сначала выдели её. Что останется — корректор 🩹 вручную. ¦ Білі або чорні точки, цятки: застосунок знаходить їх і прибирає по одній (коректором). Щоб обробити лише частину, спершу виділи її. Що залишиться — коректор 🩹 вручну.
+Sensibilité ¦ Чувствительность ¦ Чутливість
+Taille maximale d’une tache ¦ Наибольший размер пятна ¦ Найбільший розмір плями
+🔍 Repérer et enlever les taches ¦ 🔍 Найти и убрать пятна ¦ 🔍 Знайти й прибрати плями
+🩹 Correcteur à la main ¦ 🩹 Корректор вручную ¦ 🩹 Коректор вручну
+Filtre poussière et rayures ¦ Фильтр «Пыль и царапины» ¦ Фільтр «Пил і подряпини»
+🩹 Déchirures, plis, rayures ¦ 🩹 Разрывы, заломы, царапины ¦ 🩹 Розриви, заломи, подряпини
+« Repérer les plis » trouve les lignes fines claires ou sombres et propose de les combler. À la main : le pinceau 🪡 Réparer — peins sur le pli, il est refait d’après ce qui l’entoure. Pour un morceau manquant (coin arraché), le tampon recopie une partie voisine. ¦ «Найти заломы» находит тонкие светлые или тёмные линии и предлагает их заполнить. Вручную: кисть 🪡 Восстановить — рисуй по залому, он воссоздаётся по окружающему. Для недостающего куска (оторванный угол) штамп копирует соседнюю часть. ¦ «Знайти заломи» знаходить тонкі світлі чи темні лінії й пропонує їх заповнити. Вручну: пензель 🪡 Відновити — малюй по залому, його буде відтворено за тим, що довкола. Для відсутнього шматка (відірваний кут) штамп копіює сусідню частину.
+🔍 Repérer les plis et rayures ¦ 🔍 Найти заломы и царапины ¦ 🔍 Знайти заломи й подряпини
+🪡 Réparer au pinceau ¦ 🪡 Восстановить кистью ¦ 🪡 Відновити пензлем
+➰ Entourer une zone… ¦ ➰ Обвести область… ¦ ➰ Обвести ділянку…
+🌫️ Grain et bruit ¦ 🌫️ Зерно и шум ¦ 🌫️ Зерно й шум
+Une photo granuleuse ou un tirage abîmé : on adoucit sans perdre les contours. ¦ Зернистое фото или повреждённый отпечаток: смягчаем, не теряя контуров. ¦ Зернисте фото або пошкоджений відбиток: пом’якшуємо, не втрачаючи контурів.
+🙂 Netteté des visages ¦ 🙂 Чёткость лиц ¦ 🙂 Чіткість облич
+Entoure un visage avec l’ellipse ◯, puis « Visage plus net » : il est débruité et accentué, seulement là (calque à part, que tu peux doser). ¦ Обведи лицо эллипсом ◯, затем «Лицо чётче»: шум убирается и резкость усиливается только там (отдельный слой, который можно ослабить). ¦ Обведи обличчя еліпсом ◯, потім «Обличчя чіткіше»: шум прибирається, а різкість посилюється лише там (окремий шар, який можна послабити).
+◯ Entourer le visage ¦ ◯ Обвести лицо ¦ ◯ Обвести обличчя
+✨ Visage plus net ¦ ✨ Лицо чётче ¦ ✨ Обличчя чіткіше
+Visage plus net ¦ Лицо чётче ¦ Обличчя чіткіше
+🎯 Sélectionner le sujet ¦ 🎯 Выделить объект ¦ 🎯 Виділити об’єкт
+🌈 Coloriser une photo en noir et blanc ¦ 🌈 Раскрасить чёрно-белое фото ¦ 🌈 Розфарбувати чорно-біле фото
+Tout seul (un dégradé de couleurs d’époque), ou à la main : choisis une couleur ci-dessous et peins doucement, la lumière de la photo est gardée. ¦ Автоматически (градиент старинных цветов) или вручную: выбери цвет ниже и аккуратно рисуй, свет на фото сохраняется. ¦ Автоматично (градієнт старовинних кольорів) або вручну: вибери колір нижче й обережно малюй, світло на фото зберігається.
+🎨 Coloriser tout seul ¦ 🎨 Раскрасить автоматически ¦ 🎨 Розфарбувати автоматично
+🖌 Coloriser au pinceau ¦ 🖌 Раскрасить кистью ¦ 🖌 Розфарбувати пензлем
+✅ Comparer et enregistrer ¦ ✅ Сравнить и сохранить ¦ ✅ Порівняти й зберегти
+Garde appuyé « 👁 Avant / après » (sous la photo) pour comparer, ou « ◧ Rideau » pour glisser de l’un à l’autre. La photo restaurée devient une nouvelle version : l’original reste. ¦ Удерживай «👁 До / после» (под фото), чтобы сравнить, или «◧ Шторка», чтобы перетаскивать от одного к другому. Восстановленное фото становится новой версией: оригинал остаётся. ¦ Утримуй «👁 До / після» (під фото), щоб порівняти, або «◧ Шторка», щоб перетягувати від одного до іншого. Відновлене фото стає новою версією: оригінал залишається.
+💾 Enregistrer et afficher ¦ 💾 Сохранить и показать ¦ 💾 Зберегти й показати
+Garder le travail pour plus tard ¦ Сохранить работу на потом ¦ Зберегти роботу на потім
+Impossible d’ouvrir cette image. ¦ Не удаётся открыть это изображение. ¦ Не вдається відкрити це зображення.
+Chaque étape est facultative et se défait (↶). Rien n’abîme l’original : la photo restaurée devient une nouvelle version. ¦ Каждый шаг необязателен и отменяется (↶). Ничто не портит оригинал: восстановленное фото становится новой версией. ¦ Кожен крок необов’язковий і скасовується (↶). Ніщо не псує оригінал: відновлене фото стає новою версією.
+Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup : tu vois chaque étape et tu choisis ¦ Шумоподавление, пыль, заломы, контраст, резкость и раскрашивание за один раз: ты видишь каждый шаг и выбираешь ¦ Зменшення шуму, пил, заломи, контраст, різкість і розфарбування за один раз: ти бачиш кожен крок і вибираєш
+✨ Restaurer en une fois ¦ ✨ Восстановить за один раз ¦ ✨ Відновити за один раз
+ou étape par étape : ¦ или шаг за шагом: ¦ або крок за кроком:
+Réparer ¦ Восстановить ¦ Відновити
+🪡 Réparer ¦ 🪡 Восстановить ¦ 🪡 Відновити
+Déplacer la vue ¦ Сдвинуть вид ¦ Зсунути вигляд
+Réparer un pli ou une déchirure (R) : peins dessus, c’est refait d’après les alentours ¦ Исправить залом или разрыв (R): рисуй по нему, он воссоздаётся по окружающему ¦ Виправити залом або розрив (R): малюй по ньому, його буде відтворено за тим, що довкола
+Gomme (E) : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu) ¦ Ластик (E): стирает выбранный слой; на фото скрывает его маской (ничего не теряется) ¦ Гумка (E): стирає вибраний шар; на фото приховує його маскою (нічого не втрачається)
+Dégradé (G) : glisse pour le tracer ; sur un masque, il fond le calque ¦ Градиент (G): перетаскивай, чтобы нарисовать; на маске он растворяет слой ¦ Градієнт (G): перетягуй, щоб намалювати; на масці він розчиняє шар
+Déplacer un élément d’un calque (V) ¦ Переместить элемент слоя (V) ¦ Перемістити елемент шару (V)
+Déplacer un élément d’un calque ¦ Переместить элемент слоя ¦ Перемістити елемент шару
+Sélection rectangle (M) ¦ Прямоугольное выделение (M) ¦ Прямокутне виділення (M)
+Sélection rectangle ¦ Прямоугольное выделение ¦ Прямокутне виділення
+Sélection ellipse (⇧M) ¦ Овальное выделение (⇧M) ¦ Овальне виділення (⇧M)
+Sélection ellipse ¦ Овальное выделение ¦ Овальне виділення
+Lasso : entourer à main levée (L) ¦ Лассо: обвести от руки (L) ¦ Ласо: обвести від руки (L)
+Lasso : entourer à main levée ¦ Лассо: обвести от руки ¦ Ласо: обвести від руки
+Plume : sélection point par point (P) — double-clic ou Entrée pour fermer ¦ Перо: выделение по точкам (P) — двойной щелчок или Enter, чтобы замкнуть ¦ Перо: виділення по точках (P) — подвійний клац або Enter, щоб замкнути
+Plume : sélection point par point — double-clic ou Entrée pour fermer ¦ Перо: выделение по точкам — двойной щелчок или Enter, чтобы замкнуть ¦ Перо: виділення по точках — подвійний клац або Enter, щоб замкнути
+Sélection automatique (baguette magique) (W) ¦ Автоматическое выделение (волшебная палочка) (W) ¦ Автоматичне виділення (чарівна паличка) (W)
+Sélection automatique (baguette magique) ¦ Автоматическое выделение (волшебная палочка) ¦ Автоматичне виділення (чарівна паличка)
+Recadrer et redresser (C) ¦ Кадрировать и выровнять (C) ¦ Кадрувати й вирівняти (C)
+Recadrer et redresser ¦ Кадрировать и выровнять ¦ Кадрувати й вирівняти
+Correcteur de taches (J) ¦ Точечный корректор (J) ¦ Точковий коректор (J)
+Correcteur de taches ¦ Точечный корректор ¦ Точковий коректор
+🩹 Correcteur de taches ¦ 🩹 Точечный корректор ¦ 🩹 Точковий коректор
+Réparer un pli ou une déchirure : peins dessus, c’est refait d’après les alentours ¦ Исправить залом или разрыв: рисуй по нему, он воссоздаётся по окружающему ¦ Виправити залом або розрив: малюй по ньому, його буде відтворено за тим, що довкола
+Tampon : un endroit, ou une zone sélectionnée (S) ¦ Штамп: одно место или выделенная область (S) ¦ Штамп: одне місце або виділена ділянка (S)
+Tampon : un endroit, ou une zone sélectionnée ¦ Штамп: одно место или выделенная область ¦ Штамп: одне місце або виділена ділянка
+Pinceau (B) ¦ Кисть (B) ¦ Пензель (B)
+Gomme : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu) ¦ Ластик: стирает выбранный слой; на фото скрывает его маской (ничего не теряется) ¦ Гумка: стирає вибраний шар; на фото приховує його маскою (нічого не втрачається)
+Formes : rectangle, ellipse, ligne, flèche (U) ¦ Фигуры: прямоугольник, эллипс, линия, стрелка (U) ¦ Фігури: прямокутник, еліпс, лінія, стрілка (U)
+Formes : rectangle, ellipse, ligne, flèche ¦ Фигуры: прямоугольник, эллипс, линия, стрелка ¦ Фігури: прямокутник, еліпс, лінія, стрілка
+Dégradé : glisse pour le tracer ; sur un masque, il fond le calque ¦ Градиент: перетаскивай, чтобы нарисовать; на маске он растворяет слой ¦ Градієнт: перетягуй, щоб намалювати; на масці він розчиняє шар
+Texte (T) ¦ Текст (T) ¦ Текст (T)
+Main, ou barre d’espace (H) ¦ Рука или пробел (H) ¦ Рука або пробіл (H)
+Main, ou barre d’espace ¦ Рука или пробел ¦ Рука або пробіл
+Zoom (Z) — ⌥ pour reculer ¦ Масштаб (Z) — ⌥, чтобы уменьшить ¦ Масштаб (Z) — ⌥, щоб зменшити
+Zoom — ⌥ pour reculer ¦ Масштаб — ⌥, чтобы уменьшить ¦ Масштаб — ⌥, щоб зменшити
+💾 Enregistrer le projet (pour continuer plus tard) ¦ 💾 Сохранить проект (чтобы продолжить позже) ¦ 💾 Зберегти проєкт (щоб продовжити пізніше)
+📂 Ouvrir un projet… ¦ 📂 Открыть проект… ¦ 📂 Відкрити проєкт…
+Enregistrer et afficher cette version ¦ Сохранить и показать эту версию ¦ Зберегти й показати цю версію
+Enregistrer sans l’afficher ¦ Сохранить, не показывая ¦ Зберегти, не показуючи
+Copie séparée ¦ Отдельная копия ¦ Окрема копія
+ℹ️ Informations… ¦ ℹ️ Сведения… ¦ ℹ️ Відомості…
+⤓ Exporter l’image (PNG, JPG, imprimer)… ¦ ⤓ Экспорт изображения (PNG, JPG, печать)… ¦ ⤓ Експорт зображення (PNG, JPG, друк)…
+⤓ Exporter l’avant / après… ¦ ⤓ Экспорт «до / после»… ¦ ⤓ Експорт «до / після»…
+🗂 Exporter en PSD (avec les calques)… ¦ 🗂 Экспорт в PSD (со слоями)… ¦ 🗂 Експорт у PSD (із шарами)…
+🗂 Importer les calques d’un PSD… ¦ 🗂 Импорт слоёв из PSD… ¦ 🗂 Імпорт шарів із PSD…
+⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos… ¦ ⚡ Операции: сохранённые настройки, чтобы повторить на нескольких фото… ¦ ⚡ Операції: збережені налаштування, щоб повторити на кількох фото…
+⚡ Passer à la retouche rapide ¦ ⚡ Перейти к быстрой ретуши ¦ ⚡ Перейти до швидкої ретуші
+🕘 Historique ¦ 🕘 История ¦ 🕘 Історія
+🎚 Réglages, niveaux et courbe ¦ 🎚 Коррекция, уровни и кривая ¦ 🎚 Коригування, рівні й крива
+🎨 Teinte/Saturation… ¦ 🎨 Цветовой тон/Насыщенность… ¦ 🎨 Відтінок/Насиченість…
+⌗ Recadrer et redresser ¦ ⌗ Кадрировать и выровнять ¦ ⌗ Кадрувати й вирівняти
+📐 Redresser automatiquement ¦ 📐 Выровнять автоматически ¦ 📐 Вирівняти автоматично
+Annuler le recadrage ¦ Отменить кадрирование ¦ Скасувати кадрування
+⧈ Redresser la perspective (photo prise de biais)… ¦ ⧈ Исправить перспективу (фото, снятое под углом)… ¦ ⧈ Виправити перспективу (фото, зняте під кутом)…
+Enlever la perspective ¦ Убрать перспективу ¦ Прибрати перспективу
+📏 Taille de l’image… ¦ 📏 Размер изображения… ¦ 📏 Розмір зображення…
+⬚ Taille de la zone de travail… ¦ ⬚ Размер холста… ¦ ⬚ Розмір полотна…
+🔄 Rotation de l’image ¦ 🔄 Поворот изображения ¦ 🔄 Поворот зображення
+↻ 90° horaire ¦ ↻ 90° по часовой ¦ ↻ 90° за годинниковою
+↺ 90° antihoraire ¦ ↺ 90° против часовой ¦ ↺ 90° проти годинникової
+Angle… ¦ Угол… ¦ Кут…
+📐 Redresser l’horizon (tracer une ligne)… ¦ 📐 Выровнять горизонт (провести линию)… ¦ 📐 Вирівняти горизонт (провести лінію)…
+⇆ Symétrie horizontale de l’image ¦ ⇆ Отразить изображение по горизонтали ¦ ⇆ Віддзеркалити зображення по горизонталі
+⇅ Symétrie verticale de l’image ¦ ⇅ Отразить изображение по вертикали ¦ ⇅ Віддзеркалити зображення по вертикалі
+✨ Restaurer en une fois… ¦ ✨ Восстановить за один раз… ¦ ✨ Відновити за один раз…
+🧭 Restaurer une vieille photo (pas à pas) ¦ 🧭 Восстановить старое фото (шаг за шагом) ¦ 🧭 Відновити старе фото (крок за кроком)
+🔍 Repérer les plis et rayures… ¦ 🔍 Найти заломы и царапины… ¦ 🔍 Знайти заломи й подряпини…
+🪡 Réparer au pinceau (plis, déchirures) ¦ 🪡 Восстановить кистью (заломы, разрывы) ¦ 🪡 Відновити пензлем (заломи, розриви)
+🧹 Poussière et rayures (Filtres) ¦ 🧹 Пыль и царапины (Фильтры) ¦ 🧹 Пил і подряпини (Фільтри)
+🪟 Enlever les reflets (vitre) : calque à part ¦ 🪟 Убрать блики (стекло): отдельный слой ¦ 🪟 Прибрати відблиски (скло): окремий шар
+🎨 Coloriser : calque de réglage (dégradé) ¦ 🎨 Раскрасить: корректирующий слой (градиент) ¦ 🎨 Розфарбувати: коригувальний шар (градієнт)
+🖌 Coloriser au pinceau : calque « Couleur » ¦ 🖌 Раскрасить кистью: слой «Цвет» ¦ 🖌 Розфарбувати пензлем: шар «Колір»
+🪪 Recadrer en photo d’identité… ¦ 🪪 Кадрировать как фото на документы… ¦ 🪪 Кадрувати як фото на документи…
+🪪 Portraits de plusieurs fiches… ¦ 🪪 Портреты для нескольких карточек… ¦ 🪪 Портрети для кількох карток…
+💧 Fluidité (déformer au pinceau)… ¦ 💧 Пластика (деформировать кистью)… ¦ 💧 Пластика (деформувати пензлем)…
+🪄 Gomme magique (fond uni → transparent)… ¦ 🪄 Волшебный ластик (однотонный фон → прозрачный)… ¦ 🪄 Чарівна гумка (однотонне тло → прозоре)…
+✨ Affiner le bord du masque (cheveux, contours)… ¦ ✨ Уточнить край маски (волосы, контуры)… ¦ ✨ Уточнити край маски (волосся, контури)…
+☁️ Remplacer le ciel… ¦ ☁️ Заменить небо… ¦ ☁️ Замінити небо…
+✂️ Détourer une personne (fond transparent, flou, uni)… ¦ ✂️ Вырезать человека (прозрачный, размытый или однотонный фон)… ¦ ✂️ Вирізати людину (прозоре, розмите чи однотонне тло)…
+🔍 Agrandir ×2 / ×4… ¦ 🔍 Увеличить ×2 / ×4… ¦ 🔍 Збільшити ×2 / ×4…
+🧩 Panorama : assembler avec d’autres photos… ¦ 🧩 Панорама: собрать с другими фото… ¦ 🧩 Панорама: зібрати з іншими фото…
+Calque ¦ Слой ¦ Шар
+＋ Nouveau calque ¦ ＋ Новый слой ¦ ＋ Новий шар
+📁 Nouveau groupe ¦ 📁 Новая группа ¦ 📁 Нова група
+Grouper le calque choisi ¦ Сгруппировать выбранный слой ¦ Згрупувати вибраний шар
+🎚 Nouveau calque de réglage ¦ 🎚 Новый корректирующий слой ¦ 🎚 Новий коригувальний шар
+🎨 Nouveau réglage Teinte/Saturation ¦ 🎨 Новая коррекция «Цветовой тон/Насыщенность» ¦ 🎨 Нове коригування «Відтінок/Насиченість»
+Nouveau réglage Teinte/Saturation ¦ Новая коррекция «Цветовой тон/Насыщенность» ¦ Нове коригування «Відтінок/Насиченість»
+🖼️ Placer une image… ¦ 🖼️ Поместить изображение… ¦ 🖼️ Розмістити зображення…
+▦ Nouveau calque de dégradé… ¦ ▦ Новый слой градиента… ¦ ▦ Новий шар градієнта…
+▩ Nouveau calque de motif… ¦ ▩ Новый слой узора… ¦ ▩ Новий шар візерунка…
+▩ Créer un motif… ¦ ▩ Создать узор… ¦ ▩ Створити візерунок…
+▩ Créer un motif ¦ ▩ Создать узор ¦ ▩ Створити візерунок
+＋ Créer un motif… ¦ ＋ Создать узор… ¦ ＋ Створити візерунок…
+Copier la sélection sur un calque ¦ Скопировать выделение на слой ¦ Скопіювати виділення на шар
+🎭 Ajouter un masque au calque choisi ¦ 🎭 Добавить маску к выбранному слою ¦ 🎭 Додати маску до вибраного шару
+🎭 Masque qui cache tout (⌥ + clic sur 🎭) ¦ 🎭 Маска, скрывающая всё (⌥ + щелчок по 🎭) ¦ 🎭 Маска, що приховує все (⌥ + клац по 🎭)
+Masque d’après la sélection ¦ Маска по выделению ¦ Маска за виділенням
+Masque qui cache la sélection ¦ Маска, скрывающая выделение ¦ Маска, що приховує виділення
+Inverser le masque ¦ Инвертировать маску ¦ Інвертувати маску
+Retirer le masque ¦ Убрать маску ¦ Прибрати маску
+inverser le masque ¦ инвертировать маску ¦ інвертувати маску
+retirer le masque ¦ убрать маску ¦ прибрати маску
+🗂 Calques ¦ 🗂 Слои ¦ 🗂 Шари
+🎯 Sélectionner le sujet (automatique) ¦ 🎯 Выделить объект (автоматически) ¦ 🎯 Виділити об’єкт (автоматично)
+✂️ Détourer une personne… ¦ ✂️ Вырезать человека… ¦ ✂️ Вирізати людину…
+Désélectionner ¦ Снять выделение ¦ Зняти виділення
+Inverser ¦ Инвертировать ¦ Інвертувати
+Contour progressif… ¦ Растушёвка… ¦ Розтушовування…
+Contour progressif ¦ Растушёвка ¦ Розтушовування
+Agrandir… ¦ Расширить… ¦ Розширити…
+Réduire… ¦ Сжать… ¦ Стиснути…
+Remplir avec la couleur ¦ Залить цветом ¦ Залити кольором
+Effacer (transparent) ¦ Стереть (прозрачный) ¦ Стерти (прозоре)
+Recadrer sur la sélection ¦ Кадрировать по выделению ¦ Кадрувати за виділенням
+Filtre ¦ Фильтр ¦ Фільтр
+↻ Refaire le dernier filtre ¦ ↻ Повторить последний фильтр ¦ ↻ Повторити останній фільтр
+✨ Filtres rapides et filtres du calque (panneau) ¦ ✨ Быстрые фильтры и фильтры слоя (панель) ¦ ✨ Швидкі фільтри й фільтри шару (панель)
+Enlever les filtres rapides ¦ Убрать быстрые фильтры ¦ Прибрати швидкі фільтри
+Replier / ouvrir le panneau de droite ¦ Свернуть / развернуть правую панель ¦ Згорнути / розгорнути праву панель
+◧ Avant / après en rideau ¦ ◧ До / после шторкой ¦ ◧ До / після шторкою
+Toute l’image ¦ Всё изображение ¦ Усе зображення
+Nom du projet de retouche ¦ Название проекта ретуши ¦ Назва проєкту ретуші
+Le nom du projet de retouche (tape pour le changer) ¦ Название проекта ретуши (введи, чтобы изменить) ¦ Назва проєкту ретуші (введи, щоб змінити)
+Passer à la retouche rapide (celle de la version 0.5.0) : réglages, courbe, taches, tampon — moins de boutons ¦ Перейти к быстрой ретуши (из версии 0.5.0): коррекция, кривая, пятна, штамп — меньше кнопок ¦ Перейти до швидкої ретуші (з версії 0.5.0): коригування, крива, плями, штамп — менше кнопок
+⚡ Rapide ¦ ⚡ Быстро ¦ ⚡ Швидко
+Exporter : l’image retouchée (PNG, JPG, imprimer) ou l’avant / après ¦ Экспорт: отретушированное изображение (PNG, JPG, печать) или «до / после» ¦ Експорт: відретушоване зображення (PNG, JPG, друк) або «до / після»
+Enregistrer le projet : tout le travail (calques, masques, réglages…) pour le rouvrir et continuer ¦ Сохранить проект: вся работа (слои, маски, коррекция…), чтобы открыть его снова и продолжить ¦ Зберегти проєкт: уся робота (шари, маски, коригування…), щоб відкрити його знову й продовжити
+🖼 L’image retouchée (PNG, JPG, imprimer)… ¦ 🖼 Отретушированное изображение (PNG, JPG, печать)… ¦ 🖼 Відретушоване зображення (PNG, JPG, друк)…
+◧ Avant / après (côte à côte ou rideau)… ¦ ◧ До / после (рядом или шторкой)… ¦ ◧ До / після (поруч або шторкою)…
+Dureté ¦ Жёсткость ¦ Жорсткість
+Sorte de pinceau ¦ Вид кисти ¦ Вид пензля
+Couleurs rapides ¦ Быстрые цвета ¦ Швидкі кольори
+contour ¦ обводка ¦ обведення
+Contour du texte ¦ Обводка текста ¦ Обведення тексту
+Couleur du contour ¦ Цвет обводки ¦ Колір обведення
+Épaisseur du contour ¦ Толщина обводки ¦ Товщина обведення
+épaisseur ¦ толщина ¦ товщина
+ombre ¦ тень ¦ тінь
+Ombre du texte ¦ Тень текста ¦ Тінь тексту
+Couleur de l’ombre ¦ Цвет тени ¦ Колір тіні
+Tampon : endroit à recopier, aligné ¦ Штамп: место для копирования, с выравниванием ¦ Штамп: місце для копіювання, з вирівнюванням
+🎯 Choisir l’endroit à recopier ¦ 🎯 Выбрать место для копирования ¦ 🎯 Вибрати місце для копіювання
+Coché : l’endroit recopié suit le pinceau d’un trait à l’autre. Décoché : chaque trait repart du même endroit. ¦ Отмечено: копируемое место следует за кистью от мазка к мазку. Не отмечено: каждый мазок начинается с того же места. ¦ Позначено: місце, що копіюється, рухається за пензлем від мазка до мазка. Не позначено: кожен мазок починається з того самого місця.
+aligné ¦ с выравниванием ¦ з вирівнюванням
+Réparer : grain, repérer les plis ¦ Восстановление: зерно, поиск заломов ¦ Відновлення: зерно, пошук заломів
+Coché : un peu du grain de la photo autour est remis dans la zone réparée, pour qu’elle ne paraisse pas trop lisse. ¦ Отмечено: немного зерна фото вокруг возвращается в восстановленную область, чтобы она не выглядела слишком гладкой. ¦ Позначено: трохи зерна фото довкола повертається у відновлену ділянку, щоб вона не виглядала надто гладкою.
+garder le grain ¦ сохранять зерно ¦ зберігати зерно
+Trouver tout seul les lignes fines (plis, rayures) et proposer de les combler ¦ Автоматически найти тонкие линии (заломы, царапины) и предложить их заполнить ¦ Автоматично знайти тонкі лінії (заломи, подряпини) й запропонувати їх заповнити
+🔍 Repérer les plis ¦ 🔍 Найти заломы ¦ 🔍 Знайти заломи
+Texte gras ¦ Жирный текст ¦ Жирний текст
+Texte italique ¦ Курсив ¦ Курсив
+Forme (rectangle, ellipse, flèche…) ¦ Фигура (прямоугольник, эллипс, стрелка…) ¦ Фігура (прямокутник, еліпс, стрілка…)
+Rectangle arrondi ¦ Скруглённый прямоугольник ¦ Заокруглений прямокутник
+Forme remplie ¦ Залитая фигура ¦ Залита фігура
+remplie ¦ с заливкой ¦ із заливкою
+Couleur de fond des formes ¦ Цвет заливки фигур ¦ Колір заливки фігур
+Baguette : tolérance ¦ Палочка: допуск ¦ Паличка: допуск
+Jusqu’où une couleur peut s’écarter de celle cliquée pour être prise : petit = la même teinte seulement, grand = des teintes voisines aussi. ¦ Насколько цвет может отличаться от того, по которому щёлкнули, чтобы попасть в выделение: малый = только тот же оттенок, большой = и соседние оттенки. ¦ Наскільки колір може відрізнятися від того, по якому клацнули, щоб потрапити у виділення: малий = лише той самий відтінок, великий = і сусідні відтінки.
+Tolérance ¦ Допуск ¦ Допуск
+Baguette : contiguë ¦ Палочка: смежные пиксели ¦ Паличка: суміжні пікселі
+contiguë ¦ смежные ¦ суміжні
+Sélectionner le sujet ¦ Выделить объект ¦ Виділити об’єкт
+Le fond est reconnu sur les bords de la photo ; la tolérance règle jusqu’où il va ¦ Фон определяется по краям фото; допуск задаёт, насколько далеко он заходит ¦ Тло визначається за краями фото; допуск задає, наскільки далеко воно сягає
+🎯 Sujet ¦ 🎯 Объект ¦ 🎯 Об’єкт
+Actions de la sélection ¦ Действия с выделением ¦ Дії з виділенням
+⇧ ajouter · ⌥ enlever ¦ ⇧ добавить · ⌥ вычесть ¦ ⇧ додати · ⌥ відняти
+→ Calque ¦ → Слой ¦ → Шар
+Remplir ¦ Залить ¦ Залити
+Effacer ¦ Стереть ¦ Стерти
+Masque ¦ Маска ¦ Маска
+Recadrer ¦ Кадрировать ¦ Кадрувати
+Recadrage : proportions, redresser ¦ Кадрирование: пропорции, выравнивание ¦ Кадрування: пропорції, вирівнювання
+Proportions ¦ Пропорции ¦ Пропорції
+Libres ¦ Свободные ¦ Вільні
+Celles de la photo ¦ Как у фото ¦ Як у фото
+Carré 1:1 ¦ Квадрат 1:1 ¦ Квадрат 1:1
+A4 portrait ¦ A4 книжная ¦ A4 книжкова
+Redresser ¦ Выровнять ¦ Вирівняти
+Trouve l’angle des grandes lignes (horizon, murs, cadres) ¦ Находит угол главных линий (горизонт, стены, рамки) ¦ Знаходить кут головних ліній (горизонт, стіни, рамки)
+📐 Auto ¦ 📐 Авто ¦ 📐 Авто
+✓ Valider ¦ ✓ Подтвердить ¦ ✓ Підтвердити
+Perspective ¦ Перспектива ¦ Перспектива
+Place les 4 coins sur les coins de ce qui doit devenir rectangulaire (la photo, le document, la façade). ¦ Поставь 4 угла на углы того, что должно стать прямоугольным (фото, документ, фасад). ¦ Постав 4 кути на кути того, що має стати прямокутним (фото, документ, фасад).
+Coins aux bords ¦ Углы по краям ¦ Кути по краях
+Dégradé : couleurs, forme, options ¦ Градиент: цвета, форма, параметры ¦ Градієнт: кольори, форма, параметри
+Modifier le dégradé : couleurs, transparence, préréglages ¦ Изменить градиент: цвета, прозрачность, наборы настроек ¦ Змінити градієнт: кольори, прозорість, набори налаштувань
+Forme du dégradé ¦ Форма градиента ¦ Форма градієнта
+Inverser le dégradé ¦ Инвертировать градиент ¦ Інвертувати градієнт
+inverser ¦ инвертировать ¦ інвертувати
+Tramage ¦ Дизеринг ¦ Дизеринг
+tramage ¦ дизеринг ¦ дизеринг
+Un très léger grain qui évite les « marches » visibles dans les dégradés doux. ¦ Очень лёгкое зерно, которое убирает заметные «ступеньки» в мягких градиентах. ¦ Дуже легке зерно, яке прибирає помітні «сходинки» в м’яких градієнтах.
+Masque : cacher / montrer ¦ Маска: скрыть / показать ¦ Маска: приховати / показати
+⬛ cacher ¦ ⬛ скрыть ¦ ⬛ приховати
+⬜ montrer ¦ ⬜ показать ¦ ⬜ показати
+Aide de l’outil ¦ Справка по инструменту ¦ Довідка щодо інструмента
+Couleurs (premier plan et arrière-plan) ¦ Цвета (передний план и фон) ¦ Кольори (передній план і тло)
+Noir et blanc (D) ¦ Чёрный и белый (D) ¦ Чорний і білий (D)
+Couleurs par défaut : noir et blanc ¦ Цвета по умолчанию: чёрный и белый ¦ Кольори за замовчуванням: чорний і білий
+Intervertir les deux couleurs (X) ¦ Поменять два цвета местами (X) ¦ Поміняти два кольори місцями (X)
+Intervertir les couleurs ¦ Поменять цвета местами ¦ Поміняти кольори місцями
+Couleur d’arrière-plan (fond des formes) : clic pour la changer ¦ Цвет фона (заливка фигур): щёлкни, чтобы изменить ¦ Колір тла (заливка фігур): клацни, щоб змінити
+Couleur de premier plan (pinceau, texte, formes) : clic pour la changer ¦ Цвет переднего плана (кисть, текст, фигуры): щёлкни, чтобы изменить ¦ Колір переднього плану (пензель, текст, фігури): клацни, щоб змінити
+Replier le panneau (plus de place pour la photo) — Tab ¦ Свернуть панель (больше места для фото) — Tab ¦ Згорнути панель (більше місця для фото) — Tab
+Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ) ¦ Перетащи, чтобы расширить или сузить панель (двойной щелчок: исходный размер) ¦ Перетягни, щоб розширити чи звузити панель (подвійний клац: початковий розмір)
+Onglets du panneau de droite ¦ Вкладки правой панели ¦ Вкладки правої панелі
+Propriétés : Teinte/Saturation, masque, position et taille du calque choisi ¦ Свойства: цветовой тон/насыщенность, маска, положение и размер выбранного слоя ¦ Властивості: відтінок/насиченість, маска, положення й розмір вибраного шару
+ⓘ Propriétés ¦ ⓘ Свойства ¦ ⓘ Властивості
+Caractère : police, variante (graisse), taille, interligne, approche… ¦ Символ: шрифт, начертание (насыщенность), размер, интерлиньяж, трекинг… ¦ Символ: шрифт, накреслення (товщина), розмір, інтерліньяж, трекінг…
+🔤 Caractère ¦ 🔤 Символ ¦ 🔤 Символ
+Motifs : remplir d’un motif, créer les siens ¦ Узоры: залить узором, создать свои ¦ Візерунки: залити візерунком, створити власні
+▩ Motifs ¦ ▩ Узоры ¦ ▩ Візерунки
+Motifs ¦ Узоры ¦ Візерунки
+Formes de pinceau : préréglages, pas, angle, dispersion, forme d’après une sélection ¦ Формы кисти: наборы настроек, интервал, угол, рассеивание, форма по выделению ¦ Форми пензля: набори налаштувань, інтервал, кут, розсіювання, форма за виділенням
+🖌 Formes ¦ 🖌 Формы ¦ 🖌 Форми
+Restaurer une vieille photo, pas à pas ¦ Восстановить старое фото, шаг за шагом ¦ Відновити старе фото, крок за кроком
+🧭 Restaurer ¦ 🧭 Восстановить ¦ 🧭 Відновити
+Comme la saturation, mais les couleurs déjà vives bougent peu : les teintes ternes (peau, ciel pâle) se ravivent d’abord. ¦ Как насыщенность, но уже яркие цвета почти не меняются: тусклые оттенки (кожа, бледное небо) оживают первыми. ¦ Як насиченість, але вже яскраві кольори майже не змінюються: тьмяні відтінки (шкіра, бліде небо) оживають першими.
+Éclaircit ou assombrit les tons moyens sans toucher au noir ni au blanc : au-dessus de 100, plus clair ; en dessous, plus sombre. ¦ Осветляет или затемняет средние тона, не трогая чёрное и белое: больше 100 — светлее; меньше — темнее. ¦ Освітлює або затемнює середні тони, не чіпаючи чорне й біле: понад 100 — світліше; менше — темніше.
+Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou ⌫), ou le glisser hors du cadre. ¦ Щелчок по кривой: добавить точку · перетаскивание: сдвинуть её · чтобы убрать: выбери её, затем «Убрать точку» (или ⌫), или вытащи её за рамку. ¦ Клац по кривій: додати точку · перетягування: зсунути її · щоб прибрати: вибери її, потім «Прибрати точку» (або ⌫), або витягни її за рамку.
+Enlever le point ¦ Убрать точку ¦ Прибрати точку
+🎨 Colorisation douce (photo en noir et blanc) ¦ 🎨 Мягкое раскрашивание (чёрно-белое фото) ¦ 🎨 М’яке розфарбування (чорно-біле фото)
+Mieux dans un calque de réglage (Image → Coloriser) : on le dose, on le masque, on l’enlève. Pour colorier à la main : Image → Coloriser au pinceau. ¦ Лучше в корректирующем слое (Изображение → Раскрасить): его можно ослабить, замаскировать, убрать. Чтобы раскрасить вручную: Изображение → Раскрасить кистью. ¦ Краще в коригувальному шарі (Зображення → Розфарбувати): його можна послабити, замаскувати, прибрати. Щоб розфарбувати вручну: Зображення → Розфарбувати пензлем.
+Filtres rapides, après les réglages : sur la photo, ou dans un calque de réglage (sur tout ce qui est dessous, ou seulement le calque juste dessous). Les mêmes sur l’image enregistrée en pleine taille. ¦ Быстрые фильтры, после коррекции: на фото или в корректирующем слое (на всё, что ниже, или только на слой прямо под ним). Те же — на сохранённом изображении в полном размере. ¦ Швидкі фільтри, після коригування: на фото або в коригувальному шарі (на все, що нижче, або лише на шар просто під ним). Ті самі — на збереженому зображенні в повному розмірі.
+Renforce le contraste des détails moyens (rides, plis d’un tissu, écriture) sans changer le contraste général. ¦ Усиливает контраст средних деталей (морщины, складки ткани, почерк), не меняя общий контраст. ¦ Посилює контраст середніх деталей (зморшки, складки тканини, почерк), не змінюючи загальний контраст.
+Enlever les filtres ¦ Убрать фильтры ¦ Прибрати фільтри
+Variante : la graisse (Light, Regular, Bold, Black…) et l’italique ¦ Начертание: насыщенность (Light, Regular, Bold, Black…) и курсив ¦ Накреслення: товщина (Light, Regular, Bold, Black…) і курсив
+Taille (en points de l’image) ¦ Размер (в точках изображения) ¦ Розмір (у точках зображення)
+Interligne (vide = automatique, 120 % de la taille) ¦ Интерлиньяж (пусто = автоматически, 120 % от размера) ¦ Інтерліньяж (порожньо = автоматично, 120 % від розміру)
+Crénage : les paires de lettres rapprochées selon la police (Métrique) ou pas du tout (0) ¦ Кернинг: пары букв сближаются согласно шрифту (Метрический) или вовсе нет (0) ¦ Кернінг: пари літер зближуються відповідно до шрифту (Метричний) або зовсім ні (0)
+Approche : l’espace entre toutes les lettres, en millièmes de la taille ¦ Трекинг: расстояние между всеми буквами, в тысячных долях размера ¦ Трекінг: відстань між усіма літерами, у тисячних частках розміру
+Échelle verticale ¦ Масштаб по вертикали ¦ Масштаб по вертикалі
+Échelle horizontale ¦ Масштаб по горизонтали ¦ Масштаб по горизонталі
+Décalage vertical (au-dessus de la ligne de base si positif) ¦ Смещение базовой линии (выше базовой линии, если положительное) ¦ Зміщення базової лінії (вище базової лінії, якщо додатне)
+Lissage des bords des lettres ¦ Сглаживание краёв букв ¦ Згладжування країв літер
+Lissage ¦ Сглаживание ¦ Згладжування
+Lissé ¦ Сглаженный ¦ Згладжений
+Aucun (bords nets, pixels) ¦ Нет (резкие края, пиксели) ¦ Немає (різкі краї, пікселі)
+Alignement du paragraphe ¦ Выравнивание абзаца ¦ Вирівнювання абзацу
+Pour les prochains textes. Choisis un texte avec ➤ pour le changer. ¦ Для следующих текстов. Выбери текст с помощью ➤, чтобы изменить его. ¦ Для наступних текстів. Вибери текст за допомогою ➤, щоб змінити його.
+Pour les prochains textes. Clique sur un texte (outil Texte ou ➤) pour le changer. ¦ Для следующих текстов. Щёлкни по тексту (инструмент «Текст» или ➤), чтобы изменить его. ¦ Для наступних текстів. Клацни по тексту (інструмент «Текст» або ➤), щоб змінити його.
+✍️ Texte en cours d’écriture : chaque réglage s’y applique tout de suite. ¦ ✍️ Текст, который ты пишешь: каждая настройка применяется к нему сразу. ¦ ✍️ Текст, який ти пишеш: кожне налаштування застосовується до нього одразу.
+Métrique ¦ Метрический ¦ Метричний
+Les variantes viennent des polices de l’ordinateur (Mac, Windows, Linux) quand l’app peut les lire ; sinon les graisses habituelles. ¦ Начертания берутся из шрифтов компьютера (Mac, Windows, Linux), когда приложение может их прочитать; иначе — обычные насыщенности. ¦ Накреслення беруться зі шрифтів комп’ютера (Mac, Windows, Linux), коли застосунок може їх прочитати; інакше — звичайні товщини.
+Retrait de la première ligne (négatif : en saillie) ¦ Отступ первой строки (отрицательный: выступ) ¦ Відступ першого рядка (від’ємний: виступ)
+Largeur du bloc de texte : les lignes se coupent toutes seules (vide = texte simple, une ligne par paragraphe) ¦ Ширина текстового блока: строки переносятся сами (пусто = простой текст, одна строка на абзац) ¦ Ширина текстового блоку: рядки переносяться самі (порожньо = простий текст, один рядок на абзац)
+Espace avant chaque paragraphe ¦ Отступ перед каждым абзацем ¦ Відступ перед кожним абзацом
+Espace après chaque paragraphe ¦ Отступ после каждого абзаца ¦ Відступ після кожного абзацу
+Couper les mots longs en fin de ligne, avec un tiret (règles simples du français ; un tiret conditionnel ⌥- dans un mot est pris en premier) ¦ Переносить длинные слова в конце строки с дефисом (простые правила французского; мягкий перенос ⌥- в слове учитывается первым) ¦ Переносити довгі слова в кінці рядка з дефісом (прості правила французької; м’яке перенесення ⌥- у слові враховується першим)
+Ω Glyphes ¦ Ω Глифы ¦ Ω Гліфи
+Police (famille) ¦ Шрифт (семейство) ¦ Шрифт (родина)
+(Auto) ¦ (Авто) ¦ (Авто)
+⟸ gauche ¦ ⟸ слева ¦ ⟸ ліворуч
+≡ centre ¦ ≡ по центру ¦ ≡ по центру
+droite ⟹ ¦ справа ⟹ ¦ праворуч ⟹
+Symboles ¦ Символы ¦ Символи
+Code (U+00E9) ou caractère ¦ Код (U+00E9) или символ ¦ Код (U+00E9) або символ
+Chercher un glyphe ¦ Искать глиф ¦ Шукати гліф
+Pour un bloc de texte, glisse un cadre avec l’outil Texte T au lieu de cliquer, ou donne sa largeur ici. La justification ne vaut que pour un bloc. ¦ Для текстового блока растяни рамку инструментом «Текст» T вместо щелчка или укажи здесь его ширину. Выравнивание по ширине работает только для блока. ¦ Для текстового блоку розтягни рамку інструментом «Текст» T замість клацання або вкажи тут його ширину. Вирівнювання за шириною працює лише для блоку.
+Clic : ajouté au texte en cours d’écriture (ou à la fin du texte choisi). Sans texte : copié. ¦ Щелчок: добавляется в текст, который ты пишешь (или в конец выбранного текста). Без текста: копируется. ¦ Клац: додається до тексту, який ти пишеш (або в кінець вибраного тексту). Без тексту: копіюється.
+Choisis d’abord un texte (outil T). ¦ Сначала выбери текст (инструмент T). ¦ Спершу вибери текст (інструмент T).
+Un autre média, rattaché aux mêmes fiches ¦ Другой медиафайл, связанный с теми же карточками ¦ Інший медіафайл, пов’язаний із тими самими картками
+Gardée dans les versions, la photo affichée ne change pas ¦ Сохраняется в версиях, показанное фото не меняется ¦ Зберігається у версіях, показане фото не змінюється
+avec les annotations (calques visibles) ¦ с пометками (видимые слои) ¦ з позначками (видимі шари)
+Avec les annotations (calques visibles) ¦ С пометками (видимые слои) ¦ З позначками (видимі шари)
+L’original n’est jamais modifié : chaque retouche est une version de la photo, et tu choisis celle qui s’affiche partout. ¦ Оригинал никогда не меняется: каждая ретушь — это версия фото, и ты выбираешь, какая показывается везде. ¦ Оригінал ніколи не змінюється: кожна ретуш — це версія фото, і ти вибираєш, яка показується всюди.
+🖼 Enregistrer l’image dans les Médias ¦ 🖼 Сохранить изображение в медиафайлах ¦ 🖼 Зберегти зображення в медіафайлах
+L’image (calques compris) remplace celle du média ; le projet, lui, garde tous les calques pour continuer ¦ Изображение (вместе со слоями) заменяет изображение медиафайла; проект же сохраняет все слои, чтобы продолжить ¦ Зображення (разом із шарами) замінює зображення медіафайлу; проєкт же зберігає всі шари, щоб продовжити
+Enregistrer le projet (calques, masques, réglages) ¦ Сохранить проект (слои, маски, коррекция) ¦ Зберегти проєкт (шари, маски, коригування)
+la retouche est fermée ¦ ретушь закрыта ¦ ретуш закрито
+Clique sur une étape pour revenir à ce moment-là ; les étapes suivantes restent (en gris) tant que tu ne fais rien d’autre. ¦ Щёлкни по шагу, чтобы вернуться к тому моменту; следующие шаги остаются (серым), пока ты не сделаешь что-то другое. ¦ Клацни по кроку, щоб повернутися до того моменту; наступні кроки залишаються (сірим), доки ти не зробиш щось інше.
+Tu peins le masque (pinceau : ⬛ cacher / ⬜ montrer). Clic : revenir au calque ¦ Ты рисуешь маску (кисть: ⬛ скрыть / ⬜ показать). Щелчок: вернуться к слою ¦ Ти малюєш маску (пензель: ⬛ приховати / ⬜ показати). Клац: повернутися до шару
+Masque : clic pour le peindre au pinceau ¦ Маска: щёлкни, чтобы рисовать её кистью ¦ Маска: клацни, щоб малювати її пензлем
+⇧ Maj + clic : désactiver / réactiver le masque ¦ ⇧ Shift + щелчок: отключить / включить маску ¦ ⇧ Shift + клац: вимкнути / ввімкнути маску
+⌥ Alt + clic : voir le masque seul ¦ ⌥ Alt + щелчок: показать только маску ¦ ⌥ Alt + клац: показати лише маску
+touche \ : le masque en rouge par-dessus ¦ клавиша \: маска красным поверх ¦ клавіша \: маска червоним поверх
+Ajouter un masque (cacher une partie sans l’effacer) — ⌥ / Alt + clic : un masque qui cache tout (ou cache la sélection) ¦ Добавить маску (скрыть часть, не стирая) — ⌥ / Alt + щелчок: маска, скрывающая всё (или скрывающая выделение) ¦ Додати маску (приховати частину, не стираючи) — ⌥ / Alt + клац: маска, що приховує все (або приховує виділення)
+masque ¦ маска ¦ маска
+Ranger dans un groupe ¦ Поместить в группу ¦ Помістити в групу
+(hors groupe) ¦ (вне группы) ¦ (поза групою)
+Glisser pour ranger : au-dessus, en dessous, ou dans un groupe (lâcher au milieu d’un groupe) ¦ Перетащи, чтобы упорядочить: выше, ниже или в группу (отпусти посередине группы) ¦ Перетягни, щоб упорядкувати: вище, нижче або в групу (відпусти посередині групи)
+Calque de réglage ¦ Корректирующий слой ¦ Коригувальний шар
+La photo (réglages, taches, tampon) ¦ Фото (коррекция, пятна, штамп) ¦ Фото (коригування, плями, штамп)
+Supprimer le groupe (ce qu’il contient reste) ¦ Удалить группу (её содержимое остаётся) ¦ Видалити групу (її вміст залишається)
+Retirer la photo des calques (⌘Z pour la remettre) ¦ Убрать фото из слоёв (⌘Z, чтобы вернуть) ¦ Прибрати фото з шарів (⌘Z, щоб повернути)
+Mode de fusion : comment le calque se mélange à ce qui est dessous ¦ Режим наложения: как слой смешивается с тем, что ниже ¦ Режим накладання: як шар змішується з тим, що нижче
+Fond : dose seulement le contenu du calque, pas ses effets (ombre, lueur, contour). À 0 %, il ne reste que les effets. ¦ Заливка: ослабляет только содержимое слоя, но не его эффекты (тень, свечение, обводку). При 0 % остаются только эффекты. ¦ Заливка: послаблює лише вміст шару, але не його ефекти (тінь, світіння, обведення). При 0 % залишаються лише ефекти.
+Effets du calque : ombre portée, lueur externe, contour, incrustation de couleur ¦ Эффекты слоя: тень, внешнее свечение, обводка, наложение цвета ¦ Ефекти шару: тінь, зовнішнє світіння, обведення, накладання кольору
+Objet dynamique : agrandir, réduire, tourner sans perte (l’image d’origine est gardée) ¦ Смарт-объект: увеличивать, уменьшать, поворачивать без потерь (исходное изображение сохраняется) ¦ Смарт-об’єкт: збільшувати, зменшувати, повертати без втрат (початкове зображення зберігається)
+🧩 Objet dynamique ¦ 🧩 Смарт-объект ¦ 🧩 Смарт-об’єкт
+Une autre image à la même place, même taille, même rotation ¦ Другое изображение на том же месте, того же размера, с тем же поворотом ¦ Інше зображення на тому самому місці, того самого розміру, з тим самим поворотом
+Remplacer… ¦ Заменить… ¦ Замінити…
+Remettre l’image à sa taille d’origine (et droite) ¦ Вернуть изображению исходный размер (и выровнять) ¦ Повернути зображенню початковий розмір (і вирівняти)
+Un calque de filtres juste au-dessus, qui ne touche que cette image : on peut le régler, le doser, le cacher ¦ Слой фильтров прямо над ним, действующий только на это изображение: его можно настроить, ослабить, скрыть ¦ Шар фільтрів просто над ним, що діє лише на це зображення: його можна налаштувати, послабити, приховати
+✨ Filtre dynamique ¦ ✨ Смарт-фильтр ¦ ✨ Смарт-фільтр
+Figer l’image en pixels, à la taille où elle est (plus d’agrandissement sans perte) ¦ Закрепить изображение в пикселях в текущем размере (увеличение без потерь станет невозможным) ¦ Закріпити зображення в пікселях у поточному розмірі (збільшення без втрат стане неможливим)
+Pixelliser ¦ Растрировать ¦ Растеризувати
+Couleurs, transparence, forme, préréglages ¦ Цвета, прозрачность, форма, наборы настроек ¦ Кольори, прозорість, форма, набори налаштувань
+▦ Modifier le dégradé… ¦ ▦ Изменить градиент… ¦ ▦ Змінити градієнт…
+Motif, échelle, angle, décalage ¦ Узор, масштаб, угол, сдвиг ¦ Візерунок, масштаб, кут, зсув
+▩ Modifier le motif… ¦ ▩ Изменить узор… ¦ ▩ Змінити візерунок…
+Comme un masque d’écrêtage de Photoshop ¦ Как обтравочная маска в Photoshop ¦ Як обтравна маска в Photoshop
+régler… ¦ настроить… ¦ налаштувати…
+ne touche que l’élément juste dessous ¦ действует только на элемент прямо под ним ¦ діє лише на елемент просто під ним
+touche tout ce qui est dessous ¦ действует на всё, что ниже ¦ діє на все, що нижче
+(seulement l’élément dessous) ¦ (только элемент под ним) ¦ (лише елемент під ним)
+(tout ce qui est dessous) ¦ (всё, что ниже) ¦ (усе, що нижче)
+régler la photo ¦ настроить фото ¦ налаштувати фото
+＋ dans un calque de réglage ¦ ＋ в корректирующем слое ¦ ＋ у коригувальному шарі
+Réglages et filtres dans un calque à part, qu’on peut masquer, doser ou limiter à un calque ¦ Коррекция и фильтры в отдельном слое, который можно замаскировать, ослабить или ограничить одним слоем ¦ Коригування й фільтри в окремому шарі, який можна замаскувати, послабити або обмежити одним шаром
+✨ Filtres : ¦ ✨ Фильтры: ¦ ✨ Фільтри:
+Changer les réglages de ce filtre ¦ Изменить настройки этого фильтра ¦ Змінити налаштування цього фільтра
+vider ¦ очистить ¦ очистити
+groupe vide : glisse un calque ici (⠿), ou range-le avec 📁 ¦ пустая группа: перетащи сюда слой (⠿) или помести его с помощью 📁 ¦ порожня група: перетягни сюди шар (⠿) або помісти його за допомогою 📁
+Le pinceau, les formes et le texte vont sur le calque choisi (en bleu). 📁 un groupe peut contenir des calques et d’autres groupes ; 🎚 un calque de réglage applique réglages et filtres à ce qui est dessous (ou seulement à l’élément juste dessous). 🎭 un masque cache sans effacer. ¦ Кисть, фигуры и текст ложатся на выбранный слой (синий). 📁 группа может содержать слои и другие группы; 🎚 корректирующий слой применяет коррекцию и фильтры к тому, что ниже (или только к элементу прямо под ним). 🎭 маска скрывает, не стирая. ¦ Пензель, фігури й текст лягають на вибраний шар (синій). 📁 група може містити шари й інші групи; 🎚 коригувальний шар застосовує коригування й фільтри до того, що нижче (або лише до елемента просто під ним). 🎭 маска приховує, не стираючи.
+＋ Calque ¦ ＋ Слой ¦ ＋ Шар
+＋ Groupe ¦ ＋ Группа ¦ ＋ Група
+＋ Réglage ¦ ＋ Коррекция ¦ ＋ Коригування
+🖼️ Image ¦ 🖼️ Изображение ¦ 🖼️ Зображення
+Une image de la base ou de l’ordinateur, sur un nouveau calque, en objet dynamique (agrandir, réduire, tourner sans perte) ¦ Изображение из базы или с компьютера, на новом слое, как смарт-объект (увеличивать, уменьшать, поворачивать без потерь) ¦ Зображення з бази або з комп’ютера, на новому шарі, як смарт-об’єкт (збільшувати, зменшувати, повертати без втрат)
+Un groupe vide au-dessus du calque choisi ¦ Пустая группа над выбранным слоем ¦ Порожня група над вибраним шаром
+Réglages et filtres dans un calque ¦ Коррекция и фильтры в слое ¦ Коригування й фільтри в шарі
+La photo a été retirée des calques : la remettre tout en bas ¦ Фото было убрано из слоёв: вернуть его в самый низ ¦ Фото було прибрано з шарів: повернути його в самий низ
+↺ Remettre la photo ¦ ↺ Вернуть фото ¦ ↺ Повернути фото
+Met le calque choisi dans un nouveau groupe (⌘G) ¦ Помещает выбранный слой в новую группу (⌘G) ¦ Поміщає вибраний шар у нову групу (⌘G)
+Grouper ¦ Сгруппировать ¦ Згрупувати
+Sélection → calque ¦ Выделение → слой ¦ Виділення → шар
+Aucun calque. ¦ Нет слоёв. ¦ Немає шарів.
+Choisis d’abord un calque. ¦ Сначала выбери слой. ¦ Спершу вибери шар.
+Nouveau calque ¦ Новый слой ¦ Новий шар
+Nouveau calque de réglage ¦ Новый корректирующий слой ¦ Новий коригувальний шар
+Photo remise dans les calques ¦ Фото возвращено в слои ¦ Фото повернуто в шари
+Masque ajouté : la sélection est cachée. ¦ Маска добавлена: выделение скрыто. ¦ Маску додано: виділення приховано.
+Masque ajouté : tout est caché ; peins en ⬜ pour montrer. ¦ Маска добавлена: всё скрыто; рисуй ⬜, чтобы показать. ¦ Маску додано: усе приховано; малюй ⬜, щоб показати.
+Masque ajouté : peins en ⬛ pour cacher, en ⬜ pour montrer. ¦ Маска добавлена: рисуй ⬛, чтобы скрыть, ⬜ — чтобы показать. ¦ Маску додано: малюй ⬛, щоб приховати, ⬜ — щоб показати.
+Masque seul : blanc = montré, noir = caché (⌥ + clic pour revenir) ¦ Только маска: белое = видно, чёрное = скрыто (⌥ + щелчок, чтобы вернуться) ¦ Лише маска: біле = видно, чорне = приховано (⌥ + клац, щоб повернутися)
+Ce calque est verrouillé. ¦ Этот слой заблокирован. ¦ Цей шар заблоковано.
+Filtre dynamique : choisis un filtre (« ＋ Ajouter un filtre… ») ; il ne touche que cette image, et reste réglable. ¦ Смарт-фильтр: выбери фильтр («＋ Добавить фильтр…»); он действует только на это изображение и остаётся настраиваемым. ¦ Смарт-фільтр: вибери фільтр («＋ Додати фільтр…»); він діє лише на це зображення й лишається налаштовуваним.
+verrouillé ¦ заблокирован ¦ заблоковано
+déverrouillé ¦ разблокирован ¦ розблоковано
+seulement sur l’élément dessous ¦ только на элемент под ним ¦ лише на елемент під ним
+sur tout ce qui est dessous ¦ на всё, что ниже ¦ на все, що нижче
+Ouvrir le panneau (Réglages, Calques…) — Tab ¦ Открыть панель (Коррекция, Слои…) — Tab ¦ Відкрити панель (Коригування, Шари…) — Tab
+Glisse pour te déplacer dans l’image zoomée (la barre d’espace fait pareil avec n’importe quel outil). ¦ Перетаскивай, чтобы перемещаться по увеличенному изображению (пробел делает то же самое с любым инструментом). ¦ Перетягуй, щоб переміщатися збільшеним зображенням (пробіл робить те саме з будь-яким інструментом).
+Clique sur un trait, une forme, un texte ou une zone copiée d’un calque, puis glisse-le. ⌫ le supprime, double-clic sur un texte pour le réécrire. ¦ Щёлкни по штриху, фигуре, тексту или скопированной области слоя, затем перетащи. ⌫ удаляет, двойной щелчок по тексту — чтобы переписать его. ¦ Клацни по штриху, фігурі, тексту або скопійованій ділянці шару, потім перетягни. ⌫ видаляє, подвійний клац по тексту — щоб переписати його.
+Glisse pour sélectionner un rectangle (⇧ en plus : ajouter, ⌥ : enlever). Les réglages de la barre agissent ensuite sur la sélection. ¦ Перетаскивай, чтобы выделить прямоугольник (с ⇧: добавить, ⌥: вычесть). Затем настройки панели действуют на выделение. ¦ Перетягуй, щоб виділити прямокутник (із ⇧: додати, ⌥: відняти). Потім налаштування панелі діють на виділення.
+Glisse pour sélectionner un ovale (⇧ : ajouter, ⌥ : enlever). ¦ Перетаскивай, чтобы выделить овал (⇧: добавить, ⌥: вычесть). ¦ Перетягуй, щоб виділити овал (⇧: додати, ⌥: відняти).
+Entoure à main levée la zone à sélectionner (⇧ : ajouter, ⌥ : enlever). ¦ Обведи от руки область для выделения (⇧: добавить, ⌥: вычесть). ¦ Обведи від руки ділянку для виділення (⇧: додати, ⌥: відняти).
+Plume : clique point par point autour de la zone ; double-clic, Entrée ou clic sur le premier point pour fermer. Échap : abandonner. ¦ Перо: щёлкай точку за точкой вокруг области; двойной щелчок, Enter или щелчок по первой точке — чтобы замкнуть. Esc: отказаться. ¦ Перо: клацай точку за точкою навколо ділянки; подвійний клац, Enter або клац по першій точці — щоб замкнути. Esc: відмовитися.
+Clique sur une couleur : tous les points voisins de teinte proche sont sélectionnés (Tolérance). ⇧ : ajouter, ⌥ : enlever. ¦ Щёлкни по цвету: выделяются все соседние точки близкого оттенка (Допуск). ⇧: добавить, ⌥: вычесть. ¦ Клацни по кольору: виділяються всі сусідні точки близького відтінку (Допуск). ⇧: додати, ⌥: відняти.
+Glisse les poignées du cadre (ou trace un nouveau cadre), choisis des proportions, redresse avec le curseur, puis « ✓ Valider ». ¦ Перетаскивай маркеры рамки (или нарисуй новую рамку), выбери пропорции, выровняй ползунком, затем «✓ Подтвердить». ¦ Перетягуй маркери рамки (або намалюй нову рамку), вибери пропорції, вирівняй повзунком, потім «✓ Підтвердити».
+Clic : zoomer ici · ⌥ + clic : reculer · ou glisse pour zoomer sur une zone. ¦ Щелчок: увеличить здесь · ⌥ + щелчок: уменьшить · или перетащи, чтобы увеличить область. ¦ Клац: збільшити тут · ⌥ + клац: зменшити · або перетягни, щоб збільшити ділянку.
+Glisse les 4 coins sur les coins de la photo, du document ou de la façade prise de biais, puis « ✓ Valider » : elle est remise à plat. À faire de préférence avant les corrections de taches. ¦ Перетащи 4 угла на углы фото, документа или фасада, снятого под углом, затем «✓ Подтвердить»: изображение выпрямляется. Лучше делать до исправления пятен. ¦ Перетягни 4 кути на кути фото, документа чи фасаду, знятого під кутом, потім «✓ Підтвердити»: зображення випрямляється. Краще робити до виправлення плям.
+Glisse pour tracer la forme sur le calque choisi (⇧ : carré, cercle ou angle droit). ¦ Перетаскивай, чтобы нарисовать фигуру на выбранном слое (⇧: квадрат, круг или прямой угол). ¦ Перетягуй, щоб намалювати фігуру на вибраному шарі (⇧: квадрат, коло або прямий кут).
+Glisse du début à la fin du dégradé (⇧ : tous les 45°) : il va sur un calque « Dégradé » (dans la sélection s’il y en a une ; sur le masque choisi, il fond le calque). Tire ensuite ses ronds pour l’ajuster ; clic sur la barre colorée pour changer ses couleurs. ¦ Перетащи от начала до конца градиента (⇧: каждые 45°): он ложится на слой «Градиент» (в выделении, если оно есть; на выбранной маске он растворяет слой). Затем тяни его кружки, чтобы подогнать; щелчок по цветной полосе — чтобы изменить его цвета. ¦ Перетягни від початку до кінця градієнта (⇧: кожні 45°): він лягає на шар «Градієнт» (у виділенні, якщо воно є; на вибраній масці він розчиняє шар). Потім тягни його кружечки, щоб підлаштувати; клац по кольоровій смузі — щоб змінити його кольори.
+Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long. Zoome (⌘ + molette) pour être précis. ¦ Щёлкни по пятну, пылинке или царапине: она заменяется тем, что вокруг. Для царапины проведи вдоль. Увеличь (⌘ + колёсико) для точности. ¦ Клацни по плямі, порошинці чи подряпині: її буде замінено тим, що довкола. Для подряпини проведи вздовж. Збільш (⌘ + коліщатко) для точності.
+« Choisir l’endroit à recopier » (ou ⌥ + clic), puis peins sur la zone à couvrir. « Aligné » : la source suit ton pinceau d’un trait à l’autre. Avec une sélection : glisse pour poser une copie de la zone ailleurs. ¦ «Выбрать место для копирования» (или ⌥ + щелчок), затем рисуй по области, которую нужно закрыть. «С выравниванием»: источник следует за кистью от мазка к мазку. С выделением: перетащи, чтобы положить копию области в другое место. ¦ «Вибрати місце для копіювання» (або ⌥ + клац), потім малюй по ділянці, яку треба закрити. «З вирівнюванням»: джерело рухається за пензлем від мазка до мазка. З виділенням: перетягни, щоб покласти копію ділянки в інше місце.
+Peins sur le calque choisi (Calques) : annoter, entourer, flécher à la main. La gomme efface ce qui a été peint, jamais la photo. ¦ Рисуй на выбранном слое (Слои): подписывать, обводить, рисовать стрелки от руки. Ластик стирает нарисованное, но никогда не фото. ¦ Малюй на вибраному шарі (Шари): підписувати, обводити, малювати стрілки від руки. Гумка стирає намальоване, але ніколи не фото.
+Tu peins le MASQUE du calque : ⬛ cacher, ⬜ montrer. Rien n’est effacé. Clique sur la vignette du masque (Calques) pour revenir au calque. ¦ Ты рисуешь МАСКУ слоя: ⬛ скрыть, ⬜ показать. Ничего не стирается. Щёлкни по миниатюре маски (Слои), чтобы вернуться к слою. ¦ Ти малюєш МАСКУ шару: ⬛ приховати, ⬜ показати. Нічого не стирається. Клацни по мініатюрі маски (Шари), щоб повернутися до шару.
+Clique dans l’image à l’endroit du texte, écris, puis Entrée (⇧ + Entrée pour aller à la ligne). ¦ Щёлкни на изображении там, где будет текст, пиши, затем Enter (⇧ + Enter — новая строка). ¦ Клацни на зображенні там, де буде текст, пиши, потім Enter (⇧ + Enter — новий рядок).
+Peins sur le pli, la rayure ou la déchirure (en rouge pendant le geste) : au lâcher, la zone est refaite d’après ce qui l’entoure. Zoome pour être précis ; « 🔍 Repérer les plis » les trouve tout seul. ¦ Рисуй по залому, царапине или разрыву (красным во время движения): когда отпустишь, область воссоздаётся по окружающему. Увеличь для точности; «🔍 Найти заломы» находит их само. ¦ Малюй по залому, подряпині чи розриву (червоним під час руху): коли відпустиш, ділянку буде відтворено за тим, що довкола. Збільш для точності; «🔍 Знайти заломи» знаходить їх саме.
+Glisse les deux ronds sur les yeux si besoin : le cadre suit (yeux à l’horizontale, toujours à la même hauteur). Règle la marge dans le panneau, puis « ✓ Recadrer » ou « 👤 Utiliser comme portrait ». ¦ При необходимости перетащи два кружка на глаза: рамка следует за ними (глаза горизонтально, всегда на одной высоте). Настрой поля на панели, затем «✓ Кадрировать» или «👤 Использовать как портрет». ¦ За потреби перетягни два кружечки на очі: рамка рухається за ними (очі горизонтально, завжди на одній висоті). Налаштуй поля на панелі, потім «✓ Кадрувати» або «👤 Використати як портрет».
+Calque « Annotations » créé ¦ Слой «Пометки» создан ¦ Шар «Позначки» створено
+Annotations ¦ Пометки ¦ Позначки
+Masque ajouté à la photo (gomme) ¦ Маска добавлена к фото (ластик) ¦ Маску додано до фото (гумка)
+Gomme sur la photo : elle est cachée par un masque, rien n’est effacé. Pour la faire revenir : touche X (⬜ montrer), puis repasse dessus. ¦ Ластик на фото: оно скрывается маской, ничего не стирается. Чтобы вернуть: клавиша X (⬜ показать), затем проведи снова. ¦ Гумка на фото: його приховано маскою, нічого не стирається. Щоб повернути: клавіша X (⬜ показати), потім проведи знову.
+⬜ Montrer : le pinceau (ou la gomme) fait revenir ce qui était caché. X pour revenir à ⬛ cacher. ¦ ⬜ Показать: кисть (или ластик) возвращает скрытое. X — вернуться к ⬛ скрыть. ¦ ⬜ Показати: пензель (або гумка) повертає приховане. X — повернутися до ⬛ приховати.
+⬛ Cacher : le pinceau (ou la gomme) cache. X pour ⬜ montrer. ¦ ⬛ Скрыть: кисть (или ластик) скрывает. X — для ⬜ показать. ¦ ⬛ Приховати: пензель (або гумка) приховує. X — для ⬜ показати.
+Style du texte ¦ Стиль текста ¦ Стиль тексту
+Caractère du texte ¦ Символы текста ¦ Символи тексту
+🔎 Lire les variantes de l’ordinateur… ¦ 🔎 Прочитать начертания компьютера… ¦ 🔎 Прочитати накреслення комп’ютера…
+Réglage ciblé : appuie sur une couleur de la photo et glisse à droite (plus saturé) ou à gauche (moins) ; avec ⌘ / Ctrl, c’est la teinte qui change ¦ Точечная настройка: нажми на цвет на фото и перетащи вправо (насыщеннее) или влево (меньше); с ⌘ / Ctrl меняется цветовой тон ¦ Точкове налаштування: натисни на колір на фото й перетягни праворуч (насиченіше) або ліворуч (менше); з ⌘ / Ctrl змінюється відтінок
+Réglage ciblé ¦ Точечная настройка ¦ Точкове налаштування
+Pipettes de la gamme ¦ Пипетки диапазона ¦ Піпетки діапазону
+Pipette : la gamme se centre sur la couleur cliquée dans la photo ¦ Пипетка: диапазон центрируется на цвете, по которому щёлкнули на фото ¦ Піпетка: діапазон центрується на кольорі, по якому клацнули на фото
+Ajouter à la gamme la couleur cliquée ¦ Добавить в диапазон цвет, по которому щёлкнули ¦ Додати до діапазону колір, по якому клацнули
+Retirer de la gamme la couleur cliquée ¦ Убрать из диапазона цвет, по которому щёлкнули ¦ Прибрати з діапазону колір, по якому клацнули
+Bord intérieur : plein effet jusqu’ici ¦ Внутренний край: полный эффект до этого места ¦ Внутрішній край: повний ефект до цього місця
+Bord extérieur : l’effet s’éteint ici ¦ Внешний край: эффект здесь затухает ¦ Зовнішній край: ефект тут згасає
+Haut : les couleurs avant ; bas : après. ¦ Вверху: цвета до; внизу: после. ¦ Угорі: кольори до; унизу: після.
+🎚 Autres réglages… ¦ 🎚 Другая коррекция… ¦ 🎚 Інше коригування…
+🖌 Peindre le masque ¦ 🖌 Рисовать маску ¦ 🖌 Малювати маску
+Réactiver ¦ Включить снова ¦ Увімкнути знову
+Désactiver ¦ Отключить ¦ Вимкнути
+▦ Calque de dégradé ¦ ▦ Слой градиента ¦ ▦ Шар градієнта
+garder les proportions ¦ сохранять пропорции ¦ зберігати пропорції
+Un calque de réglage juste au-dessus, qui ne touche que ce calque ¦ Корректирующий слой прямо над ним, действующий только на этот слой ¦ Коригувальний шар просто над ним, що діє лише на цей шар
+🎨 Teinte/Saturation sur ce calque ¦ 🎨 Цветовой тон/Насыщенность на этом слое ¦ 🎨 Відтінок/Насиченість на цьому шарі
+Choisis la photo ou un calque de réglage 🎚 (Calques) pour Teinte/Saturation. ¦ Выбери фото или корректирующий слой 🎚 (Слои) для «Цветовой тон/Насыщенность». ¦ Вибери фото або коригувальний шар 🎚 (Шари) для «Відтінок/Насиченість».
+👆 Appuie sur une couleur de la photo et glisse à gauche ou à droite (⌘ / Ctrl : la teinte). ¦ 👆 Нажми на цвет на фото и перетащи влево или вправо (⌘ / Ctrl: цветовой тон). ¦ 👆 Натисни на колір на фото й перетягни ліворуч або праворуч (⌘ / Ctrl: відтінок).
+💧 Clique sur une couleur de la photo. ¦ 💧 Щёлкни по цвету на фото. ¦ 💧 Клацни по кольору на фото.
+C’est un gris : il n’a pas de teinte. ¦ Это серый: у него нет цветового тона. ¦ Це сірий: він не має відтінку.
+Gamme choisie à la pipette ¦ Диапазон выбран пипеткой ¦ Діапазон вибрано піпеткою
+Gamme élargie ¦ Диапазон расширен ¦ Діапазон розширено
+Gamme réduite ¦ Диапазон сужен ¦ Діапазон звужено
+Coloriser : oui ¦ Раскрасить: да ¦ Розфарбувати: так
+Coloriser : non ¦ Раскрасить: нет ¦ Розфарбувати: ні
+Coloriser ¦ Раскрасить ¦ Розфарбувати
+Propriétés du masque ¦ Свойства маски ¦ Властивості маски
+Teinte/Saturation remise à zéro ¦ Цветовой тон/Насыщенность сброшены ¦ Відтінок/Насиченість скинуто
+Masque inversé ¦ Маска инвертирована ¦ Маску інвертовано
+Masque désactivé ¦ Маска отключена ¦ Маску вимкнено
+Masque réactivé ¦ Маска снова включена ¦ Маску знову ввімкнено
+Masque retiré ¦ Маска убрана ¦ Маску прибрано
+Masque ajouté ¦ Маска добавлена ¦ Маску додано
+Ce calque a déjà un masque. ¦ У этого слоя уже есть маска. ¦ Цей шар уже має маску.
+Teinte/Saturation sur un calque ¦ Цветовой тон/Насыщенность на слое ¦ Відтінок/Насиченість на шарі
+Teinte/Saturation ¦ Цветовой тон/Насыщенность ¦ Відтінок/Насиченість
+Ancien style ¦ Старый стиль ¦ Старий стиль
+Global ¦ Все ¦ Усі
+Rouges ¦ Красные ¦ Червоні
+Jaunes ¦ Жёлтые ¦ Жовті
+Verts ¦ Зелёные ¦ Зелені
+Cyans ¦ Голубые ¦ Блакитні
+Bleus ¦ Синие ¦ Сині
+Magentas ¦ Пурпурные ¦ Пурпурові
+Cyanotype ¦ Цианотипия ¦ Ціанотипія
+Supprimer ce motif ¦ Удалить этот узор ¦ Видалити цей візерунок
+Calque de motif <b>« {name} »</b> : tout se règle ici, tout de suite. ¦ Слой узора <b>«{name}»</b>: всё настраивается здесь, сразу. ¦ Шар візерунка <b>«{name}»</b>: усе налаштовується тут, одразу.
+Choisis un motif, puis « Remplir » : il va sur son propre calque (dans la sélection s’il y en a une). Les motifs de l’app prennent tes deux couleurs. ¦ Выбери узор, затем «Залить»: он ложится на собственный слой (в выделении, если оно есть). Узоры приложения берут твои два цвета. ¦ Вибери візерунок, потім «Залити»: він лягає на власний шар (у виділенні, якщо воно є). Візерунки застосунку беруть твої два кольори.
+fond transparent (motifs de l’app) ¦ прозрачный фон (узоры приложения) ¦ прозоре тло (візерунки застосунку)
+Décalage horizontal ¦ Сдвиг по горизонтали ¦ Зсув по горизонталі
+Décalage vertical ¦ Сдвиг по вертикали ¦ Зсув по вертикалі
+▩ Remplir : nouveau calque de motif ¦ ▩ Залить: новый слой узора ¦ ▩ Залити: новий шар візерунка
+Il rejoint la bibliothèque des motifs (gardée sur cet ordinateur). ¦ Он попадает в библиотеку узоров (хранится на этом компьютере). ¦ Він потрапляє до бібліотеки візерунків (зберігається на цьому комп’ютері).
+l’image visible ¦ видимое изображение ¦ видиме зображення
+Taille du carreau ¦ Размер плитки ¦ Розмір плитки
+raccord sans couture (les bords se fondent) ¦ бесшовный стык (края сливаются) ¦ безшовний стик (краї зливаються)
+Garder et remplir ¦ Сохранить и залить ¦ Зберегти й залити
+Plus de place pour garder ce motif : supprime des motifs, ou fais-le plus petit. ¦ Нет места, чтобы сохранить этот узор: удали несколько узоров или сделай его меньше. ¦ Немає місця, щоб зберегти цей візерунок: видали кілька візерунків або зроби його меншим.
+Motif gardé dans la bibliothèque ▩. ¦ Узор сохранён в библиотеке ▩. ¦ Візерунок збережено в бібліотеці ▩.
+Mon motif ¦ Мой узор ¦ Мій візерунок
+Clic sur une forme : le pinceau 🖌 la prend. La taille se règle en haut (ou [ et ]). ¦ Щелчок по форме: кисть 🖌 берёт её. Размер настраивается вверху (или [ и ]). ¦ Клац по формі: пензель 🖌 бере її. Розмір налаштовується вгорі (або [ і ]).
+Forme de la pointe ¦ Форма кончика ¦ Форма кінчика
+Pas (écart entre les empreintes) ¦ Интервал (расстояние между отпечатками) ¦ Інтервал (відстань між відбитками)
+Petit : un trait continu. Grand : des empreintes séparées (étoiles, feuilles). ¦ Маленький: сплошной штрих. Большой: отдельные отпечатки (звёзды, листья). ¦ Малий: суцільний штрих. Великий: окремі відбитки (зірки, листя).
+À 100 % la forme est entière ; plus bas, elle est aplatie (plume, pinceau plat). ¦ При 100 % форма целая; ниже — она сплющена (перо, плоская кисть). ¦ При 100 % форма ціла; нижче — вона сплющена (перо, плаский пензель).
+l’angle suit le trait ¦ угол следует за штрихом ¦ кут іде за штрихом
+Dynamique et dispersion ¦ Динамика и рассеивание ¦ Динаміка й розсіювання
+Variation de taille ¦ Колебание размера ¦ Коливання розміру
+Variation d’angle ¦ Колебание угла ¦ Коливання кута
+Dispersion ¦ Рассеивание ¦ Розсіювання
+Nombre par empreinte ¦ Количество на отпечаток ¦ Кількість на відбиток
+Transfert et couleur ¦ Передача и цвет ¦ Передавання й колір
+Flux (chaque empreinte) ¦ Поток (каждый отпечаток) ¦ Потік (кожен відбиток)
+Variation d’opacité ¦ Колебание непрозрачности ¦ Коливання непрозорості
+Variation de couleur ¦ Колебание цвета ¦ Коливання кольору
+Fais d’abord une sélection autour du dessin ¦ Сначала выдели область вокруг рисунка ¦ Спершу виділи ділянку навколо малюнка
+Fais d’abord une sélection autour du dessin. ¦ Сначала выдели область вокруг рисунка. ¦ Спершу виділи ділянку навколо малюнка.
+＋ Forme d’après la sélection ¦ ＋ Форма по выделению ¦ ＋ Форма за виділенням
+Garder comme préréglage ¦ Сохранить как набор настроек ¦ Зберегти як набір налаштувань
+＋ Garder comme préréglage ¦ ＋ Сохранить как набор настроек ¦ ＋ Зберегти як набір налаштувань
+Garder cette forme de pinceau ¦ Сохранить эту форму кисти ¦ Зберегти цю форму пензля
+Nom du préréglage : ¦ Название набора настроек: ¦ Назва набору налаштувань:
+Plus de place pour garder ce pinceau. ¦ Нет места, чтобы сохранить эту кисть. ¦ Немає місця, щоб зберегти цей пензель.
+🖌 Ta forme est prête : peins avec ; « Garder comme préréglage » pour la retrouver. ¦ 🖌 Твоя форма готова: рисуй ею; «Сохранить как набор настроек», чтобы найти её потом. ¦ 🖌 Твоя форма готова: малюй нею; «Зберегти як набір налаштувань», щоб знайти її потім.
+Rond net ¦ Жёсткая круглая ¦ Жорсткий круглий
+Rond doux ¦ Мягкая круглая ¦ М’який круглий
+Surligneur ¦ Маркер ¦ Маркер
+Crayon fin ¦ Тонкий карандаш ¦ Тонкий олівець
+Craie (grain) ¦ Мел (зерно) ¦ Крейда (зерно)
+Craie ¦ Мел ¦ Крейда
+Fusain ¦ Уголь ¦ Вугіль
+Dégradé inversé ¦ Градиент инвертирован ¦ Градієнт інвертовано
+Dégradé : tramage ¦ Градиент: дизеринг ¦ Градієнт: дизеринг
+Dégradé : sans tramage ¦ Градиент: без дизеринга ¦ Градієнт: без дизерингу
+▦ Dégradé ¦ ▦ Градиент ¦ ▦ Градієнт
+Clic : ajouter un arrêt de couleur à cet endroit ¦ Щелчок: добавить здесь контрольную точку цвета ¦ Клац: додати тут контрольну точку кольору
+Clic sur la barre : un arrêt de plus · glisse un arrêt pour le déplacer, vers le bas pour l’enlever ¦ Щелчок по полосе: ещё одна точка · перетащи точку, чтобы сдвинуть её, вниз — чтобы убрать ¦ Клац по смузі: ще одна точка · перетягни точку, щоб зсунути її, донизу — щоб прибрати
+Mélange ¦ Смешивание ¦ Змішування
+Classique (RVB) ¦ Классическое (RGB) ¦ Класичне (RGB)
+Perceptuel (plus doux) ¦ Перцептивное (мягче) ¦ Перцептивне (м’якше)
+Par les teintes ¦ Через оттенки ¦ Через відтінки
+Au-delà des bouts ¦ За концами ¦ За кінцями
+Couleur des bouts ¦ Цвет концов ¦ Колір кінців
+Répéter ¦ Повторять ¦ Повторювати
+Répéter en miroir ¦ Повторять зеркально ¦ Повторювати дзеркально
+Le début devient la fin ¦ Начало становится концом ¦ Початок стає кінцем
+⇄ Retourner les arrêts ¦ ⇄ Развернуть точки ¦ ⇄ Розвернути точки
+Espacer également ¦ Распределить равномерно ¦ Розподілити рівномірно
+Couleur de l’arrêt ¦ Цвет точки ¦ Колір точки
+Arrêt choisi ¦ Выбранная точка ¦ Вибрана точка
+Milieu vers le suivant ¦ Середина до следующей ¦ Середина до наступної
+Où se trouve le mélange à moitié entre cet arrêt et le suivant (le petit losange de Photoshop). ¦ Где находится смешивание наполовину между этой точкой и следующей (маленький ромб в Photoshop). ¦ Де міститься змішування навпіл між цією точкою й наступною (маленький ромб у Photoshop).
+✕ Enlever cet arrêt ¦ ✕ Убрать эту точку ¦ ✕ Прибрати цю точку
+Supprimer ce préréglage ¦ Удалить этот набор настроек ¦ Видалити цей набір налаштувань
+Garder ce dégradé ¦ Сохранить этот градиент ¦ Зберегти цей градієнт
+Mon dégradé ¦ Мой градиент ¦ Мій градієнт
+Premier plan → transparent ¦ Передний план → прозрачный ¦ Передній план → прозорий
+Noir → blanc ¦ Чёрный → белый ¦ Чорний → білий
+Blanc → transparent ¦ Белый → прозрачный ¦ Білий → прозорий
+Vignette (bords sombres) ¦ Виньетка (тёмные края) ¦ Віньєтка (темні краї)
+Arc-en-ciel ¦ Радуга ¦ Веселка
+Cuivre ¦ Медь ¦ Мідь
+Chrome ¦ Хром ¦ Хром
+Or ¦ Золото ¦ Золото
+Vieux papier ¦ Старая бумага ¦ Старий папір
+Nuit ¦ Ночь ¦ Ніч
+Printemps ¦ Весна ¦ Весна
+Mer ¦ Море ¦ Море
+Coucher de soleil ¦ Закат ¦ Захід сонця
+▭ Linéaire ¦ ▭ Линейный ¦ ▭ Лінійний
+◉ Radial ¦ ◉ Радиальный ¦ ◉ Радіальний
+◔ Angle (conique) ¦ ◔ Угловой (конический) ¦ ◔ Кутовий (конічний)
+⇋ Réfléchi ¦ ⇋ Зеркальный ¦ ⇋ Дзеркальний
+◇ Losange ¦ ◇ Ромбовидный ¦ ◇ Ромбоподібний
+Damier ¦ Шахматка ¦ Шахівниця
+Pois ¦ Горошек ¦ Горошок
+Rayures ¦ Полоски ¦ Смужки
+Hachures ¦ Штриховка ¦ Штрихування
+Briques ¦ Кирпичи ¦ Цегла
+Chevrons ¦ Шевроны ¦ Шеврони
+Losanges ¦ Ромбы ¦ Ромби
+Vagues ¦ Волны ¦ Хвилі
+Toile ¦ Холст ¦ Полотно
+Croix ¦ Крестики ¦ Хрестики
+Fleurs de lys ¦ Геральдические лилии ¦ Геральдичні лілеї
+Clique maintenant à l’endroit à recopier. ¦ Теперь щёлкни по месту, которое нужно скопировать. ¦ Тепер клацни по місцю, яке треба скопіювати.
+Ce calque est verrouillé : déverrouille-le dans Calques. ¦ Этот слой заблокирован: разблокируй его в «Слоях». ¦ Цей шар заблоковано: розблокуй його в «Шарах».
+Texte effacé ¦ Текст стёрт ¦ Текст стерто
+Sélection vide ¦ Пустое выделение ¦ Порожнє виділення
+Sélection ajoutée ¦ Выделение добавлено ¦ Виділення додано
+Sélection retirée ¦ Выделение вычтено ¦ Виділення віднято
+Image remplacée : même place, même taille, même rotation. ¦ Изображение заменено: то же место, тот же размер, тот же поворот. ¦ Зображення замінено: те саме місце, той самий розмір, той самий поворот.
+Image placée : ➤ glisse-la, tire un coin pour la taille (⇧ : libre), la poignée ronde pour la tourner. ¦ Изображение размещено: ➤ перетащи его, тяни за угол для размера (⇧: свободно), круглый маркер — чтобы повернуть. ¦ Зображення розміщено: ➤ перетягни його, тягни за кут для розміру (⇧: вільно), круглий маркер — щоб повернути.
+Ce fichier n’est pas une image. ¦ Этот файл — не изображение. ¦ Цей файл — не зображення.
+Remplacer l’image de l’objet dynamique ¦ Заменить изображение смарт-объекта ¦ Замінити зображення смарт-об’єкта
+Remplacer par cette image ¦ Заменить этим изображением ¦ Замінити цим зображенням
+La nouvelle image prend la place, la taille et la rotation de l’ancienne. ¦ Новое изображение занимает место, размер и поворот старого. ¦ Нове зображення займає місце, розмір і поворот старого.
+Elle arrive sur un nouveau calque, en objet dynamique 🧩 (agrandir, réduire, tourner sans perte). Tu peux aussi glisser un fichier sur la photo, ou coller une image copiée (⌘V). ¦ Оно появляется на новом слое как смарт-объект 🧩 (увеличивать, уменьшать, поворачивать без потерь). Можно также перетащить файл на фото или вставить скопированное изображение (⌘V). ¦ Воно з’являється на новому шарі як смарт-об’єкт 🧩 (збільшувати, зменшувати, повертати без втрат). Можна також перетягнути файл на фото або вставити скопійоване зображення (⌘V).
+Sélection automatique ¦ Автоматическое выделение ¦ Автоматичне виділення
+Ce calque est verrouillé : choisis-en un autre dans Calques. ¦ Этот слой заблокирован: выбери другой в «Слоях». ¦ Цей шар заблоковано: вибери інший у «Шарах».
+Endroit à recopier choisi : peins maintenant sur la zone à couvrir. ¦ Место для копирования выбрано: теперь рисуй по области, которую нужно закрыть. ¦ Місце для копіювання вибрано: тепер малюй по ділянці, яку треба закрити.
+Choisis d’abord l’endroit à recopier (bouton 🎯 ou ⌥ + clic). ¦ Сначала выбери место для копирования (кнопка 🎯 или ⌥ + щелчок). ¦ Спершу вибери місце для копіювання (кнопка 🎯 або ⌥ + клац).
+La photo n’est plus dans les calques : « ↺ Remettre la photo » (onglet Calques). ¦ Фото больше нет в слоях: «↺ Вернуть фото» (вкладка «Слои»). ¦ Фото більше немає в шарах: «↺ Повернути фото» (вкладка «Шари»).
+La photo est verrouillée (🔒 dans Calques). ¦ Фото заблокировано (🔒 в «Слоях»). ¦ Фото заблоковано (🔒 у «Шарах»).
+Tampon : zone recopiée (calque ✨ Retouches) ¦ Штамп: область скопирована (слой ✨ Ретушь) ¦ Штамп: ділянку скопійовано (шар ✨ Ретуш)
+Fais d’abord une sélection (outils ⬚ ◯ ➰ ✒︎ 🪄). ¦ Сначала сделай выделение (инструменты ⬚ ◯ ➰ ✒︎ 🪄). ¦ Спершу зроби виділення (інструменти ⬚ ◯ ➰ ✒︎ 🪄).
+Aucun filtre utilisé pour l’instant (menu Filtre). ¦ Пока не использовано ни одного фильтра (меню «Фильтр»). ¦ Поки не використано жодного фільтра (меню «Фільтр»).
+Opacité du calque (dosage) ¦ Непрозрачность слоя (дозировка) ¦ Непрозорість шару (дозування)
+Valeurs de départ ¦ Исходные значения ¦ Початкові значення
+Rien n’est détruit : le filtre est sur son propre calque. Plus tard : Calques → le calque → onglet ✨ Filtres → « régler… ». ¦ Ничего не разрушается: фильтр — на собственном слое. Позже: Слои → слой → вкладка ✨ Фильтры → «настроить…». ¦ Ніщо не руйнується: фільтр — на власному шарі. Пізніше: Шари → шар → вкладка ✨ Фільтри → «налаштувати…».
+Filtre enlevé du calque ¦ Фильтр убран со слоя ¦ Фільтр прибрано з шару
+Ordre des filtres ¦ Порядок фильтров ¦ Порядок фільтрів
+Filtres enlevés ¦ Фильтры убраны ¦ Фільтри прибрано
+Plus de place pour les actions : supprimes-en une. ¦ Больше нет места для операций: удали одну. ¦ Більше немає місця для операцій: видали одну.
+⚡ Actions ¦ ⚡ Операции ¦ ⚡ Операції
+Nom de l’action (ex. « Photos de l’album 1930 ») ¦ Название операции (напр. «Фото из альбома 1930») ¦ Назва операції (напр. «Фото з альбому 1930»)
+Une action garde les réglages de la photo (exposition, niveaux, courbe, teinte, filtres, poussière, colorisation…) et ses calques de réglage sans masque. On la remet sur une autre photo, ou sur plusieurs d’un coup : chacune reçoit une <b>nouvelle version</b>, l’original est gardé. ¦ Операция хранит коррекцию фото (экспозиция, уровни, кривая, цветовой тон, фильтры, пыль, раскрашивание…) и его корректирующие слои без маски. Её можно применить к другому фото или к нескольким сразу: каждое получает <b>новую версию</b>, оригинал сохраняется. ¦ Операція зберігає коригування фото (експозиція, рівні, крива, відтінок, фільтри, пил, розфарбування…) і його коригувальні шари без маски. Її можна застосувати до іншого фото або до кількох одразу: кожне отримує <b>нову версію</b>, оригінал зберігається.
+Enregistrer cette action dans un fichier, pour la garder ou la donner ¦ Сохранить эту операцию в файл, чтобы хранить её или передать ¦ Зберегти цю операцію у файл, щоб зберігати її або передати
+Sur cette photo ¦ На этом фото ¦ На цьому фото
+Sur plusieurs photos… ¦ На нескольких фото… ¦ На кількох фото…
+Aucune action enregistrée pour l’instant ¦ Пока нет сохранённых операций ¦ Поки немає збережених операцій
+« ＋ Enregistrer les réglages actuels » les garde pour les rejouer sur d’autres photos. ¦ «＋ Сохранить текущую коррекцию» запоминает её, чтобы повторить на других фото. ¦ «＋ Зберегти поточне коригування» запам’ятовує його, щоб повторити на інших фото.
+Les photos à retoucher ¦ Фото для ретуши ¦ Фото для ретуші
+Prendre ces photos ¦ Взять эти фото ¦ Взяти ці фото
+＋ Choisir des photos… ¦ ＋ Выбрать фото… ¦ ＋ Вибрати фото…
+afficher la nouvelle version ¦ показать новую версию ¦ показати нову версію
+Aucune photo choisie. ¦ Фото не выбрано. ¦ Фото не вибрано.
+refusé ¦ отклонено ¦ відхилено
+fx Effets du calque ¦ fx Эффекты слоя ¦ fx Ефекти шару
+Fond (le contenu seulement, pas les effets) ¦ Заливка (только содержимое, не эффекты) ¦ Заливка (лише вміст, не ефекти)
+Lueur externe ¦ Внешнее свечение ¦ Зовнішнє світіння
+Incrustation de couleur ¦ Наложение цвета ¦ Накладання кольору
+à l’extérieur ¦ снаружи ¦ ззовні
+au milieu ¦ по центру ¦ по центру
+à l’intérieur ¦ внутри ¦ усередині
+Tout enlever ¦ Убрать всё ¦ Прибрати все
+🔍 Plis et rayures ¦ 🔍 Заломы и царапины ¦ 🔍 Заломи й подряпини
+Recherche des plis… ¦ Поиск заломов… ¦ Пошук заломів…
+garder le grain autour ¦ сохранять зерно вокруг ¦ зберігати зерно довкола
+🪡 Plutôt à la main ¦ 🪡 Лучше вручную ¦ 🪡 Краще вручну
+✓ Réparer ces lignes ¦ ✓ Исправить эти линии ¦ ✓ Виправити ці лінії
+Aucun pli trouvé : monte la sensibilité, ou répare à la main avec le pinceau 🪡. ¦ Заломы не найдены: повысь чувствительность или исправь вручную кистью 🪡. ¦ Заломів не знайдено: підвищ чутливість або виправ вручну пензлем 🪡.
+Réparation… ¦ Исправление… ¦ Виправлення…
+✨ Plis et rayures comblés ¦ ✨ Заломы и царапины заполнены ¦ ✨ Заломи й подряпини заповнено
+🌫️ Débruitage ¦ 🌫️ Шумоподавление ¦ 🌫️ Зменшення шуму
+adoucit le grain sans perdre les contours ¦ смягчает зерно, не теряя контуров ¦ пом’якшує зерно, не втрачаючи контурів
+🧹 Poussières et rayures ¦ 🧹 Пыль и царапины ¦ 🧹 Пил і подряпини
+les petits points blancs ou noirs ¦ мелкие белые или чёрные точки ¦ дрібні білі чи чорні точки
+🩹 Plis et fines déchirures ¦ 🩹 Заломы и мелкие разрывы ¦ 🩹 Заломи й дрібні розриви
+lignes fines repérées puis comblées ¦ тонкие линии найдены и заполнены ¦ тонкі лінії знайдено й заповнено
+🎚 Contraste et niveaux automatiques ¦ 🎚 Автоматический контраст и уровни ¦ 🎚 Автоматичний контраст і рівні
+noirs bien noirs, blancs bien blancs ¦ чёрное — по-настоящему чёрное, белое — по-настоящему белое ¦ чорне — справді чорне, біле — справді біле
+🔎 Netteté douce ¦ 🔎 Мягкая резкость ¦ 🔎 М’яка різкість
+un peu plus de piqué ¦ чуть больше чёткости ¦ трохи більше чіткості
+🌈 Colorisation ¦ 🌈 Раскрашивание ¦ 🌈 Розфарбування
+couleurs d’époque (photo en noir et blanc) ¦ цвета той эпохи (чёрно-белое фото) ¦ кольори тієї доби (чорно-біле фото)
+la photo a déjà des couleurs : coche si tu veux quand même ¦ на фото уже есть цвета: отметь, если всё равно хочешь ¦ фото вже має кольори: познач, якщо все одно хочеш
+Coche les étapes à garder ; chacune devient un calque « ✨ » que tu peux ensuite cacher ou doser. ↶ défait tout d’un coup. ¦ Отметь шаги, которые нужно оставить; каждый станет слоем «✨», который потом можно скрыть или ослабить. ↶ отменяет всё сразу. ¦ Познач кроки, які треба залишити; кожен стане шаром «✨», який потім можна приховати або послабити. ↶ скасовує все одразу.
+Garder : {what} ¦ Оставить: {what} ¦ Залишити: {what}
+détail au centre ¦ деталь в центре ¦ деталь у центрі
+Aperçus… ¦ Предпросмотр… ¦ Попередній перегляд…
+aucun pli trouvé à cette intensité ¦ при такой силе заломы не найдены ¦ за такої сили заломів не знайдено
+Coche au moins une étape. ¦ Отметь хотя бы один шаг. ¦ Познач хоча б один крок.
+✨ Plis et fines déchirures ¦ ✨ Заломы и мелкие разрывы ¦ ✨ Заломи й дрібні розриви
+✨ Poussières et rayures ¦ ✨ Пыль и царапины ¦ ✨ Пил і подряпини
+✨ Débruitage ¦ ✨ Шумоподавление ¦ ✨ Зменшення шуму
+✨ Contraste et niveaux ¦ ✨ Контраст и уровни ¦ ✨ Контраст і рівні
+✨ Netteté douce ¦ ✨ Мягкая резкость ¦ ✨ М’яка різкість
+✨ Colorisation ¦ ✨ Раскрашивание ¦ ✨ Розфарбування
+Colorisation ¦ Раскрашивание ¦ Розфарбування
+Couleurs (pinceau) ¦ Цвета (кисть) ¦ Кольори (пензель)
+✨ Retouches (taches, plis, tampon) ¦ ✨ Ретушь (пятна, заломы, штамп) ¦ ✨ Ретуш (плями, заломи, штамп)
+🪪 Photo d’identité ¦ 🪪 Фото на документы ¦ 🪪 Фото на документи
+Les yeux à l’horizontale, toujours à la même hauteur : tous les portraits faits ainsi ont le même format. ¦ Глаза горизонтально, всегда на одной высоте: все портреты, сделанные так, имеют одинаковый формат. ¦ Очі горизонтально, завжди на одній висоті: усі портрети, зроблені так, мають однаковий формат.
+✓ Yeux trouvés sur le visage. ¦ ✓ Глаза найдены на лице. ¦ ✓ Очі знайдено на обличчі.
+✓ D’après l’identification de la photo : ajuste les ronds sur les yeux. ¦ ✓ По отметке на фото: подгони кружки на глаза. ¦ ✓ За позначкою на фото: підлаштуй кружечки на очі.
+⚠️ Visage non trouvé : glisse les deux ronds sur les yeux. ¦ ⚠️ Лицо не найдено: перетащи два кружка на глаза. ¦ ⚠️ Обличчя не знайдено: перетягни два кружечки на очі.
+Plusieurs fiches… ¦ Несколько карточек… ¦ Кілька карток…
+✓ Recadrer ¦ ✓ Кадрировать ¦ ✓ Кадрувати
+👤 Utiliser comme portrait… ¦ 👤 Использовать как портрет… ¦ 👤 Використати як портрет…
+Recadré en photo d’identité ¦ Кадрировано как фото на документы ¦ Кадровано як фото на документи
+3:4 (portrait classique) ¦ 3:4 (классический портрет) ¦ 3:4 (класичний портрет)
+35 × 45 mm (photo d’identité) ¦ 35 × 45 мм (фото на документы) ¦ 35 × 45 мм (фото на документи)
+Marge autour du visage ¦ Поле вокруг лица ¦ Поле навколо обличчя
+Hauteur des yeux ¦ Высота глаз ¦ Висота очей
+modèle absent ¦ модель отсутствует ¦ модель відсутня
+Recherche du visage… ¦ Поиск лица… ¦ Пошук обличчя…
+Photo non enregistrée. ¦ Фото не сохранено. ¦ Фото не збережено.
+Utiliser comme portrait de quelle fiche ? ¦ Использовать как портрет какой карточки? ¦ Використати як портрет якої картки?
+PHOTO D’IDENTITÉ ¦ ФОТО НА ДОКУМЕНТЫ ¦ ФОТО НА ДОКУМЕНТИ
+La photo recadrée est ajoutée aux médias de la fiche, puis devient son portrait (l’ancien portrait reste dans ses médias). ¦ Кадрированное фото добавляется в медиафайлы карточки, затем становится её портретом (старый портрет остаётся в её медиафайлах). ¦ Кадроване фото додається до медіафайлів картки, потім стає її портретом (старий портрет залишається в її медіафайлах).
+Choisis une personne dans la liste. ¦ Выбери человека из списка. ¦ Вибери людину зі списку.
+RETOUCHE · PHOTO D’IDENTITÉ ¦ РЕТУШЬ · ФОТО НА ДОКУМЕНТЫ ¦ РЕТУШ · ФОТО НА ДОКУМЕНТИ
+🪪 Portraits de plusieurs fiches ¦ 🪪 Портреты для нескольких карточек ¦ 🪪 Портрети для кількох карток
+Choisis les fiches : pour chacune, l’app prend son portrait (ou sa première photo), trouve le visage et le cadre au même format que les autres (yeux à la même hauteur). Tu vérifies, puis « Utiliser comme portraits » : chaque photo recadrée entre dans les médias de sa fiche et devient son portrait (l’ancien reste). ¦ Выбери карточки: для каждой приложение берёт её портрет (или первое фото), находит лицо и кадрирует его в том же формате, что и другие (глаза на одной высоте). Ты проверяешь, затем «Использовать как портреты»: каждое кадрированное фото попадает в медиафайлы своей карточки и становится её портретом (старый остаётся). ¦ Вибери картки: для кожної застосунок бере її портрет (або перше фото), знаходить обличчя й кадрує його в тому самому форматі, що й інші (очі на одній висоті). Ти перевіряєш, потім «Використати як портрети»: кожне кадроване фото потрапляє до медіафайлів своєї картки й стає її портретом (старий залишається).
+🔍 Préparer les portraits ¦ 🔍 Подготовить портреты ¦ 🔍 Підготувати портрети
+Aucune fiche choisie pour l’instant ¦ Пока не выбрано ни одной карточки ¦ Поки не вибрано жодної картки
+Choisis une ou plusieurs personnes ci-dessus, puis « 🔍 Préparer les portraits ». ¦ Выбери одного или нескольких человек выше, затем «🔍 Подготовить портреты». ¦ Вибери одну чи кілька людей вище, потім «🔍 Підготувати портрети».
+Choisis d’abord une ou plusieurs fiches. ¦ Сначала выбери одну или несколько карточек. ¦ Спершу вибери одну чи кілька карток.
+aucune photo dans la fiche ¦ в карточке нет фото ¦ у картці немає фото
+yeux trouvés ¦ глаза найдены ¦ очі знайдено
+d’après l’identification ¦ по отметке на фото ¦ за позначкою на фото
+✓ portrait mis à jour ¦ ✓ портрет обновлён ¦ ✓ портрет оновлено
+Utiliser comme portraits ¦ Использовать как портреты ¦ Використати як портрети
+La rotation n’est pas encore prête : réessaie dans un instant. ¦ Поворот ещё не готов: попробуй ещё раз через мгновение. ¦ Поворот ще не готовий: спробуй ще раз за мить.
+Rotation de l’image ¦ Поворот изображения ¦ Поворот зображення
+Rotation de l’image : 90° horaire ¦ Поворот изображения: 90° по часовой ¦ Поворот зображення: 90° за годинниковою
+Rotation de l’image : 90° antihoraire ¦ Поворот изображения: 90° против часовой ¦ Поворот зображення: 90° проти годинникової
+Rotation de l’image : 180° ¦ Поворот изображения: 180° ¦ Поворот зображення: 180°
+Rotation de l’image : {a}° horaire ¦ Поворот изображения: {a}° по часовой ¦ Поворот зображення: {a}° за годинниковою
+Rotation de l’image : {a}° antihoraire ¦ Поворот изображения: {a}° против часовой ¦ Поворот зображення: {a}° проти годинникової
+Symétrie horizontale de l’image ¦ Отражение изображения по горизонтали ¦ Віддзеркалення зображення по горизонталі
+Symétrie verticale de l’image ¦ Отражение изображения по вертикали ¦ Віддзеркалення зображення по вертикалі
+Perspective figée ¦ Перспектива закреплена ¦ Перспективу закріплено
+Le recadrage d’avant a été retiré (il ne tenait plus droit) : refais-le si besoin, ou ↶ Annuler. ¦ Прежнее кадрирование убрано (оно больше не было ровным): сделай его снова при необходимости или ↶ Отменить. ¦ Попереднє кадрування прибрано (воно вже не було рівним): зроби його знову за потреби або ↶ Відмінити.
+📐 Redresser l’horizon ¦ 📐 Выровнять горизонт ¦ 📐 Вирівняти горизонт
+L’angle mesuré sur ta ligne : la photo tourne de cet angle pour la remettre droite. ¦ Угол, измеренный по твоей линии: фото поворачивается на этот угол, чтобы стать ровным. ¦ Кут, виміряний за твоєю лінією: фото повертається на цей кут, щоб стати рівним.
+Coins ajoutés autour ¦ Углы, добавленные вокруг ¦ Кути, додані навколо
+Transparents (PNG) ¦ Прозрачные (PNG) ¦ Прозорі (PNG)
+✂️ Recadrer pour enlever les coins vides ¦ ✂️ Кадрировать, чтобы убрать пустые углы ¦ ✂️ Кадрувати, щоб прибрати порожні кути
+Tous les calques, masques, textes et la sélection tournent avec la photo. ↶ Annuler (⌘Z) revient comme avant. ¦ Все слои, маски, тексты и выделение поворачиваются вместе с фото. ↶ Отменить (⌘Z) возвращает как было. ¦ Усі шари, маски, тексти й виділення повертаються разом із фото. ↶ Відмінити (⌘Z) повертає як було.
+Donne un angle entre 0,01 et 359,99°. ¦ Укажи угол от 0,01 до 359,99°. ¦ Вкажи кут від 0,01 до 359,99°.
+Trace une ligne le long de l’horizon (ou d’un mur bien droit) : la photo tournera pour la remettre droite. Échap pour arrêter. ¦ Проведи линию вдоль горизонта (или ровной стены): фото повернётся, чтобы стать ровным. Esc — чтобы прекратить. ¦ Проведи лінію вздовж горизонту (або рівної стіни): фото повернеться, щоб стати рівним. Esc — щоб припинити.
+Cette ligne est déjà droite : rien à tourner. ¦ Эта линия уже ровная: поворачивать нечего. ¦ Ця лінія вже рівна: повертати нічого.
+Photo prise avec le téléphone tourné : elle est enregistrée couchée. ¦ Фото снято с повёрнутым телефоном: оно сохранено лёжа. ¦ Фото знято з повернутим телефоном: його збережено лежачи.
+↻ Remettre droite ¦ ↻ Поставить прямо ¦ ↻ Поставити прямо
+Photo remise droite (orientation du téléphone) ¦ Фото поставлено прямо (ориентация телефона) ¦ Фото поставлено прямо (орієнтація телефона)
+Les retouches en cours seront perdues (💾 Enregistrer le projet les garde pour plus tard). ¦ Текущая ретушь будет потеряна (💾 «Сохранить проект» сохранит её на потом). ¦ Поточну ретуш буде втрачено (💾 «Зберегти проєкт» збереже її на потім).
+Passer à la retouche simple ? ¦ Перейти к простой ретуши? ¦ Перейти до простої ретуші?
+Passer sans enregistrer ¦ Перейти без сохранения ¦ Перейти без збереження
+Le PSD n’est pas encore prêt : réessaie dans un instant. ¦ PSD ещё не готов: попробуй ещё раз через мгновение. ¦ PSD ще не готовий: спробуй ще раз за мить.
+L’assemblage de photos n’est pas encore prêt. ¦ Склейка фото ещё не готова. ¦ Склеювання фото ще не готове.
+Cet outil n’est pas encore prêt : réessaie dans un instant. ¦ Этот инструмент ещё не готов: попробуй ещё раз через мгновение. ¦ Цей інструмент ще не готовий: спробуй ще раз за мить.
+Recherche du sujet… ¦ Поиск объекта… ¦ Пошук об’єкта…
+Sujet introuvable : le fond touche tout le bord. Essaie avec moins de tolérance (🪄), ou le lasso. ¦ Объект не найден: фон касается всего края. Попробуй с меньшим допуском (🪄) или лассо. ¦ Об’єкт не знайдено: тло торкається всього краю. Спробуй із меншим допуском (🪄) або ласо.
+Sujet sélectionné : ⇧ + baguette ou lasso pour ajouter, ⌥ pour enlever ; « Masque » pour l’appliquer. Tolérance (🪄) : jusqu’où va le fond. ¦ Объект выделен: ⇧ + палочка или лассо — добавить, ⌥ — вычесть; «Маска» — чтобы применить. Допуск (🪄): насколько далеко заходит фон. ¦ Об’єкт виділено: ⇧ + паличка або ласо — додати, ⌥ — відняти; «Маска» — щоб застосувати. Допуск (🪄): наскільки далеко сягає тло.
+Sujet sélectionné ¦ Объект выделен ¦ Об’єкт виділено
+La photo semble déjà droite. ¦ Фото, похоже, уже ровное. ¦ Фото, схоже, вже рівне.
+Des corrections (taches, tampon) sont déjà faites : elles vont bouger avec la remise à plat. ¦ Некоторые исправления (пятна, штамп) уже сделаны: они сдвинутся при выпрямлении. ¦ Деякі виправлення (плями, штамп) уже зроблено: вони зсунуться під час випрямлення.
+Redresser la perspective ? ¦ Исправить перспективу? ¦ Виправити перспективу?
+Perspective redressée ¦ Перспектива исправлена ¦ Перспективу виправлено
+Perspective enlevée ¦ Перспектива убрана ¦ Перспективу прибрано
+Peins les couleurs (pinceau doux) : le calque est en fusion « Couleur », la lumière de la photo est gardée. 🧽 pour corriger, opacité du calque pour doser. ¦ Рисуй цвета (мягкой кистью): слой в режиме «Цветность», свет на фото сохраняется. 🧽 — чтобы исправить, непрозрачность слоя — чтобы ослабить. ¦ Малюй кольори (м’яким пензлем): шар у режимі «Колір», світло на фото зберігається. 🧽 — щоб виправити, непрозорість шару — щоб послабити.
+Recherche des taches… ¦ Поиск пятен… ¦ Пошук плям…
+Aucune tache trouvée : augmente la sensibilité ou la taille. ¦ Пятна не найдены: увеличь чувствительность или размер. ¦ Плям не знайдено: збільш чутливість або розмір.
+✨ Jaunissement enlevé ¦ ✨ Желтизна убрана ¦ ✨ Жовтизну прибрано
+Jaunissement enlevé sur le calque de réglage « ✨ Jaunissement enlevé » : la photo n’est pas touchée. ¦ Желтизна убрана на корректирующем слое «✨ Желтизна убрана»: фото не затронуто. ¦ Жовтизну прибрано на коригувальному шарі «✨ Жовтизну прибрано»: фото не змінено.
+Jaunissement enlevé (calque de réglage) ¦ Желтизна убрана (корректирующий слой) ¦ Жовтизну прибрано (коригувальний шар)
+Entoure d’abord le visage avec l’ellipse ◯ (glisse sur la photo), puis reclique « Visage plus net ». ¦ Сначала обведи лицо эллипсом ◯ (перетащи по фото), затем снова нажми «Лицо чётче». ¦ Спершу обведи обличчя еліпсом ◯ (перетягни по фото), потім знову натисни «Обличчя чіткіше».
+Visage débruité et accentué sur un calque à part : son opacité dose l’effet. ¦ Шум на лице убран и резкость усилена на отдельном слое: его непрозрачность регулирует эффект. ¦ Шум на обличчі прибрано й різкість посилено на окремому шарі: його непрозорість регулює ефект.
+Correcteur prêt : glisse le long de la rayure ou du pli (zoome pour être précis). ¦ Корректор готов: проведи вдоль царапины или залома (увеличь для точности). ¦ Коректор готовий: проведи вздовж подряпини чи залому (збільш для точності).
+✨ Vieille photo ravivée ¦ ✨ Оживлённое старое фото ¦ ✨ Оживлене старе фото
+✨ Réglage automatique ¦ ✨ Автонастройка ¦ ✨ Автоналаштування
+Fais d’abord une sélection. ¦ Сначала сделай выделение. ¦ Спершу зроби виділення.
+Masque qui cache tout ¦ Маска, скрывающая всё ¦ Маска, що приховує все
+Ce calque n’a pas de masque (Calque → Ajouter un masque). ¦ У этого слоя нет маски (Слой → Добавить маску). ¦ Цей шар не має маски (Шар → Додати маску).
+Ce calque n’a pas de masque. ¦ У этого слоя нет маски. ¦ Цей шар не має маски.
+Sélection inversée ¦ Выделение инвертировано ¦ Виділення інвертовано
+Agrandir la sélection ¦ Расширить выделение ¦ Розширити виділення
+Réduire la sélection ¦ Сжать выделение ¦ Стиснути виділення
+De combien de points (de l’aperçu) ? ¦ На сколько точек (предпросмотра)? ¦ На скільки точок (попереднього перегляду)?
+Sélection agrandie ¦ Выделение расширено ¦ Виділення розширено
+Sélection réduite ¦ Выделение сжато ¦ Виділення стиснуто
+Contour progressif de la sélection ¦ Растушёвка выделения ¦ Розтушовування виділення
+Copie de la sélection ¦ Копия выделения ¦ Копія виділення
+Sélection copiée sur un calque ¦ Выделение скопировано на слой ¦ Виділення скопійовано на шар
+Remplissage ¦ Заливка ¦ Заливка
+Zone effacée de la photo : elle sera transparente (image enregistrée en PNG). ¦ Область стёрта с фото: она будет прозрачной (изображение сохраняется в PNG). ¦ Ділянку стерто з фото: вона буде прозорою (зображення зберігається в PNG).
+Sélection effacée ¦ Выделение стёрто ¦ Виділення стерто
+Recadré sur la sélection ¦ Кадрировано по выделению ¦ Кадровано за виділенням
+Filtres de ce calque ¦ Фильтры этого слоя ¦ Фільтри цього шару
+Plus tôt ¦ Раньше ¦ Раніше
+un filtre… ¦ фильтр… ¦ фільтр…
+＋ Ajouter ¦ ＋ Добавить ¦ ＋ Додати
+✨ Menu <b>Filtre</b> : chaque filtre se pose sur son propre calque (rien n’est détruit) : on le règle, on le dose avec l’opacité du calque, on le limite avec un masque 🎭, on le cache 👁. ¦ ✨ Меню <b>Фильтр</b>: каждый фильтр ложится на собственный слой (ничего не разрушается): его можно настроить, ослабить непрозрачностью слоя, ограничить маской 🎭, скрыть 👁. ¦ ✨ Меню <b>Фільтр</b>: кожен фільтр лягає на власний шар (ніщо не руйнується): його можна налаштувати, послабити непрозорістю шару, обмежити маскою 🎭, приховати 👁.
+Réglages remis à zéro ¦ Коррекция сброшена ¦ Коригування скинуто
+Point de courbe enlevé ¦ Точка кривой убрана ¦ Точку кривої прибрано
+Supprimer ce point ¦ Удалить эту точку ¦ Видалити цю точку
+Point de la courbe ¦ Точка кривой ¦ Точка кривої
+Masque en rouge : ce qui est caché (touche \ pour revenir) ¦ Маска красным: то, что скрыто (клавиша \, чтобы вернуться) ¦ Маска червоним: те, що приховано (клавіша \, щоб повернутися)
+Pas encore enregistré comme projet : 💾 Enregistrer garde tout le travail pour continuer plus tard ¦ Ещё не сохранено как проект: 💾 «Сохранить» сохраняет всю работу, чтобы продолжить позже ¦ Ще не збережено як проєкт: 💾 «Зберегти» зберігає всю роботу, щоб продовжити пізніше
+Enregistrer le projet sous un autre nom ¦ Сохранить проект под другим названием ¦ Зберегти проєкт під іншою назвою
+Nom du nouveau projet (pour le retrouver dans « 📂 Projets… ») : ¦ Название нового проекта (чтобы найти его в «📂 Проекты…»): ¦ Назва нового проєкту (щоб знайти його в «📂 Проєкти…»):
+Les retouches en cours seront perdues. ¦ Текущая ретушь будет потеряна. ¦ Поточну ретуш буде втрачено.
+Ouvrir un autre projet sans enregistrer ce travail ? ¦ Открыть другой проект, не сохранив эту работу? ¦ Відкрити інший проєкт, не зберігши цю роботу?
+Ouvrir sans enregistrer ¦ Открыть без сохранения ¦ Відкрити без збереження
+affichée ¦ показана ¦ показано
+en cours de retouche ¦ ретушируется ¦ ретушується
+Voir, comparer, revenir, renommer, supprimer (L3) ¦ Смотреть, сравнивать, возвращать, переименовывать, удалять (L3) ¦ Переглядати, порівнювати, повертати, перейменовувати, видаляти (L3)
+Voir, comparer, revenir, renommer, supprimer ¦ Смотреть, сравнивать, возвращать, переименовывать, удалять ¦ Переглядати, порівнювати, повертати, перейменовувати, видаляти
+l’original est toujours gardé ¦ оригинал всегда сохраняется ¦ оригінал завжди зберігається
+Original ¦ Оригинал ¦ Оригінал
+Quitter cette retouche sans l’enregistrer ? ¦ Выйти из этой ретуши, не сохранив её? ¦ Вийти з цієї ретуші, не зберігши її?
+Pas de versions pour cette image. ¦ Для этого изображения нет версий. ¦ Для цього зображення немає версій.
+Bicubique, plus lisse (pour agrandir) ¦ Бикубическая, глаже (для увеличения) ¦ Бікубічна, гладкіша (для збільшення)
+Bicubique, plus net (pour réduire) ¦ Бикубическая, чётче (для уменьшения) ¦ Бікубічна, чіткіша (для зменшення)
+Bilinéaire ¦ Билинейная ¦ Білінійна
+Au plus proche (contours nets, pixels) ¦ По соседним (резкие края, пиксели) ¦ За сусідніми (різкі краї, пікселі)
+La taille de l’image enregistrée ou exportée (Image → Taille de l’image, Taille de la zone de travail) ¦ Размер сохраняемого или экспортируемого изображения (Изображение → Размер изображения, Размер холста) ¦ Розмір зображення, що зберігається чи експортується (Зображення → Розмір зображення, Розмір полотна)
+📏 Taille de l’image ¦ 📏 Размер изображения ¦ 📏 Розмір зображення
+pixels ¦ пиксели ¦ пікселі
+pour cent ¦ проценты ¦ відсотки
+Ajuster à un format ¦ Подогнать под формат ¦ Підігнати під формат
+— garder ces mesures — ¦ — сохранить эти размеры — ¦ — зберегти ці розміри —
+🔗 Conserver les proportions ¦ 🔗 Сохранять пропорции ¦ 🔗 Зберігати пропорції
+Résolution ¦ Разрешение ¦ Роздільність
+Rééchantillonner ¦ Изменить разрешение ¦ Змінити роздільність
+Méthode ¦ Метод ¦ Метод
+À l’impression ¦ При печати ¦ Під час друку
+↺ Remettre la taille d’origine ¦ ↺ Вернуть исходный размер ¦ ↺ Повернути початковий розмір
+La photo reste en pleine qualité pendant la retouche : la taille choisie s’applique quand tu enregistres ou exportes l’image. ↶ Annuler (⌘Z) revient à la taille d’avant. ¦ Во время ретуши фото остаётся в полном качестве: выбранный размер применяется, когда ты сохраняешь или экспортируешь изображение. ↶ Отменить (⌘Z) возвращает прежний размер. ¦ Під час ретуші фото лишається в повній якості: вибраний розмір застосовується, коли ти зберігаєш чи експортуєш зображення. ↶ Відмінити (⌘Z) повертає попередній розмір.
+✓ Assez grande pour imprimer en A5 à 300 ppp. ¦ ✓ Достаточно большое для печати в A5 при 300 dpi. ¦ ✓ Достатньо велике для друку в A5 при 300 dpi.
+⚠️ Trop petite pour imprimer en A5 à 300 ppp (il faut 1748 × 2480 px). ¦ ⚠️ Слишком маленькое для печати в A5 при 300 dpi (нужно 1748 × 2480 px). ¦ ⚠️ Замале для друку в A5 при 300 dpi (потрібно 1748 × 2480 px).
+Choisis une taille entre 1 et 30 000 pixels de côté (260 millions de pixels au plus). ¦ Выбери размер от 1 до 30 000 пикселей по стороне (не более 260 миллионов пикселей). ¦ Вибери розмір від 1 до 30 000 пікселів на бік (не більше 260 мільйонів пікселів).
+⬚ Taille de la zone de travail ¦ ⬚ Размер холста ¦ ⬚ Розмір полотна
+Nouvelle taille ¦ Новый размер ¦ Новий розмір
+Ancrage ¦ Привязка ¦ Прив’язка
+Où reste l’image ¦ Где остаётся изображение ¦ Де лишається зображення
+Relative (ajouter à la taille actuelle) ¦ Относительно (добавить к текущему размеру) ¦ Відносно (додати до поточного розміру)
+Au centre ¦ По центру ¦ По центру
+L’image reste à cet endroit ; la toile s’agrandit (ou se coupe) autour. ¦ Изображение остаётся на этом месте; холст увеличивается (или обрезается) вокруг. ¦ Зображення лишається на цьому місці; полотно збільшується (або обрізається) навколо.
+Fond de la zone ajoutée ¦ Фон добавленной области ¦ Тло доданої ділянки
+Transparent (PNG) ¦ Прозрачный (PNG) ¦ Прозоре (PNG)
+↺ Remettre la zone de départ ¦ ↺ Вернуть исходный холст ¦ ↺ Повернути початкове полотно
+↶ Annuler (⌘Z) revient à la zone d’avant. ¦ ↶ Отменить (⌘Z) возвращает прежний холст. ¦ ↶ Відмінити (⌘Z) повертає попереднє полотно.
+Choisis une taille entre 1 et 30 000 pixels de côté. ¦ Выбери размер от 1 до 30 000 пикселей по стороне. ¦ Вибери розмір від 1 до 30 000 пікселів на бік.
+Informations de l’image ¦ Сведения об изображении ¦ Відомості про зображення
+Ces informations sont écrites dans l’image enregistrée ou exportée (XMP, lisible par Photoshop, Lightroom, l’Explorateur…). ¦ Эти сведения записываются в сохраняемое или экспортируемое изображение (XMP, читается Photoshop, Lightroom, Проводником…). ¦ Ці відомості записуються в зображення, що зберігається чи експортується (XMP, читається Photoshop, Lightroom, Провідником…).
+Droits (copyright) ¦ Права (копирайт) ¦ Права (копірайт)
+Personnes reliées ¦ Связанные люди ¦ Пов’язані люди
+Image trop grande pour être enregistrée par le navigateur. ¦ Изображение слишком большое, чтобы браузер мог его сохранить. ¦ Зображення завелике, щоб браузер міг його зберегти.
+Image trop grande pour le navigateur. ¦ Изображение слишком большое для браузера. ¦ Зображення завелике для браузера.
+Copie retouchée ajoutée aux mêmes fiches. ¦ Отретушированная копия добавлена к тем же карточкам. ¦ Відретушовану копію додано до тих самих карток.
+Image enregistrée dans les Médias. ¦ Изображение сохранено в медиафайлах. ¦ Зображення збережено в медіафайлах.
+Nouvelle version affichée. L’original est gardé dans les versions. ¦ Показана новая версия. Оригинал сохранён в версиях. ¦ Показано нову версію. Оригінал збережено у версіях.
+Version enregistrée (non affichée). ¦ Версия сохранена (не показана). ¦ Версію збережено (не показано).
+Ouverture de la photo ¦ Открытие фото ¦ Відкриття фото
+La photo de départ n’a plus la même taille : vérifie les calques. ¦ Исходное фото уже другого размера: проверь слои. ¦ Початкове фото вже іншого розміру: перевір шари.
+Supprimer le projet (les photos et leurs versions restent) ¦ Удалить проект (фото и их версии остаются) ¦ Видалити проєкт (фото та їхні версії залишаються)
+Aucun projet de retouche pour l’instant ¦ Пока нет проектов ретуши ¦ Поки немає проєктів ретуші
+Dans la Retouche, « 💾 Enregistrer le projet ». ¦ В «Ретуши» — «💾 Сохранить проект». ¦ У «Ретуші» — «💾 Зберегти проєкт».
+Renommer le projet ¦ Переименовать проект ¦ Перейменувати проєкт
+La photo et ses versions restent. ¦ Фото и его версии остаются. ¦ Фото та його версії залишаються.
+Écran 16:9 — 1920 × 1080 ¦ Экран 16:9 — 1920 × 1080 ¦ Екран 16:9 — 1920 × 1080
+Carré — 1080 × 1080 ¦ Квадрат — 1080 × 1080 ¦ Квадрат — 1080 × 1080
+Carte postale — 1500 × 2100 ¦ Открытка — 1500 × 2100 ¦ Листівка — 1500 × 2100
+A4 portrait (150 dpi) — 1240 × 1754 ¦ A4 книжная (150 dpi) — 1240 × 1754 ¦ A4 книжкова (150 dpi) — 1240 × 1754
+A4 paysage (150 dpi) — 1754 × 1240 ¦ A4 альбомная (150 dpi) — 1754 × 1240 ¦ A4 альбомна (150 dpi) — 1754 × 1240
+A4 portrait (300 dpi) — 2480 × 3508 ¦ A4 книжная (300 dpi) — 2480 × 3508 ¦ A4 книжкова (300 dpi) — 2480 × 3508
+Autre taille… ¦ Другой размер… ¦ Інший розмір…
+⬜ Partir d’un canevas vide ¦ ⬜ Начать с пустого холста ¦ ⬜ Почати з порожнього полотна
+⬜ Canevas vide ¦ ⬜ Пустой холст ¦ ⬜ Порожнє полотно
+Créer et ouvrir ¦ Создать и открыть ¦ Створити й відкрити
+Une couleur… ¦ Цвет… ¦ Колір…
+Le canevas est ajouté aux Médias ; on y met ensuite des calques, des groupes, du texte, des formes, des photos (Sélection → calque)… ¦ Холст добавляется в медиафайлы; затем на него кладут слои, группы, текст, фигуры, фото (Выделение → слой)… ¦ Полотно додається до медіафайлів; потім на нього кладуть шари, групи, текст, фігури, фото (Виділення → шар)…
+Taille entre 16 et 8 000 pixels de côté. ¦ Размер от 16 до 8 000 пикселей по стороне. ¦ Розмір від 16 до 8 000 пікселів на бік.
+Canevas trop grand pour le navigateur. ¦ Холст слишком большой для браузера. ¦ Полотно завелике для браузера.
+Création impossible. ¦ Не удалось создать. ¦ Не вдалося створити.
+Canevas ¦ Холст ¦ Полотно
+Restaurer cette photo ¦ Восстановить это фото ¦ Відновити це фото
+Retoucher cette photo ¦ Ретушировать это фото ¦ Ретушувати це фото
+Une photo importée est ajoutée aux Médias (sans être rattachée à une fiche) ; ses retouches sont gardées comme versions. ¦ Импортированное фото добавляется в медиафайлы (без связи с карточкой); его ретушь сохраняется как версии. ¦ Імпортоване фото додається до медіафайлів (без зв’язку з карткою); його ретуш зберігається як версії.
+Rouvrir un travail de retouche enregistré ¦ Снова открыть сохранённую работу по ретуши ¦ Знову відкрити збережену роботу з ретуші
+📂 Projets… ¦ 📂 Проекты… ¦ 📂 Проєкти…
+Une image vide, pour dessiner, écrire ou assembler des calques ¦ Пустое изображение, чтобы рисовать, писать или собирать слои ¦ Порожнє зображення, щоб малювати, писати або збирати шари
+Trop grande : {w} × {h} points. L’agrandissement est limité à {max} points de côté (et {mp} millions de points). ¦ Слишком большое: {w} × {h} точек. Увеличение ограничено {max} точками по стороне (и {mp} млн точек). ¦ Завелике: {w} × {h} точок. Збільшення обмежене {max} точками на бік (і {mp} млн точок).
+Ta sélection est prise comme ciel ¦ Твоё выделение принято за небо ¦ Твоє виділення взято за небо
+Ciel trouvé : {cov} de la photo ¦ Небо найдено: {cov} фото ¦ Небо знайдено: {cov} фото
+calques « Ciel » et « Harmonisation » ¦ слои «Небо» и «Гармонизация» ¦ шари «Небо» і «Гармонізація»
+Ciel remplacé ({what}) ¦ Небо заменено ({what}) ¦ Небо замінено ({what})
+Personne détourée (dans ton rectangle) : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Человек вырезан (в твоём прямоугольнике): выбери фон; «Подправить контур» — чтобы исправить кистью. ¦ Людину вирізано (у твоєму прямокутнику): вибери тло; «Підправити контур» — щоб виправити пензлем.
+Personne détourée : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Человек вырезан: выбери фон; «Подправить контур» — чтобы исправить кистью. ¦ Людину вирізано: вибери тло; «Підправити контур» — щоб виправити пензлем.
+{w} × {h} points aujourd’hui ¦ {w} × {h} точек сейчас ¦ {w} × {h} точок зараз
+Cette image est déjà grande : l’agrandissement est limité à {max} points de côté. ¦ Это изображение уже большое: увеличение ограничено {max} точками по стороне. ¦ Це зображення вже велике: збільшення обмежене {max} точками на бік.
+×4 donnerait plus de {max} points de côté : seulement ×2. ¦ ×4 дало бы больше {max} точек по стороне: только ×2. ¦ ×4 дало б понад {max} точок на бік: лише ×2.
+Image agrandie téléchargée ({w} × {h}). ¦ Увеличенное изображение скачано ({w} × {h}). ¦ Збільшене зображення завантажено ({w} × {h}).
+Image agrandie ×{k} ({w} × {h}) rangée dans les médias. ¦ Изображение, увеличенное ×{k} ({w} × {h}), сохранено в медиафайлах. ¦ Зображення, збільшене ×{k} ({w} × {h}), збережено в медіафайлах.
+Nouvelle version agrandie ×{k} ({w} × {h}) affichée ; l’original reste dans les versions. ¦ Показана новая версия, увеличенная ×{k} ({w} × {h}); оригинал остаётся в версиях. ¦ Показано нову версію, збільшену ×{k} ({w} × {h}); оригінал залишається у версіях.
+☀️ Bleu dégagé ¦ ☀️ Ясное голубое ¦ ☀️ Ясне блакитне
+⛅ Beaux nuages ¦ ⛅ Красивые облака ¦ ⛅ Гарні хмари
+🌅 Coucher de soleil ¦ 🌅 Закат ¦ 🌅 Захід сонця
+⛈️ Ciel orageux ¦ ⛈️ Грозовое небо ¦ ⛈️ Грозове небо
+🌫️ Ciel blanc d’hiver ¦ 🌫️ Белое зимнее небо ¦ 🌫️ Біле зимове небо
+Agrandissement arrêté. ¦ Увеличение остановлено. ¦ Збільшення зупинено.
+Fil de calcul en panne. ¦ Поток вычислений сломался. ¦ Потік обчислень зламався.
+Recherche du ciel… ¦ Поиск неба… ¦ Пошук неба…
+Je ne trouve pas de ciel : il doit toucher le haut de la photo et être assez uni. Sélectionne-le toi-même (🪄 baguette, ➰ lasso), puis recommence : ta sélection sera prise comme ciel. ¦ Не могу найти небо: оно должно касаться верха фото и быть достаточно однородным. Выдели его сам(а) (🪄 палочка, ➰ лассо), затем начни снова: твоё выделение будет принято за небо. ¦ Не можу знайти небо: воно має торкатися верху фото й бути досить однорідним. Виділи його сам(а) (🪄 паличка, ➰ ласо), потім почни знову: твоє виділення буде взято за небо.
+Harmonisation du premier plan ¦ Гармонизация переднего плана ¦ Гармонізація переднього плану
+Ciel ¦ Небо ¦ Небо
+☁️ Remplacer le ciel ¦ ☁️ Заменить небо ¦ ☁️ Замінити небо
+Une photo de ciel : de la base, ou de l’ordinateur ¦ Фото неба: из базы или с компьютера ¦ Фото неба: з бази або з комп’ютера
+Une image… ¦ Изображение… ¦ Зображення…
+Taille du nouveau ciel ¦ Размер нового неба ¦ Розмір нового неба
+Position verticale ¦ Положение по вертикали ¦ Положення по вертикалі
+Position horizontale ¦ Положение по горизонтали ¦ Положення по горизонталі
+Avec une taille au-dessus de 100 % : quelle partie du ciel se voit (0 = le haut). ¦ При размере больше 100 %: какая часть неба видна (0 = верх). ¦ За розміру понад 100 %: яка частина неба видна (0 = верх).
+Fondu à l’horizon ¦ Растворение на горизонте ¦ Розчинення на горизонті
+Adoucit la limite entre le ciel et la terre (arbres, toits) : plus haut, plus fondu. ¦ Смягчает границу между небом и землёй (деревья, крыши): чем выше, тем мягче. ¦ Пом’якшує межу між небом і землею (дерева, дахи): що вище, то м’якше.
+Harmoniser le premier plan ¦ Гармонизировать передний план ¦ Гармонізувати передній план
+Le paysage prend un peu la couleur et la lumière du nouveau ciel, pour que tout aille ensemble. ¦ Пейзаж немного перенимает цвет и свет нового неба, чтобы всё сочеталось. ¦ Пейзаж трохи переймає колір і світло нового неба, щоб усе пасувало.
+Opacité du ciel ¦ Непрозрачность неба ¦ Непрозорість неба
+Peindre le masque du calque « Ciel » : ⬛ cacher (là où le ciel ne doit pas passer), ⬜ montrer ¦ Рисовать маску слоя «Небо»: ⬛ скрыть (там, где неба быть не должно), ⬜ показать ¦ Малювати маску шару «Небо»: ⬛ приховати (там, де неба не має бути), ⬜ показати
+🖌 Corriger le masque ¦ 🖌 Исправить маску ¦ 🖌 Виправити маску
+Rien n’est détruit : le ciel est un calque avec un masque. Si un bout de ciel manque ou déborde : « Corriger le masque », ou sélectionne le ciel toi-même (🪄, ➰) et relance. ¦ Ничего не разрушается: небо — это слой с маской. Если кусочка неба не хватает или он вылезает: «Исправить маску» или выдели небо сам(а) (🪄, ➰) и запусти снова. ¦ Ніщо не руйнується: небо — це шар із маскою. Якщо шматочка неба бракує або він вилазить: «Виправити маску» або виділи небо сам(а) (🪄, ➰) і запусти знову.
+Une photo de ciel ¦ Фото неба ¦ Фото неба
+Prendre ce ciel ¦ Взять это небо ¦ Взяти це небо
+Une photo de la base, ou une image de l’ordinateur (elle entre dans les médias). ¦ Фото из базы или изображение с компьютера (оно попадает в медиафайлы). ¦ Фото з бази або зображення з комп’ютера (воно потрапляє до медіафайлів).
+Tu peins le masque du ciel : ⬛ cacher là où le ciel déborde (feuillage, toits), ⬜ montrer là où il manque. Puis « ✓ OK ». ¦ Ты рисуешь маску неба: ⬛ скрыть там, где небо вылезает (листва, крыши), ⬜ показать там, где его не хватает. Затем «✓ OK». ¦ Ти малюєш маску неба: ⬛ приховати там, де небо вилазить (листя, дахи), ⬜ показати там, де його бракує. Потім «✓ OK».
+Ciel remplacé : calques « Ciel » et « Harmonisation du premier plan » (opacité, masque, 👁 pour comparer). ¦ Небо заменено: слои «Небо» и «Гармонизация переднего плана» (непрозрачность, маска, 👁 — чтобы сравнить). ¦ Небо замінено: шари «Небо» і «Гармонізація переднього плану» (непрозорість, маска, 👁 — щоб порівняти).
+✂️ Détourer une personne ¦ ✂️ Вырезать человека ¦ ✂️ Вирізати людину
+Sans intelligence artificielle : tout se calcule ici ¦ Без искусственного интеллекта: всё вычисляется здесь ¦ Без штучного інтелекту: усе обчислюється тут
+1. Trace un rectangle autour de la personne (⬚), pas trop serré — ou laisse tout : la photo entière sert de cadre. ¦ 1. Нарисуй прямоугольник вокруг человека (⬚), не слишком тесно — или оставь всё: рамкой служит всё фото. ¦ 1. Намалюй прямокутник навколо людини (⬚), не надто тісно — або залиш усе: рамкою слугує все фото.
+2. « Détourer » : l’app apprend les couleurs de la personne (dans le rectangle) et du fond (autour), puis suit les contours. ¦ 2. «Вырезать»: приложение изучает цвета человека (в прямоугольнике) и фона (вокруг), затем следует по контурам. ¦ 2. «Вирізати»: застосунок вивчає кольори людини (у прямокутнику) і тла (довкола), потім іде за контурами.
+⬚ Tracer un rectangle ¦ ⬚ Нарисовать прямоугольник ¦ ⬚ Намалювати прямокутник
+✂️ Détourer ¦ ✂️ Вырезать ¦ ✂️ Вирізати
+Fond transparent (image en PNG) ¦ Прозрачный фон (изображение PNG) ¦ Прозоре тло (зображення PNG)
+Fond flou ¦ Размытый фон ¦ Розмите тло
+Fond uni ¦ Однотонный фон ¦ Однотонне тло
+Garder la personne sur un calque à part ¦ Оставить человека на отдельном слое ¦ Залишити людину на окремому шарі
+Flou du fond ¦ Размытие фона ¦ Розмиття тла
+Peindre le masque : ⬛ cacher, ⬜ montrer ¦ Рисовать маску: ⬛ скрыть, ⬜ показать ¦ Малювати маску: ⬛ приховати, ⬜ показати
+🖌 Retoucher le contour ¦ 🖌 Подправить контур ¦ 🖌 Підправити контур
+Marche bien quand la personne se détache de son fond (couleurs différentes, fond assez simple). Cheveux fins, fond chargé ou vêtements de la couleur du fond : il faudra retoucher au pinceau (« Retoucher le contour »). ¦ Хорошо работает, когда человек выделяется на фоне (разные цвета, достаточно простой фон). Тонкие волосы, пёстрый фон или одежда цвета фона: придётся подправлять кистью («Подправить контур»). ¦ Добре працює, коли людина вирізняється на тлі (різні кольори, досить просте тло). Тонке волосся, строкате тло чи одяг кольору тла: доведеться підправляти пензлем («Підправити контур»).
+Personne détourée ¦ Человек вырезан ¦ Людину вирізано
+Trace un rectangle autour de la personne (en laissant un peu de fond tout autour), puis « ✂️ Détourer ». ¦ Нарисуй прямоугольник вокруг человека (оставив немного фона со всех сторон), затем «✂️ Вырезать». ¦ Намалюй прямокутник навколо людини (залишивши трохи тла з усіх боків), потім «✂️ Вирізати».
+Détourage… ¦ Вырезание… ¦ Вирізання…
+Personne introuvable : trace le rectangle plus près d’elle, puis recommence. ¦ Человек не найден: нарисуй прямоугольник ближе к нему, затем начни снова. ¦ Людину не знайдено: намалюй прямокутник ближче до неї, потім почни знову.
+✂️ Détourer à nouveau ¦ ✂️ Вырезать снова ¦ ✂️ Вирізати знову

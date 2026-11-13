@@ -1,0 +1,1563 @@
+fr ¦ is
+=élément retiré ¦ atriði fjarlægt|atriði fjarlægð
+=heure ¦ klukkustund|klukkustundir
+=généalogie ¦ ættfræði|ættfræðir
+=changement ¦ breyting|breytingar
+=paquet ¦ pakki|pakkar
+=chose changée des deux côtés ¦ atriði breytt báðum megin|atriðum breytt báðum megin
+=changement reçu ¦ breyting móttekin|breytingar mótteknar
+=changement envoyé ¦ breyting send|breytingar sendar
+=corrigée ¦ leiðrétt|leiðréttar
+=écartée ¦ lögð til hliðar|lagðar til hliðar
+=document traité ¦ skjal unnið|skjöl unnin
+=erreur ¦ villa|villur
+=nom corrigé ¦ nafn leiðrétt|nöfn leiðrétt
+=document sélectionné ¦ valið skjal|valin skjöl
+=photo ¦ mynd|myndir
+=souvenir ¦ minning|minningar
+=bonne réponse ¦ rétt svar|rétt svör
+=chiffre tapé ¦ tölustafur sleginn inn|tölustafir slegnir inn
+=an ¦ ár|ár
+=raccourci ¦ flýtileið|flýtileiðir
+=forme ¦ form|form
+=chemin gardé ¦ slóð geymd|slóðir geymdar
+=famille vide ¦ tóm fjölskylda|tómar fjölskyldur
+=famille vide supprimée ¦ tómri fjölskyldu eytt|tómum fjölskyldum eytt
+=ligne exportée ¦ lína flutt út|línur fluttar út
+=autre élément ¦ annað atriði|önnur atriði
+=fiche trouvée ¦ spjald fannst|spjöld fundust
+=hypothèse ¦ tilgáta|tilgátur
+=média enregistré ¦ miðill skráður|miðlar skráðir
+=fichier présent ¦ skrá til staðar|skrár til staðar
+=lien familial impossible ignoré ¦ ómögulegum fjölskyldutengslum sleppt|ómögulegum fjölskyldutengslum sleppt
+=média introuvable ¦ miðill finnst ekki|miðlar finnast ekki
+=mois ¦ mánuður|mánuðir
+=minute ¦ mínúta|mínútur
+=seconde ¦ sekúnda|sekúndur
+=ligne ¦ lína|línur
+=cadre ¦ reitur|reitir
+=copie ¦ afrit|afrit
+Ressemblance {n} % ¦ Líkindi {n} %
+Score {n}/110 ¦ Stig {n}/110
+Naissances : {a} / {b} ¦ Fæðingar: {a} / {b}
+Décès : {a} / {b} ¦ Andlát: {a} / {b}
+Fusionner la fiche #{a} dans la fiche #{b} ? ¦ Sameina spjald #{a} við spjald #{b}?
+Lancer sur {n} ¦ Keyra á {n}
+{n} avec succès. ¦ {n} tókst.
+{n} sera concernée. Confirmer pour {action} ? ¦ {n} verður fyrir áhrifum. Staðfesta til að {action}?
+{n} seront concernées. Confirmer pour {action} ? ¦ {n} verða fyrir áhrifum. Staðfesta til að {action}?
+corriger le nom inscrit en conservant une variante ¦ leiðrétta skráða nafnið og halda afbrigði
+rattacher au groupe ¦ tengja við hópinn
+{n} et ancien nom conservé. ¦ {n} og gamla nafninu haldið.
+{n} et anciens noms conservés. ¦ {n} og gömlu nöfnunum haldið.
+{n} rattachée au groupe. ¦ {n} tengd við hópinn.
+{n} rattachées au groupe. ¦ {n} tengdar við hópinn.
+Couleur de « {name} » ¦ Litur á „{name}“
+Pictogramme de « {name} » ¦ Tákn fyrir „{name}“
+Supprimer le type « {name} » ? ¦ Eyða tegundinni „{name}“?
+Import de « {name} » annulé : tout ce qu’il avait ajouté a été retiré. ¦ Innflutningur á „{name}“ afturkallaður: allt sem hann bætti við hefur verið fjarlægt.
+Supprimer définitivement la base « {name} » ? ¦ Eyða gagnagrunninum „{name}“ fyrir fullt og allt?
+Convertir {n} Deed en Décès ? ¦ Breyta {n} Deed í Andlát?
+Le texte sur « {name} » ¦ Textinn um „{name}“
+Les photos de {name} ¦ Myndir af {name}
+{x} de {who} (lien) ¦ {x} {who}
+C’est toi ¦ Þetta ert þú
+c’est toi ¦ þetta ert þú
+C’est toi ! ¦ Þetta ert þú!
+C’est {rel}. ¦ Þetta er {rel}.
+Bonjour {name} ! ¦ Halló {name}!
+Bonjour ! ¦ Halló!
+Bonjour {name}. Touche un gros bouton : {list}. ¦ Halló {name}. Snertu stóran hnapp: {list}.
+Bonjour. Touche un gros bouton : {list}. ¦ Halló. Snertu stóran hnapp: {list}.
+Bonjour {name} ! L’app dira « ta mère », « ton petit-fils »… ¦ Halló {name}! Appið segir „mamma þín“, „barnabarnið þitt“…
+D’accord. L’app ne dira pas les liens de famille. ¦ Allt í lagi. Appið segir ekki fjölskyldutengslin.
+⚠️ {what} (caché sur la tablette) ¦ ⚠️ {what} (falið á spjaldtölvunni)
+{n} aujourd’hui ¦ {n} í dag
+Ce n’est pas {name} ? ¦ Ekki {name}?
+Quitter le mode simple : garde le doigt appuyé {n} secondes, ou garde la touche Entrée enfoncée ¦ Hætta í einföldum ham: haltu fingrinum á í {n} sekúndur, eða haltu Enter-hnappnum niðri
+garde le doigt appuyé {n} s ¦ haltu fingrinum á í {n} s
+Garde le doigt appuyé {n} secondes ¦ Haltu fingrinum á í {n} sekúndur
+Vers les parents ¦ Til foreldranna
+Vers les enfants ¦ Til barnanna
+l’aîné ¦ elsti
+l’aînée ¦ elsta
+Regarder les {n} ¦ Skoða {n}
+{a} sur {b} ¦ {a} af {b}
+vers {y} (date) ¦ um {y}
+en {date} (année) ¦ árið {date}
+en {date} (mois) ¦ í {date}
+le {date} (jour) ¦ {date}
+à {place} (lieu) ¦ í {place}
+{name} fait partie de la famille. ¦ {name} er hluti af fjölskyldunni.
+{name} est né {details}. ¦ {name} fæddist {details}.
+{name} est née {details}. ¦ {name} fæddist {details}.
+{name} a été baptisé {details}. ¦ {name} var skírður {details}.
+{name} a été baptisée {details}. ¦ {name} var skírð {details}.
+Il ¦ Hann
+Elle ¦ Hún
+C’est la fille de {names}. ¦ Hún er dóttir {names}.
+C’est le fils de {names}. ¦ Hann er sonur {names}.
+C’est l’enfant de {names}. ¦ Þetta er barn {names}.
+Il était {job}. ¦ Hann var {job}.
+Elle était {job}. ¦ Hún var {job}.
+Il a été {job}. ¦ Hann starfaði sem {job}.
+Elle a été {job}. ¦ Hún starfaði sem {job}.
+Il est {job}. ¦ Hann er {job}.
+Elle est {job}. ¦ Hún er {job}.
+Il s’est marié avec {name} {details}. ¦ Hann giftist {name} {details}.
+Elle s’est mariée avec {name} {details}. ¦ Hún giftist {name} {details}.
+Il s’est marié avec {name}. ¦ Hann giftist {name}.
+Elle s’est mariée avec {name}. ¦ Hún giftist {name}.
+Il a vécu avec {name}. ¦ Hann bjó með {name}.
+Elle a vécu avec {name}. ¦ Hún bjó með {name}.
+Ils ont eu une fille, {name}. ¦ Þau eignuðust dóttur, {name}.
+Ils ont eu un fils, {name}. ¦ Þau eignuðust son, {name}.
+Ils ont eu un enfant, {name}. ¦ Þau eignuðust barn, {name}.
+Ils ont eu {n} enfants : {names}. ¦ Þau eignuðust {n} börn: {names}.
+Aujourd’hui, il a {age}. ¦ Í dag er hann {age}.
+Aujourd’hui, elle a {age}. ¦ Í dag er hún {age}.
+Il est décédé {details}, à {age}. ¦ Hann lést {details}, {age} að aldri.
+Elle est décédée {details}, à {age}. ¦ Hún lést {details}, {age} að aldri.
+Il est décédé {details}. ¦ Hann lést {details}.
+Elle est décédée {details}. ¦ Hún lést {details}.
+né en {y} ¦ fæddur {y}
+née en {y} ¦ fædd {y}
+mort en {y} ¦ dáinn {y}
+morte en {y} ¦ dáin {y}
+de {a} à {b} ¦ frá {a} til {b}
+Toucher pour la mettre au milieu. ¦ Snertu til að setja í miðjuna.
+Toucher pour voir sa fiche. ¦ Snertu til að sjá spjaldið.
+Les prénoms en « {x} » ¦ Fornöfn sem byrja á „{x}“
+Personne ne s’appelle « {q} ». Vérifie l’orthographe. ¦ Enginn heitir „{q}“. Athugaðu stafsetninguna.
+Pas d’anniversaire aujourd’hui. ¦ Enginn afmælisdagur í dag.
+Pas d’anniversaire aujourd’hui. Voici ce qui arrive bientôt. ¦ Enginn afmælisdagur í dag. Hér er það sem er fram undan.
+📷 Des photos prises en {month} ¦ 📷 Myndir teknar í {month}
+La famille de {name} ¦ Fjölskylda {name}
+Aujourd’hui ! ¦ Í dag!
+Demain ¦ Á morgun
+Dans {n} jours ¦ Eftir {n} daga
+{n} depuis le début ¦ {n} frá upphafi
+Ce n’est pas {name}. Essaie encore ! ¦ Þetta er ekki {name}. Reyndu aftur!
+Ce n’est pas ça. Essaie encore ! ¦ Þetta er ekki rétt. Reyndu aftur!
+C’est {part} ¦ Þetta er {part}
+le matin ¦ morgunn
+l’après-midi ¦ síðdegi
+le soir ¦ kvöld
+{n} sur 4 ¦ {n} af 4
+⚠️ {what} pour qu’il apparaisse ¦ ⚠️ {what} til að það birtist
+Modifier « {name} » ¦ Breyta „{name}“
+Dupliquer « {name} » ¦ Tvöfalda „{name}“
+Retirer « {name} » ¦ Fjarlægja „{name}“
+Monter « {name} » ¦ Færa „{name}“ upp
+Descendre « {name} » ¦ Færa „{name}“ niður
+Montrer « {name} » ¦ Sýna „{name}“
+Afficher « {name} » ¦ Birta „{name}“
+cadres ajoutés au plus. ¦ viðbættir reitir í mesta lagi.
+Côté {branch} ¦ {branch} megin
+Remettre « {name} » dans le mode simple ¦ Setja „{name}“ aftur í einfaldan ham
+Photo ¦ Mynd
+{n} s par photo ¦ {n} s á mynd
+cadre après {n} min ¦ myndarammi eftir {n} mín
+sans cadre photo ¦ enginn myndarammi
+Chiffre {n} du code ¦ Tölustafur {n} í kóðanum
+Ce que verra {name} sur une tablette. Le mode simple ne permet <b>ni de modifier, ni de supprimer</b> : ni menu caché, ni clic droit. ¦ Það sem {name} sér á spjaldtölvu. Einfaldur hamur leyfir <b>hvorki breytingar né eyðingu</b>: engin falin valmynd, enginn hægri smellur.
+Ce que verra la personne sur une tablette. Le mode simple ne permet <b>ni de modifier, ni de supprimer</b> : ni menu caché, ni clic droit. ¦ Það sem einstaklingurinn sér á spjaldtölvu. Einfaldur hamur leyfir <b>hvorki breytingar né eyðingu</b>: engin falin valmynd, enginn hægri smellur.
+Réglage « {name} » supprimé ¦ Stillingu „{name}“ eytt
+Réglage « {name} » importé : clique « Appliquer » pour t’en servir. ¦ Stillingin „{name}“ flutt inn: smelltu á „Nota“ til að nota hana.
+Maison choisie : « {name} ». ¦ Hús valið: „{name}“.
+Maison ¦ Hús
+Adresse copiée : {url} ¦ Vistfang afritað: {url}
+ ou  ¦ eða
+Seulement avec {what}. ¦ Aðeins með {what}.
+{what} remis comme au départ ¦ {what} upphafsstillt
+activé ¦ virkt
+désactivé ¦ óvirkt
+Style des fiches : {name}. ¦ Stíll spjalda: {name}.
+Style des fiches : {name} (retouché). ¦ Stíll spjalda: {name} (lagfærður).
+ton {x} (lien) ¦ {x} þinn
+ta {x} (lien) ¦ {x} þín
+le {x} (lien) ¦ {x}
+la {x} (lien) ¦ {x}
+la femme de {who} {name} (lien) ¦ eiginkona {who} {name}
+le mari de {who} {name} (lien) ¦ eiginmaður {who} {name}
+le conjoint de {who} {name} (lien) ¦ maki {who} {name}
+lien|mère ¦ móðir
+lien|père ¦ faðir
+lien|parent ¦ foreldri
+lien|grand-mère ¦ amma
+lien|grand-père ¦ afi
+lien|arrière-grand-mère ¦ langamma
+lien|arrière-grand-père ¦ langafi
+lien|arrière-arrière-grand-mère ¦ langalangamma
+lien|arrière-arrière-grand-père ¦ langalangafi
+lien|fille ¦ dóttir
+lien|fils ¦ sonur
+lien|enfant ¦ barn
+lien|petite-fille ¦ barnabarn
+lien|petit-fils ¦ barnabarn
+lien|arrière-petite-fille ¦ barnabarnabarn
+lien|arrière-petit-fils ¦ barnabarnabarn
+lien|arrière-arrière-petite-fille ¦ barnabarnabarnabarn
+lien|arrière-arrière-petit-fils ¦ barnabarnabarnabarn
+lien|sœur ¦ systir
+lien|frère ¦ bróðir
+lien|tante ¦ frænka
+lien|oncle ¦ frændi
+lien|grand-tante ¦ ömmusystir / afasystir
+lien|grand-oncle ¦ ömmubróðir / afabróðir
+lien|arrière-grand-tante ¦ langömmusystir / langafasystir
+lien|arrière-grand-oncle ¦ langömmubróðir / langafabróðir
+lien|arrière-arrière-grand-tante ¦ langalangömmusystir / langalangafasystir
+lien|arrière-arrière-grand-oncle ¦ langalangömmubróðir / langalangafabróðir
+lien|nièce ¦ bróðurdóttir / systurdóttir
+lien|neveu ¦ bróðursonur / systursonur
+lien|petite-nièce ¦ systkinabarnabarn (stúlka)
+lien|petit-neveu ¦ systkinabarnabarn (drengur)
+lien|arrière-petite-nièce ¦ systkinabarnabarnabarn (stúlka)
+lien|arrière-petit-neveu ¦ systkinabarnabarnabarn (drengur)
+lien|arrière-arrière-petite-nièce ¦ systkinabarnabarnabarnabarn (stúlka)
+lien|arrière-arrière-petit-neveu ¦ systkinabarnabarnabarnabarn (drengur)
+lien|cousin germain ¦ systkinabarn
+lien|cousine germaine ¦ systkinabarn
+lien|cousin issu de germains ¦ þremenningur
+lien|cousine issue de germains ¦ þremenningur
+lien|cousin éloigné ¦ fjarskyldur frændi
+lien|cousine éloignée ¦ fjarskyld frænka
+lien|cousin ¦ frændi
+lien|cousine ¦ frænka
+lien|femme ¦ eiginkona
+lien|mari ¦ eiginmaður
+lien|conjoint ¦ maki
+lien|belle-mère ¦ tengdamóðir
+lien|beau-père ¦ tengdafaðir
+lien|belle-fille ¦ tengdadóttir
+lien|gendre ¦ tengdasonur
+lien|beau-fils ¦ stjúpsonur
+lien|belle-sœur ¦ mágkona
+lien|beau-frère ¦ mágur
+⚙️ Gérer les formes ({n}) ¦ ⚙️ Sýsla með form ({n})
+Forme « {name} » supprimée ¦ Forminu „{name}“ eytt
+Forme « {name} » importée : elle est dans le menu « Forme des avatars ». ¦ Formið „{name}“ flutt inn: það er í valmyndinni „Lögun mynda“.
+Aucune forme pour « {q} ». Essaie un autre mot (cœur, arbre, étoile, croix…). ¦ Ekkert form fyrir „{q}“. Prófaðu annað orð (hjarta, tré, stjarna, kross…).
+{n} points au plus. ¦ {n} punktar í mesta lagi.
+{what} (scripts, textes, images, styles…) ¦ {what} (skriftur, textar, myndir, stílar…)
+Forme « {name} » enregistrée. ¦ Formið „{name}“ vistað.
+Forme « {name} » créée : elle est dans le menu « Forme des avatars » (✎ Mes formes). ¦ Formið „{name}“ búið til: það er í valmyndinni „Lögun mynda“ (✎ Mín form).
+Ce qu’ouvre « {name} » ¦ Það sem „{name}“ opnar
+Ouvre la fenêtre « ＋ Nouvelle personne » (ou un nouvel animal sur la page des animaux). Caché au départ. ¦ Opnar gluggann „＋ Nýr einstaklingur“ (eða nýtt dýr á síðu dýranna). Falið í upphafi.
+Raccourci : Enquêtes, sur cet onglet. Caché au départ. ¦ Flýtileið: Athuganir, á þennan flipa. Falið í upphafi.
+Raccourci : Listes → 🛠️ Outils de modification, sur cet outil. Caché au départ. ¦ Flýtileið: Listar → 🛠️ Breytingatól, á þetta tól. Falið í upphafi.
+Forme : « {name} » ¦ Form: „{name}“
+Portraits : « {name} » ¦ Andlitsmyndir: „{name}“
+Colonne de gauche : partir de « {name} » ¦ Vinstri dálkur: byrja á „{name}“
+Contrôlé {when} ¦ Athugað {when}
+Lieu corrigé : {name} ({what}) ¦ Staður leiðréttur: {name} ({what})
+La bonne commune pour « {name} » ¦ Rétta sveitarfélagið fyrir „{name}“
+Exception gardée : {what} ¦ Undantekning geymd: {what}
+Signalée de nouveau : {what} ¦ Merkt aftur: {what}
+Alerte {i} sur {n} ¦ Viðvörun {i} af {n}
+{n} plus tard ¦ {n} síðar
+Date enregistrée : {date} ¦ Dagsetning vistuð: {date}
+✓ Alerte réglée ({date}) ¦ ✓ Viðvörun leyst ({date})
+Bandeau sur la fiche : {what} ¦ Borði á spjaldinu: {what}
+{a} fiches sur {b} n’ont aucune alerte (les exceptions ne comptent pas) ¦ {a} spjöld af {b} eru án viðvörunar (undantekningar teljast ekki með)
+{n} ans ¦ {n} ár
+{n} mois ¦ {n} mánuðir
+Supprimer les {n} familles vides ¦ Eyða {n} tómum fjölskyldum
+Supprimer les {n} familles vides ? ¦ Eyða {n} tómum fjölskyldum?
+Me le signaler à nouveau si une de ces dates change ¦ Láta mig vita aftur ef ein af þessum dagsetningum breytist
+Me le signaler à nouveau si une de ces coordonnées change ¦ Láta mig vita aftur ef ein af þessum hnitum breytist
+Déjà pris par {os} ou le menu de l’application : « {what} ». ¦ Þegar notað af {os} eða valmynd forritsins: „{what}“.
+Déjà pris par l’app (même quand un outil est ouvert) : « {what} ». Change-le d’abord dans Raccourcis clavier si tu veux cette touche. ¦ Þegar notað af appinu (líka þegar tól er opið): „{what}“. Breyttu því fyrst í Flýtilyklum ef þú vilt þennan lykil.
+Dans cet outil, cette touche sert déjà à « {what} » : ton raccourci passera avant. ¦ Í þessu tóli er þessi lykill þegar notaður fyrir „{what}“: flýtileiðin þín gengur fyrir.
+La touche de départ ({key}) ne fera plus cette action : elle est libre pour autre chose. ¦ Upphaflegi lykillinn ({key}) gerir þetta ekki lengur: hann er laus fyrir annað.
+Déjà donné à « {what} » : il lui sera retiré. ¦ Þegar gefinn „{what}“: hann verður tekinn af því.
+Sans {key}, il ne marchera qu’en dehors des cases de texte. ¦ Án {key} virkar hann aðeins utan textareita.
+NOUVEAU RACCOURCI ¦ NÝ FLÝTILEIÐ
+Nouveau raccourci : {key} ¦ Ný flýtileið: {key}
+Donne une touche à n’importe quelle commande de l’outil (ses menus, ses outils, ses boutons). {os} et le menu de l’application passent avant : une touche qu’ils prennent est refusée. Ton raccourci passe avant la touche de l’outil. Sans {key}, il ne marche qu’en dehors des cases de texte. ¦ Gefðu hvaða skipun tólsins sem er lykil (valmyndum þess, tólum, hnöppum). {os} og valmynd forritsins ganga fyrir: lykli sem þau nota er hafnað. Flýtileiðin þín gengur fyrir lykli tólsins. Án {key} virkar hún aðeins utan textareita.
+{n} à toi ¦ {n} frá þér
+{a} et {n} autres personnes ¦ {a} og {n} aðrir
+Sinon, on lira : « {text} » ¦ Annars verður lesið: „{text}“
+Dicter dans ce champ ({key}) ¦ Lesa inn í þennan reit ({key})
+Dicter : parle, le texte s’écrit au curseur ({key}, Échap pour arrêter) ¦ Lesa inn: talaðu, textinn skrifast við bendilinn ({key}, Esc til að stöðva)
+Voici un message : il reste {n} secondes environ. ¦ Hér eru skilaboð: um {n} sekúndur eftir.
+toutes les {n} ¦ á {n} fresti
+chaque jour ¦ á hverjum degi
+chaque semaine ¦ í hverri viku
+Dernière sauvegarde : <b>{when}</b> ¦ Síðasta afrit: <b>{when}</b>
+Dernière sauvegarde : <b>jamais</b> ¦ Síðasta afrit: <b>aldrei</b>
+rien n’avait changé ¦ ekkert hafði breyst
+dès maintenant ¦ strax
+Prochaine : {when} ({freq}). ¦ Næst: {when} ({freq}).
+Prochaine : {when} ({freq}, et à la fermeture). ¦ Næst: {when} ({freq}, og við lokun).
+Dernier essai raté : {error} ¦ Síðasta tilraun mistókst: {error}
+Rien n’est bloqué : continue à travailler. ¦ Ekkert er læst: haltu áfram að vinna.
+Toutes mes généalogies ({n}) ¦ Öll ættfræðin mín ({n})
+Remettre ta généalogie comme dans la copie choisie ({when}) ? Tout ce que tu as fait depuis sera remplacé. Ta base actuelle est d’abord gardée dans les sauvegardes (« avant restauration »), pour pouvoir y revenir. ¦ Færa ættfræðina þína aftur í valið afrit ({when})? Allt sem þú hefur gert síðan verður skipt út. Núverandi gagnagrunnur er fyrst geymdur í afritunum („fyrir endurheimt“), svo þú getir farið aftur í hann.
+Remettre ta généalogie comme dans la copie choisie ? Tout ce que tu as fait depuis sera remplacé. Ta base actuelle est d’abord gardée dans les sauvegardes (« avant restauration »), pour pouvoir y revenir. ¦ Færa ættfræðina þína aftur í valið afrit? Allt sem þú hefur gert síðan verður skipt út. Núverandi gagnagrunnur er fyrst geymdur í afritunum („fyrir endurheimt“), svo þú getir farið aftur í hann.
+✓ Généalogie remise comme dans la copie ({n}). L’ancienne est gardée : {file}. ¦ ✓ Ættfræðin færð aftur í afritið ({n}). Sú gamla er geymd: {file}.
+✓ Sauvegarde faite et vérifiée ({n}) : {size}. ¦ ✓ Afrit gert og athugað ({n}): {size}.
+✓ Sauvegarde faite et vérifiée : {size}. ¦ ✓ Afrit gert og athugað: {size}.
+Supprimée sur cet ordinateur, modifiée sur « {name} ». ¦ Eytt í þessari tölvu, breytt á „{name}“.
+Modifiée ici, supprimée sur « {name} ». ¦ Breytt hér, eytt á „{name}“.
+modifiée des deux côtés ¦ breytt báðum megin
+Sur « {name} » ¦ Á „{name}“
+<b>{n}</b> à envoyer ¦ <b>{n}</b> til að senda
+<b>{n}</b> à recevoir ¦ <b>{n}</b> til að taka á móti
+Rien à envoyer ¦ Ekkert að senda
+Rien à recevoir ¦ Ekkert að taka á móti
+Dernière synchronisation : {when} ¦ Síðasta samstilling: {when}
+jamais ¦ aldrei
+⚠️ {n} : choisis ¦ ⚠️ {n}: veldu
+rien de nouveau ¦ ekkert nýtt
+{n} de « {from} » ¦ {n} frá „{from}“
+Déjà à jour ¦ Þegar uppfært
+⚠️ {n} : à toi de choisir. ¦ ⚠️ {n}: þú velur.
+Cette généalogie est déjà ouverte sur l’ordinateur <b>« {name} »</b> (depuis {when}). ¦ Þessi ættfræði er þegar opin í tölvunni <b>„{name}“</b> (síðan {when}).
+Cette généalogie est déjà ouverte sur l’ordinateur <b>« {name} »</b>. ¦ Þessi ættfræði er þegar opin í tölvunni <b>„{name}“</b>.
+Ouvrir quand même ? Fais-le seulement si « {name} » est éteint ou si l’app y est fermée (sinon le fichier peut s’abîmer). ¦ Opna samt? Gerðu það aðeins ef slökkt er á „{name}“ eða appinu þar lokað (annars getur skráin skemmst).
+Télécharger LCNDA {v} ¦ Sækja LCNDA {v}
+{a} sur {b}… ¦ {a} af {b}…
+Plus de message pour la version {v} ¦ Engin fleiri skilaboð fyrir útgáfu {v}
+🔄 Une nouvelle version {v} est disponible. ¦ 🔄 Ný útgáfa {v} er fáanleg.
+regardé {when} ¦ athugað {when}
+« 🔍 Rechercher une mise à jour » regarde tout de suite. ¦ „🔍 Leita að uppfærslu“ athugar strax.
+Pas encore regardé sur cet ordinateur. « 🔍 Rechercher une mise à jour » regarde tout de suite. ¦ Ekki enn athugað í þessari tölvu. „🔍 Leita að uppfærslu“ athugar strax.
+Tu as la dernière version publiée ({v}){when}. ¦ Þú ert með nýjustu útgáfuna ({v}){when}.
+Une nouvelle version {v} est disponible (tu as la {cur}). ¦ Ný útgáfa {v} er fáanleg (þú ert með {cur}).
+Tu as choisi de ne plus être prévenu pour la {v}{when}. ¦ Þú valdir að fá ekki fleiri tilkynningar um {v}{when}.
+Ce réglage vient d’un autre outil (« {name} ») : il ne va pas dans la visionneuse. ¦ Þessi stilling kemur úr öðru tóli („{name}“): hún fer ekki í skoðarann.
+Réglage « {name} » mis. ¦ Stillingin „{name}“ sett.
+Range avec ↑ ↓, coche ce qui s’affiche dans la colonne, en groupes ou en une seule liste. ¦ Raðaðu með ↑ ↓, hakaðu við það sem birtist í dálkinum, í hópum eða í einum lista.
+Range avec ↑ ↓, en groupes ou en une seule liste. ¦ Raðaðu með ↑ ↓, í hópum eða í einum lista.
+Réordonner les listes ¦ Endurraða listunum
+Réordonner les pages ¦ Endurraða síðunum
+Réordonner les {what} ¦ Endurraða: {what}
+Range avec ↑ ↓, coche ce qui s’affiche, en groupes ou en une seule liste. Puis Enregistrer. ¦ Raðaðu með ↑ ↓, hakaðu við það sem birtist, í hópum eða í einum lista. Síðan Vista.
+Range avec ↑ ↓, en groupes ou en une seule liste. Puis Enregistrer. ¦ Raðaðu með ↑ ↓, í hópum eða í einum lista. Síðan Vista.
+Garde au moins une liste visible. ¦ Haltu að minnsta kosti einum lista sýnilegum.
+Garde au moins une page visible. ¦ Haltu að minnsta kosti einni síðu sýnilegri.
+(CC BY 4.0) ; collectivités locales d’Australie : © ¦ (CC BY 4.0); sveitarfélög í Ástralíu: ©
+(OGL v3) ; paroisses civiles d’Irlande : © ¦ (OGL v3); borgaralegar sóknir á Írlandi: ©
+(William & Mary geoLab), d’après leurs sources (gouvernements, OCHA, Banque mondiale, GRID3…), licences ouvertes indiquées pays par pays dans le fichier de chaque pays (domaine public, CC BY, CC BY IGO, ODbL, CC BY-SA pour le Togo et Taïwan). ¦ (William & Mary geoLab), eftir heimildum þeirra (stjórnvöld, OCHA, Alþjóðabankinn, GRID3…), opin leyfi tilgreind land fyrir land í skrá hvers lands (almenningseign, CC BY, CC BY IGO, ODbL, CC BY-SA fyrir Tógó og Taívan).
+(auto = comme l’app) ¦ (sjálfvirkt = eins og appið)
+(avec ou sans accents). Ex. : ¦ (með eða án kommna). Dæmi:
+(domaine public) ; paroisses d’Angleterre et du pays de Galles : © ¦ (almenningseign); sóknir í Englandi og Wales: ©
+(familles qu’on ouvre et referme) ¦ (fjölskyldur sem þú opnar og lokar)
+(hors des cases de texte) ¦ (utan textareita)
+(jusqu’à 32 px). ¦ (allt að 32 px).
+(style « Onglets en haut ») ¦ (stíllinn „Flipar efst“)
+(un petit fichier, par e-mail par exemple). ¦ (lítil skrá, t.d. í tölvupósti).
+), parle, et le texte s’écrit au curseur. Dis « virgule », « point », « point d’interrogation », « deux points », « à la ligne » ou « nouveau paragraphe » pour la ponctuation. ¦ ), talaðu, og textinn skrifast við bendilinn. Segðu „virgule“, „point“, „point d’interrogation“, „deux points“, „à la ligne“ eða „nouveau paragraphe“ fyrir greinarmerki (raddskipanir á frönsku).
+). Il se règle avec la forme de l’en-tête, plus bas sur cette page. ¦ ). Það er stillt með lögun hausins, neðar á þessari síðu.
+, contient des données OS © Crown copyright (OGL v3) ; paroisses civiles d’Écosse : © ¦ , inniheldur gögn OS © Crown copyright (OGL v3); borgaralegar sóknir í Skotlandi: ©
+, données sous licence ¦ , gögn með leyfi
+, même dans un tableau large avec beaucoup de colonnes. ¦ , jafnvel í breiðri töflu með mörgum dálkum.
+. Aucune fiche n’est supprimée : les personnes restent là, même quand l’onglet est caché. On peut en allumer plusieurs : leurs onglets s’additionnent. ¦ . Engu spjaldi er eytt: einstaklingarnir eru áfram þar, líka þegar flipinn er falinn. Þú getur kveikt á nokkrum: flipar þeirra bætast saman.
+. Double-clic sur un curseur : valeur de départ. ¦ . Tvísmelltu á sleða: upphafsgildi.
+. Même licence pour les communes d’Amérique du Sud, du Moyen-Orient, d’Asie et d’une partie de l’Afrique. ¦ . Sama leyfi fyrir sveitarfélög í Suður-Ameríku, Mið-Austurlöndum, Asíu og hluta Afríku.
+12/03/1790, mars 1790 ou 1790 ¦ 12/03/1790, mars 1790 eða 1790
+1re heure du jour, au lever du soleil ¦ 1. stund dagsins, við sólarupprás
+3e heure, milieu de la matinée (heure de la grand-messe) ¦ 3. stund, um miðjan morgun (tími hámessunnar)
+9e heure, milieu de l’après-midi ¦ 9. stund, um miðjan síðdegi
+256 ancêtres de la génération 8 en théorie (Sosa 256 à 511) ; 510 ancêtres en tout jusqu’à cette génération ¦ 256 forfeður í 8. kynslóð í orði (Sosa 256 til 511); 510 forfeður alls upp að þessari kynslóð
+4 générations ¦ 4 kynslóðir
+5 générations ¦ 5 kynslóðir
+6 générations ¦ 6 kynslóðir
+6 secondes (de départ) ¦ 6 sekúndur (upphaflegt)
+4 tailles seulement : 22 px (dans une ligne), 34 px (listes, menu de choix), 48 px (arbre, vignettes), 88 px (fiche). ¦ Aðeins 4 stærðir: 22 px (í línu), 34 px (listar, valvalmynd), 48 px (tré, smámyndir), 88 px (spjald).
+: boutons et barres d’outils au trait, rubriques et contenus en émoji (💍 conjoints, 🎂 anniversaires…). ¦ : línutákn fyrir hnappa og tækjastikur, emoji fyrir flokka og efni (💍 makar, 🎂 afmæli…).
+: chaque bouton est une vraie « touche » encadrée, avec son ombre. ¦ : hver hnappur er raunverulegur innrammaður „lykill“, með skugga.
+: coins presque droits, traits fins, un léger grain de papier derrière les pages. Pour le fond crème, choisis le Preset « Archive papier » dans Apparence. ¦ : nánast beinhyrnd horn, fínar línur, létt pappírsáferð bak við síðurnar. Fyrir rjómalitaðan bakgrunn skaltu velja forstillinguna „Skjalasafnspappír“ í Útliti.
+: comme un registre, on voit beaucoup de lignes. ¦ : eins og skrá, þú sérð margar línur.
+: des émojis en couleur, faciles à reconnaître. ¦ : litrík emoji, auðþekkjanleg.
+: grand nom très lisible, outils toujours à droite. ¦ : stórt, mjög læsilegt nafn, tól alltaf til hægri.
+: le style « néo-brutal » que tu connais, net et très lisible. ¦ : „nýgrimmi“ stíllinn sem þú þekkir, skýr og mjög læsilegur.
+: les autres restent visibles mais plus légers. ¦ : hin eru áfram sýnileg en léttari.
+: les lignes sont hautes, on ne se trompe pas de ligne. ¦ : línurnar eru háar, þú villist ekki á línum.
+: l’équilibre actuel entre place et lisibilité. ¦ : núverandi jafnvægi milli rýmis og læsileika.
+: nom, prénoms, naissance, décès rangés dans des cases fixes. ¦ : eftirnafn, fornöfn, fæðing, andlát í föstum reitum.
+: parfait pour les longues listes et les petits écrans. ¦ : fullkomið fyrir langa lista og litla skjái.
+: rien ne dépasse, seul le contenu compte. Idéal pour imprimer ou faire des captures. ¦ : ekkert stendur út, aðeins efnið skiptir máli. Tilvalið til prentunar eða skjámynda.
+: toutes les icônes ont le même trait et prennent la couleur du texte (aussi en mode sombre). ¦ : öll tákn hafa sömu línu og taka lit textans (líka í dökkum ham).
+: traits dans les Listes, cartes encadrées dans la colonne Personnes. ¦ : línur í Listum, innrömmuð kort í dálkinum Einstaklingar.
+: traits fins et pâles, coins ronds, ombres floues comme sur un téléphone. ¦ : fínar ljósar línur, rúnnuð horn, mjúkir skuggar eins og í síma.
+: une clé USB, ou un dossier iCloud Drive, Dropbox, OneDrive… L’app n’utilise aucun service en ligne et n’a pas besoin de serveur : chaque ordinateur garde sa base et dépose ses changements dans ce dossier ; l’autre les reprend. ¦ : USB-lykill, eða mappa í iCloud Drive, Dropbox, OneDrive… Appið notar enga netþjónustu og þarf engan netþjón: hver tölva heldur sínum gagnagrunni og setur breytingar sínar í þessa möppu; hin tekur þær upp.
+: une grande photo (la maison, la famille, le village) et le portrait rond par-dessus, comme un profil. ¦ : stór mynd (húsið, fjölskyldan, þorpið) og kringlótt andlitsmynd ofan á, eins og prófíll.
+: « Annuler », « Modifier » deviennent des mots en couleur, soulignés au survol. ¦ : „Hætta við“, „Breyta“ verða lituð orð, undirstrikuð þegar bendill fer yfir.
+: « Née le … à …, décédée le … », portrait ovale sépia, tampon Sosa. ¦ : „Fædd … í …, dáin …“, sporöskjulaga sepia-andlitsmynd, Sosa-stimpill.
+; des Pays-Bas : © ¦ ; Hollands: ©
+; du Québec : © ¦ ; Québec: ©
+; noms traduits en français. Les autres formes sont dessinées pour l’application. ¦ ; nöfn þýdd á frönsku. Hin formin eru teiknuð fyrir forritið.
+Accents et esprits (s’ajoutent à la lettre avant le curseur) ¦ Kommur og andblástursmerki (bætast við stafinn á undan bendlinum)
+Accents é è ê, et ç, œ, æ. ¦ Kommur é è ê, og ç, œ, æ.
+Actes et documents ¦ Skjöl og gögn
+Affichage des événements ¦ Birting atburða
+Afficher ce bouton ¦ Sýna þennan hnapp
+Afficher cette catégorie ¦ Sýna þennan flokk
+Afficher dans la fiche ¦ Sýna á spjaldinu
+Afficher dans le menu ¦ Sýna í valmyndinni
+Afficher la liste des raccourcis ¦ Sýna lista yfir flýtileiðir
+Afficher le cadre (défaut) ¦ Sýna rammann (sjálfgefið)
+Afficher seulement si renseigné ¦ Sýna aðeins ef útfyllt
+Affiché : clique pour le cacher ¦ Sýnt: smelltu til að fela það
+Agit sur les marges intérieures et l’écart entre les blocs. 100 % = comme avant. La « Taille typographique » de l’Apparence reste à part et s’ajoute ; une colonne de gauche réglée « Compacte » (onglet Colonne) garde sa propre taille : la Densité ne la touche pas. ¦ Hefur áhrif á innri spássíur og bilið milli kubba. 100 % = eins og áður. „Leturstærð“ Útlitsins er sér og bætist við; vinstri dálkur stilltur á „Þéttur“ (flipinn Dálkur) heldur sinni stærð: Þéttleikinn snertir hann ekki.
+Agrandit et aère le texte. Les outils en plein écran gardent leur taille pour que leurs réglages restent à leur place. ¦ Stækkar textann og gefur honum meira rými. Tól á öllum skjánum halda stærð sinni svo stillingar þeirra haldist á sínum stað.
+Aide : Ce que tu fais avec l’app : ses onglets et son premier écran. Aucune fiche n’est supprimée. ¦ Hjálp: Það sem þú gerir með appinu: flipar þess og fyrsti skjár. Engu spjaldi er eytt.
+Aide : Choisis la sorte de daltonisme : l’app corrige ses couleurs pour que tu les distingues mieux. Les petites pastilles montrent comment ces couleurs sont vues. ¦ Hjálp: Veldu tegund litblindu: appið leiðréttir litina sína svo þú greinir þá betur. Litlu deplarnir sýna hvernig þessir litir sjást.
+Aide : La forme des petits carrés numérotés des blocs et des initiales des fiches. Ajoute tes formes (bibliothèque des tableaux, polygone dessiné, SVG importé), range la liste du menu « Forme des avatars », cache celles qui ne te servent pas. ¦ Hjálp: Lögun litlu tölusettu ferninganna í kubbum og upphafsstafanna á spjöldum. Bættu við þínum formum (formasafn taflnanna, teiknaður marghyrningur, innflutt SVG), raðaðu listanum í valmyndinni „Lögun mynda“, feldu þau sem þú notar ekki.
+(CC BY 4.0) ; de Slovénie : © ¦ (CC BY 4.0); Slóveníu: ©
+3 fiches trouvées ¦ 3 spjöld fundust
+Aide des touches ¦ Hjálp með lykla
+Anniversaires et souvenirs ¦ Afmæli og minningar
+Année ¦ Ár
+Année de naissance lue par SocFace ¦ Fæðingarár lesið af SocFace
+Aperçu vivant ¦ Lifandi forskoðun
+Appeler quelqu’un ¦ Hringja í einhvern
+Arial, comme d’habitude. ¦ Arial, eins og venjulega.
+Arrondi des coins ¦ Rúnnun horna
+Atkinson Hyperlegible : faite pour les personnes qui voient mal (lettres qu’on ne confond pas : I l 1, O 0). Toujours disponible. ¦ Atkinson Hyperlegible: gert fyrir sjónskert fólk (stafir sem ruglast ekki: I l 1, O 0). Alltaf í boði.
+Atkinson Hyperlegible, texte 30 px, très gros boutons ¦ Atkinson Hyperlegible, 30 px texti, mjög stórir hnappar
+Au démarrage, une fois par jour au plus. Seule une demande « quelle est la dernière version ? » part vers GitHub : aucune donnée de ta généalogie, aucun identifiant. Rien n’est installé tout seul. ¦ Við ræsingu, í mesta lagi einu sinni á dag. Aðeins fyrirspurnin „hver er nýjasta útgáfan?“ fer til GitHub: engin gögn úr ættfræðinni þinni, ekkert auðkenni. Ekkert er sett upp sjálfkrafa.
+Aucun fichier média manquant. ¦ Engin miðlaskrá vantar.
+Aucune modification pour ce filtre. ¦ Engin breyting fyrir þessa síu.
+Aucune ombre ¦ Enginn skuggi
+Aucune voix française trouvée ¦ Engin frönsk rödd fannst
+Aujourd’hui, pas de portrait dans les cases de l’arbre. ¦ Eins og er, engin andlitsmynd í reitum trésins.
+Aussi : ⇧ + Entrée dans la recherche rapide. ¦ Líka: ⇧ + Enter í hraðleit.
+Aussi dans Réglages → Accessibilité → 🧓 Mode simple (« Montrer le bouton »). Caché au départ. ¦ Líka í Stillingar → Aðgengi → 🧓 Einfaldur hamur („Sýna hnappinn“). Falið í upphafi.
+Aussi dans les réglages de la calculette (« Bouton 🧮 dans la barre du haut »). ¦ Líka í stillingum reiknivélarinnar („Hnappurinn 🧮 í efstu stikunni“).
+Avec les médias (photos, actes, sons…) ¦ Með miðlum (myndir, skjöl, hljóð…)
+Avec les pastilles ¦ Með merkjunum
+Aérée ¦ Rúmgóð
+Bande d’actions rapides ¦ Stika fyrir flýtiaðgerðir
+Baptême loin de la naissance ¦ Skírn langt frá fæðingu
+Baptême tardif (avant 1900) ¦ Sein skírn (fyrir 1900)
+Barre de côté ¦ Hliðarstika
+Bleu et jaune affaiblis. ¦ Veiklaður blár og gulur.
+Bouton bleu « ＋ Observation » au-dessus de la grille ¦ Blár hnappur „＋ Athugun“ fyrir ofan töfluna
+Boutons carrés ¦ Ferkantaðir hnappar
+Boutons des pistes : plus grands ¦ Hnappar laganna: stærri
+Boutons des pistes : plus petits ¦ Hnappar laganna: minni
+Boutons des pistes : taille de départ ¦ Hnappar laganna: upphafsstærð
+Boutons encadrés ¦ Innrammaðir hnappar
+Cache les outils avancés ou rarement utilisés : ADN, comparaison, animaux, écran divisé, nouvelle fenêtre, réglages du tableau de bord, supprimer / verrouiller une fiche, historique, filtres avancés de la carte… ¦ Felur ítarleg eða sjaldan notuð tól: DNA, samanburð, dýr, skiptan skjá, nýjan glugga, stillingar stjórnborðsins, eyða / læsa spjaldi, ferill, ítarlegar síur kortsins…
+Caché ¦ Falið
+Caché : le mode simple s’ouvre d’ici, ou par le widget du tableau de bord. ¦ Falið: einfaldi hamurinn opnast héðan, eða úr græju stjórnborðsins.
+Calendrier de cette date ¦ Dagatal þessarar dagsetningar
+Calendrier républicain ¦ Lýðveldisdagatalið
+Calendrier source ¦ Upprunadagatal
+Calendrier utilisé par défaut dans les champs de date ¦ Sjálfgefið dagatal í dagsetningarreitum
+Carré arrondi ¦ Rúnnaður ferningur
+Carré droit ¦ Beinn ferningur
+Carré penché (défaut) ¦ Hallaður ferningur (sjálfgefið)
+Carrés numérotés ¦ Tölusettir ferningar
+Cartes avec repère ¦ Kort með merki
+Cartes espacées ¦ Dreifð kort
+Cases de l’arbre ¦ Reitir trésins
+Ce n’est pas une erreur ¦ Þetta er ekki villa
+Ce que tu as réglé dans « ♿ Toute l’app » (daltonisme, contraste, taille du texte, mouvements, voix) s’applique aussi au mode simple. Pour un réglage différent, choisis « Propre au mode simple ». ¦ Það sem þú stilltir í „♿ Allt appið“ (litblinda, birtuskil, textastærð, hreyfingar, rödd) gildir líka um einfaldan ham. Fyrir aðra stillingu skaltu velja „Sér fyrir einfaldan ham“.
+Ce qui semble impossible ou très rare dans tes fiches : souvent une faute de frappe, un homonyme ou de mauvais parents. Rien n’est changé sans toi. ¦ Það sem virðist ómögulegt eða mjög sjaldgæft í spjöldunum þínum: oft innsláttarvilla, alnafni eða rangir foreldrar. Engu er breytt án þín.
+Ce qu’on montre ¦ Það sem er sýnt
+Celle de l’app ¦ Sú sem appið notar
+Celle du thème ¦ Sú sem þemað notar
+Cette personne était… (ses profils) ¦ Þessi einstaklingur var… (prófílar)
+Ceux qui arrivent ¦ Fram undan
+Champs œuvre ¦ Reitir verks
+Changer la couleur ¦ Breyta litnum
+Changer le pictogramme ¦ Breyta tákninu
+Chaque choix se voit : clique, l’aperçu suit. Pour les outils Graphiques, Carte, Enquêtes, Recherche, Personnes, Listes, Réglages… ¦ Hvert val sést: smelltu, forskoðunin fylgir. Fyrir tólin Gröf, Kort, Athuganir, Rannsóknir, Einstaklingar, Listar, Stillingar…
+Chaque fiche est un objet ¦ Hvert spjald er hlutur
+Chaque gros bouton garde sa couleur partout : on se repère sans lire. ¦ Hver stór hnappur heldur lit sínum alls staðar: þú ratar án þess að lesa.
+Chercher quelqu’un par son nom ¦ Finna einhvern eftir nafni
+Chercher une commande… ¦ Leita að skipun…
+Chercher… (nom, contrôle, lieu) ¦ Leita… (nafn, athugun, staður)
+Choisir une voix propre au mode simple ¦ Velja rödd sem er sér fyrir einfaldan ham
+Clair ou sombre ¦ Ljóst eða dökkt
+Clavier et souris ¦ Lyklaborð og mús
+Comme le prototype ¦ Eins og frumgerðin
+Comme le reste ¦ Eins og restin
+Comme les blocs (réglage A1) ¦ Eins og kubbarnir (stilling A1)
+Communes de Belgique : IGN-NGI (Institut géographique national belge), licence ouverte, via ¦ Sveitarfélög í Belgíu: IGN-NGI (Landfræðistofnun Belgíu), opið leyfi, um
+Communes de Tchéquie : RÚIAN © ¦ Sveitarfélög í Tékklandi: RÚIAN ©
+Communes d’Allemagne : VG250 © ¦ Sveitarfélög í Þýskalandi: VG250 ©
+Communes d’Autriche : © ¦ Sveitarfélög í Austurríki: ©
+Communes d’Espagne : © ¦ Sveitarfélög á Spáni: ©
+Communes d’Italie : confini amministrativi © ¦ Sveitarfélög á Ítalíu: confini amministrativi ©
+Compact et clair ¦ Þétt og skýrt
+Comparer les GEDCOM ¦ Bera saman GEDCOM-skrár
+Comtés des États-Unis : ¦ Sýslur í Bandaríkjunum:
+Contour bien visible autour de l’élément choisi au clavier ¦ Vel sýnileg útlína um atriðið sem er valið með lyklaborðinu
+Contours des communes : IGN, Admin Express, via ¦ Mörk sveitarfélaga: IGN, Admin Express, um
+Contraste élevé ¦ Mikil birtuskil
+Contrôle ¦ Athugun
+Convertir une date ¦ Umreikna dagsetningu
+Correspondance (lettres, cartes) ¦ Bréfaskipti (bréf, kort)
+Couleur du bord ¦ Litur kants
+Couleur du genre, fond plein (lettres blanches) ¦ Litur kyns, heill bakgrunnur (hvítir stafir)
+Couleur du genre, fond pâle (lettres de couleur) ¦ Litur kyns, ljós bakgrunnur (litaðir stafir)
+Couleur principale pâle avec un trait ¦ Ljós aðallitur með línu
+Couleurs et daltonisme ¦ Litir og litblinda
+Couleurs seulement affaiblies (léger) ¦ Litir aðeins veiklaðir (vægt)
+Créer / modifier une branche ¦ Búa til / breyta grein
+Créer / modifier une étiquette ¦ Búa til / breyta merki
+Créer le type ¦ Búa til tegundina
+Créer un type ¦ Búa til tegund
+Créer une copie de test ¦ Búa til prófunarafrit
+Créer une forme ¦ Búa til form
+DENSITÉ ¦ ÞÉTTLEIKI
+Dans la barre au-dessus ¦ Í stikunni fyrir ofan
+Dans un navigateur ¦ Í vafra
+Demander aussi un code ¦ Biðja líka um kóða
+Demander « Qui regarde ? » ¦ Spyrja „Hver er að horfa?“
+Densité ¦ Þéttleiki
+Des photos au hasard ¦ Myndir af handahófi
+Des photos choisies ¦ Valdar myndir
+Dessin au trait ¦ Línuteikning
+Deutéranomalie ¦ Grænveikla
+Deutéranopie ¦ Grænblinda
+Deux façons de faire selon l’endroit. ¦ Tvær leiðir eftir staðnum.
+Diaporama et cadre photo ¦ Myndasýning og myndarammi
+Dictée vocale ¦ Raddinnsláttur
+Dictée vocale dans les champs texte ¦ Raddinnsláttur í textareitum
+Données géographiques ¦ Landfræðileg gögn
+Dossier des copies ¦ Mappa afritanna
+Dossier partagé ¦ Sameiginleg mappa
+Double-clic : 320 px, la valeur de départ. ¦ Tvísmelltu: 320 px, upphafsgildið.
+Douces et floues ¦ Mjúkir og óskýrir
+Duplique la base ouverte pour essayer un import ou une fusion sans modifier l’original. Les médias restent partagés : ne les supprime pas depuis la copie si tu veux préserver l’original. ¦ Tvöfaldar opna gagnagrunninn til að prófa innflutning eða sameiningu án þess að breyta frumritinu. Miðlarnir eru áfram sameiginlegir: eyddu þeim ekki úr afritinu ef þú vilt halda frumritinu.
+Durée de chaque photo ¦ Lengd hverrar myndar
+Durée de l’appui long ¦ Lengd langrar snertingar
+Décrire les images ¦ Lýsa myndum
+Défilement ¦ Skrun
+Délai après la mort du père ¦ Tími eftir andlát föðurins
+Effacer le groupe (son contenu va dans le groupe d’à côté) ¦ Eyða hópnum (innihald hans fer í næsta hóp)
+En bas de la colonne ¦ Neðst í dálkinum
+En bas de la colonne des badges ¦ Neðst í dálki merkjanna
+En bas de l’en-tête ¦ Neðst í hausnum
+En diaporama ¦ Sem myndasýning
+En français. Pas dans les cases de recherche, les dates, les nombres ni les mots de passe. ¦ Á frönsku. Ekki í leitarreitum, dagsetningum, tölum né lykilorðum.
+En grand, avec sa légende ¦ Stórt, með myndatexta
+En très grand ¦ Mjög stórt
+En-tête actuel ¦ Núverandi haus
+En-tête de la fiche ¦ Haus spjaldsins
+En-têtes ¦ Hausar
+Enlever l’élément choisi ¦ Fjarlægja valið atriði
+Enregistrer la branche ¦ Vista greinina
+Enregistrer le projet sous un autre nom… ¦ Vista verkefnið undir öðru nafni…
+Ensembles prêts ¦ Tilbúin sett
+Entre une date complète pour convertir. ¦ Sláðu inn heila dagsetningu til að umreikna.
+Espace dans les blocs ¦ Bil inni í kubbum
+Espace entre les boutons ¦ Bil milli hnappa
+Espace entre les cadres ¦ Bil milli reita
+Espace entre les lettres ¦ Stafabil
+Espace entre les mots ¦ Orðabil
+Essaie ici ¦ Prófaðu hér
+FICHES ANIMAUX ¦ SPJÖLD DÝRA
+FICHES PERSONNES ET ANIMAUX ¦ SPJÖLD EINSTAKLINGA OG DÝRA
+Fiche d’une personne ¦ Spjald einstaklings
+Fiche · 88 px ¦ Spjald · 88 px
+Fiches personnes ¦ Spjöld einstaklinga
+Fichiers médias ¦ Miðlaskrár
+Fond crème, police de livre, doux pour les yeux ¦ Rjómalitaður bakgrunnur, bókaletur, þægilegt fyrir augun
+Fond pâle (comme avant) ¦ Ljós bakgrunnur (eins og áður)
+Force de la correction ¦ Styrkur leiðréttingar
+Forme de l’en-tête ¦ Lögun hausins
+Forme des boutons ¦ Lögun hnappa
+Forme des listes ¦ Lögun lista
+Français ¦ Franska
+Fratrie étalée ¦ Dreifður systkinahópur
+GEDCOM de référence ¦ Viðmiðunar-GEDCOM
+Garder les dernières ¦ Halda þeim nýjustu
+Gouvernement du Québec ¦ Ríkisstjórn Québec
+Gravité ¦ Alvarleiki
+Grosse flèche de souris ¦ Stór músarbendill
+Grégorien ¦ Gregoríanskt
+Hauteur des boutons ¦ Hæð hnappa
+Hauteur des cadres ¦ Hæð reita
+Hauteur des lignes ¦ Línuhæð
+Hauteur du bandeau ¦ Hæð borðans
+ICÔNES ¦ TÁKN
+Ici : choisis le dossier. L’app y pose une copie de départ ( ¦ Hér: veldu möppuna. Appið setur upphafsafrit í hana (
+Icône + nom ¦ Tákn + nafn
+Icône au-dessus ¦ Tákn fyrir ofan
+Icônes ¦ Tákn
+Ignorée dans une case de texte ; réglable dans Raccourcis clavier. ¦ Hunsað í textareit; hægt að stilla í Flýtilyklum.
+Ils sont gardés avec ta généalogie : chaque tablette ou ordinateur part d’ici. ¦ Þau eru geymd með ættfræðinni þinni: hver spjaldtölva eða tölva byrjar héðan.
+Intégrité SQLite : ¦ Heilleiki SQLite:
+Jamais testé ¦ Aldrei prófað
+Je ne suis pas dans l’arbre ¦ Ég er ekki í trénu
+La forme ¦ Lögunin
+La maison ¦ Húsið
+La personne de départ ¦ Upphafseinstaklingurinn
+La photo de chaque case : plus grande, on se reconnaît plus vite. ¦ Myndin í hverjum reit: stærri, maður þekkir sig fyrr.
+Largeur de la colonne ¦ Breidd dálksins
+Le bouton principal ressort ¦ Aðalhnappurinn sker sig úr
+Le cadre du haut ¦ Efri ramminn
+Le carré de la fiche, partout ¦ Ferningur spjaldsins, alls staðar
+Le dessin de la colonne ¦ Útlit dálksins
+Le gris peut se confondre avec une ligne choisie si l’écran est pâle. ¦ Grái liturinn getur ruglast við valda línu ef skjárinn er ljós.
+Le meilleur des deux ¦ Það besta úr báðum
+Le mode simple ¦ Einfaldur hamur
+Le nom est moins grand ; un style plus « administratif ». ¦ Nafnið er minna; „stjórnsýslulegri“ stíll.
+Le plus discret ¦ Það hógværasta
+Le plus épuré ¦ Það einfaldasta
+Le portrait ¦ Andlitsmyndin
+Le rond ou carré qui montre une personne : ses couleurs, sa photo, ses initiales. ¦ Hringurinn eða ferningurinn sem sýnir einstakling: litir hans, mynd, upphafsstafir.
+Le rouge est peu visible (paraît sombre, se confond avec le vert). ¦ Rauður sést illa (virðist dökkur, ruglast við grænan).
+Le rouge prévient avant de cliquer : on ne supprime pas une fiche par erreur. ¦ Rauður varar við áður en þú smellir: þú eyðir ekki spjaldi óvart.
+Le site propose seulement des candidats. La fusion déplace les données vers la fiche gardée puis supprime l’autre fiche. ¦ Vefurinn stingur aðeins upp á möguleikum. Sameining færir gögnin í spjaldið sem er haldið og eyðir síðan hinu spjaldinu.
+Le sépia est plus doux pour les yeux fatigués ; le sombre n’éblouit pas le soir. ¦ Sepia er mildara fyrir þreytt augu; dökkt blindar ekki á kvöldin.
+Le texte des boutons principaux ¦ Texti aðalhnappanna
+Lecteur d’écran ¦ Skjálesari
+Les anniversaires ¦ Afmælin
+Les blocs se détachent un peu moins du fond. ¦ Kubbarnir skera sig aðeins minna úr bakgrunninum.
+Les couleurs de l’app, sans changement. ¦ Litir appsins, óbreyttir.
+Les dates seules (comme avant) ¦ Aðeins dagsetningar (eins og áður)
+Les deux ¦ Hvort tveggja
+Les fiches marquées « confidentielles » ne sont jamais montrées. ¦ Spjöld merkt „trúnaðarmál“ eru aldrei sýnd.
+Les gros boutons ¦ Stóru hnapparnir
+Les modifications effectuées depuis ce site sont enregistrées ici. ¦ Breytingar gerðar frá þessum vef eru skráðar hér.
+Les personnes ¦ Einstaklingarnir
+Les photos ¦ Myndirnar
+Les réglages du prototype que tu as aimé ¦ Stillingar frumgerðarinnar sem þér líkaði
+Lettres d’origine ¦ Upprunalegir stafir
+Lien « 🧩 Cette personne était… » ¦ Tengill „🧩 Þessi einstaklingur var…“
+Liens toujours soulignés ¦ Tenglar alltaf undirstrikaðir
+Lier au mode Artiste : masqué pour les personnes non artistes ¦ Tengja við Listamannsham: falið fyrir þá sem eru ekki listamenn
+Lieux et souvenirs ¦ Staðir og minningar
+Lire les légendes des photos dans le diaporama ¦ Lesa myndatexta upphátt í myndasýningunni
+Lire l’histoire dès qu’on ouvre une fiche ¦ Lesa söguna um leið og spjald opnast
+Liste aérée ¦ Rúmgóður listi
+Liste continue ¦ Samfelldur listi
+Liste · 34 px ¦ Listi · 34 px
+Listes et arbre ¦ Listar og tré
+Longévité 🔴 ¦ Langlífi 🔴
+Longévité 🟠 ¦ Langlífi 🟠
+L’ambiance des archives ¦ Andrúmsloft skjalasafnsins
+L’app dit alors les noms, sans « ta mère » ni « ton petit-fils ». ¦ Appið segir þá nöfnin, án „mamma þín“ eða „barnabarnið þitt“.
+L’arbre ¦ Tréð
+L’heure et la date ¦ Tími og dagsetning
+L’ombre fait « touche qu’on enfonce ». Elle suit le style général (franche, douce ou aucune). ¦ Skugginn lítur út eins og „lykill sem er þrýst á“. Hann fylgir almenna stílnum (skarpur, mjúkur eða enginn).
+Masquer tout le cadre ¦ Fela allan rammann
+Mettre les espacements conseillés pour la dyslexie ¦ Nota ráðlagt bil fyrir lesblindu
+Mode consultation (la famille regarde sans rien modifier) ¦ Skoðunarhamur (fjölskyldan skoðar án þess að breyta neinu)
+Modifier ce cadre ¦ Breyta þessum reit
+Moins de boutons, moins d’hésitation : garde seulement ce que la personne aime regarder. Un cadre ajouté peut ouvrir directement la fiche d’une personne, ses photos ou un petit mot. ¦ Færri hnappar, minna hik: haltu aðeins því sem einstaklingurinn hefur gaman af að skoða. Viðbættur reitur getur opnað beint spjald einstaklings, myndir hans eða stutt skilaboð.
+Moins de choses visibles d’un coup ; plus de défilement. ¦ Færra sýnilegt í einu; meira skrun.
+Moins de lignes visibles ; plus de défilement. ¦ Færri sýnilegar línur; meira skrun.
+Moins de place pour les boutons ; plus décoratif que pratique. ¦ Minna pláss fyrir hnappa; meira skraut en gagn.
+Montre l’écran comme le voit une personne daltonienne, pour vérifier qu’un document reste lisible avant de l’envoyer ou de l’imprimer. Rien n’est modifié. ¦ Sýnir skjáinn eins og litblindur einstaklingur sér hann, til að athuga að skjal haldist læsilegt áður en þú sendir það eða prentar. Engu er breytt.
+Montrer la photo de la fiche quand elle existe ¦ Sýna mynd spjaldsins þegar hún er til
+Montrer les boutons « 🔊 Écouter » ¦ Sýna hnappana „🔊 Hlusta“
+Médias et transcriptions ¦ Miðlar og uppskriftir
+Ne range jamais le fichier de la base lui-même dans iCloud ou Dropbox pour l’ouvrir des deux côtés : l’app le refuse (verrou), car il pourrait s’abîmer. ¦ Settu aldrei sjálfa gagnagrunnsskrána í iCloud eða Dropbox til að opna hana á báðum stöðum: appið neitar því (lás), því hún gæti skemmst.
+Net et régulier ¦ Hreint og jafnt
+Norvégien ¦ Norska
+Nouveau GEDCOM ¦ Nýtt GEDCOM
+Nouvelle étiquette ¦ Nýtt merki
+Numéros ¦ Númer
+Numéros qui se suivent (01, 02, 03…), les mêmes onglets partout (icône + nom), « Liste | Fiches » dans la barre au-dessus de la liste ¦ Samfelld númer (01, 02, 03…), sömu flipar alls staðar (tákn + nafn), „Listi | Spjöld“ í stikunni fyrir ofan listann
+N’importe quel autre lieu peut être saisi librement. ¦ Hvaða annan stað sem er má slá inn frjálst.
+On suit la ligne sans se tromper ¦ Þú fylgir línunni án þess að villast
+Onglets du haut ¦ Efri flipar
+Ordre des pages des Réglages ¦ Röð síðna í Stillingum
+Ordre et visibilité des boutons ¦ Röð og sýnileiki hnappa
+Ordre et visibilité des éléments de l’en-tête ¦ Röð og sýnileiki atriða í hausnum
+Par défaut ¦ Sjálfgefið
+Par ligne ¦ Í hverri línu
+Pareil que l’app ¦ Eins og appið
+Parle au lieu de taper : un petit 🎤 apparaît dans le champ texte où tu écris. Clique dessus (ou ¦ Talaðu í stað þess að skrifa: lítill 🎤 birtist í textareitnum sem þú skrifar í. Smelltu á hann (eða
+Pas de numéros ¦ Engin númer
+Pas vérifiée ¦ Ekki athuguð
+Pastille sous le nom ¦ Merki undir nafninu
+Persan (hégirien solaire) ¦ Persneskt (sólar-hijri)
+Personne qui regarde ¦ Einstaklingur sem horfir
+Personnes identifiées ¦ Auðkenndir einstaklingar
+Personnes vivantes ¦ Lifandi einstaklingar
+Petit écran ¦ Lítill skjár
+Peut se confondre avec un lien ; demande un peu d’habitude. ¦ Getur ruglast við tengil; krefst smá vana.
+Photo de la personne ¦ Mynd af einstaklingnum
+Photo des cases de l’arbre ¦ Mynd í reitum trésins
+Photos retirées ¦ Fjarlægðar myndir
+Pictogrammes des tableaux ¦ Tákn taflnanna
+Place de ＋ Nouvelle observation ¦ Staðsetning ＋ Ný athugun
+Plus calme pour les yeux ¦ Rólegra fyrir augun
+Plus discret que « Comme avant » : les blocs se détachent un peu moins. ¦ Hógværara en „Eins og áður“: kubbarnir skera sig aðeins minna úr.
+Plus d’actions (menu ⋯) ¦ Fleiri aðgerðir (valmynd ⋯)
+Plus d’espace : on touche moins souvent le bouton d’à côté. ¦ Meira bil: þú hittir sjaldnar á hnappinn við hliðina.
+Plus grandes, elles se voient de loin ; plus petites, les barres d’outils prennent moins de place. ¦ Stærri sjást þau langt að; minni taka tækjastikurnar minna pláss.
+Plus haut, la photo se voit mieux ; plus bas, la fiche commence plus tôt. Seulement pour le bandeau photo. ¦ Hærri sést myndin betur; lægri byrjar spjaldið fyrr. Aðeins fyrir myndaborðann.
+Police des cadres ¦ Letur reitanna
+Portée ¦ Umfang
+Pour la dyslexie : choisis celle qui te va ¦ Fyrir lesblindu: veldu það sem hentar þér
+Pour quitter ¦ Til að hætta
+Pour tout le monde ¦ Fyrir alla
+Pratique pour apprendre l’app : plus besoin de passer la souris pour savoir ce que fait chaque bouton. Prend un peu plus de place. ¦ Hentugt til að læra á appið: þú þarft ekki að færa músina yfir til að vita hvað hver hnappur gerir. Tekur aðeins meira pláss.
+Prend de la hauteur ; sans photo, le bandeau prend la couleur principale (Apparence). ¦ Tekur hæð; án myndar fær borðinn aðallitinn (Útlit).
+Proposer dans le menu ¦ Bjóða í valmyndinni
+Prénom + nom (JM) ¦ Fornafn + eftirnafn (JM)
+Prénom seulement ¦ Aðeins fornafn
+Présentation (Keynote) ¦ Kynning (Keynote)
+Quand il y a beaucoup de boutons, on ne voit plus lequel est important. ¦ Þegar hnapparnir eru margir sést ekki lengur hver skiptir máli.
+Quand personne ne touche, lancer le diaporama ¦ Þegar enginn snertir, hefja myndasýninguna
+Quand plusieurs personnes se servent de la même tablette. ¦ Þegar nokkrir nota sömu spjaldtölvuna.
+Quelqu’un d’autre de la famille ¦ Einhver annar í fjölskyldunni
+Qui est-ce ? ¦ Hver er þetta?
+Qui regarde ¦ Hver horfir
+Qui regarde ? ¦ Hver er að horfa?
+Qui regarde l’arbre ? ¦ Hver er að skoða tréð?
+Qui se suivent ¦ Samfelld
+Quitter le mode simple ¦ Hætta í einföldum ham
+Rattaché à ¦ Tengt við
+Recherche et enquêtes ¦ Rannsóknir og athuganir
+Reculer le morceau → ¦ Færa bútinn aftur →
+Remettre un réglage exporté (fichier .json) ¦ Setja inn útflutta stillingu (.json-skrá)
+Ressemblance des doublons ¦ Líkindi tvítekninga
+Rien ne bouge ¦ Ekkert hreyfist
+Récit d’une vie (diaporama tout fait) ¦ Lífssaga (tilbúin myndasýning)
+Réduire les mouvements ¦ Draga úr hreyfingum
+Réglages de base ¦ Grunnstillingar
+Réglages et export ¦ Stillingar og útflutningur
+Républicain ¦ Lýðveldis-
+Sans couleur, il faut parfois une seconde de plus pour les reconnaître. ¦ Án lita tekur stundum sekúndu lengur að þekkja þá.
+Se lit comme un acte ¦ Lesið eins og skjal
+Ses photos, ceux qui y sont nés ¦ Myndir hans, þeir sem fæddust þar
+Signatures identifiées ¦ Auðkenndar undirskriftir
+Son rapide ¦ Hratt hljóð
+Sortie et démarrage ¦ Útganga og ræsing
+Sous la souris ¦ Undir músinni
+Sous le nom ¦ Undir nafninu
+Sous À vérifier, Hors généalogie, Artiste. ¦ Undir Að athuga, Utan ættfræðinnar, Listamaður.
+Sous-titres toujours affichés ¦ Skjátextar alltaf sýndir
+Studio son ¦ Hljóðver
+Style des entrées ¦ Stíll færslna
+Style des fiches ¦ Stíll spjalda
+Style « acte ancien » ¦ Stíllinn „gamalt skjal“
+Style « carte d’identité » ¦ Stíllinn „persónuskilríki“
+Suit l’accessibilité de l’app ¦ Fylgir aðgengi appsins
+Sur 1 colonne ¦ Í 1 dálki
+Sur 2 colonnes ¦ Í 2 dálkum
+Sur 2 lignes (défaut) ¦ Í 2 línum (sjálfgefið)
+Sur cet appareil ¦ Á þessu tæki
+Sur l’autre ordinateur : ouvre ¦ Á hinni tölvunni: opnaðu
+Sur un grand écran, l’œil peut sauter de ligne. ¦ Á stórum skjá getur augað hoppað yfir línu.
+Sur un petit portable, il faut souvent faire défiler. ¦ Á lítilli fartölvu þarf oft að skruna.
+Sur un téléphone, la barre du haut est repliée : ces boutons n’y sont pas montrés. ¦ Í síma er efsta stikan felld saman: þessir hnappar sjást ekki þar.
+Suédois ¦ Sænska
+Sépia doux ¦ Mjúk sepia
+Ta version ¦ Þín útgáfa
+Taille des entrées ¦ Stærð færslna
+Taille des icônes ¦ Stærð tákna
+Taille des initiales ¦ Stærð upphafsstafa
+Taille du texte ¦ Textastærð
+Taille du titre des cadres ¦ Stærð titils reitanna
+Tchèque ¦ Tékkneska
+Tes réglages d’accessibilité valent aussi ici ¦ Aðgengisstillingar þínar gilda líka hér
+Tester cette sauvegarde ¦ Prófa þetta afrit
+Texte et traits ¦ Texti og línur
+Thème et couleurs → Taille typographique ¦ Þema og litir → Leturstærð
+Ton prénom ¦ Fornafnið þitt
+Touche O pour une nouvelle observation ¦ Lykillinn O fyrir nýja athugun
+Touche de l’outil ¦ Lykill tólsins
+Touche ta photo. L’app dira ensuite « ta mère », « ton petit-fils »… ¦ Snertu myndina þína. Appið segir síðan „mamma þín“, „barnabarnið þitt“…
+Touche un gros bouton pour commencer. ¦ Snertu stóran hnapp til að byrja.
+Touches déjà prévues dans cet outil ¦ Lyklar sem þegar eru í þessu tóli
+Toujours proposée (la forme de départ) ¦ Alltaf í boði (upphaflega formið)
+Tous, dans l’ordre d’origine ¦ Öll, í upprunalegri röð
+Tout désélectionner ¦ Afvelja allt
+Tout d’un coup d’œil ¦ Allt í einni sjónhendingu
+Tout le monde ¦ Allir
+Tout seul ¦ Sjálfkrafa
+Tout sélectionner ¦ Velja allt
+Toute l’app ¦ Allt appið
+Toutes les ¦ Á
+Toutes les … heures ¦ Á … klukkustunda fresti
+Traits entre les lignes ¦ Línur milli raða
+Trois par ligne ¦ Þrír í línu
+Très grande (56 px) ¦ Mjög stór (56 px)
+Très lisible ¦ Mjög læsilegt
+Très petite (30 px) ¦ Mjög lítil (30 px)
+Un album ¦ Albúm
+Un appui long ne se fait pas par hasard : on ne sort pas par erreur. ¦ Löng snerting gerist ekki óvart: þú ferð ekki út fyrir mistök.
+Un bord noir va avec les blocs de l’app (tous ont un trait noir de 2 px) ; sans bord, c’est plus léger. Sur les plus petits portraits, le bord s’affine tout seul. ¦ Svartur kantur passar við kubba appsins (allir eru með 2 px svarta línu); án kants er það léttara. Á minnstu andlitsmyndunum þynnist kanturinn sjálfkrafa.
+Un bouton carré 🧩, dans la colonne des boutons ¦ Ferkantaður hnappur 🧩, í dálki hnappanna
+Un bouton qui ne répond pas, un écran bizarre, un message d’erreur ? Décris-le : un rapport technique (sans aucune donnée de ta généalogie) est préparé, tu le relis, puis tu l’envoies par GitHub ou par e-mail. ¦ Hnappur sem svarar ekki, undarlegur skjár, villuboð? Lýstu því: tæknileg skýrsla (án nokkurra gagna úr ættfræðinni þinni) er útbúin, þú lest hana yfir og sendir hana síðan um GitHub eða í tölvupósti.
+Un doigt qui tremble touche facilement un bouton de 72 px ou plus (64 px au moins). ¦ Skjálfandi fingur hittir auðveldlega hnapp sem er 72 px eða stærri (64 px að minnsta kosti).
+Un film de famille ¦ Fjölskyldukvikmynd
+Un lieu de famille ¦ Fjölskyldustaður
+Un mot de la famille ¦ Orð frá fjölskyldunni
+Un petit jeu avec les portraits ¦ Lítill leikur með andlitsmyndum
+Un petit portrait au début de chaque ligne ¦ Lítil andlitsmynd í byrjun hverrar línu
+Un peu grande (46 px) ¦ Frekar stór (46 px)
+Un peu moins « cliquable » au premier regard. ¦ Aðeins minna „smellanlegt“ við fyrstu sýn.
+Un peu petite (38 px) ¦ Frekar lítil (38 px)
+Un peu « bureau » : moins de caractère que les autres. ¦ Svolítið „skrifstofulegt“: minni karakter en hin.
+Un son, une chanson ¦ Hljóð, lag
+Un trait épais ressemble aux traits noirs de l’app ; un trait fin fait plus élégant. Seulement pour les icônes au trait. ¦ Þykk lína líkist svörtu línum appsins; fín lína er glæsilegri. Aðeins fyrir línutákn.
+Une copie de ta généalogie, faite toute seule, vérifiée, rangée dans le dossier de ton choix. ¦ Afrit af ættfræðinni þinni, gert sjálfkrafa, athugað, geymt í möppu að eigin vali.
+Une copie quand tu quittes l’app (ou fermes l’onglet), seulement si quelque chose a changé. ¦ Afrit þegar þú hættir í appinu (eða lokar flipanum), aðeins ef eitthvað hefur breyst.
+Une grande colonne ¦ Einn stór dálkur
+Une grande partie des formes des tableaux (animaux, métiers, maison, transports, météo, santé…) vient de ¦ Stór hluti forma taflnanna (dýr, starfsgreinar, hús, samgöngur, veður, heilsa…) kemur frá
+Une ombre sous les boutons ¦ Skuggi undir hnöppum
+Une photo ¦ Mynd
+Une photo rend la fiche vivante. Sans elle, les initiales prennent sa place (le bandeau prend la couleur principale de l’Apparence). ¦ Mynd gæðir spjaldið lífi. Án hennar koma upphafsstafirnir í staðinn (borðinn fær aðallit Útlitsins).
+Une phrase écoutée se comprend même quand on lit mal. ¦ Setning sem maður heyrir skilst jafnvel þegar maður les illa.
+Une seule couleur pour tous (comme la fiche) ¦ Einn litur fyrir alla (eins og spjaldið)
+Une seule lettre, celle du nom (M) ¦ Aðeins einn stafur, eftirnafnsins (M)
+Utile quand un petit-enfant joue aussi avec la tablette. Ce n’est pas une vraie protection : il évite seulement de sortir par erreur. ¦ Gagnlegt þegar barnabarn leikur sér líka með spjaldtölvuna. Þetta er ekki raunveruleg vörn: það kemur aðeins í veg fyrir að farið sé út fyrir mistök.
+Utiliser la personne affichée ¦ Nota einstaklinginn sem er sýndur
+Verrouiller / déverrouiller ¦ Læsa / aflæsa
+Vert affaibli (le plus courant de tous). ¦ Veiklaður grænn (algengast af öllum).
+Vitesse de la voix ¦ Hraði raddarinnar
+Voir l’aperçu ¦ Sjá forskoðun
+Voix française de l’appareil ¦ Frönsk rödd tækisins
+Vu la dernière fois (fiches d’animaux) ¦ Síðast séð (spjöld dýra)
+Zoom de départ ¦ Upphafsaðdráttur
+arrête la lecture. ¦ stöðvar lesturinn.
+au-delà de ¦ yfir
+carré photo, grand nom ¦ ferningsmynd, stórt nafn
+champs rangés, photo d’identité ¦ reitir í röð, passamynd
+chaque ligne dans son cadre ¦ hver lína í sínum ramma
+chaque liste garde le sien ¦ hver listi heldur sínu
+chaque outil le sien ¦ hvert tól sitt
+coins arrondis, ombres légères ¦ rúnnuð horn, léttir skuggar
+dans LCNDA (écran de démarrage → Importer un fichier, ou une nouvelle généalogie vide), puis ici même, choisis le même dossier. ¦ í LCNDA (upphafsskjár → Flytja inn skrá, eða ný tóm ættfræði), veldu síðan sömu möppu hér.
+de départ ¦ upphaflegt
+dossier partagé ¦ sameiginleg mappa
+du nom ¦ nafnsins
+décédé ¦ látinn
+décédée ¦ látin
+ex. Dimensions, Technique, Lieu de conservation ¦ t.d. Mál, Tækni, Varðveislustaður
+icônes fines, une seule couleur ¦ fín tákn, einn litur
+impossible au-delà de ¦ ómögulegt yfir
+juste au-dessus de la liste ¦ rétt fyrir ofan listann
+la Densité ne s’y ajoute pas ¦ Þéttleikinn bætist ekki við
+la liste des projets ¦ listinn yfir verkefni
+le numéro dans un carré ¦ númerið í ferningi
+là où il était ¦ þar sem það var
+l’entrée choisie dépasse ¦ valin færsla stendur út
+on passe par le bloc « 👁 Observations » ¦ notaðu kubbinn „👁 Athuganir“
+papier, phrase d’état civil ¦ pappír, setning úr kirkjubók
+par défaut ¦ sjálfgefið
+plus d’espace ¦ meira bil
+plus d’espace partout ¦ meira bil alls staðar
+règle tout d’un coup ; tu peux ensuite changer chaque ligne (« retouché » s’affiche). ¦ stillir allt í einu; síðan geturðu breytt hverri línu („lagfært“ birtist).
+sans icône ¦ ekkert tákn
+se règle dans ¦ er stillt í
+serré, plus de lignes ¦ þétt, fleiri línur
+sous l’en-tête de la fiche, replié ¦ undir haus spjaldsins, fellt saman
+sur une ligne ¦ í einni línu
+taille du texte ¦ textastærð
+tout dans un cadre ¦ allt í einum ramma
+tout reste comme avant ¦ allt helst eins og áður
+trait pour agir, émoji pour les rubriques ¦ lína fyrir aðgerðir, emoji fyrir flokka
+traits fins, grain du papier ¦ fínar línur, pappírsáferð
+traits épais, ombres franches ¦ þykkar línur, skarpir skuggar
+un seul cadre, lignes fines ¦ einn rammi, fínar línur
+un trait fin, fond transparent ¦ fín lína, gegnsær bakgrunnur
+« Calendrier de cette date » ¦ „Dagatal þessarar dagsetningar“
+« Liste | Fiches » ¦ „Listi | Spjöld“
+« Retirer » cache la photo du mode simple seulement : elle reste dans tes médias. ¦ „Fjarlægja“ felur myndina aðeins í einföldum ham: hún er áfram í miðlunum þínum.
+« ＋ Nouvelle observation · vu il y a 2 j » ¦ „＋ Ný athugun · séð fyrir 2 d“
+À chaque ouverture ¦ Í hvert sinn sem það opnast
+À droite, les unes sous les autres (comme avant) ¦ Til hægri, hvert undir öðru (eins og áður)
+À vérifier, branche maternelle, acte illisible… ¦ Að athuga, móðurgrein, ólæsilegt skjal…
+À écouter ¦ Til að hlusta á
+Âge de la mère 🔴 ¦ Aldur móður 🔴
+Âge de la mère 🟠 ¦ Aldur móður 🟠
+Âge du père 🔴 ¦ Aldur föður 🔴
+Âge du père 🟠 ¦ Aldur föður 🟠
+Âge minimum au mariage ¦ Lágmarksaldur við hjónaband
+Ère ¦ Tímatal
+Ère d’Espagne ¦ Spænskt tímatal
+Écart entre deux naissances ¦ Bil milli tveggja fæðinga
+Écouter ¦ Hlusta
+Édition ¦ Breyta
+Émojis ¦ Emoji
+Énorme (62 px) ¦ Risastór (62 px)
+Épaisseur des traits ¦ Þykkt lína
+Épaisseur du trait ¦ Þykkt línu
+Éteint : seulement la pastille « Vu hier ». ¦ Slökkt: aðeins merkið „Séð í gær“.
+Éthiopien ¦ Eþíópískt
+Étoile ¦ Stjarna
+à vérifier au-delà de ¦ að athuga yfir
+← Avancer le morceau ¦ ← Færa bútinn fram
+↗ Voir les versions publiées ¦ ↗ Sjá útgefnar útgáfur
+↺ Remettre seulement les groupes ¦ ↺ Upphafsstilla aðeins hópana
+↻ Relancer le contrôle ¦ ↻ Keyra athugunina aftur
+▶ Ouvrir le mode simple ¦ ▶ Opna einfaldan ham
+♿ Voir les réglages de toute l’app ¦ ♿ Sjá stillingar alls appsins
+⤓ Exporter ce réglage ¦ ⤓ Flytja út þessa stillingu
+＋ Créer une forme… ¦ ＋ Búa til form…
+＋ Nouvelle branche ¦ ＋ Ný grein
+＋ Nouvelle forme… ¦ ＋ Nýtt form…
+＋ Nouvelle observation (fiches d’animaux) ¦ ＋ Ný athugun (spjöld dýra)
+＋ Nouvelle étiquette ¦ ＋ Nýtt merki
+🌳 L’arbre ¦ 🌳 Tréð
+🎂 Âges ¦ 🎂 Aldur
+🎤 Dictée vocale ¦ 🎤 Raddinnsláttur
+🎯 Élément choisi ¦ 🎯 Valið atriði
+👁 Aperçu : le même réglage partout ¦ 👁 Forskoðun: sama stilling alls staðar
+👁 Aperçu vivant ¦ 👁 Lifandi forskoðun
+👁 Essayer ici ¦ 👁 Prófa hér
+👁＋ Observation · 🩺＋ Santé · 📍 Trajet GPS · 🔖 Marque ¦ 👁＋ Athugun · 🩺＋ Heilsa · 📍 GPS-leið · 🔖 Merking
+👤 Sur la fiche ¦ 👤 Á spjaldinu
+👥 Les personnes ¦ 👥 Einstaklingarnir
+📊 Moyennes de la famille ¦ 📊 Meðaltöl fjölskyldunnar
+📜 Sépia ¦ 📜 Sepia
+📦 Quoi ¦ 📦 Hvað
+📷 Les photos ¦ 📷 Myndirnar
+🔗 Relier ce dossier ¦ 🔗 Tengja þessa möppu
+🔴 moins de ¦ 🔴 minna en
+🔴 naissance plus tard que ¦ 🔴 fæðing seinna en
+🔷 Formes des avatars ¦ 🔷 Lögun mynda
+🖨 Imprimer la liste ¦ 🖨 Prenta listann
+🗂 Les copies ¦ 🗂 Afritin
+🗑 Enlever l’élément choisi ¦ 🗑 Fjarlægja valið atriði
+🟠 au-delà de ¦ 🟠 yfir
+🟡 au-delà de ¦ 🟡 yfir
+🟡 plus de ¦ 🟡 meira en
+🟡 écart de plus de ¦ 🟡 bil meira en
+🦮 Lecteur d’écran ¦ 🦮 Skjálesari
+🪙 Convertisseur d’autrefois ¦ 🪙 Umreiknari fyrri tíma
+C’est ton anniversaire ! ¦ Þú átt afmæli!
+{name} a {n} ans aujourd’hui ! ¦ {name} á {n} ára afmæli í dag!
+Il est né {details}. ¦ Hann fæddist {details}.
+Elle est née {details}. ¦ Hún fæddist {details}.
+{a} et {b} se sont mariés il y a {n} ans ¦ {a} og {b} giftu sig fyrir {n} árum
+{name} aurait eu {n} ans aujourd’hui ¦ {name} hefði orðið {n} ára í dag
+On se souvient de {name} ¦ Við minnumst {name}
+Elle nous a quittés {details}, il y a {n} ans. ¦ Hún kvaddi okkur {details}, fyrir {n} árum.
+Il nous a quittés {details}, il y a {n} ans. ¦ Hann kvaddi okkur {details}, fyrir {n} árum.
+ton anniversaire ¦ afmælið þitt
+Elle aurait eu {n} ans ¦ Hún hefði orðið {n} ára
+Il aurait eu {n} ans ¦ Hann hefði orðið {n} ára
+Tu auras {n} ans ¦ Þú verður {n} ára
+Elle aura {n} ans ¦ Hún verður {n} ára
+Il aura {n} ans ¦ Hann verður {n} ára
+Mariés ici ¦ Gift hér
+Né·es ici ¦ Fædd hér
+Mort·es ici ¦ Dáin hér
+Bravo ! C’est {name} ({rel}). ¦ Vel gert! Þetta er {name} ({rel}).
+Bravo ! C’est {name}. ¦ Vel gert! Þetta er {name}.
+toi ¦ þú
+Avec toi ({n}) ¦ Með þér ({n})
+Ses photos ({n}) ¦ Myndir af viðkomandi ({n})
+Sur la photo : {names}. ¦ Á myndinni: {names}.
+=personne trouvée ¦ einstaklingur fannst|einstaklingar fundust
+Icône du gros bouton ¦ Tákn stóra hnappsins
+Un cadre ¦ Reitur
+Écris le mot ¦ Skrifaðu orðsendinguna
+Choisis la maison ¦ Veldu húsið
+Choisis la personne ¦ Veldu einstaklinginn
+Choisis la photo ¦ Veldu myndina
+Choisis les photos ¦ Veldu myndirnar
+Choisis le film ¦ Veldu kvikmyndina
+Choisis le son ¦ Veldu hljóðið
+Choisis le lieu ¦ Veldu staðinn
+Écris le numéro ¦ Skrifaðu númerið
+Sa fiche ¦ Spjaldið
+Un mot ¦ Orðsending
+Un film ¦ Kvikmynd
+Un lieu ¦ Staður
+Un instant… ¦ Augnablik…
+Sans prénom ¦ Ekkert fornafn
+Un instant, on prépare l’arbre… ¦ Augnablik, verið er að undirbúa tréð…
+Un instant, on construit la maison… ¦ Augnablik, verið er að byggja húsið…
+La maison n’a pas pu être montrée. ¦ Ekki tókst að sýna húsið.
+Monter d’un étage ¦ Fara upp um hæð
+Descendre d’un étage ¦ Fara niður um hæð
+Voir toute la maison ¦ Sjá allt húsið
+Plus près ¦ Nær
+Plus loin ¦ Fjær
+La visite ¦ Skoðunarferðin
+Étage ¦ Hæð
+Il se passe quelque chose aujourd’hui ! ¦ Eitthvað er að gerast í dag!
+Continue… encore un peu ¦ Haltu áfram… aðeins lengur
+On ne connaît pas encore ses parents ¦ Foreldrar eru ekki enn þekktir
+Voir sa fiche ¦ Sjá spjaldið
+Pas d’enfants connus ¦ Engin þekkt börn
+Plus gros ¦ Stærra
+Plus de monde ¦ Fleira fólk
+Photo d’avant ¦ Fyrri mynd
+Cacher les noms ¦ Fela nöfnin
+Qui est là ? ¦ Hver er þarna?
+Arrêter le défilement ¦ Stöðva myndasýninguna
+Défilement tout seul ¦ Spila sjálfkrafa
+Ses maris ¦ Eiginmenn hennar
+Son mari ¦ Eiginmaður hennar
+Ses femmes ¦ Eiginkonur hans
+Sa femme ¦ Eiginkona hans
+Son conjoint ¦ Maki
+Sa sœur ¦ Systir
+Son frère ¦ Bróðir
+Ses frères et sœurs ¦ Systkini
+Écouter son histoire ¦ Hlusta á söguna
+Voir dans l’arbre ¦ Sjá í trénu
+Ses parents ¦ Foreldrar
+Son parent ¦ Foreldri
+Ses enfants ¦ Börn
+Son enfant ¦ Barn
+Par famille ¦ Eftir fjölskyldu
+Par prénom ¦ Eftir fornafni
+La famille d’aujourd’hui ¦ Fjölskyldan í dag
+Touche la première lettre du prénom. ¦ Snertu fyrsta stafinn í fornafninu.
+Touche la personne qui regarde. ¦ Snertu einstaklinginn sem horfir.
+Tape un prénom ou un nom ¦ Sláðu inn fornafn eða eftirnafn
+Effacer une lettre ¦ Eyða staf
+J’écoute… ¦ Ég hlusta…
+Je n’ai pas bien entendu. Réessaie, ou utilise le clavier. ¦ Ég heyrði ekki vel. Reyndu aftur, eða notaðu lyklaborðið.
+La dictée n’a pas marché. Utilise le clavier. ¦ Raddinnslátturinn virkaði ekki. Notaðu lyklaborðið.
+Voir la photo ¦ Sjá myndina
+🎈 Bientôt ¦ 🎈 Bráðum
+Dis d’abord qui regarde : l’app montrera ta famille. ¦ Segðu fyrst hver horfir: appið sýnir fjölskylduna þína.
+Tes conjoints ¦ Makar þínir
+Ta femme ¦ Konan þín
+Ton mari ¦ Maðurinn þinn
+Tes parents ¦ Foreldrar þínir
+Tes grands-parents ¦ Afi þinn og amma
+Tes enfants ¦ Börnin þín
+Tes petits-enfants ¦ Barnabörnin þín
+Tes arrière-petits-enfants ¦ Barnabarnabörnin þín
+Personne n’est encore relié dans l’arbre. ¦ Enginn er enn tengdur í trénu.
+Ton anniversaire ¦ Afmælið þitt
+Les anniversaires qui arrivent ¦ Afmæli fram undan
+Pas de date de naissance connue pour l’instant. ¦ Enginn þekktur fæðingardagur í bili.
+Voir les photos ¦ Sjá myndirnar
+Il faut au moins trois portraits pour jouer. ¦ Það þarf að minnsta kosti þrjár andlitsmyndir til að spila.
+Un autre portrait ¦ Önnur andlitsmynd
+Écouter l’heure ¦ Hlusta á tímann
+Écouter le numéro ¦ Hlusta á númerið
+Tape le code pour quitter ¦ Sláðu inn kóðann til að hætta
+Arrêter ¦ Stöðva
+Les gros boutons : avancer, reculer, tourner. On passe par les portes. ¦ Stóru hnapparnir: áfram, aftur á bak, snúa. Þú ferð í gegnum dyrnar.
+On voit déjà le plus de monde possible. ¦ Þú sérð nú þegar eins marga og hægt er.
+Pas de frère ou de sœur après. ¦ Enginn bróðir eða systir á eftir.
+Pas de frère ou de sœur avant. ¦ Enginn bróðir eða systir á undan.
+Mode simple quitté. Tu retrouves l’app normale. ¦ Einföldum ham lokað. Þú ert aftur í venjulega appinu.
+Première fois : vérifie ces réglages, puis « ▶ Ouvrir le mode simple ». ¦ Fyrsta skiptið: athugaðu þessar stillingar, síðan „▶ Opna einfaldan ham“.
+▶ Démarrer le mode simple ¦ ▶ Hefja einfaldan ham
+⚙️ Préparer ¦ ⚙️ Undirbúa
+Ta couleur ¦ Liturinn þinn
+La personne ¦ Einstaklingurinn
+⚠️ Pas encore de photo de cette personne : le cadre est caché ¦ ⚠️ Engin mynd enn af þessum einstaklingi: reiturinn er falinn
+Écrite toute seule (nombre de photos, souvenirs du jour) ¦ Skrifað sjálfkrafa (fjöldi mynda, minningar dagsins)
+Le mot ¦ Orðsendingin
+Icône du cadre ¦ Tákn reitsins
+↺ Remettre ce cadre comme au départ ¦ ↺ Upphafsstilla þennan reit
+Retirer ce cadre ¦ Fjarlægja þennan reit
+La photo ¦ Myndin
+Le film ¦ Kvikmyndin
+Le son ¦ Hljóðið
+Le lieu ¦ Staðurinn
+Choisis un lieu… ¦ Veldu stað…
+Aucun lieu dans l’arbre pour l’instant (naissances, mariages, photos). ¦ Enginn staður í trénu í bili (fæðingar, hjónabönd, myndir).
+Le numéro ¦ Númerið
+Montre la famille de la personne qui regarde (ses parents, ses enfants, ses petits-enfants…). ¦ Sýnir fjölskyldu einstaklingsins sem horfir (foreldra, börn, barnabörn…).
+Les anniversaires des vivants, du plus proche au plus lointain. ¦ Afmæli lifandi fólks, frá því næsta til þess fjarlægasta.
+Un portrait, trois prénoms : il faut trouver le bon. Il faut au moins trois portraits. ¦ Ein andlitsmynd, þrjú fornöfn: finndu rétta nafnið. Það þarf að minnsta kosti þrjár andlitsmyndir.
+Toutes les photos, dans le désordre. ¦ Allar myndirnar, í óreglulegri röð.
+Propre au mode simple ¦ Sér fyrir einfaldan ham
+✕ Fermer l’essai ¦ ✕ Loka prófuninni
+Daltonisme propre au mode simple ¦ Litblinda aðeins fyrir einfaldan ham
+Contraste fort dans le mode simple ¦ Mikil birtuskil í einföldum ham
+Moins d’animations dans le mode simple ¦ Færri hreyfimyndir í einföldum ham
+✓ Appliqué ¦ ✓ Virkt
+Personne de l’arbre ¦ Einstaklingur í trénu
+Le contraste fort est allumé : les couleurs choisies ici reviendront quand tu l’éteindras. ¦ Mikil birtuskil eru virk: litirnir sem valdir eru hér koma aftur þegar þú slekkur á þeim.
+✓ très lisible ¦ ✓ mjög læsilegt
+Jamais moins de 22 px. ¦ Aldrei minna en 22 px.
+Comme l’app ¦ Eins og appið
+↺ Remettre la disposition comme au départ ¦ ↺ Upphafsstilla uppsetninguna
+ℹ️ Le « mode confidentialité » de l’app est allumé : les vivants sont montrés par leur prénom seulement. ¦ ℹ️ „Persónuverndarhamur“ appsins er virkur: lifandi fólk er aðeins sýnt með fornafni.
+Les branches apparaîtront quand l’arbre sera lu. ¦ Greinarnar birtast þegar tréð hefur verið lesið.
+Remettre dans le mode simple ¦ Setja aftur í einfaldan ham
+🔒 Un code est enregistré (il est gardé caché, même pour l’app). Tape 4 chiffres pour le changer. ¦ 🔒 Kóði er vistaður (hann er falinn, líka fyrir appinu). Sláðu inn 4 tölustafi til að breyta honum.
+Coupé : cet appareil garde ses propres réglages du mode simple. ¦ Slökkt: þetta tæki heldur sínum eigin stillingum fyrir einfaldan ham.
+⚠️ À corriger ¦ ⚠️ Að leiðrétta
+⚠️ Pas assez lisible ¦ ⚠️ Ekki nógu læsilegt
+Essai fermé : c’est ainsi qu’on quitte le mode simple. ¦ Prófun lokað: svona ferðu úr einföldum ham.
+La photo du gros bouton ¦ Mynd stóra hnappsins
+Les photos du gros bouton ¦ Myndir stóra hnappsins
+Le film du gros bouton ¦ Kvikmynd stóra hnappsins
+Le son du gros bouton ¦ Hljóð stóra hnappsins
+La police des gros boutons ¦ Letur stóru hnappanna
+La police du mode simple ¦ Letur einfalda hamsins
+Il faut garder au moins un gros bouton. ¦ Þú verður að halda að minnsta kosti einum stórum hnappi.
+Code de sortie enregistré (gardé caché). ¦ Útgöngukóði vistaður (falinn).
+Retour à l’écran d’avant ¦ Aftur á fyrri skjá
+Âges ¦ Aldur
+Lieux mal placés ¦ Rangt staðsettir staðir
+Baptême loin ¦ Skírn langt frá
+Lieux contradictoires ¦ Misvísandi staðir
+une mauvaise année de décès (1862 au lieu de 1882 ?), ou un homonyme pris pour le père. Regarde l’acte de décès du père. ¦ rangt dánarár (1862 í stað 1882?), eða alnafni tekinn sem faðirinn. Skoðaðu dánarskrá föðurins.
+une erreur de date, ou la mère confondue avec une homonyme (une tante, une cousine). Regarde l’acte de naissance de l’enfant. ¦ villa í dagsetningu, eða móðirin rugluð saman við alnöfnu (frænku). Skoðaðu fæðingarskrá barnsins.
+une génération confondue (la grand-mère prise pour la mère), ou une année mal lue. ¦ kynslóðum ruglað saman (amman tekin sem móðirin), eða ár rangt lesið.
+une génération sautée, ou une année mal lue. ¦ kynslóð sleppt, eða ár rangt lesið.
+une mauvaise date de décès, ou le mariage d’un homonyme. ¦ röng dánardagsetning, eða hjónaband alnafna.
+deux dates inversées, ou une année mal recopiée. ¦ tvær dagsetningar sem hafa víxlast, eða ár rangt afritað.
+un chiffre mal lu (31 au lieu de 21) ou un mois mal recopié. ¦ tölustafur rangt lesinn (31 í stað 21) eða mánuður rangt afritaður.
+la naissance d’un parent prise pour la sienne, ou un homonyme. ¦ fæðing foreldris tekin sem fæðing viðkomandi, eða alnafni.
+des jumeaux mal datés, ou un enfant rattaché aux mauvais parents. ¦ tvíburar með rangar dagsetningar, eða barn tengt röngum foreldrum.
+la même personne saisie deux fois : compare les deux fiches avant de les fusionner. ¦ sami einstaklingur skráður tvisvar: berðu spjöldin tvö saman áður en þú sameinar þau.
+une commune homonyme d’un autre département, ou des coordonnées inversées. ¦ samnefnt sveitarfélag í annarri sýslu, eða hnit sem hafa víxlast.
+deux homonymes confondus dans une seule fiche. ¦ tveimur alnöfnum ruglað saman í einu spjaldi.
+une commune homonyme d’un autre département. ¦ samnefnt sveitarfélag í annarri sýslu.
+les deux dates inversées. ¦ dagsetningarnar tvær hafa víxlast.
+un tiret tapé par erreur devant l’année. ¦ bandstrik slegið inn fyrir mistök á undan árinu.
+un homonyme pris pour le conjoint, ou une fiche rattachée une génération trop haut ou trop bas. ¦ alnafni tekinn sem makinn, eða spjald tengt einni kynslóð of ofarlega eða of neðarlega.
+un chiffre mal lu par la machine (1/7, 3/8, 5/6), ou un âge déclaré au hasard par la famille : regarde l’image du recensement. ¦ tölustafur rangt lesinn af vélinni (1/7, 3/8, 5/6), eða aldur gefinn upp af handahófi af fjölskyldunni: skoðaðu mynd manntalsins.
+un nom de commune mal lu ou abrégé (« St » pour Saint) : regarde l’image du recensement. ¦ nafn sveitarfélags rangt lesið eða stytt („St“ fyrir Saint): skoðaðu mynd manntalsins.
+la case du genre mal lue, ou une autre personne du ménage : regarde l’image du recensement. ¦ kynreiturinn rangt lesinn, eða annar einstaklingur á heimilinu: skoðaðu mynd manntalsins.
+un lien mal lu (fils / fille), un ménage mal découpé, ou une fiche pas encore reliée : regarde l’image du recensement. ¦ tengsl rangt lesin (sonur / dóttir), heimili rangt skipt, eða spjald ekki enn tengt: skoðaðu mynd manntalsins.
+J’ai vérifié dans l’acte : c’est bien ça ¦ Ég athugaði skjalið: þetta er rétt
+La date est approximative (« vers… ») ¦ Dagsetningin er áætluð („um…“)
+Ce sont deux personnes différentes ¦ Þetta eru tveir ólíkir einstaklingar
+Le lieu est juste ¦ Staðurinn er réttur
+J’ai regardé l’image : ma fiche est juste, SocFace a mal lu ¦ Ég skoðaði myndina: spjaldið mitt er rétt, SocFace las rangt
+Ce n’est pas la même personne (homonyme) ¦ Þetta er ekki sami einstaklingur (alnafni)
+L’âge déclaré au recensement était approximatif ¦ Aldurinn sem gefinn var upp í manntalinu var áætlaður
+Personne sans nom ¦ Einstaklingur án nafns
+Dates changées ¦ Dagsetningum breytt
+Écartée ¦ Lögð til hliðar
+Plus d’alerte ¦ Engin viðvörun lengur
+Le contrôle ne trouve plus ce problème ¦ Athugunin finnur þetta vandamál ekki lengur
+Pas une erreur ¦ Ekki villa
+Toute la base ¦ Allur gagnagrunnurinn
+Mes ancêtres (Sosa) ¦ Forfeður mínir (Sosa)
+Tous les lieux ¦ Allir staðir
+Aucune alerte écartée ¦ Engin viðvörun lögð til hliðar
+Rien avec ces filtres ¦ Ekkert með þessum síum
+Retire un filtre pour revoir les autres alertes. ¦ Fjarlægðu síu til að sjá hinar viðvaranirnar aftur.
+Aucune incohérence trouvée dans tes fiches. Bravo ! ¦ Ekkert ósamræmi fannst í spjöldunum þínum. Vel gert!
+Ouvre l’événement dans la fiche pour corriger sa date. ¦ Opnaðu atburðinn á spjaldinu til að leiðrétta dagsetninguna.
+PLACER SUR LA CARTE ¦ SETJA Á KORTIÐ
+Choisis la commune : ses coordonnées seront reprises ¦ Veldu sveitarfélagið: hnit þess verða notuð
+Ce lieu n’a pas de coordonnées : choisis une commune de la liste. ¦ Þessi staður hefur engin hnit: veldu sveitarfélag af listanum.
+CONTRÔLE DE LA BASE ¦ ATHUGUN GAGNAGRUNNSINS
+Ta raison ¦ Ástæðan þín
+Ne plus signaler ¦ Hætta að merkja
+Écris ta raison, ou choisis-en une. ¦ Skrifaðu ástæðuna þína, eða veldu eina.
+Détail ¦ Nánar
+Fermer (Échap) ¦ Loka (Esc)
+La famille ¦ Fjölskyldan
+Contrôle impossible pour l’instant. ¦ Athugun ekki möguleg í bili.
+des fiches sans alerte ¦ spjalda án viðvörunar
+Tout voir dans « ✅ Contrôle de la base » → ¦ Sjá allt í „✅ Athugun gagnagrunnsins“ →
+Moyennes de la famille ¦ Meðaltöl fjölskyldunnar
+Âge au mariage des hommes ¦ Aldur karla við hjónaband
+des femmes ¦ kvenna
+Écart entre naissances ¦ Bil milli fæðinga
+Pas assez de dates ¦ Ekki nógu margar dagsetningar
+: ni conjoint, ni enfant, ni événement, ni note, ni média, ni source (souvent laissées par un ancien logiciel ou un import). Une copie de sécurité de la base est faite juste avant. ¦ : enginn maki, ekkert barn, enginn atburður, engin athugasemd, enginn miðill, engin heimild (oft skilið eftir af gömlum hugbúnaði eða innflutningi). Öryggisafrit af gagnagrunninum er gert rétt áður.
+Elles ne contiennent aucune information. Une copie de sécurité de la base est faite juste avant. ¦ Þær innihalda engar upplýsingar. Öryggisafrit af gagnagrunninum er gert rétt áður.
+Familles vides ¦ Tómar fjölskyldur
+Supprimer la famille vide ¦ Eyða tómu fjölskyldunni
+Supprimer la famille vide ? ¦ Eyða tómu fjölskyldunni?
+Supprimer les familles vides ¦ Eyða tómu fjölskyldunum
+À la fermeture ¦ Við lokun
+À la main ¦ Handvirkt
+Avant une restauration ou une fusion ¦ Fyrir endurheimt eða sameiningu
+Automatique ¦ Sjálfvirkt
+Avant une mise à jour ¦ Fyrir uppfærslu
+Jamais tout seul (seulement à la main) ¦ Aldrei sjálfkrafa (aðeins handvirkt)
+Chaque jour ¦ Á hverjum degi
+Chaque semaine ¦ Í hverri viku
+Vérifiée ¦ Athugað
+Échec ¦ Mistókst
+Dossier absent ¦ Mappa vantar
+La sauvegarde automatique est éteinte : choisis « Chaque jour » ci-dessous. ¦ Sjálfvirk afritun er óvirk: veldu „Á hverjum degi“ hér fyrir neðan.
+Prochaine : à la fermeture de l’app (si quelque chose a changé). ¦ Næst: þegar appinu er lokað (ef eitthvað hefur breyst).
+Aucune copie dans ce dossier pour l’instant. ¦ Ekkert afrit í þessari möppu enn.
+Abîmée ¦ Skemmt
+⚠️ Dossier introuvable pour l’instant (clé débranchée ?). ¦ ⚠️ Mappan finnst ekki í bili (USB-lykill aftengdur?).
+Dossier trouvé ¦ Mappa fannst
+Dossier synchronisé en ligne ¦ Mappa samstillt á netinu
+Chacune dans son sous-dossier, pour qu’elles ne s’effacent pas l’une l’autre. ¦ Hvert í sinni undirmöppu, svo þau eyði ekki hvert öðru.
+Avec les médias ¦ Með miðlum
+Toutes mes généalogies ¦ Öll ættfræðin mín
+État indisponible. ¦ Staða ekki tiltæk.
+Dossier introuvable (clé débranchée ?). Rien n’est bloqué. ¦ Mappan finnst ekki (USB-lykill aftengdur?). Ekkert er læst.
+Éteinte : rien ne se fait tout seul. ¦ Slökkt: ekkert gerist sjálfkrafa.
+⚙️ Régler ¦ ⚙️ Stilla
+Lieu (texte) ¦ Staður (texti)
+Sorte d’événement ¦ Tegund atburðar
+Posée sur ¦ Sett á
+l’autre ordinateur ¦ hin tölvan
+À choisir ¦ Að velja
+Sur cet ordinateur ¦ Í þessari tölvu
+Garder la mienne ¦ Halda minni
+Prendre l’autre ¦ Taka hina
+Garder les deux ¦ Halda báðum
+Dossier branché ¦ Mappa tengd
+💻 L’autre : ¦ 💻 Hin:
+L’autre ordinateur n’est pas encore passé par ce dossier. ¦ Hin tölvan hefur ekki enn notað þessa möppu.
+Dossier introuvable pour l’instant (clé débranchée ?). Rien n’est perdu : tes changements partiront la prochaine fois. ¦ Mappan finnst ekki í bili (USB-lykill aftengdur?). Ekkert tapast: breytingarnar þínar fara næst.
+Paquets mis de côté ¦ Pakkar lagðir til hliðar
+Tu as annulé leur fusion : ils ne sont plus repris tout seuls. « Revoir » pour choisir changement par changement. ¦ Þú afturkallaðir sameiningu þeirra: þeir eru ekki lengur teknir sjálfkrafa. „Fara yfir“ til að velja breytingu fyrir breytingu.
+Revoir ¦ Fara yfir
+Dernières fusions ¦ Síðustu sameiningar
+Annulée ¦ Afturkallað
+Écris le chemin du dossier partagé. ¦ Skrifaðu slóð sameiginlegu möppunnar.
+✓ Dossier relié. Sur l’autre ordinateur, ouvre « depart.db » qui s’y trouve, puis choisis ce même dossier. ¦ ✓ Mappa tengd. Í hinni tölvunni opnarðu „depart.db“ sem er í henni og velur síðan sömu möppu.
+Dossier partagé retiré de cet ordinateur ¦ Sameiginleg mappa fjarlægð úr þessari tölvu
+Ta version gardée ¦ Þín útgáfa haldin
+Version de l’autre ordinateur prise ¦ Útgáfa hinnar tölvunnar tekin
+Les deux notes gardées ¦ Báðum athugasemdum haldið
+Fusion annulée : ses paquets sont mis de côté ¦ Sameining afturkölluð: pakkar hennar eru settir til hliðar
+🔒 Généalogie ouverte ailleurs ¦ 🔒 Ættfræðin er opin annars staðar
+Ouvrir quand même ¦ Opna samt
+⏹ Arrêter la lecture ¦ ⏹ Stöðva upplesturinn
+🔊 Lire la fiche ¦ 🔊 Lesa spjaldið upp
+Type de daltonisme simulé ¦ Tegund litblindu sem er líkt eftir
+Description de l’image ¦ Lýsing myndar
+Tout afficher ¦ Sýna allt
+Ta machine ne propose pas la dictée ici. Sur Mac, utilise la dictée du système : touche 🎤 ou deux fois Fn. Sur Windows : touche Windows + H. ¦ Tækið þitt býður ekki upp á tal í texta hér. Á Mac skaltu nota tal í texta kerfisins: hnappinn 🎤 eða Fn tvisvar. Á Windows: Windows-hnappurinn + H.
+Je t’écoute… ¦ Ég hlusta…
+Aucun micro trouvé : branche-en un ou vérifie les réglages du son. ¦ Enginn hljóðnemi fannst: tengdu hljóðnema eða athugaðu hljóðstillingarnar.
+La dictée de ce navigateur a besoin d’Internet. Sur Mac, la dictée du système marche hors ligne : touche 🎤 ou deux fois Fn. ¦ Tal í texta þessa vafra þarf internet. Á Mac virkar tal í texta kerfisins án nettengingar: hnappurinn 🎤 eða Fn tvisvar.
+Choisis la sorte de daltonisme : l’app corrige ses couleurs pour que tu les distingues mieux. Les petites pastilles montrent comment ces couleurs sont vues. ¦ Veldu tegund litblindu: appið lagar litina sína svo þú greinir þá betur í sundur. Litlu deplarnir sýna hvernig þessir litir sjást.
+Moins de choses qui bougent : pas d’animations, pas de glissements, pas de défilement animé. ¦ Færri hlutir á hreyfingu: engar hreyfimyndir, engar rennur, engin hreyfð skrun.
+Ton ordinateur demande déjà moins d’animations : c’est respecté. ¦ Tölvan þín biður þegar um minni hreyfingu: farið er eftir því.
+Durée des messages ¦ Lengd skilaboða
+Les messages restent affichés ¦ Skilaboðin sjást áfram
+2 fois plus (12 s) ¦ 2 sinnum lengur (12 s)
+3 fois plus (18 s) ¦ 3 sinnum lengur (18 s)
+Voix française de l’ordinateur ¦ Frönsk rödd tölvunnar
+Comment faire lire la description des images par un lecteur d’écran ? ¦ Hvernig læt ég skjálesara lesa lýsingar mynda?
+Pas disponible ici (voir au-dessus). ¦ Ekki í boði hér (sjá hér að ofan).
+Aperçu : la page prendra cette taille quand tu lâcheras le curseur. ¦ Forskoðun: síðan fær þessa stærð þegar þú sleppir sleðanum.
+Espacements conseillés appliqués. ¦ Ráðlögð bil notuð.
+Enregistrement impossible : la place du navigateur est pleine ? ¦ Ekki hægt að vista: er geymslurými vafrans fullt?
+Cette forme n’est pas lisible. ¦ Ekki er hægt að lesa þessa lögun.
+Trop de formes enregistrées : supprime-en avant d’en ajouter. ¦ Of margar vistaðar laganir: eyddu einhverjum áður en þú bætir fleirum við.
+Liste des formes enregistrée. ¦ Listi yfir laganir vistaður.
+Liste des formes remise comme au départ ¦ Listi yfir laganir upphafsstilltur
+Écusson ¦ Skjöldur
+Ce fichier est trop gros (2 Mo au plus). ¦ Þessi skrá er of stór (2 MB í mesta lagi).
+Ce n’est pas un dessin SVG lisible. ¦ Þetta er ekki læsileg SVG-teikning.
+Ce dessin est plat : il n’a pas de surface. ¦ Þessi teikning er flöt: hún hefur ekkert flatarmál.
+Ce dessin n’a pas pu être nettoyé. ¦ Ekki tókst að hreinsa þessa teikningu.
+Nouvelle forme d’avatar ¦ Ný lögun á auðkennismynd
+APPARENCE · FORME DES AVATARS ¦ ÚTLIT · LÖGUN AUÐKENNISMYNDA
+Ex. Blason, Médaillon, Feuille… ¦ T.d. Skjaldarmerki, Medalía, Lauf…
+Chercher… (cœur, arbre, blason, étoile) ¦ Leita… (hjarta, tré, skjaldarmerki, stjarna)
+Chercher une forme ¦ Leita að lögun
+Formes de la bibliothèque ¦ Laganir safnsins
+Cadre de dessin du polygone ¦ Teiknisvæði marghyrningsins
+📚 Bibliothèque ¦ 📚 Safn
+✏️ Dessiner un polygone ¦ ✏️ Teikna marghyrning
+Modèles ¦ Sniðmát
+↶ Enlever le dernier point ¦ ↶ Fjarlægja síðasta punktinn
+ou colle le code SVG ici ¦ eða límdu SVG-kóðann hér
+Lire ce SVG ¦ Lesa þetta SVG
+Créer la forme ¦ Búa til lögunina
+Pose au moins 3 points. ¦ Settu að minnsta kosti 3 punkta.
+Choisis ou colle un dessin SVG. ¦ Veldu eða límdu inn SVG-teikningu.
+Choisis une forme dans la bibliothèque. ¦ Veldu lögun úr safninu.
+SVG importé ¦ Innflutt SVG
+Il faut un fichier SVG (.svg). ¦ SVG-skrá (.svg) þarf.
+📁 Glisse un fichier SVG ici, colle-le (⌘V) ou choisis-le ¦ 📁 Dragðu SVG-skrá hingað, límdu hana (⌘V) eða veldu hana
+Seuls ses chemins pleins sont gardés : pas de script, d’image ni de texte. ¦ Aðeins fylltir ferlar hennar eru geymdir: engin skrifta, mynd né texti.
+Choisis d’abord un dessin SVG. ¦ Veldu fyrst SVG-teikningu.
+Choisis d’abord une forme. ¦ Veldu fyrst lögun.
+Clique dans le cadre pour poser les points, dans l’ordre du tour. Glisse un point pour le déplacer ; double-clic sur un point pour l’enlever. ¦ Smelltu í rammann til að setja punktana, í röð hringinn í kring. Dragðu punkt til að færa hann; tvísmelltu á punkt til að fjarlægja hann.
+Un dessin SVG (logo, pictogramme…) : seuls ses chemins pleins sont gardés. Les scripts, liens, images, textes et styles sont retirés. ¦ SVG-teikning (merki, táknmynd…): aðeins fylltir ferlar hennar eru geymdir. Skriftur, tenglar, myndir, textar og stílar eru fjarlægð.
+Revenir en arrière (Ctrl+Z) ¦ Fara til baka (Ctrl+Z)
+Revenir en avant (Ctrl+Maj+Z ou Ctrl+Y) ¦ Fara áfram (Ctrl+Maj+Z eða Ctrl+Y)
+Comme dans les blocs (01) et sur les fiches (initiales). ¦ Eins og í blokkunum (01) og á spjöldunum (upphafsstafir).
+Clique sur « Appliquer » pour utiliser cette forme. ¦ Smelltu á „Nota“ til að nota þessa lögun.
+＋ Nouveau projet ¦ ＋ Nýtt verkefni
+＋ Nouvelle battue ¦ ＋ Ný leit
+＋ Nouveau tableau ¦ ＋ Ný tafla
+Mes généalogies (changer, en créer une autre) ¦ Ættfræðirnar mínar (skipta, búa til aðra)
+L’ordre de l’app, tous les boutons montrés sauf 🧓 et les raccourcis vers les outils (cachés au départ) ¦ Röð appsins, allir hnappar sýndir nema 🧓 og flýtileiðir í verkfærin (faldar í upphafi)
+Le clic ouvre ¦ Smellur opnar
+Enquêtes, sur cet onglet ¦ Athuganir, á þessum flipa
+: chaque écran garde le dessin que tu connais. ¦ : hver skjár heldur útlitinu sem þú þekkir.
+Un seul dessin partout ¦ Eitt útlit alls staðar
+Le style « archive » ¦ „Skjalasafns“-stíllinn
+Va avec les blocs de l’app (traits noirs, coins droits). Plus sobre, moins coloré. ¦ Passar við blokkir appsins (svartar línur, hvöss horn). Látlausara, minna litríkt.
+Où ? ¦ Hvar?
+Nouvelle forme choisie ¦ Ný lögun valin
+« Liste | Fiches » est dans la barre au-dessus des enquêtes. ¦ „Listi | Spjöld“ er í stikunni fyrir ofan athuganirnar.
+« Liste | Fiches » est en bas de la colonne. ¦ „Listi | Spjöld“ er neðst í dálkinum.
+Ici pas de liste : « Liste | Fiches » ne concerne que Recherche, Enquêtes et les autres listes. ¦ Enginn listi hér: „Listi | Spjöld“ á aðeins við Rannsóknir, Athuganir og hina listana.
+à droite ¦ hægra megin
+à gauche ¦ vinstra megin
+Colonne à droite ¦ Dálkur hægra megin
+Colonne à gauche ¦ Dálkur vinstra megin
+Colonne de gauche remise comme au départ ¦ Vinstri dálkur upphafsstilltur
+Portraits remis comme au départ ¦ Andlitsmyndir upphafsstilltar
+Designs remis comme au départ ¦ Útlit upphafsstillt
+Quel style pour les fiches ? ¦ Hvaða stíl á spjöldin?
+Combien d’espace autour des choses ? ¦ Hversu mikið pláss í kringum hlutina?
+Quelles icônes veux-tu ? ¦ Hvaða tákn viltu?
+Quel en-tête pour la fiche d’une personne ? ¦ Hvaða haus á spjald einstaklings?
+Cases des arbres ¦ Reitir trjánna
+Quelles cases pour les arbres ? ¦ Hvaða reiti í trén?
+Les cases des personnes dans les arbres (Graphiques) : ascendants, descendants, sablier… ¦ Reitir einstaklinga í trjánum (Gröf): forfeður, afkomendur, stundaglas…
+Toutes pareilles : on ne voit pas d’un coup les hommes, les femmes ni les ancêtres directs. ¦ Allir eins: þú sérð ekki strax karla, konur né beina forfeður.
+Repérage immédiat ¦ Sést strax
+Avec photo ¦ Með mynd
+le portrait au-dessus du nom ¦ andlitsmyndin fyrir ofan nafnið
+On reconnaît les visages ¦ Þú þekkir andlitin
+le nom seul ¦ nafnið eitt
+Les dates n’apparaissent qu’au survol (sauf si tu les remets). ¦ Dagsetningar birtast aðeins þegar músin er yfir (nema þú setjir þær aftur inn).
+Largeur des cases ¦ Breidd reitanna
+Couleurs du genre ¦ Kynjalitir
+Ce sont aussi les couleurs des portraits ronds (Apparence → 👤 Portraits : menu de choix, listes). Les changer ici les change partout. ¦ Þetta eru líka litir hringlaga andlitsmyndanna (Útlit → 👤 Andlitsmyndir: valmynd, listar). Ef þú breytir þeim hér breytast þeir alls staðar.
+Traits entre les cases ¦ Línur milli reitanna
+Écrire les dates dans les cases ¦ Skrifa dagsetningar í reitina
+Les dates évitent de confondre deux Louise BORIE ; sans elles, l’arbre est plus léger (elles restent au survol). ¦ Dagsetningar koma í veg fyrir að tveimur Louise BORIE sé ruglað saman; án þeirra er tréð léttara (þær sjást þegar músin er yfir).
+Petit badge Sosa sur la case ¦ Lítið Sosa-merki á reitnum
+Tu vois tout de suite le numéro de chaque ancêtre direct, utile pour parler d’un ancêtre (« le 6 »). ¦ Þú sérð strax númer hvers beins forföður, gagnlegt þegar talað er um forföður („númer 6“).
+Quels boutons veux-tu ? ¦ Hvaða hnappa viltu?
+Comment les choses apparaissent-elles ? ¦ Hvernig birtast hlutirnir?
+Instantané ¦ Samstundis
+L’apparition brusque peut surprendre : on ne voit pas d’où vient la fenêtre. ¦ Snögg birting getur komið á óvart: þú sérð ekki hvaðan glugginn kemur.
+doux et court (0,18 s) ¦ mjúkt og stutt (0,18 s)
+On suit ce qui se passe ¦ Þú fylgist með því sem gerist
+Très léger temps d’attente (moins d’un quart de seconde). ¦ Örlítil bið (innan við fjórðungur úr sekúndu).
+Aucune animation ¦ Engin hreyfing
+rien ne bouge jamais ¦ ekkert hreyfist nokkurn tíma
+Le plus calme ¦ Rólegast
+Les boutons s’enfoncent sous la souris ¦ Hnapparnir þrýstast niður undir músinni
+Montre que le bouton réagit avant même de cliquer. ¦ Sýnir að hnappurinn bregst við áður en þú smellir.
+Barre bleue du temps qui reste (messages H7) ¦ Blá stika fyrir tímann sem eftir er (H7-skilaboð)
+Suivre le réglage « réduire les animations » de l’ordinateur ¦ Fylgja stillingu tölvunnar „minnka hreyfingu“
+Comment séparer les lignes des listes ? ¦ Hvernig á að skilja á milli lína í listum?
+retouché ¦ lagfært
+🎨 Designs au choix ¦ 🎨 Útlit að eigin vali
+La forme des éléments est rangée là où on s’en sert : ¦ Lögun hlutanna er stillt þar sem þeir eru notaðir:
+🎨 le style des fiches ¦ 🎨 stíll spjaldanna
+Exporter ce réglage ¦ Flytja þessa stillingu út
+Nom de ce réglage : ¦ Heiti þessarar stillingar:
+Ce fichier n’est pas un réglage LCNDA (il n’est pas lisible). ¦ Þessi skrá er ekki LCNDA-stilling (ekki er hægt að lesa hana).
+Ce fichier n’est pas un réglage LCNDA. ¦ Þessi skrá er ekki LCNDA-stilling.
+Ce réglage est vide. ¦ Þessi stilling er tóm.
+MISE À JOUR ¦ UPPFÆRSLA
+Téléchargement dans ton dossier « Téléchargements »… ¦ Sækir í möppuna þína „Niðurhal“…
+📁 Afficher dans le dossier ¦ 📁 Sýna í möppu
+Impossible d’ouvrir le dossier. ¦ Ekki hægt að opna möppuna.
+Impossible d’ouvrir le fichier. ¦ Ekki hægt að opna skrána.
+Ouvre-le, puis glisse LCNDA dans « Applications » (à la place de l’ancienne). Ta généalogie ne bouge pas. ¦ Opnaðu hana og dragðu síðan LCNDA í „Forrit“ (í stað þeirrar gömlu). Ættfræðin þín helst óbreytt.
+Ouvre-le et suis l’installation : elle remplace l’ancienne version. Ta généalogie ne bouge pas. Windows peut afficher « Windows a protégé votre ordinateur » : « Informations complémentaires » → « Exécuter quand même ». ¦ Opnaðu hana og fylgdu uppsetningunni: hún kemur í stað gömlu útgáfunnar. Ættfræðin þín helst óbreytt. Windows gæti sýnt „Windows varði tölvuna þína“: „Frekari upplýsingar“ → „Keyra samt“.
+Ouvre-le avec l’installateur de paquets (ou « sudo apt install ./ce-fichier.deb »). Ta généalogie ne bouge pas. ¦ Opnaðu hana með pakkauppsetningarforritinu (eða „sudo apt install ./ce-fichier.deb“). Ættfræðin þín helst óbreytt.
+⤓ Télécharger ¦ ⤓ Sækja
+Voir les nouveautés ¦ Sjá nýjungarnar
+↗ Voir les nouveautés ¦ ↗ Sjá nýjungarnar
+Ne plus me prévenir pour cette version ¦ Ekki láta mig vita aftur um þessa útgáfu
+Recherche de la dernière version… ¦ Leitar að nýjustu útgáfunni…
+La recherche n’a pas abouti. ¦ Leitin tókst ekki.
+À jour ¦ Uppfært
+Pas d’installateur pour cet ordinateur dans cette version : regarde la page des nouveautés. ¦ Ekkert uppsetningarforrit fyrir þessa tölvu í þessari útgáfu: skoðaðu síðuna með nýjungunum.
+↺ Me prévenir de nouveau pour cette version ¦ ↺ Láta mig vita aftur um þessa útgáfu
+Le fichier va dans ton dossier « Téléchargements », son empreinte est vérifiée, puis tu l’ouvres pour installer. Ta généalogie ne bouge pas. ¦ Skráin fer í möppuna þína „Niðurhal“, fingrafar hennar er staðfest og síðan opnarðu hana til að setja upp. Ættfræðin þín helst óbreytt.
+Ce que la carte montre ¦ Það sem spjaldið sýnir
+Naissances par décennie ¦ Fæðingar eftir áratugum
+Prénoms les plus donnés ¦ Algengustu fornöfnin
+Âge au mariage ¦ Aldur við hjónaband
+Liste | Fiches ¦ Listi | Spjöld
+Minguo (Taïwan) ¦ Minguo (Taívan)
+Tailte Éireann ¦ Tailte Éireann
+💾 Enregistrer le projet ¦ 💾 Vista verkefnið
+⤓ Exporter la vidéo (MP4 / WebM, plusieurs formats)… ¦ ⤓ Flytja myndbandið út (MP4 / WebM, mörg snið)…
+⤓ Exporter les sous-titres (.srt) ¦ ⤓ Flytja textann út (.srt)
+🔖 Copier les chapitres (pour YouTube) ¦ 🔖 Afrita kaflana (fyrir YouTube)
+✂️ Couper ici ¦ ✂️ Klippa hér
+⟦ Commence ici ¦ ⟦ Byrjar hér
+⟧ Finit ici ¦ ⟧ Endar hér
+🔊 Séparer le son de l’image ¦ 🔊 Skilja hljóðið frá myndinni
+⌨️ Raccourcis du montage… ¦ ⌨️ Flýtilyklar klippingarinnar…
+🎥 Plusieurs caméras (calées par le son)… ¦ 🎥 Margar myndavélar (samstilltar eftir hljóði)…
+🗂 Un rush de la base… ¦ 🗂 Hrámyndskeið úr gagnagrunninum…
+＋ Son / musique ¦ ＋ Hljóð / tónlist
+🎙 Enregistrer une voix off ¦ 🎙 Taka upp lestur
+💬 Sous-titre ici ¦ 💬 Skjátexti hér
+🔖 Chapitre ici ¦ 🔖 Kafli hér
+🪄 Modèle « La vie de… » ¦ 🪄 Sniðmát „Ævi…“
+🪄 Modèle « Une famille » ¦ 🪄 Sniðmát „Fjölskylda“
+＋ Piste vidéo ¦ ＋ Myndbandsrás
+＋ Piste son ¦ ＋ Hljóðrás
+⏮ Au début ¦ ⏮ Á byrjun
+◀ ◆ Image clé précédente ¦ ◀ ◆ Fyrri lykilrammi
+◆ ▶ Image clé suivante ¦ ◆ ▶ Næsti lykilrammi
+🧲 Aimanter (marche / arrêt) ¦ 🧲 Grípa (kveikt / slökkt)
+🎨 Couleurs du film ¦ 🎨 Litir myndarinnar
+🔊 Son du film ¦ 🔊 Hljóð myndarinnar
+🎞️ Le film (rotation, fondus) ¦ 🎞️ Myndin (snúningur, deyfingar)
+Le dessin des personnes partout dans l’app : d’abord la forme, puis le portrait. Tant que tu ne touches à rien, ¦ Hvernig einstaklingar eru teiknaðir alls staðar í appinu: fyrst lögunin, svo andlitsmyndin. Á meðan þú snertir ekkert,
+Une seule, qui vaut partout : la fiche, les listes, l’arbre, le menu de choix et les petits carrés numérotés des blocs. ¦ Aðeins ein, sem gildir alls staðar: spjaldið, listarnir, tréð, valmyndin og litlu tölusettu reitirnir í blokkunum.
+Les formes proposées dans « Forme des avatars » : coche celles à montrer, range-les en glissant ⠿ (ou ↑ ↓). Celles de l’app ne se suppriment pas : décoche-les pour les cacher. Les tiennes (✎) se modifient, se dupliquent, s’exportent. ¦ Laganirnar sem boðið er upp á í „Lögun auðkennismynda“: hakaðu við þær sem á að sýna, raðaðu þeim með því að draga ⠿ (eða ↑ ↓). Ekki er hægt að eyða lögunum appsins: taktu hakið af til að fela þær. Þínum eigin (✎) má breyta, afrita og flytja út.
+Créer une forme à partir de celle-ci ¦ Búa til lögun út frá þessari
+Enregistrer l’ordre et les formes montrées ¦ Vista röðina og sýndar laganir
+La liste de départ : l’ordre de l’app et toutes les formes montrées (tes formes restent, à la fin) ¦ Upphafslistinn: röð appsins og allar laganir sýndar (þínar laganir haldast, aftast)
+Avec le portrait « Comme avant », la forme s’applique aux carrés numérotés et aux initiales des fiches. ¦ Með andlitsmyndinni „Eins og áður“ gildir lögunin um tölusettu reitina og upphafsstafi spjaldanna.
+règle tout d’un coup (le rond unique et le carré de la fiche choisissent aussi la forme) ; tu peux ensuite changer chaque ligne (« retouché » s’affiche). ¦ stillir allt í einu (sameiginlegi hringurinn og reitur spjaldsins velja líka lögunina); síðan geturðu breytt hverri línu („lagfært“ birtist).
+Avec « Comme avant », chaque endroit garde son propre dessin (la forme ci-dessus s’applique quand même aux petits carrés numérotés et aux initiales des fiches). Pars du rond unique ou du carré de la fiche pour utiliser ces réglages. ¦ Með „Eins og áður“ heldur hver staður sínu eigin útliti (lögunin hér að ofan gildir samt um litlu tölusettu reitina og upphafsstafi spjaldanna). Byrjaðu á sameiginlega hringnum eða reit spjaldsins til að nota þessar stillingar.
+Un peu d’arrondi adoucit le carré sans le confondre avec un rond. Seulement pour la forme « Carré arrondi ». Double-clic sur le curseur : valeur de départ. ¦ Örlítil rúnnun mýkir ferninginn án þess að hann líkist hring. Aðeins fyrir lögunina „Rúnnaður ferningur“. Tvísmelltu á sleðann: upphafsgildi.
+Plus grandes, elles se lisent mieux de loin et sur les petits ronds ; plus petites, le portrait paraît plus calme. Le chiffre est une part de la taille du portrait, donc ça reste juste aux 4 tailles. ¦ Stærri eru þeir auðlæsilegri úr fjarlægð og á litlum hringjum; minni gera andlitsmyndina rólegri. Talan er hlutfall af stærð andlitsmyndarinnar, svo þetta passar í öllum 4 stærðunum.
+Avec la couleur du genre, tu sais d’un coup d’œil si c’est un homme, une femme ou un animal, partout pareil. Une seule couleur, c’est plus sobre et plus « archive », comme le carré actuel de la fiche. ¦ Með kynjalitnum sérðu í sjónhendingu hvort þetta er karl, kona eða dýr, eins alls staðar. Einn litur er látlausari og meira í „skjalasafns“-stíl, eins og núverandi reitur spjaldsins.
+Photos en noir et blanc ¦ Svarthvítar myndir
+Une photo, c’est plus parlant que deux lettres. Les initiales toujours, c’est plus régulier quand certaines photos sont floues ou mal cadrées. Le noir et blanc donne le même ton à toutes les photos, anciennes comme récentes (c’est ce que fait la fiche aujourd’hui). ¦ Mynd segir meira en tveir stafir. Alltaf upphafsstafir er jafnara þegar sumar myndir eru óskýrar eða illa rammaðar. Svarthvítt gefur öllum myndum sama blæ, gömlum sem nýjum (þannig er spjaldið í dag).
+Deux lettres distinguent Joseph et Jean MARTIN. Une seule lettre est plus lisible sur les petits ronds de 22 px et met la famille en avant. ¦ Tveir stafir greina á milli Joseph og Jean MARTIN. Einn stafur er læsilegri á litlum 22 px hringjum og setur fjölskylduna í forgrunn.
+Mettre le numéro Sosa sur le portrait ¦ Setja Sosa-númerið á andlitsmyndina
+Tu repères tes ancêtres directs sans lire la ligne. Si tu trouves que ça charge trop, laisse-le éteint : le Sosa reste écrit à droite des listes. Il n’apparaît pas sur les portraits de 22 px, trop petits. ¦ Þú finnur beina forfeður þína án þess að lesa línuna. Ef þér finnst það of mikið, hafðu slökkt á því: Sosa-númerið stendur áfram hægra megin í listunum. Það birtist ekki á 22 px andlitsmyndum, þær eru of litlar.
+Aujourd’hui, pas d’initiales dans la liste des personnes : seulement la photo, quand la fiche en a une. ¦ Í dag engir upphafsstafir í listanum yfir einstaklinga: aðeins myndin, þegar spjaldið hefur hana.
+Où elle est, et son dessin. Tant que tu ne touches à rien, ¦ Hvar hann er, og útlit hans. Á meðan þú snertir ekkert,
+La colonne, à gauche ou à droite de l’écran. ¦ Dálkurinn, vinstra eða hægra megin á skjánum.
+Lettres d’origine (A, H, S1…), les onglets de chaque outil, « Liste | Fiches » en bas de la colonne ¦ Upprunalegir stafir (A, H, S1…), flipar hvers verkfæris, „Listi | Spjöld“ neðst í dálkinum
+encadrés, à plat ¦ innrammað, flatt
+un trait bleu à gauche ¦ blá lína vinstra megin
+sans cadre, tout en douceur ¦ án ramma, allt mjúkt
+Des boutons, cadres et champs de la colonne. ¦ Hnappa, ramma og reita dálksins.
+Franches, décalées en bleu (comme avant) ¦ Skýrir, hliðraðir í bláu (eins og áður)
+Réglages en plus ¦ Fleiri stillingar
+Les groupes de départ ; l’ordre à l’intérieur est gardé ¦ Upphaflegu hóparnir; röðinni innan þeirra er haldið
+Décoché : une seule liste. Chaque façon garde ses propres réglages : tu les retrouves en recochant ou en décochant. ¦ Ekki hakað: einn listi. Hver leið heldur sínum eigin stillingum: þú finnur þær aftur með því að haka við eða taka hakið af.
+Boutons en haut à droite ¦ Hnappar efst til hægri
+Ajouter aux raccourcis (étoile) ¦ Bæta við flýtileiðir (stjarna)
+Les boutons secondaires de toute l’app (Annuler, Modifier, ＋ Ajouter…) ; le bouton principal reste plein, à la couleur principale. ¦ Aukahnappar alls appsins (Hætta við, Breyta, ＋ Bæta við…); aðalhnappurinn er áfram fylltur, í aðallitnum.
+pour les boutons secondaires ¦ fyrir aukahnappa
+Ils partent du choix du dessus. Si tu en changes un, la carte choisie affiche « retouché ». ¦ Þær byrja á valinu hér að ofan. Ef þú breytir einni sýnir valda spjaldið „lagfært“.
+La hauteur et la marge des boutons : les grands sont plus faciles à viser, surtout sur une tablette ; les petits laissent plus de place au contenu. La taille des lettres reste celle de l’Apparence. ¦ Hæð og spássía hnappanna: stórir eru auðveldari að hitta, sérstaklega á spjaldtölvu; litlir gefa efninu meira pláss. Leturstærðin er sú sem er í Útliti.
+Des boutons bien ronds se distinguent des cadres et des champs ; comme les blocs, tout reste cohérent. ¦ Vel rúnnaðir hnappar skera sig úr römmum og reitum; eins og blokkirnar helst allt samræmt.
+Le changement est gardé tout de suite (« ✓ Enregistré »), sans bouton. Un message en bas à gauche propose « ↶ Annuler ». ¦ Breytingin er vistuð strax („✓ Vistað“), án hnapps. Skilaboð neðst til vinstri bjóða „↶ Afturkalla“.
+Comment se séparent les lignes des listes, de la colonne des personnes et des tableaux. ¦ Hvernig skilið er á milli lína í listum, dálki einstaklinga og töflum.
+Une ligne sur deux grisée ¦ Önnur hver lína grá
+qu’on attrape : facile à glisser, à viser sur une tablette. ¦ sem þú grípur: auðvelt að draga og hitta á spjaldtölvu.
+Trait de la couleur principale à gauche ¦ Lína í aðallitnum vinstra megin
+Le fond pâle se voit de loin ; le trait à gauche ne cache pas le gris des lignes alternées. ¦ Ljós bakgrunnurinn sést úr fjarlægð; línan vinstra megin felur ekki gráan lit annarrar hverrar línu.
+Les visages et les couleurs du genre aident à retrouver une personne sans lire. ¦ Andlit og kynjalitir hjálpa þér að finna einstakling án þess að lesa.
+Les titres des colonnes restent en haut quand on fait défiler ¦ Dálkaheiti haldast efst þegar skrunað er
+Dans une longue liste, tu sais toujours quelle colonne est la naissance et laquelle est le décès. ¦ Í löngum lista veistu alltaf hvaða dálkur er fæðing og hver er andlát.
+Émojis, traits, pictogrammes… les petits dessins des boutons, des barres d’outils et des rubriques. ¦ Tjáningartákn, línur, táknmyndir… litlu teikningarnar á hnöppum, tækjastikum og köflum.
+Leur dessin change d’un ordinateur à l’autre (Mac, Windows) et certains sont un peu enfantins. ¦ Útlit þeirra er misjafnt eftir tölvum (Mac, Windows) og sumar eru dálítið barnalegar.
+Deux styles à l’écran en même temps. ¦ Tveir stílar á skjánum í einu.
+La corbeille 🗑 toujours en rouge ¦ Ruslafatan 🗑 alltaf rauð
+Noms à côté ¦ Nöfn við hliðina
+Écrire le nom à côté des boutons de la fiche ¦ Skrifa heitið við hliðina á hnöppum spjaldsins
+Combien d’espace autour des choses : dans et entre les blocs, entre les lignes, autour des boutons. ¦ Hversu mikið pláss í kringum hlutina: í og á milli blokka, á milli lína, í kringum hnappa.
+Reposant et facile à cliquer ¦ Þægilegt og auðvelt að smella
+Plus d’informations à l’écran ¦ Meiri upplýsingar á skjánum
+Les cibles sont plus petites : demande plus de précision à la souris. ¦ Skotmörkin eru minni: krefst meiri nákvæmni með músinni.
+Passer en compact tout seul sur un petit écran ¦ Skipta sjálfkrafa yfir í þétt á litlum skjá
+Sur un téléphone ou une tablette, l’app se resserre d’elle-même, puis reprend ton réglage sur le grand écran. ¦ Í síma eða spjaldtölvu þéttist appið af sjálfu sér og tekur svo aftur upp stillinguna þína á stóra skjánum.
+Beaucoup de blanc sous le nom ; la photo est petite et en gris. ¦ Mikið autt pláss undir nafninu; myndin er lítil og grá.
+une photo de famille en haut ¦ fjölskyldumynd efst
+Les dates et les lieux ¦ Dagsetningar og staðir
+Dates, lieux et métier ¦ Dagsetningar, staðir og starf
+Les lieux évitent d’ouvrir les blocs pour savoir d’où vient la personne ; le métier aide à distinguer les homonymes. ¦ Staðirnir spara þér að opna blokkirnar til að vita hvaðan einstaklingurinn kemur; starfið hjálpar til við að greina á milli nafna.
+Sous le nom, sur une ligne ¦ Undir nafninu, í einni línu
+À droite, elles ne gênent pas le nom ; sous le nom, elles se lisent avec lui et l’en-tête est moins haut. ¦ Hægra megin eru þær ekki fyrir nafninu; undir nafninu lesast þær með því og hausinn verður lægri.
+Beaucoup de traits épais et d’ombres décalées : ça peut paraître chargé sur un grand écran plein de blocs. ¦ Mikið af þykkum línum og hliðruðum skuggum: það getur virst ofhlaðið á stórum skjá fullum af blokkum.
+Des coins droits font « dossier d’archives » ; arrondis, l’app paraît plus douce et plus moderne. Le même arrondi va sur toute la fiche (blocs, boutons, champs). ¦ Hvöss horn minna á „skjalamöppu“; með rúnnuðum hornum virðist appið mýkra og nútímalegra. Sama rúnnun gildir um allt spjaldið (blokkir, hnappa, reiti).
+Des traits épais séparent nettement les blocs (utile si tu vois mal) ; des traits fins allègent les pages pleines de cadres. Leur couleur suit les couleurs de l’Apparence ; un thème à toi qui a ses propres traits (Apparence → ✎ Mes thèmes) garde les siens. ¦ Þykkar línur skilja greinilega á milli blokka (gagnlegt ef þú sérð illa); þunnar línur létta síður fullar af römmum. Litur þeirra fylgir litum Útlits; eigið þema með eigin línum (Útlit → ✎ Þemun mín) heldur sínum.
+L’ombre dit « ceci est un bloc qu’on peut toucher ». Franches, elles donnent du relief ; douces, elles sont presque invisibles ; sans ombre, c’est le plus sobre (et le plus net à l’impression). ¦ Skugginn segir „þetta er blokk sem hægt er að snerta“. Skýrir gefa dýpt; mjúkir eru næstum ósýnilegir; án skugga er látlausast (og skarpast við prentun).
+Pour voir, lire et utiliser l’app plus facilement (couleurs, texte, contraste, clavier, mouvement, voix, lecteur d’écran, sous-titres, dictée), et pour préparer le mode simple. Chaque réglage s’applique tout de suite et reste gardé avec ta généalogie. ¦ Til að sjá, lesa og nota appið á auðveldari hátt (litir, texti, birtuskil, lyklaborð, hreyfing, rödd, skjálesari, skjátextar, tal í texta), og til að undirbúa einfaldan ham. Hver stilling tekur gildi strax og er geymd með ættfræðinni þinni.
+Environ 1 homme sur 12 voit mal certaines couleurs. Choisis ce qui te ressemble : l’app décale ses couleurs pour que les différences se voient (c’est une correction, réglable). ¦ Um 1 af hverjum 12 körlum sér suma liti illa. Veldu það sem á við þig: appið hliðrar litum sínum svo munurinn sjáist (þetta er leiðrétting, stillanleg).
+Le bleu et le jaune se confondent (rare). ¦ Blár og gulur ruglast saman (sjaldgæft).
+Pas de couleurs du tout : tout est en gris. ¦ Engir litir yfirleitt: allt er grátt.
+Couleurs faciles à distinguer ¦ Litir sem auðvelt er að greina í sundur
+Erreur / réussi, homme / femme et graphiques prennent des couleurs que tout le monde distingue (palette Okabe-Ito). ¦ Villa / tókst, karl / kona og gröf fá liti sem allir geta greint í sundur (Okabe-Ito-litaspjaldið).
+Les couleurs que tu as choisies toi-même (dessins, plans et maison 3D, tableaux, mises en page, photos) ne sont pas remplacées : c’est la correction (le curseur au-dessus) qui les rend plus faciles à distinguer, partout, y compris dans les outils de modification en plein écran. ¦ Litum sem þú valdir sjálf(ur) (teikningar, grunnmyndir og þrívíddarhús, töflur, umbrot, myndir) er ekki skipt út: leiðréttingin (sleðinn hér að ofan) gerir þá auðgreinanlegri, alls staðar, líka í breytingaverkfærum á öllum skjánum.
+Ajouter des formes en plus des couleurs ¦ Bæta lögunum við litina
+Symboles ✓ ⚠ ⛔ dans les messages, hachures sur les pastilles des légendes et les barres des graphiques, ronds et carrés pour femmes et hommes. ¦ Táknin ✓ ⚠ ⛔ í skilaboðum, skástrikun á deplum skýringa og súlum grafa, hringir og ferningar fyrir konur og karla.
+pour vérifier un faire-part, un livre ou un graphique ¦ til að athuga tilkynningu, bók eða graf
+Montre tout l’écran comme le voit une personne daltonienne (une simulation, pas une correction). Va ensuite sur l’écran à vérifier : un bandeau en haut rappelle que c’est une simulation, avec « Arrêter ». ¦ Sýnir allan skjáinn eins og litblindur einstaklingur sér hann (eftirlíking, ekki leiðrétting). Farðu síðan á skjáinn sem á að athuga: borði efst minnir á að þetta er eftirlíking, með „Stöðva“.
+L’interligne, les espaces et la police. La taille du texte de toute l’app se règle dans Thème et couleurs (Taille typographique). ¦ Línubil, bil og letur. Textastærð alls appsins er stillt í Þema og litir (Leturstærð).
+Plus aéré, une police plus facile à lire. Recommandé pour la dyslexie : interligne 1,5, lettres + 12 %, mots + 16 %. ¦ Loftmeira, letur sem er auðveldara að lesa. Mælt með við lesblindu: línubil 1,5, stafir + 12 %, orð + 16 %.
+Lettres alourdies en bas, pour qu’elles ne se retournent pas. Toujours disponible. ¦ Stafir sem eru þyngri að neðan svo þeir snúist ekki við. Alltaf í boði.
+« Atkinson Hyperlegible » et « OpenDyslexic » sont rangées dans l’app (polices libres, licence SIL OFL) : rien à installer, et elles marchent sans internet. ¦ „Atkinson Hyperlegible“ og „OpenDyslexic“ fylgja appinu (frjáls letur, SIL OFL-leyfi): ekkert að setja upp, og þau virka án internets.
+Textes gris passés en noir (ou en blanc en mode sombre), bordures plus marquées, fonds unis sans quadrillage. Marche en clair et en sombre. ¦ Grár texti verður svartur (eða hvítur í dökkum ham), greinilegri rammar, einlitur bakgrunnur án rúðunets. Virkar í ljósum og dökkum ham.
+🧩 Une chose à la fois ¦ 🧩 Eitt í einu
+Une chose à la fois ¦ Eitt í einu
+Mode « une chose à la fois » ¦ Hamurinn „eitt í einu“
+Une interface plus calme : moins de boutons, de chiffres et de décorations, les actions principales plus grandes, et un seul panneau à la fois (le tableau de bord sans sa colonne de réglages, les fiches sur une seule colonne, pas d’écran divisé). Rien n’est supprimé : le petit bandeau « 🧩 Une chose à la fois — Tout afficher », en bas à droite, remet tout d’un clic. ¦ Rólegra viðmót: færri hnappar, tölur og skraut, stærri aðalaðgerðir og aðeins eitt spjald í einu (stjórnborðið án stillingadálksins, spjöldin í einum dálki, enginn skiptur skjár). Engu er eytt: litli borðinn „🧩 Eitt í einu — Sýna allt“ neðst til hægri setur allt aftur með einum smelli.
+Moins de choses à l’écran pour se concentrer sur l’essentiel. Les outils cachés reviennent avec « Tout afficher », en bas à droite de l’écran. ¦ Færri hlutir á skjánum til að einbeita sér að því sem skiptir máli. Falin verkfæri koma aftur með „Sýna allt“ neðst til hægri á skjánum.
+Avec la touche Tab, un cadre épais bleu et jaune montre où tu es. Les boutons et les cases peuvent être plus grands (au moins 40 px), et la flèche de la souris plus grosse. ¦ Með Tab-lyklinum sýnir þykkur blár og gulur rammi hvar þú ert. Hnappar og reitir geta verið stærri (að minnsta kosti 40 px) og músarbendillinn stærri.
+Boutons, menus, champs et cases à cocher plus grands, plus faciles à toucher ou à cliquer. ¦ Stærri hnappar, valmyndir, reitir og gátreitir, auðveldari að snerta eða smella á.
+🔊 Lecture à voix haute ¦ 🔊 Upplestur
+Lecture à voix haute ¦ Upplestur
+Sélectionne un texte avec la souris : un bouton 🔊 apparaît à côté, clique dessus pour l’entendre. Sur une fiche, le bouton « 🔊 Lire la fiche » (en bas à gauche) lit le nom puis les blocs affichés. ¦ Veldu texta með músinni: hnappur 🔊 birtist við hliðina, smelltu á hann til að heyra textann. Á spjaldi les hnappurinn „🔊 Lesa spjaldið upp“ (neðst til vinstri) nafnið og síðan blokkirnar sem sjást.
+Lire à voix haute le texte que je sélectionne ¦ Lesa upp textann sem ég vel
+Chaque photo ou document de tes médias est décrit à voix haute : la « Description de l’image » écrite dans la fenêtre du média, sinon son titre, sa date, son lieu et les personnes rattachées. Les petites images à côté d’un nom et les décorations sont passées sous silence. ¦ Hver mynd eða skjal í miðlunum þínum er lýst upphátt: „Lýsing myndar“ sem skrifuð er í glugga miðilsins, annars titill, dagsetning, staður og tengdir einstaklingar. Litlum myndum við hlið nafns og skrauti er sleppt.
+Le lecteur d’écran lit un texte à la place de chaque image. Pour l’écrire toi-même : ouvre un média, champ « Description de l’image (lue à voix haute) ». ¦ Skjálesarinn les texta í stað hverrar myndar. Til að skrifa hann sjálf(ur): opnaðu miðil, reiturinn „Lýsing myndar (lesin upphátt)“.
+🎬 Vidéos et montages ¦ 🎬 Myndbönd og klippur
+Les vidéos qui ont des sous-titres les montrent d’office (en français s’il y en a). Dans le montage, la piste « Sous-titres » se voit à la lecture même si tu l’as cachée (l’œil) ; la vidéo exportée, elle, ne change pas. ¦ Myndbönd með skjátextum sýna þá sjálfkrafa (á frönsku ef þeir eru til). Í klippingunni sést rásin „Skjátextar“ við spilun jafnvel þótt þú hafir falið hana (augað); útflutta myndbandið breytist ekki.
+Pour lire ce qui est dit sans devoir allumer les sous-titres à chaque fois. ¦ Til að lesa það sem sagt er án þess að þurfa að kveikja á skjátextum í hvert skipti.
+ou un nouveau clic sur 🎤 arrête. ¦ eða annar smellur á 🎤 stöðvar.
+Le navigateur écoute le micro seulement quand tu cliques sur 🎤. La première fois, il demande la permission d’utiliser le micro. ¦ Vafrinn hlustar á hljóðnemann aðeins þegar þú smellir á 🎤. Í fyrsta skipti biður hann um leyfi til að nota hljóðnemann.
+Plus de gris pâle : le texte est noir sur blanc (ou blanc sur noir en mode sombre). ¦ Ekkert fölgrátt lengur: textinn er svartur á hvítu (eða hvítur á svörtu í dökkum ham).
+Utilise la voix de l’ordinateur ; rien n’est envoyé sur internet par l’app. ¦ Notar rödd tölvunnar; appið sendir ekkert á internetið.
+Cache ce qui sert rarement pour garder l’essentiel, en plus grand. « Tout afficher » (en bas à droite) remet tout. ¦ Felur það sem sjaldan er notað til að halda því helsta, í stærra letri. „Sýna allt“ (neðst til hægri) setur allt aftur.
+Donne un texte à chaque image de tes médias. Le mieux : écrire toi-même ce qu’on voit, dans la fenêtre du média. ¦ Gefur hverri mynd í miðlunum þínum texta. Best er að skrifa sjálf(ur) hvað sést, í glugga miðilsins.
+Utilise la reconnaissance de la voix du navigateur (Chrome et Edge passent par internet ; Safari peut le faire sur l’ordinateur). Dans l’app de bureau, utilise la dictée du système : sur Mac, touche 🎤 ou deux fois Fn ; sur Windows, touche Windows + H. ¦ Notar talgreiningu vafrans (Chrome og Edge fara um internetið; Safari getur gert það í tölvunni). Í skjáborðsappinu skaltu nota tal í texta kerfisins: á Mac hnappinn 🎤 eða Fn tvisvar; á Windows Windows-hnappinn + H.
+Ces réglages sont gardés avec ta généalogie (comme l’apparence) : ils suivent sa sauvegarde et la retrouvent sur un autre ordinateur. ¦ Þessar stillingar eru geymdar með ættfræðinni þinni (eins og útlitið): þær fylgja afritinu og finnast aftur í annarri tölvu.
+De très gros boutons pour regarder l’arbre, les photos et les fiches, sans rien pouvoir modifier ni supprimer par erreur — pour une personne âgée, un enfant, ou n’importe qui qui veut juste regarder. ¦ Mjög stórir hnappar til að skoða tréð, myndirnar og spjöldin, án þess að geta breytt eða eytt neinu fyrir mistök — fyrir eldri einstakling, barn eða hvern sem vill bara skoða.
+Montrer le bouton « 🧓 Mode simple » en haut de l’app ¦ Sýna hnappinn „🧓 Einfaldur hamur“ efst í appinu
+Taille du texte (Thème et couleurs) ¦ Textastærð (Þema og litir)
+Un clic applique tout d’un coup : couleurs, police et tailles. Tu peux ensuite retoucher chaque réglage plus bas. ¦ Einn smellur setur allt í einu: liti, letur og stærðir. Síðan geturðu lagfært hverja stillingu hér fyrir neðan.
+Toute la famille, de case en case ¦ Öll fjölskyldan, reit fyrir reit
+Fond sombre et texte clair, n’éblouit pas le soir ¦ Dökkur bakgrunnur og ljós texti, blindar ekki á kvöldin
+Noir sur blanc pur, traits épais, 21:1 ¦ Svart á hreinu hvítu, þykkar línur, 21:1
+Un cadre par ligne, large et facile à viser ¦ Einn rammi í hverri línu, breiður og auðvelt að hitta
+Plus de cadres d’un coup d’œil, sur un grand écran ¦ Fleiri rammar í sjónhendingu, á stórum skjá
+Chacun touche sa photo, et les liens s’écrivent pour lui. ¦ Hver og einn snertir sína mynd og skyldleikinn er skrifaður fyrir hann.
+Fond, texte et boutons ¦ Bakgrunnur, texti og hnappar
+Une couleur de fond douce et un texte très foncé fatiguent moins. ¦ Mjúkur bakgrunnslitur og mjög dökkur texti þreyta minna.
+Le texte sur le fond ¦ Textinn á bakgrunninum
+On vise 7:1 au moins (le plus haut niveau des règles d’accessibilité). « Corriger » garde la teinte et change seulement sa clarté. ¦ Stefnt er að minnst 7:1 (hæsta stig aðgengisreglnanna). „Laga“ heldur litblænum og breytir aðeins birtu hans.
+À 24 px on lit sans lunettes à 50 cm ; à 30 px et plus, de loin. ¦ Við 24 px má lesa án gleraugna í 50 cm fjarlægð; við 30 px og meira, úr fjarlægð.
+Atkinson Hyperlegible et Luciole sont dessinées pour les personnes qui voient mal : les lettres qui se ressemblent (I l 1, O 0, b d) ne se confondent pas. OpenDyslexic aide certaines personnes dyslexiques. Atkinson et OpenDyslexic sont rangées dans l’app ; Luciole est prise si elle est sur l’ordinateur, sinon une police proche (Atkinson Hyperlegible). ¦ Atkinson Hyperlegible og Luciole eru hönnuð fyrir sjónskerta: stafir sem líkjast hver öðrum (I l 1, O 0, b d) ruglast ekki saman. OpenDyslexic hjálpar sumum með lesblindu. Atkinson og OpenDyslexic fylgja appinu; Luciole er notað ef það er í tölvunni, annars svipað letur (Atkinson Hyperlegible).
+Les capitales repèrent le nom de famille, comme dans l’app ; en minuscules, c’est plus doux à lire. ¦ Hástafir auðkenna eftirnafnið, eins og í appinu; með lágstöfum er mýkra að lesa.
+Pareil que l’app : la voix et la vitesse de « ♿ Toute l’app ». ¦ Eins og appið: rödd og hraði úr „♿ Allt appið“.
+Un peu plus lent que d’habitude (80 à 90 %) se suit mieux. ¦ Örlítið hægar en venjulega (80 til 90 %) er auðveldara að fylgja.
+＋ Ajouter un cadre ¦ ＋ Bæta við ramma
+Sa fiche, en phrases ¦ Spjaldið, í setningum
+Son numéro en grand ¦ Númerið, stórt
+Ses photos, en diaporama ¦ Myndirnar, sem myndasýning
+Une surprise à chaque fois ¦ Óvænt í hvert skipti
+À regarder en grand ¦ Til að skoða í stóru
+La regarder en 3D, étage par étage ¦ Skoða það í þrívídd, hæð fyrir hæð
+À lire et à écouter ¦ Til að lesa og hlusta á
+Un cadre par ligne se vise sans peine sur une tablette ; trois ou quatre par ligne montrent tout d’un coup sur un grand écran. Sur un téléphone, il n’y en a jamais plus de deux. ¦ Einn rammi í hverri línu er auðvelt að hitta á spjaldtölvu; þrír eða fjórir í línu sýna allt í einu á stórum skjá. Í síma eru þeir aldrei fleiri en tveir.
+La personne qui regarde, sa famille proche et ses descendants restent toujours visibles. ¦ Sá sem horfir, nánasta fjölskylda hans og afkomendur eru alltaf sýnileg.
+🖼 Choisir les photos à retirer… ¦ 🖼 Velja myndir til að fjarlægja…
+Montrer aussi les actes et documents ¦ Sýna líka skjöl og gögn
+Souvent difficiles à lire. ¦ Oft erfið aflestrar.
+Une écriture ancienne ou une page dense découragent ; les photos parlent à tout le monde. ¦ Gömul rithönd eða þéttskrifuð síða fæla frá; myndir tala til allra.
+Le temps de regarder, et de dire « Oh, c’est ta tante ! ». ¦ Tími til að skoða og segja „Nei, þetta er frænka þín!“.
+Faire défiler tout seul en ouvrant le diaporama ¦ Spila sjálfkrafa þegar myndasýningin er opnuð
+La tablette posée sur le buffet devient un cadre photo de famille. ¦ Spjaldtölvan á skenknum verður að fjölskyldumyndaramma.
+Garder le doigt sur « 🔒 Quitter le mode simple » (sur l’accueil seulement). ¦ Haltu fingrinum á „🔒 Hætta í einföldum ham“ (aðeins á upphafsskjánum).
+Code à 4 chiffres ¦ Fjögurra stafa kóði
+Tape 4 chiffres : le code est gardé caché, jamais en clair. ¦ Sláðu inn 4 tölustafi: kóðinn er geymdur falinn, aldrei í ljósu letri.
+Ouvrir l’app directement en mode simple ¦ Opna appið beint í einföldum ham
+Sur la tablette de Mamie, l’app s’ouvre toute seule sur les gros boutons. Ajoute l’adresse à l’écran d’accueil de la tablette. ¦ Á spjaldtölvu ömmu opnast appið sjálfkrafa á stóru hnöppunum. Bættu slóðinni við heimaskjá spjaldtölvunnar.
+Ces réglages servent de base sur tous les appareils ¦ Þessar stillingar eru grunnurinn á öllum tækjum
+Tu prépares une fois, et chaque tablette ou ordinateur de la famille démarre pareil. ¦ Þú undirbýrð einu sinni og allar spjaldtölvur eða tölvur fjölskyldunnar byrja eins.
+Pensé et designé par Victor Baissait. Codé par Codex (ChatGPT) et Claude, sous la supervision de Victor Baissait. ¦ Hugsað og hannað af Victor Baissait. Forritað af Codex (ChatGPT) og Claude, undir umsjón Victor Baissait.
+Cartes, chronologie et statistiques ¦ Kort, tímalína og tölfræði
+Communes, lieux-dits et villes du monde : ¦ Sveitarfélög, örnefni og borgir heimsins:
+Communes de Suisse et du Liechtenstein : swissBOUNDARIES3D © ¦ Sveitarfélög í Sviss og Liechtenstein: swissBOUNDARIES3D ©
+Communes du Luxembourg : Administration du cadastre et de la topographie, ¦ Sveitarfélög í Lúxemborg: Administration du cadastre et de la topographie,
+Elle prend la couleur principale de l’Apparence (un rouge devient rouge pâle). La couleur pleine ne peut pas se rater ; la couleur pâle laisse lire les gris et les badges. ¦ Hann fær aðallitinn úr Útliti (rauður verður ljósrauður). Fullan lit er ekki hægt að missa af; ljósi liturinn leyfir gráu og merkjunum að sjást.
+Le cadre du haut (nom, badges, boutons carrés) de toutes les fiches de personnes et d’animaux. Glisse les boutons pour changer leur ordre ; décoche un bouton pour le masquer. ¦ Efri ramminn (nafn, merki, ferningshnappar) á öllum spjöldum einstaklinga og dýra. Dragðu hnappana til að breyta röð þeirra; taktu hakið af hnappi til að fela hann.
+Fiche épurée, pour un diaporama : ni nom, ni badges, ni boutons en haut. ¦ Hreinsað spjald, fyrir myndasýningu: hvorki nafn, merki né hnappar efst.
+Les boutons côte à côte, en deux rangées. ¦ Hnapparnir hlið við hlið, í tveimur röðum.
+Il est caché au départ : coche « 🧩 » dans la liste des boutons pour le montrer (décoche-le pour le cacher à nouveau). Pas sur les fiches d’animaux. ¦ Hann er falinn í upphafi: hakaðu við „🧩“ í listanum yfir hnappa til að sýna hann (taktu hakið af til að fela hann aftur). Ekki á spjöldum dýra.
+Écrire sur cette personne (traitement de texte) ¦ Skrifa um þennan einstakling (ritvinnsla)
+Gardé tout seul. Alt + ↑ / ↓ au clavier. « 👁＋ » n’apparaît que sur les fiches d’animaux. ¦ Vistað sjálfkrafa. Alt + ↑ / ↓ á lyklaborðinu. „👁＋“ birtist aðeins á spjöldum dýra.
+Ce qui s’affiche sous le nom et à côté du statut. Glisse pour changer l’ordre ; décoche pour masquer. Gardé tout de suite. ¦ Það sem birtist undir nafninu og við hliðina á stöðunni. Dragðu til að breyta röðinni; taktu hakið af til að fela. Vistað strax.
+La forme de l’en-tête et la place des pastilles (à droite ou sous le nom) : « Forme de l’en-tête », plus bas sur cette page. ¦ Lögun haussins og staðsetning merkjanna (hægra megin eða undir nafninu): „Lögun haussins“, neðar á þessari síðu.
+Montrer le lieu et la personne ¦ Sýna staðinn og einstaklinginn
+« Pas revu au bout de… » sert aussi au bloc « Animaux à retrouver » du Suivi : un seul seuil. ¦ „Ekki sést aftur eftir…“ gildir líka um blokkina „Dýr sem þarf að finna“ í Eftirlitinu: ein sameiginleg mörk.
+Place de « ＋ Nouvelle observation » ¦ Staðsetning „＋ Ný athugun“
+Le bouton pour noter qu’on a vu l’animal. Seulement sur les fiches d’animaux. ¦ Hnappurinn til að skrá að dýrið hafi sést. Aðeins á spjöldum dýra.
+Carré 👁＋ en premier dans la grille des boutons ¦ Ferningurinn 👁＋ fremst í hnappanetinu
+en bas à droite de la fiche ¦ neðst til hægri á spjaldinu
+Le carré suit aussi « Ordre et visibilité des boutons » plus haut (ligne 01). ¦ Ferningurinn fylgir líka „Röð og sýnileiki hnappa“ hér að ofan (lína 01).

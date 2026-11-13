@@ -1,0 +1,1004 @@
+fr ¦ cs ¦ sv ¦ da
+(l’original reste gardé : on peut y revenir) ¦ (originál zůstane uložený: dá se k němu vrátit) ¦ (originalet behålls: du kan gå tillbaka till det) ¦ (originalen bevares: du kan gå tilbage til den)
+(voix, plus léger) ¦ (hlas, menší soubor) ¦ (röst, lättare) ¦ (stemme, lettere)
+1 rush ajouté : glisse-le sur la frise. ¦ 1 záběr přidán: přetáhni ho na časovou osu. ¦ 1 klipp tillagt: dra det till tidslinjen. ¦ 1 klip tilføjet: træk det til tidslinjen.
+1 rush ajouté : glisse-le sur la frise. Il entre dans les Médias quand tu enregistres le projet. ¦ 1 záběr přidán: přetáhni ho na časovou osu. Do Médií se dostane, až uložíš projekt. ¦ 1 klipp tillagt: dra det till tidslinjen. Det hamnar bland Medierna när du sparar projektet. ¦ 1 klip tilføjet: træk det til tidslinjen. Det kommer i Medier, når du gemmer projektet.
+: l’original ne change pas du tout ¦ : originál se vůbec nezmění ¦ : originalet ändras inte alls ¦ : originalen ændres slet ikke
+<b>Une copie à part</b> (un autre son, rattaché aux mêmes fiches) ¦ <b>Samostatná kopie</b> (jiný zvuk, propojený se stejnými kartami) ¦ <b>En separat kopia</b> (ett annat ljud, kopplat till samma poster) ¦ <b>En separat kopi</b> (en anden lyd, forbundet med de samme poster)
+<b>Une copie à part</b> (une autre vidéo, rattachée aux mêmes fiches) ¦ <b>Samostatná kopie</b> (jiné video, propojené se stejnými kartami) ¦ <b>En separat kopia</b> (en annan video, kopplad till samma poster) ¦ <b>En separat kopi</b> (en anden video, forbundet med de samme poster)
+Au repère orange ({time}) ¦ U oranžové značky ({time}) ¦ Vid den orange markören ({time}) ¦ Ved den orange markør ({time})
+Boutons des pistes : {n} px ¦ Tlačítka stop: {n} px ¦ Spårknappar: {n} px ¦ Sporknapper: {n} px
+Boutons des pistes : {n} px (taille de départ) ¦ Tlačítka stop: {n} px (výchozí velikost) ¦ Spårknappar: {n} px (standardstorlek) ¦ Sporknapper: {n} px (standardstørrelse)
+Ce fichier est un réglage pour {a}, pas pour {b} : importe-le à sa place. ¦ Tento soubor je nastavení pro {a}, ne pro {b}: importuj ho tam. ¦ Filen är en inställning för {a}, inte för {b}: importera den där i stället. ¦ Filen er en indstilling til {a}, ikke til {b}: importér den der i stedet.
+Ce qu’il contient ({what}) remonte dans la racine. ¦ Jeho obsah ({what}) se přesune do kořene. ¦ Innehållet ({what}) flyttas upp till översta nivån. ¦ Indholdet ({what}) flyttes op til øverste niveau.
+Ce qu’il contient ({what}) remonte dans « {dir} ». ¦ Jeho obsah ({what}) se přesune do „{dir}“. ¦ Innehållet ({what}) flyttas upp till ”{dir}”. ¦ Indholdet ({what}) flyttes op til »{dir}«.
+Chapitre {n} ¦ Kapitola {n} ¦ Kapitel {n} ¦ Kapitel {n}
+Clic sur la frise : se placer · clic sur un élément : le choisir · glisser : le déplacer · {play} : lire · {split} : couper ici · {del} : enlever ¦ Klik na časovou osu: přesun · klik na prvek: výběr · tažení: posun · {play}: přehrát · {split}: střih tady · {del}: odebrat ¦ Klick på tidslinjen: gå dit · klick på ett objekt: välj det · dra: flytta det · {play}: spela · {split}: klipp här · {del}: ta bort ¦ Klik på tidslinjen: gå dertil · klik på et element: vælg det · træk: flyt det · {play}: afspil · {split}: klip her · {del}: fjern
+Enregistrement du son… {n} % ¦ Ukládám zvuk… {n} % ¦ Sparar ljudet… {n} % ¦ Gemmer lyden… {n} %
+Ensemble « {name} » appliqué. ¦ Sada „{name}“ použita. ¦ Uppsättningen ”{name}” tillämpad. ¦ Sættet »{name}« anvendt.
+Ensemble « {name} » supprimé ¦ Sada „{name}“ smazána ¦ Uppsättningen ”{name}” raderad ¦ Sættet »{name}« slettet
+Envoi des rushes {k}/{n}… ¦ Nahrávám záběry {k}/{n}… ¦ Laddar upp klipp {k}/{n}… ¦ Uploader klip {k}/{n}…
+Espace ¦ Mezerník ¦ Mellanslag ¦ Mellemrum
+Fichier {fmt} téléchargé ({n} Mo). Rien n’a changé dans la base. ¦ Soubor {fmt} stažen ({n} MB). V databázi se nic nezměnilo. ¦ {fmt}-filen nedladdad ({n} MB). Inget har ändrats i databasen. ¦ {fmt}-filen hentet ({n} MB). Intet er ændret i databasen.
+Il est utilisé {n} fois sur la frise : ces passages seront retirés aussi. Le fichier reste dans les Médias s’il y est. ¦ Na časové ose se používá {n}×: tyto úseky se odeberou také. Soubor zůstane v Médiích, pokud tam je. ¦ Det används {n} gånger på tidslinjen: de delarna tas också bort. Filen finns kvar bland Medierna om den finns där. ¦ Det bruges {n} gange på tidslinjen: de dele fjernes også. Filen bliver i Medier, hvis den er der.
+Image clé {time} ¦ Klíčový snímek {time} ¦ Nyckelbildruta {time} ¦ Nøglebillede {time}
+Le fichier importé est maintenant dans les Médias. ¦ Importovaný soubor je teď v Médiích. ¦ Den importerade filen finns nu bland Medierna. ¦ Den importerede fil er nu i Medier.
+Le fichier reste dans les Médias s’il y est. ¦ Soubor zůstane v Médiích, pokud tam je. ¦ Filen finns kvar bland Medierna om den finns där. ¦ Filen bliver i Medier, hvis den er der.
+Le montage est rejoué pour être enregistré : cela prend <b>{time}</b> (sa durée). Laisse la fenêtre ouverte. ¦ Střih se přehraje, aby se nahrál: trvá to <b>{time}</b> (jeho délka). Nech okno otevřené. ¦ Redigeringen spelas upp för att spelas in: det tar <b>{time}</b> (dess längd). Låt fönstret vara öppet. ¦ Redigeringen afspilles for at blive optaget: det tager <b>{time}</b> (dens længde). Lad vinduet være åbent.
+Les boutons des pistes ont déjà leur taille de départ. ¦ Tlačítka stop už mají výchozí velikost. ¦ Spårknapparna har redan standardstorlek. ¦ Sporknapperne har allerede standardstørrelsen.
+Les boutons des pistes sont déjà au plus grand. ¦ Tlačítka stop jsou už největší. ¦ Spårknapparna är redan så stora som möjligt. ¦ Sporknapperne er allerede størst mulige.
+Les boutons des pistes sont déjà au plus petit. ¦ Tlačítka stop jsou už nejmenší. ¦ Spårknapparna är redan så små som möjligt. ¦ Sporknapperne er allerede mindst mulige.
+Les {n} fichiers importés sont maintenant dans les Médias. ¦ Importované soubory ({n}) jsou teď v Médiích. ¦ De {n} importerade filerna finns nu bland Medierna. ¦ De {n} importerede filer er nu i Medier.
+Mettre « {name} » dans… ¦ Dát „{name}“ do… ¦ Lägg ”{name}” i… ¦ Læg »{name}« i…
+Montage fabriqué : {what}. Retouche ce que tu veux, puis ⤓ Exporter. ¦ Střih vytvořen: {what}. Uprav, co chceš, pak ⤓ Exportovat. ¦ Redigering gjord: {what}. Justera det du vill och sedan ⤓ Exportera. ¦ Redigering lavet: {what}. Justér det, du vil, og så ⤓ Eksportér.
+Nom du dossier (dans « {name} ») : ¦ Název složky (v „{name}“): ¦ Mappens namn (i ”{name}”): ¦ Mappens navn (i »{name}«):
+Nom du dossier : ¦ Název složky: ¦ Mappens namn: ¦ Mappens navn:
+Nouveau chapitre ¦ Nová kapitola ¦ Nytt kapitel ¦ Nyt kapitel
+Nouvelle version, <b>sans la montrer</b> pour l’instant ¦ Nová verze, <b>zatím nezobrazená</b> ¦ Ny version, <b>som inte visas</b> än så länge ¦ Ny version, <b>uden at vise den</b> foreløbig
+Nouvelle version, montrée partout ¦ Nová verze, zobrazená všude ¦ Ny version, visas överallt ¦ Ny version, vist overalt
+Ouvre une fois {what} : ses boutons apparaîtront ici. ¦ Otevři jednou {what}: jeho tlačítka se objeví tady. ¦ Öppna {what} en gång: dess knappar visas här. ¦ Åbn {what} én gang: dens knapper vises her.
+Où mettre « {name} » ? ¦ Kam dát „{name}“? ¦ Var ska ”{name}” läggas? ¦ Hvor skal »{name}« lægges?
+Piste « {name} » ajoutée. ¦ Stopa „{name}“ přidána. ¦ Spåret ”{name}” tillagt. ¦ Sporet »{name}« tilføjet.
+Piste « {name} » supprimée ¦ Stopa „{name}“ smazána ¦ Spåret ”{name}” raderat ¦ Sporet »{name}« slettet
+Piste « {name} » supprimée (avec {what}) ¦ Stopa „{name}“ smazána (i s {what}) ¦ Spåret ”{name}” raderat (med {what}) ¦ Sporet »{name}« slettet (med {what})
+Piste « {name} » vidée ¦ Stopa „{name}“ vyprázdněna ¦ Spåret ”{name}” tömt ¦ Sporet »{name}« tømt
+Ranger « {name} » dans… ¦ Uložit „{name}“ do… ¦ Lägg ”{name}” i… ¦ Læg »{name}« i…
+Remplacer les réglages actuels par l’ensemble « {name} » ? ¦ Nahradit aktuální nastavení sadou „{name}“? ¦ Ersätta de aktuella inställningarna med uppsättningen ”{name}”? ¦ Erstat de aktuelle indstillinger med sættet »{name}«?
+Rush supprimé, avec ses {n} passages sur la frise. ¦ Záběr smazán i se svými úseky na časové ose ({n}). ¦ Klippet raderat, med sina {n} användningar på tidslinjen. ¦ Klippet slettet med dets {n} brug på tidslinjen.
+Rush supprimé, avec son passage sur la frise. ¦ Záběr smazán i se svým úsekem na časové ose. ¦ Klippet raderat, med sin användning på tidslinjen. ¦ Klippet slettet med dets brug på tidslinjen.
+Rush supprimé. ¦ Záběr smazán. ¦ Klippet raderat. ¦ Klippet slettet.
+Réglage « {name} » importé : « Appliquer » pour l’utiliser. ¦ Nastavení „{name}“ importováno: „Použít“ ho zapne. ¦ Inställningen ”{name}” importerad: ”Använd” för att använda den. ¦ Indstillingen »{name}« importeret: »Anvend« for at bruge den.
+Supprimer le dossier « {name} » ? ¦ Smazat složku „{name}“? ¦ Radera mappen ”{name}”? ¦ Slet mappen »{name}«?
+Supprimer le rush ¦ Smazat záběr ¦ Radera klippet ¦ Slet klippet
+Supprimer « {name} » du projet ? ¦ Smazat „{name}“ z projektu? ¦ Radera ”{name}” från projektet? ¦ Slet »{name}« fra projektet?
+Titre de la vidéo ¦ Název videa ¦ Videons titel ¦ Videoens titel
+Titre du chapitre qui commence à {time} : ¦ Název kapitoly, která začíná v {time}: ¦ Titel på kapitlet som börjar vid {time}: ¦ Titel på kapitlet, der begynder ved {time}:
+Titre du son ¦ Název zvuku ¦ Ljudets titel ¦ Lydens titel
+Un réglage s’appelle déjà « {name} ». Quel nom pour celui-ci ? ¦ Nastavení „{name}“ už existuje. Jaký název pro toto? ¦ En inställning heter redan ”{name}”. Vilket namn för den här? ¦ En indstilling hedder allerede »{name}«. Hvilket navn til denne?
+ce rush ¦ tento záběr ¦ det här klippet ¦ dette klip
+comme l’original (mono) ¦ jako originál (mono) ¦ som originalet (mono) ¦ som originalen (mono)
+comme l’original (stéréo) ¦ jako originál (stereo) ¦ som originalet (stereo) ¦ som originalen (stereo)
+comme l’original ({n} kHz) ¦ jako originál ({n} kHz) ¦ som originalet ({n} kHz) ¦ som originalen ({n} kHz)
+la copie est rattachée aux mêmes fiches ¦ kopie je propojená se stejnými kartami ¦ kopian är kopplad till samma poster ¦ kopien er forbundet med de samme poster
+la disposition du montage ¦ rozvržení střihu ¦ videoredigerarens layout ¦ videoredigeringens layout
+le plus léger pour la voix · environ {n} Mo · QuickTime ne le lit pas ¦ nejmenší pro hlas · asi {n} MB · QuickTime ho nepřehraje ¦ det lättaste för röst · cirka {n} MB · QuickTime kan inte spela det ¦ den letteste til stemme · cirka {n} MB · QuickTime kan ikke afspille den
+le plus léger · ~{n} Mo ¦ nejmenší · ~{n} MB ¦ det lättaste · ~{n} MB ¦ den letteste · ~{n} MB
+les boutons de « {name} » ¦ tlačítka „{name}“ ¦ knapparna för ”{name}” ¦ knapperne til »{name}«
+lu absolument partout (téléphones, voitures, Mac, Windows) · environ {n} Mo en 128 kbit/s ¦ přehraje se úplně všude (telefony, auta, Mac, Windows) · asi {n} MB při 128 kbit/s ¦ spelas absolut överallt (telefoner, bilar, Mac, Windows) · cirka {n} MB vid 128 kbit/s ¦ kan afspilles absolut overalt (telefoner, biler, Mac, Windows) · cirka {n} MB ved 128 kbit/s
+lu partout · ~{n} Mo ¦ přehraje se všude · ~{n} MB ¦ spelas överallt · ~{n} MB ¦ afspilles overalt · ~{n} MB
+l’original est toujours gardé · montrée : {name} ¦ originál se vždy zachová · zobrazená: {name} ¦ originalet behålls alltid · visas: {name} ¦ originalen bevares altid · vist: {name}
+l’outil « {name} » ¦ nástroj „{name}“ ¦ verktyget ”{name}” ¦ værktøjet »{name}«
+nouvelle version, copie (réglages) ¦ nová verze, kopie (nastavení) ¦ ny version, kopia (inställningar) ¦ ny version, kopi (indstillinger)
+rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité, images par seconde et volume (📢 {n} LUFS) : Réglages → Montage ¦ přehraje se v reálném čase, aby se nahrál (nech okno otevřené) · velikost, kvalita, snímky za sekundu a hlasitost (📢 {n} LUFS): Nastavení → Střih ¦ spelas upp i realtid för att spelas in (låt fönstret vara öppet) · storlek, kvalitet, bilder per sekund och volym (📢 {n} LUFS): Inställningar → Redigering ¦ afspilles i realtid for at blive optaget (lad vinduet være åbent) · størrelse, kvalitet, billeder pr. sekund og lydstyrke (📢 {n} LUFS): Indstillinger → Redigering
+rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité, images par seconde et volume standard : Réglages → Montage ¦ přehraje se v reálném čase, aby se nahrál (nech okno otevřené) · velikost, kvalita, snímky za sekundu a standardní hlasitost: Nastavení → Střih ¦ spelas upp i realtid för att spelas in (låt fönstret vara öppet) · storlek, kvalitet, bilder per sekund och standardvolym: Inställningar → Redigering ¦ afspilles i realtid for at blive optaget (lad vinduet være åbent) · størrelse, kvalitet, billeder pr. sekund og standardlydstyrke: Indstillinger → Redigering
+sans perte et environ deux fois plus léger que le WAV · environ {n} Mo · lu par les navigateurs, VLC, Windows ; pas par QuickTime ¦ bezeztrátový a asi o polovinu menší než WAV · asi {n} MB · přehrají ho prohlížeče, VLC, Windows; QuickTime ne ¦ förlustfritt och ungefär hälften så stort som WAV · cirka {n} MB · spelas i webbläsare, VLC, Windows; inte i QuickTime ¦ tabsfrit og cirka halvt så stort som WAV · cirka {n} MB · afspilles i browsere, VLC, Windows; ikke i QuickTime
+sans perte · ~{n} Mo ¦ bezeztrátový · ~{n} MB ¦ förlustfritt · ~{n} MB ¦ tabsfrit · ~{n} MB
+sans perte, lu partout (Mac, Windows, Audacity) · environ {n} Mo ¦ bezeztrátový, přehraje se všude (Mac, Windows, Audacity) · asi {n} MB ¦ förlustfritt, spelas överallt (Mac, Windows, Audacity) · cirka {n} MB ¦ tabsfrit, afspilles overalt (Mac, Windows, Audacity) · cirka {n} MB
+sans perte, léger · ~{n} Mo ¦ bezeztrátový, menší · ~{n} MB ¦ förlustfritt, lätt · ~{n} MB ¦ tabsfrit, let · ~{n} MB
+sans perte, pour GarageBand, Logic, QuickTime · environ {n} Mo · à télécharger seulement (l’app ne le lit pas) ¦ bezeztrátový, pro GarageBand, Logic, QuickTime · asi {n} MB · jen ke stažení (aplikace ho nepřehraje) ¦ förlustfritt, för GarageBand, Logic, QuickTime · cirka {n} MB · endast för nedladdning (appen kan inte spela det) ¦ tabsfrit, til GarageBand, Logic, QuickTime · cirka {n} MB · kun til download (appen kan ikke afspille det)
+stéréo ¦ stereo ¦ stereo ¦ stereo
+sur chaque temps ¦ na každou dobu ¦ på varje taktslag ¦ på hvert slag
+tourné de {n}° ¦ otočeno o {n}° ¦ roterad {n}° ¦ roteret {n}°
+tous les {n} temps ¦ každé {n} doby ¦ var {n}:e taktslag ¦ hvert {n}. slag
+{file} : ni vidéo, ni photo, ni son. ¦ {file}: není to video, fotka ani zvuk. ¦ {file}: varken video, foto eller ljud. ¦ {file}: hverken video, foto eller lyd.
+{n} images/s ¦ {n} snímků/s ¦ {n} bilder/s ¦ {n} billeder/s
+{n} rushes ajoutés : glisse-les sur la frise. ¦ Přidané záběry: {n}. Přetáhni je na časovou osu. ¦ {n} klipp tillagda: dra dem till tidslinjen. ¦ {n} klip tilføjet: træk dem til tidslinjen.
+{n} rushes ajoutés : glisse-les sur la frise. Ils entrent dans les Médias quand tu enregistres le projet. ¦ Přidané záběry: {n}. Přetáhni je na časovou osu. Do Médií se dostanou, až uložíš projekt. ¦ {n} klipp tillagda: dra dem till tidslinjen. De hamnar bland Medierna när du sparar projektet. ¦ {n} klip tilføjet: træk dem til tidslinjen. De kommer i Medier, når du gemmer projektet.
+{n} temps repérés · environ {bpm} battements par minute. ¦ Nalezené doby: {n} · asi {bpm} úderů za minutu. ¦ {n} taktslag hittade · cirka {bpm} slag per minut. ¦ {n} slag fundet · cirka {bpm} slag pr. minut.
+{n} temps repérés. ¦ Nalezené doby: {n}. ¦ {n} taktslag hittade. ¦ {n} slag fundet.
+{what} : choisis-en un puis « Appliquer ». ¦ {what}: vyber jedno a pak „Použít“. ¦ {what}: välj en och sedan ”Använd”. ¦ {what}: vælg en, og så »Anvend«.
+{what} sur la piste « Sous-titres ». ¦ {what} na stopě „Titulky“. ¦ {what} på spåret ”Undertexter”. ¦ {what} på sporet »Undertekster«.
+« {name} » est revenu du Studio son, nettoyé. ¦ „{name}“ se vrátil ze Zvukového studia, vyčištěný. ¦ ”{name}” är tillbaka från Ljudstudion, rensat. ¦ »{name}« er tilbage fra Lydstudiet, renset.
+« {name} » rangé dans la racine. ¦ „{name}“ přesunuto do kořene. ¦ ”{name}” flyttat till översta nivån. ¦ »{name}« flyttet til øverste niveau.
+« {name} » rangé dans « {dir} ». ¦ „{name}“ přesunuto do „{dir}“. ¦ ”{name}” flyttat till ”{dir}”. ¦ »{name}« flyttet til »{dir}«.
+À la fin ¦ Na konec ¦ I slutet ¦ Til sidst
+◇ image clé à {time} ¦ ◇ klíčový snímek v {time} ¦ ◇ nyckelbildruta vid {time} ¦ ◇ nøglebillede ved {time}
+🎥 {what} à la piste 1 (décalages : {offs}). ¦ 🎥 {what} ke stopě 1 (posuny: {offs}). ¦ 🎥 {what} till spår 1 (förskjutningar: {offs}). ¦ 🎥 {what} til spor 1 (forskydninger: {offs}).
+💾 Dans les médias… ¦ 💾 Do médií… ¦ 💾 Bland medierna… ¦ 💾 I medierne…
+📢 Mesure du volume… {n} % ¦ 📢 Měřím hlasitost… {n} % ¦ 📢 Mäter ljudstyrkan… {n} % ¦ 📢 Måler lydstyrken… {n} %
+📢 Volume mesuré : {a} LUFS → {b} LUFS (crêtes tenues par le limiteur). ¦ 📢 Změřená hlasitost: {a} LUFS → {b} LUFS (špičky drží limiter). ¦ 📢 Uppmätt ljudstyrka: {a} LUFS → {b} LUFS (toppar hålls av begränsaren). ¦ 📢 Målt lydstyrke: {a} LUFS → {b} LUFS (spidser holdes af limiteren).
+📢 Volume mesuré : {a} LUFS → {b} LUFS. ¦ 📢 Změřená hlasitost: {a} LUFS → {b} LUFS. ¦ 📢 Uppmätt ljudstyrka: {a} LUFS → {b} LUFS. ¦ 📢 Målt lydstyrke: {a} LUFS → {b} LUFS.
+🔒 Piste « {name} » verrouillée : ses éléments ne bougent plus. ¦ 🔒 Stopa „{name}“ zamčena: její prvky se už nehýbou. ¦ 🔒 Spåret ”{name}” låst: dess objekt flyttas inte längre. ¦ 🔒 Sporet »{name}« låst: dets elementer flytter sig ikke længere.
+🔓 Piste « {name} » déverrouillée. ¦ 🔓 Stopa „{name}“ odemčena. ¦ 🔓 Spåret ”{name}” upplåst. ¦ 🔓 Sporet »{name}« låst op.
+🕘 Versions ({n})… ¦ 🕘 Verze ({n})… ¦ 🕘 Versioner ({n})… ¦ 🕘 Versioner ({n})…
+🥁 {n} temps repérés (environ {bpm} par minute). ¦ 🥁 Nalezené doby: {n} (asi {bpm} za minutu). ¦ 🥁 {n} taktslag hittade (cirka {bpm} per minut). ¦ 🥁 {n} slag fundet (cirka {bpm} pr. minut).
+🥁 {n} temps repérés. ¦ 🥁 Nalezené doby: {n}. ¦ 🥁 {n} taktslag hittade. ¦ 🥁 {n} slag fundet.
+=rush ¦ záběr|záběry|záběrů ¦ klipp|klipp ¦ klip|klip
+=plan ajouté ¦ přidaný záběr|přidané záběry|přidaných záběrů ¦ tagning tillagd|tagningar tillagda ¦ indstilling tilføjet|indstillinger tilføjet
+=sous-titre importé ¦ importovaný titulek|importované titulky|importovaných titulků ¦ undertext importerad|undertexter importerade ¦ undertekst importeret|undertekster importeret
+=ensemble importé ¦ importovaná sada|importované sady|importovaných sad ¦ uppsättning importerad|uppsättningar importerade ¦ sæt importeret|sæt importeret
+=réglage du Studio reste appliqué ¦ nastavení Studia zůstává použité|nastavení Studia zůstávají použitá|nastavení Studia zůstává použitých ¦ Studioinställning gäller fortfarande|Studioinställningar gäller fortfarande ¦ Studieindstilling gælder stadig|Studieindstillinger gælder stadig
+=morceau ¦ úsek|úseky|úseků ¦ segment|segment ¦ segment|segmenter
+(rien ne change dans la base) ¦ (v databázi se nic nemění) ¦ (inget ändras i databasen) ¦ (intet ændres i databasen)
+(un autre son, rattaché aux mêmes fiches) ¦ (jiný zvuk, propojený se stejnými kartami) ¦ (ett annat ljud, kopplat till samma poster) ¦ (en anden lyd, forbundet med de samme poster)
+(une autre vidéo, rattachée aux mêmes fiches) ¦ (jiné video, propojené se stejnými kartami) ¦ (en annan video, kopplad till samma poster) ¦ (en anden video, forbundet med de samme poster)
+300 dossiers au plus. ¦ Nejvýše 300 složek. ¦ Högst 300 mappar. ¦ Højst 300 mapper.
+bandes floues plutôt que noires ¦ rozmazané pruhy místo černých ¦ suddiga kanter i stället för svarta ¦ slørede bjælker i stedet for sorte
+Activer / couper ¦ Zapnout / vypnout ¦ Slå på / av ¦ Slå til / fra
+Adaptation spatiale ¦ Prostorové přizpůsobení ¦ Rumslig anpassning ¦ Rumlig tilpasning
+Adapter (toute l’image, bandes noires) ¦ Přizpůsobit (celý obraz, černé pruhy) ¦ Anpassa (hela bilden, svarta kanter) ¦ Tilpas (hele billedet, sorte bjælker)
+Aide sous la frise ¦ Nápověda pod časovou osou ¦ Hjälp under tidslinjen ¦ Hjælp under tidslinjen
+Aigus ¦ Výšky ¦ Diskant ¦ Diskant
+Aimant arrêté. ¦ Přichytávání vypnuto. ¦ Fästning av. ¦ Fastgørelse slået fra.
+Aimanter : en glissant, un élément se colle à la tête de lecture, au début ou à la fin des autres, aux chapitres et aux temps de la musique (garder Alt / Option appuyé : sans aimant) ¦ Přichytávat: při tažení se prvek přichytí k přehrávací hlavě, k začátku nebo konci ostatních, ke kapitolám a k dobám hudby (podržená Alt / Option: bez přichytávání) ¦ Fäst: när ett objekt dras fäster det mot uppspelningshuvudet, mot början eller slutet av de andra, mot kapitel och musikens taktslag (håll ned Alt / Option: utan fästning) ¦ Fastgør: når et element trækkes, klæber det til afspilningshovedet, til starten eller slutningen af de andre, til kapitler og til musikkens slag (hold Alt / Option nede: uden fastgørelse)
+Aimanter : un élément glissé se colle à la tête de lecture, aux autres éléments, aux chapitres et aux temps de la musique (Alt / Option : sans aimant) ¦ Přichytávat: tažený prvek se přichytí k přehrávací hlavě, k ostatním prvkům, ke kapitolám a k dobám hudby (Alt / Option: bez přichytávání) ¦ Fäst: ett draget objekt fäster mot uppspelningshuvudet, andra objekt, kapitel och musikens taktslag (Alt / Option: utan fästning) ¦ Fastgør: et trukket element klæber til afspilningshovedet, andre elementer, kapitler og musikkens slag (Alt / Option: uden fastgørelse)
+Ajouter une image clé ici (la valeur pourra changer au fil du temps) ¦ Přidat sem klíčový snímek (hodnota se může v čase měnit) ¦ Lägg till en nyckelbildruta här (värdet kan ändras med tiden) ¦ Tilføj et nøglebillede her (værdien kan ændre sig over tid)
+Aller à l'image clé précédente de l'élément choisi ¦ Přejít na předchozí klíčový snímek vybraného prvku ¦ Gå till föregående nyckelbildruta för det valda objektet ¦ Gå til det forrige nøglebillede for det valgte element
+Aller à l'image clé suivante de l'élément choisi ¦ Přejít na další klíčový snímek vybraného prvku ¦ Gå till nästa nyckelbildruta för det valda objektet ¦ Gå til det næste nøglebillede for det valgte element
+Le nom du projet (pour le retrouver dans 📂 Projets…) ¦ Název projektu (abys ho našel v 📂 Projekty…) ¦ Projektets namn (för att hitta det i 📂 Projekt…) ¦ Projektets navn (for at finde det i 📂 Projekter…)
+Le son du morceau passe sur une piste son, à part ¦ Zvuk úseku přejde na samostatnou zvukovou stopu ¦ Segmentets ljud flyttas till ett separat ljudspår ¦ Segmentets lyd flyttes til et separat lydspor
+Le son fini : nouvelle version (l’original est gardé), copie, nouveau son ou fichier téléchargé ¦ Hotový zvuk: nová verze (originál se zachová), kopie, nový zvuk nebo stažený soubor ¦ Det färdiga ljudet: ny version (originalet behålls), kopia, nytt ljud eller nedladdad fil ¦ Den færdige lyd: ny version (originalen bevares), kopi, ny lyd eller hentet fil
+Ancien film ¦ Starý film ¦ Gammal film ¦ Gammel film
+Ancrage X ¦ Kotva X ¦ Ankarpunkt X ¦ Ankerpunkt X
+Ancrage Y ¦ Kotva Y ¦ Ankarpunkt Y ¦ Ankerpunkt Y
+Au début ¦ Na začátek ¦ Till början ¦ Til starten
+Aucun projet son pour l’instant ¦ Zatím žádný zvukový projekt ¦ Inga ljudprojekt än ¦ Ingen lydprojekter endnu
+Aucun sous-titre reconnu (fichier .srt ou .vtt). ¦ Žádný titulek nerozpoznán (soubor .srt nebo .vtt). ¦ Inga undertexter kändes igen (.srt- eller .vtt-fil). ¦ Ingen undertekster genkendt (.srt- eller .vtt-fil).
+Aucune (taille d’origine) ¦ Žádná (původní velikost) ¦ Ingen (ursprunglig storlek) ¦ Ingen (oprindelig størrelse)
+Aussi ⌘ + et ⌘ −, ⌘ 0 pour revenir ¦ Také ⌘ + a ⌘ −, ⌘ 0 pro návrat ¦ Även ⌘ + och ⌘ −, ⌘ 0 för att återställa ¦ Også ⌘ + og ⌘ −, ⌘ 0 for at nulstille
+Avancer le morceau dans la piste 1 ¦ Posunout úsek ve stopě 1 dopředu ¦ Flytta segmentet tidigare i spår 1 ¦ Flyt segmentet tidligere i spor 1
+← Avancer ¦ ← Dříve ¦ ← Tidigare ¦ ← Tidligere
+Reculer → ¦ Později → ¦ Senare → ¦ Senere →
+Bord adouci ¦ Změkčený okraj ¦ Mjuk kant ¦ Blød kant
+Boutons remis comme au départ. ¦ Tlačítka vrácena do výchozího stavu. ¦ Knapparna återställda. ¦ Knapperne nulstillet.
+Cacher cette piste (ni vue ni entendue) ¦ Skrýt tuto stopu (není vidět ani slyšet) ¦ Dölj spåret (varken syns eller hörs) ¦ Skjul sporet (hverken ses eller høres)
+Montrée ¦ Zobrazená ¦ Visas ¦ Vist
+Cachée ¦ Skrytá ¦ Dold ¦ Skjult
+Ce fichier n’est pas une disposition du montage. ¦ Tento soubor není rozvržení střihu. ¦ Filen är inte en layout för videoredigeraren. ¦ Filen er ikke et layout til videoredigeringen.
+Ce réglage est vide ou abîmé. ¦ Toto nastavení je prázdné nebo poškozené. ¦ Inställningen är tom eller skadad. ¦ Indstillingen er tom eller beskadiget.
+Cette piste est déjà vide. ¦ Tato stopa je už prázdná. ¦ Spåret är redan tomt. ¦ Sporet er allerede tomt.
+Chapitres copiés. ¦ Kapitoly zkopírovány. ¦ Kapitlen kopierade. ¦ Kapitler kopieret.
+Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse un élément pour le déplacer dans le temps, ou sur une autre piste du même genre (vidéos et photos vont sur toutes les pistes vidéo, texte ↔ texte, son ↔ son). Espace = lire / pause · ⌫ ou Suppr = enlever · B = couper ici · ◇ = image clé · 🧲 un élément glissé se colle aux autres (Alt / Option : sans aimant) · 🔒 une piste verrouillée ne bouge plus. ¦ Klikni na časovou osu a přesuň se, na prvek a vyber ho; táhni prvek a posuň ho v čase, nebo na jinou stopu stejného druhu (videa a fotky jdou na všechny videostopy, text ↔ text, zvuk ↔ zvuk). Mezerník = přehrát / pauza · ⌫ nebo Delete = odebrat · B = střih tady · ◇ = klíčový snímek · 🧲 tažený prvek se přichytí k ostatním (Alt / Option: bez přichytávání) · 🔒 zamčená stopa se už nehýbe. ¦ Klicka på tidslinjen för att gå dit, på ett objekt för att välja det; dra ett objekt för att flytta det i tiden, eller till ett annat spår av samma slag (videor och foton går på alla videospår, text ↔ text, ljud ↔ ljud). Mellanslag = spela / paus · ⌫ eller Delete = ta bort · B = klipp här · ◇ = nyckelbildruta · 🧲 ett draget objekt fäster mot de andra (Alt / Option: utan fästning) · 🔒 ett låst spår rör sig inte längre. ¦ Klik på tidslinjen for at gå dertil, på et element for at vælge det; træk et element for at flytte det i tiden eller til et andet spor af samme slags (videoer og fotos går på alle videospor, tekst ↔ tekst, lyd ↔ lyd). Mellemrum = afspil / pause · ⌫ eller Delete = fjern · B = klip her · ◇ = nøglebillede · 🧲 et trukket element klæber til de andre (Alt / Option: uden fastgørelse) · 🔒 et låst spor flytter sig ikke længere.
+Comme la 1re vidéo ¦ Jako 1. video ¦ Som den 1:a videon ¦ Som den 1. video
+Comme la vidéo ¦ Jako video ¦ Som videon ¦ Som videoen
+Composition ¦ Kompozice ¦ Komposition ¦ Komposition
+Copie ce texte : ¦ Zkopíruj tento text: ¦ Kopiera den här texten: ¦ Kopiér denne tekst:
+Couleur du fondu ¦ Barva prolínání ¦ Toningsfärg ¦ Toningsfarve
+Couleurs vives ¦ Živé barvy ¦ Livfulla färger ¦ Livlige farver
+Coupe franche ¦ Ostrý střih ¦ Rakt klipp ¦ Lige klip
+Coupe le morceau choisi à la tête de lecture ¦ Rozstřihne vybraný úsek u přehrávací hlavy ¦ Klipper det valda segmentet vid uppspelningshuvudet ¦ Klipper det valgte segment ved afspilningshovedet
+Commence ici ¦ Začíná tady ¦ Börjar här ¦ Begynder her
+Finit ici ¦ Končí tady ¦ Slutar här ¦ Slutter her
+Le morceau choisi commence à la tête de lecture ¦ Vybraný úsek začíná u přehrávací hlavy ¦ Det valda segmentet börjar vid uppspelningshuvudet ¦ Det valgte segment begynder ved afspilningshovedet
+Le morceau choisi finit à la tête de lecture ¦ Vybraný úsek končí u přehrávací hlavy ¦ Det valda segmentet slutar vid uppspelningshuvudet ¦ Det valgte segment slutter ved afspilningshovedet
+Dans « Modifier le son », « 💾 Enregistrer le projet ». ¦ V „Upravit zvuk“, „💾 Uložit projekt“. ¦ I ”Redigera ljud”, ”💾 Spara projektet”. ¦ I »Redigér lyd«, »💾 Gem projektet«.
+Monter ce bloc ¦ Posunout blok nahoru ¦ Flytta upp blocket ¦ Flyt blokken op
+Descendre ce bloc ¦ Posunout blok dolů ¦ Flytta ned blocket ¦ Flyt blokken ned
+Monter la piste ¦ Posunout stopu nahoru ¦ Flytta upp spåret ¦ Flyt sporet op
+Descendre la piste ¦ Posunout stopu dolů ¦ Flytta ned spåret ¦ Flyt sporet ned
+Distorsion ¦ Zkreslení ¦ Förvrängning ¦ Forvrængning
+Doux ¦ Jemný ¦ Mjuk ¦ Blød
+Durée du film : ¦ Délka filmu: ¦ Filmens längd: ¦ Filmens længde:
+Durée illisible ¦ Nečitelná délka ¦ Oläslig längd ¦ Ulæselig længde
+Durée par photo ¦ Doba na fotku ¦ Tid per foto ¦ Tid pr. foto
+Durée à l’écran ¦ Doba na obrazovce ¦ Tid på skärmen ¦ Tid på skærmen
+Défiler ¦ Posouvat ¦ Rulla ¦ Rul
+Détacher le son ¦ Oddělit zvuk ¦ Koppla loss ljudet ¦ Løsn lyden
+🔊 Détacher le son ¦ 🔊 Oddělit zvuk ¦ 🔊 Koppla loss ljudet ¦ 🔊 Løsn lyden
+Montrer cette piste ¦ Zobrazit tuto stopu ¦ Visa spåret ¦ Vis sporet
+Déverrouiller la piste ¦ Odemknout stopu ¦ Lås upp spåret ¦ Lås sporet op
+Verrouiller la piste (ses éléments ne bougent plus, ne se coupent plus, ne s’enlèvent plus) ¦ Zamknout stopu (její prvky se už nedají posunout, rozstřihnout ani odebrat) ¦ Lås spåret (dess objekt kan inte längre flyttas, klippas eller tas bort) ¦ Lås sporet (dets elementer kan ikke længere flyttes, klippes eller fjernes)
+ENREGISTRER LE SON ¦ ULOŽIT ZVUK ¦ SPARA LJUDET ¦ GEM LYDEN
+EXPORTER LA VIDÉO ¦ EXPORTOVAT VIDEO ¦ EXPORTERA VIDEON ¦ EKSPORTÉR VIDEOEN
+Effacer les temps ¦ Vymazat doby ¦ Rensa taktslagen ¦ Ryd slagene
+Repérer les temps ¦ Najít doby ¦ Hitta taktslagen ¦ Find slagene
+Repérer de nouveau ¦ Najít znovu ¦ Hitta igen ¦ Find igen
+Effet Ken Burns ¦ Efekt Ken Burns ¦ Ken Burns-effekt ¦ Ken Burns-effekt
+Effet vieux film : grain, rayures, poussières, image qui scintille, coins assombris ¦ Efekt starého filmu: zrno, škrábance, prach, blikající obraz, ztmavené rohy ¦ Gammal film-effekt: korn, repor, damm, flimrande bild, mörka hörn ¦ Gammel film-effekt: korn, ridser, støv, flimrende billede, mørke hjørner
+En couple ¦ V páru ¦ Som par ¦ Som par
+Les parents ¦ Rodiče ¦ Föräldrarna ¦ Forældrene
+En incrustation, à la tête de lecture ¦ Jako obraz v obraze, u přehrávací hlavy ¦ Som bild-i-bild, vid uppspelningshuvudet ¦ Som billede-i-billede, ved afspilningshovedet
+Enlever cette image clé ¦ Odebrat tento klíčový snímek ¦ Ta bort nyckelbildrutan ¦ Fjern dette nøglebillede
+Enlever l'élément choisi ¦ Odebrat vybraný prvek ¦ Ta bort det valda objektet ¦ Fjern det valgte element
+🗑 Enlever ¦ 🗑 Odebrat ¦ 🗑 Ta bort ¦ 🗑 Fjern
+Enlever la stabilisation ¦ Odebrat stabilizaci ¦ Ta bort stabiliseringen ¦ Fjern stabiliseringen
+Enlever le reflet vert sur le sujet (cheveux, bords) ¦ Odebrat zelený odlesk na objektu (vlasy, okraje) ¦ Ta bort det gröna skenet på motivet (hår, kanter) ¦ Fjern det grønne skær på motivet (hår, kanter)
+Enregistre ta voix au micro pendant que le film défile (casque conseillé) ¦ Nahraj svůj hlas mikrofonem, zatímco film běží (doporučená sluchátka) ¦ Spela in din röst med mikrofonen medan filmen spelas (hörlurar rekommenderas) ¦ Optag din stemme med mikrofonen, mens filmen kører (hovedtelefoner anbefales)
+Enregistrer le projet de montage, pour le rouvrir et continuer plus tard (⌘S) ¦ Uložit projekt střihu, abys ho mohl znovu otevřít a pokračovat později (⌘S) ¦ Spara redigeringsprojektet för att öppna det igen och fortsätta senare (⌘S) ¦ Gem redigeringsprojektet for at åbne det igen og fortsætte senere (⌘S)
+Enregistrer le projet son, pour y revenir plus tard (⌘S) ¦ Uložit zvukový projekt, abys se k němu mohl vrátit (⌘S) ¦ Spara ljudprojektet för att återkomma till det senare (⌘S) ¦ Gem lydprojektet for at vende tilbage til det senere (⌘S)
+Entre deux images clés ¦ Mezi dvěma klíčovými snímky ¦ Mellan två nyckelbildrutor ¦ Mellem to nøglebilleder
+en douceur ¦ plynule ¦ mjukt ¦ blødt
+régulier ¦ rovnoměrně ¦ jämnt ¦ jævnt
+Exporter un fichier (et, si tu veux, une copie dans les médias) ¦ Exportovat soubor (a chceš-li, kopii do médií) ¦ Exportera en fil (och, om du vill, en kopia bland medierna) ¦ Eksportér en fil (og, hvis du vil, en kopi i medierne)
+Fabrique le fichier vidéo (MP4 ou WebM, plusieurs formats d’image) et le range dans les médias : nouvelle version, copie ou nouvelle vidéo ¦ Vytvoří videosoubor (MP4 nebo WebM, několik formátů obrazu) a uloží ho do médií: nová verze, kopie nebo nové video ¦ Skapar videofilen (MP4 eller WebM, flera bildformat) och sparar den bland medierna: ny version, kopia eller ny video ¦ Laver videofilen (MP4 eller WebM, flere billedformater) og gemmer den i medierne: ny version, kopi eller ny video
+Fermer sans enregistrer les modifications ? ¦ Zavřít bez uložení změn? ¦ Stänga utan att spara ändringarna? ¦ Luk uden at gemme ændringerne?
+Fondu au blanc ¦ Prolínání do bílé ¦ Tona till vitt ¦ Ton til hvid
+Fondu au noir ¦ Prolínání do černé ¦ Tona till svart ¦ Ton til sort
+Fondu d’entrée ¦ Roztmívání ¦ Tona in ¦ Fade ind
+Fondu de sortie ¦ Zatmívání ¦ Tona ut ¦ Fade ud
+↗ Fondu d’entrée ¦ ↗ Roztmívání ¦ ↗ Tona in ¦ ↗ Fade ind
+↘ Fondu de sortie ¦ ↘ Zatmívání ¦ ↘ Tona ut ¦ ↘ Fade ud
+Fondu en couleur (au choix) ¦ Prolínání přes barvu (podle výběru) ¦ Tona via en färg (valfri) ¦ Ton via en farve (valgfri)
+Fondu enchaîné ¦ Prolínačka ¦ Övertoning ¦ Overtoning
+Fondu flou ¦ Rozmazané prolínání ¦ Suddig övertoning ¦ Sløret overtoning
+Genre (vidéo, photo, son) ¦ Druh (video, fotka, zvuk) ¦ Typ (video, foto, ljud) ¦ Type (video, foto, lyd)
+Glisse depuis la droite ¦ Vjede zprava ¦ Glider in från höger ¦ Glider ind fra højre
+Glisse depuis la gauche ¦ Vjede zleva ¦ Glider in från vänster ¦ Glider ind fra venstre
+Glisse sur l’onde pour sélectionner · clic = se placer · Espace = écouter · molette = défiler, Ctrl + molette = zoom ¦ Táhni po vlně a vyber · klik = přesun · Mezerník = poslech · kolečko = posun, Ctrl + kolečko = lupa ¦ Dra över vågformen för att markera · klick = gå dit · Mellanslag = lyssna · hjul = rulla, Ctrl + hjul = zoom ¦ Træk hen over bølgeformen for at markere · klik = gå dertil · Mellemrum = lyt · hjul = rul, Ctrl + hjul = zoom
+Glisse-le sur une piste de la frise ¦ Přetáhni ho na stopu časové osy ¦ Dra det till ett spår på tidslinjen ¦ Træk det til et spor på tidslinjen
+Glissement vers la droite ¦ Posun doprava ¦ Glid åt höger ¦ Glid til højre
+Glissement vers la gauche (la suivante pousse) ¦ Posun doleva (další tlačí) ¦ Glid åt vänster (nästa knuffar) ¦ Glid til venstre (den næste skubber)
+Glissement vers le bas ¦ Posun dolů ¦ Glid nedåt ¦ Glid nedad
+Glissement vers le haut ¦ Posun nahoru ¦ Glid uppåt ¦ Glid opad
+Glisser pour élargir ou rétrécir le panneau (double-clic : largeur de départ) ¦ Táhni a rozšiř nebo zúž panel (dvojklik: výchozí šířka) ¦ Dra för att bredda eller smalna av panelen (dubbelklick: standardbredd) ¦ Træk for at gøre panelet bredere eller smallere (dobbeltklik: standardbredde)
+Graves ¦ Basy ¦ Bas ¦ Bas
+Tons moyens ¦ Středy ¦ Mellantoner ¦ Mellemtoner
+Hauteur des pistes ¦ Výška stop ¦ Spårhöjd ¦ Sporhøjde
+Taille des boutons des pistes ¦ Velikost tlačítek stop ¦ Spårknapparnas storlek ¦ Sporknappernes størrelse
+Image et son ¦ Obraz a zvuk ¦ Bild och ljud ¦ Billede og lyd
+Images par seconde ¦ Snímky za sekundu ¦ Bilder per sekund ¦ Billeder pr. sekund
+Importe tes vidéos et photos dans l’onglet 🎞️ Rush, puis glisse-les sur la frise (ou « ＋ Vidéo / photo à la suite »). ¦ Importuj videa a fotky na kartě 🎞️ Záběry, pak je přetáhni na časovou osu (nebo „＋ Video / fotka za sebou“). ¦ Importera dina videor och foton under fliken 🎞️ Klipp och dra dem sedan till tidslinjen (eller ”＋ Video / foto efter”). ¦ Importér dine videoer og fotos under fanen 🎞️ Klip, og træk dem så til tidslinjen (eller »＋ Video / foto efter«).
+Inclinaison horizontale ¦ Vodorovné zkosení ¦ Vågrät skevning ¦ Vandret forskydning
+Inclinaison verticale ¦ Svislé zkosení ¦ Lodrät skevning ¦ Lodret forskydning
+Indique un nombre, par exemple 6 ou -3. ¦ Zadej číslo, například 6 nebo -3. ¦ Ange ett tal, till exempel 6 eller -3. ¦ Angiv et tal, for eksempel 6 eller -3.
+＋ Incrustation ¦ ＋ Obraz v obraze ¦ ＋ Bild-i-bild ¦ ＋ Billede-i-billede
+＋ Incruster ¦ ＋ Vložit přes ¦ ＋ Lägg över ¦ ＋ Læg over
+Une vidéo ou une photo dans un coin de l'image, à la tête de lecture ¦ Video nebo fotka v rohu obrazu, u přehrávací hlavy ¦ En video eller ett foto i ett hörn av bilden, vid uppspelningshuvudet ¦ En video eller et foto i et hjørne af billedet, ved afspilningshovedet
+Une vidéo ou une photo, à la suite dans la piste Vidéo 1 ¦ Video nebo fotka za ostatními na stopě Video 1 ¦ En video eller ett foto, efter de andra i spåret Video 1 ¦ En video eller et foto efter de andre i sporet Video 1
+＋ Vidéo / photo à la suite ¦ ＋ Video / fotka za sebou ¦ ＋ Video / foto efter ¦ ＋ Video / foto efter
+Vidéo / photo à la suite ¦ Video / fotka za sebou ¦ Video / foto efter ¦ Video / foto efter
+Lecture ¦ Přehrávání ¦ Uppspelning ¦ Afspilning
+Les modifications du montage seront perdues. ¦ Změny střihu se ztratí. ¦ Ändringarna i redigeringen går förlorade. ¦ Ændringerne i redigeringen går tabt.
+Les modifications du son seront perdues. ¦ Změny zvuku se ztratí. ¦ Ändringarna i ljudet går förlorade. ¦ Ændringerne i lyden går tabt.
+Les photos arrivent… ¦ Fotky přicházejí… ¦ Fotona kommer… ¦ Fotoene kommer…
+Les réglages s’appliquent à la sélection ; sans sélection, à tout le son. ¦ Nastavení platí pro výběr; bez výběru pro celý zvuk. ¦ Inställningarna gäller markeringen; utan markering hela ljudet. ¦ Indstillingerne gælder markeringen; uden markering hele lyden.
+Les vidéos, photos et sons du projet ¦ Videa, fotky a zvuky projektu ¦ Projektets videor, foton och ljud ¦ Projektets videoer, fotos og lyde
+Lettres qui se resserrent ¦ Písmena, která se sbíhají ¦ Bokstäver som dras ihop ¦ Bogstaver, der trækkes sammen
+Lettres qui s’écartent ¦ Písmena, která se rozbíhají ¦ Bokstäver som sprids ut ¦ Bogstaver, der spredes ud
+Lissage du mouvement ¦ Vyhlazení pohybu ¦ Rörelseutjämning ¦ Bevægelsesudjævning
+MODIFIER LE SON ¦ UPRAVIT ZVUK ¦ REDIGERA LJUD ¦ REDIGÉR LYD
+MODÈLE DE MONTAGE ¦ ŠABLONA STŘIHU ¦ REDIGERINGSMALL ¦ REDIGERINGSSKABELON
+MONTAGE VIDÉO ¦ STŘIH VIDEA ¦ VIDEOREDIGERING ¦ VIDEOREDIGERING
+🎬 MONTAGE VIDÉO ¦ 🎬 STŘIH VIDEA ¦ 🎬 VIDEOREDIGERING ¦ 🎬 VIDEOREDIGERING
+🎬 MONTAGE ¦ 🎬 STŘIH ¦ 🎬 REDIGERING ¦ 🎬 REDIGERING
+Mets la vidéo du fond vert au-dessus (incrustation, tout l’écran), et le décor (photo d’archive, autre vidéo) dessous, sur la piste 1. ¦ Dej video se zeleným pozadím nahoru (obraz v obraze, celá obrazovka) a pozadí (archivní fotka, jiné video) dolů, na stopu 1. ¦ Lägg greenscreen-videon överst (bild-i-bild, helskärm) och bakgrunden (arkivfoto, annan video) under, på spår 1. ¦ Læg greenscreen-videoen øverst (billede-i-billede, fuld skærm) og baggrunden (arkivfoto, anden video) nedenunder, på spor 1.
+Mettre ce dossier dans un autre ¦ Dát tuto složku do jiné ¦ Lägg mappen i en annan ¦ Læg mappen i en anden
+Mode de fusion ¦ Režim prolnutí ¦ Blandningsläge ¦ Blandingstilstand
+Mon son ¦ Můj zvuk ¦ Mitt ljud ¦ Min lyd
+Mot par mot ¦ Slovo po slovu ¦ Ord för ord ¦ Ord for ord
+Musique pendant la voix ¦ Hudba během hlasu ¦ Musik under rösten ¦ Musik under stemmen
+Nom du fichier téléchargé ¦ Název staženého souboru ¦ Den nedladdade filens namn ¦ Navnet på den hentede fil
+Non, nettoyer la sélection ¦ Ne, vyčistit výběr ¦ Nej, rensa markeringen ¦ Nej, rens markeringen
+Oui, c’est du bruit seul ¦ Ano, je to jen šum ¦ Ja, det är bara brus ¦ Ja, det er kun støj
+Nouveau dossier dans le dossier ouvert ¦ Nová složka v otevřené složce ¦ Ny mapp i den öppna mappen ¦ Ny mappe i den åbne mappe
+Nouveau montage ¦ Nový střih ¦ Ny redigering ¦ Ny redigering
+Nouveau son enregistré, rattaché aux mêmes fiches. ¦ Nový zvuk uložen, propojený se stejnými kartami. ¦ Nytt ljud sparat, kopplat till samma poster. ¦ Ny lyd gemt, forbundet med de samme poster.
+Nouveau ⚡ Son rapide ¦ Nový ⚡ Rychlý zvuk ¦ Ny ⚡ Snabbljud ¦ Ny ⚡ Hurtig lyd
+Nouvelle version montrée partout. L’original est gardé. ¦ Nová verze zobrazená všude. Originál je zachován. ¦ Ny version visas överallt. Originalet behålls. ¦ Ny version vist overalt. Originalen bevares.
+Nouvelle vidéo enregistrée, rattachée aux mêmes fiches. ¦ Nové video uloženo, propojené se stejnými kartami. ¦ Ny video sparad, kopplad till samma poster. ¦ Ny video gemt, forbundet med de samme poster.
+Version enregistrée (l’ancienne reste montrée). ¦ Verze uložena (stále se zobrazuje ta stará). ¦ Version sparad (den gamla visas fortfarande). ¦ Version gemt (den gamle vises stadig).
+Ordre d’arrivée ¦ Pořadí přidání ¦ Ordning tillagda ¦ Rækkefølge tilføjet
+Trier les rushes ¦ Seřadit záběry ¦ Sortera klippen ¦ Sortér klippene
+Outils du montage ¦ Nástroje střihu ¦ Redigeringsverktyg ¦ Redigeringsværktøjer
+Outils du son ¦ Nástroje zvuku ¦ Ljudverktyg ¦ Lydværktøjer
+Ouverture du son… ¦ Otevírám zvuk… ¦ Öppnar ljudet… ¦ Åbner lyden…
+Ouvrir ce dossier ¦ Otevřít tuto složku ¦ Öppna mappen ¦ Åbn mappen
+Renommer ce dossier ¦ Přejmenovat tuto složku ¦ Byt namn på mappen ¦ Omdøb mappen
+Renommer ce rush ¦ Přejmenovat tento záběr ¦ Byt namn på klippet ¦ Omdøb klippet
+Ranger ce rush dans un dossier ¦ Uložit tento záběr do složky ¦ Lägg klippet i en mapp ¦ Læg klippet i en mappe
+Ouvrir un autre projet sans enregistrer ce son ? ¦ Otevřít jiný projekt bez uložení tohoto zvuku? ¦ Öppna ett annat projekt utan att spara ljudet? ¦ Åbn et andet projekt uden at gemme denne lyd?
+Ouvrir un autre projet sans enregistrer celui-ci ? ¦ Otevřít jiný projekt bez uložení tohoto? ¦ Öppna ett annat projekt utan att spara det här? ¦ Åbn et andet projekt uden at gemme dette?
+Panneau des réglages ¦ Panel nastavení ¦ Inställningspanel ¦ Indstillingspanel
+Part vers la droite ¦ Odjede doprava ¦ Försvinner åt höger ¦ Forsvinder til højre
+Part vers la gauche ¦ Odjede doleva ¦ Försvinner åt vänster ¦ Forsvinder til venstre
+Pas d’image clé après. ¦ Žádný další klíčový snímek. ¦ Ingen nyckelbildruta efter. ¦ Intet nøglebillede efter.
+Pas d’image clé avant. ¦ Žádný předchozí klíčový snímek. ¦ Ingen nyckelbildruta före. ¦ Intet nøglebillede før.
+Passer dans l’autre colonne ¦ Přesunout do druhého sloupce ¦ Flytta till den andra kolumnen ¦ Flyt til den anden kolonne
+Pistes ¦ Stopy ¦ Spår ¦ Spor
+Plus chaud ¦ Tepleji ¦ Varmare ¦ Varmere
+Plus froid ¦ Chladněji ¦ Kallare ¦ Koldere
+Projets de montage ¦ Projekty střihu ¦ Redigeringsprojekt ¦ Redigeringsprojekter
+Projets son ¦ Zvukové projekty ¦ Ljudprojekt ¦ Lydprojekter
+Préparation du fichier… ¦ Připravuji soubor… ¦ Förbereder filen… ¦ Forbereder filen…
+Qualité MP3 ¦ Kvalita MP3 ¦ MP3-kvalitet ¦ MP3-kvalitet
+Que fait chaque outil ? ¦ Co dělá který nástroj? ¦ Vad gör varje verktyg? ¦ Hvad gør hvert værktøj?
+Raccourcir les blancs ¦ Zkrátit ticha ¦ Korta ner tystnaderna ¦ Forkort pauserne
+⏩ Raccourcir les longs blancs ¦ ⏩ Zkrátit dlouhá ticha ¦ ⏩ Korta ner långa tystnader ¦ ⏩ Forkort lange pauser
+Rebondit puis disparaît ¦ Odrazí se a zmizí ¦ Studsar och försvinner ¦ Hopper og forsvinder
+Reculer le morceau dans la piste 1 ¦ Posunout úsek ve stopě 1 dozadu ¦ Flytta segmentet senare i spår 1 ¦ Flyt segmentet senere i spor 1
+Rejoue ce texte depuis son début ¦ Přehraje tento text od začátku ¦ Spelar texten från början ¦ Afspiller teksten fra begyndelsen
+Remplir (recadre pour remplir) ¦ Vyplnit (ořízne pro vyplnění) ¦ Fyll (beskär för att fylla) ¦ Udfyld (beskærer for at udfylde)
+Rendre transparente la couleur du fond (fond vert ou bleu) : ce qui est dessous se voit ¦ Zprůhlednit barvu pozadí (zelené nebo modré pozadí): je vidět, co je pod tím ¦ Gör bakgrundsfärgen genomskinlig (grön- eller blåskärm): det som ligger under syns ¦ Gør baggrundsfarven gennemsigtig (grøn eller blå skærm): det, der ligger under, ses
+Roues de couleur ¦ Barevná kola ¦ Färghjul ¦ Farvehjul
+Rouvrir un montage enregistré ¦ Znovu otevřít uložený střih ¦ Öppna en sparad redigering igen ¦ Genåbn en gemt redigering
+Rouvrir un son en cours de travail ¦ Znovu otevřít rozpracovaný zvuk ¦ Öppna ett påbörjat ljud igen ¦ Genåbn en lyd under arbejde
+Son 1 ¦ Zvuk 1 ¦ Ljud 1 ¦ Lyd 1
+Son 2 ¦ Zvuk 2 ¦ Ljud 2 ¦ Lyd 2
+🎵 Son 1 ¦ 🎵 Zvuk 1 ¦ 🎵 Ljud 1 ¦ 🎵 Lyd 1
+Vidéo 1 ¦ Video 1 ¦ Video 1 ¦ Video 1
+Vidéo 2 ¦ Video 2 ¦ Video 2 ¦ Video 2
+Textes 1 ¦ Texty 1 ¦ Texter 1 ¦ Tekster 1
+🔤 Textes 1 ¦ 🔤 Texty 1 ¦ 🔤 Texter 1 ¦ 🔤 Tekster 1
+Son ajouté (il est sélectionné). ¦ Zvuk přidán (je vybraný). ¦ Ljud tillagt (det är markerat). ¦ Lyd tilføjet (den er markeret).
+Son illisible ¦ Nečitelný zvuk ¦ Oläsligt ljud ¦ Ulæselig lyd
+Vidéo illisible ¦ Nečitelné video ¦ Oläslig video ¦ Ulæselig video
+vidéo illisible ¦ nečitelné video ¦ oläslig video ¦ ulæselig video
+son introuvable ¦ zvuk nenalezen ¦ ljudet hittades inte ¦ lyden blev ikke fundet
+Sort du flou ¦ Vynoří se z rozmazání ¦ Kommer fram ur oskärpan ¦ Kommer frem af sløringen
+Stabilisation annulée. ¦ Stabilizace zrušena. ¦ Stabiliseringen avbruten. ¦ Stabilisering annulleret.
+Superposition claire (écran) ¦ Závoj ¦ Raster ¦ Skærm
+Supprimer cette piste ¦ Smazat tuto stopu ¦ Radera spåret ¦ Slet sporet
+Vider cette piste (elle reste, c’est la piste de base du film) ¦ Vyprázdnit tuto stopu (zůstane, je to základní stopa filmu) ¦ Töm spåret (det finns kvar, det är filmens grundspår) ¦ Tøm sporet (det bliver, det er filmens grundspor)
+Supprimer le projet (les vidéos et photos restent dans les Médias) ¦ Smazat projekt (videa a fotky zůstanou v Médiích) ¦ Radera projektet (videorna och fotona finns kvar bland Medierna) ¦ Slet projektet (videoerne og fotoene bliver i Medier)
+Sur la frise ¦ Na časové ose ¦ På tidslinjen ¦ På tidslinjen
+Surgit avec un rebond ¦ Vyskočí s odrazem ¦ Dyker upp med en studs ¦ Dukker op med et hop
+Tombe et rebondit ¦ Spadne a odrazí se ¦ Faller och studsar ¦ Falder og hopper
+S’ajoute aux réglages de chaque morceau (onglet 🎯 Élément → « 🔊 Son de ce morceau »). ¦ Přičte se k nastavení každého úseku (karta 🎯 Prvek → „🔊 Zvuk tohoto úseku“). ¦ Läggs till varje segments inställningar (fliken 🎯 Objekt → ”🔊 Segmentets ljud”). ¦ Lægges til hvert segments indstillinger (fanen 🎯 Element → »🔊 Segmentets lyd«).
+S’ajoutent aux couleurs de chaque morceau (onglet Élément). ¦ Přičtou se k barvám každého úseku (karta Prvek). ¦ Läggs till varje segments färger (fliken Objekt). ¦ Lægges til hvert segments farver (fanen Element).
+S’efface lettre par lettre ¦ Mizí písmeno po písmenu ¦ Tonar bort bokstav för bokstav ¦ Forsvinder bogstav for bogstav
+S’efface mot par mot ¦ Mizí slovo po slově ¦ Tonar bort ord för ord ¦ Forsvinder ord for ord
+Température (froid ↔ chaud) ¦ Teplota (chladná ↔ teplá) ¦ Temperatur (kall ↔ varm) ¦ Temperatur (kold ↔ varm)
+Titre / texte ¦ Titulek / text ¦ Titel / text ¦ Titel / tekst
+＋ Titre / texte ¦ ＋ Titulek / text ¦ ＋ Titel / text ¦ ＋ Titel / tekst
+Son / musique ¦ Zvuk / hudba ¦ Ljud / musik ¦ Lyd / musik
+Tout reste modifiable ensuite. ¦ Vše se dá potom ještě změnit. ¦ Allt kan fortfarande ändras efteråt. ¦ Alt kan stadig ændres bagefter.
+Transformer ¦ Transformovat ¦ Transformera ¦ Transformér
+Transition avant ¦ Přechod před ¦ Övergång före ¦ Overgang før
+Type ¦ Typ ¦ Typ ¦ Type
+Un chapitre commence à la tête de lecture ¦ Kapitola začíná u přehrávací hlavy ¦ Ett kapitel börjar vid uppspelningshuvudet ¦ Et kapitel begynder ved afspilningshovedet
+Chapitre ici ¦ Kapitola tady ¦ Kapitel här ¦ Kapitel her
+Un chapitre par grande étape ¦ Kapitola pro každou velkou etapu ¦ Ett kapitel per stor etapp ¦ Ét kapitel pr. større etape
+Un sous-titre de 3 s à la tête de lecture, sur la piste « Sous-titres » ¦ Titulek na 3 s u přehrávací hlavy, na stopě „Titulky“ ¦ En undertext på 3 s vid uppspelningshuvudet, på spåret ”Undertexter” ¦ En undertekst på 3 s ved afspilningshovedet, på sporet »Undertekster«
+Sous-titre ici ¦ Titulek tady ¦ Undertext här ¦ Undertekst her
+Une petite vidéo dans un coin, réglable ¦ Malé video v rohu, nastavitelné ¦ En liten video i ett hörn, justerbar ¦ En lille video i et hjørne, justerbar
+Une piste texte reçoit des titres (« ＋ Titre / texte »). ¦ Textová stopa nese titulky („＋ Titulek / text“). ¦ Ett textspår tar emot titlar (”＋ Titel / text”). ¦ Et tekstspor rummer titler (»＋ Titel / tekst«).
+Vidéos, photos ou sons de l’ordinateur (plusieurs à la fois), rangés dans le dossier ouvert ¦ Videa, fotky nebo zvuky z počítače (víc najednou), uložené do otevřené složky ¦ Videor, foton eller ljud från datorn (flera åt gången), sparade i den öppna mappen ¦ Videoer, fotos eller lyde fra computeren (flere ad gangen), gemt i den åbne mappe
+Voix off ¦ Komentář mimo obraz ¦ Speakerröst ¦ Speak
+🎙 Voix off ¦ 🎙 Komentář mimo obraz ¦ 🎙 Speakerröst ¦ 🎙 Speak
+⏹ Arrêter la voix off ¦ ⏹ Zastavit komentář ¦ ⏹ Stoppa speakerrösten ¦ ⏹ Stop speaken
+Volet de droite à gauche ¦ Stírání zprava doleva ¦ Torka höger till vänster ¦ Visker fra højre mod venstre
+Volet de gauche à droite ¦ Stírání zleva doprava ¦ Torka vänster till höger ¦ Visker fra venstre mod højre
+Volet en cercle (iris) ¦ Kruhové stírání (clona) ¦ Cirkelövergång (iris) ¦ Cirkeloverblænding (iris)
+Volume général ¦ Celková hlasitost ¦ Total volym ¦ Samlet lydstyrke
+WebM — léger ¦ WebM — menší ¦ WebM — lätt ¦ WebM — let
+Zoom ¦ Lupa ¦ Zoom ¦ Zoom
+Zoom arrière sur la frise ¦ Oddálit časovou osu ¦ Zooma ut på tidslinjen ¦ Zoom ud på tidslinjen
+Zoom avant sur la frise ¦ Přiblížit časovou osu ¦ Zooma in på tidslinjen ¦ Zoom ind på tidslinjen
+Zoom avant à travers ¦ Průlet přiblížením ¦ Zooma igenom ¦ Zoom igennem
+Zoom de la frise ¦ Lupa časové osy ¦ Tidslinjens zoom ¦ Tidslinjens zoom
+Zoomer sur la sélection ¦ Přiblížit výběr ¦ Zooma till markeringen ¦ Zoom til markeringen
+bandes floues au lieu des bandes noires (la même image, floutée, derrière) ¦ rozmazané pruhy místo černých (tentýž obraz, rozmazaný, vzadu) ¦ suddiga kanter i stället för svarta (samma bild, suddig, bakom) ¦ slørede bjælker i stedet for sorte (samme billede, sløret, bagved)
+centré ¦ na střed ¦ centrerad ¦ centreret
+ces boutons ¦ tato tlačítka ¦ de här knapparna ¦ disse knapper
+cette disposition ¦ toto rozvržení ¦ den här layouten ¦ dette layout
+commence par un fondu depuis le noir ¦ začíná roztmíváním z černé ¦ börjar med en intoning från svart ¦ begynder med en fade ind fra sort
+finit par un fondu au noir ¦ končí zatmíváním do černé ¦ slutar med en uttoning till svart ¦ slutter med en fade ud til sort
+effet Ken Burns sur toutes les photos (zoom et glissement lents, variés) ¦ efekt Ken Burns na všech fotkách (pomalé, různé přiblížení a posun) ¦ Ken Burns-effekt på alla foton (långsam, varierad zoom och panorering) ¦ Ken Burns-effekt på alle fotos (langsom, varieret zoom og panorering)
+la musique baisse toute seule pendant une voix ¦ hudba se během hlasu sama ztiší ¦ musiken sänks av sig själv under en röst ¦ musikken dæmpes af sig selv under en stemme
+… et aussi pendant le son des vidéos de la piste 1 ¦ … a také během zvuku videí na stopě 1 ¦ … och även under ljudet från videorna på spår 1 ¦ … og også under lyden fra videoerne på spor 1
+le montage est vide ¦ střih je prázdný ¦ redigeringen är tom ¦ redigeringen er tom
+l’image tremble un peu, comme dans un vieux projecteur ¦ obraz se trochu chvěje, jako ve starém promítačce ¦ bilden skakar lite, som i en gammal projektor ¦ billedet ryster lidt, som i en gammel projektor
+sépia (couleurs passées, brunes) ¦ sépie (vybledlé, hnědé barvy) ¦ sepia (bleka, bruna färger) ¦ sepia (falmede, brune farver)
+pas de sélection ¦ žádný výběr ¦ ingen markering ¦ ingen markering
+plusieurs formats, nouvelle version ¦ několik formátů, nová verze ¦ flera format, ny version ¦ flere formater, ny version
+sans les blancs, voix plus nette… ¦ bez ticha, jasnější hlas… ¦ utan tystnader, tydligare röst… ¦ uden pauser, klarere stemme…
+« 🔖 Chapitre ici » pose un chapitre à la tête de lecture. ¦ „🔖 Kapitola tady“ vloží kapitolu u přehrávací hlavy. ¦ ”🔖 Kapitel här” sätter ett kapitel vid uppspelningshuvudet. ¦ »🔖 Kapitel her« sætter et kapitel ved afspilningshovedet.
+· tire le point vers une couleur, double-clic pour revenir ¦ · táhni bod k barvě, dvojklik pro návrat ¦ · dra punkten mot en färg, dubbelklicka för att återställa ¦ · træk punktet mod en farve, dobbeltklik for at nulstille
+À la suite dans Vidéo 1 ¦ Za sebou ve Videu 1 ¦ Efter i Video 1 ¦ Efter i Video 1
+＋ À la suite ¦ ＋ Za sebou ¦ ＋ Efter ¦ ＋ Efter
+＋ Son seul ¦ ＋ Jen zvuk ¦ ＋ Bara ljud ¦ ＋ Kun lyd
+Échelle (tout) ¦ Měřítko (vše) ¦ Skala (allt) ¦ Skala (alt)
+Échelle X ¦ Měřítko X ¦ Skala X ¦ Skala X
+Échelle Y ¦ Měřítko Y ¦ Skala Y ¦ Skala Y
+Écouter, comparer, montrer partout, renommer, supprimer ¦ Poslechnout, porovnat, zobrazit všude, přejmenovat, smazat ¦ Lyssna, jämför, visa överallt, byt namn, radera ¦ Lyt, sammenlign, vis overalt, omdøb, slet
+↻ Refaire l’analyse ¦ ↻ Znovu analyzovat ¦ ↻ Analysera igen ¦ ↻ Analysér igen
+⌨️ Raccourcis du montage ¦ ⌨️ Zkratky střihu ¦ ⌨️ Redigeringens kortkommandon ¦ ⌨️ Redigeringens genveje
+▣ Dans un coin ¦ ▣ V rohu ¦ ▣ I ett hörn ¦ ▣ I et hjørne
+⛶ Tout l’écran ¦ ⛶ Celá obrazovka ¦ ⛶ Helskärm ¦ ⛶ Fuld skærm
+▶ Lire ¦ ▶ Přehrát ¦ ▶ Spela ¦ ▶ Afspil
+▶ Lire / pause ¦ ▶ Přehrát / pauza ¦ ▶ Spela / paus ¦ ▶ Afspil / pause
+✂️ Modifier un son ouvre ¦ ✂️ Upravit zvuk otevře ¦ ✂️ Redigera ett ljud öppnar ¦ ✂️ Redigér en lyd åbner
+⬅️ Glisse vers la gauche ¦ ⬅️ Posun doleva ¦ ⬅️ Panorerar åt vänster ¦ ⬅️ Panorerer til venstre
+➡️ Glisse vers la droite ¦ ➡️ Posun doprava ¦ ➡️ Panorerar åt höger ¦ ➡️ Panorerer til højre
+⬆️ Monte ¦ ⬆️ Nahoru ¦ ⬆️ Panorerar uppåt ¦ ⬆️ Panorerer opad
+⬇️ Descend ¦ ⬇️ Dolů ¦ ⬇️ Panorerar nedåt ¦ ⬇️ Panorerer nedad
+⤒ Importer des rushes (vidéos, photos, sons)… ¦ ⤒ Importovat záběry (videa, fotky, zvuky)… ¦ ⤒ Importera klipp (videor, foton, ljud)… ¦ ⤒ Importér klip (videoer, fotos, lyde)…
+⤒ Importer des sous-titres (.srt, .vtt)… ¦ ⤒ Importovat titulky (.srt, .vtt)… ¦ ⤒ Importera undertexter (.srt, .vtt)… ¦ ⤒ Importér undertekster (.srt, .vtt)…
+⬚ Garder seulement la sélection ¦ ⬚ Ponechat jen výběr ¦ ⬚ Behåll bara markeringen ¦ ⬚ Behold kun markeringen
+〰️ Enlever le bourdonnement ¦ 〰️ Odstranit brum ¦ 〰️ Ta bort brummet ¦ 〰️ Fjern brummen
+＋ Ajouter un son… ¦ ＋ Přidat zvuk… ¦ ＋ Lägg till ett ljud… ¦ ＋ Tilføj en lyd…
+＋ Piste texte ¦ ＋ Textová stopa ¦ ＋ Textspår ¦ ＋ Tekstspor
+🎙 Musique et voix ¦ 🎙 Hudba a hlas ¦ 🎙 Musik och röst ¦ 🎙 Musik og stemme
+🎛️ Réglages de l’image ¦ 🎛️ Nastavení obrazu ¦ 🎛️ Bildinställningar ¦ 🎛️ Billedindstillinger
+🎞️ Film ¦ 🎞️ Film ¦ 🎞️ Film ¦ 🎞️ Film
+🎞️ Rush ¦ 🎞️ Záběry ¦ 🎞️ Klipp ¦ 🎞️ Klip
+🎞️ Rushes ¦ 🎞️ Záběry ¦ 🎞️ Klipp ¦ 🎞️ Klip
+🎯 Élément ¦ 🎯 Prvek ¦ 🎯 Objekt ¦ 🎯 Element
+🎞️ Vieux film (ce morceau) ¦ 🎞️ Starý film (tento úsek) ¦ 🎞️ Gammal film (det här segmentet) ¦ 🎞️ Gammel film (dette segment)
+🎞️ Vieux film (tout le film) ¦ 🎞️ Starý film (celý film) ¦ 🎞️ Gammal film (hela filmen) ¦ 🎞️ Gammel film (hele filmen)
+🎧 Mono ¦ 🎧 Mono ¦ 🎧 Mono ¦ 🎧 Mono
+🎧 Mono (le même son des deux côtés) ¦ 🎧 Mono (stejný zvuk na obou stranách) ¦ 🎧 Mono (samma ljud på båda sidor) ¦ 🎧 Mono (samme lyd i begge sider)
+🎧 SON ¦ 🎧 ZVUK ¦ 🎧 LJUD ¦ 🎧 LYD
+🎨 Couleurs de ce morceau ¦ 🎨 Barvy tohoto úseku ¦ 🎨 Segmentets färger ¦ 🎨 Segmentets farver
+🎨 Couleurs de tout le film ¦ 🎨 Barvy celého filmu ¦ 🎨 Hela filmens färger ¦ 🎨 Hele filmens farver
+🎬 Disposition du montage ¦ 🎬 Rozvržení střihu ¦ 🎬 Videoredigerarens layout ¦ 🎬 Videoredigeringens layout
+🎯 Vectorscope et histogramme ¦ 🎯 Vektorskop a histogram ¦ 🎯 Vektorskop och histogram ¦ 🎯 Vektorskop og histogram
+🎲 Automatique (varié) ¦ 🎲 Automaticky (různě) ¦ 🎲 Automatiskt (varierat) ¦ 🎲 Automatisk (varieret)
+💾 Garder dans les médias… ¦ 💾 Uložit do médií… ¦ 💾 Spara bland medierna… ¦ 💾 Gem i medierne…
+📁＋ Dossier ¦ 📁＋ Složka ¦ 📁＋ Mapp ¦ 📁＋ Mappe
+📏 Normaliser ¦ 📏 Normalizovat ¦ 📏 Normalisera ¦ 📏 Normalisér
+📐 Format de l’image ¦ 📐 Formát obrazu ¦ 📐 Bildformat ¦ 📐 Billedformat
+📢 Volume standard (LUFS)… ¦ 📢 Standardní hlasitost (LUFS)… ¦ 📢 Standardljudstyrka (LUFS)… ¦ 📢 Standardlydstyrke (LUFS)…
+📱 Téléphone 9:16 (vertical) ¦ 📱 Telefon 9:16 (na výšku) ¦ 📱 Telefon 9:16 (stående) ¦ 📱 Telefon 9:16 (lodret)
+📺 Ancien écran 4:3 ¦ 📺 Stará obrazovka 4:3 ¦ 📺 Gammal skärm 4:3 ¦ 📺 Gammel skærm 4:3
+🖥️ Écran 16:9 ¦ 🖥️ Obrazovka 16:9 ¦ 🖥️ Skärm 16:9 ¦ 🖥️ Skærm 16:9
+🖼️ Portrait 4:5 (réseaux) ¦ 🖼️ Na výšku 4:5 (sociální sítě) ¦ 🖼️ Stående 4:5 (sociala medier) ¦ 🖼️ Portræt 4:5 (sociale medier)
+🖼️ Vidéos incrustées ¦ 🖼️ Videa v obraze ¦ 🖼️ Överlagrade videor ¦ 🖼️ Overlejrede videoer
+🔇 Sans le son ¦ 🔇 Bez zvuku ¦ 🔇 Utan ljud ¦ 🔇 Uden lyd
+🔇 Sans son ¦ 🔇 Bez zvuku ¦ 🔇 Inget ljud ¦ 🔇 Ingen lyd
+🔇 Silence ¦ 🔇 Ticho ¦ 🔇 Tystnad ¦ 🔇 Stilhed
+🔊 Volume… ¦ 🔊 Hlasitost… ¦ 🔊 Volym… ¦ 🔊 Lydstyrke…
+🔖 Chapitres ¦ 🔖 Kapitoly ¦ 🔖 Kapitel ¦ 🔖 Kapitler
+🖼️ Photos ¦ 🖼️ Fotky ¦ 🖼️ Foton ¦ 🖼️ Fotos
+🗂 De la base ¦ 🗂 Z databáze ¦ 🗂 Ur databasen ¦ 🗂 Fra databasen
+🗣️ Voix plus nette ¦ 🗣️ Jasnější hlas ¦ 🗣️ Tydligare röst ¦ 🗣️ Klarere stemme
+🟩 Fond vert (incrustation) ¦ 🟩 Zelené pozadí (klíčování) ¦ 🟩 Greenscreen (nyckling) ¦ 🟩 Greenscreen (keying)
+🧲 Aimanter ¦ 🧲 Přichytávat ¦ 🧲 Fäst ¦ 🧲 Fastgør
+Aimanter ¦ Přichytávat ¦ Fäst ¦ Fastgør
+🧹 Moins de souffle et de grondement ¦ 🧹 Méně šumu a hučení ¦ 🧹 Mindre brus och mullder ¦ 🧹 Mindre sus og rumlen
+🧹 Réduire le souffle ¦ 🧹 Snížit šum ¦ 🧹 Minska bruset ¦ 🧹 Reducér suset
+🪄 « La vie de… » ¦ 🪄 „Život…“ ¦ 🪄 ”Livet för…” ¦ 🪄 »Livet for…«
+🪄 « Une famille » ¦ 🪄 „Jedna rodina“ ¦ 🪄 ”En familj” ¦ 🪄 »En familie«
+{what}, et rangés dans les médias. ¦ {what} a uloženo v médiích. ¦ {what}, och sparade bland medierna. ¦ {what} og gemt i medierne.
+=fichier téléchargé ¦ stažený soubor|stažené soubory|stažených souborů ¦ fil nedladdad|filer nedladdade ¦ fil hentet|filer hentet
+Fichier téléchargé, et une copie est rangée dans les médias. ¦ Soubor stažen a kopie je uložena v médiích. ¦ Filen nedladdad, och en kopia sparas bland medierna. ¦ Filen hentet, og en kopi er gemt i medierne.
+{dur} · {ch} · {khz} kHz · sonie {lufs} LUFS · crête {pk} dB ¦ {dur} · {ch} · {khz} kHz · hlasitost {lufs} LUFS · špička {pk} dB ¦ {dur} · {ch} · {khz} kHz · ljudstyrka {lufs} LUFS · topp {pk} dB ¦ {dur} · {ch} · {khz} kHz · lydstyrke {lufs} LUFS · spids {pk} dB
+{dur} · {ch} · {khz} kHz · crête {pk} dB · sonie <span data-as-lufs>…</span> ¦ {dur} · {ch} · {khz} kHz · špička {pk} dB · hlasitost <span data-as-lufs>…</span> ¦ {dur} · {ch} · {khz} kHz · topp {pk} dB · ljudstyrka <span data-as-lufs>…</span> ¦ {dur} · {ch} · {khz} kHz · spids {pk} dB · lydstyrke <span data-as-lufs>…</span>
+Chaque zone dans un fichier ({n}) ¦ Každá oblast v samostatném souboru ({n}) ¦ Varje region i en egen fil ({n}) ¦ Hvert område i sin egen fil ({n})
+Chaque piste dans un fichier ({n}) ¦ Každá stopa v samostatném souboru ({n}) ¦ Varje spår i en egen fil ({n}) ¦ Hvert spor i sin egen fil ({n})
+Comme l’original (stéréo) ¦ Jako originál (stereo) ¦ Som originalet (stereo) ¦ Som originalen (stereo)
+Comme l’original (mono) ¦ Jako originál (mono) ¦ Som originalet (mono) ¦ Som originalen (mono)
+Comme l’original ({n} kHz) ¦ Jako originál ({n} kHz) ¦ Som originalet ({n} kHz) ¦ Som originalen ({n} kHz)
+Relier « {name} » à une personne… ¦ Propojit „{name}“ s osobou… ¦ Koppla ”{name}” till en person… ¦ Forbind »{name}« med en person…
+Relier « {name} » à une personne ¦ Propojit „{name}“ s osobou ¦ Koppla ”{name}” till en person ¦ Forbind »{name}« med en person
+Relier « {name} » à un événement ¦ Propojit „{name}“ s událostí ¦ Koppla ”{name}” till en händelse ¦ Forbind »{name}« med en begivenhed
+Relier « {name} » à {what} ¦ Propojit „{name}“ s {what} ¦ Koppla ”{name}” till {what} ¦ Forbind »{name}« med {what}
+Relier « {name} » ¦ Propojit „{name}“ ¦ Koppla ”{name}” ¦ Forbind »{name}«
+Insérer « {name} » ¦ Vložit „{name}“ ¦ Infoga ”{name}” ¦ Indsæt »{name}«
+Enregistrement au micro ({time}) ¦ Nahrávka z mikrofonu ({time}) ¦ Mikrofoninspelning ({time}) ¦ Mikrofonoptagelse ({time})
+🎛️ Rack d’effets ¦ 🎛️ Řetězec efektů ¦ 🎛️ Effektrack ¦ 🎛️ Effektrack
+Rack d’effets ¦ Řetězec efektů ¦ Effektrack ¦ Effektrack
+=effet ¦ efekt|efekty|efektů ¦ effekt|effekter ¦ effekt|effekter
+Rallumer ¦ Znovu zapnout ¦ Slå på igen ¦ Tænd igen
+Éteindre ¦ Vypnout ¦ Stäng av ¦ Sluk
+Rallumer l’effet ¦ Znovu zapnout efekt ¦ Slå på effekten igen ¦ Tænd effekten igen
+Éteindre l’effet ¦ Vypnout efekt ¦ Stäng av effekten ¦ Sluk effekten
+Rallumer {what} ¦ Znovu zapnout {what} ¦ Slå på {what} igen ¦ Tænd {what} igen
+Éteindre {what} ¦ Vypnout {what} ¦ Stäng av {what} ¦ Sluk {what}
+Retirer {what} ¦ Odebrat {what} ¦ Ta bort {what} ¦ Fjern {what}
+Effet « {name} » retiré ¦ Efekt „{name}“ odebrán ¦ Effekten ”{name}” borttagen ¦ Effekten »{name}« fjernet
+Réglages « {name} » ¦ Nastavení „{name}“ ¦ Inställningar ”{name}” ¦ Indstillinger »{name}«
+Égaliseur : {what} ¦ Ekvalizér: {what} ¦ Equalizer: {what} ¦ Equalizer: {what}
+à plat ¦ rovně ¦ platt ¦ flad
+Empreinte : {a} → {b} ({n} s de bruit choisi). ¦ Otisk: {a} → {b} ({n} s vybraného šumu). ¦ Brusprofil: {a} → {b} ({n} s valt brus). ¦ Støjprofil: {a} → {b} ({n} s valgt støj).
+Empreinte : {a} → {b} ({n} s de bruit seul, trouvé tout seul). ¦ Otisk: {a} → {b} ({n} s samotného šumu, nalezeno samo). ¦ Brusprofil: {a} → {b} ({n} s bara brus, hittat automatiskt). ¦ Støjprofil: {a} → {b} ({n} s kun støj, fundet automatisk).
+Réverbération : {what} ¦ Dozvuk: {what} ¦ Efterklang: {what} ¦ Rumklang: {what}
+{n} Hz (trouvé) ¦ {n} Hz (nalezeno) ¦ {n} Hz (hittat) ¦ {n} Hz (fundet)
+Trouver tout seul ¦ Najít samo ¦ Hitta automatiskt ¦ Find automatisk
+Forme du fondu d’entrée ¦ Tvar roztmívání ¦ Intoningens form ¦ Fade ind-form
+Forme du fondu de sortie ¦ Tvar zatmívání ¦ Uttoningens form ¦ Fade ud-form
+Forme du fondu ¦ Tvar prolínání ¦ Toningens form ¦ Toningens form
+{what} au pinceau. ¦ {what} štětcem. ¦ {what} med penseln. ¦ {what} med penslen.
+=zone réparée ¦ opravená oblast|opravené oblasti|opravených oblastí ¦ region reparerad|regioner reparerade ¦ område repareret|områder repareret
+=réparation au pinceau ¦ oprava štětcem|opravy štětcem|oprav štětcem ¦ penselreparation|penselreparationer ¦ penselreparation|penselreparationer
+Seulement sur {a} → {b} ¦ Jen na {a} → {b} ¦ Bara på {a} → {b} ¦ Kun på {a} → {b}
+Renommer « {name} » ¦ Přejmenovat „{name}“ ¦ Byt namn på ”{name}” ¦ Omdøb »{name}«
+Écouter « {name} » ¦ Poslechnout „{name}“ ¦ Lyssna på ”{name}” ¦ Lyt til »{name}«
+Fichier introuvable ¦ Soubor nenalezen ¦ Filen hittades inte ¦ Filen blev ikke fundet
+Prise micro du {date} ¦ Nahrávka z mikrofonu z {date} ¦ Mikrofontagning från {date} ¦ Mikrofonoptagelse fra {date}
+Glisse = sélectionner · <kbd>Espace</kbd> écouter · <kbd>⌘</kbd> et molette : zoom · <kbd>M</kbd> marqueur · <kbd>A</kbd> maintenu : l’avant ¦ Tažení = výběr · <kbd>Mezerník</kbd> poslech · <kbd>⌘</kbd> a kolečko: lupa · <kbd>M</kbd> značka · podržené <kbd>A</kbd>: původní stav ¦ Dra = markera · <kbd>Mellanslag</kbd> lyssna · <kbd>⌘</kbd> och hjul: zoom · <kbd>M</kbd> markör · <kbd>A</kbd> nedhållen: före ¦ Træk = markér · <kbd>Mellemrum</kbd> lyt · <kbd>⌘</kbd> og hjul: zoom · <kbd>M</kbd> markør · <kbd>A</kbd> holdt nede: før
+Glisse sur l’onde pour sélectionner ; clic = se placer ; ⇧ ← → agrandit la sélection. ¦ Táhni po vlně a vyber; klik = přesun; ⇧ ← → zvětší výběr. ¦ Dra över vågformen för att markera; klick = gå dit; ⇧ ← → utökar markeringen. ¦ Træk hen over bølgeformen for at markere; klik = gå dertil; ⇧ ← → udvider markeringen.
+Peins sur la tache du spectre (toux, sonnerie), puis « 🩹 Réparer ». Taille : le curseur. ¦ Přemaluj skvrnu ve spektru (kašel, zvonění), pak „🩹 Opravit“. Velikost: posuvník. ¦ Måla över fläcken i spektrumet (hosta, ringsignal), sedan ”🩹 Reparera”. Storlek: reglaget. ¦ Mal over pletten i spektret (hoste, ringetone), derefter »🩹 Reparér«. Størrelse: skyderen.
+Entoure la tache sur le spectre, puis « 🩹 Réparer ». ¦ Obkresli skvrnu ve spektru, pak „🩹 Opravit“. ¦ Ringa in fläcken i spektrumet, sedan ”🩹 Reparera”. ¦ Tegn rundt om pletten i spektret, derefter »🩹 Reparér«.
+Clic sur l’onde : un marqueur 🚩 à cet endroit. ¦ Klik na vlnu: značka 🚩 na tomto místě. ¦ Klicka på vågformen: en markör 🚩 på det stället. ¦ Klik på bølgeformen: en markør 🚩 på det sted.
+Multipiste : clic sur un morceau pour le couper en deux. Sur l’onde : supprime la sélection. ¦ Vícestopý režim: klik na úsek ho rozdělí na dva. Na vlně: smaže výběr. ¦ Flerspår: klicka på ett segment för att dela det i två. På vågformen: raderar markeringen. ¦ Flerspor: klik på et segment for at dele det i to. På bølgeformen: sletter markeringen.
+Garde <kbd>A</kbd> appuyée pour entendre l’avant, au même endroit. ¦ Drž <kbd>A</kbd> a uslyšíš původní stav na stejném místě. ¦ Håll ned <kbd>A</kbd> för att höra före, på samma ställe. ¦ Hold <kbd>A</kbd> nede for at høre før, samme sted.
+{name} — {what} (prêt) ¦ {name} — {what} (hotové) ¦ {name} — {what} (färdig) ¦ {name} — {what} (færdig)
+{time} au début ¦ {time} na začátku ¦ {time} i början ¦ {time} i starten
+{time} à la fin ¦ {time} na konci ¦ {time} i slutet ¦ {time} i slutningen
+Les zones hachurées seront coupées ({what}). ¦ Šrafované oblasti se vystřihnou ({what}). ¦ De streckade områdena klipps bort ({what}). ¦ De skraverede områder klippes væk ({what}).
+Glisse les poignées noires pour changer. ¦ Táhni černé úchyty a změň to. ¦ Dra i de svarta handtagen för att ändra. ¦ Træk i de sorte håndtag for at ændre.
+le « mmm » du courant (trouvé tout seul : {n} Hz) ¦ „brum“ ze sítě (nalezeno samo: {n} Hz) ¦ nätbrummet (hittat automatiskt: {n} Hz) ¦ netbrummen (fundet automatisk: {n} Hz)
+le « mmm » du courant (aucun trouvé : 50 Hz par défaut) ¦ „brum“ ze sítě (nenalezen: výchozí 50 Hz) ¦ nätbrummet (inget hittat: 50 Hz som standard) ¦ netbrummen (ingen fundet: 50 Hz som standard)
+le « mmm » du courant ¦ „brum“ ze sítě ¦ nätbrummet ¦ netbrummen
+le « chhh » de la cassette ¦ „šum“ kazety ¦ kassettens brus ¦ kassettens sus
+plus de {n} s → 0,5 s ¦ víc než {n} s → 0,5 s ¦ över {n} s → 0,5 s ¦ over {n} s → 0,5 s
+{name} (nettoyé) ¦ {name} (vyčištěno) ¦ {name} (rensat) ¦ {name} (renset)
+Couper la fin ({time}) ¦ Ustřihnout konec ({time}) ¦ Klipp bort slutet ({time}) ¦ Klip slutningen væk ({time})
+Couper le début ({time}) ¦ Ustřihnout začátek ({time}) ¦ Klipp bort början ({time}) ¦ Klip starten væk ({time})
+Nettoyer « {name} » à la place ? ¦ Vyčistit raději „{name}“? ¦ Rensa ”{name}” i stället? ¦ Rens »{name}« i stedet?
+Ouvrir ce son ¦ Otevřít tento zvuk ¦ Öppna ljudet ¦ Åbn lyden
+Un ronflement du courant a été trouvé ({n} Hz) : il est enlevé, avec les clics. Écoute la différence. ¦ Byl nalezen síťový brum ({n} Hz): odstraní se spolu s lupanci. Poslechni si rozdíl. ¦ Ett nätbrum hittades ({n} Hz): det tas bort, tillsammans med klicken. Lyssna på skillnaden. ¦ En netbrum blev fundet ({n} Hz): den fjernes sammen med klikkene. Lyt til forskellen.
+son|piste ¦ stopa ¦ spår ¦ spor
+baisse|de ¦ o ¦ med ¦ med
+retour en ¦ návrat za ¦ tillbaka på ¦ tilbage på
+Piste de la voix ¦ Stopa hlasu ¦ Röstspår ¦ Stemmespor
+Piste qui baisse ¦ Stopa, která se ztiší ¦ Spår som sänks ¦ Spor, der dæmpes
+Baisse en dB ¦ Ztlumení v dB ¦ Sänkning i dB ¦ Dæmpning i dB
+{name} : armée pour le micro ¦ {name}: připravená pro mikrofon ¦ {name}: redo för mikrofonen ¦ {name}: klar til mikrofonen
+{name} : désarmée ¦ {name}: nepřipravená ¦ {name}: inte redo ¦ {name}: ikke klar
+Renommer la piste « {name} » ¦ Přejmenovat stopu „{name}“ ¦ Byt namn på spåret ”{name}” ¦ Omdøb sporet »{name}«
+{name} : courbe du panoramique ¦ {name}: křivka panorámy ¦ {name}: panoreringskurva ¦ {name}: panoreringskurve
+{name} : courbe du volume ¦ {name}: křivka hlasitosti ¦ {name}: volymkurva ¦ {name}: lydstyrkekurve
+Couper « {name} » à {time} ¦ Rozstřihnout „{name}“ v {time} ¦ Klipp ”{name}” vid {time} ¦ Klip »{name}« ved {time}
+Déplacer « {name} » ¦ Přesunout „{name}“ ¦ Flytta ”{name}” ¦ Flyt »{name}«
+le morceau ¦ úsek ¦ segmentet ¦ segmentet
+{name} : point ajouté à {time} ¦ {name}: bod přidán v {time} ¦ {name}: punkt tillagd vid {time} ¦ {name}: punkt tilføjet ved {time}
+{name} : point retiré ¦ {name}: bod odebrán ¦ {name}: punkt borttagen ¦ {name}: punkt fjernet
+Ajouter « {name} » sur {track} ¦ Přidat „{name}“ na {track} ¦ Lägg till ”{name}” på {track} ¦ Tilføj »{name}« på {track}
+Morceau « {name} » retiré ¦ Úsek „{name}“ odebrán ¦ Segmentet ”{name}” borttaget ¦ Segmentet »{name}« fjernet
+son ¦ zvuk ¦ ljud ¦ lyd
+(mélange) ¦ (mix) ¦ (mix) ¦ (mix)
+Le son ouvert ici ¦ Zvuk otevřený tady ¦ Ljudet som är öppet här ¦ Lyden, der er åben her
+Le son tel qu’il est (garde la touche A appuyée) ¦ Zvuk, jak je (podrž klávesu A) ¦ Ljudet som det är (håll ned A) ¦ Lyden, som den er (hold A nede)
+Appliquer le rack pour de bon ¦ Použít řetězec efektů natrvalo ¦ Tillämpa racket för gott ¦ Anvend racket for altid
+Arme d’abord une piste avec ● (dans ses boutons M S ●). ¦ Nejdřív připrav stopu pomocí ● (v jejích tlačítkách M S ●). ¦ Gör först ett spår redo med ● (i dess knappar M S ●). ¦ Gør først et spor klar med ● (i dets knapper M S ●).
+Atténuer de ¦ Ztlumit o ¦ Sänk med ¦ Dæmp med
+Aucun effet ¦ Žádný efekt ¦ Ingen effekt ¦ Ingen effekt
+Aucun effet : « ＋ Ajouter un effet », ou le menu Effets. ¦ Žádný efekt: „＋ Přidat efekt“ nebo nabídka Efekty. ¦ Ingen effekt: ”＋ Lägg till en effekt”, eller menyn Effekter. ¦ Ingen effekt: »＋ Tilføj en effekt« eller menuen Effekter.
+Aucun marqueur ni zone : sélectionne un passage, puis « ＋ Nouvelle zone » (ou M). ¦ Žádná značka ani oblast: vyber pasáž, pak „＋ Nová oblast“ (nebo M). ¦ Ingen markör eller region: markera ett avsnitt, sedan ”＋ Ny region” (eller M). ¦ Ingen markør eller område: markér en passage, derefter »＋ Nyt område« (eller M).
+Avant ou après ¦ Před nebo po ¦ Före eller efter ¦ Før eller efter
+Baisser la musique sous la voix ¦ Ztišit hudbu pod hlasem ¦ Sänk musiken under rösten ¦ Dæmp musikken under stemmen
+Ne plus baisser la musique ¦ Přestat ztišovat hudbu ¦ Sluta sänka musiken ¦ Stop med at dæmpe musikken
+Bientôt : un moteur de reconnaissance qui tourne dans l’ordinateur (rien n’est envoyé sur Internet) ¦ Brzy: rozpoznávací modul, který běží v počítači (nic se neposílá na internet) ¦ Snart: en igenkänningsmotor som körs på datorn (inget skickas över internet) ¦ Snart: en genkendelsesmotor, der kører på computeren (intet sendes over internettet)
+Boucle ¦ Smyčka ¦ Slinga ¦ Løkke
+Calcul des effets… ¦ Počítám efekty… ¦ Beräknar effekterna… ¦ Beregner effekterne…
+Ce fichier n’est pas un réglage du son. ¦ Tento soubor není nastavení zvuku. ¦ Filen är inte en ljudinställning. ¦ Filen er ikke en lydindstilling.
+Ce navigateur ne donne pas accès au micro. ¦ Tento prohlížeč nedává přístup k mikrofonu. ¦ Webbläsaren ger inte åtkomst till mikrofonen. ¦ Browseren giver ikke adgang til mikrofonen.
+Ce qui est dit ¦ Co se říká ¦ Det som sägs ¦ Det, der bliver sagt
+Choisis d’abord une zone. ¦ Nejdřív vyber oblast. ¦ Välj först en region. ¦ Vælg først et område.
+Choisis une zone (à gauche ou au-dessus de l’onde), ou crée-en une : « ＋ Nouvelle zone ». ¦ Vyber oblast (vlevo nebo nad vlnou), nebo nějakou vytvoř: „＋ Nová oblast“. ¦ Välj en region (till vänster eller ovanför vågformen), eller skapa en: ”＋ Ny region”. ¦ Vælg et område (til venstre eller over bølgeformen), eller opret et: »＋ Nyt område«.
+Clics et craquements ¦ Lupance a praskání ¦ Klick och knaster ¦ Klik og knitren
+Clique une étape pour y revenir ; les étapes grisées reviennent avec ↷. ¦ Klikni na krok a vrátíš se k němu; zašedlé kroky se vrátí přes ↷. ¦ Klicka på ett steg för att gå tillbaka till det; gråade steg kommer tillbaka med ↷. ¦ Klik på et trin for at gå tilbage til det; grå trin kommer tilbage med ↷.
+Cliquer une heure fait écouter ce passage. Export en .txt, .srt, .vtt : ⤓ Exporter → 📝 Texte et repères. Le texte est cherchable dans la base. ¦ Klik na čas přehraje tuto pasáž. Export do .txt, .srt, .vtt: ⤓ Exportovat → 📝 Text a značky. Text lze v databázi vyhledávat. ¦ Klicka på en tid för att spela avsnittet. Export som .txt, .srt, .vtt: ⤓ Exportera → 📝 Text och markeringar. Texten är sökbar i databasen. ¦ Klik på et tidspunkt for at afspille passagen. Eksport som .txt, .srt, .vtt: ⤓ Eksportér → 📝 Tekst og markører. Teksten kan søges i databasen.
+Copie nettoyée ajoutée aux mêmes fiches. ¦ Vyčištěná kopie přidána ke stejným kartám. ¦ Rensad kopia tillagd till samma poster. ¦ Renset kopi tilføjet til de samme poster.
+Copie séparée ajoutée aux mêmes fiches. ¦ Samostatná kopie přidána ke stejným kartám. ¦ Separat kopia tillagd till samma poster. ¦ Separat kopi tilføjet til de samme poster.
+Couper le début et la fin ¦ Ustřihnout začátek a konec ¦ Klipp bort början och slutet ¦ Klip starten og slutningen væk
+Couper un morceau en deux (multipiste) ; sur l’onde : supprimer la sélection ¦ Rozstřihnout úsek na dva (vícestopý režim); na vlně: smazat výběr ¦ Dela ett segment i två (flerspår); på vågformen: radera markeringen ¦ Del et segment i to (flerspor); på bølgeformen: slet markeringen
+Crête ¦ Špička ¦ Topp ¦ Spids
+Effacer le dessin ¦ Vymazat kresbu ¦ Rensa ritningen ¦ Ryd tegningen
+× Effacer le dessin ¦ × Vymazat kresbu ¦ × Rensa ritningen ¦ × Ryd tegningen
+Empreinte du bruit ¦ Otisk šumu ¦ Brusprofil ¦ Støjprofil
+En S ¦ Tvar S ¦ S-formad ¦ S-formet
+Rapide ¦ Rychlý ¦ Snabb ¦ Hurtig
+Lente ¦ Pomalý ¦ Långsam ¦ Langsom
+🏠 Pièce ¦ 🏠 Pokoj ¦ 🏠 Rum ¦ 🏠 Rum
+⛪ Église ¦ ⛪ Kostel ¦ ⛪ Kyrka ¦ ⛪ Kirke
+🎭 Salle ¦ 🎭 Sál ¦ 🎭 Sal ¦ 🎭 Sal
+🧱 Cave ¦ 🧱 Sklep ¦ 🧱 Källare ¦ 🧱 Kælder
+Enlever le bourdonnement ¦ Odstranit brum ¦ Ta bort brummet ¦ Fjern brummen
+Enregistrer au micro ¦ Nahrávat z mikrofonu ¦ Spela in med mikrofonen ¦ Optag med mikrofonen
+● Enregistrer au micro ¦ ● Nahrávat z mikrofonu ¦ ● Spela in med mikrofonen ¦ ● Optag med mikrofonen
+🎙️ Enregistrer au micro ¦ 🎙️ Nahrávat z mikrofonu ¦ 🎙️ Spela in med mikrofonen ¦ 🎙️ Optag med mikrofonen
+Enregistrer au micro (au repère orange ; en multipiste : sur la piste armée ●) ¦ Nahrávat z mikrofonu (u oranžové značky; ve vícestopém režimu: na připravenou stopu ●) ¦ Spela in med mikrofonen (vid den orange markören; i flerspår: på det redo spåret ●) ¦ Optag med mikrofonen (ved den orange markør; i flerspor: på det klargjorte spor ●)
+Enregistrer dans les médias ¦ Uložit do médií ¦ Spara bland medierna ¦ Gem i medierne
+Enregistrer et afficher cette version (l’original est gardé) ¦ Uložit a zobrazit tuto verzi (originál se zachová) ¦ Spara och visa den här versionen (originalet behålls) ¦ Gem og vis denne version (originalen bevares)
+Enregistrer le projet son (rack, zones, pistes), pour y revenir ¦ Uložit zvukový projekt (řetězec efektů, oblasti, stopy) a vrátit se k němu ¦ Spara ljudprojektet (rack, regioner, spår) för att återkomma till det ¦ Gem lydprojektet (rack, områder, spor) for at vende tilbage til det
+Enregistrer le projet sous… ¦ Uložit projekt jako… ¦ Spara projektet som… ¦ Gem projektet som…
+Exporter : MP3, M4A, WAV, FLAC, Ogg, AIFF, texte et repères ¦ Export: MP3, M4A, WAV, FLAC, Ogg, AIFF, text a značky ¦ Exportera: MP3, M4A, WAV, FLAC, Ogg, AIFF, text och markeringar ¦ Eksport: MP3, M4A, WAV, FLAC, Ogg, AIFF, tekst og markører
+Exporter ce passage… ¦ Exportovat tuto pasáž… ¦ Exportera det här avsnittet… ¦ Eksportér denne passage…
+Exporter un fichier (MP3, WAV, FLAC…), et si tu veux une copie dans les médias ¦ Exportovat soubor (MP3, WAV, FLAC…) a chceš-li, kopii do médií ¦ Exportera en fil (MP3, WAV, FLAC…), och om du vill en kopia bland medierna ¦ Eksportér en fil (MP3, WAV, FLAC…), og hvis du vil, en kopi i medierne
+Fichiers ¦ Soubory ¦ Filer ¦ Filer
+Fort ¦ Silný ¦ Stark ¦ Stærk
+Moyen ¦ Střední ¦ Medel ¦ Middel
+Garde ¦ Držení ¦ Håll ¦ Hold
+Garder seulement la sélection ¦ Ponechat jen výběr ¦ Behåll bara markeringen ¦ Behold kun markeringen
+Gardée dans les versions, le son affiché ne change pas ¦ Uloženo ve verzích, zobrazený zvuk se nemění ¦ Sparad bland versionerna, ljudet som visas ändras inte ¦ Gemt i versionerne, den viste lyd ændres ikke
+Insérer un son… ¦ Vložit zvuk… ¦ Infoga ett ljud… ¦ Indsæt en lyd…
+La fenêtre d’export n’est pas prête. ¦ Okno exportu není připravené. ¦ Exportfönstret är inte redo. ¦ Eksportvinduet er ikke klar.
+L’export n’est pas encore prêt. ¦ Export ještě není připravený. ¦ Exporten är inte redo än. ¦ Eksporten er ikke klar endnu.
+La sélection ¦ Výběr ¦ Markeringen ¦ Markeringen
+Lasso de réparation ¦ Opravné laso ¦ Reparationslasso ¦ Reparationslasso
+Lasso de réparation (sur le spectre) ¦ Opravné laso (ve spektru) ¦ Reparationslasso (i spektrumet) ¦ Reparationslasso (i spektret)
+➰ Lasso de réparation ¦ ➰ Opravné laso ¦ ➰ Reparationslasso ¦ ➰ Reparationslasso
+Pinceau de réparation ¦ Opravný štětec ¦ Reparationspensel ¦ Reparationspensel
+Pinceau de réparation (sur le spectre) ¦ Opravný štětec (ve spektru) ¦ Reparationspensel (i spektrumet) ¦ Reparationspensel (i spektret)
+🖌 Pinceau de réparation ¦ 🖌 Opravný štětec ¦ 🖌 Reparationspensel ¦ 🖌 Reparationspensel
+Les boutons ¦ Tlačítka ¦ Knapparna ¦ Knapperne
+Les réglages du son seront perdus. ¦ Nastavení zvuku se ztratí. ¦ Ljudinställningarna går förlorade. ¦ Lydindstillingerne går tabt.
+Lire la sélection en boucle ¦ Přehrávat výběr ve smyčce ¦ Spela markeringen i slinga ¦ Afspil markeringen i løkke
+🔁 Lire en boucle ¦ 🔁 Přehrávat ve smyčce ¦ 🔁 Spela i slinga ¦ 🔁 Afspil i løkke
+🐢 Lire à 75 % ¦ 🐢 Přehrát na 75 % ¦ 🐢 Spela i 75 % ¦ 🐢 Afspil ved 75 %
+Marqueur ici ¦ Značka tady ¦ Markör här ¦ Markør her
+🚩 Marqueur ici ¦ 🚩 Značka tady ¦ 🚩 Markör här ¦ 🚩 Markør her
+Marqueurs et zones ¦ Značky a oblasti ¦ Markörer och regioner ¦ Markører og områder
+Zones et marqueurs ¦ Oblasti a značky ¦ Regioner och markörer ¦ Områder og markører
+Mono ¦ Mono ¦ Mono ¦ Mono
+Stéréo ¦ Stereo ¦ Stereo ¦ Stereo
+Nettoyer ¦ Vyčistit ¦ Rensa ¦ Rens
+Nettoyer le souffle ¦ Vyčistit šum ¦ Rensa bruset ¦ Rens suset
+Nom du projet son ¦ Název zvukového projektu ¦ Ljudprojektets namn ¦ Lydprojektets navn
+Nom du son ¦ Název zvuku ¦ Ljudets namn ¦ Lydens navn
+Nouvelle piste ¦ Nová stopa ¦ Nytt spår ¦ Nyt spor
+Nouvelle version affichée partout. L’original est gardé. ¦ Nová verze zobrazená všude. Originál je zachován. ¦ Ny version visas överallt. Originalet behålls. ¦ Ny version vist overalt. Originalen bevares.
+Version enregistrée (l’ancienne reste affichée). ¦ Verze uložena (stále se zobrazuje ta stará). ¦ Version sparad (den gamla visas fortfarande). ¦ Version gemt (den gamle vises stadig).
+Nouvelle zone ¦ Nová oblast ¦ Ny region ¦ Nyt område
+Ouverture ¦ Otevření ¦ Öppning ¦ Åbning
+Ouvrir un autre projet sans enregistrer ? ¦ Otevřít jiný projekt bez uložení? ¦ Öppna ett annat projekt utan att spara? ¦ Åbn et andet projekt uden at gemme?
+Pause quand j’écris ¦ Pauza, když píšu ¦ Paus när jag skriver ¦ Pause, når jeg skriver
+Peins sur une tache (toux, sonnerie, porte), puis « 🩹 Réparer ». ¦ Přemaluj skvrnu (kašel, zvonění, dveře), pak „🩹 Opravit“. ¦ Måla över en fläck (hosta, ringsignal, dörr), sedan ”🩹 Reparera”. ¦ Mal over en plet (hoste, ringetone, dør), derefter »🩹 Reparér«.
+Poser des marqueurs (clic sur l’onde) ¦ Vkládat značky (klik na vlnu) ¦ Sätt markörer (klicka på vågformen) ¦ Sæt markører (klik på bølgeformen)
+🚩 Poser des marqueurs ¦ 🚩 Vkládat značky ¦ 🚩 Sätt markörer ¦ 🚩 Sæt markører
+Raccourcir ¦ Zkrátit ¦ Korta ¦ Forkort
+Rendre agréable ¦ Zpříjemnit ¦ Gör behagligt ¦ Gør behageligt
+Revenir au ⚡ Son rapide : ce qu’il sait montrer revient en boutons, le reste reste appliqué ¦ Zpět na ⚡ Rychlý zvuk: co umí zobrazit, se vrátí jako tlačítka, zbytek zůstane použitý ¦ Tillbaka till ⚡ Snabbljud: det som kan visas kommer tillbaka som knappar, resten förblir tillämpat ¦ Tilbage til ⚡ Hurtig lyd: det, den kan vise, kommer tilbage som knapper, resten forbliver anvendt
+Réglages du Son rapide ¦ Nastavení Rychlého zvuku ¦ Inställningar för Snabbljud ¦ Indstillinger for Hurtig lyd
+Réglages repris ¦ Převzatá nastavení ¦ Övertagna inställningar ¦ Overtagne indstillinger
+Seulement sur la sélection ¦ Jen na výběru ¦ Bara på markeringen ¦ Kun på markeringen
+Silence ¦ Ticho ¦ Tystnad ¦ Stilhed
+Souffle, clics, bourdonnement, voix, volume et coupe du début et de la fin, d’un coup ¦ Šum, lupance, brum, hlas, hlasitost a ořez začátku i konce, najednou ¦ Brus, klick, brum, röst, volym och beskärning av början och slutet, på en gång ¦ Sus, klik, brum, stemme, lydstyrke og beskæring af start og slutning, på én gang
+✨ Tout nettoyer en une fois ¦ ✨ Vyčistit vše najednou ¦ ✨ Rensa allt på en gång ¦ ✨ Rens alt på én gang
+Spectre ¦ Spektrum ¦ Spektrum ¦ Spektrum
+Spectre : montrer / cacher ¦ Spektrum: zobrazit / skrýt ¦ Spektrum: visa / dölj ¦ Spektrum: vis / skjul
+Sélection : glisser sur l’onde ¦ Výběr: táhni po vlně ¦ Markering: dra över vågformen ¦ Markering: træk hen over bølgeformen
+Tout le son : glisse le cadre pour te déplacer ¦ Celý zvuk: táhni rámeček a posuň se ¦ Hela ljudet: dra ramen för att flytta dig ¦ Hele lyden: træk rammen for at flytte dig
+Un autre son, rattaché aux mêmes fiches ¦ Jiný zvuk, propojený se stejnými kartami ¦ Ett annat ljud, kopplat till samma poster ¦ En anden lyd, forbundet med de samme poster
+Un ensemble prêt ne se supprime pas. ¦ Hotovou sadu nelze smazat. ¦ En färdig uppsättning kan inte raderas. ¦ Et færdigt sæt kan ikke slettes.
+VU-mètres ¦ VU metry ¦ VU-mätare ¦ VU-metre
+Volume du morceau ¦ Hlasitost úseku ¦ Segmentets volym ¦ Segmentets lydstyrke
+Volume du morceau… ¦ Hlasitost úseku… ¦ Segmentets volym… ¦ Segmentets lydstyrke…
+Zoom sur la sélection ¦ Přiblížit výběr ¦ Zooma till markeringen ¦ Zoom til markeringen
+Zoom vertical + ¦ Svislé přiblížení + ¦ Lodrät zoom + ¦ Lodret zoom +
+Zoom vertical − ¦ Svislé přiblížení − ¦ Lodrät zoom − ¦ Lodret zoom −
+ces réglages du son ¦ tato nastavení zvuku ¦ de här ljudinställningarna ¦ disse lydindstillinger
+disque, bande abîmée ¦ deska, poškozená páska ¦ skiva, skadat band ¦ plade, beskadiget bånd
+les voix lointaines remontent, les cris baissent ¦ vzdálené hlasy zesílí, křik se ztiší ¦ avlägsna röster höjs, rop sänks ¦ fjerne stemmer hæves, råb dæmpes
+on comprend mieux les mots ¦ slovům je líp rozumět ¦ orden blir lättare att förstå ¦ ordene er lettere at forstå
+nouvelle version, copie ¦ nová verze, kopie ¦ ny version, kopia ¦ ny version, kopi
+trouvé tout seul, poignées sur l’onde ¦ nalezeno samo, úchyty na vlně ¦ hittat automatiskt, handtag på vågformen ¦ fundet automatisk, håndtag på bølgeformen
+souffle, voix claire, volume égal ¦ šum, jasný hlas, vyrovnaná hlasitost ¦ brus, tydlig röst, jämn volym ¦ sus, klar stemme, jævn lydstyrke
+souffle fort, voix, coupe des blancs ¦ silný šum, hlas, střih ticha ¦ starkt brus, röst, klippning av tystnader ¦ kraftigt sus, stemme, klipning af pauser
+de-hum, égaliseur, limiteur ¦ odstranění brumu, ekvalizér, limiter ¦ brumborttagning, equalizer, begränsare ¦ brumfjernelse, equalizer, limiter
+📼 Cassette des années 70 ¦ 📼 Kazeta ze 70. let ¦ 📼 Kassett från 70-talet ¦ 📼 Kassettebånd fra 70'erne
+🎙 Dictaphone ¦ 🎙 Diktafon ¦ 🎙 Diktafon ¦ 🎙 Diktafon
+💒 Vidéo de mariage 1987 ¦ 💒 Svatební video 1987 ¦ 💒 Bröllopsvideo 1987 ¦ 💒 Bryllupsvideo 1987
+Écoute, puis « ⏱ Insérer l’heure » (⌘T) et tape ce qui est dit. ¦ Poslouchej, pak „⏱ Vložit čas“ (⌘T) a napiš, co se říká. ¦ Lyssna, sedan ”⏱ Infoga tiden” (⌘T) och skriv det som sägs. ¦ Lyt, derefter »⏱ Indsæt tidspunktet« (⌘T), og skriv det, der bliver sagt.
+⏱ Insérer l’heure ¦ ⏱ Vložit čas ¦ ⏱ Infoga tiden ¦ ⏱ Indsæt tidspunktet
+Écouter ce passage ¦ Poslechnout tuto pasáž ¦ Lyssna på avsnittet ¦ Lyt til passagen
+Écouter seulement le passage peint ¦ Poslechnout jen vymalovanou pasáž ¦ Lyssna bara på det målade avsnittet ¦ Lyt kun til den malede passage
+Écouter, comparer A / B, montrer partout, renommer, supprimer ¦ Poslechnout, porovnat A / B, zobrazit všude, přejmenovat, smazat ¦ Lyssna, jämför A / B, visa överallt, byt namn, radera ¦ Lyt, sammenlign A / B, vis overalt, omdøb, slet
+ℹ️ Infos du son ¦ ℹ️ Informace o zvuku ¦ ℹ️ Ljudinformation ¦ ℹ️ Lydoplysninger
+▶ Écouter / pause ¦ ▶ Poslech / pauza ¦ ▶ Lyssna / paus ¦ ▶ Lyt / pause
+▶ Écouter 10 s du résultat ¦ ▶ Poslechnout 10 s výsledku ¦ ▶ Lyssna på 10 s av resultatet ¦ ▶ Lyt til 10 s af resultatet
+✂️ Couper (dans le presse-papiers) ¦ ✂️ Vyjmout (do schránky) ¦ ✂️ Klipp ut (till urklipp) ¦ ✂️ Klip (til udklipsholderen)
+✂️ Couper un morceau (multipiste) ¦ ✂️ Rozstřihnout úsek (vícestopý režim) ¦ ✂️ Dela ett segment (flerspår) ¦ ✂️ Del et segment (flerspor)
+〰️ Forme d’onde ¦ 〰️ Vlnový průběh ¦ 〰️ Vågform ¦ 〰️ Bølgeform
+＋ Ajouter un effet ▾ ¦ ＋ Přidat efekt ▾ ¦ ＋ Lägg till en effekt ▾ ¦ ＋ Tilføj en effekt ▾
+🎛️ Multipiste ¦ 🎛️ Vícestopý režim ¦ 🎛️ Flerspår ¦ 🎛️ Flerspor
+🎬 Ouvrir dans le montage ¦ 🎬 Otevřít ve střihu ¦ 🎬 Öppna i videoredigeraren ¦ 🎬 Åbn i videoredigeringen
+👂 Écoute d’abord ¦ 👂 Nejdřív poslouchej ¦ 👂 Lyssna först ¦ 👂 Lyt først
+👂 Écouter la zone ¦ 👂 Poslechnout oblast ¦ 👂 Lyssna på regionen ¦ 👂 Lyt til området
+📝 Transcription ¦ 📝 Přepis ¦ 📝 Transkription ¦ 📝 Transskription
+🔗 Relier ce passage ¦ 🔗 Propojit tuto pasáž ¦ 🔗 Koppla avsnittet ¦ 🔗 Forbind passagen
+🗣️ La voix ¦ 🗣️ Hlas ¦ 🗣️ Rösten ¦ 🗣️ Stemmen
+🤖 Transcrire tout seul (bientôt) ¦ 🤖 Přepsat automaticky (brzy) ¦ 🤖 Transkribera automatiskt (snart) ¦ 🤖 Transskribér automatisk (snart)
+½ ton ¦ ½ tónu ¦ ½ ton ¦ ½ tone
+Volume ¦ Hlasitost ¦ Volym ¦ Lydstyrke
+Normaliser ¦ Normalizovat ¦ Normalisera ¦ Normalisér
+Volume égal ¦ Vyrovnaná hlasitost ¦ Jämn volym ¦ Jævn lydstyrke
+Sonie visée ¦ Cílová hlasitost ¦ Målljudstyrka ¦ Mållydstyrke
+Niveleur ¦ Vyrovnávač ¦ Nivåutjämnare ¦ Niveauudligner
+Fondus ¦ Prolínání ¦ Toningar ¦ Toninger
+Égaliseur graphique ¦ Grafický ekvalizér ¦ Grafisk equalizer ¦ Grafisk equalizer
+Égaliseur paramétrique ¦ Parametrický ekvalizér ¦ Parametrisk equalizer ¦ Parametrisk equalizer
+Égaliseurs ¦ Ekvalizéry ¦ Equalizrar ¦ Equalizere
+Filtre passe-haut / passe-bas ¦ Filtr horní / dolní propust ¦ Högpass- / lågpassfilter ¦ Højpas- / lavpasfilter
+Passe-haut ¦ Horní propust ¦ Högpass ¦ Højpas
+Passe-bas ¦ Dolní propust ¦ Lågpass ¦ Lavpas
+Compresseur ¦ Kompresor ¦ Kompressor ¦ Kompressor
+Dynamique ¦ Dynamika ¦ Dynamik ¦ Dynamik
+Rapport ¦ Poměr ¦ Förhållande ¦ Forhold
+Attaque ¦ Náběh ¦ Attack ¦ Attack
+Relâche ¦ Uvolnění ¦ Release ¦ Release
+Gain de sortie ¦ Výstupní zisk ¦ Utgångsförstärkning ¦ Udgangsforstærkning
+Limiteur ¦ Limiter ¦ Begränsare ¦ Limiter
+Placé en dernier dans le rack : plus jamais de son qui « crache ». ¦ Umístěný v řetězci jako poslední: už nikdy zvuk, který „chrčí“. ¦ Placerad sist i racket: aldrig mer ljud som ”sprakar”. ¦ Placeret sidst i racket: aldrig mere lyd, der »skratter«.
+Plafond ¦ Strop ¦ Tak ¦ Loft
+Réduction de bruit ¦ Potlačení šumu ¦ Brusreducering ¦ Støjreduktion
+Réduction ¦ Potlačení ¦ Reducering ¦ Reduktion
+N’écouter que le bruit enlevé ¦ Poslouchat jen odstraněný šum ¦ Lyssna bara på det borttagna bruset ¦ Lyt kun til den fjernede støj
+De-clicker ¦ Odstraňovač lupanců ¦ Klickborttagare ¦ Klikfjerner
+Clics ¦ Lupance ¦ Klick ¦ Klik
+De-hum ¦ Odstranění brumu ¦ Brumborttagning ¦ Brumfjernelse
+Harmoniques ¦ Harmonické ¦ Övertoner ¦ Overtoner
+De-esser ¦ De-esser ¦ De-esser ¦ De-esser
+Sifflantes ¦ Sykavky ¦ Väsljud ¦ Hvislelyde
+Baisser jusqu’à ¦ Ztlumit až o ¦ Sänk upp till ¦ Dæmp op til
+Réparations au pinceau ¦ Opravy štětcem ¦ Penselreparationer ¦ Penselreparationer
+Voix plus claire ¦ Jasnější hlas ¦ Tydligare röst ¦ Klarere stemme
+Égaliseur (moins de grondement, plus de présence) et compresseur. ¦ Ekvalizér (méně hučení, víc přítomnosti) a kompresor. ¦ Equalizer (mindre mullder, mer närvaro) och kompressor. ¦ Equalizer (mindre rumlen, mere nærvær) og kompressor.
+Réverbération ¦ Dozvuk ¦ Efterklang ¦ Rumklang
+Ambiance ¦ Atmosféra ¦ Atmosfär ¦ Atmosfære
+Vitesse et hauteur ¦ Rychlost a výška ¦ Hastighet och tonhöjd ¦ Hastighed og tonehøjde
+Temps ¦ Čas ¦ Tid ¦ Tid
+Pour une cassette lue trop vite (voix « de canard ») : 96 % la remet à sa vraie vitesse. ¦ Pro kazetu přehranou příliš rychle („kachní“ hlas): 96 % ji vrátí na skutečnou rychlost. ¦ För ett band som spelas för fort (”kalle anka”-röst): 96 % återställer den verkliga hastigheten. ¦ For et bånd, der afspilles for hurtigt (»anderøst«): 96 % sætter det tilbage til den rigtige hastighed.
+Vitesse ¦ Rychlost ¦ Hastighet ¦ Hastighed
+Garder la hauteur de la voix ¦ Zachovat výšku hlasu ¦ Behåll röstens tonhöjd ¦ Bevar stemmens tonehøjde
+Blancs de plus de ¦ Ticha delší než ¦ Tystnader längre än ¦ Pauser længere end
+Ramenés à ¦ Zkrácena na ¦ Förkortade till ¦ Forkortet til
+Fin ¦ Konec ¦ Slut ¦ Slut
+Diapositive {k} / {n} ¦ Snímek {k} / {n} ¦ Bild {k} / {n} ¦ Dias {k} / {n}
+Aucune diapositive ¦ Žádný snímek ¦ Ingen bild ¦ Intet dias
+Aucune diapositive. ¦ Žádný snímek. ¦ Ingen bild. ¦ Intet dias.
+Aucune diapositive pour l’instant ¦ Zatím žádný snímek ¦ Inga bilder än ¦ Ingen dias endnu
+{what} aux Médias (le son devient la musique). ¦ {what} do Médií (zvuk se stane hudbou). ¦ {what} till Medierna (ljudet blir musiken). ¦ {what} til Medier (lyden bliver musikken).
+{what} aux Médias. ¦ {what} do Médií. ¦ {what} till Medierna. ¦ {what} til Medier.
+=diapositive est prête ¦ snímek je připravený|snímky jsou připravené|snímků je připraveno ¦ bild är klar|bilder är klara ¦ dias er klar|dias er klar
+{what}. Elles peuvent remplacer celles du diaporama ou venir à la suite. ¦ {what}. Mohou nahradit snímky prezentace, nebo přijít za ně. ¦ {what}. De kan ersätta bildspelets bilder eller läggas efter dem. ¦ {what}. De kan erstatte diasshowets dias eller komme efter dem.
+Remplacer le diaporama par le récit ? ¦ Nahradit prezentaci vyprávěním? ¦ Ersätta bildspelet med livsberättelsen? ¦ Erstat diasshowet med livshistorien?
+Ajouter à la suite ¦ Přidat za ¦ Lägg till efter ¦ Tilføj efter
+Police du style ({name}) ¦ Písmo stylu ({name}) ¦ Stilens teckensnitt ({name}) ¦ Stilens skrifttype ({name})
+Avancer de {time} (réglable dans Réglages › Apparence) ¦ Posunout o {time} (nastavitelné v Nastavení › Vzhled) ¦ Hoppa fram {time} (ställs in i Inställningar › Utseende) ¦ Spring {time} frem (kan justeres i Indstillinger › Udseende)
+Suivi sur {n} positions. ¦ Sledováno v {n} polohách. ¦ Följd över {n} positioner. ¦ Fulgt over {n} positioner.
+(importé) ¦ (importováno) ¦ (importerad) ¦ (importeret)
+Durée souhaitée ¦ Požadovaná délka ¦ Önskad längd ¦ Ønsket længde
+Mettre les sources dans les notes ¦ Dát prameny do poznámek ¦ Lägg källorna i anteckningarna ¦ Læg kilderne i noterne
+⇥ durée = voix ¦ ⇥ délka = hlas ¦ ⇥ längd = röst ¦ ⇥ længde = stemme
+Ajoute des photos, un titre, une carte, ou laisse « ✨ Récit d’une vie » tout préparer. Tu peux aussi glisser des photos ici. ¦ Přidej fotky, název, mapu, nebo nech „✨ Vyprávění o životě“ vše připravit. Fotky sem můžeš i přetáhnout. ¦ Lägg till foton, en titel, en karta, eller låt ”✨ Livsberättelse” förbereda allt. Du kan också släppa foton här. ¦ Tilføj fotos, en titel, et kort, eller lad »✨ Livshistorie« forberede det hele. Du kan også trække fotos herhen.
+Ce fichier n’est pas un diaporama exporté par LCNDA (⤓ Exporter → 💾 Fichier). ¦ Tento soubor není prezentace exportovaná z LCNDA (⤓ Exportovat → 💾 Soubor). ¦ Filen är inte ett bildspel exporterat av LCNDA (⤓ Exportera → 💾 Fil). ¦ Filen er ikke et diasshow eksporteret af LCNDA (⤓ Eksportér → 💾 Fil).
+Ce que raconte cette diapositive… ¦ Co vypráví tento snímek… ¦ Vad bilden berättar… ¦ Hvad dette dias fortæller…
+Changer la photo ¦ Změnit fotku ¦ Byt foto ¦ Skift foto
+🖼️ Changer la photo ¦ 🖼️ Změnit fotku ¦ 🖼️ Byt foto ¦ 🖼️ Skift foto
+Choisis d’abord une personne. ¦ Nejdřív vyber osobu. ¦ Välj först en person. ¦ Vælg først en person.
+Couleur du trajet ¦ Barva trasy ¦ Färg på rutten ¦ Rutens farve
+Glisse des photos ou un son. ¦ Přetáhni sem fotky nebo zvuk. ¦ Släpp foton eller ett ljud. ¦ Træk fotos eller en lyd herhen.
+Glisser vers la droite ¦ Posun doprava ¦ Panorera åt höger ¦ Panorér til højre
+Glisser vers la gauche ¦ Posun doleva ¦ Panorera åt vänster ¦ Panorér til venstre
+Zoom arrière lent ¦ Pomalé oddálení ¦ Långsam utzoomning ¦ Langsom udzoomning
+La fenêtre des médias n’est pas encore prête. ¦ Okno médií ještě není připravené. ¦ Mediefönstret är inte redo än. ¦ Medievinduet er ikke klar endnu.
+Les dernières modifications du diaporama seront perdues. ¦ Poslední změny prezentace se ztratí. ¦ De senaste ändringarna i bildspelet går förlorade. ¦ De seneste ændringer i diasshowet går tabt.
+Les photos du récit ¦ Fotky vyprávění ¦ Berättelsens foton ¦ Fortællingens fotos
+Légendes ¦ Popisky ¦ Bildtexter ¦ Billedtekster
+Personnes sous chaque photo ¦ Osoby pod každou fotkou ¦ Personer under varje foto ¦ Personer under hvert foto
+Place du texte ¦ Umístění textu ¦ Textens placering ¦ Tekstens placering
+Police des textes ¦ Písmo textů ¦ Texternas teckensnitt ¦ Teksternes skrifttype
+Prendre ce son ¦ Použít tento zvuk ¦ Använd det här ljudet ¦ Brug denne lyd
+RÉCIT D’UNE VIE ¦ VYPRÁVĚNÍ O ŽIVOTĚ ¦ LIVSBERÄTTELSE ¦ LIVSHISTORIE
+Récit d’une vie ¦ Vyprávění o životě ¦ Livsberättelse ¦ Livshistorie
+✨ Récit d’une vie ¦ ✨ Vyprávění o životě ¦ ✨ Livsberättelse ¦ ✨ Livshistorie
+✨ Récit d’une vie : un diaporama tout fait à partir de la fiche d’une personne ¦ ✨ Vyprávění o životě: hotová prezentace z karty osoby ¦ ✨ Livsberättelse: ett färdigt bildspel utifrån en persons post ¦ ✨ Livshistorie: et færdigt diasshow ud fra en persons post
+Un diaporama tout fait à partir de la fiche d’une personne ¦ Hotová prezentace z karty osoby ¦ Ett färdigt bildspel utifrån en persons post ¦ Et færdigt diasshow ud fra en persons post
+Selon les textes ¦ Podle textů ¦ Efter texterna ¦ Efter teksterne
+Une musique ¦ Hudba ¦ Musik ¦ Musik
+Une photo par page ¦ Jedna fotka na stránku ¦ Ett foto per sida ¦ Ét foto pr. side
+Une photo ronde au-dessus du titre ¦ Kulatá fotka nad názvem ¦ Ett runt foto ovanför titeln ¦ Et rundt foto over titlen
+Une photo ronde au-dessus du titre… ¦ Kulatá fotka nad názvem… ¦ Ett runt foto ovanför titeln… ¦ Et rundt foto over titlen…
+Une présentation ou un diaporama ? ¦ Přednáška, nebo prezentace fotek? ¦ En presentation eller ett bildspel? ¦ En præsentation eller et diasshow?
+Une voix, un son ¦ Hlas, zvuk ¦ En röst, ett ljud ¦ En stemme, en lyd
+Vidéo téléchargée. ¦ Video staženo. ¦ Video nedladdad. ¦ Video hentet.
+cette diapositive ¦ tento snímek ¦ den här bilden ¦ dette dias
+retirer la voix ¦ odebrat hlas ¦ ta bort rösten ¦ fjern stemmen
+✨ Préparation du récit… ¦ ✨ Připravuji vyprávění… ¦ ✨ Förbereder berättelsen… ¦ ✨ Forbereder fortællingen…
+🎙 Enregistrer ma voix ¦ 🎙 Nahrát můj hlas ¦ 🎙 Spela in min röst ¦ 🎙 Optag min stemme
+🎤 En faire une présentation… ¦ 🎤 Udělat z toho přednášku… ¦ 🎤 Gör en presentation av det… ¦ 🎤 Lav det til en præsentation…
+🖼 Choisir les photos… ¦ 🖼 Vybrat fotky… ¦ 🖼 Välj fotona… ¦ 🖼 Vælg fotoene…
+Format de l’image (16:9 pour un écran, 9:16 pour un téléphone) ¦ Formát obrazu (16:9 pro obrazovku, 9:16 pro telefon) ¦ Bildformat (16:9 för en skärm, 9:16 för en telefon) ¦ Billedformat (16:9 til en skærm, 9:16 til en telefon)
+Exporter : vidéo, images, PDF, impression, fichier ¦ Export: video, obrázky, PDF, tisk, soubor ¦ Exportera: video, bilder, PDF, utskrift, fil ¦ Eksport: video, billeder, PDF, udskrift, fil
+Ajouter un titre ¦ Přidat název ¦ Lägg till en titel ¦ Tilføj en titel
+Ajouter une carte (trajet) ¦ Přidat mapu (trasa) ¦ Lägg till en karta (rutt) ¦ Tilføj et kort (rute)
+Ajouter une carte ¦ Přidat mapu ¦ Lägg till en karta ¦ Tilføj et kort
+＋ Carte (trajet) ¦ ＋ Mapa (trasa) ¦ ＋ Karta (rutt) ¦ ＋ Kort (rute)
+Regarder en plein écran (Échap pour revenir) ¦ Sledovat na celé obrazovce (Esc pro návrat) ¦ Titta i helskärm (Esc för att komma tillbaka) ¦ Se i fuld skærm (Esc for at komme tilbage)
+Avancer dans le diaporama ¦ Posouvat se prezentací ¦ Bläddra i bildspelet ¦ Bladr i diasshowet
+Choisis une diapositive (à gauche) pour régler sa durée, sa transition, son texte, sa voix. ¦ Vyber snímek (vlevo) a nastav jeho délku, přechod, text a hlas. ¦ Välj en bild (till vänster) för att ställa in längd, övergång, text och röst. ¦ Vælg et dias (til venstre) for at indstille længde, overgang, tekst og stemme.
+🎞️ Tout le diaporama ¦ 🎞️ Celá prezentace ¦ 🎞️ Hela bildspelet ¦ 🎞️ Hele diasshowet
+La police de tous les titres et légendes. Sans choix, c’est celle du style (Classique, Album ancien…). ¦ Písmo všech nadpisů a popisků. Bez výběru je to písmo stylu (Klasický, Staré album…). ¦ Teckensnittet för alla titlar och bildtexter. Utan val är det stilens (Klassisk, Gammalt album…). ¦ Skrifttypen for alle titler og billedtekster. Uden valg er det stilens (Klassisk, Gammelt album…).
+Une musique de fond, prise dans les sons des médias ¦ Hudba na pozadí, vzatá ze zvuků v médiích ¦ Bakgrundsmusik, hämtad bland ljuden i medierna ¦ Baggrundsmusik, hentet blandt lydene i medierne
+Une présentation façon Keynote faite de ces diapositives (textes, formes, animations, mode présentateur…) ; le diaporama reste tel quel ¦ Přednáška ve stylu Keynote z těchto snímků (texty, tvary, animace, režim přednášejícího…); prezentace fotek zůstane, jak je ¦ En presentation i Keynote-stil gjord av bilderna (texter, former, animationer, presentatörsläge…); bildspelet förblir som det är ¦ En præsentation i Keynote-stil lavet af disse dias (tekster, former, animationer, præsentationstilstand…); diasshowet forbliver, som det er
+Clic sur une diapositive : la régler à droite · glisse-les pour les ranger · Espace : lire ¦ Klik na snímek: nastav ho vpravo · přetažením je seřadíš · Mezerník: přehrát ¦ Klicka på en bild: ställ in den till höger · dra för att ordna dem · Mellanslag: spela ¦ Klik på et dias: indstil det til højre · træk for at ordne dem · Mellemrum: afspil
+Album ancien ¦ Staré album ¦ Gammalt album ¦ Gammelt album
+Clair ¦ Světlý ¦ Ljus ¦ Lys
+Lire / pause ¦ Přehrát / pauza ¦ Spela / paus ¦ Afspil / pause
+Lire ¦ Přehrát ¦ Spela ¦ Afspil
+Regarder ¦ Sledovat ¦ Titta ¦ Se
+📺 Regarder ¦ 📺 Sledovat ¦ 📺 Titta ¦ 📺 Se
+Musique de fond ¦ Hudba na pozadí ¦ Bakgrundsmusik ¦ Baggrundsmusik
+🎵 Musique ¦ 🎵 Hudba ¦ 🎵 Musik ¦ 🎵 Musik
+🎵 Musique de fond (facultatif) ¦ 🎵 Hudba na pozadí (nepovinné) ¦ 🎵 Bakgrundsmusik (valfritt) ¦ 🎵 Baggrundsmusik (valgfri)
+=diapositive ¦ snímek|snímky|snímků ¦ bild|bilder ¦ dias|dias
+Choisis une personne : un diaporama se prépare tout seul avec sa fiche (naissance, baptême, mariage, enfants, métiers, recensements, déménagements, décès, sépulture), ses photos, ses lieux sur une carte. Une information absente ne donne pas de diapositive ; tout reste modifiable ensuite. ¦ Vyber osobu: prezentace se sama připraví z její karty (narození, křest, sňatek, děti, povolání, sčítání lidu, stěhování, úmrtí, pohřeb), fotek a míst na mapě. Chybějící údaj snímek nevytvoří; vše se dá potom změnit. ¦ Välj en person: ett bildspel förbereds av sig självt utifrån posten (födelse, dop, vigsel, barn, yrken, folkräkningar, flyttar, död, begravning), fotona och orterna på en karta. Saknade uppgifter ger ingen bild; allt kan ändras efteråt. ¦ Vælg en person: et diasshow forberedes af sig selv ud fra posten (fødsel, dåb, vielse, børn, erhverv, folketællinger, flytninger, død, begravelse), fotoene og stederne på et kort. Manglende oplysninger giver intet dias; alt kan ændres bagefter.
+Le récit prend à peu près cette durée : chaque diapositive grandit ou rétrécit un peu. « Selon les textes » laisse le temps de lire. ¦ Vyprávění zabere zhruba tuto dobu: každý snímek se trochu prodlouží nebo zkrátí. „Podle textů“ nechá čas na čtení. ¦ Berättelsen tar ungefär så lång tid: varje bild blir lite längre eller kortare. ”Efter texterna” ger tid att läsa. ¦ Fortællingen varer cirka så længe: hvert dias bliver lidt længere eller kortere. »Efter teksterne« giver tid til at læse.
+Aucune photo : le récit sera fait de titres et de cartes. ¦ Žádná fotka: vyprávění bude z nadpisů a map. ¦ Inget foto: berättelsen görs av titlar och kartor. ¦ Intet foto: fortællingen laves af titler og kort.
+Inclure les frères et sœurs ¦ Zahrnout sourozence ¦ Ta med syskon ¦ Medtag søskende
+Les sources de chaque événement (titre, page) sont écrites dans les notes de sa diapositive : on les voit en modifiant, pas pendant la lecture. ¦ Prameny každé události (název, stránka) jsou zapsané v poznámkách jejího snímku: vidíš je při úpravách, ne při přehrávání. ¦ Källorna för varje händelse (titel, sida) står i bildens anteckningar: du ser dem när du redigerar, inte under uppspelningen. ¦ Kilderne til hver begivenhed (titel, side) står i diassets noter: du ser dem, når du redigerer, ikke under afspilningen.
+Ajouter les événements historiques de l’époque ¦ Přidat historické události doby ¦ Lägg till tidens historiska händelser ¦ Tilføj tidens historiske begivenheder
+Les épidémies, guerres et grands hivers que l’app connaît (Listes → Épidémies, guerres, hivers) et qui ont eu lieu pendant sa vie. ¦ Epidemie, války a kruté zimy, které aplikace zná (Seznamy → Epidemie, války, zimy) a které proběhly během jejího života. ¦ Epidemier, krig och stränga vintrar som appen känner till (Listor → Epidemier, krig, vintrar) och som inträffade under personens liv. ¦ Epidemier, krige og strenge vintre, som appen kender (Lister → Epidemier, krige, vintre), og som fandt sted i personens levetid.
+Le texte du bloc « 📖 Biographie » de la fiche (ta version si tu l’as modifiée), en version courte, sur une diapositive. ¦ Text bloku „📖 Životopis“ z karty (tvoje verze, pokud jsi ji upravil), ve zkrácené podobě, na jednom snímku. ¦ Texten i postens block ”📖 Biografi” (din version om du har ändrat den), i kort form, på en bild. ¦ Teksten i postens blok »📖 Biografi« (din version, hvis du har ændret den), i kort form, på ét dias.
+Créer le récit ¦ Vytvořit vyprávění ¦ Skapa berättelsen ¦ Opret fortællingen
+DIAPORAMA ¦ PREZENTACE ¦ BILDSPEL ¦ DIASSHOW
+Environ 1 minute ¦ Asi 1 minuta ¦ Cirka 1 minut ¦ Cirka 1 minut
+Environ 2 minutes ¦ Asi 2 minuty ¦ Cirka 2 minuter ¦ Cirka 2 minutter
+Environ 3 minutes ¦ Asi 3 minuty ¦ Cirka 3 minuter ¦ Cirka 3 minutter
+Environ 5 minutes ¦ Asi 5 minut ¦ Cirka 5 minuter ¦ Cirka 5 minutter
+Environ 8 minutes ¦ Asi 8 minut ¦ Cirka 8 minuter ¦ Cirka 8 minutter
+Environ 10 minutes ¦ Asi 10 minut ¦ Cirka 10 minuter ¦ Cirka 10 minutter
+Choisir un son… ¦ Vybrat zvuk… ¦ Välj ett ljud… ¦ Vælg en lyd…
+Ajouter sa biographie (📖) ¦ Přidat životopis (📖) ¦ Lägg till biografin (📖) ¦ Tilføj biografien (📖)
+🎯 Suivre ce qui bouge ¦ 🎯 Sledovat, co se hýbe ¦ 🎯 Följ det som rör sig ¦ 🎯 Følg det, der bevæger sig
+✕ Ne plus suivre ¦ ✕ Přestat sledovat ¦ ✕ Sluta följa ¦ ✕ Stop med at følge
+🎥 Plusieurs caméras ¦ 🎥 Více kamer ¦ 🎥 Flera kameror ¦ 🎥 Flere kameraer
+Synchroniser et monter ¦ Synchronizovat a stříhat ¦ Synkronisera och redigera ¦ Synkronisér og redigér
+quand quelqu’un parle plus près d’une autre caméra ¦ když někdo mluví blíž k jiné kameře ¦ när någon talar närmare en annan kamera ¦ når nogen taler tættere på et andet kamera
+Lecture des sons… ¦ Čtu zvuky… ¦ Läser ljuden… ¦ Læser lydene…
+dédié à {who} ¦ věnováno {who} ¦ tillägnad {who} ¦ tilegnet {who}
+Pas encore de {what} pour ce soir ¦ Pro tento večer zatím nic: {what} ¦ Ingen {what} för den här kvällen än ¦ Ingen {what} for denne aften endnu
+Note les titres dans l’ordre, avec les rappels, les reprises, les invités… ou copie la setlist d’un autre soir. ¦ Zapiš skladby v pořadí, s přídavky, převzatými písněmi, hosty… nebo zkopíruj setlist z jiného večera. ¦ Skriv titlarna i ordning, med extranummer, covers, gäster… eller kopiera setlistan från en annan kväll. ¦ Skriv titlerne i rækkefølge med ekstranumre, covernumre, gæster… eller kopiér sætlisten fra en anden aften.
+La sorte de ce soir ¦ Druh dnešního večera ¦ Kvällens typ ¦ Aftenens type
+En faire : {what} (la setlist s’adapte) ¦ Udělat z toho: {what} (setlist se přizpůsobí) ¦ Gör det till: {what} (setlistan anpassas) ¦ Gør det til: {what} (sætlisten tilpasses)
+{n} prévues ¦ Plánováno: {n} ¦ {n} planerade ¦ {n} planlagt
+d’après {what} ¦ podle {what} ¦ efter {what} ¦ efter {what}
+{what} à la setlist. ¦ {what} do setlistu. ¦ {what} till setlistan. ¦ {what} til sætlisten.
+{what} depuis « {name} ». ¦ {what} z „{name}“. ¦ {what} från ”{name}”. ¦ {what} fra »{name}«.
+=ligne ajoutée ¦ přidaný řádek|přidané řádky|přidaných řádků ¦ rad tillagd|rader tillagda ¦ linje tilføjet|linjer tilføjet
+=ligne copiée ¦ zkopírovaný řádek|zkopírované řádky|zkopírovaných řádků ¦ rad kopierad|rader kopierade ¦ linje kopieret|linjer kopieret
+Setlist de « {name} » copiée ({what}) ¦ Setlist z „{name}“ zkopírován ({what}) ¦ Setlistan från ”{name}” kopierad ({what}) ¦ Sætlisten fra »{name}« kopieret ({what})
+Ce soir devient : {what} ¦ Tento večer je teď: {what} ¦ Kvällen blir: {what} ¦ Aftenen bliver: {what}
+{n} enregistrements « en public » ajoutés aux morceaux ¦ Ke skladbám přidány živé nahrávky: {n} ¦ {n} liveinspelningar tillagda till låtarna ¦ {n} liveoptagelser tilføjet til numrene
+1 enregistrement « en public » ajouté au morceau ¦ 1 živá nahrávka přidána ke skladbě ¦ 1 liveinspelning tillagd till låten ¦ 1 liveoptagelse tilføjet til nummeret
+{n} enregistrements « en public » déjà tirés de ce soir. ¦ Živých nahrávek už z tohoto večera vzato: {n}. ¦ {n} liveinspelningar redan hämtade från den här kvällen. ¦ {n} liveoptagelser allerede hentet fra denne aften.
+1 enregistrement « en public » déjà tiré de ce soir. ¦ 1 živá nahrávka už z tohoto večera vzata. ¦ 1 liveinspelning redan hämtad från den här kvällen. ¦ 1 liveoptagelse allerede hentet fra denne aften.
+→ En faire des enregistrements « en public » des morceaux ({n}) ¦ → Udělat z toho živé nahrávky skladeb ({n}) ¦ → Gör liveinspelningar av låtarna ({n}) ¦ → Lav liveoptagelser af numrene ({n})
+→ En faire un enregistrement « en public » du morceau ({n}) ¦ → Udělat z toho živou nahrávku skladby ({n}) ¦ → Gör en liveinspelning av låten ({n}) ¦ → Lav en liveoptagelse af nummeret ({n})
+« {name} » ajouté au catalogue ({what}). ¦ „{name}“ přidáno do katalogu ({what}). ¦ ”{name}” tillagd i katalogen ({what}). ¦ »{name}« tilføjet til kataloget ({what}).
+Aucun lieu de ta base pour ces soirs ({what} sans lieu choisi dans la base). ¦ Žádné místo z tvé databáze pro tyto večery ({what} bez místa vybraného z databáze). ¦ Ingen ort ur din databas för de här kvällarna ({what} utan ort vald ur databasen). ¦ Intet sted fra din database til disse aftener ({what} uden sted valgt fra databasen).
+Aucun lieu de ta base pour ces soirs. ¦ Žádné místo z tvé databáze pro tyto večery. ¦ Ingen ort ur din databas för de här kvällarna. ¦ Intet sted fra din database til disse aftener.
+{what} sans coordonnées ¦ {what} bez souřadnic ¦ {what} utan koordinater ¦ {what} uden koordinater
+{what} sans lieu de ta base ¦ {what} bez místa z tvé databáze ¦ {what} utan ort ur din databas ¦ {what} uden sted fra din database
+=soir ¦ večer|večery|večerů ¦ kväll|kvällar ¦ aften|aftener
+🔝 {what} les plus joués ¦ 🔝 Nejhranější: {what} ¦ 🔝 Mest spelade {what} ¦ 🔝 Mest spillede {what}
+{what} par soir ¦ {what} za večer ¦ {what} per kväll ¦ {what} pr. aften
+{n} en moyenne ¦ v průměru {n} ¦ {n} i genomsnitt ¦ {n} i gennemsnit
+{what} mais jamais sur scène, et {other} : ¦ {what}, ale nikdy na pódiu, a {other}: ¦ {what} men aldrig på scen, och {other}: ¦ {what}, men aldrig på scenen, og {other}:
+{what} mais jamais sur scène : ¦ {what}, ale nikdy na pódiu: ¦ {what} men aldrig på scen: ¦ {what}, men aldrig på scenen:
+{what} jamais dans une setlist : ¦ {what} nikdy v setlistu: ¦ {what} aldrig i en setlista: ¦ {what} aldrig på en sætliste:
+=morceau enregistré ¦ nahraná skladba|nahrané skladby|nahraných skladeb ¦ inspelad låt|inspelade låtar ¦ indspillet nummer|indspillede numre
+=autre fiche ¦ jiná karta|jiné karty|jiných karet ¦ annan post|andra poster ¦ anden post|andre poster
+… et {n} de plus ¦ … a dalších {n} ¦ … och {n} till ¦ … og {n} mere
+✓ Profil « {name} » coché : ses sections sont sur sa page. ¦ ✓ Profil „{name}“ zaškrtnut: jeho oddíly jsou na jeho stránce. ¦ ✓ Profilen ”{name}” ikryssad: dess avsnitt finns på personens sida. ¦ ✓ Profilen »{name}« afkrydset: dens sektioner er på personens side.
+Aucun épisode n° {a} à {b} dans cette saison. ¦ V této řadě není epizoda č. {a} až {b}. ¦ Inget avsnitt nr {a} till {b} i den här säsongen. ¦ Intet afsnit nr. {a} til {b} i denne sæson.
+Aucun épisode n° {a} dans cette saison. ¦ V této řadě není epizoda č. {a}. ¦ Inget avsnitt nr {a} i den här säsongen. ¦ Intet afsnit nr. {a} i denne sæson.
+＋ Nouveau concert ou représentation ¦ ＋ Nový koncert nebo představení ¦ ＋ Ny konsert eller föreställning ¦ ＋ Ny koncert eller forestilling
+Chercher… (ville, salle, morceau joué, tournée, personne) ¦ Hledat… (město, sál, zahraná skladba, turné, osoba) ¦ Sök… (stad, lokal, spelad låt, turné, person) ¦ Søg… (by, sal, spillet nummer, turné, person)
+Aucun concert ni spectacle pour l’instant ¦ Zatím žádný koncert ani představení ¦ Inga konserter eller föreställningar än ¦ Ingen koncerter eller forestillinger endnu
+Un soir = une fiche : la date, le lieu, la setlist (titres, rappels, reprises, invités), qui était sur scène et dans la salle. ¦ Jeden večer = jedna karta: datum, místo, setlist (skladby, přídavky, převzaté písně, hosté), kdo byl na pódiu a v sále. ¦ En kväll = en post: datum, ort, setlista (titlar, extranummer, covers, gäster), vem som stod på scenen och satt i salongen. ¦ Én aften = én post: dato, sted, sætliste (titler, ekstranumre, covernumre, gæster), hvem der var på scenen og i salen.
+Concert ou représentation ¦ Koncert nebo představení ¦ Konsert eller föreställning ¦ Koncert eller forestilling
+Concerts et représentations ¦ Koncerty a představení ¦ Konserter och föreställningar ¦ Koncerter og forestillinger
+=concert ou représentation ¦ koncert nebo představení|koncerty nebo představení|koncertů nebo představení ¦ konsert eller föreställning|konserter eller föreställningar ¦ koncert eller forestilling|koncerter eller forestillinger
+Spectacle d’humour ¦ Komediální vystoupení ¦ Komikershow ¦ Comedyshow
+Scènes jouées ¦ Zahrané scény ¦ Spelade scener ¦ Spillede scener
+Concert d’orchestre ¦ Orchestrální koncert ¦ Orkesterkonsert ¦ Orkesterkoncert
+Début d’une partie ¦ Začátek části ¦ Början på en del ¦ Begyndelsen på en del
+Bande, intro enregistrée ¦ Páska, nahrané intro ¦ Band, inspelat intro ¦ Bånd, indspillet intro
+Dernière fois ¦ Naposledy ¦ Senaste gången ¦ Sidste gang
+Reprise, invités, dédicace, 1re fois, durée… ¦ Převzatá píseň, hosté, věnování, poprvé, délka… ¦ Cover, gäster, dedikation, 1:a gången, längd… ¦ Covernummer, gæster, dedikation, 1. gang, længde…
+＋ Un rappel ¦ ＋ Přídavek ¦ ＋ Ett extranummer ¦ ＋ Et ekstranummer
+📋 Coller une liste ¦ 📋 Vložit seznam ¦ 📋 Klistra in en lista ¦ 📋 Indsæt en liste
+📋 Copier la setlist d’un autre soir ¦ 📋 Zkopírovat setlist z jiného večera ¦ 📋 Kopiera setlistan från en annan kväll ¦ 📋 Kopiér sætlisten fra en anden aften
+Copier la setlist d’un autre soir ¦ Zkopírovat setlist z jiného večera ¦ Kopiera setlistan från en annan kväll ¦ Kopiér sætlisten fra en anden aften
+inachevé ¦ nedokončeno ¦ ofullbordad ¦ ufuldendt
+Nouvelle partie ¦ Nová část ¦ Ny del ¦ Ny del
+critique positive ¦ pozitivní kritika ¦ positiv recension ¦ positiv anmeldelse
+critique négative ¦ negativní kritika ¦ negativ recension ¦ negativ anmeldelse
+neutre ¦ neutrální ¦ neutral ¦ neutral
+Église, chapelle ¦ Kostel, kaple ¦ Kyrka, kapell ¦ Kirke, kapel
+Bal, salle des fêtes ¦ Taneční zábava, společenský sál ¦ Dans, festlokal ¦ Bal, forsamlingshus
+Café, cabaret ¦ Kavárna, kabaret ¦ Kafé, kabaré ¦ Café, kabaret
+Soirée privée ¦ Soukromý večer ¦ Privat kväll ¦ Privat aften
+Festival, fête ¦ Festival, slavnost ¦ Festival, fest ¦ Festival, fest
+création du rôle ¦ první ztvárnění role ¦ rollen skapad ¦ rollen skabt
+Création du rôle ¦ První ztvárnění role ¦ Rollen skapad ¦ Rollen skabt
+chef d’orchestre ¦ dirigent ¦ dirigent ¦ dirigent
+Un ou une soliste ¦ Sólista nebo sólistka ¦ En solist ¦ En solist
+Une personne dans la salle ¦ Osoba v sále ¦ En person i publiken ¦ En person i salen
+🎭 Ce soir-là, au théâtre ¦ 🎭 Toho večera v divadle ¦ 🎭 Den kvällen, på teatern ¦ 🎭 Den aften, i teatret
+Rôles du soir ¦ Role večera ¦ Kvällens roller ¦ Aftenens roller
+Titulaire ou remplaçant ¦ Stálý obsazení nebo záskok ¦ Ordinarie eller ersättare ¦ Fast eller afløser
+La soirée ¦ Večer ¦ Kvällen ¦ Aftenen
+Joué ¦ Zahráno ¦ Spelad ¦ Spillet
+La tournée ¦ Turné ¦ Turnén ¦ Turnéen
+Dates prévues ¦ Plánovaná data ¦ Planerade datum ¦ Planlagte datoer
+Les dates ¦ Data ¦ Datumen ¦ Datoerne
+📅 Les dates ¦ 📅 Data ¦ 📅 Datumen ¦ 📅 Datoerne
+＋ Ajouter une date ¦ ＋ Přidat datum ¦ ＋ Lägg till ett datum ¦ ＋ Tilføj en dato
+＋ Ajouter une représentation ¦ ＋ Přidat představení ¦ ＋ Lägg till en föreställning ¦ ＋ Tilføj en forestilling
+Chanson parlée, poème dit ¦ Mluvená píseň, recitovaná báseň ¦ Talad sång, uppläst dikt ¦ Talt sang, reciteret digt
+Sketch, numéro, scène ¦ Skeč, číslo, scéna ¦ Sketch, nummer, scen ¦ Sketch, nummer, scene
+Sketches, numéros, scènes ¦ Skeče, čísla, scény ¦ Sketcher, nummer, scener ¦ Sketcher, numre, scener
+Écrit, créé ¦ Napsáno, vytvořeno ¦ Skriven, skapad ¦ Skrevet, skabt
+Tiré de ¦ Převzato z ¦ Hämtad från ¦ Hentet fra
+Son ou vidéo ¦ Zvuk nebo video ¦ Ljud eller video ¦ Lyd eller video
+Carte indisponible. ¦ Mapa není k dispozici. ¦ Kartan är inte tillgänglig. ¦ Kortet er ikke tilgængeligt.
+Avec une setlist ¦ Se setlistem ¦ Med en setlista ¦ Med en sætliste
+Avec une captation ¦ Se záznamem ¦ Med en inspelning ¦ Med en optagelse
+Avec une 1re fois ¦ S premiérou ¦ Med en första gång ¦ Med en første gang
+Avec un remplacement ¦ Se záskokem ¦ Med en ersättare ¦ Med en afløser
+Avec ce titre joué ¦ S touto zahranou skladbou ¦ Med den här titeln spelad ¦ Med denne titel spillet
+Joué ce soir-là ¦ Zahráno toho večera ¦ Spelad den kvällen ¦ Spillet den aften
+Carte des lieux… ¦ Mapa míst… ¦ Karta över orterna… ¦ Kort over stederne…
+🗺 Carte des lieux ¦ 🗺 Mapa míst ¦ 🗺 Karta över orterna ¦ 🗺 Kort over stederne
+hors tournée ¦ mimo turné ¦ utanför turné ¦ uden for turné
+Dernière ¦ Poslední ¦ Sista ¦ Sidste
+Moins ↑ ¦ Méně ↑ ¦ Färre ↑ ¦ Færre ↑
+Soirs par année ¦ Večery za rok ¦ Kvällar per år ¦ Aftener pr. år
+📅 Soirs par année ¦ 📅 Večery za rok ¦ 📅 Kvällar per år ¦ 📅 Aftener pr. år
+Durée moyenne ¦ Průměrná délka ¦ Genomsnittlig längd ¦ Gennemsnitlig længde
+Ville la plus visitée ¦ Nejnavštěvovanější město ¦ Mest besökta stad ¦ Mest besøgte by
+🚌 Setlist type d’une tournée ¦ 🚌 Typický setlist turné ¦ 🚌 Typisk setlista för en turné ¦ 🚌 Typisk sætliste for en turné
+Choisis une tournée. ¦ Vyber turné. ¦ Välj en turné. ¦ Vælg en turné.
+Choisis deux soirs différents. ¦ Vyber dva různé večery. ¦ Välj två olika kvällar. ¦ Vælg to forskellige aftener.
+Cinéma ¦ Kino ¦ Bio ¦ Biograf
+Au générique ¦ V titulcích ¦ I eftertexterna ¦ I rulleteksterne
+Pas au générique ¦ Ne v titulcích ¦ Inte i eftertexterna ¦ Ikke i rulleteksterne
+Tournage, période ¦ Natáčení, období ¦ Inspelning, period ¦ Optagelse, periode
+🎭 Au théâtre ¦ 🎭 V divadle ¦ 🎭 På teatern ¦ 🎭 I teatret
+Théâtres, salles ¦ Divadla, sály ¦ Teatrar, lokaler ¦ Teatre, sale
+Un théâtre ¦ Divadlo ¦ En teater ¦ Et teater
+Théâtre, salle ¦ Divadlo, sál ¦ Teater, lokal ¦ Teater, sal
+Un remplacement ¦ Záskok ¦ En ersättning ¦ En afløsning
+📺 Télévision, radio ¦ 📺 Televize, rozhlas ¦ 📺 Tv, radio ¦ 📺 Tv, radio
+Voix française de ¦ Francouzský hlas ¦ Fransk röst för ¦ Fransk stemme til
+Un ou une partenaire ¦ Partner nebo partnerka ¦ En partner ¦ En partner
+Prix et nominations ¦ Ceny a nominace ¦ Priser och nomineringar ¦ Priser og nomineringer
+Œuvre A → Z ¦ Dílo A → Z ¦ Verk A → Ö ¦ Værk A → Å
+Fiches « Rôle » ¦ Karty „Role“ ¦ ”Roll”-poster ¦ »Rolle«-poster
+Films du catalogue ¦ Filmy z katalogu ¦ Filmer i katalogen ¦ Film i kataloget
+Cités dans d’autres catalogues ¦ Citované v jiných katalozích ¦ Citerade i andra kataloger ¦ Citeret i andre kataloger
+Crédit ¦ Zásluha ¦ Medverkan ¦ Kredit
+RÔLE ¦ ROLE ¦ ROLL ¦ ROLLE
+＋ En faire une fiche rôle détaillée ¦ ＋ Udělat z toho podrobnou kartu role ¦ ＋ Gör en detaljerad rollpost av det ¦ ＋ Lav det til en detaljeret rollepost
+D’où vient la ligne ¦ Odkud řádek pochází ¦ Varifrån raden kommer ¦ Hvor linjen kommer fra
+Chercher un rôle, un film, un partenaire… ¦ Hledat roli, film, partnera… ¦ Sök en roll, en film, en partner… ¦ Søg efter en rolle, en film, en partner…
+Profil d’acteur ¦ Profil herce ¦ Skådespelarprofil ¦ Skuespillerprofil
+Débuts ¦ Začátky ¦ Debut ¦ Debut
+Une école, un cours ¦ Škola, kurz ¦ En skola, en kurs ¦ En skole, et kursus
+École, conservatoire, cours ¦ Škola, konzervatoř, kurz ¦ Skola, konservatorium, kurs ¦ Skole, konservatorium, kursus
+Prix, diplôme ¦ Cena, diplom ¦ Pris, diplom ¦ Pris, diplom
+Un agent ¦ Agent ¦ En agent ¦ En agent
+Une troupe ¦ Soubor ¦ En trupp ¦ Et ensemble
+Troupe, théâtre ¦ Soubor, divadlo ¦ Trupp, teater ¦ Ensemble, teater
+Un casting ¦ Konkurz ¦ En provspelning ¦ En audition
+Rôle visé ¦ Hledaná role ¦ Eftersökt roll ¦ Ønsket rolle
+pas obtenu ¦ nezískáno ¦ inte erhållen ¦ ikke opnået
+Compétences, physique, voix ¦ Dovednosti, vzhled, hlas ¦ Färdigheter, utseende, röst ¦ Færdigheder, udseende, stemme
+Tout voir, trier ¦ Zobrazit vše, seřadit ¦ Se allt, sortera ¦ Se alt, sortér
+Aucune série, aucun téléfilm. ¦ Žádný seriál, žádný televizní film. ¦ Ingen serie, ingen tv-film. ¦ Ingen serie, ingen tv-film.
+Théâtrographie ¦ Divadelní role ¦ Teaterroller ¦ Teaterroller
+Aucun rôle au théâtre. ¦ Žádná divadelní role. ¦ Ingen teaterroll. ¦ Ingen teaterrolle.
+Aucune voix. ¦ Žádný dabing. ¦ Ingen röstroll. ¦ Ingen stemmerolle.
+Publicité et mannequinat ¦ Reklama a modeling ¦ Reklam och modellarbete ¦ Reklame og modelarbejde
+Aucune publicité. ¦ Žádná reklama. ¦ Ingen reklam. ¦ Ingen reklame.
+Aucun clip. ¦ Žádný videoklip. ¦ Ingen musikvideo. ¦ Ingen musikvideo.
+=casting noté ¦ zaznamenaný konkurz|zaznamenané konkurzy|zaznamenaných konkurzů ¦ provspelning noterad|provspelningar noterade ¦ audition noteret|auditions noteret
+Aucun casting noté. ¦ Žádný zaznamenaný konkurz. ¦ Ingen provspelning noterad. ¦ Ingen audition noteret.
+Les statistiques viennent des rôles notés. ¦ Statistiky vycházejí ze zaznamenaných rolí. ¦ Statistiken kommer från de noterade rollerna. ¦ Statistikken kommer fra de noterede roller.
+Rôles par décennie ¦ Role podle desetiletí ¦ Roller per årtionde ¦ Roller pr. årti
+Réalisateurs ¦ Režiséři ¦ Regissörer ¦ Instruktører
+Aucun soir noté. ¦ Žádný zaznamenaný večer. ¦ Ingen kväll noterad. ¦ Ingen aften noteret.
+Feuilleton télévisé ¦ Televizní seriál ¦ Tv-följetong ¦ Tv-føljeton
+Websérie ¦ Webový seriál ¦ Webbserie ¦ Webserie
+Séries et émissions ¦ Seriály a pořady ¦ Serier och program ¦ Serier og programmer
+La série ¦ Seriál ¦ Serien ¦ Serien
+Saisons et épisodes ¦ Řady a epizody ¦ Säsonger och avsnitt ¦ Sæsoner og afsnit
+Durée d’un épisode ¦ Délka epizody ¦ Avsnittets längd ¦ Afsnittets længde
+Qui y a fait quoi ¦ Kdo co dělal ¦ Vem gjorde vad ¦ Hvem gjorde hvad
+Épisodes prévus ¦ Plánované epizody ¦ Planerade avsnitt ¦ Planlagte afsnit
+L’épisode ¦ Epizoda ¦ Avsnittet ¦ Afsnittet
+N° dans la saison ¦ Č. v řadě ¦ Nr i säsongen ¦ Nr. i sæsonen
+N° dans la série ¦ Č. v seriálu ¦ Nr i serien ¦ Nr. i serien
+Un ou une scénariste ¦ Scenárista nebo scenáristka ¦ En manusförfattare ¦ En manuskriptforfatter
+Un invité ¦ Host ¦ En gäst ¦ En gæst
+Rôle ou métier ¦ Role nebo profese ¦ Roll eller yrke ¦ Rolle eller job
+toute la série ¦ celý seriál ¦ hela serien ¦ hele serien
+Chaîne, station, éditeur ¦ Stanice, kanál, vydavatel ¦ Kanal, station, utgivare ¦ Kanal, station, udgiver
+Un créateur, une créatrice ¦ Tvůrce nebo tvůrkyně ¦ En skapare ¦ En skaber
+Comment cette image se mélange avec celle de dessous : « Produit » assombrit, « Superposition claire » éclaircit, « Normal » la pose simplement dessus. ¦ Jak se tento obraz mísí s obrazem pod ním: „Násobit“ ztmaví, „Závoj“ zesvětlí, „Normální“ ho jen položí navrch. ¦ Hur bilden blandas med den under: ”Multiplicera” gör mörkare, ”Raster” gör ljusare, ”Normal” lägger den helt enkelt ovanpå. ¦ Hvordan billedet blandes med det nedenunder: »Multiplicér« gør mørkere, »Skærm« gør lysere, »Normal« lægger det bare ovenpå.
+Un lent mouvement de caméra sur la photo : elle s’approche, s’éloigne ou glisse doucement pendant qu’elle est à l’écran. ¦ Pomalý pohyb kamery po fotce: přibližuje se, vzdaluje nebo jemně klouže, dokud je na obrazovce. ¦ En långsam kamerarörelse över fotot: det kommer närmare, längre bort eller glider mjukt medan det visas. ¦ En langsom kamerabevægelse hen over fotoet: det kommer tættere på, længere væk eller glider blødt, mens det er på skærmen.
+Une image clé fixe un réglage (taille, place, rotation…) à un moment du film ; entre deux images clés, l’image passe de l’une à l’autre, en douceur ou à vitesse régulière. ¦ Klíčový snímek pevně určí nastavení (velikost, polohu, otočení…) v určitém okamžiku filmu; mezi dvěma klíčovými snímky obraz přechází z jednoho do druhého, plynule nebo rovnoměrně. ¦ En nyckelbildruta låser en inställning (storlek, position, rotation…) vid ett ögonblick i filmen; mellan två nyckelbildrutor går bilden från den ena till den andra, mjukt eller med jämn hastighet. ¦ Et nøglebillede fastlåser en indstilling (størrelse, placering, rotation…) på et tidspunkt i filmen; mellem to nøglebilleder går billedet fra det ene til det andet, blødt eller med jævn hastighed.
+« Réduire le souffle » : choisis d’abord un passage où l’on n’entend que le bruit, il sert d’exemple. « Voix plus nette » rend la parole plus claire. « Normaliser » monte le volume au plus fort sans saturer. ¦ „Snížit šum“: nejdřív vyber pasáž, kde je slyšet jen šum, slouží jako vzor. „Jasnější hlas“ zpřehlední řeč. „Normalizovat“ zesílí hlasitost co nejvíc bez zkreslení. ¦ ”Minska bruset”: markera först ett avsnitt där bara bruset hörs, det används som prov. ”Tydligare röst” gör talet klarare. ”Normalisera” höjer volymen så mycket som möjligt utan att det överstyr. ¦ »Reducér suset«: markér først en passage, hvor kun støjen høres, den bruges som prøve. »Klarere stemme« gør talen tydeligere. »Normalisér« hæver lydstyrken mest muligt uden forvrængning.
+Doux : on nettoie peu, la voix reste naturelle. Fort : on enlève plus de bruit, au risque d’un son un peu « métallique ». Écoute avec 👂 Avant / ✨ Après. ¦ Jemný: čistí se málo, hlas zůstane přirozený. Silný: odstraní se víc šumu, ale zvuk může být trochu „kovový“. Poslechni si s 👂 Před / ✨ Po. ¦ Mjuk: lite rensning, rösten förblir naturlig. Stark: mer brus tas bort, med risk för ett något ”metalliskt” ljud. Lyssna med 👂 Före / ✨ Efter. ¦ Blød: der renses lidt, stemmen forbliver naturlig. Stærk: der fjernes mere støj, med risiko for en lidt »metallisk« lyd. Lyt med 👂 Før / ✨ Efter.
+Supprimer ce rush du projet (et ses {n} passages sur la frise) ¦ Smazat tento záběr z projektu (i s jeho úseky na časové ose: {n}) ¦ Radera klippet från projektet (och dess {n} användningar på tidslinjen) ¦ Slet klippet fra projektet (og dets {n} brug på tidslinjen)
+Supprimer ce rush du projet (et son passage sur la frise) ¦ Smazat tento záběr z projektu (i s jeho úsekem na časové ose) ¦ Radera klippet från projektet (och dess användning på tidslinjen) ¦ Slet klippet fra projektet (og dets brug på tidslinjen)
+Supprimer ce rush du projet ¦ Smazat tento záběr z projektu ¦ Radera klippet från projektet ¦ Slet klippet fra projektet
+{time} à l’écran ¦ {time} na obrazovce ¦ {time} på skärmen ¦ {time} på skærmen
+🖼️ Photo de la piste 1 ¦ 🖼️ Fotka ze stopy 1 ¦ 🖼️ Foto på spår 1 ¦ 🖼️ Foto på spor 1
+🎬 Morceau de la piste 1 ¦ 🎬 Úsek ze stopy 1 ¦ 🎬 Segment på spår 1 ¦ 🎬 Segment på spor 1

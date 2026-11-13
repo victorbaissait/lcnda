@@ -1,0 +1,93 @@
+0 HEAD
+1 SOUR Gramps
+2 VERS 5.2.3
+2 NAME Gramps
+1 DATE 2 OCT 2026
+2 TIME 10:00:00
+1 SUBM @SUBM@
+1 FILE gramps-export.ged
+1 COPR Copyright (c) 2026 Testeur Imaginaire.
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 CHAR UTF-8
+1 LANG French
+0 @SUBM@ SUBM
+1 NAME Testeur Imaginaire
+0 @I0000@ INDI
+1 NAME Yves Marie /Morvan/
+2 GIVN Yves Marie
+2 SURN Morvan
+2 NICK Le Grand
+1 NAME Yvon /Morvan/
+2 GIVN Yvon
+2 SURN Morvan
+2 TYPE aka
+1 SEX M
+1 BIRT
+2 TYPE Birth of Morvan, Yves Marie
+2 DATE 14 MAR 1852
+2 PLAC Kerguélen, Plouvien, Finistère, Bretagne, France
+3 MAP
+4 LATI N48.5333
+4 LONG W4.4250
+2 SOUR @S0000@
+3 PAGE Registre 1852, folio 12, acte n° 34
+3 QUAY 2
+1 DEAT
+2 DATE ABT 1921
+2 PLAC Brest, Finistère, Bretagne, France
+2 CAUS Fluxion de poitrine
+1 OCCU Goémonier
+2 DATE FROM 1880 TO 1910
+1 EVEN Mobile du Finistère
+2 TYPE Military Service
+1 FAMS @F0000@
+1 ASSO @I0003@
+2 RELA Godfather
+1 CHAN
+2 DATE 2 OCT 2026
+3 TIME 10:00:00
+0 @I0001@ INDI
+1 NAME Anne /Le Goff/
+1 NAME Anne /Morvan/
+2 TYPE married
+1 SEX F
+1 BIRT
+2 DATE BET 1855 AND 1857
+2 PLAC Plouvien, Finistère, Bretagne, France
+1 FAMS @F0000@
+0 @I0002@ INDI
+1 NAME Marie-Jeanne /Morvan/
+1 SEX F
+1 BIRT
+2 DATE JUN 1880
+2 PLAC Plouvien, Finistère, Bretagne, France
+1 FAMC @F0000@
+0 @I0003@ INDI
+1 NAME Hervé /Kerjean/
+1 SEX M
+1 RESN privacy
+1 FAMC @F0000@
+2 PEDI adopted
+0 @F0000@ FAM
+1 HUSB @I0000@
+1 WIFE @I0001@
+1 CHIL @I0002@
+1 CHIL @I0003@
+2 _FREL Adopted
+2 _MREL Adopted
+1 MARR
+2 DATE @#DJULIAN@ 20 NOV 1878
+2 PLAC Plouvien, Finistère, Bretagne, France
+1 NOTE Mariage célébré par l'abbé Le Bris.
+0 @S0000@ SOUR
+1 TITL Registres paroissiaux de Plouvien (exemple)
+1 AUTH Paroisse Saint-Pierre
+1 REPO @R0000@
+2 CALN 3 E 999/12
+0 @R0000@ REPO
+1 NAME Archives départementales imaginaires
+1 ADDR 1 rue des Registres
+2 CITY Quimper
+0 TRLR

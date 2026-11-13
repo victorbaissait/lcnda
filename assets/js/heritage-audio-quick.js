@@ -13,6 +13,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s)); // 🌐 traduction (docs/I18N.md)
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const UI = () => window.LCNDA_UI || {};
@@ -91,14 +92,14 @@
         const U = UI(); if (!U.presetsFrame) return document.createElement('div');
         const all = () => [...AE().BUILTIN_PRESETS.map(p => ({...p, builtin: true, date: ''})), ...userPresets()];
         const today = () => new Date().toISOString();
-        const fr = U.presetsFrame({id, what: 'ces réglages du son', list: () => all().map(p => ({name: p.builtin ? `${p.name} — ${p.summary} (prêt)` : p.name, date: p.date})),
-            apply: async i => { const p = all()[i]; if (!p) return false; await apply(p); toast(`Réglages « ${p.name} » appliqués.`); return false; }, quietApply: true,
+        const fr = U.presetsFrame({id, what: 'ces réglages du son', list: () => all().map(p => ({name: p.builtin ? i18n('{name} — {what} (prêt)', {name: i18n(p.name), what: i18n(p.summary)}) : p.name, date: p.date})),
+            apply: async i => { const p = all()[i]; if (!p) return false; await apply(p); toast(i18n('Réglages « {name} » appliqués.', {name: p.builtin ? i18n(p.name) : p.name})); return false; }, quietApply: true,
             save: name => { const list = userPresets(), it = {name, date: today(), ...now()}; const at = list.findIndex(x => x.name === name); if (at >= 0) list[at] = it; else list.push(it); return saveUserPresets(list); },
             replace: i => { const n = AE().BUILTIN_PRESETS.length; if (i < n) { toast('Un ensemble prêt ne se remplace pas : enregistre les réglages sous un autre nom.', 'error'); return false; } const list = userPresets(); list[i - n] = {...list[i - n], date: today(), ...now()}; return saveUserPresets(list); },
             rename: (i, name) => { const n = AE().BUILTIN_PRESETS.length; if (i < n) return false; const list = userPresets(); list[i - n] = {...list[i - n], name}; return saveUserPresets(list); },
             duplicate: i => { const p = all()[i]; if (!p) return false; const list = userPresets(), name = U.freeName(p.builtin ? p.name.replace(/^\S+\s/, '') : p.name, list.map(x => x.name)); list.push({name, date: today(), ...(p.builtin ? (p.quick ? {kind: 'quick', quick: p.quick} : {kind: 'rack', rack: p.rack()}) : {kind: p.kind, quick: p.quick, rack: p.rack})}); return saveUserPresets(list); },
             exportOne: i => { const p = all()[i]; if (!p) return false; const data = p.builtin ? (p.quick ? {kind: 'quick', quick: p.quick} : {kind: 'rack', rack: p.rack()}) : {kind: p.kind, quick: p.quick, rack: p.rack}; const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify({lcnda: 'reglage', outil: 'son', nom: p.name, version: 1, donnees: data}, null, 1)], {type: 'application/json'})); a.download = `lcnda-reglage-son-${(p.name || 'son').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9]+/g, '-').toLowerCase().slice(0, 40)}.json`; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); return false; },
-            remove: i => { const n = AE().BUILTIN_PRESETS.length; if (i < n) { toast('Un ensemble prêt ne se supprime pas.', 'error'); return false; } const list = userPresets(), it = list[i - n]; A().undoLocalChange ? A().undoLocalChange(`Réglage « ${it.name} » supprimé`, [PRESETS_KEY], () => { list.splice(i - n, 1); saveUserPresets(list); }, () => fr.isConnected && fr.refresh()) : (list.splice(i - n, 1), saveUserPresets(list)); },
+            remove: i => { const n = AE().BUILTIN_PRESETS.length; if (i < n) { toast('Un ensemble prêt ne se supprime pas.', 'error'); return false; } const list = userPresets(), it = list[i - n]; A().undoLocalChange ? A().undoLocalChange(i18n('Réglage « {name} » supprimé', {name: it.name}), [PRESETS_KEY], () => { list.splice(i - n, 1); saveUserPresets(list); }, () => fr.isConnected && fr.refresh()) : (list.splice(i - n, 1), saveUserPresets(list)); },
             importOne: async () => { const f = await new Promise(ok => { const inp = document.createElement('input'); inp.type = 'file'; inp.accept = '.json,application/json'; inp.addEventListener('change', () => ok(inp.files?.[0] || null), {once: true}); inp.click(); }); if (!f) return false;
                 let d; try { d = JSON.parse(await f.text()); } catch (_) { toast('Ce fichier n’est pas un réglage LCNDA.', 'error'); return false; }
                 if (d?.lcnda !== 'reglage' || d.outil !== 'son' || !d.donnees) { toast('Ce fichier n’est pas un réglage du son.', 'error'); return false; }
@@ -154,7 +155,7 @@
                     <div class="h-aq-wave"><canvas data-aq-canvas></canvas></div>
                     <div class="h-aq-ticks" data-aq-ticks>${ticksHtml(base.duration)}</div>
                     <div class="h-aq-transport" data-tbg="aq-transport" data-tbg-label="Lecture"><button type="button" class="button" data-aq-cmd="play" data-shortcut="Espace">▶ Écouter</button><button type="button" class="button small secondary" data-aq-cmd="home" title="Au début">⏮</button>
-                        <span class="muted h-aq-tip">Garde <kbd>A</kbd> appuyée pour entendre l’avant, au même endroit.</span></div>
+                        <span class="muted h-aq-tip">${i18n('Garde <kbd>A</kbd> appuyée pour entendre l’avant, au même endroit.')}</span></div>
                     <div data-aq-notice></div><div data-aq-extras></div>
                     <div class="h-aq-versions" data-aq-versions></div>
                 </div>
@@ -238,18 +239,18 @@
         cv.addEventListener('pointermove', e => { if (!q.on.trim) { cv.style.cursor = ''; return; } const t = tAt(e), px = base.duration / cv.getBoundingClientRect().width * 8; cv.style.cursor = Math.abs(t - trim.a) < px || Math.abs(t - trim.b) < px ? 'ew-resize' : ''; });
         // ── les boutons ──
         function paintNotice() {
-            const parts = []; if (q.on.trim) { if (trim.a > 0.05) parts.push(`${fmt(trim.a, false)} au début`); if (trim.b < base.duration - 0.05) parts.push(`${fmt(base.duration - trim.b, false)} à la fin`); }
+            const parts = []; if (q.on.trim) { if (trim.a > 0.05) parts.push(i18n('{time} au début', {time: fmt(trim.a, false)})); if (trim.b < base.duration - 0.05) parts.push(i18n('{time} à la fin', {time: fmt(base.duration - trim.b, false)})); }
             const sil = q.on.silences ? cuts().filter(c => c.a > (q.on.trim ? trim.a : 0) + 0.01 && c.b < (q.on.trim ? trim.b : base.duration) - 0.01) : [];
             if (sil.length) parts.push(A().plural(sil.length, 'blanc raccourci', 'blancs raccourcis'));
-            $('[data-aq-notice]').innerHTML = parts.length ? (UI().notice ? UI().notice('info', `Les zones hachurées seront coupées (${parts.join(' ; ')}). ${q.on.trim ? 'Glisse les poignées noires pour changer.' : ''}`) : `<p class="muted">Les zones hachurées seront coupées (${esc(parts.join(' ; '))}).</p>`) : '';
+            $('[data-aq-notice]').innerHTML = parts.length ? (UI().notice ? UI().notice('info', `${i18n('Les zones hachurées seront coupées ({what}).', {what: parts.join(' ; ')})} ${q.on.trim ? i18n('Glisse les poignées noires pour changer.') : ''}`) : `<p class="muted">${i18n('Les zones hachurées seront coupées ({what}).', {what: esc(parts.join(' ; '))})}</p>`) : '';
             const ex = extras.filter(x => x.on !== false);
-            $('[data-aq-extras]').innerHTML = ex.length ? `<div class="h-as-rackpill"><span>⚠️ ${esc(A().plural(ex.length, 'réglage du Studio reste appliqué', 'réglages du Studio restent appliqués'))} (${esc(ex.map(x => x.type === 'repair' ? `${A().plural(x.params?.masks?.length || 0, 'réparation au pinceau', 'réparations au pinceau')}` : (E.FX[x.type]?.label || x.type).toLowerCase()).join(', '))}).</span> <button type="button" class="link-button" data-aq-cmd="studio">↗ Les voir dans le Studio</button></div>` : '';
+            $('[data-aq-extras]').innerHTML = ex.length ? `<div class="h-as-rackpill"><span>⚠️ ${esc(A().plural(ex.length, 'réglage du Studio reste appliqué', 'réglages du Studio restent appliqués'))} (${esc(ex.map(x => x.type === 'repair' ? `${A().plural(x.params?.masks?.length || 0, 'réparation au pinceau', 'réparations au pinceau')}` : i18n(E.FX[x.type]?.label || x.type).toLowerCase()).join(', '))}).</span> <button type="button" class="link-button" data-aq-cmd="studio">↗ Les voir dans le Studio</button></div>` : '';
         }
         function paint() {
             dl.querySelectorAll('[data-aq-tog]').forEach(b => { const on = !!q.on[b.dataset.aqTog]; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
             dl.querySelectorAll('[data-aq-force]').forEach(b => b.classList.toggle('is-active', b.dataset.aqForce === q.force));
-            const hb = $('[data-aq-help="hum"]'); if (hb) hb.textContent = analysis.hum ? `le « mmm » du courant (trouvé tout seul : ${analysis.hum} Hz)` : 'le « mmm » du courant (aucun trouvé : 50 Hz par défaut)';
-            const sb = $('[data-aq-help="silences"]'); if (sb) sb.textContent = `plus de ${String([3, 2, 1.2][{doux: 0, moyen: 1, fort: 2}[q.force]]).replace('.', ',')} s → 0,5 s`;
+            const hb = $('[data-aq-help="hum"]'); if (hb) hb.textContent = analysis.hum ? i18n('le « mmm » du courant (trouvé tout seul : {n} Hz)', {n: analysis.hum}) : i18n('le « mmm » du courant (aucun trouvé : 50 Hz par défaut)');
+            const sb = $('[data-aq-help="silences"]'); if (sb) sb.textContent = i18n('plus de {n} s → 0,5 s', {n: String([3, 2, 1.2][{doux: 0, moyen: 1, fort: 2}[q.force]]).replace('.', ',')});
             paintNotice(); drawNow();
         }
         dl.querySelectorAll('[data-aq-tog]').forEach(b => b.addEventListener('click', () => change(() => { const k = b.dataset.aqTog; q.on[k] = !q.on[k]; if (k === 'trim' && q.on.trim && !(trim.b > trim.a)) trim = {...analysis.edges}; })));
@@ -261,7 +262,7 @@
         // ── versions ──
         function paintVersions() { // L3 : une ligne ; le reste dans la fenêtre commune « 🕘 Versions »
             const box = $('[data-aq-versions]'), sh = versions.find(v => v.shown) || versions[0];
-            box.innerHTML = versions.length > 1 && media.id ? `<p class="ui-vers-line"><button type="button" class="button small secondary" data-aq-vwin title="Écouter, comparer A / B, montrer partout, renommer, supprimer">🕘 Versions (${versions.length})…</button><small>l’original est toujours gardé · montrée : ${esc(sh?.label || 'Original')}</small></p>` : '';
+            box.innerHTML = versions.length > 1 && media.id ? `<p class="ui-vers-line"><button type="button" class="button small secondary" data-aq-vwin title="Écouter, comparer A / B, montrer partout, renommer, supprimer">${i18n('🕘 Versions ({n})…', {n: versions.length})}</button><small>${i18n('l’original est toujours gardé · montrée : {name}', {name: esc(sh?.label || i18n('Original'))})}</small></p>` : '';
         }
         paintVersions();
         $('[data-aq-versions]').addEventListener('click', e => {
@@ -279,7 +280,7 @@
                 const out = await finalBuf(), f = formatFor(media);
                 const blob = await E.encode(f.fmt, out, {kbps: f.kbps || 192, onStep: x => { if (btn) btn.textContent = `Compression… ${Math.round(x * 100)} %`; }});
                 if (btn) btn.textContent = 'Envoi…';
-                const res = await ext._av.uploadResult(media, blob, f.ext, {mode: mode === 'copy' ? 'copy' : mode === 'new' ? 'new' : 'version', show: mode === 'show', duration: out.duration, note: 'Son rapide', title: mode === 'copy' ? `${nameNow()} (nettoyé)` : nameNow()});
+                const res = await ext._av.uploadResult(media, blob, f.ext, {mode: mode === 'copy' ? 'copy' : mode === 'new' ? 'new' : 'version', show: mode === 'show', duration: out.duration, note: 'Son rapide', title: mode === 'copy' ? i18n('{name} (nettoyé)', {name: nameNow()}) : nameNow()});
                 saved = true; setStatus('saved');
                 toast(mode === 'copy' ? 'Copie nettoyée ajoutée aux mêmes fiches.' : mode === 'show' ? 'Nouvelle version affichée. L’original est gardé dans les versions.' : mode === 'new' ? 'Son enregistré : il est dans Listes → Audios.' : 'Version enregistrée (non affichée).');
                 onDone?.(); dl.close(); return res;
@@ -300,7 +301,7 @@
             stopPlay(); if (!ext.openAudioStudio) return toast('Le Studio son n’est pas encore prêt.', 'error');
             lsSet(MODE_KEY, 'studio'); const wasDirty = !saved; saved = true; dl.close();
             const rack = [...E.quickToRack({...q, trim: null, hum: analysis.hum}).filter(x => x.type !== 'silences'), ...extras];
-            const edits = []; if (q.on.trim) { if (trim.b < base.duration - 0.01) edits.push({label: `Couper la fin (${fmt(base.duration - trim.b, false)})`, a: trim.b, b: base.duration}); if (trim.a > 0.01) edits.push({label: `Couper le début (${fmt(trim.a, false)})`, a: 0, b: trim.a}); }
+            const edits = []; if (q.on.trim) { if (trim.b < base.duration - 0.01) edits.push({label: i18n('Couper la fin ({time})', {time: fmt(base.duration - trim.b, false)}), a: trim.b, b: base.duration}); if (trim.a > 0.01) edits.push({label: i18n('Couper le début ({time})', {time: fmt(trim.a, false)}), a: 0, b: trim.a}); }
             if (q.on.silences) { const sil = cuts().filter(c => !(q.on.trim && (c.a < trim.a + 0.01 || c.b > trim.b - 0.01))); if (sil.length) edits.push({label: `Raccourcir ${A().plural(sil.length, 'blanc', 'blancs')}`, cuts: sil}); }
             ext.openAudioStudio(media, {onDone, proj: projId ? {id: projId, name: projName, source: proj?.source || media.filename || ''} : null, carry: {buf: base, rack, regions, name: nameNow(), dirty: wasDirty, edits, from: 'quick'}});
         }
@@ -326,7 +327,7 @@
         // E4 : un son glissé sur l'onde entre dans les médias et s'ouvre à la place
         UI().bindFileDrop?.($('.h-aq-wave'), async files => {
             const f = files[0]; if (!f) return;
-            if (!await A().confirmBox('Le son est ajouté aux médias. Les réglages en cours sur ce son-ci sont abandonnés.', {title: `Nettoyer « ${f.name} » à la place ?`, okLabel: 'Ouvrir ce son'})) return;
+            if (!await A().confirmBox('Le son est ajouté aux médias. Les réglages en cours sur ce son-ci sont abandonnés.', {title: i18n('Nettoyer « {name} » à la place ?', {name: f.name}), okLabel: i18n('Ouvrir ce son')})) return;
             try { const fd = new FormData(); fd.append('file', f, f.name); fd.append('kind', 'audio'); fd.append('title', f.name.replace(/\.[^.]+$/, '')); fd.append('csrf', S().csrf); const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': S().csrf}}); const j = await r.json().catch(() => ({})); if (!r.ok || j.error) throw new Error(j.error || 'envoi impossible');
                 saved = true; dl.close(); openQuick({id: j.result.media_id, filename: j.result.filename, title: f.name.replace(/\.[^.]+$/, ''), media_type: 'audio'}, {onDone}); }
             catch (err) { toast(`${f.name} : ${err.message}`, 'error'); }
@@ -339,7 +340,7 @@
         const GUIDE = [
             {t: '👂 Écoute d’abord', d: 'Clique « ▶ Écouter ». Une vieille cassette fait souvent « chhh » (le souffle), « mmm » (le courant) ou des clics. Rien n’est abîmé : tout se règle avant d’enregistrer.'},
             {t: '🧹 Le souffle', d: 'Le bouton « Nettoyer le souffle » est allumé : l’app a pris toute seule le passage le plus calme comme exemple du bruit. Compare 👂 Avant / ✨ Après (ou garde A appuyée). Trop fort ? Choisis « Doux ».', on: ['hiss']},
-            {t: '〰️ Le bourdonnement et les clics', d: () => analysis.hum ? `Un ronflement du courant a été trouvé (${analysis.hum} Hz) : il est enlevé, avec les clics. Écoute la différence.` : 'Aucun ronflement trouvé : rien à enlever de ce côté. Les clics et craquements sont nettoyés.', on: () => analysis.hum ? ['hum', 'clicks'] : ['clicks']},
+            {t: '〰️ Le bourdonnement et les clics', d: () => analysis.hum ? i18n('Un ronflement du courant a été trouvé ({n} Hz) : il est enlevé, avec les clics. Écoute la différence.', {n: analysis.hum}) : 'Aucun ronflement trouvé : rien à enlever de ce côté. Les clics et craquements sont nettoyés.', on: () => analysis.hum ? ['hum', 'clicks'] : ['clicks']},
             {t: '🗣️ La voix', d: '« Voix plus claire » et « Volume égal » sont allumés : on comprend mieux les mots, les voix lointaines remontent, les cris baissent.', on: ['voice', 'level']},
             {t: '✂️ Le début et la fin', d: 'Le silence du début (le bouton « Lecture ») et la cassette qui tourne à vide à la fin sont hachurés : ils seront coupés. Glisse les poignées noires si besoin.', on: ['trim']},
             {t: '💾 C’est prêt', d: media.id ? 'Clique « Enregistrer et afficher cette version » : l’original reste gardé dans les versions.' : 'Clique « Enregistrer dans les médias ».'},

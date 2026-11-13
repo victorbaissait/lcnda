@@ -1,0 +1,1692 @@
+fr ¦ sk ¦ nb
+Ordre sur la ligne ¦ Poradie na priamke ¦ Rekkefølge på linjen
+Comme dans les tableaux ¦ Ako v tabuľkách ¦ Som i tabellene
+Les plus reliés d’abord ¦ Najprepojenejšie najprv ¦ De mest koblede først
+Par numéro (Sosa 2, 3, 10…) ¦ Podľa čísla (Sosa 2, 3, 10…) ¦ Etter nummer (Sosa 2, 3, 10…)
+Au-dessus et en dessous selon la sorte ¦ Nad a pod podľa druhu ¦ Over og under etter type
+Hauteur des arcs ¦ Výška oblúkov ¦ Buenes høyde
+Arcs colorés selon leur sorte ¦ Oblúky zafarbené podľa druhu ¦ Buer farget etter type
+Sous la ligne ¦ Pod priamkou ¦ Under linjen
+Mariages entre familles du village ¦ Sobáše medzi rodinami v dedine ¦ Vielser mellom familier i bygda
+Les ensembles (2 à 4) : A, B, C, D ¦ Množiny (2 až 4): A, B, C, D ¦ Mengdene (2 til 4): A, B, C, D
+Ce qu’on écrit dans chaque zone (AB = dans A et B, pas dans les autres) ¦ Čo sa píše do každej oblasti (AB = v A a B, nie v ostatných) ¦ Det som skrives i hvert område (AB = i A og B, ikke i de andre)
+Nombre ou texte ¦ Číslo alebo text ¦ Tall eller tekst
+Ajouter le pourcentage ¦ Pridať percento ¦ Legg til prosentandelen
+Total de chaque ensemble à côté de son nom ¦ Súčet každej množiny vedľa jej názvu ¦ Summen for hver mengde ved siden av navnet
+Transparence des formes ¦ Priehľadnosť tvarov ¦ Formenes gjennomsiktighet
+Mes sources ¦ Moje pramene ¦ Mine kilder
+Les dates (une ligne par événement, ou une date et un nombre) ¦ Dátumy (jeden riadok na udalosť alebo dátum a číslo) ¦ Datoene (én rad per hendelse, eller en dato og et tall)
+Toutes années ensemble (12 mois × 31 jours) ¦ Všetky roky spolu (12 mesiacov × 31 dní) ¦ Alle år samlet (12 måneder × 31 dager)
+Une ligne par année (semaines) ¦ Jeden riadok na rok (týždne) ¦ Én rad per år (uker)
+Années (ex. 1890-1895, 1900 ; vide = auto) ¦ Roky (napr. 1890-1895, 1900; prázdne = auto) ¦ År (f.eks. 1890-1895, 1900; tomt = auto)
+Doux (racine carrée) ¦ Jemné (odmocnina) ¦ Mykt (kvadratrot)
+Écrire les nombres dans les cases ¦ Písať čísla do políčok ¦ Skriv tallene i feltene
+Dire combien de dates n’ont pas de jour ¦ Uviesť, koľko dátumov nemá deň ¦ Oppgi hvor mange datoer som mangler dag
+Jours de naissance de mes ancêtres ¦ Dni narodenia mojich predkov ¦ Fødselsdagene til mine aner
+Superposées (transparentes) ¦ Prekryté (priehľadné) ¦ Lagt over hverandre (gjennomsiktige)
+Longueur des rayons ¦ Dĺžka lúčov ¦ Strålenes lengde
+Surface juste (racine carrée) ¦ Správna plocha (odmocnina) ¦ Riktig areal (kvadratrot)
+Écrire les nombres (une seule série) ¦ Písať čísla (iba jeden rad) ¦ Skriv tallene (bare én serie)
+Mois en abrégé ¦ Skrátené mesiace ¦ Forkortede måneder
+Naissances, mariages et décès par mois ¦ Narodenia, sobáše a úmrtia podľa mesiacov ¦ Fødsler, vielser og dødsfall per måned
+Les événements (une date = un point ; un début et une fin = un trait) ¦ Udalosti (dátum = bod; začiatok a koniec = čiara) ¦ Hendelsene (en dato = et punkt; en start og en slutt = en strek)
+Date ou début ¦ Dátum alebo začiatok ¦ Dato eller start
+Un tour de spirale ¦ Jedna otáčka špirály ¦ Én runde av spiralen
+Un siècle ¦ Storočie ¦ Et århundre
+Une décennie ¦ Desaťročie ¦ Et tiår
+Autant d’années que… ¦ Toľko rokov, koľko… ¦ Like mange år som…
+Années par tour ¦ Rokov na otáčku ¦ År per runde
+Tous (sans chevauchement) ¦ Všetky (bez prekrývania) ¦ Alle (uten overlapping)
+Trois siècles de la famille Martin ¦ Tri storočia rodiny Martin ¦ Tre århundrer med familien Martin
+Remettre comme au départ (ou double-clic sur le fond) ¦ Obnoviť východiskový stav (alebo dvojklik na pozadie) ¦ Tilbakestill som fra start (eller dobbeltklikk på bakgrunnen)
+Arrêter / relancer le mouvement ¦ Zastaviť / znova spustiť pohyb ¦ Stopp / start bevegelsen igjen
+Arrêter ou relancer le mouvement ¦ Zastaviť alebo znova spustiť pohyb ¦ Stopp eller start bevegelsen igjen
+Zoomer avec la molette (sinon : Ctrl + molette) ¦ Približovať kolieskom (inak: Ctrl + koliesko) ¦ Zoom med hjulet (ellers: Ctrl + hjul)
+Zoom à la molette ¦ Priblíženie kolieskom ¦ Zoom med hjulet
+Glisse un point pour le placer · double-clic pour le libérer ¦ Potiahnutím bod umiestniš · dvojklikom ho uvoľníš ¦ Dra et punkt for å plassere det · dobbeltklikk for å frigjøre det
+⚠ Lieux sans position : {list} — tape « Nom 48.11, -1.68 » ou « Depuis l’app » → Retrouver les lieux ¦ ⚠ Miesta bez polohy: {list} — napíš „Názov 48.11, -1.68“ alebo „Z aplikácie“ → Dohľadať miesta ¦ ⚠ Steder uten posisjon: {list} — skriv «Navn 48.11, -1.68» eller «Fra appen» → Finn stedene
+né(e) en {y} ¦ narodený(-á) v roku {y} ¦ født i {y}
+{a} → {b} : même premier prénom ¦ {a} → {b}: rovnaké prvé krstné meno ¦ {a} → {b}: samme første fornavn
+{a} → {b} : un autre de ses prénoms ¦ {a} → {b}: iné z jeho krstných mien ¦ {a} → {b}: et annet av vedkommendes fornavn
+{a} → {b} : prénom différent ¦ {a} → {b}: iné krstné meno ¦ {a} → {b}: annet fornavn
+Ajoute des événements : un lieu, une date, une sorte (ou « Depuis l’app »). ¦ Pridaj udalosti: miesto, dátum, druh (alebo „Z aplikácie“). ¦ Legg til hendelser: et sted, en dato, en type (eller «Fra appen»).
+Carte en points : {n} événements dans {k}. ¦ Bodová mapa: {n} udalostí v {k}. ¦ Punktkart: {n} hendelser i {k}.
+{unit} par alvéole ¦ {unit} na bunku ¦ {unit} per celle
+Ajoute des événements : un lieu et une date (ou « Depuis l’app »). ¦ Pridaj udalosti: miesto a dátum (alebo „Z aplikácie“). ¦ Legg til hendelser: et sted og en dato (eller «Fra appen»).
+=alvéole ¦ bunka|bunky|buniek ¦ celle|celler
+=filleul ¦ krstný syn|krstní synovia|krstných synov ¦ gudbarn|gudbarn
+=cause ¦ príčina|príčiny|príčin ¦ årsak|årsaker
+=grande famille ¦ hlavná skupina|hlavné skupiny|hlavných skupín ¦ hovedgruppe|hovedgrupper
+=descendant ¦ potomok|potomkovia|potomkov ¦ etterkommer|etterkommere
+=lieu retrouvé ¦ dohľadané miesto|dohľadané miesta|dohľadaných miest ¦ funnet sted|funne steder
+=lieu sans position ¦ miesto bez polohy|miesta bez polohy|miest bez polohy ¦ sted uten posisjon|steder uten posisjon
+=étape placée ¦ umiestnená zastávka|umiestnené zastávky|umiestnených zastávok ¦ plassert etappe|plasserte etapper
+Carte en hexagones : {n} événements dans {k} ; la plus remplie en compte {max}. ¦ Šesťuholníková mapa: {n} udalostí v {k}; najplnšia ich má {max}. ¦ Sekskantkart: {n} hendelser i {k}; den fulleste har {max}.
+{name} : de {lo} (clair) à {hi} (foncé) ¦ {name}: od {lo} (svetlé) po {hi} (tmavé) ¦ {name}: fra {lo} (lyst) til {hi} (mørkt)
+⚠ Pas trouvé sur ce fond : {list} ¦ ⚠ Na tomto podklade sa nenašlo: {list} ¦ ⚠ Ikke funnet på dette grunnkartet: {list}
+Carte déformée : {n} grossies selon leur chiffre (carrés). ¦ Kartogram: {n} zväčšené podľa svojho čísla (štvorce). ¦ Kartogram: {n} forstørret etter tallet sitt (kvadrater).
+Carte déformée : {n} grossies selon leur chiffre (ronds). ¦ Kartogram: {n} zväčšené podľa svojho čísla (kruhy). ¦ Kartogram: {n} forstørret etter tallet sitt (sirkler).
+Étape {k} sur {n} : {what} ¦ Zastávka {k} z {n}: {what} ¦ Etappe {k} av {n}: {what}
+{n} de {a} à {b} — {k} sur la carte ¦ {n} od {a} do {b} — {k} na mape ¦ {n} fra {a} til {b} — {k} på kartet
+{n} — {k} sur la carte ¦ {n} — {k} na mape ¦ {n} — {k} på kartet
+Ajoute les étapes d’une vie : une date, ce qui s’est passé, un lieu. ¦ Pridaj zastávky života: dátum, čo sa stalo, miesto. ¦ Legg til etappene i et liv: en dato, hva som skjedde, et sted.
+Carte qui raconte : aucune étape. ¦ Rozprávajúca mapa: žiadna zastávka. ¦ Fortellende kart: ingen etapper.
+Carte qui raconte : {n}, étape {k} : {what}. ¦ Rozprávajúca mapa: {n}, zastávka {k}: {what}. ¦ Fortellende kart: {n}, etappe {k}: {what}.
+Carte qui raconte : {n}. ¦ Rozprávajúca mapa: {n}. ¦ Fortellende kart: {n}.
+Diagrammes Généalogie indisponibles. ¦ Diagramy Rodokmeň nie sú k dispozícii. ¦ Slektsforskningsskjemaer er ikke tilgjengelige.
+Ajoute des lignes : un nom, le nom du parent (vide pour l’ancêtre) et un chiffre si tu veux. ¦ Pridaj riadky: meno, meno rodiča (prázdne pre predka) a číslo, ak chceš. ¦ Legg til rader: et navn, forelderens navn (tomt for stamfaren) og et tall hvis du vil.
+{n} · {p} % de la descendance ¦ {n} · {p} % potomstva ¦ {n} · {p} % av etterslekten
+Descendance en rectangles : {n} sur {g}. ¦ Potomstvo v obdĺžnikoch: {n} v {g}. ¦ Etterslekt i rektangler: {n} over {g}.
+Ajoute des lignes : le parrain ou la marraine, le filleul, et leurs années de naissance. ¦ Pridaj riadky: krstného otca alebo krstnú matku, krstné dieťa a ich roky narodenia. ¦ Legg til rader: gudfaren eller gudmoren, gudbarnet og fødselsårene deres.
+Aucun filleul ne porte le prénom de son parrain ou de sa marraine ({n}). ¦ Žiadne krstné dieťa nenesie krstné meno svojho krstného otca alebo krstnej matky ({n}). ¦ Ingen gudbarn bærer fornavnet til gudfaren eller gudmoren sin ({n}).
+{n} filleuls sur {t} ({p} %) portent le prénom de leur parrain ou marraine ¦ {n} krstných detí z {t} ({p} %) nesie krstné meno svojho krstného otca alebo krstnej matky ¦ {n} gudbarn av {t} ({p} %) bærer fornavnet til gudfaren eller gudmoren sin
+{n} filleul sur {t} ({p} %) portent le prénom de leur parrain ou marraine ¦ {n} krstné dieťa z {t} ({p} %) nesie krstné meno svojho krstného otca alebo krstnej matky ¦ {n} gudbarn av {t} ({p} %) bærer fornavnet til gudfaren eller gudmoren sin
+Pointillés : un autre de ses prénoms ¦ Bodkovane: iné z jeho krstných mien ¦ Prikket: et annet av vedkommendes fornavn
+Prénoms transmis : {n} filleuls sur {t} portent le prénom de leur parrain ou marraine ; le plus transmis : {name}. ¦ Odovzdané krstné mená: {n} krstných detí z {t} nesie krstné meno svojho krstného otca alebo krstnej matky; najčastejšie odovzdané: {name}. ¦ Videreførte fornavn: {n} gudbarn av {t} bærer fornavnet til gudfaren eller gudmoren sin; mest videreført: {name}.
+Naissance et petite enfance ¦ Narodenie a rané detstvo ¦ Fødsel og tidlig barndom
+Reins, sang et autres maladies ¦ Obličky, krv a iné choroby ¦ Nyrer, blod og andre sykdommer
+Ajoute des causes de décès et leur nombre (ou « Depuis l’app »). ¦ Pridaj príčiny úmrtia a ich počet (alebo „Z aplikácie“). ¦ Legg til dødsårsaker og antallet (eller «Fra appen»).
+{name} : {v} ({a} % des décès, {b} % de « {fam} ») ¦ {name}: {v} ({a} % úmrtí, {b} % z „{fam}“) ¦ {name}: {v} ({a} % av dødsfallene, {b} % av «{fam}»)
+Causes de décès : {n} décès en {k} ; la plus fréquente : {name}. ¦ Príčiny úmrtia: {n} úmrtí v {k}; najčastejšia: {name}. ¦ Dødsårsaker: {n} dødsfall i {k}; den hyppigste: {name}.
+Naissances, mariages et décès de la famille ¦ Narodenia, sobáše a úmrtia v rodine ¦ Familiens fødsler, vielser og dødsfall
+un point par événement ¦ jeden bod na udalosť ¦ ett punkt per hendelse
+Village {n} (près de {place}) ¦ Dedina {n} (pri {place}) ¦ Bygd {n} (nær {place})
+nombre d’événements par alvéole ¦ počet udalostí na bunku ¦ antall hendelser per celle
+chaque département grossi selon le nombre d’ancêtres ¦ každý departement zväčšený podľa počtu predkov ¦ hvert departement forstørret etter antall aner
+ancêtres ¦ predkovia ¦ aner
+Descendance de {name} ¦ Potomstvo osoby {name} ¦ Etterslekten etter {name}
+Prénoms transmis par les parrains et marraines ¦ Krstné mená odovzdané krstnými otcami a matkami ¦ Fornavn videreført av faddere
+causes relevées dans les actes de décès ¦ príčiny zapísané v záznamoch o úmrtí ¦ årsaker notert i dødsdokumenter
+{n} : vérifie-les sur la carte. ¦ {n}: skontroluj ich na mape. ¦ {n}: kontroller dem på kartet.
+Aucun lieu retrouvé : tape leurs coordonnées dans le tableau (« Nom 48.11, -1.68 »). ¦ Žiadne miesto sa nedohľadalo: napíš ich súradnice do tabuľky („Názov 48.11, -1.68“). ¦ Ingen steder funnet: skriv koordinatene i tabellen («Navn 48.11, -1.68»).
+📍 Les événements de ton arbre ¦ 📍 Udalosti tvojho rodokmeňa ¦ 📍 Hendelsene i slektstreet ditt
+Chaque événement qui a un lieu devient un point (un mariage compte pour chacun des deux époux). Les lieux sans coordonnées sont retrouvés dans les communes de France par leur nom et leur département. Le tableau est remplacé. ¦ Každá udalosť s miestom sa stane bodom (sobáš sa počíta pre každého z manželov). Miesta bez súradníc sa dohľadajú medzi obcami Francúzska podľa názvu a departementu. Tabuľka sa nahradí. ¦ Hver hendelse med et sted blir et punkt (en vielse teller for hver av ektefellene). Steder uten koordinater slås opp blant Frankrikes kommuner etter navn og departement. Tabellen erstattes.
+Aucun événement avec un lieu pour ce choix. ¦ Pre túto voľbu nie je žiadna udalosť s miestom. ¦ Ingen hendelse med sted for dette valget.
+{what} de mes ancêtres ¦ {what} mojich predkov ¦ {what} for mine aner
+{what} de la famille ¦ {what} rodiny ¦ {what} i familien
+{n} pris dans l’arbre (les 12 000 premiers). ¦ {n} prevzaté z rodokmeňa (prvých 12 000). ¦ {n} hentet fra slektstreet (de første 12 000).
+{n} pris dans l’arbre. ¦ {n} prevzaté z rodokmeňa. ¦ {n} hentet fra slektstreet.
+{n} : « 🔎 Retrouver les lieux sans position ». ¦ {n}: „🔎 Dohľadať miesta bez polohy“. ¦ {n}: «🔎 Finn steder uten posisjon».
+Ses événements (naissance, baptême, mariages, résidences, métiers, décès…) deviennent les étapes, dans l’ordre des dates. Le tableau est remplacé. ¦ Udalosti osoby (narodenie, krst, sobáše, bydliská, povolania, úmrtie…) sa stanú zastávkami v poradí dátumov. Tabuľka sa nahradí. ¦ Vedkommendes hendelser (fødsel, dåp, vielser, bosteder, yrker, død…) blir etappene, i datorekkefølge. Tabellen erstattes.
+Garder aussi les étapes sans lieu (sur la frise seulement) ¦ Ponechať aj zastávky bez miesta (iba na časovej osi) ¦ Behold også etapper uten sted (bare på tidslinjen)
+Aucun événement avec un lieu pour cette personne. ¦ Táto osoba nemá žiadnu udalosť s miestom. ¦ Ingen hendelse med sted for denne personen.
+{n} prises dans la vie de {name}. ¦ {n} prevzaté zo života osoby {name}. ¦ {n} hentet fra livet til {name}.
+{n} prise dans la vie de {name}. ¦ {n} prevzatá zo života osoby {name}. ¦ {n} hentet fra livet til {name}.
+Chaque enfant devient une case sous son parent ; sa largeur = le nombre de ses descendants (la personne comprise). Un clic sur une case ouvre la fiche. ¦ Každé dieťa sa stane políčkom pod svojím rodičom; jeho šírka = počet jeho potomkov (vrátane danej osoby). Kliknutím na políčko otvoríš kartu. ¦ Hvert barn blir et felt under forelderen sin; bredden = antall etterkommere (personen medregnet). Et klikk på et felt åpner oppføringen.
+Ancêtre en haut ¦ Predok hore ¦ Stamfar øverst
+{n} personne prise dans l’app. ¦ {n} osoba prevzatá z aplikácie. ¦ {n} person hentet fra appen.
+🎀 Parrains, marraines et filleuls ¦ 🎀 Krstní otcovia, krstné matky a krstné deti ¦ 🎀 Faddere og gudbarn
+Les témoins des naissances et des baptêmes dont le rôle dit « parrain » ou « marraine ». Le lien de parenté (grand-père, oncle, sœur…) est trouvé dans l’arbre. ¦ Svedkovia narodení a krstov, ktorých rola je „krstný otec“ alebo „krstná matka“. Príbuzenský vzťah (starý otec, strýko, sestra…) sa zistí z rodokmeňa. ¦ Vitner ved fødsler og dåp der rollen er «gudfar» eller «gudmor». Slektskapet (bestefar, onkel, søster…) finnes i slektstreet.
+Seulement autour de mes ancêtres (lignée Sosa) ¦ Iba okolo mojich predkov (línia Sosa) ¦ Bare rundt mine aner (Sosa-linjen)
+Prendre les parrains et marraines ¦ Vziať krstných otcov a krstné matky ¦ Hent fadderne
+Aucun parrain ni marraine dans les témoins des naissances et baptêmes (rôle « parrain » ou « marraine »). ¦ Medzi svedkami narodení a krstov nie je žiadny krstný otec ani krstná matka (rola „krstný otec“ alebo „krstná matka“). ¦ Ingen gudfar eller gudmor blant vitnene ved fødsler og dåp (rolle «gudfar» eller «gudmor»).
+{n} pris dans l’app (les 3 000 premiers). ¦ {n} prevzaté z aplikácie (prvých 3 000). ¦ {n} hentet fra appen (de første 3 000).
+{n} pris dans l’app. ¦ {n} prevzaté z aplikácie. ¦ {n} hentet fra appen.
+🎗 Les causes de décès de ton arbre ¦ 🎗 Príčiny úmrtia v tvojom rodokmeni ¦ 🎗 Dødsårsakene i slektstreet ditt
+La cause écrite sur le décès (ou la sépulture) de chaque personne. Les grandes familles (maladies infectieuses, cœur, accidents, guerre…) sont devinées d’après les mots ; corrige-les dans la colonne « Grande famille ». ¦ Príčina zapísaná pri úmrtí (alebo pohrebe) každej osoby. Hlavné skupiny (infekčné choroby, srdce, nehody, vojna…) sa odhadnú podľa slov; oprav ich v stĺpci „Hlavná skupina“. ¦ Årsaken som er skrevet ved hver persons død (eller begravelse). Hovedgruppene (infeksjonssykdommer, hjerte, ulykker, krig…) gjettes ut fra ordene; rett dem i kolonnen «Hovedgruppe».
+Prendre les causes de décès ¦ Vziať príčiny úmrtia ¦ Hent dødsårsakene
+Aucune cause de décès relevée : elle s’écrit dans le champ « Cause » d’un décès. ¦ Žiadna zapísaná príčina úmrtia: píše sa do poľa „Príčina“ pri úmrtí. ¦ Ingen dødsårsak notert: den skrives i feltet «Årsak» ved et dødsfall.
+Causes de décès dans la famille ¦ Príčiny úmrtia v rodine ¦ Dødsårsaker i familien
+{n} avec une cause, en {k} différentes. ¦ {n} s príčinou, v {k}. ¦ {n} med en årsak, i {k}.
+{n} avec une cause, en {k} différente. ¦ {n} s príčinou, v {k}. ¦ {n} med en årsak, i {k}.
+Pas de fiche derrière ce point : les lignes ont été tapées à la main (« Depuis l’app » les relie aux fiches). ¦ Za týmto bodom nie je žiadna karta: riadky boli napísané ručne („Z aplikácie“ ich prepojí s kartami). ¦ Ingen oppføring bak dette punktet: radene er skrevet inn for hånd («Fra appen» kobler dem til oppføringene).
+Étapes de la vie ¦ Zastávky života ¦ Livets etapper
+Étape précédente ¦ Predchádzajúca zastávka ¦ Forrige etappe
+Vitesse de la lecture ¦ Rýchlosť prehrávania ¦ Avspillingshastighet
+Seulement à partir de l’année ¦ Iba od roku ¦ Bare fra året
+Lieu (« Rennes », « Rennes 48.11, -1.68 », « 35 »…) ¦ Miesto („Rennes“, „Rennes 48.11, -1.68“, „35“…) ¦ Sted («Rennes», «Rennes 48.11, -1.68», «35»…)
+Selon le siècle ¦ Podľa storočia ¦ Etter århundre
+Mot pour un point (ex. : naissance) ¦ Slovo pre bod (napr.: narodenie) ¦ Ord for et punkt (f.eks.: fødsel)
+Carte en points : {n} événements. ¦ Bodová mapa: {n} udalostí. ¦ Punktkart: {n} hendelser.
+Taille des alvéoles (% de la largeur) ¦ Veľkosť buniek (% šírky) ¦ Cellestørrelse (% av bredden)
+Échelle douce (très grands écarts) ¦ Mierna mierka (veľmi veľké rozdiely) ¦ Myk skala (svært store forskjeller)
+Écrire le nombre dans les alvéoles ¦ Písať počet do buniek ¦ Skriv antallet i cellene
+Carte en hexagones : {n} événements. ¦ Šesťuholníková mapa: {n} udalostí. ¦ Sekskantkart: {n} hendelser.
+Les zones et leurs chiffres ¦ Oblasti a ich čísla ¦ Områdene og tallene deres
+Zone (nom ou code : 35, Gers, FR, Vaud…) ¦ Oblasť (názov alebo kód: 35, Gers, FR, Vaud…) ¦ Område (navn eller kode: 35, Gers, FR, Vaud…)
+Taille des formes (% de la carte) ¦ Veľkosť tvarov (% mapy) ¦ Formenes størrelse (% av kartet)
+Écart entre les formes ¦ Medzera medzi tvarmi ¦ Avstand mellom formene
+Selon le chiffre (dégradé) ¦ Podľa čísla (prechod) ¦ Etter tall (overgang)
+La vraie carte en fond (pâle) ¦ Skutočná mapa v pozadí (bledá) ¦ Det virkelige kartet i bakgrunnen (blekt)
+Couleur de la carte en fond ¦ Farba mapy v pozadí ¦ Fargen på bakgrunnskartet
+Un trait vers la vraie place quand une forme a bougé ¦ Čiara k skutočnému miestu, keď sa tvar posunul ¦ En strek til den virkelige plassen når en form er flyttet
+Carte déformée : {n} zones. ¦ Kartogram: {n} oblastí. ¦ Kartogram: {n} områder.
+Lieu (« Rennes », « Rennes 48.11, -1.68 ») ¦ Miesto („Rennes“, „Rennes 48.11, -1.68“) ¦ Sted («Rennes», «Rennes 48.11, -1.68»)
+Étape montrée (-1 = toute la vie) ¦ Zobrazená zastávka (-1 = celý život) ¦ Vist etappe (-1 = hele livet)
+Suit l’étape en cours (zoom) ¦ Sleduje aktuálnu zastávku (priblíženie) ¦ Følger den aktuelle etappen (zoom)
+Zoom sur l’étape (degrés autour) ¦ Priblíženie na zastávku (stupne okolo) ¦ Zoom på etappen (grader rundt)
+Montrer les étapes à venir (pointillés) ¦ Zobraziť nadchádzajúce zastávky (bodkovane) ¦ Vis kommende etapper (prikket)
+Carte qui raconte : {n} étapes. ¦ Rozprávajúca mapa: {n} zastávok. ¦ Fortellende kart: {n} etapper.
+De haut en bas (générations en lignes) ¦ Zhora nadol (generácie v riadkoch) ¦ Ovenfra og ned (generasjoner i rader)
+De gauche à droite (générations en colonnes) ¦ Zľava doprava (generácie v stĺpcoch) ¦ Fra venstre mot høyre (generasjoner i kolonner)
+Une par branche (plus clair en descendant) ¦ Jedna na vetvu (smerom nadol svetlejšia) ¦ Én per gren (lysere nedover)
+Selon le sexe ¦ Podľa pohlavia ¦ Etter kjønn
+Le nom et l’année ¦ Meno a rok ¦ Navnet og året
+Le nom et le nombre ¦ Názov a počet ¦ Navnet og antallet
+Les parrains, marraines et filleuls ¦ Krstní otcovia, krstné matky a krstné deti ¦ Fadderne og gudbarna
+Parrain ou marraine (Prénom NOM) ¦ Krstný otec alebo krstná matka (Meno PRIEZVISKO) ¦ Gudfar eller gudmor (Fornavn ETTERNAVN)
+Filleul ou filleule (Prénom NOM) ¦ Krstný syn alebo krstná dcéra (Meno PRIEZVISKO) ¦ Gudbarn (Fornavn ETTERNAVN)
+Lien (grand-père, oncle…) ¦ Vzťah (starý otec, strýko…) ¦ Slektskap (bestefar, onkel…)
+Année de naissance (parrain) ¦ Rok narodenia (krstný rodič) ¦ Fødselsår (fadder)
+Année de naissance (filleul) ¦ Rok narodenia (krstné dieťa) ¦ Fødselsår (gudbarn)
+Prénoms au plus (lignes) ¦ Najviac krstných mien (riadky) ¦ Høyst antall fornavn (rader)
+Les causes de décès ¦ Príčiny úmrtia ¦ Dødsårsakene
+Grande famille (vide = devinée) ¦ Hlavná skupina (prázdne = odhadnutá) ¦ Hovedgruppe (tomt = gjettet)
+Deviner les grandes familles d’après les mots ¦ Odhadnúť hlavné skupiny podľa slov ¦ Gjett hovedgruppene ut fra ordene
+Épaisseur des grandes familles ¦ Hrúbka hlavných skupín ¦ Hovedgruppenes tykkelse
+Les noms et les nombres ¦ Názvy a čísla ¦ Navnene og tallene
+Les noms et les pourcentages ¦ Názvy a percentá ¦ Navnene og prosentene
+Ranger les causes de la plus fréquente à la plus rare ¦ Zoradiť príčiny od najčastejšej po najzriedkavejšiu ¦ Sorter årsakene fra hyppigst til sjeldnest
+migration|{n} flux ¦ {n} tokov ¦ {n} strømmer
+le département ¦ departement ¦ departementet
+la province ¦ provincia ¦ provinsen
+le canton ¦ kantón ¦ kantonen
+un département ¦ departement ¦ et departement
+des départements ¦ departementov ¦ departementenes
+une province ¦ provinciu ¦ en provins
+des provinces ¦ provincií ¦ provinsenes
+un canton ¦ kantón ¦ en kanton
+des cantons ¦ kantónov ¦ kantonenes
+Province ¦ Provincia ¦ Provins
+Canton ¦ Kantón ¦ Kanton
+Zoomer sur {what} ¦ Priblížiť {what} ¦ Zoom inn på {what}
+{what} (nom ou numéro : {ex}) ¦ {what} (názov alebo číslo: {ex}) ¦ {what} (navn eller nummer: {ex})
+Limites {what} par-dessus les communes ¦ Hranice {what} cez obce ¦ Grenser for {what} over kommunene
+{what} entière ¦ Celá {what} ¦ Hele {what}
+Îles Britanniques ¦ Britské ostrovy ¦ De britiske øyer
+Péninsule Ibérique ¦ Pyrenejský polostrov ¦ Den iberiske halvøy
+Allemagne et Benelux ¦ Nemecko a Benelux ¦ Tyskland og Benelux
+Méditerranée ¦ Stredomorie ¦ Middelhavet
+Afrique du Nord ¦ Severná Afrika ¦ Nord-Afrika
+Afrique de l’Ouest ¦ Západná Afrika ¦ Vest-Afrika
+Proche et Moyen-Orient ¦ Blízky a Stredný východ ¦ Det nære og Midtøsten
+Océan Indien ¦ Indický oceán ¦ Det indiske hav
+Asie du Sud-Est ¦ Juhovýchodná Ázia ¦ Sørøst-Asia
+Atlantique Nord (vers l’Amérique) ¦ Severný Atlantik (smerom k Amerike) ¦ Nord-Atlanteren (mot Amerika)
+Québec et Acadie ¦ Québec a Akádia ¦ Québec og Acadia
+Antilles et Caraïbes ¦ Antily a Karibik ¦ De vestindiske øyer og Karibia
+Amérique centrale ¦ Stredná Amerika ¦ Mellom-Amerika
+Centre et Massif central ¦ Centre a Centrálny masív ¦ Centre og Sentralmassivet
+Sud-Est et Alpes ¦ Juhovýchod a Alpy ¦ Sørøst og Alpene
+Paris et petite couronne ¦ Paríž a vnútorné predmestia ¦ Paris og de nære forstedene
+Fond de carte illisible. ¦ Mapový podklad sa nedá prečítať. ¦ Grunnkartet kan ikke leses.
+Ce navigateur ne sait pas ouvrir ce fond de carte. ¦ Tento prehliadač nevie otvoriť tento mapový podklad. ¦ Denne nettleseren kan ikke åpne dette grunnkartet.
+Fond de carte inconnu. ¦ Neznámy mapový podklad. ¦ Ukjent grunnkart.
+Fond de carte introuvable. ¦ Mapový podklad sa nenašiel. ¦ Fant ikke grunnkartet.
+Fond de carte indisponible. ¦ Mapový podklad nie je k dispozícii. ¦ Grunnkartet er ikke tilgjengelig.
+(homonymes : précise {what}) ¦ (rovnaké názvy: upresni {what}) ¦ (samme navn: angi {what})
+(plusieurs villes de ce nom : choisis-en une) ¦ (viac miest s týmto názvom: jedno vyber) ¦ (flere byer med dette navnet: velg én)
+{name} : pas de chiffre ¦ {name}: žiadne číslo ¦ {name}: ingen tall
+moins de {a} ¦ menej ako {a} ¦ under {a}
+{a} et plus ¦ {a} a viac ¦ {a} og mer
+de {a} à moins de {b} ¦ od {a} do menej ako {b} ¦ fra {a} til under {b}
+pas de chiffre ¦ žiadne číslo ¦ ingen tall
+Ajoute des zones et leurs chiffres (onglet Données ou « Depuis l’app »). ¦ Pridaj oblasti a ich čísla (karta Údaje alebo „Z aplikácie“). ¦ Legg til områder og tallene deres (fanen Data eller «Fra appen»).
+⚠ Lieux sans position : {list} — « Depuis l’app » → Lieux ¦ ⚠ Miesta bez polohy: {list} — „Z aplikácie“ → Miesta ¦ ⚠ Steder uten posisjon: {list} — «Fra appen» → Steder
+⚠ Lieux sans position : {list} — tape « Nom 48.11, -1.68 » ou « Depuis l’app » ¦ ⚠ Miesta bez polohy: {list} — napíš „Názov 48.11, -1.68“ alebo „Z aplikácie“ ¦ ⚠ Steder uten posisjon: {list} — skriv «Navn 48.11, -1.68» eller «Fra appen»
+Ajoute des lieux (ou des zones) et leurs chiffres. ¦ Pridaj miesta (alebo oblasti) a ich čísla. ¦ Legg til steder (eller områder) og tallene deres.
+Carte à symboles proportionnels : {n} ronds, le plus gros vaut {max}. ¦ Mapa s proporcionálnymi symbolmi: {n} kruhov, najväčší má hodnotu {max}. ¦ Kart med proporsjonale symboler: {n} sirkler, den største er verdt {max}.
+Niveau de détail ¦ Úroveň podrobnosti ¦ Detaljnivå
+Partie de la carte (cadrage) ¦ Časť mapy (výrez) ¦ Del av kartet (utsnitt)
+Lambert azimutale équivalente (Europe, pays) ¦ Lambertovo azimutálne plochojavné (Európa, krajiny) ¦ Lamberts arealtro asimutale (Europa, land)
+Outre-mer en encarts ¦ Zámorské územia vo vložených mapkách ¦ Oversjøiske områder i innfelte kart
+Encart zoomé sur l’Île-de-France ¦ Priblížená vložená mapka Île-de-France ¦ Forstørret innfelt kart over Île-de-France
+Toute l’Île-de-France ¦ Celé Île-de-France ¦ Hele Île-de-France
+Pays voisins en gris ¦ Susedné krajiny sivou ¦ Naboland i grått
+Mer en couleur ¦ More farebne ¦ Havet i farge
+Couleur de la mer ¦ Farba mora ¦ Havets farge
+Hauteur du dessin (px, vide = selon la carte) ¦ Výška kresby (px, prázdne = podľa mapy) ¦ Tegningens høyde (px, tomt = avhengig av kartet)
+Autant de zones dans chaque classe (quantiles) ¦ Rovnaký počet oblastí v každej triede (kvantily) ¦ Like mange områder i hver klasse (kvantiler)
+Classes de même largeur ¦ Triedy rovnakej šírky ¦ Klasser med samme bredde
+Épaisseur des limites ¦ Hrúbka hraníc ¦ Grensenes tykkelse
+Épaisseur des limites des communes ¦ Hrúbka hraníc obcí ¦ Tykkelse på kommunegrensene
+Bulle aussi sur les zones sans chiffre ¦ Bublina aj pri oblastiach bez čísla ¦ Boble også på områder uten tall
+Bulle aussi sur les communes sans chiffre (plus lent) ¦ Bublina aj pri obciach bez čísla (pomalšie) ¦ Boble også på kommuner uten tall (tregere)
+Signaler les lignes pas trouvées sur la carte ¦ Upozorniť na riadky, ktoré sa na mape nenašli ¦ Angi rader som ikke ble funnet på kartet
+Épaisseur du plus gros flux ¦ Hrúbka najväčšieho toku ¦ Tykkelse på den største strømmen
+Épaisseur du plus petit flux ¦ Hrúbka najmenšieho toku ¦ Tykkelse på den minste strømmen
+Pointes de flèche ¦ Hroty šípok ¦ Pilspisser
+Selon le lieu de départ ¦ Podľa miesta odchodu ¦ Etter avreisested
+Selon le lieu d’arrivée ¦ Podľa miesta príchodu ¦ Etter ankomststed
+Ronds sur les lieux ¦ Kruhy na miestach ¦ Sirkler på stedene
+Regrouper par zone (un rond au centre de chaque zone du fond) ¦ Zoskupiť podľa oblasti (jeden kruh v strede každej oblasti podkladu) ¦ Grupper etter område (én sirkel midt i hvert område på grunnkartet)
+Rayon du plus gros rond (px, vide = auto) ¦ Polomer najväčšieho kruhu (px, prázdne = auto) ¦ Radius for den største sirkelen (px, tomt = auto)
+Chiffre à côté du nom ¦ Číslo vedľa názvu ¦ Tall ved siden av navnet
+un rond par commune ¦ jeden kruh na obec ¦ én sirkel per kommune
+naissances ¦ narodenia ¦ fødsler
+naissances par département ¦ narodenia podľa departementu ¦ fødsler per departement
+Les migrations de la famille ¦ Sťahovanie rodiny ¦ Familiens flyttinger
+du lieu de naissance au lieu de décès ¦ z miesta narodenia do miesta úmrtia ¦ fra fødested til dødssted
+personnes ¦ osoby ¦ personer
+Âge moyen au décès (en années) ¦ Priemerný vek pri úmrtí (v rokoch) ¦ Gjennomsnittsalder ved død (i år)
+Actes trouvés (événements avec une source ou un document) ¦ Nájdené záznamy (udalosti s prameňom alebo dokumentom) ¦ Funne dokumenter (hendelser med kilde eller dokument)
+D’une génération à l’autre (naissance du parent → de l’enfant) ¦ Z jednej generácie do druhej (narodenie rodiča → dieťaťa) ¦ Fra én generasjon til den neste (forelderens fødsel → barnets)
+Cadrage de la carte ¦ Výrez mapy ¦ Kartets utsnitt
+Tracer un cadre sur la carte (ou Maj + glisser) ¦ Nakresliť rámček na mape (alebo Shift + potiahnutie) ¦ Tegn en ramme på kartet (eller Shift + dra)
+Revenir au cadrage de départ ¦ Späť na východiskový výrez ¦ Tilbake til det opprinnelige utsnittet
+Molette : zoomer · glisser : déplacer · Maj + glisser : tracer un cadre ¦ Koliesko: priblížiť · potiahnutie: posunúť · Shift + potiahnutie: nakresliť rámček ¦ Hjul: zoom · dra: flytt · Shift + dra: tegn en ramme
+(famille) ¦ (rodina) ¦ (familie)
+pas encore utilisée ¦ zatiaľ nepoužitá ¦ ikke brukt ennå
+Les migrations de ton arbre ¦ Sťahovanie v tvojom rodokmeni ¦ Flyttingene i slektstreet ditt
+Les lieux de ton arbre ¦ Miesta tvojho rodokmeňa ¦ Stedene i slektstreet ditt
+Chaque lieu de ta base devient un rond, plus gros quand plus de personnes y sont nées (mariées, décédées). Les lieux avec des coordonnées sont placés exactement ; les autres sont cherchés par leur nom sur la carte. Le tableau est remplacé. ¦ Každé miesto z tvojej databázy sa stane kruhom, tým väčším, čím viac osôb sa tam narodilo (uzavrelo sobáš, zomrelo). Miesta so súradnicami sa umiestnia presne; ostatné sa hľadajú na mape podľa názvu. Tabuľka sa nahradí. ¦ Hvert sted i databasen din blir en sirkel, større jo flere personer som er født (gift, døde) der. Steder med koordinater plasseres nøyaktig; de andre søkes opp etter navn på kartet. Tabellen erstattes.
+Chaque personne relie deux lieux de ta base (ceux qui ont des coordonnées, ou une zone de la carte reconnue). Le tableau est remplacé. ¦ Každá osoba spája dve miesta z tvojej databázy (tie so súradnicami alebo rozpoznanú oblasť mapy). Tabuľka sa nahradí. ¦ Hver person kobler to steder i databasen din (de med koordinater, eller et gjenkjent område på kartet). Tabellen erstattes.
+Chaque lieu de ta base est rattaché à sa zone (d’après ses coordonnées, sinon son département, sa région ou son pays ; pour les communes : son code INSEE, puis son nom et son département), puis les zones sont comptées. Le tableau est remplacé. ¦ Každé miesto z tvojej databázy sa priradí k svojej oblasti (podľa súradníc, inak podľa departementu, regiónu alebo krajiny; pri obciach: podľa kódu INSEE, potom podľa názvu a departementu), potom sa oblasti spočítajú. Tabuľka sa nahradí. ¦ Hvert sted i databasen din knyttes til sitt område (ut fra koordinatene, ellers departement, region eller land; for kommuner: INSEE-koden, deretter navn og departement), deretter telles områdene. Tabellen erstattes.
+🔄 Tenir à jour (relire l’arbre à chaque affichage) ¦ 🔄 Udržiavať aktuálne (pri každom zobrazení znova načítať rodokmeň) ¦ 🔄 Hold oppdatert (les slektstreet på nytt ved hver visning)
+＋ Ajouter un flux ¦ ＋ Pridať tok ¦ ＋ Legg til en strøm
+＋ Ajouter ce flux ¦ ＋ Pridať tento tok ¦ ＋ Legg til denne strømmen
+Un lieu sans position (⚠) : choisis-le dans ta base ou dans les communes et villes du monde, ou tape ses coordonnées dans le tableau (« Rennes 48.11, -1.68 »). ¦ Miesto bez polohy (⚠): vyber ho vo svojej databáze alebo medzi obcami a mestami sveta, alebo napíš jeho súradnice do tabuľky („Rennes 48.11, -1.68“). ¦ Et sted uten posisjon (⚠): velg det i databasen din eller blant kommuner og byer i verden, eller skriv koordinatene i tabellen («Rennes 48.11, -1.68»).
+⏳ Lecture de l’arbre… ¦ ⏳ Načítavam rodokmeň… ¦ ⏳ Leser slektstreet…
+(mes ancêtres) ¦ (moji predkovia) ¦ (mine aner)
+{n} : cherchés par leur nom sur la carte. ¦ {n}: hľadané na mape podľa názvu. ¦ {n}: søkt opp etter navn på kartet.
+{n} : cherché par leur nom sur la carte. ¦ {n}: hľadané na mape podľa názvu. ¦ {n}: søkt opp etter navn på kartet.
+=lieu sans coordonnées ¦ miesto bez súradníc|miesta bez súradníc|miest bez súradníc ¦ sted uten koordinater|steder uten koordinater
+=lieu rattaché ¦ priradené miesto|priradené miesta|priradených miest ¦ tilknyttet sted|tilknyttede steder
+Aucun lieu dans ton arbre pour ce choix. ¦ Pre túto voľbu nie je v tvojom rodokmeni žiadne miesto. ¦ Ingen steder i slektstreet ditt for dette valget.
+Aucun déplacement trouvé (il faut deux lieux différents pour une même personne). ¦ Nenašlo sa žiadne sťahovanie (jedna osoba potrebuje dve rôzne miesta). ¦ Ingen flytting funnet (én person må ha to forskjellige steder).
+{n} : voir « Les lieux du tableau ». ¦ {n}: pozri „Miesta v tabuľke“. ¦ {n}: se «Stedene i tabellen».
+{n} à {z} (âge moyen sur {p} ; la carte montre des années, pas un nombre). ¦ {n} do {z} (priemerný vek z {p}; mapa ukazuje roky, nie počet). ¦ {n} til {z} (gjennomsnittsalder over {p}; kartet viser år, ikke et antall).
+{n} à {z}. ¦ {n} do {z}. ¦ {n} til {z}.
+{n} hors de cette carte ou sans position ({list}). ¦ {n} mimo tejto mapy alebo bez polohy ({list}). ¦ {n} utenfor dette kartet eller uten posisjon ({list}).
+Aucun lieu de ton arbre ne tombe sur cette carte : change de carte ou de niveau dans Réglages. ¦ Žiadne miesto z tvojho rodokmeňa nepadá na túto mapu: zmeň mapu alebo úroveň v Nastaveniach. ¦ Ingen steder i slektstreet ditt havner på dette kartet: bytt kart eller nivå i Innstillinger.
+Où est « {name} » ? ¦ Kde je „{name}“? ¦ Hvor ligger «{name}»?
+Le tableau n’a pas encore de lieux. ¦ Tabuľka zatiaľ nemá žiadne miesta. ¦ Tabellen har ingen steder ennå.
+Ce lieu n’a pas de coordonnées : choisis-en un autre, ou tape ses coordonnées dans le tableau. ¦ Toto miesto nemá súradnice: vyber iné alebo napíš jeho súradnice do tabuľky. ¦ Dette stedet har ingen koordinater: velg et annet, eller skriv koordinatene i tabellen.
+Choisis le lieu de départ et le lieu d’arrivée. ¦ Vyber miesto odchodu a miesto príchodu. ¦ Velg avreisested og ankomststed.
+Flux ajouté. ¦ Tok pridaný. ¦ Strømmen er lagt til.
+niveau|ville ¦ mesto ¦ by
+niveau|département ¦ departement ¦ departement
+niveau|province ¦ provincia ¦ provins
+niveau|canton ¦ kantón ¦ kanton
+niveau|région ¦ región ¦ region
+niveau|grande région ¦ veľký región ¦ storregion
+niveau|pays ¦ krajina ¦ land
+niveau|continent ¦ kontinent ¦ kontinent
+niveau|zone ¦ oblasť ¦ område
+sa commune ¦ jeho obec ¦ sin kommune
+leur commune ¦ ich obec ¦ kommunen deres
+une ville ¦ mesto ¦ en by
+son département ¦ jeho departement ¦ sitt departement
+leur département ¦ ich departement ¦ departementet deres
+sa province ¦ jeho provinciu ¦ sin provins
+leur province ¦ ich provinciu ¦ provinsen deres
+son canton ¦ jeho kantón ¦ sin kanton
+leur canton ¦ ich kantón ¦ kantonen deres
+région ¦ región ¦ region
+sa région ¦ jeho región ¦ sin region
+leur région ¦ ich región ¦ regionen deres
+une région ¦ región ¦ en region
+grande région ¦ veľký región ¦ storregion
+sa grande région ¦ jeho veľký región ¦ sin storregion
+leur grande région ¦ ich veľký región ¦ storregionen deres
+une grande région ¦ veľký región ¦ en storregion
+son pays ¦ jeho krajinu ¦ sitt land
+leur pays ¦ ich krajinu ¦ landet deres
+un pays ¦ krajinu ¦ et land
+son continent ¦ jeho kontinent ¦ sitt kontinent
+leur continent ¦ ich kontinent ¦ kontinentet deres
+un continent ¦ kontinent ¦ et kontinent
+sa zone ¦ jeho oblasť ¦ sitt område
+leur zone ¦ ich oblasť ¦ området deres
+une zone ¦ oblasť ¦ et område
+aussi « {name} » ¦ aj „{name}“ ¦ også «{name}»
+autre niveau : « {name} » ¦ iná úroveň: „{name}“ ¦ annet nivå: «{name}»
+ancienne commune ¦ bývalá obec ¦ tidligere kommune
+Plusieurs villes s’appellent {name} ({n}) : choisis-en une dans la liste. ¦ Viac miest sa volá {name} ({n}): jedno vyber zo zoznamu. ¦ Flere byer heter {name} ({n}): velg én i listen.
+Plusieurs villes s’appellent {name} : choisis-en une dans la liste. ¦ Viac miest sa volá {name}: jedno vyber zo zoznamu. ¦ Flere byer heter {name}: velg én i listen.
+{name} est {a}, mais la carte montre le niveau « {level} » : choisis {b} dans la liste, ou change le niveau de détail (Réglages). ¦ {name} je {a}, ale mapa ukazuje úroveň „{level}“: vyber zo zoznamu {b} alebo zmeň úroveň podrobnosti (Nastavenia). ¦ {name} er {a}, men kartet viser nivået «{level}»: velg {b} i listen, eller bytt detaljnivå (Innstillinger).
+Pas trouvé sur cette carte : vérifie l’orthographe, ou choisis dans la liste. ¦ Na tejto mape sa nenašlo: skontroluj pravopis alebo vyber zo zoznamu. ¦ Ikke funnet på dette kartet: sjekk stavemåten, eller velg i listen.
+{n} villes comptent dans {where} sur cette carte (niveau « {level} »). ¦ {n} miest sa na tejto mape počíta do {where} (úroveň „{level}“). ¦ {n} byer telles med i {where} på dette kartet (nivå «{level}»).
+1 ville compte dans {where} sur cette carte (niveau « {level} »). ¦ 1 mesto sa na tejto mape počíta do {where} (úroveň „{level}“). ¦ 1 by telles med i {where} på dette kartet (nivå «{level}»).
+Rien de ce nom sur cette carte. ¦ Na tejto mape nie je nič s týmto názvom. ¦ Ingenting med dette navnet på dette kartet.
+chargement des communes… ¦ načítavam obce… ¦ laster inn kommuner…
+↑ ↓ pour choisir · Entrée pour valider · Échap pour fermer ¦ ↑ ↓ na výber · Enter na potvrdenie · Esc na zatvorenie ¦ ↑ ↓ for å velge · Enter for å bekrefte · Esc for å lukke
+Une ville compte dans {where} sur cette carte. ¦ Jedno mesto sa na tejto mape počíta do {where}. ¦ Én by telles med i {where} på dette kartet.
+Niveau « Communes » : chaque ville a sa couleur. ¦ Úroveň „Obce“: každé mesto má svoju farbu. ¦ Nivået «Kommuner»: hver by har sin farge.
+Zone (nom ou code : 35, FRH03, BE, Vaud…) ¦ Oblasť (názov alebo kód: 35, FRH03, BE, Vaud…) ¦ Område (navn eller kode: 35, FRH03, BE, Vaud…)
+Carte colorée : {n} zones ({map}, {level}). ¦ Farebná mapa: {n} oblastí ({map}, {level}). ¦ Farget kart: {n} områder ({map}, {level}).
+Carte des migrations : {n} flux. ¦ Mapa sťahovania: {n} tokov. ¦ Flyttekart: {n} strømmer.
+Les lieux (ou zones) et leurs chiffres ¦ Miesta (alebo oblasti) a ich čísla ¦ Stedene (eller områdene) og tallene deres
+Lieu ou zone (« Rennes », « Rennes 48.11, -1.68 », « 35 »…) ¦ Miesto alebo oblasť („Rennes“, „Rennes 48.11, -1.68“, „35“…) ¦ Sted eller område («Rennes», «Rennes 48.11, -1.68», «35»…)
+Carte à symboles proportionnels : {n} lieux. ¦ Mapa s proporcionálnymi symbolmi: {n} miest. ¦ Kart med proporsjonale symboler: {n} steder.
+Rien à dessiner pour l’instant. ¦ Zatiaľ nie je čo kresliť. ¦ Ingenting å tegne ennå.
+Graphique introuvable : supprimé, ou fait dans un autre navigateur. ¦ Graf sa nenašiel: vymazaný alebo vytvorený v inom prehliadači. ¦ Fant ikke diagrammet: slettet, eller laget i en annen nettleser.
+L’ouvrir en grand dans Graphiques ¦ Otvoriť ho vo veľkom v Grafoch ¦ Åpne det i stort format i Diagrammer
+Ajuster à la page ¦ Prispôsobiť stránke ¦ Tilpass til siden
+par l’impression : « Enregistrer en PDF » ¦ cez tlač: „Uložiť ako PDF“ ¦ via utskrift: «Lagre som PDF»
+ouvrir les chiffres dans le tableur ¦ otvoriť čísla v tabuľkovom editore ¦ åpne tallene i regnearket
+du diagramme, à réimporter ¦ diagramu, na opätovný import ¦ for skjemaet, til å importere igjen
+à coller ailleurs (⌘V) ¦ na vloženie inam (⌘V) ¦ til å lime inn et annet sted (⌘V)
+Revenir à la couleur automatique ¦ Späť na automatickú farbu ¦ Tilbake til den automatiske fargen
+🧾 Tout voir dans le tableur ¦ 🧾 Zobraziť všetko v tabuľkovom editore ¦ 🧾 Se alt i regnearket
+{a} lignes sur {b} (toutes comptent dans le dessin) ¦ {a} riadkov z {b} (v kresbe sa počítajú všetky) ¦ {a} rader av {b} (alle teller med i tegningen)
+Couleur de la série ¦ Farba radu ¦ Seriens farge
+Supprimer cette série ¦ Vymazať tento rad ¦ Slett denne serien
+Copier des cellules dans Excel, LibreOffice, Numbers… et les coller ici ¦ Skopírovať bunky v Exceli, LibreOffice, Numbers… a vložiť ich sem ¦ Kopier celler i Excel, LibreOffice, Numbers… og lim dem inn her
+⤒ Importer un CSV ¦ ⤒ Importovať CSV ¦ ⤒ Importer en CSV
+Un classeur déjà fait dans le Tableur : une feuille, une plage, copiée une fois ou liée ¦ Zošit už vytvorený v Tabuľkovom editore: hárok, oblasť, skopírovaná raz alebo prepojená ¦ En arbeidsbok som allerede er laget i Regnearket: et ark, et område, kopiert én gang eller koblet
+Relevés paroissiaux ¦ Výpisy z farských matrík ¦ Registreringer fra kirkebøker
+Visite aux AD ¦ Návšteva archívu ¦ Besøk i arkivet
+Déplacement ¦ Cesta ¦ Reise
+Rédaction ¦ Písanie ¦ Skriving
+Planning de recherche ¦ Plán výskumu ¦ Forskningsplan
+Style, annotations, lignes de repère, petits multiples, lecture dans le temps ¦ Štýl, poznámky, referenčné čiary, malé násobky, prehrávanie v čase ¦ Stil, merknader, referanselinjer, små multipler, avspilling over tid
+Les figer (les modifier à la main) ¦ Zmraziť ich (upravovať ručne) ¦ Frys dem (rediger dem for hånd)
+Le tableur en grand, préparé avec les colonnes de ce diagramme : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir » ¦ Tabuľkový editor vo veľkom, pripravený so stĺpcami tohto diagramu: vzorce, zoraďovanie, vkladanie z Excelu… potom „✓ Uložiť a vrátiť sa“ ¦ Regnearket i stort format, klargjort med kolonnene i dette skjemaet: formler, sortering, lim inn fra Excel… deretter «✓ Lagre og gå tilbake»
+dans le tableur (formules, tri, Excel…) ¦ v tabuľkovom editore (vzorce, zoraďovanie, Excel…) ¦ i regnearket (formler, sortering, Excel…)
+🔄 Chiffres tenus à jour depuis « {src} » : ils sont relus à chaque affichage. ¦ 🔄 Čísla udržiavané aktuálne z „{src}“: načítavajú sa znova pri každom zobrazení. ¦ 🔄 Tall som holdes oppdatert fra «{src}»: de leses på nytt ved hver visning.
+l’app ¦ aplikácia ¦ appen
+Pas de réglage particulier. ¦ Žiadne zvláštne nastavenie. ¦ Ingen spesielle innstillinger.
+🌳 Des données de mon arbre ¦ 🌳 Údaje z môjho rodokmeňa ¦ 🌳 Data fra slektstreet mitt
+Remplace le tableau par des chiffres calculés dans ta base (tu peux ensuite les retoucher à la main). ¦ Nahradí tabuľku číslami spočítanými v tvojej databáze (potom ich môžeš ručne upraviť). ¦ Erstatter tabellen med tall beregnet i databasen din (du kan deretter justere dem for hånd).
+📊 Des chiffres de l’app ¦ 📊 Čísla z aplikácie ¦ 📊 Tall fra appen
+Remplace le tableau par des chiffres calculés dans ta base : « 🧮 Compter dans ma base » (ce qu’on compte, le groupe de personnes, la période, le regroupement… tout se règle ci-dessous), un exemple, une statistique de l’app ou un de « Mes graphiques » (faits dans Réglages → Éditeur de graphiques). ¦ Nahradí tabuľku číslami spočítanými v tvojej databáze: „🧮 Spočítať v mojej databáze“ (čo sa počíta, skupina osôb, obdobie, zoskupenie… všetko sa nastaví nižšie), príklad, štatistika aplikácie alebo jeden z „Moje grafy“ (vytvorené v Nastaveniach → Editor grafov). ¦ Erstatter tabellen med tall beregnet i databasen din: «🧮 Tell i databasen min» (hva som telles, persongruppen, perioden, grupperingen… alt stilles inn nedenfor), et eksempel, en statistikk fra appen eller et av «Mine diagrammer» (laget i Innstillinger → Diagramredigering).
+👥 Des personnes de la base ¦ 👥 Osoby z databázy ¦ 👥 Personer fra databasen
+Chaque personne devient une ligne, de sa naissance à son décès (rôle : Homme ou Femme, à changer à volonté). ¦ Každá osoba sa stane riadkom od narodenia po úmrtie (rola: Muž alebo Žena, môžeš ľubovoľne zmeniť). ¦ Hver person blir en rad, fra fødsel til død (rolle: Mann eller Kvinne, endre som du vil).
+Leurs naissances, mariages et décès deviennent des dates de la frise. ¦ Ich narodenia, sobáše a úmrtia sa stanú dátumami na časovej osi. ¦ Fødslene, vielsene og dødsfallene deres blir datoer på tidslinjen.
+Ce type de diagramme se remplit à la main, en collant un tableau ou avec un CSV (onglet Données). ¦ Tento typ diagramu sa vypĺňa ručne, vložením tabuľky alebo pomocou CSV (karta Údaje). ¦ Denne skjematypen fylles ut for hånd, ved å lime inn en tabell eller med en CSV (fanen Data).
+Données prises dans ton arbre. ¦ Údaje prevzaté z tvojho rodokmeňa. ¦ Data hentet fra slektstreet ditt.
+Ces chiffres sont déjà comptés : tu peux les trier, garder les premiers, montrer « Inconnu » ou les passer en %. Pour choisir ce qu’on compte, le groupe de personnes ou la période, prends « 🧮 Compter dans ma base » ¦ Tieto čísla sú už spočítané: môžeš ich zoradiť, ponechať prvé, zobraziť „Neznáme“ alebo ich previesť na %. Ak chceš zvoliť, čo sa počíta, skupinu osôb alebo obdobie, použi „🧮 Spočítať v mojej databáze“ ¦ Disse tallene er allerede telt: du kan sortere dem, beholde de første, vise «Ukjent» eller vise dem i %. For å velge hva som telles, persongruppen eller perioden, bruk «🧮 Tell i databasen min»
+{name} — pas pour ce diagramme ¦ {name} — nie pre tento diagram ¦ {name} — ikke for dette skjemaet
+Aucun chiffre pour ces réglages : essaie un autre groupe, une autre période ou montre « Inconnu ». ¦ Pre tieto nastavenia nie sú žiadne čísla: skús inú skupinu, iné obdobie alebo zobraz „Neznáme“. ¦ Ingen tall for disse innstillingene: prøv en annen gruppe, en annen periode eller vis «Ukjent».
+{n} valeurs prises dans ta base ({k} comptés). ¦ {n} hodnôt prevzatých z tvojej databázy (započítaných {k}). ¦ {n} verdier hentet fra databasen din ({k} telt).
+{n} valeur prise dans ta base ({k} comptés). ¦ {n} hodnota prevzatá z tvojej databázy (započítaných {k}). ¦ {n} verdi hentet fra databasen din ({k} telt).
+{n} valeur prise dans ta base. ¦ {n} hodnota prevzatá z tvojej databázy. ¦ {n} verdi hentet fra databasen din.
+{n} valeurs prises dans l’app. ¦ {n} hodnôt prevzatých z aplikácie. ¦ {n} verdier hentet fra appen.
+{n} valeur prise dans l’app. ¦ {n} hodnota prevzatá z aplikácie. ¦ {n} verdi hentet fra appen.
+{name} : pas de date de naissance dans sa fiche. ¦ {name}: na karte nie je dátum narodenia. ¦ {name}: ingen fødselsdato i oppføringen.
+{name} ajouté. ¦ {name} pridaný. ¦ {name} er lagt til.
+{name} ajoutée. ¦ {name} pridaná. ¦ {name} er lagt til.
+{name} ajouté(e). ¦ {name} pridaný(-á). ¦ {name} er lagt til.
+Le diagramme apparaît alors sur la fiche de la personne, dans l’enquête ou dans le projet de l’Atelier. Pour le poser ailleurs : un widget (Réglages → Éditeur de widgets), un bloc de fiche, la mise en page. ¦ Diagram sa potom objaví na karte osoby, v pátraní alebo v projekte Dielne. Ak ho chceš vložiť inam: widget (Nastavenia → Editor widgetov), blok poznámkovej karty, sadzba. ¦ Skjemaet vises da på personens oppføring, i undersøkelsen eller i Verkstedets prosjekt. For å sette det inn et annet sted: en widget (Innstillinger → Widgetredigering), en blokk i et notatkort, sideoppsettet.
+ou une partie d’enquête, un projet de l’Atelier… ¦ alebo časť pátrania, projekt Dielne… ¦ eller en del av en undersøkelse, et prosjekt i Verkstedet…
+Supprimer la série « {name} » et ses chiffres ? ¦ Vymazať rad „{name}“ a jeho čísla? ¦ Slette serien «{name}» og tallene i den?
+Supprimer la série ¦ Vymazať rad ¦ Slett serien
+Vider le tableau ¦ Vyprázdniť tabuľku ¦ Tøm tabellen
+une feuille, une plage : copiée une fois ou liée (tenue à jour) ¦ hárok, oblasť: skopírovaná raz alebo prepojená (udržiavaná aktuálne) ¦ et ark, et område: kopiert én gang eller koblet (holdes oppdatert)
+Sélectionne des cellules dans Excel, LibreOffice, Numbers ou Google Sheets, copie-les (⌘C) et colle-les ici. Si la première ligne contient des titres, ils deviennent les noms des séries. Le tableau actuel est remplacé. ¦ Vyber bunky v Exceli, LibreOffice, Numbers alebo Google Sheets, skopíruj ich (⌘C) a vlož ich sem. Ak prvý riadok obsahuje nadpisy, stanú sa názvami radov. Súčasná tabuľka sa nahradí. ¦ Merk celler i Excel, LibreOffice, Numbers eller Google Sheets, kopier dem (⌘C) og lim dem inn her. Hvis første rad inneholder overskrifter, blir de navnene på seriene. Den nåværende tabellen erstattes.
+Données liées au classeur : elles suivent le Tableur. ¦ Údaje prepojené so zošitom: sledujú Tabuľkový editor. ¦ Data koblet til arbeidsboken: de følger Regnearket.
+{n} lignes copiées du classeur. ¦ {n} riadkov skopírovaných zo zošita. ¦ {n} rader kopiert fra arbeidsboken.
+Ce type ne lit pas le même tableau : l’exemple remplace tes données. Continuer ? ¦ Tento typ nečíta rovnakú tabuľku: príklad nahradí tvoje údaje. Pokračovať? ¦ Denne typen leser ikke den samme tabellen: eksempelet erstatter dataene dine. Fortsette?
+D’un graphique (à moi ou de l’app, tenu à jour) ¦ Z grafu (môjho alebo z aplikácie, udržiavaného aktuálne) ¦ Fra et diagram (mitt eller appens, holdes oppdatert)
+Un de mes graphiques (Éditeur de graphiques, tenu à jour) ¦ Jeden z mojich grafov (Editor grafov, udržiavaný aktuálne) ¦ Et av mine diagrammer (Diagramredigering, holdes oppdatert)
+Hémicycle d’une assemblée, fer à cheval, frise des membres d’un groupe de musique façon Wikipédia, frise de vies, camembert, flux de migrations, organigramme, nuage de noms… avec tes propres chiffres ou ceux de l’app. Ils se posent ensuite partout : tableau de bord, fiches, fiche d’une personne, enquêtes, Atelier, mise en page. ¦ Polkruh zhromaždenia, podkova, časová os členov hudobnej skupiny ako na Wikipédii, os životov, koláčový graf, toky sťahovania, organizačná schéma, mrak mien… s tvojimi vlastnými číslami alebo s číslami z aplikácie. Potom ich vložíš kamkoľvek: prehľad, poznámkové karty, karta osoby, pátrania, Dielňa, sadzba. ¦ Halvsirkel for en forsamling, hestesko, tidslinje over medlemmene i et band i Wikipedia-stil, livslinjer, kakediagram, flyttestrømmer, organisasjonskart, navnesky… med dine egne tall eller appens. De settes deretter inn hvor som helst: oversikt, notatkort, en persons oppføring, undersøkelser, Verksted, sideoppsett.
+MES DIAGRAMMES ¦ MOJE DIAGRAMY ¦ MINE SKJEMAER
+📈 Ce diagramme montre ton graphique « {name} » (Éditeur de graphiques) : son dessin et ses chiffres le suivent, partout où il est posé. ¦ 📈 Tento diagram ukazuje tvoj graf „{name}“ (Editor grafov): jeho kresba a čísla ho nasledujú, nech je vložený kdekoľvek. ¦ 📈 Dette skjemaet viser diagrammet ditt «{name}» (Diagramredigering): tegningen og tallene følger med, uansett hvor det er satt inn.
+🔗 Données : {src} · tenu à jour. ¦ 🔗 Údaje: {src} · udržiavané aktuálne. ¦ 🔗 Data: {src} · holdes oppdatert.
+🔄 Chiffres tenus à jour depuis « {src} ». ¦ 🔄 Čísla udržiavané aktuálne z „{src}“. ¦ 🔄 Tall som holdes oppdatert fra «{src}».
+✎ Modifier le graphique ¦ ✎ Upraviť graf ¦ ✎ Rediger diagrammet
+Une copie figée, à retoucher comme un diagramme ¦ Zmrazená kópia na úpravu ako diagram ¦ En frosset kopi som kan justeres som et skjema
+Une copie à modifier ¦ Kópia na úpravu ¦ En kopi til redigering
+Le poser sur le tableau de bord, comme un widget ¦ Vložiť ho na prehľad ako widget ¦ Sett det inn på oversikten, som en widget
+Pour le poser ailleurs : <b>Réglages → Éditeur de widgets</b> (partie « Diagramme ») pour le tableau de bord ou un onglet, un bloc « 📊 Diagramme » dans une <b>Fiche</b>, « Relier » (onglet de l’éditeur) pour la fiche d’une personne, une enquête ou un projet de l’Atelier, et « Insérer → Diagramme » dans la <b>mise en page</b>. Tous tes graphiques et diagrammes : <b>Listes → Graphiques et diagrammes</b>. ¦ Ak ho chceš vložiť inam: <b>Nastavenia → Editor widgetov</b> (časť „Diagram“) pre prehľad alebo kartu, blok „📊 Diagram“ v <b>poznámkovej karte</b>, „Prepojiť“ (karta editora) pre kartu osoby, pátranie alebo projekt Dielne a „Vložiť → Diagram“ v <b>sadzbe</b>. Všetky tvoje grafy a diagramy: <b>Zoznamy → Grafy a diagramy</b>. ¦ For å sette det inn et annet sted: <b>Innstillinger → Widgetredigering</b> (delen «Skjema») for oversikten eller en fane, en blokk «📊 Skjema» i et <b>notatkort</b>, «Koble» (fanen i redigeringsverktøyet) for en persons oppføring, en undersøkelse eller et prosjekt i Verkstedet, og «Sett inn → Skjema» i <b>sideoppsettet</b>. Alle diagrammene og skjemaene dine: <b>Lister → Diagrammer og skjemaer</b>.
+Rien à copier : le graphique est introuvable. ¦ Nie je čo kopírovať: graf sa nenašiel. ¦ Ingenting å kopiere: fant ikke diagrammet.
+Supprimer le diagramme « {name} » ? Il disparaît aussi des widgets, fiches et enquêtes où il est posé. ¦ Vymazať diagram „{name}“? Zmizne aj z widgetov, kariet a pátraní, kde je vložený. ¦ Slette skjemaet «{name}»? Det forsvinner også fra widgets, oppføringer og undersøkelser der det er satt inn.
+Supprimer le diagramme ¦ Vymazať diagram ¦ Slett skjemaet
+Passe par les Réglages → Éditeur de widgets. ¦ Choď cez Nastavenia → Editor widgetov. ¦ Gå via Innstillinger → Widgetredigering.
+Ajouter un diagramme ¦ Pridať diagram ¦ Legg til et skjema
+Ajoute des groupes et leur nombre de sièges. ¦ Pridaj skupiny a ich počet kresiel. ¦ Legg til grupper og antall seter.
+{n} sièges ¦ {n} kresiel ¦ {n} seter
+Tribune · {n} sièges ¦ Rečnícky pult · {n} kresiel ¦ Talerstol · {n} seter
+Majorité absolue : {n} sièges ¦ Absolútna väčšina: {n} kresiel ¦ Absolutt flertall: {n} seter
+Ajoute des lignes : un nom, des rôles, une date de début et de fin. ¦ Pridaj riadky: meno, roly, dátum začiatku a konca. ¦ Legg til rader: et navn, roller, en start- og sluttdato.
+Ajoute des dates et ce qui s’est passé. ¦ Pridaj dátumy a čo sa stalo. ¦ Legg til datoer og hva som skjedde.
+Ajoute des lignes de chiffres. ¦ Pridaj riadky s číslami. ¦ Legg til rader med tall.
+Ajoute des tranches (âges…) et deux séries (hommes, femmes…). ¦ Pridaj intervaly (veky…) a dva rady (muži, ženy…). ¦ Legg til intervaller (aldre…) og to serier (menn, kvinner…).
+Ajoute des lignes et des colonnes de chiffres. ¦ Pridaj riadky a stĺpce s číslami. ¦ Legg til rader og kolonner med tall.
+Ajoute des points : X, Y (et une taille pour des bulles). ¦ Pridaj body: X, Y (a veľkosť pre bubliny). ¦ Legg til punkter: X, Y (og en størrelse for bobler).
+Ajoute des cases : un nom et, pour chacune, sa case « au-dessus ». ¦ Pridaj políčka: názov a pri každom jeho políčko „nad ním“. ¦ Legg til felter: et navn og, for hvert, feltet «over».
+Ajoute des mots (noms, prénoms, lieux…) et leur poids. ¦ Pridaj slová (priezviská, krstné mená, miesta…) a ich váhu. ¦ Legg til ord (etternavn, fornavn, steder…) og vekten deres.
+Texte au centre (sinon le total) ¦ Text v strede (inak súčet) ¦ Tekst i midten (ellers summen)
+Total au centre ¦ Súčet v strede ¦ Sum i midten
+Les groupes (de gauche à droite) ¦ Skupiny (zľava doprava) ¦ Gruppene (fra venstre mot høyre)
+Côté (Westminster) ¦ Strana (Westminster) ¦ Side (Westminster)
+Salle (rangées face à la tribune) ¦ Sála (rady oproti rečníckemu pultu) ¦ Sal (rader vendt mot talerstolen)
+Angle de l’arc ¦ Uhol oblúka ¦ Buens vinkel
+Nombre de rangées (0 = automatique) ¦ Počet radov (0 = automaticky) ¦ Antall rader (0 = automatisk)
+Texte au centre (sinon le nombre de sièges) ¦ Text v strede (inak počet kresiel) ¦ Tekst i midten (ellers antall seter)
+Petit texte sous le nombre ¦ Malý text pod číslom ¦ Liten tekst under tallet
+En texte et ligne au milieu ¦ Ako text a čiara v strede ¦ Som tekst og linje i midten
+Écologistes ¦ Zelení ¦ De grønne
+Libéraux ¦ Liberáli ¦ Liberale
+Les rôles et leur couleur ¦ Roly a ich farba ¦ Rollene og fargen deres
+Début de la frise (vide = auto) ¦ Začiatok časovej osi (prázdne = auto) ¦ Tidslinjens start (tomt = auto)
+Fin de la frise (vide = auto) ¦ Koniec časovej osi (prázdne = auto) ¦ Tidslinjens slutt (tomt = auto)
+Écrire le nom des traits verticaux ¦ Písať názvy zvislých čiar ¦ Skriv navnene på de loddrette strekene
+Les Cousins — membres ¦ Les Cousins — členovia ¦ Les Cousins — medlemmer
+Guitare solo, Chœurs ¦ Sólová gitara, vokály ¦ Leadgitar, kor
+Deuxième ¦ Druhý ¦ Andre
+Tous en dessous ¦ Všetky pod ¦ Alle under
+Décès de Jean ¦ Úmrtie Jeana ¦ Jeans død
+La famille Martin ¦ Rodina Martin ¦ Familien Martin
+Sur les parts ¦ Na dieloch ¦ På delene
+Avec une date de naissance ¦ S dátumom narodenia ¦ Med fødselsdato
+Où en sont mes recherches ¦ Kde je môj výskum ¦ Hvor forskningen min står
+Maximum de l’échelle (vide = auto) ¦ Maximum mierky (prázdne = auto) ¦ Skalaens maksimum (tomt = auto)
+Première ligne en bas ¦ Prvý riadok dole ¦ Første rad nederst
+Naissances par mois et par siècle ¦ Narodenia podľa mesiaca a storočia ¦ Fødsler per måned og århundre
+Nom de l’axe X ¦ Názov osi X ¦ X-aksens navn
+Nom de l’axe Y ¦ Názov osi Y ¦ Y-aksens navn
+Taille de la plus grosse bulle ¦ Veľkosť najväčšej bubliny ¦ Størrelse på den største boblen
+Âge au mariage et nombre d’enfants ¦ Vek pri sobáši a počet detí ¦ Alder ved vielse og antall barn
+Au-dessus (nom de la case) ¦ Nad tým (názov políčka) ¦ Over (feltets navn)
+Présidente ¦ Predsedníčka ¦ Leder
+Trésorier ¦ Pokladník ¦ Kasserer
+Secrétaire ¦ Tajomník ¦ Sekretær
+3 bénévoles ¦ 3 dobrovoľníci ¦ 3 frivillige
+Fêtes ¦ Slávnosti ¦ Fester
+5 bénévoles ¦ 5 dobrovoľníkov ¦ 5 frivillige
+Association des Amis du village ¦ Spolok priateľov obce ¦ Bygdas venneforening
+Diagramme de Venn (2 ou 3 ensembles) ¦ Vennov diagram (2 alebo 3 množiny) ¦ Venndiagram (2 eller 3 mengder)
+Mes objectifs ¦ Moje ciele ¦ Mine mål
+Jean et Marie ¦ Jean a Marie ¦ Jean og Marie
+Pierre et Anne ¦ Pierre a Anne ¦ Pierre og Anne
+Louis et Rose ¦ Louis a Rose ¦ Louis og Rose
+Enfants par couple ¦ Deti na pár ¦ Barn per par
+Source / note en bas ¦ Prameň / poznámka dole ¦ Kilde / merknad nederst
+Largeur de l’image ¦ Šírka obrázka ¦ Bildets bredde
+Notaires ¦ Notári ¦ Notarer
+↺ Police de l’app ¦ ↺ Písmo aplikácie ¦ ↺ Appens skrifttype
+{name} : {a} sur {n} enfants morts avant 1 an ({p} %) ¦ {name}: {a} z {n} detí zomrelo pred 1. rokom ({p} %) ¦ {name}: {a} av {n} barn døde før fylte 1 år ({p} %)
+{name} : {a} sur {n} morts avant 5 ans ({p} %) ¦ {name}: {a} z {n} zomrelo pred 5. rokom ({p} %) ¦ {name}: {a} av {n} døde før fylte 5 år ({p} %)
+parrains : {a} sur {b} · marraines : {c} sur {d} ¦ krstní otcovia: {a} z {b} · krstné matky: {c} z {d} ¦ gudfedre: {a} av {b} · gudmødre: {c} av {d}
+donnees|Tableaux ¦ Tabuľky ¦ Tabeller
+Types de diagrammes enregistrés (galerie des diagrammes et Éditeur de graphiques). ¦ Uložené typy diagramov (galéria diagramov a Editor grafov). ¦ Lagrede diagramtyper (diagramgalleriet og diagramredigeringen).
+Les mêmes types pour <b>Mes diagrammes</b> et pour l’<b>Éditeur de graphiques</b> : ↑ ↓ pour l’ordre, décoche pour cacher un type, choisis un groupe (ou « ＋ Nouveau groupe… ») pour les regrouper à ta façon ; ✎ renomme un groupe, ↑ ↓ de l’en-tête range les groupes. ¦ Rovnaké typy pre <b>Moje diagramy</b> aj pre <b>Editor grafov</b>: ↑ ↓ mení poradie, zrušením začiarknutia typ skryješ, vyber skupinu (alebo „＋ Nová skupina…“) a zoskup ich po svojom; ✎ premenuje skupinu, ↑ ↓ v záhlaví radí skupiny. ¦ De samme typene for <b>Mine diagrammer</b> og for <b>Diagramredigeringen</b>: ↑ ↓ for rekkefølgen, fjern haken for å skjule en type, velg en gruppe (eller «＋ Ny gruppe…») for å gruppere dem slik du vil; ✎ gir en gruppe nytt navn, ↑ ↓ i overskriften ordner gruppene.
+⤒ Mon propre graphique à partir de données d’ailleurs ¦ ⤒ Vlastný graf z údajov odinakiaľ ¦ ⤒ Mitt eget diagram ut fra data fra andre steder
+<b>Un tableau</b> (tableur, site, CSV) : copie-le, puis <b>Graphiques → Mes diagrammes → ＋ Nouveau</b> (ou « ⤒ Importer » là où l’on pose un diagramme : fiche, personne, enquête, Atelier) → « Coller un tableau ». Première colonne = les noms, colonnes suivantes = les chiffres ; une première ligne de titres devient le nom des séries. ¦ <b>Tabuľka</b> (tabuľkový editor, web, CSV): skopíruj ju, potom <b>Grafy → Moje diagramy → ＋ Nový</b> (alebo „⤒ Importovať“ tam, kam sa diagram vkladá: poznámková karta, osoba, pátranie, Dielňa) → „Vložiť tabuľku“. Prvý stĺpec = názvy, ďalšie stĺpce = čísla; prvý riadok s nadpismi sa stane názvami radov. ¦ <b>En tabell</b> (regneark, nettsted, CSV): kopier den, deretter <b>Diagrammer → Mine diagrammer → ＋ Ny</b> (eller «⤒ Importer» der du setter inn et diagram: notatkort, person, undersøkelse, Verksted) → «Lim inn en tabell». Første kolonne = navnene, de neste kolonnene = tallene; en første rad med overskrifter blir navnene på seriene.
+<b>Un fichier CSV</b> : « ⤒ Importer » → « Fichier » (séparateur virgule, point-virgule ou tabulation). ¦ <b>Súbor CSV</b>: „⤒ Importovať“ → „Súbor“ (oddeľovač čiarka, bodkočiarka alebo tabulátor). ¦ <b>En CSV-fil</b>: «⤒ Importer» → «Fil» (skilletegn komma, semikolon eller tabulator).
+<b>Une page Wikipédia</b> : « ⤒ Importer » → « Page Wikipédia », colle son adresse : ses tableaux et ses images de graphiques s’affichent, choisis-en un. ¦ <b>Stránka Wikipédie</b>: „⤒ Importovať“ → „Stránka Wikipédie“, vlož jej adresu: zobrazia sa jej tabuľky a obrázky grafov, jeden vyber. ¦ <b>En Wikipedia-side</b>: «⤒ Importer» → «Wikipedia-side», lim inn adressen: tabellene og diagrambildene vises, velg ett.
+<b>Une image de graphique</b> (camembert, barres, courbe, hémicycle) : « ⤒ Importer » → « Image » : l’app repère les couleurs et propose les chiffres (parts, hauteurs, sièges) ; corrige les noms et les valeurs dans le tableau avant de créer le diagramme. ¦ <b>Obrázok grafu</b> (koláč, stĺpce, krivka, polkruh): „⤒ Importovať“ → „Obrázok“: aplikácia rozpozná farby a navrhne čísla (podiely, výšky, mandáty); pred vytvorením diagramu oprav v tabuľke názvy a hodnoty. ¦ <b>Et diagrambilde</b> (kake, søyler, kurve, halvsirkel): «⤒ Importer» → «Bilde»: appen finner fargene og foreslår tallene (andeler, høyder, seter); rett navnene og verdiene i tabellen før du oppretter diagrammet.
+<b>Un graphique partagé</b> par quelqu’un (fichier <code>.lcnda-widget.json</code>) : « ⤒ Importer » → « Fichier » : il rejoint « Mes graphiques » et se dessine avec les données de ton arbre. ¦ <b>Zdieľaný graf</b> od niekoho (súbor <code>.lcnda-widget.json</code>): „⤒ Importovať“ → „Súbor“: pridá sa do „Moje grafy“ a vykreslí sa s údajmi tvojho rodokmeňa. ¦ <b>Et delt diagram</b> fra noen (filen <code>.lcnda-widget.json</code>): «⤒ Importer» → «Fil»: det havner i «Mine diagrammer» og tegnes med dataene fra slektstreet ditt.
+Ensuite, le diagramme se choisit parmi tous les types (parts, chiffres, frises, liens…), se règle, s’exporte (PNG, SVG, PDF) et se pose partout. ¦ Potom si pre diagram vyberieš ľubovoľný typ (podiely, čísla, časové osi, väzby…), nastavíš ho, exportuješ (PNG, SVG, PDF) a vložíš kamkoľvek. ¦ Deretter kan diagrammet få hvilken som helst type (andeler, tall, tidslinjer, forbindelser…), justeres, eksporteres (PNG, SVG, PDF) og settes inn overalt.
+(avec des personnes) ¦ (s osobami) ¦ (med personer)
+Ce dessin a besoin d’une liste de personnes (source « Personnes »). ¦ Táto kresba potrebuje zoznam osôb (zdroj „Osoby“). ¦ Denne tegningen trenger en liste over personer (kilde «Personer»).
+Aucune personne avec un lieu de naissance et un lieu de décès. ¦ Žiadna osoba s miestom narodenia aj miestom úmrtia. ¦ Ingen person med både fødested og dødssted.
+Créer le diagramme ¦ Vytvoriť diagram ¦ Opprett diagrammet
+Un de tes graphiques (Réglages → Éditeur de graphiques), un exemple, ou une statistique de l’app (naissances par décennie, prénoms…), dessiné avec le type de ton choix. ¦ Jeden z tvojich grafov (Nastavenia → Editor grafov), príklad alebo štatistika aplikácie (narodenia po desaťročiach, krstné mená…), vykreslené typom podľa tvojej voľby. ¦ Et av diagrammene dine (Innstillinger → Diagramredigering), et eksempel eller en statistikk fra appen (fødsler per tiår, fornavn…), tegnet med typen du velger.
+Chiffres tenus à jour (relus dans l’arbre à chaque affichage) ¦ Aktualizované čísla (pri každom zobrazení znova načítané z rodokmeňa) ¦ Tall som holdes oppdatert (leses på nytt fra slektstreet ved hver visning)
+＋ Créer un nouveau graphique (Éditeur de graphiques)… ¦ ＋ Vytvoriť nový graf (Editor grafov)… ¦ ＋ Opprett et nytt diagram (Diagramredigering)…
+🌐 Page Wikipédia ¦ 🌐 Stránka Wikipédie ¦ 🌐 Wikipedia-side
+Copie un tableau (tableur, site web…) et colle-le ici. Première colonne = les noms, colonnes suivantes = les chiffres. ¦ Skopíruj tabuľku (tabuľkový editor, web…) a vlož ju sem. Prvý stĺpec = názvy, ďalšie stĺpce = čísla. ¦ Kopier en tabell (regneark, nettsted…) og lim den inn her. Første kolonne = navnene, de neste kolonnene = tallene.
+L’adresse d’une page Wikipédia (n’importe quelle langue) : ses tableaux et ses graphiques s’affichent, choisis-en un. Il faut Internet. ¦ Adresa stránky Wikipédie (v akomkoľvek jazyku): zobrazia sa jej tabuľky a grafy, jeden vyber. Je potrebný internet. ¦ Adressen til en Wikipedia-side (hvilket som helst språk): tabellene og diagrammene vises, velg ett. Krever internett.
+Un camembert, des barres ou colonnes, une courbe ou un hémicycle en image : l’app regarde ses couleurs et propose des chiffres, à corriger ensuite. ¦ Koláč, pruhy či stĺpce, krivka alebo polkruh ako obrázok: aplikácia preskúma farby a navrhne čísla, ktoré potom opravíš. ¦ Et kakediagram, stolper eller søyler, en kurve eller en halvsirkel som bilde: appen ser på fargene og foreslår tall som du retter etterpå.
+Graphique « {name} » ajouté à Mes graphiques. ¦ Graf „{name}“ bol pridaný do Moje grafy. ¦ Diagrammet «{name}» er lagt til i Mine diagrammer.
+Lecture de la page… ¦ Načítavam stránku… ¦ Leser siden…
+{n} lignes ¦ {n} riadkov ¦ {n} rader
+<b>Images</b> (graphiques à convertir en chiffres) ¦ <b>Obrázky</b> (grafy na prevedenie na čísla) ¦ <b>Bilder</b> (diagrammer som skal gjøres om til tall)
+Image illisible (ou refusée par le site). ¦ Obrázok sa nedá prečítať (alebo ho web odmietol). ¦ Bildet kan ikke leses (eller ble avvist av nettstedet).
+Pas de couleur franche trouvée (graphique en noir et blanc ?) : remplis le tableau à la main. ¦ Nenašla sa žiadna výrazná farba (čiernobiely graf?): vyplň tabuľku ručne. ¦ Ingen tydelig farge funnet (svart-hvitt diagram?): fyll ut tabellen for hånd.
+Parts en % de la surface colorée. Les textes ne sont pas lus : donne un nom à chaque part. ¦ Podiely v % farebnej plochy. Texty sa nečítajú: pomenuj každý podiel. ¦ Andeler i % av det fargede området. Tekstene leses ikke: gi hver andel et navn.
+Sièges comptés (une tache = un siège ; deux sièges collés comptent pour deux). Nomme les groupes. ¦ Spočítané mandáty (jedna škvrna = jeden mandát; dva zlepené mandáty sa počítajú za dva). Pomenuj skupiny. ¦ Opptalte seter (én flekk = ett sete; to sammenhengende seter teller som to). Gi gruppene navn.
+Hauteur de la courbe (0 à 100 % de l’image) en 12 points : règle l’échelle avec « Valeur du haut ». ¦ Výška krivky (0 až 100 % obrázka) v 12 bodoch: mierku nastav pomocou „Horná hodnota“. ¦ Kurvens høyde (0 til 100 % av bildet) i 12 punkter: still inn skalaen med «Øverste verdi».
+Longueur de chaque barre, la plus longue = 100 : indique sa vraie valeur dans « Valeur du haut », et nomme les barres. ¦ Dĺžka každého pruhu, najdlhší = 100: zadaj jeho skutočnú hodnotu do „Horná hodnota“ a pomenuj pruhy. ¦ Lengden på hver stolpe, den lengste = 100: angi den virkelige verdien i «Øverste verdi», og gi stolpene navn.
+C’est un… ¦ Je to… ¦ Det er en…
+Sorte de média ¦ Druh média ¦ Medietype
+en vie ou décédés ¦ žijúci alebo zosnulí ¦ levende eller avdøde
+avec ou sans source ¦ s prameňom alebo bez ¦ med eller uten kilde
+par sorte de média ¦ podľa druhu média ¦ etter medietype
+l’âge au décès ¦ vek pri úmrtí ¦ alder ved død
+l’âge au mariage ¦ vek pri sobáši ¦ alder ved vielse
+le nombre d’enfants ¦ počet detí ¦ antall barn
+l’âge au premier enfant ¦ vek pri prvom dieťati ¦ alder ved første barn
+Une de mes listes ¦ Jeden z mojich zoznamov ¦ En av listene mine
+de A à Z ¦ od A po Z ¦ fra A til Å
+de Z à A ¦ od Z po A ¦ fra Å til A
+dans l’ordre ¦ v poradí ¦ i rekkefølge
+Part en % ¦ Podiel v % ¦ Andel i %
+Une personne qui a plusieurs de ces événements dans le même groupe ne compte qu’une fois. ¦ Osoba, ktorá má niekoľko z týchto udalostí v tej istej skupine, sa počíta len raz. ¦ En person som har flere av disse hendelsene i samme gruppe, telles bare én gang.
+Pour ne garder que certaines personnes : un métier, un nombre d’enfants, un lieu de naissance, une période, un âge au décès, une étiquette, une génération Sosa… Ajoute autant de critères que tu veux : « tous » les veut tous (ET), « au moins un » se contente d’un seul (OU). ¦ Ak chceš ponechať len niektoré osoby: povolanie, počet detí, miesto narodenia, obdobie, vek pri úmrtí, štítok, generácia Sosa… Pridaj toľko kritérií, koľko chceš: „všetky“ vyžaduje všetky (A), „aspoň jedno“ sa uspokojí s jedným (ALEBO). ¦ For å beholde bare noen personer: et yrke, et antall barn, et fødested, en periode, en alder ved død, en etikett, en Sosa-generasjon… Legg til så mange kriterier du vil: «alle» krever alle (OG), «minst ett» nøyer seg med ett (ELLER).
+Les personnes prises en compte : toute ta base, tes ancêtres ou tes descendants, une branche, une étiquette, une de tes listes, une recherche, ou des personnes que tu choisis. ¦ Započítané osoby: celá tvoja databáza, tvoji predkovia alebo potomkovia, vetva, štítok, jeden z tvojich zoznamov, hľadanie alebo osoby, ktoré vyberieš. ¦ Personene som tas med: hele databasen din, anene eller etterkommerne dine, en gren, en etikett, en av listene dine, et søk eller personer du velger.
+La personne d’où l’on part pour ses ancêtres, ses descendants ou ses branches (elle est comptée avec ses ancêtres et ses descendants). ¦ Osoba, od ktorej sa vychádza pre jej predkov, potomkov alebo vetvy (počíta sa spolu so svojimi predkami a potomkami). ¦ Personen man går ut fra for aner, etterkommere eller grener (personen telles med sammen med sine aner og etterkommere).
+Jusqu’à combien de générations on remonte (ou on descend). 0 = toutes. ¦ O koľko generácií sa ide nahor (alebo nadol). 0 = všetky. ¦ Hvor mange generasjoner man går opp (eller ned). 0 = alle.
+Seulement les personnes d’une de tes listes (Réglages → Mes listes). ¦ Len osoby z jedného z tvojich zoznamov (Nastavenia → Moje zoznamy). ¦ Bare personene på en av listene dine (Innstillinger → Mine lister).
+Seulement les personnes dont le nom ou le prénom contient ces lettres. ¦ Len osoby, ktorých priezvisko alebo krstné meno obsahuje tieto písmená. ¦ Bare personer der etternavnet eller fornavnet inneholder disse bokstavene.
+Seulement ce qui s’est passé entre ces deux dates, écrites comme dans un acte (1789, vers 1850, mai 1900…). Une seule date suffit. ¦ Len to, čo sa stalo medzi týmito dvoma dátumami, zapísanými ako v matričnom zázname (1789, vers 1850, mai 1900…). Stačí jeden dátum. ¦ Bare det som skjedde mellom disse to datoene, skrevet som i et dokument (1789, vers 1850, mai 1900…). Én dato er nok.
+Seulement les personnes nées entre ces deux dates, écrites comme dans un acte (1789, vers 1850, mai 1900…). Une seule date suffit. ¦ Len osoby narodené medzi týmito dvoma dátumami, zapísanými ako v matričnom zázname (1789, vers 1850, mai 1900…). Stačí jeden dátum. ¦ Bare personer født mellom disse to datoene, skrevet som i et dokument (1789, vers 1850, mai 1900…). Én dato er nok.
+Pour les colonnes empilées, la pyramide, la carte de chaleur… : chaque groupe est coupé en séries (hommes et femmes, ou siècles). ¦ Pre skladané stĺpce, pyramídu, teplotnú mapu…: každá skupina sa rozdelí na rady (muži a ženy alebo storočia). ¦ For stablede søyler, pyramiden, varmekartet…: hver gruppe deles i serier (menn og kvinner, eller århundrer).
+L’ordre des valeurs. « Automatique » : du plus grand au plus petit, ou dans l’ordre du temps pour les dates et les âges. ¦ Poradie hodnôt. „Automaticky“: od najväčšej po najmenšiu, alebo časovo pri dátumoch a vekoch. ¦ Rekkefølgen på verdiene. «Automatisk»: fra størst til minst, eller i tidsrekkefølge for datoer og aldre.
+Combien de valeurs garder, les premières après le tri. 0 = toutes. ¦ Koľko hodnôt ponechať, prvé po zoradení. 0 = všetky. ¦ Hvor mange verdier som skal beholdes, de første etter sorteringen. 0 = alle.
+Les valeurs au-delà des N premières sont additionnées dans une dernière barre « Autres ». ¦ Hodnoty za prvými N sa sčítajú do posledného pruhu „Ostatné“. ¦ Verdiene utover de første N legges sammen i en siste stolpe «Andre».
+Montrer aussi ce qui n’est pas renseigné (sans lieu, sans date, sans métier…) sous le nom « Inconnu ». ¦ Zobraziť aj to, čo nie je vyplnené (bez miesta, bez dátumu, bez povolania…), pod názvom „Neznáme“. ¦ Vis også det som ikke er fylt ut (uten sted, uten dato, uten yrke…), under navnet «Ukjent».
+Un nombre, une part en %, ou la moyenne (la médiane) d’une valeur : âge au décès, âge au mariage, nombre d’enfants. ¦ Počet, podiel v % alebo priemer (medián) hodnoty: vek pri úmrtí, vek pri sobáši, počet detí. ¦ Et antall, en andel i % eller gjennomsnittet (medianen) av en verdi: alder ved død, alder ved vielse, antall barn.
+Le diagramme se recalcule à chaque affichage : il suit les changements de ta base. ¦ Diagram sa prepočíta pri každom zobrazení: sleduje zmeny v tvojej databáze. ¦ Diagrammet beregnes på nytt ved hver visning: det følger endringene i databasen din.
+✏️ Sur mesure (critères, ce qu’on compte, regroupé par…) ¦ ✏️ Na mieru (kritériá, čo sa počíta, zoskupené podľa…) ¦ ✏️ Skreddersydd (kriterier, hva som telles, gruppert etter…)
+Âge au décès, hommes et femmes ¦ Vek pri úmrtí, muži a ženy ¦ Alder ved død, menn og kvinner
+Causes de décès, par siècle ¦ Príčiny úmrtia podľa storočia ¦ Dødsårsaker per århundre
+Mariages par mois ¦ Sobáše podľa mesiacov ¦ Vielser per måned
+Âge au mariage, hommes et femmes ¦ Vek pri sobáši, muži a ženy ¦ Alder ved vielse, menn og kvinner
+Âge moyen au mariage, par siècle de naissance ¦ Priemerný vek pri sobáši podľa storočia narodenia ¦ Gjennomsnittsalder ved vielse per fødselsårhundre
+Âge au premier enfant, pères et mères ¦ Vek pri prvom dieťati, otcovia a matky ¦ Alder ved første barn, fedre og mødre
+Âge moyen au premier enfant, par siècle de naissance ¦ Priemerný vek pri prvom dieťati podľa storočia narodenia ¦ Gjennomsnittsalder ved første barn per fødselsårhundre
+Lieux de naissance (communes) ¦ Miesta narodenia (obce) ¦ Fødesteder (kommuner)
+Métiers des femmes et des hommes ¦ Povolania žien a mužov ¦ Kvinners og menns yrker
+Décès par mois ¦ Úmrtia podľa mesiacov ¦ Dødsfall per måned
+Mes ancêtres, côté père et côté mère ¦ Moji predkovia z otcovej a matkinej strany ¦ Mine aner, på farssiden og morssiden
+Médias par nom de famille ¦ Médiá podľa priezviska ¦ Medier per etternavn
+nées en {a} ¦ narodené v roku {a} ¦ født i {a}
+periode|en {a} ¦ v roku {a} ¦ i {a}
+nées entre {a} et {b} ¦ narodené medzi {a} a {b} ¦ født mellom {a} og {b}
+periode|entre {a} et {b} ¦ medzi {a} a {b} ¦ mellom {a} og {b}
+nées depuis {a} ¦ narodené od {a} ¦ født siden {a}
+periode|depuis {a} ¦ od {a} ¦ siden {a}
+nées jusqu’en {b} ¦ narodené do {b} ¦ født fram til {b}
+periode|jusqu’en {b} ¦ do {b} ¦ fram til {b}
+au moins un de ces critères (OU) ¦ aspoň jedno z týchto kritérií (ALEBO) ¦ minst ett av disse kriteriene (ELLER)
+critere|qui ont ¦ ktorí majú ¦ som har
+critere|{a} ans ¦ {a} rokov ¦ {a} år
+critere|de {a} à {b} ans ¦ od {a} do {b} rokov ¦ fra {a} til {b} år
+critere|de {a} à {b} ¦ od {a} do {b} ¦ fra {a} til {b}
+critere|au moins {a} ans ¦ aspoň {a} rokov ¦ minst {a} år
+critere|au moins {a} ¦ aspoň {a} ¦ minst {a}
+critere|au plus {b} ans ¦ najviac {b} rokov ¦ høyst {b} år
+critere|au plus {b} ¦ najviac {b} ¦ høyst {b}
+nés en {a} ¦ narodení v roku {a} ¦ født i {a}
+nés entre {a} et {b} ¦ narodení medzi {a} a {b} ¦ født mellom {a} og {b}
+nés depuis {a} ¦ narodení od {a} ¦ født siden {a}
+nés jusqu’en {b} ¦ narodení do {b} ¦ født fram til {b}
+morts en {a} ¦ zomrelí v roku {a} ¦ døde i {a}
+morts entre {a} et {b} ¦ zomrelí medzi {a} a {b} ¦ døde mellom {a} og {b}
+morts depuis {a} ¦ zomrelí od {a} ¦ døde siden {a}
+morts jusqu’en {b} ¦ zomrelí do {b} ¦ døde fram til {b}
+liste|ou ¦ alebo ¦ eller
+métier « {v} » ¦ povolanie „{v}“ ¦ yrke «{v}»
+nom « {v} » ¦ priezvisko „{v}“ ¦ etternavn «{v}»
+prénom « {v} » ¦ krstné meno „{v}“ ¦ fornavn «{v}»
+nés à « {v} » ¦ narodení v „{v}“ ¦ født i «{v}»
+morts ou inhumés à « {v} » ¦ zomrelí alebo pochovaní v „{v}“ ¦ døde eller begravet i «{v}»
+avec un événement à « {v} » ¦ s udalosťou v „{v}“ ¦ med en hendelse i «{v}»
+avec un événement dans « {v} » ¦ s udalosťou v oblasti „{v}“ ¦ med en hendelse innenfor «{v}»
+à moins de {km} km de « {v} » ¦ menej ako {km} km od „{v}“ ¦ mindre enn {km} km fra «{v}»
+critere|femmes ¦ ženy ¦ kvinner
+critere|hommes ¦ muži ¦ menn
+sexe inconnu ¦ neznáme pohlavie ¦ ukjent kjønn
+critere|en vie ¦ žijúci ¦ levende
+critere|décédés ¦ zosnulí ¦ avdøde
+statut à vérifier ¦ stav na overenie ¦ status må kontrolleres
+ayant vécu {r} ¦ ktorí žili {r} ¦ som levde {r}
+âgés {r} à : {types} ¦ vo veku {r} pri: {types} ¦ i alderen {r} ved: {types}
+âgés {r} ¦ vo veku {r} ¦ i alderen {r}
+mes ancêtres (Sosa) ¦ moji predkovia (Sosa) ¦ mine aner (Sosa)
+génération Sosa {r} ¦ generácia Sosa {r} ¦ Sosa-generasjon {r}
+critere|sans source ¦ bez prameňa ¦ uten kilde
+avec une photo ou un document ¦ s fotografiou alebo dokumentom ¦ med et bilde eller et dokument
+critere|parents inconnus ¦ neznámi rodičia ¦ ukjente foreldre
+dans mes favoris ¦ v mojich obľúbených ¦ blant favorittene mine
+cause de décès « {v} » ¦ príčina úmrtia „{v}“ ¦ dødsårsak «{v}»
+ayant eu : {types} ¦ ktorí mali: {types} ¦ som har hatt: {types}
+étiquette « {v} » ¦ štítok „{v}“ ¦ etikett «{v}»
+critere|sauf {x} ¦ okrem {x} ¦ unntatt {x}
+Groupe de personnes ¦ Skupina osôb ¦ Persongruppe
+gén. ¦ gen. ¦ gen.
+periode|à ¦ až ¦ til
+🔄 Tenir à jour (relire les chiffres à chaque affichage) ¦ 🔄 Aktualizovať (pri každom zobrazení znova načítať čísla) ¦ 🔄 Hold oppdatert (les tallene på nytt ved hver visning)
+({n} générations) ¦ ({n} generácií) ¦ ({n} generasjoner)
+({n} génération) ¦ ({n} generácia) ¦ ({n} generasjon)
+les ancêtres de {name} ¦ predkovia osoby {name} ¦ anene til {name}
+critere|mes ancêtres ¦ moji predkovia ¦ mine aner
+les descendants de {name} ¦ potomkovia osoby {name} ¦ etterkommerne etter {name}
+critere|mes descendants ¦ moji potomkovia ¦ mine etterkommere
+la branche paternelle de {name} ¦ otcovská vetva osoby {name} ¦ farsgrenen til {name}
+ma branche paternelle ¦ moja otcovská vetva ¦ min farsgren
+la branche maternelle de {name} ¦ materská vetva osoby {name} ¦ morsgrenen til {name}
+ma branche maternelle ¦ moja materská vetva ¦ min morsgren
+l’étiquette « {name} » ¦ štítok „{name}“ ¦ etiketten «{name}»
+critere|une étiquette ¦ štítok ¦ en etikett
+la liste « {name} » ¦ zoznam „{name}“ ¦ listen «{name}»
+critere|une de mes listes ¦ jeden z mojich zoznamov ¦ en av listene mine
+les noms qui contiennent « {q} » ¦ mená obsahujúce „{q}“ ¦ navn som inneholder «{q}»
+critere|une recherche ¦ hľadanie ¦ et søk
+{n} personnes choisies ¦ {n} vybraných osôb ¦ {n} valgte personer
+{n} personne choisie ¦ {n} vybraná osoba ¦ {n} valgt person
+toute ma base ¦ celá moja databáza ¦ hele databasen min
+Un graphique de l’app ¦ Graf z aplikácie ¦ Et diagram fra appen
+Médiane de {value} ({what}) ¦ Medián: {value} ({what}) ¦ Median av {value} ({what})
+chaque personne une fois ¦ každá osoba raz ¦ hver person én gang
+personnes {p} ¦ osoby {p} ¦ personer {p}
+une série par sexe ¦ jeden rad pre každé pohlavie ¦ én serie per kjønn
+une série par siècle ¦ jeden rad pre každé storočie ¦ én serie per århundre
+{n} premiers et « Autres » ¦ prvých {n} a „Ostatné“ ¦ de første {n} og «Andre»
+{n} premier et « Autres » ¦ prvý {n} a „Ostatné“ ¦ den første {n} og «Andre»
+toutes les valeurs ¦ všetky hodnoty ¦ alle verdier
+« Inconnu » montré ¦ „Neznáme“ zobrazené ¦ «Ukjent» vises
+unite|en % ¦ v % ¦ i %
+Moyenne de {value} ({what}) ¦ Priemer: {value} ({what}) ¦ Gjennomsnitt av {value} ({what})
+{n} premiers ¦ prvých {n} ¦ de første {n}
+{n} premier ¦ prvý {n} ¦ den første {n}
+ayant {t} enfant ¦ s {t} dieťaťom ¦ med {t} barn
+ayant {t} enfants ¦ s {t} deťmi ¦ med {t} barn
+ayant {t} union ¦ s {t} zväzkom ¦ med {t} forbindelse
+ayant {t} unions ¦ s {t} zväzkami ¦ med {t} forbindelser
+ayant {t} source ¦ s {t} prameňom ¦ med {t} kilde
+ayant {t} sources ¦ s {t} prameňmi ¦ med {t} kilder
+Gris-bleu calme, traits fins, quadrillage léger. ¦ Pokojná sivomodrá, tenké čiary, jemná mriežka. ¦ Rolig blågrå, tynne streker, lett rutenett.
+Papier ancien, encre brune, police à empattements. ¦ Starý papier, hnedý atrament, pätkové písmo. ¦ Gammelt papir, brunt blekk, skrift med seriffer.
+Couleurs franches, traits épais, coins arrondis. ¦ Výrazné farby, hrubé čiary, zaoblené rohy. ¦ Klare farger, tykke streker, avrundede hjørner.
+Noir et blanc imprimable ¦ Čiernobiele na tlač ¦ Svart-hvitt for utskrift
+Gris du noir au clair, quadrillage marqué : lisible imprimé sans couleur. ¦ Sivé od čiernej po svetlú, výrazná mriežka: čitateľné aj pri tlači bez farieb. ¦ Grått fra svart til lyst, tydelig rutenett: lesbart utskrevet uten farge.
+Couleurs qu’on distingue même en voyant mal certaines couleurs (Okabe-Ito). ¦ Farby rozlíšiteľné aj pri poruche farebného videnia (Okabe-Ito). ¦ Farger man kan skille selv om man ser enkelte farger dårlig (Okabe-Ito).
+{n} petits diagrammes, même échelle (de {lo} à {hi}) ¦ {n} malých diagramov, rovnaká mierka (od {lo} do {hi}) ¦ {n} små diagrammer, samme skala (fra {lo} til {hi})
+Repère de date ¦ Značka dátumu ¦ Datomarkør
+Revenir au dessin complet ¦ Späť na celú kresbu ¦ Tilbake til hele tegningen
+Enregistrer la lecture en vidéo ¦ Uložiť prehrávanie ako video ¦ Lagre avspillingen som video
+Réglages → Accessibilité → Mouvement ¦ Nastavenia → Prístupnosť → Pohyb ¦ Innstillinger → Tilgjengelighet → Bevegelse
+Mouvements réduits : une étape à la fois, sans glisser ¦ Obmedzený pohyb: jeden krok za druhým, bez plynulého posunu ¦ Redusert bevegelse: ett trinn om gangen, uten gliding
+Lire les années ¦ Prehrať roky ¦ Spill av årene
+Mettre en pause ¦ Pozastaviť ¦ Sett på pause
+rien à filmer ¦ nie je čo natočiť ¦ ingenting å filme
+✓ Vidéo exportée ({format}). ¦ ✓ Video exportované ({format}). ¦ ✓ Video eksportert ({format}).
+Vidéo impossible : {err} ¦ Video sa nedá vytvoriť: {err} ¦ Video ikke mulig: {err}
+Les couleurs et réglages du type, comme avant ¦ Farby a nastavenia typu ako predtým ¦ Typens farger og innstillinger, som før
+Selon le type ¦ Podľa typu ¦ Avhengig av typen
+Marqué ¦ Výrazné ¦ Tydelig
+Tous mes diagrammes prennent ce style (même ceux qui avaient le leur) ¦ Všetky moje diagramy prevezmú tento štýl (aj tie, ktoré mali vlastný) ¦ Alle diagrammene mine får denne stilen (også de som hadde sin egen)
+Les nouveaux diagrammes, et ceux sans style à eux, le prennent ¦ Prevezmú ho nové diagramy a tie bez vlastného štýlu ¦ Nye diagrammer, og de uten egen stil, får den
+Appliquer à tous les diagrammes ¦ Použiť na všetky diagramy ¦ Bruk på alle diagrammer
+⭐ Style par défaut ¦ ⭐ Predvolený štýl ¦ ⭐ Standardstil
+à (facultatif) ¦ do (nepovinné) ¦ til (valgfritt)
+Retirer l’annotation ¦ Odobrať poznámku ¦ Fjern merknaden
+Aucune annotation : ajoute une flèche, un texte, une zone ou un repère de date. ¦ Žiadna poznámka: pridaj šípku, text, oblasť alebo značku dátumu. ¦ Ingen merknader: legg til en pil, en tekst, et område eller en datomarkør.
+Toutes les séries ¦ Všetky rady ¦ Alle serier
+Nom de la ligne ¦ Názov čiary ¦ Linjens navn
+Échelle logarithmique (très grands écarts) ¦ Logaritmická mierka (veľmi veľké rozdiely) ¦ Logaritmisk skala (svært store forskjeller)
+Deuxième axe (à droite) ¦ Druhá os (vpravo) ¦ Andre akse (til høyre)
+{name} (en courbe) ¦ {name} (ako krivka) ¦ {name} (som kurve)
+Les séries du tableau ¦ Rady tabuľky ¦ Tabellens serier
+Le sexe ¦ Pohlavie ¦ Kjønn
+Le siècle ¦ Storočie ¦ Århundre
+La branche (côté père / côté mère) ¦ Vetva (otcova / matkina strana) ¦ Gren (farssiden / morssiden)
+Le lieu (département) ¦ Miesto (departement) ¦ Sted (departement)
+Le lieu (pays) ¦ Miesto (krajina) ¦ Sted (land)
+La génération ¦ Generácia ¦ Generasjon
+Un seul diagramme ¦ Jediný diagram ¦ Ett enkelt diagram
+Répéter le diagramme par ¦ Opakovať diagram podľa ¦ Gjenta diagrammet etter
+Pour répéter par sexe, siècle, branche, lieu ou génération : prends tes chiffres avec « 🧮 Compter dans ma base » (onglet « Depuis l’app ») et coche « Tenir à jour ». ¦ Ak chceš opakovať podľa pohlavia, storočia, vetvy, miesta alebo generácie: získaj čísla cez „🧮 Spočítať v mojej databáze“ (karta „Z aplikácie“) a začiarkni „Aktualizovať“. ¦ For å gjenta etter kjønn, århundre, gren, sted eller generasjon: hent tallene med «🧮 Tell i databasen min» (fanen «Fra appen») og huk av for «Hold oppdatert».
+Les données vont de {a} à {b} : le curseur ▶ sous l’aperçu les fait apparaître année après année. ¦ Údaje sú od {a} do {b}: posúvač ▶ pod náhľadom ich zobrazuje rok po roku. ¦ Dataene går fra {a} til {b}: glidebryteren ▶ under forhåndsvisningen viser dem år for år.
+Montrer aussi le curseur ▶ là où le diagramme est posé (Graphiques, fiches, tableau de bord) ¦ Zobraziť posúvač ▶ aj tam, kde je diagram vložený (Grafy, karty, Prehľad) ¦ Vis også glidebryteren ▶ der diagrammet er satt inn (Diagrammer, oppføringer, Oversikt)
+Recommencer au début (boucle) ¦ Začať znova od začiatku (slučka) ¦ Start på nytt fra begynnelsen (løkke)
+Un pas de ¦ Krok ¦ Et trinn på
+unite|ans ¦ rokov ¦ år
+« Réduire les animations » est demandé : la lecture avance d’une étape par seconde, sans glisser. ¦ Je zapnuté „Obmedziť animácie“: prehrávanie postupuje o jeden krok za sekundu, bez plynulého posunu. ¦ «Reduser animasjoner» er slått på: avspillingen går ett trinn per sekund, uten gliding.
+Palette, police, fond, traits, coins, taille du texte, quadrillage : choisis un style prêt, retouche-le, garde-le sous un nom. ¦ Paleta, písmo, pozadie, čiary, rohy, veľkosť textu, mriežka: vyber hotový štýl, uprav ho a ulož pod názvom. ¦ Palett, skrift, bakgrunn, streker, hjørner, tekststørrelse, rutenett: velg en ferdig stil, juster den og ta vare på den under et navn.
+Pose-les ici, puis glisse-les sur l’aperçu (et leurs poignées pour les agrandir). Elles partent avec le diagramme à l’export et à l’impression. ¦ Vlož ich sem a potom ich presuň na náhľad (a ich úchyty na zväčšenie). Pri exporte a tlači idú s diagramom. ¦ Sett dem inn her, og dra dem deretter på forhåndsvisningen (og håndtakene for å forstørre dem). De følger med diagrammet ved eksport og utskrift.
+📏 Lignes de repère et axes ¦ 📏 Referenčné čiary a osi ¦ 📏 Referanselinjer og akser
+Moyenne et médiane se calculent seules ; l’objectif et la valeur sont à toi. ¦ Priemer a medián sa vypočítajú samy; cieľ a hodnotu určuješ ty. ¦ Gjennomsnitt og median beregnes automatisk; målet og verdien bestemmer du.
+Un petit diagramme par groupe, côte à côte, avec la même échelle pour comparer d’un coup d’œil. ¦ Jeden malý diagram pre každú skupinu, vedľa seba, s rovnakou mierkou na porovnanie na prvý pohľad. ¦ Ett lite diagram per gruppe, side om side, med samme skala for å sammenligne med ett blikk.
+▶ Lecture dans le temps ¦ ▶ Prehrávanie v čase ¦ ▶ Avspilling over tid
+Aucun chiffre pour ce découpage. ¦ Pre toto rozdelenie nie sú žiadne čísla. ¦ Ingen tall for denne inndelingen.
+{n} petits diagrammes, même échelle. ¦ {n} malých diagramov, rovnaká mierka. ¦ {n} små diagrammer, samme skala.
+Baptêmes et sépultures ¦ Krsty a pohreby ¦ Dåp og begravelser
+Police du diagramme ¦ Písmo diagramu ¦ Diagrammets skrift
+⭐ « {name} » : style par défaut des nouveaux diagrammes et de ceux sans style à eux. ¦ ⭐ „{name}“: predvolený štýl nových diagramov a tých bez vlastného štýlu. ¦ ⭐ «{name}»: standardstil for nye diagrammer og de uten egen stil.
+Plus de style par défaut ¦ Už žiadny predvolený štýl ¦ Ingen standardstil lenger
+60 annotations au plus. ¦ Najviac 60 poznámok. ¦ Høyst 60 merknader.
+Guerre de 14 ¦ Vojna 1914 ¦ Krigen 1914
+Mon repère ¦ Moja značka ¦ Min markør
+Mon texte ¦ Môj text ¦ Min tekst
+Ligne de repère retirée ¦ Referenčná čiara odobraná ¦ Referanselinjen er fjernet
+Annotation retirée ¦ Poznámka odobraná ¦ Merknaden er fjernet
+(retouché) ¦ (upravené) ¦ (justert)
+Style « {name} » appliqué à {n} diagrammes ¦ Štýl „{name}“ použitý na {n} diagramov ¦ Stilen «{name}» brukt på {n} diagrammer
+Style « {name} » appliqué à {n} diagramme ¦ Štýl „{name}“ použitý na {n} diagram ¦ Stilen «{name}» brukt på {n} diagram
+Mes styles enregistrés ¦ Moje uložené štýly ¦ Mine lagrede stiler
+ce style (palette, police, fond, traits, coins, taille du texte, quadrillage) ¦ tento štýl (paleta, písmo, pozadie, čiary, rohy, veľkosť textu, mriežka) ¦ denne stilen (palett, skrift, bakgrunn, streker, hjørner, tekststørrelse, rutenett)
+Style « {name} » appliqué à ce diagramme. ¦ Štýl „{name}“ použitý na tento diagram. ¦ Stilen «{name}» brukt på dette diagrammet.
+Style « {name} » importé. ¦ Štýl „{name}“ importovaný. ¦ Stilen «{name}» importert.
+Annotation : glisser pour la déplacer, Suppr pour la retirer ¦ Poznámka: potiahnutím ju presunieš, klávesom Delete ju odoberieš ¦ Merknad: dra for å flytte den, Delete for å fjerne den
+Texte de l’annotation ¦ Text poznámky ¦ Merknadens tekst
+Hauteur du dessin (0 = automatique) ¦ Výška kresby (0 = automaticky) ¦ Tegningens høyde (0 = automatisk)
+Ajoute la personne du milieu (génération 0), puis ses ascendants (−1, −2…) et ses descendants (1, 2…). ¦ Pridaj osobu v strede (generácia 0), potom jej predkov (−1, −2…) a potomkov (1, 2…). ¦ Legg til personen i midten (generasjon 0), deretter anene (−1, −2…) og etterkommerne (1, 2…).
+Gén. +{g} ¦ Gen. +{g} ¦ Gen. +{g}
+Le sablier de {name} ¦ Presýpacie hodiny osoby {name} ¦ Timeglasset til {name}
+Ajoute des tâches : nom, début, fin (dates ou années), avancement en %. ¦ Pridaj úlohy: názov, začiatok, koniec (dátumy alebo roky), postup v %. ¦ Legg til oppgaver: navn, start, slutt (datoer eller år), framdrift i %.
+Diagramme de Gantt : {n} tâches. ¦ Ganttov diagram: {n} úloh. ¦ Gantt-diagram: {n} oppgaver.
+Diagramme de Gantt : {n} tâche. ¦ Ganttov diagram: {n} úloha. ¦ Gantt-diagram: {n} oppgave.
+Ma recherche sur les {name} ¦ Môj výskum rodu {name} ¦ Min forskning om slekten {name}
+Relevés de Naves (1700-1792) ¦ Výpisy z Naves (1700-1792) ¦ Registreringer fra Naves (1700-1792)
+État civil de Tulle ¦ Matriky z Tulle ¦ Folkeregister i Tulle
+Notaires (contrats de mariage) ¦ Notári (svadobné zmluvy) ¦ Notarer (ektepakter)
+Recensements 1836-1936 ¦ Sčítania obyvateľov 1836-1936 ¦ Folketellinger 1836-1936
+Registres matricules ¦ Vojenské kmeňové listy ¦ Militære rulleregistre
+Visite à Arnac-la-Poste ¦ Návšteva v Arnac-la-Poste ¦ Besøk i Arnac-la-Poste
+Terrain ¦ Terén ¦ Feltarbeid
+Mon idée ¦ Môj nápad ¦ Min idé
+Ajoute des branches (et, à côté, leurs idées). ¦ Pridaj vetvy (a vedľa nich ich nápady). ¦ Legg til grener (og ved siden av dem idéene deres).
+Carte mentale « {name} » : {n} branches. ¦ Myšlienková mapa „{name}“: {n} vetiev. ¦ Tankekart «{name}»: {n} grener.
+Carte mentale « {name} » : {n} branche. ¦ Myšlienková mapa „{name}“: {n} vetva. ¦ Tankekart «{name}»: {n} gren.
+Mes pistes de recherche ¦ Moje stopy výskumu ¦ Mine forskningsspor
+Famille {name} ¦ Rodina {name} ¦ Familien {name}
+Registres de Naves ¦ Matriky z Naves ¦ Kirkebøker fra Naves
+Notaires de Tulle ¦ Notári z Tulle ¦ Notarer i Tulle
+Laboureurs ¦ Roľníci ¦ Bønder
+Tisserands ¦ Tkáči ¦ Vevere
+Qui était Jeanne Roux ? ¦ Kto bola Jeanne Roux? ¦ Hvem var Jeanne Roux?
+Pourquoi le départ en 1902 ? ¦ Prečo odchod v roku 1902? ¦ Hvorfor avreisen i 1902?
+Photos ¦ Fotografie ¦ Bilder
+Mariage 1919 ¦ Svadba 1919 ¦ Bryllup 1919
+Maison de Naves ¦ Dom v Naves ¦ Huset i Naves
+Cousins ¦ Bratranci a sesternice ¦ Fettere og kusiner
+Branche de Paris ¦ Parížska vetva ¦ Paris-grenen
+ADN : 3 correspondances ¦ DNA: 3 zhody ¦ DNA: 3 treff
+Ajoute des noms et leurs chiffres. ¦ Pridaj názvy a ich čísla. ¦ Legg til navn og tallene deres.
+Barres en cercle : {n} lignes, la plus longue « {name} » ({v}). ¦ Kruhové pruhy: {n} riadkov, najdlhší „{name}“ ({v}). ¦ Sirkulære stolper: {n} rader, den lengste «{name}» ({v}).
+Les prénoms les plus donnés ¦ Najčastejšie krstné mená ¦ De mest brukte fornavnene
+fois ¦ krát ¦ ganger
+Ajoute des noms (patronymes, métiers, lieux…) et leurs chiffres. ¦ Pridaj názvy (priezviská, povolania, miesta…) a ich čísla. ¦ Legg til navn (etternavn, yrker, steder…) og tallene deres.
+Bulles groupées : {n} bulles ({k} trop petites pour la place). ¦ Zoskupené bubliny: {n} bublín ({k} príliš malých na dané miesto). ¦ Pakkede bobler: {n} bobler ({k} for små for plassen).
+Bulles groupées : {n} bulles. ¦ Zoskupené bubliny: {n} bublín. ¦ Pakkede bobler: {n} bobler.
+Les noms de famille de l’arbre ¦ Priezviská v rodokmeni ¦ Etternavnene i slektstreet
+Ajoute des objectifs : un nom, où tu en es, et le but (ex. 12 sur 16 ancêtres trouvés). ¦ Pridaj ciele: názov, kde práve si, a cieľ (napr. 12 zo 16 nájdených predkov). ¦ Legg til mål: et navn, hvor langt du er kommet, og målet (f.eks. 12 av 16 aner funnet).
+{name} : {v} sur {goal} ¦ {name}: {v} z {goal} ¦ {name}: {v} av {goal}
+Anneaux d’avancement : {n} objectifs. ¦ Krúžky postupu: {n} cieľov. ¦ Framdriftsringer: {n} mål.
+Anneaux d’avancement : {n} objectifs, de {a} à {b} %. ¦ Krúžky postupu: {n} cieľov, od {a} do {b} %. ¦ Framdriftsringer: {n} mål, fra {a} til {b} %.
+Grands-parents trouvés ¦ Nájdení starí rodičia ¦ Besteforeldre funnet
+Actes de naissance sourcés ¦ Záznamy o narodení s prameňom ¦ Fødselsdokumenter med kilde
+Photos identifiées ¦ Identifikované fotografie ¦ Identifiserte bilder
+Quadrisaïeuls ¦ Prapraprarodičia ¦ Tipp-tippoldeforeldre
+Génération 6 ¦ Generácia 6 ¦ Generasjon 6
+Génération 7 ¦ Generácia 7 ¦ Generasjon 7
+Génération +4 ¦ Generácia +4 ¦ Generasjon +4
+Génération +{g} ¦ Generácia +{g} ¦ Generasjon +{g}
+Les noms de famille ¦ Priezviská ¦ Etternavnene
+Les communes de naissance ¦ Obce narodenia ¦ Fødekommunene
+Les siècles de naissance ¦ Storočia narodenia ¦ Fødselsårhundrene
+{n}e siècle ¦ {n}. storočie ¦ {n}. århundre
+Prendre dans mon arbre ¦ Vziať z môjho rodokmeňa ¦ Hent fra slektstreet mitt
+Rien trouvé dans l’arbre pour ce choix. ¦ V rodokmeni sa pre túto voľbu nič nenašlo. ¦ Ingenting funnet i slektstreet for dette valget.
+{n} lignes prises dans l’arbre. ¦ {n} riadkov prevzatých z rodokmeňa. ¦ {n} rader hentet fra slektstreet.
+⏳ Le sablier de quelqu’un de mon arbre ¦ ⏳ Presýpacie hodiny niekoho z môjho rodokmeňa ¦ ⏳ Timeglasset til en person i slektstreet mitt
+Ses ancêtres au-dessus, ses descendants au-dessous, avec leurs dates. ¦ Predkovia hore, potomkovia dole, s ich dátumami. ¦ Anene over, etterkommerne under, med datoene deres.
+Générations au-dessus ¦ Generácie hore ¦ Generasjoner over
+Générations au-dessous ¦ Generácie dole ¦ Generasjoner under
+📅 Les vies côte à côte ¦ 📅 Životy vedľa seba ¦ 📅 Livene side om side
+Une barre par personne, de sa naissance à son décès (ou à aujourd’hui). ¦ Jeden pruh na osobu, od narodenia po úmrtie (alebo po dnešok). ¦ Én stolpe per person, fra fødsel til død (eller til i dag).
+Ses ancêtres directs ¦ Priami predkovia ¦ De direkte anene
+Sa famille proche (parents, frères et sœurs, enfants) ¦ Blízka rodina (rodičia, súrodenci, deti) ¦ Nærmeste familie (foreldre, søsken, barn)
+Ses descendants ¦ Potomkovia ¦ Etterkommerne
+Les vies autour de {name} ¦ Životy okolo osoby {name} ¦ Livene rundt {name}
+🧠 Une personne et ses branches ¦ 🧠 Osoba a jej vetvy ¦ 🧠 En person og grenene rundt
+Au centre la personne ; autour, ses enfants (et leurs enfants), ou les métiers et les communes de ses ancêtres. ¦ V strede osoba; okolo jej deti (a ich deti), alebo povolania a obce jej predkov. ¦ I midten personen; rundt den barna (og barnas barn), eller anenes yrker og kommuner.
+Les branches ¦ Vetvy ¦ Grenene
+Ses enfants, et leurs enfants ¦ Deti a ich deti ¦ Barna og barnas barn
+Les métiers de ses ancêtres ¦ Povolania predkov ¦ Anenes yrker
+Les communes de naissance de ses ancêtres ¦ Obce narodenia predkov ¦ Anenes fødekommuner
+La descendance de {name} ¦ Potomstvo osoby {name} ¦ Etterslekten etter {name}
+D’où viennent les ancêtres de {name} ¦ Odkiaľ pochádzajú predkovia osoby {name} ¦ Hvor anene til {name} kommer fra
+🎯 Un classement de mon arbre ¦ 🎯 Rebríček z môjho rodokmeňa ¦ 🎯 En rangering fra slektstreet mitt
+Les plus fréquents dans toute la base, en barres autour d’un cercle. ¦ Najčastejšie v celej databáze, ako pruhy okolo kruhu. ¦ De hyppigste i hele databasen, som stolper rundt en sirkel.
+fiches ¦ kariet ¦ oppføringer
+🫧 Les bulles de mon arbre ¦ 🫧 Bubliny môjho rodokmeňa ¦ 🫧 Boblene i slektstreet mitt
+Une bulle par nom, métier ou commune : plus il y a de fiches, plus elle est grosse. ¦ Jedna bublina na meno, povolanie alebo obec: čím viac kariet, tým je väčšia. ¦ Én boble per navn, yrke eller kommune: jo flere oppføringer, jo større blir den.
+Les bulles ¦ Bubliny ¦ Boblene
+⭕ Où j’en suis dans mon arbre ¦ ⭕ Kde som vo svojom rodokmeni ¦ ⭕ Hvor langt jeg er kommet i slektstreet
+Un anneau par objectif : plein, c’est fini. ¦ Jeden krúžok na cieľ: plný znamená hotovo. ¦ Én ring per mål: full betyr ferdig.
+Les objectifs ¦ Ciele ¦ Målene
+Les ancêtres trouvés, génération par génération ¦ Nájdení predkovia, generácia po generácii ¦ Aner funnet, generasjon for generasjon
+Les fiches complètes (dates, lieux, métier) ¦ Úplné karty (dátumy, miesta, povolanie) ¦ Fullstendige oppføringer (datoer, steder, yrke)
+Date de décès (personnes décédées) ¦ Dátum úmrtia (zosnulé osoby) ¦ Dødsdato (avdøde personer)
+Mes fiches complètes ¦ Moje úplné karty ¦ Mine fullstendige oppføringer
+Les ancêtres de {name} : où j’en suis ¦ Predkovia osoby {name}: kde som ¦ Anene til {name}: hvor langt jeg er kommet
+Les personnes (génération : 0 = la personne, −1 = parents, 1 = enfants…) ¦ Osoby (generácia: 0 = osoba, −1 = rodičia, 1 = deti…) ¦ Personene (generasjon: 0 = personen, −1 = foreldre, 1 = barn…)
+Couleur des ascendants ¦ Farba predkov ¦ Anenes farge
+Couleur de la personne ¦ Farba osoby ¦ Personens farge
+Couleur des descendants ¦ Farba potomkov ¦ Etterkommernes farge
+Hauteur d’une case ¦ Výška políčka ¦ Boksens høyde
+Écart entre générations ¦ Medzera medzi generáciami ¦ Avstand mellom generasjoner
+Traits vers la personne ¦ Čiary k osobe ¦ Streker til personen
+Nom des générations à gauche ¦ Názvy generácií vľavo ¦ Generasjonsnavn til venstre
+Les tâches ¦ Úlohy ¦ Oppgavene
+Début (date ou année) ¦ Začiatok (dátum alebo rok) ¦ Start (dato eller år)
+Une par tâche ¦ Jedna na úlohu ¦ Én per oppgave
+Couleur (une seule) ¦ Farba (jediná) ¦ Farge (bare én)
+Montrer l’avancement ¦ Zobraziť postup ¦ Vis framdrift
+Écrire le % ¦ Napísať % ¦ Skriv %
+Trait « aujourd’hui » ¦ Čiara „dnes“ ¦ Streken «i dag»
+Couleur du trait « aujourd’hui » ¦ Farba čiary „dnes“ ¦ Fargen på streken «i dag»
+Les branches et leurs idées (une ligne par idée) ¦ Vetvy a ich nápady (jeden riadok na nápad) ¦ Grenene og idéene deres (én rad per idé)
+Le mot du centre ¦ Slovo v strede ¦ Ordet i midten
+Couleur du centre ¦ Farba stredu ¦ Fargen i midten
+Branches en courbes ¦ Zakrivené vetvy ¦ Buede grener
+Épaisseur des branches ¦ Hrúbka vetiev ¦ Grenenes tykkelse
+Une par ligne ¦ Jedna na riadok ¦ Én per rad
+Chiffre d’un tour complet (vide = le plus grand) ¦ Hodnota celého kruhu (prázdne = najväčšia) ¦ Verdi for en hel runde (tom = den største)
+Une par bulle ¦ Jedna na bublinu ¦ Én per boble
+Écart entre les bulles ¦ Medzera medzi bublinami ¦ Avstand mellom boblene
+Le but ¦ Cieľ ¦ Målet
+Anneaux l’un dans l’autre ¦ Krúžky jeden v druhom ¦ Ringer inni hverandre
+Un anneau par objectif, côte à côte ¦ Jeden krúžok na cieľ, vedľa seba ¦ Én ring per mål, side om side
+Par ligne (côte à côte) ¦ Na riadok (vedľa seba) ¦ Per rad (side om side)
+1er siècle ¦ 1. storočie ¦ 1. århundre
+nombre|{n}e siècle ¦ {n}. storočie ¦ {n}. århundre
+⚠ Lieux sans position : {list} ¦ ⚠ Miesta bez polohy: {list} ¦ ⚠ Steder uten posisjon: {list}
+mentions par département ¦ zmienky podľa departementu ¦ omtaler per departement
+Choisis un nom dans « Depuis l’app » (ou tape des lieux et des dates). ¦ Vyber meno v „Z aplikácie“ (alebo napíš miesta a dátumy). ¦ Velg et navn i «Fra appen» (eller skriv inn steder og datoer).
+Aucune mention au {when}. ¦ Žiadna zmienka v {when}. ¦ Ingen omtaler i {when}.
+Aucune mention pour ce nom. ¦ Žiadna zmienka o tomto mene. ¦ Ingen omtaler av dette navnet.
+Carte du nom {name} : {n} au {when} dans {d}. ¦ Mapa mena {name}: {n} v {when} v {d}. ¦ Kart over navnet {name}: {n} i {when} i {d}.
+Carte du nom {name} : {n} au {when}. ¦ Mapa mena {name}: {n} v {when}. ¦ Kart over navnet {name}: {n} i {when}.
+Carte du nom {name} : {n} dans {d}. ¦ Mapa mena {name}: {n} v {d}. ¦ Kart over navnet {name}: {n} i {d}.
+Carte du nom {name} : {n}. ¦ Mapa mena {name}: {n}. ¦ Kart over navnet {name}: {n}.
+jusqu’en {y} ¦ do {y} ¦ fram til {y}
+années {y} ¦ roky {y} ¦ {y}-årene
+peu → beaucoup ¦ málo → veľa ¦ få → mange
+peu ¦ málo ¦ få
+beaucoup ¦ veľa ¦ mange
+Prends les événements de ton arbre (« Depuis l’app »). ¦ Vezmi udalosti zo svojho rodokmeňa („Z aplikácie“). ¦ Hent hendelsene fra slektstreet ditt («Fra appen»).
+Carte de chaleur : {n} ({when}). ¦ Teplotná mapa: {n} ({when}). ¦ Varmekart: {n} ({when}).
+Carte de chaleur : {n}. ¦ Teplotná mapa: {n}. ¦ Varmekart: {n}.
+Relie des correspondances ADN à leur fiche (onglet ADN), puis « Depuis l’app ». ¦ Prepoj zhody DNA s ich kartou (záložka DNA), potom „Z aplikácie“. ¦ Koble DNA-treff til oppføringen deres (fanen DNA), deretter «Fra appen».
+=lieu d’ancêtre commun ¦ miesto spoločného predka|miesta spoločných predkov|miest spoločných predkov ¦ sted for felles ane|steder for felles aner
+=mention ¦ zmienka|zmienky|zmienok ¦ omtale|omtaler
+=recherche vue ¦ vykonané hľadanie|vykonané hľadania|vykonaných hľadaní ¦ gjennomført søk|gjennomførte søk
+=à faire ou à revoir ¦ na urobenie alebo revíziu|na urobenie alebo revíziu|na urobenie alebo revíziu ¦ å gjøre eller se over|å gjøre eller se over
+Carte des cousins ADN : {n}. ¦ Mapa bratrancov podľa DNA: {n}. ¦ Kart over DNA-søskenbarn: {n}.
+En partie, à revoir ¦ Čiastočne, na revíziu ¦ Delvis, må ses over
+Prévu, pas fait ¦ Plánované, neurobené ¦ Planlagt, ikke gjort
+Toutes les sortes d’actes ¦ Všetky druhy záznamov ¦ Alle typer dokumenter
+Naissances et baptêmes ¦ Narodenia a krsty ¦ Fødsler og dåp
+Décès et sépultures ¦ Úmrtia a pohreby ¦ Dødsfall og begravelser
+Tout vu ¦ Všetko prezreté ¦ Alt gjennomgått
+Trous à couvrir ¦ Medzery na doplnenie ¦ Hull å fylle
+Clic : le détail ¦ Klik: podrobnosti ¦ Klikk: detaljer
+Rien pour ce choix (sorte d’acte, période). ¦ Pre túto voľbu nič (druh záznamu, obdobie). ¦ Ingenting for dette valget (dokumenttype, periode).
+Prends tes dépouillements, battues et trous (« Depuis l’app »). ¦ Vezmi svoje výpisy, hromadné pátrania a medzery („Z aplikácie“). ¦ Hent registreringene, leteaksjonene og hullene dine («Fra appen»).
+Carte de tes recherches : {n} — {g} tout vu, {o} en partie, {r} avec des trous. ¦ Mapa tvojho výskumu: {n} — {g} všetko prezreté, {o} čiastočne, {r} s medzerami. ¦ Kart over forskningen din: {n} — {g} alt gjennomgått, {o} delvis, {r} med hull.
+✓ Ce qui a été vu ¦ ✓ Čo bolo prezreté ¦ ✓ Det som er gjennomgått
+⚠️ Ce qui manque ou reste à revoir ¦ ⚠️ Čo chýba alebo treba zrevidovať ¦ ⚠️ Det som mangler eller må ses over
+Rien de vu ici pour l’instant. ¦ Zatiaľ tu nie je nič prezreté. ¦ Ingenting gjennomgått her ennå.
+Rien ne manque ici. ¦ Nič tu nechýba. ¦ Ingenting mangler her.
+CARTE DE TES RECHERCHES ¦ MAPA TVOJHO VÝSKUMU ¦ KART OVER FORSKNINGEN DIN
+Données prises dans l’app. ¦ Údaje prevzaté z aplikácie. ¦ Data hentet fra appen.
+Quels événements ¦ Ktoré udalosti ¦ Hvilke hendelser
+Naissances, mariages, décès, résidences ¦ Narodenia, sobáše, úmrtia, bydliská ¦ Fødsler, vielser, dødsfall, bosteder
+🔤 Un nom de ta généalogie ¦ 🔤 Meno z tvojho rodokmeňa ¦ 🔤 Et navn fra slektsforskningen din
+Choisis un nom dans la liste (les plus fréquents d’abord) ou une personne : son nom est pris. Jamais un vivant ni une fiche confidentielle. ¦ Vyber meno zo zoznamu (najčastejšie prvé) alebo osobu: použije sa jej priezvisko. Nikdy žijúca osoba ani dôverná karta. ¦ Velg et navn fra listen (de hyppigste først) eller en person: etternavnet brukes. Aldri en levende person eller en konfidensiell oppføring.
+ou une personne ¦ alebo osobu ¦ eller en person
+Avec les variantes du même groupe de noms ¦ S variantmi z tej istej skupiny mien ¦ Med variantene i samme navnegruppe
+Aucun nom ¦ Žiadne meno ¦ Ingen navn
+Choisis un nom. ¦ Vyber meno. ¦ Velg et navn.
+Le nom {name}, siècle par siècle ¦ Meno {name}, storočie po storočí ¦ Navnet {name}, århundre for århundre
+Avec {list} ¦ S {list} ¦ Med {list}
+Aucun événement avec un lieu pour ce nom. ¦ Pre toto meno nie je žiadna udalosť s miestom. ¦ Ingen hendelse med sted for dette navnet.
+{n} du nom {name}. ¦ {n} s menom {name}. ¦ {n} med navnet {name}.
+🔥 Les événements de ton arbre ¦ 🔥 Udalosti tvojho rodokmeňa ¦ 🔥 Hendelsene i slektstreet ditt
+Chaque événement daté qui a un lieu compte. Le curseur ▶ passe les décennies une à une. ¦ Počíta sa každá datovaná udalosť s miestom. Posúvač ▶ prechádza desaťročia jedno po druhom. ¦ Hver daterte hendelse med et sted teller. Glidebryteren ▶ går gjennom tiårene ett om gangen.
+Aucun événement daté avec un lieu. ¦ Žiadna datovaná udalosť s miestom. ¦ Ingen datert hendelse med sted.
+🧬 Tes correspondances ADN ¦ 🧬 Tvoje zhody DNA ¦ 🧬 DNA-treffene dine
+Les correspondances reliées à une fiche de l’arbre (onglet ADN) : l’ancêtre commun calculé et ses lieux. Les noms des correspondances (souvent vivantes) ne sont mis que si tu le demandes. ¦ Zhody prepojené s kartou v rodokmeni (záložka DNA): vypočítaný spoločný predok a jeho miesta. Mená zhôd (často žijúcich osôb) sa zobrazia, len keď o to požiadaš. ¦ Treff som er koblet til en oppføring i slektstreet (fanen DNA): den beregnede felles anen og stedene til denne. Navnene på treffene (ofte levende personer) vises bare hvis du ber om det.
+Écrire le nom des correspondances (pas pour un export partagé) ¦ Napísať mená zhôd (nie pre zdieľaný export) ¦ Skriv navnene på treffene (ikke for en delt eksport)
+Aucun test ADN ¦ Žiadny test DNA ¦ Ingen DNA-test
+Aucun ancêtre commun avec un lieu : relie des correspondances à leur fiche dans l’onglet ADN. ¦ Žiadny spoločný predok s miestom: prepoj zhody s ich kartou na záložke DNA. ¦ Ingen felles ane med sted: koble treff til oppføringen deres under fanen DNA.
+🔎 Tes recherches ¦ 🔎 Tvoj výskum ¦ 🔎 Forskningen din
+Les dépouillements (registres consultés), les communes des battues et les actes qui manquent à tes ancêtres (« Que manque-t-il ? »). ¦ Výpisy (prezreté matriky), obce hromadných pátraní a záznamy, ktoré tvojim predkom chýbajú („Čo chýba?“). ¦ Registreringene (gjennomgåtte protokoller), kommunene i leteaksjonene og dokumentene anene dine mangler («Hva mangler?»).
+Aucune recherche ni aucun trou avec une commune placée. ¦ Žiadny výskum ani medzera s umiestnenou obcou. ¦ Ingen forskning eller hull med en plassert kommune.
+Correspondance n° 1 ¦ Zhoda č. 1 ¦ Treff nr. 1
+Correspondance n° 2 ¦ Zhoda č. 2 ¦ Treff nr. 2
+Correspondance n° 3 ¦ Zhoda č. 3 ¦ Treff nr. 3
+Correspondance n° 4 ¦ Zhoda č. 4 ¦ Treff nr. 4
+Correspondance n° 5 ¦ Zhoda č. 5 ¦ Treff nr. 5
+Registres paroissiaux ¦ Farské matriky ¦ Kirkebøker
+Registre abîmé ¦ Poškodená matrika ¦ Skadet kirkebok
+Prévu ¦ Plánované ¦ Planlagt
+Cadrer tout seul sur les points ¦ Automaticky orámovať body ¦ Ramme inn punktene automatisk
+Comme le type ¦ Podľa typu ¦ Som typen
+Couleur de « peu » ¦ Farba pre „málo“ ¦ Farge for «få»
+Couleur de « beaucoup » ¦ Farba pre „veľa“ ¦ Farge for «mange»
+Les mentions du nom (une par ligne) ¦ Zmienky o mene (jedna na riadok) ¦ Omtaler av navnet (én per rad)
+Lieu (« Auch », « Auch 43.65, 0.59 ») ¦ Miesto („Auch“, „Auch 43.65, 0.59“) ¦ Sted («Auch», «Auch 43.65, 0.59»)
+N° du département ¦ Č. departementu ¦ Departementsnr.
+Nom montré (vide = toutes les lignes) ¦ Zobrazené meno (prázdne = všetky riadky) ¦ Vist navn (tom = alle rader)
+🔤 Ce nom sur Géopatronyme (1891-1990) ↗ ¦ 🔤 Toto meno na Géopatronyme (1891-1990) ↗ ¦ 🔤 Dette navnet på Géopatronyme (1891-1990) ↗
+Choisis un nom : un lien ouvrira sa répartition en France de 1891 à 1990 (Géopatronyme). ¦ Vyber meno: odkaz otvorí jeho rozšírenie vo Francúzsku v rokoch 1891 až 1990 (Géopatronyme). ¦ Velg et navn: en lenke åpner utbredelsen i Frankrike fra 1891 til 1990 (Géopatronyme).
+Départements colorés ¦ Zafarbené departementy ¦ Fargede departementer
+Des ronds par lieu ¦ Krúžky podľa miesta ¦ Sirkler per sted
+Siècle montré (une année ; vide = tous) ¦ Zobrazené storočie (rok; prázdne = všetky) ¦ Vist århundre (et år; tom = alle)
+Écrire le nombre sur les départements ¦ Napísať počet na departementy ¦ Skriv antallet på departementene
+Carte des patronymes : {n} mentions. ¦ Mapa priezvisk: {n} zmienok. ¦ Etternavnskart: {n} omtaler.
+Les événements (un par ligne) ¦ Udalosti (jedna na riadok) ¦ Hendelsene (én per rad)
+Décennie montrée (une année ; vide = toutes) ¦ Zobrazené desaťročie (rok; prázdne = všetky) ¦ Vist tiår (et år; tom = alle)
+La décennie seule ¦ Len desaťročie ¦ Bare tiåret
+Tout jusqu’à cette décennie ¦ Všetko až po toto desaťročie ¦ Alt fram til dette tiåret
+La même pour toutes les décennies ¦ Rovnaká pre všetky desaťročia ¦ Den samme for alle tiår
+Propre à chaque décennie ¦ Vlastná pre každé desaťročie ¦ Egen for hvert tiår
+Finesse (cases sur la largeur) ¦ Jemnosť (políčok na šírku) ¦ Finhet (ruter i bredden)
+Étalement ¦ Rozptyl ¦ Spredning
+Où vivait la famille, décennie par décennie ¦ Kde rodina žila, desaťročie po desaťročí ¦ Hvor familien bodde, tiår for tiår
+Carte de chaleur : {n} événements. ¦ Teplotná mapa: {n} udalostí. ¦ Varmekart: {n} hendelser.
+Les lieux des ancêtres communs ¦ Miesta spoločných predkov ¦ Stedene til de felles anene
+Selon le groupe ¦ Podľa skupiny ¦ Etter gruppe
+Selon les cM partagés ¦ Podľa zdieľaných cM ¦ Etter delte cM
+Là où plusieurs correspondances ¦ Tam, kde je viac zhôd ¦ Der det er flere treff
+Mes cousins ADN : où vivaient nos ancêtres communs ¦ Moji bratranci podľa DNA: kde žili naši spoloční predkovia ¦ Mine DNA-søskenbarn: hvor de felles anene våre bodde
+Carte des cousins ADN : {n} lieux. ¦ Mapa bratrancov podľa DNA: {n} miest. ¦ Kart over DNA-søskenbarn: {n} steder.
+Les recherches, commune par commune ¦ Výskum, obec po obci ¦ Forskningen, kommune for kommune
+Noms des communes ¦ Názvy obcí ¦ Kommunenavn
+Les trous et les plus remplies ¦ Medzery a najúplnejšie ¦ Hullene og de mest utfylte
+Mes recherches dans le Gers ¦ Môj výskum v Gers ¦ Min forskning i Gers
+Carte de tes recherches : {n} lignes. ¦ Mapa tvojho výskumu: {n} riadkov. ¦ Kart over forskningen din: {n} rader.
+{g} générations ¦ {g} generácií ¦ {g} generasjoner
+Ma branche paternelle (côté père) ¦ Moja otcovská vetva (otcova strana) ¦ Min farsgren (farssiden)
+Ma branche maternelle (côté mère) ¦ Moja materská vetva (matkina strana) ¦ Min morsgren (morssiden)
+Avant la Révolution (jusqu’en 1789) ¦ Pred revolúciou (do roku 1789) ¦ Før revolusjonen (fram til 1789)
+Au XVIIIe siècle ¦ V 18. storočí ¦ På 1700-tallet
+Au XIXe siècle ¦ V 19. storočí ¦ På 1800-tallet
+Naissances par lieu ¦ Narodenia podľa miesta ¦ Fødsler per sted
+Naissances de mes ancêtres ¦ Narodenia mojich predkov ¦ Anenes fødsler
+Décès par lieu ¦ Úmrtia podľa miesta ¦ Dødsfall per sted
+Mariages par lieu ¦ Sobáše podľa miesta ¦ Vielser per sted
+Naissances, mariages et décès ¦ Narodenia, sobáše a úmrtia ¦ Fødsler, vielser og dødsfall
+Personnes différentes par lieu ¦ Rôzne osoby podľa miesta ¦ Ulike personer per sted
+Familles (patronymes différents) par lieu ¦ Rodiny (rôzne priezviská) podľa miesta ¦ Familier (ulike etternavn) per sted
+Âge moyen au décès par lieu ¦ Priemerný vek pri úmrtí podľa miesta ¦ Gjennomsnittsalder ved død per sted
+Actes trouvés (événements avec une source) ¦ Nájdené záznamy (udalosti s prameňom) ¦ Funne dokumenter (hendelser med kilde)
+Naissances au XIXe siècle ¦ Narodenia v 19. storočí ¦ Fødsler på 1800-tallet
+Naissances avant la Révolution ¦ Narodenia pred revolúciou ¦ Fødsler før revolusjonen
+Tout au XIXe siècle ¦ Všetko v 19. storočí ¦ Alt på 1800-tallet
+Tout, avant la Révolution ¦ Všetko pred revolúciou ¦ Alt før revolusjonen
+Les anniversaires de mes ancêtres ¦ Narodeniny mojich predkov ¦ Anenes fødselsdager
+Mariages de mes ancêtres ¦ Sobáše mojich predkov ¦ Anenes vielser
+Ses parents et ses enfants ¦ Rodičia a deti ¦ Foreldrene og barna
+Grands-parents et petits-enfants ¦ Starí rodičia a vnúčatá ¦ Besteforeldre og barnebarn
+Le plus loin possible ¦ Čo najďalej ¦ Så langt som mulig
+Les vies de ses ancêtres (3 générations) ¦ Životy predkov (3 generácie) ¦ Anenes liv (3 generasjoner)
+Sa famille proche ¦ Blízka rodina ¦ Nærmeste familie
+Les vies de ses descendants ¦ Životy potomkov ¦ Etterkommernes liv
+Ses enfants et petits-enfants ¦ Deti a vnúčatá ¦ Barn og barnebarn
+Les communes de ses ancêtres ¦ Obce predkov ¦ Anenes kommuner
+Les ancêtres trouvés par génération ¦ Nájdení predkovia podľa generácie ¦ Aner funnet per generasjon
+Les fiches complètes ¦ Úplné karty ¦ Fullstendige oppføringer
+Taux de recherche de mes ancêtres (5 générations) ¦ Miera preskúmania mojich predkov (5 generácií) ¦ Forskningsgrad for anene mine (5 generasjoner)
+Régions de naissance (6 générations) ¦ Regióny narodenia (6 generácií) ¦ Fødselsregioner (6 generasjoner)
+Départements de naissance (6 générations) ¦ Departementy narodenia (6 generácií) ¦ Fødselsdepartementer (6 generasjoner)
+Pays de naissance (8 générations) ¦ Krajiny narodenia (8 generácií) ¦ Fødeland (8 generasjoner)
+Communes de naissance (5 générations) ¦ Obce narodenia (5 generácií) ¦ Fødekommuner (5 generasjoner)
+Métiers de mes ancêtres (5 générations) ¦ Povolania mojich predkov (5 generácií) ¦ Anenes yrker (5 generasjoner)
+Siècles de naissance (8 générations) ¦ Storočia narodenia (8 generácií) ¦ Fødselsårhundrer (8 generasjoner)
+Noms de famille (6 générations) ¦ Priezviská (6 generácií) ¦ Etternavn (6 generasjoner)
+Hommes et femmes (4 générations) ¦ Muži a ženy (4 generácie) ¦ Menn og kvinner (4 generasjoner)
+Le plus loin possible (10 générations) ¦ Čo najďalej (10 generácií) ¦ Så langt som mulig (10 generasjoner)
+Toute la descendance connue (8 générations) ¦ Všetci známi potomkovia (8 generácií) ¦ Alle kjente etterkommere (8 generasjoner)
+Toute la descendance connue (10 générations) ¦ Všetci známi potomkovia (10 generácií) ¦ Alle kjente etterkommere (10 generasjoner)
+Ses liens directs (témoins, parrains, marraines) ¦ Priame väzby (svedkovia, krstní otcovia, krstné matky) ¦ Direkte forbindelser (vitner, gudfedre, gudmødre)
+Ses liens et les liens de ses liens ¦ Väzby a väzby týchto väzieb ¦ Forbindelsene og forbindelsenes forbindelser
+Tous les liens de ma base ¦ Všetky väzby v mojej databáze ¦ Alle forbindelser i databasen min
+Implexe : un même ancêtre par plusieurs chemins ¦ Implex: ten istý predok po viacerých cestách ¦ Anetap: den samme anen via flere veier
+Témoins, parrains et marraines ¦ Svedkovia, krstní otcovia a krstné matky ¦ Vitner, gudfedre og gudmødre
+Mes ancêtres et les fiches avec une source ¦ Moji predkovia a karty s prameňom ¦ Anene mine og oppføringer med kilde
+Avec un portrait, avec une source ¦ S portrétom, s prameňom ¦ Med portrett, med kilde
+Mes ancêtres, avec portrait, avec source ¦ Moji predkovia, s portrétom, s prameňom ¦ Anene mine, med portrett, med kilde
+Vivants, avec un portrait, avec une source ¦ Žijúci, s portrétom, s prameňom ¦ Levende, med portrett, med kilde
+Mes ancêtres, hommes, avec source ¦ Moji predkovia, muži, s prameňom ¦ Anene mine, menn, med kilde
+Les vies de toute ma base ¦ Životy v celej mojej databáze ¦ Livene i hele databasen min
+Décès seulement ¦ Len úmrtia ¦ Bare dødsfall
+Lieu de naissance → lieu de décès ¦ Miesto narodenia → miesto úmrtia ¦ Fødested → dødssted
+Lieu de naissance → lieu du mariage ¦ Miesto narodenia → miesto sobáša ¦ Fødested → vielsessted
+D’une génération à l’autre ¦ Z jednej generácie do druhej ¦ Fra én generasjon til den neste
+Mes ancêtres : naissance → décès ¦ Moji predkovia: narodenie → úmrtie ¦ Anene mine: fødsel → død
+Mes ancêtres : d’une génération à l’autre ¦ Moji predkovia: z jednej generácie do druhej ¦ Anene mine: fra én generasjon til den neste
+Au XIXe siècle : naissance → décès ¦ V 19. storočí: narodenie → úmrtie ¦ På 1800-tallet: fødsel → død
+Sa vie : les étapes avec un lieu ¦ Život: etapy s miestom ¦ Livet: etappene med et sted
+Sa vie : toutes les étapes (même sans lieu) ¦ Život: všetky etapy (aj bez miesta) ¦ Livet: alle etappene (også uten sted)
+Avant la Révolution ¦ Pred revolúciou ¦ Før revolusjonen
+Mes parents et grands-parents (3 générations) ¦ Moji rodičia a starí rodičia (3 generácie) ¦ Foreldrene og besteforeldrene mine (3 generasjoner)
+Le XVIIIe siècle, année par année ¦ 18. storočie, rok po roku ¦ 1700-tallet, år for år
+Le XIXe siècle, année par année ¦ 19. storočie, rok po roku ¦ 1800-tallet, år for år
+Mes ancêtres, par 5 ans ¦ Moji predkovia, po 5 rokoch ¦ Anene mine, per 5 år
+Qui vit aujourd’hui ¦ Kto dnes žije ¦ Hvem som lever i dag
+Qui vivait en {y} ¦ Kto žil v roku {y} ¦ Hvem som levde i {y}
+Ses frères et sœurs (1 génération) ¦ Súrodenci (1 generácia) ¦ Søsken (1 generasjon)
+Ses cousins germains (2 générations) ¦ Bratranci a sesternice (2 generácie) ¦ Søskenbarn (2 generasjoner)
+Ses cousins issus de germains (3 générations) ¦ Bratranci a sesternice z druhého kolena (3 generácie) ¦ Tremenninger (3 generasjoner)
+Les cousins germains (2 générations) ¦ Bratranci a sesternice (2 generácie) ¦ Søskenbarn (2 generasjoner)
+Les cousins issus de germains (3 générations) ¦ Bratranci a sesternice z druhého kolena (3 generácie) ¦ Tremenninger (3 generasjoner)
+Jusqu’à 4 générations, tous les liens ¦ Až 4 generácie, všetky väzby ¦ Opptil 4 generasjoner, alle forbindelser
+Jusqu’à 6 générations, tous les liens ¦ Až 6 generácií, všetky väzby ¦ Opptil 6 generasjoner, alle forbindelser
+Moi, mes parents et mes grands-parents ¦ Ja, moji rodičia a starí rodičia ¦ Meg, foreldrene og besteforeldrene mine
+Moi et mes parents ¦ Ja a moji rodičia ¦ Meg og foreldrene mine
+Mes parents, moi et mes enfants ¦ Moji rodičia, ja a moje deti ¦ Foreldrene mine, meg og barna mine
+Le plus loin possible (14 générations) ¦ Čo najďalej (14 generácií) ¦ Så langt som mulig (14 generasjoner)
+Ce que je sais (6 générations) ¦ Čo viem (6 generácií) ¦ Det jeg vet (6 generasjoner)
+Taux de recherche (8 générations) ¦ Miera preskúmania (8 generácií) ¦ Forskningsgrad (8 generasjoner)
+Métiers (5 générations) ¦ Povolania (5 generácií) ¦ Yrker (5 generasjoner)
+Hommes et femmes (5 générations) ¦ Muži a ženy (5 generácií) ¦ Menn og kvinner (5 generasjoner)
+Les villages des deux époux (10 lieux) ¦ Dediny oboch manželov (10 miest) ¦ Bygdene til begge ektefellene (10 steder)
+Les villages des deux époux (20 lieux) ¦ Dediny oboch manželov (20 miest) ¦ Bygdene til begge ektefellene (20 steder)
+Le village de chacun → le lieu du mariage (10 lieux) ¦ Dedina každého → miesto sobáša (10 miest) ¦ Bygda til hver enkelt → vielsesstedet (10 steder)
+Les 6 villages principaux ¦ 6 hlavných dedín ¦ De 6 viktigste bygdene
+Âge au décès, par siècle ¦ Vek pri úmrtí podľa storočia ¦ Alder ved død per århundre
+Mes ancêtres : âge au décès, par siècle ¦ Moji predkovia: vek pri úmrtí podľa storočia ¦ Anene mine: alder ved død per århundre
+Ses grands-parents et ses petits-enfants ¦ Starí rodičia a vnúčatá ¦ Besteforeldre og barnebarn
+Quatre générations d’ancêtres ¦ Štyri generácie predkov ¦ Fire generasjoner aner
+Six générations d’ancêtres ¦ Šesť generácií predkov ¦ Seks generasjoner aner
+Ses descendants sur 4 générations ¦ Potomkovia v 4 generáciách ¦ Etterkommerne over 4 generasjoner
+Trois générations de chaque côté ¦ Tri generácie na každej strane ¦ Tre generasjoner på hver side
+Une courbe par siècle de naissance ¦ Jedna krivka na storočie narodenia ¦ Én kurve per fødselsårhundre
+Branche paternelle et maternelle ¦ Otcovská a materská vetva ¦ Farsgren og morsgren
+Mes ancêtres, génération par génération ¦ Moji predkovia, generácia po generácii ¦ Anene mine, generasjon for generasjon
+Une seule courbe pour toute ma base ¦ Jediná krivka pre celú moju databázu ¦ Én enkelt kurve for hele databasen min
+Nés au XIXe siècle, femmes et hommes ¦ Narodení v 19. storočí, ženy a muži ¦ Født på 1800-tallet, kvinner og menn
+Père → fils, sur 3 générations ¦ Otec → syn, v 3 generáciách ¦ Far → sønn, over 3 generasjoner
+Père → fils, sur 5 générations ¦ Otec → syn, v 5 generáciách ¦ Far → sønn, over 5 generasjoner
+Parents → enfants, sur 3 générations ¦ Rodičia → deti, v 3 generáciách ¦ Foreldre → barn, over 3 generasjoner
+Mes ancêtres : père → fils ¦ Moji predkovia: otec → syn ¦ Anene mine: far → sønn
+Les 5 mères qui ont eu le plus d’enfants ¦ 5 matiek s najviac deťmi ¦ De 5 mødrene som fikk flest barn
+Les 10 mères qui ont eu le plus d’enfants ¦ 10 matiek s najviac deťmi ¦ De 10 mødrene som fikk flest barn
+Les mères parmi mes ancêtres ¦ Matky medzi mojimi predkami ¦ Mødrene blant anene mine
+Mes ancêtres sur 2 générations ¦ Moji predkovia v 2 generáciách ¦ Anene mine over 2 generasjoner
+Mes ancêtres sur 3 générations ¦ Moji predkovia v 3 generáciách ¦ Anene mine over 3 generasjoner
+Mes ancêtres sur 4 générations ¦ Moji predkovia v 4 generáciách ¦ Anene mine over 4 generasjoner
+Mes ancêtres sur 5 générations ¦ Moji predkovia v 5 generáciách ¦ Anene mine over 5 generasjoner
+Mes ancêtres sur 3 générations (parents, grands-parents) ¦ Moji predkovia v 3 generáciách (rodičia, starí rodičia) ¦ Anene mine over 3 generasjoner (foreldre, besteforeldre)
+Mes ancêtres, par siècle ¦ Moji predkovia podľa storočia ¦ Anene mine per århundre
+Au XIXe siècle, par décennie ¦ V 19. storočí, po desaťročiach ¦ På 1800-tallet, per tiår
+Les 20 couples qui ont eu le plus d’enfants ¦ 20 párov s najviac deťmi ¦ De 20 parene som fikk flest barn
+Les 40 couples ¦ 40 párov ¦ De 40 parene
+Adulte à 21 ans (majorité d’autrefois) ¦ Dospelý v 21 rokoch (niekdajšia plnoletosť) ¦ Voksen som 21-åring (tidligere myndighetsalder)
+Par siècle, moins de 8 mois ¦ Podľa storočia, menej ako 8 mesiacov ¦ Per århundre, under 8 måneder
+Par demi-siècle, moins de 8 mois ¦ Podľa polstoročia, menej ako 8 mesiacov ¦ Per halvt århundre, under 8 måneder
+Par décennie, moins de 8 mois ¦ Podľa desaťročia, menej ako 8 mesiacov ¦ Per tiår, under 8 måneder
+Très tôt : moins de 7 mois, par siècle ¦ Veľmi skoro: menej ako 7 mesiacov, podľa storočia ¦ Svært tidlig: under 7 måneder, per århundre
+Depuis son lieu de naissance (8 générations) ¦ Z miesta narodenia (8 generácií) ¦ Fra fødestedet (8 generasjoner)
+Depuis son lieu de naissance (5 générations) ¦ Z miesta narodenia (5 generácií) ¦ Fra fødestedet (5 generasjoner)
+Depuis le berceau des plus anciens (10 générations) ¦ Z kolísky najstarších (10 generácií) ¦ Fra de eldstes vugge (10 generasjoner)
+Les 8 communes les plus suivies ¦ 8 najsledovanejších obcí ¦ De 8 mest fulgte kommunene
+Tous les segments ¦ Všetky segmenty ¦ Alle segmenter
+Segments d’au moins 7 cM (les plus sûrs) ¦ Segmenty aspoň 7 cM (najspoľahlivejšie) ¦ Segmenter på minst 7 cM (de sikreste)
+Segments d’au moins 10 cM ¦ Segmenty aspoň 10 cM ¦ Segmenter på minst 10 cM
+Gros segments (20 cM et plus) ¦ Veľké segmenty (20 cM a viac) ¦ Store segmenter (20 cM og mer)
+Toutes les correspondances (150 au plus) ¦ Všetky zhody (najviac 150) ¦ Alle treff (høyst 150)
+Au moins 20 cM (150 au plus) ¦ Aspoň 20 cM (najviac 150) ¦ Minst 20 cM (høyst 150)
+Cousins proches (90 cM et plus) ¦ Blízki bratranci (90 cM a viac) ¦ Nære søskenbarn (90 cM og mer)
+Au moins 50 cM, toutes ¦ Aspoň 50 cM, všetky ¦ Minst 50 cM, alle
+Graphique : un point de départ tout prêt ¦ Graf: hotový východiskový bod ¦ Diagram: et ferdig utgangspunkt
+✏️ Sur mesure (les réglages ci-dessous) ¦ ✏️ Na mieru (nastavenia nižšie) ¦ ✏️ Skreddersydd (innstillingene nedenfor)
+Ce point de départ n’a pas pu être réglé. ¦ Tento východiskový bod sa nepodarilo nastaviť. ¦ Dette utgangspunktet kunne ikke stilles inn.
+Réglé. Clique sur « {label} » pour voir le dessin. ¦ Nastavené. Klikni na „{label}“ a uvidíš kresbu. ¦ Stilt inn. Klikk på «{label}» for å se tegningen.
+Pas d’ascendance : choisis une personne de départ (Personnes → sa fiche → « Personne de départ »). ¦ Žiadni predkovia: vyber východiskovú osobu (Osoby → jej karta → „Východisková osoba“). ¦ Ingen aner: velg en startperson (Personer → oppføringen → «Startperson»).
+Pas d’enfant connu pour la personne de départ. ¦ Východisková osoba nemá žiadne známe dieťa. ¦ Startpersonen har ingen kjente barn.
+Pas de fratrie connue. ¦ Žiadni známi súrodenci. ¦ Ingen kjente søsken.
+La fratrie de la personne de départ ¦ Súrodenci východiskovej osoby ¦ Startpersonens søsken
+Les enfants de la personne de départ ¦ Deti východiskovej osoby ¦ Startpersonens barn
+Les vies de mes ancêtres ({n} générations) ¦ Životy mojich predkov ({n} generácií) ¦ Anenes liv ({n} generasjoner)
+Pas de descendance connue. ¦ Žiadni známi potomkovia. ¦ Ingen kjente etterkommere.
+Homme ¦ Muž ¦ Mann
+Femme ¦ Žena ¦ Kvinne
+Aucune date de naissance pour ces personnes. ¦ Tieto osoby nemajú žiadny dátum narodenia. ¦ Ingen fødselsdato for disse personene.
+La vie de la personne de départ, étape par étape ¦ Život východiskovej osoby, krok za krokom ¦ Startpersonens liv, trinn for trinn
+Naissances et décès de mes ancêtres (3 générations) ¦ Narodenia a úmrtia mojich predkov (3 generácie) ¦ Anenes fødsler og dødsfall (3 generasjoner)
+Naissances et décès de mes ancêtres (4 générations) ¦ Narodenia a úmrtia mojich predkov (4 generácie) ¦ Anenes fødsler og dødsfall (4 generasjoner)
+Naissances, mariages et décès de sa fratrie ¦ Narodenia, sobáše a úmrtia súrodencov ¦ Fødsler, vielser og dødsfall blant søsknene
+La naissance de ses enfants ¦ Narodenie detí ¦ Barnas fødsel
+{what} avec {who} à {place} ¦ {what} s {who} v {place} ¦ {what} med {who} i {place}
+{what} avec {who} ¦ {what} s {who} ¦ {what} med {who}
+{what} à {place} ¦ {what} v {place} ¦ {what} i {place}
+Mes ancêtres : naissances et décès ¦ Moji predkovia: narodenia a úmrtia ¦ Anene mine: fødsler og dødsfall
+Aucune date pour ce choix. ¦ Pre túto voľbu nie je žiadny dátum. ¦ Ingen dato for dette valget.
+Année de naissance et âge au décès (une personne = un point) ¦ Rok narodenia a vek pri úmrtí (jedna osoba = jeden bod) ¦ Fødselsår og alder ved død (én person = ett punkt)
+Âge de l’époux et âge de l’épouse au mariage ¦ Vek ženícha a vek nevesty pri sobáši ¦ Mannens og konas alder ved vielsen
+Âge de l’époux ¦ Vek ženícha ¦ Mannens alder
+Âge de l’épouse ¦ Vek nevesty ¦ Konas alder
+Âge des époux au mariage ¦ Vek manželov pri sobáši ¦ Ektefellenes alder ved vielsen
+Âge au décès selon l’année de naissance ¦ Vek pri úmrtí podľa roku narodenia ¦ Alder ved død etter fødselsår
+Âge au mariage et âge au décès ¦ Vek pri sobáši a vek pri úmrtí ¦ Alder ved vielse og alder ved død
+Pas assez de dates dans l’arbre pour ce choix. ¦ V rodokmeni nie je pre túto voľbu dosť dátumov. ¦ Ikke nok datoer i slektstreet for dette valget.
+bleu : hommes · rouge : femmes ¦ modrá: muži · červená: ženy ¦ blå: menn · rød: kvinner
+Département de naissance → département de décès ¦ Departement narodenia → departement úmrtia ¦ Fødselsdepartement → dødsdepartement
+Département de naissance → département du mariage ¦ Departement narodenia → departement sobáša ¦ Fødselsdepartement → vielsesdepartement
+Département du parent → département de l’enfant ¦ Departement rodiča → departement dieťaťa ¦ Forelderens departement → barnets departement
+Pays de naissance → pays de décès ¦ Krajina narodenia → krajina úmrtia ¦ Fødeland → dødsland
+Commune de naissance → commune de décès ¦ Obec narodenia → obec úmrtia ¦ Fødekommune → dødskommune
+Fils ¦ Syn ¦ Sønn
+Fille ¦ Dcéra ¦ Datter
+Père : {x} ¦ Otec: {x} ¦ Far: {x}
+Parent : ¦ Rodič: ¦ Forelder:
+Enfant : ¦ Dieťa: ¦ Barn:
+Pas assez de lieux connus des deux côtés. ¦ Na oboch stranách nie je dosť známych miest. ¦ Ikke nok kjente steder på begge sider.
+Sa descendance sur 2 générations ¦ Potomkovia v 2 generáciách ¦ Etterkommerne over 2 generasjoner
+Sa descendance sur 3 générations ¦ Potomkovia v 3 generáciách ¦ Etterkommerne over 3 generasjoner
+Rien à dessiner pour ce choix. ¦ Pre túto voľbu nie je čo kresliť. ¦ Ingenting å tegne for dette valget.
+Mes ancêtres ({n} générations) ¦ Moji predkovia ({n} generácií) ¦ Anene mine ({n} generasjoner)
+Mes ancêtres en chiffres (trouvés, sourcés, taux de recherche) ¦ Moji predkovia v číslach (nájdení, s prameňom, miera preskúmania) ¦ Anene mine i tall (funnet, med kilde, forskningsgrad)
+La qualité de ma base (sources, noms, lieux) ¦ Kvalita mojej databázy (pramene, mená, miesta) ¦ Kvaliteten på databasen min (kilder, navn, steder)
+Ancêtres trouvés (10 générations) ¦ Nájdení predkovia (10 generácií) ¦ Aner funnet (10 generasjoner)
+Trouvés sur 8 générations ¦ Nájdení v 8 generáciách ¦ Funnet over 8 generasjoner
+Ancêtres avec une source ¦ Predkovia s prameňom ¦ Aner med kilde
+Taux de recherche moyen ¦ Priemerná miera preskúmania ¦ Gjennomsnittlig forskningsgrad
+Génération la plus lointaine ¦ Najvzdialenejšia generácia ¦ Den fjerneste generasjonen
+Mes ancêtres en chiffres ¦ Moji predkovia v číslach ¦ Anene mine i tall
+à partir de {name} ¦ od osoby {name} ¦ ut fra {name}
+Les chiffres ne sont pas encore prêts. ¦ Čísla ešte nie sú pripravené. ¦ Tallene er ikke klare ennå.
+Fiches avec une source ¦ Karty s prameňom ¦ Oppføringer med kilde
+Personnes décédées ¦ Zosnulé osoby ¦ Avdøde personer
+Noms de famille différents ¦ Rôzne priezviská ¦ Ulike etternavn
+La qualité de ma base ¦ Kvalita mojej databázy ¦ Kvaliteten på databasen min
+Ancêtres avec une source, génération par génération ¦ Predkovia s prameňom, generácia po generácii ¦ Aner med kilde, generasjon for generasjon
+Taux de recherche moyen, génération par génération ¦ Priemerná miera preskúmania, generácia po generácii ¦ Gjennomsnittlig forskningsgrad, generasjon for generasjon
+Ancêtres dont on connaît la date de naissance, par génération ¦ Predkovia so známym dátumom narodenia, podľa generácie ¦ Aner med kjent fødselsdato, per generasjon
+Génér. {g} ¦ Gen. {g} ¦ Gen. {g}
+Pas d’ancêtre trouvé. ¦ Nenašiel sa žiadny predok. ¦ Ingen aner funnet.
+Taux de recherche, génération par génération ¦ Miera preskúmania, generácia po generácii ¦ Forskningsgrad, generasjon for generasjon
+Date de naissance connue ¦ Známy dátum narodenia ¦ Kjent fødselsdato
+à partir de {name} (parmi les ancêtres trouvés) ¦ od osoby {name} (medzi nájdenými predkami) ¦ ut fra {name} (blant anene som er funnet)
+Objectif à changer dans le tableau ¦ Cieľ zmeníš v tabuľke ¦ Målet endres i tabellen
+Ajoute des noms (lignes) et au moins deux périodes (colonnes). ¦ Pridaj názvy (riadky) a aspoň dve obdobia (stĺpce). ¦ Legg til navn (rader) og minst to perioder (kolonner).
+Aucun rang à montrer : vérifie les chiffres. ¦ Žiadne poradie na zobrazenie: skontroluj čísla. ¦ Ingen plassering å vise: kontroller tallene.
+Ajoute au moins deux périodes (lignes) et des catégories (colonnes). ¦ Pridaj aspoň dve obdobia (riadky) a kategórie (stĺpce). ¦ Legg til minst to perioder (rader) og kategorier (kolonner).
+Ajoute des valeurs (une par ligne) : l’app les range dans les tranches. ¦ Pridaj hodnoty (jednu na riadok): aplikácia ich rozdelí do intervalov. ¦ Legg til verdier (én per rad): appen sorterer dem i intervaller.
+médiane ¦ medián ¦ median
+Ajoute des valeurs avec leur groupe (siècle, sexe…) : médiane et quartiles sont calculés. ¦ Pridaj hodnoty s ich skupinou (storočie, pohlavie…): vypočíta sa medián a kvartily. ¦ Legg til verdier med gruppen deres (århundre, kjønn…): median og kvartiler beregnes.
+{name} — {n} valeurs : médiane {md}{u}, quartiles {q1} et {q3}, de {min} à {max}{u}, moyenne {mean} ¦ {name} — {n} hodnôt: medián {md}{u}, kvartily {q1} a {q3}, od {min} do {max}{u}, priemer {mean} ¦ {name} — {n} verdier: median {md}{u}, kvartiler {q1} og {q3}, fra {min} til {max}{u}, gjennomsnitt {mean}
+{name} — {n} valeur : médiane {md}{u}, quartiles {q1} et {q3}, de {min} à {max}{u}, moyenne {mean} ¦ {name} — {n} hodnota: medián {md}{u}, kvartily {q1} a {q3}, od {min} do {max}{u}, priemer {mean} ¦ {name} — {n} verdi: median {md}{u}, kvartiler {q1} og {q3}, fra {min} til {max}{u}, gjennomsnitt {mean}
+moyenne {v}{u} ¦ priemer {v}{u} ¦ gjennomsnitt {v}{u}
+{v}{u} (valeur à part) ¦ {v}{u} (odľahlá hodnota) ¦ {v}{u} (avvikende verdi)
+Ajoute des lignes avec deux valeurs (ex. âge du mari, âge de la femme). ¦ Pridaj riadky s dvoma hodnotami (napr. vek muža, vek ženy). ¦ Legg til rader med to verdier (f.eks. mannens alder, konas alder).
+écart ¦ rozdiel ¦ forskjell
+Ajoute des lignes avec une valeur « avant » et une valeur « après ». ¦ Pridaj riadky s hodnotou „pred“ a hodnotou „po“. ¦ Legg til rader med en «før»-verdi og en «etter»-verdi.
+Ajoute des étapes : un départ, des hausses (+) et des baisses (−), des sous-totaux. ¦ Pridaj kroky: začiatok, nárasty (+) a poklesy (−), medzisúčty. ¦ Legg til trinn: en start, økninger (+) og nedganger (−), delsummer.
+Ajoute des lignes : un nom et un nombre. ¦ Pridaj riadky: názov a číslo. ¦ Legg til rader: et navn og et tall.
+Ajoute des valeurs : une ligne = une personne (nom, valeur, groupe). ¦ Pridaj hodnoty: jeden riadok = jedna osoba (meno, hodnota, skupina). ¦ Legg til verdier: én rad = én person (navn, verdi, gruppe).
+médiane {v}{u} ¦ medián {v}{u} ¦ median {v}{u}
+5 000 premiers points sur {n} ¦ prvých 5 000 bodov z {n} ¦ de første 5 000 punktene av {n}
+Ajoute des périodes (lignes) et une colonne par petite courbe. ¦ Pridaj obdobia (riadky) a jeden stĺpec na každú malú krivku. ¦ Legg til perioder (rader) og én kolonne per liten kurve.
+Ajoute une carte : un nom, un chiffre (et la valeur d’avant, une mini-courbe, des seuils…). ¦ Pridaj kartu: názov, číslo (a predchádzajúcu hodnotu, minikrivku, prahy…). ¦ Legg til et kort: et navn, et tall (og den forrige verdien, en minikurve, terskler…).
+Ajoute une ligne : un nom, une valeur, un objectif (et des zones). ¦ Pridaj riadok: názov, hodnotu, cieľ (a pásma). ¦ Legg til en rad: et navn, en verdi, et mål (og soner).
+tout le monde ¦ všetci ¦ alle
+les femmes ¦ ženy ¦ kvinnene
+les hommes ¦ muži ¦ mennene
+Âge au décès (tout le monde) ¦ Vek pri úmrtí (všetci) ¦ Alder ved død (alle)
+Âge au décès (les femmes) ¦ Vek pri úmrtí (ženy) ¦ Alder ved død (kvinnene)
+Âge au décès (les hommes) ¦ Vek pri úmrtí (muži) ¦ Alder ved død (mennene)
+D’après {n} personnes de l’arbre ¦ Podľa {n} osôb z rodokmeňa ¦ Ut fra {n} personer i slektstreet
+Les métiers de la famille ¦ Povolania v rodine ¦ Familiens yrker
+Naissances par commune ¦ Narodenia podľa obce ¦ Fødsler per kommune
+Naissances par nom de famille ¦ Narodenia podľa priezviska ¦ Fødsler per etternavn
+par tranches de {n} ans ¦ po {n}-ročných intervaloch ¦ i intervaller på {n} år
+Prénoms les plus donnés par décennie ({who}) ¦ Najčastejšie krstné mená podľa desaťročia ({who}) ¦ De mest brukte fornavnene per tiår ({who})
+Pas assez de naissances datées. ¦ Nie je dosť datovaných narodení. ¦ Ikke nok daterte fødsler.
+Les 10 prénoms les plus donnés par décennie ¦ 10 najčastejších krstných mien podľa desaťročia ¦ De 10 mest brukte fornavnene per tiår
+D’après les naissances de l’arbre ¦ Podľa narodení v rodokmeni ¦ Ut fra fødslene i slektstreet
+Métiers (par 25 ans) ¦ Povolania (po 25 rokoch) ¦ Yrker (per 25 år)
+Métiers (par 50 ans) ¦ Povolania (po 50 rokoch) ¦ Yrker (per 50 år)
+Naissances par nom de famille (par décennie) ¦ Narodenia podľa priezviska (po desaťročiach) ¦ Fødsler per etternavn (per tiår)
+Naissances par commune (par 25 ans) ¦ Narodenia podľa obce (po 25 rokoch) ¦ Fødsler per kommune (per 25 år)
+Naissances par commune (par décennie) ¦ Narodenia podľa obce (po desaťročiach) ¦ Fødsler per kommune (per tiår)
+Âges des époux au mariage (25 couples les plus récents) ¦ Vek manželov pri sobáši (25 najnovších párov) ¦ Ektefellenes alder ved vielsen (de 25 nyeste parene)
+Âges des époux au mariage (50 couples) ¦ Vek manželov pri sobáši (50 párov) ¦ Ektefellenes alder ved vielsen (50 par)
+Aucun couple marié avec les deux dates de naissance. ¦ Žiadny zosobášený pár s oboma dátumami narodenia. ¦ Ingen gifte par med begge fødselsdatoene.
+Lui ¦ On ¦ Han
+D’après les mariages de l’arbre ¦ Podľa sobášov v rodokmeni ¦ Ut fra vielsene i slektstreet
+Naissances par commune : un siècle et le suivant ¦ Narodenia podľa obce: jedno storočie a nasledujúce ¦ Fødsler per kommune: ett århundre og det neste
+Il faut des naissances sur au moins deux siècles. ¦ Sú potrebné narodenia aspoň z dvoch storočí. ¦ Det trengs fødsler fra minst to århundrer.
+Naissances par commune, d’un siècle à l’autre ¦ Narodenia podľa obce, z jedného storočia do druhého ¦ Fødsler per kommune, fra ett århundre til det neste
+Naissances et décès dans l’arbre (par 50 ans) ¦ Narodenia a úmrtia v rodokmeni (po 50 rokoch) ¦ Fødsler og dødsfall i slektstreet (per 50 år)
+Naissances et décès dans l’arbre (par 25 ans) ¦ Narodenia a úmrtia v rodokmeni (po 25 rokoch) ¦ Fødsler og dødsfall i slektstreet (per 25 år)
+Naissances et décès dans l’arbre (par siècle) ¦ Narodenia a úmrtia v rodokmeni (podľa storočia) ¦ Fødsler og dødsfall i slektstreet (per århundre)
+Les vivants de l’arbre, période par période ¦ Žijúci v rodokmeni, obdobie po období ¦ De levende i slektstreet, periode for periode
+naissances (+) et décès (−) ; décès inconnu d’une naissance ancienne : compté 60 ans après ¦ narodenia (+) a úmrtia (−); neznáme úmrtie pri dávnom narodení: počíta sa 60 rokov potom ¦ fødsler (+) og dødsfall (−); ukjent dødsfall for en gammel fødsel: telles 60 år senere
+Les compteurs de ma base (personnes, familles, médias…) ¦ Počítadlá mojej databázy (osoby, rodiny, médiá…) ¦ Tellerne i databasen min (personer, familier, medier…)
+il y a un mois ¦ pred mesiacom ¦ for en måned siden
+Ancêtres trouvés (8 générations) ¦ Nájdení predkovia (8 generácií) ¦ Aner funnet (8 generasjoner)
+Ma base en chiffres ¦ Moja databáza v číslach ¦ Databasen min i tall
+mini-courbes : les 12 derniers mois ¦ minikrivky: posledných 12 mesiacov ¦ minikurver: de siste 12 månedene
+Ancêtres trouvés par génération (SOSA) ¦ Nájdení predkovia podľa generácie (Sosa) ¦ Aner funnet per generasjon (Sosa)
+Pas d’ascendance SOSA : choisis une personne de départ. ¦ Žiadny vývod Sosa: vyber východiskovú osobu. ¦ Ingen Sosa-anetavle: velg en startperson.
+Génér. ¦ Gen. ¦ Gen.
+Ancêtres trouvés, génération par génération ¦ Nájdení predkovia, generácia po generácii ¦ Aner funnet, generasjon for generasjon
+Objectif : 75 % (à changer dans le tableau) ¦ Cieľ: 75 % (zmeníš v tabuľke) ¦ Mål: 75 % (endres i tabellen)
+Unité (ex. : ans, personnes) ¦ Jednotka (napr. roky, osoby) ¦ Enhet (f.eks. år, personer)
+Les prénoms les plus donnés, décennie par décennie ¦ Najčastejšie krstné mená, desaťročie po desaťročí ¦ De mest brukte fornavnene, tiår for tiår
+rang de 1 (le plus donné) à 8 ; dans le tableau : le nombre de naissances ¦ poradie od 1 (najčastejšie) po 8; v tabuľke: počet narodení ¦ plassering fra 1 (det mest brukte) til 8; i tabellen: antall fødsler
+Laboureur ¦ Roľník ¦ Bonde
+Tisserand ¦ Tkáč ¦ Vever
+Instituteur ¦ Učiteľ ¦ Lærer
+Employé ¦ Úradník ¦ Kontorist
+Journalier ¦ Nádenník ¦ Dagarbeider
+Domestique ¦ Čeľadník ¦ Tjenestefolk
+Les métiers de la famille sur 200 ans ¦ Povolania v rodine počas 200 rokov ¦ Familiens yrker over 200 år
+nombre de personnes, par tranches de 25 ans ¦ počet osôb, po 25-ročných intervaloch ¦ antall personer, i intervaller på 25 år
+par tranches de 5 ans ¦ po 5-ročných intervaloch ¦ i intervaller på 5 år
+Jean et Marie (1789) ¦ Jean a Marie (1789) ¦ Jean og Marie (1789)
+Pierre et Anne (1812) ¦ Pierre a Anne (1812) ¦ Pierre og Anne (1812)
+Louis et Rose (1838) ¦ Louis a Rose (1838) ¦ Louis og Rose (1838)
+Joseph et Jeanne (1861) ¦ Joseph a Jeanne (1861) ¦ Joseph og Jeanne (1861)
+François et Louise (1889) ¦ François a Louise (1889) ¦ François og Louise (1889)
+Henri et Germaine (1919) ¦ Henri a Germaine (1919) ¦ Henri og Germaine (1919)
+André et Simone (1946) ¦ André a Simone (1946) ¦ André og Simone (1946)
+XVIIIe siècle ¦ 18. storočie ¦ 1700-tallet
+XIXe siècle ¦ 19. storočie ¦ 1800-tallet
+Les vivants de la famille ¦ Žijúci v rodine ¦ De levende i familien
+naissances (+), décès et départs (−) ¦ narodenia (+), úmrtia a odchody (−) ¦ fødsler (+), dødsfall og utflyttinger (−)
+En 1800 ¦ V roku 1800 ¦ I 1800
+Naissances 1800-1849 ¦ Narodenia 1800-1849 ¦ Fødsler 1800-1849
+Décès 1800-1849 ¦ Úmrtia 1800-1849 ¦ Dødsfall 1800-1849
+En 1850 ¦ V roku 1850 ¦ I 1850
+Naissances 1850-1899 ¦ Narodenia 1850-1899 ¦ Fødsler 1850-1899
+Départs (Amérique) ¦ Odchody (Amerika) ¦ Utvandringer (Amerika)
+Décès 1850-1899 ¦ Úmrtia 1850-1899 ¦ Dødsfall 1850-1899
+En 1900 ¦ V roku 1900 ¦ I 1900
+Févr. ¦ Feb. ¦ Feb.
+Mars ¦ Mar. ¦ Mar.
+Avril ¦ Apr. ¦ Apr.
+Mai ¦ Máj ¦ Mai
+Juin ¦ Jún ¦ Juni
+Août ¦ Aug. ¦ Aug.
+Déc. ¦ Dec. ¦ Des.
+Âge au décès : une personne, un point ¦ Vek pri úmrtí: jedna osoba, jeden bod ¦ Alder ved død: én person, ett punkt
+Naissances par branche ¦ Narodenia podľa vetvy ¦ Fødsler per gren
+tous les 20 ans, même échelle ¦ každých 20 rokov, rovnaká mierka ¦ hvert 20. år, samme skala
+Ma généalogie en chiffres ¦ Môj rodokmeň v číslach ¦ Slektsforskningen min i tall
+l’an dernier ¦ minulý rok ¦ i fjor
+Actes numérisés ¦ Digitalizované záznamy ¦ Digitaliserte dokumenter
+Fiches sans source ¦ Karty bez prameňa ¦ Oppføringer uten kilde
+Photos légendées ¦ Fotografie s popisom ¦ Bilder med bildetekst
+pareil ¦ rovnako ¦ likt
+Objectif : 75 % ¦ Cieľ: 75 % ¦ Mål: 75 %
+Génér. 2 (parents) ¦ Gen. 2 (rodičia) ¦ Gen. 2 (foreldre)
+Génér. 3 ¦ Gen. 3 ¦ Gen. 3
+Génér. 4 ¦ Gen. 4 ¦ Gen. 4
+Génér. 5 ¦ Gen. 5 ¦ Gen. 5
+Génér. 6 ¦ Gen. 6 ¦ Gen. 6
+Génér. 7 ¦ Gen. 7 ¦ Gen. 7
+Génér. 8 ¦ Gen. 8 ¦ Gen. 8
+Génér. 9 ¦ Gen. 9 ¦ Gen. 9
+Par la 1re valeur ¦ Podľa 1. hodnoty ¦ Etter 1. verdi
+Par la 2e valeur ¦ Podľa 2. hodnoty ¦ Etter 2. verdi
+Les noms (lignes) et les périodes (colonnes) ¦ Názvy (riadky) a obdobia (stĺpce) ¦ Navnene (rader) og periodene (kolonner)
+Nom / prénom ¦ Priezvisko / krstné meno ¦ Etternavn / fornavn
+Les chiffres du tableau sont ¦ Čísla v tabuľke sú ¦ Tallene i tabellen er
+Des nombres : l’app calcule le rang ¦ Čísla: aplikácia vypočíta poradie ¦ Tall: appen beregner plasseringen
+Déjà des rangs (1 = premier) ¦ Už poradia (1 = prvý) ¦ Allerede plasseringer (1 = først)
+Hauteur d’un rang ¦ Výška jedného poradia ¦ Høyde for en plassering
+Les périodes (lignes) et les catégories (colonnes) ¦ Obdobia (riadky) a kategórie (stĺpce) ¦ Periodene (rader) og kategoriene (kolonner)
+Courants (centrés, le moins de mouvement) ¦ Prúdy (vycentrované, čo najmenej pohybu) ¦ Strømmer (sentrert, minst mulig bevegelse)
+Centrés sur l’axe ¦ Vycentrované na osi ¦ Sentrert på aksen
+Empilés sur le sol ¦ Navrstvené na zemi ¦ Stablet på bakken
+En parts (100 %) ¦ V podieloch (100 %) ¦ I andeler (100 %)
+Noms dans les courants ¦ Názvy v prúdoch ¦ Navn i strømmene
+Les valeurs (une par ligne : l’app les range en tranches) ¦ Hodnoty (jedna na riadok: aplikácia ich rozdelí do intervalov) ¦ Verdiene (én per rad: appen sorterer dem i intervaller)
+Largeur des tranches (0 = automatique) ¦ Šírka intervalov (0 = automaticky) ¦ Intervallbredde (0 = automatisk)
+Début de la première tranche (vide = automatique) ¦ Začiatok prvého intervalu (prázdne = automaticky) ¦ Start på første intervall (tom = automatisk)
+Couleur des colonnes ¦ Farba stĺpcov ¦ Søylenes farge
+Montrer la moyenne ¦ Zobraziť priemer ¦ Vis gjennomsnittet
+Les valeurs et leur groupe (médiane, quartiles et extrêmes sont calculés) ¦ Hodnoty a ich skupina (vypočíta sa medián, kvartily a krajné hodnoty) ¦ Verdiene og gruppen deres (median, kvartiler og ytterverdier beregnes)
+Boîtes debout ¦ Zvislé krabice ¦ Stående bokser
+Boîtes couchées ¦ Vodorovné krabice ¦ Liggende bokser
+Jusqu’à 1,5 × l’écart des quartiles (valeurs à part en ronds) ¦ Až 1,5 × medzikvartilové rozpätie (odľahlé hodnoty ako krúžky) ¦ Opptil 1,5 × kvartilavstanden (avvikende verdier som sirkler)
+Du minimum au maximum ¦ Od minima po maximum ¦ Fra minimum til maksimum
+Montrer la moyenne (◆) ¦ Zobraziť priemer (◆) ¦ Vis gjennomsnittet (◆)
+Les lignes et leurs deux valeurs ¦ Riadky a ich dve hodnoty ¦ Radene og de to verdiene deres
+Écrire l’écart ¦ Napísať rozdiel ¦ Skriv forskjellen
+Les lignes : la valeur avant, la valeur après ¦ Riadky: hodnota pred, hodnota po ¦ Radene: verdien før, verdien etter
+Une couleur par ligne ¦ Jedna farba na riadok ¦ Én farge per rad
+Couleur des hausses ¦ Farba nárastov ¦ Farge for økninger
+Couleur des baisses ¦ Farba poklesov ¦ Farge for nedganger
+Les étapes (dans l’ordre) ¦ Kroky (v poradí) ¦ Trinnene (i rekkefølge)
+Valeur (+ ou −) ¦ Hodnota (+ alebo −) ¦ Verdi (+ eller −)
+Hausse ou baisse ¦ Nárast alebo pokles ¦ Økning eller nedgang
+Sous-total (calculé) ¦ Medzisúčet (vypočítaný) ¦ Delsum (beregnet)
+Total (calculé) ¦ Spolu (vypočítané) ¦ Totalt (beregnet)
+Traits entre les marches ¦ Čiary medzi schodmi ¦ Streker mellom trinnene
+Couleur des totaux ¦ Farba súčtov ¦ Farge for totaler
+Les points (une ligne = une personne) ¦ Body (jeden riadok = jedna osoba) ¦ Punktene (én rad = én person)
+Les périodes (lignes) et une colonne par petite courbe ¦ Obdobia (riadky) a jeden stĺpec na malú krivku ¦ Periodene (rader) og én kolonne per liten kurve
+Courbes par ligne (0 = automatique) ¦ Kriviek na riadok (0 = automaticky) ¦ Kurver per rad (0 = automatisk)
+Hauteur d’une courbe ¦ Výška krivky ¦ Kurvens høyde
+Remplir sous la courbe ¦ Vyplniť pod krivkou ¦ Fyll under kurven
+Écrire la dernière valeur ¦ Napísať poslednú hodnotu ¦ Skriv den siste verdien
+Valeur d’avant (flèche, écart) ¦ Predchádzajúca hodnota (šípka, rozdiel) ¦ Forrige verdi (pil, forskjell)
+Texte « avant » (ex. : l’an dernier) ¦ Text „pred“ (napr. minulý rok) ¦ Tekst for «før» (f.eks. i fjor)
+Mini-courbe (chiffres séparés par des espaces) ¦ Minikrivka (čísla oddelené medzerami) ¦ Minikurve (tall adskilt med mellomrom)
+C’est plus haut ¦ Je to vyššie ¦ Det er høyere
+C’est plus bas ¦ Je to nižšie ¦ Det er lavere
+Couleur (sinon selon les seuils) ¦ Farba (inak podľa prahov) ¦ Farge (ellers etter terskler)
+Cartes par ligne (0 = automatique) ¦ Kariet na riadok (0 = automaticky) ¦ Kort per rad (0 = automatisk)
+En valeur et en % ¦ V hodnote a v % ¦ Som verdi og i %
+En valeur ¦ V hodnote ¦ Som verdi
+En % ¦ V % ¦ I %
+Chiffres après la virgule (au plus) ¦ Desatinné miesta (najviac) ¦ Desimaler (høyst)
+Couleur « bien » ¦ Farba „dobré“ ¦ Farge for «bra»
+Couleur « moyen » ¦ Farba „priemerné“ ¦ Farge for «middels»
+Couleur « à surveiller » ¦ Farba „sledovať“ ¦ Farge for «må følges med på»
+Les barres ¦ Pruhy ¦ Stolpene
+Unité (ex. : %) ¦ Jednotka (napr. %) ¦ Enhet (f.eks. %)
+Graduations sous la dernière barre ¦ Stupnica pod posledným pruhom ¦ Skala under den siste stolpen
+Couleur de la valeur ¦ Farba hodnoty ¦ Verdiens farge
+Couleur de l’objectif ¦ Farba cieľa ¦ Målets farge
+Couleur des zones ¦ Farba pásiem ¦ Sonenes farge
+Ajoute des périodes : le nombre d’enfants nés, ceux morts avant 1 an et avant 5 ans. ¦ Pridaj obdobia: počet narodených detí, tých zomrelých pred 1. rokom a pred 5. rokom. ¦ Legg til perioder: antall fødte barn, de som døde før 1 år og før 5 år.
+En tout : {a} % des enfants morts avant 1 an, {b} % avant 5 ans ({n}). ¦ Spolu: {a} % detí zomrelo pred 1. rokom, {b} % pred 5. rokom ({n}). ¦ Totalt: {a} % av barna døde før 1 år, {b} % før 5 år ({n}).
+Mortalité des enfants ¦ Detská úmrtnosť ¦ Barnedødelighet
+Ajoute des couples : enfants nés, arrivés à l’âge adulte, morts jeunes. ¦ Pridaj páry: narodené deti, tie, čo sa dožili dospelosti, a tie, čo zomreli mladé. ¦ Legg til par: fødte barn, de som ble voksne, de som døde unge.
+{name} : {n} sans date de décès ¦ {name}: {n} bez dátumu úmrtia ¦ {name}: {n} uten dødsdato
+Sur {n}, {p} % sont arrivés à l’âge adulte. ¦ Z {n} sa {p} % dožilo dospelosti. ¦ Av {n} ble {p} % voksne.
+Arrivés à l’âge adulte ¦ Dožili sa dospelosti ¦ Ble voksne
+Ajoute des lignes : une période, « Naissances » ou « Décès », et les 12 mois. ¦ Pridaj riadky: obdobie, „Narodenia“ alebo „Úmrtia“ a 12 mesiacov. ¦ Legg til rader: en periode, «Fødsler» eller «Dødsfall», og de 12 månedene.
+{n} naissances ({p} % de l’année) ¦ {n} narodení ({p} % roka) ¦ {n} fødsler ({p} % av året)
+{n} naissances ¦ {n} narodení ¦ {n} fødsler
+{n} décès ({p} % de l’année) ¦ {n} úmrtí ({p} % roka) ¦ {n} dødsfall ({p} % av året)
+Saisons des naissances et des décès (plus foncé = plus d’actes) ¦ Ročné obdobia narodení a úmrtí (tmavšie = viac záznamov) ¦ Årstider for fødsler og dødsfall (mørkere = flere dokumenter)
+moins de 6 mois ¦ menej ako 6 mesiacov ¦ under 6 måneder
+6 mois à 1 an ¦ 6 mesiacov až 1 rok ¦ 6 måneder til 1 år
+1 à 2 ans ¦ 1 až 2 roky ¦ 1 til 2 år
+2 à 5 ans ¦ 2 až 5 rokov ¦ 2 til 5 år
+5 à 10 ans ¦ 5 až 10 rokov ¦ 5 til 10 år
+10 ans et plus ¦ 10 rokov a viac ¦ 10 år og mer
+Ajoute des remariages : le nom, le sexe et le délai en mois depuis la mort du premier conjoint. ¦ Pridaj nové sobáše: meno, pohlavie a čas v mesiacoch od smrti prvého manžela či manželky. ¦ Legg til nye ekteskap: navnet, kjønnet og tiden i måneder siden den første ektefellens død.
+Hommes remariés {when} après : {n} ¦ Muži znova ženatí {when} potom: {n} ¦ Menn gift på nytt {when} etter: {n}
+Femmes remariées {when} après : {n} ¦ Ženy znova vydaté {when} potom: {n} ¦ Kvinner gift på nytt {when} etter: {n}
+Délai médian avant de se remarier : {a} pour les hommes, {b} pour les femmes. ¦ Mediánový čas do nového sobáša: {a} u mužov, {b} u žien. ¦ Mediantid før nytt ekteskap: {a} for menn, {b} for kvinner.
+Veuvage et remariage ¦ Ovdovenie a nový sobáš ¦ Enkestand og nytt ekteskap
+Ajoute des couples : l’année du mariage et sa durée en années. ¦ Pridaj páry: rok sobáša a jeho dĺžku v rokoch. ¦ Legg til par: vielsesåret og ekteskapets lengde i år.
+Durée médiane : {a} ans ({n} terminés par un décès). ¦ Mediánová dĺžka: {a} rokov ({n} ukončených úmrtím). ¦ Medianlengde: {a} år ({n} avsluttet ved dødsfall).
+Durée médiane : {a} ans ({n} terminé par un décès). ¦ Mediánová dĺžka: {a} rokov ({n} ukončené úmrtím). ¦ Medianlengde: {a} år ({n} avsluttet ved dødsfall).
+Durée des mariages ¦ Dĺžka manželstiev ¦ Ekteskapenes lengde
+Ajoute des naissances : l’année, l’âge du père, l’âge de la mère. ¦ Pridaj narodenia: rok, vek otca, vek matky. ¦ Legg til fødsler: året, farens alder, morens alder.
+le père ¦ otec ¦ faren
+la mère ¦ matka ¦ moren
+Âge du père (médiane {n} ans) ¦ Vek otca (medián {n} rokov) ¦ Farens alder (median {n} år)
+Âge de la mère (médiane {n} ans) ¦ Vek matky (medián {n} rokov) ¦ Morens alder (median {n} år)
+Âge des parents à chaque naissance ¦ Vek rodičov pri každom narodení ¦ Foreldrenes alder ved hver fødsel
+Ajoute des périodes : le nombre de couples, les premiers enfants nés avant le mariage et ceux nés moins de 8 mois après. ¦ Pridaj obdobia: počet párov, prvé deti narodené pred sobášom a tie narodené menej ako 8 mesiacov po ňom. ¦ Legg til perioder: antall par, første barn født før vielsen og de som ble født mindre enn 8 måneder etter.
+{name} : {a} premiers enfants nés avant le mariage, sur {n} ¦ {name}: {a} prvých detí narodených pred sobášom z {n} ¦ {name}: {a} første barn født før vielsen, av {n}
+{name} : {a} premier enfant né avant le mariage, sur {n} ¦ {name}: {a} prvé dieťa narodené pred sobášom z {n} ¦ {name}: {a} første barn født før vielsen, av {n}
+{name} : {a} nés moins de 8 mois après, sur {n} ¦ {name}: {a} narodených menej ako 8 mesiacov po sobáši z {n} ¦ {name}: {a} født mindre enn 8 måneder etter, av {n}
+{name} : {a} né moins de 8 mois après, sur {n} ¦ {name}: {a} narodené menej ako 8 mesiacov po sobáši z {n} ¦ {name}: {a} født mindre enn 8 måneder etter, av {n}
+Né avant le mariage ¦ Narodené pred sobášom ¦ Født før vielsen
+Né moins de 8 mois après ¦ Narodené menej ako 8 mesiacov po sobáši ¦ Født mindre enn 8 måneder etter
+{p} % des premiers enfants ont été conçus avant le mariage ({n}). ¦ {p} % prvých detí bolo počatých pred sobášom ({n}). ¦ {p} % av de første barna ble unnfanget før vielsen ({n}).
+Conceptions avant mariage ¦ Počatia pred sobášom ¦ Unnfangelser før vielse
+moins d’1 an ¦ menej ako 1 rok ¦ under 1 år
+1 à 3 ans ¦ 1 až 3 roky ¦ 1 til 3 år
+3 à 5 ans ¦ 3 až 5 rokov ¦ 3 til 5 år
+10 à 15 ans ¦ 10 až 15 rokov ¦ 10 til 15 år
+15 ans et plus ¦ 15 rokov a viac ¦ 15 år og mer
+Ajoute des couples : l’écart d’âge en années (positif = le mari est plus âgé). ¦ Pridaj páry: vekový rozdiel v rokoch (kladný = muž je starší). ¦ Legg til par: aldersforskjellen i år (positiv = mannen er eldst).
+Le mari est plus âgé ¦ Muž je starší ¦ Mannen er eldst
+La femme est plus âgée ¦ Žena je staršia ¦ Kona er eldst
+Mari plus âgé de {gap} : {n} ¦ Muž starší o {gap}: {n} ¦ Mannen eldre med {gap}: {n}
+Femme plus âgée de {gap} : {n} ¦ Žena staršia o {gap}: {n} ¦ Kona eldre med {gap}: {n}
+Écart médian : {a} ans ; la femme est plus âgée dans {p} % des couples. ¦ Mediánový rozdiel: {a} rokov; žena je staršia v {p} % párov. ¦ Medianforskjell: {a} år; kona er eldst i {p} % av parene.
+Écart médian : {a} an ; la femme est plus âgée dans {p} % des couples. ¦ Mediánový rozdiel: {a} rok; žena je staršia v {p} % párov. ¦ Medianforskjell: {a} år; kona er eldst i {p} % av parene.
+Écart d’âge entre époux ¦ Vekový rozdiel medzi manželmi ¦ Aldersforskjell mellom ektefeller
+Ajoute des générations : la distance moyenne (km) au lieu de référence. ¦ Pridaj generácie: priemernú vzdialenosť (km) od referenčného miesta. ¦ Legg til generasjoner: gjennomsnittlig avstand (km) til referansestedet.
+Génération {g} : {km} km en médiane ({n}, le plus loin à {max} km) ¦ Generácia {g}: medián {km} km ({n}, najďalej {max} km) ¦ Generasjon {g}: {km} km i median ({n}, lengst unna {max} km)
+Génération {g} : {km} km en moyenne ({n}, le plus loin à {max} km) ¦ Generácia {g}: priemerne {km} km ({n}, najďalej {max} km) ¦ Generasjon {g}: {km} km i gjennomsnitt ({n}, lengst unna {max} km)
+=lieu connu ¦ známe miesto|známe miesta|známych miest ¦ kjent sted|kjente steder
+Distance au {ref}. ¦ Vzdialenosť od: {ref}. ¦ Avstand til {ref}.
+Loin du berceau ¦ Ďaleko od kolísky ¦ Langt fra vuggen
+Note qui a signé : dans « Modifier un événement », « ✍️ A signé » pour les époux et chaque témoin. ¦ Zaznamenaj, kto sa podpísal: v „Upraviť udalosť“ zvoľ „✍️ Podpísal(a)“ pri manželoch a každom svedkovi. ¦ Noter hvem som skrev under: i «Rediger en hendelse», «✍️ Skrev under» for ektefellene og hvert vitne.
+Hommes (époux…) ¦ Muži (ženísi…) ¦ Menn (ektemenn…)
+Femmes (épouses…) ¦ Ženy (nevesty…) ¦ Kvinner (hustruer…)
+{a} ont signé sur {b} ¦ podpísalo sa {a} z {b} ¦ {a} skrev under av {b}
+Part de ceux qui savaient signer ¦ Podiel tých, ktorí sa vedeli podpísať ¦ Andel som kunne skrive navnet sitt
+Ajoute des générations : pour chaque acte, combien sont sourcés, sans source, manquants. ¦ Pridaj generácie: pri každom zázname, koľko ich má prameň, koľko je bez prameňa a koľko chýba. ¦ Legg til generasjoner: for hvert dokument, hvor mange som har kilde, er uten kilde eller mangler.
+Génération 12 ¦ Generácia 12 ¦ Generasjon 12
+sourcé ¦ s prameňom ¦ med kilde
+sans source ¦ bez prameňa ¦ uten kilde
+manquant ¦ chýba ¦ mangler
+{n} sourcés ¦ {n} s prameňom ¦ {n} med kilde
+{n} sourcé ¦ {n} s prameňom ¦ {n} med kilde
+{n} sans source ¦ {n} bez prameňa ¦ {n} uten kilde
+{n} manquants ¦ chýba: {n} ¦ {n} mangler
+{n} manquant ¦ chýba: {n} ¦ {n} mangler
+{p} % des actes attendus sont prouvés par une source. ¦ {p} % očakávaných záznamov je doložených prameňom. ¦ {p} % av de forventede dokumentene er belagt med en kilde.
+Ce que tu as prouvé ¦ Čo si doložil ¦ Det du har belagt
+Dépouillé ¦ Vypísané ¦ Registrert
+Vu, rien trouvé ¦ Prezreté, nič sa nenašlo ¦ Gjennomgått, ingenting funnet
+Acte trouvé (source) ¦ Záznam nájdený (prameň) ¦ Dokument funnet (kilde)
+Ajoute des lignes : la commune, les années vues (de… à…) et la sorte (dépouillé, vu sans rien, à faire, acte). ¦ Pridaj riadky: obec, prezreté roky (od… do…) a druh (vypísané, prezreté bez výsledku, na urobenie, záznam). ¦ Legg til rader: kommunen, årene som er gjennomgått (fra… til…) og typen (registrert, gjennomgått uten resultat, å gjøre, dokument).
+{place} : de {a} à {b} — en rouge pâle, les années pas encore vues ¦ {place}: od {a} do {b} — bledočerveno roky, ktoré ešte nie sú prezreté ¦ {place}: fra {a} til {b} — i blek rødt, årene som ikke er gjennomgått ennå
+Pas encore vu ¦ Ešte neprezreté ¦ Ikke gjennomgått ennå
+Registres consultés ¦ Prezreté matriky ¦ Gjennomgåtte protokoller
+Couple {n} ¦ Pár {n} ¦ Par {n}
+Enfant {n} ¦ Dieťa {n} ¦ Barn {n}
+Quart de siècle ¦ Štvrťstoročie ¦ Kvart århundre
+Demi-siècle ¦ Polstoročie ¦ Halvt århundre
+👶 Les enfants de ma base ¦ 👶 Deti v mojej databáze ¦ 👶 Barna i databasen min
+Chaque enfant né (ou baptisé) avec une date : mort avant 1 an, avant 5 ans, ou plus tard. Ceux dont on ne connaît pas le décès sont laissés de côté. ¦ Každé dieťa narodené (alebo pokrstené) s dátumom: zomrelo pred 1. rokom, pred 5. rokom, alebo neskôr. Tie, pri ktorých úmrtie nepoznáme, sa vynechajú. ¦ Hvert barn født (eller døpt) med en dato: døde før 1 år, før 5 år eller senere. De som har ukjent død, utelates.
+Aucun enfant avec une naissance et un décès connus. ¦ Žiadne dieťa so známym narodením aj úmrtím. ¦ Ingen barn med kjent fødsel og død.
+{n} périodes prises dans ta base ({k} personnes sans date de décès laissées de côté). ¦ {n} období prevzatých z tvojej databázy ({k} osôb bez dátumu úmrtia vynechaných). ¦ {n} perioder hentet fra databasen din ({k} personer uten dødsdato utelatt).
+👨‍👩‍👧 Les couples de ma base ¦ 👨‍👩‍👧 Páry v mojej databáze ¦ 👨‍👩‍👧 Parene i databasen min
+Pour chaque couple : ses enfants, ceux arrivés à l’âge adulte et ceux morts jeunes. ¦ Pri každom páre: jeho deti, tie, čo sa dožili dospelosti, a tie, čo zomreli mladé. ¦ For hvert par: barna, de som ble voksne, og de som døde unge.
+Adulte à partir de ¦ Dospelý od ¦ Voksen fra
+Aucun couple avec des enfants. ¦ Žiadny pár s deťmi. ¦ Ingen par med barn.
+Les fratries qui ont survécu ¦ Súrodenecké skupiny, ktoré prežili ¦ Søskenflokkene som overlevde
+{n} couples pris dans ta base (sur {k}). ¦ {n} párov prevzatých z tvojej databázy (z {k}). ¦ {n} par hentet fra databasen din (av {k}).
+🗓 Les naissances et les décès de ma base ¦ 🗓 Narodenia a úmrtia v mojej databáze ¦ 🗓 Fødsler og dødsfall i databasen min
+Datés au mois près : combien chaque mois, période par période. ¦ S dátumom presne na mesiac: koľko v každom mesiaci, obdobie po období. ¦ Datert på måneden: hvor mange hver måned, periode for periode.
+Aucune naissance ni aucun décès datés au mois près. ¦ Žiadne narodenie ani úmrtie s dátumom presne na mesiac. ¦ Ingen fødsler eller dødsfall datert på måneden.
+💔 Les remariages de ma base ¦ 💔 Nové sobáše v mojej databáze ¦ 💔 Nye ekteskap i databasen min
+Les personnes mariées deux fois ou plus : le temps entre la mort du conjoint et le mariage suivant (les deux dates connues). ¦ Osoby, ktoré uzavreli sobáš dvakrát či viackrát: čas medzi smrťou manžela či manželky a ďalším sobášom (oba dátumy známe). ¦ Personer som er gift to ganger eller flere: tiden mellom ektefellens død og neste ekteskap (begge datoene kjent).
+Aucun remariage avec la date du décès du conjoint et celle du nouveau mariage. ¦ Žiadny nový sobáš s dátumom úmrtia manžela či manželky aj dátumom nového sobáša. ¦ Ingen nye ekteskap med både ektefellens dødsdato og datoen for det nye ekteskapet.
+{n} remariages pris dans ta base. ¦ {n} nových sobášov prevzatých z tvojej databázy. ¦ {n} nye ekteskap hentet fra databasen din.
+⏳ Les mariages de ma base ¦ ⏳ Manželstvá v mojej databáze ¦ ⏳ Ekteskapene i databasen min
+De la date du mariage à la mort du premier des deux époux. ¦ Od dátumu sobáša po smrť prvého z manželov. ¦ Fra vielsesdatoen til den første ektefellens død.
+Aucun mariage daté dont un des époux a une date de décès. ¦ Žiadny datovaný sobáš, pri ktorom má jeden z manželov dátum úmrtia. ¦ Ingen datert vielse der en av ektefellene har en dødsdato.
+{n} mariages pris dans ta base ({k} encore en cours ou sans date de décès). ¦ {n} manželstiev prevzatých z tvojej databázy ({k} stále trvá alebo bez dátumu úmrtia). ¦ {n} ekteskap hentet fra databasen din ({k} fortsatt i gang eller uten dødsdato).
+{n} mariages pris dans ta base. ¦ {n} manželstiev prevzatých z tvojej databázy. ¦ {n} ekteskap hentet fra databasen din.
+👴 Les naissances de ma base ¦ 👴 Narodenia v mojej databáze ¦ 👴 Fødslene i databasen min
+Pour chaque enfant : l’âge de son père et de sa mère le jour de sa naissance. ¦ Pri každom dieťati: vek otca a matky v deň jeho narodenia. ¦ For hvert barn: farens og morens alder på fødselsdagen.
+Aucun enfant dont un parent a une date de naissance. ¦ Žiadne dieťa, ktorého rodič má dátum narodenia. ¦ Ingen barn der en av foreldrene har en fødselsdato.
+{n} naissances prises dans ta base. ¦ {n} narodení prevzatých z tvojej databázy. ¦ {n} fødsler hentet fra databasen din.
+🤰 Les premiers enfants de ma base ¦ 🤰 Prvé deti v mojej databáze ¦ 🤰 De første barna i databasen min
+Pour chaque mariage daté au mois près : le premier enfant est-il né avant, ou moins de 8 mois après ? ¦ Pri každom sobáši s dátumom presne na mesiac: narodilo sa prvé dieťa pred ním, alebo menej ako 8 mesiacov po ňom? ¦ For hver vielse datert på måneden: ble det første barnet født før, eller mindre enn 8 måneder etter?
+« Tôt » : moins de ¦ „Skoro“: menej ako ¦ «Tidlig»: mindre enn
+Aucun mariage daté au mois près avec un enfant daté. ¦ Žiadny sobáš s dátumom presne na mesiac s datovaným dieťaťom. ¦ Ingen vielse datert på måneden med et datert barn.
+💑 Les couples de ma base ¦ 💑 Páry v mojej databáze ¦ 💑 Parene i databasen min
+L’écart entre les dates de naissance du mari et de la femme. ¦ Rozdiel medzi dátumami narodenia muža a ženy. ¦ Forskjellen mellom mannens og konas fødselsdatoer.
+Aucun couple dont les deux époux ont une date de naissance. ¦ Žiadny pár, kde majú obaja manželia dátum narodenia. ¦ Ingen par der begge ektefellene har en fødselsdato.
+🧭 L’ascendance d’une personne ¦ 🧭 Predkovia jednej osoby ¦ 🧭 Anene til én person
+Génération par génération : à quelle distance du lieu de référence sont nés ses ancêtres (les lieux ont besoin de leurs coordonnées). ¦ Generácia po generácii: ako ďaleko od referenčného miesta sa narodili predkovia (miesta potrebujú súradnice). ¦ Generasjon for generasjon: hvor langt fra referansestedet anene ble født (stedene trenger koordinater).
+Distance mesurée depuis ¦ Vzdialenosť meraná od ¦ Avstand målt fra
+Le lieu de naissance de la personne ¦ Miesto narodenia osoby ¦ Personens fødested
+Le centre des lieux de la génération la plus ancienne ¦ Stred miest najstaršej generácie ¦ Midtpunktet av stedene til den eldste generasjonen
+Un lieu que je choisis ¦ Miesto, ktoré si vyberiem ¦ Et sted jeg velger
+Le lieu (si « un lieu que je choisis ») ¦ Miesto (ak „miesto, ktoré si vyberiem“) ¦ Stedet (hvis «et sted jeg velger»)
+Choisis le lieu dans le menu. ¦ Vyber miesto v ponuke. ¦ Velg stedet i menyen.
+Le lieu de référence n’a pas de coordonnées. ¦ Referenčné miesto nemá súradnice. ¦ Referansestedet har ingen koordinater.
+Aucun ancêtre né dans un lieu situé. ¦ Žiadny predok narodený v umiestnenom mieste. ¦ Ingen aner født på et plassert sted.
+Loin du berceau — {name} ¦ Ďaleko od kolísky — {name} ¦ Langt fra vuggen — {name}
+✍️ Les signatures notées dans ma base ¦ ✍️ Podpisy zaznamenané v mojej databáze ¦ ✍️ Underskriftene notert i databasen min
+Ceux qui ont signé l’acte, ou « ne sait pas signer » : à noter dans « Modifier un événement » (✍️ pour les époux, et pour chaque témoin). ¦ Tí, ktorí záznam podpísali, alebo „nevie sa podpísať“: zaznamenaj v „Upraviť udalosť“ (✍️ pri manželoch a pri každom svedkovi). ¦ De som skrev under på dokumentet, eller «kan ikke skrive navnet sitt»: noter det i «Rediger en hendelse» (✍️ for ektefellene og for hvert vitne).
+Aucune signature notée pour l’instant : dans un événement, choisis « ✍️ A signé : oui / non » pour les époux et les témoins. ¦ Zatiaľ žiadny zaznamenaný podpis: v udalosti zvoľ „✍️ Podpísal(a): áno / nie“ pri manželoch a svedkoch. ¦ Ingen underskrifter notert ennå: velg «✍️ Skrev under: ja / nei» i en hendelse for ektefellene og vitnene.
+✅ L’ascendance d’une personne ¦ ✅ Predkovia jednej osoby ¦ ✅ Anene til én person
+Pour chaque génération d’ancêtres : les naissances, mariages et décès prouvés par une source, présents sans source, ou pas encore trouvés. ¦ Pri každej generácii predkov: narodenia, sobáše a úmrtia doložené prameňom, zapísané bez prameňa alebo ešte nenájdené. ¦ For hver generasjon aner: fødsler, vielser og dødsfall belagt med en kilde, oppgitt uten kilde eller ikke funnet ennå.
+Ce que j’ai prouvé — {name} ¦ Čo som doložil — {name} ¦ Det jeg har belagt — {name}
+📚 Mes dépouillements et mes actes ¦ 📚 Moje výpisy a záznamy ¦ 📚 Mine registreringer og dokumenter
+Pour chaque commune : les années des registres dépouillés (suivi des dépouillements) et des actes trouvés avec une source. ¦ Pri každej obci: roky vypísaných matrík (sledovanie výpisov) a záznamov nájdených s prameňom. ¦ For hver kommune: årene for de registrerte protokollene (oppfølging av registreringer) og for dokumentene funnet med kilde.
+Aucun dépouillement avec des années, ni d’acte sourcé avec un lieu. ¦ Žiadny výpis s rokmi ani záznam s prameňom a miestom. ¦ Ingen registrering med år og ingen dokumenter med kilde og sted.
+{n} communes prises dans ta base. ¦ {n} obcí prevzatých z tvojej databázy. ¦ {n} kommuner hentet fra databasen din.
+Les périodes ¦ Obdobia ¦ Periodene
+Période (ex. 1780) ¦ Obdobie (napr. 1780) ¦ Periode (f.eks. 1780)
+Enfants nés ¦ Narodené deti ¦ Fødte barn
+Le nombre ¦ Počet ¦ Antallet
+Aussi « avant 5 ans » ¦ Aj „pred 5. rokom“ ¦ Også «før 5 år»
+Couleur « avant 1 an » ¦ Farba „pred 1. rokom“ ¦ Farge for «før 1 år»
+Couleur « avant 5 ans » ¦ Farba „pred 5. rokom“ ¦ Farge for «før 5 år»
+Arrivés adultes ¦ Dožili sa dospelosti ¦ Ble voksne
+Le plus de morts jeunes d’abord ¦ Najviac zomrelých v mladosti najprv ¦ Flest døde som unge først
+Couples au plus ¦ Najviac párov ¦ Høyst antall par
+Couleur « adultes » ¦ Farba „dospelí“ ¦ Farge for «voksne»
+Couleur « morts jeunes » ¦ Farba „zomreli mladí“ ¦ Farge for «døde unge»
+Couleur « on ne sait pas » ¦ Farba „nevieme“ ¦ Farge for «vet ikke»
+Les fratries de la famille ¦ Súrodenecké skupiny v rodine ¦ Familiens søskenflokker
+Les lignes (une période et une sorte, puis les 12 mois) ¦ Riadky (obdobie a druh, potom 12 mesiacov) ¦ Radene (en periode og en type, deretter de 12 månedene)
+Les naissances ¦ Narodenia ¦ Fødslene
+Les décès ¦ Úmrtia ¦ Dødsfallene
+Comparer les mois (part de l’année, en %) ¦ Porovnať mesiace (podiel roka v %) ¦ Sammenlign månedene (andel av året, i %)
+Hauteur des cases ¦ Výška políčok ¦ Rutenes høyde
+Saisons des naissances et des décès ¦ Ročné obdobia narodení a úmrtí ¦ Årstider for fødsler og dødsfall
+Les remariages ¦ Nové sobáše ¦ Nye ekteskap
+Année du veuvage ¦ Rok ovdovenia ¦ År for enkestanden
+Combien de temps avant de se remarier ¦ Ako dlho do nového sobáša ¦ Hvor lenge før nytt ekteskap
+Les mariages ¦ Sobáše ¦ Vielsene
+Âge du père ¦ Vek otca ¦ Farens alder
+Âge de la mère ¦ Vek matky ¦ Morens alder
+Le père et la mère ¦ Otec a matka ¦ Faren og moren
+Moyenne par quart de siècle (ligne) ¦ Priemer za štvrťstoročie (čiara) ¦ Gjennomsnitt per kvart århundre (linje)
+Couleur du père ¦ Farba otca ¦ Farens farge
+Couleur de la mère ¦ Farba matky ¦ Morens farge
+Couleur « avant » ¦ Farba „pred“ ¦ Farge for «før»
+Couleur « moins de 8 mois » ¦ Farba „menej ako 8 mesiacov“ ¦ Farge for «under 8 måneder»
+Conceptions avant le mariage ¦ Počatia pred sobášom ¦ Unnfangelser før vielsen
+Écart (ans, + = le mari est plus âgé) ¦ Rozdiel (roky, + = muž je starší) ¦ Forskjell (år, + = mannen er eldst)
+Couleur « mari plus âgé » ¦ Farba „muž starší“ ¦ Farge for «mannen eldst»
+Couleur « femme plus âgée » ¦ Farba „žena staršia“ ¦ Farge for «kona eldst»
+Lieux connus ¦ Známe miesta ¦ Kjente steder
+Distance médiane ¦ Mediánová vzdialenosť ¦ Medianavstand
+Le plus loin ¦ Najďalej ¦ Lengst unna
+Trait : le plus loin ¦ Čiara: najďalej ¦ Strek: lengst unna
+Phrase sous le dessin ¦ Veta pod kresbou ¦ Setning under tegningen
+lieu de naissance de la personne ¦ miesto narodenia osoby ¦ personens fødested
+Hommes : ont signé ¦ Muži: podpísali sa ¦ Menn: skrev under
+Hommes : n’ont pas signé ¦ Muži: nepodpísali sa ¦ Menn: skrev ikke under
+Femmes : ont signé ¦ Ženy: podpísali sa ¦ Kvinner: skrev under
+Femmes : n’ont pas signé ¦ Ženy: nepodpísali sa ¦ Kvinner: skrev ikke under
+Témoins : ont signé ¦ Svedkovia: podpísali sa ¦ Vitner: skrev under
+Témoins : n’ont pas signé ¦ Svedkovia: nepodpísali sa ¦ Vitner: skrev ikke under
+Couleur des témoins ¦ Farba svedkov ¦ Vitnenes farge
+Savoir signer ¦ Vedieť sa podpísať ¦ Kunne skrive navnet sitt
+Ancêtres possibles ¦ Možní predkovia ¦ Mulige aner
+{what} : sourcée ¦ {what}: s prameňom ¦ {what}: med kilde
+{what} : sans source ¦ {what}: bez prameňa ¦ {what}: uten kilde
+{what} : manquante ¦ {what}: chýba ¦ {what}: mangler
+Couleur « sourcé » ¦ Farba „s prameňom“ ¦ Farge for «med kilde»
+Couleur « sans source » ¦ Farba „bez prameňa“ ¦ Farge for «uten kilde»
+Couleur « manquant » ¦ Farba „chýba“ ¦ Farge for «mangler»
+Ce que j’ai prouvé ¦ Čo som doložil ¦ Det jeg har belagt
+Les registres ¦ Matriky ¦ Protokollene
+Montrer les trous (rouge pâle) ¦ Zobraziť medzery (bledočerveno) ¦ Vis hullene (blek rødt)
+Communes au plus ¦ Najviac obcí ¦ Høyst antall kommuner
+Couleur « {what} » ¦ Farba „{what}“ ¦ Farge for «{what}»
+{name} : {n} adultes ¦ {name}: {n} dospelých ¦ {name}: {n} voksne
+{name} : {n} adulte ¦ {name}: {n} dospelý ¦ {name}: {n} voksen
+{name} : {n} morts jeunes ¦ {name}: {n} zomrelých mladých ¦ {name}: {n} døde unge
+{name} : {n} mort jeune ¦ {name}: {n} zomrelý mladý ¦ {name}: {n} død ung
+Éventail d’ascendance de {g} générations : {n} sur {max} places. ¦ Vejár predkov s {g} generáciami: {n} z {max} miest. ¦ Anevifte med {g} generasjoner: {n} av {max} plasser.
+🪭 Mes ancêtres (numéros Sosa) ¦ 🪭 Moji predkovia (čísla Sosa) ¦ 🪭 Anene mine (Sosa-numre)
+Chaque case reçoit un ancêtre et se colore selon ce que tu choisis. Les cases vides sont les ancêtres pas encore trouvés. ¦ Každé políčko dostane predka a zafarbí sa podľa tvojej voľby. Prázdne políčka sú predkovia, ktorí ešte neboli nájdení. ¦ Hver rute får en ane og farges etter det du velger. Tomme ruter er aner som ikke er funnet ennå.
+Personne au centre ¦ Osoba v strede ¦ Person i midten
+Taux de recherche (dates, lieux, mariage, source) ¦ Miera preskúmania (dátumy, miesta, sobáš, prameň) ¦ Forskningsgrad (datoer, steder, vielse, kilde)
+Département de naissance ¦ Departement narodenia ¦ Fødselsdepartement
+Prendre mes ancêtres ¦ Vziať mojich predkov ¦ Hent anene mine
+{n} ancêtres pris dans l’app. ¦ {n} predkov prevzatých z aplikácie. ¦ {n} aner hentet fra appen.
+Ajoute des lignes : un nom, le nom au-dessus (vide pour le centre) et un chiffre. ¦ Pridaj riadky: názov, názov nad ním (prázdny pre stred) a číslo. ¦ Legg til rader: et navn, navnet over (tomt for midten) og et tall.
+Soleil de {n} parts sur {d} anneaux, total {t}. ¦ Lúčový diagram s {n} dielmi v {d} prstencoch, spolu {t}. ¦ Solskive med {n} deler på {d} ringer, totalt {t}.
+🌞 Une descendance ¦ 🌞 Potomstvo ¦ 🌞 En etterslekt
+Chaque enfant devient une part de son parent ; la taille d’une part = le nombre de descendants (la personne comprise). ¦ Každé dieťa sa stane dielom svojho rodiča; veľkosť dielu = počet potomkov (vrátane danej osoby). ¦ Hvert barn blir en del av forelderen sin; størrelsen på en del = antall etterkommere (personen selv medregnet).
+Ancêtre au centre ¦ Predok v strede ¦ Ane i midten
+Aucun descendant trouvé pour cette personne. ¦ Pre túto osobu sa nenašli žiadni potomkovia. ¦ Ingen etterkommere funnet for denne personen.
+{n} personnes prises dans l’app (les 3 000 premières). ¦ {n} osôb prevzatých z aplikácie (prvých 3 000). ¦ {n} personer hentet fra appen (de første 3 000).
+{n} personnes prises dans l’app. ¦ {n} osôb prevzatých z aplikácie. ¦ {n} personer hentet fra appen.
+Ajoute des liens : une personne, une autre, et la sorte de lien (témoin, parrain, voisin…). ¦ Pridaj väzby: jednu osobu, druhú a druh väzby (svedok, krstný otec, sused…). ¦ Legg til forbindelser: en person, en annen og typen forbindelse (vitne, gudfar, nabo…).
+Réseau de {n} personnes et {k} liens. ¦ Sieť {n} osôb a {k} väzieb. ¦ Nettverk med {n} personer og {k} forbindelser.
+Arcs : {n} personnes et {k} liens. ¦ Oblúky: {n} osôb a {k} väzieb. ¦ Buer: {n} personer og {k} forbindelser.
+Aucun témoin, parrain ou marraine noté dans les actes de ces personnes. ¦ V záznamoch týchto osôb nie je zapísaný žiadny svedok, krstný otec ani krstná matka. ¦ Ingen vitner, gudfedre eller gudmødre notert i dokumentene til disse personene.
+Pas d’implexe : aucun ancêtre n’apparaît deux fois. ¦ Žiadny implex: žiadny predok sa neobjavuje dvakrát. ¦ Ingen anetap: ingen ane forekommer to ganger.
+Aucun mariage entre deux familles. ¦ Žiadny sobáš medzi dvoma rodinami. ¦ Ingen vielse mellom to familier.
+Implexe : {n} à plusieurs places ¦ Implex: {n} na viacerých miestach ¦ Anetap: {n} på flere plasser
+Mariages entre familles ¦ Sobáše medzi rodinami ¦ Vielser mellom familier
+{n} liens pris dans l’app. ¦ {n} väzieb prevzatých z aplikácie. ¦ {n} forbindelser hentet fra appen.
+{n} lien pris dans l’app. ¦ {n} väzba prevzatá z aplikácie. ¦ {n} forbindelse hentet fra appen.
+🕸 Témoins, parrains, marraines ¦ 🕸 Svedkovia, krstní otcovia, krstné matky ¦ 🕸 Vitner, gudfedre, gudmødre
+Les personnes notées dans les actes (témoins, parrains, déclarants…) et celles pour qui elles l’ont été. Couleur = nom de famille. ¦ Osoby zapísané v záznamoch (svedkovia, krstní rodičia, oznamovatelia…) a tie, pre ktoré nimi boli. Farba = priezvisko. ¦ Personene notert i dokumentene (vitner, faddere, anmeldere…) og de de var det for. Farge = etternavn.
+Jusqu’où ¦ Ako ďaleko ¦ Hvor langt
+Ses liens directs ¦ Priame väzby ¦ Direkte forbindelser
+Et les liens de ses liens ¦ A väzby týchto väzieb ¦ Og forbindelsenes forbindelser
+Toute ma base (les 2 500 premiers liens) ¦ Celá moja databáza (prvých 2 500 väzieb) ¦ Hele databasen min (de første 2 500 forbindelsene)
+Prendre ces liens ¦ Vziať tieto väzby ¦ Hent disse forbindelsene
+Ajoute des liens : une personne, une autre, et la sorte de lien (mariage, implexe…). ¦ Pridaj väzby: jednu osobu, druhú a druh väzby (sobáš, implex…). ¦ Legg til forbindelser: en person, en annen og typen forbindelse (vielse, anetap…).
+🌈 Des liens de l’app ¦ 🌈 Väzby z aplikácie ¦ 🌈 Forbindelser fra appen
+Implexe : un même ancêtre à plusieurs numéros Sosa ¦ Implex: ten istý predok pod viacerými číslami Sosa ¦ Anetap: den samme anen med flere Sosa-numre
+Témoins, parrains, marraines ¦ Svedkovia, krstní otcovia, krstné matky ¦ Vitner, gudfedre, gudmødre
+Personne de départ (implexe, témoins) ¦ Východisková osoba (implex, svedkovia) ¦ Startperson (anetap, vitner)
+Il faut 2, 3 ou 4 ensembles. ¦ Sú potrebné 2, 3 alebo 4 množiny. ¦ Det trengs 2, 3 eller 4 mengder.
+⭕ Des ensembles de l’app ¦ ⭕ Množiny z aplikácie ¦ ⭕ Mengder fra appen
+Choisis 2 à 4 ensembles : chaque zone reçoit le nombre de personnes qui sont dans ces ensembles-là, et pas dans les autres. ¦ Vyber 2 až 4 množiny: každá oblasť dostane počet osôb, ktoré sú v týchto množinách a nie v ostatných. ¦ Velg 2 til 4 mengder: hvert område får antall personer som er i nettopp disse mengdene og ikke i de andre.
+Personne de départ (pour « Mes ancêtres ») ¦ Východisková osoba (pre „Moji predkovia“) ¦ Startperson (for «Anene mine»)
+Rien d’autre pour l’instant. ¦ Zatiaľ nič ďalšie. ¦ Ingenting annet foreløpig.
+Choisis 2 à 4 ensembles (là : {n}). ¦ Vyber 2 až 4 množiny (teraz: {n}). ¦ Velg 2 til 4 mengder (nå: {n}).
+{n} personnes comptées. ¦ Započítané osoby: {n}. ¦ {n} personer telt.
+{n} personne comptée. ¦ Započítaná {n} osoba. ¦ {n} person telt.
+Février ¦ Február ¦ Februar
+Décembre ¦ December ¦ Desember
+Aucune date avec le jour et le mois (ex. : 7 mai 1925, 08/12/1960). ¦ Žiadny dátum s dňom a mesiacom (napr. 7 mai 1925, 08/12/1960). ¦ Ingen dato med dag og måned (f.eks. 7 mai 1925, 08/12/1960).
+Ajoute des dates (7 mai 1925, 08/12/1960, 12 thermidor an II…) et, si tu veux, un nombre. ¦ Pridaj dátumy (7 mai 1925, 08/12/1960, 12 thermidor an II…) a ak chceš, číslo. ¦ Legg til datoer (7 mai 1925, 08/12/1960, 12 thermidor an II…) og, om du vil, et tall.
+{d} {month} {y} : {v} ¦ {d}. {month} {y}: {v} ¦ {d}. {month} {y}: {v}
+{d} {month} : {v} ¦ {d}. {month}: {v} ¦ {d}. {month}: {v}
+jour|1er ¦ 1. ¦ 1.
+{n} dates sans jour précis (non montrées) ¦ {n} dátumov bez presného dňa (nezobrazené) ¦ {n} datoer uten nøyaktig dag (vises ikke)
+{n} date sans jour précis (non montrée) ¦ {n} dátum bez presného dňa (nezobrazený) ¦ {n} dato uten nøyaktig dag (vises ikke)
+Calendrier : {n} événements montrés, au plus {m} le même jour. ¦ Kalendár: zobrazených {n} udalostí, najviac {m} v ten istý deň. ¦ Kalender: {n} hendelser vist, høyst {m} samme dag.
+Calendrier : {n} événement montré, au plus {m} le même jour. ¦ Kalendár: zobrazená {n} udalosť, najviac {m} v ten istý deň. ¦ Kalender: {n} hendelse vist, høyst {m} samme dag.
+Personne (pour ses ancêtres) ¦ Osoba (pre jej predkov) ¦ Person (for anene til personen)
+🗓 Des événements de l’app, jour par jour ¦ 🗓 Udalosti z aplikácie, deň po dni ¦ 🗓 Hendelser fra appen, dag for dag
+Seules les dates avec le jour comptent. « Toutes années ensemble » montre la saison (366 cases) ; « Une ligne par année » montre les années choisies. ¦ Počítajú sa len dátumy s dňom. „Všetky roky spolu“ ukazuje ročné obdobie (366 políčok); „Jeden riadok na rok“ ukazuje vybrané roky. ¦ Bare datoer med dag teller. «Alle år samlet» viser årstiden (366 ruter); «Én rad per år» viser de valgte årene.
+Prendre ces dates ¦ Vziať tieto dátumy ¦ Hent disse datoene
+Coche au moins une sorte d’événement. ¦ Začiarkni aspoň jeden druh udalosti. ¦ Huk av for minst én type hendelse.
+Aucune date complète (jour, mois, année) pour ces événements. ¦ Pri týchto udalostiach nie je žiadny úplný dátum (deň, mesiac, rok). ¦ Ingen fullstendig dato (dag, måned, år) for disse hendelsene.
+{what} jour par jour ¦ {what} deň po dni ¦ {what} dag for dag
+{n} dates complètes prises ({k} sans jour précis laissées de côté). ¦ Prevzatých {n} úplných dátumov ({k} bez presného dňa vynechaných). ¦ {n} fullstendige datoer hentet ({k} uten nøyaktig dag utelatt).
+Ajoute des chiffres pour chaque mois (janvier à décembre). ¦ Pridaj čísla pre každý mesiac (január až december). ¦ Legg til tall for hver måned (januar til desember).
+Rose des mois : {list}. ¦ Ružica mesiacov: {list}. ¦ Månedsrose: {list}.
+{name} {n} (le plus en {month}) ¦ {name} {n} (najviac v mesiaci {month}) ¦ {name} {n} (flest i {month})
+🌸 Des événements de l’app, mois par mois ¦ 🌸 Udalosti z aplikácie, mesiac po mesiaci ¦ 🌸 Hendelser fra appen, måned for måned
+Une série par sorte d’événement ; seules les dates avec le mois comptent. ¦ Jeden rad na druh udalosti; počítajú sa len dátumy s mesiacom. ¦ Én serie per type hendelse; bare datoer med måned teller.
+Compter par mois ¦ Počítať po mesiacoch ¦ Tell per måned
+Aucune date avec le mois pour ces événements. ¦ Pri týchto udalostiach nie je žiadny dátum s mesiacom. ¦ Ingen dato med måned for disse hendelsene.
+Chiffres pris dans l’app. ¦ Čísla prevzaté z aplikácie. ¦ Tall hentet fra appen.
+Ajoute des événements : une date (ou un début et une fin) et un nom. ¦ Pridaj udalosti: dátum (alebo začiatok a koniec) a názov. ¦ Legg til hendelser: en dato (eller en start og en slutt) og et navn.
+Spirale du temps de {a} à {b}, {per} ans par tour : {n}. ¦ Špirála času od {a} do {b}, {per} rokov na otáčku: {n}. ¦ Tidsspiral fra {a} til {b}, {per} år per runde: {n}.
+Mariage à Rennes ¦ Sobáš v Rennes ¦ Vielse i Rennes
+Départ pour Nantes ¦ Odchod do Nantes ¦ Avreise til Nantes
+Achat de la ferme ¦ Kúpa statku ¦ Kjøp av gården
+Arrivée à Paris ¦ Príchod do Paríža ¦ Ankomst til Paris
+🌀 Des vies et des événements de l’app ¦ 🌀 Životy a udalosti z aplikácie ¦ 🌀 Liv og hendelser fra appen
+Les vies (de la naissance au décès) ¦ Životy (od narodenia po úmrtie) ¦ Livene (fra fødsel til død)
+Des événements (points) ¦ Udalosti (body) ¦ Hendelser (punkter)
+Aucune personne avec une date de naissance ou de décès. ¦ Žiadna osoba s dátumom narodenia alebo úmrtia. ¦ Ingen person med fødsels- eller dødsdato.
+Vies de la famille ¦ Životy rodiny ¦ Familiens liv
+Les événements de la famille ¦ Udalosti rodiny ¦ Familiens hendelser
+{n} lignes prises dans l’app. ¦ {n} riadkov prevzatých z aplikácie. ¦ {n} rader hentet fra appen.
+{n} ligne prise dans l’app. ¦ {n} riadok prevzatý z aplikácie. ¦ {n} rad hentet fra appen.
+Les plus reliés (30) ¦ Najprepojenejší (30) ¦ De mest forbundne (30)
+Par groupe (colonne « Groupe ») ¦ Podľa skupiny (stĺpec „Skupina“) ¦ Etter gruppe (kolonnen «Gruppe»)
+Groupes trouvés tout seuls ¦ Automaticky nájdené skupiny ¦ Grupper funnet automatisk
+Une seule (les liens en couleur) ¦ Jediná (väzby farebne) ¦ Bare én (forbindelsene i farge)
+Couleur du tableau ¦ Farba tabuľky ¦ Tabellens farge
+Les liens (une ligne par lien) ¦ Väzby (jeden riadok na väzbu) ¦ Forbindelsene (én rad per forbindelse)
+Sorte de lien (témoin, parrain…) ¦ Druh väzby (svedok, krstný otec…) ¦ Type forbindelse (vitne, gudfar…)
+Les personnes (facultatif : groupe et couleur) ¦ Osoby (nepovinné: skupina a farba) ¦ Personene (valgfritt: gruppe og farge)
+Couleur des sortes de liens (facultatif) ¦ Farba druhov väzieb (nepovinné) ¦ Farge for forbindelsestyper (valgfritt)
+Détail (dates, lieu…) ¦ Podrobnosti (dátumy, miesto…) ¦ Detaljer (datoer, sted…)
+Le nom ¦ Názov ¦ Navnet
+Le nom et la valeur ¦ Názov a hodnota ¦ Navnet og verdien
+Le nom et le détail ¦ Názov a podrobnosti ¦ Navnet og detaljene
+La valeur ¦ Hodnota ¦ Verdien
+Dégradé : minimum (vide = auto) ¦ Prechod: minimum (prázdne = auto) ¦ Overgang: minimum (tom = auto)
+Dégradé : maximum (vide = auto) ¦ Prechod: maximum (prázdne = auto) ¦ Overgang: maksimum (tom = auto)
+Unité (%, ans…) ¦ Jednotka (%, roky…) ¦ Enhet (%, år…)
+Taille du centre ¦ Veľkosť stredu ¦ Midtens størrelse
+Numéro des générations ¦ Čísla generácií ¦ Generasjonsnumre
+Origines de mes ancêtres ¦ Pôvod mojich predkov ¦ Anenes opprinnelse
+Les parts (parent → enfant → chiffre) ¦ Diely (rodič → dieťa → číslo) ¦ Delene (forelder → barn → tall)
+Au-dessus (vide = au centre) ¦ Nad tým (prázdne = v strede) ¦ Over (tom = i midten)
+Taille des parts ¦ Veľkosť dielov ¦ Delenes størrelse
+Le chiffre (ou la somme des parts) ¦ Číslo (alebo súčet dielov) ¦ Tallet (eller summen av delene)
+Le nombre de descendants ¦ Počet potomkov ¦ Antall etterkommere
+Le nombre de bouts de branche ¦ Počet koncov vetiev ¦ Antall grenender
+Anneaux au plus ¦ Najviac prstencov ¦ Høyst antall ringer
+Une par branche (plus clair vers l’extérieur) ¦ Jedna na vetvu (smerom von svetlejšia) ¦ Én per gren (lysere utover)
+Une par anneau ¦ Jedna na prstenec ¦ Én per ring
+Le nom et le chiffre ¦ Názov a číslo ¦ Navnet og tallet
+Ordre des parts ¦ Poradie dielov ¦ Delenes rekkefølge
+De la plus grande à la plus petite ¦ Od najväčšieho po najmenší ¦ Fra største til minste
+Texte au centre ¦ Text v strede ¦ Tekst i midten
+Rapprocher les points de même couleur ¦ Priblížiť body rovnakej farby ¦ Samle punkter med samme farge
+Liens colorés selon leur sorte ¦ Väzby zafarbené podľa druhu ¦ Forbindelser farget etter type
+Selon le nombre de liens ¦ Podľa počtu väzieb ¦ Etter antall forbindelser
+Tous pareils ¦ Všetky rovnaké ¦ Alle like
+Écartement ¦ Rozostup ¦ Avstand
+Témoins et parrains au village ¦ Svedkovia a krstní otcovia v dedine ¦ Vitner og gudfedre i bygda
+Les personnes, dans l’ordre de la ligne (facultatif) ¦ Osoby v poradí na priamke (nepovinné) ¦ Personene, i linjens rekkefølge (valgfritt)

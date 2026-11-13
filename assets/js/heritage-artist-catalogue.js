@@ -7,6 +7,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ART = window.LCNDA_ART; if (!ART) return;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP, P = () => window.LCNDA_PICKER || window.LCNDA_APP;
@@ -31,7 +32,7 @@
         const meta = use.filter(f => !['title', 'catref', 'photos', 'provenance', 'exhibitions', 'literature', 'related', 'notes', 'note', 'tracks', 'credits', 'versions', 'owner'].includes(f.key) && f.type !== 'rows' && f.type !== 'longtext');
         // « 1921 », « Huile sur toile, 46 × 55 cm », « Signé et daté en bas à droite… » : les champs « nus » sans libellé, ensemble
         const NL = ['date', 'released', 'year', 'technique', 'dims', 'format', 'signature'];
-        const bare = meta.filter(f => NL.includes(f.key)).map(f => (f.key === 'signature' ? `Signé, daté ${txt(f)}` : txt(f))).filter(Boolean);
+        const bare = meta.filter(f => NL.includes(f.key)).map(f => (f.key === 'signature' ? i18n('Signé, daté {nm}', {nm: txt(f)}) : txt(f))).filter(Boolean);
         const dt = bare.length && meta.some(f => ['date', 'released', 'year'].includes(f.key) && txt(f)) ? bare.shift() : '';
         if (dt) out.push(p('ps-dates', esc(dt)));
         if (bare.length) out.push(p('ps-dates', esc(bare.join(', '))));
@@ -133,15 +134,15 @@
         const K = ext.layoutKit, th = K.THEMES.find(t => t.id === o.design) || K.THEMES[0], fm = FORMATS.find(x => x[0] === o.format) || FORMATS[0];
         const doc = K.themeDoc(th, '', {w: fm[2], h: fm[3]});
         const kind = o.mode === 'catalogue' ? 'work' : 'release';
-        doc.title = o.mode === 'catalogue' ? `${st.name}, catalogue raisonné` : `${st.name}, discographie`;
+        doc.title = o.mode === 'catalogue' ? i18n('{nm}, catalogue raisonné', {nm: st.name}) : i18n('{nm}, discographie', {nm: st.name});
         if (!doc.paraStyles.some(s => s.id === 'ps-name')) K.baseStyles({titleFont: th.titleFont, bodyFont: th.bodyFont, bodySize: 10}).forEach(s => { if (!doc.paraStyles.some(x => x.id === s.id)) doc.paraStyles.push(s); });
         doc.pages = [];
         const page = (master = 'A') => { const pg = {id: K.nid('p'), master, items: []}; doc.pages.push(pg); return pg; };
         const chapter = (title, paras, cols = 1) => { const pg = page(), b = K.box(doc, doc.pages.length - 1); pg.items.push(K.textItem({x: b.x, y: b.y, w: b.w, h: 18, html: `<p data-ps="ps-chapter">${esc(title)}</p>`, name: 'Chapitre'})); pg.flowTop = b.y + 20; K.flow(doc, paras.length ? paras : [{ps: 'ps-body', text: ' '}], {first: pg, columns: cols}); delete pg.flowTop; };
         const pr = st.of('profile')[0]?.data || {}, now = new Date().toISOString().slice(0, 16);
         const fieldsExport = ART.layout(st, kind, 'export').fields.filter(f => f.on).map(f => f.key);
-        const notice = (it, b, h = null) => K.textItem({x: b.x, y: b.y, w: b.w, h: h || b.h, html: noticeParas(st, it, fieldsExport, {hideLiving: o.hide}), name: `Notice — ${it.title}`, dyn: {type: 'art', id: it.id, fields: fieldsExport, part: o.hide ? 'hide' : '', at: now}});
-        const frame = (it, x, y, w, h) => { const ph = ART.normPhotos(it.data.photos)[0]; return K.shapeItem('frame', {x, y, w, h, src: ph?.f ? `media/${ph.f}` : '', mediaId: ph?.mid || undefined, srcName: it.title, fit: 'fit', fill: ph?.f ? 'none' : 'sw-light', stroke: {c: 'none', w: 0}, name: `Image — ${it.title}`}); };
+        const notice = (it, b, h = null) => K.textItem({x: b.x, y: b.y, w: b.w, h: h || b.h, html: noticeParas(st, it, fieldsExport, {hideLiving: o.hide}), name: i18n('Notice — {nm}', {nm: it.title}), dyn: {type: 'art', id: it.id, fields: fieldsExport, part: o.hide ? 'hide' : '', at: now}});
+        const frame = (it, x, y, w, h) => { const ph = ART.normPhotos(it.data.photos)[0]; return K.shapeItem('frame', {x, y, w, h, src: ph?.f ? `media/${ph.f}` : '', mediaId: ph?.mid || undefined, srcName: it.title, fit: 'fit', fill: ph?.f ? 'none' : 'sw-light', stroke: {c: 'none', w: 0}, name: i18n('Image — {nm}', {nm: it.title})}); };
         const cap = (it, x, y, w) => K.textItem({x, y, w, h: 8, html: `<p data-ps="ps-caption">${esc([String(it.data.catref || '').replace(/^CR\s*/i, '') && `Fig. ${String(it.data.catref).replace(/^CR\s*/i, '')}`, it.title, it.year].filter(Boolean).join(' — '))}</p>`, name: 'Légende'});
         o.parts.forEach(part => {
             if (part === 'cover') { const first = list.find(i => ART.normPhotos(i.data.photos)[0]?.f); page('B').items.push(...K.coverItems(doc, th, {title: st.name, subtitle: o.mode === 'catalogue' ? 'Catalogue raisonné' : 'Discographie', author: '', photo: first ? `media/${ART.normPhotos(first.data.photos)[0].f}` : ''})); }

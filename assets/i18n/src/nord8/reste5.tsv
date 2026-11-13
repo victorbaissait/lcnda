@@ -1,0 +1,134 @@
+fr ¦ tr
+# ═════ zone « reste5 » : turc (tr) ═════
+Les traits, les ombres et les coins des fiches des personnes et des animaux : blocs, boutons, champs. Le reste de l’app ne change pas ; les couleurs et la police restent celles de l’Apparence. ¦ Kişi ve hayvan kartlarının çizgileri, gölgeleri ve köşeleri: bloklar, düğmeler, alanlar. Uygulamanın geri kalanı değişmez; renkler ve yazı tipi Görünüm’deki gibi kalır.
+L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. ¦ Blokların içindeki ve aralarındaki boşluk, liste satırlarının yüksekliği, düğmelerin iç boşluğu.
+Les petits dessins des boutons, des barres d’outils et des rubriques. ¦ Düğmelerin, araç çubuklarının ve başlıkların küçük resimleri.
+Le haut de la fiche : portrait, nom, dates, pastilles et boutons. ¦ Kartın üstü: portre, ad, tarihler, rozetler ve düğmeler.
+Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…) ; le bouton principal reste toujours plein, à la couleur principale de l’Apparence. ¦ İkincil düğmeler (İptal, Düzenle, ＋ Ekle…); ana düğme her zaman dolu kalır, Görünüm’ün ana renginde.
+Les fenêtres qui s’ouvrent, les menus, les messages en bas à gauche, les boutons au survol. L’aperçu tourne en boucle. ¦ Açılan pencereler, menüler, sol alttaki mesajlar, üzerine gelince düğmeler. Önizleme döngü hâlinde oynar.
+Les listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. ¦ Listeler (Listeler, Kişiler, Araştırma…), kişiler sütunu ve tablolar.
+{label} (nombre) ¦ {label} (sayı)
+Pour les listes, les tableaux et le menu de choix. Plus haut = plus facile à viser ; plus bas = plus de lignes visibles. ¦ Listeler, tablolar ve seçim menüsü için. Daha yüksek = hedeflemesi daha kolay; daha alçak = daha çok satır görünür.
+Le haut de la fiche. Les traits, les ombres et les coins de la fiche se règlent juste en dessous ¦ Kartın üstü. Kartın çizgileri, gölgeleri ve köşeleri hemen aşağıda ayarlanır
+Les traits, les ombres et les coins des fiches (personnes et animaux) seulement : le reste de l’app ne change pas. La colonne de gauche a les siens (Menus, colonne et listes → Colonne) ¦ Yalnızca kartların (kişiler ve hayvanlar) çizgileri, gölgeleri ve köşeleri: uygulamanın geri kalanı değişmez. Sol sütunun kendi ayarları var (Menüler, sütun ve listeler → Sütun)
+L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. Une colonne de gauche réglée « Compacte » (onglet Colonne) garde sa propre taille : les deux ne s’additionnent pas ¦ Blokların içindeki ve aralarındaki boşluk, liste satırlarının yüksekliği, düğmelerin iç boşluğu. “Sıkışık” olarak ayarlanmış bir sol sütun (Sütun sekmesi) kendi boyutunu korur: ikisi toplanmaz
+Les petits dessins des boutons, des barres d’outils et des rubriques. Les traits et les ombres suivent ¦ Düğmelerin, araç çubuklarının ve başlıkların küçük resimleri. Çizgiler ve gölgeler uyar
+Les lignes des listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. Les traits et les ombres suivent ¦ Listelerin satırları (Listeler, Kişiler, Araştırma…), kişiler sütunu ve tablolar. Çizgiler ve gölgeler uyar
+Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…). Les traits et les ombres suivent ¦ İkincil düğmeler (İptal, Düzenle, ＋ Ekle…). Çizgiler ve gölgeler uyar
+Comment les fenêtres, les menus et les messages apparaissent. L’aperçu tourne en boucle ¦ Pencerelerin, menülerin ve mesajların nasıl belirdiği. Önizleme döngü hâlinde oynar
+{group} : {choice} ¦ {group}: {choice}
+Rien ne bouge : chaque écran garde le dessin que tu connais. ¦ Hiçbir şey kıpırdamaz: her ekran bildiğin çizimi korur.
+7 dessins différents ; tes couleurs homme / femme et ta forme d’avatar ne s’y appliquent pas. ¦ 7 farklı çizim; erkek / kadın renklerin ve avatar biçimin bunlara uygulanmaz.
+Un seul dessin partout, à la couleur du genre : homme, femme, animal se voient d’un coup d’œil. ¦ Her yerde tek bir çizim, cinsiyetin renginde: erkek, kadın, hayvan bir bakışta ayırt edilir.
+Léger dans les listes serrées et le menu de choix (c’est déjà le modèle validé du menu). ¦ Sıkışık listelerde ve seçim menüsünde hafif (zaten menünün onaylanmış modeli).
+Le style « archive » de ta fiche : bord noir, photo en noir et blanc, comme une photo d’identité collée. ¦ Kartının “arşiv” tarzı: siyah kenar, siyah beyaz fotoğraf, yapıştırılmış bir vesikalık gibi.
+Nouveau nom de l’onglet {tab} ¦ {tab} sekmesinin yeni adı
+Émoji de l’onglet {tab} ¦ {tab} sekmesinin emojisi
+La personne n°1 (le de cujus) ; son père a le n°2, sa mère le n°3, et ainsi de suite : le père d’un numéro N a toujours 2N, la mère 2N+1. ¦ 1 numaralı kişi (kök kişi); babası 2 numara, annesi 3 numara, ve böyle devam eder: N numaranın babası her zaman 2N, annesi 2N+1’dir.
+Pour les descendants : la personne n°1, ses enfants 1.1, 1.2, 1.3…, les enfants de 1.2 sont 1.2.1, 1.2.2… Chaque point = une génération de plus. ¦ Torunlar için: 1 numaralı kişi, çocukları 1.1, 1.2, 1.3…, 1.2’nin çocukları 1.2.1, 1.2.2… Her nokta = bir kuşak daha.
+Un thème règle les couleurs de toute l’app : la couleur principale, le fond de la page, des panneaux, des cartes et de leurs en-têtes, le texte, et les traits qui entourent (couleur et épaisseur). Crée le tien à partir d’un thème existant : il s’ajoute à la liste « Preset », dans « ✎ Mes thèmes ». ¦ Bir tema tüm uygulamanın renklerini ayarlar: ana renk, sayfanın, panellerin, kartların ve başlıklarının zemini, metin ve çevreleyen çizgiler (renk ve kalınlık). Kendi temanı var olan bir temadan oluştur: “Hazır ayar” listesine, “✎ Temalarım” altına eklenir.
+La forme des petits carrés numérotés des blocs et des initiales des fiches. Ajoute tes formes (bibliothèque des tableaux, polygone dessiné, SVG importé), range la liste du menu « Forme des avatars », cache celles qui ne te servent pas. ¦ Blokların numaralı küçük karelerinin ve kartlardaki baş harflerin biçimi. Kendi biçimlerini ekle (tablo kitaplığı, çizilmiş çokgen, içe aktarılmış SVG), “Avatar biçimi” menüsünün listesini sırala, kullanmadıklarını gizle.
+Le grand cadre en haut de chaque fiche : le nom, les badges (Sosa, À vérifier, Hors généalogie, Artiste) et la colonne de boutons carrés. Tu peux le masquer pour une fiche épurée (diaporama), ranger les boutons, les cacher, les mettre sur 2 colonnes. ¦ Her kartın üstündeki büyük çerçeve: ad, rozetler (Sosa, Kontrol edilecek, Soy ağacı dışında, Sanatçı) ve kare düğmeler sütunu. Sade bir kart için (slayt gösterisi) onu gizleyebilir, düğmeleri sıralayabilir, gizleyebilir, 2 sütuna koyabilirsin.
+Les petits boutons carrés en haut à droite, à côté du nombre de personnes : écran en deux, nouvelle fenêtre, mode consultation, mode simple, calculette, Mes généalogies. Décoche pour cacher, glisse ⠿ pour changer l’ordre. ¦ Sağ üstte, kişi sayısının yanındaki küçük kare düğmeler: ikiye bölünmüş ekran, yeni pencere, görüntüleme modu, basit mod, hesap makinesi, Soy ağaçlarım. Gizlemek için işareti kaldır, sırayı değiştirmek için ⠿ sürükle.
+Les boutons de la barre du haut, à côté du nombre de personnes. Glisse ⠿ (ou Alt + ↑ / ↓) pour changer leur ordre ; décoche un bouton pour le cacher. Plus bas, « 👤 Nouvelle personne » et un raccourci vers chaque outil de modification (tableur, montage, retouche…) et chaque partie d’Enquêtes : coche ceux que tu veux en haut, et choisis ce que le clic ouvre (la liste des projets ou un nouveau projet). C’est gardé tout de suite. ¦ Üst çubuğun düğmeleri, kişi sayısının yanında. Sıralarını değiştirmek için ⠿ (ya da Alt + ↑ / ↓) sürükle; gizlemek için bir düğmenin işaretini kaldır. Daha aşağıda “👤 Yeni kişi” ve her düzenleme aracına (tablo, kurgu, rötuş…) ve İncelemeler’in her bölümüne bir kısayol: üstte istediklerini işaretle ve tıklamanın neyi açacağını seç (projelerin listesi ya da yeni bir proje). Hemen saklanır.
+Les blocs d’une fiche se rangent en sections nommées (Identité, Famille…). Ici, où vont leurs titres et leurs options ; la forme (traits, coins, ombres) se règle plus bas, avec l’en-tête (« Style des fiches »). ¦ Bir kartın blokları adlandırılmış bölümlere ayrılır (Kimlik, Aile…). Burada başlıklarının ve seçeneklerinin nereye gideceği; biçim (çizgiler, köşeler, gölgeler) daha aşağıda, başlıkla birlikte ayarlanır (“Kartların tarzı”).
+Glisse les sections et les blocs pour changer leur ordre. Décoche une section ou un bloc pour le masquer. ¦ Sıralarını değiştirmek için bölümleri ve blokları sürükle. Gizlemek için bir bölümün ya da bloğun işaretini kaldır.
+La façon dont les listes à ranger de cette page sont dessinées. Ne change que cet écran de réglage (et la fenêtre « ⚙️ Ranger les sections » d’une fiche) : ni les fiches, ni les données. ¦ Bu sayfadaki sıralanabilir listelerin nasıl çizildiği. Yalnızca bu ayar ekranını (ve bir kartın “⚙️ Bölümleri düzenle” penceresini) değiştirir: kartları da verileri de değil.
+Les blocs se rangent en sections nommées (Identité, Famille…). Ici, la façon de dessiner leurs titres et leurs options. Chaque changement est gardé tout de suite. ¦ Bloklar adlandırılmış bölümlere ayrılır (Kimlik, Aile…). Burada başlıklarının ve seçeneklerinin nasıl çizileceği. Her değişiklik hemen saklanır.
+Retenu d’une fiche à l’autre. ¦ Bir karttan ötekine hatırlanır.
+Sans trait ni cadre : juste le nom, en grand, comme un chapitre. ¦ Ne çizgi ne çerçeve: yalnızca ad, büyük, bir bölüm başlığı gibi.
+Un cadre autour de la section, le titre dans une étiquette sur le bord. ¦ Bölümün çevresinde bir çerçeve, başlık kenardaki bir etikette.
+Un petit titre en capitales posé sur un trait. Sobre, prend peu de place. ¦ Bir çizginin üzerine konmuş büyük harfli küçük bir başlık. Sade, az yer kaplar.
+Une bande de la couleur principale (celle de l’Apparence), titre en blanc. ¦ Ana renkte bir şerit (Görünüm’deki renk), başlık beyaz.
+« Nouveau » : sections en bandes, ⠿ et 👁. ¦ “Yeni”: şerit şeklinde bölümler, ⠿ ve 👁.
+Ce que tu fais avec l’app : ses onglets et son premier écran. Aucune fiche n’est supprimée. ¦ Uygulamayla ne yaptığın: sekmeleri ve ilk ekranı. Hiçbir kart silinmez.
+Changer d’usage change <b>seulement les onglets et le premier écran</b>. Aucune fiche n’est supprimée : les personnes restent là, même quand l’onglet est caché. On peut en allumer plusieurs : leurs onglets s’additionnent. ¦ Kullanımı değiştirmek <b>yalnızca sekmeleri ve ilk ekranı</b> değiştirir. Hiçbir kart silinmez: sekme gizli olsa bile kişiler orada kalır. Birkaç tanesini açabilirsin: sekmeleri toplanır.
+Personnes, arbre, actes. ¦ Kişiler, ağaç, belgeler.
+« 🌳 Ma généalogie » seule ¦ Yalnızca “🌳 Soy ağacım”
+Trésors de famille. ¦ Aile hazineleri.
+Catalogue raisonné. ¦ Eser kataloğu (catalogue raisonné).
+Maisons et lieux. ¦ Evler ve yerler.
+L’entreprise, 👥 Membres. ¦ Şirket, 👥 Üyeler.
+Animaux, portées, pedigree. ¦ Hayvanlar, batınlar, soy kütüğü.
+Suivi des animaux. ¦ Hayvanların izlenmesi.
+Documents, ✨ Trésors. ¦ Belgeler, ✨ Hazineler.
+Les onglets se rangent, se renomment et se cachent un par un dans « Ordre et noms du menu principal ». ¦ Sekmeler “Ana menünün sırası ve adları” içinde tek tek sıralanır, yeniden adlandırılır ve gizlenir.
+Au féminin ¦ Dişil
+Au masculin ¦ Eril
+Avec un point médian ¦ Orta noktayla
+Entre parenthèses ¦ Parantez içinde
+Sexe « Autre / non binaire » ¦ Cinsiyet “Diğer / ikili olmayan”
+Sexe « Non renseigné » (et les animaux dont on ne connaît pas le sexe) ¦ Cinsiyet “Belirtilmemiş” (ve cinsiyeti bilinmeyen hayvanlar)
+Sur les fiches d’hommes et de femmes, les mots s’accordent tout seuls : « né le » ou « née le », « décédé » ou « décédée ». Choisis ici comment les écrire pour les autres fiches. Chaque choix est gardé tout de suite. ¦ Erkek ve kadın kartlarında kelimeler kendiliğinden uyar (Fransızcada: « né le » ya da « née le », « décédé » ya da « décédée »). Diğer kartlar için nasıl yazılacaklarını burada seç. Her seçim hemen saklanır.
+comme on dit « la personne » : « née », « décédée » ¦ « la personne » (dişil) der gibi: « née », « décédée »
+rien ne change : « né(e) », sauf « Vivante », « Décédée » sur la fiche ¦ hiçbir şey değişmez: « né(e) », kartta « Vivante », « Décédée » dışında
+une tournure neutre quand il y en a une (« Naissance le … », « Décès »), sinon « né(e) » ¦ varsa nötr bir söyleyiş (« Naissance le … », « Décès »), yoksa « né(e) »
+« né », « décédé » ¦ « né », « décédé » (eril)
+« né(e) », « décédé(e) », partout ¦ her yerde « né(e) », « décédé(e) »
+« né·e », « décédé·e » ¦ « né·e », « décédé·e » (orta nokta)
+autre / non binaire ¦ diğer / ikili olmayan
+sexe non renseigné ¦ cinsiyet belirtilmemiş
+Arbre en filigrane ¦ Filigran ağaç
+Bleu pâle (comme avant) ¦ Açık mavi (eskisi gibi)
+Gris neutre ¦ Nötr gri
+Les traits de mon thème (✎ Mes thèmes) ¦ Temamın çizgileri (✎ Temalarım)
+Les traits de mon thème : choisis d’abord un thème à toi (✎ Mes thèmes) ¦ Temamın çizgileri: önce kendine ait bir tema seç (✎ Temalarım)
+Bleu pâle = comme avant · gris · la couleur principale de l’Apparence (elle suit si tu la changes) · sépia · la couleur des traits de ton thème (✎ Mes thèmes) · une couleur à toi. ¦ Açık mavi = eskisi gibi · gri · Görünüm’ün ana rengi (değiştirirsen o da değişir) · sepya · temanın çizgi rengi (✎ Temalarım) · sana ait bir renk.
+Cahier ligné ¦ Çizgili defter
+Papier millimétré ¦ Milimetrik kâğıt
+Papier vergé ¦ Vergé kâğıt
+Ce qu’on voit derrière les blocs, sur toutes les pages. Le fond reste très pâle pour ne jamais gêner la lecture ; la couleur du papier vient du Preset (ou de ton thème). ¦ Tüm sayfalarda blokların arkasında görünen. Zemin, okumayı hiç zorlaştırmasın diye çok soluk kalır; kâğıdın rengi Hazır ayardan (ya da temandan) gelir.
+Choisir une photo ¦ Fotoğraf seç
+Couleur du motif ¦ Desenin rengi
+Couleur principale (suit l’Apparence) ¦ Ana renk (Görünüm’e uyar)
+De « à peine visible » à « bien marqué ». Au départ : comme aujourd’hui. ¦ “Zor görünür”den “belirgin”e. Başlangıçta: bugünkü gibi.
+Décoché : fond uni sur ces pages. La carte et les éditeurs plein écran gardent toujours le leur. ¦ İşaretsiz: bu sayfalarda düz zemin. Harita ve tam ekran düzenleyiciler her zaman kendi zeminlerini korur.
+Pas encore de photo : fond uni en attendant. ¦ Henüz fotoğraf yok: bu arada düz zemin.
+Pâlie par l’intensité et floutée, pour rester derrière sans gêner. Elle reste sur cet ordinateur (pas dans le défaut du site : là-bas, fond uni). ¦ Yoğunlukla soluklaştırılmış ve bulanıklaştırılmış, rahatsız etmeden arkada kalsın diye. Bu bilgisayarda kalır (sitenin varsayılanında değil: orada düz zemin).
+bords à peine teintés, vieille photo ¦ hafif renkli kenarlar, eski fotoğraf
+comme aujourd’hui ¦ bugünkü gibi
+de petites branches, très pâles ¦ küçük dallar, çok soluk
+du papier vers la couleur ¦ kâğıttan renge
+fin, trait plus fort tous les 5 ¦ ince, her 5’te bir daha kalın çizgi
+fines rayures des vieux papiers ¦ eski kâğıtların ince çizgileri
+hexagones de la maison de famille ¦ aile evinin altıgenleri
+lignes et double marge, comme l’état civil ¦ nüfus kayıtlarındaki gibi çizgiler ve çift kenar boşluğu
+lignes et marge rouge ¦ çizgiler ve kırmızı kenar boşluğu
+pâle et floutée derrière ¦ arkada soluk ve bulanık
+rien derrière, le plus calme ¦ arkada hiçbir şey, en sakini
+tissage léger, album de famille ¦ hafif dokuma, aile albümü
+une grille de petits points ¦ küçük noktalardan bir ızgara
+va bien avec « Archive papier » ¦ “Kâğıt arşiv” ile iyi gider
+Une page de l’app ¦ Uygulamanın bir sayfası
+Ta photo ¦ Fotoğrafın
+les Réglages ¦ Ayarlar
+Dans les listes où l’on coche ce qui s’affiche (menus, listes, Réordonner, Personnaliser…) : une ligne décochée reste telle quelle, ou se grise un peu. ¦ İşaretleyerek neyin gösterileceğini seçtiğin listelerde (menüler, listeler, Yeniden sırala, Özelleştir…): işareti kaldırılmış bir satır olduğu gibi kalır ya da biraz grileşir.
+Une ligne affichée ¦ Gösterilen bir satır
+Une ligne cachée ¦ Gizlenmiş bir satır
+Lignes cachées dans les listes à ranger ¦ Sıralanabilir listelerde gizlenmiş satırlar
+Supprimer en rouge ¦ Kırmızı “Sil”
+Hypothèses à comparer ¦ Karşılaştırılacak varsayımlar
+signature ou sceau ¦ imza ya da mühür
+PLAN DU RECENSEMENT ¦ NÜFUS SAYIMI PLANI
+Fonds de carte du plan des adresses ¦ Adres planının harita altlıkları
+Plan, photo aérienne, carte hors ligne… ¦ Plan, hava fotoğrafı, çevrimdışı harita…
+Cassini, État-major, cartes et photos de 1950… ¦ Cassini, État-major, 1950’den haritalar ve fotoğraflar…
+Carte ancienne (par-dessus) ¦ Eski harita (üstte)
+Aujourd’hui (dessous) ¦ Bugün (altta)
+Dépouillements (onglet « Plan ») et fiche d’un village : les fonds cochés viennent en premier dans les menus ; le premier coché est celui de départ. Tous les autres restent dans les menus, par catégorie. ¦ Dökümler (“Plan” sekmesi) ve bir köyün kartı: işaretli altlıklar menülerde önce gelir; işaretli ilk altlık başlangıçtakidir. Diğerleri kategoriye göre menülerde kalır.
+naissance manquante ¦ doğum eksik
+décès manquant ¦ ölüm eksik
+parents manquants ¦ ebeveynler eksik
+source manquante ¦ kaynak eksik
+aucun média ¦ medya yok
+1 livre en {y} ¦ {y} yılında 1 livre
+1 franc en {y} ¦ {y} yılında 1 frank
+1 euro en {y} ¦ {y} yılında 1 euro
+≈ <b>{eur} €</b> d’aujourd’hui ¦ ≈ bugün <b>{eur} €</b>
+≈ <b>{kg} kg</b> de pain ¦ ≈ <b>{kg} kg</b> ekmek
+≈ {n} jour de travail d’un journalier ¦ ≈ bir gündelikçinin {n} günlük işi
+≈ {n} jours de travail d’un journalier ¦ ≈ bir gündelikçinin {n} günlük işi
+🛡 Solidité des liens à côté des parents ¦ 🛡 Ebeveynlerin yanında bağların sağlamlığı
+Seulement Supposé et Réfuté ¦ Yalnızca Varsayılan ve Çürütülen
+Toujours ¦ Her zaman
+Jamais ¦ Asla

@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 70;
+const SCHEMA_VERSION = 88;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -91,6 +91,24 @@ function migration_steps(): array
         68 => 'schema_v68',
         69 => 'schema_v69',
         70 => 'schema_v70',
+        71 => 'schema_v71',
+        72 => 'schema_v72',
+        73 => 'schema_v73',
+        74 => 'schema_v74',
+        75 => 'schema_v75',
+        76 => 'schema_v76',
+        77 => 'schema_v77',
+        78 => 'schema_v78',
+        79 => 'schema_v79',
+        80 => 'schema_v80',
+        81 => 'schema_v81',
+        82 => 'schema_v82',
+        83 => 'schema_v83',
+        84 => 'schema_v84',
+        85 => 'schema_v85',
+        86 => 'schema_v86',
+        87 => 'schema_v87',
+        88 => 'schema_v88',
     ];
 }
 
@@ -2379,4 +2397,178 @@ function schema_v70(PDO $pdo): void
         if (!$pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='$t'")->fetchColumn()) { continue; }
         if (!$pdo->query("SELECT 1 FROM pragma_table_info('$t') WHERE name='auto'")->fetchColumn()) { $pdo->exec("ALTER TABLE $t ADD COLUMN auto INTEGER NOT NULL DEFAULT 0"); }
     }
+}
+
+/** 71 : index pour les très grosses bases (100 000 personnes, tests/test-grosse-base.js) : sources citées, notes et médias
+ *  d'une fiche, variantes de nom, journal… Sans eux, chaque fiche relisait toute la table (le tableau de bord ne finissait pas). */
+function schema_v71(PDO $pdo): void
+{
+    $want = [
+        'idx_source_links_entity' => ['source_links', 'entity_type, entity_id'],
+        'idx_source_links_source' => ['source_links', 'source_record_id'],
+        'idx_notes_entity' => ['notes', 'entity_type, entity_id'],
+        'idx_media_links_media' => ['media_links', 'media_id'],
+        'idx_name_variants_person' => ['name_variants', 'person_id'],
+        'idx_change_log_entity' => ['change_log', 'entity_type, entity_id'],
+        'idx_census_members_census' => ['census_members', 'census_id'],
+        'idx_investigation_items_inv' => ['investigation_items', 'investigation_id'],
+        'idx_investigation_persons_person' => ['investigation_persons', 'person_id'],
+        'idx_media_tags_media' => ['media_tags', 'media_id'],
+        'idx_media_tags_person' => ['media_tags', 'person_id'],
+        'idx_cited_names_person' => ['cited_names', 'person_id'],
+        'idx_cited_names_event' => ['cited_names', 'event_id'],
+        'idx_living_contacts_person' => ['living_contacts', 'person_id'],
+        // « dernières fiches modifiées sans source… » (tableau de bord) : lues dans l'ordre, on s'arrête aux 80 premières
+        'idx_persons_updated' => ['persons', 'updated_at'],
+        'idx_events_updated' => ['events', 'COALESCE(updated_at,created_at)'],
+        // Listes › Événements : rangés par année (sans année à la fin) — la première page sans trier 300 000 lignes
+        'idx_events_list_order' => ['events', 'COALESCE(year,9999), sort_date, id'],
+    ];
+    foreach ($want as $name => [$table, $cols]) {
+        if (!$pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='$table'")->fetchColumn()) { continue; }
+        $have = array_column($pdo->query("PRAGMA table_info('$table')")->fetchAll(PDO::FETCH_ASSOC), 'name');
+        preg_match_all('/[a-z_]+/', str_replace('COALESCE', '', $cols), $m);
+        foreach ($m[0] as $c) { if (!in_array($c, $have, true)) { continue 2; } }
+        $pdo->exec("CREATE INDEX IF NOT EXISTS $name ON $table($cols)");
+    }
+}
+
+/** 72 : le lieu d'une photo (media.place_id) — repris à l'import des photos (Google Photos, Apple Photos : ⤒ Importer des photos). */
+function schema_v72(PDO $pdo): void
+{
+    if (!$pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='media'")->fetchColumn()) { return; }
+    if (!$pdo->query("SELECT 1 FROM pragma_table_info('media') WHERE name='place_id'")->fetchColumn()) { $pdo->exec('ALTER TABLE media ADD COLUMN place_id INTEGER'); }
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_media_place ON media(place_id)');
+}
+
+/** 73 : identifiant Wikidata d'une fiche (« Q42 ») : lien ↗ dans « Références externes », « Compléter depuis Wikidata » à la demande,
+ *  relu et écrit par les imports / exports GEDCOM (_WIKIDATA, EXID en GEDCOM 7) et GEDCOM-X. */
+function schema_v73(PDO $pdo): void
+{
+    if (!$pdo->query("SELECT 1 FROM pragma_table_info('persons') WHERE name='wikidata_id'")->fetchColumn()) { $pdo->exec("ALTER TABLE persons ADD COLUMN wikidata_id TEXT DEFAULT ''"); }
+}
+
+/** 74 : 🧭 « Mes couches » de la Carte (zones, itinéraires, points, notes dessinés à la main ; GeoJSON / KML) — lib/cartes_outils.php. */
+function schema_v74(PDO $pdo): void
+{
+    if (!function_exists('cartes_outils_schema')) { require_once __DIR__ . '/cartes_outils.php'; }
+    cartes_outils_schema($pdo);
+}
+
+/** 75 : 🧾 Recensements SocFace (FranceArchives) — l'origine, les liens (notice, image), la cote, la page, « Vérifié sur l'image »
+ *  sur census_records / census_members, et socface_imports pour « ↶ Annuler » un import (lib/socface.php). */
+function schema_v75(PDO $pdo): void
+{
+    if (!function_exists('socface_schema')) { require_once __DIR__ . '/socface.php'; }
+    socface_schema($pdo);
+}
+
+/** 76 : 🗂 Archives en ligne (Mémoire des hommes, Léonore, registres matricules, presse) — so_imports garde ce qu'un import a
+ *  créé et les anciennes valeurs, pour « ↶ Annuler » (lib/sources_ouvertes.php). */
+function schema_v76(PDO $pdo): void
+{
+    if (!function_exists('so_schema')) { require_once __DIR__ . '/sources_ouvertes.php'; }
+    so_schema($pdo);
+}
+
+/** 77 : 🗂 Archives en ligne (suite) — les types d'événements Déportation, Décès en déportation, Fusillé, Condamnation, Arrivée au
+ *  bagne, Libération ou décès au bagne, Décoration, Changement de nom (lib/sources_ouvertes_2.php). Rien n'est ajouté s'ils existent. */
+function schema_v77(PDO $pdo): void
+{
+    if (!function_exists('so2_seed_types')) { require_once __DIR__ . '/sources_ouvertes_2.php'; }
+    so2_seed_types($pdo);
+}
+
+/** 78 : 🗂 Archives en ligne (4e lot) — population d'une commune depuis 1793 (place_populations) et ses anciens noms
+ *  (place_former_names), lus sur le site de l'EHESS « Des villages de Cassini… » ou recopiés (lib/sources_ouvertes_4.php). */
+function schema_v78(PDO $pdo): void
+{
+    if (!function_exists('so4_schema')) { require_once __DIR__ . '/sources_ouvertes_4.php'; }
+    so4_schema($pdo);
+}
+
+/** 79 : 🩺 Santé de la famille — maladies, handicaps, causes de décès, épidémies traversées (health_records), privées : cachées
+ *  au départ et jamais exportées (lib/sante.php). */
+function schema_v79(PDO $pdo): void
+{
+    if (!function_exists('sante_schema')) { require_once __DIR__ . '/sante.php'; }
+    sante_schema($pdo);
+}
+
+/** 80 : 🔄 Deux ordinateurs et 🤝 travail à deux — identifiants communs (uid) aussi sur les sources, médias, liens de médias et
+ *  citations ; conflits à régler (sync_conflicts) et fusions à défaire (sync_merges) (lib/sync_dossier.php). */
+function schema_v80(PDO $pdo): void
+{
+    if (!function_exists('sd_schema')) { require_once __DIR__ . '/sync_dossier.php'; }
+    sd_schema($pdo);
+}
+
+/** 81 : 🏠 Héritages et successions — les actes (testament, partage, inventaire après décès, donation, vente entre héritiers,
+ *  contrat de mariage, déclaration de succession), leurs personnes avec rôle (défunt ou donateur, bénéficiaires, autres) et
+ *  les biens transmis (maison, parcelle, objet de famille, terre, somme, meuble), à qui (lib/successions.php). */
+function schema_v81(PDO $pdo): void
+{
+    if (!function_exists('successions_schema')) { require_once __DIR__ . '/successions.php'; }
+    successions_schema($pdo);
+}
+
+/** 82 : 👶 Transmission des prénoms — les corrections à la main (« ce n'est pas ça », « choisir la personne ») :
+ *  name_origin_choices (lib/prenoms_france.php). Le reste est calculé à la lecture. */
+function schema_v82(PDO $pdo): void
+{
+    if (!function_exists('pf_schema')) { require_once __DIR__ . '/prenoms_france.php'; }
+    pf_schema($pdo);
+}
+
+/** 83 : 🧩 Murs de brique — les ancêtres où l'on bloque : marque « 🧱 Je bloque ici », statut (à chercher, en cours, résolu,
+ *  abandonné) et note (brick_walls) ; les murs eux-mêmes sont calculés (lib/ou_chercher.php). */
+function schema_v83(PDO $pdo): void
+{
+    if (!function_exists('ouc_schema')) { require_once __DIR__ . '/ou_chercher.php'; }
+    ouc_schema($pdo);
+}
+
+/** 84 : 🔍 « Qui est sur cette photo ? » à plusieurs (photo_asks : visages, noms proposés, réponses des cousins, imports à
+ *  défaire — lib/photo_ask.php) et 📮 courriers tout prêts (courriers.person_id, letter_json, media_id — lib/courriers_actes.php). */
+function schema_v84(PDO $pdo): void
+{
+    if (!function_exists('photo_ask_schema')) { require_once __DIR__ . '/photo_ask.php'; }
+    photo_ask_schema($pdo);
+    if (!function_exists('cl_schema')) { require_once __DIR__ . '/courriers_actes.php'; }
+    cl_schema($pdo);
+}
+
+/** 85 : 📍 Images de lieux — « Où a-t-elle été prise ? » : ce qu'on sait de l'image (place_photos : sorte, auteur, photo
+ *  d'aujourd'hui, comparaison) et ses hypothèses de lieu (place_photo_guesses : lieu, point, zone, rue, direction, certitude,
+ *  pourquoi, auteur, une seule retenue) (lib/place_photos.php). */
+function schema_v85(PDO $pdo): void
+{
+    if (!function_exists('place_photos_schema')) { require_once __DIR__ . '/place_photos.php'; }
+    place_photos_schema($pdo);
+}
+
+/** 86 : 🎉 Organiser une cousinade — les projets (cousinades : ancêtre ou couple, personne de référence, date, lieu, réglages)
+ *  et leurs invités (cousinade_guests : fiche ou nom libre, coordonnées propres au projet, réponse, régime, présence, table)
+ *  (lib/cousinade.php). Les liens de parenté et les branches sont calculés à la lecture. */
+function schema_v86(PDO $pdo): void
+{
+    if (!function_exists('cousinade_schema')) { require_once __DIR__ . '/cousinade.php'; }
+    cousinade_schema($pdo);
+}
+
+/** 87 : 🗺 Mes cartes (Carte → « 🗺 Mes cartes ») — custom_maps : nom, description et définition (fond, période, vue, couches avec
+ *  leurs filtres et leur style), jamais les données ; supprimée = gardée 30 jours pour « ↶ Annuler » (lib/cartes_perso.php). */
+function schema_v87(PDO $pdo): void
+{
+    if (!function_exists('cartes_perso_schema')) { require_once __DIR__ . '/cartes_perso.php'; }
+    cartes_perso_schema($pdo);
+}
+
+/** 88 : ⚖️ Dossiers de preuve (proof_cases : question, conclusion, certitude ; proof_items : indices pour et contre avec leur
+ *  source ou citation, sorte d'indice et qualité, recherches faites, conflits et leur résolution) et 🛡 solidité des liens
+ *  choisie à la main (link_strength) ; le reste est calculé à la lecture (lib/preuve.php). */
+function schema_v88(PDO $pdo): void
+{
+    if (!function_exists('preuve_schema')) { require_once __DIR__ . '/preuve.php'; }
+    preuve_schema($pdo);
 }

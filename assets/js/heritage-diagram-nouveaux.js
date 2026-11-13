@@ -7,6 +7,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s).replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? String(v[k]) : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const R = ext.diagramRender; if (!R?.KINDS) return;
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
@@ -28,7 +29,7 @@
     const rowsOf = (spec, key = 'rows', max = 2000) => (Array.isArray(spec[key]) ? spec[key] : []).filter(r => r && typeof r === 'object' && !Array.isArray(r)).slice(0, max);
     const str = (v, n = 120) => String(v ?? '').replace(/\s+/g, ' ').trim().slice(0, n);
     const C = (k, label, type = 'text', extra = {}) => ({k, label, type, ...extra});
-    const empty = (W, fs, msg) => ({h: 60, svg: T(W / 2, 30, msg, {anchor: 'middle', size: fs, fill: '#888888'}), legend: [], desc: msg});
+    const empty = (W, fs, msg) => { msg = i18n(msg); return {h: 60, svg: T(W / 2, 30, msg, {anchor: 'middle', size: fs, fill: '#888888'}), legend: [], desc: msg}; };
     const H_OPT = C('height', 'Hauteur du dessin (0 = automatique)', 'range', {unit: 'px', min: 0, max: 1600, step: 10, def: 0});
     const P = (cx, cy, r, a) => [cx + Math.cos(a) * r, cy + Math.sin(a) * r];
     const arc = (cx, cy, r0, r1, a0, a1) => { if (a1 - a0 > Math.PI * 1.98) { const m = (a0 + a1) / 2; return arc1(cx, cy, r0, r1, a0, m) + arc1(cx, cy, r0, r1, m, a1); } return arc1(cx, cy, r0, r1, a0, a1); };
@@ -51,7 +52,7 @@
                     + T(x + bw / 2, y + rowH * (r.dates && rowH > fs * 2.6 ? .38 : .5), cut(r.name, bw - 8, fs * (g === 0 ? 1 : .9)), {size: fs * (g === 0 ? 1 : .9), anchor: 'middle', weight: g === 0 ? 700 : 600, fill: ink})
                     + (r.dates && rowH > fs * 2.6 ? T(x + bw / 2, y + rowH * .72, cut(r.dates, bw - 8, fs * .75), {size: fs * .75, anchor: 'middle', fill: ink, op: .85}) : '') + '</g>';
                 pos.set(r, [x + bw / 2, y]); });
-            if (lw) svg += T(4, y + rowH / 2, g === 0 ? '' : g < 0 ? `${-g === 1 ? 'Parents' : -g === 2 ? 'Grands-parents' : `Gén. ${g}`}` : `${g === 1 ? 'Enfants' : g === 2 ? 'Petits-enfants' : `Gén. +${g}`}`, {size: fs * .7, op: .6});
+            if (lw) svg += T(4, y + rowH / 2, g === 0 ? '' : g < 0 ? (-g === 1 ? i18n('Parents') : -g === 2 ? i18n('Grands-parents') : i18n('Gén. {g}', {g: String(g)})) : (g === 1 ? i18n('Enfants') : g === 2 ? i18n('Petits-enfants') : i18n('Gén. +{g}', {g: String(g)})), {size: fs * .7, op: .6});
             y += rowH + gap;
         });
         if (o.links !== false) { const mid = list.find(r => r.gen === 0), [mx, my] = pos.get(mid); let lines = '';
@@ -60,7 +61,7 @@
         const up = list.filter(r => r.gen < 0).length, down = list.filter(r => r.gen > 0).length;
         return {h: Math.max(num(o.height) || 0, y - gap + 4), svg, legend: [{label: 'Ascendants', color: cUp}, {label: 'La personne', color: cMid}, {label: 'Descendants', color: cDown}], desc: `Sablier : ${up} ascendant${up > 1 ? 's' : ''} au-dessus, ${down} descendant${down > 1 ? 's' : ''} au-dessous.`};
     }
-    const sampleHour = () => ({o: {title: 'Le sablier de Joseph Borie'}, rows: [
+    const sampleHour = () => ({o: {title: i18n('Le sablier de {name}', {name: 'Joseph Borie'})}, rows: [
         ['Antoine Borie', -2, '1820-1881'], ['Marie Lacoste', -2, '1824-1890'], ['Pierre Faure', -2, '1818-1870'], ['Jeanne Roux', -2, '1822-1899'],
         ['Jean Borie', -1, '1851-1919'], ['Louise Faure', -1, '1855-1932'], ['Joseph Borie', 0, '1890-1964'],
         ['Odette Borie', 1, '1921-2010'], ['Henri Borie', 1, '1924-1944'], ['René Borie', 1, '1927-1999'], ['Claire', 2, '1950'], ['Paul', 2, '1953'], ['Anne', 2, '1956'], ['Luc', 2, '1958'], ['Marc', 2, '1961']].map(([name, gen, dates]) => ({name, gen, dates}))});
@@ -89,16 +90,16 @@
         const today = new Date(), tv = today.getFullYear() + today.getMonth() / 12 + (today.getDate() - 1) / 365;
         if (o.today !== false && tv >= lo && tv <= hi) svg += `<line x1="${r2(X(tv))}" x2="${r2(X(tv))}" y1="${r2(top - 6)}" y2="${r2(y)}" stroke="${color(o.todayColor, '#e15759')}" stroke-width="1.6" stroke-dasharray="4 3"/>` + T(X(tv), y + fs * .7, 'aujourd’hui', {size: fs * .65, anchor: 'middle', fill: color(o.todayColor, '#e15759')});
         const legend = o.colorBy === 'group' || !o.colorBy ? groups.filter(Boolean).map((g, i) => ({label: g, color: pick(spec, groups.indexOf(g))})) : [];
-        return {h: Math.max(num(o.height) || 0, y + fs * 1.4), svg, legend, desc: `Diagramme de Gantt : ${list.length} tâche${list.length > 1 ? 's' : ''}.`};
+        return {h: Math.max(num(o.height) || 0, y + fs * 1.4), svg, legend, desc: i18n(list.length > 1 ? 'Diagramme de Gantt : {n} tâches.' : 'Diagramme de Gantt : {n} tâche.', {n: list.length})};
     }
-    const sampleGantt = () => ({o: {title: 'Ma recherche sur les Borie'}, rows: [
-        ['Relevés de Naves (1700-1792)', 'Archives', '2026-01-10', '2026-03-20', 100], ['État civil de Tulle', 'Archives', '2026-02-15', '2026-06-01', 70], ['Notaires (contrats de mariage)', 'Archives', '2026-04-01', '2026-09-30', 30],
-        ['Recensements 1836-1936', 'En ligne', '2026-03-01', '2026-05-15', 90], ['Registres matricules', 'En ligne', '2026-05-01', '2026-07-20', 50], ['Visite à Arnac-la-Poste', 'Terrain', '2026-07-01', '2026-07-08', 0], ['Livre de famille', 'Écriture', '2026-08-01', '2026-12-15', 10]]
+    const sampleGantt = () => ({o: {title: i18n('Ma recherche sur les {name}', {name: 'Borie'})}, rows: [
+        [i18n('Relevés de Naves (1700-1792)'), i18n('Archives'), '2026-01-10', '2026-03-20', 100], [i18n('État civil de Tulle'), i18n('Archives'), '2026-02-15', '2026-06-01', 70], [i18n('Notaires (contrats de mariage)'), i18n('Archives'), '2026-04-01', '2026-09-30', 30],
+        [i18n('Recensements 1836-1936'), i18n('En ligne'), '2026-03-01', '2026-05-15', 90], [i18n('Registres matricules'), i18n('En ligne'), '2026-05-01', '2026-07-20', 50], [i18n('Visite à Arnac-la-Poste'), i18n('Terrain'), '2026-07-01', '2026-07-08', 0], [i18n('Livre de famille'), i18n('Écriture'), '2026-08-01', '2026-12-15', 10]]
         .map(([task, group, start, end, done]) => ({task, group, start, end, done}))});
 
     /* ═════════ 🧠 Carte mentale : une idée au centre, des branches, des feuilles ═════════ */
     function mindmap(spec, W, fs) {
-        const o = spec.o || {}, center = str(o.center || spec.o?.title, 60) || 'Mon idée', list = rowsOf(spec, 'rows', 300).map(r => ({branch: str(r.branch, 50), leaf: str(r.leaf, 60)})).filter(r => r.branch);
+        const o = spec.o || {}, center = str(o.center || spec.o?.title, 60) || i18n('Mon idée'), list = rowsOf(spec, 'rows', 300).map(r => ({branch: str(r.branch, 50), leaf: str(r.leaf, 60)})).filter(r => r.branch);
         if (!list.length) return empty(W, fs, 'Ajoute des branches (et, à côté, leurs idées).');
         const branches = [...new Set(list.map(r => r.branch))].slice(0, 16), leaves = b => list.filter(r => r.branch === b && r.leaf).map(r => r.leaf).slice(0, 12);
         const H = num(o.height) > 120 ? num(o.height) : Math.max(320, Math.min(1200, 120 + branches.reduce((s, b) => s + Math.max(1, leaves(b).length), 0) * fs * 1.25));
@@ -115,11 +116,11 @@
             void right; });
         const cw = Math.min(W * .34, textW(center, fs * 1.15) + fs * 2), ch = fs * 2.6, cc = color(o.centerColor, '#1d1d1f');
         lab += `<rect x="${r2(cx - cw / 2)}" y="${r2(cy - ch / 2)}" width="${r2(cw)}" height="${r2(ch)}" rx="${r2(ch / 2)}" fill="${cc}"/>` + T(cx, cy, cut(center, cw - fs, fs * 1.15), {size: fs * 1.15, anchor: 'middle', weight: 800, fill: contrast(cc)});
-        return {h: H, svg: svg + lab, legend: [], desc: `Carte mentale « ${center} » : ${branches.length} branche${branches.length > 1 ? 's' : ''}.`};
+        return {h: H, svg: svg + lab, legend: [], desc: i18n(branches.length > 1 ? 'Carte mentale « {name} » : {n} branches.' : 'Carte mentale « {name} » : {n} branche.', {name: center, n: branches.length})};
     }
-    const sampleMind = () => ({o: {title: 'Mes pistes de recherche', center: 'Famille Borie'}, rows: [
-        ['Archives', 'Registres de Naves'], ['Archives', 'Notaires de Tulle'], ['Archives', 'Registres matricules'], ['Lieux', 'Naves'], ['Lieux', 'Arnac-la-Poste'], ['Lieux', 'Brive'],
-        ['Métiers', 'Laboureurs'], ['Métiers', 'Tisserands'], ['Questions', 'Qui était Jeanne Roux ?'], ['Questions', 'Pourquoi le départ en 1902 ?'], ['Photos', 'Mariage 1919'], ['Photos', 'Maison de Naves'], ['Cousins', 'Branche de Paris'], ['Cousins', 'ADN : 3 correspondances']].map(([branch, leaf]) => ({branch, leaf}))});
+    const sampleMind = () => ({o: {title: i18n('Mes pistes de recherche'), center: i18n('Famille {name}', {name: 'Borie'})}, rows: [
+        [i18n('Archives'), i18n('Registres de Naves')], [i18n('Archives'), i18n('Notaires de Tulle')], [i18n('Archives'), i18n('Registres matricules')], [i18n('Lieux'), 'Naves'], [i18n('Lieux'), 'Arnac-la-Poste'], [i18n('Lieux'), 'Brive'],
+        [i18n('Métiers'), i18n('Laboureurs')], [i18n('Métiers'), i18n('Tisserands')], [i18n('Questions'), i18n('Qui était Jeanne Roux ?')], [i18n('Questions'), i18n('Pourquoi le départ en 1902 ?')], [i18n('Photos'), i18n('Mariage 1919')], [i18n('Photos'), i18n('Maison de Naves')], [i18n('Cousins'), i18n('Branche de Paris')], [i18n('Cousins'), i18n('ADN : 3 correspondances')]].map(([branch, leaf]) => ({branch, leaf}))});
 
     /* ═════════ 🎯 Barres en cercle : un classement qui s'enroule ═════════ */
     function radialbar(spec, W, fs) {
@@ -132,9 +133,9 @@
             if (o.track !== false) svg += sweep > TAU - .01 ? `<circle cx="${r2(cx)}" cy="${r2(cy)}" r="${r2((r0 + r1) / 2)}" fill="none" stroke="currentColor" stroke-opacity=".07" stroke-width="${r2(r1 - r0)}"/>` : `<path d="${arc(cx, cy, r0, r1, a0, a0 + sweep)}" fill="currentColor" fill-opacity=".07"/>`;
             if (r.v > 0) svg += `<path d="${arc(cx, cy, r0, r1, a0, Math.max(a0 + .01, a1))}" fill="${c}">${tip(`${r.label} : ${fmt(r.v)}${str(o.unit, 20) ? ' ' + str(o.unit, 20) : ''}`)}</path>`;
             if (band > fs * .8) svg += T(cx - 6, cy - (r0 + r1) / 2, `${cut(r.label, cx - inner - 12, fs * .75)}${o.values !== false ? ' · ' + fmt(r.v) : ''}`, {size: Math.min(fs * .75, band * .8), anchor: 'end', weight: 600}); });
-        return {h: cy + Rm + 6, svg, legend: [], desc: `Barres en cercle : ${sorted.length} lignes, la plus longue « ${sorted[0].label} » (${fmt(sorted[0].v)}).`};
+        return {h: cy + Rm + 6, svg, legend: [], desc: i18n('Barres en cercle : {n} lignes, la plus longue « {name} » ({v}).', {n: sorted.length, name: sorted[0].label, v: fmt(sorted[0].v)})};
     }
-    const sampleRadial = () => ({o: {title: 'Les prénoms les plus donnés', unit: 'fois'}, rows: [['Jean', 48], ['Marie', 61], ['Pierre', 33], ['Jeanne', 29], ['Antoine', 22], ['Louise', 18], ['François', 16], ['Anne', 15], ['Joseph', 14]].map(([label, value]) => ({label, value}))});
+    const sampleRadial = () => ({o: {title: i18n('Les prénoms les plus donnés'), unit: i18n('fois')}, rows: [['Jean', 48], ['Marie', 61], ['Pierre', 33], ['Jeanne', 29], ['Antoine', 22], ['Louise', 18], ['François', 16], ['Anne', 15], ['Joseph', 14]].map(([label, value]) => ({label, value}))});
 
     /* ═════════ 🫧 Bulles groupées : une bulle par nom, sa taille suit le chiffre, rangées serrées ═════════ */
     function circlepack(spec, W, fs) {
@@ -150,9 +151,9 @@
             svg += `<g>${tip(`${p.label}${p.group ? ' (' + p.group + ')' : ''} : ${fmt(p.v)}`)}<circle cx="${r2(p.x)}" cy="${r2(p.y)}" r="${r2(p.r)}" fill="${c}" fill-opacity="${r2(clamp(num(o.opacity ?? 85), 10, 100) / 100)}"/></g>`;
             if (p.r > fs * 1.2) { const s = Math.min(fs, p.r * .45); svg += T(p.x, p.y - (o.values !== false && p.r > fs * 1.8 ? s * .45 : 0), cut(p.label, p.r * 1.8, s), {size: s, anchor: 'middle', weight: 700, fill: contrast(c)}) + (o.values !== false && p.r > fs * 1.8 ? T(p.x, p.y + s * .7, fmt(p.v), {size: s * .8, anchor: 'middle', fill: contrast(c)}) : ''); } });
         const legend = (o.colorBy || 'group') === 'group' ? groups.filter(Boolean).map(g => ({label: g, color: pick(spec, groups.indexOf(g))})) : [];
-        return {h: H, svg, legend, desc: `Bulles groupées : ${placed.length} bulles${placed.length < list.length ? ` (${list.length - placed.length} trop petites pour la place)` : ''}.`};
+        return {h: H, svg, legend, desc: placed.length < list.length ? i18n('Bulles groupées : {n} bulles ({k} trop petites pour la place).', {n: placed.length, k: list.length - placed.length}) : i18n('Bulles groupées : {n} bulles.', {n: placed.length})};
     }
-    const sampleBubbles = () => ({o: {title: 'Les noms de famille de l’arbre'}, rows: [['Borie', 84, 'Corrèze'], ['Faure', 52, 'Corrèze'], ['Lacoste', 31, 'Corrèze'], ['Roux', 28, 'Haute-Vienne'], ['Martin', 25, 'Haute-Vienne'], ['Dupuy', 19, 'Corrèze'], ['Peyrat', 14, 'Haute-Vienne'], ['Chastang', 12, 'Corrèze'], ['Lagarde', 11, 'Lot'], ['Bourdet', 9, 'Lot'], ['Vergne', 8, 'Corrèze'], ['Mas', 6, 'Lot'], ['Rivière', 5, 'Haute-Vienne'], ['Soulier', 4, 'Lot'], ['Bos', 3, 'Corrèze']].map(([label, value, group]) => ({label, value, group}))});
+    const sampleBubbles = () => ({o: {title: i18n('Les noms de famille de l’arbre')}, rows: [['Borie', 84, 'Corrèze'], ['Faure', 52, 'Corrèze'], ['Lacoste', 31, 'Corrèze'], ['Roux', 28, 'Haute-Vienne'], ['Martin', 25, 'Haute-Vienne'], ['Dupuy', 19, 'Corrèze'], ['Peyrat', 14, 'Haute-Vienne'], ['Chastang', 12, 'Corrèze'], ['Lagarde', 11, 'Lot'], ['Bourdet', 9, 'Lot'], ['Vergne', 8, 'Corrèze'], ['Mas', 6, 'Lot'], ['Rivière', 5, 'Haute-Vienne'], ['Soulier', 4, 'Lot'], ['Bos', 3, 'Corrèze']].map(([label, value, group]) => ({label, value, group}))});
 
     /* ═════════ ⭕ Anneaux d'avancement : un anneau par objectif (branche, registre…), plein = fini ═════════ */
     function rings(spec, W, fs) {
@@ -161,16 +162,16 @@
         const side = o.layout === 'grid', n = list.length;
         if (side) { const cols = clamp(Math.round(num(o.cols) || Math.min(4, n)), 1, 6), cw = W / cols, r = Math.min(cw * .38, 90), rowH = r * 2 + fs * 3; let svg = '';
             list.forEach((it, i) => { const cx = cw * (i % cols) + cw / 2, cy = Math.floor(i / cols) * rowH + r + 6, c = pick(spec, i), f = Math.min(1, it.v / it.goal), th = r * clamp(num(o.thick ?? 22), 6, 60) / 100;
-                svg += `<circle cx="${r2(cx)}" cy="${r2(cy)}" r="${r2(r - th / 2)}" fill="none" stroke="${c}" stroke-opacity=".18" stroke-width="${r2(th)}"/>` + (f > 0 ? `<path d="${arc(cx, cy, r - th, r, -Math.PI / 2, -Math.PI / 2 + Math.max(.01, f * TAU - 1e-4))}" fill="${c}">${tip(`${it.label} : ${fmt(it.v)} sur ${fmt(it.goal)}`)}</path>` : '')
+                svg += `<circle cx="${r2(cx)}" cy="${r2(cy)}" r="${r2(r - th / 2)}" fill="none" stroke="${c}" stroke-opacity=".18" stroke-width="${r2(th)}"/>` + (f > 0 ? `<path d="${arc(cx, cy, r - th, r, -Math.PI / 2, -Math.PI / 2 + Math.max(.01, f * TAU - 1e-4))}" fill="${c}">${tip(i18n('{name} : {v} sur {goal}', {name: it.label, v: fmt(it.v), goal: fmt(it.goal)}))}</path>` : '')
                     + T(cx, cy, `${Math.round(f * 100)} %`, {size: Math.min(fs * 1.4, r * .5), anchor: 'middle', weight: 800}) + T(cx, cy + r + fs * .9, cut(it.label, cw - 8, fs * .85), {size: fs * .85, anchor: 'middle', weight: 600}) + T(cx, cy + r + fs * 2, `${fmt(it.v)} / ${fmt(it.goal)}`, {size: fs * .7, anchor: 'middle', op: .7}); });
-            return {h: Math.ceil(n / cols) * rowH + 6, svg, legend: [], desc: `Anneaux d’avancement : ${n} objectifs.`}; }
+            return {h: Math.ceil(n / cols) * rowH + 6, svg, legend: [], desc: i18n('Anneaux d’avancement : {n} objectifs.', {n})}; }
         const Rm = Math.min(W * .3, 180), cx = Rm + 8, cy = Rm + 6, band = Rm * .75 / n, th = band * clamp(num(o.thick ?? 80), 30, 100) / 100; let svg = '';
         list.forEach((it, i) => { const r1 = Rm - i * band, r0 = r1 - th, c = pick(spec, i), f = Math.min(1, it.v / it.goal);
-            svg += `<circle cx="${r2(cx)}" cy="${r2(cy)}" r="${r2((r0 + r1) / 2)}" fill="none" stroke="${c}" stroke-opacity=".16" stroke-width="${r2(r1 - r0)}"/>` + (f > 0 ? `<path d="${arc(cx, cy, r0, r1, -Math.PI / 2, -Math.PI / 2 + Math.max(.01, f * TAU - 1e-4))}" fill="${c}">${tip(`${it.label} : ${fmt(it.v)} sur ${fmt(it.goal)}`)}</path>` : '');
+            svg += `<circle cx="${r2(cx)}" cy="${r2(cy)}" r="${r2((r0 + r1) / 2)}" fill="none" stroke="${c}" stroke-opacity=".16" stroke-width="${r2(r1 - r0)}"/>` + (f > 0 ? `<path d="${arc(cx, cy, r0, r1, -Math.PI / 2, -Math.PI / 2 + Math.max(.01, f * TAU - 1e-4))}" fill="${c}">${tip(i18n('{name} : {v} sur {goal}', {name: it.label, v: fmt(it.v), goal: fmt(it.goal)}))}</path>` : '');
             const ly = 10 + fs * 1.6 * i + fs; svg += `<rect x="${r2(cx + Rm + 18)}" y="${r2(ly - fs * .45)}" width="${r2(fs * .9)}" height="${r2(fs * .9)}" rx="2" fill="${c}"/>` + T(cx + Rm + 18 + fs * 1.3, ly, cut(`${it.label} — ${Math.round(f * 100)} % (${fmt(it.v)} / ${fmt(it.goal)})`, W - cx - Rm - 30 - fs, fs * .85), {size: fs * .85, weight: 600}); });
-        return {h: Math.max(cy + Rm + 6, 10 + fs * 1.6 * n + fs), svg, legend: [], desc: `Anneaux d’avancement : ${n} objectifs, de ${Math.round(Math.min(...list.map(r => Math.min(1, r.v / r.goal))) * 100)} à ${Math.round(Math.max(...list.map(r => Math.min(1, r.v / r.goal))) * 100)} %.`};
+        return {h: Math.max(cy + Rm + 6, 10 + fs * 1.6 * n + fs), svg, legend: [], desc: i18n('Anneaux d’avancement : {n} objectifs, de {a} à {b} %.', {n, a: Math.round(Math.min(...list.map(r => Math.min(1, r.v / r.goal))) * 100), b: Math.round(Math.max(...list.map(r => Math.min(1, r.v / r.goal))) * 100)})};
     }
-    const sampleRings = () => ({o: {title: 'Où j’en suis'}, rows: [['Grands-parents trouvés', 4, 4], ['Arrière-grands-parents', 7, 8], ['Trisaïeuls', 11, 16], ['Actes de naissance sourcés', 38, 60], ['Photos identifiées', 52, 120]].map(([label, value, goal]) => ({label, value, goal}))});
+    const sampleRings = () => ({o: {title: i18n('Où j’en suis')}, rows: [[i18n('Grands-parents trouvés'), 4, 4], [i18n('Arrière-grands-parents'), 7, 8], [i18n('Trisaïeuls'), 11, 16], [i18n('Actes de naissance sourcés'), 38, 60], [i18n('Photos identifiées'), 52, 120]].map(([label, value, goal]) => ({label, value, goal}))});
 
     /* ═════════ « Depuis l'app » : les chiffres de mon arbre (l'arbre lu par ✨ Trésors, tresor_tree) ═════════ */
     const APP = () => window.LCNDA_APP;
@@ -196,15 +197,15 @@
     const count6 = (list, key) => { const m = new Map(); list.forEach(x => { const k = key(x); if (k) m.set(k, (m.get(k) || 0) + 1); }); return [...m].sort((a, b) => b[1] - a[1] || String(a[0]).localeCompare(String(b[0]), 'fr')); };
     const roman6 = n => { let s = '', x = n; for (const [a, b] of [[20, 'XX'], [10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']]) while (x >= a) { s += b; x -= a; } return s; };
     const BYS = [['first', 'Les prénoms les plus donnés', p => String(p.first || '').split(/[\s-]+/)[0]], ['last', 'Les noms de famille', p => p.last || ''], ['occ', 'Les métiers', p => p.occ || ''],
-        ['place', 'Les communes de naissance', (p, tr) => (p.bplace && tr.places[p.bplace] ? tr.places[p.bplace].name.split(',')[0] : '')], ['century', 'Les siècles de naissance', p => (p.by ? `${roman6(Math.ceil(p.by / 100))}e siècle` : '')]];
+        ['place', 'Les communes de naissance', (p, tr) => (p.bplace && tr.places[p.bplace] ? tr.places[p.bplace].name.split(',')[0] : '')], ['century', 'Les siècles de naissance', p => (p.by ? i18n('{n}e siècle', {n: roman6(Math.ceil(p.by / 100))}) : '')]];
     /** un panneau : titre, phrase, la personne (ou non), des choix, « Prendre dans mon arbre » ; run(pane, tr) → {rows, o} */
     function app6(title, intro, fields, run, {person = true} = {}) {
         return {html: () => `<div class="h-dg-app n6-app"><h4>${esc(title)}</h4><p class="muted">${esc(intro)}</p>${person && APP()?.pickerField ? `<span class="pk-lab">La personne</span>${APP().pickerField({name: 'n6_root', kind: 'person', animals: false, value: Number(APP().state?.bootstrap?.startPersonId) || null})}` : ''}${fields}
                 <button type="button" class="button small" data-n6-go>Prendre dans mon arbre</button><p class="muted" data-n6-msg aria-live="polite"></p></div>`,
             bind: (pane, io) => { const btn = pane.querySelector('[data-n6-go]'), msg = pane.querySelector('[data-n6-msg]'); if (!btn) return;
-                btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.innerHTML = window.LCNDA_UI.spinner('Lecture de ta généalogie…', {inline: true});
-                    try { const tr = await tree6(), r = run(pane, tr); if (!r.rows.length) throw new Error('Rien trouvé dans l’arbre pour ce choix.');
-                        const s = io.spec(); s.rows = r.rows.slice(0, 400); s.o = {...s.o, ...r.o}; io.apply(s); if (msg) msg.textContent = ''; APP().toast?.(`${r.rows.length > 400 ? 400 : r.rows.length} lignes prises dans l’arbre.`); }
+                btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.innerHTML = window.LCNDA_UI.spinner(i18n('Lecture de ta généalogie…'), {inline: true});
+                    try { const tr = await tree6(), r = run(pane, tr); if (!r.rows.length) throw new Error(i18n('Rien trouvé dans l’arbre pour ce choix.'));
+                        const s = io.spec(); s.rows = r.rows.slice(0, 400); s.o = {...s.o, ...r.o}; io.apply(s); if (msg) msg.textContent = ''; APP().toast?.(i18n('{n} lignes prises dans l’arbre.', {n: r.rows.length > 400 ? 400 : r.rows.length})); }
                     catch (e) { if (msg) msg.textContent = '⚠️ ' + (e.message || e); } finally { btn.disabled = false; } }); }};
     }
     const N_OPTS = [[8, '8'], [10, '10'], [15, '15'], [20, '20']];
@@ -214,34 +215,34 @@
             sel6('up', 'Générations au-dessus', [[1, '1 (parents)'], [2, '2'], [3, '3'], [4, '4'], [5, '5']], 2) + sel6('down', 'Générations au-dessous', [[1, '1 (enfants)'], [2, '2'], [3, '3'], [4, '4']], 2),
             (pane, tr) => { const p = root6(pane, tr); if (!p) return {rows: []};
                 const rows = [...anc6(tr, p, Number(v6(pane, 'up')) || 2).map(x => ({name: nm(x.p), gen: -x.gen, dates: life(x.p)})), {name: nm(p), gen: 0, dates: life(p)}, ...desc6(tr, p, Number(v6(pane, 'down')) || 2).map(x => ({name: nm(x.p), gen: x.gen, dates: life(x.p)}))];
-                return {rows, o: {title: `Le sablier de ${nm(p)}`}}; }),
+                return {rows, o: {title: i18n('Le sablier de {name}', {name: nm(p)})}}; }),
         gantt: app6('📅 Les vies côte à côte', 'Une barre par personne, de sa naissance à son décès (ou à aujourd’hui).',
             sel6('who', 'Qui', [['anc', 'Ses ancêtres directs'], ['fam', 'Sa famille proche (parents, frères et sœurs, enfants)'], ['desc', 'Ses descendants']], 'anc') + sel6('gens', 'Générations', [[2, '2'], [3, '3'], [4, '4'], [5, '5']], 3),
             (pane, tr) => { const p = root6(pane, tr); if (!p) return {rows: []}; const who = v6(pane, 'who'), g = Number(v6(pane, 'gens')) || 3, now = new Date().getFullYear();
-                let list = who === 'desc' ? desc6(tr, p, g).map(x => ({p: x.p, group: GEN_DOWN[x.gen - 1] || `Génération +${x.gen}`})) : who === 'fam' ? [] : anc6(tr, p, g).map(x => ({p: x.p, group: GEN_UP[x.gen - 1] || `Génération ${x.gen}`}));
+                let list = who === 'desc' ? desc6(tr, p, g).map(x => ({p: x.p, group: GEN_DOWN[x.gen - 1] ? i18n(GEN_DOWN[x.gen - 1]) : i18n('Génération +{g}', {g: String(x.gen)})})) : who === 'fam' ? [] : anc6(tr, p, g).map(x => ({p: x.p, group: GEN_UP[x.gen - 1] ? i18n(GEN_UP[x.gen - 1]) : i18n('Génération {g}', {g: String(x.gen)})}));
                 if (who === 'fam') { const add = (q, group) => { if (q && !list.some(x => x.p.id === q.id)) list.push({p: q, group}); };
-                    [p.father, p.mother].forEach(id => add(tr.byId.get(id), 'Parents'));
-                    (tr.families || []).filter(f => f.children?.includes(p.id)).forEach(f => f.children.forEach(id => id !== p.id && add(tr.byId.get(id), 'Frères et sœurs')));
-                    (tr.kids.get(p.id) || []).forEach(id => add(tr.byId.get(id), 'Enfants')); }
-                list = [{p, group: 'La personne'}, ...list];
+                    [p.father, p.mother].forEach(id => add(tr.byId.get(id), i18n('Parents')));
+                    (tr.families || []).filter(f => f.children?.includes(p.id)).forEach(f => f.children.forEach(id => id !== p.id && add(tr.byId.get(id), i18n('Frères et sœurs'))));
+                    (tr.kids.get(p.id) || []).forEach(id => add(tr.byId.get(id), i18n('Enfants'))); }
+                list = [{p, group: i18n('La personne')}, ...list];
                 const rows = list.filter(x => x.p.by).map(x => ({task: `${nm(x.p)}${x.p.occ ? ` (${x.p.occ})` : ''}`, group: x.group, start: String(x.p.by), end: String(x.p.dy || (x.p.living ? now : x.p.by + 1)), done: x.p.dy || x.p.living ? 100 : 0}));
-                return {rows, o: {title: `Les vies autour de ${nm(p)}`}}; }),
+                return {rows, o: {title: i18n('Les vies autour de {name}', {name: nm(p)})}}; }),
         mindmap: app6('🧠 Une personne et ses branches', 'Au centre la personne ; autour, ses enfants (et leurs enfants), ou les métiers et les communes de ses ancêtres.',
             sel6('by', 'Les branches', [['kids', 'Ses enfants, et leurs enfants'], ['occ', 'Les métiers de ses ancêtres'], ['place', 'Les communes de naissance de ses ancêtres']], 'kids'),
             (pane, tr) => { const p = root6(pane, tr); if (!p) return {rows: []}; const by = v6(pane, 'by'); let rows = [];
                 if (by === 'kids') (tr.kids.get(p.id) || []).forEach(k => { const c = tr.byId.get(k); if (!c) return; const gk = (tr.kids.get(k) || []).map(x => tr.byId.get(x)).filter(Boolean); rows.push(...(gk.length ? gk.map(g => ({branch: nm(c), leaf: nm(g)})) : [{branch: nm(c), leaf: life(c) || '—'}])); });
                 else { const key = by === 'occ' ? q => q.occ : q => (q.bplace && tr.places[q.bplace] ? tr.places[q.bplace].name.split(',')[0] : ''); anc6(tr, p, 6).forEach(x => { const k = key(x.p); if (k) rows.push({branch: k, leaf: nm(x.p)}); }); }
-                return {rows, o: {title: by === 'kids' ? `La descendance de ${nm(p)}` : by === 'occ' ? `Les métiers des ancêtres de ${nm(p)}` : `D’où viennent les ancêtres de ${nm(p)}`, center: nm(p)}}; }),
+                return {rows, o: {title: by === 'kids' ? i18n('La descendance de {name}', {name: nm(p)}) : by === 'occ' ? i18n('Les métiers des ancêtres de {name}', {name: nm(p)}) : i18n('D’où viennent les ancêtres de {name}', {name: nm(p)}), center: nm(p)}}; }),
         radialbar: app6('🎯 Un classement de mon arbre', 'Les plus fréquents dans toute la base, en barres autour d’un cercle.', sel6('by', 'Classer', BYS.map(b => [b[0], b[1]]), 'first') + sel6('n', 'Combien', N_OPTS, 10),
-            (pane, tr) => { const {by, list} = ranked(pane, tr); return {rows: list.map(([label, value]) => ({label, value})), o: {title: by[1], unit: 'fiches'}}; }, {person: false}),
+            (pane, tr) => { const {by, list} = ranked(pane, tr); return {rows: list.map(([label, value]) => ({label, value})), o: {title: i18n(by[1]), unit: i18n('fiches')}}; }, {person: false}),
         circlepack: app6('🫧 Les bulles de mon arbre', 'Une bulle par nom, métier ou commune : plus il y a de fiches, plus elle est grosse.', sel6('by', 'Les bulles', BYS.filter(b => b[0] !== 'century').map(b => [b[0], b[1]]), 'last') + sel6('n', 'Combien', N_OPTS, 15),
-            (pane, tr) => { const {by, list} = ranked(pane, tr); return {rows: list.map(([label, value]) => ({label, value, group: ''})), o: {title: by[1]}}; }, {person: false}),
+            (pane, tr) => { const {by, list} = ranked(pane, tr); return {rows: list.map(([label, value]) => ({label, value, group: ''})), o: {title: i18n(by[1])}}; }, {person: false}),
         rings: app6('⭕ Où j’en suis dans mon arbre', 'Un anneau par objectif : plein, c’est fini.', sel6('by', 'Les objectifs', [['gens', 'Les ancêtres trouvés, génération par génération'], ['facts', 'Les fiches complètes (dates, lieux, métier)']], 'gens'),
             (pane, tr) => { const by = v6(pane, 'by');
                 if (by === 'facts') { const all = tr.people, dead = all.filter(p => !p.living), n = all.length;
-                    return {rows: [['Date de naissance', all.filter(p => p.by).length, n], ['Lieu de naissance', all.filter(p => p.bplace).length, n], ['Date de décès (personnes décédées)', dead.filter(p => p.dy).length, dead.length], ['Métier', all.filter(p => p.occ).length, n]].filter(r => r[2]).map(([label, value, goal]) => ({label, value, goal})), o: {title: 'Mes fiches complètes'}}; }
+                    return {rows: [['Date de naissance', all.filter(p => p.by).length, n], ['Lieu de naissance', all.filter(p => p.bplace).length, n], ['Date de décès (personnes décédées)', dead.filter(p => p.dy).length, dead.length], ['Métier', all.filter(p => p.occ).length, n]].filter(r => r[2]).map(([label, value, goal]) => ({label: i18n(label), value, goal})), o: {title: i18n('Mes fiches complètes')}}; }
                 const p = root6(pane, tr); if (!p) return {rows: []}; const a = anc6(tr, p, 5);
-                return {rows: GEN_UP.slice(0, 5).map((label, i) => ({label, value: a.filter(x => x.gen === i + 1).length, goal: 2 ** (i + 1)})), o: {title: `Les ancêtres de ${nm(p)} : où j’en suis`}}; }),
+                return {rows: GEN_UP.slice(0, 5).map((label, i) => ({label: i18n(label), value: a.filter(x => x.gen === i + 1).length, goal: 2 ** (i + 1)})), o: {title: i18n('Les ancêtres de {name} : où j’en suis', {name: nm(p)})}}; }),
     };
 
     /* ═════════ Les sortes : tableaux, réglages ═════════ */

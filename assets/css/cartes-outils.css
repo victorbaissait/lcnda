@@ -1,0 +1,106 @@
+/* LCNDA — 🧭 Outils de la Carte (assets/js/heritage-cartes-outils.js) : trajets d'autrefois, grande carte à imprimer,
+ * relief 3D, « ✏️ Mes couches ». Couleurs : variables de l'app (--ink, --card-bg, --blue-bright…) ; le reste du mode sombre
+ * est écrit par scripts/build-dark-css.py (bloc en fin de fichier). */
+
+/* ── la barre de la Carte ── */
+.cpo-ctl { display: inline-flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.cpo-ctl .button.is-active { background: var(--blue-bright); color: #fff; border-color: var(--blue-bright); }
+
+/* ── 1. trajets ── */
+.cpo-travel { display: grid; gap: 12px; min-width: 0; }
+.cpo-travel > *, .cpo-travel [data-cpo-pane] { min-width: 0; }
+.cpo-modes-wrap { overflow-x: auto; max-width: 100%; }
+.cpo-travel .segmented { justify-self: start; }
+.cpo-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.cpo-year { display: inline-flex; align-items: center; gap: 8px; margin: 10px 0; font-weight: 700; }
+.cpo-year input { width: 110px; }
+.cpo-phrase { overflow-wrap: anywhere; font-size: 17px; line-height: 1.45; font-weight: 700; margin: 6px 0; padding: 10px 12px; border-left: 4px solid var(--blue-bright); background: var(--blue-soft); color: var(--ink); }
+.cpo-dist { margin: 6px 0; }
+.cpo-modes { width: 100%; }
+.cpo-modes td, .cpo-modes th { padding: 6px 8px; text-align: left; }
+.cpo-modes tr.is-off td { opacity: .55; }
+.cpo-settings { border: 1.5px solid var(--line-color); padding: 8px 12px; background: var(--card-bg); }
+.cpo-settings summary { cursor: pointer; font-weight: 700; }
+.cpo-speeds { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px 14px; margin: 10px 0; }
+.cpo-speed { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 13.5px; }
+.cpo-speed input { width: 90px; }
+.cpo-set-row { display: flex; align-items: center; gap: 10px; }
+.cpo-saved { color: #2b8a3e; font-weight: 700; font-size: 13px; }
+.cpo-sources { font-size: 12.5px; line-height: 1.5; color: var(--muted); padding-left: 18px; }
+.cpo-sources li { margin: 4px 0; }
+.cpo-legs { list-style: none; padding: 0; margin: 6px 0; display: grid; gap: 3px; }
+.cpo-legs li { display: grid; grid-template-columns: 48px 1fr auto auto; gap: 8px; align-items: baseline; padding: 4px 0; border-bottom: 1px solid var(--line-color); font-size: 13.5px; }
+.cpo-leg-y { font-weight: 700; color: var(--muted); }
+.cpo-leg-d { color: var(--muted); white-space: nowrap; }
+.cpo-leg-t { white-space: nowrap; font-weight: 700; }
+.cpo-block .cpo-phrase { font-size: 14.5px; }
+
+/* ── 2. grande carte ── */
+dialog.cpo-poster-dlg .cpo-poster-body { display: grid; grid-template-columns: 330px 1fr; gap: 18px; padding: 14px 18px; }
+.cpo-poster-side { display: grid; gap: 7px; align-content: start; max-height: 70vh; overflow: auto; padding-right: 6px; }
+.cpo-poster-side h4 { margin: 8px 0 2px; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.cpo-seg { flex-wrap: wrap; }
+.cpo-styles { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.cpo-style { display: flex; align-items: center; gap: 7px; padding: 6px 8px; border: 1.5px solid var(--line-color); background: var(--card-bg); color: var(--ink); cursor: pointer; font-size: 12.5px; text-align: left; }
+.cpo-style.is-active { border-color: var(--blue-bright); box-shadow: inset 0 0 0 1px var(--blue-bright); }
+.cpo-style i { position: relative; width: 26px; height: 20px; border: 1.5px solid; flex: none; }
+.cpo-style i b { position: absolute; left: 3px; top: 3px; width: 13px; height: 9px; border-radius: 40% 60% 50% 40%; }
+.cpo-style i u { position: absolute; right: 3px; bottom: 3px; width: 5px; height: 5px; border-radius: 50%; }
+.cpo-in { display: grid; gap: 3px; font-size: 13px; }
+.cpo-poster-prev { display: grid; gap: 6px; align-content: start; min-width: 0; }
+.cpo-poster-stage { background: #8a8f98; padding: 16px; display: flex; justify-content: center; align-items: flex-start; min-height: 360px; max-height: 70vh; overflow: auto; }
+.cpo-poster-stage svg { width: auto; height: auto; max-width: 100%; max-height: calc(70vh - 32px); box-shadow: 0 4px 18px rgba(0, 0, 0, .35); }
+.cpo-poster-stage .ui-notice { position: absolute; max-width: 420px; }
+.cpo-poster-info { color: var(--muted); }
+.cpo-export-prev svg { width: 100%; height: auto; }
+
+/* ── 3. relief ── */
+.cpo-relief { display: grid; grid-template-columns: 280px 1fr; gap: 16px; }
+.cpo-relief-side { display: grid; gap: 10px; align-content: start; }
+.cpo-relief-view { position: relative; height: min(62vh, 560px); min-height: 300px; background: #e9f1f8; border: 1.5px solid var(--line-color); overflow: hidden; cursor: grab; touch-action: none; }
+.cpo-relief-view:active { cursor: grabbing; }
+.cpo-relief-view:focus-visible { outline: 3px solid var(--blue-bright); outline-offset: 2px; }
+.cpo-relief-view canvas { display: block; width: 100% !important; height: 100% !important; }
+.cpo-relief-labels { position: absolute; inset: 0; pointer-events: none; }
+.cpo-pin-label { position: absolute; left: 0; top: 0; margin: -26px 0 0 8px; padding: 1px 6px; background: rgba(255, 255, 255, .92); color: #111; border: 1px solid #333; font: 700 12px/1.4 system-ui, sans-serif; white-space: nowrap; }
+
+/* ── 4. mes couches ── */
+.cpo-layers { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; overflow: visible; }
+.cpo-layers .cpo-f { pointer-events: visiblePainted; cursor: pointer; }
+.cpo-layers.is-drawing .cpo-f { pointer-events: none; }
+.cpo-layers .cpo-f-label { font: 700 12px system-ui, sans-serif; fill: #111; stroke: #fff; stroke-width: 3px; paint-order: stroke; }
+.cpo-layers .cpo-draft { pointer-events: none; }
+#map-stage.is-cpo-drawing { cursor: crosshair; }
+.cpo-panel { position: absolute; top: 52px; right: 10px; z-index: 20; width: 300px; max-width: calc(100% - 20px); max-height: calc(100% - 20px); overflow: auto; background: var(--card-bg); color: var(--ink); border: 2px solid var(--ink); box-shadow: var(--shadow-small); padding: 10px; display: grid; gap: 8px; font-size: 13.5px; }
+.cpo-panel[hidden] { display: none; }
+.cpo-panel-head { display: flex; justify-content: space-between; align-items: center; }
+.cpo-layer-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.cpo-layer { display: grid; grid-template-columns: auto auto 1fr auto; align-items: center; gap: 6px; padding: 3px 4px; border: 1.5px solid transparent; }
+.cpo-layer.is-cur { border-color: var(--blue-bright); background: var(--blue-soft); }
+.cpo-layer .ui-toggle { margin: 0; }
+.cpo-swatch { width: 20px; height: 20px; border: 1.5px solid var(--ink); cursor: pointer; padding: 0; }
+.cpo-layer-name { background: none; border: 0; color: var(--ink); text-align: left; cursor: pointer; font: inherit; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cpo-layer-name small { font-weight: 400; color: var(--muted); }
+.cpo-tools, .cpo-draw-act, .cpo-panel-foot { display: flex; flex-wrap: wrap; gap: 5px; }
+.cpo-pop { position: absolute; z-index: 25; width: 260px; background: var(--card-bg); color: var(--ink); border: 2px solid var(--ink); box-shadow: var(--shadow-small); padding: 10px 12px; display: grid; gap: 4px; font-size: 13.5px; }
+.cpo-pop p { margin: 2px 0; }
+.cpo-pop-x { position: absolute; top: 4px; right: 4px; }
+.cpo-pop-act { display: flex; gap: 6px; margin-top: 4px; }
+.cpo-color-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+@media (max-width: 760px) {
+    .cpo-grid2, dialog.cpo-poster-dlg .cpo-poster-body, .cpo-relief { grid-template-columns: 1fr; }
+    .cpo-poster-side { max-height: none; }
+    .cpo-legs li { grid-template-columns: 40px 1fr; }
+    .cpo-legs li .cpo-leg-d, .cpo-legs li .cpo-leg-t { grid-column: 2; }
+    .cpo-panel { width: auto; left: 10px; max-height: 46%; }
+    .cpo-modes th:nth-child(4), .cpo-modes td:nth-child(4) { display: none; }
+    .cpo-poster-stage svg { max-height: none; }
+    .cpo-relief-view { height: 52vh; }
+}
+:root[data-theme="dark"] .cpo-relief-view { background: #1d232c; }
+:root[data-theme="dark"] .cpo-poster-stage { background: #2a2e35; }
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+:root[data-theme="dark"] .cpo-saved{color:#afdeb9}
+:root[data-theme="dark"] .cpo-pin-label{background:rgba(33,33,33,0.92);color:#f0f0f0}
+/* ═════ fin du mode sombre automatique ═════ */

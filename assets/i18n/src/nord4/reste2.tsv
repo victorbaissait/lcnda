@@ -1,0 +1,710 @@
+fr ¦ fi ¦ hu
+=grappe ¦ klusteri|klusteria ¦ klaszter|klaszter
+=chevauchement ¦ päällekkäisyys|päällekkäisyyttä ¦ átfedés|átfedés
+adn|Nom ¦ Nimi ¦ Név
+Test ¦ Testi ¦ Teszt
+Segments ¦ Segmentit ¦ Szegmensek
+Groupes ¦ Ryhmät ¦ Csoportok
+Paternel ¦ Isän puoli ¦ Apai
+Maternel ¦ Äidin puoli ¦ Anyai
+Pas de réponse ¦ Ei vastausta ¦ Nincs válasz
+ADN-X ¦ X-DNA ¦ X-DNS
+ADN-Y ¦ Y-DNA ¦ Y-DNS
+ADNmt ¦ mtDNA ¦ mtDNS
+Autosomal (atDNA) ¦ Autosomaalinen (atDNA) ¦ Autoszomális (atDNS)
+ADN mitochondrial ¦ Mitokondrio-DNA ¦ Mitokondriális DNS
+Demi-oncle, demi-tante ¦ Puolisetä/-eno, puolitäti ¦ Féltestvér nagybácsi, nagynéni
+vous ¦ sinä ¦ te
+grands-parents ¦ isovanhemmat ¦ nagyszülők
+arrière-arrière-grands-parents (4e génération) ¦ isoisoisovanhemmat (4. sukupolvi) ¦ ük-nagyszülők (4. nemzedék)
+5e génération ¦ 5. sukupolvi ¦ 5. nemzedék
+6e génération ¦ 6. sukupolvi ¦ 6. nemzedék
+7e génération ¦ 7. sukupolvi ¦ 7. nemzedék
+8e génération ¦ 8. sukupolvi ¦ 8. nemzedék
+Relation proposée ¦ Ehdotettu sukulaisuus ¦ Javasolt rokoni kapcsolat
+Correspondances en commun ¦ Yhteiset osumat ¦ Közös egyezések
+Taille de l’arbre ¦ Sukupuun koko ¦ A családfa mérete
+Arbre (adresse) ¦ Sukupuu (osoite) ¦ Családfa (cím)
+Contact ¦ Yhteystieto ¦ Kapcsolat
+cM sur le X ¦ cM X-kromosomissa ¦ cM az X-en
+Pays ¦ Maa ¦ Ország
+Fiche sur le site (adresse) ¦ Profiili sivustolla (osoite) ¦ Adatlap az oldalon (cím)
+Identifiant chez la société ¦ Tunnus yhtiössä ¦ Azonosító a cégnél
+Haplogroupe Y ¦ Y-haploryhmä ¦ Y-haplocsoport
+Haplogroupe mt ¦ mt-haploryhmä ¦ mt-haplocsoport
+Haplogroupe mitochondrial ¦ Mitokondrion haploryhmä ¦ Mitokondriális haplocsoport
+% d’ADN partagé ¦ % jaettua DNA:ta ¦ Közös DNS %-a
+Grappe (Genetic Affairs) ¦ Klusteri (Genetic Affairs) ¦ Klaszter (Genetic Affairs)
+Nom de la correspondance ¦ Osuman nimi ¦ Az egyezés neve
+Chromosome ¦ Kromosomi ¦ Kromoszóma
+SNP ¦ SNP ¦ SNP
+Groupe ou ancêtre ¦ Ryhmä tai esivanhempi ¦ Csoport vagy felmenő
+n° {n} ¦ nro {n} ¦ {n}. sz.
+{n} sur {total}. Clic sur un nom : sa fiche (cM, ancêtre commun, arbre, suivi). Le calculateur propose la relation la plus probable. ¦ {n} / {total}. Napsauta nimeä: sen kortti (cM, yhteinen esivanhempi, sukupuu, seuranta). Laskuri ehdottaa todennäköisintä sukulaisuutta. ¦ {n} / {total}. Kattints egy névre: az adatlapja (cM, közös felmenő, családfa, követés). A kalkulátor a legvalószínűbb rokoni kapcsolatot javasolja.
+Supprimer {n} correspondances et leurs segments ? ¦ Poistetaanko {n} osumaa ja niiden segmentit? ¦ Törlöd a(z) {n} egyezést és a szegmenseiket?
+Supprimer cette correspondance et ses segments ? ¦ Poistetaanko tämä osuma ja sen segmentit? ¦ Törlöd ezt az egyezést és a szegmenseit?
+Le centiMorgan (cM) mesure l’ADN que vous avez en commun : environ 3 400 cM avec un parent, 850 avec un cousin germain, 200 avec un cousin issu de germain. Recopie le chiffre donné par le site du test. ¦ Senttimorgan (cM) mittaa yhteistä DNA:tanne: noin 3 400 cM vanhemman kanssa, 850 serkun kanssa, 200 pikkuserkun kanssa. Kopioi testisivuston antama luku. ¦ A centimorgan (cM) a közös DNS-t méri: kb. 3 400 cM egy szülővel, 850 egy első unokatestvérrel, 200 egy másod-unokatestvérrel. Írd be a tesztoldal által megadott számot.
+Un long morceau d’ADN en commun (plus de 20 cM) montre souvent une parenté proche et sûre ; beaucoup de petits morceaux peuvent venir d’ancêtres très anciens. ¦ Pitkä yhteinen DNA-jakso (yli 20 cM) kertoo usein läheisestä ja varmasta sukulaisuudesta; monet pienet jaksot voivat periytyä hyvin kaukaisilta esivanhemmilta. ¦ Egy hosszú közös DNS-szakasz (több mint 20 cM) gyakran közeli és biztos rokonságot mutat; sok kis szakasz nagyon régi felmenőktől is származhat.
+Relation probable ({cm} cM, {pct} %) ¦ Todennäköinen sukulaisuus ({cm} cM, {pct} %) ¦ Valószínű rokoni kapcsolat ({cm} cM, {pct} %)
+fichier de <b>{name}</b> ¦ tiedosto: <b>{name}</b> ¦ fájl: <b>{name}</b>
+{n} de {tool} : chacune devient un groupe (« {tool} 1 »…), retrouvé dans « 🗂️ Groupes ». ¦ {n} työkalusta {tool}: kustakin tulee ryhmä (”{tool} 1”…), löytyy kohdasta ”🗂️ Ryhmät”. ¦ {n} innen: {tool}: mindegyikből csoport lesz („{tool} 1”…), a „🗂️ Csoportok” alatt található.
+⤓ {file} : {n} pour DNA Painter. ¦ ⤓ {file}: {n} DNA Painteria varten. ¦ ⤓ {file}: {n} a DNA Painterhez.
+Branche Martin (Bretagne) ¦ Martin-haara (Bretagne) ¦ Martin-ág (Bretagne)
+Supprimer le groupe « {name} » ? (les correspondances restent) ¦ Poistetaanko ryhmä ”{name}”? (osumat säilyvät) ¦ Törlöd a(z) „{name}” csoportot? (az egyezések megmaradnak)
+{n} entre {lo} et {hi} cM (bornes dans ⚙️ Réglages) ¦ {n} väliltä {lo}–{hi} cM (rajat kohdassa ⚙️ Asetukset) ¦ {n} {lo} és {hi} cM között (határok: ⚙️ Beállítások)
+{n} entre {lo} et {hi} cM pour ce test (bornes dans ⚙️ Réglages) ¦ {n} väliltä {lo}–{hi} cM tälle testille (rajat kohdassa ⚙️ Asetukset) ¦ {n} {lo} és {hi} cM között ennél a tesztnél (határok: ⚙️ Beállítások)
+{base} ; {n} sans « correspondances en commun » notées, donc ignorées. ¦ {base}; {n} ilman merkittyjä ”yhteisiä osumia”, joten ne ohitetaan. ¦ {base}; {n} feljegyzett „közös egyezések” nélkül, ezért kimaradnak.
+Créer {n} avec ces couleurs ¦ Luo {n} näillä väreillä ¦ {n} létrehozása ezekkel a színekkel
+Créé par la méthode de Leeds autour de {name} ({cm} cM). ¦ Luotu Leedsin menetelmällä henkilön {name} ympärille ({cm} cM). ¦ A Leeds-módszerrel létrehozva {name} köré ({cm} cM).
+masculin|inconnu ¦ tuntematon ¦ ismeretlen
+Les groupes (clusters) rassemblent les correspondances qui se partagent entre elles : chaque groupe a souvent un même couple d’ancêtres. Garde de 30 à 600 cM pour éviter les parents trop proches et le bruit. ¦ Ryhmät (klusterit) kokoavat osumat, jotka osuvat myös toisiinsa: kullakin ryhmällä on usein sama esivanhempipari. Pidä 30–600 cM välttääksesi liian läheiset sukulaiset ja kohinan. ¦ A csoportok (klaszterek) azokat az egyezéseket fogják össze, amelyek egymással is egyeznek: minden csoportnak gyakran ugyanaz a felmenőpárja. Tarts 30–600 cM között, hogy elkerüld a túl közeli rokonokat és a zajt.
+{n} entre {lo} et {hi} cM ; {shared} avec des correspondances en commun, {links} de segments. Les très proches parents (au-delà de {hi} cM) sont écartés : ils correspondent à tout le monde. ¦ {n} väliltä {lo}–{hi} cM; {shared} yhteisillä osumilla, {links} segmenteistä. Hyvin läheiset sukulaiset (yli {hi} cM) jätetään pois: ne osuvat kaikkiin. ¦ {n} {lo} és {hi} cM között; {shared} közös egyezésekkel, {links} szegmensekből. A nagyon közeli rokonok ({hi} cM felett) kimaradnak: mindenkivel egyeznek.
+Grappe {n} ¦ Klusteri {n} ¦ {n}. klaszter
+{n} correspondances · {lo}–{hi} cM · liens {pct} % ¦ {n} osumaa · {lo}–{hi} cM · yhteydet {pct} % ¦ {n} egyezés · {lo}–{hi} cM · kapcsolatok {pct} %
+Ancêtre commun encore inconnu (côté {side}) : place une de ces correspondances dans l’arbre (fiche liée), ou ajoute ses noms de famille. ¦ Yhteinen esivanhempi vielä tuntematon (puoli: {side}): sijoita jokin näistä osumista sukupuuhun (yhdistetty kortti) tai lisää sen sukunimet. ¦ A közös felmenő még ismeretlen ({side} ág): helyezd el valamelyik egyezést a családfán (kapcsolt adatlap), vagy add meg a vezetékneveit.
+Ancêtre commun encore inconnu : place une de ces correspondances dans l’arbre (fiche liée), ou ajoute ses noms de famille. ¦ Yhteinen esivanhempi vielä tuntematon: sijoita jokin näistä osumista sukupuuhun (yhdistetty kortti) tai lisää sen sukunimet. ¦ A közös felmenő még ismeretlen: helyezd el valamelyik egyezést a családfán (kapcsolt adatlap), vagy add meg a vezetékneveit.
+Groupe automatique : {n} correspondances qui se correspondent entre elles. ¦ Automaattinen ryhmä: {n} osumaa, jotka osuvat toisiinsa. ¦ Automatikus csoport: {n} egymással is egyező egyezés.
+{n} groupes créés ou mis à jour. ¦ {n} ryhmää luotu tai päivitetty. ¦ {n} csoport létrehozva vagy frissítve.
+{n} groupe créé ou mis à jour. ¦ {n} ryhmä luotu tai päivitetty. ¦ {n} csoport létrehozva vagy frissítve.
+noms : {list} ¦ nimet: {list} ¦ nevek: {list}
+lieux : {list} ¦ paikat: {list} ¦ helyek: {list}
+grappe {n} ¦ klusteri {n} ¦ {n}. klaszter
+plus long segment {cm} cM ¦ pisin segmentti {cm} cM ¦ leghosszabb szegmens {cm} cM
+À {pct} % une parenté en ligne directe (parent, grand-parent, arrière-grand-parent) : regarde d’abord ta proche famille. ¦ {pct} %:n todennäköisyydellä suoraan alenevan tai ylenevän polven sukulaisuus (vanhempi, isovanhempi, isoisovanhempi): katso ensin lähisukuasi. ¦ {pct} % eséllyel egyenesági rokonság (szülő, nagyszülő, dédszülő): először a közeli családodat nézd meg.
+Dans la <b>grappe {n}</b>. ¦ <b>Klusterissa {n}</b>. ¦ A <b>{n}. klaszterben</b>.
+Dans la <b>grappe {n}</b> — ancêtres communs de la grappe : {couple}. ¦ <b>Klusterissa {n}</b> — klusterin yhteiset esivanhemmat: {couple}. ¦ A <b>{n}. klaszterben</b> — a klaszter közös felmenői: {couple}.
+Dans la <b>grappe {n}</b> — ancêtres probables de la grappe : {couple}. ¦ <b>Klusterissa {n}</b> — klusterin todennäköiset esivanhemmat: {couple}. ¦ A <b>{n}. klaszterben</b> — a klaszter valószínű felmenői: {couple}.
+🎯 Déjà placée dans l’arbre : ancêtres communs {couple}. ¦ 🎯 Jo sijoitettu sukupuuhun: yhteiset esivanhemmat {couple}. ¦ 🎯 Már elhelyezve a családfán: közös felmenők: {couple}.
+{couple} (probable) ¦ {couple} (todennäköinen) ¦ {couple} (valószínű)
+{name} — chr {c} : {a}–{b} Mb, {cm} cM ¦ {name} — kr {c}: {a}–{b} Mb, {cm} cM ¦ {name} — kr. {c}: {a}–{b} Mb, {cm} cM
+{pct} % de l’ADN (sur {total} cM) ¦ {pct} % DNA:sta ({total} cM:stä) ¦ A DNS {pct} %-a ({total} cM-ből)
+Pour aller plus loin (outils externes, en anglais) : <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. L’endogamie (villages isolés, communautés fermées) et l’implexe gonflent les cM : une relation paraît alors plus proche qu’elle ne l’est. ¦ Lisätietoa (ulkoiset työkalut, englanniksi): <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. Endogamia (eristyneet kylät, suljetut yhteisöt) ja esivanhempien kato kasvattavat cM-määriä: sukulaisuus näyttää silloin läheisemmältä kuin se on. ¦ További információ (külső eszközök, angolul): <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. Az endogámia (elszigetelt falvak, zárt közösségek) és az ősveszteség megnöveli a cM-et: a rokonság így közelebbinek tűnik, mint amilyen.
+Les « origines ethniques » données par les sociétés : des <b>estimations</b>, qui changent d’une société à l’autre et d’une mise à jour à l’autre. Elles ne remplacent pas les registres. ¦ Yhtiöiden antamat ”etniset alkuperät” ovat <b>arvioita</b>, jotka vaihtelevat yhtiöstä ja päivityksestä toiseen. Ne eivät korvaa kirkonkirjoja. ¦ A cégek által megadott „etnikai származás” csak <b>becslés</b>, amely cégenként és frissítésenként változik. Nem helyettesíti az anyakönyveket.
+Couleur « {name} » ¦ Väri ”{name}” ¦ „{name}” szín
+👥 Correspondance ADN « {name} » : <b>{cm} cM</b> ¦ 👥 DNA-osuma ”{name}”: <b>{cm} cM</b> ¦ 👥 DNS-egyezés: „{name}”: <b>{cm} cM</b>
+ancêtre commun : {name} ¦ yhteinen esivanhempi: {name} ¦ közös felmenő: {name}
+Code civil, article 16-10 (examen des caractéristiques génétiques : seulement à des fins médicales ou de recherche scientifique, avec consentement écrit) ¦ Code civil, article 16-10 (geneettisten ominaisuuksien tutkiminen: vain lääketieteellisiin tai tieteellisiin tutkimustarkoituksiin, kirjallisella suostumuksella) ¦ Code civil, article 16-10 (a genetikai jellemzők vizsgálata: csak orvosi vagy tudományos kutatási célra, írásos beleegyezéssel)
+Code pénal, article 226-28-1 (demander un examen génétique hors des cas prévus par la loi : 3 750 € d’amende) ¦ Code pénal, article 226-28-1 (geneettisen tutkimuksen pyytäminen lain sallimien tapausten ulkopuolella: 3 750 € sakko) ¦ Code pénal, article 226-28-1 (genetikai vizsgálat kérése a törvényben előírt eseteken kívül: 3 750 € bírság)
+Loi n° 2021-1017 du 2 août 2021 relative à la bioéthique, article 16 (nouvelle rédaction de l’article 16-10) ¦ Loi n° 2021-1017 du 2 août 2021 relative à la bioéthique, article 16 (artiklan 16-10 uusi sanamuoto) ¦ Loi n° 2021-1017 du 2 août 2021 relative à la bioéthique, article 16 (a 16-10. cikk új szövege)
+Code civil sur Légifrance (articles 16-10 à 16-13 : examen génétique, empreintes génétiques, filiation) ¦ Code civil Légifrancessa (artiklat 16-10–16-13: geneettinen tutkimus, DNA-tunnisteet, polveutuminen) ¦ Code civil a Légifrance-on (16-10–16-13. cikk: genetikai vizsgálat, genetikai ujjlenyomat, leszármazás)
+Code pénal sur Légifrance (articles 226-25 à 226-30) ¦ Code pénal Légifrancessa (artiklat 226-25–226-30) ¦ Code pénal a Légifrance-on (226-25–226-30. cikk)
+Code de la santé publique sur Légifrance (articles L1131-1 et suivants : examens génétiques) ¦ Code de la santé publique Légifrancessa (artiklat L1131-1 ja seuraavat: geneettiset tutkimukset) ¦ Code de la santé publique a Légifrance-on (L1131-1. és következő cikkek: genetikai vizsgálatok)
+CNIL : les données génétiques sont des données « sensibles » (RGPD, article 9) ¦ CNIL: geneettiset tiedot ovat ”arkaluonteisia” tietoja (GDPR, artikla 9) ¦ CNIL: a genetikai adatok „különleges” adatok (GDPR, 9. cikk)
+Personne : mets « À contacter » dans le suivi d’une correspondance. ¦ Ei ketään: merkitse ”Otettava yhteyttä” osuman seurantaan. ¦ Senki: állítsd az egyezés követésében „Felveendő a kapcsolat” állapotra.
+J’ai lu cette mise en garde (elle ne s’affichera plus en haut des autres pages). ¦ Olen lukenut tämän varoituksen (se ei enää näy muiden sivujen yläreunassa). ¦ Elolvastam ezt a figyelmeztetést (többé nem jelenik meg a többi oldal tetején).
+La mise en garde reviendra en haut des pages. ¦ Varoitus palaa sivujen yläreunaan. ¦ A figyelmeztetés visszatér az oldalak tetejére.
+Modifier le test ¦ Muokkaa testiä ¦ Teszt szerkesztése
+Société / origine ¦ Yhtiö / alkuperä ¦ Cég / származás
+Géré par ¦ Hallinnoija ¦ Kezeli
+Fichier brut (où il est rangé) ¦ Raakatiedosto (missä se on) ¦ Nyers fájl (hol tárolod)
+(qui a accepté quoi, cadre médical ou de recherche, pays…) ¦ (kuka hyväksyi mitä, lääketieteellinen tai tutkimuskehys, maa…) ¦ (ki mibe egyezett bele, orvosi vagy kutatási keret, ország…)
+(une ligne par région : « Bretagne ; 42 ») ¦ (yksi rivi aluetta kohden: ”Bretagne ; 42”) ¦ (régiónként egy sor: „Bretagne ; 42”)
+Supprimer ce test, ses correspondances et ses segments ? ¦ Poistetaanko tämä testi, sen osumat ja segmentit? ¦ Törlöd ezt a tesztet, az egyezéseit és a szegmenseit?
+Supprimer le test ¦ Poista testi ¦ Teszt törlése
+Un test par personne et par société : type, haplogroupes, origines estimées, marqueurs. ¦ Yksi testi henkilöä ja yhtiötä kohden: tyyppi, haploryhmät, arvioidut alkuperät, merkkiaineet. ¦ Személyenként és cégenként egy teszt: típus, haplocsoportok, becsült származás, markerek.
+Aucun test ADN pour l’instant ¦ Ei vielä DNA-testejä ¦ Még nincs DNS-teszt
+Ajoute ton test (Ancestry, MyHeritage, 23andMe…) pour y ranger tes correspondances. ¦ Lisää testisi (Ancestry, MyHeritage, 23andMe…) tallentaaksesi siihen osumasi. ¦ Add hozzá a tesztedet (Ancestry, MyHeritage, 23andMe…), hogy oda rendezhesd az egyezéseidet.
+⤒ Importer (CSV) ¦ ⤒ Tuo (CSV) ¦ ⤒ Importálás (CSV)
+Ajoute d’abord un test dans « 🧬 Mes tests » : les correspondances s’y rattachent. ¦ Lisää ensin testi kohtaan ”🧬 Testini”: osumat liitetään siihen. ¦ Előbb adj hozzá egy tesztet a „🧬 Tesztjeim” alatt: az egyezések ahhoz kapcsolódnak.
+Nom, nom de famille, lieu, note… ¦ Nimi, sukunimi, paikka, muistiinpano… ¦ Név, vezetéknév, hely, megjegyzés…
+cM min ¦ cM väh. ¦ cM min.
+cM max ¦ cM enint. ¦ cM max.
+Ajouter au groupe… ¦ Lisää ryhmään… ¦ Hozzáadás csoporthoz…
+Retirer du groupe… ¦ Irrota ryhmästä… ¦ Eltávolítás a csoportból…
+Aucune correspondance pour ces filtres. ¦ Ei osumia näillä suodattimilla. ¦ Nincs egyezés ezekkel a szűrőkkel.
+cM : les plus nombreux ¦ cM: eniten ¦ cM: a legtöbb
+cM : les moins nombreux ¦ cM: vähiten ¦ cM: a legkevesebb
+Nom : A → Z ¦ Nimi: A → Ö ¦ Név: A → Z
+Nom : Z → A ¦ Nimi: Ö → A ¦ Név: Z → A
+Segments : les plus nombreux ¦ Segmentit: eniten ¦ Szegmensek: a legtöbb
+Les plus récemment modifiées ¦ Viimeksi muokatut ¦ Legutóbb módosítottak
+Les plus anciennement modifiées ¦ Kauimmin sitten muokatut ¦ Legrégebben módosítottak
+Supprimer les correspondances ¦ Poista osumat ¦ Egyezések törlése
+Nom (tel que sur le site) ¦ Nimi (kuten sivustolla) ¦ Név (ahogy az oldalon áll)
+Relation proposée par la société ¦ Yhtiön ehdottama sukulaisuus ¦ A cég által javasolt rokoni kapcsolat
+Ancêtre(s) commun(s) (MRCA) ¦ Yhteinen esivanhempi / yhteiset esivanhemmat (MRCA) ¦ Közös felmenő(k) (MRCA)
+Jean Martin et Marie Durand ¦ Jean Martin ja Marie Durand ¦ Jean Martin és Marie Durand
+Étoiles (0 à 5) ¦ Tähdet (0–5) ¦ Csillagok (0–5)
+Aucun groupe (« 🗂️ Groupes »). ¦ Ei ryhmiä (”🗂️ Ryhmät”). ¦ Nincs csoport („🗂️ Csoportok”).
+Noms de famille en commun ¦ Yhteiset sukunimet ¦ Közös vezetéknevek
+Lieux en commun ¦ Yhteiset paikat ¦ Közös helyek
+Arbre en ligne (adresse) ¦ Sukupuu verkossa (osoite) ¦ Online családfa (cím)
+Taille de son arbre ¦ Hänen sukupuunsa koko ¦ A családfája mérete
+(une par ligne ou séparées par ; — sert à la méthode de Leeds) ¦ (yksi per rivi tai eroteltuina ;-merkillä — käytetään Leedsin menetelmässä) ¦ (soronként egy, vagy ;-vel elválasztva — a Leeds-módszerhez kell)
+Supprimer la correspondance ¦ Poista osuma ¦ Egyezés törlése
+CSV de la société ¦ Yhtiön CSV ¦ A cég CSV-je
+Le fichier CSV exporté par la société (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch, LivingDNA) ou par un outil (DNA Painter, Genetic Affairs : AutoCluster, AutoTree) : la liste des correspondances ou les segments. Les colonnes sont reconnues toutes seules. Un fichier ADN brut (tes SNP) n’est jamais importé. ¦ Yhtiön (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch, LivingDNA) tai työkalun (DNA Painter, Genetic Affairs: AutoCluster, AutoTree) viemä CSV-tiedosto: osumaluettelo tai segmentit. Sarakkeet tunnistetaan automaattisesti. DNA-raakatiedostoa (SNP:si) ei koskaan tuoda. ¦ A cég (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch, LivingDNA) vagy egy eszköz (DNA Painter, Genetic Affairs: AutoCluster, AutoTree) által exportált CSV-fájl: az egyezések listája vagy a szegmensek. Az oszlopokat magától felismeri. Nyers DNS-fájlt (az SNP-idet) soha nem importál.
+Fichier compressé : ouvre-le d’abord sur l’ordinateur et choisis le fichier .csv qu’il contient. (Un fichier ADN brut, lui, ne s’importe jamais.) ¦ Pakattu tiedosto: avaa se ensin tietokoneella ja valitse sen sisältämä .csv-tiedosto. (DNA-raakatiedostoa ei koskaan tuoda.) ¦ Tömörített fájl: előbb nyisd meg a számítógépen, és válaszd ki a benne lévő .csv fájlt. (Nyers DNS-fájlt soha nem importál.)
+C’est un fichier compressé (.zip) : ouvre-le d’abord et choisis le .csv qu’il contient. ¦ Tämä on pakattu tiedosto (.zip): avaa se ensin ja valitse sen sisältämä .csv. ¦ Ez egy tömörített fájl (.zip): előbb nyisd meg, és válaszd ki a benne lévő .csv-t.
+Colonnes non reconnues : il faut au moins le nom et les cM (correspondances), ou le chromosome, le début et la fin (segments). ¦ Sarakkeita ei tunnistettu: tarvitaan vähintään nimi ja cM (osumat) tai kromosomi, alku ja loppu (segmentit). ¦ Fel nem ismert oszlopok: legalább a név és a cM (egyezések), vagy a kromoszóma, a kezdet és a vég (szegmensek) kell.
+Une correspondance déjà présente (même nom, même test) est mise à jour : tes notes, groupes, suivi et fiche liée sont gardés. ¦ Jo olemassa oleva osuma (sama nimi, sama testi) päivitetään: muistiinpanosi, ryhmäsi, seurantasi ja yhdistetty kortti säilyvät. ¦ A már meglévő egyezés (azonos név, azonos teszt) frissül: a megjegyzéseid, csoportjaid, követésed és kapcsolt adatlapod megmarad.
+Remplacer tous les segments de ce test ¦ Korvaa tämän testin kaikki segmentit ¦ A teszt összes szegmensének cseréje
+Choisis au moins la colonne du nom (« Colonnes reconnues »). ¦ Valitse vähintään nimen sarake (”Tunnistetut sarakkeet”). ¦ Válaszd ki legalább a név oszlopát („Felismert oszlopok”).
+Choisis les colonnes du chromosome, du début et de la fin (« Colonnes reconnues »). ¦ Valitse kromosomin, alun ja lopun sarakkeet (”Tunnistetut sarakkeet”). ¦ Válaszd ki a kromoszóma, a kezdet és a vég oszlopát („Felismert oszlopok”).
+Ce test n’a pas encore de segments à exporter : importe-les d’abord (⤒ Importer des segments). ¦ Tällä testillä ei ole vielä vietäviä segmenttejä: tuo ne ensin (⤒ Tuo segmentit). ¦ Ennek a tesztnek még nincsenek exportálható szegmensei: előbb importáld őket (⤒ Szegmensek importálása).
+Modifier le groupe ¦ Muokkaa ryhmää ¦ Csoport szerkesztése
+Couple d’ancêtres supposé ¦ Oletettu esivanhempipari ¦ Feltételezett felmenőpár
+Supprimer le groupe ¦ Poista ryhmä ¦ Csoport törlése
+Groupes et méthode de Leeds ¦ Ryhmät ja Leedsin menetelmä ¦ Csoportok és Leeds-módszer
+Range tes correspondances par branche. La méthode de Leeds regroupe les cousins de 2e et 3e degré (≈ 90 à 400 cM) qui se correspondent entre eux : chaque groupe pointe souvent vers un de tes 8 arrière-grands-parents… à condition d’avoir noté leurs « correspondances en commun ». ¦ Järjestä osumasi haaroittain. Leedsin menetelmä ryhmittelee toisiinsa osuvat pikku- ja pikkupikkuserkut (≈ 90–400 cM): kukin ryhmä osoittaa usein yhteen kahdeksasta isoisovanhemmastasi… kunhan olet merkinnyt heidän ”yhteiset osumansa”. ¦ Rendezd ágak szerint az egyezéseidet. A Leeds-módszer csoportosítja az egymással is egyező másod- és harmad-unokatestvéreket (≈ 90–400 cM): minden csoport gyakran a 8 dédszülőd egyikére mutat… feltéve, hogy feljegyezted a „közös egyezéseiket”.
+Aucun groupe pour l’instant ¦ Ei vielä ryhmiä ¦ Még nincs csoport
+Méthode de Leeds automatique ¦ Automaattinen Leedsin menetelmä ¦ Automatikus Leeds-módszer
+Pas encore de groupe trouvé : ouvre tes correspondances proches et remplis « Correspondances en commun » (ou importe une colonne « Shared matches »). ¦ Ryhmiä ei vielä löytynyt: avaa läheiset osumasi ja täytä ”Yhteiset osumat” (tai tuo sarake ”Shared matches”). ¦ Még nem található csoport: nyisd meg a közeli egyezéseidet, és töltsd ki a „Közös egyezések” mezőt (vagy importálj egy „Shared matches” oszlopot).
+Les correspondances qui se correspondent entre elles forment des grappes : chaque grappe descend en général d’un même couple d’ancêtres. Le calcul utilise les « correspondances en commun » notées ou importées, et les segments qui se chevauchent sur un même chromosome. ¦ Toisiinsa osuvat osumat muodostavat klustereita: kukin klusteri polveutuu yleensä samasta esivanhempiparista. Laskenta käyttää merkittyjä tai tuotuja ”yhteisiä osumia” ja samassa kromosomissa päällekkäisiä segmenttejä. ¦ Az egymással is egyező egyezések klasztereket alkotnak: minden klaszter általában ugyanattól a felmenőpártól származik. A számítás a feljegyzett vagy importált „közös egyezéseket” és az ugyanazon a kromoszómán átfedő szegmenseket használja.
+(ou mettre à jour ceux déjà créés) ¦ (tai päivitä jo luodut) ¦ (vagy a már létrehozottak frissítése)
+Pas encore de grappe : il faut des « correspondances en commun » (fiche d’une correspondance, ou colonne « Shared matches » à l’import) ou des segments (🧩 Chromosomes). ¦ Ei vielä klustereita: tarvitaan ”yhteisiä osumia” (osuman kortti tai sarake ”Shared matches” tuonnissa) tai segmenttejä (🧩 Kromosomit). ¦ Még nincs klaszter: „közös egyezések” kellenek (egy egyezés adatlapja, vagy „Shared matches” oszlop importáláskor) vagy szegmensek (🧩 Kromoszómák).
+Pour une correspondance (ou un nombre de cM), les relations possibles et les couples d’ancêtres de ton arbre par lesquels elle descend probablement, du plus au moins probable. On s’appuie sur les cM (Shared cM Project), le côté, les noms et lieux en commun, la grappe et l’âge : c’est une piste à vérifier, jamais une preuve. ¦ Osumalle (tai cM-määrälle) mahdolliset sukulaisuudet ja sukupuusi esivanhempiparit, joista se todennäköisesti polveutuu, todennäköisimmästä epätodennäköisimpään. Perusteina cM (Shared cM Project), puoli, yhteiset nimet ja paikat, klusteri ja ikä: se on tarkistettava johtolanka, ei koskaan todiste. ¦ Egy egyezéshez (vagy cM-értékhez) a lehetséges rokoni kapcsolatok és a családfád azon felmenőpárjai, akiktől valószínűleg származik, a legvalószínűbbtől a legkevésbé valószínűig. Alapja a cM (Shared cM Project), az ág, a közös nevek és helyek, a klaszter és az életkor: ellenőrizendő nyom, soha nem bizonyíték.
+Placer un cousin dans l’arbre ¦ Sijoita serkku sukupuuhun ¦ Unokatestvér elhelyezése a családfán
+— ou les cM à la main ci-dessous — ¦ — tai cM käsin alla — ¦ — vagy a cM kézzel lent —
+Ce test n’est relié à aucune fiche : relie-le à la personne testée (🧬 Mes tests) pour que l’arbre serve au placement. ¦ Tätä testiä ei ole yhdistetty mihinkään korttiin: yhdistä se testattuun henkilöön (🧬 Testini), jotta sukupuuta voi käyttää sijoittamiseen. ¦ Ez a teszt nincs adatlaphoz kapcsolva: kapcsold a tesztelt személyhez (🧬 Tesztjeim), hogy a családfa segíthessen az elhelyezésben.
+Lecture de l’arbre… ¦ Luetaan sukupuuta… ¦ A családfa olvasása…
+Ensuite : cherche les descendants de ce couple (« Descendance » dans Graphiques), compare avec l’arbre de la correspondance, et note-la dans la fiche (Ancêtre commun, Fiche liée). ¦ Seuraavaksi: etsi tämän parin jälkeläiset (”Jälkipolvet” kohdassa Kaaviot), vertaa osuman sukupuuhun ja merkitse se korttiin (Yhteinen esivanhempi, Yhdistetty kortti). ¦ Ezután: keresd meg ennek a párnak a leszármazottait („Leszármazottak” a Grafikonok alatt), hasonlítsd össze az egyezés családfájával, és jegyezd fel az adatlapon (Közös felmenő, Kapcsolt adatlap).
+Indices ¦ Vihjeet ¦ Nyomok
+Retenir ¦ Säilytä ¦ Megjegyzés
+Noté dans la correspondance (Ancêtre commun, côté). ¦ Merkitty osumaan (Yhteinen esivanhempi, puoli). ¦ Feljegyezve az egyezésnél (Közös felmenő, ág).
+Le « navigateur de chromosomes » : où chaque correspondance partage de l’ADN avec toi. Des segments qui se chevauchent viennent peut-être du même ancêtre (triangulation — à confirmer : chacun doit aussi correspondre avec l’autre sur ce segment). ¦ ”Kromosomiselain”: missä kukin osuma jakaa DNA:ta kanssasi. Päällekkäiset segmentit voivat tulla samalta esivanhemmalta (triangulaatio — vahvistettava: jokaisen on myös osuttava toiseen tässä segmentissä). ¦ A „kromoszómaböngésző”: hol oszt meg veled DNS-t az egyes egyezések. Az átfedő szegmensek talán ugyanattól a felmenőtől származnak (trianguláció — megerősítendő: mindegyiknek a másikkal is egyeznie kell ezen a szegmensen).
+Le fichier CSV que DNA Painter sait lire (« Paint a new match » → importer) ¦ CSV-tiedosto, jonka DNA Painter osaa lukea (”Paint a new match” → tuo) ¦ A DNA Painter által olvasható CSV-fájl („Paint a new match” → importálás)
+⤒ Importer des segments (CSV) ¦ ⤒ Tuo segmentit (CSV) ¦ ⤒ Szegmensek importálása (CSV)
+⤓ Exporter pour DNA Painter ¦ ⤓ Vie DNA Painteriin ¦ ⤓ Exportálás a DNA Painterhez
+Segment ¦ Segmentti ¦ Szegmens
+Chevauchements (triangulation possible) ¦ Päällekkäisyydet (triangulaatio mahdollinen) ¦ Átfedések (trianguláció lehetséges)
+Chr ¦ Kr ¦ Kr.
+De (Mb) ¦ Alku (Mb) ¦ Ettől (Mb)
+À (Mb) ¦ Loppu (Mb) ¦ Eddig (Mb)
+Correspondance 1 ¦ Osuma 1 ¦ 1. egyezés
+Correspondance 2 ¦ Osuma 2 ¦ 2. egyezés
+Aucun pour l’instant. ¦ Ei vielä mitään. ¦ Még nincs.
+Segment refusé : vérifie le chromosome, et que la fin est après le début. ¦ Segmentti hylätty: tarkista kromosomi ja että loppu on alun jälkeen. ¦ Szegmens elutasítva: ellenőrizd a kromoszómát, és hogy a vég a kezdet után van-e.
+Combien de centimorgans partagés pour quelle relation ? Valeurs indicatives d’après le Shared cM Project (Blaine Bettinger, version 4, 2020) : une moyenne et une fourchette observées sur des milliers de cas réels. Une même valeur peut convenir à plusieurs relations. ¦ Montako senttimorgania jaetaan missäkin sukulaisuudessa? Suuntaa antavat arvot Shared cM Projectin mukaan (Blaine Bettinger, versio 4, 2020): keskiarvo ja vaihteluväli tuhansista todellisista tapauksista. Sama arvo voi sopia useaan sukulaisuuteen. ¦ Hány közös centimorgan melyik rokoni kapcsolathoz? Tájékoztató értékek a Shared cM Project alapján (Blaine Bettinger, 4. verzió, 2020): több ezer valós esetből megfigyelt átlag és tartomány. Ugyanaz az érték több kapcsolathoz is illhet.
+Ex. 230 ¦ Esim. 230 ¦ Pl. 230
+Aucune relation connue pour cette valeur (au-delà de 3 720 cM, c’est soi-même ou un vrai jumeau). ¦ Tälle arvolle ei ole tunnettua sukulaisuutta (yli 3 720 cM: se olet sinä itse tai identtinen kaksonen). ¦ Ehhez az értékhez nincs ismert rokoni kapcsolat (3 720 cM felett: te magad vagy egy egypetéjű ikertestvér).
+Tableau de référence ¦ Viitetaulukko ¦ Referenciatáblázat
+Fourchette ¦ Vaihteluväli ¦ Tartomány
+D’après ton arbre : de qui viennent l’ADN-Y (père du père du père…), l’ADN mitochondrial (mère de la mère…) et l’ADN-X d’une personne. Utile pour savoir qui faire tester, et pour lire un haplogroupe ou une correspondance sur le X. ¦ Sukupuusi mukaan: keneltä henkilön Y-DNA (isän isän isä…), mitokondrio-DNA (äidin äiti…) ja X-DNA tulevat. Hyödyllistä, kun mietit, kenet testata, ja kun luet haploryhmää tai X-osumaa. ¦ A családfád szerint: kitől származik egy személy Y-DNS-e (apa apjának apja…), mitokondriális DNS-e (anya anyja…) és X-DNS-e. Hasznos annak eldöntéséhez, kit érdemes teszteltetni, és egy haplocsoport vagy X-egyezés értelmezéséhez.
+Seuls les hommes ont un ADN-Y. Une femme n’a pas d’ADN-Y : ce sont ceux de son père, de ses frères ou d’un cousin du même nom qui le portent. ¦ Vain miehillä on Y-DNA. Naisella ei ole Y-DNA:ta: sitä kantavat hänen isänsä, veljensä tai samanniminen serkku. ¦ Csak a férfiaknak van Y-DNS-ük. Egy nőnek nincs Y-DNS-e: az apja, a fivérei vagy egy azonos nevű unokatestvér hordozza.
+Pas de père connu dans l’arbre. ¦ Sukupuussa ei ole tunnettua isää. ¦ A családfán nincs ismert apa.
+Tous ces hommes ont (presque) le même chromosome Y : un homme vivant de cette lignée peut le faire tester. ¦ Kaikilla näillä miehillä on (lähes) sama Y-kromosomi: tämän sukulinjan elävä mies voi testauttaa sen. ¦ Mindezeknek a férfiaknak (majdnem) ugyanaz az Y-kromoszómájuk: ennek az ágnak egy élő férfi tagja teszteltetheti.
+Pas de mère connue dans l’arbre. ¦ Sukupuussa ei ole tunnettua äitiä. ¦ A családfán nincs ismert anya.
+Transmis par les mères à tous leurs enfants ; seules les filles le transmettent à leur tour. ¦ Äidit siirtävät sen kaikille lapsilleen; vain tyttäret siirtävät sen edelleen. ¦ Az anyák minden gyermeküknek továbbadják; csak a lányok adják tovább.
+Un homme reçoit son X de sa mère seulement. Un père ne transmet que le X qu’il tient de sa mère : certains ancêtres ne peuvent donc pas avoir donné d’X. {n} : ¦ Mies saa X-kromosominsa vain äidiltään. Isä siirtää vain äidiltään saamansa X:n: siksi jotkin esivanhemmat eivät ole voineet antaa X:ää. {n}: ¦ Egy férfi az X-ét csak az anyjától kapja. Egy apa csak az anyjától kapott X-et adja tovább: ezért egyes felmenők nem adhattak X-et. {n}:
+Une femme reçoit un X de chaque parent. Un père ne transmet que le X qu’il tient de sa mère : certains ancêtres ne peuvent donc pas avoir donné d’X. {n} : ¦ Nainen saa X:n kummaltakin vanhemmalta. Isä siirtää vain äidiltään saamansa X:n: siksi jotkin esivanhemmat eivät ole voineet antaa X:ää. {n}: ¦ Egy nő mindkét szülőjétől kap egy X-et. Egy apa csak az anyjától kapott X-et adja tovább: ezért egyes felmenők nem adhattak X-et. {n}:
+Aucune estimation : ajoute-les dans un test (« 🧬 Mes tests » → Origines estimées). ¦ Ei arvioita: lisää ne testiin (”🧬 Testini” → Arvioidut alkuperät). ¦ Nincs becslés: add meg egy tesztben („🧬 Tesztjeim” → Becsült származás).
+Ce que montre l’onglet, dans l’ordre voulu, et comment. ¦ Mitä välilehti näyttää, missä järjestyksessä ja miten. ¦ Mit mutat a lap, milyen sorrendben és hogyan.
+Rubriques de la colonne de gauche ¦ Vasemman sarakkeen osiot ¦ A bal oldali oszlop rovatai
+Coche ce que tu veux voir ; ↑ ↓ pour l’ordre (ou glisse la poignée). ¦ Valitse, mitä haluat nähdä; ↑ ↓ järjestykseen (tai vedä kahvasta). ¦ Jelöld be, mit szeretnél látni; ↑ ↓ a sorrendhez (vagy húzd a fogantyút).
+Ne montrer que les correspondances d’au moins ¦ Näytä vain osumat, joilla on vähintään ¦ Csak azok az egyezések, amelyeknél legalább
+Lignes affichées à la fois ¦ Kerralla näytettävät rivit ¦ Egyszerre megjelenített sorok
+Méthode de Leeds : de ¦ Leedsin menetelmä: alkaen ¦ Leeds-módszer: ettől
+Total de cM pour les % (6 800 Ancestry/MyHeritage, 7 400 23andMe) ¦ cM yhteensä %-osuuksia varten (6 800 Ancestry/MyHeritage, 7 400 23andMe) ¦ Összes cM a %-okhoz (6 800 Ancestry/MyHeritage, 7 400 23andMe)
+Sauvegarde de l’onglet ¦ Välilehden varmuuskopio ¦ A lap biztonsági mentése
+Les tests, correspondances, segments et groupes sont dans la base (et ses sauvegardes). Tu peux aussi les exporter à part. ¦ Testit, osumat, segmentit ja ryhmät ovat tietokannassa (ja sen varmuuskopioissa). Voit myös viedä ne erikseen. ¦ A tesztek, egyezések, szegmensek és csoportok az adatbázisban vannak (és a biztonsági mentéseiben). Külön is exportálhatod őket.
+Fait. ¦ Valmis. ¦ Kész.
+C’est un fichier ADN brut (tes SNP, c’est-à-dire ton génome lettre par lettre) : il n’est jamais importé. Par prudence pour ta vie privée et celle de ta famille, et parce qu’en France un test génétique hors cadre médical ou de recherche est interdit, l’app ne garde que les listes de correspondances et de segments. Exporte plutôt depuis la société la liste des correspondances (matches) ou le navigateur de chromosomes. ¦ Tämä on DNA-raakatiedosto (SNP:si eli perimäsi kirjain kirjaimelta): sitä ei koskaan tuoda. Sinun ja perheesi yksityisyyden vuoksi ja koska Ranskassa geneettinen testi lääketieteellisen tai tutkimuskehyksen ulkopuolella on kielletty, sovellus säilyttää vain osuma- ja segmenttiluettelot. Vie mieluummin yhtiöltä osumaluettelo (matches) tai kromosomiselain. ¦ Ez egy nyers DNS-fájl (az SNP-id, vagyis a genomod betűről betűre): soha nem importálódik. A te és a családod magánéletének védelmében, és mert Franciaországban az orvosi vagy kutatási kereten kívüli genetikai teszt tilos, az alkalmazás csak az egyezések és szegmensek listáit tárolja. Inkább a cégtől exportáld az egyezések listáját (matches) vagy a kromoszómaböngészőt.
+=analysée ¦ analysoitu|analysoitua ¦ elemezve|elemezve
+=visage à nommer ¦ nimettävä kasvo|nimettävää kasvoa ¦ megnevezendő arc|megnevezendő arc
+=photo restante ¦ jäljellä oleva valokuva|jäljellä olevaa valokuvaa ¦ hátralévő fénykép|hátralévő fénykép
+=photo sautée ¦ ohitettu valokuva|ohitettua valokuvaa ¦ kihagyott fénykép|kihagyott fénykép
+=visage ignoré ¦ ohitettu kasvo|ohitettua kasvoa ¦ figyelmen kívül hagyott arc|figyelmen kívül hagyott arc
+Impossible de charger le modèle de reconnaissance (connexion internet requise la première fois, ou fichier modifié refusé). ¦ Tunnistusmallia ei voitu ladata (internetyhteys tarvitaan ensimmäisellä kerralla, tai muutettu tiedosto hylättiin). ¦ A felismerő modellt nem sikerült betölteni (első alkalommal internetkapcsolat kell, vagy a módosított fájl el lett utasítva).
+Bibliothèque… ¦ Kirjasto… ¦ Könyvtár…
+Bibliothèque illisible. ¦ Kirjastoa ei voi lukea. ¦ A könyvtár olvashatatlan.
+Bibliothèque de reconnaissance indisponible. ¦ Tunnistuskirjasto ei ole käytettävissä. ¦ A felismerő könyvtár nem érhető el.
+Repérage des visages… ¦ Etsitään kasvoja… ¦ Arcok keresése…
+Points du visage… ¦ Kasvojen pisteet… ¦ Arcpontok…
+Empreintes des visages… ¦ Kasvojen tunnisteet… ¦ Arclenyomatok…
+Analyse arrêtée. ¦ Analyysi pysäytetty. ¦ Elemzés leállítva.
+Fil de calcul impossible : {err} ¦ Laskentasäiettä ei voitu käynnistää: {err} ¦ A számítási szál nem indítható: {err}
+Le modèle met trop de temps à se charger. ¦ Mallin lataaminen kestää liian kauan. ¦ A modell betöltése túl sokáig tart.
+le calcul a planté ¦ laskenta kaatui ¦ a számítás összeomlott
+Fil de calcul en erreur. ¦ Laskentasäikeessä virhe. ¦ Hiba a számítási szálban.
+Calcul sur la page (plus lent)… ¦ Lasketaan sivulla (hitaampi)… ¦ Számítás az oldalon (lassabb)…
+Redémarrage du calcul… ¦ Käynnistetään laskenta uudelleen… ¦ A számítás újraindítása…
+trop longue à analyser (plus de {n} s) ¦ liian pitkä analysoitavaksi (yli {n} s) ¦ túl hosszú az elemzéshez (több mint {n} mp)
+Étape 1 : l’app repère les visages sur les photos choisies. Étape 2 : elle propose un nom d’après les visages déjà identifiés. Tout se calcule sur cet ordinateur. ¦ Vaihe 1: sovellus etsii kasvot valituista valokuvista. Vaihe 2: se ehdottaa nimeä jo tunnistettujen kasvojen perusteella. Kaikki lasketaan tällä tietokoneella. ¦ 1. lépés: az alkalmazás megkeresi az arcokat a kiválasztott fényképeken. 2. lépés: a már azonosított arcok alapján nevet javasol. Minden ezen a számítógépen számolódik.
+MÉDIAS · VISAGES ¦ MEDIA · KASVOT ¦ MÉDIA · ARCOK
+Visages ¦ Kasvot ¦ Arcok
+Chargement des photos… ¦ Ladataan valokuvia… ¦ Fényképek betöltése…
+≈ {time} sur cet ordinateur ¦ ≈ {time} tällä tietokoneella ¦ ≈ {time} ezen a számítógépen
+environ 1 à 3 s par photo, selon l’ordinateur ¦ noin 1–3 s valokuvaa kohden tietokoneesta riippuen ¦ fényképenként kb. 1–3 mp, a számítógéptől függően
+<b>{n}</b> identifiés ¦ <b>{n}</b> tunnistettu ¦ <b>{n}</b> azonosítva
+<b>{n}</b> identifié ¦ <b>{n}</b> tunnistettu ¦ <b>{n}</b> azonosítva
+{n} identifiés ¦ {n} tunnistettu ¦ {n} azonosítva
+{n} identifié ¦ {n} tunnistettu ¦ {n} azonosítva
+① Trouver les visages ¦ ① Etsi kasvot ¦ ① Arcok keresése
+② Qui est-ce ? ¦ ② Kuka tämä on? ¦ ② Ki ez?
+Les {n} plus récentes ¦ {n} uusinta ¦ A {n} legújabb
+{n} à analyser ¦ {n} analysoitavana ¦ {n} elemzendő
+<b>Analyse en pause</b> : {n} sur {total} ({what}). ¦ <b>Analyysi tauolla</b>: {n} / {total} ({what}). ¦ <b>Elemzés szüneteltetve</b>: {n} / {total} ({what}).
+analyse|Abandonner ¦ Luovu ¦ Feladás
+Quelles photos analyser ? ¦ Mitkä valokuvat analysoidaan? ¦ Mely fényképeket elemezze?
+Sauter les photos déjà analysées ¦ Ohita jo analysoidut valokuvat ¦ A már elemzett fényképek kihagyása
+Analyser {n} ¦ Analysoi {n} ¦ {n} elemzése
+Rien à analyser ici ¦ Täällä ei ole analysoitavaa ¦ Itt nincs mit elemezni
+↻ Réessayer {n} ¦ ↻ Yritä uudelleen {n} ¦ ↻ {n} újrapróbálása
+Photos avec des visages à nommer ¦ Valokuvat, joissa on nimettäviä kasvoja ¦ Fényképek megnevezendő arcokkal
+Ouvrir {name} ¦ Avaa {name} ¦ {name} megnyitása
+détection simple ¦ yksinkertainen tunnistus ¦ egyszerű észlelés
+Ouvrir et identifier ¦ Avaa ja tunnista ¦ Megnyitás és azonosítás
+Tous les visages trouvés ont un nom ou ont été ignorés. 👍 ¦ Kaikilla löydetyillä kasvoilla on nimi tai ne on ohitettu. 👍 ¦ Minden talált arcnak van neve, vagy figyelmen kívül lett hagyva. 👍
+Lance une analyse : les photos où l’app trouve des visages apparaîtront ici. ¦ Käynnistä analyysi: valokuvat, joista sovellus löytää kasvoja, näkyvät tässä. ¦ Indíts egy elemzést: azok a fényképek, amelyeken az alkalmazás arcot talál, itt jelennek meg.
+entre 1900 et 1950, vers 1925, 1960… ¦ välillä 1900–1950, noin 1925, 1960… ¦ 1900 és 1950 között, 1925 körül, 1960…
+Les photos marquées avec des visages ¦ Valokuvat, joihin on merkitty kasvoja ¦ Arcokkal megjelölt fényképek
+photo de la personne, portrait d’une fiche, visages déjà identifiés, étiquette « portrait » ou « visage » ¦ henkilön valokuva, kortin muotokuva, jo tunnistetut kasvot, tunniste ”muotokuva” tai ”kasvot” ¦ a személy fényképe, egy adatlap portréja, már azonosított arcok, „portré” vagy „arc” címke
+Les photos affichées dans la liste Médias ¦ Media-luettelossa näkyvät valokuvat ¦ A Média listában megjelenített fényképek
+avec ta recherche et tes filtres actuels ¦ nykyisellä haullasi ja suodattimillasi ¦ a jelenlegi keresésed és szűrőid szerint
+Les photos d’une personne ¦ Henkilön valokuvat ¦ Egy személy fényképei
+rattachées à sa fiche ou où elle est identifiée ¦ liitetty hänen korttiinsa tai joissa hänet on tunnistettu ¦ az adatlapjához kapcsolva, vagy ahol azonosítva van
+Les photos d’une étiquette ¦ Tunnisteen valokuvat ¦ Egy címke fényképei
+Un album ou un dossier ¦ Albumi tai kansio ¦ Egy album vagy mappa
+Une période ¦ Ajanjakso ¦ Egy időszak
+d’après la date de la photo, sinon sa date d’ajout ¦ valokuvan päivämäärän mukaan, muuten lisäyspäivän ¦ a fénykép dátuma szerint, egyébként a hozzáadás dátuma szerint
+les dernières ajoutées ¦ viimeksi lisätyt ¦ a legutóbb hozzáadottak
+Toutes les photos ¦ Kaikki valokuvat ¦ Minden fénykép
+peut être long : tu peux mettre en pause et reprendre plus tard ¦ voi kestää kauan: voit keskeyttää ja jatkaa myöhemmin ¦ sokáig tarthat: szüneteltetheted és később folytathatod
+En attendant, nomme les inconnus regroupés (👥). ¦ Sillä välin nimeä ryhmitellyt tuntemattomat (👥). ¦ Közben nevezd meg a csoportosított ismeretleneket (👥).
+Pour avoir des propositions : ouvre quelques photos et identifie les visages à la main (bouton « Identifier » de la visionneuse, ou « Ouvrir et identifier » à l’étape ①), au moins une fois par personne. ¦ Saadaksesi ehdotuksia: avaa muutama valokuva ja tunnista kasvot käsin (katseluohjelman painike ”Tunnista” tai ”Avaa ja tunnista” vaiheessa ①) vähintään kerran kutakin henkilöä kohden. ¦ Javaslatokhoz: nyiss meg néhány fényképet, és azonosítsd kézzel az arcokat (a megjelenítő „Azonosítás” gombja, vagy „Megnyitás és azonosítás” az ① lépésben), személyenként legalább egyszer.
+Aucun visage trouvé pour l’instant. Commence par l’étape ① : choisis quelques photos et lance l’analyse. ¦ Kasvoja ei ole vielä löytynyt. Aloita vaiheesta ①: valitse muutama valokuva ja käynnistä analyysi. ¦ Még nem található arc. Kezdd az ① lépéssel: válassz néhány fényképet, és indítsd el az elemzést.
+💡 Propositions ¦ 💡 Ehdotukset ¦ 💡 Javaslatok
+👥 Inconnus regroupés ¦ 👥 Ryhmitellyt tuntemattomat ¦ 👥 Csoportosított ismeretlenek
+❔ Autres inconnus ¦ ❔ Muut tuntemattomat ¦ ❔ Egyéb ismeretlenek
+✓ Identifiés ¦ ✓ Tunnistetut ¦ ✓ Azonosítottak
+✓ Accepter les {n} très probables ¦ ✓ Hyväksy {n} hyvin todennäköistä ¦ ✓ A(z) {n} nagyon valószínű elfogadása
+visage|probable ¦ todennäköinen ¦ valószínű
+ressemblance {pct} % ¦ samankaltaisuus {pct} % ¦ hasonlóság {pct} %
+ou {name} ? ¦ vai {name}? ¦ vagy {name}?
+✓ Oui ¦ ✓ Kyllä ¦ ✓ Igen
+Quelqu’un d’autre… ¦ Joku muu… ¦ Valaki más…
+Pas un visage, ou personne à ne pas nommer ¦ Ei kasvot, tai henkilö, jota ei nimetä ¦ Nem arc, vagy meg nem nevezendő személy
+Aucune proposition pour l’instant : analyse plus de photos, ou identifie plus de visages à la main. ¦ Ei vielä ehdotuksia: analysoi lisää valokuvia tai tunnista lisää kasvoja käsin. ¦ Még nincs javaslat: elemezz több fényképet, vagy azonosíts több arcot kézzel.
+<b>{n} visages</b> qui se ressemblent, sur {p} photos. ¦ <b>{n} toisiaan muistuttavaa kasvoa</b> {p} valokuvassa. ¦ <b>{n} egymásra hasonlító arc</b> {p} fényképen.
+Nommer… ¦ Nimeä… ¦ Megnevezés…
+Demander à la famille ¦ Kysy suvulta ¦ Megkérdezni a családot
+Personne n’est encore identifié. ¦ Ketään ei ole vielä tunnistettu. ¦ Még senki sincs azonosítva.
+⏸ En pause (la photo en cours se termine) ¦ ⏸ Tauolla (käsiteltävä valokuva viedään loppuun) ¦ ⏸ Szünetel (az aktuális fénykép befejeződik)
+{s} s par photo · reste ≈ {left} ¦ {s} s valokuvaa kohden · jäljellä ≈ {left} ¦ {s} mp fényképenként · hátravan ≈ {left}
+vitesse : on mesure… ¦ nopeus: mitataan… ¦ sebesség: mérés…
+■ Arrêter ¦ ■ Pysäytä ¦ ■ Leállítás
+Calcul sur la page (le fil à part n’a pas pu démarrer) : un peu plus lent. ¦ Lasketaan sivulla (erillinen säie ei käynnistynyt): hieman hitaampi. ¦ Számítás az oldalon (a külön szál nem indult el): kicsit lassabb.
+Modèle de reconnaissance indisponible ({why}). Détection simple du navigateur : les visages sont repérés, mais sans proposition de nom. ¦ Tunnistusmalli ei ole käytettävissä ({why}). Selaimen yksinkertainen tunnistus: kasvot löydetään, mutta nimiä ei ehdoteta. ¦ A felismerő modell nem érhető el ({why}). A böngésző egyszerű észlelése: az arcokat megtalálja, de nevet nem javasol.
+Chargement du modèle… ¦ Ladataan mallia… ¦ A modell betöltése…
+Chargement du modèle : {step} ¦ Ladataan mallia: {step} ¦ A modell betöltése: {step}
+■ Analyse arrêtée : {n}{more}. ¦ ■ Analyysi pysäytetty: {n}{more}. ¦ ■ Elemzés leállítva: {n}{more}.
+✓ Analyse finie : {n}{more}. ¦ ✓ Analyysi valmis: {n}{more}. ¦ ✓ Elemzés kész: {n}{more}.
+Il reste {n} : « ▶ Reprendre » quand tu veux. ¦ Jäljellä {n}: ”▶ Jatka”, kun haluat. ¦ Még {n} van hátra: „▶ Folytatás”, amikor szeretnéd.
+■ Analyse arrêtée. ¦ ■ Analyysi pysäytetty. ¦ ■ Elemzés leállítva.
+{n} : tu pourras reprendre. ¦ {n}: voit jatkaa myöhemmin. ¦ {n}: később folytathatod.
+Visage ignoré ¦ Kasvo ohitettu ¦ Arc figyelmen kívül hagyva
+photos de {name} ¦ henkilön {name} valokuvat ¦ {name} fényképei
+photos sautées ¦ ohitetut valokuvat ¦ kihagyott fényképek
+Identifié : {name} ¦ Tunnistettu: {name} ¦ Azonosítva: {name}
+{n} (certitude « probable ») ¦ {n} (varmuus ”todennäköinen”) ¦ {n} („valószínű” bizonyosság)
+Qui est-ce ? ({n} visages) ¦ Kuka tämä on? ({n} kasvoa) ¦ Ki ez? ({n} arc)
+Certitude ¦ Varmuus ¦ Bizonyosság
+Certaine ¦ Varma ¦ Biztos
+Possible ¦ Mahdollinen ¦ Lehetséges
+Choisis… ¦ Valitse… ¦ Válassz…
+Hier et aujourd’hui ¦ Ennen ja nyt ¦ Tegnap és ma
+Nom de la comparaison ¦ Vertailun nimi ¦ Az összehasonlítás neve
+Enregistrer la comparaison (reliée aux deux photos et aux personnes) ¦ Tallenna vertailu (yhdistetty molempiin valokuviin ja henkilöihin) ¦ Az összehasonlítás mentése (a két fényképhez és a személyekhez kapcsolva)
+A — l’image ancienne ¦ A — vanha kuva ¦ A — a régi kép
+B — la photo d’aujourd’hui ¦ B — tämän päivän valokuva ¦ B — a mai fénykép
+Photo A ¦ Valokuva A ¦ A fénykép
+Photo B ¦ Valokuva B ¦ B fénykép
+La photo A ¦ Valokuva A ¦ Az A fénykép
+La photo B ¦ Valokuva B ¦ A B fénykép
+la photo A ¦ valokuva A ¦ az A fénykép
+La photo « {name} » n’a pas pu être ouverte. ¦ Valokuvaa ”{name}” ei voitu avata. ¦ A(z) „{name}” fényképet nem sikerült megnyitni.
+Choisis la photo B à droite → ¦ Valitse valokuva B oikealta → ¦ Válaszd ki a B fényképet jobbra →
+Choisis la photo A à droite → ¦ Valitse valokuva A oikealta → ¦ Válaszd ki az A fényképet jobbra →
+Clique <b>{what}</b> (à ta gauche sur l’écran). ¦ Napsauta <b>{what}</b> (vasemmalla puolellasi näytöllä). ¦ Kattints erre: <b>{what}</b> (a képernyőn tőled balra).
+Échap pour arrêter. ¦ Lopeta painamalla Esc. ¦ Esc a leállításhoz.
+Clique sur la photo <b>{side}</b> : {what}. ¦ Napsauta valokuvaa <b>{side}</b>: {what}. ¦ Kattints a(z) <b>{side}</b> fényképre: {what}.
+Aucun visage trouvé sur la photo {side} : pose les yeux en deux clics. ¦ Valokuvasta {side} ei löytynyt kasvoja: merkitse silmät kahdella napsautuksella. ¦ A(z) {side} fényképen nem található arc: jelöld be a szemeket két kattintással.
+Le modèle de visages n’a pas pu être chargé. ¦ Kasvomallia ei voitu ladata. ¦ Az arcmodellt nem sikerült betölteni.
+Pose les yeux en deux clics par photo. ¦ Merkitse silmät kahdella napsautuksella kuhunkin valokuvaan. ¦ Jelöld be a szemeket fényképenként két kattintással.
+Pas encore de ressemblance calculée pour ces deux photos. ¦ Näille kahdelle valokuvalle ei ole vielä laskettu samankaltaisuutta. ¦ Ehhez a két fényképhez még nincs kiszámított hasonlóság.
+« ✨ Repérer les yeux tout seul » la calcule (modèle de visages sur cet ordinateur), ou lance <b>👤 Visages</b> sur ces photos (Listes → Médias). ¦ ”✨ Etsi silmät automaattisesti” laskee sen (kasvomalli tällä tietokoneella), tai käynnistä <b>👤 Kasvot</b> näille valokuville (Luettelot → Media). ¦ A „✨ Szemek automatikus keresése” kiszámítja (arcmodell ezen a számítógépen), vagy indítsd el a <b>👤 Arcok</b> funkciót ezeken a fényképeken (Listák → Média).
+Calculée par le modèle de visages, sur cet ordinateur ({from}). L’âge, la lumière, l’angle et la qualité des photos changent beaucoup le résultat ; un air de famille (parent, frère, sœur) peut aussi donner une ressemblance forte. À confirmer par les actes. ¦ Laskettu kasvomallilla tällä tietokoneella ({from}). Ikä, valaistus, kulma ja valokuvien laatu vaikuttavat tulokseen paljon; sukuyhdennäköisyys (vanhempi, veli, sisar) voi myös antaa vahvan samankaltaisuuden. Vahvistettava asiakirjoilla. ¦ Az arcmodell számolta ezen a számítógépen ({from}). Az életkor, a fény, a szög és a fényképek minősége sokat változtat az eredményen; a családi hasonlóság (szülő, fivér, nővér) is adhat erős hasonlóságot. Okiratokkal megerősítendő.
+visages repérés à l’instant ¦ juuri löydetyt kasvot ¦ az imént talált arcok
+visages trouvés par 👤 Visages ¦ 👤 Kasvot -toiminnon löytämät kasvot ¦ a 👤 Arcok által talált arcok
+Rideau ¦ Verho ¦ Függöny
+Part de B ¦ B:n osuus ¦ B aránya
+La photo B, à poser à côté de « {name} ». ¦ Valokuva B, asetettavaksi kuvan ”{name}” viereen. ¦ A B fénykép, a(z) „{name}” mellé helyezendő.
+Une photo de cette personne ; ensuite, la photo à comparer. ¦ Valokuva tästä henkilöstä; sen jälkeen verrattava valokuva. ¦ Egy fénykép erről a személyről; ezután az összehasonlítandó fénykép.
+Comparer deux photos (ressemblance, même personne à deux âges…) ¦ Vertaa kahta valokuvaa (samankaltaisuus, sama henkilö kahdessa iässä…) ¦ Két fénykép összehasonlítása (hasonlóság, ugyanaz a személy két életkorban…)
+Ressemblance très forte — ce n’est pas une preuve ¦ Hyvin vahva samankaltaisuus — ei todiste ¦ Nagyon erős hasonlóság — ez nem bizonyíték
+Ressemblance forte — ce n’est pas une preuve ¦ Vahva samankaltaisuus — ei todiste ¦ Erős hasonlóság — ez nem bizonyíték
+Ressemblance moyenne — ce n’est pas une preuve ¦ Kohtalainen samankaltaisuus — ei todiste ¦ Közepes hasonlóság — ez nem bizonyíték
+Ressemblance faible — ce n’est pas une preuve ¦ Heikko samankaltaisuus — ei todiste ¦ Gyenge hasonlóság — ez nem bizonyíték
+Affichage des deux photos ¦ Kahden valokuvan näyttö ¦ A két fénykép megjelenítése
+Zoomer et déplacer les deux photos ensemble ¦ Zoomaa ja siirrä molempia valokuvia yhdessä ¦ A két fénykép együttes nagyítása és mozgatása
+Zoomer ¦ Zoomaa ¦ Nagyítás
+Toute la photo ¦ Koko valokuva ¦ Az egész fénykép
+Toute la photo (double-clic) ¦ Koko valokuva (kaksoisnapsautus) ¦ Az egész fénykép (dupla kattintás)
+Les deux photos : molette pour zoomer, glisser pour déplacer, double-clic pour revoir toute la photo ¦ Molemmat valokuvat: rulla zoomaa, vetäminen siirtää, kaksoisnapsautus näyttää koko valokuvan ¦ A két fénykép: görgő a nagyításhoz, húzás a mozgatáshoz, dupla kattintás az egész fényképhez
+Les deux photos ¦ Molemmat valokuvat ¦ A két fénykép
+Mettre A à la place de B et B à la place de A ¦ Vaihda A:n ja B:n paikat ¦ A és B helyének felcserélése
+⇄ Échanger A et B ¦ ⇄ Vaihda A ja B ¦ ⇄ A és B felcserélése
+Caler la photo d’aujourd’hui ¦ Kohdista tämän päivän valokuva ¦ A mai fénykép igazítása
+Clique deux mêmes repères sur chaque photo (le haut du clocher, le coin d’un toit…) : la photo d’aujourd’hui est tournée et mise à la même taille. ¦ Napsauta kahta samaa kohtaa kummassakin valokuvassa (kellotornin huippu, katon kulma…): tämän päivän valokuva käännetään ja skaalataan samaan kokoon. ¦ Kattints két ugyanolyan pontra mindkét fényképen (a harangtorony csúcsa, egy tető sarka…): a mai fényképet elforgatja és azonos méretre állítja.
+Deux clics sur la photo A, puis les deux mêmes repères sur la photo B ¦ Kaksi napsautusta valokuvaan A, sitten samat kaksi kohtaa valokuvaan B ¦ Két kattintás az A fényképen, majd ugyanaz a két pont a B fényképen
+📌 Poser 2 repères par photo ¦ 📌 Merkitse 2 kohtaa kuhunkin valokuvaan ¦ 📌 2 pont elhelyezése fényképenként
+Caler sur les repères ¦ Kohdista merkkien mukaan ¦ Igazítás a pontokhoz
+✕ Retirer les repères ¦ ✕ Poista merkit ¦ ✕ Pontok eltávolítása
+Ajuster à la main ¦ Säädä käsin ¦ Kézi igazítás
+Glisser sur l’image déplace seulement la photo d’aujourd’hui ¦ Vetäminen kuvan päällä siirtää vain tämän päivän valokuvaa ¦ A képen való húzás csak a mai fényképet mozgatja
+Glisser déplace la photo B ¦ Vetäminen siirtää valokuvaa B ¦ A húzás a B fényképet mozgatja
+Les yeux (alignement) ¦ Silmät (kohdistus) ¦ A szemek (igazítás)
+Les deux visages sont mis à la même taille, les yeux à la même hauteur : la comparaison est bien plus juste. ¦ Molemmat kasvot skaalataan samaan kokoon, silmät samalle korkeudelle: vertailu on paljon tarkempi. ¦ A két arc azonos méretre kerül, a szemek azonos magasságba: így az összehasonlítás sokkal pontosabb.
+✨ Repérer les yeux tout seul ¦ ✨ Etsi silmät automaattisesti ¦ ✨ Szemek automatikus keresése
+Clique l’œil gauche puis l’œil droit sur chaque photo ¦ Napsauta kummassakin valokuvassa ensin vasenta ja sitten oikeaa silmää ¦ Kattints mindkét fényképen előbb a bal, majd a jobb szemre
+👁 Poser les yeux (2 clics par photo) ¦ 👁 Merkitse silmät (2 napsautusta valokuvaa kohden) ¦ 👁 Szemek bejelölése (fényképenként 2 kattintás)
+Aligner sur les yeux ¦ Kohdista silmien mukaan ¦ Igazítás a szemekhez
+✕ Retirer les yeux posés ¦ ✕ Poista merkityt silmät ¦ ✕ A bejelölt szemek eltávolítása
+Prises sur les deux photos ; ajoute ou retire qui tu veux. ¦ Otettu molemmista valokuvista; lisää tai poista kenet haluat. ¦ A két fényképről átvéve; adj hozzá vagy vegyél ki bárkit.
+Ce que tu remarques : forme du nez, des oreilles, implantation des cheveux, grain de beauté, âge supposé… ¦ Mitä huomaat: nenän ja korvien muoto, hiusraja, luomi, arvioitu ikä… ¦ Amit észreveszel: az orr, a fülek formája, a hajvonal, anyajegy, becsült életkor…
+Fondu : part de la photo B ; rideau : place du rideau ¦ Häivytys: valokuvan B osuus; verho: verhon paikka ¦ Áttűnés: a B fénykép aránya; függöny: a függöny helye
+Choisis une photo (image). ¦ Valitse valokuva (kuva). ¦ Válassz egy fényképet (képet).
+C’est déjà l’autre photo : choisis-en une autre. ¦ Tämä on jo toinen valokuva: valitse jokin muu. ¦ Ez már a másik fénykép: válassz egy másikat.
+Choisis les deux photos à comparer ¦ Valitse kaksi verrattavaa valokuvaa ¦ Válaszd ki a két összehasonlítandó fényképet
+Deux portraits : la même personne à deux âges, deux personnes qu’on croit parentes… ¦ Kaksi muotokuvaa: sama henkilö kahdessa iässä, kaksi henkilöä, joita pidetään sukulaisina… ¦ Két portré: ugyanaz a személy két életkorban, két személy, akikről rokonságot sejtünk…
+🖼 Choisir la photo A ¦ 🖼 Valitse valokuva A ¦ 🖼 Az A fénykép kiválasztása
+Pose d’abord deux repères sur chaque photo (📌). ¦ Merkitse ensin kaksi kohtaa kuhunkin valokuvaan (📌). ¦ Előbb helyezz el két pontot mindkét fényképen (📌).
+Pose d’abord les yeux sur les deux photos (✨ tout seul, ou 👁 deux clics par photo). ¦ Merkitse ensin silmät molempiin valokuviin (✨ automaattisesti tai 👁 kaksi napsautusta valokuvaa kohden). ¦ Előbb jelöld be a szemeket mindkét fényképen (✨ automatikusan, vagy 👁 fényképenként két kattintással).
+le repère 1 sur l’image ancienne (A) ¦ kohta 1 vanhassa kuvassa (A) ¦ az 1. pont a régi képen (A)
+le repère 2 sur l’image ancienne (A) ¦ kohta 2 vanhassa kuvassa (A) ¦ a 2. pont a régi képen (A)
+le même repère 1 sur la photo d’aujourd’hui (B) ¦ sama kohta 1 tämän päivän valokuvassa (B) ¦ ugyanaz az 1. pont a mai fényképen (B)
+le même repère 2 sur la photo d’aujourd’hui (B) ¦ sama kohta 2 tämän päivän valokuvassa (B) ¦ ugyanaz a 2. pont a mai fényképen (B)
+l’œil de gauche de la photo A ¦ valokuvan A vasen silmä ¦ az A fénykép bal szeme
+l’œil de droite de la photo A ¦ valokuvan A oikea silmä ¦ az A fénykép jobb szeme
+l’œil de gauche de la photo B ¦ valokuvan B vasen silmä ¦ a B fénykép bal szeme
+l’œil de droite de la photo B ¦ valokuvan B oikea silmä ¦ a B fénykép jobb szeme
+Choisis d’abord les deux photos. ¦ Valitse ensin molemmat valokuvat. ¦ Előbb válaszd ki a két fényképet.
+Repères non posés : rien n’a changé. ¦ Kohtia ei merkitty: mikään ei muuttunut. ¦ Nincsenek pontok elhelyezve: semmi sem változott.
+Yeux non posés : rien n’a changé. ¦ Silmiä ei merkitty: mikään ei muuttunut. ¦ Nincsenek szemek bejelölve: semmi sem változott.
+Repères posés : la photo d’aujourd’hui est calée sur l’ancienne. ¦ Kohdat merkitty: tämän päivän valokuva on kohdistettu vanhaan. ¦ Pontok elhelyezve: a mai fénykép a régihez igazítva.
+Yeux posés : les deux visages sont alignés. ¦ Silmät merkitty: kasvot on kohdistettu. ¦ Szemek bejelölve: a két arc igazítva.
+Le modèle de visages n’est pas disponible ici : pose les yeux en deux clics par photo. ¦ Kasvomalli ei ole käytettävissä täällä: merkitse silmät kahdella napsautuksella kuhunkin valokuvaan. ¦ Az arcmodell itt nem érhető el: jelöld be a szemeket fényképenként két kattintással.
+Le modèle de visages (≈ 13 Mo, sur cet ordinateur seulement) se charge une fois, au premier clic. ¦ Kasvomalli (≈ 13 Mt, vain tällä tietokoneella) ladataan kerran, ensimmäisellä napsautuksella. ¦ Az arcmodell (≈ 13 MB, csak ezen a számítógépen) egyszer töltődik be, az első kattintáskor.
+Visages trouvés : les yeux sont alignés. ¦ Kasvot löytyivät: silmät on kohdistettu. ¦ Arcok megtalálva: a szemek igazítva.
+Le modèle de visages n’a pas pu être chargé (il faut internet la première fois) : pose les yeux en deux clics par photo. ¦ Kasvomallia ei voitu ladata (ensimmäisellä kerralla tarvitaan internet): merkitse silmät kahdella napsautuksella kuhunkin valokuvaan. ¦ Az arcmodellt nem sikerült betölteni (első alkalommal internet kell): jelöld be a szemeket fényképenként két kattintással.
+Choisis les deux photos. ¦ Valitse molemmat valokuvat. ¦ Válaszd ki a két fényképet.
+Choisis les deux photos avant d’enregistrer. ¦ Valitse molemmat valokuvat ennen tallentamista. ¦ Mentés előtt válaszd ki a két fényképet.
+Les derniers changements de la comparaison ne sont pas enregistrés. ¦ Vertailun viimeisiä muutoksia ei ole tallennettu. ¦ Az összehasonlítás legutóbbi módosításai nincsenek mentve.
+C’est la même photo : choisis-en une autre. ¦ Tämä on sama valokuva: valitse jokin muu. ¦ Ez ugyanaz a fénykép: válassz egy másikat.
+comparaison de photos ¦ valokuvien vertailu ¦ fényképek összehasonlítása
+Deux photos ¦ Kaksi valokuvaa ¦ Két fénykép
+=autre déplacement ¦ muu muutto|muuta muuttoa ¦ egyéb költözés|egyéb költözés
+=déplacement ¦ muutto|muuttoa ¦ költözés|költözés
+=personne vivante ou confidentielle ¦ elävä tai luottamuksellinen henkilö|elävää tai luottamuksellista henkilöä ¦ élő vagy bizalmas személy|élő vagy bizalmas személy
+=lieu de la famille ¦ suvun paikka|suvun paikkaa ¦ családi hely|családi hely
+=couche importée ¦ tuotu taso|tuotua tasoa ¦ importált réteg|importált réteg
+=couche ¦ taso|tasoa ¦ réteg|réteg
+{n} jours ({w} semaines) ¦ {n} päivää ({w} viikkoa) ¦ {n} nap ({w} hét)
+Il faut environ {dur} pour aller de {from} à {to} ({how}, ≈ {what}). ¦ Matka paikasta {from} paikkaan {to} kestää noin {dur} ({how}, ≈ {what}). ¦ Kb. {dur} kell az úthoz innen: {from}, ide: {to} ({how}, ≈ {what}).
+Il faut environ {dur} pour aller de {from} à {to} en {year} ({how}, ≈ {what}). ¦ Matka paikasta {from} paikkaan {to} kestää noin {dur} vuonna {year} ({how}, ≈ {what}). ¦ Kb. {dur} kell az úthoz innen: {from}, ide: {to}, {year}-ban ({how}, ≈ {what}).
+Il fallait environ {dur} pour aller de {from} à {to} en {year} ({how}, ≈ {what}). ¦ Matka paikasta {from} paikkaan {to} kesti noin {dur} vuonna {year} ({how}, ≈ {what}). ¦ Kb. {dur} kellett az úthoz innen: {from}, ide: {to}, {year}-ban ({how}, ≈ {what}).
+{km} sur l’eau ¦ {km} vesitse ¦ {km} vízen
+{km} de voie ¦ {km} rataa ¦ {km} vasúton
+{km} de route ¦ {km} tietä ¦ {km} úton
+À pied ¦ Jalan ¦ Gyalog
+à pied ¦ jalan ¦ gyalog
+À cheval ¦ Ratsain ¦ Lóháton
+à cheval ¦ ratsain ¦ lóháton
+En diligence ¦ Postivaunuilla ¦ Postakocsival
+en diligence ¦ postivaunuilla ¦ postakocsival
+Bateau (rivière) ¦ Vene (joki) ¦ Hajó (folyó)
+en bateau sur la rivière ¦ veneellä jokea pitkin ¦ hajóval a folyón
+Bateau (mer) ¦ Laiva (meri) ¦ Hajó (tenger)
+en bateau ¦ laivalla ¦ hajóval
+En train ¦ Junalla ¦ Vonattal
+en train ¦ junalla ¦ vonattal
+4 à 5 km/h, 8 heures de marche par jour ¦ 4–5 km/h, 8 tuntia kävelyä päivässä ¦ 4–5 km/h, napi 8 óra gyaloglás
+au pas et au trot, en ménageant sa monture (un courrier qui change de cheval aux relais va deux fois plus loin) ¦ käyntiä ja ravia ratsua säästäen (postinkuljettaja, joka vaihtaa hevosta kievareissa, pääsee kaksi kertaa pidemmälle) ¦ lépésben és ügetésben, kímélve a lovat (a váltóállomásokon lovat cserélő futár kétszer messzebbre jut)
+coches puis diligences et malles-poste ; on roule de plus en plus la nuit ¦ ensin kyytivaunut, sitten postivaunut ja postikiitovaunut; yhä useammin ajetaan myös yöllä ¦ előbb fogatok, majd postakocsik és gyorspostakocsik; egyre többet utaznak éjjel is
+coche d’eau, halage, puis bateaux à vapeur ¦ jokiveneet, hinaus rannalta, sitten höyrylaivat ¦ folyami csónakok, vontatás a partról, majd gőzhajók
+à la voile jusque vers 1840, puis à la vapeur ¦ purjein noin vuoteen 1840, sitten höyryllä ¦ vitorlával kb. 1840-ig, utána gőzzel
+selon les lignes ouvertes : grandes lignes de 1840 à 1860, petites lignes jusque vers 1910 ¦ avattujen ratojen mukaan: päälinjat 1840–1860, sivuradat noin vuoteen 1910 ¦ a megnyitott vonalak szerint: fővonalak 1840 és 1860 között, mellékvonalak kb. 1910-ig
+par la route ¦ maanteitse ¦ közúton
+par la rivière ¦ jokea pitkin ¦ folyón
+par la mer ¦ meritse ¦ tengeren
+par le rail ¦ rautateitse ¦ vasúton
+Fernand Braudel, « Civilisation matérielle, économie et capitalisme » (1979) et « L’identité de la France » (1986) : à pied, 30 à 40 km par jour ; à cheval, 50 à 60 km par jour pour un voyageur qui garde sa monture. ¦ Fernand Braudel, « Civilisation matérielle, économie et capitalisme » (1979) ja « L’identité de la France » (1986): jalan 30–40 km päivässä; ratsain 50–60 km päivässä matkustajalle, joka pitää saman ratsun. ¦ Fernand Braudel, « Civilisation matérielle, économie et capitalisme » (1979) és « L’identité de la France » (1986): gyalog napi 30–40 km; lóháton napi 50–60 km a lovát megtartó utazónak.
+Règlements militaires (XVIIIᵉ–XIXᵉ s.) : l’étape ordinaire d’une troupe à pied est de 24 à 28 km par jour ; un marcheur seul fait davantage. ¦ Sotilasohjesäännöt (1700–1800-luku): jalkaväen tavallinen päivämarssi on 24–28 km; yksin kulkeva kävelee enemmän. ¦ Katonai szabályzatok (XVIII–XIX. sz.): a gyalogos csapat szokásos napi menete 24–28 km; egy magányos gyalogos többet tesz meg.
+Guy Arbellot, « La grande mutation des routes de France au milieu du XVIIIᵉ siècle », Annales ESC, 1973, et « Atlas de la Révolution française », t. 1 « Routes et communications » (1987) : les temps de parcours depuis Paris sont presque divisés par deux entre 1765 et 1780 (turgotines). ¦ Guy Arbellot, « La grande mutation des routes de France au milieu du XVIIIᵉ siècle », Annales ESC, 1973, ja « Atlas de la Révolution française », osa 1 « Routes et communications » (1987): matka-ajat Pariisista lähes puolittuvat vuosina 1765–1780 (turgotines). ¦ Guy Arbellot, « La grande mutation des routes de France au milieu du XVIIIᵉ siècle », Annales ESC, 1973, és « Atlas de la Révolution française », 1. köt. « Routes et communications » (1987): a Párizsból induló menetidők 1765 és 1780 között majdnem a felére csökkennek (turgotines).
+Christophe Studeny, « L’invention de la vitesse. France, XVIIIᵉ–XXᵉ siècle » (Gallimard, 1995) : diligences des Messageries roulant jour et nuit vers 1830, malles-poste à près de 10 km/h vers 1845. ¦ Christophe Studeny, « L’invention de la vitesse. France, XVIIIᵉ–XXᵉ siècle » (Gallimard, 1995): Messageries-yhtiön postivaunut kulkevat yötä päivää noin 1830, postikiitovaunut lähes 10 km/h noin 1845. ¦ Christophe Studeny, « L’invention de la vitesse. France, XVIIIᵉ–XXᵉ siècle » (Gallimard, 1995): a Messageries éjjel-nappal közlekedő postakocsijai 1830 körül, a gyorspostakocsik közel 10 km/h-val 1845 körül.
+François Caron, « Histoire des chemins de fer en France », t. 1 (1997) : première ligne de voyageurs en 1837 (Paris – Saint-Germain), grandes lignes ouvertes de 1840 à 1860, environ 40 km/h de moyenne arrêts compris vers 1860. ¦ François Caron, « Histoire des chemins de fer en France », osa 1 (1997): ensimmäinen henkilöliikenteen rata 1837 (Paris – Saint-Germain), päälinjat avattiin 1840–1860, keskinopeus noin 40 km/h pysähdykset mukaan lukien noin 1860. ¦ François Caron, « Histoire des chemins de fer en France », 1. köt. (1997): az első személyszállító vonal 1837-ben (Paris – Saint-Germain), a fővonalak 1840 és 1860 között nyíltak meg, átlagosan kb. 40 km/h a megállókkal együtt 1860 körül.
+Traversées de l’Atlantique Nord : 30 à 45 jours à la voile ; 12 à 14 jours en vapeur vers 1860 ; 6 à 7 jours vers 1900 ; 4 à 5 jours pour les grands paquebots des années 1930. ¦ Pohjois-Atlantin ylitykset: 30–45 päivää purjein; 12–14 päivää höyryllä noin 1860; 6–7 päivää noin 1900; 4–5 päivää 1930-luvun suurilla matkustajalaivoilla. ¦ Az Észak-Atlanti-óceán átszelése: vitorlással 30–45 nap; gőzössel 12–14 nap 1860 körül; 6–7 nap 1900 körül; 4–5 nap az 1930-as évek nagy óceánjáróin.
+Coches d’eau et halage : 20 à 40 km par jour en remontant, davantage en descendant ; premiers bateaux à vapeur sur la Saône et le Rhône vers 1830. ¦ Jokiveneet ja hinaus: 20–40 km päivässä vastavirtaan, enemmän myötävirtaan; ensimmäiset höyrylaivat Saônella ja Rhônella noin 1830. ¦ Folyami csónakok és vontatás: napi 20–40 km felfelé, lefelé több; az első gőzhajók a Saône-on és a Rhône-on 1830 körül.
+réglé ¦ säädetty ¦ beállítva
+Vitesse réglée par toi ¦ Sinun säätämäsi nopeus ¦ Általad beállított sebesség
+Pas avant {year} ¦ Ei ennen vuotta {year} ¦ Nem {year} előtt
+km/j ¦ km/pv ¦ km/nap
+{name} : kilomètres par jour ¦ {name}: kilometriä päivässä ¦ {name}: kilométer naponta
+Détour {how} ¦ Kiertotie {how} ¦ Kerülő {how}
+Vitesses de trajet enregistrées ¦ Matkanopeudet tallennettu ¦ Utazási sebességek mentve
+Vitesses remises comme au départ ¦ Nopeudet palautettu alkuperäisiksi ¦ Sebességek visszaállítva alapra
+Tulle, Brive… ¦ Tulle, Brive… ¦ Tulle, Brive…
+Paris… ¦ Paris… ¦ Paris…
+Un des deux lieux n’a pas de position sur la carte ({name}) : place-le d’abord. ¦ Toisella paikoista ei ole sijaintia kartalla ({name}): sijoita se ensin. ¦ Az egyik helynek nincs pozíciója a térképen ({name}): előbb helyezd el.
+À vol d’oiseau : <b>{km}</b> ¦ Linnuntietä: <b>{km}</b> ¦ Légvonalban: <b>{km}</b>
+Je relis ses événements… ¦ Luen hänen tapahtumiaan… ¦ Átnézem az eseményeit…
+Au total, environ <b>{km}</b> à vol d’oiseau d’un lieu de vie à l’autre ({n}). ¦ Yhteensä noin <b>{km}</b> linnuntietä asuinpaikasta toiseen ({n}). ¦ Összesen kb. <b>{km}</b> légvonalban egyik lakóhelytől a másikig ({n}).
+Distance parcourue ¦ Kuljettu matka ¦ Megtett távolság
+Par jour ¦ Päivässä ¦ Naponta
+⚙️ Vitesses et sources ¦ ⚙️ Nopeudet ja lähteet ¦ ⚙️ Sebességek és források
+Les vitesses suivent l’époque (ordres de grandeur pour la France et l’Europe de l’Ouest). Écris une autre distance par jour pour un moyen ; vide = selon l’époque. ¦ Nopeudet seuraavat aikakautta (suuruusluokat Ranskalle ja Länsi-Euroopalle). Kirjoita kulkuneuvolle toinen päivämatka; tyhjä = aikakauden mukaan. ¦ A sebességek a korszakot követik (nagyságrendek Franciaországra és Nyugat-Európára). Írj be más napi távolságot egy közlekedési módhoz; üres = a korszak szerint.
+Le détour : la route n’est jamais droite. 1,25 = 25 % de plus que la distance à vol d’oiseau. ¦ Kiertotie: tie ei ole koskaan suora. 1,25 = 25 % enemmän kuin linnuntie. ¦ A kerülő: az út sosem egyenes. 1,25 = 25 %-kal több a légvonalnál.
+📍 Entre deux lieux ¦ 📍 Kahden paikan välillä ¦ 📍 Két hely között
+👤 Le long d’une vie ¦ 👤 Elämän varrella ¦ 👤 Egy élet során
+Année du voyage ¦ Matkan vuosi ¦ Az utazás éve
+Distances et temps de trajet ¦ Etäisyydet ja matka-ajat ¦ Távolságok és menetidők
+Distances et temps de trajet… ¦ Etäisyydet ja matka-ajat… ¦ Távolságok és menetidők…
+Choisis le lieu de départ et le lieu d’arrivée ¦ Valitse lähtöpaikka ja määränpää ¦ Válaszd ki az indulási és az érkezési helyet
+Choisis une personne pour suivre ses déplacements ¦ Valitse henkilö, jonka muuttoja seurataan ¦ Válassz egy személyt, akinek a helyváltoztatásait követed
+Pas de déplacement : il faut au moins deux lieux placés sur la carte ¦ Ei muuttoja: tarvitaan vähintään kaksi kartalle sijoitettua paikkaa ¦ Nincs helyváltoztatás: legalább két, a térképen elhelyezett hely kell
+Pas de déplacement entre deux lieux placés ¦ Ei muuttoa kahden sijoitetun paikan välillä ¦ Nincs helyváltoztatás két elhelyezett hely között
+🧭 Ses déplacements ¦ 🧭 Hänen muuttonsa ¦ 🧭 Helyváltoztatásai
+🧭 Calculer un trajet… ¦ 🧭 Laske matka… ¦ 🧭 Útvonal kiszámítása…
+📜 Ancienne (parchemin) ¦ 📜 Vanha (pergamentti) ¦ 📜 Régi (pergamen)
+🎖 État-major (XIXᵉ) ¦ 🎖 Yleisesikunnan kartta (1800-luku) ¦ 🎖 Vezérkari térkép (XIX. sz.)
+🌙 Bleu nuit et or ¦ 🌙 Yönsininen ja kulta ¦ 🌙 Éjkék és arany
+🎯 Autour des lieux ¦ 🎯 Paikkojen ympärillä ¦ 🎯 A helyek körül
+CARTE · À IMPRIMER ¦ KARTTA · TULOSTETTAVA ¦ TÉRKÉP · NYOMTATÁSRA
+Grande carte à imprimer ¦ Suuri tulostettava kartta ¦ Nagy nyomtatható térkép
+Grande carte à imprimer… ¦ Suuri tulostettava kartta… ¦ Nagy nyomtatható térkép…
+Grande carte ¦ Suuri kartta ¦ Nagy térkép
+Cartouche ¦ Nimiö ¦ Kartus
+Les BORIE ¦ BORIE-suku ¦ A BORIE család
+Ce qu’on met dessus ¦ Mitä siihen laitetaan ¦ Mi kerüljön rá
+● Lieux de naissance ¦ ● Syntymäpaikat ¦ ● Születési helyek
+◆ Lieux de mariage ¦ ◆ Vihkipaikat ¦ ◆ Házasságkötési helyek
+✝ Lieux de décès ¦ ✝ Kuolinpaikat ¦ ✝ Halálozási helyek
+Migrations (naissance → décès) ¦ Muuttoliikkeet (syntymä → kuolema) ¦ Vándorlások (születés → halál)
+➜ Migrations (naissance → décès) ¦ ➜ Muuttoliikkeet (syntymä → kuolema) ¦ ➜ Vándorlások (születés → halál)
+👤 Portraits en médaillon ¦ 👤 Muotokuvat medaljongeissa ¦ 👤 Portrék medalionban
+Une branche (ses ancêtres seulement) ¦ Yksi haara (vain sen esivanhemmat) ¦ Egy ág (csak a felmenői)
+Toute la famille ¦ Koko suku ¦ Az egész család
+Habillage ¦ Ulkoasu ¦ Díszítés
+Cartouche (titre, famille, dates) ¦ Nimiö (otsikko, suku, vuodet) ¦ Kartus (cím, család, dátumok)
+Jamais de personne vivante ni de fiche confidentielle sur cette carte. Le fond est dessiné par l’app (Natural Earth, IGN), sans tuiles d’Internet : il reste net à toutes les tailles. ¦ Tällä kartalla ei koskaan ole eläviä henkilöitä eikä luottamuksellisia kortteja. Sovellus piirtää taustan itse (Natural Earth, IGN) ilman internetin karttatiilejä: se pysyy terävänä kaikissa koissa. ¦ Ezen a térképen soha nincs élő személy vagy bizalmas adatlap. Az alaptérképet az alkalmazás rajzolja (Natural Earth, IGN), internetes csempék nélkül: minden méretben éles marad.
+Les {name} ¦ {name}-suku ¦ A {name} család
+Notre famille ¦ Sukumme ¦ A családunk
+Les lieux de la famille ¦ Suvun paikat ¦ A család helyei
+Fond : {src} ¦ Pohjakartta: {src} ¦ Alaptérkép: {src}
+Natural Earth (domaine public) · IGN Admin Express (Licence Ouverte) ¦ Natural Earth (vapaasti käytettävissä) · IGN Admin Express (Licence Ouverte) ¦ Natural Earth (közkincs) · IGN Admin Express (Licence Ouverte)
+Natural Earth (domaine public) ¦ Natural Earth (vapaasti käytettävissä) ¦ Natural Earth (közkincs)
+dessin impossible ¦ piirtäminen ei onnistu ¦ a rajzolás nem lehetséges
+image trop grande pour ce navigateur ¦ kuva on liian suuri tälle selaimelle ¦ a kép túl nagy ehhez a böngészőhöz
+{n} laissées de côté ¦ {n} jätetty pois ¦ {n} kihagyva
+{n} laissée de côté ¦ {n} jätetty pois ¦ {n} kihagyva
+image : jusqu’à {w} × {h} px ({dpi} ppp) ¦ kuva: enintään {w} × {h} px ({dpi} ppi) ¦ kép: legfeljebb {w} × {h} px ({dpi} dpi)
+Aucun lieu placé sur la carte pour ces choix : place les lieux de la famille (fiche du lieu → position) ou coche d’autres événements. ¦ Näillä valinnoilla kartalle ei ole sijoitettu paikkoja: sijoita suvun paikat (paikan kortti → sijainti) tai valitse muita tapahtumia. ¦ Ezekkel a beállításokkal nincs elhelyezett hely a térképen: helyezd el a család helyeit (a hely adatlapja → pozíció), vagy jelölj be más eseményeket.
+Qualité ramenée à {dpi} ppp (taille de l’affiche, mémoire du navigateur). ¦ Laatu laskettu tasolle {dpi} ppi (julisteen koko, selaimen muisti). ¦ A minőség {dpi} dpi-re csökkentve (a plakát mérete, a böngésző memóriája).
+{paper}, prêt pour l’imprimeur ¦ {paper}, valmis painoon ¦ {paper}, nyomdakész
+haute définition ¦ korkea tarkkuus ¦ nagy felbontás
+📍 Lieux de la famille en épingles ¦ 📍 Suvun paikat nuppineuloina ¦ 📍 A család helyei gombostűként
+Glisse pour tourner, molette pour zoomer. Au clavier : ← → pour tourner, ↑ ↓ pour pencher, + et − pour zoomer, 0 pour revenir. ¦ Kierrä vetämällä, zoomaa rullalla. Näppäimistöllä: ← → kiertää, ↑ ↓ kallistaa, + ja − zoomaa, 0 palauttaa. ¦ Húzással forgathatsz, görgővel nagyíthatsz. Billentyűzettel: ← → forgatás, ↑ ↓ döntés, + és − nagyítás, 0 vissza.
+Relief en 3D ¦ Maasto 3D:nä ¦ Domborzat 3D-ben
+Relief 3D ¦ 3D-maasto ¦ 3D domborzat
+Relief 3D… ¦ 3D-maasto… ¦ 3D domborzat…
+CARTE · RELIEF ¦ KARTTA · MAASTO ¦ TÉRKÉP · DOMBORZAT
+Exagération du relief ¦ Maaston korostus ¦ A domborzat túlzása
+Choisis le lieu du centre (un lieu placé sur la carte) ¦ Valitse keskipisteen paikka (kartalle sijoitettu paikka) ¦ Válaszd ki a középpont helyét (egy térképen elhelyezett helyet)
+Je lis les altitudes… ¦ Luen korkeuksia… ¦ Beolvasom a magasságokat…
+La carte du relief n’est pas installée : elle vient avec la Météo d’autrefois (Réglages → 🌦 Météo d’autrefois). ¦ Maastokarttaa ei ole asennettu: se tulee Menneiden aikojen sään mukana (Asetukset → 🌦 Menneiden aikojen sää). ¦ A domborzati térkép nincs telepítve: a Régi idők időjárásával érkezik (Beállítások → 🌦 Régi idők időjárása).
+Pas d’altitude pour cette zone : la carte du relief couvre {n} pays ({list}). ¦ Tälle alueelle ei ole korkeustietoja: maastokartta kattaa {n} maata ({list}). ¦ Ehhez a területhez nincs magassági adat: a domborzati térkép {n} országot fed le ({list}).
+Pas d’altitude pour cette zone : la carte du relief couvre seulement quelques pays. ¦ Tälle alueelle ei ole korkeustietoja: maastokartta kattaa vain muutaman maan. ¦ Ehhez a területhez nincs magassági adat: a domborzati térkép csak néhány országot fed le.
+{km} de côté ¦ sivun pituus {km} ¦ {km} oldalhossz
+Altitudes : {min} m à {max} m ¦ Korkeudet: {min} m – {max} m ¦ Magasságok: {min} m – {max} m
+{pct} % sans altitude (mer ou hors de la carte) ¦ {pct} % ilman korkeutta (meri tai kartan ulkopuolella) ¦ {pct} % magasság nélkül (tenger vagy a térképen kívül)
+{n} dans la zone ¦ {n} alueella ¦ {n} a területen
+Altitudes : Copernicus DEM GLO-90 (grille de 30″), © DLR / Airbus, Copernicus. ¦ Korkeudet: Copernicus DEM GLO-90 (30″:n ruudukko), © DLR / Airbus, Copernicus. ¦ Magasságok: Copernicus DEM GLO-90 (30″-es rács), © DLR / Airbus, Copernicus.
+Le moteur 3D ne se charge pas. ¦ 3D-moottori ei lataudu. ¦ A 3D-motor nem töltődik be.
+Ce navigateur ne sait pas dessiner en 3D (WebGL éteint). ¦ Tämä selain ei osaa piirtää 3D:tä (WebGL pois päältä). ¦ Ez a böngésző nem tud 3D-ben rajzolni (a WebGL ki van kapcsolva).
+Ma couche ¦ Oma tasoni ¦ Saját rétegem
+Mes couches ¦ Omat tasoni ¦ Saját rétegeim
+Mes couches (dessiner) ¦ Omat tasoni (piirrä) ¦ Saját rétegeim (rajzolás)
+Cacher mes couches ¦ Piilota omat tasoni ¦ Saját rétegeim elrejtése
+Clique sur la carte pour poser le point. Échap pour arrêter. ¦ Napsauta karttaa asettaaksesi pisteen. Lopeta painamalla Esc. ¦ Kattints a térképre a pont elhelyezéséhez. Esc a leállításhoz.
+Clique point par point. ¦ Napsauta piste pisteeltä. ¦ Kattints pontról pontra.
+Entrée ou double-clic pour finir, ⌫ pour retirer le dernier, Échap pour arrêter. ¦ Enter tai kaksoisnapsautus lopettaa, ⌫ poistaa viimeisen, Esc keskeyttää. ¦ Enter vagy dupla kattintás a befejezéshez, ⌫ az utolsó eltávolításához, Esc a leállításhoz.
+Couleur de la couche ¦ Tason väri ¦ A réteg színe
+Dessiner dans cette couche ¦ Piirrä tähän tasoon ¦ Rajzolás ebbe a rétegbe
+Aucune couche pour l’instant ¦ Ei vielä tasoja ¦ Még nincs réteg
+Importer des couches ¦ Tuo tasoja ¦ Rétegek importálása
+GeoJSON ou KML ¦ GeoJSON tai KML ¦ GeoJSON vagy KML
+Aucune forme lisible dans ce fichier. ¦ Tiedostossa ei ole luettavia muotoja. ¦ Ebben a fájlban nincs olvasható alakzat.
+⬠ Nom de la zone ¦ ⬠ Alueen nimi ¦ ⬠ A terület neve
+〰 Nom de l’itinéraire ¦ 〰 Reitin nimi ¦ 〰 Az útvonal neve
+Facultatif. ¦ Valinnainen. ¦ Nem kötelező.
+Les terres de la famille ¦ Suvun maat ¦ A család földjei
+Le chemin de l’école ¦ Koulumatka ¦ Az iskolába vezető út
+📝 La note ¦ 📝 Muistiinpano ¦ 📝 A jegyzet
+📍 Nom du point ¦ 📍 Pisteen nimi ¦ 📍 A pont neve
+Ce que tu veux noter à cet endroit. ¦ Mitä haluat merkitä tähän kohtaan. ¦ Amit erről a helyről fel szeretnél jegyezni.
+Ici se trouvait le moulin ¦ Tässä oli mylly ¦ Itt állt a malom
+〰 Itinéraire ¦ 〰 Reitti ¦ 〰 Útvonal
+⬠ Zone ¦ ⬠ Alue ¦ ⬠ Terület
+📍 Point ¦ 📍 Piste ¦ 📍 Pont
+📝 Note ¦ 📝 Muistiinpano ¦ 📝 Jegyzet
+Zone ajoutée à « {name} » ¦ Alue lisätty tasoon ”{name}” ¦ Terület hozzáadva ehhez: „{name}”
+Itinéraire ajouté à « {name} » ¦ Reitti lisätty tasoon ”{name}” ¦ Útvonal hozzáadva ehhez: „{name}”
+Note ajoutée à « {name} » ¦ Muistiinpano lisätty tasoon ”{name}” ¦ Jegyzet hozzáadva ehhez: „{name}”
+Point ajouté à « {name} » ¦ Piste lisätty tasoon ”{name}” ¦ Pont hozzáadva ehhez: „{name}”
+{dur} aujourd’hui ¦ {dur} nykyään ¦ ma {dur}
+« {name} » supprimé de la couche ¦ ”{name}” poistettu tasosta ¦ „{name}” törölve a rétegből
+« {name} » modifié ¦ ”{name}” muokattu ¦ „{name}” módosítva
+« Aucune » = la couleur de la couche ¦ ”Ei mitään” = tason väri ¦ „Nincs” = a réteg színe
+MES COUCHES ¦ OMAT TASONI ¦ SAJÁT RÉTEGEIM
+Renommer la couche ¦ Nimeä taso uudelleen ¦ Réteg átnevezése
+Couche renommée « {name} » ¦ Taso nimetty uudelleen: ”{name}” ¦ Réteg átnevezve: „{name}”
+Exporter en GeoJSON ¦ Vie GeoJSON-muotoon ¦ Exportálás GeoJSON-be
+Exporter en KML ¦ Vie KML-muotoon ¦ Exportálás KML-be
+Supprimer la couche ¦ Poista taso ¦ Réteg törlése
+Couche « {name} » supprimée ¦ Taso ”{name}” poistettu ¦ „{name}” réteg törölve
+Couleur de la couche changée ¦ Tason väri vaihdettu ¦ A réteg színe módosítva
+Couche « {name} » créée ¦ Taso ”{name}” luotu ¦ „{name}” réteg létrehozva
+Toutes en GeoJSON ¦ Kaikki GeoJSON-muotoon ¦ Mind GeoJSON-be
+Toutes en KML ¦ Kaikki KML-muotoon ¦ Mind KML-be
+Zone ¦ Alue ¦ Terület
+{n} Ko ¦ {n} kt ¦ {n} KB
+Fond à comparer ¦ Verrattava pohjakartta ¦ Összehasonlítandó alaptérkép
+Façon de comparer ¦ Vertailutapa ¦ Az összehasonlítás módja
+▏ Trait ¦ ▏ Viiva ¦ ▏ Vonal
+◐ Transparence ¦ ◐ Läpinäkyvyys ¦ ◐ Átlátszóság
+Transparence du fond à comparer ¦ Verrattavan pohjakartan läpinäkyvyys ¦ Az összehasonlítandó alaptérkép átlátszósága
+Transparence en % ¦ Läpinäkyvyys %:na ¦ Átlátszóság %-ban
+Trait de comparaison : glisse-le, ou flèches gauche et droite ¦ Vertailuviiva: vedä sitä tai käytä vasenta ja oikeaa nuolta ¦ Összehasonlító vonal: húzd, vagy használd a bal és jobb nyilat
+(approximatif) ¦ (likimääräinen) ¦ (közelítő)
+Frontières ¦ Rajat ¦ Határok
+🏛 Province : {name} ¦ 🏛 Maakunta: {name} ¦ 🏛 Tartomány: {name}
+🏛 Département de 1790 : {name} ¦ 🏛 Vuoden 1790 departementti: {name} ¦ 🏛 1790-es megye: {name}
+Tracé approximatif, d’après les départements d’aujourd’hui ({list}). ¦ Likimääräinen rajaus nykyisten departementtien mukaan ({list}). ¦ Közelítő határvonal a mai megyék alapján ({list}).
+Tracé approximatif, d’après les départements d’aujourd’hui. ¦ Likimääräinen rajaus nykyisten departementtien mukaan. ¦ Közelítő határvonal a mai megyék alapján.
+🏚 Communes disparues : à télécharger une fois (Réglages → 🏛 Frontières anciennes). ¦ 🏚 Kadonneet kunnat: ladattava kerran (Asetukset → 🏛 Vanhat rajat). ¦ 🏚 Megszűnt települések: egyszer le kell tölteni (Beállítások → 🏛 Régi határok).
+🏚 Zoome sur une région pour voir les communes disparues. ¦ 🏚 Zoomaa alueelle nähdäksesi kadonneet kunnat. ¦ 🏚 Nagyíts rá egy régióra a megszűnt települések megtekintéséhez.
+Pas français en 1789 : royaume de Sardaigne (français en 1860). L’ouest (Grasse) était en Provence. ¦ Ei ranskalainen vuonna 1789: Sardinian kuningaskunta (ranskalainen 1860). Länsiosa (Grasse) kuului Provenceen. ¦ 1789-ben nem francia: Szárd Királyság (1860-tól francia). A nyugati rész (Grasse) Provence-hoz tartozott.
+Pas française en 1789 : royaume de Sardaigne (française en 1860). ¦ Ei ranskalainen vuonna 1789: Sardinian kuningaskunta (ranskalainen 1860). ¦ 1789-ben nem francia: Szárd Királyság (1860-tól francia).
+Pas français en 1789 : Avignon et le Comtat appartenaient au pape (réunis en 1791). ¦ Ei ranskalainen vuonna 1789: Avignon ja Comtat kuuluivat paaville (liitettiin 1791). ¦ 1789-ben nem francia: Avignon és a Comtat a pápáé volt (1791-ben csatolták).
+Mulhouse était une république alliée des Suisses (réunie en 1798). ¦ Mulhouse oli sveitsiläisten liittolaistasavalta (liitettiin 1798). ¦ Mulhouse a svájciak szövetséges köztársasága volt (1798-ban csatolták).
+Montbéliard appartenait au Wurtemberg (réuni en 1793). ¦ Montbéliard kuului Württembergille (liitettiin 1793). ¦ Montbéliard Württembergé volt (1793-ban csatolták).
+Coupé en Rhône et Loire en 1793. ¦ Jaettiin Rhôneksi ja Loireksi 1793. ¦ 1793-ban Rhône-ra és Loire-ra osztották.
+Le département de Paris (puis de la Seine, 1795). ¦ Pariisin departementti (sitten Seine, 1795). ¦ Párizs megye (majd Seine, 1795).
+Partagé en 1968 (Yvelines, Essonne, Val-d’Oise…). ¦ Jaettiin 1968 (Yvelines, Essonne, Val-d’Oise…). ¦ 1968-ban felosztották (Yvelines, Essonne, Val-d’Oise…).
+Le Tarn-et-Garonne n’existe qu’en 1808 (pris au Lot surtout, et à 5 départements voisins) : ici rangé avec le Lot. ¦ Tarn-et-Garonne on olemassa vasta vuodesta 1808 (otettu enimmäkseen Lot’sta ja viidestä naapuridepartementista): tässä se on luettu Lot’hon. ¦ Tarn-et-Garonne csak 1808 óta létezik (főleg Lot-ból és 5 szomszédos megyéből alakították): itt Lot-hoz sorolva.
+Un seul département en 1790 (coupé en deux de 1793 à 1811, puis en 1976). ¦ Yksi departementti vuonna 1790 (jaettu kahtia 1793–1811 ja sitten 1976). ¦ 1790-ben egyetlen megye (1793 és 1811 között, majd 1976-ban kettéosztva).
+Devenu Maine-et-Loire en 1791. ¦ Siitä tuli Maine-et-Loire 1791. ¦ 1791-ben Maine-et-Loire lett.
+Limites changées en 1871 (Meurthe-et-Moselle). ¦ Rajat muuttuivat 1871 (Meurthe-et-Moselle). ¦ Határai 1871-ben változtak (Meurthe-et-Moselle).
+Limites changées en 1871. ¦ Rajat muuttuivat 1871. ¦ Határai 1871-ben változtak.
+Belfort en faisait partie jusqu’en 1871. ¦ Belfort kuului siihen vuoteen 1871 asti. ¦ Belfort 1871-ig hozzá tartozott.
+Devenu Alpes-de-Haute-Provence en 1970. ¦ Siitä tuli Alpes-de-Haute-Provence 1970. ¦ 1970-ben Alpes-de-Haute-Provence lett.
+Comté de Nice (royaume de Sardaigne) : pas français en 1790 ¦ Nizzan kreivikunta (Sardinian kuningaskunta): ei ranskalainen vuonna 1790 ¦ Nizzai grófság (Szárd Királyság): 1790-ben nem francia
+Savoie (royaume de Sardaigne) : pas française en 1790 ¦ Savoiji (Sardinian kuningaskunta): ei ranskalainen vuonna 1790 ¦ Savoya (Szárd Királyság): 1790-ben nem francia
+Avignon et Comtat Venaissin (au pape) : réunis en 1791 ¦ Avignon ja Comtat Venaissin (paavin): liitettiin 1791 ¦ Avignon és Comtat Venaissin (a pápáé): 1791-ben csatolták
+Pas en France en 1790. ¦ Ei Ranskassa vuonna 1790. ¦ 1790-ben nem Franciaországhoz tartozott.
+réunie en commune nouvelle ¦ yhdistetty uudeksi kunnaksi ¦ új településbe olvasztva
+Réglages · Cartes ¦ Asetukset · Kartat ¦ Beállítások · Térképek
+Provinces, départements de 1790 et communes disparues, sur la Carte (bouton « 🏛 Frontières »). ¦ Maakunnat, vuoden 1790 departementit ja kadonneet kunnat Kartalla (painike ”🏛 Rajat”). ¦ Tartományok, 1790-es megyék és megszűnt települések a Térképen („🏛 Határok” gomb).
+↗ Voir sur la Carte ¦ ↗ Näytä Kartalla ¦ ↗ Megtekintés a Térképen
+🏛 Provinces (≈ 1789) et départements de 1790 ¦ 🏛 Maakunnat (≈ 1789) ja vuoden 1790 departementit ¦ 🏛 Tartományok (≈ 1789) és 1790-es megyék
+Livrés avec l’app : rien à télécharger. Ce sont des tracés <b>approximatifs</b>, faits d’après les départements d’aujourd’hui (chaque département rangé dans la province qui en couvre la plus grande partie). Aucune source libre et officielle de leurs vrais contours n’a été trouvée. ¦ Tulevat sovelluksen mukana: ei mitään ladattavaa. Rajaukset ovat <b>likimääräisiä</b>, tehty nykyisten departementtien mukaan (kukin departementti on luettu maakuntaan, joka kattaa siitä suurimman osan). Niiden todellisille rajoille ei löytynyt vapaata ja virallista lähdettä. ¦ Az alkalmazással érkeznek: semmit sem kell letölteni. Ezek <b>közelítő</b> határvonalak, a mai megyék alapján (minden megye ahhoz a tartományhoz sorolva, amely a nagyobb részét lefedi). Valódi határaikról nem található szabad és hivatalos forrás.
+{size} ({bytes} octets) · empreinte sha256 {hash}… · vérifié : {when} ¦ {size} ({bytes} tavua) · sha256-tiiviste {hash}… · tarkistettu: {when} ¦ {size} ({bytes} bájt) · sha256 ujjlenyomat {hash}… · ellenőrizve: {when}
+taille inconnue ¦ tuntematon koko ¦ ismeretlen méret
+enfants ¦ lapset ¦ gyermekek
+Grand-parent ¦ Isovanhempi ¦ Nagyszülő
+Parrain ou marraine ¦ Kummisetä tai kummitäti ¦ Keresztapa vagy keresztanya
+Frère ou sœur mort avant ¦ Aiemmin kuollut veli tai sisar ¦ Korábban elhunyt testvér
+Choisi à la main ¦ Valittu käsin ¦ Kézzel kiválasztva
+choisi à la main ¦ valittu käsin ¦ kézzel kiválasztva
+vérifié ¦ tarkistettu ¦ ellenőrizve
+Corrigé ou confirmé à la main ¦ Korjattu tai vahvistettu käsin ¦ Kézzel javítva vagy megerősítve
+Indice de confiance : {n} sur 100 ¦ Luotettavuusindeksi: {n}/100 ¦ Megbízhatósági mutató: {n}/100
+Ma branche paternelle ¦ Isän puoleinen haarani ¦ Apai ágam
+Ma branche maternelle ¦ Äidin puoleinen haarani ¦ Anyai ágam
+D’où vient le prénom, par époque ¦ Mistä etunimi tulee, aikakausittain ¦ Honnan ered a keresztnév, korszakonként
+Enfants qui portent le prénom de leur parrain ou marraine ¦ Lapset, joilla on kummisedän tai kummitädin etunimi ¦ A keresztszülőjük nevét viselő gyermekek
+% des enfants qui ont un parrain ou une marraine notés ¦ % lapsista, joille on merkitty kummisetä tai kummitäti ¦ Azon gyermekek %-a, akiknél fel van jegyezve keresztszülő
+Tous les prénoms ¦ Kaikki etunimet ¦ Minden keresztnév
+Pour chaque enfant, d’où vient probablement son prénom : parrain, marraine, grand-parent, frère ou sœur mort avant (prénom « relevé »), oncle, tante, saint du jour. Chaque piste a sa règle et un indice de confiance ; tu peux la corriger sur la fiche ou ici avec ⋯. Sans les personnes en vie ni les fiches confidentielles. ¦ Kullekin lapselle, mistä hänen etunimensä todennäköisesti tulee: kummisetä, kummitäti, isovanhempi, aiemmin kuollut veli tai sisar (”uudelleen käytetty” nimi), setä/eno, täti, päivän pyhimys. Jokaisella johtolangalla on sääntönsä ja luotettavuusindeksinsä; voit korjata sen kortilla tai tässä ⋯-valikosta. Ilman eläviä henkilöitä ja luottamuksellisia kortteja. ¦ Minden gyermeknél, honnan ered valószínűleg a keresztneve: keresztapa, keresztanya, nagyszülő, korábban elhunyt testvér („továbbvitt” név), nagybácsi, nagynéni, a nap szentje. Minden nyomnak megvan a szabálya és megbízhatósági mutatója; javíthatod az adatlapon vagy itt a ⋯ gombbal. Élő személyek és bizalmas adatlapok nélkül.
+prénoms expliqués sur {n} ¦ selitettyä etunimeä / {n} ¦ megmagyarázott keresztnév / {n}
+prénom expliqué sur {n} ¦ selitetty etunimi / {n} ¦ megmagyarázott keresztnév / {n}
+des enfants qui ont un parrain ou une marraine notés portent son prénom ({n} sur {total}) ¦ lapsista, joille on merkitty kummi, kantaa tämän etunimeä ({n}/{total}) ¦ azon gyermekek közül, akiknél fel van jegyezve keresztszülő, az ő nevét viseli ({n}/{total})
+🌳 Les flèches de transmission ¦ 🌳 Periytymisnuolet ¦ 🌳 Az öröklődés nyilai
+Une ligne par prénom, les années en travers : chaque flèche va de la personne qui transmet à l’enfant. Clique sur un rond pour ouvrir la fiche. ¦ Yksi rivi etunimeä kohden, vuodet poikittain: kukin nuoli kulkee nimen antajasta lapseen. Avaa kortti napsauttamalla ympyrää. ¦ Keresztnevenként egy sor, az évek keresztben: minden nyíl a nevet továbbadótól a gyermekhez mutat. Kattints egy körre az adatlap megnyitásához.
+Chaque enfant ¦ Jokainen lapsi ¦ Minden gyermek
+Prénom reçu de ¦ Etunimi saatu henkilöltä ¦ A keresztnevet kapta tőle
+La liste s’arrête à {n} enfants (les prénoms les plus transmis d’abord) ; les chiffres du haut comptent tout le monde. Choisis un prénom pour voir les autres. ¦ Luettelo päättyy {n} lapseen (useimmin periytyneet etunimet ensin); yläosan luvut laskevat kaikki. Valitse etunimi nähdäksesi muut. ¦ A lista {n} gyermeknél ér véget (a leggyakrabban továbbadott nevek elöl); a fenti számok mindenkit beszámítanak. Válassz egy keresztnevet a többiek megtekintéséhez.
+Aucun enfant prénommé {name} ¦ Ei lapsia nimeltä {name} ¦ Nincs {name} nevű gyermek
+Rien à comparer pour l’instant ¦ Ei vielä mitään verrattavaa ¦ Még nincs mit összehasonlítani
+Il faut des enfants reliés à leurs parents (ou des parrains et marraines notés comme témoins « parrain », « marraine » de la naissance ou du baptême). ¦ Tarvitaan lapsia, jotka on yhdistetty vanhempiinsa (tai kummeja, jotka on merkitty syntymän tai kasteen todistajiksi rooleilla ”kummisetä”, ”kummitäti”). ¦ Szüleikhez kapcsolt gyermekek kellenek (vagy a születésnél vagy keresztelőnél „keresztapa”, „keresztanya” tanúként feljegyzett keresztszülők).
+Les plus sûrs d’abord ¦ Varmimmat ensin ¦ A legbiztosabbak elöl
+Les moins sûrs d’abord ¦ Epävarmimmat ensin ¦ A legkevésbé biztosak elöl
+Aucune transmission entre deux fiches datées (le saint du jour n’a pas de flèche). ¦ Ei periytymistä kahden päivätyn kortin välillä (päivän pyhimyksellä ei ole nuolta). ¦ Nincs öröklődés két dátummal ellátott adatlap között (a nap szentjének nincs nyila).
+{name} ({year}) : ouvrir la fiche ¦ {name} ({year}): avaa kortti ¦ {name} ({year}): adatlap megnyitása
+Les {n} prénoms les plus transmis ; choisis un prénom dans « Prénom » pour le voir seul. ¦ {n} useimmin periytynyttä etunimeä; valitse etunimi kohdassa ”Etunimi” nähdäksesi sen yksin. ¦ A {n} leggyakrabban továbbadott keresztnév; válassz egyet a „Keresztnév” mezőben, hogy csak azt lásd.
+Flèches de transmission des prénoms ¦ Etunimien periytymisnuolet ¦ A keresztnevek öröklődési nyilai
+C’est bien ça ¦ Juuri niin ¦ Így van
+Garder cette piste comme sûre ¦ Pidä tämä johtolanka varmana ¦ A nyom megtartása biztosként
+Prénom reçu de {name} : confirmé. ¦ Etunimi saatu henkilöltä {name}: vahvistettu. ¦ A keresztnevet {name} személytől kapta: megerősítve.
+Ce n’est pas ça ¦ Ei pidä paikkaansa ¦ Nem így van
+Écarter cette piste ¦ Hylkää tämä johtolanka ¦ A nyom elvetése
+Piste écartée. ¦ Johtolanka hylätty. ¦ Nyom elvetve.
+Plutôt : {who} ¦ Pikemminkin: {who} ¦ Inkább: {who}
+Prénom reçu de {name}. ¦ Etunimi saatu henkilöltä {name}. ¦ A keresztnevet {name} személytől kapta.
+Celle dont il ou elle tient son prénom ¦ Henkilö, jolta hän sai etunimensä ¦ Akitől a keresztnevét kapta
+De qui tient-il son prénom ? ¦ Keneltä hän sai etunimensä? ¦ Kitől kapta a keresztnevét?
+la personne choisie ¦ valittu henkilö ¦ a kiválasztott személy
+Oublier les corrections à la main ¦ Unohda käsin tehdyt korjaukset ¦ A kézi javítások elvetése
+Corrections oubliées : le calcul de l’app revient. ¦ Korjaukset unohdettu: sovelluksen laskelma palaa. ¦ Javítások elvetve: az alkalmazás számítása visszatér.
+Voir la transmission de ce prénom ¦ Näytä tämän etunimen periytyminen ¦ A keresztnév öröklődésének megtekintése
+Prénom reçu de… ¦ Etunimi saatu henkilöltä… ¦ A keresztnevet kapta tőle…
+saint du jour : ¦ päivän pyhimys: ¦ a nap szentje:
+Prénom reçu de {who} ¦ Etunimi saatu henkilöltä {who} ¦ A keresztnevet kapta tőle: {who}
+indice {n} sur 100 ¦ indeksi {n}/100 ¦ mutató {n}/100
+Ta famille ¦ Sukusi ¦ A családod
+France ≈ ¦ Ranska ≈ ¦ Franciaország ≈
+personnes {who} ¦ henkilöt {who} ¦ személyek {who}
+pas de données ¦ ei tietoja ¦ nincs adat
+Moins de 10 : à lire avec prudence ¦ Alle 10: tulkitse varoen ¦ 10 alatt: óvatosan értelmezendő
+Aucune époque dans cette période ¦ Tällä ajanjaksolla ei ole aikakausia ¦ Ebben az időszakban nincs korszak
+Les repères français vont de 1686 à 1999 : élargis la période. ¦ Ranskan vertailuluvut kattavat vuodet 1686–1999: laajenna ajanjaksoa. ¦ A francia viszonyítási adatok 1686-tól 1999-ig terjednek: bővítsd az időszakot.
+Les moyennes de ta famille à côté des moyennes françaises de la même époque (≈ : des ordres de grandeur, avec leur source). Une famille compte quelques dizaines d’actes : la comparaison se lit en gros. Sans les personnes en vie ni les fiches confidentielles. ¦ Sukusi keskiarvot saman aikakauden ranskalaisten keskiarvojen rinnalla (≈: suuruusluokkia lähteineen). Suvussa on muutamia kymmeniä asiakirjoja: vertailu on vain suuntaa antava. Ilman eläviä henkilöitä ja luottamuksellisia kortteja. ¦ A családod átlagai az ugyanazon korszak francia átlagai mellett (≈: nagyságrendek, a forrásukkal). Egy családnak néhány tucat okirata van: az összehasonlítás csak nagy vonalakban érvényes. Élő személyek és bizalmas adatlapok nélkül.
+📚 D’où viennent les chiffres de la France ¦ 📚 Mistä Ranskan luvut tulevat ¦ 📚 Honnan származnak a francia adatok
+TA FAMILLE ET LA FRANCE ¦ SUKUSI JA RANSKA ¦ A CSALÁDOD ÉS FRANCIAORSZÁG
+Lecture impossible. ¦ Lukeminen ei onnistu. ¦ Az olvasás nem lehetséges.
+Simple ¦ Perus ¦ Egyszerű
+Scientifique ¦ Tieteellinen ¦ Tudományos
+Ruban ¦ Nauha ¦ Szalag
+RUBAN ¦ NAUHA ¦ SZALAG
+chiffres ¦ numeroa ¦ számjegy
+ex. mariage-1925 ¦ esim. mariage-1925 ¦ pl. mariage-1925
+Janv. ¦ Tammi ¦ Jan.
+Juil. ¦ Heinä ¦ Júl.
+Sept. ¦ Syys ¦ Szept.
+Oct. ¦ Loka ¦ Okt.
+Nov. ¦ Marras ¦ Nov.
+Archive ¦ Arkisto ¦ Archívum
+{n} vie à raconter : {list} ¦ {n} kerrottava elämä: {list} ¦ {n} elmesélendő élet: {list}
+JEU ¦ PELI ¦ JÁTÉK
+côté ¦ puoli ¦ ág
+Comparer avec… ¦ Vertaa… ¦ Összehasonlítás ezzel…
+Choisir la personne… ¦ Valitse henkilö… ¦ Személy kiválasztása…
+Âge moyen au premier mariage ¦ Keski-ikä ensimmäisessä avioliitossa ¦ Átlagos életkor az első házasságkötéskor
+L’âge de chaque époux à son premier mariage (date de naissance et date du mariage connues). ¦ Kummankin puolison ikä ensimmäisessä avioliitossaan (syntymä- ja vihkipäivä tiedossa). ¦ Mindkét házastárs életkora az első házasságkötésekor (ismert születési és házasságkötési dátummal).
+Le nombre d’enfants connus des couples mariés pendant la période (couples qui ont au moins un enfant dans ta base). En France : enfants par femme (indicateur de fécondité), qui se compare seulement en gros. ¦ Ajanjaksolla avioituneiden parien tunnettujen lasten määrä (parit, joilla on vähintään yksi lapsi tietokannassasi). Ranskassa: lapsia naista kohden (hedelmällisyysluku), joka on verrattavissa vain suurin piirtein. ¦ Az időszakban házasodott párok ismert gyermekeinek száma (legalább egy gyermekkel az adatbázisodban). Franciaországban: gyermekszám nőnként (termékenységi mutató), csak nagy vonalakban hasonlítható össze.
+baby-boom (1946-1964) ¦ suuret ikäluokat (1946–1964) ¦ baby-boom (1946–1964)
+Mortalité infantile (morts avant 1 an) ¦ Imeväiskuolleisuus (kuolleet ennen 1 vuoden ikää) ¦ Csecsemőhalandóság (1 éves kor előtt elhunytak)
+Sur 1 000 enfants nés pendant la période dont on connaît le décès (ou qui ont vécu), combien sont morts avant 1 an. Les bébés morts manquent souvent dans les arbres : le chiffre de la famille est souvent trop bas. ¦ Kuinka moni 1 000:sta ajanjaksolla syntyneestä lapsesta, joiden kuolema tunnetaan (tai jotka elivät), kuoli ennen 1 vuoden ikää. Kuolleet vauvat puuttuvat usein sukupuista: suvun luku on usein liian pieni. ¦ Az időszakban született, ismert halálozású (vagy életben maradt) 1 000 gyermek közül hány halt meg 1 éves kora előtt. Az elhunyt csecsemők gyakran hiányoznak a családfákból: a család száma gyakran túl alacsony.
+Espérance de vie à la naissance ¦ Elinajanodote syntymähetkellä ¦ Születéskor várható élettartam
+L’âge moyen au décès des personnes nées pendant la période (naissance et décès connus). Les bébés morts manquent souvent dans les arbres : le chiffre de la famille est souvent trop haut. ¦ Ajanjaksolla syntyneiden henkilöiden keskimääräinen kuolinikä (syntymä ja kuolema tiedossa). Kuolleet vauvat puuttuvat usein sukupuista: suvun luku on usein liian suuri. ¦ Az időszakban született személyek átlagos halálozási életkora (ismert születéssel és halállal). Az elhunyt csecsemők gyakran hiányoznak a családfákból: a család száma gyakran túl magas.
+Savoir signer son acte de mariage ¦ Osasi allekirjoittaa vihkiasiakirjansa ¦ Alá tudta írni a házassági okiratát
+La part des époux et des épouses qui ont signé leur acte de mariage (case « a signé » des mariages). En France : mesuré sur les années indiquées ; ta famille : sur les années autour. ¦ Niiden aviomiesten ja vaimojen osuus, jotka allekirjoittivat vihkiasiakirjansa (vihkimisten kohta ”allekirjoitti”). Ranskassa: mitattu ilmoitettuina vuosina; sukusi: niiden ympärillä olevina vuosina. ¦ Azon férjek és feleségek aránya, akik aláírták a házassági okiratukat (a házasságok „aláírta” mezője). Franciaországban: a megadott években mérve; a családodnál: a környező években.
+Part des métiers de la terre (agriculture, forêt) ¦ Maa- ja metsätalouden ammattien osuus ¦ A föld- és erdőművelő foglalkozások aránya
+Parmi les personnes de la famille en âge de travailler à cette date (20 à 60 ans) et dont le métier est reconnu, la part des métiers de la terre et de la forêt (laboureur, cultivateur, journalier agricole, bûcheron…). ¦ Niistä suvun henkilöistä, jotka olivat tuolloin työikäisiä (20–60-vuotiaita) ja joiden ammatti tunnistetaan, maa- ja metsätalouden ammattien osuus (talonpoika, viljelijä, maatyöläinen, metsuri…). ¦ A család azon akkor munkaképes korú (20–60 éves) tagjai közül, akiknek foglalkozása felismerhető, a föld- és erdőművelő foglalkozások aránya (szántóvető, gazdálkodó, mezőgazdasági napszámos, favágó…).
+Ordres de grandeur arrondis, toujours précédés de « ≈ ». Une fourchette quand les travaux donnent des chiffres un peu différents selon l’échantillon ou les années. Un chiffre dont on n’était pas sûr n’a pas été mis : il vaut mieux une case vide qu’un chiffre inventé. Les moyennes d’une famille (quelques dizaines d’actes) ne se comparent qu’en gros à celles de toute la France. ¦ Pyöristettyjä suuruusluokkia, aina merkin ”≈” kanssa. Vaihteluväli, kun tutkimukset antavat hieman eri lukuja otoksen tai vuosien mukaan. Epävarmaa lukua ei ole merkitty: tyhjä kohta on parempi kuin keksitty luku. Suvun keskiarvoja (muutamia kymmeniä asiakirjoja) voi verrata koko Ranskan keskiarvoihin vain suurin piirtein. ¦ Kerekített nagyságrendek, mindig „≈” jellel. Tartomány, ha a kutatások a mintától vagy az évektől függően kissé eltérő számokat adnak. Bizonytalan szám nem került be: jobb egy üres mező, mint egy kitalált szám. Egy család átlagai (néhány tucat okirat) csak nagy vonalakban hasonlíthatók össze egész Franciaországéival.
+nées entre 1846 et 1886 ¦ syntyneet 1846–1886 ¦ 1846 és 1886 között születettek
+{type} publiée par {from} ¦ {type}, julkaisija {from} ¦ {type}, kiadta: {from}
+LCNDA (fichiers livrés avec l’app) ¦ LCNDA (sovelluksen mukana tulevat tiedostot) ¦ LCNDA (az alkalmazással érkező fájlok)
+Événements survenus aux communes depuis 1943 (INSEE) ¦ Kuntien tapahtumat vuodesta 1943 (INSEE) ¦ A településekkel 1943 óta történt események (INSEE)
+Communes depuis 1943 (INSEE) ¦ Kunnat vuodesta 1943 (INSEE) ¦ Települések 1943 óta (INSEE)

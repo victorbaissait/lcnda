@@ -1,0 +1,8 @@
+{"type":"FeatureCollection","features":[
+ {"type":"Feature","geometry":{"type":"Point","coordinates":[1.7716,45.3093]},"properties":{"nom":"Naves","departement":"Corrèze","pays":"France"}},
+ {"type":"Feature","geometry":{"type":"Point","coordinates":[1.7650,45.2672]},"properties":{"name":"Tulle","county":"Corrèze"}},
+ {"type":"Feature","geometry":{"type":"Point","coordinates":[1.7129,45.3700]},"properties":{"name":"Seilhac","county":"Corrèze","country":"France"}},
+ {"type":"Feature","geometry":{"type":"Point","coordinates":[1.7342,45.2955]},"properties":{"name":"Lachaud (village de Naves)","county":"Corrèze"}},
+ {"type":"Feature","geometry":{"type":"LineString","coordinates":[[1.7,45.3],[1.8,45.3]]},"properties":{"name":"Chemin de Naves à Tulle"}},
+ {"type":"Feature","geometry":{"type":"Point","coordinates":[200,95]},"properties":{"name":"Point faux"}}
+]}

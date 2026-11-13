@@ -1,0 +1,1013 @@
+fr ¦ is
+TABLEUR · BASE ¦ TÖFLUREIKNIR · GAGNAGRUNNUR
+⤒ Remplir depuis l’app ¦ ⤒ Fylla út úr appinu
+1 · Ce qu’on prend ¦ 1 · Hvað er tekið
+(comme l’export pour partager) ¦ (eins og útflutningur til að deila)
+2 · Les colonnes ¦ 2 · Dálkarnir
+(glisse ⠿ pour ranger) ¦ (dragðu ⠿ til að raða)
+＋ Une colonne tirée des données ¦ ＋ Dálkur úr gögnunum
+3 · Aperçu ¦ 3 · Forskoðun
+🔗 Tenir à jour ¦ 🔗 Halda uppfærðu
+— les lignes changent quand la base change (à l’ouverture, ou avec ↻). Tes colonnes ajoutées à droite (formules, notes) restent sur la bonne ligne. ¦ — línurnar breytast þegar gagnagrunnurinn breytist (við opnun, eða með ↻). Dálkarnir sem þú bættir við hægra megin (formúlur, athugasemdir) haldast á réttri línu.
+Où : ¦ Hvar:
+à la même place (remplace la plage liée) ¦ á sama stað (kemur í stað tengda sviðsins)
+à partir de A1 dans une nouvelle feuille ¦ frá A1 í nýju blaði
+à partir de {cell} dans cette feuille ¦ frá {cell} í þessu blaði
+⤒ Remplir ¦ ⤒ Fylla út
+Commune ¦ Sveitarfélag
+Pas encore de dépouillement : Listes → 📜 Dépouillements. ¦ Engin skráning enn: Listar → 📜 Skráningar.
+Statistique ¦ Tölfræði
+Hommes et femmes à part ¦ Karlar og konur sér
+Pas encore de liste à toi : Listes → Mes listes. ¦ Enginn eigin listi enn: Listar → Listarnir mínir.
+Hommes ¦ Karlar
+Femmes ¦ Konur
+Inconnu ¦ Óþekkt
+Lignée ¦ Ætt
+Né(e) à ¦ Fædd(ur) í
+Nés à partir de ¦ Fædd frá
+Nés jusqu’à ¦ Fædd til og með
+Nés avant ¦ Fædd fyrir
+Sorte ¦ Tegund
+Chercher… (nom, prénom) ¦ Leita… (eftirnafn, fornafn)
+Chercher… (nom, sorte, lieu) ¦ Leita… (nafn, tegund, staður)
+👤 personne ¦ 👤 einstaklingur
+📍 lieu ¦ 📍 staður
+📅 date d’acte ¦ 📅 dagsetning skjals
+nombre ¦ tala
+Monter ¦ Færa upp
+Descendre ¦ Færa niður
+Retirer la colonne ¦ Fjarlægja dálkinn
+Aucune colonne : ajoute-en une. ¦ Enginn dálkur: bættu einum við.
+Lecture de la base… ¦ Les gagnagrunninn…
+Lecture… ¦ Les…
+({shown} premières lignes sur {n}) ¦ (fyrstu {shown} línur af {n})
+Rien ne correspond : change les filtres. ¦ Ekkert passar: breyttu síunum.
+{n} de côté (personnes vivantes ou fiches confidentielles). ¦ {n} sett til hliðar (lifandi einstaklingar eða trúnaðarspjöld).
+Seules les {n} premières lignes sont prises : précise les filtres. ¦ Aðeins fyrstu {n} línurnar eru teknar: þrengdu síurnar.
+⤒ Remplir {n} ¦ ⤒ Fylla út {n}
+Toutes les colonnes sont déjà là. ¦ Allir dálkarnir eru þegar komnir.
+Une colonne tirée des données ¦ Dálkur úr gögnunum
+Cette feuille n’est pas liée à la base : Données → « ⤒ Remplir depuis l’app… ». ¦ Þetta blað er ekki tengt gagnagrunninum: Gögn → „⤒ Fylla út úr appinu…“.
+Impossible de relire la base : {error} ¦ Ekki tókst að lesa gagnagrunninn aftur: {error}
+🔗 Déjà à jour : rien n’a changé dans la base. ¦ 🔗 Þegar uppfært: ekkert hefur breyst í gagnagrunninum.
+{n} de plus ¦ {n} fleiri
+{n} de moins ¦ {n} færri
+valeurs mises à jour ¦ gildi uppfærð
+🔗 « {name} » relue : {what} ({lost}) ¦ 🔗 „{name}“ lesið aftur: {what} ({lost})
+🔗 « {name} » relue : {what} ¦ 🔗 „{name}“ lesið aftur: {what}
+<b>Relevé de recensement</b> · les colonnes de l’année : ¦ <b>Manntalsskráning</b> · dálkar ársins:
+Année du recensement ¦ Ár manntalsins
+📤 Envoyer vers la base… ¦ 📤 Senda í gagnagrunninn…
+🔗 Tenue à jour : <b>{what}</b> · {n} · relue {when} ¦ 🔗 Haldið uppfærðu: <b>{what}</b> · {n} · lesið {when}
+la base ¦ gagnagrunnurinn
+Relire depuis la base ¦ Lesa aftur úr gagnagrunninum
+↻ Relire ¦ ↻ Lesa aftur
+Changer la source ou les colonnes… ¦ Breyta heimildinni eða dálkunum…
+Envoyer vers la base… ¦ Senda í gagnagrunninn…
+Ne plus tenir à jour (garder les valeurs) ¦ Hætta að halda uppfærðu (halda gildunum)
+« {name} » n’est plus tenue à jour ¦ „{name}“ er ekki lengur haldið uppfærðu
+Relevé : colonnes de {year} ¦ Skráning: dálkar ársins {year}
+Mode consultation : rien ne peut être envoyé vers la base. ¦ Skoðunarhamur: ekkert er hægt að senda í gagnagrunninn.
+Choisis le tableau à envoyer (sa ligne de titres et ses lignes), puis recommence. ¦ Veldu töfluna sem á að senda (fyrirsagnalínuna og línurnar), og reyndu svo aftur.
+📤 Envoyer vers la base — {name}, lignes {from} à {to} ¦ 📤 Senda í gagnagrunninn — {name}, línur {from} til {to}
+1. Les colonnes ¦ 1. Dálkarnir
+2. Voilà ce qui va entrer ¦ 2. Þetta fer inn
+3. Envoyer ¦ 3. Senda
+Voir ce qui va entrer ¦ Sjá hvað fer inn
+Ce que ça crée : ¦ Það sem þetta býr til:
+Colonne ¦ Dálkur
+Exemple ¦ Dæmi
+Va dans ¦ Fer í
+(sans titre) ¦ (án titils)
+Champ pour la colonne {col} ¦ Reitur fyrir dálk {col}
+Colonnes : {list} ¦ Dálkar: {list}
+aucune pour l’instant ¦ enginn í bili
+Déjà dans la base ¦ Þegar í gagnagrunninum
+Problème ¦ Vandamál
+Laissée de côté ¦ Sett til hliðar
+📤 Créer {n} ¦ 📤 Búa til {n}
+📤 Rien de nouveau ¦ 📤 Ekkert nýtt
+📤 Créer {n} et en relier {m} ¦ 📤 Búa til {n} og tengja {m}
+📤 Relier {m} ¦ 📤 Tengja {m}
+📤 Envoyer ¦ 📤 Senda
+Choisis au moins une colonne à envoyer (le nom, par exemple). ¦ Veldu að minnsta kosti einn dálk til að senda (til dæmis nafnið).
+Choisis au moins une colonne. ¦ Veldu að minnsta kosti einn dálk.
+Donne l’année du recensement. ¦ Gefðu upp ár manntalsins.
+Il faut une colonne pour le nom (ou « Nom et prénom »). ¦ Það þarf dálk fyrir nafnið (eða „Nafn og fornafn“).
+Il faut une colonne pour le nom. ¦ Það þarf dálk fyrir nafnið.
+Choisis la colonne qui dit la sorte d’événement (Baptême, Décès…). ¦ Veldu dálkinn sem segir tegund atburðar (Skírn, Andlát…).
+Il manque la sorte d’événement. ¦ Tegund atburðar vantar.
+Ces lignes sont vides. ¦ Þessar línur eru tómar.
+Je compare avec ta base… ¦ Ber saman við gagnagrunninn þinn…
+Comparaison… ¦ Samanburður…
+Choisir la fiche de la ligne {row} ¦ Veldu spjaldið fyrir línu {row}
+choisis ▾ ¦ veldu ▾
+Relier à {name} ({meta}) ¦ Tengja við {name} ({meta})
+Laisser de côté ¦ Setja til hliðar
+Des lignes ressemblent à plusieurs fiches : choisis la bonne (sinon elles sont laissées de côté). ¦ Sumar línur líkjast mörgum spjöldum: veldu það rétta (annars eru þær settar til hliðar).
+Ligne ¦ Lína
+Ce qui va se passer ¦ Það sem gerist
+Impossible d’envoyer : {error} ¦ Ekki tókst að senda: {error}
+contient « {text} » : compté comme {n} ¦ inniheldur „{text}“: talið sem {n}
+contient l’erreur « {text} » : laissée vide ¦ inniheldur villuna „{text}“: skilið eftir autt
+« {text} » n’est pas un nombre : laissé vide ¦ „{text}“ er ekki tala: skilið eftir autt
+à trouver ¦ á eftir að finna
+L’éditeur de diagrammes n’est pas chargé. ¦ Ritill skýringarmynda er ekki hlaðinn.
+L’éditeur de graphiques n’est pas chargé. ¦ Ritill grafa er ekki hlaðinn.
+Graphique « {name} » ajouté à Mes graphiques (Graphiques, tableau de bord…). ¦ Grafinu „{name}“ bætt við Gröfin mín (Gröf, stjórnborð…).
+Le navigateur refuse de copier ici : sélectionne la plage et fais {key}. ¦ Vafrinn neitar að afrita hér: veldu sviðið og ýttu á {key}.
+Copié : dans un tableau (Enquêtes → 🧩 Tableaux), colle-le ({key}) : il devient un objet ▦ Tableur, formules comprises. ¦ Afritað: í töflu (Athuganir → 🧩 Töflur), límdu það ({key}): það verður ▦ Töflureiknis-hlutur, með formúlum.
+Copié : dans la page d’un recueil, clique une case du tableau et colle ({key}). ¦ Afritað: á síðu safnrits, smelltu á hólf í töflunni og límdu ({key}).
+La présentation n’est pas chargée. ¦ Kynningin er ekki hlaðin.
+… et {n} ¦ … og {n}
+Colonnes attendues : {list} ¦ Dálkar sem búist er við: {list}
+(une ou plusieurs) ¦ (einn eða fleiri)
+(facultatif) ¦ (valfrjálst)
+Les données de « {name} » ¦ Gögn „{name}“
+l’outil ¦ tólið
+{name} (données) ¦ {name} (gögn)
+Renvoyer les données là d’où elles viennent ¦ Senda gögnin aftur þangað sem þau komu frá
+Formules, tri, coller depuis Excel… « Fichier → Enregistrer une copie… » garde aussi ce classeur dans le Tableur. ¦ Formúlur, röðun, líma úr Excel… „Skrá → Vista afrit…“ geymir líka þessa vinnubók í Töflureikninum.
+Rien à ouvrir : la liste est vide. ¦ Ekkert að opna: listinn er tómur.
+🧾 Tableur ¦ 🧾 Töflureiknir
+ouvrir dans le tableur ¦ opna í töflureikninum
+🧾 Ouvrir dans le tableur ¦ 🧾 Opna í töflureikninum
+La feuille est vide : écris ou colle un tableau, puis choisis-le. ¦ Blaðið er tómt: skrifaðu eða límdu töflu, og veldu hana svo.
+TABLEUR · PRÉPARER POUR… ¦ TÖFLUREIKNIR · UNDIRBÚA FYRIR…
+🎯 Préparer pour… ({range}) ¦ 🎯 Undirbúa fyrir… ({range})
+Le tableur sait ce que chaque endroit de l’app attend : choisis où vont ces données. Il vérifie les colonnes de la plage <b>{range}</b> et les range comme il faut. ¦ Töflureiknirinn veit hverju hver hluti appsins býst við: veldu hvert þessi gögn fara. Hann athugar dálka sviðsins <b>{range}</b> og raðar þeim eins og þarf.
+Dessin ¦ Teikning
+▦ Un tableau ¦ ▦ Tafla
+Il faut une colonne de chiffres ¦ Það þarf dálk með tölum
+📊 Un graphique ¦ 📊 Graf
+Dans la plage ¦ Í sviðinu
+, une ou plusieurs ¦ , einn eða fleiri
+, facultatif ¦ , valfrjálst
+Voir la cellule ¦ Sjá hólfið
+… et {n} à vérifier. ¦ … og {n} til að athuga.
+Il manque une colonne : ajoute-la dans la plage, ou choisis une autre plage. ¦ Það vantar dálk: bættu honum við sviðið, eða veldu annað svið.
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) ¦ Halda tengingunni: skýringarmyndin fylgir töflureikninum (uppfærð þegar sviðið breytist)
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) — le classeur sera enregistré dans le Tableur ¦ Halda tengingunni: skýringarmyndin fylgir töflureikninum (uppfærð þegar sviðið breytist) — vinnubókin verður vistuð í Töflureikninum
+← Autre endroit ¦ ← Annar staður
+La première ligne donne les titres ¦ Fyrsta línan gefur fyrirsagnirnar
+Pas d’aperçu. ¦ Engin forskoðun.
+🎤 Créer la présentation ¦ 🎤 Búa til kynninguna
+Corrige la cellule, puis rouvre « 🎯 Préparer pour… ». ¦ Lagaðu hólfið, og opnaðu svo „🎯 Undirbúa fyrir…“ aftur.
+Ces données reviennent dans leur outil : le diagramme est fait d’une copie (pas de lien). ¦ Þessi gögn fara aftur í sitt tól: skýringarmyndin er gerð úr afriti (engin tenging).
+Choisis une plage avec des nombres (par exemple : Décennie, Hommes, Femmes). ¦ Veldu svið með tölum (til dæmis: Áratugur, Karlar, Konur).
+Tous les types de diagrammes… ¦ Allar tegundir skýringarmynda…
+Conseillés pour {range} ¦ Mælt með fyrir {range}
+🔗 Données : « {name} » ! {range} ¦ 🔗 Gögn: „{name}“ ! {range}
+Classeur ¦ Vinnubók
+(feuille « {name} ») ¦ (blaðið „{name}“)
+tenu à jour ¦ haldið uppfærðu
+Les figer ¦ Frysta þær
+⚠️ Classeur introuvable (supprimé ?) : le dessin garde les derniers chiffres lus. ¦ ⚠️ Vinnubók finnst ekki (eytt?): teikningin heldur síðustu tölunum sem lesnar voru.
+TABLEUR ¦ TÖFLUREIKNIR
+Nom du classeur… ¦ Heiti vinnubókar…
+Plage illisible : écris par exemple A1:C12. ¦ Ólæsilegt svið: skrifaðu til dæmis A1:C12.
+Feuille ¦ Blað
+Plage ¦ Svið
+Copier une fois (les chiffres ne bougent plus) ¦ Afrita einu sinni (tölurnar breytast ekki lengur)
+Garder le lien : le diagramme suit le classeur (tenu à jour) ¦ Halda tengingunni: skýringarmyndin fylgir vinnubókinni (haldið uppfærðu)
+Lecture du classeur… ¦ Les vinnubókina…
+Choisis un classeur. ¦ Veldu vinnubók.
+Écris une plage, par exemple A1:C12. ¦ Skrifaðu svið, til dæmis A1:C12.
+Écris le résultat voulu dans la première case de la colonne (par exemple « Jean D. »), puis relance ✨ Remplissage instantané. ¦ Skrifaðu niðurstöðuna sem þú vilt í fyrsta hólf dálksins (til dæmis „Jean D.“), og keyrðu svo ✨ Leifturfyllingu aftur.
+Je ne trouve pas de règle qui marche pour tous les exemples : écris-en un de plus, ou un plus simple. ¦ Ég finn enga reglu sem virkar fyrir öll dæmin: skrifaðu eitt í viðbót, eða einfaldara.
+Rien à remplir : la colonne est déjà pleine. ¦ Ekkert að fylla: dálkurinn er þegar fullur.
+{what} de {col} ¦ {what} úr {col}
+{what} n°{n} de {col} ¦ {what} nr. {n} úr {col}
+{what} n°{n} depuis la fin de {col} ¦ {what} nr. {n} frá enda {col}
+✨ {n} (règle : {rule}). ↶ pour annuler. ¦ ✨ {n} (regla: {rule}). ↶ til að afturkalla.
+Choisis un tableau avec une ligne de titres et des lignes de données. ¦ Veldu töflu með fyrirsagnalínu og gagnalínum.
+Colonne {col} ¦ Dálkur {col}
+DONNÉES ¦ GÖGN
+Σ Sous-totaux ¦ Σ Millisamtölur
+Créer les sous-totaux ¦ Búa til millisamtölurnar
+D’après <b>{range}</b>. Une nouvelle feuille : les lignes rangées par groupe, un total sous chaque groupe (formules), puis le total général. « ⊟ Plan » (menu Données) replie le détail. ¦ Út frá <b>{range}</b>. Nýtt blað: línunum raðað í hópa, samtala undir hverjum hópi (formúlur), svo heildarsamtalan. „⊟ Útlína“ (Gögn-valmyndin) fellir saman smáatriðin.
+À chaque changement de ¦ Við hverja breytingu á
+Calcul ¦ Útreikningur
+Sur les colonnes ¦ Í dálkunum
+Coche au moins une colonne à calculer. ¦ Hakaðu við að minnsta kosti einn dálk til að reikna.
+Σ {n}. « ⊟ Plan » (menu Données) replie le détail. ¦ Σ {n}. „⊟ Útlína“ (Gögn-valmyndin) fellir saman smáatriðin.
+Cette feuille n’a pas de sous-totaux : Données → Σ Sous-totaux… d’abord. ¦ Þetta blað hefur engar millisamtölur: Gögn → Σ Millisamtölur… fyrst.
+⊟ Détail replié : seuls les totaux restent. ¦ ⊟ Smáatriði felld saman: aðeins samtölurnar eru eftir.
+⊞ Détail déplié. ¦ ⊞ Smáatriði opnuð.
+🎯 Valeur cible ¦ 🎯 Markleit
+L’app essaie des valeurs dans « la case à changer » jusqu’à ce que la formule donne le résultat voulu. Ex. : à quel âge s’est-il marié pour que la différence d’âge soit 7 ans ? ¦ Appið prófar gildi í „hólfinu sem á að breyta“ þar til formúlan gefur niðurstöðuna sem þú vilt. Dæmi: á hvaða aldri gifti hann sig til að aldursmunurinn yrði 7 ár?
+La formule de la case ¦ Formúla hólfsins
+Doit donner ¦ Á að gefa
+En changeant la case ¦ Með því að breyta hólfinu
+Écris une adresse de case (ex. C5, B2). ¦ Skrifaðu vistfang hólfs (t.d. C5, B2).
+Écris le résultat voulu. ¦ Skrifaðu niðurstöðuna sem þú vilt.
+La première case doit contenir une formule. ¦ Fyrsta hólfið verður að innihalda formúlu.
+Pas de valeur trouvée : la formule ne dépend peut-être pas de cette case, ou ne peut pas atteindre ce résultat. ¦ Ekkert gildi fannst: formúlan er kannski ekki háð þessu hólfi, eða nær ekki þessari niðurstöðu.
+🎯 {cell} = {value} : la formule donne {target}. ↶ pour annuler. ¦ 🎯 {cell} = {value}: formúlan gefur {target}. ↶ til að afturkalla.
+INSERTION ¦ SETJA INN
+📈 Mini-graphique ¦ 📈 Smágraf
+Poser ¦ Setja inn
+Un petit graphique dans la case, qui suit les chiffres. Plusieurs lignes choisies : un graphique par ligne (la plage descend avec elles). ¦ Lítið graf í hólfinu sem fylgir tölunum. Margar línur valdar: eitt graf á hverja línu (sviðið færist niður með þeim).
+Les nombres (plage de la 1re ligne) ¦ Tölurnar (svið 1. línu)
+Gagné / perdu ¦ Unnið / tapað
+Couleur ¦ Litur
+Écris une plage, par exemple B2:F2. ¦ Skrifaðu svið, til dæmis B2:F2.
+🧮 Solveur ¦ 🧮 Leysir
+Résoudre ¦ Leysa
+Comme la valeur cible, mais en changeant plusieurs cases à la fois, avec des conditions. Ex. : répartir un héritage entre trois branches pour que chacune ait au moins 1 000 € et que l’écart soit le plus petit possible. ¦ Eins og markleit, en breytir mörgum hólfum í einu, með skilyrðum. Dæmi: skipta arfi milli þriggja greina svo að hver fái að minnsta kosti 1 000 € og munurinn verði sem minnstur.
+La formule (case objectif) ¦ Formúlan (markhólf)
+Doit être ¦ Á að vera
+la plus grande possible ¦ eins stór og hægt er
+la plus petite possible ¦ eins lítil og hægt er
+égale à… ¦ jöfn…
+Valeur (si « égale à ») ¦ Gildi (ef „jöfn“)
+En changeant les cases ¦ Með því að breyta hólfunum
+B2:B4 ou B2;C3 ¦ B2:B4 eða B2;C3
+Conditions (une par ligne : {examples}) ¦ Skilyrði (eitt í hverri línu: {examples})
+Nombres entiers seulement ¦ Aðeins heilar tölur
+La case objectif doit contenir une formule (ex. D5). ¦ Markhólfið verður að innihalda formúlu (t.d. D5).
+Trente cases à changer au plus. ¦ Í mesta lagi þrjátíu hólf til að breyta.
+Écris les cases à changer (ex. B2:B4). ¦ Skrifaðu hólfin sem á að breyta (t.d. B2:B4).
+Condition illisible : « {text} » (ex. B2 >= 0). ¦ Ólæsilegt skilyrði: „{text}“ (t.d. B2 >= 0).
+Écris la valeur voulue. ¦ Skrifaðu gildið sem þú vilt.
+Pas de solution qui respecte toutes les conditions (vérifie-les, ou change le départ). ¦ Engin lausn uppfyllir öll skilyrðin (athugaðu þau, eða breyttu upphafinu).
+🧮 Trouvé : {cell} = {value} ({n}). ↶ pour annuler. ¦ 🧮 Fundið: {cell} = {value} ({n}). ↶ til að afturkalla.
+📋 Tableau de scénarios ¦ 📋 Sviðsmyndatafla
+Et si cette case valait 20, 25, 30… ? Le tableau montre ce que donnent les formules pour chaque valeur. Il est posé à partir de la case choisie ({cell}) ; rien d’autre ne change. ¦ Hvað ef þetta hólf væri 20, 25, 30…? Taflan sýnir hvað formúlurnar gefa fyrir hvert gildi. Hún er sett frá valda hólfinu ({cell}); ekkert annað breytist.
+La case qui change ¦ Hólfið sem breytist
+Ses valeurs (séparées par « ; », ou une plage) ¦ Gildi þess (aðskilin með „;“, eða svið)
+20;25;30 ou A10:A15 ¦ 20;25;30 eða A10:A15
+Les formules à suivre ¦ Formúlurnar sem á að fylgjast með
+Écris la case qui change (ex. B2). ¦ Skrifaðu hólfið sem breytist (t.d. B2).
+Écris au moins une formule (ex. C5). ¦ Skrifaðu að minnsta kosti eina formúlu (t.d. C5).
+Écris des valeurs (500 au plus). ¦ Skrifaðu gildi (í mesta lagi 500).
+📋 {n} (valeurs fixes : refais-le si les données changent). ¦ 📋 {n} (föst gildi: gerðu þetta aftur ef gögnin breytast).
+Rien n’a été enregistré. ¦ Ekkert var tekið upp.
+⏺ Nommer l’action ¦ ⏺ Nefna aðgerðina
+Mon action ¦ Aðgerðin mín
+Garder ¦ Geyma
+⏺ Action « {name} » gardée : Données → ▶ Actions enregistrées. ¦ ⏺ Aðgerðin „{name}“ geymd: Gögn → ▶ Uppteknar aðgerðir.
+⏺ Enregistrement : fais tes manipulations (menus, boutons, formats), puis Données → ⏹ Arrêter l’enregistrement. ¦ ⏺ Upptaka: gerðu það sem þú vilt (valmyndir, hnappar, snið), svo Gögn → ⏹ Stöðva upptöku.
+Aucune action enregistrée : Données → ⏺ Enregistrer une action. ¦ Engin upptekin aðgerð: Gögn → ⏺ Taka upp aðgerð.
+▶ Actions enregistrées ¦ ▶ Uppteknar aðgerðir
+Elles se refont sur la sélection du moment. ¦ Þær eru endurteknar á núverandi vali.
+▶ Refaire ¦ ▶ Endurtaka
+▶ « {name} » refaite. ¦ ▶ „{name}“ endurtekin.
+Colonne {n} ¦ Dálkur {n}
+{what} de « {col} » ¦ {what} úr „{col}“
+Lignes ¦ Línur
+Total ¦ Samtals
+{title} · par « {rows} » et « {cols} » — d’après {src} ¦ {title} · eftir „{rows}“ og „{cols}“ — út frá {src}
+{title} · par « {rows} » — d’après {src} ¦ {title} · eftir „{rows}“ — út frá {src}
+Choisis une plage avec une ligne de titres et des lignes de données (par exemple : Nom, Commune, Année, Âge). ¦ Veldu svið með fyrirsagnalínu og gagnalínum (til dæmis: Nafn, Sveitarfélag, Ár, Aldur).
+🔀 Tableau croisé dynamique ¦ 🔀 Veltitafla
+Créer le tableau croisé ¦ Búa til veltitöfluna
+D’après <b>{range}</b> ({n}). Le résultat va dans une nouvelle feuille ; « ↻ Actualiser le tableau croisé » (menu Données) le refait si les données changent. ¦ Út frá <b>{range}</b> ({n}). Niðurstaðan fer í nýtt blað; „↻ Uppfæra veltitöfluna“ (Gögn-valmyndin) gerir hana aftur ef gögnin breytast.
+En lignes ¦ Í línum
+En colonnes (facultatif) ¦ Í dálkum (valfrjálst)
+— rien — ¦ — ekkert —
+Sur la colonne ¦ Í dálkinum
+— (compter les lignes) — ¦ — (telja línurnar) —
+Totaux ¦ Samtölur
+Aperçu : {rows} × {cols} ¦ Forskoðun: {rows} × {cols}
+Tableau croisé créé : {rows} × {cols}. Données → « ↻ Actualiser le tableau croisé » pour le refaire. ¦ Veltitafla búin til: {rows} × {cols}. Gögn → „↻ Uppfæra veltitöfluna“ til að gera hana aftur.
+Cette feuille n’est pas un tableau croisé : va sur sa feuille « TCD … ». ¦ Þetta blað er ekki veltitafla: farðu á blaðið hennar „TCD …“.
+La feuille des données n’existe plus. ¦ Gagnablaðið er ekki lengur til.
+Tableau croisé actualisé ({rows} × {cols}). ¦ Veltitafla uppfærð ({rows} × {cols}).
+Graphique vivant ¦ Lifandi graf
+Type de graphique ¦ Tegund grafs
+En faire un diagramme lié à la plage ¦ Gera úr því skýringarmynd tengda sviðinu
+Choisis des cases avec des nombres (et leurs noms à gauche ou en haut) : le graphique se dessine ici. ¦ Veldu hólf með tölum (og heitum þeirra vinstra megin eða efst): grafið teiknast hér.
+Plage {range} · suit la sélection ¦ Svið {range} · fylgir valinu
+Le moteur du tableur n’est pas chargé. ¦ Vél töflureiknisins er ekki hlaðin.
+Mon classeur ¦ Vinnubókin mín
+Rien à rétablir. ¦ Ekkert að endurgera.
+d’autres changements ont suivi : utilise ↶ ({key}) ¦ aðrar breytingar komu á eftir: notaðu ↶ ({key})
+Barre d’outils · {group} ¦ Tækjastika · {group}
+Barre d’outils ¦ Tækjastika
+Police et gras ¦ Leturgerð og feitletrun
+Police (E5) ¦ Leturgerð (E5)
+Police ¦ Leturgerð
+Gras ¦ Feitletrað
+Italique ¦ Skáletrað
+Souligné ¦ Undirstrikað
+Renvoi à la ligne ¦ Línuskipting
+Fusionner / séparer ¦ Sameina / aðskilja
+Aligner à gauche ¦ Jafna til vinstri
+Centrer ¦ Miðja
+Aligner à droite ¦ Jafna til hægri
+Couleurs (C2) ¦ Litir (C2)
+Couleur du texte ¦ Litur texta
+Format de cellule ¦ Hólfsnið
+Format de la cellule ¦ Snið hólfsins
+Une décimale de moins ¦ Einum aukastaf færra
+Une décimale de plus ¦ Einum aukastaf fleira
+Bordures ¦ Jaðrar
+Bordures : tout ¦ Jaðrar: allir
+Bordures : contour ¦ Jaðrar: útlína
+Bordure du bas ¦ Neðri jaðar
+Sans bordure ¦ Enginn jaðar
+Graphique ¦ Graf
+Un diagramme avec les chiffres de la sélection : les types conseillés pour cette plage ¦ Skýringarmynd með tölum valsins: tegundirnar sem mælt er með fyrir þetta svið
+Choisir une fonction ¦ Velja fall
+Fonction ¦ Fall
+XLSX, ODS, CSV, TSV, JSON, PDF, impression ¦ XLSX, ODS, CSV, TSV, JSON, PDF, prentun
+✓ Enregistrer et revenir ¦ ✓ Vista og fara til baka
+Plein écran (⛶) ¦ Allur skjárinn (⛶)
+Données d’un autre outil ¦ Gögn úr öðru tóli
+Adresse (tape D12 ou un nom pour y aller) ¦ Vistfang (skrifaðu D12 eða heiti til að fara þangað)
+Tape une adresse (D12, B2:C9) ou un nom pour y aller ¦ Skrifaðu vistfang (D12, B2:C9) eða heiti til að fara þangað
+Contenu ou formule de la cellule ¦ Innihald eða formúla hólfsins
+Feuille de calcul ¦ Vinnublað
+Feuille de calcul : tape pour écrire dans la cellule choisie ¦ Vinnublað: skrifaðu til að skrifa í valda hólfið
+Écrire dans la cellule ¦ Skrifa í hólfið
+Panneau de droite ¦ Hægri spjaldið
+Feuilles ¦ Blöð
+Clique pour choisir ce qu’on y voit (somme, moyenne…) ¦ Smelltu til að velja hvað sést hér (summa, meðaltal…)
+Enregistrer une copie dans le Tableur… ¦ Vista afrit í Töflureikninum…
+Enregistrer une copie… ¦ Vista afrit…
+Enregistrer comme modèle… ¦ Vista sem sniðmát…
+Exporter (XLSX, ODS, CSV, PDF…)… ¦ Flytja út (XLSX, ODS, CSV, PDF…)…
+Feuille « {name} » ¦ Blaðið „{name}“
+Pas encore relié à une fiche ¦ Ekki enn tengt við spjald
+Tire pour recopier ou continuer une suite ¦ Dragðu til að afrita eða halda röð áfram
+« {text} » n’est pas dans la liste : {list} ¦ „{text}“ er ekki á listanum: {list}
+Il faut un nombre d’au moins {min} et au plus {max}. ¦ Það þarf tölu, að minnsta kosti {min} og í mesta lagi {max}.
+Il faut un nombre d’au moins {min}. ¦ Það þarf tölu, að minnsta kosti {min}.
+Il faut un nombre et au plus {max}. ¦ Það þarf tölu, í mesta lagi {max}.
+Il faut un nombre. ¦ Það þarf tölu.
+Je ne comprends pas cette date ({why}). ¦ Ég skil ekki þessa dagsetningu ({why}).
+exemples : 7 mai 1925, vers 1784, an II ¦ dæmi: 7 mai 1925, vers 1784, an II
+Tab = compléter ¦ Tab = ljúka við
+✓ Compris comme une date d’acte : <b>{date}</b> (approximative : les calculs montreront ≈) ¦ ✓ Skilið sem dagsetning skjals: <b>{date}</b> (áætluð: útreikningar sýna ≈)
+✓ Compris comme une date d’acte : <b>{date}</b> ¦ ✓ Skilið sem dagsetning skjals: <b>{date}</b>
+Texte ou nombre. Commence par <b>=</b> pour calculer. ¦ Texti eða tala. Byrjaðu á <b>=</b> til að reikna.
+ƒ Formule : clique ou glisse sur des cellules pour les mettre, ou tape le nom d’une fonction (en français ou en anglais). <kbd>F4</kbd> : $A$1. ¦ ƒ Formúla: smelltu eða dragðu yfir hólf til að setja þau inn, eða skrifaðu heiti falls (á frönsku eða ensku). <kbd>F4</kbd>: $A$1.
+Corriger en {name} ¦ Leiðrétta í {name}
+Résultat approché : une des dates est approximative (« vers », « avant », « an … » sans jour). ¦ Áætluð niðurstaða: ein dagsetninganna er áætluð („vers“, „avant“, „an …“ án dags).
+« {text} » : ni une adresse (D12, B2:C9), ni un nom du classeur. ¦ „{text}“: hvorki vistfang (D12, B2:C9) né heiti í vinnubókinni.
+Pas de feuille « {name} ». ¦ Ekkert blað „{name}“.
+Utilise {key} dans la grille (le navigateur ne laisse pas un bouton écrire dans le presse-papiers). ¦ Notaðu {key} í töflunni (vafrinn leyfir ekki hnappi að skrifa á klippiborðið).
+En pixels (6 à 72) : ¦ Í dílum (6 til 72):
+Lignes masquées (Format → Tout remontrer) ¦ Faldar línur (Snið → Sýna allt aftur)
+Colonnes masquées (Format → Tout remontrer) ¦ Faldir dálkar (Snið → Sýna allt aftur)
+Trier A → Z (sur la colonne choisie) ¦ Raða A → Ö (eftir valda dálkinum)
+Trier Z → A ¦ Raða Ö → A
+Trier sur plusieurs colonnes… ¦ Raða eftir mörgum dálkum…
+Espaces en trop retirés. ¦ Auka bil fjarlægð.
+Rien à retirer. ¦ Ekkert að fjarlægja.
+Police des cellules ¦ Leturgerð hólfa
+Cette police a un nom que le tableur ne sait pas garder. ¦ Þessi leturgerð hefur heiti sem töflureiknirinn getur ekki geymt.
+Une taille entre 6 et 72 px (« {value} » ne va pas). ¦ Stærð milli 6 og 72 px („{value}“ gengur ekki).
+Une taille entre 6 et 72 px. ¦ Stærð milli 6 og 72 px.
+Choisis d’abord plusieurs cases à fusionner. ¦ Veldu fyrst mörg hólf til að sameina.
+Cases fusionnées : {n} ¦ Hólf sameinuð: {n}
+Largeur de colonne ¦ Breidd dálks
+Hauteur de ligne ¦ Hæð línu
+En pixels (16 à 1200) : ¦ Í dílum (16 til 1200):
+En pixels (12 à 600) : ¦ Í dílum (12 til 600):
+Un nom commence par une lettre, sans espace (ex. Total, Âges_1836). ¦ Heiti byrjar á bókstaf, án bils (t.d. Total, Âges_1836).
+Nom « {name} » = {ref} : tape =SOMME({name}) dans une formule. ¦ Heitið „{name}“ = {ref}: skrifaðu =SOMME({name}) í formúlu.
+Nom pour la plage ¦ Heiti fyrir sviðið
+Un nom pour {ref} (pour écrire =SOMME(Total) au lieu de =SOMME(D2:D40)) : ¦ Heiti fyrir {ref} (til að skrifa =SOMME(Total) í stað =SOMME(D2:D40)):
+💬 Note sur {cell} ¦ 💬 Athugasemd við {cell}
+La note s’affiche au survol de la case (un petit coin orange). Vide = pas de note. ¦ Athugasemdin birtist þegar bendillinn er yfir hólfinu (lítið appelsínugult horn). Autt = engin athugasemd.
+⌨️ Raccourcis du tableur ¦ ⌨️ Flýtilyklar töflureiknisins
+Raccourcis indisponibles. ¦ Flýtilyklar ekki tiltækir.
+⚙️ Réglages du tableur ¦ ⚙️ Stillingar töflureiknisins
+Après la touche Entrée, aller ¦ Eftir Enter-lykilinn, fara
+vers le bas ¦ niður
+vers la droite (saisie de relevés en ligne) ¦ til hægri (skráning línu fyrir línu)
+Séparateur des fichiers CSV ¦ Skiltákn CSV-skráa
+point-virgule « ; » (Excel en français) ¦ semíkomma „;“ (Excel á frönsku)
+virgule « , » ¦ komma „,“
+tabulation ¦ dálkalykill (tab)
+Largeur des colonnes d’une feuille neuve ¦ Breidd dálka í nýju blaði
+Dans la barre du bas, pour les cellules choisies ¦ Í neðri stikunni, fyrir valin hólf
+Réglages du tableur ¦ Stillingar töflureiknisins
+Trop de lignes ou de colonnes d’un coup. ¦ Of margar línur eða dálkar í einu.
+Trié {dir} sur la colonne {col} (la 1re ligne, ce sont les titres). ¦ Raðað {dir} eftir dálki {col} (fyrsta línan eru fyrirsagnirnar).
+Trié {dir} sur la colonne {col}. ¦ Raðað {dir} eftir dálki {col}.
+A → Z (croissant) ¦ A → Ö (hækkandi)
+Z → A (décroissant) ¦ Ö → A (lækkandi)
+Plage {range} · les dates d’actes (« vers 1784 », « an II ») se rangent à leur date. ¦ Svið {range} · dagsetningar skjala („vers 1784“, „an II“) raðast eftir dagsetningu sinni.
+La première ligne, ce sont les titres ¦ Fyrsta línan eru fyrirsagnirnar
+Puis par ¦ Síðan eftir
+Choisis un tableau avec une ligne de titres et des lignes en dessous. ¦ Veldu töflu með fyrirsagnalínu og línum fyrir neðan.
+(vide) ¦ (autt)
+Chercher dans le tableau… (nom, métier) ¦ Leita í töflunni… (nafn, starf)
+{n} sur {total} ¦ {n} af {total}
+Supprimer les doublons ¦ Eyða tvítekningum
+Plage {range} · la 1re ligne, ce sont les titres. La première ligne de chaque groupe reste. ¦ Svið {range} · fyrsta línan eru fyrirsagnirnar. Fyrsta lína hvers hóps er eftir.
+Plage {range}. La première ligne de chaque groupe reste. ¦ Svið {range}. Fyrsta lína hvers hóps er eftir.
+Compare les colonnes : ¦ Bera saman dálkana:
+{n} en double (lignes {rows}). ¦ {n} tvítekið (línur {rows}).
+{n} en double (ligne {rows}). ¦ {n} tvítekið (lína {rows}).
+Aucune ligne en double. ¦ Engin tvítekin lína.
+Supprimer {n} ¦ Eyða {n}
+Coche au moins une colonne. ¦ Hakaðu við að minnsta kosti einn dálk.
+Choisis des cases de texte dans une colonne (ex. « MARTIN Jean, 34 ans, laboureur »). ¦ Veldu textahólf í dálki (t.d. „MARTIN Jean, 34 ans, laboureur“).
+Convertir le texte en colonnes ¦ Breyta texta í dálka
+Convertir ¦ Breyta
+Couper à : ¦ Skipta við:
+« 34 ans » devient 34 ¦ „34 ans“ verður 34
+Le nom en capitales devient une colonne à part (« MARTIN Jean » → MARTIN | Jean) ¦ Eftirnafnið í hástöfum verður sér dálkur („MARTIN Jean“ → MARTIN | Jean)
+Les morceaux vont dans la colonne {col} et les suivantes (ce qui s’y trouve est remplacé ; ↶ pour revenir). ¦ Bútarnir fara í dálk {col} og þá næstu (það sem þar er kemur í stað; ↶ til að fara til baka).
+Validation des données ¦ Gagnaprófun
+Pour {range} : ce qu’on peut écrire dans ces cases. ¦ Fyrir {range}: hvað má skrifa í þessi hólf.
+Autoriser ¦ Leyfa
+Une liste de choix (menu ▾) ¦ Valkostalisti (valmynd ▾)
+👤 Une personne de la base (menu de choix) ¦ 👤 Einstaklingur úr gagnagrunninum (valmynd)
+📍 Un lieu de la base (menu de choix) ¦ 📍 Staður úr gagnagrunninum (valmynd)
+Un nombre entre… ¦ Tala á milli…
+Une date d’acte (vers 1784, an II…) ¦ Dagsetning skjals (vers 1784, an II…)
+Les choix (un par ligne) ¦ Valkostirnir (einn í hverri línu)
+Entre ¦ Á milli
+Garder aussi un texte libre (sans fiche, ou hors de la liste) ¦ Leyfa líka frjálsan texta (án spjalds, eða utan listans)
+Écris au moins un choix. ¦ Skrifaðu að minnsta kosti einn valkost.
+FORMAT ¦ SNIÐ
+Mise en forme conditionnelle ¦ Skilyrt snið
+Ajouter la règle ¦ Bæta reglunni við
+Une couleur quand la valeur le demande : l’erreur ou la valeur étrange saute aux yeux. ¦ Litur þegar gildið kallar á það: villan eða skrýtna gildið stingur í augun.
+Prêtes à l’emploi : ¦ Tilbúið til notkunar:
+« âge > 100 ans » ¦ „aldur > 100 ár“
+« date impossible » ¦ „ómöguleg dagsetning“
+« doublons » ¦ „tvítekningar“
+« barres » ¦ „súlur“
+Si la valeur ¦ Ef gildið
+alors ¦ þá
+en gras ¦ feitletrað
+Une plage comme D2:D40. ¦ Svið eins og D2:D40.
+Écris un nombre. ¦ Skrifaðu tölu.
+ÉDITION ¦ BREYTA
+🔍 Rechercher et remplacer ¦ 🔍 Leita og skipta út
+Remplacer tout ¦ Skipta öllu út
+Remplacer par ¦ Skipta út fyrir
+Dans toutes les feuilles ¦ Í öllum blöðum
+Respecter les capitales ¦ Gera greinarmun á há- og lágstöfum
+Chercher le suivant ¦ Finna næsta
+Trouvé en {cell} ¦ Fannst í {cell}
+Écris ce qu’il faut chercher. ¦ Skrifaðu það sem á að leita að.
+Aucune fonction ne correspond. ¦ Ekkert fall passar.
+ƒ Choisir une fonction ¦ ƒ Velja fall
+Chercher… (âge, somme, recherche) ¦ Leita… (aldur, summa, uppfletting)
+Le menu de choix n’est pas chargé. ¦ Valmyndin er ekki hlaðin.
+📍 Un lieu pour {cell} ¦ 📍 Staður fyrir {cell}
+👤 Une personne pour {cell} ¦ 👤 Einstaklingur fyrir {cell}
+📍 Lieu de la base ¦ 📍 Staður úr gagnagrunninum
+auto ¦ sjálfvirkt
+Décimales ¦ Aukastafir
+✓ « {text} » est comprise (≈) ¦ ✓ „{text}“ er skilið (≈)
+✓ « {text} » est comprise ¦ ✓ „{text}“ er skilið
+Noir ¦ Svartur
+Contour ¦ Útlína
+Retirer la règle ¦ Fjarlægja regluna
+Aucune règle sur cette feuille. ¦ Engin regla á þessu blaði.
+＋ Ajouter une règle… ¦ ＋ Bæta við reglu…
+Une liste : {list} ¦ Listi: {list}
+👤 Une personne de la base ¦ 👤 Einstaklingur úr gagnagrunninum
+📍 Un lieu de la base ¦ 📍 Staður úr gagnagrunninum
+Un nombre ¦ Tala
+Une date d’acte ¦ Dagsetning skjals
+Garder le texte ¦ Halda textanum
+Pas de validation ici. ¦ Engin gagnaprófun hér.
+Validation des données… ¦ Gagnaprófun…
+Enregistre d’abord le classeur (💾), puis ouvre la fiche. ¦ Vistaðu fyrst vinnubókina (💾), og opnaðu svo spjaldið.
+{name} : lieu n° {id} de ta base. ¦ {name}: staður nr. {id} í gagnagrunninum þínum.
+Règle « {range} » retirée ¦ Reglan „{range}“ fjarlægð
+Police (E5) : {font} ¦ Leturgerð (E5): {font}
+celle de départ ¦ sú upprunalega
+Panneau de droite : montrer ¦ Hægri spjaldið: sýna
+Panneau de droite : cacher ¦ Hægri spjaldið: fela
+Double-clic : renommer · clic droit : plus d’actions ¦ Tvísmella: endurnefna · hægrismella: fleiri aðgerðir
+Ajouter une feuille ¦ Bæta við blaði
+Feuille {n} ¦ Blað {n}
+Renommer la feuille ¦ Endurnefna blaðið
+Un classeur garde au moins une feuille. ¦ Vinnubók heldur að minnsta kosti einu blaði.
+Feuille « {name} » supprimée ¦ Blaðinu „{name}“ eytt
+Couleur de l’onglet… ¦ Litur flipans…
+Déplacer à gauche ¦ Færa til vinstri
+Déplacer à droite ¦ Færa til hægri
+Somme <b>{v}</b> ¦ Summa <b>{v}</b>
+Moyenne <b>{v}</b> ¦ Meðaltal <b>{v}</b>
+Nb <b>{v}</b> ¦ Fjöldi <b>{v}</b>
+Min <b>{v}</b> ¦ Lágm. <b>{v}</b>
+Max <b>{v}</b> ¦ Hám. <b>{v}</b>
+Dans la barre d’état ¦ Í stöðustikunni
+Utilise {key} : le navigateur ne laisse pas un menu écrire dans le presse-papiers. ¦ Notaðu {key}: vafrinn leyfir ekki valmynd að skrifa á klippiborðið.
+Sélection trop grande pour le presse-papiers. ¦ Valið er of stórt fyrir klippiborðið.
+Coupé : choisis où coller, puis {key}. ¦ Klippt: veldu hvar á að líma, svo {key}.
+Utilise {key} dans la grille pour coller. ¦ Notaðu {key} í töflunni til að líma.
+Trop de cellules à coller. ¦ Of mörg hólf til að líma.
+{n} (avec le gras et les couleurs). ¦ {n} (með feitletrun og litum).
+Série {n} ¦ Röð {n}
+Colonnes groupées ¦ Flokkaðar súlur
+Barres horizontales ¦ Láréttar súlur
+TSV (tabulations) ¦ TSV (dálkalyklar)
+⤒ Importer un tableau ¦ ⤒ Flytja inn töflu
+Séparateur deviné : {sep} · Encodage : {enc} ¦ Ágiskað skiltákn: {sep} · Kóðun: {enc}
+point-virgule (;) ¦ semíkomma (;)
+virgule (,) ¦ komma (,)
+✓ Accents corrects : « {list} ». ¦ ✓ Kommur og sérstafir réttir: „{list}“.
+<b>{rows}</b> dans {sheets} ¦ <b>{rows}</b> í {sheets}
+CSV et TSV : la feuille ouverte. Les autres : tout le classeur. Une cellule qui commence par « = » est protégée dans un CSV (pas de formule glissée). ¦ CSV og TSV: opna blaðið. Hin: öll vinnubókin. Hólf sem byrjar á „=“ er varið í CSV (engin formúla laumast inn).
+tout tableur ¦ hvaða töflureiknir sem er
+tabulations ¦ dálkalyklar
+données ¦ gögn
+à lire ¦ til lestrar
+💾 Fichier de l’outil ¦ 💾 Skrá tólsins
+Exporté : {name} ¦ Flutt út: {name}
+(feuille vide) ¦ (autt blað)
+Toutes les feuilles ¦ Öll blöð
+Quadrillage ¦ Hnitanet
+Rangé dans Listes → Outils de modification → 🧾 Tableur. ¦ Geymt í Listar → Breytingatól → 🧾 Töflureiknir.
+Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles). ¦ Sniðmátið „{name}“ vistað (Byrja á sniðmáti → Sniðmátin mín).
+Copie « {name} » enregistrée. ¦ Afritið „{name}“ vistað.
+Ce classeur ¦ Þessi vinnubók
+Impossible d’enregistrer : {error} ¦ Ekki tókst að vista: {error}
+Enregistrer comme modèle ¦ Vista sem sniðmát
+Enregistrer une copie ¦ Vista afrit
+Le nom du modèle (les données restent : vide-les avant si tu veux un modèle vierge) : ¦ Heiti sniðmátsins (gögnin haldast: tæmdu þau fyrst ef þú vilt autt sniðmát):
+Le nom de la copie : ¦ Heiti afritsins:
+{name} (copie) ¦ {name} (afrit)
+Les changements faits depuis le dernier enregistrement seront perdus. ¦ Breytingar sem gerðar voru frá síðustu vistun tapast.
+📋 Partir d’un modèle ¦ 📋 Byrja á sniðmáti
+Mes modèles ¦ Sniðmátin mín
+Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Ekkert eigið sniðmát enn: í vinnubók, Skrá → „Vista sem sniðmát…“.
+séparateur « {sep} » ¦ skiltákn „{sep}“
+Classeur importé ¦ Innflutt vinnubók
+Classeur « {name} » créé ({rows}) ¦ Vinnubókin „{name}“ búin til ({rows})
+classeur ¦ vinnubók
+＋ Nouveau classeur ¦ ＋ Ný vinnubók
+Relevé de recensement, registre paroissial, budget de la recherche, suivi des courriers… ¦ Manntalsskráning, kirkjubók, rannsóknarkostnaður, eftirfylgni bréfa…
+Tu divises par zéro : {ref} est vide ou vaut 0. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Þú deilir með núlli: {ref} er autt eða jafnt 0. Ráð: =SI.ERREUR(…;"") skilur hólfið eftir autt.
+Tu divises par zéro : {why}. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Þú deilir með núlli: {why}. Ráð: =SI.ERREUR(…;"") skilur hólfið eftir autt.
+Tu divises par zéro. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Þú deilir með núlli. Ráð: =SI.ERREUR(…;"") skilur hólfið eftir autt.
+Je ne connais pas « {name} ». Voulais-tu dire {sugg} ? ¦ Ég þekki ekki „{name}“. Áttirðu við {sugg}?
+Je ne connais pas « {name} ». Tape les premières lettres : la liste des fonctions s’ouvre. ¦ Ég þekki ekki „{name}“. Skrifaðu fyrstu stafina: listi fallanna opnast.
+Un nom inconnu dans la formule. ¦ Óþekkt heiti í formúlunni.
+« {text} » n’est pas un nombre (cellule {cell}) : on ne peut pas faire de calcul avec. ¦ „{text}“ er ekki tala (hólf {cell}): það er ekki hægt að reikna með því.
+« {text} » n’est pas un nombre : on ne peut pas faire de calcul avec. ¦ „{text}“ er ekki tala: það er ekki hægt að reikna með því.
+Une valeur ne convient pas ¦ Gildi hentar ekki
+{what} (cellule {cell}). ¦ {what} (hólf {cell}).
+La formule montre quelque chose qui n’existe pas : {what}. ¦ Formúlan vísar á eitthvað sem er ekki til: {what}.
+La formule montre une cellule qui a été supprimée. ¦ Formúlan vísar á hólf sem hefur verið eytt.
+Valeur introuvable ¦ Gildi finnst ekki
+La recherche ¦ Uppflettingin
+{fn} n’a pas trouvé « {what} » dans {where}. ¦ {fn} fann ekki „{what}“ í {where}.
+{fn} n’a pas trouvé « {what} ». ¦ {fn} fann ekki „{what}“.
+{path} : la formule tourne en rond. ¦ {path}: formúlan fer í hringi.
+La formule a besoin d’elle-même : elle tourne en rond. ¦ Formúlan þarf á sjálfri sér að halda: hún fer í hringi.
+« {text} » : {why}. ¦ „{text}“: {why}.
+cette date ¦ þessa dagsetningu
+Je ne comprends pas {what} (« {text} »). Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Ég skil ekki {what} („{text}“). Dæmi: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas {what}. Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Ég skil ekki {what}. Dæmi: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas la formule près de « {near} » : {why}. ¦ Ég skil ekki formúluna nálægt „{near}“: {why}.
+Je ne comprends pas la formule : {why}. ¦ Ég skil ekki formúluna: {why}.
+Je ne comprends pas la formule près de « {near} » : vérifie les parenthèses, les guillemets et les « ; ». ¦ Ég skil ekki formúluna nálægt „{near}“: athugaðu svigana, gæsalappirnar og „;“.
+Je ne comprends pas la formule : vérifie les parenthèses, les guillemets et les « ; ». ¦ Ég skil ekki formúluna: athugaðu svigana, gæsalappirnar og „;“.
+Nombre impossible ¦ Ómöguleg tala
+Le résultat a besoin de {size} vers le bas et la droite, mais {cell} n’est pas vide : vide-la pour voir tout le résultat. ¦ Niðurstaðan þarf {size} niður og til hægri, en {cell} er ekki autt: tæmdu það til að sjá alla niðurstöðuna.
+plusieurs cases ¦ mörg hólf
+une case ¦ eitt hólf
+Trop gros pour être calculé : {why}. ¦ Of stórt til að reikna: {why}.
+réduis la plage ¦ minnkaðu sviðið
+Erreur dans la formule. ¦ Villa í formúlunni.
+Astuce : =SI.ERREUR(A4/B4;"") ¦ Ráð: =SI.ERREUR(A4/B4;"")
+fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un document de bureau n’utilise pas ¦ skrá hafnað: hún inniheldur XML-yfirlýsingar (DOCTYPE eða ENTITY) sem skrifstofuskjal notar ekki
+fichier XML abîmé ¦ skemmd XML-skrá
+fichier refusé : trop d’éléments ¦ skrá hafnað: of margar einingar
+fichier refusé : XML trop imbriqué ¦ skrá hafnað: XML of djúpt hreiðrað
+fichier trop gros (plus de {n} Mo) ¦ skráin er of stór (yfir {n} MB)
+ce n’est pas un fichier zip valide ¦ þetta er ekki gild zip-skrá
+fichier refusé : trop d’éléments dans le zip ¦ skrá hafnað: of mörg atriði í zip-skránni
+fichier chiffré : ouvre-le d’abord dans son tableur et enregistre-le sans mot de passe ¦ dulkóðuð skrá: opnaðu hana fyrst í sínum töflureikni og vistaðu hana án lykilorðs
+fichier zip abîmé ¦ skemmd zip-skrá
+fichier refusé : trop gros une fois décompressé ¦ skrá hafnað: of stór þegar hún er afþjöppuð
+fichier refusé : il se décompresse en beaucoup trop gros (bombe zip) ¦ skrá hafnað: hún afþjappast í allt of stóra skrá (zip-sprengja)
+ce navigateur ne sait pas ouvrir les fichiers zip (mets-le à jour) ¦ þessi vafri getur ekki opnað zip-skrár (uppfærðu hann)
+compression inconnue dans le fichier ¦ óþekkt þjöppun í skránni
+ce n’est pas un fichier Excel (.xlsx) : xl/workbook.xml manque ¦ þetta er ekki Excel-skrá (.xlsx): xl/workbook.xml vantar
+fichier refusé : trop de feuilles ¦ skrá hafnað: of mörg blöð
+fichier refusé : trop de cellules ¦ skrá hafnað: of mörg hólf
+ce n’est pas un fichier LibreOffice (.ods) : content.xml manque ¦ þetta er ekki LibreOffice-skrá (.ods): content.xml vantar
+ce fichier n’est pas un JSON valide ¦ þessi skrá er ekki gilt JSON
+je ne trouve pas de tableau dans ce JSON (il faut une liste de lignes ou d’objets) ¦ ég finn enga töflu í þessu JSON (það þarf lista af línum eða hlutum)
+les anciens fichiers Excel (.xls) ne sont pas lus : ouvre-le dans Excel ou LibreOffice et enregistre-le en .xlsx ¦ gamlar Excel-skrár (.xls) eru ekki lesnar: opnaðu hana í Excel eða LibreOffice og vistaðu hana sem .xlsx
+ce fichier compressé n’est ni un .xlsx ni un .ods ¦ þessi þjappaða skrá er hvorki .xlsx né .ods
+Nombre 0,00 ¦ Tala 0,00
+Nombre entier ¦ Heil tala
+Monnaie (€) ¦ Gjaldmiðill (€)
+Pourcentage ¦ Hundraðshluti
+Date courte ¦ Stutt dagsetning
+Date d’acte ¦ Dagsetning skjals
+Texte ¦ Texti
+Relevé de recensement ¦ Manntalsskráning
+colonnes de l’année · foyers · « Né(e) vers » calculé ¦ dálkar ársins · heimili · „Fædd(ur) um“ reiknað
+Registre paroissial ¦ Kirkjubók
+baptêmes, mariages, sépultures ¦ skírnir, hjónavígslur, greftranir
+Budget de la recherche ¦ Rannsóknarkostnaður
+actes, déplacements, abonnements ¦ skjöl, ferðir, áskriftir
+Suivi des courriers ¦ Eftirfylgni bréfa
+envoyé, relancé, réponse ¦ sent, ítrekað, svar
+Arbre en tableau ¦ Ættartré sem tafla
+Sosa, génération, côté, âge ¦ Sosa, kynslóð, hlið, aldur
+objets, prix, total en livres ¦ munir, verð, samtals í livres
+Registre matricule ¦ Herskráning
+classe, signalement, campagnes ¦ árgangur, persónulýsing, herferðir
+📋 Partir d’un modèle… ¦ 📋 Byrja á sniðmáti…
+⤒ Importer un tableau… ¦ ⤒ Flytja inn töflu…
+⤓ Exporter… ¦ ⤓ Flytja út…
+🖨 Imprimer… ¦ 🖨 Prenta…
+⚙️ Réglages du tableur… ¦ ⚙️ Stillingar töflureiknisins…
+Insertion ¦ Setja inn
+Coller les valeurs seulement ¦ Líma aðeins gildin
+Effacer le contenu ¦ Hreinsa innihald
+Effacer tout (contenu et mise en forme) ¦ Hreinsa allt (innihald og snið)
+Recopier vers le bas ¦ Fylla niður
+Recopier vers la droite ¦ Fylla til hægri
+🔍 Rechercher et remplacer… ¦ 🔍 Leita og skipta út…
+Ligne au-dessus ¦ Lína fyrir ofan
+Ligne en dessous ¦ Lína fyrir neðan
+＋ Nouvelle feuille ¦ ＋ Nýtt blað
+ƒ Fonction… ¦ ƒ Fall…
+Σ Somme automatique ¦ Σ Sjálfvirk summa
+📅 Date du jour ¦ 📅 Dagsetning dagsins
+Nom pour la plage… ¦ Heiti fyrir sviðið…
+💬 Note sur la cellule… ¦ 💬 Athugasemd við hólfið…
+📊 Graphique depuis la sélection ¦ 📊 Graf úr valinu
+Barré ¦ Yfirstrikað
+Aa Police… ¦ Aa Leturgerð…
+Taille du texte… ¦ Stærð texta…
+↵ Renvoi à la ligne ¦ ↵ Línuskipting
+⊞ Fusionner / séparer ¦ ⊞ Sameina / aðskilja
+▦ Bordures : tout ¦ ▦ Jaðrar: allir
+▭ Bordures : contour ¦ ▭ Jaðrar: útlína
+▁ Bordure du bas ¦ ▁ Neðri jaðar
+Largeur de colonne… ¦ Breidd dálks…
+Hauteur de ligne… ¦ Hæð línu…
+Ajuster la largeur au contenu ¦ Laga breidd að innihaldi
+Masquer les lignes ¦ Fela línur
+Masquer les colonnes ¦ Fela dálka
+Tout remontrer ¦ Sýna allt aftur
+Mise en forme conditionnelle… ¦ Skilyrt snið…
+Une ligne sur deux ¦ Önnur hver lína
+Effacer la mise en forme ¦ Hreinsa snið
+↕ Trier A → Z ¦ ↕ Raða A → Ö
+↕ Trier Z → A ¦ ↕ Raða Ö → A
+⚲ Filtrer ¦ ⚲ Sía
+Supprimer les doublons… ¦ Eyða tvítekningum…
+Convertir le texte en colonnes… ¦ Breyta texta í dálka…
+Retirer les espaces en trop ¦ Fjarlægja auka bil
+Figer la 1re ligne ¦ Frysta 1. línu
+Figer la 1re colonne ¦ Frysta 1. dálk
+Figer jusqu’à la cellule choisie ¦ Frysta að valda hólfinu
+Libérer les volets ¦ Losa frystingu
+Montrer les formules ¦ Sýna formúlur
+⤢ Ajuster à la fenêtre ¦ ⤢ Laga að glugganum
+100 % (taille réelle) ¦ 100 % (raunstærð)
+⌨️ Raccourcis du tableur… ¦ ⌨️ Flýtilyklar töflureiknisins…
+Rechercher et remplacer ¦ Leita og skipta út
+Filtrer (barre de recherche et filtres au-dessus) ¦ Sía (leitarstika og síur fyrir ofan)
+Trier la plage ¦ Raða sviðinu
+Somme, moyenne, nombre… ¦ Summa, meðaltal, fjöldi…
+Une personne de la base dans la cellule ¦ Einstaklingur úr gagnagrunninum í hólfið
+Un lieu de la base dans la cellule ¦ Staður úr gagnagrunninum í hólfið
+Note sur la cellule ¦ Athugasemd við hólfið
+Graphique avec les chiffres de la sélection ¦ Graf með tölum valsins
+Tape pour écrire · = pour calculer · double-clic pour modifier · clic droit pour les actions · glisse le petit carré pour recopier ¦ Skrifaðu til að slá inn · = til að reikna · tvísmelltu til að breyta · hægrismelltu fyrir aðgerðir · dragðu litla ferninginn til að afrita
+Entrée valide · Tab : case à droite · Échap annule · pendant une formule, clique ou glisse sur des cellules pour les y mettre ¦ Enter staðfestir · Tab: hólfið til hægri · Esc hættir við · í formúlu, smelltu eða dragðu yfir hólf til að setja þau inn
+Σ Somme ¦ Σ Summa
+Nombre ¦ Fjöldi
+Minimum ¦ Lágmark
+Maximum ¦ Hámark
+Somme ¦ Summa
+Panneau de droite ouvert ¦ Hægra spjaldið opið
+, virgule ¦ , komma
+; point-virgule ¦ ; semíkomma
+espace ¦ bil
+Autre… ¦ Annað…
+plus grande que ¦ stærra en
+plus petite que ¦ minna en
+au moins ¦ að minnsta kosti
+au plus ¦ í mesta lagi
+égale à ¦ jafnt og
+différente de ¦ ólíkt
+entre ¦ á milli
+contient le texte ¦ inniheldur textann
+est vide ¦ er autt
+n’est pas vide ¦ er ekki autt
+est en double ¦ er tvítekið
+est une date impossible ¦ er ómöguleg dagsetning
+barres dans la cellule ¦ súlur í hólfinu
+fond jaune ¦ gulur bakgrunnur
+fond rouge ¦ rauður bakgrunnur
+fond vert ¦ grænn bakgrunnur
+fond bleu ¦ blár bakgrunnur
+fond orange ¦ appelsínugulur bakgrunnur
+fond violet ¦ fjólublár bakgrunnur
+règle|plus grande que ¦ stærra en
+règle|plus petite que ¦ minna en
+règle|au moins ¦ að minnsta kosti
+règle|au plus ¦ í mesta lagi
+règle|égale à ¦ jafnt og
+règle|différente de ¦ ólíkt
+règle|entre ¦ á milli
+règle|contient ¦ inniheldur
+règle|vide ¦ autt
+règle|pas vide ¦ ekki autt
+règle|en double ¦ tvítekið
+règle|date impossible ¦ ómöguleg dagsetning
+règle|barres ¦ súlur
+Cellule ¦ Hólf
+Nombre et date ¦ Tala og dagsetning
+Couleur et bordures ¦ Litur og jaðrar
+Validation ¦ Prófun
+Adresse ¦ Vistfang
+Valeur ¦ Gildi
+Formule ¦ Formúla
+Autorise ¦ Leyfir
+Sinon ¦ Annars
+Insérer une ligne au-dessus ¦ Setja inn línu fyrir ofan
+Insérer une ligne en dessous ¦ Setja inn línu fyrir neðan
+Insérer une colonne à gauche ¦ Setja inn dálk til vinstri
+Insérer une colonne à droite ¦ Setja inn dálk til hægri
+Trier A → Z ¦ Raða A → Ö
+Retirer le filtre ¦ Fjarlægja síuna
+Note… ¦ Athugasemd…
+Ajuster la largeur ¦ Laga breiddina
+Supprimer les lignes ¦ Eyða línum
+Supprimer les colonnes ¦ Eyða dálkum
+Windows (vieil Excel) ¦ Windows (gamalt Excel)
+👤 Des fiches ¦ 👤 Spjöld
+🏠 Un recensement (foyers) ¦ 🏠 Manntal (heimili)
+📅 Des événements ¦ 📅 Atburðir
+— ne pas envoyer — ¦ — ekki senda —
+Nom et prénom ¦ Nafn og fornafn
+Sexe ¦ Kyn
+Naissance (date ou année) ¦ Fæðing (dagsetning eða ár)
+Décès (date) ¦ Andlát (dagsetning)
+N° de foyer (ménage) ¦ Nr. heimilis
+N° de maison ¦ Nr. húss
+Rue, quartier ¦ Gata, hverfi
+Patron, employeur ¦ Húsbóndi, vinnuveitandi
+Situation (marié, veuf…) ¦ Hjúskaparstaða (gift(ur), ekkja/ekkill…)
+Observations, notes ¦ Athugasemdir, minnispunktar
+Sorte d’événement (acte) ¦ Tegund atburðar (skjal)
+Date de l’événement ¦ Dagsetning atburðar
+Lieu de l’événement ¦ Staður atburðar
+colonnes de l’année (1836 → 1936) · foyers · 📤 vers la base ¦ dálkar ársins (1836 → 1936) · heimili · 📤 í gagnagrunninn
+⤒ Remplir depuis l’app… ¦ ⤒ Fylla út úr appinu…
+↻ Relire depuis la base ¦ ↻ Lesa aftur úr gagnagrunninum
+catégorie + séries ¦ flokkur + raðir
+📊 Créer le diagramme ¦ 📊 Búa til skýringarmyndina
+Un graphique ¦ Graf
+📈 Créer le graphique ¦ 📈 Búa til grafið
+objet ▦ Tableur ¦ ▦ Töflureiknis-hlutur
+📋 Copier pour un tableau ¦ 📋 Afrita fyrir töflu
+Un recueil ¦ Safnrit
+tableur d’une page ¦ töflureiknir á síðu
+📋 Copier pour un recueil ¦ 📋 Afrita fyrir safnrit
+tableau ou graphique ¦ tafla eða graf
+Ce que le diagramme attend ¦ Það sem skýringarmyndin býst við
+Ce que le graphique attend ¦ Það sem grafið býst við
+Ce que le tableau attend ¦ Það sem taflan býst við
+Ce que le recueil attend ¦ Það sem safnritið býst við
+Pyramide des âges ¦ Aldurspíramídi
+Courbes ¦ Línurit
+Radar ¦ Ratsjárrit
+Barres groupées ¦ Flokkaðar súlur
+Camembert (une seule série) ¦ Kökurit (aðeins ein röð)
+Rectangles proportionnels ¦ Hlutfallsrétthyrningar
+🎯 Préparer pour… (diagramme, graphique, présentation…) ¦ 🎯 Undirbúa fyrir… (skýringarmynd, graf, kynningu…)
+initiale ¦ upphafsstafur
+MAJUSCULES ¦ HÁSTAFIR
+minuscules ¦ lágstafir
+Capitale ¦ Stór upphafsstafur
+Plus petit ¦ Minnst
+Plus grand ¦ Stærst
+✨ Remplissage instantané ¦ ✨ Leifturfylling
+Σ Sous-totaux… ¦ Σ Millisamtölur…
+⊟ Plan : replier / déplier le détail ¦ ⊟ Útlína: fella saman / opna smáatriðin
+🎯 Valeur cible… ¦ 🎯 Markleit…
+🧮 Solveur… ¦ 🧮 Leysir…
+📋 Tableau de scénarios (et si…)… ¦ 📋 Sviðsmyndatafla (hvað ef…)…
+⏺ Enregistrer une action / ⏹ arrêter ¦ ⏺ Taka upp aðgerð / ⏹ stöðva
+▶ Actions enregistrées… ¦ ▶ Uppteknar aðgerðir…
+📈 Mini-graphique… ¦ 📈 Smágraf…
+Nombre de lignes ¦ Fjöldi lína
+Nombre de valeurs différentes ¦ Fjöldi ólíkra gilda
+En % de la ligne ¦ Sem % af línunni
+En % de la colonne ¦ Sem % af dálkinum
+En % du tout ¦ Sem % af heildinni
+🔀 Tableau croisé dynamique… ¦ 🔀 Veltitafla…
+↻ Actualiser le tableau croisé ¦ ↻ Uppfæra veltitöfluna
+📊 Graphique vivant (suit la sélection) ¦ 📊 Lifandi graf (fylgir valinu)
+📊 Graphique vivant ¦ 📊 Lifandi graf
+Vide ¦ Autt
+⛔ Formule en erreur ¦ ⛔ Formúla með villu
+ƒ Formule ¦ ƒ Formúla
+VRAI / FAUX ¦ VRAI / FAUX (satt / ósatt)
+⚠️ Date impossible ¦ ⚠️ Ómöguleg dagsetning
+📅 Date d’acte ¦ 📅 Dagsetning skjals
+Conditions ¦ Skilyrði
+Logique ¦ Rökföll
+Conjoint ¦ Maki
+Parents ¦ Foreldrar
+N° de fiche ¦ Nr. spjalds
+Date ¦ Dagsetning
+Personne(s) ¦ Einstaklingur/-ar
+Description ¦ Lýsing
+N° d’événement ¦ Nr. atburðar
+Foyer ¦ Heimili
+Employeur ¦ Vinnuveitandi
+Situation ¦ Staða
+Rue ¦ Gata
+N° ¦ Nr.
+Adresse entière ¦ Fullt heimilisfang
+Deuxième prénom ¦ Millinafn
+Titre ¦ Titill
+Suffixe ¦ Viðskeyti
+FamilySearch ¦ FamilySearch
+Description physique ¦ Útlitslýsing
+Teint ¦ Húðlitur
+Origine ¦ Uppruni
+Vivant ? ¦ Á lífi?
+Modifié le ¦ Breytt þann
+Cause ¦ Orsök
+Autorité ¦ Yfirvald
+Confiance ¦ Traust
+Date convertie ¦ Umreiknuð dagsetning
+Autre date ¦ Önnur dagsetning
+Informations en plus ¦ Viðbótarupplýsingar
+Calendrier ¦ Dagatal
+Relevés de dépouillement ¦ Skráningar
+Noms de famille ¦ Eftirnöfn
+Âges au décès ¦ Aldur við andlát
+Décès par siècle ¦ Andlát eftir öldum
+Communes de naissance ¦ Fæðingarsveitarfélög
+Départements de naissance ¦ Fæðingarumdæmi (départements)
+Naissances par mois ¦ Fæðingar eftir mánuðum
+Personnes par génération ¦ Einstaklingar eftir kynslóðum
+Additionne des nombres ou des plages. ¦ Leggur saman tölur eða svið.
+La moyenne des nombres. ¦ Meðaltal talnanna.
+Le plus petit nombre. ¦ Minnsta talan.
+Le plus grand nombre. ¦ Stærsta talan.
+Compte les cellules qui contiennent un nombre. ¦ Telur hólfin sem innihalda tölu.
+Compte les cellules qui ne sont pas vides. ¦ Telur hólfin sem eru ekki auð.
+Compte les cellules vides. ¦ Telur auðu hólfin.
+Multiplie des nombres. ¦ Margfaldar tölur.
+Arrondit au plus proche. ¦ Námundar að næstu tölu.
+Arrondit vers zéro. ¦ Námundar í átt að núlli.
+Arrondit en s’éloignant de zéro. ¦ Námundar frá núlli.
+La partie entière (arrondi vers le bas). ¦ Heiltöluhlutinn (námundað niður).
+Le nombre sans son signe. ¦ Talan án formerkis.
+Le reste d’une division. ¦ Afgangur deilingar.
+Un nombre élevé à une puissance. ¦ Tala hafin í veldi.
+La racine carrée. ¦ Kvaðratrótin.
+La valeur du milieu. ¦ Miðgildið.
+L’écart type (sur un échantillon). ¦ Staðalfrávikið (úrtaks).
+La place d’un nombre dans une liste (1 = le plus grand ; ordre 1 = le plus petit d’abord). ¦ Sæti tölu í lista (1 = stærst; röð 1 = minnst fyrst).
+La k-ième plus grande valeur. ¦ K-ta stærsta gildið.
+La k-ième plus petite valeur. ¦ K-ta minnsta gildið.
+Une valeur si le test est vrai, une autre sinon. ¦ Eitt gildi ef prófið er satt, annað annars.
+La valeur du premier test vrai. ¦ Gildi fyrsta sanna prófsins.
+La valeur, ou autre chose s’il y a une erreur. ¦ Gildið, eða eitthvað annað ef villa kemur upp.
+La valeur, ou autre chose si elle n’est pas trouvée (#N/A). ¦ Gildið, eða eitthvað annað ef það finnst ekki (#N/A).
+VRAI si tous les tests sont vrais. ¦ VRAI (satt) ef öll prófin eru sönn.
+VRAI si au moins un test est vrai. ¦ VRAI (satt) ef að minnsta kosti eitt próf er satt.
+La valeur VRAI (comme le mot VRAI). ¦ Gildið VRAI (satt), eins og orðið VRAI.
+La valeur FAUX (comme le mot FAUX). ¦ Gildið FAUX (ósatt), eins og orðið FAUX.
+Inverse un test. ¦ Snýr prófi við.
+Compte les cellules qui remplissent une condition (">60", "laboureur", "lab*"). ¦ Telur hólfin sem uppfylla skilyrði (">60", "laboureur", "lab*").
+Compte les lignes qui remplissent toutes les conditions. ¦ Telur línurnar sem uppfylla öll skilyrðin.
+Additionne les cellules qui remplissent une condition. ¦ Leggur saman hólfin sem uppfylla skilyrði.
+Additionne les lignes qui remplissent toutes les conditions. ¦ Leggur saman línurnar sem uppfylla öll skilyrðin.
+La moyenne des cellules qui remplissent une condition. ¦ Meðaltal hólfanna sem uppfylla skilyrði.
+Cherche dans la 1re colonne d’un tableau et rend la valeur d’une autre colonne. ¦ Leitar í 1. dálki töflu og skilar gildi úr öðrum dálki.
+Cherche dans la 1re ligne d’un tableau. ¦ Leitar í 1. línu töflu.
+Cherche une valeur et rend celle d’à côté. ¦ Leitar að gildi og skilar því sem er við hliðina.
+La valeur à une ligne et une colonne de la plage. ¦ Gildið í línu og dálki sviðsins.
+La position d’une valeur dans une plage (type 0 = exactement). ¦ Staða gildis í sviði (gerð 0 = nákvæmlega).
+La n-ième valeur de la liste. ¦ N-ta gildi listans.
+Les valeurs sans doublons (déborde sur les cases du dessous). ¦ Gildin án tvítekninga (flæðir niður í hólfin fyrir neðan).
+La plage triée (ordre 1 = croissant, -1 = décroissant). ¦ Sviðið raðað (röð 1 = hækkandi, -1 = lækkandi).
+Les lignes de la plage qui remplissent la condition (ex. =FILTRE(A2:C9; C2:C9>30)). ¦ Línur sviðsins sem uppfylla skilyrðið (t.d. =FILTRE(A2:C9; C2:C9>30)).
+Met des textes bout à bout. ¦ Skeytir textum saman.
+Met des textes bout à bout avec un séparateur. ¦ Skeytir textum saman með skiltákni.
+Les premiers caractères. ¦ Fyrstu stafirnir.
+Les derniers caractères. ¦ Síðustu stafirnir.
+Un morceau au milieu d’un texte. ¦ Bútur úr miðjum texta.
+Le nombre de caractères. ¦ Fjöldi stafa.
+En capitales. ¦ Í hástöfum.
+En minuscules. ¦ Í lágstöfum.
+Une capitale au début de chaque mot. ¦ Stór stafur í byrjun hvers orðs.
+Retire les espaces en trop. ¦ Fjarlægir auka bil.
+Remplace un morceau de texte. ¦ Skiptir út textabút.
+La position d’un texte dans un autre (sans tenir compte des capitales). ¦ Staða texta í öðrum texta (óháð há- og lágstöfum).
+Un nombre ou une date écrits avec un format ("0,00", "0 %", "jj/mm/aaaa"). ¦ Tala eða dagsetning skrifuð með sniði ("0,00", "0 %", "jj/mm/aaaa").
+Le nombre écrit dans un texte. ¦ Talan sem skrifuð er í texta.
+Fabrique une date. ¦ Býr til dagsetningu.
+L’année d’une date (date d’acte comprise). ¦ Ár dagsetningar (dagsetningar skjala skildar).
+Le mois d’une date (1 à 12). ¦ Mánuður dagsetningar (1 til 12).
+Le jour du mois. ¦ Dagur mánaðarins.
+Le jour de la semaine (type 1 : 1 = dimanche ; type 2 : 1 = lundi … 7 = dimanche ; type 3 : 0 = lundi). ¦ Vikudagurinn (gerð 1: 1 = sunnudagur; gerð 2: 1 = mánudagur … 7 = sunnudagur; gerð 3: 0 = mánudagur).
+La date du jour. ¦ Dagsetning dagsins.
+La date et l’heure. ¦ Dagsetning og tími.
+L’écart entre deux dates, en années, mois ou jours (« AM » : mois en plus des années, « MJ » : jours en plus des mois, « AJ » : jours en plus des années ; « Y », « D », « YM », « MD », « YD » d’Excel compris). ¦ Bilið milli tveggja dagsetninga, í árum, mánuðum eða dögum („AM“: mánuðir umfram árin, „MJ“: dagar umfram mánuðina, „AJ“: dagar umfram árin; „Y“, „D“, „YM“, „MD“, „YD“ úr Excel skilin).
+L’âge entre deux dates d’acte (« vers 1784 », « an II » compris) ; « ≈ » si une date est approximative. Unité : « ans », « mois » ou « jours ». ¦ Aldurinn milli tveggja dagsetninga skjala („vers 1784“, „an II“ skilið); „≈“ ef dagsetning er áætluð. Eining: „ans“, „mois“ eða „jours“.
+L’année trouvée dans un texte d’acte, même républicain (« baptisé le 3 frimaire an XII » → 1803). ¦ Árið sem finnst í texta skjals, jafnvel í lýðveldistímatalinu („baptisé le 3 frimaire an XII“ → 1803).
+La date comprise, écrite proprement (comme « ✓ Compris : » des champs de date). ¦ Skilda dagsetningin, snyrtilega skrifuð (eins og „✓ Skilið:“ í dagsetningarreitum).
+« jour », « mois », « année », « vers », « avant », « après » ou « entre ». ¦ „jour“, „mois“, „année“, „vers“, „avant“, „après“ eða „entre“.
+La date dans le calendrier républicain. ¦ Dagsetningin í franska lýðveldistímatalinu.
+La génération d’un numéro Sosa (1 = toi, 2 et 3 = tes parents…). ¦ Kynslóð Sosa-númers (1 = þú, 2 og 3 = foreldrar þínir…).
+Le numéro Sosa du père (2 × n). ¦ Sosa-númer föðurins (2 × n).
+Le numéro Sosa de la mère (2 × n + 1). ¦ Sosa-númer móðurinnar (2 × n + 1).
+« paternel » ou « maternel » (le côté du Sosa 1). ¦ „paternel“ (föðurætt) eða „maternel“ (móðurætt) (hlið Sosa 1).
+Un petit graphique dans la case : "courbe", "barres" ou "gagné" (au-dessus ou au-dessous de zéro). ¦ Lítið graf í hólfinu: "courbe" (lína), "barres" (súlur) eða "gagné" (yfir eða undir núlli).
+Donne un nom à une valeur pour l’utiliser dans le calcul. ¦ Gefur gildi heiti til að nota það í útreikningnum.
+Une petite fonction à soi, à utiliser dans LET, MAP, PAR.LIGNE… ¦ Lítið eigið fall, til að nota í LET, MAP, PAR.LIGNE…
+Applique la LAMBDA à chaque case de la plage. ¦ Beitir LAMBDA á hvert hólf sviðsins.
+Un résultat par ligne de la plage. ¦ Ein niðurstaða á hverja línu sviðsins.
+Un résultat par colonne de la plage. ¦ Ein niðurstaða á hvern dálk sviðsins.
+Cumule les cases une à une (un total qui avance). ¦ Safnar hólfunum saman eitt af öðru (samtala sem vex).
+Comme REDUCE, avec chaque étape du total. ¦ Eins og REDUCE, með hverju skrefi samtölunnar.
+=ligne laissée ¦ lína skilin eftir|línur skildar eftir
+=ligne remplie depuis l’app (tenue à jour) ¦ lína fyllt úr appinu (haldið uppfærðri)|línur fylltar úr appinu (haldið uppfærðum)
+=ligne remplie depuis l’app ¦ lína fyllt úr appinu|línur fylltar úr appinu
+=ligne à toi sans fiche : retirée ¦ eigin lína án spjalds: fjarlægð|eigin línur án spjalds: fjarlægðar
+=nouvelle fiche ¦ nýtt spjald|ný spjöld
+=reliée ¦ tengt|tengd
+=laissée ¦ sett til hliðar|settar til hliðar
+=autre ligne ¦ önnur lína|aðrar línur
+=case ¦ hólf|hólf
+=autre case ¦ annað hólf|önnur hólf
+=case remplie ¦ hólf fyllt|hólf fyllt
+=groupe ¦ hópur|hópar
+=case changée ¦ hólfi breytt|hólfum breytt
+=scénario calculé ¦ sviðsmynd reiknuð|sviðsmyndir reiknaðar
+=commande ¦ skipun|skipanir
+=fonction ¦ fall|föll
+=valeur en plus de la première retirée ¦ gildi umfram það fyrsta fjarlægt|gildi umfram það fyrsta fjarlægð
+=ligne supprimée ¦ línu eytt|línum eytt
+=colonne supprimée ¦ dálki eytt|dálkum eytt
+=ligne en double supprimée ¦ tvítekinni línu eytt|tvíteknum línum eytt
+=ligne coupée en colonnes ¦ línu skipt í dálka|línum skipt í dálka
+=case modifiée ¦ hólfi breytt|hólfum breytt
+=cellule ¦ hólf|hólf
+=cellule copiée ¦ hólf afritað|hólf afrituð
+=feuille importée ¦ blað flutt inn|blöð flutt inn
+{sheets} ({rows}) ¦ {sheets} ({rows})
+la date ¦ dagsetningin
+le début ¦ upphafið
+la fin ¦ endirinn
+il manque un guillemet « " » à la fin d’un texte ¦ það vantar gæsalöpp „"“ í lok texta
+il manque une apostrophe à la fin du nom de feuille ¦ það vantar úrfellingarmerki í lok heitis blaðsins
+après le nom de la feuille, il faut « ! » puis la cellule ¦ á eftir heiti blaðsins þarf „!“ og svo hólfið
+la formule s’arrête trop tôt ¦ formúlan endar of snemma
+il manque une parenthèse « ) » ¦ það vantar svigann „)“
+une parenthèse « ) » de trop ¦ einum sviga „)“ of mikið
+un « ; » à une place inattendue ¦ „;“ á óvæntum stað
+un numéro Sosa est un nombre entier qui commence à 1 ¦ Sosa-númer er heil tala sem byrjar á 1
+il n’y a aucun nombre dans la plage ¦ það er engin tala í sviðinu
+le diviseur de MOD vaut 0 ¦ deilir MOD er 0
+pas de racine carrée d’un nombre négatif ¦ engin kvaðratrót af neikvæðri tölu
+aucun nombre ¦ engin tala
+il faut au moins deux nombres ¦ það þarf að minnsta kosti tvær tölur
+aucun test n’est vrai ¦ ekkert próf er satt
+les plages n’ont pas la même taille ¦ sviðin eru ekki jafnstór
+aucune cellule ne remplit la condition ¦ ekkert hólf uppfyllir skilyrðið
+le 2e morceau doit être une plage, par exemple A2:C40 ¦ 2. hlutinn verður að vera svið, til dæmis A2:C40
+le 2e morceau doit être une plage ¦ 2. hlutinn verður að vera svið
+la plage est vide ¦ sviðið er autt
+la condition doit avoir autant de lignes que la plage ¦ skilyrðið verður að hafa jafnmargar línur og sviðið
+aucune ligne ne remplit la condition ¦ engin lína uppfyllir skilyrðið
+le début compte à partir de 1 ¦ upphafið telst frá 1
+cette date n’a pas de mois ¦ þessi dagsetning hefur engan mánuð
+cette date n’a pas de jour ¦ þessi dagsetning hefur engan dag
+il faut le jour ¦ það þarf daginn
+le type de JOURSEM va de 1 à 3 (ou 11 à 17) ¦ gerð JOURSEM er frá 1 til 3 (eða 11 til 17)
+la fin est avant le début ¦ endirinn er á undan upphafinu
+la seconde date est avant la première ¦ seinni dagsetningin er á undan þeirri fyrri
+il faut une date au jour près ¦ það þarf dagsetningu upp á dag
+le calendrier républicain va du 22 septembre 1792 à 1805 ¦ lýðveldistímatalið nær frá 22 septembre 1792 til 1805
+il faut des nombres dans la plage ¦ það þarf tölur í sviðinu
+il faut une LAMBDA(…) ¦ það þarf LAMBDA(…)
+trop de LAMBDA imbriquées ¦ of margar hreiðraðar LAMBDA
+des paires « nom; valeur » puis le calcul ¦ pör „heiti; gildi“ og svo útreikningurinn
+un nom (lettres) avant chaque valeur ¦ heiti (bókstafir) á undan hverju gildi
+il faut au moins le calcul ¦ það þarf að minnsta kosti útreikninginn
+les paramètres sont des noms ¦ færibreyturnar eru heiti
+le calcul n’a pas de résultat ¦ útreikningurinn hefur enga niðurstöðu
+le résultat est trop grand pour être calculé ¦ niðurstaðan er of stór til að reikna
+une feuille supprimée ¦ blað sem var eytt
+une plage entière ne tient pas dans une case : utilise SOMME(…), INDEX(…)… ¦ heilt svið kemst ekki fyrir í einu hólfi: notaðu SOMME(…), INDEX(…)…
+puissance impossible ¦ ómögulegt veldi
+une LAMBDA seule ne donne pas de valeur : utilise-la dans LET, MAP… ¦ LAMBDA ein og sér gefur ekkert gildi: notaðu hana í LET, MAP…
+la formule est trop longue ¦ formúlan er of löng
+la formule est trop imbriquée ¦ formúlan er of djúpt hreiðruð
+trop de morceaux dans une fonction ¦ of margir hlutar í falli
+la formule demande trop de calculs ¦ formúlan krefst of margra útreikninga
+le résultat est trop grand ¦ niðurstaðan er of stór
+la plage est trop grande ¦ sviðið er of stórt
+le fichier a trop de cellules ¦ skráin hefur of mörg hólf

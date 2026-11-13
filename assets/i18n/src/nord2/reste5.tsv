@@ -1,0 +1,133 @@
+fr ¦ sk ¦ nb
+Les traits, les ombres et les coins des fiches des personnes et des animaux : blocs, boutons, champs. Le reste de l’app ne change pas ; les couleurs et la police restent celles de l’Apparence. ¦ Čiary, tiene a rohy kariet osôb a zvierat: bloky, tlačidlá, polia. Zvyšok aplikácie sa nemení; farby a písmo zostávajú tie zo Vzhľadu. ¦ Strekene, skyggene og hjørnene på oppføringene for personer og dyr: blokker, knapper, felt. Resten av appen endres ikke; fargene og skrifttypen er fortsatt de fra Utseende.
+L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. ¦ Medzery v blokoch a medzi nimi, výška riadkov zoznamov, okraj tlačidiel. ¦ Avstanden i og mellom blokkene, høyden på listelinjene, margen på knappene.
+Les petits dessins des boutons, des barres d’outils et des rubriques. ¦ Malé obrázky tlačidiel, panelov nástrojov a rubrík. ¦ De små bildene på knapper, verktøylinjer og overskrifter.
+Le haut de la fiche : portrait, nom, dates, pastilles et boutons. ¦ Horná časť karty: portrét, meno, dátumy, štítky a tlačidlá. ¦ Toppen av oppføringen: portrett, navn, datoer, merker og knapper.
+Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…) ; le bouton principal reste toujours plein, à la couleur principale de l’Apparence. ¦ Vedľajšie tlačidlá (Zrušiť, Upraviť, ＋ Pridať…); hlavné tlačidlo zostáva vždy plné, v hlavnej farbe Vzhľadu. ¦ De sekundære knappene (Avbryt, Rediger, ＋ Legg til…); hovedknappen er alltid fylt, i hovedfargen fra Utseende.
+Les fenêtres qui s’ouvrent, les menus, les messages en bas à gauche, les boutons au survol. L’aperçu tourne en boucle. ¦ Okná, ktoré sa otvárajú, ponuky, správy vľavo dole, tlačidlá pri prechode myšou. Ukážka sa prehráva dookola. ¦ Vinduer som åpnes, menyer, meldingene nederst til venstre, knapper når musen holdes over dem. Forhåndsvisningen går i en sløyfe.
+Les listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. ¦ Zoznamy (Zoznamy, Osoby, Výskum…), stĺpec osôb a tabuľky. ¦ Listene (Lister, Personer, Forskning…), personkolonnen og tabellene.
+{label} (nombre) ¦ {label} (číslo) ¦ {label} (tall)
+Pour les listes, les tableaux et le menu de choix. Plus haut = plus facile à viser ; plus bas = plus de lignes visibles. ¦ Pre zoznamy, tabuľky a ponuku výberu. Vyššie = ľahšie sa trafíš; nižšie = viac viditeľných riadkov. ¦ For lister, tabeller og valgmenyen. Høyere = lettere å treffe; lavere = flere synlige linjer.
+Le haut de la fiche. Les traits, les ombres et les coins de la fiche se règlent juste en dessous ¦ Horná časť karty. Čiary, tiene a rohy karty sa nastavujú hneď pod tým ¦ Toppen av oppføringen. Strekene, skyggene og hjørnene på oppføringen stilles inn rett nedenfor
+Les traits, les ombres et les coins des fiches (personnes et animaux) seulement : le reste de l’app ne change pas. La colonne de gauche a les siens (Menus, colonne et listes → Colonne) ¦ Len čiary, tiene a rohy kariet (osôb a zvierat): zvyšok aplikácie sa nemení. Ľavý stĺpec má vlastné (Ponuky, stĺpec a zoznamy → Stĺpec) ¦ Bare strekene, skyggene og hjørnene på oppføringene (personer og dyr): resten av appen endres ikke. Venstre kolonne har sine egne (Menyer, kolonne og lister → Kolonne)
+L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. Une colonne de gauche réglée « Compacte » (onglet Colonne) garde sa propre taille : les deux ne s’additionnent pas ¦ Medzery v blokoch a medzi nimi, výška riadkov zoznamov, okraj tlačidiel. Ľavý stĺpec nastavený na „Kompaktný“ (karta Stĺpec) si zachová vlastnú veľkosť: tieto dve nastavenia sa nesčítavajú ¦ Avstanden i og mellom blokkene, høyden på listelinjene, margen på knappene. En venstre kolonne satt til «Kompakt» (fanen Kolonne) beholder sin egen størrelse: de to legges ikke sammen
+Les petits dessins des boutons, des barres d’outils et des rubriques. Les traits et les ombres suivent ¦ Malé obrázky tlačidiel, panelov nástrojov a rubrík. Čiary a tiene sa prispôsobia ¦ De små bildene på knapper, verktøylinjer og overskrifter. Streker og skygger følger med
+Les lignes des listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. Les traits et les ombres suivent ¦ Riadky zoznamov (Zoznamy, Osoby, Výskum…), stĺpec osôb a tabuľky. Čiary a tiene sa prispôsobia ¦ Linjene i listene (Lister, Personer, Forskning…), personkolonnen og tabellene. Streker og skygger følger med
+Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…). Les traits et les ombres suivent ¦ Vedľajšie tlačidlá (Zrušiť, Upraviť, ＋ Pridať…). Čiary a tiene sa prispôsobia ¦ De sekundære knappene (Avbryt, Rediger, ＋ Legg til…). Streker og skygger følger med
+Comment les fenêtres, les menus et les messages apparaissent. L’aperçu tourne en boucle ¦ Ako sa objavujú okná, ponuky a správy. Ukážka sa prehráva dookola ¦ Hvordan vinduer, menyer og meldinger dukker opp. Forhåndsvisningen går i en sløyfe
+{group} : {choice} ¦ {group}: {choice} ¦ {group}: {choice}
+Rien ne bouge : chaque écran garde le dessin que tu connais. ¦ Nič sa nemení: každá obrazovka si nechá vzhľad, ktorý poznáš. ¦ Ingenting endres: hver skjerm beholder utseendet du kjenner.
+7 dessins différents ; tes couleurs homme / femme et ta forme d’avatar ne s’y appliquent pas. ¦ 7 rôznych vzhľadov; tvoje farby muž / žena a tvar avatara sa na ne nevzťahujú. ¦ 7 ulike utseender; fargene dine for mann / kvinne og avatarformen din gjelder ikke der.
+Un seul dessin partout, à la couleur du genre : homme, femme, animal se voient d’un coup d’œil. ¦ Všade rovnaký vzhľad vo farbe pohlavia: muža, ženu aj zviera spoznáš na prvý pohľad. ¦ Det samme utseendet overalt, i kjønnets farge: mann, kvinne og dyr ser du med en gang.
+Léger dans les listes serrées et le menu de choix (c’est déjà le modèle validé du menu). ¦ Ľahký v hustých zoznamoch a v ponuke výberu (je to už schválený vzor ponuky). ¦ Lett i tette lister og i valgmenyen (det er allerede menyens godkjente modell).
+Le style « archive » de ta fiche : bord noir, photo en noir et blanc, comme une photo d’identité collée. ¦ „Archívny“ štýl tvojej karty: čierny okraj, čiernobiela fotka ako nalepená fotka na preukaz. ¦ «Arkivstilen» på oppføringen din: svart kant, svart-hvitt bilde, som et påklistret passbilde.
+Nouveau nom de l’onglet {tab} ¦ Nový názov karty {tab} ¦ Nytt navn på fanen {tab}
+Émoji de l’onglet {tab} ¦ Emoji karty {tab} ¦ Emoji for fanen {tab}
+La personne n°1 (le de cujus) ; son père a le n°2, sa mère le n°3, et ainsi de suite : le père d’un numéro N a toujours 2N, la mère 2N+1. ¦ Osoba č. 1 (proband); jej otec má č. 2, matka č. 3 a tak ďalej: otec čísla N má vždy 2N, matka 2N+1. ¦ Person nr. 1 (probanden); faren har nr. 2, moren nr. 3 og så videre: faren til nummer N har alltid 2N, moren 2N+1.
+Pour les descendants : la personne n°1, ses enfants 1.1, 1.2, 1.3…, les enfants de 1.2 sont 1.2.1, 1.2.2… Chaque point = une génération de plus. ¦ Pre potomkov: osoba č. 1, jej deti 1.1, 1.2, 1.3…, deti 1.2 sú 1.2.1, 1.2.2… Každá bodka = o generáciu viac. ¦ For etterkommere: person nr. 1, barna 1.1, 1.2, 1.3…, barna til 1.2 er 1.2.1, 1.2.2… Hvert punktum = én generasjon til.
+Un thème règle les couleurs de toute l’app : la couleur principale, le fond de la page, des panneaux, des cartes et de leurs en-têtes, le texte, et les traits qui entourent (couleur et épaisseur). Crée le tien à partir d’un thème existant : il s’ajoute à la liste « Preset », dans « ✎ Mes thèmes ». ¦ Motív nastavuje farby celej aplikácie: hlavnú farbu, pozadie stránky, panelov, kariet a ich záhlaví, text a okrajové čiary (farbu a hrúbku). Vytvor si vlastný z existujúceho motívu: pridá sa do zoznamu „Preset“, do „✎ Moje motívy“. ¦ Et tema bestemmer fargene i hele appen: hovedfargen, bakgrunnen på siden, panelene, kortene og overskriftene deres, teksten og strekene rundt (farge og tykkelse). Lag ditt eget ut fra et eksisterende tema: det legges til i listen «Preset», under «✎ Mine temaer».
+La forme des petits carrés numérotés des blocs et des initiales des fiches. Ajoute tes formes (bibliothèque des tableaux, polygone dessiné, SVG importé), range la liste du menu « Forme des avatars », cache celles qui ne te servent pas. ¦ Tvar malých očíslovaných štvorčekov blokov a iniciál na kartách. Pridaj vlastné tvary (knižnica tabúľ, nakreslený mnohouholník, importované SVG), zoraď zoznam ponuky „Tvar avatarov“, skry tie, ktoré nepotrebuješ. ¦ Formen på blokkenes små nummererte firkanter og på initialene i oppføringene. Legg til dine egne former (tavlebiblioteket, tegnet polygon, importert SVG), sorter listen i menyen «Avatarform», skjul de du ikke bruker.
+Le grand cadre en haut de chaque fiche : le nom, les badges (Sosa, À vérifier, Hors généalogie, Artiste) et la colonne de boutons carrés. Tu peux le masquer pour une fiche épurée (diaporama), ranger les boutons, les cacher, les mettre sur 2 colonnes. ¦ Veľký rámec hore na každej karte: meno, odznaky (Sosa, Na kontrolu, Mimo rodokmeňa, Umelec) a stĺpec štvorcových tlačidiel. Môžeš ho skryť pre jednoduchšiu kartu (prezentácia), zoradiť tlačidlá, skryť ich, dať ich do 2 stĺpcov. ¦ Den store rammen øverst på hver oppføring: navnet, merkene (Sosa, Må sjekkes, Utenfor slektstreet, Kunstner) og kolonnen med firkantede knapper. Du kan skjule den for en ren oppføring (lysbildefremvisning), sortere knappene, skjule dem, sette dem i 2 kolonner.
+Les petits boutons carrés en haut à droite, à côté du nombre de personnes : écran en deux, nouvelle fenêtre, mode consultation, mode simple, calculette, Mes généalogies. Décoche pour cacher, glisse ⠿ pour changer l’ordre. ¦ Malé štvorcové tlačidlá vpravo hore vedľa počtu osôb: rozdelená obrazovka, nové okno, režim prehliadania, jednoduchý režim, kalkulačka, Moje rodokmene. Odškrtni, ak ich chceš skryť, presuň ⠿, ak chceš zmeniť poradie. ¦ De små firkantede knappene øverst til høyre, ved siden av antall personer: delt skjerm, nytt vindu, visningsmodus, enkel modus, kalkulator, Mine slektstrær. Fjern haken for å skjule, dra ⠿ for å endre rekkefølgen.
+Les boutons de la barre du haut, à côté du nombre de personnes. Glisse ⠿ (ou Alt + ↑ / ↓) pour changer leur ordre ; décoche un bouton pour le cacher. Plus bas, « 👤 Nouvelle personne » et un raccourci vers chaque outil de modification (tableur, montage, retouche…) et chaque partie d’Enquêtes : coche ceux que tu veux en haut, et choisis ce que le clic ouvre (la liste des projets ou un nouveau projet). C’est gardé tout de suite. ¦ Tlačidlá hornej lišty vedľa počtu osôb. Presuň ⠿ (alebo Alt + ↑ / ↓), ak chceš zmeniť ich poradie; odškrtni tlačidlo, ak ho chceš skryť. Nižšie „👤 Nová osoba“ a skratka ku každému nástroju úprav (tabuľkový editor, strih, retuš…) a ku každej časti Pátraní: zaškrtni tie, ktoré chceš mať hore, a vyber, čo kliknutie otvorí (zoznam projektov alebo nový projekt). Uloží sa to hneď. ¦ Knappene i topplinjen, ved siden av antall personer. Dra ⠿ (eller Alt + ↑ / ↓) for å endre rekkefølgen; fjern haken ved en knapp for å skjule den. Lenger ned «👤 Ny person» og en snarvei til hvert redigeringsverktøy (regneark, videoredigering, bilderetusj…) og hver del av Undersøkelser: kryss av for de du vil ha øverst, og velg hva klikket åpner (listen over prosjekter eller et nytt prosjekt). Det lagres med en gang.
+Les blocs d’une fiche se rangent en sections nommées (Identité, Famille…). Ici, où vont leurs titres et leurs options ; la forme (traits, coins, ombres) se règle plus bas, avec l’en-tête (« Style des fiches »). ¦ Bloky karty sa radia do pomenovaných oddielov (Identita, Rodina…). Tu: kam idú ich nadpisy a voľby; tvar (čiary, rohy, tiene) sa nastavuje nižšie, so záhlavím („Štýl kariet“). ¦ Blokkene i en oppføring ordnes i navngitte seksjoner (Identitet, Familie…). Her: hvor overskriftene og valgene deres havner; formen (streker, hjørner, skygger) stilles inn lenger ned, sammen med toppen («Stil på oppføringer»).
+Glisse les sections et les blocs pour changer leur ordre. Décoche une section ou un bloc pour le masquer. ¦ Presuň oddiely a bloky, ak chceš zmeniť ich poradie. Odškrtni oddiel alebo blok, ak ho chceš skryť. ¦ Dra seksjonene og blokkene for å endre rekkefølgen. Fjern haken ved en seksjon eller en blokk for å skjule den.
+La façon dont les listes à ranger de cette page sont dessinées. Ne change que cet écran de réglage (et la fenêtre « ⚙️ Ranger les sections » d’une fiche) : ni les fiches, ni les données. ¦ Ako sú vykreslené zoznamy na usporiadanie na tejto stránke. Mení len túto obrazovku nastavení (a okno „⚙️ Usporiadať oddiely“ karty): ani karty, ani údaje. ¦ Hvordan listene som kan sorteres på denne siden, tegnes. Endrer bare denne innstillingsskjermen (og vinduet «⚙️ Ordne seksjonene» i en oppføring): verken oppføringene eller dataene.
+Les blocs se rangent en sections nommées (Identité, Famille…). Ici, la façon de dessiner leurs titres et leurs options. Chaque changement est gardé tout de suite. ¦ Bloky sa radia do pomenovaných oddielov (Identita, Rodina…). Tu: ako sa kreslia ich nadpisy a voľby. Každá zmena sa hneď uloží. ¦ Blokkene ordnes i navngitte seksjoner (Identitet, Familie…). Her: hvordan overskriftene og valgene deres tegnes. Hver endring lagres med en gang.
+Retenu d’une fiche à l’autre. ¦ Zapamätá sa z jednej karty na druhú. ¦ Huskes fra én oppføring til den neste.
+Sans trait ni cadre : juste le nom, en grand, comme un chapitre. ¦ Bez čiary a rámčeka: len názov, veľký, ako kapitola. ¦ Uten strek eller ramme: bare navnet, stort, som et kapittel.
+Un cadre autour de la section, le titre dans une étiquette sur le bord. ¦ Rámček okolo oddielu, nadpis v štítku na okraji. ¦ En ramme rundt seksjonen, overskriften i en etikett på kanten.
+Un petit titre en capitales posé sur un trait. Sobre, prend peu de place. ¦ Malý nadpis veľkými písmenami na čiare. Striedmy, zaberie málo miesta. ¦ En liten overskrift med store bokstaver på en strek. Enkel, tar lite plass.
+Une bande de la couleur principale (celle de l’Apparence), titre en blanc. ¦ Pás v hlavnej farbe (tej zo Vzhľadu), nadpis bielou. ¦ Et bånd i hovedfargen (den fra Utseende), overskriften i hvitt.
+« Nouveau » : sections en bandes, ⠿ et 👁. ¦ „Nový“: oddiely v pásoch, ⠿ a 👁. ¦ «Ny»: seksjoner som bånd, ⠿ og 👁.
+Ce que tu fais avec l’app : ses onglets et son premier écran. Aucune fiche n’est supprimée. ¦ Na čo aplikáciu používaš: jej karty a prvá obrazovka. Žiadna karta sa nevymaže. ¦ Hva du bruker appen til: fanene og den første skjermen. Ingen oppføring slettes.
+Changer d’usage change <b>seulement les onglets et le premier écran</b>. Aucune fiche n’est supprimée : les personnes restent là, même quand l’onglet est caché. On peut en allumer plusieurs : leurs onglets s’additionnent. ¦ Zmena použitia mení <b>len karty a prvú obrazovku</b>. Žiadna karta sa nevymaže: osoby zostanú, aj keď je karta skrytá. Môžeš ich zapnúť viac: ich karty sa sčítajú. ¦ Å bytte bruk endrer <b>bare fanene og den første skjermen</b>. Ingen oppføring slettes: personene blir værende, også når fanen er skjult. Du kan slå på flere: fanene deres legges sammen.
+Personnes, arbre, actes. ¦ Osoby, strom, záznamy. ¦ Personer, tre, dokumenter.
+« 🌳 Ma généalogie » seule ¦ Len „🌳 Môj rodokmeň“ ¦ Bare «🌳 Mitt slektstre»
+Trésors de famille. ¦ Rodinné poklady. ¦ Familieskatter.
+Catalogue raisonné. ¦ Súpis diela. ¦ Verkfortegnelse.
+Maisons et lieux. ¦ Domy a miesta. ¦ Hus og steder.
+L’entreprise, 👥 Membres. ¦ Firma, 👥 Členovia. ¦ Bedriften, 👥 Medlemmer.
+Animaux, portées, pedigree. ¦ Zvieratá, vrhy, rodokmeň. ¦ Dyr, kull, stamtavle.
+Suivi des animaux. ¦ Sledovanie zvierat. ¦ Oppfølging av dyr.
+Documents, ✨ Trésors. ¦ Dokumenty, ✨ Poklady. ¦ Dokumenter, ✨ Skatter.
+Les onglets se rangent, se renomment et se cachent un par un dans « Ordre et noms du menu principal ». ¦ Karty sa radia, premenúvajú a skrývajú jednotlivo v „Poradie a názvy hlavnej ponuky“. ¦ Fanene sorteres, får nytt navn og skjules én etter én i «Rekkefølge og navn i hovedmenyen».
+Au féminin ¦ V ženskom rode ¦ Feminint
+Au masculin ¦ V mužskom rode ¦ Maskulint
+Avec un point médian ¦ So stredovou bodkou ¦ Med midtpunkt
+Entre parenthèses ¦ V zátvorke ¦ I parentes
+Sexe « Autre / non binaire » ¦ Pohlavie „Iné / nebinárne“ ¦ Kjønn «Annet / ikke-binær»
+Sexe « Non renseigné » (et les animaux dont on ne connaît pas le sexe) ¦ Pohlavie „Neuvedené“ (a zvieratá s neznámym pohlavím) ¦ Kjønn «Ikke oppgitt» (og dyr med ukjent kjønn)
+Sur les fiches d’hommes et de femmes, les mots s’accordent tout seuls : « né le » ou « née le », « décédé » ou « décédée ». Choisis ici comment les écrire pour les autres fiches. Chaque choix est gardé tout de suite. ¦ Na kartách mužov a žien sa slová prispôsobia samy (po francúzsky: « né le » alebo « née le », « décédé » alebo « décédée »). Tu vyber, ako ich písať na ostatných kartách. Každá voľba sa hneď uloží. ¦ På oppføringer for menn og kvinner bøyes ordene av seg selv (på fransk: « né le » eller « née le », « décédé » eller « décédée »). Velg her hvordan de skal skrives på de andre oppføringene. Hvert valg lagres med en gang.
+comme on dit « la personne » : « née », « décédée » ¦ ako pri « la personne » (ženský rod): « née », « décédée » ¦ som i « la personne » (feminint): « née », « décédée »
+rien ne change : « né(e) », sauf « Vivante », « Décédée » sur la fiche ¦ nič sa nemení: « né(e) », okrem « Vivante », « Décédée » na karte ¦ ingenting endres: « né(e) », unntatt « Vivante », « Décédée » på oppføringen
+une tournure neutre quand il y en a une (« Naissance le … », « Décès »), sinon « né(e) » ¦ neutrálna formulácia, ak existuje (« Naissance le … », « Décès »), inak « né(e) » ¦ en nøytral formulering når det finnes en (« Naissance le … », « Décès »), ellers « né(e) »
+« né », « décédé » ¦ « né », « décédé » (mužský rod) ¦ « né », « décédé » (maskulint)
+« né(e) », « décédé(e) », partout ¦ « né(e) », « décédé(e) », všade ¦ « né(e) », « décédé(e) », overalt
+« né·e », « décédé·e » ¦ « né·e », « décédé·e » (stredová bodka) ¦ « né·e », « décédé·e » (midtpunkt)
+autre / non binaire ¦ iné / nebinárne ¦ annet / ikke-binær
+sexe non renseigné ¦ pohlavie neuvedené ¦ kjønn ikke oppgitt
+Arbre en filigrane ¦ Strom ako vodoznak ¦ Tre som vannmerke
+Bleu pâle (comme avant) ¦ Svetlomodrá (ako predtým) ¦ Lyseblå (som før)
+Gris neutre ¦ Neutrálna sivá ¦ Nøytral grå
+Les traits de mon thème (✎ Mes thèmes) ¦ Čiary môjho motívu (✎ Moje motívy) ¦ Strekene i temaet mitt (✎ Mine temaer)
+Les traits de mon thème : choisis d’abord un thème à toi (✎ Mes thèmes) ¦ Čiary môjho motívu: najprv si vyber vlastný motív (✎ Moje motívy) ¦ Strekene i temaet mitt: velg først ditt eget tema (✎ Mine temaer)
+Bleu pâle = comme avant · gris · la couleur principale de l’Apparence (elle suit si tu la changes) · sépia · la couleur des traits de ton thème (✎ Mes thèmes) · une couleur à toi. ¦ Svetlomodrá = ako predtým · sivá · hlavná farba Vzhľadu (zmení sa s ňou) · sépia · farba čiar tvojho motívu (✎ Moje motívy) · tvoja vlastná farba. ¦ Lyseblå = som før · grå · hovedfargen fra Utseende (følger med hvis du endrer den) · sepia · strekfargen i temaet ditt (✎ Mine temaer) · din egen farge.
+Cahier ligné ¦ Linajkový zošit ¦ Linjert skrivebok
+Papier millimétré ¦ Milimetrový papier ¦ Millimeterpapir
+Papier vergé ¦ Vergé papier ¦ Vergépapir
+Ce qu’on voit derrière les blocs, sur toutes les pages. Le fond reste très pâle pour ne jamais gêner la lecture ; la couleur du papier vient du Preset (ou de ton thème). ¦ Čo vidno za blokmi na všetkých stránkach. Pozadie zostáva veľmi svetlé, aby nikdy nerušilo čítanie; farba papiera pochádza z Presetu (alebo z tvojho motívu). ¦ Det som vises bak blokkene, på alle sider. Bakgrunnen forblir svært blek, så den aldri forstyrrer lesingen; papirfargen kommer fra Preset (eller temaet ditt).
+Choisir une photo ¦ Vybrať fotku ¦ Velg et bilde
+Couleur du motif ¦ Farba vzoru ¦ Mønsterfarge
+Couleur principale (suit l’Apparence) ¦ Hlavná farba (podľa Vzhľadu) ¦ Hovedfarge (følger Utseende)
+De « à peine visible » à « bien marqué ». Au départ : comme aujourd’hui. ¦ Od „sotva viditeľné“ po „výrazné“. Na začiatku: ako dnes. ¦ Fra «knapt synlig» til «tydelig». Fra start: som i dag.
+Décoché : fond uni sur ces pages. La carte et les éditeurs plein écran gardent toujours le leur. ¦ Nezaškrtnuté: jednofarebné pozadie na týchto stránkach. Mapa a celoobrazovkové editory si vždy nechajú svoje. ¦ Uten hake: ensfarget bakgrunn på disse sidene. Kartet og fullskjermsredigeringsverktøyene beholder alltid sin egen.
+Pas encore de photo : fond uni en attendant. ¦ Zatiaľ žiadna fotka: medzitým jednofarebné pozadie. ¦ Ikke noe bilde ennå: ensfarget bakgrunn så lenge.
+Pâlie par l’intensité et floutée, pour rester derrière sans gêner. Elle reste sur cet ordinateur (pas dans le défaut du site : là-bas, fond uni). ¦ Zosvetlená podľa intenzity a rozmazaná, aby zostala v pozadí a nerušila. Zostáva na tomto počítači (nie vo východiskovom nastavení webu: tam je jednofarebné pozadie). ¦ Bleket etter intensiteten og gjort uskarpt, så det blir i bakgrunnen uten å forstyrre. Det blir på denne datamaskinen (ikke i nettstedets standard: der er bakgrunnen ensfarget).
+bords à peine teintés, vieille photo ¦ sotva zafarbené okraje, stará fotka ¦ svakt tonede kanter, gammelt bilde
+comme aujourd’hui ¦ ako dnes ¦ som i dag
+de petites branches, très pâles ¦ malé vetvičky, veľmi svetlé ¦ små greiner, svært bleke
+du papier vers la couleur ¦ od papiera k farbe ¦ fra papiret mot fargen
+fin, trait plus fort tous les 5 ¦ jemný, výraznejšia čiara každých 5 ¦ fin, kraftigere strek for hver 5.
+fines rayures des vieux papiers ¦ jemné prúžky starých papierov ¦ fine striper som på gammelt papir
+hexagones de la maison de famille ¦ šesťuholníky rodinného domu ¦ sekskanter fra slektsgården
+lignes et double marge, comme l’état civil ¦ linky a dvojitý okraj, ako v matrike ¦ linjer og dobbel marg, som i kirkeboka
+lignes et marge rouge ¦ linky a červený okraj ¦ linjer og rød marg
+pâle et floutée derrière ¦ svetlá a rozmazaná v pozadí ¦ blek og uskarp bak
+rien derrière, le plus calme ¦ nič v pozadí, najpokojnejšie ¦ ingenting bak, det roligste
+tissage léger, album de famille ¦ jemná tkanina, rodinný album ¦ lett vev, familiealbum
+une grille de petits points ¦ mriežka malých bodiek ¦ et rutenett av små prikker
+va bien avec « Archive papier » ¦ hodí sa k „Papierový archív“ ¦ passer godt til «Papirarkiv»
+Une page de l’app ¦ Stránka aplikácie ¦ En side i appen
+Ta photo ¦ Tvoja fotka ¦ Bildet ditt
+les Réglages ¦ Nastavenia ¦ Innstillinger
+Dans les listes où l’on coche ce qui s’affiche (menus, listes, Réordonner, Personnaliser…) : une ligne décochée reste telle quelle, ou se grise un peu. ¦ V zoznamoch, kde sa zaškrtáva, čo sa zobrazí (ponuky, zoznamy, Preradiť, Prispôsobiť…): nezaškrtnutý riadok zostane, ako je, alebo trochu zosivie. ¦ I listene der du krysser av for hva som vises (menyer, lister, Endre rekkefølge, Tilpass…): en linje uten hake forblir som den er, eller blir litt grå.
+Une ligne affichée ¦ Zobrazený riadok ¦ En vist linje
+Une ligne cachée ¦ Skrytý riadok ¦ En skjult linje
+Lignes cachées dans les listes à ranger ¦ Skryté riadky v zoznamoch na usporiadanie ¦ Skjulte linjer i lister som kan sorteres
+Supprimer en rouge ¦ Vymazať červenou ¦ Slett i rødt
+Hypothèses à comparer ¦ Hypotézy na porovnanie ¦ Hypoteser å sammenligne
+signature ou sceau ¦ podpis alebo pečať ¦ underskrift eller segl
+PLAN DU RECENSEMENT ¦ PLÁN SČÍTANIA OBYVATEĽOV ¦ FOLKETELLINGSKART
+Fonds de carte du plan des adresses ¦ Mapové podklady plánu adries ¦ Bakgrunnskart for adressekartet
+Plan, photo aérienne, carte hors ligne… ¦ Plán, letecká snímka, offline mapa… ¦ Bykart, flyfoto, frakoblet kart…
+Cassini, État-major, cartes et photos de 1950… ¦ Cassini, État-major, mapy a fotky z roku 1950… ¦ Cassini, État-major, kart og bilder fra 1950…
+Carte ancienne (par-dessus) ¦ Stará mapa (navrchu) ¦ Gammelt kart (øverst)
+Aujourd’hui (dessous) ¦ Dnes (pod ňou) ¦ I dag (under)
+Dépouillements (onglet « Plan ») et fiche d’un village : les fonds cochés viennent en premier dans les menus ; le premier coché est celui de départ. Tous les autres restent dans les menus, par catégorie. ¦ Výpisy (karta „Plán“) a karta dediny: zaškrtnuté podklady sú v ponukách prvé; prvý zaškrtnutý je východiskový. Všetky ostatné zostávajú v ponukách podľa kategórií. ¦ Registreringer (fanen «Kart») og en bygds oppføring: bakgrunnskartene med hake kommer først i menyene; det første med hake er startkartet. Alle de andre blir værende i menyene, etter kategori.
+naissance manquante ¦ chýba narodenie ¦ fødsel mangler
+décès manquant ¦ chýba úmrtie ¦ død mangler
+parents manquants ¦ chýbajú rodičia ¦ foreldre mangler
+source manquante ¦ chýba prameň ¦ kilde mangler
+aucun média ¦ žiadne médiá ¦ ingen medier
+1 livre en {y} ¦ 1 livre v roku {y} ¦ 1 livre i {y}
+1 franc en {y} ¦ 1 frank v roku {y} ¦ 1 franc i {y}
+1 euro en {y} ¦ 1 euro v roku {y} ¦ 1 euro i {y}
+≈ <b>{eur} €</b> d’aujourd’hui ¦ ≈ <b>{eur} €</b> v dnešných peniazoch ¦ ≈ <b>{eur} €</b> i dagens penger
+≈ <b>{kg} kg</b> de pain ¦ ≈ <b>{kg} kg</b> chleba ¦ ≈ <b>{kg} kg</b> brød
+≈ {n} jour de travail d’un journalier ¦ ≈ {n} deň práce nádenníka ¦ ≈ {n} dags arbeid for en dagarbeider
+≈ {n} jours de travail d’un journalier ¦ ≈ {n} dní práce nádenníka ¦ ≈ {n} dagers arbeid for en dagarbeider
+🛡 Solidité des liens à côté des parents ¦ 🛡 Spoľahlivosť väzieb vedľa rodičov ¦ 🛡 Hvor sikre koblingene er, ved siden av foreldrene
+Seulement Supposé et Réfuté ¦ Len Predpokladané a Vyvrátené ¦ Bare Antatt og Tilbakevist
+Toujours ¦ Vždy ¦ Alltid
+Jamais ¦ Nikdy ¦ Aldri

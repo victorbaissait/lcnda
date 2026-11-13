@@ -1,0 +1,1629 @@
+fr ¦ tr
+Lien hypertexte ¦ Köprü bağlantısı
+Abréviation ¦ Kısaltma
+Coordonnées de contact d’une page ou d’un élément article ¦ Bir sayfanın ya da bir article öğesinin iletişim bilgileri
+Lien ou zone inactive sur une image cliquable (map) ¦ Tıklanabilir bir görüntüde (map) bağlantı ya da etkisiz alan
+Composition autonome, qu’on peut diffuser ou réutiliser seule ¦ Tek başına paylaşılabilen ya da yeniden kullanılabilen bağımsız içerik
+Encadré pour un contenu en marge du sujet ¦ Konunun dışındaki bir içerik için kenar kutusu
+Lecteur audio ¦ Ses oynatıcı
+Mots-clés (mis en avant sans importance particulière) ¦ Anahtar sözcükler (özel bir önem taşımadan öne çıkarılmış)
+Adresse de base et cible par défaut des liens et formulaires ¦ Bağlantılar ve formlar için temel adres ve varsayılan hedef
+Isole le sens d’écriture d’un texte ¦ Bir metnin yazı yönünü yalıtır
+Impose le sens d’écriture d’un texte ¦ Bir metnin yazı yönünü zorlar
+Passage cité d’une autre source ¦ Başka bir kaynaktan alıntılanan bölüm
+Corps du document ¦ Belgenin gövdesi
+Retour à la ligne (dans un poème, une adresse postale…) ¦ Satır sonu (bir şiirde, bir posta adresinde…)
+Bouton ¦ Düğme
+Zone de dessin pilotée par script ¦ Betikle yönetilen çizim alanı
+Titre d’un tableau ¦ Tablo başlığı
+Titre d’une œuvre ¦ Bir eserin başlığı
+Code informatique ¦ Bilgisayar kodu
+Colonne de tableau ¦ Tablo sütunu
+Groupe de colonnes d’un tableau ¦ Bir tablonun sütun grubu
+Équivalent lisible par une machine ¦ Makinece okunabilir karşılık
+Liste de propositions pour un champ à saisie libre ¦ Serbest yazılan bir alan için öneri listesi
+Contenu du ou des termes dt correspondants ¦ Karşılık gelen dt terim(ler)inin içeriği
+Suppression dans le document ¦ Belgede silme
+Bloc dépliable pour cacher des détails ¦ Ayrıntıları gizlemek için açılır blok
+Définition d’un terme (première occurrence) ¦ Bir terimin tanımı (ilk geçtiği yer)
+Boîte de dialogue ou fenêtre ¦ İletişim kutusu ya da pencere
+Conteneur générique (bloc), ou groupe nom-valeur dans un dl ¦ Genel kapsayıcı (blok) ya da bir dl içinde ad-değer grubu
+Liste d’associations : zéro ou plusieurs groupes nom-valeur ¦ İlişki listesi: sıfır ya da daha çok ad-değer grubu
+Intitulé du ou des éléments dd correspondants ¦ Karşılık gelen dd öğe(ler)inin başlığı
+Accent d’insistance ¦ Vurgu
+Module externe (plugin) ¦ Dış modül (eklenti)
+Groupe de champs de formulaire ¦ Form alanları grubu
+Légende d’une figure ¦ Bir şeklin açıklaması
+Figure, avec une légende facultative ¦ Şekil, isteğe bağlı açıklamayla
+Pied d’une page ou d’une section ¦ Bir sayfanın ya da bölümün alt bilgisi
+Formulaire à envoyer ¦ Gönderilecek form
+Titre (niveau 1) ¦ Başlık (1. düzey)
+Titre (niveau 2) ¦ Başlık (2. düzey)
+Titre (niveau 3) ¦ Başlık (3. düzey)
+Titre (niveau 4) ¦ Başlık (4. düzey)
+Titre (niveau 5) ¦ Başlık (5. düzey)
+Titre (niveau 6) ¦ Başlık (6. düzey)
+Conteneur des métadonnées du document ¦ Belgenin üst verilerinin kapsayıcısı
+Introduction ou aides à la navigation d’une page ou d’une section ¦ Bir sayfanın ya da bölümün girişi ya da gezinme yardımları
+Groupe de titres (titre et sous-titre) ¦ Başlık grubu (başlık ve alt başlık)
+Rupture thématique (changement de sujet) ¦ Konu değişimi (tematik ayrım)
+Élément racine ¦ Kök öğe
+Autre voix (terme étranger, pensée, nom d’œuvre…) ¦ Başka bir ses (yabancı terim, düşünce, eser adı…)
+Page incluse dans la page (cadre) ¦ Sayfa içine yerleştirilmiş sayfa (çerçeve)
+Champ de formulaire ¦ Form alanı
+Ajout dans le document ¦ Belgeye ekleme
+Saisie de l’utilisateur (touches) ¦ Kullanıcı girişi (tuşlar)
+Libellé d’un champ de formulaire ¦ Bir form alanının etiketi
+Légende d’un fieldset ¦ Bir fieldset başlığı
+Élément de liste ¦ Liste öğesi
+Lien de métadonnées (feuille de styles, icône…) ¦ Üst veri bağlantısı (stil sayfası, simge…)
+Conteneur du contenu principal du document ¦ Belgenin ana içeriğinin kapsayıcısı
+Image cliquable (zones) ¦ Tıklanabilir görüntü (alanlar)
+Racine MathML (formules) ¦ MathML kökü (formüller)
+Menu de commandes ¦ Komut menüsü
+Métadonnée en texte ¦ Metin olarak üst veri
+Jauge ¦ Gösterge
+Section de liens de navigation ¦ Gezinme bağlantıları bölümü
+Contenu de secours quand les scripts ne tournent pas ¦ Betikler çalışmadığında yedek içerik
+Image, page incluse ou module externe ¦ Görüntü, yerleştirilmiş sayfa ya da dış modül
+Groupe d’options dans une liste ¦ Bir listedeki seçenek grubu
+Option d’une liste ou d’un champ à choix ¦ Bir listenin ya da seçim alanının seçeneği
+Résultat d’un calcul ¦ Bir hesabın sonucu
+Image (avec plusieurs sources) ¦ Görüntü (birkaç kaynaklı)
+Bloc de texte préformaté ¦ Önceden biçimlendirilmiş metin bloğu
+Barre de progression ¦ İlerleme çubuğu
+Citation courte ¦ Kısa alıntı
+Parenthèse pour une annotation ruby ¦ Bir ruby açıklaması için parantez
+Texte d’une annotation ruby ¦ Bir ruby açıklamasının metni
+Annotation(s) ruby (prononciation au-dessus du texte) ¦ Ruby açıklama(lar)ı (metnin üstünde okunuş)
+Texte qui n’est plus exact ¦ Artık doğru olmayan metin
+Sortie d’un programme ¦ Bir programın çıktısı
+Script intégré ¦ Gömülü betik
+Conteneur des champs de recherche ¦ Arama alanlarının kapsayıcısı
+Section générique d’un document ou d’une application ¦ Bir belgenin ya da uygulamanın genel bölümü
+Liste déroulante ¦ Açılır liste
+Reprend le contenu de l’option choisie ¦ Seçilen seçeneğin içeriğini yineler
+Emplacement dans un arbre « shadow » ¦ “Shadow” ağacındaki yuva
+Remarque en marge (petits caractères) ¦ Kenar notu (küçük harflerle)
+Source d’une image (img) ou d’un média (video, audio) ¦ Bir görüntünün (img) ya da medyanın (video, audio) kaynağı
+Conteneur générique (dans le texte) ¦ Genel kapsayıcı (metin içinde)
+Importance ¦ Önem
+Styles intégrés ¦ Gömülü stiller
+Intitulé d’un details ¦ Bir details öğesinin başlığı
+Racine SVG (dessin vectoriel) ¦ SVG kökü (vektör çizim)
+Groupe de lignes d’un tableau ¦ Bir tablonun satır grubu
+Cellule de tableau ¦ Tablo hücresi
+Modèle (contenu inerte, à copier par script) ¦ Şablon (etkisiz içerik, betikle kopyalanır)
+Zone de texte sur plusieurs lignes ¦ Çok satırlı metin alanı
+Groupe de lignes de pied d’un tableau ¦ Bir tablonun alt bilgi satırları grubu
+Cellule d’en-tête de tableau ¦ Tablo başlık hücresi
+Groupe de lignes d’en-tête d’un tableau ¦ Bir tablonun başlık satırları grubu
+Date ou heure, lisible par une machine ¦ Tarih ya da saat, makinece okunabilir
+Titre du document (onglet du navigateur) ¦ Belgenin başlığı (tarayıcı sekmesi)
+Ligne de tableau ¦ Tablo satırı
+Piste de texte minutée (sous-titres) ¦ Zamanlanmış metin izi (altyazılar)
+Annotation non exprimée (souligné) ¦ Sözsüz açıklama (altı çizili)
+Variable ¦ Değişken
+Lecteur vidéo ¦ Video oynatıcı
+Possibilité de coupure de ligne ¦ Olası satır kesme yeri
+texte courant ¦ akış içi metin
+interactif ¦ etkileşimli
+palpable ¦ somut
+transparent ¦ saydam
+vide ¦ boş
+intégré ¦ gömülü
+métadonnées ¦ üst veriler
+listé ¦ listelenen
+avec libellé ¦ etiketlenebilir
+envoyable ¦ gönderilebilir
+associé à un formulaire ¦ bir forma bağlı
+éléments de soutien aux scripts ¦ betik destek öğeleri
+contenu de métadonnées ¦ üst veri içeriği
+réinitialisable ¦ sıfırlanabilir
+contenu de titre ¦ başlık içeriği
+selon MathML ¦ MathML’e göre
+un img ¦ bir img
+soutien aux scripts ¦ betik desteği
+script, data, ou documentation du script ¦ betik, veri ya da betik belgesi
+selon SVG ¦ SVG’ye göre
+flux ¦ akış
+tous les éléments ¦ tüm öğeler
+voir chaque propriété ¦ her özelliğe bak
+éléments positionnés ¦ konumlandırılmış öğeler
+tous les éléments et le texte ¦ tüm öğeler ve metin
+éléments d’un flex ¦ flex öğeleri
+conteneurs flex ¦ flex kapsayıcıları
+conteneurs de grille ¦ grid kapsayıcıları
+éléments remplacés (img, video…) ¦ yerine konan öğeler (img, video…)
+éléments transformables ¦ dönüştürülebilir öğeler
+conteneurs de blocs ¦ blok kapsayıcıları
+éléments personnalisés de formulaire ¦ forma bağlı özel öğeler
+présent ou absent ¦ var ya da yok
+mots séparés par des espaces ¦ boşlukla ayrılmış sözcükler
+adresse (URL) ¦ adres (URL)
+chaîne vide ¦ boş dizi
+nombre entier ¦ tam sayı
+un id ¦ bir id
+nombres ¦ sayılar
+date (et heure) ¦ tarih (ve saat)
+date, heure, durée… ¦ tarih, saat, süre…
+nom de cadre ou _blank, _self, _parent, _top ¦ çerçeve adı ya da _blank, _self, _parent, _top
+nombre entier between 0 and 8 ¦ 0 ile 8 arasında tam sayı
+code de langue (fr, en…) ¦ dil kodu (fr, en…)
+code de langue (fr, en…) or chaîne vide ¦ dil kodu (fr, en…) ya da boş dizi
+tailles (sizes) ¦ boyutlar (sizes)
+liste d’images (srcset) ¦ görüntü listesi (srcset)
+requête @media ¦ @media sorgusu
+expression régulière ¦ düzenli ifade
+déclarations CSS ¦ CSS bildirimleri
+type MIME (image/png…) ¦ MIME türü (image/png…)
+un type de champ (text, email, date, number…) ¦ bir alan türü (text, email, date, number…)
+liste séparée par des virgules consisting of valid MIME type strings with no parameters or audio/*, video/*, or image/* ¦ parametresiz geçerli MIME türlerinden oluşan virgülle ayrılmış liste ya da audio/*, video/*, image/*
+nombre greater than zero, or "any" ¦ sıfırdan büyük sayı ya da "any"
+Couleur des cases, boutons radio, curseurs ¦ Onay kutularının, radyo düğmelerinin, sürgülerin rengi
+Répartition des lignes (flex à plusieurs lignes, grid) ¦ Satırların dağılımı (çok satırlı flex, grid)
+Alignement des éléments sur l’axe secondaire ¦ Öğelerin ikincil eksende hizalanması
+Alignement de cet élément seul ¦ Yalnızca bu öğenin hizalanması
+Raccourci d’une animation (@keyframes) ¦ Animasyon kısaltması (@keyframes)
+Délai avant l’animation ¦ Animasyondan önceki gecikme
+Sens de l’animation ¦ Animasyonun yönü
+Durée de l’animation ¦ Animasyonun süresi
+État avant et après l’animation ¦ Animasyondan önceki ve sonraki durum
+Nombre de répétitions (infinite) ¦ Yineleme sayısı (infinite)
+Nom de l’animation (@keyframes) ¦ Animasyonun adı (@keyframes)
+Rythme de l’animation ¦ Animasyonun hızlanma eğrisi
+Apparence native d’un champ ou d’un bouton ¦ Bir alanın ya da düğmenin yerel görünümü
+Proportions largeur / hauteur (16 / 9…) ¦ Genişlik / yükseklik oranı (16 / 9…)
+Effets sur ce qu’il y a derrière (verre dépoli) ¦ Arkadakine uygulanan efektler (buzlu cam)
+Raccourci : couleur, image, position et taille du fond ¦ Kısaltma: arka planın rengi, görüntüsü, konumu ve boyutu
+Le fond défile avec la page ou reste fixe ¦ Arka plan sayfayla birlikte kayar ya da sabit kalır
+Jusqu’où va le fond (bordure, marges intérieures, texte) ¦ Arka planın nereye kadar gittiği (kenarlık, iç boşluk, metin)
+Image(s) ou dégradé(s) du fond ¦ Arka planın görüntü(ler)i ya da geçiş(ler)i
+Point de départ de l’image de fond ¦ Arka plan görüntüsünün başlangıç noktası
+Place de l’image de fond ¦ Arka plan görüntüsünün konumu
+Répétition de l’image de fond ¦ Arka plan görüntüsünün yinelenmesi
+Taille de l’image de fond (cover, contain, 100px…) ¦ Arka plan görüntüsünün boyutu (cover, contain, 100px…)
+Hauteur (selon le sens d’écriture) ¦ Yükseklik (yazı yönüne göre)
+Raccourci : épaisseur, style et couleur de la bordure ¦ Kısaltma: kenarlığın kalınlığı, stili ve rengi
+Bordures de tableau fusionnées ou séparées ¦ Birleşik ya da ayrık tablo kenarlıkları
+Couleur de la bordure ¦ Kenarlığın rengi
+Image utilisée comme bordure ¦ Kenarlık olarak kullanılan görüntü
+Bordure de gauche ¦ Sol kenarlık
+Bordure de droite ¦ Sağ kenarlık
+Espace entre les cellules ¦ Hücreler arasındaki boşluk
+Style de la bordure (solid, dashed, dotted…) ¦ Kenarlığın stili (solid, dashed, dotted…)
+Bordure du haut ¦ Üst kenarlık
+Épaisseur de la bordure ¦ Kenarlığın kalınlığı
+Décalage depuis le bas (avec position) ¦ Alttan uzaklık (position ile)
+Ombre autour de la boîte ¦ Kutunun çevresindeki gölge
+La largeur compte-t-elle les bordures et l’espace intérieur (border-box) ? ¦ Genişlik kenarlıkları ve iç boşluğu içeriyor mu (border-box)?
+Saut (page, colonne) après ¦ Sonrasında kesme (sayfa, sütun)
+Saut (page, colonne) avant ¦ Öncesinde kesme (sayfa, sütun)
+Éviter de couper l’élément ¦ Öğeyi bölmekten kaçın
+Titre du tableau en haut ou en bas ¦ Tablo başlığı üstte ya da altta
+Couleur du curseur de saisie ¦ Yazı imlecinin rengi
+Passe sous les éléments flottants ¦ Yüzen öğelerin altına geçer
+Découpe en forme (cercle, polygone…) ¦ Bir şekle göre kırp (daire, çokgen…)
+Nombre de colonnes de texte ¦ Metin sütunu sayısı
+Espace entre les colonnes ¦ Sütunlar arasındaki boşluk
+Trait entre les colonnes de texte ¦ Metin sütunları arasındaki çizgi
+Largeur des colonnes de texte ¦ Metin sütunlarının genişliği
+Texte en plusieurs colonnes ¦ Birkaç sütunlu metin
+Isole l’élément pour accélérer l’affichage ¦ Görüntülemeyi hızlandırmak için öğeyi yalıtır
+Nom du conteneur (@container) ¦ Kapsayıcının adı (@container)
+Fait de l’élément un conteneur (@container) ¦ Öğeyi bir kapsayıcı yapar (@container)
+Contenu généré (::before, ::after) ¦ Oluşturulan içerik (::before, ::after)
+Augmente un compteur ¦ Bir sayacı artırır
+Remet un compteur à zéro ¦ Bir sayacı sıfırlar
+Forme du pointeur de la souris ¦ Fare işaretçisinin biçimi
+Sens du texte (ltr, rtl) ¦ Metnin yönü (ltr, rtl)
+Façon d’afficher la boîte : block, inline, flex, grid, none… ¦ Kutunun gösterilme biçimi: block, inline, flex, grid, none…
+Bordures des cellules vides ¦ Boş hücrelerin kenarlıkları
+Effets : flou, noir et blanc, luminosité… ¦ Efektler: bulanıklık, siyah beyaz, parlaklık…
+Raccourci : capacité à grandir, rétrécir, taille de départ (flexbox) ¦ Kısaltma: büyüme, küçülme yeteneği, başlangıç boyutu (flexbox)
+Taille de départ dans un flex ¦ Bir flex içinde başlangıç boyutu
+Sens des éléments d’un flex : ligne ou colonne ¦ Flex öğelerinin yönü: satır ya da sütun
+Raccourci de flex-direction et flex-wrap ¦ flex-direction ve flex-wrap kısaltması
+Part de la place libre prise par l’élément ¦ Öğenin aldığı boş alan payı
+Capacité à rétrécir ¦ Küçülme yeteneği
+Les éléments d’un flex passent à la ligne ou non ¦ Flex öğeleri alt satıra geçsin mi
+Fait flotter à gauche ou à droite (le texte l’entoure) ¦ Sola ya da sağa yüzdürür (metin çevresini sarar)
+Raccourci : style, graisse, taille, interligne et police ¦ Kısaltma: stil, kalınlık, boyut, satır aralığı ve yazı tipi
+Police (et polices de secours) ¦ Yazı tipi (ve yedek yazı tipleri)
+Fonctions OpenType de la police ¦ Yazı tipinin OpenType özellikleri
+Italique ou droit ¦ İtalik ya da dik
+Variantes (petites capitales…) ¦ Varyantlar (küçük büyük harfler…)
+Graisse du texte (400 normal, 700 gras) ¦ Metnin kalınlığı (400 normal, 700 kalın)
+Espace entre les éléments (flex, grid, colonnes) ¦ Öğeler arasındaki boşluk (flex, grid, sütunlar)
+Raccourci de toute la grille ¦ Tüm ızgaranın kısaltması
+Zone de la grille occupée par l’élément ¦ Öğenin kapladığı ızgara alanı
+Taille des colonnes créées automatiquement ¦ Kendiliğinden oluşturulan sütunların boyutu
+Comment la grille place les éléments sans place précise ¦ Izgaranın belirli bir yeri olmayan öğeleri nasıl yerleştirdiği
+Taille des lignes créées automatiquement ¦ Kendiliğinden oluşturulan satırların boyutu
+Colonnes occupées par l’élément ¦ Öğenin kapladığı sütunlar
+Lignes occupées par l’élément ¦ Öğenin kapladığı satırlar
+Zones nommées de la grille ¦ Izgaranın adlandırılmış alanları
+Colonnes de la grille (1fr 1fr, repeat(3, 1fr)…) ¦ Izgara sütunları (1fr 1fr, repeat(3, 1fr)…)
+Lignes de la grille ¦ Izgara satırları
+Césure automatique (avec lang) ¦ Otomatik heceleme (lang ile)
+Agrandissement d’une image (net, lissé) ¦ Bir görüntünün büyütülmesi (keskin, yumuşatılmış)
+Largeur (selon le sens d’écriture) ¦ Genişlik (yazı yönüne göre)
+Raccourci de top, right, bottom, left ¦ top, right, bottom, left kısaltması
+Crée un nouveau groupe d’empilement ¦ Yeni bir yığın bağlamı oluşturur
+Répartition des éléments sur l’axe principal (flex, grid) ¦ Öğelerin ana eksende dağılımı (flex, grid)
+Alignement des éléments dans leur case (grid) ¦ Öğelerin hücrelerinde hizalanması (grid)
+Alignement de cet élément dans sa case ¦ Bu öğenin hücresinde hizalanması
+Décalage depuis la gauche (avec position) ¦ Soldan uzaklık (position ile)
+Raccourci du style des puces ¦ Madde imi stilinin kısaltması
+Image de puce ¦ Madde imi görüntüsü
+Puces dedans ou dehors ¦ Madde imleri içeride ya da dışarıda
+Forme des puces ou numéros ¦ Madde imlerinin ya da numaraların biçimi
+Marge extérieure (les 4 côtés) ¦ Dış kenar boşluğu (4 kenar)
+Marges extérieures haut et bas (selon le sens d’écriture) ¦ Üst ve alt dış kenar boşlukları (yazı yönüne göre)
+Marge extérieure en bas ¦ Alt dış kenar boşluğu
+Marges extérieures des côtés (selon le sens d’écriture) ¦ Yan dış kenar boşlukları (yazı yönüne göre)
+Marge extérieure à gauche ¦ Sol dış kenar boşluğu
+Marge extérieure à droite ¦ Sağ dış kenar boşluğu
+Marge extérieure en haut ¦ Üst dış kenar boşluğu
+Masque (image ou dégradé) ¦ Maske (görüntü ya da geçiş)
+Hauteur maximale ¦ En büyük yükseklik
+Largeur maximale ¦ En büyük genişlik
+Hauteur minimale ¦ En küçük yükseklik
+Largeur minimale ¦ En küçük genişlik
+Mélange avec ce qu’il y a dessous ¦ Alttakiyle karışım
+Image ou vidéo dans sa boîte : cover, contain… ¦ Kutusundaki görüntü ya da video: cover, contain…
+Place de l’image dans sa boîte ¦ Görüntünün kutusundaki yeri
+Transparence de tout l’élément (0 : invisible, 1 : opaque) ¦ Tüm öğenin saydamlığı (0: görünmez, 1: opak)
+Ordre d’affichage dans un flex ou une grille ¦ Bir flex ya da ızgarada gösterim sırası
+Lignes minimum en bas de page ¦ Sayfa sonunda en az satır sayısı
+Contour (n’occupe pas de place), utile pour le focus clavier ¦ Dış çizgi (yer kaplamaz), klavye odağı için yararlı
+Écart entre le contour et la bordure ¦ Dış çizgi ile kenarlık arasındaki boşluk
+Ce qui dépasse : visible, caché, barre de défilement ¦ Taşan kısım: görünür, gizli, kaydırma çubuğu
+Couper un mot trop long pour qu’il tienne ¦ Sığması için çok uzun bir sözcüğü böl
+Ce qui dépasse en largeur ¦ Genişlikte taşan kısım
+Ce qui dépasse en hauteur ¦ Yükseklikte taşan kısım
+Espace intérieur (les 4 côtés) ¦ İç boşluk (4 kenar)
+Espaces intérieurs haut et bas ¦ Üst ve alt iç boşluklar
+Espace intérieur en bas ¦ Alt iç boşluk
+Espaces intérieurs des côtés ¦ Yan iç boşluklar
+Espace intérieur à gauche ¦ Sol iç boşluk
+Espace intérieur à droite ¦ Sağ iç boşluk
+Espace intérieur en haut ¦ Üst iç boşluk
+Raccourci de align-content et justify-content ¦ align-content ve justify-content kısaltması
+Raccourci de align-items et justify-items ¦ align-items ve justify-items kısaltması
+L’élément réagit-il à la souris ? ¦ Öğe fareye tepki veriyor mu?
+Placement : static, relative, absolute, fixed, sticky ¦ Konumlandırma: static, relative, absolute, fixed, sticky
+Guillemets utilisés par <q> ¦ <q> tarafından kullanılan tırnak işaretleri
+L’utilisateur peut-il redimensionner (textarea…) ¦ Kullanıcı boyutunu değiştirebilir mi (textarea…)
+Décalage depuis la droite (avec position) ¦ Sağdan uzaklık (position ile)
+Tourner ¦ Döndür
+Agrandir ou réduire ¦ Büyüt ya da küçült
+Défilement doux vers une ancre ¦ Bir çapaya yumuşak kaydırma
+Marge gardée quand on fait défiler jusqu’à l’élément ¦ Öğeye kaydırırken korunan boşluk
+Défilement qui s’arrête sur des éléments ¦ Öğelerde duran kaydırma
+Calcul de la largeur des colonnes d’un tableau ¦ Tablo sütun genişliklerinin hesaplanması
+Alignement du texte (gauche, centré, droite, justifié) ¦ Metin hizalama (sol, orta, sağ, iki yana yaslı)
+Soulignement, barré… ¦ Altı çizili, üstü çizili…
+Couleur du soulignement ¦ Alt çizginin rengi
+Épaisseur du soulignement ¦ Alt çizginin kalınlığı
+Retrait de la première ligne ¦ İlk satırın girintisi
+Texte coupé : « … » à la fin ¦ Kesilen metin: sonda “…”
+Majuscules, minuscules, capitales ¦ Büyük harf, küçük harf, baş harfler büyük
+Écart du soulignement ¦ Alt çizginin uzaklığı
+Façon de couper les lignes (balance, pretty…) ¦ Satırların kesilme biçimi (balance, pretty…)
+Décalage depuis le haut (avec position) ¦ Üstten uzaklık (position ile)
+Déplacer, tourner, agrandir, incliner ¦ Taşı, döndür, büyüt, eğ
+Point d’appui des transformations ¦ Dönüşümlerin dayanak noktası
+Changement progressif d’une valeur à l’autre ¦ Bir değerden ötekine aşamalı geçiş
+Délai avant la transition ¦ Geçişten önceki gecikme
+Durée de la transition ¦ Geçişin süresi
+Propriétés qui changent en douceur ¦ Yumuşakça değişen özellikler
+Rythme de la transition (ease, linear…) ¦ Geçişin hızlanma eğrisi (ease, linear…)
+Le texte peut-il être sélectionné ? ¦ Metin seçilebilir mi?
+Alignement vertical dans la ligne ou une cellule ¦ Satırda ya da hücrede dikey hizalama
+Visible ou caché (en gardant la place) ¦ Görünür ya da gizli (yerini koruyarak)
+Gestion des espaces et des retours à la ligne ¦ Boşlukların ve satır sonlarının işlenmesi
+Lignes minimum en haut de page ¦ Sayfa başında en az satır sayısı
+Prévient le navigateur d’un changement (animations) ¦ Tarayıcıyı bir değişiklik için önceden uyarır (animasyonlar)
+Coupure des mots longs ¦ Uzun sözcüklerin bölünmesi
+Sens d’écriture (horizontal, vertical) ¦ Yazı yönü (yatay, dikey)
+Ordre d’empilement (qui passe devant) ¦ Yığılma sırası (öne geçen)
+Trouve le premier élément qui correspond à un sélecteur CSS ¦ Bir CSS seçiciye uyan ilk öğeyi bulur
+Trouve tous les éléments qui correspondent (une liste) ¦ Uyan tüm öğeleri bulur (bir liste)
+Trouve l’élément qui a cet id ¦ Bu id’ye sahip öğeyi bulur
+Réagit à un évènement (click, input, submit…) ¦ Bir olaya tepki verir (click, input, submit…)
+Arrête de réagir à un évènement ¦ Bir olaya tepki vermeyi bırakır
+Empêche l’action habituelle (suivre un lien, envoyer un formulaire) ¦ Olağan eylemi engeller (bağlantıyı izlemek, formu göndermek)
+Ajouter, retirer, basculer une classe ¦ Bir sınıf ekle, çıkar, değiştir
+Le texte d’un élément (sans HTML) ¦ Bir öğenin metni (HTML olmadan)
+Le HTML à l’intérieur d’un élément (attention aux textes venus d’ailleurs) ¦ Bir öğenin içindeki HTML (başka yerden gelen metinlere dikkat)
+Donne une valeur à un attribut ¦ Bir özniteliğe değer verir
+Lit la valeur d’un attribut ¦ Bir özniteliğin değerini okur
+Les attributs data-… d’un élément ¦ Bir öğenin data-… öznitelikleri
+Les styles écrits sur l’élément (style="…") ¦ Öğenin üzerine yazılmış stiller (style="…")
+Crée un nouvel élément ¦ Yeni bir öğe oluşturur
+Ajoute à la fin d’un élément ¦ Bir öğenin sonuna ekler
+Retire l’élément de la page ¦ Öğeyi sayfadan çıkarır
+Le plus proche parent qui correspond au sélecteur ¦ Seçiciye uyan en yakın üst öğe
+L’élément correspond-il au sélecteur ? ¦ Öğe seçiciye uyuyor mu?
+Fait défiler jusqu’à l’élément ¦ Öğeye kadar kaydırır
+Lance une fonction après un délai (en ms) ¦ Bir fonksiyonu bir gecikmeden sonra çalıştırır (ms cinsinden)
+Lance une fonction à intervalles réguliers ¦ Bir fonksiyonu düzenli aralıklarla çalıştırır
+Garde des petites données dans le navigateur ¦ Tarayıcıda küçük veriler saklar
+Charge un fichier ou des données (JSON…) ¦ Bir dosya ya da veri yükler (JSON…)
+Texte JSON ↔ objet JavaScript ¦ JSON metni ↔ JavaScript nesnesi
+Écrit dans la console du navigateur (pour vérifier) ¦ Tarayıcı konsoluna yazar (kontrol için)
+Évènement : la page est prête (HTML lu) ¦ Olay: sayfa hazır (HTML okundu)
+Évènements courants : clic, saisie, changement, envoi ¦ Sık olaylar: tıklama, giriş, değişiklik, gönderme
+Prévient quand un élément entre à l’écran (apparitions au défilement) ¦ Bir öğe ekrana girdiğinde haber verir (kaydırırken beliren öğeler)
+Teste une requête @media en JS ¦ JS içinde bir @media sorgusunu sınar
+Déclare une variable (const : ne change plus) ¦ Bir değişken bildirir (const: artık değişmez)
+Déclare une fonction (=> : écriture courte) ¦ Bir fonksiyon bildirir (=>: kısa yazım)
+Fait une chose ou une autre selon une condition ¦ Bir koşula göre bir şeyi ya da ötekini yapar
+Parcourt une liste ¦ Bir listeyi dolaşır
+Transforme, trie ou parcourt un tableau ¦ Bir diziyi dönüştürür, sıralar ya da dolaşır
+Attend un résultat (fetch…) sans bloquer la page ¦ Sayfayı engellemeden bir sonucu bekler (fetch…)
+Attrape une erreur pour l’afficher proprement ¦ Düzgünce göstermek için bir hatayı yakalar
+Texte avec des valeurs dedans ¦ İçinde değerler olan metin
+Dates et heures ¦ Tarihler ve saatler
+Nombre au hasard, arrondi ¦ Rastgele sayı, yuvarlama
+Chercher, couper, remplacer dans un texte ¦ Bir metinde ara, böl, değiştir
+Autre libellé de la cellule d’en-tête, quand on y renvoie ailleurs ¦ Başlık hücresinin başka bir yerden anıldığındaki diğer etiketi
+Types de fichiers attendus dans un champ d’envoi de fichier ¦ Dosya gönderme alanında beklenen dosya türleri
+Codages de caractères pour l’envoi du formulaire ¦ Form gönderimi için karakter kodlamaları
+Raccourci clavier pour activer ou atteindre l’élément ¦ Öğeyi etkinleştirmek ya da ona ulaşmak için klavye kısayolu
+Adresse où envoyer le formulaire ¦ Formun gönderileceği adres
+Permissions données au contenu de l’iframe ¦ iframe içeriğine verilen izinler
+Le contenu de l’iframe peut-il passer en plein écran ¦ iframe içeriği tam ekrana geçebilir mi
+Permet de choisir la transparence (alpha) de la couleur ¦ Rengin saydamlığını (alfa) seçmeyi sağlar
+Texte de remplacement quand l’image ne s’affiche pas (essentiel pour l’accessibilité) ¦ Görüntü gösterilemediğinde yerine geçen metin (erişilebilirlik için çok önemli)
+Sorte de ressource à précharger (avec rel="preload" ou "modulepreload") ¦ Önceden yüklenecek kaynak türü (rel="preload" ya da "modulepreload" ile)
+Lance le script dès qu’il est prêt, sans bloquer la page ¦ Betiği hazır olur olmaz, sayfayı engellemeden çalıştırır
+Majuscules automatiques conseillées (claviers qui le gèrent) ¦ Önerilen otomatik büyük harf (destekleyen klavyelerde)
+Remplissage automatique par défaut des champs du formulaire ¦ Form alanlarının varsayılan otomatik doldurması
+Indice pour le remplissage automatique (email, nom, adresse…) ¦ Otomatik doldurma için ipucu (e-posta, ad, adres…)
+Correction automatique conseillée (claviers qui le gèrent) ¦ Önerilen otomatik düzeltme (destekleyen klavyelerde)
+Met le curseur dans l’élément à l’ouverture de la page ¦ Sayfa açılınca imleci öğeye koyar
+Le média peut démarrer tout seul à l’ouverture de la page ¦ Medya sayfa açılınca kendiliğinden başlayabilir
+L’élément peut-il retarder l’affichage de la page ¦ Öğe sayfanın gösterimini geciktirebilir mi
+Codage des caractères du document (UTF-8) ¦ Belgenin karakter kodlaması (UTF-8)
+La case est-elle cochée ¦ Kutu işaretli mi
+Lien vers la source de la citation ou vers des précisions sur la modification ¦ Alıntının kaynağına ya da değişiklikle ilgili ayrıntılara bağlantı
+Classes de l’élément (pour le CSS) ¦ Öğenin sınıfları (CSS için)
+Ce qui ferme la boîte de dialogue ¦ İletişim kutusunu kapatan şey
+Couleur de l’icône du site (rel="mask-icon") ¦ Site simgesinin rengi (rel="mask-icon")
+Espace colorimétrique de la couleur choisie ¦ Seçilen rengin renk uzayı
+Nombre de caractères par ligne ¦ Satır başına karakter sayısı
+Nombre de colonnes couvertes par la cellule ¦ Hücrenin kapladığı sütun sayısı
+Action à faire sur l’élément visé ¦ Hedef öğe üzerinde yapılacak eylem
+Élément visé par le bouton ¦ Düğmenin hedeflediği öğe
+Valeur de la métadonnée ¦ Üst verinin değeri
+L’élément est-il modifiable par le visiteur ¦ Öğe ziyaretçi tarafından düzenlenebilir mi
+Montrer les boutons de lecture du navigateur ¦ Tarayıcının oynatma düğmelerini göster
+Coordonnées de la zone dans une image cliquable ¦ Tıklanabilir bir görüntüdeki alanın koordinatları
+Façon de traiter les demandes vers un autre site (CORS) ¦ Başka bir siteye yapılan isteklerin işlenme biçimi (CORS)
+Adresse de la ressource ¦ Kaynağın adresi
+Date (et heure) de la modification ¦ Değişikliğin tarihi (ve saati)
+Valeur lisible par une machine ¦ Makinece okunabilir değer
+Indice de décodage de l’image pour l’affichage ¦ Gösterim için görüntü çözme ipucu
+Active cette piste si aucune autre ne convient mieux ¦ Daha uygun başka bir iz yoksa bu izi açar
+Lance le script après la lecture de la page ¦ Betiği sayfa okunduktan sonra çalıştırır
+Sens d’écriture de l’élément ¦ Öğenin yazı yönü
+Nom du champ qui envoie le sens d’écriture avec le formulaire ¦ Yazı yönünü formla birlikte gönderen alanın adı
+Le champ est-il désactivé ¦ Alan devre dışı mı
+Les champs à l’intérieur sont-ils désactivés (sauf dans legend) ¦ İçerideki alanlar devre dışı mı (legend içindekiler hariç)
+Le lien est-il désactivé ¦ Bağlantı devre dışı mı
+Télécharger le fichier au lieu de l’ouvrir, et sous quel nom ¦ Dosyayı açmak yerine indir ve hangi adla
+L’élément peut-il être glissé ¦ Öğe sürüklenebilir mi
+Codage des données à l’envoi du formulaire ¦ Form gönderilirken verilerin kodlaması
+Libellé conseillé pour la touche Entrée du clavier ¦ Klavyedeki Enter tuşu için önerilen etiket
+Priorité du chargement lancé par l’élément ¦ Öğenin başlattığı yüklemenin önceliği
+Relie le libellé à un champ (son id) ¦ Etiketi bir alana bağlar (alanın id’si)
+Champs dont dépend le résultat ¦ Sonucun bağlı olduğu alanlar
+Met à jour un contenu existant ¦ Var olan bir içeriği günceller
+Rattache l’élément à un formulaire (son id) ¦ Öğeyi bir forma bağlar (formun id’si)
+Adresse d’envoi (pour ce bouton) ¦ Gönderme adresi (bu düğme için)
+Codage de l’envoi (pour ce bouton) ¦ Gönderme kodlaması (bu düğme için)
+Méthode d’envoi : GET ou POST (pour ce bouton) ¦ Gönderme yöntemi: GET ya da POST (bu düğme için)
+Envoyer sans vérifier les champs (pour ce bouton) ¦ Alanları kontrol etmeden gönder (bu düğme için)
+Où ouvrir la réponse (pour ce bouton) ¦ Yanıtın açılacağı yer (bu düğme için)
+Cellules d’en-tête de cette cellule ¦ Bu hücrenin başlık hücreleri
+Décale les niveaux des titres à l’intérieur ¦ İçerideki başlıkların düzeylerini kaydırır
+Empêche le décalage des niveaux de titres d’aller plus loin ¦ Başlık düzeyi kaymasının daha ileri gitmesini engeller
+Caché (l’élément ne compte pas pour l’instant) ¦ Gizli (öğe şimdilik sayılmaz)
+Début de la zone haute de la jauge ¦ Göstergenin yüksek bölgesinin başlangıcı
+Adresse du lien ¦ Bağlantının adresi
+Adresse de la ressource liée ¦ Bağlı kaynağın adresi
+Adresse de base du document ¦ Belgenin temel adresi
+Langue de la page liée ¦ Bağlı sayfanın dili
+Instruction pour le navigateur (http-equiv) ¦ Tarayıcı için talimat (http-equiv)
+Identifiant unique de l’élément (pour le CSS, le JS et les ancres #) ¦ Öğenin tekil tanımlayıcısı (CSS, JS ve # çapaları için)
+Tailles d’image selon la mise en page (préchargement) ¦ Sayfa düzenine göre görüntü boyutları (önceden yükleme)
+Images selon l’écran (préchargement) ¦ Ekrana göre görüntüler (önceden yükleme)
+Rend l’élément inerte (ni clic ni focus) ¦ Öğeyi etkisiz kılar (tıklama da odak da olmaz)
+Clavier conseillé sur mobile (chiffres, email…) ¦ Mobilde önerilen klavye (rakamlar, e-posta…)
+Empreinte pour vérifier que le fichier n’a pas été modifié (SRI) ¦ Dosyanın değiştirilmediğini doğrulamak için parmak izi (SRI)
+Crée un élément personnalisé à partir d’un élément existant ¦ Var olan bir öğeden özel bir öğe oluşturur
+Image cliquable gérée par le serveur ¦ Sunucu tarafında yönetilen tıklanabilir görüntü
+Identifiant global d’un objet de microdonnées ¦ Bir mikroveri nesnesinin genel tanımlayıcısı
+Propriétés de microdonnées ¦ Mikroveri özellikleri
+Éléments rattachés (microdonnées) ¦ Bağlı öğeler (mikroveri)
+Commence un objet de microdonnées ¦ Bir mikroveri nesnesi başlatır
+Type d’un objet de microdonnées (schema.org…) ¦ Bir mikroveri nesnesinin türü (schema.org…)
+Sorte de piste de texte (sous-titres, chapitres…) ¦ Metin izi türü (altyazılar, bölümler…)
+Libellé visible ¦ Görünür etiket
+Langue de l’élément (fr, en…) ¦ Öğenin dili (fr, en…)
+Liste de propositions (id d’un datalist) ¦ Öneri listesi (bir datalist’in id’si)
+Chargement différé : lazy ou eager ¦ Ertelenmiş yükleme: lazy ya da eager
+Lecture en boucle ¦ Döngüde oynatma
+Fin de la zone basse de la jauge ¦ Göstergenin düşük bölgesinin sonu
+Valeur maximale ¦ En büyük değer
+Borne haute ¦ Üst sınır
+Longueur maximale ¦ En büyük uzunluk
+Média concerné (requête @media) ¦ İlgili medya (@media sorgusu)
+Méthode d’envoi : GET ou POST ¦ Gönderme yöntemi: GET ya da POST
+Valeur minimale ¦ En küçük değer
+Borne basse ¦ Alt sınır
+Longueur minimale ¦ En küçük uzunluk
+Plusieurs valeurs permises ¦ Birden çok değere izin var
+Son coupé au départ ¦ Başlangıçta ses kapalı
+Nom du champ pour l’envoi du formulaire ¦ Form gönderimi için alan adı
+Nom d’un groupe de details (un seul ouvert à la fois) ¦ Bir details grubunun adı (aynı anda yalnızca biri açık)
+Nom du formulaire (document.forms) ¦ Formun adı (document.forms)
+Nom du cadre (cible des liens) ¦ Çerçevenin adı (bağlantıların hedefi)
+Nom de l’image cliquable (pour usemap) ¦ Tıklanabilir görüntünün adı (usemap için)
+Nom de la métadonnée (description, viewport…) ¦ Üst verinin adı (description, viewport…)
+Nom de l’emplacement (shadow DOM) ¦ Yuvanın adı (shadow DOM)
+Ignoré par les navigateurs qui lisent les modules ¦ Modülleri okuyan tarayıcılar yok sayar
+Jeton unique pour la politique de sécurité (CSP) ¦ Güvenlik politikası için tek kullanımlık jeton (CSP)
+Envoyer sans vérifier les champs ¦ Alanları kontrol etmeden gönder
+Le details est-il ouvert ¦ details açık mı
+La boîte de dialogue est-elle affichée ¦ İletişim kutusu gösteriliyor mu
+Valeur idéale de la jauge ¦ Göstergenin ideal değeri
+Motif que la saisie doit suivre (expression régulière) ¦ Girişin uyması gereken desen (düzenli ifade)
+Adresses à prévenir quand on suit le lien ¦ Bağlantı izlenince haber verilecek adresler
+Texte d’exemple dans le champ vide ¦ Boş alanda örnek metin
+Lire la vidéo dans la page (pas en plein écran sur mobile) ¦ Videoyu sayfa içinde oynat (mobilde tam ekran değil)
+Fait de l’élément une fenêtre surgissante (popover) ¦ Öğeyi açılır pencere yapar (popover)
+Fenêtre surgissante visée par le bouton ¦ Düğmenin hedeflediği açılır pencere
+Montrer, cacher ou basculer la fenêtre surgissante ¦ Açılır pencereyi göster, gizle ya da aç/kapat
+Image montrée avant la lecture de la vidéo ¦ Video oynatılmadan önce gösterilen görüntü
+Quantité de média à charger à l’avance ¦ Önceden yüklenecek medya miktarı
+Le champ est-il en lecture seule ¦ Alan salt okunur mu
+Lecture seule (éléments personnalisés) ¦ Salt okunur (özel öğeler)
+Informations de provenance envoyées lors des chargements ¦ Yüklemelerde gönderilen kaynak bilgisi
+Relation du lien (noopener, nofollow…) ¦ Bağlantı ilişkisi (noopener, nofollow…)
+Relation du document lié (stylesheet, icon…) ¦ Bağlı belgenin ilişkisi (stylesheet, icon…)
+Champ obligatoire ¦ Zorunlu alan
+Numérotation à l’envers ¦ Tersten numaralandırma
+Nombre de lignes visibles ¦ Görünür satır sayısı
+Nombre de lignes couvertes par la cellule ¦ Hücrenin kapladığı satır sayısı
+Règles de sécurité du contenu intégré ¦ Gömülü içeriğin güvenlik kuralları
+Cellules concernées par l’en-tête (row, col…) ¦ Başlığın kapsadığı hücreler (row, col…)
+Option choisie au départ ¦ Başlangıçta seçili seçenek
+Shadow root clonable ¦ Klonlanabilir shadow root
+Shadow root avec registre d’éléments personnalisés ¦ Özel öğe kayıt defterli shadow root
+Shadow root qui transmet le focus ¦ Odağı aktaran shadow root
+Shadow root déclaratif (open ou closed) ¦ Bildirimsel shadow root (open ya da closed)
+Shadow root sérialisable ¦ Serileştirilebilir shadow root
+Répartition des emplacements du shadow root ¦ Shadow root yuvalarının dağıtımı
+Forme de la zone (rect, circle, poly) ¦ Alanın biçimi (rect, circle, poly)
+Taille du champ ¦ Alanın boyutu
+Tailles des icônes (rel="icon") ¦ Simge boyutları (rel="icon")
+Tailles d’image selon la mise en page ¦ Sayfa düzenine göre görüntü boyutları
+Emplacement voulu (shadow DOM) ¦ İstenen yuva (shadow DOM)
+Nombre de colonnes couvertes ¦ Kaplanan sütun sayısı
+Vérifier l’orthographe et la grammaire ¦ Yazım ve dil bilgisini kontrol et
+Adresse du fichier ¦ Dosyanın adresi
+Page à afficher dans l’iframe (HTML) ¦ iframe içinde gösterilecek sayfa (HTML)
+Langue de la piste de texte ¦ Metin izinin dili
+Images selon l’écran (haute définition, petit écran…) ¦ Ekrana göre görüntüler (yüksek çözünürlük, küçük ekran…)
+Premier numéro de la liste ¦ Listenin ilk numarası
+Pas de la valeur (1, 0.5…) ¦ Değer adımı (1, 0.5…)
+Styles écrits sur l’élément ¦ Öğenin üzerine yazılmış stiller
+Ordre et possibilité d’atteindre l’élément au clavier (Tab) ¦ Öğeye klavyeyle (Tab) ulaşma sırası ve olanağı
+Où ouvrir le lien (_blank : nouvel onglet) ¦ Bağlantının açılacağı yer (_blank: yeni sekme)
+Cible par défaut des liens et formulaires ¦ Bağlantılar ve formlar için varsayılan hedef
+Où ouvrir la réponse du formulaire ¦ Formun yanıtının açılacağı yer
+Infobulle (information en plus) ¦ Araç ipucu (ek bilgi)
+Forme complète de l’abréviation ¦ Kısaltmanın tam biçimi
+Explication du motif attendu ¦ Beklenen desenin açıklaması
+Titre du lien ¦ Bağlantının başlığı
+Nom d’un jeu de feuilles de styles ¦ Bir stil sayfası takımının adı
+Faut-il traduire l’élément quand la page est traduite (yes, no) ¦ Sayfa çevrildiğinde öğe de çevrilsin mi (yes, no)
+Type de la ressource liée ¦ Bağlı kaynağın türü
+Type de bouton (submit, button, reset) ¦ Düğme türü (submit, button, reset)
+Type de la ressource intégrée ¦ Gömülü kaynağın türü
+Type de champ (text, email, date…) ¦ Alan türü (text, email, date…)
+Forme des numéros de la liste (1, a, A, i, I) ¦ Liste numaralarının biçimi (1, a, A, i, I)
+Type de script (module…) ¦ Betik türü (module…)
+Image cliquable à utiliser (#nom) ¦ Kullanılacak tıklanabilir görüntü (#ad)
+Valeur envoyée avec le formulaire ¦ Formla gönderilen değer
+Valeur du champ ¦ Alanın değeri
+Numéro de cet élément de liste ¦ Bu liste öğesinin numarası
+Valeur actuelle ¦ Şu anki değer
+Retour à la ligne du texte envoyé (soft, hard) ¦ Gönderilen metnin satır kaydırması (soft, hard)
+Suggestions d’écriture permises ou non ¦ Yazma önerilerine izin var mı
+{tag} ferme une balise qui n’est pas ouverte. ¦ {tag} açılmamış bir etiketi kapatıyor.
+{tag} n’est pas fermée ({end}). ¦ {tag} kapatılmamış ({end}).
+L’id « {id} » est donné deux fois. ¦ “{id}” id’si iki kez verilmiş.
+Une image sans alt (texte pour ceux qui ne la voient pas). ¦ alt’ı olmayan bir görüntü (onu göremeyenler için metin).
+Des guillemets ne sont pas fermés. ¦ Bazı tırnaklar kapatılmamış.
+« {ch} » en trop. ¦ Fazladan: “{ch}”.
+« {ch} » ferme « {open} » (ligne {n}). ¦ “{ch}”, “{open}” işaretini kapatıyor (satır {n}).
+Un commentaire /* … */ n’est pas fermé. ¦ Bir /* … */ yorumu kapatılmamış.
+« {ch} » n’est pas fermé. ¦ Kapatılmamış: “{ch}”.
+Il manque sans doute un « ; » au bout de la ligne. ¦ Büyük olasılıkla satırın sonunda bir “;” eksik.
+Ligne {line}, colonne {col} ¦ Satır {line}, sütun {col}
+Le numéro de la ligne (1 à {n}), ou ligne:colonne : ¦ Satır numarası (1 – {n}) ya da satır:sütun:
+Aller à la ligne (1 à {n}) ¦ Satıra git (1 – {n})
+Déjà en forme. ¦ Zaten biçimli.
+Code remis en forme. ¦ Kod yeniden biçimlendirildi.
+Retour au début. ¦ Başa dönüldü.
+Sur PC et Linux : Ctrl au lieu de ⌘, Alt au lieu de ⌥. ¦ PC ve Linux’ta: ⌘ yerine Ctrl, ⌥ yerine Alt.
+jumelle ligne {n} ¦ eşi: satır {n}
+✓ Rien à signaler ¦ ✓ Bildirilecek bir şey yok
+Ligne {n} : {msg} ¦ Satır {n}: {msg}
+Le code a l’air bien formé. ¦ Kod düzgün biçimli görünüyor.
+Rien à signaler. ¦ Bildirilecek bir şey yok.
+=remplacé ¦ değiştirildi|değiştirildi
+=caractère choisi ¦ seçili karakter|seçili karakter
+pas sur {name} ¦ şurada yok: {name}
+pas sur {name} avant {v} ¦ {v} öncesinde şurada yok: {name}
+Aller à la ligne {n} de {file} ¦ Satıra git: {n} ({file})
+partout chez les navigateurs visés ¦ hedeflenen tüm tarayıcılarda
+ligne {n} de {file} ¦ satır {n} ({file})
+Navigateurs visés : {list}. ¦ Hedeflenen tarayıcılar: {list}.
+✅ Rien à signaler : ton site devrait marcher sur tous les navigateurs visés. ¦ ✅ Bildirilecek bir şey yok: siten hedeflenen tüm tarayıcılarda çalışmalı.
+{what} : certains visiteurs verront ton site un peu différemment. ¦ {what}: bazı ziyaretçiler siteni biraz farklı görecek.
+=fonction récente, bien prise en charge ¦ yeni özellik, iyi destekleniyor|yeni özellik, iyi destekleniyor
+=point à vérifier ¦ kontrol edilecek nokta|kontrol edilecek nokta
+=autre fonction récente, sans souci ¦ başka yeni özellik, sorunsuz|başka yeni özellik, sorunsuz
+swref|Sur ¦ Şurada
+Imiter {name} ¦ Taklit et: {name}
+Carte : {err} ¦ Harita: {err}
+Ce lien mène hors du site ({url}) : il marchera dans le site exporté. ¦ Bu bağlantı sitenin dışına gidiyor ({url}): dışa aktarılan sitede çalışacak.
+Comme dans {name} : {what} à vérifier (🧭 Navigateurs). ¦ {name} içindeki gibi: {what} kontrol edilecek (🧭 Tarayıcılar).
+Comme dans {name} : rien à signaler. ¦ {name} içindeki gibi: bildirilecek bir şey yok.
+L’aperçu reste celui de l’app : pour voir le vrai, ↗ Aperçu dans ce navigateur. ¦ Önizleme uygulamanınki olarak kalır: gerçeğini görmek için ↗ O tarayıcıda önizle.
+Largeur en px ¦ px cinsinden genişlik
+aperçu {w} ¦ önizleme {w}
+{a} et {b} ¦ {a} ve {b}
+{what} dans le CSS ¦ CSS içinde: {what}
+pas encore de CSS ¦ henüz CSS yok
+ces blocs suivront la nouvelle requête ¦ bu bloklar yeni sorguya uyacak
+l’aperçu le montre même si ton appareil ne l’est pas ¦ cihazın öyle olmasa bile önizleme bunu gösterir
+Chaque écran est un bouton au-dessus de l’aperçu, et un choix « Écran » quand tu règles un élément : ses styles vont dans son bloc {code} du CSS du site. ¦ Her ekran önizlemenin üstünde bir düğmedir ve bir öğeyi ayarlarken bir “Ekran” seçeneğidir: stilleri sitenin CSS’indeki kendi {code} bloğuna gider.
+Dans le CSS, sans écran : ¦ CSS içinde, ekransız:
+Cette page : « {name} » ¦ Bu sayfa: “{name}”
+Titre dans l’onglet du navigateur ¦ Tarayıcı sekmesindeki başlık
+Description (pour les moteurs de recherche) ¦ Açıklama (arama motorları için)
+Ces réglages remplissent les variables {code} de ta feuille de styles (onglet CSS). ¦ Bu ayarlar stil sayfandaki {code} değişkenlerini doldurur (CSS sekmesi).
+titres ¦ başlıklar
+Ta règle {rule} passe devant ce curseur : change-la, ou retire sa ligne. ¦ {rule} kuralın bu sürgüden önce geliyor: onu değiştir ya da satırını sil.
+ligne {n} ¦ satır {n}
+Écrit dans {code} : seulement sur cet écran. ¦ Yazıldığı yer: {code}. Yalnızca bu ekranda.
+Écrit dans le CSS du site, pour tous les écrans. ¦ Sitenin CSS’ine yazıldı, tüm ekranlar için.
+Pour un seul élément : clique-le, section « Marges, espace intérieur et taille ». ¦ Tek bir öğe için: ona tıkla, “Kenar boşlukları, iç boşluk ve boyut” bölümü.
+la racine du site ¦ sitenin kökü
+Dans {dir} : ¦ Klasör: {dir}
+{dir} : glisses-y des fichiers, ou ＋ pour en créer un dedans (un dossier vide n’est pas gardé à l’enregistrement). ¦ {dir}: içine dosya sürükle ya da içinde bir tane oluşturmak için ＋ (boş bir klasör kaydedilirken korunmaz).
+Page « {name} » supprimée ¦ “{name}” sayfası silindi
+Page « {name} » créée : elle est dans le menu de toutes les pages. ¦ “{name}” sayfası oluşturuldu: tüm sayfaların menüsünde.
+C’est ton {what} : {tag}, nommé « {name} ». ¦ Bu: {what} — {tag}, adı “{name}”.
+{what}. Valeur : {value}. ¦ {what}. Değer: {value}.
+Sa valeur : ¦ Değeri:
+{what} · valeur : {value} ¦ {what} · değer: {value}
+Attribut sans description dans la norme (data-…, aria-…, ou propre à ton site) ¦ Standartta açıklaması olmayan öznitelik (data-…, aria-… ya da sitene özgü)
+Attributs HTML ¦ HTML öznitelikleri
+＋ Ajouter un attribut… ¦ ＋ Öznitelik ekle…
+Propres à {tag} ¦ Şuna özgü: {tag}
+Pour tous les éléments ¦ Tüm öğeler için
+Autre (data-…, aria-…)… ¦ Diğer (data-…, aria-…)…
+Source : {link}, © {by}, licence {lic} ; {changes}. ¦ Kaynak: {link}, © {by}, lisans {lic}; {changes}.
+traduit en français et adapté ¦ Fransızcaya çevrildi ve uyarlandı (buradaki açıklamaları yapay zekâ çevirdi)
+Syntaxe, valeur de départ, héritage : {link} (relevées dans w3c/webref), © World Wide Web Consortium, {lic} ; seuls quelques champs sont repris, « héritée » et certains « s’applique à » sont traduits. Descriptions en français : écrites pour LCNDA. ¦ Sözdizimi, başlangıç değeri, kalıtım: {link} (w3c/webref’ten alındı), © World Wide Web Consortium, {lic}; yalnızca birkaç alan alındı, “kalıtılır” ve bazı “uygulandığı öğeler” çevrildi. Açıklamalar: LCNDA için Fransızca yazıldı.
+normes CSS du W3C ¦ W3C CSS standartları
+Notice de la licence W3C ¦ W3C lisans bildirimi
+Les plus utiles ; cherche pour voir les {n}. ¦ En yararlıları; {n} öğenin tümünü görmek için ara.
+{x} copié. ¦ Kopyalandı: {x}
+Astuces ¦ İpuçları
+{b} : clique dans un texte pour le changer, le code suit tout seul. ¦ {b}: değiştirmek için bir metne tıkla, kod kendiliğinden uyar.
+T Écrire ¦ T Yaz
+Dans le code, {key} déplie une abréviation : {ex}. ¦ Kodda {key} bir kısaltmayı açar: {ex}.
+{b} fait tourner tes scripts (JS) dans l’aperçu isolé. ¦ {b} betiklerini (JS) yalıtılmış önizlemede çalıştırır.
+▶ Tester ¦ ▶ Dene
+La carte est faite en image avec ce fond (et sa mention : {credit}), redessinée à chaque ouverture. ¦ Harita bu arka planla (ve kaynak bilgisiyle: {credit}) görüntü olarak yapılır, her açılışta yeniden çizilir.
+🌳 Bloc de la généalogie : {what} ¦ 🌳 Soy ağacı bloğu: {what}
+Texte de remplacement (pour qui ne voit pas l’image) ¦ Yerine geçen metin (görüntüyü göremeyenler için)
+Ceci est ¦ Bu
+Ceci est… ¦ Bu…
+{tag}, nommé « {name} » ¦ {tag}, adı “{name}”
+Nom (pour toi) ¦ Ad (senin için)
+Balise ¦ Etiket
+Classe(s) ¦ Sınıf(lar)
+{x} en px ¦ {x} (px)
+marge ¦ dış boşluk
+espace intérieur ¦ iç boşluk
+style="…" de l’élément ¦ öğenin style="…" özniteliği
+dans @media {q} ¦ @media {q} içinde
+Appliquer à ¦ Uygula:
+Tous les éléments {cls} ¦ Tüm {cls} öğeleri
+Écrit dans : {where} ¦ Yazıldığı yer: {where}
+CSS du site ¦ Sitenin CSS’i
+modifié le {date} ¦ değiştirilme: {date}
+{kb} Ko · dans une page : {html} · dans le CSS : {css} ¦ {kb} KB · bir sayfada: {html} · CSS içinde: {css}
+depuis css/ ¦ css/ klasöründen
+page « {name} » ¦ “{name}” sayfası
+Fichiers du site ({n}) ¦ Sitenin dosyaları ({n})
+{name} garde son nom : c’est le fichier principal du site. ¦ {name} adını korur: sitenin ana dosyası.
+tu peux y écrire du PHP, par exemple {code} ¦ içine PHP yazabilirsin, örneğin {code}
+aujourd’hui : {where} ¦ şu an: {where}
+la racine ¦ kök
+Déplacer {name} ¦ Taşı: {name}
+{x} supprimé ¦ Silindi: {x}
+PHP exécuté ({ms} ms) ¦ PHP çalıştırıldı ({ms} ms)
+L’aperçu remplace seulement les include. ¦ Önizleme yalnızca include’ları yerine koyar.
+lié après style.css sur {what} ¦ style.css’ten sonra bağlandı, şurada: {what}
+lié après style.css ¦ style.css’ten sonra bağlandı
+clic droit sur l’onglet : ses pages ¦ sekmeye sağ tıkla: sayfaları
+lié après script.js, tourne en ▶ Tester ¦ script.js’ten sonra bağlandı, ▶ Dene ile çalışır
+à inclure dans une page PHP : {code} ¦ bir PHP sayfasına eklemek için: {code}
+PHP de « {name} » · {code} pour un en-tête commun ¦ “{name}” PHP’si · ortak bir üst bilgi için {code}
+HTML de « {name} » · Tab : Emmet (ul>li*3) · les blocs data-lc-block sont remplis tout seuls ¦ “{name}” HTML’i · Tab: Emmet (ul>li*3) · data-lc-block blokları kendiliğinden doldurulur
+CSS de tout le site · Tab : m10 → margin: 10px; · les couleurs de 🎨 : var(--lc-principale)… ¦ Tüm sitenin CSS’i · Tab: m10 → margin: 10px; · 🎨 renkleri: var(--lc-principale)…
+JS de tout le site · il tourne seulement en ▶ Tester, dans l’aperçu isolé, et dans le site exporté ¦ Tüm sitenin JS’i · yalnızca ▶ Dene ile, yalıtılmış önizlemede ve dışa aktarılan sitede çalışır
+🎨 CSS de {what} ¦ 🎨 CSS: {what}
+aucune règle ¦ kural yok
+modifie ici, le fichier suit ¦ burada düzenle, dosya uyar
+＋ Règle {sel} ¦ ＋ Kural {sel}
+Règle {n} ¦ Kural {n}
+{what} du HTML (scripts, cadres, attributs on…, liens javascript:) : mets ton JavaScript dans l’onglet JS. ¦ HTML’den çıkarılanlar: {what} (betikler, çerçeveler, on… öznitelikleri, javascript: bağlantıları): JavaScript’ini JS sekmesine koy.
+=chose retirée ¦ öğe çıkarıldı|öğe çıkarıldı
+Impossible d’enregistrer : {err} ¦ Kaydedilemedi: {err}
+Copie enregistrée : « {name} » (Mes sites…). ¦ Kopya kaydedildi: “{name}” (Sitelerim…).
+Site prêt : {name}. Décompresse-le et ouvre index.html (ou pose le dossier dans MAMP, WAMP, chez ton hébergeur) : le mode d’emploi est dans LISEZ-MOI.html. ¦ Site hazır: {name}. Arşivi aç ve index.html’i aç (ya da klasörü MAMP, WAMP içine, barındırma hizmetine koy): kullanım kılavuzu LISEZ-MOI.html içinde.
+Page prête : {name} (tout est dedans, à ouvrir d’un double-clic). ¦ Sayfa hazır: {name} (her şey içinde, çift tıklayarak aç).
+{what} (sans GPS ni appareil) ¦ {what} (GPS ve fotoğraf makinesi bilgisi olmadan)
+=image réduite ¦ küçültülen görüntü|küçültülen görüntü
+=image pas mise ¦ konmayan görüntü|konmayan görüntü
+=nom de personne vivante remplacé ¦ yaşayan kişi adı değiştirildi|yaşayan kişi adı değiştirildi
+=image introuvable ¦ bulunamayan görüntü|bulunamayan görüntü
+{what} (une personne vivante ou confidentielle dessus : {list}) ¦ {what} (üzerinde yaşayan ya da gizli bir kişi var: {list})
+{what} (une personne vivante ou confidentielle dessus) ¦ {what} (üzerinde yaşayan ya da gizli bir kişi var)
+{what} par « [nom retiré] » ¦ {what}, yerine “[nom retiré]”
+{what} vers une page qui n’existe plus ¦ {what}, artık var olmayan bir sayfaya
+{what} dans tes médias ¦ {what}, medyanda
+Le site a sa politique de sécurité (CSP) : ses scripts viennent seulement de ses fichiers. ¦ Sitenin güvenlik politikası (CSP) var: betikleri yalnızca kendi dosyalarından gelir.
+Déjà en ligne : ¦ Zaten internette:
+Jeton Netlify ¦ Netlify jetonu
+Jeton GitHub ¦ GitHub jetonu
+Dépôt ¦ Depo
+Serveur ¦ Sunucu
+Port ¦ Bağlantı noktası
+Identifiant ¦ Kullanıcı adı
+Dossier du site sur le serveur ¦ Sunucudaki site klasörü
+Ton site est en ligne ({n} fichiers). Il peut falloir une minute avant qu’il s’affiche. ¦ Siten internette ({n} dosya). Görünmesi bir dakika sürebilir.
+Ton site est envoyé ({n} fichiers). ¦ Siten gönderildi ({n} dosya).
+↗ Ouvrir {url} ¦ ↗ Aç: {url}
+« {name} » illisible. ¦ “{name}” okunamıyor.
+« {name} » : {pages}, {files} ; laissé de côté : {list}. Enregistre (💾) pour le garder. ¦ “{name}”: {pages}, {files}; dışarıda bırakılan: {list}. Korumak için kaydet (💾).
+« {name} » : {pages}, {files}. Enregistre (💾) pour le garder. ¦ “{name}”: {pages}, {files}. Korumak için kaydet (💾).
+Rempli depuis la fiche de {name} : relis et complète. ¦ Şu kişinin kartından dolduruldu: {name}. Gözden geçir ve tamamla.
+Mon dessin : {what} ¦ Çizimim: {what}
+celui déjà enregistré ¦ zaten kaydedilmiş olan
+ce qui est choisi dans le dessin ({what}) ¦ çizimde seçilen ({what})
+choisis d’abord des formes dans le dessin (outil Sélection), puis « ＋ Créer un élément » ¦ önce çizimde şekilleri seç (Seçim aracı), sonra “＋ Öğe oluştur”
+Le remplacer par ce qui est choisi dans le dessin ({n}) ¦ Onu çizimde seçilenle değiştir ({n})
+Choisis ce que tu dessines, puis : {a} — un clic par point, double-clic ou Entrée pour finir (les courbes se lissent toutes seules) ; {b} — glisse un rectangle ; {c} — un clic. ¦ Ne çizdiğini seç, sonra: {a} — her nokta için bir tıklama, bitirmek için çift tıklama ya da Enter (eğriler kendiliğinden yumuşar); {b} — bir dikdörtgen sürükle; {c} — bir tıklama.
+traits et zones ¦ çizgiler ve alanlar
+bâtiment ¦ bina
+symbole, nom ¦ simge, ad
+Plan situé : {place} — il couvre {size} (1 px ≈ {m} m). Les lieux de ta base se posent à leur vraie place (📍). ¦ Plan konumlandı: {place} — kapladığı alan {size} (1 px ≈ {m} m). Veritabanındaki yerler gerçek konumlarına yerleşir (📍).
+Pour une carte juste et pas déformée, commence par {b} (plus bas) : l’échelle se règle toute seule. Sinon, dis combien vaut un pixel : ¦ Doğru ve bozulmamış bir harita için {b} ile başla (aşağıda): ölçek kendiliğinden ayarlanır. Yoksa bir pikselin kaç metre olduğunu söyle:
+🗺️ Fond de carte d’un lieu ¦ 🗺️ Bir yerin harita altlığı
+1 pixel = … mètres ¦ 1 piksel = … metre
+Longueur réelle : {v} ¦ Gerçek uzunluk: {v}
+Surface : {v} · tour : {t} ¦ Alan: {v} · çevre: {t}
+Taille réelle : {v} ¦ Gerçek boyut: {v}
+(échelle à régler) ¦ (ölçek ayarlanacak)
+Centré sur le lieu ¦ Yere ortalanmış
+Décalé de {what} ¦ Kaydırma: {what}
+{d} vers le nord ¦ kuzeye {d}
+{d} vers le sud ¦ güneye {d}
+{d} vers l’est ¦ doğuya {d}
+{d} vers l’ouest ¦ batıya {d}
+=lieu posé ¦ yer kondu|yer kondu
+Choisis l’image d’un acte, puis {b} en glissant. Le papier, les taches et les lignes s’effacent ; l’encre devient un tracé net, à agrandir sans perte, à imprimer ou à graver. ¦ Bir belgenin görüntüsünü seç, sonra sürükleyerek {b}. Kâğıt, lekeler ve çizgiler silinir; mürekkep keskin bir çizgiye dönüşür; kayıpsız büyütülebilir, yazdırılabilir ya da kazınabilir.
+encadre la signature ¦ imzayı çerçevele
+Pas rangée dans les médias : {err} ¦ Medyaya konmadı: {err}
+Image non rangée : {err} ¦ Görüntü konmadı: {err}
+Signature rangée dans les médias d’{name}. ¦ İmza medyaya kondu. Kişi: {name}.
+Signature rangée dans les médias de {name}. ¦ İmza medyaya kondu. Kişi: {name}.
+Supprimer « {name} » ? ¦ “{name}” silinsin mi?
+cet élément ¦ bu öğe
+{n} générations ({c} cases) ¦ {n} kuşak ({c} kutu)
+Établi par … en {y} ¦ Hazırlayan: … ({y} yılında)
+{file} enregistré dans Téléchargements. ¦ {file} İndirilenler klasörüne kaydedildi.
+Ce fichier est un réglage d’un autre outil (« {other} ») : il ne va pas dans {tool}. ¦ Bu dosya başka bir aracın ayarı (“{other}”): şuna girmez: {tool}.
+cet outil ¦ bu araç
+le dessin vectoriel ¦ vektör çizim
+le faire-part ¦ duyuru kartı
+les signatures et sceaux ¦ imzalar ve mühürler
+l’arbre décoratif ¦ süslü ağaç
+la palette du plan ¦ planın paleti
+les réglages du document ¦ belge ayarları
+ces réglages du faire-part ¦ bu duyuru kartı ayarları
+cette palette du plan ¦ bu plan paleti
+ces réglages du sceau ¦ bu mühür ayarları
+ces réglages de l’arbre ¦ bu ağaç ayarları
+Un réglage « {name} » existe déjà. Quel nom donner à celui-ci ? ¦ “{name}” adlı bir ayar zaten var. Buna hangi adı verelim?
+« {name} » est tourné : remets sa rotation à 0, ou dissocie-le, pour travailler dedans. ¦ “{name}” döndürülmüş: içinde çalışmak için dönüşünü 0’a getir ya da grubunu çöz.
+Ce groupe ¦ Bu grup
+Tu es dans « {name} » : le reste est pâli. Échap ou ⤴ pour en sortir. ¦ Şuranın içindesin: “{name}”. Gerisi soluk. Çıkmak için Esc ya da ⤴.
+le groupe ¦ grup
+Sortir de ce calque ¦ Bu katmandan çık
+Sortir de ce groupe ¦ Bu gruptan çık
+Travailler dans ce calque : les nouveaux dessins y vont ¦ Bu katmanda çalış: yeni çizimler buraya gider
+Travailler dans ce groupe : les nouveaux dessins y vont ¦ Bu grupta çalış: yeni çizimler buraya gider
+Retirer le masque : la forme revient tout en haut, rien n’est perdu ¦ Maskeyi kaldır: şekil en üste döner, hiçbir şey kaybolmaz
+Masquer avec la forme du dessus : la forme la plus haute de ce calque le découpe (on ne voit que ce qui est dedans) ¦ Üstteki şekille maskele: bu katmanın en üstteki şekli onu kırpar (yalnızca içinde kalan görünür)
+Masquer avec la forme du dessus : la forme la plus haute de ce groupe le découpe (on ne voit que ce qui est dedans) ¦ Üstteki şekille maskele: bu grubun en üstteki şekli onu kırpar (yalnızca içinde kalan görünür)
+le dessin (hors calque) ¦ çizim (katman dışında)
+Range la sélection dans un groupe ¦ Seçimi bir gruba koyar
+Un groupe vide dans le calque actuel ¦ Geçerli katmanda boş bir grup
+Grouper la sélection ¦ Seçimi grupla
+Tu dessines dans : {where} ¦ Çizdiğin yer: {where}
+au moins 3 objets ¦ en az 3 nesne
+{w} × {h} cm à l’impression (96 points par pouce). ¦ Baskıda {w} × {h} cm (inç başına 96 nokta).
+=volet ¦ pano|pano
+{name} — clic : au centre ; glisser : où tu veux ¦ {name} — tıklama: ortaya; sürükleme: istediğin yere
+Aucun ornement pour « {q} ». ¦ “{q}” için süsleme yok.
+Ornement : {name} ¦ Süsleme: {name}
+{what} en hachures : prêt pour une impression en noir et blanc. ¦ {what} taramalı: siyah beyaz baskıya hazır.
+Couleur {n} ¦ Renk {n}
+Masque retiré : la forme est revenue tout en haut du calque. ¦ Maske kaldırıldı: şekil katmanın en üstüne döndü.
+Masque retiré : la forme est revenue tout en haut du groupe. ¦ Maske kaldırıldı: şekil grubun en üstüne döndü.
+Pose d’abord une forme (rond, ovale, rectangle, tracé…) tout en haut de ce calque : elle servira de découpe. ¦ Önce bu katmanın en üstüne bir şekil koy (daire, oval, dikdörtgen, yol…): kesim için kullanılacak.
+Pose d’abord une forme (rond, ovale, rectangle, tracé…) tout en haut de ce groupe : elle servira de découpe. ¦ Önce bu grubun en üstüne bir şekil koy (daire, oval, dikdörtgen, yol…): kesim için kullanılacak.
+Il faut quelque chose à découper sous la forme, dans ce calque. ¦ Bu katmanda, şeklin altında kırpılacak bir şey olmalı.
+Il faut quelque chose à découper sous la forme, dans ce groupe. ¦ Bu grupta, şeklin altında kırpılacak bir şey olmalı.
+Masque posé : on ne voit plus que ce qui est dans « {name} ». ¦ Maske uygulandı: artık yalnızca “{name}” içinde kalan görünüyor.
+la forme ¦ şekil
+« {name} » supprimé avec ce qu’il contient ¦ “{name}” içindekilerle birlikte silindi
+Émail : {name} ¦ Renk (arma): {name}
+Le blasonnement est écrit en français héraldique. ¦ Arma tanımı Fransızca arma diliyle yazılmıştır.
+Ajoute un meuble {name} seul, à placer où tu veux ¦ Tek bir {name} figürü ekler, istediğin yere koyarsın
+{a} → {b} points. ¦ {a} → {b} nokta.
+Plans de travail ({n}) ¦ Çalışma alanları ({n})
+Ce dessin a plusieurs pages ({what}) : leur taille vient du pliage choisi. Tu peux changer ici le fond, l’unité et la résolution. ¦ Bu çizimin birkaç sayfası var ({what}): boyutları seçilen katlamadan gelir. Burada arka planı, birimi ve çözünürlüğü değiştirebilirsin.
+Vectorisé : {what} ¦ Vektörleştirildi: {what}
+{n} pages, une par face ¦ {n} sayfa, her yüz için bir sayfa
+Image : {name} ¦ Görüntü: {name}
+« {name} » rangée dans les médias ¦ “{name}” medyaya kondu
+Pas rangée dans les médias ({err}) : l’image est posée dans le dessin seulement. ¦ Medyaya konmadı ({err}): görüntü yalnızca çizime yerleştirildi.
+Ouvrir « {name} » à la place ? ¦ Onun yerine “{name}” açılsın mı?
+Ma forme ¦ Şeklim
+Remplacer « {name} » ¦ Değiştir: “{name}”
+Forme « {name} » enregistrée : elle est dans « Mes formes ». ¦ “{name}” şekli kaydedildi: “Şekillerim” içinde.
+Image ajoutée aux armoiries « {name} ». ¦ Görüntü “{name}” armasına eklendi.
+L’image (PNG, nette, fond transparent) y est ajoutée. ¦ Görüntü (PNG, keskin, saydam arka plan) buna eklenir.
+L’image (PNG, nette, fond compris) y est ajoutée. ¦ Görüntü (PNG, keskin, arka plan dahil) buna eklenir.
+=copié ¦ kopyalandı|kopyalandı
+=copie transformée ¦ dönüştürülmüş kopya|dönüştürülmüş kopya
+=bloc @media ¦ @media bloğu|@media bloğu
+=règle ¦ kural|kural
+=calque de plan créé ¦ plan katmanı oluşturuldu|plan katmanı oluşturuldu
+Mot de passe ¦ Parola
+Écrans enregistrés ; {what} du CSS ont suivi. ¦ Ekranlar kaydedildi; CSS’teki {what} de uydu.
+Écrans enregistrés ; {what} du CSS a suivi. ¦ Ekranlar kaydedildi; CSS’teki {what} de uydu.
+(accordéon exclusif) ¦ (tek açılır akordeon)
+(celle de la fiche, ou à choisir) ¦ (kartınki ya da seçilecek)
+(réglé tout seul) ¦ (kendiliğinden ayarlandı)
+(se remplit avec ce qui est dessiné) ¦ (çizilenle dolar)
+* : avec des conditions, voir la norme. ¦ *: koşullarla, standarda bak.
+1 point de fuite (une rue vue de face) ¦ 1 kaçış noktası (önden görülen bir sokak)
+2 points (une maison vue de l’angle) ¦ 2 nokta (köşeden görülen bir ev)
+60 styles au plus. ¦ En çok 60 stil.
+ARBRE DÉCORATIF ¦ SÜSLÜ AĞAÇ
+Aa Choisir… ¦ Aa Seç…
+Abbaye, prieuré ¦ Manastır, priorluk
+Accueil, notre arbre, la famille en chiffres, nous écrire ¦ Ana sayfa, ağacımız, rakamlarla aile, bize yaz
+Afficher ce champ sur le faire-part (décoché : gardé ici, mais pas imprimé) ¦ Bu alanı duyuru kartında göster (işaretsiz: burada saklanır ama yazdırılmaz)
+Affiché ¦ Gösteriliyor
+Aimanter : en glissant, les objets se collent aux bords et aux centres des autres (⌘ pour s’en passer) ¦ Mıknatısla: sürüklerken nesneler diğerlerinin kenarlarına ve merkezlerine yapışır (istemiyorsan ⌘)
+Aimanter à la grille ¦ Izgaraya mıknatısla
+Ajoute un vrai bouton « Fermer ». ¦ Gerçek bir “Kapat” düğmesi ekler.
+Aligner en bas ¦ Alta hizala
+Aligner en haut ¦ Üste hizala
+Aligner par rapport au plan de travail ¦ Çalışma alanına göre hizala
+Aligner par rapport à la sélection ¦ Seçime göre hizala
+Aligné ¦ Hizalandı
+Aller à un bloc @media du CSS ¦ CSS’teki bir @media bloğuna git
+Allongé 11 × 22 cm ¦ Uzun 11 × 22 cm
+Allongé DL 10 × 21 cm ¦ Uzun DL 10 × 21 cm
+Allongés ¦ Uzun
+Alt + flèches dans une case : ±10 px. Les valeurs vont là où dit « Appliquer à » (élément, classe, écran). ¦ Bir kutuda Alt + oklar: ±10 px. Değerler “Uygula:” seçeneğinin gösterdiği yere gider (öğe, sınıf, ekran).
+Anglaise entrelacée ¦ Birleşik İngiliz el yazısı
+Animations réduites ¦ Azaltılmış hareket
+Années 50 ¦ 1950’ler
+Aperçu du fond ¦ Arka plan önizlemesi
+Aperçu du site ¦ Site önizlemesi
+Aperçu indisponible. ¦ Önizleme kullanılamıyor.
+Arbre dessiné (tronc et branches) ¦ Çizilmiş ağaç (gövde ve dallar)
+Arbre en cases (de bas en haut) ¦ Kutulu ağaç (aşağıdan yukarıya)
+Au centre (horizontal) ¦ Ortada (yatay)
+Au milieu (vertical) ¦ Ortada (dikey)
+Au naturel (brun) ¦ Doğal (kahverengi)
+Au plus ¦ En çok
+Auberge, café ¦ Han, kahvehane
+Aucun (l’aperçu seul) ¦ Hiçbiri (yalnızca önizleme)
+Aucun ancêtre trouvé. ¦ Ata bulunamadı.
+Aucun attribut ne correspond. ¦ Uyan öznitelik yok.
+Aucun dessin enregistré. ¦ Kayıtlı çizim yok.
+Aucun élément ne correspond. ¦ Uyan öğe yok.
+Aucune propriété ne correspond. ¦ Uyan özellik yok.
+Autour du centre de la sélection. Avec des copies, chaque copie reprend la transformation de la précédente (une frise, un dégradé de tailles…). ¦ Seçimin merkezi çevresinde. Kopyalarla, her kopya bir öncekinin dönüşümünü yineler (bir friz, boyut geçişi…).
+Avancé ¦ Öne alındı
+Bannière 150 × 50 ¦ Afiş 150 × 50
+Bien plus épais ¦ Çok daha kalın
+Blason créé ¦ Arma oluşturuldu
+Blocs @media du CSS ¦ CSS’teki @media blokları
+Bourg, quartier bâti ¦ Kasaba, yapılaşmış alan
+Bâtiment ou symbole ¦ Bina ya da simge
+CALLIGRAPHIE ET SCEAUX ¦ KALİGRAFİ VE MÜHÜRLER
+CSS de la classe ou de l’id (édition rapide) ¦ Sınıfın ya da id’nin CSS’i (hızlı düzenleme)
+Cacher ce panneau (la languette sur le bord, ou ◧, le remet) ¦ Bu paneli gizle (kenardaki dil ya da ◧ onu geri getirir)
+Cacher ce panneau (la languette sur le bord, ou ◨, le remet) ¦ Bu paneli gizle (kenardaki dil ya da ◨ onu geri getirir)
+Cacher le panneau Ceci est ¦ “Bu” panelini gizle
+Cacher le panneau de gauche ¦ Sol paneli gizle
+Cadastre napoléonien ¦ Napolyon kadastrosu
+Cadre Art déco ¦ Art Deco çerçeve
+Cadre Art nouveau ¦ Art Nouveau çerçeve
+Cadre Belle Époque ¦ Belle Époque çerçeve
+Cadre du salon, toile 80 × 120… ¦ Salondaki çerçeve, tuval 80 × 120…
+Cadre et ornements ¦ Çerçeve ve süslemeler
+Cadre à filets ¦ Çizgili çerçeve
+Calques déjà là ¦ Var olan katmanlar
+Carré 100 × 100 ¦ Kare 100 × 100
+Carré 12 × 12 cm ¦ Kare 12 × 12 cm
+Carré 14 × 14 cm ¦ Kare 14 × 14 cm
+Carré 17 × 17 cm ¦ Kare 17 × 17 cm
+Carré 30 × 30 ¦ Kare 30 × 30
+Carré 60 × 60 ¦ Kare 60 × 60
+Carrée 14 × 14 cm ¦ Kare 14 × 14 cm
+Carrée 16 × 16 cm ¦ Kare 16 × 16 cm
+Carrée 17 × 17 cm ¦ Kare 17 × 17 cm
+Carrée 22 × 22 cm ¦ Kare 22 × 22 cm
+Carte 10 × 15 cm ¦ Kart 10 × 15 cm
+Carte 12 × 17 cm ¦ Kart 12 × 17 cm
+Carte 13 × 18 cm ¦ Kart 13 × 18 cm
+Carte 15 × 21 cm ¦ Kart 15 × 21 cm
+Carte 16 × 22 cm ¦ Kart 16 × 22 cm
+Carte des lieux ¦ Yerler haritası
+Carte moderne ¦ Modern harita
+Carte simple ¦ Tek kart
+Cartouche à enroulements ¦ Kıvrımlı kartuş
+Cases vides (ancêtres à trouver) ¦ Boş kutular (bulunacak atalar)
+Ce fichier n’est pas un SVG lisible. ¦ Bu dosya okunabilir bir SVG değil.
+Ce navigateur n’a pas pu s’ouvrir. ¦ Bu tarayıcı açılamadı.
+Ce qui n’est pas enregistré sera perdu. ¦ Kaydedilmeyenler kaybolacak.
+Ceci est… (nom, balise, classe, id) ¦ Bu… (ad, etiket, sınıf, id)
+Centrer sur le plan de travail ¦ Çalışma alanında ortala
+Ces formes ne se mélangent pas. ¦ Bu şekiller karışmaz.
+Cet élément seulement ¦ Yalnızca bu öğe
+Cette adresse n’est pas permise (data:…). ¦ Bu adrese izin verilmiyor (data:…).
+Cette adresse n’est pas permise (javascript:, data:…). ¦ Bu adrese izin verilmiyor (javascript:, data:…).
+Cette adresse n’est pas permise (javascript:…). ¦ Bu adrese izin verilmiyor (javascript:…).
+Changer l’affichage des fichiers ¦ Dosyaların gösterimini değiştir
+Chercher : titre, lien, tableau, h2… ¦ Ara: başlık, bağlantı, tablo, h2…
+Chercher dans l’aide-mémoire ¦ Başvuru kartında ara
+Chercher un ornement ¦ Süsleme ara
+Chercher une signature ¦ İmza ara
+Chercher… (fleuron, coin, déco) ¦ Ara… (fleuron, köşe, deko)
+Choisir le parent ¦ Üst öğeyi seç
+Choisir l’élément qui le contient ¦ Onu içeren öğeyi seç
+Choisir un élément de la page ¦ Sayfadan bir öğe seç
+Choisis au moins deux formes. ¦ En az iki şekil seç.
+Choisis au moins deux objets. ¦ En az iki nesne seç.
+Choisis d’abord des objets. ¦ Önce nesne seç.
+Choisis d’abord l’image d’un acte. ¦ Önce bir belgenin görüntüsünü seç.
+Choisis d’abord un objet. ¦ Önce bir nesne seç.
+Choisis d’abord un ou plusieurs objets. ¦ Önce bir ya da birkaç nesne seç.
+Choisis exactement deux formes (rectangle, ellipse, étoile, tracé…). ¦ Tam olarak iki şekil seç (dikdörtgen, elips, yıldız, yol…).
+Choisis un fichier ou une image. ¦ Bir dosya ya da görüntü seç.
+Choisis un lieu : la carte s’affiche ici. ¦ Bir yer seç: harita burada görünür.
+Choisis un modèle : tu pourras tout changer ensuite, en glissant des blocs ou dans le code. ¦ Bir şablon seç: sonra her şeyi blokları sürükleyerek ya da kodda değiştirebilirsin.
+Choisis un objet (outil Sélection) pour changer ses couleurs, son trait, sa taille. Les couleurs ci-dessous seront celles des prochaines formes. ¦ Renklerini, çizgisini, boyutunu değiştirmek için bir nesne seç (Seçim aracı). Aşağıdaki renkler sonraki şekillerin renkleri olacak.
+Choisis un objet qui a un contour. ¦ Dış çizgisi olan bir nesne seç.
+Château ¦ Şato
+Clic : choisir un élément (« Ceci est… ») · double-clic sur un texte : l’écrire · glisse un bloc depuis ＋ Blocs ¦ Tıklama: bir öğe seç (“Bu…”) · bir metne çift tıklama: onu yaz · ＋ Bloklar’dan bir blok sürükle
+Clique sur un élément de l’aperçu (ou dans le code) : il dira ce qu’il est, par exemple « header.site-entete ». Tu pourras lui donner un nom, une classe, un id, des couleurs. ¦ Önizlemede (ya da kodda) bir öğeye tıkla: ne olduğunu söyler, örneğin “header.site-entete”. Ona bir ad, sınıf, id, renkler verebilirsin.
+Coche ou décoche un champ pour l’afficher ou le masquer, ↑ ↓ pour le ranger, 🗑 pour l’enlever. Le faire-part s’ouvre ensuite dans le dessin vectoriel : tout se retouche (textes, couleurs, polices, ornements), puis « ⤓ Exporter » (PDF, image, impression, recto-verso sur A4). ¦ Bir alanı göstermek ya da gizlemek için işaretle ya da işaretini kaldır, sıralamak için ↑ ↓, kaldırmak için 🗑. Duyuru kartı ardından vektör çizimde açılır: her şey düzenlenebilir (metinler, renkler, yazı tipleri, süslemeler), sonra “⤓ Dışa aktar” (PDF, görüntü, baskı, A4’e çift yüz).
+Code du site ¦ Sitenin kodu
+Coin Art déco ¦ Art Deco köşe
+Coin Art nouveau ¦ Art Nouveau köşe
+Coin fleuronné ¦ Çiçekli köşe
+Coin perlé ¦ İnci dizili köşe
+Coin à filet arrondi ¦ Yuvarlak çizgili köşe
+Coin à volutes ¦ Kıvrımlı köşe
+Colle ton jeton ici ¦ Jetonunu buraya yapıştır
+Collé ¦ Yapıştırıldı
+Comme Tailwind, en montant (640, 768, 1024, 1280) ¦ Tailwind gibi, büyüyerek (640, 768, 1024, 1280)
+Comme l’original ¦ Özgündeki gibi
+Commencer un nouveau dessin ? ¦ Yeni bir çizim başlatılsın mı?
+Comment colorer les cases : côté du père et côté de la mère, hommes et femmes, une teinte qui pâlit à chaque génération, ou une seule couleur (pour imprimer). ¦ Kutuları renklendirme biçimi: baba tarafı ve anne tarafı, erkekler ve kadınlar, her kuşakta açılan bir ton ya da tek renk (yazdırmak için).
+Commenter, décommenter ¦ Yorum yap, yorumu kaldır
+Contour du trait → forme ¦ Çizginin dış hattı → şekil
+Contour par défaut ¦ Varsayılan dış çizgi
+Convertir en tracé ¦ Yola dönüştür
+Convertir en tracé (points modifiables) ¦ Yola dönüştür (düzenlenebilir noktalar)
+Copie impossible ici. ¦ Burada kopyalanamıyor.
+Couleur libre : n’importe quelle couleur ¦ Serbest renk: herhangi bir renk
+Coupé ¦ Yatay bölünmüş
+Courbes lissées ¦ Yumuşatılmış eğriler
+Cours d’eau, lac ¦ Akarsu, göl
+Croix fleuronnée ¦ Çiçekli haç
+Créer et ouvrir dans le dessin ¦ Oluştur ve çizimde aç
+Créer la page ¦ Sayfayı oluştur
+Créer l’arbre ¦ Ağacı oluştur
+Créer l’élément ¦ Öğeyi oluştur
+Créer un style (à partir de celui choisi) ¦ Bir stil oluştur (seçilenden)
+Cul-de-lampe en triangle ¦ Üçgen sayfa sonu süsü
+Cérémonie ¦ Tören
+Cérémonie, réception ¦ Tören, kabul
+Côte à côte ou l’un au-dessus de l’autre ¦ Yan yana ya da biri ötekinin üstünde
+Côte, rivage ¦ Kıyı, sahil
+Cœur fleuronné ¦ Çiçekli kalp
+Dans l’export ¦ Dışa aktarımda
+Date et lieu ¦ Tarih ve yer
+Date, heure, lieu ¦ Tarih, saat, yer
+Dates complètes ¦ Tam tarihler
+De qui est cette signature ? ¦ Bu imza kimin?
+Des copies tournent autour d’un centre (une rosace, une couronne de meubles autour d’un écu…). Le tout devient un groupe. ¦ Kopyalar bir merkez çevresinde döner (bir gül pencere, bir kalkan çevresinde figürlerden bir taç…). Hepsi bir grup olur.
+Descendre l’élément ¦ Öğeyi aşağı taşı
+Deux fichiers (côte à côte ou l’un au-dessus de l’autre) ¦ İki dosya (yan yana ya da biri ötekinin üstünde)
+Deux fichiers : côte à côte ou l’un au-dessus de l’autre ¦ İki dosya: yan yana ya da biri ötekinin üstünde
+Deuxième fichier ¦ İkinci dosya
+Dis ce que c’est : « c’est mon en-tête, mon menu… » ¦ Ne olduğunu söyle: “bu benim üst bilgim, menüm…”
+Dissocié ¦ Grup çözüldü
+Distance au centre (si « sous la sélection ») ¦ Merkeze uzaklık (“seçimin altında” ise)
+Donne un nom aux armoiries. ¦ Armaya bir ad ver.
+Dossier css/ — déposer un fichier ici pour l’y ranger ¦ css/ klasörü — oraya koymak için buraya bir dosya bırak
+Dossier js/ — déposer un fichier ici pour l’y ranger ¦ js/ klasörü — oraya koymak için buraya bir dosya bırak
+Dupliquer la ligne ¦ Satırı çoğalt
+Dupliquer l’élément ¦ Öğeyi çoğalt
+Décalage ¦ Kaydırma
+Décaler le fond (d’un dixième de sa largeur) ¦ Arka planı kaydır (genişliğinin onda biri kadar)
+Déplacé dedans ¦ İçine taşındı
+Déplier / replier ¦ Aç / kapat
+Déverrouillé ¦ Kilit açıldı
+D’après la norme HTML du WHATWG (CC BY 4.0), traduit. ¦ WHATWG HTML standardına (CC BY 4.0) dayanır, çevrilmiştir.
+D’après la norme HTML du WHATWG (CC BY 4.0), traduit. Les on… (onclick) vont dans le JS du site. ¦ WHATWG HTML standardına (CC BY 4.0) dayanır, çevrilmiştir. on… öznitelikleri (onclick) sitenin JS’ine gider.
+D’après une personne ¦ Bir kişiden
+Effacer les lignes du registre ¦ Kayıt defterinin çizgilerini sil
+Effacer les petites taches ¦ Küçük lekeleri sil
+Effilé aux deux bouts ¦ İki ucu sivri
+Elle montre tout seul ce qui est dessiné. ¦ Çizileni kendiliğinden gösterir.
+En bas de chaque page ¦ Her sayfanın altında
+En déplaçant, en agrandissant ou en dessinant, l’objet s’aimante aux bords et aux centres des autres objets, du plan de travail et des pages ; un trait rose le montre. ⌘ (ou Ctrl) maintenu : sans aimant. ¦ Taşırken, büyütürken ya da çizerken nesne diğer nesnelerin, çalışma alanının ve sayfaların kenarlarına ve merkezlerine mıknatıslanır; pembe bir çizgi bunu gösterir. ⌘ (ya da Ctrl) basılıyken: mıknatıs yok.
+En faire un écran ¦ Bunu bir ekran yap
+En-tête, carte de la famille… ¦ Üst bilgi, aile kartı…
+Encre sépia ¦ Sepya mürekkep
+Enlever ce champ ¦ Bu alanı kaldır
+Enregistrer ce site avant d’en ouvrir un autre ? ¦ Başka bir site açmadan önce bu site kaydedilsin mi?
+Enregistrer comme forme ¦ Şekil olarak kaydet
+Enregistrer comme image d’armoiries ¦ Arma görüntüsü olarak kaydet
+Enregistrer dans les médias d’une fiche ¦ Bir kartın medyasına kaydet
+Enregistrer le dessin ¦ Çizimi kaydet
+Envoi dans les médias… ¦ Medyaya gönderiliyor…
+Espace en haut et en bas des sections ¦ Bölümlerin üstünde ve altında boşluk
+Espace entre colonnes et photos ¦ Sütunlar ve fotoğraflar arasındaki boşluk
+Espace intérieur des cartes ¦ Kartların iç boşluğu
+Espace intérieur, les 4 côtés d’un coup ¦ İç boşluk, 4 kenar birden
+Espace sous les paragraphes ¦ Paragrafların altındaki boşluk
+Espace sous les titres ¦ Başlıkların altındaki boşluk
+Espacement des lettres ¦ Harf aralığı
+Existe depuis (année) ¦ Şu yıldan beri var
+Exporter : PDF, images, SVG, impression, fichier du dessin ¦ Dışa aktar: PDF, görüntüler, SVG, baskı, çizim dosyası
+Expression régulière ¦ Düzenli ifade
+Expéditeur ¦ Gönderen
+Expéditeur (en haut à gauche) ¦ Gönderen (sol üstte)
+FAIRE-PART ET AFFICHES ¦ DUYURU KARTLARI VE AFİŞLER
+FTP sécurisé ¦ Güvenli FTP
+Fermer la recherche ¦ Aramayı kapat
+Fermer l’onglet ¦ Sekmeyi kapat
+Fermer l’onglet (le fichier reste dans le site) ¦ Sekmeyi kapat (dosya sitede kalır)
+Fermer sans enregistrer le dessin ? ¦ Çizim kaydedilmeden kapatılsın mı?
+Feuillage (arbre dessiné) ¦ Yapraklar (çizilmiş ağaç)
+Feuille d’acanthe ¦ Akantus yaprağı
+Fiche affichée ¦ Gösterilen kart
+Fichier du deuxième éditeur ¦ İkinci düzenleyicideki dosya
+Fichier trop gros (25 Mo au plus). ¦ Dosya çok büyük (en çok 25 MB).
+Fichiers du site ¦ Sitenin dosyaları
+Fichiers en onglets (comme Phoenix Code) ¦ Sekmelerde dosyalar (Phoenix Code gibi)
+Fichiers en trois boutons (HTML / CSS / JS) ¦ Üç düğmede dosyalar (HTML / CSS / JS)
+Filet Art déco ¦ Art Deco çizgi
+Filet au fleuron ¦ Fleuronlu çizgi
+Filet au losange ¦ Baklavalı çizgi
+Filet ondulé ¦ Dalgalı çizgi
+Filet perlé ¦ İnci dizili çizgi
+Filet à volutes ¦ Kıvrımlı çizgi
+Fleurons, cadres Belle Époque, Art nouveau, Art déco, coins, filets, culs-de-lampe, lettrines. Clique pour poser au centre, ou glisse sur le dessin ; la palette « Couleur » les recolore ensuite. ¦ Fleuronlar, Belle Époque, Art Nouveau, Art Deco çerçeveler, köşeler, çizgiler, sayfa sonu süsleri, süslü baş harfler. Ortaya koymak için tıkla ya da çizimin üstüne sürükle; “Renk” paleti ardından onları yeniden renklendirir.
+Fond du plan ¦ Planın arka planı
+Fond décalé ¦ Arka plan kaydırıldı
+Format de l’enveloppe ¦ Zarf boyutu
+Format d’image non lu par ce navigateur. ¦ Bu tarayıcının okumadığı görüntü biçimi.
+Forme au départ ¦ Başlangıç şekli
+Forme, format, style, cases… reviennent comme au départ. ¦ Şekil, boyut, stil, kutular… başlangıçtaki gibi olur.
+Forêt, bois ¦ Orman, koru
+Frontière ¦ Sınır
+Garde-en au moins un. ¦ En az birini koru.
+Gironné ¦ Dilimli
+GitHub Pages met ton site à l’adresse « ton-compte.github.io/nom-du-depot ». Crée un jeton dans GitHub → Settings → Developer settings → « Fine-grained tokens », avec les droits « Contents » et « Pages » en lecture et écriture (et « Administration » si le dépôt n’existe pas encore). ¦ GitHub Pages siteni “hesabın.github.io/depo-adi” adresine koyar. GitHub → Settings → Developer settings → “Fine-grained tokens” içinde, “Contents” ve “Pages” için okuma ve yazma izinli (depo henüz yoksa “Administration” da) bir jeton oluştur.
+Glisse pour dessiner la forme · ⇧ : carré, cercle, angle droit ¦ Şekli çizmek için sürükle · ⇧: kare, daire, dik açı
+Glisse un bloc dans l’aperçu, ou clique pour l’ajouter après l’élément choisi. ¦ Bir bloğu önizlemeye sürükle ya da seçili öğeden sonra eklemek için tıkla.
+Glisse une ligne sur un groupe pour l’y ranger (il devient bleu), entre deux lignes pour changer l’ordre ; ou sélectionne puis « 📁 Ranger dans… ». Double-clic sur un nom pour le renommer. ✂️ : la forme la plus haute du groupe ou du calque le découpe (masque), 2e clic pour le retirer. ○ : travailler dans ce calque ou ce groupe. Dans le dessin : double-clic sur un groupe pour y entrer, Échap pour en sortir. ¦ Bir satırı bir grubun içine koymak için onun üstüne sürükle (grup maviye döner), sırayı değiştirmek için iki satırın arasına; ya da seç, sonra “📁 Şuraya koy…”. Yeniden adlandırmak için bir ada çift tıkla. ✂️: grubun ya da katmanın en üstteki şekli onu kırpar (maske), kaldırmak için yeniden tıkla. ○: bu katmanda ya da grupta çalış. Çizimde: bir gruba girmek için çift tıkla, çıkmak için Esc.
+Glisser pour élargir ou rétrécir le panneau (double-clic : taille d’origine) ¦ Paneli genişletmek ya da daraltmak için sürükle (çift tıklama: özgün boyut)
+Goutte et volutes ¦ Damla ve kıvrımlar
+Grand téléphone ¦ Büyük telefon
+Grand écran ¦ Büyük ekran
+Grille d’échelle ¦ Ölçek ızgarası
+Grille d’échelle pendant le dessin ¦ Çizim sırasında ölçek ızgarası
+Grille et repères ¦ Izgara ve kılavuzlar
+Groupé ¦ Gruplandı
+Gérer les écrans ¦ Ekranları yönet
+Gérer les écrans (@media)… ¦ Ekranları yönet (@media)…
+Gérer les écrans : points de rupture et @media (largeurs, orientation, mode sombre, impression…) ¦ Ekranları yönet: kırılma noktaları ve @media (genişlikler, yön, koyu mod, baskı…)
+Gérer les écrans… ¦ Ekranları yönet…
+Hachures héraldiques ¦ Arma taramaları
+Hameau, lieu-dit ¦ Mezra, mevki
+Héritée ¦ Kalıtılır
+Il faut au moins trois objets. ¦ En az üç nesne gerekir.
+Il faut des formes ou des tracés (pas seulement du texte ou des images). ¦ Şekiller ya da yollar gerekir (yalnızca metin ya da görüntü değil).
+Image ajustée ¦ Görüntü sığdırıldı
+Image copiée. ¦ Görüntü kopyalandı.
+Image refusée. ¦ Görüntü reddedildi.
+Importe d’abord une image (Fichier → Importer), puis choisis-la. ¦ Önce bir görüntü içe aktar (Dosya → İçe aktar), sonra onu seç.
+Intervertir remplissage et contour (⇧X) ¦ Dolgu ile dış çizgiyi değiştir (⇧X)
+Intérieur 1 ¦ İç 1
+Intérieur 2 ¦ İç 2
+Intérieur 3 ¦ İç 3
+Intérieur 4 ¦ İç 4
+Intérieur droit ¦ İç sağ
+Intérieur gauche ¦ İç sol
+Intérieur milieu ¦ İç orta
+Inverser l’aperçu et le code ¦ Önizleme ile kodun yerini değiştir
+JS du site ¦ Sitenin JS’i
+La bibliothèque d’ornements n’est pas chargée. ¦ Süsleme kitaplığı yüklenmedi.
+La carte du lieu se pose sous le dessin, en transparence, à la taille du plan de travail : décalque les rues, les rivières, les maisons. Le plan est alors « situé » : l’échelle est juste et les lieux de ta base peuvent s’y placer. ¦ Yerin haritası çizimin altına, saydam olarak, çalışma alanı boyutunda konur: sokakların, ırmakların, evlerin üstünden geç. Plan böylece “konumlanmış” olur: ölçek doğrudur ve veritabanındaki yerler üzerine yerleşebilir.
+La fenêtre d’export n’est pas chargée. ¦ Dışa aktarma penceresi yüklenmedi.
+La largeur de l’aperçu quand on choisit cet écran ¦ Bu ekran seçildiğinde önizlemenin genişliği
+La lettre du nom au milieu, plus grande (3 initiales) ¦ Soyadının harfi ortada, daha büyük (3 baş harf)
+La lettrine ¦ Süslü baş harf
+La page ¦ Sayfa
+La photo du faire-part ¦ Duyuru kartının fotoğrafı
+La racine du site ¦ Sitenin kökü
+La taille, le fond, la grille et les couleurs par défaut, gardés sous un nom. ¦ Boyut, arka plan, ızgara ve varsayılan renkler, bir adla saklanır.
+La vérification des navigateurs n’est pas chargée. ¦ Tarayıcı kontrolü yüklenmedi.
+Lac, étang, mare ¦ Göl, gölet, gölcük
+Largeur au plus (0 = toute) ¦ En çok genişlik (0 = tümü)
+Largeur du contenu ¦ İçeriğin genişliği
+Le nombre de rangées d’ancêtres, la personne comptant pour la première. Au-delà de 7, choisis un grand format (A2, A1…) pour que les noms restent lisibles. ¦ Ata satırlarının sayısı; kişinin kendisi ilk satır sayılır. 7’nin üstünde adlar okunaklı kalsın diye büyük bir boyut seç (A2, A1…).
+Les ancêtres d’une personne (2 à 5 générations) ¦ Bir kişinin ataları (2 ile 5 kuşak)
+Les blocs « Ma généalogie » sont remplis par l’app et figés à l’export : jamais de personne vivante ni de fiche confidentielle. ¦ “Soy ağacım” blokları uygulama tarafından doldurulur ve dışa aktarımda sabitlenir: asla yaşayan bir kişi ya da gizli bir kart yer almaz.
+Les liens vers les pages, tenus à jour ¦ Sayfalara bağlantılar, güncel tutulur
+Les lieux d’une personne (ou de ses ancêtres) ¦ Bir kişinin (ya da atalarının) yerleri
+Les noms, dates, lieux et parents de la fiche remplissent les champs ; relis-les et complète avant de créer. ¦ Kartın adları, tarihleri, yerleri ve ebeveynleri alanları doldurur; oluşturmadan önce gözden geçir ve tamamla.
+Les objets s’alignent entre eux ¦ Nesneler birbirine göre hizalanır
+Les objets s’alignent sur le plan de travail (ou la page, le volet où ils sont) ¦ Nesneler çalışma alanına (ya da bulundukları sayfaya, panoya) göre hizalanır
+Les points d’encre plus petits que cette taille sont effacés (poussières, piqûres du papier). ¦ Bu boyuttan küçük mürekkep noktaları silinir (toz, kâğıttaki benekler).
+Les raccourcis ¦ Kısayollar
+Les versions viennent d’une liste intégrée à l’app (comme caniuse.com, sans internet). Pour voir le site en vrai : ↗ Aperçu, puis ouvre l’adresse dans le navigateur voulu. ¦ Sürümler uygulamaya yerleşik bir listeden gelir (caniuse.com gibi, internetsiz). Siteyi gerçekten görmek için: ↗ Önizleme, sonra adresi istediğin tarayıcıda aç.
+Lettrine Art déco ¦ Art Deco süslü baş harf
+Lettrine Art nouveau ¦ Art Nouveau süslü baş harf
+Lettrine au feuillage ¦ Yapraklı süslü baş harf
+Lettrine carrée ¦ Kare süslü baş harf
+Lettrine cerclée ¦ Daire içinde süslü baş harf
+Lettrine médiévale ¦ Orta Çağ süslü baş harfi
+Lien retiré ¦ Bağlantı kaldırıldı
+Lieu important ¦ Önemli yer
+Lieux de ¦ Yerler:
+Ligne d’horizon (hauteur) ¦ Ufuk çizgisi (yükseklik)
+Lisser les courbes ¦ Eğrileri yumuşat
+Légende du bas ¦ Alt açıklama
+Légende du haut ¦ Üst açıklama
+Légende sous la signature (facultatif) ¦ İmzanın altındaki açıklama (isteğe bağlı)
+L’aperçu de la signature s’affiche ici. ¦ İmzanın önizlemesi burada görünür.
+L’arbre est fabriqué comme un dessin : il s’ouvre ensuite dans l’outil de dessin vectoriel pour changer les couleurs, les polices, les textes, ajouter des ornements, un blason… puis l’exporter en PDF ou en image, à la taille voulue. ¦ Ağaç bir çizim olarak yapılır: ardından vektör çizim aracında açılır; renkleri, yazı tiplerini, metinleri değiştirebilir, süslemeler, bir arma ekleyebilir… sonra istediğin boyutta PDF ya da görüntü olarak dışa aktarabilirsin.
+L’image d’un acte ¦ Bir belgenin görüntüsü
+L’objet du dessus doit être une forme ou un tracé. ¦ Üstteki nesne bir şekil ya da yol olmalı.
+L’un au-dessus de l’autre ¦ Biri ötekinin üstünde
+L’écran de base : son CSS s’applique partout, sans @media. Les autres écrans le complètent. ¦ Temel ekran: CSS’i her yerde, @media olmadan uygulanır. Diğer ekranlar onu tamamlar.
+L’écrire dans le HTML de la page, là où est le curseur ¦ Sayfanın HTML’ine, imlecin olduğu yere yaz
+Ma généalogie (rempli tout seul) ¦ Soy ağacım (kendiliğinden dolar)
+Marche partout depuis 2023 ; mets une couleur simple juste avant pour les plus vieux. ¦ 2023’ten beri her yerde çalışır; eski tarayıcılar için hemen önüne düz bir renk koy.
+Marge des côtés du contenu ¦ İçeriğin yan kenar boşluğu
+Marges et espace intérieur ¦ Kenar boşlukları ve iç boşluk
+Marges, espace intérieur et taille ¦ Kenar boşlukları, iç boşluk ve boyut
+Mariés le… ¦ Evlilik tarihi…
+Masque d’écrêtage ¦ Kırpma maskesi
+Masque d’écrêtage (l’objet du dessus découpe les autres) ¦ Kırpma maskesi (üstteki nesne ötekileri kırpar)
+Masqué ¦ Gizli
+Mes formats ; ranger, montrer ou cacher ¦ Boyutlarım; sırala, göster ya da gizle
+Mes sites : en ouvrir un autre, en créer un, ouvrir un dossier ¦ Sitelerim: başka birini aç, yeni bir tane oluştur, bir klasör aç
+Mes styles ; ranger, montrer ou cacher ¦ Stillerim; sırala, göster ya da gizle
+Mettre le site en ligne : Netlify, GitHub Pages ou ton hébergement (FTP sécurisé) ¦ Siteyi internete koy: Netlify, GitHub Pages ya da kendi barındırman (güvenli FTP)
+Mettre l’un au-dessus de l’autre ¦ Birini ötekinin üstüne koy
+Mine, carrière ¦ Maden, taş ocağı
+Mode Blason désactivé ¦ Arma modu kapalı
+Mode Carte ¦ Harita modu
+Mode Carte désactivé ¦ Harita modu kapalı
+Mode Plan (cartes), fond de carte, image de référence ¦ Plan modu (haritalar), harita altlığı, başvuru görüntüsü
+Mode Plan désactivé ¦ Plan modu kapalı
+Moderne épuré ¦ Sade modern
+Modifier mon style ¦ Stilimi düzenle
+Mon ancêtre ¦ Atam
+Monter l’élément ¦ Öğeyi yukarı taşı
+Montre l’onglet Plan et ses outils (routes, rivières…) ¦ Plan sekmesini ve araçlarını gösterir (yollar, ırmaklar…)
+Montre l’onglet et le menu Blason ¦ Arma sekmesini ve menüsünü gösterir
+Montrer dans la liste ¦ Listede göster
+Montrer la grille ¦ Izgarayı göster
+Montrer l’année ¦ Yılı göster
+Montrer ou cacher le panneau de gauche (Blocs, Pages, Styles) ¦ Sol paneli göster ya da gizle (Bloklar, Sayfalar, Stiller)
+Montrer ou cacher le panneau des réglages ¦ Ayarlar panelini göster ya da gizle
+Montrer ou cacher le panneau « Ceci est… » ¦ “Bu…” panelini göster ya da gizle
+Monument aux morts, obélisque ¦ Şehitler anıtı, dikilitaş
+Médaillon perlé ¦ İnci dizili madalyon
+Mélanger ¦ Karıştır
+Naissance, décès, parents, événements ¦ Doğum, ölüm, ebeveynler, olaylar
+Naissances par décennie, prénoms les plus portés ¦ On yıllara göre doğumlar, en çok verilen adlar
+Navigateur par défaut ¦ Varsayılan tarayıcı
+Navigateurs : vérifier le site… ¦ Tarayıcılar: siteyi kontrol et…
+Navigateurs visés (versions les plus anciennes à prendre en charge) ¦ Hedeflenen tarayıcılar (desteklenecek en eski sürümler)
+Ne rien sélectionner ¦ Hiçbir şey seçme
+Netlify héberge ton site gratuitement, à une adresse en …netlify.app. 1. Crée un compte sur netlify.com. 2. Dans « User settings → Applications → Personal access tokens », crée un jeton (« New access token »). 3. Colle-le ici. ¦ Netlify siteni ücretsiz barındırır, …netlify.app ile biten bir adreste. 1. netlify.com’da bir hesap oluştur. 2. “User settings → Applications → Personal access tokens” içinde bir jeton oluştur (“New access token”). 3. Onu buraya yapıştır.
+Nom de lieu (ville, village, rivière… déjà mis en forme pour une carte ; T = texte libre) ¦ Yer adı (şehir, köy, ırmak… harita için önceden biçimlendirilmiş; T = serbest metin)
+Nom de l’écran ¦ Ekranın adı
+Nom du dessin ¦ Çizimin adı
+Nom placé ¦ Adın yeri
+Nombre (avec l’original) ¦ Sayı (özgünle birlikte)
+Nombre d’étapes ¦ Adım sayısı
+Noms des générations ¦ Kuşak adları
+Note, légende ¦ Not, açıklama
+Nouveau dessin ¦ Yeni çizim
+Nouveau fichier ¦ Yeni dosya
+Nouveau fichier : page HTML ou PHP, CSS, JS, morceau PHP (en-tête…) ¦ Yeni dosya: HTML ya da PHP sayfası, CSS, JS, PHP parçası (üst bilgi…)
+Nouveau fichier dans css/ ¦ css/ içinde yeni dosya
+Nouveau fichier dans js/ ¦ js/ içinde yeni dosya
+Nouveau fichier ici ¦ Burada yeni dosya
+Nouveau fichier… ¦ Yeni dosya…
+Nouveau sans enregistrer ¦ Kaydetmeden yeni
+Nouveau site… ¦ Yeni site…
+Nouveau sous-dossier… ¦ Yeni alt klasör…
+Nouvel écran ¦ Yeni ekran
+Orangé ¦ Turuncu
+Outils du mode Plan ¦ Plan modu araçları
+Ouvrir cette page dans un onglet du navigateur, comme un visiteur (isolée de l’app) ¦ Bu sayfayı bir ziyaretçi gibi tarayıcı sekmesinde aç (uygulamadan ayrı)
+Ouvrir l’aperçu dans le navigateur ¦ Önizlemeyi tarayıcıda aç
+Ouvrir un autre dessin ? ¦ Başka bir çizim açılsın mı?
+Ouvrir un dessin ¦ Bir çizim aç
+Ouvrir un dessin… ¦ Bir çizim aç…
+Ouvrir un dossier… ¦ Bir klasör aç…
+Pages où il est lié… ¦ Bağlı olduğu sayfalar…
+Palette du plan (routes, rivières, bâtiments…) ¦ Plan paleti (yollar, dereler, binalar…)
+Panneau Ceci est ¦ “Bu…” paneli
+Panneau « Ceci est… » ¦ “Bu…” paneli
+Parents, frères et sœurs ¦ Anne ve baba, kardeşler
+Part du tracé occupée ¦ Kullanılan yol oranı
+Pas de la grille (0 = aucune) ¦ Izgara aralığı (0 = yok)
+Pas d’autre attribut que la classe et l’id. ¦ class ve id dışında başka öznitelik yok.
+Pas encore de version. ¦ Henüz sürüm yok.
+Passer aux trois boutons HTML / CSS / JS ¦ Üç düğmeye geç: HTML / CSS / JS
+Passer aux onglets de fichiers (comme Phoenix Code) ¦ Dosya sekmelerine geç (Phoenix Code’daki gibi)
+Personne au centre (ou au pied de l’arbre) ¦ Ortadaki kişi (ya da ağacın dibindeki)
+Peut se mettre dans ¦ Şunun içine konabilir
+Peut contenir ¦ İçerebilir
+Photos d’une personne ¦ Bir kişinin fotoğrafları
+Phrase d’ouverture ¦ Açılış cümlesi
+Pipette (prend la couleur d’un objet) ¦ Damlalık (bir nesnenin rengini alır)
+Place du titre ¦ Başlığın yeri
+Plus : déplacer, format, pages où il est lié, dupliquer, supprimer ¦ Daha fazla: taşı, biçim, bağlı olduğu sayfalar, çoğalt, sil
+Plus fin ¦ Daha ince
+Plus à droite : plus de gris devient de l’encre (un trait pâle réapparaît) ; plus à gauche : seulement l’encre la plus foncée (les taches disparaissent). Réglé tout seul au départ. ¦ Daha sağa: daha çok gri mürekkep olur (soluk bir çizgi geri gelir); daha sola: yalnızca en koyu mürekkep (lekeler kaybolur). Başlangıçta kendiliğinden ayarlanır.
+Plus épais ¦ Daha kalın
+Plusieurs images en vignettes ¦ Küçük resim olarak birkaç görüntü
+Point modifié ¦ Nokta değiştirildi
+Portfolio d’artiste ¦ Sanatçı portfolyosu
+Portraits (arbre dessiné) ¦ Portreler (çizilmiş ağaç)
+Pose un texte qui suit ce tracé ¦ Bu yolu izleyen bir metin yerleştirir
+Poser le fond ¦ Arka planı yerleştir
+Poser l’image ¦ Görüntüyü yerleştir
+Propriété changée ¦ Özellik değiştirildi
+Pré, prairie ¦ Çayır, otlak
+Prénom (grand) ¦ Ad (büyük)
+Prénom, puis NOM dessous ¦ Ad, altında SOYADI
+Prénoms les plus portés ¦ En çok taşınan adlar
+Préparer l’impression ¦ Yazdırmaya hazırla
+Présentation, œuvres en galerie, expositions, contact ¦ Tanıtım, galeride eserler, sergiler, iletişim
+Prévois un polygon() juste avant. ¦ Hemen öncesine bir polygon() koy.
+Publier en ligne… ¦ Çevrim içi yayımla…
+Quel lieu ? ¦ Hangi yer?
+Qui est né, s’est marié ou est mort là ¦ Orada kim doğdu, evlendi ya da öldü
+Raccourcis du code ¦ Kod kısayolları
+Ranger aussi l’image (fond transparent) dans les médias de la personne ¦ Görüntüyü (saydam arka planlı) kişinin medyasında da sakla
+Ranger la sélection dans un groupe ou un calque, sans glisser ¦ Seçimi sürüklemeden bir gruba ya da katmana koy
+Ranger tout seul ¦ Kendiliğinden düzenle
+Rangé dans un groupe ¦ Bir gruba kondu
+Recto-verso : deux faces. Pliée en 2, 3 ou 4 : la carte a plusieurs volets ; le dessin montre les plis (traits roses) et s’imprime face par face, ou sur A4 avec les traits de coupe et de pli (⤓ Exporter → Recto-verso sur A4). ¦ Çift taraflı: iki yüz. 2, 3 ya da 4’e katlanmış: kartın birkaç kanadı var; çizim katları (pembe çizgiler) gösterir ve yüz yüz yazdırılır ya da kesim ve kat çizgileriyle A4’e (⤓ Dışa aktar → A4’e çift taraflı).
+Reculé ¦ Geri alındı
+Redimensionné ¦ Yeniden boyutlandırıldı
+Relief, Eau, Végétation, Parcelles, Routes, Bâti, Limites, Noms, Généalogie, Habillage ¦ Kabartı, Su, Bitki örtüsü, Parseller, Yollar, Yapılar, Sınırlar, Adlar, Soy ağacı, Süsleme
+Relire les blocs de la généalogie ¦ Soy ağacı bloklarını yeniden yükle
+Remettre un champ enlevé… ¦ Kaldırılan bir alanı geri koy…
+Remplir depuis une fiche ¦ Bir karttan doldur
+Remplissage : clic pour choisir la couleur ¦ Dolgu: rengi seçmek için tıkla
+Remplissage par défaut ¦ Varsayılan dolgu
+Reprendre les couleurs du style ¦ Stilin renklerini yeniden al
+Repères de pli et noms des pages : oui / non ¦ Kat işaretleri ve sayfa adları: açık / kapalı
+Requête @media ¦ @media sorgusu
+Retire les longues lignes droites imprimées ou tracées du registre qui traversent la signature. ¦ İmzanın üzerinden geçen, kayıt defterine basılmış ya da çizilmiş uzun düz çizgileri kaldırır.
+Retirer cette couleur ¦ Bu rengi çıkar
+Retirer l’attribut ¦ Özniteliği çıkar
+Retourné ¦ Çevrildi
+Revenir au niveau du dessus (Échap) ¦ Bir üst düzeye dön (Esc)
+Revenir aux champs d’origine de ce modèle ¦ Bu şablonun orijinal alanlarına dön
+Rosace à six pétales ¦ Altı yapraklı rozet
+Rose des vents ¦ Rüzgâr gülü
+Récent. ¦ Yeni.
+Région, pays ¦ Bölge, ülke
+Réglages appliqués ¦ Ayarlar uygulandı
+Réparti ¦ Dağıtıldı
+Répartir horizontalement ¦ Yatay dağıt
+Répartir horizontalement (même écart) ¦ Yatay dağıt (eşit aralık)
+Répartir verticalement ¦ Dikey dağıt
+Répartir verticalement (même écart) ¦ Dikey dağıt (eşit aralık)
+Réponse souhaitée ¦ Cevap bekleniyor
+Répétition en cercle ¦ Dairesel tekrar
+Répétition en cercle… ¦ Dairesel tekrar…
+Répétition en grille… ¦ Izgara tekrarı…
+Sa fiche, sa vie en frise, son arbre, ses lieux, ses photos ¦ Kartı, zaman çizelgesinde hayatı, ağacı, yerleri, fotoğrafları
+Sa vie, année par année ¦ Yıl yıl hayatı
+Sable, grève ¦ Kum, kumsal
+Sans grille d’échelle ¦ Ölçek ızgarası yok
+Selon la forme ¦ Biçime göre
+Ses photos publiables, toutes seules ¦ Yayımlanabilir fotoğrafları, kendiliğinden
+Simple : tablette et téléphone ¦ Basit: tablet ve telefon
+Simplifier le tracé… ¦ Yolu sadeleştir…
+Simplifiée ¦ Sadeleştirilmiş
+Site modifié ailleurs ¦ Site başka bir yerde değiştirildi
+Situer la carte tout de suite (conseillé) : le lieu et la largeur couverte donnent la bonne échelle, et la carte n’est pas déformée ¦ Haritayı hemen konumlandır (önerilir): yer ve kapsanan genişlik doğru ölçeği verir, harita bozulmaz
+Son CSS ¦ CSS’i
+Son nouveau chemin : ¦ Yeni yolu:
+Sortir d’un niveau (Échap) ¦ Bir düzey çık (Esc)
+Style du plan ¦ Plan stili
+Suivant / précédent ¦ Sonraki / önceki
+Supprimer l’élément ¦ Ögeyi sil
+Survenu le… ¦ Tarih…
+Symbole, bâtiment ¦ Simge, bina
+S’applique à ¦ Şuna uygulanır
+S’épaississant ¦ Kalınlaşan
+Tableau d’ascendance (de gauche à droite) ¦ Atalar tablosu (soldan sağa)
+Taille de l’écran ¦ Ekran boyutu
+Taille des meubles ¦ Figürlerin boyutu
+Taille du nom ¦ Adın boyutu
+Taillé ¦ Sol çapraz bölünmüş
+Tes éléments sont gardés. ¦ Ögelerin saklandı.
+Ton hébergeur (OVH, o2switch, Infomaniak…) te donne un serveur FTP. La connexion est toujours chiffrée (FTPS) et son certificat vérifié : un serveur sans chiffrement est refusé. ¦ Barındırma sağlayıcın (OVH, o2switch, Infomaniak…) sana bir FTP sunucusu verir. Bağlantı her zaman şifrelidir (FTPS) ve sertifikası kontrol edilir: şifrelemesiz bir sunucu reddedilir.
+Ton site est envoyé tel qu’à l’export (.zip) : sans personne vivante ni fiche confidentielle. Le jeton ou le mot de passe reste sur cet ordinateur : il n’est jamais montré, ni mis dans une sauvegarde ou dans le site. ¦ Siten dışa aktarmadaki (.zip) gibi gönderilir: yaşayan kişi ve gizli kart olmadan. Jeton ya da parola bu bilgisayarda kalır: asla gösterilmez, bir yedeğe ya da siteye konmaz.
+Tous les fichiers ¦ Tüm dosyalar
+Tous les fichiers du site ¦ Sitenin tüm dosyaları
+Tous les écrans ¦ Tüm ekranlar
+Tout affiché ¦ Hepsi gösteriliyor
+Tracé fermé ¦ Kapalı yol
+Tracé simplifié ¦ Yol sadeleştirildi
+Trait au crayon ¦ Kurşun kalem çizgisi
+Tranché ¦ Çapraz bölünmüş
+Transformer… (échelle, inclinaison, copies) ¦ Dönüştür… (ölçek, eğme, kopyalar)
+Transformé ¦ Dönüştürüldü
+Trois cartes côte à côte (une seule sur téléphone) ¦ Yan yana üç kart (telefonda tek)
+Très fine ¦ Çok ince
+Très simplifiée ¦ Çok sadeleştirilmiş
+Téléphone couché ¦ Yatay telefon
+Un bouton pour écrire un courriel ¦ E-posta yazmak için bir düğme
+Un calque vide, au-dessus des autres : tu dessines dedans ¦ Diğerlerinin üzerinde boş bir katman: içine çizersin
+Un de tes diagrammes (Graphiques → Mes diagrammes), ou un nouveau ; redessiné à chaque ouverture, figé à l’export ¦ Diyagramlarından biri (Grafikler → Diyagramlarım) ya da yeni bir tane; her açılışta yeniden çizilir, dışa aktarmada sabitlenir
+Un en-tête, un texte, un pied de page : à toi de jouer ¦ Bir üstbilgi, bir metin, bir altbilgi: sıra sende
+Un grand titre et une phrase ¦ Büyük bir başlık ve bir cümle
+Un objet seul s’aligne sur le plan de travail (ou sur la page, le volet où il se trouve). Plusieurs : entre eux, ou sur le plan si « Plan de travail » est choisi. En déplaçant ou en agrandissant, des repères roses aimantent aux bords et aux centres des autres objets (⌘ ou Ctrl pour s’en passer). ¦ Tek bir nesne çalışma alanına (ya da bulunduğu sayfaya, kanada) hizalanır. Birkaç nesne: birbirine ya da “Çalışma alanı” seçiliyse alana. Taşırken ya da büyütürken pembe kılavuzlar diğer nesnelerin kenarlarına ve merkezlerine mıknatıslanır (bunu istemezsen ⌘ ya da Ctrl).
+Un quadrillage bleu en kilomètres (ou mètres) aide à dessiner aux bonnes distances ; il ne s’imprime jamais. ¦ Kilometre (ya da metre) cinsinden mavi bir ızgara doğru uzaklıklarda çizmeye yardım eder; asla yazdırılmaz.
+Un titre et un paragraphe ¦ Bir başlık ve bir paragraf
+Une autre fenêtre a enregistré ce site entre-temps. Garder ta version effacera la sienne. ¦ Bu arada başka bir pencere bu siteyi kaydetti. Kendi sürümünü saklarsan onunki silinir.
+Une autre image ¦ Başka bir görüntü
+Une carte sur mesure (Carte → 🗺 Mes cartes), mise en image sans personne vivante ni fiche confidentielle ¦ Özel bir harita (Harita → 🗺 Haritalarım), yaşayan kişi ve gizli kart olmadan görüntüye dönüştürülmüş
+Une image de tes médias ¦ Medyandan bir görüntü
+Une page de plus dans le document : l’enveloppe au bon format (C6, DL, C5 ou carrée, selon la carte), dans le même style, avec l’adresse du destinataire et l’expéditeur. Elle s’imprime à sa taille. ¦ Belgeye bir sayfa daha: doğru boyutta zarf (karta göre C6, DL, C5 ya da kare), aynı stilde, alıcının adresi ve gönderenle. Kendi boyutunda yazdırılır.
+Une phrase mise en valeur ¦ Öne çıkarılmış bir cümle
+Une signature déjà encadrée dans la visionneuse (Signatures identifiées) ¦ Görüntüleyicide zaten çerçevelenmiş bir imza (Tanımlanan imzalar)
+Unité montrée ¦ Gösterilen birim
+Variante du bord de cire ¦ Mum kenarı çeşidi
+Le bord d’un cachet de cire est irrégulier : chaque variante l’écrase autrement. ¦ Bir mühür mumunun kenarı düzensizdir: her çeşit onu başka türlü ezer.
+Le site entier (.zip, à mettre en ligne) ou une page seule (.html) ¦ Sitenin tamamı (.zip, yayına konacak) ya da tek bir sayfa (.html)
+Le village, son histoire, les familles qui y ont vécu ¦ Köy, tarihi, orada yaşamış aileler
+🧭 Le site dans les navigateurs ¦ 🧭 Tarayıcılarda site
+Imiter dans l’aperçu : ¦ Önizlemede taklit et:
+pour l’export en image (PNG, JPG) ; 300 ppp pour imprimer ¦ görüntü olarak dışa aktarma için (PNG, JPG); yazdırmak için 300 ppi
+Verrouillé ¦ Kilitli
+Vers le bas ¦ Aşağı
+Vers le haut ¦ Yukarı
+Vers le nord ¦ Kuzeye
+Vers le sud ¦ Güneye
+Vers l’est ¦ Doğuya
+Vers l’ouest ¦ Batıya
+Vide : ne pas vérifier ce navigateur ¦ Boş: bu tarayıcıyı kontrol etme
+Voie ferrée ¦ Demiryolu
+Voie, rivière, limite (un clic par point) ¦ Yol, dere, sınır (nokta başına bir tık)
+Voir dans le code ¦ Kodda gör
+Voir et modifier le CSS de cette classe ou de cet id (⌘E), comme l’édition rapide de Phoenix Code ¦ Bu class ya da id’nin CSS’ini gör ve düzenle (⌘E), Phoenix Code’un hızlı düzenlemesi gibi
+Voir l’élément dans le code ¦ Ögeyi kodda gör
+Végétation ¦ Bitki örtüsü
+Zone : forêt, champ, lac, bourg… ¦ Alan: orman, tarla, göl, kasaba…
+animations liées au défilement ¦ kaydırmaya bağlı animasyonlar
+biseautés ¦ pahlı
+carrés ¦ kare
+chaînage optionnel ?. ¦ isteğe bağlı zincirleme ?.
+délier ¦ bağı kopar
+gap en flexbox ¦ flexbox’ta gap
+la personne seule ¦ yalnızca kişi
+la personne et ses ancêtres ¦ kişi ve ataları
+lié après script.js ¦ script.js’den sonra bağlı
+liée après style.css ¦ style.css’ten sonra bağlı
+margin-left et margin-right : auto ¦ margin-left ve margin-right: auto
+Retirer margin et padding posés ici ¦ Burada konan margin ve padding’i çıkar
+mon-site (ou compte/mon-site) ¦ benim-sitem (ya da hesap/benim-sitem)
+opérateur ?? ¦ ?? işleci
+ouvrir la fiche ¦ kartı aç
+principal · tout le site ¦ ana · tüm site
+script.js · le script de tout le site ¦ script.js · tüm sitenin betiği
+style.css · la feuille de styles de tout le site ¦ style.css · tüm sitenin stil sayfası
+translate, rotate, scale séparés ¦ ayrı translate, rotate, scale
+un seul fichier .html ¦ tek bir .html dosyası
+une face par feuille ¦ sayfa başına bir yüz
+unités cqw, cqh, cqi, cqb ¦ cqw, cqh, cqi, cqb birimleri
+unités dvh, svh, lvh ¦ dvh, svh, lvh birimleri
+unités lh, rlh ¦ lh, rlh birimleri
+évènement scrollend ¦ scrollend olayı
+Écart horizontal ¦ Yatay aralık
+Écart vertical ¦ Dikey aralık
+Écartelé ¦ Dörde bölünmüş
+Échelle, rose des vents, cartouche, légende ¦ Ölçek, rüzgâr gülü, kartuş, lejant
+Échiqueté ¦ Damalı
+Écran 16:9 ¦ 16:9 ekran
+Écrans enregistrés. ¦ Ekranlar kaydedildi.
+Écrire ¦ Yaz
+Écrire le texte dans la page ¦ Metni sayfaya yaz
+Écu ¦ Kalkan
+Écu (5 × 6) ¦ Kalkan (5 × 6)
+Écu français moderne ¦ Modern Fransız kalkanı
+Écu suisse ¦ İsviçre kalkanı
+Élément incomplet. ¦ Eksik öge.
+Émail des meubles ¦ Figürlerin rengi
+Émail du champ ¦ Alanın rengi
+Étendue ¦ Yayılma
+Éventail (demi-cercle) ¦ Yelpaze (yarım daire)
+Éventail Art déco ¦ Art deco yelpaze
+Éventail ouvert (240°) ¦ Açık yelpaze (240°)
+Éventail trois-quarts (270°) ¦ Dörtte üç yelpaze (270°)
+× Oublier cet accès FTP ¦ × Bu FTP erişimini unut
+× Oublier le jeton Netlify ¦ × Netlify jetonunu unut
+× Oublier le jeton GitHub ¦ × GitHub jetonunu unut
+à la taille exacte ¦ tam boyutta
+à ouvrir partout : double-clic, MAMP, WAMP, hébergeur ¦ her yerde açılır: çift tık, MAMP, WAMP, barındırma sağlayıcısı
+à rouvrir ici ¦ burada yeniden açmak için
+↗ Ouvrir le site dans : ¦ ↗ Siteyi şurada aç:
+↗ Ouvrir là ¦ ↗ Orada aç
+↺ Les 2 dernières années ¦ ↺ Son 2 yıl
+↺ Marges de départ ¦ ↺ Başlangıç kenar boşlukları
+↺ Remettre comme au départ (retire cette règle) ¦ ↺ Başlangıçtaki gibi yap (bu kuralı kaldırır)
+↻ La personne affichée ¦ ↻ Gösterilen kişi
+↻ Remplacer l’image… ¦ ↻ Görüntüyü değiştir…
+▶ Tester : comme un visiteur (tes scripts tournent, les liens marchent) ¦ ▶ Test et: bir ziyaretçi gibi (betiklerin çalışır, bağlantılar işler)
+◎ Exclure (là où ils se croisent) ¦ ◎ Dışla (kesiştikleri yerde)
+◐ Soustraire (le dessous moins le reste) ¦ ◐ Çıkar (alttaki eksi geri kalanlar)
+◫ Visuel et code ¦ ◫ Görsel ve kod
+⚙ Les écrans du site (@media) ¦ ⚙ Sitenin ekranları (@media)
+⚙️ Les formats ¦ ⚙️ Biçimler
+⚙️ Les éléments du plan ¦ ⚙️ Planın ögeleri
+⚙️ Ranger les éléments ¦ ⚙️ Ögeleri düzenle
+⚜️ Ajouter un meuble (fleur de lys, lion, étoile…)… ¦ ⚜️ Bir figür ekle (zambak, aslan, yıldız…)…
+⚜️ Ajouter un meuble seul ¦ ⚜️ Tek bir figür ekle
+⛔ Colle ton jeton GitHub. ¦ ⛔ GitHub jetonunu yapıştır.
+⛔ Colle ton jeton Netlify. ¦ ⛔ Netlify jetonunu yapıştır.
+✍️ La signature d’un acte ¦ ✍️ Bir belgedeki imza
+✍️ Une signature déjà repérée ¦ ✍️ Daha önce bulunmuş bir imza
+✍️ Une signature déjà repérée… ¦ ✍️ Daha önce bulunmuş bir imza…
+✎ Mon élément ¦ ✎ Ögem
+✒ La sélection seule en SVG ¦ ✒ Yalnızca seçim, SVG olarak
+➰ Texte sur une courbe… ¦ ➰ Eğri üzerinde metin…
+➰ Un texte qui suit une courbe ¦ ➰ Bir eğriyi izleyen metin
+➰ Un texte sur ce tracé ¦ ➰ Bu yol üzerinde bir metin
+⤒ Importer de l’ordinateur (SVG, PNG, JPG, WEBP, GIF, BMP, fichier du dessin…) ¦ ⤒ Bilgisayardan içe aktar (SVG, PNG, JPG, WEBP, GIF, BMP, çizim dosyası…)
+⤓ Exporter le site ¦ ⤓ Siteyi dışa aktar
+⤓ Exporter tout le site (.zip) ¦ ⤓ Tüm siteyi dışa aktar (.zip)
+⤓ Exporter la page (.html) ¦ ⤓ Sayfayı dışa aktar (.html)
+⧉ Copier l’exemple ¦ ⧉ Örneği kopyala
+⧉ Mélange de deux formes (étapes)… ¦ ⧉ İki biçimi karıştır (adımlar)…
+⧉ Mélange de deux formes ¦ ⧉ İki biçimi karıştır
+⬤ Réunir ¦ ⬤ Birleştir
+◑ Intersection ¦ ◑ Kesişim
+⭕ Médaillon rond ¦ ⭕ Yuvarlak madalyon
+〰 Largeur du trait ¦ 〰 Çizgi kalınlığı
+＋ Blocs : glisse-les dans la page ¦ ＋ Bloklar: sayfaya sürükle
+＋ Créer un style ¦ ＋ Stil oluştur
+＋ Créer un élément ¦ ＋ Öge oluştur
+＋ Enregistrer la version actuelle ¦ ＋ Şimdiki sürümü kaydet
+＋ Nouveau faire-part ¦ ＋ Yeni duyuru kartı
+＋ Nouveau site : par où commencer ? ¦ ＋ Yeni site: nereden başlamalı?
+＋ Nouvel arbre décoratif ¦ ＋ Yeni süs ağacı
+＋ Signature ou sceau ¦ ＋ İmza ya da mühür
+＋ Un écran ¦ ＋ Bir ekran
+📱 Téléphone couché ¦ 📱 Yatay telefon
+👆 Écran tactile ¦ 👆 Dokunmatik ekran
+🖨 Impression ¦ 🖨 Baskı
+🌐 Cette page seule ¦ 🌐 Yalnızca bu sayfa
+🌳 Un arbre à imprimer en grand ¦ 🌳 Büyük yazdırılacak bir ağaç
+🎨 Couleurs, polices, largeur du site ¦ 🎨 Renkler, yazı tipleri, site genişliği
+🎨 Les styles ¦ 🎨 Stiller
+🎨 Remettre les émaux en couleur ¦ 🎨 Armacılık renklerini yeniden renkli yap
+🎨 Son CSS : les règles de ses classes et de son id, modifiables (⌘E) ¦ 🎨 CSS’i: class’larının ve id’sinin kuralları, düzenlenebilir (⌘E)
+💻 De l’ordinateur ¦ 💻 Bilgisayardan
+💾 Fichier du dessin ¦ 💾 Çizim dosyası
+💾 Fichier du dessin… ¦ 💾 Çizim dosyası…
+📄 Les pages du site ¦ 📄 Sitenin sayfaları
+📋 Copier le code SVG ¦ 📋 SVG kodunu kopyala
+📍 Lieux de la base sur le plan… ¦ 📍 Veritabanındaki yerler plan üzerinde…
+📐 Format du document / plans de travail… ¦ 📐 Belge biçimi / çalışma alanları…
+📖 Aide-mémoire ¦ 📖 Hatırlatma kartı
+📤 Publier en ligne ¦ 📤 Çevrim içi yayımla
+📤 Publier le site ¦ 📤 Siteyi yayımla
+📤 Publier ¦ 📤 Yayımla
+📤 Site publié. ¦ 📤 Site yayımlandı.
+📦 Tout le site en .zip ¦ 📦 Tüm site .zip olarak
+📰 Avis dans le journal ¦ 📰 Gazete ilanı
+📰 Un faire-part, une affiche ¦ 📰 Bir duyuru kartı, bir afiş
+📷 Un acte des médias… ¦ 📷 Medyadan bir belge…
+🔗 Objets reliés ¦ 🔗 Bağlı nesneler
+🔗 Objets reliés à la famille… ¦ 🔗 Aileye bağlı nesneler…
+🔷 Enregistrer comme forme (Mes formes)… ¦ 🔷 Biçim olarak kaydet (Biçimlerim)…
+🔷 Enregistrer la forme ¦ 🔷 Biçimi kaydet
+🖨 Hachures héraldiques ¦ 🖨 Armacılık taramaları
+🖨 Hachures héraldiques (noir et blanc) ¦ 🖨 Armacılık taramaları (siyah beyaz)
+🖼 Choisir la photo… ¦ 🖼 Fotoğrafı seç…
+🖼 Une image de la base… ¦ 🖼 Veritabanından bir görüntü…
+🖼️ Enregistrer dans les médias d’une fiche… ¦ 🖼️ Bir kartın medyasına kaydet…
+🖼️ Image de référence (en transparence)… ¦ 🖼️ Referans görüntüsü (saydam)…
+🗂 Créer les calques d’un plan ¦ 🗂 Bir planın katmanlarını oluştur
+🗺️ Mode Plan (cartes) : oui / non ¦ 🗺️ Plan modu (haritalar): açık / kapalı
+🗺️ Plan : la palette des routes, rivières, bâtiments… ¦ 🗺️ Plan: yollar, dereler, binalar paleti…
+🗺️ Une nouvelle carte ¦ 🗺️ Yeni bir harita
+🛡️ Créer ce blason ¦ 🛡️ Bu armayı oluştur
+🛡️ Créer un blason… ¦ 🛡️ Arma oluştur…
+🛡️ Dans ces armoiries ¦ 🛡️ Bu armada
+🛡️ Enregistrer comme image d’armoiries… ¦ 🛡️ Arma görüntüsü olarak kaydet…
+🛡️ Écu ¦ 🛡️ Kalkan
+🥚 Médaillon ovale ¦ 🥚 Oval madalyon
+🧭 Navigateurs : ce qui pourrait ne pas marcher sur Safari, Firefox, un vieux téléphone… et imiter un navigateur ¦ 🧭 Tarayıcılar: Safari’de, Firefox’ta, eski bir telefonda çalışmayabilecekler… ve bir tarayıcıyı taklit etme
+🧲 Aimanter (bords et centres des objets) : oui / non ¦ 🧲 Mıknatısla (nesnelerin kenarları ve merkezleri): açık / kapalı
+🧲 Aimanter aux autres objets (traits roses) ¦ 🧲 Diğer nesnelere mıknatısla (pembe çizgiler)
+🪄 Vectoriser cette image ¦ 🪄 Bu görüntüyü vektöre dönüştür
+🪄 Vectoriser une image (refaire un blason scanné)… ¦ 🪄 Bir görüntüyü vektöre dönüştür (taranmış bir armayı yeniden yap)…
+Prévois un style correct sans :has() (il sera ignoré sur les vieux Firefox). ¦ :has() olmadan da düzgün bir stil öngör (eski Firefox’larda yok sayılır).
+@container (requêtes de conteneur) ¦ @container (kapsayıcı sorguları)
+Marche partout depuis 2023 ; garde une mise en page lisible sans. ¦ 2023’ten beri her yerde çalışır; onsuz da okunabilir bir sayfa düzeni koru.
+@container style() (requêtes de style) ¦ @container style() (stil sorguları)
+Pas sur Firefox : utilise une classe à la place. ¦ Firefox’ta yok: onun yerine bir class kullan.
+Seulement Chrome et Edge : ne compte pas dessus. ¦ Yalnızca Chrome ve Edge: buna güvenme.
+Marche partout depuis 2023. ¦ 2023’ten beri her yerde çalışır.
+CSS imbriqué (nesting) ¦ İç içe CSS (nesting)
+Marche partout depuis fin 2023 ; pour les plus vieux navigateurs, écris les sélecteurs en entier. ¦ 2023 sonundan beri her yerde çalışır; en eski tarayıcılar için seçicileri tam yaz.
+Marche partout depuis 2023 ; mets une couleur #hex juste avant pour les plus vieux. ¦ 2023’ten beri her yerde çalışır; en eskiler için hemen öncesine bir #hex renk koy.
+Récent : mets une couleur fixe juste avant. ¦ Yeni: hemen öncesine sabit bir renk koy.
+Marche partout depuis 2022. ¦ 2022’den beri her yerde çalışır.
+Récent : mets une couleur fixe juste avant, ou utilise @media (prefers-color-scheme). ¦ Yeni: hemen öncesine sabit bir renk koy ya da @media (prefers-color-scheme) kullan.
+Sans risque : les vieux navigateurs coupent les titres comme avant. ¦ Risksiz: eski tarayıcılar başlıkları eskisi gibi böler.
+Sans risque : ignoré là où ça ne marche pas. ¦ Risksiz: çalışmadığı yerde yok sayılır.
+Récent sur Firefox : préfère des classes bien nommées si tu vises de vieux Firefox. ¦ Firefox’ta yeni: eski Firefox’ları hedefliyorsan iyi adlandırılmış class’ları tercih et.
+@property (variables typées) ¦ @property (türlendirilmiş değişkenler)
+Marche partout depuis 2024 ; donne une valeur de départ à la variable. ¦ 2024’ten beri her yerde çalışır; değişkene bir başlangıç değeri ver.
+Très récent : prévois une position de repli (position: absolute classique). ¦ Çok yeni: bir yedek konum öngör (klasik position: absolute).
+Sans risque : les pages changent sans animation là où ça ne marche pas. ¦ Risksiz: çalışmadığı yerde sayfalar animasyonsuz değişir.
+Pas sur Firefox : le contenu doit rester visible sans l'animation. ¦ Firefox’ta yok: içerik animasyon olmadan da görünür kalmalı.
+Marche partout depuis 2023 ; mets 100vh juste avant pour les plus vieux. ¦ 2023’ten beri her yerde çalışır; en eskiler için hemen öncesine 100vh koy.
+backdrop-filter sans -webkit- ¦ -webkit- olmadan backdrop-filter
+Ajoute aussi -webkit-backdrop-filter (Safari avant 18). ¦ -webkit-backdrop-filter da ekle (18 öncesi Safari).
+mask / mask-image sans -webkit- ¦ -webkit- olmadan mask / mask-image
+Ajoute aussi -webkit-mask-image pour les Chrome un peu anciens. ¦ Biraz eski Chrome’lar için -webkit-mask-image da ekle.
+user-select sans -webkit- ¦ -webkit- olmadan user-select
+Ajoute -webkit-user-select : Safari n'a toujours que celui-là. ¦ -webkit-user-select ekle: Safari’de hâlâ yalnızca o var.
+Marche partout depuis 2021. ¦ 2021’den beri her yerde çalışır.
+Pas sur Firefox ni Safari : donne une hauteur normale au champ. ¦ Firefox’ta da Safari’de de yok: alana normal bir yükseklik ver.
+Sans risque : pas d'animation d'entrée là où ça ne marche pas. ¦ Risksiz: çalışmadığı yerde giriş animasyonu olmaz.
+Sans risque : l'élément apparaît sans transition ailleurs. ¦ Risksiz: başka yerlerde öge geçişsiz görünür.
+Seulement Chrome et Edge : l'ouverture se fera sans animation ailleurs. ¦ Yalnızca Chrome ve Edge: başka yerlerde açılış animasyonsuz olur.
+Marche partout depuis fin 2023. ¦ 2023 sonundan beri her yerde çalışır.
+Pas sur Firefox : sans risque, juste un peu plus d'espace. ¦ Firefox’ta yok: risksiz, yalnızca biraz daha fazla boşluk.
+Marche partout depuis 2020. ¦ 2020’den beri her yerde çalışır.
+Récent sur Chrome : mets une valeur fixe juste avant. ¦ Chrome’da yeni: hemen öncesine sabit bir değer koy.
+Pas sur Safari : sans risque. ¦ Safari’de yok: risksiz.
+Pas sur Firefox : prévois une lettrine avec ::first-letter et float. ¦ Firefox’ta yok: ::first-letter ve float ile bir büyük ilk harf öngör.
+Marche partout depuis 2024 ; sinon [dir="rtl"]. ¦ 2024’ten beri her yerde çalışır; yoksa [dir="rtl"].
+Marche partout depuis 2024. ¦ 2024’ten beri her yerde çalışır.
+Sans risque : ignoré ailleurs. ¦ Risksiz: başka yerlerde yok sayılır.
+Firefox ne le gère que depuis 2024 : préfère transform: scale() si besoin. ¦ Firefox bunu yalnızca 2024’ten beri destekliyor: gerekirse transform: scale() tercih et.
+Récent : le contenu s'ouvrira sans animation ailleurs. ¦ Yeni: başka yerlerde içerik animasyonsuz açılır.
+appearance: base-select (menus stylés) ¦ appearance: base-select (stilli menüler)
+Seulement Chrome et Edge : le menu reste normal ailleurs (sans risque). ¦ Yalnızca Chrome ve Edge: başka yerlerde menü normal kalır (risksiz).
+Seulement Chrome et Edge : mets une valeur fixe juste avant. ¦ Yalnızca Chrome ve Edge: hemen öncesine sabit bir değer koy.
+Seulement Chrome et Edge. ¦ Yalnızca Chrome ve Edge.
+Récent sur Firefox : le texte ne sera pas surligné ailleurs. ¦ Firefox’ta yeni: başka yerlerde metin vurgulanmaz.
+Seulement Chrome et Edge : garde un ordre du code logique. ¦ Yalnızca Chrome ve Edge: kodun sırasını mantıklı tut.
+popover (bulles sans JavaScript) ¦ popover (JavaScript’siz baloncuklar)
+Marche partout depuis 2024 ; sur les plus vieux, la bulle reste cachée. ¦ 2024’ten beri her yerde çalışır; en eskilerde baloncuk gizli kalır.
+<details name=…> (accordéon exclusif) ¦ <details name=…> (tek açılan akordeon)
+loading="lazy" sur les images ¦ görüntülerde loading="lazy"
+loading="lazy" sur les cadres (iframe) ¦ çerçevelerde loading="lazy" (iframe)
+Sans risque : chargé tout de suite ailleurs. ¦ Risksiz: başka yerlerde hemen yüklenir.
+Ajoute role="search" pour les plus vieux. ¦ En eskiler için role="search" ekle.
+commandfor / command (boutons sans JS) ¦ commandfor / command (JS’siz düğmeler)
+Très récent : garde un petit script de repli. ¦ Çok yeni: küçük bir yedek betik tut.
+Pas sur Safari : le texte restera caché à la recherche. ¦ Safari’de yok: metin aramada gizli kalır.
+Seulement Safari : ailleurs c'est une case à cocher normale. ¦ Yalnızca Safari: başka yerlerde normal bir onay kutusudur.
+Marche partout depuis 2023 ; garde une version JPEG dans un <picture>. ¦ 2023’ten beri her yerde çalışır; bir <picture> içinde JPEG sürümünü tut.
+règles de préchargement (speculationrules) ¦ ön yükleme kuralları (speculationrules)
+Marche partout. ¦ Her yerde çalışır.
+Marche partout depuis 2023 ; sinon [...t].sort(). ¦ 2023’ten beri her yerde çalışır; yoksa [...t].sort().
+Marche partout depuis 2024 ; sinon new Promise((res, rej) => …). ¦ 2024’ten beri her yerde çalışır; yoksa new Promise((res, rej) => …).
+Récent : sinon new Promise(r => r(f())). ¦ Yeni: yoksa new Promise(r => r(f())).
+Seulement dans un <script type="module"> ; marche partout depuis 2022. ¦ Yalnızca bir <script type="module"> içinde; 2022’den beri her yerde çalışır.
+Firefox ne l'a que depuis 2024. ¦ Firefox’ta yalnızca 2024’ten beri var.
+Récent : écris la durée à la main pour les plus vieux. ¦ Yeni: en eskiler için süreyi elle yaz.
+Très récent sur Firefox et Safari : garde des liens normaux. ¦ Firefox ve Safari’de çok yeni: normal bağlantılar tut.
+Vérifie que document.startViewTransition existe avant de l'appeler. ¦ Çağırmadan önce document.startViewTransition olup olmadığını kontrol et.
+Firefox ne l'a que depuis l'été 2024. ¦ Firefox’ta yalnızca 2024 yazından beri var.
+Récent sur Safari : passe par [...it] pour les plus vieux. ¦ Safari’de yeni: en eskiler için [...it] kullan.
+Récent : sinon s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'). ¦ Yeni: yoksa s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').
+Pas sur Safari : utilise Date ou une petite bibliothèque. ¦ Safari’de yok: Date ya da küçük bir kütüphane kullan.
+Récent : sinon btoa() / atob(). ¦ Yeni: yoksa btoa() / atob().
+champs privés de classe (#x) ¦ özel class alanları (#x)
+Pas sur Safari : vérifie qu'il existe, sinon setTimeout(f, 1). ¦ Safari’de yok: var olup olmadığını kontrol et, yoksa setTimeout(f, 1).
+Récent sur Firefox. ¦ Firefox’ta yeni.
+Pas sur Safari : garde un minuteur après scroll. ¦ Safari’de yok: kaydırmadan sonra bir zamanlayıcı tut.
+Seulement Chrome et Edge sur ordinateur : vérifie qu'il existe. ¦ Yalnızca masaüstünde Chrome ve Edge: var olup olmadığını kontrol et.
+Récent : sinon try { new URL(…) } catch. ¦ Yeni: yoksa try { new URL(…) } catch.
+Pas sur Safari : vérifie qu'il existe. ¦ Safari’de yok: var olup olmadığını kontrol et.
+Marche partout depuis 2022 (seulement en https). ¦ 2022’den beri her yerde çalışır (yalnızca https’te).
+Sélection directe (points et poignées) ¦ Doğrudan seçim (noktalar ve tutamaçlar)
+Plume (clic : point, glisser : courbe) ¦ Kalem (tık: nokta, sürükle: eğri)
+Crayon (à main levée) ¦ Kurşun kalem (serbest el)
+Spirale (glisser depuis le centre) ¦ Sarmal (merkezden sürükle)
+Cote (mesure entre deux points) ¦ Ölçü (iki nokta arası ölçüm)
+Main (déplacer la vue) ¦ El (görünümü taşı)
+Loupe (⌥ : dézoomer) ¦ Büyüteç (⌥: uzaklaştır)
+Clic : choisir (⇧ : en plus) · glisser : déplacer · poignées : agrandir, ⇧ garde les proportions · rond du haut : tourner (⇧ : par 15°) ¦ Tık: seç (⇧: ekle) · sürükle: taşı · tutamaçlar: büyüt, ⇧ oranları korur · üstteki daire: döndür (⇧: 15°’lik adımlarla)
+Glisse les points et leurs poignées · ⌥ clic sur un point : angle ↔ courbe · ⌫ : supprimer le point · double-clic sur un tracé : ajouter un point ¦ Noktaları ve tutamaçlarını sürükle · bir noktaya ⌥ tık: köşe ↔ eğri · ⌫: noktayı sil · bir yola çift tık: nokta ekle
+Clic : un point · glisser : une courbe (⌥ : casser la poignée) · ⇧ : angles de 45° · clic sur le 1er point : fermer · ⌫ : retirer le dernier point · Entrée, Échap ou double-clic : terminer · clic sur le bout d’un tracé ouvert choisi : le reprendre ¦ Tık: bir nokta · sürükle: bir eğri (⌥: tutamacı kır) · ⇧: 45° açılar · 1. noktaya tık: kapat · ⌫: son noktayı kaldır · Enter, Esc ya da çift tık: bitir · seçili açık bir yolun ucuna tık: devam et
+Dessine à main levée : le trait est lissé ¦ Serbest elle çiz: çizgi yumuşatılır
+Clic : nouveau texte (écris-le dans « Propriétés ») ¦ Tık: yeni metin (onu “Özellikler” içinde yaz)
+Clic sur un objet : sa couleur et son trait vont à la sélection ¦ Bir nesneye tıkla: rengi ve çizgisi seçime geçer
+Glisser : déplacer la vue (ou barre d’espace, ou la molette) ¦ Sürükle: görünümü taşı (ya da boşluk çubuğu veya tekerlek)
+Clic : zoomer · ⌥ clic : dézoomer · ⌘ molette partout ¦ Tık: yakınlaştır · ⌥ tık: uzaklaştır · her yerde ⌘ tekerlek
+Glisse depuis le centre : la taille et le départ de la spirale ¦ Merkezden sürükle: sarmalın boyutu ve başlangıcı
+Des lignes de fuite par-dessus le dessin (elles ne s’impriment pas). Avec ╱ Ligne et 📏 Cote, le trait s’aligne sur la ligne de fuite, la verticale ou l’horizontale la plus proche (⌘ ou Ctrl : sans). ¦ Çizimin üzerinde kaçış çizgileri (yazdırılmazlar). ╱ Çizgi ve 📏 Ölçü ile çizgi en yakın kaçış çizgisine, dikeye ya da yataya hizalanır (⌘ ya da Ctrl: onsuz).
+Aucune image pour l’instant : choisis un acte, ou glisse une image ici (⌘V pour la coller). ¦ Şimdilik görüntü yok: bir belge seç ya da buraya bir görüntü sürükle (yapıştırmak için ⌘V).
+Gens d’un lieu ¦ Bir yerin insanları
+</> Écrire dans le code ¦ </> Kodda yaz
+</> Écrire dans le CSS ¦ </> CSS’te yaz
+</> Écrire dans le JS ¦ </> JS’te yaz
+</> Montrer ou cacher le code ¦ </> Kodu göster ya da gizle
+le site à l’écran ¦ ekrandaki site
+Plan du village en 1850 ¦ 1850’de köyün planı

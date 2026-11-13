@@ -1,0 +1,1563 @@
+fr ¦ el ¦ bg
+=élément retiré ¦ στοιχείο που αφαιρέθηκε|στοιχεία που αφαιρέθηκαν ¦ премахнат елемент|премахнати елемента
+=heure ¦ ώρα|ώρες ¦ час|часа
+=généalogie ¦ γενεαλογία|γενεαλογίες ¦ генеалогия|генеалогии
+=changement ¦ αλλαγή|αλλαγές ¦ промяна|промени
+=paquet ¦ πακέτο|πακέτα ¦ пакет|пакета
+=chose changée des deux côtés ¦ πράγμα που άλλαξε και στις δύο πλευρές|πράγματα που άλλαξαν και στις δύο πλευρές ¦ нещо, променено и от двете страни|неща, променени и от двете страни
+=changement reçu ¦ αλλαγή που ελήφθη|αλλαγές που ελήφθησαν ¦ получена промяна|получени промени
+=changement envoyé ¦ αλλαγή που στάλθηκε|αλλαγές που στάλθηκαν ¦ изпратена промяна|изпратени промени
+=corrigée ¦ διορθώθηκε|διορθώθηκαν ¦ поправена|поправени
+=écartée ¦ παραμερίστηκε|παραμερίστηκαν ¦ отхвърлена|отхвърлени
+=document traité ¦ έγγραφο που επεξεργάστηκε|έγγραφα που επεξεργάστηκαν ¦ обработен документ|обработени документа
+=erreur ¦ σφάλμα|σφάλματα ¦ грешка|грешки
+=nom corrigé ¦ όνομα που διορθώθηκε|ονόματα που διορθώθηκαν ¦ поправено име|поправени имена
+=document sélectionné ¦ επιλεγμένο έγγραφο|επιλεγμένα έγγραφα ¦ избран документ|избрани документа
+=photo ¦ φωτογραφία|φωτογραφίες ¦ снимка|снимки
+=souvenir ¦ ανάμνηση|αναμνήσεις ¦ спомен|спомена
+=bonne réponse ¦ σωστή απάντηση|σωστές απαντήσεις ¦ верен отговор|верни отговора
+=chiffre tapé ¦ ψηφίο που πληκτρολογήθηκε|ψηφία που πληκτρολογήθηκαν ¦ въведена цифра|въведени цифри
+=an ¦ έτος|έτη ¦ година|години
+=raccourci ¦ συντόμευση|συντομεύσεις ¦ пряк път|преки пътя
+=forme ¦ σχήμα|σχήματα ¦ фигура|фигури
+=chemin gardé ¦ διαδρομή που κρατήθηκε|διαδρομές που κρατήθηκαν ¦ запазен път|запазени пътя
+=famille vide ¦ κενή οικογένεια|κενές οικογένειες ¦ празно семейство|празни семейства
+=famille vide supprimée ¦ κενή οικογένεια διαγράφηκε|κενές οικογένειες διαγράφηκαν ¦ изтрито празно семейство|изтрити празни семейства
+=ligne exportée ¦ γραμμή που εξήχθη|γραμμές που εξήχθησαν ¦ експортиран ред|експортирани реда
+=autre élément ¦ άλλο στοιχείο|άλλα στοιχεία ¦ друг елемент|други елемента
+=fiche trouvée ¦ καρτέλα βρέθηκε|καρτέλες βρέθηκαν ¦ намерен картон|намерени картона
+=hypothèse ¦ υπόθεση|υποθέσεις ¦ хипотеза|хипотези
+=média enregistré ¦ πολυμέσο που αποθηκεύτηκε|πολυμέσα που αποθηκεύτηκαν ¦ запазена медия|запазени медии
+=fichier présent ¦ αρχείο που υπάρχει|αρχεία που υπάρχουν ¦ наличен файл|налични файла
+=lien familial impossible ignoré ¦ αδύνατος οικογενειακός δεσμός που αγνοήθηκε|αδύνατοι οικογενειακοί δεσμοί που αγνοήθηκαν ¦ пренебрегната невъзможна семейна връзка|пренебрегнати невъзможни семейни връзки
+=média introuvable ¦ πολυμέσο που δεν βρέθηκε|πολυμέσα που δεν βρέθηκαν ¦ ненамерена медия|ненамерени медии
+=mois ¦ μήνας|μήνες ¦ месец|месеца
+=minute ¦ λεπτό|λεπτά ¦ минута|минути
+=seconde ¦ δευτερόλεπτο|δευτερόλεπτα ¦ секунда|секунди
+=ligne ¦ γραμμή|γραμμές ¦ ред|реда
+=cadre ¦ πλαίσιο|πλαίσια ¦ рамка|рамки
+=copie ¦ αντίγραφο|αντίγραφα ¦ копие|копия
+Ressemblance {n} % ¦ Ομοιότητα {n} % ¦ Сходство {n} %
+Score {n}/110 ¦ Βαθμολογία {n}/110 ¦ Резултат {n}/110
+Naissances : {a} / {b} ¦ Γεννήσεις: {a} / {b} ¦ Раждания: {a} / {b}
+Décès : {a} / {b} ¦ Θάνατοι: {a} / {b} ¦ Смърти: {a} / {b}
+Fusionner la fiche #{a} dans la fiche #{b} ? ¦ Συγχώνευση της καρτέλας #{a} στην καρτέλα #{b}; ¦ Да се слее ли картон #{a} с картон #{b}?
+Lancer sur {n} ¦ Εκτέλεση σε {n} ¦ Изпълни за {n}
+{n} avec succès. ¦ {n} με επιτυχία. ¦ {n} успешно.
+{n} sera concernée. Confirmer pour {action} ? ¦ Θα επηρεαστεί {n}. Επιβεβαίωση για {action}; ¦ Засегната ще бъде {n}. Потвърждаваш ли да се {action}?
+{n} seront concernées. Confirmer pour {action} ? ¦ Θα επηρεαστούν {n}. Επιβεβαίωση για {action}; ¦ Засегнати ще бъдат {n}. Потвърждаваш ли да се {action}?
+corriger le nom inscrit en conservant une variante ¦ διόρθωση του γραμμένου ονόματος κρατώντας μια παραλλαγή ¦ поправи записаното име, като запазиш вариант
+rattacher au groupe ¦ σύνδεση με την ομάδα ¦ свържи с групата
+{n} et ancien nom conservé. ¦ {n} και το παλιό όνομα κρατήθηκε. ¦ {n} и старото име е запазено.
+{n} et anciens noms conservés. ¦ {n} και τα παλιά ονόματα κρατήθηκαν. ¦ {n} и старите имена са запазени.
+{n} rattachée au groupe. ¦ {n} συνδέθηκε με την ομάδα. ¦ {n} свързан с групата.
+{n} rattachées au groupe. ¦ {n} συνδέθηκαν με την ομάδα. ¦ {n} свързани с групата.
+Couleur de « {name} » ¦ Χρώμα του «{name}» ¦ Цвят на „{name}“
+Pictogramme de « {name} » ¦ Εικονόγραμμα του «{name}» ¦ Пиктограма на „{name}“
+Supprimer le type « {name} » ? ¦ Διαγραφή του τύπου «{name}»; ¦ Да се изтрие ли видът „{name}“?
+Import de « {name} » annulé : tout ce qu’il avait ajouté a été retiré. ¦ Η εισαγωγή του «{name}» ακυρώθηκε: ό,τι είχε προσθέσει αφαιρέθηκε. ¦ Импортирането на „{name}“ е отменено: всичко, което беше добавило, е премахнато.
+Supprimer définitivement la base « {name} » ? ¦ Οριστική διαγραφή της βάσης «{name}»; ¦ Да се изтрие ли окончателно базата „{name}“?
+Convertir {n} Deed en Décès ? ¦ Μετατροπή {n} Deed σε Θάνατο; ¦ Да се преобразуват ли {n} Deed в Смърт?
+Le texte sur « {name} » ¦ Το κείμενο για τον/την «{name}» ¦ Текстът за „{name}“
+Les photos de {name} ¦ Οι φωτογραφίες του/της {name} ¦ Снимките на {name}
+{x} de {who} (lien) ¦ {x} — {who} ¦ {x} на {who}
+C’est toi ¦ Είσαι εσύ ¦ Това си ти
+c’est toi ¦ είσαι εσύ ¦ това си ти
+C’est toi ! ¦ Είσαι εσύ! ¦ Това си ти!
+C’est {rel}. ¦ Είναι {rel}. ¦ Това е {rel}.
+Bonjour {name} ! ¦ Γεια σου {name}! ¦ Здравей, {name}!
+Bonjour ! ¦ Γεια σου! ¦ Здравей!
+Bonjour {name}. Touche un gros bouton : {list}. ¦ Γεια σου {name}. Άγγιξε ένα μεγάλο κουμπί: {list}. ¦ Здравей, {name}. Докосни голям бутон: {list}.
+Bonjour. Touche un gros bouton : {list}. ¦ Γεια σου. Άγγιξε ένα μεγάλο κουμπί: {list}. ¦ Здравей. Докосни голям бутон: {list}.
+Bonjour {name} ! L’app dira « ta mère », « ton petit-fils »… ¦ Γεια σου {name}! Η εφαρμογή θα λέει «η μητέρα σου», «ο εγγονός σου»… ¦ Здравей, {name}! Приложението ще казва „твоята майка“, „твоят внук“…
+D’accord. L’app ne dira pas les liens de famille. ¦ Εντάξει. Η εφαρμογή δεν θα λέει τους οικογενειακούς δεσμούς. ¦ Добре. Приложението няма да казва семейните връзки.
+⚠️ {what} (caché sur la tablette) ¦ ⚠️ {what} (κρυφό στο tablet) ¦ ⚠️ {what} (скрито на таблета)
+{n} aujourd’hui ¦ {n} σήμερα ¦ {n} днес
+Ce n’est pas {name} ? ¦ Δεν είναι ο/η {name}; ¦ Не е {name}?
+Quitter le mode simple : garde le doigt appuyé {n} secondes, ou garde la touche Entrée enfoncée ¦ Έξοδος από την απλή λειτουργία: κράτα το δάχτυλο πατημένο {n} δευτερόλεπτα ή κράτα πατημένο το πλήκτρο Enter ¦ Изход от опростения режим: задръж пръста си {n} секунди или задръж натиснат клавиша Enter
+garde le doigt appuyé {n} s ¦ κράτα το δάχτυλο πατημένο {n} δευτ. ¦ задръж пръста си {n} s
+Garde le doigt appuyé {n} secondes ¦ Κράτα το δάχτυλο πατημένο {n} δευτερόλεπτα ¦ Задръж пръста си {n} секунди
+Vers les parents ¦ Προς τους γονείς ¦ Към родителите
+Vers les enfants ¦ Προς τα παιδιά ¦ Към децата
+l’aîné ¦ ο μεγαλύτερος ¦ най-големият
+l’aînée ¦ η μεγαλύτερη ¦ най-голямата
+Regarder les {n} ¦ Δες τα {n} ¦ Разгледай {n}
+{a} sur {b} ¦ {a} από {b} ¦ {a} от {b}
+vers {y} (date) ¦ γύρω στο {y} ¦ около {y}
+en {date} (année) ¦ το {date} ¦ през {date}
+en {date} (mois) ¦ τον {date} ¦ през {date}
+le {date} (jour) ¦ στις {date} ¦ на {date}
+à {place} (lieu) ¦ στο {place} ¦ в {place}
+{name} fait partie de la famille. ¦ Ο/Η {name} είναι μέλος της οικογένειας. ¦ {name} е част от семейството.
+{name} est né {details}. ¦ Ο {name} γεννήθηκε {details}. ¦ {name} е роден {details}.
+{name} est née {details}. ¦ Η {name} γεννήθηκε {details}. ¦ {name} е родена {details}.
+{name} a été baptisé {details}. ¦ Ο {name} βαπτίστηκε {details}. ¦ {name} е кръстен {details}.
+{name} a été baptisée {details}. ¦ Η {name} βαπτίστηκε {details}. ¦ {name} е кръстена {details}.
+Il ¦ Αυτός ¦ Той
+Elle ¦ Αυτή ¦ Тя
+C’est la fille de {names}. ¦ Είναι η κόρη των {names}. ¦ Тя е дъщеря на {names}.
+C’est le fils de {names}. ¦ Είναι ο γιος των {names}. ¦ Той е син на {names}.
+C’est l’enfant de {names}. ¦ Είναι το παιδί των {names}. ¦ Това е детето на {names}.
+Il était {job}. ¦ Ήταν {job}. ¦ Той беше {job}.
+Elle était {job}. ¦ Ήταν {job}. ¦ Тя беше {job}.
+Il a été {job}. ¦ Υπήρξε {job}. ¦ Той е бил {job}.
+Elle a été {job}. ¦ Υπήρξε {job}. ¦ Тя е била {job}.
+Il est {job}. ¦ Είναι {job}. ¦ Той е {job}.
+Elle est {job}. ¦ Είναι {job}. ¦ Тя е {job}.
+Il s’est marié avec {name} {details}. ¦ Παντρεύτηκε με τον/την {name} {details}. ¦ Той се ожени за {name} {details}.
+Elle s’est mariée avec {name} {details}. ¦ Παντρεύτηκε με τον/την {name} {details}. ¦ Тя се омъжи за {name} {details}.
+Il s’est marié avec {name}. ¦ Παντρεύτηκε με τον/την {name}. ¦ Той се ожени за {name}.
+Elle s’est mariée avec {name}. ¦ Παντρεύτηκε με τον/την {name}. ¦ Тя се омъжи за {name}.
+Il a vécu avec {name}. ¦ Έζησε με τον/την {name}. ¦ Той живя с {name}.
+Elle a vécu avec {name}. ¦ Έζησε με τον/την {name}. ¦ Тя живя с {name}.
+Ils ont eu une fille, {name}. ¦ Απέκτησαν μια κόρη, την {name}. ¦ Имаха дъщеря, {name}.
+Ils ont eu un fils, {name}. ¦ Απέκτησαν έναν γιο, τον {name}. ¦ Имаха син, {name}.
+Ils ont eu un enfant, {name}. ¦ Απέκτησαν ένα παιδί, {name}. ¦ Имаха дете, {name}.
+Ils ont eu {n} enfants : {names}. ¦ Απέκτησαν {n} παιδιά: {names}. ¦ Имаха {n} деца: {names}.
+Aujourd’hui, il a {age}. ¦ Σήμερα είναι {age}. ¦ Днес той е на {age}.
+Aujourd’hui, elle a {age}. ¦ Σήμερα είναι {age}. ¦ Днес тя е на {age}.
+Il est décédé {details}, à {age}. ¦ Πέθανε {details}, σε ηλικία {age}. ¦ Той почина {details}, на {age}.
+Elle est décédée {details}, à {age}. ¦ Πέθανε {details}, σε ηλικία {age}. ¦ Тя почина {details}, на {age}.
+Il est décédé {details}. ¦ Πέθανε {details}. ¦ Той почина {details}.
+Elle est décédée {details}. ¦ Πέθανε {details}. ¦ Тя почина {details}.
+né en {y} ¦ γεννήθηκε το {y} ¦ роден през {y}
+née en {y} ¦ γεννήθηκε το {y} ¦ родена през {y}
+mort en {y} ¦ πέθανε το {y} ¦ починал през {y}
+morte en {y} ¦ πέθανε το {y} ¦ починала през {y}
+de {a} à {b} ¦ από {a} έως {b} ¦ от {a} до {b}
+Toucher pour la mettre au milieu. ¦ Άγγιξε για να το βάλεις στη μέση. ¦ Докосни, за да я сложиш в средата.
+Toucher pour voir sa fiche. ¦ Άγγιξε για να δεις την καρτέλα του/της. ¦ Докосни, за да видиш картона.
+Les prénoms en « {x} » ¦ Τα ονόματα από «{x}» ¦ Имената с „{x}“
+Personne ne s’appelle « {q} ». Vérifie l’orthographe. ¦ Κανείς δεν λέγεται «{q}». Έλεγξε την ορθογραφία. ¦ Никой не се казва „{q}“. Провери правописа.
+Pas d’anniversaire aujourd’hui. ¦ Κανένα γενέθλιο σήμερα. ¦ Днес няма рождени дни.
+Pas d’anniversaire aujourd’hui. Voici ce qui arrive bientôt. ¦ Κανένα γενέθλιο σήμερα. Να τι έρχεται σύντομα. ¦ Днес няма рождени дни. Ето какво предстои скоро.
+📷 Des photos prises en {month} ¦ 📷 Φωτογραφίες που τραβήχτηκαν τον {month} ¦ 📷 Снимки, направени през {month}
+La famille de {name} ¦ Η οικογένεια του/της {name} ¦ Семейството на {name}
+Aujourd’hui ! ¦ Σήμερα! ¦ Днес!
+Demain ¦ Αύριο ¦ Утре
+Dans {n} jours ¦ Σε {n} ημέρες ¦ След {n} дни
+{n} depuis le début ¦ {n} από την αρχή ¦ {n} от началото
+Ce n’est pas {name}. Essaie encore ! ¦ Δεν είναι ο/η {name}. Δοκίμασε ξανά! ¦ Това не е {name}. Опитай пак!
+Ce n’est pas ça. Essaie encore ! ¦ Δεν είναι αυτό. Δοκίμασε ξανά! ¦ Не е това. Опитай пак!
+C’est {part} ¦ Είναι {part} ¦ Сега е {part}
+le matin ¦ το πρωί ¦ сутрин
+l’après-midi ¦ το απόγευμα ¦ следобед
+le soir ¦ το βράδυ ¦ вечер
+{n} sur 4 ¦ {n} από 4 ¦ {n} от 4
+⚠️ {what} pour qu’il apparaisse ¦ ⚠️ {what} για να εμφανιστεί ¦ ⚠️ {what}, за да се появи
+Modifier « {name} » ¦ Επεξεργασία του «{name}» ¦ Редактирай „{name}“
+Dupliquer « {name} » ¦ Διπλασιασμός του «{name}» ¦ Дублирай „{name}“
+Retirer « {name} » ¦ Αφαίρεση του «{name}» ¦ Премахни „{name}“
+Monter « {name} » ¦ Μετακίνηση του «{name}» πιο πάνω ¦ Премести „{name}“ нагоре
+Descendre « {name} » ¦ Μετακίνηση του «{name}» πιο κάτω ¦ Премести „{name}“ надолу
+Montrer « {name} » ¦ Εμφάνιση του «{name}» ¦ Покажи „{name}“
+Afficher « {name} » ¦ Προβολή του «{name}» ¦ Покажи „{name}“
+cadres ajoutés au plus. ¦ πλαίσια το πολύ. ¦ рамки най-много.
+Côté {branch} ¦ Πλευρά {branch} ¦ Страна {branch}
+Remettre « {name} » dans le mode simple ¦ Επαναφορά του «{name}» στην απλή λειτουργία ¦ Върни „{name}“ в опростения режим
+Photo ¦ Φωτογραφία ¦ Снимка
+{n} s par photo ¦ {n} δευτ. ανά φωτογραφία ¦ {n} s на снимка
+cadre après {n} min ¦ κορνίζα μετά από {n} λεπτά ¦ фоторамка след {n} мин
+sans cadre photo ¦ χωρίς κορνίζα φωτογραφιών ¦ без фоторамка
+Chiffre {n} du code ¦ Ψηφίο {n} του κωδικού ¦ Цифра {n} от кода
+Ce que verra {name} sur une tablette. Le mode simple ne permet <b>ni de modifier, ni de supprimer</b> : ni menu caché, ni clic droit. ¦ Τι θα βλέπει ο/η {name} σε ένα tablet. Η απλή λειτουργία <b>δεν επιτρέπει ούτε επεξεργασία ούτε διαγραφή</b>: ούτε κρυφό μενού, ούτε δεξί κλικ. ¦ Какво ще вижда {name} на таблет. Опростеният режим <b>не позволява нито редактиране, нито изтриване</b>: нито скрито меню, нито десен бутон.
+Ce que verra la personne sur une tablette. Le mode simple ne permet <b>ni de modifier, ni de supprimer</b> : ni menu caché, ni clic droit. ¦ Τι θα βλέπει το άτομο σε ένα tablet. Η απλή λειτουργία <b>δεν επιτρέπει ούτε επεξεργασία ούτε διαγραφή</b>: ούτε κρυφό μενού, ούτε δεξί κλικ. ¦ Какво ще вижда човекът на таблет. Опростеният режим <b>не позволява нито редактиране, нито изтриване</b>: нито скрито меню, нито десен бутон.
+Réglage « {name} » supprimé ¦ Η ρύθμιση «{name}» διαγράφηκε ¦ Настройката „{name}“ е изтрита
+Réglage « {name} » importé : clique « Appliquer » pour t’en servir. ¦ Η ρύθμιση «{name}» εισήχθη: πάτησε «Εφαρμογή» για να τη χρησιμοποιήσεις. ¦ Настройката „{name}“ е импортирана: щракни „Приложи“, за да я използваш.
+Maison choisie : « {name} ». ¦ Επιλεγμένο σπίτι: «{name}». ¦ Избрана къща: „{name}“.
+Maison ¦ Σπίτι ¦ Къща
+Adresse copiée : {url} ¦ Η διεύθυνση αντιγράφηκε: {url} ¦ Адресът е копиран: {url}
+ ou  ¦ ή ¦ или
+Seulement avec {what}. ¦ Μόνο με {what}. ¦ Само с {what}.
+{what} remis comme au départ ¦ {what}: επαναφορά στην αρχική κατάσταση ¦ {what}: върнато както в началото
+activé ¦ ενεργό ¦ включено
+désactivé ¦ ανενεργό ¦ изключено
+Style des fiches : {name}. ¦ Στυλ καρτελών: {name}. ¦ Стил на картоните: {name}.
+Style des fiches : {name} (retouché). ¦ Στυλ καρτελών: {name} (τροποποιημένο). ¦ Стил на картоните: {name} (променен).
+ton {x} (lien) ¦ ο {x} σου ¦ твоят {x}
+ta {x} (lien) ¦ η {x} σου ¦ твоята {x}
+le {x} (lien) ¦ ο {x} ¦ {x}
+la {x} (lien) ¦ η {x} ¦ {x}
+la femme de {who} {name} (lien) ¦ η γυναίκα — {who} {name} ¦ съпругата на {who} {name}
+le mari de {who} {name} (lien) ¦ ο άντρας — {who} {name} ¦ съпругът на {who} {name}
+le conjoint de {who} {name} (lien) ¦ ο/η σύντροφος — {who} {name} ¦ партньорът на {who} {name}
+lien|mère ¦ μητέρα ¦ майка
+lien|père ¦ πατέρας ¦ баща
+lien|parent ¦ γονέας ¦ родител
+lien|grand-mère ¦ γιαγιά ¦ баба
+lien|grand-père ¦ παππούς ¦ дядо
+lien|arrière-grand-mère ¦ προγιαγιά ¦ прабаба
+lien|arrière-grand-père ¦ προπάππους ¦ прадядо
+lien|arrière-arrière-grand-mère ¦ προ-προγιαγιά ¦ прапрабаба
+lien|arrière-arrière-grand-père ¦ προ-προπάππους ¦ прапрадядо
+lien|fille ¦ κόρη ¦ дъщеря
+lien|fils ¦ γιος ¦ син
+lien|enfant ¦ παιδί ¦ дете
+lien|petite-fille ¦ εγγονή ¦ внучка
+lien|petit-fils ¦ εγγονός ¦ внук
+lien|arrière-petite-fille ¦ δισέγγονη ¦ правнучка
+lien|arrière-petit-fils ¦ δισέγγονος ¦ правнук
+lien|arrière-arrière-petite-fille ¦ τρισέγγονη ¦ праправнучка
+lien|arrière-arrière-petit-fils ¦ τρισέγγονος ¦ праправнук
+lien|sœur ¦ αδελφή ¦ сестра
+lien|frère ¦ αδελφός ¦ брат
+lien|tante ¦ θεία ¦ леля
+lien|oncle ¦ θείος ¦ чичо
+lien|grand-tante ¦ μεγάλη θεία ¦ пралеля
+lien|grand-oncle ¦ μεγάλος θείος ¦ прачичо
+lien|arrière-grand-tante ¦ προ-μεγάλη θεία ¦ прапралеля
+lien|arrière-grand-oncle ¦ προ-μεγάλος θείος ¦ прапрачичо
+lien|arrière-arrière-grand-tante ¦ προ-προ-μεγάλη θεία ¦ прапрапралеля
+lien|arrière-arrière-grand-oncle ¦ προ-προ-μεγάλος θείος ¦ прапрапрачичо
+lien|nièce ¦ ανιψιά ¦ племенница
+lien|neveu ¦ ανιψιός ¦ племенник
+lien|petite-nièce ¦ δισανιψιά ¦ праплеменница
+lien|petit-neveu ¦ δισανιψιός ¦ праплеменник
+lien|arrière-petite-nièce ¦ τρισανιψιά ¦ прапраплеменница
+lien|arrière-petit-neveu ¦ τρισανιψιός ¦ прапраплеменник
+lien|arrière-arrière-petite-nièce ¦ τετρανιψιά ¦ прапрапраплеменница
+lien|arrière-arrière-petit-neveu ¦ τετρανιψιός ¦ прапрапраплеменник
+lien|cousin germain ¦ πρώτος ξάδερφος ¦ първи братовчед
+lien|cousine germaine ¦ πρώτη ξαδέρφη ¦ първа братовчедка
+lien|cousin issu de germains ¦ δεύτερος ξάδερφος ¦ втори братовчед
+lien|cousine issue de germains ¦ δεύτερη ξαδέρφη ¦ втора братовчедка
+lien|cousin éloigné ¦ μακρινός ξάδερφος ¦ далечен братовчед
+lien|cousine éloignée ¦ μακρινή ξαδέρφη ¦ далечна братовчедка
+lien|cousin ¦ ξάδερφος ¦ братовчед
+lien|cousine ¦ ξαδέρφη ¦ братовчедка
+lien|femme ¦ γυναίκα ¦ съпруга
+lien|mari ¦ άντρας ¦ съпруг
+lien|conjoint ¦ σύντροφος ¦ партньор
+lien|belle-mère ¦ πεθερά ¦ свекърва/тъща
+lien|beau-père ¦ πεθερός ¦ свекър/тъст
+lien|belle-fille ¦ νύφη ¦ снаха
+lien|gendre ¦ γαμπρός ¦ зет
+lien|beau-fils ¦ προγονός ¦ доведен син
+lien|belle-sœur ¦ κουνιάδα ¦ балдъза/зълва
+lien|beau-frère ¦ κουνιάδος ¦ шурей/девер
+⚙️ Gérer les formes ({n}) ¦ ⚙️ Διαχείριση των σχημάτων ({n}) ¦ ⚙️ Управлявай фигурите ({n})
+Forme « {name} » supprimée ¦ Το σχήμα «{name}» διαγράφηκε ¦ Фигурата „{name}“ е изтрита
+Forme « {name} » importée : elle est dans le menu « Forme des avatars ». ¦ Το σχήμα «{name}» εισήχθη: είναι στο μενού «Σχήμα των avatar». ¦ Фигурата „{name}“ е импортирана: тя е в менюто „Форма на аватарите“.
+Aucune forme pour « {q} ». Essaie un autre mot (cœur, arbre, étoile, croix…). ¦ Κανένα σχήμα για «{q}». Δοκίμασε άλλη λέξη (καρδιά, δέντρο, αστέρι, σταυρός…). ¦ Няма фигура за „{q}“. Опитай друга дума (сърце, дърво, звезда, кръст…).
+{n} points au plus. ¦ {n} σημεία το πολύ. ¦ Най-много {n} точки.
+{what} (scripts, textes, images, styles…) ¦ {what} (σενάρια, κείμενα, εικόνες, στυλ…) ¦ {what} (скриптове, текстове, изображения, стилове…)
+Forme « {name} » enregistrée. ¦ Το σχήμα «{name}» αποθηκεύτηκε. ¦ Фигурата „{name}“ е запазена.
+Forme « {name} » créée : elle est dans le menu « Forme des avatars » (✎ Mes formes). ¦ Το σχήμα «{name}» δημιουργήθηκε: είναι στο μενού «Σχήμα των avatar» (✎ Τα σχήματά μου). ¦ Фигурата „{name}“ е създадена: тя е в менюто „Форма на аватарите“ (✎ Моите фигури).
+Ce qu’ouvre « {name} » ¦ Τι ανοίγει το «{name}» ¦ Какво отваря „{name}“
+Ouvre la fenêtre « ＋ Nouvelle personne » (ou un nouvel animal sur la page des animaux). Caché au départ. ¦ Ανοίγει το παράθυρο «＋ Νέο άτομο» (ή ένα νέο ζώο στη σελίδα των ζώων). Κρυφό αρχικά. ¦ Отваря прозореца „＋ Нов човек“ (или ново животно на страницата на животните). Скрит в началото.
+Raccourci : Enquêtes, sur cet onglet. Caché au départ. ¦ Συντόμευση: Έρευνες, σε αυτή την καρτέλα του μενού. Κρυφό αρχικά. ¦ Пряк път: Разследвания, в този раздел. Скрит в началото.
+Raccourci : Listes → 🛠️ Outils de modification, sur cet outil. Caché au départ. ¦ Συντόμευση: Λίστες → 🛠️ Εργαλεία επεξεργασίας, σε αυτό το εργαλείο. Κρυφό αρχικά. ¦ Пряк път: Списъци → 🛠️ Инструменти за редактиране, към този инструмент. Скрит в началото.
+Forme : « {name} » ¦ Σχήμα: «{name}» ¦ Фигура: „{name}“
+Portraits : « {name} » ¦ Πορτρέτα: «{name}» ¦ Портрети: „{name}“
+Colonne de gauche : partir de « {name} » ¦ Στήλη αριστερά: ξεκίνα από «{name}» ¦ Лява колона: започни от „{name}“
+Contrôlé {when} ¦ Ελέγχθηκε {when} ¦ Проверено {when}
+Lieu corrigé : {name} ({what}) ¦ Ο τόπος διορθώθηκε: {name} ({what}) ¦ Мястото е поправено: {name} ({what})
+La bonne commune pour « {name} » ¦ Ο σωστός δήμος για «{name}» ¦ Правилната община за „{name}“
+Exception gardée : {what} ¦ Η εξαίρεση κρατήθηκε: {what} ¦ Изключението е запазено: {what}
+Signalée de nouveau : {what} ¦ Επισημάνθηκε ξανά: {what} ¦ Отново сигнализирано: {what}
+Alerte {i} sur {n} ¦ Ειδοποίηση {i} από {n} ¦ Сигнал {i} от {n}
+{n} plus tard ¦ {n} αργότερα ¦ {n} по-късно
+Date enregistrée : {date} ¦ Η ημερομηνία αποθηκεύτηκε: {date} ¦ Датата е запазена: {date}
+✓ Alerte réglée ({date}) ¦ ✓ Η ειδοποίηση διευθετήθηκε ({date}) ¦ ✓ Сигналът е уреден ({date})
+Bandeau sur la fiche : {what} ¦ Ταινία στην καρτέλα: {what} ¦ Лента в картона: {what}
+{a} fiches sur {b} n’ont aucune alerte (les exceptions ne comptent pas) ¦ {a} καρτέλες από {b} δεν έχουν καμία ειδοποίηση (οι εξαιρέσεις δεν μετράνε) ¦ {a} от {b} картона нямат сигнали (изключенията не се броят)
+{n} ans ¦ {n} έτη ¦ {n} години
+{n} mois ¦ {n} μήνες ¦ {n} месеца
+Supprimer les {n} familles vides ¦ Διαγραφή των {n} κενών οικογενειών ¦ Изтрий {n} празни семейства
+Supprimer les {n} familles vides ? ¦ Διαγραφή των {n} κενών οικογενειών; ¦ Да се изтрият ли {n} празни семейства?
+Me le signaler à nouveau si une de ces dates change ¦ Ειδοποίησέ με ξανά αν αλλάξει μια από αυτές τις ημερομηνίες ¦ Сигнализирай ми отново, ако някоя от тези дати се промени
+Me le signaler à nouveau si une de ces coordonnées change ¦ Ειδοποίησέ με ξανά αν αλλάξει μια από αυτές τις συντεταγμένες ¦ Сигнализирай ми отново, ако някоя от тези координати се промени
+Déjà pris par {os} ou le menu de l’application : « {what} ». ¦ Το χρησιμοποιεί ήδη το {os} ή το μενού της εφαρμογής: «{what}». ¦ Вече е заето от {os} или менюто на приложението: „{what}“.
+Déjà pris par l’app (même quand un outil est ouvert) : « {what} ». Change-le d’abord dans Raccourcis clavier si tu veux cette touche. ¦ Το χρησιμοποιεί ήδη η εφαρμογή (ακόμη κι όταν ένα εργαλείο είναι ανοιχτό): «{what}». Άλλαξέ το πρώτα στις Συντομεύσεις πληκτρολογίου αν θέλεις αυτό το πλήκτρο. ¦ Вече е заето от приложението (дори когато е отворен инструмент): „{what}“. Първо го смени в Клавишни комбинации, ако искаш този клавиш.
+Dans cet outil, cette touche sert déjà à « {what} » : ton raccourci passera avant. ¦ Σε αυτό το εργαλείο, αυτό το πλήκτρο χρησιμεύει ήδη για «{what}»: η συντόμευσή σου θα έχει προτεραιότητα. ¦ В този инструмент този клавиш вече служи за „{what}“: твоята комбинация ще има предимство.
+La touche de départ ({key}) ne fera plus cette action : elle est libre pour autre chose. ¦ Το αρχικό πλήκτρο ({key}) δεν θα κάνει πια αυτή την ενέργεια: είναι ελεύθερο για κάτι άλλο. ¦ Началният клавиш ({key}) вече няма да прави това действие: свободен е за друго.
+Déjà donné à « {what} » : il lui sera retiré. ¦ Έχει ήδη δοθεί στο «{what}»: θα του αφαιρεθεί. ¦ Вече е дадено на „{what}“: ще му бъде отнето.
+Sans {key}, il ne marchera qu’en dehors des cases de texte. ¦ Χωρίς {key}, θα λειτουργεί μόνο έξω από τα πεδία κειμένου. ¦ Без {key} ще работи само извън текстовите полета.
+NOUVEAU RACCOURCI ¦ ΝΕΑ ΣΥΝΤΟΜΕΥΣΗ ¦ НОВА КЛАВИШНА КОМБИНАЦИЯ
+Nouveau raccourci : {key} ¦ Νέα συντόμευση: {key} ¦ Нова клавишна комбинация: {key}
+Donne une touche à n’importe quelle commande de l’outil (ses menus, ses outils, ses boutons). {os} et le menu de l’application passent avant : une touche qu’ils prennent est refusée. Ton raccourci passe avant la touche de l’outil. Sans {key}, il ne marche qu’en dehors des cases de texte. ¦ Δώσε ένα πλήκτρο σε οποιαδήποτε εντολή του εργαλείου (τα μενού, τα εργαλεία, τα κουμπιά του). Το {os} και το μενού της εφαρμογής έχουν προτεραιότητα: ένα πλήκτρο που χρησιμοποιούν απορρίπτεται. Η συντόμευσή σου έχει προτεραιότητα έναντι του πλήκτρου του εργαλείου. Χωρίς {key}, λειτουργεί μόνο έξω από τα πεδία κειμένου. ¦ Дай клавиш на всяка команда на инструмента (менютата, инструментите, бутоните му). {os} и менюто на приложението имат предимство: клавиш, който те използват, се отказва. Твоята комбинация има предимство пред клавиша на инструмента. Без {key} работи само извън текстовите полета.
+{n} à toi ¦ {n} δικές σου ¦ {n} твои
+{a} et {n} autres personnes ¦ {a} και {n} ακόμη άτομα ¦ {a} и още {n} души
+Sinon, on lira : « {text} » ¦ Αλλιώς, θα διαβαστεί: «{text}» ¦ Иначе ще се прочете: „{text}“
+Dicter dans ce champ ({key}) ¦ Υπαγόρευση σε αυτό το πεδίο ({key}) ¦ Диктувай в това поле ({key})
+Dicter : parle, le texte s’écrit au curseur ({key}, Échap pour arrêter) ¦ Υπαγόρευση: μίλα, και το κείμενο γράφεται στον κέρσορα ({key}, Esc για διακοπή) ¦ Диктуване: говори и текстът се пише при курсора ({key}, Esc за спиране)
+Voici un message : il reste {n} secondes environ. ¦ Ορίστε ένα μήνυμα: μένουν περίπου {n} δευτερόλεπτα. ¦ Ето съобщение: остават около {n} секунди.
+toutes les {n} ¦ κάθε {n} ¦ на всеки {n}
+chaque jour ¦ κάθε μέρα ¦ всеки ден
+chaque semaine ¦ κάθε εβδομάδα ¦ всяка седмица
+Dernière sauvegarde : <b>{when}</b> ¦ Τελευταίο αντίγραφο ασφαλείας: <b>{when}</b> ¦ Последно резервно копие: <b>{when}</b>
+Dernière sauvegarde : <b>jamais</b> ¦ Τελευταίο αντίγραφο ασφαλείας: <b>ποτέ</b> ¦ Последно резервно копие: <b>никога</b>
+rien n’avait changé ¦ τίποτα δεν είχε αλλάξει ¦ нищо не беше променено
+dès maintenant ¦ από τώρα ¦ веднага
+Prochaine : {when} ({freq}). ¦ Επόμενο: {when} ({freq}). ¦ Следващо: {when} ({freq}).
+Prochaine : {when} ({freq}, et à la fermeture). ¦ Επόμενο: {when} ({freq}, και στο κλείσιμο). ¦ Следващо: {when} ({freq}, и при затваряне).
+Dernier essai raté : {error} ¦ Τελευταία αποτυχημένη προσπάθεια: {error} ¦ Последен неуспешен опит: {error}
+Rien n’est bloqué : continue à travailler. ¦ Τίποτα δεν είναι μπλοκαρισμένο: συνέχισε να δουλεύεις. ¦ Нищо не е блокирано: продължавай да работиш.
+Toutes mes généalogies ({n}) ¦ Όλες οι γενεαλογίες μου ({n}) ¦ Всички мои генеалогии ({n})
+Remettre ta généalogie comme dans la copie choisie ({when}) ? Tout ce que tu as fait depuis sera remplacé. Ta base actuelle est d’abord gardée dans les sauvegardes (« avant restauration »), pour pouvoir y revenir. ¦ Να επανέλθει η γενεαλογία σου όπως στο αντίγραφο που διάλεξες ({when}); Ό,τι έκανες από τότε θα αντικατασταθεί. Η τωρινή σου βάση φυλάγεται πρώτα στα αντίγραφα ασφαλείας («πριν από την επαναφορά»), για να μπορείς να επιστρέψεις. ¦ Да се върне ли генеалогията ти както в избраното копие ({when})? Всичко, направено след това, ще бъде заменено. Текущата ти база първо се пази в резервните копия („преди възстановяване“), за да можеш да се върнеш към нея.
+Remettre ta généalogie comme dans la copie choisie ? Tout ce que tu as fait depuis sera remplacé. Ta base actuelle est d’abord gardée dans les sauvegardes (« avant restauration »), pour pouvoir y revenir. ¦ Να επανέλθει η γενεαλογία σου όπως στο αντίγραφο που διάλεξες; Ό,τι έκανες από τότε θα αντικατασταθεί. Η τωρινή σου βάση φυλάγεται πρώτα στα αντίγραφα ασφαλείας («πριν από την επαναφορά»), για να μπορείς να επιστρέψεις. ¦ Да се върне ли генеалогията ти както в избраното копие? Всичко, направено след това, ще бъде заменено. Текущата ти база първо се пази в резервните копия („преди възстановяване“), за да можеш да се върнеш към нея.
+✓ Généalogie remise comme dans la copie ({n}). L’ancienne est gardée : {file}. ¦ ✓ Η γενεαλογία επανήλθε όπως στο αντίγραφο ({n}). Η παλιά φυλάχτηκε: {file}. ¦ ✓ Генеалогията е върната както в копието ({n}). Старата е запазена: {file}.
+✓ Sauvegarde faite et vérifiée ({n}) : {size}. ¦ ✓ Το αντίγραφο ασφαλείας έγινε και ελέγχθηκε ({n}): {size}. ¦ ✓ Резервното копие е направено и проверено ({n}): {size}.
+✓ Sauvegarde faite et vérifiée : {size}. ¦ ✓ Το αντίγραφο ασφαλείας έγινε και ελέγχθηκε: {size}. ¦ ✓ Резервното копие е направено и проверено: {size}.
+Supprimée sur cet ordinateur, modifiée sur « {name} ». ¦ Διαγράφηκε σε αυτόν τον υπολογιστή, τροποποιήθηκε στο «{name}». ¦ Изтрито на този компютър, променено на „{name}“.
+Modifiée ici, supprimée sur « {name} ». ¦ Τροποποιήθηκε εδώ, διαγράφηκε στο «{name}». ¦ Променено тук, изтрито на „{name}“.
+modifiée des deux côtés ¦ τροποποιήθηκε και στις δύο πλευρές ¦ променено и от двете страни
+Sur « {name} » ¦ Στο «{name}» ¦ На „{name}“
+<b>{n}</b> à envoyer ¦ <b>{n}</b> για αποστολή ¦ <b>{n}</b> за изпращане
+<b>{n}</b> à recevoir ¦ <b>{n}</b> για λήψη ¦ <b>{n}</b> за получаване
+Rien à envoyer ¦ Τίποτα για αποστολή ¦ Нищо за изпращане
+Rien à recevoir ¦ Τίποτα για λήψη ¦ Нищо за получаване
+Dernière synchronisation : {when} ¦ Τελευταίος συγχρονισμός: {when} ¦ Последно синхронизиране: {when}
+jamais ¦ ποτέ ¦ никога
+⚠️ {n} : choisis ¦ ⚠️ {n}: διάλεξε ¦ ⚠️ {n}: избери
+rien de nouveau ¦ τίποτα καινούργιο ¦ нищо ново
+{n} de « {from} » ¦ {n} από «{from}» ¦ {n} от „{from}“
+Déjà à jour ¦ Ήδη ενημερωμένο ¦ Вече е актуално
+⚠️ {n} : à toi de choisir. ¦ ⚠️ {n}: εσύ διαλέγεις. ¦ ⚠️ {n}: ти избираш.
+Cette généalogie est déjà ouverte sur l’ordinateur <b>« {name} »</b> (depuis {when}). ¦ Αυτή η γενεαλογία είναι ήδη ανοιχτή στον υπολογιστή <b>«{name}»</b> (από {when}). ¦ Тази генеалогия вече е отворена на компютъра <b>„{name}“</b> (от {when}).
+Cette généalogie est déjà ouverte sur l’ordinateur <b>« {name} »</b>. ¦ Αυτή η γενεαλογία είναι ήδη ανοιχτή στον υπολογιστή <b>«{name}»</b>. ¦ Тази генеалогия вече е отворена на компютъра <b>„{name}“</b>.
+Ouvrir quand même ? Fais-le seulement si « {name} » est éteint ou si l’app y est fermée (sinon le fichier peut s’abîmer). ¦ Να ανοίξει παρ’ όλα αυτά; Κάν’ το μόνο αν ο «{name}» είναι σβηστός ή αν η εφαρμογή είναι κλειστή εκεί (αλλιώς το αρχείο μπορεί να χαλάσει). ¦ Да се отвори ли въпреки това? Направи го само ако „{name}“ е изключен или приложението там е затворено (иначе файлът може да се повреди).
+Télécharger LCNDA {v} ¦ Λήψη του LCNDA {v} ¦ Изтегли LCNDA {v}
+{a} sur {b}… ¦ {a} από {b}… ¦ {a} от {b}…
+Plus de message pour la version {v} ¦ Όχι άλλα μηνύματα για την έκδοση {v} ¦ Без повече съобщения за версия {v}
+🔄 Une nouvelle version {v} est disponible. ¦ 🔄 Μια νέα έκδοση {v} είναι διαθέσιμη. ¦ 🔄 Налична е нова версия {v}.
+regardé {when} ¦ ελέγχθηκε {when} ¦ проверено {when}
+« 🔍 Rechercher une mise à jour » regarde tout de suite. ¦ Το «🔍 Αναζήτηση ενημέρωσης» ελέγχει αμέσως. ¦ „🔍 Провери за обновяване“ проверява веднага.
+Pas encore regardé sur cet ordinateur. « 🔍 Rechercher une mise à jour » regarde tout de suite. ¦ Δεν έχει ελεγχθεί ακόμη σε αυτόν τον υπολογιστή. Το «🔍 Αναζήτηση ενημέρωσης» ελέγχει αμέσως. ¦ Още не е проверявано на този компютър. „🔍 Провери за обновяване“ проверява веднага.
+Tu as la dernière version publiée ({v}){when}. ¦ Έχεις την τελευταία έκδοση που κυκλοφόρησε ({v}){when}. ¦ Имаш последната публикувана версия ({v}){when}.
+Une nouvelle version {v} est disponible (tu as la {cur}). ¦ Μια νέα έκδοση {v} είναι διαθέσιμη (έχεις την {cur}). ¦ Налична е нова версия {v} (имаш {cur}).
+Tu as choisi de ne plus être prévenu pour la {v}{when}. ¦ Διάλεξες να μην ειδοποιείσαι πια για την {v}{when}. ¦ Избра да не бъдеш известяван повече за {v}{when}.
+Ce réglage vient d’un autre outil (« {name} ») : il ne va pas dans la visionneuse. ¦ Αυτή η ρύθμιση προέρχεται από άλλο εργαλείο («{name}»): δεν μπαίνει στο πρόγραμμα προβολής. ¦ Тази настройка идва от друг инструмент („{name}“): не е за визуализатора.
+Réglage « {name} » mis. ¦ Η ρύθμιση «{name}» εφαρμόστηκε. ¦ Настройката „{name}“ е приложена.
+Range avec ↑ ↓, coche ce qui s’affiche dans la colonne, en groupes ou en une seule liste. ¦ Τακτοποίησε με ↑ ↓, τσέκαρε ό,τι εμφανίζεται στη στήλη, σε ομάδες ή σε μία λίστα. ¦ Подреди с ↑ ↓, отметни какво се показва в колоната, на групи или в един списък.
+Range avec ↑ ↓, en groupes ou en une seule liste. ¦ Τακτοποίησε με ↑ ↓, σε ομάδες ή σε μία λίστα. ¦ Подреди с ↑ ↓, на групи или в един списък.
+Réordonner les listes ¦ Αναδιάταξη των λιστών ¦ Пренареди списъците
+Réordonner les pages ¦ Αναδιάταξη των σελίδων ¦ Пренареди страниците
+Réordonner les {what} ¦ Αναδιάταξη: {what} ¦ Пренареди: {what}
+Range avec ↑ ↓, coche ce qui s’affiche, en groupes ou en une seule liste. Puis Enregistrer. ¦ Τακτοποίησε με ↑ ↓, τσέκαρε ό,τι εμφανίζεται, σε ομάδες ή σε μία λίστα. Μετά Αποθήκευση. ¦ Подреди с ↑ ↓, отметни какво се показва, на групи или в един списък. После Запази.
+Range avec ↑ ↓, en groupes ou en une seule liste. Puis Enregistrer. ¦ Τακτοποίησε με ↑ ↓, σε ομάδες ή σε μία λίστα. Μετά Αποθήκευση. ¦ Подреди с ↑ ↓, на групи или в един списък. После Запази.
+Garde au moins une liste visible. ¦ Κράτα τουλάχιστον μία λίστα ορατή. ¦ Остави поне един видим списък.
+Garde au moins une page visible. ¦ Κράτα τουλάχιστον μία σελίδα ορατή. ¦ Остави поне една видима страница.
+(CC BY 4.0) ; collectivités locales d’Australie : © ¦ (CC BY 4.0)· τοπικές αυτοδιοικήσεις της Αυστραλίας: © ¦ (CC BY 4.0); местни власти в Австралия: ©
+(OGL v3) ; paroisses civiles d’Irlande : © ¦ (OGL v3)· πολιτικές ενορίες της Ιρλανδίας: © ¦ (OGL v3); граждански енории в Ирландия: ©
+(William & Mary geoLab), d’après leurs sources (gouvernements, OCHA, Banque mondiale, GRID3…), licences ouvertes indiquées pays par pays dans le fichier de chaque pays (domaine public, CC BY, CC BY IGO, ODbL, CC BY-SA pour le Togo et Taïwan). ¦ (William & Mary geoLab), με βάση τις πηγές τους (κυβερνήσεις, OCHA, Παγκόσμια Τράπεζα, GRID3…), ανοιχτές άδειες που αναφέρονται χώρα προς χώρα στο αρχείο κάθε χώρας (δημόσιος τομέας, CC BY, CC BY IGO, ODbL, CC BY-SA για το Τόγκο και την Ταϊβάν). ¦ (William & Mary geoLab), по техни източници (правителства, OCHA, Световната банка, GRID3…), отворени лицензи, посочени за всяка страна във файла ѝ (обществено достояние, CC BY, CC BY IGO, ODbL, CC BY-SA за Того и Тайван).
+(auto = comme l’app) ¦ (αυτόματο = όπως η εφαρμογή) ¦ (автоматично = като приложението)
+(avec ou sans accents). Ex. : ¦ (με ή χωρίς τόνους). Π.χ.: ¦ (със или без ударения). Напр.:
+(domaine public) ; paroisses d’Angleterre et du pays de Galles : © ¦ (δημόσιος τομέας)· ενορίες της Αγγλίας και της Ουαλίας: © ¦ (обществено достояние); енории в Англия и Уелс: ©
+(familles qu’on ouvre et referme) ¦ (οικογένειες που ανοίγουν και κλείνουν) ¦ (семейства, които се отварят и затварят)
+(hors des cases de texte) ¦ (έξω από τα πεδία κειμένου) ¦ (извън текстовите полета)
+(jusqu’à 32 px). ¦ (έως 32 px). ¦ (до 32 px).
+(style « Onglets en haut ») ¦ (στυλ «Καρτέλες επάνω») ¦ (стил „Раздели горе“)
+(un petit fichier, par e-mail par exemple). ¦ (ένα μικρό αρχείο, με email για παράδειγμα). ¦ (малък файл, например по имейл).
+), parle, et le texte s’écrit au curseur. Dis « virgule », « point », « point d’interrogation », « deux points », « à la ligne » ou « nouveau paragraphe » pour la ponctuation. ¦ ), μίλα, και το κείμενο γράφεται στον κέρσορα. Πες «κόμμα», «τελεία», «ερωτηματικό», «άνω και κάτω τελεία», «νέα γραμμή» ή «νέα παράγραφος» για τη στίξη. ¦ ), говори и текстът се пише при курсора. Кажи „запетая“, „точка“, „въпросителен знак“, „двоеточие“, „нов ред“ или „нов абзац“ за пунктуацията.
+). Il se règle avec la forme de l’en-tête, plus bas sur cette page. ¦ ). Ρυθμίζεται μαζί με το σχήμα της κεφαλίδας, πιο κάτω σε αυτή τη σελίδα. ¦ ). Настройва се с формата на заглавната част, по-долу на тази страница.
+, contient des données OS © Crown copyright (OGL v3) ; paroisses civiles d’Écosse : © ¦ , περιέχει δεδομένα OS © Crown copyright (OGL v3)· πολιτικές ενορίες της Σκωτίας: © ¦ , съдържа данни OS © Crown copyright (OGL v3); граждански енории в Шотландия: ©
+, données sous licence ¦ , δεδομένα με άδεια ¦ , данни под лиценз
+, même dans un tableau large avec beaucoup de colonnes. ¦ , ακόμη και σε φαρδύ πίνακα με πολλές στήλες. ¦ , дори в широка таблица с много колони.
+. Aucune fiche n’est supprimée : les personnes restent là, même quand l’onglet est caché. On peut en allumer plusieurs : leurs onglets s’additionnent. ¦ . Καμία καρτέλα δεν διαγράφεται: τα άτομα μένουν εκεί, ακόμη κι όταν η καρτέλα του μενού είναι κρυφή. Μπορείς να ενεργοποιήσεις πολλές: οι καρτέλες τους προστίθενται. ¦ . Не се изтрива нито един картон: хората остават, дори когато разделът е скрит. Можеш да включиш няколко: разделите им се добавят.
+. Double-clic sur un curseur : valeur de départ. ¦ . Διπλό κλικ σε ένα ρυθμιστικό: αρχική τιμή. ¦ . Двойно щракване върху плъзгач: начална стойност.
+. Même licence pour les communes d’Amérique du Sud, du Moyen-Orient, d’Asie et d’une partie de l’Afrique. ¦ . Ίδια άδεια για τους δήμους της Νότιας Αμερικής, της Μέσης Ανατολής, της Ασίας και μέρους της Αφρικής. ¦ . Същият лиценз за общините в Южна Америка, Близкия изток, Азия и част от Африка.
+12/03/1790, mars 1790 ou 1790 ¦ 12/03/1790, mars 1790 ή 1790 ¦ 12/03/1790, mars 1790 или 1790
+1re heure du jour, au lever du soleil ¦ 1η ώρα της ημέρας, με την ανατολή του ήλιου ¦ 1-ви час от деня, при изгрев слънце
+3e heure, milieu de la matinée (heure de la grand-messe) ¦ 3η ώρα, μέσα του πρωινού (ώρα της μεγάλης λειτουργίας) ¦ 3-ти час, средата на сутринта (часът на голямата литургия)
+9e heure, milieu de l’après-midi ¦ 9η ώρα, μέσα του απογεύματος ¦ 9-ти час, средата на следобеда
+256 ancêtres de la génération 8 en théorie (Sosa 256 à 511) ; 510 ancêtres en tout jusqu’à cette génération ¦ 256 πρόγονοι της 8ης γενιάς θεωρητικά (Sosa 256 έως 511)· 510 πρόγονοι συνολικά ως αυτή τη γενιά ¦ 256 предци от 8-о поколение на теория (Sosa 256 до 511); общо 510 предци до това поколение
+4 générations ¦ 4 γενιές ¦ 4 поколения
+5 générations ¦ 5 γενιές ¦ 5 поколения
+6 générations ¦ 6 γενιές ¦ 6 поколения
+6 secondes (de départ) ¦ 6 δευτερόλεπτα (αρχική τιμή) ¦ 6 секунди (начална стойност)
+4 tailles seulement : 22 px (dans une ligne), 34 px (listes, menu de choix), 48 px (arbre, vignettes), 88 px (fiche). ¦ Μόνο 4 μεγέθη: 22 px (σε γραμμή), 34 px (λίστες, μενού επιλογής), 48 px (δέντρο, μικρογραφίες), 88 px (καρτέλα). ¦ Само 4 размера: 22 px (в ред), 34 px (списъци, меню за избор), 48 px (дърво, миниатюри), 88 px (картон).
+: boutons et barres d’outils au trait, rubriques et contenus en émoji (💍 conjoints, 🎂 anniversaires…). ¦ : κουμπιά και γραμμές εργαλείων με περίγραμμα, ενότητες και περιεχόμενα με emoji (💍 σύζυγοι, 🎂 γενέθλια…). ¦ : бутони и ленти с инструменти с контур, раздели и съдържание с емоджи (💍 съпрузи, 🎂 рождени дни…).
+: chaque bouton est une vraie « touche » encadrée, avec son ombre. ¦ : κάθε κουμπί είναι ένα αληθινό «πλήκτρο» με πλαίσιο και σκιά. ¦ : всеки бутон е истински „клавиш“ с рамка и сянка.
+: coins presque droits, traits fins, un léger grain de papier derrière les pages. Pour le fond crème, choisis le Preset « Archive papier » dans Apparence. ¦ : σχεδόν ίσιες γωνίες, λεπτές γραμμές, ελαφρύς κόκκος χαρτιού πίσω από τις σελίδες. Για κρεμ φόντο, διάλεξε το Preset «Αρχείο χαρτί» στην Εμφάνιση. ¦ : почти прави ъгли, тънки линии, лека хартиена текстура зад страниците. За кремав фон избери Preset „Хартиен архив“ в Облик.
+: comme un registre, on voit beaucoup de lignes. ¦ : σαν ληξιαρχικό βιβλίο, βλέπεις πολλές γραμμές. ¦ : като регистър, виждаш много редове.
+: des émojis en couleur, faciles à reconnaître. ¦ : χρωματιστά emoji, που αναγνωρίζονται εύκολα. ¦ : цветни емоджита, лесни за разпознаване.
+: grand nom très lisible, outils toujours à droite. ¦ : μεγάλο όνομα πολύ ευανάγνωστο, εργαλεία πάντα δεξιά. ¦ : голямо, много четливо име, инструментите винаги вдясно.
+: le style « néo-brutal » que tu connais, net et très lisible. ¦ : το στυλ «νεο-μπρουταλιστικό» που ξέρεις, καθαρό και πολύ ευανάγνωστο. ¦ : стилът „нео-брутализъм“, който познаваш, чист и много четлив.
+: les autres restent visibles mais plus légers. ¦ : τα άλλα μένουν ορατά αλλά πιο αχνά. ¦ : другите остават видими, но по-бледи.
+: les lignes sont hautes, on ne se trompe pas de ligne. ¦ : οι γραμμές είναι ψηλές, δεν μπερδεύεις γραμμή. ¦ : редовете са високи, не се бъркаш в реда.
+: l’équilibre actuel entre place et lisibilité. ¦ : η τωρινή ισορροπία ανάμεσα σε χώρο και αναγνωσιμότητα. ¦ : сегашният баланс между място и четливост.
+: nom, prénoms, naissance, décès rangés dans des cases fixes. ¦ : επώνυμο, ονόματα, γέννηση, θάνατος σε σταθερά πλαίσια. ¦ : фамилия, имена, раждане, смърт в неподвижни полета.
+: parfait pour les longues listes et les petits écrans. ¦ : ιδανικό για μεγάλες λίστες και μικρές οθόνες. ¦ : идеално за дълги списъци и малки екрани.
+: rien ne dépasse, seul le contenu compte. Idéal pour imprimer ou faire des captures. ¦ : τίποτα δεν προεξέχει, μετράει μόνο το περιεχόμενο. Ιδανικό για εκτύπωση ή στιγμιότυπα. ¦ : нищо не стърчи, важно е само съдържанието. Идеално за печат или екранни снимки.
+: toutes les icônes ont le même trait et prennent la couleur du texte (aussi en mode sombre). ¦ : όλα τα εικονίδια έχουν την ίδια γραμμή και παίρνουν το χρώμα του κειμένου (και στη σκοτεινή λειτουργία). ¦ : всички икони имат една и съща линия и приемат цвета на текста (и в тъмен режим).
+: traits dans les Listes, cartes encadrées dans la colonne Personnes. ¦ : γραμμές στις Λίστες, κάρτες με πλαίσιο στη στήλη Άτομα. ¦ : линии в Списъци, карти с рамка в колоната Хора.
+: traits fins et pâles, coins ronds, ombres floues comme sur un téléphone. ¦ : λεπτές και αχνές γραμμές, στρογγυλές γωνίες, θολές σκιές όπως στο κινητό. ¦ : тънки и бледи линии, заоблени ъгли, размити сенки като на телефон.
+: une clé USB, ou un dossier iCloud Drive, Dropbox, OneDrive… L’app n’utilise aucun service en ligne et n’a pas besoin de serveur : chaque ordinateur garde sa base et dépose ses changements dans ce dossier ; l’autre les reprend. ¦ : ένα USB stick ή ένας φάκελος iCloud Drive, Dropbox, OneDrive… Η εφαρμογή δεν χρησιμοποιεί καμία διαδικτυακή υπηρεσία και δεν χρειάζεται διακομιστή: κάθε υπολογιστής κρατά τη βάση του και αφήνει τις αλλαγές του σε αυτόν τον φάκελο· ο άλλος τις παίρνει. ¦ : USB флашка или папка в iCloud Drive, Dropbox, OneDrive… Приложението не използва онлайн услуги и не се нуждае от сървър: всеки компютър пази своята база и оставя промените си в тази папка; другият ги взима.
+: une grande photo (la maison, la famille, le village) et le portrait rond par-dessus, comme un profil. ¦ : μια μεγάλη φωτογραφία (το σπίτι, η οικογένεια, το χωριό) και το στρογγυλό πορτρέτο από πάνω, σαν προφίλ. ¦ : голяма снимка (къщата, семейството, селото) и кръглият портрет отгоре, като профил.
+: « Annuler », « Modifier » deviennent des mots en couleur, soulignés au survol. ¦ : τα «Ακύρωση», «Επεξεργασία» γίνονται χρωματιστές λέξεις, υπογραμμισμένες με το πέρασμα του ποντικιού. ¦ : „Отказ“, „Редактирай“ стават цветни думи, подчертани при посочване.
+: « Née le … à …, décédée le … », portrait ovale sépia, tampon Sosa. ¦ : «Γεννήθηκε στις … στο …, πέθανε στις …», οβάλ πορτρέτο σε σέπια, σφραγίδα Sosa. ¦ : „Родена на … в …, починала на …“, овален портрет в сепия, печат Sosa.
+; des Pays-Bas : © ¦ · της Ολλανδίας: © ¦ ; на Нидерландия: ©
+; du Québec : © ¦ · του Κεμπέκ: © ¦ ; на Квебек: ©
+; noms traduits en français. Les autres formes sont dessinées pour l’application. ¦ · ονόματα μεταφρασμένα. Τα άλλα σχήματα είναι σχεδιασμένα για την εφαρμογή. ¦ ; преведени имена. Другите фигури са нарисувани за приложението.
+Accents et esprits (s’ajoutent à la lettre avant le curseur) ¦ Τόνοι και πνεύματα (προστίθενται στο γράμμα πριν από τον κέρσορα) ¦ Ударения и придихания (добавят се към буквата преди курсора)
+Accents é è ê, et ç, œ, æ. ¦ Τόνοι é è ê, και ç, œ, æ. ¦ Ударения é è ê, както и ç, œ, æ.
+Actes et documents ¦ Πράξεις και έγγραφα ¦ Актове и документи
+Affichage des événements ¦ Εμφάνιση των γεγονότων ¦ Показване на събитията
+Afficher ce bouton ¦ Εμφάνιση αυτού του κουμπιού ¦ Показвай този бутон
+Afficher cette catégorie ¦ Εμφάνιση αυτής της κατηγορίας ¦ Показвай тази категория
+Afficher dans la fiche ¦ Εμφάνιση στην καρτέλα ¦ Показвай в картона
+Afficher dans le menu ¦ Εμφάνιση στο μενού ¦ Показвай в менюто
+Afficher la liste des raccourcis ¦ Εμφάνιση της λίστας συντομεύσεων ¦ Покажи списъка с клавишни комбинации
+Afficher le cadre (défaut) ¦ Εμφάνιση του πλαισίου (προεπιλογή) ¦ Показвай рамката (по подразбиране)
+Afficher seulement si renseigné ¦ Εμφάνιση μόνο αν έχει συμπληρωθεί ¦ Показвай само ако е попълнено
+Affiché : clique pour le cacher ¦ Εμφανίζεται: κάνε κλικ για να το κρύψεις ¦ Показано: щракни, за да го скриеш
+Agit sur les marges intérieures et l’écart entre les blocs. 100 % = comme avant. La « Taille typographique » de l’Apparence reste à part et s’ajoute ; une colonne de gauche réglée « Compacte » (onglet Colonne) garde sa propre taille : la Densité ne la touche pas. ¦ Επηρεάζει τα εσωτερικά περιθώρια και την απόσταση ανάμεσα στα μπλοκ. 100 % = όπως πριν. Το «Μέγεθος γραμμάτων» της Εμφάνισης μένει ξεχωριστό και προστίθεται· μια στήλη αριστερά ρυθμισμένη «Συμπαγής» (καρτέλα Στήλη) κρατά το δικό της μέγεθος: η Πυκνότητα δεν την αγγίζει. ¦ Влияе на вътрешните полета и разстоянието между блоковете. 100 % = както преди. „Размерът на шрифта“ от Облик остава отделно и се добавя; лява колона, настроена „Сбита“ (раздел Колона), запазва своя размер: Плътността не я засяга.
+Agrandit et aère le texte. Les outils en plein écran gardent leur taille pour que leurs réglages restent à leur place. ¦ Μεγαλώνει και αραιώνει το κείμενο. Τα εργαλεία σε πλήρη οθόνη κρατούν το μέγεθός τους για να μένουν οι ρυθμίσεις τους στη θέση τους. ¦ Уголемява текста и му дава въздух. Инструментите на цял екран запазват размера си, за да остават настройките им на мястото си.
+Aide : Ce que tu fais avec l’app : ses onglets et son premier écran. Aucune fiche n’est supprimée. ¦ Βοήθεια: Τι κάνεις με την εφαρμογή: οι καρτέλες του μενού της και η πρώτη της οθόνη. Καμία καρτέλα ατόμου δεν διαγράφεται. ¦ Помощ: Какво правиш с приложението: разделите му и първият му екран. Не се изтрива нито един картон.
+Aide : Choisis la sorte de daltonisme : l’app corrige ses couleurs pour que tu les distingues mieux. Les petites pastilles montrent comment ces couleurs sont vues. ¦ Βοήθεια: Διάλεξε το είδος αχρωματοψίας: η εφαρμογή διορθώνει τα χρώματά της για να τα ξεχωρίζεις καλύτερα. Τα μικρά σήματα δείχνουν πώς φαίνονται αυτά τα χρώματα. ¦ Помощ: Избери вида цветна слепота: приложението коригира цветовете си, за да ги различаваш по-добре. Малките значки показват как се виждат тези цветове.
+Aide : La forme des petits carrés numérotés des blocs et des initiales des fiches. Ajoute tes formes (bibliothèque des tableaux, polygone dessiné, SVG importé), range la liste du menu « Forme des avatars », cache celles qui ne te servent pas. ¦ Βοήθεια: Το σχήμα των μικρών αριθμημένων τετραγώνων των μπλοκ και των αρχικών των καρτελών. Πρόσθεσε τα δικά σου σχήματα (βιβλιοθήκη των πινάκων ιδεών, πολύγωνο που σχεδίασες, εισαγμένο SVG), τακτοποίησε τη λίστα του μενού «Σχήμα των avatar», κρύψε όσα δεν σου χρειάζονται. ¦ Помощ: Формата на малките номерирани квадратчета на блоковете и на инициалите в картоните. Добави свои фигури (библиотека на дъските, нарисуван многоъгълник, импортиран SVG), подреди списъка в менюто „Форма на аватарите“, скрий тези, които не ти трябват.
+(CC BY 4.0) ; de Slovénie : © ¦ (CC BY 4.0)· της Σλοβενίας: © ¦ (CC BY 4.0); на Словения: ©
+3 fiches trouvées ¦ Βρέθηκαν 3 καρτέλες ¦ Намерени са 3 картона
+Aide des touches ¦ Βοήθεια πλήκτρων ¦ Помощ за клавишите
+Anniversaires et souvenirs ¦ Γενέθλια και αναμνήσεις ¦ Рождени дни и спомени
+Année ¦ Έτος ¦ Година
+Année de naissance lue par SocFace ¦ Έτος γέννησης που διάβασε το SocFace ¦ Година на раждане, разчетена от SocFace
+Aperçu vivant ¦ Ζωντανή προεπισκόπηση ¦ Преглед на живо
+Appeler quelqu’un ¦ Κάλεσε κάποιον ¦ Обади се на някого
+Arial, comme d’habitude. ¦ Arial, όπως συνήθως. ¦ Arial, както обикновено.
+Arrondi des coins ¦ Στρογγύλεμα γωνιών ¦ Заобляне на ъглите
+Atkinson Hyperlegible : faite pour les personnes qui voient mal (lettres qu’on ne confond pas : I l 1, O 0). Toujours disponible. ¦ Atkinson Hyperlegible: φτιαγμένη για άτομα που δεν βλέπουν καλά (γράμματα που δεν μπερδεύονται: I l 1, O 0). Πάντα διαθέσιμη. ¦ Atkinson Hyperlegible: създаден за хора, които виждат зле (букви, които не се бъркат: I l 1, O 0). Винаги наличен.
+Atkinson Hyperlegible, texte 30 px, très gros boutons ¦ Atkinson Hyperlegible, κείμενο 30 px, πολύ μεγάλα κουμπιά ¦ Atkinson Hyperlegible, текст 30 px, много големи бутони
+Au démarrage, une fois par jour au plus. Seule une demande « quelle est la dernière version ? » part vers GitHub : aucune donnée de ta généalogie, aucun identifiant. Rien n’est installé tout seul. ¦ Κατά την εκκίνηση, το πολύ μία φορά τη μέρα. Μόνο ένα αίτημα «ποια είναι η τελευταία έκδοση;» φεύγει προς το GitHub: κανένα δεδομένο της γενεαλογίας σου, κανένα αναγνωριστικό. Τίποτα δεν εγκαθίσταται μόνο του. ¦ При стартиране, най-много веднъж на ден. Към GitHub отива само запитване „коя е последната версия?“: никакви данни от генеалогията ти, никакъв идентификатор. Нищо не се инсталира само.
+Aucun fichier média manquant. ¦ Κανένα αρχείο πολυμέσων δεν λείπει. ¦ Няма липсващи медийни файлове.
+Aucune modification pour ce filtre. ¦ Καμία αλλαγή για αυτό το φίλτρο. ¦ Няма промени за този филтър.
+Aucune ombre ¦ Χωρίς σκιά ¦ Без сянка
+Aucune voix française trouvée ¦ Δεν βρέθηκε γαλλική φωνή ¦ Не е намерен френски глас
+Aujourd’hui, pas de portrait dans les cases de l’arbre. ¦ Σήμερα, κανένα πορτρέτο στα κουτάκια του δέντρου. ¦ Днес в клетките на дървото няма портрети.
+Aussi : ⇧ + Entrée dans la recherche rapide. ¦ Επίσης: ⇧ + Enter στη γρήγορη αναζήτηση. ¦ Също: ⇧ + Enter в бързото търсене.
+Aussi dans Réglages → Accessibilité → 🧓 Mode simple (« Montrer le bouton »). Caché au départ. ¦ Επίσης στις Ρυθμίσεις → Προσβασιμότητα → 🧓 Απλή λειτουργία («Εμφάνιση του κουμπιού»). Κρυφό αρχικά. ¦ Също в Настройки → Достъпност → 🧓 Опростен режим („Покажи бутона“). Скрит в началото.
+Aussi dans les réglages de la calculette (« Bouton 🧮 dans la barre du haut »). ¦ Επίσης στις ρυθμίσεις της αριθμομηχανής («Κουμπί 🧮 στην επάνω γραμμή»). ¦ Също в настройките на калкулатора („Бутон 🧮 в горната лента“).
+Avec les médias (photos, actes, sons…) ¦ Με τα πολυμέσα (φωτογραφίες, πράξεις, ήχοι…) ¦ С медиите (снимки, актове, звуци…)
+Avec les pastilles ¦ Με τα σήματα ¦ Със значките
+Aérée ¦ Ευρύχωρη ¦ Просторна
+Bande d’actions rapides ¦ Ταινία γρήγορων ενεργειών ¦ Лента с бързи действия
+Baptême loin de la naissance ¦ Βάπτιση μακριά από τη γέννηση ¦ Кръщене далеч от раждането
+Baptême tardif (avant 1900) ¦ Καθυστερημένη βάπτιση (πριν από το 1900) ¦ Късно кръщене (преди 1900)
+Barre de côté ¦ Πλαϊνή μπάρα ¦ Странична лента
+Bleu et jaune affaiblis. ¦ Αδύναμο μπλε και κίτρινο. ¦ Отслабени синьо и жълто.
+Bouton bleu « ＋ Observation » au-dessus de la grille ¦ Μπλε κουμπί «＋ Παρατήρηση» πάνω από το πλέγμα ¦ Син бутон „＋ Наблюдение“ над мрежата
+Boutons carrés ¦ Τετράγωνα κουμπιά ¦ Квадратни бутони
+Boutons des pistes : plus grands ¦ Κουμπιά των κομματιών: μεγαλύτερα ¦ Бутони на пистите: по-големи
+Boutons des pistes : plus petits ¦ Κουμπιά των κομματιών: μικρότερα ¦ Бутони на пистите: по-малки
+Boutons des pistes : taille de départ ¦ Κουμπιά των κομματιών: αρχικό μέγεθος ¦ Бутони на пистите: начален размер
+Boutons encadrés ¦ Κουμπιά με πλαίσιο ¦ Бутони с рамка
+Cache les outils avancés ou rarement utilisés : ADN, comparaison, animaux, écran divisé, nouvelle fenêtre, réglages du tableau de bord, supprimer / verrouiller une fiche, historique, filtres avancés de la carte… ¦ Κρύβει τα προχωρημένα ή σπάνια εργαλεία: DNA, σύγκριση, ζώα, διαιρεμένη οθόνη, νέο παράθυρο, ρυθμίσεις του πίνακα ελέγχου, διαγραφή / κλείδωμα καρτέλας, ιστορικό, προχωρημένα φίλτρα του χάρτη… ¦ Скрива разширените или рядко ползвани инструменти: ДНК, сравнение, животни, разделен екран, нов прозорец, настройки на таблото, изтриване / заключване на картон, история, разширени филтри на картата…
+Caché ¦ Κρυφό ¦ Скрит
+Caché : le mode simple s’ouvre d’ici, ou par le widget du tableau de bord. ¦ Κρυφό: η απλή λειτουργία ανοίγει από εδώ ή από το widget του πίνακα ελέγχου. ¦ Скрит: опростеният режим се отваря оттук или от уиджета на таблото.
+Calendrier de cette date ¦ Ημερολόγιο αυτής της ημερομηνίας ¦ Календар на тази дата
+Calendrier républicain ¦ Δημοκρατικό ημερολόγιο ¦ Републикански календар
+Calendrier source ¦ Ημερολόγιο πηγής ¦ Изходен календар
+Calendrier utilisé par défaut dans les champs de date ¦ Ημερολόγιο που χρησιμοποιείται από προεπιλογή στα πεδία ημερομηνίας ¦ Календар по подразбиране в полетата за дата
+Carré arrondi ¦ Στρογγυλεμένο τετράγωνο ¦ Заоблен квадрат
+Carré droit ¦ Ίσιο τετράγωνο ¦ Прав квадрат
+Carré penché (défaut) ¦ Γερτό τετράγωνο (προεπιλογή) ¦ Наклонен квадрат (по подразбиране)
+Carrés numérotés ¦ Αριθμημένα τετράγωνα ¦ Номерирани квадрати
+Cartes avec repère ¦ Κάρτες με σημάδι ¦ Карти с маркер
+Cartes espacées ¦ Κάρτες με απόσταση ¦ Раздалечени карти
+Cases de l’arbre ¦ Κουτάκια του δέντρου ¦ Клетки на дървото
+Ce n’est pas une erreur ¦ Δεν είναι λάθος ¦ Това не е грешка
+Ce que tu as réglé dans « ♿ Toute l’app » (daltonisme, contraste, taille du texte, mouvements, voix) s’applique aussi au mode simple. Pour un réglage différent, choisis « Propre au mode simple ». ¦ Ό,τι ρύθμισες στο «♿ Όλη η εφαρμογή» (αχρωματοψία, αντίθεση, μέγεθος κειμένου, κινήσεις, φωνή) ισχύει και στην απλή λειτουργία. Για διαφορετική ρύθμιση, διάλεξε «Μόνο για την απλή λειτουργία». ¦ Това, което си настроил в „♿ Цялото приложение“ (цветна слепота, контраст, размер на текста, движения, глас), важи и за опростения режим. За различна настройка избери „Само за опростения режим“.
+Ce qui semble impossible ou très rare dans tes fiches : souvent une faute de frappe, un homonyme ou de mauvais parents. Rien n’est changé sans toi. ¦ Ό,τι μοιάζει αδύνατο ή πολύ σπάνιο στις καρτέλες σου: συχνά ένα τυπογραφικό λάθος, ένας συνονόματος ή λάθος γονείς. Τίποτα δεν αλλάζει χωρίς εσένα. ¦ Това, което изглежда невъзможно или много рядко в картоните ти: често печатна грешка, съименник или грешни родители. Нищо не се променя без теб.
+Ce qu’on montre ¦ Τι δείχνουμε ¦ Какво показваме
+Celle de l’app ¦ Αυτή της εφαρμογής ¦ Тази на приложението
+Celle du thème ¦ Αυτή του θέματος ¦ Тази на темата
+Cette personne était… (ses profils) ¦ Αυτό το άτομο ήταν… (τα προφίλ του) ¦ Този човек беше… (профилите му)
+Ceux qui arrivent ¦ Όσοι έρχονται ¦ Предстоящите
+Champs œuvre ¦ Πεδία έργου ¦ Полета за творба
+Changer la couleur ¦ Αλλαγή χρώματος ¦ Смени цвета
+Changer le pictogramme ¦ Αλλαγή εικονογράμματος ¦ Смени пиктограмата
+Chaque choix se voit : clique, l’aperçu suit. Pour les outils Graphiques, Carte, Enquêtes, Recherche, Personnes, Listes, Réglages… ¦ Κάθε επιλογή φαίνεται: κάνε κλικ, η προεπισκόπηση ακολουθεί. Για τα εργαλεία Γραφήματα, Χάρτης, Έρευνες, Έρευνα, Άτομα, Λίστες, Ρυθμίσεις… ¦ Всеки избор се вижда: щракни и прегледът следва. За инструментите Графики, Карта, Разследвания, Проучване, Хора, Списъци, Настройки…
+Chaque fiche est un objet ¦ Κάθε καρτέλα είναι ένα αντικείμενο ¦ Всеки картон е обект
+Chaque gros bouton garde sa couleur partout : on se repère sans lire. ¦ Κάθε μεγάλο κουμπί κρατά το χρώμα του παντού: προσανατολίζεσαι χωρίς να διαβάζεις. ¦ Всеки голям бутон запазва цвета си навсякъде: ориентираш се, без да четеш.
+Chercher quelqu’un par son nom ¦ Βρες κάποιον με το όνομά του ¦ Потърси някого по име
+Chercher une commande… ¦ Αναζήτηση εντολής… ¦ Търси команда…
+Chercher… (nom, contrôle, lieu) ¦ Αναζήτηση… (όνομα, έλεγχος, τόπος) ¦ Търси… (име, проверка, място)
+Choisir une voix propre au mode simple ¦ Διάλεξε φωνή μόνο για την απλή λειτουργία ¦ Избери глас само за опростения режим
+Clair ou sombre ¦ Φωτεινό ή σκοτεινό ¦ Светло или тъмно
+Clavier et souris ¦ Πληκτρολόγιο και ποντίκι ¦ Клавиатура и мишка
+Comme le prototype ¦ Όπως το πρωτότυπο ¦ Като прототипа
+Comme le reste ¦ Όπως τα υπόλοιπα ¦ Като останалото
+Comme les blocs (réglage A1) ¦ Όπως τα μπλοκ (ρύθμιση A1) ¦ Като блоковете (настройка A1)
+Communes de Belgique : IGN-NGI (Institut géographique national belge), licence ouverte, via ¦ Δήμοι του Βελγίου: IGN-NGI (Εθνικό Γεωγραφικό Ινστιτούτο του Βελγίου), ανοιχτή άδεια, μέσω ¦ Общини в Белгия: IGN-NGI (Национален географски институт на Белгия), отворен лиценз, чрез
+Communes de Tchéquie : RÚIAN © ¦ Δήμοι της Τσεχίας: RÚIAN © ¦ Общини в Чехия: RÚIAN ©
+Communes d’Allemagne : VG250 © ¦ Δήμοι της Γερμανίας: VG250 © ¦ Общини в Германия: VG250 ©
+Communes d’Autriche : © ¦ Δήμοι της Αυστρίας: © ¦ Общини в Австрия: ©
+Communes d’Espagne : © ¦ Δήμοι της Ισπανίας: © ¦ Общини в Испания: ©
+Communes d’Italie : confini amministrativi © ¦ Δήμοι της Ιταλίας: confini amministrativi © ¦ Общини в Италия: confini amministrativi ©
+Compact et clair ¦ Συμπαγές και καθαρό ¦ Сбито и ясно
+Comparer les GEDCOM ¦ Σύγκριση των GEDCOM ¦ Сравни GEDCOM файловете
+Comtés des États-Unis : ¦ Κομητείες των ΗΠΑ: ¦ Окръзи в САЩ:
+Contour bien visible autour de l’élément choisi au clavier ¦ Πολύ ορατό περίγραμμα γύρω από το στοιχείο που διαλέχτηκε με το πληκτρολόγιο ¦ Ясно видим контур около елемента, избран с клавиатурата
+Contours des communes : IGN, Admin Express, via ¦ Όρια των δήμων: IGN, Admin Express, μέσω ¦ Граници на общините: IGN, Admin Express, чрез
+Contraste élevé ¦ Υψηλή αντίθεση ¦ Висок контраст
+Contrôle ¦ Έλεγχος ¦ Проверка
+Convertir une date ¦ Μετατροπή ημερομηνίας ¦ Преобразувай дата
+Correspondance (lettres, cartes) ¦ Αλληλογραφία (γράμματα, κάρτες) ¦ Кореспонденция (писма, картички)
+Couleur du bord ¦ Χρώμα του περιγράμματος ¦ Цвят на ръба
+Couleur du genre, fond plein (lettres blanches) ¦ Χρώμα του φύλου, γεμάτο φόντο (λευκά γράμματα) ¦ Цвят на пола, плътен фон (бели букви)
+Couleur du genre, fond pâle (lettres de couleur) ¦ Χρώμα του φύλου, αχνό φόντο (χρωματιστά γράμματα) ¦ Цвят на пола, блед фон (цветни букви)
+Couleur principale pâle avec un trait ¦ Αχνό κύριο χρώμα με γραμμή ¦ Блед основен цвят с линия
+Couleurs et daltonisme ¦ Χρώματα και αχρωματοψία ¦ Цветове и цветна слепота
+Couleurs seulement affaiblies (léger) ¦ Μόνο αδύναμα χρώματα (ελαφρύ) ¦ Само отслабени цветове (леко)
+Créer / modifier une branche ¦ Δημιουργία / επεξεργασία κλάδου ¦ Създай / редактирай клон
+Créer / modifier une étiquette ¦ Δημιουργία / επεξεργασία ετικέτας ¦ Създай / редактирай етикет
+Créer le type ¦ Δημιουργία του τύπου ¦ Създай вида
+Créer un type ¦ Δημιουργία τύπου ¦ Създай вид
+Créer une copie de test ¦ Δημιουργία δοκιμαστικού αντιγράφου ¦ Създай тестово копие
+Créer une forme ¦ Δημιουργία σχήματος ¦ Създай фигура
+DENSITÉ ¦ ΠΥΚΝΟΤΗΤΑ ¦ ПЛЪТНОСТ
+Dans la barre au-dessus ¦ Στη γραμμή από πάνω ¦ В лентата отгоре
+Dans un navigateur ¦ Σε πρόγραμμα περιήγησης ¦ В браузър
+Demander aussi un code ¦ Να ζητείται και κωδικός ¦ Искай и код
+Demander « Qui regarde ? » ¦ Να ρωτάει «Ποιος βλέπει;» ¦ Питай „Кой гледа?“
+Densité ¦ Πυκνότητα ¦ Плътност
+Des photos au hasard ¦ Τυχαίες φωτογραφίες ¦ Случайни снимки
+Des photos choisies ¦ Επιλεγμένες φωτογραφίες ¦ Избрани снимки
+Dessin au trait ¦ Σχέδιο με περίγραμμα ¦ Контурна рисунка
+Deutéranomalie ¦ Δευτερανωμαλία ¦ Деутераномалия
+Deutéranopie ¦ Δευτερανωπία ¦ Деутеранопия
+Deux façons de faire selon l’endroit. ¦ Δύο τρόποι ανάλογα με το σημείο. ¦ Два начина според мястото.
+Diaporama et cadre photo ¦ Προβολή διαφανειών και ψηφιακή κορνίζα ¦ Слайдшоу и фоторамка
+Dictée vocale ¦ Φωνητική υπαγόρευση ¦ Гласова диктовка
+Dictée vocale dans les champs texte ¦ Φωνητική υπαγόρευση στα πεδία κειμένου ¦ Гласова диктовка в текстовите полета
+Données géographiques ¦ Γεωγραφικά δεδομένα ¦ Географски данни
+Dossier des copies ¦ Φάκελος αντιγράφων ¦ Папка за копията
+Dossier partagé ¦ Κοινόχρηστος φάκελος ¦ Споделена папка
+Double-clic : 320 px, la valeur de départ. ¦ Διπλό κλικ: 320 px, η αρχική τιμή. ¦ Двойно щракване: 320 px, началната стойност.
+Douces et floues ¦ Απαλές και θολές ¦ Меки и размити
+Duplique la base ouverte pour essayer un import ou une fusion sans modifier l’original. Les médias restent partagés : ne les supprime pas depuis la copie si tu veux préserver l’original. ¦ Διπλασιάζει την ανοιχτή βάση για να δοκιμάσεις μια εισαγωγή ή μια συγχώνευση χωρίς να αλλάξεις το πρωτότυπο. Τα πολυμέσα μένουν κοινά: μην τα διαγράψεις από το αντίγραφο αν θέλεις να κρατήσεις το πρωτότυπο. ¦ Дублира отворената база, за да опиташ импортиране или сливане, без да променяш оригинала. Медиите остават общи: не ги изтривай от копието, ако искаш да запазиш оригинала.
+Durée de chaque photo ¦ Διάρκεια κάθε φωτογραφίας ¦ Продължителност на всяка снимка
+Durée de l’appui long ¦ Διάρκεια του παρατεταμένου πατήματος ¦ Продължителност на дългото натискане
+Décrire les images ¦ Περιγραφή των εικόνων ¦ Описвай изображенията
+Défilement ¦ Κύλιση ¦ Превъртане
+Délai après la mort du père ¦ Διάστημα μετά τον θάνατο του πατέρα ¦ Срок след смъртта на бащата
+Effacer le groupe (son contenu va dans le groupe d’à côté) ¦ Διαγραφή της ομάδας (το περιεχόμενό της πάει στη διπλανή ομάδα) ¦ Изтрий групата (съдържанието ѝ отива в съседната група)
+En bas de la colonne ¦ Κάτω στη στήλη ¦ Долу в колоната
+En bas de la colonne des badges ¦ Κάτω στη στήλη των σημάτων ¦ Долу в колоната със значките
+En bas de l’en-tête ¦ Κάτω στην κεφαλίδα ¦ Долу в заглавната част
+En diaporama ¦ Σε προβολή διαφανειών ¦ Като слайдшоу
+En français. Pas dans les cases de recherche, les dates, les nombres ni les mots de passe. ¦ Στα γαλλικά. Όχι στα πεδία αναζήτησης, τις ημερομηνίες, τους αριθμούς ούτε τους κωδικούς πρόσβασης. ¦ На френски. Не в полетата за търсене, датите, числата и паролите.
+En grand, avec sa légende ¦ Σε μεγάλο μέγεθος, με τη λεζάντα της ¦ В голям размер, с надписа си
+En très grand ¦ Σε πολύ μεγάλο μέγεθος ¦ В много голям размер
+En-tête actuel ¦ Τωρινή κεφαλίδα ¦ Текуща заглавна част
+En-tête de la fiche ¦ Κεφαλίδα της καρτέλας ¦ Заглавна част на картона
+En-têtes ¦ Κεφαλίδες ¦ Заглавни части
+Enlever l’élément choisi ¦ Αφαίρεση του επιλεγμένου στοιχείου ¦ Махни избрания елемент
+Enregistrer la branche ¦ Αποθήκευση του κλάδου ¦ Запази клона
+Enregistrer le projet sous un autre nom… ¦ Αποθήκευση του έργου με άλλο όνομα… ¦ Запази проекта с друго име…
+Ensembles prêts ¦ Έτοιμα σύνολα ¦ Готови комплекти
+Entre une date complète pour convertir. ¦ Γράψε μια πλήρη ημερομηνία για μετατροπή. ¦ Въведи пълна дата за преобразуване.
+Espace dans les blocs ¦ Κενό μέσα στα μπλοκ ¦ Разстояние в блоковете
+Espace entre les boutons ¦ Κενό ανάμεσα στα κουμπιά ¦ Разстояние между бутоните
+Espace entre les cadres ¦ Κενό ανάμεσα στα πλαίσια ¦ Разстояние между рамките
+Espace entre les lettres ¦ Κενό ανάμεσα στα γράμματα ¦ Разстояние между буквите
+Espace entre les mots ¦ Κενό ανάμεσα στις λέξεις ¦ Разстояние между думите
+Essaie ici ¦ Δοκίμασε εδώ ¦ Опитай тук
+FICHES ANIMAUX ¦ ΚΑΡΤΕΛΕΣ ΖΩΩΝ ¦ КАРТОНИ НА ЖИВОТНИ
+FICHES PERSONNES ET ANIMAUX ¦ ΚΑΡΤΕΛΕΣ ΑΤΟΜΩΝ ΚΑΙ ΖΩΩΝ ¦ КАРТОНИ НА ХОРА И ЖИВОТНИ
+Fiche d’une personne ¦ Καρτέλα ατόμου ¦ Картон на човек
+Fiche · 88 px ¦ Καρτέλα · 88 px ¦ Картон · 88 px
+Fiches personnes ¦ Καρτέλες ατόμων ¦ Картони на хора
+Fichiers médias ¦ Αρχεία πολυμέσων ¦ Медийни файлове
+Fond crème, police de livre, doux pour les yeux ¦ Κρεμ φόντο, γραμματοσειρά βιβλίου, ξεκούραστο για τα μάτια ¦ Кремав фон, книжен шрифт, щадящ очите
+Fond pâle (comme avant) ¦ Αχνό φόντο (όπως πριν) ¦ Блед фон (както преди)
+Force de la correction ¦ Ένταση της διόρθωσης ¦ Сила на корекцията
+Forme de l’en-tête ¦ Σχήμα της κεφαλίδας ¦ Форма на заглавната част
+Forme des boutons ¦ Σχήμα των κουμπιών ¦ Форма на бутоните
+Forme des listes ¦ Σχήμα των λιστών ¦ Форма на списъците
+Français ¦ Γαλλικά ¦ Френски
+Fratrie étalée ¦ Αδέλφια με μεγάλες διαφορές ηλικίας ¦ Братя и сестри с големи разлики във възрастта
+GEDCOM de référence ¦ GEDCOM αναφοράς ¦ Еталонен GEDCOM
+Garder les dernières ¦ Κράτα τα τελευταία ¦ Пази последните
+Gouvernement du Québec ¦ Gouvernement du Québec ¦ Gouvernement du Québec
+Gravité ¦ Σοβαρότητα ¦ Сериозност
+Grosse flèche de souris ¦ Μεγάλος δείκτης ποντικιού ¦ Голяма стрелка на мишката
+Grégorien ¦ Γρηγοριανό ¦ Григориански
+Hauteur des boutons ¦ Ύψος των κουμπιών ¦ Височина на бутоните
+Hauteur des cadres ¦ Ύψος των πλαισίων ¦ Височина на рамките
+Hauteur des lignes ¦ Ύψος των γραμμών ¦ Височина на редовете
+Hauteur du bandeau ¦ Ύψος της ταινίας ¦ Височина на лентата
+ICÔNES ¦ ΕΙΚΟΝΙΔΙΑ ¦ ИКОНИ
+Ici : choisis le dossier. L’app y pose une copie de départ ( ¦ Εδώ: διάλεξε τον φάκελο. Η εφαρμογή βάζει εκεί ένα αρχικό αντίγραφο ( ¦ Тук: избери папката. Приложението слага там начално копие (
+Icône + nom ¦ Εικονίδιο + όνομα ¦ Икона + име
+Icône au-dessus ¦ Εικονίδιο από πάνω ¦ Икона отгоре
+Icônes ¦ Εικονίδια ¦ Икони
+Ignorée dans une case de texte ; réglable dans Raccourcis clavier. ¦ Αγνοείται σε πεδίο κειμένου· ρυθμίζεται στις Συντομεύσεις πληκτρολογίου. ¦ Пренебрегва се в текстово поле; настройва се в Клавишни комбинации.
+Ils sont gardés avec ta généalogie : chaque tablette ou ordinateur part d’ici. ¦ Φυλάγονται μαζί με τη γενεαλογία σου: κάθε tablet ή υπολογιστής ξεκινά από εδώ. ¦ Пазят се с генеалогията ти: всеки таблет или компютър започва оттук.
+Intégrité SQLite : ¦ Ακεραιότητα SQLite: ¦ Цялост на SQLite:
+Jamais testé ¦ Δεν δοκιμάστηκε ποτέ ¦ Никога не е тествано
+Je ne suis pas dans l’arbre ¦ Δεν είμαι στο δέντρο ¦ Не съм в дървото
+La forme ¦ Το σχήμα ¦ Формата
+La maison ¦ Το σπίτι ¦ Къщата
+La personne de départ ¦ Το αρχικό άτομο ¦ Началният човек
+La photo de chaque case : plus grande, on se reconnaît plus vite. ¦ Η φωτογραφία κάθε κουτιού: μεγαλύτερη, αναγνωρίζεσαι πιο γρήγορα. ¦ Снимката във всяка клетка: по-голяма, разпознаваш се по-бързо.
+Largeur de la colonne ¦ Πλάτος της στήλης ¦ Ширина на колоната
+Le bouton principal ressort ¦ Το κύριο κουμπί ξεχωρίζει ¦ Главният бутон изпъква
+Le cadre du haut ¦ Το επάνω πλαίσιο ¦ Горната рамка
+Le carré de la fiche, partout ¦ Το τετράγωνο της καρτέλας, παντού ¦ Квадратът от картона, навсякъде
+Le dessin de la colonne ¦ Το σχέδιο της στήλης ¦ Рисунката на колоната
+Le gris peut se confondre avec une ligne choisie si l’écran est pâle. ¦ Το γκρι μπορεί να μπερδευτεί με μια επιλεγμένη γραμμή αν η οθόνη είναι αχνή. ¦ Сивото може да се обърка с избран ред, ако екранът е блед.
+Le meilleur des deux ¦ Το καλύτερο από τα δύο ¦ Най-доброто от двете
+Le mode simple ¦ Η απλή λειτουργία ¦ Опростеният режим
+Le nom est moins grand ; un style plus « administratif ». ¦ Το όνομα είναι μικρότερο· ένα στυλ πιο «υπηρεσιακό». ¦ Името е по-малко; по-„административен“ стил.
+Le plus discret ¦ Το πιο διακριτικό ¦ Най-дискретното
+Le plus épuré ¦ Το πιο λιτό ¦ Най-изчистеното
+Le portrait ¦ Το πορτρέτο ¦ Портретът
+Le rond ou carré qui montre une personne : ses couleurs, sa photo, ses initiales. ¦ Ο κύκλος ή το τετράγωνο που δείχνει ένα άτομο: τα χρώματά του, τη φωτογραφία του, τα αρχικά του. ¦ Кръгът или квадратът, който показва човек: цветовете му, снимката му, инициалите му.
+Le rouge est peu visible (paraît sombre, se confond avec le vert). ¦ Το κόκκινο φαίνεται λίγο (μοιάζει σκούρο, μπερδεύεται με το πράσινο). ¦ Червеното се вижда слабо (изглежда тъмно, бърка се със зеленото).
+Le rouge prévient avant de cliquer : on ne supprime pas une fiche par erreur. ¦ Το κόκκινο προειδοποιεί πριν κάνεις κλικ: δεν διαγράφεις μια καρτέλα κατά λάθος. ¦ Червеното предупреждава преди щракване: не изтриваш картон по грешка.
+Le site propose seulement des candidats. La fusion déplace les données vers la fiche gardée puis supprime l’autre fiche. ¦ Ο ιστότοπος προτείνει μόνο υποψήφιους. Η συγχώνευση μεταφέρει τα δεδομένα στην καρτέλα που κρατιέται και μετά διαγράφει την άλλη καρτέλα. ¦ Сайтът само предлага кандидати. Сливането премества данните в запазения картон и после изтрива другия картон.
+Le sépia est plus doux pour les yeux fatigués ; le sombre n’éblouit pas le soir. ¦ Η σέπια είναι πιο απαλή για κουρασμένα μάτια· το σκοτεινό δεν θαμπώνει το βράδυ. ¦ Сепията е по-мека за уморени очи; тъмното не заслепява вечер.
+Le texte des boutons principaux ¦ Το κείμενο των κύριων κουμπιών ¦ Текстът на главните бутони
+Lecteur d’écran ¦ Αναγνώστης οθόνης ¦ Екранен четец
+Les anniversaires ¦ Τα γενέθλια ¦ Рождените дни
+Les blocs se détachent un peu moins du fond. ¦ Τα μπλοκ ξεχωρίζουν λίγο λιγότερο από το φόντο. ¦ Блоковете се открояват малко по-слабо от фона.
+Les couleurs de l’app, sans changement. ¦ Τα χρώματα της εφαρμογής, χωρίς αλλαγή. ¦ Цветовете на приложението, без промяна.
+Les dates seules (comme avant) ¦ Μόνο οι ημερομηνίες (όπως πριν) ¦ Само датите (както преди)
+Les deux ¦ Και τα δύο ¦ И двете
+Les fiches marquées « confidentielles » ne sont jamais montrées. ¦ Οι καρτέλες με σήμανση «εμπιστευτικές» δεν εμφανίζονται ποτέ. ¦ Картоните, отбелязани като „поверителни“, никога не се показват.
+Les gros boutons ¦ Τα μεγάλα κουμπιά ¦ Големите бутони
+Les modifications effectuées depuis ce site sont enregistrées ici. ¦ Οι αλλαγές που έγιναν από αυτόν τον ιστότοπο καταγράφονται εδώ. ¦ Промените, направени от този сайт, се записват тук.
+Les personnes ¦ Τα άτομα ¦ Хората
+Les photos ¦ Οι φωτογραφίες ¦ Снимките
+Les réglages du prototype que tu as aimé ¦ Οι ρυθμίσεις του πρωτοτύπου που σου άρεσε ¦ Настройките на прототипа, който ти хареса
+Lettres d’origine ¦ Αρχικά γράμματα ¦ Оригинални букви
+Lien « 🧩 Cette personne était… » ¦ Σύνδεσμος «🧩 Αυτό το άτομο ήταν…» ¦ Връзка „🧩 Този човек беше…“
+Liens toujours soulignés ¦ Σύνδεσμοι πάντα υπογραμμισμένοι ¦ Връзките винаги подчертани
+Lier au mode Artiste : masqué pour les personnes non artistes ¦ Σύνδεση με τη λειτουργία Καλλιτέχνη: κρυφό για άτομα που δεν είναι καλλιτέχνες ¦ Свържи с режим Артист: скрито за хора, които не са артисти
+Lieux et souvenirs ¦ Τόποι και αναμνήσεις ¦ Места и спомени
+Lire les légendes des photos dans le diaporama ¦ Ανάγνωση των λεζάντων των φωτογραφιών στην προβολή διαφανειών ¦ Чети надписите на снимките в слайдшоуто
+Lire l’histoire dès qu’on ouvre une fiche ¦ Ανάγνωση της ιστορίας μόλις ανοίγει μια καρτέλα ¦ Чети историята веднага щом се отвори картон
+Liste aérée ¦ Ευρύχωρη λίστα ¦ Просторен списък
+Liste continue ¦ Συνεχής λίστα ¦ Непрекъснат списък
+Liste · 34 px ¦ Λίστα · 34 px ¦ Списък · 34 px
+Listes et arbre ¦ Λίστες και δέντρο ¦ Списъци и дърво
+Longévité 🔴 ¦ Μακροζωία 🔴 ¦ Дълголетие 🔴
+Longévité 🟠 ¦ Μακροζωία 🟠 ¦ Дълголетие 🟠
+L’ambiance des archives ¦ Η ατμόσφαιρα των αρχείων ¦ Атмосферата на архивите
+L’app dit alors les noms, sans « ta mère » ni « ton petit-fils ». ¦ Τότε η εφαρμογή λέει τα ονόματα, χωρίς «η μητέρα σου» ή «ο εγγονός σου». ¦ Тогава приложението казва имената, без „твоята майка“ или „твоят внук“.
+L’arbre ¦ Το δέντρο ¦ Дървото
+L’heure et la date ¦ Η ώρα και η ημερομηνία ¦ Часът и датата
+L’ombre fait « touche qu’on enfonce ». Elle suit le style général (franche, douce ou aucune). ¦ Η σκιά δίνει την αίσθηση «πλήκτρου που πατιέται». Ακολουθεί το γενικό στυλ (έντονη, απαλή ή καθόλου). ¦ Сянката създава усещане за „натиснат клавиш“. Следва общия стил (рязка, мека или никаква).
+Masquer tout le cadre ¦ Απόκρυψη όλου του πλαισίου ¦ Скрий цялата рамка
+Mettre les espacements conseillés pour la dyslexie ¦ Εφαρμογή των αποστάσεων που συνιστώνται για τη δυσλεξία ¦ Сложи препоръчаните разстояния за дислексия
+Mode consultation (la famille regarde sans rien modifier) ¦ Λειτουργία προβολής (η οικογένεια βλέπει χωρίς να αλλάζει τίποτα) ¦ Режим на разглеждане (семейството гледа, без да променя нищо)
+Modifier ce cadre ¦ Επεξεργασία αυτού του πλαισίου ¦ Редактирай тази рамка
+Moins de boutons, moins d’hésitation : garde seulement ce que la personne aime regarder. Un cadre ajouté peut ouvrir directement la fiche d’une personne, ses photos ou un petit mot. ¦ Λιγότερα κουμπιά, λιγότερος δισταγμός: κράτα μόνο ό,τι αρέσει στο άτομο να βλέπει. Ένα πλαίσιο που προστίθεται μπορεί να ανοίγει απευθείας την καρτέλα ενός ατόμου, τις φωτογραφίες του ή ένα μικρό μήνυμα. ¦ По-малко бутони, по-малко колебание: остави само това, което човекът обича да гледа. Добавена рамка може да отваря направо картона на човек, снимките му или кратко послание.
+Moins de choses visibles d’un coup ; plus de défilement. ¦ Λιγότερα πράγματα ορατά με μια ματιά· περισσότερη κύλιση. ¦ По-малко неща видими наведнъж; повече превъртане.
+Moins de lignes visibles ; plus de défilement. ¦ Λιγότερες γραμμές ορατές· περισσότερη κύλιση. ¦ По-малко видими редове; повече превъртане.
+Moins de place pour les boutons ; plus décoratif que pratique. ¦ Λιγότερος χώρος για τα κουμπιά· πιο διακοσμητικό παρά πρακτικό. ¦ По-малко място за бутоните; по-декоративно, отколкото практично.
+Montre l’écran comme le voit une personne daltonienne, pour vérifier qu’un document reste lisible avant de l’envoyer ou de l’imprimer. Rien n’est modifié. ¦ Δείχνει την οθόνη όπως τη βλέπει ένα άτομο με αχρωματοψία, για να ελέγξεις ότι ένα έγγραφο μένει ευανάγνωστο πριν το στείλεις ή το εκτυπώσεις. Τίποτα δεν αλλάζει. ¦ Показва екрана така, както го вижда човек с цветна слепота, за да провериш дали документът остава четлив, преди да го изпратиш или отпечаташ. Нищо не се променя.
+Montrer la photo de la fiche quand elle existe ¦ Εμφάνιση της φωτογραφίας της καρτέλας όταν υπάρχει ¦ Показвай снимката от картона, когато има
+Montrer les boutons « 🔊 Écouter » ¦ Εμφάνιση των κουμπιών «🔊 Άκου» ¦ Показвай бутоните „🔊 Слушай“
+Médias et transcriptions ¦ Πολυμέσα και μεταγραφές ¦ Медии и транскрипции
+Ne range jamais le fichier de la base lui-même dans iCloud ou Dropbox pour l’ouvrir des deux côtés : l’app le refuse (verrou), car il pourrait s’abîmer. ¦ Μην βάζεις ποτέ το ίδιο το αρχείο της βάσης στο iCloud ή στο Dropbox για να το ανοίγεις και από τις δύο πλευρές: η εφαρμογή το αρνείται (κλείδωμα), γιατί μπορεί να χαλάσει. ¦ Никога не слагай самия файл на базата в iCloud или Dropbox, за да го отваряш и от двете страни: приложението отказва (заключване), защото може да се повреди.
+Net et régulier ¦ Καθαρό και ομοιόμορφο ¦ Чисто и равномерно
+Norvégien ¦ Νορβηγικά ¦ Норвежки
+Nouveau GEDCOM ¦ Νέο GEDCOM ¦ Нов GEDCOM
+Nouvelle étiquette ¦ Νέα ετικέτα ¦ Нов етикет
+Numéros ¦ Αριθμοί ¦ Номера
+Numéros qui se suivent (01, 02, 03…), les mêmes onglets partout (icône + nom), « Liste | Fiches » dans la barre au-dessus de la liste ¦ Αριθμοί που ακολουθούν ο ένας τον άλλον (01, 02, 03…), οι ίδιες καρτέλες του μενού παντού (εικονίδιο + όνομα), «Λίστα | Κάρτες» στη γραμμή πάνω από τη λίστα ¦ Поредни номера (01, 02, 03…), същите раздели навсякъде (икона + име), „Списък | Картони“ в лентата над списъка
+N’importe quel autre lieu peut être saisi librement. ¦ Οποιοσδήποτε άλλος τόπος μπορεί να γραφτεί ελεύθερα. ¦ Всяко друго място може да се въведе свободно.
+On suit la ligne sans se tromper ¦ Ακολουθείς τη γραμμή χωρίς λάθος ¦ Следваш реда, без да сбъркаш
+Onglets du haut ¦ Καρτέλες επάνω ¦ Раздели горе
+Ordre des pages des Réglages ¦ Σειρά των σελίδων των Ρυθμίσεων ¦ Ред на страниците в Настройки
+Ordre et visibilité des boutons ¦ Σειρά και ορατότητα των κουμπιών ¦ Ред и видимост на бутоните
+Ordre et visibilité des éléments de l’en-tête ¦ Σειρά και ορατότητα των στοιχείων της κεφαλίδας ¦ Ред и видимост на елементите в заглавната част
+Par défaut ¦ Προεπιλογή ¦ По подразбиране
+Par ligne ¦ Ανά γραμμή ¦ На ред
+Pareil que l’app ¦ Όπως η εφαρμογή ¦ Като приложението
+Parle au lieu de taper : un petit 🎤 apparaît dans le champ texte où tu écris. Clique dessus (ou ¦ Μίλα αντί να πληκτρολογείς: ένα μικρό 🎤 εμφανίζεται στο πεδίο κειμένου όπου γράφεις. Κάνε κλικ πάνω του (ή ¦ Говори, вместо да пишеш: малко 🎤 се появява в текстовото поле, в което пишеш. Щракни върху него (или
+Pas de numéros ¦ Χωρίς αριθμούς ¦ Без номера
+Pas vérifiée ¦ Δεν ελέγχθηκε ¦ Непроверена
+Pastille sous le nom ¦ Σήμα κάτω από το όνομα ¦ Значка под името
+Persan (hégirien solaire) ¦ Περσικό (ηλιακό εγίρας) ¦ Персийски (слънчев хиджри)
+Personne qui regarde ¦ Άτομο που βλέπει ¦ Човекът, който гледа
+Personnes identifiées ¦ Αναγνωρισμένα άτομα ¦ Разпознати хора
+Personnes vivantes ¦ Ζωντανά άτομα ¦ Живи хора
+Petit écran ¦ Μικρή οθόνη ¦ Малък екран
+Peut se confondre avec un lien ; demande un peu d’habitude. ¦ Μπορεί να μπερδευτεί με σύνδεσμο· θέλει λίγη συνήθεια. ¦ Може да се обърка с връзка; иска малко свикване.
+Photo de la personne ¦ Φωτογραφία του ατόμου ¦ Снимка на човека
+Photo des cases de l’arbre ¦ Φωτογραφία των κουτιών του δέντρου ¦ Снимка в клетките на дървото
+Photos retirées ¦ Φωτογραφίες που αφαιρέθηκαν ¦ Премахнати снимки
+Pictogrammes des tableaux ¦ Εικονογράμματα των πινάκων ιδεών ¦ Пиктограми на дъските
+Place de ＋ Nouvelle observation ¦ Θέση του ＋ Νέα παρατήρηση ¦ Място на ＋ Ново наблюдение
+Plus calme pour les yeux ¦ Πιο ήρεμο για τα μάτια ¦ По-спокойно за очите
+Plus discret que « Comme avant » : les blocs se détachent un peu moins. ¦ Πιο διακριτικό από το «Όπως πριν»: τα μπλοκ ξεχωρίζουν λίγο λιγότερο. ¦ По-дискретно от „Както преди“: блоковете се открояват малко по-слабо.
+Plus d’actions (menu ⋯) ¦ Περισσότερες ενέργειες (μενού ⋯) ¦ Още действия (меню ⋯)
+Plus d’espace : on touche moins souvent le bouton d’à côté. ¦ Περισσότερος χώρος: πατάς λιγότερο συχνά το διπλανό κουμπί. ¦ Повече място: по-рядко натискаш съседния бутон.
+Plus grandes, elles se voient de loin ; plus petites, les barres d’outils prennent moins de place. ¦ Μεγαλύτερα, φαίνονται από μακριά· μικρότερα, οι γραμμές εργαλείων πιάνουν λιγότερο χώρο. ¦ По-големи — виждат се отдалеч; по-малки — лентите с инструменти заемат по-малко място.
+Plus haut, la photo se voit mieux ; plus bas, la fiche commence plus tôt. Seulement pour le bandeau photo. ¦ Πιο ψηλά, η φωτογραφία φαίνεται καλύτερα· πιο χαμηλά, η καρτέλα ξεκινά νωρίτερα. Μόνο για την ταινία με φωτογραφία. ¦ По-високо — снимката се вижда по-добре; по-ниско — картонът започва по-рано. Само за лентата със снимка.
+Police des cadres ¦ Γραμματοσειρά των πλαισίων ¦ Шрифт на рамките
+Portée ¦ Γέννα ¦ Котило
+Pour la dyslexie : choisis celle qui te va ¦ Για τη δυσλεξία: διάλεξε αυτή που σου ταιριάζει ¦ За дислексия: избери този, който ти подхожда
+Pour quitter ¦ Για έξοδο ¦ За изход
+Pour tout le monde ¦ Για όλους ¦ За всички
+Pratique pour apprendre l’app : plus besoin de passer la souris pour savoir ce que fait chaque bouton. Prend un peu plus de place. ¦ Πρακτικό για να μάθεις την εφαρμογή: δεν χρειάζεται να περάσεις το ποντίκι για να μάθεις τι κάνει κάθε κουμπί. Πιάνει λίγο περισσότερο χώρο. ¦ Удобно за учене на приложението: не е нужно да посочваш с мишката, за да разбереш какво прави всеки бутон. Заема малко повече място.
+Prend de la hauteur ; sans photo, le bandeau prend la couleur principale (Apparence). ¦ Πιάνει ύψος· χωρίς φωτογραφία, η ταινία παίρνει το κύριο χρώμα (Εμφάνιση). ¦ Заема височина; без снимка лентата приема основния цвят (Облик).
+Proposer dans le menu ¦ Πρόταση στο μενού ¦ Предлагай в менюто
+Prénom + nom (JM) ¦ Όνομα + επώνυμο (JM) ¦ Име + фамилия (JM)
+Prénom seulement ¦ Μόνο το μικρό όνομα ¦ Само собственото име
+Présentation (Keynote) ¦ Παρουσίαση (Keynote) ¦ Презентация (Keynote)
+Quand il y a beaucoup de boutons, on ne voit plus lequel est important. ¦ Όταν υπάρχουν πολλά κουμπιά, δεν φαίνεται πια ποιο είναι σημαντικό. ¦ Когато има много бутони, вече не се вижда кой е важен.
+Quand personne ne touche, lancer le diaporama ¦ Όταν κανείς δεν αγγίζει, ξεκίνα την προβολή διαφανειών ¦ Когато никой не докосва, пусни слайдшоуто
+Quand plusieurs personnes se servent de la même tablette. ¦ Όταν πολλά άτομα χρησιμοποιούν το ίδιο tablet. ¦ Когато няколко души ползват един и същ таблет.
+Quelqu’un d’autre de la famille ¦ Κάποιος άλλος από την οικογένεια ¦ Някой друг от семейството
+Qui est-ce ? ¦ Ποιος είναι; ¦ Кой е това?
+Qui regarde ¦ Ποιος βλέπει ¦ Кой гледа
+Qui regarde ? ¦ Ποιος βλέπει; ¦ Кой гледа?
+Qui regarde l’arbre ? ¦ Ποιος βλέπει το δέντρο; ¦ Кой гледа дървото?
+Qui se suivent ¦ Διαδοχικοί ¦ Поредни
+Quitter le mode simple ¦ Έξοδος από την απλή λειτουργία ¦ Изход от опростения режим
+Rattaché à ¦ Συνδεδεμένο με ¦ Свързан с
+Recherche et enquêtes ¦ Έρευνα και έρευνες ¦ Проучване и разследвания
+Reculer le morceau → ¦ Μετακίνηση του κομματιού πιο πίσω → ¦ Премести парчето назад →
+Remettre un réglage exporté (fichier .json) ¦ Επαναφορά μιας ρύθμισης που εξήχθη (αρχείο .json) ¦ Върни експортирана настройка (файл .json)
+Ressemblance des doublons ¦ Ομοιότητα των διπλοτύπων ¦ Сходство на дубликатите
+Rien ne bouge ¦ Τίποτα δεν κινείται ¦ Нищо не се движи
+Récit d’une vie (diaporama tout fait) ¦ Αφήγηση μιας ζωής (έτοιμη προβολή διαφανειών) ¦ Разказ за един живот (готово слайдшоу)
+Réduire les mouvements ¦ Λιγότερες κινήσεις ¦ Намали движенията
+Réglages de base ¦ Βασικές ρυθμίσεις ¦ Основни настройки
+Réglages et export ¦ Ρυθμίσεις και εξαγωγή ¦ Настройки и експорт
+Républicain ¦ Δημοκρατικό ¦ Републикански
+Sans couleur, il faut parfois une seconde de plus pour les reconnaître. ¦ Χωρίς χρώμα, μερικές φορές χρειάζεται ένα δευτερόλεπτο παραπάνω για να τα αναγνωρίσεις. ¦ Без цвят понякога е нужна секунда повече, за да ги разпознаеш.
+Se lit comme un acte ¦ Διαβάζεται σαν πράξη ¦ Чете се като акт
+Ses photos, ceux qui y sont nés ¦ Οι φωτογραφίες του, όσοι γεννήθηκαν εκεί ¦ Снимките му, родените там
+Signatures identifiées ¦ Αναγνωρισμένες υπογραφές ¦ Разпознати подписи
+Son rapide ¦ Γρήγορος ήχος ¦ Бърз звук
+Sortie et démarrage ¦ Έξοδος και εκκίνηση ¦ Изход и стартиране
+Sous la souris ¦ Κάτω από το ποντίκι ¦ Под мишката
+Sous le nom ¦ Κάτω από το όνομα ¦ Под името
+Sous À vérifier, Hors généalogie, Artiste. ¦ Κάτω από τα Για έλεγχο, Εκτός γενεαλογίας, Καλλιτέχνης. ¦ Под За проверка, Извън генеалогията, Артист.
+Sous-titres toujours affichés ¦ Υπότιτλοι πάντα ορατοί ¦ Субтитрите винаги видими
+Studio son ¦ Στούντιο ήχου ¦ Звуково студио
+Style des entrées ¦ Στυλ των εγγραφών ¦ Стил на записите
+Style des fiches ¦ Στυλ των καρτελών ¦ Стил на картоните
+Style « acte ancien » ¦ Στυλ «παλιάς πράξης» ¦ Стил „стар акт“
+Style « carte d’identité » ¦ Στυλ «ταυτότητας» ¦ Стил „лична карта“
+Suit l’accessibilité de l’app ¦ Ακολουθεί την προσβασιμότητα της εφαρμογής ¦ Следва достъпността на приложението
+Sur 1 colonne ¦ Σε 1 στήλη ¦ В 1 колона
+Sur 2 colonnes ¦ Σε 2 στήλες ¦ В 2 колони
+Sur 2 lignes (défaut) ¦ Σε 2 γραμμές (προεπιλογή) ¦ На 2 реда (по подразбиране)
+Sur cet appareil ¦ Σε αυτή τη συσκευή ¦ На това устройство
+Sur l’autre ordinateur : ouvre ¦ Στον άλλο υπολογιστή: άνοιξε ¦ На другия компютър: отвори
+Sur un grand écran, l’œil peut sauter de ligne. ¦ Σε μεγάλη οθόνη, το μάτι μπορεί να πηδήξει γραμμή. ¦ На голям екран окото може да прескочи ред.
+Sur un petit portable, il faut souvent faire défiler. ¦ Σε μικρό φορητό, συχνά χρειάζεται κύλιση. ¦ На малък лаптоп често се налага превъртане.
+Sur un téléphone, la barre du haut est repliée : ces boutons n’y sont pas montrés. ¦ Σε κινητό, η επάνω γραμμή είναι διπλωμένη: αυτά τα κουμπιά δεν εμφανίζονται εκεί. ¦ На телефон горната лента е свита: тези бутони не се показват там.
+Suédois ¦ Σουηδικά ¦ Шведски
+Sépia doux ¦ Απαλή σέπια ¦ Мека сепия
+Ta version ¦ Η έκδοσή σου ¦ Твоята версия
+Taille des entrées ¦ Μέγεθος των εγγραφών ¦ Размер на записите
+Taille des icônes ¦ Μέγεθος των εικονιδίων ¦ Размер на иконите
+Taille des initiales ¦ Μέγεθος των αρχικών ¦ Размер на инициалите
+Taille du texte ¦ Μέγεθος του κειμένου ¦ Размер на текста
+Taille du titre des cadres ¦ Μέγεθος του τίτλου των πλαισίων ¦ Размер на заглавието на рамките
+Tchèque ¦ Τσεχικά ¦ Чешки
+Tes réglages d’accessibilité valent aussi ici ¦ Οι ρυθμίσεις προσβασιμότητάς σου ισχύουν και εδώ ¦ Настройките ти за достъпност важат и тук
+Tester cette sauvegarde ¦ Δοκιμή αυτού του αντιγράφου ασφαλείας ¦ Тествай това резервно копие
+Texte et traits ¦ Κείμενο και γραμμές ¦ Текст и линии
+Thème et couleurs → Taille typographique ¦ Θέμα και χρώματα → Μέγεθος γραμμάτων ¦ Тема и цветове → Размер на шрифта
+Ton prénom ¦ Το όνομά σου ¦ Твоето име
+Touche O pour une nouvelle observation ¦ Πλήκτρο O για νέα παρατήρηση ¦ Клавиш O за ново наблюдение
+Touche de l’outil ¦ Πλήκτρο του εργαλείου ¦ Клавиш на инструмента
+Touche ta photo. L’app dira ensuite « ta mère », « ton petit-fils »… ¦ Άγγιξε τη φωτογραφία σου. Μετά η εφαρμογή θα λέει «η μητέρα σου», «ο εγγονός σου»… ¦ Докосни снимката си. После приложението ще казва „твоята майка“, „твоят внук“…
+Touche un gros bouton pour commencer. ¦ Άγγιξε ένα μεγάλο κουμπί για να ξεκινήσεις. ¦ Докосни голям бутон, за да започнеш.
+Touches déjà prévues dans cet outil ¦ Πλήκτρα που υπάρχουν ήδη σε αυτό το εργαλείο ¦ Клавиши, вече предвидени в този инструмент
+Toujours proposée (la forme de départ) ¦ Πάντα διαθέσιμο (το αρχικό σχήμα) ¦ Винаги предлагана (началната форма)
+Tous, dans l’ordre d’origine ¦ Όλα, με την αρχική σειρά ¦ Всички, в първоначалния ред
+Tout désélectionner ¦ Αποεπιλογή όλων ¦ Махни избора на всички
+Tout d’un coup d’œil ¦ Όλα με μια ματιά ¦ Всичко с един поглед
+Tout le monde ¦ Όλοι ¦ Всички
+Tout seul ¦ Μόνο του ¦ Само
+Tout sélectionner ¦ Επιλογή όλων ¦ Избери всички
+Toute l’app ¦ Όλη η εφαρμογή ¦ Цялото приложение
+Toutes les ¦ Κάθε ¦ На всеки
+Toutes les … heures ¦ Κάθε … ώρες ¦ На всеки … часа
+Traits entre les lignes ¦ Γραμμές ανάμεσα στις σειρές ¦ Линии между редовете
+Trois par ligne ¦ Τρία ανά γραμμή ¦ По три на ред
+Très grande (56 px) ¦ Πολύ μεγάλη (56 px) ¦ Много голям (56 px)
+Très lisible ¦ Πολύ ευανάγνωστο ¦ Много четливо
+Très petite (30 px) ¦ Πολύ μικρή (30 px) ¦ Много малък (30 px)
+Un album ¦ Ένα άλμπουμ ¦ Албум
+Un appui long ne se fait pas par hasard : on ne sort pas par erreur. ¦ Ένα παρατεταμένο πάτημα δεν γίνεται τυχαία: δεν βγαίνεις κατά λάθος. ¦ Дългото натискане не става случайно: не излизаш по грешка.
+Un bord noir va avec les blocs de l’app (tous ont un trait noir de 2 px) ; sans bord, c’est plus léger. Sur les plus petits portraits, le bord s’affine tout seul. ¦ Ένα μαύρο περίγραμμα ταιριάζει με τα μπλοκ της εφαρμογής (όλα έχουν μαύρη γραμμή 2 px)· χωρίς περίγραμμα, είναι πιο ελαφρύ. Στα πιο μικρά πορτρέτα, το περίγραμμα λεπταίνει μόνο του. ¦ Черният ръб върви с блоковете на приложението (всички имат черна линия от 2 px); без ръб е по-леко. При най-малките портрети ръбът изтънява сам.
+Un bouton carré 🧩, dans la colonne des boutons ¦ Ένα τετράγωνο κουμπί 🧩, στη στήλη των κουμπιών ¦ Квадратен бутон 🧩 в колоната с бутоните
+Un bouton qui ne répond pas, un écran bizarre, un message d’erreur ? Décris-le : un rapport technique (sans aucune donnée de ta généalogie) est préparé, tu le relis, puis tu l’envoies par GitHub ou par e-mail. ¦ Ένα κουμπί που δεν ανταποκρίνεται, μια παράξενη οθόνη, ένα μήνυμα σφάλματος; Περίγραψέ το: ετοιμάζεται μια τεχνική αναφορά (χωρίς κανένα δεδομένο της γενεαλογίας σου), τη διαβάζεις και μετά τη στέλνεις μέσω GitHub ή με email. ¦ Бутон, който не реагира, странен екран, съобщение за грешка? Опиши го: подготвя се технически доклад (без никакви данни от генеалогията ти), прочиташ го и после го изпращаш през GitHub или по имейл.
+Un doigt qui tremble touche facilement un bouton de 72 px ou plus (64 px au moins). ¦ Ένα δάχτυλο που τρέμει πατά εύκολα ένα κουμπί 72 px ή μεγαλύτερο (τουλάχιστον 64 px). ¦ Треперещ пръст лесно натиска бутон от 72 px или повече (поне 64 px).
+Un film de famille ¦ Μια οικογενειακή ταινία ¦ Семеен филм
+Un lieu de famille ¦ Ένας οικογενειακός τόπος ¦ Семейно място
+Un mot de la famille ¦ Ένα μήνυμα από την οικογένεια ¦ Послание от семейството
+Un petit jeu avec les portraits ¦ Ένα μικρό παιχνίδι με τα πορτρέτα ¦ Малка игра с портретите
+Un petit portrait au début de chaque ligne ¦ Ένα μικρό πορτρέτο στην αρχή κάθε γραμμής ¦ Малък портрет в началото на всеки ред
+Un peu grande (46 px) ¦ Λίγο μεγάλη (46 px) ¦ Малко голям (46 px)
+Un peu moins « cliquable » au premier regard. ¦ Λίγο λιγότερο «πατήσιμο» με την πρώτη ματιά. ¦ Малко по-малко „щракаемо“ на пръв поглед.
+Un peu petite (38 px) ¦ Λίγο μικρή (38 px) ¦ Малко малък (38 px)
+Un peu « bureau » : moins de caractère que les autres. ¦ Λίγο «γραφείου»: λιγότερος χαρακτήρας από τα άλλα. ¦ Малко „офис“ стил: по-малко характер от другите.
+Un son, une chanson ¦ Ένας ήχος, ένα τραγούδι ¦ Звук, песен
+Un trait épais ressemble aux traits noirs de l’app ; un trait fin fait plus élégant. Seulement pour les icônes au trait. ¦ Μια χοντρή γραμμή μοιάζει με τις μαύρες γραμμές της εφαρμογής· μια λεπτή γραμμή είναι πιο κομψή. Μόνο για τα εικονίδια με περίγραμμα. ¦ Дебелата линия прилича на черните линии на приложението; тънката е по-елегантна. Само за контурните икони.
+Une copie de ta généalogie, faite toute seule, vérifiée, rangée dans le dossier de ton choix. ¦ Ένα αντίγραφο της γενεαλογίας σου, φτιαγμένο αυτόματα, ελεγμένο, αποθηκευμένο στον φάκελο που θα διαλέξεις. ¦ Копие на генеалогията ти, направено автоматично, проверено, прибрано в папка по твой избор.
+Une copie quand tu quittes l’app (ou fermes l’onglet), seulement si quelque chose a changé. ¦ Ένα αντίγραφο όταν βγαίνεις από την εφαρμογή (ή κλείνεις την καρτέλα), μόνο αν κάτι άλλαξε. ¦ Копие, когато излизаш от приложението (или затваряш раздела), само ако нещо се е променило.
+Une grande colonne ¦ Μια μεγάλη στήλη ¦ Една голяма колона
+Une grande partie des formes des tableaux (animaux, métiers, maison, transports, météo, santé…) vient de ¦ Μεγάλο μέρος των σχημάτων των πινάκων ιδεών (ζώα, επαγγέλματα, σπίτι, μεταφορές, καιρός, υγεία…) προέρχεται από ¦ Голяма част от фигурите на дъските (животни, професии, къща, транспорт, време, здраве…) идва от
+Une ombre sous les boutons ¦ Μια σκιά κάτω από τα κουμπιά ¦ Сянка под бутоните
+Une photo ¦ Μια φωτογραφία ¦ Снимка
+Une photo rend la fiche vivante. Sans elle, les initiales prennent sa place (le bandeau prend la couleur principale de l’Apparence). ¦ Μια φωτογραφία ζωντανεύει την καρτέλα. Χωρίς αυτή, τα αρχικά παίρνουν τη θέση της (η ταινία παίρνει το κύριο χρώμα της Εμφάνισης). ¦ Снимката съживява картона. Без нея инициалите заемат мястото ѝ (лентата приема основния цвят от Облик).
+Une phrase écoutée se comprend même quand on lit mal. ¦ Μια φράση που ακούς γίνεται κατανοητή ακόμη κι όταν δυσκολεύεσαι να διαβάσεις. ¦ Изречение, което чуваш, се разбира дори когато четеш трудно.
+Une seule couleur pour tous (comme la fiche) ¦ Ένα μόνο χρώμα για όλους (όπως η καρτέλα) ¦ Един цвят за всички (като картона)
+Une seule lettre, celle du nom (M) ¦ Ένα μόνο γράμμα, του επωνύμου (M) ¦ Само една буква, на фамилията (M)
+Utile quand un petit-enfant joue aussi avec la tablette. Ce n’est pas une vraie protection : il évite seulement de sortir par erreur. ¦ Χρήσιμο όταν ένα εγγόνι παίζει κι αυτό με το tablet. Δεν είναι πραγματική προστασία: απλώς εμποδίζει την έξοδο κατά λάθος. ¦ Полезно, когато и внуче си играе с таблета. Това не е истинска защита: само пречи да излезеш по грешка.
+Utiliser la personne affichée ¦ Χρήση του ατόμου που εμφανίζεται ¦ Използвай показания човек
+Verrouiller / déverrouiller ¦ Κλείδωμα / ξεκλείδωμα ¦ Заключи / отключи
+Vert affaibli (le plus courant de tous). ¦ Αδύναμο πράσινο (το πιο συχνό απ’ όλα). ¦ Отслабено зелено (най-честото от всички).
+Vitesse de la voix ¦ Ταχύτητα της φωνής ¦ Скорост на гласа
+Voir l’aperçu ¦ Δες την προεπισκόπηση ¦ Виж прегледа
+Voix française de l’appareil ¦ Γαλλική φωνή της συσκευής ¦ Френски глас на устройството
+Vu la dernière fois (fiches d’animaux) ¦ Εθεάθη τελευταία φορά (καρτέλες ζώων) ¦ Видяно за последно (картони на животни)
+Zoom de départ ¦ Αρχικό ζουμ ¦ Начален мащаб
+arrête la lecture. ¦ σταματά την ανάγνωση. ¦ спира четенето.
+au-delà de ¦ πέρα από ¦ над
+carré photo, grand nom ¦ τετράγωνη φωτογραφία, μεγάλο όνομα ¦ квадратна снимка, голямо име
+champs rangés, photo d’identité ¦ τακτοποιημένα πεδία, φωτογραφία ταυτότητας ¦ подредени полета, снимка за документи
+chaque ligne dans son cadre ¦ κάθε γραμμή στο πλαίσιό της ¦ всеки ред в своя рамка
+chaque liste garde le sien ¦ κάθε λίστα κρατά τη δική της ¦ всеки списък пази своя
+chaque outil le sien ¦ κάθε εργαλείο τη δική του ¦ всеки инструмент своя
+coins arrondis, ombres légères ¦ στρογγυλές γωνίες, ελαφριές σκιές ¦ заоблени ъгли, леки сенки
+dans LCNDA (écran de démarrage → Importer un fichier, ou une nouvelle généalogie vide), puis ici même, choisis le même dossier. ¦ στο LCNDA (οθόνη εκκίνησης → Εισαγωγή αρχείου, ή μια νέα κενή γενεαλογία), και μετά εδώ, διάλεξε τον ίδιο φάκελο. ¦ в LCNDA (начален екран → Импортирай файл или нова празна генеалогия), после точно тук избери същата папка.
+de départ ¦ αρχικό ¦ начален
+dossier partagé ¦ κοινόχρηστος φάκελος ¦ споделена папка
+du nom ¦ του ονόματος ¦ на името
+décédé ¦ αποβιώσας ¦ починал
+décédée ¦ αποβιώσασα ¦ починала
+ex. Dimensions, Technique, Lieu de conservation ¦ π.χ. Διαστάσεις, Τεχνική, Τόπος φύλαξης ¦ напр. Размери, Техника, Място на съхранение
+icônes fines, une seule couleur ¦ λεπτά εικονίδια, ένα μόνο χρώμα ¦ тънки икони, един цвят
+impossible au-delà de ¦ αδύνατο πέρα από ¦ невъзможно над
+juste au-dessus de la liste ¦ ακριβώς πάνω από τη λίστα ¦ точно над списъка
+la Densité ne s’y ajoute pas ¦ η Πυκνότητα δεν προστίθεται εκεί ¦ Плътността не се добавя там
+la liste des projets ¦ τη λίστα των έργων ¦ списъка с проекти
+le numéro dans un carré ¦ ο αριθμός σε τετράγωνο ¦ номерът в квадрат
+là où il était ¦ εκεί που ήταν ¦ там, където беше
+l’entrée choisie dépasse ¦ η επιλεγμένη εγγραφή ξεχωρίζει ¦ избраният запис изпъква
+on passe par le bloc « 👁 Observations » ¦ περνάμε από το μπλοκ «👁 Παρατηρήσεις» ¦ минава се през блока „👁 Наблюдения“
+papier, phrase d’état civil ¦ χαρτί, φράση ληξιαρχείου ¦ хартия, изречение от гражданското състояние
+par défaut ¦ προεπιλογή ¦ по подразбиране
+plus d’espace ¦ περισσότερος χώρος ¦ повече място
+plus d’espace partout ¦ περισσότερος χώρος παντού ¦ повече място навсякъде
+règle tout d’un coup ; tu peux ensuite changer chaque ligne (« retouché » s’affiche). ¦ ρυθμίζει τα πάντα μονομιάς· μετά μπορείς να αλλάξεις κάθε γραμμή (εμφανίζεται «τροποποιημένο»). ¦ настройва всичко наведнъж; после можеш да промениш всеки ред (показва се „променено“).
+sans icône ¦ χωρίς εικονίδιο ¦ без икона
+se règle dans ¦ ρυθμίζεται στο ¦ настройва се в
+serré, plus de lignes ¦ σφιχτό, περισσότερες γραμμές ¦ сбито, повече редове
+sous l’en-tête de la fiche, replié ¦ κάτω από την κεφαλίδα της καρτέλας, διπλωμένο ¦ под заглавната част на картона, свито
+sur une ligne ¦ σε μία γραμμή ¦ на един ред
+taille du texte ¦ μέγεθος του κειμένου ¦ размер на текста
+tout dans un cadre ¦ όλα σε ένα πλαίσιο ¦ всичко в една рамка
+tout reste comme avant ¦ όλα μένουν όπως πριν ¦ всичко остава както преди
+trait pour agir, émoji pour les rubriques ¦ περίγραμμα για τις ενέργειες, emoji για τις ενότητες ¦ контур за действията, емоджи за разделите
+traits fins, grain du papier ¦ λεπτές γραμμές, κόκκος χαρτιού ¦ тънки линии, хартиена текстура
+traits épais, ombres franches ¦ χοντρές γραμμές, έντονες σκιές ¦ дебели линии, резки сенки
+un seul cadre, lignes fines ¦ ένα μόνο πλαίσιο, λεπτές γραμμές ¦ една рамка, тънки линии
+un trait fin, fond transparent ¦ μια λεπτή γραμμή, διάφανο φόντο ¦ тънка линия, прозрачен фон
+« Calendrier de cette date » ¦ «Ημερολόγιο αυτής της ημερομηνίας» ¦ „Календар на тази дата“
+« Liste | Fiches » ¦ «Λίστα | Κάρτες» ¦ „Списък | Картони“
+« Retirer » cache la photo du mode simple seulement : elle reste dans tes médias. ¦ Το «Αφαίρεση» κρύβει τη φωτογραφία μόνο από την απλή λειτουργία: μένει στα πολυμέσα σου. ¦ „Премахни“ скрива снимката само от опростения режим: тя остава в медиите ти.
+« ＋ Nouvelle observation · vu il y a 2 j » ¦ «＋ Νέα παρατήρηση · εθεάθη πριν από 2 ημ.» ¦ „＋ Ново наблюдение · видяно преди 2 дни“
+À chaque ouverture ¦ Σε κάθε άνοιγμα ¦ При всяко отваряне
+À droite, les unes sous les autres (comme avant) ¦ Δεξιά, το ένα κάτω από το άλλο (όπως πριν) ¦ Вдясно, един под друг (както преди)
+À vérifier, branche maternelle, acte illisible… ¦ Για έλεγχο, μητρικός κλάδος, δυσανάγνωστη πράξη… ¦ За проверка, майчин клон, нечетлив акт…
+À écouter ¦ Για ακρόαση ¦ За слушане
+Âge de la mère 🔴 ¦ Ηλικία της μητέρας 🔴 ¦ Възраст на майката 🔴
+Âge de la mère 🟠 ¦ Ηλικία της μητέρας 🟠 ¦ Възраст на майката 🟠
+Âge du père 🔴 ¦ Ηλικία του πατέρα 🔴 ¦ Възраст на бащата 🔴
+Âge du père 🟠 ¦ Ηλικία του πατέρα 🟠 ¦ Възраст на бащата 🟠
+Âge minimum au mariage ¦ Ελάχιστη ηλικία γάμου ¦ Минимална възраст за брак
+Ère ¦ Χρονολογία ¦ Ера
+Ère d’Espagne ¦ Ισπανική χρονολογία ¦ Испанска ера
+Écart entre deux naissances ¦ Διάστημα ανάμεσα σε δύο γεννήσεις ¦ Разлика между две раждания
+Écouter ¦ Άκου ¦ Слушай
+Édition ¦ Επεξεργασία ¦ Редакция
+Émojis ¦ Emoji ¦ Емоджи
+Énorme (62 px) ¦ Τεράστια (62 px) ¦ Огромен (62 px)
+Épaisseur des traits ¦ Πάχος των γραμμών ¦ Дебелина на линиите
+Épaisseur du trait ¦ Πάχος της γραμμής ¦ Дебелина на линията
+Éteint : seulement la pastille « Vu hier ». ¦ Ανενεργό: μόνο το σήμα «Εθεάθη χθες». ¦ Изключено: само значката „Видяно вчера“.
+Éthiopien ¦ Αιθιοπικό ¦ Етиопски
+Étoile ¦ Αστέρι ¦ Звезда
+à vérifier au-delà de ¦ για έλεγχο πέρα από ¦ за проверка над
+← Avancer le morceau ¦ ← Μετακίνηση του κομματιού πιο μπροστά ¦ ← Премести парчето напред
+↗ Voir les versions publiées ¦ ↗ Δες τις εκδόσεις που κυκλοφόρησαν ¦ ↗ Виж публикуваните версии
+↺ Remettre seulement les groupes ¦ ↺ Επαναφορά μόνο των ομάδων ¦ ↺ Върни само групите
+↻ Relancer le contrôle ¦ ↻ Επανεκκίνηση του ελέγχου ¦ ↻ Пусни проверката отново
+▶ Ouvrir le mode simple ¦ ▶ Άνοιγμα της απλής λειτουργίας ¦ ▶ Отвори опростения режим
+♿ Voir les réglages de toute l’app ¦ ♿ Δες τις ρυθμίσεις όλης της εφαρμογής ¦ ♿ Виж настройките на цялото приложение
+⤓ Exporter ce réglage ¦ ⤓ Εξαγωγή αυτής της ρύθμισης ¦ ⤓ Експортирай тази настройка
+＋ Créer une forme… ¦ ＋ Δημιουργία σχήματος… ¦ ＋ Създай фигура…
+＋ Nouvelle branche ¦ ＋ Νέος κλάδος ¦ ＋ Нов клон
+＋ Nouvelle forme… ¦ ＋ Νέο σχήμα… ¦ ＋ Нова фигура…
+＋ Nouvelle observation (fiches d’animaux) ¦ ＋ Νέα παρατήρηση (καρτέλες ζώων) ¦ ＋ Ново наблюдение (картони на животни)
+＋ Nouvelle étiquette ¦ ＋ Νέα ετικέτα ¦ ＋ Нов етикет
+🌳 L’arbre ¦ 🌳 Το δέντρο ¦ 🌳 Дървото
+🎂 Âges ¦ 🎂 Ηλικίες ¦ 🎂 Възрасти
+🎤 Dictée vocale ¦ 🎤 Φωνητική υπαγόρευση ¦ 🎤 Гласова диктовка
+🎯 Élément choisi ¦ 🎯 Επιλεγμένο στοιχείο ¦ 🎯 Избран елемент
+👁 Aperçu : le même réglage partout ¦ 👁 Προεπισκόπηση: η ίδια ρύθμιση παντού ¦ 👁 Преглед: една и съща настройка навсякъде
+👁 Aperçu vivant ¦ 👁 Ζωντανή προεπισκόπηση ¦ 👁 Преглед на живо
+👁 Essayer ici ¦ 👁 Δοκίμασε εδώ ¦ 👁 Опитай тук
+👁＋ Observation · 🩺＋ Santé · 📍 Trajet GPS · 🔖 Marque ¦ 👁＋ Παρατήρηση · 🩺＋ Υγεία · 📍 Διαδρομή GPS · 🔖 Σημάδι ¦ 👁＋ Наблюдение · 🩺＋ Здраве · 📍 GPS маршрут · 🔖 Марка
+👤 Sur la fiche ¦ 👤 Στην καρτέλα ¦ 👤 В картона
+👥 Les personnes ¦ 👥 Τα άτομα ¦ 👥 Хората
+📊 Moyennes de la famille ¦ 📊 Μέσοι όροι της οικογένειας ¦ 📊 Средни стойности на семейството
+📜 Sépia ¦ 📜 Σέπια ¦ 📜 Сепия
+📦 Quoi ¦ 📦 Τι ¦ 📦 Какво
+📷 Les photos ¦ 📷 Οι φωτογραφίες ¦ 📷 Снимките
+🔗 Relier ce dossier ¦ 🔗 Σύνδεση αυτού του φακέλου ¦ 🔗 Свържи тази папка
+🔴 moins de ¦ 🔴 λιγότερο από ¦ 🔴 по-малко от
+🔴 naissance plus tard que ¦ 🔴 γέννηση αργότερα από ¦ 🔴 раждане по-късно от
+🔷 Formes des avatars ¦ 🔷 Σχήματα των avatar ¦ 🔷 Форми на аватарите
+🖨 Imprimer la liste ¦ 🖨 Εκτύπωση της λίστας ¦ 🖨 Печат на списъка
+🗂 Les copies ¦ 🗂 Τα αντίγραφα ¦ 🗂 Копията
+🗑 Enlever l’élément choisi ¦ 🗑 Αφαίρεση του επιλεγμένου στοιχείου ¦ 🗑 Махни избрания елемент
+🟠 au-delà de ¦ 🟠 πέρα από ¦ 🟠 над
+🟡 au-delà de ¦ 🟡 πέρα από ¦ 🟡 над
+🟡 plus de ¦ 🟡 περισσότερο από ¦ 🟡 повече от
+🟡 écart de plus de ¦ 🟡 διαφορά μεγαλύτερη από ¦ 🟡 разлика над
+🦮 Lecteur d’écran ¦ 🦮 Αναγνώστης οθόνης ¦ 🦮 Екранен четец
+🪙 Convertisseur d’autrefois ¦ 🪙 Μετατροπέας του παλιού καιρού ¦ 🪙 Конвертор от едно време
+C’est ton anniversaire ! ¦ Είναι τα γενέθλιά σου! ¦ Днес е рожденият ти ден!
+{name} a {n} ans aujourd’hui ! ¦ Ο/Η {name} κλείνει {n} χρόνια σήμερα! ¦ {name} навършва {n} години днес!
+Il est né {details}. ¦ Γεννήθηκε {details}. ¦ Той е роден {details}.
+Elle est née {details}. ¦ Γεννήθηκε {details}. ¦ Тя е родена {details}.
+{a} et {b} se sont mariés il y a {n} ans ¦ Ο/Η {a} και ο/η {b} παντρεύτηκαν πριν από {n} χρόνια ¦ {a} и {b} са се оженили преди {n} години
+{name} aurait eu {n} ans aujourd’hui ¦ Ο/Η {name} θα έκλεινε {n} χρόνια σήμερα ¦ {name} щеше да навърши {n} години днес
+On se souvient de {name} ¦ Θυμόμαστε τον/την {name} ¦ Спомняме си за {name}
+Elle nous a quittés {details}, il y a {n} ans. ¦ Μας άφησε {details}, πριν από {n} χρόνια. ¦ Тя ни напусна {details}, преди {n} години.
+Il nous a quittés {details}, il y a {n} ans. ¦ Μας άφησε {details}, πριν από {n} χρόνια. ¦ Той ни напусна {details}, преди {n} години.
+ton anniversaire ¦ τα γενέθλιά σου ¦ твоят рожден ден
+Elle aurait eu {n} ans ¦ Θα έκλεινε {n} χρόνια ¦ Тя щеше да навърши {n} години
+Il aurait eu {n} ans ¦ Θα έκλεινε {n} χρόνια ¦ Той щеше да навърши {n} години
+Tu auras {n} ans ¦ Θα κλείσεις {n} χρόνια ¦ Ще навършиш {n} години
+Elle aura {n} ans ¦ Θα κλείσει {n} χρόνια ¦ Тя ще навърши {n} години
+Il aura {n} ans ¦ Θα κλείσει {n} χρόνια ¦ Той ще навърши {n} години
+Mariés ici ¦ Παντρεύτηκαν εδώ ¦ Оженили се тук
+Né·es ici ¦ Γεννήθηκαν εδώ ¦ Родени тук
+Mort·es ici ¦ Πέθαναν εδώ ¦ Починали тук
+Bravo ! C’est {name} ({rel}). ¦ Μπράβο! Είναι ο/η {name} ({rel}). ¦ Браво! Това е {name} ({rel}).
+Bravo ! C’est {name}. ¦ Μπράβο! Είναι ο/η {name}. ¦ Браво! Това е {name}.
+toi ¦ εσύ ¦ ти
+Avec toi ({n}) ¦ Μαζί σου ({n}) ¦ С теб ({n})
+Ses photos ({n}) ¦ Οι φωτογραφίες του/της ({n}) ¦ Снимките ({n})
+Sur la photo : {names}. ¦ Στη φωτογραφία: {names}. ¦ На снимката: {names}.
+=personne trouvée ¦ άτομο βρέθηκε|άτομα βρέθηκαν ¦ намерен човек|намерени души
+Icône du gros bouton ¦ Εικονίδιο του μεγάλου κουμπιού ¦ Икона на големия бутон
+Un cadre ¦ Ένα πλαίσιο ¦ Рамка
+Écris le mot ¦ Γράψε το μήνυμα ¦ Напиши посланието
+Choisis la maison ¦ Διάλεξε το σπίτι ¦ Избери къщата
+Choisis la personne ¦ Διάλεξε το άτομο ¦ Избери човека
+Choisis la photo ¦ Διάλεξε τη φωτογραφία ¦ Избери снимката
+Choisis les photos ¦ Διάλεξε τις φωτογραφίες ¦ Избери снимките
+Choisis le film ¦ Διάλεξε την ταινία ¦ Избери филма
+Choisis le son ¦ Διάλεξε τον ήχο ¦ Избери звука
+Choisis le lieu ¦ Διάλεξε τον τόπο ¦ Избери мястото
+Écris le numéro ¦ Γράψε τον αριθμό ¦ Напиши номера
+Sa fiche ¦ Η καρτέλα του/της ¦ Картонът
+Un mot ¦ Ένα μήνυμα ¦ Послание
+Un film ¦ Μια ταινία ¦ Филм
+Un lieu ¦ Ένας τόπος ¦ Място
+Un instant… ¦ Μια στιγμή… ¦ Момент…
+Sans prénom ¦ Χωρίς όνομα ¦ Без име
+Un instant, on prépare l’arbre… ¦ Μια στιγμή, ετοιμάζουμε το δέντρο… ¦ Момент, подготвяме дървото…
+Un instant, on construit la maison… ¦ Μια στιγμή, χτίζουμε το σπίτι… ¦ Момент, строим къщата…
+La maison n’a pas pu être montrée. ¦ Δεν ήταν δυνατό να εμφανιστεί το σπίτι. ¦ Къщата не можа да бъде показана.
+Monter d’un étage ¦ Ανέβα έναν όροφο ¦ Качи се един етаж
+Descendre d’un étage ¦ Κατέβα έναν όροφο ¦ Слез един етаж
+Voir toute la maison ¦ Δες όλο το σπίτι ¦ Виж цялата къща
+Plus près ¦ Πιο κοντά ¦ По-близо
+Plus loin ¦ Πιο μακριά ¦ По-далеч
+La visite ¦ Η περιήγηση ¦ Обиколката
+Étage ¦ Όροφος ¦ Етаж
+Il se passe quelque chose aujourd’hui ! ¦ Κάτι συμβαίνει σήμερα! ¦ Днес се случва нещо!
+Continue… encore un peu ¦ Συνέχισε… λίγο ακόμη ¦ Продължи… още малко
+On ne connaît pas encore ses parents ¦ Δεν ξέρουμε ακόμη τους γονείς του/της ¦ Още не знаем родителите му
+Voir sa fiche ¦ Δες την καρτέλα του/της ¦ Виж картона
+Pas d’enfants connus ¦ Κανένα γνωστό παιδί ¦ Няма известни деца
+Plus gros ¦ Πιο μεγάλα ¦ По-едро
+Plus de monde ¦ Περισσότεροι άνθρωποι ¦ Повече хора
+Photo d’avant ¦ Φωτογραφία από παλιά ¦ Снимка отпреди
+Cacher les noms ¦ Απόκρυψη των ονομάτων ¦ Скрий имената
+Qui est là ? ¦ Ποιος είναι εδώ; ¦ Кой е тук?
+Arrêter le défilement ¦ Σταμάτα την κύλιση ¦ Спри превъртането
+Défilement tout seul ¦ Αυτόματη κύλιση ¦ Автоматично превъртане
+Ses maris ¦ Οι σύζυγοί της ¦ Съпрузите ѝ
+Son mari ¦ Ο σύζυγός της ¦ Съпругът ѝ
+Ses femmes ¦ Οι σύζυγοί του ¦ Съпругите му
+Sa femme ¦ Η σύζυγός του ¦ Съпругата му
+Son conjoint ¦ Ο/Η σύντροφός του/της ¦ Партньорът
+Sa sœur ¦ Η αδελφή του/της ¦ Сестра му/ѝ
+Son frère ¦ Ο αδελφός του/της ¦ Брат му/ѝ
+Ses frères et sœurs ¦ Τα αδέλφια του/της ¦ Братята и сестрите
+Écouter son histoire ¦ Άκου την ιστορία του/της ¦ Чуй историята
+Voir dans l’arbre ¦ Δες στο δέντρο ¦ Виж в дървото
+Ses parents ¦ Οι γονείς του/της ¦ Родителите
+Son parent ¦ Ο γονέας του/της ¦ Родителят
+Ses enfants ¦ Τα παιδιά του/της ¦ Децата
+Son enfant ¦ Το παιδί του/της ¦ Детето
+Par famille ¦ Ανά οικογένεια ¦ По семейство
+Par prénom ¦ Ανά μικρό όνομα ¦ По собствено име
+La famille d’aujourd’hui ¦ Η σημερινή οικογένεια ¦ Днешното семейство
+Touche la première lettre du prénom. ¦ Άγγιξε το πρώτο γράμμα του ονόματος. ¦ Докосни първата буква на името.
+Touche la personne qui regarde. ¦ Άγγιξε το άτομο που βλέπει. ¦ Докосни човека, който гледа.
+Tape un prénom ou un nom ¦ Γράψε ένα όνομα ή ένα επώνυμο ¦ Напиши име или фамилия
+Effacer une lettre ¦ Σβήσε ένα γράμμα ¦ Изтрий буква
+J’écoute… ¦ Ακούω… ¦ Слушам…
+Je n’ai pas bien entendu. Réessaie, ou utilise le clavier. ¦ Δεν άκουσα καλά. Δοκίμασε ξανά ή χρησιμοποίησε το πληκτρολόγιο. ¦ Не чух добре. Опитай отново или използвай клавиатурата.
+La dictée n’a pas marché. Utilise le clavier. ¦ Η υπαγόρευση δεν λειτούργησε. Χρησιμοποίησε το πληκτρολόγιο. ¦ Диктуването не проработи. Използвай клавиатурата.
+Voir la photo ¦ Δες τη φωτογραφία ¦ Виж снимката
+🎈 Bientôt ¦ 🎈 Σύντομα ¦ 🎈 Скоро
+Dis d’abord qui regarde : l’app montrera ta famille. ¦ Πες πρώτα ποιος βλέπει: η εφαρμογή θα δείξει την οικογένειά σου. ¦ Първо кажи кой гледа: приложението ще покаже семейството ти.
+Tes conjoints ¦ Οι σύζυγοί σου ¦ Твоите съпрузи
+Ta femme ¦ Η γυναίκα σου ¦ Твоята съпруга
+Ton mari ¦ Ο άντρας σου ¦ Твоят съпруг
+Tes parents ¦ Οι γονείς σου ¦ Твоите родители
+Tes grands-parents ¦ Ο παππούς και η γιαγιά σου ¦ Твоите баби и дядовци
+Tes enfants ¦ Τα παιδιά σου ¦ Твоите деца
+Tes petits-enfants ¦ Τα εγγόνια σου ¦ Твоите внуци
+Tes arrière-petits-enfants ¦ Τα δισέγγονά σου ¦ Твоите правнуци
+Personne n’est encore relié dans l’arbre. ¦ Κανείς δεν είναι ακόμη συνδεδεμένος στο δέντρο. ¦ Още никой не е свързан в дървото.
+Ton anniversaire ¦ Τα γενέθλιά σου ¦ Твоят рожден ден
+Les anniversaires qui arrivent ¦ Τα γενέθλια που έρχονται ¦ Предстоящите рождени дни
+Pas de date de naissance connue pour l’instant. ¦ Καμία γνωστή ημερομηνία γέννησης προς το παρόν. ¦ Засега няма известна дата на раждане.
+Voir les photos ¦ Δες τις φωτογραφίες ¦ Виж снимките
+Il faut au moins trois portraits pour jouer. ¦ Χρειάζονται τουλάχιστον τρία πορτρέτα για να παίξεις. ¦ За да играеш, са нужни поне три портрета.
+Un autre portrait ¦ Άλλο πορτρέτο ¦ Друг портрет
+Écouter l’heure ¦ Άκου την ώρα ¦ Чуй колко е часът
+Écouter le numéro ¦ Άκου τον αριθμό ¦ Чуй номера
+Tape le code pour quitter ¦ Γράψε τον κωδικό για έξοδο ¦ Въведи кода за изход
+Arrêter ¦ Σταμάτα ¦ Спри
+Les gros boutons : avancer, reculer, tourner. On passe par les portes. ¦ Τα μεγάλα κουμπιά: μπροστά, πίσω, στροφή. Περνάμε από τις πόρτες. ¦ Големите бутони: напред, назад, завой. Минава се през вратите.
+On voit déjà le plus de monde possible. ¦ Φαίνονται ήδη όσο το δυνατόν περισσότεροι άνθρωποι. ¦ Вече се виждат възможно най-много хора.
+Pas de frère ou de sœur après. ¦ Κανένας αδελφός ή αδελφή μετά. ¦ Няма брат или сестра след това.
+Pas de frère ou de sœur avant. ¦ Κανένας αδελφός ή αδελφή πριν. ¦ Няма брат или сестра преди това.
+Mode simple quitté. Tu retrouves l’app normale. ¦ Βγήκες από την απλή λειτουργία. Επιστρέφεις στην κανονική εφαρμογή. ¦ Излезе от опростения режим. Връщаш се към нормалното приложение.
+Première fois : vérifie ces réglages, puis « ▶ Ouvrir le mode simple ». ¦ Πρώτη φορά: έλεγξε αυτές τις ρυθμίσεις και μετά «▶ Άνοιγμα της απλής λειτουργίας». ¦ Първи път: провери тези настройки, после „▶ Отвори опростения режим“.
+▶ Démarrer le mode simple ¦ ▶ Έναρξη της απλής λειτουργίας ¦ ▶ Стартирай опростения режим
+⚙️ Préparer ¦ ⚙️ Προετοιμασία ¦ ⚙️ Подготви
+Ta couleur ¦ Το χρώμα σου ¦ Твоят цвят
+La personne ¦ Το άτομο ¦ Човекът
+⚠️ Pas encore de photo de cette personne : le cadre est caché ¦ ⚠️ Δεν υπάρχει ακόμη φωτογραφία αυτού του ατόμου: το πλαίσιο είναι κρυφό ¦ ⚠️ Още няма снимка на този човек: рамката е скрита
+Écrite toute seule (nombre de photos, souvenirs du jour) ¦ Γράφεται αυτόματα (αριθμός φωτογραφιών, αναμνήσεις της ημέρας) ¦ Пише се автоматично (брой снимки, спомени за деня)
+Le mot ¦ Το μήνυμα ¦ Посланието
+Icône du cadre ¦ Εικονίδιο του πλαισίου ¦ Икона на рамката
+↺ Remettre ce cadre comme au départ ¦ ↺ Επαναφορά αυτού του πλαισίου στην αρχική κατάσταση ¦ ↺ Върни тази рамка както в началото
+Retirer ce cadre ¦ Αφαίρεση αυτού του πλαισίου ¦ Премахни тази рамка
+La photo ¦ Η φωτογραφία ¦ Снимката
+Le film ¦ Η ταινία ¦ Филмът
+Le son ¦ Ο ήχος ¦ Звукът
+Le lieu ¦ Ο τόπος ¦ Мястото
+Choisis un lieu… ¦ Διάλεξε έναν τόπο… ¦ Избери място…
+Aucun lieu dans l’arbre pour l’instant (naissances, mariages, photos). ¦ Κανένας τόπος στο δέντρο προς το παρόν (γεννήσεις, γάμοι, φωτογραφίες). ¦ Засега няма места в дървото (раждания, бракове, снимки).
+Le numéro ¦ Ο αριθμός ¦ Номерът
+Montre la famille de la personne qui regarde (ses parents, ses enfants, ses petits-enfants…). ¦ Δείχνει την οικογένεια του ατόμου που βλέπει (τους γονείς, τα παιδιά, τα εγγόνια του…). ¦ Показва семейството на човека, който гледа (родителите, децата, внуците му…).
+Les anniversaires des vivants, du plus proche au plus lointain. ¦ Τα γενέθλια των ζωντανών, από το πιο κοντινό στο πιο μακρινό. ¦ Рождените дни на живите, от най-близкия до най-далечния.
+Un portrait, trois prénoms : il faut trouver le bon. Il faut au moins trois portraits. ¦ Ένα πορτρέτο, τρία ονόματα: πρέπει να βρεις το σωστό. Χρειάζονται τουλάχιστον τρία πορτρέτα. ¦ Един портрет, три имена: трябва да намериш правилното. Нужни са поне три портрета.
+Toutes les photos, dans le désordre. ¦ Όλες οι φωτογραφίες, ανακατεμένες. ¦ Всички снимки, разбъркани.
+Propre au mode simple ¦ Μόνο για την απλή λειτουργία ¦ Само за опростения режим
+✕ Fermer l’essai ¦ ✕ Κλείσιμο της δοκιμής ¦ ✕ Затвори пробата
+Daltonisme propre au mode simple ¦ Αχρωματοψία μόνο για την απλή λειτουργία ¦ Цветна слепота само за опростения режим
+Contraste fort dans le mode simple ¦ Έντονη αντίθεση στην απλή λειτουργία ¦ Силен контраст в опростения режим
+Moins d’animations dans le mode simple ¦ Λιγότερα κινούμενα εφέ στην απλή λειτουργία ¦ По-малко анимации в опростения режим
+✓ Appliqué ¦ ✓ Εφαρμόστηκε ¦ ✓ Приложено
+Personne de l’arbre ¦ Άτομο του δέντρου ¦ Човек от дървото
+Le contraste fort est allumé : les couleurs choisies ici reviendront quand tu l’éteindras. ¦ Η έντονη αντίθεση είναι ενεργή: τα χρώματα που διάλεξες εδώ θα επανέλθουν όταν την απενεργοποιήσεις. ¦ Силният контраст е включен: избраните тук цветове ще се върнат, когато го изключиш.
+✓ très lisible ¦ ✓ πολύ ευανάγνωστο ¦ ✓ много четливо
+Jamais moins de 22 px. ¦ Ποτέ λιγότερο από 22 px. ¦ Никога под 22 px.
+Comme l’app ¦ Όπως η εφαρμογή ¦ Като приложението
+↺ Remettre la disposition comme au départ ¦ ↺ Επαναφορά της διάταξης στην αρχική κατάσταση ¦ ↺ Върни подредбата както в началото
+ℹ️ Le « mode confidentialité » de l’app est allumé : les vivants sont montrés par leur prénom seulement. ¦ ℹ️ Η «λειτουργία απορρήτου» της εφαρμογής είναι ενεργή: οι ζωντανοί εμφανίζονται μόνο με το μικρό τους όνομα. ¦ ℹ️ „Режимът за поверителност“ на приложението е включен: живите се показват само със собственото си име.
+Les branches apparaîtront quand l’arbre sera lu. ¦ Οι κλάδοι θα εμφανιστούν όταν διαβαστεί το δέντρο. ¦ Клоновете ще се появят, когато дървото бъде прочетено.
+Remettre dans le mode simple ¦ Επαναφορά στην απλή λειτουργία ¦ Върни в опростения режим
+🔒 Un code est enregistré (il est gardé caché, même pour l’app). Tape 4 chiffres pour le changer. ¦ 🔒 Έχει αποθηκευτεί κωδικός (μένει κρυφός, ακόμη και για την εφαρμογή). Γράψε 4 ψηφία για να τον αλλάξεις. ¦ 🔒 Има запазен код (пази се скрит, дори от приложението). Въведи 4 цифри, за да го смениш.
+Coupé : cet appareil garde ses propres réglages du mode simple. ¦ Ανενεργό: αυτή η συσκευή κρατά τις δικές της ρυθμίσεις της απλής λειτουργίας. ¦ Изключено: това устройство пази собствените си настройки на опростения режим.
+⚠️ À corriger ¦ ⚠️ Για διόρθωση ¦ ⚠️ За поправка
+⚠️ Pas assez lisible ¦ ⚠️ Όχι αρκετά ευανάγνωστο ¦ ⚠️ Недостатъчно четливо
+Essai fermé : c’est ainsi qu’on quitte le mode simple. ¦ Η δοκιμή έκλεισε: έτσι βγαίνεις από την απλή λειτουργία. ¦ Пробата е затворена: така се излиза от опростения режим.
+La photo du gros bouton ¦ Η φωτογραφία του μεγάλου κουμπιού ¦ Снимката на големия бутон
+Les photos du gros bouton ¦ Οι φωτογραφίες του μεγάλου κουμπιού ¦ Снимките на големия бутон
+Le film du gros bouton ¦ Η ταινία του μεγάλου κουμπιού ¦ Филмът на големия бутон
+Le son du gros bouton ¦ Ο ήχος του μεγάλου κουμπιού ¦ Звукът на големия бутон
+La police des gros boutons ¦ Η γραμματοσειρά των μεγάλων κουμπιών ¦ Шрифтът на големите бутони
+La police du mode simple ¦ Η γραμματοσειρά της απλής λειτουργίας ¦ Шрифтът на опростения режим
+Il faut garder au moins un gros bouton. ¦ Πρέπει να μείνει τουλάχιστον ένα μεγάλο κουμπί. ¦ Трябва да остане поне един голям бутон.
+Code de sortie enregistré (gardé caché). ¦ Ο κωδικός εξόδου αποθηκεύτηκε (μένει κρυφός). ¦ Кодът за изход е запазен (пази се скрит).
+Retour à l’écran d’avant ¦ Επιστροφή στην προηγούμενη οθόνη ¦ Обратно към предишния екран
+Âges ¦ Ηλικίες ¦ Възрасти
+Lieux mal placés ¦ Λάθος τοποθετημένοι τόποι ¦ Грешно поставени места
+Baptême loin ¦ Βάπτιση μακριά ¦ Далечно кръщене
+Lieux contradictoires ¦ Αντιφατικοί τόποι ¦ Противоречиви места
+une mauvaise année de décès (1862 au lieu de 1882 ?), ou un homonyme pris pour le père. Regarde l’acte de décès du père. ¦ λάθος έτος θανάτου (1862 αντί για 1882;), ή ένας συνονόματος που θεωρήθηκε πατέρας. Κοίτα την πράξη θανάτου του πατέρα. ¦ грешна година на смърт (1862 вместо 1882?) или съименник, взет за бащата. Виж акта за смърт на бащата.
+une erreur de date, ou la mère confondue avec une homonyme (une tante, une cousine). Regarde l’acte de naissance de l’enfant. ¦ λάθος ημερομηνία, ή η μητέρα μπερδεμένη με μια συνονόματη (θεία, ξαδέρφη). Κοίτα την πράξη γέννησης του παιδιού. ¦ грешка в датата или майката е объркана със съименница (леля, братовчедка). Виж акта за раждане на детето.
+une génération confondue (la grand-mère prise pour la mère), ou une année mal lue. ¦ μπερδεμένη γενιά (η γιαγιά θεωρήθηκε μητέρα), ή ένα έτος που διαβάστηκε λάθος. ¦ объркано поколение (бабата взета за майката) или грешно разчетена година.
+une génération sautée, ou une année mal lue. ¦ μια γενιά που παραλείφθηκε, ή ένα έτος που διαβάστηκε λάθος. ¦ пропуснато поколение или грешно разчетена година.
+une mauvaise date de décès, ou le mariage d’un homonyme. ¦ λάθος ημερομηνία θανάτου, ή ο γάμος ενός συνονόματου. ¦ грешна дата на смърт или бракът на съименник.
+deux dates inversées, ou une année mal recopiée. ¦ δύο ημερομηνίες ανάποδα, ή ένα έτος που αντιγράφηκε λάθος. ¦ две разменени дати или грешно преписана година.
+un chiffre mal lu (31 au lieu de 21) ou un mois mal recopié. ¦ ένα ψηφίο που διαβάστηκε λάθος (31 αντί για 21) ή ένας μήνας που αντιγράφηκε λάθος. ¦ грешно разчетена цифра (31 вместо 21) или грешно преписан месец.
+la naissance d’un parent prise pour la sienne, ou un homonyme. ¦ η γέννηση ενός γονέα θεωρήθηκε δική του, ή ένας συνονόματος. ¦ раждането на родител е взето за неговото или съименник.
+des jumeaux mal datés, ou un enfant rattaché aux mauvais parents. ¦ δίδυμα με λάθος ημερομηνία, ή ένα παιδί συνδεδεμένο με λάθος γονείς. ¦ близнаци с грешна дата или дете, свързано с грешни родители.
+la même personne saisie deux fois : compare les deux fiches avant de les fusionner. ¦ το ίδιο άτομο καταχωρίστηκε δύο φορές: σύγκρινε τις δύο καρτέλες πριν τις συγχωνεύσεις. ¦ същият човек е въведен два пъти: сравни двата картона, преди да ги слееш.
+une commune homonyme d’un autre département, ou des coordonnées inversées. ¦ ένας συνώνυμος δήμος άλλου διαμερίσματος, ή συντεταγμένες ανάποδα. ¦ едноименна община от друг департамент или разменени координати.
+deux homonymes confondus dans une seule fiche. ¦ δύο συνονόματοι μπερδεμένοι σε μία καρτέλα. ¦ двама съименници, смесени в един картон.
+une commune homonyme d’un autre département. ¦ ένας συνώνυμος δήμος άλλου διαμερίσματος. ¦ едноименна община от друг департамент.
+les deux dates inversées. ¦ οι δύο ημερομηνίες ανάποδα. ¦ двете дати са разменени.
+un tiret tapé par erreur devant l’année. ¦ μια παύλα πληκτρολογημένη κατά λάθος πριν από το έτος. ¦ тире, въведено по грешка пред годината.
+un homonyme pris pour le conjoint, ou une fiche rattachée une génération trop haut ou trop bas. ¦ ένας συνονόματος θεωρήθηκε σύζυγος, ή μια καρτέλα συνδεδεμένη μία γενιά πιο πάνω ή πιο κάτω. ¦ съименник, взет за съпруга, или картон, свързан едно поколение твърде високо или твърде ниско.
+un chiffre mal lu par la machine (1/7, 3/8, 5/6), ou un âge déclaré au hasard par la famille : regarde l’image du recensement. ¦ ένα ψηφίο που διάβασε λάθος η μηχανή (1/7, 3/8, 5/6), ή μια ηλικία που δήλωσε στην τύχη η οικογένεια: κοίτα την εικόνα της απογραφής. ¦ цифра, грешно разчетена от машината (1/7, 3/8, 5/6), или възраст, посочена наслуки от семейството: виж изображението от преброяването.
+un nom de commune mal lu ou abrégé (« St » pour Saint) : regarde l’image du recensement. ¦ ένα όνομα δήμου που διαβάστηκε λάθος ή συντομεύτηκε («St» για Saint): κοίτα την εικόνα της απογραφής. ¦ грешно разчетено или съкратено име на община („St“ за Saint): виж изображението от преброяването.
+la case du genre mal lue, ou une autre personne du ménage : regarde l’image du recensement. ¦ το πεδίο του φύλου διαβάστηκε λάθος, ή άλλο άτομο του νοικοκυριού: κοίτα την εικόνα της απογραφής. ¦ грешно разчетено поле за пола или друг човек от домакинството: виж изображението от преброяването.
+un lien mal lu (fils / fille), un ménage mal découpé, ou une fiche pas encore reliée : regarde l’image du recensement. ¦ ένας δεσμός που διαβάστηκε λάθος (γιος / κόρη), ένα νοικοκυριό που χωρίστηκε λάθος, ή μια καρτέλα που δεν έχει συνδεθεί ακόμη: κοίτα την εικόνα της απογραφής. ¦ грешно разчетена връзка (син / дъщеря), грешно разделено домакинство или картон, който още не е свързан: виж изображението от преброяването.
+J’ai vérifié dans l’acte : c’est bien ça ¦ Το έλεγξα στην πράξη: είναι σωστό ¦ Проверих в акта: така е
+La date est approximative (« vers… ») ¦ Η ημερομηνία είναι κατά προσέγγιση («vers…») ¦ Датата е приблизителна („vers…“)
+Ce sont deux personnes différentes ¦ Είναι δύο διαφορετικά άτομα ¦ Това са двама различни души
+Le lieu est juste ¦ Ο τόπος είναι σωστός ¦ Мястото е вярно
+J’ai regardé l’image : ma fiche est juste, SocFace a mal lu ¦ Κοίταξα την εικόνα: η καρτέλα μου είναι σωστή, το SocFace διάβασε λάθος ¦ Погледнах изображението: картонът ми е верен, SocFace е разчел грешно
+Ce n’est pas la même personne (homonyme) ¦ Δεν είναι το ίδιο άτομο (συνονόματος) ¦ Не е същият човек (съименник)
+L’âge déclaré au recensement était approximatif ¦ Η ηλικία που δηλώθηκε στην απογραφή ήταν κατά προσέγγιση ¦ Възрастта, посочена при преброяването, беше приблизителна
+Personne sans nom ¦ Άτομο χωρίς όνομα ¦ Човек без име
+Dates changées ¦ Ημερομηνίες που άλλαξαν ¦ Променени дати
+Écartée ¦ Παραμερίστηκε ¦ Отхвърлен
+Plus d’alerte ¦ Καμία ειδοποίηση πια ¦ Няма вече сигнал
+Le contrôle ne trouve plus ce problème ¦ Ο έλεγχος δεν βρίσκει πια αυτό το πρόβλημα ¦ Проверката вече не намира този проблем
+Pas une erreur ¦ Δεν είναι λάθος ¦ Не е грешка
+Toute la base ¦ Όλη η βάση ¦ Цялата база
+Mes ancêtres (Sosa) ¦ Οι πρόγονοί μου (Sosa) ¦ Моите предци (Sosa)
+Tous les lieux ¦ Όλοι οι τόποι ¦ Всички места
+Aucune alerte écartée ¦ Καμία ειδοποίηση δεν παραμερίστηκε ¦ Няма отхвърлени сигнали
+Rien avec ces filtres ¦ Τίποτα με αυτά τα φίλτρα ¦ Нищо с тези филтри
+Retire un filtre pour revoir les autres alertes. ¦ Αφαίρεσε ένα φίλτρο για να ξαναδείς τις άλλες ειδοποιήσεις. ¦ Махни филтър, за да видиш отново другите сигнали.
+Aucune incohérence trouvée dans tes fiches. Bravo ! ¦ Δεν βρέθηκε καμία ασυνέπεια στις καρτέλες σου. Μπράβο! ¦ Няма открити несъответствия в картоните ти. Браво!
+Ouvre l’événement dans la fiche pour corriger sa date. ¦ Άνοιξε το γεγονός στην καρτέλα για να διορθώσεις την ημερομηνία του. ¦ Отвори събитието в картона, за да поправиш датата му.
+PLACER SUR LA CARTE ¦ ΤΟΠΟΘΕΤΗΣΗ ΣΤΟΝ ΧΑΡΤΗ ¦ ПОСТАВЯНЕ НА КАРТАТА
+Choisis la commune : ses coordonnées seront reprises ¦ Διάλεξε τον δήμο: οι συντεταγμένες του θα μεταφερθούν ¦ Избери общината: координатите ѝ ще бъдат взети
+Ce lieu n’a pas de coordonnées : choisis une commune de la liste. ¦ Αυτός ο τόπος δεν έχει συντεταγμένες: διάλεξε έναν δήμο από τη λίστα. ¦ Това място няма координати: избери община от списъка.
+CONTRÔLE DE LA BASE ¦ ΕΛΕΓΧΟΣ ΤΗΣ ΒΑΣΗΣ ¦ ПРОВЕРКА НА БАЗАТА
+Ta raison ¦ Ο λόγος σου ¦ Твоята причина
+Ne plus signaler ¦ Να μην επισημαίνεται πια ¦ Не сигнализирай повече
+Écris ta raison, ou choisis-en une. ¦ Γράψε τον λόγο σου ή διάλεξε έναν. ¦ Напиши причината си или избери една.
+Détail ¦ Λεπτομέρεια ¦ Подробност
+Fermer (Échap) ¦ Κλείσιμο (Esc) ¦ Затвори (Esc)
+La famille ¦ Η οικογένεια ¦ Семейството
+Contrôle impossible pour l’instant. ¦ Ο έλεγχος δεν είναι δυνατός προς το παρόν. ¦ Проверката засега е невъзможна.
+des fiches sans alerte ¦ των καρτελών χωρίς ειδοποίηση ¦ от картоните без сигнал
+Tout voir dans « ✅ Contrôle de la base » → ¦ Δες τα όλα στο «✅ Έλεγχος της βάσης» → ¦ Виж всичко в „✅ Проверка на базата“ →
+Moyennes de la famille ¦ Μέσοι όροι της οικογένειας ¦ Средни стойности на семейството
+Âge au mariage des hommes ¦ Ηλικία γάμου των ανδρών ¦ Възраст при брак на мъжете
+des femmes ¦ των γυναικών ¦ на жените
+Écart entre naissances ¦ Διάστημα ανάμεσα στις γεννήσεις ¦ Разлика между ражданията
+Pas assez de dates ¦ Δεν υπάρχουν αρκετές ημερομηνίες ¦ Няма достатъчно дати
+: ni conjoint, ni enfant, ni événement, ni note, ni média, ni source (souvent laissées par un ancien logiciel ou un import). Une copie de sécurité de la base est faite juste avant. ¦ : ούτε σύζυγος, ούτε παιδί, ούτε γεγονός, ούτε σημείωση, ούτε πολυμέσο, ούτε πηγή (συχνά έμειναν από παλιό πρόγραμμα ή από εισαγωγή). Ένα αντίγραφο ασφαλείας της βάσης γίνεται ακριβώς πριν. ¦ : нито съпруг, нито дете, нито събитие, нито бележка, нито медия, нито източник (често останали от стара програма или от импортиране). Точно преди това се прави резервно копие на базата.
+Elles ne contiennent aucune information. Une copie de sécurité de la base est faite juste avant. ¦ Δεν περιέχουν καμία πληροφορία. Ένα αντίγραφο ασφαλείας της βάσης γίνεται ακριβώς πριν. ¦ Не съдържат никаква информация. Точно преди това се прави резервно копие на базата.
+Familles vides ¦ Κενές οικογένειες ¦ Празни семейства
+Supprimer la famille vide ¦ Διαγραφή της κενής οικογένειας ¦ Изтрий празното семейство
+Supprimer la famille vide ? ¦ Διαγραφή της κενής οικογένειας; ¦ Да се изтрие ли празното семейство?
+Supprimer les familles vides ¦ Διαγραφή των κενών οικογενειών ¦ Изтрий празните семейства
+À la fermeture ¦ Στο κλείσιμο ¦ При затваряне
+À la main ¦ Με το χέρι ¦ На ръка
+Avant une restauration ou une fusion ¦ Πριν από επαναφορά ή συγχώνευση ¦ Преди възстановяване или сливане
+Automatique ¦ Αυτόματο ¦ Автоматично
+Avant une mise à jour ¦ Πριν από ενημέρωση ¦ Преди обновяване
+Jamais tout seul (seulement à la main) ¦ Ποτέ αυτόματα (μόνο με το χέρι) ¦ Никога автоматично (само на ръка)
+Chaque jour ¦ Κάθε μέρα ¦ Всеки ден
+Chaque semaine ¦ Κάθε εβδομάδα ¦ Всяка седмица
+Vérifiée ¦ Ελέγχθηκε ¦ Проверено
+Échec ¦ Αποτυχία ¦ Неуспех
+Dossier absent ¦ Ο φάκελος λείπει ¦ Папката липсва
+La sauvegarde automatique est éteinte : choisis « Chaque jour » ci-dessous. ¦ Το αυτόματο αντίγραφο ασφαλείας είναι ανενεργό: διάλεξε «Κάθε μέρα» παρακάτω. ¦ Автоматичното резервно копие е изключено: избери „Всеки ден“ по-долу.
+Prochaine : à la fermeture de l’app (si quelque chose a changé). ¦ Επόμενο: στο κλείσιμο της εφαρμογής (αν κάτι άλλαξε). ¦ Следващо: при затваряне на приложението (ако нещо се е променило).
+Aucune copie dans ce dossier pour l’instant. ¦ Κανένα αντίγραφο σε αυτόν τον φάκελο προς το παρόν. ¦ Засега няма копия в тази папка.
+Abîmée ¦ Χαλασμένο ¦ Повредено
+⚠️ Dossier introuvable pour l’instant (clé débranchée ?). ¦ ⚠️ Ο φάκελος δεν βρίσκεται προς το παρόν (αποσυνδέθηκε το USB stick;). ¦ ⚠️ Папката засега не е намерена (изваден ли е флашът?).
+Dossier trouvé ¦ Ο φάκελος βρέθηκε ¦ Папката е намерена
+Dossier synchronisé en ligne ¦ Φάκελος συγχρονισμένος online ¦ Папка, синхронизирана онлайн
+Chacune dans son sous-dossier, pour qu’elles ne s’effacent pas l’une l’autre. ¦ Το καθένα στον υποφάκελό του, για να μη σβήνει το ένα το άλλο. ¦ Всяко в своя подпапка, за да не се изтриват едно друго.
+Avec les médias ¦ Με τα πολυμέσα ¦ С медиите
+Toutes mes généalogies ¦ Όλες οι γενεαλογίες μου ¦ Всички мои генеалогии
+État indisponible. ¦ Η κατάσταση δεν είναι διαθέσιμη. ¦ Състоянието не е налично.
+Dossier introuvable (clé débranchée ?). Rien n’est bloqué. ¦ Ο φάκελος δεν βρέθηκε (αποσυνδέθηκε το USB stick;). Τίποτα δεν είναι μπλοκαρισμένο. ¦ Папката не е намерена (изваден ли е флашът?). Нищо не е блокирано.
+Éteinte : rien ne se fait tout seul. ¦ Ανενεργό: τίποτα δεν γίνεται αυτόματα. ¦ Изключено: нищо не става автоматично.
+⚙️ Régler ¦ ⚙️ Ρύθμιση ¦ ⚙️ Настрой
+Lieu (texte) ¦ Τόπος (κείμενο) ¦ Място (текст)
+Sorte d’événement ¦ Είδος γεγονότος ¦ Вид събитие
+Posée sur ¦ Τοποθετημένο σε ¦ Поставено на
+l’autre ordinateur ¦ ο άλλος υπολογιστής ¦ другият компютър
+À choisir ¦ Για επιλογή ¦ За избор
+Sur cet ordinateur ¦ Σε αυτόν τον υπολογιστή ¦ На този компютър
+Garder la mienne ¦ Κράτα τη δική μου ¦ Запази моята
+Prendre l’autre ¦ Πάρε την άλλη ¦ Вземи другата
+Garder les deux ¦ Κράτα και τις δύο ¦ Запази и двете
+Dossier branché ¦ Ο φάκελος είναι συνδεδεμένος ¦ Папката е свързана
+💻 L’autre : ¦ 💻 Ο άλλος: ¦ 💻 Другият:
+L’autre ordinateur n’est pas encore passé par ce dossier. ¦ Ο άλλος υπολογιστής δεν έχει περάσει ακόμη από αυτόν τον φάκελο. ¦ Другият компютър още не е минавал през тази папка.
+Dossier introuvable pour l’instant (clé débranchée ?). Rien n’est perdu : tes changements partiront la prochaine fois. ¦ Ο φάκελος δεν βρίσκεται προς το παρόν (αποσυνδέθηκε το USB stick;). Τίποτα δεν χάθηκε: οι αλλαγές σου θα φύγουν την επόμενη φορά. ¦ Папката засега не е намерена (изваден ли е флашът?). Нищо не е загубено: промените ти ще тръгнат следващия път.
+Paquets mis de côté ¦ Πακέτα που μπήκαν στην άκρη ¦ Оставени настрана пакети
+Tu as annulé leur fusion : ils ne sont plus repris tout seuls. « Revoir » pour choisir changement par changement. ¦ Ακύρωσες τη συγχώνευσή τους: δεν λαμβάνονται πια αυτόματα. «Επανεξέταση» για να διαλέξεις αλλαγή προς αλλαγή. ¦ Отменил си сливането им: вече не се взимат автоматично. „Прегледай“, за да избираш промяна по промяна.
+Revoir ¦ Επανεξέταση ¦ Прегледай
+Dernières fusions ¦ Τελευταίες συγχωνεύσεις ¦ Последни сливания
+Annulée ¦ Ακυρώθηκε ¦ Отменена
+Écris le chemin du dossier partagé. ¦ Γράψε τη διαδρομή του κοινόχρηστου φακέλου. ¦ Въведи пътя до споделената папка.
+✓ Dossier relié. Sur l’autre ordinateur, ouvre « depart.db » qui s’y trouve, puis choisis ce même dossier. ¦ ✓ Ο φάκελος συνδέθηκε. Στον άλλο υπολογιστή, άνοιξε το «depart.db» που βρίσκεται εκεί και μετά διάλεξε τον ίδιο φάκελο. ¦ ✓ Папката е свързана. На другия компютър отвори „depart.db“, който е в нея, после избери същата папка.
+Dossier partagé retiré de cet ordinateur ¦ Ο κοινόχρηστος φάκελος αφαιρέθηκε από αυτόν τον υπολογιστή ¦ Споделената папка е премахната от този компютър
+Ta version gardée ¦ Κρατήθηκε η δική σου έκδοση ¦ Запазена е твоята версия
+Version de l’autre ordinateur prise ¦ Πάρθηκε η έκδοση του άλλου υπολογιστή ¦ Взета е версията от другия компютър
+Les deux notes gardées ¦ Κρατήθηκαν και οι δύο σημειώσεις ¦ Запазени са и двете бележки
+Fusion annulée : ses paquets sont mis de côté ¦ Η συγχώνευση ακυρώθηκε: τα πακέτα της μπαίνουν στην άκρη ¦ Сливането е отменено: пакетите му са оставени настрана
+🔒 Généalogie ouverte ailleurs ¦ 🔒 Η γενεαλογία είναι ανοιχτή αλλού ¦ 🔒 Генеалогията е отворена другаде
+Ouvrir quand même ¦ Άνοιγμα παρ’ όλα αυτά ¦ Отвори въпреки това
+⏹ Arrêter la lecture ¦ ⏹ Διακοπή ανάγνωσης ¦ ⏹ Спри четенето
+🔊 Lire la fiche ¦ 🔊 Ανάγνωση της καρτέλας ¦ 🔊 Прочети картона
+Type de daltonisme simulé ¦ Είδος αχρωματοψίας που προσομοιώνεται ¦ Вид симулирано цветно слепство
+Description de l’image ¦ Περιγραφή της εικόνας ¦ Описание на изображението
+Tout afficher ¦ Εμφάνιση όλων ¦ Покажи всичко
+Ta machine ne propose pas la dictée ici. Sur Mac, utilise la dictée du système : touche 🎤 ou deux fois Fn. Sur Windows : touche Windows + H. ¦ Ο υπολογιστής σου δεν προσφέρει υπαγόρευση εδώ. Σε Mac, χρησιμοποίησε την υπαγόρευση του συστήματος: πλήκτρο 🎤 ή δύο φορές Fn. Σε Windows: πλήκτρο Windows + H. ¦ Устройството ти не предлага диктовка тук. На Mac използвай диктовката на системата: клавиш 🎤 или два пъти Fn. На Windows: клавиш Windows + H.
+Je t’écoute… ¦ Σε ακούω… ¦ Слушам те…
+Aucun micro trouvé : branche-en un ou vérifie les réglages du son. ¦ Δεν βρέθηκε μικρόφωνο: σύνδεσε ένα ή έλεγξε τις ρυθμίσεις ήχου. ¦ Не е намерен микрофон: включи един или провери настройките на звука.
+La dictée de ce navigateur a besoin d’Internet. Sur Mac, la dictée du système marche hors ligne : touche 🎤 ou deux fois Fn. ¦ Η υπαγόρευση αυτού του περιηγητή χρειάζεται Internet. Σε Mac, η υπαγόρευση του συστήματος λειτουργεί χωρίς σύνδεση: πλήκτρο 🎤 ή δύο φορές Fn. ¦ Диктовката на този браузър има нужда от интернет. На Mac диктовката на системата работи без връзка: клавиш 🎤 или два пъти Fn.
+Choisis la sorte de daltonisme : l’app corrige ses couleurs pour que tu les distingues mieux. Les petites pastilles montrent comment ces couleurs sont vues. ¦ Διάλεξε το είδος αχρωματοψίας: η εφαρμογή διορθώνει τα χρώματά της για να τα ξεχωρίζεις καλύτερα. Οι μικρές κουκκίδες δείχνουν πώς φαίνονται αυτά τα χρώματα. ¦ Избери вида цветно слепство: приложението коригира цветовете си, за да ги различаваш по-добре. Малките точки показват как се виждат тези цветове.
+Moins de choses qui bougent : pas d’animations, pas de glissements, pas de défilement animé. ¦ Λιγότερα πράγματα που κινούνται: χωρίς κινούμενα εφέ, χωρίς ολισθήσεις, χωρίς κινούμενη κύλιση. ¦ По-малко неща, които се движат: без анимации, без плъзгания, без анимирано превъртане.
+Ton ordinateur demande déjà moins d’animations : c’est respecté. ¦ Ο υπολογιστής σου ζητά ήδη λιγότερα κινούμενα εφέ: αυτό τηρείται. ¦ Компютърът ти вече иска по-малко анимации: това се спазва.
+Durée des messages ¦ Διάρκεια μηνυμάτων ¦ Продължителност на съобщенията
+Les messages restent affichés ¦ Τα μηνύματα μένουν στην οθόνη ¦ Съобщенията остават на екрана
+2 fois plus (12 s) ¦ 2 φορές περισσότερο (12 s) ¦ 2 пъти повече (12 s)
+3 fois plus (18 s) ¦ 3 φορές περισσότερο (18 s) ¦ 3 пъти повече (18 s)
+Voix française de l’ordinateur ¦ Γαλλική φωνή του υπολογιστή ¦ Френски глас на компютъра
+Comment faire lire la description des images par un lecteur d’écran ? ¦ Πώς να διαβάζεται η περιγραφή των εικόνων από ένα πρόγραμμα ανάγνωσης οθόνης; ¦ Как екранен четец да чете описанието на изображенията?
+Pas disponible ici (voir au-dessus). ¦ Δεν είναι διαθέσιμο εδώ (δες παραπάνω). ¦ Не е налично тук (виж по-горе).
+Aperçu : la page prendra cette taille quand tu lâcheras le curseur. ¦ Προεπισκόπηση: η σελίδα θα πάρει αυτό το μέγεθος όταν αφήσεις τον δρομέα. ¦ Преглед: страницата ще стане с този размер, когато пуснеш плъзгача.
+Espacements conseillés appliqués. ¦ Εφαρμόστηκαν τα προτεινόμενα διαστήματα. ¦ Приложени са препоръчаните разстояния.
+Enregistrement impossible : la place du navigateur est pleine ? ¦ Η αποθήκευση είναι αδύνατη: γέμισε ο χώρος του περιηγητή; ¦ Не може да се запази: мястото в браузъра е пълно?
+Cette forme n’est pas lisible. ¦ Αυτό το σχήμα δεν είναι αναγνώσιμο. ¦ Тази форма не може да се прочете.
+Trop de formes enregistrées : supprime-en avant d’en ajouter. ¦ Πάρα πολλά αποθηκευμένα σχήματα: διάγραψε κάποια πριν προσθέσεις άλλα. ¦ Твърде много запазени форми: изтрий някои, преди да добавиш нови.
+Liste des formes enregistrée. ¦ Η λίστα σχημάτων αποθηκεύτηκε. ¦ Списъкът с форми е запазен.
+Liste des formes remise comme au départ ¦ Η λίστα σχημάτων επανήλθε στην αρχική κατάσταση ¦ Списъкът с форми е върнат както в началото
+Écusson ¦ Θυρεός ¦ Щит
+Ce fichier est trop gros (2 Mo au plus). ¦ Αυτό το αρχείο είναι πολύ μεγάλο (2 MB το πολύ). ¦ Този файл е твърде голям (най-много 2 MB).
+Ce n’est pas un dessin SVG lisible. ¦ Δεν είναι αναγνώσιμο σχέδιο SVG. ¦ Това не е четима SVG рисунка.
+Ce dessin est plat : il n’a pas de surface. ¦ Αυτό το σχέδιο είναι επίπεδο: δεν έχει επιφάνεια. ¦ Тази рисунка е плоска: няма площ.
+Ce dessin n’a pas pu être nettoyé. ¦ Δεν ήταν δυνατό να καθαριστεί αυτό το σχέδιο. ¦ Тази рисунка не можа да се изчисти.
+Nouvelle forme d’avatar ¦ Νέο σχήμα avatar ¦ Нова форма на аватар
+APPARENCE · FORME DES AVATARS ¦ ΕΜΦΑΝΙΣΗ · ΣΧΗΜΑ ΤΩΝ AVATAR ¦ ОБЛИК · ФОРМА НА АВАТАРИТЕ
+Ex. Blason, Médaillon, Feuille… ¦ Π.χ. Οικόσημο, Μετάλλιο, Φύλλο… ¦ Напр. Герб, Медальон, Лист…
+Chercher… (cœur, arbre, blason, étoile) ¦ Αναζήτηση… (καρδιά, δέντρο, οικόσημο, αστέρι) ¦ Търси… (сърце, дърво, герб, звезда)
+Chercher une forme ¦ Αναζήτηση σχήματος ¦ Търси форма
+Formes de la bibliothèque ¦ Σχήματα της βιβλιοθήκης ¦ Форми от библиотеката
+Cadre de dessin du polygone ¦ Πλαίσιο σχεδίασης του πολυγώνου ¦ Рамка за рисуване на многоъгълника
+📚 Bibliothèque ¦ 📚 Βιβλιοθήκη ¦ 📚 Библиотека
+✏️ Dessiner un polygone ¦ ✏️ Σχεδίασε πολύγωνο ¦ ✏️ Нарисувай многоъгълник
+Modèles ¦ Πρότυπα ¦ Шаблони
+↶ Enlever le dernier point ¦ ↶ Αφαίρεση του τελευταίου σημείου ¦ ↶ Махни последната точка
+ou colle le code SVG ici ¦ ή επικόλλησε τον κώδικα SVG εδώ ¦ или постави SVG кода тук
+Lire ce SVG ¦ Ανάγνωση αυτού του SVG ¦ Прочети този SVG
+Créer la forme ¦ Δημιουργία σχήματος ¦ Създай формата
+Pose au moins 3 points. ¦ Βάλε τουλάχιστον 3 σημεία. ¦ Сложи поне 3 точки.
+Choisis ou colle un dessin SVG. ¦ Διάλεξε ή επικόλλησε ένα σχέδιο SVG. ¦ Избери или постави SVG рисунка.
+Choisis une forme dans la bibliothèque. ¦ Διάλεξε ένα σχήμα από τη βιβλιοθήκη. ¦ Избери форма от библиотеката.
+SVG importé ¦ Το SVG εισήχθη ¦ SVG е импортиран
+Il faut un fichier SVG (.svg). ¦ Χρειάζεται αρχείο SVG (.svg). ¦ Трябва SVG файл (.svg).
+📁 Glisse un fichier SVG ici, colle-le (⌘V) ou choisis-le ¦ 📁 Σύρε ένα αρχείο SVG εδώ, επικόλλησέ το (⌘V) ή διάλεξέ το ¦ 📁 Плъзни SVG файл тук, постави го (⌘V) или го избери
+Seuls ses chemins pleins sont gardés : pas de script, d’image ni de texte. ¦ Κρατιούνται μόνο οι γεμάτες διαδρομές του: χωρίς script, εικόνα ή κείμενο. ¦ Запазват се само плътните му пътища: без скрипт, изображение или текст.
+Choisis d’abord un dessin SVG. ¦ Διάλεξε πρώτα ένα σχέδιο SVG. ¦ Първо избери SVG рисунка.
+Choisis d’abord une forme. ¦ Διάλεξε πρώτα ένα σχήμα. ¦ Първо избери форма.
+Clique dans le cadre pour poser les points, dans l’ordre du tour. Glisse un point pour le déplacer ; double-clic sur un point pour l’enlever. ¦ Κάνε κλικ στο πλαίσιο για να βάλεις τα σημεία, με τη σειρά του περιγράμματος. Σύρε ένα σημείο για να το μετακινήσεις· διπλό κλικ σε ένα σημείο για να το αφαιρέσεις. ¦ Кликни в рамката, за да слагаш точките по реда на контура. Плъзни точка, за да я преместиш; двоен клик върху точка я маха.
+Un dessin SVG (logo, pictogramme…) : seuls ses chemins pleins sont gardés. Les scripts, liens, images, textes et styles sont retirés. ¦ Ένα σχέδιο SVG (λογότυπο, εικονόγραμμα…): κρατιούνται μόνο οι γεμάτες διαδρομές του. Τα scripts, οι σύνδεσμοι, οι εικόνες, τα κείμενα και τα στυλ αφαιρούνται. ¦ SVG рисунка (лого, пиктограма…): запазват се само плътните ѝ пътища. Скриптовете, връзките, изображенията, текстовете и стиловете се махат.
+Revenir en arrière (Ctrl+Z) ¦ Πίσω (Ctrl+Z) ¦ Назад (Ctrl+Z)
+Revenir en avant (Ctrl+Maj+Z ou Ctrl+Y) ¦ Μπροστά (Ctrl+Shift+Z ή Ctrl+Y) ¦ Напред (Ctrl+Shift+Z или Ctrl+Y)
+Comme dans les blocs (01) et sur les fiches (initiales). ¦ Όπως στα μπλοκ (01) και στις καρτέλες (αρχικά). ¦ Както в блоковете (01) и в картоните (инициали).
+Clique sur « Appliquer » pour utiliser cette forme. ¦ Κάνε κλικ στο «Εφαρμογή» για να χρησιμοποιήσεις αυτό το σχήμα. ¦ Кликни „Приложи“, за да използваш тази форма.
+＋ Nouveau projet ¦ ＋ Νέο έργο ¦ ＋ Нов проект
+＋ Nouvelle battue ¦ ＋ Νέο χτένισμα ¦ ＋ Ново претърсване
+＋ Nouveau tableau ¦ ＋ Νέος πίνακας ¦ ＋ Нова дъска
+Mes généalogies (changer, en créer une autre) ¦ Οι γενεαλογίες μου (αλλαγή, δημιουργία άλλης) ¦ Моите генеалогии (смени, създай друга)
+L’ordre de l’app, tous les boutons montrés sauf 🧓 et les raccourcis vers les outils (cachés au départ) ¦ Η σειρά της εφαρμογής, όλα τα κουμπιά ορατά εκτός από το 🧓 και τις συντομεύσεις προς τα εργαλεία (κρυφά στην αρχή) ¦ Редът на приложението, всички бутони видими освен 🧓 и преките пътища към инструментите (скрити в началото)
+Le clic ouvre ¦ Το κλικ ανοίγει ¦ Кликът отваря
+Enquêtes, sur cet onglet ¦ Έρευνες, σε αυτή την καρτέλα ¦ Разследвания, в този раздел
+: chaque écran garde le dessin que tu connais. ¦ : κάθε οθόνη κρατά τη σχεδίαση που ξέρεις. ¦ : всеки екран запазва рисунката, която познаваш.
+Un seul dessin partout ¦ Ένα μόνο σχέδιο παντού ¦ Една рисунка навсякъде
+Le style « archive » ¦ Το στυλ «αρχείο» ¦ Стилът „архив“
+Va avec les blocs de l’app (traits noirs, coins droits). Plus sobre, moins coloré. ¦ Ταιριάζει με τα μπλοκ της εφαρμογής (μαύρες γραμμές, ίσιες γωνίες). Πιο λιτό, λιγότερο πολύχρωμο. ¦ Подхожда на блоковете в приложението (черни линии, прави ъгли). По-семпло, по-малко цветно.
+Où ? ¦ Πού; ¦ Къде?
+Nouvelle forme choisie ¦ Επιλέχθηκε νέο σχήμα ¦ Избрана е нова форма
+« Liste | Fiches » est dans la barre au-dessus des enquêtes. ¦ Το «Λίστα | Κάρτες» είναι στη γραμμή πάνω από τις έρευνες. ¦ „Списък | Картони“ е в лентата над разследванията.
+« Liste | Fiches » est en bas de la colonne. ¦ Το «Λίστα | Κάρτες» είναι στο κάτω μέρος της στήλης. ¦ „Списък | Картони“ е в долната част на колоната.
+Ici pas de liste : « Liste | Fiches » ne concerne que Recherche, Enquêtes et les autres listes. ¦ Εδώ δεν υπάρχει λίστα: το «Λίστα | Κάρτες» αφορά μόνο την Έρευνα, τις Έρευνες και τις άλλες λίστες. ¦ Тук няма списък: „Списък | Картони“ засяга само Проучване, Разследвания и другите списъци.
+à droite ¦ δεξιά ¦ вдясно
+à gauche ¦ αριστερά ¦ вляво
+Colonne à droite ¦ Στήλη δεξιά ¦ Колона вдясно
+Colonne à gauche ¦ Στήλη αριστερά ¦ Колона вляво
+Colonne de gauche remise comme au départ ¦ Η αριστερή στήλη επανήλθε στην αρχική κατάσταση ¦ Лявата колона е върната както в началото
+Portraits remis comme au départ ¦ Τα πορτρέτα επανήλθαν στην αρχική κατάσταση ¦ Портретите са върнати както в началото
+Designs remis comme au départ ¦ Τα σχέδια εμφάνισης επανήλθαν στην αρχική κατάσταση ¦ Дизайните са върнати както в началото
+Quel style pour les fiches ? ¦ Ποιο στυλ για τις καρτέλες; ¦ Какъв стил за картоните?
+Combien d’espace autour des choses ? ¦ Πόσος χώρος γύρω από τα στοιχεία; ¦ Колко място около нещата?
+Quelles icônes veux-tu ? ¦ Ποια εικονίδια θέλεις; ¦ Какви икони искаш?
+Quel en-tête pour la fiche d’une personne ? ¦ Ποια κεφαλίδα για την καρτέλα ενός ατόμου; ¦ Какво заглавие за картона на човек?
+Cases des arbres ¦ Πλαίσια των δέντρων ¦ Кутийки в дърветата
+Quelles cases pour les arbres ? ¦ Ποια πλαίσια για τα δέντρα; ¦ Какви кутийки за дърветата?
+Les cases des personnes dans les arbres (Graphiques) : ascendants, descendants, sablier… ¦ Τα πλαίσια των ατόμων στα δέντρα (Γραφήματα): πρόγονοι, απόγονοι, κλεψύδρα… ¦ Кутийките на хората в дърветата (Графики): предци, потомци, пясъчен часовник…
+Toutes pareilles : on ne voit pas d’un coup les hommes, les femmes ni les ancêtres directs. ¦ Όλα ίδια: δεν ξεχωρίζεις αμέσως τους άνδρες, τις γυναίκες ούτε τους άμεσους προγόνους. ¦ Всички еднакви: не се различават веднага мъжете, жените, нито преките предци.
+Repérage immédiat ¦ Άμεσος εντοπισμός ¦ Веднага се забелязва
+Avec photo ¦ Με φωτογραφία ¦ Със снимка
+le portrait au-dessus du nom ¦ το πορτρέτο πάνω από το όνομα ¦ портретът над името
+On reconnaît les visages ¦ Αναγνωρίζεις τα πρόσωπα ¦ Лицата се разпознават
+le nom seul ¦ μόνο το όνομα ¦ само името
+Les dates n’apparaissent qu’au survol (sauf si tu les remets). ¦ Οι ημερομηνίες εμφανίζονται μόνο όταν περνάς τον δείκτη (εκτός αν τις ξαναβάλεις). ¦ Датите се показват само при посочване (освен ако ги върнеш).
+Largeur des cases ¦ Πλάτος πλαισίων ¦ Ширина на кутийките
+Couleurs du genre ¦ Χρώματα φύλου ¦ Цветове по пол
+Ce sont aussi les couleurs des portraits ronds (Apparence → 👤 Portraits : menu de choix, listes). Les changer ici les change partout. ¦ Είναι και τα χρώματα των στρογγυλών πορτρέτων (Εμφάνιση → 👤 Πορτρέτα: μενού επιλογής, λίστες). Αν τα αλλάξεις εδώ, αλλάζουν παντού. ¦ Това са и цветовете на кръглите портрети (Облик → 👤 Портрети: меню за избор, списъци). Ако ги смениш тук, се сменят навсякъде.
+Traits entre les cases ¦ Γραμμές ανάμεσα στα πλαίσια ¦ Линии между кутийките
+Écrire les dates dans les cases ¦ Γράψε τις ημερομηνίες στα πλαίσια ¦ Пиши датите в кутийките
+Les dates évitent de confondre deux Louise BORIE ; sans elles, l’arbre est plus léger (elles restent au survol). ¦ Οι ημερομηνίες αποτρέπουν τη σύγχυση ανάμεσα σε δύο Louise BORIE· χωρίς αυτές, το δέντρο είναι πιο ελαφρύ (μένουν όταν περνάς τον δείκτη). ¦ Датите пречат да объркаш две Louise BORIE; без тях дървото е по-леко (остават при посочване).
+Petit badge Sosa sur la case ¦ Μικρό σήμα Sosa στο πλαίσιο ¦ Малка значка Sosa в кутийката
+Tu vois tout de suite le numéro de chaque ancêtre direct, utile pour parler d’un ancêtre (« le 6 »). ¦ Βλέπεις αμέσως τον αριθμό κάθε άμεσου προγόνου, χρήσιμο για να μιλάς για έναν πρόγονο («ο 6»). ¦ Веднага виждаш номера на всеки пряк предшественик — удобно, за да говориш за предшественик („№ 6“).
+Quels boutons veux-tu ? ¦ Ποια κουμπιά θέλεις; ¦ Какви бутони искаш?
+Comment les choses apparaissent-elles ? ¦ Πώς εμφανίζονται τα στοιχεία; ¦ Как се появяват нещата?
+Instantané ¦ Ακαριαία ¦ Мигновено
+L’apparition brusque peut surprendre : on ne voit pas d’où vient la fenêtre. ¦ Η απότομη εμφάνιση μπορεί να ξαφνιάσει: δεν βλέπεις από πού έρχεται το παράθυρο. ¦ Рязкото появяване може да изненада: не се вижда откъде идва прозорецът.
+doux et court (0,18 s) ¦ απαλό και σύντομο (0,18 s) ¦ плавно и кратко (0,18 s)
+On suit ce qui se passe ¦ Παρακολουθείς τι συμβαίνει ¦ Вижда се какво става
+Très léger temps d’attente (moins d’un quart de seconde). ¦ Πολύ μικρή αναμονή (λιγότερο από ένα τέταρτο του δευτερολέπτου). ¦ Съвсем кратко чакане (под четвърт секунда).
+Aucune animation ¦ Χωρίς κινούμενα εφέ ¦ Без анимации
+rien ne bouge jamais ¦ τίποτα δεν κινείται ποτέ ¦ нищо никога не се движи
+Le plus calme ¦ Το πιο ήρεμο ¦ Най-спокойно
+Les boutons s’enfoncent sous la souris ¦ Τα κουμπιά βουλιάζουν κάτω από το ποντίκι ¦ Бутоните хлътват под мишката
+Montre que le bouton réagit avant même de cliquer. ¦ Δείχνει ότι το κουμπί αντιδρά πριν καν κάνεις κλικ. ¦ Показва, че бутонът реагира още преди да кликнеш.
+Barre bleue du temps qui reste (messages H7) ¦ Μπλε μπάρα του χρόνου που απομένει (μηνύματα H7) ¦ Синя лента на оставащото време (съобщения H7)
+Suivre le réglage « réduire les animations » de l’ordinateur ¦ Ακολούθησε τη ρύθμιση «μείωση κινούμενων εφέ» του υπολογιστή ¦ Следвай настройката „намаляване на анимациите“ на компютъра
+Comment séparer les lignes des listes ? ¦ Πώς να χωρίζονται οι γραμμές των λιστών; ¦ Как да се разделят редовете в списъците?
+retouché ¦ τροποποιημένο ¦ донастроено
+🎨 Designs au choix ¦ 🎨 Σχέδια εμφάνισης κατ’ επιλογή ¦ 🎨 Дизайни по избор
+La forme des éléments est rangée là où on s’en sert : ¦ Η μορφή των στοιχείων βρίσκεται εκεί όπου τη χρησιμοποιείς: ¦ Формата на елементите е подредена там, където се използва:
+🎨 le style des fiches ¦ 🎨 το στυλ των καρτελών ¦ 🎨 стилът на картоните
+Exporter ce réglage ¦ Εξαγωγή αυτής της ρύθμισης ¦ Експортирай тази настройка
+Nom de ce réglage : ¦ Όνομα αυτής της ρύθμισης: ¦ Име на тази настройка:
+Ce fichier n’est pas un réglage LCNDA (il n’est pas lisible). ¦ Αυτό το αρχείο δεν είναι ρύθμιση LCNDA (δεν είναι αναγνώσιμο). ¦ Този файл не е настройка на LCNDA (не може да се прочете).
+Ce fichier n’est pas un réglage LCNDA. ¦ Αυτό το αρχείο δεν είναι ρύθμιση LCNDA. ¦ Този файл не е настройка на LCNDA.
+Ce réglage est vide. ¦ Αυτή η ρύθμιση είναι κενή. ¦ Тази настройка е празна.
+MISE À JOUR ¦ ΕΝΗΜΕΡΩΣΗ ¦ АКТУАЛИЗАЦИЯ
+Téléchargement dans ton dossier « Téléchargements »… ¦ Λήψη στον φάκελο «Λήψεις»… ¦ Изтегляне в папка „Изтегляния“…
+📁 Afficher dans le dossier ¦ 📁 Εμφάνιση στον φάκελο ¦ 📁 Покажи в папката
+Impossible d’ouvrir le dossier. ¦ Δεν ήταν δυνατό να ανοίξει ο φάκελος. ¦ Папката не може да се отвори.
+Impossible d’ouvrir le fichier. ¦ Δεν ήταν δυνατό να ανοίξει το αρχείο. ¦ Файлът не може да се отвори.
+Ouvre-le, puis glisse LCNDA dans « Applications » (à la place de l’ancienne). Ta généalogie ne bouge pas. ¦ Άνοιξέ το και σύρε το LCNDA στις «Εφαρμογές» (στη θέση της παλιάς). Η γενεαλογία σου δεν αλλάζει. ¦ Отвори го, после плъзни LCNDA в „Приложения“ (на мястото на старото). Генеалогията ти не се променя.
+Ouvre-le et suis l’installation : elle remplace l’ancienne version. Ta généalogie ne bouge pas. Windows peut afficher « Windows a protégé votre ordinateur » : « Informations complémentaires » → « Exécuter quand même ». ¦ Άνοιξέ το και ακολούθησε την εγκατάσταση: αντικαθιστά την παλιά έκδοση. Η γενεαλογία σου δεν αλλάζει. Τα Windows μπορεί να δείξουν «Τα Windows προστάτευσαν τον υπολογιστή σας»: «Περισσότερες πληροφορίες» → «Εκτέλεση οπωσδήποτε». ¦ Отвори го и следвай инсталацията: тя заменя старата версия. Генеалогията ти не се променя. Windows може да покаже „Windows защити компютъра ви“: „Още информация“ → „Изпълни въпреки това“.
+Ouvre-le avec l’installateur de paquets (ou « sudo apt install ./ce-fichier.deb »). Ta généalogie ne bouge pas. ¦ Άνοιξέ το με το πρόγραμμα εγκατάστασης πακέτων (ή «sudo apt install ./ce-fichier.deb»). Η γενεαλογία σου δεν αλλάζει. ¦ Отвори го с инсталатора на пакети (или „sudo apt install ./ce-fichier.deb“). Генеалогията ти не се променя.
+⤓ Télécharger ¦ ⤓ Λήψη ¦ ⤓ Изтегли
+Voir les nouveautés ¦ Δες τα νέα ¦ Виж новостите
+↗ Voir les nouveautés ¦ ↗ Δες τα νέα ¦ ↗ Виж новостите
+Ne plus me prévenir pour cette version ¦ Να μη με ειδοποιήσεις ξανά για αυτή την έκδοση ¦ Не ме предупреждавай повече за тази версия
+Recherche de la dernière version… ¦ Αναζήτηση της τελευταίας έκδοσης… ¦ Търсене на последната версия…
+La recherche n’a pas abouti. ¦ Η αναζήτηση δεν ολοκληρώθηκε. ¦ Търсенето не успя.
+À jour ¦ Ενημερωμένο ¦ Актуално
+Pas d’installateur pour cet ordinateur dans cette version : regarde la page des nouveautés. ¦ Δεν υπάρχει πρόγραμμα εγκατάστασης για αυτόν τον υπολογιστή σε αυτή την έκδοση: δες τη σελίδα με τα νέα. ¦ В тази версия няма инсталатор за този компютър: виж страницата с новостите.
+↺ Me prévenir de nouveau pour cette version ¦ ↺ Ειδοποίησέ με ξανά για αυτή την έκδοση ¦ ↺ Предупреждавай ме отново за тази версия
+Le fichier va dans ton dossier « Téléchargements », son empreinte est vérifiée, puis tu l’ouvres pour installer. Ta généalogie ne bouge pas. ¦ Το αρχείο πηγαίνει στον φάκελο «Λήψεις», το αποτύπωμά του ελέγχεται και μετά το ανοίγεις για εγκατάσταση. Η γενεαλογία σου δεν αλλάζει. ¦ Файлът отива в папка „Изтегляния“, отпечатъкът му се проверява, после го отваряш, за да инсталираш. Генеалогията ти не се променя.
+Ce que la carte montre ¦ Τι δείχνει ο χάρτης ¦ Какво показва картата
+Naissances par décennie ¦ Γεννήσεις ανά δεκαετία ¦ Раждания по десетилетия
+Prénoms les plus donnés ¦ Τα πιο συχνά ονόματα ¦ Най-често давани имена
+Âge au mariage ¦ Ηλικία γάμου ¦ Възраст при брак
+Liste | Fiches ¦ Λίστα | Κάρτες ¦ Списък | Картони
+Minguo (Taïwan) ¦ Minguo (Ταϊβάν) ¦ Минго (Тайван)
+Tailte Éireann ¦ Tailte Éireann ¦ Tailte Éireann
+💾 Enregistrer le projet ¦ 💾 Αποθήκευση του έργου ¦ 💾 Запази проекта
+⤓ Exporter la vidéo (MP4 / WebM, plusieurs formats)… ¦ ⤓ Εξαγωγή του βίντεο (MP4 / WebM, διάφορες μορφές)… ¦ ⤓ Експортирай видеото (MP4 / WebM, няколко формата)…
+⤓ Exporter les sous-titres (.srt) ¦ ⤓ Εξαγωγή υποτίτλων (.srt) ¦ ⤓ Експортирай субтитрите (.srt)
+🔖 Copier les chapitres (pour YouTube) ¦ 🔖 Αντιγραφή κεφαλαίων (για το YouTube) ¦ 🔖 Копирай главите (за YouTube)
+✂️ Couper ici ¦ ✂️ Κόψε εδώ ¦ ✂️ Изрежи тук
+⟦ Commence ici ¦ ⟦ Ξεκινά εδώ ¦ ⟦ Започва тук
+⟧ Finit ici ¦ ⟧ Τελειώνει εδώ ¦ ⟧ Свършва тук
+🔊 Séparer le son de l’image ¦ 🔊 Διαχωρισμός ήχου από εικόνα ¦ 🔊 Отдели звука от картината
+⌨️ Raccourcis du montage… ¦ ⌨️ Συντομεύσεις του μοντάζ… ¦ ⌨️ Клавишни комбинации за монтажа…
+🎥 Plusieurs caméras (calées par le son)… ¦ 🎥 Πολλές κάμερες (συγχρονισμένες με τον ήχο)… ¦ 🎥 Няколко камери (синхронизирани по звука)…
+🗂 Un rush de la base… ¦ 🗂 Ένα ακατέργαστο πλάνο από τη βάση… ¦ 🗂 Суров кадър от базата…
+＋ Son / musique ¦ ＋ Ήχος / μουσική ¦ ＋ Звук / музика
+🎙 Enregistrer une voix off ¦ 🎙 Ηχογράφηση αφήγησης ¦ 🎙 Запиши глас зад кадър
+💬 Sous-titre ici ¦ 💬 Υπότιτλος εδώ ¦ 💬 Субтитър тук
+🔖 Chapitre ici ¦ 🔖 Κεφάλαιο εδώ ¦ 🔖 Глава тук
+🪄 Modèle « La vie de… » ¦ 🪄 Πρότυπο «Η ζωή του/της…» ¦ 🪄 Шаблон „Животът на…“
+🪄 Modèle « Une famille » ¦ 🪄 Πρότυπο «Μια οικογένεια» ¦ 🪄 Шаблон „Едно семейство“
+＋ Piste vidéo ¦ ＋ Κανάλι βίντεο ¦ ＋ Видеописта
+＋ Piste son ¦ ＋ Κανάλι ήχου ¦ ＋ Аудиописта
+⏮ Au début ¦ ⏮ Στην αρχή ¦ ⏮ В началото
+◀ ◆ Image clé précédente ¦ ◀ ◆ Προηγούμενο καρέ-κλειδί ¦ ◀ ◆ Предишен ключов кадър
+◆ ▶ Image clé suivante ¦ ◆ ▶ Επόμενο καρέ-κλειδί ¦ ◆ ▶ Следващ ключов кадър
+🧲 Aimanter (marche / arrêt) ¦ 🧲 Μαγνήτισμα (ενεργό / ανενεργό) ¦ 🧲 Прилепване (вкл. / изкл.)
+🎨 Couleurs du film ¦ 🎨 Χρώματα της ταινίας ¦ 🎨 Цветове на филма
+🔊 Son du film ¦ 🔊 Ήχος της ταινίας ¦ 🔊 Звук на филма
+🎞️ Le film (rotation, fondus) ¦ 🎞️ Η ταινία (περιστροφή, σβησίματα) ¦ 🎞️ Филмът (завъртане, преливания)
+Le dessin des personnes partout dans l’app : d’abord la forme, puis le portrait. Tant que tu ne touches à rien, ¦ Η σχεδίαση των ατόμων παντού στην εφαρμογή: πρώτα το σχήμα, μετά το πορτρέτο. Όσο δεν αγγίζεις τίποτα, ¦ Рисунката на хората навсякъде в приложението: първо формата, после портретът. Докато не пипаш нищо,
+Une seule, qui vaut partout : la fiche, les listes, l’arbre, le menu de choix et les petits carrés numérotés des blocs. ¦ Ένα μόνο, που ισχύει παντού: η καρτέλα, οι λίστες, το δέντρο, το μενού επιλογής και τα μικρά αριθμημένα τετράγωνα των μπλοκ. ¦ Само една, валидна навсякъде: картонът, списъците, дървото, менюто за избор и малките номерирани квадратчета на блоковете.
+Les formes proposées dans « Forme des avatars » : coche celles à montrer, range-les en glissant ⠿ (ou ↑ ↓). Celles de l’app ne se suppriment pas : décoche-les pour les cacher. Les tiennes (✎) se modifient, se dupliquent, s’exportent. ¦ Τα σχήματα που προτείνονται στο «Σχήμα των avatar»: τσέκαρε όσα θα εμφανίζονται, τακτοποίησέ τα σύροντας ⠿ (ή ↑ ↓). Της εφαρμογής δεν διαγράφονται: ξετσέκαρέ τα για να τα κρύψεις. Τα δικά σου (✎) επεξεργάζονται, αντιγράφονται, εξάγονται. ¦ Формите, предлагани във „Форма на аватарите“: отметни тези за показване, подреди ги чрез плъзгане ⠿ (или ↑ ↓). Тези на приложението не се изтриват: махни отметката, за да ги скриеш. Твоите (✎) се редактират, дублират, експортират.
+Créer une forme à partir de celle-ci ¦ Δημιουργία σχήματος από αυτό ¦ Създай форма от тази
+Enregistrer l’ordre et les formes montrées ¦ Αποθήκευση της σειράς και των ορατών σχημάτων ¦ Запази реда и показаните форми
+La liste de départ : l’ordre de l’app et toutes les formes montrées (tes formes restent, à la fin) ¦ Η αρχική λίστα: η σειρά της εφαρμογής και όλα τα σχήματα ορατά (τα δικά σου σχήματα μένουν, στο τέλος) ¦ Началният списък: редът на приложението и всички форми показани (твоите форми остават, накрая)
+Avec le portrait « Comme avant », la forme s’applique aux carrés numérotés et aux initiales des fiches. ¦ Με το πορτρέτο «Όπως πριν», το σχήμα εφαρμόζεται στα αριθμημένα τετράγωνα και στα αρχικά των καρτελών. ¦ С портрет „Както преди“ формата се прилага за номерираните квадратчета и инициалите в картоните.
+règle tout d’un coup (le rond unique et le carré de la fiche choisissent aussi la forme) ; tu peux ensuite changer chaque ligne (« retouché » s’affiche). ¦ ρυθμίζει τα πάντα μονομιάς (ο ενιαίος κύκλος και το τετράγωνο της καρτέλας διαλέγουν και το σχήμα)· μετά μπορείς να αλλάξεις κάθε γραμμή (εμφανίζεται «τροποποιημένο»). ¦ настройва всичко наведнъж (единният кръг и квадратът на картона избират и формата); после можеш да промениш всеки ред (показва се „донастроено“).
+Avec « Comme avant », chaque endroit garde son propre dessin (la forme ci-dessus s’applique quand même aux petits carrés numérotés et aux initiales des fiches). Pars du rond unique ou du carré de la fiche pour utiliser ces réglages. ¦ Με το «Όπως πριν», κάθε σημείο κρατά τη δική του σχεδίαση (το παραπάνω σχήμα εφαρμόζεται πάντως στα μικρά αριθμημένα τετράγωνα και στα αρχικά των καρτελών). Ξεκίνα από τον ενιαίο κύκλο ή από το τετράγωνο της καρτέλας για να χρησιμοποιήσεις αυτές τις ρυθμίσεις. ¦ С „Както преди“ всяко място запазва своята рисунка (формата по-горе все пак се прилага за малките номерирани квадратчета и инициалите в картоните). Започни от единния кръг или квадрата на картона, за да ползваш тези настройки.
+Un peu d’arrondi adoucit le carré sans le confondre avec un rond. Seulement pour la forme « Carré arrondi ». Double-clic sur le curseur : valeur de départ. ¦ Λίγη στρογγύλευση μαλακώνει το τετράγωνο χωρίς να το μπερδεύει με κύκλο. Μόνο για το σχήμα «Στρογγυλεμένο τετράγωνο». Διπλό κλικ στον δρομέα: αρχική τιμή. ¦ Малко заобляне омекотява квадрата, без да го прави като кръг. Само за формата „Заоблен квадрат“. Двоен клик върху плъзгача: начална стойност.
+Plus grandes, elles se lisent mieux de loin et sur les petits ronds ; plus petites, le portrait paraît plus calme. Le chiffre est une part de la taille du portrait, donc ça reste juste aux 4 tailles. ¦ Μεγαλύτερα, διαβάζονται καλύτερα από μακριά και στους μικρούς κύκλους· μικρότερα, το πορτρέτο φαίνεται πιο ήρεμο. Ο αριθμός είναι ποσοστό του μεγέθους του πορτρέτου, άρα μένει σωστό και στα 4 μεγέθη. ¦ По-големи се четат по-добре отдалеч и в малките кръгчета; по-малки — портретът изглежда по-спокоен. Числото е част от размера на портрета, така че остава точно и при 4-те размера.
+Avec la couleur du genre, tu sais d’un coup d’œil si c’est un homme, une femme ou un animal, partout pareil. Une seule couleur, c’est plus sobre et plus « archive », comme le carré actuel de la fiche. ¦ Με το χρώμα του φύλου, καταλαβαίνεις με μια ματιά αν είναι άνδρας, γυναίκα ή ζώο, παντού το ίδιο. Ένα μόνο χρώμα είναι πιο λιτό και πιο «αρχείο», όπως το σημερινό τετράγωνο της καρτέλας. ¦ С цвета по пол виждаш с един поглед дали е мъж, жена или животно, навсякъде еднакво. Един цвят е по-семпло и по-„архивно“, като сегашния квадрат на картона.
+Photos en noir et blanc ¦ Ασπρόμαυρες φωτογραφίες ¦ Черно-бели снимки
+Une photo, c’est plus parlant que deux lettres. Les initiales toujours, c’est plus régulier quand certaines photos sont floues ou mal cadrées. Le noir et blanc donne le même ton à toutes les photos, anciennes comme récentes (c’est ce que fait la fiche aujourd’hui). ¦ Μια φωτογραφία λέει περισσότερα από δύο γράμματα. Τα αρχικά πάντα είναι πιο ομοιόμορφα όταν κάποιες φωτογραφίες είναι θολές ή κακοκαδραρισμένες. Το ασπρόμαυρο δίνει τον ίδιο τόνο σε όλες τις φωτογραφίες, παλιές και καινούργιες (αυτό κάνει σήμερα η καρτέλα). ¦ Една снимка казва повече от две букви. Инициалите винаги са по-равномерни, когато някои снимки са размазани или зле кадрирани. Черно-бялото дава един тон на всички снимки, стари и нови (така прави картонът днес).
+Deux lettres distinguent Joseph et Jean MARTIN. Une seule lettre est plus lisible sur les petits ronds de 22 px et met la famille en avant. ¦ Δύο γράμματα ξεχωρίζουν τον Joseph από τον Jean MARTIN. Ένα μόνο γράμμα διαβάζεται καλύτερα στους μικρούς κύκλους των 22 px και αναδεικνύει την οικογένεια. ¦ Две букви различават Joseph и Jean MARTIN. Една буква се чете по-лесно в малките кръгчета от 22 px и извежда напред фамилията.
+Mettre le numéro Sosa sur le portrait ¦ Βάλε τον αριθμό Sosa στο πορτρέτο ¦ Сложи номера Sosa на портрета
+Tu repères tes ancêtres directs sans lire la ligne. Si tu trouves que ça charge trop, laisse-le éteint : le Sosa reste écrit à droite des listes. Il n’apparaît pas sur les portraits de 22 px, trop petits. ¦ Εντοπίζεις τους άμεσους προγόνους σου χωρίς να διαβάσεις τη γραμμή. Αν σου φαίνεται φορτωμένο, άφησέ το κλειστό: το Sosa μένει γραμμένο δεξιά στις λίστες. Δεν εμφανίζεται στα πορτρέτα των 22 px, που είναι πολύ μικρά. ¦ Забелязваш преките си предци, без да четеш реда. Ако ти се струва претрупано, остави го изключено: Sosa остава написан вдясно в списъците. Не се показва на портретите от 22 px — твърде малки са.
+Aujourd’hui, pas d’initiales dans la liste des personnes : seulement la photo, quand la fiche en a une. ¦ Σήμερα, χωρίς αρχικά στη λίστα ατόμων: μόνο η φωτογραφία, όταν η καρτέλα έχει. ¦ Днес в списъка с хора няма инициали: само снимката, когато картонът има такава.
+Où elle est, et son dessin. Tant que tu ne touches à rien, ¦ Πού βρίσκεται και η σχεδίασή της. Όσο δεν αγγίζεις τίποτα, ¦ Къде е и как изглежда. Докато не пипаш нищо,
+La colonne, à gauche ou à droite de l’écran. ¦ Η στήλη, αριστερά ή δεξιά στην οθόνη. ¦ Колоната — вляво или вдясно на екрана.
+Lettres d’origine (A, H, S1…), les onglets de chaque outil, « Liste | Fiches » en bas de la colonne ¦ Αρχικά γράμματα (A, H, S1…), οι καρτέλες κάθε εργαλείου, «Λίστα | Κάρτες» στο κάτω μέρος της στήλης ¦ Оригинални букви (A, H, S1…), разделите на всеки инструмент, „Списък | Картони“ в долната част на колоната
+encadrés, à plat ¦ με πλαίσιο, επίπεδα ¦ в рамка, плоски
+un trait bleu à gauche ¦ μια μπλε γραμμή αριστερά ¦ синя черта вляво
+sans cadre, tout en douceur ¦ χωρίς πλαίσιο, απαλά ¦ без рамка, меко
+Des boutons, cadres et champs de la colonne. ¦ Κουμπιά, πλαίσια και πεδία της στήλης. ¦ Бутони, рамки и полета на колоната.
+Franches, décalées en bleu (comme avant) ¦ Έντονες, μετατοπισμένες σε μπλε (όπως πριν) ¦ Ясни, отместени в синьо (както преди)
+Réglages en plus ¦ Επιπλέον ρυθμίσεις ¦ Още настройки
+Les groupes de départ ; l’ordre à l’intérieur est gardé ¦ Οι αρχικές ομάδες· η σειρά μέσα τους διατηρείται ¦ Началните групи; редът вътре в тях се запазва
+Décoché : une seule liste. Chaque façon garde ses propres réglages : tu les retrouves en recochant ou en décochant. ¦ Χωρίς τσεκ: μία μόνο λίστα. Κάθε τρόπος κρατά τις δικές του ρυθμίσεις: τις ξαναβρίσκεις τσεκάροντας ή ξετσεκάροντας. ¦ Без отметка: един списък. Всеки начин пази своите настройки: намираш ги отново, като сложиш или махнеш отметката.
+Boutons en haut à droite ¦ Κουμπιά πάνω δεξιά ¦ Бутони горе вдясно
+Ajouter aux raccourcis (étoile) ¦ Προσθήκη στις συντομεύσεις (αστέρι) ¦ Добави към преките пътища (звезда)
+Les boutons secondaires de toute l’app (Annuler, Modifier, ＋ Ajouter…) ; le bouton principal reste plein, à la couleur principale. ¦ Τα δευτερεύοντα κουμπιά όλης της εφαρμογής (Ακύρωση, Επεξεργασία, ＋ Προσθήκη…)· το κύριο κουμπί μένει γεμάτο, με το κύριο χρώμα. ¦ Второстепенните бутони в цялото приложение (Отказ, Редактирай, ＋ Добави…); основният бутон остава плътен, в основния цвят.
+pour les boutons secondaires ¦ για τα δευτερεύοντα κουμπιά ¦ за второстепенните бутони
+Ils partent du choix du dessus. Si tu en changes un, la carte choisie affiche « retouché ». ¦ Ξεκινούν από την παραπάνω επιλογή. Αν αλλάξεις ένα, η επιλεγμένη κάρτα δείχνει «τροποποιημένο». ¦ Тръгват от избора по-горе. Ако смениш един, избраната карта показва „донастроено“.
+La hauteur et la marge des boutons : les grands sont plus faciles à viser, surtout sur une tablette ; les petits laissent plus de place au contenu. La taille des lettres reste celle de l’Apparence. ¦ Το ύψος και το περιθώριο των κουμπιών: τα μεγάλα στοχεύονται πιο εύκολα, ειδικά σε tablet· τα μικρά αφήνουν περισσότερο χώρο στο περιεχόμενο. Το μέγεθος των γραμμάτων μένει αυτό της Εμφάνισης. ¦ Височината и полето на бутоните: големите се улучват по-лесно, особено на таблет; малките оставят повече място за съдържанието. Размерът на буквите остава този от Облика.
+Des boutons bien ronds se distinguent des cadres et des champs ; comme les blocs, tout reste cohérent. ¦ Τα πολύ στρογγυλά κουμπιά ξεχωρίζουν από τα πλαίσια και τα πεδία· όπως τα μπλοκ, όλα μένουν συνεπή. ¦ Съвсем кръглите бутони се отличават от рамките и полетата; както при блоковете, всичко остава последователно.
+Le changement est gardé tout de suite (« ✓ Enregistré »), sans bouton. Un message en bas à gauche propose « ↶ Annuler ». ¦ Η αλλαγή κρατιέται αμέσως («✓ Αποθηκεύτηκε»), χωρίς κουμπί. Ένα μήνυμα κάτω αριστερά προτείνει «↶ Αναίρεση». ¦ Промяната се пази веднага („✓ Запазено“), без бутон. Съобщение долу вляво предлага „↶ Отмени“.
+Comment se séparent les lignes des listes, de la colonne des personnes et des tableaux. ¦ Πώς χωρίζονται οι γραμμές των λιστών, της στήλης των ατόμων και των πινάκων. ¦ Как се разделят редовете в списъците, в колоната с хора и в таблиците.
+Une ligne sur deux grisée ¦ Μία γραμμή στις δύο γκρι ¦ Всеки втори ред в сиво
+qu’on attrape : facile à glisser, à viser sur une tablette. ¦ που πιάνεις: εύκολο να το σύρεις, να το στοχεύσεις σε tablet. ¦ за хващане: лесно се плъзга и улучва на таблет.
+Trait de la couleur principale à gauche ¦ Γραμμή στο κύριο χρώμα αριστερά ¦ Черта в основния цвят вляво
+Le fond pâle se voit de loin ; le trait à gauche ne cache pas le gris des lignes alternées. ¦ Το απαλό φόντο φαίνεται από μακριά· η γραμμή αριστερά δεν κρύβει το γκρι των εναλλασσόμενων γραμμών. ¦ Бледият фон се вижда отдалеч; чертата вляво не скрива сивото на редуващите се редове.
+Les visages et les couleurs du genre aident à retrouver une personne sans lire. ¦ Τα πρόσωπα και τα χρώματα του φύλου βοηθούν να βρεις ένα άτομο χωρίς να διαβάσεις. ¦ Лицата и цветовете по пол помагат да намериш човек, без да четеш.
+Les titres des colonnes restent en haut quand on fait défiler ¦ Οι τίτλοι των στηλών μένουν πάνω όταν κάνεις κύλιση ¦ Заглавията на колоните остават горе при превъртане
+Dans une longue liste, tu sais toujours quelle colonne est la naissance et laquelle est le décès. ¦ Σε μια μεγάλη λίστα, ξέρεις πάντα ποια στήλη είναι η γέννηση και ποια ο θάνατος. ¦ В дълъг списък винаги знаеш коя колона е раждането и коя смъртта.
+Émojis, traits, pictogrammes… les petits dessins des boutons, des barres d’outils et des rubriques. ¦ Emoji, γραμμές, εικονογράμματα… τα μικρά σχέδια των κουμπιών, των γραμμών εργαλείων και των ενοτήτων. ¦ Емоджита, линии, пиктограми… малките рисунки на бутоните, лентите с инструменти и рубриките.
+Leur dessin change d’un ordinateur à l’autre (Mac, Windows) et certains sont un peu enfantins. ¦ Η σχεδίασή τους αλλάζει από υπολογιστή σε υπολογιστή (Mac, Windows) και κάποια είναι λίγο παιδικά. ¦ Видът им се мени от компютър на компютър (Mac, Windows) и някои са малко детински.
+Deux styles à l’écran en même temps. ¦ Δύο στυλ στην οθόνη ταυτόχρονα. ¦ Два стила на екрана едновременно.
+La corbeille 🗑 toujours en rouge ¦ Ο κάδος 🗑 πάντα σε κόκκινο ¦ Кошчето 🗑 винаги в червено
+Noms à côté ¦ Ονόματα δίπλα ¦ Имена отстрани
+Écrire le nom à côté des boutons de la fiche ¦ Γράψε το όνομα δίπλα στα κουμπιά της καρτέλας ¦ Пиши името до бутоните на картона
+Combien d’espace autour des choses : dans et entre les blocs, entre les lignes, autour des boutons. ¦ Πόσος χώρος γύρω από τα στοιχεία: μέσα και ανάμεσα στα μπλοκ, ανάμεσα στις γραμμές, γύρω από τα κουμπιά. ¦ Колко място около нещата: в блоковете и между тях, между редовете, около бутоните.
+Reposant et facile à cliquer ¦ Ξεκούραστο και εύκολο στο κλικ ¦ Спокойно и лесно за кликане
+Plus d’informations à l’écran ¦ Περισσότερες πληροφορίες στην οθόνη ¦ Повече информация на екрана
+Les cibles sont plus petites : demande plus de précision à la souris. ¦ Οι στόχοι είναι μικρότεροι: χρειάζεται περισσότερη ακρίβεια με το ποντίκι. ¦ Целите са по-малки: иска се повече точност с мишката.
+Passer en compact tout seul sur un petit écran ¦ Αυτόματα συμπαγές σε μικρή οθόνη ¦ Сгъстявай автоматично на малък екран
+Sur un téléphone ou une tablette, l’app se resserre d’elle-même, puis reprend ton réglage sur le grand écran. ¦ Σε κινητό ή tablet, η εφαρμογή συμπτύσσεται μόνη της και μετά επανέρχεται στη ρύθμισή σου στη μεγάλη οθόνη. ¦ На телефон или таблет приложението само се сгъстява, после връща настройката ти на голям екран.
+Beaucoup de blanc sous le nom ; la photo est petite et en gris. ¦ Πολύ κενό κάτω από το όνομα· η φωτογραφία είναι μικρή και γκρι. ¦ Много празно място под името; снимката е малка и сива.
+une photo de famille en haut ¦ μια οικογενειακή φωτογραφία πάνω ¦ семейна снимка горе
+Les dates et les lieux ¦ Οι ημερομηνίες και οι τόποι ¦ Датите и местата
+Dates, lieux et métier ¦ Ημερομηνίες, τόποι και επάγγελμα ¦ Дати, места и професия
+Les lieux évitent d’ouvrir les blocs pour savoir d’où vient la personne ; le métier aide à distinguer les homonymes. ¦ Οι τόποι σε γλιτώνουν από το να ανοίγεις τα μπλοκ για να μάθεις από πού είναι το άτομο· το επάγγελμα βοηθά να ξεχωρίσεις τους συνονόματους. ¦ Местата спестяват отварянето на блоковете, за да разбереш откъде е човекът; професията помага да различиш съименниците.
+Sous le nom, sur une ligne ¦ Κάτω από το όνομα, σε μία γραμμή ¦ Под името, на един ред
+À droite, elles ne gênent pas le nom ; sous le nom, elles se lisent avec lui et l’en-tête est moins haut. ¦ Δεξιά, δεν ενοχλούν το όνομα· κάτω από το όνομα, διαβάζονται μαζί του και η κεφαλίδα είναι πιο χαμηλή. ¦ Вдясно не пречат на името; под името се четат заедно с него и заглавието е по-ниско.
+Beaucoup de traits épais et d’ombres décalées : ça peut paraître chargé sur un grand écran plein de blocs. ¦ Πολλές χοντρές γραμμές και μετατοπισμένες σκιές: μπορεί να φαίνεται φορτωμένο σε μεγάλη οθόνη γεμάτη μπλοκ. ¦ Много дебели линии и отместени сенки: може да изглежда претрупано на голям екран, пълен с блокове.
+Des coins droits font « dossier d’archives » ; arrondis, l’app paraît plus douce et plus moderne. Le même arrondi va sur toute la fiche (blocs, boutons, champs). ¦ Οι ίσιες γωνίες θυμίζουν «φάκελο αρχείου»· στρογγυλεμένες, η εφαρμογή φαίνεται πιο απαλή και πιο μοντέρνα. Η ίδια στρογγύλευση πηγαίνει σε όλη την καρτέλα (μπλοκ, κουμπιά, πεδία). ¦ Правите ъгли напомнят „архивна папка“; заоблени — приложението изглежда по-меко и по-модерно. Едно и също заобляне важи за целия картон (блокове, бутони, полета).
+Des traits épais séparent nettement les blocs (utile si tu vois mal) ; des traits fins allègent les pages pleines de cadres. Leur couleur suit les couleurs de l’Apparence ; un thème à toi qui a ses propres traits (Apparence → ✎ Mes thèmes) garde les siens. ¦ Οι χοντρές γραμμές χωρίζουν καθαρά τα μπλοκ (χρήσιμο αν δεν βλέπεις καλά)· οι λεπτές γραμμές ελαφραίνουν τις σελίδες που είναι γεμάτες πλαίσια. Το χρώμα τους ακολουθεί τα χρώματα της Εμφάνισης· ένα δικό σου θέμα με δικές του γραμμές (Εμφάνιση → ✎ Τα θέματά μου) κρατά τις δικές του. ¦ Дебелите линии ясно разделят блоковете (полезно, ако не виждаш добре); тънките олекотяват страниците, пълни с рамки. Цветът им следва цветовете от Облика; твоя тема със собствени линии (Облик → ✎ Моите теми) запазва своите.
+L’ombre dit « ceci est un bloc qu’on peut toucher ». Franches, elles donnent du relief ; douces, elles sont presque invisibles ; sans ombre, c’est le plus sobre (et le plus net à l’impression). ¦ Η σκιά λέει «αυτό είναι ένα μπλοκ που μπορείς να αγγίξεις». Έντονες, δίνουν ανάγλυφο· απαλές, είναι σχεδόν αόρατες· χωρίς σκιά, είναι το πιο λιτό (και το πιο καθαρό στην εκτύπωση). ¦ Сянката казва „това е блок, който можеш да докоснеш“. Ясни — дават релеф; меки — почти невидими; без сянка — най-семпло (и най-чисто при печат).
+Pour voir, lire et utiliser l’app plus facilement (couleurs, texte, contraste, clavier, mouvement, voix, lecteur d’écran, sous-titres, dictée), et pour préparer le mode simple. Chaque réglage s’applique tout de suite et reste gardé avec ta généalogie. ¦ Για να βλέπεις, να διαβάζεις και να χρησιμοποιείς την εφαρμογή πιο εύκολα (χρώματα, κείμενο, αντίθεση, πληκτρολόγιο, κίνηση, φωνή, πρόγραμμα ανάγνωσης οθόνης, υπότιτλοι, υπαγόρευση), και για να προετοιμάσεις την απλή λειτουργία. Κάθε ρύθμιση εφαρμόζεται αμέσως και κρατιέται μαζί με τη γενεαλογία σου. ¦ За да виждаш, четеш и използваш приложението по-лесно (цветове, текст, контраст, клавиатура, движение, глас, екранен четец, субтитри, диктовка) и за да подготвиш опростения режим. Всяка настройка се прилага веднага и се пази заедно с генеалогията ти.
+Environ 1 homme sur 12 voit mal certaines couleurs. Choisis ce qui te ressemble : l’app décale ses couleurs pour que les différences se voient (c’est une correction, réglable). ¦ Περίπου 1 στους 12 άνδρες δεν βλέπει καλά κάποια χρώματα. Διάλεξε αυτό που σου ταιριάζει: η εφαρμογή μετατοπίζει τα χρώματά της ώστε να φαίνονται οι διαφορές (είναι διόρθωση, ρυθμιζόμενη). ¦ Около 1 от 12 мъже не вижда добре някои цветове. Избери това, което ти подхожда: приложението измества цветовете си, за да се виждат разликите (това е корекция, регулируема).
+Le bleu et le jaune se confondent (rare). ¦ Το μπλε και το κίτρινο μπερδεύονται (σπάνιο). ¦ Синьото и жълтото се объркват (рядко).
+Pas de couleurs du tout : tout est en gris. ¦ Καθόλου χρώματα: όλα είναι γκρι. ¦ Никакви цветове: всичко е в сиво.
+Couleurs faciles à distinguer ¦ Χρώματα που ξεχωρίζουν εύκολα ¦ Лесно различими цветове
+Erreur / réussi, homme / femme et graphiques prennent des couleurs que tout le monde distingue (palette Okabe-Ito). ¦ Σφάλμα / επιτυχία, άνδρας / γυναίκα και γραφήματα παίρνουν χρώματα που όλοι ξεχωρίζουν (παλέτα Okabe-Ito). ¦ Грешка / успех, мъж / жена и графиките получават цветове, които всички различават (палитра Okabe-Ito).
+Les couleurs que tu as choisies toi-même (dessins, plans et maison 3D, tableaux, mises en page, photos) ne sont pas remplacées : c’est la correction (le curseur au-dessus) qui les rend plus faciles à distinguer, partout, y compris dans les outils de modification en plein écran. ¦ Τα χρώματα που διάλεξες μόνος/η σου (σχέδια, κατόψεις και σπίτι 3D, πίνακες, σελιδοποιήσεις, φωτογραφίες) δεν αντικαθίστανται: η διόρθωση (ο δρομέας παραπάνω) τα κάνει πιο εύκολα να ξεχωρίζουν, παντού, ακόμα και στα εργαλεία επεξεργασίας σε πλήρη οθόνη. ¦ Цветовете, които си избрал/а сам/а (рисунки, планове и 3D къща, дъски, оформления, снимки), не се заменят: корекцията (плъзгачът по-горе) ги прави по-лесни за различаване навсякъде, включително в инструментите за редакция на цял екран.
+Ajouter des formes en plus des couleurs ¦ Πρόσθεσε σχήματα εκτός από τα χρώματα ¦ Добави форми освен цветовете
+Symboles ✓ ⚠ ⛔ dans les messages, hachures sur les pastilles des légendes et les barres des graphiques, ronds et carrés pour femmes et hommes. ¦ Σύμβολα ✓ ⚠ ⛔ στα μηνύματα, διαγραμμίσεις στις κουκκίδες των υπομνημάτων και στις μπάρες των γραφημάτων, κύκλοι και τετράγωνα για γυναίκες και άνδρες. ¦ Символи ✓ ⚠ ⛔ в съобщенията, щриховки по точките на легендите и стълбовете на графиките, кръгове и квадрати за жени и мъже.
+pour vérifier un faire-part, un livre ou un graphique ¦ για να ελέγξεις ένα αναγγελτήριο, ένα βιβλίο ή ένα γράφημα ¦ за да провериш съобщение, книга или графика
+Montre tout l’écran comme le voit une personne daltonienne (une simulation, pas une correction). Va ensuite sur l’écran à vérifier : un bandeau en haut rappelle que c’est une simulation, avec « Arrêter ». ¦ Δείχνει όλη την οθόνη όπως τη βλέπει ένα άτομο με αχρωματοψία (προσομοίωση, όχι διόρθωση). Μετά πήγαινε στην οθόνη που θέλεις να ελέγξεις: μια ταινία πάνω θυμίζει ότι είναι προσομοίωση, με «Διακοπή». ¦ Показва целия екран така, както го вижда човек с цветно слепство (симулация, не корекция). После отиди на екрана за проверка: лента горе напомня, че е симулация, с „Спри“.
+L’interligne, les espaces et la police. La taille du texte de toute l’app se règle dans Thème et couleurs (Taille typographique). ¦ Το διάστιχο, τα κενά και η γραμματοσειρά. Το μέγεθος κειμένου όλης της εφαρμογής ρυθμίζεται στο Θέμα και χρώματα (Μέγεθος γραμμάτων). ¦ Междуредието, разстоянията и шрифтът. Размерът на текста в цялото приложение се настройва в Тема и цветове (Размер на шрифта).
+Plus aéré, une police plus facile à lire. Recommandé pour la dyslexie : interligne 1,5, lettres + 12 %, mots + 16 %. ¦ Πιο ευάερο, μια γραμματοσειρά πιο ευανάγνωστη. Συνιστάται για τη δυσλεξία: διάστιχο 1,5, γράμματα + 12 %, λέξεις + 16 %. ¦ По-просторно, с по-лесно четим шрифт. Препоръчително при дислексия: междуредие 1,5, букви + 12 %, думи + 16 %.
+Lettres alourdies en bas, pour qu’elles ne se retournent pas. Toujours disponible. ¦ Γράμματα βαρύτερα στο κάτω μέρος, για να μην αναποδογυρίζουν. Πάντα διαθέσιμο. ¦ Букви, утежнени отдолу, за да не се обръщат. Винаги налично.
+« Atkinson Hyperlegible » et « OpenDyslexic » sont rangées dans l’app (polices libres, licence SIL OFL) : rien à installer, et elles marchent sans internet. ¦ Οι «Atkinson Hyperlegible» και «OpenDyslexic» είναι ενσωματωμένες στην εφαρμογή (ελεύθερες γραμματοσειρές, άδεια SIL OFL): τίποτα για εγκατάσταση, και λειτουργούν χωρίς Internet. ¦ „Atkinson Hyperlegible“ и „OpenDyslexic“ са вградени в приложението (свободни шрифтове, лиценз SIL OFL): нищо за инсталиране, работят и без интернет.
+Textes gris passés en noir (ou en blanc en mode sombre), bordures plus marquées, fonds unis sans quadrillage. Marche en clair et en sombre. ¦ Γκρι κείμενα σε μαύρο (ή σε λευκό στη σκοτεινή λειτουργία), πιο έντονα περιγράμματα, μονόχρωμα φόντα χωρίς πλέγμα. Λειτουργεί σε φωτεινή και σκοτεινή. ¦ Сивите текстове стават черни (или бели в тъмен режим), по-ясни рамки, едноцветни фонове без мрежа. Работи в светъл и тъмен режим.
+🧩 Une chose à la fois ¦ 🧩 Ένα πράγμα τη φορά ¦ 🧩 Едно нещо наведнъж
+Une chose à la fois ¦ Ένα πράγμα τη φορά ¦ Едно нещо наведнъж
+Mode « une chose à la fois » ¦ Λειτουργία «ένα πράγμα τη φορά» ¦ Режим „едно нещо наведнъж“
+Une interface plus calme : moins de boutons, de chiffres et de décorations, les actions principales plus grandes, et un seul panneau à la fois (le tableau de bord sans sa colonne de réglages, les fiches sur une seule colonne, pas d’écran divisé). Rien n’est supprimé : le petit bandeau « 🧩 Une chose à la fois — Tout afficher », en bas à droite, remet tout d’un clic. ¦ Μια πιο ήρεμη διεπαφή: λιγότερα κουμπιά, αριθμοί και διακοσμήσεις, οι κύριες ενέργειες μεγαλύτερες, και ένα μόνο πάνελ τη φορά (ο πίνακας ελέγχου χωρίς τη στήλη ρυθμίσεων, οι καρτέλες σε μία στήλη, χωρίς διαιρεμένη οθόνη). Τίποτα δεν διαγράφεται: η μικρή ταινία «🧩 Ένα πράγμα τη φορά — Εμφάνιση όλων», κάτω δεξιά, τα επαναφέρει όλα με ένα κλικ. ¦ По-спокоен интерфейс: по-малко бутони, числа и украси, по-големи основни действия и само един панел наведнъж (таблото без колоната с настройки, картоните в една колона, без разделен екран). Нищо не се изтрива: малката лента „🧩 Едно нещо наведнъж — Покажи всичко“ долу вдясно връща всичко с един клик.
+Moins de choses à l’écran pour se concentrer sur l’essentiel. Les outils cachés reviennent avec « Tout afficher », en bas à droite de l’écran. ¦ Λιγότερα πράγματα στην οθόνη για να συγκεντρωθείς στα ουσιώδη. Τα κρυμμένα εργαλεία επιστρέφουν με το «Εμφάνιση όλων», κάτω δεξιά στην οθόνη. ¦ По-малко неща на екрана, за да се съсредоточиш върху същественото. Скритите инструменти се връщат с „Покажи всичко“ долу вдясно на екрана.
+Avec la touche Tab, un cadre épais bleu et jaune montre où tu es. Les boutons et les cases peuvent être plus grands (au moins 40 px), et la flèche de la souris plus grosse. ¦ Με το πλήκτρο Tab, ένα χοντρό μπλε και κίτρινο πλαίσιο δείχνει πού βρίσκεσαι. Τα κουμπιά και τα πεδία μπορούν να είναι μεγαλύτερα (τουλάχιστον 40 px), και ο δείκτης του ποντικιού πιο μεγάλος. ¦ С клавиша Tab дебела синьо-жълта рамка показва къде си. Бутоните и полетата могат да са по-големи (поне 40 px), а стрелката на мишката — по-едра.
+Boutons, menus, champs et cases à cocher plus grands, plus faciles à toucher ou à cliquer. ¦ Κουμπιά, μενού, πεδία και πλαίσια ελέγχου μεγαλύτερα, πιο εύκολα στο άγγιγμα ή στο κλικ. ¦ По-големи бутони, менюта, полета и отметки — по-лесни за докосване или кликане.
+🔊 Lecture à voix haute ¦ 🔊 Ανάγνωση φωναχτά ¦ 🔊 Четене на глас
+Lecture à voix haute ¦ Ανάγνωση φωναχτά ¦ Четене на глас
+Sélectionne un texte avec la souris : un bouton 🔊 apparaît à côté, clique dessus pour l’entendre. Sur une fiche, le bouton « 🔊 Lire la fiche » (en bas à gauche) lit le nom puis les blocs affichés. ¦ Επίλεξε ένα κείμενο με το ποντίκι: εμφανίζεται δίπλα ένα κουμπί 🔊, κάνε κλικ για να το ακούσεις. Σε μια καρτέλα, το κουμπί «🔊 Ανάγνωση της καρτέλας» (κάτω αριστερά) διαβάζει το όνομα και μετά τα εμφανιζόμενα μπλοκ. ¦ Маркирай текст с мишката: до него се появява бутон 🔊 — кликни, за да го чуеш. На картон бутонът „🔊 Прочети картона“ (долу вляво) чете името, после показаните блокове.
+Lire à voix haute le texte que je sélectionne ¦ Διάβασε φωναχτά το κείμενο που επιλέγω ¦ Чети на глас текста, който маркирам
+Chaque photo ou document de tes médias est décrit à voix haute : la « Description de l’image » écrite dans la fenêtre du média, sinon son titre, sa date, son lieu et les personnes rattachées. Les petites images à côté d’un nom et les décorations sont passées sous silence. ¦ Κάθε φωτογραφία ή έγγραφο των πολυμέσων σου περιγράφεται φωναχτά: η «Περιγραφή της εικόνας» που γράφτηκε στο παράθυρο του πολυμέσου, αλλιώς ο τίτλος του, η ημερομηνία του, ο τόπος του και τα συνδεδεμένα άτομα. Οι μικρές εικόνες δίπλα σε ένα όνομα και οι διακοσμήσεις παραλείπονται. ¦ Всяка снимка или документ от медиите ти се описва на глас: „Описанието на изображението“, написано в прозореца на медията, иначе заглавието, датата, мястото и свързаните хора. Малките изображения до име и украсите се пропускат.
+Le lecteur d’écran lit un texte à la place de chaque image. Pour l’écrire toi-même : ouvre un média, champ « Description de l’image (lue à voix haute) ». ¦ Το πρόγραμμα ανάγνωσης οθόνης διαβάζει ένα κείμενο στη θέση κάθε εικόνας. Για να το γράψεις μόνος/η σου: άνοιξε ένα πολυμέσο, πεδίο «Περιγραφή της εικόνας (διαβάζεται φωναχτά)». ¦ Екранният четец чете текст вместо всяко изображение. За да го напишеш сам/а: отвори медия, поле „Описание на изображението (чете се на глас)“.
+🎬 Vidéos et montages ¦ 🎬 Βίντεο και μοντάζ ¦ 🎬 Видеа и монтажи
+Les vidéos qui ont des sous-titres les montrent d’office (en français s’il y en a). Dans le montage, la piste « Sous-titres » se voit à la lecture même si tu l’as cachée (l’œil) ; la vidéo exportée, elle, ne change pas. ¦ Τα βίντεο που έχουν υπότιτλους τους δείχνουν από μόνα τους (στα γαλλικά αν υπάρχουν). Στο μοντάζ, το κανάλι «Υπότιτλοι» φαίνεται στην αναπαραγωγή ακόμα κι αν το έκρυψες (το μάτι)· το βίντεο που εξάγεται δεν αλλάζει. ¦ Видеата със субтитри ги показват автоматично (на френски, ако има). В монтажа пистата „Субтитри“ се вижда при възпроизвеждане, дори ако си я скрил/а (окото); експортираното видео не се променя.
+Pour lire ce qui est dit sans devoir allumer les sous-titres à chaque fois. ¦ Για να διαβάζεις τι λέγεται χωρίς να ανάβεις τους υπότιτλους κάθε φορά. ¦ За да четеш казаното, без да включваш субтитрите всеки път.
+ou un nouveau clic sur 🎤 arrête. ¦ ή ένα νέο κλικ στο 🎤 σταματά. ¦ или нов клик върху 🎤 спира.
+Le navigateur écoute le micro seulement quand tu cliques sur 🎤. La première fois, il demande la permission d’utiliser le micro. ¦ Ο περιηγητής ακούει το μικρόφωνο μόνο όταν κάνεις κλικ στο 🎤. Την πρώτη φορά, ζητά άδεια για να χρησιμοποιήσει το μικρόφωνο. ¦ Браузърът слуша микрофона само когато кликнеш 🎤. Първия път иска разрешение да използва микрофона.
+Plus de gris pâle : le texte est noir sur blanc (ou blanc sur noir en mode sombre). ¦ Τέλος το ανοιχτό γκρι: το κείμενο είναι μαύρο σε λευκό (ή λευκό σε μαύρο στη σκοτεινή λειτουργία). ¦ Без бледосиво: текстът е черен на бяло (или бял на черно в тъмен режим).
+Utilise la voix de l’ordinateur ; rien n’est envoyé sur internet par l’app. ¦ Χρησιμοποιεί τη φωνή του υπολογιστή· η εφαρμογή δεν στέλνει τίποτα στο Internet. ¦ Използва гласа на компютъра; приложението не изпраща нищо в интернет.
+Cache ce qui sert rarement pour garder l’essentiel, en plus grand. « Tout afficher » (en bas à droite) remet tout. ¦ Κρύβει ό,τι χρησιμοποιείται σπάνια για να κρατήσει τα ουσιώδη, σε μεγαλύτερο μέγεθος. Το «Εμφάνιση όλων» (κάτω δεξιά) τα επαναφέρει όλα. ¦ Скрива рядко използваното, за да остане същественото, по-голямо. „Покажи всичко“ (долу вдясно) връща всичко.
+Donne un texte à chaque image de tes médias. Le mieux : écrire toi-même ce qu’on voit, dans la fenêtre du média. ¦ Δίνει ένα κείμενο σε κάθε εικόνα των πολυμέσων σου. Το καλύτερο: γράψε μόνος/η σου τι φαίνεται, στο παράθυρο του πολυμέσου. ¦ Дава текст на всяко изображение от медиите ти. Най-добре: напиши сам/а какво се вижда, в прозореца на медията.
+Utilise la reconnaissance de la voix du navigateur (Chrome et Edge passent par internet ; Safari peut le faire sur l’ordinateur). Dans l’app de bureau, utilise la dictée du système : sur Mac, touche 🎤 ou deux fois Fn ; sur Windows, touche Windows + H. ¦ Χρησιμοποιεί την αναγνώριση φωνής του περιηγητή (Chrome και Edge περνούν από το Internet· το Safari μπορεί να το κάνει στον υπολογιστή). Στην εφαρμογή υπολογιστή, χρησιμοποίησε την υπαγόρευση του συστήματος: σε Mac, πλήκτρο 🎤 ή δύο φορές Fn· σε Windows, πλήκτρο Windows + H. ¦ Използва разпознаването на глас на браузъра (Chrome и Edge минават през интернет; Safari може да го прави на компютъра). В настолното приложение използвай диктовката на системата: на Mac клавиш 🎤 или два пъти Fn; на Windows клавиш Windows + H.
+Ces réglages sont gardés avec ta généalogie (comme l’apparence) : ils suivent sa sauvegarde et la retrouvent sur un autre ordinateur. ¦ Αυτές οι ρυθμίσεις κρατιούνται μαζί με τη γενεαλογία σου (όπως η εμφάνιση): ακολουθούν το αντίγραφο ασφαλείας της και τις βρίσκεις σε άλλον υπολογιστή. ¦ Тези настройки се пазят с генеалогията ти (както облика): следват резервното ѝ копие и ги намираш на друг компютър.
+De très gros boutons pour regarder l’arbre, les photos et les fiches, sans rien pouvoir modifier ni supprimer par erreur — pour une personne âgée, un enfant, ou n’importe qui qui veut juste regarder. ¦ Πολύ μεγάλα κουμπιά για να βλέπεις το δέντρο, τις φωτογραφίες και τις καρτέλες, χωρίς να μπορείς να αλλάξεις ή να διαγράψεις κάτι κατά λάθος — για έναν ηλικιωμένο, ένα παιδί ή οποιονδήποτε θέλει απλώς να κοιτάξει. ¦ Много големи бутони за разглеждане на дървото, снимките и картоните, без да можеш да промениш или изтриеш нещо по погрешка — за възрастен човек, дете или всеки, който просто иска да гледа.
+Montrer le bouton « 🧓 Mode simple » en haut de l’app ¦ Εμφάνιση του κουμπιού «🧓 Απλή λειτουργία» πάνω στην εφαρμογή ¦ Покажи бутона „🧓 Опростен режим“ горе в приложението
+Taille du texte (Thème et couleurs) ¦ Μέγεθος κειμένου (Θέμα και χρώματα) ¦ Размер на текста (Тема и цветове)
+Un clic applique tout d’un coup : couleurs, police et tailles. Tu peux ensuite retoucher chaque réglage plus bas. ¦ Ένα κλικ τα εφαρμόζει όλα μονομιάς: χρώματα, γραμματοσειρά και μεγέθη. Μετά μπορείς να διορθώσεις κάθε ρύθμιση πιο κάτω. ¦ Един клик прилага всичко наведнъж: цветове, шрифт и размери. После можеш да донастроиш всяка настройка по-долу.
+Toute la famille, de case en case ¦ Όλη η οικογένεια, από πλαίσιο σε πλαίσιο ¦ Цялото семейство, от кутийка на кутийка
+Fond sombre et texte clair, n’éblouit pas le soir ¦ Σκοτεινό φόντο και ανοιχτό κείμενο, δεν θαμπώνει το βράδυ ¦ Тъмен фон и светъл текст, не заслепява вечер
+Noir sur blanc pur, traits épais, 21:1 ¦ Μαύρο σε καθαρό λευκό, χοντρές γραμμές, 21:1 ¦ Черно на чисто бяло, дебели линии, 21:1
+Un cadre par ligne, large et facile à viser ¦ Ένα πλαίσιο ανά γραμμή, φαρδύ και εύκολο να το στοχεύσεις ¦ По една рамка на ред, широка и лесна за улучване
+Plus de cadres d’un coup d’œil, sur un grand écran ¦ Περισσότερα πλαίσια με μια ματιά, σε μεγάλη οθόνη ¦ Повече рамки с един поглед, на голям екран
+Chacun touche sa photo, et les liens s’écrivent pour lui. ¦ Ο καθένας αγγίζει τη φωτογραφία του, και οι σχέσεις γράφονται για εκείνον. ¦ Всеки докосва своята снимка и връзките се изписват спрямо него.
+Fond, texte et boutons ¦ Φόντο, κείμενο και κουμπιά ¦ Фон, текст и бутони
+Une couleur de fond douce et un texte très foncé fatiguent moins. ¦ Ένα απαλό χρώμα φόντου και ένα πολύ σκούρο κείμενο κουράζουν λιγότερο. ¦ Мек цвят на фона и много тъмен текст изморяват по-малко.
+Le texte sur le fond ¦ Το κείμενο πάνω στο φόντο ¦ Текстът върху фона
+On vise 7:1 au moins (le plus haut niveau des règles d’accessibilité). « Corriger » garde la teinte et change seulement sa clarté. ¦ Στοχεύουμε τουλάχιστον 7:1 (το υψηλότερο επίπεδο των κανόνων προσβασιμότητας). Το «Διόρθωση» κρατά την απόχρωση και αλλάζει μόνο τη φωτεινότητά της. ¦ Целим поне 7:1 (най-високото ниво на правилата за достъпност). „Коригирай“ пази оттенъка и променя само яркостта му.
+À 24 px on lit sans lunettes à 50 cm ; à 30 px et plus, de loin. ¦ Στα 24 px διαβάζεις χωρίς γυαλιά στα 50 cm· στα 30 px και πάνω, από μακριά. ¦ При 24 px се чете без очила от 50 cm; при 30 px и повече — отдалеч.
+Atkinson Hyperlegible et Luciole sont dessinées pour les personnes qui voient mal : les lettres qui se ressemblent (I l 1, O 0, b d) ne se confondent pas. OpenDyslexic aide certaines personnes dyslexiques. Atkinson et OpenDyslexic sont rangées dans l’app ; Luciole est prise si elle est sur l’ordinateur, sinon une police proche (Atkinson Hyperlegible). ¦ Οι Atkinson Hyperlegible και Luciole είναι σχεδιασμένες για άτομα που δεν βλέπουν καλά: τα γράμματα που μοιάζουν (I l 1, O 0, b d) δεν μπερδεύονται. Η OpenDyslexic βοηθά κάποια άτομα με δυσλεξία. Οι Atkinson και OpenDyslexic είναι ενσωματωμένες στην εφαρμογή· η Luciole χρησιμοποιείται αν υπάρχει στον υπολογιστή, αλλιώς μια παρόμοια γραμματοσειρά (Atkinson Hyperlegible). ¦ Atkinson Hyperlegible и Luciole са създадени за хора със слабо зрение: сходните букви (I l 1, O 0, b d) не се объркват. OpenDyslexic помага на някои хора с дислексия. Atkinson и OpenDyslexic са вградени в приложението; Luciole се взима, ако е на компютъра, иначе — близък шрифт (Atkinson Hyperlegible).
+Les capitales repèrent le nom de famille, comme dans l’app ; en minuscules, c’est plus doux à lire. ¦ Τα κεφαλαία ξεχωρίζουν το επώνυμο, όπως στην εφαρμογή· με πεζά, διαβάζεται πιο απαλά. ¦ Главните букви отличават фамилията, както в приложението; с малки букви се чете по-меко.
+Pareil que l’app : la voix et la vitesse de « ♿ Toute l’app ». ¦ Όπως η εφαρμογή: η φωνή και η ταχύτητα του «♿ Όλη η εφαρμογή». ¦ Както в приложението: гласът и скоростта от „♿ Цялото приложение“.
+Un peu plus lent que d’habitude (80 à 90 %) se suit mieux. ¦ Λίγο πιο αργά από το συνηθισμένο (80 έως 90 %) παρακολουθείται καλύτερα. ¦ Малко по-бавно от обикновено (80 до 90 %) се следи по-лесно.
+＋ Ajouter un cadre ¦ ＋ Προσθήκη πλαισίου ¦ ＋ Добави рамка
+Sa fiche, en phrases ¦ Η καρτέλα του/της, σε προτάσεις ¦ Картонът му/ѝ, в изречения
+Son numéro en grand ¦ Ο αριθμός του/της σε μεγάλο μέγεθος ¦ Номерът му/ѝ в едър шрифт
+Ses photos, en diaporama ¦ Οι φωτογραφίες του/της, σε προβολή διαφανειών ¦ Снимките му/ѝ, като слайдшоу
+Une surprise à chaque fois ¦ Μια έκπληξη κάθε φορά ¦ Изненада всеки път
+À regarder en grand ¦ Για να το δεις σε μεγάλο μέγεθος ¦ За разглеждане в едър план
+La regarder en 3D, étage par étage ¦ Δες το σε 3D, όροφο προς όροφο ¦ Разгледай я в 3D, етаж по етаж
+À lire et à écouter ¦ Για ανάγνωση και ακρόαση ¦ За четене и слушане
+Un cadre par ligne se vise sans peine sur une tablette ; trois ou quatre par ligne montrent tout d’un coup sur un grand écran. Sur un téléphone, il n’y en a jamais plus de deux. ¦ Ένα πλαίσιο ανά γραμμή στοχεύεται εύκολα σε tablet· τρία ή τέσσερα ανά γραμμή δείχνουν τα πάντα μονομιάς σε μεγάλη οθόνη. Σε κινητό, δεν υπάρχουν ποτέ περισσότερα από δύο. ¦ Една рамка на ред се улучва лесно на таблет; три или четири на ред показват всичко наведнъж на голям екран. На телефон никога не са повече от две.
+La personne qui regarde, sa famille proche et ses descendants restent toujours visibles. ¦ Το άτομο που κοιτάζει, η στενή οικογένειά του και οι απόγονοί του μένουν πάντα ορατοί. ¦ Човекът, който гледа, близкото му семейство и потомците му винаги остават видими.
+🖼 Choisir les photos à retirer… ¦ 🖼 Διάλεξε τις φωτογραφίες προς αφαίρεση… ¦ 🖼 Избери снимките за премахване…
+Montrer aussi les actes et documents ¦ Εμφάνιση και των πράξεων και εγγράφων ¦ Показвай и актовете и документите
+Souvent difficiles à lire. ¦ Συχνά δύσκολα στην ανάγνωση. ¦ Често трудни за четене.
+Une écriture ancienne ou une page dense découragent ; les photos parlent à tout le monde. ¦ Ένας παλιός γραφικός χαρακτήρας ή μια πυκνή σελίδα αποθαρρύνουν· οι φωτογραφίες μιλούν σε όλους. ¦ Стар почерк или гъста страница обезсърчават; снимките говорят на всички.
+Le temps de regarder, et de dire « Oh, c’est ta tante ! ». ¦ Ο χρόνος για να κοιτάξεις και να πεις «Α, αυτή είναι η θεία σου!». ¦ Време да погледнеш и да кажеш „О, това е леля ти!“.
+Faire défiler tout seul en ouvrant le diaporama ¦ Αυτόματη κύλιση όταν ανοίγει η προβολή διαφανειών ¦ Превъртай автоматично при отваряне на слайдшоуто
+La tablette posée sur le buffet devient un cadre photo de famille. ¦ Το tablet πάνω στον μπουφέ γίνεται οικογενειακή κορνίζα. ¦ Таблетът на бюфета става семейна фоторамка.
+Garder le doigt sur « 🔒 Quitter le mode simple » (sur l’accueil seulement). ¦ Κράτα το δάχτυλο πάνω στο «🔒 Έξοδος από την απλή λειτουργία» (μόνο στην αρχική). ¦ Задръж пръст върху „🔒 Изход от опростения режим“ (само на началния екран).
+Code à 4 chiffres ¦ Κωδικός 4 ψηφίων ¦ Код от 4 цифри
+Tape 4 chiffres : le code est gardé caché, jamais en clair. ¦ Γράψε 4 ψηφία: ο κωδικός μένει κρυφός, ποτέ σε απλό κείμενο. ¦ Въведи 4 цифри: кодът се пази скрит, никога в явен вид.
+Ouvrir l’app directement en mode simple ¦ Άνοιγμα της εφαρμογής κατευθείαν σε απλή λειτουργία ¦ Отваряй приложението направо в опростен режим
+Sur la tablette de Mamie, l’app s’ouvre toute seule sur les gros boutons. Ajoute l’adresse à l’écran d’accueil de la tablette. ¦ Στο tablet της γιαγιάς, η εφαρμογή ανοίγει μόνη της στα μεγάλα κουμπιά. Πρόσθεσε τη διεύθυνση στην αρχική οθόνη του tablet. ¦ На таблета на баба приложението се отваря само на големите бутони. Добави адреса към началния екран на таблета.
+Ces réglages servent de base sur tous les appareils ¦ Αυτές οι ρυθμίσεις χρησιμεύουν ως βάση σε όλες τις συσκευές ¦ Тези настройки служат за основа на всички устройства
+Tu prépares une fois, et chaque tablette ou ordinateur de la famille démarre pareil. ¦ Τα ετοιμάζεις μία φορά, και κάθε tablet ή υπολογιστής της οικογένειας ξεκινά το ίδιο. ¦ Подготвяш веднъж и всеки таблет или компютър в семейството тръгва еднакво.
+Pensé et designé par Victor Baissait. Codé par Codex (ChatGPT) et Claude, sous la supervision de Victor Baissait. ¦ Σύλληψη και σχεδίαση: Victor Baissait. Κώδικας: Codex (ChatGPT) και Claude, υπό την επίβλεψη του Victor Baissait. ¦ Замисъл и дизайн: Victor Baissait. Код: Codex (ChatGPT) и Claude, под надзора на Victor Baissait.
+Cartes, chronologie et statistiques ¦ Χάρτες, χρονολόγιο και στατιστικά ¦ Карти, хронология и статистика
+Communes, lieux-dits et villes du monde : ¦ Δήμοι, τοποθεσίες και πόλεις του κόσμου: ¦ Общини, местности и градове по света:
+Communes de Suisse et du Liechtenstein : swissBOUNDARIES3D © ¦ Δήμοι της Ελβετίας και του Λιχτενστάιν: swissBOUNDARIES3D © ¦ Общини в Швейцария и Лихтенщайн: swissBOUNDARIES3D ©
+Communes du Luxembourg : Administration du cadastre et de la topographie, ¦ Δήμοι του Λουξεμβούργου: Administration du cadastre et de la topographie, ¦ Общини в Люксембург: Administration du cadastre et de la topographie,
+Elle prend la couleur principale de l’Apparence (un rouge devient rouge pâle). La couleur pleine ne peut pas se rater ; la couleur pâle laisse lire les gris et les badges. ¦ Παίρνει το κύριο χρώμα της Εμφάνισης (ένα κόκκινο γίνεται ανοιχτό κόκκινο). Το γεμάτο χρώμα δεν μπορεί να σου ξεφύγει· το ανοιχτό χρώμα αφήνει να διαβάζονται τα γκρι και τα σήματα. ¦ Взима основния цвят от Облика (червеното става бледочервено). Плътният цвят не може да се пропусне; бледият оставя да се четат сивите и значките.
+Le cadre du haut (nom, badges, boutons carrés) de toutes les fiches de personnes et d’animaux. Glisse les boutons pour changer leur ordre ; décoche un bouton pour le masquer. ¦ Το πάνω πλαίσιο (όνομα, σήματα, τετράγωνα κουμπιά) όλων των καρτελών ατόμων και ζώων. Σύρε τα κουμπιά για να αλλάξεις τη σειρά τους· ξετσέκαρε ένα κουμπί για να το κρύψεις. ¦ Горната рамка (име, значки, квадратни бутони) на всички картони на хора и животни. Плъзгай бутоните, за да смениш реда им; махни отметката на бутон, за да го скриеш.
+Fiche épurée, pour un diaporama : ni nom, ni badges, ni boutons en haut. ¦ Καρτέλα λιτή, για προβολή διαφανειών: χωρίς όνομα, σήματα ή κουμπιά πάνω. ¦ Изчистен картон за слайдшоу: без име, значки и бутони горе.
+Les boutons côte à côte, en deux rangées. ¦ Τα κουμπιά το ένα δίπλα στο άλλο, σε δύο σειρές. ¦ Бутоните един до друг, на два реда.
+Il est caché au départ : coche « 🧩 » dans la liste des boutons pour le montrer (décoche-le pour le cacher à nouveau). Pas sur les fiches d’animaux. ¦ Είναι κρυφό στην αρχή: τσέκαρε το «🧩» στη λίστα κουμπιών για να το εμφανίσεις (ξετσέκαρέ το για να το κρύψεις ξανά). Όχι στις καρτέλες ζώων. ¦ Скрит е в началото: отметни „🧩“ в списъка с бутони, за да го покажеш (махни отметката, за да го скриеш пак). Не и в картоните на животни.
+Écrire sur cette personne (traitement de texte) ¦ Γράψε για αυτό το άτομο (επεξεργαστής κειμένου) ¦ Пиши за този човек (текстообработка)
+Gardé tout seul. Alt + ↑ / ↓ au clavier. « 👁＋ » n’apparaît que sur les fiches d’animaux. ¦ Κρατιέται αυτόματα. Alt + ↑ / ↓ από το πληκτρολόγιο. Το «👁＋» εμφανίζεται μόνο στις καρτέλες ζώων. ¦ Пази се автоматично. Alt + ↑ / ↓ от клавиатурата. „👁＋“ се показва само в картоните на животни.
+Ce qui s’affiche sous le nom et à côté du statut. Glisse pour changer l’ordre ; décoche pour masquer. Gardé tout de suite. ¦ Ό,τι εμφανίζεται κάτω από το όνομα και δίπλα στην κατάσταση. Σύρε για να αλλάξεις τη σειρά· ξετσέκαρε για να κρύψεις. Κρατιέται αμέσως. ¦ Какво се показва под името и до статуса. Плъзгай, за да смениш реда; махни отметката, за да скриеш. Пази се веднага.
+La forme de l’en-tête et la place des pastilles (à droite ou sous le nom) : « Forme de l’en-tête », plus bas sur cette page. ¦ Το σχήμα της κεφαλίδας και η θέση των σημάτων (δεξιά ή κάτω από το όνομα): «Σχήμα της κεφαλίδας», πιο κάτω σε αυτή τη σελίδα. ¦ Формата на заглавието и мястото на значките (вдясно или под името): „Форма на заглавието“, по-надолу на тази страница.
+Montrer le lieu et la personne ¦ Εμφάνιση του τόπου και του ατόμου ¦ Покажи мястото и човека
+« Pas revu au bout de… » sert aussi au bloc « Animaux à retrouver » du Suivi : un seul seuil. ¦ Το «Δεν ξαναφάνηκε μετά από…» χρησιμεύει και για το μπλοκ «Ζώα προς εύρεση» της Παρακολούθησης: ένα μόνο όριο. ¦ „Не е виждано от…“ служи и за блока „Животни за намиране“ в Проследяването: един-единствен праг.
+Place de « ＋ Nouvelle observation » ¦ Θέση του «＋ Νέα παρατήρηση» ¦ Място на „＋ Ново наблюдение“
+Le bouton pour noter qu’on a vu l’animal. Seulement sur les fiches d’animaux. ¦ Το κουμπί για να σημειώσεις ότι είδες το ζώο. Μόνο στις καρτέλες ζώων. ¦ Бутонът, с който отбелязваш, че си видял/а животното. Само в картоните на животни.
+Carré 👁＋ en premier dans la grille des boutons ¦ Τετράγωνο 👁＋ πρώτο στο πλέγμα των κουμπιών ¦ Квадрат 👁＋ пръв в мрежата с бутони
+en bas à droite de la fiche ¦ κάτω δεξιά στην καρτέλα ¦ долу вдясно на картона
+Le carré suit aussi « Ordre et visibilité des boutons » plus haut (ligne 01). ¦ Το τετράγωνο ακολουθεί και τη «Σειρά και ορατότητα των κουμπιών» πιο πάνω (γραμμή 01). ¦ Квадратът следва и „Ред и видимост на бутоните“ по-горе (ред 01).

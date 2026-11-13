@@ -18,7 +18,8 @@
     const card = (...args) => A().card(...args);
     const S = () => A().state;
     const fmt = n => Number(n || 0).toLocaleString('fr-FR');
-    const plural = (n, one, many) => `${fmt(n)} ${n > 1 ? many : one}`;
+    const plural = (n, one, many) => (window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? window.LCNDA_I18N.plural(n, one, many) : `${fmt(n)} ${n > 1 ? many : one}`);
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const isCurrent = token => token === S().workspaceToken && S().module === 'listes';
     const personLink = (id, name) => id ? `<button type="button" class="table-link" data-h-person="${Number(id)}">${esc(name || 'Personne')}</button>` : esc(name || '');
     const pname = p => p ? A().personName(p) : '';
@@ -52,16 +53,18 @@
         // majorité : 21 ans, puis 18 ans à partir de 1974 (France ; la plupart des pays l'ont abaissée vers 1970)
         const adult = born ? Math.min(born + 21, Math.max(born + 18, 1974)) : 0;
         const from = Math.max(year, adult);
-        const who = female ? 'elle' : 'il';
-        const after = !born ? '' : died && died < from ? ` — ${female ? 'morte' : 'mort'} en ${died}, ${who} n’a pas pu voter à ce titre` : ` — ${who} a pu voter à partir de ${from}${adult > year ? ` (à ses ${adult - born} ans)` : ''}`;
-        return `<p class="h-voter-right">🗳️ Droit de vote des ${female ? 'femmes' : 'hommes'} (${esc(country.name)}) : <strong>${year}</strong>${after}.</p>`;
+        const yv = {y: String(died), from: String(from), age: adult - born};
+        const after = !born ? '' : died && died < from ? (female ? ' ' + i18n('— morte en {y}, elle n’a pas pu voter à ce titre', yv) : ' ' + i18n('— mort en {y}, il n’a pas pu voter à ce titre', yv))
+            : adult > year ? (female ? ' ' + i18n('— elle a pu voter à partir de {from} (à ses {age} ans)', yv) : ' ' + i18n('— il a pu voter à partir de {from} (à ses {age} ans)', yv))
+            : (female ? ' ' + i18n('— elle a pu voter à partir de {from}', yv) : ' ' + i18n('— il a pu voter à partir de {from}', yv));
+        return `<p class="h-voter-right">${female ? i18n('🗳️ Droit de vote des femmes ({country}) : <strong>{year}</strong>', {country: esc(country.name), year: String(year)}) : i18n('🗳️ Droit de vote des hommes ({country}) : <strong>{year}</strong>', {country: esc(country.name), year: String(year)})}${after}.</p>`;
     }
 
     function cardHtml(c) {
-        const head = [c.card_number && `Carte n° ${esc(c.card_number)}`, c.commune && `<strong>${esc(c.commune)}</strong>${c.country && c.country !== 'France' ? ` (${esc(c.country)})` : ''}`, c.bureau && `bureau ${esc(c.bureau)}`].filter(Boolean).join(' · ');
-        const dates = [c.issued && `délivrée le ${esc(c.issued)}`, (c.valid_from || c.valid_to) && `valable ${esc(c.valid_from || '?')} → ${esc(c.valid_to || '?')}`].filter(Boolean).join(' · ');
-        const rest = ['list_number', 'bureau_address', 'address', 'written_name', 'written_birth', 'occupation', 'reason', 'source'].filter(k => c[k]).map(k => `<div class="data-row"><dt>${esc(CARD_LABELS[k])}</dt><dd>${esc(c[k])}</dd></div>`).join('');
-        return `<article class="h-voter-card"><header>🗳️ ${head || 'Carte d’électeur'}</header>${dates ? `<p class="muted">${dates}</p>` : ''}${rest ? `<dl class="data-list">${rest}</dl>` : ''}${c.note ? `<p class="h-transcription">${nl(c.note)}</p>` : ''}</article>`;
+        const head = [c.card_number && i18n('Carte n° {num}', {num: esc(c.card_number)}), c.commune && `<strong>${esc(c.commune)}</strong>${c.country && c.country !== 'France' ? ` (${esc(c.country)})` : ''}`, c.bureau && i18n('bureau {bureau}', {bureau: esc(c.bureau)})].filter(Boolean).join(' · ');
+        const dates = [c.issued && i18n('délivrée le {dt}', {dt: esc(c.issued)}), (c.valid_from || c.valid_to) && i18n('valable {from} → {to}', {from: esc(c.valid_from || '?'), to: esc(c.valid_to || '?')})].filter(Boolean).join(' · ');
+        const rest = ['list_number', 'bureau_address', 'address', 'written_name', 'written_birth', 'occupation', 'reason', 'source'].filter(k => c[k]).map(k => `<div class="data-row"><dt>${esc(i18n(CARD_LABELS[k]))}</dt><dd>${esc(c[k])}</dd></div>`).join('');
+        return `<article class="h-voter-card"><header>🗳️ ${head || i18n('Carte d’électeur')}</header>${dates ? `<p class="muted">${dates}</p>` : ''}${rest ? `<dl class="data-list">${rest}</dl>` : ''}${c.note ? `<p class="h-transcription">${nl(c.note)}</p>` : ''}</article>`;
     }
     function votesHtml(votes) {
         if (!votes.length) return '';
@@ -185,18 +188,18 @@
                     else if (atYear) fill = y <= atYear ? '#2f8f5b' : '#e3e3e3';
                     else fill = periodColor(y);
                 }
-                const tip = s ? `${s.name} — hommes : ${s.men || '?'} · femmes : ${s.women || '?'}` : `${c.name} — pas de date dans la liste`;
+                const tip = s ? i18n('{nm} — hommes : {men} · femmes : {women}', {nm: s.name, men: String(s.men || '?'), women: String(s.women || '?')}) : i18n('{nm} — pas de date dans la liste', {nm: c.name});
                 return `<path d="${c.d}" fill="${fill}" ${selected && c.id === selected ? 'class="is-selected"' : ''} data-h-suffrage-country="${esc(c.id)}"><title>${esc(tip)}</title></path>`;
             }).join('')}</svg>`;
     }
     function legendHtml(who, atYear) {
-        if (who === 'gap') return `<div class="h-suffrage-legend">${[['#3b8ec4', 'les femmes avant'], ['#4a9d5b', 'en même temps'], ['#9ccf8a', '1 à 10 ans'], ['#f0b45a', '11 à 30 ans'], ['#e07b39', '31 à 60 ans'], ['#c0392b', 'plus de 60 ans'], ['#d8d8d8', 'pas de date']].map(([c, l]) => `<span><i style="background:${c}"></i>${l}</span>`).join('')}<small class="muted">Années entre le vote des hommes et celui des femmes.</small></div>`;
-        if (atYear) return `<div class="h-suffrage-legend"><span><i style="background:#2f8f5b"></i>${who === 'men' ? 'les hommes votent' : 'les femmes votent'} en ${atYear}</span><span><i style="background:#e3e3e3"></i>pas encore</span><span><i style="background:#d8d8d8"></i>pas de date</span></div>`;
+        if (who === 'gap') return `<div class="h-suffrage-legend">${[['#3b8ec4', 'les femmes avant'], ['#4a9d5b', 'en même temps'], ['#9ccf8a', '1 à 10 ans'], ['#f0b45a', '11 à 30 ans'], ['#e07b39', '31 à 60 ans'], ['#c0392b', 'plus de 60 ans'], ['#d8d8d8', 'pas de date']].map(([c, l]) => `<span><i style="background:${c}"></i>${i18n(l)}</span>`).join('')}<small class="muted">Années entre le vote des hommes et celui des femmes.</small></div>`;
+        if (atYear) return `<div class="h-suffrage-legend"><span><i style="background:#2f8f5b"></i>${who === 'men' ? i18n('les hommes votent en {year}', {year: String(atYear)}) : i18n('les femmes votent en {year}', {year: String(atYear)})}</span><span><i style="background:#e3e3e3"></i>pas encore</span><span><i style="background:#d8d8d8"></i>pas de date</span></div>`;
         return `<div class="h-suffrage-legend">${PERIODS.map(([, , c, l]) => `<span><i style="background:${c}"></i>${l}</span>`).join('')}<span><i style="background:#d8d8d8"></i>pas de date</span></div>`;
     }
     function countryInfo(s) {
         if (!s) return '';
-        return `<div class="h-suffrage-info"><h4>${esc(s.name)} <small class="muted">${esc(s.region)}</small></h4><p>👨 Hommes : <strong>${s.men || '—'}</strong> · 👩 Femmes : <strong>${s.women || '—'}</strong>${s.men && s.women ? ` <small class="muted">(${s.women - s.men > 0 ? `${s.women - s.men} ans d’écart` : s.women < s.men ? `les femmes ${s.men - s.women} ans avant les hommes` : 'en même temps'})</small>` : ''}</p>${s.note ? `<p>${esc(s.note)}</p>` : ''}
+        return `<div class="h-suffrage-info"><h4>${esc(s.name)} <small class="muted">${esc(s.region)}</small></h4><p>👨 Hommes : <strong>${s.men || '—'}</strong> · 👩 Femmes : <strong>${s.women || '—'}</strong>${s.men && s.women ? ` <small class="muted">(${s.women - s.men > 0 ? i18n('{gap} ans d’écart', {gap: s.women - s.men}) : s.women < s.men ? i18n('les femmes {gap} ans avant les hommes', {gap: s.men - s.women}) : i18n('en même temps')})</small>` : ''}</p>${s.note ? `<p>${esc(s.note)}</p>` : ''}
             ${s.subdivisions ? `<details open><summary>${esc(s.subdivisions_label || 'Régions')}</summary><table class="data-table"><tbody>${[...s.subdivisions].sort((a, b) => a.women - b.women || a.name.localeCompare(b.name, 'fr')).map(x => `<tr><td>${esc(x.name)}</td><td>${x.women}</td><td><small>${esc(x.note || '')}</small></td></tr>`).join('')}</tbody></table></details>` : ''}</div>`;
     }
     const SORTS = {name: ['Pays (A → Z)', (a, b) => a.name.localeCompare(b.name, 'fr')], region: ['Région, puis pays', (a, b) => a.region.localeCompare(b.region, 'fr') || a.name.localeCompare(b.name, 'fr')],
@@ -233,7 +236,7 @@
                     <div class="h-suffrage-controls"><span data-h-suffrage-sortbar></span>
                     <label>Région <select data-h-suffrage-region><option value="">Toutes</option>${regions.map(r => `<option ${st.hSuffrage.region === r ? 'selected' : ''}>${esc(r)}</option>`).join('')}</select></label></div>
                     <div data-h-suffrage-rows>${countryListHtml(world, st.hSuffrage.sort, st.hSuffrage.region)}</div></details>
-                <p class="muted"><small>${esc(world.suffrage.source)} Fond de carte : Natural Earth (domaine public) ; les tout petits pays ne sont que dans la liste.</small></p></section>` : '<p class="muted">La carte du droit de vote n’a pas pu être chargée.</p>'}</section>`;
+                <p class="muted"><small>${esc(i18n(world.suffrage.source))} ${i18n('Fond de carte : Natural Earth (domaine public) ; les tout petits pays ne sont que dans la liste.')}</small></p></section>` : '<p class="muted">La carte du droit de vote n’a pas pu être chargée.</p>'}</section>`;
         const ws = A().$('#workspace');
         // H10 : la barre commune au-dessus des électeurs (retenue pour cette liste) ; la carte du monde, dessous, ne bouge pas
         const U = window.LCNDA_UI, LM = U?.listMatch, vbox = ws.querySelector('[data-h-voters-list]'), vslot = ws.querySelector('[data-h-voters-bar]');
@@ -254,7 +257,7 @@
             const bar = U.listBar({key: 'listes:voter_cards', search: {placeholder: 'Chercher… (personne, commune)'},
                 filters: [{id: 'commune', label: 'Commune', type: 'place', chipPrefix: '📍'},
                     {id: 'from', group: 'Période du premier vote', label: 'À partir de', type: 'date', placeholder: '« 1900 »', chipPrefix: 'Premier vote depuis'}, {id: 'to', group: 'Période du premier vote', label: 'Jusqu’à', type: 'date', placeholder: '« 1950 »', chipPrefix: 'Premier vote jusqu’à'},
-                    {id: 'photo', label: 'Photos', type: 'radio', dflt: '', options: [['', 'Tous'], ['yes', `Avec des photos (${people.filter(hasPh).length})`, '📷 Avec photos'], ['no', `Sans photo (${people.filter(r => !hasPh(r)).length})`, 'Sans photo']]}],
+                    {id: 'photo', label: 'Photos', type: 'radio', dflt: '', options: [['', 'Tous'], ['yes', i18n('Avec des photos ({n})', {n: people.filter(hasPh).length}), '📷 Avec photos'], ['no', i18n('Sans photo ({n})', {n: people.filter(r => !hasPh(r)).length}), 'Sans photo']]}],
                 sort: {options: [['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A'], ['votes', 'Le plus de votes'], ['first', 'Premier vote']], value: 'first'},
                 onChange: () => paint(bar)});
             vslot.replaceWith(bar); paint(bar);

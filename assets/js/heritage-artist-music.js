@@ -5,6 +5,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ART = window.LCNDA_ART; if (!ART?.define) return;
     const U = ART.util, esc = U.esc;
     const REL_TYPES = [['album', 'Album'], ['ep', 'EP, maxi'], ['single', 'Single, 45 tours'], ['compil', 'Compilation'], ['live', 'En public (live)'], ['bo', 'Bande originale'], ['coffret', 'Coffret'], ['reedition', 'Réédition'], ['participation', 'Participation'], ['autre', 'Autre']];

@@ -1,0 +1,5 @@
+Chromosome,Start,End,Match,cM,SNPs,Side,Group,Notes,Colour
+1,72017446,98912213,Camille Imaginaire,24.6,5300,paternal,Delmas x Carrié,triangulé avec Inès,#4e79a7
+3,45120333,98543221,Camille Imaginaire,58.1,9100,paternal,Delmas x Carrié,,#4e79a7
+7,120000000,141000000,Lucas Fictif,22.0,4100,maternal,Fabre,,#e15759
+X,10500000,23800000,"Morvan, Inès",31.2,3500,maternal,Morvan x Le Goff,segment X,#59a14f

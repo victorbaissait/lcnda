@@ -45,9 +45,9 @@ module.exports = async (t, {page, open, body, pick: exportPick}, assert) => {
     await t('👶 prénoms qui sautent une génération : Henri (1994), comme son grand-père Henri', async () => {
         await open('prenoms-sauts'); const b = await body(); assert.match(b, /Henri MARTIN \(1994\), comme son grand-père Henri MARTIN \(1905\)/); assert.match(b, /MARTIN/);
     });
-    await t('💰 pouvoir d’achat : 100 francs de 1900 ≈ 400 € et ≈ 300 kg de pain ; la dot de 1200 francs de l’arbre est convertie', async () => {
+    await t('💰 pouvoir d’achat : 100 francs de 1900 ≈ 500 € et ≈ 300 kg de pain ; la dot de 1200 francs de l’arbre est convertie', async () => {
         await open('pouvoir-achat'); const w = await page.evaluate(() => window.LCNDA_EXT.tresorMoney.worth(100, 'livre', 1900));
-        assert.ok(w.euros > 350 && w.euros < 450, `${w.euros} €`); assert.ok(w.bread > 250 && w.bread < 330, `${w.bread} kg`); assert.ok(w.days > 20 && w.days < 60, `${w.days} j`);
+        assert.ok(w.euros > 400 && w.euros < 620, `${w.euros} €`); // calcul du Convertisseur d’autrefois : 1 franc de 1901 ≈ 5,08 € (indice INSEE base 2025) assert.ok(w.bread > 250 && w.bread < 330, `${w.bread} kg`); assert.ok(w.days > 20 && w.days < 60, `${w.days} j`);
         const b = await body(); assert.match(b, /En euros d’aujourd’hui/); assert.match(b, /1200 francs en 1876 — Antoine MARTIN|1200 francs en 1876/);
         const e = await page.evaluate(() => window.LCNDA_EXT.tresorMoney.worth(10, 'euro', 2025)); assert.ok(Math.abs(e.euros - 10) < 0.01);
     });

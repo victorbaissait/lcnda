@@ -21,21 +21,43 @@ declare(strict_types=1);
  */
 const ACT_KINDS = ['BIRT' => 'naissance', 'MARR' => 'mariage', 'DEAT' => 'décès'];
 
-function recent_acts(PDO $pdo): array
+function recent_acts(PDO $pdo, int $onlyEventId = 0, ?array $page = null, ?int &$total = null): array
 {
     $now = (int) date('Y');
+    // un seul acte (la lettre à la mairie) : seulement lui, pas les 100 000 actes d'une très grosse base
+    $one = $onlyEventId > 0 ? ' AND e.id=' . $onlyEventId : '';
     $rows = $pdo->query("SELECT e.id, e.date_text, e.year, e.person_id, e.family_id, t.gedcom_tag, t.label, pl.name AS place, pl.county, pl.country, pl.admin4_code,
             (SELECT count(*) FROM media_links ml WHERE ml.entity_type='event' AND ml.entity_id=e.id) AS media_count,
             (SELECT count(*) FROM source_links sl WHERE sl.entity_type='event' AND sl.entity_id=e.id) AS source_count,
             (SELECT c.id FROM courriers c WHERE c.event_id=e.id ORDER BY c.id DESC LIMIT 1) AS courrier_id,
             (SELECT c.statut FROM courriers c WHERE c.event_id=e.id ORDER BY c.id DESC LIMIT 1) AS courrier_statut
         FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id
-        WHERE t.gedcom_tag IN ('BIRT','MARR','DEAT') AND e.year IS NOT NULL AND e.year > " . ($now - 100) . " AND e.year <= {$now}
+        WHERE t.gedcom_tag IN ('BIRT','MARR','DEAT') AND e.year IS NOT NULL AND e.year > " . ($now - 100) . " AND e.year <= {$now}{$one}
         ORDER BY e.year DESC")->fetchAll();
+    // les couples : lus en une fois (avant : deux requêtes par mariage)
+    $fams = [];
+    $famIds = array_values(array_unique(array_filter(array_map(static fn($r) => (int) $r['family_id'], $rows))));
+    foreach (array_chunk($famIds, 20000) as $chunk) {
+        foreach ($pdo->query('SELECT id, partner1_id, partner2_id FROM families WHERE id IN (' . implode(',', $chunk) . ')') as $f) { $fams[(int) $f['id']] = $f; }
+    }
+    if ($page !== null) { // une page (recent_acts_page) : on filtre et on compte sans lire les fiches, puis seulement celles de la page
+        $exists = array_fill_keys(array_map('intval', $pdo->query('SELECT id FROM persons')->fetchAll(PDO::FETCH_COLUMN)), true);
+        $kept = []; $total = 0;
+        foreach ($rows as $r) {
+            $f = $r['person_id'] ? null : ($fams[(int) $r['family_id']] ?? null);
+            $wid = $r['person_id'] ? [(int) $r['person_id']] : ($f ? [(int) $f['partner1_id'], (int) $f['partner2_id']] : []);
+            if (!array_filter($wid, static fn($id) => isset($exists[$id]))) { continue; }
+            if (!$page['all'] && (((int) $r['media_count'] + (int) $r['source_count']) > 0 || $r['courrier_id'])) { continue; }
+            if ($page['kind'] !== '' && ACT_KINDS[$r['gedcom_tag']] !== $page['kind']) { continue; }
+            $total++;
+            if (count($kept) < $page['limit']) { $kept[] = $r; }
+        }
+        $rows = $kept;
+    }
     $ids = [];
     foreach ($rows as $r) {
         if ($r['person_id']) { $ids[] = (int) $r['person_id']; }
-        if ($r['family_id']) { $f = $pdo->query('SELECT partner1_id, partner2_id FROM families WHERE id=' . (int) $r['family_id'])->fetch(); if ($f) { $ids[] = (int) $f['partner1_id']; $ids[] = (int) $f['partner2_id']; } }
+        if ($r['family_id']) { $f = $fams[(int) $r['family_id']] ?? null; if ($f) { $ids[] = (int) $f['partner1_id']; $ids[] = (int) $f['partner2_id']; } }
     }
     $people = collection_people($pdo, $ids);
     $out = [];
@@ -43,7 +65,7 @@ function recent_acts(PDO $pdo): array
         $tag = $r['gedcom_tag'];
         $who = [];
         if ($r['person_id']) { $who[] = $people[(int) $r['person_id']] ?? null; }
-        else { $f = $pdo->query('SELECT partner1_id, partner2_id FROM families WHERE id=' . (int) $r['family_id'])->fetch(); if ($f) { $who[] = $people[(int) $f['partner1_id']] ?? null; $who[] = $people[(int) $f['partner2_id']] ?? null; } }
+        else { $f = $fams[(int) $r['family_id']] ?? null; if ($f) { $who[] = $people[(int) $f['partner1_id']] ?? null; $who[] = $people[(int) $f['partner2_id']] ?? null; } }
         $who = array_values(array_filter($who));
         if (!$who) { continue; }
         $exact = function_exists('exact_date') ? exact_date((string) $r['date_text']) : null;
@@ -59,11 +81,23 @@ function recent_acts(PDO $pdo): array
     return $out;
 }
 
+/**
+ * GET recent_acts : avec ?limit=N, seulement les N premiers actes à montrer (filtres « all » et « kind » appliqués ici) et leur
+ * nombre — une très grosse base en a 100 000 (plus de 150 Mo envoyés au navigateur avant). Sans limit : tous, comme avant.
+ */
+function recent_acts_page(PDO $pdo, array $q): array
+{
+    if (!isset($q['limit'])) { return ['acts' => recent_acts($pdo)]; }
+    $total = 0;
+    $acts = recent_acts($pdo, 0, ['all' => ($q['all'] ?? '') === '1', 'kind' => (string) ($q['kind'] ?? ''), 'limit' => max(1, min(1000, (int) $q['limit']))], $total);
+    return ['acts' => $acts, 'total' => $total];
+}
+
 /** Lettre de demande prête à envoyer à la mairie (copie intégrale si possible, sinon extrait). */
 function act_request_letter(PDO $pdo, int $eventId, string $requester, string $relation): array
 {
     $act = null;
-    foreach (recent_acts($pdo) as $a) { if ($a['event_id'] === $eventId) { $act = $a; break; } }
+    foreach (recent_acts($pdo, $eventId) as $a) { if ($a['event_id'] === $eventId) { $act = $a; break; } }
     if (!$act) { throw new RuntimeException('Acte introuvable (ou de plus de 100 ans : il est sans doute en ligne aux archives).'); }
     $names = implode(' et ', array_map(static fn($p) => trim(($p['first_name'] ?? '') . ' ' . ($p['last_name'] ?? '')), $act['people']));
     $parents = '';
@@ -797,13 +831,13 @@ function suspicious_places(PDO $pdo): array
         $country = strtolower(ascii_fold(trim((string) $r['country']))) ?: 'france';
         $country = str_replace(['etats unis', 'usa', 'united states'], 'etats-unis', $country);
         $reasons = []; $suggest = null;
-        if ($lat == 0.0 && $lon == 0.0) { $reasons[] = 'Coordonnées 0, 0 (en plein océan, au large de l’Afrique)'; }
+        if ($lat == 0.0 && $lon == 0.0) { $reasons[] = i18n_t('Coordonnées 0, 0 (en plein océan, au large de l’Afrique)'); }
         elseif (isset(COUNTRY_BOXES[$country])) {
             [$a, $b, $c, $d] = COUNTRY_BOXES[$country];
             if (!place_in_country($country, $lat, $lon)) {
-                $reasons[] = 'Hors de ' . ($r['country'] ?: 'France') . ' alors que le pays indiqué est ' . ($r['country'] ?: 'France');
-                if ($lon >= $a && $lon <= $b && $lat >= $c && $lat <= $d) { $reasons[] = 'Latitude et longitude probablement inversées'; $suggest = ['lat' => $lon, 'lon' => $lat, 'why' => 'Inverser latitude et longitude']; }
-                elseif ($country === 'france' && $lat >= $a && $lat <= $b && -$lon >= $c && -$lon <= $d) { $reasons[] = 'Longitude probablement de mauvais signe (est / ouest)'; $suggest = ['lat' => $lat, 'lon' => -$lon, 'why' => 'Corriger le signe de la longitude']; }
+                $reasons[] = i18n_t('Hors de {country} alors que le pays indiqué est {country}', ['country' => $r['country'] ?: 'France']);
+                if ($lon >= $a && $lon <= $b && $lat >= $c && $lat <= $d) { $reasons[] = i18n_t('Latitude et longitude probablement inversées'); $suggest = ['lat' => $lon, 'lon' => $lat, 'why' => i18n_t('Inverser latitude et longitude')]; }
+                elseif ($country === 'france' && $lat >= $a && $lat <= $b && -$lon >= $c && -$lon <= $d) { $reasons[] = i18n_t('Longitude probablement de mauvais signe (est / ouest)'); $suggest = ['lat' => $lat, 'lon' => -$lon, 'why' => i18n_t('Corriger le signe de la longitude')]; }
             }
         }
         $dist = h_distance_km($center[0], $center[1], $lat, $lon);
@@ -811,12 +845,13 @@ function suspicious_places(PDO $pdo): array
             $best = null;
             foreach ($byName[mb_strtolower(trim((string) $r['name']))] as $c) { $dc = h_distance_km($center[0], $center[1], (float) $c['centroid_lat'], (float) $c['centroid_lon']); if (!$best || $dc < $best['d']) { $best = ['d' => $dc, 'c' => $c]; } }
             if ($best && $best['d'] + 150 < $dist && $best['c']['insee_code'] !== $r['admin4_code']) {
-                $reasons[] = 'Une autre commune « ' . $r['name'] . ' » est beaucoup plus près du reste de la famille (' . round($best['d']) . ' km au lieu de ' . round($dist) . ' km) : département ' . substr((string) $best['c']['insee_code'], 0, 2);
-                $suggest ??= ['lat' => (float) $best['c']['centroid_lat'], 'lon' => (float) $best['c']['centroid_lon'], 'insee' => $best['c']['insee_code'], 'why' => 'Prendre la commune du département ' . substr((string) $best['c']['insee_code'], 0, 2)];
+                $reasons[] = i18n_t('Une autre commune « {name} » est beaucoup plus près du reste de la famille ({a} km au lieu de {b} km) : département {dep}', ['name' => $r['name'], 'a' => round($best['d']), 'b' => round($dist), 'dep' => substr((string) $best['c']['insee_code'], 0, 2)]);
+                $suggest ??= ['lat' => (float) $best['c']['centroid_lat'], 'lon' => (float) $best['c']['centroid_lon'], 'insee' => $best['c']['insee_code'], 'why' => i18n_t('Prendre la commune du département {dep}', ['dep' => substr((string) $best['c']['insee_code'], 0, 2)])];
             }
         }
-        if (!$reasons && $dist > 1500 && $country === 'france' && !france_overseas_name($lat, $lon)) { $reasons[] = 'À ' . round($dist) . ' km du reste de la famille'; }
-        if ($reasons) { $alerts[] = ['place' => $r, 'distance' => round($dist), 'reasons' => $reasons, 'suggest' => $suggest]; }
+        $onlyFar = false;
+        if (!$reasons && $dist > 1500 && $country === 'france' && !france_overseas_name($lat, $lon)) { $reasons[] = i18n_t('À {n} km du reste de la famille', ['n' => round($dist)]); $onlyFar = true; }
+        if ($reasons) { $alerts[] = ['place' => $r, 'distance' => round($dist), 'reasons' => $reasons, 'suggest' => $suggest, 'only_far' => $onlyFar]; }
     }
     usort($alerts, static fn($a, $b) => $b['distance'] <=> $a['distance']);
     return ['alerts' => $alerts, 'center' => $center];
@@ -1106,7 +1141,7 @@ function save_custom_block_entry(PDO $pdo, array $data): array
             case 'longtext': $clean[$f['key']] = mb_substr((string) ($v ?? ''), 0, 40000); break;
             default: $clean[$f['key']] = mb_substr(safe_text($v ?? ''), 0, 2000);
         }
-        if (!empty($f['required']) && in_array($f['type'], ['text', 'longtext', 'date', 'select', 'person'], true) && ($clean[$f['key']] ?? '') === '') { throw new RuntimeException('Le champ « ' . $f['label'] . ' » est obligatoire.'); }
+        if (!empty($f['required']) && in_array($f['type'], ['text', 'longtext', 'date', 'select', 'person'], true) && ($clean[$f['key']] ?? '') === '') { throw new RuntimeException(i18n_t('Le champ « {label} » est obligatoire.', ['label' => $f['label']])); }
     }
     $json = json_encode($clean, JSON_UNESCAPED_UNICODE);
     if ($id) {

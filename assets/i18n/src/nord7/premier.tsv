@@ -1,0 +1,111 @@
+fr ¦ is
+# ═════ zone « premier » : islandais (is) ═════
+INSTALLATION ¦ UPPSETNING
+La base généalogique doit être importée. ¦ Það þarf að flytja inn ættfræðigagnagrunninn.
+Choisis comment démarrer : importer un fichier existant, ou créer une première personne pour partir d'une base vide. ¦ Veldu hvernig þú byrjar: flytja inn skrá sem er til, eða búa til fyrsta einstaklinginn og byrja með tóman gagnagrunn.
+GEDCOM (.ged, aussi d’Ancestry, MyHeritage, Geneanet), Gramps (.gramps ou paquet .gpkg avec les photos), Hérédis (.hmw ou .heredis), MacFamilyTree (.mftpkg), base LCNDA (.db) ou sauvegarde complète LCNDA (.zip, base + médias). Les fichiers JSON et CSV sont analysés mais pas encore importés. ¦ GEDCOM (.ged, líka frá Ancestry, MyHeritage, Geneanet), Gramps (.gramps eða .gpkg-pakki með myndunum), Hérédis (.hmw eða .heredis), MacFamilyTree (.mftpkg), LCNDA-gagnagrunnur (.db) eða heilt LCNDA-afrit (.zip, gagnagrunnur + miðlar). JSON- og CSV-skrár eru greindar en ekki enn fluttar inn.
+Fichier ¦ Skrá
+Créer une première personne ¦ Búa til fyrsta einstaklinginn
+Initialise une base vide avec une première fiche, à compléter ensuite. ¦ Býr til tóman gagnagrunn með fyrsta spjaldinu, sem þú fyllir út síðar.
+Prénom ¦ Eiginnafn
+Nom ¦ Eftirnafn
+Créer et ouvrir la base ¦ Búa til og opna gagnagrunninn
+Je veux faire autre chose ▾ ¦ Ég vil gera eitthvað annað ▾
+▴ Replier ¦ ▴ Fella saman
+Qu’est-ce que tu veux faire avec l’app ? ¦ Hvað viltu gera með appinu?
+Choisis ce qui te ressemble : l’app s’ouvre avec les bons onglets et le bon premier écran. Tu pourras tout changer après. ¦ Veldu það sem hentar þér: appið opnast með réttu flipunum og réttum fyrsta skjá. Þú getur breytt öllu síðar.
+Ta famille, tes ancêtres, leurs actes et leurs photos. ¦ Fjölskyldan þín, forfeður þínir, skjöl þeirra og myndir.
+Une lignée d’animaux ¦ Ættlína dýra
+Un élevage, le pedigree de tes chiens, chats, chevaux… ¦ Ræktun, ættbók hundanna, kattanna, hestanna þinna…
+Recenser des animaux ¦ Skrá dýr
+Suivre des animaux : baguage, puces, observations, trajets. ¦ Fylgjast með dýrum: merkingar, örmerki, athuganir, ferðir.
+L’histoire d’une maison ou d’un village ¦ Saga húss eða þorps
+Maison ou village ¦ Hús eða þorp
+Qui a vécu où, de génération en génération, pièce par pièce. ¦ Hver bjó hvar, kynslóð eftir kynslóð, herbergi fyrir herbergi.
+Le catalogue d’un artiste ou d’une collection ¦ Skrá yfir listamann eða safn
+Artiste ou collection ¦ Listamaður eða safn
+Ses œuvres, ses expositions, son catalogue raisonné. ¦ Verkin, sýningarnar, heildarskrá verkanna.
+Un fonds d’archives ou un musée familial ¦ Skjalasafn eða fjölskyldusafn
+Archives ou musée ¦ Skjalasafn eða safn
+Des photos, des lettres, des objets à classer et à décrire. ¦ Myndir, bréf, munir til að flokka og lýsa.
+L’étude d’un nom de famille ¦ Rannsókn á ættarnafni
+Un nom de famille ¦ Ættarnafn
+Tous les porteurs d’un nom, ses variantes, d’où ils viennent. ¦ Allir sem bera nafnið, afbrigði þess, hvaðan þeir koma.
+L’histoire d’une entreprise ou d’une association ¦ Saga fyrirtækis eða félags
+Entreprise ou association ¦ Fyrirtæki eða félag
+Ses lieux, ses dirigeants, ses salariés ou ses membres. ¦ Staðir þess, stjórnendur, starfsmenn eða félagar.
+Transmettre des souvenirs ¦ Miðla minningum
+Des lettres à ouvrir plus tard, des recettes, des chansons, des souvenirs à laisser. ¦ Bréf til að opna síðar, uppskriftir, söngvar, minningar til að skilja eftir.
+Ce qui change ¦ Það sem breytist
+Commencer avec une base vide ¦ Byrja með tóman gagnagrunn
+🧪 Essayer avec une base d’exemple ¦ 🧪 Prófa með sýnigagnagrunni
+🧪 Base d’exemple ¦ 🧪 Sýnigagnagrunnur
+Une famille imaginaire pour essayer l’app : ta généalogie n’est pas touchée. ¦ Ímynduð fjölskylda til að prófa appið: ættfræðin þín er ekki snert.
+Revenir à ma généalogie ¦ Aftur í ættfræðina mína
+Repartir d’une base vide ¦ Byrja aftur með tóman gagnagrunn
+Ou bien : ¦ Eða:
+🐾 Créer le premier animal ¦ 🐾 Búa til fyrsta dýrið
+Créer le premier animal ¦ Búa til fyrsta dýrið
+Espèce ¦ Tegund
+Création de la base… ¦ Gagnagrunnurinn er búinn til…
+Préparation de la base d’exemple… ¦ Sýnigagnagrunnurinn er undirbúinn…
+✓ Base créée ¦ ✓ Gagnagrunnur búinn til
+ℹ️ Rien n’est figé : Réglages → Apparence → « 🧭 Usage de l’app ». ¦ ℹ️ Ekkert er endanlegt: Stillingar → Útlit → „🧭 Notkun appsins“.
+🧭 Usage de l’app ¦ 🧭 Notkun appsins
+🧭 Revoir le premier lancement ¦ 🧭 Sjá fyrstu ræsingu aftur
+Premier écran à l’ouverture ¦ Fyrsti skjár við opnun
+Le dernier écran ouvert (comme avant) ¦ Síðasti skjár sem var opinn (eins og áður)
+Usage enregistré. ¦ Notkun vistuð.
+(la page va se recharger) ¦ (síðan hleðst aftur)
+Langue · Language ¦ Tungumál · Language
+Une petite visite ? ¦ Smá kynning?
+En {n} étapes, l’app te montre où créer une fiche, ajouter un parent, une photo, un événement, faire une sauvegarde et trouver l’aide. Ça prend deux minutes. ¦ Í {n} skrefum sýnir appið þér hvar þú býrð til spjald, bætir við foreldri, mynd, atburði, tekur afrit og finnur hjálpina. Það tekur tvær mínútur.
+▶ Commencer ¦ ▶ Byrja
+Plus tard ¦ Seinna
+Ne plus proposer ¦ Ekki bjóða aftur
+Passer la visite ¦ Sleppa kynningunni
+← Précédent ¦ ← Fyrra
+Suivant → ¦ Næsta →
+✓ Terminer ¦ ✓ Ljúka
+Étape {i} sur {n} ¦ Skref {i} af {n}
+Visite guidée, étape {i} sur {n} : {what} ¦ Leiðsögn, skref {i} af {n}: {what}
+Tu peux cliquer le bouton entouré pour le faire pour de vrai, ou juste avancer. ¦ Þú getur smellt á hnappinn sem er hringaður til að gera það í alvöru, eða bara haldið áfram.
+Ajouter un parent ¦ Bæta við foreldri
+Ajouter une photo ¦ Bæta við mynd
+Un événement et son lieu ¦ Atburður og staður hans
+Faire une sauvegarde ¦ Taka afrit
+Les Réglages et l’aide ¦ Stillingar og hjálp
+Chaque personne a sa fiche. Ce bouton en crée une : un prénom, un nom, et c’est parti. ¦ Hver einstaklingur hefur sitt spjald. Þessi hnappur býr til eitt: eiginnafn, eftirnafn, og þá er allt komið af stað.
+Sur une fiche, le « ＋ » de « Parents » relie un père ou une mère : choisis une fiche qui existe, ou crée-la. C’est comme ça que l’arbre se construit. ¦ Á spjaldi tengir „＋“ við „Foreldrar“ föður eða móður: veldu spjald sem er til, eða búðu það til. Þannig verður tréð til.
+Ici, tu ajoutes des photos et des actes à la fiche : prends-les dans tes médias, ou glisse-les depuis l’ordinateur. ¦ Hér bætirðu myndum og skjölum við spjaldið: taktu þau úr miðlunum þínum, eða dragðu þau inn úr tölvunni.
+Naissance, mariage, décès… Ajoute un événement avec sa date et son lieu : tape les premières lettres de la commune, l’app la trouve. ¦ Fæðing, hjónaband, andlát… Bættu við atburði með dagsetningu og stað: sláðu inn fyrstu stafina í staðarheitinu, appið finnur það.
+De temps en temps, fais une sauvegarde : ce fichier garde toute ta généalogie et tes photos. Range-le sur une clé USB ou un autre disque. ¦ Taktu afrit öðru hverju: þessi skrá geymir alla ættfræðina þína og myndirnar. Geymdu hana á USB-lykli eða öðrum diski.
+Tout se règle ici : apparence, import, sauvegardes… Dans les Réglages, la page « FAQ / tuto » répond à tes questions ; tu peux aussi y relancer cette visite. ¦ Hér er allt stillt: útlit, innflutningur, afrit… Í Stillingum svarar síðan „FAQ / leiðbeiningar“ spurningum þínum; þar geturðu líka byrjað þessa kynningu aftur.
+✓ Visite terminée. Pour la revoir : Réglages → FAQ / tuto → « ▶ Relancer la visite guidée ». ¦ ✓ Kynningu lokið. Til að sjá hana aftur: Stillingar → FAQ / leiðbeiningar → „▶ Byrja leiðsögnina aftur“.
+Visite guidée fermée. Tu la retrouves dans Réglages → FAQ / tuto. ¦ Leiðsögn lokað. Þú finnur hana í Stillingar → FAQ / leiðbeiningar.
+Une petite visite guidée de l’app est proposée. Commencer, plus tard, ou ne plus proposer. ¦ Boðið er upp á stutta leiðsögn um appið. Byrja, seinna, eða ekki bjóða aftur.
+Rien à montrer sur cet écran pour l’instant. ¦ Ekkert að sýna á þessum skjá í bili.
+Pas de visite guidée en mode consultation. ¦ Engin leiðsögn í skoðunarham.
+La visite guidée n’est pas possible ici. ¦ Leiðsögnin er ekki möguleg hér.
+🐞 Signaler un problème ¦ 🐞 Tilkynna vandamál
+AIDE ¦ HJÁLP
+Ce qui s’est passé ¦ Það sem gerðist
+Ce que j’attendais ¦ Það sem ég bjóst við
+Écris avec tes mots. Évite les noms de ta famille si tu ne veux pas qu’ils soient lus. ¦ Skrifaðu með þínum eigin orðum. Forðastu nöfn fjölskyldu þinnar ef þú vilt ekki að þau séu lesin.
+Joindre le rapport technique ¦ Láta tæknilega skýrslu fylgja
+Joindre le rapport technique ({x}) ¦ Láta tæknilega skýrslu fylgja ({x})
+aucune erreur captée ¦ engin villa gripin
+Rapport technique ¦ Tæknileg skýrsla
+🗑 Vider le journal ¦ 🗑 Tæma annálinn
+Vider le journal des erreurs captées sur cet ordinateur ¦ Tæma annál yfir villur sem gripnar voru á þessari tölvu
+✉️ Écrire un e-mail ¦ ✉️ Skrifa tölvupóst
+Ouvrir une demande sur GitHub ¦ Opna beiðni á GitHub
+Journal des erreurs vidé ¦ Villuannáll tæmdur
+✓ Message copié : colle-le où tu veux (e-mail, forum, GitHub). ¦ ✓ Skilaboð afrituð: límdu þau hvar sem þú vilt (tölvupóst, spjallborð, GitHub).
+La copie n’a pas marché : sélectionne le texte et copie-le à la main. ¦ Afritunin tókst ekki: veldu textann og afritaðu hann handvirkt.
+Dis en quelques mots ce qui s’est passé. ¦ Segðu í fáum orðum hvað gerðist.
+Ex. : j’ai cliqué sur « Enregistrer » dans la fiche, et la fenêtre est restée grise. ¦ T.d.: ég smellti á „Vista“ á spjaldinu og glugginn varð áfram grár.
+Ex. : que la fiche soit enregistrée et que la fenêtre se ferme. ¦ T.d.: að spjaldið vistist og glugginn lokist.
+Pour écrire un e-mail plutôt qu’ouvrir une demande sur GitHub : règle une adresse dans Réglages → « 🔄 Mises à jour ». ¦ Til að skrifa tölvupóst frekar en að opna beiðni á GitHub: stilltu netfang í Stillingar → „🔄 Uppfærslur“.
+La base d’exemple est une famille imaginaire (5 générations, des photos d’époque dessinées) rangée à part dans « Mes généalogies » : ta généalogie n’est jamais touchée. ¦ Sýnigagnagrunnurinn er ímynduð fjölskylda (5 kynslóðir, teiknaðar myndir frá gamla tímanum) sem er geymd sér í „Ættfræðin mín“: ættfræðin þín er aldrei snert.
+Aucun fichier choisi ¦ Engin skrá valin

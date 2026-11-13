@@ -9,6 +9,8 @@
     for (const key of ['personBlocks', 'lists', 'dashboard']) ext[key] = ext[key] || {};
     const A = () => window.LCNDA_APP;
     const esc = v => A().escapeHtml(v ?? '');
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? v[k] : m))); // 🌐 docs/I18N.md
+    const pl = (n, one, many) => (A().plural ? A().plural(n, one, many) : `${n} ${n > 1 ? many : one}`);
     const nl = v => esc(v).replace(/\n/g, '<br>');
     const api = (...a) => A().api(...a);
     const toast = (...a) => A().toast(...a);
@@ -137,7 +139,7 @@
         const rows = UI?.sortItems ? UI.sortItems(all.filter(r => !lifeF.length || lifeF.includes(r.deceased ? 'gone' : 'alive')), sort, {name: r => r.title, date: r => r.updated_at || r.created_at || ''}) : (data.pets || []);
         const alive = rows.filter(r => !r.deceased).length;
         const ro = document.body.classList.contains('is-kiosk') || document.documentElement.classList.contains('base-readonly');
-        const delBtn = r => (ro ? '' : `<button type="button" class="icon-button small danger" data-pet-del="${r.id}" data-pet-name="${esc(r.title)}" title="Supprimer ${esc(r.title)}" aria-label="Supprimer ${esc(r.title)}">🗑</button>`);
+        const delBtn = r => (ro ? '' : `<button type="button" class="icon-button small danger" data-pet-del="${r.id}" data-pet-name="${esc(r.title)}" title="${i18n('Supprimer {nm}', {nm: esc(r.title)})}" aria-label="${i18n('Supprimer {nm}', {nm: esc(r.title)})}">🗑</button>`);
         const delItem = r => (ro ? '' : `<button type="button" role="menuitem" class="is-danger" data-pet-del="${r.id}" data-pet-name="${esc(r.title)}">🗑 Supprimer</button>`);
         const kind = r => [iconOf(r.species) + ' ' + (r.breed || String(speciesLabel(r.species) || r.species_label || '').split(/[ ,(]/)[0]), r.color].filter(Boolean).join(' · ');
         A().$('#workspace').innerHTML = `<section class="page h-pets"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>Animaux de compagnie</h2>
@@ -155,7 +157,7 @@
                 {id: 'life', label: 'État', type: 'check', options: [['alive', 'En vie'], ['gone', 'Disparus']]}],
             view: {dflt: 'cards', what: 'animaux'}, sort: {options: [['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A']], value: sort},
             onChange: b => { st.hPetQ = b.q; st.hPetSpecies = b.filters.species || ''; UI.setSort(KEY, b.sort); ext.lists.pets(++st.workspaceToken); }});
-            bar.setCount(`${fmt(rows.length)} animal${rows.length > 1 ? 'ux' : ''}${rows.length ? ` · ${fmt(alive)} en vie` : ''}`); slot.replaceWith(bar); }
+            bar.setCount(`${pl(rows.length, 'animal', 'animaux')}${rows.length ? ` · ${i18n('{n} en vie', {n: alive})}` : ''}`); slot.replaceWith(bar); }
         ws.querySelectorAll('[data-pet-new]').forEach(b => b.addEventListener('click', () => openEditor(null)));
         ws.querySelector('[data-pet-prefs]').addEventListener('click', () => { st.maintenanceTab = 'pet_prefs'; A().setModule('maintenance'); });
         ws.querySelector('[data-pet-mode]').addEventListener('change', e => { try { localStorage.setItem('genealogie-base-mode', e.target.value); } catch (_) {} toast({family: 'Base de famille.', breeding: 'Base d’élevage : la liste de gauche, le compteur et les statistiques partent des animaux.', both: 'Personnes et animaux mêlés.'}[e.target.value]); A().refreshBaseMode?.(); });
@@ -167,7 +169,7 @@
     /** « N animaux ont reçu leur fiche complète » : une seule fois, après la mise à jour (migration 67, réglage genealogie-pets-merged) */
     function mergedNotice() {
         let n = 0; try { n = Number((JSON.parse(localStorage.getItem('genealogie-pets-merged') || 'null') || {}).n) || 0; if (n) localStorage.removeItem('genealogie-pets-merged'); } catch (_) {}
-        return n ? `<div class="ui-notice ui-notice-info h-pets-merged" role="status"><span class="ui-notice-ic" aria-hidden="true">ℹ️</span><span>${esc(n > 1 ? `${fmt(n)} animaux ont reçu leur fiche complète.` : '1 animal a reçu sa fiche complète.')} Un animal n’a plus qu’une seule fiche : tout ce que montrait l’ancienne « fiche d’animal » y est, rangé en sections. Rien n’est perdu.</span><button type="button" class="icon-button small" data-pets-merged-x aria-label="Fermer">×</button></div>` : '';
+        return n ? `<div class="ui-notice ui-notice-info h-pets-merged" role="status"><span class="ui-notice-ic" aria-hidden="true">ℹ️</span><span>${esc(n > 1 ? i18n('{n} animaux ont reçu leur fiche complète.', {n}) : i18n('1 animal a reçu sa fiche complète.'))} ${i18n('Un animal n’a plus qu’une seule fiche : tout ce que montrait l’ancienne « fiche d’animal » y est, rangé en sections. Rien n’est perdu.')}</span><button type="button" class="icon-button small" data-pets-merged-x aria-label="Fermer">×</button></div>` : '';
     }
     /** les anciens onglets de la page simple → les blocs de la fiche complète (« ↗ Santé » ouvre 🩺 Santé) */
     const TAB_BLOCK = {marks: 'animal_marks', obs: 'animal_obs', health: 'animal_health', group: 'animal_group', map: 'animal_map', pedigree: 'animal_parents'};
@@ -176,8 +178,9 @@
     async function openPet(id, view = '', tab = '') {
         const st = S(); id = Number(id) || 0; if (!id) return;
         if (view === 'pedigree') { st.hPet = id; st.hPetView = view; st.listType = 'pets'; if (st.module === 'listes') ext.lists.pets(++st.workspaceToken); else A().setModule('listes'); return; }
-        let pid = 0, pet = null;
+        let pid = 0, pet = null; const token = st.workspaceToken; // une autre page ouverte pendant l'attente (Recensement, groupe…) passe devant : on ne revient pas en arrière
         try { pet = await api('pet', {id}); pid = Number(pet.person_id) || 0; } catch (error) { toast(error.message, 'error'); return; }
+        if (token !== st.workspaceToken) return;
         // sa fiche complète a été supprimée (avant que l'animal parte avec elle) : on demande, on ne la refait plus en silence
         if (!pid) { if (document.body.classList.contains('is-kiosk')) { toast('Cette fiche ne peut pas s’ouvrir en mode consultation.'); return; } orphanPet(id, pet?.title || ''); return; }
         st.hPet = 0; st.hPetView = ''; st.sheetFocus = TAB_BLOCK[tab] || '';
@@ -188,8 +191,8 @@
     function orphanPet(id, title) {
         const name = title || 'Cet animal';
         const dlg = ext.openDialog?.({eyebrow: '🐾 FICHE ANIMAL', title: 'Cette fiche a été supprimée', submitLabel: '↺ La rétablir',
-            body: `<p data-pet-orphan="${id}">La fiche de <b>${esc(name)}</b> a été supprimée, mais l’animal était resté dans la liste des animaux, avec son suivi.</p><p class="muted">« ↺ La rétablir » refait sa fiche avec ce qu’il a gardé (nom, sexe, dates, parents, suivi). « 🗑 Supprimer l’animal » l’enlève aussi, avec tout son suivi (tu pourras le rétablir depuis le Journal des modifications).</p>`,
-            onSubmit: async () => { const r = await api('pet_make_person', {}, {method: 'POST', body: {id}}); const pid = Number(r.result?.person_id) || 0; if (pid) { toast(`La fiche de ${name} est rétablie.`); if (A().openPersonById) A().openPersonById(pid); else { S().currentPersonId = pid; A().setModule('personnes'); } } },
+            body: `<p data-pet-orphan="${id}">${i18n('La fiche de <b>{name}</b> a été supprimée, mais l’animal était resté dans la liste des animaux, avec son suivi.', {name: esc(name)})}</p><p class="muted">« ↺ La rétablir » refait sa fiche avec ce qu’il a gardé (nom, sexe, dates, parents, suivi). « 🗑 Supprimer l’animal » l’enlève aussi, avec tout son suivi (tu pourras le rétablir depuis le Journal des modifications).</p>`,
+            onSubmit: async () => { const r = await api('pet_make_person', {}, {method: 'POST', body: {id}}); const pid = Number(r.result?.person_id) || 0; if (pid) { toast(i18n('La fiche de {name} est rétablie.', {name})); if (A().openPersonById) A().openPersonById(pid); else { S().currentPersonId = pid; A().setModule('personnes'); } } },
             onDelete: async () => { await trashPet(id, name, {ask: false}); },
             onOpen: d => { const b = d.querySelector('[data-h-delete]'); if (b) b.textContent = '🗑 Supprimer l’animal'; }});
         return dlg;
@@ -198,11 +201,11 @@
     async function trashPet(id, name, {ask = true, person = null} = {}) {
         if (ask) {
             const p = person || {id: 0, kind: 'animal', first_name: name};
-            if (A().askDeleteSheet ? !(await A().askDeleteSheet(p)) : !(await A().confirmBox(`Supprimer ${name} et tout ce qui s’y rattache (marques, observations, santé, groupe, trajets) ?`, {title: `Supprimer ${name}`, okLabel: 'Supprimer définitivement', danger: true}))) return false;
+            if (A().askDeleteSheet ? !(await A().askDeleteSheet(p)) : !(await A().confirmBox(i18n('Supprimer {name} et tout ce qui s’y rattache (marques, observations, santé, groupe, trajets) ?', {name}), {title: i18n('Supprimer {nm}', {nm: name}), okLabel: i18n('Supprimer définitivement'), danger: true}))) return false;
         }
         try { await api('pet_trash', {}, {method: 'POST', body: {id}}); }
         catch (error) { toast(error.message, 'error'); return false; }
-        toast(`« ${name} » supprimé, avec son suivi. Pour le rétablir : Réglages → Journal des modifications → « Restaurer ».`);
+        toast(i18n('« {name} » supprimé, avec son suivi. Pour le rétablir : Réglages → Journal des modifications → « Restaurer ».', {name}));
         const st = S(); if (st.module === 'listes' && st.listType === 'pets') ext.lists.pets(++st.workspaceToken);
         A().loadPeople?.();
         return true;
@@ -233,7 +236,7 @@
         const d = p.data, anc = p.ancestors || {}, people = p.people || {};
         const f = coi(id, anc), contrib = coi.last || {};
         const parentBox = (pid, name, reg, label) => pid && anc[pid] ? miniPet(anc[pid], label) : name ? `<div class="h-pet-mini is-text"><span class="h-pet-mini-ic">${label.startsWith('Père') ? '♂' : '♀'}</span><span><strong>${esc(name)}</strong><small>${esc(label)} · pas encore dans la base</small>${reg ? `<small class="muted">${esc(reg)}</small>` : ''}</span></div>` : `<div class="h-pet-mini is-empty"><span class="h-pet-mini-ic">?</span><span><small>${esc(label)} inconnu${label.startsWith('Mère') ? 'e' : ''}</small></span></div>`;
-        const gp = (pid, which) => { const a = pid && anc[pid]; if (!a) return ''; return `<div class="h-pet-gp">${a.sire_id && anc[a.sire_id] ? miniPet(anc[a.sire_id], `Père de ${which}`) : a.sire_name ? `<div class="h-pet-mini is-text"><span><strong>${esc(a.sire_name)}</strong><small>Père de ${esc(which)}</small></span></div>` : ''}${a.dam_id && anc[a.dam_id] ? miniPet(anc[a.dam_id], `Mère de ${which}`) : a.dam_name ? `<div class="h-pet-mini is-text"><span><strong>${esc(a.dam_name)}</strong><small>Mère de ${esc(which)}</small></span></div>` : ''}</div>`; };
+        const gp = (pid, which) => { const a = pid && anc[pid]; if (!a) return ''; return `<div class="h-pet-gp">${a.sire_id && anc[a.sire_id] ? miniPet(anc[a.sire_id], i18n('Père de {nm}', {nm: which})) : a.sire_name ? `<div class="h-pet-mini is-text"><span><strong>${esc(a.sire_name)}</strong><small>${i18n('Père de {nm}', {nm: esc(which)})}</small></span></div>` : ''}${a.dam_id && anc[a.dam_id] ? miniPet(anc[a.dam_id], i18n('Mère de {nm}', {nm: which})) : a.dam_name ? `<div class="h-pet-mini is-text"><span><strong>${esc(a.dam_name)}</strong><small>${i18n('Mère de {nm}', {nm: esc(which)})}</small></span></div>` : ''}</div>`; };
         // portées : les petits regroupés par autre parent et date de naissance
         const litters = {};
         for (const k of p.offspring || []) { const other = k.sire_id === id ? k.dam_id : k.sire_id; const key = other + '|' + (k.birth_date || '?'); (litters[key] = litters[key] || {other, date: k.birth_date, kids: []}).kids.push(k); }
@@ -255,7 +258,7 @@
             ${sec('parents', `🌳 Parents et pedigree <small class="muted">consanguinité : <strong title="Coefficient de Wright, d’après les ancêtres connus">${coiText(f)}</strong></small>`, `<div class="h-pet-parents"><div>${parentBox(d.sire_id, d.sire_name, d.sire_registration, 'Père')}${gp(d.sire_id, 'son père')}</div><div>${parentBox(d.dam_id, d.dam_name, d.dam_registration, 'Mère')}${gp(d.dam_id, 'sa mère')}</div></div>
                 ${Object.keys(contrib).length ? `<p class="muted">Ancêtres communs au père et à la mère : ${Object.entries(contrib).sort((a, b) => b[1] - a[1]).map(([aid, c]) => `<button type="button" class="table-link" data-pet-goto="${aid}">${esc(anc[aid]?.title || '#' + aid)}</button> (${coiText(c)})`).join(', ')}.</p>` : ''}
                 <button type="button" class="button small secondary" data-pet-pedfor="${id}">⛶ Voir le pedigree en grand</button>`)}
-            ${sec('offspring', `🐾 Descendance <small class="muted">${fmt((p.offspring || []).length)} petit${(p.offspring || []).length > 1 ? 's' : ''}</small>`, Object.keys(litters).length ? Object.values(litters).map(L => `<div class="h-pet-litter"><h4>Portée ${L.date ? 'du ' + esc(L.date) : '(date inconnue)'} ${L.other ? `avec ${mates[L.other] ? `<button type="button" class="table-link" data-pet-goto="${L.other}">${esc(mates[L.other].title)}</button>` : '?'}` : ''} <small class="muted">${L.kids.length} petit${L.kids.length > 1 ? 's' : ''}</small></h4><div class="h-pet-minis">${L.kids.map(k => miniPet(k)).join('')}</div></div>`).join('') : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">👶</span><span class="empty-line-text">Aucun petit dans la base <small>Sa fiche se crée avec ce parent déjà rempli.</small></span><button type="button" class="button small secondary" data-empty-click="[data-pet-kid]">＋ Un petit</button></p>')}
+            ${sec('offspring', `${i18n('🐾 Descendance')} <small class="muted">${pl((p.offspring || []).length, 'petit', 'petits')}</small>`, Object.keys(litters).length ? Object.values(litters).map(L => `<div class="h-pet-litter"><h4>${L.date ? i18n('Portée du {dt}', {dt: esc(L.date)}) : i18n('Portée (date inconnue)')} ${L.other ? i18n('avec {nm}', {nm: mates[L.other] ? `<button type="button" class="table-link" data-pet-goto="${L.other}">${esc(mates[L.other].title)}</button>` : '?'}) : ''} <small class="muted">${pl(L.kids.length, 'petit', 'petits')}</small></h4><div class="h-pet-minis">${L.kids.map(k => miniPet(k)).join('')}</div></div>`).join('') : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">👶</span><span class="empty-line-text">Aucun petit dans la base <small>Sa fiche se crée avec ce parent déjà rempli.</small></span><button type="button" class="button small secondary" data-empty-click="[data-pet-kid]">＋ Un petit</button></p>')}
             ${full.length || half.length ? sec('siblings', '👥 Frères et sœurs', `${full.length ? `<h4>Mêmes parents</h4><div class="h-pet-minis">${full.map(k => miniPet(k)).join('')}</div>` : ''}${half.length ? `<h4>Demi-frères et demi-sœurs</h4><div class="h-pet-minis">${half.map(k => miniPet(k, k.sire_id === d.sire_id ? 'même père' : 'même mère')).join('')}</div>` : ''}`) : ''}
             ${sec('owners', '🏠 Ses maîtres', owners ? `<ul class="h-pet-owners">${owners}</ul>` : '<p class="muted">Relie l’animal aux fiches de ses maîtres : il apparaîtra sur leur fiche.</p>')}
             ${sec('titles', '🏆 Titres, expositions, concours', table([['date', 'Date'], ['event', 'Exposition / concours'], ['place', 'Lieu'], ['title', 'Titre, qualificatif'], ['result', 'Classement'], ['judge', 'Juge']], d.titles))}
@@ -299,8 +302,8 @@
             return `<div class="h-ped-cell g${s.g} ${s.i % 2 ? 'is-dam' : 'is-sire'} ${p ? '' : 'is-empty'}" style="grid-column:${s.g};grid-row:${row} / span ${span};${p && colorOf[p.id] ? `background:${colorOf[p.id]}` : ''}">${p ? `<button type="button" class="h-ped-name" data-pet-goto="${p.id}">${esc(p.title)}</button>${p.registered_name && p.registered_name !== p.title ? `<small class="h-ped-reg">${esc(p.registered_name)}</small>` : ''}${s.g <= 3 ? `<small>${esc([p.color, p.birth_date && '° ' + p.birth_date].filter(Boolean).join(' · '))}</small>` : ''}${p.registration && s.g <= 4 ? `<small class="muted">${esc(p.registration)}</small>` : ''}${p.titles.length && s.g <= 4 ? `<small class="h-ped-titles">🏆 ${esc(p.titles.slice(0, 3).join(', '))}</small>` : ''}`
                 : s.name ? `<span class="h-ped-name is-text">${esc(s.name)}</span><small class="muted">pas dans la base</small>` : '<span class="muted">—</span>'}</div>`; };
         A().$('#workspace').innerHTML = `<section class="page h-pedigree"><header class="page-header"><div><span class="eyebrow">PEDIGREE</span><h2>${esc(me.title)}${me.sex ? ` <span class="h-pet-sex is-${me.sex}">${me.sex === 'M' ? '♂' : '♀'}</span>` : ''}</h2>
-                <p>${esc([me.registered_name !== me.title && me.registered_name, me.breed, me.color, me.birth_date && (window.LCNDA_ACCORD?.accord || ((_, t) => t))(me.sex || 'unknown', 'né(e) le', {before: 'né le', x: 'naissance le'}) + ' ' + me.birth_date, me.registration].filter(Boolean).join(' · '))}</p>
-                <p>Consanguinité (Wright, sur les ancêtres connus) : <strong>${coiText(f)}</strong>${Object.keys(contrib).length ? ` — ancêtres communs : ${Object.entries(contrib).sort((a, b) => b[1] - a[1]).map(([aid, c]) => `<span class="h-ped-common" style="background:${colorOf[aid] || '#eee'}">${esc(anc[aid]?.title || '#' + aid)} ${coiText(c)}</span>`).join(' ')}` : ''}</p></div>
+                <p>${esc([me.registered_name !== me.title && me.registered_name, me.breed, me.color, me.birth_date && i18n((window.LCNDA_ACCORD?.accord || ((_, t) => t))(me.sex || 'unknown', 'né(e) le', {before: 'né le', x: 'naissance le'})) + ' ' + me.birth_date, me.registration].filter(Boolean).join(' · '))}</p>
+                <p>${i18n('Consanguinité (Wright, sur les ancêtres connus) : <strong>{x}</strong>', {x: coiText(f)})}${Object.keys(contrib).length ? ` — ${i18n('ancêtres communs :')} ${Object.entries(contrib).sort((a, b) => b[1] - a[1]).map(([aid, c]) => `<span class="h-ped-common" style="background:${colorOf[aid] || '#eee'}">${esc(anc[aid]?.title || '#' + aid)} ${coiText(c)}</span>`).join(' ')}` : ''}</p></div>
                 <div class="page-actions"><button type="button" class="button secondary" data-ped-back>← La fiche</button><label class="h-ped-gens">Générations <select data-ped-gens>${[2, 3, 4, 5, 6, 7, 8].map(n => `<option ${n === gens ? 'selected' : ''}>${n}</option>`).join('')}</select></label><button type="button" class="button secondary" data-ped-csv>⬇ Tableur (CSV)</button><button type="button" class="button" data-ped-print>🖨 Imprimer</button></div></header>
             <div class="h-ped-wrap"><div class="h-ped" style="grid-template-columns:repeat(${gens},minmax(${gens > 5 ? 120 : 170}px,1fr));grid-template-rows:repeat(${rows},minmax(${gens > 5 ? 18 : 26}px,auto))">${slots.map(cell).join('')}</div></div>
             <p class="muted">Haut de chaque bloc : côté père ; bas : côté mère. Une couleur = un ancêtre qui revient plusieurs fois. Clique un nom pour ouvrir sa fiche.</p></section>`;
@@ -472,13 +475,13 @@
         const today = () => new Date().toLocaleDateString('fr-FR');
         const putPreset = (name, prefs, at = -1) => { const l = presets(), i = l.findIndex(x => x.name === name), it = {name, date: today(), prefs}; if (i >= 0) l[i] = it; else if (at >= 0) l.splice(at, 0, it); else l.push(it); savePresets(l); };
         const frame = window.LCNDA_UI.presetsFrame({id: 'animaux', what: 'les espèces, les catégories et les champs du formulaire', list: presets, quietApply: true,
-            apply: async i => { const x = presets()[i]; if (!await A().confirmBox(`Remplacer les réglages actuels par « ${x.name} » ?`, {title: 'Appliquer ces réglages', okLabel: 'Remplacer les réglages'})) return false; savePetPrefs(x.prefs); pr = petPrefs(); savePetPrefs(pr); scope = '*'; draw(); toast(`Réglages « ${x.name} » appliqués.`); return false; },
+            apply: async i => { const x = presets()[i]; if (!await A().confirmBox(i18n('Remplacer les réglages actuels par « {name} » ?', {name: x.name}), {title: i18n('Appliquer ces réglages'), okLabel: i18n('Remplacer les réglages')})) return false; savePetPrefs(x.prefs); pr = petPrefs(); savePetPrefs(pr); scope = '*'; draw(); toast(i18n('Réglages « {name} » appliqués.', {name: x.name})); return false; },
             save: name => { collect(); putPreset(name, JSON.parse(JSON.stringify(pr))); },
             replace: i => { collect(); putPreset(presets()[i].name, JSON.parse(JSON.stringify(pr))); },
             rename: (i, name) => { const l = presets(); l[i].name = name; savePresets(l); },
-            duplicate: i => { const l = presets(), x = l[i], nm = window.LCNDA_UI.freeName(x.name, l.map(y => y.name)); putPreset(nm, JSON.parse(JSON.stringify(x.prefs)), i + 1); toast(`Copie « ${nm} » créée.`); },
+            duplicate: i => { const l = presets(), x = l[i], nm = window.LCNDA_UI.freeName(x.name, l.map(y => y.name)); putPreset(nm, JSON.parse(JSON.stringify(x.prefs)), i + 1); toast(i18n('Copie « {nm} » créée.', {nm: nm})); },
             exportOne: i => { const x = presets()[i]; A().exportSettingFile?.('animaux', x.name, {prefs: x.prefs}); return false; },
-            remove: i => { const l = presets(), x = l[i]; A().undoLocalChange(`Réglage « ${x.name} » supprimé`, [PRESETS_KEY], () => { l.splice(i, 1); savePresets(l); }, () => { if (frame.isConnected) frame.refresh(); }); },
+            remove: i => { const l = presets(), x = l[i]; A().undoLocalChange(i18n('Réglage « {nm} » supprimé', {nm: x.name}), [PRESETS_KEY], () => { l.splice(i, 1); savePresets(l); }, () => { if (frame.isConnected) frame.refresh(); }); },
             importOne: async () => {
                 const got = await A().importSettingFile?.('animaux', {names: presets().map(x => x.name), check: d => d.prefs && typeof d.prefs === 'object' && !Array.isArray(d.prefs)});
                 if (!got) return false;
@@ -487,7 +490,7 @@
                 try { localStorage.setItem(PREFS_KEY, JSON.stringify(got.donnees.prefs)); clean = petPrefs(); } catch (_) {} finally { try { if (before === null) localStorage.removeItem(PREFS_KEY); else localStorage.setItem(PREFS_KEY, before); } catch (_) {} }
                 if (!clean) { toast('Ce réglage n’a pas pu être lu.', 'error'); return false; }
                 const l = presets(); l.push({name: got.nom.slice(0, 60), date: today(), prefs: clean}); savePresets(l);
-                toast(`Réglage « ${got.nom} » importé : « Appliquer » pour t’en servir.`);
+                toast(i18n('Réglage « {name} » importé : « Appliquer » pour t’en servir.', {name: got.nom}));
             }});
         draw();
         window.LCNDA_UI?.autoSave?.(ws, {save: () => { if (token !== st.workspaceToken || !ws.querySelector('.h-pp')) return; collect(); savePetPrefs(pr); }, redraw: () => { pr = petPrefs(); draw(); }});
@@ -502,11 +505,11 @@
             if (e.target.closest('[data-f-up]')) { mv('[data-field-row]', true); return; } if (e.target.closest('[data-f-down]')) { mv('[data-field-row]', false); return; }
             const uid = () => Date.now().toString(36) + Math.floor(Math.random() * 1296).toString(36);
             const nf = e.target.closest('[data-nf-add]'); if (nf) { const row = nf.closest('.h-pp-addf'), sk = nf.closest('[data-sec]').dataset.sec, label = row.querySelector('[data-nf-label]').value.trim(); if (!label) return window.LCNDA_UI.fail(row.querySelector('[data-nf-label]'), 'Écris le nom du champ.');
-                const type = row.querySelector('[data-nf-type]').value, options = row.querySelector('[data-nf-opts]').value.trim(); collect(); pr.customFields.push({k: 'cf_' + uid(), label, type, options, sec: sk}); pr.cfg[scope] = cleanCfg(pr.cfg[scope], pr); draw(); toast(`Champ « ${label} » ajouté.`); return; }
+                const type = row.querySelector('[data-nf-type]').value, options = row.querySelector('[data-nf-opts]').value.trim(); collect(); pr.customFields.push({k: 'cf_' + uid(), label, type, options, sec: sk}); pr.cfg[scope] = cleanCfg(pr.cfg[scope], pr); draw(); toast(i18n('Champ « {nm} » ajouté.', {nm: label})); return; }
             const cfd = e.target.closest('[data-cf-del]'); if (cfd) { if (!await A().confirmBox('Supprimer ce champ ? Ce qui y était écrit reste gardé dans les fiches, mais ne s’affiche plus.', {title: 'Supprimer le champ', okLabel: 'Supprimer le champ'})) return; const k = cfd.closest('[data-field-row]').dataset.fieldRow; collect(); pr.customFields = pr.customFields.filter(x => x.k !== k); draw(); return; }
-            if (e.target.closest('[data-cs-add]')) { const label = ws.querySelector('[data-cs-newlabel]').value.trim(); if (!label) return window.LCNDA_UI.fail(ws.querySelector('[data-cs-newlabel]'), 'Écris le nom de la catégorie.'); collect(); pr.customSecs.push({k: 'cs_' + uid(), label, icon: ws.querySelector('[data-cs-newicon]').value.trim() || '🗂️'}); Object.keys(pr.cfg).forEach(k => { pr.cfg[k] = cleanCfg(pr.cfg[k], pr); }); draw(); toast(`Catégorie « ${label} » ajoutée : ajoute-lui des champs avec « ＋ Champ ».`); return; }
+            if (e.target.closest('[data-cs-add]')) { const label = ws.querySelector('[data-cs-newlabel]').value.trim(); if (!label) return window.LCNDA_UI.fail(ws.querySelector('[data-cs-newlabel]'), 'Écris le nom de la catégorie.'); collect(); pr.customSecs.push({k: 'cs_' + uid(), label, icon: ws.querySelector('[data-cs-newicon]').value.trim() || '🗂️'}); Object.keys(pr.cfg).forEach(k => { pr.cfg[k] = cleanCfg(pr.cfg[k], pr); }); draw(); toast(i18n('Catégorie « {name} » ajoutée : ajoute-lui des champs avec « ＋ Champ ».', {name: label})); return; }
             const csd = e.target.closest('[data-cs-del]'); if (csd) { if (!await A().confirmBox('Supprimer cette catégorie et ses champs ? Ce qui y était écrit reste gardé dans les fiches, mais ne s’affiche plus.', {title: 'Supprimer la catégorie', okLabel: 'Supprimer la catégorie'})) return; const k = csd.closest('[data-sec]').dataset.sec; collect(); pr.customSecs = pr.customSecs.filter(x => x.k !== k); pr.customFields = pr.customFields.filter(x => x.sec !== k); Object.keys(pr.cfg).forEach(c => { pr.cfg[c] = cleanCfg(pr.cfg[c], pr); }); draw(); return; }
-            if (e.target.closest('[data-sp-add]')) { collect(); const label = ws.querySelector('[data-sp-newlabel]').value.trim(); if (!label) return window.LCNDA_UI.fail(ws.querySelector('[data-sp-newlabel]'), 'Écris le nom de l’espèce.'); const k = 'my_' + Date.now().toString(36); pr.species.push({k, label, icon: ws.querySelector('[data-sp-newicon]').value.trim() || '🐾'}); pr.speciesOrder.push(k); draw(); toast(`Espèce « ${label} » ajoutée.`); return; }
+            if (e.target.closest('[data-sp-add]')) { collect(); const label = ws.querySelector('[data-sp-newlabel]').value.trim(); if (!label) return window.LCNDA_UI.fail(ws.querySelector('[data-sp-newlabel]'), 'Écris le nom de l’espèce.'); const k = 'my_' + Date.now().toString(36); pr.species.push({k, label, icon: ws.querySelector('[data-sp-newicon]').value.trim() || '🐾'}); pr.speciesOrder.push(k); draw(); toast(i18n('Espèce « {nm} » ajoutée.', {nm: label})); return; }
             const del = e.target.closest('[data-sp-del]'); if (del) { const k = del.closest('[data-sp]').dataset.sp; if (!await A().confirmBox('Supprimer cette espèce ? Les animaux qui l’ont deviennent « Autre » à leur prochaine modification.', {title: 'Supprimer l’espèce', okLabel: 'Supprimer l’espèce'})) return; collect(); pr.species = pr.species.filter(x => x.k !== k); pr.speciesOrder = pr.speciesOrder.filter(x => x !== k); delete pr.cfg[k]; if (scope === k) scope = '*'; draw(); return; }
             // K2 : plus de bouton « Enregistrer » : tout est gardé tout de suite (UI.autoSave, plus haut)
         }, {signal});
@@ -516,7 +519,7 @@
                 let v; try { if (file.size > 2e6) throw new Error(); v = JSON.parse(await file.text()); } catch (_) { v = null; }
                 if (v?.type !== 'lcnda-pet-prefs' || !v.prefs || typeof v.prefs !== 'object') { toast('Ce fichier n’est pas un fichier de réglages des animaux.', 'error'); return; }
                 const add = (Array.isArray(v.presets) ? v.presets : []).filter(x => x && x.prefs && typeof x.prefs === 'object' && String(x.name || '').trim()).slice(0, 50);
-                if (!await A().confirmBox(`Remplacer les réglages actuels par ceux du fichier${add.length ? ` (et ajouter ${add.length} ensemble${add.length > 1 ? 's' : ''})` : ''} ?`, {title: 'Importer des réglages', okLabel: 'Remplacer les réglages'})) return;
+                if (!await A().confirmBox(add.length ? i18n('Remplacer les réglages actuels par ceux du fichier (et ajouter {what}) ?', {what: pl(add.length, 'ensemble', 'ensembles')}) : i18n('Remplacer les réglages actuels par ceux du fichier ?'), {title: i18n('Importer des réglages'), okLabel: i18n('Remplacer les réglages')})) return;
                 savePetPrefs(v.prefs); const names = add.map(x => String(x.name).trim().slice(0, 80));
                 savePresets([...presets().filter(x => !names.includes(x.name)), ...add.map((x, i) => ({name: names[i], date: String(x.date || '').slice(0, 20), prefs: x.prefs}))]);
                 pr = petPrefs(); savePetPrefs(pr); scope = '*'; draw(); toast('Réglages des animaux importés.'); return;
@@ -576,12 +579,12 @@
         // ce qui est vide ne s'affiche pas (un oiseau sauvage n'a ni race, ni puce, ni éleveur)
         const rows = dlA([['Espèce', speciesLabel(d.species)], ['Race', [d.breed, d.variety].filter(Boolean).join(', ')], ['Nom officiel', d.registered_name !== a.title ? d.registered_name : ''], ['Robe', d.color], ['Marques particulières', d.markings], ['Poil', d.coat], ['Yeux', d.eyes],
             [accSex(d.sex, 'Stérilisé(e)', 'Stérilisation'), d.neutered ? 'oui' + (d.neutered_date ? ` (${d.neutered_date})` : '') : ''], ['Puce', d.microchip], ['Tatouage', d.tattoo], ['Passeport', d.passport], ['Livre des origines', [d.registry, d.registration].filter(Boolean).join(' · ')], ['N° de pedigree', d.pedigree_number], ['UELN', d.ueln], ['ADN', d.dna],
-            ['Éleveur', [d.breeder, d.affix && `affixe « ${d.affix} »`].filter(Boolean).join(' · ')], ['Adresse de l’élevage', d.breeder_address], ['Portée', d.litter], ['Père', sire ? sire.title : d.sire_name], ['Mère', dam ? dam.title : d.dam_name],
+            ['Éleveur', [d.breeder, d.affix && i18n('affixe « {nm} »', {nm: d.affix})].filter(Boolean).join(' · ')], ['Adresse de l’élevage', d.breeder_address], ['Portée', d.litter], ['Père', sire ? sire.title : d.sire_name], ['Mère', dam ? dam.title : d.dam_name],
             ['Consanguinité', Object.keys(anc).length > 1 ? coiText(f) : ''], ['Petits', (a.offspring || []).length ? fmt(a.offspring.length) : ''], ['Titres', (d.titles || []).length ? d.titles.map(t => t.title).filter(Boolean).join(', ') : ''],
             ...pr.customFields.filter(cf => cf.sec === 'pe1' || cf.sec === 'pe2').map(cf => [cf.label, cus[cf.k] || ''])]);
         const body = `<div class="h-pet-animalblock">${a.media?.[0] ? photoHtml(a.media[0], 'is-mini') : `<span class="h-pet-hero-ic">${iconOf(d.species)}</span>`}
             <dl class="h-pet-dl">${rows || '<div><dd class="muted">Ses caractéristiques (race, puce, éleveur, santé…) : « ✎ Modifier ».</dd></div>'}</dl></div>`;
-        return A().card(index, `${iconOf(d.species)} Caractéristiques`, '', body, 'span-12',
+        return A().card(index, `${iconOf(d.species)} ${i18n('Caractéristiques')}`, '', body, 'span-12',
             `<button type="button" class="button small secondary" data-pet-editfor="${a.id}" title="Modifier les caractéristiques">✎</button>`);
     };
     /* ═════════ Bloc « 🩺 Santé » : la santé écrite (vétérinaire, vaccins, tests), le poids et la taille, et le suivi (frise des états, courbe, soins) ═════════ */
@@ -624,7 +627,7 @@
         const shown = (alive.length ? alive : rows).slice(0, 12);
         return A().card(index, 'Animaux de compagnie', rows.length || '', rows.length ? `${soon.length ? `<p class="h-pet-bday">🎂 ${soon.map(s => `<button type="button" class="table-link" data-pet-goto="${s.r.id}">${esc(s.r.title)}</button> ${s.days ? `dans ${s.days} jour${s.days > 1 ? 's' : ''}` : 'aujourd’hui'} (${s.age} an${s.age > 1 ? 's' : ''})`).join(' · ')}</p>` : ''}
             <div class="h-pet-wgrid">${shown.map(r => `<button type="button" class="h-pet-wcard ${r.deceased ? 'is-gone' : ''}" data-pet-goto="${r.id}">${r.media?.[0] ? A().mediaThumbHtml(r.media[0]) : `<span class="h-pet-icon">${iconOf(r.species)}</span>`}<strong>${esc(r.title)}</strong><small>${esc(r.breed || String(speciesLabel(r.species) || r.species_label || '').split(/[ ,(]/)[0])}</small></button>`).join('')}</div>
-            ${alive.length < rows.length ? `<p class="muted">${fmt(rows.length - alive.length)} animal${rows.length - alive.length > 1 ? 'ux' : ''} disparu${rows.length - alive.length > 1 ? 's' : ''} dans la liste.</p>` : ''}`
+            ${alive.length < rows.length ? `<p class="muted">${i18n('{what} dans la liste.', {what: pl(rows.length - alive.length, 'animal disparu', 'animaux disparus')})}</p>` : ''}`
             : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🐾</span><span class="empty-line-text">Aucun animal. Listes → Animaux de compagnie → « ＋ Nouvel animal ».</span></p>', span, '<button type="button" class="button small secondary" data-pet-all>Tous</button>');
     }};
     document.addEventListener('click', e => { if (e.target.closest?.('[data-pet-all]')) { const st = S(); st.hPet = 0; st.listType = 'pets'; A().setModule('listes'); } });

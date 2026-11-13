@@ -202,6 +202,7 @@ function readZip(file) {
             out.viewer = { verr, found, ph, hs }; await vctx.close();
             // l'app
             const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } }); const p = await ctx.newPage(); const errs = [];
+            await p.clock.install({ time: new Date(TODAY + 'T10:00:00') }); // les dates du jeu d'essai sont autour du 21 octobre
             await ctx.route(u => !u.href.startsWith(base), r => r.abort());
             p.on('pageerror', e => errs.push(e.message)); p.on('console', m => { if (m.type() === 'error' && !/Failed to load resource/.test(m.text())) errs.push(m.text()); });
             await p.goto(base); await p.waitForFunction(() => window.LCNDA_APP?.state?.bootstrap && window.LCNDA_POSTCARDS && window.LCNDA_UI?.listBar, null, { timeout: 60000, polling: 300 });

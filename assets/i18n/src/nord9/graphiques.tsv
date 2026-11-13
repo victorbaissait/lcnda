@@ -1,0 +1,1800 @@
+fr ¦ lb
+Règle un diagramme puis enregistre-le comme vue pour le retrouver ici. ¦ Stell en Diagramm an a späicher et dann als Usiicht, fir et hei erëmzefannen.
+Vue enregistrée supprimée ¦ Gespäichert Usiicht geläscht
+Première personne ¦ Éischt Persoun
+Deuxième personne ¦ Zweet Persoun
+Afficher le lien ¦ D'Verbindung weisen
+Année non renseignée ¦ Joer net uginn
+Adresse non renseignée ¦ Adress net uginn
+Membre du foyer ¦ Member vum Stot
+Aucun membre relevé. ¦ Kee Member opgeholl.
+Aucune maisonnée recensée pour cette personne. ¦ Keen Haushalt fir dës Persoun gezielt.
+Ajoute des recensements depuis sa fiche. ¦ Setz Vollekszielunge vu senger Fiche aus derbäi.
+Aucun déplacement entre deux lieux géocodés n’est encore disponible pour cette branche. ¦ Fir dëse Zweig gëtt et nach keng Plënnerung tëscht zwou geocodéierte Plazen.
+Pas encore assez de liens renseignés pour dessiner ce graphe. ¦ Nach net genuch Verbindungen uginn, fir dës Grafik ze zeechnen.
+Réseau social ¦ Sozialt Netz
+Métiers transmis ¦ Weiderginn Beruffer
+Migrations de la branche ¦ Migratioune vum Zweig
+Réseau ¦ Netz
+=nœud ¦ Knuet|Kniet
+{nodes} · {links}. Survole un lien pour voir sa nature et clique sur une personne pour ouvrir sa fiche. ¦ {nodes} · {links}. Fuer iwwer eng Verbindung, fir ze gesinn, wat et ass, a klick op eng Persoun, fir hir Fiche opzemaachen.
+Tous les actes ¦ All d'Akten
+Actes rattachés ¦ Verbonnen Akten
+Actes liés ¦ Verbonnen Akten
+Sépultures ¦ Begriefnisser
+Aucun acte pour ces filtres. ¦ Keen Akt fir dës Filteren.
+Sans précision ¦ Ouni Detailer
+Aucun recensement pour ces filtres. ¦ Keng Vollekszielung fir dës Filteren.
+Aucun dépouillement enregistré pour ces filtres. ¦ Keen Auszuch fir dës Filteren gespäichert.
+GRAPHIQUES · LIEUX ¦ GRAFIKEN · PLAZEN
+SYNTHÈSE LOCALE ¦ LOKAL IWWERSIICHT
+Regroupe les sources et recherches déjà rattachées à un même lieu. ¦ Sammelt d'Quellen an d'Recherchen, déi schonn un eng selwecht Plaz verbonne sinn.
+Choisis une commune pour afficher les actes, dépouillements, battues et sépultures liés à ce lieu. ¦ Wiel eng Gemeng, fir d'Akten, Auszich, Sichaktiounen a Begriefnisser vun dëser Plaz ze weisen.
+génération {list} ¦ Generatioun {list}
+générations {list} ¦ Generatiounen {list}
+est {list} ¦ ass {list}
+(… {n} places en tout) ¦ (… {n} Plazen am Ganzen)
+Ancêtres répétés de {name} ¦ Widderholl Virfahre vum {name}
+Voir aussi leurs ancêtres répétés ({n}) ¦ Och hir widderholl Virfahre gesinn ({n})
+Quand deux ancêtres sont cousins, leurs propres ancêtres apparaissent plusieurs fois dans l’arbre : c’est l’implexe. Seules les filiations biologiques comptent. Le taux = 1 − personnes différentes ÷ places connues. ¦ Wann zwee Virfahre Cousinen sinn, kommen hir eege Virfahre méi wéi eemol am Bam vir: dat ass den Implex. Nëmmen déi biologesch Ofstamunge zielen. D'Quot = 1 − verschidde Persounen ÷ bekannte Plazen.
+Places théoriques ¦ Theoretesch Plazen
+Places connues ¦ Bekannte Plazen
+places connues ¦ bekannte Plazen
+Personnes différentes ¦ Verschidde Persounen
+Implexe ¦ Implex
+IMPLEXE ¦ IMPLEX
+Implexe cumulé ¦ Kumuléierten Implex
+implexe global ¦ globalen Implex
+ancêtres différents ¦ verschidde Virfahren
+ancêtres répétés ¦ widderholl Virfahren
+Calcul arrêté : arbre trop grand. ¦ Berechnung gestoppt: de Bam ass ze grouss.
+Les couples communs les plus proches ¦ Déi nootste gemeinsam Koppelen
+C’est ici que les branches se rejoignent ; leurs ancêtres sont répétés à leur suite. ¦ Hei kommen d'Zweiger zesummen; hir Virfahre ginn dono widderholl.
+Aucun ancêtre répété : chaque ancêtre connu n’apparaît qu’une fois. ¦ Kee widderholle Virfahr: all bekannte Virfahr kënnt nëmmen eemol vir.
+LIENS DE PARENTÉ ¦ VERWANDTSCHAFT
+Choisis deux personnes ¦ Wiel zwou Persounen
+Recherche les deux individus dans la colonne de gauche pour afficher le chemin familial le plus court. ¦ Sich déi zwou Persounen an der lénker Kolonn, fir de kierzste Familljewee ze weisen.
+lié à ¦ verbonne mat
+{links} entre les deux personnes. ¦ {links} tëscht deenen zwou Persounen.
+Aucun chemin familial trouvé entre ces deux personnes. ¦ Kee Familljewee tëscht dësen zwou Persoune fonnt.
+Aucune relation disponible. ¦ Keng Relatioun disponibel.
+Ajoute des parents, conjoints ou enfants sur la fiche. ¦ Setz Elteren, Partner oder Kanner op der Fiche derbäi.
+Molette : zoomer · Maj + molette ou glisser : déplacer ¦ Rad: zoomen · Shift + Rad oder zéien: verréckelen
+Choisir dans Personnes ¦ An de Persounen auswielen
+Aucune ascendance disponible. ¦ Keng Virfahren disponibel.
+Ajoute des parents sur la fiche pour voir l’arbre. ¦ Setz Elteren op der Fiche derbäi, fir de Bam ze gesinn.
+♂ Masculin ¦ ♂ Männlech
+♀ Féminin ¦ ♀ Weiblech
+□ Masculin ¦ □ Männlech
+○ Féminin ¦ ○ Weiblech
+◇ Sexe non renseigné ¦ ◇ Geschlecht net uginn
+Les traits relient les générations connues. ¦ D'Linne verbannen déi bekannte Generatiounen.
+Distribution des noms ¦ Verdeelung vun den Nimm
+DISTRIBUTION ¦ VERDEELUNG
+=naissance regroupée ¦ gruppéiert Gebuert|gruppéiert Gebuerten
+{births} par année et patronyme. ¦ {births} pro Joer a Familljennumm.
+Vivant·e ¦ Lieweg
+Décédé·e ¦ Gestuerwen
+D’autres générations existent ¦ Et ginn nach aner Generatiounen
+Côte à côte ¦ Niewenteneen
+Dessus / dessous ¦ Uewen / ënnen
+Aucune vue enregistrée pour l’instant ¦ Nach keng gespäichert Usiicht
+Montrer les animaux de chacun à côté de leur maître (trait pointillé) ¦ D'Déiere vun all Persoun nieft hirem Meeschter weisen (gepunktte Linn)
+Couleur et épaisseur des traits selon la solidité de chaque lien parent-enfant ¦ Faarf an Déckt vun de Linne no der Zouverlässegkeet vun all Eltere-Kand-Verbindung
+🛡 Vue solidité ¦ 🛡 Zouverlässegkeetsusiicht
+Tableau des chiffres ¦ Tabell vun den Zuelen
+Graphique d’une statistique de l’app ¦ Grafik vun enger Statistik vun der App
+Ce graphique n’existe plus. ¦ Dës Grafik gëtt et net méi.
+Un de mes graphiques ¦ Eng vu menge Grafiken
+📈 Un de mes graphiques ¦ 📈 Eng vu menge Grafiken
+Un graphique de l’Éditeur de graphiques, tenu à jour ¦ Eng Grafik aus dem Grafikeditor, aktuell gehalen
+Données de l’app ¦ Donnéeë vun der App
+🔄 Données de l’app ¦ 🔄 Donnéeë vun der App
+✍️ Mes chiffres ¦ ✍️ Meng Zuelen
+Mon diagramme ¦ Mäin Diagramm
+Posé : {where} ¦ Plazéiert: {where}
+LISTES · GRAPHIQUES ¦ LËSCHTEN · GRAFIKEN
+📈 Graphiques et diagrammes ¦ 📈 Grafiken an Diagrammer
+Tous tes graphiques (faits dans <b>Réglages → Éditeur de graphiques</b>, avec tes propres chiffres ou ceux de l’app) et tes diagrammes (hémicycle, frise d’un groupe, camembert…). Chacun se pose partout : un widget du tableau de bord, une Fiche, une enquête, l’Atelier, la page d’une personne, la mise en page — bouton « ＋ Diagramme », puis « 📈 Un de mes graphiques ». ¦ All deng Grafiken (gemaach an <b>Astellungen → Grafikeditor</b>, mat dengen eegenen Zuelen oder deene vun der App) an deng Diagrammer (Hemizykel, Zäitlinn vun enger Grupp, Kuchen…). All eenzel kann iwwerall hikommen: e Widget vum Dashboard, eng Notizfiche, eng Ënnersichung, d'Atelier, d'Säit vun enger Persoun, d'Säitegestaltung — Knäppchen „＋ Diagramm“, dann „📈 Eng vu menge Grafiken“.
+＋ Nouveau diagramme ¦ ＋ Neit Diagramm
+Aucun graphique ni diagramme pour l’instant ¦ Nach keng Grafik an keen Diagramm
+Un graphique compte ce que tu veux (tes propres chiffres, des personnes, des événements, une statistique de l’app) ; un diagramme dessine une assemblée, une frise, un organigramme… ¦ Eng Grafik zielt dat, wat s du wëlls (deng eegen Zuelen, Persounen, Evenementer, eng Statistik vun der App); en Diagramm zeechent eng Versammlung, eng Zäitlinn, en Organigramm…
+Rien ne correspond : retire un filtre ou change la recherche. ¦ Näischt passt: huel e Filter ewech oder änner d'Sich.
+Chercher un graphique, un diagramme… (ex. naissances, Rennes) ¦ Eng Grafik, en Diagramm sichen… (z. B. Gebuerten, Rennes)
+Seulement ceux posés quelque part ¦ Nëmmen déi, déi iergendwou plazéiert sinn
+Posés quelque part ¦ Iergendwou plazéiert
+Posé nulle part pour l’instant ¦ Nach néierens plazéiert
+Courbe ¦ Kurv
+Aire ¦ Fläch
+Anneau ¦ Rank
+Camembert ¦ Kuch
+Barres ¦ Balken
+Revenir à la personne ¦ Zréck bei d'Persoun
+Prénom contient ¦ Virnumm enthält
+Statut (vivant, décédé) ¦ Status (lieweg, gestuerwen)
+Métier contient ¦ Beruff enthält
+Dans mes favoris ¦ A menge Favoritten
+Naissance entre (années) ¦ Gebuert tëscht (Joren)
+Naissance entre deux dates précises ¦ Gebuert tëscht zwee genauen Datumen
+Naissance en (mois) ¦ Gebuert am (Mount)
+Décès entre (années) ¦ Doud tëscht (Joren)
+Âge à un événement entre ¦ Alter bei engem Evenement tëscht
+A vécu entre … ans ¦ Huet tëscht … Joer gelieft
+Lieu de naissance (contient) ¦ Gebuertsplaz (enthält)
+Lieu de décès ou d’inhumation (contient) ¦ Plaz vum Doud oder vum Begriefnis (enthält)
+A un événement à (lieu contient) ¦ Huet en Evenement zu (Plaz enthält)
+A un événement dans le département, la région ou le pays ¦ Huet en Evenement am Departement, an der Regioun oder am Land
+A un événement à moins de … km de ¦ Huet en Evenement manner wéi … km vun
+A eu un événement (mariage, divorce, voyage…) ¦ Hat en Evenement (Bestietnes, Scheedung, Rees…)
+Nombre d’événements d’un type entre ¦ Zuel vun Evenementer vun engem Typ tëscht
+Nombre d’unions (mariages) entre ¦ Zuel vu Verbindungen (Bestietnesser) tëscht
+Nombre d’enfants entre ¦ Zuel vu Kanner tëscht
+Conjoint : nom ou prénom contient ¦ Partner: Numm oder Virnumm enthält
+Parent : nom ou prénom contient ¦ Elterendeel: Numm oder Virnumm enthält
+Cause de décès contient ¦ Doudesursaach enthält
+Seulement mes ancêtres (Sosa) ¦ Nëmme meng Virfahren (Sosa)
+Par rapport à la personne de la fiche (ses ancêtres, sa famille…) ¦ Am Verglach mat der Persoun vun der Fiche (hir Virfahren, hir Famill…)
+Génération Sosa entre ¦ Sosa-Generatioun tëscht
+Sans source ¦ Ouni Quell
+Nombre de sources entre ¦ Zuel vu Quellen tëscht
+A une photo ou un document ¦ Huet eng Foto oder en Dokument
+Les filtres ci-dessus (années, limite, sexe et critères) peuvent devenir ceux de départ de ¦ D'Filteren hei uewen (Joren, Limit, Geschlecht a Critèren) kënnen d'Startfilteren ginn vun
+les distributions. ¦ de Verdeelungen.
+Usage des noms de famille dans la base. ¦ Gebrauch vun de Familljennimm an der Datebank.
+Années de naissance (par décennie) ¦ Gebuertsjoren (pro Joerzéngt)
+Années de décès (par décennie) ¦ Doudesjoren (pro Joerzéngt)
+Mes ancêtres par siècle ¦ Meng Virfahre pro Joerhonnert
+Métiers les plus fréquents ¦ Heefegst Beruffer
+Femmes et hommes ¦ Fraen a Männer
+Ancêtres à sourcer ¦ Virfahren, déi eng Quell brauchen
+Toutes les personnes récentes ont au moins une source. ¦ All déi rezent Persounen hu mindestens eng Quell.
+Tous les événements récents ont un média. ¦ All déi rezent Evenementer hunn e Medium.
+Aucun média. ¦ Keng Medien.
+Aucun média isolé. ¦ Keen isoléiert Medium.
+Toutes les images récentes ont au moins une zone identifiée. ¦ All déi rezent Biller hu mindestens eng identifizéiert Zon.
+Aucune fiche récente avec parent manquant. ¦ Keng rezent Fiche mat engem feelenden Elterendeel.
+Aucun baptême récent sans parrain/marraine. ¦ Keen rezenten Daf ouni Pätter/Gotta.
+✎ Modifier l’onglet ¦ ✎ Reiter änneren
+Aucun widget affiché ¦ Kee Widget ugewisen
+Onglet vide ¦ Eidele Reiter
+Ajoute des widgets, tes listes ou tes graphiques depuis la colonne de gauche. ¦ Setz Widgeten, deng Lëschten oder deng Grafiken aus der lénker Kolonn derbäi.
+Ajoute-en depuis la colonne de gauche, ou crée le tien. ¦ Setz der aus der lénker Kolonn derbäi oder erstell däin eegent.
+Widget « {name} » retiré du tableau de bord. ¦ Widget „{name}“ vum Dashboard ewechgeholl.
+Widget retiré du tableau de bord. ¦ Widget vum Dashboard ewechgeholl.
+Widget supprimé du tableau de bord. ¦ Widget vum Dashboard geläscht.
+Widget modifié. ¦ Widget geännert.
+Revenir au widget ¦ Zréck bei de Widget
+Enquêtes ouvertes ¦ Oppen Ënnersichungen
+Battues ouvertes ¦ Oppe Sichaktiounen
+Rappels proches ¦ Noe Rappellen
+Incohérences ¦ Inkohärenzen
+Seulement les SOSA ¦ Nëmmen d'SOSA
+Types d’évènements ¦ Evenementtypen
+Ex : trouver la date de naissance de Jean Dupont ¦ Z. B.: de Gebuertsdatum vum Jean Dupont fannen
+Personne liée (facultatif) ¦ Verbonne Persoun (fakultativ)
+Réglages du widget ¦ Astellunge vum Widget
+Statistique affichée ¦ Ugewise Statistik
+Dernière fiche consultée ¦ Lescht gekuckte Fiche
+Les descendants ¦ D'Nokommen
+Les ascendants ¦ D'Virfahren
+Sites affichés ¦ Ugewise Sitten
+Prendre cette image ¦ Dëst Bild huelen
+Provenance affichée ¦ Ugewisen Hierkonft
+Ex : Jean Dupont · Enquête ¦ Z. B.: Jean Dupont · Ënnersichung
+Personne affichée ¦ Ugewise Persoun
+Aléatoire ¦ Zoufälleg
+Personne précise ¦ Bestëmmt Persoun
+📁 ou glisse une image ici, ou colle-la (⌘V). ¦ 📁 oder zéi e Bild heihin, oder fëg et an (⌘V).
+Pages du suivi ¦ Säite vum Suivi
+Pages du tableau de bord ¦ Säite vum Dashboard
+Chaque page a ses widgets ; les boutons des pages sont en haut du Suivi des animaux. La page cochée s’affiche à l’ouverture. ¦ All Säit huet hir Widgeten; d'Knäppercher vun de Säite sinn uewen am Suivi vun den Déieren. Déi ugekräizte Säit gëtt beim Opmaache gewisen.
+Chaque page a ses widgets ; les boutons des pages sont en haut du tableau de bord. La page cochée s’affiche à l’ouverture. ¦ All Säit huet hir Widgeten; d'Knäppercher vun de Säite sinn uewen um Dashboard. Déi ugekräizte Säit gëtt beim Opmaache gewisen.
+Ranger ses widgets ¦ Seng Widgeten opraumen
+✎ en cours ¦ ✎ amgaangen
+Titre de l’ensemble ¦ Titel vum Ganzen
+Un niveau plus haut ¦ Een Niveau méi héich
+Sous-ensemble (un niveau plus bas) ¦ Ënnergrupp (een Niveau méi déif)
+SUIVI DES ANIMAUX ¦ SUIVI VUN DEN DÉIEREN
+MON ONGLET ¦ MÄI REITER
+Son widget sera supprimé avec elle. ¦ Hire Widget gëtt mat hir geläscht.
+Ses {widgets} seront supprimés avec elle. ¦ Hir {widgets} gi mat hir geläscht.
+=widget ¦ Widget|Widgeten
+Supprimer la page « {name} » ? ¦ D'Säit „{name}“ läschen?
+Page ¦ Säit
+Pages du suivi enregistrées. ¦ Säite vum Suivi gespäichert.
+Tableau de bord enregistré. ¦ Dashboard gespäichert.
+=fiche créée ¦ erstallt Fiche|erstallt Fichen
+=événement ajouté ¦ derbäigesaten Evenement|derbäigesat Evenementer
+=source ajoutée ¦ derbäigesate Quell|derbäigesate Quellen
+=recensement ajouté ¦ derbäigesate Vollekszielung|derbäigesate Vollekszielungen
+=nouvel ancêtre Sosa ¦ neie Sosa-Virfahr|nei Sosa-Virfahren
+=battue terminée ¦ ofgeschloss Sichaktioun|ofgeschloss Sichaktiounen
+=enquête terminée ¦ ofgeschloss Ënnersichung|ofgeschloss Ënnersichungen
+=évènement ¦ Evenement|Evenementer
+=doublon ¦ Doublon|Doublonen
+pas encore de modification ce mois-ci ¦ dëse Mount nach keng Ännerung
+rien pour l’instant ¦ fir de Moment näischt
+En {month} : ¦ Am {month}:
+En {year} : ¦ Am Joer {year}:
+{days} de recherche. ¦ {days} Recherche.
+{days} de recherche, {changes}. ¦ {days} Recherche, {changes}.
+↑ plus actif que le mois dernier ¦ ↑ méi aktiv wéi de leschte Mount
+Modifications par mois sur un an ¦ Ännerunge pro Mount iwwer ee Joer
+D’après le journal des modifications : le travail fait à la main (les imports de fichiers ne comptent pas comme fiches créées). ¦ No dem Ännerungsjournal: d'Aarbecht, déi mat der Hand gemaach gouf (d'Importer vu Fichieren zielen net als erstallt Fichen).
+Bilan indisponible. ¦ Bilan net disponibel.
+dernière fiche consultée ¦ lescht gekuckte Fiche
+Aucun anniversaire aujourd’hui. ¦ Haut kee Gebuertsdag.
+Aucune personne verrouillée récemment. ¦ Keng Persoun ass rezent gespaart ginn.
+Aucune personne disponible pour ce widget. ¦ Keng Persoun disponibel fir dëse Widget.
+Aucun événement renseigné. ¦ Keen Evenement uginn.
+Aucune note. ¦ Keng Notiz.
+Aucun recensement. ¦ Keng Vollekszielung.
+Aucune source ou citation. ¦ Keng Quell an kee Zitat.
+Bloc surtout utile pour une fiche féminine. ¦ Block virun allem nëtzlech fir eng Fiche vun enger Fra.
+Aucune enquête ou battue liée. ¦ Keng verbonnen Ënnersichung oder Sichaktioun.
+Aucun détail ¦ Keen Detail
+Décision ¦ Decisioun
+Bureau ¦ Büro
+Œuvre ¦ Wierk
+Ouvrir fiche ¦ Fiche opmaachen
+Tous les événements récents ont une source. ¦ All déi rezent Evenementer hunn eng Quell.
+Aucun lieu prioritaire à compléter. ¦ Keng prioritär Plaz ze vervollstännegen.
+Coordonnées ou pays à compléter ¦ Koordinaten oder Land ze vervollstännegen
+Aucun couple prioritaire sans mariage. ¦ Kee prioritäre Koppel ouni Bestietnes.
+Personne 1 ¦ Persoun 1
+Personne 2 ¦ Persoun 2
+Aucune incohérence de dates détectée. ¦ Keng Inkohärenz bei den Datume fonnt.
+Incohérences et conflits ¦ Inkohärenzen a Konflikter
+Vérifier ¦ Kontrolléieren
+Aucun SOSA manquant proche. ¦ Kee feelende SOSA an der Noperschaft.
+Aucune battue prioritaire. ¦ Keng prioritär Sichaktioun.
+Commune de départ inconnue ¦ Startgemeng onbekannt
+Aucune action prioritaire pour le moment. ¦ Fir de Moment keng prioritär Aktioun.
+À traiter ¦ Ze erleedegen
+Liste de travail quotidienne ¦ Deeglech Aarbechtslëscht
+Aucune archive disponible. ¦ Keen Archiv disponibel.
+Aucune racine SOSA définie. ¦ Keng SOSA-Wuerzel festgeluecht.
+Aucun doublon probable repéré. ¦ Kee wahrscheinlechen Doublon fonnt.
+Aucun point géographique exploitable. ¦ Kee geographesche Punkt, mat deem ee ka schaffen.
+Aperçu cartographique ¦ Kaartenvirschau
+Aucune personne avec lieux datés. ¦ Keng Persoun mat datéierte Plazen.
+Aucune personne disponible. ¦ Keng Persoun disponibel.
+Aucun événement daté. ¦ Keen datéiert Evenement.
+Éléments datés ou localisés ¦ Datéiert oder lokaliséiert Elementer
+Documents et images ¦ Dokumenter a Biller
+Sources enregistrées ¦ Gespäichert Quellen
+En cours ou en pause ¦ Amgaangen oder op Paus
+Recherches commune par commune ¦ Recherchë Gemeng fir Gemeng
+À vérifier dans maintenance ¦ Am Entretien ze kontrolléieren
+100 fiches ¦ 100 Fichen
+Au moins 100 personnes enregistrées ¦ Mindestens 100 Persoune gespäichert
+100 médias ¦ 100 Medien
+Au moins 100 documents conservés ¦ Mindestens 100 Dokumenter gespäichert
+Au moins la moitié des fiches sourcées ¦ Mindestens d'Halschent vun de Fiche mat Quell
+Illustrée ¦ Illustréiert
+Au moins la moitié des fiches avec un média ¦ Mindestens d'Halschent vun de Fiche mat engem Medium
+5 générations SOSA ¦ 5 SOSA-Generatiounen
+Cinq générations complètes ¦ Fënnef komplett Generatiounen
+Au moins une battue créée ¦ Mindestens eng Sichaktioun erstallt
+Aucune suppression récente. ¦ Keng rezent Läschung.
+Aucune modification récente. ¦ Keng rezent Ännerung.
+Aucun événement exploitable pour ce quiz avec les filtres choisis. ¦ Keen Evenement, dat sech mat de gewielte Filtere fir dëse Quiz eegent.
+Pas assez de dates distinctes pour générer des propositions. ¦ Net genuch verschidden Datumen, fir Virschléi ze maachen.
+Quelle est la date de <strong>{what}</strong> de <strong>{name}</strong> ? ¦ Wéini war <strong>{what}</strong> vum <strong>{name}</strong>?
+Aucune image disponible. ¦ Kee Bild disponibel.
+Choisis une image dans les réglages du widget. ¦ Wiel e Bild an den Astellunge vum Widget.
+Choisis deux personnes dans les réglages du widget. ¦ Wiel zwou Persounen an den Astellunge vum Widget.
+Personne liée ¦ Verbonne Persoun
+Ouvre Comparaison pour analyser le lien. ¦ Maach de Verglach op, fir d'Verbindung z'analyséieren.
+Aucune personne favorite. ¦ Keng Favoritte-Persoun.
+Rappels à traiter ¦ Rappellen ze erleedegen
+Alertes cohérence ¦ Kohärenzalarmen
+Naissance renseignée ¦ Gebuert uginn
+Décès renseigné ¦ Doud uginn
+Au moins un média ¦ Mindestens ee Medium
+Au moins une source ¦ Mindestens eng Quell
+Aucun lieu renseigné. ¦ Keng Plaz uginn.
+Ajoute un objectif dans les réglages du widget. ¦ Setz en Zil an den Astellunge vum Widget derbäi.
+Ajouter {what} ¦ {what} derbäisetzen
+Aucun rappel à venir. ¦ Keng Rappellen, déi kommen.
+Aucune fiche consultée sur ce navigateur. ¦ Keng Fiche an dësem Browser gekuckt.
+Aucun média à transcrire. ¦ Kee Medium ze transkribéieren.
+Aucune signature identifiée à comparer. ¦ Keng identifizéiert Ënnerschrëft ze vergläichen.
+Aucune commune de battue à reprendre. ¦ Keng Sichaktiounsgemeng fir weiderzemaachen.
+Aucune source ou piste à vérifier. ¦ Keng Quell a keng Spuer ze kontrolléieren.
+Rien à relire pour le moment. ¦ Fir de Moment näischt nozeliesen.
+Aucun départ enregistré : coche « Départs / émigration » sur une fiche. ¦ Keen Depart gespäichert: kräiz „Departen / Auswanderung“ op enger Fiche un.
+Aucun enfant placé enregistré. ¦ Keent placéiert Kand gespäichert.
+Aucune armoirie. ¦ Kee Wopen.
+Ajouter des armoiries ¦ E Wope derbäisetzen
+Aucun poilu : coche « Poilu 14-18 » sur une fiche. ¦ Kee Poilu: kräiz „Poilu 14-18“ op enger Fiche un.
+Aucune recherche enregistrée (Recherche → Recherche multicritère). ¦ Keng gespäichert Sich (Recherche → Sich mat méi Critèren).
+Aucun circuit à faire. ¦ Keng Rundrees ze maachen.
+Préparer un circuit ¦ Eng Rundrees preparéieren
+⚠ Aucun dossier hors de cet ordinateur n’est réglé : si le Mac est volé ou tombe en panne, tout part avec lui. ¦ ⚠ Keen Dossier ausserhalb vun dësem Computer ass agestallt: wann de Mac geklaut gëtt oder futti geet, ass alles mat him fort.
+Régler ¦ Astellen
+Aucun dossier surveillé pour l’instant ¦ Nach keen iwwerwaachten Dossier
+Choisir un dossier ¦ En Dossier wielen
+Aucun nom indexé dans les transcriptions. ¦ Keen Numm an den Transkriptiounen indexéiert.
+Rien de prévu sur les 7 prochains jours. ¦ Näischt geplangt an de nächste 7 Deeg.
+Aucune date récurrente repérée dans les 7 prochains jours. ¦ Keen Datum, deen ëmmer erëm kënnt, an de nächste 7 Deeg fonnt.
+Texte vide : écris-le avec le crayon ✎. ¦ Eidelen Text: schreif en mam Bläistëft ✎.
+↗ Ouvrir mon agenda ¦ ↗ Mäin Agenda opmaachen
+Ce mois-ci ¦ Dëse Mount
+Voir le mois ¦ De Mount gesinn
+Qui ¦ Wien
+Entrée : calculer · ↑ : reprendre le dernier ¦ Enter: rechnen · ↑: dat Lescht erëmhuelen
+⛶ Ouvrir la calculette ¦ ⛶ De Rechner opmaachen
+Fond de carte indisponible (pas d’Internet ?) : les photos restent à leur place. ¦ Grondkaart net disponibel (keen Internet?): d'Fotoe bleiwen op hirer Plaz.
+Pas précédent ¦ Schrëtt zréck
+Pas suivant ¦ Schrëtt no vir
+Aucune date pour l’instant. ¦ Nach keen Datum.
+Frise : glisse pour choisir une période, molette pour zoomer, double-clic pour tout voir ¦ Zäitlinn: zéi, fir eng Period ze wielen, Rad fir ze zoomen, Duebelklick fir alles ze gesinn
+Choisis une carte dans les réglages du widget (✎). ¦ Wiel eng Kaart an den Astellunge vum Widget (✎).
+Des barres ou un camembert : par métier, par lieu, par décennie, par siècle… ¦ Balken oder e Kuch: no Beruff, no Plaz, no Joerzéngt, no Joerhonnert…
+Écran de l’app ¦ Ecran vun der App
+Une liste, un diagramme, une statistique, la fiche d’une personne, la carte… tel quel. ¦ Eng Lëscht, en Diagramm, eng Statistik, d'Fiche vun enger Persoun, d'Kaart… sou wéi se sinn.
+Un pense-bête, une citation, une consigne, avec des émojis. ¦ Eng Erënnerungsnotiz, en Zitat, eng Uweisung, mat Emojien.
+Raccourcis ¦ Ofkierzungen
+Des boutons vers les écrans, les listes ou des sites que tu utilises souvent. ¦ Knäppercher op d'Ecranen, d'Lëschten oder Säiten, déi s du dacks benotz.
+Parcours jour par jour ¦ Dag fir Dag duerchgoen
+Widget de l’app habillé ¦ Ugepasste Widget vun der App
+Widget de l’app ¦ Widget vun der App
+toute la largeur ¦ déi ganz Breet
+Mosaïque (carrés proportionnels) ¦ Mosaik (proportional Quadrater)
+Aire (courbe remplie) ¦ Fläch (gefëllte Kurv)
+cliquer pour voir qui ¦ klick, fir ze gesinn, wien
+Tout voir ({n}) ¦ Alles gesinn ({n})
+{n} autres valeurs ¦ {n} aner Wäerter
+Aucune ligne. ¦ Keng Zeil.
+Personne ne correspond. ¦ Keng Persoun passt.
+=personne différente ¦ verschidde Persoun|verschidde Persounen
+{people} pour {n} comptés (les 3 000 premières lignes seulement). ¦ {people} fir {n} gezielt (nëmmen déi éischt 3 000 Zeilen).
+{people} pour {n} comptés : une même personne peut compter plusieurs fois (deux événements, deux étiquettes…). ¦ {people} fir {n} gezielt: déi selwecht Persoun ka méi wéi eemol zielen (zwee Evenementer, zwou Etiketten…).
+Chercher un nom, un métier… ¦ En Numm, e Beruff sichen…
+Par nom, A → Z ¦ No Numm, A → Z
+Par nom, Z → A ¦ No Numm, Z → A
+Par naissance, les plus anciennes ¦ No Gebuert, déi eelst
+Par naissance, les plus récentes ¦ No Gebuert, déi rezentst
+Aucun raccourci. ¦ Keng Ofkierzung.
+Frise verticale ¦ Vertikal Zäitlinn
+Frise horizontale (défile) ¦ Horizontal Zäitlinn (scrollt)
+Cartes en grille ¦ Kaarten an engem Gitter
+Liste compacte ¦ Kompakt Lëscht
+jusqu’au… (facultatif) ¦ bis… (fakultativ)
+Titre de l’étape ¦ Titel vun der Etapp
+Couleur de l’étape ¦ Faarf vun der Etapp
+Ce qui s’est passé ce jour-là ¦ Wat deen Dag geschitt ass
+Aucun événement daté pour cette personne. ¦ Keen datéiert Evenement fir dës Persoun.
+Étape ¦ Etapp
+Ancêtres trouvés (Sosa) ¦ Fonnt Virfahren (Sosa)
+Ancêtres sans source ¦ Virfahren ouni Quell
+décès avant 1800 ¦ Doud virun 1800
+Pense-bête ¦ Erënnerungsnotiz
+Crée tes propres graphiques, sans rien programmer : avec ¦ Erstell deng eege Grafiken, ouni eppes ze programméieren: mat
+tes propres chiffres ¦ dengen eegenen Zuelen
+＋ Nouveau widget ¦ ＋ Neie Widget
+Importer un widget reçu ¦ E kritte Widget importéieren
+Un fichier « .lcnda-widget.json » envoyé par un proche : seul le modèle du widget est partagé, jamais les données. ¦ E Fichier „.lcnda-widget.json“, dee vun engem Familljemember geschéckt gouf: nëmmen de Modell vum Widget gëtt gedeelt, ni d'Donnéeën.
+sur le tableau de bord ¦ um Dashboard
+↗ Ouvrir dans Graphiques ¦ ↗ An de Grafiken opmaachen
+＋ Ajouter au tableau de bord ¦ ＋ Op den Dashboard derbäisetzen
+Widget supprimé. ¦ Widget geläscht.
+Mon widget ¦ Mäi Widget
+Supprimer le widget ¦ De Widget läschen
+Supprimer le widget « {name} » ? Il disparaît aussi du tableau de bord. ¦ De Widget „{name}“ läschen? E verschwënnt och vum Dashboard.
+Supprimer le widget « {name} » ? Il disparaît aussi du tableau de bord et de tous les endroits où ce graphique est posé (fiches, enquêtes, mise en page…). ¦ De Widget „{name}“ läschen? E verschwënnt och vum Dashboard a vun alle Plazen, wou dës Grafik plazéiert ass (Fichen, Ënnersichungen, Säitegestaltung…).
+« {name} » importé : il est dans Graphiques → « Mes graphiques ». ¦ „{name}“ importéiert: en ass a Grafiken → „Meng Grafiken“.
+Widget « {name} » importé : ajoute-le au tableau de bord. ¦ Widget „{name}“ importéiert: setz en op den Dashboard derbäi.
+📌 Le poser aussi sur… ¦ 📌 En och plazéieren op…
+(à l’enregistrement) ¦ (beim Späicheren)
+Posé nulle part pour l’instant. ¦ Nach néierens plazéiert.
+La page d’une personne, une enquête… ¦ D'Säit vun enger Persoun, eng Ënnersichung…
+Graphique posé : {name}. ¦ Grafik plazéiert: {name}.
+Graphique retiré de cet endroit ¦ Grafik vun dëser Plaz ewechgeholl
+L’ouvrir dans Graphiques ¦ Se an de Grafiken opmaachen
+… et {n} autres (Listes → Graphiques et diagrammes) ¦ … an {n} aner (Lëschten → Grafiken an Diagrammer)
+Widget ajouté au tableau de bord. ¦ Widget op den Dashboard derbäigesat.
+NOUVEAU WIDGET ¦ NEIE WIDGET
+NOUVEAU GRAPHIQUE ¦ NEI GRAFIK
+Par quoi commencer ? ¦ Mat wat ufänken?
+Partir de rien ¦ Vun null ufänken
+Partir d’un élément de l’app ¦ Vun engem Element vun der App ufänken
+N’importe quel écran devient un widget : une liste (fiche d’un village, recensements, rappels…), un diagramme, une statistique, une de tes listes, la fiche d’une personne, la carte, un outil des Réglages. ¦ All Ecran kann e Widget ginn: eng Lëscht (Fiche vun engem Duerf, Vollekszielungen, Rappellen…), en Diagramm, eng Statistik, eng vun denge Lëschten, d'Fiche vun enger Persoun, d'Kaart, en Tool aus den Astellungen.
+Créer ce widget ¦ Dëse Widget erstellen
+Partir d’un widget de l’app ¦ Vun engem Widget vun der App ufänken
+Partir d’un de mes widgets ¦ Vun engem vu menge Widgeten ufänken
+Avec mes propres chiffres ¦ Mat menge Zuelen
+Un tableau à remplir (des noms et des chiffres, en une ou plusieurs séries), collé d’un tableur ou importé d’un fichier CSV. ¦ Eng Tabell fir auszefëllen (Nimm an Zuelen, an enger oder méi Serien), aus enger Tabelle agefüügt oder aus engem CSV-Fichier importéiert.
+Mes propres chiffres ¦ Meng eegen Zuelen
+Un diagramme ¦ En Diagramm
+Hémicycle d’une assemblée, frise des membres d’un groupe, organigramme, flux, nuage de mots… (Mes diagrammes). ¦ Hemizykel vun enger Versammlung, Zäitlinn vun de Membere vun enger Grupp, Organigramm, Strom, Wierderwollek… (Meng Diagrammer).
+Partir de rien, avec les données de l’app ¦ Vun null ufänken, mat den Donnéeë vun der App
+Un ou plusieurs nombres : combien de personnes, d’événements, de lieux… répondent à tes critères. ¦ Eng oder méi Zuelen: wéi vill Persounen, Evenementer, Plazen… op deng Critèren passen.
+Les premières lignes d’une liste, avec les colonnes et l’ordre que tu veux. ¦ Déi éischt Zeile vun enger Lëscht, mat de Kolonnen an der Reiefolleg, déi s du wëlls.
+Partir d’une statistique de l’app ¦ Vun enger Statistik vun der App ufänken
+Les mêmes chiffres que dans Graphiques → Statistiques, avec ton dessin (barres, camembert, courbe, mosaïque…), tes couleurs, et autant de critères que tu veux : métier, lieu et rayon en km, dates précises, mariage, nombre d’enfants, durée de vie, divorce, voyage… ¦ Déi selwecht Zuele wéi a Grafiken → Statistiken, mat dengem Dessin (Balken, Kuch, Kurv, Mosaik…), denge Faarwen, a sou vill Critèren, wéi s du wëlls: Beruff, Plaz a Radius a km, genau Datumen, Bestietnes, Zuel vu Kanner, Liewensdauer, Scheedung, Rees…
+D’une statistique de l’app ¦ Vun enger Statistik vun der App
+Partir d’un de mes widgets ou de mes graphiques ¦ Vun engem vu menge Widgeten oder Grafiken ufänken
+── ou des données de l’app ── ¦ ── oder vun den Donnéeë vun der App ──
+Listes de l’app ¦ Lëschte vun der App
+Aucun critère : toute la base. ¦ Kee Critère: déi ganz Datebank.
+Toutes les lignes de cette liste de l’app. ¦ All d'Zeile vun dëser Lëscht vun der App.
+(ce que montre cette partie, affichée dessous) ¦ (wat dësen Deel weist, hei ënnendrënner)
+Ex. : Les baptêmes de la paroisse, du plus ancien au plus récent ¦ Z. B.: D'Dafe vun der Par, vum eelsten zum rezentsten
+✨ Proposer une légende d’après les critères ¦ ✨ Eng Legend no de Critèren virschloen
+Tableau vide : « ＋ Ligne » ou « 📋 Coller un tableau ». ¦ Eidel Tabell: „＋ Zeil“ oder „📋 Eng Tabell afügen“.
+＋ Série (colonne de chiffres) ¦ ＋ Serie (Kolonn mat Zuelen)
+Recopier les chiffres d’un graphique (à toi, un exemple, ou une statistique de l’app) pour les retoucher ¦ D'Zuele vun enger Grafik (vun dir, e Beispill oder eng Statistik vun der App) iwwerhuelen, fir se ze retuschéieren
+📋 Coller un tableau ¦ 📋 Eng Tabell afügen
+📊 Partir d’un graphique ¦ 📊 Vun enger Grafik ufänken
+🧾 Modifier les données ¦ 🧾 D'Donnéeën änneren
+Fichier trop gros (5 Mo au plus). ¦ Fichier ze grouss (maximal 5 MB).
+Ligne retirée ¦ Zeil ewechgeholl
+Tableau vidé ¦ Tabell eidel gemaach
+Remplacer le tableau ¦ D'Tabell ersetzen
+La première ligne ¦ Déi éischt Zeil
+à deviner ¦ ze roden
+donne les titres (noms des séries) ¦ gëtt d'Titelen (Nimm vun de Serien)
+est une ligne de chiffres ¦ ass eng Zeil mat Zuelen
+Aucun graphique disponible. ¦ Keng Grafik disponibel.
+Recopier ces chiffres ¦ Dës Zuelen iwwerhuelen
+Aucun chiffre pour ce graphique. ¦ Keng Zuele fir dës Grafik.
+=valeur recopiée ¦ iwwerholle Wäert|iwwerholl Wäerter
+=série ¦ Serie|Serien
+Série {num} ¦ Serie {num}
+Nom de la série {num} ¦ Numm vun der Serie {num}
+Tableau importé ({rows}) ¦ Tabell importéiert ({rows})
+Série « {name} » retirée ¦ Serie „{name}“ ewechgeholl
+Chiffres repris du tableur ({rows}) ¦ Zuelen aus der Tabelle iwwerholl ({rows})
+Tableau collé ({rows}) ¦ Tabell agefüügt ({rows})
+Retirer cette série ¦ Dës Serie ewechhuelen
+(type masqué) ¦ (Typ verstoppt)
+Dessins simples ¦ Einfach Dessinen
+Sépia (photos anciennes) ¦ Sepia (al Fotoen)
+Une couleur en dégradé ¦ Eng Faarf als Verlaf
+Couleur du dégradé ¦ Faarf vum Verlaf
+Les valeurs apparaissent ici après le calcul de l’aperçu. ¦ D'Wäerter erschéngen hei, nodeems d'Virschau berechent ass.
+Valeurs les plus fréquentes ¦ Heefegst Wäerter
+Écrans indisponibles. ¦ Ecranen net disponibel.
+(date précise ou année, facultatif) ¦ (genauen Datum oder Joer, fakultativ)
+Nés à partir du ¦ Gebuer vum
+12 mars 1750 ou 1700 ¦ 12 mars 1750 oder 1700
+jusqu’au ¦ bis
+31/12/1850 ou 1900 ¦ 31/12/1850 oder 1900
+Cette statistique garde ses seuls filtres (années, sexe, lignée). ¦ Dës Statistik behält nëmmen hir eege Filteren (Joren, Geschlecht, Linn).
+ne pas montrer les valeurs vides ¦ eidel Wäerter net weisen
+Libellé ¦ Bezeechnung
+retirer ce chiffre ¦ dës Zuel ewechhuelen
+ordre de la liste ¦ Reiefolleg vun der Lëscht
+croissant ¦ eropgoend
+décroissant ¦ erofgoend
+Compter par ¦ Zielen no
+Regrouper ¦ Gruppéieren
+par valeur ¦ no Wäert
+par année ¦ no Joer
+par décennie ¦ no Joerzéngt
+par tranche (de … ans, ou de … pour un nombre) ¦ no Tranche (vun … Joer, oder vun … fir eng Zuel)
+par siècle ¦ no Joerhonnert
+par mois de l’année ¦ no Mount vum Joer
+Tranche de ¦ Tranche vun
+Seulement du ¦ Nëmme vum
+12 mars 1750 ou 1750 ¦ 12 mars 1750 oder 1750
+au ¦ bis
+31/12/1800 ou 1800 ¦ 31/12/1800 oder 1800
+ne pas compter les cases vides ¦ eidel Felder net zielen
+Les étapes viennent ¦ D'Etappe kommen
+écrites à la main ¦ mat der Hand geschriwwen
+des événements d’une personne ¦ aus den Evenementer vun enger Persoun
+Présentation ¦ Presentatioun
+par date ¦ no Datum
+dans l’ordre écrit ¦ an der geschriwwener Reiefolleg
+Hauteur de la carte ¦ Héicht vun der Kaart
+Carte du parcours ¦ Kaart vum Wee
+« Jour 1, Jour 2… » ¦ „Dag 1, Dag 2…“
+Textes des étapes ¦ Texter vun den Etappen
+Seulement les événements avec un lieu ¦ Nëmmen d'Evenementer mat enger Plaz
+✎ Modifier ce diagramme ¦ ✎ Dësen Diagramm änneren
+Le widget montre toujours la dernière version du diagramme (Graphiques → Mes diagrammes). ¦ De Widget weist ëmmer déi lescht Versioun vum Diagramm (Grafiken → Meng Diagrammer).
+Un pense-bête, une citation… Les émojis marchent 🌳 ¦ Eng Erënnerungsnotiz, en Zitat… D'Emojië funktionéieren 🌳
+Un site internet… ¦ En Internetsite…
+Texte du bouton ¦ Text vum Knäppchen
+Sous-titre de cette partie ¦ Ënnertitel vun dësem Deel
+Ex. : À faire, Mes chiffres, Liens utiles ¦ Z. B.: Ze maachen, Meng Zuelen, Nëtzlech Linken
+ÉDITEUR DE GRAPHIQUES ¦ GRAFIKEDITOR
+ÉDITEUR DE WIDGETS ¦ WIDGETEDITOR
+Nouveau widget ¦ Neie Widget
+Règle ton widget à gauche ; l’aperçu se met à jour à droite. ¦ Stell däi Widget lénks an; d'Virschau aktualiséiert sech riets.
+1. Le widget ¦ 1. De Widget
+Mes ancêtres bretons ¦ Meng bretonesch Virfahren
+Texte en haut du widget ¦ Text uewen am Widget
+Une phrase pour expliquer ce widget ¦ E Saz, fir dëse Widget z'erklären
+Où l’afficher ¦ Wou ee se weist
+Enregistrer et ouvrir dans Graphiques ¦ Späicheren an a Grafiken opmaachen
+Enregistrer et ajouter au tableau de bord ¦ Späicheren an op den Dashboard derbäisetzen
+la courbe ¦ d'Kurv
+Aucune valeur. ¦ Kee Wäert.
+remettre les couleurs de la palette ¦ d'Faarwe vun der Palett zrécksetzen
+Donne un titre au widget. ¦ Gëff dem Widget en Titel.
+Widget enregistré : ajoute-le depuis la colonne de gauche du tableau de bord. ¦ Widget gespäichert: setz en aus der lénker Kolonn vum Dashboard derbäi.
+Graphique enregistré : il est dans Graphiques → Statistiques, rubrique « Mes graphiques ». ¦ Grafik gespäichert: si ass a Grafiken → Statistiken, Rubrik „Meng Grafiken“.
+ce n’est pas un widget LCNDA. ¦ dat ass kee LCNDA-Widget.
+Liste absente de ta base ({name}) : remplacée par « Personnes ». ¦ Lëscht feelt an denger Datebank ({name}): ersat duerch „Persounen“.
+Widget importé ¦ Widget importéiert
+Ce widget n’existe plus. ¦ Dëse Widget gëtt et net méi.
+Statistiques de l’app ¦ Statistike vun der App
+Source introuvable (graphique supprimé ?). ¦ Quell net fonnt (Grafik geläscht?).
+MES GRAPHIQUES ¦ MENG GRAFIKEN
+Graphique introuvable ¦ Grafik net fonnt
+Il a peut-être été supprimé. ¦ Si ass vläicht geläscht ginn.
+Image PNG ou JPG, PDF, impression, tableau CSV ¦ PNG- oder JPG-Bild, PDF, Drock, CSV-Tabell
+léger, pour un courriel ¦ liicht, fir eng E-Mail
+les chiffres, pour un tableur ¦ d'Zuelen, fir eng Tabelle
+Fenêtre d’impression bloquée. ¦ Drockfënster blockéiert.
+Une photo de tes médias, une nouvelle chaque jour. ¦ Eng Foto aus denge Medien, all Dag eng nei.
+Compte à rebours ¦ Countdown
+Les jours qui restent avant une date : la cousinade, un anniversaire, un voyage aux archives… ¦ D'Deeg, déi bis zu engem Datum bleiwen: d'Familljentreffen, e Gebuertsdag, eng Rees an d'Archiven…
+Le widget n’a pas pu être fabriqué. ¦ De Widget konnt net gemaach ginn.
+Widget prêt : {file}. Ouvre-le d’un double-clic et garde l’onglet ouvert (ou épingle-le) : il change tout seul chaque jour. ¦ Widget fäerdeg: {file}. Maach en mat engem Duebelklick op a looss de Reiter op (oder pinn en un): en ännert sech all Dag eleng.
+La cousinade ¦ D'Familljentreffen
+ton ordinateur ¦ däi Computer
+Toujours au-dessus ¦ Ëmmer uewen
+× Retirer du bureau ¦ × Vum Bureau ewechhuelen
+⤓ Télécharger le widget (.html) ¦ ⤓ De Widget eroflueden (.html)
+Démarrer avec l’ordinateur (les widgets s’ouvrent seuls, sans la grande fenêtre) ¦ Mam Computer starten (d'Widgete ginn eleng op, ouni déi grouss Fënster)
+⛔ Je ne comprends pas cette date : écris par exemple « 14 juillet 2027 » ou « 14/07/2027 ». ¦ ⛔ Ech verstinn dësen Datum net: schreif zum Beispill „14 juillet 2027“ oder „14/07/2027“.
+⛔ Donne la date du compte à rebours. ¦ ⛔ Gëff den Datum vum Countdown un.
+Donne la date. ¦ Gëff den Datum un.
+Le widget n’a pas pu s’ouvrir. ¦ De Widget konnt net opgoen.
+Retiré du bureau. ¦ Vum Bureau ewechgeholl.
+« {name} » retiré du bureau ¦ „{name}“ vum Bureau ewechgeholl
+Les widgets démarreront avec l’ordinateur. ¦ D'Widgete starte mam Computer.
+Les widgets ne démarreront plus avec l’ordinateur. ¦ D'Widgete starten net méi mam Computer.
+🪟 Mettre sur le bureau (« {name} », une petite fenêtre à part) ¦ 🪟 Op de Bureau setzen („{name}“, eng kleng separat Fënster)
+🪟 Mettre sur le bureau (« {name} » : un fichier .html autonome dans un navigateur) ¦ 🪟 Op de Bureau setzen („{name}“: en eegestännegen .html-Fichier an engem Browser)
+Retirer {name} ¦ {name} ewechhuelen
+Aucune personne ¦ Keng Persoun
+Flèches ¦ Feiler
+▶ Carte de la vie animée ¦ ▶ Animéiert Liewenskaart
+Ajoute une personne. ¦ Setz eng Persoun derbäi.
+Aucun lieu daté. ¦ Keng datéiert Plaz.
+Comparer avec ¦ Vergläiche mat
+Opacité ¦ Deckkraaft
+Année de ¦ Joer vu(n)
+Âge de ¦ Alter vu(n)
+Famille / groupe ¦ Famill / Grupp
+Fond ¦ Hannergrond
+Recentrer ¦ Nei zentréieren
+carte|sépulture ¦ Begriefnis
+carte|évt ¦ Ev.
+contributeurs OpenStreetMap ¦ OpenStreetMap-Mataarbechter
+· connexion requise pour les tuiles ¦ · Verbindung néideg fir d'Kaartestécker
+connexion requise pour les tuiles ¦ Verbindung néideg fir d'Kaartestécker
+Aucun événement dans cette zone ¦ Keen Evenement an dëser Zon
+⤢ Voir tout ¦ ⤢ Alles gesinn
+Lieu non précisé ¦ Plaz net uginn
+Voir la tombe ¦ D'Graf gesinn
+Événement non rattaché ¦ Net verbonnent Evenement
+🚢 voyage ¦ 🚢 Rees
+👶 placement ¦ 👶 Placement
+🎖 armée ¦ 🎖 Arméi
+💞 conjoint ¦ 💞 Partner
+👶 enfant ¦ 👶 Kand
+🏫 école ¦ 🏫 Schoul
+École ¦ Schoul
+Les étapes ¦ D'Etappen
+📍 Lieux sans position ¦ 📍 Plazen ouni Positioun
+🗓 Sans lieu ¦ 🗓 Ouni Plaz
+CARTE · LA VIE D’UNE PERSONNE ¦ KAART · D'LIEWE VUN ENGER PERSOUN
+Carte de sa vie ¦ Kaart vu sengem Liewen
+👪 Avec la famille (le couple, les enfants) ¦ 👪 Mat der Famill (de Koppel, d'Kanner)
+Les étapes l’une après l’autre, en vidéo (MP4 ou WebM) ¦ D'Etappen eng no der anerer, als Video (MP4 oder WebM)
+Ce navigateur ne sait pas enregistrer de vidéo ¦ Dëse Browser kann keng Video ophuelen
+🎬 Exporter en vidéo ¦ 🎬 Als Video exportéieren
+Chargement de la carte… ¦ D'Kaart gëtt gelueden…
+La carte de sa vie se remplit avec ses événements, ses résidences, ses recensements, ses voyages… ¦ D'Kaart vu sengem Liewe fëllt sech mat sengen Evenementer, senge Wunnplazen, senge Vollekszielungen, senge Reesen…
+🗺 La vie de {name} ¦ 🗺 D'Liewe vum {name}
+La vie de {name} ¦ D'Liewe vum {name}
+Aucun lieu dans cette vie ¦ Keng Plaz an dësem Liewen
+Ajoute un lieu à ses événements (naissance, mariage, résidence…) pour voir sa vie sur la carte. ¦ Setz eng Plaz bei seng Evenementer (Gebuert, Bestietnes, Wunnplaz…), fir säi Liewen op der Kaart ze gesinn.
+Le moteur vidéo n’est pas chargé. ¦ De Videomoteur ass net gelueden.
+Durée d’une étape ¦ Dauer vun enger Etapp
+aucune étape avec un lieu. ¦ keng Etapp mat enger Plaz.
+🎬 Vidéo {file} ¦ 🎬 Video {file}
+les étapes animées ¦ déi animéiert Etappen
+⤓ Exporter la vidéo en {file} ¦ ⤓ D'Video als {file} exportéieren
+Vidéo exportée, mais pas rangée dans les médias : {err} ¦ Video exportéiert, awer net an de Medie gespäichert: {err}
+✓ Vidéo exportée ({file}). ¦ ✓ Video exportéiert ({file}).
+Montrer la même vie, étape par étape, avec la lecture ▶ et la vidéo ¦ Datselwecht Liewen Etapp fir Etapp weisen, mam Ofspillen ▶ an der Video
+Comparer deux époques ¦ Zwou Epochë vergläichen
+Fermer la comparaison ¦ De Verglach zoumaachen
+Glisse le trait (← →) ¦ Zéi de Strëch (← →)
+Transparence ¦ Transparenz
+Deux fonds sur la même zone : un trait à glisser, côte à côte ou en transparence ¦ Zwee Hannergrënn op der selwechter Zon: e Strëch fir ze zéien, niewenteneen oder transparent
+Fond des départements introuvable. ¦ Hannergrond vun den Departementer net fonnt.
+supprimée (partagée entre ses voisines) ¦ opgeléist (tëscht hiren Noperen opgedeelt)
+fusionnée ¦ fusionéiert
+fusionnée (fusion-association) ¦ fusionéiert (Fusioun-Associatioun)
+disparue ¦ verschwonnen
+renommée ¦ ëmbenannt
+renommée « {name} » le {date} ¦ den {date} an „{name}“ ëmbenannt
+{what} le {date} ¦ {what} den {date}
+dans {name} ¦ an {name}
+(devenue commune {name}) ¦ (gouf d'Gemeng {name})
+Aujourd’hui : <b>{name}</b> ¦ Haut: <b>{name}</b>
+Rétablie le {date}. ¦ Den {date} erëm hiergestallt.
+Position approximative : le centre de la commune d’aujourd’hui. ¦ Ongeféier Positioun: den Zentrum vun der Gemeng vun haut.
+Source : INSEE, Code officiel géographique (depuis 1943). ¦ Quell: INSEE, Code officiel géographique (zënter 1943).
+{name}, commune renommée ¦ {name}, ëmbenannt Gemeng
+{name}, commune disparue ¦ {name}, verschwonne Gemeng
+{name} — renommée en {year} ¦ {name} — ëmbenannt am Joer {year}
+{name} — disparue en {year} ¦ {name} — verschwonnen am Joer {year}
+🏛 Frontières ▾ ¦ 🏛 Grenzen ▾
+Provinces, départements de 1790, communes disparues ¦ Provënzen, Departementer vun 1790, verschwonne Gemengen
+Tracé approximatif, d’après les départements d’aujourd’hui ¦ Ongeféieren Tracé, no den Departementer vun haut
+Frontières anciennes ¦ Al Grenzen
+Provinces d’Ancien Régime (≈ 1789) ¦ Provënze vum Ancien Régime (≈ 1789)
+Approximatif : d’après les départements d’aujourd’hui. ¦ Ongeféier: no den Departementer vun haut.
+Départements de 1790 ¦ Departementer vun 1790
+Les 83 départements, noms d’alors ; approximatif. ¦ Déi 83 Departementer, mat hiren deemolegen Nimm; ongeféier.
+Communes disparues ou fusionnées ¦ Verschwonnen oder fusionéiert Gemengen
+🏚 Communes disparues ou fusionnées ¦ 🏚 Verschwonnen oder fusionéiert Gemengen
+Depuis 1943 (INSEE). Zoome sur une région. ¦ Zënter 1943 (INSEE). Zoom op eng Regioun.
+Avec les communes renommées ¦ Mat den ëmbenannte Gemengen
+Les communes disparues se téléchargent une fois : ¦ D'verschwonne Gemenge ginn eemol erofgelueden:
+Réglages → Frontières anciennes ↗ ¦ Astellungen → Al Grenzen ↗
+Pas encore téléchargé ¦ Nach net erofgelueden
+Téléchargé ¦ Erofgelueden
+Installé ¦ Installéiert
+Pas installé ¦ Net installéiert
+=commune disparue ¦ verschwonne Gemeng|verschwonne Gemengen
+=commune renommée ¦ ëmbenannt Gemeng|ëmbenannt Gemengen
+=placée sur la carte ¦ op der Kaart plazéiert|op der Kaart plazéiert
+L’historique officiel des communes de l’INSEE (depuis 1943) : chaque commune disparue avec sa date et sa commune d’aujourd’hui. Livré avec l’app (5,5 Mo, Licence Ouverte 2.0 de l’INSEE) : installé tout seul, sans Internet. Les anciens noms aident aussi le menu de choix des lieux (« anc. « … » »). ¦ Déi offiziell Geschicht vun de Gemenge vum INSEE (zënter 1943): all verschwonne Gemeng mat hirem Datum an hirer Gemeng vun haut. Mat der App geliwwert (5,5 MB, Licence Ouverte 2.0 vum INSEE): installéiert sech eleng, ouni Internet. Déi al Nimm hëllefen och dem Auswielmenü vun de Plazen („anc. „…““).
+⤓ Télécharger de nouveau (mise à jour) ¦ ⤓ Nach eng Kéier eroflueden (Aktualiséierung)
+🗑 Retirer ¦ 🗑 Ewechhuelen
+⤓ Installer les frontières anciennes ¦ ⤓ Déi al Grenzen installéieren
+(taille…) ¦ (Gréisst…)
+dossier des données ¦ Donnéeën-Dossier
+Rangé dans le {name}, commun à toutes tes généalogies. ¦ Am {name} gespäichert, gemeinsam fir all deng Genealogien.
+Téléchargement et vérification… ¦ Eroflueden a kontrolléieren…
+Frontières anciennes retirées ¦ Al Grenzen ewechgeholl
+pas d’Internet ¦ keen Internet
+Adresse de téléchargement injoignable pour l’instant ({err}). ¦ Downloadadress fir de Moment net erreechbar ({err}).
+✓ Frontières anciennes installées : {n}. ¦ ✓ Al Grenzen installéiert: {n}.
+Départ, voyage ¦ Depart, Rees
+Tous les autres ¦ All déi aner
+Couvert ¦ Bedeckt
+Pluie toute la journée ¦ De ganzen Dag Reen
+Pluie faible ¦ Liichte Reen
+Matin de brouillard glacé ¦ Moies äiseg Niwwel
+Brouillard le matin ¦ Moies Niwwel
+Il faisait très froid ¦ Et war ganz kal
+Grand soleil et chaleur ¦ Vill Sonn an Hëtzt
+Gris et frais ¦ Gro a frësch
+Nuages et éclaircies ¦ Wolleken an Opklärungen
+Froid mais ensoleillé ¦ Kal, awer sonneg
+Beau temps ¦ Schéint Wieder
+Neige ¦ Schnéi
+Orage ¦ Donnerwieder
+Mesuré ¦ Gemooss
+Station à moins de 15 km (et moins de 150 m d’écart d’altitude) ¦ Statioun manner wéi 15 km ewech (a manner wéi 150 m Héichtenënnerscheed)
+Station à {n} km ¦ Statioun op {n} km
+Station entre 15 et 40 km : indicatif (la pluie change vite d’un village à l’autre) ¦ Statioun tëscht 15 a 40 km: als Hiwäis (de Reen ännert sech séier vun engem Duerf zum aneren)
+Estimé (carreau ≈ 30 km) ¦ Geschat (Quadrat ≈ 30 km)
+Réanalyse ERA5 : aucune station à moins de 40 km ¦ ERA5-Reanalys: keng Statioun manner wéi 40 km ewech
+Reconstitution grossière (≈ 100 km) ¦ Grof Rekonstruktioun (≈ 100 km)
+Réanalyse 20CR (1836–1939) : une idée du temps, pas une mesure ¦ 20CR-Reanalys (1836–1939): eng Iddi vum Wieder, keng Miessung
+Les données météo ne sont pas installées. ¦ D'Wiederdonnéeë sinn net installéiert.
+Le lieu n’a pas de coordonnées : place-le sur la carte pour avoir sa météo. ¦ D'Plaz huet keng Koordinaten: setz se op d'Kaart, fir hiert Wieder ze kréien.
+La date n’est pas connue au jour près. ¦ Den Datum ass net op den Dag genau bekannt.
+Pas de météo pour ce lieu : les données installées couvrent la France, la Belgique, la Suisse et le Luxembourg (le pack Europe ajoute le reste). ¦ Kee Wieder fir dës Plaz: déi installéiert Donnéeën decken Frankräich, d'Belsch, d'Schwäiz a Lëtzebuerg of (de Pack Europa setzt de Rescht derbäi).
+Pas de relevé connu près d’ici avant {year} (première station : {name}). ¦ Keng bekannte Miessung hei an der Géigend viru(n) {year} (éischt Statioun: {name}).
+Pas de relevé connu près d’ici avant {year}. ¦ Keng bekannte Miessung hei an der Géigend viru(n) {year}.
+Cliquer pour le détail ¦ Klick fir d'Detailer
+À propos des données ¦ Iwwer d'Donnéeën
+🙈 Météo masquée pour cet événement ¦ 🙈 Wieder fir dëst Evenement verstoppt
+🙈 Météo masquée pour cette personne ¦ 🙈 Wieder fir dës Persoun verstoppt
+{what} (la retrouver : Réglages → 🌦 Météo d’autrefois) ¦ {what} (erëmfannen: Astellungen → 🌦 Wieder vu fréier)
+Ton lieu ¦ Deng Plaz
+(carte du relief) ¦ (Reliefkaart)
+Fiabilité ¦ Zouverlässegkeet
+3 jours avant · 3 jours après ¦ 3 Deeg virdrun · 3 Deeg duerno
+Tout le détail… ¦ All d'Detailer…
+⛰ Altitude du lieu ¦ ⛰ Héicht vun der Plaz
+Lecture des données météo… ¦ D'Wiederdonnéeë gi gelies…
+Météo ¦ Wieder
+🌦 MÉTÉO D’AUTREFOIS ¦ 🌦 WIEDER VU FRÉIER
+Le lieu, la station et le carreau ¦ D'Plaz, d'Statioun an de Quadrat
+↺ Altitude remise à celle de la carte ¦ ↺ Héicht op déi vun der Kaart zréckgesat
+⛰ Altitude enregistrée : {n} ¦ ⛰ Héicht gespäichert: {n}
+⛰ LIEU ¦ ⛰ PLAZ
+Altitude de {name} ¦ Héicht vu(n) {name}
+ce lieu ¦ dës Plaz
+Ce qu’elle donne ¦ Wat se gëtt
+Licence et mention ¦ Lizenz a Mentioun
+Une météo ancienne reste une estimation : elle aide à imaginer la journée, elle ne remplace pas ce que dit l’acte ou un journal de l’époque. ¦ E fréiert Wieder bleift eng Schätzung: et hëlleft, sech den Dag virzestellen, mä et ersetzt net dat, wat am Akt oder an enger Zeitung vun där Zäit steet.
+Rien n’est envoyé sur Internet : toutes ces données sont dans l’app ou dans les packs importés. Les règles de fiabilité : station à moins de 15 km et moins de 150 m d’écart d’altitude → « Mesuré » ; de 15 à 40 km → « Station à … km » ; sinon la réanalyse ERA5 (1940 →) → « Estimé » ; de 1836 à 1939 la reconstitution 20CR → « Reconstitution grossière ». ¦ Näischt gëtt op den Internet geschéckt: all dës Donnéeë sinn an der App oder an den importéierte Packen. D'Regele fir d'Zouverlässegkeet: Statioun manner wéi 15 km ewech a manner wéi 150 m Héichtenënnerscheed → „Gemooss“; vu 15 bis 40 km → „Statioun op … km“; soss d'ERA5-Reanalys (1940 →) → „Geschat“; vun 1836 bis 1939 d'20CR-Rekonstruktioun → „Grof Rekonstruktioun“.
+Comment les obtenir ¦ Wéi ee se kritt
+Comment l’obtenir ¦ Wéi ee en kritt
+(avant 1940, la météo montre la journée) ¦ (virun 1940 weist d'Wieder den Dag)
+Socle inclus ¦ Socle abegraff
+Pack complet ¦ Komplette Pack
+Pack Europe ¦ Pack Europa
+Pack ¦ Pack
+1836 à 2025 · France, Belgique, Suisse, Luxembourg · ≈ 300 stations chaque jour, 4 heures par jour depuis 1940 · ≈ 550 Mo ¦ 1836 bis 2025 · Frankräich, Belsch, Schwäiz, Lëtzebuerg · ≈ 300 Statiounen all Dag, 4 Stonnen den Dag zënter 1940 · ≈ 550 MB
+Toutes les stations (≈ 14 700), heure par heure depuis 1950 · ≈ 3 Go ¦ All d'Statiounen (≈ 14 700), Stonn fir Stonn zënter 1950 · ≈ 3 GB
+🗑 Supprimer le pack ¦ 🗑 De Pack läschen
+⤒ Importer le fichier… ¦ ⤒ De Fichier importéieren…
+🗑 {name} supprimé ¦ 🗑 {name} geläscht
+Le temps qu’il faisait le jour de chaque événement, sans Internet. ¦ D'Wieder, dat um Dag vun all Evenement war, ouni Internet.
+Météo sur les fiches ¦ Wieder op de Fichen
+Au survol ¦ Beim Driwwerfueren
+Au clic sur la pastille ¦ Beim Klick op d'Plack
+Fenêtre ¦ Fënster
+Sous l’événement ¦ Ënner dem Evenement
+Températures ¦ Temperaturen
+Pluie ¦ Reen
+pouces ¦ Zoll
+La phrase simple ¦ Den einfache Saz
+« Il faisait froid : −4 °C au matin… » ¦ „Et war kal: −4 °C de Moien…“
+Comparer à la normale ¦ Mat der Norm vergläichen
+Ligne des sources sous le détail ¦ Zeil vun de Quellen ënner den Detailer
+Obligatoire pour certaines licences : elle reste dans le détail et à l’export. ¦ Obligatoresch fir verschidde Lizenzen: si bleift an den Detailer an beim Export.
+Bloc « 🌦 Météo de sa vie » sur les fiches ¦ Block „🌦 Wieder vu sengem Liewen“ op de Fichen
+Phrases curieuses (« Né le jour le plus froid… ») ¦ Kuriéis Sätz („Gebuer um kälsten Dag…“)
+Dans « Ce jour-là » et le tableau de bord ¦ An „Deen Dag“ an um Dashboard
+Montrer aussi les reconstitutions grossières (avant 1940) ¦ Och déi grof Rekonstruktioune weisen (virun 1940)
+Pour quels événements ¦ Fir wéi eng Evenementer
+Tous les types d’événements de ta base (avec leur nombre). Décoche ceux qui n’ont pas besoin de la météo. ¦ All d'Evenementtypen aus denger Datebank (mat hirer Zuel). Huel den Haken ewech bei deenen, déi d'Wieder net brauchen.
+Météo masquée ¦ Verstoppt Wieder
+Remontrer la météo ¦ D'Wieder erëm weisen
+Rien n’est masqué. ¦ Näischt ass verstoppt.
+Sur une fiche : clic droit sur la pastille météo (ou ⋯ du détail) → « Masquer la météo ». ¦ Op enger Fiche: Rietsklick op d'Wiederplack (oder ⋯ vun den Detailer) → „D'Wieder verstoppen“.
+Les données dans l’app ¦ D'Donnéeën an der App
+Le téléchargement se fait une fois, depuis n’importe quel ordinateur. Ensuite on importe le fichier ici et l’app n’a plus besoin d’Internet. ¦ Den Download geschitt eemol, vun iergendengem Computer aus. Duerno importéiert een de Fichier hei an d'App brauch keen Internet méi.
+le socle ¦ de Socle
+le pack complet ¦ de komplette Pack
+le pack Europe ¦ de Pack Europa
+le pack ¦ de Pack
+Obtenir {name} ¦ {name} kréien
+Importer un pack météo ¦ E Wiederpack importéieren
+aucun fichier ¦ kee Fichier
+l’en-tête du pack est abîmé. ¦ de Kapp vum Pack ass beschiedegt.
+le fichier est incomplet (téléchargement interrompu ?). ¦ de Fichier ass net komplett (Download ënnerbrach?).
+heure par heure ¦ Stonn fir Stonn
+sur le disque ¦ op der Disk
+Le socle reste : le pack s’ajoute par-dessus. ¦ De Socle bleift: de Pack kënnt driwwer.
+Vérifié ¦ Kontrolléiert
+Envoi du fichier… ¦ De Fichier gëtt geschéckt…
+Envoi du fichier… {n} % ¦ De Fichier gëtt geschéckt… {n} %
+réponse illisible ¦ Äntwert net liesbar
+Vérification du pack… ¦ De Pack gëtt kontrolléiert…
+La météo est masquée ici (Réglages → 🌦 Météo d’autrefois). ¦ D'Wieder ass hei verstoppt (Astellungen → 🌦 Wieder vu fréier).
+Aucun anniversaire rond avec une météo connue aujourd’hui. ¦ Haut keen ronne Gebuertsdag mat bekanntem Wieder.
+Bague métal lue ¦ Metallring gelies
+Photo-identifié ¦ Op Foto identifizéiert
+(pas tout lu) ¦ (net alles gelies)
+Éloigner ¦ Ewechzoomen
+Le temps ¦ D'Zäit
+1 heure par seconde ¦ 1 Stonn pro Sekonn
+1 jour par seconde ¦ 1 Dag pro Sekonn
+1 semaine par seconde ¦ 1 Woch pro Sekonn
+1 mois par seconde ¦ 1 Mount pro Sekonn
+↗ Ouvrir l’observation ¦ ↗ D'Observatioun opmaachen
+cette année ¦ dëst Joer
+période choisie ¦ gewielte Period
+La journée (ou la nuit) d’un animal qui porte une balise ou un collier GPS. ¦ Den Dag (oder d'Nuecht) vun engem Déier, dat e GPS-Sender oder e GPS-Halsband dréit.
+Animaux vus par mois, distance parcourue, zone fréquentée, jamais revus. ¦ Déiere pro Mount gesinn, zréckgeluechten Distanz, besicht Zon, ni méi gesinn.
+Une case pour retrouver un animal par ses couleurs, un code gravé, une bague métal, une puce, un tatouage ou une boucle. ¦ E Feld, fir en Déier erëmzefannen no senge Faarwen, engem agravéierte Code, engem Metallring, engem Chip, enger Tätowéierung oder enger Ouermark.
+Déposer un fichier GPX, KML ou CSV d’une balise ou d’un collier. ¦ E GPX-, KML- oder CSV-Fichier vun engem Sender oder engem Halsband ofleeën.
+Le suivi n’a pas pu se charger. ¦ De Suivi konnt net gelueden ginn.
+dernière position GPS ¦ lescht GPS-Positioun
+Aucune observation pour l’instant. ¦ Nach keng Observatioun.
+Tous ont été revus récemment. ¦ All goufe viru kuerzem erëmgesinn.
+Tous ont été revus. ¦ All goufen erëmgesinn.
+pas encore vu ¦ nach net gesinn
+Aucun animal suivi pour l’instant. ¦ Nach keen Déier am Suivi.
+Ouvre la fiche d’un animal (Listes → Animaux) et ajoute-lui une marque ou une observation. ¦ Maach d'Fiche vun engem Déier op (Lëschten → Déieren) a setz him eng Mark oder eng Observatioun derbäi.
+Le plus suivi ¦ Dee meescht verfollegt
+Code, couleurs ou numéro ¦ Code, Faarwen oder Nummer
+Chercher… (« 7K », « vert rouge », n° de puce) ¦ Sichen… („7K“, „gréng rout“, Chip-Nr.)
+Couleurs (« vert rouge »), code gravé, bague métal, puce, tatouage, boucle. « ? » = pas lu, [K|X] = j’hésite. ¦ Faarwen („gréng rout“), agravéierte Code, Metallring, Chip, Tätowéierung, Ouermark. „?“ = net gelies, [K|X] = ech sinn net sécher.
+Aucun trajet GPS pour l’instant. ¦ Nach keen GPS-Wee.
+＋ Nouveau site ¦ ＋ Neie Site
+＋ Nouveau site de suivi ¦ ＋ Neie Suivi-Site
+Nouveau site de suivi ¦ Neie Suivi-Site
+Aucun site de suivi pour l’instant. ¦ Nach kee Suivi-Site.
+Aucun comptage. ¦ Keng Zielung.
+↗ Le site ¦ ↗ De Site
+La météo… ¦ D'Wieder…
+Dernier événement ¦ Lescht Evenement
+Aucun groupe pour l’instant. ¦ Nach keng Grupp.
+🪺 Nids occupés ¦ 🪺 Besat Näschter
+🐣 Poussins bagués ¦ 🐣 Beréngt Jonker
+Courbe des comptages ¦ Kurv vun den Zielungen
+Cette année ¦ Dëst Joer
+Montrer les trajets GPS ¦ D'GPS-Weeër weisen
+Pas revus depuis ¦ Net méi gesi zënter
+Le même seuil que « 👁 Vu la dernière fois » des fiches d’animaux. ¦ Déiselwecht Limit wéi „👁 Fir d'lescht gesinn“ op de Fiche vun den Déieren.
+Seulement ceux qui ne vont pas bien ¦ Nëmmen déi, deenen et net gutt geet
+Réglages du bloc remis comme au départ. ¦ Astellunge vum Block zréckgesat wéi am Ufank.
+un site ¦ e Site
+⤒ Recevoir un suivi partagé… ¦ ⤒ E gedeelte Suivi kréien…
+Toutes les espèces ¦ All d'Aarten
+Corneilles, Hérissons, Chats du quartier… ¦ Kueben, Kéiseker, Kazen aus dem Quartier…
+Corneille noire, Hérisson d’Europe… ¦ Rabekueb, Braunbrust-Kéiseker…
+Renommer la page ¦ D'Säit ëmbenennen
+Un émoji : 🐦 🦔 🐈 🐬 🐺… ¦ En Emoji: 🐦 🦔 🐈 🐬 🐺…
+Icône changée. ¦ Ikon geännert.
+Espèce et site par défaut… ¦ Standardaart a -site…
+Dupliquer la page ¦ D'Säit duplizéieren
+Bloc dupliqué. ¦ Block duplizéiert.
+Copier vers une autre page… ¦ Op eng aner Säit kopéieren…
+Copier vers la page… ¦ Op d'Säit kopéieren…
+Pages rangées. ¦ Säiten opgeraumt.
+📁 Glisse ici un trajet (GPX, KML, CSV), colle-le (⌘V) ou choisis-le ¦ 📁 Zéi hei e Wee eran (GPX, KML, CSV), fëg en an (⌘V) oder wiel en aus
+Balises de la faune sauvage (Movebank…) ou colliers (Tractive, Weenect, Invoxia, Kippy…). ¦ Sender vun de Wëlldéieren (Movebank…) oder Halsbänner (Tractive, Weenect, Invoxia, Kippy…).
+Aucune observation datée et placée. ¦ Keng datéiert a plazéiert Observatioun.
+Aucun événement de santé pour l’instant. ¦ Nach keen Gesondheetsevenement.
+Aucun passage sur cette période. ¦ Kee Passage an dëser Period.
+Ce mois ¦ Dëse Mount
+Météo trouvée ¦ Wieder fonnt
+=animal trouvé ¦ fonnt Déier|fonnt Déieren
+SUIVI DES ANIMAUX · EN GRAND ¦ SUIVI VUN DEN DÉIEREN · GROUSS
+SUIVI DES ANIMAUX · CHIFFRES ¦ SUIVI VUN DEN DÉIEREN · ZUELEN
+Par animal ¦ Pro Déier
+Par année ¦ Pro Joer
+relié dans l’ordre ¦ an der Reiefolleg verbonnen
+Les chiffres… ¦ D'Zuelen…
+Tous les animaux ¦ All d'Déieren
+Par site · observations ¦ Pro Site · Observatiounen
+Aucune observation. ¦ Keng Observatioun.
+Zone fréquentée ¦ Besicht Zon
+enveloppe des points vus ¦ Ëmrandung vun de gesinne Punkten
+Il faut au moins 3 points pour une zone. ¦ Fir eng Zon brauch een op d'mannst 3 Punkten.
+Délai ¦ Delai
+Ce qu’il faisait ¦ Wat et fir e Wieder war
+Vu par ¦ Gesi vum
+Avec qui ¦ Mat wiem
+Chaque caractère du code ¦ All Zeechen aus dem Code
+Pas lu : clique pour dire « j’hésite entre… » ¦ Net gelies: klick, fir ze soen „ech zécken tëscht…“
+J’hésite : clique pour dire que c’est sûr ¦ Ech zécken: klick, fir ze soen, datt et sécher ass
+Sûr : clique pour dire « pas lu » ¦ Sécher: klick, fir ze soen „net gelies“
+un clic : sûr → pas lu → j’hésite entre… ¦ e Klick: sécher → net gelies → ech zécken tëscht…
+Modifier l’observation ¦ D'Observatioun änneren
+Nouvelle observation ¦ Nei Observatioun
+Retrouver l’animal · selon l’espèce : ¦ D'Déier erëmfannen · jee no der Aart:
+Photos, sons ou vidéos ¦ Fotoen, Téin oder Videoen
+Dis quand tu l’as vu. ¦ So, wéini s du et gesinn hues.
+Dis où tu l’as vu (un lieu, un site, ou 📍 Ma position). ¦ So, wou s du et gesinn hues (eng Plaz, e Site oder 📍 Meng Positioun).
+Observation enregistrée. ¦ Observatioun gespäichert.
+Observation créée. ¦ Observatioun erstallt.
+🌊 En mer ¦ 🌊 Um Mier
+Taille du groupe ¦ Gréisst vun der Grupp
+📷 Piège photo ¦ 📷 Fotofal
+Vu par un piège photo ¦ Vun enger Fotofal gesinn
+Piège n° ¦ Fal Nr.
+mise toute seule d’après ce que tu as cliqué ¦ eleng gesat, no deem, wat s du geklickt hues
+＋ Créer la fiche d’un nouvel animal ¦ ＋ D'Fiche vun engem neien Déier erstellen
+✎ Garder sans fiche ¦ ✎ Ouni Fiche halen
+Deux animaux correspondent autant : la lecture sera marquée « Doute ». ¦ Zwee Déiere passe gläich gutt: d'Liesung gëtt als „Zweiwel“ markéiert.
+Couleurs des bagues ¦ Faarwe vun de Réng
+Bague vue mais couleur pas sûre ¦ Rank gesinn, mä d'Faarf ass net sécher
+Une autre couleur (pipette, code #…) ¦ Eng aner Faarf (Pipette, Code #…)
+Pas regardé ¦ Net gekuckt
+J’hésite entre… ¦ Ech zécken tëscht…
+L’observation sera gardée sans fiche, avec la lecture. ¦ D'Observatioun gëtt ouni Fiche gehalen, mat der Liesung.
+Son nom (ou un code : « 7K », « Sans nom 2C9 ») ¦ Säin Numm (oder e Code: „7K“, „Ouni Numm 2C9“)
+En quelques mots (« se baigne », « chasse un goéland »…) ¦ A puer Wierder („bued sech“, „jot eng Mouk“…)
+Cet appareil ne donne pas sa position. ¦ Dësen Apparat gëtt seng Positioun net un.
+La fenêtre d’import n’est pas chargée. ¦ D'Importfënster ass net gelueden.
+Un trajet GPS ¦ E GPS-Wee
+Fichier trop gros (40 Mo au plus). ¦ Fichier ze grouss (maximal 40 MB).
+Fichier trop gros (200 Mo au plus). ¦ Fichier ze grouss (maximal 200 MB).
+{rows} sans date ou sans position seront sautées. ¦ {rows} ouni Datum oder ouni Positioun ginn iwwersprongen.
+{rows} sans date ou sans position sera sautée. ¦ {rows} ouni Datum oder ouni Positioun gëtt iwwersprongen.
+=point importé ¦ importéierte Punkt|importéiert Punkten
+{points} pour {name} ¦ {points} fir {name}
+({n} déjà là, sautés) ¦ ({n} schonn do, iwwersprongen)
+({n} déjà là, sauté) ¦ ({n} schonn do, iwwersprongen)
+{points} en tout ¦ {points} am Ganzen
+{name} a déjà {points} : ils restent, ce fichier s’y ajoute (un instant déjà là n’est pas repris deux fois). ¦ {name} huet schonn {points}: si bleiwen, dëse Fichier kënnt derbäi (e Moment, deen et schonn do gëtt, gëtt net zweemol iwwerholl).
+l’animal ¦ d'Déier
+Ne va pas bien ¦ Et geet him net gutt
+Chercher… (nom, code « 7K », bague EA…, lieu, observateur) ¦ Sichen… (Numm, Code „7K“, Rank EA…, Plaz, Beobachter)
+Chercher… (nom, code « 7K », puce…) ¦ Sichen… (Numm, Code „7K“, Chip…)
+Vus récemment ¦ Viru kuerzem gesinn
+＋ Nouveau comptage ¦ ＋ Nei Zielung
+Nouveau comptage ¦ Nei Zielung
+＋ Nouvelle observation ici ¦ ＋ Nei Observatioun hei
+🗑 Supprimer le site ¦ 🗑 De Site läschen
+Aucun comptage pour l’instant. ¦ Nach keng Zielung.
+? Non identifiés ¦ ? Net identifizéiert
+Personne encore. ¦ Nach keen.
+contour du site ¦ Ëmrandung vum Site
+Site enregistré. ¦ Site gespäichert.
+Site créé. ¦ Site erstallt.
+île, colonie nord… ¦ Insel, Kolonie Nord…
+Ce qu’on compte ¦ Wat een zielt
+Donne la date du comptage. ¦ Gëff den Datum vun der Zielung un.
+Comptage enregistré. ¦ Zielung gespäichert.
+Comptage supprimé. ¦ Zielung geläscht.
+＋ Ajouter un membre ¦ ＋ E Member derbäisetzen
+Aucun membre pour l’instant. ¦ Nach kee Member.
+Membres passés ¦ Fréier Memberen
+Personne n’est parti. ¦ Keen ass fortgaangen.
+Frise du groupe ¦ Zäitlinn vun der Grupp
+🗑 Supprimer le groupe ¦ 🗑 D'Grupp läschen
+Loup gris, chimpanzé, orque… ¦ Growollef, Schimpans, Orca…
+Territoire ¦ Territoire
+Donne un nom au groupe. ¦ Gëff der Grupp en Numm.
+Groupe enregistré. ¦ Grupp gespäichert.
+Groupe créé. ¦ Grupp erstallt.
+Groupe supprimé (son histoire aussi). ¦ Grupp geläscht (hir Geschicht och).
+✓ Onglet « 🐾 Suivi des animaux » affiché ¦ ✓ Reiter „🐾 Suivi vun den Déieren“ ugewisen
+Tu suis des animaux sauvages ou un chat avec un collier GPS ? ¦ Verfollegs du Wëlldéieren oder eng Kaz mat engem GPS-Halsband?
+L’onglet « 🐾 Suivi des animaux » est caché. Pour l’afficher : Réglages → Apparence → Onglets du haut. ¦ De Reiter „🐾 Suivi vun den Déieren“ ass verstoppt. Fir en ze weisen: Astellungen → Ausgesinn → Reiteren uewen.
+↗ Afficher l’onglet ¦ ↗ De Reiter weisen
+Observation dupliquée. ¦ Observatioun duplizéiert.
+Observation supprimée. ¦ Observatioun geläscht.
+Voir les {n} autres médias ¦ Déi {n} aner Medie gesinn
+{n} sans bague ¦ {n} ouni Rank
+Animal sans fiche ¦ Déier ouni Fiche
+pas revus depuis {days} ¦ net méi gesi zënter {days}
+Suivi des animaux · Page « {name} » ¦ Suivi vun den Déieren · Säit „{name}“
+Cette page montre seulement : <b>{what}</b>. Tous ses blocs s’y règlent d’office (un bloc peut garder son propre choix). ¦ Dës Säit weist nëmmen: <b>{what}</b>. All hir Bléck ginn automatesch domat agestallt (e Block ka seng eege Wiel halen).
+Cette page montre seulement : <b>{what}</b> · tous les sites. Tous ses blocs s’y règlent d’office (un bloc peut garder son propre choix). ¦ Dës Säit weist nëmmen: <b>{what}</b> · all d'Sitten. All hir Bléck ginn automatesch domat agestallt (e Block ka seng eege Wiel halen).
+Nouvelle page ¦ Nei Säit
+Espèce et site de la page « {name} » ¦ Aart a Site vun der Säit „{name}“
+Page « {name} » créée. ¦ Säit „{name}“ erstallt.
+Page « {name} » supprimée (ses blocs, pas les animaux). ¦ Säit „{name}“ geläscht (hir Bléck, net d'Déieren).
+Bloc copié vers « {name} ». ¦ Block op „{name}“ kopéiert.
+Aucun animal pour « {q} ». ¦ Keen Déier fir „{q}“.
+première observation ¦ éischt Observatioun
+dernière : {date} ¦ lescht: {date}
+parcourus par {name} ({from} → {to}) ¦ vum {name} zréckgeluecht ({from} → {to})
+pas de trajet GPS ¦ kee GPS-Wee
+Fiche de « {name} » créée. ¦ Fiche vu(n) „{name}“ erstallt.
+vu sur {sites} ¦ gesinn op {sites}
+Pas revu depuis {when} ¦ Net méi gesi zënter {when}
+Jamais vu ¦ Ni gesinn
+Suivi en cours ¦ Suivi amgaangen
+Ce qu’on partage ¦ Wat een deelt
+Des animaux choisis ¦ Gewielten Déieren
+Tous les animaux d’une espèce ¦ All d'Déiere vun enger Aart
+Les animaux d’un site ¦ D'Déiere vun engem Site
+Les points GPS ¦ D'GPS-Punkten
+Choisis au moins un animal. ¦ Wiel mindestens een Déier.
+Choisis l’espèce. ¦ Wiel d'Aart.
+📤 Fichier prêt : {animals}. ¦ 📤 Fichier fäerdeg: {animals}.
+📤 Fichier prêt : {animals} (sans les noms des observateurs). ¦ 📤 Fichier fäerdeg: {animals} (ouni d'Nimm vun de Beobachter).
+Ce fichier n’est pas un suivi partagé (suivi.json manque). ¦ Dëse Fichier ass kee gedeelte Suivi (suivi.json feelt).
+Fichier abîmé : il ne se lit pas. ¦ Fichier beschiedegt: e léisst sech net liesen.
+Ce fichier n’est pas un suivi d’animaux partagé (format inconnu). ¦ Dëse Fichier ass kee gedeelte Suivi vun Déieren (onbekannt Format).
+Un suivi partagé ¦ E gedeelte Suivi
+=nouvel animal ¦ neit Déier|nei Déieren
+=animal déjà là ¦ Déier, dat schonn do ass|Déieren, déi schonn do sinn
+=ligne nouvelle ¦ nei Zeil|nei Zeilen
+=ligne déjà là, écartée ¦ Zeil schonn do, ausgeschloss|Zeilen schonn do, ausgeschloss
+=conflit ¦ Konflikt|Konflikter
+<b>{new}</b>, {known} (à compléter), <b>{rows}</b> (observations, marques, santé, groupes) ¦ <b>{new}</b>, {known} (ze vervollstännegen), <b>{rows}</b> (Observatiounen, Marken, Gesondheet, Gruppen)
+{n} points GPS ¦ {n} GPS-Punkten
+{rows} (doublons exacts). ¦ {rows} (exakt Doublonen).
+{conflicts} : tu choisiras pour chacun, à l’étape suivante. ¦ {conflicts}: du wiels fir all eenzelnen, am nächste Schrëtt.
+{name} chez toi (reconnu par {how}) ¦ {name} bei dir (erkannt duerch {how})
+reçu · chez toi : {name} (reconnu par {how}) ¦ kritt · bei dir: {name} (erkannt duerch {how})
+Comparer et fusionner… ¦ Vergläichen a fusionéieren…
+⤒ Importer {animals} ¦ ⤒ {animals} importéieren
+Suivi reçu : {what} ¦ Suivi kritt: {what}
+conflit restant ¦ Konflikt, dee bleift
+conflits restants ¦ Konflikter, déi bleiwen
+nouveaux ¦ nei
+lignes nouvelles ¦ nei Zeilen
+doublons écartés ¦ ausgeschloss Doublonen
+média reçu non importé ¦ kritt Medium net importéiert
+Fusionner avec ma fiche ¦ Mat menger Fiche fusionéieren
+En faire une nouvelle fiche ¦ Eng nei Fiche draus maachen
+Ne pas le prendre ¦ Et net huelen
+Le mien : ¦ Mäint:
+Le sien : ¦ Säint:
+Observation modifiée ¦ Observatioun geännert
+Marque modifiée ¦ Mark geännert
+Événement de santé modifié ¦ Gesondheetsevenement geännert
+Rôle dans le groupe ¦ Roll an der Grupp
+Choisis d’abord pour chaque conflit ¦ Wiel fir d'éischt fir all Konflikt
+Fusionner ¦ Fusionéieren
+vert foncé ¦ donkelgréng
+bleu foncé ¦ donkelblo
+métal ¦ Metall
+👥 En groupe ¦ 👥 An der Grupp
+💤 Au dortoir ¦ 💤 Um Schlofplaz
+🕊 En vol ¦ 🕊 Am Flug
+💞 En couple ¦ 💞 Als Koppel
+🏠 Rentré ¦ 🏠 Heemkomm
+🐄 En troupeau ¦ 🐄 An der Häerd
+😴 Au repos ¦ 😴 Am Rascht
+🌊 En surface ¦ 🌊 Un der Uewerfläch
+⛵ À la proue ¦ ⛵ Um Bug
+🧭 Marque son territoire ¦ 🧭 Markéiert säin Territoire
+🍼 Avec des jeunes ¦ 🍼 Mat Jonken
+🪵 Utilise un outil ¦ 🪵 Benotzt en Handwierksgeschir
+🔖 Bague changée ¦ 🔖 Rank gewiesselt
+🪤 Piège ¦ 🪤 Fal
+🚧 Clôture ¦ 🚧 Zonk
+🌬 Éolienne ¦ 🌬 Wandrad
+🏖 Échouage ¦ 🏖 Gestrand
+⚔️ Conflit avec un autre ¦ ⚔️ Konflikt mat engem aneren
+Bonne santé ¦ Gutt Gesondheet
+Blessé ¦ Blesséiert
+En soins ¦ A Fleeg
+Relâché ¦ Fräigelooss
+Mammifère sauvage ¦ Wëll Mamendéier
+Vache, mouton, chèvre ¦ Kou, Schof, Geess
+Format inconnu : GPX, KML, GeoJSON ou CSV. ¦ Onbekannt Format: GPX, KML, GeoJSON oder CSV.
+Le tableau est vide. ¦ D'Tabell ass eidel.
+Fichier refusé : il contient une déclaration DOCTYPE ou ENTITY. ¦ Fichier refuséiert: en enthält eng DOCTYPE- oder ENTITY-Deklaratioun.
+3 février 2026 ¦ 3 février 2026
+⚖️ Mise en garde : en France, les tests ADN « récréatifs » ne sont pas légaux ¦ ⚖️ Opgepasst: a Frankräich sinn „Fräizäit“-DNA-Tester net legal
+En France, l’examen des caractéristiques génétiques d’une personne n’est permis <b>qu’à des fins médicales ou de recherche scientifique</b>, avec son <b>consentement écrit</b> (Code civil, article 16-10). L’identification par empreintes génétiques est réservée à la justice et à quelques cas prévus par la loi (article 16-11). <b>Demander</b> un tel examen hors de ces cas — par exemple commander un test généalogique sur internet — est puni d’une <b>amende de 3 750 €</b> (Code pénal, article 226-28-1), même si le laboratoire est à l’étranger. ¦ A Frankräich ass d'Ënnersichung vun de genetesche Charakteristike vun enger Persoun <b>nëmmen zu medezineschen Zwecker oder fir wëssenschaftlech Fuerschung</b> erlaabt, mat hirer <b>schrëftlecher Zoustëmmung</b> (Code civil, Artikel 16-10). D'Identifikatioun duerch genetesch Fangerofdréck ass der Justiz an e puer Fäll, déi d'Gesetz virgesäit, reservéiert (Artikel 16-11). Esou eng Ënnersichung ausserhalb vun dëse Fäll <b>ze froen</b> — zum Beispill en Genealogietest um Internet ze bestellen — gëtt mat enger <b>Geldstrof vun 3 750 €</b> bestrooft (Code pénal, Artikel 226-28-1), och wann de Labo am Ausland ass.
+<b>Vérifie toujours le texte en vigueur</b> sur Légifrance : la loi peut changer (les débats sur la généalogie génétique sont réguliers). Cet onglet ne donne pas de conseil juridique. ¦ <b>Kontrolléier ëmmer den Text, deen a Kraaft ass</b>, op Légifrance: d'Gesetz ka sech änneren (iwwer genetesch Genealogie gëtt regelméisseg diskutéiert). Dëse Reiter gëtt keen juristesche Rot.
+<b>Ce que fait LCNDA</b> : rien n’est analysé ni envoyé. L’onglet sert à <b>ranger des informations</b> (par exemple des résultats obtenus légalement à l’étranger, par un parent résidant hors de France, dans un cadre médical ou de recherche, ou des renseignements donnés par d’autres personnes) et à <b>comprendre</b> ce que signifient des cM, des segments, un haplogroupe. ¦ <b>Wat LCNDA mécht</b>: näischt gëtt analyséiert oder geschéckt. De Reiter déngt dozou, <b>Informatiounen ze sortéieren</b> (zum Beispill Resultater, déi legal am Ausland kritt goufen, vun engem Familljemember, deen ausserhalb vu Frankräich wunnt, an engem medezineschen oder Fuerschungskader, oder Informatiounen, déi aner Persoune ginn hunn) an ze <b>verstoen</b>, wat cM, Segmenter, eng Haplogrupp bedeiten.
+<b>Données sensibles</b> : l’ADN révèle des choses sur toi <i>et sur ta famille</i> (parents, frères et sœurs, enfants, cousins), qui n’ont pas consenti. Il peut révéler un secret de famille : naissance hors mariage, adoption, don de gamètes, parent inconnu. Prends le temps d’y penser avant de partager. ¦ <b>Sensibel Donnéeën</b>: d'DNA verréit Saachen iwwer dech <i>an iwwer deng Famill</i> (Elteren, Bridder a Schwësteren, Kanner, Cousinen), déi net zougestëmmt hunn. Et kann e Familljegeheimnis verroden: Gebuert ausserhalb vum Bestietnes, Adoptioun, Spend vu Keimzellen, onbekannten Elterendeel. Huel der d'Zäit, fir driwwer nozedenken, ier s du deels.
+<b>Les sociétés de test</b> gardent les données selon leurs conditions (vente de société, fuites de données, demandes de la justice dans certains pays). Lis leurs conditions, choisis ce que tu partages, supprime ce que tu ne veux plus voir conservé. ¦ <b>D'Testfirmen</b> halen d'Donnéeë no hire Konditiounen (Verkaf vun der Firma, Datelecken, Ufroe vun der Justiz a verschiddene Länner). Lies hir Konditiounen, wiel, wat s du deels, läsch dat, wat s du net méi gespäichert wëlls.
+<b>Personnes vivantes</b> : les noms, cM et contacts de correspondances sont des données personnelles. Garde-les pour ta recherche, ne les publie pas sans accord. ¦ <b>Lieweg Persounen</b>: d'Nimm, cM a Kontakter vun den Treffer si perséinlech Donnéeën. Behal se fir deng Recherche, publizéier se net ouni Accord.
+Textes officiels ¦ Offiziell Texter
+Lire la mise en garde complète et les textes officiels → ¦ Déi komplett Warnung an déi offiziell Texter liesen →
+Commencer ¦ Ufänken
+Lis la <button type="button" class="link-button" data-dna-go="law">mise en garde sur la loi française</button>. ¦ Lies d'<button type="button" class="link-button" data-dna-go="law">Warnung iwwer dat franséischt Gesetz</button>.
+« 🧬 Mes tests » : ajoute le test d’une personne (société, type, haplogroupes, origines). ¦ „🧬 Meng Tester“: setz den Test vun enger Persoun derbäi (Firma, Typ, Haplogruppen, Hierkonft).
+« 👥 Correspondances » : importe le fichier CSV de la société, ou ajoute-les à la main. ¦ „👥 Treffer“: importéier den CSV-Fichier vun der Firma, oder setz se mat der Hand derbäi.
+Le calculateur de cM, la méthode de Leeds et le navigateur de chromosomes t’aident à placer chacun dans l’arbre. ¦ De cM-Rechner, d'Leeds-Method an de Chromosomebrowser hëllefen dir, jiddereen am Bam ze plazéieren.
+Tes tests, tes correspondances et où tu en es. Tout se règle dans « ⚙️ Réglages » (rubriques montrées, ordre, colonnes, couleurs). ¦ Deng Tester, deng Treffer a wou s du drun bass. Alles gëtt an „⚙️ Astellungen“ agestallt (gewise Rubriken, Reiefolleg, Kolonnen, Faarwen).
+🧬 Synthèse ¦ 🧬 Iwwersiicht
+Loi et mises en garde ¦ Gesetz a Warnungen
+⚖️ Loi et mises en garde ¦ ⚖️ Gesetz a Warnungen
+À lire avant d’utiliser cet onglet. ¦ Ze liesen, ier s du dëse Reiter benotz.
+Mes tests ¦ Meng Tester
+Correspondances ¦ Treffer
+Groupes (méthode de Leeds) ¦ Gruppen (Leeds-Method)
+🗂️ Groupes (méthode de Leeds) ¦ 🗂️ Gruppen (Leeds-Method)
+Groupes automatiques ¦ Automatesch Gruppen
+Placer un cousin ¦ E Cousin plazéieren
+📍 Placer un cousin ¦ 📍 E Cousin plazéieren
+Chromosomes et segments ¦ Chromosomen a Segmenter
+🧩 Chromosomes et segments ¦ 🧩 Chromosomen a Segmenter
+Calculateur de cM ¦ cM-Rechner
+📐 Calculateur de cM ¦ 📐 cM-Rechner
+Lignées Y, mt et X ¦ Y-, mt- an X-Linnen
+🌳 Lignées Y, mt et X ¦ 🌳 Y-, mt- an X-Linnen
+Origines estimées ¦ Geschate Hierkonft
+🌍 Origines estimées ¦ 🌍 Geschate Hierkonft
+Comprendre l’ADN ¦ D'DNA verstoen
+📚 Comprendre l’ADN ¦ 📚 D'DNA verstoen
+cM partagés ¦ Gedeelt cM
+% partagé ¦ % gedeelt
+Plus long segment ¦ Längste Segment
+Relation (société) ¦ Relatioun (Firma)
+Relation probable ¦ Wahrscheinlech Relatioun
+Fiche liée ¦ Verbonne Fiche
+Ancêtre commun ¦ Gemeinsame Virfahr
+Noms en commun ¦ Gemeinsam Nimm
+Des deux côtés ¦ Vu béide Säiten
+Contacté ¦ Kontaktéiert
+A répondu ¦ Huet geäntwert
+Arbre échangé ¦ Bam ausgetosch
+Placé dans l’arbre ✓ ¦ Am Bam plazéiert ✓
+À ignorer ¦ Ze ignoréieren
+Placées dans l’arbre ¦ Am Bam plazéiert
+Tests ¦ Tester
+Correspondances par nombre de cM ¦ Treffer no Zuel vu cM
+Par côté ¦ No Säit
+Les plus proches ¦ Déi nootsten
+Autosomal (atDNA) : tous les ancêtres récents ¦ Autosomal (atDNA): all rezent Virfahren
+ADN-Y : lignée paternelle directe ¦ Y-DNA: direkt Pappelinn
+ADN mitochondrial : lignée maternelle directe ¦ Mitochondrial DNA: direkt Mammelinn
+Nebula / séquençage complet ¦ Nebula / komplett Sequenzéierung
+Labo médical ¦ Medezinesche Labo
+Parent / enfant ¦ Elterendeel / Kand
+Frère ou sœur ¦ Brudder oder Schwëster
+Demi-frère ou demi-sœur ¦ Hallefbrudder oder Hallefschwëster
+Grand-parent / petit-enfant ¦ Grousselterendeel / Enkelkand
+Oncle, tante / neveu, nièce ¦ Monni, Tatta / Neveu, Niess
+Arrière-grand-parent ¦ Urgrousselterendeel
+Grand-oncle, grand-tante ¦ Grousspätter, Groussmätter
+Cousin germain (1C) ¦ Cousin éischte Grads (1C)
+Cousin germain, une génération d’écart (1C1R) ¦ Cousin éischte Grads, eng Generatioun Ënnerscheed (1C1R)
+Cousin germain, deux générations d’écart (1C2R) ¦ Cousin éischte Grads, zwou Generatiounen Ënnerscheed (1C2R)
+Demi-cousin germain ¦ Hallefcousin éischte Grads
+Demi-cousin germain, une génération d’écart ¦ Hallefcousin éischte Grads, eng Generatioun Ënnerscheed
+Cousin issu de germain (2C) ¦ Cousin zweete Grads (2C)
+Cousin issu de germain, une génération d’écart (2C1R) ¦ Cousin zweete Grads, eng Generatioun Ënnerscheed (2C1R)
+Cousin issu de germain, deux générations d’écart (2C2R) ¦ Cousin zweete Grads, zwou Generatiounen Ënnerscheed (2C2R)
+Demi-cousin issu de germain ¦ Hallefcousin zweete Grads
+Cousin au 3e degré (3C, issu d’issu de germain) ¦ Cousin drëtte Grads (3C)
+Demi-cousin au 3e degré ¦ Hallefcousin drëtte Grads
+Cousin au 4e degré (4C) ¦ Cousin véierte Grads (4C)
+Cousin au 5e degré (5C) ¦ Cousin fënnefte Grads (5C)
+Cousin au 6e degré ou plus ¦ Cousin sechste Grads oder méi
+Noté. ¦ Notéiert.
+Nouveau test ¦ Neien Test
+Personne testée ¦ Getest Persoun
+Nom du test ¦ Numm vum Test
+(si la personne n’est pas dans l’arbre) ¦ (wann d'Persoun net am Bam ass)
+Test supprimé. ¦ Test geläscht.
+Test enregistré. ¦ Test gespäichert.
+les voir ¦ se gesinn
+Tous les tests ¦ All d'Tester
+Tous les côtés ¦ All d'Säiten
+Tout suivi ¦ All de Suivi
+Tous les groupes ¦ All d'Gruppen
+Sans groupe ¦ Ouni Grupp
+Côté… ¦ Säit…
+Étoiles ¦ Stären
+Afficher la suite ¦ De Rescht weisen
+Ajoute d’abord un test (« 🧬 Mes tests »). ¦ Setz fir d'éischt en Test derbäi („🧬 Meng Tester“).
+Ajoute d’abord un test. ¦ Setz fir d'éischt en Test derbäi.
+Nouvelle correspondance ¦ Neien Treffer
+Fiche dans l’arbre ¦ Fiche am Bam
+Si tu sais qui c’est… ¦ Wann s du weess, wien et ass…
+Tape les cM partagés : la relation probable s’affiche ici. ¦ Tipp déi gedeelt cM: déi wahrscheinlech Relatioun gëtt hei ugewisen.
+Supprimée. ¦ Geläscht.
+Correspondance enregistrée. ¦ Treffer gespäichert.
+Importer des segments ADN ¦ DNA-Segmenter importéieren
+Importer des correspondances ADN ¦ DNA-Treffer importéieren
+Fichier vide ou illisible. ¦ Fichier eidel oder net liesbar.
+Colonnes reconnues (à vérifier) ¦ Erkannt Kolonnen (ze kontrolléieren)
+— ne pas prendre — ¦ — net huelen —
+=correspondance ajoutée ¦ derbäigesaten Treffer|derbäigesaten Treffer
+=segment importé ¦ importéiert Segment|importéiert Segmenter
+=groupe créé ¦ erstallt Grupp|erstallt Gruppen
+=cochée ¦ ugekräizt|ugekräizt
+=ancêtre possible ¦ méigleche Virfahr|méiglech Virfahren
+Un groupe range ensemble les correspondances d’une même branche. ¦ Eng Grupp sammelt d'Treffer vun engem selwechte Zweig.
+arrière-grands-parents ¦ Urgrousselteren
+🎯 Ancêtres communs ¦ 🎯 Gemeinsam Virfahren
+🤔 Ancêtres probables ¦ 🤔 Wahrscheinlech Virfahren
+Ancêtre commun encore inconnu ¦ Gemeinsame Virfahr nach onbekannt
+📍 Placer un cousin dans l’arbre ¦ 📍 E Cousin am Bam plazéieren
+Hors des valeurs connues. ¦ Ausserhalb vun de bekannte Wäerter.
+Probabilité ¦ Wahrscheinlechkeet
+Couple d’ancêtres ¦ Virfahrekoppel
+(un seul des deux : demi-cousin) ¦ (nëmmen ee vun deenen zwee: Hallefcousin)
+Choisis une correspondance ou entre des cM. ¦ Wiel en Treffer oder gëff cM an.
+Aucun test ¦ Keen Test
+Couleur par correspondance ¦ Faarf pro Treffer
+Par groupe ¦ Pro Grupp
+Aucun segment. ¦ Kee Segment.
+Nouveau segment ¦ Neit Segment
+Ancêtre supposé ¦ Vermuddlechen Virfahr
+♂ ADN-Y — lignée paternelle directe ¦ ♂ Y-DNA — direkt Pappelinn
+♀ ADN mitochondrial — lignée maternelle directe ¦ ♀ Mitochondrial DNA — direkt Mammelinn
+✕ ADN-X — ancêtres possibles ¦ ✕ X-DNA — méiglech Virfahren
+Endogamie et implexe ¦ Endogamie an Implex
+Placer une correspondance ¦ En Treffer plazéieren
+Confidentialité et éthique ¦ Vertraulechkeet an Ethik
+Colonnes du tableau des correspondances ¦ Kolonne vun der Tabell vun den Treffer
+Chiffres et couleurs ¦ Zuelen a Faarwen
+⤓ Exporter tout l’ADN (JSON) ¦ ⤓ Déi ganz DNA exportéieren (JSON)
+Ouvrir l’onglet ADN → ¦ De Reiter DNA opmaachen →
+Nouveau diagramme ¦ Neit Diagramm
+Choisis un dessin : il arrive avec un exemple que tu remplaces par tes chiffres (à la main, collés d’un tableur, d’un CSV, ou pris dans l’app). ¦ Wiel en Dessin: e kënnt mat engem Beispill, dat s du duerch deng Zuelen ersetz (mat der Hand, aus enger Tabelle agefüügt, aus engem CSV oder aus der App geholl).
+Ordre, types montrés ou cachés, groupes à toi ¦ Reiefolleg, gewisen oder verstoppten Typen, eege Gruppen
+⚙️ Ranger les types ¦ ⚙️ D'Typen opraumen
+Assemblées ¦ Versammlungen
+Parlement, assemblée, conseil ¦ Parlament, Versammlung, Rot
+Arc élargi (Assemblée en éventail) ¦ Erweiderte Bou (Versammlung als Fächer)
+Fer à cheval ¦ Houfeisen
+Westminster (bancs face à face) ¦ Westminster (Bänken vis-à-vis)
+Salle face à la tribune (conseil municipal…) ¦ Sall vis-à-vis vun der Tribün (Gemengerot…)
+Frise des membres (groupe de musique, association…) ¦ Zäitlinn vun de Memberen (Museksgrupp, Associatioun…)
+Frise de vies (des personnes de la base) ¦ Zäitlinn vu Liewen (Persounen aus der Datebank)
+Planning (tâches d’une enquête, Gantt) ¦ Planning (Aufgabe vun enger Ënnersichung, Gantt)
+Frise chronologique (dates clés) ¦ Chronologesch Zäitlinn (wichteg Datumen)
+Calendrier coloré (jour par jour) ¦ Faarwege Kalenner (Dag fir Dag)
+Rose des mois (12 parts) ¦ Rous vun de Méint (12 Deeler)
+Spirale du temps (une spire par siècle) ¦ Zäitspiral (eng Wicklung pro Joerhonnert)
+Arbre en frise (vies par génération) ¦ Bam als Zäitlinn (Liewen no Generatioun)
+Naissances, décès et crises ¦ Gebuerten, Doudesfäll a Krisen
+Âges comparés d’une fratrie ¦ Verglach vum Alter vu Geschwëster
+Pyramide « qui vivait en … » ¦ Pyramid „wien huet am … gelieft“
+Les vies de plusieurs générations superposées : qui a connu son arrière-petit-enfant, et combien d’années. ¦ D'Liewe vu méi Generatiounen iwwerenee geluecht: wien huet säin Urenkelkand kannt, a wéi vill Joer.
+Qui a connu qui (vies de plusieurs générations) ¦ Wien huet wie kannt (Liewe vu méi Generatiounen)
+Les mariages et les conceptions (naissance − 9 mois) mois par mois, avec le Carême et l’Avent repérés. ¦ D’Bestietnesser an d’Empfängnisser (Gebuert − 9 Méint) Mount fir Mount, mat der Faaschtenzäit an dem Advent markéiert.
+Mois des mariages et des conceptions (Carême, Avent) ¦ Méint vun de Bestietnesser an Empfängnisser (Faaschtenzäit, Advent)
+Une ligne par mère : ses enfants à l’âge qu’elle avait, l’écart entre deux naissances et les enfants morts jeunes. ¦ Eng Linn pro Mamm: hir Kanner beim Alter, deen si hat, den Ofstand tëscht zwou Gebuerten an d’Kanner, déi jonk gestuerwe sinn.
+Espacement des naissances (les enfants de chaque mère) ¦ Ofstand tëscht de Gebuerten (d’Kanner vun all Mamm)
+Une bande par personne, colorée selon la commune (ou le département, le pays) où elle vivait à chaque époque. ¦ Eng Band pro Persoun, gefierft no der Gemeng (oder dem Departement, dem Land), wou si zu all Zäit gelieft huet.
+Frise des lieux de vie (une bande par personne) ¦ Zäitstrahl vun de Wunnplazen (eng Band pro Persoun)
+Une ligne par tâche, de sa date de début à sa date de fin, avec ce qui est déjà fait. ¦ Eng Linn pro Aufgab, vun hirem Ufanksdatum bis zu hirem Enndatum, mat deem, wat scho gemaach ass.
+Diagramme de Gantt (tâches, chantiers de recherche) ¦ Gantt-Diagramm (Aufgaben, Recherche-Chantieren)
+Les anniversaires, mariages, décès et fêtes des prénoms autour d’un cercle de douze mois. ¦ D’Gebuertsdeeg, Bestietnesser, Doudesfäll an Nummendeeg ronderëm e Krees vun zwielef Méint.
+Roue de l’année (anniversaires et fêtes de la famille) ¦ Rad vum Joer (Gebuertsdeeg a Feierdeeg vun der Famill)
+Colonnes empilées ¦ Gestapelt Kolonnen
+Colonnes empilées à 100 % ¦ Gestapelt Kolonnen op 100 %
+Pyramide (des âges…) ¦ Pyramid (vun den Alteren…)
+Carte de chaleur (tableau coloré) ¦ Wäermtkaart (faarweg Tabell)
+Classement qui évolue (prénoms par décennie…) ¦ Classement, dat sech ännert (Virnumm pro Joerzéngt…)
+Courants empilés (métiers sur 200 ans…) ¦ Gestapelt Stréim (Beruffer iwwer 200 Joer…)
+Histogramme (valeurs rangées en tranches) ¦ Histogramm (Wäerter a Tranchen agedeelt)
+Boîte à moustaches (médiane, quartiles) ¦ Boxplot (Median, Quartillen)
+Haltères (deux valeurs par ligne) ¦ Hantelen (zwee Wäerter pro Linn)
+Pente avant / après ¦ Steigung virdrun / duerno
+Cascade (un total qui monte et descend) ¦ Kaskad (en Total, dee klëmmt a fält)
+Sucettes couchées ¦ Leiend Lollien
+Essaim de points (une personne = un point) ¦ Punkteschwarm (eng Persoun = ee Punkt)
+Petites courbes en grille ¦ Kleng Kurven an engem Gitter
+Violon (répartition par catégorie) ¦ Gei (Verdeelung pro Kategorie)
+Pour chaque âge, la part des personnes encore en vie : une courbe par siècle, par sexe ou par branche. ¦ Fir all Alter den Undeel vun de Leit, déi nach liewen: eng Kurv pro Joerhonnert, pro Geschlecht oder pro Zweig.
+Courbe de survie (part encore en vie à chaque âge) ¦ Iwwerliewenskurv (Undeel, deen bei all Alter nach lieft)
+Vagues (une répartition par siècle…) ¦ Wellen (eng Verdeelung pro Joerhonnert…)
+Échelle de points (Cleveland) ¦ Punkteskala (Cleveland)
+Tableau de mobilité (métier du père × métier de l’enfant) ¦ Mobilitéitstabell (Beruff vum Papp × Beruff vum Kand)
+Barres en cercle (classement qui s’enroule) ¦ Baren am Krees (Classement, dat sech ronderëm wéckelt)
+Des barres sur l’axe de gauche et une courbe sur un deuxième axe à droite, pour comparer deux sortes de chiffres. ¦ Baren op der lénker Achs an eng Kurv op enger zweeter Achs riets, fir zwou Zorte vun Zuelen ze vergläichen.
+Barres + courbe (deuxième axe à droite) ¦ Baren + Kurv (zweet Achs riets)
+Deux chiffres face à face de chaque côté d’un trait (décès et naissances, femmes et hommes), ou un chiffre au-dessus et en dessous d’un centre. ¦ Zwou Zuelen openeen zou op all Säit vun engem Strich (Doudesfäll a Gebuerten, Fraen a Männer), oder eng Zuel iwwer an ënner enger Mëtt.
+Barres divergentes (gauche / droite d’un centre) ¦ Divergent Baren (lénks / riets vun enger Mëtt)
+Une colline par série (un nom de famille, un prénom, une commune…), l’une derrière l’autre, au fil du temps. ¦ Ee Bierg pro Serie (e Familljennumm, e Virnumm, eng Gemeng…), een hannert dem aneren, am Laf vun der Zäit.
+Collines empilées (une courbe par série, décalées) ¦ Gestapelt Bierger (eng Kurv pro Serie, verréckelt)
+Chaque personne est une ligne qui passe par plusieurs axes (âge au mariage, enfants, âge au décès…) : les profils se voient d’un coup d’œil. ¦ All Persoun ass eng Linn, déi duerch e puer Achsen geet (Alter beim Bestietnes, Kanner, Alter beim Doud…): d’Profiller gesäit een op ee Bléck.
+Coordonnées parallèles (plusieurs chiffres par personne) ¦ Parallel Koordinaten (e puer Zuelen pro Persoun)
+Une courbe qui avance par marches : le chiffre reste le même jusqu’au prochain changement (vivants de la famille, ancêtres trouvés…). ¦ Eng Kurv, déi a Stufe virugeet: d’Zuel bleift déiselwecht bis zur nächster Ännerung (Lieweg aus der Famill, fonnte Virfahren…).
+Courbe en escalier (ex. combien de vivants, année par année) ¦ Trapekurv (z. B. wéi vill Lieweg, Joer fir Joer)
+Mosaïque (100 carrés) ¦ Mosaik (100 Quadraten)
+Carte proportionnelle (rectangles) ¦ Proportional Kaart (Rechtecker)
+Pictogrammes (symboles répétés) ¦ Piktogrammer (widderholl Symboler)
+Mosaïque à largeur variable (Marimekko) ¦ Mosaik mat variabeler Breet (Marimekko)
+Bulles groupées (noms, métiers, lieux) ¦ Gruppéiert Bubbelen (Nimm, Beruffer, Plazen)
+Flux (Sankey) : migrations, métiers… ¦ Stroum (Sankey): Migratiounen, Beruffer…
+Diagramme d’accord (mariages entre villages) ¦ Akkorddiagramm (Bestietnesser tëscht Dierfer)
+Une idée au centre, des branches autour, et les idées de chaque branche. ¦ Eng Iddi an der Mëtt, Äscht ronderëm an d’Iddie vun all Ast.
+Carte mentale (une idée, ses branches) ¦ Mindmap (eng Iddi, hir Äscht)
+Éventail d’ascendance (mes chiffres) ¦ Virfahrefächer (meng Zuelen)
+Soleil des lignées (anneaux) ¦ Sonn vun de Lignéeën (Réng)
+Réseau de relations (témoins, parrains…) ¦ Relatiounsnetz (Zeien, Pättere…)
+Diagramme de Venn (2 à 4 ensembles) ¦ Venn-Diagramm (2 bis 4 Ensemblen)
+Arbre en accordéon (cousins) ¦ Akkordeon-Stammbam (Koseng)
+Graphe des cousinages ¦ Graf vun de Kosengschaften
+Matrice de parenté (qui est quoi pour qui) ¦ Verwandtschaftsmatrix (wien ass wat fir wien)
+Arbre des patronymes (transmission du nom) ¦ Bam vun de Familljennimm (Weidergi vum Numm)
+Quadrillage des ancêtres (une case par Sosa) ¦ Gitter vun de Virfahren (eng Zell pro Sosa)
+Les métiers d’une génération à l’autre : chaque bande suit des lignées, du trisaïeul au fils. ¦ D’Beruffer vun enger Generatioun zur anerer: all Band suivéiert Lignéeën, vum Urgroussgrousspapp bis zum Jong.
+Métiers de père en fils (flux sur plusieurs générations) ¦ Beruffer vum Papp op de Jong (Stroum iwwer e puer Generatiounen)
+Chaque couple est un point : sa distance au centre est celle qui séparait les lieux de naissance des deux époux. ¦ All Koppel ass e Punkt: säin Ofstand zur Mëtt ass deen, deen d’Gebuertsplaze vun deenen zwee Bestuete getrennt huet.
+Rayon des mariages (distance entre les villages des époux) ¦ Radius vun de Bestietnesser (Distanz tëscht den Dierfer vun de Bestuete)
+Par génération : les ancêtres qu’on devrait avoir (2, 4, 8…), les places trouvées et les personnes différentes. ¦ Pro Generatioun: d’Virfahren, déi een hätt misse hunn (2, 4, 8…), déi fonnte Plazen an déi verschidde Persounen.
+Implexe (ancêtres théoriques et réels) ¦ Implex (theoretesch a reell Virfahren)
+Descendance en rectangles (icicle) ¦ Nokomme a Rechtecker (Icicle)
+Prénoms transmis (parrain, marraine → filleul) ¦ Weiderginn Virnimm (Pätter, Gotta → Patekand)
+Causes de décès en anneaux (familles puis détail) ¦ Doudesursaachen a Réng (Haaptgruppen, dann Detail)
+Une personne au milieu ; ses parents, grands-parents… au-dessus ; ses enfants, petits-enfants… au-dessous. ¦ Eng Persoun an der Mëtt; hir Elteren, Grousselteren… driwwer; hir Kanner, Enkelkanner… drënner.
+Sablier (ascendants et descendants d’une personne) ¦ Sanduhr (Virfahren an Nokomme vun enger Persoun)
+Le plus court chemin entre deux personnes, étape par étape, et la phrase qui dit le lien (« cousin issu de germains », « beau-frère »…). ¦ De kierzste Wee tëscht zwou Persounen, Schrëtt fir Schrëtt, an de Saz, deen d’Verbindung seet („cousin issu de germains“, „beau-frère“…).
+Chemin de parenté entre deux personnes ¦ Verwandtschaftswee tëscht zwou Persounen
+La part des ancêtres connus à chaque génération (1, 2, 4, 8… possibles), en barres ou en éventail. ¦ Den Undeel vun de bekannte Virfahren an all Generatioun (1, 2, 4, 8… méiglech), als Baren oder als Fächer.
+Complétude de l’arbre (ancêtres connus par génération) ¦ Vollstännegkeet vum Stammbam (bekannte Virfahren pro Generatioun)
+La liste des ancêtres par numéro Sosa, génération par génération, prête à imprimer. ¦ D’Lëscht vun de Virfahren no Sosa-Nummer, Generatioun fir Generatioun, prett fir ze drécken.
+Tableau d’ascendance (ahnentafel, une ligne par Sosa) ¦ Virfahrentabell (Ahnentafel, eng Linn pro Sosa)
+Cartes de chiffres (KPI) ¦ Zuelekaarten (KPI)
+Barre d’objectif (valeur, objectif, zones) ¦ Zilbar (Wäert, Zil, Zonen)
+Un anneau par objectif : plein quand c’est fini (ancêtres trouvés, actes sourcés, photos identifiées…). ¦ E Rank pro Zil: voll, wann et fäerdeg ass (fonnte Virfahren, Akte mat Quell, identifizéiert Fotoen…).
+Anneaux d’avancement (objectifs de recherche) ¦ Fortschrëttsréng (Recherche-Ziler)
+Carte colorée par zones (départements, régions, pays…) ¦ Kaart, no Zone gefierft (Departementer, Regiounen, Länner…)
+Carte des migrations (flèches d’un lieu à un autre) ¦ Migratiounskaart (Feiler vun enger Plaz op eng aner)
+Carte à symboles proportionnels (ronds par lieu) ¦ Kaart mat proportionale Symboler (Kreeser pro Plaz)
+Carte en points (un point par événement) ¦ Punktekaart (ee Punkt pro Evenement)
+Carte en hexagones (densité en alvéoles) ¦ Hexagonkaart (Dicht a Waben)
+Carte déformée (zones grossies selon leur chiffre) ¦ Verzerrt Kaart (Zonen no hirer Zuel vergréissert)
+Carte qui raconte (une vie étape par étape) ¦ Kaart, déi erzielt (e Liewen Etapp fir Etapp)
+Carte des patronymes (siècle par siècle) ¦ Kaart vun de Familljennimm (Joerhonnert fir Joerhonnert)
+Carte de chaleur dans le temps (décennie par décennie) ¦ Wäermtkaart an der Zäit (Joerzéngt fir Joerzéngt)
+Carte des cousins ADN (lieux des ancêtres communs) ¦ Kaart vun den ADN-Koseng (Plaze vun de gemeinsame Virfahren)
+Carte de tes recherches (vu, en partie, trous) ¦ Kaart vun denge Recherchen (gesinn, deelweis, Lächer)
+Le point moyen des lieux de naissance de chaque génération, et le chemin qu’il a fait jusqu’à toi. ¦ De Mëttelpunkt vun de Gebuertsplaze vun all Generatioun, an de Wee, deen e bis bei dech gemaach huet.
+Centre de gravité de la famille par génération ¦ Schwéierpunkt vun der Famill pro Generatioun
+Les lieux de naissance des ancêtres, une couleur par génération : on voit la famille venir de plus loin. ¦ D’Gebuertsplaze vun de Virfahren, eng Faarf pro Generatioun: Du gesäis, wéi d’Famill vu méi wäit hierkënnt.
+Carte des générations (une couleur par génération) ¦ Kaart vun de Generatiounen (eng Faarf pro Generatioun)
+Vie et mort ¦ Liewen an Doud
+La part des enfants morts avant 1 an et avant 5 ans, période par période. ¦ Den Undeel vun de Kanner, déi viru 1 Joer a viru 5 Joer gestuerwe sinn, Period fir Period.
+Mortalité des enfants (avant 1 an, avant 5 ans) ¦ Kannerstierflechkeet (viru 1 Joer, viru 5 Joer)
+Pour chaque couple, ses enfants : arrivés à l’âge adulte, morts jeunes, ou dont on ne sait pas. ¦ Fir all Koppel seng Kanner: erwuesse ginn, jonk gestuerwen oder onbekannt.
+Fratries qui survivent (enfants nés, arrivés adultes) ¦ Geschwëster, déi iwwerliewen (gebuere Kanner, erwuesse ginn)
+Un damier : chaque mois de l’année, pour chaque époque. Plus c’est foncé, plus il y a de naissances (ou de décès). ¦ En Dammbriet: all Mount vum Joer, fir all Epoch. Wat méi däischter, wat méi Gebuerten (oder Doudesfäll).
+Saisons des naissances et des décès (mois × époque) ¦ Saisone vun de Gebuerten an Doudesfäll (Mount × Epoch)
+Couples et familles ¦ Koppelen a Familljen
+Combien de temps attendaient les veufs et les veuves avant de se remarier. ¦ Wéi laang d’Witmänner an d’Witfraen gewaart hunn, ier se sech nees bestuet hunn.
+Veuvage et remariage (délai avant de se remarier) ¦ Witfrae-/Witmannstand an nei Bestietnes (Delai bis zum neie Bestietnes)
+Combien d’années duraient les mariages, de la noce à la mort du premier des deux. ¦ Wéi vill Joer d’Bestietnesser gedauert hunn, vun der Hochzäit bis zum Doud vum éischte vun deenen zwee.
+Durée des mariages (jusqu’à la mort d’un époux) ¦ Dauer vun de Bestietnesser (bis zum Doud vun engem Bestuetenen)
+Chaque naissance est un point : l’âge du père (et celui de la mère) selon l’année. ¦ All Gebuert ass e Punkt: den Alter vum Papp (an dee vun der Mamm) no Joer.
+Âge des parents à chaque naissance (nuage de points) ¦ Alter vun den Elteren bei all Gebuert (Punktewollek)
+La part des premiers enfants nés avant le mariage, ou moins de 8 mois après. ¦ Den Undeel vun den éischte Kanner, déi virum Bestietnes gebuer goufen, oder manner wéi 8 Méint duerno.
+Conceptions avant mariage (premier enfant « trop tôt ») ¦ Empfängnisser virum Bestietnes (éischt Kand „ze fréi“)
+À gauche les couples où le mari est plus âgé, à droite ceux où la femme est plus âgée, par tranches d’écart. ¦ Lénks d’Koppelen, wou de Mann méi al ass, riets déi, wou d’Fra méi al ass, no Tranchen vum Ënnerscheed.
+Écart d’âge entre époux (pyramide) ¦ Altersënnerscheed tëscht Bestuete (Pyramid)
+À chaque génération d’ancêtres, la distance moyenne entre leur lieu de naissance et le lieu de référence. ¦ Bei all Generatioun vu Virfahren déi duerchschnëttlech Distanz tëscht hirer Gebuertsplaz an der Referenzplaz.
+Loin du berceau (distance par génération) ¦ Wäit vun der Wee (Distanz pro Generatioun)
+La part de ceux qui ont signé l’acte (époux, épouses, témoins), période par période. ¦ Den Undeel vun deenen, déi den Akt ënnerschriwwen hunn (Bestuete Männer, Bestuete Fraen, Zeien), Period fir Period.
+Savoir signer (époux, épouses, témoins) ¦ Ënnerschreiwe kënnen (Bestuete Männer, Bestuete Fraen, Zeien)
+Pour chaque génération d’ancêtres : naissances, mariages et décès prouvés par une source (vert), sans source (jaune) ou manquants (gris). ¦ Fir all Generatioun vu Virfahren: Gebuerten, Bestietnesser an Doudesfäll, déi duerch eng Quell bewise sinn (gréng), ouni Quell (giel) oder déi feelen (gro).
+Ce que tu as prouvé (actes sourcés par génération) ¦ Wat s du bewisen hues (Akte mat Quell pro Generatioun)
+Pour chaque commune, une frise des années : dépouillées, vues sans rien trouver, à faire, actes trouvés ; en rouge pâle, les trous. ¦ Fir all Gemeng en Zäitstrahl vun de Joren: ausgezunn, gesinn ouni eppes ze fannen, ze maachen, fonnten Akten; a bleechrout d’Lächer.
+Registres consultés (années vues et trous) ¦ Konsultéiert Registeren (gesinn Joren a Lächer)
+Peinture des chromosomes (segments ADN par branche) ¦ Chromosomemolerei (ADN-Segmenter pro Zweig)
+Règle des cM (parentés possibles) ¦ cM-Regel (méiglech Verwandtschaften)
+Les correspondances ADN qui se correspondent entre elles, rangées en groupes de couleur (souvent un par grand-parent). ¦ D’ADN-Iwwereneestëmmungen, déi ënnerenee passen, a Faarfgruppen agedeelt (dacks eng pro Grousselterendeel).
+Matrice des correspondances ADN (méthode de Leeds) ¦ Matrix vun den ADN-Iwwereneestëmmungen (Leeds-Method)
+Chargement du diagramme… ¦ Diagramm gëtt gelueden…
+Diagramme introuvable (supprimé ?). ¦ Diagramm net fonnt (geläscht?).
+la fenêtre « Imprimer » n’est pas chargée ¦ d’Fënster „Drécken“ ass net gelueden
+Titre et légende ¦ Titel a Legend
+Tableau des données dessous ¦ Datentabell drënner
+Taille réelle ¦ Richteg Gréisst
+Image copiée : colle-la où tu veux (⌘V). ¦ Bild kopéiert: Fëg et an, wou s du wëlls (⌘V).
+Copie impossible ici : utilise « Image PNG ». ¦ Kopéieren hei net méiglech: Benotz „PNG-Bild“.
+image trop grande : baisse la qualité ¦ Bild ze grouss: Setz d’Qualitéit erof
+📋 Copier l’image ¦ 📋 D’Bild kopéieren
+🧾 Prendre un classeur du Tableur ¦ 🧾 E Classeur aus der Tabelle huelen
+Prendre un classeur du Tableur ¦ E Classeur aus der Tabelle huelen
+Nom du diagramme ¦ Numm vum Diagramm
+PNG, JPG, SVG, PDF, impression, CSV, fichier du diagramme ¦ PNG, JPG, SVG, PDF, Drécken, CSV, Fichier vum Diagramm
+Depuis l’app ¦ Aus der App
+Personnaliser n’est pas chargé. ¦ Personaliséieren ass net gelueden.
+Dans l’ordre du tableau ¦ An der Reiefolleg vun der Tabell
+Prendre ces données ¦ Dës Donnéeë huelen
+Prendre ces chiffres ¦ Dës Zuelen huelen
+🧮 Refaire avec « Compter dans ma base » ¦ 🧮 Nach eng Kéier mat „A menger Datebank zielen“
+🧮 Compter dans ma base ¦ 🧮 A menger Datebank zielen
+Une personne, une enquête… ¦ Eng Persoun, eng Ënnersichung…
+Tableau importé. ¦ Tabell importéiert.
+Vider ce tableau ? ¦ Dës Tabell eidel maachen?
+Coller un tableau ¦ Eng Tabell afügen
+Données reprises du tableur. ¦ Donnéeën aus der Tabelle iwwerholl.
+Fermer sans enregistrer les changements ? ¦ Zoumaachen, ouni d’Ännerungen ze späicheren?
+Changements non enregistrés ¦ Net gespäichert Ännerungen
+Remplacer mes données ¦ Meng Donnéeën ersetzen
+Choisir un diagramme ¦ En Diagramm wielen
+Importer (fichier, tableau, Wikipédia, image) ¦ Importéieren (Fichier, Tabell, Wikipedia, Bild)
+un classeur du Tableur ¦ e Classeur aus der Tabelle
+Copie créée. ¦ Kopie erstallt.
+Diagramme supprimé. ¦ Diagramm geläscht.
+Ce fichier n’est pas un diagramme. ¦ Dëse Fichier ass keen Diagramm.
+Diagramme importé ¦ Importéiert Diagramm
+Diagramme importé. ¦ Diagramm importéiert.
+Naissances (ou baptêmes) ¦ Gebuerten (oder Deeften)
+Baptêmes ¦ Deeften
+Décès (ou sépultures) ¦ Doudesfäll (oder Begriefnesser)
+Rien (un seul total) ¦ Näischt (een eenzegen Total)
+Âge (par 5 ans) ¦ Alter (pro 5 Joer)
+Âge (par 10 ans) ¦ Alter (pro 10 Joer)
+Nombre d’enfants ¦ Zuel vu Kanner
+Âge au mariage (par 5 ans) ¦ Alter beim Bestietnes (pro 5 Joer)
+Âge au premier enfant (par 5 ans) ¦ Alter beim éischte Kand (pro 5 Joer)
+Nombre d’unions ¦ Zuel vu Verbindungen
+Branche (côté père, côté mère) ¦ Zweig (Säit vum Papp, Säit vun der Mamm)
+En vie ou décédé ¦ Lieweg oder gestuerwen
+En vie ou décédés ¦ Lieweg oder gestuerwen
+Avec ou sans source ¦ Mat oder ouni Quell
+par nom ¦ no Familljennumm
+par prénom ¦ no Virnumm
+par sexe ¦ no Geschlecht
+par métier ¦ no Beruff
+par génération ¦ no Generatioun
+par commune ¦ no Gemeng
+par département ¦ no Departement
+par région ¦ no Regioun
+par pays ¦ no Land
+par âge (5 ans) ¦ no Alter (5 Joer)
+par âge (10 ans) ¦ no Alter (10 Joer)
+par nombre d’enfants ¦ no Zuel vu Kanner
+par âge au mariage ¦ no Alter beim Bestietnes
+par âge au premier enfant ¦ no Alter beim éischte Kand
+par nombre d’unions ¦ no Zuel vu Verbindungen
+par branche ¦ no Zweig
+par cause ¦ no Ursaach
+par sorte d’événement ¦ no Zort vun Evenement
+Mes ancêtres ¦ Meng Virfahren
+Branche paternelle (côté père) ¦ Zweig vum Papp (Säit vum Papp)
+Branche maternelle (côté mère) ¦ Zweig vun der Mamm (Säit vun der Mamm)
+Une étiquette ¦ Eng Etikett
+Une recherche dans les noms ¦ Eng Sich an den Nimm
+Les personnes que je choisis ¦ D’Persounen, déi ech wielen
+Une seule série ¦ Eng eenzeg Serie
+Une série par sexe ¦ Eng Serie pro Geschlecht
+Une série par siècle ¦ Eng Serie pro Joerhonnert
+Une série par branche (côté père / mère) ¦ Eng Serie pro Zweig (Säit vum Papp / vun der Mamm)
+Une série par génération ¦ Eng Serie pro Generatioun
+Une série par département ¦ Eng Serie pro Departement
+Une série par pays ¦ Eng Serie pro Land
+Du plus grand au plus petit ¦ Vum gréissten zum klengsten
+Du plus petit au plus grand ¦ Vum klengsten zum gréissten
+Dans l’ordre (temps, âges…) ¦ An der Reiefolleg (Zäit, Alteren…)
+Médiane ¦ Median
+Ce que chaque barre (ou part) compte : des personnes, des naissances, des mariages, des lieux, des médias… ¦ Wat all Bar (oder all Deel) zielt: Persounen, Gebuerten, Bestietnesser, Plazen, Medien…
+Seulement les fiches qui portent cette étiquette. ¦ Nëmmen d’Fichen, déi dës Etikett hunn.
+Seulement les personnes que tu choisis ici, une par une. ¦ Nëmmen d’Persounen, déi s du hei wiels, eng no der anerer.
+Comment on range ce qu’on compte : par nom, par lieu (commune, département, pays), par siècle, décennie ou année, par âge, par génération… ¦ Wéi dat, wat gezielt gëtt, agedeelt gëtt: no Numm, no Plaz (Gemeng, Departement, Land), no Joerhonnert, Joerzéngt oder Joer, no Alter, no Generatioun…
+Prénoms, par siècle ¦ Virnimm, pro Joerhonnert
+Âge au décès (par 5 ans) ¦ Alter beim Doud (pro 5 Joer)
+Mariages par décennie ¦ Bestietnesser pro Joerzéngt
+Nombre d’unions par personne ¦ Zuel vu Verbindunge pro Persoun
+Nombre moyen d’enfants par famille, par siècle ¦ Duerchschnëttlech Zuel vu Kanner pro Famill, pro Joerhonnert
+Naissances par département ¦ Gebuerten pro Departement
+Mariages par département, par siècle ¦ Bestietnesser pro Departement, pro Joerhonnert
+Lieux par département ¦ Plaze pro Departement
+Métiers, par siècle ¦ Beruffer, pro Joerhonnert
+Âge moyen au décès, par métier ¦ Duerchschnëttlechen Alter beim Doud, pro Beruff
+Décès par décennie ¦ Doudesfäll pro Joerzéngt
+Événements par siècle ¦ Evenementer pro Joerhonnert
+Mes ancêtres par génération ¦ Meng Virfahre pro Generatioun
+Fiches avec ou sans source ¦ Fichen mat oder ouni Quell
+Mes ancêtres avec ou sans source ¦ Meng Virfahre mat oder ouni Quell
+Événements par sorte ¦ Evenementer no Zort
+Médias par sorte ¦ Medien no Zort
+Médias par décennie ¦ Medien pro Joerzéngt
+Seulement les personnes… ¦ Nëmmen d’Persounen…
+tous ces critères (ET) ¦ all dës Critèren (AN)
+choisir… (métier, enfants, lieu, période…) ¦ wielen… (Beruff, Kanner, Plaz, Period…)
+Compter chaque personne une seule fois ¦ All Persoun nëmmen eemol zielen
+Jusqu’à (générations, 0 = toutes) ¦ Bis (Generatiounen, 0 = all)
+Nom ou prénom qui contient ¦ Numm oder Virnumm, deen … enthält
+Chercher… (Martin, Jean) ¦ Sichen… (Martin, Jean)
+Nées entre (période) ¦ Gebuer tëscht (Period)
+Regrouper par ¦ Gruppéieren no
+Garder les premiers (0 = tous) ¦ Déi éischt halen (0 = all)
+Le reste dans « Autres » ¦ De Rescht an „Aner“
+Montrer « Inconnu » (les valeurs vides) ¦ „Onbekannt“ weisen (déi eidel Wäerter)
+De quoi ¦ Vu wat
+Écris une année (ex. 1800, vers 1850). ¦ Schreif e Joer (z. B. 1800, vers 1850).
+Choisis une étiquette. ¦ Wiel eng Etikett.
+Écris au moins 2 lettres. ¦ Schreif mindestens 2 Buschtawen.
+Choisis au moins une personne. ¦ Wiel mindestens eng Persoun.
+=siège ¦ Sëtz|Sëtz
+Ajoute des valeurs positives. ¦ Setz positiv Wäerter derbäi.
+Il faut au moins 3 lignes (les axes). ¦ Et brauch mindestens 3 Linnen (d’Achsen).
+Ajoute des valeurs. ¦ Setz Wäerter derbäi.
+Ajoute des flux : de, vers, combien. ¦ Setz Stréim derbäi: vun, op, wéi vill.
+Il faut 2 ou 3 ensembles. ¦ Et brauch 2 oder 3 Ensemblen.
+Ajoute une jauge : un nom, une valeur, un maximum. ¦ Setz eng Jauge derbäi: en Numm, e Wäert, e Maximum.
+Ajoute des lignes : un nom, un nombre, un symbole (👤, 👶, ⚓…). ¦ Setz Linnen derbäi: en Numm, eng Zuel, e Symbol (👤, 👶, ⚓…).
+Majorité (banc du haut) ¦ Majoritéit (iewescht Bänk)
+Opposition (banc du bas) ¦ Oppositioun (ënnescht Bänk)
+Non-inscrits (bout) ¦ Fraktiounslos (Enn)
+Présidence ¦ Presidence
+Les chiffres ¦ D’Zuelen
+Afficher les valeurs ¦ D’Wäerter weisen
+Hauteur du dessin ¦ Héicht vun der Zeechnung
+Unité (ex. : personnes, €) ¦ Eenheet (z. B.: Persounen, €)
+Trou au centre ¦ Lach an der Mëtt
+Sièges ¦ Sëtz
+Hémicycle (demi-cercle) ¦ Hemizykel (Hallefkrees)
+Arc élargi (angle au choix) ¦ Erweiderte Bou (Wénkel no Wiel)
+Longueur des bancs droits ¦ Längt vun de riichte Bänken
+Forme des sièges ¦ Form vun de Sëtz
+Carrés ¦ Quadraten
+Carrés arrondis ¦ Ofgerond Quadraten
+Espace entre les sièges ¦ Ofstand tëscht de Sëtz
+Contour des sièges ¦ Kontur vun de Sëtz
+Majorité absolue ¦ Absolut Majoritéit
+Ne pas montrer ¦ Net weisen
+En texte ¦ Als Text
+Sièges dans la légende ¦ Sëtz an der Legend
+Assemblée ¦ Assemblée
+Les membres (une ligne par période ; même nom = même ligne) ¦ D’Memberen (eng Linn pro Period; selwechten Numm = selwecht Linn)
+Rôles (séparés par des virgules) ¦ Rollen (mat Kommaen getrennt)
+1987 ou 03/1987 ¦ 1987 oder 03/1987
+Fin (vide = aujourd’hui) ¦ Enn (eidel = haut)
+Les traits verticaux (albums, tournées, événements) ¦ Déi vertikal Stricher (Alben, Tourneeën, Evenementer)
+Tournée (rouge, pointillés) ¦ Tournee (rout, punktéiert)
+Autre (bleu, pointillés) ¦ Aner (blo, punktéiert)
+Un repère tous les … ans (vide = auto) ¦ E Repère all … Joer (eidel = automatesch)
+Épaisseur des barres ¦ Déckt vun de Baren
+Espace entre les lignes ¦ Ofstand tëscht de Linnen
+Ordre des lignes ¦ Reiefolleg vun de Linnen
+Par date d’arrivée ¦ No Datum vun der Arrivée
+Rôle par défaut (si vide) ¦ Standardroll (wann eidel)
+Les événements ¦ D’Evenementer
+En alternance dessus / dessous ¦ Ofwiesselnd driwwer / drënner
+Tous au-dessus ¦ All driwwer
+Étages au plus (pour éviter les chevauchements) ¦ Héchstens esou vill Etagen (fir Iwwerlappungen ze vermeiden)
+Carrés par ligne ¦ Quadraten pro Linn
+Personnes trouvées ¦ Fonnte Persounen
+Avec un acte ¦ Mat engem Akt
+Acte vérifié ¦ Akt iwwerpréift
+Sourcées ¦ Mat Quell
+Complétude par branche ¦ Vollstännegkeet pro Zweig
+Couleur des petites valeurs ¦ Faarf vun de klenge Wäerter
+Couleur des grandes valeurs ¦ Faarf vun de grousse Wäerter
+Les points ¦ D’Punkten
+Une seule couleur ¦ Eng eenzeg Faarf
+Les flux ¦ D’Stréim
+D’où venaient les conjoints ¦ Wou d’Partner hierkomm sinn
+Les cases ¦ D’Zellen
+Largeur des cases (vide = auto) ¦ Breet vun den Zellen (eidel = automatesch)
+Les ensembles (2 ou 3) ¦ D’Ensemblen (2 oder 3)
+Ce qu’on écrit dans chaque zone ¦ Wat an all Zon geschriwwe gëtt
+Texte ou nombre ¦ Text oder Zuel
+Les mots ¦ D’Wierder
+Taille du plus gros mot ¦ Gréisst vum gréisste Wuert
+Les jauges ¦ D’Jaugen
+Les lignes ¦ D’Linnen
+Un symbole vaut ¦ Ee Symbol ass wäert
+Taille des symboles ¦ Gréisst vun de Symboler
+Légende ¦ Legend
+En bas ¦ Ënnen
+Couleurs par défaut ¦ Standardfaarwen
+Sépia (ancien) ¦ Sepia (al)
+Taille des textes ¦ Gréisst vun den Texter
+Couleur du fond ¦ Hannergrondfaarf
+Couleur des textes ¦ Faarf vun den Texter
+Types remis comme au départ. ¦ Zorten zréckgesat wéi am Ufank.
+Nom du groupe (ex. « Mes favoris », « Pour la famille ») : ¦ Numm vun der Grupp (z. B. „Meng Favoritten“, „Fir d’Famill“):
+Un tableau ¦ Eng Tabell
+Un fichier CSV ¦ E CSV-Fichier
+Une page Wikipédia ¦ Eng Wikipedia-Säit
+Un graphique partagé ¦ Eng gedeelt Grafik
+📊 D’un graphique ¦ 📊 Vun enger Grafik
+Avec quel dessin ? ¦ Mat wéi enger Zeechnung?
+🖼️ Image d’un graphique ¦ 🖼️ Bild vun enger Grafik
+Un diagramme LCNDA (.json), un graphique partagé (.lcnda-widget.json) ou un tableau CSV. ¦ En LCNDA-Diagramm (.json), eng gedeelt Grafik (.lcnda-widget.json) oder eng CSV-Tabell.
+Lire la page ¦ D’Säit liesen
+Comment faire mon propre graphique avec des données d’ailleurs ? ¦ Wéi maachen ech meng eege Grafik mat Donnéeën aus anere Quellen?
+Ce fichier JSON n’est ni un diagramme ni un graphique LCNDA. ¦ Dëse JSON-Fichier ass weder en LCNDA-Diagramm nach eng LCNDA-Grafik.
+Colle un tableau. ¦ Fëg eng Tabell an.
+Tableau collé ¦ Tabell agefüügt
+Clique « Lire la page », puis choisis un tableau ou une image. ¦ Klick op „D’Säit liesen“, wiel dann eng Tabell oder e Bild.
+Colle l’adresse d’une page Wikipédia (https://xx.wikipedia.org/wiki/…). ¦ Fëg d’Adress vun enger Wikipedia-Säit an (https://xx.wikipedia.org/wiki/…).
+Aucun tableau. ¦ Keng Tabell.
+＋ Une ligne ¦ ＋ Eng Linn
+Je ne sais pas (barres ou colonnes) ¦ Ech weess et net (Baren oder Kolonnen)
+Hémicycle (sièges) ¦ Hemizykel (Sëtz)
+Valeur du haut (la plus grande barre, ou 100 %) ¦ Wäert uewen (déi gréisste Bar, oder 100 %)
+D’après une image ¦ No engem Bild
+Président ¦ President
+Majorité ¦ Majoritéit
+Indépendants ¦ Onofhängeg
+Liste du maire ¦ Lëscht vum Buergermeeschter
+Sens de l’arbre ¦ Richtung vum Stammbam
+Chercher un métier… (tisserand, laboureur) ¦ E Beruff sichen… (tisserand, laboureur)
+Chercher un métier ¦ E Beruff sichen
+Pour montrer ou imprimer l’arbre : les vivants et les fiches confidentielles n’apparaissent plus ¦ Fir de Stammbam ze weisen oder ze drécken: déi Lieweg an déi vertraulech Fichen erschéngen net méi
+🔒 Sans les vivants ni les fiches confidentielles ¦ 🔒 Ouni déi Lieweg an ouni vertraulech Fichen
+ARBRE DES MÉTIERS ¦ STAMMBAM VUN DE BERUFFER
+Les métiers des ancêtres de {name} ¦ D’Beruffer vun de Virfahre vu(n) {name}
+🧬 Les métiers des ancêtres de {name} ¦ 🧬 D’Beruffer vun de Virfahre vu(n) {name}
+métier inconnu ¦ Beruff onbekannt
+Aucun métier noté dans cet arbre. ¦ Kee Beruff an dësem Stammbam notéiert.
+Même métier que le parent ¦ Selwechte Beruff wéi den Elterendeel
+Changement de métier ¦ Beruffswiessel
+Métier inconnu pour l’un des deux ¦ Beruff bei engem vun deenen zwee onbekannt
+📊 La transmission du métier ¦ 📊 D’Weidergi vum Beruff
+Un enfant « reprend » le métier quand au moins un de ses métiers est aussi celui du parent (mêmes mots du dictionnaire des métiers anciens : « laboureur » et « laboureur à bras » comptent pareil). ¦ E Kand „iwwerhëlt“ de Beruff, wann op d’mannst ee vu senge Beruffer och dee vum Elterendeel ass (selwecht Wierder am Dictionnaire vun den ale Beruffer: „laboureur“ a „laboureur à bras“ zielen d’selwecht).
+Pas encore de quoi compter : il faut le métier d’un parent et celui de son enfant du même sexe. ¦ Nach näischt ze zielen: Et brauch de Beruff vun engem Elterendeel an dee vu sengem Kand vum selwechte Geschlecht.
+Arrivée au bagne ¦ Arrivée am Bagno
+Autre événement ¦ Anert Evenement
+Décoration ¦ Auszeechnung
+Décès en déportation ¦ Doud an der Deportatioun
+Déportation ¦ Deportatioun
+Fusillé ¦ Erschoss
+Libération ou décès au bagne ¦ Fräiloossung oder Doud am Bagno
+Lieu de résidence ¦ Wunnplaz
+Obsèques ¦ Begriefnes
+Séparation ¦ Trennung
+{name} : {n} — voir les personnes ¦ {name}: {n} — d’Persoune gesinn
+Personne de ta base n’est né ou baptisé un {date}. ¦ Keng Persoun aus denger Datebank ass um {date} gebuer oder gedeeft ginn.
+{n} coïncidences dans l’arbre ¦ {n} Zoufäll am Stammbam
+Aucune bougie allumée cette semaine. ¦ Dës Woch keng Käerz ugefaang.
+Aucune lettre scellée. ¦ Kee versigelte Bréif.
+Le détail ¦ D’Detail
+Prochain à voir : ¦ Nächst ze gesinn:
+L’ambiance ¦ D’Stëmmung
+La veillée au coin du feu (vers 1880) ¦ Den Owend um Kamäin (vers 1880)
+Le village un dimanche matin ¦ D’Duerf un engem Sonndeg de Moien
+L’atelier du forgeron ¦ D’Schmëttatelier
+La gare (vers 1900) ¦ D’Gare (vers 1900)
+Le moulin au bord de l’eau ¦ D’Millen um Waasser
+La nuit d’orage ¦ D’Donnerwiedernuecht
+Le port ¦ Den Hafen
+La ferme au petit matin ¦ De Bauerenhaff am fréie Moien
+Une nuit d’été à la campagne ¦ Eng Summernuecht um Land
+Le lavoir ¦ D’Wäschbuer
+Le jour de marché ¦ De Maartdag
+Le café du village ¦ De Café vum Duerf
+Le bal musette ¦ De Bal musette
+La messe à l’église ¦ D’Mass an der Kierch
+L’atelier de couture ¦ D’Nätatelier
+La filature et le tissage ¦ D’Spënnerei an d’Weberei
+La veillée des fileuses ¦ Den Owend vun de Spënnerinnen
+L’atelier du menuisier ¦ D’Schräinerei
+La classe (vers 1900) ¦ D’Schoulklass (vers 1900)
+L’étude du notaire ¦ D’Etude vum Notaire
+Les moissons ¦ D’Ären
+Le rucher ¦ D’Bienenhaus
+La route en diligence ¦ D’Strooss mat der Postkutsch
+Sons fabriqués par l’ordinateur, libres de droits. ¦ Kläng, déi de Computer gemaach huet, fräi vu Rechter.
+Montrer les cartes postales anciennes à l’endroit qu’elles montrent (avec la direction de la vue) ¦ Al Postkaarten op där Plaz weisen, déi se weisen (mat der Bléckrichtung)
+＋ Nouvelle couche ¦ ＋ Nei Ebeen
+Départements ¦ Departementer
+Grandes régions ¦ Grouss Regiounen
+Grandes régions (NUTS 1) ¦ Grouss Regiounen (NUTS 1)
+Régions (NUTS 2) ¦ Regiounen (NUTS 2)
+Le monde entier ¦ Déi ganz Welt
+France et voisins ¦ Frankräich an Noperen
+France entière ¦ Ganz Frankräich
+Ajoute des flux : départ, arrivée, combien. ¦ Setz Stréim derbäi: Depart, Arrivée, wéi vill.
+📍 Zoomer sur ¦ 📍 Zoomen op
+✋ Mon cadrage (souris ou cadre tracé) ¦ ✋ Mäin Ausschnëtt (Maus oder gezeechente Rumm)
+Mon cadrage : ouest, sud, est, nord (degrés) ¦ Mäin Ausschnëtt: Westen, Süden, Osten, Norden (Grad)
+Dégradé continu ¦ Kontinuéierleche Verlaf
+Par classes (tranches) ¦ No Klassen (Tranchen)
+Du jaune au rouge ¦ Vu giel bis rout
+Du bleu au rouge (écarts) ¦ Vu blo bis rout (Ofwäichungen)
+Couleur des petits chiffres ¦ Faarf vun de klengen Zuelen
+Couleur des grands chiffres ¦ Faarf vun de groussen Zuelen
+Découpage des classes ¦ Andeelung vun de Klassen
+Couleur des zones sans chiffre ¦ Faarf vun den Zonen ouni Zuel
+Couleur des limites ¦ Faarf vun de Grenzen
+Automatiques (là où il y a la place) ¦ Automatesch (do, wou Plaz ass)
+Noms des zones ¦ Nimm vun den Zonen
+Noms et chiffres ¦ Nimm an Zuelen
+Taille des étiquettes ¦ Gréisst vun den Etiketten
+Unité (ex. : naissances, %) ¦ Eenheet (z. B.: Gebuerten, %)
+Courbure des flèches ¦ Kréimung vun de Feiler
+Opacité des flèches ¦ Opazitéit vun de Feiler
+Couleur des flèches ¦ Faarf vun de Feiler
+Taille des ronds ¦ Gréisst vun de Kreeser
+Couleur du tour des ronds ¦ Faarf vum Rand vun de Kreeser
+Tous (sans se chevaucher) ¦ All (ouni sech ze iwwerlappen)
+Les 12 plus importants ¦ Déi 12 wichtegst
+Taille des noms ¦ Gréisst vun den Nimm
+Couleur des terres ¦ Faarf vum Land
+Unité (ex. : personnes) ¦ Eenheet (z. B.: Persounen)
+Signaler les lieux sans position ¦ Plazen ouni Positioun mellen
+Couleur des ronds ¦ Faarf vun de Kreeser
+Opacité des ronds ¦ Opazitéit vun de Kreeser
+Les 15 plus gros (sans se chevaucher) ¦ Déi 15 gréisst (ouni sech ze iwwerlappen)
+Unité (ex. : naissances) ¦ Eenheet (z. B.: Gebuerten)
+Où sont nés mes ancêtres ¦ Wou meng Virfahre gebuer sinn
+Baptêmes seuls ¦ Nëmmen Deeften
+Sépultures seules ¦ Nëmme Begriefnesser
+Recensements (personnes recensées) ¦ Vollekszielungen (gezielt Persounen)
+Métiers (lieux où on les exerçait) ¦ Beruffer (Plazen, wou se ausgeüübt goufen)
+Départs (nés ici, morts ailleurs) ¦ Departen (hei gebuer, soss anzwousch gestuerwen)
+Arrivées (nés ailleurs, morts ici) ¦ Arrivéeën (soss anzwousch gebuer, hei gestuerwen)
+Familles (patronymes différents) ¦ Familljen (ënnerschiddlech Familljennimm)
+Une sorte d’événement ¦ Eng Zort vun Evenement
+▭ Tracer un cadre ¦ ▭ E Rumm zeechnen
+Chargement des sortes d’événements… ¦ Zorte vun Evenementer gi gelueden…
+Quelle sorte d’événement ¦ Wéi eng Zort vun Evenement
+Seulement mes ancêtres (lignée Sosa) ¦ Nëmme meng Virfahren (Sosa-Lignée)
+Jusqu’à l’année ¦ Bis zum Joer
+Départ ¦ Depart
+Arrivée ¦ Arrivée
+📍 Les lieux du tableau ¦ 📍 D’Plazen aus der Tabell
+🔎 Retrouver les lieux sans position ¦ 🔎 D’Plazen ouni Positioun erëmfannen
+Choisis d’abord une sorte d’événement. ¦ Wiel fir d’éischt eng Zort vun Evenement.
+Choisis une sorte d’événement. ¦ Wiel eng Zort vun Evenement.
+Aucun lieu retrouvé : choisis-les un par un. ¦ Keng Plaz fonnt: Wiel se eng no der anerer.
+Colorer les villes elles-mêmes ¦ D’Stied selwer faarwen
+Zones proposées ¦ Proposéiert Zonen
+Tape un nom ou un code… ¦ Tipp en Numm oder e Code…
+Note (dans la bulle) ¦ Notiz (an der Bull)
+Les flux (départ → arrivée) ¦ D’Stréim (Depart → Arrivée)
+Départ (lieu) ¦ Depart (Plaz)
+Arrivée (lieu) ¦ Arrivée (Plaz)
+Hauteur au plus ¦ Héchstens esou héich
+Clic : ouvrir la fiche ¦ Klick: d’Fiche opmaachen
+Oncle ou tante ¦ Monni oder Tatta
+Père ou mère ¦ Papp oder Mamm
+Autre lien (ou inconnu) ¦ Aner Verbindung (oder onbekannt)
+Autre prénom ¦ Anere Virnumm
+Trait plein : même premier prénom ¦ Voll Linn: selwechten éischte Virnumm
+Guerre et violence ¦ Krich a Gewalt
+Poumons et respiration ¦ Lonken an Otmung
+Cœur et vaisseaux ¦ Häerz a Bluttgefässer
+Cancers et tumeurs ¦ Kriibs an Tumoren
+Ventre et digestion ¦ Bauch a Verdauung
+Nerfs et cerveau ¦ Nerven a Gehir
+Autres et inconnues ¦ Aner an onbekannt
+Où vivait la famille ¦ Wou d’Famill gelieft huet
+Ancêtres ¦ Virfahren
+De quoi sont morts mes ancêtres ¦ Un wat meng Virfahre gestuerwe sinn
+Tous les lieux ont une position. ¦ All Plazen hunn eng Positioun.
+Résidences et recensements ¦ Wunnsëtzer a Vollekszielungen
+Prendre ces événements ¦ Dës Evenementer huelen
+📖 La vie d’une personne ¦ 📖 D’Liewe vun enger Persoun
+Prendre sa vie ¦ Säi Liewen huelen
+🧱 Une descendance ¦ 🧱 Eng Nokommenschaft
+Prendre la descendance ¦ D’Nokommenschaft huelen
+Ces personnes ¦ Dës Persounen
+Toute la vie ¦ Dat ganzt Liewen
+Voir toute la vie ¦ Dat ganzt Liewe gesinn
+Lecture : les étapes défilent ¦ Ofspillen: D’Etappe lafen duerch
+⤢ Toute la vie ¦ ⤢ Dat ganzt Liewen
+Les événements (un point par ligne) ¦ D’Evenementer (ee Punkt pro Linn)
+Date ou année ¦ Datum oder Joer
+Couleur des points ¦ Faarf vun de Punkten
+Selon la sorte d’événement ¦ No der Zort vun Evenement
+Taille des points ¦ Gréisst vun de Punkten
+Opacité des points ¦ Opazitéit vun de Punkten
+Les 10 plus remplis ¦ Déi 10 vollst
+Opacité des alvéoles ¦ Opazitéit vun de Waben
+Traits blancs entre les alvéoles ¦ Wäiss Stricher tëscht de Waben
+Des ronds (Dorling) ¦ Kreeser (Dorling)
+Des carrés (Demers) ¦ Quadraten (Demers)
+Couleur des formes ¦ Faarf vun de Formen
+Nom et chiffre (là où il y a la place) ¦ Numm an Zuel (do, wou Plaz ass)
+Légende des tailles ¦ Legend vun de Gréissten
+Unité (ex. : ancêtres) ¦ Eenheet (z. B.: Virfahren)
+Signaler les zones pas trouvées ¦ Net fonnt Zonen mellen
+Les étapes, dans l’ordre ¦ D’Etappen, an der Reiefolleg
+Détail (dans la bulle) ¦ Detail (an der Bull)
+La carte ¦ D’Kaart
+Montre toute la vie (fixe) ¦ Weist dat ganzt Liewen (fest)
+Couleur du chemin ¦ Faarf vum Wee
+Oui (sans se chevaucher) ¦ Jo (ouni sech ze iwwerlappen)
+Les personnes (parent → enfant) ¦ D’Persounen (Elterendeel → Kand)
+Parent (vide = l’ancêtre) ¦ Elterendeel (eidel = de Virfahr)
+Le chiffre (ou la somme) ¦ D’Zuel (oder d’Zomm)
+Une par génération ¦ Eng pro Generatioun
+Hauteur d’une génération ¦ Héicht vun enger Generatioun
+Dans les cases ¦ An den Zellen
+Ordre des enfants ¦ Reiefolleg vun de Kanner
+Les plus grandes familles d’abord ¦ Déi gréisste Familljen als éischt
+Traits blancs entre les cases ¦ Wäiss Stricher tëscht den Zellen
+Traits blancs entre les parts ¦ Wäiss Stricher tëscht den Deeler
+Seulement les prénoms transmis ¦ Nëmmen déi weiderginn Virnimm
+Aussi les filleuls au prénom différent ¦ Och d’Patekanner mat engem anere Virnumm
+Hauteur d’une ligne ¦ Héicht vun enger Linn
+Noms sous les ronds ¦ Nimm ënner de Kreeser
+Quand il y a la place ¦ Wann et Plaz huet
+Les noms ¦ D’Nimm
+Qui a connu qui dans la famille ¦ Wien huet wien an der Famill kannt
+Autres métiers ¦ Aner Beruffer
+Métier différent ¦ Anere Beruff
+Même lieu ¦ Selwecht Plaz
+Tout près ¦ Ganz no
+Ancêtres possibles (2, 4, 8…) ¦ Méiglech Virfahren (2, 4, 8…)
+Places trouvées ¦ Fonnte Plazen
+Carême et Avent ¦ Faaschtenzäit an Advent
+Si tout était égal ¦ Wann alles gläich wier
+Garçon ¦ Jong
+Autres lieux ¦ Aner Plazen
+Prendre dans ma base ¦ Aus menger Datebank huelen
+Personnes comptées ¦ Gezielt Persounen
+🤝 Les vies autour d’une personne ¦ 🤝 D’Liewen ronderëm eng Persoun
+Une courbe par ¦ Eng Kurv pro
+Une seule courbe ¦ Eng eenzeg Kurv
+Lignées ¦ Lignéeën
+Père → fils (lignées d’hommes) ¦ Papp → Jong (Männerlignéeën)
+Rayon des mariages ¦ Radius vun de Bestietnesser
+🧮 L’ascendance d’une personne ¦ 🧮 D’Virfahre vun enger Persoun
+De (année) ¦ Vun (Joer)
+Quelles mères ¦ Wéi eng Mammen
+Une seule mère ¦ Eng eenzeg Mamm
+Espacement des naissances ¦ Ofstand tëscht de Gebuerten
+Quelles personnes ¦ Wéi eng Persounen
+Générations d’ancêtres ¦ Generatioune vu Virfahren
+Début (année, vide = auto) ¦ Ufank (Joer, eidel = automatesch)
+Fin (année, vide = auto) ¦ Enn (Joer, eidel = automatesch)
+Les personnes (une ligne chacune) ¦ D’Persounen (eng Linn fir all eng)
+Ordre des groupes ¦ Reiefolleg vun de Gruppen
+Les plus nombreux d’abord ¦ Déi zuelräichst als éischt
+Couleur des bandes ¦ Faarf vun de Bänner
+Cacher les métiers inconnus ¦ Onbekannt Beruffer verstoppen
+Les couples ¦ D’Koppelen
+Année du mariage ¦ Joer vum Bestietnes
+Par siècle du mariage ¦ No Joerhonnert vum Bestietnes
+Selon la distance ¦ No der Distanz
+Où allait-on chercher son conjoint ? ¦ Wou huet ee säi Partner gesicht?
+Montrer les ancêtres possibles ¦ Déi méiglech Virfahre weisen
+Mon implexe, génération par génération ¦ Mäin Implex, Generatioun fir Generatioun
+En % du total ¦ A % vum Total
+Les années ¦ D’Joren
+Ordre des mères ¦ Reiefolleg vun de Mammen
+Le plus d’enfants d’abord ¦ Déi meeschte Kanner als éischt
+Chargement des personnes… ¦ Persoune gi gelueden…
+Aucune fiche trouvée. ¦ Keng Fiche fonnt.
+Frères et sœurs ¦ Bridder a Schwësteren
+Plier cette branche ¦ Dësen Zweig zesummeklappen

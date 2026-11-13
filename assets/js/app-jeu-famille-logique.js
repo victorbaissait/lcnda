@@ -5,6 +5,8 @@
  */
 (function (root) {
     'use strict';
+    // 🌐 la traduction (docs/I18N.md) ; dans Node : le français, variables remplacées
+    const i18n = (s, v) => { const I = typeof window !== 'undefined' && window.LCNDA_I18N; return I ? I.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s); };
 
     /* ═════ Hasard à graine (même graine = même partie) ═════ */
     function rng(seed) {
@@ -39,7 +41,7 @@
         if (o.scope === 'people') keep = new Set((o.ids || []).map(Number));
         const out = [];
         persons.forEach(p => {
-            if (!p || p.living || p.priv) return;
+            if (!p || p.living || p.priv || p.mem) return; // mem : déporté(e) ou fusillé(e), jamais dans un jeu
             const n = Number(sosa[p.id]) || 0;
             if (o.scope === 'sosa' && !n) return;
             if (o.scope === 'gen' && sosaGen(n) !== Number(o.gen)) return;
@@ -64,25 +66,25 @@
      */
     function quizQuestions(cands) {
         const qs = [], add = (id, text, test, cat) => { let yes = 0, no = 0; cands.forEach(p => { const r = test(p); if (r === true) yes++; else if (r === false) no++; }); if (yes && no) qs.push({id, text, test, cat, yes, no}); };
-        add('g:f', 'Est-ce une femme ?', p => (p.g === 'f' ? true : p.g === 'm' ? false : null), 'Qui');
-        add('photo', 'A-t-on son portrait (une photo) ?', p => !!p.photo, 'Qui');
+        add('g:f', i18n('Est-ce une femme ?'), p => (p.g === 'f' ? true : p.g === 'm' ? false : null), 'Qui');
+        add('photo', i18n('A-t-on son portrait (une photo) ?'), p => !!p.photo, 'Qui');
         const years = [...new Set(cands.map(p => p.by).filter(Boolean))].sort((a, b) => a - b);
-        [1650, 1700, 1750, 1800, 1825, 1850, 1875, 1900, 1925].forEach(y => { if (years.length && years[0] < y && years[years.length - 1] >= y) add(`by<${y}`, `Cette personne est-elle née avant ${y} ?`, p => (p.by ? p.by < y : null), 'Quand'); });
-        [40, 60, 80].forEach(a => add(`age>${a}`, `A-t-elle vécu plus de ${a} ans ?`, p => (p.by && p.dy ? p.dy - p.by > a : null), 'Quand'));
+        [1650, 1700, 1750, 1800, 1825, 1850, 1875, 1900, 1925].forEach(y => { if (years.length && years[0] < y && years[years.length - 1] >= y) add(`by<${y}`, i18n('Cette personne est-elle née avant {year} ?', {year: String(y)}), p => (p.by ? p.by < y : null), 'Quand'); });
+        [40, 60, 80].forEach(a => add(`age>${a}`, i18n('A-t-elle vécu plus de {n} ans ?', {n: a}), p => (p.by && p.dy ? p.dy - p.by > a : null), 'Quand'));
         const towns = new Map(); cands.forEach(p => { if (p.btown) towns.set(p.btown, (towns.get(p.btown) || 0) + 1); });
-        [...towns.keys()].sort((a, b) => a.localeCompare(b, 'fr')).forEach(t => add(`bt:${t}`, `Est-elle née à ${t} ?`, p => (p.btown ? p.btown === t : null), 'Où'));
+        [...towns.keys()].sort((a, b) => a.localeCompare(b, 'fr')).forEach(t => add(`bt:${t}`, i18n('Est-elle née à {town} ?', {town: t}), p => (p.btown ? p.btown === t : null), 'Où'));
         const dtowns = new Set(cands.map(p => p.dtown).filter(Boolean));
-        [...dtowns].sort((a, b) => a.localeCompare(b, 'fr')).forEach(t => add(`dt:${t}`, `Est-elle morte à ${t} ?`, p => (p.dtown ? p.dtown === t : null), 'Où'));
+        [...dtowns].sort((a, b) => a.localeCompare(b, 'fr')).forEach(t => add(`dt:${t}`, i18n('Est-elle morte à {town} ?', {town: t}), p => (p.dtown ? p.dtown === t : null), 'Où'));
         const jobs = new Map(); cands.forEach(p => { const k = jobKey(p.job); if (k) jobs.set(k, p.job.trim()); });
-        [...jobs.entries()].sort((a, b) => a[0].localeCompare(b[0], 'fr')).forEach(([k, label]) => add(`job:${k}`, `Était-elle ${label.toLocaleLowerCase('fr-FR')} ?`, p => (p.job ? jobKey(p.job) === k : null), 'Métier'));
-        add('side:pere', 'Est-ce du côté de ton père ?', p => (p.side ? p.side === 'pere' : null), 'Famille');
+        [...jobs.entries()].sort((a, b) => a[0].localeCompare(b[0], 'fr')).forEach(([k, label]) => add(`job:${k}`, i18n('Était-elle {job} ?', {job: label.toLocaleLowerCase('fr-FR')}), p => (p.job ? jobKey(p.job) === k : null), 'Métier'));
+        add('side:pere', i18n('Est-ce du côté de ton père ?'), p => (p.side ? p.side === 'pere' : null), 'Famille');
         const gens = [...new Set(cands.map(p => p.gen).filter(g => g > 0))].sort((a, b) => a - b);
-        gens.forEach(g => add(`gen:${g}`, `Est-ce ${genLabel(g)} ?`, p => (p.gen > 0 ? p.gen === g : null), 'Famille'));
+        gens.forEach(g => add(`gen:${g}`, (g === 1 ? i18n('Est-ce un parent ?') : g === 2 ? i18n('Est-ce un grand-parent ?') : g === 3 ? i18n('Est-ce un arrière-grand-parent ?') : i18n('Est-ce un ancêtre de la génération {n} ?', {n: g})), p => (p.gen > 0 ? p.gen === g : null), 'Famille'));
         const letters = [...new Set(cands.map(firstLetter).filter(Boolean))].sort();
-        letters.forEach(l => add(`l:${l}`, `Son nom commence-t-il par ${l} ?`, p => (firstLetter(p) ? firstLetter(p) === l : null), 'Nom'));
+        letters.forEach(l => add(`l:${l}`, i18n('Son nom commence-t-il par {letter} ?', {letter: l}), p => (firstLetter(p) ? firstLetter(p) === l : null), 'Nom'));
         return qs;
     }
-    function genLabel(g) { return g === 1 ? 'un parent' : g === 2 ? 'un grand-parent' : g === 3 ? 'un arrière-grand-parent' : `un ancêtre de la génération ${g}`; }
+    function genLabel(g) { return g === 1 ? i18n('un parent') : g === 2 ? i18n('un grand-parent') : g === 3 ? i18n('un arrière-grand-parent') : i18n('un ancêtre de la génération {n}', {n: g}); }
     /** la réponse pour la personne cachée : 'oui', 'non' ou 'inconnu' */
     function quizAnswer(q, secret) { const r = q.test(secret); return r === true ? 'oui' : r === false ? 'non' : 'inconnu'; }
     /** les candidats encore possibles après les réponses déjà données */
@@ -130,11 +132,11 @@
     function timelineEvents(data, people, {history = false, kinds = ['naissance', 'deces', 'mariage']} = {}) {
         const ok = new Set(people.map(p => p.id)), byId = new Map(people.map(p => [p.id, p])), out = [];
         people.forEach(p => {
-            if (kinds.includes('naissance') && p.bdate?.y) out.push({id: `b${p.id}`, kind: 'naissance', icon: '👶', text: `Naissance de ${p.name}`, where: p.btown, date: dkey(p.bdate), pid: p.id});
-            if (kinds.includes('deces') && p.ddate?.y) out.push({id: `d${p.id}`, kind: 'deces', icon: '✝', text: `Décès de ${p.name}`, where: p.dtown, date: dkey(p.ddate), pid: p.id});
+            if (kinds.includes('naissance') && p.bdate?.y) out.push({id: `b${p.id}`, kind: 'naissance', icon: '👶', text: i18n('Naissance de {name}', {name: p.name}), where: p.btown, date: dkey(p.bdate), pid: p.id});
+            if (kinds.includes('deces') && p.ddate?.y) out.push({id: `d${p.id}`, kind: 'deces', icon: '✝', text: i18n('Décès de {name}', {name: p.name}), where: p.dtown, date: dkey(p.ddate), pid: p.id});
         });
-        if (kinds.includes('mariage')) (data?.families || []).forEach(f => { if (!f.marr?.date?.y || !(ok.has(f.a) || ok.has(f.b))) return; const a = byId.get(f.a), b = byId.get(f.b); if ((f.a && !a) || (f.b && !b)) return; out.push({id: `m${f.id}`, kind: 'mariage', icon: '💍', text: `Mariage de ${[a, b].filter(Boolean).map(x => x.name).join(' et ')}`, where: townOf(f.marr.place), date: dkey(f.marr.date), pid: (a || b).id}); });
-        if (history) HISTORY.forEach(([y, t], i) => out.push({id: `h${i}`, kind: 'histoire', icon: '📜', text: t, where: '', date: {y, m: 0, d: 0, about: false}}));
+        if (kinds.includes('mariage')) (data?.families || []).forEach(f => { if (!f.marr?.date?.y || !(ok.has(f.a) || ok.has(f.b))) return; const a = byId.get(f.a), b = byId.get(f.b); if ((f.a && !a) || (f.b && !b)) return; out.push({id: `m${f.id}`, kind: 'mariage', icon: '💍', text: a && b ? i18n('Mariage de {a} et {b}', {a: a.name, b: b.name}) : i18n('Mariage de {name}', {name: (a || b).name}), where: townOf(f.marr.place), date: dkey(f.marr.date), pid: (a || b).id}); });
+        if (history) HISTORY.forEach(([y, t], i) => out.push({id: `h${i}`, kind: 'histoire', icon: '📜', text: i18n(t), where: '', date: {y, m: 0, d: 0, about: false}}));
         return out;
     }
     /** n événements au hasard, au moins `gap` années entre deux d'entre eux */
@@ -147,7 +149,9 @@
     function timelineFits(line, card, at) { const prev = line[at - 1], next = line[at]; return (!prev || cmpDate(prev.date, card.date) <= 0) && (!next || cmpDate(card.date, next.date) <= 0); }
     /** la vraie place (la première qui convient) */
     function timelinePlace(line, card) { for (let i = 0; i <= line.length; i++) if (timelineFits(line, card, i)) return i; return line.length; }
-    const dateText = d => { const M = ['', 'janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.']; return `${d.about ? '≈ ' : ''}${d.d && d.m ? d.d + ' ' : ''}${d.m ? M[d.m] + ' ' : ''}${d.y}`; };
+    const dateText = d => { const M = ['', 'janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'], I = typeof window !== 'undefined' && window.LCNDA_I18N;
+        const mon = m => { if (I && I.lang !== 'fr') { try { return new Date(2000, m - 1, 1).toLocaleDateString(I.locale(), {month: 'short'}); } catch (_) {} } return M[m]; }; // le mois dans la langue choisie
+        return `${d.about ? '≈ ' : ''}${d.d && d.m ? d.d + ' ' : ''}${d.m ? mon(d.m) + ' ' : ''}${d.y}`; };
 
     /* ═════ 4. Morpion ═════ */
     const DIRS = [[0, 1], [1, 0], [1, 1], [1, -1]];

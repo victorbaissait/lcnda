@@ -1,0 +1,1565 @@
+fr ¦ lb
+Espace de travail « {name} » appliqué. ¦ Aarbechtsberäich „{name}“ ugewannt.
+Réglages « {name} » importés : « Appliquer » pour les utiliser. ¦ Astellungen „{name}“ importéiert: „Uwenden“, fir se ze benotzen.
+{layer} (avant / après) ¦ {layer} (virdrun / duerno)
+Avant / après — {name} ¦ Virdrun / duerno — {name}
+Modèle des visages : {what} ¦ Gesiichtsmodell: {what}
+Portrait de {name} (photo d’identité) ¦ Portrait vun {name} (Passfoto)
+Portrait (photo d’identité) ¦ Portrait (Passfoto)
+Fiche {num} ¦ Fiche {num}
+⚠️ visage non trouvé sur « {name} » : cadrage au centre, à vérifier (ou identifie le visage dans la visionneuse) ¦ ⚠️ kee Gesiicht op „{name}“ fonnt: Ausschnëtt an der Mëtt, ze kontrolléieren (oder identifizéier d’Gesiicht am Bildbetruechter)
+={n} portraits prêts : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ {n} Portrait fäerdeg: hëll den Haken ewech, wann et net passt, dann „Als Portraite benotzen“.|{n} Portraite fäerdeg: hëll den Haken bei deenen ewech, déi net passen, dann „Als Portraite benotzen“.
+={n} portrait prêt : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ {n} Portrait fäerdeg: hëll den Haken ewech, wann et net passt, dann „Als Portraite benotzen“.|{n} Portraite fäerdeg: hëll den Haken bei deenen ewech, déi net passen, dann „Als Portraite benotzen“.
+Aucun visage trouvé tout seul. ¦ Kee Gesiicht automatesch fonnt.
+={n} autres sont cadrés au centre : coche-les seulement s’ils vont. ¦ {n} anert ass an der Mëtt ausgeschnidden: kräiz et nëmmen un, wann et passt.|{n} aner sinn an der Mëtt ausgeschnidden: kräiz se nëmmen un, wa se passen.
+={n} autre est cadré au centre : coche-le seulement s’il va. ¦ {n} anert ass an der Mëtt ausgeschnidden: kräiz et nëmmen un, wann et passt.|{n} aner sinn an der Mëtt ausgeschnidden: kräiz se nëmmen un, wa se passen.
+Calque {num} ¦ Eben {num}
+Groupe {num} ¦ Grupp {num}
+calque|Réglages ¦ Astellungen
+Masque d’écrêtage : ne touche que « {name} » juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Clipping-Mask: wierkt nëmmen op „{name}“ direkt drënner (⌥ Alt + Klick tëscht zwou Ebenen am Photoshop)
+Masque d’écrêtage : ne touche que l’élément juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Clipping-Mask: wierkt nëmmen op d’Element direkt drënner (⌥ Alt + Klick tëscht zwou Ebenen am Photoshop)
+seulement sur « {name} » ¦ nëmmen op „{name}“
+seulement sur ce qui est juste dessous ¦ nëmmen op dat, wat direkt drënner ass
+touche tout ce qui est dessous dans « {name} » ¦ wierkt op alles, wat an „{name}“ drënner ass
+réglages, {n} corrections ¦ Astellungen, {n} Korrekturen
+réglages, {n} correction ¦ Astellungen, {n} Korrektur
+« {name} » mis dans un groupe ¦ „{name}“ an eng Grupp gesat
+{layer} montré ¦ {layer} gewisen
+{layer} masqué ¦ {layer} verstoppt
+Masque qui cache la sélection ajouté à {name} ¦ Mask, déi d’Auswiel verstoppt, bei {name} derbäigesat
+Masque qui cache tout ajouté à {name} ¦ Mask, déi alles verstoppt, bei {name} derbäigesat
+Masque ajouté à {name} ¦ Mask bei {name} derbäigesat
+Masque de {name} désactivé ¦ Mask vun {name} ausgeschalt
+Masque de {name} réactivé ¦ Mask vun {name} nees ageschalt
+Masque de {name} inversé ¦ Mask vun {name} ëmgedréint
+Masque de {name} retiré ¦ Mask vun {name} ewechgeholl
+« {name} » à sa taille d’origine ¦ „{name}“ op senger Originalgréisst
+✨ Filtre sur « {name} » ¦ ✨ Filter op „{name}“
+« {name} » pixellisé ¦ „{name}“ gerastert
+« {name} » pixellisé : figé à sa taille actuelle (l’agrandir le rendra flou) ¦ „{name}“ gerastert: op senger aktueller Gréisst fixéiert (wann s de et vergréisserts, gëtt et onschaarf)
+Groupe « {name} » supprimé (son contenu reste) ¦ Grupp „{name}“ geläscht (hiren Inhalt bleift)
+{layer} supprimé ¦ {layer} geläscht
+« {name} » retiré des calques ¦ „{name}“ aus den Ebenen ewechgeholl
+Calque « {name} » supprimé avec ce qui est dessus ¦ Eben „{name}“ mat deem, wat drop ass, geläscht
+{layer} dupliquée ¦ {layer} duplizéiert
+{layer} dupliqué ¦ {layer} duplizéiert
+{layer} vidé ¦ {layer} eidel gemaach
+{layer} déplacé ¦ {layer} verréckelt
+Opacité de {name} : {n} % ¦ Opazitéit vun {name}: {n} %
+Fond de {name} : {n} % ¦ Fëllung vun {name}: {n} %
+Renommé « {name} » ¦ Ëmbenannt „{name}“
+Fusion de {name} : {what} ¦ Fusiounsmodus vun {name}: {what}
+« {name} » rangé dans « {group} » ¦ „{name}“ an „{group}“ geréckelt
+« {name} » sorti du groupe ¦ „{name}“ aus der Grupp eraus geholl
+« {name} » rangé tout en bas ¦ „{name}“ ganz no ënne geréckelt
+« {name} » rangé au-dessus de « {other} » ¦ „{name}“ iwwer „{other}“ geréckelt
+« {name} » rangé sous « {other} » ¦ „{name}“ ënner „{other}“ geréckelt
+🎚 Calque de réglage {name} ¦ 🎚 Astellungsebe {name}
+🖼 Réglages de <b>la photo</b> ¦ 🖼 Astellunge vun <b>der Foto</b>
+Sur le masque, le pinceau ⬜ montre (fait revenir ce qui était caché) — X pour changer ¦ Op der Mask weist de Pinsel ⬜ (bréngt zeréck, wat verstoppt war) — X fir ze wiesselen
+Sur le masque, le pinceau ⬛ cache — X pour changer ¦ Op der Mask verstoppt de Pinsel ⬛ — X fir ze wiesselen
+Texte choisi : « {text} » ¦ Gewielten Text: „{text}“
+Glyphe {what} ajouté ¦ Glyph {what} derbäigesat
+« {what} » copié : colle-le dans un texte (⌘V). ¦ „{what}“ kopéiert: setz et an en Text an (⌘V).
+calque « {name} » (seulement l’élément dessous) ¦ Ebe „{name}“ (nëmmen d’Element drënner)
+calque « {name} » ¦ Ebe „{name}“
+Gamme : {a}° / {b}° — {c}° \ {d}° (glisse les repères) ¦ Beräich: {a}° / {b}° — {c}° \ {d}° (zéi d’Markéierungen)
+Propriétés de « {name} » ¦ Eegeschafte vun „{name}“
+🎨 Teinte/Saturation sur « {name} » ¦ 🎨 Faarftoun/Sättegung op „{name}“
+Motif « {what} » : calque « {name} » ¦ Muster „{what}“: Ebe „{name}“
+Motif de « {name} » ¦ Muster vun „{name}“
+Motif « {what} » sur « {name} » ¦ Muster „{what}“ op „{name}“
+Motif « {what} » retiré de la bibliothèque (les calques qui l’utilisent le gardent) ¦ Muster „{what}“ aus der Bibliothéik ewechgeholl (d’Ebenen, déi et benotzen, behalen et)
+le calque « {name} » ¦ d’Ebe „{name}“
+🖌 {name} : peins sur un calque. ¦ 🖌 {name}: mol op enger Eben.
+Dégradé : {what} ¦ Faarfverlaf: {what}
+Dégradé {num} ¦ Faarfverlaf {num}
+Calque « {name} » ¦ Ebe „{name}“
+« {name} » · son masque (noir = caché, blanc = montré) : tout se voit tout de suite ¦ „{name}“ · seng Mask (schwaarz = verstoppt, wäiss = gewisen): du gesäis alles direkt
+« {name} » : tout se voit tout de suite ¦ „{name}“: du gesäis alles direkt
+le prochain dégradé que tu traceras ¦ dee nächste Faarfverlaf, deen s du zéies
+Préréglage « {name} » gardé : il reste dans cette liste. ¦ Virastellung „{name}“ behalen: se bleift an dëser Lëscht.
+Dégradé modifié sur « {name} » ¦ Faarfverlaf op „{name}“ geännert
+Texte « {text} » ¦ Text „{text}“
+Objet dynamique « {name} » : image remplacée ¦ Smart-Objet „{name}“: Bild ersat
+Image placée : « {name} » ¦ Bild placéiert: „{name}“
+Image placée, mais pas rangée dans les médias : {err} ¦ Bild placéiert, mä net an de Medien ofgeluecht: {err}
+Élément supprimé de « {name} » ¦ Element aus „{name}“ geläscht
+Image tournée sur « {name} » ¦ Bild op „{name}“ gedréint
+Image agrandie / réduite sur « {name} » ¦ Bild op „{name}“ vergréissert / verklengert
+Dégradé ajusté (masque) sur « {name} » ¦ Faarfverlaf (Mask) op „{name}“ ugepasst
+Dégradé ajusté sur « {name} » ¦ Faarfverlaf op „{name}“ ugepasst
+Élément déplacé sur « {name} » ¦ Element op „{name}“ verréckelt
+Masque en dégradé sur « {name} » ¦ Mask mat Faarfverlaf op „{name}“
+Dégradé {what} : « {name} » ¦ Faarfverlaf {what}: „{name}“
+{what} sur « {name} » ¦ {what} op „{name}“
+Masque : caché au pinceau ¦ Mask: mam Pinsel verstoppt
+Masque : montré au pinceau ¦ Mask: mam Pinsel gewisen
+Pli réparé ({n} touches) (calque ✨ Retouches) ¦ Fal reparéiert ({n} Stréchen) (Ebe ✨ Retuschen)
+Pli réparé (calque ✨ Retouches) ¦ Fal reparéiert (Ebe ✨ Retuschen)
+Recadrage enlevé ¦ Zouschnëtt ewechgeholl
+Recadrage et redressement ({a}°) ¦ Zouschnëtt a Riichten ({a}°)
+Recadrage ¦ Zouschnëtt
+Filtre « {what} » (refait) ¦ Filter „{what}“ (nach eng Kéier)
+« {what} » refait sur un nouveau calque. ¦ „{what}“ op enger neier Ebe widderholl.
+limité à la sélection ¦ op d’Auswiel limitéiert
+Filtre « {what} » ¦ Filter „{what}“
+Filtre « {what} » ajouté au calque ¦ Filter „{what}“ bei d’Ebe derbäigesat
+Filtre « {what} » réglé ¦ Filter „{what}“ agestallt
+Action « {name} » ¦ Aktioun „{name}“
+Action du {date} ¦ Aktioun vum {date}
+Action « {name} » enregistrée. ¦ Aktioun „{name}“ gespäichert.
+Action « {name} » importée : « Sur cette photo » ou « Sur plusieurs photos… ». ¦ Aktioun „{name}“ importéiert: „Op dëser Foto“ oder „Op e puer Fotoen…“.
+Action « {name} » supprimée ¦ Aktioun „{name}“ geläscht
+« {name} » sur plusieurs photos ¦ „{name}“ op e puer Fotoen
+Terminé : {n} photos sur {total}, nouvelle version affichée. ¦ Fäerdeg: {n} Fotoe vun {total}, nei Versioun ugewisen.
+Terminé : {n} photo sur {total}, nouvelle version affichée. ¦ Fäerdeg: {n} Foto vun {total}, nei Versioun ugewisen.
+Terminé : {n} photos sur {total}. ¦ Fäerdeg: {n} Fotoe vun {total}.
+Terminé : {n} photo sur {total}. ¦ Fäerdeg: {n} Foto vun {total}.
+{layer} (retouchée) ¦ {layer} (retuschéiert)
+« {name} » · comme le style de calque de Photoshop ¦ „{name}“ · wéi den Ebestil vum Photoshop
+Effets de {layer} enlevés ¦ Effekter vun {layer} ewechgeholl
+Effets de {layer} ¦ Effekter vun {layer}
+Les lignes fines, claires ou sombres, sont repérées en rouge (dans la sélection). Vérifie, puis « Réparer ces lignes ». ¦ Déi fein Linnen, hell oder däischter, gi rout markéiert (an der Auswiel). Kontrolléier, dann „Dës Linne reparéieren“.
+Les lignes fines, claires ou sombres, sont repérées en rouge. Vérifie, puis « Réparer ces lignes ». ¦ Déi fein Linnen, hell oder däischter, gi rout markéiert. Kontrolléier, dann „Dës Linne reparéieren“.
+{what} (en rouge sur la photo). ¦ {what} (rout op der Foto).
+Plis réparés ({what}) ¦ Fale reparéiert ({what})
+{what} : compare avec 👁 ou ◧ ; ↶ pour revenir. ¦ {what}: vergläich mat 👁 oder ◧; ↶ fir zeréckzegoen.
+={n} lignes repérées puis comblées ¦ {n} Linn fonnt an dann ausgefëllt|{n} Linne fonnt an dann ausgefëllt
+={n} ligne repérée puis comblée ¦ {n} Linn fonnt an dann ausgefëllt|{n} Linne fonnt an dann ausgefëllt
+=pli|{n} lignes ¦ {n} Linn|{n} Linnen
+=pli|{n} ligne ¦ {n} Linn|{n} Linnen
+=retouche|{n} étapes ¦ {n} Schrëtt|{n} Schrëtt
+=retouche|{n} étape ¦ {n} Schrëtt|{n} Schrëtt
+=ligne repérée ¦ fonnt Linn|fonnt Linnen
+=ligne réparée ¦ reparéiert Linn|reparéiert Linnen
+=calque de réglage ¦ Astellungsebe|Astellungsebenen
+=portrait mis à jour ¦ aktualiséiert Portrait|aktualiséiert Portraiten
+✨ Restauration en une fois ({what}) ¦ ✨ Restauratioun an engem Gang ({what})
+Restauration faite ({what}) : chaque étape est un calque « ✨ » (Calques) que tu peux cacher ou doser ; ↶ défait tout. ¦ Restauratioun gemaach ({what}): all Schrëtt ass eng „✨“-Ebe (Ebenen), déi s de verstoppe oder ofschwäche kanns; ↶ mécht alles réckgängeg.
+Portrait de la fiche « {name} » mis à jour (la photo recadrée est dans ses médias). ¦ Portrait vun der Fiche „{name}“ aktualiséiert (déi zougeschnidde Foto ass a senge Medien).
+Portrait de la fiche mis à jour (la photo recadrée est dans ses médias). ¦ Portrait vun der Fiche aktualiséiert (déi zougeschnidde Foto ass a senge Medien).
+{w} × {h} px (recadrée) ¦ {w} × {h} px (zougeschnidden)
+Horizon redressé ({a}°) ¦ Horizont riichtgezunn ({a}°)
+Redressée de {a}° : ajuste le cadre puis « ✓ Valider ». ¦ Ëm {a}° riichtgezunn: pass de Kader un, dann „✓ Bestätegen“.
+Photo redressée de {a}° (et recadrée pour ne pas voir les coins). ⌗ Recadrer pour ajuster. ¦ Foto ëm {a}° riichtgezunn (an zougeschnidden, fir d’Ecker net ze gesinn). ⌗ Zouschneiden, fir unzepassen.
+Redressée automatiquement ({a}°) ¦ Automatesch riichtgezunn ({a}°)
+Reflets retirés sur un calque à part (seulement dans la sélection : fais d’abord une sélection de la vitre pour limiter) : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Reflexer op enger separater Ebe ewechgeholl (nëmmen an der Auswiel: wiel fir d’éischt d’Fënsterglas aus, fir ze limitéieren): stell d’Stäerkt an d’Gréisst an; d’Opazitéit doséiert, 🎭 limitéiert, 👁 verstoppt. D’Foto gëtt net beréiert.
+Reflets retirés sur un calque à part : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Reflexer op enger separater Ebe ewechgeholl: stell d’Stäerkt an d’Gréisst an; d’Opazitéit doséiert, 🎭 limitéiert, 👁 verstoppt. D’Foto gëtt net beréiert.
+Colorisation dans un calque de réglage (limitée à la sélection) : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Faarfgestaltung an enger Astellungsebe (op d’Auswiel limitéiert): wiel d’Faarwen an d’Stäerkt; 🎭 fir se ze limitéieren, 👁 fir se ze verstoppen. D’Foto gëtt net beréiert.
+Colorisation dans un calque de réglage : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Faarfgestaltung an enger Astellungsebe: wiel d’Faarwen an d’Stäerkt; 🎭 fir se ze limitéieren, 👁 fir se ze verstoppen. D’Foto gëtt net beréiert.
+={n} taches enlevées, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ {n} Flack ewechgeholl, op der Ebe „{layer}“ (d’Foto gëtt net beréiert): verstopp se oder schwäch se of, fir ze vergläichen; ↶ wann et ze vill ass.|{n} Flecken ewechgeholl, op der Ebe „{layer}“ (d’Foto gëtt net beréiert): verstopp se oder schwäch se of, fir ze vergläichen; ↶ wann et ze vill ass.
+={n} tache enlevée, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ {n} Flack ewechgeholl, op der Ebe „{layer}“ (d’Foto gëtt net beréiert): verstopp se oder schwäch se of, fir ze vergläichen; ↶ wann et ze vill ass.|{n} Flecken ewechgeholl, op der Ebe „{layer}“ (d’Foto gëtt net beréiert): verstopp se oder schwäch se of, fir ze vergläichen; ↶ wann et ze vill ass.
+✨ Taches enlevées ¦ ✨ Flecken ewechgeholl
+Taches enlevées automatiquement ({n}) ¦ Flecken automatesch ewechgeholl ({n})
+Sélection remplie ({what}) ¦ Auswiel ausgefëllt ({what})
+Sélection effacée sur « {name} » ¦ Auswiel op „{name}“ geläscht
+Masque d’après la sélection ({name}) ¦ Mask no der Auswiel ({name})
+Préréglage « {name} » retiré ¦ Virastellung „{name}“ ewechgeholl
+Préréglage « {name} » ¦ Virastellung „{name}“
+Projet « {name} » (📂 Fichier → Ouvrir un projet pour le retrouver) ¦ Projet „{name}“ (📂 Fichier → Projet opmaachen, fir en erëmzefannen)
+Versions de la photo ({n}) ¦ Versioune vun der Foto ({n})
+{w} × {h} cm à {dpi} ppp ¦ {w} × {h} cm bei {dpi} dpi
+≈ {size} Mo en mémoire ¦ ≈ {size} MB am Späicher
+Taille de l’image : {w} × {h} px ¦ Bildgréisst: {w} × {h} px
+Zone de travail : {w} × {h} px ¦ Aarbechtsfläch: {w} × {h} px
+Zone de travail de départ ¦ Ursprénglech Aarbechtsfläch
+Cette image est très grande ({n} millions de points) : l’enregistrement peut être long, voire échouer. ¦ Dëst Bild ass ganz grouss ({n} Millioune Punkten): d’Späichere ka laang daueren, oder souguer net klappen.
+Enregistrer quand même ? ¦ Trotzdeem späicheren?
+Projet « {name} » rouvert ¦ Projet „{name}“ nees opgemaach
+Projet en partie illisible : {err} ¦ Projet deelweis net liesbar: {err}
+photo de départ introuvable ¦ Startfoto net fonnt
+Supprimer le projet « {name} » ? ¦ De Projet „{name}“ läschen?
+Quitter le plein écran ¦ Vollbild verloossen
+Plus de place pour enregistrer : supprime un espace de travail. ¦ Keng Plaz méi fir ze späicheren: läsch en Aarbechtsberäich.
+Ranger, montrer ou cacher les boutons et les options ¦ D’Knäppercher an d’Optiounen uerdnen, weisen oder verstoppen
+⚙️ Boutons et options ¦ ⚙️ Knäppercher an Optiounen
+Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). Gardé pour la prochaine fois. Comme les espaces de travail de Photoshop : enregistre une disposition sous un nom (« Restauration », « Montage rapide »…) et passe de l’une à l’autre. ¦ Kräiz un, wat gewise gëtt, uerdne mat ↑ ↓ (oder andeems de ⠿ zéis). Gëtt fir déi nächst Kéier behalen. Wéi d’Aarbechtsberäicher vum Photoshop: späicher eng Disposition ënner engem Numm („Restauratioun“, „Séier Montage“…) a wiessel vun där enger op déi aner.
+les boutons montrés, cachés et rangés ¦ déi gewisen, verstoppt an ageuerdent Knäppercher
+Boutons remis comme au départ (rouvre la fenêtre pour retrouver l’ordre de départ). ¦ Knäppercher zréckgesat wéi am Ufank (maach d’Fënster nees op, fir déi ursprénglech Reiefolleg erëmzefannen).
+Boutons rangés. ¦ Knäppercher ageuerdent.
+Hautes lumières ¦ Hellegkeeten
+Vibrance (couleurs ternes d’abord) ¦ Dynamik (fir d’éischt déi blass Faarwen)
+Teinte (tourner les couleurs) ¦ Faarftoun (d’Faarwen dréinen)
+Noir d’entrée ¦ Schwaarz vum Agang
+Blanc d’entrée ¦ Wäiss vum Agang
+Tons moyens (gamma ×100) ¦ Mëtteltéin (Gamma ×100)
+Noir de sortie ¦ Schwaarz vum Ausgang
+Blanc de sortie ¦ Wäiss vum Ausgang
+Naturelle : ciel, verdure, peau, habits (conseillé) ¦ Natierlech: Himmel, Gréngs, Haut, Kleeder (recommandéiert)
+Sépia chaud ¦ Waarme Sepia
+Autochrome (couleurs d’autrefois) ¦ Autochrome (Faarwe vu fréier)
+Portrait (peau rosée) ¦ Portrait (rosa Haut)
+Paysage : ciel en haut, terre en bas ¦ Landschaft: Himmel uewen, Buedem ënnen
+Saturation augmentée ¦ Sättegung erhéicht
+Saturation plus forte ¦ Méi staark Sättegung
+Rouges plus saturés ¦ Méi gesätegt Rouden
+Jaune intensifié ¦ Méi staarke Giel
+Ciel plus bleu ¦ Méi bloen Himmel
+Peau plus douce ¦ Méi mëll Haut
+Désaturer ¦ Entsätegen
+Verts d’automne ¦ Hierschtgréng
+Reflets en moins (vitre, verre, vernis) ¦ Manner Reflexer (Fënster, Glas, Lack)
+Taille des reflets (0 = moyenne) ¦ Gréisst vun de Reflexer (0 = mëttel)
+Poussière et rayures (automatique) ¦ Stëbs a Kratzer (automatesch)
+Réduire le bruit ¦ Rauschen reduzéieren
+Netteté ¦ Schäerft
+Clarté (contraste local) ¦ Kloerheet (lokale Kontrast)
+Flou de surface (garde les contours) ¦ Uewerflächenonschäerft (behält d’Konturen)
+Décentrement (maquette, tilt-shift) ¦ Tilt-Shift (Miniatur)
+Largeur de la bande ¦ Breet vum Band
+Flou de l’objectif (bokeh) ¦ Objektivonschäerft (Bokeh)
+Ajouter du bruit ¦ Rauschen derbäisetzen
+Poussière et rayures ¦ Stëbs a Kratzer
+Passe-haut (pour accentuer en Incrustation) ¦ Héichpass (fir am Modus Iwwerlagerung ze schäerfen)
+Esthétiques ¦ Stiliséieren
+Garder les couleurs (0 / 1) ¦ D’Faarwe behalen (0 / 1)
+Tracé des contours ¦ Konturen nozéien
+Contours lumineux (néon) ¦ Liichtend Konturen (Neon)
+Postérisation ¦ Tounwäertreduktioun
+Seuil (noir et blanc pur) ¦ Schwellwäert (purt Schwaarz a Wäiss)
+Vers la droite (1) / gauche (0) ¦ No riets (1) / lénks (0)
+Peinture à l’huile ¦ Uelegmolerei
+Taille de la touche ¦ Gréisst vum Pinselstréch
+Taille des taches ¦ Gréisst vun de Flecken
+Dessin au crayon ¦ Bläistëftzeechnung
+En couleur (0 / 1) ¦ A Faarf (0 / 1)
+Taille des carreaux ¦ Gréisst vun de Plättercher
+Demi-teinte (points d’imprimerie) ¦ Rasterpunkten (Dréckpunkten)
+Taille des cristaux ¦ Gréisst vun de Kristaller
+Éclairage (projecteur) ¦ Beliichtung (Spot)
+Lumière X ¦ Liicht X
+Lumière Y ¦ Liicht Y
+Lumière ambiante ¦ Ëmgéigendsliicht
+Halo de lumière (flare) ¦ Liichtrefle (Flare)
+À partir de (luminosité) ¦ Ab (Hellegkeet)
+Déformation ¦ Verzerrung
+Pincement / sphérisation ¦ Kniwwen / Kugelform
+Force (− sphère, + pincement) ¦ Stäerkt (− Kugel, + kniwwen)
+Longueur d’onde ¦ Wellelängt
+Ondulation (ronds dans l’eau) ¦ Wellen (Kreeser am Waasser)
+Écart des ronds ¦ Ofstand vun de Kreeser
+Coordonnées polaires ¦ Polarkoordinaten
+Rectangle → polaire (0) / l’inverse (1) ¦ Rechteck → polar (0) / ëmgedréint (1)
+Minimum (assombrit, épaissit le sombre) ¦ Minimum (mécht méi däischter, verdéckt dat Däischtert)
+Maximum (éclaircit, épaissit le clair) ¦ Maximum (mécht méi hell, verdéckt dat Hellt)
+Décalage (avec retour de l’autre côté) ¦ Verréckelung (kënnt op der anerer Säit erëm eran)
+Enlever les reflets (vitre) ¦ D’Reflexer ewechhuelen (Fënster)
+Reflets en moins ¦ Manner Reflexer
+Vieille photo ravivée ¦ Al Foto opgefrëscht
+Négatif → positif ¦ Negativ → Positiv
+🖌 Forme du panneau Formes ¦ 🖌 Form aus dem Panel Formen
+Avec empattement ¦ Mat Serifen
+Sans empattement ¦ Ouni Serifen
+Manuscrite ¦ Handschrëft
+Extra-fin ¦ Extra-dënn
+Ultra-léger ¦ Ultra-liicht
+Léger ¦ Liicht
+Médium ¦ Mëttel
+Demi-gras ¦ Hallef-fett
+Extra-gras ¦ Extra-fett
+Aligné à gauche ¦ Lénksbündeg
+Aligné à droite ¦ Rietsbündeg
+Justifié, dernière ligne à gauche ¦ Blocksaz, lescht Zeil lénks
+Justifié, dernière ligne centrée ¦ Blocksaz, lescht Zeil zentréiert
+Justifié, dernière ligne à droite ¦ Blocksaz, lescht Zeil riets
+Tout justifié ¦ Alles Blocksaz
+Ligatures et formes ¦ Ligaturen a Formen
+Unicode : Latin étendu A ¦ Unicode: Latäin erweidert A
+Unicode : Latin étendu B ¦ Unicode: Latäin erweidert B
+Unicode : hébreu ¦ Unicode: Hebräesch
+Unicode : exposants et indices ¦ Unicode: Exponenten an Indizes
+Unicode : flèches ¦ Unicode: Feiler
+Unicode : mathématiques ¦ Unicode: Mathematik
+Unicode : formes géométriques ¦ Unicode: geometresch Formen
+Unicode : latin étendu D (abréviations anciennes) ¦ Unicode: Latäin erweidert D (al Ofkierzungen)
+espace fine ¦ schmuelen Abstand
+tiret conditionnel (césure) ¦ bedéngte Bindestréch (Silbentrennung)
+mort au combat ¦ am Krich gefall
+et (abréviation ancienne) ¦ an (al Ofkierzung)
+s long ¦ laangt s
+Linéaire ¦ Linear
+Radial ¦ Radial
+Angle (conique) ¦ Wénkel (konesch)
+Réfléchi ¦ Gespigelt
+Losange ¦ Raut
+Premier plan → arrière-plan ¦ Virdergrond → Hannergrond
+Hachures croisées ¦ Kräizschraffur
+Écailles ¦ Schuppen
+Brin d’herbe ¦ Grashallem
+Éclaboussure ¦ Spritzer
+Ma forme (d’après une sélection) ¦ Meng Form (no enger Auswiel)
+Aérographe ¦ Airbrush
+Carré net ¦ Schaarf Quadrat
+Étoiles semées ¦ Verstreet Stären
+Éclaboussures ¦ Spritzer
+Superposition (Écran) ¦ Iwwerlagerung (Ecran)
+⌗ Cadrer et redresser ¦ ⌗ Ausschneiden a riichten
+Une photo scannée de travers, avec ses bords blancs ou abîmés : on la redresse, puis on garde ce qui compte. ¦ Eng Foto, déi schief gescannt ass, mat wäissen oder beschiedegte Ränner: mer riichten se, an dann behale mer dat, wat zielt.
+📐 Redresser tout seul ¦ 📐 Automatesch riichten
+⌗ Recadrer ¦ ⌗ Zouschneiden
+⧈ Photo prise de biais ¦ ⧈ Foto schréi geholl
+🎨 Couleurs passées, photo jaunie ¦ 🎨 Verbleechte Faarwen, giel ginn Foto
+Le temps jaunit, pâlit ou rosit les photos. « Enlever le jaunissement » remet chaque couleur à sa place ; « Raviver » redonne du contraste. ¦ D’Zäit mécht d’Fotoe giel, blass oder rosa. „De Gielstéch ewechhuelen“ setzt all Faarf erëm op hir Plaz; „Opfrëschen“ gëtt erëm Kontrast.
+🟨 Enlever le jaunissement ¦ 🟨 De Gielstéch ewechhuelen
+✨ Raviver une vieille photo ¦ ✨ Eng al Foto opfrëschen
+Réglage automatique ¦ Automatesch Astellung
+🧹 Poussières et petites taches ¦ 🧹 Stëbs a kleng Flecken
+Les points blancs ou noirs, les piqûres : l’app les cherche et les enlève une par une (avec le correcteur). Pour ne traiter qu’une partie, sélectionne-la d’abord. Ce qui reste : le correcteur 🩹 à la main. ¦ Déi wäiss oder schwaarz Punkten, d’Stockflecken: d’App sicht se an hëlt se een nom aneren ewech (mam Korrekturwierkzeug). Fir nëmmen en Deel ze behandelen, wiel en éischter aus. Wat bleift: de Korrekturwierkzeug 🩹 mat der Hand.
+Sensibilité ¦ Empfindlechkeet
+Taille maximale d’une tache ¦ Maximal Gréisst vun engem Flack
+🔍 Repérer et enlever les taches ¦ 🔍 D’Flecke fannen an ewechhuelen
+🩹 Correcteur à la main ¦ 🩹 Korrekturwierkzeug mat der Hand
+Filtre poussière et rayures ¦ Filter Stëbs a Kratzer
+🩹 Déchirures, plis, rayures ¦ 🩹 Rëss, Falen, Kratzer
+« Repérer les plis » trouve les lignes fines claires ou sombres et propose de les combler. À la main : le pinceau 🪡 Réparer — peins sur le pli, il est refait d’après ce qui l’entoure. Pour un morceau manquant (coin arraché), le tampon recopie une partie voisine. ¦ „Falen erkennen“ fënnt déi fein hell oder däischter Linnen a proposéiert, se auszefëllen. Mat der Hand: de Pinsel 🪡 Reparéieren — mol iwwer d’Fal, si gëtt no deem, wat ronderëm ass, nei gemaach. Fir e Stéck, dat feelt (ofgerappten Eck), kopéiert de Stempel en Deel dernieft.
+🔍 Repérer les plis et rayures ¦ 🔍 Falen a Kratzer erkennen
+🪡 Réparer au pinceau ¦ 🪡 Mam Pinsel reparéieren
+➰ Entourer une zone… ¦ ➰ E Beräich ëmkreesen…
+🌫️ Grain et bruit ¦ 🌫️ Kar a Rauschen
+Une photo granuleuse ou un tirage abîmé : on adoucit sans perdre les contours. ¦ Eng kärig Foto oder e beschiedegten Ofzuch: mer maachen et méi mëll, ouni d’Konturen ze verléieren.
+🙂 Netteté des visages ¦ 🙂 Méi schaarf Gesiichter
+Entoure un visage avec l’ellipse ◯, puis « Visage plus net » : il est débruité et accentué, seulement là (calque à part, que tu peux doser). ¦ Ëmkrees e Gesiicht mat der Ellips ◯, dann „Méi schaarf Gesiicht“: et gëtt entrauscht a geschäerft, nëmmen do (separat Eben, déi s de doséiere kanns).
+◯ Entourer le visage ¦ ◯ D’Gesiicht ëmkreesen
+✨ Visage plus net ¦ ✨ Méi schaarf Gesiicht
+Visage plus net ¦ Méi schaarf Gesiicht
+🎯 Sélectionner le sujet ¦ 🎯 D’Sujet auswielen
+🌈 Coloriser une photo en noir et blanc ¦ 🌈 Eng schwaarz-wäiss Foto faarweg maachen
+Tout seul (un dégradé de couleurs d’époque), ou à la main : choisis une couleur ci-dessous et peins doucement, la lumière de la photo est gardée. ¦ Automatesch (e Faarfverlaf mat Faarwe vun der Zäit), oder mat der Hand: wiel hei ënnen eng Faarf a mol lues, d’Liicht vun der Foto bleift erhalen.
+🎨 Coloriser tout seul ¦ 🎨 Automatesch faarweg maachen
+🖌 Coloriser au pinceau ¦ 🖌 Mam Pinsel faarweg maachen
+✅ Comparer et enregistrer ¦ ✅ Vergläichen a späicheren
+Garde appuyé « 👁 Avant / après » (sous la photo) pour comparer, ou « ◧ Rideau » pour glisser de l’un à l’autre. La photo restaurée devient une nouvelle version : l’original reste. ¦ Hal „👁 Virdrun / duerno“ (ënner der Foto) gedréckt, fir ze vergläichen, oder „◧ Rideau“, fir vun engem op dat anert ze zéien. Déi restauréiert Foto gëtt eng nei Versioun: d’Original bleift.
+💾 Enregistrer et afficher ¦ 💾 Späicheren a weisen
+Garder le travail pour plus tard ¦ D’Aarbecht fir méi spéit behalen
+Impossible d’ouvrir cette image. ¦ Dëst Bild kann net opgemaach ginn.
+Chaque étape est facultative et se défait (↶). Rien n’abîme l’original : la photo restaurée devient une nouvelle version. ¦ All Schrëtt ass fakultativ a léisst sech réckgängeg maachen (↶). Näischt beschiedegt d’Original: déi restauréiert Foto gëtt eng nei Versioun.
+Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup : tu vois chaque étape et tu choisis ¦ Entrauschen, Stëbs, Falen, Kontrast, Schäerft a Faarfgestaltung an engem Gang: du gesäis all Schrëtt a wiels
+✨ Restaurer en une fois ¦ ✨ An engem Gang restauréieren
+ou étape par étape : ¦ oder Schrëtt fir Schrëtt:
+Réparer ¦ Reparéieren
+🪡 Réparer ¦ 🪡 Reparéieren
+Déplacer la vue ¦ D’Usiicht verréckelen
+Réparer un pli ou une déchirure (R) : peins dessus, c’est refait d’après les alentours ¦ Eng Fal oder e Rëss reparéieren (R): mol driwwer, et gëtt no der Ëmgéigend nei gemaach
+Gomme (E) : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu) ¦ Gummi (E): läscht déi gewielten Eben; op der Foto verstoppt e se mat enger Mask (näischt geet verluer)
+Dégradé (G) : glisse pour le tracer ; sur un masque, il fond le calque ¦ Faarfverlaf (G): zéi, fir en ze zéien; op enger Mask bleecht en d’Eben aus
+Déplacer un élément d’un calque (V) ¦ En Element vun enger Eben verréckelen (V)
+Déplacer un élément d’un calque ¦ En Element vun enger Eben verréckelen
+Sélection rectangle (M) ¦ Rechteckauswiel (M)
+Sélection rectangle ¦ Rechteckauswiel
+Sélection ellipse (⇧M) ¦ Ellipsenauswiel (⇧M)
+Sélection ellipse ¦ Ellipsenauswiel
+Lasso : entourer à main levée (L) ¦ Lasso: fräihand ëmkreesen (L)
+Lasso : entourer à main levée ¦ Lasso: fräihand ëmkreesen
+Plume : sélection point par point (P) — double-clic ou Entrée pour fermer ¦ Fieder: Auswiel Punkt fir Punkt (P) — Duebelklick oder Entrée fir zouzemaachen
+Plume : sélection point par point — double-clic ou Entrée pour fermer ¦ Fieder: Auswiel Punkt fir Punkt — Duebelklick oder Entrée fir zouzemaachen
+Sélection automatique (baguette magique) (W) ¦ Automatesch Auswiel (Zauberstaf) (W)
+Sélection automatique (baguette magique) ¦ Automatesch Auswiel (Zauberstaf)
+Recadrer et redresser (C) ¦ Zouschneiden a riichten (C)
+Recadrer et redresser ¦ Zouschneiden a riichten
+Correcteur de taches (J) ¦ Flecken-Korrekturwierkzeug (J)
+Correcteur de taches ¦ Flecken-Korrekturwierkzeug
+🩹 Correcteur de taches ¦ 🩹 Flecken-Korrekturwierkzeug
+Réparer un pli ou une déchirure : peins dessus, c’est refait d’après les alentours ¦ Eng Fal oder e Rëss reparéieren: mol driwwer, et gëtt no der Ëmgéigend nei gemaach
+Tampon : un endroit, ou une zone sélectionnée (S) ¦ Stempel: eng Plaz, oder e gewielte Beräich (S)
+Tampon : un endroit, ou une zone sélectionnée ¦ Stempel: eng Plaz, oder e gewielte Beräich
+Pinceau (B) ¦ Pinsel (B)
+Gomme : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu) ¦ Gummi: läscht déi gewielten Eben; op der Foto verstoppt e se mat enger Mask (näischt geet verluer)
+Formes : rectangle, ellipse, ligne, flèche (U) ¦ Formen: Rechteck, Ellips, Linn, Feil (U)
+Formes : rectangle, ellipse, ligne, flèche ¦ Formen: Rechteck, Ellips, Linn, Feil
+Dégradé : glisse pour le tracer ; sur un masque, il fond le calque ¦ Faarfverlaf: zéi, fir en ze zéien; op enger Mask bleecht en d’Eben aus
+Texte (T) ¦ Text (T)
+Main, ou barre d’espace (H) ¦ Hand, oder Espacetast (H)
+Main, ou barre d’espace ¦ Hand, oder Espacetast
+Zoom (Z) — ⌥ pour reculer ¦ Zoom (Z) — ⌥ fir erauszezoomen
+Zoom — ⌥ pour reculer ¦ Zoom — ⌥ fir erauszezoomen
+💾 Enregistrer le projet (pour continuer plus tard) ¦ 💾 De Projet späicheren (fir méi spéit weiderzemaachen)
+📂 Ouvrir un projet… ¦ 📂 E Projet opmaachen…
+Enregistrer et afficher cette version ¦ Dës Versioun späicheren a weisen
+Enregistrer sans l’afficher ¦ Späicheren ouni ze weisen
+Copie séparée ¦ Separat Kopie
+ℹ️ Informations… ¦ ℹ️ Informatiounen…
+⤓ Exporter l’image (PNG, JPG, imprimer)… ¦ ⤓ D’Bild exportéieren (PNG, JPG, drécken)…
+⤓ Exporter l’avant / après… ¦ ⤓ D’Virdrun / duerno exportéieren…
+🗂 Exporter en PSD (avec les calques)… ¦ 🗂 Als PSD exportéieren (mat den Ebenen)…
+🗂 Importer les calques d’un PSD… ¦ 🗂 D’Ebene vun enger PSD importéieren…
+⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos… ¦ ⚡ Aktiounen: gespäichert Astellungen, fir op e puer Fotoen ze widderhuelen…
+⚡ Passer à la retouche rapide ¦ ⚡ Op d’séier Retusch wiesselen
+🕘 Historique ¦ 🕘 Historique
+🎚 Réglages, niveaux et courbe ¦ 🎚 Astellungen, Niveauen a Kurv
+🎨 Teinte/Saturation… ¦ 🎨 Faarftoun/Sättegung…
+⌗ Recadrer et redresser ¦ ⌗ Zouschneiden a riichten
+📐 Redresser automatiquement ¦ 📐 Automatesch riichten
+Annuler le recadrage ¦ Den Zouschnëtt réckgängeg maachen
+⧈ Redresser la perspective (photo prise de biais)… ¦ ⧈ D’Perspektiv riichten (Foto schréi geholl)…
+Enlever la perspective ¦ D’Perspektiv ewechhuelen
+📏 Taille de l’image… ¦ 📏 Bildgréisst…
+⬚ Taille de la zone de travail… ¦ ⬚ Gréisst vun der Aarbechtsfläch…
+🔄 Rotation de l’image ¦ 🔄 Rotatioun vum Bild
+↻ 90° horaire ¦ ↻ 90° mat der Auer
+↺ 90° antihoraire ¦ ↺ 90° géint d’Auer
+Angle… ¦ Wénkel…
+📐 Redresser l’horizon (tracer une ligne)… ¦ 📐 Den Horizont riichten (eng Linn zéien)…
+⇆ Symétrie horizontale de l’image ¦ ⇆ Bild horizontal spigelen
+⇅ Symétrie verticale de l’image ¦ ⇅ Bild vertikal spigelen
+✨ Restaurer en une fois… ¦ ✨ An engem Gang restauréieren…
+🧭 Restaurer une vieille photo (pas à pas) ¦ 🧭 Eng al Foto restauréieren (Schrëtt fir Schrëtt)
+🔍 Repérer les plis et rayures… ¦ 🔍 Falen a Kratzer erkennen…
+🪡 Réparer au pinceau (plis, déchirures) ¦ 🪡 Mam Pinsel reparéieren (Falen, Rëss)
+🧹 Poussière et rayures (Filtres) ¦ 🧹 Stëbs a Kratzer (Filteren)
+🪟 Enlever les reflets (vitre) : calque à part ¦ 🪟 D’Reflexer ewechhuelen (Fënster): separat Eben
+🎨 Coloriser : calque de réglage (dégradé) ¦ 🎨 Faarweg maachen: Astellungsebe (Faarfverlaf)
+🖌 Coloriser au pinceau : calque « Couleur » ¦ 🖌 Mam Pinsel faarweg maachen: Eben „Faarf“
+🪪 Recadrer en photo d’identité… ¦ 🪪 Als Passfoto zouschneiden…
+🪪 Portraits de plusieurs fiches… ¦ 🪪 Portraite vu méi Fichen…
+💧 Fluidité (déformer au pinceau)… ¦ 💧 Verflëssegen (mam Pinsel verzerren)…
+🪄 Gomme magique (fond uni → transparent)… ¦ 🪄 Zaubergummi (eenfaarwegen Hannergrond → transparent)…
+✨ Affiner le bord du masque (cheveux, contours)… ¦ ✨ De Rand vun der Mask verfeineren (Hoer, Konturen)…
+☁️ Remplacer le ciel… ¦ ☁️ Den Himmel ersetzen…
+✂️ Détourer une personne (fond transparent, flou, uni)… ¦ ✂️ Eng Persoun fräistellen (transparenten, onschaarfen oder eenfaarwegen Hannergrond)…
+🔍 Agrandir ×2 / ×4… ¦ 🔍 Vergréisseren ×2 / ×4…
+🧩 Panorama : assembler avec d’autres photos… ¦ 🧩 Panorama: mat anere Fotoen zesummesetzen…
+Calque ¦ Eben
+＋ Nouveau calque ¦ ＋ Nei Eben
+📁 Nouveau groupe ¦ 📁 Nei Grupp
+Grouper le calque choisi ¦ Déi gewielten Eben gruppéieren
+🎚 Nouveau calque de réglage ¦ 🎚 Nei Astellungsebe
+🎨 Nouveau réglage Teinte/Saturation ¦ 🎨 Nei Astellung Faarftoun/Sättegung
+Nouveau réglage Teinte/Saturation ¦ Nei Astellung Faarftoun/Sättegung
+🖼️ Placer une image… ¦ 🖼️ E Bild placéieren…
+▦ Nouveau calque de dégradé… ¦ ▦ Nei Faarfverlafsebe…
+▩ Nouveau calque de motif… ¦ ▩ Nei Musterebe…
+▩ Créer un motif… ¦ ▩ E Muster erstellen…
+▩ Créer un motif ¦ ▩ E Muster erstellen
+＋ Créer un motif… ¦ ＋ E Muster erstellen…
+Copier la sélection sur un calque ¦ D’Auswiel op eng Eben kopéieren
+🎭 Ajouter un masque au calque choisi ¦ 🎭 Eng Mask op déi gewielten Eben derbäisetzen
+🎭 Masque qui cache tout (⌥ + clic sur 🎭) ¦ 🎭 Mask, déi alles verstoppt (⌥ + Klick op 🎭)
+Masque d’après la sélection ¦ Mask no der Auswiel
+Masque qui cache la sélection ¦ Mask, déi d’Auswiel verstoppt
+Inverser le masque ¦ D’Mask ëmdréinen
+Retirer le masque ¦ D’Mask ewechhuelen
+inverser le masque ¦ d’Mask ëmdréinen
+retirer le masque ¦ d’Mask ewechhuelen
+🗂 Calques ¦ 🗂 Ebenen
+🎯 Sélectionner le sujet (automatique) ¦ 🎯 D’Sujet auswielen (automatesch)
+✂️ Détourer une personne… ¦ ✂️ Eng Persoun fräistellen…
+Désélectionner ¦ Auswiel ophiewen
+Inverser ¦ Ëmdréinen
+Contour progressif… ¦ Weiche Rand…
+Contour progressif ¦ Weiche Rand
+Agrandir… ¦ Vergréisseren…
+Réduire… ¦ Verklengeren…
+Remplir avec la couleur ¦ Mat der Faarf ausfëllen
+Effacer (transparent) ¦ Läschen (transparent)
+Recadrer sur la sélection ¦ Op d’Auswiel zouschneiden
+Filtre ¦ Filter
+↻ Refaire le dernier filtre ¦ ↻ De leschte Filter widderhuelen
+✨ Filtres rapides et filtres du calque (panneau) ¦ ✨ Séier Filteren a Filtere vun der Eben (Panel)
+Enlever les filtres rapides ¦ Déi séier Filteren ewechhuelen
+Replier / ouvrir le panneau de droite ¦ De rietse Panel zouklappen / opklappen
+◧ Avant / après en rideau ¦ ◧ Virdrun / duerno als Rideau
+Toute l’image ¦ D’ganzt Bild
+Nom du projet de retouche ¦ Numm vum Retuschéierprojet
+Le nom du projet de retouche (tape pour le changer) ¦ Den Numm vum Retuschéierprojet (tipp, fir en z’änneren)
+Passer à la retouche rapide (celle de la version 0.5.0) : réglages, courbe, taches, tampon — moins de boutons ¦ Op d’séier Retusch wiesselen (déi vun der Versioun 0.5.0): Astellungen, Kurv, Flecken, Stempel — manner Knäppercher
+⚡ Rapide ¦ ⚡ Séier
+Exporter : l’image retouchée (PNG, JPG, imprimer) ou l’avant / après ¦ Exportéieren: dat retuschéiert Bild (PNG, JPG, drécken) oder d’Virdrun / duerno
+Enregistrer le projet : tout le travail (calques, masques, réglages…) pour le rouvrir et continuer ¦ De Projet späicheren: déi ganz Aarbecht (Ebenen, Masken, Astellungen…), fir en nees opzemaachen a weiderzemaachen
+🖼 L’image retouchée (PNG, JPG, imprimer)… ¦ 🖼 Dat retuschéiert Bild (PNG, JPG, drécken)…
+◧ Avant / après (côte à côte ou rideau)… ¦ ◧ Virdrun / duerno (nieftenee oder Rideau)…
+Dureté ¦ Häert
+Sorte de pinceau ¦ Zort Pinsel
+Couleurs rapides ¦ Séier Faarwen
+contour ¦ Kontur
+Contour du texte ¦ Kontur vum Text
+Couleur du contour ¦ Faarf vun der Kontur
+Épaisseur du contour ¦ Déckt vun der Kontur
+épaisseur ¦ Déckt
+ombre ¦ Schiet
+Ombre du texte ¦ Schiet vum Text
+Couleur de l’ombre ¦ Faarf vum Schiet
+Tampon : endroit à recopier, aligné ¦ Stempel: Plaz fir ze kopéieren, ausgeriicht
+🎯 Choisir l’endroit à recopier ¦ 🎯 D’Plaz fir ze kopéiere wielen
+Coché : l’endroit recopié suit le pinceau d’un trait à l’autre. Décoché : chaque trait repart du même endroit. ¦ Ugekräizt: déi kopéiert Plaz follegt dem Pinsel vun engem Stréch zum aneren. Net ugekräizt: all Stréch fänkt erëm op der selwechter Plaz un.
+aligné ¦ ausgeriicht
+Réparer : grain, repérer les plis ¦ Reparéieren: Kar, Falen erkennen
+Coché : un peu du grain de la photo autour est remis dans la zone réparée, pour qu’elle ne paraisse pas trop lisse. ¦ Ugekräizt: e bësse vum Kar vun der Foto ronderëm gëtt an de reparéierte Beräich zeréckgesat, fir datt en net ze glat ausgesäit.
+garder le grain ¦ de Kar behalen
+Trouver tout seul les lignes fines (plis, rayures) et proposer de les combler ¦ Déi fein Linnen (Falen, Kratzer) automatesch fannen a proposéieren, se auszefëllen
+🔍 Repérer les plis ¦ 🔍 Falen erkennen
+Texte gras ¦ Fetten Text
+Texte italique ¦ Kursiven Text
+Forme (rectangle, ellipse, flèche…) ¦ Form (Rechteck, Ellips, Feil…)
+Rectangle arrondi ¦ Ofgeronnt Rechteck
+Forme remplie ¦ Gefëllt Form
+remplie ¦ gefëllt
+Couleur de fond des formes ¦ Fëllfaarf vun de Formen
+Baguette : tolérance ¦ Zauberstaf: Toleranz
+Jusqu’où une couleur peut s’écarter de celle cliquée pour être prise : petit = la même teinte seulement, grand = des teintes voisines aussi. ¦ Wéi wäit eng Faarf vun där geklickter ofwäiche kann, fir matgeholl ze ginn: kleng = nëmmen dee selwechte Faarftoun, grouss = och ähnlech Faarftéin.
+Tolérance ¦ Toleranz
+Baguette : contiguë ¦ Zauberstaf: zesummenhänkend
+contiguë ¦ zesummenhänkend
+Sélectionner le sujet ¦ D’Sujet auswielen
+Le fond est reconnu sur les bords de la photo ; la tolérance règle jusqu’où il va ¦ Den Hannergrond gëtt un de Ränner vun der Foto erkannt; d’Toleranz stellt an, wéi wäit e geet
+🎯 Sujet ¦ 🎯 Sujet
+Actions de la sélection ¦ Aktioune vun der Auswiel
+⇧ ajouter · ⌥ enlever ¦ ⇧ derbäisetzen · ⌥ ewechhuelen
+→ Calque ¦ → Eben
+Remplir ¦ Ausfëllen
+Effacer ¦ Läschen
+Masque ¦ Mask
+Recadrer ¦ Zouschneiden
+Recadrage : proportions, redresser ¦ Zouschnëtt: Proportiounen, riichten
+Proportions ¦ Proportiounen
+Libres ¦ Fräi
+Celles de la photo ¦ Déi vun der Foto
+Carré 1:1 ¦ Quadrat 1:1
+A4 portrait ¦ A4 Héichformat
+Redresser ¦ Riichten
+Trouve l’angle des grandes lignes (horizon, murs, cadres) ¦ Fënnt de Wénkel vun de groussen Linnen (Horizont, Maueren, Kaderen)
+📐 Auto ¦ 📐 Auto
+✓ Valider ¦ ✓ Bestätegen
+Perspective ¦ Perspektiv
+Place les 4 coins sur les coins de ce qui doit devenir rectangulaire (la photo, le document, la façade). ¦ Setz déi 4 Ecker op d’Ecker vun deem, wat rechteckeg soll ginn (d’Foto, d’Dokument, d’Fassad).
+Coins aux bords ¦ Ecker un de Ränner
+Dégradé : couleurs, forme, options ¦ Faarfverlaf: Faarwen, Form, Optiounen
+Modifier le dégradé : couleurs, transparence, préréglages ¦ De Faarfverlaf änneren: Faarwen, Transparenz, Virastellungen
+Forme du dégradé ¦ Form vum Faarfverlaf
+Inverser le dégradé ¦ De Faarfverlaf ëmdréinen
+inverser ¦ ëmdréinen
+Tramage ¦ Dithering
+tramage ¦ Dithering
+Un très léger grain qui évite les « marches » visibles dans les dégradés doux. ¦ E ganz liichte Kar, deen siichtbar „Trapen“ a mëlle Faarfverleef verhënnert.
+Masque : cacher / montrer ¦ Mask: verstoppen / weisen
+⬛ cacher ¦ ⬛ verstoppen
+⬜ montrer ¦ ⬜ weisen
+Aide de l’outil ¦ Hëllef zum Wierkzeug
+Couleurs (premier plan et arrière-plan) ¦ Faarwen (Virdergrond an Hannergrond)
+Noir et blanc (D) ¦ Schwaarz a Wäiss (D)
+Couleurs par défaut : noir et blanc ¦ Standardfaarwen: Schwaarz a Wäiss
+Intervertir les deux couleurs (X) ¦ Déi zwou Faarwen tauschen (X)
+Intervertir les couleurs ¦ D’Faarwen tauschen
+Couleur d’arrière-plan (fond des formes) : clic pour la changer ¦ Hannergrondfaarf (Fëllung vun de Formen): Klick fir se z’änneren
+Couleur de premier plan (pinceau, texte, formes) : clic pour la changer ¦ Virdergrondfaarf (Pinsel, Text, Formen): Klick fir se z’änneren
+Replier le panneau (plus de place pour la photo) — Tab ¦ De Panel zouklappen (méi Plaz fir d’Foto) — Tab
+Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ) ¦ Zéi, fir de Panel méi breet oder méi schmuel ze maachen (Duebelklick: ursprénglech Gréisst)
+Onglets du panneau de droite ¦ Reitere vum rietse Panel
+Propriétés : Teinte/Saturation, masque, position et taille du calque choisi ¦ Eegeschaften: Faarftoun/Sättegung, Mask, Positioun a Gréisst vun der gewielter Eben
+ⓘ Propriétés ¦ ⓘ Eegeschaften
+Caractère : police, variante (graisse), taille, interligne, approche… ¦ Zeechen: Schrëft, Variant (Schrëftstäerkt), Gréisst, Zeilenofstand, Spatioun…
+🔤 Caractère ¦ 🔤 Zeechen
+Motifs : remplir d’un motif, créer les siens ¦ Muster: mat engem Muster ausfëllen, eegen Muster erstellen
+▩ Motifs ¦ ▩ Muster
+Motifs ¦ Muster
+Formes de pinceau : préréglages, pas, angle, dispersion, forme d’après une sélection ¦ Pinselformen: Virastellungen, Ofstand, Wénkel, Streeung, Form no enger Auswiel
+🖌 Formes ¦ 🖌 Formen
+Restaurer une vieille photo, pas à pas ¦ Eng al Foto restauréieren, Schrëtt fir Schrëtt
+🧭 Restaurer ¦ 🧭 Restauréieren
+Comme la saturation, mais les couleurs déjà vives bougent peu : les teintes ternes (peau, ciel pâle) se ravivent d’abord. ¦ Wéi d’Sättegung, mä d’Faarwen, déi scho kräfteg sinn, ännere sech wéineg: déi blass Faarftéin (Haut, hellen Himmel) liewen als éischt op.
+Éclaircit ou assombrit les tons moyens sans toucher au noir ni au blanc : au-dessus de 100, plus clair ; en dessous, plus sombre. ¦ Mécht d’Mëtteltéin méi hell oder méi däischter, ouni d’Schwaarz oder d’Wäiss ze beréieren: iwwer 100 méi hell; drënner méi däischter.
+Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou ⌫), ou le glisser hors du cadre. ¦ Klick op d’Kurv: e Punkt derbäisetzen · zéien: en verréckelen · fir en ewechzehuelen: e wielen an dann „De Punkt ewechhuelen“ (oder ⌫), oder en aus dem Kader zéien.
+Enlever le point ¦ De Punkt ewechhuelen
+🎨 Colorisation douce (photo en noir et blanc) ¦ 🎨 Mëll Faarfgestaltung (schwaarz-wäiss Foto)
+Mieux dans un calque de réglage (Image → Coloriser) : on le dose, on le masque, on l’enlève. Pour colorier à la main : Image → Coloriser au pinceau. ¦ Besser an enger Astellungsebe (Bild → Faarweg maachen): ee kann se doséieren, maskéieren, ewechhuelen. Fir mat der Hand faarweg ze maachen: Bild → Mam Pinsel faarweg maachen.
+Filtres rapides, après les réglages : sur la photo, ou dans un calque de réglage (sur tout ce qui est dessous, ou seulement le calque juste dessous). Les mêmes sur l’image enregistrée en pleine taille. ¦ Séier Filteren, no den Astellungen: op der Foto, oder an enger Astellungsebe (op allem, wat drënner ass, oder nëmmen op der Eben direkt drënner). Déi selwecht op dem Bild, dat a voller Gréisst gespäichert gëtt.
+Renforce le contraste des détails moyens (rides, plis d’un tissu, écriture) sans changer le contraste général. ¦ Verstäerkt de Kontrast vun de mëttlere Detailer (Falen an der Haut, Falen an engem Stoff, Handschrëft), ouni den allgemenge Kontrast z’änneren.
+Enlever les filtres ¦ D’Filteren ewechhuelen
+Variante : la graisse (Light, Regular, Bold, Black…) et l’italique ¦ Variant: d’Schrëftstäerkt (Light, Regular, Bold, Black…) an d’Kursiv
+Taille (en points de l’image) ¦ Gréisst (a Punkte vum Bild)
+Interligne (vide = automatique, 120 % de la taille) ¦ Zeilenofstand (eidel = automatesch, 120 % vun der Gréisst)
+Crénage : les paires de lettres rapprochées selon la police (Métrique) ou pas du tout (0) ¦ Kerning: d’Buschtawepueren no der Schrëft méi no beienee gesat (Metresch) oder guer net (0)
+Approche : l’espace entre toutes les lettres, en millièmes de la taille ¦ Spatioun: den Ofstand tëscht all de Buschtawen, an Dausendstel vun der Gréisst
+Échelle verticale ¦ Vertikal Skala
+Échelle horizontale ¦ Horizontal Skala
+Décalage vertical (au-dessus de la ligne de base si positif) ¦ Grondlinnverréckelung (iwwer der Grondlinn, wa positiv)
+Lissage des bords des lettres ¦ Glätte vun de Buschtawenränner
+Lissage ¦ Glätten
+Lissé ¦ Geglatt
+Aucun (bords nets, pixels) ¦ Keen (schaarf Ränner, Pixelen)
+Alignement du paragraphe ¦ Ausriichtung vum Paragraph
+Pour les prochains textes. Choisis un texte avec ➤ pour le changer. ¦ Fir déi nächst Texter. Wiel en Text mat ➤, fir en z’änneren.
+Pour les prochains textes. Clique sur un texte (outil Texte ou ➤) pour le changer. ¦ Fir déi nächst Texter. Klick op en Text (Textwierkzeug oder ➤), fir en z’änneren.
+✍️ Texte en cours d’écriture : chaque réglage s’y applique tout de suite. ¦ ✍️ Text, deen am Gaang ass geschriwwen ze ginn: all Astellung gëtt direkt drop ugewannt.
+Métrique ¦ Metresch
+Les variantes viennent des polices de l’ordinateur (Mac, Windows, Linux) quand l’app peut les lire ; sinon les graisses habituelles. ¦ D’Variante kommen aus de Schrëfte vum Computer (Mac, Windows, Linux), wann d’App se liese kann; soss déi üblech Schrëftstäerkten.
+Retrait de la première ligne (négatif : en saillie) ¦ Aréckung vun der éischter Zeil (negativ: hängend)
+Largeur du bloc de texte : les lignes se coupent toutes seules (vide = texte simple, une ligne par paragraphe) ¦ Breet vum Textblock: d’Zeile gi vu selwer gebrach (eidel = einfachen Text, eng Zeil pro Paragraph)
+Espace avant chaque paragraphe ¦ Ofstand virun all Paragraph
+Espace après chaque paragraphe ¦ Ofstand no all Paragraph
+Couper les mots longs en fin de ligne, avec un tiret (règles simples du français ; un tiret conditionnel ⌥- dans un mot est pris en premier) ¦ Laang Wierder um Enn vun der Zeil mat engem Bindestréch trennen (einfach Reegele vum Franséischen; e bedéngte Bindestréch ⌥- an engem Wuert gëtt als éischt geholl)
+Ω Glyphes ¦ Ω Glyphen
+Police (famille) ¦ Schrëft (Famill)
+(Auto) ¦ (Auto)
+⟸ gauche ¦ ⟸ lénks
+≡ centre ¦ ≡ Mëtt
+droite ⟹ ¦ riets ⟹
+Symboles ¦ Symboler
+Code (U+00E9) ou caractère ¦ Code (U+00E9) oder Zeechen
+Chercher un glyphe ¦ No engem Glyph sichen
+Pour un bloc de texte, glisse un cadre avec l’outil Texte T au lieu de cliquer, ou donne sa largeur ici. La justification ne vaut que pour un bloc. ¦ Fir en Textblock zéi e Kader mam Textwierkzeug T, amplaz ze klicken, oder gëff seng Breet hei an. De Blocksaz gëllt nëmme fir e Block.
+Clic : ajouté au texte en cours d’écriture (ou à la fin du texte choisi). Sans texte : copié. ¦ Klick: bei den Text derbäigesat, deen am Gaang ass geschriwwen ze ginn (oder um Enn vum gewielten Text). Ouni Text: kopéiert.
+Choisis d’abord un texte (outil T). ¦ Wiel fir d’éischt en Text (Wierkzeug T).
+Un autre média, rattaché aux mêmes fiches ¦ En anere Medium, mat de selwechte Fiche verbonnen
+Gardée dans les versions, la photo affichée ne change pas ¦ An de Versioune behalen, déi ugewise Foto ännert sech net
+avec les annotations (calques visibles) ¦ mat den Notizen (siichtbar Ebenen)
+Avec les annotations (calques visibles) ¦ Mat den Notizen (siichtbar Ebenen)
+L’original n’est jamais modifié : chaque retouche est une version de la photo, et tu choisis celle qui s’affiche partout. ¦ D’Original gëtt ni geännert: all Retusch ass eng Versioun vun der Foto, an du wiels déi, déi iwwerall ugewise gëtt.
+🖼 Enregistrer l’image dans les Médias ¦ 🖼 D’Bild an de Medie späicheren
+L’image (calques compris) remplace celle du média ; le projet, lui, garde tous les calques pour continuer ¦ D’Bild (mat den Ebenen) ersetzt dat vum Medium; de Projet behält all d’Ebenen, fir weiderzemaachen
+Enregistrer le projet (calques, masques, réglages) ¦ De Projet späicheren (Ebenen, Masken, Astellungen)
+la retouche est fermée ¦ d’Retusch ass zou
+Clique sur une étape pour revenir à ce moment-là ; les étapes suivantes restent (en gris) tant que tu ne fais rien d’autre. ¦ Klick op e Schrëtt, fir op dee Moment zeréckzegoen; déi nächst Schrëtt bleiwen (gro), soulaang s de näischt anescht méchs.
+Tu peins le masque (pinceau : ⬛ cacher / ⬜ montrer). Clic : revenir au calque ¦ Du mols d’Mask (Pinsel: ⬛ verstoppen / ⬜ weisen). Klick: zeréck op d’Eben
+Masque : clic pour le peindre au pinceau ¦ Mask: Klick, fir se mam Pinsel ze molen
+⇧ Maj + clic : désactiver / réactiver le masque ¦ ⇧ Shift + Klick: d’Mask aus- / aschalten
+⌥ Alt + clic : voir le masque seul ¦ ⌥ Alt + Klick: d’Mask eleng gesinn
+touche \ : le masque en rouge par-dessus ¦ Tast \: d’Mask rout driwwer
+Ajouter un masque (cacher une partie sans l’effacer) — ⌥ / Alt + clic : un masque qui cache tout (ou cache la sélection) ¦ Eng Mask derbäisetzen (en Deel verstoppen, ouni en ze läschen) — ⌥ / Alt + Klick: eng Mask, déi alles verstoppt (oder d’Auswiel verstoppt)
+masque ¦ Mask
+Ranger dans un groupe ¦ An eng Grupp setzen
+(hors groupe) ¦ (ausserhalb vun enger Grupp)
+Glisser pour ranger : au-dessus, en dessous, ou dans un groupe (lâcher au milieu d’un groupe) ¦ Zéi fir z’uerdnen: driwwer, drënner, oder an eng Grupp (an der Mëtt vun enger Grupp lassloossen)
+Calque de réglage ¦ Astellungsebe
+La photo (réglages, taches, tampon) ¦ D’Foto (Astellungen, Flecken, Stempel)
+Supprimer le groupe (ce qu’il contient reste) ¦ D’Grupp läschen (wat dra stécht, bleift)
+Retirer la photo des calques (⌘Z pour la remettre) ¦ D’Foto aus den Ebenen ewechhuelen (⌘Z fir se zeréckzesetzen)
+Mode de fusion : comment le calque se mélange à ce qui est dessous ¦ Fusiounsmodus: wéi d’Eben sech mat deem vermëscht, wat drënner ass
+Fond : dose seulement le contenu du calque, pas ses effets (ombre, lueur, contour). À 0 %, il ne reste que les effets. ¦ Fëllung: doséiert nëmmen den Inhalt vun der Eben, net hir Effekter (Schiet, Gloen, Kontur). Bei 0 % bleiwen nëmmen d’Effekter.
+Effets du calque : ombre portée, lueur externe, contour, incrustation de couleur ¦ Effekter vun der Eben: Schlagschiet, baussent Gloen, Kontur, Faarfiwwerlagerung
+Objet dynamique : agrandir, réduire, tourner sans perte (l’image d’origine est gardée) ¦ Smart-Objet: vergréisseren, verklengeren, dréinen ouni Verloscht (dat ursprénglecht Bild gëtt behalen)
+🧩 Objet dynamique ¦ 🧩 Smart-Objet
+Une autre image à la même place, même taille, même rotation ¦ En anert Bild op der selwechter Plaz, selwecht Gréisst, selwecht Rotatioun
+Remplacer… ¦ Ersetzen…
+Remettre l’image à sa taille d’origine (et droite) ¦ D’Bild op seng ursprénglech Gréisst zrécksetzen (a riicht)
+Un calque de filtres juste au-dessus, qui ne touche que cette image : on peut le régler, le doser, le cacher ¦ Eng Filterebe direkt driwwer, déi nëmmen op dëst Bild wierkt: ee kann se astellen, doséieren, verstoppen
+✨ Filtre dynamique ¦ ✨ Smart-Filter
+Figer l’image en pixels, à la taille où elle est (plus d’agrandissement sans perte) ¦ D’Bild a Pixele fixéieren, an der Gréisst, an där et ass (keng Vergréisserung méi ouni Verloscht)
+Pixelliser ¦ Rasteren
+Couleurs, transparence, forme, préréglages ¦ Faarwen, Transparenz, Form, Virastellungen
+▦ Modifier le dégradé… ¦ ▦ De Faarfverlaf änneren…
+Motif, échelle, angle, décalage ¦ Muster, Skala, Wénkel, Verréckelung
+▩ Modifier le motif… ¦ ▩ D’Muster änneren…
+Comme un masque d’écrêtage de Photoshop ¦ Wéi eng Clipping-Mask vum Photoshop
+régler… ¦ astellen…
+ne touche que l’élément juste dessous ¦ wierkt nëmmen op d’Element direkt drënner
+touche tout ce qui est dessous ¦ wierkt op alles, wat drënner ass
+(seulement l’élément dessous) ¦ (nëmmen d’Element drënner)
+(tout ce qui est dessous) ¦ (alles, wat drënner ass)
+régler la photo ¦ d’Foto astellen
+＋ dans un calque de réglage ¦ ＋ an enger Astellungsebe
+Réglages et filtres dans un calque à part, qu’on peut masquer, doser ou limiter à un calque ¦ Astellungen a Filteren an enger separater Eben, déi ee maskéieren, doséieren oder op eng Eben limitéiere kann
+✨ Filtres : ¦ ✨ Filteren:
+Changer les réglages de ce filtre ¦ D’Astellunge vun dësem Filter änneren
+vider ¦ eidel maachen
+groupe vide : glisse un calque ici (⠿), ou range-le avec 📁 ¦ eidel Grupp: zéi eng Eben heihin (⠿), oder setz se mat 📁 eran
+Le pinceau, les formes et le texte vont sur le calque choisi (en bleu). 📁 un groupe peut contenir des calques et d’autres groupes ; 🎚 un calque de réglage applique réglages et filtres à ce qui est dessous (ou seulement à l’élément juste dessous). 🎭 un masque cache sans effacer. ¦ De Pinsel, d’Formen an den Text kommen op déi gewielten Eben (blo). 📁 eng Grupp kann Ebenen an aner Gruppen enthalen; 🎚 eng Astellungsebe wennt Astellungen a Filteren op dat un, wat drënner ass (oder nëmmen op d’Element direkt drënner). 🎭 eng Mask verstoppt, ouni ze läschen.
+＋ Calque ¦ ＋ Eben
+＋ Groupe ¦ ＋ Grupp
+＋ Réglage ¦ ＋ Astellung
+🖼️ Image ¦ 🖼️ Bild
+Une image de la base ou de l’ordinateur, sur un nouveau calque, en objet dynamique (agrandir, réduire, tourner sans perte) ¦ E Bild aus der Datebank oder vum Computer, op enger neier Eben, als Smart-Objet (vergréisseren, verklengeren, dréinen ouni Verloscht)
+Un groupe vide au-dessus du calque choisi ¦ Eng eidel Grupp iwwer der gewielter Eben
+Réglages et filtres dans un calque ¦ Astellungen a Filteren an enger Eben
+La photo a été retirée des calques : la remettre tout en bas ¦ D’Foto gouf aus den Ebenen ewechgeholl: se ganz no ënnen zrécksetzen
+↺ Remettre la photo ¦ ↺ D’Foto zrécksetzen
+Met le calque choisi dans un nouveau groupe (⌘G) ¦ Setzt déi gewielten Eben an eng nei Grupp (⌘G)
+Grouper ¦ Gruppéieren
+Sélection → calque ¦ Auswiel → Eben
+Aucun calque. ¦ Keng Eben.
+Choisis d’abord un calque. ¦ Wiel fir d’éischt eng Eben.
+Nouveau calque ¦ Nei Eben
+Nouveau calque de réglage ¦ Nei Astellungsebe
+Photo remise dans les calques ¦ Foto zeréck an d’Ebene gesat
+Masque ajouté : la sélection est cachée. ¦ Mask derbäigesat: d’Auswiel ass verstoppt.
+Masque ajouté : tout est caché ; peins en ⬜ pour montrer. ¦ Mask derbäigesat: alles ass verstoppt; mol mat ⬜, fir ze weisen.
+Masque ajouté : peins en ⬛ pour cacher, en ⬜ pour montrer. ¦ Mask derbäigesat: mol mat ⬛, fir ze verstoppen, mat ⬜, fir ze weisen.
+Masque seul : blanc = montré, noir = caché (⌥ + clic pour revenir) ¦ Mask eleng: wäiss = gewisen, schwaarz = verstoppt (⌥ + Klick fir zeréckzegoen)
+Ce calque est verrouillé. ¦ Dës Eben ass gespaart.
+Filtre dynamique : choisis un filtre (« ＋ Ajouter un filtre… ») ; il ne touche que cette image, et reste réglable. ¦ Smart-Filter: wiel e Filter („＋ E Filter derbäisetzen…“); e wierkt nëmmen op dëst Bild a bleift astellbar.
+verrouillé ¦ gespaart
+déverrouillé ¦ entspaart
+seulement sur l’élément dessous ¦ nëmmen op d’Element drënner
+sur tout ce qui est dessous ¦ op alles, wat drënner ass
+Ouvrir le panneau (Réglages, Calques…) — Tab ¦ De Panel opmaachen (Astellungen, Ebenen…) — Tab
+Glisse pour te déplacer dans l’image zoomée (la barre d’espace fait pareil avec n’importe quel outil). ¦ Zéi, fir dech am gezoomte Bild ze beweegen (d’Espacetast mécht datselwecht mat egal wéi engem Wierkzeug).
+Clique sur un trait, une forme, un texte ou une zone copiée d’un calque, puis glisse-le. ⌫ le supprime, double-clic sur un texte pour le réécrire. ¦ Klick op e Stréch, eng Form, en Text oder e kopéierte Beräich vun enger Eben, an zéi en dann. ⌫ läscht en, Duebelklick op en Text, fir en nei ze schreiwen.
+Glisse pour sélectionner un rectangle (⇧ en plus : ajouter, ⌥ : enlever). Les réglages de la barre agissent ensuite sur la sélection. ¦ Zéi, fir e Rechteck auszewielen (⇧ dobäi: derbäisetzen, ⌥: ewechhuelen). D’Astellunge vun der Leescht wierken duerno op d’Auswiel.
+Glisse pour sélectionner un ovale (⇧ : ajouter, ⌥ : enlever). ¦ Zéi, fir en Oval auszewielen (⇧: derbäisetzen, ⌥: ewechhuelen).
+Entoure à main levée la zone à sélectionner (⇧ : ajouter, ⌥ : enlever). ¦ Ëmkrees fräihand de Beräich, deen s de auswiele wëlls (⇧: derbäisetzen, ⌥: ewechhuelen).
+Plume : clique point par point autour de la zone ; double-clic, Entrée ou clic sur le premier point pour fermer. Échap : abandonner. ¦ Fieder: klick Punkt fir Punkt ronderëm de Beräich; Duebelklick, Entrée oder Klick op den éischte Punkt fir zouzemaachen. Esc: opginn.
+Clique sur une couleur : tous les points voisins de teinte proche sont sélectionnés (Tolérance). ⇧ : ajouter, ⌥ : enlever. ¦ Klick op eng Faarf: all d’Nopeschpunkte mat engem ähnleche Faarftoun ginn ausgewielt (Toleranz). ⇧: derbäisetzen, ⌥: ewechhuelen.
+Glisse les poignées du cadre (ou trace un nouveau cadre), choisis des proportions, redresse avec le curseur, puis « ✓ Valider ». ¦ Zéi d’Griffer vum Kader (oder zéi en neie Kader), wiel Proportiounen, riicht mam Schieber, dann „✓ Bestätegen“.
+Clic : zoomer ici · ⌥ + clic : reculer · ou glisse pour zoomer sur une zone. ¦ Klick: hei zoomen · ⌥ + Klick: erauszoomen · oder zéi, fir op e Beräich ze zoomen.
+Glisse les 4 coins sur les coins de la photo, du document ou de la façade prise de biais, puis « ✓ Valider » : elle est remise à plat. À faire de préférence avant les corrections de taches. ¦ Zéi déi 4 Ecker op d’Ecker vun der Foto, vum Dokument oder vun der Fassad, déi schréi geholl gouf, dann „✓ Bestätegen“: si gëtt flaach gemaach. Am beschte virun de Fleckekorrekture maachen.
+Glisse pour tracer la forme sur le calque choisi (⇧ : carré, cercle ou angle droit). ¦ Zéi, fir d’Form op déi gewielten Eben ze zeechnen (⇧: Quadrat, Krees oder rechte Wénkel).
+Glisse du début à la fin du dégradé (⇧ : tous les 45°) : il va sur un calque « Dégradé » (dans la sélection s’il y en a une ; sur le masque choisi, il fond le calque). Tire ensuite ses ronds pour l’ajuster ; clic sur la barre colorée pour changer ses couleurs. ¦ Zéi vum Ufank bis zum Enn vum Faarfverlaf (⇧: all 45°): e kënnt op eng Eben „Faarfverlaf“ (an d’Auswiel, wann et eng gëtt; op der gewielter Mask bleecht en d’Eben aus). Zéi duerno u senge Kreeser, fir en unzepassen; Klick op déi faarweg Leescht, fir seng Faarwen z’änneren.
+Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long. Zoome (⌘ + molette) pour être précis. ¦ Klick op e Flack, e Stëbskär oder e Kratzer: en gëtt duerch dat ersat, wat ronderëm ass. Fir e Kratzer, zéi laanscht en. Zoom (⌘ + Rad), fir genee ze sinn.
+« Choisir l’endroit à recopier » (ou ⌥ + clic), puis peins sur la zone à couvrir. « Aligné » : la source suit ton pinceau d’un trait à l’autre. Avec une sélection : glisse pour poser une copie de la zone ailleurs. ¦ „D’Plaz fir ze kopéiere wielen“ (oder ⌥ + Klick), dann mol iwwer de Beräich, deen s de iwwerdecke wëlls. „Ausgeriicht“: d’Quell follegt dengem Pinsel vun engem Stréch zum aneren. Mat enger Auswiel: zéi, fir eng Kopie vum Beräich soss anzwousch hinzesetzen.
+Peins sur le calque choisi (Calques) : annoter, entourer, flécher à la main. La gomme efface ce qui a été peint, jamais la photo. ¦ Mol op déi gewielten Eben (Ebenen): notéieren, ëmkreesen, Feiler mat der Hand zeechnen. De Gummi läscht dat, wat gemoolt gouf, ni d’Foto.
+Tu peins le MASQUE du calque : ⬛ cacher, ⬜ montrer. Rien n’est effacé. Clique sur la vignette du masque (Calques) pour revenir au calque. ¦ Du mols d’MASK vun der Eben: ⬛ verstoppen, ⬜ weisen. Näischt gëtt geläscht. Klick op d’Miniatur vun der Mask (Ebenen), fir op d’Eben zeréckzegoen.
+Clique dans l’image à l’endroit du texte, écris, puis Entrée (⇧ + Entrée pour aller à la ligne). ¦ Klick am Bild op d’Plaz vum Text, schreif, dann Entrée (⇧ + Entrée fir op eng nei Zeil).
+Peins sur le pli, la rayure ou la déchirure (en rouge pendant le geste) : au lâcher, la zone est refaite d’après ce qui l’entoure. Zoome pour être précis ; « 🔍 Repérer les plis » les trouve tout seul. ¦ Mol iwwer d’Fal, de Kratzer oder de Rëss (rout, während s de mols): beim Lassloossen gëtt de Beräich no deem nei gemaach, wat ronderëm ass. Zoom, fir genee ze sinn; „🔍 Falen erkennen“ fënnt se automatesch.
+Glisse les deux ronds sur les yeux si besoin : le cadre suit (yeux à l’horizontale, toujours à la même hauteur). Règle la marge dans le panneau, puis « ✓ Recadrer » ou « 👤 Utiliser comme portrait ». ¦ Zéi déi zwee Kreeser op d’Aen, wann et néideg ass: de Kader follegt (Aen horizontal, ëmmer op der selwechter Héicht). Stell de Rand am Panel an, dann „✓ Zouschneiden“ oder „👤 Als Portrait benotzen“.
+Calque « Annotations » créé ¦ Ebe „Notizen“ erstallt
+Annotations ¦ Notizen
+Masque ajouté à la photo (gomme) ¦ Mask op d’Foto derbäigesat (Gummi)
+Gomme sur la photo : elle est cachée par un masque, rien n’est effacé. Pour la faire revenir : touche X (⬜ montrer), puis repasse dessus. ¦ Gummi op der Foto: si gëtt vun enger Mask verstoppt, näischt gëtt geläscht. Fir se zeréckzebréngen: Tast X (⬜ weisen), dann nach eng Kéier driwwer goen.
+⬜ Montrer : le pinceau (ou la gomme) fait revenir ce qui était caché. X pour revenir à ⬛ cacher. ¦ ⬜ Weisen: de Pinsel (oder de Gummi) bréngt zeréck, wat verstoppt war. X fir zeréck op ⬛ verstoppen.
+⬛ Cacher : le pinceau (ou la gomme) cache. X pour ⬜ montrer. ¦ ⬛ Verstoppen: de Pinsel (oder de Gummi) verstoppt. X fir ⬜ weisen.
+Style du texte ¦ Textstil
+Caractère du texte ¦ Zeeche vum Text
+🔎 Lire les variantes de l’ordinateur… ¦ 🔎 D’Schrëftvariante vum Computer liesen…
+Réglage ciblé : appuie sur une couleur de la photo et glisse à droite (plus saturé) ou à gauche (moins) ; avec ⌘ / Ctrl, c’est la teinte qui change ¦ Geziilt Astellung: dréck op eng Faarf vun der Foto an zéi no riets (méi gesätegt) oder no lénks (manner); mat ⌘ / Ctrl ännert sech de Faarftoun
+Réglage ciblé ¦ Geziilt Astellung
+Pipettes de la gamme ¦ Pipette vum Beräich
+Pipette : la gamme se centre sur la couleur cliquée dans la photo ¦ Pipett: de Beräich zentréiert sech op déi Faarf, op déi an der Foto geklickt gouf
+Ajouter à la gamme la couleur cliquée ¦ Déi geklickte Faarf an de Beräich derbäisetzen
+Retirer de la gamme la couleur cliquée ¦ Déi geklickte Faarf aus dem Beräich ewechhuelen
+Bord intérieur : plein effet jusqu’ici ¦ Bannenrand: voll Wierkung bis hei
+Bord extérieur : l’effet s’éteint ici ¦ Baussenrand: d’Wierkung hält hei op
+Haut : les couleurs avant ; bas : après. ¦ Uewen: d’Faarwe virdrun; ënnen: duerno.
+🎚 Autres réglages… ¦ 🎚 Aner Astellungen…
+🖌 Peindre le masque ¦ 🖌 D’Mask molen
+Réactiver ¦ Nees aschalten
+Désactiver ¦ Ausschalten
+▦ Calque de dégradé ¦ ▦ Faarfverlafsebe
+garder les proportions ¦ d’Proportiounen behalen
+Un calque de réglage juste au-dessus, qui ne touche que ce calque ¦ Eng Astellungsebe direkt driwwer, déi nëmmen op dës Eben wierkt
+🎨 Teinte/Saturation sur ce calque ¦ 🎨 Faarftoun/Sättegung op dëser Eben
+Choisis la photo ou un calque de réglage 🎚 (Calques) pour Teinte/Saturation. ¦ Wiel d’Foto oder eng Astellungsebe 🎚 (Ebenen) fir Faarftoun/Sättegung.
+👆 Appuie sur une couleur de la photo et glisse à gauche ou à droite (⌘ / Ctrl : la teinte). ¦ 👆 Dréck op eng Faarf vun der Foto an zéi no lénks oder no riets (⌘ / Ctrl: de Faarftoun).
+💧 Clique sur une couleur de la photo. ¦ 💧 Klick op eng Faarf vun der Foto.
+C’est un gris : il n’a pas de teinte. ¦ Dat ass e Gro: et huet kee Faarftoun.
+Gamme choisie à la pipette ¦ Beräich mat der Pipett gewielt
+Gamme élargie ¦ Beräich erweidert
+Gamme réduite ¦ Beräich reduzéiert
+Coloriser : oui ¦ Faarweg maachen: jo
+Coloriser : non ¦ Faarweg maachen: nee
+Coloriser ¦ Faarweg maachen
+Propriétés du masque ¦ Eegeschafte vun der Mask
+Teinte/Saturation remise à zéro ¦ Faarftoun/Sättegung op null zréckgesat
+Masque inversé ¦ Mask ëmgedréint
+Masque désactivé ¦ Mask ausgeschalt
+Masque réactivé ¦ Mask nees ageschalt
+Masque retiré ¦ Mask ewechgeholl
+Masque ajouté ¦ Mask derbäigesat
+Ce calque a déjà un masque. ¦ Dës Eben huet schonn eng Mask.
+Teinte/Saturation sur un calque ¦ Faarftoun/Sättegung op enger Eben
+Teinte/Saturation ¦ Faarftoun/Sättegung
+Ancien style ¦ Ale Stil
+Global ¦ Global
+Rouges ¦ Rouden
+Jaunes ¦ Gielen
+Verts ¦ Gréngen
+Cyans ¦ Cyanen
+Bleus ¦ Bloen
+Magentas ¦ Magentaen
+Cyanotype ¦ Zyanotypie
+Supprimer ce motif ¦ Dëst Muster läschen
+Calque de motif <b>« {name} »</b> : tout se règle ici, tout de suite. ¦ Musterebe <b>„{name}“</b>: alles gëtt hei agestallt, direkt.
+Choisis un motif, puis « Remplir » : il va sur son propre calque (dans la sélection s’il y en a une). Les motifs de l’app prennent tes deux couleurs. ¦ Wiel e Muster, dann „Ausfëllen“: et kënnt op seng eege Eben (an d’Auswiel, wann et eng gëtt). D’Muster vun der App huelen deng zwou Faarwen.
+fond transparent (motifs de l’app) ¦ transparenten Hannergrond (Muster vun der App)
+Décalage horizontal ¦ Horizontal Verréckelung
+Décalage vertical ¦ Vertikal Verréckelung
+▩ Remplir : nouveau calque de motif ¦ ▩ Ausfëllen: nei Musterebe
+Il rejoint la bibliothèque des motifs (gardée sur cet ordinateur). ¦ Et kënnt an d’Musterbibliothéik (op dësem Computer gespäichert).
+l’image visible ¦ dat siichtbart Bild
+Taille du carreau ¦ Gréisst vum Plättchen
+raccord sans couture (les bords se fondent) ¦ nahtlos (d’Ränner verschmëlzen)
+Garder et remplir ¦ Behalen an ausfëllen
+Plus de place pour garder ce motif : supprime des motifs, ou fais-le plus petit. ¦ Keng Plaz méi, fir dëst Muster ze behalen: läsch Muster, oder maach et méi kleng.
+Motif gardé dans la bibliothèque ▩. ¦ Muster an der Bibliothéik ▩ behalen.
+Mon motif ¦ Mäi Muster
+Clic sur une forme : le pinceau 🖌 la prend. La taille se règle en haut (ou [ et ]). ¦ Klick op eng Form: de Pinsel 🖌 hëlt se. D’Gréisst gëtt uewen agestallt (oder [ an ]).
+Forme de la pointe ¦ Form vun der Spëtzt
+Pas (écart entre les empreintes) ¦ Ofstand (tëscht den Ofdréck)
+Petit : un trait continu. Grand : des empreintes séparées (étoiles, feuilles). ¦ Kleng: e kontinuéierleche Stréch. Grouss: getrennt Ofdréck (Stären, Blieder).
+À 100 % la forme est entière ; plus bas, elle est aplatie (plume, pinceau plat). ¦ Bei 100 % ass d’Form ganz; méi niddreg gëtt se flaach gedréckt (Fieder, flaache Pinsel).
+l’angle suit le trait ¦ de Wénkel follegt dem Stréch
+Dynamique et dispersion ¦ Dynamik a Streeung
+Variation de taille ¦ Gréissteschwankung
+Variation d’angle ¦ Wénkelschwankung
+Dispersion ¦ Streeung
+Nombre par empreinte ¦ Zuel pro Ofdrock
+Transfert et couleur ¦ Transfert a Faarf
+Flux (chaque empreinte) ¦ Flux (all Ofdrock)
+Variation d’opacité ¦ Opazitéitsschwankung
+Variation de couleur ¦ Faarfschwankung
+Fais d’abord une sélection autour du dessin ¦ Maach fir d’éischt eng Auswiel ronderëm d’Zeechnung
+Fais d’abord une sélection autour du dessin. ¦ Maach fir d’éischt eng Auswiel ronderëm d’Zeechnung.
+＋ Forme d’après la sélection ¦ ＋ Form no der Auswiel
+Garder comme préréglage ¦ Als Virastellung behalen
+＋ Garder comme préréglage ¦ ＋ Als Virastellung behalen
+Garder cette forme de pinceau ¦ Dës Pinselform behalen
+Nom du préréglage : ¦ Numm vun der Virastellung:
+Plus de place pour garder ce pinceau. ¦ Keng Plaz méi, fir dëse Pinsel ze behalen.
+🖌 Ta forme est prête : peins avec ; « Garder comme préréglage » pour la retrouver. ¦ 🖌 Deng Form ass fäerdeg: mol domat; „Als Virastellung behalen“, fir se erëmzefannen.
+Rond net ¦ Schaarf Ronn
+Rond doux ¦ Mëll Ronn
+Surligneur ¦ Textmarker
+Crayon fin ¦ Feine Bläistëft
+Craie (grain) ¦ Kräid (Kar)
+Craie ¦ Kräid
+Fusain ¦ Holzkuel
+Dégradé inversé ¦ Faarfverlaf ëmgedréint
+Dégradé : tramage ¦ Faarfverlaf: Dithering
+Dégradé : sans tramage ¦ Faarfverlaf: ouni Dithering
+▦ Dégradé ¦ ▦ Faarfverlaf
+Clic : ajouter un arrêt de couleur à cet endroit ¦ Klick: hei e Faarfpunkt derbäisetzen
+Clic sur la barre : un arrêt de plus · glisse un arrêt pour le déplacer, vers le bas pour l’enlever ¦ Klick op d’Leescht: ee Punkt méi · zéi e Punkt, fir en ze verréckelen, no ënnen, fir en ewechzehuelen
+Mélange ¦ Vermëschung
+Classique (RVB) ¦ Klassesch (RGB)
+Perceptuel (plus doux) ¦ Perzeptuell (méi mëll)
+Par les teintes ¦ Iwwer d’Faarftéin
+Au-delà des bouts ¦ Iwwer d’Enner eraus
+Couleur des bouts ¦ Faarf vun den Ennen
+Répéter ¦ Widderhuelen
+Répéter en miroir ¦ Gespigelt widderhuelen
+Le début devient la fin ¦ Den Ufank gëtt d’Enn
+⇄ Retourner les arrêts ¦ ⇄ D’Punkten ëmdréinen
+Espacer également ¦ Gläichméisseg verdeelen
+Couleur de l’arrêt ¦ Faarf vum Punkt
+Arrêt choisi ¦ Gewielte Punkt
+Milieu vers le suivant ¦ Mëtt bis bei de nächsten
+Où se trouve le mélange à moitié entre cet arrêt et le suivant (le petit losange de Photoshop). ¦ Wou d’Vermëschung hallef tëscht dësem Punkt an dem nächsten ass (déi kleng Raut vum Photoshop).
+✕ Enlever cet arrêt ¦ ✕ Dëse Punkt ewechhuelen
+Supprimer ce préréglage ¦ Dës Virastellung läschen
+Garder ce dégradé ¦ Dëse Faarfverlaf behalen
+Mon dégradé ¦ Mäi Faarfverlaf
+Premier plan → transparent ¦ Virdergrond → transparent
+Noir → blanc ¦ Schwaarz → wäiss
+Blanc → transparent ¦ Wäiss → transparent
+Vignette (bords sombres) ¦ Vignette (däischter Ränner)
+Arc-en-ciel ¦ Reebou
+Cuivre ¦ Koffer
+Chrome ¦ Chrom
+Or ¦ Gold
+Vieux papier ¦ Aalt Pabeier
+Nuit ¦ Nuecht
+Printemps ¦ Fréijoer
+Mer ¦ Mier
+Coucher de soleil ¦ Sonnenënnergang
+▭ Linéaire ¦ ▭ Linear
+◉ Radial ¦ ◉ Radial
+◔ Angle (conique) ¦ ◔ Wénkel (konesch)
+⇋ Réfléchi ¦ ⇋ Gespigelt
+◇ Losange ¦ ◇ Raut
+Damier ¦ Schachbriet
+Pois ¦ Punkten
+Rayures ¦ Sträifen
+Hachures ¦ Schraffur
+Briques ¦ Steng
+Chevrons ¦ Chevronen
+Losanges ¦ Rauten
+Vagues ¦ Wellen
+Toile ¦ Leinwand
+Croix ¦ Kräizer
+Fleurs de lys ¦ Lilien
+Clique maintenant à l’endroit à recopier. ¦ Klick elo op d’Plaz, déi s de kopéiere wëlls.
+Ce calque est verrouillé : déverrouille-le dans Calques. ¦ Dës Eben ass gespaart: entspäer se an den Ebenen.
+Texte effacé ¦ Text geläscht
+Sélection vide ¦ Eidel Auswiel
+Sélection ajoutée ¦ Auswiel derbäigesat
+Sélection retirée ¦ Auswiel ewechgeholl
+Image remplacée : même place, même taille, même rotation. ¦ Bild ersat: selwecht Plaz, selwecht Gréisst, selwecht Rotatioun.
+Image placée : ➤ glisse-la, tire un coin pour la taille (⇧ : libre), la poignée ronde pour la tourner. ¦ Bild placéiert: ➤ zéi et, zéi un engem Eck fir d’Gréisst (⇧: fräi), un dem ronne Grëff, fir et ze dréinen.
+Ce fichier n’est pas une image. ¦ Dëse Fichier ass kee Bild.
+Remplacer l’image de l’objet dynamique ¦ D’Bild vum Smart-Objet ersetzen
+Remplacer par cette image ¦ Duerch dëst Bild ersetzen
+La nouvelle image prend la place, la taille et la rotation de l’ancienne. ¦ Dat neit Bild hëlt d’Plaz, d’Gréisst an d’Rotatioun vum alen.
+Elle arrive sur un nouveau calque, en objet dynamique 🧩 (agrandir, réduire, tourner sans perte). Tu peux aussi glisser un fichier sur la photo, ou coller une image copiée (⌘V). ¦ Et kënnt op eng nei Eben, als Smart-Objet 🧩 (vergréisseren, verklengeren, dréinen ouni Verloscht). Du kanns och e Fichier op d’Foto zéien, oder e kopéiert Bild asetzen (⌘V).
+Sélection automatique ¦ Automatesch Auswiel
+Ce calque est verrouillé : choisis-en un autre dans Calques. ¦ Dës Eben ass gespaart: wiel eng aner an den Ebenen.
+Endroit à recopier choisi : peins maintenant sur la zone à couvrir. ¦ Plaz fir ze kopéiere gewielt: mol elo iwwer de Beräich, deen s de iwwerdecke wëlls.
+Choisis d’abord l’endroit à recopier (bouton 🎯 ou ⌥ + clic). ¦ Wiel fir d’éischt d’Plaz fir ze kopéieren (Knäppchen 🎯 oder ⌥ + Klick).
+La photo n’est plus dans les calques : « ↺ Remettre la photo » (onglet Calques). ¦ D’Foto ass net méi an den Ebenen: „↺ D’Foto zrécksetzen“ (Reiter Ebenen).
+La photo est verrouillée (🔒 dans Calques). ¦ D’Foto ass gespaart (🔒 an den Ebenen).
+Tampon : zone recopiée (calque ✨ Retouches) ¦ Stempel: Beräich kopéiert (Ebe ✨ Retuschen)
+Fais d’abord une sélection (outils ⬚ ◯ ➰ ✒︎ 🪄). ¦ Maach fir d’éischt eng Auswiel (Wierkzeuger ⬚ ◯ ➰ ✒︎ 🪄).
+Aucun filtre utilisé pour l’instant (menu Filtre). ¦ Nach kee Filter benotzt (Menü Filter).
+Opacité du calque (dosage) ¦ Opazitéit vun der Eben (Dosage)
+Valeurs de départ ¦ Standardwäerter
+Rien n’est détruit : le filtre est sur son propre calque. Plus tard : Calques → le calque → onglet ✨ Filtres → « régler… ». ¦ Näischt gëtt zerstéiert: de Filter ass op senger eegener Eben. Méi spéit: Ebenen → d’Eben → Reiter ✨ Filteren → „astellen…“.
+Filtre enlevé du calque ¦ Filter vun der Eben ewechgeholl
+Ordre des filtres ¦ Reiefolleg vun de Filteren
+Filtres enlevés ¦ Filteren ewechgeholl
+Plus de place pour les actions : supprimes-en une. ¦ Keng Plaz méi fir Aktiounen: läsch eng.
+⚡ Actions ¦ ⚡ Aktiounen
+Nom de l’action (ex. « Photos de l’album 1930 ») ¦ Numm vun der Aktioun (z. B. „Fotoe vum Album 1930“)
+Une action garde les réglages de la photo (exposition, niveaux, courbe, teinte, filtres, poussière, colorisation…) et ses calques de réglage sans masque. On la remet sur une autre photo, ou sur plusieurs d’un coup : chacune reçoit une <b>nouvelle version</b>, l’original est gardé. ¦ Eng Aktioun behält d’Astellunge vun der Foto (Beliichtung, Niveauen, Kurv, Faarftoun, Filteren, Stëbs, Faarfgestaltung…) an hir Astellungsebenen ouni Mask. Ee kann se op eng aner Foto uwenden, oder op e puer op eemol: all eenzel kritt eng <b>nei Versioun</b>, d’Original bleift erhalen.
+Enregistrer cette action dans un fichier, pour la garder ou la donner ¦ Dës Aktioun an engem Fichier späicheren, fir se ze behalen oder engem ze ginn
+Sur cette photo ¦ Op dëser Foto
+Sur plusieurs photos… ¦ Op e puer Fotoen…
+Aucune action enregistrée pour l’instant ¦ Nach keng Aktioun gespäichert
+« ＋ Enregistrer les réglages actuels » les garde pour les rejouer sur d’autres photos. ¦ „＋ Déi aktuell Astellunge späicheren“ behält se, fir se op anere Fotoen nees ofzespillen.
+Les photos à retoucher ¦ D’Fotoen, déi retuschéiert solle ginn
+Prendre ces photos ¦ Dës Fotoen huelen
+＋ Choisir des photos… ¦ ＋ Fotoe wielen…
+afficher la nouvelle version ¦ déi nei Versioun weisen
+Aucune photo choisie. ¦ Keng Foto gewielt.
+refusé ¦ refuséiert
+fx Effets du calque ¦ fx Effekter vun der Eben
+Fond (le contenu seulement, pas les effets) ¦ Fëllung (nëmmen den Inhalt, net d’Effekter)
+Lueur externe ¦ Baussent Gloen
+Incrustation de couleur ¦ Faarfiwwerlagerung
+à l’extérieur ¦ dobaussen
+au milieu ¦ an der Mëtt
+à l’intérieur ¦ dobannen
+Tout enlever ¦ Alles ewechhuelen
+🔍 Plis et rayures ¦ 🔍 Falen a Kratzer
+Recherche des plis… ¦ Falen gi gesicht…
+garder le grain autour ¦ de Kar ronderëm behalen
+🪡 Plutôt à la main ¦ 🪡 Léiwer mat der Hand
+✓ Réparer ces lignes ¦ ✓ Dës Linne reparéieren
+Aucun pli trouvé : monte la sensibilité, ou répare à la main avec le pinceau 🪡. ¦ Keng Fal fonnt: setz d’Empfindlechkeet erop, oder reparéier mat der Hand mam Pinsel 🪡.
+Réparation… ¦ Gëtt reparéiert…
+✨ Plis et rayures comblés ¦ ✨ Falen a Kratzer ausgefëllt
+🌫️ Débruitage ¦ 🌫️ Entrauschen
+adoucit le grain sans perdre les contours ¦ mécht de Kar méi mëll, ouni d’Konturen ze verléieren
+🧹 Poussières et rayures ¦ 🧹 Stëbs a Kratzer
+les petits points blancs ou noirs ¦ déi kleng wäiss oder schwaarz Punkten
+🩹 Plis et fines déchirures ¦ 🩹 Falen a fein Rëss
+lignes fines repérées puis comblées ¦ fein Linne fonnt an dann ausgefëllt
+🎚 Contraste et niveaux automatiques ¦ 🎚 Automatesche Kontrast an Niveauen
+noirs bien noirs, blancs bien blancs ¦ Schwaarz richteg schwaarz, Wäiss richteg wäiss
+🔎 Netteté douce ¦ 🔎 Mëll Schäerft
+un peu plus de piqué ¦ e bësse méi Schäerft
+🌈 Colorisation ¦ 🌈 Faarfgestaltung
+couleurs d’époque (photo en noir et blanc) ¦ Faarwe vun der Zäit (schwaarz-wäiss Foto)
+la photo a déjà des couleurs : coche si tu veux quand même ¦ d’Foto huet schonn Faarwen: kräiz un, wann s de et trotzdeem wëlls
+Coche les étapes à garder ; chacune devient un calque « ✨ » que tu peux ensuite cacher ou doser. ↶ défait tout d’un coup. ¦ Kräiz d’Schrëtt un, déi s de behale wëlls; all Schrëtt gëtt eng „✨“-Ebe, déi s de duerno verstoppe oder doséiere kanns. ↶ mécht alles op eemol réckgängeg.
+Garder : {what} ¦ Behalen: {what}
+détail au centre ¦ Detail an der Mëtt
+Aperçus… ¦ Virschauen…
+aucun pli trouvé à cette intensité ¦ keng Fal bei dëser Intensitéit fonnt
+Coche au moins une étape. ¦ Kräiz op d’mannst ee Schrëtt un.
+✨ Plis et fines déchirures ¦ ✨ Falen a fein Rëss
+✨ Poussières et rayures ¦ ✨ Stëbs a Kratzer
+✨ Débruitage ¦ ✨ Entrauschen
+✨ Contraste et niveaux ¦ ✨ Kontrast an Niveauen
+✨ Netteté douce ¦ ✨ Mëll Schäerft
+✨ Colorisation ¦ ✨ Faarfgestaltung
+Colorisation ¦ Faarfgestaltung
+Couleurs (pinceau) ¦ Faarwen (Pinsel)
+✨ Retouches (taches, plis, tampon) ¦ ✨ Retuschen (Flecken, Falen, Stempel)
+🪪 Photo d’identité ¦ 🪪 Passfoto
+Les yeux à l’horizontale, toujours à la même hauteur : tous les portraits faits ainsi ont le même format. ¦ D’Aen horizontal, ëmmer op der selwechter Héicht: all d’Portraiten, déi esou gemaach ginn, hunn dat selwecht Format.
+✓ Yeux trouvés sur le visage. ¦ ✓ Aen am Gesiicht fonnt.
+✓ D’après l’identification de la photo : ajuste les ronds sur les yeux. ¦ ✓ No der Identifikatioun vun der Foto: pass d’Kreeser op d’Aen un.
+⚠️ Visage non trouvé : glisse les deux ronds sur les yeux. ¦ ⚠️ Gesiicht net fonnt: zéi déi zwee Kreeser op d’Aen.
+Plusieurs fiches… ¦ Méi Fichen…
+✓ Recadrer ¦ ✓ Zouschneiden
+👤 Utiliser comme portrait… ¦ 👤 Als Portrait benotzen…
+Recadré en photo d’identité ¦ Als Passfoto zougeschnidden
+3:4 (portrait classique) ¦ 3:4 (klassescht Portrait)
+35 × 45 mm (photo d’identité) ¦ 35 × 45 mm (Passfoto)
+Marge autour du visage ¦ Rand ronderëm d’Gesiicht
+Hauteur des yeux ¦ Héicht vun den Aen
+modèle absent ¦ Modell feelt
+Recherche du visage… ¦ D’Gesiicht gëtt gesicht…
+Photo non enregistrée. ¦ Foto net gespäichert.
+Utiliser comme portrait de quelle fiche ? ¦ Als Portrait vu wéi enger Fiche benotzen?
+PHOTO D’IDENTITÉ ¦ PASSFOTO
+La photo recadrée est ajoutée aux médias de la fiche, puis devient son portrait (l’ancien portrait reste dans ses médias). ¦ Déi zougeschnidde Foto gëtt bei d’Medie vun der Fiche derbäigesat a gëtt dann hiert Portrait (dat aalt Portrait bleift an hire Medien).
+Choisis une personne dans la liste. ¦ Wiel eng Persoun aus der Lëscht.
+RETOUCHE · PHOTO D’IDENTITÉ ¦ RETUSCH · PASSFOTO
+🪪 Portraits de plusieurs fiches ¦ 🪪 Portraite vu méi Fichen
+Choisis les fiches : pour chacune, l’app prend son portrait (ou sa première photo), trouve le visage et le cadre au même format que les autres (yeux à la même hauteur). Tu vérifies, puis « Utiliser comme portraits » : chaque photo recadrée entre dans les médias de sa fiche et devient son portrait (l’ancien reste). ¦ Wiel d’Fichen: fir all eenzel hëlt d’App hiert Portrait (oder hir éischt Foto), fënnt d’Gesiicht a schneit et am selwechte Format zou wéi déi aner (Aen op der selwechter Héicht). Du kontrolléiers, dann „Als Portraite benotzen“: all zougeschnidde Foto kënnt an d’Medie vun hirer Fiche a gëtt hiert Portrait (dat aalt bleift).
+🔍 Préparer les portraits ¦ 🔍 D’Portraite virbereeden
+Aucune fiche choisie pour l’instant ¦ Nach keng Fiche gewielt
+Choisis une ou plusieurs personnes ci-dessus, puis « 🔍 Préparer les portraits ». ¦ Wiel hei uewen eng oder méi Persounen, dann „🔍 D’Portraite virbereeden“.
+Choisis d’abord une ou plusieurs fiches. ¦ Wiel fir d’éischt eng oder méi Fichen.
+aucune photo dans la fiche ¦ keng Foto an der Fiche
+yeux trouvés ¦ Aen fonnt
+d’après l’identification ¦ no der Identifikatioun
+✓ portrait mis à jour ¦ ✓ Portrait aktualiséiert
+Utiliser comme portraits ¦ Als Portraite benotzen
+La rotation n’est pas encore prête : réessaie dans un instant. ¦ D’Rotatioun ass nach net prett: probéier et an engem Moment nach eng Kéier.
+Rotation de l’image ¦ Rotatioun vum Bild
+Rotation de l’image : 90° horaire ¦ Rotatioun vum Bild: 90° mat der Auer
+Rotation de l’image : 90° antihoraire ¦ Rotatioun vum Bild: 90° géint d’Auer
+Rotation de l’image : 180° ¦ Rotatioun vum Bild: 180°
+Rotation de l’image : {a}° horaire ¦ Rotatioun vum Bild: {a}° mat der Auer
+Rotation de l’image : {a}° antihoraire ¦ Rotatioun vum Bild: {a}° géint d’Auer
+Symétrie horizontale de l’image ¦ Bild horizontal gespigelt
+Symétrie verticale de l’image ¦ Bild vertikal gespigelt
+Perspective figée ¦ Perspektiv fixéiert
+Le recadrage d’avant a été retiré (il ne tenait plus droit) : refais-le si besoin, ou ↶ Annuler. ¦ Den Zouschnëtt vu virdrun gouf ewechgeholl (e war net méi riicht): maach en nach eng Kéier, wann et néideg ass, oder ↶ Réckgängeg.
+📐 Redresser l’horizon ¦ 📐 Den Horizont riichten
+L’angle mesuré sur ta ligne : la photo tourne de cet angle pour la remettre droite. ¦ De Wénkel, deen op denger Linn gemooss gouf: d’Foto dréint sech ëm dëse Wénkel, fir se riicht ze maachen.
+Coins ajoutés autour ¦ Ecker ronderëm derbäigesat
+Transparents (PNG) ¦ Transparent (PNG)
+✂️ Recadrer pour enlever les coins vides ¦ ✂️ Zouschneiden, fir déi eidel Ecker ewechzehuelen
+Tous les calques, masques, textes et la sélection tournent avec la photo. ↶ Annuler (⌘Z) revient comme avant. ¦ All Ebenen, Masken, Texter an d’Auswiel dréine sech mat der Foto. ↶ Réckgängeg (⌘Z) mécht et nees wéi virdrun.
+Donne un angle entre 0,01 et 359,99°. ¦ Gëff e Wénkel tëscht 0,01 an 359,99° an.
+Trace une ligne le long de l’horizon (ou d’un mur bien droit) : la photo tournera pour la remettre droite. Échap pour arrêter. ¦ Zéi eng Linn laanscht den Horizont (oder eng ganz riicht Mauer): d’Foto dréint sech, fir se riicht ze maachen. Esc fir opzehalen.
+Cette ligne est déjà droite : rien à tourner. ¦ Dës Linn ass scho riicht: näischt ze dréinen.
+Photo prise avec le téléphone tourné : elle est enregistrée couchée. ¦ Foto mam gedréinten Telefon geholl: se ass leiend gespäichert.
+↻ Remettre droite ¦ ↻ Riicht stellen
+Photo remise droite (orientation du téléphone) ¦ Foto riicht gestallt (Orientéierung vum Telefon)
+Les retouches en cours seront perdues (💾 Enregistrer le projet les garde pour plus tard). ¦ D’Retuschen, déi am Gaang sinn, gi verluer (💾 De Projet späicheren hält se fir méi spéit).
+Passer à la retouche simple ? ¦ Op déi einfach Retusch wiesselen?
+Passer sans enregistrer ¦ Wiesselen ouni ze späicheren
+Le PSD n’est pas encore prêt : réessaie dans un instant. ¦ De PSD ass nach net prett: probéier et an engem Moment nach eng Kéier.
+L’assemblage de photos n’est pas encore prêt. ¦ D’Zesummesetze vu Fotoen ass nach net prett.
+Cet outil n’est pas encore prêt : réessaie dans un instant. ¦ Dëst Wierkzeug ass nach net prett: probéier et an engem Moment nach eng Kéier.
+Recherche du sujet… ¦ D’Sujet gëtt gesicht…
+Sujet introuvable : le fond touche tout le bord. Essaie avec moins de tolérance (🪄), ou le lasso. ¦ Sujet net fonnt: den Hannergrond beréiert de ganze Rand. Probéier et mat manner Toleranz (🪄), oder mam Lasso.
+Sujet sélectionné : ⇧ + baguette ou lasso pour ajouter, ⌥ pour enlever ; « Masque » pour l’appliquer. Tolérance (🪄) : jusqu’où va le fond. ¦ Sujet ausgewielt: ⇧ + Zauberstaf oder Lasso fir derbäizesetzen, ⌥ fir ewechzehuelen; „Mask“ fir se unzewenden. Toleranz (🪄): wéi wäit den Hannergrond geet.
+Sujet sélectionné ¦ Sujet ausgewielt
+La photo semble déjà droite. ¦ D’Foto schéngt scho riicht ze sinn.
+Des corrections (taches, tampon) sont déjà faites : elles vont bouger avec la remise à plat. ¦ Et si scho Korrekture gemaach (Flecken, Stempel): si beweege sech mat beim Flaachmaachen.
+Redresser la perspective ? ¦ D’Perspektiv riichten?
+Perspective redressée ¦ Perspektiv geriicht
+Perspective enlevée ¦ Perspektiv ewechgeholl
+Peins les couleurs (pinceau doux) : le calque est en fusion « Couleur », la lumière de la photo est gardée. 🧽 pour corriger, opacité du calque pour doser. ¦ Mol d’Faarwen (mëlle Pinsel): d’Eben ass am Fusiounsmodus „Faarf“, d’Liicht vun der Foto bleift erhalen. 🧽 fir ze korrigéieren, Opazitéit vun der Eben fir ze doséieren.
+Recherche des taches… ¦ D’Flecke gi gesicht…
+Aucune tache trouvée : augmente la sensibilité ou la taille. ¦ Kee Flack fonnt: setz d’Empfindlechkeet oder d’Gréisst erop.
+✨ Jaunissement enlevé ¦ ✨ Gielstéch ewechgeholl
+Jaunissement enlevé sur le calque de réglage « ✨ Jaunissement enlevé » : la photo n’est pas touchée. ¦ Gielstéch op der Astellungsebe „✨ Gielstéch ewechgeholl“ ewechgeholl: d’Foto gëtt net beréiert.
+Jaunissement enlevé (calque de réglage) ¦ Gielstéch ewechgeholl (Astellungsebe)
+Entoure d’abord le visage avec l’ellipse ◯ (glisse sur la photo), puis reclique « Visage plus net ». ¦ Ëmkrees fir d’éischt d’Gesiicht mat der Ellips ◯ (zéi op der Foto), dann klick nach eng Kéier op „Méi schaarf Gesiicht“.
+Visage débruité et accentué sur un calque à part : son opacité dose l’effet. ¦ Gesiicht entrauscht a geschäerft op enger separater Eben: hir Opazitéit doséiert den Effekt.
+Correcteur prêt : glisse le long de la rayure ou du pli (zoome pour être précis). ¦ Korrekturwierkzeug prett: zéi laanscht de Kratzer oder d’Fal (zoom, fir genee ze sinn).
+✨ Vieille photo ravivée ¦ ✨ Al Foto opgefrëscht
+✨ Réglage automatique ¦ ✨ Automatesch Astellung
+Fais d’abord une sélection. ¦ Maach fir d’éischt eng Auswiel.
+Masque qui cache tout ¦ Mask, déi alles verstoppt
+Ce calque n’a pas de masque (Calque → Ajouter un masque). ¦ Dës Eben huet keng Mask (Eben → Eng Mask derbäisetzen).
+Ce calque n’a pas de masque. ¦ Dës Eben huet keng Mask.
+Sélection inversée ¦ Auswiel ëmgedréint
+Agrandir la sélection ¦ D’Auswiel vergréisseren
+Réduire la sélection ¦ D’Auswiel verklengeren
+De combien de points (de l’aperçu) ? ¦ Ëm wéi vill Punkten (vun der Virschau)?
+Sélection agrandie ¦ Auswiel vergréissert
+Sélection réduite ¦ Auswiel verklengert
+Contour progressif de la sélection ¦ Weiche Rand vun der Auswiel
+Copie de la sélection ¦ Kopie vun der Auswiel
+Sélection copiée sur un calque ¦ Auswiel op eng Eben kopéiert
+Remplissage ¦ Fëllung
+Zone effacée de la photo : elle sera transparente (image enregistrée en PNG). ¦ Beräich aus der Foto geläscht: e gëtt transparent (Bild als PNG gespäichert).
+Sélection effacée ¦ Auswiel geläscht
+Recadré sur la sélection ¦ Op d’Auswiel zougeschnidden
+Filtres de ce calque ¦ Filtere vun dëser Eben
+Plus tôt ¦ Méi fréi
+un filtre… ¦ e Filter…
+＋ Ajouter ¦ ＋ Derbäisetzen
+✨ Menu <b>Filtre</b> : chaque filtre se pose sur son propre calque (rien n’est détruit) : on le règle, on le dose avec l’opacité du calque, on le limite avec un masque 🎭, on le cache 👁. ¦ ✨ Menü <b>Filter</b>: all Filter kënnt op seng eege Eben (näischt gëtt zerstéiert): ee stellt en an, doséiert en mat der Opazitéit vun der Eben, limitéiert en mat enger Mask 🎭, verstoppt en 👁.
+Réglages remis à zéro ¦ Astellungen op null zréckgesat
+Point de courbe enlevé ¦ Kurvepunkt ewechgeholl
+Supprimer ce point ¦ Dëse Punkt läschen
+Point de la courbe ¦ Punkt vun der Kurv
+Masque en rouge : ce qui est caché (touche \ pour revenir) ¦ Mask a rout: dat, wat verstoppt ass (Tast \ fir zeréckzegoen)
+Pas encore enregistré comme projet : 💾 Enregistrer garde tout le travail pour continuer plus tard ¦ Nach net als Projet gespäichert: 💾 Späicheren hält déi ganz Aarbecht, fir méi spéit weiderzemaachen
+Enregistrer le projet sous un autre nom ¦ De Projet ënner engem aneren Numm späicheren
+Nom du nouveau projet (pour le retrouver dans « 📂 Projets… ») : ¦ Numm vum neie Projet (fir en an „📂 Projeten…“ erëmzefannen):
+Les retouches en cours seront perdues. ¦ D’Retuschen, déi am Gaang sinn, gi verluer.
+Ouvrir un autre projet sans enregistrer ce travail ? ¦ En anere Projet opmaachen, ouni dës Aarbecht ze späicheren?
+Ouvrir sans enregistrer ¦ Opmaachen ouni ze späicheren
+affichée ¦ ugewisen
+en cours de retouche ¦ gëtt retuschéiert
+Voir, comparer, revenir, renommer, supprimer (L3) ¦ Ukucken, vergläichen, zeréckgoen, ëmbenennen, läschen (L3)
+Voir, comparer, revenir, renommer, supprimer ¦ Ukucken, vergläichen, zeréckgoen, ëmbenennen, läschen
+l’original est toujours gardé ¦ d’Original gëtt ëmmer behalen
+Original ¦ Original
+Quitter cette retouche sans l’enregistrer ? ¦ Dës Retusch verloossen, ouni se ze späicheren?
+Pas de versions pour cette image. ¦ Keng Versioune fir dëst Bild.
+Bicubique, plus lisse (pour agrandir) ¦ Bikubesch, méi glat (fir ze vergréisseren)
+Bicubique, plus net (pour réduire) ¦ Bikubesch, méi schaarf (fir ze verklengeren)
+Bilinéaire ¦ Bilinear
+Au plus proche (contours nets, pixels) ¦ Nootsten Nopesch (schaarf Konturen, Pixelen)
+La taille de l’image enregistrée ou exportée (Image → Taille de l’image, Taille de la zone de travail) ¦ D’Gréisst vum gespäicherten oder exportéierte Bild (Bild → Bildgréisst, Gréisst vun der Aarbechtsfläch)
+📏 Taille de l’image ¦ 📏 Bildgréisst
+pixels ¦ Pixelen
+pour cent ¦ Prozent
+Ajuster à un format ¦ Un e Format upassen
+— garder ces mesures — ¦ — dës Moosser behalen —
+🔗 Conserver les proportions ¦ 🔗 D’Proportiounen behalen
+Résolution ¦ Opléisung
+Rééchantillonner ¦ Nei berechnen
+Méthode ¦ Method
+À l’impression ¦ Beim Drécken
+↺ Remettre la taille d’origine ¦ ↺ D’Originalgréisst zrécksetzen
+La photo reste en pleine qualité pendant la retouche : la taille choisie s’applique quand tu enregistres ou exportes l’image. ↶ Annuler (⌘Z) revient à la taille d’avant. ¦ D’Foto bleift während der Retusch a voller Qualitéit: déi gewielte Gréisst gëtt ugewannt, wann s de d’Bild späichers oder exportéiers. ↶ Réckgängeg (⌘Z) geet zeréck op déi Gréisst vu virdrun.
+✓ Assez grande pour imprimer en A5 à 300 ppp. ¦ ✓ Grouss genuch, fir an A5 bei 300 dpi ze drécken.
+⚠️ Trop petite pour imprimer en A5 à 300 ppp (il faut 1748 × 2480 px). ¦ ⚠️ Ze kleng, fir an A5 bei 300 dpi ze drécken (et brauch 1748 × 2480 px).
+Choisis une taille entre 1 et 30 000 pixels de côté (260 millions de pixels au plus). ¦ Wiel eng Gréisst tëscht 1 an 30 000 Pixel pro Säit (maximal 260 Millioune Pixelen).
+⬚ Taille de la zone de travail ¦ ⬚ Gréisst vun der Aarbechtsfläch
+Nouvelle taille ¦ Nei Gréisst
+Ancrage ¦ Verankerung
+Où reste l’image ¦ Wou d’Bild bleift
+Relative (ajouter à la taille actuelle) ¦ Relativ (bei déi aktuell Gréisst derbäisetzen)
+Au centre ¦ An der Mëtt
+L’image reste à cet endroit ; la toile s’agrandit (ou se coupe) autour. ¦ D’Bild bleift op dëser Plaz; d’Leinwand gëtt ronderëm méi grouss (oder gëtt ofgeschnidden).
+Fond de la zone ajoutée ¦ Hannergrond vum derbäigesate Beräich
+Transparent (PNG) ¦ Transparent (PNG)
+↺ Remettre la zone de départ ¦ ↺ D’ursprénglech Aarbechtsfläch zrécksetzen
+↶ Annuler (⌘Z) revient à la zone d’avant. ¦ ↶ Réckgängeg (⌘Z) geet zeréck op d’Aarbechtsfläch vu virdrun.
+Choisis une taille entre 1 et 30 000 pixels de côté. ¦ Wiel eng Gréisst tëscht 1 an 30 000 Pixel pro Säit.
+Informations de l’image ¦ Informatioune vum Bild
+Ces informations sont écrites dans l’image enregistrée ou exportée (XMP, lisible par Photoshop, Lightroom, l’Explorateur…). ¦ Dës Informatioune ginn an dat gespäichert oder exportéiert Bild geschriwwen (XMP, liesbar fir Photoshop, Lightroom, den Explorer…).
+Droits (copyright) ¦ Rechter (Copyright)
+Personnes reliées ¦ Verbonne Persounen
+Image trop grande pour être enregistrée par le navigateur. ¦ Bild ze grouss, fir vum Browser gespäichert ze ginn.
+Image trop grande pour le navigateur. ¦ Bild ze grouss fir de Browser.
+Copie retouchée ajoutée aux mêmes fiches. ¦ Retuschéiert Kopie bei déi selwecht Fiche derbäigesat.
+Image enregistrée dans les Médias. ¦ Bild an de Medie gespäichert.
+Nouvelle version affichée. L’original est gardé dans les versions. ¦ Nei Versioun ugewisen. D’Original bleift an de Versiounen.
+Version enregistrée (non affichée). ¦ Versioun gespäichert (net ugewisen).
+Ouverture de la photo ¦ D’Foto gëtt opgemaach
+La photo de départ n’a plus la même taille : vérifie les calques. ¦ D’Startfoto huet net méi déi selwecht Gréisst: kontrolléier d’Ebenen.
+Supprimer le projet (les photos et leurs versions restent) ¦ De Projet läschen (d’Fotoen an hir Versioune bleiwen)
+Aucun projet de retouche pour l’instant ¦ Nach kee Retuschéierprojet
+Dans la Retouche, « 💾 Enregistrer le projet ». ¦ An der Retusch, „💾 De Projet späicheren“.
+Renommer le projet ¦ De Projet ëmbenennen
+La photo et ses versions restent. ¦ D’Foto an hir Versioune bleiwen.
+Écran 16:9 — 1920 × 1080 ¦ Ecran 16:9 — 1920 × 1080
+Carré — 1080 × 1080 ¦ Quadrat — 1080 × 1080
+Carte postale — 1500 × 2100 ¦ Postkaart — 1500 × 2100
+A4 portrait (150 dpi) — 1240 × 1754 ¦ A4 Héichformat (150 dpi) — 1240 × 1754
+A4 paysage (150 dpi) — 1754 × 1240 ¦ A4 Breetformat (150 dpi) — 1754 × 1240
+A4 portrait (300 dpi) — 2480 × 3508 ¦ A4 Héichformat (300 dpi) — 2480 × 3508
+Autre taille… ¦ Aner Gréisst…
+⬜ Partir d’un canevas vide ¦ ⬜ Mat enger eidler Leinwand ufänken
+⬜ Canevas vide ¦ ⬜ Eidel Leinwand
+Créer et ouvrir ¦ Erstellen an opmaachen
+Une couleur… ¦ Eng Faarf…
+Le canevas est ajouté aux Médias ; on y met ensuite des calques, des groupes, du texte, des formes, des photos (Sélection → calque)… ¦ D’Leinwand gëtt bei d’Medien derbäigesat; duerno setzt ee Ebenen, Gruppen, Text, Formen, Fotoen drop (Auswiel → Eben)…
+Taille entre 16 et 8 000 pixels de côté. ¦ Gréisst tëscht 16 an 8 000 Pixel pro Säit.
+Canevas trop grand pour le navigateur. ¦ Leinwand ze grouss fir de Browser.
+Création impossible. ¦ Erstellen net méiglech.
+Canevas ¦ Leinwand
+Restaurer cette photo ¦ Dës Foto restauréieren
+Retoucher cette photo ¦ Dës Foto retuschéieren
+Une photo importée est ajoutée aux Médias (sans être rattachée à une fiche) ; ses retouches sont gardées comme versions. ¦ Eng importéiert Foto gëtt bei d’Medien derbäigesat (ouni mat enger Fiche verbonnen ze sinn); hir Retusche ginn als Versioune behalen.
+Rouvrir un travail de retouche enregistré ¦ Eng gespäichert Retuschéieraarbecht nees opmaachen
+📂 Projets… ¦ 📂 Projeten…
+Une image vide, pour dessiner, écrire ou assembler des calques ¦ En eidelt Bild, fir ze zeechnen, ze schreiwen oder Ebenen zesummenzesetzen
+Trop grande : {w} × {h} points. L’agrandissement est limité à {max} points de côté (et {mp} millions de points). ¦ Ze grouss: {w} × {h} Punkten. D’Vergréisserung ass op {max} Punkte pro Säit limitéiert (an {mp} Millioune Punkten).
+Ta sélection est prise comme ciel ¦ Deng Auswiel gëtt als Himmel geholl
+Ciel trouvé : {cov} de la photo ¦ Himmel fonnt: {cov} vun der Foto
+calques « Ciel » et « Harmonisation » ¦ Ebenen „Himmel“ an „Harmoniséierung“
+Ciel remplacé ({what}) ¦ Himmel ersat ({what})
+Personne détourée (dans ton rectangle) : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Persoun fräigestallt (an dengem Rechteck): wiel den Hannergrond; „D’Kontur retuschéieren“, fir mam Pinsel ze korrigéieren.
+Personne détourée : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Persoun fräigestallt: wiel den Hannergrond; „D’Kontur retuschéieren“, fir mam Pinsel ze korrigéieren.
+{w} × {h} points aujourd’hui ¦ {w} × {h} Punkten am Moment
+Cette image est déjà grande : l’agrandissement est limité à {max} points de côté. ¦ Dëst Bild ass scho grouss: d’Vergréisserung ass op {max} Punkte pro Säit limitéiert.
+×4 donnerait plus de {max} points de côté : seulement ×2. ¦ ×4 géif méi wéi {max} Punkte pro Säit ginn: nëmmen ×2.
+Image agrandie téléchargée ({w} × {h}). ¦ Vergréissert Bild erofgelueden ({w} × {h}).
+Image agrandie ×{k} ({w} × {h}) rangée dans les médias. ¦ Bild ×{k} vergréissert ({w} × {h}) an de Medien ofgeluecht.
+Nouvelle version agrandie ×{k} ({w} × {h}) affichée ; l’original reste dans les versions. ¦ Nei Versioun ×{k} vergréissert ({w} × {h}) ugewisen; d’Original bleift an de Versiounen.
+☀️ Bleu dégagé ¦ ☀️ Kloer blo
+⛅ Beaux nuages ¦ ⛅ Schéi Wolleken
+🌅 Coucher de soleil ¦ 🌅 Sonnenënnergang
+⛈️ Ciel orageux ¦ ⛈️ Stuermegen Himmel
+🌫️ Ciel blanc d’hiver ¦ 🌫️ Wäissen Wanterhimmel
+Agrandissement arrêté. ¦ Vergréisserung gestoppt.
+Fil de calcul en panne. ¦ Berechnungsfuedem ausgefall.
+Recherche du ciel… ¦ Den Himmel gëtt gesicht…
+Je ne trouve pas de ciel : il doit toucher le haut de la photo et être assez uni. Sélectionne-le toi-même (🪄 baguette, ➰ lasso), puis recommence : ta sélection sera prise comme ciel. ¦ Ech fanne keen Himmel: e muss den ieweschte Rand vun der Foto beréieren an zimlech eenheetlech sinn. Wiel en selwer aus (🪄 Zauberstaf, ➰ Lasso), dann fänk nees un: deng Auswiel gëtt als Himmel geholl.
+Harmonisation du premier plan ¦ Harmoniséierung vum Virdergrond
+Ciel ¦ Himmel
+☁️ Remplacer le ciel ¦ ☁️ Den Himmel ersetzen
+Une photo de ciel : de la base, ou de l’ordinateur ¦ Eng Himmelsfoto: aus der Datebank, oder vum Computer
+Une image… ¦ E Bild…
+Taille du nouveau ciel ¦ Gréisst vum neien Himmel
+Position verticale ¦ Vertikal Positioun
+Position horizontale ¦ Horizontal Positioun
+Avec une taille au-dessus de 100 % : quelle partie du ciel se voit (0 = le haut). ¦ Mat enger Gréisst iwwer 100 %: wéi een Deel vum Himmel ze gesinn ass (0 = uewen).
+Fondu à l’horizon ¦ Iwwergank um Horizont
+Adoucit la limite entre le ciel et la terre (arbres, toits) : plus haut, plus fondu. ¦ Mécht d’Grenz tëscht Himmel an Äerd méi mëll (Beem, Diech): méi héich = méi verschwommen.
+Harmoniser le premier plan ¦ De Virdergrond harmoniséieren
+Le paysage prend un peu la couleur et la lumière du nouveau ciel, pour que tout aille ensemble. ¦ D’Landschaft hëlt e bëssen d’Faarf an d’Liicht vum neien Himmel un, fir datt alles zesummepasst.
+Opacité du ciel ¦ Opazitéit vum Himmel
+Peindre le masque du calque « Ciel » : ⬛ cacher (là où le ciel ne doit pas passer), ⬜ montrer ¦ D’Mask vun der Eben „Himmel“ molen: ⬛ verstoppen (do, wou den Himmel net duerchkomme soll), ⬜ weisen
+🖌 Corriger le masque ¦ 🖌 D’Mask korrigéieren
+Rien n’est détruit : le ciel est un calque avec un masque. Si un bout de ciel manque ou déborde : « Corriger le masque », ou sélectionne le ciel toi-même (🪄, ➰) et relance. ¦ Näischt gëtt zerstéiert: den Himmel ass eng Eben mat enger Mask. Wann e Stéck Himmel feelt oder iwwerleeft: „D’Mask korrigéieren“, oder wiel den Himmel selwer aus (🪄, ➰) a start nees.
+Une photo de ciel ¦ Eng Himmelsfoto
+Prendre ce ciel ¦ Dësen Himmel huelen
+Une photo de la base, ou une image de l’ordinateur (elle entre dans les médias). ¦ Eng Foto aus der Datebank, oder e Bild vum Computer (et kënnt an d’Medien).
+Tu peins le masque du ciel : ⬛ cacher là où le ciel déborde (feuillage, toits), ⬜ montrer là où il manque. Puis « ✓ OK ». ¦ Du mols d’Mask vum Himmel: ⬛ verstoppen do, wou den Himmel iwwerleeft (Blieder, Diech), ⬜ weisen do, wou en feelt. Dann „✓ OK“.
+Ciel remplacé : calques « Ciel » et « Harmonisation du premier plan » (opacité, masque, 👁 pour comparer). ¦ Himmel ersat: Ebenen „Himmel“ an „Harmoniséierung vum Virdergrond“ (Opazitéit, Mask, 👁 fir ze vergläichen).
+✂️ Détourer une personne ¦ ✂️ Eng Persoun fräistellen
+Sans intelligence artificielle : tout se calcule ici ¦ Ouni kënschtlech Intelligenz: alles gëtt hei berechent
+1. Trace un rectangle autour de la personne (⬚), pas trop serré — ou laisse tout : la photo entière sert de cadre. ¦ 1. Zéi e Rechteck ronderëm d’Persoun (⬚), net ze enk — oder looss alles: déi ganz Foto déngt als Kader.
+2. « Détourer » : l’app apprend les couleurs de la personne (dans le rectangle) et du fond (autour), puis suit les contours. ¦ 2. „Fräistellen“: d’App léiert d’Faarwe vun der Persoun (am Rechteck) a vum Hannergrond (ronderëm), an da follegt se de Konturen.
+⬚ Tracer un rectangle ¦ ⬚ E Rechteck zéien
+✂️ Détourer ¦ ✂️ Fräistellen
+Fond transparent (image en PNG) ¦ Transparenten Hannergrond (Bild als PNG)
+Fond flou ¦ Onschaarfen Hannergrond
+Fond uni ¦ Eenfaarwegen Hannergrond
+Garder la personne sur un calque à part ¦ D’Persoun op enger separater Eben behalen
+Flou du fond ¦ Onschäerft vum Hannergrond
+Peindre le masque : ⬛ cacher, ⬜ montrer ¦ D’Mask molen: ⬛ verstoppen, ⬜ weisen
+🖌 Retoucher le contour ¦ 🖌 D’Kontur retuschéieren
+Marche bien quand la personne se détache de son fond (couleurs différentes, fond assez simple). Cheveux fins, fond chargé ou vêtements de la couleur du fond : il faudra retoucher au pinceau (« Retoucher le contour »). ¦ Klappt gutt, wann d’Persoun sech vun hirem Hannergrond ofhieft (aner Faarwen, zimlech einfachen Hannergrond). Fein Hoer, onrouegen Hannergrond oder Kleeder an der Faarf vum Hannergrond: da muss mam Pinsel retuschéiert ginn („D’Kontur retuschéieren“).
+Personne détourée ¦ Persoun fräigestallt
+Trace un rectangle autour de la personne (en laissant un peu de fond tout autour), puis « ✂️ Détourer ». ¦ Zéi e Rechteck ronderëm d’Persoun (a looss ronderëm e bësse Hannergrond), dann „✂️ Fräistellen“.
+Détourage… ¦ Gëtt fräigestallt…
+Personne introuvable : trace le rectangle plus près d’elle, puis recommence. ¦ Persoun net fonnt: zéi d’Rechteck méi no bei hir, dann fänk nees un.
+✂️ Détourer à nouveau ¦ ✂️ Nach eng Kéier fräistellen
+Tu peins le masque de la personne : ⬛ cacher (du fond resté), ⬜ montrer (un bout de la personne oublié). ¦ Du mools d’Mask vun der Persoun: ⬛ verstoppen (Rescht vum Hannergrond), ⬜ weisen (e vergiessent Stéck vun der Persoun).
+Tu peins le masque du fond : ⬛ cacher (là c’est la personne), ⬜ montrer (là c’est du fond). ¦ Du mools d’Mask vum Hannergrond: ⬛ verstoppen (do ass d’Persoun), ⬜ weisen (do ass Hannergrond).
+Détourage : fond transparent ¦ Fräistellen: transparenten Hannergrond
+Détourage : fond flou ¦ Fräistellen: onschaarfen Hannergrond
+Détourage : fond uni ¦ Fräistellen: eenfaarwegen Hannergrond
+Détourage : personne sur un calque ¦ Fräistellen: Persoun op enger Eben
+Fond rendu transparent (masque de la photo) : l’image sera enregistrée en PNG. ¦ Hannergrond transparent gemaach (Mask vun der Foto): d’Bild gëtt als PNG gespäichert.
+Détourage fait : tout est sur des calques, avec des masques à retoucher au besoin. ¦ Fräigestallt: alles ass op Ebenen, mat Masken, déi een am Bedarfsfall nach retouchéiere kann.
+Trace un rectangle autour de la personne (⬚), ou « ✂️ Détourer » directement pour toute la photo. ¦ Zeechen e Rechteck ronderëm d’Persoun (⬚), oder „✂️ Fräistellen“ direkt fir déi ganz Foto.
+Préparation de l’image en pleine taille… ¦ D’Bild gëtt a voller Gréisst preparéiert…
+🔍 Agrandir l’image ¦ 🔍 D’Bild vergréisseren
+Netteté des contours ¦ Schäerft vun de Konturen
+Renforce les contours sans faire de halo ; les aplats (ciel, peau) restent doux. ¦ Verstäerkt d’Konturen ouni Halo; déi eenheetlech Flächen (Himmel, Haut) bleiwe mëll.
+Clique pour choisir l’endroit de l’aperçu ¦ Klick, fir d’Plaz vun der Virschau ze wielen
+Lissage du grain ¦ Kär ausgläichen
+Avant (agrandi simplement) ¦ Virdrun (einfach vergréissert)
+Après, à 100 % ¦ Duerno, op 100 %
+Une nouvelle version de la photo, affichée partout (l’original reste) ¦ Eng nei Versioun vun der Foto, iwwerall ugewisen (d’Original bleift)
+Agrandir → nouvelle version ¦ Vergréisseren → nei Versioun
+→ copie séparée ¦ → separat Kopie
+Agrandir → dans les médias ¦ Vergréisseren → an d’Medien
+Agrandir ne retrouve pas les détails qui n’ont jamais été photographiés : l’image est plus grande et plus nette, pas plus précise. ¦ Vergréisseren bréngt keng Detailer zeréck, déi ni fotograféiert goufen: d’Bild ass méi grouss a méi schaarf, net méi präzis.
+Cette image est déjà trop grande pour être agrandie. ¦ Dëst Bild ass scho ze grouss, fir vergréissert ze ginn.
+Filtre : {what} ¦ Filter: {what}
+🎨 Teinte/Saturation {num} ¦ 🎨 Faarftoun/Sättegung {num}
+Motif {num} ¦ Muster {num}
+Bruit ¦ Rauschen
+Artistiques ¦ Artistesch
+Pixellisation ¦ Pixeliséierung
+Rendu ¦ Rendu
+Autres ¦ Anerer
+Flou gaussien ¦ Gaussesch Onschäerft
+Flou de mouvement ¦ Beweegungsonschäerft
+Flou radial (zoom) ¦ Radial Onschäerft (Zoom)
+Flou rotatif ¦ Dréionschäerft
+Accentuation (masque flou) ¦ Onschaarf Maskéierung
+Estampage (relief) ¦ Prägen (Relief)
+Solarisation ¦ Solariséierung
+Diffusion ¦ Diffusioun
+Vent ¦ Wand
+Aquarelle ¦ Aquarell
+Vieux film ¦ Ale Film
+Cristallisation ¦ Kristalliséierung
+Pointillisme ¦ Pointillismus
+Nuages (texture) ¦ Wolleken (Textur)
+Lueur diffuse ¦ Diffus Liichten
+Tourbillon ¦ Wierbel
+Onde ¦ Well
+Rayon ¦ Radius
+Centre X ¦ Mëttelpunkt X
+Centre Y ¦ Mëttelpunkt Y
+Seuil ¦ Schwell
+Bande nette, hauteur ¦ Schaarf Band, Héicht
+Points lumineux ¦ Hell Punkten
+Monochrome (0 / 1) ¦ Monochrom (0 / 1)
+Gain ¦ Stäerkt
+Niveaux ¦ Niveauen
+Longueur ¦ Längt
+Contours ¦ Konturen
+Trait ¦ Strich
+Traits noirs ¦ Schwaarz Strécher
+Usure ¦ Ofnotzung
+Position X ¦ Positioun X
+Position Y ¦ Positioun Y
+Amplitude ¦ Amplitud
+Horizontale (0) / verticale (1) ¦ Horizontal (0) / vertikal (1)
+Horizontal ¦ Horizontal
+Contraste ¦ Kontrast
+Ombres ¦ Schatten
+Chaleur ¦ Wäermt
+Rouge ¦ Rout
+Vert ¦ Gréng
+Bleu ¦ Blo
+RVB ¦ RGB
+Assombrir ¦ Méi däischter maachen
+Grain ¦ Kär
+Vignette ¦ Vignette
+Force ¦ Stäerkt
+Couleurs ¦ Faarwen
+Auto ¦ Auto
+Document lisible ¦ Liesbart Dokument
+Niveaux : point noir, tons moyens, point blanc ¦ Niveauen: schwaarze Punkt, Mëtteltéin, wäisse Punkt
+Niveaux automatiques ¦ Automatesch Niveauen
+Monter la courbe éclaircit, la creuser assombrit, un « S » donne du contraste. Rouge, vert, bleu : corriger une dominante de couleur. ¦ D’Kurv eropzéien mécht méi hell, se erofzéien mécht méi däischter, en „S“ gëtt Kontrast. Rout, gréng, blo: e Faarfstéch korrigéieren.
+✨ Menu ¦ ✨ Menü
+Déplacer : glisse la poignée, ou Alt + ↑ / ↓ ¦ Réckelen: zéi um Grëff, oder Alt + ↑ / ↓
+Auto : les points les plus sombres deviennent noirs et les plus clairs blancs ; cliquer une 2ᵉ fois revient à l’état d’avant. ¦ Auto: déi däischtst Punkte ginn schwaarz an déi hellst wäiss; eng 2. Kéier klicken setzt alles zeréck wéi virdrun.
+Éclaircit seulement les parties sombres (ou les assombrit vers la gauche), sans toucher aux claires. ¦ Mécht nëmmen déi däischter Deeler méi hell (oder no lénks méi däischter), ouni déi hell unzerécken.
+Cliquer à nouveau pour revenir à l’état d’avant ¦ Nach eng Kéier klicken, fir zeréck op wéi et virdru war
+Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou la touche ⌫), ou le glisser hors du cadre. ¦ Klick op d’Kurv: e Punkt derbäisetzen · zéien: e réckelen · fir en ewechzehuelen: e wielen an duerno „De Punkt ewechhuelen“ (oder d’Tast ⌫), oder en aus dem Kader zéien.
+fx ¦ fx
+Normal italique ¦ Normal kursiv
+Extra-fin italique ¦ Extra-déng kursiv
+Ultra-léger italique ¦ Ultraliicht kursiv
+Léger italique ¦ Liicht kursiv
+Médium italique ¦ Medium kursiv
+Demi-gras italique ¦ Hallef-fett kursiv
+Gras italique ¦ Fett kursiv
+Extra-gras italique ¦ Extra-fett kursiv
+Noir italique ¦ Schwaarz kursiv
+Unicode : Latin-1 ¦ Unicode: Latin-1
+Unicode : grec ¦ Unicode: Griichesch
+Unicode : cyrillique ¦ Unicode: Kyrillesch
+Unicode : ponctuation ¦ Unicode: Punktuatioun
+Unicode : monnaies ¦ Unicode: Währungen
+Unicode : symboles de lettres ¦ Unicode: Buschtawenähnlech Symboler
+Unicode : nombres ¦ Unicode: Zuelen
+Unicode : traits de tableau ¦ Unicode: Tabellestrécher
+Unicode : symboles divers ¦ Unicode: verschidde Symboler
+Unicode : casseau (dingbats) ¦ Unicode: Dingbats
+Unicode : ligatures ¦ Unicode: Ligaturen
+Grain de papier ¦ Pabeierkär
+Rond ¦ Ronn
+Plume calligraphique ¦ Kalligraphiefieder
+Crayon ¦ Bläistëft
+Pinceau sec ¦ Dréchene Pinsel
+Herbe ¦ Gras
+Peau claire ¦ Hell Haut
+Peau hâlée ¦ Gebrongt Haut
+Peau mate ¦ Donkel Haut
+Joues, lèvres ¦ Baken, Lëpsen
+Cheveux bruns ¦ Brong Hoer
+Cheveux blonds ¦ Blonden Hoer
+Cheveux gris ¦ Gro Hoer
+Feuillage ¦ Blieder
+Uniforme, costume bleu ¦ Uniform, bloe Kostüm
+Robe bordeaux ¦ Bordeauxroude Kleed
+Habit noir ¦ Schwaarz Kleedung
+Mur, pierre ¦ Mauer, Steen
+Brique, tuile ¦ Bréck, Zil
+Bois ¦ Holz
+🩹 Correcteur ¦ 🩹 Korrekturpinsel
+🧬 Tampon (morceau manquant) ¦ 🧬 Stempel (feelend Stéck)
+Zoom : ajuster, 50 %, 100 %, 200 % ¦ Zoom: upassen, 50 %, 100 %, 200 %
+photo|Restaurer ¦ Restauréieren
+menu|Sélection ¦ Auswiel
+retouche|Courbe ¦ Kurv
+motif|D’après ¦ No
+pinceau|Feuille ¦ Blat
+pinceau|Étoile ¦ Stär
+pinceau|Carré ¦ Véiereck
+Glisse pour comparer ¦ Zéi, fir ze vergläichen
+Rideau avant / après ¦ Rideau virdrun / duerno
+Image importée ¦ Importéiert Bild
+La fenêtre d’export n’est pas encore prête. ¦ D’Exportfënster ass nach net prett.
+Image téléchargée ; une copie est rangée dans les médias. ¦ Bild erofgelueden; eng Kopie ass an de Medien ofgeluecht.
+Aperçu de l’avant / après ¦ Virschau vum Virdrun / Duerno
+Rideau vertical (avant à gauche) ¦ Vertikale Rideau (virdrun lénks)
+Rideau horizontal (avant en haut) ¦ Horizontale Rideau (virdrun uewen)
+L’une sous l’autre ¦ Déi eng ënner där anerer
+Position du rideau ¦ Positioun vum Rideau
+ex. Mariage de Jean et Marie, 1925 ¦ z. B. Bestietnes vum Jean an der Marie, 1925
+Écrire « Avant » et « Après » ¦ „Virdrun“ an „Duerno“ schreiwen
+Avant / après téléchargé ; une copie est rangée dans les médias. ¦ Virdrun / duerno erofgelueden; eng Kopie ass an de Medien ofgeluecht.
+Garder appuyé pour voir l’original ¦ Gedréckt halen, fir d’Original ze gesinn
+👁 Avant / après ¦ 👁 Virdrun / duerno
+◧ Rideau ¦ ◧ Rideau
+Comparer avec un rideau qu’on glisse sur la photo ¦ Mat engem Rideau vergläichen, deen ee iwwer d’Foto zitt
+Rideau vertical ou horizontal ¦ Vertikalen oder horizontale Rideau
+Exporter l’avant / après en image (côte à côte ou rideau, avec légende) ¦ D’Virdrun / Duerno als Bild exportéieren (nieftenee oder Rideau, mat Legend)
+Rideau horizontal ¦ Horizontale Rideau
+Rideau vertical ¦ Vertikale Rideau
+De combien le cadre dépasse autour du visage : petit = visage serré, grand = épaules et un peu de fond. ¦ Wéi wäit de Kader ronderëm d’Gesiicht geet: kleng = enk ëm d’Gesiicht, grouss = Schëlleren an e bësse Hannergrond.
+La hauteur des yeux dans le cadre, depuis le haut : la même pour tous les portraits, ils s’alignent quand on les met côte à côte. ¦ D’Héicht vun den Aen am Kader, vun uewen: déi selwecht fir all Portraiten, sou stinn se riicht, wann een se nieftenee setzt.
+Faible : le bord du pinceau est doux et se fond ; forte : le bord est net. ¦ Schwaach: de Rand vum Pinsel ass mëll a leeft aus; staark: de Rand ass schaarf.
+Filtres ¦ Filteren
+✨ Filtres ¦ ✨ Filteren
+Classique : comme avant. Perceptuel : un passage plus égal à l’œil, sans zone grise ni trop sombre au milieu. Par les teintes : en passant par les couleurs de l’arc-en-ciel. ¦ Klassesch: wéi virdrun. Perzeptuell: en Iwwergank, deen fir d’A méi gläichméisseg ass, ouni gro oder ze däischter Zon an der Mëtt. Iwwer d’Faarftéin: duerch d’Faarwe vum Reebou.
+Plus haut : des lignes plus pâles ou plus courtes sont aussi prises. Trop haut, des détails de la photo (cheveux, écriture) peuvent l’être : regarde le rouge. ¦ Méi héich: méi blass oder méi kuerz Linne ginn och erfaasst. Ze héich, kënnen Detailer vun der Foto (Hoer, Schrëft) och erfaasst ginn: kuck op dat Rout.
+La force de toutes les étapes d’un coup : bas = une restauration discrète, haut = plus marquée (mais attention au « trop lisse »). ¦ D’Stäerkt vun alle Schrëtt op eemol: niddereg = eng diskret Restauratioun, héich = méi staark (mee opgepasst op „ze glat“).
+Sens ¦ Richtung
+De combien ¦ Wéi vill
+↻ Horaire ¦ ↻ Mat der Auer
+↺ Antihoraire ¦ ↺ Géint d’Auer
+↻ Faire pivoter ¦ ↻ Dréinen
+Garde le plus grand rectangle droit dans la photo tournée : plus de coins vides. C’est un recadrage : « Annuler le recadrage » le retire. ¦ Behält dat gréisste riicht Rechteck an der gedréinter Foto: keng eidel Ecken méi. Et ass e Rogne: „D’Rogne réckgängeg maachen“ hëlt et ewech.
+Enlever ¦ Ewechhuelen
+Coché : le nombre de pixels change (l’image est recalculée). Décoché : seuls la résolution et la taille à l’impression changent, les pixels restent les mêmes. ¦ Ugekräizt: d’Zuel vun de Pixelen ännert sech (d’Bild gëtt nei gerechent). Net ugekräizt: nëmmen d’Opléisung an d’Drockgréisst änneren sech, d’Pixele bleiwen déi selwecht.
+Coché : tu écris ce qu’on ajoute (ou enlève, avec un nombre négatif) autour de l’image. ¦ Ugekräizt: du schreifs, wat ronderëm d’Bild derbäikënnt (oder ewechgeholl gëtt, mat enger negativer Zuel).
+Avant d’agrandir, adoucit le grain et le bruit (les contours restent) : utile pour une photo scannée granuleuse. ¦ Mécht virum Vergréisseren de Kär an d’Rauschen méi mëll (d’Konturen bleiwen): nëtzlech fir eng kärneg gescannte Foto.
+Pour un négatif photographié ou scanné : les clairs et les sombres s’échangent. ¦ Fir en Negativ, dat fotograféiert oder gescannt gouf: hell an däischter ginn ausgetosch.
+Nom de la photo retouchée ¦ Numm vun der retouchéierter Foto
+Le nom de la copie et des fichiers exportés ¦ Den Numm vun der Kopie an vun den exportéierte Fichieren
+La retouche complète : calques, sélections, masques, texte, formes, filtres, projets ¦ Déi komplett Retouche: Ebenen, Auswielen, Masken, Text, Formen, Filteren, Projeten
+Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup (dans la retouche complète) ¦ Entrauschen, Stëbs, Falen, Kontrast, Schäerft a Faarwe op eemol (an der kompletter Retouche)
+🎛️ Retouche complète ¦ 🎛️ Komplett Retouche
+Retouche complète ¦ Komplett Retouche
+Exporter : la photo retouchée (PNG, JPG, imprimer) ou l’avant / après ¦ Exportéieren: déi retouchéiert Foto (PNG, JPG, drécken) oder d’Virdrun / Duerno
+Enregistrer et afficher cette version de la photo (l’original est gardé) ¦ Dës Versioun vun der Foto späicheren a weisen (d’Original bleift erhalen)
+🖼 La photo retouchée (PNG, JPG, imprimer)… ¦ 🖼 Déi retouchéiert Foto (PNG, JPG, drécken)…
+Barre des outils ¦ Toolbar
+Réglages : couleur, lumière, courbe ¦ Astellungen: Faarf, Liicht, Kurv
+Correcteur de taches : clique sur une tache, une poussière, une rayure ¦ Fleckekorrektur: klick op e Flecken, e Stëbskär, e Kratzer
+Tampon de duplication : {key} + clic sur l’endroit à recopier, puis peins sur la zone à couvrir ¦ Stempel: {key} + Klick op d’Plaz, déi kopéiert soll ginn, duerno mol iwwer d’Zon, déi zougedeckt soll ginn
+{key} + clic pour choisir l’endroit à recopier, puis peins sur la zone à couvrir. ¦ {key} + Klick, fir d’Plaz ze wielen, déi kopéiert soll ginn, duerno mol iwwer d’Zon, déi zougedeckt soll ginn.
+Faire pivoter de 90° vers la gauche (antihoraire) ¦ Ëm 90° no lénks dréinen (géint d’Auer)
+Pivoter à gauche ¦ No lénks dréinen
+Faire pivoter de 90° vers la droite (horaire) ¦ Ëm 90° no riets dréinen (mat der Auer)
+Pivoter à droite ¦ No riets dréinen
+Retouche complète : calques, sélections, masques, texte, filtres ¦ Komplett Retouche: Ebenen, Auswielen, Masken, Text, Filteren
+Les corrections en cours seront perdues. ¦ Déi lafend Korrekture ginn verluer.
+Passer à la retouche complète ? ¦ Op déi komplett Retouche wiesselen?
+Passer à la retouche complète ¦ Op déi komplett Retouche wiesselen
+Règle la couleur et la lumière à droite · garde « 👁 Avant / après » appuyé pour comparer ¦ Stell d’Faarf an d’Liicht riets an · hal „👁 Virdrun / duerno“ gedréckt, fir ze vergläichen
+Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long. ¦ Klick op e Flecken, e Stëbskär oder e Kratzer: e gëtt duerch dat ersat, wat ronderëm ass. Fir e Kratzer, zéi laanscht en.
+Choisis d’abord l’endroit à recopier : Alt + clic (⌥ + clic sur Mac). ¦ Wiel fir d’éischt d’Plaz, déi kopéiert soll ginn: Alt + Klick (⌥ + Klick um Mac).
+Versions de la photo ¦ Versioune vun der Foto
+Enregistrer sans l’afficher (gardée dans les versions) ¦ Späicheren ouni se ze weisen (bei de Versiounen behalen)
+Copie séparée (un autre média, relié aux mêmes fiches) ¦ Separat Kopie (en anere Medium, mat deene selwechte Fiche verbonnen)
+Exporter la photo retouchée (PNG, JPG, imprimer)… ¦ Déi retouchéiert Foto exportéieren (PNG, JPG, drécken)…
+Exporter l’avant / après… ¦ D’Virdrun / Duerno exportéieren…
+Restaurer en une fois… ¦ Op eemol restauréieren…
+Pivoter de 90° à droite (horaire) ¦ Ëm 90° no riets dréinen (mat der Auer)
+Pivoter de 90° à gauche (antihoraire) ¦ Ëm 90° no lénks dréinen (géint d’Auer)
+Avant / après en rideau ¦ Virdrun / duerno als Rideau
+La photo est ajoutée aux médias (sans fiche). Les réglages en cours sur cette photo-ci sont abandonnés. ¦ D’Foto gëtt bei d’Medien derbäigesat (ouni Fiche). Déi lafend Astellungen op dëser Foto hei ginn opginn.
+Retoucher « {name} » à la place ? ¦ Amplaz „{name}“ retouchéieren?
+💧 Fluidité ¦ 💧 Verflëssegen
+Fluidité ¦ Verflëssegen
+Peins sur la photo pour la déformer, comme une pâte souple ¦ Mol op d’Foto, fir se ze deforméieren, wéi e mëllen Deeg
+L’image suit la main ¦ D’Bild follegt der Hand
+Agrandit sous le pinceau (garder appuyé) ¦ Vergréissert ënner dem Pinsel (gedréckt halen)
+Rétrécit sous le pinceau (garder appuyé) ¦ Verklengert ënner dem Pinsel (gedréckt halen)
+Fait tourner dans le sens des aiguilles d’une montre ¦ Dréit mat der Auer
+Fait tourner dans l’autre sens ¦ Dréit an déi aner Richtung
+Ramène peu à peu l’image d’origine ¦ Bréngt lues a lues d’Original zeréck
+➡ Pousser ¦ ➡ Drécken
+⊕ Gonfler ¦ ⊕ Opblosen
+⊖ Dégonfler ¦ ⊖ Zesummenzéien
+Dégonfler ¦ Zesummenzéien
+Gonfler ¦ Opblosen
+Pousser ¦ Drécken
+↻ Tourbillon ¦ ↻ Wierbel
+↺ Tourbillon inverse ¦ ↺ Ëmgedréinte Wierbel
+Tourbillon inverse ¦ Ëmgedréinte Wierbel
+↩ Reconstruire ¦ ↩ Rekonstruéieren
+Reconstruire ¦ Rekonstruéieren
+Image trop grande pour la Fluidité. ¦ Bild ze grouss fir d’Verflëssegen.
+↶ Annuler le coup ¦ ↶ De Strich réckgängeg maachen
+✓ Appliquer (calque « Fluidité ») ¦ ✓ Uwenden (Ebe „Verflëssegen“)
+Rien n’a été déformé. ¦ Et gouf näischt deforméiert.
+💧 Fluidité appliquée sur le calque « Fluidité » (la photo reste dessous : 👁 pour comparer). ¦ 💧 Verflëssegen op d’Ebe „Verflëssegen“ ugewannt (d’Foto bleift drënner: 👁 fir ze vergläichen).
+🪄 Gomme magique ¦ 🪄 Magesche Gummi
+Clique sur le fond à rendre transparent (plusieurs clics s’ajoutent) ¦ Klick op den Hannergrond, deen transparent soll ginn (e puer Klicke ginn zesummegezielt)
+Zone voisine seulement (sinon : cette couleur partout) ¦ Just déi Nopeschzon (soss: dës Faarf iwwerall)
+↶ Annuler le clic ¦ ↶ De Klick réckgängeg maachen
+✓ Appliquer (masque de la photo) ¦ ✓ Uwenden (Mask vun der Foto)
+La photo a déjà un masque : la gomme magique le remplace. ¦ D’Foto huet schonn eng Mask: de Magesche Gummi ersetzt se.
+Remplacer le masque de la photo ? ¦ D’Mask vun der Foto ersetzen?
+🪄 Fond rendu transparent (masque de la photo, à retoucher au pinceau) : l’image s’enregistre en PNG. ¦ 🪄 Hannergrond transparent gemaach (Mask vun der Foto, mam Pinsel nozebesseren): d’Bild gëtt als PNG gespäichert.
+Masque de « {name} » ¦ Mask vu „{name}“
+Il n’y a pas encore de masque : détoure (✂️), gomme le fond (🪄) ou ajoute un masque à un calque, puis affine son bord. ¦ Et gëtt nach keng Mask: stell fräi (✂️), gumm den Hannergrond ewech (🪄) oder setz enger Ebe eng Mask derbäi, an da verfeiner hire Rand.
+✨ Affiner le bord ¦ ✨ De Rand verfeineren
+Décaler le bord ¦ De Rand verréckelen
+Voir le masque seul (blanc : gardé) ¦ Just d’Mask weisen (wäiss: behalen)
+Bord du masque affiné ¦ Rand vun der Mask verfeinert
+✨ Bord affiné (↶ pour revenir ; le pinceau corrige le reste). ¦ ✨ Rand verfeinert (↶ fir zeréckzegoen; de Pinsel korrigéiert de Rescht).
+Lissage du bord ¦ Rand ausgläichen
+Contraste du bord ¦ Kontrast vum Rand
+Image trop grande ({w} × {h} points) : réduis la taille des photos. ¦ Bild ze grouss ({w} × {h} Pixel): reduzéier d’Gréisst vun de Fotoen.
+Recherche… ({i}/{total}) ¦ Sichen… ({i}/{total})
+« {name} » : décalage {dx} × {dy} points, rotation {rot}°, ressemblance {pct} %. ¦ „{name}“: Verréckelung {dx} × {dy} Pixel, Rotatioun {rot}°, Ähnlechkeet {pct} %.
+Pas de partie commune sûre pour {names} : place-la à la main (glisser, flèches ; « Mode différence » pour vérifier). ¦ Keen sécheren gemeinsamen Deel fir {names}: placéier se mat der Hand (zéien, Feiler; „Differenzmodus“ fir ze kontrolléieren).
+Photos alignées : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement. ¦ Fotoen ausgeriicht: kontrolléier (zéien, Feiler fir unzepassen). „Iwwergäng iwwerbenden“ mécht d’Verbindung beim Späichere méi mëll.
+Photo alignée : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement. ¦ Foto ausgeriicht: kontrolléier (zéien, Feiler fir unzepassen). „Iwwergäng iwwerbenden“ mécht d’Verbindung beim Späichere méi mëll.
+Image assemblée enregistrée, rattachée aux mêmes fiches que « {name} ». Les photos d’origine restent. ¦ Zesummegesat Bild gespäichert, mat deene selwechte Fiche verbonnen wéi „{name}“. D’Original-Fotoe bleiwen.
+Titre de l’image assemblée ¦ Titel vum zesummegesate Bild
+Le titre de l’image assemblée (et le nom des fichiers exportés) ¦ Den Titel vum zesummegesate Bild (an den Numm vun den exportéierte Fichieren)
+L’image assemblée : PNG, JPG ou imprimer ¦ D’zesummegesat Bild: PNG, JPG oder drécken
+Enregistrer l’image assemblée dans les médias, rattachée aux mêmes fiches que la première photo de la base ¦ D’zesummegesat Bild an de Medie späicheren, mat deene selwechte Fiche verbonnen wéi déi éischt Foto aus der Datebank
+Clique une photo pour la choisir, glisse pour la déplacer · Maj + molette : taille · Alt + molette : rotation · molette : zoom · flèches : 1 px (Maj : 10 px) · glisse ici une photo de l’ordinateur pour l’ajouter ¦ Klick op eng Foto, fir se ze wielen, zéi, fir se ze réckelen · Shift + Rad: Gréisst · Alt + Rad: Rotatioun · Rad: Zoom · Feiler: 1 px (Shift: 10 px) · zéi eng Foto vum Computer heihinner, fir se derbäizesetzen
+Fond blanc (sinon transparent en PNG) ¦ Wäissen Hannergrond (soss transparent am PNG)
+Coché : le fond autour des photos est blanc. Décoché, il reste transparent (seulement en PNG ; le JPG met toujours du blanc). ¦ Ugekräizt: den Hannergrond ronderëm d’Fotoen ass wäiss. Net ugekräizt, bleift e transparent (just am PNG; de JPG mécht ëmmer wäiss).
+Ce qui se superpose bien devient noir : idéal pour aligner deux photos du même endroit ¦ Wat gutt iwwerenee passt, gëtt schwaarz: ideal, fir zwou Fotoe vun der selwechter Plaz auszeriichten
+Les parties identiques des deux photos deviennent noires : quand l’écriture disparaît presque, elles sont parfaitement alignées. ¦ Déi identesch Deeler vun deenen zwou Fotoe ginn schwaarz: wann d’Schrëft bal verschwënnt, sinn se perfekt ausgeriicht.
+Mode différence ¦ Differenzmodus
+Boutons des photos ¦ Knäppercher vun de Fotoen
+Panorama, page photographiée en deux fois : chaque photo est posée sur la précédente là où elles se recouvrent (décalage, petite rotation) ¦ Panorama, Säit an zwee Mol fotograféiert: all Foto gëtt op déi virdrun geluecht, do wou se sech iwwerlappen (Verréckelung, kleng Rotatioun)
+🪄 Aligner tout seul ¦ 🪄 Automatesch ausriichten
+Image enregistrée ¦ Gespäichert Bild
+JPEG (léger) ¦ JPEG (liicht)
+PNG (sans perte) ¦ PNG (ouni Verloscht)
+Fondre les raccords ¦ Iwwergäng iwwerbenden
+Là où deux photos se recouvrent, le bord de celle du dessus s’efface en douceur : pas de marche visible au raccord. ¦ Do wou zwou Fotoe sech iwwerlappen, verschwënnt de Rand vun där uewendrop lues: keng siichtbar Stuf beim Iwwergank.
+Largeur du fondu ¦ Breet vum Iwwerbenden
+Rogner aux parties couvertes (sans coins vides) ¦ Op déi zougedeckten Deeler rognéieren (ouni eidel Ecken)
+Garde le plus grand rectangle entièrement couvert par les photos : plus de coins blancs autour d’un panorama. ¦ Behält dat gréisst Rechteck, dat ganz vun de Fotoen zougedeckt ass: keng wäiss Ecke méi ronderëm e Panorama.
+L’assemblage non enregistré sera perdu. ¦ Déi net gespäichert Zesummesetzung geet verluer.
+Fermer sans enregistrer l’assemblage ? ¦ Zoumaachen, ouni d’Zesummesetzung ze späicheren?
+Mettre devant ¦ No vir setzen
+Mettre derrière ¦ No hannen setzen
+Aucune photo à assembler pour l’instant ¦ Nach keng Fotoen zum Zesummesetzen
+« ＋ Photos », ou glisse une photo de l’ordinateur sur le plan de travail. ¦ „＋ Fotoen“, oder zéi eng Foto vum Computer op d’Aarbechtsfläch.
+＋ Photos ¦ ＋ Fotoen
+Clique une photo pour la régler. ¦ Klick op eng Foto, fir se anzestellen.
+La taille de la photo par rapport à ses vrais points : pour mettre deux photos à la même échelle. ¦ D’Gréisst vun der Foto am Verglach mat hiren echte Pixelen: fir zwou Fotoen op déi selwecht Skala ze bréngen.
+À moitié transparente, la photo du dessus laisse voir celle du dessous : on aligne les écritures. ¦ Hallef transparent léisst déi iewescht Foto déi ënnescht duerchkucken: esou riicht een d’Schrëften aus.
+À moitié transparente ¦ Hallef transparent
+Pour mettre deux photos à la même échelle : rends celle du dessus à moitié transparente (ou coche « Mode différence »), puis ajuste sa taille et sa rotation jusqu’à ce que les écritures se superposent. ¦ Fir zwou Fotoen op déi selwecht Skala ze bréngen: maach déi iewescht hallef transparent (oder kräiz „Differenzmodus“ un), a pass dann hir Gréisst an hir Rotatioun un, bis d’Schrëften openeen leien.
+Opaque ¦ Net transparent
+Aucune photo visible. ¦ Keng siichtbar Foto.
+Ajoute au moins deux photos qui se recouvrent (« ＋ Photos »). ¦ Setz mindestens zwou Fotoen derbäi, déi sech iwwerlappen („＋ Fotoen“).
+Le navigateur n’a pas pu créer l’image. ¦ De Browser konnt d’Bild net erstellen.
+Pour enregistrer dans la base, l’une des photos doit venir de la base (sinon : ⤓ Télécharger). ¦ Fir an der Datebank ze späicheren, muss eng vun de Fotoen aus der Datebank kommen (soss: ⤓ Eroflueden).
+Création de l’image… ¦ D’Bild gëtt erstallt…
+ASSEMBLER ¦ ZESUMMESETZEN
+ce n’est pas un fichier PSD ¦ et ass kee PSD-Fichier
+les très grands PSD (PSB) ne sont pas lus ¦ ganz grouss PSD-Fichieren (PSB) ginn net gelies
+version de PSD inconnue ¦ onbekannt PSD-Versioun
+profondeur {n} bits non lue (seulement 8 bits) ¦ Faarftiefte vun {n} Bits net gelies (just 8 Bits)
+seuls les PSD en RVB ou en niveaux de gris sont lus ¦ nëmme PSD-Fichieren a RGB oder a Grostufe ginn gelies
+image trop grande ¦ Bild ze grouss
+compression ZIP non lue ¦ ZIP-Kompressioun net gelies
+=🗂 PSD prêt : {n} calques, {w} × {h} px (les calques de réglage sont dans l’image aplatie). ¦ 🗂 PSD prett: {n} Eben, {w} × {h} px (d’Astellungsebene sinn am flaache Bild).|🗂 PSD prett: {n} Ebenen, {w} × {h} px (d’Astellungsebene sinn am flaache Bild).
+=🗂 PSD prêt : {n} calque, {w} × {h} px (les calques de réglage sont dans l’image aplatie). ¦ 🗂 PSD prett: {n} Eben, {w} × {h} px (d’Astellungsebene sinn am flaache Bild).|🗂 PSD prett: {n} Ebenen, {w} × {h} px (d’Astellungsebene sinn am flaache Bild).
+PSD illisible : {err}. ¦ PSD net liesbar: {err}.
+Calque PSD ¦ PSD-Ebe
+PSD importé : {file} ¦ PSD importéiert: {file}
+=🗂 {n} calques importés de « {file} » (proportions différentes : ajusté à la photo). ¦ 🗂 {n} Ebe vu „{file}“ importéiert (aner Proportiounen: un d’Foto ugepasst).|🗂 {n} Ebene vu „{file}“ importéiert (aner Proportiounen: un d’Foto ugepasst).
+=🗂 {n} calques importés de « {file} ». ¦ 🗂 {n} Ebe vu „{file}“ importéiert.|🗂 {n} Ebene vu „{file}“ importéiert.
+=🗂 {n} calque importé de « {file} » (proportions différentes : ajusté à la photo). ¦ 🗂 {n} Ebe vu „{file}“ importéiert (aner Proportiounen: un d’Foto ugepasst).|🗂 {n} Ebene vu „{file}“ importéiert (aner Proportiounen: un d’Foto ugepasst).
+=🗂 {n} calque importé de « {file} ». ¦ 🗂 {n} Ebe vu „{file}“ importéiert.|🗂 {n} Ebene vu „{file}“ importéiert.
+Cocher pour comparer ¦ Ukräizen, fir ze vergläichen
+Coche deux versions pour les comparer. ¦ Kräiz zwou Versiounen un, fir se ze vergläichen.
+Plus ancien ¦ Méi al
+léger ¦ liicht
+Taille des vignettes ¦ Gréisst vun de Miniaturen
+Utiliser ces images ¦ Dës Biller benotzen
+Chercher : titre, cote, personne, lieu, année ¦ Sichen: Titel, Archivnummer, Persoun, Plaz, Joer
+Titre, cote, personne, lieu, année… ¦ Titel, Archivnummer, Persoun, Plaz, Joer…
+↑ ↓ ← → · Espace : cocher · Entrée : valider ¦ ↑ ↓ ← → · Espace: ukräizen · Enter: bestätegen
+↑ ↓ ← → · Entrée : valider ¦ ↑ ↓ ← → · Enter: bestätegen
+Retouche ¦ Retouche
+RETOUCHE ¦ RETOUCHE
+photo|Légende ¦ Legend
+Propriétés ¦ Eegeschaften
+Préréglage ¦ Virastellung
+Aucun. ¦ Keng.
+trop petite pour imprimer en A5 ¦ ze kleng, fir an A5 ze drécken
+assez grande pour imprimer en A5 ¦ grouss genuch, fir an A5 ze drécken
+Écran 16:9 (1920 × 1080) ¦ Ecran 16:9 (1920 × 1080)
+Écran 4:3 (1600 × 1200) ¦ Ecran 4:3 (1600 × 1200)
+Carré 1:1 (1080 × 1080) ¦ Quadrat 1:1 (1080 × 1080)
+Vertical 9:16 (1080 × 1920) ¦ Vertikal 9:16 (1080 × 1920)
+photo|Exposition ¦ Beliichtung
+photo|Luminosité ¦ Hellegkeet
+Colorisation : {what} ¦ Faarwen derbäisetzen: {what}
+{what} oui ¦ {what} un
+{what} non ¦ {what} aus
+Courbe {what} ¦ Kurv {what}
+{layer} verrouillé ¦ {layer} gespaart
+{layer} déverrouillé ¦ {layer} entspaart
+« {name} » seulement sur l’élément dessous ¦ „{name}“ just um Element drënner
+« {name} » sur tout ce qui est dessous ¦ „{name}“ op allem, wat drënner ass
+Teinte/Saturation : {what} ¦ Faarftoun/Sättegung: {what}
+{dpi} ppp ¦ {dpi} dpi
+Envoi ({w} × {h} points, {size} Mo)… ¦ Eroplueden ({w} × {h} Pixel, {size} MB)…
+Barre du haut (groupes) ¦ Iewescht Leescht (Gruppen)
+Les outils ¦ D’Tools
+Options des outils (pinceau, texte…) ¦ Optioune vun den Tools (Pinsel, Text…)
+Colonne d’outils ¦ Toolkolonn
+Panneau Réglages ¦ Astellungspanneau
+Préréglages ¦ Virastellungen
+Import des réglages indisponible. ¦ Import vun den Astellungen net disponibel.

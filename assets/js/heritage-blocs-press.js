@@ -107,7 +107,7 @@
     }
     BL.renderers.in_media = render;
     ext.personBlocks.in_media = BL.block({key: 'in_media', title: '📰 Dans les médias', render,
-        actions: (p, ed) => `<button type="button" class="button small secondary" data-bl-open="press" data-pid="${Number(p.id)}" title="La revue de presse de cette personne">Tout voir</button>${ed(`<button type="button" class="button small secondary" data-bl-new="press_item" data-pid="${Number(p.id)}">＋ Ajouter</button>`)}`});
+        actions: (p, ed) => `<button type="button" class="button small secondary" data-bl-open="press" data-pid="${Number(p.id)}" title="La revue de presse de cette personne">Tout voir</button>${window.LCNDA_EXT?.sourcesOuvertes ? window.LCNDA_EXT.sourcesOuvertes.btn('presse', p.id) + ed(window.LCNDA_EXT.sourcesOuvertes.importBtn('presse', p.id)) : ''}${window.LCNDA_EXT?.sourcesOuvertes4?.blockButtons?.('presse', p.id, ed) || ''}${ed(`<button type="button" class="button small secondary" data-bl-new="press_item" data-pid="${Number(p.id)}">＋ Ajouter</button>`)}`});
     // Entrée ou Espace sur une carte : l'ouvrir
     document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches?.('.bl-mcard, .bl-rowbtn')) { e.preventDefault(); e.target.click(); } });
 

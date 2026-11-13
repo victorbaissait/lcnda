@@ -15,6 +15,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s); // 🌐 docs/I18N.md
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP || {};
     const UI = () => window.LCNDA_UI || {};
@@ -278,7 +279,7 @@
         lf: ['« Liste | Fiches »', 'lck-vis2', [['barre', 'Dans la barre au-dessus', 'juste au-dessus de la liste', '<span class="lck-ml"><b>Liste | Fiches</b><i></i><i></i></span>'], ['bas', 'En bas de la colonne', 'là où il était', '<span class="lck-ml"><i></i><i></i><b>Liste | Fiches</b></span>']]],
     };
     const numsOf = S => (S.nums ? S.numstyle : 'aucun');
-    const vcHtml = (g, v, name, sub, pic, on) => `<button type="button" class="lck-vc${on ? ' is-active' : ''}" data-lck-c="${g}" data-v="${v}" aria-pressed="${on}" aria-label="${esc(C_GROUPS[g][0])} : ${esc(name)}">${pic}<span>${esc(name)}</span>${sub ? `<small>${esc(sub)}</small>` : ''}</button>`;
+    const vcHtml = (g, v, name, sub, pic, on) => `<button type="button" class="lck-vc${on ? ' is-active' : ''}" data-lck-c="${g}" data-v="${v}" aria-pressed="${on}" aria-label="${esc(i18n('{group} : {choice}', {group: i18n(C_GROUPS[g][0]), choice: i18n(name)}))}">${pic}<span>${esc(name)}</span>${sub ? `<small>${esc(sub)}</small>` : ''}</button>`;
     function columnPageHtml() {
         return `<div class="lck-panel"><div class="lck-panel-head"><div><h3>Où ?</h3><p class="muted">La colonne, à gauche ou à droite de l’écran.</p></div><span class="lck-saved" data-lck-saved="w"></span></div>
             <div class="lck-vis lck-vis2 lck-vis-side" id="lck-c-side"></div></div>
@@ -332,7 +333,7 @@
         /* 2 · le portrait */
         function renderP() {
             const S = P().read(), off = S.mode === 'avant';
-            $('#lck-p-start').innerHTML = `<span>Partir de :</span>${P_CARDS.map(c => { const on = S.mode === c.k, mod = on && c.k !== 'avant' && isModP(S, {...P().PRESETS[c.k], shape: S.shape}); return `<button type="button" class="lck-vc lck-mini-preset${on ? ' is-active' : ''}${mod ? ' is-mod' : ''}" data-lck-pmode="${c.k}" aria-pressed="${on}" title="${esc(c.why.map(w => w[1].replace(/<[^>]+>/g, '')).join(' '))}">${esc(c.t)}</button>`; }).join('')}<small>règle tout d’un coup (le rond unique et le carré de la fiche choisissent aussi la forme) ; tu peux ensuite changer chaque ligne (« retouché » s’affiche).</small>`;
+            $('#lck-p-start').innerHTML = `<span>Partir de :</span>${P_CARDS.map(c => { const on = S.mode === c.k, mod = on && c.k !== 'avant' && isModP(S, {...P().PRESETS[c.k], shape: S.shape}); return `<button type="button" class="lck-vc lck-mini-preset${on ? ' is-active' : ''}${mod ? ' is-mod' : ''}" data-lck-pmode="${c.k}" aria-pressed="${on}" title="${esc(c.why.map(w => i18n(w[1].replace(/<[^>]+>/g, ''))).join(' '))}">${esc(c.t)}</button>`; }).join('')}<small>règle tout d’un coup (le rond unique et le carré de la fiche choisissent aussi la forme) ; tu peux ensuite changer chaque ligne (« retouché » s’affiche).</small>`;
             $('#lck-p-settings').classList.toggle('is-off', off);
             $('#lck-p-off').hidden = !off;
             $('#lck-p-radius-set').classList.toggle('is-dis', S.shape !== 'arrondi'); $('#lck-p-radius').disabled = S.shape !== 'arrondi';
@@ -354,11 +355,11 @@
         const shapeName = id => (AP()?.orderedShapes().find(s => s.id === id)?.name || id).replace(/\s*\(défaut\)$/, '');
         box.addEventListener('click', e => {
             const sh = e.target.closest('[data-lck-shape]');
-            if (sh) { const id = sh.dataset.lckShape; if (id === (P().designShape() || 'tilted')) return; undoP(`Forme : « ${shapeName(id)} »`, () => P().setShape(id), 's'); return; }
+            if (sh) { const id = sh.dataset.lckShape; if (id === (P().designShape() || 'tilted')) return; undoP(i18n('Forme : « {name} »', {name: i18n(shapeName(id))}), () => P().setShape(id), 's'); return; }
             if (e.target.closest('[data-lck-shape-new]')) { AP()?.openShapeEditor?.({onSaved: sid => undoP('Nouvelle forme choisie', () => P().setShape(sid), 's')}); return; }
             const pm = e.target.closest('[data-lck-pmode]');
             if (pm) { const k = pm.dataset.lckPmode; if (k === P().read().mode) return; const c = P_CARDS.find(x => x.k === k);
-                undoP(`Portraits : « ${c.t} »`, () => { if (k === 'avant') { P().write({...P().read(), mode: 'avant'}); return; } P().write({mode: k, ...P().PRESETS[k]}); P().setShape(P().TO_AV[P().PRESETS[k].shape]); }); return; }
+                undoP(i18n('Portraits : « {name} »', {name: i18n(c.t)}), () => { if (k === 'avant') { P().write({...P().read(), mode: 'avant'}); return; } P().write({mode: k, ...P().PRESETS[k]}); P().setShape(P().TO_AV[P().PRESETS[k].shape]); }); return; }
             if (e.target.closest('#lck-p-reset')) { undoP('Portraits remis comme au départ', () => P().write({mode: 'avant'})); }
         });
         const onRange = (id, fn) => $('#' + id).addEventListener('input', e => fn(Number(e.target.value)));
@@ -386,7 +387,7 @@
             const S = read();
             $('#lck-c-side').innerHTML = [['left', 'À gauche', '<span class="lck-vside"><i class="c"></i><i></i></span>'], ['right', 'À droite', '<span class="lck-vside r"><i></i><i class="c"></i></span>']]
                 .map(([v, l, pic]) => { const on = (v === 'right') === right(); return `<button type="button" class="lck-vc${on ? ' is-active' : ''}" data-lck-side="${v}" aria-pressed="${on}" aria-label="Colonne ${l.toLowerCase()}">${pic}<span>${l}</span>${v === 'left' ? '<small>par défaut</small>' : ''}</button>`; }).join('');
-            $('#lck-c-start').innerHTML = `<span>Partir de :</span>${C_CARDS.map(c => { const on = S.mode === c.k, mod = on && CKEYS.some(k => S[k] !== PRESETS[c.k][k]); return `<button type="button" class="lck-vc lck-mini-preset${on ? ' is-active' : ''}${mod ? ' is-mod' : ''}" data-lck-cmode="${c.k}" aria-pressed="${on}" title="${esc(c.why)}">${esc(c.t)}</button>`; }).join('')}<small>règle tout d’un coup ; tu peux ensuite changer chaque ligne (« retouché » s’affiche).</small>`;
+            $('#lck-c-start').innerHTML = `<span>Partir de :</span>${C_CARDS.map(c => { const on = S.mode === c.k, mod = on && CKEYS.some(k => S[k] !== PRESETS[c.k][k]); return `<button type="button" class="lck-vc lck-mini-preset${on ? ' is-active' : ''}${mod ? ' is-mod' : ''}" data-lck-cmode="${c.k}" aria-pressed="${on}" title="${esc(i18n(c.why))}">${esc(c.t)}</button>`; }).join('')}<small>règle tout d’un coup ; tu peux ensuite changer chaque ligne (« retouché » s’affiche).</small>`;
             const val = {style: S.style, tabs: S.tabs, nums: numsOf(S), size: S.size, lf: S.lf};
             Object.entries(C_GROUPS).forEach(([g, [, , items]]) => { $(`[data-lck-g="${g}"]`).innerHTML = items.map(([v, n, sub, pic]) => vcHtml(g, v, n, sub, pic, val[g] === v)).join(''); });
             syncRangeIn(box, 'lck-c-width', S.width); syncRangeIn(box, 'lck-c-r', S.r); syncRangeIn(box, 'lck-c-bw', S.bw);
@@ -405,7 +406,7 @@
                 else { patchDesign('sidebarPosition', v); done(); }
                 return; }
             const cm = e.target.closest('[data-lck-cmode]');
-            if (cm) { const k = cm.dataset.lckCmode, c = C_CARDS.find(x => x.k === k); undoC(`Colonne de gauche : partir de « ${c.t} »`, () => write({mode: k, ...PRESETS[k]})); return; }
+            if (cm) { const k = cm.dataset.lckCmode, c = C_CARDS.find(x => x.k === k); undoC(i18n('Colonne de gauche : partir de « {name} »', {name: i18n(c.t)}), () => write({mode: k, ...PRESETS[k]})); return; }
             const ch = e.target.closest('[data-lck-c]');
             if (ch) { const g = ch.dataset.lckC, v = ch.dataset.v; setC(g === 'nums' ? (v === 'aucun' ? {nums: false} : {nums: true, numstyle: v}) : {[g]: v}); return; }
             const tl = e.target.closest('[data-tool]'); if (tl) { tool = tl.dataset.tool; renderC(); return; }

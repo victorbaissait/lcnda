@@ -1,0 +1,429 @@
+fr ¦ tr
+=invité ¦ davetli|davetli
+=descendant vivant ¦ yaşayan torun|yaşayan torun
+=conjoint ¦ eş|eş
+=fiche confidentielle ¦ gizli kart|gizli kart
+=invité trouvé ¦ bulunan davetli|bulunan davetli
+=nouvel invité ¦ yeni davetli|yeni davetli
+=invitée ¦ davetli|davetli
+=invité déjà là ¦ zaten listede olan davetli|zaten listede olan davetli
+=colonne ¦ sütun|sütun
+=invité ajouté ¦ eklenen davetli|eklenen davetli
+=invité complété ¦ tamamlanan davetli|tamamlanan davetli
+=foyer ¦ hane|hane
+=avec adresse ¦ adresli|adresli
+=avec courriel ¦ e-postalı|e-postalı
+=badge ¦ yaka kartı|yaka kartı
+=présent ¦ gelen|gelen
+=personne attendue ¦ beklenen kişi|beklenen kişi
+=table ¦ masa|masa
+=personne placée ¦ yerleştirilen kişi|yerleştirilen kişi
+=photo ajoutée ¦ eklenen fotoğraf|eklenen fotoğraf
+=personne présente ¦ gelen kişi|gelen kişi
+Sans réponse ¦ Yanıt yok
+👥 Invités ¦ 👥 Davetliler
+✉️ Invitations ¦ ✉️ Davetiyeler
+🏷 Badges ¦ 🏷 Yaka kartları
+🌳 Grand arbre ¦ 🌳 Büyük ağaç
+📅 Jour J ¦ 📅 Büyük gün
+Réunir les descendants d’un ancêtre : invités, invitations, badges, grand arbre, jour J. ¦ Bir atanın torunlarını bir araya getir: davetliler, davetiyeler, yaka kartları, büyük ağaç, büyük gün.
+＋ Nouvelle cousinade ¦ ＋ Yeni aile buluşması
+Nouvelle cousinade ¦ Yeni aile buluşması
+Lecture des cousinades… ¦ Aile buluşmaları okunuyor…
+Aucune cousinade pour l’instant ¦ Henüz aile buluşması yok
+Choisis un ancêtre (ou un couple) : l’app trouve ses descendants vivants, branche par branche, et prépare la liste des invités. ¦ Bir ata (ya da bir çift) seç: uygulama yaşayan torunlarını kol kol bulur ve davetli listesini hazırlar.
+Chercher… (ex. Martin, 2026, Tulle) ¦ Ara… (örn. Martin, 2026, Tulle)
+{n} oui ¦ {n} evet
+{n} sans réponse ¦ {n} yanıtsız
+Aucune cousinade ne correspond. ¦ Eşleşen aile buluşması yok.
+Renommer la cousinade ¦ Aile buluşmasını yeniden adlandır
+Cousinade renommée. ¦ Aile buluşması yeniden adlandırıldı.
+Cousinade supprimée : « {name} » ¦ Aile buluşması silindi: “{name}”
+Modifier la cousinade ¦ Aile buluşmasını düzenle
+L’ancêtre dont on réunit les descendants ¦ Torunları bir araya getirilen ata
+Avec son conjoint (le couple) — facultatif ¦ Eşiyle birlikte (çift) — isteğe bağlı
+Seulement les enfants du couple. Vide : tous les enfants de l’ancêtre. ¦ Yalnızca çiftin çocukları. Boş: atanın tüm çocukları.
+Nom de la cousinade ¦ Aile buluşmasının adı
+Personne de référence pour les liens de parenté ¦ Akrabalık bağları için referans kişi
+Chaque invité aura son lien avec elle (« cousin issu de germains de … »). Toi, le plus souvent. ¦ Her davetlinin bu kişiyle bağı yazılır (“… kişisinin ikinci dereceden kuzeni”). Çoğu zaman sen.
+Inviter aussi les conjoints des descendants ¦ Torunların eşlerini de davet et
+🔒 Les fiches confidentielles ne sont jamais montrées. Les adresses des vivants restent dans ce projet. ¦ 🔒 Gizli kartlar asla gösterilmez. Yaşayanların adresleri bu projede kalır.
+Choisis l’ancêtre : l’app cherche ses descendants vivants. ¦ Atayı seç: uygulama yaşayan torunlarını arar.
+Recherche des descendants vivants… ¦ Yaşayan torunlar aranıyor…
+{who} dans {branches}, et {spouses}. ¦ {who} — kollar: {branches}; ayrıca {spouses}.
+{who} dans {branches}. ¦ {who} — kollar: {branches}.
+{n} sans décès noté, née il y a moins de 100 ans : marquée « vivant ? ». ¦ {n} — ölümü not edilmemiş, 100 yıldan kısa süre önce doğmuş: “yaşıyor mu?” olarak işaretlendi.
+{n} laissées de côté. ¦ {n} dışarıda bırakıldı.
+{n} laissée de côté. ¦ {n} dışarıda bırakıldı.
+Choisis l’ancêtre dont on réunit les descendants. ¦ Torunları bir araya getirilecek atayı seç.
+Cousinade créée : {n}. ¦ Aile buluşması oluşturuldu: {n}.
+Cousinade enregistrée : {n}. ¦ Aile buluşması kaydedildi: {n}.
+Cousinade enregistrée. ¦ Aile buluşması kaydedildi.
+Lecture de la cousinade… ¦ Aile buluşması okunuyor…
+← Toutes les cousinades ¦ ← Tüm aile buluşmaları
+↻ Chercher les nouveaux descendants ¦ ↻ Yeni torunları ara
+Chercher les nouveaux descendants ¦ Yeni torunları ara
+↗ Fiche de l’ancêtre ¦ ↗ Atanın kartı
+{n} n’apparaissent plus : sa fiche est devenue confidentielle (ou a été supprimée). ¦ {n} artık görünmüyor: kartı gizli oldu (ya da silindi).
+{n} n’apparaît plus : sa fiche est devenue confidentielle (ou a été supprimée). ¦ {n} artık görünmüyor: kartı gizli oldu (ya da silindi).
+la personne de référence ¦ referans kişi
+Liens de parenté avec ¦ Akrabalık bağları — referans:
+＋ Ajouter un invité ¦ ＋ Davetli ekle
+⤒ Importer une liste… ¦ ⤒ Bir liste içe aktar…
+Aucun invité pour l’instant ¦ Henüz davetli yok
+Aucun descendant vivant trouvé. Ajoute les invités à la main, importe une liste, ou complète l’arbre puis « ↻ Chercher les nouveaux descendants ». ¦ Yaşayan torun bulunamadı. Davetlileri elle ekle, bir liste içe aktar ya da ağacı tamamla, sonra “↻ Yeni torunları ara”.
+Chercher… (ex. Martin, Brive, végétarien) ¦ Ara… (örn. Martin, Brive, vejetaryen)
+Invités (cochés) ¦ Davetliler (işaretli)
+Pas invités ¦ Davet edilmeyenler
+Seulement « vivant ? » ¦ Yalnızca “yaşıyor mu?”
+Par branche et par foyer ¦ Kola ve haneye göre
+Par génération ¦ Kuşağa göre
+Par réponse ¦ Yanıta göre
+{n} · {inv} en tout ¦ {n} · toplam {inv}
+Aucun invité ne correspond. ¦ Eşleşen davetli yok.
+Pas invité ¦ Davet edilmedi
+Invité (coché) ¦ Davetli (işaretli)
+Régime ¦ Beslenme
+Rien de noté sur son décès, née il y a moins de 100 ans : vérifie avant d’inviter ¦ Ölümü hakkında not yok, 100 yıldan kısa süre önce doğmuş: davet etmeden önce kontrol et
+Sans fiche ¦ Kartsız
+Pas d’adresse ¦ Adres yok
+Nombre de personnes ¦ Kişi sayısı
+{name} est invitée. ¦ Davet edildi: {name}.
+{name} est invité. ¦ Davet edildi: {name}.
+{name} n’est plus invitée. ¦ Artık davetli değil: {name}.
+{name} n’est plus invité. ¦ Artık davetli değil: {name}.
+Réponse de {name} : {answer}. ¦ Yanıt — {name}: {answer}.
+Inviter les {n} affichées ¦ Gösterilen {n} kişiyi davet et
+{n} invitées. ¦ {n} kişi davet edildi.
+{n} invitée. ¦ {n} kişi davet edildi.
+Ne plus inviter les personnes affichées ¦ Gösterilen kişileri artık davet etme
+{n} retirées des invitations. ¦ {n} kişi davetlerden çıkarıldı.
+{n} retirée des invitations. ¦ {n} kişi davetlerden çıkarıldı.
+Tableau des invités (CSV)… ¦ Davetli tablosu (CSV)…
+Imprimer la liste des invités… ¦ Davetli listesini yazdır…
+Écrire un courriel ¦ E-posta yaz
+Retirer de la liste ¦ Listeden çıkar
+🗑 Retirer de la liste ¦ 🗑 Listeden çıkar
+{name} retirée de la liste. ¦ Listeden çıkarıldı: {name}.
+{name} retiré de la liste. ¦ Listeden çıkarıldı: {name}.
+Aucun nouveau descendant vivant : la liste est à jour. ¦ Yeni yaşayan torun yok: liste güncel.
+{n} ajoutés. ¦ {n} eklendi.
+{n} ajouté. ¦ {n} eklendi.
+Son propre foyer ¦ Kendi hanesi
+Garder son foyer ¦ Hanesini koru
+🎉 COUSINADE · INVITÉ ¦ 🎉 AİLE BULUŞMASI · DAVETLİ
+🎉 COUSINADE ¦ 🎉 AİLE BULUŞMASI
+Nouvel invité ¦ Yeni davetli
+Une fiche de ta généalogie (facultatif) ¦ Soy ağacından bir kart (isteğe bağlı)
+Sinon, écris le prénom et le nom ci-dessous. ¦ Yoksa adı ve soyadını aşağıya yaz.
+Foyer (une invitation par foyer) ¦ Hane (her hane için bir davetiye)
+12 rue des Écoles ¦ 12 rue des Écoles
+Régime, allergies ¦ Beslenme, alerjiler
+végétarien, sans gluten… ¦ vejetaryen, glütensiz…
+Mettre aussi l’adresse, le courriel et le téléphone dans le répertoire des vivants (sa fiche) ¦ Adresi, e-postayı ve telefonu yaşayanlar rehberine de (kişinin kartı) koy
+Décoché : seulement dans cette cousinade. ¦ İşaretsiz: yalnızca bu aile buluşmasında.
+Écris au moins un prénom ou un nom (ou choisis une fiche). ¦ En azından bir ad ya da soyadı yaz (ya da bir kart seç).
+Ce courriel n’a pas la bonne forme (exemple : prenom.nom@exemple.fr). ¦ Bu e-posta doğru biçimde değil (örnek: ad.soyad@ornek.com).
+Invité ajouté. ¦ Davetli eklendi.
+Enregistré, et aussi dans le répertoire des vivants. ¦ Kaydedildi, yaşayanlar rehberine de.
+Le lecteur de tableaux n’est pas chargé. ¦ Tablo okuyucu yüklenmedi.
+Importer une liste d’invités ¦ Davetli listesi içe aktar
+Un tableau avec une ligne de titres : Prénom, Nom, Courriel, Téléphone, Adresse, Code postal, Ville, Réponse (oui / non / peut-être), Nombre, Régime, Note. ¦ Başlık satırı olan bir tablo: Ad, Soyadı, E-posta, Telefon, Adres, Posta kodu, Şehir, Yanıt (evet / hayır / belki), Sayı, Beslenme, Not.
+Je ne trouve ni prénom ni nom : la première ligne doit donner les titres des colonnes (Prénom, Nom, Courriel…). ¦ Ad da soyadı da bulamıyorum: ilk satır sütun başlıklarını vermeli (Ad, Soyadı, E-posta…).
+{n} (coordonnées et réponse complétées) ¦ {n} (iletişim bilgileri ve yanıt tamamlandı)
+{n} non reconnues : laissées de côté. ¦ {n} tanınmadı: dışarıda bırakıldı.
+{n} non reconnue : laissée de côté. ¦ {n} tanınmadı: dışarıda bırakıldı.
+⤓ Exporter le tableau des invités ¦ ⤓ Davetli tablosunu dışa aktar
+Un fichier CSV (tableur) avec les invités, leur branche, leur lien de parenté et leur réponse. ¦ Davetlileri, kollarını, akrabalık bağlarını ve yanıtlarını içeren bir CSV (tablo) dosyası.
+Avec les adresses, courriels et téléphones ¦ Adresler, e-postalar ve telefonlarla
+🔒 Ce sont des données de personnes vivantes : ne partage ce fichier qu’avec ceux qui organisent. ¦ 🔒 Bunlar yaşayan kişilerin verileri: bu dosyayı yalnızca düzenleyenlerle paylaş.
+Seulement les invités cochés ¦ Yalnızca işaretli davetliler
+Lien avec l’ancêtre ¦ Atayla bağ
+Lien avec la référence ¦ Referans kişiyle bağ
+Tableau exporté, avec les coordonnées. ¦ Tablo dışa aktarıldı, iletişim bilgileriyle.
+Tableau exporté, sans les coordonnées. ¦ Tablo dışa aktarıldı, iletişim bilgileri olmadan.
+Invités — {name} ¦ Davetliler — {name}
+Liste des invités ¦ Davetli listesi
+Les invités cochés ¦ İşaretli davetliler
+Ceux qui viennent ¦ Gelenler
+Avec les coordonnées ¦ İletişim bilgileriyle
+Le texte de l’invitation ¦ Davetiyenin metni
+Une invitation par foyer. Ces mots se remplacent tout seuls : ¦ Her hane için bir davetiye. Bu sözcükler kendiliğinden değiştirilir:
+Répondre avant le ¦ Son yanıt tarihi
+Contact pour répondre ¦ Yanıt için iletişim
+Objet du courriel ¦ E-postanın konusu
+🖨 Imprimer les invitations… ¦ 🖨 Davetiyeleri yazdır…
+📝 Dans le traitement de texte ¦ 📝 Kelime işlemcide
+📁 Copie dans les médias ¦ 📁 Medyada kopya
+{n} à inviter ¦ Davet edilecek: {n}
+✉️ Un courriel à tous (en copie cachée) ¦ ✉️ Herkese tek e-posta (gizli kopya)
+Ta messagerie s’ouvre avec le texte prêt : rien n’est envoyé par l’app. ¦ E-posta programın metin hazır olarak açılır: uygulama hiçbir şey göndermez.
+✉️ Courriel prêt ¦ ✉️ E-posta hazır
+Aucun invité coché : coche des invités dans l’onglet « 👥 Invités ». ¦ İşaretli davetli yok: “👥 Davetliler” sekmesinde davetlileri işaretle.
+Aucun foyer à inviter : coche des invités d’abord. ¦ Davet edilecek hane yok: önce davetlileri işaretle.
+L’adresse du foyer en haut à droite (enveloppe à fenêtre) ¦ Hanenin adresi sağ üstte (pencereli zarf)
+Le traitement de texte n’est pas chargé. ¦ Kelime işlemci yüklenmedi.
+Les faire-part ne sont pas chargés. ¦ Duyuru kartları yüklenmedi.
+Tous les descendants de {name} ¦ Tüm torunları: {name}
+Réponse avant le {date} ¦ Son yanıt tarihi: {date}
+Envoi vers les médias indisponible. ¦ Medyaya gönderme kullanılamıyor.
+Une copie de l’invitation est rangée dans les médias. ¦ Davetiyenin bir kopyası medyaya kondu.
+Copie non rangée dans les médias : {err} ¦ Kopya medyaya konamadı: {err}
+Le lien écrit sous le nom ¦ Adın altına yazılan bağ
+Avec l’ancêtre ¦ Atayla
+Avec la référence ¦ Referans kişiyle
+Pour qui ¦ Kimin için
+Invités cochés ¦ İşaretli davetliler
+Qui viennent ¦ Gelenler
+Présents ¦ Burada olanlar
+Par page A4 ¦ A4 sayfa başına
+Petite photo (si la fiche en a une) ¦ Küçük fotoğraf (kartta varsa)
+QR code (nom, branche et lien, lu par un téléphone) ¦ QR kod (ad, kol ve bağ; telefonla okunur)
+Chaque branche a sa couleur (onglet « 📊 Chiffres » pour la changer). ¦ Her kolun bir rengi var (değiştirmek için “📊 Sayılar” sekmesi).
+Personne à qui faire un badge. ¦ Yaka kartı yapılacak kimse yok.
+L’arbre décoratif n’est pas chargé. ¦ Süslü ağaç yüklenmedi.
+Toute la descendance de {name}, en grand, une couleur par branche, à afficher le jour de la cousinade. Le dessin s’ouvre ensuite pour tout retoucher, puis « ⤓ Exporter » (PDF pour l’imprimeur, avec fond perdu et traits de coupe, PNG, SVG…). ¦ Tüm torunları ({name}), büyük boyutta, her kola bir renk, aile buluşması günü asmak için. Çizim sonra her şeyi düzenlemen için açılır, ardından “⤓ Dışa aktar” (matbaa için taşma payı ve kesim çizgili PDF, PNG, SVG…).
+l’ancêtre ¦ ata
+Les conjoints sous chaque nom ¦ Her adın altında eşler
+Une place pour coller les photos du jour (à côté des vivants) ¦ Günün fotoğraflarını yapıştırmak için bir yer (yaşayanların yanında)
+🌳 Fabriquer le grand arbre ¦ 🌳 Büyük ağacı oluştur
+Fabrication du grand arbre… ¦ Büyük ağaç oluşturuluyor…
+Aucune descendance pour cet ancêtre. ¦ Bu atanın torunu yok.
+Cet ancêtre est confidentiel. ¦ Bu ata gizli.
+Photos du jour ¦ Günün fotoğrafları
+✅ Présence ¦ ✅ Katılım
+{here} sur {n} ¦ {here} / {n}
+🖨 Imprimer la liste de présence… ¦ 🖨 Katılım listesini yazdır…
+Personne n’a encore dit oui : les réponses se notent dans « 👥 Invités ». ¦ Henüz kimse evet demedi: yanıtlar “👥 Davetliler” içinde not edilir.
+{name} est là. ¦ Burada: {name}.
+{name} n’est plus notée présente. ¦ Artık burada olarak işaretli değil: {name}.
+{name} n’est plus noté présent. ¦ Artık burada olarak işaretli değil: {name}.
+Présence — {name} ¦ Katılım — {name}
+{name} — présence ¦ {name} — katılım
+Liste de présence ¦ Katılım listesi
+Places par table ¦ Masa başına yer
+Compter aussi les « peut-être » ¦ “Belki”leri de say
+Les petites branches partagent une table ¦ Küçük kollar bir masayı paylaşır
+✨ Faire le plan par branche ¦ ✨ Kola göre oturma planı yap
+🖨 Imprimer le plan… ¦ 🖨 Planı yazdır…
+Un foyer n’est jamais séparé. Change la table d’une personne avec sa case ; ↶ Annuler défait le plan. ¦ Bir hane asla ayrılmaz. Bir kişinin masasını kutusundan değiştir; ↶ Geri al planı geri alır.
+Pas encore de plan de table : note les réponses, puis « ✨ Faire le plan par branche ». ¦ Henüz oturma planı yok: yanıtları not et, sonra “✨ Kola göre oturma planı yap”.
+{name} va à la table {no}. ¦ Masa {no}: {name}.
+Personne ne vient encore : note les réponses « Oui » d’abord. ¦ Henüz gelen kimse yok: önce “Evet” yanıtlarını not et.
+＋ Ajouter des photos… ¦ ＋ Fotoğraf ekle…
+Retirer de l’album ¦ Albümden çıkar
+L’album est vide ¦ Albüm boş
+Les photos du jour : importe-les depuis l’ordinateur ou choisis-les dans les médias. ¦ Günün fotoğrafları: bilgisayardan içe aktar ya da medyadan seç.
+＋ Ajouter des photos ¦ ＋ Fotoğraf ekle
+Les photos de la cousinade ¦ Aile buluşmasının fotoğrafları
+Ajouter à l’album ¦ Albüme ekle
+{n} à l’album. ¦ Albüme eklendi: {n}.
+Photo retirée de l’album (elle reste dans les médias). ¦ Fotoğraf albümden çıkarıldı (medyada kalır).
+invités ¦ davetli
+oui ¦ evet
+peut-être ¦ belki
+non ¦ hayır
+sans réponse ¦ yanıtsız
+personnes attendues ¦ beklenen kişi
+Par branche ¦ Kola göre
+Invités ¦ Davetliler
+Réponses ¦ Yanıtlar
+Couleur de la branche {name} ¦ Kol rengi: {name}
+{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse ¦ {yes} evet, {maybe} belki, {no} hayır, {wait} yanıtsız
+Régimes et allergies (de ceux qui viennent) ¦ Beslenme ve alerjiler (gelenlerin)
+Le jour J : {n}. ¦ Büyük gün: {n}.
+Couleur de la branche enregistrée. ¦ Kol rengi kaydedildi.
+Organiser une cousinade… ¦ Aile buluşması düzenle…
+Descendants de {name} · {n} ¦ Torunlar: {name} · {n}
+=passage dans les médias ¦ medyada yer alma|medyada yer alma
+passages dans les médias ¦ medyada yer almalar
+1980 et après ¦ 1980 ve sonrası
+avant 1900 ¦ 1900’den önce
+Ajoute un fichier MP3, M4A, WAV, AIFF ou OGG sur une fiche, une battue, une enquête… (ou glisse-le ici) et il apparaîtra ici. ¦ Bir karta, bir taramaya, bir incelemeye… MP3, M4A, WAV, AIFF ya da OGG dosyası ekle (ya da buraya sürükle), burada görünür.
+Ajoute un fichier MP4, MOV ou WEBM sur une fiche, une battue, une enquête… (ou glisse-le ici) et elle apparaîtra ici. ¦ Bir karta, bir taramaya, bir incelemeye… MP4, MOV ya da WEBM dosyası ekle (ya da buraya sürükle), burada görünür.
+Ajoute une carte : l’image de la vue, celle du dos, puis le lieu montré pour la retrouver sur la Carte. ¦ Bir kartpostal ekle: manzaranın resmi, arkasının resmi, sonra Harita’da bulmak için gösterilen yer.
+Ajoute-les sur la fiche d’une personne (bloc 🛂 Passeports) ou dans ✨ Trésors → Les passeports, où l’on peut aussi importer un relevé. ¦ Onları bir kişinin kartına (🛂 Pasaportlar bloğu) ya da ✨ Hazineler → Pasaportlar içine ekle; orada bir döküm de içe aktarabilirsin.
+Allume-en une dans ✨ Trésors → Allumer une bougie. ¦ ✨ Hazineler → Bir mum yak içinde bir tane yak.
+Amérique du Nord ¦ Kuzey Amerika
+Assembler et retoucher des sons ¦ Sesleri birleştir ve düzenle
+Aucun acte pour l’instant ¦ Henüz belge yok
+Aucun dossier de preuve ¦ Kanıt dosyası yok
+Aucun lieu dans l’arbre pour l’instant ¦ Ağaçta henüz yer yok
+Aucun livret pour l’instant ¦ Henüz kitapçık yok
+Aucun nom indexé pour l’instant ¦ Henüz dizinlenmiş ad yok
+Aucun partage pour l’instant ¦ Henüz paylaşım yok
+Aucun passage dans les médias pour l’instant ¦ Henüz medyada yer alma yok
+Aucun passeport pour l’instant ¦ Henüz pasaport yok
+Aucun projet de montage pour l’instant ¦ Henüz montaj projesi yok
+Aucun questionnaire pour l’instant ¦ Henüz anket yok
+Aucun rattachement pour l’instant ¦ Henüz kilise bölgesi bağı yok
+Aucun recueil pour l’instant ¦ Henüz derleme yok
+Aucun son pour l’instant ¦ Henüz ses yok
+Aucune annonce pour l’instant ¦ Henüz ilan yok
+Aucune bougie au registre ¦ Kayıt defterinde mum yok
+Aucune carte d’électeur pour l’instant ¦ Henüz seçmen kartı yok
+Aucune carte postale pour l’instant ¦ Henüz kartpostal yok
+Aucune création ni carrière pour l’instant ¦ Henüz eser ya da kariyer yok
+Aucune demande : ouvre une photo et clique « 📤 Demander qui c’est ». ¦ İstek yok: bir fotoğraf aç ve “📤 Kim olduğunu sor” düğmesine tıkla.
+Aucune demande pour l’instant ¦ Henüz istek yok
+Aucune gazette pour l’instant ¦ Henüz gazete yok
+Aucune image de lieu pour l’instant ¦ Henüz yer resmi yok
+Aucune langue notée pour l’instant ¦ Henüz not edilmiş dil yok
+Aucune lettre pour l’instant ¦ Henüz mektup yok
+Aucune maison pour l’instant : « ＋ Nouvelle maison ». ¦ Henüz ev yok: “＋ Yeni ev”.
+Aucune personne n’a encore de profil ¦ Henüz kimsenin profili yok
+Aucune règle pour l’instant ¦ Henüz kural yok
+Aucune récompense pour l’instant ¦ Henüz ödül yok
+Aucune transcription d’acte pour l’instant ¦ Henüz belge transkripsiyonu yok
+Aucune vidéo pour l’instant ¦ Henüz video yok
+Auteur, réalisation ¦ Yazar, yönetmen
+Bravo ! L’assistant peut chercher plus loin (jusqu’à 12 générations). ¦ Bravo! Yardımcı daha uzağa bakabilir (12 kuşağa kadar).
+Carte du droit de vote ¦ Oy hakkı haritası
+Cette liste est cachée ¦ Bu liste gizli
+Ce que tu notes ici reprend les actes : ce n’est pas un conseil juridique. ¦ Buraya not ettiklerin belgelere dayanır: hukuki tavsiye değildir.
+Ce sont des informations privées : montre-les d’abord dans les Réglages. ¦ Bunlar özel bilgiler: önce Ayarlar’da göster.
+Chercher un nom, une commune… ¦ Bir ad, bir yerleşim yeri ara…
+Chercher un projet… (nom, photo, détails) ¦ Bir proje ara… (ad, fotoğraf, ayrıntılar)
+Chercher un questionnaire… (ex. Anne, guerre, Marie) ¦ Bir anket ara… (örn. Anne, savaş, Marie)
+Chercher une carte… (ex. Bretagne, 1978, Lucie) ¦ Bir harita ara… (örn. Bretagne, 1978, Lucie)
+Chercher une maison… (nom, lieu, époque, personne, recensement) ¦ Bir ev ara… (ad, yer, dönem, kişi, nüfus sayımı)
+Chercher une personne… (ex. Martin, maire, sportif) ¦ Bir kişi ara… (örn. Martin, belediye başkanı, sporcu)
+Chercher… (commune, cote, année, service d’archives) ¦ Ara… (yerleşim yeri, arşiv numarası, yıl, arşiv kurumu)
+Chercher… (commune, section, numéro, lieu-dit, propriétaire) ¦ Ara… (yerleşim yeri, pafta, numara, mevki, sahip)
+Chercher… (personne, bien, notaire, lieu, cote) ¦ Ara… (kişi, mal, noter, yer, arşiv numarası)
+Chercher… (titre, auteur, lieu, nom cité, ce qu’on voit, notes) ¦ Ara… (başlık, yazar, yer, anılan ad, görülen şey, notlar)
+Chercher… (titre, lieu) ¦ Ara… (başlık, yer)
+Chercher… (titre, personne, lieu, année) ¦ Ara… (başlık, kişi, yer, yıl)
+Chercher… (titre, texte, personne, lieu, cote) ¦ Ara… (başlık, metin, kişi, yer, arşiv numarası)
+Choisir la personne, puis la sorte de fiche ¦ Kişiyi seç, sonra kayıt türünü
+Choisir les colonnes (« ⚙️ Champs affichés », onglet « La liste ») ¦ Sütunları seç (“⚙️ Gösterilen alanlar”, “Liste” sekmesi)
+Choisir une personne, puis cocher ce qu’elle était (artiste, sportif, élu…) ¦ Bir kişi seç, sonra ne olduğunu işaretle (sanatçı, sporcu, seçilmiş yetkili…)
+Choisis la personne de départ (Sosa 1) et ajoute ses parents. ¦ Başlangıç kişisini (Sosa 1) seç ve anne babasını ekle.
+Choisis la personne, puis la sorte de fiche : elle se range sur sa page et apparaît ici. ¦ Kişiyi seç, sonra kayıt türünü: kişinin sayfasına yerleşir ve burada görünür.
+Choisis l’image d’un acte (baptême, mariage, sépulture…) et transcris-le à côté. ¦ Bir belgenin resmini seç (vaftiz, evlilik, defin…) ve yanında transkripsiyonunu yap.
+Clique sur un pays pour voir ses dates (et les cantons suisses, les provinces canadiennes…). ¦ Tarihlerini görmek için bir ülkeye tıkla (İsviçre kantonları, Kanada eyaletleri… de var).
+Clubs et équipes, résultats, records, saisons. ¦ Kulüpler ve takımlar, sonuçlar, rekorlar, sezonlar.
+Commence par « ＋ Numéro », « ＋ Livre » ou « ＋ Documentaire », en haut de la page. ¦ Sayfanın üstündeki “＋ Sayı”, “＋ Kitap” ya da “＋ Belgesel” ile başla.
+Commence-en un : il apparaîtra ici, avec les autres, pour le rouvrir plus tard. ¦ Bir tane başlat: ötekilerle birlikte burada görünür, sonra yeniden açabilirsin.
+Commune, section, numéro ¦ Yerleşim yeri, pafta, numara
+Crée d’abord ton type (« ＋ Créer mon propre type… » dans « ＋ Nouvelle œuvre »), puis ses fiches. ¦ Önce türünü oluştur (“＋ Yeni eser” içinde “＋ Kendi türümü oluştur…”), sonra kayıtlarını.
+Crée le recueil (registre, liste, cahier…), puis ajoute tes photos : chaque photo devient une page. ¦ Derlemeyi oluştur (kayıt defteri, liste, defter…), sonra fotoğraflarını ekle: her fotoğraf bir sayfa olur.
+Crée une carte, puis ajoute des photos de l’app ou importe-les : celles qui ont des coordonnées GPS se placent toutes seules. ¦ Bir harita oluştur, sonra uygulamadan fotoğraf ekle ya da içe aktar: GPS koordinatı olanlar kendiliğinden yerleşir.
+Créer ce jour-là ¦ O güne oluştur
+Date (récent d’abord) ¦ Tarih (en yeni önce)
+Date de l’acte ¦ Belgenin tarihi
+Date pour les femmes ¦ Kadınlar için tarih
+Date pour les hommes ¦ Erkekler için tarih
+Décennie ¦ On yıl
+Siècle ¦ Yüzyıl
+Précédent ¦ Önceki
+Elles s’ajoutent sur la fiche d’une personne (bloc Cartes d’électeur). ¦ Bir kişinin kartına eklenirler (Seçmen kartları bloğu).
+Ensuite par ¦ Sonra şuna göre
+Grouper par catégorie ¦ Kategoriye göre grupla
+Héritages et successions ¦ Miraslar ve terekeler
+Il faut des dates dans l’arbre : une naissance, un mariage, un décès… ¦ Ağaçta tarihler gerekir: bir doğum, bir evlilik, bir ölüm…
+Index des noms ¦ Ad dizini
+Inventions et leurs brevets, découvertes (espèce, comète, site…), publications scientifiques. ¦ Buluşlar ve patentleri, keşifler (tür, kuyruklu yıldız, alan…), bilimsel yayınlar.
+La liste « Palmarès » ¦ “Ödüller” listesi
+La liste « Revue de presse » ¦ “Basın derlemesi” listesi
+Palmarès ¦ Ödüller
+🏆 Palmarès ¦ 🏆 Ödüller
+Langue des actes et des documents ¦ Belgelerin ve dokümanların dili
+Le cercle autour des ancêtres ¦ Ataların çevresindeki çember
+Le plus de fiches ¦ En çok kaydı olanlar
+Le plus de photos ¦ En çok fotoğrafı olanlar
+Le plus de profils ¦ En çok profili olanlar
+Les autres listes ¦ Öteki listeler
+Les lieux viennent des naissances, mariages et décès de l’arbre. ¦ Yerler, ağaçtaki doğumlardan, evliliklerden ve ölümlerden gelir.
+Les plus grandes ¦ En büyükler önce
+Lettres aux descendants ¦ Torunlara mektuplar
+L’ordre des outils, et ceux qu’on montre ¦ Araçların sırası ve gösterilenler
+Marquer dans les transcriptions ¦ Transkripsiyonlarda işaretle
+Mes annonces et courriers ¦ İlanlarım ve mektuplarım
+Mettre ce qui est affiché dans un projet de l’Atelier ¦ Gösterileni bir Atölye projesine koy
+Modifiés récemment ¦ Son düzenlenenler
+Monter des vidéos : morceaux, titres, fondus, incrustations, musiques ¦ Video montajı: parçalar, başlıklar, geçişler, bindirmeler, müzikler
+Morceaux, albums et disques, enregistrements, concerts, tournées, œuvres de musique savante. ¦ Şarkılar, albümler ve plaklar, kayıtlar, konserler, turneler, klasik müzik eserleri.
+Note de quelle paroisse dépendait chaque hameau ou village avant la Révolution. ¦ Fransız Devrimi’nden önce her mezranın ya da köyün hangi kilise bölgesine bağlı olduğunu not et.
+Numéro, tome, épisode ¦ Sayı, cilt, bölüm
+Ou « 📷 Lire une capture des règles » pour les remplir toutes seules. ¦ Ya da onları kendiliğinden doldurmak için “📷 Kuralların ekran görüntüsünü oku”.
+Où j’en suis ¦ Nerede olduğum
+Par commune ¦ Yerleşim yerine göre
+Par date de l’œuvre ¦ Eserin tarihine göre
+Par date, récentes d’abord ¦ Tarihe göre, en yeniler önce
+Par personne ¦ Kişiye göre
+Par période ¦ Döneme göre
+Partage une branche dans ✨ Trésors → Partager une branche (pour un temps). ¦ ✨ Hazineler → Bir kolu paylaş içinde bir kolu (bir süreliğine) paylaş.
+Pas encore de lignée ¦ Henüz soy hattı yok
+Passeport des lieux ¦ Yerler pasaportu
+Peintures, dessins, gravures, sculptures et fontes, photographies, affiches, expositions… ¦ Resimler, çizimler, gravürler, heykeller ve dökümler, fotoğraflar, afişler, sergiler…
+Plus anciens ¦ En eskiler
+Priorité d’achat ¦ Satın alma önceliği
+Précisions ¦ Ayrıntılar
+Ranger les fiches par sorte, avec un intertitre pour chacune ¦ Kayıtları türe göre sırala, her biri için bir ara başlıkla
+Ranger par sorte ¦ Türe göre sırala
+Revenir sur un son en cours de travail ¦ Üzerinde çalıştığın bir sese geri dön
+Revue, collection, série ¦ Dergi, koleksiyon, dizi
+＋ Revue, collection, série ¦ ＋ Dergi, koleksiyon, dizi
+Rien ne manque sur 5 générations ¦ 5 kuşakta eksik bir şey yok
+Règles des journaux ¦ Gazete kuralları
+Région, puis pays ¦ Bölge, sonra ülke
+Pays (A → Z) ¦ Ülke (A → Z)
+Tous les pays, dans l’ordre que tu veux ¦ Tüm ülkeler, istediğin sırayla
+Un fichier .ics à ouvrir dans ton calendrier (Apple, Google, Outlook…) ¦ Takviminde açılacak bir .ics dosyası (Apple, Google, Outlook…)
+Un son de la base ou de l’ordinateur, à travailler et à garder comme projet ¦ Veritabanından ya da bilgisayardan, üzerinde çalışılıp proje olarak saklanacak bir ses
+Une fiche rassemble texte, images, personnes, cartes et listes sur un sujet. ¦ Bir not kartı, bir konu üzerine metin, resim, kişi, harita ve listeleri bir araya getirir.
+Voir qui pouvait voter en ¦ Oy kullanabilenleri gör — yıl:
+pas de date ¦ tarih yok
+Écart ¦ Fark
+↔ Écart ¦ ↔ Fark
+Écart hommes / femmes ¦ Erkek / kadın farkı
+Écoles, études et apprentissages, diplômes, établissements. ¦ Okullar, öğrenim ve çıraklık, diplomalar, kurumlar.
+Écris ton annonce et vois tout de suite combien elle coûtera d’après les règles du journal. ¦ İlanını yaz ve gazetenin kurallarına göre ne kadar tutacağını hemen gör.
+Écris ton annonce, vois tout de suite combien elle coûtera d’après les règles du journal, et suis ce qu’elle devient. ¦ İlanını yaz, gazetenin kurallarına göre ne kadar tutacağını hemen gör ve ne olduğunu izle.
+Écris-en une dans ✨ Trésors → Lettres aux descendants : « pour les 18 ans de Léa », « en 2050 ». ¦ ✨ Hazineler → Torunlara mektuplar içinde bir tane yaz: “Léa’nın 18 yaşı için”, “2050’de”.
+↗ Ouvrir dans Recherche ¦ ↗ Araştırma’da aç
+⚙️ Ouvrir les Réglages ¦ ⚙️ Ayarlar’ı aç
+⚙️ Ranger les outils ¦ ⚙️ Araçları düzenle
+✅ Tâches de l’Atelier ¦ ✅ Atölye görevleri
+✉️ Courriers envoyés ¦ ✉️ Gönderilen mektuplar
+✉️ Ouvrir les lettres dans ✨ Trésors ¦ ✉️ Mektupları ✨ Hazineler’de aç
+✝️ Décès, sépultures ¦ ✝️ Ölümler, defin kayıtları
+👶 Naissances, baptêmes ¦ 👶 Doğumlar, vaftizler
+❓ Ce qu’on peut récupérer (licences) ¦ ❓ Neler alınabilir (lisanslar)
+❓ Comment noter un héritage ? ¦ ❓ Bir mirası nasıl not ederim?
+⤒ Importer des relevés ¦ ⤒ Döküm içe aktar
+⤒ Importer les réponses ¦ ⤒ Yanıtları içe aktar
+⤓ Exporter les anniversaires (.ics) ¦ ⤓ Yıl dönümlerini dışa aktar (.ics)
+＋ Ajouter une image ¦ ＋ Resim ekle
+＋ Ajouter une parcelle ¦ ＋ Parsel ekle
+＋ Annonce ou courrier ¦ ＋ İlan ya da mektup
+＋ Nouveau dossier de preuve ¦ ＋ Yeni kanıt dosyası
+＋ Nouveau livret ¦ ＋ Yeni kitapçık
+＋ Nouveau montage ¦ ＋ Yeni montaj
+＋ Nouveau passage dans les médias ¦ ＋ Yeni medyada yer alma
+＋ Nouveau passeport ¦ ＋ Yeni pasaport
+＋ Nouveau projet son ¦ ＋ Yeni ses projesi
+＋ Nouveau questionnaire ¦ ＋ Yeni anket
+＋ Nouveau recueil ¦ ＋ Yeni derleme
+＋ Nouvelle carte ¦ ＋ Yeni harita
+＋ Nouvelle carte postale ¦ ＋ Yeni kartpostal
+＋ Nouvelle demande… ¦ ＋ Yeni istek…
+＋ Nouvelle maison ¦ ＋ Yeni ev
+＋ Nouvelle transcription ¦ ＋ Yeni transkripsiyon
+＋ Règles d’un journal ¦ ＋ Bir gazetenin kuralları
+＋ Épisode ¦ ＋ Bölüm
+🌍 Le droit de vote dans le monde ¦ 🌍 Dünyada oy hakkı
+📂 Projets son ¦ 📂 Ses projeleri
+📚 Vers l’Atelier ¦ 📚 Atölye’ye
+📷 Lire une capture des règles ¦ 📷 Kuralların ekran görüntüsünü oku
+🔍 Ouvrir l’assistant ¦ 🔍 Yardımcıyı aç
+🔍 Ouvrir l’assistant « Que manque-t-il ? » ¦ 🔍 “Ne eksik?” yardımcısını aç
+🔍 Qui est sur cette photo ? ¦ 🔍 Bu fotoğrafta kim var?
+🔍 Rappels d’enquête ¦ 🔍 İnceleme hatırlatmaları
+🔗 Partager une branche ¦ 🔗 Bir kolu paylaş
+🕯️ Allumer une bougie ¦ 🕯️ Bir mum yak
+🖼️ Tous les médias ¦ 🖼️ Tüm medya
+🗺 Toutes mes cartes ¦ 🗺 Tüm haritalarım
+🛂 Ouvrir dans ✨ Trésors ¦ 🛂 ✨ Hazineler’de aç
+🛡 Les règles ¦ 🛡 Kurallar

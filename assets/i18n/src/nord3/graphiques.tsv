@@ -1,0 +1,1800 @@
+fr ¦ ro
+Règle un diagramme puis enregistre-le comme vue pour le retrouver ici. ¦ Configurează o diagramă, apoi salveaz-o ca vizualizare ca s-o regăsești aici.
+Vue enregistrée supprimée ¦ Vizualizarea salvată a fost ștearsă
+Première personne ¦ Prima persoană
+Deuxième personne ¦ A doua persoană
+Afficher le lien ¦ Arată legătura
+Année non renseignée ¦ An necompletat
+Adresse non renseignée ¦ Adresă necompletată
+Membre du foyer ¦ Membru al gospodăriei
+Aucun membre relevé. ¦ Niciun membru consemnat.
+Aucune maisonnée recensée pour cette personne. ¦ Nicio gospodărie recenzată pentru această persoană.
+Ajoute des recensements depuis sa fiche. ¦ Adaugă recensăminte din fișa ei.
+Aucun déplacement entre deux lieux géocodés n’est encore disponible pour cette branche. ¦ Încă nu există nicio deplasare între două locuri geocodate pentru această ramură.
+Pas encore assez de liens renseignés pour dessiner ce graphe. ¦ Încă nu sunt destule legături completate pentru a desena acest graf.
+Réseau social ¦ Rețea socială
+Métiers transmis ¦ Meserii transmise
+Migrations de la branche ¦ Migrațiile ramurii
+Réseau ¦ Rețea
+=nœud ¦ nod|noduri|de noduri
+{nodes} · {links}. Survole un lien pour voir sa nature et clique sur une personne pour ouvrir sa fiche. ¦ {nodes} · {links}. Treci cu mouse-ul peste o legătură ca să vezi natura ei și fă clic pe o persoană ca să-i deschizi fișa.
+Tous les actes ¦ Toate actele
+Actes rattachés ¦ Acte atașate
+Actes liés ¦ Acte legate
+Sépultures ¦ Înmormântări
+Aucun acte pour ces filtres. ¦ Niciun act pentru aceste filtre.
+Sans précision ¦ Fără precizare
+Aucun recensement pour ces filtres. ¦ Niciun recensământ pentru aceste filtre.
+Aucun dépouillement enregistré pour ces filtres. ¦ Nicio indexare salvată pentru aceste filtre.
+GRAPHIQUES · LIEUX ¦ GRAFICE · LOCURI
+SYNTHÈSE LOCALE ¦ SINTEZĂ LOCALĂ
+Regroupe les sources et recherches déjà rattachées à un même lieu. ¦ Reunește sursele și cercetările deja legate de același loc.
+Choisis une commune pour afficher les actes, dépouillements, battues et sépultures liés à ce lieu. ¦ Alege o localitate ca să afișezi actele, indexările, căutările ample și înmormântările legate de acest loc.
+génération {list} ¦ generația {list}
+générations {list} ¦ generațiile {list}
+est {list} ¦ este {list}
+(… {n} places en tout) ¦ (… {n} locuri în total)
+Ancêtres répétés de {name} ¦ Strămoșii repetați ai lui {name}
+Voir aussi leurs ancêtres répétés ({n}) ¦ Vezi și strămoșii lor repetați ({n})
+Quand deux ancêtres sont cousins, leurs propres ancêtres apparaissent plusieurs fois dans l’arbre : c’est l’implexe. Seules les filiations biologiques comptent. Le taux = 1 − personnes différentes ÷ places connues. ¦ Când doi strămoși sunt veri, propriii lor strămoși apar de mai multe ori în arbore: acesta este implexul. Contează doar filiațiile biologice. Rata = 1 − persoane diferite ÷ locuri cunoscute.
+Places théoriques ¦ Locuri teoretice
+Places connues ¦ Locuri cunoscute
+places connues ¦ locuri cunoscute
+Personnes différentes ¦ Persoane diferite
+Implexe ¦ Implex
+IMPLEXE ¦ IMPLEX
+Implexe cumulé ¦ Implex cumulat
+implexe global ¦ implex global
+ancêtres différents ¦ strămoși diferiți
+ancêtres répétés ¦ strămoși repetați
+Calcul arrêté : arbre trop grand. ¦ Calcul oprit: arbore prea mare.
+Les couples communs les plus proches ¦ Cele mai apropiate cupluri comune
+C’est ici que les branches se rejoignent ; leurs ancêtres sont répétés à leur suite. ¦ Aici se unesc ramurile; strămoșii lor se repetă după ele.
+Aucun ancêtre répété : chaque ancêtre connu n’apparaît qu’une fois. ¦ Niciun strămoș repetat: fiecare strămoș cunoscut apare o singură dată.
+LIENS DE PARENTÉ ¦ LEGĂTURI DE RUDENIE
+Choisis deux personnes ¦ Alege două persoane
+Recherche les deux individus dans la colonne de gauche pour afficher le chemin familial le plus court. ¦ Caută cele două persoane în coloana din stânga ca să afișezi cel mai scurt drum familial.
+lié à ¦ legat de
+{links} entre les deux personnes. ¦ {links} între cele două persoane.
+Aucun chemin familial trouvé entre ces deux personnes. ¦ Niciun drum familial găsit între aceste două persoane.
+Aucune relation disponible. ¦ Nicio relație disponibilă.
+Ajoute des parents, conjoints ou enfants sur la fiche. ¦ Adaugă părinți, soți sau copii în fișă.
+Molette : zoomer · Maj + molette ou glisser : déplacer ¦ Rotița: mărește · Shift + rotița sau trage: mută
+Choisir dans Personnes ¦ Alege din Persoane
+Aucune ascendance disponible. ¦ Nicio ascendență disponibilă.
+Ajoute des parents sur la fiche pour voir l’arbre. ¦ Adaugă părinți în fișă ca să vezi arborele.
+♂ Masculin ¦ ♂ Masculin
+♀ Féminin ¦ ♀ Feminin
+□ Masculin ¦ □ Masculin
+○ Féminin ¦ ○ Feminin
+◇ Sexe non renseigné ¦ ◇ Sex necompletat
+Les traits relient les générations connues. ¦ Liniile leagă generațiile cunoscute.
+Distribution des noms ¦ Distribuția numelor
+DISTRIBUTION ¦ DISTRIBUȚIE
+=naissance regroupée ¦ naștere grupată|nașteri grupate|de nașteri grupate
+{births} par année et patronyme. ¦ {births} pe an și nume de familie.
+Vivant·e ¦ În viață
+Décédé·e ¦ Decedat(ă)
+D’autres générations existent ¦ Există și alte generații
+Côte à côte ¦ Alăturat
+Dessus / dessous ¦ Sus / jos
+Aucune vue enregistrée pour l’instant ¦ Nicio vizualizare salvată deocamdată
+Montrer les animaux de chacun à côté de leur maître (trait pointillé) ¦ Arată animalele fiecăruia lângă stăpânul lor (linie punctată)
+Couleur et épaisseur des traits selon la solidité de chaque lien parent-enfant ¦ Culoarea și grosimea liniilor după soliditatea fiecărei legături părinte-copil
+🛡 Vue solidité ¦ 🛡 Vizualizare soliditate
+Tableau des chiffres ¦ Tabelul cifrelor
+Graphique d’une statistique de l’app ¦ Grafic al unei statistici din aplicație
+Ce graphique n’existe plus. ¦ Acest grafic nu mai există.
+Un de mes graphiques ¦ Unul dintre graficele mele
+📈 Un de mes graphiques ¦ 📈 Unul dintre graficele mele
+Un graphique de l’Éditeur de graphiques, tenu à jour ¦ Un grafic din Editorul de grafice, ținut la zi
+Données de l’app ¦ Date din aplicație
+🔄 Données de l’app ¦ 🔄 Date din aplicație
+✍️ Mes chiffres ¦ ✍️ Cifrele mele
+Mon diagramme ¦ Diagrama mea
+Posé : {where} ¦ Pus în: {where}
+LISTES · GRAPHIQUES ¦ LISTE · GRAFICE
+📈 Graphiques et diagrammes ¦ 📈 Grafice și diagrame
+Tous tes graphiques (faits dans <b>Réglages → Éditeur de graphiques</b>, avec tes propres chiffres ou ceux de l’app) et tes diagrammes (hémicycle, frise d’un groupe, camembert…). Chacun se pose partout : un widget du tableau de bord, une Fiche, une enquête, l’Atelier, la page d’une personne, la mise en page — bouton « ＋ Diagramme », puis « 📈 Un de mes graphiques ». ¦ Toate graficele tale (făcute în <b>Setări → Editor de grafice</b>, cu propriile tale cifre sau cu cele ale aplicației) și diagramele tale (hemiciclu, cronologia unui grup, diagramă circulară…). Fiecare se poate pune oriunde: un widget din tabloul de bord, o Fișă, o investigație, Atelierul, pagina unei persoane, macheta — butonul „＋ Diagramă”, apoi „📈 Unul dintre graficele mele”.
+＋ Nouveau diagramme ¦ ＋ Diagramă nouă
+Aucun graphique ni diagramme pour l’instant ¦ Niciun grafic și nicio diagramă deocamdată
+Un graphique compte ce que tu veux (tes propres chiffres, des personnes, des événements, une statistique de l’app) ; un diagramme dessine une assemblée, une frise, un organigramme… ¦ Un grafic numără ce vrei tu (propriile tale cifre, persoane, evenimente, o statistică din aplicație); o diagramă desenează o adunare, o cronologie, o organigramă…
+Rien ne correspond : retire un filtre ou change la recherche. ¦ Nimic nu se potrivește: scoate un filtru sau schimbă căutarea.
+Chercher un graphique, un diagramme… (ex. naissances, Rennes) ¦ Caută un grafic, o diagramă… (ex. nașteri, Rennes)
+Seulement ceux posés quelque part ¦ Doar cele puse undeva
+Posés quelque part ¦ Puse undeva
+Posé nulle part pour l’instant ¦ Nepus nicăieri deocamdată
+Courbe ¦ Curbă
+Aire ¦ Arie
+Anneau ¦ Inel
+Camembert ¦ Diagramă circulară
+Barres ¦ Bare
+Revenir à la personne ¦ Înapoi la persoană
+Prénom contient ¦ Prenumele conține
+Statut (vivant, décédé) ¦ Stare (în viață, decedat)
+Métier contient ¦ Meseria conține
+Dans mes favoris ¦ În favoritele mele
+Naissance entre (années) ¦ Naștere între (ani)
+Naissance entre deux dates précises ¦ Naștere între două date precise
+Naissance en (mois) ¦ Naștere în (luna)
+Décès entre (années) ¦ Deces între (ani)
+Âge à un événement entre ¦ Vârsta la un eveniment între
+A vécu entre … ans ¦ A trăit între … ani
+Lieu de naissance (contient) ¦ Locul nașterii (conține)
+Lieu de décès ou d’inhumation (contient) ¦ Locul decesului sau al înmormântării (conține)
+A un événement à (lieu contient) ¦ Are un eveniment în (locul conține)
+A un événement dans le département, la région ou le pays ¦ Are un eveniment în departament, regiune sau țară
+A un événement à moins de … km de ¦ Are un eveniment la mai puțin de … km de
+A eu un événement (mariage, divorce, voyage…) ¦ A avut un eveniment (căsătorie, divorț, călătorie…)
+Nombre d’événements d’un type entre ¦ Numărul de evenimente de un tip între
+Nombre d’unions (mariages) entre ¦ Numărul de uniuni (căsătorii) între
+Nombre d’enfants entre ¦ Numărul de copii între
+Conjoint : nom ou prénom contient ¦ Soț/soție: numele sau prenumele conține
+Parent : nom ou prénom contient ¦ Părinte: numele sau prenumele conține
+Cause de décès contient ¦ Cauza decesului conține
+Seulement mes ancêtres (Sosa) ¦ Doar strămoșii mei (Sosa)
+Par rapport à la personne de la fiche (ses ancêtres, sa famille…) ¦ Față de persoana din fișă (strămoșii, familia ei…)
+Génération Sosa entre ¦ Generația Sosa între
+Sans source ¦ Fără sursă
+Nombre de sources entre ¦ Numărul de surse între
+A une photo ou un document ¦ Are o fotografie sau un document
+Les filtres ci-dessus (années, limite, sexe et critères) peuvent devenir ceux de départ de ¦ Filtrele de mai sus (ani, limită, sex și criterii) pot deveni cele de pornire pentru
+les distributions. ¦ distribuții.
+Usage des noms de famille dans la base. ¦ Folosirea numelor de familie în bază.
+Années de naissance (par décennie) ¦ Anii nașterii (pe decenii)
+Années de décès (par décennie) ¦ Anii decesului (pe decenii)
+Mes ancêtres par siècle ¦ Strămoșii mei pe secole
+Métiers les plus fréquents ¦ Cele mai frecvente meserii
+Femmes et hommes ¦ Femei și bărbați
+Ancêtres à sourcer ¦ Strămoși de documentat
+Toutes les personnes récentes ont au moins une source. ¦ Toate persoanele recente au cel puțin o sursă.
+Tous les événements récents ont un média. ¦ Toate evenimentele recente au un fișier media.
+Aucun média. ¦ Niciun fișier media.
+Aucun média isolé. ¦ Niciun fișier media izolat.
+Toutes les images récentes ont au moins une zone identifiée. ¦ Toate imaginile recente au cel puțin o zonă identificată.
+Aucune fiche récente avec parent manquant. ¦ Nicio fișă recentă cu părinte lipsă.
+Aucun baptême récent sans parrain/marraine. ¦ Niciun botez recent fără naș/nașă.
+✎ Modifier l’onglet ¦ ✎ Modifică fila
+Aucun widget affiché ¦ Niciun widget afișat
+Onglet vide ¦ Filă goală
+Ajoute des widgets, tes listes ou tes graphiques depuis la colonne de gauche. ¦ Adaugă widgeturi, listele sau graficele tale din coloana din stânga.
+Ajoute-en depuis la colonne de gauche, ou crée le tien. ¦ Adaugă din coloana din stânga sau creează-l pe al tău.
+Widget « {name} » retiré du tableau de bord. ¦ Widgetul „{name}” a fost scos din tabloul de bord.
+Widget retiré du tableau de bord. ¦ Widget scos din tabloul de bord.
+Widget supprimé du tableau de bord. ¦ Widget șters din tabloul de bord.
+Widget modifié. ¦ Widget modificat.
+Revenir au widget ¦ Înapoi la widget
+Enquêtes ouvertes ¦ Investigații deschise
+Battues ouvertes ¦ Căutări ample deschise
+Rappels proches ¦ Mementouri apropiate
+Incohérences ¦ Incoerențe
+Seulement les SOSA ¦ Doar SOSA
+Types d’évènements ¦ Tipuri de evenimente
+Ex : trouver la date de naissance de Jean Dupont ¦ Ex.: găsește data nașterii lui Jean Dupont
+Personne liée (facultatif) ¦ Persoană legată (opțional)
+Réglages du widget ¦ Setările widgetului
+Statistique affichée ¦ Statistica afișată
+Dernière fiche consultée ¦ Ultima fișă consultată
+Les descendants ¦ Descendenții
+Les ascendants ¦ Ascendenții
+Sites affichés ¦ Situri afișate
+Prendre cette image ¦ Ia această imagine
+Provenance affichée ¦ Proveniența afișată
+Ex : Jean Dupont · Enquête ¦ Ex.: Jean Dupont · Investigație
+Personne affichée ¦ Persoana afișată
+Aléatoire ¦ Aleatoriu
+Personne précise ¦ Persoană anume
+📁 ou glisse une image ici, ou colle-la (⌘V). ¦ 📁 sau trage o imagine aici, ori lipește-o (⌘V).
+Pages du suivi ¦ Paginile urmăririi
+Pages du tableau de bord ¦ Paginile tabloului de bord
+Chaque page a ses widgets ; les boutons des pages sont en haut du Suivi des animaux. La page cochée s’affiche à l’ouverture. ¦ Fiecare pagină are widgeturile ei; butoanele paginilor sunt în partea de sus a Urmăririi animalelor. Pagina bifată se afișează la deschidere.
+Chaque page a ses widgets ; les boutons des pages sont en haut du tableau de bord. La page cochée s’affiche à l’ouverture. ¦ Fiecare pagină are widgeturile ei; butoanele paginilor sunt în partea de sus a tabloului de bord. Pagina bifată se afișează la deschidere.
+Ranger ses widgets ¦ Aranjează-i widgeturile
+✎ en cours ¦ ✎ în lucru
+Titre de l’ensemble ¦ Titlul ansamblului
+Un niveau plus haut ¦ Un nivel mai sus
+Sous-ensemble (un niveau plus bas) ¦ Subansamblu (un nivel mai jos)
+SUIVI DES ANIMAUX ¦ URMĂRIREA ANIMALELOR
+MON ONGLET ¦ FILA MEA
+Son widget sera supprimé avec elle. ¦ Widgetul ei va fi șters odată cu ea.
+Ses {widgets} seront supprimés avec elle. ¦ {widgets} ale ei vor fi șterse odată cu ea.
+=widget ¦ widget|widgeturi|de widgeturi
+Supprimer la page « {name} » ? ¦ Ștergi pagina „{name}”?
+Page ¦ Pagină
+Pages du suivi enregistrées. ¦ Paginile urmăririi au fost salvate.
+Tableau de bord enregistré. ¦ Tabloul de bord a fost salvat.
+=fiche créée ¦ fișă creată|fișe create|de fișe create
+=événement ajouté ¦ eveniment adăugat|evenimente adăugate|de evenimente adăugate
+=source ajoutée ¦ sursă adăugată|surse adăugate|de surse adăugate
+=recensement ajouté ¦ recensământ adăugat|recensăminte adăugate|de recensăminte adăugate
+=nouvel ancêtre Sosa ¦ strămoș Sosa nou|strămoși Sosa noi|de strămoși Sosa noi
+=battue terminée ¦ căutare amplă încheiată|căutări ample încheiate|de căutări ample încheiate
+=enquête terminée ¦ investigație încheiată|investigații încheiate|de investigații încheiate
+=évènement ¦ eveniment|evenimente|de evenimente
+=doublon ¦ dublură|dubluri|de dubluri
+pas encore de modification ce mois-ci ¦ încă nicio modificare luna aceasta
+rien pour l’instant ¦ nimic deocamdată
+En {month} : ¦ În {month}:
+En {year} : ¦ În {year}:
+{days} de recherche. ¦ {days} de cercetare.
+{days} de recherche, {changes}. ¦ {days} de cercetare, {changes}.
+↑ plus actif que le mois dernier ¦ ↑ mai activ decât luna trecută
+Modifications par mois sur un an ¦ Modificări pe lună, pe un an
+D’après le journal des modifications : le travail fait à la main (les imports de fichiers ne comptent pas comme fiches créées). ¦ După jurnalul modificărilor: munca făcută de mână (importurile de fișiere nu se numără ca fișe create).
+Bilan indisponible. ¦ Bilanț indisponibil.
+dernière fiche consultée ¦ ultima fișă consultată
+Aucun anniversaire aujourd’hui. ¦ Nicio aniversare azi.
+Aucune personne verrouillée récemment. ¦ Nicio persoană blocată recent.
+Aucune personne disponible pour ce widget. ¦ Nicio persoană disponibilă pentru acest widget.
+Aucun événement renseigné. ¦ Niciun eveniment completat.
+Aucune note. ¦ Nicio notă.
+Aucun recensement. ¦ Niciun recensământ.
+Aucune source ou citation. ¦ Nicio sursă sau citare.
+Bloc surtout utile pour une fiche féminine. ¦ Bloc util mai ales pentru fișa unei femei.
+Aucune enquête ou battue liée. ¦ Nicio investigație sau căutare amplă legată.
+Aucun détail ¦ Niciun detaliu
+Décision ¦ Decizie
+Bureau ¦ Birou
+Œuvre ¦ Operă
+Ouvrir fiche ¦ Deschide fișa
+Tous les événements récents ont une source. ¦ Toate evenimentele recente au o sursă.
+Aucun lieu prioritaire à compléter. ¦ Niciun loc prioritar de completat.
+Coordonnées ou pays à compléter ¦ Coordonate sau țară de completat
+Aucun couple prioritaire sans mariage. ¦ Niciun cuplu prioritar fără căsătorie.
+Personne 1 ¦ Persoana 1
+Personne 2 ¦ Persoana 2
+Aucune incohérence de dates détectée. ¦ Nicio incoerență de date detectată.
+Incohérences et conflits ¦ Incoerențe și conflicte
+Vérifier ¦ Verifică
+Aucun SOSA manquant proche. ¦ Niciun SOSA lipsă apropiat.
+Aucune battue prioritaire. ¦ Nicio căutare amplă prioritară.
+Commune de départ inconnue ¦ Localitate de pornire necunoscută
+Aucune action prioritaire pour le moment. ¦ Nicio acțiune prioritară deocamdată.
+À traiter ¦ De rezolvat
+Liste de travail quotidienne ¦ Lista de lucru zilnică
+Aucune archive disponible. ¦ Nicio arhivă disponibilă.
+Aucune racine SOSA définie. ¦ Nicio rădăcină SOSA definită.
+Aucun doublon probable repéré. ¦ Nicio dublură probabilă găsită.
+Aucun point géographique exploitable. ¦ Niciun punct geografic utilizabil.
+Aperçu cartographique ¦ Previzualizare pe hartă
+Aucune personne avec lieux datés. ¦ Nicio persoană cu locuri datate.
+Aucune personne disponible. ¦ Nicio persoană disponibilă.
+Aucun événement daté. ¦ Niciun eveniment datat.
+Éléments datés ou localisés ¦ Elemente datate sau localizate
+Documents et images ¦ Documente și imagini
+Sources enregistrées ¦ Surse salvate
+En cours ou en pause ¦ În lucru sau în pauză
+Recherches commune par commune ¦ Cercetări localitate cu localitate
+À vérifier dans maintenance ¦ De verificat în Setări
+100 fiches ¦ 100 de fișe
+Au moins 100 personnes enregistrées ¦ Cel puțin 100 de persoane salvate
+100 médias ¦ 100 de fișiere media
+Au moins 100 documents conservés ¦ Cel puțin 100 de documente păstrate
+Au moins la moitié des fiches sourcées ¦ Cel puțin jumătate din fișe cu surse
+Illustrée ¦ Ilustrată
+Au moins la moitié des fiches avec un média ¦ Cel puțin jumătate din fișe cu un fișier media
+5 générations SOSA ¦ 5 generații SOSA
+Cinq générations complètes ¦ Cinci generații complete
+Au moins une battue créée ¦ Cel puțin o căutare amplă creată
+Aucune suppression récente. ¦ Nicio ștergere recentă.
+Aucune modification récente. ¦ Nicio modificare recentă.
+Aucun événement exploitable pour ce quiz avec les filtres choisis. ¦ Niciun eveniment utilizabil pentru acest test cu filtrele alese.
+Pas assez de dates distinctes pour générer des propositions. ¦ Nu sunt destule date diferite pentru a genera variante.
+Quelle est la date de <strong>{what}</strong> de <strong>{name}</strong> ? ¦ Care este data pentru <strong>{what}</strong> lui <strong>{name}</strong>?
+Aucune image disponible. ¦ Nicio imagine disponibilă.
+Choisis une image dans les réglages du widget. ¦ Alege o imagine în setările widgetului.
+Choisis deux personnes dans les réglages du widget. ¦ Alege două persoane în setările widgetului.
+Personne liée ¦ Persoană legată
+Ouvre Comparaison pour analyser le lien. ¦ Deschide Comparația ca să analizezi legătura.
+Aucune personne favorite. ¦ Nicio persoană favorită.
+Rappels à traiter ¦ Mementouri de rezolvat
+Alertes cohérence ¦ Alerte de coerență
+Naissance renseignée ¦ Naștere completată
+Décès renseigné ¦ Deces completat
+Au moins un média ¦ Cel puțin un fișier media
+Au moins une source ¦ Cel puțin o sursă
+Aucun lieu renseigné. ¦ Niciun loc completat.
+Ajoute un objectif dans les réglages du widget. ¦ Adaugă un obiectiv în setările widgetului.
+Ajouter {what} ¦ Adaugă {what}
+Aucun rappel à venir. ¦ Niciun memento viitor.
+Aucune fiche consultée sur ce navigateur. ¦ Nicio fișă consultată în acest browser.
+Aucun média à transcrire. ¦ Niciun fișier media de transcris.
+Aucune signature identifiée à comparer. ¦ Nicio semnătură identificată de comparat.
+Aucune commune de battue à reprendre. ¦ Nicio localitate de căutare amplă de reluat.
+Aucune source ou piste à vérifier. ¦ Nicio sursă sau pistă de verificat.
+Rien à relire pour le moment. ¦ Nimic de recitit deocamdată.
+Aucun départ enregistré : coche « Départs / émigration » sur une fiche. ¦ Nicio plecare salvată: bifează „Plecări / emigrare” pe o fișă.
+Aucun enfant placé enregistré. ¦ Niciun copil plasat salvat.
+Aucune armoirie. ¦ Nicio stemă.
+Ajouter des armoiries ¦ Adaugă o stemă
+Aucun poilu : coche « Poilu 14-18 » sur une fiche. ¦ Niciun „poilu”: bifează „Poilu 14-18” pe o fișă.
+Aucune recherche enregistrée (Recherche → Recherche multicritère). ¦ Nicio căutare salvată (Cercetare → Căutare multicriterială).
+Aucun circuit à faire. ¦ Niciun circuit de făcut.
+Préparer un circuit ¦ Pregătește un circuit
+⚠ Aucun dossier hors de cet ordinateur n’est réglé : si le Mac est volé ou tombe en panne, tout part avec lui. ¦ ⚠ Niciun dosar din afara acestui calculator nu este configurat: dacă Mac-ul e furat sau se strică, totul se pierde odată cu el.
+Régler ¦ Configurează
+Aucun dossier surveillé pour l’instant ¦ Niciun dosar urmărit deocamdată
+Choisir un dossier ¦ Alege un dosar
+Aucun nom indexé dans les transcriptions. ¦ Niciun nume indexat în transcrieri.
+Rien de prévu sur les 7 prochains jours. ¦ Nimic planificat în următoarele 7 zile.
+Aucune date récurrente repérée dans les 7 prochains jours. ¦ Nicio dată recurentă găsită în următoarele 7 zile.
+Texte vide : écris-le avec le crayon ✎. ¦ Text gol: scrie-l cu creionul ✎.
+↗ Ouvrir mon agenda ¦ ↗ Deschide agenda mea
+Ce mois-ci ¦ Luna aceasta
+Voir le mois ¦ Vezi luna
+Qui ¦ Cine
+Entrée : calculer · ↑ : reprendre le dernier ¦ Enter: calculează · ↑: reia ultimul
+⛶ Ouvrir la calculette ¦ ⛶ Deschide calculatorul
+Fond de carte indisponible (pas d’Internet ?) : les photos restent à leur place. ¦ Harta de fundal indisponibilă (fără internet?): fotografiile rămân la locul lor.
+Pas précédent ¦ Pasul anterior
+Pas suivant ¦ Pasul următor
+Aucune date pour l’instant. ¦ Nicio dată deocamdată.
+Frise : glisse pour choisir une période, molette pour zoomer, double-clic pour tout voir ¦ Cronologie: trage ca să alegi o perioadă, rotița ca să mărești, dublu clic ca să vezi tot
+Choisis une carte dans les réglages du widget (✎). ¦ Alege o hartă în setările widgetului (✎).
+Des barres ou un camembert : par métier, par lieu, par décennie, par siècle… ¦ Bare sau o diagramă circulară: pe meserii, pe locuri, pe decenii, pe secole…
+Écran de l’app ¦ Ecran al aplicației
+Une liste, un diagramme, une statistique, la fiche d’une personne, la carte… tel quel. ¦ O listă, o diagramă, o statistică, fișa unei persoane, harta… așa cum sunt.
+Un pense-bête, une citation, une consigne, avec des émojis. ¦ Un memento, un citat, o instrucțiune, cu emoji.
+Raccourcis ¦ Scurtături
+Des boutons vers les écrans, les listes ou des sites que tu utilises souvent. ¦ Butoane către ecranele, listele sau site-urile pe care le folosești des.
+Parcours jour par jour ¦ Parcurs zi cu zi
+Widget de l’app habillé ¦ Widget al aplicației, decorat
+Widget de l’app ¦ Widget al aplicației
+toute la largeur ¦ toată lățimea
+Mosaïque (carrés proportionnels) ¦ Mozaic (pătrate proporționale)
+Aire (courbe remplie) ¦ Arie (curbă umplută)
+cliquer pour voir qui ¦ fă clic ca să vezi cine
+Tout voir ({n}) ¦ Vezi tot ({n})
+{n} autres valeurs ¦ {n} alte valori
+Aucune ligne. ¦ Niciun rând.
+Personne ne correspond. ¦ Nimeni nu se potrivește.
+=personne différente ¦ persoană diferită|persoane diferite|de persoane diferite
+{people} pour {n} comptés (les 3 000 premières lignes seulement). ¦ {people} pentru {n} numărate (doar primele 3 000 de rânduri).
+{people} pour {n} comptés : une même personne peut compter plusieurs fois (deux événements, deux étiquettes…). ¦ {people} pentru {n} numărate: aceeași persoană poate fi numărată de mai multe ori (două evenimente, două etichete…).
+Chercher un nom, un métier… ¦ Caută un nume, o meserie…
+Par nom, A → Z ¦ După nume, A → Z
+Par nom, Z → A ¦ După nume, Z → A
+Par naissance, les plus anciennes ¦ După naștere, cele mai vechi
+Par naissance, les plus récentes ¦ După naștere, cele mai recente
+Aucun raccourci. ¦ Nicio scurtătură.
+Frise verticale ¦ Cronologie verticală
+Frise horizontale (défile) ¦ Cronologie orizontală (derulează)
+Cartes en grille ¦ Carduri în grilă
+Liste compacte ¦ Listă compactă
+jusqu’au… (facultatif) ¦ până la… (opțional)
+Titre de l’étape ¦ Titlul etapei
+Couleur de l’étape ¦ Culoarea etapei
+Ce qui s’est passé ce jour-là ¦ Ce s-a întâmplat în ziua aceea
+Aucun événement daté pour cette personne. ¦ Niciun eveniment datat pentru această persoană.
+Étape ¦ Etapă
+Ancêtres trouvés (Sosa) ¦ Strămoși găsiți (Sosa)
+Ancêtres sans source ¦ Strămoși fără sursă
+décès avant 1800 ¦ decese înainte de 1800
+Pense-bête ¦ Memento
+Crée tes propres graphiques, sans rien programmer : avec ¦ Creează-ți propriile grafice, fără să programezi nimic: cu
+tes propres chiffres ¦ propriile tale cifre
+＋ Nouveau widget ¦ ＋ Widget nou
+Importer un widget reçu ¦ Importă un widget primit
+Un fichier « .lcnda-widget.json » envoyé par un proche : seul le modèle du widget est partagé, jamais les données. ¦ Un fișier „.lcnda-widget.json” trimis de cineva apropiat: se partajează doar modelul widgetului, niciodată datele.
+sur le tableau de bord ¦ pe tabloul de bord
+↗ Ouvrir dans Graphiques ¦ ↗ Deschide în Grafice
+＋ Ajouter au tableau de bord ¦ ＋ Adaugă la tabloul de bord
+Widget supprimé. ¦ Widget șters.
+Mon widget ¦ Widgetul meu
+Supprimer le widget ¦ Șterge widgetul
+Supprimer le widget « {name} » ? Il disparaît aussi du tableau de bord. ¦ Ștergi widgetul „{name}”? Dispare și din tabloul de bord.
+Supprimer le widget « {name} » ? Il disparaît aussi du tableau de bord et de tous les endroits où ce graphique est posé (fiches, enquêtes, mise en page…). ¦ Ștergi widgetul „{name}”? Dispare și din tabloul de bord și din toate locurile unde e pus acest grafic (fișe, investigații, machetă…).
+« {name} » importé : il est dans Graphiques → « Mes graphiques ». ¦ „{name}” importat: îl găsești în Grafice → „Graficele mele”.
+Widget « {name} » importé : ajoute-le au tableau de bord. ¦ Widgetul „{name}” a fost importat: adaugă-l la tabloul de bord.
+📌 Le poser aussi sur… ¦ 📌 Pune-l și pe…
+(à l’enregistrement) ¦ (la salvare)
+Posé nulle part pour l’instant. ¦ Nepus nicăieri deocamdată.
+La page d’une personne, une enquête… ¦ Pagina unei persoane, o investigație…
+Graphique posé : {name}. ¦ Grafic pus: {name}.
+Graphique retiré de cet endroit ¦ Grafic scos din acest loc
+L’ouvrir dans Graphiques ¦ Deschide-l în Grafice
+… et {n} autres (Listes → Graphiques et diagrammes) ¦ … și încă {n} (Liste → Grafice și diagrame)
+Widget ajouté au tableau de bord. ¦ Widget adăugat la tabloul de bord.
+NOUVEAU WIDGET ¦ WIDGET NOU
+NOUVEAU GRAPHIQUE ¦ GRAFIC NOU
+Par quoi commencer ? ¦ Cu ce începi?
+Partir de rien ¦ Pornește de la zero
+Partir d’un élément de l’app ¦ Pornește de la un element al aplicației
+N’importe quel écran devient un widget : une liste (fiche d’un village, recensements, rappels…), un diagramme, une statistique, une de tes listes, la fiche d’une personne, la carte, un outil des Réglages. ¦ Orice ecran devine un widget: o listă (fișa unui sat, recensăminte, mementouri…), o diagramă, o statistică, una dintre listele tale, fișa unei persoane, harta, un instrument din Setări.
+Créer ce widget ¦ Creează acest widget
+Partir d’un widget de l’app ¦ Pornește de la un widget al aplicației
+Partir d’un de mes widgets ¦ Pornește de la unul dintre widgeturile mele
+Avec mes propres chiffres ¦ Cu propriile mele cifre
+Un tableau à remplir (des noms et des chiffres, en une ou plusieurs séries), collé d’un tableur ou importé d’un fichier CSV. ¦ Un tabel de completat (nume și cifre, într-una sau mai multe serii), lipit dintr-un tabel de calcul sau importat dintr-un fișier CSV.
+Mes propres chiffres ¦ Propriile mele cifre
+Un diagramme ¦ O diagramă
+Hémicycle d’une assemblée, frise des membres d’un groupe, organigramme, flux, nuage de mots… (Mes diagrammes). ¦ Hemiciclul unei adunări, cronologia membrilor unui grup, organigramă, flux, nor de cuvinte… (Diagramele mele).
+Partir de rien, avec les données de l’app ¦ Pornește de la zero, cu datele aplicației
+Un ou plusieurs nombres : combien de personnes, d’événements, de lieux… répondent à tes critères. ¦ Unul sau mai multe numere: câte persoane, evenimente, locuri… corespund criteriilor tale.
+Les premières lignes d’une liste, avec les colonnes et l’ordre que tu veux. ¦ Primele rânduri ale unei liste, cu coloanele și ordinea pe care le vrei.
+Partir d’une statistique de l’app ¦ Pornește de la o statistică a aplicației
+Les mêmes chiffres que dans Graphiques → Statistiques, avec ton dessin (barres, camembert, courbe, mosaïque…), tes couleurs, et autant de critères que tu veux : métier, lieu et rayon en km, dates précises, mariage, nombre d’enfants, durée de vie, divorce, voyage… ¦ Aceleași cifre ca în Grafice → Statistici, cu desenul tău (bare, diagramă circulară, curbă, mozaic…), culorile tale și câte criterii vrei: meserie, loc și rază în km, date precise, căsătorie, număr de copii, durata vieții, divorț, călătorie…
+D’une statistique de l’app ¦ Dintr-o statistică a aplicației
+Partir d’un de mes widgets ou de mes graphiques ¦ Pornește de la unul dintre widgeturile sau graficele mele
+── ou des données de l’app ── ¦ ── sau din datele aplicației ──
+Listes de l’app ¦ Liste ale aplicației
+Aucun critère : toute la base. ¦ Niciun criteriu: toată baza.
+Toutes les lignes de cette liste de l’app. ¦ Toate rândurile acestei liste din aplicație.
+(ce que montre cette partie, affichée dessous) ¦ (ce arată această parte, afișată dedesubt)
+Ex. : Les baptêmes de la paroisse, du plus ancien au plus récent ¦ Ex.: Botezurile din parohie, de la cel mai vechi la cel mai recent
+✨ Proposer une légende d’après les critères ¦ ✨ Propune o legendă după criterii
+Tableau vide : « ＋ Ligne » ou « 📋 Coller un tableau ». ¦ Tabel gol: „＋ Rând” sau „📋 Lipește un tabel”.
+＋ Série (colonne de chiffres) ¦ ＋ Serie (coloană de cifre)
+Recopier les chiffres d’un graphique (à toi, un exemple, ou une statistique de l’app) pour les retoucher ¦ Copiază cifrele unui grafic (al tău, un exemplu sau o statistică din aplicație) ca să le retușezi
+📋 Coller un tableau ¦ 📋 Lipește un tabel
+📊 Partir d’un graphique ¦ 📊 Pornește de la un grafic
+🧾 Modifier les données ¦ 🧾 Modifică datele
+Fichier trop gros (5 Mo au plus). ¦ Fișier prea mare (cel mult 5 MB).
+Ligne retirée ¦ Rând scos
+Tableau vidé ¦ Tabel golit
+Remplacer le tableau ¦ Înlocuiește tabelul
+La première ligne ¦ Primul rând
+à deviner ¦ de ghicit
+donne les titres (noms des séries) ¦ dă titlurile (numele seriilor)
+est une ligne de chiffres ¦ este un rând de cifre
+Aucun graphique disponible. ¦ Niciun grafic disponibil.
+Recopier ces chiffres ¦ Copiază aceste cifre
+Aucun chiffre pour ce graphique. ¦ Nicio cifră pentru acest grafic.
+=valeur recopiée ¦ valoare copiată|valori copiate|de valori copiate
+=série ¦ serie|serii|de serii
+Série {num} ¦ Seria {num}
+Nom de la série {num} ¦ Numele seriei {num}
+Tableau importé ({rows}) ¦ Tabel importat ({rows})
+Série « {name} » retirée ¦ Seria „{name}” a fost scoasă
+Chiffres repris du tableur ({rows}) ¦ Cifre preluate din tabelul de calcul ({rows})
+Tableau collé ({rows}) ¦ Tabel lipit ({rows})
+Retirer cette série ¦ Scoate această serie
+(type masqué) ¦ (tip ascuns)
+Dessins simples ¦ Desene simple
+Sépia (photos anciennes) ¦ Sepia (fotografii vechi)
+Une couleur en dégradé ¦ O culoare în degrade
+Couleur du dégradé ¦ Culoarea degradeului
+Les valeurs apparaissent ici après le calcul de l’aperçu. ¦ Valorile apar aici după calcularea previzualizării.
+Valeurs les plus fréquentes ¦ Cele mai frecvente valori
+Écrans indisponibles. ¦ Ecrane indisponibile.
+(date précise ou année, facultatif) ¦ (dată precisă sau an, opțional)
+Nés à partir du ¦ Născuți începând cu
+12 mars 1750 ou 1700 ¦ 12 mars 1750 sau 1700
+jusqu’au ¦ până la
+31/12/1850 ou 1900 ¦ 31/12/1850 sau 1900
+Cette statistique garde ses seuls filtres (années, sexe, lignée). ¦ Această statistică își păstrează doar propriile filtre (ani, sex, linie).
+ne pas montrer les valeurs vides ¦ nu arăta valorile goale
+Libellé ¦ Denumire
+retirer ce chiffre ¦ scoate această cifră
+ordre de la liste ¦ ordinea listei
+croissant ¦ crescător
+décroissant ¦ descrescător
+Compter par ¦ Numără după
+Regrouper ¦ Grupează
+par valeur ¦ după valoare
+par année ¦ pe an
+par décennie ¦ pe deceniu
+par tranche (de … ans, ou de … pour un nombre) ¦ pe interval (de … ani, sau de … pentru un număr)
+par siècle ¦ pe secol
+par mois de l’année ¦ pe luna anului
+Tranche de ¦ Interval de
+Seulement du ¦ Doar de la
+12 mars 1750 ou 1750 ¦ 12 mars 1750 sau 1750
+au ¦ până la
+31/12/1800 ou 1800 ¦ 31/12/1800 sau 1800
+ne pas compter les cases vides ¦ nu număra celulele goale
+Les étapes viennent ¦ Etapele vin
+écrites à la main ¦ scrise de mână
+des événements d’une personne ¦ din evenimentele unei persoane
+Présentation ¦ Prezentare
+par date ¦ după dată
+dans l’ordre écrit ¦ în ordinea scrisă
+Hauteur de la carte ¦ Înălțimea hărții
+Carte du parcours ¦ Harta parcursului
+« Jour 1, Jour 2… » ¦ „Ziua 1, Ziua 2…”
+Textes des étapes ¦ Textele etapelor
+Seulement les événements avec un lieu ¦ Doar evenimentele cu un loc
+✎ Modifier ce diagramme ¦ ✎ Modifică această diagramă
+Le widget montre toujours la dernière version du diagramme (Graphiques → Mes diagrammes). ¦ Widgetul arată mereu ultima versiune a diagramei (Grafice → Diagramele mele).
+Un pense-bête, une citation… Les émojis marchent 🌳 ¦ Un memento, un citat… Emoji-urile merg 🌳
+Un site internet… ¦ Un site web…
+Texte du bouton ¦ Textul butonului
+Sous-titre de cette partie ¦ Subtitlul acestei părți
+Ex. : À faire, Mes chiffres, Liens utiles ¦ Ex.: De făcut, Cifrele mele, Linkuri utile
+ÉDITEUR DE GRAPHIQUES ¦ EDITOR DE GRAFICE
+ÉDITEUR DE WIDGETS ¦ EDITOR DE WIDGETURI
+Nouveau widget ¦ Widget nou
+Règle ton widget à gauche ; l’aperçu se met à jour à droite. ¦ Configurează-ți widgetul în stânga; previzualizarea se actualizează în dreapta.
+1. Le widget ¦ 1. Widgetul
+Mes ancêtres bretons ¦ Strămoșii mei bretoni
+Texte en haut du widget ¦ Textul din partea de sus a widgetului
+Une phrase pour expliquer ce widget ¦ O frază care explică acest widget
+Où l’afficher ¦ Unde să-l afișezi
+Enregistrer et ouvrir dans Graphiques ¦ Salvează și deschide în Grafice
+Enregistrer et ajouter au tableau de bord ¦ Salvează și adaugă la tabloul de bord
+la courbe ¦ curba
+Aucune valeur. ¦ Nicio valoare.
+remettre les couleurs de la palette ¦ readu culorile paletei
+Donne un titre au widget. ¦ Dă un titlu widgetului.
+Widget enregistré : ajoute-le depuis la colonne de gauche du tableau de bord. ¦ Widget salvat: adaugă-l din coloana din stânga a tabloului de bord.
+Graphique enregistré : il est dans Graphiques → Statistiques, rubrique « Mes graphiques ». ¦ Grafic salvat: îl găsești în Grafice → Statistici, rubrica „Graficele mele”.
+ce n’est pas un widget LCNDA. ¦ nu este un widget LCNDA.
+Liste absente de ta base ({name}) : remplacée par « Personnes ». ¦ Listă absentă din baza ta ({name}): înlocuită cu „Persoane”.
+Widget importé ¦ Widget importat
+Ce widget n’existe plus. ¦ Acest widget nu mai există.
+Statistiques de l’app ¦ Statisticile aplicației
+Source introuvable (graphique supprimé ?). ¦ Sursă negăsită (grafic șters?).
+MES GRAPHIQUES ¦ GRAFICELE MELE
+Graphique introuvable ¦ Grafic negăsit
+Il a peut-être été supprimé. ¦ Poate a fost șters.
+Image PNG ou JPG, PDF, impression, tableau CSV ¦ Imagine PNG sau JPG, PDF, tipărire, tabel CSV
+léger, pour un courriel ¦ ușor, pentru un e-mail
+les chiffres, pour un tableur ¦ cifrele, pentru un tabel de calcul
+Fenêtre d’impression bloquée. ¦ Fereastra de tipărire a fost blocată.
+Une photo de tes médias, une nouvelle chaque jour. ¦ O fotografie din fișierele tale media, una nouă în fiecare zi.
+Compte à rebours ¦ Numărătoare inversă
+Les jours qui restent avant une date : la cousinade, un anniversaire, un voyage aux archives… ¦ Zilele rămase până la o dată: reuniunea de familie, o aniversare, o vizită la arhive…
+Le widget n’a pas pu être fabriqué. ¦ Widgetul nu a putut fi creat.
+Widget prêt : {file}. Ouvre-le d’un double-clic et garde l’onglet ouvert (ou épingle-le) : il change tout seul chaque jour. ¦ Widget gata: {file}. Deschide-l cu dublu clic și ține fila deschisă (sau fixeaz-o): se schimbă singur în fiecare zi.
+La cousinade ¦ Reuniunea de familie
+ton ordinateur ¦ calculatorul tău
+Toujours au-dessus ¦ Mereu deasupra
+× Retirer du bureau ¦ × Scoate de pe desktop
+⤓ Télécharger le widget (.html) ¦ ⤓ Descarcă widgetul (.html)
+Démarrer avec l’ordinateur (les widgets s’ouvrent seuls, sans la grande fenêtre) ¦ Pornește odată cu calculatorul (widgeturile se deschid singure, fără fereastra mare)
+⛔ Je ne comprends pas cette date : écris par exemple « 14 juillet 2027 » ou « 14/07/2027 ». ¦ ⛔ Nu înțeleg această dată: scrie de exemplu „14 juillet 2027” sau „14/07/2027”.
+⛔ Donne la date du compte à rebours. ¦ ⛔ Dă data numărătorii inverse.
+Donne la date. ¦ Dă data.
+Le widget n’a pas pu s’ouvrir. ¦ Widgetul nu s-a putut deschide.
+Retiré du bureau. ¦ Scos de pe desktop.
+« {name} » retiré du bureau ¦ „{name}” scos de pe desktop
+Les widgets démarreront avec l’ordinateur. ¦ Widgeturile vor porni odată cu calculatorul.
+Les widgets ne démarreront plus avec l’ordinateur. ¦ Widgeturile nu vor mai porni odată cu calculatorul.
+🪟 Mettre sur le bureau (« {name} », une petite fenêtre à part) ¦ 🪟 Pune pe desktop („{name}”, o fereastră mică separată)
+🪟 Mettre sur le bureau (« {name} » : un fichier .html autonome dans un navigateur) ¦ 🪟 Pune pe desktop („{name}”: un fișier .html autonom într-un browser)
+Retirer {name} ¦ Scoate {name}
+Aucune personne ¦ Nicio persoană
+Flèches ¦ Săgeți
+▶ Carte de la vie animée ¦ ▶ Harta animată a vieții
+Ajoute une personne. ¦ Adaugă o persoană.
+Aucun lieu daté. ¦ Niciun loc datat.
+Comparer avec ¦ Compară cu
+Opacité ¦ Opacitate
+Année de ¦ Anul de la
+Âge de ¦ Vârsta de la
+Famille / groupe ¦ Familie / grup
+Fond ¦ Fundal
+Recentrer ¦ Recentrează
+carte|sépulture ¦ înmormântări
+carte|évt ¦ ev.
+contributeurs OpenStreetMap ¦ contributorii OpenStreetMap
+· connexion requise pour les tuiles ¦ · e nevoie de conexiune pentru dale
+connexion requise pour les tuiles ¦ e nevoie de conexiune pentru dale
+Aucun événement dans cette zone ¦ Niciun eveniment în această zonă
+⤢ Voir tout ¦ ⤢ Vezi tot
+Lieu non précisé ¦ Loc neprecizat
+Voir la tombe ¦ Vezi mormântul
+Événement non rattaché ¦ Eveniment neatașat
+🚢 voyage ¦ 🚢 călătorie
+👶 placement ¦ 👶 plasament
+🎖 armée ¦ 🎖 armată
+💞 conjoint ¦ 💞 soț/soție
+👶 enfant ¦ 👶 copil
+🏫 école ¦ 🏫 școală
+École ¦ Școală
+Les étapes ¦ Etapele
+📍 Lieux sans position ¦ 📍 Locuri fără poziție
+🗓 Sans lieu ¦ 🗓 Fără loc
+CARTE · LA VIE D’UNE PERSONNE ¦ HARTĂ · VIAȚA UNEI PERSOANE
+Carte de sa vie ¦ Harta vieții sale
+👪 Avec la famille (le couple, les enfants) ¦ 👪 Cu familia (cuplul, copiii)
+Les étapes l’une après l’autre, en vidéo (MP4 ou WebM) ¦ Etapele una după alta, în video (MP4 sau WebM)
+Ce navigateur ne sait pas enregistrer de vidéo ¦ Acest browser nu poate înregistra video
+🎬 Exporter en vidéo ¦ 🎬 Exportă ca video
+Chargement de la carte… ¦ Se încarcă harta…
+La carte de sa vie se remplit avec ses événements, ses résidences, ses recensements, ses voyages… ¦ Harta vieții sale se umple cu evenimentele, reședințele, recensămintele, călătoriile sale…
+🗺 La vie de {name} ¦ 🗺 Viața lui {name}
+La vie de {name} ¦ Viața lui {name}
+Aucun lieu dans cette vie ¦ Niciun loc în această viață
+Ajoute un lieu à ses événements (naissance, mariage, résidence…) pour voir sa vie sur la carte. ¦ Adaugă un loc la evenimentele sale (naștere, căsătorie, reședință…) ca să-i vezi viața pe hartă.
+Le moteur vidéo n’est pas chargé. ¦ Motorul video nu este încărcat.
+Durée d’une étape ¦ Durata unei etape
+aucune étape avec un lieu. ¦ nicio etapă cu un loc.
+🎬 Vidéo {file} ¦ 🎬 Video {file}
+les étapes animées ¦ etapele animate
+⤓ Exporter la vidéo en {file} ¦ ⤓ Exportă videoclipul în {file}
+Vidéo exportée, mais pas rangée dans les médias : {err} ¦ Video exportat, dar nepus în fișierele media: {err}
+✓ Vidéo exportée ({file}). ¦ ✓ Video exportat ({file}).
+Montrer la même vie, étape par étape, avec la lecture ▶ et la vidéo ¦ Arată aceeași viață, etapă cu etapă, cu redarea ▶ și video
+Comparer deux époques ¦ Compară două epoci
+Fermer la comparaison ¦ Închide comparația
+Glisse le trait (← →) ¦ Trage linia (← →)
+Transparence ¦ Transparență
+Deux fonds sur la même zone : un trait à glisser, côte à côte ou en transparence ¦ Două fundaluri pe aceeași zonă: o linie de tras, alăturat sau în transparență
+Fond des départements introuvable. ¦ Fundalul departamentelor negăsit.
+supprimée (partagée entre ses voisines) ¦ desființată (împărțită între vecinele ei)
+fusionnée ¦ comasată
+fusionnée (fusion-association) ¦ comasată (comasare-asociere)
+disparue ¦ dispărută
+renommée ¦ redenumită
+renommée « {name} » le {date} ¦ redenumită „{name}” la {date}
+{what} le {date} ¦ {what} la {date}
+dans {name} ¦ în {name}
+(devenue commune {name}) ¦ (devenită comuna {name})
+Aujourd’hui : <b>{name}</b> ¦ Astăzi: <b>{name}</b>
+Rétablie le {date}. ¦ Restabilită la {date}.
+Position approximative : le centre de la commune d’aujourd’hui. ¦ Poziție aproximativă: centrul comunei de astăzi.
+Source : INSEE, Code officiel géographique (depuis 1943). ¦ Sursă: INSEE, Code officiel géographique (din 1943).
+{name}, commune renommée ¦ {name}, comună redenumită
+{name}, commune disparue ¦ {name}, comună dispărută
+{name} — renommée en {year} ¦ {name} — redenumită în {year}
+{name} — disparue en {year} ¦ {name} — dispărută în {year}
+🏛 Frontières ▾ ¦ 🏛 Frontiere ▾
+Provinces, départements de 1790, communes disparues ¦ Provincii, departamente din 1790, comune dispărute
+Tracé approximatif, d’après les départements d’aujourd’hui ¦ Traseu aproximativ, după departamentele de astăzi
+Frontières anciennes ¦ Frontiere vechi
+Provinces d’Ancien Régime (≈ 1789) ¦ Provinciile Vechiului Regim (≈ 1789)
+Approximatif : d’après les départements d’aujourd’hui. ¦ Aproximativ: după departamentele de astăzi.
+Départements de 1790 ¦ Departamentele din 1790
+Les 83 départements, noms d’alors ; approximatif. ¦ Cele 83 de departamente, cu numele de atunci; aproximativ.
+Communes disparues ou fusionnées ¦ Comune dispărute sau comasate
+🏚 Communes disparues ou fusionnées ¦ 🏚 Comune dispărute sau comasate
+Depuis 1943 (INSEE). Zoome sur une région. ¦ Din 1943 (INSEE). Mărește pe o regiune.
+Avec les communes renommées ¦ Cu comunele redenumite
+Les communes disparues se téléchargent une fois : ¦ Comunele dispărute se descarcă o singură dată:
+Réglages → Frontières anciennes ↗ ¦ Setări → Frontiere vechi ↗
+Pas encore téléchargé ¦ Nedescărcat încă
+Téléchargé ¦ Descărcat
+Installé ¦ Instalat
+Pas installé ¦ Neinstalat
+=commune disparue ¦ comună dispărută|comune dispărute|de comune dispărute
+=commune renommée ¦ comună redenumită|comune redenumite|de comune redenumite
+=placée sur la carte ¦ plasată pe hartă|plasate pe hartă|de plasate pe hartă
+L’historique officiel des communes de l’INSEE (depuis 1943) : chaque commune disparue avec sa date et sa commune d’aujourd’hui. Livré avec l’app (5,5 Mo, Licence Ouverte 2.0 de l’INSEE) : installé tout seul, sans Internet. Les anciens noms aident aussi le menu de choix des lieux (« anc. « … » »). ¦ Istoricul oficial al comunelor de la INSEE (din 1943): fiecare comună dispărută cu data ei și comuna de astăzi. Livrat cu aplicația (5,5 MB, Licence Ouverte 2.0 de la INSEE): se instalează singur, fără internet. Numele vechi ajută și meniul de alegere a locurilor („anc. „…””).
+⤓ Télécharger de nouveau (mise à jour) ¦ ⤓ Descarcă din nou (actualizare)
+🗑 Retirer ¦ 🗑 Scoate
+⤓ Installer les frontières anciennes ¦ ⤓ Instalează frontierele vechi
+(taille…) ¦ (mărime…)
+dossier des données ¦ dosarul de date
+Rangé dans le {name}, commun à toutes tes généalogies. ¦ Păstrat în {name}, comun tuturor genealogiilor tale.
+Téléchargement et vérification… ¦ Descărcare și verificare…
+Frontières anciennes retirées ¦ Frontierele vechi au fost scoase
+pas d’Internet ¦ fără internet
+Adresse de téléchargement injoignable pour l’instant ({err}). ¦ Adresa de descărcare nu poate fi accesată deocamdată ({err}).
+✓ Frontières anciennes installées : {n}. ¦ ✓ Frontierele vechi au fost instalate: {n}.
+Départ, voyage ¦ Plecare, călătorie
+Tous les autres ¦ Toate celelalte
+Couvert ¦ Înnorat
+Pluie toute la journée ¦ Ploaie toată ziua
+Pluie faible ¦ Ploaie slabă
+Matin de brouillard glacé ¦ Dimineață cu ceață înghețată
+Brouillard le matin ¦ Ceață dimineața
+Il faisait très froid ¦ Era foarte frig
+Grand soleil et chaleur ¦ Soare puternic și căldură
+Gris et frais ¦ Cenușiu și răcoros
+Nuages et éclaircies ¦ Nori și înseninări
+Froid mais ensoleillé ¦ Frig, dar însorit
+Beau temps ¦ Vreme frumoasă
+Neige ¦ Ninsoare
+Orage ¦ Furtună
+Mesuré ¦ Măsurat
+Station à moins de 15 km (et moins de 150 m d’écart d’altitude) ¦ Stație la mai puțin de 15 km (și sub 150 m diferență de altitudine)
+Station à {n} km ¦ Stație la {n} km
+Station entre 15 et 40 km : indicatif (la pluie change vite d’un village à l’autre) ¦ Stație între 15 și 40 km: orientativ (ploaia se schimbă repede de la un sat la altul)
+Estimé (carreau ≈ 30 km) ¦ Estimat (pătrat ≈ 30 km)
+Réanalyse ERA5 : aucune station à moins de 40 km ¦ Reanaliză ERA5: nicio stație la mai puțin de 40 km
+Reconstitution grossière (≈ 100 km) ¦ Reconstituire aproximativă (≈ 100 km)
+Réanalyse 20CR (1836–1939) : une idée du temps, pas une mesure ¦ Reanaliză 20CR (1836–1939): o idee despre vreme, nu o măsurătoare
+Les données météo ne sont pas installées. ¦ Datele meteo nu sunt instalate.
+Le lieu n’a pas de coordonnées : place-le sur la carte pour avoir sa météo. ¦ Locul nu are coordonate: plasează-l pe hartă ca să ai vremea lui.
+La date n’est pas connue au jour près. ¦ Data nu este cunoscută la zi exactă.
+Pas de météo pour ce lieu : les données installées couvrent la France, la Belgique, la Suisse et le Luxembourg (le pack Europe ajoute le reste). ¦ Nicio informație meteo pentru acest loc: datele instalate acoperă Franța, Belgia, Elveția și Luxemburgul (pachetul Europa adaugă restul).
+Pas de relevé connu près d’ici avant {year} (première station : {name}). ¦ Nicio măsurătoare cunoscută pe aici înainte de {year} (prima stație: {name}).
+Pas de relevé connu près d’ici avant {year}. ¦ Nicio măsurătoare cunoscută pe aici înainte de {year}.
+Cliquer pour le détail ¦ Fă clic pentru detalii
+À propos des données ¦ Despre date
+🙈 Météo masquée pour cet événement ¦ 🙈 Vremea ascunsă pentru acest eveniment
+🙈 Météo masquée pour cette personne ¦ 🙈 Vremea ascunsă pentru această persoană
+{what} (la retrouver : Réglages → 🌦 Météo d’autrefois) ¦ {what} (o regăsești în: Setări → 🌦 Vremea de altădată)
+Ton lieu ¦ Locul tău
+(carte du relief) ¦ (harta reliefului)
+Fiabilité ¦ Fiabilitate
+3 jours avant · 3 jours après ¦ 3 zile înainte · 3 zile după
+Tout le détail… ¦ Toate detaliile…
+⛰ Altitude du lieu ¦ ⛰ Altitudinea locului
+Lecture des données météo… ¦ Se citesc datele meteo…
+Météo ¦ Vremea
+🌦 MÉTÉO D’AUTREFOIS ¦ 🌦 VREMEA DE ALTĂDATĂ
+Le lieu, la station et le carreau ¦ Locul, stația și pătratul
+↺ Altitude remise à celle de la carte ¦ ↺ Altitudinea readusă la cea de pe hartă
+⛰ Altitude enregistrée : {n} ¦ ⛰ Altitudine salvată: {n}
+⛰ LIEU ¦ ⛰ LOC
+Altitude de {name} ¦ Altitudinea pentru {name}
+ce lieu ¦ acest loc
+Ce qu’elle donne ¦ Ce oferă
+Licence et mention ¦ Licență și mențiune
+Une météo ancienne reste une estimation : elle aide à imaginer la journée, elle ne remplace pas ce que dit l’acte ou un journal de l’époque. ¦ Vremea de odinioară rămâne o estimare: te ajută să-ți imaginezi ziua, nu înlocuiește ce spune actul sau un ziar din epocă.
+Rien n’est envoyé sur Internet : toutes ces données sont dans l’app ou dans les packs importés. Les règles de fiabilité : station à moins de 15 km et moins de 150 m d’écart d’altitude → « Mesuré » ; de 15 à 40 km → « Station à … km » ; sinon la réanalyse ERA5 (1940 →) → « Estimé » ; de 1836 à 1939 la reconstitution 20CR → « Reconstitution grossière ». ¦ Nimic nu este trimis pe internet: toate aceste date sunt în aplicație sau în pachetele importate. Regulile de fiabilitate: stație la mai puțin de 15 km și sub 150 m diferență de altitudine → „Măsurat”; între 15 și 40 km → „Stație la … km”; altfel reanaliza ERA5 (1940 →) → „Estimat”; între 1836 și 1939 reconstituirea 20CR → „Reconstituire aproximativă”.
+Comment les obtenir ¦ Cum le obții
+Comment l’obtenir ¦ Cum îl obții
+(avant 1940, la météo montre la journée) ¦ (înainte de 1940, vremea arată ziua întreagă)
+Socle inclus ¦ Baza inclusă
+Pack complet ¦ Pachet complet
+Pack Europe ¦ Pachetul Europa
+Pack ¦ Pachet
+1836 à 2025 · France, Belgique, Suisse, Luxembourg · ≈ 300 stations chaque jour, 4 heures par jour depuis 1940 · ≈ 550 Mo ¦ 1836–2025 · Franța, Belgia, Elveția, Luxemburg · ≈ 300 de stații în fiecare zi, 4 ore pe zi din 1940 · ≈ 550 MB
+Toutes les stations (≈ 14 700), heure par heure depuis 1950 · ≈ 3 Go ¦ Toate stațiile (≈ 14 700), oră cu oră din 1950 · ≈ 3 GB
+🗑 Supprimer le pack ¦ 🗑 Șterge pachetul
+⤒ Importer le fichier… ¦ ⤒ Importă fișierul…
+🗑 {name} supprimé ¦ 🗑 {name} a fost șters
+Le temps qu’il faisait le jour de chaque événement, sans Internet. ¦ Vremea din ziua fiecărui eveniment, fără internet.
+Météo sur les fiches ¦ Vremea pe fișe
+Au survol ¦ La trecerea mouse-ului
+Au clic sur la pastille ¦ La clic pe insignă
+Fenêtre ¦ Fereastră
+Sous l’événement ¦ Sub eveniment
+Températures ¦ Temperaturi
+Pluie ¦ Ploaie
+pouces ¦ inci
+La phrase simple ¦ Fraza simplă
+« Il faisait froid : −4 °C au matin… » ¦ „Era frig: −4 °C dimineața…”
+Comparer à la normale ¦ Compară cu normalul
+Ligne des sources sous le détail ¦ Rândul surselor sub detalii
+Obligatoire pour certaines licences : elle reste dans le détail et à l’export. ¦ Obligatoriu pentru unele licențe: rămâne în detalii și la export.
+Bloc « 🌦 Météo de sa vie » sur les fiches ¦ Blocul „🌦 Vremea din viața sa” pe fișe
+Phrases curieuses (« Né le jour le plus froid… ») ¦ Fraze curioase („Născut în cea mai rece zi…”)
+Dans « Ce jour-là » et le tableau de bord ¦ În „În ziua aceea” și în tabloul de bord
+Montrer aussi les reconstitutions grossières (avant 1940) ¦ Arată și reconstituirile aproximative (înainte de 1940)
+Pour quels événements ¦ Pentru ce evenimente
+Tous les types d’événements de ta base (avec leur nombre). Décoche ceux qui n’ont pas besoin de la météo. ¦ Toate tipurile de evenimente din baza ta (cu numărul lor). Debifează-le pe cele care nu au nevoie de vreme.
+Météo masquée ¦ Vreme ascunsă
+Remontrer la météo ¦ Arată din nou vremea
+Rien n’est masqué. ¦ Nimic nu este ascuns.
+Sur une fiche : clic droit sur la pastille météo (ou ⋯ du détail) → « Masquer la météo ». ¦ Pe o fișă: clic dreapta pe insigna meteo (sau ⋯ din detalii) → „Ascunde vremea”.
+Les données dans l’app ¦ Datele din aplicație
+Le téléchargement se fait une fois, depuis n’importe quel ordinateur. Ensuite on importe le fichier ici et l’app n’a plus besoin d’Internet. ¦ Descărcarea se face o singură dată, de pe orice calculator. Apoi imporți fișierul aici și aplicația nu mai are nevoie de internet.
+le socle ¦ baza
+le pack complet ¦ pachetul complet
+le pack Europe ¦ pachetul Europa
+le pack ¦ pachetul
+Obtenir {name} ¦ Obține {name}
+Importer un pack météo ¦ Importă un pachet meteo
+aucun fichier ¦ niciun fișier
+l’en-tête du pack est abîmé. ¦ antetul pachetului este deteriorat.
+le fichier est incomplet (téléchargement interrompu ?). ¦ fișierul este incomplet (descărcare întreruptă?).
+heure par heure ¦ oră cu oră
+sur le disque ¦ pe disc
+Le socle reste : le pack s’ajoute par-dessus. ¦ Baza rămâne: pachetul se adaugă peste ea.
+Vérifié ¦ Verificat
+Envoi du fichier… ¦ Se trimite fișierul…
+Envoi du fichier… {n} % ¦ Se trimite fișierul… {n} %
+réponse illisible ¦ răspuns ilizibil
+Vérification du pack… ¦ Se verifică pachetul…
+La météo est masquée ici (Réglages → 🌦 Météo d’autrefois). ¦ Vremea este ascunsă aici (Setări → 🌦 Vremea de altădată).
+Aucun anniversaire rond avec une météo connue aujourd’hui. ¦ Nicio aniversare rotundă cu vreme cunoscută azi.
+Bague métal lue ¦ Inel metalic citit
+Photo-identifié ¦ Identificat foto
+(pas tout lu) ¦ (necitit în întregime)
+Éloigner ¦ Micșorează
+Le temps ¦ Timpul
+1 heure par seconde ¦ 1 oră pe secundă
+1 jour par seconde ¦ 1 zi pe secundă
+1 semaine par seconde ¦ 1 săptămână pe secundă
+1 mois par seconde ¦ 1 lună pe secundă
+↗ Ouvrir l’observation ¦ ↗ Deschide observația
+cette année ¦ anul acesta
+période choisie ¦ perioada aleasă
+La journée (ou la nuit) d’un animal qui porte une balise ou un collier GPS. ¦ Ziua (sau noaptea) unui animal care poartă un emițător sau o zgardă GPS.
+Animaux vus par mois, distance parcourue, zone fréquentée, jamais revus. ¦ Animale văzute pe lună, distanța parcursă, zona frecventată, niciodată revăzute.
+Une case pour retrouver un animal par ses couleurs, un code gravé, une bague métal, une puce, un tatouage ou une boucle. ¦ O casetă pentru a regăsi un animal după culori, un cod gravat, un inel metalic, un cip, un tatuaj sau o crotalie.
+Déposer un fichier GPX, KML ou CSV d’une balise ou d’un collier. ¦ Depune un fișier GPX, KML sau CSV de la un emițător sau o zgardă.
+Le suivi n’a pas pu se charger. ¦ Urmărirea nu s-a putut încărca.
+dernière position GPS ¦ ultima poziție GPS
+Aucune observation pour l’instant. ¦ Nicio observație deocamdată.
+Tous ont été revus récemment. ¦ Toate au fost revăzute recent.
+Tous ont été revus. ¦ Toate au fost revăzute.
+pas encore vu ¦ nevăzut încă
+Aucun animal suivi pour l’instant. ¦ Niciun animal urmărit deocamdată.
+Ouvre la fiche d’un animal (Listes → Animaux) et ajoute-lui une marque ou une observation. ¦ Deschide fișa unui animal (Liste → Animale) și adaugă-i un marcaj sau o observație.
+Le plus suivi ¦ Cel mai urmărit
+Code, couleurs ou numéro ¦ Cod, culori sau număr
+Chercher… (« 7K », « vert rouge », n° de puce) ¦ Caută… („7K”, „verde roșu”, nr. cip)
+Couleurs (« vert rouge »), code gravé, bague métal, puce, tatouage, boucle. « ? » = pas lu, [K|X] = j’hésite. ¦ Culori („verde roșu”), cod gravat, inel metalic, cip, tatuaj, crotalie. „?” = necitit, [K|X] = nu sunt sigur.
+Aucun trajet GPS pour l’instant. ¦ Niciun traseu GPS deocamdată.
+＋ Nouveau site ¦ ＋ Sit nou
+＋ Nouveau site de suivi ¦ ＋ Sit de urmărire nou
+Nouveau site de suivi ¦ Sit de urmărire nou
+Aucun site de suivi pour l’instant. ¦ Niciun sit de urmărire deocamdată.
+Aucun comptage. ¦ Nicio numărătoare.
+↗ Le site ¦ ↗ Situl
+La météo… ¦ Vremea…
+Dernier événement ¦ Ultimul eveniment
+Aucun groupe pour l’instant. ¦ Niciun grup deocamdată.
+🪺 Nids occupés ¦ 🪺 Cuiburi ocupate
+🐣 Poussins bagués ¦ 🐣 Pui inelați
+Courbe des comptages ¦ Curba numărătorilor
+Cette année ¦ Anul acesta
+Montrer les trajets GPS ¦ Arată traseele GPS
+Pas revus depuis ¦ Nerevăzuți de
+Le même seuil que « 👁 Vu la dernière fois » des fiches d’animaux. ¦ Același prag ca „👁 Văzut ultima dată” de pe fișele animalelor.
+Seulement ceux qui ne vont pas bien ¦ Doar cei care nu se simt bine
+Réglages du bloc remis comme au départ. ¦ Setările blocului au fost readuse la starea inițială.
+un site ¦ un sit
+⤒ Recevoir un suivi partagé… ¦ ⤒ Primește o urmărire partajată…
+Toutes les espèces ¦ Toate speciile
+Corneilles, Hérissons, Chats du quartier… ¦ Ciori, Arici, Pisicile din cartier…
+Corneille noire, Hérisson d’Europe… ¦ Cioară neagră, Arici european…
+Renommer la page ¦ Redenumește pagina
+Un émoji : 🐦 🦔 🐈 🐬 🐺… ¦ Un emoji: 🐦 🦔 🐈 🐬 🐺…
+Icône changée. ¦ Pictogramă schimbată.
+Espèce et site par défaut… ¦ Specia și situl implicite…
+Dupliquer la page ¦ Duplică pagina
+Bloc dupliqué. ¦ Bloc duplicat.
+Copier vers une autre page… ¦ Copiază pe altă pagină…
+Copier vers la page… ¦ Copiază pe pagina…
+Pages rangées. ¦ Pagini aranjate.
+📁 Glisse ici un trajet (GPX, KML, CSV), colle-le (⌘V) ou choisis-le ¦ 📁 Trage aici un traseu (GPX, KML, CSV), lipește-l (⌘V) sau alege-l
+Balises de la faune sauvage (Movebank…) ou colliers (Tractive, Weenect, Invoxia, Kippy…). ¦ Emițătoare pentru fauna sălbatică (Movebank…) sau zgărzi (Tractive, Weenect, Invoxia, Kippy…).
+Aucune observation datée et placée. ¦ Nicio observație datată și plasată.
+Aucun événement de santé pour l’instant. ¦ Niciun eveniment de sănătate deocamdată.
+Aucun passage sur cette période. ¦ Nicio trecere în această perioadă.
+Ce mois ¦ Luna aceasta
+Météo trouvée ¦ Vreme găsită
+=animal trouvé ¦ animal găsit|animale găsite|de animale găsite
+SUIVI DES ANIMAUX · EN GRAND ¦ URMĂRIREA ANIMALELOR · ÎN MARE
+SUIVI DES ANIMAUX · CHIFFRES ¦ URMĂRIREA ANIMALELOR · CIFRE
+Par animal ¦ Pe animal
+Par année ¦ Pe an
+relié dans l’ordre ¦ unite în ordine
+Les chiffres… ¦ Cifrele…
+Tous les animaux ¦ Toate animalele
+Par site · observations ¦ Pe sit · observații
+Aucune observation. ¦ Nicio observație.
+Zone fréquentée ¦ Zona frecventată
+enveloppe des points vus ¦ conturul punctelor văzute
+Il faut au moins 3 points pour une zone. ¦ O zonă are nevoie de cel puțin 3 puncte.
+Délai ¦ Termen
+Ce qu’il faisait ¦ Ce făcea
+Vu par ¦ Văzut de
+Avec qui ¦ Cu cine
+Chaque caractère du code ¦ Fiecare caracter al codului
+Pas lu : clique pour dire « j’hésite entre… » ¦ Necitit: fă clic ca să spui „ezit între…”
+J’hésite : clique pour dire que c’est sûr ¦ Ezit: fă clic ca să spui că e sigur
+Sûr : clique pour dire « pas lu » ¦ Sigur: fă clic ca să spui „necitit”
+un clic : sûr → pas lu → j’hésite entre… ¦ un clic: sigur → necitit → ezit între…
+Modifier l’observation ¦ Modifică observația
+Nouvelle observation ¦ Observație nouă
+Retrouver l’animal · selon l’espèce : ¦ Regăsește animalul · după specie:
+Photos, sons ou vidéos ¦ Fotografii, sunete sau videoclipuri
+Dis quand tu l’as vu. ¦ Spune când l-ai văzut.
+Dis où tu l’as vu (un lieu, un site, ou 📍 Ma position). ¦ Spune unde l-ai văzut (un loc, un sit sau 📍 Poziția mea).
+Observation enregistrée. ¦ Observație salvată.
+Observation créée. ¦ Observație creată.
+🌊 En mer ¦ 🌊 Pe mare
+Taille du groupe ¦ Mărimea grupului
+📷 Piège photo ¦ 📷 Capcană foto
+Vu par un piège photo ¦ Văzut de o capcană foto
+Piège n° ¦ Capcana nr.
+mise toute seule d’après ce que tu as cliqué ¦ completată singură după ce ai făcut clic
+＋ Créer la fiche d’un nouvel animal ¦ ＋ Creează fișa unui animal nou
+✎ Garder sans fiche ¦ ✎ Păstrează fără fișă
+Deux animaux correspondent autant : la lecture sera marquée « Doute ». ¦ Două animale se potrivesc la fel de bine: citirea va fi marcată „Îndoială”.
+Couleurs des bagues ¦ Culorile inelelor
+Bague vue mais couleur pas sûre ¦ Inel văzut, dar culoare nesigură
+Une autre couleur (pipette, code #…) ¦ Altă culoare (pipetă, cod #…)
+Pas regardé ¦ Neprivit
+J’hésite entre… ¦ Ezit între…
+L’observation sera gardée sans fiche, avec la lecture. ¦ Observația va fi păstrată fără fișă, cu citirea.
+Son nom (ou un code : « 7K », « Sans nom 2C9 ») ¦ Numele lui (sau un cod: „7K”, „Fără nume 2C9”)
+En quelques mots (« se baigne », « chasse un goéland »…) ¦ În câteva cuvinte („se scaldă”, „vânează un pescăruș”…)
+Cet appareil ne donne pas sa position. ¦ Acest aparat nu își dă poziția.
+La fenêtre d’import n’est pas chargée. ¦ Fereastra de import nu este încărcată.
+Un trajet GPS ¦ Un traseu GPS
+Fichier trop gros (40 Mo au plus). ¦ Fișier prea mare (cel mult 40 MB).
+Fichier trop gros (200 Mo au plus). ¦ Fișier prea mare (cel mult 200 MB).
+{rows} sans date ou sans position seront sautées. ¦ {rows} fără dată sau fără poziție vor fi sărite.
+{rows} sans date ou sans position sera sautée. ¦ {rows} fără dată sau fără poziție va fi sărit.
+=point importé ¦ punct importat|puncte importate|de puncte importate
+{points} pour {name} ¦ {points} pentru {name}
+({n} déjà là, sautés) ¦ ({n} deja existente, sărite)
+({n} déjà là, sauté) ¦ ({n} deja existent, sărit)
+{points} en tout ¦ {points} în total
+{name} a déjà {points} : ils restent, ce fichier s’y ajoute (un instant déjà là n’est pas repris deux fois). ¦ {name} are deja {points}: rămân, iar acest fișier se adaugă (un moment deja existent nu este preluat de două ori).
+l’animal ¦ animalul
+Ne va pas bien ¦ Nu se simte bine
+Chercher… (nom, code « 7K », bague EA…, lieu, observateur) ¦ Caută… (nume, cod „7K”, inel EA…, loc, observator)
+Chercher… (nom, code « 7K », puce…) ¦ Caută… (nume, cod „7K”, cip…)
+Vus récemment ¦ Văzute recent
+＋ Nouveau comptage ¦ ＋ Numărătoare nouă
+Nouveau comptage ¦ Numărătoare nouă
+＋ Nouvelle observation ici ¦ ＋ Observație nouă aici
+🗑 Supprimer le site ¦ 🗑 Șterge situl
+Aucun comptage pour l’instant. ¦ Nicio numărătoare deocamdată.
+? Non identifiés ¦ ? Neidentificați
+Personne encore. ¦ Nimeni încă.
+contour du site ¦ conturul sitului
+Site enregistré. ¦ Sit salvat.
+Site créé. ¦ Sit creat.
+île, colonie nord… ¦ insulă, colonia de nord…
+Ce qu’on compte ¦ Ce se numără
+Donne la date du comptage. ¦ Dă data numărătorii.
+Comptage enregistré. ¦ Numărătoare salvată.
+Comptage supprimé. ¦ Numărătoare ștearsă.
+＋ Ajouter un membre ¦ ＋ Adaugă un membru
+Aucun membre pour l’instant. ¦ Niciun membru deocamdată.
+Membres passés ¦ Foști membri
+Personne n’est parti. ¦ Nimeni nu a plecat.
+Frise du groupe ¦ Cronologia grupului
+🗑 Supprimer le groupe ¦ 🗑 Șterge grupul
+Loup gris, chimpanzé, orque… ¦ Lup cenușiu, cimpanzeu, orcă…
+Territoire ¦ Teritoriu
+Donne un nom au groupe. ¦ Dă un nume grupului.
+Groupe enregistré. ¦ Grup salvat.
+Groupe créé. ¦ Grup creat.
+Groupe supprimé (son histoire aussi). ¦ Grup șters (și istoria lui).
+✓ Onglet « 🐾 Suivi des animaux » affiché ¦ ✓ Fila „🐾 Urmărirea animalelor” este afișată
+Tu suis des animaux sauvages ou un chat avec un collier GPS ? ¦ Urmărești animale sălbatice sau o pisică cu zgardă GPS?
+L’onglet « 🐾 Suivi des animaux » est caché. Pour l’afficher : Réglages → Apparence → Onglets du haut. ¦ Fila „🐾 Urmărirea animalelor” este ascunsă. Ca s-o afișezi: Setări → Aspect → File de sus.
+↗ Afficher l’onglet ¦ ↗ Afișează fila
+Observation dupliquée. ¦ Observație duplicată.
+Observation supprimée. ¦ Observație ștearsă.
+Voir les {n} autres médias ¦ Vezi celelalte {n} fișiere media
+{n} sans bague ¦ {n} fără inel
+Animal sans fiche ¦ Animal fără fișă
+pas revus depuis {days} ¦ nerevăzute de {days}
+Suivi des animaux · Page « {name} » ¦ Urmărirea animalelor · Pagina „{name}”
+Cette page montre seulement : <b>{what}</b>. Tous ses blocs s’y règlent d’office (un bloc peut garder son propre choix). ¦ Această pagină arată doar: <b>{what}</b>. Toate blocurile ei se reglează automat așa (un bloc își poate păstra propria alegere).
+Cette page montre seulement : <b>{what}</b> · tous les sites. Tous ses blocs s’y règlent d’office (un bloc peut garder son propre choix). ¦ Această pagină arată doar: <b>{what}</b> · toate siturile. Toate blocurile ei se reglează automat așa (un bloc își poate păstra propria alegere).
+Nouvelle page ¦ Pagină nouă
+Espèce et site de la page « {name} » ¦ Specia și situl paginii „{name}”
+Page « {name} » créée. ¦ Pagina „{name}” a fost creată.
+Page « {name} » supprimée (ses blocs, pas les animaux). ¦ Pagina „{name}” a fost ștearsă (blocurile ei, nu animalele).
+Bloc copié vers « {name} ». ¦ Bloc copiat pe „{name}”.
+Aucun animal pour « {q} ». ¦ Niciun animal pentru „{q}”.
+première observation ¦ prima observație
+dernière : {date} ¦ ultima: {date}
+parcourus par {name} ({from} → {to}) ¦ parcurși de {name} ({from} → {to})
+pas de trajet GPS ¦ niciun traseu GPS
+Fiche de « {name} » créée. ¦ Fișa lui „{name}” a fost creată.
+vu sur {sites} ¦ văzut la {sites}
+Pas revu depuis {when} ¦ Nerevăzut din {when}
+Jamais vu ¦ Niciodată văzut
+Suivi en cours ¦ Urmărire în curs
+Ce qu’on partage ¦ Ce se partajează
+Des animaux choisis ¦ Animale alese
+Tous les animaux d’une espèce ¦ Toate animalele unei specii
+Les animaux d’un site ¦ Animalele unui sit
+Les points GPS ¦ Punctele GPS
+Choisis au moins un animal. ¦ Alege cel puțin un animal.
+Choisis l’espèce. ¦ Alege specia.
+📤 Fichier prêt : {animals}. ¦ 📤 Fișier gata: {animals}.
+📤 Fichier prêt : {animals} (sans les noms des observateurs). ¦ 📤 Fișier gata: {animals} (fără numele observatorilor).
+Ce fichier n’est pas un suivi partagé (suivi.json manque). ¦ Acest fișier nu este o urmărire partajată (lipsește suivi.json).
+Fichier abîmé : il ne se lit pas. ¦ Fișier deteriorat: nu poate fi citit.
+Ce fichier n’est pas un suivi d’animaux partagé (format inconnu). ¦ Acest fișier nu este o urmărire de animale partajată (format necunoscut).
+Un suivi partagé ¦ O urmărire partajată
+=nouvel animal ¦ animal nou|animale noi|de animale noi
+=animal déjà là ¦ animal deja existent|animale deja existente|de animale deja existente
+=ligne nouvelle ¦ rând nou|rânduri noi|de rânduri noi
+=ligne déjà là, écartée ¦ rând deja existent, pus deoparte|rânduri deja existente, puse deoparte|de rânduri deja existente, puse deoparte
+=conflit ¦ conflict|conflicte|de conflicte
+<b>{new}</b>, {known} (à compléter), <b>{rows}</b> (observations, marques, santé, groupes) ¦ <b>{new}</b>, {known} (de completat), <b>{rows}</b> (observații, marcaje, sănătate, grupuri)
+{n} points GPS ¦ {n} puncte GPS
+{rows} (doublons exacts). ¦ {rows} (dubluri exacte).
+{conflicts} : tu choisiras pour chacun, à l’étape suivante. ¦ {conflicts}: vei alege pentru fiecare la pasul următor.
+{name} chez toi (reconnu par {how}) ¦ {name} la tine (recunoscut după {how})
+reçu · chez toi : {name} (reconnu par {how}) ¦ primit · la tine: {name} (recunoscut după {how})
+Comparer et fusionner… ¦ Compară și unește…
+⤒ Importer {animals} ¦ ⤒ Importă {animals}
+Suivi reçu : {what} ¦ Urmărire primită: {what}
+conflit restant ¦ conflict rămas
+conflits restants ¦ conflicte rămase
+nouveaux ¦ noi
+lignes nouvelles ¦ rânduri noi
+doublons écartés ¦ dubluri puse deoparte
+média reçu non importé ¦ fișier media primit neimportat
+Fusionner avec ma fiche ¦ Unește cu fișa mea
+En faire une nouvelle fiche ¦ Fă din el o fișă nouă
+Ne pas le prendre ¦ Nu-l lua
+Le mien : ¦ Al meu:
+Le sien : ¦ Al lui:
+Observation modifiée ¦ Observație modificată
+Marque modifiée ¦ Marcaj modificat
+Événement de santé modifié ¦ Eveniment de sănătate modificat
+Rôle dans le groupe ¦ Rol în grup
+Choisis d’abord pour chaque conflit ¦ Alege mai întâi pentru fiecare conflict
+Fusionner ¦ Unește
+vert foncé ¦ verde închis
+bleu foncé ¦ albastru închis
+métal ¦ metal
+👥 En groupe ¦ 👥 În grup
+💤 Au dortoir ¦ 💤 La dormitor
+🕊 En vol ¦ 🕊 În zbor
+💞 En couple ¦ 💞 În pereche
+🏠 Rentré ¦ 🏠 Întors acasă
+🐄 En troupeau ¦ 🐄 În turmă
+😴 Au repos ¦ 😴 În repaus
+🌊 En surface ¦ 🌊 La suprafață
+⛵ À la proue ¦ ⛵ La proră
+🧭 Marque son territoire ¦ 🧭 Își marchează teritoriul
+🍼 Avec des jeunes ¦ 🍼 Cu pui
+🪵 Utilise un outil ¦ 🪵 Folosește o unealtă
+🔖 Bague changée ¦ 🔖 Inel schimbat
+🪤 Piège ¦ 🪤 Capcană
+🚧 Clôture ¦ 🚧 Gard
+🌬 Éolienne ¦ 🌬 Turbină eoliană
+🏖 Échouage ¦ 🏖 Eșuare
+⚔️ Conflit avec un autre ¦ ⚔️ Conflict cu altul
+Bonne santé ¦ Sănătate bună
+Blessé ¦ Rănit
+En soins ¦ În îngrijire
+Relâché ¦ Eliberat
+Mammifère sauvage ¦ Mamifer sălbatic
+Vache, mouton, chèvre ¦ Vacă, oaie, capră
+Format inconnu : GPX, KML, GeoJSON ou CSV. ¦ Format necunoscut: GPX, KML, GeoJSON sau CSV.
+Le tableau est vide. ¦ Tabelul este gol.
+Fichier refusé : il contient une déclaration DOCTYPE ou ENTITY. ¦ Fișier refuzat: conține o declarație DOCTYPE sau ENTITY.
+3 février 2026 ¦ 3 februarie 2026
+⚖️ Mise en garde : en France, les tests ADN « récréatifs » ne sont pas légaux ¦ ⚖️ Avertisment: în Franța, testele ADN „recreative” nu sunt legale
+En France, l’examen des caractéristiques génétiques d’une personne n’est permis <b>qu’à des fins médicales ou de recherche scientifique</b>, avec son <b>consentement écrit</b> (Code civil, article 16-10). L’identification par empreintes génétiques est réservée à la justice et à quelques cas prévus par la loi (article 16-11). <b>Demander</b> un tel examen hors de ces cas — par exemple commander un test généalogique sur internet — est puni d’une <b>amende de 3 750 €</b> (Code pénal, article 226-28-1), même si le laboratoire est à l’étranger. ¦ În Franța, examinarea caracteristicilor genetice ale unei persoane este permisă <b>doar în scopuri medicale sau de cercetare științifică</b>, cu <b>consimțământul ei scris</b> (Codul civil, articolul 16-10). Identificarea prin amprente genetice este rezervată justiției și câtorva cazuri prevăzute de lege (articolul 16-11). <b>A cere</b> o astfel de examinare în afara acestor cazuri — de exemplu a comanda un test genealogic pe internet — se pedepsește cu o <b>amendă de 3 750 €</b> (Codul penal, articolul 226-28-1), chiar dacă laboratorul este în străinătate.
+<b>Vérifie toujours le texte en vigueur</b> sur Légifrance : la loi peut changer (les débats sur la généalogie génétique sont réguliers). Cet onglet ne donne pas de conseil juridique. ¦ <b>Verifică mereu textul în vigoare</b> pe Légifrance: legea se poate schimba (genealogia genetică este dezbătută des). Această filă nu oferă consiliere juridică.
+<b>Ce que fait LCNDA</b> : rien n’est analysé ni envoyé. L’onglet sert à <b>ranger des informations</b> (par exemple des résultats obtenus légalement à l’étranger, par un parent résidant hors de France, dans un cadre médical ou de recherche, ou des renseignements donnés par d’autres personnes) et à <b>comprendre</b> ce que signifient des cM, des segments, un haplogroupe. ¦ <b>Ce face LCNDA</b>: nimic nu este analizat sau trimis. Fila servește la <b>păstrarea informațiilor</b> (de exemplu rezultate obținute legal în străinătate, de o rudă care locuiește în afara Franței, într-un cadru medical sau de cercetare, ori informații date de alte persoane) și la <b>a înțelege</b> ce înseamnă cM, segmentele, un haplogrup.
+<b>Données sensibles</b> : l’ADN révèle des choses sur toi <i>et sur ta famille</i> (parents, frères et sœurs, enfants, cousins), qui n’ont pas consenti. Il peut révéler un secret de famille : naissance hors mariage, adoption, don de gamètes, parent inconnu. Prends le temps d’y penser avant de partager. ¦ <b>Date sensibile</b>: ADN-ul dezvăluie lucruri despre tine <i>și despre familia ta</i> (părinți, frați și surori, copii, veri), care nu și-au dat consimțământul. Poate dezvălui un secret de familie: naștere în afara căsătoriei, adopție, donare de gameți, părinte necunoscut. Gândește-te bine înainte să partajezi.
+<b>Les sociétés de test</b> gardent les données selon leurs conditions (vente de société, fuites de données, demandes de la justice dans certains pays). Lis leurs conditions, choisis ce que tu partages, supprime ce que tu ne veux plus voir conservé. ¦ <b>Companiile de testare</b> păstrează datele după propriile condiții (vânzarea companiei, scurgeri de date, cereri ale justiției în unele țări). Citește-le condițiile, alege ce partajezi, șterge ce nu mai vrei să fie păstrat.
+<b>Personnes vivantes</b> : les noms, cM et contacts de correspondances sont des données personnelles. Garde-les pour ta recherche, ne les publie pas sans accord. ¦ <b>Persoane în viață</b>: numele, cM și datele de contact ale potrivirilor sunt date personale. Păstrează-le pentru cercetarea ta, nu le publica fără acord.
+Textes officiels ¦ Texte oficiale
+Lire la mise en garde complète et les textes officiels → ¦ Citește avertismentul complet și textele oficiale →
+Commencer ¦ Primii pași
+Lis la <button type="button" class="link-button" data-dna-go="law">mise en garde sur la loi française</button>. ¦ Citește <button type="button" class="link-button" data-dna-go="law">avertismentul despre legea franceză</button>.
+« 🧬 Mes tests » : ajoute le test d’une personne (société, type, haplogroupes, origines). ¦ „🧬 Testele mele”: adaugă testul unei persoane (companie, tip, haplogrupuri, origini).
+« 👥 Correspondances » : importe le fichier CSV de la société, ou ajoute-les à la main. ¦ „👥 Potriviri”: importă fișierul CSV al companiei sau adaugă-le de mână.
+Le calculateur de cM, la méthode de Leeds et le navigateur de chromosomes t’aident à placer chacun dans l’arbre. ¦ Calculatorul de cM, metoda Leeds și browserul de cromozomi te ajută să-l plasezi pe fiecare în arbore.
+Tes tests, tes correspondances et où tu en es. Tout se règle dans « ⚙️ Réglages » (rubriques montrées, ordre, colonnes, couleurs). ¦ Testele tale, potrivirile tale și unde ai ajuns. Totul se reglează în „⚙️ Setări” (rubrici afișate, ordine, coloane, culori).
+🧬 Synthèse ¦ 🧬 Sinteză
+Loi et mises en garde ¦ Lege și avertismente
+⚖️ Loi et mises en garde ¦ ⚖️ Lege și avertismente
+À lire avant d’utiliser cet onglet. ¦ De citit înainte de a folosi această filă.
+Mes tests ¦ Testele mele
+Correspondances ¦ Potriviri
+Groupes (méthode de Leeds) ¦ Grupuri (metoda Leeds)
+🗂️ Groupes (méthode de Leeds) ¦ 🗂️ Grupuri (metoda Leeds)
+Groupes automatiques ¦ Grupuri automate
+Placer un cousin ¦ Plasează un văr
+📍 Placer un cousin ¦ 📍 Plasează un văr
+Chromosomes et segments ¦ Cromozomi și segmente
+🧩 Chromosomes et segments ¦ 🧩 Cromozomi și segmente
+Calculateur de cM ¦ Calculator de cM
+📐 Calculateur de cM ¦ 📐 Calculator de cM
+Lignées Y, mt et X ¦ Liniile Y, mt și X
+🌳 Lignées Y, mt et X ¦ 🌳 Liniile Y, mt și X
+Origines estimées ¦ Origini estimate
+🌍 Origines estimées ¦ 🌍 Origini estimate
+Comprendre l’ADN ¦ Să înțelegi ADN-ul
+📚 Comprendre l’ADN ¦ 📚 Să înțelegi ADN-ul
+cM partagés ¦ cM comuni
+% partagé ¦ % comun
+Plus long segment ¦ Cel mai lung segment
+Relation (société) ¦ Relație (companie)
+Relation probable ¦ Relație probabilă
+Fiche liée ¦ Fișă legată
+Ancêtre commun ¦ Strămoș comun
+Noms en commun ¦ Nume în comun
+Des deux côtés ¦ Din ambele părți
+Contacté ¦ Contactat
+A répondu ¦ A răspuns
+Arbre échangé ¦ Arbore schimbat
+Placé dans l’arbre ✓ ¦ Plasat în arbore ✓
+À ignorer ¦ De ignorat
+Placées dans l’arbre ¦ Plasate în arbore
+Tests ¦ Teste
+Correspondances par nombre de cM ¦ Potriviri după numărul de cM
+Par côté ¦ După parte
+Les plus proches ¦ Cele mai apropiate
+Autosomal (atDNA) : tous les ancêtres récents ¦ Autozomal (atDNA): toți strămoșii recenți
+ADN-Y : lignée paternelle directe ¦ ADN-Y: linia paternă directă
+ADN mitochondrial : lignée maternelle directe ¦ ADN mitocondrial: linia maternă directă
+Nebula / séquençage complet ¦ Nebula / secvențiere completă
+Labo médical ¦ Laborator medical
+Parent / enfant ¦ Părinte / copil
+Frère ou sœur ¦ Frate sau soră
+Demi-frère ou demi-sœur ¦ Frate vitreg sau soră vitregă
+Grand-parent / petit-enfant ¦ Bunic / nepot
+Oncle, tante / neveu, nièce ¦ Unchi, mătușă / nepot, nepoată
+Arrière-grand-parent ¦ Străbunic
+Grand-oncle, grand-tante ¦ Unchi mare, mătușă mare
+Cousin germain (1C) ¦ Văr primar (1C)
+Cousin germain, une génération d’écart (1C1R) ¦ Văr primar, la o generație distanță (1C1R)
+Cousin germain, deux générations d’écart (1C2R) ¦ Văr primar, la două generații distanță (1C2R)
+Demi-cousin germain ¦ Văr primar pe jumătate
+Demi-cousin germain, une génération d’écart ¦ Văr primar pe jumătate, la o generație distanță
+Cousin issu de germain (2C) ¦ Văr de gradul al doilea (2C)
+Cousin issu de germain, une génération d’écart (2C1R) ¦ Văr de gradul al doilea, la o generație distanță (2C1R)
+Cousin issu de germain, deux générations d’écart (2C2R) ¦ Văr de gradul al doilea, la două generații distanță (2C2R)
+Demi-cousin issu de germain ¦ Văr de gradul al doilea pe jumătate
+Cousin au 3e degré (3C, issu d’issu de germain) ¦ Văr de gradul al treilea (3C)
+Demi-cousin au 3e degré ¦ Văr de gradul al treilea pe jumătate
+Cousin au 4e degré (4C) ¦ Văr de gradul al patrulea (4C)
+Cousin au 5e degré (5C) ¦ Văr de gradul al cincilea (5C)
+Cousin au 6e degré ou plus ¦ Văr de gradul al șaselea sau mai departe
+Noté. ¦ Notat.
+Nouveau test ¦ Test nou
+Personne testée ¦ Persoana testată
+Nom du test ¦ Numele testului
+(si la personne n’est pas dans l’arbre) ¦ (dacă persoana nu este în arbore)
+Test supprimé. ¦ Test șters.
+Test enregistré. ¦ Test salvat.
+les voir ¦ vezi-le
+Tous les tests ¦ Toate testele
+Tous les côtés ¦ Toate părțile
+Tout suivi ¦ Orice stadiu
+Tous les groupes ¦ Toate grupurile
+Sans groupe ¦ Fără grup
+Côté… ¦ Partea…
+Étoiles ¦ Stele
+Afficher la suite ¦ Arată continuarea
+Ajoute d’abord un test (« 🧬 Mes tests »). ¦ Adaugă mai întâi un test („🧬 Testele mele”).
+Ajoute d’abord un test. ¦ Adaugă mai întâi un test.
+Nouvelle correspondance ¦ Potrivire nouă
+Fiche dans l’arbre ¦ Fișă în arbore
+Si tu sais qui c’est… ¦ Dacă știi cine este…
+Tape les cM partagés : la relation probable s’affiche ici. ¦ Scrie cM comuni: relația probabilă apare aici.
+Supprimée. ¦ Ștearsă.
+Correspondance enregistrée. ¦ Potrivire salvată.
+Importer des segments ADN ¦ Importă segmente ADN
+Importer des correspondances ADN ¦ Importă potriviri ADN
+Fichier vide ou illisible. ¦ Fișier gol sau ilizibil.
+Colonnes reconnues (à vérifier) ¦ Coloane recunoscute (de verificat)
+— ne pas prendre — ¦ — nu lua —
+=correspondance ajoutée ¦ potrivire adăugată|potriviri adăugate|de potriviri adăugate
+=segment importé ¦ segment importat|segmente importate|de segmente importate
+=groupe créé ¦ grup creat|grupuri create|de grupuri create
+=cochée ¦ bifată|bifate|de bifate
+=ancêtre possible ¦ strămoș posibil|strămoși posibili|de strămoși posibili
+Un groupe range ensemble les correspondances d’une même branche. ¦ Un grup adună potrivirile din aceeași ramură.
+arrière-grands-parents ¦ străbunici
+🎯 Ancêtres communs ¦ 🎯 Strămoși comuni
+🤔 Ancêtres probables ¦ 🤔 Strămoși probabili
+Ancêtre commun encore inconnu ¦ Strămoș comun încă necunoscut
+📍 Placer un cousin dans l’arbre ¦ 📍 Plasează un văr în arbore
+Hors des valeurs connues. ¦ În afara valorilor cunoscute.
+Probabilité ¦ Probabilitate
+Couple d’ancêtres ¦ Cuplu de strămoși
+(un seul des deux : demi-cousin) ¦ (doar unul dintre cei doi: văr pe jumătate)
+Choisis une correspondance ou entre des cM. ¦ Alege o potrivire sau introdu cM.
+Aucun test ¦ Niciun test
+Couleur par correspondance ¦ Culoare după potrivire
+Par groupe ¦ După grup
+Aucun segment. ¦ Niciun segment.
+Nouveau segment ¦ Segment nou
+Ancêtre supposé ¦ Strămoș presupus
+♂ ADN-Y — lignée paternelle directe ¦ ♂ ADN-Y — linia paternă directă
+♀ ADN mitochondrial — lignée maternelle directe ¦ ♀ ADN mitocondrial — linia maternă directă
+✕ ADN-X — ancêtres possibles ¦ ✕ ADN-X — strămoși posibili
+Endogamie et implexe ¦ Endogamie și implex
+Placer une correspondance ¦ Plasarea unei potriviri
+Confidentialité et éthique ¦ Confidențialitate și etică
+Colonnes du tableau des correspondances ¦ Coloanele tabelului de potriviri
+Chiffres et couleurs ¦ Cifre și culori
+⤓ Exporter tout l’ADN (JSON) ¦ ⤓ Exportă tot ADN-ul (JSON)
+Ouvrir l’onglet ADN → ¦ Deschide fila ADN →
+Nouveau diagramme ¦ Diagramă nouă
+Choisis un dessin : il arrive avec un exemple que tu remplaces par tes chiffres (à la main, collés d’un tableur, d’un CSV, ou pris dans l’app). ¦ Alege un desen: vine cu un exemplu pe care îl înlocuiești cu cifrele tale (de mână, lipite dintr-un tabel de calcul, dintr-un CSV sau luate din aplicație).
+Ordre, types montrés ou cachés, groupes à toi ¦ Ordine, tipuri afișate sau ascunse, grupuri proprii
+⚙️ Ranger les types ¦ ⚙️ Aranjează tipurile
+Assemblées ¦ Adunări
+Parlement, assemblée, conseil ¦ Parlament, adunare, consiliu
+Arc élargi (Assemblée en éventail) ¦ Arc lărgit (adunare în evantai)
+Fer à cheval ¦ Potcoavă
+Westminster (bancs face à face) ¦ Westminster (bănci față în față)
+Salle face à la tribune (conseil municipal…) ¦ Sală cu fața la tribună (consiliu local…)
+Frise des membres (groupe de musique, association…) ¦ Cronologia membrilor (formație muzicală, asociație…)
+Frise de vies (des personnes de la base) ¦ Cronologie de vieți (persoane din bază)
+Planning (tâches d’une enquête, Gantt) ¦ Planificare (sarcinile unei investigații, Gantt)
+Frise chronologique (dates clés) ¦ Cronologie (date-cheie)
+Calendrier coloré (jour par jour) ¦ Calendar colorat (zi cu zi)
+Rose des mois (12 parts) ¦ Roza lunilor (12 părți)
+Spirale du temps (une spire par siècle) ¦ Spirala timpului (o spiră pe secol)
+Arbre en frise (vies par génération) ¦ Arbore în cronologie (vieți pe generații)
+Naissances, décès et crises ¦ Nașteri, decese și crize
+Âges comparés d’une fratrie ¦ Vârstele comparate ale fraților
+Pyramide « qui vivait en … » ¦ Piramida „cine trăia în …”
+Les vies de plusieurs générations superposées : qui a connu son arrière-petit-enfant, et combien d’années. ¦ Viețile mai multor generații suprapuse: cine și-a cunoscut strănepotul și câți ani.
+Qui a connu qui (vies de plusieurs générations) ¦ Cine pe cine a cunoscut (viețile mai multor generații)
+Les mariages et les conceptions (naissance − 9 mois) mois par mois, avec le Carême et l’Avent repérés. ¦ Căsătoriile și concepțiile (naștere − 9 luni) lună de lună, cu Postul Mare și Postul Crăciunului marcate.
+Mois des mariages et des conceptions (Carême, Avent) ¦ Lunile căsătoriilor și ale concepțiilor (Postul Mare, Postul Crăciunului)
+Une ligne par mère : ses enfants à l’âge qu’elle avait, l’écart entre deux naissances et les enfants morts jeunes. ¦ Un rând pentru fiecare mamă: copiii ei la vârsta pe care o avea, intervalul dintre două nașteri și copiii morți de mici.
+Espacement des naissances (les enfants de chaque mère) ¦ Spațierea nașterilor (copiii fiecărei mame)
+Une bande par personne, colorée selon la commune (ou le département, le pays) où elle vivait à chaque époque. ¦ O bandă pentru fiecare persoană, colorată după localitatea (sau departamentul, țara) în care trăia în fiecare perioadă.
+Frise des lieux de vie (une bande par personne) ¦ Cronologia locurilor de trai (o bandă pe persoană)
+Une ligne par tâche, de sa date de début à sa date de fin, avec ce qui est déjà fait. ¦ Un rând pentru fiecare sarcină, de la data de început la data de sfârșit, cu ce s-a făcut deja.
+Diagramme de Gantt (tâches, chantiers de recherche) ¦ Diagramă Gantt (sarcini, proiecte de cercetare)
+Les anniversaires, mariages, décès et fêtes des prénoms autour d’un cercle de douze mois. ¦ Zilele de naștere, căsătoriile, decesele și onomasticile în jurul unui cerc de douăsprezece luni.
+Roue de l’année (anniversaires et fêtes de la famille) ¦ Roata anului (aniversări și sărbători ale familiei)
+Colonnes empilées ¦ Coloane stivuite
+Colonnes empilées à 100 % ¦ Coloane stivuite la 100 %
+Pyramide (des âges…) ¦ Piramidă (a vârstelor…)
+Carte de chaleur (tableau coloré) ¦ Hartă termică (tabel colorat)
+Classement qui évolue (prénoms par décennie…) ¦ Clasament în evoluție (prenume pe decenii…)
+Courants empilés (métiers sur 200 ans…) ¦ Fluxuri stivuite (meserii pe 200 de ani…)
+Histogramme (valeurs rangées en tranches) ¦ Histogramă (valori grupate pe intervale)
+Boîte à moustaches (médiane, quartiles) ¦ Diagramă cu mustăți (mediană, quartile)
+Haltères (deux valeurs par ligne) ¦ Haltere (două valori pe rând)
+Pente avant / après ¦ Pantă înainte / după
+Cascade (un total qui monte et descend) ¦ Cascadă (un total care urcă și coboară)
+Sucettes couchées ¦ Acadele culcate
+Essaim de points (une personne = un point) ¦ Roi de puncte (o persoană = un punct)
+Petites courbes en grille ¦ Curbe mici în grilă
+Violon (répartition par catégorie) ¦ Vioară (distribuție pe categorii)
+Pour chaque âge, la part des personnes encore en vie : une courbe par siècle, par sexe ou par branche. ¦ Pentru fiecare vârstă, proporția persoanelor încă în viață: o curbă pe secol, pe sex sau pe ramură.
+Courbe de survie (part encore en vie à chaque âge) ¦ Curba de supraviețuire (proporția încă în viață la fiecare vârstă)
+Vagues (une répartition par siècle…) ¦ Valuri (o distribuție pe secol…)
+Échelle de points (Cleveland) ¦ Scară de puncte (Cleveland)
+Tableau de mobilité (métier du père × métier de l’enfant) ¦ Tabel de mobilitate (meseria tatălui × meseria copilului)
+Barres en cercle (classement qui s’enroule) ¦ Bare în cerc (clasament care se înfășoară)
+Des barres sur l’axe de gauche et une courbe sur un deuxième axe à droite, pour comparer deux sortes de chiffres. ¦ Bare pe axa din stânga și o curbă pe o a doua axă în dreapta, pentru a compara două feluri de cifre.
+Barres + courbe (deuxième axe à droite) ¦ Bare + curbă (a doua axă în dreapta)
+Deux chiffres face à face de chaque côté d’un trait (décès et naissances, femmes et hommes), ou un chiffre au-dessus et en dessous d’un centre. ¦ Două cifre față în față de o parte și de alta a unei linii (decese și nașteri, femei și bărbați), sau o cifră deasupra și dedesubtul unui centru.
+Barres divergentes (gauche / droite d’un centre) ¦ Bare divergente (stânga / dreapta unui centru)
+Une colline par série (un nom de famille, un prénom, une commune…), l’une derrière l’autre, au fil du temps. ¦ Un deal pentru fiecare serie (un nume de familie, un prenume, o localitate…), unul în spatele celuilalt, de-a lungul timpului.
+Collines empilées (une courbe par série, décalées) ¦ Dealuri stivuite (o curbă pe serie, decalate)
+Chaque personne est une ligne qui passe par plusieurs axes (âge au mariage, enfants, âge au décès…) : les profils se voient d’un coup d’œil. ¦ Fiecare persoană este o linie care trece prin mai multe axe (vârsta la căsătorie, copii, vârsta la deces…): profilurile se văd dintr-o privire.
+Coordonnées parallèles (plusieurs chiffres par personne) ¦ Coordonate paralele (mai multe cifre pe persoană)
+Une courbe qui avance par marches : le chiffre reste le même jusqu’au prochain changement (vivants de la famille, ancêtres trouvés…). ¦ O curbă care avansează în trepte: cifra rămâne aceeași până la următoarea schimbare (membri în viață ai familiei, strămoși găsiți…).
+Courbe en escalier (ex. combien de vivants, année par année) ¦ Curbă în trepte (ex. câți în viață, an de an)
+Mosaïque (100 carrés) ¦ Mozaic (100 de pătrate)
+Carte proportionnelle (rectangles) ¦ Hartă proporțională (dreptunghiuri)
+Pictogrammes (symboles répétés) ¦ Pictograme (simboluri repetate)
+Mosaïque à largeur variable (Marimekko) ¦ Mozaic cu lățime variabilă (Marimekko)
+Bulles groupées (noms, métiers, lieux) ¦ Bule grupate (nume, meserii, locuri)
+Flux (Sankey) : migrations, métiers… ¦ Flux (Sankey): migrații, meserii…
+Diagramme d’accord (mariages entre villages) ¦ Diagramă cu coarde (căsătorii între sate)
+Une idée au centre, des branches autour, et les idées de chaque branche. ¦ O idee în centru, ramuri în jur și ideile de pe fiecare ramură.
+Carte mentale (une idée, ses branches) ¦ Hartă mentală (o idee, ramurile ei)
+Éventail d’ascendance (mes chiffres) ¦ Evantaiul ascendenței (cifrele mele)
+Soleil des lignées (anneaux) ¦ Soarele liniilor (inele)
+Réseau de relations (témoins, parrains…) ¦ Rețea de relații (martori, nași…)
+Diagramme de Venn (2 à 4 ensembles) ¦ Diagramă Venn (2–4 mulțimi)
+Arbre en accordéon (cousins) ¦ Arbore acordeon (veri)
+Graphe des cousinages ¦ Graful verilor
+Matrice de parenté (qui est quoi pour qui) ¦ Matrice de rudenie (cine ce este pentru cine)
+Arbre des patronymes (transmission du nom) ¦ Arborele numelor de familie (transmiterea numelui)
+Quadrillage des ancêtres (une case par Sosa) ¦ Grila strămoșilor (o căsuță pe număr Sosa)
+Les métiers d’une génération à l’autre : chaque bande suit des lignées, du trisaïeul au fils. ¦ Meseriile de la o generație la alta: fiecare bandă urmărește linii, de la stră-străbunic la fiu.
+Métiers de père en fils (flux sur plusieurs générations) ¦ Meserii din tată-n fiu (flux pe mai multe generații)
+Chaque couple est un point : sa distance au centre est celle qui séparait les lieux de naissance des deux époux. ¦ Fiecare cuplu este un punct: distanța lui față de centru este cea care despărțea locurile de naștere ale celor doi soți.
+Rayon des mariages (distance entre les villages des époux) ¦ Raza căsătoriilor (distanța dintre satele soților)
+Par génération : les ancêtres qu’on devrait avoir (2, 4, 8…), les places trouvées et les personnes différentes. ¦ Pe generații: strămoșii pe care ar trebui să-i ai (2, 4, 8…), locurile găsite și persoanele diferite.
+Implexe (ancêtres théoriques et réels) ¦ Implex (strămoși teoretici și reali)
+Descendance en rectangles (icicle) ¦ Descendența în dreptunghiuri (icicle)
+Prénoms transmis (parrain, marraine → filleul) ¦ Prenume transmise (naș, nașă → fin)
+Causes de décès en anneaux (familles puis détail) ¦ Cauzele deceselor în inele (grupe, apoi detaliu)
+Une personne au milieu ; ses parents, grands-parents… au-dessus ; ses enfants, petits-enfants… au-dessous. ¦ O persoană la mijloc; părinții, bunicii ei… deasupra; copiii, nepoții ei… dedesubt.
+Sablier (ascendants et descendants d’une personne) ¦ Clepsidră (ascendenții și descendenții unei persoane)
+Le plus court chemin entre deux personnes, étape par étape, et la phrase qui dit le lien (« cousin issu de germains », « beau-frère »…). ¦ Cel mai scurt drum între două persoane, pas cu pas, și fraza care spune legătura („văr de gradul al doilea”, „cumnat”…).
+Chemin de parenté entre deux personnes ¦ Drumul de rudenie între două persoane
+La part des ancêtres connus à chaque génération (1, 2, 4, 8… possibles), en barres ou en éventail. ¦ Proporția strămoșilor cunoscuți în fiecare generație (1, 2, 4, 8… posibili), în bare sau în evantai.
+Complétude de l’arbre (ancêtres connus par génération) ¦ Completitudinea arborelui (strămoși cunoscuți pe generații)
+La liste des ancêtres par numéro Sosa, génération par génération, prête à imprimer. ¦ Lista strămoșilor după numărul Sosa, generație cu generație, gata de tipărit.
+Tableau d’ascendance (ahnentafel, une ligne par Sosa) ¦ Tabel de ascendență (ahnentafel, un rând pe număr Sosa)
+Cartes de chiffres (KPI) ¦ Carduri cu cifre (KPI)
+Barre d’objectif (valeur, objectif, zones) ¦ Bară de obiectiv (valoare, obiectiv, zone)
+Un anneau par objectif : plein quand c’est fini (ancêtres trouvés, actes sourcés, photos identifiées…). ¦ Un inel pe obiectiv: plin când e gata (strămoși găsiți, acte cu surse, fotografii identificate…).
+Anneaux d’avancement (objectifs de recherche) ¦ Inele de progres (obiective de cercetare)
+Carte colorée par zones (départements, régions, pays…) ¦ Hartă colorată pe zone (departamente, regiuni, țări…)
+Carte des migrations (flèches d’un lieu à un autre) ¦ Harta migrațiilor (săgeți de la un loc la altul)
+Carte à symboles proportionnels (ronds par lieu) ¦ Hartă cu simboluri proporționale (cercuri pe loc)
+Carte en points (un point par événement) ¦ Hartă cu puncte (un punct pe eveniment)
+Carte en hexagones (densité en alvéoles) ¦ Hartă în hexagoane (densitate în celule)
+Carte déformée (zones grossies selon leur chiffre) ¦ Hartă deformată (zone mărite după cifra lor)
+Carte qui raconte (une vie étape par étape) ¦ Hartă care povestește (o viață etapă cu etapă)
+Carte des patronymes (siècle par siècle) ¦ Harta numelor de familie (secol cu secol)
+Carte de chaleur dans le temps (décennie par décennie) ¦ Hartă termică în timp (deceniu cu deceniu)
+Carte des cousins ADN (lieux des ancêtres communs) ¦ Harta verilor ADN (locurile strămoșilor comuni)
+Carte de tes recherches (vu, en partie, trous) ¦ Harta cercetărilor tale (văzut, parțial, goluri)
+Le point moyen des lieux de naissance de chaque génération, et le chemin qu’il a fait jusqu’à toi. ¦ Punctul mediu al locurilor de naștere din fiecare generație și drumul pe care l-a făcut până la tine.
+Centre de gravité de la famille par génération ¦ Centrul de greutate al familiei pe generații
+Les lieux de naissance des ancêtres, une couleur par génération : on voit la famille venir de plus loin. ¦ Locurile de naștere ale strămoșilor, o culoare pe generație: vezi familia venind de mai departe.
+Carte des générations (une couleur par génération) ¦ Harta generațiilor (o culoare pe generație)
+Vie et mort ¦ Viață și moarte
+La part des enfants morts avant 1 an et avant 5 ans, période par période. ¦ Proporția copiilor morți înainte de 1 an și înainte de 5 ani, perioadă cu perioadă.
+Mortalité des enfants (avant 1 an, avant 5 ans) ¦ Mortalitatea copiilor (sub 1 an, sub 5 ani)
+Pour chaque couple, ses enfants : arrivés à l’âge adulte, morts jeunes, ou dont on ne sait pas. ¦ Pentru fiecare cuplu, copiii lui: ajunși la vârsta adultă, morți de mici sau despre care nu se știe.
+Fratries qui survivent (enfants nés, arrivés adultes) ¦ Frați care supraviețuiesc (copii născuți, ajunși adulți)
+Un damier : chaque mois de l’année, pour chaque époque. Plus c’est foncé, plus il y a de naissances (ou de décès). ¦ O tablă de șah: fiecare lună a anului, pentru fiecare epocă. Cu cât e mai închis, cu atât sunt mai multe nașteri (sau decese).
+Saisons des naissances et des décès (mois × époque) ¦ Anotimpurile nașterilor și deceselor (lună × epocă)
+Couples et familles ¦ Cupluri și familii
+Combien de temps attendaient les veufs et les veuves avant de se remarier. ¦ Cât așteptau văduvii și văduvele înainte să se recăsătorească.
+Veuvage et remariage (délai avant de se remarier) ¦ Văduvie și recăsătorire (timpul până la recăsătorire)
+Combien d’années duraient les mariages, de la noce à la mort du premier des deux. ¦ Câți ani durau căsătoriile, de la nuntă până la moartea primului dintre cei doi.
+Durée des mariages (jusqu’à la mort d’un époux) ¦ Durata căsătoriilor (până la moartea unui soț)
+Chaque naissance est un point : l’âge du père (et celui de la mère) selon l’année. ¦ Fiecare naștere este un punct: vârsta tatălui (și a mamei) după an.
+Âge des parents à chaque naissance (nuage de points) ¦ Vârsta părinților la fiecare naștere (nor de puncte)
+La part des premiers enfants nés avant le mariage, ou moins de 8 mois après. ¦ Proporția primilor copii născuți înainte de căsătorie sau la mai puțin de 8 luni după.
+Conceptions avant mariage (premier enfant « trop tôt ») ¦ Concepții înainte de căsătorie (primul copil „prea devreme”)
+À gauche les couples où le mari est plus âgé, à droite ceux où la femme est plus âgée, par tranches d’écart. ¦ În stânga cuplurile în care soțul e mai în vârstă, în dreapta cele în care soția e mai în vârstă, pe intervale de diferență.
+Écart d’âge entre époux (pyramide) ¦ Diferența de vârstă dintre soți (piramidă)
+À chaque génération d’ancêtres, la distance moyenne entre leur lieu de naissance et le lieu de référence. ¦ Pentru fiecare generație de strămoși, distanța medie dintre locul lor de naștere și locul de referință.
+Loin du berceau (distance par génération) ¦ Departe de leagăn (distanța pe generații)
+La part de ceux qui ont signé l’acte (époux, épouses, témoins), période par période. ¦ Proporția celor care au semnat actul (soți, soții, martori), perioadă cu perioadă.
+Savoir signer (époux, épouses, témoins) ¦ Știința semnăturii (soți, soții, martori)
+Pour chaque génération d’ancêtres : naissances, mariages et décès prouvés par une source (vert), sans source (jaune) ou manquants (gris). ¦ Pentru fiecare generație de strămoși: nașteri, căsătorii și decese dovedite de o sursă (verde), fără sursă (galben) sau lipsă (gri).
+Ce que tu as prouvé (actes sourcés par génération) ¦ Ce ai dovedit (acte cu surse pe generații)
+Pour chaque commune, une frise des années : dépouillées, vues sans rien trouver, à faire, actes trouvés ; en rouge pâle, les trous. ¦ Pentru fiecare localitate, o cronologie a anilor: indexați, văzuți fără rezultat, de făcut, acte găsite; cu roșu pal, golurile.
+Registres consultés (années vues et trous) ¦ Registre consultate (ani văzuți și goluri)
+Peinture des chromosomes (segments ADN par branche) ¦ Pictarea cromozomilor (segmente ADN pe ramuri)
+Règle des cM (parentés possibles) ¦ Rigla cM (rudenii posibile)
+Les correspondances ADN qui se correspondent entre elles, rangées en groupes de couleur (souvent un par grand-parent). ¦ Potrivirile ADN care se potrivesc între ele, grupate pe culori (adesea câte una pentru fiecare bunic).
+Matrice des correspondances ADN (méthode de Leeds) ¦ Matricea potrivirilor ADN (metoda Leeds)
+Chargement du diagramme… ¦ Se încarcă diagrama…
+Diagramme introuvable (supprimé ?). ¦ Diagramă negăsită (ștearsă?).
+la fenêtre « Imprimer » n’est pas chargée ¦ fereastra „Tipărește” nu este încărcată
+Titre et légende ¦ Titlu și legendă
+Tableau des données dessous ¦ Tabelul datelor dedesubt
+Taille réelle ¦ Mărime reală
+Image copiée : colle-la où tu veux (⌘V). ¦ Imagine copiată: lipește-o unde vrei (⌘V).
+Copie impossible ici : utilise « Image PNG ». ¦ Copierea nu e posibilă aici: folosește „Imagine PNG”.
+image trop grande : baisse la qualité ¦ imagine prea mare: scade calitatea
+📋 Copier l’image ¦ 📋 Copiază imaginea
+🧾 Prendre un classeur du Tableur ¦ 🧾 Ia un registru din Tabelul de calcul
+Prendre un classeur du Tableur ¦ Ia un registru din Tabelul de calcul
+Nom du diagramme ¦ Numele diagramei
+PNG, JPG, SVG, PDF, impression, CSV, fichier du diagramme ¦ PNG, JPG, SVG, PDF, tipărire, CSV, fișierul diagramei
+Depuis l’app ¦ Din aplicație
+Personnaliser n’est pas chargé. ¦ Personalizarea nu este încărcată.
+Dans l’ordre du tableau ¦ În ordinea tabelului
+Prendre ces données ¦ Ia aceste date
+Prendre ces chiffres ¦ Ia aceste cifre
+🧮 Refaire avec « Compter dans ma base » ¦ 🧮 Refă cu „Numără în baza mea”
+🧮 Compter dans ma base ¦ 🧮 Numără în baza mea
+Une personne, une enquête… ¦ O persoană, o investigație…
+Tableau importé. ¦ Tabel importat.
+Vider ce tableau ? ¦ Golești acest tabel?
+Coller un tableau ¦ Lipește un tabel
+Données reprises du tableur. ¦ Date preluate din tabelul de calcul.
+Fermer sans enregistrer les changements ? ¦ Închizi fără să salvezi modificările?
+Changements non enregistrés ¦ Modificări nesalvate
+Remplacer mes données ¦ Înlocuiește datele mele
+Choisir un diagramme ¦ Alege o diagramă
+Importer (fichier, tableau, Wikipédia, image) ¦ Importă (fișier, tabel, Wikipedia, imagine)
+un classeur du Tableur ¦ un registru din Tabelul de calcul
+Copie créée. ¦ Copie creată.
+Diagramme supprimé. ¦ Diagramă ștearsă.
+Ce fichier n’est pas un diagramme. ¦ Acest fișier nu este o diagramă.
+Diagramme importé ¦ Diagramă importată
+Diagramme importé. ¦ Diagramă importată.
+Naissances (ou baptêmes) ¦ Nașteri (sau botezuri)
+Baptêmes ¦ Botezuri
+Décès (ou sépultures) ¦ Decese (sau înmormântări)
+Rien (un seul total) ¦ Nimic (un singur total)
+Âge (par 5 ans) ¦ Vârstă (din 5 în 5 ani)
+Âge (par 10 ans) ¦ Vârstă (din 10 în 10 ani)
+Nombre d’enfants ¦ Număr de copii
+Âge au mariage (par 5 ans) ¦ Vârsta la căsătorie (din 5 în 5 ani)
+Âge au premier enfant (par 5 ans) ¦ Vârsta la primul copil (din 5 în 5 ani)
+Nombre d’unions ¦ Număr de uniuni
+Branche (côté père, côté mère) ¦ Ramură (dinspre tată, dinspre mamă)
+En vie ou décédé ¦ În viață sau decedat
+En vie ou décédés ¦ În viață sau decedați
+Avec ou sans source ¦ Cu sau fără sursă
+par nom ¦ după nume
+par prénom ¦ după prenume
+par sexe ¦ după sex
+par métier ¦ după meserie
+par génération ¦ după generație
+par commune ¦ după localitate
+par département ¦ după departament
+par région ¦ după regiune
+par pays ¦ după țară
+par âge (5 ans) ¦ după vârstă (5 ani)
+par âge (10 ans) ¦ după vârstă (10 ani)
+par nombre d’enfants ¦ după numărul de copii
+par âge au mariage ¦ după vârsta la căsătorie
+par âge au premier enfant ¦ după vârsta la primul copil
+par nombre d’unions ¦ după numărul de uniuni
+par branche ¦ după ramură
+par cause ¦ după cauză
+par sorte d’événement ¦ după felul evenimentului
+Mes ancêtres ¦ Strămoșii mei
+Branche paternelle (côté père) ¦ Ramura paternă (dinspre tată)
+Branche maternelle (côté mère) ¦ Ramura maternă (dinspre mamă)
+Une étiquette ¦ O etichetă
+Une recherche dans les noms ¦ O căutare în nume
+Les personnes que je choisis ¦ Persoanele pe care le aleg
+Une seule série ¦ O singură serie
+Une série par sexe ¦ O serie pe sex
+Une série par siècle ¦ O serie pe secol
+Une série par branche (côté père / mère) ¦ O serie pe ramură (dinspre tată / mamă)
+Une série par génération ¦ O serie pe generație
+Une série par département ¦ O serie pe departament
+Une série par pays ¦ O serie pe țară
+Du plus grand au plus petit ¦ De la cel mai mare la cel mai mic
+Du plus petit au plus grand ¦ De la cel mai mic la cel mai mare
+Dans l’ordre (temps, âges…) ¦ În ordine (timp, vârste…)
+Médiane ¦ Mediană
+Ce que chaque barre (ou part) compte : des personnes, des naissances, des mariages, des lieux, des médias… ¦ Ce numără fiecare bară (sau felie): persoane, nașteri, căsătorii, locuri, fișiere media…
+Seulement les fiches qui portent cette étiquette. ¦ Doar fișele care au această etichetă.
+Seulement les personnes que tu choisis ici, une par une. ¦ Doar persoanele pe care le alegi aici, una câte una.
+Comment on range ce qu’on compte : par nom, par lieu (commune, département, pays), par siècle, décennie ou année, par âge, par génération… ¦ Cum se grupează ce se numără: după nume, după loc (localitate, departament, țară), după secol, deceniu sau an, după vârstă, după generație…
+Prénoms, par siècle ¦ Prenume, pe secole
+Âge au décès (par 5 ans) ¦ Vârsta la deces (din 5 în 5 ani)
+Mariages par décennie ¦ Căsătorii pe decenii
+Nombre d’unions par personne ¦ Număr de uniuni pe persoană
+Nombre moyen d’enfants par famille, par siècle ¦ Număr mediu de copii pe familie, pe secole
+Naissances par département ¦ Nașteri pe departamente
+Mariages par département, par siècle ¦ Căsătorii pe departamente, pe secole
+Lieux par département ¦ Locuri pe departamente
+Métiers, par siècle ¦ Meserii, pe secole
+Âge moyen au décès, par métier ¦ Vârsta medie la deces, pe meserii
+Décès par décennie ¦ Decese pe decenii
+Événements par siècle ¦ Evenimente pe secole
+Mes ancêtres par génération ¦ Strămoșii mei pe generații
+Fiches avec ou sans source ¦ Fișe cu sau fără sursă
+Mes ancêtres avec ou sans source ¦ Strămoșii mei cu sau fără sursă
+Événements par sorte ¦ Evenimente pe feluri
+Médias par sorte ¦ Fișiere media pe feluri
+Médias par décennie ¦ Fișiere media pe decenii
+Seulement les personnes… ¦ Doar persoanele…
+tous ces critères (ET) ¦ toate aceste criterii (ȘI)
+choisir… (métier, enfants, lieu, période…) ¦ alege… (meserie, copii, loc, perioadă…)
+Compter chaque personne une seule fois ¦ Numără fiecare persoană o singură dată
+Jusqu’à (générations, 0 = toutes) ¦ Până la (generații, 0 = toate)
+Nom ou prénom qui contient ¦ Numele sau prenumele conține
+Chercher… (Martin, Jean) ¦ Caută… (Martin, Jean)
+Nées entre (période) ¦ Născute între (perioadă)
+Regrouper par ¦ Grupează după
+Garder les premiers (0 = tous) ¦ Păstrează primele (0 = toate)
+Le reste dans « Autres » ¦ Restul în „Altele”
+Montrer « Inconnu » (les valeurs vides) ¦ Arată „Necunoscut” (valorile goale)
+De quoi ¦ Din ce
+Écris une année (ex. 1800, vers 1850). ¦ Scrie un an (ex. 1800, vers 1850).
+Choisis une étiquette. ¦ Alege o etichetă.
+Écris au moins 2 lettres. ¦ Scrie cel puțin 2 litere.
+Choisis au moins une personne. ¦ Alege cel puțin o persoană.
+=siège ¦ loc|locuri|de locuri
+Ajoute des valeurs positives. ¦ Adaugă valori pozitive.
+Il faut au moins 3 lignes (les axes). ¦ Sunt necesare cel puțin 3 rânduri (axele).
+Ajoute des valeurs. ¦ Adaugă valori.
+Ajoute des flux : de, vers, combien. ¦ Adaugă fluxuri: de la, către, câte.
+Il faut 2 ou 3 ensembles. ¦ Sunt necesare 2 sau 3 mulțimi.
+Ajoute une jauge : un nom, une valeur, un maximum. ¦ Adaugă un indicator: un nume, o valoare, un maxim.
+Ajoute des lignes : un nom, un nombre, un symbole (👤, 👶, ⚓…). ¦ Adaugă rânduri: un nume, un număr, un simbol (👤, 👶, ⚓…).
+Majorité (banc du haut) ¦ Majoritate (banca de sus)
+Opposition (banc du bas) ¦ Opoziție (banca de jos)
+Non-inscrits (bout) ¦ Neafiliați (capăt)
+Présidence ¦ Președinție
+Les chiffres ¦ Cifrele
+Afficher les valeurs ¦ Afișează valorile
+Hauteur du dessin ¦ Înălțimea desenului
+Unité (ex. : personnes, €) ¦ Unitate (ex.: persoane, €)
+Trou au centre ¦ Gaură în centru
+Sièges ¦ Locuri
+Hémicycle (demi-cercle) ¦ Hemiciclu (semicerc)
+Arc élargi (angle au choix) ¦ Arc lărgit (unghi la alegere)
+Longueur des bancs droits ¦ Lungimea băncilor drepte
+Forme des sièges ¦ Forma locurilor
+Carrés ¦ Pătrate
+Carrés arrondis ¦ Pătrate rotunjite
+Espace entre les sièges ¦ Spațiu între locuri
+Contour des sièges ¦ Conturul locurilor
+Majorité absolue ¦ Majoritate absolută
+Ne pas montrer ¦ Nu arăta
+En texte ¦ Ca text
+Sièges dans la légende ¦ Locurile în legendă
+Assemblée ¦ Adunare
+Les membres (une ligne par période ; même nom = même ligne) ¦ Membrii (un rând pe perioadă; același nume = același rând)
+Rôles (séparés par des virgules) ¦ Roluri (separate prin virgule)
+1987 ou 03/1987 ¦ 1987 sau 03/1987
+Fin (vide = aujourd’hui) ¦ Sfârșit (gol = azi)
+Les traits verticaux (albums, tournées, événements) ¦ Liniile verticale (albume, turnee, evenimente)
+Tournée (rouge, pointillés) ¦ Turneu (roșu, punctat)
+Autre (bleu, pointillés) ¦ Altul (albastru, punctat)
+Un repère tous les … ans (vide = auto) ¦ Un reper la fiecare … ani (gol = automat)
+Épaisseur des barres ¦ Grosimea barelor
+Espace entre les lignes ¦ Spațiu între rânduri
+Ordre des lignes ¦ Ordinea rândurilor
+Par date d’arrivée ¦ După data sosirii
+Rôle par défaut (si vide) ¦ Rol implicit (dacă e gol)
+Les événements ¦ Evenimentele
+En alternance dessus / dessous ¦ Alternativ deasupra / dedesubt
+Tous au-dessus ¦ Toate deasupra
+Étages au plus (pour éviter les chevauchements) ¦ Niveluri maxim (ca să evite suprapunerile)
+Carrés par ligne ¦ Pătrate pe rând
+Personnes trouvées ¦ Persoane găsite
+Avec un acte ¦ Cu un act
+Acte vérifié ¦ Act verificat
+Sourcées ¦ Cu surse
+Complétude par branche ¦ Completitudine pe ramuri
+Couleur des petites valeurs ¦ Culoarea valorilor mici
+Couleur des grandes valeurs ¦ Culoarea valorilor mari
+Les points ¦ Punctele
+Une seule couleur ¦ O singură culoare
+Les flux ¦ Fluxurile
+D’où venaient les conjoints ¦ De unde veneau soții
+Les cases ¦ Casetele
+Largeur des cases (vide = auto) ¦ Lățimea casetelor (gol = automat)
+Les ensembles (2 ou 3) ¦ Mulțimile (2 sau 3)
+Ce qu’on écrit dans chaque zone ¦ Ce se scrie în fiecare zonă
+Texte ou nombre ¦ Text sau număr
+Les mots ¦ Cuvintele
+Taille du plus gros mot ¦ Mărimea celui mai mare cuvânt
+Les jauges ¦ Indicatoarele
+Les lignes ¦ Rândurile
+Un symbole vaut ¦ Un simbol valorează
+Taille des symboles ¦ Mărimea simbolurilor
+Légende ¦ Legendă
+En bas ¦ Jos
+Couleurs par défaut ¦ Culori implicite
+Sépia (ancien) ¦ Sepia (vechi)
+Taille des textes ¦ Mărimea textelor
+Couleur du fond ¦ Culoarea fundalului
+Couleur des textes ¦ Culoarea textelor
+Types remis comme au départ. ¦ Tipurile au fost readuse la starea inițială.
+Nom du groupe (ex. « Mes favoris », « Pour la famille ») : ¦ Numele grupului (ex. „Favoritele mele”, „Pentru familie”):
+Un tableau ¦ Un tabel
+Un fichier CSV ¦ Un fișier CSV
+Une page Wikipédia ¦ O pagină Wikipedia
+Un graphique partagé ¦ Un grafic partajat
+📊 D’un graphique ¦ 📊 Dintr-un grafic
+Avec quel dessin ? ¦ Cu ce desen?
+🖼️ Image d’un graphique ¦ 🖼️ Imaginea unui grafic
+Un diagramme LCNDA (.json), un graphique partagé (.lcnda-widget.json) ou un tableau CSV. ¦ O diagramă LCNDA (.json), un grafic partajat (.lcnda-widget.json) sau un tabel CSV.
+Lire la page ¦ Citește pagina
+Comment faire mon propre graphique avec des données d’ailleurs ? ¦ Cum îmi fac propriul grafic cu date din altă parte?
+Ce fichier JSON n’est ni un diagramme ni un graphique LCNDA. ¦ Acest fișier JSON nu este nici o diagramă, nici un grafic LCNDA.
+Colle un tableau. ¦ Lipește un tabel.
+Tableau collé ¦ Tabel lipit
+Clique « Lire la page », puis choisis un tableau ou une image. ¦ Fă clic pe „Citește pagina”, apoi alege un tabel sau o imagine.
+Colle l’adresse d’une page Wikipédia (https://xx.wikipedia.org/wiki/…). ¦ Lipește adresa unei pagini Wikipedia (https://xx.wikipedia.org/wiki/…).
+Aucun tableau. ¦ Niciun tabel.
+＋ Une ligne ¦ ＋ Un rând
+Je ne sais pas (barres ou colonnes) ¦ Nu știu (bare sau coloane)
+Hémicycle (sièges) ¦ Hemiciclu (locuri)
+Valeur du haut (la plus grande barre, ou 100 %) ¦ Valoarea de sus (cea mai mare bară sau 100 %)
+D’après une image ¦ După o imagine
+Président ¦ Președinte
+Majorité ¦ Majoritate
+Indépendants ¦ Independenți
+Liste du maire ¦ Lista primarului
+Sens de l’arbre ¦ Direcția arborelui
+Chercher un métier… (tisserand, laboureur) ¦ Caută o meserie… (țesător, plugar)
+Chercher un métier ¦ Caută o meserie
+Pour montrer ou imprimer l’arbre : les vivants et les fiches confidentielles n’apparaissent plus ¦ Pentru a arăta sau tipări arborele: persoanele în viață și fișele confidențiale nu mai apar
+🔒 Sans les vivants ni les fiches confidentielles ¦ 🔒 Fără persoanele în viață și fișele confidențiale
+ARBRE DES MÉTIERS ¦ ARBORELE MESERIILOR
+Les métiers des ancêtres de {name} ¦ Meseriile strămoșilor lui {name}
+🧬 Les métiers des ancêtres de {name} ¦ 🧬 Meseriile strămoșilor lui {name}
+métier inconnu ¦ meserie necunoscută
+Aucun métier noté dans cet arbre. ¦ Nicio meserie notată în acest arbore.
+Même métier que le parent ¦ Aceeași meserie ca părintele
+Changement de métier ¦ Schimbare de meserie
+Métier inconnu pour l’un des deux ¦ Meserie necunoscută pentru unul dintre cei doi
+📊 La transmission du métier ¦ 📊 Transmiterea meseriei
+Un enfant « reprend » le métier quand au moins un de ses métiers est aussi celui du parent (mêmes mots du dictionnaire des métiers anciens : « laboureur » et « laboureur à bras » comptent pareil). ¦ Un copil „preia” meseria când cel puțin una dintre meseriile lui este și a părintelui (aceleași cuvinte din dicționarul meseriilor vechi: „laboureur” și „laboureur à bras” contează la fel).
+Pas encore de quoi compter : il faut le métier d’un parent et celui de son enfant du même sexe. ¦ Încă nu e nimic de numărat: e nevoie de meseria unui părinte și de cea a copilului său de același sex.
+Arrivée au bagne ¦ Sosirea la ocnă
+Autre événement ¦ Alt eveniment
+Décoration ¦ Decorație
+Décès en déportation ¦ Deces în deportare
+Déportation ¦ Deportare
+Fusillé ¦ Împușcat
+Libération ou décès au bagne ¦ Eliberare sau deces la ocnă
+Lieu de résidence ¦ Loc de reședință
+Obsèques ¦ Funeralii
+Séparation ¦ Separare
+{name} : {n} — voir les personnes ¦ {name}: {n} — vezi persoanele
+Personne de ta base n’est né ou baptisé un {date}. ¦ Nimeni din baza ta nu s-a născut și nu a fost botezat pe {date}.
+{n} coïncidences dans l’arbre ¦ {n} coincidențe în arbore
+Aucune bougie allumée cette semaine. ¦ Nicio lumânare aprinsă săptămâna aceasta.
+Aucune lettre scellée. ¦ Nicio scrisoare sigilată.
+Le détail ¦ Detaliile
+Prochain à voir : ¦ Următorul de văzut:
+L’ambiance ¦ Atmosfera
+La veillée au coin du feu (vers 1880) ¦ Șezătoarea lângă foc (pe la 1880)
+Le village un dimanche matin ¦ Satul într-o duminică dimineața
+L’atelier du forgeron ¦ Atelierul fierarului
+La gare (vers 1900) ¦ Gara (pe la 1900)
+Le moulin au bord de l’eau ¦ Moara de lângă apă
+La nuit d’orage ¦ Noaptea cu furtună
+Le port ¦ Portul
+La ferme au petit matin ¦ Ferma în zori
+Une nuit d’été à la campagne ¦ O noapte de vară la țară
+Le lavoir ¦ Spălătoria satului
+Le jour de marché ¦ Ziua de târg
+Le café du village ¦ Cafeneaua satului
+Le bal musette ¦ Balul cu acordeon
+La messe à l’église ¦ Slujba la biserică
+L’atelier de couture ¦ Atelierul de croitorie
+La filature et le tissage ¦ Filatura și țesătoria
+La veillée des fileuses ¦ Șezătoarea torcătoarelor
+L’atelier du menuisier ¦ Atelierul tâmplarului
+La classe (vers 1900) ¦ Clasa (pe la 1900)
+L’étude du notaire ¦ Biroul notarului
+Les moissons ¦ Seceratul
+Le rucher ¦ Stupina
+La route en diligence ¦ Drumul cu diligența
+Sons fabriqués par l’ordinateur, libres de droits. ¦ Sunete create de calculator, libere de drepturi.
+Montrer les cartes postales anciennes à l’endroit qu’elles montrent (avec la direction de la vue) ¦ Arată cărțile poștale vechi în locul pe care îl înfățișează (cu direcția privirii)
+＋ Nouvelle couche ¦ ＋ Strat nou
+Départements ¦ Departamente
+Grandes régions ¦ Regiuni mari
+Grandes régions (NUTS 1) ¦ Regiuni mari (NUTS 1)
+Régions (NUTS 2) ¦ Regiuni (NUTS 2)
+Le monde entier ¦ Lumea întreagă
+France et voisins ¦ Franța și vecinii
+France entière ¦ Toată Franța
+Ajoute des flux : départ, arrivée, combien. ¦ Adaugă fluxuri: plecare, sosire, câte.
+📍 Zoomer sur ¦ 📍 Mărește pe
+✋ Mon cadrage (souris ou cadre tracé) ¦ ✋ Încadrarea mea (mouse sau cadru desenat)
+Mon cadrage : ouest, sud, est, nord (degrés) ¦ Încadrarea mea: vest, sud, est, nord (grade)
+Dégradé continu ¦ Degrade continuu
+Par classes (tranches) ¦ Pe clase (intervale)
+Du jaune au rouge ¦ De la galben la roșu
+Du bleu au rouge (écarts) ¦ De la albastru la roșu (abateri)
+Couleur des petits chiffres ¦ Culoarea cifrelor mici
+Couleur des grands chiffres ¦ Culoarea cifrelor mari
+Découpage des classes ¦ Împărțirea claselor
+Couleur des zones sans chiffre ¦ Culoarea zonelor fără cifră
+Couleur des limites ¦ Culoarea limitelor
+Automatiques (là où il y a la place) ¦ Automate (unde e loc)
+Noms des zones ¦ Numele zonelor
+Noms et chiffres ¦ Nume și cifre
+Taille des étiquettes ¦ Mărimea etichetelor
+Unité (ex. : naissances, %) ¦ Unitate (ex.: nașteri, %)
+Courbure des flèches ¦ Curbura săgeților
+Opacité des flèches ¦ Opacitatea săgeților
+Couleur des flèches ¦ Culoarea săgeților
+Taille des ronds ¦ Mărimea cercurilor
+Couleur du tour des ronds ¦ Culoarea conturului cercurilor
+Tous (sans se chevaucher) ¦ Toate (fără să se suprapună)
+Les 12 plus importants ¦ Cele mai importante 12
+Taille des noms ¦ Mărimea numelor
+Couleur des terres ¦ Culoarea uscatului
+Unité (ex. : personnes) ¦ Unitate (ex.: persoane)
+Signaler les lieux sans position ¦ Semnalează locurile fără poziție
+Couleur des ronds ¦ Culoarea cercurilor
+Opacité des ronds ¦ Opacitatea cercurilor
+Les 15 plus gros (sans se chevaucher) ¦ Cele mai mari 15 (fără să se suprapună)
+Unité (ex. : naissances) ¦ Unitate (ex.: nașteri)
+Où sont nés mes ancêtres ¦ Unde s-au născut strămoșii mei
+Baptêmes seuls ¦ Doar botezuri
+Sépultures seules ¦ Doar înmormântări
+Recensements (personnes recensées) ¦ Recensăminte (persoane recenzate)
+Métiers (lieux où on les exerçait) ¦ Meserii (locurile unde erau practicate)
+Départs (nés ici, morts ailleurs) ¦ Plecări (născuți aici, morți în altă parte)
+Arrivées (nés ailleurs, morts ici) ¦ Sosiri (născuți în altă parte, morți aici)
+Familles (patronymes différents) ¦ Familii (nume de familie diferite)
+Une sorte d’événement ¦ Un fel de eveniment
+▭ Tracer un cadre ¦ ▭ Desenează un cadru
+Chargement des sortes d’événements… ¦ Se încarcă felurile de evenimente…
+Quelle sorte d’événement ¦ Ce fel de eveniment
+Seulement mes ancêtres (lignée Sosa) ¦ Doar strămoșii mei (linia Sosa)
+Jusqu’à l’année ¦ Până în anul
+Départ ¦ Plecare
+Arrivée ¦ Sosire
+📍 Les lieux du tableau ¦ 📍 Locurile din tabel
+🔎 Retrouver les lieux sans position ¦ 🔎 Găsește locurile fără poziție
+Choisis d’abord une sorte d’événement. ¦ Alege mai întâi un fel de eveniment.
+Choisis une sorte d’événement. ¦ Alege un fel de eveniment.
+Aucun lieu retrouvé : choisis-les un par un. ¦ Niciun loc găsit: alege-le unul câte unul.
+Colorer les villes elles-mêmes ¦ Colorează orașele însele
+Zones proposées ¦ Zone propuse
+Tape un nom ou un code… ¦ Scrie un nume sau un cod…
+Note (dans la bulle) ¦ Notă (în bulă)
+Les flux (départ → arrivée) ¦ Fluxurile (plecare → sosire)
+Départ (lieu) ¦ Plecare (loc)
+Arrivée (lieu) ¦ Sosire (loc)
+Hauteur au plus ¦ Înălțime maximă
+Clic : ouvrir la fiche ¦ Clic: deschide fișa
+Oncle ou tante ¦ Unchi sau mătușă
+Père ou mère ¦ Tată sau mamă
+Autre lien (ou inconnu) ¦ Altă legătură (sau necunoscută)
+Autre prénom ¦ Alt prenume
+Trait plein : même premier prénom ¦ Linie plină: același prim prenume
+Guerre et violence ¦ Război și violență
+Poumons et respiration ¦ Plămâni și respirație
+Cœur et vaisseaux ¦ Inimă și vase de sânge
+Cancers et tumeurs ¦ Cancere și tumori
+Ventre et digestion ¦ Burtă și digestie
+Nerfs et cerveau ¦ Nervi și creier
+Autres et inconnues ¦ Altele și necunoscute
+Où vivait la famille ¦ Unde a trăit familia
+Ancêtres ¦ Strămoși
+De quoi sont morts mes ancêtres ¦ De ce au murit strămoșii mei
+Tous les lieux ont une position. ¦ Toate locurile au o poziție.
+Résidences et recensements ¦ Reședințe și recensăminte
+Prendre ces événements ¦ Ia aceste evenimente
+📖 La vie d’une personne ¦ 📖 Viața unei persoane
+Prendre sa vie ¦ Ia viața ei
+🧱 Une descendance ¦ 🧱 O descendență
+Prendre la descendance ¦ Ia descendența
+Ces personnes ¦ Aceste persoane
+Toute la vie ¦ Toată viața
+Voir toute la vie ¦ Vezi toată viața
+Lecture : les étapes défilent ¦ Redare: etapele se succedă
+⤢ Toute la vie ¦ ⤢ Toată viața
+Les événements (un point par ligne) ¦ Evenimentele (un punct pe rând)
+Date ou année ¦ Dată sau an
+Couleur des points ¦ Culoarea punctelor
+Selon la sorte d’événement ¦ După felul evenimentului
+Taille des points ¦ Mărimea punctelor
+Opacité des points ¦ Opacitatea punctelor
+Les 10 plus remplis ¦ Cele mai pline 10
+Opacité des alvéoles ¦ Opacitatea celulelor
+Traits blancs entre les alvéoles ¦ Linii albe între celule
+Des ronds (Dorling) ¦ Cercuri (Dorling)
+Des carrés (Demers) ¦ Pătrate (Demers)
+Couleur des formes ¦ Culoarea formelor
+Nom et chiffre (là où il y a la place) ¦ Nume și cifră (unde e loc)
+Légende des tailles ¦ Legenda mărimilor
+Unité (ex. : ancêtres) ¦ Unitate (ex.: strămoși)
+Signaler les zones pas trouvées ¦ Semnalează zonele negăsite
+Les étapes, dans l’ordre ¦ Etapele, în ordine
+Détail (dans la bulle) ¦ Detaliu (în bulă)
+La carte ¦ Harta
+Montre toute la vie (fixe) ¦ Arată toată viața (fix)
+Couleur du chemin ¦ Culoarea drumului
+Oui (sans se chevaucher) ¦ Da (fără să se suprapună)
+Les personnes (parent → enfant) ¦ Persoanele (părinte → copil)
+Parent (vide = l’ancêtre) ¦ Părinte (gol = strămoșul)
+Le chiffre (ou la somme) ¦ Cifra (sau suma)
+Une par génération ¦ Una pe generație
+Hauteur d’une génération ¦ Înălțimea unei generații
+Dans les cases ¦ În casete
+Ordre des enfants ¦ Ordinea copiilor
+Les plus grandes familles d’abord ¦ Cele mai mari familii întâi
+Traits blancs entre les cases ¦ Linii albe între casete
+Traits blancs entre les parts ¦ Linii albe între felii
+Seulement les prénoms transmis ¦ Doar prenumele transmise
+Aussi les filleuls au prénom différent ¦ Și finii cu prenume diferit
+Hauteur d’une ligne ¦ Înălțimea unui rând
+Noms sous les ronds ¦ Nume sub cercuri
+Quand il y a la place ¦ Când e loc
+Les noms ¦ Numele
+Qui a connu qui dans la famille ¦ Cine pe cine a cunoscut în familie
+Autres métiers ¦ Alte meserii
+Métier différent ¦ Meserie diferită
+Même lieu ¦ Același loc
+Tout près ¦ Foarte aproape
+Ancêtres possibles (2, 4, 8…) ¦ Strămoși posibili (2, 4, 8…)
+Places trouvées ¦ Locuri găsite
+Carême et Avent ¦ Postul Mare și Postul Crăciunului
+Si tout était égal ¦ Dacă totul ar fi egal
+Garçon ¦ Băiat
+Autres lieux ¦ Alte locuri
+Prendre dans ma base ¦ Ia din baza mea
+Personnes comptées ¦ Persoane numărate
+🤝 Les vies autour d’une personne ¦ 🤝 Viețile din jurul unei persoane
+Une courbe par ¦ O curbă pentru fiecare
+Une seule courbe ¦ O singură curbă
+Lignées ¦ Linii de descendență
+Père → fils (lignées d’hommes) ¦ Tată → fiu (linii bărbătești)
+Rayon des mariages ¦ Raza căsătoriilor
+🧮 L’ascendance d’une personne ¦ 🧮 Ascendența unei persoane
+De (année) ¦ De la (an)
+Quelles mères ¦ Ce mame
+Une seule mère ¦ O singură mamă
+Espacement des naissances ¦ Spațierea nașterilor
+Quelles personnes ¦ Ce persoane
+Générations d’ancêtres ¦ Generații de strămoși
+Début (année, vide = auto) ¦ Început (an, gol = automat)
+Fin (année, vide = auto) ¦ Sfârșit (an, gol = automat)
+Les personnes (une ligne chacune) ¦ Persoanele (câte un rând fiecare)
+Ordre des groupes ¦ Ordinea grupurilor
+Les plus nombreux d’abord ¦ Cele mai numeroase întâi
+Couleur des bandes ¦ Culoarea benzilor
+Cacher les métiers inconnus ¦ Ascunde meseriile necunoscute
+Les couples ¦ Cuplurile
+Année du mariage ¦ Anul căsătoriei
+Par siècle du mariage ¦ Pe secolul căsătoriei
+Selon la distance ¦ După distanță
+Où allait-on chercher son conjoint ? ¦ Unde își căutau oamenii soțul sau soția?
+Montrer les ancêtres possibles ¦ Arată strămoșii posibili
+Mon implexe, génération par génération ¦ Implexul meu, generație cu generație
+En % du total ¦ În % din total
+Les années ¦ Anii
+Ordre des mères ¦ Ordinea mamelor
+Le plus d’enfants d’abord ¦ Cei mai mulți copii întâi
+Chargement des personnes… ¦ Se încarcă persoanele…
+Aucune fiche trouvée. ¦ Nicio fișă găsită.
+Frères et sœurs ¦ Frați și surori
+Plier cette branche ¦ Pliază această ramură

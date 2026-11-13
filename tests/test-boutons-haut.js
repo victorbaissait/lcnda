@@ -30,7 +30,7 @@ const KEY = 'genealogie-topbar-buttons';
         assert.ok(read('api.php').includes(`'${KEY}'`), 'site_defaults_allowed_keys (api.php)');
         assert.ok(read('assets/js/heritage-studio.js').includes(`'${KEY}'`), '💾 Réglages enregistrés : l’Apparence');
         const ap = read('assets/js/app-apparence.js');
-        for (const id of ['#side-panel-open', '#new-window-open', '#kiosk-toggle', '#mode-simple-open', '#calculette-open', '#genealogy-switch']) assert.ok(ap.includes(`'${id}'`), id + ' dans la liste');
+        for (const id of ['#side-panel-open', '#new-window-open', '#kiosk-toggle', '#mode-simple-open', '#calculette-open', '#report-problem-open', '#genealogy-switch']) assert.ok(ap.includes(`'${id}'`), id + ' dans la liste');
     });
     await t('« Réglages » à l’écran, module interne « maintenance » gardé', () => {
         const idx = read('index.php');
@@ -83,8 +83,8 @@ echo 'ok';`], {cwd: root, encoding: 'utf8', env: envFor(tmp)});
     const shot = async (page, name) => { if (shots) { fs.mkdirSync(shots, {recursive: true}); await page.screenshot({path: path.join(shots, name)}); } };
     try {
         const page = await open(1440);
-        await t('par défaut : tout comme avant (◫ ↗ 🔒 🧮 🌳, 🧓 caché)', async () => {
-            assert.deepEqual(await bar(page), ['side-panel-open', 'new-window-open', 'kiosk-toggle', 'calculette-open', 'genealogy-switch']);
+        await t('par défaut : tout comme avant (◫ ↗ 🔒 🧮 🐞 🌳, 🧓 caché)', async () => {
+            assert.deepEqual(await bar(page), ['side-panel-open', 'new-window-open', 'kiosk-toggle', 'calculette-open', 'report-problem-open', 'genealogy-switch']);
             assert.equal(await page.evaluate(k => localStorage.getItem(k), KEY), null, 'rien d’enregistré');
         });
         await t('l’ancienne adresse #maintenance/design ouvre l’Apparence ; menu, colonne et sur-titre disent « Réglages »', async () => {
@@ -98,11 +98,11 @@ echo 'ok';`], {cwd: root, encoding: 'utf8', env: envFor(tmp)});
             assert.equal(await page.$eval('#lc-topbar-buttons', e => e.previousElementSibling?.classList.contains('design-order-grid-four')), true, 'juste après l’ordre du menu');
         });
         await t('la liste : même modèle que les boutons de la fiche (⠿, numéro, case), aperçu', async () => {
-            assert.deepEqual(await rows(page), ['split', 'window', 'kiosk', 'simple', 'calc', 'genealogies']);
+            assert.deepEqual(await rows(page), ['split', 'window', 'kiosk', 'simple', 'calc', 'report', 'genealogies']);
             const r0 = await page.$eval('#lc-tb-order .order-row', e => ({grip: e.querySelector('.order-grip')?.textContent, n: e.querySelector('.order-number')?.textContent, box: !!e.querySelector('.order-visible input[type=checkbox]')}));
             assert.deepEqual(r0, {grip: '⠿', n: '01', box: true});
             assert.equal(await page.$eval('#lc-tb-order [data-order-key="simple"] [data-tb-show]', e => e.checked), false, '🧓 décoché au départ');
-            assert.equal(await page.$$eval('[data-tb-preview] .lc-tb-btn', e => e.length), 5, 'aperçu : 5 boutons');
+            assert.equal(await page.$$eval('[data-tb-preview] .lc-tb-btn', e => e.length), 6, 'aperçu : 6 boutons');
             await page.locator('#lc-topbar-buttons').scrollIntoViewIfNeeded(); await shot(page, 'boutons-1440.png');
         });
         await t('décocher 🧮 : le bouton disparaît, la calculette suit, « ✓ Enregistré » et « ↶ Annuler » le remet', async () => {
@@ -118,29 +118,29 @@ echo 'ok';`], {cwd: root, encoding: 'utf8', env: envFor(tmp)});
             assert.equal(await page.$('#calculette-open'), null);
         });
         await t('changer l’ordre (Alt + ↑) : l’ordre suit dans la barre ; cacher 🔒', async () => {
-            for (let i = 0; i < 5; i++) { await page.focus('#lc-tb-order [data-order-key="genealogies"] .order-grip'); await page.keyboard.press('Alt+ArrowUp'); await page.waitForTimeout(200); }
+            for (let i = 0; i < 6; i++) { await page.focus('#lc-tb-order [data-order-key="genealogies"] .order-grip'); await page.keyboard.press('Alt+ArrowUp'); await page.waitForTimeout(200); }
             await page.waitForTimeout(400);
-            assert.deepEqual(await rows(page), ['genealogies', 'split', 'window', 'kiosk', 'simple', 'calc']);
+            assert.deepEqual(await rows(page), ['genealogies', 'split', 'window', 'kiosk', 'simple', 'calc', 'report']);
             assert.equal(await page.$eval('#lc-tb-order .order-row', e => e.querySelector('.order-number').textContent), '01', 'numéros refaits');
             await page.click('#lc-tb-order [data-order-key="kiosk"] [data-tb-show]'); await page.waitForTimeout(600);
-            assert.deepEqual(await bar(page), ['genealogy-switch', 'side-panel-open', 'new-window-open']);
-            { const v = JSON.parse(await page.evaluate(k => localStorage.getItem(k), KEY)); assert.deepEqual(v.order.slice(0, 6), ['genealogies', 'split', 'window', 'kiosk', 'simple', 'calc']); assert.deepEqual(v.hidden, ['kiosk']); assert.deepEqual(v.on, []); }
+            assert.deepEqual(await bar(page), ['genealogy-switch', 'side-panel-open', 'new-window-open', 'report-problem-open']);
+            { const v = JSON.parse(await page.evaluate(k => localStorage.getItem(k), KEY)); assert.deepEqual(v.order.slice(0, 7), ['genealogies', 'split', 'window', 'kiosk', 'simple', 'calc', 'report']); assert.deepEqual(v.hidden, ['kiosk']); assert.deepEqual(v.on, []); }
         });
         await t('🧓 coché dans la liste = « Montrer le bouton » du mode simple', async () => {
             await page.click('#lc-tb-order [data-order-key="simple"] [data-tb-show]'); await page.waitForTimeout(600);
             assert.equal(await page.evaluate(() => window.LCNDA_EXT.modeSimple.settings().forAll), true);
-            assert.deepEqual(await bar(page), ['genealogy-switch', 'side-panel-open', 'new-window-open', 'mode-simple-open']);
+            assert.deepEqual(await bar(page), ['genealogy-switch', 'side-panel-open', 'new-window-open', 'mode-simple-open', 'report-problem-open']);
         });
         await t('après un rechargement : même ordre, mêmes boutons cachés', async () => {
             await page.reload(); await page.waitForTimeout(2500);
-            assert.deepEqual(await bar(page), ['genealogy-switch', 'side-panel-open', 'new-window-open', 'mode-simple-open']);
+            assert.deepEqual(await bar(page), ['genealogy-switch', 'side-panel-open', 'new-window-open', 'mode-simple-open', 'report-problem-open']);
             await shot(page, 'boutons-change-1440.png');
         });
         await t('↺ Remettre comme au départ : ordre de l’app, tout montré sauf 🧓', async () => {
             await page.click('[data-tb-reset]'); await page.waitForTimeout(900);
             assert.equal(await page.evaluate(k => localStorage.getItem(k), KEY), null);
-            assert.deepEqual(await bar(page), ['side-panel-open', 'new-window-open', 'kiosk-toggle', 'calculette-open', 'genealogy-switch']);
-            assert.deepEqual(await rows(page), ['split', 'window', 'kiosk', 'simple', 'calc', 'genealogies']);
+            assert.deepEqual(await bar(page), ['side-panel-open', 'new-window-open', 'kiosk-toggle', 'calculette-open', 'report-problem-open', 'genealogy-switch']);
+            assert.deepEqual(await rows(page), ['split', 'window', 'kiosk', 'simple', 'calc', 'report', 'genealogies']);
         });
         await t('raccourcis vers les outils : cachés au départ, un par outil de modification (Tableaux compris) et par partie d’Enquêtes', async () => {
             const all = await allRows(page);
@@ -153,7 +153,7 @@ echo 'ok';`], {cwd: root, encoding: 'utf8', env: envFor(tmp)});
             await page.click('#lc-tb-order [data-order-key="enq_tableaux"] [data-tb-show]'); await page.waitForTimeout(500);
             assert.deepEqual(JSON.parse(await page.evaluate(k => localStorage.getItem(k), KEY)).on.sort(), ['enq_tableaux', 'et_sheet']);
             assert.deepEqual((await bar(page)).filter(x => /^tb-go-/.test(x)), ['tb-go-et_sheet', 'tb-go-enq_tableaux']);
-            assert.equal(await page.$$eval('[data-tb-preview] .lc-tb-btn', e => e.length), 7, 'aperçu : 5 + 2');
+            assert.equal(await page.$$eval('[data-tb-preview] .lc-tb-btn', e => e.length), 8, 'aperçu : 6 + 2');
             await page.click('#tb-go-et_sheet'); await page.waitForTimeout(1800);
             assert.equal(await page.evaluate(() => window.LCNDA_APP.state.module + '/' + window.LCNDA_APP.state.listType), 'listes/edit_tools');
             assert.ok(await page.$('.h-et-page'), 'page des outils');

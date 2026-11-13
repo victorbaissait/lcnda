@@ -1,0 +1,48 @@
+fr ¦ lt ¦ lv ¦ et
+# ═════ zone « montage » : lituanien (lt), letton (lv) et estonien (et) ═════
+Boutons des pistes : petits ¦ Takelių mygtukai: maži ¦ Celiņu pogas: mazas ¦ Radade nupud: väikesed
+Boutons des pistes : grands ¦ Takelių mygtukai: dideli ¦ Celiņu pogas: lielas ¦ Radade nupud: suured
+Les boutons des pistes ont déjà cette taille. ¦ Takelių mygtukai jau tokio dydžio. ¦ Celiņu pogas jau ir šādā izmērā. ¦ Radade nupud on juba selles suuruses.
+Petits ¦ Maži ¦ Mazas ¦ Väikesed
+Moyens (départ) ¦ Vidutiniai (pradiniai) ¦ Vidējas (sākotnējās) ¦ Keskmised (algne)
+Grands ¦ Dideli ¦ Lielas ¦ Suured
+Ranger cette section : glisse la poignée, ou Alt + ↑ / ↓ ¦ Perkelk šią skiltį: tempk rankenėlę arba Alt + ↑ / ↓ ¦ Pārvieto šo sadaļu: velc rokturi vai Alt + ↑ / ↓ ¦ Liiguta seda jaotist: lohista pidet või Alt + ↑ / ↓
+Sections du panneau de droite : ↺ Remettre comme au départ ¦ Dešiniojo skydelio skiltys: ↺ Atkurti pradinius ¦ Labā paneļa sadaļas: ↺ Atjaunot sākotnējo ¦ Parema paneeli jaotised: ↺ Taasta algne
+Sections du panneau de droite remises comme au départ ¦ Dešiniojo skydelio skiltys atkurtos kaip pradžioje ¦ Labā paneļa sadaļas atjaunotas kā sākumā ¦ Parema paneeli jaotised on taastatud algseks
+Les sections du panneau de droite sont déjà comme au départ. ¦ Dešiniojo skydelio skiltys jau tokios, kaip pradžioje. ¦ Labā paneļa sadaļas jau ir tādas kā sākumā. ¦ Parema paneeli jaotised on juba algsed.
+Taille et place ¦ Dydis ir vieta ¦ Izmērs un novietojums ¦ Suurus ja asukoht
+Durée, taille et place ¦ Trukmė, dydis ir vieta ¦ Ilgums, izmērs un novietojums ¦ Kestus, suurus ja asukoht
+Couleurs de cette vidéo ¦ Šio vaizdo įrašo spalvos ¦ Šī video krāsas ¦ Selle video värvid
+Rotation et fondus ¦ Pasukimas ir perėjimai ¦ Pagriešana un pārejas ¦ Pööramine ja sujumised
+Volume et effets ¦ Garsumas ir efektai ¦ Skaļums un efekti ¦ Helitugevus ja efektid
+Les couleurs et le vieux film de ce morceau reviennent comme au départ ¦ Šio fragmento spalvos ir senojo filmo efektas grįžta į pradinę būseną ¦ Šī fragmenta krāsas un vecās filmas efekts atgriežas sākotnējā stāvoklī ¦ Selle lõigu värvid ja vana filmi efekt taastatakse algseks
+Les couleurs et le vieux film de tout le film reviennent comme au départ ¦ Viso filmo spalvos ir senojo filmo efektas grįžta į pradinę būseną ¦ Visas filmas krāsas un vecās filmas efekts atgriežas sākotnējā stāvoklī ¦ Kogu filmi värvid ja vana filmi efekt taastatakse algseks
+Couleurs remises comme au départ ¦ Spalvos atkurtos kaip pradžioje ¦ Krāsas atjaunotas kā sākumā ¦ Värvid on taastatud algseks
+Le son de tout le film revient comme au départ (volume, effets) ¦ Viso filmo garsas grįžta į pradinę būseną (garsumas, efektai) ¦ Visas filmas skaņa atgriežas sākotnējā stāvoklī (skaļums, efekti) ¦ Kogu filmi heli taastatakse algseks (helitugevus, efektid)
+Son du film remis comme au départ ¦ Filmo garsas atkurtas kaip pradžioje ¦ Filmas skaņa atjaunota kā sākumā ¦ Filmi heli on taastatud algseks
+Texte remis comme au départ ¦ Tekstas atkurtas kaip pradžioje ¦ Teksts atjaunots kā sākumā ¦ Tekst on taastatud algseks
+Volume dans le temps ¦ Garsumas laike ¦ Skaļums laikā ¦ Helitugevus ajas
+Poser des points sur le morceau ¦ Dėti taškus ant fragmento ¦ Likt punktus uz fragmenta ¦ Pane lõigule punkte
+Point à la tête de lecture ¦ Taškas ties grojimo žymekliu ¦ Punkts pie atskaņošanas galviņas ¦ Punkt esitusjoonel
+Effacer la courbe ¦ Ištrinti kreivę ¦ Notīrīt līkni ¦ Kustuta kõver
+Courbe du volume effacée ¦ Garsumo kreivė ištrinta ¦ Skaļuma līkne notīrīta ¦ Helitugevuse kõver kustutatud
+Volume : {n} % ¦ Garsumas: {n} % ¦ Skaļums: {n} % ¦ Helitugevus: {n} %
+Points sur la courbe : {n}. La ligne du milieu = le volume réglé plus haut ; en haut, jusqu’à deux fois plus fort. ¦ Taškai kreivėje: {n}. Vidurinė linija = aukščiau nustatytas garsumas; viršuje – iki dviejų kartų garsiau. ¦ Punkti uz līknes: {n}. Vidējā līnija = augstāk iestatītais skaļums; augšā – līdz divreiz skaļāk. ¦ Punkte kõveral: {n}. Keskmine joon = ülal määratud helitugevus; üleval kuni kaks korda valjem.
+Pas encore de courbe : le volume reste le même du début à la fin (avec ses fondus). ¦ Kreivės dar nėra: garsumas nuo pradžios iki galo išlieka tas pats (su perėjimais). ¦ Līknes vēl nav: skaļums no sākuma līdz beigām paliek tāds pats (ar pārejām). ¦ Kõverat veel pole: helitugevus jääb algusest lõpuni samaks (koos sujumistega).
+Sur le morceau choisi, dans la frise : un clic pose un point, on glisse un point pour le déplacer (en haut : plus fort, en bas : moins fort), un double-clic l’enlève. ¦ Pasirinktame fragmente, laiko juostoje: spustelėjimas padeda tašką, tašką galima tempti (aukštyn – garsiau, žemyn – tyliau), dvigubas spustelėjimas jį pašalina. ¦ Izvēlētajā fragmentā, laika joslā: klikšķis noliek punktu, punktu var vilkt (uz augšu – skaļāk, uz leju – klusāk), dubultklikšķis to noņem. ¦ Valitud lõigul ajajoonel: klõps paneb punkti, punkti saab lohistada (üles – valjem, alla – vaiksem), topeltklõps eemaldab selle.
+✎ Clique sur le morceau, dans la frise, pour poser un point ; glisse un point pour le déplacer ; double-clic pour l’enlever. ¦ ✎ Spustelėk fragmentą laiko juostoje, kad padėtum tašką; tempk tašką, kad jį perkeltum; dvigubai spustelėk, kad pašalintum. ¦ ✎ Noklikšķini uz fragmenta laika joslā, lai noliktu punktu; velc punktu, lai to pārvietotu; dubultklikšķis, lai to noņemtu. ¦ ✎ Klõpsa ajajoonel lõigule, et punkt panna; lohista punkti, et seda liigutada; topeltklõps eemaldab selle.
+Volume plus égal (les passages faibles remontent, les forts baissent) ¦ Tolygesnis garsumas (tylios vietos pagarsėja, garsios – patylėja) ¦ Vienmērīgāks skaļums (klusās vietas kļūst skaļākas, skaļās – klusākas) ¦ Ühtlasem helitugevus (vaiksed kohad tõusevad, valjud langevad)
+Lieu de la réverbération ¦ Aido patalpa ¦ Atbalss telpa ¦ Kaja ruum
+Une grande salle ¦ Didelė salė ¦ Liela zāle ¦ Suur saal
+Une église ¦ Bažnyčia ¦ Baznīca ¦ Kirik
+Une cave ¦ Rūsys ¦ Pagrabs ¦ Kelder
+Gauche ↔ droite ¦ Kairė ↔ dešinė ¦ Kreisā ↔ labā ¦ Vasak ↔ parem
+Police et couleur ¦ Šriftas ir spalva ¦ Fonts un krāsa ¦ Font ja värv
+italique ¦ kursyvas ¦ slīpraksts ¦ kaldkiri
+Contour et ombre ¦ Kontūras ir šešėlis ¦ Kontūra un ēna ¦ Kontuur ja vari
+autour des lettres ¦ aplink raides ¦ ap burtiem ¦ tähtede ümber
+Force de l’ombre ¦ Šešėlio stiprumas ¦ Ēnas stiprums ¦ Varju tugevus
+Allume « ombre » (Police et couleur) pour régler l’ombre. ¦ Įjunk „šešėlį“ (Šriftas ir spalva), kad galėtum reguliuoti šešėlį. ¦ Ieslēdz „ēnu“ (Fonts un krāsa), lai pielāgotu ēnu. ¦ Lülita sisse „vari“ (Font ja värv), et varju reguleerida.
+Bandeau derrière le texte ¦ Juosta už teksto ¦ Josla aiz teksta ¦ Riba teksti taga
+Opacité du bandeau ¦ Juostos nepermatomumas ¦ Joslas necaurredzamība ¦ Riba läbipaistmatus
+Allume « bandeau » (Police et couleur) : un fond de couleur derrière le texte, plus ou moins transparent, aux coins droits ou arrondis. ¦ Įjunk „juostą“ (Šriftas ir spalva): spalvotas fonas už teksto, daugiau ar mažiau permatomas, stačiais ar apvaliais kampais. ¦ Ieslēdz „joslu“ (Fonts un krāsa): krāsains fons aiz teksta, vairāk vai mazāk caurspīdīgs, ar taisniem vai noapaļotiem stūriem. ¦ Lülita sisse „riba“ (Font ja värv): värviline taust teksti taga, rohkem või vähem läbipaistev, teravate või ümarate nurkadega.

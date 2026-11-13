@@ -1,0 +1,710 @@
+fr ¦ vi ¦ id
+=grappe ¦ cụm ¦ klaster
+=chevauchement ¦ chồng lấp ¦ tumpang tindih
+adn|Nom ¦ Tên ¦ Nama
+Test ¦ Xét nghiệm ¦ Tes
+Segments ¦ Đoạn ¦ Segmen
+Groupes ¦ Nhóm ¦ Grup
+Paternel ¦ Bên nội ¦ Dari ayah
+Maternel ¦ Bên ngoại ¦ Dari ibu
+Pas de réponse ¦ Chưa trả lời ¦ Tidak ada balasan
+ADN-X ¦ ADN-X ¦ DNA-X
+ADN-Y ¦ ADN-Y ¦ DNA-Y
+ADNmt ¦ ADN ty thể (mtDNA) ¦ mtDNA
+Autosomal (atDNA) ¦ Nhiễm sắc thể thường (atDNA) ¦ Autosomal (atDNA)
+ADN mitochondrial ¦ ADN ty thể ¦ DNA mitokondria
+Demi-oncle, demi-tante ¦ Chú/bác cùng cha khác mẹ, cô/dì cùng cha khác mẹ ¦ Paman tiri, bibi tiri
+vous ¦ bạn ¦ kamu
+grands-parents ¦ ông bà ¦ kakek-nenek
+arrière-arrière-grands-parents (4e génération) ¦ ông bà sơ (thế hệ thứ 4) ¦ canggah (generasi ke-4)
+5e génération ¦ thế hệ thứ 5 ¦ generasi ke-5
+6e génération ¦ thế hệ thứ 6 ¦ generasi ke-6
+7e génération ¦ thế hệ thứ 7 ¦ generasi ke-7
+8e génération ¦ thế hệ thứ 8 ¦ generasi ke-8
+Relation proposée ¦ Quan hệ được đề xuất ¦ Hubungan yang disarankan
+Correspondances en commun ¦ Trùng khớp chung ¦ Kecocokan bersama
+Taille de l’arbre ¦ Kích thước cây ¦ Ukuran pohon
+Arbre (adresse) ¦ Cây (địa chỉ) ¦ Pohon (alamat)
+Contact ¦ Liên hệ ¦ Kontak
+cM sur le X ¦ cM trên X ¦ cM pada X
+Pays ¦ Quốc gia ¦ Negara
+Fiche sur le site (adresse) ¦ Hồ sơ trên trang web (địa chỉ) ¦ Profil di situs (alamat)
+Identifiant chez la société ¦ Mã định danh tại công ty ¦ ID di perusahaan
+Haplogroupe Y ¦ Nhóm đơn bội Y ¦ Haplogrup Y
+Haplogroupe mt ¦ Nhóm đơn bội mt ¦ Haplogrup mt
+Haplogroupe mitochondrial ¦ Nhóm đơn bội ty thể ¦ Haplogrup mitokondria
+% d’ADN partagé ¦ % ADN chung ¦ % DNA bersama
+Grappe (Genetic Affairs) ¦ Cụm (Genetic Affairs) ¦ Klaster (Genetic Affairs)
+Nom de la correspondance ¦ Tên người trùng khớp ¦ Nama kecocokan
+Chromosome ¦ Nhiễm sắc thể ¦ Kromosom
+SNP ¦ SNP ¦ SNP
+Groupe ou ancêtre ¦ Nhóm hoặc tổ tiên ¦ Grup atau leluhur
+n° {n} ¦ số {n} ¦ no. {n}
+{n} sur {total}. Clic sur un nom : sa fiche (cM, ancêtre commun, arbre, suivi). Le calculateur propose la relation la plus probable. ¦ {n} trên {total}. Bấm vào một tên: hồ sơ của người đó (cM, tổ tiên chung, cây, theo dõi). Công cụ tính đề xuất quan hệ có khả năng nhất. ¦ {n} dari {total}. Klik sebuah nama: profilnya (cM, leluhur bersama, pohon, pemantauan). Kalkulator menyarankan hubungan yang paling mungkin.
+Supprimer {n} correspondances et leurs segments ? ¦ Xoá {n} trùng khớp và các đoạn của chúng? ¦ Hapus {n} kecocokan beserta segmennya?
+Supprimer cette correspondance et ses segments ? ¦ Xoá trùng khớp này và các đoạn của nó? ¦ Hapus kecocokan ini beserta segmennya?
+Le centiMorgan (cM) mesure l’ADN que vous avez en commun : environ 3 400 cM avec un parent, 850 avec un cousin germain, 200 avec un cousin issu de germain. Recopie le chiffre donné par le site du test. ¦ centiMorgan (cM) đo lượng ADN mà bạn có chung: khoảng 3 400 cM với cha hoặc mẹ, 850 với anh chị em họ đời thứ nhất, 200 với anh chị em họ đời thứ hai. Hãy chép lại con số do trang web xét nghiệm cung cấp. ¦ CentiMorgan (cM) mengukur DNA yang kamu miliki bersama: sekitar 3 400 cM dengan orang tua, 850 dengan sepupu satu kali, 200 dengan sepupu dua kali. Salin angka yang diberikan situs tes.
+Un long morceau d’ADN en commun (plus de 20 cM) montre souvent une parenté proche et sûre ; beaucoup de petits morceaux peuvent venir d’ancêtres très anciens. ¦ Một đoạn ADN chung dài (trên 20 cM) thường cho thấy quan hệ gần và chắc chắn; nhiều đoạn nhỏ có thể đến từ tổ tiên rất xa xưa. ¦ Satu potongan DNA bersama yang panjang (lebih dari 20 cM) sering menunjukkan kekerabatan dekat dan pasti; banyak potongan kecil bisa berasal dari leluhur yang sangat jauh.
+Relation probable ({cm} cM, {pct} %) ¦ Quan hệ có thể ({cm} cM, {pct} %) ¦ Hubungan yang mungkin ({cm} cM, {pct} %)
+fichier de <b>{name}</b> ¦ tệp của <b>{name}</b> ¦ berkas dari <b>{name}</b>
+{n} de {tool} : chacune devient un groupe (« {tool} 1 »…), retrouvé dans « 🗂️ Groupes ». ¦ {n} từ {tool}: mỗi cụm trở thành một nhóm (“{tool} 1”…), có trong “🗂️ Nhóm”. ¦ {n} dari {tool}: masing-masing menjadi grup (“{tool} 1”…), ada di “🗂️ Grup”.
+⤓ {file} : {n} pour DNA Painter. ¦ ⤓ {file}: {n} cho DNA Painter. ¦ ⤓ {file}: {n} untuk DNA Painter.
+Branche Martin (Bretagne) ¦ Nhánh Martin (Bretagne) ¦ Cabang Martin (Bretagne)
+Supprimer le groupe « {name} » ? (les correspondances restent) ¦ Xoá nhóm “{name}”? (các trùng khớp vẫn giữ lại) ¦ Hapus grup “{name}”? (kecocokan tetap ada)
+{n} entre {lo} et {hi} cM (bornes dans ⚙️ Réglages) ¦ {n} trong khoảng {lo} đến {hi} cM (giới hạn trong ⚙️ Cài đặt) ¦ {n} antara {lo} dan {hi} cM (batas di ⚙️ Pengaturan)
+{n} entre {lo} et {hi} cM pour ce test (bornes dans ⚙️ Réglages) ¦ {n} trong khoảng {lo} đến {hi} cM cho xét nghiệm này (giới hạn trong ⚙️ Cài đặt) ¦ {n} antara {lo} dan {hi} cM untuk tes ini (batas di ⚙️ Pengaturan)
+{base} ; {n} sans « correspondances en commun » notées, donc ignorées. ¦ {base}; {n} không có “trùng khớp chung” được ghi, nên bị bỏ qua. ¦ {base}; {n} tanpa “kecocokan bersama” yang dicatat, jadi diabaikan.
+Créer {n} avec ces couleurs ¦ Tạo {n} với các màu này ¦ Buat {n} dengan warna-warna ini
+Créé par la méthode de Leeds autour de {name} ({cm} cM). ¦ Được tạo bằng phương pháp Leeds quanh {name} ({cm} cM). ¦ Dibuat dengan metode Leeds di sekitar {name} ({cm} cM).
+masculin|inconnu ¦ không rõ ¦ tidak diketahui
+Les groupes (clusters) rassemblent les correspondances qui se partagent entre elles : chaque groupe a souvent un même couple d’ancêtres. Garde de 30 à 600 cM pour éviter les parents trop proches et le bruit. ¦ Các nhóm (cụm) gom những trùng khớp cũng trùng khớp với nhau: mỗi nhóm thường có chung một cặp tổ tiên. Hãy giữ từ 30 đến 600 cM để tránh họ hàng quá gần và nhiễu. ¦ Grup (klaster) mengumpulkan kecocokan yang juga cocok satu sama lain: setiap grup sering punya satu pasangan leluhur yang sama. Pertahankan 30 sampai 600 cM untuk menghindari kerabat yang terlalu dekat dan gangguan.
+{n} entre {lo} et {hi} cM ; {shared} avec des correspondances en commun, {links} de segments. Les très proches parents (au-delà de {hi} cM) sont écartés : ils correspondent à tout le monde. ¦ {n} trong khoảng {lo} đến {hi} cM; {shared} có trùng khớp chung, {links} đoạn. Họ hàng rất gần (trên {hi} cM) bị loại ra: họ trùng khớp với tất cả mọi người. ¦ {n} antara {lo} dan {hi} cM; {shared} dengan kecocokan bersama, {links} segmen. Kerabat yang sangat dekat (di atas {hi} cM) disisihkan: mereka cocok dengan semua orang.
+Grappe {n} ¦ Cụm {n} ¦ Klaster {n}
+{n} correspondances · {lo}–{hi} cM · liens {pct} % ¦ {n} trùng khớp · {lo}–{hi} cM · liên kết {pct} % ¦ {n} kecocokan · {lo}–{hi} cM · tautan {pct} %
+Ancêtre commun encore inconnu (côté {side}) : place une de ces correspondances dans l’arbre (fiche liée), ou ajoute ses noms de famille. ¦ Tổ tiên chung vẫn chưa rõ (bên {side}): hãy đặt một trong các trùng khớp này vào cây (hồ sơ liên kết), hoặc thêm họ của họ. ¦ Leluhur bersama masih belum diketahui (sisi {side}): tempatkan salah satu kecocokan ini di pohon (profil terhubung), atau tambahkan nama keluarganya.
+Ancêtre commun encore inconnu : place une de ces correspondances dans l’arbre (fiche liée), ou ajoute ses noms de famille. ¦ Tổ tiên chung vẫn chưa rõ: hãy đặt một trong các trùng khớp này vào cây (hồ sơ liên kết), hoặc thêm họ của họ. ¦ Leluhur bersama masih belum diketahui: tempatkan salah satu kecocokan ini di pohon (profil terhubung), atau tambahkan nama keluarganya.
+Groupe automatique : {n} correspondances qui se correspondent entre elles. ¦ Nhóm tự động: {n} trùng khớp cùng trùng khớp với nhau. ¦ Grup otomatis: {n} kecocokan yang saling cocok.
+{n} groupes créés ou mis à jour. ¦ Đã tạo hoặc cập nhật {n} nhóm. ¦ {n} grup dibuat atau diperbarui.
+{n} groupe créé ou mis à jour. ¦ Đã tạo hoặc cập nhật {n} nhóm. ¦ {n} grup dibuat atau diperbarui.
+noms : {list} ¦ họ: {list} ¦ nama keluarga: {list}
+lieux : {list} ¦ địa điểm: {list} ¦ tempat: {list}
+grappe {n} ¦ cụm {n} ¦ klaster {n}
+plus long segment {cm} cM ¦ đoạn dài nhất {cm} cM ¦ segmen terpanjang {cm} cM
+À {pct} % une parenté en ligne directe (parent, grand-parent, arrière-grand-parent) : regarde d’abord ta proche famille. ¦ {pct} % khả năng là quan hệ trực hệ (cha mẹ, ông bà, cụ): hãy xem gia đình gần của bạn trước. ¦ {pct} % kemungkinan hubungan garis langsung (orang tua, kakek-nenek, buyut): lihat dulu keluarga dekatmu.
+Dans la <b>grappe {n}</b>. ¦ Trong <b>cụm {n}</b>. ¦ Di <b>klaster {n}</b>.
+Dans la <b>grappe {n}</b> — ancêtres communs de la grappe : {couple}. ¦ Trong <b>cụm {n}</b> — tổ tiên chung của cụm: {couple}. ¦ Di <b>klaster {n}</b> — leluhur bersama klaster: {couple}.
+Dans la <b>grappe {n}</b> — ancêtres probables de la grappe : {couple}. ¦ Trong <b>cụm {n}</b> — tổ tiên có thể của cụm: {couple}. ¦ Di <b>klaster {n}</b> — leluhur yang mungkin dari klaster: {couple}.
+🎯 Déjà placée dans l’arbre : ancêtres communs {couple}. ¦ 🎯 Đã đặt trong cây: tổ tiên chung {couple}. ¦ 🎯 Sudah ditempatkan di pohon: leluhur bersama {couple}.
+{couple} (probable) ¦ {couple} (có thể) ¦ {couple} (mungkin)
+{name} — chr {c} : {a}–{b} Mb, {cm} cM ¦ {name} — nst {c}: {a}–{b} Mb, {cm} cM ¦ {name} — kr {c}: {a}–{b} Mb, {cm} cM
+{pct} % de l’ADN (sur {total} cM) ¦ {pct} % ADN (trên {total} cM) ¦ {pct} % DNA (dari {total} cM)
+Pour aller plus loin (outils externes, en anglais) : <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. L’endogamie (villages isolés, communautés fermées) et l’implexe gonflent les cM : une relation paraît alors plus proche qu’elle ne l’est. ¦ Để tìm hiểu thêm (công cụ bên ngoài, bằng tiếng Anh): <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. Nội hôn (làng biệt lập, cộng đồng khép kín) và trùng lặp tổ tiên làm tăng cM: khi đó một quan hệ trông gần hơn thực tế. ¦ Untuk lebih jauh (alat eksternal, dalam bahasa Inggris): <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. Endogami (desa terpencil, komunitas tertutup) dan implex menggelembungkan cM: hubungan lalu tampak lebih dekat dari sebenarnya.
+Les « origines ethniques » données par les sociétés : des <b>estimations</b>, qui changent d’une société à l’autre et d’une mise à jour à l’autre. Elles ne remplacent pas les registres. ¦ “Nguồn gốc dân tộc” do các công ty đưa ra: là những <b>ước tính</b>, thay đổi từ công ty này sang công ty khác và từ lần cập nhật này sang lần khác. Chúng không thay thế được sổ sách. ¦ “Asal etnis” yang diberikan perusahaan: <b>perkiraan</b>, yang berubah dari satu perusahaan ke perusahaan lain dan dari satu pembaruan ke pembaruan berikutnya. Itu tidak menggantikan register.
+Couleur « {name} » ¦ Màu “{name}” ¦ Warna “{name}”
+👥 Correspondance ADN « {name} » : <b>{cm} cM</b> ¦ 👥 Trùng khớp ADN “{name}”: <b>{cm} cM</b> ¦ 👥 Kecocokan DNA “{name}”: <b>{cm} cM</b>
+ancêtre commun : {name} ¦ tổ tiên chung: {name} ¦ leluhur bersama: {name}
+Code civil, article 16-10 (examen des caractéristiques génétiques : seulement à des fins médicales ou de recherche scientifique, avec consentement écrit) ¦ Bộ luật Dân sự Pháp, điều 16-10 (xét nghiệm đặc điểm di truyền: chỉ nhằm mục đích y tế hoặc nghiên cứu khoa học, có sự đồng ý bằng văn bản) ¦ Kitab Undang-Undang Hukum Perdata Prancis, pasal 16-10 (pemeriksaan ciri genetik: hanya untuk tujuan medis atau riset ilmiah, dengan persetujuan tertulis)
+Code pénal, article 226-28-1 (demander un examen génétique hors des cas prévus par la loi : 3 750 € d’amende) ¦ Bộ luật Hình sự Pháp, điều 226-28-1 (yêu cầu xét nghiệm di truyền ngoài các trường hợp luật định: phạt 3 750 €) ¦ Kitab Undang-Undang Hukum Pidana Prancis, pasal 226-28-1 (meminta tes genetik di luar kasus yang diatur undang-undang: denda 3 750 €)
+Loi n° 2021-1017 du 2 août 2021 relative à la bioéthique, article 16 (nouvelle rédaction de l’article 16-10) ¦ Luật Pháp số 2021-1017 ngày 2 tháng 8 năm 2021 về đạo đức sinh học, điều 16 (văn bản mới của điều 16-10) ¦ Undang-Undang Prancis no. 2021-1017 tanggal 2 Agustus 2021 tentang bioetika, pasal 16 (rumusan baru pasal 16-10)
+Code civil sur Légifrance (articles 16-10 à 16-13 : examen génétique, empreintes génétiques, filiation) ¦ Bộ luật Dân sự trên Légifrance (điều 16-10 đến 16-13: xét nghiệm di truyền, dấu vân tay di truyền, quan hệ cha mẹ con) ¦ Kitab Undang-Undang Hukum Perdata di Légifrance (pasal 16-10 sampai 16-13: tes genetik, sidik jari genetik, hubungan keturunan)
+Code pénal sur Légifrance (articles 226-25 à 226-30) ¦ Bộ luật Hình sự trên Légifrance (điều 226-25 đến 226-30) ¦ Kitab Undang-Undang Hukum Pidana di Légifrance (pasal 226-25 sampai 226-30)
+Code de la santé publique sur Légifrance (articles L1131-1 et suivants : examens génétiques) ¦ Bộ luật Y tế công cộng trên Légifrance (điều L1131-1 và tiếp theo: xét nghiệm di truyền) ¦ Kitab Undang-Undang Kesehatan Masyarakat di Légifrance (pasal L1131-1 dan seterusnya: tes genetik)
+CNIL : les données génétiques sont des données « sensibles » (RGPD, article 9) ¦ CNIL: dữ liệu di truyền là dữ liệu “nhạy cảm” (GDPR, điều 9) ¦ CNIL: data genetik adalah data “sensitif” (GDPR, pasal 9)
+Personne : mets « À contacter » dans le suivi d’une correspondance. ¦ Không ai cả: hãy đặt “Cần liên hệ” trong phần theo dõi của một trùng khớp. ¦ Tidak ada: atur “Perlu dihubungi” di pemantauan sebuah kecocokan.
+J’ai lu cette mise en garde (elle ne s’affichera plus en haut des autres pages). ¦ Tôi đã đọc lời cảnh báo này (nó sẽ không hiện ở đầu các trang khác nữa). ¦ Saya sudah membaca peringatan ini (tidak akan muncul lagi di atas halaman lain).
+La mise en garde reviendra en haut des pages. ¦ Lời cảnh báo sẽ hiện lại ở đầu các trang. ¦ Peringatan akan muncul lagi di atas halaman.
+Modifier le test ¦ Sửa xét nghiệm ¦ Ubah tes
+Société / origine ¦ Công ty / nguồn gốc ¦ Perusahaan / asal
+Géré par ¦ Do ai quản lý ¦ Dikelola oleh
+Fichier brut (où il est rangé) ¦ Tệp thô (nơi lưu trữ) ¦ Berkas mentah (tempat disimpan)
+(qui a accepté quoi, cadre médical ou de recherche, pays…) ¦ (ai đã đồng ý điều gì, khuôn khổ y tế hay nghiên cứu, quốc gia…) ¦ (siapa menyetujui apa, konteks medis atau riset, negara…)
+(une ligne par région : « Bretagne ; 42 ») ¦ (mỗi dòng một vùng: “Bretagne ; 42”) ¦ (satu baris per wilayah: “Bretagne ; 42”)
+Supprimer ce test, ses correspondances et ses segments ? ¦ Xoá xét nghiệm này, các trùng khớp và các đoạn của nó? ¦ Hapus tes ini beserta kecocokan dan segmennya?
+Supprimer le test ¦ Xoá xét nghiệm ¦ Hapus tes
+Un test par personne et par société : type, haplogroupes, origines estimées, marqueurs. ¦ Mỗi người mỗi công ty một xét nghiệm: loại, nhóm đơn bội, nguồn gốc ước tính, dấu chỉ. ¦ Satu tes per orang dan per perusahaan: jenis, haplogrup, perkiraan asal, penanda.
+Aucun test ADN pour l’instant ¦ Chưa có xét nghiệm ADN nào ¦ Belum ada tes DNA
+Ajoute ton test (Ancestry, MyHeritage, 23andMe…) pour y ranger tes correspondances. ¦ Hãy thêm xét nghiệm của bạn (Ancestry, MyHeritage, 23andMe…) để xếp các trùng khớp vào đó. ¦ Tambahkan tesmu (Ancestry, MyHeritage, 23andMe…) untuk menyimpan kecocokanmu di dalamnya.
+⤒ Importer (CSV) ¦ ⤒ Nhập (CSV) ¦ ⤒ Impor (CSV)
+Ajoute d’abord un test dans « 🧬 Mes tests » : les correspondances s’y rattachent. ¦ Trước tiên hãy thêm một xét nghiệm trong “🧬 Xét nghiệm của tôi”: các trùng khớp thuộc về nó. ¦ Tambahkan dulu tes di “🧬 Tes saya”: kecocokan terhubung ke sana.
+Nom, nom de famille, lieu, note… ¦ Tên, họ, địa điểm, ghi chú… ¦ Nama, nama keluarga, tempat, catatan…
+cM min ¦ cM tối thiểu ¦ cM min
+cM max ¦ cM tối đa ¦ cM maks
+Ajouter au groupe… ¦ Thêm vào nhóm… ¦ Tambah ke grup…
+Retirer du groupe… ¦ Gỡ khỏi nhóm… ¦ Lepas dari grup…
+Aucune correspondance pour ces filtres. ¦ Không có trùng khớp nào cho các bộ lọc này. ¦ Tidak ada kecocokan untuk saringan ini.
+cM : les plus nombreux ¦ cM: nhiều nhất trước ¦ cM: terbanyak dulu
+cM : les moins nombreux ¦ cM: ít nhất trước ¦ cM: tersedikit dulu
+Nom : A → Z ¦ Tên: A → Z ¦ Nama: A → Z
+Nom : Z → A ¦ Tên: Z → A ¦ Nama: Z → A
+Segments : les plus nombreux ¦ Đoạn: nhiều nhất trước ¦ Segmen: terbanyak dulu
+Les plus récemment modifiées ¦ Sửa gần đây nhất ¦ Paling baru diubah
+Les plus anciennement modifiées ¦ Sửa lâu nhất ¦ Paling lama diubah
+Supprimer les correspondances ¦ Xoá các trùng khớp ¦ Hapus kecocokan
+Nom (tel que sur le site) ¦ Tên (như trên trang web) ¦ Nama (seperti di situs)
+Relation proposée par la société ¦ Quan hệ do công ty đề xuất ¦ Hubungan yang disarankan perusahaan
+Ancêtre(s) commun(s) (MRCA) ¦ Tổ tiên chung (MRCA) ¦ Leluhur bersama (MRCA)
+Jean Martin et Marie Durand ¦ Jean Martin và Marie Durand ¦ Jean Martin dan Marie Durand
+Étoiles (0 à 5) ¦ Sao (0 đến 5) ¦ Bintang (0 sampai 5)
+Aucun groupe (« 🗂️ Groupes »). ¦ Không có nhóm nào (“🗂️ Nhóm”). ¦ Tidak ada grup (“🗂️ Grup”).
+Noms de famille en commun ¦ Họ chung ¦ Nama keluarga bersama
+Lieux en commun ¦ Địa điểm chung ¦ Tempat bersama
+Arbre en ligne (adresse) ¦ Cây trực tuyến (địa chỉ) ¦ Pohon daring (alamat)
+Taille de son arbre ¦ Kích thước cây của họ ¦ Ukuran pohonnya
+(une par ligne ou séparées par ; — sert à la méthode de Leeds) ¦ (mỗi dòng một mục hoặc cách nhau bằng ; — dùng cho phương pháp Leeds) ¦ (satu per baris atau dipisah dengan ; — dipakai metode Leeds)
+Supprimer la correspondance ¦ Xoá trùng khớp ¦ Hapus kecocokan
+CSV de la société ¦ CSV của công ty ¦ CSV perusahaan
+Le fichier CSV exporté par la société (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch, LivingDNA) ou par un outil (DNA Painter, Genetic Affairs : AutoCluster, AutoTree) : la liste des correspondances ou les segments. Les colonnes sont reconnues toutes seules. Un fichier ADN brut (tes SNP) n’est jamais importé. ¦ Tệp CSV do công ty xuất (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch, LivingDNA) hoặc do một công cụ xuất (DNA Painter, Genetic Affairs: AutoCluster, AutoTree): danh sách trùng khớp hoặc các đoạn. Các cột được nhận ra tự động. Tệp ADN thô (các SNP của bạn) không bao giờ được nhập. ¦ Berkas CSV yang diekspor perusahaan (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch, LivingDNA) atau oleh alat (DNA Painter, Genetic Affairs: AutoCluster, AutoTree): daftar kecocokan atau segmen. Kolom dikenali otomatis. Berkas DNA mentah (SNP-mu) tidak pernah diimpor.
+Fichier compressé : ouvre-le d’abord sur l’ordinateur et choisis le fichier .csv qu’il contient. (Un fichier ADN brut, lui, ne s’importe jamais.) ¦ Tệp nén: hãy mở nó trên máy tính trước rồi chọn tệp .csv bên trong. (Còn tệp ADN thô thì không bao giờ được nhập.) ¦ Berkas terkompresi: buka dulu di komputer lalu pilih berkas .csv di dalamnya. (Berkas DNA mentah tidak pernah diimpor.)
+C’est un fichier compressé (.zip) : ouvre-le d’abord et choisis le .csv qu’il contient. ¦ Đây là tệp nén (.zip): hãy mở nó trước rồi chọn tệp .csv bên trong. ¦ Ini berkas terkompresi (.zip): buka dulu lalu pilih .csv di dalamnya.
+Colonnes non reconnues : il faut au moins le nom et les cM (correspondances), ou le chromosome, le début et la fin (segments). ¦ Không nhận ra các cột: cần ít nhất tên và cM (trùng khớp), hoặc nhiễm sắc thể, điểm đầu và điểm cuối (đoạn). ¦ Kolom tidak dikenali: perlu setidaknya nama dan cM (kecocokan), atau kromosom, awal dan akhir (segmen).
+Une correspondance déjà présente (même nom, même test) est mise à jour : tes notes, groupes, suivi et fiche liée sont gardés. ¦ Một trùng khớp đã có (cùng tên, cùng xét nghiệm) sẽ được cập nhật: ghi chú, nhóm, theo dõi và hồ sơ liên kết của bạn được giữ lại. ¦ Kecocokan yang sudah ada (nama sama, tes sama) diperbarui: catatan, grup, pemantauan, dan profil terhubungmu tetap disimpan.
+Remplacer tous les segments de ce test ¦ Thay tất cả các đoạn của xét nghiệm này ¦ Ganti semua segmen tes ini
+Choisis au moins la colonne du nom (« Colonnes reconnues »). ¦ Hãy chọn ít nhất cột tên (“Cột đã nhận ra”). ¦ Pilih setidaknya kolom nama (“Kolom yang dikenali”).
+Choisis les colonnes du chromosome, du début et de la fin (« Colonnes reconnues »). ¦ Hãy chọn các cột nhiễm sắc thể, điểm đầu và điểm cuối (“Cột đã nhận ra”). ¦ Pilih kolom kromosom, awal dan akhir (“Kolom yang dikenali”).
+Ce test n’a pas encore de segments à exporter : importe-les d’abord (⤒ Importer des segments). ¦ Xét nghiệm này chưa có đoạn nào để xuất: hãy nhập chúng trước (⤒ Nhập các đoạn). ¦ Tes ini belum punya segmen untuk diekspor: impor dulu (⤒ Impor segmen).
+Modifier le groupe ¦ Sửa nhóm ¦ Ubah grup
+Couple d’ancêtres supposé ¦ Cặp tổ tiên giả định ¦ Pasangan leluhur yang diduga
+Supprimer le groupe ¦ Xoá nhóm ¦ Hapus grup
+Groupes et méthode de Leeds ¦ Nhóm và phương pháp Leeds ¦ Grup dan metode Leeds
+Range tes correspondances par branche. La méthode de Leeds regroupe les cousins de 2e et 3e degré (≈ 90 à 400 cM) qui se correspondent entre eux : chaque groupe pointe souvent vers un de tes 8 arrière-grands-parents… à condition d’avoir noté leurs « correspondances en commun ». ¦ Hãy xếp các trùng khớp của bạn theo nhánh. Phương pháp Leeds gom các anh chị em họ đời thứ 2 và thứ 3 (≈ 90 đến 400 cM) trùng khớp với nhau: mỗi nhóm thường chỉ về một trong 8 cụ của bạn… với điều kiện bạn đã ghi “trùng khớp chung” của họ. ¦ Susun kecocokanmu per cabang. Metode Leeds mengelompokkan sepupu dua dan tiga kali (≈ 90 sampai 400 cM) yang saling cocok: setiap grup sering mengarah ke salah satu dari 8 buyutmu… asalkan kamu sudah mencatat “kecocokan bersama” mereka.
+Aucun groupe pour l’instant ¦ Chưa có nhóm nào ¦ Belum ada grup
+Méthode de Leeds automatique ¦ Phương pháp Leeds tự động ¦ Metode Leeds otomatis
+Pas encore de groupe trouvé : ouvre tes correspondances proches et remplis « Correspondances en commun » (ou importe une colonne « Shared matches »). ¦ Chưa tìm thấy nhóm nào: hãy mở các trùng khớp gần và điền “Trùng khớp chung” (hoặc nhập một cột “Shared matches”). ¦ Belum ada grup ditemukan: buka kecocokan dekatmu dan isi “Kecocokan bersama” (atau impor kolom “Shared matches”).
+Les correspondances qui se correspondent entre elles forment des grappes : chaque grappe descend en général d’un même couple d’ancêtres. Le calcul utilise les « correspondances en commun » notées ou importées, et les segments qui se chevauchent sur un même chromosome. ¦ Các trùng khớp cùng trùng khớp với nhau tạo thành cụm: mỗi cụm thường xuất phát từ cùng một cặp tổ tiên. Phép tính dùng các “trùng khớp chung” đã ghi hoặc đã nhập, và các đoạn chồng lấp trên cùng một nhiễm sắc thể. ¦ Kecocokan yang saling cocok membentuk klaster: setiap klaster biasanya berasal dari satu pasangan leluhur. Perhitungannya memakai “kecocokan bersama” yang dicatat atau diimpor, dan segmen yang tumpang tindih pada kromosom yang sama.
+(ou mettre à jour ceux déjà créés) ¦ (hoặc cập nhật những nhóm đã tạo) ¦ (atau perbarui yang sudah dibuat)
+Pas encore de grappe : il faut des « correspondances en commun » (fiche d’une correspondance, ou colonne « Shared matches » à l’import) ou des segments (🧩 Chromosomes). ¦ Chưa có cụm nào: cần có “trùng khớp chung” (trong hồ sơ của một trùng khớp, hoặc cột “Shared matches” khi nhập) hoặc các đoạn (🧩 Nhiễm sắc thể). ¦ Belum ada klaster: perlu “kecocokan bersama” (di profil sebuah kecocokan, atau kolom “Shared matches” saat impor) atau segmen (🧩 Kromosom).
+Pour une correspondance (ou un nombre de cM), les relations possibles et les couples d’ancêtres de ton arbre par lesquels elle descend probablement, du plus au moins probable. On s’appuie sur les cM (Shared cM Project), le côté, les noms et lieux en commun, la grappe et l’âge : c’est une piste à vérifier, jamais une preuve. ¦ Với một trùng khớp (hoặc một số cM), các quan hệ có thể và các cặp tổ tiên trong cây của bạn mà người đó có lẽ là con cháu, từ khả năng cao đến thấp. Dựa vào cM (Shared cM Project), bên nội/ngoại, họ và địa điểm chung, cụm và tuổi: đây là một hướng cần kiểm tra, không bao giờ là bằng chứng. ¦ Untuk sebuah kecocokan (atau sejumlah cM), hubungan yang mungkin dan pasangan leluhur di pohonmu yang kemungkinan menurunkannya, dari yang paling sampai paling tidak mungkin. Dasarnya cM (Shared cM Project), sisi, nama keluarga dan tempat bersama, klaster dan usia: ini petunjuk untuk diperiksa, bukan bukti.
+Placer un cousin dans l’arbre ¦ Đặt một người họ hàng vào cây ¦ Tempatkan sepupu di pohon
+— ou les cM à la main ci-dessous — ¦ — hoặc nhập cM bằng tay bên dưới — ¦ — atau cM secara manual di bawah —
+Ce test n’est relié à aucune fiche : relie-le à la personne testée (🧬 Mes tests) pour que l’arbre serve au placement. ¦ Xét nghiệm này chưa liên kết với hồ sơ nào: hãy liên kết nó với người được xét nghiệm (🧬 Xét nghiệm của tôi) để dùng cây cho việc xếp chỗ. ¦ Tes ini belum terhubung ke profil mana pun: hubungkan ke orang yang dites (🧬 Tes saya) agar pohon bisa dipakai untuk penempatan.
+Lecture de l’arbre… ¦ Đang đọc cây… ¦ Membaca pohon…
+Ensuite : cherche les descendants de ce couple (« Descendance » dans Graphiques), compare avec l’arbre de la correspondance, et note-la dans la fiche (Ancêtre commun, Fiche liée). ¦ Tiếp theo: hãy tìm con cháu của cặp này (“Con cháu” trong Biểu đồ), so sánh với cây của người trùng khớp, rồi ghi vào hồ sơ (Tổ tiên chung, Hồ sơ liên kết). ¦ Selanjutnya: cari keturunan pasangan ini (“Keturunan” di Grafik), bandingkan dengan pohon kecocokan, lalu catat di profil (Leluhur bersama, Profil terhubung).
+Indices ¦ Manh mối ¦ Petunjuk
+Retenir ¦ Giữ lại ¦ Simpan
+Noté dans la correspondance (Ancêtre commun, côté). ¦ Đã ghi trong trùng khớp (Tổ tiên chung, bên). ¦ Dicatat di kecocokan (Leluhur bersama, sisi).
+Le « navigateur de chromosomes » : où chaque correspondance partage de l’ADN avec toi. Des segments qui se chevauchent viennent peut-être du même ancêtre (triangulation — à confirmer : chacun doit aussi correspondre avec l’autre sur ce segment). ¦ “Trình duyệt nhiễm sắc thể”: nơi mỗi trùng khớp có chung ADN với bạn. Các đoạn chồng lấp có thể đến từ cùng một tổ tiên (phép tam giác — cần xác nhận: mỗi người cũng phải trùng khớp với người kia trên đoạn đó). ¦ “Penjelajah kromosom”: tempat setiap kecocokan berbagi DNA denganmu. Segmen yang tumpang tindih mungkin berasal dari leluhur yang sama (triangulasi — perlu dipastikan: masing-masing juga harus cocok dengan yang lain pada segmen itu).
+Le fichier CSV que DNA Painter sait lire (« Paint a new match » → importer) ¦ Tệp CSV mà DNA Painter đọc được (“Paint a new match” → nhập) ¦ Berkas CSV yang bisa dibaca DNA Painter (“Paint a new match” → impor)
+⤒ Importer des segments (CSV) ¦ ⤒ Nhập các đoạn (CSV) ¦ ⤒ Impor segmen (CSV)
+⤓ Exporter pour DNA Painter ¦ ⤓ Xuất cho DNA Painter ¦ ⤓ Ekspor untuk DNA Painter
+Segment ¦ Đoạn ¦ Segmen
+Chevauchements (triangulation possible) ¦ Chồng lấp (có thể tam giác hoá) ¦ Tumpang tindih (mungkin triangulasi)
+Chr ¦ Nst ¦ Kr
+De (Mb) ¦ Từ (Mb) ¦ Dari (Mb)
+À (Mb) ¦ Đến (Mb) ¦ Sampai (Mb)
+Correspondance 1 ¦ Trùng khớp 1 ¦ Kecocokan 1
+Correspondance 2 ¦ Trùng khớp 2 ¦ Kecocokan 2
+Aucun pour l’instant. ¦ Chưa có. ¦ Belum ada.
+Segment refusé : vérifie le chromosome, et que la fin est après le début. ¦ Đoạn bị từ chối: hãy kiểm tra nhiễm sắc thể, và điểm cuối phải sau điểm đầu. ¦ Segmen ditolak: periksa kromosomnya, dan pastikan akhir setelah awal.
+Combien de centimorgans partagés pour quelle relation ? Valeurs indicatives d’après le Shared cM Project (Blaine Bettinger, version 4, 2020) : une moyenne et une fourchette observées sur des milliers de cas réels. Une même valeur peut convenir à plusieurs relations. ¦ Bao nhiêu centimorgan chung cho quan hệ nào? Giá trị tham khảo theo Shared cM Project (Blaine Bettinger, phiên bản 4, 2020): một trung bình và một khoảng quan sát trên hàng nghìn trường hợp thực tế. Cùng một giá trị có thể hợp với nhiều quan hệ. ¦ Berapa centimorgan bersama untuk hubungan apa? Nilai perkiraan dari Shared cM Project (Blaine Bettinger, versi 4, 2020): rata-rata dan rentang yang diamati dari ribuan kasus nyata. Nilai yang sama bisa cocok untuk beberapa hubungan.
+Ex. 230 ¦ VD: 230 ¦ Mis. 230
+Aucune relation connue pour cette valeur (au-delà de 3 720 cM, c’est soi-même ou un vrai jumeau). ¦ Không có quan hệ nào đã biết cho giá trị này (trên 3 720 cM là chính bạn hoặc một người sinh đôi cùng trứng). ¦ Tidak ada hubungan yang dikenal untuk nilai ini (di atas 3 720 cM, itu dirimu sendiri atau kembar identik).
+Tableau de référence ¦ Bảng tham khảo ¦ Tabel referensi
+Fourchette ¦ Khoảng ¦ Rentang
+D’après ton arbre : de qui viennent l’ADN-Y (père du père du père…), l’ADN mitochondrial (mère de la mère…) et l’ADN-X d’une personne. Utile pour savoir qui faire tester, et pour lire un haplogroupe ou une correspondance sur le X. ¦ Theo cây của bạn: ADN-Y (cha của cha của cha…), ADN ty thể (mẹ của mẹ…) và ADN-X của một người đến từ đâu. Hữu ích để biết nên cho ai xét nghiệm, và để đọc một nhóm đơn bội hoặc một trùng khớp trên X. ¦ Dari pohonmu: asal DNA-Y (ayah dari ayah dari ayah…), DNA mitokondria (ibu dari ibu…) dan DNA-X seseorang. Berguna untuk tahu siapa yang perlu dites, dan untuk membaca haplogrup atau kecocokan pada X.
+Seuls les hommes ont un ADN-Y. Une femme n’a pas d’ADN-Y : ce sont ceux de son père, de ses frères ou d’un cousin du même nom qui le portent. ¦ Chỉ nam giới mới có ADN-Y. Phụ nữ không có ADN-Y: chính cha, anh em trai hoặc một người anh em họ cùng họ của cô ấy mang nó. ¦ Hanya laki-laki yang punya DNA-Y. Perempuan tidak punya DNA-Y: yang membawanya adalah ayahnya, saudara laki-lakinya, atau sepupu dengan nama keluarga yang sama.
+Pas de père connu dans l’arbre. ¦ Không có cha được biết trong cây. ¦ Tidak ada ayah yang diketahui di pohon.
+Tous ces hommes ont (presque) le même chromosome Y : un homme vivant de cette lignée peut le faire tester. ¦ Tất cả những người đàn ông này có (gần như) cùng một nhiễm sắc thể Y: một người đàn ông còn sống của dòng này có thể đi xét nghiệm. ¦ Semua laki-laki ini punya kromosom Y yang (hampir) sama: laki-laki yang masih hidup dari garis ini bisa mengetesnya.
+Pas de mère connue dans l’arbre. ¦ Không có mẹ được biết trong cây. ¦ Tidak ada ibu yang diketahui di pohon.
+Transmis par les mères à tous leurs enfants ; seules les filles le transmettent à leur tour. ¦ Được người mẹ truyền cho tất cả các con; chỉ con gái mới truyền tiếp. ¦ Diwariskan ibu kepada semua anaknya; hanya anak perempuan yang mewariskannya lagi.
+Un homme reçoit son X de sa mère seulement. Un père ne transmet que le X qu’il tient de sa mère : certains ancêtres ne peuvent donc pas avoir donné d’X. {n} : ¦ Nam giới chỉ nhận X từ mẹ. Người cha chỉ truyền X mà ông nhận từ mẹ mình: vì vậy một số tổ tiên không thể đã truyền X. {n}: ¦ Laki-laki menerima X hanya dari ibunya. Ayah hanya mewariskan X yang ia terima dari ibunya: jadi beberapa leluhur tidak mungkin memberikan X. {n}:
+Une femme reçoit un X de chaque parent. Un père ne transmet que le X qu’il tient de sa mère : certains ancêtres ne peuvent donc pas avoir donné d’X. {n} : ¦ Nữ giới nhận một X từ mỗi bên cha mẹ. Người cha chỉ truyền X mà ông nhận từ mẹ mình: vì vậy một số tổ tiên không thể đã truyền X. {n}: ¦ Perempuan menerima satu X dari masing-masing orang tua. Ayah hanya mewariskan X yang ia terima dari ibunya: jadi beberapa leluhur tidak mungkin memberikan X. {n}:
+Aucune estimation : ajoute-les dans un test (« 🧬 Mes tests » → Origines estimées). ¦ Không có ước tính: hãy thêm chúng vào một xét nghiệm (“🧬 Xét nghiệm của tôi” → Nguồn gốc ước tính). ¦ Tidak ada perkiraan: tambahkan di sebuah tes (“🧬 Tes saya” → Perkiraan asal).
+Ce que montre l’onglet, dans l’ordre voulu, et comment. ¦ Những gì thẻ này hiển thị, theo thứ tự bạn muốn, và hiển thị thế nào. ¦ Apa yang ditampilkan tab ini, dalam urutan yang kamu mau, dan bagaimana.
+Rubriques de la colonne de gauche ¦ Các mục của cột bên trái ¦ Bagian kolom kiri
+Coche ce que tu veux voir ; ↑ ↓ pour l’ordre (ou glisse la poignée). ¦ Hãy đánh dấu những gì bạn muốn xem; ↑ ↓ để sắp thứ tự (hoặc kéo tay nắm). ¦ Centang yang ingin kamu lihat; ↑ ↓ untuk urutan (atau seret pegangannya).
+Ne montrer que les correspondances d’au moins ¦ Chỉ hiện các trùng khớp có ít nhất ¦ Hanya tampilkan kecocokan minimal
+Lignes affichées à la fois ¦ Số dòng hiển thị mỗi lần ¦ Baris yang ditampilkan sekaligus
+Méthode de Leeds : de ¦ Phương pháp Leeds: từ ¦ Metode Leeds: dari
+Total de cM pour les % (6 800 Ancestry/MyHeritage, 7 400 23andMe) ¦ Tổng cM để tính % (6 800 Ancestry/MyHeritage, 7 400 23andMe) ¦ Total cM untuk % (6 800 Ancestry/MyHeritage, 7 400 23andMe)
+Sauvegarde de l’onglet ¦ Sao lưu thẻ ¦ Cadangan tab
+Les tests, correspondances, segments et groupes sont dans la base (et ses sauvegardes). Tu peux aussi les exporter à part. ¦ Các xét nghiệm, trùng khớp, đoạn và nhóm nằm trong cơ sở dữ liệu (và các bản sao lưu). Bạn cũng có thể xuất chúng riêng. ¦ Tes, kecocokan, segmen dan grup ada di basis data (dan cadangannya). Kamu juga bisa mengekspornya terpisah.
+Fait. ¦ Xong. ¦ Selesai.
+C’est un fichier ADN brut (tes SNP, c’est-à-dire ton génome lettre par lettre) : il n’est jamais importé. Par prudence pour ta vie privée et celle de ta famille, et parce qu’en France un test génétique hors cadre médical ou de recherche est interdit, l’app ne garde que les listes de correspondances et de segments. Exporte plutôt depuis la société la liste des correspondances (matches) ou le navigateur de chromosomes. ¦ Đây là tệp ADN thô (các SNP của bạn, tức là bộ gen của bạn từng chữ một): nó không bao giờ được nhập. Để bảo vệ đời tư của bạn và gia đình, và vì ở Pháp xét nghiệm di truyền ngoài khuôn khổ y tế hay nghiên cứu bị cấm, ứng dụng chỉ giữ danh sách trùng khớp và đoạn. Thay vào đó, hãy xuất từ công ty danh sách trùng khớp (matches) hoặc trình duyệt nhiễm sắc thể. ¦ Ini berkas DNA mentah (SNP-mu, yaitu genommu huruf demi huruf): tidak pernah diimpor. Demi privasimu dan keluargamu, dan karena di Prancis tes genetik di luar konteks medis atau riset dilarang, aplikasi hanya menyimpan daftar kecocokan dan segmen. Sebaiknya ekspor dari perusahaan daftar kecocokan (matches) atau penjelajah kromosom.
+=analysée ¦ đã phân tích ¦ dianalisis
+=visage à nommer ¦ khuôn mặt cần đặt tên ¦ wajah perlu dinamai
+=photo restante ¦ ảnh còn lại ¦ foto tersisa
+=photo sautée ¦ ảnh bị bỏ qua ¦ foto dilewati
+=visage ignoré ¦ khuôn mặt bị bỏ qua ¦ wajah diabaikan
+Impossible de charger le modèle de reconnaissance (connexion internet requise la première fois, ou fichier modifié refusé). ¦ Không tải được mô hình nhận dạng (lần đầu cần kết nối internet, hoặc tệp đã bị sửa nên bị từ chối). ¦ Model pengenalan tidak bisa dimuat (perlu koneksi internet pertama kali, atau berkas yang diubah ditolak).
+Bibliothèque… ¦ Thư viện… ¦ Pustaka…
+Bibliothèque illisible. ¦ Không đọc được thư viện. ¦ Pustaka tidak terbaca.
+Bibliothèque de reconnaissance indisponible. ¦ Thư viện nhận dạng không khả dụng. ¦ Pustaka pengenalan tidak tersedia.
+Repérage des visages… ¦ Đang tìm khuôn mặt… ¦ Mencari wajah…
+Points du visage… ¦ Các điểm trên khuôn mặt… ¦ Titik-titik wajah…
+Empreintes des visages… ¦ Dấu vân khuôn mặt… ¦ Sidik wajah…
+Analyse arrêtée. ¦ Đã dừng phân tích. ¦ Analisis dihentikan.
+Fil de calcul impossible : {err} ¦ Không thể chạy luồng tính toán: {err} ¦ Utas perhitungan tidak bisa dijalankan: {err}
+Le modèle met trop de temps à se charger. ¦ Mô hình tải quá lâu. ¦ Model terlalu lama dimuat.
+le calcul a planté ¦ phép tính bị lỗi ¦ perhitungan macet
+Fil de calcul en erreur. ¦ Luồng tính toán bị lỗi. ¦ Utas perhitungan error.
+Calcul sur la page (plus lent)… ¦ Đang tính trên trang (chậm hơn)… ¦ Menghitung di halaman (lebih lambat)…
+Redémarrage du calcul… ¦ Đang khởi động lại phép tính… ¦ Memulai ulang perhitungan…
+trop longue à analyser (plus de {n} s) ¦ quá lâu để phân tích (hơn {n} s) ¦ terlalu lama untuk dianalisis (lebih dari {n} s)
+Étape 1 : l’app repère les visages sur les photos choisies. Étape 2 : elle propose un nom d’après les visages déjà identifiés. Tout se calcule sur cet ordinateur. ¦ Bước 1: ứng dụng tìm khuôn mặt trên các ảnh đã chọn. Bước 2: ứng dụng đề xuất một tên dựa trên các khuôn mặt đã được nhận diện. Mọi thứ được tính trên máy tính này. ¦ Langkah 1: aplikasi mencari wajah di foto yang dipilih. Langkah 2: aplikasi menyarankan nama berdasarkan wajah yang sudah dikenali. Semua dihitung di komputer ini.
+MÉDIAS · VISAGES ¦ TƯ LIỆU · KHUÔN MẶT ¦ MEDIA · WAJAH
+Visages ¦ Khuôn mặt ¦ Wajah
+Chargement des photos… ¦ Đang tải ảnh… ¦ Memuat foto…
+≈ {time} sur cet ordinateur ¦ ≈ {time} trên máy tính này ¦ ≈ {time} di komputer ini
+environ 1 à 3 s par photo, selon l’ordinateur ¦ khoảng 1 đến 3 s mỗi ảnh, tuỳ máy tính ¦ sekitar 1 sampai 3 s per foto, tergantung komputer
+<b>{n}</b> identifiés ¦ <b>{n}</b> đã nhận diện ¦ <b>{n}</b> dikenali
+<b>{n}</b> identifié ¦ <b>{n}</b> đã nhận diện ¦ <b>{n}</b> dikenali
+{n} identifiés ¦ {n} đã nhận diện ¦ {n} dikenali
+{n} identifié ¦ {n} đã nhận diện ¦ {n} dikenali
+① Trouver les visages ¦ ① Tìm khuôn mặt ¦ ① Cari wajah
+② Qui est-ce ? ¦ ② Đây là ai? ¦ ② Siapa ini?
+Les {n} plus récentes ¦ {n} ảnh mới nhất ¦ {n} terbaru
+{n} à analyser ¦ {n} cần phân tích ¦ {n} untuk dianalisis
+<b>Analyse en pause</b> : {n} sur {total} ({what}). ¦ <b>Đã tạm dừng phân tích</b>: {n} trên {total} ({what}). ¦ <b>Analisis dijeda</b>: {n} dari {total} ({what}).
+analyse|Abandonner ¦ Bỏ ¦ Buang
+Quelles photos analyser ? ¦ Phân tích những ảnh nào? ¦ Foto mana yang dianalisis?
+Sauter les photos déjà analysées ¦ Bỏ qua các ảnh đã phân tích ¦ Lewati foto yang sudah dianalisis
+Analyser {n} ¦ Phân tích {n} ¦ Analisis {n}
+Rien à analyser ici ¦ Không có gì để phân tích ở đây ¦ Tidak ada yang perlu dianalisis di sini
+↻ Réessayer {n} ¦ ↻ Thử lại {n} ¦ ↻ Coba lagi {n}
+Photos avec des visages à nommer ¦ Ảnh có khuôn mặt cần đặt tên ¦ Foto dengan wajah yang perlu dinamai
+Ouvrir {name} ¦ Mở {name} ¦ Buka {name}
+détection simple ¦ nhận diện đơn giản ¦ deteksi sederhana
+Ouvrir et identifier ¦ Mở và nhận diện ¦ Buka dan kenali
+Tous les visages trouvés ont un nom ou ont été ignorés. 👍 ¦ Tất cả khuôn mặt tìm thấy đều đã có tên hoặc đã bị bỏ qua. 👍 ¦ Semua wajah yang ditemukan sudah bernama atau diabaikan. 👍
+Lance une analyse : les photos où l’app trouve des visages apparaîtront ici. ¦ Hãy bắt đầu phân tích: các ảnh mà ứng dụng tìm thấy khuôn mặt sẽ hiện ở đây. ¦ Mulai analisis: foto tempat aplikasi menemukan wajah akan muncul di sini.
+entre 1900 et 1950, vers 1925, 1960… ¦ giữa 1900 và 1950, khoảng 1925, 1960… ¦ antara 1900 dan 1950, sekitar 1925, 1960…
+Les photos marquées avec des visages ¦ Các ảnh được đánh dấu có khuôn mặt ¦ Foto yang ditandai berisi wajah
+photo de la personne, portrait d’une fiche, visages déjà identifiés, étiquette « portrait » ou « visage » ¦ ảnh của người đó, chân dung của một hồ sơ, khuôn mặt đã nhận diện, nhãn “chân dung” hoặc “khuôn mặt” ¦ foto orang itu, potret profil, wajah yang sudah dikenali, label “potret” atau “wajah”
+Les photos affichées dans la liste Médias ¦ Các ảnh hiển thị trong danh sách Tư liệu ¦ Foto yang tampil di daftar Media
+avec ta recherche et tes filtres actuels ¦ với tìm kiếm và bộ lọc hiện tại của bạn ¦ dengan pencarian dan saringanmu saat ini
+Les photos d’une personne ¦ Các ảnh của một người ¦ Foto seseorang
+rattachées à sa fiche ou où elle est identifiée ¦ gắn với hồ sơ của người đó hoặc nơi người đó được nhận diện ¦ terhubung ke profilnya atau tempat ia dikenali
+Les photos d’une étiquette ¦ Các ảnh có một nhãn ¦ Foto dengan sebuah label
+Un album ou un dossier ¦ Một album hoặc một thư mục ¦ Sebuah album atau folder
+Une période ¦ Một khoảng thời gian ¦ Satu periode
+d’après la date de la photo, sinon sa date d’ajout ¦ theo ngày của ảnh, nếu không có thì theo ngày thêm vào ¦ menurut tanggal foto, jika tidak ada menurut tanggal ditambahkan
+les dernières ajoutées ¦ những ảnh mới thêm gần nhất ¦ yang terakhir ditambahkan
+Toutes les photos ¦ Tất cả ảnh ¦ Semua foto
+peut être long : tu peux mettre en pause et reprendre plus tard ¦ có thể lâu: bạn có thể tạm dừng và tiếp tục sau ¦ bisa lama: kamu bisa menjeda dan melanjutkan nanti
+En attendant, nomme les inconnus regroupés (👥). ¦ Trong lúc chờ, hãy đặt tên cho những người lạ đã được gom nhóm (👥). ¦ Sambil menunggu, namai orang tak dikenal yang dikelompokkan (👥).
+Pour avoir des propositions : ouvre quelques photos et identifie les visages à la main (bouton « Identifier » de la visionneuse, ou « Ouvrir et identifier » à l’étape ①), au moins une fois par personne. ¦ Để có đề xuất: hãy mở vài ảnh và nhận diện khuôn mặt bằng tay (nút “Nhận diện” của trình xem ảnh, hoặc “Mở và nhận diện” ở bước ①), ít nhất một lần cho mỗi người. ¦ Untuk mendapat saran: buka beberapa foto dan kenali wajah secara manual (tombol “Kenali” di penampil, atau “Buka dan kenali” di langkah ①), setidaknya sekali per orang.
+Aucun visage trouvé pour l’instant. Commence par l’étape ① : choisis quelques photos et lance l’analyse. ¦ Chưa tìm thấy khuôn mặt nào. Hãy bắt đầu với bước ①: chọn vài ảnh và bắt đầu phân tích. ¦ Belum ada wajah ditemukan. Mulai dengan langkah ①: pilih beberapa foto dan mulai analisis.
+💡 Propositions ¦ 💡 Đề xuất ¦ 💡 Saran
+👥 Inconnus regroupés ¦ 👥 Người lạ đã gom nhóm ¦ 👥 Tak dikenal yang dikelompokkan
+❔ Autres inconnus ¦ ❔ Những người lạ khác ¦ ❔ Tak dikenal lainnya
+✓ Identifiés ¦ ✓ Đã nhận diện ¦ ✓ Dikenali
+✓ Accepter les {n} très probables ¦ ✓ Chấp nhận {n} đề xuất rất có khả năng ¦ ✓ Terima {n} yang sangat mungkin
+visage|probable ¦ có thể ¦ mungkin
+ressemblance {pct} % ¦ giống {pct} % ¦ kemiripan {pct} %
+ou {name} ? ¦ hay {name}? ¦ atau {name}?
+✓ Oui ¦ ✓ Đúng ¦ ✓ Ya
+Quelqu’un d’autre… ¦ Người khác… ¦ Orang lain…
+Pas un visage, ou personne à ne pas nommer ¦ Không phải khuôn mặt, hoặc người không cần đặt tên ¦ Bukan wajah, atau orang yang tidak perlu dinamai
+Aucune proposition pour l’instant : analyse plus de photos, ou identifie plus de visages à la main. ¦ Chưa có đề xuất nào: hãy phân tích thêm ảnh, hoặc nhận diện thêm khuôn mặt bằng tay. ¦ Belum ada saran: analisis lebih banyak foto, atau kenali lebih banyak wajah secara manual.
+<b>{n} visages</b> qui se ressemblent, sur {p} photos. ¦ <b>{n} khuôn mặt</b> giống nhau, trên {p} ảnh. ¦ <b>{n} wajah</b> yang mirip, di {p} foto.
+Nommer… ¦ Đặt tên… ¦ Namai…
+Demander à la famille ¦ Hỏi gia đình ¦ Tanya keluarga
+Personne n’est encore identifié. ¦ Chưa có ai được nhận diện. ¦ Belum ada yang dikenali.
+⏸ En pause (la photo en cours se termine) ¦ ⏸ Đã tạm dừng (ảnh đang xử lý sẽ xong) ¦ ⏸ Dijeda (foto yang sedang diproses diselesaikan)
+{s} s par photo · reste ≈ {left} ¦ {s} s mỗi ảnh · còn ≈ {left} ¦ {s} s per foto · sisa ≈ {left}
+vitesse : on mesure… ¦ tốc độ: đang đo… ¦ kecepatan: sedang diukur…
+■ Arrêter ¦ ■ Dừng ¦ ■ Hentikan
+Calcul sur la page (le fil à part n’a pas pu démarrer) : un peu plus lent. ¦ Đang tính trên trang (luồng riêng không khởi động được): hơi chậm hơn. ¦ Menghitung di halaman (utas terpisah tidak bisa dimulai): sedikit lebih lambat.
+Modèle de reconnaissance indisponible ({why}). Détection simple du navigateur : les visages sont repérés, mais sans proposition de nom. ¦ Mô hình nhận dạng không khả dụng ({why}). Nhận diện đơn giản của trình duyệt: khuôn mặt được tìm thấy, nhưng không có đề xuất tên. ¦ Model pengenalan tidak tersedia ({why}). Deteksi sederhana peramban: wajah ditemukan, tetapi tanpa saran nama.
+Chargement du modèle… ¦ Đang tải mô hình… ¦ Memuat model…
+Chargement du modèle : {step} ¦ Đang tải mô hình: {step} ¦ Memuat model: {step}
+■ Analyse arrêtée : {n}{more}. ¦ ■ Đã dừng phân tích: {n}{more}. ¦ ■ Analisis dihentikan: {n}{more}.
+✓ Analyse finie : {n}{more}. ¦ ✓ Phân tích xong: {n}{more}. ¦ ✓ Analisis selesai: {n}{more}.
+Il reste {n} : « ▶ Reprendre » quand tu veux. ¦ Còn {n}: “▶ Tiếp tục” khi bạn muốn. ¦ Sisa {n}: “▶ Lanjutkan” kapan pun kamu mau.
+■ Analyse arrêtée. ¦ ■ Đã dừng phân tích. ¦ ■ Analisis dihentikan.
+{n} : tu pourras reprendre. ¦ {n}: bạn có thể tiếp tục sau. ¦ {n}: kamu bisa melanjutkan nanti.
+Visage ignoré ¦ Khuôn mặt bị bỏ qua ¦ Wajah diabaikan
+photos de {name} ¦ ảnh của {name} ¦ foto {name}
+photos sautées ¦ ảnh bị bỏ qua ¦ foto dilewati
+Identifié : {name} ¦ Đã nhận diện: {name} ¦ Dikenali: {name}
+{n} (certitude « probable ») ¦ {n} (mức chắc chắn “có thể”) ¦ {n} (kepastian “mungkin”)
+Qui est-ce ? ({n} visages) ¦ Đây là ai? ({n} khuôn mặt) ¦ Siapa ini? ({n} wajah)
+Certitude ¦ Mức chắc chắn ¦ Kepastian
+Certaine ¦ Chắc chắn ¦ Pasti
+Possible ¦ Có thể ¦ Mungkin
+Choisis… ¦ Chọn… ¦ Pilih…
+Hier et aujourd’hui ¦ Xưa và nay ¦ Dulu dan sekarang
+Nom de la comparaison ¦ Tên của phép so sánh ¦ Nama perbandingan
+Enregistrer la comparaison (reliée aux deux photos et aux personnes) ¦ Lưu phép so sánh (liên kết với cả hai ảnh và những người trong ảnh) ¦ Simpan perbandingan (terhubung ke kedua foto dan orang-orangnya)
+A — l’image ancienne ¦ A — hình ảnh cũ ¦ A — gambar lama
+B — la photo d’aujourd’hui ¦ B — ảnh ngày nay ¦ B — foto masa kini
+Photo A ¦ Ảnh A ¦ Foto A
+Photo B ¦ Ảnh B ¦ Foto B
+La photo A ¦ Ảnh A ¦ Foto A
+La photo B ¦ Ảnh B ¦ Foto B
+la photo A ¦ ảnh A ¦ foto A
+La photo « {name} » n’a pas pu être ouverte. ¦ Không mở được ảnh “{name}”. ¦ Foto “{name}” tidak bisa dibuka.
+Choisis la photo B à droite → ¦ Hãy chọn ảnh B ở bên phải → ¦ Pilih foto B di sebelah kanan →
+Choisis la photo A à droite → ¦ Hãy chọn ảnh A ở bên phải → ¦ Pilih foto A di sebelah kanan →
+Clique <b>{what}</b> (à ta gauche sur l’écran). ¦ Hãy bấm <b>{what}</b> (bên trái màn hình của bạn). ¦ Klik <b>{what}</b> (di sebelah kiri layarmu).
+Échap pour arrêter. ¦ Esc để dừng. ¦ Esc untuk berhenti.
+Clique sur la photo <b>{side}</b> : {what}. ¦ Hãy bấm vào ảnh <b>{side}</b>: {what}. ¦ Klik pada foto <b>{side}</b>: {what}.
+Aucun visage trouvé sur la photo {side} : pose les yeux en deux clics. ¦ Không tìm thấy khuôn mặt nào trên ảnh {side}: hãy đặt hai mắt bằng hai lần bấm. ¦ Tidak ada wajah ditemukan di foto {side}: tandai mata dengan dua klik.
+Le modèle de visages n’a pas pu être chargé. ¦ Không tải được mô hình khuôn mặt. ¦ Model wajah tidak bisa dimuat.
+Pose les yeux en deux clics par photo. ¦ Hãy đặt hai mắt bằng hai lần bấm trên mỗi ảnh. ¦ Tandai mata dengan dua klik per foto.
+Pas encore de ressemblance calculée pour ces deux photos. ¦ Chưa tính độ giống cho hai ảnh này. ¦ Belum ada kemiripan yang dihitung untuk kedua foto ini.
+« ✨ Repérer les yeux tout seul » la calcule (modèle de visages sur cet ordinateur), ou lance <b>👤 Visages</b> sur ces photos (Listes → Médias). ¦ “✨ Tự tìm mắt” sẽ tính nó (mô hình khuôn mặt trên máy tính này), hoặc hãy chạy <b>👤 Khuôn mặt</b> trên các ảnh này (Danh sách → Tư liệu). ¦ “✨ Cari mata otomatis” menghitungnya (model wajah di komputer ini), atau jalankan <b>👤 Wajah</b> pada foto-foto ini (Daftar → Media).
+Calculée par le modèle de visages, sur cet ordinateur ({from}). L’âge, la lumière, l’angle et la qualité des photos changent beaucoup le résultat ; un air de famille (parent, frère, sœur) peut aussi donner une ressemblance forte. À confirmer par les actes. ¦ Được tính bởi mô hình khuôn mặt, trên máy tính này ({from}). Tuổi, ánh sáng, góc chụp và chất lượng ảnh làm kết quả thay đổi nhiều; nét giống trong gia đình (cha mẹ, anh em trai, chị em gái) cũng có thể cho độ giống cao. Cần xác nhận bằng giấy tờ. ¦ Dihitung oleh model wajah, di komputer ini ({from}). Usia, cahaya, sudut, dan kualitas foto sangat mengubah hasilnya; kemiripan keluarga (orang tua, saudara laki-laki, saudara perempuan) juga bisa memberi kemiripan tinggi. Perlu dipastikan dengan akta.
+visages repérés à l’instant ¦ khuôn mặt vừa được tìm thấy ¦ wajah yang baru ditemukan
+visages trouvés par 👤 Visages ¦ khuôn mặt do 👤 Khuôn mặt tìm thấy ¦ wajah yang ditemukan 👤 Wajah
+Rideau ¦ Màn kéo ¦ Tirai
+Part de B ¦ Phần của B ¦ Porsi B
+La photo B, à poser à côté de « {name} ». ¦ Ảnh B, đặt cạnh “{name}”. ¦ Foto B, untuk diletakkan di samping “{name}”.
+Une photo de cette personne ; ensuite, la photo à comparer. ¦ Một ảnh của người này; sau đó là ảnh cần so sánh. ¦ Satu foto orang ini; lalu foto yang akan dibandingkan.
+Comparer deux photos (ressemblance, même personne à deux âges…) ¦ So sánh hai ảnh (độ giống, cùng một người ở hai độ tuổi…) ¦ Bandingkan dua foto (kemiripan, orang yang sama di dua usia…)
+Ressemblance très forte — ce n’est pas une preuve ¦ Rất giống — đây không phải là bằng chứng ¦ Sangat mirip — ini bukan bukti
+Ressemblance forte — ce n’est pas une preuve ¦ Giống nhiều — đây không phải là bằng chứng ¦ Cukup mirip — ini bukan bukti
+Ressemblance moyenne — ce n’est pas une preuve ¦ Giống vừa phải — đây không phải là bằng chứng ¦ Kemiripan sedang — ini bukan bukti
+Ressemblance faible — ce n’est pas une preuve ¦ Ít giống — đây không phải là bằng chứng ¦ Kemiripan lemah — ini bukan bukti
+Affichage des deux photos ¦ Hiển thị hai ảnh ¦ Tampilan kedua foto
+Zoomer et déplacer les deux photos ensemble ¦ Phóng to và di chuyển cả hai ảnh cùng lúc ¦ Perbesar dan geser kedua foto bersamaan
+Zoomer ¦ Phóng to ¦ Perbesar
+Toute la photo ¦ Toàn bộ ảnh ¦ Seluruh foto
+Toute la photo (double-clic) ¦ Toàn bộ ảnh (bấm đúp) ¦ Seluruh foto (klik ganda)
+Les deux photos : molette pour zoomer, glisser pour déplacer, double-clic pour revoir toute la photo ¦ Cả hai ảnh: lăn chuột để phóng to, kéo để di chuyển, bấm đúp để xem lại toàn bộ ảnh ¦ Kedua foto: roda untuk memperbesar, seret untuk menggeser, klik ganda untuk melihat seluruh foto lagi
+Les deux photos ¦ Cả hai ảnh ¦ Kedua foto
+Mettre A à la place de B et B à la place de A ¦ Đặt A vào chỗ B và B vào chỗ A ¦ Taruh A di tempat B dan B di tempat A
+⇄ Échanger A et B ¦ ⇄ Đổi chỗ A và B ¦ ⇄ Tukar A dan B
+Caler la photo d’aujourd’hui ¦ Căn chỉnh ảnh ngày nay ¦ Selaraskan foto masa kini
+Clique deux mêmes repères sur chaque photo (le haut du clocher, le coin d’un toit…) : la photo d’aujourd’hui est tournée et mise à la même taille. ¦ Hãy bấm vào hai mốc giống nhau trên mỗi ảnh (đỉnh tháp chuông, góc mái nhà…): ảnh ngày nay sẽ được xoay và chỉnh cùng kích thước. ¦ Klik dua penanda yang sama di setiap foto (puncak menara lonceng, sudut atap…): foto masa kini diputar dan disamakan ukurannya.
+Deux clics sur la photo A, puis les deux mêmes repères sur la photo B ¦ Hai lần bấm trên ảnh A, rồi hai mốc giống vậy trên ảnh B ¦ Dua klik di foto A, lalu dua penanda yang sama di foto B
+📌 Poser 2 repères par photo ¦ 📌 Đặt 2 mốc trên mỗi ảnh ¦ 📌 Pasang 2 penanda per foto
+Caler sur les repères ¦ Căn theo các mốc ¦ Selaraskan dengan penanda
+✕ Retirer les repères ¦ ✕ Gỡ các mốc ¦ ✕ Lepas penanda
+Ajuster à la main ¦ Chỉnh bằng tay ¦ Atur secara manual
+Glisser sur l’image déplace seulement la photo d’aujourd’hui ¦ Kéo trên hình chỉ di chuyển ảnh ngày nay ¦ Menyeret di gambar hanya menggeser foto masa kini
+Glisser déplace la photo B ¦ Kéo sẽ di chuyển ảnh B ¦ Menyeret menggeser foto B
+Les yeux (alignement) ¦ Hai mắt (căn chỉnh) ¦ Mata (penyelarasan)
+Les deux visages sont mis à la même taille, les yeux à la même hauteur : la comparaison est bien plus juste. ¦ Hai khuôn mặt được chỉnh cùng kích thước, hai mắt cùng độ cao: phép so sánh chính xác hơn nhiều. ¦ Kedua wajah disamakan ukurannya, mata di ketinggian yang sama: perbandingan jauh lebih adil.
+✨ Repérer les yeux tout seul ¦ ✨ Tự tìm mắt ¦ ✨ Cari mata otomatis
+Clique l’œil gauche puis l’œil droit sur chaque photo ¦ Hãy bấm mắt trái rồi mắt phải trên mỗi ảnh ¦ Klik mata kiri lalu mata kanan di setiap foto
+👁 Poser les yeux (2 clics par photo) ¦ 👁 Đặt mắt (2 lần bấm mỗi ảnh) ¦ 👁 Tandai mata (2 klik per foto)
+Aligner sur les yeux ¦ Căn theo hai mắt ¦ Selaraskan dengan mata
+✕ Retirer les yeux posés ¦ ✕ Gỡ hai mắt đã đặt ¦ ✕ Lepas tanda mata
+Prises sur les deux photos ; ajoute ou retire qui tu veux. ¦ Lấy từ cả hai ảnh; hãy thêm hoặc gỡ bất kỳ ai bạn muốn. ¦ Diambil dari kedua foto; tambah atau lepas siapa pun yang kamu mau.
+Ce que tu remarques : forme du nez, des oreilles, implantation des cheveux, grain de beauté, âge supposé… ¦ Những gì bạn nhận thấy: hình dáng mũi, tai, chân tóc, nốt ruồi, tuổi ước đoán… ¦ Yang kamu perhatikan: bentuk hidung, telinga, garis rambut, tahi lalat, perkiraan usia…
+Fondu : part de la photo B ; rideau : place du rideau ¦ Hoà trộn: phần của ảnh B; màn kéo: vị trí của màn kéo ¦ Pudar: porsi foto B; tirai: posisi tirai
+Choisis une photo (image). ¦ Hãy chọn một ảnh (hình ảnh). ¦ Pilih sebuah foto (gambar).
+C’est déjà l’autre photo : choisis-en une autre. ¦ Đây đã là ảnh kia rồi: hãy chọn ảnh khác. ¦ Itu sudah foto yang satunya: pilih yang lain.
+Choisis les deux photos à comparer ¦ Hãy chọn hai ảnh cần so sánh ¦ Pilih dua foto yang akan dibandingkan
+Deux portraits : la même personne à deux âges, deux personnes qu’on croit parentes… ¦ Hai bức chân dung: cùng một người ở hai độ tuổi, hai người được cho là có họ hàng… ¦ Dua potret: orang yang sama di dua usia, dua orang yang diduga bersaudara…
+🖼 Choisir la photo A ¦ 🖼 Chọn ảnh A ¦ 🖼 Pilih foto A
+Pose d’abord deux repères sur chaque photo (📌). ¦ Trước tiên hãy đặt hai mốc trên mỗi ảnh (📌). ¦ Pasang dulu dua penanda di setiap foto (📌).
+Pose d’abord les yeux sur les deux photos (✨ tout seul, ou 👁 deux clics par photo). ¦ Trước tiên hãy đặt mắt trên cả hai ảnh (✨ tự động, hoặc 👁 hai lần bấm mỗi ảnh). ¦ Tandai dulu mata di kedua foto (✨ otomatis, atau 👁 dua klik per foto).
+le repère 1 sur l’image ancienne (A) ¦ mốc 1 trên hình ảnh cũ (A) ¦ penanda 1 di gambar lama (A)
+le repère 2 sur l’image ancienne (A) ¦ mốc 2 trên hình ảnh cũ (A) ¦ penanda 2 di gambar lama (A)
+le même repère 1 sur la photo d’aujourd’hui (B) ¦ cùng mốc 1 trên ảnh ngày nay (B) ¦ penanda 1 yang sama di foto masa kini (B)
+le même repère 2 sur la photo d’aujourd’hui (B) ¦ cùng mốc 2 trên ảnh ngày nay (B) ¦ penanda 2 yang sama di foto masa kini (B)
+l’œil de gauche de la photo A ¦ mắt bên trái của ảnh A ¦ mata kiri di foto A
+l’œil de droite de la photo A ¦ mắt bên phải của ảnh A ¦ mata kanan di foto A
+l’œil de gauche de la photo B ¦ mắt bên trái của ảnh B ¦ mata kiri di foto B
+l’œil de droite de la photo B ¦ mắt bên phải của ảnh B ¦ mata kanan di foto B
+Choisis d’abord les deux photos. ¦ Trước tiên hãy chọn hai ảnh. ¦ Pilih dulu kedua foto.
+Repères non posés : rien n’a changé. ¦ Chưa đặt mốc: không có gì thay đổi. ¦ Penanda belum dipasang: tidak ada yang berubah.
+Yeux non posés : rien n’a changé. ¦ Chưa đặt mắt: không có gì thay đổi. ¦ Mata belum ditandai: tidak ada yang berubah.
+Repères posés : la photo d’aujourd’hui est calée sur l’ancienne. ¦ Đã đặt mốc: ảnh ngày nay đã được căn theo ảnh cũ. ¦ Penanda dipasang: foto masa kini diselaraskan dengan yang lama.
+Yeux posés : les deux visages sont alignés. ¦ Đã đặt mắt: hai khuôn mặt đã được căn thẳng hàng. ¦ Mata ditandai: kedua wajah sudah selaras.
+Le modèle de visages n’est pas disponible ici : pose les yeux en deux clics par photo. ¦ Mô hình khuôn mặt không có ở đây: hãy đặt mắt bằng hai lần bấm trên mỗi ảnh. ¦ Model wajah tidak tersedia di sini: tandai mata dengan dua klik per foto.
+Le modèle de visages (≈ 13 Mo, sur cet ordinateur seulement) se charge une fois, au premier clic. ¦ Mô hình khuôn mặt (≈ 13 MB, chỉ trên máy tính này) được tải một lần, ở lần bấm đầu tiên. ¦ Model wajah (≈ 13 MB, hanya di komputer ini) dimuat sekali, pada klik pertama.
+Visages trouvés : les yeux sont alignés. ¦ Đã tìm thấy khuôn mặt: hai mắt đã được căn thẳng hàng. ¦ Wajah ditemukan: mata sudah diselaraskan.
+Le modèle de visages n’a pas pu être chargé (il faut internet la première fois) : pose les yeux en deux clics par photo. ¦ Không tải được mô hình khuôn mặt (lần đầu cần internet): hãy đặt mắt bằng hai lần bấm trên mỗi ảnh. ¦ Model wajah tidak bisa dimuat (perlu internet pertama kali): tandai mata dengan dua klik per foto.
+Choisis les deux photos. ¦ Hãy chọn hai ảnh. ¦ Pilih kedua foto.
+Choisis les deux photos avant d’enregistrer. ¦ Hãy chọn hai ảnh trước khi lưu. ¦ Pilih kedua foto sebelum menyimpan.
+Les derniers changements de la comparaison ne sont pas enregistrés. ¦ Những thay đổi mới nhất của phép so sánh chưa được lưu. ¦ Perubahan terakhir pada perbandingan belum disimpan.
+C’est la même photo : choisis-en une autre. ¦ Đây là cùng một ảnh: hãy chọn ảnh khác. ¦ Ini foto yang sama: pilih yang lain.
+comparaison de photos ¦ so sánh ảnh ¦ perbandingan foto
+Deux photos ¦ Hai ảnh ¦ Dua foto
+=autre déplacement ¦ chuyến đi khác ¦ perjalanan lain
+=déplacement ¦ chuyến đi ¦ perjalanan
+=personne vivante ou confidentielle ¦ người còn sống hoặc bảo mật ¦ orang yang masih hidup atau rahasia
+=lieu de la famille ¦ địa điểm của gia đình ¦ tempat keluarga
+=couche importée ¦ lớp đã nhập ¦ lapisan diimpor
+=couche ¦ lớp ¦ lapisan
+{n} jours ({w} semaines) ¦ {n} ngày ({w} tuần) ¦ {n} hari ({w} minggu)
+Il faut environ {dur} pour aller de {from} à {to} ({how}, ≈ {what}). ¦ Cần khoảng {dur} để đi từ {from} đến {to} ({how}, ≈ {what}). ¦ Perlu sekitar {dur} untuk pergi dari {from} ke {to} ({how}, ≈ {what}).
+Il faut environ {dur} pour aller de {from} à {to} en {year} ({how}, ≈ {what}). ¦ Cần khoảng {dur} để đi từ {from} đến {to} vào năm {year} ({how}, ≈ {what}). ¦ Perlu sekitar {dur} untuk pergi dari {from} ke {to} pada {year} ({how}, ≈ {what}).
+Il fallait environ {dur} pour aller de {from} à {to} en {year} ({how}, ≈ {what}). ¦ Năm {year}, cần khoảng {dur} để đi từ {from} đến {to} ({how}, ≈ {what}). ¦ Pada {year} perlu sekitar {dur} untuk pergi dari {from} ke {to} ({how}, ≈ {what}).
+{km} sur l’eau ¦ {km} trên mặt nước ¦ {km} di air
+{km} de voie ¦ {km} đường ray ¦ {km} rel
+{km} de route ¦ {km} đường bộ ¦ {km} jalan
+À pied ¦ Đi bộ ¦ Jalan kaki
+à pied ¦ đi bộ ¦ jalan kaki
+À cheval ¦ Cưỡi ngựa ¦ Berkuda
+à cheval ¦ cưỡi ngựa ¦ berkuda
+En diligence ¦ Bằng xe ngựa chở khách ¦ Dengan kereta kuda
+en diligence ¦ bằng xe ngựa chở khách ¦ dengan kereta kuda
+Bateau (rivière) ¦ Thuyền (sông) ¦ Perahu (sungai)
+en bateau sur la rivière ¦ bằng thuyền trên sông ¦ dengan perahu di sungai
+Bateau (mer) ¦ Tàu (biển) ¦ Kapal (laut)
+en bateau ¦ bằng tàu thuỷ ¦ dengan kapal
+En train ¦ Bằng tàu hoả ¦ Dengan kereta api
+en train ¦ bằng tàu hoả ¦ dengan kereta api
+4 à 5 km/h, 8 heures de marche par jour ¦ 4 đến 5 km/h, 8 giờ đi bộ mỗi ngày ¦ 4 sampai 5 km/jam, 8 jam berjalan per hari
+au pas et au trot, en ménageant sa monture (un courrier qui change de cheval aux relais va deux fois plus loin) ¦ đi bước và chạy nước kiệu, giữ sức cho ngựa (người đưa thư đổi ngựa ở các trạm thì đi xa gấp đôi) ¦ berjalan dan berderap, menghemat tenaga kuda (kurir yang berganti kuda di pos-pos bisa dua kali lebih jauh)
+coches puis diligences et malles-poste ; on roule de plus en plus la nuit ¦ xe ngựa, rồi xe ngựa chở khách và xe thư; ngày càng đi nhiều vào ban đêm ¦ kereta, lalu kereta kuda penumpang dan kereta pos; makin sering berjalan di malam hari
+coche d’eau, halage, puis bateaux à vapeur ¦ thuyền chở khách đường sông, kéo thuyền dọc bờ, rồi tàu hơi nước ¦ perahu penumpang sungai, penarikan dari tepi, lalu kapal uap
+à la voile jusque vers 1840, puis à la vapeur ¦ đi thuyền buồm đến khoảng năm 1840, sau đó bằng hơi nước ¦ dengan layar sampai sekitar 1840, lalu dengan uap
+selon les lignes ouvertes : grandes lignes de 1840 à 1860, petites lignes jusque vers 1910 ¦ tuỳ theo các tuyến đã mở: tuyến chính từ 1840 đến 1860, tuyến nhánh đến khoảng 1910 ¦ tergantung jalur yang sudah dibuka: jalur utama dari 1840 sampai 1860, jalur cabang sampai sekitar 1910
+par la route ¦ bằng đường bộ ¦ lewat jalan darat
+par la rivière ¦ bằng đường sông ¦ lewat sungai
+par la mer ¦ bằng đường biển ¦ lewat laut
+par le rail ¦ bằng đường sắt ¦ lewat rel
+Fernand Braudel, « Civilisation matérielle, économie et capitalisme » (1979) et « L’identité de la France » (1986) : à pied, 30 à 40 km par jour ; à cheval, 50 à 60 km par jour pour un voyageur qui garde sa monture. ¦ Fernand Braudel, “Civilisation matérielle, économie et capitalisme” (1979) và “L’identité de la France” (1986): đi bộ 30 đến 40 km mỗi ngày; cưỡi ngựa 50 đến 60 km mỗi ngày đối với người giữ nguyên một con ngựa. ¦ Fernand Braudel, “Civilisation matérielle, économie et capitalisme” (1979) dan “L’identité de la France” (1986): jalan kaki, 30 sampai 40 km per hari; berkuda, 50 sampai 60 km per hari bagi pelancong yang memakai kuda yang sama.
+Règlements militaires (XVIIIᵉ–XIXᵉ s.) : l’étape ordinaire d’une troupe à pied est de 24 à 28 km par jour ; un marcheur seul fait davantage. ¦ Quy định quân sự (thế kỷ XVIII–XIX): chặng hành quân thường ngày của bộ binh là 24 đến 28 km; một người đi bộ một mình đi được xa hơn. ¦ Peraturan militer (abad ke-18–19): perjalanan harian biasa pasukan pejalan kaki adalah 24 sampai 28 km; pejalan kaki sendirian menempuh lebih jauh.
+Guy Arbellot, « La grande mutation des routes de France au milieu du XVIIIᵉ siècle », Annales ESC, 1973, et « Atlas de la Révolution française », t. 1 « Routes et communications » (1987) : les temps de parcours depuis Paris sont presque divisés par deux entre 1765 et 1780 (turgotines). ¦ Guy Arbellot, “La grande mutation des routes de France au milieu du XVIIIᵉ siècle”, Annales ESC, 1973, và “Atlas de la Révolution française”, tập 1 “Routes et communications” (1987): thời gian đi từ Paris gần như giảm một nửa từ 1765 đến 1780 (xe turgotine). ¦ Guy Arbellot, “La grande mutation des routes de France au milieu du XVIIIᵉ siècle”, Annales ESC, 1973, dan “Atlas de la Révolution française”, jil. 1 “Routes et communications” (1987): waktu tempuh dari Paris hampir berkurang separuh antara 1765 dan 1780 (turgotine).
+Christophe Studeny, « L’invention de la vitesse. France, XVIIIᵉ–XXᵉ siècle » (Gallimard, 1995) : diligences des Messageries roulant jour et nuit vers 1830, malles-poste à près de 10 km/h vers 1845. ¦ Christophe Studeny, “L’invention de la vitesse. France, XVIIIᵉ–XXᵉ siècle” (Gallimard, 1995): xe ngựa của hãng Messageries chạy cả ngày lẫn đêm vào khoảng 1830, xe thư đạt gần 10 km/h vào khoảng 1845. ¦ Christophe Studeny, “L’invention de la vitesse. France, XVIIIᵉ–XXᵉ siècle” (Gallimard, 1995): kereta kuda Messageries berjalan siang dan malam sekitar 1830, kereta pos hampir 10 km/jam sekitar 1845.
+François Caron, « Histoire des chemins de fer en France », t. 1 (1997) : première ligne de voyageurs en 1837 (Paris – Saint-Germain), grandes lignes ouvertes de 1840 à 1860, environ 40 km/h de moyenne arrêts compris vers 1860. ¦ François Caron, “Histoire des chemins de fer en France”, tập 1 (1997): tuyến chở khách đầu tiên năm 1837 (Paris – Saint-Germain), các tuyến chính mở từ 1840 đến 1860, tốc độ trung bình khoảng 40 km/h kể cả lúc dừng vào khoảng 1860. ¦ François Caron, “Histoire des chemins de fer en France”, jil. 1 (1997): jalur penumpang pertama pada 1837 (Paris – Saint-Germain), jalur utama dibuka dari 1840 sampai 1860, rata-rata sekitar 40 km/jam termasuk berhenti sekitar 1860.
+Traversées de l’Atlantique Nord : 30 à 45 jours à la voile ; 12 à 14 jours en vapeur vers 1860 ; 6 à 7 jours vers 1900 ; 4 à 5 jours pour les grands paquebots des années 1930. ¦ Vượt Bắc Đại Tây Dương: 30 đến 45 ngày bằng thuyền buồm; 12 đến 14 ngày bằng tàu hơi nước vào khoảng 1860; 6 đến 7 ngày vào khoảng 1900; 4 đến 5 ngày với các tàu khách lớn những năm 1930. ¦ Penyeberangan Atlantik Utara: 30 sampai 45 hari dengan layar; 12 sampai 14 hari dengan kapal uap sekitar 1860; 6 sampai 7 hari sekitar 1900; 4 sampai 5 hari untuk kapal penumpang besar tahun 1930-an.
+Coches d’eau et halage : 20 à 40 km par jour en remontant, davantage en descendant ; premiers bateaux à vapeur sur la Saône et le Rhône vers 1830. ¦ Thuyền chở khách đường sông và kéo thuyền: 20 đến 40 km mỗi ngày khi đi ngược dòng, nhiều hơn khi xuôi dòng; tàu hơi nước đầu tiên trên sông Saône và Rhône vào khoảng 1830. ¦ Perahu penumpang sungai dan penarikan: 20 sampai 40 km per hari ke hulu, lebih jauh ke hilir; kapal uap pertama di Saône dan Rhône sekitar 1830.
+réglé ¦ đã chỉnh ¦ diatur
+Vitesse réglée par toi ¦ Tốc độ do bạn chỉnh ¦ Kecepatan diatur olehmu
+Pas avant {year} ¦ Không trước năm {year} ¦ Tidak sebelum {year}
+km/j ¦ km/ngày ¦ km/hari
+{name} : kilomètres par jour ¦ {name}: số kilômét mỗi ngày ¦ {name}: kilometer per hari
+Détour {how} ¦ Đường vòng {how} ¦ Jalan memutar {how}
+Vitesses de trajet enregistrées ¦ Đã lưu tốc độ di chuyển ¦ Kecepatan perjalanan tersimpan
+Vitesses remises comme au départ ¦ Tốc độ đã được đặt lại như ban đầu ¦ Kecepatan dikembalikan seperti semula
+Tulle, Brive… ¦ Tulle, Brive… ¦ Tulle, Brive…
+Paris… ¦ Paris… ¦ Paris…
+Un des deux lieux n’a pas de position sur la carte ({name}) : place-le d’abord. ¦ Một trong hai địa điểm chưa có vị trí trên bản đồ ({name}): hãy đặt nó trước. ¦ Salah satu dari dua tempat belum punya posisi di peta ({name}): tempatkan dulu.
+À vol d’oiseau : <b>{km}</b> ¦ Theo đường chim bay: <b>{km}</b> ¦ Garis lurus: <b>{km}</b>
+Je relis ses événements… ¦ Đang đọc lại các sự kiện của người đó… ¦ Membaca peristiwanya…
+Au total, environ <b>{km}</b> à vol d’oiseau d’un lieu de vie à l’autre ({n}). ¦ Tổng cộng, khoảng <b>{km}</b> theo đường chim bay từ nơi sống này đến nơi sống khác ({n}). ¦ Totalnya, sekitar <b>{km}</b> garis lurus dari satu tempat tinggal ke tempat berikutnya ({n}).
+Distance parcourue ¦ Quãng đường đã đi ¦ Jarak yang ditempuh
+Par jour ¦ Mỗi ngày ¦ Per hari
+⚙️ Vitesses et sources ¦ ⚙️ Tốc độ và nguồn ¦ ⚙️ Kecepatan dan sumber
+Les vitesses suivent l’époque (ordres de grandeur pour la France et l’Europe de l’Ouest). Écris une autre distance par jour pour un moyen ; vide = selon l’époque. ¦ Tốc độ theo thời kỳ (con số ước lượng cho Pháp và Tây Âu). Hãy nhập một quãng đường mỗi ngày khác cho một phương tiện; để trống = theo thời kỳ. ¦ Kecepatan mengikuti zaman (perkiraan untuk Prancis dan Eropa Barat). Ketik jarak harian lain untuk satu sarana; kosong = menurut zaman.
+Le détour : la route n’est jamais droite. 1,25 = 25 % de plus que la distance à vol d’oiseau. ¦ Đường vòng: con đường không bao giờ thẳng. 1,25 = dài hơn 25 % so với đường chim bay. ¦ Jalan memutar: jalan tidak pernah lurus. 1,25 = 25 % lebih dari jarak garis lurus.
+📍 Entre deux lieux ¦ 📍 Giữa hai địa điểm ¦ 📍 Antara dua tempat
+👤 Le long d’une vie ¦ 👤 Dọc theo một cuộc đời ¦ 👤 Sepanjang satu kehidupan
+Année du voyage ¦ Năm của chuyến đi ¦ Tahun perjalanan
+Distances et temps de trajet ¦ Khoảng cách và thời gian di chuyển ¦ Jarak dan waktu tempuh
+Distances et temps de trajet… ¦ Khoảng cách và thời gian di chuyển… ¦ Jarak dan waktu tempuh…
+Choisis le lieu de départ et le lieu d’arrivée ¦ Hãy chọn nơi đi và nơi đến ¦ Pilih tempat berangkat dan tempat tiba
+Choisis une personne pour suivre ses déplacements ¦ Hãy chọn một người để theo dõi các chuyến đi của người đó ¦ Pilih seseorang untuk mengikuti perjalanannya
+Pas de déplacement : il faut au moins deux lieux placés sur la carte ¦ Không có chuyến đi: cần ít nhất hai địa điểm đã đặt trên bản đồ ¦ Tidak ada perjalanan: perlu setidaknya dua tempat di peta
+Pas de déplacement entre deux lieux placés ¦ Không có chuyến đi giữa hai địa điểm đã đặt ¦ Tidak ada perjalanan antara dua tempat yang ditempatkan
+🧭 Ses déplacements ¦ 🧭 Các chuyến đi của người đó ¦ 🧭 Perjalanannya
+🧭 Calculer un trajet… ¦ 🧭 Tính một hành trình… ¦ 🧭 Hitung perjalanan…
+📜 Ancienne (parchemin) ¦ 📜 Cổ (giấy da) ¦ 📜 Kuno (perkamen)
+🎖 État-major (XIXᵉ) ¦ 🎖 Bản đồ tham mưu (thế kỷ XIX) ¦ 🎖 Peta staf (abad ke-19)
+🌙 Bleu nuit et or ¦ 🌙 Xanh đêm và vàng kim ¦ 🌙 Biru malam dan emas
+🎯 Autour des lieux ¦ 🎯 Quanh các địa điểm ¦ 🎯 Di sekitar tempat-tempat
+CARTE · À IMPRIMER ¦ BẢN ĐỒ · ĐỂ IN ¦ PETA · UNTUK DICETAK
+Grande carte à imprimer ¦ Bản đồ lớn để in ¦ Peta besar untuk dicetak
+Grande carte à imprimer… ¦ Bản đồ lớn để in… ¦ Peta besar untuk dicetak…
+Grande carte ¦ Bản đồ lớn ¦ Peta besar
+Cartouche ¦ Khung tiêu đề ¦ Kartus
+Les BORIE ¦ Gia đình BORIE ¦ Keluarga BORIE
+Ce qu’on met dessus ¦ Những gì đặt lên bản đồ ¦ Yang dimuat di atasnya
+● Lieux de naissance ¦ ● Nơi sinh ¦ ● Tempat kelahiran
+◆ Lieux de mariage ¦ ◆ Nơi kết hôn ¦ ◆ Tempat pernikahan
+✝ Lieux de décès ¦ ✝ Nơi mất ¦ ✝ Tempat kematian
+Migrations (naissance → décès) ¦ Di cư (sinh → mất) ¦ Migrasi (kelahiran → kematian)
+➜ Migrations (naissance → décès) ¦ ➜ Di cư (sinh → mất) ¦ ➜ Migrasi (kelahiran → kematian)
+👤 Portraits en médaillon ¦ 👤 Chân dung trong khung tròn ¦ 👤 Potret dalam medalion
+Une branche (ses ancêtres seulement) ¦ Một nhánh (chỉ tổ tiên của người đó) ¦ Satu cabang (hanya leluhurnya)
+Toute la famille ¦ Cả gia đình ¦ Seluruh keluarga
+Habillage ¦ Trang trí ¦ Hiasan
+Cartouche (titre, famille, dates) ¦ Khung tiêu đề (tiêu đề, gia đình, ngày tháng) ¦ Kartus (judul, keluarga, tanggal)
+Jamais de personne vivante ni de fiche confidentielle sur cette carte. Le fond est dessiné par l’app (Natural Earth, IGN), sans tuiles d’Internet : il reste net à toutes les tailles. ¦ Không bao giờ có người còn sống hay hồ sơ bảo mật trên bản đồ này. Nền được ứng dụng tự vẽ (Natural Earth, IGN), không dùng ô bản đồ từ Internet: nó luôn sắc nét ở mọi kích thước. ¦ Tidak pernah ada orang yang masih hidup atau profil rahasia di peta ini. Latarnya digambar oleh aplikasi (Natural Earth, IGN), tanpa ubin dari internet: tetap tajam di semua ukuran.
+Les {name} ¦ Gia đình {name} ¦ Keluarga {name}
+Notre famille ¦ Gia đình chúng ta ¦ Keluarga kita
+Les lieux de la famille ¦ Các địa điểm của gia đình ¦ Tempat-tempat keluarga
+Fond : {src} ¦ Nền: {src} ¦ Latar: {src}
+Natural Earth (domaine public) · IGN Admin Express (Licence Ouverte) ¦ Natural Earth (phạm vi công cộng) · IGN Admin Express (Giấy phép Mở) ¦ Natural Earth (domain publik) · IGN Admin Express (Lisensi Terbuka)
+Natural Earth (domaine public) ¦ Natural Earth (phạm vi công cộng) ¦ Natural Earth (domain publik)
+dessin impossible ¦ không vẽ được ¦ tidak bisa digambar
+image trop grande pour ce navigateur ¦ hình ảnh quá lớn đối với trình duyệt này ¦ gambar terlalu besar untuk peramban ini
+{n} laissées de côté ¦ {n} bị bỏ ra ngoài ¦ {n} disisihkan
+{n} laissée de côté ¦ {n} bị bỏ ra ngoài ¦ {n} disisihkan
+image : jusqu’à {w} × {h} px ({dpi} ppp) ¦ hình ảnh: tối đa {w} × {h} px ({dpi} ppp) ¦ gambar: hingga {w} × {h} px ({dpi} dpi)
+Aucun lieu placé sur la carte pour ces choix : place les lieux de la famille (fiche du lieu → position) ou coche d’autres événements. ¦ Không có địa điểm nào trên bản đồ cho các lựa chọn này: hãy đặt các địa điểm của gia đình (hồ sơ địa điểm → vị trí) hoặc đánh dấu các sự kiện khác. ¦ Tidak ada tempat di peta untuk pilihan ini: tempatkan tempat-tempat keluarga (profil tempat → posisi) atau centang peristiwa lain.
+Qualité ramenée à {dpi} ppp (taille de l’affiche, mémoire du navigateur). ¦ Chất lượng giảm xuống {dpi} ppp (kích thước áp phích, bộ nhớ trình duyệt). ¦ Kualitas diturunkan ke {dpi} dpi (ukuran poster, memori peramban).
+{paper}, prêt pour l’imprimeur ¦ {paper}, sẵn sàng cho nhà in ¦ {paper}, siap untuk percetakan
+haute définition ¦ độ phân giải cao ¦ resolusi tinggi
+📍 Lieux de la famille en épingles ¦ 📍 Địa điểm của gia đình dạng ghim ¦ 📍 Tempat keluarga sebagai pin
+Glisse pour tourner, molette pour zoomer. Au clavier : ← → pour tourner, ↑ ↓ pour pencher, + et − pour zoomer, 0 pour revenir. ¦ Kéo để xoay, lăn chuột để phóng to. Bằng bàn phím: ← → để xoay, ↑ ↓ để nghiêng, + và − để phóng to, 0 để trở lại. ¦ Seret untuk memutar, roda untuk memperbesar. Papan ketik: ← → untuk memutar, ↑ ↓ untuk memiringkan, + dan − untuk memperbesar, 0 untuk kembali.
+Relief en 3D ¦ Địa hình 3D ¦ Relief 3D
+Relief 3D ¦ Địa hình 3D ¦ Relief 3D
+Relief 3D… ¦ Địa hình 3D… ¦ Relief 3D…
+CARTE · RELIEF ¦ BẢN ĐỒ · ĐỊA HÌNH ¦ PETA · RELIEF
+Exagération du relief ¦ Phóng đại địa hình ¦ Pembesaran relief
+Choisis le lieu du centre (un lieu placé sur la carte) ¦ Hãy chọn địa điểm trung tâm (một địa điểm đã đặt trên bản đồ) ¦ Pilih tempat pusat (tempat yang ada di peta)
+Je lis les altitudes… ¦ Đang đọc độ cao… ¦ Membaca ketinggian…
+La carte du relief n’est pas installée : elle vient avec la Météo d’autrefois (Réglages → 🌦 Météo d’autrefois). ¦ Bản đồ địa hình chưa được cài đặt: nó đi kèm với Thời tiết ngày xưa (Cài đặt → 🌦 Thời tiết ngày xưa). ¦ Peta relief belum terpasang: tersedia bersama Cuaca masa lalu (Pengaturan → 🌦 Cuaca masa lalu).
+Pas d’altitude pour cette zone : la carte du relief couvre {n} pays ({list}). ¦ Không có độ cao cho vùng này: bản đồ địa hình bao phủ {n} quốc gia ({list}). ¦ Tidak ada ketinggian untuk area ini: peta relief mencakup {n} negara ({list}).
+Pas d’altitude pour cette zone : la carte du relief couvre seulement quelques pays. ¦ Không có độ cao cho vùng này: bản đồ địa hình chỉ bao phủ một vài quốc gia. ¦ Tidak ada ketinggian untuk area ini: peta relief hanya mencakup beberapa negara.
+{km} de côté ¦ mỗi cạnh {km} ¦ {km} per sisi
+Altitudes : {min} m à {max} m ¦ Độ cao: {min} m đến {max} m ¦ Ketinggian: {min} m sampai {max} m
+{pct} % sans altitude (mer ou hors de la carte) ¦ {pct} % không có độ cao (biển hoặc ngoài bản đồ) ¦ {pct} % tanpa ketinggian (laut atau di luar peta)
+{n} dans la zone ¦ {n} trong vùng ¦ {n} di area ini
+Altitudes : Copernicus DEM GLO-90 (grille de 30″), © DLR / Airbus, Copernicus. ¦ Độ cao: Copernicus DEM GLO-90 (lưới 30″), © DLR / Airbus, Copernicus. ¦ Ketinggian: Copernicus DEM GLO-90 (grid 30″), © DLR / Airbus, Copernicus.
+Le moteur 3D ne se charge pas. ¦ Không tải được bộ máy 3D. ¦ Mesin 3D tidak bisa dimuat.
+Ce navigateur ne sait pas dessiner en 3D (WebGL éteint). ¦ Trình duyệt này không vẽ được 3D (WebGL đang tắt). ¦ Peramban ini tidak bisa menggambar 3D (WebGL mati).
+Ma couche ¦ Lớp của tôi ¦ Lapisan saya
+Mes couches ¦ Các lớp của tôi ¦ Lapisan-lapisan saya
+Mes couches (dessiner) ¦ Các lớp của tôi (vẽ) ¦ Lapisan saya (gambar)
+Cacher mes couches ¦ Ẩn các lớp của tôi ¦ Sembunyikan lapisan saya
+Clique sur la carte pour poser le point. Échap pour arrêter. ¦ Hãy bấm lên bản đồ để đặt điểm. Esc để dừng. ¦ Klik di peta untuk memasang titik. Esc untuk berhenti.
+Clique point par point. ¦ Hãy bấm từng điểm một. ¦ Klik titik demi titik.
+Entrée ou double-clic pour finir, ⌫ pour retirer le dernier, Échap pour arrêter. ¦ Enter hoặc bấm đúp để kết thúc, ⌫ để gỡ điểm cuối, Esc để dừng. ¦ Enter atau klik ganda untuk selesai, ⌫ untuk melepas yang terakhir, Esc untuk berhenti.
+Couleur de la couche ¦ Màu của lớp ¦ Warna lapisan
+Dessiner dans cette couche ¦ Vẽ trong lớp này ¦ Gambar di lapisan ini
+Aucune couche pour l’instant ¦ Chưa có lớp nào ¦ Belum ada lapisan
+Importer des couches ¦ Nhập các lớp ¦ Impor lapisan
+GeoJSON ou KML ¦ GeoJSON hoặc KML ¦ GeoJSON atau KML
+Aucune forme lisible dans ce fichier. ¦ Không có hình nào đọc được trong tệp này. ¦ Tidak ada bentuk yang terbaca di berkas ini.
+⬠ Nom de la zone ¦ ⬠ Tên vùng ¦ ⬠ Nama area
+〰 Nom de l’itinéraire ¦ 〰 Tên lộ trình ¦ 〰 Nama rute
+Facultatif. ¦ Không bắt buộc. ¦ Opsional.
+Les terres de la famille ¦ Đất đai của gia đình ¦ Tanah keluarga
+Le chemin de l’école ¦ Đường đến trường ¦ Jalan ke sekolah
+📝 La note ¦ 📝 Ghi chú ¦ 📝 Catatan
+📍 Nom du point ¦ 📍 Tên điểm ¦ 📍 Nama titik
+Ce que tu veux noter à cet endroit. ¦ Những gì bạn muốn ghi lại ở chỗ này. ¦ Apa yang ingin kamu catat di tempat ini.
+Ici se trouvait le moulin ¦ Nơi đây từng có cối xay ¦ Di sini dulu ada kincir
+〰 Itinéraire ¦ 〰 Lộ trình ¦ 〰 Rute
+⬠ Zone ¦ ⬠ Vùng ¦ ⬠ Area
+📍 Point ¦ 📍 Điểm ¦ 📍 Titik
+📝 Note ¦ 📝 Ghi chú ¦ 📝 Catatan
+Zone ajoutée à « {name} » ¦ Đã thêm vùng vào “{name}” ¦ Area ditambahkan ke “{name}”
+Itinéraire ajouté à « {name} » ¦ Đã thêm lộ trình vào “{name}” ¦ Rute ditambahkan ke “{name}”
+Note ajoutée à « {name} » ¦ Đã thêm ghi chú vào “{name}” ¦ Catatan ditambahkan ke “{name}”
+Point ajouté à « {name} » ¦ Đã thêm điểm vào “{name}” ¦ Titik ditambahkan ke “{name}”
+{dur} aujourd’hui ¦ {dur} ngày nay ¦ {dur} saat ini
+« {name} » supprimé de la couche ¦ Đã xoá “{name}” khỏi lớp ¦ “{name}” dihapus dari lapisan
+« {name} » modifié ¦ Đã sửa “{name}” ¦ “{name}” diubah
+« Aucune » = la couleur de la couche ¦ “Không có” = màu của lớp ¦ “Tidak ada” = warna lapisan
+MES COUCHES ¦ CÁC LỚP CỦA TÔI ¦ LAPISAN SAYA
+Renommer la couche ¦ Đổi tên lớp ¦ Ganti nama lapisan
+Couche renommée « {name} » ¦ Đã đổi tên lớp thành “{name}” ¦ Lapisan diganti nama menjadi “{name}”
+Exporter en GeoJSON ¦ Xuất ra GeoJSON ¦ Ekspor ke GeoJSON
+Exporter en KML ¦ Xuất ra KML ¦ Ekspor ke KML
+Supprimer la couche ¦ Xoá lớp ¦ Hapus lapisan
+Couche « {name} » supprimée ¦ Đã xoá lớp “{name}” ¦ Lapisan “{name}” dihapus
+Couleur de la couche changée ¦ Đã đổi màu lớp ¦ Warna lapisan diubah
+Couche « {name} » créée ¦ Đã tạo lớp “{name}” ¦ Lapisan “{name}” dibuat
+Toutes en GeoJSON ¦ Tất cả ra GeoJSON ¦ Semua ke GeoJSON
+Toutes en KML ¦ Tất cả ra KML ¦ Semua ke KML
+Zone ¦ Vùng ¦ Area
+{n} Ko ¦ {n} KB ¦ {n} KB
+Fond à comparer ¦ Nền để so sánh ¦ Latar pembanding
+Façon de comparer ¦ Cách so sánh ¦ Cara membandingkan
+▏ Trait ¦ ▏ Đường kẻ ¦ ▏ Garis
+◐ Transparence ¦ ◐ Độ trong suốt ¦ ◐ Transparansi
+Transparence du fond à comparer ¦ Độ trong suốt của nền để so sánh ¦ Transparansi latar pembanding
+Transparence en % ¦ Độ trong suốt theo % ¦ Transparansi dalam %
+Trait de comparaison : glisse-le, ou flèches gauche et droite ¦ Đường so sánh: hãy kéo nó, hoặc dùng phím mũi tên trái và phải ¦ Garis perbandingan: seret, atau pakai panah kiri dan kanan
+(approximatif) ¦ (ước chừng) ¦ (perkiraan)
+Frontières ¦ Biên giới ¦ Perbatasan
+🏛 Province : {name} ¦ 🏛 Tỉnh: {name} ¦ 🏛 Provinsi: {name}
+🏛 Département de 1790 : {name} ¦ 🏛 Tỉnh (département) năm 1790: {name} ¦ 🏛 Departemen 1790: {name}
+Tracé approximatif, d’après les départements d’aujourd’hui ({list}). ¦ Đường ranh ước chừng, dựa theo các tỉnh (département) ngày nay ({list}). ¦ Garis batas perkiraan, berdasarkan departemen masa kini ({list}).
+Tracé approximatif, d’après les départements d’aujourd’hui. ¦ Đường ranh ước chừng, dựa theo các tỉnh (département) ngày nay. ¦ Garis batas perkiraan, berdasarkan departemen masa kini.
+🏚 Communes disparues : à télécharger une fois (Réglages → 🏛 Frontières anciennes). ¦ 🏚 Các xã đã biến mất: cần tải về một lần (Cài đặt → 🏛 Biên giới xưa). ¦ 🏚 Kota yang sudah hilang: unduh sekali (Pengaturan → 🏛 Perbatasan lama).
+🏚 Zoome sur une région pour voir les communes disparues. ¦ 🏚 Hãy phóng to một vùng để xem các xã đã biến mất. ¦ 🏚 Perbesar sebuah wilayah untuk melihat kota yang sudah hilang.
+Pas français en 1789 : royaume de Sardaigne (français en 1860). L’ouest (Grasse) était en Provence. ¦ Chưa thuộc Pháp năm 1789: vương quốc Sardaigne (thuộc Pháp năm 1860). Phía tây (Grasse) thuộc Provence. ¦ Belum milik Prancis pada 1789: Kerajaan Sardinia (milik Prancis pada 1860). Bagian barat (Grasse) termasuk Provence.
+Pas française en 1789 : royaume de Sardaigne (française en 1860). ¦ Chưa thuộc Pháp năm 1789: vương quốc Sardaigne (thuộc Pháp năm 1860). ¦ Belum milik Prancis pada 1789: Kerajaan Sardinia (milik Prancis pada 1860).
+Pas français en 1789 : Avignon et le Comtat appartenaient au pape (réunis en 1791). ¦ Chưa thuộc Pháp năm 1789: Avignon và Comtat thuộc về Giáo hoàng (sáp nhập năm 1791). ¦ Belum milik Prancis pada 1789: Avignon dan Comtat milik Paus (digabungkan pada 1791).
+Mulhouse était une république alliée des Suisses (réunie en 1798). ¦ Mulhouse là một nước cộng hoà liên minh với Thuỵ Sĩ (sáp nhập năm 1798). ¦ Mulhouse adalah republik yang bersekutu dengan Swiss (digabungkan pada 1798).
+Montbéliard appartenait au Wurtemberg (réuni en 1793). ¦ Montbéliard thuộc về Wurtemberg (sáp nhập năm 1793). ¦ Montbéliard milik Württemberg (digabungkan pada 1793).
+Coupé en Rhône et Loire en 1793. ¦ Bị chia thành Rhône và Loire năm 1793. ¦ Dibagi menjadi Rhône dan Loire pada 1793.
+Le département de Paris (puis de la Seine, 1795). ¦ Tỉnh Paris (sau là tỉnh Seine, 1795). ¦ Departemen Paris (lalu Seine, 1795).
+Partagé en 1968 (Yvelines, Essonne, Val-d’Oise…). ¦ Bị chia năm 1968 (Yvelines, Essonne, Val-d’Oise…). ¦ Dibagi pada 1968 (Yvelines, Essonne, Val-d’Oise…).
+Le Tarn-et-Garonne n’existe qu’en 1808 (pris au Lot surtout, et à 5 départements voisins) : ici rangé avec le Lot. ¦ Tarn-et-Garonne chỉ có từ năm 1808 (lấy chủ yếu từ Lot, và từ 5 tỉnh lân cận): ở đây được xếp chung với Lot. ¦ Tarn-et-Garonne baru ada sejak 1808 (sebagian besar diambil dari Lot, dan dari 5 departemen tetangga): di sini dimasukkan ke Lot.
+Un seul département en 1790 (coupé en deux de 1793 à 1811, puis en 1976). ¦ Một tỉnh duy nhất năm 1790 (bị chia đôi từ 1793 đến 1811, rồi năm 1976). ¦ Satu departemen pada 1790 (dibagi dua dari 1793 sampai 1811, lalu pada 1976).
+Devenu Maine-et-Loire en 1791. ¦ Trở thành Maine-et-Loire năm 1791. ¦ Menjadi Maine-et-Loire pada 1791.
+Limites changées en 1871 (Meurthe-et-Moselle). ¦ Ranh giới thay đổi năm 1871 (Meurthe-et-Moselle). ¦ Batas berubah pada 1871 (Meurthe-et-Moselle).
+Limites changées en 1871. ¦ Ranh giới thay đổi năm 1871. ¦ Batas berubah pada 1871.
+Belfort en faisait partie jusqu’en 1871. ¦ Belfort thuộc về nó cho đến năm 1871. ¦ Belfort termasuk di dalamnya sampai 1871.
+Devenu Alpes-de-Haute-Provence en 1970. ¦ Trở thành Alpes-de-Haute-Provence năm 1970. ¦ Menjadi Alpes-de-Haute-Provence pada 1970.
+Comté de Nice (royaume de Sardaigne) : pas français en 1790 ¦ Bá quốc Nice (vương quốc Sardaigne): chưa thuộc Pháp năm 1790 ¦ County Nice (Kerajaan Sardinia): belum milik Prancis pada 1790
+Savoie (royaume de Sardaigne) : pas française en 1790 ¦ Savoie (vương quốc Sardaigne): chưa thuộc Pháp năm 1790 ¦ Savoie (Kerajaan Sardinia): belum milik Prancis pada 1790
+Avignon et Comtat Venaissin (au pape) : réunis en 1791 ¦ Avignon và Comtat Venaissin (thuộc Giáo hoàng): sáp nhập năm 1791 ¦ Avignon dan Comtat Venaissin (milik Paus): digabungkan pada 1791
+Pas en France en 1790. ¦ Chưa thuộc Pháp năm 1790. ¦ Belum di Prancis pada 1790.
+réunie en commune nouvelle ¦ đã sáp nhập thành xã mới ¦ digabung menjadi kota baru
+Réglages · Cartes ¦ Cài đặt · Bản đồ ¦ Pengaturan · Peta
+Provinces, départements de 1790 et communes disparues, sur la Carte (bouton « 🏛 Frontières »). ¦ Các tỉnh cũ, tỉnh (département) năm 1790 và các xã đã biến mất, trên Bản đồ (nút “🏛 Biên giới”). ¦ Provinsi, departemen 1790 dan kota yang sudah hilang, di Peta (tombol “🏛 Perbatasan”).
+↗ Voir sur la Carte ¦ ↗ Xem trên Bản đồ ¦ ↗ Lihat di Peta
+🏛 Provinces (≈ 1789) et départements de 1790 ¦ 🏛 Các tỉnh cũ (≈ 1789) và tỉnh (département) năm 1790 ¦ 🏛 Provinsi (≈ 1789) dan departemen 1790
+Livrés avec l’app : rien à télécharger. Ce sont des tracés <b>approximatifs</b>, faits d’après les départements d’aujourd’hui (chaque département rangé dans la province qui en couvre la plus grande partie). Aucune source libre et officielle de leurs vrais contours n’a été trouvée. ¦ Đi kèm với ứng dụng: không cần tải gì. Đây là các đường ranh <b>ước chừng</b>, dựa theo các tỉnh (département) ngày nay (mỗi tỉnh được xếp vào tỉnh cũ bao phủ phần lớn diện tích của nó). Không tìm thấy nguồn mở và chính thức nào về đường ranh thật của chúng. ¦ Disertakan bersama aplikasi: tidak ada yang perlu diunduh. Ini garis batas <b>perkiraan</b>, berdasarkan departemen masa kini (setiap departemen dimasukkan ke provinsi yang mencakup sebagian besar wilayahnya). Tidak ditemukan sumber terbuka dan resmi tentang batas aslinya.
+{size} ({bytes} octets) · empreinte sha256 {hash}… · vérifié : {when} ¦ {size} ({bytes} byte) · dấu vân sha256 {hash}… · đã kiểm tra: {when} ¦ {size} ({bytes} byte) · sidik sha256 {hash}… · diperiksa: {when}
+taille inconnue ¦ không rõ kích thước ¦ ukuran tidak diketahui
+enfants ¦ con ¦ anak
+Grand-parent ¦ Ông bà ¦ Kakek atau nenek
+Parrain ou marraine ¦ Cha đỡ đầu hoặc mẹ đỡ đầu ¦ Ayah baptis atau ibu baptis
+Frère ou sœur mort avant ¦ Anh chị em đã mất trước đó ¦ Saudara yang meninggal lebih dulu
+Choisi à la main ¦ Chọn bằng tay ¦ Dipilih secara manual
+choisi à la main ¦ chọn bằng tay ¦ dipilih secara manual
+vérifié ¦ đã kiểm tra ¦ diperiksa
+Corrigé ou confirmé à la main ¦ Đã sửa hoặc xác nhận bằng tay ¦ Dikoreksi atau dipastikan secara manual
+Indice de confiance : {n} sur 100 ¦ Chỉ số tin cậy: {n} trên 100 ¦ Skor keyakinan: {n} dari 100
+Ma branche paternelle ¦ Nhánh bên nội của tôi ¦ Cabang ayah saya
+Ma branche maternelle ¦ Nhánh bên ngoại của tôi ¦ Cabang ibu saya
+D’où vient le prénom, par époque ¦ Tên gọi đến từ đâu, theo thời kỳ ¦ Asal nama depan, per zaman
+Enfants qui portent le prénom de leur parrain ou marraine ¦ Những đứa trẻ mang tên của cha đỡ đầu hoặc mẹ đỡ đầu ¦ Anak yang memakai nama ayah atau ibu baptisnya
+% des enfants qui ont un parrain ou une marraine notés ¦ % trẻ có ghi cha đỡ đầu hoặc mẹ đỡ đầu ¦ % anak yang punya ayah atau ibu baptis tercatat
+Tous les prénoms ¦ Tất cả tên gọi ¦ Semua nama depan
+Pour chaque enfant, d’où vient probablement son prénom : parrain, marraine, grand-parent, frère ou sœur mort avant (prénom « relevé »), oncle, tante, saint du jour. Chaque piste a sa règle et un indice de confiance ; tu peux la corriger sur la fiche ou ici avec ⋯. Sans les personnes en vie ni les fiches confidentielles. ¦ Với mỗi đứa trẻ, tên gọi của nó có lẽ đến từ đâu: cha đỡ đầu, mẹ đỡ đầu, ông bà, anh chị em đã mất trước đó (tên được “dùng lại”), chú bác, cô dì, vị thánh của ngày. Mỗi hướng có quy tắc riêng và một chỉ số tin cậy; bạn có thể sửa trên hồ sơ hoặc ở đây bằng ⋯. Không tính người còn sống và hồ sơ bảo mật. ¦ Untuk setiap anak, dari mana kemungkinan nama depannya berasal: ayah baptis, ibu baptis, kakek-nenek, saudara yang meninggal lebih dulu (nama “dipakai lagi”), paman, bibi, santo hari itu. Setiap petunjuk punya aturan dan skor keyakinan; kamu bisa mengoreksinya di profil atau di sini dengan ⋯. Tanpa orang yang masih hidup dan profil rahasia.
+prénoms expliqués sur {n} ¦ tên gọi được giải thích trên {n} ¦ nama depan dijelaskan dari {n}
+prénom expliqué sur {n} ¦ tên gọi được giải thích trên {n} ¦ nama depan dijelaskan dari {n}
+des enfants qui ont un parrain ou une marraine notés portent son prénom ({n} sur {total}) ¦ số trẻ có ghi cha hoặc mẹ đỡ đầu mang tên của người đó ({n} trên {total}) ¦ anak dengan ayah atau ibu baptis tercatat memakai namanya ({n} dari {total})
+🌳 Les flèches de transmission ¦ 🌳 Mũi tên truyền tên ¦ 🌳 Panah pewarisan
+Une ligne par prénom, les années en travers : chaque flèche va de la personne qui transmet à l’enfant. Clique sur un rond pour ouvrir la fiche. ¦ Mỗi tên gọi một dòng, các năm nằm ngang: mỗi mũi tên đi từ người truyền tên đến đứa trẻ. Hãy bấm vào một vòng tròn để mở hồ sơ. ¦ Satu baris per nama depan, tahun melintang: setiap panah berjalan dari orang yang mewariskan ke anak. Klik lingkaran untuk membuka profil.
+Chaque enfant ¦ Từng đứa trẻ ¦ Setiap anak
+Prénom reçu de ¦ Tên nhận từ ¦ Nama didapat dari
+La liste s’arrête à {n} enfants (les prénoms les plus transmis d’abord) ; les chiffres du haut comptent tout le monde. Choisis un prénom pour voir les autres. ¦ Danh sách dừng ở {n} trẻ (những tên được truyền nhiều nhất trước); các con số phía trên tính tất cả mọi người. Hãy chọn một tên gọi để xem những người khác. ¦ Daftar berhenti di {n} anak (nama yang paling banyak diwariskan dulu); angka di atas menghitung semua orang. Pilih sebuah nama depan untuk melihat yang lain.
+Aucun enfant prénommé {name} ¦ Không có đứa trẻ nào tên {name} ¦ Tidak ada anak bernama {name}
+Rien à comparer pour l’instant ¦ Chưa có gì để so sánh ¦ Belum ada yang bisa dibandingkan
+Il faut des enfants reliés à leurs parents (ou des parrains et marraines notés comme témoins « parrain », « marraine » de la naissance ou du baptême). ¦ Cần có những đứa trẻ được liên kết với cha mẹ (hoặc cha mẹ đỡ đầu được ghi là người làm chứng “cha đỡ đầu”, “mẹ đỡ đầu” của việc sinh hoặc rửa tội). ¦ Perlu ada anak yang terhubung ke orang tuanya (atau wali baptis yang dicatat sebagai saksi “ayah baptis”, “ibu baptis” pada kelahiran atau baptis).
+Les plus sûrs d’abord ¦ Chắc chắn nhất trước ¦ Paling pasti dulu
+Les moins sûrs d’abord ¦ Ít chắc chắn nhất trước ¦ Paling tidak pasti dulu
+Aucune transmission entre deux fiches datées (le saint du jour n’a pas de flèche). ¦ Không có lần truyền tên nào giữa hai hồ sơ có ngày tháng (vị thánh của ngày không có mũi tên). ¦ Tidak ada pewarisan antara dua profil bertanggal (santo hari itu tidak punya panah).
+{name} ({year}) : ouvrir la fiche ¦ {name} ({year}): mở hồ sơ ¦ {name} ({year}): buka profil
+Les {n} prénoms les plus transmis ; choisis un prénom dans « Prénom » pour le voir seul. ¦ {n} tên gọi được truyền nhiều nhất; hãy chọn một tên trong “Tên gọi” để xem riêng nó. ¦ {n} nama depan yang paling banyak diwariskan; pilih sebuah nama di “Nama depan” untuk melihatnya sendiri.
+Flèches de transmission des prénoms ¦ Mũi tên truyền tên gọi ¦ Panah pewarisan nama depan
+C’est bien ça ¦ Đúng vậy ¦ Benar
+Garder cette piste comme sûre ¦ Giữ hướng này là chắc chắn ¦ Simpan petunjuk ini sebagai pasti
+Prénom reçu de {name} : confirmé. ¦ Tên nhận từ {name}: đã xác nhận. ¦ Nama didapat dari {name}: dipastikan.
+Ce n’est pas ça ¦ Không phải vậy ¦ Bukan itu
+Écarter cette piste ¦ Loại bỏ hướng này ¦ Singkirkan petunjuk ini
+Piste écartée. ¦ Đã loại bỏ hướng này. ¦ Petunjuk disingkirkan.
+Plutôt : {who} ¦ Đúng hơn là: {who} ¦ Lebih tepatnya: {who}
+Prénom reçu de {name}. ¦ Tên nhận từ {name}. ¦ Nama didapat dari {name}.
+Celle dont il ou elle tient son prénom ¦ Người mà người này nhận tên ¦ Orang yang memberinya nama depan
+De qui tient-il son prénom ? ¦ Người này nhận tên từ ai? ¦ Dari siapa ia mendapat nama depannya?
+la personne choisie ¦ người được chọn ¦ orang yang dipilih
+Oublier les corrections à la main ¦ Bỏ các chỉnh sửa bằng tay ¦ Lupakan koreksi manual
+Corrections oubliées : le calcul de l’app revient. ¦ Đã bỏ các chỉnh sửa: phép tính của ứng dụng được dùng lại. ¦ Koreksi dilupakan: perhitungan aplikasi kembali dipakai.
+Voir la transmission de ce prénom ¦ Xem tên gọi này được truyền thế nào ¦ Lihat bagaimana nama depan ini diwariskan
+Prénom reçu de… ¦ Tên nhận từ… ¦ Nama didapat dari…
+saint du jour : ¦ thánh của ngày: ¦ santo hari itu:
+Prénom reçu de {who} ¦ Tên nhận từ {who} ¦ Nama didapat dari {who}
+indice {n} sur 100 ¦ chỉ số {n} trên 100 ¦ skor {n} dari 100
+Ta famille ¦ Gia đình bạn ¦ Keluargamu
+France ≈ ¦ Pháp ≈ ¦ Prancis ≈
+personnes {who} ¦ người {who} ¦ orang {who}
+pas de données ¦ không có dữ liệu ¦ tidak ada data
+Moins de 10 : à lire avec prudence ¦ Dưới 10: hãy đọc thận trọng ¦ Kurang dari 10: baca dengan hati-hati
+Aucune époque dans cette période ¦ Không có thời kỳ nào trong khoảng thời gian này ¦ Tidak ada zaman dalam periode ini
+Les repères français vont de 1686 à 1999 : élargis la période. ¦ Các mốc của Pháp đi từ 1686 đến 1999: hãy mở rộng khoảng thời gian. ¦ Patokan Prancis berkisar dari 1686 sampai 1999: perluas periodenya.
+Les moyennes de ta famille à côté des moyennes françaises de la même époque (≈ : des ordres de grandeur, avec leur source). Une famille compte quelques dizaines d’actes : la comparaison se lit en gros. Sans les personnes en vie ni les fiches confidentielles. ¦ Các số trung bình của gia đình bạn đặt cạnh số trung bình của Pháp cùng thời kỳ (≈: con số ước lượng, kèm nguồn). Một gia đình chỉ có vài chục giấy tờ: hãy đọc phép so sánh một cách tổng quát. Không tính người còn sống và hồ sơ bảo mật. ¦ Rata-rata keluargamu di samping rata-rata Prancis pada zaman yang sama (≈: angka perkiraan, dengan sumbernya). Satu keluarga hanya punya beberapa puluh akta: baca perbandingannya secara garis besar. Tanpa orang yang masih hidup dan profil rahasia.
+📚 D’où viennent les chiffres de la France ¦ 📚 Các con số của Pháp lấy từ đâu ¦ 📚 Dari mana angka-angka Prancis berasal
+TA FAMILLE ET LA FRANCE ¦ GIA ĐÌNH BẠN VÀ NƯỚC PHÁP ¦ KELUARGAMU DAN PRANCIS
+Lecture impossible. ¦ Không đọc được. ¦ Tidak bisa dibaca.
+Simple ¦ Đơn giản ¦ Sederhana
+Scientifique ¦ Khoa học ¦ Ilmiah
+Ruban ¦ Băng giấy ¦ Pita
+RUBAN ¦ BĂNG GIẤY ¦ PITA
+chiffres ¦ chữ số ¦ digit
+ex. mariage-1925 ¦ VD: ket-hon-1925 ¦ mis. pernikahan-1925
+Janv. ¦ Th1 ¦ Jan.
+Juil. ¦ Th7 ¦ Jul.
+Sept. ¦ Th9 ¦ Sep.
+Oct. ¦ Th10 ¦ Okt.
+Nov. ¦ Th11 ¦ Nov.
+Archive ¦ Lưu trữ ¦ Arsip
+{n} vie à raconter : {list} ¦ {n} cuộc đời để kể: {list} ¦ {n} kisah hidup untuk diceritakan: {list}
+JEU ¦ TRÒ CHƠI ¦ PERMAINAN
+côté ¦ bên ¦ sisi
+Comparer avec… ¦ So sánh với… ¦ Bandingkan dengan…
+Choisir la personne… ¦ Chọn người… ¦ Pilih orang…
+Âge moyen au premier mariage ¦ Tuổi trung bình khi kết hôn lần đầu ¦ Usia rata-rata saat pernikahan pertama
+L’âge de chaque époux à son premier mariage (date de naissance et date du mariage connues). ¦ Tuổi của mỗi người phối ngẫu khi kết hôn lần đầu (đã biết ngày sinh và ngày kết hôn). ¦ Usia setiap pasangan saat pernikahan pertamanya (tanggal kelahiran dan tanggal pernikahan diketahui).
+Le nombre d’enfants connus des couples mariés pendant la période (couples qui ont au moins un enfant dans ta base). En France : enfants par femme (indicateur de fécondité), qui se compare seulement en gros. ¦ Số con được biết của các cặp vợ chồng kết hôn trong khoảng thời gian này (các cặp có ít nhất một con trong dữ liệu của bạn). Ở Pháp: số con trên mỗi phụ nữ (tỷ suất sinh), chỉ so sánh được một cách tổng quát. ¦ Jumlah anak yang diketahui dari pasangan yang menikah selama periode itu (pasangan dengan setidaknya satu anak di basis datamu). Di Prancis: anak per perempuan (angka kesuburan), yang hanya bisa dibandingkan secara garis besar.
+baby-boom (1946-1964) ¦ bùng nổ dân số (1946-1964) ¦ ledakan bayi (1946-1964)
+Mortalité infantile (morts avant 1 an) ¦ Tử vong trẻ sơ sinh (mất trước 1 tuổi) ¦ Kematian bayi (meninggal sebelum usia 1 tahun)
+Sur 1 000 enfants nés pendant la période dont on connaît le décès (ou qui ont vécu), combien sont morts avant 1 an. Les bébés morts manquent souvent dans les arbres : le chiffre de la famille est souvent trop bas. ¦ Trên 1 000 trẻ sinh ra trong khoảng thời gian này mà ta biết ngày mất (hoặc biết đã sống sót), bao nhiêu trẻ mất trước 1 tuổi. Trẻ sơ sinh mất sớm thường bị thiếu trong cây: con số của gia đình thường quá thấp. ¦ Dari 1 000 anak yang lahir selama periode itu yang kematiannya diketahui (atau yang bertahan hidup), berapa yang meninggal sebelum usia 1 tahun. Bayi yang meninggal sering tidak ada di pohon: angka keluarga sering terlalu rendah.
+Espérance de vie à la naissance ¦ Tuổi thọ trung bình khi sinh ¦ Harapan hidup saat lahir
+L’âge moyen au décès des personnes nées pendant la période (naissance et décès connus). Les bébés morts manquent souvent dans les arbres : le chiffre de la famille est souvent trop haut. ¦ Tuổi trung bình khi mất của những người sinh ra trong khoảng thời gian này (đã biết ngày sinh và ngày mất). Trẻ sơ sinh mất sớm thường bị thiếu trong cây: con số của gia đình thường quá cao. ¦ Usia rata-rata saat meninggal dari orang yang lahir selama periode itu (kelahiran dan kematian diketahui). Bayi yang meninggal sering tidak ada di pohon: angka keluarga sering terlalu tinggi.
+Savoir signer son acte de mariage ¦ Biết ký tên vào giấy tờ kết hôn ¦ Bisa menandatangani akta pernikahan
+La part des époux et des épouses qui ont signé leur acte de mariage (case « a signé » des mariages). En France : mesuré sur les années indiquées ; ta famille : sur les années autour. ¦ Tỷ lệ chú rể và cô dâu đã ký tên vào giấy tờ kết hôn của mình (ô “đã ký” của các lần kết hôn). Ở Pháp: đo trên những năm được nêu; gia đình bạn: trên những năm xung quanh. ¦ Persentase mempelai pria dan wanita yang menandatangani akta pernikahannya (kotak “sudah tanda tangan” pada pernikahan). Di Prancis: diukur pada tahun-tahun yang disebut; keluargamu: pada tahun-tahun di sekitarnya.
+Part des métiers de la terre (agriculture, forêt) ¦ Tỷ lệ nghề làm đất (nông nghiệp, lâm nghiệp) ¦ Persentase pekerjaan tanah (pertanian, kehutanan)
+Parmi les personnes de la famille en âge de travailler à cette date (20 à 60 ans) et dont le métier est reconnu, la part des métiers de la terre et de la forêt (laboureur, cultivateur, journalier agricole, bûcheron…). ¦ Trong số những người của gia đình ở độ tuổi lao động vào thời điểm đó (20 đến 60 tuổi) và có nghề nghiệp được nhận ra, tỷ lệ nghề làm đất và làm rừng (thợ cày, nông dân, người làm thuê nông nghiệp, tiều phu…). ¦ Di antara anggota keluarga usia kerja pada tanggal itu (20 sampai 60 tahun) yang pekerjaannya dikenali, persentase pekerjaan tanah dan hutan (pembajak, petani, buruh tani, penebang kayu…).
+Ordres de grandeur arrondis, toujours précédés de « ≈ ». Une fourchette quand les travaux donnent des chiffres un peu différents selon l’échantillon ou les années. Un chiffre dont on n’était pas sûr n’a pas été mis : il vaut mieux une case vide qu’un chiffre inventé. Les moyennes d’une famille (quelques dizaines d’actes) ne se comparent qu’en gros à celles de toute la France. ¦ Con số ước lượng đã làm tròn, luôn có “≈” đứng trước. Một khoảng khi các nghiên cứu cho số liệu hơi khác nhau tuỳ mẫu hoặc tuỳ năm. Con số nào không chắc thì không được đưa vào: một ô trống tốt hơn một con số bịa ra. Số trung bình của một gia đình (vài chục giấy tờ) chỉ so sánh được một cách tổng quát với số của cả nước Pháp. ¦ Angka perkiraan yang dibulatkan, selalu diawali “≈”. Sebuah rentang jika penelitian memberi angka yang sedikit berbeda tergantung sampel atau tahunnya. Angka yang tidak pasti tidak dimasukkan: sel kosong lebih baik daripada angka karangan. Rata-rata satu keluarga (beberapa puluh akta) hanya bisa dibandingkan secara garis besar dengan seluruh Prancis.
+nées entre 1846 et 1886 ¦ sinh từ 1846 đến 1886 ¦ lahir antara 1846 dan 1886
+{type} publiée par {from} ¦ {type} do {from} công bố ¦ {type} diterbitkan oleh {from}
+LCNDA (fichiers livrés avec l’app) ¦ LCNDA (các tệp đi kèm ứng dụng) ¦ LCNDA (berkas yang disertakan bersama aplikasi)
+Événements survenus aux communes depuis 1943 (INSEE) ¦ Những thay đổi của các xã từ năm 1943 (INSEE) ¦ Perubahan kota sejak 1943 (INSEE)
+Communes depuis 1943 (INSEE) ¦ Các xã từ năm 1943 (INSEE) ¦ Kota sejak 1943 (INSEE)

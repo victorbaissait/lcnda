@@ -19,6 +19,8 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function (G) {
     'use strict';
     const S = () => G.LCNDA_SHEET || (typeof require === 'function' ? require('./app-tableur-engine.js') : null);
+    // 🌐 traduction des textes affichés (dans Node, ou sans app-i18n.js : le français tel quel)
+    const tr = (s, v) => (G && G.LCNDA_I18N && typeof G.LCNDA_I18N.t === 'function' ? G.LCNDA_I18N.t(s, v) : s);
 
     /* ═════════ Unités et limites ═════════ */
     const MM_PX = 96 / 25.4, PT_PX = 96 / 72, TW_MM = 25.4 / 1440, EMU_PX = 9525;
@@ -116,6 +118,9 @@
         return o;
     }
     const styleId = (styles, id) => (styles || []).find(s => s.id === id);
+    /** le nom d'un style à l'écran : un style de départ resté à son nom français est traduit ; un nom choisi par la personne ne bouge pas (le nom enregistré ne change jamais) */
+    const styleLabel = s => { if (!s) return ''; const b = BASE_STYLES.find(x => x.id === s.id); return b && b.name === s.name ? tr(s.name) : String(s.name || s.id || ''); };
+    const setLabel = set => { if (!set) return ''; const b = STYLE_SETS.find(x => x.id === set.id); return b && b.name === set.name ? tr(set.name) : String(set.name || set.id || ''); };
     /** la feuille de styles des styles du document (pour l'éditeur, l'impression et le HTML) */
     function stylesCss(styles, scope = '.wp-doc') {
         const out = [], normal = styleId(styles, 'normal') || BASE_STYLES[0];
@@ -257,7 +262,7 @@
     return Object.assign(docProps, {
         MM_PX, PT_PX, TW_MM, EMU_PX, LIMITS, BASE_STYLES, BUILTIN, STYLE_SETS, PAGE0,
         esc, xe, col, hex6, fontOk, nid, clamp, toB64, fromB64, sniffImage, imageSize, dataUrl, fromDataUrl,
-        styleSet, cleanStyle, stylesCss, newDoc, run, para, plainOf, blockText, allBlocks, wordCount, mergeRuns,
+        styleSet, cleanStyle, stylesCss, styleLabel, setLabel, tr, newDoc, run, para, plainOf, blockText, allBlocks, wordCount, mergeRuns,
         htmlOf: sectionHtml, blocksHtml, runsHtml, runHtml,
         _x: {local, kids, kid, xtext, attr, findAll, onOff, finish, P},
     });

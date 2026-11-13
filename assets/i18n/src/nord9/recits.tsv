@@ -1,0 +1,1543 @@
+fr ¦ lb
+son {x} (lien) ¦ säi {x}
+sa {x} (lien) ¦ seng {x}
+père ¦ Papp
+mère ¦ Mamm
+grand-père ¦ Grousspapp
+grand-mère ¦ Groussmamm
+arrière-grand-père ¦ Urgrousspapp
+arrière-grand-mère ¦ Urgroussmamm
+arrière-arrière-grand-père ¦ Ururgrousspapp
+arrière-arrière-grand-mère ¦ Ururgroussmamm
+arrière-arrière-arrière-grand-père ¦ Urururgrousspapp
+arrière-arrière-arrière-grand-mère ¦ Urururgroussmamm
+ancêtre à la {n}e génération ¦ Virfahr an der {n}. Generatioun
+{kin} de {name} ¦ {kin} vum {name}
+Il est né {when}{where}. ¦ Hie gouf {when}{where} gebuer.
+Elle est née {when}{where}. ¦ Si gouf {when}{where} gebuer.
+Il était {occ}. ¦ Hie war {occ}.
+Elle était {occ}. ¦ Si war {occ}.
+Il a épousé {name}{when}{where}. ¦ Hien huet {name}{when}{where} bestuet.
+Elle a épousé {name}{when}{where}. ¦ Si huet {name}{when}{where} bestuet.
+Il a eu un enfant : {list}. ¦ Hien hat ee Kand: {list}.
+Elle a eu un enfant : {list}. ¦ Si hat ee Kand: {list}.
+Il a eu {n} enfants : {list}. ¦ Hien hat {n} Kanner: {list}.
+Elle a eu {n} enfants : {list}. ¦ Si hat {n} Kanner: {list}.
+Il est mort {when}{age}{where}. ¦ Hien ass {when}{age}{where} gestuerwen.
+Elle est morte {when}{age}{where}. ¦ Si ass {when}{age}{where} gestuerwen.
+, à {n} ans ¦ , mat {n} Joer
+, à {n} an ¦ , mat {n} Joer
+avec {name} ¦ mat {name}
+se mariait{with}{where}{date} ¦ bestuet sech{with}{where}{date}
+se mariait civilement{with}{where}{date} ¦ bestuet sech zivil{with}{where}{date}
+se mariait religieusement{with}{where}{date} ¦ bestuet sech kierchlech{with}{where}{date}
+mourait{with}{where}{date} ¦ stierft{with}{where}{date}
+était inhumé{with}{where}{date} ¦ gëtt begruewen{with}{where}{date}
+était inhumée{with}{where}{date} ¦ gëtt begruewen{with}{where}{date}
+habitait{with}{where}{date} ¦ wunnt{with}{where}{date}
+travaillait comme{what}{with}{where}{date} ¦ schafft als{what}{with}{where}{date}
+partait{with}{where}{date} ¦ geet fort{with}{where}{date}
+arrivait{with}{where}{date} ¦ kënnt un{with}{where}{date}
+était recensé{with}{where}{date} ¦ gëtt bei der Vollekszielung gezielt{with}{where}{date}
+était recensée{with}{where}{date} ¦ gëtt bei der Vollekszielung gezielt{with}{where}{date}
+était sous les drapeaux{with}{where}{date} ¦ ass bei der Arméi{with}{where}{date}
+obtenait un diplôme{with}{where}{date} ¦ kritt en Diplom{with}{where}{date}
+devenait français{with}{where}{date} ¦ gëtt Fransous{with}{where}{date}
+devenait française{with}{where}{date} ¦ gëtt Fransousin{with}{where}{date}
+était baptisé{with}{where}{date} ¦ gëtt gedeeft{with}{where}{date}
+était baptisée{with}{where}{date} ¦ gëtt gedeeft{with}{where}{date}
+faisait sa confirmation{with}{where}{date} ¦ mécht seng Firmung{with}{where}{date}
+était à l’école{with}{where}{date} ¦ ass an der Schoul{with}{where}{date}
+vivait un événement ({label}){where}{date} ¦ erlieft en Evenement ({label}){where}{date}
+devenait père de {name}{where}{date} ¦ gëtt Papp vum {name}{where}{date}
+devenait mère de {name}{where}{date} ¦ gëtt Mamm vum {name}{where}{date}
+n’était plus là : il était mort à {n} ans ¦ war net méi do: hie war mat {n} Joer gestuerwen
+n’était plus là : elle était morte à {n} ans ¦ war net méi do: si war mat {n} Joer gestuerwen
+vivait sans doute du côté de {place} en {y}{occ} ¦ huet {y} wuel an der Géigend vu {place} gelieft{occ}
+vivait sa vie en {y}{occ} ¦ huet {y} säi Liewe gelieft{occ}
+À {n} ans… ¦ Mat {n} Joer…
+À {n} ans, il {facts}. ¦ Mat {n} Joer {facts} hien.
+À {n} ans, elle {facts}. ¦ Mat {n} Joer {facts} si.
+{who} de {name} dont on connaît la naissance. ¦ {who} vum {name}, vun deenen een d’Gebuert kennt.
+{who} de {name} dont on connaît la naissance ({k} sans date de naissance ne sont pas comptés). ¦ {who} vum {name}, vun deenen een d’Gebuert kennt ({k} ouni Gebuertsdatum ginn net gezielt).
+{who}{y}, comme {kin} {from}{fy} ¦ {who}{y}, wéi {kin} {from}{fy}
+C’est un homme. ¦ Et ass e Mann.
+C’est une femme. ¦ Et ass eng Fra.
+C’est un homme, né au XVIIIe siècle ou avant. ¦ Et ass e Mann, am 18. Joerhonnert oder virdru gebuer.
+C’est un homme, né au XIXe siècle. ¦ Et ass e Mann, am 19. Joerhonnert gebuer.
+C’est un homme, né au XXe siècle. ¦ Et ass e Mann, am 20. Joerhonnert gebuer.
+C’est une femme, née au XVIIIe siècle ou avant. ¦ Et ass eng Fra, am 18. Joerhonnert oder virdru gebuer.
+C’est une femme, née au XIXe siècle. ¦ Et ass eng Fra, am 19. Joerhonnert gebuer.
+C’est une femme, née au XXe siècle. ¦ Et ass eng Fra, am 20. Joerhonnert gebuer.
+Il est né à {place}. ¦ Hie gouf zu {place} gebuer.
+Elle est née à {place}. ¦ Si gouf zu {place} gebuer.
+Son métier : {occ}. ¦ Säi Beruff: {occ}.
+Il a vécu {n} ans. ¦ Hien huet {n} Joer gelieft.
+Elle a vécu {n} ans. ¦ Si huet {n} Joer gelieft.
+Il a eu {n} enfant. ¦ Hien hat {n} Kand.
+Elle a eu {n} enfant. ¦ Si hat {n} Kand.
+Il a eu {n} enfants. ¦ Hien hat {n} Kanner.
+Elle a eu {n} enfants. ¦ Si hat {n} Kanner.
+On ne lui connaît pas d’enfant. ¦ Et si keng Kanner bekannt.
+Né dans les années {y}. ¦ An den {y}er Joren gebuer.
+Née dans les années {y}. ¦ An den {y}er Joren gebuer.
+Sa femme s’appelait {name}. ¦ Seng Fra huet {name} geheescht.
+Son mari s’appelait {name}. ¦ Hire Mann huet {name} geheescht.
+Un de ses enfants s’appelait {name}. ¦ Ee vu senge Kanner huet {name} geheescht.
+Son nom commence par {l}… et compte {n} lettres. ¦ Den Numm fänkt mat {l}… un an huet {n} Buschtawen.
+Ta naissance ¦ Deng Gebuert
+Tu es {name}. ¦ Du bass {name}.
+Tu nais {when}{where}{parents}. ¦ Du gëss {when}{where}{parents} gebuer.
+fils de {names} ¦ Jong vu(n) {names}
+fille de {names} ¦ Meedche vu(n) {names}
+{a} et de {b} ¦ {a} a vu(n) {b}
+Ton père est {occ}. ¦ Däi Papp ass {occ}.
+Le métier ¦ De Beruff
+Tu as quinze ans, c’est l’année {y}. Il faut gagner ta vie. Que vas-tu faire ? ¦ Du bass fofzéng Joer al, mir sinn am Joer {y}. Du muss däi Liewen verdéngen. Wat méchs du?
+Tu as quinze ans. Il faut gagner ta vie. Que vas-tu faire ? ¦ Du bass fofzéng Joer al. Du muss däi Liewen verdéngen. Wat méchs du?
+Devenir {occ} ¦ {occ} ginn
+Dans la vraie vie, {name} est devenu {occ}. ¦ Am richtege Liewen ass {name} {occ} ginn.
+Dans la vraie vie, {name} est devenue {occ}. ¦ Am richtege Liewen ass {name} {occ} ginn.
+L’amour ¦ D’Léift
+Tu as {n} ans. ¦ Du bass {n} Joer al.
+À {place}, deux personnes ont attiré ton regard… ¦ Zu {place} sinn der zwou Persounen opgefall…
+deux personnes ont attiré ton regard… ¦ zwou Persounen sinn der opgefall…
+Épouser {name} ¦ {name} bestueden
+Rester libre encore un peu ¦ Nach e bësse fräi bleiwen
+Dans la vraie vie, {first} a épousé {name}{when}{where}. ¦ Am richtege Liewen huet {first} {name}{when}{where} bestuet.
+Partir ? ¦ Fortgoen?
+La vie est dure{where}. On parle de partir… ¦ D’Liewen ass schwéier{where}. Et gëtt vum Fortgoe geschwat…
+Partir pour {place} ¦ Op {place} goen
+Rester au pays ¦ Doheem bleiwen
+Dans la vraie vie, {name} a fini sa route à {place}. ¦ Am richtege Liewen ass {name} zu {place} gelant.
+On parle de partir pour la ville… ¦ Et gëtt geschwat, an d’Stad ze goen…
+Partir ¦ Fortgoen
+Rester à {place} ¦ Zu {place} bleiwen
+Dans la vraie vie, {name} est resté à {place}. ¦ Am richtege Liewen ass {name} zu {place} bliwwen.
+Dans la vraie vie, {name} est restée à {place}. ¦ Am richtege Liewen ass {name} zu {place} bliwwen.
+Les enfants ¦ D’Kanner
+Un enfant arrive : {list}. Tu les regardes grandir. ¦ E Kand kënnt: {list}. Du kucks, wéi se grouss ginn.
+{n} enfants arrivent : {list}. Tu les regardes grandir. ¦ {n} Kanner kommen: {list}. Du kucks, wéi se grouss ginn.
+La fin du voyage ¦ D’Enn vun der Rees
+Tu t’éteins {when}{where}{age}. ¦ Du stierfs {when}{where}{age}.
+Ton histoire continue… ¦ Deng Geschicht geet weider…
+{n} personnes nées un {date} : {list}. ¦ {n} Persounen, déi un engem {date} gebuer sinn: {list}.
+{name} est mort le jour de son anniversaire, à {n} ans ({date}). ¦ {name} ass op sengem Gebuertsdag gestuerwen, mat {n} Joer ({date}).
+{name} est morte le jour de son anniversaire, à {n} ans ({date}). ¦ {name} ass op hirem Gebuertsdag gestuerwen, mat {n} Joer ({date}).
+{name} est né un {date}, jour anniversaire de la mort de {kin} {who} ({y}). ¦ {name} gouf un engem {date} gebuer, um Joresdag vum Doud vu(n) {kin} {who} ({y}).
+{name} est née un {date}, jour anniversaire de la mort de {kin} {who} ({y}). ¦ {name} gouf un engem {date} gebuer, um Joresdag vum Doud vu(n) {kin} {who} ({y}).
+son ancêtre ¦ säi Virfahr
+{n} mariages le même jour de l’année : {list}. ¦ {n} Bestietnesser um selwechten Dag vum Joer: {list}.
+{a} et {b} sont nés à {n} ans pile d’écart, jour pour jour ({y1} et {y2}). ¦ {a} an {b} goufen op den Dag genee {n} Joer ausernee gebuer ({y1} an {y2}).
+{name} est né le jour de Noël {y}. ¦ {name} gouf op Chrëschtdag {y} gebuer.
+{name} est née le jour de Noël {y}. ¦ {name} gouf op Chrëschtdag {y} gebuer.
+{name} est né le jour de l’An {y}. ¦ {name} gouf op Neijoerschdag {y} gebuer.
+{name} est née le jour de l’An {y}. ¦ {name} gouf op Neijoerschdag {y} gebuer.
+{name} est né un vendredi 13 ({date}). ¦ {name} gouf un engem Freideg, dem 13., gebuer ({date}).
+{name} est née un vendredi 13 ({date}). ¦ {name} gouf un engem Freideg, dem 13., gebuer ({date}).
+{name} s’est marié à {n} ans, au même âge que son père {father}. ¦ {name} huet sech mat {n} Joer bestuet, am selwechten Alter wéi säi Papp {father}.
+{name} s’est mariée à {n} ans, au même âge que son père {father}. ¦ {name} huet sech mat {n} Joer bestuet, am selwechten Alter wéi hire Papp {father}.
+En quelle année est né {name} ? ¦ A wéi engem Joer gouf {name} gebuer?
+En quelle année est née {name} ? ¦ A wéi engem Joer gouf {name} gebuer?
+Où est né {name} ? ¦ Wou gouf {name} gebuer?
+Où est née {name} ? ¦ Wou gouf {name} gebuer?
+Quel était le métier de {name} ? ¦ Wat war dem {name} säi Beruff?
+{name} était {occ}. ¦ {name} war {occ}.
+Qui a épousé {name} ? ¦ Wien huet {name} bestuet?
+{a} et {b} se sont mariés{when}{where}. ¦ {a} an {b} hu sech{when}{where} bestuet.
+Qui est le père de {name} ? ¦ Wien ass de Papp vum {name}?
+Qui est la mère de {name} ? ¦ Wien ass d’Mamm vum {name}?
+{name} est le fils de {parent}. ¦ {name} ass de Jong vu(n) {parent}.
+{name} est la fille de {parent}. ¦ {name} ass d’Duechter vu(n) {parent}.
+Combien d’enfants a eus {name} ? ¦ Wéi vill Kanner hat {name}?
+À quel âge est mort {name} ? ¦ Mat wéi engem Alter ass {name} gestuerwen?
+À quel âge est morte {name} ? ¦ Mat wéi engem Alter ass {name} gestuerwen?
+Qui est né le premier ? ¦ Wie gouf als Éischte gebuer?
+Ici est né {name}, {when}. ¦ Hei gouf {name} gebuer, {when}.
+Ici est née {name}, {when}. ¦ Hei gouf {name} gebuer, {when}.
+C’est aussi ici que est né {name}, {when}. ¦ Hei gouf och {name} gebuer, {when}.
+C’est aussi ici que est née {name}, {when}. ¦ Hei gouf och {name} gebuer, {when}.
+Ici est né {name}, {when} ; il sera {occ}. ¦ Hei gouf {name} gebuer, {when}; hie gëtt spéider {occ}.
+Ici est née {name}, {when} ; elle sera {occ}. ¦ Hei gouf {name} gebuer, {when}; si gëtt spéider {occ}.
+C’est aussi ici que est né {name}, {when} ; il sera {occ}. ¦ Hei gouf och {name} gebuer, {when}; hie gëtt spéider {occ}.
+C’est aussi ici que est née {name}, {when} ; elle sera {occ}. ¦ Hei gouf och {name} gebuer, {when}; si gëtt spéider {occ}.
+Ici, {when}, {name} : {label}{what}. ¦ Hei, {when}, {name}: {label}{what}.
+Puis, {when}, {name} : {label}{what}. ¦ Duerno, {when}, {name}: {label}{what}.
+Ici, {when}, {name} a épousé {other}. ¦ Hei, {when}, huet {name} {other} bestuet.
+Puis, {when}, {name} a épousé {other}. ¦ Duerno, {when}, huet {name} {other} bestuet.
+Ici est mort {name}, {when}{age}. ¦ Hei ass {name} gestuerwen, {when}{age}.
+Ici est morte {name}, {when}{age}. ¦ Hei ass {name} gestuerwen, {when}{age}.
+C’est aussi ici que est mort {name}, {when}{age}. ¦ Hei ass och {name} gestuerwen, {when}{age}.
+C’est aussi ici que est morte {name}, {when}{age}. ¦ Hei ass och {name} gestuerwen, {when}{age}.
+son conjoint ¦ säi Partner
+Naissance ({date}) ¦ Gebuert ({date})
+Mariage avec {name} ({date}) ¦ Bestietnes mat {name} ({date})
+Mariage avec {name} ¦ Bestietnes mat {name}
+Mariage ({date}) ¦ Bestietnes ({date})
+Décès ({date}) ¦ Doud ({date})
+ont la joie de vous annoncer la naissance de leur fils ¦ hunn d’Freed, Iech d’Gebuert vun hirem Jong matzedeelen
+ont la joie de vous annoncer la naissance de leur fille ¦ hunn d’Freed, Iech d’Gebuert vun hirer Duechter matzedeelen
+a la joie de vous annoncer la naissance de son fils ¦ huet d’Freed, Iech d’Gebuert vu sengem Jong matzedeelen
+a la joie de vous annoncer la naissance de sa fille ¦ huet d’Freed, Iech d’Gebuert vu senger Duechter matzedeelen
+a la joie de vous annoncer la naissance de ¦ huet d’Freed, Iech d’Gebuert matzedeele vun
+On nous prie d’annoncer le décès de ¦ Mir mussen Iech den Doud matdeele vun
+survenu {when}{age} ¦ {when}{age}
+survenue {when}{age} ¦ {when}{age}
+, dans sa {n}e année ¦ , a sengem {n}. Liewensjoer
+De la part de ¦ Am Numm vun
+Monsieur {name}, son époux ¦ Här {name}, hire Mann
+Madame {name}, son épouse ¦ Madame {name}, seng Fra
+{names}, ses enfants ¦ {names}, d’Kanner
+{names}, son fils ¦ {names}, de Jong
+{names}, sa fille ¦ {names}, d’Duechter
+ont l’honneur de vous faire part du mariage de leurs enfants ¦ hunn d’Éier, Iech d’Bestietnes vun hire Kanner matzedeelen
+ont la joie de vous faire part de leur mariage ¦ hunn d’Freed, Iech hiert Bestietnes matzedeelen
+célébré {when} ¦ gefeiert {when}
+{names} se sont dit oui ! ¦ {names} hu sech d’Jo-Wuert ginn!
+Bienvenue à {name} ! ¦ Wëllkomm, {name}!
+Adieu à {name} ¦ Äddi, {name}
+Une année tranquille ¦ E rouegt Joer
+C’est {when} que {a} a épousé {b}. ¦ {when} huet {a} {b} bestuet.
+{name} est le fils de {parents} ¦ {name} ass de Jong vu(n) {parents}
+{name} est la fille de {parents} ¦ {name} ass d’Duechter vu(n) {parents}
+Tous nos vœux de bonheur aux jeunes époux. ¦ All eis gutt Wënsch fir dat jonkt Koppel.
+Les heureux parents, {names}, reçoivent les félicitations de toute la famille. ¦ Déi glécklech Elteren, {names}, kréien d’Félicitatioune vun der ganzer Famill.
+Rien de notable à signaler cette année dans la famille, ce qui est aussi une bonne nouvelle. ¦ Dëst Joer ass näischt Besonnesches an der Famill geschitt, an dat ass och eng gutt Noriicht.
+{name} fête ses {n} ans. ¦ {name} gëtt {n} Joer al.
+{names} : {n} ans de mariage ! ¦ {names}: {n} Joer bestuet!
+Né il y a {n} ans, jour pour jour. ¦ Op den Dag genee virun {n} Joer gebuer.
+Née il y a {n} ans, jour pour jour. ¦ Op den Dag genee virun {n} Joer gebuer.
+Disparu il y a {n} ans, jour pour jour. ¦ Op den Dag genee virun {n} Joer gestuerwen.
+Disparue il y a {n} ans, jour pour jour. ¦ Op den Dag genee virun {n} Joer gestuerwen.
+Fils de {names}. ¦ Jong vu(n) {names}.
+Fille de {names}. ¦ Duechter vu(n) {names}.
+{name}, son frère, est né {when} : moins de neuf mois d’écart (des jumeaux auraient la même date). ¦ {name}, säi Brudder, gouf {when} gebuer: manner wéi néng Méint Ofstand (Zwillinge géifen dee selwechten Datum hunn).
+{name}, sa sœur, est née {when} : moins de neuf mois d’écart (des jumeaux auraient la même date). ¦ {name}, seng Schwëster, gouf {when} gebuer: manner wéi néng Méint Ofstand (Zwillinge géifen dee selwechten Datum hunn).
+{name} est mort {when}, avant ce mariage. ¦ {name} ass {when} gestuerwen, virun dësem Bestietnes.
+{name} est morte {when}, avant ce mariage. ¦ {name} ass {when} gestuerwen, virun dësem Bestietnes.
+La même année, {label} à {place}, à {km} km : possible, mais à vérifier. ¦ Am selwechte Joer, {label} zu {place}, {km} km ewech: méiglech, mee et sollt een et nokucken.
+Un métier à {n} ans : c’est jeune. ¦ E Beruff mat {n} Joer: dat ass jonk.
+🔎 À regarder aussi ¦ 🔎 Och ze kucken
+{name} naît {when} {where}. ¦ {name} gëtt {when} {where} gebuer.
+Ses parents : {list}. ¦ D’Elteren: {list}.
+Parent connu : {list}. ¦ Bekannten Elterendeel: {list}.
+Ses frères et sœurs ¦ Seng Bridder a Schwësteren
+Son frère ou sa sœur ¦ Säi Brudder oder seng Schwëster
+{name} reçoit le baptême {when} {where}. ¦ {name} gëtt {when} {where} gedeeft.
+Présents : {list}. ¦ Do waren: {list}.
+Le mariage religieux est célébré {when} {where}. ¦ Dat kierchlecht Bestietnes gëtt {when} {where} gefeiert.
+Le mariage civil est célébré {when} {where}. ¦ Dat zivilt Bestietnes gëtt {when} {where} gefeiert.
+{name} se marie avec {who} {when} {where}. ¦ {name} bestuet sech {when} {where} mat {who}.
+{name} se marie {when} {where}. ¦ {name} bestuet sech {when} {where}.
+{name} meurt {when} {where}{age}. ¦ {name} stierft {when} {where}{age}.
+Cause notée : {cause}. ¦ Notéiert Ursaach: {cause}.
+{name} repose {where} ¦ {name} läit {where}
+{name} est inhumé ¦ {name} gëtt begruewen
+{name} est inhumée ¦ {name} gëtt begruewen
+{name} est inhumé(e) ¦ {name} gëtt begruewen
+(inhumation {when}) ¦ (Begriefnes {when})
+{kind} {when} {where}. ¦ {kind} {when} {where}.
+{name} exerce le métier de {job}{where}. ¦ {name} schafft als {job}{where}.
+{name} s’installe {where}{addr}. ¦ {name} léisst sech {where}{addr} néier.
+{name} habite {where}{addr}. ¦ {name} wunnt {where}{addr}.
+Au recensement de {y}, {name} vit {where}{desc}. ¦ Bei der Vollekszielung vun {y} lieft {name} {where}{desc}.
+Au recensement {when}, {name} vit {where}{desc}. ¦ Bei der Vollekszielung {when} lieft {name} {where}{desc}.
+à l’adresse « {ad} » ¦ op der Adress „{ad}“
+Métier noté : {job}. ¦ Notéierte Beruff: {job}.
+Le foyer compte {who}. ¦ Am Stot sinn {who}.
+{label} {when} {where}. ¦ {label} {when} {where}.
+Recensement de {y} ¦ Vollekszielung vun {y}
+Déménagement ¦ Plënneren
+Domicile ¦ Wunnsëtz
+Sépulture ¦ Begriefnes
+Crémation ¦ Kreméierung
+Obsèques ¦ Beerdegung
+Ses enfants ¦ Seng Kanner
+Son enfant ¦ Säi Kand
+{n} enfants connus : {list}. ¦ {n} bekannte Kanner: {list}.
+Un enfant connu : {list}. ¦ Ee bekannt Kand: {list}.
+Pendant sa vie ¦ Wärend sengem Liewen
+Sa vie en quelques mots ¦ Säi Liewen a puer Wierder
+Ta version de la biographie (📖 sur la fiche). ¦ Deng Versioun vun der Biographie (📖 op der Fiche).
+Biographie écrite par l’app d’après la fiche. ¦ Biographie, déi d’App no der Fiche geschriwwen huet.
+Les lieux de sa vie ¦ D’Plazen aus sengem Liewen
+Sa descendance ¦ Seng Nokommen
+{list} dans la généalogie. ¦ {list} an der Genealogie.
+Récit d’une vie — {name} ¦ Geschicht vun engem Liewen — {name}
+=petit-enfant ¦ Enkelkand|Enkelkanner
+=arrière-petit-enfant ¦ Urenkelkand|Urenkelkanner
+=autre descendant ¦ anere Nokomm|aner Nokommen
+=signature ¦ Ënnerschrëft|Ënnerschrëften
+=visage ¦ Gesiicht|Gesiichter
+=trésor caché ¦ verstoppte Schatz|verstoppt Schätz
+Garder la mémoire ¦ D’Erënnerung halen
+← Tous les trésors ¦ ← All d’Schätz
+Trésors · {fam} ¦ Schätz · {fam}
+Un texte, un son ou une vidéo qui ne s’ouvre qu’à une date : « pour les 18 ans de Léa », « en 2050 ». ¦ En Text, en Toun oder e Video, deen eréischt un engem bestëmmten Datum opgeet: „pour les 18 ans de Léa“, „en 2050“.
+{n} scellée ¦ {n} versigelt
+{n} ouverte ¦ {n} opgemaach
+📬 Ouvertes ¦ 📬 Opgemaach
+Aucune lettre ouverte pour l’instant ¦ Nach keen opgemaache Bréif
+Une lettre scellée s’ouvre toute seule le jour venu. ¦ E versigelte Bréif geet vun eleng op, wann den Dag do ass.
+Souvenirs des sens ¦ Erënnerunge vun de Sënner
+L’odeur de la cire, le bruit du moulin, le goût des confitures : ce qu’aucun acte ne garde. ¦ De Geroch vum Wuess, de Kaméidi vun der Millen, de Goût vun der Gebeess: dat, wat keen Akt behält.
+Le sens ¦ De Sënn
+👃 Une odeur ¦ 👃 E Geroch
+👂 Un son ¦ 👂 En Toun
+👅 Un goût ¦ 👅 E Goût
+✋ Au toucher ¦ ✋ Beim Upaken
+👁 Une image ¦ 👁 E Bild
+Les souvenirs qui ne tiennent dans aucun acte : une odeur, un bruit, un goût. Joins-y un son enregistré ou une photo si tu en as. ¦ D’Erënnerungen, déi an keen Akt passen: e Geroch, e Kaméidi, e Goût. Setz en opgeholten Toun oder eng Foto derbäi, wann s du der hues.
+Noter un souvenir ¦ Eng Erënnerung notéieren
+📋 Voir dans Listes › Mémoire familiale ¦ 📋 An de Lëschten › Familljegedächtnes kucken
+Rangé avec les expressions, surnoms, traditions et témoignages ¦ Zesumme mat de Sprëch, Spëtznimm, Traditiounen an Zeienaussoen ofgeluecht
+Aucun souvenir noté pour l’instant : l’odeur de la cire dans l’escalier, le bruit du moulin, le goût des confitures de Mémé… ¦ Nach keng Erënnerung notéiert: de Geroch vum Wuess an der Trap, de Kaméidi vun der Millen, de Goût vun der Bomi hirer Gebeess…
+Le livre de recettes ¦ D’Rezeptebuch
+Les recettes de la famille, avec qui les faisait et leur histoire, puis un vrai livre à imprimer. ¦ D’Rezepter vun der Famill, mat deem, deen se gemaach huet, an hirer Geschicht, an duerno e richtegt Buch zum Drécken.
+Rubrique ¦ Rubrik
+Entrées et soupes ¦ Virspeisen an Zoppen
+Plats ¦ Haaptplat
+Desserts et gâteaux ¦ Desserten a Kuchen
+Confitures et conserves ¦ Gebeess a Konserven
+Boissons ¦ Gedrénks
+Ajouter une recette ¦ E Rezept derbäisetzen
+Imprimer le livre ¦ D’Buch drécken
+{label} : couverture, sommaire, une page chacun ¦ {label}: Deckel, Inhaltsverzeechnes, eng Säit pro Rezept
+Aucune recette pour l’instant : le far de Mamie, la soupe aux choux du dimanche… ¦ Nach keen Rezept: de Bomi hire Far, d’Kabeszopp vum Sonndeg…
+Rien à mettre dans le livre pour l’instant : commence par « ＋ {what} ». ¦ Nach näischt fir an d’Buch: fänk mat „＋ {what}“ un.
+Les chansons de la famille ¦ D’Lidder vun der Famill
+Berceuses, chansons de banquet, de conscrits : paroles, air, qui la chantait, l’enregistrement, et un carnet à imprimer. ¦ Schlofliddercher, Liddere fir Feierlechkeeten, Conscritslidder: Text, Melodie, wien et gesongen huet, d’Opnam, an e Lidderheft zum Drécken.
+Berceuses ¦ Schlofliddercher
+Chansons de fête et de repas ¦ Fest- a Molzechtslidder
+Chansons de travail ¦ Aarbechtslidder
+Conscrits et soldats ¦ Conscriten an Zaldoten
+Noël ¦ Chrëschtdag
+En patois ¦ Am Dialekt
+Les paroles, l’air, qui la chantait — et, si tu peux, l’enregistrement (un son choisi dans les médias). ¦ Den Text, d’Melodie, wien et gesongen huet — an, wann s du kanns, d’Opnam (en Toun aus de Medien).
+Ajouter une chanson ¦ E Lidd derbäisetzen
+Imprimer le carnet ¦ D’Lidderheft drécken
+Aucune chanson pour l’instant : la berceuse de Mémé, la chanson des fins de banquet… ¦ Nach kee Lidd: dem Bomi säi Schloflidd, d’Lidd vum Enn vum Festiessen…
+L’entretien guidé ¦ De gefouerten Interview
+Les bonnes questions à poser à un grand-parent, lues à voix haute ; l’enregistrement est rangé sur sa fiche, avec un repère par question. ¦ Déi richteg Froen un e Grousselterendeel, haart virgelies; d’Opnam gëtt op senger Fiche ofgeluecht, mat engem Zeechen pro Fro.
+Les questions s’affichent en grand (et peuvent être lues à voix haute) ; l’entretien s’enregistre au micro, chaque question est marquée dans l’enregistrement, puis le son est rangé dans les médias de la fiche. ¦ D’Froe ginn an ganz grouss gewisen (a kënnen haart virgelies ginn); den Interview gëtt mam Mikro opgeholl, all Fro gëtt an der Opnam markéiert, an duerno gëtt den Toun an de Medie vun der Fiche ofgeluecht.
+La personne interrogée ¦ Déi gefrote Persoun
+Lire les questions à voix haute ¦ D’Froen haart virliesen
+Les thèmes ¦ D’Themen
+🧒 L’enfance ¦ 🧒 D’Kandheet
+✏️ L’école ¦ ✏️ D’Schoul
+👪 La famille ¦ 👪 D’Famill
+🔨 Le travail ¦ 🔨 D’Aarbecht
+💞 L’amour ¦ 💞 D’Léift
+🪖 La guerre ¦ 🪖 De Krich
+🏡 La maison ¦ 🏡 D’Haus
+🎉 Les fêtes ¦ 🎉 D’Fester
+💬 Pour plus tard ¦ 💬 Fir méi spéit
+Les entretiens enregistrés ¦ Opgeholl Interviewen
+🎙️ Commencer l’entretien ¦ 🎙️ Den Interview ufänken
+Les questions sur papier, avec la place pour noter les réponses ¦ D’Froen op Pabeier, mat Plaz fir d’Äntwerten ze notéieren
+Aucun entretien pour l’instant ¦ Nach keen Interview
+Choisis la personne et les thèmes, puis « 🎙️ Commencer l’entretien ». ¦ Wiel d’Persoun an d’Themen, duerno „🎙️ Den Interview ufänken“.
+La veillée en un clic ¦ D’Owesronn mat engem Klick
+En plein écran, les portraits d’une branche défilent, chaque vie est racontée à voix haute, avec une musique douce. ¦ Um ganzen Ecran zéien d’Portraite vun engem Zweig laanscht, all Liewen gëtt haart erzielt, mat douer Musek.
+Autour de ¦ Ronderëm
+Secondes par vie ¦ Sekonne pro Liewen
+Raconter à voix haute ¦ Haart erzielen
+Musique douce ¦ Douce Musek
+En plein écran : les portraits défilent, chaque vie est racontée. Espace = pause, flèches = avant / après, Échap = fin. ¦ Um ganzen Ecran: d’Portraite zéie laanscht, all Liewe gëtt erzielt. Leertast = Paus, Feiler = zréck / weider, Échap = Enn.
+La veillée de la famille {name} ¦ D’Owesronn vun der Famill {name}
+Ce soir, on raconte {n} vies de la famille de {name}. ¦ Haut den Owend erziele mir {n} Liewe vun der Famill vum {name}.
+Bonne nuit ¦ Gutt Nuecht
+Et maintenant, à vous de raconter ce dont vous vous souvenez. ¦ An elo sidd Dir drun, ze erzielen, wat Dir nach wësst.
+{n} vies à raconter : {list} ¦ {n} Liewen ze erzielen: {list}
+🕯️ Lancer la veillée ¦ 🕯️ D’Owesronn starten
+Découvrir ¦ Entdecken
+À ton âge… ¦ An dengem Alter…
+Ce que faisait chaque ancêtre au même âge que toi : il se mariait, partait, devenait parent… ¦ Wat all Virfahr am selwechten Alter wéi du gemaach huet: e bestuet sech, ass fortgaang, gouf Papp oder Mamm…
+L’âge ¦ Den Alter
+Mon âge ¦ Mäin Alter
+Aperçu, A4 ou A5, ⤓ PDF ¦ Virschau, A4 oder A5, ⤓ PDF
+Les prénoms qui sautent une génération ¦ Virnimm, déi eng Generatioun iwwersprangen
+Henri comme son grand-père, Rose comme son arrière-grand-mère : les prénoms transmis par-dessus les parents. ¦ Henri wéi säi Grousspapp, Rose wéi hir Urgroussmamm: Virnimm, déi iwwer d’Elteren ewech weiderginn goufen.
+Un prénom qui « saute » une génération : l’enfant le reçoit d’un grand-parent (ou d’un arrière-grand-parent), alors que ni son père ni sa mère ne le portaient. La popularité de chaque prénom en France (INSEE) est dans <b>Patrimoine → Prénoms</b>. ¦ E Virnumm, deen eng Generatioun „iwwersprëngt“: d’Kand kritt en vun engem Grousselterendeel (oder Urgrousselterendeel), obwuel weder säi Papp nach seng Mamm en haten. D’Popularitéit vun all Virnumm a Frankräich (INSEE) steet ënner <b>Patrimoine → Virnimm</b>.
+{n} prénom transmis par-dessus une génération ¦ {n} Virnumm iwwer eng Generatioun ewech weiderginn
+{n} fois ¦ {n} Mol
+Les prénoms qui reviennent ¦ Virnimm, déi ëmmer erëmkommen
+Le pouvoir d’achat d’autrefois ¦ D’Kafkraaft vu fréier
+Une dot de 1 200 francs en 1880 : combien d’euros d’aujourd’hui, de kilos de pain, de journées de travail ? ¦ Eng Aussteier vun 1 200 Frang am Joer 1880: wéi vill Euro vun haut, Kilo Brout, Aarbechtsdeeg?
+La somme ¦ De Betrag
+livres (ou francs de l’époque) ¦ livres (oder Frang vun där Zäit)
+sous (1/20 de livre ou de franc) ¦ sous (1/20 vun enger livre oder engem Frang)
+deniers (1/240 de livre) ¦ deniers (1/240 vun enger livre)
+anciens francs (après 1960) ¦ al Frang (no 1960)
+centimes ¦ Centimes
+euros ¦ Euro
+Repères : à partir de 1901, l’indice des prix de l’INSEE ; avant, un ordre de grandeur d’après le prix des denrées. Le pain : prix moyen du kilo de pain ordinaire. Les journées : le salaire d’un journalier. Un écu = 3 livres. ¦ Uhaltspunkten: ab 1901 de Präisindex vum INSEE; virdrun eng Gréissenuerdnung no de Präisser vun de Liewensmëttelen. D’Brout: Duerchschnëttspräis vun engem Kilo normalem Brout. D’Deeg: de Loun vun engem Dagelénger. Een écu = 3 livres.
+🪙 Le calcul pas à pas dans le Convertisseur d’autrefois ↗ ¦ 🪙 D’Rechnung Schrëtt fir Schrëtt am Ëmrechner vu fréier ↗
+Les sommes de ton arbre ¦ D’Beträg aus dengem Bam
+{sum} en {y} ¦ {sum} am Joer {y}
+≈ {eur} d’aujourd’hui ¦ ≈ {eur} vun haut
+{kg} kg de pain ¦ {kg} kg Brout
+{d} journées de travail ¦ {d} Aarbechtsdeeg
+En euros d’aujourd’hui ¦ An Euro vun haut
+En pain ¦ A Brout
+soit {n} baguettes d’aujourd’hui ¦ also {n} Baguettë vun haut
+En journées de travail ¦ An Aarbechtsdeeg
+d’un journalier en {y} ¦ vun engem Dagelénger am Joer {y}
+≈ {eur} au SMIC d’aujourd’hui ¦ ≈ {eur} beim Mindestloun vun haut
+francs ¦ Frang
+{n} {unit} de {y}. ¦ {n} {unit} vun {y}.
+Les deux chiffres ne disent pas la même chose : le pain coûtait proportionnellement bien plus cher autrefois, le travail beaucoup moins. ¦ Déi zwou Zuele soen net datselwecht: d’Brout war fréier am Verhältnis vill méi deier, d’Aarbecht vill manner.
+Les vieux mots des actes ¦ Al Wierder aus den Akten
+Laboureur, ondoyé, brumaire, douaire… Colle un acte : les mots anciens sont surlignés et expliqués. ¦ Laboureur, ondoyé, brumaire, douaire… Pech en Akt an: déi al Wierder ginn ënnerstrach an erkläert.
+Colle ici le texte d’un acte ¦ Pech hei den Text vun engem Akt an
+Dans ton arbre ¦ An dengem Bam
+Chercher un mot ¦ E Wuert sichen
+{n} mots ¦ {n} Wierder
+📜 Le latin, les abréviations et les anciennes lettres ↗ ¦ 📜 D’Latäin, d’Ofkierzungen an déi al Buschtawen ↗
+Ces mots et leurs explications sont ceux des actes français : ils restent en français. ¦ Dës Wierder an hir Erklärunge kommen aus franséischen Akten: si bleiwen op Franséisch.
+Jouer en famille ¦ Als Famill spillen
+Jeu des 7 familles ¦ Quartettspill (7 Familljen)
+Les cartes faites depuis ton arbre : la photo de chacun au choix et recadrée, six styles de cartes, les couleurs, le dos ; à imprimer et découper. ¦ D’Kaarten aus dengem Bam: d’Foto vun all Persoun no Wiel an zougeschnidden, sechs Kaartestiler, d’Faarwen, de Réck; zum Drécken an Ausschneiden.
+Les familles ¦ D’Familljen
+par nom de famille ¦ no Familljennumm
+par branche (arrière-grands-parents) ¦ no Zweig (Urgrousselteren)
+Le style ¦ De Stil
+🃏 Classique ¦ 🃏 Klassesch
+📜 Ancien (papier jauni) ¦ 📜 Al (giel Pabeier)
+◻️ Moderne (grande photo) ¦ ◻️ Modern (grouss Foto)
+🧸 Pour les petits ¦ 🧸 Fir déi Kleng
+🎩 Années folles ¦ 🎩 Wëll Zwanzeger
+🪵 Bois gravé ¦ 🪵 Holzschnëtt
+Couleurs d’origine ¦ Originalfaarwen
+Le dos ¦ De Réck
+Un dos à motif (à imprimer au verso) ¦ E Réck mat Muster (fir op d’Récksäit ze drécken)
+Sans dos ¦ Ouni Réck
+Le lieu de naissance ¦ D’Gebuertsplaz
+La liste de la famille ¦ D’Lëscht vun der Famill
+Les photos choisies, les couleurs et le style de départ ¦ Déi gewielte Fotoen, d’Faarwen an de Stil vum Ufank
+📷 sur une carte : choisir et recadrer sa photo. ¦ 📷 op enger Kaart: hir Foto wielen an zouschneiden.
+{n} familles de 6 cartes ({total} cartes). ¦ {n} Familljen zu 6 Kaarten ({total} Kaarten).
+Choisir et recadrer la photo de {name} ¦ D’Foto vum {name} wielen an zouschneiden
+Le grand-père ¦ De Grousspapp
+Le fils ¦ De Jong
+Jeu des familles ¦ Quartettspill
+La grand-mère ¦ D’Groussmamm
+La fille ¦ D’Duechter
+Les planches de cartes (et leurs dos), avec la règle du jeu ¦ D’Kaartebliedern (an hir Récksäit), mat de Spillreegelen
+Arbre à colorier ¦ Bam zum Ausmolen
+Les vrais ancêtres d’un enfant en traits noirs : un arbre, un jardin de fleurs, un village, des blasons, des montgolfières, une ruche, un éventail ou une rosace. ¦ Déi richteg Virfahre vun engem Kand a schwaarze Strécher: e Bam, e Blummegaart, en Duerf, Wopen, Heissloftballonen, e Bäistack, e Fächer oder eng Rosette.
+L’enfant (ou la personne) au pied de l’arbre ¦ D’Kand (oder d’Persoun) um Fouss vum Bam
+5 (petites cases) ¦ 5 (kleng Felder)
+Le dessin ¦ D’Zeechnung
+🌳 Le grand arbre ¦ 🌳 De grousse Bam
+🌷 Le jardin de fleurs ¦ 🌷 De Blummegaart
+🏡 Le village (une maison chacun) ¦ 🏡 D’Duerf (en Haus fir jiddereen)
+🛡️ Les blasons ¦ 🛡️ D’Wopen
+🎈 Les montgolfières ¦ 🎈 D’Heissloftballonen
+🐝 La ruche (alvéoles) ¦ 🐝 De Bäistack (Waben)
+🪭 L’éventail ¦ 🪭 De Fächer
+🏵️ La rosace ¦ 🏵️ D’Rosette
+Le prénom seul (petits) ¦ Nëmmen de Virnumm (Kleng)
+Prénom et nom ¦ Virnumm an Numm
+Prénom, nom et année ¦ Virnumm, Numm a Joer
+L’écriture ¦ D’Schrëft
+D’écolier ¦ Schoulschrëft
+Bâton (lettres rondes) ¦ Drockbuschtawen (ronn)
+Le trait ¦ De Strich
+Fin (grands) ¦ Dënn (Grouss)
+Épais (petits, gros feutres) ¦ Déck (Kleng, déck Filzstëfter)
+Sans ¦ Ouni
+Double trait ¦ Duebele Strich
+Guirlande de feuilles ¦ Blieder-Girlande
+Le titre ¦ Den Titel
+L’arbre de … ¦ De Bam vum …
+Dessiner ¦ Zeechnen
+Enregistrer un fichier sur l’ordinateur, ou ranger une copie dans les médias ¦ E Fichier um Computer späicheren oder eng Kopie an de Medien ofleeën
+L’arbre de {name} ¦ De Bam vum {name}
+Le quiz du repas ¦ De Quiz beim Iessen
+Sur la télé, en équipes : des questions tirées de l’arbre (qui a épousé qui, où, quel métier), compte à rebours et scores. ¦ Um Fernseh, an Equippen: Froen aus dem Bam (wien huet wien bestuet, wou, wéi e Beruff), Countdown a Punkten.
+Les équipes (séparées par des virgules) ¦ D’Equippen (mat Kommaen getrennt)
+Les {name}, Les cousins ¦ D’{name}en, D’Koseng
+Secondes pour répondre ¦ Sekonne fir z’äntweren
+Branche l’ordinateur sur la télé : la question et les quatre réponses s’affichent en grand ; à la fin du compte à rebours (ou avec <b>Entrée</b>), la bonne réponse apparaît, puis on donne le point à l’équipe qui a trouvé (touches <b>1</b> à <b>9</b>). Répondre depuis les téléphones demanderait que l’application soit joignable depuis tout le réseau de la maison : ce n’est pas possible pour l’instant, on joue devant l’écran. ¦ Schléiss de Computer um Fernseh un: d’Fro an déi véier Äntwerte ginn an ganz grouss gewisen; um Enn vum Countdown (oder mat <b>Enter</b>) erschéngt déi richteg Äntwert, an duerno kritt d’Equipp, déi se fonnt huet, de Punkt (Tasten <b>1</b> bis <b>9</b>). Fir vun den Handyen aus z’äntweren, misst d’App aus dem ganzen Heemnetz erreechbar sinn: dat geet am Moment net, also spillt een virum Ecran.
+📺 Lancer le quiz ¦ 📺 De Quiz starten
+Un avant-goût ¦ E Virgeschmaach
+Créer et fabriquer ¦ Erstellen a maachen
+Le faire-part d’un événement ¦ D’Annonce vun engem Evenement
+Une naissance, un mariage ou un décès de l’arbre : le faire-part se compose tout seul, dans le style de l’époque. ¦ Eng Gebuert, e Bestietnes oder en Doud aus dem Bam: d’Annonce setzt sech vun eleng zesummen, am Stil vun där Zäit.
+L’événement ¦ D’Evenement
+Classique (1900) ¦ Klassesch (1900)
+Art déco (1925) ¦ Art déco (1925)
+Fleuri ¦ Mat Blummen
+Deuil (liseré noir) ¦ Trauer (schwaarze Rand)
+Romantique (dentelle, 1880) ¦ Romantesch (Spëtzen, 1880)
+Art nouveau (1900) ¦ Jugendstil (1900)
+Champêtre (papier kraft) ¦ Ländlech (Kraftpabeier)
+Bleu et or ¦ Blo a Gold
+Layette (naissance) ¦ Puppelchen (Gebuert)
+Épuré ¦ Schlicht
+🎨 Plus d’options ¦ 🎨 Méi Optiounen
+Le format ¦ D’Format
+Carte A6 (portrait) ¦ A6-Kaart (Héichformat)
+Marque-page ¦ Lieszeechen
+Celle du style ¦ Déi vum Stil
+Écriture à la plume ¦ Fiederschrëft
+Élégante (Didot) ¦ Elegant (Didot)
+Bâton ¦ Drockbuschtawen
+Les ornements ¦ D’Verzierungen
+Ceux du style ¦ Déi vum Stil
+Mes couleurs ¦ Meng Faarwen
+La photo de la personne ¦ D’Foto vun der Persoun
+Sa forme ¦ Hir Form
+Couleurs de la photo ¦ Faarwe vun der Foto
+D’origine ¦ Original
+Le texte (une ligne par ligne ; * devant une ligne = en grand) ¦ Den Text (Zeil fir Zeil; * virun enger Zeil = grouss)
+Le mur des signatures ¦ D’Mauer vun den Ënnerschrëften
+Toutes les signatures repérées sur les actes, découpées et rangées par époque : l’écriture de chaque génération. ¦ All d’Ënnerschrëften, déi op den Akte fonnt goufen, ausgeschnidden an no Zäit sortéiert: d’Schrëft vun all Generatioun.
+La Belle Époque ¦ D’Belle Époque
+L’affiche (image PNG) ¦ D’Affiche (PNG-Bild)
+Lieux et voyages ¦ Plazen a Reesen
+Le film des migrations ¦ De Film vun de Migratiounen
+Année après année, chacun se déplace sur la carte, de sa naissance à sa mort ; le film s’enregistre en vidéo. ¦ Joer fir Joer beweegt sech jidderee op der Kaart, vu senger Gebuert bis zu sengem Doud; de Film gëtt als Video gespäichert.
+Durée du film ¦ Dauer vum Film
+Sans carte ¦ Ouni Kaart
+▶ Jouer ¦ ▶ Spillen
+{n} parcours, de {y0} à {y1} ¦ {n} Weeër, vun {y0} bis {y1}
+famille {name} ¦ Famill {name}
+Le fond de carte se charge… ¦ D’Grondkaart gëtt gelueden…
+{n} personne en vie ¦ {n} Persoun lieft
+Fond de carte © OpenStreetMap, Esri ¦ Grondkaart © OpenStreetMap, Esri
+La vidéo (WebM) ¦ De Video (WebM)
+Le film se joue une fois pendant l’enregistrement ¦ De Film leeft eemol, wärend en opgeholl gëtt
+Cette image (PNG) ¦ Dëst Bild (PNG)
+Le film des migrations — {title} ¦ De Film vun de Migratiounen — {title}
+La vidéo, enregistrée pendant que le film se joue ¦ De Video, opgeholl wärend de Film leeft
+Le village des ancêtres sur la carte de Cassini et sur la carte d’aujourd’hui, avec un rideau à faire glisser. ¦ D’Duerf vun de Virfahren op der Cassini-Kaart an op der Kaart vun haut, mat engem Riddo zum Verschiben.
+Hier ¦ Fréier
+Carte de Cassini (XVIIIe s.) ¦ Cassini-Kaart (18. Jh.)
+Cassini, exemplaire du roi ¦ Cassini, Exemplar vum Kinnek
+Carte d’État-major (1820-1866) ¦ Generalstabskaart (1820-1866)
+OpenHistoricalMap ¦ OpenHistoricalMap
+Fais glisser le rideau (ou les flèches du clavier). ¦ Zéi de Riddo (oder benotz d’Feiltasten).
+Rideau entre la carte d’hier et celle d’aujourd’hui ¦ Riddo tëscht der Kaart vu fréier an där vun haut
+Cartes : Géoplateforme IGN (Cassini, État-major), © OpenStreetMap, Esri. Dans l’onglet Carte, le mode « superposition » compare aussi deux fonds avec l’opacité. ¦ Kaarten: Géoplateforme IGN (Cassini, Generalstabskaart), © OpenStreetMap, Esri. Am Reiter Kaart vergläicht de Modus „Iwwerlagerung“ och zwou Grondkaarte mat der Duerchsiichtegkeet.
+La promenade guidée ¦ De gefouerte Spazéiergank
+Les lieux d’une vie dans l’ordre, l’histoire de chaque étape lue à voix haute — même toute seule, en arrivant sur place. ¦ D’Plazen aus engem Liewen an der Rei, d’Geschicht vun all Etapp haart virgelies — och eleng, wann s de op der Plaz ukënns.
+La promenade de ¦ De Spazéiergank vum
+Le parcours ¦ De Wee
+les lieux de sa vie ¦ d’Plazen aus sengem Liewen
+les villages de ses ancêtres ¦ d’Dierfer vu senge Virfahren
+🔊 Tout le guide ¦ 🔊 De ganze Guide
+📍 Me guider en marchant ¦ 📍 Mech beim Goe féieren
+⏹ Silence ¦ ⏹ Rou
+Le guide de la promenade, étape par étape ¦ De Guide vum Spazéiergank, Etapp fir Etapp
+🔊 Écouter ¦ 🔊 Lauschteren
+🧭 Itinéraire ¦ 🧭 Wee
+{km} km en tout (à vol d’oiseau) ¦ {km} km am Ganzen (Loftlinn)
+Outils malins ¦ Clever Tools
+Dater une vieille photo ¦ Eng al Foto datéieren
+Le support, le carton, les vêtements, les coiffures : une fourchette d’années, et qui de l’arbre ça peut être. ¦ Den Ënnergrond, de Kartong, d’Kleeder, d’Frisuren: eng Spann vu Joren, a wien et aus dem Bam kéint sinn.
+Coche ce que tu vois sur la photo (une ou plusieurs réponses par question, ou rien si tu ne sais pas). Les repères sont volontairement larges. ¦ Kräiz un, wat s de op der Foto gesäis (eng oder méi Äntwerte pro Fro, oder näischt, wann s de et net weess). D’Uhaltspunkte si bewosst breet.
+Le support ¦ Den Ënnergrond
+Plaque de métal argentée, comme un miroir, dans un écrin ¦ Versilwert Metallplack, wéi e Spigel, an engem Etui
+Image sur verre, dans un écrin (ambrotype) ¦ Bild op Glas, an engem Etui (Ambrotypie)
+Image sur une fine plaque de fer, sombre (ferrotype) ¦ Bild op enger dënner Eiseplack, däischter (Ferrotypie)
+Petite carte (6 × 10 cm) collée sur un carton : carte de visite ¦ Kleng Kaart (6 × 10 cm) op Kartong gepecht: Carte de visite
+Grande carte (11 × 16 cm) sur carton : carte cabinet ¦ Grouss Kaart (11 × 16 cm) op Kartong: Kabinettkaart
+Carte postale photo (dos imprimé « carte postale ») ¦ Foto-Postkaart (Récksäit mat „carte postale“ bedréckt)
+Tirage papier aux bords dentelés ¦ Pabeierofzuch mat gezackte Ränner
+Petit tirage papier noir et blanc sans carton, bords blancs droits ¦ Klengen schwaarz-wäissen Pabeierofzuch ouni Kartong, mat riichte wäisse Ränner
+Photo couleur aux couleurs passées (orange, magenta) ¦ Faarwfoto mat verbleechte Faarwen (orange, magenta)
+Tirage carré à bord blanc large (type Polaroid / Instamatic) ¦ Véiereckegen Ofzuch mat breedem wäisse Rand (Polaroid / Instamatic)
+Le carton (carte de visite ou cabinet) ¦ De Kartong (Carte de visite oder Kabinettkaart)
+Coins carrés, carton fin et clair ¦ Eckeg Ecken, dënnen, hellen Kartong
+Carton épais et coloré (crème, noir, bordeaux), tranche dorée ¦ Décke, faarwege Kartong (Crème, schwaarz, bordeauxrout), vergëllte Rand
+Nom du photographe en grandes lettres décorées au dos, médailles ¦ Numm vum Fotograf a grousse verzierte Buschtawen op der Récksäit, Medaillen
+Bord biseauté doré ¦ Vergëllten, ofgeschréigte Rand
+Les vêtements des femmes ¦ D’Kleeder vun de Fraen
+Jupe très large en cloche (crinoline), épaules tombantes ¦ Ganz breet Klackejupe (Krinoline), ofhängend Schëlleren
+Jupe plate devant et gonflée derrière (tournure) ¦ Jupe vir flaach an hannen opgebauscht (Tournure)
+Manches très bouffantes en haut (gigot) ¦ Uewen ganz bauscheg Äermelen (Gigot)
+Silhouette en S, col montant, grand chapeau ¦ S-Silhouette, héije Krag, grousse Hutt
+Robe droite, taille basse, jupe au genou ¦ Riicht Kleed, déif Taille, Jupe bis un de Knéi
+Épaules carrées, jupe sous le genou ¦ Eckeg Schëlleren, Jupe ënnert dem Knéi
+Jupe ample et taille fine (New Look) ¦ Breet Jupe a schmuel Taille (New Look)
+Coiffe régionale ou bonnet de paysanne ¦ Regional Kopfbedeckung oder Bauerekap
+Les coiffures ¦ D’Frisuren
+Raie au milieu, cheveux plaqués sur les oreilles ¦ Schäitel an der Mëtt, Hoer flaach iwwer d’Oueren
+Frange frisée sur le front ¦ Gekrauselt Fransen op der Stir
+Chignon haut et volumineux ¦ Héijen, décke Kniet
+Cheveux courts « à la garçonne » ¦ Kuerz Hoer „à la garçonne“
+Mise en plis ondulée ¦ Gewellt Frisur
+Les hommes ¦ D’Männer
+Haut-de-forme ¦ Zylinder
+Canotier (chapeau de paille plat) ¦ Canotier (flaachen Strohutt)
+Moustache fournie, sans barbe ¦ Décke Schnauz, ouni Baart
+Barbe entière fournie ¦ Vollen, décke Baart
+Col cassé et nœud papillon ¦ Vatermërder a Méck
+Uniforme bleu horizon ¦ Horizontblo Uniform
+Costume trois-pièces large, chapeau mou ¦ Breede Kostüm mat dräi Deeler, mëllen Hutt
+Pantalon pattes d’éléphant, cheveux longs ¦ Schlabberbox, laang Hoer
+Le décor ¦ Den Dekor
+Fond peint, colonne, balustrade, rideau drapé ¦ Gemolten Hannergrond, Säul, Balustrade, gerafften Riddo
+Fond uni, simple chaise ¦ Eefaarwegen Hannergrond, einfache Stull
+Dehors, photo prise sur le vif (pas en atelier) ¦ Dobaussen, Schnappschoss (net am Atelier)
+Et toi, que sais-tu ? ¦ A wat weess du?
+Photographe ou date notée : de ¦ Fotograf oder notéierten Datum: vun
+Âge apparent de la personne ¦ Ongeféiert Alter vun der Persoun
+C’est ¦ Et ass
+un homme, un garçon ¦ e Mann, e Jong
+une femme, une fille ¦ eng Fra, e Meedchen
+Lieu (nom du photographe, ville) ¦ Plaz (Numm vum Fotograf, Stad)
+Coche au moins un indice ¦ Kräiz mindestens een Indice un
+Les rappels de recherche ¦ D’Rechercheerënnerungen
+« Tu n’as pas touché à la branche FAURE depuis 8 mois » : les branches endormies, ce qui y manque, un rappel en un clic. ¦ „Du hues den Zweig FAURE zënter 8 Méint net méi ugepak“: déi ageschlofe Zweiger, wat do feelt, eng Erënnerung mat engem Klick.
+Les branches de ¦ D’Zweiger vum
+Endormie depuis au moins ¦ Ageschlof zënter mindestens
+peu importe ¦ egal
+La date est celle de la dernière modification d’une fiche de la branche. Un rappel se crée en un clic : il rejoint les rappels de l’application (Listes → Rappels) et le widget « À venir ». ¦ Den Datum ass dee vun der leschter Ännerung vun enger Fiche aus dem Zweig. Eng Erënnerung gëtt mat engem Klick erstallt: si kënnt bei d’Erënnerunge vun der App (Lëschten → Erënnerungen) an an de Widget „Demnächst“.
+Branche {name} ({first}) ¦ Zweig {name} ({first})
+Reprendre la branche {name} ({first}) ¦ Den Zweig {name} erëm ophuelen ({first})
+Aucune branche endormie depuis aussi longtemps ¦ Keen Zweig, deen esou laang ageschlof ass
+Les actes manquants ¦ Déi feelend Akten
+Ce qui manque à la lignée, rangé par archives où chercher (l’assistant de l’onglet Recherche). ¦ Wat der Lini feelt, no Archiven, wou ee sicht, sortéiert (den Assistent vum Reiter Recherche).
+Je regarde ce qui manque… ¦ Ech kucken, wat feelt…
+L’assistant <b>« Que manque-t-il ? »</b> (onglet Recherche) liste les actes qui manquent à la lignée, rangés par service d’archives, avec la commune, les années et les séries à consulter (état civil, tables décennales, registres paroissiaux, notaires, recensements, registres matricules), et un lien vers FranceArchives. ¦ Den Assistent <b>„Wat feelt?“</b> (Reiter Recherche) lëscht d’Akten op, déi der Lini feelen, no Archivdéngscht sortéiert, mat der Gemeng, de Joren an de Serien, déi een nokucke soll (Ziviltstand, Zéngjorestabellen, Parregëschteren, Notairen, Vollekszielungen, Matrikelregëschteren), an e Link op FranceArchives.
+{n} recherches à faire sur 6 générations ¦ {n} Recherchen ze maachen iwwer 6 Generatiounen
+L’assistant « Que manque-t-il ? » de l’onglet Recherche ¦ Den Assistent „Wat feelt?“ vum Reiter Recherche
+Le thème d’époque ¦ D’Thema vun der Zäit
+Chaque fiche aux couleurs de son temps : parchemin, sépia, Belle Époque, art déco, Trente Glorieuses. ¦ All Fiche an de Faarwe vun hirer Zäit: Pergament, Sepia, Belle Époque, Art déco, Trente Glorieuses.
+Habiller chaque fiche aux couleurs de son époque ¦ All Fiche an de Faarwe vun hirer Zäit undoen
+La fiche d’un ancêtre prend l’allure du temps où il a vécu (ses 25 ans) : parchemin pour l’Ancien Régime, sépia au XIXe, art déco pour les années folles… Le reste de l’application ne change pas. Ce réglage est gardé sur cet ordinateur. ¦ D’Fiche vun engem Virfahr kritt den Ausgesi vun der Zäit, an där hie gelieft huet (mat 25 Joer): Pergament fir d’Ancien Régime, Sepia fir dat 19. Joerhonnert, Art déco fir déi wëll Zwanzeger… De Rescht vun der App ännert sech net. Dës Astellung gëtt op dësem Computer behalen.
+📜 Ancien Régime ¦ 📜 Ancien Régime
+avant ¦ virun
+🎖️ Révolution et Empire ¦ 🎖️ Revolutioun an Empire
+🎩 Le XIXe siècle ¦ 🎩 Dat 19. Joerhonnert
+🌿 La Belle Époque ¦ 🌿 D’Belle Époque
+🍸 Les années folles et la guerre ¦ 🍸 Déi wëll Zwanzeger an de Krich
+🚗 Les Trente Glorieuses ¦ 🚗 D’Trente Glorieuses
+📻 Les années 70 et après ¦ 📻 D’70er Joren an duerno
+Les étoiles, la Lune et les planètes au-dessus du village, la nuit de la naissance : une image à garder ou à offrir. ¦ D’Stären, de Mound an d’Planéiten iwwer dem Duerf an der Nuecht vun der Gebuert: e Bild fir ze behalen oder ze schenken.
+La naissance de ¦ D’Gebuert vum
+Vers quelle heure (heure solaire du lieu) ¦ Ëm wéi vill Auer (Sonnenzäit vun der Plaz)
+Nuit bleue ¦ Blo Nuecht
+Affiche (fond crème) ¦ Affiche (crèmefaarwegen Hannergrond)
+Noir et or ¦ Schwaarz a Gold
+Encre sur papier (à imprimer) ¦ Tënt op Pabeier (zum Drécken)
+Aube (rose et bleu) ¦ Moiesdämmerung (rosa a blo)
+Vert forêt ¦ Bëschgréng
+Ronde ¦ Ronn
+Carrée ¦ Véiereckeg
+Fenêtre en arc ¦ Fënster mat Bou
+Affiche ¦ Affiche
+A4 (portrait) ¦ A4 (Héichformat)
+Élégante ¦ Elegant
+À la plume ¦ Mat der Fieder
+Les constellations ¦ D’Stärebiller
+La Voie lactée (évocation) ¦ D’Mëllechstrooss (Andeitung)
+Les repères (hauteur, directions) ¦ D’Uhaltspunkten (Héicht, Richtungen)
+✏️ Les textes ¦ ✏️ D’Texter
+(le nom) ¦ (den Numm)
+(le lieu et la date) ¦ (d’Plaz an den Datum)
+Dernière ligne ¦ Lescht Zeil
+(la lune, les planètes) ¦ (de Mound, d’Planéiten)
+Aussi rangée sur sa fiche ¦ Och op senger Fiche ofgeluecht
+{place} — {when}, vers {h} ¦ {place} — {when}, géint {h}
+pleine lune ¦ Vollmound
+Jupiter ¦ Jupiter
+{list} brillait ¦ {list} huet geblénkt
+Grande Ourse ¦ Groussen Hiewel
+Orion ¦ Orion
+Cassiopée ¦ Kassiopeia
+Lion ¦ Léiw
+Gémeaux ¦ Zwillingen
+Bouvier ¦ Bärenhüter
+Taureau ¦ Stier
+Petite Ourse ¦ Klengen Hiewel
+Cocher ¦ Fuhrmann
+Grand Chien ¦ Groussen Hond
+Vierge ¦ Jongfra
+boussole|N ¦ N
+boussole|E ¦ O
+boussole|S ¦ S
+boussole|O ¦ W
+{n} % éclairée ¦ {n} % beliicht
+coucher du soleil vers {h} ¦ Sonnenënnergang géint {h}
+lever vers {h} ¦ Sonnenopgang géint {h}
+{n} étoiles brillantes au-dessus de l’horizon ¦ {n} hell Stären iwwer dem Horizont
+Allumer une bougie ¦ Eng Käerz uzünden
+Une bougie pour un ancêtre, avec un mot : elle brûle sept jours. Les anniversaires de naissance et de décès à venir. ¦ Eng Käerz fir e Virfahr, mat e puer Wierder: si brennt siwen Deeg. Déi nächst Joresdeeg vu Gebuert an Doud.
+{n} bougie allumée ¦ {n} Käerz brennt
+{n} au registre ¦ {n} am Register
+Aucune bougie allumée en ce moment ¦ Am Moment brennt keng Käerz
+📅 Dans les trente jours ¦ 📅 An den nächsten drësseg Deeg
+{n} ans de sa naissance ({date}) ¦ {n} Joer zënter senger Gebuert ({date})
+dans {n} jours ¦ an {n} Deeg
+{n} ans de son décès ({date}) ¦ {n} Joer zënter sengem Doud ({date})
+L’ambiance sonore d’époque ¦ Klangwelt vu fréier
+Le feu et l’horloge de la veillée, les cloches du dimanche, la forge, la gare, le moulin : les bruits du temps des ancêtres. ¦ D’Feier an d’Auer vun der Owesronn, d’Klacke vum Sonndeg, d’Schmëdd, d’Gare, d’Millen: d’Geräischer aus der Zäit vun de Virfahren.
+🔥 La veillée au coin du feu (vers 1880) ¦ 🔥 D’Owesronn beim Feier (ëm 1880)
+🔔 Le village un dimanche matin ¦ 🔔 D’Duerf um Sonndeg de Moien
+⚒️ L’atelier du forgeron ¦ ⚒️ D’Schmëdd
+🚂 La gare (vers 1900) ¦ 🚂 D’Gare (ëm 1900)
+💧 Le moulin au bord de l’eau ¦ 💧 D’Millen um Waasser
+🌧️ La nuit d’orage ¦ 🌧️ D’Donnerwiedernuecht
+🌊 Le port ¦ 🌊 Den Hafen
+🐓 La ferme au petit matin ¦ 🐓 De Bauerenhaff am fréie Moien
+🌙 Une nuit d’été à la campagne ¦ 🌙 Eng Summernuecht um Land
+🧺 Le lavoir ¦ 🧺 De Wäschbuer
+🧺 Le jour de marché ¦ 🧺 De Maartdag
+🍷 Le café du village ¦ 🍷 De Café am Duerf
+🪗 Le bal musette ¦ 🪗 De Bal musette
+⛪ La messe à l’église ¦ ⛪ D’Mass an der Kierch
+🪡 L’atelier de couture ¦ 🪡 D’Schneideratelier
+🧵 La filature et le tissage ¦ 🧵 D’Spannerei an d’Weberei
+🧶 La veillée des fileuses ¦ 🧶 D’Owesronn vun de Spannerinnen
+🪚 L’atelier du menuisier ¦ 🪚 D’Schräineratelier
+🏫 La classe (vers 1900) ¦ 🏫 D’Klass (ëm 1900)
+✒️ L’étude du notaire ¦ ✒️ D’Etude vum Notaire
+🌾 Les moissons ¦ 🌾 D’Ären
+🐝 Le rucher ¦ 🐝 De Bäistand
+🐴 La route en diligence ¦ 🐴 D’Rees mat der Postkutsch
+Ou celle du métier de ¦ Oder déi vum Beruff
+▶ Écouter ¦ ▶ Lauschteren
+🔈 Volume ¦ 🔈 Lautstäerkt
+⏲️ S’arrêter après ¦ ⏲️ Ophale no
+Un mélange au hasard de 3 à 5 couches ¦ Eng zoufälleg Mëschung vun 3 bis 5 Ebenen
+🎲 Au hasard ¦ 🎲 Zoufälleg
+Tout à zéro ¦ Alles op null
+Durée du fichier son ¦ Dauer vum Tounfichier
+⭐ Mes ambiances ¦ ⭐ Meng Klangwelten
+💾 Garder ce mélange ¦ 💾 Dës Mëschung behalen
+Tout est fabriqué par l’ordinateur, à partir de bruit et de sons purs : une évocation, pas un enregistrement. Règle chaque couche à ton goût ({n} couches). ¦ Alles gëtt vum Computer gemaach, aus Rauschen a pure Téin: eng Andeitung, keng Opnam. Stell all Ebene no dengem Goût an ({n} Ebenen).
+Chercher une couche (cloches, eau, atelier…) ¦ Eng Ebene sichen (Klacken, Waasser, Atelier…)
+Chercher une couche ¦ Eng Ebene sichen
+🌬️ Le vent ¦ 🌬️ De Wand
+🌧️ La pluie ¦ 🌧️ De Reen
+🔥 Le feu de cheminée ¦ 🔥 D’Feier am Kamäin
+🕰️ L’horloge comtoise ¦ 🕰️ D’Comtoise-Auer
+🔔 Les cloches du village ¦ 🔔 D’Klacke vum Duerf
+⚒️ L’enclume du forgeron ¦ ⚒️ Den Amboss vum Schmëdd
+🐦 Les oiseaux ¦ 🐦 D’Vullen
+💧 La rivière et le moulin ¦ 💧 De Floss an d’Millen
+🚂 Le train à vapeur ¦ 🚂 Den Damptrain
+🌊 La mer ¦ 🌊 D’Mier
+🦗 Les grillons ¦ 🦗 D’Grillen
+🐸 Les grenouilles de la mare ¦ 🐸 D’Fräsch am Weier
+🦉 La chouette ¦ 🦉 D’Eil
+🐓 Le coq ¦ 🐓 De Hunn
+🐄 Les sonnailles des vaches ¦ 🐄 D’Kéiklacken
+🐴 Les sabots du cheval ¦ 🐴 D’Houfe vum Päerd
+🛞 La charrette sur les pavés ¦ 🛞 D’Kar op de Pavéen
+🐝 Les abeilles du rucher ¦ 🐝 D’Beie vum Bäistand
+🌾 Le vent dans les blés ¦ 🌾 De Wand am Weess
+⛈️ Le tonnerre au loin ¦ ⛈️ Den Donner an der Wäit
+⛲ La fontaine du lavoir ¦ ⛲ De Brunne vum Wäschbuer
+🧺 Les battoirs des lavandières ¦ 🧺 D’Wäschbeetel vun de Wäschfraen
+🧶 Le rouet qui file ¦ 🧶 D’Spannrad, dat spënnt
+🧵 Le métier à tisser ¦ 🧵 De Weefstull
+🪡 La machine à coudre ¦ 🪡 D’Nähmaschinn
+🪚 La scie du menuisier ¦ 🪚 D’Séi vum Schräiner
+✒️ La plume sur le papier ¦ ✒️ D’Fieder op dem Pabeier
+🗣️ Le murmure de la foule ¦ 🗣️ D’Gemurmels vun de Leit
+🍷 Les verres du café ¦ 🍷 D’Glieser am Café
+⛪ L’orgue de l’église ¦ ⛪ D’Uergel vun der Kierch
+🪗 L’accordéon du bal musette ¦ 🪗 D’Akkordeon vum Bal musette
+🏫 La craie au tableau ¦ 🏫 D’Kräid op der Tafel
+🪵 Le bois qui craque ¦ 🪵 Holz, dat kraacht
+👣 Des pas sur le gravier ¦ 👣 Schrëtt um Kilos
+🕊️ Les mouettes ¦ 🕊️ D’Méiwen
+🎶 Le bourdon de la vielle ¦ 🎶 De Bourdon vun der Drieleier
+© Crédits et droits des sons ¦ © Credits a Rechter vun den Téin
+Aucun enregistrement n’est utilisé : <b>chaque son est calculé par ton navigateur</b> au moment où tu l’écoutes (Web Audio), à partir de bruit et de sons purs. Il n’y a donc aucun auteur à créditer en dehors de LCNDA, et rien n’est téléchargé. ¦ Et gëtt keng Opnam benotzt: <b>all Toun gëtt vun dengem Browser berechent</b>, wann s du e lauschters (Web Audio), aus Rauschen a pure Téin. Et gëtt also keen Auteur ausser LCNDA ze nennen, an et gëtt näischt erofgelueden.
+<b>Libres de droits</b> : tu peux les écouter, les enregistrer, les mettre dans un montage ou une présentation, même les partager, sans rien demander (comme le domaine public, CC0). ¦ <b>Fräi vu Rechter</b>: du kanns se lauschteren, späicheren, an eng Montage oder eng Presentatioun setzen, souguer deelen, ouni ee bieden ze mussen (wéi de Public Domain, CC0).
+bruit blanc filtré, qui ondule lentement ¦ gefiltert wäisst Rauschen, dat lues wellt
+bruit aigu et milliers de petites gouttes au hasard ¦ héich Rauschen an Dausende vu klengen, zoufällegen Drëpsen
+bruit grave et crépitements au hasard ¦ déift Rauschen an zoufällegt Knéckelen
+deux « tic » de sons purs, un carillon toutes les 40 secondes ¦ zwee „Tick“ aus pure Téin, e Glockespill all 40 Sekonnen
+sons purs aux harmoniques des cloches de bronze ¦ pur Téin mat den Uewertéin vu Bronzeklacken
+coups métalliques : trois sons purs qui s’éteignent ¦ metallesch Schléi: dräi pur Téin, déi ausklénge
+petits sifflets de sons purs qui montent ¦ kleng Päifen aus pure Téin, déi eropginn
+bruit filtré et le battement grave de la roue ¦ gefiltert Rauschen an den déiwe Schlag vum Rad
+souffles de vapeur rythmés et un sifflet à deux notes ¦ rhythmesch Dampstéiss an eng Päif mat zwou Noten
+bruit grave qui monte et descend comme les vagues ¦ déift Rauschen, dat eropgeet an erofgeet wéi d’Wellen
+trilles de sons purs très aigus ¦ ganz héich Triller aus pure Téin
+sons en dents de scie qui montent ¦ Sägezännteen, déi eropginn
+trois sons purs graves qui glissent ¦ dräi déif pur Téin, déi rutschen
+trois sons qui montent puis retombent ¦ dräi Téin, déi eropginn an erëm erofgoen
+sons métalliques aux harmoniques de cloche ¦ metallesch Téin mat Klackenuewertéin
+petits chocs de bruit au rythme du pas ¦ kleng Rauschstéiss am Rhythmus vum Schrëtt
+grondement grave qui tremble et cailloux de bruit ¦ déift, zitterend Grommelen a Rauschkieselen
+trois notes graves qui vibrent ¦ dräi déif Noten, déi vibréieren
+bruit très aigu qui ondule ¦ ganz héich Rauschen, dat wellt
+grondements de bruit très grave ¦ ganz déift Grommele vu Rauschen
+bruit d’eau et gouttes de sons purs ¦ Waassergeräisch an Drëpsen aus pure Téin
+deux chocs sourds ¦ zwee domm Schléi
+ronronnement et petit clic de la roue ¦ Schnuerken an e klenge Klick vum Rad
+le claquement de la navette et le coup du battant ¦ d’Klaken vum Schëffchen an de Schlag vun der Lued
+cliquetis rapides par séries ¦ séier Geklappers a Serien
+bruit filtré qui va et vient ¦ gefiltert Rauschen, dat kënnt a geet
+grattements de bruit aigu ¦ Kraze vun héijem Rauschen
+quatre bandes de bruit qui imitent les voix ¦ véier Rauschbänner, déi Stëmmen nomaachen
+tintements de sons purs ¦ Klénge vu pure Téin
+accords tenus de sons doux ¦ gehale Akkorde vu mëlle Téin
+une petite valse de sons en dents de scie, basse et accords ¦ e klenge Walzer aus Sägezännteen, Bass an Akkorden
+traits de bruit et le petit coup du point ¦ Rauschstrécher an de klenge Schlag vum Punkt
+craquements de bruit ¦ Knéckele vu Rauschen
+pas de bruit filtré ¦ Schrëtt aus gefiltertem Rauschen
+cris en dents de scie qui descendent ¦ Sägezännrifft, déi erofginn
+trois notes graves tenues, qui vibrent un peu ¦ dräi déif, gehalen Noten, déi e bësse vibréieren
+Fichier son (WebM) ¦ Tounfichier (WebM)
+Ce qu’on entend, pendant la durée choisie ¦ Dat, wat een héiert, wärend der gewielter Dauer
+L’arbre qui pousse ¦ De Bam, dee wiisst
+Les descendants d’un ancêtre apparaissent année après année, les branches poussent, les feuilles roussissent. ¦ D’Nokommen vun engem Virfahr erschéngen Joer fir Joer, d’Äscht wuessen, d’Blieder gi rout.
+▶ Faire pousser ¦ ▶ Wuesse loossen
+lente ¦ lues
+normale ¦ normal
+rapide ¦ séier
+La musique de l’arbre ¦ D’Musek vum Bam
+L’arbre joué comme une partition : une note par naissance, un accord par mariage ; à écouter ou à télécharger. ¦ De Bam gespillt wéi eng Partitur: eng Note pro Gebuert, en Akkord pro Bestietnes; fir ze lauschteren oder erofzelueden.
+tout l’arbre ¦ de ganze Bam
+Tempo ¦ Tempo
+lent ¦ lues
+normal ¦ normal
+vif ¦ flott
+Chaque naissance est une note : plus aiguë pour les générations proches, plus longue pour une longue vie, au timbre plus doux pour les femmes ; chaque mariage, un accord ; chaque décès, une note grave. ¦ All Gebuert ass eng Note: méi héich fir no Generatiounen, méi laang fir e laangt Liewen, mat méi mëllem Klang fir d’Fraen; all Bestietnes en Akkord; all Doud eng déif Note.
+Fichier son (WAV) ¦ Tounfichier (WAV)
+{b} naissances, {m} mariages, {d} décès — {s} secondes ¦ {b} Gebuerten, {m} Bestietnesser, {d} Doudesfäll — {s} Sekonnen
+La chasse au trésor ¦ D’Schatzsich
+Des énigmes sur les ancêtres cachées dans la maison : seule la bonne réponse mène à la cachette suivante. ¦ Rätselen iwwer d’Virfahren, am Haus verstoppt: nëmmen déi richteg Äntwert féiert bei dat nächst Versteck.
+🗝️ Préparer la chasse ¦ 🗝️ D’Sich virbereeden
+Le nom de la chasse ¦ Den Numm vun der Sich
+La chasse au trésor de la famille {name} ¦ D’Schatzsich vun der Famill {name}
+Les cachettes, dans l’ordre (une par ligne ; la dernière est celle du trésor) ¦ D’Verstopper, an der Rei (ee pro Zeil; dee leschten ass dee vum Schatz)
+sous le paillasson ¦ ënnert dem Fousstapp
+dans la boîte aux lettres ¦ an der Bréifkëscht
+derrière l’horloge ¦ hannert der Auer
+au fond du placard de l’entrée ¦ ganz hannen am Schaf an der Entrée
+Le trésor (ce qu’on trouve à la fin) ¦ De Schatz (wat een um Enn fënnt)
+le gâteau d’anniversaire de Mamie ¦ dem Bomi säi Gebuertsdagskuch
+Chaque énigme porte sur un ancêtre ; chaque réponse renvoie à une cachette : il faut la bonne réponse pour trouver la suite. ¦ All Rätsel geet iwwer e Virfahr; all Äntwert weist op e Versteck: et brauch déi richteg Äntwert, fir dat Nächst ze fannen.
+L’ancêtre mystère ¦ De Mystère-Virfahr
+Un ancêtre caché, des indices un par un : le même pour toute la famille chaque jour. Qui le trouve le plus vite ? ¦ E verstoppte Virfahr, Indicen een nom aneren: all Dag dee selwechte fir déi ganz Famill. Wie fënnt en am séiersten?
+🕵️ L’ancêtre mystère du {date} ¦ 🕵️ De Mystère-Virfahr vum {date}
+Proposer ¦ Roden
+Un indice de plus ({n}) ¦ Nach een Indice ({n})
+Je donne ma langue au chat ¦ Ech ginn op
+Trouvé maintenant : {n} points. ¦ Elo fonnt: {n} Punkten.
+Le livre dont tu es le héros ¦ D’Buch, an deem s du den Held bass
+Vis la vie d’un ancêtre et fais ses choix — métier, mariage, départ — puis découvre ce qu’il a vraiment choisi. ¦ Liew d’Liewe vun engem Virfahr a maach seng Choixen — Beruff, Bestietnes, Fortgoen — an entdeck duerno, wat hie wierklech gewielt huet.
+Tu seras ¦ Du bass
+📖 Commencer l’histoire ¦ 📖 D’Geschicht ufänken
+Les coïncidences ¦ D’Zoufäll
+Nés le même jour, mort le jour de son anniversaire, mariés à cent ans d’écart jour pour jour : les hasards de l’arbre. ¦ Um selwechten Dag gebuer, op sengem Gebuertsdag gestuerwen, op den Dag genee honnert Joer ausernee bestuet: d’Zoufäll vum Bam.
+Plus l’arbre a de dates précises (jour et mois), plus il y en a. ¦ Wat de Bam méi genee Datumer (Dag a Mount) huet, wat et der méi ginn.
+« Et si… » ¦ „A wann…“
+Et si ces deux-là ne s’étaient pas rencontrés ? Toutes les vies qui n’auraient jamais existé — peut-être la tienne. ¦ A wann déi zwee sech ni begéint hätten? All d’Liewen, déi et ni gi wier — vläicht och däint.
+Et si… ¦ A wann…
+ces deux-là ne s’étaient jamais rencontrés ¦ déi zwee sech ni begéint hätten
+cette personne n’avait pas vécu ¦ dës Persoun ni gelieft hätt
+🦋 {n} vies n’auraient jamais existé ¦ 🦋 {n} Liewen hätt et ni ginn
+{pct} % de l’arbre, dont {who} en vie aujourd’hui. ¦ {pct} % vum Bam, dovun {who}, déi haut liewen.
+Et {name} non plus. ¦ An {name} och net.
+La broderie au point de croix ¦ Kräizstéckerei
+Un marquoir à l’ancienne : le nom de la famille, un couple, une date, un arbre ; la grille et les fils. ¦ E Sticktuch wéi fréier: de Familljennumm, e Koppel, en Datum, e Bam; d’Gitter an d’Fuedem.
+FAMILLE {name} ¦ FAMILL {name}
+La date ¦ Den Datum
+Le lieu (facultatif) ¦ D’Plaz (fräiwëlleg)
+La couleur du titre ¦ D’Faarf vum Titel
+Brun ¦ Brong
+Bleu ciel ¦ Hellblo
+La couleur du couple ¦ D’Faarf vum Koppel
+Le titre en grandes lettres (double) ¦ Den Titel a grousse Buschtawen (duebel)
+Le motif ¦ D’Motiv
+❤️ Le cœur ¦ ❤️ D’Häerz
+👑 Le cœur couronné ¦ 👑 D’Häerz mat Kroun
+🌷 Les tulipes ¦ 🌷 D’Tulpen
+⛪ L’église ¦ ⛪ D’Kierch
+🕊️ Les colombes ¦ 🕊️ D’Dauwen
+— Aucun motif ¦ — Kee Motiv
+Ses couleurs ¦ Seng Faarwen
+celle du motif ¦ déi vum Motiv
+Deux petits cœurs de chaque côté ¦ Zwee kleng Häerzer op all Säit
+La bordure ¦ De Rand
+· Les points (à l’ancienne) ¦ · D’Punkten (wéi fréier)
+♥ La frise de cœurs ¦ ♥ De Fries mat Häerzer
+⌇ La frise en zigzag ¦ ⌇ De Zickzack-Fries
+▭ Le double trait ¦ ▭ Den duebele Strich
+— Sans bordure ¦ — Ouni Rand
+La toile ¦ De Stoff
+Aïda 11 ¦ Aida 11
+Aïda 14 ¦ Aida 14
+Aïda 16 ¦ Aida 16
+Aïda 18 ¦ Aida 18
+Lin 28 fils (un point sur 2 fils) ¦ Lengen 28 Fiedem (ee Stéch iwwer 2 Fiedem)
+Sa couleur (aperçu) ¦ Seng Faarf (Virschau)
+Écru ¦ Ecru
+Lin ¦ Lengen
+Bleu nuit ¦ Nuetsblo
+l’aperçu brodé ¦ d’gestéckte Virschau
+la grille à symboles ¦ d’Gitter mat Symboler
+La grille (dessin SVG) ¦ D’Gitter (SVG-Zeechnung)
+L’aperçu brodé (image PNG) ¦ Déi gestéckte Virschau (PNG-Bild)
+La grille à symboles et la liste des fils ¦ D’Gitter mat Symboler an d’Lëscht vun de Fiedem
+{w} × {h} points · sur {cloth} : {cw} × {ch} cm (prévoir 5 cm de marge tout autour) ¦ {w} × {h} Stécher · op {cloth}: {cw} × {ch} cm (5 cm Rand ronderëm aplangen)
+{n} points ¦ {n} Stécher
+La gravure au laser ¦ Lasergravur
+L’éventail des ancêtres en fichier SVG aux vraies dimensions, prêt pour une graveuse laser (gravure et découpe). ¦ De Fächer vun de Virfahren als SVG-Fichier an de richtege Mooss, prett fir e Lasergravéierer (Gravur an Ausschneiden).
+Les ancêtres de ¦ D’Virfahre vum
+Le fichier est aux vraies dimensions, en millimètres : <b>noir = gravure</b> (traits et noms), <b>rouge = découpe</b> (le contour, trait fin). Convient à LightBurn, Glowforge, xTool, Inkscape. Vérifie toujours la taille à l’import. ¦ De Fichier ass an de richtege Mooss, a Millimeter: <b>schwaarz = Gravur</b> (Strécher an Nimm), <b>rout = Ausschneiden</b> (den Ëmress, dënne Strich). Passt fir LightBurn, Glowforge, xTool, Inkscape. Kontrolléier ëmmer d’Gréisst beim Importéieren.
+Dessin SVG pour la graveuse ¦ SVG-Zeechnung fir de Gravéierer
+Aux vraies dimensions : noir = gravure, rouge = découpe ¦ An de richtege Mooss: schwaarz = Gravur, rout = Ausschneiden
+La mosaïque de portraits ¦ D’Portraitsmosaik
+Tous les visages de l’arbre en une image, ou un portrait refait avec les visages de toute la famille. ¦ All d’Gesiichter aus dem Bam an engem Bild, oder e Portrait, dat aus de Gesiichter vun der ganzer Famill nei gemaach gëtt.
+Je rassemble les visages… ¦ Ech sammelen d’Gesiichter…
+La mosaïque ¦ D’Mosaik
+tous les visages, en grille ¦ all d’Gesiichter, an engem Gitter
+un portrait refait avec tous les autres ¦ e Portrait, nei gemaach mat all deenen aneren
+Le portrait à refaire ¦ D’Portrait, dat nei gemaach gëtt
+Finesse ¦ Feinheet
+Le visage de la lignée ¦ D’Gesiicht vun der Lini
+De père en père ou de mère en mère : les visages côte à côte, en fondu, et le visage moyen des générations. ¦ Vu Papp zu Papp oder vu Mamm zu Mamm: d’Gesiichter nieneneen, an Iwwerblendung, an d’Duerchschnëttsgesiicht vun de Generatiounen.
+La lignée ¦ D’Lini
+de père en père ¦ vu Papp zu Papp
+de mère en mère ¦ vu Mamm zu Mamm
+▶ Le fondu ¦ ▶ D’Iwwerblendung
+Les visages (image PNG) ¦ D’Gesiichter (PNG-Bild)
+Le visage moyen de {n} générations ¦ D’Duerchschnëttsgesiicht vun {n} Generatiounen
+Le fondu ¦ D’Iwwerblendung
+La gazette de l’année ¦ D’Gazette vum Joer
+La une d’un journal pour une année de la famille : mariages, naissances, nouvelles des nôtres, le prix du pain. ¦ D’Titelsäit vun enger Zeitung fir ee Joer vun der Famill: Bestietnesser, Gebuerten, Neiegkeete vun eise Leit, de Präis vum Brout.
+Les années les plus riches : ¦ Déi räichste Joren:
+🎨 Le style du journal ¦ 🎨 De Stil vun der Zeitung
+📜 Ancien (1900) ¦ 📜 Al (1900)
+🎨 Supplément illustré (en couleurs) ¦ 🎨 Illustréiert Bäilag (a Faarf)
+🗞️ Le quotidien (papier journal) ¦ 🗞️ D’Dageszeitung (Zeitungspabeier)
+🎩 Années 30 ¦ 🎩 30er Joren
+◻️ Moderne ¦ ◻️ Modern
+💖 Magazine ¦ 💖 Magazin
+📣 À sensation (gros titres) ¦ 📣 Boulevard (grouss Iwwerschrëften)
+🧸 Le journal des enfants ¦ 🧸 D’Kannerzeitung
+Le nom du journal ¦ Den Numm vun der Zeitung
+Le bandeau ¦ De Bandeau
+Édition unique ¦ Eenzeg Editioun
+Le papier ¦ D’Pabeier
+Celui du style ¦ Dat vum Stil
+Crème ¦ Crème
+Jauni ¦ Gielzeg
+Papier journal ¦ Zeitungspabeier
+Ma couleur ¦ Meng Faarf
+Les colonnes ¦ D’Kolonnen
+L’article de une ¦ Den Haaptartikel
+Les nouvelles ¦ D’Neiegkeeten
+Le coin pratique ¦ De praktesche Coin
+5 centimes ¦ 5 Centimes
+Prix : {price} ¦ Präis: {price}
+{n} membres de la famille en vie ¦ {n} Familljememberen, déi liewen
+Carnet ¦ Familljennoriichten
+Nouvelles des nôtres ¦ Neiegkeete vun eise Leit
+Anniversaires ¦ Gebuertsdeeg
+{n} centimes ¦ {n} Centimes
+Le kilo de pain : environ {price}. ¦ De Kilo Brout: ongeféier {price}.
+Qui fait quoi ¦ Wie mécht wat
+Composée à partir de l’arbre de famille · {y} ¦ Zesummegestallt aus dem Stammbam · {y}
+Le fond d’écran du jour ¦ Den Hannergrondbild vum Dag
+Chaque jour un ancêtre en image, aux dimensions de ton écran : couleurs, motif, photo, textes, calendrier… tout se règle. ¦ All Dag e Virfahr als Bild, an der Gréisst vun dengem Ecran: Faarwen, Muster, Foto, Texter, Kalenner… alles ass astellbar.
+L’ANCÊTRE DU JOUR ¦ DE VIRFAHR VUM DAG
+Ordinateur ¦ Computer
+Grand écran (2K) ¦ Groussen Ecran (2K)
+Écran 4K ¦ 4K-Ecran
+Écran très large ¦ Ganz breeden Ecran
+Mac Retina ¦ Mac Retina
+Tablette ¦ Tablet
+Tablette debout ¦ Tablet am Héichformat
+Téléphone Android ¦ Android-Handy
+L’ancêtre (celui du jour par défaut) ¦ De Virfahr (standardméisseg dee vum Dag)
+🎨 Couleurs et fond ¦ 🎨 Faarwen an Hannergrond
+Les couleurs ¦ D’Faarwen
+Selon l’époque de l’ancêtre ¦ No der Zäit vum Virfahr
+Crème et encre ¦ Crème an Tënt
+Vert sauge ¦ Salbeigréng
+Océan ¦ Ozean
+Poudre ¦ Puder
+Le dégradé ¦ De Verlaf
+En biais ¦ Schréi
+De haut en bas ¦ Vun uewe bis ënnen
+De gauche à droite ¦ Vu lénks no riets
+En rond ¦ Ronn
+Aucun (uni) ¦ Keen (eefaarweg)
+Rayures fines ¦ Fein Sträifen
+Un arbre en filigrane ¦ E Bam als Waassermark
+La photo floutée en fond ¦ Déi verschwomme Foto am Hannergrond
+🖼️ La photo ¦ 🖼️ D’Foto
+En arc ¦ Mat Bou
+La place ¦ D’Plaz
+En haut, centrée ¦ Uewen, zentréiert
+La taille ¦ D’Gréisst
+L’alignement ¦ D’Ausriichtung
+L’étiquette ¦ D’Etikett
+Sa vie en deux phrases ¦ Säi Liewen an zwee Sätz
+Une phrase à moi ¦ E Saz vu mir
+Une devise, un souvenir… ¦ Eng Devise, eng Erënnerung…
+🧩 En plus ¦ 🧩 Extraen
+Le calendrier du mois ¦ De Kalenner vum Mount
+Laisser la place pour ¦ Plaz loosse fir
+les icônes du bureau (à gauche) ¦ d’Ikonen um Desktop (lénks)
+l’heure du téléphone (en haut) ¦ d’Auerzäit vum Handy (uewen)
+Chaque jour un autre ancêtre — en priorité celui dont c’est l’anniversaire de naissance ou de décès. Tes réglages sont gardés sur cet ordinateur. ¦ All Dag en anere Virfahr — am léifsten dee, deem säi Gebuerts- oder Doudesdag sech jäert. Deng Astellunge ginn op dësem Computer behalen.
+Le fond d’écran (image PNG) ¦ D’Hannergrondbild (PNG-Bild)
+Fond d’écran du jour ¦ Hannergrondbild vum Dag
+Les passeports ¦ D’Päss
+Le passeport intérieur ou pour l’étranger d’un ancêtre voyageur, son signalement, son portrait-robot, et l’import des relevés publiés (Saint-Brieuc…). ¦ Den Inlandspass oder de Pass fir d’Ausland vun engem reesende Virfahr, seng Personenbeschreiwung, säi Phantombild, an den Import vu publizéierten Auszich (Saint-Brieuc…).
+＋ Ajouter un passeport ¦ ＋ E Pass derbäisetzen
+⤒ Importer un relevé (XML, CSV)… ¦ ⤒ En Auszuch importéieren (XML, CSV)…
+Un relevé publié (par exemple sur data.gouv.fr) ¦ E publizéierten Auszuch (zum Beispill op data.gouv.fr)
+{n} passeport rattaché ¦ {n} Pass verbonnen
+« ＋ Ajouter un passeport », ou importe un relevé publié. ¦ „＋ E Pass derbäisetzen“, oder importéier e publizéierten Auszuch.
+Grand-parent raconte ¦ Grousselteren erzielen
+Un récit dicté ou collé : les naissances, mariages, métiers et domiciles repérés, comparés à l’arbre, à ajouter en un clic. ¦ Eng diktéiert oder agepecht Geschicht: déi fonnte Gebuerten, Bestietnesser, Beruffer a Wunnsëtzer, mam Bam verglach, mat engem Klick derbäizesetzen.
+Qui raconte ¦ Wien erzielt
+🎤 Dicter ¦ 🎤 Diktéieren
+🔍 Repérer les faits ¦ 🔍 D’Fakten erkennen
+Le repérage des faits lit les récits écrits en français. ¦ D’Erkenne vu Fakte liest Geschichten, déi op Franséisch geschriwwe sinn.
+Le récit (dicté, collé, ou recopié d’un enregistrement) ¦ D’Geschicht (diktéiert, agepecht oder vun enger Opnam ofgeschriwwen)
+💾 Enregistrer le récit ¦ 💾 D’Geschicht späicheren
+Rangé dans le bloc ✨ Trésors de la fiche ¦ Am Block ✨ Schätz vun der Fiche ofgeluecht
+Partager une branche (pour un temps) ¦ En Zweig deelen (fir eng Zäit)
+Un fichier à envoyer à un cousin : la branche sans les vivants, protégée par un mot de passe, qui expire à la date choisie. ¦ E Fichier fir engem Koseng ze schécken: den Zweig ouni déi Lieweg, mat engem Passwuert geschützt, deen um gewielten Datum ofleeft.
+La branche de ¦ Den Zweig vum
+Valable jusqu’au ¦ Gëlteg bis
+Mot de passe (le fichier est chiffré, illisible sans lui) ¦ Passwuert (de Fichier ass verschlësselt, ouni et net ze liesen)
+à donner à part, par téléphone par exemple ¦ separat ze ginn, zum Beispill um Telefon
+Montrer ou cacher le mot de passe ¦ Passwuert weisen oder verstoppen
+Quatre mots et un nombre, faciles à dicter ¦ Véier Wierder an eng Zuel, einfach ze diktéieren
+🎲 En proposer un ¦ 🎲 Eent virschloen
+Copier le mot de passe ¦ Passwuert kopéieren
+Sans mot de passe (déconseillé : quiconque reçoit le fichier peut le lire, et la date limite ne protège plus rien) ¦ Ouni Passwuert (net ze recommandéieren: jiddereen, deen de Fichier kritt, kann e liesen, an den Ofleefdatum schützt näischt méi)
+Un seul fichier HTML, qui s’ouvre dans n’importe quel navigateur, sans l’application : à envoyer par courriel ou à déposer sur un nuage. Retirées, avec les phrases qui les nomment : les personnes vivantes ou probablement vivantes (même règle que l’export GEDCOM « Pour partager »), les fiches confidentielles. Les numéros de fiche ne sortent pas. ¦ Een eenzegen HTML-Fichier, deen an all Browser opgeet, ouni d’App: fir per E-Mail ze schécken oder an eng Cloud ze leeën. Ewechgeholl, mat de Sätz, déi se nennen: déi lieweg oder wahrscheinlech lieweg Persounen (selwecht Reegel wéi beim GEDCOM-Export „Fir ze deelen“), déi vertraulech Fichen. D’Fichennummeren ginn net mat eraus.
+🔐 Ce que protège ce fichier, et ce qu’il ne protège pas ¦ 🔐 Wat dëse Fichier schützt, a wat en net schützt
+Chiffrement AES-256-GCM, clé tirée du mot de passe (PBKDF2, {n} tours) : sans le mot de passe, le contenu (noms compris, titre compris) est illisible. ¦ AES-256-GCM-Verschlësselung, Schlëssel aus dem Passwuert ofgeleet (PBKDF2, {n} Tier): ouni d’Passwuert ass den Inhalt (och d’Nimm an den Titel) net ze liesen.
+Le fichier ne se connecte à rien (aucune adresse internet n’est appelée, ce que le navigateur fait respecter). ¦ De Fichier verbënnt sech mat näischt (keng Internetadress gëtt opgeruff, an dat setzt de Browser duerch).
+La date limite est vérifiée à l’ouverture, mais quelqu’un qui a le mot de passe et recule l’horloge de son ordinateur peut la contourner, ou recopier ce qu’il voit : un partage ne se reprend pas. Ne partage que ce que tu acceptes de voir circuler. ¦ Den Ofleefdatum gëtt beim Opmaache kontrolléiert, mee een, deen d’Passwuert huet an d’Auer vu sengem Computer zréckstellt, kann en ëmgoen, oder ofschreiwen, wat e gesäit: eppes Gedeeltes hëlt een net méi zréck. Deel nëmmen dat, wat s de bereet bass, ronderëm goen ze gesinn.
+Envoie le mot de passe par un autre chemin que le fichier (téléphone, SMS) : les deux ensemble dans le même courriel ne protègent rien. ¦ Schéck d’Passwuert op engem anere Wee wéi de Fichier (Telefon, SMS): allebéid zesummen an der selwechter E-Mail schützen näischt.
+{n} personnes partagées ¦ {n} gedeelt Persounen
+{n} retirées (vivantes ou récentes) ¦ {n} ewechgeholl (lieweg oder rezent)
+🔗 Fabriquer le fichier à partager ¦ 🔗 De Fichier zum Deele maachen
+Le passeport des lieux ¦ De Pass vun de Plazen
+Un tampon par village de l’arbre : quand tu y vas, il se colore. Combien en as-tu visité ? ¦ E Stempel fir all Duerf aus dem Bam: wann s de do hi gees, gëtt e faarweg. Wéi vill hues de der scho besicht?
+Le carnet des tampons, à imprimer ¦ D’Stempelheft, zum Drécken
+{n} / {total} lieux visités ¦ {n} / {total} Plazen besicht
+Chaque lieu de l’arbre a son tampon. Quand tu y vas — le village, l’église, la mairie, le cimetière —, clique dessus : « J’y suis allé ». ¦ All Plaz aus dem Bam huet säi Stempel. Wann s de do hi gees — d’Duerf, d’Kierch, d’Gemeng, de Kierfecht —, klick drop: „Ech war do“.
+{n} pers. ¦ {n} Pers.
+Le tour du monde des ancêtres ¦ D’Weltrees vun de Virfahren
+Les kilomètres parcourus de lieu en lieu, le plus long voyage, le plus loin du berceau, siècle après siècle. ¦ D’Kilometeren, déi vu Plaz zu Plaz zréckgeluecht goufen, déi längste Rees, am wäitste vun doheem, Joerhonnert fir Joerhonnert.
+Tous ensemble ¦ All zesummen
+{n} % du chemin vers la Lune ¦ {n} % vum Wee bis bei de Mound
+Le plus long voyage ¦ Déi längste Rees
+Le plus loin du berceau ({place}) ¦ Am wäitste vun doheem ({place})
+Les grands voyageurs ¦ Déi grouss Reesend
+Entre le berceau des parents et celui des enfants ¦ Tëscht der Gebuertsplaz vun den Elteren an där vun de Kanner
+La distance moyenne, siècle par siècle, entre le lieu de naissance d’un parent et celui de son enfant : la famille qui s’éloigne de son village. ¦ Déi duerchschnëttlech Distanz, Joerhonnert fir Joerhonnert, tëscht der Gebuertsplaz vun engem Elterendeel an där vu sengem Kand: d’Famill, déi sech vun hirem Duerf ewechbeweegt.
+Les maisons dans le temps ¦ D’Haiser duerch d’Zäit
+Un village, une maison : qui y a vécu, de quand à quand, génération après génération. ¦ En Duerf, en Haus: wien do gewunnt huet, vu wéini bis wéini, Generatioun fir Generatioun.
+{n} personnes sur {y} ans ¦ {n} Persounen iwwer {y} Joer
+{place} : {y} ans de présence de la famille, sur {n} générations d’ancêtres ¦ {place}: {y} Joer, wou d’Famill do war, iwwer {n} Generatioune vu Virfahren
+1 sou ¦ 1 sou
+{n} membre de la famille en vie ¦ {n} Familljemember, deen lieft
+Pas d’autres nouvelles. ¦ Keng aner Neiegkeeten.
+Rien cette année. ¦ Näischt dëst Joer.
+1 franc ¦ 1 Frang
+5 francs ¦ 5 Frang
+Ce soir, on raconte {n} vie de la famille de {name}. ¦ Haut den Owend erziele mir {n} Liewen aus der Famill vum {name}.
+⏳ Ce partage a expiré. ¦ ⏳ Dës Deelung ass ofgelaf.
+Parents : ¦ Elteren:
+Enfants : ¦ Kanner:
+Chercher un nom… ¦ En Numm sichen…
+🔒 Ce partage est protégé. ¦ 🔒 Dës Deelung ass geschützt.
+Partage valable jusqu’au {date}. Les personnes vivantes ne sont pas incluses. ¦ Deelung gëlteg bis {date}. Déi lieweg Persoune sinn net dobäi.
+l’arbre dit {what} ¦ de Bam seet {what}
+concorde avec l’arbre ({what}) ¦ stëmmt mam Bam iwwereneen ({what})
+nouvelle lune ¦ Neimound
+(sous l’horizon) ¦ (ënnert dem Horizont)
+astre|Mars ¦ Mars
+{list} brillaient ¦ {list} hu geblénkt
+dernier croissant ¦ ofhuelend Sichel
+lune gibbeuse décroissante ¦ ofhuelende Mound
+Saturne ¦ Saturn
+dernier quartier ¦ lescht Véierel
+{km} km depuis l’étape d’avant ¦ {km} km zënter der Etapp virdrun
+🕯️ Garder la mémoire ¦ 🕯️ D’Erënnerung halen
+🔭 Découvrir ¦ 🔭 Entdecken
+Trésor ¦ Schatz
+Récits ¦ Geschichten
+Chasses au trésor ¦ Schatzsichen
+TRÉSORS ¦ SCHÄTZ
+trésors ¦ Schätz
+Garde au moins un trésor affiché. ¦ Loss mindestens ee Schatz ugewisen.
+Dossier vide ¦ Eidelen Dossier
+Les trésors n’ont pas pu être lus. ¦ D’Schätz konnten net gelies ginn.
+Broderie — {title} ¦ Stéckerei — {title}
+Aucun visage connu dans cette lignée ¦ Kee bekannt Gesiicht an dëser Lini
+La Gazette {y} ¦ D’Gazette {y}
+Fond d’écran ¦ Hannergrondbild
+Pégase ¦ Pegasus
+Andromède ¦ Andromeda
+Persée ¦ Perseus
+sous l’horizon ¦ ënnert dem Horizont
+date exacte inconnue ¦ genauen Datum onbekannt
+Les deux guerres ¦ Déi zwee Kricher
+(aucun événement daté) ¦ (keen datéiert Evenement)
+Faire-part — {name} ¦ Annonce — {name}
+Faire-part ¦ Annonce
+L’arbre est vide ¦ De Bam ass eidel
+{n} prénoms transmis par-dessus une génération ¦ {n} Virnimm iwwer eng Generatioun ewech weiderginn
+{n} mots expliqués ¦ {n} Wierder erkläert
+{n} mot expliqué ¦ {n} Wuert erkläert
+Aucun vieux mot reconnu. ¦ Keen alt Wuert erkannt.
+sous l’évier ¦ ënnert dem Spullbecken
+Les chasses préparées ¦ Déi virbereete Sichen
+{n} cachettes ¦ {n} Verstopper
+Donne au moins deux cachettes. ¦ Gëff mindestens zwee Verstopper un.
+Chasse au trésor ¦ Schatzsich
+La chasse sera effacée. ¦ D’Sich gëtt geläscht.
+Carte {n} ¦ Kaart {n}
+(à donner au départ) ¦ (fir am Ufank auszedeelen)
+{answer} → cherchez {where} ¦ {answer} → sicht {where}
+Il faut quelques ancêtres avec une date, un lieu ou un métier ¦ Et brauch e puer Virfahre mat engem Datum, enger Plaz oder engem Beruff
+🕵️ Un ancêtre mystère au hasard ¦ 🕵️ E zoufällege Mystère-Virfahr
+{n} parties ¦ {n} Partien
+{n} partie ¦ {n} Partie
+🎉 Bravo ! ¦ 🎉 Bravo!
+😶 C’était… ¦ 😶 Et war…
+🎲 Un autre, au hasard ¦ 🎲 En aneren, zoufälleg
+{n} essais ratés ¦ {n} falsch Versich
+Choisis quelqu’un. ¦ Wiel een aus.
+Une autre vie aurait été possible… mais c’est celle-là qui a mené jusqu’à toi. ¦ En anert Liewe wier méiglech gewiescht… mee et ass dëst, dat bis bei dech gefouert huet.
+📖 Recommencer ¦ 📖 Nei ufänken
+Tourner la page → ¦ D’Säit ëmdréinen →
+Aucune coïncidence trouvée ¦ Keen Zoufall fonnt
+🦋 {n} vie n’aurait jamais existé ¦ 🦋 {n} Liewen hätt et ni ginn
+la fenêtre d’impression n’est pas prête. ¦ d’Drockfënster ass net prett.
+🃏 7 FAMILLES ¦ 🃏 QUARTETT
+(visage repéré) ¦ (Gesiicht erkannt)
+Ajoute-en depuis sa fiche (Médias), puis reviens ici. ¦ Setz der vu senger Fiche aus derbäi (Medien), a komm dann hei zréck.
+Jeu remis comme au départ. ¦ Spill zréckgesat wéi am Ufank.
+Donne au moins une équipe. ¦ Gëff mindestens eng Equipp un.
+Égalité ! ¦ Gläichstand!
+{n} point ¦ {n} Punkt
+Question {n} / {total} ¦ Fro {n} / {total}
+Question suivante ▶ ¦ Nächst Fro ▶
+Vidéo prête. ¦ Video prett.
+Donne-lui un titre. ¦ Gëff em en Titel.
+SOUVENIR DES SENS ¦ ERËNNERUNG VUN DE SËNNER
+Chaque samedi, elle cirait les marches… ¦ All Samschdeg huet si d’Trap gewuesst…
+La préparation ¦ D’Zoubereedung
+CHANSONS DE LA FAMILLE ¦ LIDDER VUN DER FAMILL
+Les paroles ¦ Den Text
+Quand on la chantait ¦ Wéini et gesonge gouf
+Raconte-moi une journée ordinaire quand tu avais dix ans. ¦ Verzill mer vun engem ganz normalen Dag, wéi s du zéng Joer al waars.
+Qu’est-ce qu’on apprenait par cœur ? ¦ Wat huet een auswenneg geléiert?
+Y avait-il des histoires qu’on se racontait toujours dans la famille ? ¦ Gouf et Geschichten, déi een sech an der Famill ëmmer erëm erzielt huet?
+Quel outil ou quel geste te reste dans les mains ? ¦ Wéi en Handwierksgeschir oder wéi eng Beweegung hues du nach ëmmer an den Hänn?
+Comment as-tu rencontré ton mari, ta femme, ton amour ? ¦ Wéi hues du däi Mann, deng Fra, deng Léift kennegeléiert?
+Où avez-vous habité au début ? ¦ Wou hutt Dir am Ufank gewunnt?
+Où étais-tu pendant la guerre ? ¦ Wou waars du am Krich?
+Y a-t-il un jour que tu n’as jamais oublié ? ¦ Gëtt et en Dag, deen s du ni vergiess hues?
+Comment se chauffait-on, comment s’éclairait-on ? ¦ Wéi huet een d’Haus gehëtzt, wéi huet een et beliicht?
+Comment fêtait-on Noël ? ¦ Wéi huet ee Chrëschtdag gefeiert?
+S’ouvre ¦ Geet op
+L’anniversaire de ¦ De Gebuertsdag vum
+À ses ¦ Mat sengen
+La lettre ¦ De Bréif
+Écris ici… ¦ Schreif hei…
+LETTRE AUX DESCENDANTS ¦ BRÉIF UN D’NOKOMMEN
+✉️ La lettre ¦ ✉️ De Bréif
+✉️ Nouvelle lettre ¦ ✉️ Neie Bréif
+🔒 Sceller la lettre ¦ 🔒 De Bréif versigelen
+Choisis une personne dont on connaît la naissance. ¦ Wiel eng Persoun, vun där een d’Gebuert kennt.
+Écris quelque chose ou joins un son, une vidéo ou une photo. ¦ Schreif eppes oder setz en Toun, e Video oder eng Foto derbäi.
+{n} scellées ¦ {n} versigelt
+{n} ouvertes ¦ {n} opgemaach
+De {from} ¦ Vum {from}
+écrite ¦ geschriwwen
+Sommaire ¦ Inhaltsverzeechnes
+ça rappelle {who} ¦ dat erënnert un {who}
+{n} recettes transmises ¦ {n} weiderginn Rezepter
+{n} recette transmise ¦ {n} weiderginnt Rezept
+Chantée par {who} ¦ Gesonge vum {who}
+Sans enregistrement ¦ Ouni Opnam
+(le son reste dans les médias) ¦ (den Toun bleift an de Medien)
+Entretien avec {name} ¦ Interview mam {name}
+Choisis au moins un thème. ¦ Wiel mindestens een Thema.
+Question suivante → ¦ Nächst Fro →
+Passer ¦ Iwwersprangen
+🔊 Relire ¦ 🔊 Nach eng Kéier liesen
+J’enregistre l’entretien… ¦ Ech huelen den Interview op…
+Entretien gardé (sans son). ¦ Interview behalen (ouni Toun).
+{n} bougies allumées ¦ {n} Käerze brennen
+mélange ¦ Mëschung
+UNE BOUGIE ¦ ENG KÄERZ
+encore {n} j ¦ nach {n} D.
+demain ¦ muer
+allumée ¦ ugestach
+par {name} ¦ vum {name}
+Bougie supprimée ¦ Käerz geläscht
+Bougie supprimée. ¦ Käerz geläscht.
+Ambiance arrêtée (minuterie). ¦ Klangwelt gestoppt (Timer).
+Monte au moins une couche. ¦ Dréi mindestens eng Ebene erop.
+Garder ce mélange ¦ Dës Mëschung behalen
+Mélange gardé. ¦ Mëschung behalen.
+« {name} » supprimé. ¦ „{name}“ geläscht.
+Ce navigateur ne sait pas enregistrer. ¦ Dëse Browser kann net ophuelen.
+Ambiance — {name} ¦ Klangwelt — {name}
+à ¦ bis
+Tous les indices s’accordent (vers {y}). ¦ All d’Indicë stëmmen iwwereneen (ëm {y}).
+Qui cela peut être ¦ Wien et kéint sinn
+Avait {n} ans vers {y} ¦ War ëm {y} {n} Joer al
+Reprendre la branche {name} ¦ Den Zweig {name} erëm ophuelen
+RAPPEL DE RECHERCHE ¦ RECHERCHEERËNNERUNG
+Pas touchée depuis {d} ¦ Zënter {d} net méi ugepak
+modifiée ¦ geännert
+Jamais modifiée ¦ Ni geännert
+rien d’évident ne manque ¦ et feelt näischt Offensichtleches
+Thème d’époque arrêté. ¦ Epochentheema ausgeschalt.
+châtains ¦ kastaniebrong
+coloré ¦ rout am Gesiicht
+cicatrice au front ¦ Narf op der Stir
+{n} passeports rattachés ¦ {n} Päss verbonnen
+{n} affichés ¦ {n} ugewisen
+{n} affiché ¦ {n} ugewisen
+Dans l’arbre ¦ Am Bam
+Délivré ¦ Ausgestallt
+son grand-père ¦ säi Grousspapp
+sa grand-mère ¦ seng Groussmamm
+un frère ou une sœur ¦ e Brudder oder eng Schwëster
+{n} faits repérés ¦ {n} Fakten erkannt
+{n} fait repéré ¦ {n} Fakt erkannt
+{n} personne partagée ¦ {n} Persoun gedeelt
+PASSEPORT ¦ PASS
+🛂 Nouveau passeport ¦ 🛂 Neie Pass
+Passeport enregistré. ¦ Pass gespäichert.
+je ne trouve pas d’enregistrements répétés dans ce XML ¦ ech fannen a dësem XML keng widderholl Andréi
+{n} passeports ¦ {n} Päss
+aucune ¦ keng
+un nom, une commune, un métier… ¦ en Numm, eng Gemeng, e Beruff…
+Ce relevé est trop gros (20 Mo au plus). ¦ Dësen Auszuch ass ze grouss (maximal 20 MB).
+{n} passeports lus. ¦ {n} Päss gelies.
+Passeport intérieur ¦ Inlandspass
+＋ Passeport ¦ ＋ Pass
+Les passeports n’ont pas pu être lus. ¦ D’Päss konnten net gelies ginn.
+Modifier ce passeport ¦ Dëse Pass änneren
+Aucun passeport ne correspond ¦ Kee Pass passt
+Passeports ¦ Päss
+Voyageur ¦ Reesenden
+Délivré à ¦ Ausgestallt zu
+📍 Délivré à ¦ 📍 Ausgestallt zu
+sorte d’événement introuvable ¦ Zort vun Evenement net fonnt
+Aucun fait repéré ¦ Kee Fakt erkannt
+⏹ Arrêter la dictée ¦ ⏹ Den Diktat stoppen
+Solide. ¦ Solid.
+Oui, quand même ¦ Jo, trotzdem
+La branche {name} — partagée par la famille ¦ Den Zweig {name} — vun der Famill gedeelt
+PASSEPORT DES LIEUX ¦ PASS VUN DE PLAZEN
+Où es-tu né, et dans quelle maison as-tu grandi ? ¦ Wou bass du gebuer, an a wéi engem Haus bass du grouss ginn?
+Où es-tu née, et dans quelle maison as-tu grandi ? ¦ Wou bass du gebuer, an a wéi engem Haus bass du grouss ginn?
+À quoi jouais-tu, et avec qui ? ¦ Wat hues du gespillt, a mat wiem?
+Quelle odeur ou quel bruit te ramène tout de suite à ton enfance ? ¦ Wéi ee Geroch oder wéi ee Geräisch bréngt dech direkt zréck an deng Kandheet?
+Qui était la personne la plus importante pour toi, petit ? ¦ Wien war déi wichtegst Persoun fir dech, wéi s du kleng waars?
+Qui était la personne la plus importante pour toi, petite ? ¦ Wien war déi wichtegst Persoun fir dech, wéi s du kleng waars?
+Comment allais-tu à l’école ? ¦ Wéi bass du an d’Schoul gaangen?
+Te souviens-tu de ton maître ou de ta maîtresse ? ¦ Erënners du dech un däi Léierer oder deng Léierin?
+Jusqu’à quel âge es-tu allé à l’école, et pourquoi ? ¦ Bis wéi engem Alter bass du an d’Schoul gaangen, a firwat?
+Jusqu’à quel âge es-tu allée à l’école, et pourquoi ? ¦ Bis wéi engem Alter bass du an d’Schoul gaangen, a firwat?
+Que sais-tu de tes grands-parents ? ¦ Wat weess du vun denge Grousselteren?
+Quels étaient les métiers de tes parents ? ¦ Wat fir Beruffer haten deng Elteren?
+Y a-t-il un secret ou une brouille dont on parlait à voix basse ? ¦ Gouf et e Geheimnis oder e Sträit, iwwer deen ee just lues geschwat huet?
+Quels prénoms revenaient dans la famille, et pourquoi ? ¦ Wéi eng Virnimm koumen an der Famill ëmmer erëm, a firwat?
+Quel a été ton premier travail, et combien gagnais-tu ? ¦ Wat war deng éischt Aarbecht, a wéi vill hues du verdéngt?
+Raconte une journée de travail. ¦ Verzill en Aarbechtsdag.
+De quoi es-tu le plus fier dans ton métier ? ¦ Op wat bass du an dengem Beruff am meeschte stolz?
+Comment s’est passé le mariage ? ¦ Wéi ass d’Hochzäit verlaf?
+Qu’est-ce qui manquait le plus ? ¦ Wat huet am meeschte gefeelt?
+Qui est parti, et qui est revenu ? ¦ Wien ass fortgaangen, a wien ass zréckkomm?
+Décris-moi la maison : les pièces, la cuisine, le jardin. ¦ Beschreif mir d’Haus: d’Zëmmer, d’Kiche, de Gaart.
+Qu’est-ce qu’on mangeait le dimanche ? ¦ Wat huet een e Sonndeg giess?
+Quelles étaient les fêtes du village ? ¦ Wat waren d’Fester am Duerf?
+Quelle chanson chantait-on à la fin des repas ? ¦ Wat fir e Lidd huet een um Enn vum Iessen gesongen?
+Qu’est-ce que tu aimerais que tes arrière-petits-enfants sachent de toi ? ¦ Wat géifs du gären, dass deng Urenkelen iwwer dech wëssen?
+Quel conseil donnerais-tu à quelqu’un de vingt ans ? ¦ Wat fir e Rot géifs du engem Zwanzegjärege ginn?
+Qu’est-ce qui a le plus changé dans ta vie ? ¦ Wat huet sech an dengem Liewen am meeschte geännert?
+{n} livre ¦ {n} livre
+{n} livres ¦ {n} livres
+{n} franc ¦ {n} Frang
+{n} francs ¦ {n} Frang
+{n} euro ¦ {n} Euro
+unité|en ¦ an
+année|à ¦ bis
+date|Le ¦ Den
+force|faible ¦ schwaach
+force|correct ¦ korrekt
+force|solide ¦ solid
+aucune|personne ¦ keen
+signalement|1 m 65 ¦ 1 m 65
+signalement|châtains ¦ kastaniebrong
+signalement|gris ¦ gro
+signalement|aquilin ¦ Adlernues
+signalement|rond ¦ ronn
+signalement|ovale ¦ oval
+signalement|coloré ¦ rout am Gesiicht
+signalement|brune ¦ brong
+signalement|cicatrice au front ¦ Narf op der Stir
+soit {n} baguette d’aujourd’hui ¦ also {n} Baguette vun haut
+De la Révolution au Second Empire, il fallait un passeport pour aller d’un département à l’autre ; il portait le <b>signalement</b> du voyageur, une description qui remplace souvent la photo qu’on n’a pas. Les relevés publiés (par exemple les passeports intérieurs de Saint-Brieuc, 1830-1839, sur data.gouv.fr) s’importent ici : télécharge le fichier, puis « Importer un relevé ». ¦ Vun der Revolutioun bis zum Zweete Keeserräich huet ee e Pass gebraucht, fir vun engem Departement an dat anert ze reesen; en hat d’<b>Personebeschreiwung</b> vum Reesenden drop, eng Beschreiwung, déi dacks d’Foto ersetzt, déi mir net hunn. Publizéiert Auszich (zum Beispill d’Inlandspäss vu Saint-Brieuc, 1830-1839, op data.gouv.fr) kann een hei importéieren: luet de Fichier erof, dann „En Auszuch importéieren“.
+🎲 Jouer en famille ¦ 🎲 Mat der Famill spillen
+🎨 Créer et fabriquer ¦ 🎨 Erstellen a bastelen
+🗺️ Lieux et voyages ¦ 🗺️ Plazen a Reesen
+🧰 Outils malins ¦ 🧰 Clever Tools
+L’atelier de mise en page n’est pas disponible ici. ¦ D’Atelier fir d’Säitegestaltung ass hei net disponibel.
+Une copie est rangée dans les médias (et sur la fiche) : « {title} ». ¦ Eng Kopie ass an de Medien (an op der Fiche) ofgeluecht: „{title}“.
+Une copie est rangée dans les médias : « {title} ». ¦ Eng Kopie ass an de Medien ofgeluecht: „{title}“.
+Ouvrir dans la mise en page ¦ An der Säitegestaltung opmaachen
+Pour tout retravailler (textes, cadres, pages) ¦ Fir alles nei ze bearbechten (Texter, Rummen, Säiten)
+⤓ Exporter ¦ ⤓ Exportéieren
+🖨 Imprimer ▾ ¦ 🖨 Drécken ▾
+Les trésors et leurs dossiers ¦ D’Schätz an hir Dossieren
+Réordonner les trésors ¦ D’Schätz nei uerdnen
+Ordre et trésors affichés enregistrés. ¦ Uerdnung an ugewise Schätz gespäichert.
+Pour s’émerveiller, jouer, créer et garder la mémoire, à partir de ton arbre. ¦ Fir ze stawen, ze spillen, ze erstellen an d’Erënnerung ze halen, vun dengem Bam aus.
+⚙️ Réglages pour y ranger des trésors (ou l’effacer). ¦ ⚙️ Astellungen, fir Schätz dran ofzeleeën (oder en ze läschen).
+＋ Souvenir ¦ ＋ Erënnerung
+＋ Lettre ¦ ＋ Bréif
+Aucun trésor pour l’instant ¦ Fir de Moment keng Schätz
+Un souvenir (une odeur, un bruit), une recette, une chanson, une lettre pour plus tard, un entretien enregistré… tout se garde dans l’onglet ✨ Trésors. ¦ Eng Erënnerung (e Geroch, e Geräisch), e Rezept, e Lidd, e Bréif fir méi spéit, en opgeholltent Interview… alles gëtt am Reiter ✨ Schätz gehalen.
+Grille de broderie ¦ Stickmuster
+Un carré = un point de croix ; les traits épais tous les 10 points. ¦ E Feld = e Kräizstéch; déi déck Stréch all 10 Stéch.
+Aucun portrait dans l’arbre ¦ Keng Portraiten am Bam
+Ajoute une photo de portrait sur les fiches, ou encadre les visages dans la visionneuse. ¦ Setz e Portraitfoto op d’Fichen, oder ramm d’Gesiichter am Bildbetruechter an.
+{list}. Ajoute des portraits ou encadre les visages sur les photos. ¦ {list}. Setz Portraite derbäi oder ramm d’Gesiichter op de Fotoen an.
+Le visage moyen de {n} génération ¦ Dat duerchschnëttlecht Gesiicht vun {n} Generatioun
+{n} sous ¦ {n} sous
+Il faut des ancêtres avec une date de naissance ¦ Et brauch Virfahre mat engem Gebuertsdatum
+premier croissant ¦ zouhuelend Hallefmound
+premier quartier ¦ éischt Véierel
+lune gibbeuse croissante ¦ zouhuelende Mound
+{place} (pas placé sur la carte : ciel de Paris) ¦ {place} (net op der Kaart placéiert: Himmel vu Paräis)
+il faisait jour : voici les étoiles cachées par le soleil ¦ et war Dag: hei sinn d’Stären, déi vun der Sonn verstoppt goufen
+Il faut au moins l’année de naissance. ¦ Op mannst d’Gebuertsjoer ass néideg.
+⚠️ Date exacte inconnue : ciel du 1er juillet. ¦ ⚠️ Genauen Datum onbekannt: Himmel vum 1. Juli.
+⚠️ Lieu non placé sur la carte. ¦ ⚠️ Plaz net op der Kaart placéiert.
+Il faut au moins l’année de naissance pour voir le ciel. ¦ Op mannst d’Gebuertsjoer ass néideg, fir den Himmel ze gesinn.
+Pas de portrait sur cette fiche. ¦ Kee Portrait op dëser Fiche.
+Avant 1700 ¦ Virun 1700
+Le XVIIIe siècle ¦ D’18. Joerhonnert
+Révolution et Empire ¦ Revolutioun a Keeserräich
+Le XIXe siècle ¦ D’19. Joerhonnert
+Depuis 1946 ¦ Zënter 1946
+Aucune signature repérée pour l’instant ¦ Fir de Moment keng Ënnerschrëft erkannt
+Ouvre un acte dans la visionneuse des médias, puis « ＋ Identifier une signature » : encadre la signature et dis de qui elle est. Elle viendra se poser ici, rangée par époque. ¦ Maach en Akt am Bildbetruechter vun de Medien op, dann „＋ Eng Ënnerschrëft identifizéieren“: ramm d’Ënnerschrëft an a so, vu wiem se ass. Si kënnt dann hei hin, no Epoch zortéiert.
+Pas d’ancêtres connus pour cette personne ¦ Keng bekannt Virfahre fir dës Persoun
+Aucun prénom ne saute de génération dans l’arbre pour l’instant ¦ Fir de Moment spréngt kee Virnumm am Bam eng Generatioun iwwer
+laboureur, brumaire, dot… ¦ laboureur, brumaire, dot…
+(passe la souris dessus) : ¦ (fuer mat der Maus driwwer):
+L’arbre ne donne que {n} énigmes : enlève des cachettes. ¦ De Bam gëtt just {n} Rätselen: huel e puer Verstopplazen ewech.
+L’arbre ne donne que {n} énigme : enlève des cachettes. ¦ De Bam gëtt just {n} Rätsel: huel e puer Verstopplazen ewech.
+Chasse prête : imprime les cartes. ¦ Schatzsich prett: dréck d’Kaarten.
+Supprimer ? ¦ Läschen?
+sous le lit ¦ ënner dem Bett
+dans le four ¦ am Uewen
+derrière le canapé ¦ hannert dem Canapé
+dans la baignoire ¦ an der Badbidden
+dans le panier à linge ¦ am Wäschkuerf
+derrière la porte du garage ¦ hannert der Garagenpaart
+dans la boîte à chaussures ¦ an der Schongkëscht
+sous le coussin ¦ ënner dem Këssen
+dans le pot de fleurs ¦ am Blummendëppen
+au fond du frigo ¦ hannen am Frigo
+sous la table de la cuisine ¦ ënner dem Kichendësch
+sous le tapis ¦ ënner dem Teppech
+(à cacher : {where}) ¦ (ze verstoppen: {where})
+C’est la dernière : le trésor vous attend ! ¦ Dat ass déi lescht: de Schatz waart op iech!
+<b>Pour l’organisateur.</b> Donnez la carte 1 aux joueurs. Cachez chaque carte suivante à l’endroit indiqué en haut de la carte. Le trésor ({treasure}) va à : {where}. ¦ <b>Fir den Organisateur.</b> Gitt de Spiller d’Kaart 1. Verstoppt all nächst Kaart op der Plaz, déi uewen op der Kaart steet. De Schatz ({treasure}) kënnt: {where}.
+à vous de choisir ¦ wielt selwer
+{n} essai raté ¦ {n} falsche Versuch
+Non, ce n’est pas ça… un indice de plus. ¦ Nee, dat ass et net… nach en Indice.
+Il faut un ancêtre avec une date de naissance et un métier ou un mariage ¦ Et brauch e Virfahr mat engem Gebuertsdatum an engem Beruff oder engem Bestietnes
+Tu as fait {n} choix sur {total} comme {name}. ¦ Du hues {n} vun {total} Wieler gemaach wéi {name}.
+Une vie vécue à l’identique : tu connais bien ton ancêtre ! ¦ E Liewen, genee sou gelieft: du kenns däi Virfahr gutt!
+Avec tes choix, l’histoire de la famille aurait été tout autre. ¦ Mat denge Wieler wier d’Geschicht vun der Famill ganz anescht gewiescht.
+✨ Le même choix que ton ancêtre ! ¦ ✨ Déiselwecht Wiel wéi däi Virfahr!
+🌀 Une autre vie commence… mais revenons à la vraie. ¦ 🌀 En anert Liewe fänkt un… mee loosse mer op dat richtegt zréckkommen.
+Il faut des dates précises (jour et mois). ¦ Et brauch genee Datumer (Dag a Mount).
+{pct} % de l’arbre. ¦ {pct} % vum Bam.
+Personne ne descend de ce choix dans l’arbre ¦ Keen am Bam stamt vun dëser Wiel of
+Portrait de la fiche ¦ Portrait vun der Fiche
+Aucune photo jointe à cette fiche, ni de visage encadré sur une photo ¦ Keng Foto un dës Fiche ugehaang, an och kee Gesiicht op enger Foto agerummt
+🔍 Zoom ¦ 🔍 Zoom
+Glisse la photo dans le cadre pour la placer ; la molette (ou + et −) zoome. ¦ Zéi d’Foto am Rumm, fir se ze placéieren; d’Rad vun der Maus (oder + an −) zoomt.
+Les photos marquées d’un visage se recadrent toutes seules sur lui. ¦ D’Fotoe mat engem markéierte Gesiicht ginn automatesch op dat Gesiicht zougeschnidden.
+Pas encore assez de familles ¦ Nach net genuch Famillen
+Il faut au moins deux familles d’au moins six personnes (décédées) : complète l’arbre, ou essaie « par branche ». ¦ Et brauch op mannst zwou Famille mat op mannst sechs (verstuerwene) Persounen: vervollstänneg de Bam, oder probéier „no Zweig“.
+{n} famille de 6 cartes ({total} cartes). ¦ {n} Famill vu 6 Kaarten ({total} Kaarten).
+🃏 Le jeu des {n} familles ¦ 🃏 D’Spill vun de {n} Famillen
+Distribuez 6 cartes à chacun, le reste fait la pioche. À ton tour, demande à un joueur une carte d’une famille dont tu as déjà une carte (« Dans la famille {fam}, je voudrais {role} »). S’il l’a, il te la donne et tu rejoues ; sinon, « Pioche ! ». Une famille complète se pose devant soi. Celui qui a le plus de familles a gagné. ¦ Gitt jidderengem 6 Kaarten, de Rescht ass de Stapel. Wann s du drun bass, frees du e Spiller no enger Kaart vun enger Famill, vun där s du schonn eng Kaart hues („An der Famill {fam} hätt ech gär {role}“). Wann hien se huet, gëtt hien se dir an du spills nach eng Kéier; soss: „Zéi!“. Eng komplett Famill gëtt virun sech geluecht. Deen, deen déi meeschte Famillen huet, huet gewonnen.
+Les familles : {list}. ¦ D’Famillen: {list}.
+Impression recto verso (bord long) : chaque page de dos suit sa page de cartes, déjà retournée pour tomber pile derrière. ¦ Récto-verso drécken (laang Säit): all Récksäit kënnt no hirer Kaartesäit, schonn ëmgedréint, fir genee dohannert ze falen.
+Ajoute des personnes pour dessiner leur arbre. ¦ Setz Persounen derbäi, fir hire Bam ze zeechnen.
+L’arbre est trop petit pour faire des questions. ¦ De Bam ass ze kleng, fir Froen ze maachen.
+Voir la réponse (Entrée) ¦ D’Äntwert gesinn (Enter)
+✕ Fin ¦ ✕ Enn
+Il faut des lieux placés sur la carte (latitude et longitude) et datés pour faire le film ¦ Et brauch Plazen, déi op der Kaart placéiert (Breet a Längt) an datéiert sinn, fir de Film ze maachen
+🔴 Enregistrement… ¦ 🔴 Opnam…
+Aucun lieu de l’arbre n’est placé sur la carte (latitude et longitude) ¦ Keng Plaz aus dem Bam ass op der Kaart placéiert (Breet a Längt)
+Aucun lieu placé sur la carte pour cette personne ¦ Keng Plaz op der Kaart fir dës Persoun
+La position n’est pas disponible sur cet appareil. ¦ D’Positioun ass op dësem Apparat net disponibel.
+📍 Je cherche ta position… (l’histoire de chaque étape se lira toute seule à moins de 300 m) ¦ 📍 Ech sichen deng Positioun… (d’Geschicht vun all Etapp gëtt automatesch op manner wéi 300 m virgelies)
+dans {n} jour ¦ an {n} Dag
+dans {n} mois ¦ an {n} Méint
+dans {n} ans ¦ an {n} Joer
+De la part de (une fiche, ou un nom) ¦ Vun (eng Fiche oder en Numm)
+Pour (ex. « Léa », « mes petits-enfants », « celui qui reprendra la maison ») ¦ Fir (z. B. „Léa“, „meng Enkelkanner“, „deen, deen d’Haus iwwerhëlt“)
+à une date ¦ op engem Datum
+à un anniversaire ¦ op engem Gebuertsdag
+Un son, une vidéo ou une photo (facultatif) ¦ En Toun, e Video oder eng Foto (fräiwëlleg)
+Choisis le jour où la lettre s’ouvrira. ¦ Wiel den Dag, wou de Bréif opgeet.
+La date doit être dans le futur (sinon ce n’est plus une surprise). ¦ Den Datum muss an der Zukunft leien (soss ass et keng Iwwerraschung méi).
+Pour ses {n} ans ¦ Fir säin {n}. Gebuertsdag
+à ses {n} ans ¦ mat {n} Joer
+Lettre enregistrée. ¦ Bréif gespäichert.
+🔒 Lettre scellée : elle s’ouvrira le {date}. ¦ 🔒 Bréif versigelt: en geet den {date} op.
+🔒 En attente ¦ 🔒 Waart nach
+La lettre sera effacée pour de bon. ¦ De Bréif gëtt definitiv geläscht.
+Supprimer la lettre ? ¦ De Bréif läschen?
+Cet élément sera effacé pour de bon. ¦ Dëst Element gëtt definitiv geläscht.
+Rien à mettre dans le livre pour l’instant. ¦ Fir de Moment näischt fir an d’Buch.
+de la famille ¦ vun der Famill
+Le souvenir en quelques mots ¦ D’Erënnerung an e puer Wierder
+L’odeur de la cire dans l’escalier ¦ De Geroch vum Wuess an der Trap
+Ça rappelle (une fiche, ou un nom) ¦ Dat erënnert un (eng Fiche oder en Numm)
+la maison de Naves ¦ d’Haus zu Naves
+vers 1950, l’été ¦ ëm 1950, am Summer
+Un son, une photo (facultatif) ¦ En Toun, eng Foto (fräiwëlleg)
+LIVRE DE RECETTES ¦ REZEPTEBUCH
+Le nom de la recette ¦ Den Numm vum Rezept
+Le clafoutis de Rose ¦ De Clafoutis vum Rose
+La recette de (une fiche, ou un nom) ¦ D’Rezept vun (eng Fiche oder en Numm)
+Pour combien ¦ Fir wéi vill
+pour 6 ¦ fir 6
+Les ingrédients (un par ligne) ¦ D’Zoutaten (eng pro Linn)
+500 g de cerises noires ¦ 500 g schwaarz Kiischten
+3 œufs ¦ 3 Eeër
+Son histoire (d’où elle vient, quand on la faisait) ¦ Seng Geschicht (wou et hierkënnt, wéini et gemaach gouf)
+Une photo du plat ou de la fiche écrite à la main ¦ Eng Foto vum Plat oder vun der handgeschriwwener Rezeptfiche
+sur l’air de « {tune} » ¦ op d’Melodie vun „{tune}“
+Le titre (ou le premier vers) ¦ Den Titel (oder den éischte Vers)
+Chantée par (une fiche, ou un nom) ¦ Gesonge vun (eng Fiche oder en Numm)
+Sur l’air de ¦ Op d’Melodie vun
+L’enregistrement (son ou vidéo) ¦ D’Opnam (Toun oder Video)
+Le carnet de chansons ¦ D’Liddercarnet
+{n} chansons de la famille ¦ {n} Lidder vun der Famill
+{n} chanson de la famille ¦ {n} Lidd vun der Famill
+Supprimer la fiche de l’entretien ¦ D’Fiche vum Interview läschen
+La fiche de l’entretien (les questions et les repères) sera effacée ; le son reste dans les médias. ¦ D’Fiche vum Interview (d’Froen an d’Markéierungen) gëtt geläscht; den Toun bleift an de Medien.
+Le micro n’est pas disponible : l’entretien continue sans enregistrement (note les réponses). ¦ De Mikro ass net disponibel: d’Interview geet ouni Opnam weider (schreif d’Äntwerten op).
+Notes rapides (facultatif) ¦ Séier Notizen (fräiwëlleg)
+← Précédente ¦ ← Virdrun
+Dernière question : terminer ¦ Lescht Fro: ofschléissen
+▶ Reprendre ¦ ▶ Weidermaachen
+⏸ Pause ¦ ⏸ Paus
+⏹ Terminer ¦ ⏹ Ofschléissen
+Entretien enregistré : le son est dans les médias de la fiche. ¦ Interview gespäichert: den Toun ass an de Medie vun der Fiche.
+Personne à raconter de ce côté-là. ¦ Keen, iwwer deen ee vun där Säit erzielen kann.
+Un mot (facultatif) ¦ E Wuert (fräiwëlleg)
+Choisis pour qui. ¦ Wiel, fir wien.
+🕯️ Une bougie brûle pour {name} pendant {n} jours. ¦ 🕯️ Eng Käerz brennt fir {name} während {n} Deeg.
+📖 Le registre ¦ 📖 De Register
+Son nom : ¦ Säin Numm:
+Le nom de ce mélange ¦ Den Numm vun dëser Mëschung
+Choisis d’abord un de tes mélanges. ¦ Wiel fir d’éischt eng vun denge Mëschungen.
+Enregistrement de {d} : le fichier arrive à la fin (⤓ Exporter → fichier son, de nouveau, pour finir plus tôt). ¦ Opnam vun {d}: de Fichier kënnt um Enn (⤓ Exportéieren → Tounfichier nach eng Kéier, fir méi fréi opzehalen).
+Ce navigateur ne sait pas fabriquer de fichier son. ¦ Dëse Browser kann keen Tounfichier maachen.
+Je fabrique le fichier son… ¦ Ech maachen den Tounfichier…
+Les indices ne s’accordent pas tous : {n} sur {total} tombent dans cette période. Revois celui qui détonne. ¦ D’Indicen stëmmen net all iwwereneen: {n} vun {total} falen an dësen Zäitraum. Kuck nach eng Kéier deen, deen net passt.
+Personne dans l’arbre n’avait cet âge pendant cette période. ¦ Keen am Bam war während dësem Zäitraum an deem Alter.
+Indique l’âge apparent pour voir qui ça peut être. ¦ Gëff dat geschate Alter un, fir ze gesinn, wien et ka sinn.
+⏰ Me le rappeler ¦ ⏰ Mech drun erënneren
+Le rappel ¦ D’Erënnerung
+Écris le rappel. ¦ Schreif d’Erënnerung.
+Choisis la date du rappel. ¦ Wiel den Datum vun der Erënnerung.
+⏰ Rappel créé pour le {date} (Listes → Rappels). ¦ ⏰ Erënnerung fir den {date} erstallt (Lëschten → Erënnerungen).
+Archives à trouver ¦ Archiven ze fannen
+{n} recherche à faire sur 6 générations ¦ {n} Recherche ze maachen iwwer 6 Generatiounen
+Rien ne manque sur 6 générations, ou l’assistant n’a pas pu être lu ¦ Iwwer 6 Generatioune feelt näischt, oder den Assistent konnt net gelies ginn
+Les fiches prennent maintenant les couleurs de leur époque. ¦ D’Fichen kréien elo d’Faarwe vun hirer Epoch.
+Signes particuliers ¦ Besonnesch Kennzeechen
+pour voyager d’un département à l’autre ¦ fir vun engem Departement an dat anert ze reesen
+pour aller à l’étranger ¦ fir an d’Ausland ze goen
+Date de délivrance ¦ Ausstellungsdatum
+Motif du voyage ¦ Grond vun der Rees
+Le signalement ¦ D’Personebeschreiwung
+🛂 Le passeport ¦ 🛂 De Pass
+Le voyageur ¦ De Reesenden
+Choisis le voyageur. ¦ Wiel de Reesenden.
+{what} de {name} ({date}) ¦ {what} vun {name} ({date})
+ce XML contient des déclarations (DOCTYPE ou ENTITY) : il est refusé par prudence ¦ dësen XML huet Deklaratiounen (DOCTYPE oder ENTITY): en gëtt virsiichtshalber refuséiert
+le fichier XML est abîmé ¦ de XML-Fichier ass futti
+Fermer le relevé ¦ Den Auszuch zoumaachen
+Le passeport sera effacé. ¦ De Pass gëtt geläscht.
+Rattaché à {name}. ¦ Mat {name} verbonnen.
+{n} correspondances possibles avec l’arbre (en tête) ¦ {n} méiglech Iwwereneestëmmunge mam Bam (uewen)
+{n} correspondance possible avec l’arbre (en tête) ¦ {n} méiglech Iwwereneestëmmung mam Bam (uewen)
+Aucun passeport pour l’instant. ¦ Fir de Moment keng Päss.
+Avant 1860, pour voyager en France, il fallait un passeport intérieur avec son signalement : s’il en existe un, ajoute-le ici. ¦ Virun 1860 huet ee fir a Frankräich ze reesen en Inlandspass mat senger Personebeschreiwung gebraucht: wann et ee gëtt, setz en hei derbäi.
+＋ Nouveau passeport intérieur ¦ ＋ Neien Inlandspass
+Les passeports de la famille : le passeport intérieur (pour voyager d’un département à l’autre, jusque vers 1860) et le passeport pour l’étranger. Ils se saisissent sur la fiche (bloc 🛂 Passeports) ou dans ✨ Trésors. ¦ D’Päss vun der Famill: den Inlandspass (fir vun engem Departement an dat anert ze reesen, bis ëm 1860) an de Pass fir d’Ausland. Si ginn op der Fiche (Block 🛂 Päss) oder an ✨ Schätz agedroen.
+Chercher… (voyageur, destination, motif, profession) ¦ Sichen… (Reesenden, Destinatioun, Grond, Beruff)
+Passeport pour l’étranger ¦ Pass fir d’Ausland
+Pour l’étranger ¦ Fir d’Ausland
+pas encore dans l’arbre ¦ nach net am Bam
+mariage pas encore daté dans l’arbre ¦ Bestietnes nach net am Bam datéiert
+concorde ({what}) ¦ passt ({what})
+pas de métier dans l’arbre ¦ kee Beruff am Bam
+ce lieu est déjà dans l’arbre ¦ dës Plaz ass schonn am Bam
+ce lieu n’est pas encore sur la fiche ¦ dës Plaz ass nach net op der Fiche
+👶 Naissance ¦ 👶 Gebuert
+🕯️ Décès ¦ 🕯️ Doud
+💍 Mariage ¦ 💍 Bestietnes
+🔨 Métier ¦ 🔨 Beruff
+🏠 Domicile ¦ 🏠 Wunnsëtz
+un mariage s’ajoute depuis la fiche du couple ¦ e Bestietnes gëtt vun der Fiche vum Koppel aus derbäigesat
+D’après le récit de {name} : « {text} » ¦ No der Erzielung vun {name}: „{text}“
+＋ Ajouter à la fiche ¦ ＋ Op d’Fiche setzen
+Rien n’est changé sans ton accord : « Ajouter à la fiche » crée un événement avec la phrase du récit comme source. ¦ Näischt gëtt ouni däin Accord geännert: „Op d’Fiche setzen“ erstellt en Evenement mam Saz aus der Erzielung als Quell.
+Essaie des phrases comme « Mon père était boulanger », « Ma mère est née en 1932 à Tulle ». ¦ Probéier (franséisch) Sätz wéi „Mon père était boulanger“, „Ma mère est née en 1932 à Tulle“.
+Ajouté à la fiche. ¦ Op d’Fiche gesat.
+Le récit est vide : dicte-le, colle-le ou recopie-le. ¦ D’Erzielung ass eidel: diktéier se, fëg se an oder schreif se of.
+Le récit de {name} ({date}) ¦ D’Erzielung vun {name} ({date})
+Récit enregistré (bloc ✨ Trésors de la fiche). ¦ Erzielung gespäichert (Block ✨ Schätz vun der Fiche).
+Trop court : quelqu’un d’obstiné pourrait le deviner en essayant beaucoup de mots de passe sur le fichier. ¦ Ze kuerz: een, deen net opgëtt, kéint et erroden, andeems en hannerenee vill Passwierder um Fichier probéiert.
+Correct pour un partage de quelques semaines. ¦ An der Rei fir e Partage vun e puer Wochen.
+Une branche de famille partagée ¦ E gedeelten Zweig vun der Famill
+{n} retirée (vivantes ou récentes) ¦ {n} ewechgeholl (lieweg oder rezent)
+Mot de passe copié. ¦ Passwuert kopéiert.
+Personne à partager dans cette branche. ¦ Keen an dësem Zweig ze deelen.
+Choisis un mot de passe (ou « 🎲 En proposer un »), ou coche « Sans mot de passe ». ¦ Wiel e Passwuert (oder „🎲 Eent proposéieren“), oder kräiz „Ouni Passwuert“ un.
+Ce mot de passe est court : quelqu’un d’obstiné pourrait le trouver en essayant beaucoup de mots de passe. Fabriquer le fichier quand même ? ¦ Dëst Passwuert ass kuerz: een, deen net opgëtt, kéint et fannen, andeems e vill Passwierder probéiert. De Fichier trotzdem maachen?
+Mot de passe faible ¦ Schwaacht Passwuert
+Choisis jusqu’à quand le partage est valable. ¦ Wiel, bis wéini de Partage gëlteg ass.
+Une branche de la famille — partagée par la famille ¦ En Zweig vun der Famill — vun der Famill gedeelt
+Fichier prêt : envoie-le, et donne le mot de passe à part. ¦ Fichier prett: schéck en, a gëff d’Passwuert separat.
+Aucun lieu dans l’arbre ¦ Keng Plazen am Bam
+✅ J’y suis allé ¦ ✅ Ech war do
+Retirer le tampon ¦ De Stempel ewechhuelen
+Il faut des lieux placés sur la carte et datés pour compter les kilomètres ¦ Et brauch Plazen, déi op der Kaart placéiert an datéiert sinn, fir d’Kilometeren ze zielen
+Il faut au moins un lieu où deux personnes de l’arbre ont vécu ¦ Et brauch op mannst eng Plaz, wou zwou Persoune vum Bam gewunnt hunn
+{place} : {y} ans de présence de la famille, sur {n} génération d’ancêtres ¦ {place}: {y} Joer, déi d’Famill do war, iwwer {n} Generatioun vu Virfahren
+{place} : {y} ans de présence de la famille ¦ {place}: {y} Joer, déi d’Famill do war
+portrait ✓ ¦ Portrait ✓
+✨ Récit d’une vie : un diaporama tout fait à partir de cette fiche ¦ ✨ Liewensgeschicht: eng fäerdeg Diashow aus dëser Fiche
+Récit d’une vie en diaporama ¦ Liewensgeschicht als Diashow
+Pour tes 18 ans ¦ Fir däin 18. Gebuertsdag
+Quand ¦ Wéini
+Raconte ¦ Verzill
+Passeport ¦ Pass
+Barbe ¦ Baart

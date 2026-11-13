@@ -1,0 +1,422 @@
+fr ¦ sq ¦ mt
+# ═════ zone « composants » : albanais (sq), maltais (mt) ═════
+Enregistrer ¦ Ruaj ¦ Issejvja
+Annuler ¦ Anulo ¦ Ikkanċella
+Fermer ¦ Mbyll ¦ Agħlaq
+Supprimer ¦ Fshi ¦ Ħassar
+Retirer ¦ Hiq ¦ Neħħi
+Modifier ¦ Ndrysho ¦ Editja
+Créer ¦ Krijo ¦ Oħloq
+Ajouter ¦ Shto ¦ Żid
+Relier ¦ Lidh ¦ Għaqqad
+↺ Remettre comme au départ ¦ ↺ Ktheje si në fillim ¦ ↺ Erġa’ poġġi kif kien
+Remettre comme au départ ¦ Ktheje si në fillim ¦ Erġa’ poġġi kif kien
+↶ Annuler ¦ ↶ Zhbëj ¦ ↶ Erġa’ lura
+↷ Rétablir ¦ ↷ Ribëj ¦ ↷ Erġa’ agħmel
+Rétablir ¦ Ribëj ¦ Erġa’ agħmel
+Continuer ¦ Vazhdo ¦ Kompli
+Réessayer ¦ Provo përsëri ¦ Erġa’ pprova
+Ouvrir ¦ Hap ¦ Iftaħ
+↗ Ouvrir ¦ ↗ Hap ¦ ↗ Iftaħ
+Renommer ¦ Riemërto ¦ Ibdel l-isem
+Dupliquer ¦ Dyfisho ¦ Idduplika
+Remplacer ¦ Zëvendëso ¦ Ibdel
+Choisir ¦ Zgjidh ¦ Agħżel
+Choisir… ¦ Zgjidh… ¦ Agħżel…
+Changer ¦ Ndrysho ¦ Biddel
+Exporter ¦ Eksporto ¦ Esporta
+Importer ¦ Importo ¦ Importa
+Imprimer ¦ Printo ¦ Ipprintja
+🖨 Imprimer ¦ 🖨 Printo ¦ 🖨 Ipprintja
+💾 Enregistrer ¦ 💾 Ruaj ¦ 💾 Issejvja
+⤒ Importer ¦ ⤒ Importo ¦ ⤒ Importa
+⤓ Exporter ▾ ¦ ⤓ Eksporto ▾ ¦ ⤓ Esporta ▾
+📋 Copier ¦ 📋 Kopjo ¦ 📋 Ikkopja
+✓ Enregistré ¦ ✓ U ruajt ¦ ✓ Issejvjat
+Enregistré ¦ U ruajt ¦ Issejvjat
+Enregistrement… ¦ Po ruhet… ¦ Qed jissejvja…
+⚠️ Pas enregistré ¦ ⚠️ Nuk u ruajt ¦ ⚠️ Mhux issejvjat
+• modifié ¦ • ndryshuar ¦ • mibdul
+Plein écran ¦ Ekran i plotë ¦ Skrin sħiħ
+Plus d’actions ¦ Më shumë veprime ¦ Aktar azzjonijiet
+Aide ¦ Ndihmë ¦ Għajnuna
+Aide : ¦ Ndihmë: ¦ Għajnuna:
+En savoir plus (FAQ) → ¦ Më shumë (FAQ) → ¦ Kun af aktar (FAQ) →
+Clique pour lire la suite ¦ Kliko për të lexuar vazhdimin ¦ Ikklikkja biex taqra aktar
+Retour ¦ Kthehu ¦ Lura
+← Retour ¦ ← Kthehu ¦ ← Lura
+Oui ¦ Po ¦ Iva
+Non ¦ Jo ¦ Le
+Aucune ¦ Asnjë ¦ Xejn
+Aucun ¦ Asnjë ¦ Xejn
+Tous ¦ Të gjithë ¦ Kollha
+Toutes ¦ Të gjitha ¦ Kollha
+Tout ¦ Gjithçka ¦ Kollox
+Tout voir ¦ Shiko të gjitha ¦ Ara kollox
+Voir tout ¦ Shiko të gjitha ¦ Ara kollox
+Toutes ({n}) ¦ Të gjitha ({n}) ¦ Kollha ({n})
+Tout ({n}) ¦ Gjithçka ({n}) ¦ Kollox ({n})
+Rien pour l’instant ¦ Asgjë tani për tani ¦ Xejn għalissa
+Rien ¦ Asgjë ¦ Xejn
+Sans titre ¦ Pa titull ¦ Mingħajr titlu
+Échap ¦ Esc ¦ Esc
+Entrée ¦ Enter ¦ Enter
+Début ¦ Home ¦ Home
+retour arrière ¦ backspace ¦ backspace
+⚠️ ATTENTION ¦ ⚠️ KUJDES ¦ ⚠️ ATTENZJONI
+CONFIRMER ¦ KONFIRMO ¦ IKKONFERMA
+Es-tu sûr ? ¦ A je i sigurt? ¦ Żgur?
+Confirmer ¦ Konfirmo ¦ Ikkonferma
+Impossible d’annuler : {err} ¦ Nuk mund të zhbëhet: {err} ¦ Ma setax jerġa’ lura: {err}
+Impossible de rétablir : {err} ¦ Nuk mund të ribëhet: {err} ¦ Ma setax jerġa’ jsir: {err}
+Déjà remis : rien à annuler de plus. ¦ Tashmë u kthye: asgjë më për të zhbërë. ¦ Diġà rrestawrat: xejn aktar x’terġa’ lura.
+↶ Annulé : {what} ¦ ↶ U zhbë: {what} ¦ ↶ Imreġġa’ lura: {what}
+↶ Annulé : « {what} » ¦ ↶ U zhbë: «{what}» ¦ ↶ Imreġġa’ lura: “{what}”
+Pas de connexion avec LCNDA : rien n’est perdu, réessaie. ¦ Nuk ka lidhje me LCNDA: asgjë nuk ka humbur, provo përsëri. ¦ M’hemmx konnessjoni ma’ LCNDA: xejn ma ntilef, erġa’ pprova.
+Réponse illisible du serveur ¦ Përgjigje e palexueshme nga serveri ¦ Tweġiba ma tinqarax mis-server
+Réponse illisible du serveur. ¦ Përgjigje e palexueshme nga serveri. ¦ Tweġiba ma tinqarax mis-server.
+Erreur du serveur. ¦ Gabim i serverit. ¦ Żball tas-server.
+Réglage changé ¦ Cilësimi u ndryshua ¦ Issettjar mibdul
+Réglage changé : « {what} » ¦ Cilësimi u ndryshua: «{what}» ¦ Issettjar mibdul: “{what}”
+Réglages remis comme au départ ¦ Cilësimet u kthyen si në fillim ¦ L-issettjar reġa’ kif kien fil-bidu
+Chargement… ¦ Po ngarkohet… ¦ Qed jitgħabba…
+Chargement de la base… ¦ Po ngarkohet baza… ¦ Qed titgħabba d-database…
+Ouverture de la généalogie… ¦ Po hapet gjenealogjia… ¦ Qed tinfetaħ il-ġenealoġija…
+Chercher ¦ Kërko ¦ Fittex
+Chercher… ¦ Kërko… ¦ Fittex…
+Rechercher ¦ Kërko ¦ Fittex
+Vider la case (Échap) ¦ Zbraz kutinë (Esc) ¦ Battal il-kaxxa (Esc)
+Vider la case ¦ Zbraz kutinë ¦ Battal il-kaxxa
+Touche « / » : aller dans la case de recherche ¦ Tasti «/»: shko te kutia e kërkimit ¦ Il-buttuna “/”: mur fil-kaxxa tat-tfittxija
+Filtrer ¦ Filtro ¦ Iffiltra
+Filtrer ▾ ¦ Filtro ▾ ¦ Iffiltra ▾
+Tout effacer ¦ Fshi të gjitha ¦ Ħassar kollox
+Retirer ce filtre ¦ Hiq këtë filtër ¦ Neħħi dan il-filtru
+Trier ¦ Rendit ¦ Issortja
+Trier : ¦ Rendit: ¦ Issortja:
+Les plus récents ¦ Më të rejat ¦ L-iżjed ġodda l-ewwel
+Les plus anciens ¦ Më të vjetrat ¦ L-eqdem l-ewwel
+Les plus récentes ¦ Më të rejat ¦ L-iżjed ġodda l-ewwel
+Les plus anciennes ¦ Më të vjetrat ¦ L-eqdem l-ewwel
+Nom A → Z ¦ Emri A → Z ¦ Isem A → Z
+Nom Z → A ¦ Emri Z → A ¦ Isem Z → A
+Liste ¦ Listë ¦ Lista
+Fiches ¦ Kartela ¦ Skedi
+En liste : une ligne par élément (vignette, nom, détails, date) ¦ Si listë: një rresht për çdo element (miniaturë, emër, hollësi, datë) ¦ Bħala lista: ringiela għal kull element (stampa żgħira, isem, dettalji, data)
+En fiches : une carte par élément, avec une grande vignette ¦ Si kartela: një kartë për çdo element, me një miniaturë të madhe ¦ Bħala skedi: karta għal kull element, bi stampa żgħira kbira
+Affichage des {what} ¦ Shfaqja e {what} ¦ Wiri ta’ {what}
+Voir le suivant ↓ ¦ Shiko tjetrin ↓ ¦ Ara li jmiss ↓
+Voir la suivante ↓ ¦ Shiko tjetrën ↓ ¦ Ara li jmiss ↓
+Voir les {n} suivants ↓ ¦ Shiko {n} të tjerët ↓ ¦ Ara l-{n} li jmiss ↓
+Voir les {n} suivantes ↓ ¦ Shiko {n} të tjerat ↓ ¦ Ara l-{n} li jmiss ↓
+{n} éléments ¦ {n} elemente ¦ {n} elementi
+=élément ¦ element|elemente ¦ element|elementi|elementi|element|element
+éléments ¦ elemente ¦ elementi
+=personne ¦ person|persona ¦ persuna|persuni|persuni|persuna|persuna
+=animal ¦ kafshë|kafshë ¦ annimal|annimali|annimali|annimal|annimal
+=fiche ¦ kartelë|kartela ¦ skeda|skedi|skedi|skeda|skeda
+=lieu ¦ vend|vende ¦ post|postijiet|postijiet|post|post
+=commune ¦ komunë|komuna ¦ komun|komuni|komuni|komun|komun
+=ville ¦ qytet|qytete ¦ belt|bliet|bliet|belt|belt
+=chose ¦ gjë|gjëra ¦ ħaġa|affarijiet|affarijiet|ħaġa|ħaġa
+=caractère ¦ shenjë|shenja ¦ karattru|karattri|karattri|karattru|karattru
+=page ¦ faqe|faqe ¦ paġna|paġni|paġni|paġna|paġna
+=document ¦ dokument|dokumente ¦ dokument|dokumenti|dokumenti|dokument|dokument
+=média ¦ media|media ¦ fajl tal-midja|fajls tal-midja|fajls tal-midja|fajl tal-midja|fajl tal-midja
+=source ¦ burim|burime ¦ sors|sorsi|sorsi|sors|sors
+=événement ¦ ngjarje|ngjarje ¦ avveniment|avvenimenti|avvenimenti|avveniment|avveniment
+=étiquette ¦ etiketë|etiketa ¦ tikketta|tikketti|tikketti|tikketta|tikketta
+=enquête ¦ hetim|hetime ¦ investigazzjoni|investigazzjonijiet|investigazzjonijiet|investigazzjoni|investigazzjoni
+=modification ¦ ndryshim|ndryshime ¦ bidla|bidliet|bidliet|bidla|bidla
+=famille ¦ familje|familje ¦ familja|familji|familji|familja|familja
+=génération ¦ brez|breza ¦ ġenerazzjoni|ġenerazzjonijiet|ġenerazzjonijiet|ġenerazzjoni|ġenerazzjoni
+=réglage ¦ cilësim|cilësime ¦ għażla|għażliet|għażliet|għażla|għażla
+=erreur captée ¦ gabim i kapur|gabime të kapura ¦ żball maqbud|żbalji maqbuda|żbalji maqbuda|żball maqbud|żball maqbud
+=jour ¦ ditë|ditë ¦ jum|ijiem|ijiem|jum|jum
+=type ¦ lloj|lloje ¦ tip|tipi|tipi|tip|tip
+=branche ¦ degë|degë ¦ fergħa|fergħat|fergħat|fergħa|fergħa
+=doublon possible ¦ dublikatë e mundshme|dublikata të mundshme ¦ duplikat possibbli|duplikati possibbli|duplikati possibbli|duplikat possibbli|duplikat possibbli
+=chose à vérifier ¦ gjë për t’u kontrolluar|gjëra për t’u kontrolluar ¦ ħaġa biex tiċċekkja|affarijiet biex tiċċekkja|affarijiet biex tiċċekkja|ħaġa biex tiċċekkja|ħaġa biex tiċċekkja
+=album ¦ album|albume ¦ album|albums|albums|album|album
+=chanson ¦ këngë|këngë ¦ kanzunetta|kanzunetti|kanzunetti|kanzunetta|kanzunetta
+=titre ¦ titull|tituj ¦ titlu|titli|titli|titlu|titlu
+Nom, prénom… (2 lettres suffisent) ¦ Mbiemri, emri… (mjaftojnë 2 shkronja) ¦ Kunjom, isem… (2 ittri biżżejjed)
+Ville, village, paroisse… ¦ Qytet, fshat, famulli… ¦ Belt, raħal, parroċċa…
+＋ Ajouter une personne… ¦ ＋ Shto një person… ¦ ＋ Żid persuna…
+＋ Ajouter un lieu… ¦ ＋ Shto një vend… ¦ ＋ Żid post…
+＋ Ajouter une source… ¦ ＋ Shto një burim… ¦ ＋ Żid sors…
+＋ Ajouter un média… ¦ ＋ Shto një media… ¦ ＋ Żid fajl tal-midja…
+＋ Ajouter une enquête… ¦ ＋ Shto një hetim… ¦ ＋ Żid investigazzjoni…
+＋ Ajouter une étiquette… ¦ ＋ Shto një etiketë… ¦ ＋ Żid tikketta…
+＋ Ajouter un événement… ¦ ＋ Shto një ngjarje… ¦ ＋ Żid avveniment…
+＋ Ajouter un animal… ¦ ＋ Shto një kafshë… ¦ ＋ Żid annimal…
+＋ Ajouter… ¦ ＋ Shto… ¦ ＋ Żid…
+↗ Fiche ¦ ↗ Kartela ¦ ↗ Skeda
+↗ Lieu ¦ ↗ Vendi ¦ ↗ Post
+Aucune fiche ¦ Asnjë kartelë ¦ L-ebda skeda
+Aucun lieu ¦ Asnjë vend ¦ L-ebda post
+Aucune source ¦ Asnjë burim ¦ L-ebda sors
+Aucun média ¦ Asnjë media ¦ L-ebda midja
+Aucune enquête ¦ Asnjë hetim ¦ L-ebda investigazzjoni
+Aucune étiquette ¦ Asnjë etiketë ¦ L-ebda tikketta
+Aucun événement ¦ Asnjë ngjarje ¦ L-ebda avveniment
+Aucun animal ¦ Asnjë kafshë ¦ L-ebda annimal
+Créer la fiche ¦ Krijo kartelën ¦ Oħloq l-iskeda
+Créer le lieu ¦ Krijo vendin ¦ Oħloq il-post
+Créer une fiche ¦ Krijo një kartelë ¦ Oħloq skeda
+＋ Créer sa fiche ¦ ＋ Krijo kartelën e tij ¦ ＋ Oħloq l-iskeda tagħha
+👤 Personnes ¦ 👤 Persona ¦ 👤 Persuni
+📍 Lieux ¦ 📍 Vende ¦ 📍 Postijiet
+📚 Sources ¦ 📚 Burime ¦ 📚 Sorsi
+🖼 Médias ¦ 🖼 Media ¦ 🖼 Midja
+🔍 Enquêtes ¦ 🔍 Hetime ¦ 🔍 Investigazzjonijiet
+🏷 Étiquettes ¦ 🏷 Etiketa ¦ 🏷 Tikketti
+📅 Événements ¦ 📅 Ngjarje ¦ 📅 Avvenimenti
+🐾 Animaux ¦ 🐾 Kafshë ¦ 🐾 Annimali
+✎ Garder le texte « {q} » sans fiche ¦ ✎ Mbaje tekstin «{q}» pa kartelë ¦ ✎ Żomm it-test “{q}” mingħajr skeda
+🗺 Choisir sur la carte ¦ 🗺 Zgjidh në hartë ¦ 🗺 Agħżel fuq il-mappa
+{what} de ta base ¦ {what} të bazës sate ¦ {what} fid-database tiegħek
+{what} de France ¦ {what} të Francës ¦ {what} fi Franza
+{what} du monde ¦ {what} të botës ¦ {what} madwar id-dinja
+300 villes du monde et plus ¦ 300 qytete të botës e më shumë ¦ Aktar minn 300 belt madwar id-dinja
+{what} trouvés ¦ {what} u gjetën ¦ {what} misjuba
+{none} pour « {q} ». Vérifie l’orthographe ¦ {none} për «{q}». Kontrollo drejtshkrimin ¦ {none} għal “{q}”. Iċċekkja l-ortografija
+{none} pour l’instant ¦ {none} tani për tani ¦ {none} għalissa
+, ou : ¦ , ose: ¦ , jew:
+↹ Tab passe d’un filtre à l’autre ¦ ↹ Tab kalon nga një filtër te tjetri ¦ ↹ Tab jgħaddi minn filtru għal ieħor
+↑ ↓ Entrée ¦ ↑ ↓ Enter ¦ ↑ ↓ Enter
+… la liste défile ¦ … lista rrëshqet ¦ … il-lista tiskrollja
+⭐ Personne principale ¦ ⭐ Personi kryesor ¦ ⭐ Persuna prinċipali
+Autres personnes principales ¦ Persona të tjerë kryesorë ¦ Persuni prinċipali oħra
+Personnes principales ¦ Persona kryesorë ¦ Persuni prinċipali
+Personnes secondaires ¦ Persona dytësorë ¦ Persuni sekondarji
+au cœur de la recherche ¦ në zemër të kërkimit ¦ fil-qalba tar-riċerka
+témoins, voisins, parrains, pistes… ¦ dëshmitarë, fqinjë, kumbarë, gjurmë… ¦ xhieda, ġirien, parrini, ħjiel…
+Choisir la personne principale… ¦ Zgjidh personin kryesor… ¦ Agħżel il-persuna prinċipali…
+＋ Ajouter une personne principale… ¦ ＋ Shto një person kryesor… ¦ ＋ Żid persuna prinċipali…
+＋ Ajouter une personne secondaire… ¦ ＋ Shto një person dytësor… ¦ ＋ Żid persuna sekondarja…
+Changer le rôle ¦ Ndrysho rolin ¦ Biddel ir-rwol
+Donner un rôle (facultatif) ¦ Jep një rol (sipas dëshirës) ¦ Agħti rwol (mhux obbligatorju)
+rôle ▾ ¦ roli ▾ ¦ rwol ▾
+Rôle libre ¦ Rol i lirë ¦ Rwol ħieles
+Retirer le rôle ¦ Hiq rolin ¦ Neħħi r-rwol
+Passer en secondaire ¦ Kalo në dytësor ¦ Għaddi għal sekondarja
+Passer en principale ¦ Kalo në kryesor ¦ Għaddi għal prinċipali
+Autre mot… (Entrée) ¦ Fjalë tjetër… (Enter) ¦ Kelma oħra… (Enter)
+témoin ¦ dëshmitar ¦ xhud
+déclarant ¦ deklarues ¦ dikjarant
+parrain ¦ kumbar ¦ parrinu
+marraine ¦ kumbarë ¦ parrina
+voisin ¦ fqinj ¦ ġar
+employeur ¦ punëdhënës ¦ impjegatur
+officier ¦ nëpunës ¦ uffiċjal
+épouse ¦ bashkëshortja ¦ mara
+époux ¦ bashkëshorti ¦ raġel
+sans fiche ¦ pa kartelë ¦ mingħajr skeda
+Personne sans fiche : clic pour créer sa fiche ¦ Person pa kartelë: kliko për t’i krijuar kartelën ¦ Persuna mingħajr skeda: ikklikkja biex toħloq l-iskeda tagħha
+Ouvrir la fiche ¦ Hap kartelën ¦ Iftaħ l-iskeda
+Voir sur la carte ¦ Shiko në hartë ¦ Ara fuq il-mappa
+Aucune personne choisie ¦ Asnjë person i zgjedhur ¦ L-ebda persuna magħżula
+Choisir des personnes ¦ Zgjidh persona ¦ Agħżel persuni
+Choisir une personne ¦ Zgjidh një person ¦ Agħżel persuna
+Choisir des lieux ¦ Zgjidh vende ¦ Agħżel postijiet
+Choisir un lieu ¦ Zgjidh një vend ¦ Agħżel post
+Carte : clique l’endroit du lieu ¦ Harta: kliko vendndodhjen e vendit ¦ Mappa: ikklikkja fejn jinsab il-post
+Clique l’endroit du lieu sur la carte (glisse pour te déplacer, molette pour zoomer). ¦ Kliko vendndodhjen e vendit në hartë (tërhiq për të lëvizur, rrota për zmadhim). ¦ Ikklikkja fejn jinsab il-post fuq il-mappa (kaxkar biex tiċċaqlaq, ir-rota biex tagħmel zoom).
+＋ Créer un lieu ici ¦ ＋ Krijo një vend këtu ¦ ＋ Oħloq post hawn
+Nom du lieu ¦ Emri i vendit ¦ Isem tal-post
+Lieux proches… ¦ Vende afër… ¦ Postijiet fil-qrib…
+Aucun lieu connu près d’ici : crée-le ci-dessous. ¦ Asnjë vend i njohur afër këtu: krijoje më poshtë. ¦ L-ebda post magħruf qrib hawn: oħolqu hawn taħt.
+Donne un nom au lieu. ¦ Jepi një emër vendit. ¦ Agħti isem lill-post.
+Dézoomer ¦ Zvogëlo ¦ Żgħar iż-zoom
+Lieu impossible à ajouter ¦ Vendi nuk mund të shtohet ¦ Dan il-post ma jistax jiżdied
+Crée d’abord la fiche dans Personnes, puis choisis-la ici. ¦ Krijo fillimisht kartelën te Personat, pastaj zgjidhe këtu. ¦ L-ewwel oħloq l-iskeda f’Persuni, imbagħad agħżilha hawn.
+Crée-la d’abord dans l’outil, puis choisis-la ici. ¦ Krijoje fillimisht te mjeti, pastaj zgjidhe këtu. ¦ L-ewwel oħolqha fl-għodda, imbagħad agħżilha hawn.
+Personne ¦ Person ¦ Persuna
+Lieu ¦ Vend ¦ Post
+À corriger. ¦ Për t’u korrigjuar. ¦ Biex jiġi korrett.
+<b>{what} à corriger</b> avant d’enregistrer. ¦ <b>{what} për t’u korrigjuar</b> para ruajtjes. ¦ <b>{what} biex jiġu korretti</b> qabel ma tissejvja.
+Coche cette case pour continuer. ¦ Shëno këtë kuti për të vazhduar. ¦ Immarka din il-kaxxa biex tkompli.
+Choisis une des possibilités. ¦ Zgjidh një nga mundësitë. ¦ Agħżel waħda mill-għażliet.
+Choisis un fichier. ¦ Zgjidh një skedar. ¦ Agħżel fajl.
+Choisis dans la liste. ¦ Zgjidh nga lista. ¦ Agħżel mil-lista.
+Ce champ est à remplir. ¦ Kjo fushë duhet plotësuar. ¦ Dan il-qasam irid jimtela.
+Écris un nombre (par exemple 12 ou 3,5). ¦ Shkruaj një numër (për shembull 12 ose 3,5). ¦ Ikteb numru (pereżempju 12 jew 3.5).
+Ce n’est pas compris : vérifie ce qui est écrit. ¦ Nuk u kuptua: kontrollo çfarë është shkruar. ¦ Ma nftehimx: iċċekkja x’hemm miktub.
+Écris une adresse e-mail complète (nom@exemple.fr). ¦ Shkruaj një adresë të plotë e-mail (emri@shembull.al). ¦ Ikteb indirizz tal-email sħiħ (isem@eżempju.mt).
+Écris une adresse web complète (https://…). ¦ Shkruaj një adresë të plotë interneti (https://…). ¦ Ikteb indirizz web sħiħ (https://…).
+Ce n’est pas au bon format. ¦ Nuk është në formatin e duhur. ¦ Dan mhuwiex fil-format it-tajjeb.
+Au moins {x}. ¦ Të paktën {x}. ¦ Mill-inqas {x}.
+Au plus {x}. ¦ Më së shumti {x}. ¦ L-iktar {x}.
+Au moins {x} (là : {y}). ¦ Të paktën {x} (tani: {y}). ¦ Mill-inqas {x} (issa: {y}).
+Cette valeur n’est pas permise ici : prends un nombre rond. ¦ Kjo vlerë nuk lejohet këtu: merr një numër të plotë. ¦ Dan il-valur mhux permess hawn: uża numru sħiħ.
+Donne un nom à ces réglages. ¦ Jepu një emër këtyre cilësimeve. ¦ Agħti isem lil dan l-issettjar.
+Choisir une couleur ¦ Zgjidh një ngjyrë ¦ Agħżel kulur
+Couleurs de l’app ¦ Ngjyrat e aplikacionit ¦ Kuluri tal-app
+Récentes ¦ Të fundit ¦ Riċenti
+Choisir une autre couleur ¦ Zgjidh një ngjyrë tjetër ¦ Agħżel kulur ieħor
+Prendre une couleur n’importe où dans la fenêtre ¦ Merr një ngjyrë kudo në dritare ¦ Ħu kulur minn kullimkien fit-tieqa
+Code de la couleur ¦ Kodi i ngjyrës ¦ Kodiċi tal-kulur
+Remettre la couleur d’avant ¦ Rikthe ngjyrën e mëparshme ¦ Erġa’ poġġi l-kulur ta’ qabel
+Double-clic : revenir à la valeur de départ ¦ Klikim i dyfishtë: kthehu te vlera fillestare ¦ Klikk doppju: lura għall-valur tal-bidu
+Choisir une police ¦ Zgjidh shkronjat ¦ Agħżel font
+Chercher une police… ¦ Kërko shkronja… ¦ Fittex font…
+Les polices de l’ordinateur… ¦ Shkronjat e kompjuterit… ¦ Il-fonts tal-kompjuter…
+Aucune police pour « {q} ». ¦ Asnjë shkronjë për «{q}». ¦ L-ebda font għal “{q}”.
+Lecture des polices… ¦ Po lexohen shkronjat… ¦ Qed jinqraw il-fonts…
+🔓 Voir toutes les polices de l’ordinateur ¦ 🔓 Shiko të gjitha shkronjat e kompjuterit ¦ 🔓 Ara l-fonts kollha tal-kompjuter
+Le navigateur te demandera la permission. ¦ Shfletuesi do të të kërkojë leje. ¦ Il-browser se jitolbok il-permess.
+CONSEILLÉE ¦ E KËSHILLUAR ¦ RAKKOMANDAT
+RÉCENTE ¦ E FUNDIT ¦ RIĊENTI
+DE L’APP ¦ E APLIKACIONIT ¦ TAL-APP
+TAPÉE ¦ E SHKRUAR ¦ MIKTUB
+Réglages enregistrés ¦ Cilësime të ruajtura ¦ Issettjar issejvjat
+Nom de ces réglages ¦ Emri i këtyre cilësimeve ¦ Isem ta’ dan l-issettjar
+Nom du réglage ¦ Emri i cilësimit ¦ Isem tal-issettjar
+Aucun réglage enregistré pour l’instant. ¦ Ende asnjë cilësim i ruajtur. ¦ Għad m’hemmx issettjar issejvjat.
+＋ Enregistrer les réglages actuels ¦ ＋ Ruaj cilësimet aktuale ¦ ＋ Issejvja l-issettjar attwali
+Un réglage « {name} » existe déjà. ¦ Ekziston tashmë një cilësim «{name}». ¦ Diġà jeżisti issettjar “{name}”.
+Le remplacer ? ¦ Ta zëvendësoj? ¦ Tibdlu?
+Réglages gardés sous « {name} ». ¦ Cilësimet u ruajtën si «{name}». ¦ L-issettjar issejvjat bħala “{name}”.
+Remplacer par les réglages actuels ¦ Zëvendëso me cilësimet aktuale ¦ Ibdel bl-issettjar attwali
+Remplacer « {name} » par les réglages actuels ? ¦ Ta zëvendësoj «{name}» me cilësimet aktuale? ¦ Tibdel “{name}” bl-issettjar attwali?
+Réglage mis à jour. ¦ Cilësimi u përditësua. ¦ Issettjar aġġornat.
+Réglages « {name} » appliqués. ¦ Cilësimet «{name}» u zbatuan. ¦ L-issettjar “{name}” ġie applikat.
+Exporter (fichier .json) ¦ Eksporto (skedar .json) ¦ Esporta (fajl .json)
+Remplacer, renommer, dupliquer, exporter, supprimer ¦ Zëvendëso, riemërto, dyfisho, eksporto, fshi ¦ Ibdel, ibdel l-isem, idduplika, esporta, ħassar
+Exporter (PDF, image, impression…) ¦ Eksporto (PDF, imazh, printim…) ¦ Esporta (PDF, immaġni, stampar…)
+⤓ Exporter en {fmt} ¦ ⤓ Eksporto në {fmt} ¦ ⤓ Esporta bħala {fmt}
+Nom du fichier ¦ Emri i skedarit ¦ Isem tal-fajl
+Qualité ¦ Cilësia ¦ Kwalità
+Fond perdu et traits de coupe (imprimeur) ¦ Mbushje dhe shenja prerjeje (shtypshkronja) ¦ Bleed u marki tal-qtugħ (stampatur)
+Ranger aussi une copie dans les médias ¦ Ruaj edhe një kopje te mediat ¦ Żomm ukoll kopja fil-midja
+Aperçu ¦ Parapamje ¦ Preview
+Aperçu… ¦ Parapamje… ¦ Preview…
+Pas d’aperçu ¦ Pa parapamje ¦ L-ebda preview
+Format du papier ¦ Formati i letrës ¦ Daqs tal-karta
+Ce qu’on imprime ¦ Çfarë printohet ¦ X’jiġi pprintjat
+Pages à imprimer ¦ Faqet për t’u printuar ¦ Paġni x’tipprintja
+Celle affichée ¦ Ajo e shfaqur ¦ Dik murija
+Page précédente ¦ Faqja e mëparshme ¦ Paġna ta’ qabel
+Page suivante ¦ Faqja tjetër ¦ Paġna li jmiss
+Aperçu de l’impression ¦ Parapamja e printimit ¦ Preview tal-istampar
+Exemplaires ¦ Kopje ¦ Kopji
+Portrait ¦ Vertikal ¦ Vertikali
+Paysage ¦ Horizontal ¦ Orizzontali
+L’écran affiché ¦ Ekrani i shfaqur ¦ L-iskrin muri
+Dans la fenêtre qui s’ouvre, choisis « Enregistrer au format PDF » comme imprimante. ¦ Në dritaren që hapet, zgjidh «Ruaj si PDF» si printer. ¦ Fit-tieqa li tiftaħ, agħżel “Issejvja bħala PDF” bħala printer.
+Dans la fenêtre d’impression, choisis « Enregistrer au format PDF ». ¦ Në dritaren e printimit, zgjidh «Ruaj si PDF». ¦ Fit-tieqa tal-istampar, agħżel “Issejvja bħala PDF”.
+IMPORTER · ÉTAPE 1 SUR 3 ¦ IMPORTO · HAPI 1 NGA 3 ¦ IMPORTA · PASS 1 MINN 3
+IMPORTER · ÉTAPE {n} SUR 3 ¦ IMPORTO · HAPI {n} NGA 3 ¦ IMPORTA · PASS {n} MINN 3
+📁 Glisse ici le fichier, colle-le (⌘V) ou choisis-le sur l’ordinateur ¦ 📁 Tërhiqe skedarin këtu, ngjite (⌘V) ose zgjidhe në kompjuter ¦ 📁 Kaxkar il-fajl hawn, waħħlu (⌘V) jew agħżlu mill-kompjuter
+📁 Glisse ici les fichiers, colle-les (⌘V) ou choisis-les sur l’ordinateur ¦ 📁 Tërhiqi skedarët këtu, ngjiti (⌘V) ose zgjidhi në kompjuter ¦ 📁 Kaxkar il-fajls hawn, waħħalhom (⌘V) jew agħżilhom mill-kompjuter
+Lecture du fichier… ¦ Po lexohet skedari… ¦ Qed jinqara l-fajl…
+Ce fichier ne peut pas être importé : {err} ¦ Ky skedar nuk mund të importohet: {err} ¦ Dan il-fajl ma jistax jiġi importat: {err}
+Voilà ce qui va entrer : {sum}. ¦ Ja çfarë do të hyjë: {sum}. ¦ Hawn x’se jidħol: {sum}.
+⤒ Importer {what} ¦ ⤒ Importo {what} ¦ ⤒ Importa {what}
+{what} importés. ¦ {what} u importuan. ¦ {what} importati.
+Import terminé. ¦ Importi përfundoi. ¦ L-importazzjoni spiċċat.
+Impossible d’importer : {err} ¦ Nuk mund të importohet: {err} ¦ Ma setax jiġi importat: {err}
+Importer un fichier ¦ Importo një skedar ¦ Importa fajl
+⤒ Importer un fichier… ¦ ⤒ Importo një skedar… ¦ ⤒ Importa fajl…
+Ce type de fichier n’est pas accepté ici. ¦ Ky lloj skedari nuk pranohet këtu. ¦ Dan it-tip ta’ fajl mhux aċċettat hawn.
+Il entre dans les médias de l’app et se place dans l’outil. ¦ Hyn te mediat e aplikacionit dhe vendoset te mjeti. ¦ Jidħol fil-midja tal-app u jitqiegħed fl-għodda.
+📁 Choisir un fichier ¦ 📁 Zgjidh një skedar ¦ 📁 Agħżel fajl
+Ce fichier .json est abîmé : il ne peut pas être lu. ¦ Ky skedar .json është i dëmtuar: nuk mund të lexohet. ¦ Dan il-fajl .json huwa bil-ħsara: ma jistax jinqara.
+Ajuster à la fenêtre ¦ Përshtate me dritaren ¦ Daħħal fit-tieqa
+Zoom arrière ¦ Zvogëlo ¦ Żgħar
+Zoom avant ¦ Zmadho ¦ Kabbar
+Règles ¦ Vizoret ¦ Rigi
+Règles : montrer ou cacher ¦ Vizoret: shfaq ose fshih ¦ Rigi: uri jew aħbi
+Aimanter : les objets se collent aux autres et à la grille (Alt pour s’en passer en glissant) ¦ Magnetizo: objektet ngjiten me të tjerët dhe me rrjetën (Alt për ta shmangur gjatë tërheqjes) ¦ Manjetizza: l-oġġetti jeħlu ma’ xulxin u mal-grilja (Alt biex tevitah waqt li tkaxkar)
+Les autres façons d’enregistrer ¦ Mënyrat e tjera të ruajtjes ¦ Modi oħra kif tissejvja
+Ranger, montrer ou cacher les boutons ¦ Rendit, shfaq ose fshih butonat ¦ Irranġa, uri jew aħbi l-buttuni
+Compris ¦ Kuptova ¦ Fhimt
+Choisir sur un calendrier ¦ Zgjidh në një kalendar ¦ Agħżel fuq kalendarju
+Durée ¦ Kohëzgjatja ¦ Tul
+aujourd’hui ¦ sot ¦ illum
+aujourd’hui à {h} ¦ sot në {h} ¦ illum fil-{h}
+hier ¦ dje ¦ ilbieraħ
+hier à {h} ¦ dje në {h} ¦ ilbieraħ fil-{h}
+{day} à {h} ¦ {day} në {h} ¦ {day} fil-{h}
+Modifié ¦ Ndryshuar ¦ Mibdul
+Créé ¦ Krijuar ¦ Maħluq
+Ajouté ¦ Shtuar ¦ Miżjud
+Aucune battue ¦ Asnjë kërkim në terren ¦ L-ebda tfittxija fuq il-post
+Aucune maison ¦ Asnjë shtëpi ¦ L-ebda dar
+Aucune revue ¦ Asnjë revistë ¦ L-ebda rivista
+Aucun employeur ¦ Asnjë punëdhënës ¦ L-ebda impjegatur
+Aucun recensement ¦ Asnjë regjistrim ¦ L-ebda ċensiment
+🎨 Œuvres ¦ 🎨 Vepra ¦ 🎨 Xogħlijiet
+Chercher un graphique… (ex. naissances, camembert) ¦ Kërko një grafik… (p.sh. lindje, byrek) ¦ Fittex grafika… (eż. twelid, torta)
+Aucun graphique ¦ Asnjë grafik ¦ L-ebda grafika
+Créer le graphique ¦ Krijo grafikun ¦ Oħloq il-grafika
+Nouveau graphique ¦ Grafik i ri ¦ Grafika ġdida
+Aucun projet ¦ Asnjë projekt ¦ L-ebda proġett
+Aucun tableau ¦ Asnjë tabelë ¦ L-ebda bord
+Aucune mise en page ¦ Asnjë faqosje ¦ L-ebda tqassim
+📐 Mises en page ¦ 📐 Faqosje ¦ 📐 Tqassimiet
+Aucun diagramme ¦ Asnjë diagram ¦ L-ebda dijagramma
+Aucune carte ¦ Asnjë hartë ¦ L-ebda mappa
+Aucune transcription ¦ Asnjë transkriptim ¦ L-ebda traskrizzjoni
+Aucune carte de photos ¦ Asnjë hartë fotosh ¦ L-ebda mappa tar-ritratti
+Aucun classeur ¦ Asnjë fletore pune ¦ L-ebda workbook
+Aucun document ¦ Asnjë dokument ¦ L-ebda dokument
+Aucune parcelle ¦ Asnjë parcelë ¦ L-ebda biċċa art
+Nom de l’objet, sorte… (2 lettres suffisent) ¦ Emri i objektit, lloji… (mjaftojnë 2 shkronja) ¦ Isem tal-oġġett, tip… (2 ittri biżżejjed)
+Aucun objet de famille ¦ Asnjë objekt familjar ¦ L-ebda oġġett tal-familja
+Nom du défunt, notaire, année… (2 lettres suffisent) ¦ Emri i të ndjerit, noteri, viti… (mjaftojnë 2 shkronja) ¦ Isem il-mejjet, nutar, sena… (2 ittri biżżejjed)
+Aucun inventaire après décès ¦ Asnjë inventar pas vdekjes ¦ L-ebda inventarju wara l-mewt
+⚖️ Inventaires après décès ¦ ⚖️ Inventare pas vdekjes ¦ ⚖️ Inventarji wara l-mewt
+Nom, espèce, code de bague, puce… (2 lettres suffisent) ¦ Emri, lloji, kodi i unazës, çipi… (mjaftojnë 2 shkronja) ¦ Isem, speċi, kodiċi taċ-ċirku, ċippa… (2 ittri biżżejjed)
+Nom du site… (2 lettres suffisent) ¦ Emri i vendit… (mjaftojnë 2 shkronja) ¦ Isem tas-sit… (2 ittri biżżejjed)
+Aucun site ¦ Asnjë vend ¦ L-ebda sit
+Nom du groupe, de la meute… (2 lettres suffisent) ¦ Emri i grupit, i tufës… (mjaftojnë 2 shkronja) ¦ Isem tal-grupp, tal-merħla… (2 ittri biżżejjed)
+Aucun groupe ¦ Asnjë grup ¦ L-ebda grupp
+👥 Groupes d’animaux ¦ 👥 Grupe kafshësh ¦ 👥 Gruppi ta’ annimali
+Maladie, cause de décès… (2 lettres suffisent) ¦ Sëmundje, shkak vdekjeje… (mjaftojnë 2 shkronja) ¦ Marda, kawża tal-mewt… (2 ittri biżżejjed)
+＋ Choisir une maladie… ¦ ＋ Zgjidh një sëmundje… ¦ ＋ Agħżel marda…
+Aucune maladie notée ¦ Asnjë sëmundje e shënuar ¦ L-ebda marda rreġistrata
+🩺 Santé ¦ 🩺 Shëndeti ¦ 🩺 Saħħa
+Chercher une de mes cartes… ¦ Kërko një nga hartat e mia… ¦ Fittex waħda mill-mapep tiegħi…
+＋ Choisir une carte… ¦ ＋ Zgjidh një hartë… ¦ ＋ Agħżel mappa…
+Nom de la branche… ¦ Emri i degës… ¦ Isem tal-fergħa…
+＋ Choisir une branche… ¦ ＋ Zgjidh një degë… ¦ ＋ Agħżel fergħa…
+Aucune branche ¦ Asnjë degë ¦ L-ebda fergħa
+Nom d’une de mes couches… ¦ Emri i një prej shtresave të mia… ¦ Isem ta’ wieħed mis-saffi tiegħi…
+＋ Choisir une couche… ¦ ＋ Zgjidh një shtresë… ¦ ＋ Agħżel saff…
+Aucune couche dessinée ¦ Asnjë shtresë e vizatuar ¦ L-ebda saff imfassal
+Commune, cote, année… (2 lettres suffisent) ¦ Komuna, shenja e arkivit, viti… (mjaftojnë 2 shkronja) ¦ Komun, numru tal-arkivju, sena… (2 ittri biżżejjed)
+🔗 Relier un dépouillement… ¦ 🔗 Lidh një zbërthim… ¦ 🔗 Għaqqad indiċi tar-reġistri…
+Aucun dépouillement ¦ Asnjë zbërthim ¦ L-ebda indiċi tar-reġistri
+Nom, prénom d’un contact… (2 lettres suffisent) ¦ Mbiemri, emri i një kontakti… (mjaftojnë 2 shkronja) ¦ Kunjom, isem ta’ kuntatt… (2 ittri biżżejjed)
+Aucun contact ¦ Asnjë kontakt ¦ L-ebda kuntatt
+Chercher une de mes listes… ¦ Kërko një nga listat e mia… ¦ Fittex waħda mil-listi tiegħi…
+Aucune liste ¦ Asnjë listë ¦ L-ebda lista
+Événement, personne, année… (2 lettres suffisent) ¦ Ngjarje, person, vit… (mjaftojnë 2 shkronja) ¦ Avveniment, persuna, sena… (2 ittri biżżejjed)
+Aucun service d’archives ¦ Asnjë shërbim arkivi ¦ L-ebda servizz tal-arkivji
+Créer le service ¦ Krijo shërbimin ¦ Oħloq is-servizz
+🏛 Services d’archives ¦ 🏛 Shërbimet e arkivave ¦ 🏛 Servizzi tal-arkivji
+Source, page, nom de la personne citée… ¦ Burimi, faqja, emri i personit të përmendur… ¦ Sors, paġna, isem il-persuna msemmija…
+＋ Choisir une citation… ¦ ＋ Zgjidh një citim… ¦ ＋ Agħżel ċitazzjoni…
+Aucune citation ¦ Asnjë citim ¦ L-ebda ċitazzjoni
+— une seule ¦ — vetëm një ¦ — waħda biss
+＋ Ajouter une maison… ¦ ＋ Shto një shtëpi… ¦ ＋ Żid dar…
+＋ Ajouter une fiche… ¦ ＋ Shto një kartelë… ¦ ＋ Żid skeda…
+＋ Ajouter un document… ¦ ＋ Shto një dokument… ¦ ＋ Żid dokument…
+＋ Ajouter une carte… ¦ ＋ Shto një hartë… ¦ ＋ Żid mappa…
+＋ Ajouter un groupe… ¦ ＋ Shto një grup… ¦ ＋ Żid grupp…
+＋ Ajouter un contact… ¦ ＋ Shto një kontakt… ¦ ＋ Żid kuntatt…
+＋ Ajouter une liste… ¦ ＋ Shto një listë… ¦ ＋ Żid lista…
+Ce réglage prend ce qui est à l’écran maintenant. ¦ Ky cilësim merr atë që është në ekran tani. ¦ Dan l-issettjar jieħu dak li hemm fuq l-iskrin issa.
+L’ancienne version de ce réglage ne sera plus gardée. ¦ Versioni i vjetër i këtij cilësimi nuk do të ruhet më. ¦ Il-verżjoni l-qadima ta’ dan l-issettjar mhux se tibqa’ tinżamm.
+Le nom devient modifiable sur la ligne. ¦ Emri bëhet i ndryshueshëm në rresht. ¦ L-isem isir jista’ jinbidel fuq ir-ringiela.
+Une copie, à modifier sans toucher à l’original. ¦ Një kopje, për ta ndryshuar pa prekur origjinalin. ¦ Kopja, biex tbiddel mingħajr ma tmiss l-oriġinal.
+Pour le garder, ou l’ouvrir sur un autre ordinateur. ¦ Për ta ruajtur, ose për ta hapur në një kompjuter tjetër. ¦ Biex iżżommu, jew tiftħu fuq kompjuter ieħor.
+On peut encore l’annuler juste après. ¦ Mund të zhbëhet ende menjëherë pas. ¦ Għadu jista’ jerġa’ lura eżatt wara.
+Un fichier lcnda-reglage-….json exporté ici ou sur un autre ordinateur ¦ Një skedar lcnda-reglage-….json i eksportuar këtu ose në një kompjuter tjetër ¦ Fajl lcnda-reglage-….json esportat hawn jew fuq kompjuter ieħor
+Ce navigateur ne donne pas la liste des polices : voici les polices courantes trouvées sur l’ordinateur. Pour une autre, tape son nom exact. ¦ Ky shfletues nuk e jep listën e shkronjave: ja shkronjat e zakonshme të gjetura në kompjuter. Për një tjetër, shkruaj emrin e saktë. ¦ Dan il-browser ma jagħtix il-lista tal-fonts: hawn huma l-fonts komuni misjuba fuq il-kompjuter. Għal ieħor, ikteb l-isem eżatt tiegħu.
+La liste des polices n’a pas pu être lue. Réessaie. ¦ Lista e shkronjave nuk mund të lexohej. Provo përsëri. ¦ Il-lista tal-fonts ma setgħetx tinqara. Erġa’ pprova.
+Un autre format de la liste, ou un format libre (gardé dans « Mes formats ») ¦ Një format tjetër nga lista, ose një format i lirë (i ruajtur te «Formatet e mia») ¦ Daqs ieħor mil-lista, jew daqs ħieles (miżmum f’“Id-daqsijiet tiegħi”)
+Un exemplaire au moins. ¦ Të paktën një kopje. ¦ Mill-inqas kopja waħda.
+{n} exemplaires au plus. ¦ {n} kopje më së shumti. ¦ L-iktar {n} kopji.

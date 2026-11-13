@@ -10,6 +10,7 @@
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const api = (...a) => A().api(...a);
     const toast = (...a) => A().toast(...a);
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s); // 🌐 docs/I18N.md
     const n2 = v => Math.round((Number(v) || 0) * 100) / 100;
     let seq = 0; const uid = () => 'c' + Date.now().toString(36) + (++seq).toString(36);
 
@@ -370,7 +371,7 @@
                     if (!m) { if (!photoFile) dg.querySelector('[name=usephoto]').checked = false; return; }
                     photoFile = m.filename; dg.querySelector('[name=usephoto]').checked = true; dg.querySelector('[data-fp-photo]').textContent = `(${m.title || m.filename})`; };
                 dg.querySelector('[data-fp-pickphoto]').addEventListener('click', pickPhoto);
-                const fill = async pid => { try { const r = await fillFrom(kind, pid); grab(); Object.entries(r.values).forEach(([k, v]) => { const f = fields.find(x => x.role === k); if (f && v) f.value = v; }); draw(); if (r.photo) { photoFile = r.photo; dg.querySelector('[data-fp-photo]').textContent = '(la photo de la fiche)'; } toast(`Rempli depuis la fiche de ${r.label} : relis et complète.`); } catch (e) { toast(e.message, 'error'); } };
+                const fill = async pid => { try { const r = await fillFrom(kind, pid); grab(); Object.entries(r.values).forEach(([k, v]) => { const f = fields.find(x => x.role === k); if (f && v) f.value = v; }); draw(); if (r.photo) { photoFile = r.photo; dg.querySelector('[data-fp-photo]').textContent = '(la photo de la fiche)'; } toast(i18n('Rempli depuis la fiche de {name} : relis et complète.', {name: r.label})); } catch (e) { toast(e.message, 'error'); } };
                 dg.querySelector('[data-fp-fill]').addEventListener('click', () => { if (personId) fill(personId); else dg.querySelector('[data-fp-who] .pk-search:not([hidden]) .pk-input')?.focus(); });
                 dg.querySelector('[data-fp-who]').addEventListener('cp-pick', e => { if (!e.detail.id) return; personId = e.detail.id; fill(personId); });
                 dg._fpGrab = () => { grab(); return fields; };

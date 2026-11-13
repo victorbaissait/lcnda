@@ -13,6 +13,7 @@
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     ext.lists = ext.lists || {};
     const esc = value => A().escapeHtml(value ?? '');
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const S = () => A().state;
     const toast = (...a) => A().toast(...a);
     const get = (action, params = {}) => A().api(action, params);
@@ -89,7 +90,7 @@
             // K9 : la vignette unique (UI.cardsHtml)
             return {thumb: cover ? `<img src="${esc(thumb(cover))}" alt="" loading="lazy">` : '<span class="ui-card-ico">📜</span>', name: `${types[r.record_type] || r.record_type || 'Dépouillement'}${r.year_text ? ' · ' + r.year_text : ''}`, open: `data-dp-open="${r.id}"`,
                 lines: [[r.city_alias && r.city_alias !== (r.place_name || r.city_name) ? r.city_alias : '', r.archive_service, r.archive_reference].filter(Boolean).join(' · ') || 'Service d’archives à préciser', `👥 ${(r.people || []).length} · 🏠 ${plural(households(r.people || []), 'foyer', 'foyers')}${r.page_total ? ` · 📷 ${plural(r.page_total, 'vue', 'vues')}` : ''}${r.doc_pages ? ` · 📄 ${plural(r.doc_pages, 'page', 'pages')}` : ''}`],
-                badges: [{text: statuses[r.status] || r.status || '', kind: r.status === 'done' ? 'green' : 'blue'}, ext.journal?.RESULTS?.[r.result] ? {text: ext.journal.RESULTS[r.result][0], kind: ext.journal.RESULTS[r.result][1]} : null, {text: `${pct} % dépouillé`, kind: pct >= 100 ? 'green' : 'grey'}, ls ? {text: plural(ls, 'photo à ranger', 'photos à ranger'), kind: 'yellow'} : null].filter(b => b && b.text)};
+                badges: [{text: statuses[r.status] || r.status || '', kind: r.status === 'done' ? 'green' : 'blue'}, ext.journal?.RESULTS?.[r.result] ? {text: ext.journal.RESULTS[r.result][0], kind: ext.journal.RESULTS[r.result][1]} : null, {text: i18n('{nm} % dépouillé', {nm: pct}), kind: pct >= 100 ? 'green' : 'grey'}, ls ? {text: plural(ls, 'photo à ranger', 'photos à ranger'), kind: 'yellow'} : null].filter(b => b && b.text)};
         };
         const line = r => { const pages = pagesOf(r), cover = (r.media || []).find(m => isImage(m) && String(m.archive_page_number || '').trim()) || (r.media || []).find(isImage);
             const done = pages.filter(p => ['checked', 'empty'].includes(p.status)).length, total = Number(r.page_total) || pages.length, pct = total ? Math.min(100, Math.round(done / total * 100)) : 0;
@@ -97,8 +98,8 @@
         const group = list => view === 'list' && UI?.rowsHtml ? UI.rowsHtml(list.map(line)) : UI.cardsHtml(list.map(card));
         ws.innerHTML = `<section class="page collection-page h-rc h-dp">
             <header class="page-header"><div><span class="eyebrow">LISTES · ARCHIVES</span><h2>📜 Dépouillements</h2>
-                <p>Tes dépouillements d’archive page par page : les photos de chaque page, les personnes relevées rangées par foyer, la transcription. <b>Ce sont les mêmes que dans Recherche › Dépouillement d’archive</b> : ce que tu saisis ici y est aussitôt, et inversement.</p></div>
-                <div class="page-actions"><button type="button" class="button secondary" data-dp-research>↗ Ouvrir dans Recherche</button><button type="button" class="button secondary" data-dp-decennale title="La photo d’une table décennale : l’app lit les noms, les dates et les sortes d’actes, tu relis, puis le dépouillement est créé">📑 Lire une table décennale</button><button type="button" class="button" data-dp-new>＋ Nouveau dépouillement</button></div></header>
+                <p>${i18n('Tes dépouillements d’archive page par page : les photos de chaque page, les personnes relevées rangées par foyer, la transcription. <b>Ce sont les mêmes que dans Recherche › Dépouillement d’archive</b> : ce que tu saisis ici y est aussitôt, et inversement.')}</p></div>
+                <div class="page-actions"><button type="button" class="button secondary" data-dp-research>↗ Ouvrir dans Recherche</button><button type="button" class="button secondary" data-import-plus="releves" title="Nimègue (v2, v3), CSV d’un cercle, Excel, LibreOffice : les actes relevés, avec leurs personnes">⤒ Importer des relevés</button><button type="button" class="button secondary" data-dp-decennale title="La photo d’une table décennale : l’app lit les noms, les dates et les sortes d’actes, tu relis, puis le dépouillement est créé">📑 Lire une table décennale</button><button type="button" class="button" data-dp-new>＋ Nouveau dépouillement</button></div></header>
             <div data-dp-bar></div>
             ${rows.length ? [...groups.entries()].map(([c, list]) => `<h3 class="h-dp-city">🏘️ ${esc(c)} <small class="muted">${list.length}</small></h3>${group(list)}`).join('')
             : (s.q || s.type || s.status ? A().emptyState({icon: '🔍', text: 'Aucun dépouillement ne correspond.'}) : A().emptyState({icon: '📑', text: 'Aucun dépouillement pour l’instant', hint: 'La fiche du dépouillement se remplit dans Recherche.', action: {label: '＋ Nouveau dépouillement', attrs: 'data-dp-new'}}))}</section>`;
@@ -256,7 +257,7 @@
         body.querySelectorAll('[data-dp-zoomcur]').forEach(b => b.addEventListener('click', () => viewer(imgs, Math.max(0, imgs.indexOf(cur)))));
         body.querySelectorAll('[data-dp-addhere]').forEach(b => b.addEventListener('click', () => addPhotos(p.number)));
         body.querySelector('[data-dp-moveimg]')?.addEventListener('change', async e => {
-            try { const n = await pageFromSelect(e.target.value); if (n === null || n === p.number) { e.target.value = p.number; return; } await post('link_archive_digest_media', {archive_digest_id: r.id, media_id: cur.id, page_number: n}); toast(n ? `Photo déplacée en page ${n}.` : 'Photo mise « à ranger ».'); s.image = 0; await reload(); } catch (err) { toast(err.message, 'error'); }
+            try { const n = await pageFromSelect(e.target.value); if (n === null || n === p.number) { e.target.value = p.number; return; } await post('link_archive_digest_media', {archive_digest_id: r.id, media_id: cur.id, page_number: n}); toast(n ? i18n('Photo déplacée en page {nm}.', {nm: String(n)}) : 'Photo mise « à ranger ».'); s.image = 0; await reload(); } catch (err) { toast(err.message, 'error'); }
         });
         body.querySelector('[data-dp-unlink]')?.addEventListener('click', async () => { try { await post('unlink_archive_digest_media', {archive_digest_id: r.id, media_id: cur.id}); } catch (e) { return toast(e.message, 'error'); } // H7 : pas de question, « ↶ Annuler »
             const was = s.image; s.image = 0; reload(); A().undoToast('Photo retirée du dépouillement (elle reste dans Médias).', {undo: async () => { await post('link_archive_digest_media', {archive_digest_id: r.id, media_id: cur.id, page_number: cur.archive_page_number ?? cur.page_number ?? ''}); s.image = was; reload(); }}); });
@@ -275,7 +276,7 @@
         });
         body.querySelector('[data-dp-delpage]').addEventListener('click', async () => {
             const nPeople = (r.people || []).filter(x => String(x.page_number || '').trim() === p.number).length, nLines = lines.length;
-            if (!await A().confirmBox(`Supprimer la page ${p.number} ?${ms.length ? `\n\n${ms.length > 1 ? `Ses ${ms.length} photos passent` : 'Sa photo passe'} « à ranger ».` : ''}${nPeople || nLines ? `\n${[nPeople && (nPeople > 1 ? `Ses ${nPeople} personnes relevées` : 'Sa personne relevée'), nLines && (nLines > 1 ? `ses ${nLines} lignes de transcription` : 'sa ligne de transcription')].filter(Boolean).join(' et ')} ${nPeople + nLines > 1 ? 'seront supprimées' : 'sera supprimée'} aussi (gardées dans l’Historique).` : ''}`, {title: 'Supprimer la page', okLabel: 'Supprimer la page'})) return;
+            if (!await A().confirmBox(`${i18n('Supprimer la page {n} ?', {n: String(p.number)})}${ms.length ? `\n\n${ms.length > 1 ? i18n('Ses {n} photos passent « à ranger ».', {n: ms.length}) : i18n('Sa photo passe « à ranger ».')}` : ''}${nPeople || nLines ? `\n${i18n(nPeople + nLines > 1 ? '{what} seront supprimées aussi (gardées dans l’Historique).' : '{what} sera supprimée aussi (gardées dans l’Historique).', {what: [nPeople && (nPeople > 1 ? i18n('Ses {n} personnes relevées', {n: nPeople}) : i18n('Sa personne relevée')), nLines && (nLines > 1 ? i18n('ses {n} lignes de transcription', {n: nLines}) : i18n('sa ligne de transcription'))].filter(Boolean).join(` ${i18n('et')} `)})}` : ''}`, {title: i18n('Supprimer la page'), okLabel: i18n('Supprimer la page')})) return;
             await post('save_archive_digest_page', {archive_digest_id: r.id, old_number: p.number, delete: 1, delete_content: 1}); delete DRAFTS[`${r.id}:${p.number}`]; s.page = (next || prev)?.number || ''; toast('Page supprimée.'); reload();
         });
         // transcription : chaque ligne s'enregistre ; Entrée dans la dernière en crée une nouvelle
@@ -298,7 +299,7 @@
             try { const res = await post('save_archive_digest_transcription_line', {archive_digest_id: r.id, media_id: cur?.id || '', page_number: p.number, line_number: num, content: v}); D.lines.push({id: (res.result || res).id, page_number: p.number, line_number: num, content: v, media_id: cur?.id || null, zone_json: ''}); paint(); body.isConnected; A().$('[data-dp-lnew]')?.focus(); } catch (err) { toast(err.message, 'error'); }
         });
         peopleTable(body.querySelector('[data-dp-table]'), p.number, isLocked(r.id, p.number));
-        body.querySelector('[data-dp-lock]').addEventListener('click', () => { setLocked(r.id, p.number, !isLocked(r.id, p.number)); toast(isLocked(r.id, p.number) ? `Tableau de la page ${p.number} verrouillé.` : 'Tableau déverrouillé : tu peux le modifier.'); paint(); });
+        body.querySelector('[data-dp-lock]').addEventListener('click', () => { setLocked(r.id, p.number, !isLocked(r.id, p.number)); toast(isLocked(r.id, p.number) ? i18n('Tableau de la page {nm} verrouillé.', {nm: String(p.number)}) : 'Tableau déverrouillé : tu peux le modifier.'); paint(); });
         body.querySelector('[data-dp-addp]').addEventListener('click', () => peopleTable.add?.(false));
         body.querySelector('[data-dp-addhh]').addEventListener('click', () => peopleTable.add?.(true));
         body.querySelector('[data-dp-sheet]')?.addEventListener('click', () => ext.sheetBase.openFilled({src: {source: 'digest', filters: {digest_id: r.id, page: p.number}}, cols: ['street', 'house', 'household', 'last_name', 'first_name', 'age', 'occupation', 'position', 'person'], name: `${r.city_name || 'Relevé'} — page ${p.number}`, sheetName: `Page ${p.number}`})); // 🧾 heritage-tableur-base.js
@@ -424,12 +425,12 @@
                     const k = keyOf(head());
                     const nk = ((await A().askText({title: 'Numéro du foyer', message: 'Nouveau numéro de ce foyer seulement (tel qu’il est écrit dans le document, même s’il ne suit pas) :', value: k, okLabel: 'Renuméroter'})) ?? '').trim();
                     if (nk === k) return;
-                    if (nk && all().some(y => uidOf(y) !== uid && keyOf(y) === nk) && !await A().confirmBox(`Un autre foyer de cette page porte déjà le n° ${nk}. Les deux garderont ce numéro mais resteront deux foyers distincts. Continuer ?`, {title: 'Numéro déjà pris', okLabel: 'Garder ce numéro'})) return;
-                    try { await setHousehold(uid, {new_key: nk}); render(); toast(`Foyer n° ${nk || '—'}.`); } catch (e) { toast(e.message, 'error'); }
+                    if (nk && all().some(y => uidOf(y) !== uid && keyOf(y) === nk) && !await A().confirmBox(i18n('Un autre foyer de cette page porte déjà le n° {nm}. Les deux garderont ce numéro mais resteront deux foyers distincts. Continuer ?', {nm: nk}), {title: 'Numéro déjà pris', okLabel: 'Garder ce numéro'})) return;
+                    try { await setHousehold(uid, {new_key: nk}); render(); toast(i18n('Foyer n° {nm}.', {nm: nk || '—'})); } catch (e) { toast(e.message, 'error'); }
                 });
                 tr.querySelector('[data-dp-hhdel]').addEventListener('click', async () => {
                     const ms = members(uid), saved = ms.filter(x => x.id);
-                    if (saved.length && !await A().confirmBox(`Supprimer le foyer ${keyOf(head()) || 'sans n°'} et ses ${plural(saved.length, 'personne relevée', 'personnes relevées')} ?\n\nLes fiches rattachées ne sont pas supprimées.`, {title: 'Supprimer le foyer', okLabel: 'Supprimer le foyer'})) return;
+                    if (saved.length && !await A().confirmBox(`${i18n('Supprimer le foyer {k} et ses {n} ?', {k: keyOf(head()) || i18n('sans n°'), n: plural(saved.length, 'personne relevée', 'personnes relevées')})}\n\n${i18n('Les fiches rattachées ne sont pas supprimées.')}`, {title: i18n('Supprimer le foyer'), okLabel: i18n('Supprimer le foyer')})) return;
                     try { if (saved.length) await post('save_archive_digest_household', {archive_digest_id: r.id, page_number: pageNumber, household_uid: uid, delete: 1});
                         ms.forEach(x => { if (x.id) { rows.splice(rows.indexOf(x), 1); r.people = r.people.filter(y => y !== x); } else { x._gone = true; draft.splice(draft.indexOf(x), 1); } }); render(); toast('Foyer supprimé.'); } catch (e) { toast(e.message, 'error'); }
                 });
@@ -473,7 +474,7 @@
                         const o = picker.selected();
                         if (!o) return window.LCNDA_UI.fail(form.querySelector('.h-pick .pk, .h-pick input, .h-pick'), 'Choisis une fiche dans la liste, ou « Pas encore de fiche ».');
                         x.person_id = Number(o.key); x.person_name = o.label;
-                        await save(x, {person_mode: 'existing'}); toast(`Rattachée à ${x.person_name}.`); end(true);
+                        await save(x, {person_mode: 'existing'}); toast(i18n('Rattachée à {nm}.', {nm: x.person_name})); end(true);
                     },
                 });
             });
@@ -489,7 +490,7 @@
         // un foyer = son identité (deux foyers peuvent porter le même numéro, ou aucun)
         ppl.forEach(x => { const k = `${x.page_number}|${x.household_uid || (x.household_key || '').trim() || 'a:' + (x.address || '')}`; if (!byHh.has(k)) byHh.set(k, []); byHh.get(k).push(x); });
         const keys = [...byHh.keys()].sort((a, b) => natural((byHh.get(a)[0].household_key || '~'), (byHh.get(b)[0].household_key || '~')) || natural(a, b));
-        body.innerHTML = ppl.length ? `<p class="muted">${plural(ppl.length, 'personne relevée', 'personnes relevées')} dans ${plural(byHh.size, 'foyer', 'foyers')}. Clique sur une page pour modifier.</p>
+        body.innerHTML = ppl.length ? `<p class="muted">${i18n('{n} dans {h}. Clique sur une page pour modifier.', {n: plural(ppl.length, 'personne relevée', 'personnes relevées'), h: plural(byHh.size, 'foyer', 'foyers')})}</p>
             <div class="h-dp-hhs">${keys.map(k => { const list = byHh.get(k), pages = [...new Set(list.map(x => x.page_number).filter(Boolean))].sort(natural), addr = list.find(x => x.address)?.address;
                 const num = (list[0].household_key || '').trim();
                 return `<article class="h-dp-hh maintenance-panel"><h4>🏠 ${num ? 'Foyer ' + esc(num) : 'Foyer sans n°'}${addr ? ` <small class="muted">${esc(addr)}</small>` : ''}</h4>
@@ -524,7 +525,7 @@
                 const start = String(f.get('start') || '1').trim(), m = start.match(/^(.*?)(\d+)(\D*)$/);
                 const numberFor = i => mode === 'page' ? String(f.get('page') || '') : mode === 'loose' ? '' : m ? `${m[1]}${Number(m[2]) + i}${m[3]}` : (i ? `${start}-${i + 1}` : start);
                 for (let i = 0; i < files.length; i++) {
-                    prog.textContent = `Envoi : ${i + 1} / ${files.length}…`;
+                    prog.textContent = i18n('Envoi : {nm} / {x2}…', {nm: i + 1, x2: files.length});
                     const n = numberFor(i);
                     if (n && !pages.some(p => p.number === n)) { await post('save_archive_digest_page', {archive_digest_id: D.row.id, number: n, old_number: ''}).catch(() => {}); pages.push({number: n}); }
                     const fd = new FormData(); fd.append('archive_digest_id', D.row.id); fd.append('archive_digest_page_number', n); fd.append('csrf', S().csrf); fd.append('files[]', files[i]);

@@ -1,0 +1,10 @@
+# Living DNA customer genotype data download file version: 1.0.1
+# Données inventées pour les tests de LCNDA : aucun génome réel.
+# Human Genome Reference Build 37 (GRCh37.p13).
+# rsid	chromosome	position	genotype
+rs0000101	1	752566	AA
+rs0000102	1	776546	AG
+rs0000103	1	798959	GG
+rs0000104	1	838555	CC
+rs0000105	1	846808	CT
+rs0000106	2	1000010	TT

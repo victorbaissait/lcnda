@@ -1,0 +1,1013 @@
+fr ¦ ro
+TABLEUR · BASE ¦ FOAIE DE CALCUL · BAZĂ
+⤒ Remplir depuis l’app ¦ ⤒ Completează din aplicație
+1 · Ce qu’on prend ¦ 1 · Ce se preia
+(comme l’export pour partager) ¦ (ca exportul pentru partajare)
+2 · Les colonnes ¦ 2 · Coloanele
+(glisse ⠿ pour ranger) ¦ (trage ⠿ pentru a ordona)
+＋ Une colonne tirée des données ¦ ＋ O coloană luată din date
+3 · Aperçu ¦ 3 · Previzualizare
+🔗 Tenir à jour ¦ 🔗 Ține la zi
+— les lignes changent quand la base change (à l’ouverture, ou avec ↻). Tes colonnes ajoutées à droite (formules, notes) restent sur la bonne ligne. ¦ — rândurile se schimbă când baza se schimbă (la deschidere sau cu ↻). Coloanele adăugate de tine în dreapta (formule, note) rămân pe rândul potrivit.
+Où : ¦ Unde:
+à la même place (remplace la plage liée) ¦ în același loc (înlocuiește zona legată)
+à partir de A1 dans une nouvelle feuille ¦ începând de la A1 într-o foaie nouă
+à partir de {cell} dans cette feuille ¦ începând de la {cell} în această foaie
+⤒ Remplir ¦ ⤒ Completează
+Commune ¦ Localitate
+Pas encore de dépouillement : Listes → 📜 Dépouillements. ¦ Încă nicio indexare: Liste → 📜 Indexări.
+Statistique ¦ Statistică
+Hommes et femmes à part ¦ Bărbații și femeile separat
+Pas encore de liste à toi : Listes → Mes listes. ¦ Încă nicio listă a ta: Liste → Listele mele.
+Hommes ¦ Bărbați
+Femmes ¦ Femei
+Inconnu ¦ Necunoscut
+Lignée ¦ Linie de descendență
+Né(e) à ¦ Născut(ă) în
+Nés à partir de ¦ Născuți începând din
+Nés jusqu’à ¦ Născuți până în
+Nés avant ¦ Născuți înainte de
+Sorte ¦ Fel
+Chercher… (nom, prénom) ¦ Caută… (nume, prenume)
+Chercher… (nom, sorte, lieu) ¦ Caută… (nume, fel, loc)
+👤 personne ¦ 👤 persoană
+📍 lieu ¦ 📍 loc
+📅 date d’acte ¦ 📅 data actului
+nombre ¦ număr
+Monter ¦ Mută în sus
+Descendre ¦ Mută în jos
+Retirer la colonne ¦ Scoate coloana
+Aucune colonne : ajoute-en une. ¦ Nicio coloană: adaugă una.
+Lecture de la base… ¦ Se citește baza…
+Lecture… ¦ Se citește…
+({shown} premières lignes sur {n}) ¦ (primele {shown} rânduri din {n})
+Rien ne correspond : change les filtres. ¦ Nimic nu se potrivește: schimbă filtrele.
+{n} de côté (personnes vivantes ou fiches confidentielles). ¦ {n} lăsate deoparte (persoane în viață sau fișe confidențiale).
+Seules les {n} premières lignes sont prises : précise les filtres. ¦ Se preiau doar primele {n} rânduri: restrânge filtrele.
+⤒ Remplir {n} ¦ ⤒ Completează {n}
+Toutes les colonnes sont déjà là. ¦ Toate coloanele sunt deja acolo.
+Une colonne tirée des données ¦ O coloană luată din date
+Cette feuille n’est pas liée à la base : Données → « ⤒ Remplir depuis l’app… ». ¦ Această foaie nu este legată de bază: Date → „⤒ Completează din aplicație…”.
+Impossible de relire la base : {error} ¦ Baza nu a putut fi recitită: {error}
+🔗 Déjà à jour : rien n’a changé dans la base. ¦ 🔗 Deja la zi: nimic nu s-a schimbat în bază.
+{n} de plus ¦ încă {n}
+{n} de moins ¦ cu {n} mai puțin
+valeurs mises à jour ¦ valori actualizate
+🔗 « {name} » relue : {what} ({lost}) ¦ 🔗 „{name}” recitită: {what} ({lost})
+🔗 « {name} » relue : {what} ¦ 🔗 „{name}” recitită: {what}
+<b>Relevé de recensement</b> · les colonnes de l’année : ¦ <b>Transcriere de recensământ</b> · coloanele anului:
+Année du recensement ¦ Anul recensământului
+📤 Envoyer vers la base… ¦ 📤 Trimite în bază…
+🔗 Tenue à jour : <b>{what}</b> · {n} · relue {when} ¦ 🔗 Ținută la zi: <b>{what}</b> · {n} · recitită {when}
+la base ¦ baza
+Relire depuis la base ¦ Recitește din bază
+↻ Relire ¦ ↻ Recitește
+Changer la source ou les colonnes… ¦ Schimbă sursa sau coloanele…
+Envoyer vers la base… ¦ Trimite în bază…
+Ne plus tenir à jour (garder les valeurs) ¦ Nu mai ține la zi (păstrează valorile)
+« {name} » n’est plus tenue à jour ¦ „{name}” nu mai este ținută la zi
+Relevé : colonnes de {year} ¦ Transcriere: coloanele din {year}
+Mode consultation : rien ne peut être envoyé vers la base. ¦ Mod consultare: nimic nu poate fi trimis în bază.
+Choisis le tableau à envoyer (sa ligne de titres et ses lignes), puis recommence. ¦ Alege tabelul de trimis (rândul de titluri și rândurile lui), apoi încearcă din nou.
+📤 Envoyer vers la base — {name}, lignes {from} à {to} ¦ 📤 Trimite în bază — {name}, rândurile {from} - {to}
+1. Les colonnes ¦ 1. Coloanele
+2. Voilà ce qui va entrer ¦ 2. Iată ce va intra
+3. Envoyer ¦ 3. Trimite
+Voir ce qui va entrer ¦ Vezi ce va intra
+Ce que ça crée : ¦ Ce creează:
+Colonne ¦ Coloană
+Exemple ¦ Exemplu
+Va dans ¦ Merge în
+(sans titre) ¦ (fără titlu)
+Champ pour la colonne {col} ¦ Câmp pentru coloana {col}
+Colonnes : {list} ¦ Coloane: {list}
+aucune pour l’instant ¦ niciuna deocamdată
+Déjà dans la base ¦ Deja în bază
+Problème ¦ Problemă
+Laissée de côté ¦ Lăsată deoparte
+📤 Créer {n} ¦ 📤 Creează {n}
+📤 Rien de nouveau ¦ 📤 Nimic nou
+📤 Créer {n} et en relier {m} ¦ 📤 Creează {n} și leagă {m}
+📤 Relier {m} ¦ 📤 Leagă {m}
+📤 Envoyer ¦ 📤 Trimite
+Choisis au moins une colonne à envoyer (le nom, par exemple). ¦ Alege cel puțin o coloană de trimis (numele, de exemplu).
+Choisis au moins une colonne. ¦ Alege cel puțin o coloană.
+Donne l’année du recensement. ¦ Scrie anul recensământului.
+Il faut une colonne pour le nom (ou « Nom et prénom »). ¦ Trebuie o coloană pentru nume (sau „Nume și prenume”).
+Il faut une colonne pour le nom. ¦ Trebuie o coloană pentru nume.
+Choisis la colonne qui dit la sorte d’événement (Baptême, Décès…). ¦ Alege coloana care spune felul evenimentului (Botez, Deces…).
+Il manque la sorte d’événement. ¦ Lipsește felul evenimentului.
+Ces lignes sont vides. ¦ Aceste rânduri sunt goale.
+Je compare avec ta base… ¦ Compar cu baza ta…
+Comparaison… ¦ Comparare…
+Choisir la fiche de la ligne {row} ¦ Alege fișa pentru rândul {row}
+choisis ▾ ¦ alege ▾
+Relier à {name} ({meta}) ¦ Leagă de {name} ({meta})
+Laisser de côté ¦ Lasă deoparte
+Des lignes ressemblent à plusieurs fiches : choisis la bonne (sinon elles sont laissées de côté). ¦ Unele rânduri seamănă cu mai multe fișe: alege-o pe cea bună (altfel sunt lăsate deoparte).
+Ligne ¦ Rând
+Ce qui va se passer ¦ Ce se va întâmpla
+Impossible d’envoyer : {error} ¦ Trimiterea nu a reușit: {error}
+contient « {text} » : compté comme {n} ¦ conține „{text}”: socotit ca {n}
+contient l’erreur « {text} » : laissée vide ¦ conține eroarea „{text}”: lăsată goală
+« {text} » n’est pas un nombre : laissé vide ¦ „{text}” nu este un număr: lăsat gol
+à trouver ¦ de găsit
+L’éditeur de diagrammes n’est pas chargé. ¦ Editorul de diagrame nu este încărcat.
+L’éditeur de graphiques n’est pas chargé. ¦ Editorul de grafice nu este încărcat.
+Graphique « {name} » ajouté à Mes graphiques (Graphiques, tableau de bord…). ¦ Graficul „{name}” a fost adăugat la Graficele mele (Grafice, tablou de bord…).
+Le navigateur refuse de copier ici : sélectionne la plage et fais {key}. ¦ Browserul refuză să copieze aici: selectează zona și apasă {key}.
+Copié : dans un tableau (Enquêtes → 🧩 Tableaux), colle-le ({key}) : il devient un objet ▦ Tableur, formules comprises. ¦ Copiat: într-un panou (Investigații → 🧩 Panouri), lipește-l ({key}): devine un obiect ▦ Foaie de calcul, cu tot cu formule.
+Copié : dans la page d’un recueil, clique une case du tableau et colle ({key}). ¦ Copiat: în pagina unei culegeri, fă clic pe o celulă a tabelului și lipește ({key}).
+La présentation n’est pas chargée. ¦ Prezentarea nu este încărcată.
+… et {n} ¦ … și {n}
+Colonnes attendues : {list} ¦ Coloane așteptate: {list}
+(une ou plusieurs) ¦ (una sau mai multe)
+(facultatif) ¦ (opțional)
+Les données de « {name} » ¦ Datele din „{name}”
+l’outil ¦ instrumentul
+{name} (données) ¦ {name} (date)
+Renvoyer les données là d’où elles viennent ¦ Trimite datele înapoi de unde au venit
+Formules, tri, coller depuis Excel… « Fichier → Enregistrer une copie… » garde aussi ce classeur dans le Tableur. ¦ Formule, sortare, lipire din Excel… „Fișier → Salvează o copie…” păstrează și acest registru în Foaia de calcul.
+Rien à ouvrir : la liste est vide. ¦ Nimic de deschis: lista este goală.
+🧾 Tableur ¦ 🧾 Foaie de calcul
+ouvrir dans le tableur ¦ deschide în foaia de calcul
+🧾 Ouvrir dans le tableur ¦ 🧾 Deschide în foaia de calcul
+La feuille est vide : écris ou colle un tableau, puis choisis-le. ¦ Foaia este goală: scrie sau lipește un tabel, apoi selectează-l.
+TABLEUR · PRÉPARER POUR… ¦ FOAIE DE CALCUL · PREGĂTEȘTE PENTRU…
+🎯 Préparer pour… ({range}) ¦ 🎯 Pregătește pentru… ({range})
+Le tableur sait ce que chaque endroit de l’app attend : choisis où vont ces données. Il vérifie les colonnes de la plage <b>{range}</b> et les range comme il faut. ¦ Foaia de calcul știe ce așteaptă fiecare parte a aplicației: alege unde merg aceste date. Ea verifică coloanele zonei <b>{range}</b> și le aranjează cum trebuie.
+Dessin ¦ Desen
+▦ Un tableau ¦ ▦ Un tabel
+Il faut une colonne de chiffres ¦ Trebuie o coloană de cifre
+📊 Un graphique ¦ 📊 Un grafic
+Dans la plage ¦ În zonă
+, une ou plusieurs ¦ , una sau mai multe
+, facultatif ¦ , opțional
+Voir la cellule ¦ Vezi celula
+… et {n} à vérifier. ¦ … și {n} de verificat.
+Il manque une colonne : ajoute-la dans la plage, ou choisis une autre plage. ¦ Lipsește o coloană: adaug-o în zonă sau alege altă zonă.
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) ¦ Păstrează legătura: diagrama urmează foaia de calcul (actualizată când zona se schimbă)
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) — le classeur sera enregistré dans le Tableur ¦ Păstrează legătura: diagrama urmează foaia de calcul (actualizată când zona se schimbă) — registrul va fi salvat în Foaia de calcul
+← Autre endroit ¦ ← Alt loc
+La première ligne donne les titres ¦ Primul rând conține titlurile
+Pas d’aperçu. ¦ Nicio previzualizare.
+🎤 Créer la présentation ¦ 🎤 Creează prezentarea
+Corrige la cellule, puis rouvre « 🎯 Préparer pour… ». ¦ Corectează celula, apoi redeschide „🎯 Pregătește pentru…”.
+Ces données reviennent dans leur outil : le diagramme est fait d’une copie (pas de lien). ¦ Aceste date se întorc în instrumentul lor: diagrama este făcută dintr-o copie (fără legătură).
+Choisis une plage avec des nombres (par exemple : Décennie, Hommes, Femmes). ¦ Selectează o zonă cu numere (de exemplu: Deceniu, Bărbați, Femei).
+Tous les types de diagrammes… ¦ Toate tipurile de diagrame…
+Conseillés pour {range} ¦ Recomandate pentru {range}
+🔗 Données : « {name} » ! {range} ¦ 🔗 Date: „{name}” ! {range}
+Classeur ¦ Registru
+(feuille « {name} ») ¦ (foaia „{name}”)
+tenu à jour ¦ ținut la zi
+Les figer ¦ Fixează-le
+⚠️ Classeur introuvable (supprimé ?) : le dessin garde les derniers chiffres lus. ¦ ⚠️ Registru negăsit (șters?): desenul păstrează ultimele cifre citite.
+TABLEUR ¦ FOAIE DE CALCUL
+Nom du classeur… ¦ Numele registrului…
+Plage illisible : écris par exemple A1:C12. ¦ Zonă ilizibilă: scrie de exemplu A1:C12.
+Feuille ¦ Foaie
+Plage ¦ Zonă
+Copier une fois (les chiffres ne bougent plus) ¦ Copiază o dată (cifrele nu se mai schimbă)
+Garder le lien : le diagramme suit le classeur (tenu à jour) ¦ Păstrează legătura: diagrama urmează registrul (ținut la zi)
+Lecture du classeur… ¦ Se citește registrul…
+Choisis un classeur. ¦ Alege un registru.
+Écris une plage, par exemple A1:C12. ¦ Scrie o zonă, de exemplu A1:C12.
+Écris le résultat voulu dans la première case de la colonne (par exemple « Jean D. »), puis relance ✨ Remplissage instantané. ¦ Scrie rezultatul dorit în prima celulă a coloanei (de exemplu „Jean D.”), apoi pornește din nou ✨ Completare instantanee.
+Je ne trouve pas de règle qui marche pour tous les exemples : écris-en un de plus, ou un plus simple. ¦ Nu găsesc o regulă care să meargă pentru toate exemplele: mai scrie unul sau unul mai simplu.
+Rien à remplir : la colonne est déjà pleine. ¦ Nimic de completat: coloana este deja plină.
+{what} de {col} ¦ {what} din {col}
+{what} n°{n} de {col} ¦ {what} nr. {n} din {col}
+{what} n°{n} depuis la fin de {col} ¦ {what} nr. {n} de la sfârșitul lui {col}
+✨ {n} (règle : {rule}). ↶ pour annuler. ¦ ✨ {n} (regulă: {rule}). ↶ pentru a anula.
+Choisis un tableau avec une ligne de titres et des lignes de données. ¦ Selectează un tabel cu un rând de titluri și rânduri de date.
+Colonne {col} ¦ Coloana {col}
+DONNÉES ¦ DATE
+Σ Sous-totaux ¦ Σ Subtotaluri
+Créer les sous-totaux ¦ Creează subtotalurile
+D’après <b>{range}</b>. Une nouvelle feuille : les lignes rangées par groupe, un total sous chaque groupe (formules), puis le total général. « ⊟ Plan » (menu Données) replie le détail. ¦ Pe baza <b>{range}</b>. O foaie nouă: rândurile grupate, un total sub fiecare grup (formule), apoi totalul general. „⊟ Schiță” (meniul Date) restrânge detaliile.
+À chaque changement de ¦ La fiecare schimbare de
+Calcul ¦ Calcul
+Sur les colonnes ¦ Pe coloanele
+Coche au moins une colonne à calculer. ¦ Bifează cel puțin o coloană de calculat.
+Σ {n}. « ⊟ Plan » (menu Données) replie le détail. ¦ Σ {n}. „⊟ Schiță” (meniul Date) restrânge detaliile.
+Cette feuille n’a pas de sous-totaux : Données → Σ Sous-totaux… d’abord. ¦ Această foaie nu are subtotaluri: mai întâi Date → Σ Subtotaluri….
+⊟ Détail replié : seuls les totaux restent. ¦ ⊟ Detalii restrânse: rămân doar totalurile.
+⊞ Détail déplié. ¦ ⊞ Detalii extinse.
+🎯 Valeur cible ¦ 🎯 Valoare țintă
+L’app essaie des valeurs dans « la case à changer » jusqu’à ce que la formule donne le résultat voulu. Ex. : à quel âge s’est-il marié pour que la différence d’âge soit 7 ans ? ¦ Aplicația încearcă valori în „celula de schimbat” până când formula dă rezultatul dorit. Ex.: la ce vârstă s-a căsătorit pentru ca diferența de vârstă să fie de 7 ani?
+La formule de la case ¦ Formula din celula
+Doit donner ¦ Trebuie să dea
+En changeant la case ¦ Schimbând celula
+Écris une adresse de case (ex. C5, B2). ¦ Scrie adresa unei celule (ex. C5, B2).
+Écris le résultat voulu. ¦ Scrie rezultatul dorit.
+La première case doit contenir une formule. ¦ Prima celulă trebuie să conțină o formulă.
+Pas de valeur trouvée : la formule ne dépend peut-être pas de cette case, ou ne peut pas atteindre ce résultat. ¦ Nicio valoare găsită: poate formula nu depinde de această celulă sau nu poate ajunge la acest rezultat.
+🎯 {cell} = {value} : la formule donne {target}. ↶ pour annuler. ¦ 🎯 {cell} = {value}: formula dă {target}. ↶ pentru a anula.
+INSERTION ¦ INSERARE
+📈 Mini-graphique ¦ 📈 Mini-grafic
+Poser ¦ Inserează
+Un petit graphique dans la case, qui suit les chiffres. Plusieurs lignes choisies : un graphique par ligne (la plage descend avec elles). ¦ Un mic grafic în celulă, care urmează cifrele. Mai multe rânduri selectate: câte un grafic pe rând (zona coboară odată cu ele).
+Les nombres (plage de la 1re ligne) ¦ Numerele (zona primului rând)
+Gagné / perdu ¦ Câștigat / pierdut
+Couleur ¦ Culoare
+Écris une plage, par exemple B2:F2. ¦ Scrie o zonă, de exemplu B2:F2.
+🧮 Solveur ¦ 🧮 Solver
+Résoudre ¦ Rezolvă
+Comme la valeur cible, mais en changeant plusieurs cases à la fois, avec des conditions. Ex. : répartir un héritage entre trois branches pour que chacune ait au moins 1 000 € et que l’écart soit le plus petit possible. ¦ Ca valoarea țintă, dar schimbând mai multe celule deodată, cu condiții. Ex.: împarte o moștenire între trei ramuri astfel încât fiecare să primească cel puțin 1 000 € și diferența să fie cât mai mică.
+La formule (case objectif) ¦ Formula (celula obiectiv)
+Doit être ¦ Trebuie să fie
+la plus grande possible ¦ cât mai mare
+la plus petite possible ¦ cât mai mică
+égale à… ¦ egală cu…
+Valeur (si « égale à ») ¦ Valoare (dacă „egală cu”)
+En changeant les cases ¦ Schimbând celulele
+B2:B4 ou B2;C3 ¦ B2:B4 sau B2;C3
+Conditions (une par ligne : {examples}) ¦ Condiții (câte una pe rând: {examples})
+Nombres entiers seulement ¦ Doar numere întregi
+La case objectif doit contenir une formule (ex. D5). ¦ Celula obiectiv trebuie să conțină o formulă (ex. D5).
+Trente cases à changer au plus. ¦ Cel mult treizeci de celule de schimbat.
+Écris les cases à changer (ex. B2:B4). ¦ Scrie celulele de schimbat (ex. B2:B4).
+Condition illisible : « {text} » (ex. B2 >= 0). ¦ Condiție ilizibilă: „{text}” (ex. B2 >= 0).
+Écris la valeur voulue. ¦ Scrie valoarea dorită.
+Pas de solution qui respecte toutes les conditions (vérifie-les, ou change le départ). ¦ Nicio soluție nu respectă toate condițiile (verifică-le sau schimbă punctul de pornire).
+🧮 Trouvé : {cell} = {value} ({n}). ↶ pour annuler. ¦ 🧮 Găsit: {cell} = {value} ({n}). ↶ pentru a anula.
+📋 Tableau de scénarios ¦ 📋 Tabel de scenarii
+Et si cette case valait 20, 25, 30… ? Le tableau montre ce que donnent les formules pour chaque valeur. Il est posé à partir de la case choisie ({cell}) ; rien d’autre ne change. ¦ Și dacă această celulă ar fi 20, 25, 30…? Tabelul arată ce dau formulele pentru fiecare valoare. Este pus începând de la celula selectată ({cell}); nimic altceva nu se schimbă.
+La case qui change ¦ Celula care se schimbă
+Ses valeurs (séparées par « ; », ou une plage) ¦ Valorile ei (separate prin „;” sau o zonă)
+20;25;30 ou A10:A15 ¦ 20;25;30 sau A10:A15
+Les formules à suivre ¦ Formulele de urmărit
+Écris la case qui change (ex. B2). ¦ Scrie celula care se schimbă (ex. B2).
+Écris au moins une formule (ex. C5). ¦ Scrie cel puțin o formulă (ex. C5).
+Écris des valeurs (500 au plus). ¦ Scrie niște valori (cel mult 500).
+📋 {n} (valeurs fixes : refais-le si les données changent). ¦ 📋 {n} (valori fixe: refă-l dacă datele se schimbă).
+Rien n’a été enregistré. ¦ Nimic nu a fost înregistrat.
+⏺ Nommer l’action ¦ ⏺ Denumește acțiunea
+Mon action ¦ Acțiunea mea
+Garder ¦ Păstrează
+⏺ Action « {name} » gardée : Données → ▶ Actions enregistrées. ¦ ⏺ Acțiunea „{name}” a fost păstrată: Date → ▶ Acțiuni înregistrate.
+⏺ Enregistrement : fais tes manipulations (menus, boutons, formats), puis Données → ⏹ Arrêter l’enregistrement. ¦ ⏺ Înregistrare: fă-ți manevrele (meniuri, butoane, formate), apoi Date → ⏹ Oprește înregistrarea.
+Aucune action enregistrée : Données → ⏺ Enregistrer une action. ¦ Nicio acțiune înregistrată: Date → ⏺ Înregistrează o acțiune.
+▶ Actions enregistrées ¦ ▶ Acțiuni înregistrate
+Elles se refont sur la sélection du moment. ¦ Se refac pe selecția de moment.
+▶ Refaire ¦ ▶ Refă
+▶ « {name} » refaite. ¦ ▶ „{name}” refăcută.
+Colonne {n} ¦ Coloana {n}
+{what} de « {col} » ¦ {what} din „{col}”
+Lignes ¦ Rânduri
+Total ¦ Total
+{title} · par « {rows} » et « {cols} » — d’après {src} ¦ {title} · după „{rows}” și „{cols}” — pe baza {src}
+{title} · par « {rows} » — d’après {src} ¦ {title} · după „{rows}” — pe baza {src}
+Choisis une plage avec une ligne de titres et des lignes de données (par exemple : Nom, Commune, Année, Âge). ¦ Selectează o zonă cu un rând de titluri și rânduri de date (de exemplu: Nume, Localitate, An, Vârstă).
+🔀 Tableau croisé dynamique ¦ 🔀 Tabel pivot
+Créer le tableau croisé ¦ Creează tabelul pivot
+D’après <b>{range}</b> ({n}). Le résultat va dans une nouvelle feuille ; « ↻ Actualiser le tableau croisé » (menu Données) le refait si les données changent. ¦ Pe baza <b>{range}</b> ({n}). Rezultatul merge într-o foaie nouă; „↻ Actualizează tabelul pivot” (meniul Date) îl reface dacă datele se schimbă.
+En lignes ¦ Pe rânduri
+En colonnes (facultatif) ¦ Pe coloane (opțional)
+— rien — ¦ — nimic —
+Sur la colonne ¦ Pe coloana
+— (compter les lignes) — ¦ — (numără rândurile) —
+Totaux ¦ Totaluri
+Aperçu : {rows} × {cols} ¦ Previzualizare: {rows} × {cols}
+Tableau croisé créé : {rows} × {cols}. Données → « ↻ Actualiser le tableau croisé » pour le refaire. ¦ Tabel pivot creat: {rows} × {cols}. Date → „↻ Actualizează tabelul pivot” pentru a-l reface.
+Cette feuille n’est pas un tableau croisé : va sur sa feuille « TCD … ». ¦ Această foaie nu este un tabel pivot: mergi la foaia lui „TCD …”.
+La feuille des données n’existe plus. ¦ Foaia de date nu mai există.
+Tableau croisé actualisé ({rows} × {cols}). ¦ Tabel pivot actualizat ({rows} × {cols}).
+Graphique vivant ¦ Grafic viu
+Type de graphique ¦ Tipul graficului
+En faire un diagramme lié à la plage ¦ Fă din el o diagramă legată de zonă
+Choisis des cases avec des nombres (et leurs noms à gauche ou en haut) : le graphique se dessine ici. ¦ Selectează celule cu numere (și numele lor în stânga sau sus): graficul se desenează aici.
+Plage {range} · suit la sélection ¦ Zona {range} · urmează selecția
+Le moteur du tableur n’est pas chargé. ¦ Motorul foii de calcul nu este încărcat.
+Mon classeur ¦ Registrul meu
+Rien à rétablir. ¦ Nimic de refăcut.
+d’autres changements ont suivi : utilise ↶ ({key}) ¦ au urmat alte schimbări: folosește ↶ ({key})
+Barre d’outils · {group} ¦ Bară de instrumente · {group}
+Barre d’outils ¦ Bară de instrumente
+Police et gras ¦ Font și aldin
+Police (E5) ¦ Font (E5)
+Police ¦ Font
+Gras ¦ Aldin
+Italique ¦ Cursiv
+Souligné ¦ Subliniat
+Renvoi à la ligne ¦ Încadrare text
+Fusionner / séparer ¦ Îmbină / separă
+Aligner à gauche ¦ Aliniază la stânga
+Centrer ¦ Centrează
+Aligner à droite ¦ Aliniază la dreapta
+Couleurs (C2) ¦ Culori (C2)
+Couleur du texte ¦ Culoarea textului
+Format de cellule ¦ Format de celulă
+Format de la cellule ¦ Formatul celulei
+Une décimale de moins ¦ O zecimală mai puțin
+Une décimale de plus ¦ O zecimală mai mult
+Bordures ¦ Borduri
+Bordures : tout ¦ Borduri: toate
+Bordures : contour ¦ Borduri: contur
+Bordure du bas ¦ Bordura de jos
+Sans bordure ¦ Fără bordură
+Graphique ¦ Grafic
+Un diagramme avec les chiffres de la sélection : les types conseillés pour cette plage ¦ O diagramă cu cifrele selecției: tipurile recomandate pentru această zonă
+Choisir une fonction ¦ Alege o funcție
+Fonction ¦ Funcție
+XLSX, ODS, CSV, TSV, JSON, PDF, impression ¦ XLSX, ODS, CSV, TSV, JSON, PDF, tipărire
+✓ Enregistrer et revenir ¦ ✓ Salvează și revino
+Plein écran (⛶) ¦ Ecran complet (⛶)
+Données d’un autre outil ¦ Date din alt instrument
+Adresse (tape D12 ou un nom pour y aller) ¦ Adresă (tastează D12 sau un nume pentru a merge acolo)
+Tape une adresse (D12, B2:C9) ou un nom pour y aller ¦ Tastează o adresă (D12, B2:C9) sau un nume pentru a merge acolo
+Contenu ou formule de la cellule ¦ Conținutul sau formula celulei
+Feuille de calcul ¦ Foaie de lucru
+Feuille de calcul : tape pour écrire dans la cellule choisie ¦ Foaie de lucru: tastează pentru a scrie în celula selectată
+Écrire dans la cellule ¦ Scrie în celulă
+Panneau de droite ¦ Panoul din dreapta
+Feuilles ¦ Foi
+Clique pour choisir ce qu’on y voit (somme, moyenne…) ¦ Fă clic pentru a alege ce se vede aici (sumă, medie…)
+Enregistrer une copie dans le Tableur… ¦ Salvează o copie în Foaia de calcul…
+Enregistrer une copie… ¦ Salvează o copie…
+Enregistrer comme modèle… ¦ Salvează ca model…
+Exporter (XLSX, ODS, CSV, PDF…)… ¦ Exportă (XLSX, ODS, CSV, PDF…)…
+Feuille « {name} » ¦ Foaia „{name}”
+Pas encore relié à une fiche ¦ Încă nelegat de o fișă
+Tire pour recopier ou continuer une suite ¦ Trage pentru a copia sau a continua o serie
+« {text} » n’est pas dans la liste : {list} ¦ „{text}” nu este în listă: {list}
+Il faut un nombre d’au moins {min} et au plus {max}. ¦ Trebuie un număr de cel puțin {min} și cel mult {max}.
+Il faut un nombre d’au moins {min}. ¦ Trebuie un număr de cel puțin {min}.
+Il faut un nombre et au plus {max}. ¦ Trebuie un număr de cel mult {max}.
+Il faut un nombre. ¦ Trebuie un număr.
+Je ne comprends pas cette date ({why}). ¦ Nu înțeleg această dată ({why}).
+exemples : 7 mai 1925, vers 1784, an II ¦ exemple: 7 mai 1925, vers 1784, an II
+Tab = compléter ¦ Tab = completează
+✓ Compris comme une date d’acte : <b>{date}</b> (approximative : les calculs montreront ≈) ¦ ✓ Înțeles ca dată de act: <b>{date}</b> (aproximativă: calculele vor arăta ≈)
+✓ Compris comme une date d’acte : <b>{date}</b> ¦ ✓ Înțeles ca dată de act: <b>{date}</b>
+Texte ou nombre. Commence par <b>=</b> pour calculer. ¦ Text sau număr. Începe cu <b>=</b> pentru a calcula.
+ƒ Formule : clique ou glisse sur des cellules pour les mettre, ou tape le nom d’une fonction (en français ou en anglais). <kbd>F4</kbd> : $A$1. ¦ ƒ Formulă: fă clic sau trage peste celule pentru a le pune, sau tastează numele unei funcții (în franceză sau în engleză). <kbd>F4</kbd>: $A$1.
+Corriger en {name} ¦ Corectează în {name}
+Résultat approché : une des dates est approximative (« vers », « avant », « an … » sans jour). ¦ Rezultat aproximativ: una dintre date este aproximativă („vers”, „avant”, „an …” fără zi).
+« {text} » : ni une adresse (D12, B2:C9), ni un nom du classeur. ¦ „{text}”: nici o adresă (D12, B2:C9), nici un nume din registru.
+Pas de feuille « {name} ». ¦ Nicio foaie „{name}”.
+Utilise {key} dans la grille (le navigateur ne laisse pas un bouton écrire dans le presse-papiers). ¦ Folosește {key} în grilă (browserul nu lasă un buton să scrie în clipboard).
+En pixels (6 à 72) : ¦ În pixeli (6 - 72):
+Lignes masquées (Format → Tout remontrer) ¦ Rânduri ascunse (Format → Arată din nou tot)
+Colonnes masquées (Format → Tout remontrer) ¦ Coloane ascunse (Format → Arată din nou tot)
+Trier A → Z (sur la colonne choisie) ¦ Sortează A → Z (după coloana selectată)
+Trier Z → A ¦ Sortează Z → A
+Trier sur plusieurs colonnes… ¦ Sortează după mai multe coloane…
+Espaces en trop retirés. ¦ Spațiile în plus au fost scoase.
+Rien à retirer. ¦ Nimic de scos.
+Police des cellules ¦ Fontul celulelor
+Cette police a un nom que le tableur ne sait pas garder. ¦ Acest font are un nume pe care foaia de calcul nu îl poate păstra.
+Une taille entre 6 et 72 px (« {value} » ne va pas). ¦ O mărime între 6 și 72 px („{value}” nu merge).
+Une taille entre 6 et 72 px. ¦ O mărime între 6 și 72 px.
+Choisis d’abord plusieurs cases à fusionner. ¦ Selectează mai întâi mai multe celule de îmbinat.
+Cases fusionnées : {n} ¦ Celule îmbinate: {n}
+Largeur de colonne ¦ Lățimea coloanei
+Hauteur de ligne ¦ Înălțimea rândului
+En pixels (16 à 1200) : ¦ În pixeli (16 - 1200):
+En pixels (12 à 600) : ¦ În pixeli (12 - 600):
+Un nom commence par une lettre, sans espace (ex. Total, Âges_1836). ¦ Un nume începe cu o literă, fără spațiu (ex. Total, Ages_1836).
+Nom « {name} » = {ref} : tape =SOMME({name}) dans une formule. ¦ Numele „{name}” = {ref}: tastează =SOMME({name}) într-o formulă.
+Nom pour la plage ¦ Nume pentru zonă
+Un nom pour {ref} (pour écrire =SOMME(Total) au lieu de =SOMME(D2:D40)) : ¦ Un nume pentru {ref} (ca să scrii =SOMME(Total) în loc de =SOMME(D2:D40)):
+💬 Note sur {cell} ¦ 💬 Notă pe {cell}
+La note s’affiche au survol de la case (un petit coin orange). Vide = pas de note. ¦ Nota apare când treci cu mouse-ul peste celulă (un mic colț portocaliu). Gol = nicio notă.
+⌨️ Raccourcis du tableur ¦ ⌨️ Scurtăturile foii de calcul
+Raccourcis indisponibles. ¦ Scurtături indisponibile.
+⚙️ Réglages du tableur ¦ ⚙️ Setările foii de calcul
+Après la touche Entrée, aller ¦ După tasta Enter, mergi
+vers le bas ¦ în jos
+vers la droite (saisie de relevés en ligne) ¦ la dreapta (introducerea transcrierilor pe rând)
+Séparateur des fichiers CSV ¦ Separatorul fișierelor CSV
+point-virgule « ; » (Excel en français) ¦ punct și virgulă „;” (Excel în franceză)
+virgule « , » ¦ virgulă „,”
+tabulation ¦ tabulator
+Largeur des colonnes d’une feuille neuve ¦ Lățimea coloanelor unei foi noi
+Dans la barre du bas, pour les cellules choisies ¦ În bara de jos, pentru celulele selectate
+Réglages du tableur ¦ Setările foii de calcul
+Trop de lignes ou de colonnes d’un coup. ¦ Prea multe rânduri sau coloane deodată.
+Trié {dir} sur la colonne {col} (la 1re ligne, ce sont les titres). ¦ Sortat {dir} după coloana {col} (primul rând conține titlurile).
+Trié {dir} sur la colonne {col}. ¦ Sortat {dir} după coloana {col}.
+A → Z (croissant) ¦ A → Z (crescător)
+Z → A (décroissant) ¦ Z → A (descrescător)
+Plage {range} · les dates d’actes (« vers 1784 », « an II ») se rangent à leur date. ¦ Zona {range} · datele actelor („vers 1784”, „an II”) se ordonează după data lor.
+La première ligne, ce sont les titres ¦ Primul rând conține titlurile
+Puis par ¦ Apoi după
+Choisis un tableau avec une ligne de titres et des lignes en dessous. ¦ Selectează un tabel cu un rând de titluri și rânduri dedesubt.
+(vide) ¦ (gol)
+Chercher dans le tableau… (nom, métier) ¦ Caută în tabel… (nume, meserie)
+{n} sur {total} ¦ {n} din {total}
+Supprimer les doublons ¦ Șterge duplicatele
+Plage {range} · la 1re ligne, ce sont les titres. La première ligne de chaque groupe reste. ¦ Zona {range} · primul rând conține titlurile. Primul rând din fiecare grup rămâne.
+Plage {range}. La première ligne de chaque groupe reste. ¦ Zona {range}. Primul rând din fiecare grup rămâne.
+Compare les colonnes : ¦ Compară coloanele:
+{n} en double (lignes {rows}). ¦ {n} duplicate (rândurile {rows}).
+{n} en double (ligne {rows}). ¦ {n} duplicate (rândul {rows}).
+Aucune ligne en double. ¦ Niciun rând duplicat.
+Supprimer {n} ¦ Șterge {n}
+Coche au moins une colonne. ¦ Bifează cel puțin o coloană.
+Choisis des cases de texte dans une colonne (ex. « MARTIN Jean, 34 ans, laboureur »). ¦ Selectează celule de text dintr-o coloană (ex. „MARTIN Jean, 34 ans, laboureur”).
+Convertir le texte en colonnes ¦ Transformă textul în coloane
+Convertir ¦ Transformă
+Couper à : ¦ Taie la:
+« 34 ans » devient 34 ¦ „34 ans” devine 34
+Le nom en capitales devient une colonne à part (« MARTIN Jean » → MARTIN | Jean) ¦ Numele scris cu majuscule devine o coloană separată („MARTIN Jean” → MARTIN | Jean)
+Les morceaux vont dans la colonne {col} et les suivantes (ce qui s’y trouve est remplacé ; ↶ pour revenir). ¦ Bucățile merg în coloana {col} și în următoarele (ce se află acolo este înlocuit; ↶ pentru a reveni).
+Validation des données ¦ Validarea datelor
+Pour {range} : ce qu’on peut écrire dans ces cases. ¦ Pentru {range}: ce se poate scrie în aceste celule.
+Autoriser ¦ Permite
+Une liste de choix (menu ▾) ¦ O listă de opțiuni (meniu ▾)
+👤 Une personne de la base (menu de choix) ¦ 👤 O persoană din bază (meniu de alegere)
+📍 Un lieu de la base (menu de choix) ¦ 📍 Un loc din bază (meniu de alegere)
+Un nombre entre… ¦ Un număr între…
+Une date d’acte (vers 1784, an II…) ¦ O dată de act (vers 1784, an II…)
+Les choix (un par ligne) ¦ Opțiunile (câte una pe rând)
+Entre ¦ Între
+Garder aussi un texte libre (sans fiche, ou hors de la liste) ¦ Păstrează și un text liber (fără fișă sau în afara listei)
+Écris au moins un choix. ¦ Scrie cel puțin o opțiune.
+FORMAT ¦ FORMAT
+Mise en forme conditionnelle ¦ Formatare condiționată
+Ajouter la règle ¦ Adaugă regula
+Une couleur quand la valeur le demande : l’erreur ou la valeur étrange saute aux yeux. ¦ O culoare când valoarea o cere: greșeala sau valoarea ciudată sare în ochi.
+Prêtes à l’emploi : ¦ Gata de folosit:
+« âge > 100 ans » ¦ „vârstă > 100 de ani”
+« date impossible » ¦ „dată imposibilă”
+« doublons » ¦ „duplicate”
+« barres » ¦ „bare”
+Si la valeur ¦ Dacă valoarea
+alors ¦ atunci
+en gras ¦ cu aldine
+Une plage comme D2:D40. ¦ O zonă precum D2:D40.
+Écris un nombre. ¦ Scrie un număr.
+ÉDITION ¦ EDITARE
+🔍 Rechercher et remplacer ¦ 🔍 Caută și înlocuiește
+Remplacer tout ¦ Înlocuiește tot
+Remplacer par ¦ Înlocuiește cu
+Dans toutes les feuilles ¦ În toate foile
+Respecter les capitales ¦ Ține cont de majuscule
+Chercher le suivant ¦ Caută următorul
+Trouvé en {cell} ¦ Găsit în {cell}
+Écris ce qu’il faut chercher. ¦ Scrie ce trebuie căutat.
+Aucune fonction ne correspond. ¦ Nicio funcție nu se potrivește.
+ƒ Choisir une fonction ¦ ƒ Alege o funcție
+Chercher… (âge, somme, recherche) ¦ Caută… (vârstă, sumă, căutare)
+Le menu de choix n’est pas chargé. ¦ Meniul de alegere nu este încărcat.
+📍 Un lieu pour {cell} ¦ 📍 Un loc pentru {cell}
+👤 Une personne pour {cell} ¦ 👤 O persoană pentru {cell}
+📍 Lieu de la base ¦ 📍 Loc din bază
+auto ¦ auto
+Décimales ¦ Zecimale
+✓ « {text} » est comprise (≈) ¦ ✓ „{text}” este înțeleasă (≈)
+✓ « {text} » est comprise ¦ ✓ „{text}” este înțeleasă
+Noir ¦ Negru
+Contour ¦ Contur
+Retirer la règle ¦ Scoate regula
+Aucune règle sur cette feuille. ¦ Nicio regulă pe această foaie.
+＋ Ajouter une règle… ¦ ＋ Adaugă o regulă…
+Une liste : {list} ¦ O listă: {list}
+👤 Une personne de la base ¦ 👤 O persoană din bază
+📍 Un lieu de la base ¦ 📍 Un loc din bază
+Un nombre ¦ Un număr
+Une date d’acte ¦ O dată de act
+Garder le texte ¦ Păstrează textul
+Pas de validation ici. ¦ Nicio validare aici.
+Validation des données… ¦ Validarea datelor…
+Enregistre d’abord le classeur (💾), puis ouvre la fiche. ¦ Salvează mai întâi registrul (💾), apoi deschide fișa.
+{name} : lieu n° {id} de ta base. ¦ {name}: locul nr. {id} din baza ta.
+Règle « {range} » retirée ¦ Regula „{range}” a fost scoasă
+Police (E5) : {font} ¦ Font (E5): {font}
+celle de départ ¦ cel inițial
+Panneau de droite : montrer ¦ Panoul din dreapta: arată
+Panneau de droite : cacher ¦ Panoul din dreapta: ascunde
+Double-clic : renommer · clic droit : plus d’actions ¦ Dublu clic: redenumește · clic dreapta: mai multe acțiuni
+Ajouter une feuille ¦ Adaugă o foaie
+Feuille {n} ¦ Foaia {n}
+Renommer la feuille ¦ Redenumește foaia
+Un classeur garde au moins une feuille. ¦ Un registru păstrează cel puțin o foaie.
+Feuille « {name} » supprimée ¦ Foaia „{name}” a fost ștearsă
+Couleur de l’onglet… ¦ Culoarea filei…
+Déplacer à gauche ¦ Mută la stânga
+Déplacer à droite ¦ Mută la dreapta
+Somme <b>{v}</b> ¦ Sumă <b>{v}</b>
+Moyenne <b>{v}</b> ¦ Medie <b>{v}</b>
+Nb <b>{v}</b> ¦ Nr. <b>{v}</b>
+Min <b>{v}</b> ¦ Min <b>{v}</b>
+Max <b>{v}</b> ¦ Max <b>{v}</b>
+Dans la barre d’état ¦ În bara de stare
+Utilise {key} : le navigateur ne laisse pas un menu écrire dans le presse-papiers. ¦ Folosește {key}: browserul nu lasă un meniu să scrie în clipboard.
+Sélection trop grande pour le presse-papiers. ¦ Selecție prea mare pentru clipboard.
+Coupé : choisis où coller, puis {key}. ¦ Tăiat: alege unde să lipești, apoi {key}.
+Utilise {key} dans la grille pour coller. ¦ Folosește {key} în grilă pentru a lipi.
+Trop de cellules à coller. ¦ Prea multe celule de lipit.
+{n} (avec le gras et les couleurs). ¦ {n} (cu aldine și culori).
+Série {n} ¦ Seria {n}
+Colonnes groupées ¦ Coloane grupate
+Barres horizontales ¦ Bare orizontale
+TSV (tabulations) ¦ TSV (tabulatoare)
+⤒ Importer un tableau ¦ ⤒ Importă un tabel
+Séparateur deviné : {sep} · Encodage : {enc} ¦ Separator ghicit: {sep} · Codificare: {enc}
+point-virgule (;) ¦ punct și virgulă (;)
+virgule (,) ¦ virgulă (,)
+✓ Accents corrects : « {list} ». ¦ ✓ Diacritice corecte: „{list}”.
+<b>{rows}</b> dans {sheets} ¦ <b>{rows}</b> în {sheets}
+CSV et TSV : la feuille ouverte. Les autres : tout le classeur. Une cellule qui commence par « = » est protégée dans un CSV (pas de formule glissée). ¦ CSV și TSV: foaia deschisă. Celelalte: tot registrul. O celulă care începe cu „=” este protejată într-un CSV (nicio formulă strecurată).
+tout tableur ¦ orice foaie de calcul
+tabulations ¦ tabulatoare
+données ¦ date
+à lire ¦ de citit
+💾 Fichier de l’outil ¦ 💾 Fișierul instrumentului
+Exporté : {name} ¦ Exportat: {name}
+(feuille vide) ¦ (foaie goală)
+Toutes les feuilles ¦ Toate foile
+Quadrillage ¦ Linii de grilă
+Rangé dans Listes → Outils de modification → 🧾 Tableur. ¦ Pus în Liste → Instrumente de modificare → 🧾 Foaie de calcul.
+Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles). ¦ Modelul „{name}” a fost salvat (Pornește de la un model → Modelele mele).
+Copie « {name} » enregistrée. ¦ Copia „{name}” a fost salvată.
+Ce classeur ¦ Acest registru
+Impossible d’enregistrer : {error} ¦ Salvarea nu a reușit: {error}
+Enregistrer comme modèle ¦ Salvează ca model
+Enregistrer une copie ¦ Salvează o copie
+Le nom du modèle (les données restent : vide-les avant si tu veux un modèle vierge) : ¦ Numele modelului (datele rămân: golește-le înainte dacă vrei un model gol):
+Le nom de la copie : ¦ Numele copiei:
+{name} (copie) ¦ {name} (copie)
+Les changements faits depuis le dernier enregistrement seront perdus. ¦ Schimbările făcute de la ultima salvare se vor pierde.
+📋 Partir d’un modèle ¦ 📋 Pornește de la un model
+Mes modèles ¦ Modelele mele
+Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Încă niciun model al tău: într-un registru, Fișier → „Salvează ca model…”.
+séparateur « {sep} » ¦ separator „{sep}”
+Classeur importé ¦ Registru importat
+Classeur « {name} » créé ({rows}) ¦ Registrul „{name}” a fost creat ({rows})
+classeur ¦ registru
+＋ Nouveau classeur ¦ ＋ Registru nou
+Relevé de recensement, registre paroissial, budget de la recherche, suivi des courriers… ¦ Transcriere de recensământ, registru parohial, bugetul cercetării, evidența scrisorilor…
+Tu divises par zéro : {ref} est vide ou vaut 0. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Împarți la zero: {ref} este gol sau valorează 0. Sfat: =SI.ERREUR(…;"") lasă celula goală.
+Tu divises par zéro : {why}. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Împarți la zero: {why}. Sfat: =SI.ERREUR(…;"") lasă celula goală.
+Tu divises par zéro. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Împarți la zero. Sfat: =SI.ERREUR(…;"") lasă celula goală.
+Je ne connais pas « {name} ». Voulais-tu dire {sugg} ? ¦ Nu cunosc „{name}”. Voiai să spui {sugg}?
+Je ne connais pas « {name} ». Tape les premières lettres : la liste des fonctions s’ouvre. ¦ Nu cunosc „{name}”. Tastează primele litere: se deschide lista funcțiilor.
+Un nom inconnu dans la formule. ¦ Un nume necunoscut în formulă.
+« {text} » n’est pas un nombre (cellule {cell}) : on ne peut pas faire de calcul avec. ¦ „{text}” nu este un număr (celula {cell}): nu se poate face niciun calcul cu el.
+« {text} » n’est pas un nombre : on ne peut pas faire de calcul avec. ¦ „{text}” nu este un număr: nu se poate face niciun calcul cu el.
+Une valeur ne convient pas ¦ O valoare nu este potrivită
+{what} (cellule {cell}). ¦ {what} (celula {cell}).
+La formule montre quelque chose qui n’existe pas : {what}. ¦ Formula arată spre ceva ce nu există: {what}.
+La formule montre une cellule qui a été supprimée. ¦ Formula arată spre o celulă care a fost ștearsă.
+Valeur introuvable ¦ Valoare negăsită
+La recherche ¦ Căutarea
+{fn} n’a pas trouvé « {what} » dans {where}. ¦ {fn} nu a găsit „{what}” în {where}.
+{fn} n’a pas trouvé « {what} ». ¦ {fn} nu a găsit „{what}”.
+{path} : la formule tourne en rond. ¦ {path}: formula se învârte în cerc.
+La formule a besoin d’elle-même : elle tourne en rond. ¦ Formula are nevoie de ea însăși: se învârte în cerc.
+« {text} » : {why}. ¦ „{text}”: {why}.
+cette date ¦ această dată
+Je ne comprends pas {what} (« {text} »). Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Nu înțeleg {what} („{text}”). Exemple: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas {what}. Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Nu înțeleg {what}. Exemple: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas la formule près de « {near} » : {why}. ¦ Nu înțeleg formula lângă „{near}”: {why}.
+Je ne comprends pas la formule : {why}. ¦ Nu înțeleg formula: {why}.
+Je ne comprends pas la formule près de « {near} » : vérifie les parenthèses, les guillemets et les « ; ». ¦ Nu înțeleg formula lângă „{near}”: verifică parantezele, ghilimelele și „;”.
+Je ne comprends pas la formule : vérifie les parenthèses, les guillemets et les « ; ». ¦ Nu înțeleg formula: verifică parantezele, ghilimelele și „;”.
+Nombre impossible ¦ Număr imposibil
+Le résultat a besoin de {size} vers le bas et la droite, mais {cell} n’est pas vide : vide-la pour voir tout le résultat. ¦ Rezultatul are nevoie de {size} în jos și la dreapta, dar {cell} nu este goală: golește-o ca să vezi tot rezultatul.
+plusieurs cases ¦ mai multe celule
+une case ¦ o celulă
+Trop gros pour être calculé : {why}. ¦ Prea mare pentru a fi calculat: {why}.
+réduis la plage ¦ micșorează zona
+Erreur dans la formule. ¦ Eroare în formulă.
+Astuce : =SI.ERREUR(A4/B4;"") ¦ Sfat: =SI.ERREUR(A4/B4;"")
+fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un document de bureau n’utilise pas ¦ fișier refuzat: conține declarații XML (DOCTYPE sau ENTITY) pe care un document de birou nu le folosește
+fichier XML abîmé ¦ fișier XML deteriorat
+fichier refusé : trop d’éléments ¦ fișier refuzat: prea multe elemente
+fichier refusé : XML trop imbriqué ¦ fișier refuzat: XML prea imbricat
+fichier trop gros (plus de {n} Mo) ¦ fișier prea mare (peste {n} MB)
+ce n’est pas un fichier zip valide ¦ nu este un fișier zip valid
+fichier refusé : trop d’éléments dans le zip ¦ fișier refuzat: prea multe elemente în zip
+fichier chiffré : ouvre-le d’abord dans son tableur et enregistre-le sans mot de passe ¦ fișier criptat: deschide-l mai întâi în programul lui de calcul tabelar și salvează-l fără parolă
+fichier zip abîmé ¦ fișier zip deteriorat
+fichier refusé : trop gros une fois décompressé ¦ fișier refuzat: prea mare odată dezarhivat
+fichier refusé : il se décompresse en beaucoup trop gros (bombe zip) ¦ fișier refuzat: se dezarhivează în ceva mult prea mare (bombă zip)
+ce navigateur ne sait pas ouvrir les fichiers zip (mets-le à jour) ¦ acest browser nu știe să deschidă fișiere zip (actualizează-l)
+compression inconnue dans le fichier ¦ compresie necunoscută în fișier
+ce n’est pas un fichier Excel (.xlsx) : xl/workbook.xml manque ¦ nu este un fișier Excel (.xlsx): lipsește xl/workbook.xml
+fichier refusé : trop de feuilles ¦ fișier refuzat: prea multe foi
+fichier refusé : trop de cellules ¦ fișier refuzat: prea multe celule
+ce n’est pas un fichier LibreOffice (.ods) : content.xml manque ¦ nu este un fișier LibreOffice (.ods): lipsește content.xml
+ce fichier n’est pas un JSON valide ¦ acest fișier nu este un JSON valid
+je ne trouve pas de tableau dans ce JSON (il faut une liste de lignes ou d’objets) ¦ nu găsesc niciun tabel în acest JSON (trebuie o listă de rânduri sau de obiecte)
+les anciens fichiers Excel (.xls) ne sont pas lus : ouvre-le dans Excel ou LibreOffice et enregistre-le en .xlsx ¦ fișierele Excel vechi (.xls) nu sunt citite: deschide-l în Excel sau LibreOffice și salvează-l ca .xlsx
+ce fichier compressé n’est ni un .xlsx ni un .ods ¦ acest fișier comprimat nu este nici .xlsx, nici .ods
+Nombre 0,00 ¦ Număr 0,00
+Nombre entier ¦ Număr întreg
+Monnaie (€) ¦ Monedă (€)
+Pourcentage ¦ Procent
+Date courte ¦ Dată scurtă
+Date d’acte ¦ Dată de act
+Texte ¦ Text
+Relevé de recensement ¦ Transcriere de recensământ
+colonnes de l’année · foyers · « Né(e) vers » calculé ¦ coloanele anului · gospodării · „Născut(ă) în jurul” calculat
+Registre paroissial ¦ Registru parohial
+baptêmes, mariages, sépultures ¦ botezuri, căsătorii, înmormântări
+Budget de la recherche ¦ Bugetul cercetării
+actes, déplacements, abonnements ¦ acte, deplasări, abonamente
+Suivi des courriers ¦ Evidența scrisorilor
+envoyé, relancé, réponse ¦ trimisă, revenire, răspuns
+Arbre en tableau ¦ Arbore sub formă de tabel
+Sosa, génération, côté, âge ¦ număr Sosa, generație, parte, vârstă
+objets, prix, total en livres ¦ obiecte, prețuri, total în livres
+Registre matricule ¦ Registru matricol
+classe, signalement, campagnes ¦ clasă, semnalmente, campanii
+📋 Partir d’un modèle… ¦ 📋 Pornește de la un model…
+⤒ Importer un tableau… ¦ ⤒ Importă un tabel…
+⤓ Exporter… ¦ ⤓ Exportă…
+🖨 Imprimer… ¦ 🖨 Tipărește…
+⚙️ Réglages du tableur… ¦ ⚙️ Setările foii de calcul…
+Insertion ¦ Inserare
+Coller les valeurs seulement ¦ Lipește doar valorile
+Effacer le contenu ¦ Șterge conținutul
+Effacer tout (contenu et mise en forme) ¦ Șterge tot (conținut și formatare)
+Recopier vers le bas ¦ Copiază în jos
+Recopier vers la droite ¦ Copiază la dreapta
+🔍 Rechercher et remplacer… ¦ 🔍 Caută și înlocuiește…
+Ligne au-dessus ¦ Rând deasupra
+Ligne en dessous ¦ Rând dedesubt
+＋ Nouvelle feuille ¦ ＋ Foaie nouă
+ƒ Fonction… ¦ ƒ Funcție…
+Σ Somme automatique ¦ Σ Sumă automată
+📅 Date du jour ¦ 📅 Data de azi
+Nom pour la plage… ¦ Nume pentru zonă…
+💬 Note sur la cellule… ¦ 💬 Notă pe celulă…
+📊 Graphique depuis la sélection ¦ 📊 Grafic din selecție
+Barré ¦ Tăiat
+Aa Police… ¦ Aa Font…
+Taille du texte… ¦ Mărimea textului…
+↵ Renvoi à la ligne ¦ ↵ Încadrare text
+⊞ Fusionner / séparer ¦ ⊞ Îmbină / separă
+▦ Bordures : tout ¦ ▦ Borduri: toate
+▭ Bordures : contour ¦ ▭ Borduri: contur
+▁ Bordure du bas ¦ ▁ Bordura de jos
+Largeur de colonne… ¦ Lățimea coloanei…
+Hauteur de ligne… ¦ Înălțimea rândului…
+Ajuster la largeur au contenu ¦ Potrivește lățimea la conținut
+Masquer les lignes ¦ Ascunde rândurile
+Masquer les colonnes ¦ Ascunde coloanele
+Tout remontrer ¦ Arată din nou tot
+Mise en forme conditionnelle… ¦ Formatare condiționată…
+Une ligne sur deux ¦ Un rând din două
+Effacer la mise en forme ¦ Șterge formatarea
+↕ Trier A → Z ¦ ↕ Sortează A → Z
+↕ Trier Z → A ¦ ↕ Sortează Z → A
+⚲ Filtrer ¦ ⚲ Filtrează
+Supprimer les doublons… ¦ Șterge duplicatele…
+Convertir le texte en colonnes… ¦ Transformă textul în coloane…
+Retirer les espaces en trop ¦ Scoate spațiile în plus
+Figer la 1re ligne ¦ Fixează primul rând
+Figer la 1re colonne ¦ Fixează prima coloană
+Figer jusqu’à la cellule choisie ¦ Fixează până la celula selectată
+Libérer les volets ¦ Eliberează panourile
+Montrer les formules ¦ Arată formulele
+⤢ Ajuster à la fenêtre ¦ ⤢ Potrivește la fereastră
+100 % (taille réelle) ¦ 100 % (mărime reală)
+⌨️ Raccourcis du tableur… ¦ ⌨️ Scurtăturile foii de calcul…
+Rechercher et remplacer ¦ Caută și înlocuiește
+Filtrer (barre de recherche et filtres au-dessus) ¦ Filtrează (bara de căutare și filtrele de deasupra)
+Trier la plage ¦ Sortează zona
+Somme, moyenne, nombre… ¦ Sumă, medie, număr…
+Une personne de la base dans la cellule ¦ O persoană din bază în celulă
+Un lieu de la base dans la cellule ¦ Un loc din bază în celulă
+Note sur la cellule ¦ Notă pe celulă
+Graphique avec les chiffres de la sélection ¦ Grafic cu cifrele selecției
+Tape pour écrire · = pour calculer · double-clic pour modifier · clic droit pour les actions · glisse le petit carré pour recopier ¦ Tastează pentru a scrie · = pentru a calcula · dublu clic pentru a modifica · clic dreapta pentru acțiuni · trage pătrățelul pentru a copia
+Entrée valide · Tab : case à droite · Échap annule · pendant une formule, clique ou glisse sur des cellules pour les y mettre ¦ Enter confirmă · Tab: celula din dreapta · Esc anulează · în timpul unei formule, fă clic sau trage peste celule pentru a le pune
+Σ Somme ¦ Σ Sumă
+Nombre ¦ Număr
+Minimum ¦ Minim
+Maximum ¦ Maxim
+Somme ¦ Sumă
+Panneau de droite ouvert ¦ Panoul din dreapta deschis
+, virgule ¦ , virgulă
+; point-virgule ¦ ; punct și virgulă
+espace ¦ spațiu
+Autre… ¦ Altul…
+plus grande que ¦ mai mare decât
+plus petite que ¦ mai mică decât
+au moins ¦ cel puțin
+au plus ¦ cel mult
+égale à ¦ egală cu
+différente de ¦ diferită de
+entre ¦ între
+contient le texte ¦ conține textul
+est vide ¦ este goală
+n’est pas vide ¦ nu este goală
+est en double ¦ este duplicat
+est une date impossible ¦ este o dată imposibilă
+barres dans la cellule ¦ bare în celulă
+fond jaune ¦ fundal galben
+fond rouge ¦ fundal roșu
+fond vert ¦ fundal verde
+fond bleu ¦ fundal albastru
+fond orange ¦ fundal portocaliu
+fond violet ¦ fundal violet
+règle|plus grande que ¦ mai mare decât
+règle|plus petite que ¦ mai mică decât
+règle|au moins ¦ cel puțin
+règle|au plus ¦ cel mult
+règle|égale à ¦ egală cu
+règle|différente de ¦ diferită de
+règle|entre ¦ între
+règle|contient ¦ conține
+règle|vide ¦ goală
+règle|pas vide ¦ nu e goală
+règle|en double ¦ duplicat
+règle|date impossible ¦ dată imposibilă
+règle|barres ¦ bare
+Cellule ¦ Celulă
+Nombre et date ¦ Număr și dată
+Couleur et bordures ¦ Culoare și borduri
+Validation ¦ Validare
+Adresse ¦ Adresă
+Valeur ¦ Valoare
+Formule ¦ Formulă
+Autorise ¦ Permite
+Sinon ¦ Altfel
+Insérer une ligne au-dessus ¦ Inserează un rând deasupra
+Insérer une ligne en dessous ¦ Inserează un rând dedesubt
+Insérer une colonne à gauche ¦ Inserează o coloană la stânga
+Insérer une colonne à droite ¦ Inserează o coloană la dreapta
+Trier A → Z ¦ Sortează A → Z
+Retirer le filtre ¦ Scoate filtrul
+Note… ¦ Notă…
+Ajuster la largeur ¦ Potrivește lățimea
+Supprimer les lignes ¦ Șterge rândurile
+Supprimer les colonnes ¦ Șterge coloanele
+Windows (vieil Excel) ¦ Windows (Excel vechi)
+👤 Des fiches ¦ 👤 Fișe
+🏠 Un recensement (foyers) ¦ 🏠 Un recensământ (gospodării)
+📅 Des événements ¦ 📅 Evenimente
+— ne pas envoyer — ¦ — nu trimite —
+Nom et prénom ¦ Nume și prenume
+Sexe ¦ Sex
+Naissance (date ou année) ¦ Naștere (dată sau an)
+Décès (date) ¦ Deces (dată)
+N° de foyer (ménage) ¦ Nr. gospodăriei
+N° de maison ¦ Nr. casei
+Rue, quartier ¦ Stradă, cartier
+Patron, employeur ¦ Patron, angajator
+Situation (marié, veuf…) ¦ Stare civilă (căsătorit, văduv…)
+Observations, notes ¦ Observații, note
+Sorte d’événement (acte) ¦ Felul evenimentului (act)
+Date de l’événement ¦ Data evenimentului
+Lieu de l’événement ¦ Locul evenimentului
+colonnes de l’année (1836 → 1936) · foyers · 📤 vers la base ¦ coloanele anului (1836 → 1936) · gospodării · 📤 spre bază
+⤒ Remplir depuis l’app… ¦ ⤒ Completează din aplicație…
+↻ Relire depuis la base ¦ ↻ Recitește din bază
+catégorie + séries ¦ categorie + serii
+📊 Créer le diagramme ¦ 📊 Creează diagrama
+Un graphique ¦ Un grafic
+📈 Créer le graphique ¦ 📈 Creează graficul
+objet ▦ Tableur ¦ obiect ▦ Foaie de calcul
+📋 Copier pour un tableau ¦ 📋 Copiază pentru un panou
+Un recueil ¦ O culegere
+tableur d’une page ¦ foaie de calcul pe o pagină
+📋 Copier pour un recueil ¦ 📋 Copiază pentru o culegere
+tableau ou graphique ¦ tabel sau grafic
+Ce que le diagramme attend ¦ Ce așteaptă diagrama
+Ce que le graphique attend ¦ Ce așteaptă graficul
+Ce que le tableau attend ¦ Ce așteaptă panoul
+Ce que le recueil attend ¦ Ce așteaptă culegerea
+Pyramide des âges ¦ Piramida vârstelor
+Courbes ¦ Curbe
+Radar ¦ Radar
+Barres groupées ¦ Bare grupate
+Camembert (une seule série) ¦ Diagramă circulară (o singură serie)
+Rectangles proportionnels ¦ Dreptunghiuri proporționale
+🎯 Préparer pour… (diagramme, graphique, présentation…) ¦ 🎯 Pregătește pentru… (diagramă, grafic, prezentare…)
+initiale ¦ inițiala
+MAJUSCULES ¦ MAJUSCULE
+minuscules ¦ minuscule
+Capitale ¦ Cu majusculă
+Plus petit ¦ Cel mai mic
+Plus grand ¦ Cel mai mare
+✨ Remplissage instantané ¦ ✨ Completare instantanee
+Σ Sous-totaux… ¦ Σ Subtotaluri…
+⊟ Plan : replier / déplier le détail ¦ ⊟ Schiță: restrânge / extinde detaliile
+🎯 Valeur cible… ¦ 🎯 Valoare țintă…
+🧮 Solveur… ¦ 🧮 Solver…
+📋 Tableau de scénarios (et si…)… ¦ 📋 Tabel de scenarii (și dacă…)…
+⏺ Enregistrer une action / ⏹ arrêter ¦ ⏺ Înregistrează o acțiune / ⏹ oprește
+▶ Actions enregistrées… ¦ ▶ Acțiuni înregistrate…
+📈 Mini-graphique… ¦ 📈 Mini-grafic…
+Nombre de lignes ¦ Numărul de rânduri
+Nombre de valeurs différentes ¦ Numărul de valori diferite
+En % de la ligne ¦ În % din rând
+En % de la colonne ¦ În % din coloană
+En % du tout ¦ În % din total
+🔀 Tableau croisé dynamique… ¦ 🔀 Tabel pivot…
+↻ Actualiser le tableau croisé ¦ ↻ Actualizează tabelul pivot
+📊 Graphique vivant (suit la sélection) ¦ 📊 Grafic viu (urmează selecția)
+📊 Graphique vivant ¦ 📊 Grafic viu
+Vide ¦ Gol
+⛔ Formule en erreur ¦ ⛔ Formulă cu eroare
+ƒ Formule ¦ ƒ Formulă
+VRAI / FAUX ¦ ADEVĂRAT / FALS
+⚠️ Date impossible ¦ ⚠️ Dată imposibilă
+📅 Date d’acte ¦ 📅 Dată de act
+Conditions ¦ Condiții
+Logique ¦ Logică
+Conjoint ¦ Soț/soție
+Parents ¦ Părinți
+N° de fiche ¦ Nr. fișei
+Date ¦ Dată
+Personne(s) ¦ Persoană (persoane)
+Description ¦ Descriere
+N° d’événement ¦ Nr. evenimentului
+Foyer ¦ Gospodărie
+Employeur ¦ Angajator
+Situation ¦ Stare civilă
+Rue ¦ Stradă
+N° ¦ Nr.
+Adresse entière ¦ Adresa completă
+Deuxième prénom ¦ Al doilea prenume
+Titre ¦ Titlu
+Suffixe ¦ Sufix
+FamilySearch ¦ FamilySearch
+Description physique ¦ Descriere fizică
+Teint ¦ Ten
+Origine ¦ Origine
+Vivant ? ¦ În viață?
+Modifié le ¦ Modificat la
+Cause ¦ Cauză
+Autorité ¦ Autoritate
+Confiance ¦ Încredere
+Date convertie ¦ Dată convertită
+Autre date ¦ Altă dată
+Informations en plus ¦ Informații suplimentare
+Calendrier ¦ Calendar
+Relevés de dépouillement ¦ Transcrieri de indexare
+Noms de famille ¦ Nume de familie
+Âges au décès ¦ Vârste la deces
+Décès par siècle ¦ Decese pe secole
+Communes de naissance ¦ Localități de naștere
+Départements de naissance ¦ Departamente de naștere
+Naissances par mois ¦ Nașteri pe luni
+Personnes par génération ¦ Persoane pe generații
+Additionne des nombres ou des plages. ¦ Adună numere sau zone.
+La moyenne des nombres. ¦ Media numerelor.
+Le plus petit nombre. ¦ Cel mai mic număr.
+Le plus grand nombre. ¦ Cel mai mare număr.
+Compte les cellules qui contiennent un nombre. ¦ Numără celulele care conțin un număr.
+Compte les cellules qui ne sont pas vides. ¦ Numără celulele care nu sunt goale.
+Compte les cellules vides. ¦ Numără celulele goale.
+Multiplie des nombres. ¦ Înmulțește numere.
+Arrondit au plus proche. ¦ Rotunjește la cel mai apropiat.
+Arrondit vers zéro. ¦ Rotunjește spre zero.
+Arrondit en s’éloignant de zéro. ¦ Rotunjește departe de zero.
+La partie entière (arrondi vers le bas). ¦ Partea întreagă (rotunjită în jos).
+Le nombre sans son signe. ¦ Numărul fără semn.
+Le reste d’une division. ¦ Restul unei împărțiri.
+Un nombre élevé à une puissance. ¦ Un număr ridicat la o putere.
+La racine carrée. ¦ Rădăcina pătrată.
+La valeur du milieu. ¦ Valoarea din mijloc.
+L’écart type (sur un échantillon). ¦ Abaterea standard (pe un eșantion).
+La place d’un nombre dans une liste (1 = le plus grand ; ordre 1 = le plus petit d’abord). ¦ Locul unui număr într-o listă (1 = cel mai mare; ordine 1 = cel mai mic întâi).
+La k-ième plus grande valeur. ¦ A k-a cea mai mare valoare.
+La k-ième plus petite valeur. ¦ A k-a cea mai mică valoare.
+Une valeur si le test est vrai, une autre sinon. ¦ O valoare dacă testul este adevărat, alta altfel.
+La valeur du premier test vrai. ¦ Valoarea primului test adevărat.
+La valeur, ou autre chose s’il y a une erreur. ¦ Valoarea sau altceva dacă există o eroare.
+La valeur, ou autre chose si elle n’est pas trouvée (#N/A). ¦ Valoarea sau altceva dacă nu este găsită (#N/A).
+VRAI si tous les tests sont vrais. ¦ VRAI (adevărat) dacă toate testele sunt adevărate.
+VRAI si au moins un test est vrai. ¦ VRAI (adevărat) dacă cel puțin un test este adevărat.
+La valeur VRAI (comme le mot VRAI). ¦ Valoarea VRAI (adevărat), ca și cuvântul VRAI.
+La valeur FAUX (comme le mot FAUX). ¦ Valoarea FAUX (fals), ca și cuvântul FAUX.
+Inverse un test. ¦ Inversează un test.
+Compte les cellules qui remplissent une condition (">60", "laboureur", "lab*"). ¦ Numără celulele care îndeplinesc o condiție (">60", "laboureur", "lab*").
+Compte les lignes qui remplissent toutes les conditions. ¦ Numără rândurile care îndeplinesc toate condițiile.
+Additionne les cellules qui remplissent une condition. ¦ Adună celulele care îndeplinesc o condiție.
+Additionne les lignes qui remplissent toutes les conditions. ¦ Adună rândurile care îndeplinesc toate condițiile.
+La moyenne des cellules qui remplissent une condition. ¦ Media celulelor care îndeplinesc o condiție.
+Cherche dans la 1re colonne d’un tableau et rend la valeur d’une autre colonne. ¦ Caută în prima coloană a unui tabel și întoarce valoarea din altă coloană.
+Cherche dans la 1re ligne d’un tableau. ¦ Caută în primul rând al unui tabel.
+Cherche une valeur et rend celle d’à côté. ¦ Caută o valoare și o întoarce pe cea de alături.
+La valeur à une ligne et une colonne de la plage. ¦ Valoarea de la un rând și o coloană din zonă.
+La position d’une valeur dans une plage (type 0 = exactement). ¦ Poziția unei valori într-o zonă (tip 0 = exact).
+La n-ième valeur de la liste. ¦ A n-a valoare din listă.
+Les valeurs sans doublons (déborde sur les cases du dessous). ¦ Valorile fără duplicate (se revarsă în celulele de dedesubt).
+La plage triée (ordre 1 = croissant, -1 = décroissant). ¦ Zona sortată (ordine 1 = crescător, -1 = descrescător).
+Les lignes de la plage qui remplissent la condition (ex. =FILTRE(A2:C9; C2:C9>30)). ¦ Rândurile din zonă care îndeplinesc condiția (ex. =FILTRE(A2:C9; C2:C9>30)).
+Met des textes bout à bout. ¦ Pune texte cap la cap.
+Met des textes bout à bout avec un séparateur. ¦ Pune texte cap la cap cu un separator.
+Les premiers caractères. ¦ Primele caractere.
+Les derniers caractères. ¦ Ultimele caractere.
+Un morceau au milieu d’un texte. ¦ O bucată din mijlocul unui text.
+Le nombre de caractères. ¦ Numărul de caractere.
+En capitales. ¦ Cu majuscule.
+En minuscules. ¦ Cu minuscule.
+Une capitale au début de chaque mot. ¦ O majusculă la începutul fiecărui cuvânt.
+Retire les espaces en trop. ¦ Scoate spațiile în plus.
+Remplace un morceau de texte. ¦ Înlocuiește o bucată de text.
+La position d’un texte dans un autre (sans tenir compte des capitales). ¦ Poziția unui text în altul (fără a ține cont de majuscule).
+Un nombre ou une date écrits avec un format ("0,00", "0 %", "jj/mm/aaaa"). ¦ Un număr sau o dată scrise cu un format ("0,00", "0 %", "jj/mm/aaaa").
+Le nombre écrit dans un texte. ¦ Numărul scris într-un text.
+Fabrique une date. ¦ Construiește o dată.
+L’année d’une date (date d’acte comprise). ¦ Anul unei date (inclusiv datele de act).
+Le mois d’une date (1 à 12). ¦ Luna unei date (de la 1 la 12).
+Le jour du mois. ¦ Ziua din lună.
+Le jour de la semaine (type 1 : 1 = dimanche ; type 2 : 1 = lundi … 7 = dimanche ; type 3 : 0 = lundi). ¦ Ziua săptămânii (tip 1: 1 = duminică; tip 2: 1 = luni … 7 = duminică; tip 3: 0 = luni).
+La date du jour. ¦ Data de azi.
+La date et l’heure. ¦ Data și ora.
+L’écart entre deux dates, en années, mois ou jours (« AM » : mois en plus des années, « MJ » : jours en plus des mois, « AJ » : jours en plus des années ; « Y », « D », « YM », « MD », « YD » d’Excel compris). ¦ Diferența dintre două date, în ani, luni sau zile („AM”: lunile peste ani, „MJ”: zilele peste luni, „AJ”: zilele peste ani; „Y”, „D”, „YM”, „MD”, „YD” din Excel sunt înțelese).
+L’âge entre deux dates d’acte (« vers 1784 », « an II » compris) ; « ≈ » si une date est approximative. Unité : « ans », « mois » ou « jours ». ¦ Vârsta între două date de act („vers 1784”, „an II” înțelese); „≈” dacă o dată este aproximativă. Unitate: „ans”, „mois” sau „jours”.
+L’année trouvée dans un texte d’acte, même républicain (« baptisé le 3 frimaire an XII » → 1803). ¦ Anul găsit într-un text de act, chiar republican („baptisé le 3 frimaire an XII” → 1803).
+La date comprise, écrite proprement (comme « ✓ Compris : » des champs de date). ¦ Data înțeleasă, scrisă îngrijit (ca „✓ Înțeles:” din câmpurile de dată).
+« jour », « mois », « année », « vers », « avant », « après » ou « entre ». ¦ „jour”, „mois”, „année”, „vers”, „avant”, „après” sau „entre”.
+La date dans le calendrier républicain. ¦ Data în calendarul republican.
+La génération d’un numéro Sosa (1 = toi, 2 et 3 = tes parents…). ¦ Generația unui număr Sosa (1 = tu, 2 și 3 = părinții tăi…).
+Le numéro Sosa du père (2 × n). ¦ Numărul Sosa al tatălui (2 × n).
+Le numéro Sosa de la mère (2 × n + 1). ¦ Numărul Sosa al mamei (2 × n + 1).
+« paternel » ou « maternel » (le côté du Sosa 1). ¦ „paternel” sau „maternel” (partea numărului Sosa 1).
+Un petit graphique dans la case : "courbe", "barres" ou "gagné" (au-dessus ou au-dessous de zéro). ¦ Un mic grafic în celulă: "courbe" (curbă), "barres" (bare) sau "gagné" (deasupra sau dedesubtul lui zero).
+Donne un nom à une valeur pour l’utiliser dans le calcul. ¦ Dă un nume unei valori pentru a o folosi în calcul.
+Une petite fonction à soi, à utiliser dans LET, MAP, PAR.LIGNE… ¦ O mică funcție a ta, de folosit în LET, MAP, PAR.LIGNE…
+Applique la LAMBDA à chaque case de la plage. ¦ Aplică LAMBDA fiecărei celule din zonă.
+Un résultat par ligne de la plage. ¦ Un rezultat pentru fiecare rând din zonă.
+Un résultat par colonne de la plage. ¦ Un rezultat pentru fiecare coloană din zonă.
+Cumule les cases une à une (un total qui avance). ¦ Cumulează celulele una câte una (un total care avansează).
+Comme REDUCE, avec chaque étape du total. ¦ Ca REDUCE, cu fiecare pas al totalului.
+=ligne laissée ¦ rând lăsat deoparte|rânduri lăsate deoparte|de rânduri lăsate deoparte
+=ligne remplie depuis l’app (tenue à jour) ¦ rând completat din aplicație (ținut la zi)|rânduri completate din aplicație (ținute la zi)|de rânduri completate din aplicație (ținute la zi)
+=ligne remplie depuis l’app ¦ rând completat din aplicație|rânduri completate din aplicație|de rânduri completate din aplicație
+=ligne à toi sans fiche : retirée ¦ rând al tău fără fișă: scos|rânduri ale tale fără fișă: scoase|de rânduri ale tale fără fișă: scoase
+=nouvelle fiche ¦ fișă nouă|fișe noi|de fișe noi
+=reliée ¦ legată|legate|de legate
+=laissée ¦ lăsată deoparte|lăsate deoparte|de lăsate deoparte
+=autre ligne ¦ alt rând|alte rânduri|de alte rânduri
+=case ¦ celulă|celule|de celule
+=autre case ¦ altă celulă|alte celule|de alte celule
+=case remplie ¦ celulă completată|celule completate|de celule completate
+=groupe ¦ grup|grupuri|de grupuri
+=case changée ¦ celulă schimbată|celule schimbate|de celule schimbate
+=scénario calculé ¦ scenariu calculat|scenarii calculate|de scenarii calculate
+=commande ¦ comandă|comenzi|de comenzi
+=fonction ¦ funcție|funcții|de funcții
+=valeur en plus de la première retirée ¦ valoare în afară de prima scoasă|valori în afară de prima scoase|de valori în afară de prima scoase
+=ligne supprimée ¦ rând șters|rânduri șterse|de rânduri șterse
+=colonne supprimée ¦ coloană ștearsă|coloane șterse|de coloane șterse
+=ligne en double supprimée ¦ rând duplicat șters|rânduri duplicate șterse|de rânduri duplicate șterse
+=ligne coupée en colonnes ¦ rând împărțit în coloane|rânduri împărțite în coloane|de rânduri împărțite în coloane
+=case modifiée ¦ celulă modificată|celule modificate|de celule modificate
+=cellule ¦ celulă|celule|de celule
+=cellule copiée ¦ celulă copiată|celule copiate|de celule copiate
+=feuille importée ¦ foaie importată|foi importate|de foi importate
+{sheets} ({rows}) ¦ {sheets} ({rows})
+la date ¦ data
+le début ¦ începutul
+la fin ¦ sfârșitul
+il manque un guillemet « " » à la fin d’un texte ¦ lipsește o ghilimea „"” la sfârșitul unui text
+il manque une apostrophe à la fin du nom de feuille ¦ lipsește un apostrof la sfârșitul numelui foii
+après le nom de la feuille, il faut « ! » puis la cellule ¦ după numele foii trebuie „!”, apoi celula
+la formule s’arrête trop tôt ¦ formula se oprește prea devreme
+il manque une parenthèse « ) » ¦ lipsește o paranteză „)”
+une parenthèse « ) » de trop ¦ o paranteză „)” în plus
+un « ; » à une place inattendue ¦ un „;” într-un loc neașteptat
+un numéro Sosa est un nombre entier qui commence à 1 ¦ un număr Sosa este un număr întreg care începe de la 1
+il n’y a aucun nombre dans la plage ¦ nu există niciun număr în zonă
+le diviseur de MOD vaut 0 ¦ împărțitorul lui MOD este 0
+pas de racine carrée d’un nombre négatif ¦ nu există rădăcină pătrată dintr-un număr negativ
+aucun nombre ¦ niciun număr
+il faut au moins deux nombres ¦ trebuie cel puțin două numere
+aucun test n’est vrai ¦ niciun test nu este adevărat
+les plages n’ont pas la même taille ¦ zonele nu au aceeași mărime
+aucune cellule ne remplit la condition ¦ nicio celulă nu îndeplinește condiția
+le 2e morceau doit être une plage, par exemple A2:C40 ¦ a doua parte trebuie să fie o zonă, de exemplu A2:C40
+le 2e morceau doit être une plage ¦ a doua parte trebuie să fie o zonă
+la plage est vide ¦ zona este goală
+la condition doit avoir autant de lignes que la plage ¦ condiția trebuie să aibă tot atâtea rânduri cât zona
+aucune ligne ne remplit la condition ¦ niciun rând nu îndeplinește condiția
+le début compte à partir de 1 ¦ începutul se numără de la 1
+cette date n’a pas de mois ¦ această dată nu are lună
+cette date n’a pas de jour ¦ această dată nu are zi
+il faut le jour ¦ trebuie ziua
+le type de JOURSEM va de 1 à 3 (ou 11 à 17) ¦ tipul lui JOURSEM merge de la 1 la 3 (sau de la 11 la 17)
+la fin est avant le début ¦ sfârșitul este înaintea începutului
+la seconde date est avant la première ¦ a doua dată este înaintea primei
+il faut une date au jour près ¦ trebuie o dată exactă, cu zi
+le calendrier républicain va du 22 septembre 1792 à 1805 ¦ calendarul republican merge de la 22 septembrie 1792 până în 1805
+il faut des nombres dans la plage ¦ trebuie numere în zonă
+il faut une LAMBDA(…) ¦ trebuie o LAMBDA(…)
+trop de LAMBDA imbriquées ¦ prea multe LAMBDA imbricate
+des paires « nom; valeur » puis le calcul ¦ perechi „nume; valoare”, apoi calculul
+un nom (lettres) avant chaque valeur ¦ un nume (litere) înaintea fiecărei valori
+il faut au moins le calcul ¦ trebuie cel puțin calculul
+les paramètres sont des noms ¦ parametrii sunt nume
+le calcul n’a pas de résultat ¦ calculul nu are rezultat
+le résultat est trop grand pour être calculé ¦ rezultatul este prea mare pentru a fi calculat
+une feuille supprimée ¦ o foaie ștearsă
+une plage entière ne tient pas dans une case : utilise SOMME(…), INDEX(…)… ¦ o zonă întreagă nu încape într-o celulă: folosește SOMME(…), INDEX(…)…
+puissance impossible ¦ putere imposibilă
+une LAMBDA seule ne donne pas de valeur : utilise-la dans LET, MAP… ¦ o LAMBDA singură nu dă nicio valoare: folosește-o în LET, MAP…
+la formule est trop longue ¦ formula este prea lungă
+la formule est trop imbriquée ¦ formula este prea imbricată
+trop de morceaux dans une fonction ¦ prea multe părți într-o funcție
+la formule demande trop de calculs ¦ formula cere prea multe calcule
+le résultat est trop grand ¦ rezultatul este prea mare
+la plage est trop grande ¦ zona este prea mare
+le fichier a trop de cellules ¦ fișierul are prea multe celule

@@ -21,8 +21,12 @@ const PICKER_KINDS = ['person', 'place', 'source', 'media', 'investigation', 'ba
     'event', // 📅 événements (personnes et couples) : un passage d'un son relié à un événement (Studio son, lib/audio_studio.php)
     'workbook', 'textdoc', // 🧾 classeurs du Tableur, 📝 documents du Traitement de texte (lib/textdocs.php)
     'parcel', // ▦ parcelles du cadastre (lib/cadastre.php)
+    'fobject', 'probate', // 🏺 objets de famille, ⚖️ inventaires après décès (🏠 Héritages et successions, lib/successions.php)
     'mylist', // 📋 Mes listes (custom_lists) : le groupe de personnes d'un diagramme (« Depuis l'app », lib/diagram_options.php)
-    'pet', 'tsite', 'agroup']; // 🐾 animaux (fiches « pets »), 🏞 sites de suivi, 👥 groupes d'animaux (lib/suivi.php)
+    'pet', 'tsite', 'agroup', // 🐾 animaux (fiches « pets »), 🏞 sites de suivi, 👥 groupes d'animaux (lib/suivi.php)
+    'health', // 🩺 maladies notées (lib/sante.php) : rien tant que « Santé de la famille » est cachée
+    'custommap', 'branch', 'maplayer', // 🗺 Mes cartes, 🌿 branches, ✏️ mes couches de la Carte (lib/cartes_perso.php)
+    'citation']; // 🔖 citations de sources (source_links : source, page, ce qui est cité — ⚖️ dossiers de preuve, lib/preuve.php)
 const PICKER_LABELS = [
     'person' => '👤 Personnes', 'place' => '📍 Lieux', 'source' => '📚 Sources', 'media' => '🖼 Médias',
     'investigation' => '🔍 Enquêtes', 'battue' => '🧭 Battues', 'label' => '🏷 Étiquettes', 'house' => '🏠 Maisons',
@@ -37,7 +41,11 @@ const PICKER_LABELS = [
     'event' => '📅 Événements',
     'workbook' => '🧾 Classeurs', 'textdoc' => '📝 Documents',
     'parcel' => '▦ Parcelles',
+    'fobject' => '🏺 Objets de famille', 'probate' => '⚖️ Inventaires après décès',
     'pet' => '🐾 Animaux', 'tsite' => '🏞 Sites de suivi', 'agroup' => '👥 Groupes d’animaux',
+    'health' => '🩺 Santé',
+    'custommap' => '🗺 Mes cartes', 'branch' => '🌿 Branches', 'maplayer' => '✏️ Mes couches',
+    'citation' => '🔖 Citations',
 ];
 // pays tapés en abrégé après un nom de lieu (« springfield usa »)
 const PICKER_COUNTRY_ALIASES = [
@@ -194,7 +202,7 @@ function picker_kind(PDO $pdo, string $kind, string $q, int $offset, int $limit,
             'digest' => picker_digests($pdo, $q, $offset, $limit),
             'contact' => picker_contacts($pdo, $q, $offset, $limit),
             'mylist' => picker_mylists($pdo, $q, $offset, $limit),
-            'event' => picker_events($pdo, $q, $offset, $limit),
+            'event' => picker_events($pdo, $q, $offset, $limit, $opts),
             'archive_service' => function_exists('picker_archive_services') ? picker_archive_services($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 🏛 lib/archive_services.php
             'artwork' => function_exists('picker_art_items') ? picker_art_items($pdo, $q, $offset, $limit, $opts) : ['total' => 0, 'items' => []],
             'workbook' => function_exists('picker_workbooks') ? picker_workbooks($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 🧾 lib/textdocs.php
@@ -202,10 +210,15 @@ function picker_kind(PDO $pdo, string $kind, string $q, int $offset, int $limit,
             'pet' => function_exists('picker_pets') ? picker_pets($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 🐾 lib/suivi.php
             'tsite' => function_exists('picker_tsites') ? picker_tsites($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []],
             'agroup' => function_exists('picker_agroups') ? picker_agroups($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []],
+            'health' => function_exists('picker_health') ? picker_health($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 🩺 lib/sante.php (cachée = rien)
             'parcel' => function_exists('picker_parcels') ? picker_parcels($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // ▦ lib/cadastre.php
+            'fobject' => function_exists('picker_family_objects') ? picker_family_objects($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 🏺 lib/successions.php
+            'probate' => function_exists('picker_probates') ? picker_probates($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // ⚖️ lib/successions.php
             'graph' => function_exists('picker_graphs') ? picker_graphs($pdo, $q, $offset, $limit, $opts) : ['total' => 0, 'items' => []],
+            'citation' => function_exists('picker_citations') ? picker_citations($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 🔖 lib/preuve.php
             // 🔗 sortes du widget « Raccourcis » (lib/widget_links.php) : fiches, Atelier, tableaux, mises en page, diagrammes, cartes, transcriptions
             'photomap' => (static function () use ($pdo, $q, $offset, $limit) { require_once __DIR__ . '/photomaps.php'; return picker_photomaps($pdo, $q, $offset, $limit); })(), // 📸 lib/photomaps.php
+            'custommap', 'branch', 'maplayer' => (static function () use ($pdo, $q, $offset, $limit, $kind) { require_once __DIR__ . '/cartes_perso.php'; return match ($kind) { 'custommap' => picker_custom_maps($pdo, $q, $offset, $limit), 'branch' => picker_branches($pdo, $q, $offset, $limit), default => picker_map_layers($pdo, $q, $offset, $limit) }; })(), // 🗺 lib/cartes_perso.php
             'sheet', 'atelier', 'board', 'layout', 'diagram', 'oldmap', 'act' => function_exists($fn = defined('WIDGET_LINK_PICKER_KINDS') ? (WIDGET_LINK_PICKER_KINDS[$kind][0] ?? '') : '') ? $fn($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []],
         };
         return ['groups' => [['kind' => $kind, 'key' => $kind, 'label' => PICKER_LABELS[$kind], 'total' => $r['total'], 'items' => $r['items']]],
@@ -219,13 +232,20 @@ function picker_kind(PDO $pdo, string $kind, string $q, int $offset, int $limit,
 /** Compte puis lit une tranche : $from = « FROM … WHERE … », $params liés aux deux requêtes. */
 function picker_page(PDO $pdo, string $select, string $from, string $order, array $params, int $offset, int $limit): array
 {
-    $c = $pdo->prepare($sql = 'SELECT count(*) ' . $from);
-    $c->execute(picker_params($sql, $params));
-    $total = (int) $c->fetchColumn();
-    if ($total <= $offset) { return [$total, []]; }
-    $s = $pdo->prepare($sql = $select . ' ' . $from . ' ORDER BY ' . $order . ' LIMIT ' . (int) $limit . ' OFFSET ' . (int) $offset);
+    // le nombre trouvé vient avec la page (count(*) OVER ()) : la recherche ne parcourt la base qu'une fois au lieu de deux
+    // (sur 100 000 fiches, chaque passage compare tous les noms sans accents)
+    $s = $pdo->prepare($sql = $select . ', count(*) OVER () AS picker_total_ ' . $from . ' ORDER BY ' . $order . ' LIMIT ' . (int) $limit . ' OFFSET ' . (int) $offset);
     $s->execute(picker_params($sql, $params));
-    return [$total, $s->fetchAll(PDO::FETCH_ASSOC)];
+    $rows = $s->fetchAll(PDO::FETCH_ASSOC);
+    if ($rows) {
+        $total = (int) $rows[0]['picker_total_'];
+        foreach ($rows as &$r) { unset($r['picker_total_']); }
+        unset($r);
+        return [$total, $rows];
+    }
+    $c = $pdo->prepare($sql = 'SELECT count(*) ' . $from); // plus loin que la fin : seulement le nombre
+    $c->execute(picker_params($sql, $params));
+    return [(int) $c->fetchColumn(), []];
 }
 
 /** Seulement les paramètres nommés présents dans la requête (SQLite refuse les autres). */
@@ -251,12 +271,14 @@ function picker_text_where(array $columns, string $q, array &$params, string $pr
 
 // ─── 📅 Événements ──────────────────────────────────────────────────────────
 /** Un événement : son titre (ou sa sorte), la personne ou le couple, la date et le lieu ; on cherche aussi par nom de la personne */
-function picker_events(PDO $pdo, string $q, int $offset, int $limit): array
+function picker_events(PDO $pdo, string $q, int $offset, int $limit, array $opts = []): array
 {
     $params = [];
     $who = "COALESCE(p.first_name,'') || ' ' || COALESCE(p.last_name,'')";
     $couple = "COALESCE(p1.first_name,'') || ' ' || COALESCE(p1.last_name,'') || ' et ' || COALESCE(p2.first_name,'') || ' ' || COALESCE(p2.last_name,'')";
     $where = picker_text_where(['e.title', 't.label', 'e.date_text', 'pl.name', $who, $couple], $q, $params);
+    // filter.person_id : les événements d'une personne et de ses couples (⏳ Une journée dans la vie de…)
+    if (!empty($opts['person_id'])) { $pid = (int) $opts['person_id']; $where = "({$where}) AND (e.person_id={$pid} OR f.partner1_id={$pid} OR f.partner2_id={$pid})"; }
     [$total, $rows] = picker_page($pdo, "SELECT e.id, e.title, e.date_text, e.year, t.label, pl.name AS place, e.scope, {$who} AS who, {$couple} AS couple",
         "FROM events e LEFT JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN families f ON f.id=e.family_id LEFT JOIN persons p1 ON p1.id=f.partner1_id LEFT JOIN persons p2 ON p2.id=f.partner2_id WHERE {$where}",
         'e.year IS NULL, e.year, e.id', $params, $offset, $limit);
@@ -295,10 +317,14 @@ function picker_persons(PDO $pdo, string $q, int $offset, int $limit, array $opt
         $f = ":f{$i}";
         $params[$k] = picker_like($token);
         $params[$f] = '%' . picker_fold($token) . '%';
+        // les lieux dont le nom contient le mot : cherchés une fois (avant : le nom du lieu replié pour chaque naissance et chaque décès)
+        $pl = $pdo->prepare("SELECT pl.id FROM places pl WHERE pl.id IN (SELECT DISTINCT place_id FROM events WHERE place_id IS NOT NULL) AND picker_fold(pl.name) LIKE ?");
+        $pl->execute([$params[$f]]);
+        $params[$f . 'p'] = json_encode(array_map('intval', $pl->fetchAll(PDO::FETCH_COLUMN)));
         $variant = $hasVariants ? " OR EXISTS(SELECT 1 FROM name_variants nv WHERE nv.person_id=p.id AND (nv.first_name LIKE {$k} ESCAPE '\\' COLLATE NOCASE OR nv.middle_name LIKE {$k} ESCAPE '\\' COLLATE NOCASE OR nv.last_name LIKE {$k} ESCAPE '\\' COLLATE NOCASE OR picker_fold(COALESCE(nv.first_name,'')||' '||COALESCE(nv.last_name,'')) LIKE {$f}))" : '';
         $where[] = "(p.first_name LIKE {$k} ESCAPE '\\' COLLATE NOCASE OR p.middle_name LIKE {$k} ESCAPE '\\' COLLATE NOCASE OR p.last_name LIKE {$k} ESCAPE '\\' COLLATE NOCASE"
             . " OR picker_fold(COALESCE(p.first_name,'')||' '||COALESCE(p.middle_name,'')||' '||COALESCE(p.last_name,'')) LIKE {$f}"
-            . " OR EXISTS(SELECT 1 FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND e.place_id IS NOT NULL AND t.gedcom_tag IN ('BIRT','DEAT') AND picker_fold((SELECT pl.name FROM places pl WHERE pl.id=e.place_id)) LIKE {$f})"
+            . " OR EXISTS(SELECT 1 FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND e.place_id IS NOT NULL AND t.gedcom_tag IN ('BIRT','DEAT') AND e.place_id IN (SELECT value FROM json_each({$f}p)))"
             . $variant . ')';
     }
     $start = '';
@@ -877,7 +903,7 @@ function picker_media(PDO $pdo, string $q, int $offset, int $limit, array $opts 
     $pids = $links ? "(SELECT group_concat(entity_id) FROM (SELECT DISTINCT entity_id FROM media_links WHERE media_id=m.id AND entity_type='person' ORDER BY position, id LIMIT 8))" : "''";
     $ev = $links ? "(SELECT %s FROM media_links ml JOIN events e ON e.id=ml.entity_id LEFT JOIN places pl ON pl.id=e.place_id WHERE ml.media_id=m.id AND ml.entity_type='event' ORDER BY e.year IS NULL, e.year LIMIT 1)" : "''";
     $select = "SELECT m.id, m.title, m.filename, m.thumbnail, m.media_type, m.date_text, m.document_reference, m.created_at, {$people} AS n, {$pids} AS pids,
-        " . sprintf($ev, 'COALESCE(pl.name,\'\')') . ' AS place, ' . sprintf($ev, 'e.year') . ' AS ev_year, ' . picker_media_sort_sql($pdo) . ' AS sort, ' . picker_media_portrait_sql() . " AS portrait,
+        " . (isset(picker_media_cols($pdo)['place_id']) ? "COALESCE(NULLIF(" . sprintf($ev, 'COALESCE(pl.name,\'\')') . ", ''), (SELECT mp.name FROM places mp WHERE mp.id=m.place_id), '')" : sprintf($ev, 'COALESCE(pl.name,\'\')')) . ' AS place, ' . sprintf($ev, 'e.year') . ' AS ev_year, ' . picker_media_sort_sql($pdo) . ' AS sort, ' . picker_media_portrait_sql() . " AS portrait,
         CASE WHEN trim(COALESCE(m.transcription,''))<>'' THEN 1 ELSE 0 END AS has_tr, " . picker_media_col($pdo, 'duration_seconds', 'NULL') . ' AS duration, '
         . picker_media_col($pdo, 'media_subject_type') . ' AS subject, ' . picker_media_col($pdo, 'postcard_group') . ' AS postcard, ' . picker_media_col($pdo, 'correspondence_type') . ' AS corr'
         . (!empty($opts['with_text']) ? ", substr(COALESCE(m.transcription,''), 1, 20000) AS transcription, m.description" : '');

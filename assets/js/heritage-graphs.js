@@ -8,6 +8,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? v[k] : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI;
@@ -127,7 +128,7 @@
         const thumb = it.type === 'diagram' ? `<span class="gr-thumb">${(() => { try { return it.d.spec?.live ? `<span class="gr-ico">${esc(it.icon)}</span>` : R().svg({...it.d.spec, kind: it.d.kind, o: {...(it.d.spec?.o || {}), title: '', subtitle: '', source: '', legend: 'none'}}, 480); } catch (_) { return `<span class="gr-ico">${esc(it.icon)}</span>`; } })()}</span>`
             : `<span class="gr-thumb" ${['graph'].includes(it.type) ? `data-gr-thumb="${esc(it.id)}"` : ''}><span class="gr-ico">${esc(it.icon)}</span></span>`;
         return {cls: 'gr-item', attrs: `data-gr-item="${esc(ref)}"`, name: `${it.icon} ${it.name}`, open: `data-gr-open="${esc(ref)}"`, thumb,
-            lines: [`${it.type === 'graph' ? '📈' : '📊'} ${it.what} · ${it.dataLabel}`, it.where.length ? `Posé : ${it.where.slice(0, 4).join(', ')}${it.where.length > 4 ? '…' : ''}` : 'Posé nulle part pour l’instant', it.note ? String(it.note).slice(0, 140) : ''],
+            lines: [`${it.type === 'graph' ? '📈' : '📊'} ${it.what} · ${it.dataLabel}`, it.where.length ? i18n('Posé : {where}', {where: `${it.where.slice(0, 4).join(', ')}${it.where.length > 4 ? '…' : ''}`}) : 'Posé nulle part pour l’instant', it.note ? String(it.note).slice(0, 140) : ''],
             when: it.date, whenLabel: it.type === 'graph' ? 'Créé' : 'Modifié',
             actions: kiosk() ? '' : `<button type="button" class="button small secondary" data-gr-edit="${esc(ref)}">✎ Modifier</button>`};
     }
@@ -140,7 +141,7 @@
         if (!cur() || S().module !== 'listes') return;
         let items = collect(diagrams), shown = [], limit = 40;
         ws.innerHTML = `<section class="page gr-page"><header class="page-header"><div><span class="eyebrow">LISTES · GRAPHIQUES</span><h2>📈 Graphiques et diagrammes</h2>
-            <p>Tous tes graphiques (faits dans <b>Réglages → Éditeur de graphiques</b>, avec tes propres chiffres ou ceux de l’app) et tes diagrammes (hémicycle, frise d’un groupe, camembert…). Chacun se pose partout : un widget du tableau de bord, une Fiche, une enquête, l’Atelier, la page d’une personne, la mise en page — bouton « ＋ Diagramme », puis « 📈 Un de mes graphiques ».</p></div>
+            <p>${i18n('Tous tes graphiques (faits dans <b>Réglages → Éditeur de graphiques</b>, avec tes propres chiffres ou ceux de l’app) et tes diagrammes (hémicycle, frise d’un groupe, camembert…). Chacun se pose partout : un widget du tableau de bord, une Fiche, une enquête, l’Atelier, la page d’une personne, la mise en page — bouton « ＋ Diagramme », puis « 📈 Un de mes graphiques ».')}</p></div>
             ${kiosk() ? '' : '<div class="page-actions"><button type="button" class="button" data-gr-newgraph>＋ Nouveau graphique</button><button type="button" class="button secondary" data-gr-newdg>＋ Nouveau diagramme</button></div>'}</header>
             <div data-gr-bar></div><div data-gr-body></div><div data-gr-more></div></section>`;
         const page = ws.querySelector('.gr-page'), body = page.querySelector('[data-gr-body]');

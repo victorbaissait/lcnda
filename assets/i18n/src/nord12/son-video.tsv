@@ -1,0 +1,1005 @@
+fr ¦ ru ¦ uk
+(l’original reste gardé : on peut y revenir) ¦ (оригинал сохраняется: к нему можно вернуться) ¦ (оригінал зберігається: до нього можна повернутися)
+(voix, plus léger) ¦ (голос, легче) ¦ (голос, легший)
+1 rush ajouté : glisse-le sur la frise. ¦ Добавлен 1 клип: перетащи его на шкалу времени. ¦ Додано 1 кліп: перетягни його на шкалу часу.
+1 rush ajouté : glisse-le sur la frise. Il entre dans les Médias quand tu enregistres le projet. ¦ Добавлен 1 клип: перетащи его на шкалу времени. Он попадёт в Медиафайлы, когда ты сохранишь проект. ¦ Додано 1 кліп: перетягни його на шкалу часу. Він потрапить до Медіафайлів, коли ти збережеш проєкт.
+: l’original ne change pas du tout ¦ : оригинал совсем не меняется ¦ : оригінал зовсім не змінюється
+<b>Une copie à part</b> (un autre son, rattaché aux mêmes fiches) ¦ <b>Отдельная копия</b> (другой звук, связанный с теми же карточками) ¦ <b>Окрема копія</b> (інший звук, пов’язаний із тими самими картками)
+<b>Une copie à part</b> (une autre vidéo, rattachée aux mêmes fiches) ¦ <b>Отдельная копия</b> (другое видео, связанное с теми же карточками) ¦ <b>Окрема копія</b> (інше відео, пов’язане з тими самими картками)
+Au repère orange ({time}) ¦ У оранжевой метки ({time}) ¦ Біля помаранчевої позначки ({time})
+Boutons des pistes : {n} px ¦ Кнопки дорожек: {n} px ¦ Кнопки доріжок: {n} px
+Boutons des pistes : {n} px (taille de départ) ¦ Кнопки дорожек: {n} px (исходный размер) ¦ Кнопки доріжок: {n} px (початковий розмір)
+Ce fichier est un réglage pour {a}, pas pour {b} : importe-le à sa place. ¦ Этот файл — настройка для {a}, а не для {b}: импортируй его туда. ¦ Цей файл — налаштування для {a}, а не для {b}: імпортуй його туди.
+Ce qu’il contient ({what}) remonte dans la racine. ¦ Его содержимое ({what}) поднимается в корень. ¦ Його вміст ({what}) піднімається в корінь.
+Ce qu’il contient ({what}) remonte dans « {dir} ». ¦ Его содержимое ({what}) поднимается в «{dir}». ¦ Його вміст ({what}) піднімається до «{dir}».
+Chapitre {n} ¦ Глава {n} ¦ Розділ {n}
+Clic sur la frise : se placer · clic sur un élément : le choisir · glisser : le déplacer · {play} : lire · {split} : couper ici · {del} : enlever ¦ Щелчок по шкале времени: перейти · щелчок по элементу: выбрать его · перетаскивание: переместить его · {play}: воспроизвести · {split}: разрезать здесь · {del}: убрать ¦ Клацання по шкалі часу: перейти · клацання по елементу: вибрати його · перетягування: перемістити його · {play}: відтворити · {split}: розрізати тут · {del}: прибрати
+Enregistrement du son… {n} % ¦ Запись звука… {n} % ¦ Запис звуку… {n} %
+Ensemble « {name} » appliqué. ¦ Набор «{name}» применён. ¦ Набір «{name}» застосовано.
+Ensemble « {name} » supprimé ¦ Набор «{name}» удалён ¦ Набір «{name}» видалено
+Envoi des rushes {k}/{n}… ¦ Отправка клипов {k}/{n}… ¦ Надсилання кліпів {k}/{n}…
+Espace ¦ Пробел ¦ Пробіл
+Fichier {fmt} téléchargé ({n} Mo). Rien n’a changé dans la base. ¦ Файл {fmt} скачан ({n} МБ). В базе ничего не изменилось. ¦ Файл {fmt} завантажено ({n} МБ). У базі нічого не змінилося.
+Il est utilisé {n} fois sur la frise : ces passages seront retirés aussi. Le fichier reste dans les Médias s’il y est. ¦ Число его использований на шкале времени: {n} — эти фрагменты тоже будут убраны. Файл остаётся в Медиафайлах, если он там есть. ¦ Кількість його використань на шкалі часу: {n} — ці фрагменти теж буде прибрано. Файл залишається в Медіафайлах, якщо він там є.
+Image clé {time} ¦ Ключевой кадр {time} ¦ Ключовий кадр {time}
+Le fichier importé est maintenant dans les Médias. ¦ Импортированный файл теперь в Медиафайлах. ¦ Імпортований файл тепер у Медіафайлах.
+Le fichier reste dans les Médias s’il y est. ¦ Файл остаётся в Медиафайлах, если он там есть. ¦ Файл залишається в Медіафайлах, якщо він там є.
+Le montage est rejoué pour être enregistré : cela prend <b>{time}</b> (sa durée). Laisse la fenêtre ouverte. ¦ Монтаж воспроизводится заново, чтобы его записать: это займёт <b>{time}</b> (его длительность). Не закрывай окно. ¦ Монтаж відтворюється заново, щоб його записати: це займе <b>{time}</b> (його тривалість). Не закривай вікно.
+Les boutons des pistes ont déjà leur taille de départ. ¦ У кнопок дорожек уже исходный размер. ¦ Кнопки доріжок уже мають початковий розмір.
+Les boutons des pistes sont déjà au plus grand. ¦ Кнопки дорожек уже самые большие. ¦ Кнопки доріжок уже найбільші.
+Les boutons des pistes sont déjà au plus petit. ¦ Кнопки дорожек уже самые маленькие. ¦ Кнопки доріжок уже найменші.
+Les {n} fichiers importés sont maintenant dans les Médias. ¦ Импортированные файлы ({n}) теперь в Медиафайлах. ¦ Імпортовані файли ({n}) тепер у Медіафайлах.
+Mettre « {name} » dans… ¦ Поместить «{name}» в… ¦ Помістити «{name}» до…
+Montage fabriqué : {what}. Retouche ce que tu veux, puis ⤓ Exporter. ¦ Монтаж готов: {what}. Подправь что хочешь, затем ⤓ Экспорт. ¦ Монтаж готовий: {what}. Підправ що хочеш, потім ⤓ Експорт.
+Nom du dossier (dans « {name} ») : ¦ Название папки (в «{name}»): ¦ Назва теки (у «{name}»):
+Nom du dossier : ¦ Название папки: ¦ Назва теки:
+Nouveau chapitre ¦ Новая глава ¦ Новий розділ
+Nouvelle version, <b>sans la montrer</b> pour l’instant ¦ Новая версия, <b>пока не показывать</b> ¦ Нова версія, <b>поки не показувати</b>
+Nouvelle version, montrée partout ¦ Новая версия, показанная везде ¦ Нова версія, показана всюди
+Ouvre une fois {what} : ses boutons apparaîtront ici. ¦ Открой один раз {what}: здесь появятся его кнопки. ¦ Відкрий один раз {what}: тут з’являться його кнопки.
+Où mettre « {name} » ? ¦ Куда поместить «{name}»? ¦ Куди помістити «{name}»?
+Piste « {name} » ajoutée. ¦ Дорожка «{name}» добавлена. ¦ Доріжку «{name}» додано.
+Piste « {name} » supprimée ¦ Дорожка «{name}» удалена ¦ Доріжку «{name}» видалено
+Piste « {name} » supprimée (avec {what}) ¦ Дорожка «{name}» удалена (вместе с: {what}) ¦ Доріжку «{name}» видалено (разом із: {what})
+Piste « {name} » vidée ¦ Дорожка «{name}» очищена ¦ Доріжку «{name}» очищено
+Ranger « {name} » dans… ¦ Переместить «{name}» в… ¦ Перемістити «{name}» до…
+Remplacer les réglages actuels par l’ensemble « {name} » ? ¦ Заменить текущие настройки набором «{name}»? ¦ Замінити поточні налаштування набором «{name}»?
+Rush supprimé, avec ses {n} passages sur la frise. ¦ Клип удалён вместе с его фрагментами на шкале времени ({n}). ¦ Кліп видалено разом із його фрагментами на шкалі часу ({n}).
+Rush supprimé, avec son passage sur la frise. ¦ Клип удалён вместе с его фрагментом на шкале времени. ¦ Кліп видалено разом із його фрагментом на шкалі часу.
+Rush supprimé. ¦ Клип удалён. ¦ Кліп видалено.
+Réglage « {name} » importé : « Appliquer » pour l’utiliser. ¦ Настройка «{name}» импортирована: «Применить», чтобы её использовать. ¦ Налаштування «{name}» імпортовано: «Застосувати», щоб його використати.
+Supprimer le dossier « {name} » ? ¦ Удалить папку «{name}»? ¦ Видалити теку «{name}»?
+Supprimer le rush ¦ Удалить клип ¦ Видалити кліп
+Supprimer « {name} » du projet ? ¦ Удалить «{name}» из проекта? ¦ Видалити «{name}» з проєкту?
+Titre de la vidéo ¦ Название видео ¦ Назва відео
+Titre du chapitre qui commence à {time} : ¦ Название главы, которая начинается в {time}: ¦ Назва розділу, який починається о {time}:
+Titre du son ¦ Название звука ¦ Назва звуку
+Un réglage s’appelle déjà « {name} ». Quel nom pour celui-ci ? ¦ Настройка «{name}» уже есть. Как назвать эту? ¦ Налаштування «{name}» уже є. Як назвати це?
+ce rush ¦ этот клип ¦ цей кліп
+comme l’original (mono) ¦ как в оригинале (моно) ¦ як в оригіналі (моно)
+comme l’original (stéréo) ¦ как в оригинале (стерео) ¦ як в оригіналі (стерео)
+comme l’original ({n} kHz) ¦ как в оригинале ({n} кГц) ¦ як в оригіналі ({n} кГц)
+la copie est rattachée aux mêmes fiches ¦ копия связана с теми же карточками ¦ копія пов’язана з тими самими картками
+la disposition du montage ¦ расположение монтажа ¦ розташування монтажу
+le plus léger pour la voix · environ {n} Mo · QuickTime ne le lit pas ¦ самый лёгкий для голоса · около {n} МБ · QuickTime его не воспроизводит ¦ найлегший для голосу · близько {n} МБ · QuickTime його не відтворює
+le plus léger · ~{n} Mo ¦ самый лёгкий · ~{n} МБ ¦ найлегший · ~{n} МБ
+les boutons de « {name} » ¦ кнопки «{name}» ¦ кнопки «{name}»
+lu absolument partout (téléphones, voitures, Mac, Windows) · environ {n} Mo en 128 kbit/s ¦ воспроизводится абсолютно везде (телефоны, машины, Mac, Windows) · около {n} МБ при 128 кбит/с ¦ відтворюється абсолютно всюди (телефони, автомобілі, Mac, Windows) · близько {n} МБ при 128 кбіт/с
+lu partout · ~{n} Mo ¦ воспроизводится везде · ~{n} МБ ¦ відтворюється всюди · ~{n} МБ
+l’original est toujours gardé · montrée : {name} ¦ оригинал всегда сохраняется · показана: {name} ¦ оригінал завжди зберігається · показано: {name}
+l’outil « {name} » ¦ инструмент «{name}» ¦ інструмент «{name}»
+nouvelle version, copie (réglages) ¦ новая версия, копия (настройки) ¦ нова версія, копія (налаштування)
+rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité, images par seconde et volume (📢 {n} LUFS) : Réglages → Montage ¦ воспроизводится в реальном времени, чтобы записаться (не закрывай окно) · размер, качество, кадры в секунду и громкость (📢 {n} LUFS): Настройки → Монтаж ¦ відтворюється в реальному часі, щоб записатися (не закривай вікно) · розмір, якість, кадри за секунду та гучність (📢 {n} LUFS): Налаштування → Монтаж
+rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité, images par seconde et volume standard : Réglages → Montage ¦ воспроизводится в реальном времени, чтобы записаться (не закрывай окно) · размер, качество, кадры в секунду и стандартная громкость: Настройки → Монтаж ¦ відтворюється в реальному часі, щоб записатися (не закривай вікно) · розмір, якість, кадри за секунду та стандартна гучність: Налаштування → Монтаж
+sans perte et environ deux fois plus léger que le WAV · environ {n} Mo · lu par les navigateurs, VLC, Windows ; pas par QuickTime ¦ без потерь и примерно вдвое легче WAV · около {n} МБ · воспроизводится браузерами, VLC, Windows; но не QuickTime ¦ без втрат і приблизно вдвічі легший за WAV · близько {n} МБ · відтворюється браузерами, VLC, Windows; але не QuickTime
+sans perte · ~{n} Mo ¦ без потерь · ~{n} МБ ¦ без втрат · ~{n} МБ
+sans perte, lu partout (Mac, Windows, Audacity) · environ {n} Mo ¦ без потерь, воспроизводится везде (Mac, Windows, Audacity) · около {n} МБ ¦ без втрат, відтворюється всюди (Mac, Windows, Audacity) · близько {n} МБ
+sans perte, léger · ~{n} Mo ¦ без потерь, лёгкий · ~{n} МБ ¦ без втрат, легкий · ~{n} МБ
+sans perte, pour GarageBand, Logic, QuickTime · environ {n} Mo · à télécharger seulement (l’app ne le lit pas) ¦ без потерь, для GarageBand, Logic, QuickTime · около {n} МБ · только для скачивания (приложение его не воспроизводит) ¦ без втрат, для GarageBand, Logic, QuickTime · близько {n} МБ · лише для завантаження (застосунок його не відтворює)
+stéréo ¦ стерео ¦ стерео
+sur chaque temps ¦ на каждую долю ¦ на кожну долю
+tourné de {n}° ¦ повёрнуто на {n}° ¦ повернуто на {n}°
+tous les {n} temps ¦ каждые {n} доли ¦ кожні {n} долі
+{file} : ni vidéo, ni photo, ni son. ¦ {file}: не видео, не фото и не звук. ¦ {file}: не відео, не фото і не звук.
+{n} images/s ¦ {n} кадр/с ¦ {n} кадр/с
+{n} rushes ajoutés : glisse-les sur la frise. ¦ Добавлено клипов: {n}. Перетащи их на шкалу времени. ¦ Додано кліпів: {n}. Перетягни їх на шкалу часу.
+{n} rushes ajoutés : glisse-les sur la frise. Ils entrent dans les Médias quand tu enregistres le projet. ¦ Добавлено клипов: {n}. Перетащи их на шкалу времени. Они попадут в Медиафайлы, когда ты сохранишь проект. ¦ Додано кліпів: {n}. Перетягни їх на шкалу часу. Вони потраплять до Медіафайлів, коли ти збережеш проєкт.
+{n} temps repérés · environ {bpm} battements par minute. ¦ Найдено долей: {n} · около {bpm} ударов в минуту. ¦ Знайдено долей: {n} · близько {bpm} ударів за хвилину.
+{n} temps repérés. ¦ Найдено долей: {n}. ¦ Знайдено долей: {n}.
+{what} : choisis-en un puis « Appliquer ». ¦ {what}: выбери одно, затем «Применить». ¦ {what}: вибери одне, потім «Застосувати».
+{what} sur la piste « Sous-titres ». ¦ {what} на дорожке «Субтитры». ¦ {what} на доріжці «Субтитри».
+« {name} » est revenu du Studio son, nettoyé. ¦ «{name}» вернулся из Звуковой студии, очищенный. ¦ «{name}» повернувся зі Звукової студії, очищений.
+« {name} » rangé dans la racine. ¦ «{name}» перемещён в корень. ¦ «{name}» переміщено в корінь.
+« {name} » rangé dans « {dir} ». ¦ «{name}» перемещён в «{dir}». ¦ «{name}» переміщено до «{dir}».
+À la fin ¦ В конце ¦ У кінці
+◇ image clé à {time} ¦ ◇ ключевой кадр в {time} ¦ ◇ ключовий кадр о {time}
+🎥 {what} à la piste 1 (décalages : {offs}). ¦ 🎥 {what} к дорожке 1 (сдвиги: {offs}). ¦ 🎥 {what} до доріжки 1 (зсуви: {offs}).
+💾 Dans les médias… ¦ 💾 В медиафайлы… ¦ 💾 До медіафайлів…
+📢 Mesure du volume… {n} % ¦ 📢 Измерение громкости… {n} % ¦ 📢 Вимірювання гучності… {n} %
+📢 Volume mesuré : {a} LUFS → {b} LUFS (crêtes tenues par le limiteur). ¦ 📢 Громкость измерена: {a} LUFS → {b} LUFS (пики сдерживает лимитер). ¦ 📢 Гучність виміряно: {a} LUFS → {b} LUFS (піки стримує лімітер).
+📢 Volume mesuré : {a} LUFS → {b} LUFS. ¦ 📢 Громкость измерена: {a} LUFS → {b} LUFS. ¦ 📢 Гучність виміряно: {a} LUFS → {b} LUFS.
+🔒 Piste « {name} » verrouillée : ses éléments ne bougent plus. ¦ 🔒 Дорожка «{name}» заблокирована: её элементы больше не двигаются. ¦ 🔒 Доріжку «{name}» заблоковано: її елементи більше не рухаються.
+🔓 Piste « {name} » déverrouillée. ¦ 🔓 Дорожка «{name}» разблокирована. ¦ 🔓 Доріжку «{name}» розблоковано.
+🕘 Versions ({n})… ¦ 🕘 Версии ({n})… ¦ 🕘 Версії ({n})…
+🥁 {n} temps repérés (environ {bpm} par minute). ¦ 🥁 Найдено долей: {n} (около {bpm} в минуту). ¦ 🥁 Знайдено долей: {n} (близько {bpm} за хвилину).
+🥁 {n} temps repérés. ¦ 🥁 Найдено долей: {n}. ¦ 🥁 Знайдено долей: {n}.
+=rush ¦ клип|клипа|клипов ¦ кліп|кліпи|кліпів
+=plan ajouté ¦ план добавлен|плана добавлено|планов добавлено ¦ план додано|плани додано|планів додано
+=sous-titre importé ¦ субтитр импортирован|субтитра импортировано|субтитров импортировано ¦ субтитр імпортовано|субтитри імпортовано|субтитрів імпортовано
+=ensemble importé ¦ набор импортирован|набора импортировано|наборов импортировано ¦ набір імпортовано|набори імпортовано|наборів імпортовано
+=réglage du Studio reste appliqué ¦ настройка Студии остаётся применённой|настройки Студии остаются применёнными|настроек Студии остаются применёнными ¦ налаштування Студії залишається застосованим|налаштування Студії залишаються застосованими|налаштувань Студії залишаються застосованими
+=morceau ¦ фрагмент|фрагмента|фрагментов ¦ фрагмент|фрагменти|фрагментів
+(rien ne change dans la base) ¦ (в базе ничего не меняется) ¦ (у базі нічого не змінюється)
+(un autre son, rattaché aux mêmes fiches) ¦ (другой звук, связанный с теми же карточками) ¦ (інший звук, пов’язаний із тими самими картками)
+(une autre vidéo, rattachée aux mêmes fiches) ¦ (другое видео, связанное с теми же карточками) ¦ (інше відео, пов’язане з тими самими картками)
+300 dossiers au plus. ¦ Не больше 300 папок. ¦ Не більше 300 тек.
+bandes floues plutôt que noires ¦ размытые полосы вместо чёрных ¦ розмиті смуги замість чорних
+Activer / couper ¦ Включить / выключить ¦ Увімкнути / вимкнути
+Adaptation spatiale ¦ Пространственная подгонка ¦ Просторове припасування
+Adapter (toute l’image, bandes noires) ¦ Вписать (всё изображение, чёрные полосы) ¦ Вписати (усе зображення, чорні смуги)
+Aide sous la frise ¦ Подсказка под шкалой времени ¦ Підказка під шкалою часу
+Aigus ¦ Высокие ¦ Високі
+Aimant arrêté. ¦ Притягивание выключено. ¦ Притягування вимкнено.
+Aimanter : en glissant, un élément se colle à la tête de lecture, au début ou à la fin des autres, aux chapitres et aux temps de la musique (garder Alt / Option appuyé : sans aimant) ¦ Притягивать: при перетаскивании элемент прилипает к указателю воспроизведения, к началу или концу других элементов, к главам и долям музыки (удерживай Alt / Option: без притягивания) ¦ Притягувати: під час перетягування елемент прилипає до курсора відтворення, до початку або кінця інших елементів, до розділів і долей музики (утримуй Alt / Option: без притягування)
+Aimanter : un élément glissé se colle à la tête de lecture, aux autres éléments, aux chapitres et aux temps de la musique (Alt / Option : sans aimant) ¦ Притягивать: перетаскиваемый элемент прилипает к указателю воспроизведения, к другим элементам, к главам и долям музыки (Alt / Option: без притягивания) ¦ Притягувати: перетягуваний елемент прилипає до курсора відтворення, до інших елементів, до розділів і долей музики (Alt / Option: без притягування)
+Ajouter une image clé ici (la valeur pourra changer au fil du temps) ¦ Добавить здесь ключевой кадр (значение сможет меняться со временем) ¦ Додати тут ключовий кадр (значення зможе змінюватися з часом)
+Aller à l'image clé précédente de l'élément choisi ¦ Перейти к предыдущему ключевому кадру выбранного элемента ¦ Перейти до попереднього ключового кадру вибраного елемента
+Aller à l'image clé suivante de l'élément choisi ¦ Перейти к следующему ключевому кадру выбранного элемента ¦ Перейти до наступного ключового кадру вибраного елемента
+Le nom du projet (pour le retrouver dans 📂 Projets…) ¦ Название проекта (чтобы найти его в 📂 Проекты…) ¦ Назва проєкту (щоб знайти його в 📂 Проєкти…)
+Le son du morceau passe sur une piste son, à part ¦ Звук фрагмента переходит на отдельную звуковую дорожку ¦ Звук фрагмента переходить на окрему звукову доріжку
+Le son fini : nouvelle version (l’original est gardé), copie, nouveau son ou fichier téléchargé ¦ Готовый звук: новая версия (оригинал сохраняется), копия, новый звук или скачанный файл ¦ Готовий звук: нова версія (оригінал зберігається), копія, новий звук або завантажений файл
+Ancien film ¦ Старое кино ¦ Старе кіно
+Ancrage X ¦ Привязка X ¦ Прив’язка X
+Ancrage Y ¦ Привязка Y ¦ Прив’язка Y
+Au début ¦ В начало ¦ На початок
+Aucun projet son pour l’instant ¦ Пока нет звуковых проектов ¦ Поки немає звукових проєктів
+Aucun sous-titre reconnu (fichier .srt ou .vtt). ¦ Субтитры не распознаны (файл .srt или .vtt). ¦ Субтитри не розпізнано (файл .srt або .vtt).
+Aucune (taille d’origine) ¦ Нет (исходный размер) ¦ Немає (початковий розмір)
+Aussi ⌘ + et ⌘ −, ⌘ 0 pour revenir ¦ Также ⌘ + и ⌘ −, ⌘ 0 — чтобы вернуть ¦ Також ⌘ + і ⌘ −, ⌘ 0 — щоб повернути
+Avancer le morceau dans la piste 1 ¦ Сдвинуть фрагмент раньше на дорожке 1 ¦ Зсунути фрагмент раніше на доріжці 1
+← Avancer ¦ ← Раньше ¦ ← Раніше
+Reculer → ¦ Позже → ¦ Пізніше →
+Bord adouci ¦ Мягкий край ¦ М’який край
+Boutons remis comme au départ. ¦ Кнопки возвращены как было. ¦ Кнопки повернуто як було.
+Cacher cette piste (ni vue ni entendue) ¦ Скрыть эту дорожку (ни видно, ни слышно) ¦ Сховати цю доріжку (ні видно, ні чутно)
+Montrée ¦ Показана ¦ Показана
+Cachée ¦ Скрыта ¦ Схована
+Ce fichier n’est pas une disposition du montage. ¦ Этот файл — не расположение монтажа. ¦ Цей файл — не розташування монтажу.
+Ce réglage est vide ou abîmé. ¦ Эта настройка пуста или повреждена. ¦ Це налаштування порожнє або пошкоджене.
+Cette piste est déjà vide. ¦ Эта дорожка уже пуста. ¦ Ця доріжка вже порожня.
+Chapitres copiés. ¦ Главы скопированы. ¦ Розділи скопійовано.
+Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse un élément pour le déplacer dans le temps, ou sur une autre piste du même genre (vidéos et photos vont sur toutes les pistes vidéo, texte ↔ texte, son ↔ son). Espace = lire / pause · ⌫ ou Suppr = enlever · B = couper ici · ◇ = image clé · 🧲 un élément glissé se colle aux autres (Alt / Option : sans aimant) · 🔒 une piste verrouillée ne bouge plus. ¦ Щёлкни по шкале времени, чтобы перейти, по элементу — чтобы выбрать его; перетащи элемент, чтобы сдвинуть его во времени или на другую дорожку того же вида (видео и фото идут на любые видеодорожки, текст ↔ текст, звук ↔ звук). Пробел = воспроизвести / пауза · ⌫ или Delete = убрать · B = разрезать здесь · ◇ = ключевой кадр · 🧲 перетаскиваемый элемент прилипает к другим (Alt / Option: без притягивания) · 🔒 заблокированная дорожка больше не двигается. ¦ Клацни по шкалі часу, щоб перейти, по елементу — щоб вибрати його; перетягни елемент, щоб зсунути його в часі або на іншу доріжку того самого виду (відео й фото йдуть на будь-які відеодоріжки, текст ↔ текст, звук ↔ звук). Пробіл = відтворити / пауза · ⌫ або Delete = прибрати · B = розрізати тут · ◇ = ключовий кадр · 🧲 перетягуваний елемент прилипає до інших (Alt / Option: без притягування) · 🔒 заблокована доріжка більше не рухається.
+Comme la 1re vidéo ¦ Как 1-е видео ¦ Як 1-ше відео
+Comme la vidéo ¦ Как видео ¦ Як відео
+Composition ¦ Композиция ¦ Композиція
+Copie ce texte : ¦ Скопируй этот текст: ¦ Скопіюй цей текст:
+Couleur du fondu ¦ Цвет затемнения ¦ Колір затемнення
+Couleurs vives ¦ Яркие цвета ¦ Яскраві кольори
+Coupe franche ¦ Прямая склейка ¦ Пряма склейка
+Coupe le morceau choisi à la tête de lecture ¦ Разрезает выбранный фрагмент по указателю воспроизведения ¦ Розрізає вибраний фрагмент за курсором відтворення
+Commence ici ¦ Начинается здесь ¦ Починається тут
+Finit ici ¦ Заканчивается здесь ¦ Закінчується тут
+Le morceau choisi commence à la tête de lecture ¦ Выбранный фрагмент начинается от указателя воспроизведения ¦ Вибраний фрагмент починається від курсора відтворення
+Le morceau choisi finit à la tête de lecture ¦ Выбранный фрагмент заканчивается на указателе воспроизведения ¦ Вибраний фрагмент закінчується на курсорі відтворення
+Dans « Modifier le son », « 💾 Enregistrer le projet ». ¦ В «Изменить звук» — «💾 Сохранить проект». ¦ У «Змінити звук» — «💾 Зберегти проєкт».
+Monter ce bloc ¦ Поднять этот блок ¦ Підняти цей блок
+Descendre ce bloc ¦ Опустить этот блок ¦ Опустити цей блок
+Monter la piste ¦ Поднять дорожку ¦ Підняти доріжку
+Descendre la piste ¦ Опустить дорожку ¦ Опустити доріжку
+Distorsion ¦ Искажение ¦ Спотворення
+Doux ¦ Мягкий ¦ М’який
+Durée du film : ¦ Длительность фильма: ¦ Тривалість фільму:
+Durée illisible ¦ Длительность не читается ¦ Тривалість не читається
+Durée par photo ¦ Длительность каждого фото ¦ Тривалість кожного фото
+Durée à l’écran ¦ Время на экране ¦ Час на екрані
+Défiler ¦ Прокрутка ¦ Прокручування
+Détacher le son ¦ Отделить звук ¦ Відокремити звук
+🔊 Détacher le son ¦ 🔊 Отделить звук ¦ 🔊 Відокремити звук
+Montrer cette piste ¦ Показать эту дорожку ¦ Показати цю доріжку
+Déverrouiller la piste ¦ Разблокировать дорожку ¦ Розблокувати доріжку
+Verrouiller la piste (ses éléments ne bougent plus, ne se coupent plus, ne s’enlèvent plus) ¦ Заблокировать дорожку (её элементы больше не двигаются, не режутся и не убираются) ¦ Заблокувати доріжку (її елементи більше не рухаються, не розрізаються і не прибираються)
+ENREGISTRER LE SON ¦ СОХРАНИТЬ ЗВУК ¦ ЗБЕРЕГТИ ЗВУК
+EXPORTER LA VIDÉO ¦ ЭКСПОРТ ВИДЕО ¦ ЕКСПОРТ ВІДЕО
+Effacer les temps ¦ Стереть доли ¦ Стерти долі
+Repérer les temps ¦ Найти доли ¦ Знайти долі
+Repérer de nouveau ¦ Найти заново ¦ Знайти заново
+Effet Ken Burns ¦ Эффект Кена Бёрнса ¦ Ефект Кена Бернса
+Effet vieux film : grain, rayures, poussières, image qui scintille, coins assombris ¦ Эффект старого кино: зерно, царапины, пыль, мерцающее изображение, затемнённые углы ¦ Ефект старого кіно: зерно, подряпини, пил, мерехтливе зображення, затемнені кути
+En couple ¦ Пара ¦ Пара
+Les parents ¦ Родители ¦ Батьки
+Les enfants ¦ Дети ¦ Діти
+En incrustation, à la tête de lecture ¦ Врезкой, у указателя воспроизведения ¦ Врізкою, біля курсора відтворення
+Enlever cette image clé ¦ Убрать этот ключевой кадр ¦ Прибрати цей ключовий кадр
+Enlever l'élément choisi ¦ Убрать выбранный элемент ¦ Прибрати вибраний елемент
+🗑 Enlever ¦ 🗑 Убрать ¦ 🗑 Прибрати
+Enlever la stabilisation ¦ Убрать стабилизацию ¦ Прибрати стабілізацію
+Enlever le reflet vert sur le sujet (cheveux, bords) ¦ Убрать зелёный отсвет на объекте (волосы, края) ¦ Прибрати зелений відблиск на об’єкті (волосся, краї)
+Enregistre ta voix au micro pendant que le film défile (casque conseillé) ¦ Запиши свой голос в микрофон, пока идёт фильм (лучше в наушниках) ¦ Запиши свій голос у мікрофон, поки йде фільм (краще в навушниках)
+Enregistrer le projet de montage, pour le rouvrir et continuer plus tard (⌘S) ¦ Сохранить проект монтажа, чтобы открыть его снова и продолжить позже (⌘S) ¦ Зберегти проєкт монтажу, щоб відкрити його знову й продовжити пізніше (⌘S)
+Enregistrer le projet son, pour y revenir plus tard (⌘S) ¦ Сохранить звуковой проект, чтобы вернуться к нему позже (⌘S) ¦ Зберегти звуковий проєкт, щоб повернутися до нього пізніше (⌘S)
+Entre deux images clés ¦ Между двумя ключевыми кадрами ¦ Між двома ключовими кадрами
+en douceur ¦ плавно ¦ плавно
+régulier ¦ равномерно ¦ рівномірно
+Exporter un fichier (et, si tu veux, une copie dans les médias) ¦ Экспортировать файл (и, если хочешь, копию в медиафайлы) ¦ Експортувати файл (і, якщо хочеш, копію до медіафайлів)
+Fabrique le fichier vidéo (MP4 ou WebM, plusieurs formats d’image) et le range dans les médias : nouvelle version, copie ou nouvelle vidéo ¦ Создаёт видеофайл (MP4 или WebM, несколько форматов кадра) и кладёт его в медиафайлы: новая версия, копия или новое видео ¦ Створює відеофайл (MP4 або WebM, кілька форматів кадру) і кладе його до медіафайлів: нова версія, копія або нове відео
+Fermer sans enregistrer les modifications ? ¦ Закрыть без сохранения изменений? ¦ Закрити без збереження змін?
+Fondu au blanc ¦ Переход в белое ¦ Перехід у біле
+Fondu au noir ¦ Переход в чёрное ¦ Перехід у чорне
+Fondu d’entrée ¦ Плавное появление ¦ Плавна поява
+Fondu de sortie ¦ Плавное исчезновение ¦ Плавне зникнення
+↗ Fondu d’entrée ¦ ↗ Плавное появление ¦ ↗ Плавна поява
+↘ Fondu de sortie ¦ ↘ Плавное исчезновение ¦ ↘ Плавне зникнення
+Fondu en couleur (au choix) ¦ Переход через цвет (на выбор) ¦ Перехід через колір (на вибір)
+Fondu enchaîné ¦ Наплыв ¦ Наплив
+Fondu flou ¦ Переход через размытие ¦ Перехід через розмиття
+Genre (vidéo, photo, son) ¦ Вид (видео, фото, звук) ¦ Вид (відео, фото, звук)
+Glisse depuis la droite ¦ Выезжает справа ¦ Виїжджає справа
+Glisse depuis la gauche ¦ Выезжает слева ¦ Виїжджає зліва
+Glisse sur l’onde pour sélectionner · clic = se placer · Espace = écouter · molette = défiler, Ctrl + molette = zoom ¦ Проведи по волне, чтобы выделить · щелчок = перейти · Пробел = слушать · колёсико = прокрутка, Ctrl + колёсико = масштаб ¦ Проведи по хвилі, щоб виділити · клацання = перейти · Пробіл = слухати · коліщатко = прокручування, Ctrl + коліщатко = масштаб
+Glisse-le sur une piste de la frise ¦ Перетащи его на дорожку шкалы времени ¦ Перетягни його на доріжку шкали часу
+Glissement vers la droite ¦ Сдвиг вправо ¦ Зсув праворуч
+Glissement vers la gauche (la suivante pousse) ¦ Сдвиг влево (следующий выталкивает) ¦ Зсув ліворуч (наступний виштовхує)
+Glissement vers le bas ¦ Сдвиг вниз ¦ Зсув униз
+Glissement vers le haut ¦ Сдвиг вверх ¦ Зсув угору
+Glisser pour élargir ou rétrécir le panneau (double-clic : largeur de départ) ¦ Потяни, чтобы расширить или сузить панель (двойной щелчок: исходная ширина) ¦ Потягни, щоб розширити або звузити панель (подвійне клацання: початкова ширина)
+Graves ¦ Низкие ¦ Низькі
+Tons moyens ¦ Средние тона ¦ Середні тони
+Hauteur des pistes ¦ Высота дорожек ¦ Висота доріжок
+Taille des boutons des pistes ¦ Размер кнопок дорожек ¦ Розмір кнопок доріжок
+Image et son ¦ Изображение и звук ¦ Зображення і звук
+Images par seconde ¦ Кадры в секунду ¦ Кадри за секунду
+Importe tes vidéos et photos dans l’onglet 🎞️ Rush, puis glisse-les sur la frise (ou « ＋ Vidéo / photo à la suite »). ¦ Импортируй свои видео и фото во вкладке 🎞️ Клипы, затем перетащи их на шкалу времени (или «＋ Видео / фото следом»). ¦ Імпортуй свої відео й фото у вкладці 🎞️ Кліпи, потім перетягни їх на шкалу часу (або «＋ Відео / фото слідом»).
+Inclinaison horizontale ¦ Горизонтальный наклон ¦ Горизонтальний нахил
+Inclinaison verticale ¦ Вертикальный наклон ¦ Вертикальний нахил
+Indique un nombre, par exemple 6 ou -3. ¦ Укажи число, например 6 или -3. ¦ Вкажи число, наприклад 6 або -3.
+＋ Incrustation ¦ ＋ Врезка ¦ ＋ Врізка
+＋ Incruster ¦ ＋ Наложить ¦ ＋ Накласти
+Une vidéo ou une photo dans un coin de l'image, à la tête de lecture ¦ Видео или фото в углу кадра, у указателя воспроизведения ¦ Відео або фото в куті кадру, біля курсора відтворення
+Une vidéo ou une photo, à la suite dans la piste Vidéo 1 ¦ Видео или фото следом на дорожке Видео 1 ¦ Відео або фото слідом на доріжці Відео 1
+＋ Vidéo / photo à la suite ¦ ＋ Видео / фото следом ¦ ＋ Відео / фото слідом
+Vidéo / photo à la suite ¦ Видео / фото следом ¦ Відео / фото слідом
+Lecture ¦ Воспроизведение ¦ Відтворення
+Les modifications du montage seront perdues. ¦ Изменения монтажа будут потеряны. ¦ Зміни монтажу буде втрачено.
+Les modifications du son seront perdues. ¦ Изменения звука будут потеряны. ¦ Зміни звуку буде втрачено.
+Les photos arrivent… ¦ Фото загружаются… ¦ Фото завантажуються…
+Les réglages s’appliquent à la sélection ; sans sélection, à tout le son. ¦ Настройки применяются к выделению; без выделения — ко всему звуку. ¦ Налаштування застосовуються до виділення; без виділення — до всього звуку.
+Les vidéos, photos et sons du projet ¦ Видео, фото и звуки проекта ¦ Відео, фото і звуки проєкту
+Lettres qui se resserrent ¦ Буквы сближаются ¦ Літери зближуються
+Lettres qui s’écartent ¦ Буквы расходятся ¦ Літери розходяться
+Lissage du mouvement ¦ Сглаживание движения ¦ Згладжування руху
+MODIFIER LE SON ¦ ИЗМЕНИТЬ ЗВУК ¦ ЗМІНИТИ ЗВУК
+MODÈLE DE MONTAGE ¦ ШАБЛОН МОНТАЖА ¦ ШАБЛОН МОНТАЖУ
+MONTAGE VIDÉO ¦ ВИДЕОМОНТАЖ ¦ ВІДЕОМОНТАЖ
+🎬 MONTAGE VIDÉO ¦ 🎬 ВИДЕОМОНТАЖ ¦ 🎬 ВІДЕОМОНТАЖ
+🎬 MONTAGE ¦ 🎬 МОНТАЖ ¦ 🎬 МОНТАЖ
+Mets la vidéo du fond vert au-dessus (incrustation, tout l’écran), et le décor (photo d’archive, autre vidéo) dessous, sur la piste 1. ¦ Помести видео с зелёным фоном сверху (врезка, на весь экран), а фон (архивное фото, другое видео) — снизу, на дорожку 1. ¦ Помісти відео із зеленим фоном угорі (врізка, на весь екран), а тло (архівне фото, інше відео) — внизу, на доріжку 1.
+Mettre ce dossier dans un autre ¦ Поместить эту папку в другую ¦ Помістити цю теку в іншу
+Mode de fusion ¦ Режим наложения ¦ Режим накладання
+Mon son ¦ Мой звук ¦ Мій звук
+Mot par mot ¦ По словам ¦ По словах
+Musique pendant la voix ¦ Музыка во время голоса ¦ Музика під час голосу
+Nom du fichier téléchargé ¦ Имя скачанного файла ¦ Назва завантаженого файлу
+Non, nettoyer la sélection ¦ Нет, очистить выделение ¦ Ні, очистити виділення
+Oui, c’est du bruit seul ¦ Да, это только шум ¦ Так, це лише шум
+Nouveau dossier dans le dossier ouvert ¦ Новая папка в открытой папке ¦ Нова тека у відкритій теці
+Nouveau montage ¦ Новый монтаж ¦ Новий монтаж
+Nouveau son enregistré, rattaché aux mêmes fiches. ¦ Новый звук сохранён и связан с теми же карточками. ¦ Новий звук збережено й пов’язано з тими самими картками.
+Nouveau ⚡ Son rapide ¦ Новый ⚡ Быстрый звук ¦ Новий ⚡ Швидкий звук
+Nouvelle version montrée partout. L’original est gardé. ¦ Новая версия показана везде. Оригинал сохранён. ¦ Нова версія показана всюди. Оригінал збережено.
+Nouvelle vidéo enregistrée, rattachée aux mêmes fiches. ¦ Новое видео сохранено и связано с теми же карточками. ¦ Нове відео збережено й пов’язано з тими самими картками.
+Version enregistrée (l’ancienne reste montrée). ¦ Версия сохранена (по-прежнему показана старая). ¦ Версію збережено (досі показано стару).
+Ordre d’arrivée ¦ Порядок добавления ¦ Порядок додавання
+Trier les rushes ¦ Сортировать клипы ¦ Сортувати кліпи
+Outils du montage ¦ Инструменты монтажа ¦ Інструменти монтажу
+Outils du son ¦ Инструменты звука ¦ Інструменти звуку
+Ouverture du son… ¦ Открытие звука… ¦ Відкриття звуку…
+Ouvrir ce dossier ¦ Открыть эту папку ¦ Відкрити цю теку
+Renommer ce dossier ¦ Переименовать эту папку ¦ Перейменувати цю теку
+Renommer ce rush ¦ Переименовать этот клип ¦ Перейменувати цей кліп
+Ranger ce rush dans un dossier ¦ Поместить этот клип в папку ¦ Помістити цей кліп у теку
+Ouvrir un autre projet sans enregistrer ce son ? ¦ Открыть другой проект, не сохранив этот звук? ¦ Відкрити інший проєкт, не зберігши цей звук?
+Ouvrir un autre projet sans enregistrer celui-ci ? ¦ Открыть другой проект, не сохранив этот? ¦ Відкрити інший проєкт, не зберігши цей?
+Panneau des réglages ¦ Панель настроек ¦ Панель налаштувань
+Part vers la droite ¦ Уходит вправо ¦ Іде праворуч
+Part vers la gauche ¦ Уходит влево ¦ Іде ліворуч
+Pas d’image clé après. ¦ Дальше ключевых кадров нет. ¦ Далі ключових кадрів немає.
+Pas d’image clé avant. ¦ Раньше ключевых кадров нет. ¦ Раніше ключових кадрів немає.
+Passer dans l’autre colonne ¦ Перенести в другую колонку ¦ Перенести в іншу колонку
+Pistes ¦ Дорожки ¦ Доріжки
+Plus chaud ¦ Теплее ¦ Тепліше
+Plus froid ¦ Холоднее ¦ Холодніше
+Projets de montage ¦ Проекты монтажа ¦ Проєкти монтажу
+Projets son ¦ Звуковые проекты ¦ Звукові проєкти
+Préparation du fichier… ¦ Подготовка файла… ¦ Підготовка файлу…
+Qualité MP3 ¦ Качество MP3 ¦ Якість MP3
+Que fait chaque outil ? ¦ Что делает каждый инструмент? ¦ Що робить кожен інструмент?
+Raccourcir les blancs ¦ Сократить паузы ¦ Скоротити паузи
+⏩ Raccourcir les longs blancs ¦ ⏩ Сократить длинные паузы ¦ ⏩ Скоротити довгі паузи
+Rebondit puis disparaît ¦ Подпрыгивает и исчезает ¦ Підстрибує й зникає
+Reculer le morceau dans la piste 1 ¦ Сдвинуть фрагмент позже на дорожке 1 ¦ Зсунути фрагмент пізніше на доріжці 1
+Rejoue ce texte depuis son début ¦ Воспроизводит этот текст с начала ¦ Відтворює цей текст із початку
+Remplir (recadre pour remplir) ¦ Заполнить (кадрирует, чтобы заполнить) ¦ Заповнити (кадрує, щоб заповнити)
+Rendre transparente la couleur du fond (fond vert ou bleu) : ce qui est dessous se voit ¦ Сделать цвет фона прозрачным (зелёный или синий фон): будет видно то, что под ним ¦ Зробити колір тла прозорим (зелене або синє тло): буде видно те, що під ним
+Roues de couleur ¦ Цветовые круги ¦ Колірні кола
+Rouvrir un montage enregistré ¦ Снова открыть сохранённый монтаж ¦ Знову відкрити збережений монтаж
+Rouvrir un son en cours de travail ¦ Снова открыть звук, над которым идёт работа ¦ Знову відкрити звук, над яким триває робота
+Son 1 ¦ Звук 1 ¦ Звук 1
+Son 2 ¦ Звук 2 ¦ Звук 2
+🎵 Son 1 ¦ 🎵 Звук 1 ¦ 🎵 Звук 1
+Vidéo 1 ¦ Видео 1 ¦ Відео 1
+Vidéo 2 ¦ Видео 2 ¦ Відео 2
+Textes 1 ¦ Тексты 1 ¦ Тексти 1
+🔤 Textes 1 ¦ 🔤 Тексты 1 ¦ 🔤 Тексти 1
+Son ajouté (il est sélectionné). ¦ Звук добавлен (он выделен). ¦ Звук додано (його виділено).
+Son illisible ¦ Звук не читается ¦ Звук не читається
+Vidéo illisible ¦ Видео не читается ¦ Відео не читається
+vidéo illisible ¦ видео не читается ¦ відео не читається
+son introuvable ¦ звук не найден ¦ звук не знайдено
+Sort du flou ¦ Выходит из размытия ¦ Виходить із розмиття
+Stabilisation annulée. ¦ Стабилизация отменена. ¦ Стабілізацію скасовано.
+Superposition claire (écran) ¦ Светлое наложение (экран) ¦ Світле накладання (екран)
+Supprimer cette piste ¦ Удалить эту дорожку ¦ Видалити цю доріжку
+Vider cette piste (elle reste, c’est la piste de base du film) ¦ Очистить эту дорожку (она остаётся, это основная дорожка фильма) ¦ Очистити цю доріжку (вона залишається, це основна доріжка фільму)
+Supprimer le projet (les vidéos et photos restent dans les Médias) ¦ Удалить проект (видео и фото остаются в Медиафайлах) ¦ Видалити проєкт (відео й фото залишаються в Медіафайлах)
+Sur la frise ¦ На шкале времени ¦ На шкалі часу
+Surgit avec un rebond ¦ Выскакивает с отскоком ¦ Вискакує з відскоком
+Tombe et rebondit ¦ Падает и подпрыгивает ¦ Падає й підстрибує
+S’ajoute aux réglages de chaque morceau (onglet 🎯 Élément → « 🔊 Son de ce morceau »). ¦ Добавляется к настройкам каждого фрагмента (вкладка 🎯 Элемент → «🔊 Звук этого фрагмента»). ¦ Додається до налаштувань кожного фрагмента (вкладка 🎯 Елемент → «🔊 Звук цього фрагмента»).
+S’ajoutent aux couleurs de chaque morceau (onglet Élément). ¦ Добавляются к цветам каждого фрагмента (вкладка Элемент). ¦ Додаються до кольорів кожного фрагмента (вкладка Елемент).
+S’efface lettre par lettre ¦ Исчезает по буквам ¦ Зникає по літерах
+S’efface mot par mot ¦ Исчезает по словам ¦ Зникає по словах
+Température (froid ↔ chaud) ¦ Температура (холодно ↔ тепло) ¦ Температура (холодно ↔ тепло)
+Titre / texte ¦ Заголовок / текст ¦ Заголовок / текст
+＋ Titre / texte ¦ ＋ Заголовок / текст ¦ ＋ Заголовок / текст
+Son / musique ¦ Звук / музыка ¦ Звук / музика
+Tout reste modifiable ensuite. ¦ Потом всё можно будет изменить. ¦ Потім усе можна буде змінити.
+Transformer ¦ Трансформировать ¦ Трансформувати
+Transition avant ¦ Переход перед ¦ Перехід перед
+Type ¦ Тип ¦ Тип
+Un chapitre commence à la tête de lecture ¦ Глава начинается от указателя воспроизведения ¦ Розділ починається від курсора відтворення
+Chapitre ici ¦ Глава здесь ¦ Розділ тут
+Un chapitre par grande étape ¦ По главе на каждый большой этап ¦ По розділу на кожен великий етап
+Un sous-titre de 3 s à la tête de lecture, sur la piste « Sous-titres » ¦ Субтитр на 3 с у указателя воспроизведения, на дорожке «Субтитры» ¦ Субтитр на 3 с біля курсора відтворення, на доріжці «Субтитри»
+Sous-titre ici ¦ Субтитр здесь ¦ Субтитр тут
+Une petite vidéo dans un coin, réglable ¦ Маленькое видео в углу, настраиваемое ¦ Маленьке відео в куті, з налаштуванням
+Une piste texte reçoit des titres (« ＋ Titre / texte »). ¦ Текстовая дорожка принимает заголовки («＋ Заголовок / текст»). ¦ Текстова доріжка приймає заголовки («＋ Заголовок / текст»).
+Vidéos, photos ou sons de l’ordinateur (plusieurs à la fois), rangés dans le dossier ouvert ¦ Видео, фото или звуки с компьютера (несколько сразу), кладутся в открытую папку ¦ Відео, фото або звуки з комп’ютера (кілька одразу), кладуться у відкриту теку
+Voix off ¦ Закадровый голос ¦ Закадровий голос
+🎙 Voix off ¦ 🎙 Закадровый голос ¦ 🎙 Закадровий голос
+⏹ Arrêter la voix off ¦ ⏹ Остановить закадровый голос ¦ ⏹ Зупинити закадровий голос
+Volet de droite à gauche ¦ Шторка справа налево ¦ Шторка справа наліво
+Volet de gauche à droite ¦ Шторка слева направо ¦ Шторка зліва направо
+Volet en cercle (iris) ¦ Круговая шторка (ирис) ¦ Кругова шторка (ірис)
+Volume général ¦ Общая громкость ¦ Загальна гучність
+WebM — léger ¦ WebM — лёгкий ¦ WebM — легкий
+Zoom ¦ Масштаб ¦ Масштаб
+Zoom arrière sur la frise ¦ Уменьшить масштаб шкалы времени ¦ Зменшити масштаб шкали часу
+Zoom avant sur la frise ¦ Увеличить масштаб шкалы времени ¦ Збільшити масштаб шкали часу
+Zoom avant à travers ¦ Наезд насквозь ¦ Наїзд наскрізь
+Zoom de la frise ¦ Масштаб шкалы времени ¦ Масштаб шкали часу
+Zoomer sur la sélection ¦ Приблизить выделение ¦ Наблизити виділення
+bandes floues au lieu des bandes noires (la même image, floutée, derrière) ¦ размытые полосы вместо чёрных (то же изображение, размытое, позади) ¦ розмиті смуги замість чорних (те саме зображення, розмите, позаду)
+centré ¦ по центру ¦ по центру
+ces boutons ¦ эти кнопки ¦ ці кнопки
+cette disposition ¦ это расположение ¦ це розташування
+commence par un fondu depuis le noir ¦ начинается с плавного выхода из чёрного ¦ починається з плавного виходу з чорного
+finit par un fondu au noir ¦ заканчивается плавным переходом в чёрное ¦ закінчується плавним переходом у чорне
+effet Ken Burns sur toutes les photos (zoom et glissement lents, variés) ¦ эффект Кена Бёрнса на всех фото (медленные и разные наезды и панорамы) ¦ ефект Кена Бернса на всіх фото (повільні й різні наїзди та панорами)
+la musique baisse toute seule pendant une voix ¦ музыка сама становится тише во время голоса ¦ музика сама стає тихішою під час голосу
+… et aussi pendant le son des vidéos de la piste 1 ¦ … а также во время звука видео с дорожки 1 ¦ … а також під час звуку відео з доріжки 1
+le montage est vide ¦ монтаж пуст ¦ монтаж порожній
+l’image tremble un peu, comme dans un vieux projecteur ¦ изображение слегка дрожит, как в старом проекторе ¦ зображення трохи тремтить, як у старому проєкторі
+sépia (couleurs passées, brunes) ¦ сепия (выцветшие, коричневые цвета) ¦ сепія (вицвілі, коричневі кольори)
+pas de sélection ¦ нет выделения ¦ немає виділення
+plusieurs formats, nouvelle version ¦ несколько форматов, новая версия ¦ кілька форматів, нова версія
+sans les blancs, voix plus nette… ¦ без пауз, голос чётче… ¦ без пауз, голос чіткіший…
+« 🔖 Chapitre ici » pose un chapitre à la tête de lecture. ¦ «🔖 Глава здесь» ставит главу у указателя воспроизведения. ¦ «🔖 Розділ тут» ставить розділ біля курсора відтворення.
+· tire le point vers une couleur, double-clic pour revenir ¦ · тяни точку к цвету, двойной щелчок — чтобы вернуть ¦ · тягни точку до кольору, подвійне клацання — щоб повернути
+À la suite dans Vidéo 1 ¦ Следом в Видео 1 ¦ Слідом у Відео 1
+＋ À la suite ¦ ＋ Следом ¦ ＋ Слідом
+＋ Son seul ¦ ＋ Только звук ¦ ＋ Лише звук
+Échelle (tout) ¦ Масштаб (всё) ¦ Масштаб (усе)
+Échelle X ¦ Масштаб X ¦ Масштаб X
+Échelle Y ¦ Масштаб Y ¦ Масштаб Y
+Écouter, comparer, montrer partout, renommer, supprimer ¦ Слушать, сравнивать, показывать везде, переименовывать, удалять ¦ Слухати, порівнювати, показувати всюди, перейменовувати, видаляти
+↻ Refaire l’analyse ¦ ↻ Проанализировать заново ¦ ↻ Проаналізувати заново
+⌨️ Raccourcis du montage ¦ ⌨️ Горячие клавиши монтажа ¦ ⌨️ Гарячі клавіші монтажу
+▣ Dans un coin ¦ ▣ В углу ¦ ▣ У куті
+⛶ Tout l’écran ¦ ⛶ Весь экран ¦ ⛶ Увесь екран
+▶ Lire ¦ ▶ Воспроизвести ¦ ▶ Відтворити
+▶ Lire / pause ¦ ▶ Воспроизвести / пауза ¦ ▶ Відтворити / пауза
+✂️ Modifier un son ouvre ¦ ✂️ «Изменить звук» открывает ¦ ✂️ «Змінити звук» відкриває
+⬅️ Glisse vers la gauche ¦ ⬅️ Плывёт влево ¦ ⬅️ Пливе ліворуч
+➡️ Glisse vers la droite ¦ ➡️ Плывёт вправо ¦ ➡️ Пливе праворуч
+⬆️ Monte ¦ ⬆️ Поднимается ¦ ⬆️ Піднімається
+⬇️ Descend ¦ ⬇️ Опускается ¦ ⬇️ Опускається
+⤒ Importer des rushes (vidéos, photos, sons)… ¦ ⤒ Импорт клипов (видео, фото, звуки)… ¦ ⤒ Імпорт кліпів (відео, фото, звуки)…
+⤒ Importer des sous-titres (.srt, .vtt)… ¦ ⤒ Импорт субтитров (.srt, .vtt)… ¦ ⤒ Імпорт субтитрів (.srt, .vtt)…
+⬚ Garder seulement la sélection ¦ ⬚ Оставить только выделение ¦ ⬚ Залишити лише виділення
+〰️ Enlever le bourdonnement ¦ 〰️ Убрать гул ¦ 〰️ Прибрати гул
+＋ Ajouter un son… ¦ ＋ Добавить звук… ¦ ＋ Додати звук…
+＋ Piste texte ¦ ＋ Текстовая дорожка ¦ ＋ Текстова доріжка
+🎙 Musique et voix ¦ 🎙 Музыка и голос ¦ 🎙 Музика і голос
+🎛️ Réglages de l’image ¦ 🎛️ Настройки изображения ¦ 🎛️ Налаштування зображення
+🎞️ Film ¦ 🎞️ Фильм ¦ 🎞️ Фільм
+🎞️ Rush ¦ 🎞️ Клипы ¦ 🎞️ Кліпи
+🎞️ Rushes ¦ 🎞️ Клипы ¦ 🎞️ Кліпи
+🎯 Élément ¦ 🎯 Элемент ¦ 🎯 Елемент
+🎞️ Vieux film (ce morceau) ¦ 🎞️ Старое кино (этот фрагмент) ¦ 🎞️ Старе кіно (цей фрагмент)
+🎞️ Vieux film (tout le film) ¦ 🎞️ Старое кино (весь фильм) ¦ 🎞️ Старе кіно (увесь фільм)
+🎧 Mono ¦ 🎧 Моно ¦ 🎧 Моно
+🎧 Mono (le même son des deux côtés) ¦ 🎧 Моно (одинаковый звук с обеих сторон) ¦ 🎧 Моно (однаковий звук з обох боків)
+🎧 SON ¦ 🎧 ЗВУК ¦ 🎧 ЗВУК
+🎨 Couleurs de ce morceau ¦ 🎨 Цвета этого фрагмента ¦ 🎨 Кольори цього фрагмента
+🎨 Couleurs de tout le film ¦ 🎨 Цвета всего фильма ¦ 🎨 Кольори всього фільму
+🎬 Disposition du montage ¦ 🎬 Расположение монтажа ¦ 🎬 Розташування монтажу
+🎯 Vectorscope et histogramme ¦ 🎯 Вектороскоп и гистограмма ¦ 🎯 Вектороскоп і гістограма
+🎲 Automatique (varié) ¦ 🎲 Автоматически (разнообразно) ¦ 🎲 Автоматично (різноманітно)
+💾 Garder dans les médias… ¦ 💾 Сохранить в медиафайлах… ¦ 💾 Зберегти в медіафайлах…
+📁＋ Dossier ¦ 📁＋ Папка ¦ 📁＋ Тека
+📏 Normaliser ¦ 📏 Нормализовать ¦ 📏 Нормалізувати
+📐 Format de l’image ¦ 📐 Формат кадра ¦ 📐 Формат кадру
+📢 Volume standard (LUFS)… ¦ 📢 Стандартная громкость (LUFS)… ¦ 📢 Стандартна гучність (LUFS)…
+📱 Téléphone 9:16 (vertical) ¦ 📱 Телефон 9:16 (вертикально) ¦ 📱 Телефон 9:16 (вертикально)
+📺 Ancien écran 4:3 ¦ 📺 Старый экран 4:3 ¦ 📺 Старий екран 4:3
+🖥️ Écran 16:9 ¦ 🖥️ Экран 16:9 ¦ 🖥️ Екран 16:9
+🖼️ Portrait 4:5 (réseaux) ¦ 🖼️ Портрет 4:5 (соцсети) ¦ 🖼️ Портрет 4:5 (соцмережі)
+🖼️ Vidéos incrustées ¦ 🖼️ Видео-врезки ¦ 🖼️ Відеоврізки
+🔇 Sans le son ¦ 🔇 Без звука ¦ 🔇 Без звуку
+🔇 Sans son ¦ 🔇 Без звука ¦ 🔇 Без звуку
+🔇 Silence ¦ 🔇 Тишина ¦ 🔇 Тиша
+🔊 Volume… ¦ 🔊 Громкость… ¦ 🔊 Гучність…
+🔖 Chapitres ¦ 🔖 Главы ¦ 🔖 Розділи
+🖼️ Photos ¦ 🖼️ Фото ¦ 🖼️ Фото
+🗂 De la base ¦ 🗂 Из базы ¦ 🗂 З бази
+🗣️ Voix plus nette ¦ 🗣️ Голос чётче ¦ 🗣️ Чіткіший голос
+🟩 Fond vert (incrustation) ¦ 🟩 Зелёный фон (кеинг) ¦ 🟩 Зелене тло (кеїнг)
+🧲 Aimanter ¦ 🧲 Притягивать ¦ 🧲 Притягувати
+Aimanter ¦ Притягивать ¦ Притягувати
+🧹 Moins de souffle et de grondement ¦ 🧹 Меньше шипения и гула ¦ 🧹 Менше шипіння й гулу
+🧹 Réduire le souffle ¦ 🧹 Уменьшить шипение ¦ 🧹 Зменшити шипіння
+🪄 « La vie de… » ¦ 🪄 «Жизнь…» ¦ 🪄 «Життя…»
+🪄 « Une famille » ¦ 🪄 «Одна семья» ¦ 🪄 «Одна родина»
+{what}, et rangés dans les médias. ¦ {what}, и помещены в медиафайлы. ¦ {what}, і поміщено до медіафайлів.
+=fichier téléchargé ¦ файл скачан|файла скачано|файлов скачано ¦ файл завантажено|файли завантажено|файлів завантажено
+Fichier téléchargé, et une copie est rangée dans les médias. ¦ Файл скачан, а копия помещена в медиафайлы. ¦ Файл завантажено, а копію поміщено до медіафайлів.
+{dur} · {ch} · {khz} kHz · sonie {lufs} LUFS · crête {pk} dB ¦ {dur} · {ch} · {khz} кГц · громкость {lufs} LUFS · пик {pk} дБ ¦ {dur} · {ch} · {khz} кГц · гучність {lufs} LUFS · пік {pk} дБ
+{dur} · {ch} · {khz} kHz · crête {pk} dB · sonie <span data-as-lufs>…</span> ¦ {dur} · {ch} · {khz} кГц · пик {pk} дБ · громкость <span data-as-lufs>…</span> ¦ {dur} · {ch} · {khz} кГц · пік {pk} дБ · гучність <span data-as-lufs>…</span>
+Chaque zone dans un fichier ({n}) ¦ Каждая зона в отдельный файл ({n}) ¦ Кожна зона в окремий файл ({n})
+Chaque piste dans un fichier ({n}) ¦ Каждая дорожка в отдельный файл ({n}) ¦ Кожна доріжка в окремий файл ({n})
+Comme l’original (stéréo) ¦ Как в оригинале (стерео) ¦ Як в оригіналі (стерео)
+Comme l’original (mono) ¦ Как в оригинале (моно) ¦ Як в оригіналі (моно)
+Comme l’original ({n} kHz) ¦ Как в оригинале ({n} кГц) ¦ Як в оригіналі ({n} кГц)
+Relier « {name} » à une personne… ¦ Связать «{name}» с человеком… ¦ Пов’язати «{name}» з людиною…
+Relier « {name} » à une personne ¦ Связать «{name}» с человеком ¦ Пов’язати «{name}» з людиною
+Relier « {name} » à un événement ¦ Связать «{name}» с событием ¦ Пов’язати «{name}» з подією
+Relier « {name} » à {what} ¦ Связать «{name}» с: {what} ¦ Пов’язати «{name}» з: {what}
+Relier « {name} » ¦ Связать «{name}» ¦ Пов’язати «{name}»
+Insérer « {name} » ¦ Вставить «{name}» ¦ Вставити «{name}»
+Enregistrement au micro ({time}) ¦ Запись с микрофона ({time}) ¦ Запис із мікрофона ({time})
+🎛️ Rack d’effets ¦ 🎛️ Рэк эффектов ¦ 🎛️ Рек ефектів
+Rack d’effets ¦ Рэк эффектов ¦ Рек ефектів
+=effet ¦ эффект|эффекта|эффектов ¦ ефект|ефекти|ефектів
+Rallumer ¦ Включить снова ¦ Увімкнути знову
+Éteindre ¦ Выключить ¦ Вимкнути
+Rallumer l’effet ¦ Снова включить эффект ¦ Знову увімкнути ефект
+Éteindre l’effet ¦ Выключить эффект ¦ Вимкнути ефект
+Rallumer {what} ¦ Снова включить: {what} ¦ Знову увімкнути: {what}
+Éteindre {what} ¦ Выключить: {what} ¦ Вимкнути: {what}
+Retirer {what} ¦ Убрать: {what} ¦ Прибрати: {what}
+Effet « {name} » retiré ¦ Эффект «{name}» убран ¦ Ефект «{name}» прибрано
+Réglages « {name} » ¦ Настройки «{name}» ¦ Налаштування «{name}»
+Égaliseur : {what} ¦ Эквалайзер: {what} ¦ Еквалайзер: {what}
+à plat ¦ ровно ¦ рівно
+Empreinte : {a} → {b} ({n} s de bruit choisi). ¦ Отпечаток шума: {a} → {b} ({n} с выбранного шума). ¦ Відбиток шуму: {a} → {b} ({n} с вибраного шуму).
+Empreinte : {a} → {b} ({n} s de bruit seul, trouvé tout seul). ¦ Отпечаток шума: {a} → {b} ({n} с чистого шума, найден автоматически). ¦ Відбиток шуму: {a} → {b} ({n} с чистого шуму, знайдено автоматично).
+Réverbération : {what} ¦ Реверберация: {what} ¦ Реверберація: {what}
+{n} Hz (trouvé) ¦ {n} Гц (найдено) ¦ {n} Гц (знайдено)
+Trouver tout seul ¦ Найти автоматически ¦ Знайти автоматично
+Forme du fondu d’entrée ¦ Форма плавного появления ¦ Форма плавної появи
+Forme du fondu de sortie ¦ Форма плавного исчезновения ¦ Форма плавного зникнення
+Forme du fondu ¦ Форма перехода ¦ Форма переходу
+{what} au pinceau. ¦ {what} кистью. ¦ {what} пензлем.
+=zone réparée ¦ зона исправлена|зоны исправлено|зон исправлено ¦ зону виправлено|зони виправлено|зон виправлено
+=réparation au pinceau ¦ исправление кистью|исправления кистью|исправлений кистью ¦ виправлення пензлем|виправлення пензлем|виправлень пензлем
+Seulement sur {a} → {b} ¦ Только на {a} → {b} ¦ Лише на {a} → {b}
+Renommer « {name} » ¦ Переименовать «{name}» ¦ Перейменувати «{name}»
+Écouter « {name} » ¦ Слушать «{name}» ¦ Слухати «{name}»
+Fichier introuvable ¦ Файл не найден ¦ Файл не знайдено
+Prise micro du {date} ¦ Запись с микрофона от {date} ¦ Запис із мікрофона від {date}
+Glisse = sélectionner · <kbd>Espace</kbd> écouter · <kbd>⌘</kbd> et molette : zoom · <kbd>M</kbd> marqueur · <kbd>A</kbd> maintenu : l’avant ¦ Потяни = выделить · <kbd>Пробел</kbd> слушать · <kbd>⌘</kbd> и колёсико: масштаб · <kbd>M</kbd> маркер · <kbd>A</kbd> удерживать: как было до ¦ Потягни = виділити · <kbd>Пробіл</kbd> слухати · <kbd>⌘</kbd> і коліщатко: масштаб · <kbd>M</kbd> маркер · <kbd>A</kbd> утримувати: як було до
+Glisse sur l’onde pour sélectionner ; clic = se placer ; ⇧ ← → agrandit la sélection. ¦ Проведи по волне, чтобы выделить; щелчок = перейти; ⇧ ← → расширяет выделение. ¦ Проведи по хвилі, щоб виділити; клацання = перейти; ⇧ ← → розширює виділення.
+Peins sur la tache du spectre (toux, sonnerie), puis « 🩹 Réparer ». Taille : le curseur. ¦ Закрась пятно на спектре (кашель, звонок), затем «🩹 Исправить». Размер: ползунок. ¦ Зафарбуй пляму на спектрі (кашель, дзвінок), потім «🩹 Виправити». Розмір: повзунок.
+Entoure la tache sur le spectre, puis « 🩹 Réparer ». ¦ Обведи пятно на спектре, затем «🩹 Исправить». ¦ Обведи пляму на спектрі, потім «🩹 Виправити».
+Clic sur l’onde : un marqueur 🚩 à cet endroit. ¦ Щелчок по волне: маркер 🚩 в этом месте. ¦ Клацання по хвилі: маркер 🚩 у цьому місці.
+Multipiste : clic sur un morceau pour le couper en deux. Sur l’onde : supprime la sélection. ¦ Мультитрек: щелчок по фрагменту разрезает его надвое. На волне: удаляет выделение. ¦ Мультитрек: клацання по фрагменту розрізає його навпіл. На хвилі: видаляє виділення.
+Garde <kbd>A</kbd> appuyée pour entendre l’avant, au même endroit. ¦ Удерживай <kbd>A</kbd>, чтобы услышать, как было до, в том же месте. ¦ Утримуй <kbd>A</kbd>, щоб почути, як було до, у тому самому місці.
+{name} — {what} (prêt) ¦ {name} — {what} (готовый) ¦ {name} — {what} (готовий)
+{time} au début ¦ {time} в начале ¦ {time} на початку
+{time} à la fin ¦ {time} в конце ¦ {time} у кінці
+Les zones hachurées seront coupées ({what}). ¦ Заштрихованные зоны будут вырезаны ({what}). ¦ Заштриховані зони буде вирізано ({what}).
+Glisse les poignées noires pour changer. ¦ Потяни чёрные маркеры, чтобы изменить. ¦ Потягни чорні маркери, щоб змінити.
+le « mmm » du courant (trouvé tout seul : {n} Hz) ¦ «ммм» от электросети (найдено автоматически: {n} Гц) ¦ «ммм» від електромережі (знайдено автоматично: {n} Гц)
+le « mmm » du courant (aucun trouvé : 50 Hz par défaut) ¦ «ммм» от электросети (ничего не найдено: 50 Гц по умолчанию) ¦ «ммм» від електромережі (нічого не знайдено: 50 Гц за замовчуванням)
+le « mmm » du courant ¦ «ммм» от электросети ¦ «ммм» від електромережі
+le « chhh » de la cassette ¦ «шшш» кассеты ¦ «шшш» касети
+plus de {n} s → 0,5 s ¦ больше {n} с → 0,5 с ¦ понад {n} с → 0,5 с
+{name} (nettoyé) ¦ {name} (очищено) ¦ {name} (очищено)
+Couper la fin ({time}) ¦ Обрезать конец ({time}) ¦ Обрізати кінець ({time})
+Couper le début ({time}) ¦ Обрезать начало ({time}) ¦ Обрізати початок ({time})
+Nettoyer « {name} » à la place ? ¦ Очистить вместо этого «{name}»? ¦ Очистити натомість «{name}»?
+Ouvrir ce son ¦ Открыть этот звук ¦ Відкрити цей звук
+Un ronflement du courant a été trouvé ({n} Hz) : il est enlevé, avec les clics. Écoute la différence. ¦ Найден гул электросети ({n} Гц): он убран вместе со щелчками. Послушай разницу. ¦ Знайдено гул електромережі ({n} Гц): його прибрано разом із клацаннями. Послухай різницю.
+son|piste ¦ дорожка ¦ доріжка
+baisse|de ¦ на ¦ на
+retour en ¦ возврат за ¦ повернення за
+Piste de la voix ¦ Дорожка голоса ¦ Доріжка голосу
+Piste qui baisse ¦ Приглушаемая дорожка ¦ Доріжка, що приглушується
+Baisse en dB ¦ Приглушение в дБ ¦ Приглушення в дБ
+{name} : armée pour le micro ¦ {name}: готова к записи с микрофона ¦ {name}: готова до запису з мікрофона
+{name} : désarmée ¦ {name}: запись снята ¦ {name}: запис знято
+Renommer la piste « {name} » ¦ Переименовать дорожку «{name}» ¦ Перейменувати доріжку «{name}»
+{name} : courbe du panoramique ¦ {name}: кривая панорамы ¦ {name}: крива панорами
+{name} : courbe du volume ¦ {name}: кривая громкости ¦ {name}: крива гучності
+Couper « {name} » à {time} ¦ Разрезать «{name}» в {time} ¦ Розрізати «{name}» о {time}
+Déplacer « {name} » ¦ Переместить «{name}» ¦ Перемістити «{name}»
+le morceau ¦ фрагмент ¦ фрагмент
+{name} : point ajouté à {time} ¦ {name}: точка добавлена в {time} ¦ {name}: точку додано о {time}
+{name} : point retiré ¦ {name}: точка убрана ¦ {name}: точку прибрано
+Ajouter « {name} » sur {track} ¦ Добавить «{name}» на {track} ¦ Додати «{name}» на {track}
+Morceau « {name} » retiré ¦ Фрагмент «{name}» убран ¦ Фрагмент «{name}» прибрано
+son ¦ звук ¦ звук
+(mélange) ¦ (сведение) ¦ (зведення)
+Le son ouvert ici ¦ Звук, открытый здесь ¦ Звук, відкритий тут
+Le son tel qu’il est (garde la touche A appuyée) ¦ Звук как есть (удерживай клавишу A) ¦ Звук як є (утримуй клавішу A)
+Appliquer le rack pour de bon ¦ Применить рэк окончательно ¦ Застосувати рек остаточно
+Arme d’abord une piste avec ● (dans ses boutons M S ●). ¦ Сначала подготовь дорожку к записи кнопкой ● (среди её кнопок M S ●). ¦ Спочатку підготуй доріжку до запису кнопкою ● (серед її кнопок M S ●).
+Atténuer de ¦ Приглушить на ¦ Приглушити на
+Aucun effet ¦ Нет эффектов ¦ Немає ефектів
+Aucun effet : « ＋ Ajouter un effet », ou le menu Effets. ¦ Нет эффектов: «＋ Добавить эффект» или меню Эффекты. ¦ Немає ефектів: «＋ Додати ефект» або меню Ефекти.
+Aucun marqueur ni zone : sélectionne un passage, puis « ＋ Nouvelle zone » (ou M). ¦ Нет ни маркеров, ни зон: выдели отрывок, затем «＋ Новая зона» (или M). ¦ Немає ні маркерів, ні зон: виділи уривок, потім «＋ Нова зона» (або M).
+Avant ou après ¦ До или после ¦ До або після
+Baisser la musique sous la voix ¦ Приглушать музыку под голосом ¦ Приглушувати музику під голосом
+Ne plus baisser la musique ¦ Больше не приглушать музыку ¦ Більше не приглушувати музику
+Bientôt : un moteur de reconnaissance qui tourne dans l’ordinateur (rien n’est envoyé sur Internet) ¦ Скоро: движок распознавания, работающий на компьютере (ничего не отправляется в интернет) ¦ Незабаром: рушій розпізнавання, що працює на комп’ютері (нічого не надсилається в інтернет)
+Boucle ¦ Повтор ¦ Повтор
+Calcul des effets… ¦ Расчёт эффектов… ¦ Обчислення ефектів…
+Ce fichier n’est pas un réglage du son. ¦ Этот файл — не настройка звука. ¦ Цей файл — не налаштування звуку.
+Ce navigateur ne donne pas accès au micro. ¦ Этот браузер не даёт доступа к микрофону. ¦ Цей браузер не дає доступу до мікрофона.
+Ce qui est dit ¦ Что говорится ¦ Що кажуть
+Choisis d’abord une zone. ¦ Сначала выбери зону. ¦ Спочатку вибери зону.
+Choisis une zone (à gauche ou au-dessus de l’onde), ou crée-en une : « ＋ Nouvelle zone ». ¦ Выбери зону (слева или над волной) или создай её: «＋ Новая зона». ¦ Вибери зону (ліворуч або над хвилею) або створи її: «＋ Нова зона».
+Clics et craquements ¦ Щелчки и треск ¦ Клацання й тріск
+Clique une étape pour y revenir ; les étapes grisées reviennent avec ↷. ¦ Щёлкни по шагу, чтобы вернуться к нему; серые шаги возвращаются через ↷. ¦ Клацни по кроку, щоб повернутися до нього; сірі кроки повертаються через ↷.
+Cliquer une heure fait écouter ce passage. Export en .txt, .srt, .vtt : ⤓ Exporter → 📝 Texte et repères. Le texte est cherchable dans la base. ¦ Щелчок по времени воспроизводит этот отрывок. Экспорт в .txt, .srt, .vtt: ⤓ Экспорт → 📝 Текст и метки времени. Текст можно искать в базе. ¦ Клацання по часу відтворює цей уривок. Експорт у .txt, .srt, .vtt: ⤓ Експорт → 📝 Текст і часові позначки. Текст можна шукати в базі.
+Copie nettoyée ajoutée aux mêmes fiches. ¦ Очищенная копия добавлена к тем же карточкам. ¦ Очищену копію додано до тих самих карток.
+Copie séparée ajoutée aux mêmes fiches. ¦ Отдельная копия добавлена к тем же карточкам. ¦ Окрему копію додано до тих самих карток.
+Couper le début et la fin ¦ Обрезать начало и конец ¦ Обрізати початок і кінець
+Couper un morceau en deux (multipiste) ; sur l’onde : supprimer la sélection ¦ Разрезать фрагмент надвое (мультитрек); на волне: удалить выделение ¦ Розрізати фрагмент навпіл (мультитрек); на хвилі: видалити виділення
+Crête ¦ Пик ¦ Пік
+Effacer le dessin ¦ Стереть рисунок ¦ Стерти малюнок
+× Effacer le dessin ¦ × Стереть рисунок ¦ × Стерти малюнок
+Empreinte du bruit ¦ Отпечаток шума ¦ Відбиток шуму
+En S ¦ S-образная ¦ S-подібна
+Rapide ¦ Быстрая ¦ Швидка
+Lente ¦ Медленная ¦ Повільна
+🏠 Pièce ¦ 🏠 Комната ¦ 🏠 Кімната
+⛪ Église ¦ ⛪ Церковь ¦ ⛪ Церква
+🎭 Salle ¦ 🎭 Зал ¦ 🎭 Зала
+🧱 Cave ¦ 🧱 Погреб ¦ 🧱 Льох
+Enlever le bourdonnement ¦ Убрать гул ¦ Прибрати гул
+Enregistrer au micro ¦ Записать с микрофона ¦ Записати з мікрофона
+● Enregistrer au micro ¦ ● Записать с микрофона ¦ ● Записати з мікрофона
+🎙️ Enregistrer au micro ¦ 🎙️ Записать с микрофона ¦ 🎙️ Записати з мікрофона
+Enregistrer au micro (au repère orange ; en multipiste : sur la piste armée ●) ¦ Записать с микрофона (у оранжевой метки; в мультитреке: на подготовленную дорожку ●) ¦ Записати з мікрофона (біля помаранчевої позначки; у мультитреку: на підготовлену доріжку ●)
+Enregistrer dans les médias ¦ Сохранить в медиафайлы ¦ Зберегти до медіафайлів
+Enregistrer et afficher cette version (l’original est gardé) ¦ Сохранить и показать эту версию (оригинал сохраняется) ¦ Зберегти й показати цю версію (оригінал зберігається)
+Enregistrer le projet son (rack, zones, pistes), pour y revenir ¦ Сохранить звуковой проект (рэк, зоны, дорожки), чтобы к нему вернуться ¦ Зберегти звуковий проєкт (рек, зони, доріжки), щоб до нього повернутися
+Enregistrer le projet sous… ¦ Сохранить проект как… ¦ Зберегти проєкт як…
+Exporter : MP3, M4A, WAV, FLAC, Ogg, AIFF, texte et repères ¦ Экспорт: MP3, M4A, WAV, FLAC, Ogg, AIFF, текст и метки времени ¦ Експорт: MP3, M4A, WAV, FLAC, Ogg, AIFF, текст і часові позначки
+Exporter ce passage… ¦ Экспортировать этот отрывок… ¦ Експортувати цей уривок…
+Exporter un fichier (MP3, WAV, FLAC…), et si tu veux une copie dans les médias ¦ Экспортировать файл (MP3, WAV, FLAC…) и, если хочешь, копию в медиафайлы ¦ Експортувати файл (MP3, WAV, FLAC…) і, якщо хочеш, копію до медіафайлів
+Fichiers ¦ Файлы ¦ Файли
+Fort ¦ Сильно ¦ Сильно
+Moyen ¦ Средне ¦ Середньо
+Garde ¦ Удержание ¦ Утримання
+Garder seulement la sélection ¦ Оставить только выделение ¦ Залишити лише виділення
+Gardée dans les versions, le son affiché ne change pas ¦ Сохраняется в версиях, показанный звук не меняется ¦ Зберігається у версіях, показаний звук не змінюється
+Insérer un son… ¦ Вставить звук… ¦ Вставити звук…
+La fenêtre d’export n’est pas prête. ¦ Окно экспорта не готово. ¦ Вікно експорту не готове.
+L’export n’est pas encore prêt. ¦ Экспорт ещё не готов. ¦ Експорт ще не готовий.
+La sélection ¦ Выделение ¦ Виділення
+Lasso de réparation ¦ Лассо исправления ¦ Ласо виправлення
+Lasso de réparation (sur le spectre) ¦ Лассо исправления (на спектре) ¦ Ласо виправлення (на спектрі)
+➰ Lasso de réparation ¦ ➰ Лассо исправления ¦ ➰ Ласо виправлення
+Pinceau de réparation ¦ Кисть исправления ¦ Пензель виправлення
+Pinceau de réparation (sur le spectre) ¦ Кисть исправления (на спектре) ¦ Пензель виправлення (на спектрі)
+🖌 Pinceau de réparation ¦ 🖌 Кисть исправления ¦ 🖌 Пензель виправлення
+Les boutons ¦ Кнопки ¦ Кнопки
+Les réglages du son seront perdus. ¦ Настройки звука будут потеряны. ¦ Налаштування звуку буде втрачено.
+Lire la sélection en boucle ¦ Воспроизводить выделение по кругу ¦ Відтворювати виділення по колу
+🔁 Lire en boucle ¦ 🔁 Воспроизводить по кругу ¦ 🔁 Відтворювати по колу
+🐢 Lire à 75 % ¦ 🐢 Воспроизвести на 75 % ¦ 🐢 Відтворити на 75 %
+Marqueur ici ¦ Маркер здесь ¦ Маркер тут
+🚩 Marqueur ici ¦ 🚩 Маркер здесь ¦ 🚩 Маркер тут
+Marqueurs et zones ¦ Маркеры и зоны ¦ Маркери і зони
+Zones et marqueurs ¦ Зоны и маркеры ¦ Зони і маркери
+Mono ¦ Моно ¦ Моно
+Stéréo ¦ Стерео ¦ Стерео
+Nettoyer ¦ Очистить ¦ Очистити
+Nettoyer le souffle ¦ Убрать шипение ¦ Прибрати шипіння
+Nom du projet son ¦ Название звукового проекта ¦ Назва звукового проєкту
+Nom du son ¦ Название звука ¦ Назва звуку
+Nouvelle piste ¦ Новая дорожка ¦ Нова доріжка
+Nouvelle version affichée partout. L’original est gardé. ¦ Новая версия показана везде. Оригинал сохранён. ¦ Нова версія показана всюди. Оригінал збережено.
+Version enregistrée (l’ancienne reste affichée). ¦ Версия сохранена (по-прежнему показана старая). ¦ Версію збережено (досі показано стару).
+Nouvelle zone ¦ Новая зона ¦ Нова зона
+Ouverture ¦ Открытие ¦ Відкриття
+Ouvrir un autre projet sans enregistrer ? ¦ Открыть другой проект без сохранения? ¦ Відкрити інший проєкт без збереження?
+Pause quand j’écris ¦ Пауза, когда я печатаю ¦ Пауза, коли я друкую
+Peins sur une tache (toux, sonnerie, porte), puis « 🩹 Réparer ». ¦ Закрась пятно (кашель, звонок, дверь), затем «🩹 Исправить». ¦ Зафарбуй пляму (кашель, дзвінок, двері), потім «🩹 Виправити».
+Poser des marqueurs (clic sur l’onde) ¦ Ставить маркеры (щелчок по волне) ¦ Ставити маркери (клацання по хвилі)
+🚩 Poser des marqueurs ¦ 🚩 Ставить маркеры ¦ 🚩 Ставити маркери
+Raccourcir ¦ Сократить ¦ Скоротити
+Rendre agréable ¦ Сделать приятным ¦ Зробити приємним
+Revenir au ⚡ Son rapide : ce qu’il sait montrer revient en boutons, le reste reste appliqué ¦ Вернуться к ⚡ Быстрому звуку: то, что он умеет показать, снова становится кнопками, остальное остаётся применённым ¦ Повернутися до ⚡ Швидкого звуку: те, що він уміє показати, знову стає кнопками, решта залишається застосованою
+Réglages du Son rapide ¦ Настройки Быстрого звука ¦ Налаштування Швидкого звуку
+Réglages repris ¦ Настройки перенесены ¦ Налаштування перенесено
+Seulement sur la sélection ¦ Только на выделении ¦ Лише на виділенні
+Silence ¦ Тишина ¦ Тиша
+Souffle, clics, bourdonnement, voix, volume et coupe du début et de la fin, d’un coup ¦ Шипение, щелчки, гул, голос, громкость и обрезка начала и конца — разом ¦ Шипіння, клацання, гул, голос, гучність і обрізання початку та кінця — разом
+✨ Tout nettoyer en une fois ¦ ✨ Очистить всё разом ¦ ✨ Очистити все разом
+Spectre ¦ Спектр ¦ Спектр
+Spectre : montrer / cacher ¦ Спектр: показать / скрыть ¦ Спектр: показати / сховати
+Sélection : glisser sur l’onde ¦ Выделение: проведи по волне ¦ Виділення: проведи по хвилі
+Tout le son : glisse le cadre pour te déplacer ¦ Весь звук: потяни рамку, чтобы перемещаться ¦ Увесь звук: потягни рамку, щоб переміщатися
+Un autre son, rattaché aux mêmes fiches ¦ Другой звук, связанный с теми же карточками ¦ Інший звук, пов’язаний із тими самими картками
+Un ensemble prêt ne se supprime pas. ¦ Готовый набор нельзя удалить. ¦ Готовий набір не можна видалити.
+VU-mètres ¦ Индикаторы уровня ¦ Індикатори рівня
+Volume du morceau ¦ Громкость фрагмента ¦ Гучність фрагмента
+Volume du morceau… ¦ Громкость фрагмента… ¦ Гучність фрагмента…
+Zoom sur la sélection ¦ Приблизить выделение ¦ Наблизити виділення
+Zoom vertical + ¦ Вертикальный масштаб + ¦ Вертикальний масштаб +
+Zoom vertical − ¦ Вертикальный масштаб − ¦ Вертикальний масштаб −
+ces réglages du son ¦ эти настройки звука ¦ ці налаштування звуку
+disque, bande abîmée ¦ пластинка, повреждённая плёнка ¦ платівка, пошкоджена плівка
+les voix lointaines remontent, les cris baissent ¦ далёкие голоса становятся громче, крики — тише ¦ далекі голоси стають гучнішими, крики — тихішими
+on comprend mieux les mots ¦ слова понятнее ¦ слова зрозуміліші
+nouvelle version, copie ¦ новая версия, копия ¦ нова версія, копія
+trouvé tout seul, poignées sur l’onde ¦ найдено автоматически, маркеры на волне ¦ знайдено автоматично, маркери на хвилі
+souffle, voix claire, volume égal ¦ шипение, чистый голос, ровная громкость ¦ шипіння, чистий голос, рівна гучність
+souffle fort, voix, coupe des blancs ¦ сильное шипение, голос, вырезание пауз ¦ сильне шипіння, голос, вирізання пауз
+de-hum, égaliseur, limiteur ¦ подавление гула, эквалайзер, лимитер ¦ придушення гулу, еквалайзер, лімітер
+📼 Cassette des années 70 ¦ 📼 Кассета 70-х ¦ 📼 Касета 70-х
+🎙 Dictaphone ¦ 🎙 Диктофон ¦ 🎙 Диктофон
+💒 Vidéo de mariage 1987 ¦ 💒 Свадебное видео 1987 ¦ 💒 Весільне відео 1987
+Écoute, puis « ⏱ Insérer l’heure » (⌘T) et tape ce qui est dit. ¦ Послушай, затем «⏱ Вставить время» (⌘T) и напечатай, что говорится. ¦ Послухай, потім «⏱ Вставити час» (⌘T) і надрукуй, що кажуть.
+⏱ Insérer l’heure ¦ ⏱ Вставить время ¦ ⏱ Вставити час
+Écouter ce passage ¦ Послушать этот отрывок ¦ Послухати цей уривок
+Écouter seulement le passage peint ¦ Послушать только закрашенный отрывок ¦ Послухати лише зафарбований уривок
+Écouter, comparer A / B, montrer partout, renommer, supprimer ¦ Слушать, сравнивать A / B, показывать везде, переименовывать, удалять ¦ Слухати, порівнювати A / B, показувати всюди, перейменовувати, видаляти
+ℹ️ Infos du son ¦ ℹ️ Сведения о звуке ¦ ℹ️ Відомості про звук
+▶ Écouter / pause ¦ ▶ Слушать / пауза ¦ ▶ Слухати / пауза
+▶ Écouter 10 s du résultat ¦ ▶ Послушать 10 с результата ¦ ▶ Послухати 10 с результату
+✂️ Couper (dans le presse-papiers) ¦ ✂️ Вырезать (в буфер обмена) ¦ ✂️ Вирізати (до буфера обміну)
+✂️ Couper un morceau (multipiste) ¦ ✂️ Разрезать фрагмент (мультитрек) ¦ ✂️ Розрізати фрагмент (мультитрек)
+〰️ Forme d’onde ¦ 〰️ Форма волны ¦ 〰️ Форма хвилі
+＋ Ajouter un effet ▾ ¦ ＋ Добавить эффект ▾ ¦ ＋ Додати ефект ▾
+🎛️ Multipiste ¦ 🎛️ Мультитрек ¦ 🎛️ Мультитрек
+🎬 Ouvrir dans le montage ¦ 🎬 Открыть в монтаже ¦ 🎬 Відкрити в монтажі
+👂 Écoute d’abord ¦ 👂 Сначала послушай ¦ 👂 Спочатку послухай
+👂 Écouter la zone ¦ 👂 Послушать зону ¦ 👂 Послухати зону
+📝 Transcription ¦ 📝 Расшифровка ¦ 📝 Розшифровка
+🔗 Relier ce passage ¦ 🔗 Связать этот отрывок ¦ 🔗 Пов’язати цей уривок
+🗣️ La voix ¦ 🗣️ Голос ¦ 🗣️ Голос
+🤖 Transcrire tout seul (bientôt) ¦ 🤖 Расшифровать автоматически (скоро) ¦ 🤖 Розшифрувати автоматично (незабаром)
+½ ton ¦ ½ тона ¦ ½ тону
+Volume ¦ Громкость ¦ Гучність
+Normaliser ¦ Нормализовать ¦ Нормалізувати
+Volume égal ¦ Ровная громкость ¦ Рівна гучність
+Sonie visée ¦ Целевая громкость ¦ Цільова гучність
+Niveleur ¦ Выравниватель ¦ Вирівнювач
+Fondus ¦ Плавные переходы ¦ Плавні переходи
+Égaliseur graphique ¦ Графический эквалайзер ¦ Графічний еквалайзер
+Égaliseur paramétrique ¦ Параметрический эквалайзер ¦ Параметричний еквалайзер
+Égaliseurs ¦ Эквалайзеры ¦ Еквалайзери
+Filtre passe-haut / passe-bas ¦ Фильтр высоких / низких частот ¦ Фільтр високих / низьких частот
+Passe-haut ¦ Фильтр высоких частот ¦ Фільтр високих частот
+Passe-bas ¦ Фильтр низких частот ¦ Фільтр низьких частот
+Compresseur ¦ Компрессор ¦ Компресор
+Dynamique ¦ Динамика ¦ Динаміка
+Rapport ¦ Соотношение ¦ Співвідношення
+Attaque ¦ Атака ¦ Атака
+Relâche ¦ Восстановление ¦ Відновлення
+Gain de sortie ¦ Выходное усиление ¦ Вихідне підсилення
+Limiteur ¦ Лимитер ¦ Лімітер
+Placé en dernier dans le rack : plus jamais de son qui « crache ». ¦ Ставится последним в рэке: звук больше никогда не «хрипит». ¦ Ставиться останнім у реку: звук більше ніколи не «хрипить».
+Plafond ¦ Потолок ¦ Стеля
+Réduction de bruit ¦ Шумоподавление ¦ Шумозаглушення
+Réduction ¦ Подавление ¦ Придушення
+N’écouter que le bruit enlevé ¦ Слушать только убранный шум ¦ Слухати лише прибраний шум
+De-clicker ¦ Удаление щелчков ¦ Усунення клацань
+Clics ¦ Щелчки ¦ Клацання
+De-hum ¦ Подавление гула ¦ Придушення гулу
+Harmoniques ¦ Гармоники ¦ Гармоніки
+De-esser ¦ Подавление шипящих ¦ Придушення шиплячих
+Sifflantes ¦ Шипящие ¦ Шиплячі
+Baisser jusqu’à ¦ Приглушить до ¦ Приглушити до
+Réparations au pinceau ¦ Исправления кистью ¦ Виправлення пензлем
+Voix plus claire ¦ Голос чище ¦ Чистіший голос
+Égaliseur (moins de grondement, plus de présence) et compresseur. ¦ Эквалайзер (меньше гула, больше присутствия) и компрессор. ¦ Еквалайзер (менше гулу, більше присутності) і компресор.
+Réverbération ¦ Реверберация ¦ Реверберація
+Ambiance ¦ Атмосфера ¦ Атмосфера
+Vitesse et hauteur ¦ Скорость и высота тона ¦ Швидкість і висота тону
+Temps ¦ Время ¦ Час
+Pour une cassette lue trop vite (voix « de canard ») : 96 % la remet à sa vraie vitesse. ¦ Для кассеты, воспроизведённой слишком быстро («утиный» голос): 96 % возвращает её настоящую скорость. ¦ Для касети, відтвореної надто швидко («качиний» голос): 96 % повертає її справжню швидкість.
+Vitesse ¦ Скорость ¦ Швидкість
+Garder la hauteur de la voix ¦ Сохранять высоту голоса ¦ Зберігати висоту голосу
+Blancs de plus de ¦ Паузы длиннее ¦ Паузи довші за
+Ramenés à ¦ Сокращаются до ¦ Скорочуються до
+Fin ¦ Конец ¦ Кінець
+Diapositive {k} / {n} ¦ Слайд {k} / {n} ¦ Слайд {k} / {n}
+Aucune diapositive ¦ Нет слайдов ¦ Немає слайдів
+Aucune diapositive. ¦ Нет слайдов. ¦ Немає слайдів.
+Aucune diapositive pour l’instant ¦ Пока нет слайдов ¦ Поки немає слайдів
+{what} aux Médias (le son devient la musique). ¦ {what} в Медиафайлы (звук становится музыкой). ¦ {what} до Медіафайлів (звук стає музикою).
+{what} aux Médias. ¦ {what} в Медиафайлы. ¦ {what} до Медіафайлів.
+=diapositive est prête ¦ слайд готов|слайда готовы|слайдов готовы ¦ слайд готовий|слайди готові|слайдів готові
+{what}. Elles peuvent remplacer celles du diaporama ou venir à la suite. ¦ {what}. Они могут заменить слайды слайд-шоу или добавиться после них. ¦ {what}. Вони можуть замінити слайди слайд-шоу або додатися після них.
+Remplacer le diaporama par le récit ? ¦ Заменить слайд-шоу рассказом о жизни? ¦ Замінити слайд-шоу розповіддю про життя?
+Ajouter à la suite ¦ Добавить следом ¦ Додати слідом
+Police du style ({name}) ¦ Шрифт стиля ({name}) ¦ Шрифт стилю ({name})
+Avancer de {time} (réglable dans Réglages › Apparence) ¦ Вперёд на {time} (настраивается в Настройки › Внешний вид) ¦ Уперед на {time} (налаштовується в Налаштування › Вигляд)
+Suivi sur {n} positions. ¦ Отслежено по позициям: {n}. ¦ Відстежено за позиціями: {n}.
+(importé) ¦ (импортировано) ¦ (імпортовано)
+Durée souhaitée ¦ Желаемая длительность ¦ Бажана тривалість
+Mettre les sources dans les notes ¦ Поместить источники в заметки ¦ Помістити джерела в нотатки
+⇥ durée = voix ¦ ⇥ длительность = голос ¦ ⇥ тривалість = голос
+Ajoute des photos, un titre, une carte, ou laisse « ✨ Récit d’une vie » tout préparer. Tu peux aussi glisser des photos ici. ¦ Добавь фото, заголовок, карту или позволь «✨ Рассказ о жизни» всё подготовить. Можно также перетащить фото сюда. ¦ Додай фото, заголовок, мапу або дозволь «✨ Розповідь про життя» все підготувати. Можна також перетягнути фото сюди.
+Ce fichier n’est pas un diaporama exporté par LCNDA (⤓ Exporter → 💾 Fichier). ¦ Этот файл — не слайд-шоу, экспортированное LCNDA (⤓ Экспорт → 💾 Файл). ¦ Цей файл — не слайд-шоу, експортоване LCNDA (⤓ Експорт → 💾 Файл).
+Ce que raconte cette diapositive… ¦ О чём рассказывает этот слайд… ¦ Про що розповідає цей слайд…
+Changer la photo ¦ Сменить фото ¦ Змінити фото
+🖼️ Changer la photo ¦ 🖼️ Сменить фото ¦ 🖼️ Змінити фото
+Choisis d’abord une personne. ¦ Сначала выбери человека. ¦ Спочатку вибери людину.
+Couleur du trajet ¦ Цвет маршрута ¦ Колір маршруту
+Glisse des photos ou un son. ¦ Перетащи фото или звук. ¦ Перетягни фото або звук.
+Glisser vers la droite ¦ Панорама вправо ¦ Панорама праворуч
+Glisser vers la gauche ¦ Панорама влево ¦ Панорама ліворуч
+Zoom arrière lent ¦ Медленное отдаление ¦ Повільне віддалення
+La fenêtre des médias n’est pas encore prête. ¦ Окно медиафайлов ещё не готово. ¦ Вікно медіафайлів ще не готове.
+Les dernières modifications du diaporama seront perdues. ¦ Последние изменения слайд-шоу будут потеряны. ¦ Останні зміни слайд-шоу буде втрачено.
+Les photos du récit ¦ Фото рассказа ¦ Фото розповіді
+Légendes ¦ Подписи ¦ Підписи
+Personnes sous chaque photo ¦ Люди под каждым фото ¦ Люди під кожним фото
+Place du texte ¦ Положение текста ¦ Розташування тексту
+Police des textes ¦ Шрифт текстов ¦ Шрифт текстів
+Prendre ce son ¦ Взять этот звук ¦ Взяти цей звук
+RÉCIT D’UNE VIE ¦ РАССКАЗ О ЖИЗНИ ¦ РОЗПОВІДЬ ПРО ЖИТТЯ
+Récit d’une vie ¦ Рассказ о жизни ¦ Розповідь про життя
+✨ Récit d’une vie ¦ ✨ Рассказ о жизни ¦ ✨ Розповідь про життя
+✨ Récit d’une vie : un diaporama tout fait à partir de la fiche d’une personne ¦ ✨ Рассказ о жизни: готовое слайд-шоу по карточке человека ¦ ✨ Розповідь про життя: готове слайд-шоу за карткою людини
+Un diaporama tout fait à partir de la fiche d’une personne ¦ Готовое слайд-шоу по карточке человека ¦ Готове слайд-шоу за карткою людини
+Selon les textes ¦ По длине текстов ¦ За довжиною текстів
+Une musique ¦ Музыка ¦ Музика
+Une photo par page ¦ Одно фото на страницу ¦ Одне фото на сторінку
+Une photo ronde au-dessus du titre ¦ Круглое фото над заголовком ¦ Кругле фото над заголовком
+Une photo ronde au-dessus du titre… ¦ Круглое фото над заголовком… ¦ Кругле фото над заголовком…
+Une présentation ou un diaporama ? ¦ Презентация или слайд-шоу? ¦ Презентація чи слайд-шоу?
+Une voix, un son ¦ Голос, звук ¦ Голос, звук
+Vidéo téléchargée. ¦ Видео скачано. ¦ Відео завантажено.
+cette diapositive ¦ этот слайд ¦ цей слайд
+retirer la voix ¦ убрать голос ¦ прибрати голос
+✨ Préparation du récit… ¦ ✨ Подготовка рассказа… ¦ ✨ Підготовка розповіді…
+🎙 Enregistrer ma voix ¦ 🎙 Записать мой голос ¦ 🎙 Записати мій голос
+🎤 En faire une présentation… ¦ 🎤 Сделать из этого презентацию… ¦ 🎤 Зробити з цього презентацію…
+🖼 Choisir les photos… ¦ 🖼 Выбрать фото… ¦ 🖼 Вибрати фото…
+Format de l’image (16:9 pour un écran, 9:16 pour un téléphone) ¦ Формат кадра (16:9 для экрана, 9:16 для телефона) ¦ Формат кадру (16:9 для екрана, 9:16 для телефона)
+Exporter : vidéo, images, PDF, impression, fichier ¦ Экспорт: видео, изображения, PDF, печать, файл ¦ Експорт: відео, зображення, PDF, друк, файл
+Ajouter un titre ¦ Добавить заголовок ¦ Додати заголовок
+Ajouter une carte (trajet) ¦ Добавить карту (маршрут) ¦ Додати мапу (маршрут)
+Ajouter une carte ¦ Добавить карту ¦ Додати мапу
+＋ Carte (trajet) ¦ ＋ Карта (маршрут) ¦ ＋ Мапа (маршрут)
+Regarder en plein écran (Échap pour revenir) ¦ Смотреть на весь экран (Esc — чтобы вернуться) ¦ Дивитися на весь екран (Esc — щоб повернутися)
+Avancer dans le diaporama ¦ Листать слайд-шоу ¦ Гортати слайд-шоу
+Choisis une diapositive (à gauche) pour régler sa durée, sa transition, son texte, sa voix. ¦ Выбери слайд (слева), чтобы настроить его длительность, переход, текст, голос. ¦ Вибери слайд (ліворуч), щоб налаштувати його тривалість, перехід, текст, голос.
+🎞️ Tout le diaporama ¦ 🎞️ Всё слайд-шоу ¦ 🎞️ Усе слайд-шоу
+La police de tous les titres et légendes. Sans choix, c’est celle du style (Classique, Album ancien…). ¦ Шрифт всех заголовков и подписей. Если не выбран — шрифт стиля (Классика, Старый альбом…). ¦ Шрифт усіх заголовків і підписів. Якщо не вибрано — шрифт стилю (Класика, Старий альбом…).
+Une musique de fond, prise dans les sons des médias ¦ Фоновая музыка из звуков медиафайлов ¦ Фонова музика зі звуків медіафайлів
+Une présentation façon Keynote faite de ces diapositives (textes, formes, animations, mode présentateur…) ; le diaporama reste tel quel ¦ Презентация в духе Keynote из этих слайдов (тексты, фигуры, анимации, режим докладчика…); слайд-шоу остаётся как есть ¦ Презентація в дусі Keynote з цих слайдів (тексти, фігури, анімації, режим доповідача…); слайд-шоу залишається як є
+Clic sur une diapositive : la régler à droite · glisse-les pour les ranger · Espace : lire ¦ Щелчок по слайду: настроить его справа · перетаскивай их, чтобы упорядочить · Пробел: воспроизвести ¦ Клацання по слайду: налаштувати його праворуч · перетягуй їх, щоб упорядкувати · Пробіл: відтворити
+Album ancien ¦ Старый альбом ¦ Старий альбом
+Clair ¦ Светлый ¦ Світлий
+Lire / pause ¦ Воспроизвести / пауза ¦ Відтворити / пауза
+Lire ¦ Воспроизвести ¦ Відтворити
+Regarder ¦ Смотреть ¦ Дивитися
+📺 Regarder ¦ 📺 Смотреть ¦ 📺 Дивитися
+Musique de fond ¦ Фоновая музыка ¦ Фонова музика
+🎵 Musique ¦ 🎵 Музыка ¦ 🎵 Музика
+🎵 Musique de fond (facultatif) ¦ 🎵 Фоновая музыка (необязательно) ¦ 🎵 Фонова музика (необов’язково)
+=diapositive ¦ слайд|слайда|слайдов ¦ слайд|слайди|слайдів
+Choisis une personne : un diaporama se prépare tout seul avec sa fiche (naissance, baptême, mariage, enfants, métiers, recensements, déménagements, décès, sépulture), ses photos, ses lieux sur une carte. Une information absente ne donne pas de diapositive ; tout reste modifiable ensuite. ¦ Выбери человека: слайд-шоу подготовится само по его карточке (рождение, крещение, брак, дети, профессии, переписи, переезды, смерть, погребение), его фото и местам на карте. Если сведений нет, слайда не будет; потом всё можно изменить. ¦ Вибери людину: слайд-шоу підготується саме за її карткою (народження, хрещення, шлюб, діти, професії, переписи, переїзди, смерть, поховання), її фото та місцями на мапі. Якщо відомостей немає, слайда не буде; потім усе можна змінити.
+Le récit prend à peu près cette durée : chaque diapositive grandit ou rétrécit un peu. « Selon les textes » laisse le temps de lire. ¦ Рассказ длится примерно столько: каждый слайд немного удлиняется или укорачивается. «По длине текстов» оставляет время прочитать. ¦ Розповідь триває приблизно стільки: кожен слайд трохи подовжується або скорочується. «За довжиною текстів» залишає час прочитати.
+Aucune photo : le récit sera fait de titres et de cartes. ¦ Нет фото: рассказ будет состоять из заголовков и карт. ¦ Немає фото: розповідь складатиметься із заголовків і мап.
+Inclure les frères et sœurs ¦ Включить братьев и сестёр ¦ Включити братів і сестер
+Les sources de chaque événement (titre, page) sont écrites dans les notes de sa diapositive : on les voit en modifiant, pas pendant la lecture. ¦ Источники каждого события (название, страница) записаны в заметках его слайда: их видно при редактировании, но не во время показа. ¦ Джерела кожної події (назва, сторінка) записано в нотатках її слайда: їх видно під час редагування, але не під час показу.
+Ajouter les événements historiques de l’époque ¦ Добавить исторические события эпохи ¦ Додати історичні події епохи
+Les épidémies, guerres et grands hivers que l’app connaît (Listes → Épidémies, guerres, hivers) et qui ont eu lieu pendant sa vie. ¦ Эпидемии, войны и суровые зимы, которые знает приложение (Списки → Эпидемии, войны, зимы) и которые пришлись на его жизнь. ¦ Епідемії, війни та суворі зими, які знає застосунок (Списки → Епідемії, війни, зими) і які припали на життя людини.
+Le texte du bloc « 📖 Biographie » de la fiche (ta version si tu l’as modifiée), en version courte, sur une diapositive. ¦ Текст блока «📖 Биография» карточки (твоя версия, если ты её менял(а)), в краткой форме, на одном слайде. ¦ Текст блоку «📖 Біографія» картки (твоя версія, якщо ти її змінював(ла)), у короткій формі, на одному слайді.
+Créer le récit ¦ Создать рассказ ¦ Створити розповідь
+DIAPORAMA ¦ СЛАЙД-ШОУ ¦ СЛАЙД-ШОУ
+Environ 1 minute ¦ Около 1 минуты ¦ Близько 1 хвилини
+Environ 2 minutes ¦ Около 2 минут ¦ Близько 2 хвилин
+Environ 3 minutes ¦ Около 3 минут ¦ Близько 3 хвилин
+Environ 5 minutes ¦ Около 5 минут ¦ Близько 5 хвилин
+Environ 8 minutes ¦ Около 8 минут ¦ Близько 8 хвилин
+Environ 10 minutes ¦ Около 10 минут ¦ Близько 10 хвилин
+Choisir un son… ¦ Выбрать звук… ¦ Вибрати звук…
+Ajouter sa biographie (📖) ¦ Добавить его биографию (📖) ¦ Додати біографію (📖)
+🎯 Suivre ce qui bouge ¦ 🎯 Следить за движущимся ¦ 🎯 Стежити за рухомим
+✕ Ne plus suivre ¦ ✕ Больше не следить ¦ ✕ Більше не стежити
+🎥 Plusieurs caméras ¦ 🎥 Несколько камер ¦ 🎥 Кілька камер
+Synchroniser et monter ¦ Синхронизировать и смонтировать ¦ Синхронізувати й змонтувати
+quand quelqu’un parle plus près d’une autre caméra ¦ когда кто-то говорит ближе к другой камере ¦ коли хтось говорить ближче до іншої камери
+Lecture des sons… ¦ Чтение звуков… ¦ Читання звуків…
+dédié à {who} ¦ посвящается: {who} ¦ присвячено: {who}
+Pas encore de {what} pour ce soir ¦ На этот вечер пока нет: {what} ¦ На цей вечір поки немає: {what}
+Note les titres dans l’ordre, avec les rappels, les reprises, les invités… ou copie la setlist d’un autre soir. ¦ Запиши названия по порядку, с бисами, кавер-версиями, гостями… или скопируй сет-лист другого вечера. ¦ Запиши назви по порядку, з біс-номерами, кавер-версіями, гостями… або скопіюй сет-лист іншого вечора.
+La sorte de ce soir ¦ Вид этого вечера ¦ Вид цього вечора
+En faire : {what} (la setlist s’adapte) ¦ Сделать: {what} (сет-лист подстроится) ¦ Зробити: {what} (сет-лист підлаштується)
+{n} prévues ¦ Запланировано: {n} ¦ Заплановано: {n}
+d’après {what} ¦ по мотивам: {what} ¦ за мотивами: {what}
+{what} à la setlist. ¦ {what} в сет-лист. ¦ {what} до сет-листа.
+{what} depuis « {name} ». ¦ {what} из «{name}». ¦ {what} з «{name}».
+=ligne ajoutée ¦ строка добавлена|строки добавлено|строк добавлено ¦ рядок додано|рядки додано|рядків додано
+=ligne copiée ¦ строка скопирована|строки скопировано|строк скопировано ¦ рядок скопійовано|рядки скопійовано|рядків скопійовано
+Setlist de « {name} » copiée ({what}) ¦ Сет-лист «{name}» скопирован ({what}) ¦ Сет-лист «{name}» скопійовано ({what})
+Ce soir devient : {what} ¦ Этот вечер становится: {what} ¦ Цей вечір стає: {what}
+{n} enregistrements « en public » ajoutés aux morceaux ¦ Записи «вживую» добавлены к композициям: {n} ¦ Записи «наживо» додано до композицій: {n}
+1 enregistrement « en public » ajouté au morceau ¦ 1 запись «вживую» добавлена к композиции ¦ 1 запис «наживо» додано до композиції
+{n} enregistrements « en public » déjà tirés de ce soir. ¦ Записей «вживую» уже сделано с этого вечера: {n}. ¦ Записів «наживо» вже зроблено з цього вечора: {n}.
+1 enregistrement « en public » déjà tiré de ce soir. ¦ 1 запись «вживую» уже сделана с этого вечера. ¦ 1 запис «наживо» вже зроблено з цього вечора.
+→ En faire des enregistrements « en public » des morceaux ({n}) ¦ → Сделать из этого записи композиций «вживую» ({n}) ¦ → Зробити з цього записи композицій «наживо» ({n})
+→ En faire un enregistrement « en public » du morceau ({n}) ¦ → Сделать из этого запись композиции «вживую» ({n}) ¦ → Зробити з цього запис композиції «наживо» ({n})
+« {name} » ajouté au catalogue ({what}). ¦ «{name}» добавлено в каталог ({what}). ¦ «{name}» додано до каталогу ({what}).
+Aucun lieu de ta base pour ces soirs ({what} sans lieu choisi dans la base). ¦ Для этих вечеров нет мест из твоей базы ({what} без места, выбранного в базе). ¦ Для цих вечорів немає місць із твоєї бази ({what} без місця, вибраного в базі).
+Aucun lieu de ta base pour ces soirs. ¦ Для этих вечеров нет мест из твоей базы. ¦ Для цих вечорів немає місць із твоєї бази.
+{what} sans coordonnées ¦ {what} без координат ¦ {what} без координат
+{what} sans lieu de ta base ¦ {what} без места из твоей базы ¦ {what} без місця з твоєї бази
+=soir ¦ вечер|вечера|вечеров ¦ вечір|вечори|вечорів
+🔝 {what} les plus joués ¦ 🔝 Чаще всего исполняемые: {what} ¦ 🔝 Найчастіше виконувані: {what}
+{what} par soir ¦ {what} за вечер ¦ {what} за вечір
+{n} en moyenne ¦ в среднем {n} ¦ у середньому {n}
+{what} mais jamais sur scène, et {other} : ¦ {what}, но ни разу на сцене, и {other}: ¦ {what}, але жодного разу на сцені, і {other}:
+{what} mais jamais sur scène : ¦ {what}, но ни разу на сцене: ¦ {what}, але жодного разу на сцені:
+{what} jamais dans une setlist : ¦ {what} ни разу в сет-листе: ¦ {what} жодного разу в сет-листі:
+=morceau enregistré ¦ записанная композиция|записанные композиции|записанных композиций ¦ записана композиція|записані композиції|записаних композицій
+=autre fiche ¦ другая карточка|другие карточки|других карточек ¦ інша картка|інші картки|інших карток
+… et {n} de plus ¦ … и ещё {n} ¦ … і ще {n}
+✓ Profil « {name} » coché : ses sections sont sur sa page. ¦ ✓ Профиль «{name}» отмечен: его разделы — на странице человека. ¦ ✓ Профіль «{name}» позначено: його розділи — на сторінці людини.
+Aucun épisode n° {a} à {b} dans cette saison. ¦ В этом сезоне нет эпизодов № {a}–{b}. ¦ У цьому сезоні немає епізодів № {a}–{b}.
+Aucun épisode n° {a} dans cette saison. ¦ В этом сезоне нет эпизода № {a}. ¦ У цьому сезоні немає епізоду № {a}.
+＋ Nouveau concert ou représentation ¦ ＋ Новый концерт или спектакль ¦ ＋ Новий концерт або вистава
+Chercher… (ville, salle, morceau joué, tournée, personne) ¦ Искать… (город, зал, исполненная композиция, тур, человек) ¦ Шукати… (місто, зала, виконана композиція, тур, людина)
+Aucun concert ni spectacle pour l’instant ¦ Пока нет концертов и спектаклей ¦ Поки немає концертів і вистав
+Un soir = une fiche : la date, le lieu, la setlist (titres, rappels, reprises, invités), qui était sur scène et dans la salle. ¦ Один вечер = одна карточка: дата, место, сет-лист (названия, бисы, кавер-версии, гости), кто был на сцене и в зале. ¦ Один вечір = одна картка: дата, місце, сет-лист (назви, біс-номери, кавер-версії, гості), хто був на сцені й у залі.
+Concert ou représentation ¦ Концерт или спектакль ¦ Концерт або вистава
+Concerts et représentations ¦ Концерты и спектакли ¦ Концерти і вистави
+=concert ou représentation ¦ концерт или спектакль|концерта или спектакля|концертов или спектаклей ¦ концерт або вистава|концерти або вистави|концертів або вистав
+Spectacle d’humour ¦ Юмористическое шоу ¦ Гумористичне шоу
+Scènes jouées ¦ Сыгранные сцены ¦ Зіграні сцени
+Concert d’orchestre ¦ Концерт оркестра ¦ Концерт оркестру
+Début d’une partie ¦ Начало части ¦ Початок частини
+Bande, intro enregistrée ¦ Фонограмма, записанное вступление ¦ Фонограма, записаний вступ
+Dernière fois ¦ Последний раз ¦ Останній раз
+Reprise, invités, dédicace, 1re fois, durée… ¦ Кавер, гости, посвящение, 1-й раз, длительность… ¦ Кавер, гості, присвята, 1-й раз, тривалість…
+＋ Un rappel ¦ ＋ Бис ¦ ＋ Біс
+📋 Coller une liste ¦ 📋 Вставить список ¦ 📋 Вставити список
+📋 Copier la setlist d’un autre soir ¦ 📋 Скопировать сет-лист другого вечера ¦ 📋 Скопіювати сет-лист іншого вечора
+Copier la setlist d’un autre soir ¦ Скопировать сет-лист другого вечера ¦ Скопіювати сет-лист іншого вечора
+inachevé ¦ не закончено ¦ не завершено
+Nouvelle partie ¦ Новая часть ¦ Нова частина
+critique positive ¦ положительная рецензия ¦ позитивна рецензія
+critique négative ¦ отрицательная рецензия ¦ негативна рецензія
+neutre ¦ нейтральная ¦ нейтральна
+Église, chapelle ¦ Церковь, часовня ¦ Церква, каплиця
+Bal, salle des fêtes ¦ Бал, зал для праздников ¦ Бал, зала для свят
+Café, cabaret ¦ Кафе, кабаре ¦ Кафе, кабаре
+Soirée privée ¦ Частный вечер ¦ Приватний вечір
+Festival, fête ¦ Фестиваль, праздник ¦ Фестиваль, свято
+création du rôle ¦ первое исполнение роли ¦ перше виконання ролі
+Création du rôle ¦ Первое исполнение роли ¦ Перше виконання ролі
+chef d’orchestre ¦ дирижёр ¦ диригент
+Un ou une soliste ¦ Солист или солистка ¦ Соліст або солістка
+Une personne dans la salle ¦ Человек в зале ¦ Людина в залі
+🎭 Ce soir-là, au théâtre ¦ 🎭 В тот вечер, в театре ¦ 🎭 Того вечора, у театрі
+Rôles du soir ¦ Роли вечера ¦ Ролі вечора
+Titulaire ou remplaçant ¦ Основной состав или замена ¦ Основний склад або заміна
+La soirée ¦ Вечер ¦ Вечір
+Joué ¦ Исполнено ¦ Виконано
+La tournée ¦ Тур ¦ Тур
+Dates prévues ¦ Запланированные даты ¦ Заплановані дати
+Les dates ¦ Даты ¦ Дати
+📅 Les dates ¦ 📅 Даты ¦ 📅 Дати
+＋ Ajouter une date ¦ ＋ Добавить дату ¦ ＋ Додати дату
+＋ Ajouter une représentation ¦ ＋ Добавить спектакль ¦ ＋ Додати виставу
+Chanson parlée, poème dit ¦ Песня-речитатив, прочитанное стихотворение ¦ Пісня-речитатив, прочитаний вірш
+Sketch, numéro, scène ¦ Скетч, номер, сцена ¦ Скетч, номер, сцена
+Sketches, numéros, scènes ¦ Скетчи, номера, сцены ¦ Скетчі, номери, сцени
+Écrit, créé ¦ Написано, создано ¦ Написано, створено
+Tiré de ¦ Взято из ¦ Узято з
+Son ou vidéo ¦ Звук или видео ¦ Звук або відео
+Carte indisponible. ¦ Карта недоступна. ¦ Мапа недоступна.
+Avec une setlist ¦ С сет-листом ¦ Із сет-листом
+Avec une captation ¦ С записью ¦ Із записом
+Avec une 1re fois ¦ С 1-м разом ¦ З 1-м разом
+Avec un remplacement ¦ С заменой ¦ Із заміною
+Avec ce titre joué ¦ С исполнением этой композиции ¦ З виконанням цієї композиції
+Joué ce soir-là ¦ Исполнено в тот вечер ¦ Виконано того вечора
+Carte des lieux… ¦ Карта мест… ¦ Мапа місць…
+🗺 Carte des lieux ¦ 🗺 Карта мест ¦ 🗺 Мапа місць
+hors tournée ¦ вне тура ¦ поза туром
+Dernière ¦ Последний ¦ Останній
+Moins ↑ ¦ Меньше ↑ ¦ Менше ↑
+Soirs par année ¦ Вечера по годам ¦ Вечори за роками
+📅 Soirs par année ¦ 📅 Вечера по годам ¦ 📅 Вечори за роками
+Durée moyenne ¦ Средняя длительность ¦ Середня тривалість
+Ville la plus visitée ¦ Самый посещаемый город ¦ Найвідвідуваніше місто
+🚌 Setlist type d’une tournée ¦ 🚌 Типичный сет-лист тура ¦ 🚌 Типовий сет-лист туру
+Choisis une tournée. ¦ Выбери тур. ¦ Вибери тур.
+Choisis deux soirs différents. ¦ Выбери два разных вечера. ¦ Вибери два різні вечори.
+Cinéma ¦ Кино ¦ Кіно
+Au générique ¦ В титрах ¦ У титрах
+Pas au générique ¦ Не в титрах ¦ Не в титрах
+Tournage, période ¦ Съёмки, период ¦ Знімання, період
+🎭 Au théâtre ¦ 🎭 В театре ¦ 🎭 У театрі
+Théâtres, salles ¦ Театры, залы ¦ Театри, зали
+Un théâtre ¦ Театр ¦ Театр
+Théâtre, salle ¦ Театр, зал ¦ Театр, зала
+Un remplacement ¦ Замена ¦ Заміна
+📺 Télévision, radio ¦ 📺 Телевидение, радио ¦ 📺 Телебачення, радіо
+Voix française de ¦ Французский голос для ¦ Французький голос для
+Un ou une partenaire ¦ Партнёр или партнёрша ¦ Партнер або партнерка
+Prix et nominations ¦ Премии и номинации ¦ Премії та номінації
+Œuvre A → Z ¦ Произведение А → Я ¦ Твір А → Я
+Fiches « Rôle » ¦ Карточки «Роль» ¦ Картки «Роль»
+Films du catalogue ¦ Фильмы каталога ¦ Фільми каталогу
+Cités dans d’autres catalogues ¦ Упомянутые в других каталогах ¦ Згадані в інших каталогах
+Crédit ¦ Упоминание в титрах ¦ Згадка в титрах
+RÔLE ¦ РОЛЬ ¦ РОЛЬ
+＋ En faire une fiche rôle détaillée ¦ ＋ Сделать подробную карточку роли ¦ ＋ Зробити докладну картку ролі
+D’où vient la ligne ¦ Откуда взялась строка ¦ Звідки взявся рядок
+Chercher un rôle, un film, un partenaire… ¦ Искать роль, фильм, партнёра… ¦ Шукати роль, фільм, партнера…
+Profil d’acteur ¦ Профиль актёра ¦ Профіль актора
+Débuts ¦ Дебют ¦ Дебют
+Une école, un cours ¦ Школа, курсы ¦ Школа, курси
+École, conservatoire, cours ¦ Школа, консерватория, курсы ¦ Школа, консерваторія, курси
+Prix, diplôme ¦ Премия, диплом ¦ Премія, диплом
+Un agent ¦ Агент ¦ Агент
+Une troupe ¦ Труппа ¦ Трупа
+Troupe, théâtre ¦ Труппа, театр ¦ Трупа, театр
+Un casting ¦ Прослушивание ¦ Прослуховування
+Rôle visé ¦ Желаемая роль ¦ Бажана роль
+pas obtenu ¦ не получена ¦ не отримано
+Compétences, physique, voix ¦ Навыки, внешность, голос ¦ Навички, зовнішність, голос
+Tout voir, trier ¦ Смотреть всё, сортировать ¦ Дивитися все, сортувати
+Aucune série, aucun téléfilm. ¦ Нет ни сериалов, ни телефильмов. ¦ Немає ні серіалів, ні телефільмів.
+Théâtrographie ¦ Театральные роли ¦ Театральні ролі
+Aucun rôle au théâtre. ¦ Нет ролей в театре. ¦ Немає ролей у театрі.
+Aucune voix. ¦ Нет ролей озвучивания. ¦ Немає ролей озвучення.
+Publicité et mannequinat ¦ Реклама и модельная работа ¦ Реклама та модельна робота
+Aucune publicité. ¦ Нет рекламы. ¦ Немає реклами.
+Aucun clip. ¦ Нет клипов. ¦ Немає кліпів.
+=casting noté ¦ прослушивание записано|прослушивания записано|прослушиваний записано ¦ прослуховування записано|прослуховування записано|прослуховувань записано
+Aucun casting noté. ¦ Нет записанных прослушиваний. ¦ Немає записаних прослуховувань.
+Les statistiques viennent des rôles notés. ¦ Статистика берётся из записанных ролей. ¦ Статистика береться із записаних ролей.
+Rôles par décennie ¦ Роли по десятилетиям ¦ Ролі за десятиліттями
+Réalisateurs ¦ Режиссёры ¦ Режисери
+Aucun soir noté. ¦ Нет записанных вечеров. ¦ Немає записаних вечорів.
+Feuilleton télévisé ¦ Телесериал ¦ Телесеріал
+Websérie ¦ Веб-сериал ¦ Вебсеріал
+Séries et émissions ¦ Сериалы и передачи ¦ Серіали та передачі
+La série ¦ Сериал ¦ Серіал
+Saisons et épisodes ¦ Сезоны и эпизоды ¦ Сезони та епізоди
+Durée d’un épisode ¦ Длительность эпизода ¦ Тривалість епізоду
+Qui y a fait quoi ¦ Кто что делал ¦ Хто що робив
+Épisodes prévus ¦ Запланированные эпизоды ¦ Заплановані епізоди
+L’épisode ¦ Эпизод ¦ Епізод
+N° dans la saison ¦ № в сезоне ¦ № у сезоні
+N° dans la série ¦ № в сериале ¦ № у серіалі
+Un ou une scénariste ¦ Сценарист или сценаристка ¦ Сценарист або сценаристка
+Un invité ¦ Гость ¦ Гість
+Rôle ou métier ¦ Роль или профессия ¦ Роль або професія
+toute la série ¦ весь сериал ¦ увесь серіал
+Chaîne, station, éditeur ¦ Канал, радиостанция, издатель ¦ Канал, радіостанція, видавець
+Un créateur, une créatrice ¦ Создатель или создательница ¦ Творець або творчиня
+Comment cette image se mélange avec celle de dessous : « Produit » assombrit, « Superposition claire » éclaircit, « Normal » la pose simplement dessus. ¦ Как это изображение смешивается с нижним: «Умножение» затемняет, «Светлое наложение» осветляет, «Обычный» просто кладёт его сверху. ¦ Як це зображення змішується з нижнім: «Множення» затемнює, «Світле накладання» освітлює, «Звичайний» просто кладе його зверху.
+Un lent mouvement de caméra sur la photo : elle s’approche, s’éloigne ou glisse doucement pendant qu’elle est à l’écran. ¦ Медленное движение камеры по фото: она приближается, отдаляется или плавно скользит, пока фото на экране. ¦ Повільний рух камери по фото: вона наближається, віддаляється або плавно ковзає, поки фото на екрані.
+Une image clé fixe un réglage (taille, place, rotation…) à un moment du film ; entre deux images clés, l’image passe de l’une à l’autre, en douceur ou à vitesse régulière. ¦ Ключевой кадр фиксирует настройку (размер, положение, поворот…) в определённый момент фильма; между двумя ключевыми кадрами изображение переходит от одного к другому — плавно или с равномерной скоростью. ¦ Ключовий кадр фіксує налаштування (розмір, положення, поворот…) у певний момент фільму; між двома ключовими кадрами зображення переходить від одного до іншого — плавно або з рівномірною швидкістю.
+« Réduire le souffle » : choisis d’abord un passage où l’on n’entend que le bruit, il sert d’exemple. « Voix plus nette » rend la parole plus claire. « Normaliser » monte le volume au plus fort sans saturer. ¦ «Уменьшить шипение»: сначала выбери отрывок, где слышен только шум, — он служит образцом. «Голос чётче» делает речь яснее. «Нормализовать» поднимает громкость до максимума без перегрузки. ¦ «Зменшити шипіння»: спочатку вибери уривок, де чути лише шум, — він слугує зразком. «Чіткіший голос» робить мовлення яснішим. «Нормалізувати» піднімає гучність до максимуму без перевантаження.
+Doux : on nettoie peu, la voix reste naturelle. Fort : on enlève plus de bruit, au risque d’un son un peu « métallique ». Écoute avec 👂 Avant / ✨ Après. ¦ Мягко: очистка слабая, голос остаётся естественным. Сильно: убирается больше шума, но звук может стать немного «металлическим». Послушай через 👂 До / ✨ После. ¦ М’яко: очищення слабке, голос залишається природним. Сильно: прибирається більше шуму, але звук може стати трохи «металевим». Послухай через 👂 До / ✨ Після.
+Supprimer ce rush du projet (et ses {n} passages sur la frise) ¦ Удалить этот клип из проекта (и его фрагменты на шкале времени: {n}) ¦ Видалити цей кліп із проєкту (і його фрагменти на шкалі часу: {n})
+Supprimer ce rush du projet (et son passage sur la frise) ¦ Удалить этот клип из проекта (и его фрагмент на шкале времени) ¦ Видалити цей кліп із проєкту (і його фрагмент на шкалі часу)
+Supprimer ce rush du projet ¦ Удалить этот клип из проекта ¦ Видалити цей кліп із проєкту
+{time} à l’écran ¦ {time} на экране ¦ {time} на екрані
+🖼️ Photo de la piste 1 ¦ 🖼️ Фото с дорожки 1 ¦ 🖼️ Фото з доріжки 1
+🎬 Morceau de la piste 1 ¦ 🎬 Фрагмент с дорожки 1 ¦ 🎬 Фрагмент з доріжки 1

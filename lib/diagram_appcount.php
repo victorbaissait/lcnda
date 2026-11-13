@@ -59,9 +59,9 @@ function dac_clean(array $q): array
 {
     $what = dac_enum($q, 'what', DAC_WHAT, 'persons', 'Je ne sais pas compter cela.');
     $by = dac_enum($q, 'by', DAC_BY[$what], $what === 'places' ? 'county' : ($what === 'media' ? 'mtype' : 'last_name'), 'Ce regroupement ne va pas avec ce qu’on compte.');
-    $series = dac_enum($q, 'series', ['', 'sex', 'century'], '', 'Séries inconnues.');
+    $series = dac_enum($q, 'series', ['', 'sex', 'century', 'branch', 'generation', 'county', 'country'], '', 'Séries inconnues.'); // branche, génération, lieu : aussi pour les petits multiples (⚙️ Personnaliser)
     if ($series === 'sex' && in_array($what, ['places', 'media', 'marriages', 'families'], true)) { dgo_bad('Une série par sexe ne va pas avec ce qu’on compte.'); }
-    if ($series !== '' && $series === ($by === 'sex' ? 'sex' : ($by === 'century' ? 'century' : ''))) { $series = ''; }
+    if ($series !== '' && $series === $by) { $series = ''; }
     $unit = dac_enum($q, 'unit', ['count', 'pct', 'avg', 'median'], 'count', 'Unité inconnue.');
     $value = dac_enum($q, 'value', ['age_death', 'age_marriage', 'kids', 'age_first_child'], '', 'Valeur inconnue.');
     if (in_array($unit, ['avg', 'median'], true)) {
@@ -192,7 +192,7 @@ function diagram_app_count(PDO $pdo, array $q): array
     if ($by === 'branch' || $c['series'] === 'branch') { foreach (dgn_sosa($pdo, dgn_root($pdo, $o['root']), 30, 120000) as $s => $id) { if ($s > 1 && !isset($branch[$id])) { $branch[$id] = (($s >> (strlen(decbin($s)) - 2)) & 1) === 0 ? 'Côté père' : 'Côté mère'; } } }
     // la génération : celle du groupe (ancêtres, descendants, branche), sinon celle des ancêtres de la personne de départ
     $gens = null; $up = $o['pop'] !== 'desc';
-    if ($by === 'generation') { $gens = in_array($o['pop'], ['anc', 'desc', 'pat', 'mat'], true) ? $keep : dgo_walk($pdo, dgn_root($pdo, $o['root']), 0, true); }
+    if ($by === 'generation' || $c['series'] === 'generation') { $gens = in_array($o['pop'], ['anc', 'desc', 'pat', 'mat'], true) ? $keep : dgo_walk($pdo, dgn_root($pdo, $o['root']), 0, true); }
     $P = dac_people($pdo); $PL = dac_places($pdo);
     $inPop = static fn(int $p) => $p > 0 && isset($P[$p]) && ($keep === null || isset($keep[$p]));
     $inYear = static fn(?array $d) => ($o['from'] === null && $o['to'] === null) || ($d && ($o['from'] === null || $d[0] >= $o['from']) && ($o['to'] === null || $d[0] <= $o['to']));
@@ -317,7 +317,7 @@ function diagram_app_count(PDO $pdo, array $q): array
     // les séries : les 12 plus grandes (par siècle : dans l'ordre du temps)
     $seriesNames = array_keys($seriesTot);
     if ($c['series'] !== '') {
-        usort($seriesNames, static fn($a, $b) => $c['series'] === 'century' ? $orderOf('century', $a) <=> $orderOf('century', $b) : ($seriesTot[$b] <=> $seriesTot[$a] ?: strcmp($a, $b)));
+        usort($seriesNames, static fn($a, $b) => in_array($c['series'], ['century', 'generation'], true) ? $orderOf($c['series'], $a) <=> $orderOf($c['series'], $b) : ($seriesTot[$b] <=> $seriesTot[$a] ?: strcmp($a, $b)));
         $seriesNames = array_slice($seriesNames, 0, 12);
     } else { $seriesNames = ['']; }
     $sum = static fn(array $byS) => array_sum(array_map(static fn($x) => $x['n'], $byS));

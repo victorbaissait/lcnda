@@ -25,6 +25,11 @@
 (() => {
     'use strict';
     const root = typeof window !== 'undefined' ? window : globalThis;
+    // 🌐 la traduction (docs/I18N.md) : dans Node (tests), le français, variables remplacées ; les nombres d’une phrase passent par String()
+    const i18n = (s, v) => { const I = root.LCNDA_I18N; if (I && I.t) return I.t(s, v); return v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s; };
+    /** un nombre et son mot accordé (« 3 objets ») ; un nom dans une phrase : en minuscules, sauf en allemand (les noms y gardent leur majuscule) */
+    const nW = (n, one, many) => { const I = root.LCNDA_I18N; if (I && I.plural) return I.plural(n, one, many); return `${n} ${Math.abs(n) < 2 ? one : (many || (/[sxz]$/.test(one) ? one : `${one}s`))}`; };
+    const lc = s => { const I = root.LCNDA_I18N; return I && I.lang === 'de' ? String(s ?? '') : String(s ?? '').toLowerCase(); };
 
     /* ═════════ Les données ═════════ */
     const NEEDS = [['soif', '💧', 'Soif'], ['faim', '🍞', 'Faim'], ['sommeil', '💤', 'Sommeil'], ['hygiene', '🧼', 'Hygiène'], ['vessie', '🚽', 'Toilettes']];
@@ -223,8 +228,8 @@
         SKILLS.forEach(([k, , , re]) => { sk[k] = re.test(t) ? 1.5 : 1; });
         if (SKILLS.some(([k]) => sk[k] > 1) && t) from.push(String(occ).trim().slice(0, 40));
         const era = y && y < 1900 ? 'ancien' : y >= 1950 ? 'moderne' : '';
-        if (era === 'ancien') { sk.cultiver += .25; sk.cuisiner += .25; sk.soigner += .25; from.push(`né·e en ${y}`); }
-        if (era === 'moderne') { sk.reparer += .25; from.push(`né·e en ${y}`); }
+        if (era === 'ancien') { sk.cultiver += .25; sk.cuisiner += .25; sk.soigner += .25; from.push(i18n('né·e en {y}', {y: String(y)})); }
+        if (era === 'moderne') { sk.reparer += .25; from.push(i18n('né·e en {y}', {y: String(y)})); }
         return {sk, era, from: from.join(', ')};
     }
     const SEASONS = [['printemps', '🌸', 'Printemps'], ['ete', '☀️', 'Été'], ['automne', '🍂', 'Automne'], ['hiver', '❄️', 'Hiver']];
@@ -338,7 +343,8 @@
         ['couple', '💞', 'Un couple au bunker', 'Deux habitants forment un couple.', false, g => (g.couples || []).length >= 1],
         ['souvenir', '🧓', 'Mémoire vivante', 'Un ancêtre raconte un souvenir de sa vraie vie (option « Souvenirs des ancêtres »).', false, g => (g.stats.souvenirs || 0) >= 1],
         ['coffre', '🧳', 'Le coffre plein', 'Avoir 6 objets de famille dans le coffre.', true, g => g.coffre.length >= 6],
-        ...Object.keys(SCENARIOS).map(k => ['scen_' + k, SCENARIOS[k][0], `Gagné : ${SCENARIOS[k][1]}`, `Tenir ${SCEN_GOAL[k]} jours dans le scénario « ${SCENARIOS[k][1]} ».`, false, g => g.scen === k && !!g.won])];
+        ...Object.keys(SCENARIOS).map(k => { const a = ['scen_' + k, SCENARIOS[k][0], '', '', false, g => g.scen === k && !!g.won]; // 🌐 nom et but lus dans la langue choisie
+            Object.defineProperty(a, 2, {get: () => i18n('Gagné : {scen}', {scen: SCENARIOS[k][1]}), enumerable: true}); Object.defineProperty(a, 3, {get: () => i18n('Tenir {n} jours dans le scénario « {scen} ».', {n: SCEN_GOAL[k], scen: SCENARIOS[k][1]}), enumerable: true}); return a; })];
     /** 🌪️ les catastrophes (option des réglages « météo ») : [icône, nom, ce qui se passe] */
     const EVENTS = {canicule: ['🥵', 'Canicule', 'on a soif bien plus vite'], tempete: ['🌪️', 'Tempête de poussière', 'l’air s’encrasse, dehors on se blesse, les panneaux solaires ne donnent rien'],
         inondation: ['🌊', 'Inondation', 'l’eau entre par le bas : une installation de l’étage le plus profond est abîmée'], seisme: ['🫨', 'Tremblement de terre', 'des installations sont abîmées, on peut se blesser'],
@@ -471,6 +477,7 @@
     function dateOf(g, t = g.t) {
         const H = histOf(g); if (!H) return '';
         const d = new Date(Date.UTC(2000, H.date[1] - 1, H.date[2] + dayOf(t) - 1)); d.setUTCFullYear(H.date[0] + (d.getUTCFullYear() - 2000));
+        const I = root.LCNDA_I18N; if (I && I.lang && I.lang !== 'fr' && I.fmtDate) return I.fmtDate(d, {day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC'});
         return `${d.getUTCDate() === 1 ? '1er' : d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
     }
     /** 📜 les ancêtres qui vivaient à la date d'un scénario : nés avant, morts après (ou sans date de décès, si l'âge reste crédible) ;
@@ -482,10 +489,10 @@
         const [Y, M, D] = H.date, iso = `${Y}-${String(M).padStart(2, '0')}-${String(D).padStart(2, '0')}`, ymd = v => /^\d{4}-\d\d-\d\d$/.test(String(v || ''));
         const keys = [H.city, ...H.keys].map(x => foldTxt(x));
         const here = id => { const n = foldTxt(places?.[id]?.name); return !!id && n.trim() && keys.some(x => n.includes(x)); };
-        const ok = p => { if (!p || p.living || p.priv || p.sh) return false; const by = Number(p.by) || 0, dy = Number(p.dy) || 0; if (!by) return false;
+        const ok = p => { if (!p || p.living || p.priv || p.sh || p.mem) return false; const by = Number(p.by) || 0, dy = Number(p.dy) || 0; if (!by) return false;
             if (ymd(p.bd) ? p.bd >= iso : by >= Y) return false; const age = Y - by; if (age < 8 || age > 95) return false;
             return dy ? (ymd(p.dd) ? p.dd > iso : dy > Y) : age <= 85; };
-        const all = (Array.isArray(people) ? people : []).filter(ok).map(p => ({pid: Number(p.id) || 0, name: str(p.name || [p.first, p.last].filter(Boolean).join(' '), 80) || 'Sans nom', gender: str(p.gender, 10), occ: str(p.occ, 60), by: Number(p.by), age: Y - Number(p.by), local: here(p.bplace) || here(p.dplace)}));
+        const all = (Array.isArray(people) ? people : []).filter(ok).map(p => ({pid: Number(p.id) || 0, name: str(p.name || [p.first, p.last].filter(Boolean).join(' '), 80) || i18n('Sans nom'), gender: str(p.gender, 10), occ: str(p.occ, 60), by: Number(p.by), age: Y - Number(p.by), local: here(p.bplace) || here(p.dplace)}));
         all.sort((a, b) => (b.local - a.local) || ((b.age >= 16) - (a.age >= 16)));
         return {all, local: all.filter(p => p.local).length};
     }
@@ -542,7 +549,7 @@
             g.people.push(mkPerson(g, real[0] || invent(g), true)); real.slice(1, want).forEach(p => g.people.push(mkPerson(g, p, false)));
             while (g.people.length < want) g.people.push(mkPerson(g, invent(g), false));
         } else {
-            g.people.push(mkPerson(g, opts.me || {name: 'Moi'}, true));
+            g.people.push(mkPerson(g, opts.me || {name: i18n('Moi')}, true));
             (opts.team || []).slice(0, 6).forEach(p => g.people.push(mkPerson(g, p, false)));
         }
         // les liens de famille (parents, conjoints, frères et sœurs) entre ceux qui descendent : par numéro de fiche
@@ -553,30 +560,33 @@
         const pairs = []; g.people.forEach((a, i) => g.people.slice(i + 1).forEach(b => { if (!a.kin.includes(b.id) && !a.spouses.includes(b.id)) pairs.push([a.id, b.id]); }));
         if (pairs.length && g.people.length >= 3 && rnd(g) < 0.5) g.feud = pickOne(g, pairs);
         // le coffre de famille : 3 objets au plus
-        g.coffre = (opts.coffre || []).slice(0, 3).map(o => { const t = `${o.title || ''} ${o.kind || ''} ${o.description || ''}`.toLowerCase(); return {title: String(o.title || 'Un objet de famille').slice(0, 80), bonus: HEIRLOOMS.find(([, re]) => re.test(t))[0]}; });
+        g.coffre = (opts.coffre || []).slice(0, 3).map(o => { const t = `${o.title || ''} ${o.kind || ''} ${o.description || ''}`.toLowerCase(); return {title: String(o.title || i18n('Un objet de famille')).slice(0, 80), bonus: HEIRLOOMS.find(([, re]) => re.test(t))[0]}; });
         if (heir(g, 'textile')) g.res.tissu += 3;
         if (heir(g, 'souvenir')) g.people.forEach(p => { p.mood = clamp(p.mood + 10, 0, 100); });
-        g.city = makeCity(g, String(opts.city?.name || 'la ville').slice(0, 80), SIZES[opts.city?.size] ? opts.city.size : 'moyenne', opts.homes);
+        g.city = makeCity(g, String(opts.city?.name || i18n('la ville')).slice(0, 80), SIZES[opts.city?.size] ? opts.city.size : 'moyenne', opts.homes);
         // 🗺️ la région, 🤝 les groupes, 🏚️ les bâtiments à remettre en état ; 🧓 ce que les fiches racontent (jamais un vivant ni une fiche confidentielle)
         g.region = makeRegion(g, opts.regionNames); g.groups = makeGroups(g); g.sites = makeSites(g);
         if (flood(g) && !g.plans.includes('barque')) g.plans.push('barque');
 
-        log(g, `Jour 1. La trappe se referme au-dessus de vous : ${g.people.length > 1 ? `${g.people.length} dans le bunker` : 'seul·e dans le bunker'}, à ${g.city.name}.`, 'alerte');
-        if (g.coffre.length) log(g, `🧳 Dans le coffre de famille : ${g.coffre.map(c => `« ${c.title} » (${HEIRLOOMS.find(h => h[0] === c.bonus)[2]})`).join(', ')}.`);
-        if (g.feud) { const [a, b] = g.feud.map(id => g.people.find(p => p.id === id)); log(g, `⚡ ${a.name} et ${b.name} ne se parlent plus depuis longtemps… Il faudra faire avec.`); }
-        if (g.scen !== 'classique') log(g, `${SCENARIOS[g.scen][0]} ${SCENARIOS[g.scen][1]} : ${SCENARIOS[g.scen][2]}`, 'alerte');
+        log(g, g.people.length > 1 ? i18n('Jour 1. La trappe se referme au-dessus de vous : {n} dans le bunker, à {city}.', {n: g.people.length, city: g.city.name}) : i18n('Jour 1. La trappe se referme au-dessus de vous : seul·e dans le bunker, à {city}.', {city: g.city.name}), 'alerte');
+        if (g.coffre.length) log(g, i18n('🧳 Dans le coffre de famille : {list}.', {list: g.coffre.map(c => i18n('« {title} » ({what})', {title: c.title, what: HEIRLOOMS.find(h => h[0] === c.bonus)[2]})).join(', ')}));
+        if (g.feud) { const [a, b] = g.feud.map(id => g.people.find(p => p.id === id)); log(g, i18n('⚡ {a} et {b} ne se parlent plus depuis longtemps… Il faudra faire avec.', {a: a.name, b: b.name})); }
+        if (g.scen !== 'classique') log(g, i18n('{ico} {name} : {what}', {ico: SCENARIOS[g.scen][0], name: SCENARIOS[g.scen][1], what: SCENARIOS[g.scen][2]}), 'alerte');
         if (H) { const nReal = g.people.filter(p => !p.inv).length, nInv = g.people.length - nReal, nLoc = real.slice(0, g.people.length).filter(p => p.local).length;
-            log(g, `📜 ${dateOf(g)}, à ${g.city.name} : ${nReal ? `${nReal === 1 ? '1 ancêtre de ta famille' : `${nReal} ancêtres de ta famille`} qui vivai${nReal > 1 ? 'en' : ''}t à cette date${nLoc ? ` (dont ${nLoc} ${H.region})` : ''}` : 'aucun ancêtre de ta famille ne vivait à cette date'}${nInv ? `${nReal ? ', et ' : ' : '}${nInv === 1 ? '1 habitant inventé' : `${nInv} habitants inventés`} de l’époque pour compléter le groupe` : ''}.`, 'alerte'); }
-        log(g, `🏆 Pour gagner : tenir ${goalOf(g)} jours. (On peut continuer ensuite.)`, 'info');
+            const anc = nReal === 1 ? i18n('1 ancêtre de ta famille qui vivait à cette date') : i18n('{n} ancêtres de ta famille qui vivaient à cette date', {n: nReal});
+            const who = nReal ? (nLoc ? i18n('{who} (dont {n} {region})', {who: anc, n: nLoc, region: H.region}) : anc) : i18n('aucun ancêtre de ta famille ne vivait à cette date');
+            const inv = nInv === 1 ? i18n('1 habitant inventé') : i18n('{n} habitants inventés', {n: nInv});
+            log(g, i18n('📜 {date}, à {city} : {what}.', {date: dateOf(g), city: g.city.name, what: nInv ? i18n(nReal ? '{who}, et {inv} de l’époque pour compléter le groupe' : '{who} : {inv} de l’époque pour compléter le groupe', {who, inv}) : who}), 'alerte'); }
+        log(g, i18n('🏆 Pour gagner : tenir {n} jours. (On peut continuer ensuite.)', {n: goalOf(g)}), 'info');
         marketDay(g); if (g.opt.missions) newMissions(g); snapshot(g); morningSave(g);
-        if (g.tuto === 0) log(g, `📘 Tutoriel — ${TUTO[0][0]}`, 'alerte');
-        log(g, `Pour commencer : construire des toilettes et un lit à l’atelier, creuser un étage, et envoyer quelqu’un chercher de quoi tenir. Le bric-à-brac (${E.old && E.junkBan.includes('radiocassee') ? 'un vieux tonneau' : 'une vieille radio'}, une chaise…) se démonte pour en tirer des composants : onglet ♻️ Bric-à-brac.`, 'info');
+        if (g.tuto === 0) log(g, i18n('📘 Tutoriel — {step}', {step: TUTO[0][0]}), 'alerte');
+        log(g, i18n('Pour commencer : construire des toilettes et un lit à l’atelier, creuser un étage, et envoyer quelqu’un chercher de quoi tenir. Le bric-à-brac ({junk}, une chaise…) se démonte pour en tirer des composants : onglet ♻️ Bric-à-brac.', {junk: E.old && E.junkBan.includes('radiocassee') ? i18n('un vieux tonneau') : i18n('une vieille radio')}), 'info');
         return g;
     }
     /** un habitant : ses besoins, son moral, ses compétences (métier et époque), son caractère */
     function mkPerson(g, p, me, more = {}) {
         const {sk, era, from} = skillsOf(p.occ, p.by), t1 = pickOne(g, TRAIT_KEYS), t2 = rnd(g) < 0.3 ? pickOne(g, TRAIT_KEYS.filter(k => k !== t1 && !TRAIT_OPP[t1]?.includes(k))) : null;
-        return {id: 'h' + g.nextId++, pid: Number(p.pid) || 0, name: String(p.name || 'Sans nom').slice(0, 80), gender: p.gender || '', me: !!me, hp: 100,
+        return {id: 'h' + g.nextId++, pid: Number(p.pid) || 0, name: String(p.name || i18n('Sans nom')).slice(0, 80), gender: p.gender || '', me: !!me, hp: 100,
             needs: {soif: 85, faim: 80, sommeil: 90, hygiene: 85, vessie: 90}, where: 'base', act: null, job: 'libre', exp: null,
             mood: 70, sk, era, from, occ: String(p.occ || '').slice(0, 60), by: Number(p.by) || 0, ill: null, kin: [], spouses: [], baby: false, parents: [],
             traits: [t1, t2].filter(Boolean), xp: {}, diary: [], age: more.baby ? 0 : Number(p.age) > 0 ? clamp(Math.round(Number(p.age)), 8, 100) : rint(g, 18, 72),
@@ -585,7 +595,7 @@
     /** 🧓 les fiches des ancêtres pour les souvenirs : {pid: mem} (40 au plus ; les vivants, fiches confidentielles ou cachées sont retirées) */
     function cleanBank(o) { const out = Object.create(null); Object.entries(o && typeof o === 'object' ? o : {}).slice(0, 40).forEach(([k, m]) => { const id = Number(k), c = id > 0 ? cleanMem(m) : null; if (c) out[id] = c; }); return out; }
     const str = (v, n) => String(v ?? '').replace(/\s+/g, ' ').trim().slice(0, n);
-    const cleanExtras = l => (Array.isArray(l) ? l : []).slice(0, 20).map(p => ({pid: Number(p?.pid) || 0, name: str(p?.name, 80) || 'Un voyageur', gender: str(p?.gender, 10), occ: str(p?.occ, 60), by: Number(p?.by) || 0}));
+    const cleanExtras = l => (Array.isArray(l) ? l : []).slice(0, 20).map(p => ({pid: Number(p?.pid) || 0, name: str(p?.name, 80) || i18n('Un voyageur'), gender: str(p?.gender, 10), occ: str(p?.occ, 60), by: Number(p?.by) || 0}));
     const cleanLore = l => (Array.isArray(l) ? l : []).slice(0, 40).map(x => ({kind: str(x?.kind, 12), title: str(x?.title, 80), text: str(x?.text, 200)})).filter(x => x.title);
     const cleanLetters = l => (Array.isArray(l) ? l : []).slice(0, 20).map(x => ({title: str(x?.title, 80), from: str(x?.from, 60), to: str(x?.to, 60)})).filter(x => x.title);
     /** les objets de famille qu'on peut retrouver dans les ruines (ceux de la base qui ne sont pas dans le coffre) */
@@ -605,7 +615,7 @@
             let x, y, tries = 0; do { x = rint(g, 0, n - 1); y = rint(g, 0, n - 1); tries++; } while ((used.has(`${x},${y}`) || Math.abs(x - c) + Math.abs(y - c) < 2) && tries < 200);
             used.add(`${x},${y}`);
             const [, , res, tools, plans] = PLACE_KINDS[kind], label = placeInfo(g, kind)[1], {stock, max} = stockFor(g, res);
-            const street = streets.length ? streets.splice(Math.floor(rnd(g) * streets.length), 1)[0] : `rue n° ${i + 1}`;
+            const street = streets.length ? streets.splice(Math.floor(rnd(g) * streets.length), 1)[0] : i18n('rue n° {n}', {n: i + 1});
             places.push({id: 'l' + (i + 1), kind, name: `${label}, ${street}`, x, y, stock, max, tools: tools.filter(() => rnd(g) < 0.7), plans: plans ? 3 : (rnd(g) < 0.5 ? 1 : 0), visits: 0, seen: false, junk: junkFor(g, kind, rint(g, 1, 4))});
         }
         // la maison natale d'un ancêtre né dans cette ville (2 au plus)
@@ -613,7 +623,7 @@
             let x, y, tries = 0; do { x = rint(g, 0, n - 1); y = rint(g, 0, n - 1); tries++; } while ((used.has(`${x},${y}`) || Math.abs(x - c) + Math.abs(y - c) < 2) && tries < 200);
             if (used.has(`${x},${y}`)) return; used.add(`${x},${y}`);
             const {stock, max} = stockFor(g, PLACE_KINDS.maisonfam[2]);
-            places.push({junk: junkFor(g, 'maisonfam', rint(g, 2, 4)), id: 'm' + (j + 1), kind: 'maisonfam', name: `Maison natale de ${str(h?.name, 60) || 'un ancêtre'}${Number(h?.by) ? ` (${Number(h.by)})` : ''}`, x, y, stock, max, tools: ['lampe'], plans: 1, visits: 0, seen: false, home: true});
+            places.push({junk: junkFor(g, 'maisonfam', rint(g, 2, 4)), id: 'm' + (j + 1), kind: 'maisonfam', name: Number(h?.by) ? i18n('Maison natale de {name} ({y})', {name: str(h?.name, 60) || i18n('un ancêtre'), y: String(Number(h.by))}) : i18n('Maison natale de {name}', {name: str(h?.name, 60) || i18n('un ancêtre')}), x, y, stock, max, tools: ['lampe'], plans: 1, visits: 0, seen: false, home: true});
         });
         return {name, size, n, base: [c, c], places};
     }
@@ -644,18 +654,18 @@
     /* ═════════ Les ordres du joueur ═════════ */
     /** construire : l'objet est commandé (ressources prises), un habitant « Construire » y travaille à l'atelier → {ok, err} */
     function orderBuild(g, k, fi, si) {
-        const it = ITEMS[k]; if (!it || it.fixed) return {ok: false, err: 'Objet inconnu.'};
-        if (!g.plans.includes(k)) return {ok: false, err: `Il faut d’abord trouver le plan « ${it.name} ».`};
-        if (it.tool && !g.tools.includes(it.tool)) return {ok: false, err: `Il faut l’outil « ${toolInfo(g, it.tool)[1]} ».`};
-        if (it.chain && !opt(g, 'chaines')) return {ok: false, err: 'Les chaînes de fabrication sont désactivées (réglages).'};
-        if (!itemOk(g, k)) return {ok: false, err: `« ${it.name} » n’existe pas encore à cette époque.`};
-        const f = g.floors[fi]; if (!f || si < 0 || si >= SLOTS || f.slots[si] || g.builds.some(b => b.fi === fi && b.si === si)) return {ok: false, err: 'Cette place est prise.'};
+        const it = ITEMS[k]; if (!it || it.fixed) return {ok: false, err: i18n('Objet inconnu.')};
+        if (!g.plans.includes(k)) return {ok: false, err: i18n('Il faut d’abord trouver le plan « {name} ».', {name: it.name})};
+        if (it.tool && !g.tools.includes(it.tool)) return {ok: false, err: i18n('Il faut l’outil « {name} ».', {name: toolInfo(g, it.tool)[1]})};
+        if (it.chain && !opt(g, 'chaines')) return {ok: false, err: i18n('Les chaînes de fabrication sont désactivées (réglages).')};
+        if (!itemOk(g, k)) return {ok: false, err: i18n('« {name} » n’existe pas encore à cette époque.', {name: it.name})};
+        const f = g.floors[fi]; if (!f || si < 0 || si >= SLOTS || f.slots[si] || g.builds.some(b => b.fi === fi && b.si === si)) return {ok: false, err: i18n('Cette place est prise.')};
         const miss = Object.entries(it.cost || {}).filter(([r, n]) => (g.res[r] || 0) < n);
-        if (miss.length) return {ok: false, err: `Il manque : ${miss.map(([r, n]) => `${n - (g.res[r] || 0)} ${resLabel(r, g)}`).join(', ')}.`};
+        if (miss.length) return {ok: false, err: i18n('Il manque : {list}.', {list: miss.map(([r, n]) => `${n - (g.res[r] || 0)} ${resLabel(r, g)}`).join(', ')})};
         Object.entries(it.cost || {}).forEach(([r, n]) => { g.res[r] -= n; });
         g.builds.push({k, fi, si, left: it.h, tot: it.h});
         needBuilder(g);
-        log(g, `🛠️ ${it.name} commandé à l’atelier (étage ${fi === 0 ? '−1' : '−' + (fi + 1)}).`);
+        log(g, i18n('🛠️ {name} commandé à l’atelier (étage {f}).', {name: it.name, f: fi === 0 ? '−1' : '−' + (fi + 1)}));
         return {ok: true};
     }
     function needBuilder(g) { if (!g.people.some(p => p.hp > 0 && p.where === 'base' && p.job === 'construire')) { const free = alive(g).find(p => p.where === 'base' && !p.baby && p.job === 'libre'); if (free) free.job = 'construire'; } }
@@ -672,32 +682,32 @@
     const upgradeCost = (k, L) => Object.fromEntries(Object.entries(ITEMS[k].cost || {}).map(([r, n]) => [r, Math.max(1, Math.ceil(n * (L === 2 ? 0.75 : 1.25)))]));
     function payOrErr(g, cost) {
         const miss = Object.entries(cost).filter(([r, n]) => (g.res[r] || 0) < n);
-        if (miss.length) return `Il manque : ${miss.map(([r, n]) => `${Math.ceil(n - (g.res[r] || 0))} ${resLabel(r, g)}`).join(', ')}.`;
+        if (miss.length) return i18n('Il manque : {list}.', {list: miss.map(([r, n]) => `${Math.ceil(n - (g.res[r] || 0))} ${resLabel(r, g)}`).join(', ')});
         Object.entries(cost).forEach(([r, n]) => { g.res[r] -= n; }); return '';
     }
-    function breakItem(g, fi, si, why) {
+    function breakItem(g, fi, si, why) { // why : une phrase française (traduite ici)
         const k = g.floors[fi]?.slots[si]; if (!k || !breakable(k) || g.broken[slotKey(fi, si)]) return false;
         g.broken[slotKey(fi, si)] = true; g.people.forEach(p => { if (p.act?.at && p.act.at[0] === fi && p.act.at[1] === si) p.act = null; });
-        log(g, `🔧 ${ITEMS[k].ico} ${ITEMS[k].name} ${why || 'tombe en panne'} : il faut le réparer (clique dessus) — ${Object.entries(repairCost(k)).map(([r, n]) => `${n} ${resLabel(r, g)}`).join(', ')}.`, 'alerte');
+        log(g, i18n('🔧 {ico} {name} {why} : il faut le réparer (clique dessus) — {cost}.', {ico: ITEMS[k].ico, name: ITEMS[k].name, why: i18n(why || 'tombe en panne'), cost: Object.entries(repairCost(k)).map(([r, n]) => `${n} ${resLabel(r, g)}`).join(', ')}), 'alerte');
         return true;
     }
     /** réparer une installation en panne : les pièces tout de suite, puis un habitant « Construire » y passe la moitié du temps de construction → {ok, err} */
     function orderRepair(g, fi, si) {
-        const k = g.floors[fi]?.slots[si]; if (!k || !g.broken[slotKey(fi, si)]) return {ok: false, err: 'Rien à réparer ici.'};
-        if (g.builds.some(b => b.fi === fi && b.si === si)) return {ok: false, err: 'C’est déjà commandé.'};
-        if (TRANSPORT[k]?.wear && !has(g, 'etabli')) return {ok: false, err: 'Pour réparer un moyen de transport, il faut un établi (🪚).'};
+        const k = g.floors[fi]?.slots[si]; if (!k || !g.broken[slotKey(fi, si)]) return {ok: false, err: i18n('Rien à réparer ici.')};
+        if (g.builds.some(b => b.fi === fi && b.si === si)) return {ok: false, err: i18n('C’est déjà commandé.')};
+        if (TRANSPORT[k]?.wear && !has(g, 'etabli')) return {ok: false, err: i18n('Pour réparer un moyen de transport, il faut un établi (🪚).')};
         const cost = repairCost(k), err = payOrErr(g, cost); if (err) return {ok: false, err};
         const h = Math.max(1, Math.round((ITEMS[k].h || 4) / 2)); g.builds.push({k, fi, si, left: h, tot: h, rep: true, cost}); needBuilder(g);
-        log(g, `🔧 Réparation de ${ITEMS[k].name} commandée.`); return {ok: true};
+        log(g, i18n('🔧 Réparation de {name} commandée.', {name: ITEMS[k].name})); return {ok: true};
     }
     /** améliorer une installation (niveau 2 puis 3) : ses effets comptent ×1,5 puis ×2 → {ok, err} */
     function orderUpgrade(g, fi, si) {
-        const k = g.floors[fi]?.slots[si], key = slotKey(fi, si), L = (g.lvl[key] || 1) + 1; if (!k || !upgradable(k)) return {ok: false, err: 'Cette installation ne s’améliore pas.'};
-        if (L > 3) return {ok: false, err: 'Déjà au niveau le plus haut.'}; if (g.broken[key]) return {ok: false, err: 'Il faut d’abord la réparer.'};
-        if (g.builds.some(b => b.fi === fi && b.si === si)) return {ok: false, err: 'C’est déjà commandé.'};
+        const k = g.floors[fi]?.slots[si], key = slotKey(fi, si), L = (g.lvl[key] || 1) + 1; if (!k || !upgradable(k)) return {ok: false, err: i18n('Cette installation ne s’améliore pas.')};
+        if (L > 3) return {ok: false, err: i18n('Déjà au niveau le plus haut.')}; if (g.broken[key]) return {ok: false, err: i18n('Il faut d’abord la réparer.')};
+        if (g.builds.some(b => b.fi === fi && b.si === si)) return {ok: false, err: i18n('C’est déjà commandé.')};
         const cost = upgradeCost(k, L), err = payOrErr(g, cost); if (err) return {ok: false, err};
         const h = Math.round((ITEMS[k].h || 3) * (L === 2 ? 1 : 1.5)); g.builds.push({k, fi, si, left: h, tot: h, up: L, cost}); needBuilder(g);
-        log(g, `⬆️ ${ITEMS[k].name} : amélioration au niveau ${L} commandée.`); return {ok: true};
+        log(g, i18n('⬆️ {name} : amélioration au niveau {n} commandée.', {name: ITEMS[k].name, n: L})); return {ok: true};
     }
     /** démonter un objet : on récupère la moitié de ce qu'il a coûté */
     function dismantle(g, fi, si) {
@@ -705,24 +715,24 @@
         g.floors[fi].slots[si] = null; Object.entries(ITEMS[k].cost || {}).forEach(([r, n]) => add(g, r, Math.floor(n / (g.broken[slotKey(fi, si)] ? 3 : 2))));
         delete g.broken[slotKey(fi, si)]; delete g.lvl[slotKey(fi, si)]; if (g.wear) delete g.wear[slotKey(fi, si)]; g.builds = g.builds.filter(b => !(b.fi === fi && b.si === si && (b.rep || b.up)));
         g.people.forEach(p => { if (p.act?.at && p.act.at[0] === fi && p.act.at[1] === si) p.act = null; });
-        log(g, `${ITEMS[k].name} démonté.`); return true;
+        log(g, i18n('{name} démonté.', {name: ITEMS[k].name})); return true;
     }
     /** ↔ réarranger : déplacer une installation (ou ce qui s'y construit) vers une autre place, sans frais ;
      *  sur une place prise, les deux s'échangent (niveau, panne et chantier suivent) → {ok, err} */
     function moveItem(g, fi, si, fj, sj) {
         const okSlot = (f, x) => !!g.floors[f] && Number.isInteger(x) && x >= 0 && x < SLOTS;
-        if (!okSlot(fi, si) || !okSlot(fj, sj)) return {ok: false, err: 'Cette place n’existe pas.'};
-        if (fi === fj && si === sj) return {ok: false, err: 'C’est la même place.'};
+        if (!okSlot(fi, si) || !okSlot(fj, sj)) return {ok: false, err: i18n('Cette place n’existe pas.')};
+        if (fi === fj && si === sj) return {ok: false, err: i18n('C’est la même place.')};
         const a = slotKey(fi, si), b = slotKey(fj, sj), here = (f, x) => g.floors[f].slots[x] || g.builds.some(c => c.fi === f && c.si === x);
-        if (!here(fi, si)) return {ok: false, err: 'Rien à déplacer ici.'};
-        if (inUse(g).v.has(a) || inUse(g).v.has(b)) return {ok: false, err: 'Ce transport est parti en ville ou en convoi.'};
+        if (!here(fi, si)) return {ok: false, err: i18n('Rien à déplacer ici.')};
+        if (inUse(g).v.has(a) || inUse(g).v.has(b)) return {ok: false, err: i18n('Ce transport est parti en ville ou en convoi.')};
         const ka = g.floors[fi].slots[si], kb = g.floors[fj].slots[sj];
         g.floors[fi].slots[si] = kb || null; g.floors[fj].slots[sj] = ka || null;
         [g.lvl ||= {}, g.broken ||= {}, g.wear ||= {}].forEach(m => { const va = m[a], vb = m[b]; delete m[a]; delete m[b]; if (va != null) m[b] = va; if (vb != null) m[a] = vb; });
         g.builds.forEach(c => { if (c.fi === fi && c.si === si) { c.fi = fj; c.si = sj; } else if (c.fi === fj && c.si === sj) { c.fi = fi; c.si = si; } });
         g.people.forEach(p => { const at = p.act?.at; if (!at) return; if (at[0] === fi && at[1] === si) p.act.at = [fj, sj]; else if (at[0] === fj && at[1] === sj) p.act.at = [fi, si]; });
         const nm = k => k ? ITEMS[k].name : '';
-        log(g, kb ? `↔ ${nm(ka) || 'Le chantier'} et ${nm(kb)} échangent leur place.` : `↔ ${nm(ka) || 'Le chantier'} change de place (étage −${fj + 1}).`);
+        log(g, kb ? i18n('↔ {a} et {b} échangent leur place.', {a: nm(ka) || i18n('Le chantier'), b: nm(kb)}) : i18n('↔ {a} change de place (étage −{f}).', {a: nm(ka) || i18n('Le chantier'), f: fj + 1}));
         return {ok: true};
     }
     const JOBS = ['libre', 'creuser', 'construire', 'recycler', 'pedaler', 'garde'];
@@ -731,16 +741,16 @@
         if (!OPT_KEYS.includes(k)) return; g.opt[k] = !!on;
         if (k === 'meteo' && !on) g.event = null;
         if (k === 'chaines' && on) { BASE_PLANS.filter(x => ITEMS[x].chain && !g.plans.includes(x)).forEach(x => g.plans.push(x)); g.city.places.forEach(pl => { const res = PLACE_KINDS[pl.kind][2]; CHAIN_RES.forEach(r => { if (res[r] && pl.max[r] == null) { pl.max[r] = res[r][1]; pl.stock[r] = 0; } }); }); }
-        if (k === 'tuto') { g.tuto = on ? 0 : -1; if (on) log(g, `📘 Tutoriel — ${TUTO[0][0]}`, 'alerte'); }
+        if (k === 'tuto') { g.tuto = on ? 0 : -1; if (on) log(g, i18n('📘 Tutoriel — {step}', {step: TUTO[0][0]}), 'alerte'); }
         if (k === 'feu' && !on) g.fire = null;
         if (k === 'missions' && on && !g.missions.some(m => !m.done)) newMissions(g);
     }
-    function setDiff(g, d) { if (DIFFS[d]) { g.diff = d; log(g, `🎚️ Difficulté : ${DIFFS[d].l}.`); } }
+    function setDiff(g, d) { if (DIFFS[d]) { g.diff = d; log(g, i18n('🎚️ Difficulté : {d}.', {d: DIFFS[d].l})); } }
     /** ♻️ démonter un objet du bric-à-brac (il passe dans la file de l'établi) → {ok, err} */
     function recycle(g, k) {
-        if (!JUNK[k] || !(g.junk[k] > 0)) return {ok: false, err: 'Rien à démonter.'};
+        if (!JUNK[k] || !(g.junk[k] > 0)) return {ok: false, err: i18n('Rien à démonter.')};
         g.junk[k]--; if (!g.junk[k]) delete g.junk[k]; g.recy.push({k, left: JUNK[k][3]});
-        if (!atBase(g).some(p => p.job === 'recycler')) { const free = atBase(g).find(p => !p.baby && p.job === 'libre'); if (free) { free.job = 'recycler'; log(g, `♻️ ${free.name} s’installe pour démonter.`); } }
+        if (!atBase(g).some(p => p.job === 'recycler')) { const free = atBase(g).find(p => !p.baby && p.job === 'libre'); if (free) { free.job = 'recycler'; log(g, i18n('♻️ {name} s’installe pour démonter.', {name: free.name})); } }
         return {ok: true};
     }
     function recycled(g, r, p) {
@@ -750,14 +760,15 @@
         const lost = [];
         Object.entries(got).forEach(([res, n]) => { const put = add(g, res, n); if (put < n) lost.push(`${n - put} ${resLabel(res, g)}`); });
         g.stats.recycled = (g.stats.recycled || 0) + 1;
-        log(g, `♻️ ${p.name} a démonté ${JUNK[r.k][0]} ${JUNK[r.k][1].toLowerCase()} : ${Object.entries(got).map(([res, n]) => `${n} ${resLabel(res, g)}`).join(', ')}.${lost.length ? ` Plus de place pour ${lost.join(', ')}.` : ''}`);
+        const gotTxt = Object.entries(got).map(([res, n]) => `${n} ${resLabel(res, g)}`).join(', ');
+        log(g, lost.length ? i18n('♻️ {name} a démonté {ico} {what} : {got}. Plus de place pour {lost}.', {name: p.name, ico: JUNK[r.k][0], what: lc(JUNK[r.k][1]), got: gotTxt, lost: lost.join(', ')}) : i18n('♻️ {name} a démonté {ico} {what} : {got}.', {name: p.name, ico: JUNK[r.k][0], what: lc(JUNK[r.k][1]), got: gotTxt}));
     }
     /** l'autonomie de tout le monde (prudent, normal, manuel) ou d'un habitant ; et un ordre tout de suite (boire, manger…) */
     function setAuto(g, mode, id = null) { if (!AUTO[mode] && mode !== '') return; if (id) { const p = g.people.find(x => x.id === id); if (p) { if (mode) p.auto = mode; else delete p.auto; } } else if (mode) g.auto = mode; }
     function orderNeed(g, id, k) {
-        const p = g.people.find(x => x.id === id); if (!p || p.hp <= 0 || p.where !== 'base') return {ok: false, err: 'Pas au bunker.'};
-        if (!NEEDS.some(([n]) => n === k)) return {ok: false, err: 'Besoin inconnu.'};
-        p.act = null; if (!start(g, p, k)) return {ok: false, err: k === 'soif' ? 'Plus d’eau.' : k === 'faim' ? 'Plus de nourriture.' : 'Impossible pour l’instant.'};
+        const p = g.people.find(x => x.id === id); if (!p || p.hp <= 0 || p.where !== 'base') return {ok: false, err: i18n('Pas au bunker.')};
+        if (!NEEDS.some(([n]) => n === k)) return {ok: false, err: i18n('Besoin inconnu.')};
+        p.act = null; if (!start(g, p, k)) return {ok: false, err: k === 'soif' ? i18n('Plus d’eau.') : k === 'faim' ? i18n('Plus de nourriture.') : i18n('Impossible pour l’instant.')};
         return {ok: true};
     }
     function setJob(g, id, job) { const p = g.people.find(x => x.id === id); if (p && !p.baby && JOBS.includes(job)) { p.job = job; if (job === 'creuser') g.dig.on = true; } }
@@ -768,13 +779,14 @@
         const steps = (Array.isArray(route) ? route : [route]).slice(0, 6).map(st => (typeof st === 'string' ? {id: st, take} : {id: String(st?.id || ''), take: st?.take ?? take, qty: st?.qty, room: st?.room}))
             .map(stepOf).filter(st => g.city.places.some(x => x.id === st.id));
         const p = g.people.find(x => x.id === id), pl = steps.length ? g.city.places.find(x => x.id === steps[0].id) : null;
-        if (!p || p.hp <= 0) return {ok: false, err: 'Personne à envoyer.'}; if (p.baby || p.child) return {ok: false, err: `${p.name} est bien trop petit·e pour la ville.`}; if (p.where !== 'base') return {ok: false, err: `${p.name} n’est pas au bunker.`}; if (!pl) return {ok: false, err: 'Lieu inconnu.'};
+        if (!p || p.hp <= 0) return {ok: false, err: i18n('Personne à envoyer.')}; if (p.baby || p.child) return {ok: false, err: i18n('{name} est bien trop petit·e pour la ville.', {name: p.name})}; if (p.where !== 'base') return {ok: false, err: i18n('{name} n’est pas au bunker.', {name: p.name})}; if (!pl) return {ok: false, err: i18n('Lieu inconnu.')};
         if (p.act?.k === 'dormir') p.act = null;
         // 🚚 le meilleur transport libre pour ce terrain (le chariot de mine, seulement vers le lieu relié par les rails)
         const terr = cityTerrain(g), {v, a} = bestTransport(g, terr, steps.length === 1 ? steps[0].id : null), cap = carryOf(g, p, {only: true}) + (v?.cap || 0) + (a?.cap || 0);
         p.where = 'dehors'; p.act = null; p.exp = {route: steps, i: 0, place: pl.id, phase: 'aller', from: g.t, until: g.t + travel(g, pl), loot: {}, junk: [], found: [], veh: v?.key || '', beasts: [v?.horse, a?.id].filter(Boolean), cap, terr};
-        const total = routeTime(g, steps), with_ = [v ? ITEMS[v.k].name.toLowerCase() : '', a ? g.pets.find(x => x.id === a.id)?.name : ''].filter(Boolean);
-        log(g, `🚶 ${p.name} part vers ${steps.length > 1 ? `${steps.length} lieux : ${steps.map(st => g.city.places.find(x => x.id === st.id).name).join(' → ')}` : pl.name} (${Math.round(total / 60 * 10) / 10} h de marche en tout, sans compter les fouilles${with_.length ? ` ; avec ${with_.join(' et ')}` : ''}).`);
+        const total = routeTime(g, steps), with_ = [v ? lc(ITEMS[v.k].name) : '', a ? g.pets.find(x => x.id === a.id)?.name : ''].filter(Boolean);
+        const dest = steps.length > 1 ? i18n('{n} lieux : {list}', {n: steps.length, list: steps.map(st => g.city.places.find(x => x.id === st.id).name).join(' → ')}) : pl.name, hh = String(Math.round(total / 60 * 10) / 10);
+        log(g, with_.length ? i18n('🚶 {name} part vers {dest} ({h} h de marche en tout, sans compter les fouilles ; avec {with}).', {name: p.name, dest, h: hh, with: with_.join(` ${i18n('et')} `)}) : i18n('🚶 {name} part vers {dest} ({h} h de marche en tout, sans compter les fouilles).', {name: p.name, dest, h: hh}));
         return {ok: true};
     }
     /** une étape propre : le lieu, ce qu'on rapporte (take : clés, vide = tout) et combien au plus de chaque (qty : {bois: 4}, absent = tout ce qu'il y a) */
@@ -797,11 +809,11 @@
         const pl = p.exp.site ? siteOf(g, p.exp.site) : g.city.places.find(x => x.id === p.exp.place), prev = !p.exp.site && p.exp.i > 0 ? g.city.places.find(x => x.id === p.exp.route[p.exp.i - 1]?.id) : null;
         if (!pl) return false; const back = p.exp.phase === 'aller' ? (prev ? travel(g, prev) : g.t - p.exp.from) : travel(g, pl);
         p.exp.phase = 'retour'; p.exp.until = g.t + Math.max(10, back);
-        log(g, crier(g) ? `📯 Un gamin du quartier court porter le message : « ${p.name}, rentre ! »` : `📻 « ${p.name}, rentre ! » — « Bien reçu, je rentre. »`, 'radio'); return true;
+        log(g, crier(g) ? i18n('📯 Un gamin du quartier court porter le message : « {name}, rentre ! »', {name: p.name}) : i18n('📻 « {name}, rentre ! » — « Bien reçu, je rentre. »', {name: p.name}), 'radio'); return true;
     }
 
     /* ═════════ Les visiteurs à la trappe ═════════ */
-    const resLabel = (r, g = null) => (g ? resInfo(g, r) : RES.find(x => x[0] === r))[2].toLowerCase();
+    const resLabel = (r, g = null) => lc((g ? resInfo(g, r) : RES.find(x => x[0] === r))[2]);
     function newVisit(g) {
         const night = isNight(g.t), day = dayOf(g.t), opts = [['marchand', 0.4]];
         if ((g.extras.length || g.scen === 'h1940') && g.people.length < 10) opts.push(['voyageur', g.scen === 'h1940' ? 0.9 : 0.3]); // 🚗 1940 : des réfugiés sur la route
@@ -813,13 +825,15 @@
             // 🤝 un marchand d'un groupe : plus on s'entend, meilleur est le marché
             const grp = pickOne(g, (g.groups || []).filter(x => !hostile(x) && (x.k === 'marchands' || x.k === 'amis'))), rep = grp?.rep || 0;
             v.give = {r: give, n: Math.max(1, Math.round(rint(g, 4, 10) * (1 + rep / 200)))}; v.want = {r: want, n: Math.max(1, Math.round(rint(g, 3, 8) * (1 - rep / 250)))}; if (grp) v.g = grp.id;
-            log(g, `🔔 On frappe à la trappe : ${grp ? `un marchand de ${grp.name}` : 'un marchand'} propose ${v.give.n} ${resLabel(give, g)} contre ${v.want.n} ${resLabel(want, g)}.`, 'visite'); }
-        if (k === 'voyageur') { v.person = g.extras.shift() || {...invent(g), occ: 'réfugié·e'}; log(g, `🔔 On frappe à la trappe : ${v.person.name}${v.person.occ ? `, ${v.person.occ.toLowerCase()}` : ''}, demande à entrer.`, 'visite'); }
+            const offer = {give: `${v.give.n} ${resLabel(give, g)}`, want: `${v.want.n} ${resLabel(want, g)}`};
+            log(g, grp ? i18n('🔔 On frappe à la trappe : un marchand de {group} propose {give} contre {want}.', {...offer, group: grp.name}) : i18n('🔔 On frappe à la trappe : un marchand propose {give} contre {want}.', offer), 'visite'); }
+        if (k === 'voyageur') { v.person = g.extras.shift() || {...invent(g), occ: i18n('réfugié·e')}; log(g, v.person.occ ? i18n('🔔 On frappe à la trappe : {name}, {occ}, demande à entrer.', {name: v.person.name, occ: v.person.occ.toLowerCase()}) : i18n('🔔 On frappe à la trappe : {name}, demande à entrer.', {name: v.person.name}), 'visite'); }
         if (k === 'pillards') { v.demand = {}; ['nourriture', 'eau', 'essence'].forEach(r => { const n = Math.ceil((g.res[r] || 0) * 0.3); if (n) v.demand[r] = n; });
             const bands = (g.groups || []).filter(x => hostile(x) && g.t >= (x.calm || 0)), band = bands.length ? bands.sort((a, b) => a.rep - b.rep)[rnd(g) < 0.7 ? 0 : bands.length - 1] : null; if (band) v.g = band.id;
             v.strength = Math.round((rint(g, 4, 9) + Math.floor(day / 5) + (band ? band.str - 6 + Math.max(0, -band.rep - 40) / 20 : 0)) * DF(g).raid);
             atBase(g).filter(p => trait(p, 'peureux')).forEach(p => { p.mood = clamp((p.mood ?? 70) - 8, 0, 100); });
-            log(g, `🔔 ${band ? `${band.name[0].toUpperCase()}${band.name.slice(1)} tapent` : 'Des pillards tapent'} sur la trappe : ils veulent ${Object.entries(v.demand).map(([r, n]) => `${n} ${resLabel(r, g)}`).join(', ') || 'tout ce que vous avez'}.`, 'alerte'); }
+            const what = Object.entries(v.demand).map(([r, n]) => `${n} ${resLabel(r, g)}`).join(', ') || i18n('tout ce que vous avez');
+            log(g, band ? i18n('🔔 {band} tapent sur la trappe : ils veulent {what}.', {band: `${band.name[0].toUpperCase()}${band.name.slice(1)}`, what}) : i18n('🔔 Des pillards tapent sur la trappe : ils veulent {what}.', {what}), 'alerte'); }
         g.stats.visits[k]++; g.visit = v;
     }
     /** la force de défense du bunker : porte, pièges, et ceux qui sont là (le tour de garde compte double) */
@@ -829,7 +843,7 @@
         const v = g.visit, win = defense(g) + rint(g, 0, 4) >= v.strength;
         atBase(g).filter(p => !p.baby).forEach(p => gainXp(g, p, 'defendre', 2));
         const band = (g.groups || []).find(x => x.id === v.g);
-        if (win) { g.stats.raidsWon++; const drop = rint(g, 1, 3); add(g, 'metal', drop); log(g, `🛡️ Les pillards repartent bredouilles ! Ils ont laissé ${drop} métal en fuyant.`, 'alerte');
+        if (win) { g.stats.raidsWon++; const drop = rint(g, 1, 3); add(g, 'metal', drop); log(g, i18n('🛡️ Les pillards repartent bredouilles ! Ils ont laissé {n} métal en fuyant.', {n: drop}), 'alerte');
             if (band) { repAdd(g, band, -4, 'vous les avez repoussés'); band.str = Math.max(3, band.str - 1); (g.groups || []).filter(x => !hostile(x)).forEach(x => repAdd(g, x, 2)); } }
         else {
             g.stats.raidsLost++; const took = [];
@@ -837,28 +851,29 @@
             const vic = pickOne(g, atBase(g).filter(p => !p.baby)); if (vic) { hurt(g, vic, 15); if (vic.hp > 0) sicken(g, vic, 'blessure'); }
             atBase(g).forEach(p => { p.mood = clamp((p.mood ?? 70) - 10, 0, 100); });
             if (band) band.str = Math.min(12, band.str + 1);
-            log(g, `💥 Les pillards forcent la trappe${took.length ? ` et emportent ${took.join(', ')}` : ''}${vic ? ` ; ${vic.name} est blessé·e` : ''}. Une porte renforcée et des pièges aideraient.`, 'alerte');
+            const tk = took.join(', ');
+            log(g, took.length && vic ? i18n('💥 Les pillards forcent la trappe et emportent {took} ; {name} est blessé·e. Une porte renforcée et des pièges aideraient.', {took: tk, name: vic.name}) : took.length ? i18n('💥 Les pillards forcent la trappe et emportent {took}. Une porte renforcée et des pièges aideraient.', {took: tk}) : vic ? i18n('💥 Les pillards forcent la trappe ; {name} est blessé·e. Une porte renforcée et des pièges aideraient.', {name: vic.name}) : i18n('💥 Les pillards forcent la trappe. Une porte renforcée et des pièges aideraient.'), 'alerte');
         }
         g.visit = null;
     }
     /** répondre à la trappe : 'oui' / 'non' (marchand, voyageur), 'donner' / 'resister' (pillards) → {ok, err} */
     function answerVisit(g, choice) {
-        const v = g.visit; if (!v) return {ok: false, err: 'Personne à la trappe.'};
+        const v = g.visit; if (!v) return {ok: false, err: i18n('Personne à la trappe.')};
         if (v.k === 'marchand') {
             const grp = (g.groups || []).find(x => x.id === v.g);
-            if (choice === 'oui') { if ((g.res[v.want.r] || 0) < v.want.n) return {ok: false, err: `Il manque ${v.want.n - Math.floor(g.res[v.want.r] || 0)} ${resLabel(v.want.r, g)}.`}; g.res[v.want.r] -= v.want.n; const put = add(g, v.give.r, v.give.n); g.stats.trades++; repAdd(g, grp, 3, 'un marché honnête'); log(g, `🤝 Marché conclu : ${put} ${resLabel(v.give.r, g)} contre ${v.want.n} ${resLabel(v.want.r, g)}.`); }
+            if (choice === 'oui') { if ((g.res[v.want.r] || 0) < v.want.n) return {ok: false, err: i18n('Il manque {what}.', {what: `${v.want.n - Math.floor(g.res[v.want.r] || 0)} ${resLabel(v.want.r, g)}`})}; g.res[v.want.r] -= v.want.n; const put = add(g, v.give.r, v.give.n); g.stats.trades++; repAdd(g, grp, 3, 'un marché honnête'); log(g, i18n('🤝 Marché conclu : {give} contre {want}.', {give: `${put} ${resLabel(v.give.r, g)}`, want: `${v.want.n} ${resLabel(v.want.r, g)}`})); }
             else if (choice === 'voler') { // 🦹 voler le marchand : ça peut marcher, mais tout le monde finit par le savoir
                 const ok = defense(g) + rint(g, 0, 4) >= 7 + rint(g, 0, 4);
-                if (ok) { const put = add(g, v.give.r, v.give.n); log(g, `🦹 Vous prenez ${put} ${resLabel(v.give.r, g)} au marchand sans payer. Il s’enfuit en criant qu’on s’en souviendra.`, 'alerte'); }
-                else log(g, '🦹 Le marchand se méfiait : il repart avec sa marchandise, furieux.', 'alerte');
+                if (ok) { const put = add(g, v.give.r, v.give.n); log(g, i18n('🦹 Vous prenez {what} au marchand sans payer. Il s’enfuit en criant qu’on s’en souviendra.', {what: `${put} ${resLabel(v.give.r, g)}`}), 'alerte'); }
+                else log(g, i18n('🦹 Le marchand se méfiait : il repart avec sa marchandise, furieux.'), 'alerte');
                 g.stats.thefts = (g.stats.thefts || 0) + 1; repAdd(g, grp, -35, 'vous avez volé leur marchand'); (g.groups || []).filter(x => x !== grp && !hostile(x)).forEach(x => repAdd(g, x, -8, 'la nouvelle du vol se répand'));
             }
-            else { repAdd(g, grp, -1); log(g, '🚪 Le marchand repart.'); }
+            else { repAdd(g, grp, -1); log(g, i18n('🚪 Le marchand repart.')); }
         } else if (v.k === 'voyageur') {
-            if (choice === 'oui' && g.people.length < 10) { const p = mkPerson(g, v.person, false, {needs: {soif: 50, faim: 40, sommeil: 50, hygiene: 30, vessie: 80}, mood: 60}); g.people.push(p); log(g, `🤗 ${p.name} entre dans le bunker${p.from ? ` (${p.from})` : ''}. Une bouche de plus, mais aussi des bras.`, 'alerte'); }
-            else log(g, `🚪 ${v.person.name} repart seul·e dans la nuit.`);
+            if (choice === 'oui' && g.people.length < 10) { const p = mkPerson(g, v.person, false, {needs: {soif: 50, faim: 40, sommeil: 50, hygiene: 30, vessie: 80}, mood: 60}); g.people.push(p); log(g, p.from ? i18n('🤗 {name} entre dans le bunker ({from}). Une bouche de plus, mais aussi des bras.', {name: p.name, from: p.from}) : i18n('🤗 {name} entre dans le bunker. Une bouche de plus, mais aussi des bras.', {name: p.name}), 'alerte'); }
+            else log(g, i18n('🚪 {name} repart seul·e dans la nuit.', {name: v.person.name}));
         } else if (v.k === 'pillards') {
-            if (choice === 'donner') { Object.entries(v.demand).forEach(([r, n]) => { g.res[r] = Math.max(0, g.res[r] - n); }); log(g, '🫳 Vous donnez ce qu’ils demandent. Ils s’en vont… pour cette fois.');
+            if (choice === 'donner') { Object.entries(v.demand).forEach(([r, n]) => { g.res[r] = Math.max(0, g.res[r] - n); }); log(g, i18n('🫳 Vous donnez ce qu’ils demandent. Ils s’en vont… pour cette fois.'));
                 const band = (g.groups || []).find(x => x.id === v.g); if (band) { repAdd(g, band, 6, 'vous avez payé'); band.calm = g.t + 2 * 1440; } g.visit = null; return {ok: true}; }
             fight(g); return {ok: true};
         }
@@ -885,30 +900,30 @@
         else if (g.powerOn && has(g, 'generateur') && g.res.essence >= burn) { g.res.essence = Math.max(0, g.res.essence - burn); g.power = true; g.powerSrc = 'essence'; g.batt = Math.min(store, g.batt + h * 0.5); }
         else if (g.powerOn && g.batt >= h) { g.batt -= h; g.power = true; g.powerSrc = 'batteries'; }
         else { g.power = false; g.powerSrc = ''; }
-        if (wasPower && !g.power) log(g, g.powerOn && !has(g, 'generateur') ? '⚡ Le groupe électrogène est en panne : le bunker est dans le noir. Il faut le réparer.' : g.powerOn ? '⚡ Plus d’essence : le groupe électrogène s’arrête, le bunker est dans le noir.' : '⚡ Groupe électrogène éteint.', 'alerte');
-        if (!wasPower && g.power) { log(g, '⚡ Le courant revient.'); g.radioQueue.splice(0).forEach(m => log(g, m + ' (message reçu en retard)', 'radio')); }
+        if (wasPower && !g.power) log(g, g.powerOn && !has(g, 'generateur') ? i18n('⚡ Le groupe électrogène est en panne : le bunker est dans le noir. Il faut le réparer.') : g.powerOn ? i18n('⚡ Plus d’essence : le groupe électrogène s’arrête, le bunker est dans le noir.') : i18n('⚡ Groupe électrogène éteint.'), 'alerte');
+        if (!wasPower && g.power) { log(g, i18n('⚡ Le courant revient.')); g.radioQueue.splice(0).forEach(m => log(g, i18n('{msg} (message reçu en retard)', {msg: m}), 'radio')); }
         if (newHour) hourly(g, hr, season);
-        if (g.tuto >= 0 && g.tuto < TUTO.length && TUTO[g.tuto][1](g)) { g.tuto++; log(g, g.tuto < TUTO.length ? `📘 Bien joué ! Étape ${g.tuto + 1} / ${TUTO.length} — ${TUTO[g.tuto][0]}` : '📘 Tutoriel terminé : tu sais tout ce qu’il faut. Bonne chance !', 'alerte'); if (g.tuto >= TUTO.length) g.tuto = -1; }
+        if (g.tuto >= 0 && g.tuto < TUTO.length && TUTO[g.tuto][1](g)) { g.tuto++; log(g, g.tuto < TUTO.length ? i18n('📘 Bien joué ! Étape {a} / {b} — {step}', {a: g.tuto + 1, b: TUTO.length, step: TUTO[g.tuto][0]}) : i18n('📘 Tutoriel terminé : tu sais tout ce qu’il faut. Bonne chance !'), 'alerte'); if (g.tuto >= TUTO.length) g.tuto = -1; }
         alive(g).filter(p => p.where === 'base').forEach(p => person(g, p, h));
         alive(g).filter(p => p.where === 'dehors').forEach(p => outside(g, p, h));
         alive(g).filter(p => p.where === 'convoi').forEach(p => onRoad(g, p, h));
         if (g.dig.on && g.dig.done >= DIG_HOURS) {
             g.dig = {on: false, done: 0}; g.floors.push({slots: Array(SLOTS).fill(null)});
             g.people.forEach(p => { if (p.job === 'creuser') p.job = 'libre'; });
-            log(g, `⛏️ Un nouvel étage est creusé : étage −${g.floors.length}.`, 'alerte');
+            log(g, i18n('⛏️ Un nouvel étage est creusé : étage −{n}.', {n: g.floors.length}), 'alerte');
         }
         const b = g.builds[0];
         if (b && b.left <= 0 && (b.rep || b.up)) {
             g.builds.shift(); const key = slotKey(b.fi, b.si);
-            if (g.floors[b.fi]?.slots[b.si] === b.k) { if (b.rep) { delete g.broken[key]; g.stats.repairs = (g.stats.repairs || 0) + 1; log(g, `✅ ${ITEMS[b.k].name} est réparé.`, 'alerte'); } else { g.lvl[key] = b.up; log(g, `⬆️ ${ITEMS[b.k].name} passe au niveau ${b.up}.`, 'alerte'); } }
+            if (g.floors[b.fi]?.slots[b.si] === b.k) { if (b.rep) { delete g.broken[key]; g.stats.repairs = (g.stats.repairs || 0) + 1; log(g, i18n('✅ {name} est réparé.', {name: ITEMS[b.k].name}), 'alerte'); } else { g.lvl[key] = b.up; log(g, i18n('⬆️ {name} passe au niveau {n}.', {name: ITEMS[b.k].name, n: b.up}), 'alerte'); } }
             if (!g.builds.length) g.people.forEach(p => { if (p.job === 'construire') p.job = 'libre'; });
         } else if (b && b.left <= 0) {
-            g.builds.shift(); g.floors[b.fi].slots[b.si] = b.k; log(g, `✅ ${ITEMS[b.k].name} est prêt.`, 'alerte');
+            g.builds.shift(); g.floors[b.fi].slots[b.si] = b.k; log(g, i18n('✅ {name} est prêt.', {name: ITEMS[b.k].name}), 'alerte');
             g.stats.built = (g.stats.built || 0) + 1; if (!(g.stats.builtKinds ||= []).includes(b.k)) g.stats.builtKinds.push(b.k);
-            if (ITEMS[b.k].map) { g.city.places.forEach(pl => { pl.seen = true; }); log(g, '🗺️ Tous les lieux de la ville sont marqués sur la carte.'); }
+            if (ITEMS[b.k].map) { g.city.places.forEach(pl => { pl.seen = true; }); log(g, i18n('🗺️ Tous les lieux de la ville sont marqués sur la carte.')); }
             if (!g.builds.length) g.people.forEach(p => { if (p.job === 'construire') p.job = 'libre'; });
         }
-        if (!alive(g).length && !g.over) { checkAch(g); g.over = true; log(g, `☠️ Plus personne en vie. Le bunker a tenu ${dayOf(g.t) - 1 ? `${dayOf(g.t) - 1} jours` : 'moins d’un jour'}.`, 'alerte'); }
+        if (!alive(g).length && !g.over) { checkAch(g); g.over = true; log(g, dayOf(g.t) - 1 ? i18n('☠️ Plus personne en vie. Le bunker a tenu {n} jours.', {n: dayOf(g.t) - 1}) : i18n('☠️ Plus personne en vie. Le bunker a tenu moins d’un jour.'), 'alerte'); }
         return g;
     }
     /** ce qui se passe une fois par heure : météo, eau, air, potager, froid, histoires, visiteurs, naissances, la ville */
@@ -916,22 +931,22 @@
         g.wind = rnd(g) < 0.4;
         // 🌧️ la pluie (plus au printemps, moins l'été) remplit l'eau à filtrer
         const rainK = season === 'printemps' ? 1.5 : season === 'ete' ? 0.5 : 1;
-        if (g.weather.rain && g.t >= g.weather.until) { g.weather.rain = false; log(g, '🌤️ La pluie s’arrête.'); }
-        else if (!g.weather.rain && rnd(g) < 0.06 * rainK * (flood(g) ? 3 : 1)) { g.weather = {rain: true, until: g.t + rint(g, 2, flood(g) ? 14 : 8) * 60}; log(g, `🌧️ Il pleut : ${has(g, 'cuve') ? 'les bidons du toit et les cuves' : 'les bidons du toit'} se remplissent (eau à filtrer).`); }
+        if (g.weather.rain && g.t >= g.weather.until) { g.weather.rain = false; log(g, i18n('🌤️ La pluie s’arrête.')); }
+        else if (!g.weather.rain && rnd(g) < 0.06 * rainK * (flood(g) ? 3 : 1)) { g.weather = {rain: true, until: g.t + rint(g, 2, flood(g) ? 14 : 8) * 60}; log(g, has(g, 'cuve') ? i18n('🌧️ Il pleut : les bidons du toit et les cuves se remplissent (eau à filtrer).') : i18n('🌧️ Il pleut : les bidons du toit se remplissent (eau à filtrer).')); }
         if (g.weather.rain) add(g, 'eausale', rainPerHour(g));
         // ⚗️ le filtre : 3 L par heure et par filtre ; 1 tissu tous les 30 L pour le nettoyer
         const nf = items(g).filter(x => x.k === 'filtre').reduce((n, x) => n + lvK(x.lvl), 0);
         if (nf) {
-            if (g.filterClog && g.res.tissu >= 1) { g.res.tissu -= 1; g.filterClog = false; g.filterUse = 0; log(g, '⚗️ Le filtre est nettoyé (1 tissu) : il marche de nouveau.'); }
+            if (g.filterClog && g.res.tissu >= 1) { g.res.tissu -= 1; g.filterClog = false; g.filterUse = 0; log(g, i18n('⚗️ Le filtre est nettoyé (1 tissu) : il marche de nouveau.')); }
             if (!g.filterClog) {
                 const n = Math.max(0, Math.min(3 * nf, g.res.eausale, cap(g, 'eau') - g.res.eau));
                 if (n > 0) { g.res.eausale -= n; g.res.eau += n; g.filterUse += n; }
-                if (g.filterUse >= 30) { if (g.res.tissu >= 1) { g.res.tissu -= 1; g.filterUse = 0; } else { g.filterClog = true; log(g, '⚗️ Le filtre est encrassé : il faut 1 tissu pour le nettoyer.', 'alerte'); } }
+                if (g.filterUse >= 30) { if (g.res.tissu >= 1) { g.res.tissu -= 1; g.filterUse = 0; } else { g.filterClog = true; log(g, i18n('⚗️ Le filtre est encrassé : il faut 1 tissu pour le nettoyer.'), 'alerte'); } }
             }
         }
         // 🌀 l'air : le conduit s'encrasse, plus vite quand on est nombreux
         g.air = clamp(g.air - (0.6 + 0.25 * atBase(g).length) * kinds(g).filter(k => working(g, k)).reduce((m, k) => m * (ITEMS[k].airK || 1), 1), 0, 100);
-        if (g.air < 30 && !g.said.air) { g.said.air = true; log(g, '🌀 L’air devient lourd : le conduit d’aération est encrassé. Quelqu’un de libre ira le nettoyer.', 'alerte'); }
+        if (g.air < 30 && !g.said.air) { g.said.air = true; log(g, i18n('🌀 L’air devient lourd : le conduit d’aération est encrassé. Quelqu’un de libre ira le nettoyer.'), 'alerte'); }
         // 🌱 le potager : des rations toutes les 8 h, des plantes à midi (deux fois plus avec un bon jardinier)
         const pots = items(g).filter(x => x.k === 'potager'), np = pots.reduce((n, x) => n + lvK(x.lvl), 0), green = best(g, 'cultiver') >= 1.5 ? 2 : 1;
         if (pots.length && hr % 8 === 0 && g.power) pots.forEach(x => { if (takeWater(g, 1)) add(g, 'nourriture', green * lvK(x.lvl)); });
@@ -946,14 +961,14 @@
             if (hr === 6 && opt(g, 'chaines') && g.res.vetements > 0) g.res.vetements = Math.max(0, g.res.vetements - 0.1 * atBase(g).length); // les vêtements s'usent
             if ((has(g, 'poele') || has(g, 'cheminee')) && g.res.bois >= wood) g.res.bois -= wood;
             else if (has(g, 'chaudiere') && g.res.charbon >= 0.25) g.res.charbon -= 0.25;
-            else { g.cold = true; if (!g.said.cold) { g.said.cold = true; log(g, `❄️ Il fait froid dans le bunker${has(g, 'poele') ? ' : plus de bois pour le poêle' : ' : il faudrait un poêle à bois'}. On dort mal, le moral baisse.`, 'alerte'); } }
+            else { g.cold = true; if (!g.said.cold) { g.said.cold = true; log(g, has(g, 'poele') ? i18n('❄️ Il fait froid dans le bunker : plus de bois pour le poêle. On dort mal, le moral baisse.') : i18n('❄️ Il fait froid dans le bunker : il faudrait un poêle à bois. On dort mal, le moral baisse.'), 'alerte'); } }
             if (g.cold && g.scen === 'h1709') atBase(g).forEach(p => { if (!g.warm) hurt(g, p, 0.25); }); // le froid extrême fait mal
         } else g.said.cold = false;
-        if (hr === 6 && dayOf(g.t) > 1 && (dayOf(g.t) - 1) % SEASON_DAYS === 0) { const S = SEASONS.find(x => x[0] === season); log(g, `${S[1]} C’est ${season === 'ete' ? 'l’été' : season === 'hiver' ? 'l’hiver' : season === 'automne' ? 'l’automne' : 'le printemps'}.${season === 'hiver' ? ' Pensez au bois pour le poêle.' : season === 'ete' ? ' Il pleuvra moins : gardez de l’eau.' : ''}`, 'alerte'); }
+        if (hr === 6 && dayOf(g.t) > 1 && (dayOf(g.t) - 1) % SEASON_DAYS === 0) { const S = SEASONS.find(x => x[0] === season); const tip = season === 'hiver' ? i18n('Pensez au bois pour le poêle.') : season === 'ete' ? i18n('Il pleuvra moins : gardez de l’eau.') : ''; log(g, `${i18n(season === 'ete' ? '{ico} C’est l’été.' : season === 'hiver' ? '{ico} C’est l’hiver.' : season === 'automne' ? '{ico} C’est l’automne.' : '{ico} C’est le printemps.', {ico: S[1]})}${tip ? ` ${tip}` : ''}`, 'alerte'); }
         // 📖 les histoires du soir
         if (hr === 20) evening(g);
         // 🔔 la trappe
-        if (g.visit && g.t >= g.visit.until) { if (g.visit.k === 'pillards') fight(g); else { log(g, g.visit.k === 'marchand' ? '🚪 Personne n’a répondu : le marchand est reparti.' : `🚪 Personne n’a répondu : ${g.visit.person.name} est reparti·e.`); g.visit = null; } }
+        if (g.visit && g.t >= g.visit.until) { if (g.visit.k === 'pillards') fight(g); else { log(g, g.visit.k === 'marchand' ? i18n('🚪 Personne n’a répondu : le marchand est reparti.') : i18n('🚪 Personne n’a répondu : {name} est reparti·e.', {name: g.visit.person.name})); g.visit = null; } }
         else if (!g.visit && (dayOf(g.t) >= 2 || g.scen === 'invasion') && rnd(g) < 0.035 * (g.groups?.length ? 0.9 + 0.25 * Math.min(2, hostility(g)) : 1)) newVisit(g); // 🏴 des bandes fâchées : plus de coups à la trappe
         // 👶 une naissance
         if (g.preg && g.t >= g.preg.due) birth(g);
@@ -973,31 +988,32 @@
         // 🥖 le siège de Paris : les obus (après dix jours), et les rats qu'on finit par manger
         if (g.scen === 'h1870') {
             if (hr === 14 && dayOf(g.t) > 10 && rnd(g) < 0.2) { const l = items(g).filter(x => breakable(x.k) && x.fi === 0); if (l.length) { const x = pickOne(g, l); breakItem(g, x.fi, x.si, 'est touché par un éclat d’obus'); } alive(g).filter(p => p.where === 'dehors').forEach(p => hurt(g, p, 6)); }
-            if (hr === 19 && g.res.nourriture < 3 && g.pests >= 10) { g.pests -= 10; add(g, 'nourriture', 2); log(g, '🐀 Faute de mieux, on fait cuire des rats, comme tout Paris cet hiver-là (+2 rations).', 'histoire'); }
+            if (hr === 19 && g.res.nourriture < 3 && g.pests >= 10) { g.pests -= 10; add(g, 'nourriture', 2); log(g, i18n('🐀 Faute de mieux, on fait cuire des rats, comme tout Paris cet hiver-là (+2 rations).'), 'histoire'); }
         }
         if (opt(g, 'feu')) fire(g); else if (g.fire) g.fire = null;
         if (hr === 6 && opt(g, 'age')) aging(g);
         if (hr === 0) snapshot(g);
-        if (hr === 6 && !g.won && dayOf(g.t) - 1 >= goalOf(g)) { g.won = dayOf(g.t); log(g, histOf(g)?.end || `🏆 ${SCENARIOS[g.scen][1]} : vous avez tenu ${goalOf(g)} jours ! On peut continuer aussi longtemps qu’on veut.`, 'alerte'); }
+        if (hr === 6 && !g.won && dayOf(g.t) - 1 >= goalOf(g)) { g.won = dayOf(g.t); log(g, histOf(g)?.end || i18n('🏆 {scen} : vous avez tenu {n} jours ! On peut continuer aussi longtemps qu’on veut.', {scen: SCENARIOS[g.scen][1], n: goalOf(g)}), 'alerte'); }
         checkAch(g);
         if (hr === 6) morningSave(g);
-        if (epi(g) && hr === 9 && rnd(g) < (g.scen === 'h1720' ? 0.16 : 0.12)) { const v = pickOne(g, atBase(g).filter(p => !p.ill && !p.baby)); if (v) { sicken(g, v, 'fievre'); log(g, g.scen === 'h1720' ? `⚕️ ${v.name} a de la fièvre et des bubons : la peste est entrée dans l’abri.` : `🦠 ${v.name} a attrapé la fièvre qui court.`, 'alerte'); diary(g, v, 'J’ai de la fièvre. Pourvu que ce ne soit rien.'); } }
+        if (epi(g) && hr === 9 && rnd(g) < (g.scen === 'h1720' ? 0.16 : 0.12)) { const v = pickOne(g, atBase(g).filter(p => !p.ill && !p.baby)); if (v) { sicken(g, v, 'fievre'); log(g, g.scen === 'h1720' ? i18n('⚕️ {name} a de la fièvre et des bubons : la peste est entrée dans l’abri.', {name: v.name}) : i18n('🦠 {name} a attrapé la fièvre qui court.', {name: v.name}), 'alerte'); diary(g, v, i18n('J’ai de la fièvre. Pourvu que ce ne soit rien.')); } }
     }
     /* ═════════ 🐕 Les animaux, 🐀 les nuisibles ═════════ */
     function feedPets(g) {
         g.pets.forEach(a => { if (a.hurt) a.hurt = Math.max(0, a.hurt - 1); });
         g.pets.filter(a => !(g.convoys || []).some(c => c.beasts.includes(a.id))).forEach(a => { const eat = Object.entries(PETS[a.k][2]); if (eat.every(([r, n]) => (g.res[r] || 0) >= n)) { eat.forEach(([r, n]) => { g.res[r] -= n; }); a.hungry = 0;
                 if (a.k === 'poules') add(g, 'nourriture', 2); if (a.k === 'chevre') { add(g, 'nourriture', 1); atBase(g).forEach(p => { p.mood = clamp((p.mood ?? 70) + 2, 0, 100); }); } }
-            else { a.hungry = (a.hungry || 0) + 1; if (a.hungry === 1) log(g, `${PETS[a.k][0]} ${a.name} n’a rien eu à manger aujourd’hui.`, 'alerte'); } });
+            else { a.hungry = (a.hungry || 0) + 1; if (a.hungry === 1) log(g, i18n('{ico} {name} n’a rien eu à manger aujourd’hui.', {ico: PETS[a.k][0], name: a.name}), 'alerte'); } });
         const gone = g.pets.filter(a => a.hungry >= 3 && !(has(g, 'niche') && a.hungry < 4));
-        gone.forEach(a => { log(g, `${PETS[a.k][0]} ${a.name} est parti·e chercher à manger ailleurs…`, 'alerte'); atBase(g).forEach(p => { p.mood = clamp((p.mood ?? 70) - 6, 0, 100); }); });
+        gone.forEach(a => { log(g, i18n('{ico} {name} est parti·e chercher à manger ailleurs…', {ico: PETS[a.k][0], name: a.name}), 'alerte'); atBase(g).forEach(p => { p.mood = clamp((p.mood ?? 70) - 6, 0, 100); }); });
         g.pets = g.pets.filter(a => !gone.includes(a));
     }
     const petCount = (g, k) => g.pets.filter(a => a.k === k).length;
     function adopt(g, k, by) {
         if (!PETS[k] || g.pets.length >= PETS_MAX) return false; const used = new Set(g.pets.map(a => a.name)), name = pickOne(g, PET_NAMES.filter(n => !used.has(n))) || 'Sans-nom';
-        g.pets.push({id: 'a' + (g.nextId++), k, name, hungry: 0}); log(g, `${PETS[k][0]} ${by ? `${by.name} ramène` : 'Voici'} ${k === 'poules' ? 'des poules' : `un·e ${PETS[k][1].toLowerCase()}`} : ${name} ! (${PETS[k][3]} ; mange ${Object.entries(PETS[k][2]).map(([r, n]) => `${n} ${resLabel(r, g)}`).join(', ')} par jour)`, 'histoire');
-        atBase(g).forEach(p => { p.mood = clamp((p.mood ?? 70) + 5, 0, 100); }); if (by) diary(g, by, `J’ai ramené ${name}, ${k === 'poules' ? 'nos poules' : `un·e ${PETS[k][1].toLowerCase()}`}. Tout le monde l’adore déjà.`); return true;
+        g.pets.push({id: 'a' + (g.nextId++), k, name, hungry: 0}); const what = k === 'poules' ? i18n('des poules') : i18n('un·e {pet}', {pet: lc(PETS[k][1])}), pv = {ico: PETS[k][0], what, name, desc: PETS[k][3], food: Object.entries(PETS[k][2]).map(([r, n]) => `${n} ${resLabel(r, g)}`).join(', ')};
+        log(g, by ? i18n('{ico} {by} ramène {what} : {name} ! ({desc} ; mange {food} par jour)', {...pv, by: by.name}) : i18n('{ico} Voici {what} : {name} ! ({desc} ; mange {food} par jour)', pv), 'histoire');
+        atBase(g).forEach(p => { p.mood = clamp((p.mood ?? 70) + 5, 0, 100); }); if (by) diary(g, by, i18n('J’ai ramené {name}, {what}. Tout le monde l’adore déjà.', {name, what: k === 'poules' ? i18n('nos poules') : what})); return true;
     }
     /** les rats et les cafards : ils viennent quand il y a de quoi manger ; pièges, chat et bocaux les tiennent à distance */
     function pests(g) {
@@ -1005,9 +1021,9 @@
         const kill = (has(g, 'piegerats') ? 15 * lvK(bestLvl(g, 'piegerats')) : 0) + 10 * petCount(g, 'chat');
         const before = g.pests; g.pests = clamp(g.pests + grow - kill, 0, 100);
         if (g.pests >= 10) { const k = g.pests / 100 * 0.15 * (has(g, 'hermetique') ? 0.4 : 1), lf = Math.floor(g.res.nourriture * k * 10) / 10, lp = Math.floor(g.res.plantes * k * 10) / 10;
-            g.res.nourriture -= lf; g.res.plantes -= lp; if (lf + lp >= 1) log(g, `🐀 Les rats ont mangé ${Math.round(lf)} rations${lp >= 1 ? ` et ${Math.round(lp)} plantes` : ''} cette nuit.${has(g, 'piegerats') ? '' : ' Des 🪤 pièges, un 🐈 chat ou des 🫙 bocaux les arrêteraient.'}`, 'alerte'); }
-        if (before < 50 && g.pests >= 50) log(g, '🪳 Les cafards et les rats envahissent le bunker : l’hygiène en pâtit, la fièvre guette.', 'alerte');
-        if (g.pests >= 50 && rnd(g) < 0.08) { const v = pickOne(g, atBase(g).filter(p => !p.ill && !p.baby)); if (v) { sicken(g, v, 'fievre'); log(g, `🤒 ${v.name} a de la fièvre (les rats…).`, 'alerte'); } }
+            g.res.nourriture -= lf; g.res.plantes -= lp; if (lf + lp >= 1) log(g, `${lp >= 1 ? i18n('🐀 Les rats ont mangé {a} rations et {b} plantes cette nuit.', {a: Math.round(lf), b: Math.round(lp)}) : i18n('🐀 Les rats ont mangé {a} rations cette nuit.', {a: Math.round(lf)})}${has(g, 'piegerats') ? '' : ` ${i18n('Des 🪤 pièges, un 🐈 chat ou des 🫙 bocaux les arrêteraient.')}`}`, 'alerte'); }
+        if (before < 50 && g.pests >= 50) log(g, i18n('🪳 Les cafards et les rats envahissent le bunker : l’hygiène en pâtit, la fièvre guette.'), 'alerte');
+        if (g.pests >= 50 && rnd(g) < 0.08) { const v = pickOne(g, atBase(g).filter(p => !p.ill && !p.baby)); if (v) { sicken(g, v, 'fievre'); log(g, i18n('🤒 {name} a de la fièvre (les rats…).', {name: v.name}), 'alerte'); } }
     }
     /* ═════════ 🔥 L'incendie (option) ═════════ */
     const HOT = ['poele', 'chaudiere', 'four', 'fourneau', 'generateur', 'alambic', 'forge'];
@@ -1015,24 +1031,24 @@
         if (!g.fire) {
             const risky = items(g).filter(x => HOT.includes(x.k) || ITEMS[x.k].power); if (!risky.length || rnd(g) >= 0.0012 * risky.length) return;
             const x = pickOne(g, risky); g.fire = {fi: x.fi, power: 40, h: 0}; g.stats.fires = (g.stats.fires || 0) + 1;
-            log(g, `🔥 Le feu a pris à l’étage −${x.fi + 1} (${ITEMS[x.k].name}) !${has(g, 'extincteur') ? '' : ' Tout le monde jette de l’eau. Un 🧯 extincteur l’éteindrait tout de suite.'}`, 'alerte');
-            atBase(g).forEach(p => diary(g, p, 'Le feu a pris au bunker. J’ai cru qu’on allait tous y passer.'));
+            log(g, `${i18n('🔥 Le feu a pris à l’étage −{f} ({name}) !', {f: x.fi + 1, name: ITEMS[x.k].name})}${has(g, 'extincteur') ? '' : ` ${i18n('Tout le monde jette de l’eau. Un 🧯 extincteur l’éteindrait tout de suite.')}`}`, 'alerte');
+            atBase(g).forEach(p => diary(g, p, i18n('Le feu a pris au bunker. J’ai cru qu’on allait tous y passer.')));
         }
         const F = g.fire;
-        if (has(g, 'extincteur')) { log(g, '🧯 L’extincteur éteint le feu. Ouf !', 'alerte'); g.fire = null; return; }
+        if (has(g, 'extincteur')) { log(g, i18n('🧯 L’extincteur éteint le feu. Ouf !'), 'alerte'); g.fire = null; return; }
         const fighters = atBase(g).filter(p => !p.baby && !p.ill).length, want = 2 * fighters, have = g.res.eausale + g.res.eau, used = Math.min(want, have); takeWater(g, used);
         F.power += 10 - used * 6; F.h++; g.air = clamp(g.air - 8, 0, 100);
         atBase(g).forEach(p => { p.mood = clamp((p.mood ?? 70) - 3, 0, 100); }); if (rnd(g) < 0.3) { const v = pickOne(g, atBase(g).filter(p => !p.baby)); if (v) hurt(g, v, 3); }
         items(g).filter(x => x.fi === F.fi && breakable(x.k)).forEach(x => { if (rnd(g) < 0.15) breakItem(g, x.fi, x.si, 'brûle'); });
-        if (F.power <= 0 || F.h >= 8) { log(g, F.power <= 0 ? '🔥 Le feu est éteint. Il faut aérer et réparer.' : '🔥 Le feu s’est éteint de lui-même, après avoir tout noirci.', 'alerte'); g.fire = null; }
+        if (F.power <= 0 || F.h >= 8) { log(g, F.power <= 0 ? i18n('🔥 Le feu est éteint. Il faut aérer et réparer.') : i18n('🔥 Le feu s’est éteint de lui-même, après avoir tout noirci.'), 'alerte'); g.fire = null; }
     }
     /* ═════════ 🧓 Vieillir (option) : un jour de jeu = un an ═════════ */
     function aging(g) {
         alive(g).forEach(p => { p.age = (p.age || 0) + 1;
-            if (p.baby && p.age >= 4) { p.baby = false; p.child = true; log(g, `🧒 ${p.name} a ${p.age} ans : il ou elle aide déjà un peu (pas encore en ville).`, 'histoire'); }
-            else if (p.child && p.age >= 14) { p.child = false; log(g, `🧑 ${p.name} a ${p.age} ans : un·e adulte, qui peut partir en ville.`, 'histoire'); diary(g, p, 'Je suis grand·e maintenant. Je veux aider dehors.'); }
-            if (p.age === 65) log(g, `👴 ${p.name} a 65 ans : il ou elle travaille un peu moins vite, mais en sait long.`);
-            if (p.age >= 80 && rnd(g) < (p.age - 79) * 0.01) { log(g, `🕯️ ${p.name} s’éteint paisiblement, à ${p.age} ans.`, 'alerte'); hurt(g, p, 200, true); } });
+            if (p.baby && p.age >= 4) { p.baby = false; p.child = true; log(g, i18n('🧒 {name} a {n} ans : il ou elle aide déjà un peu (pas encore en ville).', {name: p.name, n: p.age}), 'histoire'); }
+            else if (p.child && p.age >= 14) { p.child = false; log(g, i18n('🧑 {name} a {n} ans : un·e adulte, qui peut partir en ville.', {name: p.name, n: p.age}), 'histoire'); diary(g, p, i18n('Je suis grand·e maintenant. Je veux aider dehors.')); }
+            if (p.age === 65) log(g, i18n('👴 {name} a 65 ans : il ou elle travaille un peu moins vite, mais en sait long.', {name: p.name}));
+            if (p.age >= 80 && rnd(g) < (p.age - 79) * 0.01) { log(g, i18n('🕯️ {name} s’éteint paisiblement, à {n} ans.', {name: p.name, n: p.age}), 'alerte'); hurt(g, p, 200, true); } });
     }
     /** l'efficacité au travail selon l'âge (option) : les enfants aident à moitié, les aînés vont moins vite */
     const ageK = (g, p) => !opt(g, 'age') ? 1 : p.child ? 0.5 : (p.age || 0) >= 65 ? 0.85 : 1;
@@ -1047,13 +1063,13 @@
             if (g.missions.length > 30) g.missions = g.missions.filter(m => !m.done).concat(g.missions.filter(m => m.done).slice(-20));
         }
     }
-    const missionTxt = m => `Retrouver ${DOCS[m.doc][1]} de ${m.name}${m.by ? ` (né·e en ${m.by}${m.bplace ? ` à ${m.bplace}` : ''})` : ''}`;
+    const missionTxt = m => (m.by ? (m.bplace ? i18n('Retrouver {doc} de {name} (né·e en {y} à {place})', {doc: DOCS[m.doc][1], name: m.name, y: String(m.by), place: m.bplace}) : i18n('Retrouver {doc} de {name} (né·e en {y})', {doc: DOCS[m.doc][1], name: m.name, y: String(m.by)})) : i18n('Retrouver {doc} de {name}', {doc: DOCS[m.doc][1], name: m.name}));
     /* ═════════ 🎨 La décoration ═════════ */
     function addDeco(g, fi, k, pid = 0, name = '') {
-        if (!DECOS[k] || !g.floors[fi]) return {ok: false, err: 'Impossible ici.'}; if (!Object.keys(DECOS[k][2]).every(r => resOk(g, r))) return {ok: false, err: 'Pas à cette époque.'}; const l = g.deco[fi] = g.deco[fi] || [];
-        if (l.length >= DECO_MAX) return {ok: false, err: `${DECO_MAX} décorations au plus par étage.`};
+        if (!DECOS[k] || !g.floors[fi]) return {ok: false, err: i18n('Impossible ici.')}; if (!Object.keys(DECOS[k][2]).every(r => resOk(g, r))) return {ok: false, err: i18n('Pas à cette époque.')}; const l = g.deco[fi] = g.deco[fi] || [];
+        if (l.length >= DECO_MAX) return {ok: false, err: i18n('{n} décorations au plus par étage.', {n: DECO_MAX})};
         const err = payOrErr(g, DECOS[k][2]); if (err) return {ok: false, err};
-        l.push({k, ...(k === 'portrait' && name ? {pid: Number(pid) || 0, name: str(name, 80)} : {})}); log(g, `🎨 ${DECOS[k][0]} ${DECOS[k][1]}${k === 'portrait' && name ? ` de ${name}` : ''} à l’étage −${fi + 1}.`); return {ok: true};
+        l.push({k, ...(k === 'portrait' && name ? {pid: Number(pid) || 0, name: str(name, 80)} : {})}); log(g, k === 'portrait' && name ? i18n('🎨 {ico} {deco} de {name} à l’étage −{f}.', {ico: DECOS[k][0], deco: DECOS[k][1], name, f: fi + 1}) : i18n('🎨 {ico} {deco} à l’étage −{f}.', {ico: DECOS[k][0], deco: DECOS[k][1], f: fi + 1})); return {ok: true};
     }
     function removeDeco(g, fi, i) { const l = g.deco[fi]; if (l && l[i]) l.splice(i, 1); }
     const decoMood = g => Math.min(0.4, Object.values(g.deco || {}).flat().reduce((a, d) => a + (DECOS[d.k]?.[3] || 0) * (d.k === 'guirlande' && !g.power ? 0 : 1), 0));
@@ -1065,7 +1081,7 @@
     }
     /* ═════════ 🌪️ Les catastrophes ═════════ */
     function weatherEvents(g, season) {
-        if (g.event && g.t >= g.event.until) { log(g, `${EVENTS[g.event.k][0]} ${EVENTS[g.event.k][1]} : c’est fini.`); g.event = null; }
+        if (g.event && g.t >= g.event.until) { log(g, i18n('{ico} {name} : c’est fini.', {ico: EVENTS[g.event.k][0], name: EVENTS[g.event.k][1]})); g.event = null; }
         if (g.event) { if (g.event.k === 'tempete') { g.air = clamp(g.air - 3, 0, 100); alive(g).filter(p => p.where === 'dehors').forEach(p => hurt(g, p, 1.5)); } return; }
         if (dayOf(g.t) < 2 || rnd(g) >= 0.01) return;
         const w = [['canicule', season === 'ete' ? 4 : 0.3], ['tempete', 1], ['inondation', (season === 'printemps' ? 1.5 : 0.6) * (flood(g) ? 4 : 1)], ['seisme', 0.5], ['orage', g.weather.rain ? 2 : 0.6], ['froid', season === 'hiver' ? 0 : season === 'automne' ? 1.5 : 0.5]];
@@ -1074,14 +1090,14 @@
     }
     function startEvent(g, k) {
         const E = EVENTS[k]; if (!E) return; g.stats.events = (g.stats.events || 0) + 1;
-        log(g, `${E[0]} ${E[1]} ! ${E[2][0].toUpperCase()}${E[2].slice(1)}.`, 'alerte');
+        log(g, i18n('{ico} {name} ! {what}.', {ico: E[0], name: E[1], what: `${E[2][0].toUpperCase()}${E[2].slice(1)}`}), 'alerte');
         const breakables = fl => items(g).filter(x => breakable(x.k) && (fl == null || x.fi === fl));
         if (['canicule', 'tempete', 'froid'].includes(k)) g.event = {k, until: g.t + rint(g, 8, 36) * 60};
         if (k === 'orage') { g.event = {k, until: g.t + rint(g, 3, 8) * 60}; const el = breakables().filter(x => ITEMS[x.k].power || ['generateur', 'solaire', 'eolienne', 'batteries', 'radio'].includes(x.k)); if (el.length) { const x = pickOne(g, el); breakItem(g, x.fi, x.si, 'est grillé par la foudre'); } }
         if (k === 'inondation') { add(g, 'eausale', 15); const l = breakables(g.floors.length - 1); if (l.length) { const x = pickOne(g, l); breakItem(g, x.fi, x.si, 'est noyé'); } }
         if (k === 'seisme') { for (let i = 0; i < rint(g, 1, 2); i++) { const l = breakables(); if (l.length) { const x = pickOne(g, l); breakItem(g, x.fi, x.si, 'est abîmé par la secousse'); } }
-            g.dig.done = Math.max(0, g.dig.done - 3); if (rnd(g) < 0.4) { const v = pickOne(g, atBase(g).filter(p => !p.baby)); if (v) { hurt(g, v, 10); if (v.hp > 0) sicken(g, v, 'blessure'); log(g, `🩹 ${v.name} est blessé·e par une chute de gravats.`, 'alerte'); } } }
-        atBase(g).forEach(p => diary(g, p, `${E[0]} ${E[1]} aujourd’hui. ${pickOne(g, ['J’ai eu peur.', 'On s’est serré les coudes.', 'Encore une épreuve.', 'Il faudra réparer.'])}`));
+            g.dig.done = Math.max(0, g.dig.done - 3); if (rnd(g) < 0.4) { const v = pickOne(g, atBase(g).filter(p => !p.baby)); if (v) { hurt(g, v, 10); if (v.hp > 0) sicken(g, v, 'blessure'); log(g, i18n('🩹 {name} est blessé·e par une chute de gravats.', {name: v.name}), 'alerte'); } } }
+        atBase(g).forEach(p => diary(g, p, i18n('{ico} {name} aujourd’hui. {feel}', {ico: E[0], name: E[1], feel: i18n(pickOne(g, ['J’ai eu peur.', 'On s’est serré les coudes.', 'Encore une épreuve.', 'Il faudra réparer.']))})));
     }
     /** 🔧 l'usure : chaque installation peut tomber en panne (plus souvent les machines, et selon la difficulté) */
     function wear(g) {
@@ -1097,18 +1113,18 @@
     }
     function trading(g, hr) {
         const m = g.market;
-        if (hasRadio(g) && hr === 7 && m.d !== dayOf(g.t)) { marketDay(g); if (crier(g)) log(g, `📯 Le crieur annonce le marché : ${m.offers.length} offres aujourd’hui (onglet Crieur).`); else if (g.power) log(g, `📻 Le marché de la radio : ${m.offers.length} offres aujourd’hui (onglet Radio).`); }
-        m.deals.filter(d => g.t >= d.t).forEach(d => { if (d.ok) { const put = add(g, d.r, d.n); log(g, `🚚 Un messager de ${d.who} apporte ${put} ${resLabel(d.r, g)}.`, 'alerte'); } else log(g, `😠 Le messager de ${d.who} n’est jamais venu… On s’est fait avoir.`, 'alerte'); });
+        if (hasRadio(g) && hr === 7 && m.d !== dayOf(g.t)) { marketDay(g); if (crier(g)) log(g, i18n('📯 Le crieur annonce le marché : {n} offres aujourd’hui (onglet Crieur).', {n: m.offers.length})); else if (g.power) log(g, i18n('📻 Le marché de la radio : {n} offres aujourd’hui (onglet Radio).', {n: m.offers.length})); }
+        m.deals.filter(d => g.t >= d.t).forEach(d => { if (d.ok) { const put = add(g, d.r, d.n); log(g, i18n('🚚 Un messager de {who} apporte {what}.', {who: d.who, what: `${put} ${resLabel(d.r, g)}`}), 'alerte'); } else log(g, i18n('😠 Le messager de {who} n’est jamais venu… On s’est fait avoir.', {who: d.who}), 'alerte'); });
         m.deals = m.deals.filter(d => g.t < d.t);
     }
     /** accepter une offre du marché : on paie tout de suite, un messager apporte la marchandise quelques heures plus tard → {ok, err} */
     function trade(g, id) {
-        if (!hasRadio(g) || (!g.power && !crier(g))) return {ok: false, err: 'Il faut la radio et de l’électricité.'};
-        const m = g.market, i = m.offers.findIndex(o => o.id === id); if (i < 0) return {ok: false, err: 'Cette offre n’existe plus.'};
-        const o = m.offers[i]; if ((g.res[o.want.r] || 0) < o.want.n) return {ok: false, err: `Il manque ${Math.ceil(o.want.n - (g.res[o.want.r] || 0))} ${resLabel(o.want.r, g)}.`};
+        if (!hasRadio(g) || (!g.power && !crier(g))) return {ok: false, err: i18n('Il faut la radio et de l’électricité.')};
+        const m = g.market, i = m.offers.findIndex(o => o.id === id); if (i < 0) return {ok: false, err: i18n('Cette offre n’existe plus.')};
+        const o = m.offers[i]; if ((g.res[o.want.r] || 0) < o.want.n) return {ok: false, err: i18n('Il manque {what}.', {what: `${Math.ceil(o.want.n - (g.res[o.want.r] || 0))} ${resLabel(o.want.r, g)}`})};
         const grp = (g.groups || []).find(x => x.id === o.g); repAdd(g, grp, 2);
         g.res[o.want.r] -= o.want.n; m.offers.splice(i, 1); m.deals.push({t: g.t + rint(g, 3, 8) * 60, r: o.give.r, n: o.give.n, who: o.who, ok: grp && grp.rep >= 30 ? true : rnd(g) > 0.05}); g.stats.trades++;
-        log(g, `${crier(g) ? '📯' : '📻'} Marché conclu avec ${o.who} : ${o.want.n} ${resLabel(o.want.r, g)} envoyés ; ${o.give.n} ${resLabel(o.give.r, g)} arriveront par messager.`); return {ok: true};
+        log(g, i18n('{ico} Marché conclu avec {who} : {want} envoyés ; {give} arriveront par messager.', {ico: crier(g) ? '📯' : '📻', who: o.who, want: `${o.want.n} ${resLabel(o.want.r, g)}`, give: `${o.give.n} ${resLabel(o.give.r, g)}`})); return {ok: true};
     }
     /* ═════════ 🎭 L'entente, 📈 les progrès, 📔 le journal ═════════ */
     const relKey = (a, b) => [a.id, b.id].sort().join('|');
@@ -1120,8 +1136,8 @@
             const d = rint(g, -2, 3) + 2 * (trait(a, 'sociable') + trait(b, 'sociable')) - (trait(a, 'ronchon') + trait(b, 'ronchon')) + (a.job === b.job && a.job !== 'libre' ? 1 : 0)
                 - (g.feud && g.feud.includes(a.id) && g.feud.includes(b.id) ? 3 : 0) - ((trait(a, 'solitaire') || trait(b, 'solitaire')) && here.length > 4 ? 1 : 0);
             const now = clamp(before + d, -50, 50); g.rel[k] = now;
-            if (before < 25 && now >= 25) { log(g, `🤝 ${a.name} et ${b.name} sont devenu·e·s ami·e·s.`, 'histoire'); diary(g, a, `${b.name} est devenu·e un·e vrai·e ami·e.`); diary(g, b, `${a.name} est devenu·e un·e vrai·e ami·e.`); }
-            if (before > -25 && now <= -25) { log(g, `😠 ${a.name} et ${b.name} ne se supportent plus.`, 'alerte'); diary(g, a, `Je ne supporte plus ${b.name}.`); diary(g, b, `Je ne supporte plus ${a.name}.`); }
+            if (before < 25 && now >= 25) { log(g, i18n('🤝 {a} et {b} sont devenu·e·s ami·e·s.', {a: a.name, b: b.name}), 'histoire'); diary(g, a, i18n('{name} est devenu·e un·e vrai·e ami·e.', {name: b.name})); diary(g, b, i18n('{name} est devenu·e un·e vrai·e ami·e.', {name: a.name})); }
+            if (before > -25 && now <= -25) { log(g, i18n('😠 {a} et {b} ne se supportent plus.', {a: a.name, b: b.name}), 'alerte'); diary(g, a, i18n('Je ne supporte plus {name}.', {name: b.name})); diary(g, b, i18n('Je ne supporte plus {name}.', {name: a.name})); }
         }));
         couples(g, here);
     }
@@ -1130,17 +1146,17 @@
         if (!p || p.baby || !SKILL_KEYS.includes(k) || !(h > 0)) return; p.xp = p.xp || {}; p.xp[k] = (p.xp[k] || 0) + h;
         const cur = p.sk[k] || 1, need = 12 + 32 * (cur - 1);
         if (p.xp[k] >= need && cur < 2.5) { p.xp[k] -= need; p.sk[k] = Math.round(Math.min(2.5, cur + 0.1) * 100) / 100; const S = SKILLS.find(x => x[0] === k);
-            log(g, `📈 ${p.name} progresse : ${S[1]} ${S[2].toLowerCase()} ×${p.sk[k].toFixed(1).replace('.', ',')}.`); diary(g, p, `J’ai fait des progrès pour ${S[2].toLowerCase()} : ça vient tout seul, maintenant.`); }
+            log(g, i18n('📈 {name} progresse : {ico} {skill} ×{n}.', {name: p.name, ico: S[1], skill: lc(S[2]), n: p.sk[k].toFixed(1).replace('.', ',')})); diary(g, p, i18n('J’ai fait des progrès pour {skill} : ça vient tout seul, maintenant.', {skill: lc(S[2])})); }
     }
     function diary(g, p, txt) { if (!p || p.baby) return; p.diary = Array.isArray(p.diary) ? p.diary : []; p.diary.unshift({d: dayOf(g.t), t: g.t, txt: String(txt).slice(0, 300)}); if (p.diary.length > 40) p.diary.length = 40; }
     /** une ligne par jour et par habitant : comment il se sent, ce qu'il a fait */
     function diaryDay(g) {
         atBase(g).filter(p => !p.baby).forEach(p => {
             const m = p.mood ?? 70;
-            const feel = pickOne(g, m >= 75 ? ['Bonne journée.', 'Je me sens bien, malgré tout.', 'On rit encore, ici.'] : m >= 45 ? ['Une journée comme les autres.', 'On tient.', 'Le temps est long sous terre.'] : m >= 20 ? ['Dure journée.', 'J’ai le cafard.', 'Je pense à ceux d’en haut.'] : ['Je n’en peux plus.', 'Tout me pèse.', 'Je voudrais revoir le ciel.']);
-            const did = {creuser: 'J’ai creusé toute la journée, j’ai mal au dos.', construire: 'J’ai travaillé à l’atelier.', recycler: 'J’ai démonté de vieux objets : on y trouve de tout.', garde: 'J’ai monté la garde près de la trappe.', pedaler: 'J’ai pédalé pour la lumière.'}[p.job] || '';
-            const low = NEEDS.filter(([k]) => p.needs[k] < 20).map(([, , l]) => l.toLowerCase());
-            const more = [g.cold ? (g.warm ? 'Il fait froid, heureusement il y a les vêtements chauds.' : 'Il fait si froid…') : '', p.ill ? 'Je suis malade.' : '', low.length ? `Ça ne va pas fort côté ${low.join(', ')}.` : ''];
+            const feel = i18n(pickOne(g, m >= 75 ? ['Bonne journée.', 'Je me sens bien, malgré tout.', 'On rit encore, ici.'] : m >= 45 ? ['Une journée comme les autres.', 'On tient.', 'Le temps est long sous terre.'] : m >= 20 ? ['Dure journée.', 'J’ai le cafard.', 'Je pense à ceux d’en haut.'] : ['Je n’en peux plus.', 'Tout me pèse.', 'Je voudrais revoir le ciel.']));
+            const did = i18n({creuser: 'J’ai creusé toute la journée, j’ai mal au dos.', construire: 'J’ai travaillé à l’atelier.', recycler: 'J’ai démonté de vieux objets : on y trouve de tout.', garde: 'J’ai monté la garde près de la trappe.', pedaler: 'J’ai pédalé pour la lumière.'}[p.job] || '');
+            const low = NEEDS.filter(([k]) => p.needs[k] < 20).map(([, , l]) => lc(l));
+            const more = [g.cold ? (g.warm ? i18n('Il fait froid, heureusement il y a les vêtements chauds.') : i18n('Il fait si froid…')) : '', p.ill ? i18n('Je suis malade.') : '', low.length ? i18n('Ça ne va pas fort côté {what}.', {what: low.join(', ')}) : ''];
             diary(g, p, [feel, did, ...more].filter(Boolean).join(' '));
         });
     }
@@ -1150,7 +1166,7 @@
             if (ITEMS[k].chain && !opt(g, 'chaines')) return;
             const all = items(g).filter(x => x.k === k), ins = Object.entries(P.in || {}), k2 = P.skill && best(g, P.skill) >= 1.5 ? 2 : 1;
             for (const x of all) {
-                if (!ins.every(([r, q]) => (g.res[r] || 0) >= q)) { if (!g.said['prod_' + k]) { g.said['prod_' + k] = true; log(g, `${ITEMS[k].ico} ${ITEMS[k].name} : il manque ${ins.filter(([r, q]) => (g.res[r] || 0) < q).map(([r]) => resLabel(r, g)).join(', ')} pour fonctionner.`); } return; }
+                if (!ins.every(([r, q]) => (g.res[r] || 0) >= q)) { if (!g.said['prod_' + k]) { g.said['prod_' + k] = true; log(g, i18n('{ico} {name} : il manque {what} pour fonctionner.', {ico: ITEMS[k].ico, name: ITEMS[k].name, what: ins.filter(([r, q]) => (g.res[r] || 0) < q).map(([r]) => resLabel(r, g)).join(', ')})); } return; }
                 ins.forEach(([r, q]) => { g.res[r] -= q; }); Object.entries(P.out).forEach(([r, q]) => add(g, r, q * k2 * lvK(x.lvl))); g.said['prod_' + k] = false;
                 if (P.skill) { const w = atBase(g).filter(o => !o.baby).sort((a, b) => (b.sk?.[P.skill] || 1) - (a.sk?.[P.skill] || 1))[0]; if (w) gainXp(g, w, P.skill, Math.min(P.every, 4)); }
             }
@@ -1164,18 +1180,18 @@
         const gain = 8 + ((teller.sk?.raconter || 1) > 1 ? 4 : 0) + (heir(g, 'livre') ? 3 : 0);
         here.forEach(p => { p.mood = clamp((p.mood ?? 70) + gain, 0, 100); });
         g.stats.stories++;
-        const what = lore ? (lore.kind === 'recipe' ? `raconte la recette « ${lore.title} »` : lore.kind === 'song' ? `chante « ${lore.title} »` : `raconte le souvenir « ${lore.title} »`) : `raconte ${pickOne(g, TALES)}`;
-        const quote = lore?.text ? ` : « ${lore.text.slice(0, 140)}${lore.text.length > 140 ? '…' : ''} »` : '';
-        log(g, `📖 Le soir, ${teller.name} ${what}${quote}. Le moral remonte.`, 'histoire'); gainXp(g, teller, 'raconter', 1.5);
+        const what = lore ? (lore.kind === 'recipe' ? i18n('raconte la recette « {title} »', {title: lore.title}) : lore.kind === 'song' ? i18n('chante « {title} »', {title: lore.title}) : i18n('raconte le souvenir « {title} »', {title: lore.title})) : i18n('raconte {tale}', {tale: pickOne(g, TALES)});
+        const quote = lore?.text ? `${lore.text.slice(0, 140)}${lore.text.length > 140 ? '…' : ''}` : '';
+        log(g, quote ? i18n('📖 Le soir, {name} {what} : « {quote} ». Le moral remonte.', {name: teller.name, what, quote}) : i18n('📖 Le soir, {name} {what}. Le moral remonte.', {name: teller.name, what}), 'histoire'); gainXp(g, teller, 'raconter', 1.5);
         // 👵 l'aîné·e apprend son métier aux autres
         const adults = here.filter(p => !p.baby), elder = adults.filter(p => !(g.appr || []).some(x => x.m === p.id)).sort((a, b) => (a.by || 9999) - (b.by || 9999))[0];
         const sk = elder && SKILL_KEYS.filter(k => (elder.sk?.[k] || 1) >= 1.5).sort((a, b) => elder.sk[b] - elder.sk[a])[0];
         const learner = sk && adults.filter(o => o !== elder && (o.sk?.[sk] || 1) < elder.sk[sk] - 0.2).sort((a, b) => (a.sk[sk] || 1) - (b.sk[sk] || 1))[0];
-        if (learner) { gainXp(g, learner, sk, 2); log(g, `👵 ${elder.name} apprend à ${learner.name} à ${SKILLS.find(x => x[0] === sk)[2].toLowerCase()}.`); }
-        adults.forEach((a, i) => adults.slice(i + 1).forEach(b => { if (relOf(g, a, b) <= -25 && rnd(g) < 0.3) { a.mood = clamp(a.mood - 5, 0, 100); b.mood = clamp(b.mood - 5, 0, 100); log(g, `💢 ${a.name} et ${b.name} se disputent à table.`); } }));
+        if (learner) { gainXp(g, learner, sk, 2); log(g, i18n('👵 {a} apprend à {b} à {skill}.', {a: elder.name, b: learner.name, skill: lc(SKILLS.find(x => x[0] === sk)[2])})); }
+        adults.forEach((a, i) => adults.slice(i + 1).forEach(b => { if (relOf(g, a, b) <= -25 && rnd(g) < 0.3) { a.mood = clamp(a.mood - 5, 0, 100); b.mood = clamp(b.mood - 5, 0, 100); log(g, i18n('💢 {a} et {b} se disputent à table.', {a: a.name, b: b.name})); } }));
         if (g.feud) {
             const [a, b] = g.feud.map(id => g.people.find(p => p.id === id));
-            if (a && b && a.hp > 0 && b.hp > 0 && a.where === 'base' && b.where === 'base' && rnd(g) < 0.25) { a.mood = clamp(a.mood - 6, 0, 100); b.mood = clamp(b.mood - 6, 0, 100); log(g, `⚡ ${a.name} et ${b.name} se disputent encore (de vieilles histoires de famille).`); }
+            if (a && b && a.hp > 0 && b.hp > 0 && a.where === 'base' && b.where === 'base' && rnd(g) < 0.25) { a.mood = clamp(a.mood - 6, 0, 100); b.mood = clamp(b.mood - 6, 0, 100); log(g, i18n('⚡ {a} et {b} se disputent encore (de vieilles histoires de famille).', {a: a.name, b: b.name})); }
         }
     }
     /** une naissance possible : un berceau, un couple au moral, qui ne sont pas parents de sang */
@@ -1187,7 +1203,7 @@
         ad.filter(p => p.gender === 'female').forEach(a => ad.filter(p => p.gender === 'male').forEach(b => { if (!a.kin.includes(b.id) && (a.spouses || []).includes(b.id)) couples.push([a, b]); }));
         if (!couples.length) return;
         const [m, f] = pickOne(g, couples);
-        if (rnd(g) < 0.06) { g.preg = {m: m.id, f: f.id, due: g.t + 6 * 1440}; log(g, `🤰 Une bonne nouvelle : ${m.name} attend un bébé de ${f.name}. Naissance dans six jours.`, 'alerte'); }
+        if (rnd(g) < 0.06) { g.preg = {m: m.id, f: f.id, due: g.t + 6 * 1440}; log(g, i18n('🤰 Une bonne nouvelle : {m} attend un bébé de {f}. Naissance dans six jours.', {m: m.name, f: f.name}), 'alerte'); }
     }
     function birth(g) {
         const m = g.people.find(p => p.id === g.preg.m), f = g.people.find(p => p.id === g.preg.f); g.preg = null;
@@ -1197,16 +1213,16 @@
         const last = (f?.name || m.name).split(/\s+/).filter(w => w.length > 1 && w === w.toUpperCase()).join(' ') || (f?.name || m.name).split(/\s+/).slice(-1)[0];
         const baby = mkPerson(g, {name: `${first} ${last}`, gender}, false, {baby: true, parents: [m.id, f?.id].filter(Boolean), needs: {soif: 90, faim: 90, sommeil: 90, hygiene: 90, vessie: 90}, mood: 90});
         baby.kin = [m.id, f?.id].filter(Boolean); [m, f].forEach(x => { if (x && !x.kin.includes(baby.id)) x.kin.push(baby.id); });
-        g.people.push(baby); g.births.push({name: baby.name, m: m.name, f: f?.name || '', day: dayOf(g.t)}); [m, f].forEach(x => diary(g, x, `${baby.name} est né·e ! Le plus beau jour sous terre.`));
+        g.people.push(baby); g.births.push({name: baby.name, m: m.name, f: f?.name || '', day: dayOf(g.t)}); [m, f].forEach(x => diary(g, x, i18n('{name} est né·e ! Le plus beau jour sous terre.', {name: baby.name})));
         atBase(g).forEach(p => { p.mood = clamp((p.mood ?? 70) + 15, 0, 100); });
-        log(g, `👶 ${baby.name} est né·e au bunker ! ${m.name}${f ? ` et ${f.name}` : ''} sont aux anges.`, 'alerte');
+        log(g, f ? i18n('👶 {name} est né·e au bunker ! {m} et {f} sont aux anges.', {name: baby.name, m: m.name, f: f.name}) : i18n('👶 {name} est né·e au bunker ! {m} sont aux anges.', {name: baby.name, m: m.name}), 'alerte');
     }
     function hurt(g, p, n, quiet = false) {
         const was = p.hp; p.hp = clamp(p.hp - n, 0, 100);
         if (p.hp <= 0 && was > 0) {
-            p.act = null; p.ill = null; g.stats.deaths.push({name: p.name, day: dayOf(g.t)}); alive(g).forEach(o => diary(g, o, `${p.name} nous a quitté·e·s. Je n’arrive pas à y croire.`));
+            p.act = null; p.ill = null; g.stats.deaths.push({name: p.name, day: dayOf(g.t)}); alive(g).forEach(o => diary(g, o, i18n('{name} nous a quitté·e·s. Je n’arrive pas à y croire.', {name: p.name})));
             alive(g).forEach(o => { o.mood = clamp((o.mood ?? 70) - 20, 0, 100); });
-            if (!quiet) log(g, p.where === 'dehors' ? `📻 Plus de nouvelles de ${p.name}…` : p.where === 'convoi' ? `📻 Le convoi annonce une terrible nouvelle : ${p.name} est mort·e en route.` : `☠️ ${p.name} est mort·e.`, 'alerte');
+            if (!quiet) log(g, p.where === 'dehors' ? i18n('📻 Plus de nouvelles de {name}…', {name: p.name}) : p.where === 'convoi' ? i18n('📻 Le convoi annonce une terrible nouvelle : {name} est mort·e en route.', {name: p.name}) : i18n('☠️ {name} est mort·e.', {name: p.name}), 'alerte');
             masterDied(g, p); stopApprentice(g, p.id);
         }
     }
@@ -1218,20 +1234,22 @@
         if (p.ill) {
             hurt(g, p, (p.ill.k === 'fievre' ? 0.8 : 0.5) * h); if (p.hp <= 0) return;
             p.ill.left -= h * (p.where === 'base' ? best(g, 'soigner') * (has(g, 'infirmerie') ? 2 : 1) * mult(g, 'healK') : 0.7);
-            if (p.ill.left <= 0) { log(g, `😌 ${p.name} est guéri·e ${p.ill.k === 'fievre' ? 'de sa fièvre' : 'de sa blessure'}.`); p.ill = null; }
+            if (p.ill.left <= 0) { log(g, p.ill.k === 'fievre' ? i18n('😌 {name} est guéri·e de sa fièvre.', {name: p.name}) : i18n('😌 {name} est guéri·e de sa blessure.', {name: p.name})); p.ill = null; }
             else if (p.where === 'base' && !p.ill.treated) treat(g, p);
         } else if (!loss && NEEDS.every(([k]) => p.needs[k] >= 30)) p.hp = clamp(p.hp + h * (p.where === 'base' && has(g, 'infirmerie') ? 2 : 1), 0, 100);
-        if (p.hp > 0 && p.hp < 45 && p.where === 'base' && g.res.medic >= 1 && !p.act) { g.res.medic -= 1; p.hp = clamp(p.hp + 25, 0, 100); log(g, `💊 ${p.name} prend des médicaments.`); }
+        if (p.hp > 0 && p.hp < 45 && p.where === 'base' && g.res.medic >= 1 && !p.act) { g.res.medic -= 1; p.hp = clamp(p.hp + 25, 0, 100); log(g, i18n('💊 {name} prend des médicaments.', {name: p.name})); }
     }
     /** soigner une maladie : les médicaments d'abord, sinon un remède de grand-mère (les plantes, et une recette de la famille) */
     function treat(g, p) {
-        const what = p.ill.k === 'fievre' ? 'sa fièvre' : 'sa blessure';
-        if (g.res.medic >= 1) { g.res.medic -= 1; p.ill.left -= 12; p.ill.treated = true; log(g, `💊 ${p.name} prend des médicaments contre ${what}.`); return; }
+        const fev = p.ill.k === 'fievre';
+        if (g.res.medic >= 1) { g.res.medic -= 1; p.ill.left -= 12; p.ill.treated = true; log(g, fev ? i18n('💊 {name} prend des médicaments contre sa fièvre.', {name: p.name}) : i18n('💊 {name} prend des médicaments contre sa blessure.', {name: p.name})); return; }
         if (g.res.plantes >= 1) {
             const healer = atBase(g).filter(o => !o.baby && o !== p).sort((a, b) => (b.sk?.soigner || 1) - (a.sk?.soigner || 1))[0] || p;
             const rec = g.lore.filter(x => x.kind === 'recipe');
             g.res.plantes -= 1; p.ill.left -= 8 * (healer.sk?.soigner || 1); p.ill.treated = true; gainXp(g, healer, 'soigner', 3);
-            log(g, `🌿 ${healer === p ? p.name : healer.name} prépare un remède de grand-mère${rec.length ? ` (d’après « ${pickOne(g, rec).title} »)` : ''} contre ${what}${healer === p ? '' : ` de ${p.name}`}.`);
+            const rv = {name: healer === p ? p.name : healer.name, sick: p.name, recipe: rec.length ? pickOne(g, rec).title : ''}, self = healer === p;
+            log(g, rv.recipe ? (self ? i18n(fev ? '🌿 {name} prépare un remède de grand-mère (d’après « {recipe} ») contre sa fièvre.' : '🌿 {name} prépare un remède de grand-mère (d’après « {recipe} ») contre sa blessure.', rv) : i18n(fev ? '🌿 {name} prépare un remède de grand-mère (d’après « {recipe} ») contre sa fièvre de {sick}.' : '🌿 {name} prépare un remède de grand-mère (d’après « {recipe} ») contre sa blessure de {sick}.', rv))
+                : (self ? i18n(fev ? '🌿 {name} prépare un remède de grand-mère contre sa fièvre.' : '🌿 {name} prépare un remède de grand-mère contre sa blessure.', rv) : i18n(fev ? '🌿 {name} prépare un remède de grand-mère contre sa fièvre de {sick}.' : '🌿 {name} prépare un remède de grand-mère contre sa blessure de {sick}.', rv)));
         }
     }
     function decay(g, p, h, k = 1, sleeping = false) {
@@ -1260,7 +1278,7 @@
         // les amis autour remontent le moral, ceux qu'on ne supporte plus le minent
         if (p.where === 'base' && !p.baby) { const others = atBase(g).filter(o => o !== p && !o.baby); dm += 0.1 * Math.min(3, others.filter(o => relOf(g, p, o) >= 25).length) - 0.15 * others.filter(o => relOf(g, p, o) <= -25).length; }
         p.mood = clamp((p.mood ?? 70) + dm * h, 0, 100);
-        if (p.mood <= 5 && !p.baby && g.res.nourriture >= 3 && rnd(g) < 0.04 * h) { g.res.nourriture -= 3; log(g, `😫 ${p.name} craque et renverse 3 rations. Il faudrait lui remonter le moral (jeux, musique, histoires).`, 'alerte'); }
+        if (p.mood <= 5 && !p.baby && g.res.nourriture >= 3 && rnd(g) < 0.04 * h) { g.res.nourriture -= 3; log(g, i18n('😫 {name} craque et renverse 3 rations. Il faudrait lui remonter le moral (jeux, musique, histoires).', {name: p.name}), 'alerte'); }
     }
     function person(g, p, h) {
         const sleeping = p.act?.k === 'dormir';
@@ -1278,7 +1296,7 @@
         // 🌀 le conduit d'aération : quelqu'un de libre s'en occupe (n'importe qui si l'air devient vraiment lourd)
         if (g.air < 60 && (p.job === 'libre' || g.air < 30) && !atBase(g).some(o => o.act?.k === 'aerer')) { p.act = {k: 'aerer', until: g.t + Math.round(30 / best(g, 'reparer')), at: null}; p.doing = ''; return; }
         // sans moral, on ne travaille plus
-        if (p.mood < 20 && p.job !== 'libre') { if (!p.sulk) { p.sulk = true; log(g, `😞 ${p.name} n’a plus le moral et refuse de travailler.`, 'alerte'); } p.doing = ''; return; }
+        if (p.mood < 20 && p.job !== 'libre') { if (!p.sulk) { p.sulk = true; log(g, i18n('😞 {name} n’a plus le moral et refuse de travailler.', {name: p.name}), 'alerte'); } p.doing = ''; return; }
         if (p.mood >= 30) p.sulk = false;
         const mm = moodMult(p) * ageK(g, p) * teamK(g, p);
         if (p.job === 'creuser' && g.floors.length < MAX_FLOORS) { g.dig.on = true; g.dig.done += h * (g.tools.includes('pelle') ? 2 : 1) * (p.sk?.construire || 1) * mm; gainXp(g, p, 'construire', h * 0.5); p.act = null; p.doing = 'creuser'; return; }
@@ -1317,14 +1335,14 @@
     function finish(g, p) {
         const a = p.act; if (!a) return;
         if (a.k === 'boire') { if (g.res.eau >= 1) { g.res.eau -= 1; p.needs.soif = clamp(p.needs.soif + 55, 0, 100); } }
-        if (a.k === 'boiresale') { if (g.res.eausale >= 1) { g.res.eausale -= 1; p.needs.soif = clamp(p.needs.soif + 55, 0, 100); if (!p.ill && rnd(g) < 0.2) { sicken(g, p, 'fievre'); log(g, `🤒 ${p.name} a bu de l’eau de pluie sans la filtrer : la fièvre monte. (Un filtre à eau éviterait ça.)`, 'alerte'); } } }
+        if (a.k === 'boiresale') { if (g.res.eausale >= 1) { g.res.eausale -= 1; p.needs.soif = clamp(p.needs.soif + 55, 0, 100); if (!p.ill && rnd(g) < 0.2) { sicken(g, p, 'fievre'); log(g, i18n('🤒 {name} a bu de l’eau de pluie sans la filtrer : la fièvre monte. (Un filtre à eau éviterait ça.)', {name: p.name}), 'alerte'); } } }
         if (a.k === 'manger') { const R = RECIPES[pickRecipe(g)]; if (R && Object.entries(R.in).every(([r, n]) => (g.res[r] || 0) >= n)) { Object.entries(R.in).forEach(([r, n]) => { g.res[r] -= n; }); if (trait(p, 'gourmand')) p.mood = clamp((p.mood ?? 70) + 3, 0, 100); p.mood = clamp((p.mood ?? 70) + R.mood, 0, 100); g.stats.meals = (g.stats.meals || 0) + (R.mood > 0 ? 1 : 0); p.needs.faim = clamp(p.needs.faim + R.faim * best(g, 'cuisiner') * (heir(g, 'vaisselle') ? 1.2 : 1), 0, 100); } }
         if (a.k === 'toilettes') p.needs.vessie = 100;
-        if (a.k === 'coin') { p.needs.vessie = 100; p.needs.hygiene = clamp(p.needs.hygiene - 15, 0, 100); p.mood = clamp((p.mood ?? 70) - 3, 0, 100); if (!g.said.coin) { g.said.coin = true; log(g, `🚽 Pas de toilettes : ${p.name} se soulage dans un coin… Il faudrait en construire.`); } }
+        if (a.k === 'coin') { p.needs.vessie = 100; p.needs.hygiene = clamp(p.needs.hygiene - 15, 0, 100); p.mood = clamp((p.mood ?? 70) - 3, 0, 100); if (!g.said.coin) { g.said.coin = true; log(g, i18n('🚽 Pas de toilettes : {name} se soulage dans un coin… Il faudrait en construire.', {name: p.name})); } }
         if (a.k === 'douche') { if (takeWater(g, 3)) p.needs.hygiene = 100; }
         if (a.k === 'gant') { if (takeWater(g, 1)) p.needs.hygiene = clamp(p.needs.hygiene + 30, 0, 100); }
         if (a.k === 'jouer') p.mood = clamp((p.mood ?? 70) + 15 * (a.fun || (a.music ? 5 / 3 : 1)), 0, 100);
-        if (a.k === 'aerer') { g.air = 100; g.said.air = false; log(g, `🌀 ${p.name} nettoie le conduit d’aération : on respire mieux.`); }
+        if (a.k === 'aerer') { g.air = 100; g.said.air = false; log(g, i18n('🌀 {name} nettoie le conduit d’aération : on respire mieux.', {name: p.name})); }
     }
     /** dehors : marcher, fouiller, rentrer ; les nouvelles passent par la radio */
     function outside(g, p, h) {
@@ -1338,8 +1356,8 @@
         const pl = g.city.places.find(x => x.id === e.place);
         if (e.phase === 'aller') {
             e.phase = 'fouille'; e.until = g.t + (e.route?.[e.i]?.room && (KIND_ROOMS[pl.kind] || []).includes(e.route[e.i].room) ? 60 : 120); pl.seen = true;
-            if (pl.home && !pl.visits) { p.mood = clamp((p.mood ?? 70) + 12, 0, 100); radio(g, `📻 ${p.name} : « Je suis devant ${pl.name.replace(/^Maison natale de/, 'la maison où est né·e')}. Les volets sont encore là… J’entre. »`); }
-            else radio(g, `📻 ${p.name} : « Je suis à ${pl.name}, je fouille. »`);
+            if (pl.home && !pl.visits) { p.mood = clamp((p.mood ?? 70) + 12, 0, 100); radio(g, i18n('📻 {name} : « Je suis devant {place}. Les volets sont encore là… J’entre. »', {name: p.name, place: pl.name.replace(/^Maison natale de/, i18n('la maison où est né·e'))})); }
+            else radio(g, i18n('📻 {name} : « Je suis à {place}, je fouille. »', {name: p.name, place: pl.name}));
             return;
         }
         if (e.phase === 'fouille') {
@@ -1378,38 +1396,42 @@
             // 🧳 un objet de famille retrouvé dans les ruines
             if (g.ruins.length && ['maison', 'maisonfam', 'eglise', 'bibliotheque', 'ecole', 'decharge', 'hopital'].includes(pl.kind) && rnd(g) < (pl.home ? 0.5 : 0.12)) e.heir = g.ruins.shift();
             gainXp(g, p, 'fouiller', 2);
-            const got = [...Object.entries(e.loot).filter(([, n]) => n > 0).map(([r, n]) => `${n} ${resLabel(r, g)}`), ...(e.junk.length ? [`${e.junk.length} objet${e.junk.length > 1 ? 's' : ''} à démonter (${[...new Set(e.junk)].map(k => JUNK[k][1].toLowerCase()).join(', ')})`] : [])];
-            const extra = [...e.found.map(f => f[0] === 't' ? `l’outil « ${toolInfo(g, f.slice(2))[1]} »` : `le plan « ${ITEMS[f.slice(2)].name} »`), ...(e.letters || []).map(() => 'une lettre de la famille'), ...(e.heir ? [`« ${e.heir.title} », un objet de la famille`] : []), ...(e.pets || []).map(k => `${PETS[k][0]} ${k === 'poules' ? 'des poules qui me suivent' : `un·e ${PETS[k][1].toLowerCase()} qui me suit`}`), ...(e.docs || []).map(id => { const m = g.missions.find(x => x.id === id); return m ? `${DOCS[m.doc][0]} ${DOCS[m.doc][1]} de ${m.name}` : ''; }).filter(Boolean)];
+            const got = [...Object.entries(e.loot).filter(([, n]) => n > 0).map(([r, n]) => `${n} ${resLabel(r, g)}`), ...(e.junk.length ? [i18n('{n} à démonter ({list})', {n: nW(e.junk.length, 'objet'), list: [...new Set(e.junk)].map(k => lc(JUNK[k][1])).join(', ')})] : [])];
+            const extra = [...e.found.map(f => f[0] === 't' ? i18n('l’outil « {name} »', {name: toolInfo(g, f.slice(2))[1]}) : i18n('le plan « {name} »', {name: ITEMS[f.slice(2)].name})), ...(e.letters || []).map(() => i18n('une lettre de la famille')), ...(e.heir ? [i18n('« {title} », un objet de la famille', {title: e.heir.title})] : []), ...(e.pets || []).map(k => `${PETS[k][0]} ${k === 'poules' ? i18n('des poules qui me suivent') : i18n('un·e {pet} qui me suit', {pet: lc(PETS[k][1])})}`), ...(e.docs || []).map(id => { const m = g.missions.find(x => x.id === id); return m ? `${DOCS[m.doc][0]} ${i18n('{doc} de {name}', {doc: DOCS[m.doc][1], name: m.name})}` : ''; }).filter(Boolean)];
             // l'étape suivante du parcours, s'il reste de la place (sinon on rentre)
             souvenirAt(g, p, {kind: 'city', place: pl, tool: e.found.find(f => f[0] === 't')?.slice(2)});
             const next = e.route && e.i + 1 < e.route.length && (e.cap || carryOf(g, p)) - loadOf(e) >= 0.3 ? g.city.places.find(x => x.id === e.route[e.i + 1].id) : null;
-            radio(g, `📻 ${p.name} : « ${got.length || extra.length ? `J’ai trouvé ${[...got, ...extra].join(', ')}` : 'Rien du tout, l’endroit est vide'}.${e.hurt ? ' Je me suis fait mal en route…' : ''} ${next ? `Je continue vers ${next.name}.` : e.route && e.i + 1 < e.route.length ? 'Mon sac est plein : je rentre.' : 'Je rentre.'} »`);
+            const sA = got.length || extra.length ? i18n('J’ai trouvé {list}.', {list: [...got, ...extra].join(', ')}) : i18n('Rien du tout, l’endroit est vide.'), sB = next ? i18n('Je continue vers {place}.', {place: next.name}) : e.route && e.i + 1 < e.route.length ? i18n('Mon sac est plein : je rentre.') : i18n('Je rentre.');
+            radio(g, i18n('📻 {name} : « {speech} »', {name: p.name, speech: `${sA}${e.hurt ? ` ${i18n('Je me suis fait mal en route…')}` : ''} ${sB}`}));
             if (next) { e.i++; e.place = next.id; e.phase = 'aller'; e.from = g.t; e.until = g.t + travel(g, next, g.t, pl); return; }
             e.phase = 'retour'; e.until = g.t + travel(g, pl); return;
         }
         // de retour
         const lost = [];
         Object.entries(e.loot).forEach(([r, n]) => { if (n <= 0) return; const put = add(g, r, n); if (put < n) lost.push(`${n - put} ${resLabel(r, g)}`); });
-        (e.junk || []).forEach(k => { if (junkCount(g) < junkCap(g)) g.junk[k] = (g.junk[k] || 0) + 1; else lost.push(JUNK[k][1].toLowerCase()); });
-        e.found.forEach(f => { if (f[0] === 't' && !g.tools.includes(f.slice(2))) g.tools.push(f.slice(2)); if (f[0] === 'p' && !g.plans.includes(f.slice(2))) g.plans.push(f.slice(2)); g.stats.found.push(f[0] === 't' ? toolInfo(g, f.slice(2))[1] : `plan « ${ITEMS[f.slice(2)].name} »`); });
-        log(g, `🏠 ${p.name} est rentré·e.${(e.junk || []).length ? ` ♻️ ${e.junk.length} objet${e.junk.length > 1 ? 's' : ''} à démonter.` : ''}${e.found.length ? ` Nouveau : ${e.found.map(f => f[0] === 't' ? toolInfo(g, f.slice(2))[1] : 'plan « ' + ITEMS[f.slice(2)].name + ' »').join(', ')}.` : ''}${lost.length ? ` Plus de place pour ${lost.join(', ')} : laissé dehors (construis des étagères ou du stockage).` : ''}`, 'alerte');
-        (e.letters || []).forEach(L => { atBase(g).forEach(o => { o.mood = clamp((o.mood ?? 70) + 8, 0, 100); }); g.stats.found.push(`lettre « ${L.title} »`); log(g, `✉️ ${p.name} rapporte une lettre retrouvée : « ${L.title} »${L.from ? `, de ${L.from}` : ''}${L.to ? ` à ${L.to}` : ''}. Tout le monde veut la voir.`, 'histoire'); });
-        if (e.hurt) { sicken(g, p, 'blessure'); log(g, `🩹 ${p.name} est blessé·e : il faut la soigner (médicaments, ou plantes pour un remède).`, 'alerte'); }
-        if (e.sick && !p.ill) { sicken(g, p, 'fievre'); log(g, `🦠 ${p.name} rentre avec la fièvre qui court en ville.`, 'alerte'); }
+        (e.junk || []).forEach(k => { if (junkCount(g) < junkCap(g)) g.junk[k] = (g.junk[k] || 0) + 1; else lost.push(lc(JUNK[k][1])); });
+        e.found.forEach(f => { if (f[0] === 't' && !g.tools.includes(f.slice(2))) g.tools.push(f.slice(2)); if (f[0] === 'p' && !g.plans.includes(f.slice(2))) g.plans.push(f.slice(2)); g.stats.found.push(f[0] === 't' ? toolInfo(g, f.slice(2))[1] : i18n('plan « {name} »', {name: ITEMS[f.slice(2)].name})); });
+        log(g, [i18n('🏠 {name} est rentré·e.', {name: p.name}), (e.junk || []).length ? i18n('♻️ {n} à démonter.', {n: nW(e.junk.length, 'objet')}) : '', e.found.length ? i18n('Nouveau : {list}.', {list: e.found.map(f => f[0] === 't' ? toolInfo(g, f.slice(2))[1] : i18n('plan « {name} »', {name: ITEMS[f.slice(2)].name})).join(', ')}) : '', lost.length ? i18n('Plus de place pour {list} : laissé dehors (construis des étagères ou du stockage).', {list: lost.join(', ')}) : ''].filter(Boolean).join(' '), 'alerte');
+        (e.letters || []).forEach(L => { atBase(g).forEach(o => { o.mood = clamp((o.mood ?? 70) + 8, 0, 100); }); g.stats.found.push(i18n('lettre « {title} »', {title: L.title})); const lv = {name: p.name, title: L.title, from: L.from, to: L.to};
+            log(g, L.from && L.to ? i18n('✉️ {name} rapporte une lettre retrouvée : « {title} », de {from} à {to}. Tout le monde veut la voir.', lv) : L.from ? i18n('✉️ {name} rapporte une lettre retrouvée : « {title} », de {from}. Tout le monde veut la voir.', lv) : L.to ? i18n('✉️ {name} rapporte une lettre retrouvée : « {title} » à {to}. Tout le monde veut la voir.', lv) : i18n('✉️ {name} rapporte une lettre retrouvée : « {title} ». Tout le monde veut la voir.', lv), 'histoire'); });
+        if (e.hurt) { sicken(g, p, 'blessure'); log(g, i18n('🩹 {name} est blessé·e : il faut la soigner (médicaments, ou plantes pour un remède).', {name: p.name}), 'alerte'); }
+        if (e.sick && !p.ill) { sicken(g, p, 'fievre'); log(g, i18n('🦠 {name} rentre avec la fièvre qui court en ville.', {name: p.name}), 'alerte'); }
         if (e.heir) { const t = `${e.heir.title} ${e.heir.kind} ${e.heir.description}`.toLowerCase(), bonus = HEIRLOOMS.find(([, re]) => re.test(t))[0];
-            if (g.coffre.length < 10) g.coffre.push({title: e.heir.title, bonus}); atBase(g).forEach(o => { o.mood = clamp((o.mood ?? 70) + 10, 0, 100); }); g.stats.found.push(`objet de famille « ${e.heir.title} »`);
-            log(g, `🧳 ${p.name} rapporte « ${e.heir.title} », un objet de la famille retrouvé dans les ruines ! Il rejoint le coffre (${HEIRLOOMS.find(h => h[0] === bonus)[2]}).`, 'histoire'); }
+            if (g.coffre.length < 10) g.coffre.push({title: e.heir.title, bonus}); atBase(g).forEach(o => { o.mood = clamp((o.mood ?? 70) + 10, 0, 100); }); g.stats.found.push(i18n('objet de famille « {title} »', {title: e.heir.title}));
+            log(g, i18n('🧳 {name} rapporte « {title} », un objet de la famille retrouvé dans les ruines ! Il rejoint le coffre ({what}).', {name: p.name, title: e.heir.title, what: HEIRLOOMS.find(h => h[0] === bonus)[2]}), 'histoire'); }
         (e.pets || []).forEach(k => adopt(g, k, p));
         // 🔧 le véhicule s'use (deux fois plus sur un mauvais terrain) ; la bête de bât peut se blesser
         if (e.veh) wearVeh(g, e.veh, e.terr || 'route', 1);
-        (e.beasts || []).forEach(id => { const a = g.pets.find(x => x.id === id); if (a && BEASTS[a.k] && rnd(g) < 0.04) { a.hurt = 2; log(g, `${PETS[a.k][0]} ${a.name} s’est blessé·e à la patte : deux jours de repos.`); } });
+        (e.beasts || []).forEach(id => { const a = g.pets.find(x => x.id === id); if (a && BEASTS[a.k] && rnd(g) < 0.04) { a.hurt = 2; log(g, i18n('{ico} {name} s’est blessé·e à la patte : deux jours de repos.', {ico: PETS[a.k][0], name: a.name})); } });
         (e.docs || []).forEach(id => { const m = g.missions.find(x => x.id === id); if (!m || m.done) return; m.done = true; const D = DOCS[m.doc];
-            const txt = `${D[0]} ${D[1][0].toUpperCase()}${D[1].slice(1)} de ${m.name}${m.by ? `, né·e en ${m.by}` : ''}${m.bplace ? ` à ${m.bplace}` : ''}${m.occ ? ` (${m.occ.toLowerCase()})` : ''}.`;
+            let who = i18n('{doc} de {name}', {doc: `${D[1][0].toUpperCase()}${D[1].slice(1)}`, name: m.name}); const wv = {who, y: String(m.by), place: m.bplace};
+            who = m.by && m.bplace ? i18n('{who}, né·e en {y} à {place}', wv) : m.by ? i18n('{who}, né·e en {y}', wv) : m.bplace ? i18n('{who} à {place}', wv) : who;
+            const txt = `${D[0]} ${m.occ ? i18n('{who} ({occ})', {who, occ: m.occ.toLowerCase()}) : who}.`;
             g.docs.push({pid: m.pid, name: m.name, doc: m.doc, day: dayOf(g.t), txt}); add(g, m.reward.r, m.reward.n); atBase(g).forEach(o => { o.mood = clamp((o.mood ?? 70) + 12, 0, 100); }); gainXp(g, p, 'raconter', 3);
-            log(g, `📜 Mission accomplie : ${p.name} rapporte ${D[1]} de ${m.name} ! ${txt} (+${m.reward.n} ${resLabel(m.reward.r, g)})`, 'histoire'); diary(g, p, `J’ai retrouvé ${D[1]} de ${m.name}. Toute la famille l’a lu et relu.`); });
+            log(g, i18n('📜 Mission accomplie : {name} rapporte {doc} de {anc} ! {txt} (+{reward})', {name: p.name, doc: D[1], anc: m.name, txt, reward: `${m.reward.n} ${resLabel(m.reward.r, g)}`}), 'histoire'); diary(g, p, i18n('J’ai retrouvé {doc} de {anc}. Toute la famille l’a lu et relu.', {doc: D[1], anc: m.name})); });
         if ((e.docs || []).length && opt(g, 'missions')) newMissions(g);
         const names = (e.route || []).map(st => g.city.places.find(x => x.id === st.id)?.name).filter(Boolean);
-        diary(g, p, `Je suis allé·e ${names.length ? `à ${names.join(', puis à ')}` : 'en ville'}. ${Object.keys(e.loot).some(r => e.loot[r] > 0) ? `J’ai rapporté ${Object.entries(e.loot).filter(([, n]) => n > 0).map(([r, n]) => `${n} ${resLabel(r, g)}`).join(', ')}.` : 'Rien de bien utile.'}${e.heir ? ` Et surtout : « ${e.heir.title} » !` : ''}${e.hurt ? ' Je me suis blessé·e.' : ''}`);
+        diary(g, p, [names.length ? i18n('Je suis allé·e à {places}.', {places: names.join(`, ${i18n('puis à')} `)}) : i18n('Je suis allé·e en ville.'), Object.keys(e.loot).some(r => e.loot[r] > 0) ? i18n('J’ai rapporté {what}.', {what: Object.entries(e.loot).filter(([, n]) => n > 0).map(([r, n]) => `${n} ${resLabel(r, g)}`).join(', ')}) : i18n('Rien de bien utile.'), e.heir ? i18n('Et surtout : « {title} » !', {title: e.heir.title}) : '', e.hurt ? i18n('Je me suis blessé·e.') : ''].filter(Boolean).join(' '));
         p.where = 'base'; p.exp = null; p.act = null;
     }
     /** le plan trouvé dans un lieu : ceux qui « viennent » de ce genre de lieu d'abord ; les plans rares, bien moins souvent */
@@ -1484,11 +1506,11 @@
     /** ⛓️ poser les rails du chariot de mine vers un lieu proche (4 cases au plus) → {ok, err} */
     const RAILS_COST = {metal: 6, bois: 6, clous: 6};
     function layRails(g, placeId) {
-        if (!has(g, 'chariot')) return {ok: false, err: 'Il faut d’abord construire le chariot de mine.'};
-        const pl = g.city.places.find(x => x.id === placeId); if (!pl) return {ok: false, err: 'Lieu inconnu.'};
-        if (Math.abs(pl.x - g.city.base[0]) + Math.abs(pl.y - g.city.base[1]) > 4) return {ok: false, err: 'Trop loin : les rails vont jusqu’à 4 cases du bunker.'};
+        if (!has(g, 'chariot')) return {ok: false, err: i18n('Il faut d’abord construire le chariot de mine.')};
+        const pl = g.city.places.find(x => x.id === placeId); if (!pl) return {ok: false, err: i18n('Lieu inconnu.')};
+        if (Math.abs(pl.x - g.city.base[0]) + Math.abs(pl.y - g.city.base[1]) > 4) return {ok: false, err: i18n('Trop loin : les rails vont jusqu’à 4 cases du bunker.')};
         const err = payOrErr(g, RAILS_COST); if (err) return {ok: false, err};
-        g.rails = pl.id; log(g, `⛓️ Les rails sont posés jusqu’à ${pl.name} : le chariot y va deux fois plus vite et rapporte gros.`, 'alerte'); return {ok: true};
+        g.rails = pl.id; log(g, i18n('⛓️ Les rails sont posés jusqu’à {place} : le chariot y va deux fois plus vite et rapporte gros.', {place: pl.name}), 'alerte'); return {ok: true};
     }
 
     /* ═════════ 🗺️ La région : d'autres villes et lieux, des routes, des convois ═════════ */
@@ -1520,13 +1542,13 @@
     /** la carte de la région : le bunker au milieu (50, 50), 8 lieux autour, des routes plus ou moins longues et dangereuses ; names : villes de l'arbre */
     function makeRegion(g, names = []) {
         const nodes = [], kinds = ['ville', 'village', 'village', 'ferme', 'depot', 'abbaye', 'foret', 'mine', 'port'], towns = [...(Array.isArray(names) ? names : []).map(x => str(x, 40)).filter(Boolean), ...REGION_TOWNS];
-        const used = new Set(), town = () => { const t = towns.find(x => !used.has(x)) || `Lieu ${used.size + 1}`; used.add(t); return t; };
+        const used = new Set(), town = () => { const t = towns.find(x => !used.has(x)) || i18n('Lieu {n}', {n: used.size + 1}); used.add(t); return t; };
         const poor = g.scen === 'penurie' ? 0.6 : 1;
         for (let i = 0; i < 8; i++) {
             const kind = i < 3 ? ['ville', 'village', 'ferme'][i] : pickOne(g, kinds.slice(3)); let x = 50, y = 50, tries = 0;
             do { const a = rnd(g) * Math.PI * 2, d = 18 + rnd(g) * 28; x = Math.round(clamp(50 + Math.cos(a) * d, 6, 94)); y = Math.round(clamp(50 + Math.sin(a) * d, 8, 92)); tries++; }
             while (tries < 200 && [{x: 50, y: 50}, ...nodes].some(n => Math.hypot(n.x - x, n.y - y) < 15));
-            const K = REGION_KINDS[kind], nm = kind === 'ville' || kind === 'village' ? town() : `${regionInfo(g, kind)[1]} de ${town()}`, {stock, max} = stockOf(g, K[2], poor);
+            const K = REGION_KINDS[kind], nm = kind === 'ville' || kind === 'village' ? town() : i18n('{kind} de {town}', {kind: regionInfo(g, kind)[1], town: town()}), {stock, max} = stockOf(g, K[2], poor);
             nodes.push({id: 'r' + (i + 1), kind, name: nm, x, y, stock, max, plans: K[3].plans, seen: false, visits: 0});
         }
         const roads = [], d = (a, b) => Math.hypot(a.x - b.x, a.y - b.y), home = {id: 'home', x: 50, y: 50}, has2 = (a, b) => roads.some(r => (r.a === a && r.b === b) || (r.a === b && r.b === a));
@@ -1537,7 +1559,7 @@
         // tout est relié au bunker
         for (let k = 0; k < 10; k++) { const reach = new Set(['home']); let grew = true; while (grew) { grew = false; roads.forEach(r => { if (reach.has(r.a) && !reach.has(r.b)) { reach.add(r.b); grew = true; } if (reach.has(r.b) && !reach.has(r.a)) { reach.add(r.a); grew = true; } }); }
             const out = nodes.filter(n => !reach.has(n.id)); if (!out.length) break; const n = out[0], m = [home, ...nodes.filter(x => reach.has(x.id))].sort((a, b) => d(a, n) - d(b, n))[0]; link(n, m); }
-        const R = {name: `Les environs de ${str(g.city?.name || 'la ville', 60)}`, nodes, roads};
+        const R = {name: i18n('Les environs de {city}', {city: str(g.city?.name || i18n('la ville'), 60)}), nodes, roads};
         nodes.forEach(n => { if (roads.some(r => (r.a === 'home' && r.b === n.id) || (r.b === 'home' && r.a === n.id))) n.seen = true; });
         return R;
     }
@@ -1583,31 +1605,32 @@
     const CONVOY_GOALS = {fouiller: ['🎒', 'Fouiller'], commercer: ['🤝', 'Commercer'], aider: ['🎁', 'Aider'], attaquer: ['⚔️', 'Attaquer']};
     /** 🧭 former un convoi : o = {dest, who: [ids], pack: {ressource: n}, veh: [places des véhicules], beasts: [ids], tools: [clés], goal, safe} → {ok, err, c} */
     function formConvoy(g, o = {}) {
-        if (!g.region) return {ok: false, err: 'Pas de carte de la région.'};
-        const dest = nodeOf(g, o.dest); if (!dest || dest.id === 'home') return {ok: false, err: 'Choisis un lieu de la région.'}; if (!dest.seen) return {ok: false, err: 'Ce lieu n’est pas encore connu.'};
-        if ((g.convoys || []).some(c => c.dest === dest.id)) return {ok: false, err: 'Un convoi y est déjà en route.'};
+        if (!g.region) return {ok: false, err: i18n('Pas de carte de la région.')};
+        const dest = nodeOf(g, o.dest); if (!dest || dest.id === 'home') return {ok: false, err: i18n('Choisis un lieu de la région.')}; if (!dest.seen) return {ok: false, err: i18n('Ce lieu n’est pas encore connu.')};
+        if ((g.convoys || []).some(c => c.dest === dest.id)) return {ok: false, err: i18n('Un convoi y est déjà en route.')};
         const who = [...new Set((o.who || []).map(String))].slice(0, 5), ppl = who.map(id => g.people.find(p => p.id === id));
-        if (!who.length) return {ok: false, err: 'Choisis au moins une personne.'};
-        const bad = ppl.find(p => !p || p.hp <= 0 || p.where !== 'base' || p.baby || p.child); if (bad !== undefined) return {ok: false, err: bad ? `${bad.name} ne peut pas partir (${bad.baby || bad.child ? 'trop jeune' : 'pas au bunker'}).` : 'Personne inconnue.'};
-        const ill = ppl.find(p => p.ill); if (ill) return {ok: false, err: `${ill.name} est ${ill.ill.k === 'fievre' ? 'malade' : 'blessé·e'} : soigne-le ou la d’abord.`};
+        if (!who.length) return {ok: false, err: i18n('Choisis au moins une personne.')};
+        const bad = ppl.find(p => !p || p.hp <= 0 || p.where !== 'base' || p.baby || p.child); if (bad !== undefined) return {ok: false, err: bad ? (bad.baby || bad.child ? i18n('{name} ne peut pas partir (trop jeune).', {name: bad.name}) : i18n('{name} ne peut pas partir (pas au bunker).', {name: bad.name})) : i18n('Personne inconnue.')};
+        const ill = ppl.find(p => p.ill); if (ill) return {ok: false, err: ill.ill.k === 'fievre' ? i18n('{name} est malade : soigne-le ou la d’abord.', {name: ill.name}) : i18n('{name} est blessé·e : soigne-le ou la d’abord.', {name: ill.name})};
         const goal = CONVOY_GOALS[o.goal] ? o.goal : 'fouiller', grp = groupAt(g, dest.id);
-        if (goal !== 'fouiller' && !grp) return {ok: false, err: 'Personne ne vit là-bas : on ne peut que fouiller.'};
-        if (goal === 'commercer' && hostile(grp)) return {ok: false, err: `${grp.name} ne commercent pas avec vous.`};
+        if (goal !== 'fouiller' && !grp) return {ok: false, err: i18n('Personne ne vit là-bas : on ne peut que fouiller.')};
+        if (goal === 'commercer' && hostile(grp)) return {ok: false, err: i18n('{name} ne commercent pas avec vous.', {name: grp.name})};
         const pack = Object.fromEntries(Object.entries(o.pack || {}).filter(([r, n]) => RES_KEYS.includes(r) && Number(n) > 0).map(([r, n]) => [r, Math.round(Number(n) * 10) / 10]));
-        const miss = Object.entries(pack).filter(([r, n]) => (g.res[r] || 0) < n); if (miss.length) return {ok: false, err: `Il manque : ${miss.map(([r, n]) => `${Math.ceil(n - (g.res[r] || 0))} ${resLabel(r, g)}`).join(', ')}.`};
+        const miss = Object.entries(pack).filter(([r, n]) => (g.res[r] || 0) < n); if (miss.length) return {ok: false, err: i18n('Il manque : {list}.', {list: miss.map(([r, n]) => `${Math.ceil(n - (g.res[r] || 0))} ${resLabel(r, g)}`).join(', ')})};
         const F = freeTransports(g, 'route'), veh = [...new Set(o.veh || [])].filter(k => F.veh.some(v => v.key === k && TRANSPORT[v.k].kind === 'veh')), horses = veh.map(k => F.veh.find(v => v.key === k).horse).filter(Boolean);
         const beasts = [...new Set([...(o.beasts || []).map(String).filter(id => F.beasts.some(b => b.id === id) && !horses.includes(id)), ...horses])];
         const tools = [...new Set(o.tools || [])].filter(k => g.tools.includes(k));
         const plan = convoyPlan(g, dest.id, who.length, beasts.map(id => g.pets.find(a => a.id === id)), !!o.safe);
         const cap = convoyCap(g, who, veh, beasts.filter(id => !horses.includes(id)), plan.terrains) + (tools.includes('sac') ? 10 * who.length : 0), w = weightOf(pack);
-        if (w > cap) return {ok: false, err: `Trop lourd : ${Math.round(w)} à porter pour ${cap} de place. Prends moins de provisions, ou plus de transports.`};
+        if (w > cap) return {ok: false, err: i18n('Trop lourd : {w} à porter pour {cap} de place. Prends moins de provisions, ou plus de transports.', {w: String(Math.round(w)), cap: String(cap)})};
         Object.entries(pack).forEach(([r, n]) => { g.res[r] -= n; }); tools.forEach(k => { g.tools = g.tools.filter(x => x !== k); });
         const c = {id: 'c' + (g.nextId++), dest: dest.id, route: plan.path, pos: 0, dir: 1, leg: null, stayUntil: 0, who, pack, loot: {}, finds: [], recruits: [], newBeasts: [], hurt: [], news: [], veh, beasts, tools, goal, cap, from: g.t, d0: dayOf(g.t), fed: 0};
         ppl.forEach(p => { p.where = 'convoi'; p.act = null; p.doing = ''; p.conv = c.id; });
         (g.convoys = g.convoys || []).push(c);
         const nT = veh.length + beasts.length; g.stats.caravan = Math.max(g.stats.caravan || 0, nT);
-        const tr = [...veh.map(k => ITEMS[F.veh.find(v => v.key === k).k].name.toLowerCase()), ...beasts.map(id => { const a = g.pets.find(x => x.id === id); return `${a.name} (${PETS[a.k][1].toLowerCase()})`; })];
-        log(g, `🧭 Un convoi part vers ${dest.name} (${CONVOY_GOALS[goal][1].toLowerCase()}) : ${ppl.map(p => p.name).join(', ')}${tr.length ? `, avec ${tr.join(', ')}` : ''}. Environ ${plan.days.toString().replace('.', ',')} jours aller-retour.`, 'alerte');
+        const tr = [...veh.map(k => lc(ITEMS[F.veh.find(v => v.key === k).k].name)), ...beasts.map(id => { const a = g.pets.find(x => x.id === id); return `${a.name} (${lc(PETS[a.k][1])})`; })];
+        const cv = {dest: dest.name, goal: lc(CONVOY_GOALS[goal][1]), who: ppl.map(p => p.name).join(', '), with: tr.join(', '), days: plan.days.toString().replace('.', ',')};
+        log(g, tr.length ? i18n('🧭 Un convoi part vers {dest} ({goal}) : {who}, avec {with}. Environ {days} jours aller-retour.', cv) : i18n('🧭 Un convoi part vers {dest} ({goal}) : {who}. Environ {days} jours aller-retour.', cv), 'alerte');
         startLeg(g, c); return {ok: true, c};
     }
     function startLeg(g, c) {
@@ -1642,8 +1665,8 @@
         c.beasts.slice().forEach(id => { const a = g.pets.find(x => x.id === id); if (!a) return; const N = Object.entries(BEAST_NEED[a.k] || {});
             const ok = N.every(([r, n]) => (c.pack[r] || 0) + (c.loot[r] || 0) >= n || (r === 'plantes' && c.leg && roadOf(g, c.leg.a, c.leg.b)?.terr !== 'route'));
             if (ok) { N.forEach(([r, n]) => { const p = Math.min(c.pack[r] || 0, n); c.pack[r] = (c.pack[r] || 0) - p; if (n - p > 0) c.loot[r] = Math.max(0, (c.loot[r] || 0) - (n - p)); }); a.hungry = 0; }
-            else { a.hungry = (a.hungry || 0) + 1; if (a.hungry === 1) radio(g, `📻 Convoi : « ${a.name} n’a plus rien à manger ni à boire. »`);
-                if (a.hungry >= 3) { c.beasts = c.beasts.filter(x => x !== id); g.pets = g.pets.filter(x => x !== a); log(g, `${PETS[a.k][0]} ${a.name} s’est sauvé·e en route, faute de manger.`, 'alerte'); } } });
+            else { a.hungry = (a.hungry || 0) + 1; if (a.hungry === 1) radio(g, i18n('📻 Convoi : « {name} n’a plus rien à manger ni à boire. »', {name: a.name}));
+                if (a.hungry >= 3) { c.beasts = c.beasts.filter(x => x !== id); g.pets = g.pets.filter(x => x !== a); log(g, i18n('{ico} {name} s’est sauvé·e en route, faute de manger.', {ico: PETS[a.k][0], name: a.name}), 'alerte'); } } });
     }
     /** au bout d'une route : embuscade, accident, on se perd, une trouvaille, une rencontre ; les nouvelles par la radio */
     function arrive(g, c) {
@@ -1654,26 +1677,27 @@
         // ⚔️ une embuscade
         if (rnd(g) < [0.03, 0.08, 0.16, 0.28][d] * DF(g).raid * (band ? 1.6 : 1)) {
             const foe = (rint(g, 3, 8) + Math.floor(dayOf(g.t) / 6)) * DF(g).raid * (band ? band.str / 6 : 1);
-            if (convoyForce(g, c) + rint(g, 0, 4) >= foe) { said.push(`des ${band ? band.name : 'pillards'} nous ont attaqués, on les a repoussés`); if (band) { band.rep = clamp(band.rep - 3, -100, 100); } ppl.forEach(p => gainXp(g, p, 'defendre', 2)); }
+            if (convoyForce(g, c) + rint(g, 0, 4) >= foe) { said.push(band ? i18n('des {band} nous ont attaqués, on les a repoussés', {band: band.name}) : i18n('des pillards nous ont attaqués, on les a repoussés')); if (band) { band.rep = clamp(band.rep - 3, -100, 100); } ppl.forEach(p => gainXp(g, p, 'defendre', 2)); }
             else { const v = pickOne(g, ppl); hurt(g, v, rint(g, 20, 45)); if (v.hp > 0 && !c.hurt.includes(v.id)) c.hurt.push(v.id);
                 Object.keys(c.loot).forEach(k => { c.loot[k] = Math.floor(c.loot[k] * 0.6); });
-                if (c.beasts.length && rnd(g) < 0.3) { const id = pickOne(g, c.beasts), a = g.pets.find(x => x.id === id); c.beasts = c.beasts.filter(x => x !== id); g.pets = g.pets.filter(x => x.id !== id); if (a) said.push(`ils ont emmené ${a.name}`); }
-                said.push(`une embuscade${band ? ` de ${band.name}` : ''} : ${v.name.split(' ')[0]} est blessé·e, on a perdu une partie du chargement`); }
+                if (c.beasts.length && rnd(g) < 0.3) { const id = pickOne(g, c.beasts), a = g.pets.find(x => x.id === id); c.beasts = c.beasts.filter(x => x !== id); g.pets = g.pets.filter(x => x.id !== id); if (a) said.push(i18n('ils ont emmené {name}', {name: a.name})); }
+                said.push(band ? i18n('une embuscade de {band} : {name} est blessé·e, on a perdu une partie du chargement', {band: band.name, name: v.name.split(' ')[0]}) : i18n('une embuscade : {name} est blessé·e, on a perdu une partie du chargement', {name: v.name.split(' ')[0]})); }
         }
         // 🩹 un accident (plus souvent dans la neige et la boue)
         if (rnd(g) < [0.04, 0.06, 0.09, 0.12][d] + (['neige', 'boue'].includes(terr) ? 0.04 : 0)) {
-            if (c.beasts.length && rnd(g) < 0.35) { const a = g.pets.find(x => x.id === pickOne(g, c.beasts)); if (a) { a.hurt = 2; said.push(`${a.name} s’est blessé·e à la patte`); } }
-            else { const v = pickOne(g, convoyAlive(g, c)); if (v) { hurt(g, v, rint(g, 6, 14)); if (v.hp > 0 && !c.hurt.includes(v.id)) c.hurt.push(v.id); said.push(`${v.name.split(' ')[0]} s’est fait mal en route`); } }
+            if (c.beasts.length && rnd(g) < 0.35) { const a = g.pets.find(x => x.id === pickOne(g, c.beasts)); if (a) { a.hurt = 2; said.push(i18n('{name} s’est blessé·e à la patte', {name: a.name})); } }
+            else { const v = pickOne(g, convoyAlive(g, c)); if (v) { hurt(g, v, rint(g, 6, 14)); if (v.hp > 0 && !c.hurt.includes(v.id)) c.hurt.push(v.id); said.push(i18n('{name} s’est fait mal en route', {name: v.name.split(' ')[0]})); } }
         }
         // 🧭 on se perd (moins avec une lanterne ou une boussole)
-        if (rnd(g) < (0.04 + 0.03 * d) * (c.tools.includes('lampe') ? 0.5 : 1) * (has(g, 'boussole') ? 0.7 : 1)) { c.delay = rint(g, 4, 10); said.push(`on s’est perdus, on a ${c.delay} h de retard`); }
+        if (rnd(g) < (0.04 + 0.03 * d) * (c.tools.includes('lampe') ? 0.5 : 1) * (has(g, 'boussole') ? 0.7 : 1)) { c.delay = rint(g, 4, 10); said.push(i18n('on s’est perdus, on a {n} h de retard', {n: c.delay})); }
         // 🎁 une trouvaille au bord de la route
-        if (rnd(g) < 0.15) { const keys = Object.keys(REGION_KINDS[node.kind]?.[2] || {nourriture: 1, bois: 1}).filter(x => resOk(g, x)); const x = pickOne(g, keys), n = rint(g, 1, 4); if (x) { c.loot[x] = (c.loot[x] || 0) + n; said.push(`trouvé ${n} ${resLabel(x, g)} au bord de la route`); } }
+        if (rnd(g) < 0.15) { const keys = Object.keys(REGION_KINDS[node.kind]?.[2] || {nourriture: 1, bois: 1}).filter(x => resOk(g, x)); const x = pickOne(g, keys), n = rint(g, 1, 4); if (x) { c.loot[x] = (c.loot[x] || 0) + n; said.push(i18n('trouvé {what} au bord de la route', {what: `${n} ${resLabel(x, g)}`})); } }
         // 🚶 quelqu'un sur la route qui veut se joindre à vous
-        if (rnd(g) < 0.05 && g.people.length + c.recruits.length < 10) { const np = g.extras.shift() || invent(g); c.recruits.push(np); said.push(`${np.name} marche avec nous`); }
+        if (rnd(g) < 0.05 && g.people.length + c.recruits.length < 10) { const np = g.extras.shift() || invent(g); c.recruits.push(np); said.push(i18n('{name} marche avec nous', {name: np.name})); }
         if (!convoyAlive(g, c).length) { lostConvoy(g, c); return; }
         if (node.id === 'home') { returnConvoy(g, c, said); return; }
-        radio(g, `📻 Le convoi (${convoyNames(g, c)}) : « On est à ${node.name}.${said.length ? ` ${said.map(s => s[0].toUpperCase() + s.slice(1)).join('. ')}.` : ''} »`);
+        const news = said.length ? ` ${said.map(s => s[0].toUpperCase() + s.slice(1)).join('. ')}.` : '';
+        radio(g, i18n('📻 Le convoi ({who}) : « On est à {place}.{news} »', {who: convoyNames(g, c), place: node.name, news}));
         if (c.dir === 1 && node.id === c.dest) { c.stayUntil = g.t + STAY * 60; return; }
         startLeg(g, c);
     }
@@ -1693,52 +1717,57 @@
     function atDest(g, c) {
         const node = nodeOf(g, c.dest), K = REGION_KINDS[node.kind]?.[3] || {}, grp = groupAt(g, node.id), said = []; node.visits = (node.visits || 0) + 1;
         const ppl = convoyAlive(g, c), fight = (k = 1) => convoyForce(g, c) * k + rint(g, 0, 4) >= (grp ? grp.str + rint(g, 1, 4) : 5) * DF(g).raid;
-        const loss = () => { const v = pickOne(g, ppl); hurt(g, v, rint(g, 20, 40)); if (v.hp > 0 && !c.hurt.includes(v.id)) c.hurt.push(v.id); said.push(`la bagarre a mal tourné, ${v.name.split(' ')[0]} est blessé·e`); };
+        const loss = () => { const v = pickOne(g, ppl); hurt(g, v, rint(g, 20, 40)); if (v.hp > 0 && !c.hurt.includes(v.id)) c.hurt.push(v.id); said.push(i18n('la bagarre a mal tourné, {name} est blessé·e', {name: v.name.split(' ')[0]})); };
         if (c.goal === 'fouiller') {
-            if (grp && hostile(grp)) { if (fight()) { fillFrom(g, c, node.stock); repAdd(g, grp, -10, 'vous les avez chassés de chez eux'); grp.str = Math.max(3, grp.str - 1); said.push(`${grp.name} voulaient nous chasser, on a tenu bon et fouillé`); } else loss(); }
-            else { fillFrom(g, c, node.stock, grp ? 0.6 : 1); if (grp) { repAdd(g, grp, -2, 'vous avez fouillé sur leurs terres'); if (grp.rep >= 40) { const r = pickOne(g, ['nourriture', 'medic', 'tissu'].filter(x => resOk(g, x))); c.loot[r] = (c.loot[r] || 0) + 3; said.push(`${grp.name} nous ont donné 3 ${resLabel(r, g)}`); } } }
+            if (grp && hostile(grp)) { if (fight()) { fillFrom(g, c, node.stock); repAdd(g, grp, -10, 'vous les avez chassés de chez eux'); grp.str = Math.max(3, grp.str - 1); said.push(i18n('{name} voulaient nous chasser, on a tenu bon et fouillé', {name: grp.name})); } else loss(); }
+            else { fillFrom(g, c, node.stock, grp ? 0.6 : 1); if (grp) { repAdd(g, grp, -2, 'vous avez fouillé sur leurs terres'); if (grp.rep >= 40) { const r = pickOne(g, ['nourriture', 'medic', 'tissu'].filter(x => resOk(g, x))); c.loot[r] = (c.loot[r] || 0) + 3; said.push(i18n('{name} nous ont donné 3 {res}', {name: grp.name, res: resLabel(r, g)})); } } }
         } else if (c.goal === 'commercer') {
-            const give = surplus(g, c), v = valueOf(give); if (!v) said.push('on n’avait rien à échanger');
+            const give = surplus(g, c), v = valueOf(give); if (!v) said.push(i18n('on n’avait rien à échanger'));
             else { Object.entries(give).forEach(([r, n]) => { c.pack[r] -= n; }); const back = Object.keys(node.max).filter(r => resOk(g, r)); let left = v * (0.9 + grp.rep / 200), guard = 0;
                 while (left > 0.5 && back.length && guard++ < 300) { const r = pickOne(g, back); if (convoyRoom(c) < wOf(r)) break; c.loot[r] = (c.loot[r] || 0) + 1; left -= VALUE[r] || 1; }
-                g.stats.trades++; repAdd(g, grp, 4, 'un bon échange'); said.push(`échange conclu avec ${grp.name}`); }
+                g.stats.trades++; repAdd(g, grp, 4, 'un bon échange'); said.push(i18n('échange conclu avec {name}', {name: grp.name})); }
         } else if (c.goal === 'aider') {
             const give = surplus(g, c), v = valueOf(give); Object.entries(give).forEach(([r, n]) => { c.pack[r] -= n; });
-            repAdd(g, grp, Math.min(30, Math.round(4 + v * 1.2)), 'vous êtes venus les aider'); g.stats.gifts = (g.stats.gifts || 0) + 1; said.push(`on a aidé ${grp.name}${v ? ` (${Object.entries(give).map(([r, n]) => `${n} ${resLabel(r, g)}`).join(', ')})` : ''}`);
-            if (grp.rep >= 50 && rnd(g) < 0.5) { const missing = foundPlans(g).filter(k => !g.plans.includes(k) && !c.finds.includes('p:' + k)); if (missing.length) { const k = pickPlan(g, missing, K.city); c.finds.push('p:' + k); said.push(`en remerciement, le plan « ${ITEMS[k].name} »`); } }
+            repAdd(g, grp, Math.min(30, Math.round(4 + v * 1.2)), 'vous êtes venus les aider'); g.stats.gifts = (g.stats.gifts || 0) + 1; said.push(v ? i18n('on a aidé {name} ({what})', {name: grp.name, what: Object.entries(give).map(([r, n]) => `${n} ${resLabel(r, g)}`).join(', ')}) : i18n('on a aidé {name}', {name: grp.name}));
+            if (grp.rep >= 50 && rnd(g) < 0.5) { const missing = foundPlans(g).filter(k => !g.plans.includes(k) && !c.finds.includes('p:' + k)); if (missing.length) { const k = pickPlan(g, missing, K.city); c.finds.push('p:' + k); said.push(i18n('en remerciement, le plan « {name} »', {name: ITEMS[k].name})); } }
         } else if (c.goal === 'attaquer') {
             if (fight(1.2)) { const stash = {...node.stock}; Object.keys(node.max).forEach(r => { stash[r] = (stash[r] || 0) + rint(g, 2, 6); }); fillFrom(g, c, stash); Object.keys(node.stock).forEach(r => { node.stock[r] = Math.floor((node.stock[r] || 0) / 3); });
                 const was = grp.k; grp.str = Math.max(2, grp.str - 2); repAdd(g, grp, -25, 'vous les avez attaqués');
                 (g.groups || []).filter(x => x !== grp && !hostile(x)).forEach(x => repAdd(g, x, was === 'bande' ? 5 : -20, was === 'bande' ? 'une bande de moins sur les routes' : 'vous avez attaqué des gens paisibles'));
-                said.push(`on a pris la réserve de ${grp.name}`); } else loss();
+                said.push(i18n('on a pris la réserve de {name}', {name: grp.name})); } else loss();
         }
         // ce qu'on trouve en plus (quand on a pu fouiller ou qu'on a été bien reçu)
         const missing = foundPlans(g).filter(k => !g.plans.includes(k) && !c.finds.includes('p:' + k));
-        if (node.plans > 0 && missing.length && rnd(g) < 0.5) { const k = pickPlan(g, missing, K.city); c.finds.push('p:' + k); node.plans--; said.push(`le plan « ${ITEMS[k].name} »`); }
-        if (K.tool && !g.tools.includes(K.tool) && !c.tools.includes(K.tool) && rnd(g) < 0.4) { c.finds.push('t:' + K.tool); said.push(`l’outil « ${toolInfo(g, K.tool)[1]} »`); }
-        if (rnd(g) < (K.folk || 0) * (grp && !hostile(grp) ? 1.3 : 1) && g.people.length + c.recruits.length < 10) { const np = g.extras.shift() || invent(g); c.recruits.push(np); said.push(`${np.name}${np.occ ? `, ${np.occ.toLowerCase()},` : ''} veut venir avec nous`); }
-        if (rnd(g) < (K.beast || 0) && g.pets.length + c.newBeasts.length < PETS_MAX) { const k = rnd(g) < 0.7 ? 'ane' : 'cheval'; c.newBeasts.push(k); said.push(`${k === 'ane' ? 'un âne' : 'un cheval'} sans maître nous suit`); }
-        const news = pickOne(g, [`les gens de ${node.name} disent que l’hiver sera rude`, `on dit qu’il reste des vivres plus loin`, `des voyageurs parlent d’une bande sur la grand-route`, `quelqu’un a vu de la fumée du côté du bunker`, `les routes de l’est sont plus sûres en ce moment`]);
-        c.news.push(news); said.push(`nouvelles : ${news}`);
+        if (node.plans > 0 && missing.length && rnd(g) < 0.5) { const k = pickPlan(g, missing, K.city); c.finds.push('p:' + k); node.plans--; said.push(i18n('le plan « {name} »', {name: ITEMS[k].name})); }
+        if (K.tool && !g.tools.includes(K.tool) && !c.tools.includes(K.tool) && rnd(g) < 0.4) { c.finds.push('t:' + K.tool); said.push(i18n('l’outil « {name} »', {name: toolInfo(g, K.tool)[1]})); }
+        if (rnd(g) < (K.folk || 0) * (grp && !hostile(grp) ? 1.3 : 1) && g.people.length + c.recruits.length < 10) { const np = g.extras.shift() || invent(g); c.recruits.push(np); said.push(np.occ ? i18n('{name}, {occ}, veut venir avec nous', {name: np.name, occ: np.occ.toLowerCase()}) : i18n('{name} veut venir avec nous', {name: np.name})); }
+        if (rnd(g) < (K.beast || 0) && g.pets.length + c.newBeasts.length < PETS_MAX) { const k = rnd(g) < 0.7 ? 'ane' : 'cheval'; c.newBeasts.push(k); said.push(k === 'ane' ? i18n('un âne sans maître nous suit') : i18n('un cheval sans maître nous suit')); }
+        const news = pickOne(g, [i18n('les gens de {place} disent que l’hiver sera rude', {place: node.name}), i18n('on dit qu’il reste des vivres plus loin'), i18n('des voyageurs parlent d’une bande sur la grand-route'), i18n('quelqu’un a vu de la fumée du côté du bunker'), i18n('les routes de l’est sont plus sûres en ce moment')]);
+        c.news.push(news); said.push(i18n('nouvelles : {news}', {news}));
         ppl.forEach(p => souvenirAt(g, p, {kind: 'node', node}));
-        radio(g, `📻 Le convoi (${convoyNames(g, c)}) à ${node.name} : « ${said.length ? said.map(s => s[0].toUpperCase() + s.slice(1)).join('. ') : 'Rien de spécial'}. On repart. »`);
+        radio(g, i18n('📻 Le convoi ({who}) à {place} : « {news}. On repart. »', {who: convoyNames(g, c), place: node.name, news: said.length ? said.map(s => s[0].toUpperCase() + s.slice(1)).join('. ') : i18n('Rien de spécial')}));
     }
     /** de retour au bunker : le chargement, les trouvailles, les nouveaux, les bêtes ; les blessés à soigner ; les liens se resserrent */
     function returnConvoy(g, c, said = []) {
         const node = nodeOf(g, c.dest), ppl = convoyPeople(g, c), back = ppl.filter(p => p.hp > 0), lost = [];
         [c.pack, c.loot].forEach(o => Object.entries(o).forEach(([r, n]) => { const x = Math.floor(n * 10) / 10; if (x <= 0) return; const put = add(g, r, x); if (put < x - 0.05 && o === c.loot) lost.push(`${Math.round(x - put)} ${resLabel(r, g)}`); }));
         c.tools.forEach(k => { if (!g.tools.includes(k)) g.tools.push(k); });
-        c.finds.forEach(f => { const k = f.slice(2); if (f[0] === 't' && !g.tools.includes(k)) g.tools.push(k); if (f[0] === 'p' && !g.plans.includes(k)) g.plans.push(k); g.stats.found.push(f[0] === 't' ? toolInfo(g, k)[1] : `plan « ${ITEMS[k].name} »`); });
+        c.finds.forEach(f => { const k = f.slice(2); if (f[0] === 't' && !g.tools.includes(k)) g.tools.push(k); if (f[0] === 'p' && !g.plans.includes(k)) g.plans.push(k); g.stats.found.push(f[0] === 't' ? toolInfo(g, k)[1] : i18n('plan « {name} »', {name: ITEMS[k].name})); });
         const nw = []; c.recruits.forEach(np => { if (g.people.length >= 10) return; const p = mkPerson(g, np, false, {needs: {soif: 50, faim: 45, sommeil: 50, hygiene: 35, vessie: 80}, mood: 60}); g.people.push(p); nw.push(p.name); });
         c.newBeasts.forEach(k => adopt(g, k, back[0]));
         c.beasts.forEach(id => { const a = g.pets.find(x => x.id === id); if (a) a.trips = (a.trips || 0) + 1; });
-        back.forEach(p => { p.where = 'base'; delete p.conv; p.act = null; if (c.hurt.includes(p.id)) sicken(g, p, 'blessure'); diary(g, p, `Rentré·e de ${node?.name || 'la route'} après ${Math.max(1, dayOf(g.t) - c.d0)} jours. ${c.news[0] ? `On dit que ${c.news[0]}.` : ''}`); });
+        back.forEach(p => { p.where = 'base'; delete p.conv; p.act = null; if (c.hurt.includes(p.id)) sicken(g, p, 'blessure'); diary(g, p, `${i18n('Rentré·e de {place} après {n} jours.', {place: node?.name || i18n('la route'), n: Math.max(1, dayOf(g.t) - c.d0)})} ${c.news[0] ? i18n('On dit que {news}.', {news: c.news[0]}) : ''}`); });
         ppl.filter(p => p.hp <= 0).forEach(p => { p.where = 'base'; delete p.conv; });
         back.forEach((a, i) => back.slice(i + 1).forEach(b => { const k = relKey(a, b); g.rel[k] = clamp((g.rel[k] || 0) + 8, -50, 50); }));
         const gotN = Math.round(Object.values(c.loot).reduce((a, b) => a + b, 0)), ok = back.length === ppl.length && (gotN > 0 || c.finds.length || nw.length || c.goal === 'aider');
         g.stats.expeditions = (g.stats.expeditions || 0) + 1; if (ok) g.stats.expOk = (g.stats.expOk || 0) + 1;
         g.convoys = g.convoys.filter(x => x !== c);
-        log(g, `🧭 Le convoi est rentré de ${node?.name || 'la région'}${back.length < ppl.length ? ` sans ${ppl.filter(p => p.hp <= 0).map(p => p.name).join(', ')}` : ''}. ${gotN ? `Rapporté : ${Object.entries(c.loot).filter(([, n]) => n >= 1).map(([r, n]) => `${Math.floor(n)} ${resLabel(r, g)}`).join(', ')}.` : 'Presque rien rapporté.'}${c.finds.length ? ` Nouveau : ${c.finds.map(f => f[0] === 't' ? toolInfo(g, f.slice(2))[1] : `plan « ${ITEMS[f.slice(2)].name} »`).join(', ')}.` : ''}${nw.length ? ` 🤗 Avec eux : ${nw.join(', ')}.` : ''}${c.hurt.some(id => back.some(p => p.id === id)) ? ' 🩹 Des blessés à soigner.' : ''}${lost.length ? ` Plus de place pour ${lost.join(', ')}.` : ''}${said.length ? ` En route : ${said.join(' ; ')}.` : ''}`, 'alerte');
+        const where = node?.name || i18n('la région');
+        log(g, [back.length < ppl.length ? i18n('🧭 Le convoi est rentré de {place} sans {who}.', {place: where, who: ppl.filter(p => p.hp <= 0).map(p => p.name).join(', ')}) : i18n('🧭 Le convoi est rentré de {place}.', {place: where}),
+            gotN ? i18n('Rapporté : {list}.', {list: Object.entries(c.loot).filter(([, n]) => n >= 1).map(([r, n]) => `${Math.floor(n)} ${resLabel(r, g)}`).join(', ')}) : i18n('Presque rien rapporté.'),
+            c.finds.length ? i18n('Nouveau : {list}.', {list: c.finds.map(f => f[0] === 't' ? toolInfo(g, f.slice(2))[1] : i18n('plan « {name} »', {name: ITEMS[f.slice(2)].name})).join(', ')}) : '',
+            nw.length ? i18n('🤗 Avec eux : {list}.', {list: nw.join(', ')}) : '', c.hurt.some(id => back.some(p => p.id === id)) ? i18n('🩹 Des blessés à soigner.') : '',
+            lost.length ? i18n('Plus de place pour {list}.', {list: lost.join(', ')}) : '', said.length ? i18n('En route : {list}.', {list: said.join(' ; ')}) : ''].filter(Boolean).join(' '), 'alerte');
         if (back.length) atBase(g).forEach(p => { p.mood = clamp((p.mood ?? 70) + (ok ? 6 : 2), 0, 100); });
     }
     /** le convoi ne revient pas : les véhicules, les outils et les bêtes sont perdus avec lui */
@@ -1747,7 +1776,7 @@
         c.veh.forEach(key => { const m = /^(\d),(\d)$/.exec(key); if (m && g.floors[+m[1]]) { g.floors[+m[1]].slots[+m[2]] = null; delete g.broken[key]; delete g.lvl[key]; if (g.wear) delete g.wear[key]; } });
         g.pets = g.pets.filter(a => !c.beasts.includes(a.id)); convoyPeople(g, c).forEach(p => { p.where = 'base'; delete p.conv; });
         g.convoys = g.convoys.filter(x => x !== c); g.stats.expLost = (g.stats.expLost || 0) + 1; g.stats.expeditions = (g.stats.expeditions || 0) + 1;
-        log(g, `🕯️ Le convoi parti vers ${node?.name || 'la région'} n’est jamais revenu.`, 'alerte');
+        log(g, i18n('🕯️ Le convoi parti vers {place} n’est jamais revenu.', {place: node?.name || i18n('la région')}), 'alerte');
     }
     /** 📻 « Rentrez ! » : le convoi fait demi-tour (il faut de quoi porter le message) → vrai si c'est fait */
     function recallConvoy(g, id) {
@@ -1755,7 +1784,7 @@
         if (!g.power && !crier(g) && !has(g, 'talkie') && !has(g, 'pigeonnier')) return false;
         if (c.stayUntil) { c.stayUntil = 0; c.dir = -1; startLeg(g, c); }
         else if (c.leg) { const L = c.leg; c.dir = -1; c.leg = {a: L.b, b: L.a, bi: c.pos, t0: g.t, t1: g.t + Math.max(30, g.t - L.t0)}; }
-        log(g, `${crier(g) ? '📯' : '📻'} « Le convoi, rentrez ! » — « Bien reçu, on fait demi-tour. »`, 'radio'); return true;
+        log(g, i18n('{ico} « Le convoi, rentrez ! » — « Bien reçu, on fait demi-tour. »', {ico: crier(g) ? '📯' : '📻'}), 'radio'); return true;
     }
     /** où est un convoi sur la carte (pour le dessin) : {x, y} */
     function convoyAt(g, c) {
@@ -1767,48 +1796,48 @@
     /* ═════════ 🤝 Les autres groupes de survivants : la réputation ═════════ */
     function repAdd(g, grp, n, why = '') {
         if (!grp || !n) return; const before = grp.rep; grp.rep = clamp(Math.round(grp.rep + n), -100, 100); const L0 = repInfo(before)[1], L1 = repInfo(grp.rep)[1];
-        if (L0 !== L1) log(g, `${GROUP_KINDS[grp.k][0]} ${grp.name[0].toUpperCase()}${grp.name.slice(1)} : ${L1.toLowerCase()} (réputation ${grp.rep})${why ? ` — ${why}` : ''}.`, grp.rep > before ? 'histoire' : 'alerte');
+        if (L0 !== L1) { const o = {ico: GROUP_KINDS[grp.k][0], name: `${grp.name[0].toUpperCase()}${grp.name.slice(1)}`, level: lc(L1), rep: String(grp.rep)}; log(g, why ? i18n('{ico} {name} : {level} (réputation {rep}) — {why}.', {...o, why: i18n(why)}) : i18n('{ico} {name} : {level} (réputation {rep}).', o), grp.rep > before ? 'histoire' : 'alerte'); }
     }
     /** la menace des bandes (plus elles vous détestent, plus elles viennent) : 0 = personne, 1 ≈ une bande qui vous en veut beaucoup */
     const hostility = g => (g.groups || []).filter(x => hostile(x) && g.t >= (x.calm || 0)).reduce((a, x) => a + Math.max(0, -x.rep) / 100 * (x.k === 'bande' ? 1 : 0.7), 0);
     const msgOk = g => hasRadio(g) && (g.power || crier(g) || has(g, 'talkie') || has(g, 'pigeonnier'));
     /** 🎁 offrir à un groupe (un messager porte le cadeau) → {ok, err} */
     function giftGroup(g, gid, r, n) {
-        const grp = (g.groups || []).find(x => x.id === gid); if (!grp) return {ok: false, err: 'Groupe inconnu.'}; n = Math.round(Number(n) || 0);
-        if (!RES_KEYS.includes(r) || n < 1) return {ok: false, err: 'Rien à offrir.'}; if (!msgOk(g)) return {ok: false, err: 'Il faut de quoi porter le message (radio et électricité, crieur, talkies ou pigeons).'};
-        if ((g.res[r] || 0) < n) return {ok: false, err: `Il manque ${Math.ceil(n - g.res[r])} ${resLabel(r, g)}.`};
+        const grp = (g.groups || []).find(x => x.id === gid); if (!grp) return {ok: false, err: i18n('Groupe inconnu.')}; n = Math.round(Number(n) || 0);
+        if (!RES_KEYS.includes(r) || n < 1) return {ok: false, err: i18n('Rien à offrir.')}; if (!msgOk(g)) return {ok: false, err: i18n('Il faut de quoi porter le message (radio et électricité, crieur, talkies ou pigeons).')};
+        if ((g.res[r] || 0) < n) return {ok: false, err: i18n('Il manque {what}.', {what: `${Math.ceil(n - g.res[r])} ${resLabel(r, g)}`})};
         g.res[r] -= n; g.stats.gifts = (g.stats.gifts || 0) + 1; repAdd(g, grp, Math.min(15, Math.round(1 + n * (VALUE[r] || 1) * (hostile(grp) ? 0.5 : 1))), 'votre cadeau');
         if (hostile(grp)) grp.calm = Math.max(grp.calm || 0, g.t + 1440);
-        log(g, `🎁 Un messager porte ${n} ${resLabel(r, g)} à ${grp.name}.`); return {ok: true};
+        log(g, i18n('🎁 Un messager porte {what} à {name}.', {what: `${n} ${resLabel(r, g)}`, name: grp.name})); return {ok: true};
     }
     /** 🫏 échanger une bête de bât avec un groupe ami ou marchand (un messager l'amène) → {ok, err} */
     const BEAST_PRICE = {ane: {nourriture: 10, eau: 6}, cheval: {nourriture: 16, metal: 6}};
     function buyBeast(g, gid, k) {
-        const grp = (g.groups || []).find(x => x.id === gid); if (!grp || hostile(grp)) return {ok: false, err: 'Ils ne veulent pas commercer.'}; if (!BEAST_PRICE[k]) return {ok: false, err: 'Bête inconnue.'};
-        if (grp.rep < 0) return {ok: false, err: `${grp.name} ne vous font pas encore assez confiance.`}; if (!msgOk(g)) return {ok: false, err: 'Il faut de quoi porter le message.'};
-        if (g.pets.length >= PETS_MAX) return {ok: false, err: `${PETS_MAX} animaux au plus.`};
+        const grp = (g.groups || []).find(x => x.id === gid); if (!grp || hostile(grp)) return {ok: false, err: i18n('Ils ne veulent pas commercer.')}; if (!BEAST_PRICE[k]) return {ok: false, err: i18n('Bête inconnue.')};
+        if (grp.rep < 0) return {ok: false, err: i18n('{name} ne vous font pas encore assez confiance.', {name: grp.name})}; if (!msgOk(g)) return {ok: false, err: i18n('Il faut de quoi porter le message.')};
+        if (g.pets.length >= PETS_MAX) return {ok: false, err: i18n('{n} animaux au plus.', {n: PETS_MAX})};
         const err = payOrErr(g, BEAST_PRICE[k]); if (err) return {ok: false, err};
-        adopt(g, k, null); repAdd(g, grp, 2, 'un bon marché'); g.stats.trades++; log(g, `🤝 ${grp.name[0].toUpperCase()}${grp.name.slice(1)} vous amènent ${k === 'ane' ? 'un âne' : 'un cheval'}.`); return {ok: true};
+        adopt(g, k, null); repAdd(g, grp, 2, 'un bon marché'); g.stats.trades++; log(g, i18n(k === 'ane' ? '🤝 {name} vous amènent un âne.' : '🤝 {name} vous amènent un cheval.', {name: `${grp.name[0].toUpperCase()}${grp.name.slice(1)}`})); return {ok: true};
     }
     /** 🤲 répondre à une demande d'aide : 'partager' ou 'refuser' → {ok, err} */
     function answerAsk(g, id, choice) {
-        const i = (g.asks || []).findIndex(a => a.id === id); if (i < 0) return {ok: false, err: 'Cette demande n’existe plus.'}; const a = g.asks[i], grp = (g.groups || []).find(x => x.id === a.g);
-        if (choice === 'partager') { if ((g.res[a.r] || 0) < a.n) return {ok: false, err: `Il manque ${Math.ceil(a.n - g.res[a.r])} ${resLabel(a.r, g)}.`}; g.res[a.r] -= a.n; repAdd(g, grp, Math.min(20, 6 + Math.round(a.n * (VALUE[a.r] || 1))), 'vous avez partagé'); g.stats.gifts = (g.stats.gifts || 0) + 1; log(g, `🤲 Vous envoyez ${a.n} ${resLabel(a.r, g)} à ${grp?.name || 'vos voisins'}.`); }
-        else { repAdd(g, grp, -5, 'vous avez refusé de les aider'); log(g, `🚫 Vous refusez d’aider ${grp?.name || 'vos voisins'}.`); }
+        const i = (g.asks || []).findIndex(a => a.id === id); if (i < 0) return {ok: false, err: i18n('Cette demande n’existe plus.')}; const a = g.asks[i], grp = (g.groups || []).find(x => x.id === a.g);
+        if (choice === 'partager') { if ((g.res[a.r] || 0) < a.n) return {ok: false, err: i18n('Il manque {what}.', {what: `${Math.ceil(a.n - g.res[a.r])} ${resLabel(a.r, g)}`})}; g.res[a.r] -= a.n; repAdd(g, grp, Math.min(20, 6 + Math.round(a.n * (VALUE[a.r] || 1))), 'vous avez partagé'); g.stats.gifts = (g.stats.gifts || 0) + 1; log(g, i18n('🤲 Vous envoyez {what} à {name}.', {what: `${a.n} ${resLabel(a.r, g)}`, name: grp?.name || i18n('vos voisins')})); }
+        else { repAdd(g, grp, -5, 'vous avez refusé de les aider'); log(g, i18n('🚫 Vous refusez d’aider {name}.', {name: grp?.name || i18n('vos voisins')})); }
         g.asks.splice(i, 1); return {ok: true};
     }
     /** chaque heure : une demande d'aide parfois (10 h), l'aide des alliés quand ça va mal (9 h), les demandes oubliées */
     function groupsHour(g, hr) {
         if (!g.groups?.length) return; const day = dayOf(g.t);
-        (g.asks || []).filter(a => g.t >= a.until).forEach(a => { repAdd(g, g.groups.find(x => x.id === a.g), -4, 'personne ne leur a répondu'); log(g, `⌛ ${g.groups.find(x => x.id === a.g)?.name || 'Des voisins'} n’ont pas eu de réponse.`); });
+        (g.asks || []).filter(a => g.t >= a.until).forEach(a => { repAdd(g, g.groups.find(x => x.id === a.g), -4, 'personne ne leur a répondu'); log(g, i18n('⌛ {name} n’ont pas eu de réponse.', {name: g.groups.find(x => x.id === a.g)?.name || i18n('Des voisins')})); });
         g.asks = (g.asks || []).filter(a => g.t < a.until);
         if (hr === 10 && day >= 3 && g.asks.length < 2 && rnd(g) < 0.14) { const grp = pickOne(g, g.groups.filter(x => !hostile(x) && x.rep > -15 && !g.asks.some(a => a.g === x.id))); if (grp) {
             const r = pickOne(g, ['nourriture', 'eau', 'medic', 'bois', 'tissu', 'essence'].filter(x => resOk(g, x))), n = r === 'medic' ? rint(g, 1, 3) : rint(g, 3, 8);
-            g.asks.push({id: 'k' + (g.nextId++), g: grp.id, r, n, until: g.t + 36 * 60}); radio(g, `📻 ${grp.name[0].toUpperCase()}${grp.name.slice(1)} demandent de l’aide : ${n} ${resLabel(r, g)} (réponse dans les 36 h, onglet 🗺️ Région).`); } }
+            g.asks.push({id: 'k' + (g.nextId++), g: grp.id, r, n, until: g.t + 36 * 60}); radio(g, i18n('📻 {name} demandent de l’aide : {what} (réponse dans les 36 h, onglet 🗺️ Région).', {name: `${grp.name[0].toUpperCase()}${grp.name.slice(1)}`, what: `${n} ${resLabel(r, g)}`})); } }
         if (hr === 9 && msgOk(g)) { const al = atBase(g).length || 1, need = g.res.nourriture < 1.5 * al ? 'nourriture' : g.res.eau + g.res.eausale < 2 * al ? 'eau' : atBase(g).some(p => p.ill) && g.res.medic < 1 && resOk(g, 'medic') ? 'medic' : '';
             const ally = need && g.groups.filter(x => !hostile(x) && x.rep >= 40 && (!x.help || day - x.help >= 6)).sort((a, b) => b.rep - a.rep)[0];
             if (ally) { ally.help = day; const n = need === 'medic' ? rint(g, 2, 4) : rint(g, 6, 12); g.market.deals.push({t: g.t + rint(g, 4, 10) * 60, r: need, n, who: ally.name, ok: true}); repAdd(g, ally, -4, 'une dette envers eux');
-                log(g, `🤝 ${ally.name[0].toUpperCase()}${ally.name.slice(1)} ont appris que ça va mal chez vous : ils envoient ${n} ${resLabel(need, g)} par messager.`, 'histoire'); } }
+                log(g, i18n('🤝 {name} ont appris que ça va mal chez vous : ils envoient {what} par messager.', {name: `${ally.name[0].toUpperCase()}${ally.name.slice(1)}`, what: `${n} ${resLabel(need, g)}`}), 'histoire'); } }
     }
 
     /* ═════════ 🏚️ Les bâtiments de la ville à remettre en état ═════════ */
@@ -1819,7 +1848,7 @@
         e1940: {ferme: 'La ferme', moulin: 'Le moulin', infirmerie: 'Le dispensaire', atelier: 'La forge du village', puits: 'Le puits'}, e1910: {ferme: 'La ferme', moulin: 'Le moulin', infirmerie: 'Le dispensaire', atelier: 'La forge', puits: 'Le puits'},
         e1870: {ferme: 'La ferme', moulin: 'Le moulin à vent', infirmerie: 'L’ambulance du quartier', atelier: 'La forge', puits: 'Le puits communal'}, ancien: {ferme: 'La métairie', moulin: 'Le moulin à vent', infirmerie: 'La maison des sœurs', atelier: 'La forge', puits: 'Le puits communal'}};
     const SITE_STATE = {ruine: ['RUINE', 'grey'], chantier: ['CHANTIER', 'blue'], marche: ['PRODUIT', 'green'], abime: ['ABÎMÉ', 'red']};
-    const siteName = (g, k) => (SITE_NAMES[histOf(g)?.era] || SITE_NAMES.moderne)[k];
+    const siteName = (g, k) => { const n = (SITE_NAMES[histOf(g)?.era] || SITE_NAMES.moderne)[k]; return n ? i18n(n) : n; };
     const siteOf = (g, id) => (g.sites || []).find(s => s.id === id) || null;
     /** ce qu'un bâtiment remis en état fait chaque jour (moins pendant le siège, la pénurie ; la farine avec les chaînes de fabrication) */
     function siteProd(g, s) { const out = {...SITES[s.k][3]}; if (s.k === 'moulin' && opt(g, 'chaines')) { delete out.nourriture; out.farine = 3; }
@@ -1833,32 +1862,32 @@
     }
     /** lancer le chantier (les matériaux d'abord) ou les réparations d'un bâtiment abîmé (un tiers du coût, un tiers du travail) → {ok, err} */
     function startSite(g, id) {
-        const s = siteOf(g, id); if (!s) return {ok: false, err: 'Bâtiment inconnu.'}; if (!['ruine', 'abime'].includes(s.state)) return {ok: false, err: s.state === 'chantier' ? 'Le chantier est déjà lancé.' : 'Il marche déjà.'};
+        const s = siteOf(g, id); if (!s) return {ok: false, err: i18n('Bâtiment inconnu.')}; if (!['ruine', 'abime'].includes(s.state)) return {ok: false, err: s.state === 'chantier' ? i18n('Le chantier est déjà lancé.') : i18n('Il marche déjà.')};
         const cost = s.state === 'ruine' ? SITES[s.k][1] : Object.fromEntries(Object.entries(SITES[s.k][1]).map(([r, n]) => [r, Math.max(1, Math.ceil(n / 3))])), err = payOrErr(g, cost); if (err) return {ok: false, err};
         if (s.state === 'abime') { s.need = Math.round(SITES[s.k][2] / 3); s.rep = true; } else s.need = SITES[s.k][2]; s.work = 0; s.state = 'chantier';
-        log(g, `🏚️ ${siteName(g, s.k)} : le chantier commence (${s.need} h de travail sur place). Envoie des habitants y travailler.`); return {ok: true};
+        log(g, i18n('🏚️ {site} : le chantier commence ({n} h de travail sur place). Envoie des habitants y travailler.', {site: siteName(g, s.k), n: s.need})); return {ok: true};
     }
     /** 🪵 une palissade autour : le bâtiment est bien moins souvent pillé → {ok, err} */
     const FENCE_COST = {bois: 8, clous: 6};
-    function fenceSite(g, id) { const s = siteOf(g, id); if (!s) return {ok: false, err: 'Bâtiment inconnu.'}; if (s.fence) return {ok: false, err: 'Il y a déjà une palissade.'}; const err = payOrErr(g, FENCE_COST); if (err) return {ok: false, err}; s.fence = true; log(g, `🪵 Une palissade autour de ${siteName(g, s.k).toLowerCase()}.`); return {ok: true}; }
+    function fenceSite(g, id) { const s = siteOf(g, id); if (!s) return {ok: false, err: i18n('Bâtiment inconnu.')}; if (s.fence) return {ok: false, err: i18n('Il y a déjà une palissade.')}; const err = payOrErr(g, FENCE_COST); if (err) return {ok: false, err}; s.fence = true; log(g, i18n('🪵 Une palissade autour de {site}.', {site: lc(siteName(g, s.k))})); return {ok: true}; }
     /** 👷 envoyer un habitant à un bâtiment : 'travail' (des heures de chantier, et il rapporte ce qui a été produit) ou 'recolte' (il va chercher ce qui a été produit) → {ok, err} */
     function sendSite(g, id, sid, mode = 'recolte', hours = 8) {
-        const p = g.people.find(x => x.id === id), s = siteOf(g, sid); if (!p || p.hp <= 0) return {ok: false, err: 'Personne à envoyer.'}; if (!s) return {ok: false, err: 'Bâtiment inconnu.'};
-        if (p.baby || p.child) return {ok: false, err: `${p.name} est trop petit·e.`}; if (p.where !== 'base') return {ok: false, err: `${p.name} n’est pas au bunker.`};
-        if (mode === 'travail' && s.state !== 'chantier') return {ok: false, err: s.state === 'marche' ? 'Le bâtiment marche déjà : on peut y aller récolter.' : 'Lance d’abord le chantier (les matériaux).'};
-        if (mode !== 'travail' && s.state !== 'marche') return {ok: false, err: 'Rien à récolter : il ne produit pas encore.'};
+        const p = g.people.find(x => x.id === id), s = siteOf(g, sid); if (!p || p.hp <= 0) return {ok: false, err: i18n('Personne à envoyer.')}; if (!s) return {ok: false, err: i18n('Bâtiment inconnu.')};
+        if (p.baby || p.child) return {ok: false, err: i18n('{name} est trop petit·e.', {name: p.name})}; if (p.where !== 'base') return {ok: false, err: i18n('{name} n’est pas au bunker.', {name: p.name})};
+        if (mode === 'travail' && s.state !== 'chantier') return {ok: false, err: s.state === 'marche' ? i18n('Le bâtiment marche déjà : on peut y aller récolter.') : i18n('Lance d’abord le chantier (les matériaux).')};
+        if (mode !== 'travail' && s.state !== 'marche') return {ok: false, err: i18n('Rien à récolter : il ne produit pas encore.')};
         const terr = cityTerrain(g), {v, a} = bestTransport(g, terr), cap = carryOf(g, p, {only: true}) + (v?.cap || 0) + (a?.cap || 0);
         p.where = 'dehors'; p.act = null; p.exp = {site: s.id, mode: mode === 'travail' ? 'travail' : 'recolte', hours: clamp(Math.round(Number(hours) || 8), 1, 12), route: [], i: 0, place: null, phase: 'aller', from: g.t, until: g.t + travel(g, s), loot: {}, junk: [], found: [], veh: v?.key || '', beasts: [v?.horse, a?.id].filter(Boolean), cap, terr};
-        log(g, `👷 ${p.name} part ${mode === 'travail' ? `travailler ${p.exp.hours} h` : 'récolter'} à ${siteName(g, s.k).toLowerCase()}.`); return {ok: true};
+        log(g, mode === 'travail' ? i18n('👷 {name} part travailler {n} h à {site}.', {name: p.name, n: p.exp.hours, site: lc(siteName(g, s.k))}) : i18n('👷 {name} part récolter à {site}.', {name: p.name, site: lc(siteName(g, s.k))})); return {ok: true};
     }
     function siteTrip(g, p, e) {
         const s = siteOf(g, e.site); if (!s) { p.where = 'base'; p.exp = null; return; }
-        if (e.phase === 'aller') { e.phase = 'chantier'; e.until = g.t + (e.mode === 'travail' ? e.hours * 60 : 30); radio(g, `📻 ${p.name} : « Je suis à ${siteName(g, s.k).toLowerCase()}. »`); return; }
+        if (e.phase === 'aller') { e.phase = 'chantier'; e.until = g.t + (e.mode === 'travail' ? e.hours * 60 : 30); radio(g, i18n('📻 {name} : « Je suis à {site}. »', {name: p.name, site: lc(siteName(g, s.k))})); return; }
         if (e.phase === 'chantier') {
             if (e.mode === 'travail' && s.state === 'chantier') {
                 const done = e.hours * (p.sk?.construire || 1) * (g.tools.includes('scie') ? 1.3 : 1) * moodMult(p) * ageK(g, p) * (trait(p, 'bricoleur') ? 1.2 : 1) * ((p.sk?.[SITES[s.k][4]] || 1) > 1.2 ? 1.15 : 1);
                 s.work += done; gainXp(g, p, 'construire', e.hours * 0.6);
-                if (s.work >= s.need) { s.state = 'marche'; s.work = s.need; s.last = g.t; g.stats.sitesFixed = (g.stats.sitesFixed || 0) + 1; log(g, `✅ ${siteName(g, s.k)} ${s.rep ? 'est réparé' : 'est remis en état'} : il produit ${Object.entries(siteProd(g, s)).map(([r, n]) => `${String(n).replace('.', ',')} ${resLabel(r, g)}`).join(' et ')} par jour. Pense à y passer : ce qui n’est pas récolté peut être pillé.`, 'alerte'); delete s.rep; }
+                if (s.work >= s.need) { s.state = 'marche'; s.work = s.need; s.last = g.t; g.stats.sitesFixed = (g.stats.sitesFixed || 0) + 1; const sv = {site: siteName(g, s.k), prod: Object.entries(siteProd(g, s)).map(([r, n]) => `${String(n).replace('.', ',')} ${resLabel(r, g)}`).join(` ${i18n('et')} `)}; log(g, s.rep ? i18n('✅ {site} est réparé : il produit {prod} par jour. Pense à y passer : ce qui n’est pas récolté peut être pillé.', sv) : i18n('✅ {site} est remis en état : il produit {prod} par jour. Pense à y passer : ce qui n’est pas récolté peut être pillé.', sv), 'alerte'); delete s.rep; }
             }
             let room = (e.cap || carryOf(g, p, {only: true})) - loadOf(e); Object.keys(s.stock).forEach(r => { const n = Math.min(Math.floor(s.stock[r]), Math.floor(room / wOf(r))); if (n > 0) { s.stock[r] -= n; e.loot[r] = (e.loot[r] || 0) + n; room -= n * wOf(r); } });
             s.last = g.t; s.guard = g.t + 1440; souvenirAt(g, p, {kind: 'site', site: s});
@@ -1866,7 +1895,8 @@
         }
         const got = []; Object.entries(e.loot).forEach(([r, n]) => { if (n > 0) got.push(`${add(g, r, n)} ${resLabel(r, g)}`); });
         if (e.veh) wearVeh(g, e.veh, e.terr || 'route', 0.5);
-        log(g, `🏠 ${p.name} rentre de ${siteName(g, s.k).toLowerCase()}${s.state === 'chantier' ? ` (chantier : ${Math.min(100, Math.round(100 * s.work / s.need))} %)` : ''}${got.length ? ` avec ${got.join(', ')}` : ''}.`);
+        const rv = {name: p.name, site: lc(siteName(g, s.k)), pc: Math.min(100, Math.round(100 * s.work / s.need)), got: got.join(', ')};
+        log(g, s.state === 'chantier' ? (got.length ? i18n('🏠 {name} rentre de {site} (chantier : {pc} %) avec {got}.', rv) : i18n('🏠 {name} rentre de {site} (chantier : {pc} %).', rv)) : (got.length ? i18n('🏠 {name} rentre de {site} avec {got}.', rv) : i18n('🏠 {name} rentre de {site}.', rv)));
         p.where = 'base'; p.exp = null; p.act = null;
     }
     /** chaque matin : les bâtiments en marche produisent (3 jours au plus en attente) ; ceux qu'on ne visite pas sont pillés ou s'abîment */
@@ -1875,9 +1905,9 @@
             if (s.state !== 'marche') return; const P = siteProd(g, s); Object.entries(P).forEach(([r, n]) => { s.stock[r] = Math.min(n * 3, (s.stock[r] || 0) + n); });
             const since = (g.t - (s.last || 0)) / 1440, risk = Math.min(0.35, (0.02 + 0.04 * Math.max(0, since - 2)) * (0.6 + hostility(g)) * DF(g).raid * (s.fence ? 0.4 : 1) * (g.t < (s.guard || 0) ? 0.3 : 1));
             if (rnd(g) < risk) { s.raids = (s.raids || 0) + 1; const had = Object.values(s.stock).some(n => n >= 1); s.stock = {};
-                if (rnd(g) < 0.5) { s.state = 'abime'; log(g, `💥 ${siteName(g, s.k)} a été pillé et abîmé${since > 2 ? ` (personne n’y était passé depuis ${Math.floor(since)} jours)` : ''} : il ne produit plus, il faut le réparer.`, 'alerte'); }
-                else log(g, `🦹 Des pillards sont passés à ${siteName(g, s.k).toLowerCase()}${had ? ' et ont tout emporté' : ''}.`, 'alerte'); }
-            else if (since > 4 && rnd(g) < 0.04 * DF(g).wear) { s.state = 'abime'; log(g, `🔧 ${siteName(g, s.k)} s’est abîmé faute d’entretien : il faut le réparer.`, 'alerte'); }
+                if (rnd(g) < 0.5) { s.state = 'abime'; log(g, since > 2 ? i18n('💥 {site} a été pillé et abîmé (personne n’y était passé depuis {n} jours) : il ne produit plus, il faut le réparer.', {site: siteName(g, s.k), n: Math.floor(since)}) : i18n('💥 {site} a été pillé et abîmé : il ne produit plus, il faut le réparer.', {site: siteName(g, s.k)}), 'alerte'); }
+                else log(g, had ? i18n('🦹 Des pillards sont passés à {site} et ont tout emporté.', {site: lc(siteName(g, s.k))}) : i18n('🦹 Des pillards sont passés à {site}.', {site: lc(siteName(g, s.k))}), 'alerte'); }
+            else if (since > 4 && rnd(g) < 0.04 * DF(g).wear) { s.state = 'abime'; log(g, i18n('🔧 {site} s’est abîmé faute d’entretien : il faut le réparer.', {site: siteName(g, s.k)}), 'alerte'); }
         });
     }
 
@@ -1887,12 +1917,12 @@
     /** prendre un apprenti → {ok, err} */
     function setApprentice(g, mid, aid, sk) {
         const m = g.people.find(p => p.id === mid), a = g.people.find(p => p.id === aid); g.appr = g.appr || [];
-        if (!m || !a || m === a || a.hp <= 0) return {ok: false, err: 'Choisis un maître et un apprenti.'}; if (a.baby) return {ok: false, err: `${a.name} est trop petit·e.`};
-        if (!canTeach(g, m).includes(sk)) return {ok: false, err: `${m.name} n’en sait pas assez pour enseigner.`};
-        if ((a.sk?.[sk] || 1) >= m.sk[sk] - 0.1) return {ok: false, err: `${a.name} en sait déjà autant.`};
-        if (g.appr.some(x => x.m === m.id)) return {ok: false, err: `${m.name} a déjà un·e apprenti·e.`}; if (g.appr.some(x => x.a === a.id)) return {ok: false, err: `${a.name} apprend déjà un métier.`};
+        if (!m || !a || m === a || a.hp <= 0) return {ok: false, err: i18n('Choisis un maître et un apprenti.')}; if (a.baby) return {ok: false, err: i18n('{name} est trop petit·e.', {name: a.name})};
+        if (!canTeach(g, m).includes(sk)) return {ok: false, err: i18n('{name} n’en sait pas assez pour enseigner.', {name: m.name})};
+        if ((a.sk?.[sk] || 1) >= m.sk[sk] - 0.1) return {ok: false, err: i18n('{name} en sait déjà autant.', {name: a.name})};
+        if (g.appr.some(x => x.m === m.id)) return {ok: false, err: i18n('{name} a déjà un·e apprenti·e.', {name: m.name})}; if (g.appr.some(x => x.a === a.id)) return {ok: false, err: i18n('{name} apprend déjà un métier.', {name: a.name})};
         g.appr.push({m: m.id, a: a.id, sk, d0: dayOf(g.t), w: 0}); const S = SKILLS.find(x => x[0] === sk);
-        log(g, `🎓 ${a.name} devient l’apprenti·e de ${m.name} : ${S[1]} ${S[2].toLowerCase()}.`, 'histoire'); diary(g, a, `${m.name} m’apprend son métier. Je veux être à la hauteur.`); diary(g, m, `J’ai pris ${a.name} comme apprenti·e.`); return {ok: true};
+        log(g, i18n('🎓 {a} devient l’apprenti·e de {m} : {ico} {skill}.', {a: a.name, m: m.name, ico: S[1], skill: lc(S[2])}), 'histoire'); diary(g, a, i18n('{name} m’apprend son métier. Je veux être à la hauteur.', {name: m.name})); diary(g, m, i18n('J’ai pris {name} comme apprenti·e.', {name: a.name})); return {ok: true};
     }
     function stopApprentice(g, aid) { const i = (g.appr || []).findIndex(x => x.a === aid); if (i >= 0) g.appr.splice(i, 1); }
     /** chaque soir : l'apprenti progresse s'il est au bunker avec son maître (jamais plus que lui) ; une semaine de plus, ça se fête dans le journal */
@@ -1903,15 +1933,15 @@
             const top = m.sk[x.sk] - 0.05, cur = a.sk[x.sk] || 1, k = (m.sk[x.sk] / 1.5) * ((a.mood ?? 70) >= 50 ? 1 : 0.6) * (relOf(g, m, a) <= -25 ? 0.5 : 1);
             a.sk[x.sk] = Math.round(Math.min(top, cur + 0.035 * k) * 1000) / 1000; g.rel[relKey(m, a)] = clamp((g.rel[relKey(m, a)] || 0) + 1, -50, 50);
             const S = SKILLS.find(s => s[0] === x.sk), w = Math.floor((dayOf(g.t) - x.d0) / 7);
-            if (w > x.w) { x.w = w; log(g, `🎓 ${a.name} : ${w === 1 ? '1 semaine' : `${w} semaines`} d’apprentissage auprès de ${m.name} — ${S[1]} ×${a.sk[x.sk].toFixed(2).replace('.', ',')}.`, 'histoire'); }
-            if (a.sk[x.sk] >= top - 0.001) { g.stats.compagnons = (g.stats.compagnons || 0) + 1; log(g, `🎓 ${a.name} en sait maintenant autant que ${m.name} : ${S[2].toLowerCase()}, c’est son métier.`, 'histoire'); diary(g, a, `${m.name} dit que je n’ai plus rien à apprendre de lui ou d’elle.`); stopApprentice(g, a.id); }
+            if (w > x.w) { x.w = w; log(g, i18n(w === 1 ? '🎓 {a} : 1 semaine d’apprentissage auprès de {m} — {ico} ×{n}.' : '🎓 {a} : {w} semaines d’apprentissage auprès de {m} — {ico} ×{n}.', {a: a.name, w, m: m.name, ico: S[1], n: a.sk[x.sk].toFixed(2).replace('.', ',')}), 'histoire'); }
+            if (a.sk[x.sk] >= top - 0.001) { g.stats.compagnons = (g.stats.compagnons || 0) + 1; log(g, i18n('🎓 {a} en sait maintenant autant que {m} : {skill}, c’est son métier.', {a: a.name, m: m.name, skill: lc(S[2])}), 'histoire'); diary(g, a, i18n('{name} dit que je n’ai plus rien à apprendre de lui ou d’elle.', {name: m.name})); stopApprentice(g, a.id); }
         });
     }
     /** 📜 quand le maître meurt : le savoir reste chez l'apprenti (et ses carnets, après deux semaines, le font monter un peu) */
     function masterDied(g, m) {
         (g.appr || []).filter(x => x.m === m.id).forEach(x => { const a = g.people.find(p => p.id === x.a); stopApprentice(g, x.a); if (!a || a.hp <= 0) return;
             const S = SKILLS.find(s => s[0] === x.sk); if (x.w >= 2) a.sk[x.sk] = Math.round(Math.max(a.sk[x.sk], m.sk[x.sk] - 0.15) * 1000) / 1000;
-            g.stats.transmis = (g.stats.transmis || 0) + 1; log(g, `📜 ${m.name} n’est plus, mais son savoir reste chez ${a.name} : ${S[2].toLowerCase()} ×${a.sk[x.sk].toFixed(2).replace('.', ',')}.`, 'histoire'); diary(g, a, `${m.name} est parti·e. Je continuerai ce qu’il ou elle m’a appris.`); });
+            g.stats.transmis = (g.stats.transmis || 0) + 1; log(g, i18n('📜 {m} n’est plus, mais son savoir reste chez {a} : {skill} ×{n}.', {m: m.name, a: a.name, skill: lc(S[2]), n: a.sk[x.sk].toFixed(2).replace('.', ',')}), 'histoire'); diary(g, a, i18n('{name} est parti·e. Je continuerai ce qu’il ou elle m’a appris.', {name: m.name})); });
     }
 
     /* ═════════ 💞 Les couples qui se forment ═════════ */
@@ -1922,10 +1952,10 @@
     function couples(g, here) {
         here.forEach((a, i) => here.slice(i + 1).forEach(b => {
             const v = relOf(g, a, b), bunkerCouple = (g.couples || []).find(c => (c.a === a.id && c.b === b.id) || (c.a === b.id && c.b === a.id));
-            if (bunkerCouple && v <= -10) { a.spouses = a.spouses.filter(x => x !== b.id); b.spouses = b.spouses.filter(x => x !== a.id); g.couples = g.couples.filter(c => c !== bunkerCouple); log(g, `💔 ${a.name} et ${b.name} se séparent.`, 'alerte'); [a, b].forEach(p => { p.mood = clamp((p.mood ?? 70) - 12, 0, 100); }); return; }
+            if (bunkerCouple && v <= -10) { a.spouses = a.spouses.filter(x => x !== b.id); b.spouses = b.spouses.filter(x => x !== a.id); g.couples = g.couples.filter(c => c !== bunkerCouple); log(g, i18n('💔 {a} et {b} se séparent.', {a: a.name, b: b.name}), 'alerte'); [a, b].forEach(p => { p.mood = clamp((p.mood ?? 70) - 12, 0, 100); }); return; }
             if (!bunkerCouple && v >= 30 && canPair(g, a, b) && rnd(g) < 0.12 + (trait(a, 'sociable') || trait(b, 'sociable') ? 0.05 : 0)) {
                 a.spouses.push(b.id); b.spouses.push(a.id); (g.couples = g.couples || []).push({a: a.id, b: b.id, d: dayOf(g.t)}); [a, b].forEach(p => { p.mood = clamp((p.mood ?? 70) + 10, 0, 100); });
-                log(g, `💞 ${a.name} et ${b.name} forment un couple.`, 'histoire'); diary(g, a, `${b.name} et moi, c’est sérieux.`); diary(g, b, `${a.name} et moi, c’est sérieux.`);
+                log(g, i18n('💞 {a} et {b} forment un couple.', {a: a.name, b: b.name}), 'histoire'); diary(g, a, i18n('{name} et moi, c’est sérieux.', {name: b.name})); diary(g, b, i18n('{name} et moi, c’est sérieux.', {name: a.name}));
             }
         }));
     }
@@ -1938,38 +1968,40 @@
 
     /* ═════════ 🧓 Souvenirs des ancêtres (option) : la vraie vie d'un habitant tiré de la base ═════════ */
     /** ce que la fiche apporte : métier, naissance (année, lieu), mariage (année, lieu, conjoint), enfants (années) ; rien d'un vivant, d'une fiche confidentielle ou cachée */
-    const cleanMem = m => (!m || typeof m !== 'object' || m.living || m.priv || m.sh ? null : {occ: str(m.occ, 60), by: Number(m.by) || 0, bplace: str(m.bplace, 60), mplace: str(m.mplace, 60), my: Number(m.my) || 0, spouse: str(m.spouse, 80), kids: (Array.isArray(m.kids) ? m.kids : []).slice(0, 20).map(y => Number(y) || 0)});
+    const cleanMem = m => (!m || typeof m !== 'object' || m.living || m.priv || m.sh || m.mem ? null : {occ: str(m.occ, 60), by: Number(m.by) || 0, bplace: str(m.bplace, 60), mplace: str(m.mplace, 60), my: Number(m.my) || 0, spouse: str(m.spouse, 80), kids: (Array.isArray(m.kids) ? m.kids : []).slice(0, 20).map(y => Number(y) || 0)});
     /** ce qui fait penser à un métier : lieux de la ville, lieux de la région, bâtiments, outils */
     const MEM_LINK = {construire: ['menuiserie', 'quincaillerie', 'foret', 'puits', 'scie', 'pelle'], reparer: ['garage', 'usine', 'depot', 'mine', 'atelier', 'cle'], soigner: ['pharmacie', 'hopital', 'abbaye', 'infirmerie'],
         cultiver: ['ferme', 'village', 'moulin', 'pelle'], cuisiner: ['supermarche', 'moulin', 'ferme'], fouiller: ['supermarche', 'droguerie', 'station', 'ville', 'port'], defendre: ['gare', 'mairie', 'depot'], raconter: ['bibliotheque', 'ecole', 'eglise', 'abbaye']};
     const memSkills = p => SKILLS.filter(([, , , re]) => re.test(String(p.mem?.occ || '').toLowerCase())).map(x => x[0]);
     const sameTown = (a, b) => { const x = foldTxt(String(a || '').split(',')[0]).trim(), y = foldTxt(String(b || '').split(',')[0]).trim(); return !!x && !!y && (x === y || y.startsWith(x + ' ') || x.startsWith(y + ' ')); };
     /** une anecdote vraie, tirée de la fiche (dans un scénario historique : seulement ce qui s'est passé avant la date) */
-    function memTale(g, p, lead) {
-        const m = p.mem, Y = histOf(g)?.date[0] || 0, before = y => !!y && (!Y || y < Y), facts = [];
-        if (m.occ && !/métier/.test(lead)) facts.push(`J’étais ${m.occ.toLowerCase()}.`);
-        if (m.by && before(m.by) && !/né·e/.test(lead)) facts.push(`Je suis né·e en ${m.by}${m.bplace ? ` à ${m.bplace}` : ''}.`);
-        if (m.my && before(m.my) && !/marié/.test(lead)) facts.push(`Je me suis marié·e en ${m.my}${m.mplace ? ` à ${m.mplace}` : ''}${m.spouse ? `, avec ${m.spouse}` : ''}.`);
-        const kids = m.kids.filter(y => Y ? y && y < Y : true).length; if (kids) facts.push(`J’ai eu ${kids === 1 ? 'un enfant' : `${kids} enfants`}${Y ? ' (à cette date)' : ''}.`);
+    /** about : de quoi parle déjà lead ({job, born, wed}) ; absent, on le lit dans le texte français */
+    function memTale(g, p, lead, about = null) {
+        const m = p.mem, Y = histOf(g)?.date[0] || 0, before = y => !!y && (!Y || y < Y), facts = [], ab = about || {job: /métier/.test(lead), born: /né·e/.test(lead), wed: /marié/.test(lead)};
+        if (m.occ && !ab.job) facts.push(i18n('J’étais {occ}.', {occ: m.occ.toLowerCase()}));
+        if (m.by && before(m.by) && !ab.born) facts.push(m.bplace ? i18n('Je suis né·e en {y} à {place}.', {y: String(m.by), place: m.bplace}) : i18n('Je suis né·e en {y}.', {y: String(m.by)}));
+        if (m.my && before(m.my) && !ab.wed) { const wv = {y: String(m.my), place: m.mplace, spouse: m.spouse}; facts.push(m.mplace && m.spouse ? i18n('Je me suis marié·e en {y} à {place}, avec {spouse}.', wv) : m.mplace ? i18n('Je me suis marié·e en {y} à {place}.', wv) : m.spouse ? i18n('Je me suis marié·e en {y}, avec {spouse}.', wv) : i18n('Je me suis marié·e en {y}.', wv)); }
+        const kids = m.kids.filter(y => Y ? y && y < Y : true).length; if (kids) facts.push(kids === 1 ? (Y ? i18n('J’ai eu un enfant (à cette date).') : i18n('J’ai eu un enfant.')) : (Y ? i18n('J’ai eu {n} enfants (à cette date).', {n: kids}) : i18n('J’ai eu {n} enfants.', {n: kids})));
         return [lead, facts.length ? pickOne(g, facts) : ''].filter(Boolean).join(' ');
     }
     /** un habitant tiré de la base trouve quelque chose lié à sa vraie vie : il raconte (une fois par sujet, 8 fois au plus) ; seulement si l'option est allumée */
     function souvenirAt(g, p, w) {
         if (!opt(g, 'souvenirs') || !p?.mem || !p.pid || p.inv || p.hp <= 0) return false; p.memSaid = p.memSaid || []; if (p.memSaid.length >= 8) return false;
-        const m = p.mem, sk = memSkills(p), key = (k, x) => !sk.length ? '' : sk.find(s => MEM_LINK[s].includes(k)) && x; let k = '', lead = '';
+        const m = p.mem, sk = memSkills(p), key = (k, x) => !sk.length ? '' : sk.find(s => MEM_LINK[s].includes(k)) && x; let k = '', lead = '', about = {};
+        const bornY = m.by && (!histOf(g) || m.by < histOf(g).date[0]), job = {job: true};
         if (w.kind === 'node') { const n = w.node;
-            if (sameTown(m.bplace, n.name)) { k = 'n:' + n.id; lead = `${n.name}… C’est là que je suis né·e${m.by && (!histOf(g) || m.by < histOf(g).date[0]) ? `, en ${m.by}` : ''}.`; }
-            else if (sameTown(m.mplace, n.name) && m.my && (!histOf(g) || m.my < histOf(g).date[0])) { k = 'n:' + n.id; lead = `${n.name} ! C’est ici que je me suis marié·e, en ${m.my}${m.spouse ? `, avec ${m.spouse}` : ''}.`; }
-            else if (key(n.kind, 1)) { k = 'm:' + n.kind; lead = `${regionInfo(g, n.kind)[1]}… ça me rappelle mon métier.`; } }
+            if (sameTown(m.bplace, n.name)) { k = 'n:' + n.id; about = {born: true}; lead = bornY ? i18n('{place}… C’est là que je suis né·e, en {y}.', {place: n.name, y: String(m.by)}) : i18n('{place}… C’est là que je suis né·e.', {place: n.name}); }
+            else if (sameTown(m.mplace, n.name) && m.my && (!histOf(g) || m.my < histOf(g).date[0])) { k = 'n:' + n.id; about = {wed: true}; lead = m.spouse ? i18n('{place} ! C’est ici que je me suis marié·e, en {y}, avec {spouse}.', {place: n.name, y: String(m.my), spouse: m.spouse}) : i18n('{place} ! C’est ici que je me suis marié·e, en {y}.', {place: n.name, y: String(m.my)}); }
+            else if (key(n.kind, 1)) { k = 'm:' + n.kind; about = job; lead = i18n('{what}… ça me rappelle mon métier.', {what: regionInfo(g, n.kind)[1]}); } }
         if (w.kind === 'city') { const pl = w.place;
-            if (pl.home && pl.name.includes(p.name)) { k = 'h:' + pl.id; lead = `La maison où je suis né·e${m.by && (!histOf(g) || m.by < histOf(g).date[0]) ? `, en ${m.by}` : ''}… Rien n’a changé.`; }
-            else if (!p.memSaid.includes('v:city') && sameTown(m.bplace, g.city.name)) { k = 'v:city'; lead = `Je connais ces rues par cœur : je suis né·e ici, à ${g.city.name}.`; }
-            else if (key(pl.kind, 1)) { k = 'm:' + pl.kind; lead = `${placeInfo(g, pl.kind)[1]}… ça me rappelle mon métier.`; }
-            else if (w.tool && key(w.tool, 1)) { k = 't:' + w.tool; lead = `${toolInfo(g, w.tool)[1]} ! J’en avais une pareille pour mon métier.`; } }
-        if (w.kind === 'site' && key(w.site.k, 1)) { k = 's:' + w.site.k; lead = `${siteName(g, w.site.k)}… ça me rappelle mon métier.`; }
+            if (pl.home && pl.name.includes(p.name)) { k = 'h:' + pl.id; about = {born: true}; lead = bornY ? i18n('La maison où je suis né·e, en {y}… Rien n’a changé.', {y: String(m.by)}) : i18n('La maison où je suis né·e… Rien n’a changé.'); }
+            else if (!p.memSaid.includes('v:city') && sameTown(m.bplace, g.city.name)) { k = 'v:city'; about = {born: true}; lead = i18n('Je connais ces rues par cœur : je suis né·e ici, à {city}.', {city: g.city.name}); }
+            else if (key(pl.kind, 1)) { k = 'm:' + pl.kind; about = job; lead = i18n('{what}… ça me rappelle mon métier.', {what: placeInfo(g, pl.kind)[1]}); }
+            else if (w.tool && key(w.tool, 1)) { k = 't:' + w.tool; about = job; lead = i18n('{what} ! J’en avais une pareille pour mon métier.', {what: toolInfo(g, w.tool)[1]}); } }
+        if (w.kind === 'site' && key(w.site.k, 1)) { k = 's:' + w.site.k; about = job; lead = i18n('{what}… ça me rappelle mon métier.', {what: siteName(g, w.site.k)}); }
         if (!k || p.memSaid.includes(k) || rnd(g) > 0.7) return false;
-        p.memSaid.push(k); const txt = memTale(g, p, lead); g.stats.souvenirs = (g.stats.souvenirs || 0) + 1;
-        log(g, `🧓 Souvenir de ${p.name} (d’après sa fiche) : « ${txt} »`, 'histoire'); diary(g, p, txt);
+        p.memSaid.push(k); const txt = memTale(g, p, lead, about); g.stats.souvenirs = (g.stats.souvenirs || 0) + 1;
+        log(g, i18n('🧓 Souvenir de {name} (d’après sa fiche) : « {txt} »', {name: p.name, txt}), 'histoire'); diary(g, p, txt);
         (g.bubbles = g.bubbles || []).push({who: p.id, txt: txt.slice(0, 200), t: g.t}); if (g.bubbles.length > 6) g.bubbles = g.bubbles.slice(-6);
         return true;
     }
@@ -1981,7 +2013,7 @@
      *  (l'écran le montre et le garde dans les records de cet ordinateur) → la liste des nouveaux */
     function checkAch(g) {
         g.ach = g.ach && typeof g.ach === 'object' ? g.ach : {}; g.achNew = Array.isArray(g.achNew) ? g.achNew : []; if (!alive(g).length) return [];
-        const out = ACH.filter(([k, , , , , test]) => !g.ach[k] && test(g)).map(([k, ico, name]) => { g.ach[k] = dayOf(g.t); log(g, `🏆 Succès : ${ico} ${name} !`, 'alerte'); return k; });
+        const out = ACH.filter(([k, , , , , test]) => !g.ach[k] && test(g)).map(([k, ico, name]) => { g.ach[k] = dayOf(g.t); log(g, i18n('🏆 Succès : {ico} {name} !', {ico, name}), 'alerte'); return k; });
         g.achNew.push(...out); if (g.achNew.length > 40) g.achNew = g.achNew.slice(-40); return out;
     }
     /* ═════════ ⏪ Revenir au matin d'avant ═════════ */
@@ -1997,10 +2029,10 @@
     }
     /** ⏪ reprendre au matin du jour d : une nouvelle partie (celle d'avant n'est pas touchée : l'écran la garde pour « ↶ Annuler ») → {ok, g, err} */
     function rewind(g, d) {
-        const m = (g.mornings || []).find(x => x.d === Number(d)); if (!m) return {ok: false, err: 'Ce matin-là n’est plus gardé.'};
-        let n; try { n = check(JSON.parse(m.snap)); } catch (e) { return {ok: false, err: 'Ce matin-là n’a pas pu être relu.'}; }
+        const m = (g.mornings || []).find(x => x.d === Number(d)); if (!m) return {ok: false, err: i18n('Ce matin-là n’est plus gardé.')};
+        let n; try { n = check(JSON.parse(m.snap)); } catch (e) { return {ok: false, err: i18n('Ce matin-là n’a pas pu être relu.')}; }
         n.mornings = g.mornings.filter(x => x.d <= m.d).map(x => ({...x})); n.rewound = (Number(g.rewound) || 0) + 1; n.ach = {...n.ach, ...(g.ach || {})}; n.achNew = []; n.over = false;
-        log(n, `⏪ Retour au matin du jour ${m.d}${dateOf(n) ? ` (${dateOf(n)})` : ''} : on reprend d’ici.`, 'alerte');
+        log(n, dateOf(n) ? i18n('⏪ Retour au matin du jour {n} ({date}) : on reprend d’ici.', {n: m.d, date: dateOf(n)}) : i18n('⏪ Retour au matin du jour {n} : on reprend d’ici.', {n: m.d}), 'alerte');
         return {ok: true, g: n};
     }
     /** avancer de n minutes (par pas de 10) */
@@ -2008,7 +2040,7 @@
 
     /** une partie lue d'un fichier : on garde ce qui a la bonne forme (un fichier abîmé ne casse pas le jeu) */
     function check(raw) {
-        if (!raw || typeof raw !== 'object' || raw.v !== 1 || !Array.isArray(raw.people) || !Array.isArray(raw.floors) || !raw.city || !Array.isArray(raw.city.places)) throw new Error('Ce fichier n’est pas une partie du bunker.');
+        if (!raw || typeof raw !== 'object' || raw.v !== 1 || !Array.isArray(raw.people) || !Array.isArray(raw.floors) || !raw.city || !Array.isArray(raw.city.places)) throw new Error(i18n('Ce fichier n’est pas une partie du bunker.'));
         const g = JSON.parse(JSON.stringify(raw)), num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
         g.t = Math.max(0, Number(g.t) || 360); g.rng = Number(g.rng) | 0; g.log = Array.isArray(g.log) ? g.log.slice(0, 250).map(l => ({t: Number(l.t) || 0, txt: String(l.txt || '').slice(0, 400), kind: ['info', 'radio', 'alerte', 'histoire', 'visite'].includes(l.kind) ? l.kind : 'info'})) : [];
         g.radioQueue = Array.isArray(g.radioQueue) ? g.radioQueue.map(String).slice(0, 50) : [];
@@ -2021,7 +2053,7 @@
         const ids = l => (Array.isArray(l) ? l : []).map(x => String(x).slice(0, 12)).slice(0, 12);
         g.people = g.people.slice(0, 10).map((p, i) => {
             const sk = Object.fromEntries(SKILL_KEYS.map(k => [k, clamp(num(p.sk?.[k], 1), 0.5, 2.5)]));
-            return {id: /^[\w-]{1,12}$/.test(String(p.id)) ? String(p.id) : 'h' + (i + 1), pid: Number(p.pid) || 0, name: String(p.name || 'Sans nom').slice(0, 80), gender: String(p.gender || '').slice(0, 10), me: !!p.me,
+            return {id: /^[\w-]{1,12}$/.test(String(p.id)) ? String(p.id) : 'h' + (i + 1), pid: Number(p.pid) || 0, name: String(p.name || i18n('Sans nom')).slice(0, 80), gender: String(p.gender || '').slice(0, 10), me: !!p.me,
                 hp: clamp(Number(p.hp) || 0, 0, 100), needs: Object.fromEntries(NEEDS.map(([k]) => [k, clamp(Number(p.needs?.[k]) || 0, 0, 100)])),
                 where: p.where === 'convoi' && p.conv ? 'convoi' : p.where === 'dehors' && p.exp ? 'dehors' : 'base', ...(p.where === 'convoi' && p.conv ? {conv: str(p.conv, 12)} : {}), act: p.act && typeof p.act === 'object' ? {k: String(p.act.k), until: Number(p.act.until) || 0, at: Array.isArray(p.act.at) ? p.act.at.map(Number) : null, ...(p.act.music ? {music: true} : {})} : null,
                 job: JOBS.includes(p.job) ? p.job : 'libre', ...(AUTO[p.auto] ? {auto: p.auto} : {}), exp: p.where === 'dehors' && p.exp ? {...(p.exp.site ? {site: str(p.exp.site, 12), mode: p.exp.mode === 'travail' ? 'travail' : 'recolte', hours: clamp(Math.round(num(p.exp.hours, 8)), 1, 12)} : {}),
@@ -2034,7 +2066,7 @@
                 diary: (Array.isArray(p.diary) ? p.diary : []).slice(0, 40).map(x => ({d: Math.max(1, Math.round(num(x?.d, 1))), t: num(x?.t), txt: str(x?.txt, 300)})).filter(x => x.txt), doing: ['creuser', 'construire', 'recycler', 'pedaler', 'garde'].includes(p.doing) ? p.doing : '',
                 ...(cleanMem(p.mem) && p.pid && !p.inv ? {mem: cleanMem(p.mem)} : {}), ...(Array.isArray(p.memSaid) ? {memSaid: p.memSaid.map(x => str(x, 24)).slice(0, 12)} : {})};
         });
-        if (!g.people.length) throw new Error('Cette partie n’a aucun habitant.');
+        if (!g.people.length) throw new Error(i18n('Cette partie n’a aucun habitant.'));
         const pids = new Set(g.people.map(p => p.id));
         g.people.forEach(p => { p.kin = p.kin.filter(id => pids.has(id)); p.spouses = p.spouses.filter(id => pids.has(id)); });
         const c = g.city; c.n = clamp(Number(c.n) || 13, 5, 41); // lat, lng : le centre de la ville (plan en fond), ou rien
@@ -2103,7 +2135,7 @@
     function checkMore(g, pids) {
         const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d), id12 = v => str(v, 12), resObj = (o, mx = 999) => Object.fromEntries(Object.entries(o && typeof o === 'object' ? o : {}).filter(([r]) => RES_KEYS.includes(r)).map(([r, n]) => [r, clamp(Math.round(num(n) * 10) / 10, 0, mx)]));
         const R = g.region;
-        if (!R || !Array.isArray(R.nodes) || !Array.isArray(R.roads)) { g.region = makeRegion(g, []); g.groups = makeGroups(g); g.convoys = []; log(g, '🗺️ Une carte de la région a été dessinée pour cette partie : d’autres villes, des routes, d’autres survivants (onglet 🗺️ Région).', 'info'); }
+        if (!R || !Array.isArray(R.nodes) || !Array.isArray(R.roads)) { g.region = makeRegion(g, []); g.groups = makeGroups(g); g.convoys = []; log(g, i18n('🗺️ Une carte de la région a été dessinée pour cette partie : d’autres villes, des routes, d’autres survivants (onglet 🗺️ Région).'), 'info'); }
         else {
             R.name = str(R.name, 80) || 'Les environs';
             R.nodes = R.nodes.filter(n => REGION_KINDS[n?.kind]).slice(0, 12).map((n, i) => ({id: /^r\d{1,2}$/.test(String(n.id)) ? String(n.id) : 'r' + (i + 1), kind: n.kind, name: str(n.name, 80) || REGION_KINDS[n.kind][1], x: clamp(num(n.x, 50), 0, 100), y: clamp(num(n.y, 50), 0, 100), stock: resObj(n.stock), max: resObj(n.max), plans: clamp(Math.round(num(n.plans)), 0, 5), seen: !!n.seen, visits: Math.max(0, Math.round(num(n.visits)))}));
@@ -2139,6 +2171,27 @@
     check.visit = V => (V.k === 'marchand' && RES_KEYS.includes(V.give?.r) && RES_KEYS.includes(V.want?.r) ? {k: V.k, until: Number(V.until) || 0, give: {r: V.give.r, n: clamp(Number(V.give.n) || 0, 0, 50)}, want: {r: V.want.r, n: clamp(Number(V.want.n) || 0, 0, 50)}}
         : V.k === 'pillards' ? {k: V.k, until: Number(V.until) || 0, strength: clamp(Number(V.strength) || 6, 0, 50), demand: Object.fromEntries(Object.entries(V.demand || {}).filter(([r]) => RES_KEYS.includes(r)).map(([r, n]) => [r, clamp(Number(n) || 0, 0, 999)]))}
         : V.k === 'voyageur' && V.person ? {k: V.k, until: Number(V.until) || 0, person: cleanExtras([V.person])[0]} : null);
+
+    /** 🌐 les noms et descriptions des tables (ressources, objets, lieux, succès…) se lisent dans la langue choisie, à chaque lecture
+     *  (un changement de langue suit tout seul ; en français, le texte d’origine) ; jamais les clés (ids), ni les noms propres sans
+     *  traduction (rues, villes, prénoms). Dans Node (tests) : rien ne change. */
+    (function localize() {
+        const I = root.LCNDA_I18N; if (!I || !I.t) return;
+        const T = [NEEDS, RES, JUNK, ITEMS, TOOLS, PLACE_KINDS, SKILLS, SEASONS, HEIRLOOMS, TALES, TRAITS, DIFFS, SCENARIOS, OLD_RES, OLD_PLACES, ERAS, HIST, ACH, EVENTS, TUTO, TRADERS, PETS, RECIPES, DECOS, ROOMS, DOCS, SIZES,
+            TERRAINS, TRANSPORT, REGION_KINDS, REGION_OLD, DANGER, GROUP_KINDS, REP_L, CONVOY_GOALS, SITE_NAMES, SITE_STATE];
+        const IDS = new Set(RES_KEYS); T.forEach(o => { if (o && !Array.isArray(o)) Object.keys(o).forEach(k => IDS.add(k)); });
+        [DECAY, WEIGHT, SITES, VALUE, AUTO].forEach(o => Object.keys(o).forEach(k => IDS.add(k)));
+        const FIELDS = new Set(['name', 'desc', 'end', 'region', 'l', 'label']), SKIP = new Set(['keys', 'ban', 'noRes', 'junkBan', 'placeBan', 'docBan', 'where', 'tool', 'k', 'era', 'city']);
+        const ok = s => typeof s === 'string' && /\p{L}/u.test(s) && !IDS.has(s);
+        const plain = o => o && typeof o === 'object' && !(o instanceof RegExp) && (Object.getPrototypeOf(o) === Object.prototype || Object.getPrototypeOf(o) === null || Array.isArray(o));
+        const live = (o, k) => { const d = Object.getOwnPropertyDescriptor(o, k); if (!d || d.get || !d.writable) return; let fr = o[k]; Object.defineProperty(o, k, {get: () => (I.lang && I.lang !== 'fr' ? I.t(fr, {ctx: 'bunker'}) : fr), set: v => { fr = v; }, enumerable: true, configurable: true}); };
+        const walk = (o, depth = 0) => {
+            if (depth > 6 || !plain(o)) return;
+            if (Array.isArray(o)) { o.forEach((v, i) => { if (typeof v === 'string') { if (!(i === 0 && o.length > 1 && /^[a-z0-9]+$/.test(v)) && ok(v)) live(o, i); } else walk(v, depth + 1); }); return; }
+            Object.keys(o).forEach(k => { if (SKIP.has(k)) return; const v = o[k]; if (typeof v === 'string') { if (FIELDS.has(k) && ok(v)) live(o, k); } else walk(v, depth + 1); });
+        };
+        try { T.forEach(o => walk(o)); } catch (_) {}
+    })();
 
     root.LCNDA_BUNKER = {ACH, HIST, ERAS, SCEN_GOAL, OLD_JUNK, MORNINGS, histOf, eraOf, itemOk, resOk, resInfo, placeInfo, toolInfo, fixedName, resList, hasRadio, crier, lit, dateOf, histPool, invent, basePlans, foundPlans, goalOf, checkAch, morningSave, rewind, pickPlan, seasonOfG: seasonOf,
         rainPerHour, SKILLS, SKILL_KEYS, skillsOf, SEASONS, SEASON_DAYS, seasonOf, HEIRLOOMS, JOBS, answerVisit, defense, NEEDS, DECAY, RES, RES_KEYS, ITEMS, TOOLS, PLACE_KINDS, SIZES, SLOTS, MAX_FLOORS, DIG_HOURS, BASE_PLANS, FOUND_PLANS,

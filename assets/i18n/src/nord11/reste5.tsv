@@ -1,0 +1,134 @@
+fr ¦ vi ¦ id
+# ═════ zone « reste5 » : vietnamien (vi), indonésien (id) ═════
+Les traits, les ombres et les coins des fiches des personnes et des animaux : blocs, boutons, champs. Le reste de l’app ne change pas ; les couleurs et la police restent celles de l’Apparence. ¦ Đường kẻ, bóng và góc của hồ sơ người và động vật: khối, nút, ô nhập. Phần còn lại của ứng dụng không đổi; màu sắc và phông chữ vẫn theo Giao diện. ¦ Garis, bayangan, dan sudut profil orang dan hewan: blok, tombol, kolom isian. Bagian lain aplikasi tidak berubah; warna dan fon tetap mengikuti Tampilan.
+L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. ¦ Khoảng cách trong và giữa các khối, chiều cao dòng danh sách, lề của nút. ¦ Jarak di dalam dan di antara blok, tinggi baris daftar, ruang dalam tombol.
+Les petits dessins des boutons, des barres d’outils et des rubriques. ¦ Các hình nhỏ trên nút, thanh công cụ và tiêu đề mục. ¦ Gambar kecil pada tombol, bilah alat, dan judul bagian.
+Le haut de la fiche : portrait, nom, dates, pastilles et boutons. ¦ Phần đầu hồ sơ: chân dung, tên, ngày tháng, nhãn tròn và nút. ¦ Bagian atas profil: potret, nama, tanggal, lencana, dan tombol.
+Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…) ; le bouton principal reste toujours plein, à la couleur principale de l’Apparence. ¦ Các nút phụ (Hủy, Sửa, ＋ Thêm…); nút chính luôn được tô đầy, theo màu chính của Giao diện. ¦ Tombol sekunder (Batal, Ubah, ＋ Tambah…); tombol utama selalu terisi penuh, dengan warna utama Tampilan.
+Les fenêtres qui s’ouvrent, les menus, les messages en bas à gauche, les boutons au survol. L’aperçu tourne en boucle. ¦ Các cửa sổ mở ra, menu, thông báo ở góc dưới bên trái, nút khi rê chuột. Bản xem trước chạy lặp lại. ¦ Jendela yang terbuka, menu, pesan di kiri bawah, tombol saat disorot. Pratinjau berputar terus.
+Les listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. ¦ Các danh sách (Danh sách, Người, Nghiên cứu…), cột người và các bảng. ¦ Daftar (Daftar, Orang, Riset…), kolom orang, dan tabel.
+{label} (nombre) ¦ {label} (số) ¦ {label} (angka)
+Pour les listes, les tableaux et le menu de choix. Plus haut = plus facile à viser ; plus bas = plus de lignes visibles. ¦ Cho danh sách, bảng và menu chọn. Cao hơn = dễ nhấp trúng hơn; thấp hơn = thấy được nhiều dòng hơn. ¦ Untuk daftar, tabel, dan menu pilihan. Lebih tinggi = lebih mudah dibidik; lebih rendah = lebih banyak baris terlihat.
+Le haut de la fiche. Les traits, les ombres et les coins de la fiche se règlent juste en dessous ¦ Phần đầu hồ sơ. Đường kẻ, bóng và góc của hồ sơ được chỉnh ngay bên dưới ¦ Bagian atas profil. Garis, bayangan, dan sudut profil diatur tepat di bawahnya
+Les traits, les ombres et les coins des fiches (personnes et animaux) seulement : le reste de l’app ne change pas. La colonne de gauche a les siens (Menus, colonne et listes → Colonne) ¦ Chỉ đường kẻ, bóng và góc của hồ sơ (người và động vật): phần còn lại của ứng dụng không đổi. Cột bên trái có cài đặt riêng (Menu, cột và danh sách → Cột) ¦ Hanya garis, bayangan, dan sudut profil (orang dan hewan): bagian lain aplikasi tidak berubah. Kolom kiri punya pengaturannya sendiri (Menu, kolom, dan daftar → Kolom)
+L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. Une colonne de gauche réglée « Compacte » (onglet Colonne) garde sa propre taille : les deux ne s’additionnent pas ¦ Khoảng cách trong và giữa các khối, chiều cao dòng danh sách, lề của nút. Cột bên trái đặt “Gọn” (thẻ Cột) giữ kích cỡ riêng: hai cài đặt không cộng dồn ¦ Jarak di dalam dan di antara blok, tinggi baris daftar, ruang dalam tombol. Kolom kiri yang diatur “Ringkas” (tab Kolom) tetap memakai ukurannya sendiri: keduanya tidak dijumlahkan
+Les petits dessins des boutons, des barres d’outils et des rubriques. Les traits et les ombres suivent ¦ Các hình nhỏ trên nút, thanh công cụ và tiêu đề mục. Đường kẻ và bóng sẽ theo ¦ Gambar kecil pada tombol, bilah alat, dan judul bagian. Garis dan bayangan mengikuti
+Les lignes des listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. Les traits et les ombres suivent ¦ Các dòng của danh sách (Danh sách, Người, Nghiên cứu…), cột người và các bảng. Đường kẻ và bóng sẽ theo ¦ Baris daftar (Daftar, Orang, Riset…), kolom orang, dan tabel. Garis dan bayangan mengikuti
+Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…). Les traits et les ombres suivent ¦ Các nút phụ (Hủy, Sửa, ＋ Thêm…). Đường kẻ và bóng sẽ theo ¦ Tombol sekunder (Batal, Ubah, ＋ Tambah…). Garis dan bayangan mengikuti
+Comment les fenêtres, les menus et les messages apparaissent. L’aperçu tourne en boucle ¦ Cách các cửa sổ, menu và thông báo xuất hiện. Bản xem trước chạy lặp lại ¦ Cara jendela, menu, dan pesan muncul. Pratinjau berputar terus
+{group} : {choice} ¦ {group}: {choice} ¦ {group}: {choice}
+Rien ne bouge : chaque écran garde le dessin que tu connais. ¦ Không có gì thay đổi: mỗi màn hình giữ nguyên dáng vẻ bạn đã quen. ¦ Tidak ada yang berubah: setiap layar tetap tampil seperti yang kamu kenal.
+7 dessins différents ; tes couleurs homme / femme et ta forme d’avatar ne s’y appliquent pas. ¦ 7 kiểu vẽ khác nhau; màu nam / nữ và hình ảnh đại diện của bạn không áp dụng cho chúng. ¦ 7 gambar berbeda; warna pria / wanita dan bentuk avatarmu tidak berlaku untuknya.
+Un seul dessin partout, à la couleur du genre : homme, femme, animal se voient d’un coup d’œil. ¦ Một kiểu vẽ duy nhất ở mọi nơi, theo màu giới tính: nam, nữ, động vật nhận ra ngay trong nháy mắt. ¦ Satu gambar di mana-mana, dengan warna jenis kelamin: pria, wanita, hewan terlihat sekilas.
+Léger dans les listes serrées et le menu de choix (c’est déjà le modèle validé du menu). ¦ Nhẹ nhàng trong danh sách dày và menu chọn (đây đã là mẫu được duyệt của menu). ¦ Ringan di daftar yang rapat dan menu pilihan (ini sudah model menu yang disetujui).
+Le style « archive » de ta fiche : bord noir, photo en noir et blanc, comme une photo d’identité collée. ¦ Kiểu “lưu trữ” của hồ sơ bạn: viền đen, ảnh đen trắng, như một tấm ảnh thẻ được dán. ¦ Gaya “arsip” profilmu: tepi hitam, foto hitam putih, seperti pasfoto yang ditempel.
+Nouveau nom de l’onglet {tab} ¦ Tên mới của thẻ {tab} ¦ Nama baru tab {tab}
+Émoji de l’onglet {tab} ¦ Emoji của thẻ {tab} ¦ Emoji tab {tab}
+La personne n°1 (le de cujus) ; son père a le n°2, sa mère le n°3, et ainsi de suite : le père d’un numéro N a toujours 2N, la mère 2N+1. ¦ Người số 1 (người gốc); cha là số 2, mẹ là số 3, và cứ thế: cha của số N luôn là 2N, mẹ là 2N+1. ¦ Orang no. 1 (orang pangkal); ayahnya no. 2, ibunya no. 3, dan seterusnya: ayah dari nomor N selalu 2N, ibunya 2N+1.
+Pour les descendants : la personne n°1, ses enfants 1.1, 1.2, 1.3…, les enfants de 1.2 sont 1.2.1, 1.2.2… Chaque point = une génération de plus. ¦ Với con cháu: người số 1, các con là 1.1, 1.2, 1.3…, các con của 1.2 là 1.2.1, 1.2.2… Mỗi dấu chấm = thêm một thế hệ. ¦ Untuk keturunan: orang no. 1, anak-anaknya 1.1, 1.2, 1.3…, anak-anak dari 1.2 adalah 1.2.1, 1.2.2… Setiap titik = satu generasi lagi.
+Un thème règle les couleurs de toute l’app : la couleur principale, le fond de la page, des panneaux, des cartes et de leurs en-têtes, le texte, et les traits qui entourent (couleur et épaisseur). Crée le tien à partir d’un thème existant : il s’ajoute à la liste « Preset », dans « ✎ Mes thèmes ». ¦ Một chủ đề quy định màu của cả ứng dụng: màu chính, nền trang, bảng, thẻ và phần đầu của chúng, chữ, và đường viền (màu và độ dày). Hãy tạo chủ đề riêng từ một chủ đề có sẵn: nó sẽ được thêm vào danh sách “Bộ cài sẵn”, trong “✎ Chủ đề của tôi”. ¦ Sebuah tema mengatur warna seluruh aplikasi: warna utama, latar halaman, panel, kartu dan kepalanya, teks, serta garis tepi (warna dan ketebalan). Buat temamu sendiri dari tema yang ada: tema itu ditambahkan ke daftar “Preset”, di “✎ Tema saya”.
+La forme des petits carrés numérotés des blocs et des initiales des fiches. Ajoute tes formes (bibliothèque des tableaux, polygone dessiné, SVG importé), range la liste du menu « Forme des avatars », cache celles qui ne te servent pas. ¦ Hình dạng các ô vuông nhỏ đánh số của khối và chữ viết tắt tên trên hồ sơ. Thêm hình của bạn (thư viện bảng, đa giác tự vẽ, SVG đã nhập), sắp xếp danh sách menu “Hình ảnh đại diện”, ẩn những hình bạn không dùng. ¦ Bentuk kotak kecil bernomor pada blok dan inisial pada profil. Tambahkan bentukmu (pustaka tabel, poligon gambar sendiri, SVG impor), atur daftar menu “Bentuk avatar”, sembunyikan yang tidak kamu pakai.
+Le grand cadre en haut de chaque fiche : le nom, les badges (Sosa, À vérifier, Hors généalogie, Artiste) et la colonne de boutons carrés. Tu peux le masquer pour une fiche épurée (diaporama), ranger les boutons, les cacher, les mettre sur 2 colonnes. ¦ Khung lớn ở đầu mỗi hồ sơ: tên, các nhãn (Sosa, Cần kiểm tra, Ngoài gia phả, Nghệ sĩ) và cột nút vuông. Bạn có thể ẩn nó để hồ sơ gọn gàng (trình chiếu), sắp xếp các nút, ẩn chúng, đặt thành 2 cột. ¦ Bingkai besar di atas setiap profil: nama, lencana (Sosa, Perlu dicek, Di luar silsilah, Seniman), dan kolom tombol persegi. Kamu bisa menyembunyikannya agar profil bersih (tayangan slide), mengatur tombol, menyembunyikannya, menaruhnya dalam 2 kolom.
+Les petits boutons carrés en haut à droite, à côté du nombre de personnes : écran en deux, nouvelle fenêtre, mode consultation, mode simple, calculette, Mes généalogies. Décoche pour cacher, glisse ⠿ pour changer l’ordre. ¦ Các nút vuông nhỏ ở góc trên bên phải, cạnh số người: chia đôi màn hình, cửa sổ mới, chế độ chỉ xem, chế độ đơn giản, máy tính, Các gia phả của tôi. Bỏ chọn để ẩn, kéo ⠿ để đổi thứ tự. ¦ Tombol persegi kecil di kanan atas, di samping jumlah orang: layar terbagi dua, jendela baru, mode lihat saja, mode sederhana, kalkulator, Silsilah saya. Hapus centang untuk menyembunyikan, seret ⠿ untuk mengubah urutan.
+Les boutons de la barre du haut, à côté du nombre de personnes. Glisse ⠿ (ou Alt + ↑ / ↓) pour changer leur ordre ; décoche un bouton pour le cacher. Plus bas, « 👤 Nouvelle personne » et un raccourci vers chaque outil de modification (tableur, montage, retouche…) et chaque partie d’Enquêtes : coche ceux que tu veux en haut, et choisis ce que le clic ouvre (la liste des projets ou un nouveau projet). C’est gardé tout de suite. ¦ Các nút trên thanh trên cùng, cạnh số người. Kéo ⠿ (hoặc Alt + ↑ / ↓) để đổi thứ tự; bỏ chọn một nút để ẩn nó. Bên dưới, “👤 Người mới” và lối tắt đến từng công cụ chỉnh sửa (bảng tính, dựng phim, chỉnh ảnh…) và từng phần của Tìm hiểu: chọn những mục bạn muốn ở trên, và chọn nhấp vào sẽ mở gì (danh sách dự án hoặc một dự án mới). Được lưu ngay lập tức. ¦ Tombol di bilah atas, di samping jumlah orang. Seret ⠿ (atau Alt + ↑ / ↓) untuk mengubah urutannya; hapus centang tombol untuk menyembunyikannya. Di bawahnya, “👤 Orang baru” dan pintasan ke setiap alat pengeditan (spreadsheet, penyuntingan video, retus…) dan setiap bagian Penelusuran: centang yang kamu mau di atas, dan pilih apa yang dibuka saat diklik (daftar proyek atau proyek baru). Langsung tersimpan.
+Les blocs d’une fiche se rangent en sections nommées (Identité, Famille…). Ici, où vont leurs titres et leurs options ; la forme (traits, coins, ombres) se règle plus bas, avec l’en-tête (« Style des fiches »). ¦ Các khối của hồ sơ được xếp vào các mục có tên (Danh tính, Gia đình…). Ở đây, chỗ đặt tiêu đề và tùy chọn của chúng; hình dạng (đường kẻ, góc, bóng) được chỉnh bên dưới, cùng với phần đầu (“Kiểu hồ sơ”). ¦ Blok-blok sebuah profil dikelompokkan dalam bagian bernama (Identitas, Keluarga…). Di sini, letak judul dan opsinya; bentuknya (garis, sudut, bayangan) diatur lebih bawah, bersama kepala profil (“Gaya profil”).
+Glisse les sections et les blocs pour changer leur ordre. Décoche une section ou un bloc pour le masquer. ¦ Kéo các mục và khối để đổi thứ tự. Bỏ chọn một mục hoặc khối để ẩn nó. ¦ Seret bagian dan blok untuk mengubah urutannya. Hapus centang bagian atau blok untuk menyembunyikannya.
+La façon dont les listes à ranger de cette page sont dessinées. Ne change que cet écran de réglage (et la fenêtre « ⚙️ Ranger les sections » d’une fiche) : ni les fiches, ni les données. ¦ Cách vẽ các danh sách sắp xếp trên trang này. Chỉ thay đổi màn hình cài đặt này (và cửa sổ “⚙️ Sắp xếp các mục” của hồ sơ): không đổi hồ sơ, không đổi dữ liệu. ¦ Cara daftar yang bisa diatur di halaman ini digambar. Hanya mengubah layar pengaturan ini (dan jendela “⚙️ Atur bagian” sebuah profil): bukan profil, bukan data.
+Les blocs se rangent en sections nommées (Identité, Famille…). Ici, la façon de dessiner leurs titres et leurs options. Chaque changement est gardé tout de suite. ¦ Các khối được xếp vào các mục có tên (Danh tính, Gia đình…). Ở đây, cách vẽ tiêu đề và tùy chọn của chúng. Mỗi thay đổi được lưu ngay. ¦ Blok-blok dikelompokkan dalam bagian bernama (Identitas, Keluarga…). Di sini, cara menggambar judul dan opsinya. Setiap perubahan langsung tersimpan.
+Retenu d’une fiche à l’autre. ¦ Được ghi nhớ từ hồ sơ này sang hồ sơ khác. ¦ Diingat dari satu profil ke profil berikutnya.
+Sans trait ni cadre : juste le nom, en grand, comme un chapitre. ¦ Không đường kẻ, không khung: chỉ có tên, chữ lớn, như một chương sách. ¦ Tanpa garis atau bingkai: hanya nama, besar, seperti sebuah bab.
+Un cadre autour de la section, le titre dans une étiquette sur le bord. ¦ Một khung quanh mục, tiêu đề nằm trong nhãn trên mép. ¦ Bingkai di sekitar bagian, judulnya dalam label di tepi.
+Un petit titre en capitales posé sur un trait. Sobre, prend peu de place. ¦ Một tiêu đề nhỏ viết hoa đặt trên một đường kẻ. Giản dị, chiếm ít chỗ. ¦ Judul kecil berhuruf kapital di atas sebuah garis. Sederhana, hemat tempat.
+Une bande de la couleur principale (celle de l’Apparence), titre en blanc. ¦ Một dải màu chính (màu của Giao diện), tiêu đề màu trắng. ¦ Pita berwarna utama (warna dari Tampilan), judul berwarna putih.
+« Nouveau » : sections en bandes, ⠿ et 👁. ¦ “Mới”: các mục dạng dải, ⠿ và 👁. ¦ “Baru”: bagian berbentuk pita, ⠿ dan 👁.
+Ce que tu fais avec l’app : ses onglets et son premier écran. Aucune fiche n’est supprimée. ¦ Việc bạn làm với ứng dụng: các thẻ và màn hình đầu tiên. Không hồ sơ nào bị xoá. ¦ Apa yang kamu lakukan dengan aplikasi: tab dan layar pertamanya. Tidak ada profil yang dihapus.
+Changer d’usage change <b>seulement les onglets et le premier écran</b>. Aucune fiche n’est supprimée : les personnes restent là, même quand l’onglet est caché. On peut en allumer plusieurs : leurs onglets s’additionnent. ¦ Đổi cách dùng chỉ thay đổi <b>các thẻ và màn hình đầu tiên</b>. Không hồ sơ nào bị xoá: mọi người vẫn ở đó, kể cả khi thẻ bị ẩn. Có thể bật nhiều cách dùng: các thẻ của chúng cộng lại. ¦ Mengganti penggunaan <b>hanya mengubah tab dan layar pertama</b>. Tidak ada profil yang dihapus: orang-orangnya tetap ada, meski tabnya disembunyikan. Kamu bisa menyalakan beberapa: tab-tabnya digabungkan.
+Personnes, arbre, actes. ¦ Người, cây gia phả, giấy tờ. ¦ Orang, pohon, akta.
+« 🌳 Ma généalogie » seule ¦ Chỉ “🌳 Gia phả của tôi” ¦ Hanya “🌳 Silsilah saya”
+Trésors de famille. ¦ Báu vật gia đình. ¦ Harta keluarga.
+Catalogue raisonné. ¦ Danh mục toàn tập. ¦ Katalog raisonné.
+Maisons et lieux. ¦ Nhà và địa điểm. ¦ Rumah dan tempat.
+L’entreprise, 👥 Membres. ¦ Doanh nghiệp, 👥 Thành viên. ¦ Perusahaan, 👥 Anggota.
+Animaux, portées, pedigree. ¦ Động vật, lứa, phả hệ. ¦ Hewan, anakan, silsilah.
+Suivi des animaux. ¦ Theo dõi động vật. ¦ Pemantauan hewan.
+Documents, ✨ Trésors. ¦ Tài liệu, ✨ Báu vật. ¦ Dokumen, ✨ Harta.
+Les onglets se rangent, se renomment et se cachent un par un dans « Ordre et noms du menu principal ». ¦ Các thẻ được sắp xếp, đổi tên và ẩn từng cái một trong “Thứ tự và tên của menu chính”. ¦ Tab diatur, diganti namanya, dan disembunyikan satu per satu di “Urutan dan nama menu utama”.
+Au féminin ¦ Giống cái ¦ Bentuk feminin
+Au masculin ¦ Giống đực ¦ Bentuk maskulin
+Avec un point médian ¦ Với dấu chấm giữa ¦ Dengan titik tengah
+Entre parenthèses ¦ Trong ngoặc đơn ¦ Dalam tanda kurung
+Sexe « Autre / non binaire » ¦ Giới tính “Khác / phi nhị nguyên” ¦ Jenis kelamin “Lainnya / non-biner”
+Sexe « Non renseigné » (et les animaux dont on ne connaît pas le sexe) ¦ Giới tính “Chưa ghi” (và các con vật không rõ giới tính) ¦ Jenis kelamin “Tidak diisi” (dan hewan yang jenis kelaminnya tidak diketahui)
+Sur les fiches d’hommes et de femmes, les mots s’accordent tout seuls : « né le » ou « née le », « décédé » ou « décédée ». Choisis ici comment les écrire pour les autres fiches. Chaque choix est gardé tout de suite. ¦ Trên hồ sơ nam và nữ, các từ tự hợp giống (trong tiếng Pháp: “né le” hoặc “née le”, “décédé” hoặc “décédée”). Hãy chọn ở đây cách viết cho các hồ sơ khác. Mỗi lựa chọn được lưu ngay. ¦ Pada profil pria dan wanita, kata-kata menyesuaikan sendiri (dalam bahasa Prancis: “né le” atau “née le”, “décédé” atau “décédée”). Pilih di sini cara menulisnya untuk profil lain. Setiap pilihan langsung tersimpan.
+comme on dit « la personne » : « née », « décédée » ¦ như khi nói “la personne” (giống cái): “née”, “décédée” ¦ seperti menyebut “la personne” (feminin): “née”, “décédée”
+rien ne change : « né(e) », sauf « Vivante », « Décédée » sur la fiche ¦ không gì thay đổi: “né(e)”, trừ “Vivante”, “Décédée” trên hồ sơ ¦ tidak ada yang berubah: “né(e)”, kecuali “Vivante”, “Décédée” di profil
+une tournure neutre quand il y en a une (« Naissance le … », « Décès »), sinon « né(e) » ¦ một cách nói trung tính khi có (“Naissance le …”, “Décès”), nếu không thì “né(e)” ¦ ungkapan netral bila ada (“Naissance le …”, “Décès”), kalau tidak “né(e)”
+« né », « décédé » ¦ “né”, “décédé” (giống đực) ¦ “né”, “décédé” (maskulin)
+« né(e) », « décédé(e) », partout ¦ “né(e)”, “décédé(e)”, ở mọi nơi ¦ “né(e)”, “décédé(e)”, di mana-mana
+« né·e », « décédé·e » ¦ “né·e”, “décédé·e” (dấu chấm giữa) ¦ “né·e”, “décédé·e” (titik tengah)
+autre / non binaire ¦ khác / phi nhị nguyên ¦ lainnya / non-biner
+sexe non renseigné ¦ chưa ghi giới tính ¦ jenis kelamin tidak diisi
+Arbre en filigrane ¦ Cây chìm làm nền ¦ Pohon tanda air
+Bleu pâle (comme avant) ¦ Xanh nhạt (như trước) ¦ Biru pucat (seperti sebelumnya)
+Gris neutre ¦ Xám trung tính ¦ Abu-abu netral
+Les traits de mon thème (✎ Mes thèmes) ¦ Đường kẻ theo chủ đề của tôi (✎ Chủ đề của tôi) ¦ Garis tema saya (✎ Tema saya)
+Les traits de mon thème : choisis d’abord un thème à toi (✎ Mes thèmes) ¦ Đường kẻ theo chủ đề của tôi: trước hết hãy chọn một chủ đề của riêng bạn (✎ Chủ đề của tôi) ¦ Garis tema saya: pilih dulu tema milikmu (✎ Tema saya)
+Bleu pâle = comme avant · gris · la couleur principale de l’Apparence (elle suit si tu la changes) · sépia · la couleur des traits de ton thème (✎ Mes thèmes) · une couleur à toi. ¦ Xanh nhạt = như trước · xám · màu chính của Giao diện (sẽ đổi theo nếu bạn đổi) · nâu đỏ cổ · màu đường kẻ trong chủ đề của bạn (✎ Chủ đề của tôi) · một màu của riêng bạn. ¦ Biru pucat = seperti sebelumnya · abu-abu · warna utama Tampilan (ikut berubah jika kamu mengubahnya) · sepia · warna garis temamu (✎ Tema saya) · warna pilihanmu.
+Cahier ligné ¦ Vở kẻ dòng ¦ Buku bergaris
+Papier millimétré ¦ Giấy kẻ ô li ¦ Kertas milimeter
+Papier vergé ¦ Giấy vân sọc ¦ Kertas bergaris air
+Ce qu’on voit derrière les blocs, sur toutes les pages. Le fond reste très pâle pour ne jamais gêner la lecture ; la couleur du papier vient du Preset (ou de ton thème). ¦ Những gì thấy phía sau các khối, trên mọi trang. Nền luôn rất nhạt để không bao giờ cản trở việc đọc; màu giấy lấy từ Bộ cài sẵn (hoặc chủ đề của bạn). ¦ Apa yang terlihat di belakang blok, di semua halaman. Latarnya tetap sangat pucat agar tidak pernah mengganggu bacaan; warna kertas berasal dari Preset (atau temamu).
+Choisir une photo ¦ Chọn một ảnh ¦ Pilih foto
+Couleur du motif ¦ Màu họa tiết ¦ Warna motif
+Couleur principale (suit l’Apparence) ¦ Màu chính (theo Giao diện) ¦ Warna utama (mengikuti Tampilan)
+De « à peine visible » à « bien marqué ». Au départ : comme aujourd’hui. ¦ Từ “gần như không thấy” đến “thấy rõ”. Ban đầu: như hiện nay. ¦ Dari “nyaris tak terlihat” sampai “jelas terlihat”. Awalnya: seperti sekarang.
+Décoché : fond uni sur ces pages. La carte et les éditeurs plein écran gardent toujours le leur. ¦ Bỏ chọn: nền trơn trên các trang này. Bản đồ và các trình chỉnh sửa toàn màn hình luôn giữ nền riêng. ¦ Tanpa centang: latar polos di halaman-halaman ini. Peta dan editor layar penuh selalu memakai latarnya sendiri.
+Pas encore de photo : fond uni en attendant. ¦ Chưa có ảnh: tạm thời dùng nền trơn. ¦ Belum ada foto: latar polos sementara.
+Pâlie par l’intensité et floutée, pour rester derrière sans gêner. Elle reste sur cet ordinateur (pas dans le défaut du site : là-bas, fond uni). ¦ Được làm nhạt theo cường độ và làm mờ, để nằm phía sau mà không gây vướng. Ảnh chỉ ở trên máy tính này (không nằm trong mặc định của trang: ở đó là nền trơn). ¦ Dipucatkan sesuai intensitas dan dikaburkan, agar tetap di belakang tanpa mengganggu. Foto ini tetap di komputer ini (tidak di bawaan situs: di sana latar polos).
+bords à peine teintés, vieille photo ¦ viền hơi ngả màu, ảnh cũ ¦ tepi sedikit berwarna, foto lama
+comme aujourd’hui ¦ như hiện nay ¦ seperti sekarang
+de petites branches, très pâles ¦ những cành nhỏ, rất nhạt ¦ ranting kecil, sangat pucat
+du papier vers la couleur ¦ từ màu giấy sang màu chọn ¦ dari kertas ke warna
+fin, trait plus fort tous les 5 ¦ mảnh, cứ 5 ô có một đường đậm hơn ¦ tipis, garis lebih tebal setiap 5
+fines rayures des vieux papiers ¦ sọc mảnh của giấy xưa ¦ garis halus kertas lama
+hexagones de la maison de famille ¦ hình lục giác của ngôi nhà gia đình ¦ segi enam rumah keluarga
+lignes et double marge, comme l’état civil ¦ dòng kẻ và lề đôi, như sổ hộ tịch ¦ garis dan margin ganda, seperti register catatan sipil
+lignes et marge rouge ¦ dòng kẻ và lề đỏ ¦ garis dan margin merah
+pâle et floutée derrière ¦ nhạt và mờ phía sau ¦ pucat dan kabur di belakang
+rien derrière, le plus calme ¦ không có gì phía sau, yên tĩnh nhất ¦ tidak ada apa-apa di belakang, paling tenang
+tissage léger, album de famille ¦ vân dệt nhẹ, album gia đình ¦ tenunan ringan, album keluarga
+une grille de petits points ¦ một lưới chấm nhỏ ¦ kisi titik-titik kecil
+va bien avec « Archive papier » ¦ hợp với “Giấy lưu trữ” ¦ cocok dengan “Arsip kertas”
+Une page de l’app ¦ Một trang của ứng dụng ¦ Sebuah halaman aplikasi
+Ta photo ¦ Ảnh của bạn ¦ Fotomu
+les Réglages ¦ Cài đặt ¦ Pengaturan
+Dans les listes où l’on coche ce qui s’affiche (menus, listes, Réordonner, Personnaliser…) : une ligne décochée reste telle quelle, ou se grise un peu. ¦ Trong các danh sách nơi bạn chọn những gì hiển thị (menu, danh sách, Sắp xếp lại, Tùy biến…): một dòng bỏ chọn giữ nguyên, hoặc hơi xám đi. ¦ Di daftar tempat kamu mencentang apa yang ditampilkan (menu, daftar, Urutkan ulang, Sesuaikan…): baris yang tidak dicentang tetap seperti biasa, atau sedikit memudar.
+Une ligne affichée ¦ Một dòng đang hiện ¦ Baris yang ditampilkan
+Une ligne cachée ¦ Một dòng bị ẩn ¦ Baris yang disembunyikan
+Lignes cachées dans les listes à ranger ¦ Dòng bị ẩn trong danh sách sắp xếp ¦ Baris tersembunyi di daftar yang bisa diatur
+Supprimer en rouge ¦ Xoá màu đỏ ¦ Hapus berwarna merah
+Hypothèses à comparer ¦ Các giả thuyết cần so sánh ¦ Hipotesis untuk dibandingkan
+signature ou sceau ¦ chữ ký hoặc con dấu ¦ tanda tangan atau segel
+PLAN DU RECENSEMENT ¦ BẢN ĐỒ ĐIỀU TRA DÂN SỐ ¦ PETA SENSUS
+Fonds de carte du plan des adresses ¦ Nền bản đồ của sơ đồ địa chỉ ¦ Peta dasar untuk peta alamat
+Plan, photo aérienne, carte hors ligne… ¦ Bản đồ phố, ảnh hàng không, bản đồ ngoại tuyến… ¦ Peta jalan, foto udara, peta luring…
+Cassini, État-major, cartes et photos de 1950… ¦ Cassini, État-major, bản đồ và ảnh từ năm 1950… ¦ Cassini, État-major, peta dan foto dari tahun 1950…
+Carte ancienne (par-dessus) ¦ Bản đồ cổ (lớp trên) ¦ Peta lama (di atas)
+Aujourd’hui (dessous) ¦ Ngày nay (lớp dưới) ¦ Masa kini (di bawah)
+Dépouillements (onglet « Plan ») et fiche d’un village : les fonds cochés viennent en premier dans les menus ; le premier coché est celui de départ. Tous les autres restent dans les menus, par catégorie. ¦ Bảng trích lục (thẻ “Bản đồ”) và hồ sơ một làng: các nền được chọn xuất hiện trước trong menu; nền được chọn đầu tiên là nền khởi đầu. Tất cả các nền khác vẫn nằm trong menu, theo loại. ¦ Indeks catatan (tab “Peta”) dan profil desa: peta dasar yang dicentang muncul lebih dulu di menu; yang pertama dicentang menjadi peta awal. Semua yang lain tetap ada di menu, per kategori.
+naissance manquante ¦ thiếu ngày sinh ¦ kelahiran belum ada
+décès manquant ¦ thiếu ngày mất ¦ kematian belum ada
+parents manquants ¦ thiếu cha mẹ ¦ orang tua belum ada
+source manquante ¦ thiếu nguồn ¦ sumber belum ada
+aucun média ¦ không có tư liệu ¦ tidak ada media
+1 livre en {y} ¦ 1 livre năm {y} ¦ 1 livre pada {y}
+1 franc en {y} ¦ 1 franc năm {y} ¦ 1 franc pada {y}
+1 euro en {y} ¦ 1 euro năm {y} ¦ 1 euro pada {y}
+≈ <b>{eur} €</b> d’aujourd’hui ¦ ≈ <b>{eur} €</b> ngày nay ¦ ≈ <b>{eur} €</b> masa kini
+≈ <b>{kg} kg</b> de pain ¦ ≈ <b>{kg} kg</b> bánh mì ¦ ≈ <b>{kg} kg</b> roti
+≈ {n} jour de travail d’un journalier ¦ ≈ {n} ngày công của người làm thuê theo ngày ¦ ≈ {n} hari kerja seorang buruh harian
+≈ {n} jours de travail d’un journalier ¦ ≈ {n} ngày công của người làm thuê theo ngày ¦ ≈ {n} hari kerja seorang buruh harian
+🛡 Solidité des liens à côté des parents ¦ 🛡 Độ vững của liên kết cạnh cha mẹ ¦ 🛡 Kekuatan hubungan di samping orang tua
+Seulement Supposé et Réfuté ¦ Chỉ Giả định và Bác bỏ ¦ Hanya Diduga dan Dibantah
+Toujours ¦ Luôn luôn ¦ Selalu
+Jamais ¦ Không bao giờ ¦ Tidak pernah

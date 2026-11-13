@@ -76,19 +76,21 @@ function dates_feter_data(PDO $pdo, array $q): array
     $people = [];
     foreach ($pdo->query("SELECT id, first_name, last_name, gender, COALESCE(kind,'person') AS kind FROM persons") as $p) { $people[(int) $p['id']] = $p; }
 
+    // la prochaine fois que tombe chaque jour de l'année dans la période (le 29 février se fête le 28 les autres années)
+    $dayHit = [];
+    for ($k = 0; $k <= $span; $k++) {
+        $day = $today->modify("+{$k} day");
+        $m = (int) $day->format('n'); $d = (int) $day->format('j'); $leap = (bool) $day->format('L');
+        $dayHit[$m * 100 + $d] ??= [$k, $day];
+        if (!$leap && $m === 2 && $d === 28) { $dayHit[229] ??= [$k, $day]; }
+    }
     $items = []; $counts = ['all' => 0, 'living' => 0, 'dead' => 0, 'round' => 0];
-    foreach (genea_calendar_events($pdo)['events'] as $e) {
+    foreach (genea_calendar_events($pdo, [], array_fill_keys(array_keys($dayHit), true), ['BIRT', 'MARR', 'DEAT'])['events'] as $e) {
         $group = $e['group'] === 'union' ? 'union' : $e['group'];
         if (!in_array($group, ['birth', 'union', 'death'], true) || !in_array($group, $kinds, true)) { continue; }
         if (!in_array($e['tag'], ['BIRT', 'MARR', 'DEAT'], true)) { continue; } // une date à fêter : naissance, mariage, décès
         if ($e['approx'] || !$e['m'] || !$e['d'] || !$e['who']) { continue; }
-        // la prochaine fois que tombe ce jour (le 29 février se fête le 28 les autres années)
-        $hit = null;
-        for ($k = 0; $k <= $span; $k++) {
-            $day = $today->modify("+{$k} day");
-            $m = (int) $day->format('n'); $d = (int) $day->format('j'); $leap = (bool) $day->format('L');
-            if ($m === $e['m'] && ($d === $e['d'] || (!$leap && $e['m'] === 2 && $e['d'] === 29 && $d === 28))) { $hit = [$k, $day]; break; }
-        }
+        $hit = $dayHit[$e['m'] * 100 + $e['d']] ?? null; // les jours de la période, calculés une seule fois plus haut (avant : à chaque événement)
         if (!$hit) { continue; }
         $whoIds = array_map(static fn($w) => (int) $w['id'], $e['who']);
         if (array_filter($whoIds, static fn($id) => ($hidden[$id] ?? '') === 'private' || (($people[$id]['kind'] ?? 'person') === 'animal'))) { continue; } // jamais une fiche confidentielle

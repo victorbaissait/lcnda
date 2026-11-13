@@ -116,11 +116,13 @@ function tresor_tree(PDO $pdo): array
     $cond = []; if ($hasKind) { $cond[] = "COALESCE(p.kind,'human')<>'animal'"; }
     if ($kiosk) { $cond[] = "COALESCE(p.living_status,'')<>'living'"; if ($hasPriv) { $cond[] = 'COALESCE(p.is_private,0)=0'; } }
     $people = []; $where = $cond ? 'WHERE ' . implode(' AND ', $cond) : '';
+    $respect = function_exists('so2_respect_ids') ? so2_respect_ids($pdo) : []; // 🕯 déporté(e) ou fusillé(e) : « mem » → jamais dans les jeux des Trésors
+    if (function_exists('so7_respect_ids')) { $respect += so7_respect_ids($pdo); } // 🕯 « Juste parmi les nations » (lib/sources_ouvertes_7.php) : jamais dans les jeux
     foreach ($pdo->query('SELECT p.id, p.first_name, p.middle_name, p.last_name, p.gender, p.living_status, p.is_start, p.updated_at, ' . ($hasPriv ? 'COALESCE(p.is_private,0) AS priv, ' : '0 AS priv, ') . ($hasOcc ? 'p.occupation' : "'' AS occupation") . ",
             (SELECT COALESCE(NULLIF(m.thumbnail,''),m.filename) FROM media m WHERE m.id=p.portrait_media_id) AS portrait FROM persons p $where") as $r) {
         $id = (int) $r['id'];
         $people[$id] = ['id' => $id, 'first' => trim((string) $r['first_name']), 'last' => trim((string) $r['last_name']), 'name' => trim(preg_replace('/\s+/', ' ', $r['first_name'] . ' ' . $r['middle_name'] . ' ' . $r['last_name'])),
-            'gender' => $r['gender'], 'living' => $r['living_status'] === 'living', 'start' => (int) $r['is_start'] === 1, 'occ' => trim((string) $r['occupation']), 'portrait' => $r['portrait'] ?: null, 'touched' => substr((string) $r['updated_at'], 0, 10), 'priv' => (int) $r['priv'] === 1,
+            'gender' => $r['gender'], 'living' => $r['living_status'] === 'living', 'start' => (int) $r['is_start'] === 1, 'occ' => trim((string) $r['occupation']), 'portrait' => $r['portrait'] ?: null, 'touched' => substr((string) $r['updated_at'], 0, 10), 'priv' => (int) $r['priv'] === 1, 'mem' => isset($respect[$id]),
             'by' => null, 'bd' => null, 'bplace' => null, 'dy' => null, 'dd' => null, 'dplace' => null, 'father' => null, 'mother' => null];
     }
     $places = [];
@@ -150,7 +152,7 @@ function tresor_tree(PDO $pdo): array
     // pour que le navigateur n'ait pas à deviner (un enfant sans date d'une personne née en 1950 est aussi retiré)
     if (function_exists('person_select')) {
         require_once __DIR__ . '/gedcom.php';
-        try { foreach (gedcom_share_hidden($pdo, $pdo->query(person_select())->fetchAll(), $pdo->query('SELECT * FROM families')->fetchAll()) as $hid => $_) { if (isset($people[(int) $hid])) { $people[(int) $hid]['sh'] = true; } } }
+        try { foreach (gedcom_share_hidden($pdo, tresor_share_rows($pdo), $pdo->query('SELECT id, partner1_id, partner2_id FROM families')->fetchAll()) as $hid => $_) { if (isset($people[(int) $hid])) { $people[(int) $hid]['sh'] = true; } } }
         catch (Throwable $e) { foreach ($people as $id => $_) { $people[$id]['sh'] = true; } } // dans le doute, rien ne part
     }
     if ($kiosk) { // consultation : aussi les vivants probables (même règle que le partage), et leurs événements
@@ -171,6 +173,32 @@ function tresor_tree(PDO $pdo): array
 }
 
 /** En consultation : les personnes à ne jamais montrer (vivants déclarés ou probables, fiches confidentielles) [id => true] ; [] sinon */
+/**
+ * Ce que gedcom_share_hidden() lit de chaque fiche (privée, vivante, années de naissance, de décès, de mariage), comme person_select()
+ * le donne — la première naissance, le premier décès, le premier mariage dans l'ordre des événements —, sans ses douze sous-requêtes :
+ * person_select() sur 100 000 fiches prenait plusieurs secondes et des centaines de Mo.
+ */
+function tresor_share_rows(PDO $pdo): array
+{
+    $rows = [];
+    foreach ($pdo->query('SELECT id, living_status, COALESCE(is_private,0) AS is_private FROM persons') as $r) {
+        $rows[(int) $r['id']] = ['id' => (int) $r['id'], 'living_status' => $r['living_status'], 'is_private' => (int) $r['is_private'], 'birth_year' => null, 'death_year' => null, 'marr_year' => null];
+    }
+    $seen = [];
+    foreach ($pdo->query("SELECT e.person_id, t.gedcom_tag, e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id IS NOT NULL AND t.gedcom_tag IN ('BIRT','DEAT') ORDER BY e.id") as $e) {
+        $id = (int) $e['person_id']; $k = $e['gedcom_tag'] === 'BIRT' ? 'birth_year' : 'death_year';
+        if (!isset($rows[$id]) || isset($seen[$k][$id])) { continue; }
+        $seen[$k][$id] = true; $rows[$id][$k] = $e['year'];
+    }
+    foreach ($pdo->query("SELECT f.partner1_id, f.partner2_id, e.year FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN families f ON f.id=e.family_id WHERE t.gedcom_tag IN ('MARR','MRCI','MRRE') ORDER BY e.id") as $e) {
+        foreach ([(int) $e['partner1_id'], (int) $e['partner2_id']] as $id) {
+            if (!$id || !isset($rows[$id]) || isset($seen['m'][$id])) { continue; }
+            $seen['m'][$id] = true; $rows[$id]['marr_year'] = $e['year'];
+        }
+    }
+    return array_values($rows);
+}
+
 function tresor_hidden_people(PDO $pdo): array
 {
     static $memo = null;
@@ -181,7 +209,7 @@ function tresor_hidden_people(PDO $pdo): array
     foreach ($pdo->query("SELECT id FROM persons WHERE COALESCE(living_status,'')='living'" . ($hasPriv ? ' OR COALESCE(is_private,0)=1' : '')) as $r) { $memo[(int) $r['id']] = true; }
     try {
         if (!function_exists('gedcom_share_hidden')) { require_once __DIR__ . '/gedcom.php'; }
-        foreach (gedcom_share_hidden($pdo, $pdo->query(person_select())->fetchAll(), $pdo->query('SELECT * FROM families')->fetchAll()) as $h => $_) { $memo[(int) $h] = true; }
+        foreach (gedcom_share_hidden($pdo, tresor_share_rows($pdo), $pdo->query('SELECT id, partner1_id, partner2_id FROM families')->fetchAll()) as $h => $_) { $memo[(int) $h] = true; }
     } catch (Throwable $e) { foreach ($pdo->query('SELECT id FROM persons') as $r) { $memo[(int) $r['id']] = true; } } // dans le doute, personne
     return $memo;
 }

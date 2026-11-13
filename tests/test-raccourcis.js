@@ -204,7 +204,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
                 await shot('03-choix-base-390.png');
                 await p.click('.h-sc-dlg .pk-row');
                 await p.click('.h-sc-dlg [data-sc-tab="screens"]');
-                await p.fill('.h-sc-dlg [data-sc-qslot] input', 'sauvegarde');
+                await p.fill('.h-sc-dlg [data-sc-qslot] input', 'sauvegarde tout de suite');
                 await p.waitForFunction(() => /sauvegarde/i.test(document.querySelector('.h-sc-dlg .h-sc-catrow')?.textContent || '')); // la recherche attend 120 ms après la frappe
                 await shot('04-choix-ecrans-390.png');
                 await p.click('.h-sc-dlg .h-sc-catrow');
@@ -320,7 +320,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
                 await p.waitForSelector('.h-sc-dlg .pk-row', { timeout: 8000 });
                 await p.click('.h-sc-dlg .pk-row');
                 await p.click('.h-sc-dlg [data-sc-tab="screens"]');
-                await p.fill('.h-sc-dlg [data-sc-qslot] input', 'sauvegarde');
+                await p.fill('.h-sc-dlg [data-sc-qslot] input', 'sauvegarde tout de suite');
                 await p.waitForFunction(() => /sauvegarde/i.test(document.querySelector('.h-sc-dlg .h-sc-catrow')?.textContent || ''));
                 await p.click('.h-sc-dlg .h-sc-catrow');
                 assert.match(await p.textContent('.h-sc-dlg [data-sc-count]'), /^2 raccourcis choisis/);

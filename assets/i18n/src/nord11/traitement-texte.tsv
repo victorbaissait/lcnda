@@ -1,0 +1,782 @@
+fr ¦ vi ¦ id
+menu|Affichage ¦ Hiển thị ¦ Tampilan
+Insertion ¦ Chèn ¦ Sisipkan
+Format ¦ Định dạng ¦ Format
+Tableau ¦ Bảng ¦ Tabel
+Champ (page, nombre de pages, titre, auteur)… ¦ Trường (trang, số trang, tiêu đề, tác giả)… ¦ Kolom isian (halaman, jumlah halaman, judul, penulis)…
+N° de page ¦ Số trang ¦ No. halaman
+(celle de Normal) ¦ (theo kiểu Normal) ¦ (sama dengan Normal)
+(titre vide) ¦ (tiêu đề trống) ¦ (judul kosong)
+* = des lettres, ? = une lettre, # = un chiffre ¦ * = nhiều chữ cái, ? = một chữ cái, # = một chữ số ¦ * = beberapa huruf, ? = satu huruf, # = satu angka
+.lcnda-texte (tout est gardé) ¦ .lcnda-texte (giữ lại tất cả) ¦ .lcnda-texte (semuanya disimpan)
+1 (retirer les colonnes) ¦ 1 (bỏ chia cột) ¦ 1 (hapus kolom)
+1. Liste numérotée ¦ 1. Danh sách đánh số ¦ 1. Daftar bernomor
+1re ligne ¦ Dòng đầu ¦ Baris pertama
+1re ligne (négatif : en saillie) ¦ Dòng đầu (số âm: thụt treo) ¦ Baris pertama (negatif: menggantung)
+60 onglets au plus. ¦ Tối đa 60 thẻ. ¦ Paling banyak 60 tab.
+A Couleur… ¦ A Màu… ¦ A Warna…
+Accentuation ¦ Nhấn mạnh ¦ Penekanan
+Adresse ¦ Địa chỉ ¦ Alamat
+Afficher : nom, dates, naissance… ¦ Hiển thị: tên, ngày, sinh… ¦ Tampilkan: nama, tanggal, kelahiran…
+Ajoute au moins une personne. ¦ Hãy thêm ít nhất một người. ¦ Tambahkan paling sedikit satu orang.
+Ajoute d’abord des champs : Insertion → « 📨 Champ de fusion » (Prénom, Nom, Date de naissance…). ¦ Trước hết hãy thêm các trường: Chèn → “📨 Trường trộn thư” (Tên, Họ, Ngày sinh…). ¦ Tambahkan dulu kolom isian: Sisipkan → “📨 Kolom gabung surat” (Nama depan, Nama keluarga, Tanggal lahir…).
+Ajouter la citation ¦ Thêm trích dẫn ¦ Tambah kutipan
+Ajouter les personnes d’une liste ¦ Thêm những người trong một danh sách ¦ Tambahkan orang dari sebuah daftar
+Ajouter une légende ¦ Thêm chú thích ảnh ¦ Tambah keterangan
+Album photo (21,6 × 28 cm) ¦ Album ảnh (21,6 × 28 cm) ¦ Album foto (21,6 × 28 cm)
+Alignement ¦ Căn lề ¦ Perataan
+Aligner à droite ¦ Căn phải ¦ Rata kanan
+Aligner à gauche ¦ Căn trái ¦ Rata kiri
+Aligné sur le texte (seul sur sa ligne) ¦ Thẳng hàng với chữ (một mình trên dòng) ¦ Sejajar dengan teks (sendiri di barisnya)
+Allemand ¦ Tiếng Đức ¦ Bahasa Jerman
+Aller ¦ Đi ¦ Pergi
+Aller à la page ¦ Đi đến trang ¦ Pergi ke halaman
+Anglais ¦ Tiếng Anh ¦ Bahasa Inggris
+Années (1850 – 1920) ¦ Năm (1850 – 1920) ¦ Tahun (1850 – 1920)
+Aperçu avec {name} : ¦ Xem trước với {name}: ¦ Pratinjau dengan {name}:
+Apostrophe typographique ’ ¦ Dấu nháy đơn kiểu in ấn ’ ¦ Apostrof tipografis ’
+Au moins une ligne. ¦ Ít nhất một dòng. ¦ Paling sedikit satu baris.
+Aucun champ à mettre à jour. ¦ Không có trường nào cần cập nhật. ¦ Tidak ada kolom isian yang perlu diperbarui.
+Aucune modification suivie dans le document. ¦ Không có thay đổi được theo dõi nào trong tài liệu. ¦ Tidak ada perubahan terlacak di dokumen.
+Aucune modification suivie. ¦ Không có thay đổi được theo dõi nào. ¦ Tidak ada perubahan terlacak.
+Aucune modification suivie. « ✍ Suivre les modifications » garde la trace de chaque ajout et de chaque suppression. ¦ Không có thay đổi được theo dõi nào. “✍ Theo dõi thay đổi” ghi lại mỗi lần thêm và mỗi lần xoá. ¦ Tidak ada perubahan terlacak. “✍ Lacak perubahan” mencatat setiap penambahan dan setiap penghapusan.
+Augmenter le retrait ¦ Tăng thụt lề ¦ Tambah indentasi
+Auteur ¦ Tác giả ¦ Penulis
+Autre ¦ Khác ¦ Lainnya
+Avis de recherche (lettre aux cousins, remplie) ¦ Thư tìm kiếm (thư gửi họ hàng, đã điền) ¦ Surat pencarian (surat ke sepupu, sudah diisi)
+Barre d’outils ¦ Thanh công cụ ¦ Bilah alat
+Barre d’outils en ruban (avec les noms) ¦ Thanh công cụ dạng ruy-băng (có tên) ¦ Bilah alat pita (dengan nama)
+Barre d’outils · {what} ¦ Thanh công cụ · {what} ¦ Bilah alat · {what}
+Barré ¦ Gạch ngang ¦ Coret
+Bas ¦ Dưới ¦ Bawah
+Biographie ajoutée (écrite par l’app d’après la fiche) : modifie-la librement. ¦ Đã thêm tiểu sử (ứng dụng viết dựa trên hồ sơ): bạn cứ thoải mái sửa. ¦ Biografi ditambahkan (ditulis aplikasi berdasarkan profil): ubah sesukamu.
+Bordure et trame ¦ Viền và nền ¦ Batas dan arsiran
+Bordure et trame… ¦ Viền và nền… ¦ Batas dan arsiran…
+Bordures ¦ Viền ¦ Batas
+Bordures du tableau ¦ Viền của bảng ¦ Batas tabel
+Breton ¦ Tiếng Breton ¦ Bahasa Breton
+COMPARER ¦ SO SÁNH ¦ BANDINGKAN
+Cacher dans le texte ¦ Ẩn trong văn bản ¦ Sembunyikan di teks
+Caractères (espaces compris) ¦ Ký tự (kể cả dấu cách) ¦ Karakter (termasuk spasi)
+Caractères (sans les espaces) ¦ Ký tự (không kể dấu cách) ¦ Karakter (tanpa spasi)
+Caractères spéciaux ¦ Ký tự đặc biệt ¦ Karakter khusus
+Carré (le texte autour) ¦ Hình vuông (chữ bao quanh) ¦ Persegi (teks di sekelilingnya)
+Carré 15 × 15 cm ¦ Vuông 15 × 15 cm ¦ Persegi 15 × 15 cm
+Carré 21 × 21 cm ¦ Vuông 21 × 21 cm ¦ Persegi 21 × 21 cm
+Carré 30 × 30 cm ¦ Vuông 30 × 30 cm ¦ Persegi 30 × 30 cm
+Carte de visite ¦ Danh thiếp ¦ Kartu nama
+Cartes et livres ¦ Thiệp và sách ¦ Kartu dan buku
+Carton DL (faire-part) ¦ Thiệp DL (thiệp báo tin) ¦ Kartu DL (kartu pemberitahuan)
+Case séparée ¦ Đã tách ô ¦ Sel dipisah
+Cases fusionnées ¦ Đã gộp ô ¦ Sel digabung
+Casse ¦ Chữ hoa/thường ¦ Huruf besar/kecil
+Ce diagramme est vide. ¦ Sơ đồ này trống. ¦ Diagram ini kosong.
+Ce document n’a pas encore de champ de fusion (Insertion → « 📨 Champ de fusion »). Insérer d’abord une petite fiche d’identité à l’endroit du curseur ? ¦ Tài liệu này chưa có trường trộn thư (Chèn → “📨 Trường trộn thư”). Chèn trước một phiếu nhận dạng nhỏ tại vị trí con trỏ? ¦ Dokumen ini belum punya kolom gabung surat (Sisipkan → “📨 Kolom gabung surat”). Sisipkan dulu kartu identitas kecil di posisi kursor?
+Ce livre n’a pas de styles de paragraphe. ¦ Sách này không có kiểu đoạn văn. ¦ Buku ini tidak punya gaya paragraf.
+Ce passage a changé : relance la relecture. ¦ Đoạn này đã thay đổi: hãy chạy lại việc kiểm tra. ¦ Bagian ini sudah berubah: jalankan ulang pemeriksaan.
+Ce que montre l’image, en une phrase (ex. « Mariage de Jean et Marie devant l’église, 1923 ») ¦ Hình cho thấy gì, trong một câu (vd. “Mariage de Jean et Marie devant l’église, 1923”) ¦ Apa yang ditunjukkan gambar, dalam satu kalimat (mis. “Mariage de Jean et Marie devant l’église, 1923”)
+Ce texte suit la fiche : il se met à jour à l’ouverture du document (Outils → Mettre à jour les champs). ¦ Đoạn văn này theo hồ sơ: nó được cập nhật khi mở tài liệu (Công cụ → Cập nhật các trường). ¦ Teks ini mengikuti profil: diperbarui saat dokumen dibuka (Alat → Perbarui kolom isian).
+Centrer ¦ Căn giữa ¦ Rata tengah
+Certaines images, trop lourdes, n’ont pas été reprises. ¦ Một số hình quá nặng nên không được lấy vào. ¦ Beberapa gambar terlalu besar sehingga tidak diambil.
+Cette case n’est pas fusionnée. ¦ Ô này chưa được gộp. ¦ Sel ini tidak digabung.
+Cette feuille est vide. ¦ Trang tính này trống. ¦ Lembar ini kosong.
+Cette image n’a pas de fichier. ¦ Hình này không có tệp. ¦ Gambar ini tidak punya berkas.
+Champ ¦ Trường ¦ Kolom isian
+Changer l’image ¦ Đổi hình ¦ Ganti gambar
+Changer l’image… ¦ Đổi hình… ¦ Ganti gambar…
+Chaque Mot ¦ Mỗi Từ ¦ Setiap Kata
+Chaque Mot Avec Une Majuscule ¦ Viết Hoa Chữ Đầu Mỗi Từ ¦ Huruf Besar Di Awal Setiap Kata
+Cherche un mot avec 🔍 : chaque endroit trouvé s’affiche ici. ¦ Hãy tìm một từ bằng 🔍: mỗi chỗ tìm thấy sẽ hiện ở đây. ¦ Cari kata dengan 🔍: setiap tempat yang ditemukan muncul di sini.
+Chercher… (un mot, un nom) ¦ Tìm… (một từ, một tên) ¦ Cari… (kata, nama)
+Choisir un classeur du Tableur ¦ Chọn một sổ tính của Bảng tính ¦ Pilih buku kerja dari Spreadsheet
+Choisir un média (lien) ¦ Chọn một tư liệu (liên kết) ¦ Pilih media (tautan)
+Choisis d’abord du texte. ¦ Hãy chọn chữ trước. ¦ Pilih teks dulu.
+Choisis d’abord le texte à changer. ¦ Hãy chọn trước đoạn chữ cần đổi. ¦ Pilih dulu teks yang mau diubah.
+Choisis le passage à commenter. ¦ Hãy chọn đoạn cần bình luận. ¦ Pilih bagian yang mau dikomentari.
+Choisis les paragraphes à mettre en colonnes. ¦ Hãy chọn các đoạn văn cần chia cột. ¦ Pilih paragraf yang mau dibuat berkolom.
+Choisis un mot (double-clic) ou mets le curseur dedans, puis 🔁 Synonymes. ¦ Hãy chọn một từ (nhấp đúp) hoặc đặt con trỏ vào đó, rồi 🔁 Từ đồng nghĩa. ¦ Pilih kata (klik dua kali) atau taruh kursor di dalamnya, lalu 🔁 Sinonim.
+Choisis un rectangle de cases (sans morceau d’une autre fusion). ¦ Hãy chọn một vùng ô hình chữ nhật (không chứa phần của ô gộp khác). ¦ Pilih sel berbentuk persegi panjang (tanpa sebagian dari gabungan lain).
+Classique ¦ Cổ điển ¦ Klasik
+Classique (à la française) ¦ Cổ điển (kiểu Pháp) ¦ Klasik (ala Prancis)
+Clic sur un mot : il remplace « {word} » (↶ pour revenir). ¦ Nhấp vào một từ: nó thay cho “{word}” (↶ để quay lại). ¦ Klik sebuah kata: kata itu menggantikan “{word}” (↶ untuk kembali).
+Clique pour l’ajouter au texte (la fenêtre reste ouverte). ¦ Nhấp để thêm vào văn bản (cửa sổ vẫn mở). ¦ Klik untuk menambahkannya ke teks (jendela tetap terbuka).
+Coche deux versions (ou « Maintenant ») pour les comparer. ¦ Đánh dấu hai phiên bản (hoặc “Bây giờ”) để so sánh. ¦ Centang dua versi (atau “Sekarang”) untuk membandingkannya.
+Coller depuis Word ou le web ¦ Dán từ Word hoặc từ web ¦ Tempel dari Word atau web
+Coller sans la mise en forme ¦ Dán không kèm định dạng ¦ Tempel tanpa format
+Colonne ajoutée ¦ Đã thêm cột ¦ Kolom ditambahkan
+Colonne supprimée ¦ Đã xoá cột ¦ Kolom dihapus
+Commande inconnue : {cmd} ¦ Lệnh không xác định: {cmd} ¦ Perintah tidak dikenal: {cmd}
+Commencer sur une nouvelle page ¦ Bắt đầu ở trang mới ¦ Mulai di halaman baru
+Commentaire supprimé ¦ Đã xoá bình luận ¦ Komentar dihapus
+Commentaires ¦ Bình luận ¦ Komentar
+Commentaires (panneau) ¦ Bình luận (bảng) ¦ Komentar (panel)
+Commenter ¦ Bình luận ¦ Komentari
+Compte rendu de visite ¦ Biên bản chuyến thăm ¦ Laporan kunjungan
+Conjoint ¦ Vợ/chồng ¦ Pasangan
+Copie enregistrée : « {name} ». ¦ Đã lưu bản sao: “{name}”. ¦ Salinan disimpan: “{name}”.
+Copie impossible : {error} ¦ Không sao chép được: {error} ¦ Tidak bisa menyalin: {error}
+Copie rangée dans les médias ({format}). ¦ Đã xếp bản sao vào tư liệu ({format}). ¦ Salinan disimpan di media ({format}).
+Copie « {name} » enregistrée. ¦ Đã lưu bản sao “{name}”. ¦ Salinan “{name}” disimpan.
+Corriger ¦ Sửa lỗi ¦ Koreksi
+Couleur du texte ¦ Màu chữ ¦ Warna teks
+Couleur du texte… ¦ Màu chữ… ¦ Warna teks…
+Couleur et surlignage (C2) ¦ Màu và tô sáng (C2) ¦ Warna dan stabilo (C2)
+Couper ici ¦ Cắt ở đây ¦ Potong di sini
+Créer le lien ¦ Tạo liên kết ¦ Buat tautan
+Créer le style ¦ Tạo kiểu ¦ Buat gaya
+Créer le tableau ¦ Tạo bảng ¦ Buat tabel
+Créer les copies ¦ Tạo các bản sao ¦ Buat salinan
+Cyrillique ¦ Chữ Kirin ¦ Sirilik
+Dans la sélection : mots ¦ Trong phần đã chọn: số từ ¦ Di pilihan: kata
+Dans le texte, entre parenthèses ¦ Trong văn bản, trong ngoặc đơn ¦ Di teks, dalam tanda kurung
+Date (mise à jour à chaque ouverture) ¦ Ngày (cập nhật mỗi lần mở) ¦ Tanggal (diperbarui setiap dibuka)
+Date du jour ¦ Ngày hôm nay ¦ Tanggal hari ini
+Date du mariage ¦ Ngày kết hôn ¦ Tanggal pernikahan
+Demande d’acte (remplie avec une fiche) ¦ Yêu cầu trích lục giấy tờ (điền từ một hồ sơ) ¦ Permintaan akta (diisi dari profil)
+Demande d’acte d’état civil ¦ Yêu cầu trích lục giấy tờ hộ tịch ¦ Permintaan akta catatan sipil
+Design ¦ Thiết kế ¦ Desain
+Diminuer le retrait ¦ Giảm thụt lề ¦ Kurangi indentasi
+Document ¦ Tài liệu ¦ Dokumen
+Document importé ¦ Tài liệu đã nhập ¦ Dokumen diimpor
+Document modifié ailleurs ¦ Tài liệu đã được sửa ở nơi khác ¦ Dokumen diubah di tempat lain
+Document « {name} » importé ({words}) ¦ Đã nhập tài liệu “{name}” ({words}) ¦ Dokumen “{name}” diimpor ({words})
+Donne un nom au style. ¦ Hãy đặt tên cho kiểu. ¦ Beri nama gayanya.
+Double (2) ¦ Đôi (2) ¦ Ganda (2)
+Double-clic : modifier le pied de page ¦ Nhấp đúp: sửa chân trang ¦ Klik dua kali: ubah footer
+Double-clic : modifier l’en-tête ¦ Nhấp đúp: sửa đầu trang ¦ Klik dua kali: ubah header
+Double-clic : renommer · clic droit : plus ¦ Nhấp đúp: đổi tên · nhấp chuột phải: thêm ¦ Klik dua kali: ganti nama · klik kanan: lainnya
+Droite ¦ Phải ¦ Kanan
+Déplacer à droite ¦ Chuyển sang phải ¦ Pindah ke kanan
+Déplacer à gauche ¦ Chuyển sang trái ¦ Pindah ke kiri
+D’après le paragraphe du curseur : change ce que tu veux, puis il sera proposé dans la liste des styles. ¦ Dựa trên đoạn văn tại con trỏ: hãy đổi những gì bạn muốn, rồi kiểu này sẽ có trong danh sách kiểu. ¦ Berdasarkan paragraf di kursor: ubah sesukamu, lalu gaya ini akan muncul di daftar gaya.
+Effacer la mise en forme ¦ Xoá định dạng ¦ Hapus format
+Elle sert à l’orthographe (mots soulignés en rouge, corrections au clic droit) et à la lecture à voix haute. ¦ Nó dùng cho chính tả (từ gạch chân đỏ, sửa bằng nhấp chuột phải) và đọc to. ¦ Ini dipakai untuk ejaan (kata bergaris bawah merah, koreksi lewat klik kanan) dan untuk membaca dengan suara.
+En note de bas de page ¦ Thành chú thích cuối trang ¦ Sebagai catatan kaki
+En note de fin ¦ Thành chú thích cuối tài liệu ¦ Sebagai catatan akhir
+En-tête (en haut de chaque page) ¦ Đầu trang (ở trên cùng mỗi trang) ¦ Header (di atas setiap halaman)
+En-tête de la première page ¦ Đầu trang của trang đầu tiên ¦ Header halaman pertama
+En-tête et pied de page ¦ Đầu trang và chân trang ¦ Header dan footer
+En-tête et pied de page… ¦ Đầu trang và chân trang… ¦ Header dan footer…
+En-tête et pied… ¦ Đầu và chân trang… ¦ Header dan footer…
+Enregistre d’abord le document (💾) : ses versions seront gardées avec lui. ¦ Hãy lưu tài liệu trước (💾): các phiên bản sẽ được giữ cùng với nó. ¦ Simpan dulu dokumennya (💾): versinya akan disimpan bersamanya.
+Enregistrer comme modèle ¦ Lưu thành mẫu ¦ Simpan sebagai templat
+Enregistrer comme modèle… ¦ Lưu thành mẫu… ¦ Simpan sebagai templat…
+Enregistrer comme nouvelle version ¦ Lưu thành phiên bản mới ¦ Simpan sebagai versi baru
+Enregistrer tout seul ¦ Tự lưu ¦ Simpan otomatis
+Enregistrer une copie ¦ Lưu một bản sao ¦ Simpan salinan
+Envoi des images indisponible. ¦ Không gửi được hình ảnh. ¦ Pengiriman gambar tidak tersedia.
+Envoyer ¦ Gửi ¦ Kirim
+Envoyer vers la mise en page… ¦ Gửi sang Dàn trang… ¦ Kirim ke Tata letak…
+Espace après ¦ Khoảng cách sau ¦ Jarak sesudah
+Espace après le paragraphe ¦ Khoảng cách sau đoạn văn ¦ Jarak sesudah paragraf
+Espace avant ¦ Khoảng cách trước ¦ Jarak sebelum
+Espace avant le paragraphe ¦ Khoảng cách trước đoạn văn ¦ Jarak sebelum paragraf
+Espace fine avant ; ! ? ¦ Dấu cách hẹp trước ; ! ? (quy tắc tiếng Pháp) ¦ Spasi tipis sebelum ; ! ? (aturan Prancis)
+Espace insécable avant les deux-points ¦ Dấu cách không ngắt trước dấu hai chấm ¦ Spasi tak terputus sebelum titik dua
+Espaces en trop ¦ Dấu cách thừa ¦ Spasi berlebih
+Espagnol ¦ Tiếng Tây Ban Nha ¦ Bahasa Spanyol
+Et {n} de plus (« Tout corriger » les prend aussi). ¦ Và thêm {n} nữa (“Sửa tất cả” cũng sửa luôn). ¦ Dan {n} lagi (“Koreksi semua” juga mencakupnya).
+Exporté : {name} ¦ Đã xuất: {name} ¦ Diekspor: {name}
+Exposant ¦ Chỉ số trên ¦ Superskrip
+Expressions simples ¦ Biểu thức đơn giản ¦ Ekspresi sederhana
+FORMAT ¦ ĐỊNH DẠNG ¦ FORMAT
+Famille et vie ¦ Gia đình và cuộc sống ¦ Keluarga dan kehidupan
+Feuille trop grande pour un document (plus de 20 000 cases) : choisis une plage plus petite dans le Tableur. ¦ Trang tính quá lớn cho một tài liệu (hơn 20 000 ô): hãy chọn một vùng nhỏ hơn trong Bảng tính. ¦ Lembar terlalu besar untuk dokumen (lebih dari 20 000 sel): pilih rentang yang lebih kecil di Spreadsheet.
+Fiche d’identité d’un ancêtre (remplie) ¦ Phiếu nhận dạng của một tổ tiên (đã điền) ¦ Kartu identitas leluhur (sudah diisi)
+Fiche ouverte derrière le document (ferme-le ou réduis-le pour la voir). ¦ Hồ sơ đang mở phía sau tài liệu (hãy đóng hoặc thu nhỏ tài liệu để xem). ¦ Profil terbuka di belakang dokumen (tutup atau kecilkan dokumen untuk melihatnya).
+Filigrane ¦ Hình mờ ¦ Tanda air
+Garder avec le paragraphe suivant ¦ Giữ cùng đoạn văn sau ¦ Satukan dengan paragraf berikutnya
+Garder avec le suivant ¦ Giữ cùng đoạn sau ¦ Satukan dengan berikutnya
+Garder la mise en forme (nettoyée) ¦ Giữ định dạng (đã làm sạch) ¦ Pertahankan format (dibersihkan)
+Garder ma version ¦ Giữ bản của tôi ¦ Pertahankan versiku
+Gauche ¦ Trái ¦ Kiri
+Glisse la souris d’une case à l’autre pour en choisir plusieurs, puis « Fusionner ». ¦ Kéo chuột từ ô này sang ô khác để chọn nhiều ô, rồi bấm “Gộp”. ¦ Seret tetikus dari satu sel ke sel lain untuk memilih beberapa, lalu “Gabungkan”.
+Gras ¦ Đậm ¦ Tebal
+Gras, italique… ¦ Đậm, nghiêng… ¦ Tebal, miring…
+Grec ¦ Tiếng Hy Lạp ¦ Bahasa Yunani
+Groupe de caractères ¦ Nhóm ký tự ¦ Grup karakter
+Guillemets français « » ¦ Dấu ngoặc kép kiểu Pháp « » ¦ Tanda kutip Prancis « »
+Haut ¦ Trên ¦ Atas
+Hauteur ¦ Chiều cao ¦ Tinggi
+Histoire d’une maison ou d’un village ¦ Lịch sử một ngôi nhà hoặc một ngôi làng ¦ Sejarah sebuah rumah atau desa
+IMAGE ¦ HÌNH ẢNH ¦ GAMBAR
+Image ¦ Hình ảnh ¦ Gambar
+Image ajoutée (et rangée dans les médias). ¦ Đã thêm hình (và xếp vào tư liệu). ¦ Gambar ditambahkan (dan disimpan di media).
+Image choisie : tire un coin pour la taille, clic droit pour l’habillage, ⌫ pour la supprimer. ¦ Đã chọn hình: kéo một góc để đổi kích thước, nhấp chuột phải để chọn cách bao chữ, ⌫ để xoá. ¦ Gambar dipilih: tarik sudutnya untuk ukuran, klik kanan untuk pembungkusan teks, ⌫ untuk menghapusnya.
+Image posée : clic pour la taille, clic droit pour l’habillage (carré, haut et bas) et la légende. ¦ Đã đặt hình: nhấp để đổi kích thước, nhấp chuột phải để chọn cách bao chữ (hình vuông, trên và dưới) và chú thích. ¦ Gambar ditaruh: klik untuk ukuran, klik kanan untuk pembungkusan teks (persegi, atas dan bawah) dan keterangan.
+Image rangée dans les médias… ¦ Đang xếp hình vào tư liệu… ¦ Gambar disimpan di media…
+Image sans description (lue à voix haute aux personnes qui ne voient pas) ¦ Hình không có mô tả (được đọc to cho người không nhìn thấy) ¦ Gambar tanpa deskripsi (dibacakan untuk orang yang tidak bisa melihat)
+Image supprimée ¦ Đã xoá hình ¦ Gambar dihapus
+Impossible d’enregistrer : {error} ¦ Không lưu được: {error} ¦ Tidak bisa menyimpan: {error}
+Indice ¦ Chỉ số dưới ¦ Subskrip
+Insérer la fiche d’identité ¦ Chèn phiếu nhận dạng ¦ Sisipkan kartu identitas
+Interligne ¦ Giãn dòng ¦ Spasi baris
+Interligne et espacement ¦ Giãn dòng và khoảng cách ¦ Spasi baris dan jarak
+Interligne {n} ¦ Giãn dòng {n} ¦ Spasi baris {n}
+Italien ¦ Tiếng Ý ¦ Bahasa Italia
+Italique ¦ Nghiêng ¦ Miring
+Jeu de styles ¦ Bộ kiểu ¦ Set gaya
+Jeu de styles des nouveaux documents ¦ Bộ kiểu cho tài liệu mới ¦ Set gaya untuk dokumen baru
+Jeu de styles « {name} » ¦ Bộ kiểu “{name}” ¦ Set gaya “{name}”
+Jeu de styles… ¦ Bộ kiểu… ¦ Set gaya…
+Justifier ¦ Căn đều hai bên ¦ Rata kiri-kanan
+Justifié ¦ Căn đều ¦ Rata kiri-kanan
+La bibliographie (Insertion → 📚) reprend toute seule les sources citées. ¦ Thư mục tham khảo (Chèn → 📚) tự lấy lại các nguồn đã trích dẫn. ¦ Daftar pustaka (Sisipkan → 📚) otomatis mengambil sumber yang dikutip.
+La biographie de qui ? ¦ Tiểu sử của ai? ¦ Biografi siapa?
+La demande d’acte pour qui ? ¦ Yêu cầu trích lục giấy tờ cho ai? ¦ Permintaan akta untuk siapa?
+La fenêtre des images n’est pas chargée. ¦ Cửa sổ hình ảnh chưa được tải. ¦ Jendela gambar belum dimuat.
+La fenêtre des versions n’est pas chargée. ¦ Cửa sổ phiên bản chưa được tải. ¦ Jendela versi belum dimuat.
+La fiche de qui ? ¦ Hồ sơ của ai? ¦ Profil siapa?
+La lecture à voix haute n’existe pas dans ce navigateur. ¦ Trình duyệt này không có chức năng đọc to. ¦ Membaca dengan suara tidak tersedia di peramban ini.
+La naissance : date et lieu ¦ Sinh: ngày và nơi ¦ Kelahiran: tanggal dan tempat
+La première ligne est répétée en haut de chaque page ¦ Dòng đầu tiên được lặp lại ở đầu mỗi trang ¦ Baris pertama diulang di atas setiap halaman
+La suite du document commence sur une nouvelle page, avec son propre format : par exemple un grand tableau ou un arbre en paysage, puis on revient en portrait. ¦ Phần tiếp theo của tài liệu bắt đầu ở trang mới, với khổ riêng: ví dụ một bảng lớn hoặc một cây nằm ngang, rồi quay lại khổ dọc. ¦ Lanjutan dokumen dimulai di halaman baru, dengan formatnya sendiri: misalnya tabel besar atau pohon dalam lanskap, lalu kembali ke potret.
+La touche Tab avance jusqu’au prochain arrêt. Dans un tableau, Tab passe à la case suivante ; dans une liste, elle décale d’un niveau. ¦ Phím Tab đưa đến điểm dừng kế tiếp. Trong bảng, Tab chuyển sang ô kế tiếp; trong danh sách, nó lùi vào một cấp. ¦ Tombol Tab maju ke perhentian berikutnya. Di tabel, Tab pindah ke sel berikutnya; di daftar, Tab menggeser satu tingkat.
+La vérification n’est pas chargée. ¦ Chức năng kiểm tra chưa được tải. ¦ Pemeriksaan belum dimuat.
+Langue ¦ Ngôn ngữ ¦ Bahasa
+Langue des nouveaux documents ¦ Ngôn ngữ của tài liệu mới ¦ Bahasa dokumen baru
+Langue du document (orthographe, lecture à voix haute) ¦ Ngôn ngữ của tài liệu (chính tả, đọc to) ¦ Bahasa dokumen (ejaan, membaca dengan suara)
+Largeur ¦ Chiều rộng ¦ Lebar
+Latin ¦ Tiếng Latinh ¦ Bahasa Latin
+Le décès : date et lieu ¦ Mất: ngày và nơi ¦ Kematian: tanggal dan tempat
+Le livre dont reprendre les styles ¦ Sách để lấy lại các kiểu ¦ Buku yang gayanya diambil
+Le mot entier seulement ¦ Chỉ nguyên từ ¦ Hanya kata utuh
+Le mot tel qu’il apparaîtra dans l’index : ¦ Từ như sẽ hiện trong bảng chỉ mục: ¦ Kata seperti yang akan muncul di indeks:
+Le moteur du tableur n’est pas chargé. ¦ Bộ máy của bảng tính chưa được tải. ¦ Mesin spreadsheet belum dimuat.
+Le nom (lien vers la fiche) ¦ Tên (liên kết tới hồ sơ) ¦ Nama (tautan ke profil)
+Le nom de la copie : ¦ Tên của bản sao: ¦ Nama salinan:
+Le nom du modèle (le texte reste : vide-le avant si tu veux un modèle vierge) : ¦ Tên mẫu (văn bản vẫn giữ: hãy xoá trước nếu bạn muốn một mẫu trống): ¦ Nama templat (teksnya tetap ada: kosongkan dulu jika kamu mau templat kosong):
+Le nom du nouvel onglet ¦ Tên của thẻ mới ¦ Nama tab baru
+Le nom et les années (1850 – 1920) ¦ Tên và các năm (1850 – 1920) ¦ Nama dan tahun (1850 – 1920)
+Le nom, la naissance et le décès ¦ Tên, ngày sinh và ngày mất ¦ Nama, kelahiran, dan kematian
+Le petit arbre de qui ? ¦ Cây nhỏ của ai? ¦ Pohon kecil siapa?
+Le récit de qui ? ¦ Câu chuyện của ai? ¦ Kisah siapa?
+Le texte devient des pages d’un livre (Mise en page) : les titres 1 deviennent des chapitres, les images des pages d’images avec leur légende, les notes une partie « Notes » à la fin. Ton document reste tel quel ici. ¦ Văn bản trở thành các trang của một cuốn sách (Dàn trang): tiêu đề 1 trở thành chương, hình ảnh thành trang hình có chú thích, ghi chú thành phần “Ghi chú” ở cuối. Tài liệu của bạn ở đây vẫn giữ nguyên. ¦ Teks menjadi halaman-halaman buku (Tata letak): judul 1 menjadi bab, gambar menjadi halaman gambar dengan keterangannya, catatan menjadi bagian “Catatan” di akhir. Dokumenmu di sini tetap seperti adanya.
+Le texte seul ¦ Chỉ văn bản ¦ Teks saja
+Le tri ne marche pas avec des cases fusionnées : sépare-les d’abord. ¦ Không sắp xếp được khi có ô đã gộp: hãy tách chúng trước. ¦ Pengurutan tidak bisa dengan sel yang digabung: pisahkan dulu.
+Lecture arrêtée. ¦ Đã dừng đọc. ¦ Pembacaan dihentikan.
+Legal US ¦ Legal US ¦ Legal AS
+Les champs « » prennent les valeurs d’une fiche : Fichier → « 👤 Remplir avec une fiche… », ou une copie par personne avec Outils → « 📨 Publipostage… ». ¦ Các trường « » lấy giá trị từ một hồ sơ: Tệp → “👤 Điền bằng một hồ sơ…”, hoặc mỗi người một bản với Công cụ → “📨 Trộn thư…”. ¦ Kolom isian « » mengambil nilai dari sebuah profil: Berkas → “👤 Isi dengan profil…”, atau satu salinan per orang lewat Alat → “📨 Gabung surat…”.
+Les changements faits depuis le dernier enregistrement seront perdus. ¦ Những thay đổi từ lần lưu cuối sẽ bị mất. ¦ Perubahan sejak penyimpanan terakhir akan hilang.
+Les dates et les lieux écrits à côté d’un nom de la base sont comparés à sa fiche (naissance, baptême, mariage, décès, inhumation, âges, numéros Sosa). Rien n’est changé tout seul. ¦ Ngày và địa điểm viết cạnh một tên trong cơ sở dữ liệu được so với hồ sơ của người đó (sinh, rửa tội, kết hôn, mất, mai táng, tuổi, số Sosa). Không có gì tự thay đổi. ¦ Tanggal dan tempat yang ditulis di samping nama dari basis data dibandingkan dengan profilnya (kelahiran, baptis, pernikahan, kematian, pemakaman, usia, nomor Sosa). Tidak ada yang diubah otomatis.
+Les macros du fichier sont ignorées (elles ne sont jamais lancées). ¦ Các macro trong tệp bị bỏ qua (chúng không bao giờ được chạy). ¦ Makro di berkas diabaikan (tidak pernah dijalankan).
+Les modifications ne sont plus suivies. ¦ Các thay đổi không còn được theo dõi. ¦ Perubahan tidak lagi dilacak.
+Les modifications sont suivies ¦ Các thay đổi đang được theo dõi ¦ Perubahan sedang dilacak
+Les mots mal écrits sont soulignés en rouge (clic droit pour les corrections). ¦ Các từ viết sai được gạch chân đỏ (nhấp chuột phải để sửa). ¦ Kata yang salah ketik digarisbawahi merah (klik kanan untuk koreksinya).
+Les paragraphes choisis se partagent en colonnes équilibrées (comme dans un journal). ¦ Các đoạn văn đã chọn được chia thành các cột cân đối (như trên báo). ¦ Paragraf yang dipilih dibagi menjadi kolom yang seimbang (seperti di koran).
+Les personnes du publipostage ¦ Những người trong đợt trộn thư ¦ Orang-orang untuk gabung surat
+Les raccourcis à soi ne sont pas chargés. ¦ Các phím tắt riêng của bạn chưa được tải. ¦ Pintasan pribadimu belum dimuat.
+Les titres et le texte changent ensemble de police et de couleur ; tes propres styles restent. ¦ Tiêu đề và văn bản cùng đổi phông chữ và màu; các kiểu riêng của bạn vẫn giữ nguyên. ¦ Judul dan teks berganti font dan warna bersama-sama; gaya buatanmu sendiri tetap.
+Lettre US ¦ Letter US ¦ Letter AS
+Lettre aux archives ¦ Thư gửi cơ quan lưu trữ ¦ Surat ke arsip
+Lettre aux archives, demande d’acte, récit d’un ancêtre, compte rendu de visite, rapport de recherche… ¦ Thư gửi cơ quan lưu trữ, yêu cầu trích lục giấy tờ, câu chuyện về một tổ tiên, biên bản chuyến thăm, báo cáo nghiên cứu… ¦ Surat ke arsip, permintaan akta, kisah seorang leluhur, laporan kunjungan, laporan riset…
+Lettre à la famille ¦ Thư gửi gia đình ¦ Surat untuk keluarga
+Lettres accentuées ¦ Chữ có dấu ¦ Huruf beraksen
+Lettres et abréviations anciennes ¦ Chữ và chữ viết tắt cổ ¦ Huruf dan singkatan kuno
+Lettrine ¦ Chữ đầu lớn ¦ Huruf awal besar
+LibreOffice, OpenOffice ¦ LibreOffice, OpenOffice ¦ LibreOffice, OpenOffice
+Lien « {text} » : écris plutôt où il mène ¦ Liên kết “{text}”: tốt hơn hãy ghi nó dẫn tới đâu ¦ Tautan “{text}”: sebaiknya tulis ke mana tujuannya
+Lieu du mariage ¦ Nơi kết hôn ¦ Tempat pernikahan
+Ligne ajoutée ¦ Đã thêm dòng ¦ Baris ditambahkan
+Ligne au-dessus ¦ Dòng phía trên ¦ Baris di atas
+Ligne d’en-tête (répétée sur chaque page) ¦ Dòng tiêu đề (lặp lại trên mỗi trang) ¦ Baris judul (diulang di setiap halaman)
+Ligne en dessous ¦ Dòng phía dưới ¦ Baris di bawah
+Ligne supprimée ¦ Đã xoá dòng ¦ Baris dihapus
+Lire à voix haute ¦ Đọc to ¦ Bacakan
+Liste numérotée ¦ Danh sách đánh số ¦ Daftar bernomor
+Liste à puces ¦ Danh sách gạch đầu dòng ¦ Daftar berpoin
+Livre (15,6 × 23,4 cm) ¦ Sách (15,6 × 23,4 cm) ¦ Buku (15,6 × 23,4 cm)
+Livre US (6 × 9 in) ¦ Sách US (6 × 9 in) ¦ Buku AS (6 × 9 in)
+Livre ancien ¦ Sách cổ ¦ Buku kuno
+Louise Borie, née en 1850 ¦ Louise Borie, sinh năm 1850 ¦ Louise Borie, lahir tahun 1850
+L’onglet « {name} » et son texte seront supprimés. ¦ Thẻ “{name}” và văn bản của nó sẽ bị xoá. ¦ Tab “{name}” dan teksnya akan dihapus.
+MAJUSCULES ¦ CHỮ HOA ¦ HURUF BESAR
+Majuscule en début de phrase ¦ Viết hoa đầu câu ¦ Huruf besar di awal kalimat
+Majuscules et minuscules comptent ¦ Phân biệt chữ hoa và chữ thường ¦ Huruf besar dan kecil dibedakan
+Marquer ¦ Đánh dấu ¦ Tandai
+Marquer pour l’index ¦ Đánh dấu cho bảng chỉ mục ¦ Tandai untuk indeks
+Marques de mise en forme ¦ Ký hiệu định dạng ¦ Tanda format
+Marques de mise en forme ¶ ¦ Ký hiệu định dạng ¶ ¦ Tanda format ¶
+Mathématiques ¦ Toán học ¦ Matematika
+Mes modèles ¦ Mẫu của tôi ¦ Templatku
+Mettre à jour les champs (personnes, dates) ¦ Cập nhật các trường (người, ngày) ¦ Perbarui kolom isian (orang, tanggal)
+Mise en forme ¦ Định dạng ¦ Pemformatan
+Mise en forme (panneau de droite) ¦ Định dạng (bảng bên phải) ¦ Pemformatan (panel kanan)
+Mise en évidence ¦ Làm nổi bật ¦ Sorotan
+Moderne ¦ Hiện đại ¦ Modern
+Modification acceptée ¦ Đã chấp nhận thay đổi ¦ Perubahan diterima
+Modification précédente ¦ Thay đổi trước ¦ Perubahan sebelumnya
+Modification refusée ¦ Đã từ chối thay đổi ¦ Perubahan ditolak
+Modification suivante ¦ Thay đổi sau ¦ Perubahan berikutnya
+Modifications suivies ¦ Thay đổi được theo dõi ¦ Perubahan terlacak
+Modifier le lien… ¦ Sửa liên kết… ¦ Ubah tautan…
+Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles). ¦ Đã lưu mẫu “{name}” (Bắt đầu từ mẫu → Mẫu của tôi). ¦ Templat “{name}” disimpan (Mulai dari templat → Templatku).
+Moi ¦ Tôi ¦ Saya
+Mon document ¦ Tài liệu của tôi ¦ Dokumenku
+Mon nom (pour le suivi des modifications et les commentaires) ¦ Tên của tôi (cho việc theo dõi thay đổi và bình luận) ¦ Namaku (untuk pelacakan perubahan dan komentar)
+Monnaies et chiffres ¦ Tiền tệ và chữ số ¦ Mata uang dan angka
+Montrer dans le texte ¦ Hiện trong văn bản ¦ Tampilkan di teks
+Montrer les marques de mise en forme ¶ ¦ Hiện ký hiệu định dạng ¶ ¦ Tampilkan tanda format ¶
+Montrer les modifications ¦ Hiện các thay đổi ¦ Tampilkan perubahan
+Montrer les modifications… ¦ Hiện các thay đổi… ¦ Tampilkan perubahan…
+Montrer ▾ ¦ Hiện ▾ ¦ Tampilkan ▾
+Mot ancien ¦ Từ cổ ¦ Kata kuno
+Mot entier ¦ Nguyên từ ¦ Kata utuh
+Mot répété ¦ Từ lặp lại ¦ Kata berulang
+Mots ¦ Từ ¦ Kata
+NOTE DE BAS DE PAGE ¦ CHÚ THÍCH CUỐI TRANG ¦ CATATAN KAKI
+NOTE DE FIN ¦ CHÚ THÍCH CUỐI TÀI LIỆU ¦ CATATAN AKHIR
+Naissance et décès ¦ Sinh và mất ¦ Kelahiran dan kematian
+Nom de famille ¦ Họ ¦ Nama keluarga
+Nombre de colonnes ¦ Số cột ¦ Jumlah kolom
+Nombre de mots, de caractères, de paragraphes ¦ Số từ, số ký tự, số đoạn văn ¦ Jumlah kata, karakter, paragraf
+Nombre de pages ¦ Số trang ¦ Jumlah halaman
+Non (avec 💾 ou ⌘S) ¦ Không (bằng 💾 hoặc ⌘S) ¦ Tidak (dengan 💾 atau ⌘S)
+Normal ¦ Normal ¦ Normal
+Normal, A4, marges de 2,5 cm ¦ Normal, A4, lề 2,5 cm ¦ Normal, A4, margin 2,5 cm
+Note de bas de page ¦ Chú thích cuối trang ¦ Catatan kaki
+Note de fin (à la fin du document) ¦ Chú thích cuối tài liệu (ở cuối tài liệu) ¦ Catatan akhir (di akhir dokumen)
+Note {n} ¦ Chú thích {n} ¦ Catatan {n}
+Nouveau commentaire ¦ Bình luận mới ¦ Komentar baru
+Nouvel onglet ¦ Thẻ mới ¦ Tab baru
+Nouvelle section en paysage. ¦ Phần mới theo khổ ngang. ¦ Bagian baru dalam lanskap.
+Nouvelle section en portrait. ¦ Phần mới theo khổ dọc. ¦ Bagian baru dalam potret.
+Numéro de la page (1 à {n}) : ¦ Số trang (1 đến {n}): ¦ Nomor halaman (1 sampai {n}):
+Néerlandais ¦ Tiếng Hà Lan ¦ Bahasa Belanda
+OUTILS ¦ CÔNG CỤ ¦ ALAT
+Occitan ¦ Tiếng Occitan ¦ Bahasa Oksitan
+Onglet renommé ¦ Đã đổi tên thẻ ¦ Tab diganti nama
+Onglet supprimé ¦ Đã xoá thẻ ¦ Tab dihapus
+Onglet {n} ¦ Thẻ {n} ¦ Tab {n}
+Onglets du document ¦ Các thẻ của tài liệu ¦ Tab dokumen
+Onglets rangés ¦ Đã sắp xếp các thẻ ¦ Tab diurutkan
+Orientation ¦ Hướng giấy ¦ Orientasi
+Orientation de la suite ¦ Hướng giấy của phần tiếp theo ¦ Orientasi bagian selanjutnya
+Ouvrir le lieu ¦ Mở địa điểm ¦ Buka tempat
+Ouvrir le panneau de navigation ¦ Mở bảng điều hướng ¦ Buka panel navigasi
+Page blanche ¦ Trang trắng ¦ Halaman kosong
+Page {n} ¦ Trang {n} ¦ Halaman {n}
+Page {page} / {total} ¦ Trang {page} / {total} ¦ Halaman {page} / {total}
+Panneau de droite ¦ Bảng bên phải ¦ Panel kanan
+Panneau de navigation : titres, pages, résultats ¦ Bảng điều hướng: tiêu đề, trang, kết quả ¦ Panel navigasi: judul, halaman, hasil
+Paragraphe ¦ Đoạn văn ¦ Paragraf
+Paragraphes ¦ Đoạn văn ¦ Paragraf
+Paragraphe… ¦ Đoạn văn… ¦ Paragraf…
+Pas de personne dans cette liste. ¦ Không có ai trong danh sách này. ¦ Tidak ada orang di daftar ini.
+Pas de synonyme connu pour « {word} ». Le dictionnaire intégré compte {n} groupes de mots, surtout ceux d’un récit de famille. ¦ Không biết từ đồng nghĩa nào cho “{word}”. Từ điển tích hợp có {n} nhóm từ, chủ yếu là từ dùng trong chuyện gia đình. ¦ Tidak ada sinonim yang dikenal untuk “{word}”. Kamus bawaan memuat {n} kelompok kata, terutama untuk kisah keluarga.
+Pas d’espace avant la virgule ou le point ¦ Không có dấu cách trước dấu phẩy hoặc dấu chấm ¦ Tanpa spasi sebelum koma atau titik
+Pas encore de commentaire : choisis un passage, puis « 💬 Nouveau commentaire ». ¦ Chưa có bình luận: hãy chọn một đoạn, rồi “💬 Bình luận mới”. ¦ Belum ada komentar: pilih sebuah bagian, lalu “💬 Komentar baru”.
+Pas encore de modèle à toi : dans un document, Fichier → « Enregistrer comme modèle… ». ¦ Bạn chưa có mẫu riêng: trong một tài liệu, Tệp → “Lưu thành mẫu…”. ¦ Belum ada templatmu sendiri: di sebuah dokumen, Berkas → “Simpan sebagai templat…”.
+Pas encore de titre : choisis le style « Titre 1 » (ou Titre 2, 3…) pour un paragraphe, il apparaîtra ici. ¦ Chưa có tiêu đề: hãy chọn kiểu “Tiêu đề 1” (hoặc Tiêu đề 2, 3…) cho một đoạn văn, nó sẽ hiện ở đây. ¦ Belum ada judul: pilih gaya “Judul 1” (atau Judul 2, 3…) untuk sebuah paragraf, judul itu akan muncul di sini.
+Personne pour l’instant. ¦ Chưa có ai. ¦ Belum ada siapa pun.
+Petites capitales ¦ Chữ hoa nhỏ ¦ Huruf kapital kecil
+Pied de la première page ¦ Chân trang của trang đầu tiên ¦ Footer halaman pertama
+Pied de page (en bas de chaque page) ¦ Chân trang (ở dưới cùng mỗi trang) ¦ Footer (di bawah setiap halaman)
+Place d’abord le curseur dans le texte. ¦ Hãy đặt con trỏ vào văn bản trước. ¦ Taruh kursor di teks dulu.
+Place le curseur dans un paragraphe. ¦ Hãy đặt con trỏ vào một đoạn văn. ¦ Taruh kursor di sebuah paragraf.
+Place le curseur dans un tableau. ¦ Hãy đặt con trỏ vào một bảng. ¦ Taruh kursor di sebuah tabel.
+Place le curseur dans une modification (texte vert ou barré rouge). ¦ Hãy đặt con trỏ vào một thay đổi (chữ xanh lá hoặc gạch ngang đỏ). ¦ Taruh kursor di sebuah perubahan (teks hijau atau coretan merah).
+Place le curseur à l’endroit de la coupure. ¦ Hãy đặt con trỏ tại chỗ cần ngắt. ¦ Taruh kursor di tempat pemisahan.
+Plein écran (⛶) ¦ Toàn màn hình (⛶) ¦ Layar penuh (⛶)
+Plus de ligne d’en-tête ¦ Bỏ dòng tiêu đề ¦ Tanpa baris judul
+Points de suspension en un seul signe ¦ Dấu ba chấm thành một ký tự ¦ Elipsis dalam satu tanda
+Police ¦ Phông chữ ¦ Font
+Police (E5) ¦ Phông chữ (E5) ¦ Font (E5)
+Police et taille (E5) ¦ Phông chữ và cỡ chữ (E5) ¦ Font dan ukuran (E5)
+Police… ¦ Phông chữ… ¦ Font…
+Polonais ¦ Tiếng Ba Lan ¦ Bahasa Polandia
+Portugais ¦ Tiếng Bồ Đào Nha ¦ Bahasa Portugis
+Pour que le document se lise bien avec un lecteur d’écran, à voix haute ou en grand. ¦ Để tài liệu đọc tốt với trình đọc màn hình, khi đọc to hoặc ở cỡ chữ lớn. ¦ Agar dokumen mudah dibaca dengan pembaca layar, dengan suara, atau dalam ukuran besar.
+Pour une fiche ou un lieu de la base : Insertion → 👤 Une personne, 📍 Un lieu. ¦ Cho một hồ sơ hoặc một địa điểm trong cơ sở dữ liệu: Chèn → 👤 Một người, 📍 Một địa điểm. ¦ Untuk profil atau tempat dari basis data: Sisipkan → 👤 Seseorang, 📍 Sebuah tempat.
+Première page différente (pour une page de titre ou une lettre) ¦ Trang đầu khác (cho trang tiêu đề hoặc một lá thư) ¦ Halaman pertama berbeda (untuk halaman judul atau surat)
+Précédent (⇧ Entrée) ¦ Trước (⇧ Enter) ¦ Sebelumnya (⇧ Enter)
+Quelle feuille ? ¦ Trang tính nào? ¦ Lembar yang mana?
+Ranger une copie dans les médias ¦ Xếp một bản sao vào tư liệu ¦ Simpan salinan di media
+Rangé dans Listes → 🛠️ Outils de modification → 📝 Traitement de texte. ¦ Nằm trong Danh sách → 🛠️ Công cụ chỉnh sửa → 📝 Soạn thảo văn bản. ¦ Ada di Daftar → 🛠️ Alat pengubah → 📝 Pengolah kata.
+Rapport de recherche ¦ Báo cáo nghiên cứu ¦ Laporan riset
+Rechercher et remplacer ¦ Tìm và thay thế ¦ Cari dan ganti
+Relecture ¦ Đọc soát ¦ Pemeriksaan
+Remplacer par ¦ Thay bằng ¦ Ganti dengan
+Remplacer par… ¦ Thay bằng… ¦ Ganti dengan…
+Remplir avec la fiche de qui ? ¦ Điền bằng hồ sơ của ai? ¦ Isi dengan profil siapa?
+Renommer l’onglet ¦ Đổi tên thẻ ¦ Ganti nama tab
+Renommer… ¦ Đổi tên… ¦ Ganti nama…
+Retirer la légende ¦ Gỡ chú thích ¦ Lepas keterangan
+Retirer le lien (garder le texte) ¦ Gỡ liên kết (giữ chữ) ¦ Lepas tautan (teks tetap)
+Retirer l’espace après ¦ Bỏ khoảng cách sau ¦ Hapus jarak sesudah
+Retirer l’espace avant ¦ Bỏ khoảng cách trước ¦ Hapus jarak sebelum
+Retrait gauche ¦ Thụt lề trái ¦ Indentasi kiri
+Retrait à droite ¦ Thụt lề phải ¦ Indentasi kanan
+Retrait à gauche ¦ Thụt lề trái ¦ Indentasi kiri
+Rien (le texte comme s’il était accepté) ¦ Không gì cả (văn bản như thể đã được chấp nhận) ¦ Tidak ada (teks seolah sudah diterima)
+Rien de changé depuis : ce que tu tapes ou effaces apparaîtra ici. ¦ Chưa có gì thay đổi kể từ đó: những gì bạn gõ hoặc xoá sẽ hiện ở đây. ¦ Belum ada yang berubah sejak itu: yang kamu ketik atau hapus akan muncul di sini.
+Rien à remplacer. ¦ Không có gì để thay thế. ¦ Tidak ada yang perlu diganti.
+Récents ¦ Gần đây ¦ Terbaru
+Récit d’un ancêtre ¦ Câu chuyện về một tổ tiên ¦ Kisah seorang leluhur
+Récit — {name} ¦ Câu chuyện — {name} ¦ Kisah — {name}
+Répondre ¦ Trả lời ¦ Balas
+Répondre… ¦ Trả lời… ¦ Balas…
+STYLES ¦ KIỂU ¦ GAYA
+Saut de page : la suite commence en haut de la page suivante. ¦ Ngắt trang: phần tiếp theo bắt đầu ở đầu trang sau. ¦ Pemisah halaman: lanjutannya dimulai di atas halaman berikutnya.
+Section {n} sur {total} (comme le document). ¦ Phần {n} trên {total} (giống tài liệu). ¦ Bagian {n} dari {total} (sama dengan dokumen).
+Section {n} sur {total} (format à elle). ¦ Phần {n} trên {total} (khổ riêng). ¦ Bagian {n} dari {total} (format sendiri).
+Seulement un trait dessous ¦ Chỉ một đường kẻ bên dưới ¦ Hanya garis di bawah
+Signature ¦ Chữ ký ¦ Tanda tangan
+Simple (1) ¦ Đơn (1) ¦ Tunggal (1)
+Simple (une marge à côté des ajouts) ¦ Đơn giản (một lề cạnh phần thêm vào) ¦ Sederhana (margin di samping tambahan)
+Souligné ¦ Gạch chân ¦ Garis bawah
+Sous-titre ¦ Tiêu đề phụ ¦ Subjudul
+Style ¦ Kiểu ¦ Gaya
+Style de caractère (quelques mots) ¦ Kiểu ký tự (vài từ) ¦ Gaya karakter (beberapa kata)
+Style de paragraphe ¦ Kiểu đoạn văn ¦ Gaya paragraf
+Style du paragraphe ¦ Kiểu của đoạn văn ¦ Gaya paragrafnya
+Style « {name} » ¦ Kiểu “{name}” ¦ Gaya “{name}”
+Style « {name} » créé. ¦ Đã tạo kiểu “{name}”. ¦ Gaya “{name}” dibuat.
+Style « {name} » supprimé ¦ Đã xoá kiểu “{name}” ¦ Gaya “{name}” dihapus
+Styles ¦ Kiểu ¦ Gaya
+Styles de paragraphe ¦ Kiểu đoạn văn ¦ Gaya paragraf
+Suivant ¦ Tiếp ¦ Berikutnya
+Suivant (Entrée) ¦ Tiếp (Enter) ¦ Berikutnya (Enter)
+Suivre les modifications ¦ Theo dõi thay đổi ¦ Lacak perubahan
+Sujet ¦ Chủ đề ¦ Subjek
+Supprimer la colonne ¦ Xoá cột ¦ Hapus kolom
+Supprimer le tableau ¦ Xoá bảng ¦ Hapus tabel
+Supprimer l’image ¦ Xoá hình ¦ Hapus gambar
+Supprimer l’onglet ? ¦ Xoá thẻ? ¦ Hapus tab?
+Supprimer… ¦ Xoá… ¦ Hapus…
+Surlignage ¦ Tô sáng ¦ Stabilo
+Surlignage… ¦ Tô sáng… ¦ Stabilo…
+Symboles et flèches ¦ Ký hiệu và mũi tên ¦ Simbol dan panah
+Séparer la cellule ¦ Tách ô ¦ Pisahkan sel
+T Titre ¦ T Tiêu đề ¦ T Judul
+TRAITEMENT DE TEXTE ¦ SOẠN THẢO VĂN BẢN ¦ PENGOLAH KATA
+Retrait − ¦ Thụt lề − ¦ Indentasi −
+Tableau de « {name} » ¦ Bảng của “{name}” ¦ Tabel “{name}”
+Tableau sans ligne de titres (Tableau → « Ligne d’en-tête ») ¦ Bảng không có dòng tiêu đề (Bảng → “Dòng tiêu đề”) ¦ Tabel tanpa baris judul (Tabel → “Baris judul”)
+Tableau supprimé ¦ Đã xoá bảng ¦ Tabel dihapus
+Tableau trié de A à Z ¦ Đã sắp xếp bảng từ A đến Z ¦ Tabel diurutkan dari A ke Z
+Tableau trié de Z à A ¦ Đã sắp xếp bảng từ Z đến A ¦ Tabel diurutkan dari Z ke A
+Tableau « {name} » ajouté ({n}). ¦ Đã thêm bảng “{name}” ({n}). ¦ Tabel “{name}” ditambahkan ({n}).
+Tabloïd US ¦ Tabloid US ¦ Tabloid AS
+Tabulations… ¦ Điểm dừng tab… ¦ Tabulasi…
+Taille de l’image ¦ Kích thước hình ¦ Ukuran gambar
+Taille… ¦ Kích thước… ¦ Ukuran…
+Temps de lecture : environ {n} min. ¦ Thời gian đọc: khoảng {n} phút. ¦ Waktu baca: sekitar {n} menit.
+Texte affiché ¦ Chữ hiển thị ¦ Teks yang ditampilkan
+Texte de la note ¦ Nội dung chú thích ¦ Teks catatan
+Texte du commentaire ¦ Nội dung bình luận ¦ Teks komentar
+Texte du document ¦ Văn bản của tài liệu ¦ Teks dokumen
+Texte très petit (moins de 8 points) ¦ Chữ rất nhỏ (dưới 8 điểm) ¦ Teks sangat kecil (kurang dari 8 poin)
+Titre 1 ¦ Tiêu đề 1 ¦ Judul 1
+Titre 2 ¦ Tiêu đề 2 ¦ Judul 2
+Titre 3 ¦ Tiêu đề 3 ¦ Judul 3
+Titre 4 ¦ Tiêu đề 4 ¦ Judul 4
+Titre 5 ¦ Tiêu đề 5 ¦ Judul 5
+Titre 6 ¦ Tiêu đề 6 ¦ Judul 6
+Titre de niveau {n} juste après un niveau {last} : un niveau est sauté ¦ Tiêu đề cấp {n} ngay sau cấp {last}: bị bỏ qua một cấp ¦ Judul tingkat {n} tepat sesudah tingkat {last}: ada tingkat yang terlewat
+Titre en {head}, texte en {body} ¦ Tiêu đề bằng {head}, văn bản bằng {body} ¦ Judul dengan {head}, teks dengan {body}
+Titre vide ¦ Tiêu đề trống ¦ Judul kosong
+Titres ¦ Tiêu đề ¦ Judul
+Ton commentaire… ¦ Bình luận của bạn… ¦ Komentarmu…
+Tous les paragraphes de ce style changent ensemble. ¦ Mọi đoạn văn có kiểu này đều thay đổi cùng lúc. ¦ Semua paragraf bergaya ini berubah bersama.
+Tout accepter ¦ Chấp nhận tất cả ¦ Terima semua
+Tout concorde avec les fiches. ¦ Mọi thứ khớp với hồ sơ. ¦ Semuanya cocok dengan profil.
+Tout corriger ¦ Sửa tất cả ¦ Koreksi semua
+Tout est déjà à jour. ¦ Mọi thứ đã được cập nhật. ¦ Semuanya sudah terbaru.
+Tout montrer (ajouts et suppressions) ¦ Hiện tất cả (phần thêm và phần xoá) ¦ Tampilkan semua (tambahan dan hapusan)
+Tout refuser ¦ Từ chối tất cả ¦ Tolak semua
+Tout remplacer ¦ Thay thế tất cả ¦ Ganti semua
+Tout retirer ¦ Gỡ tất cả ¦ Lepas semua
+Toute la largeur du texte : {n} px. La hauteur suit (pas de déformation). ¦ Toàn bộ chiều rộng văn bản: {n} px. Chiều cao theo tỉ lệ (không bị méo). ¦ Selebar teks penuh: {n} px. Tingginya mengikuti (tidak berubah bentuk).
+Toutes les 10 minutes ¦ Mỗi 10 phút ¦ Setiap 10 menit
+Toutes les 5 minutes ¦ Mỗi 5 phút ¦ Setiap 5 menit
+Toutes les minutes ¦ Mỗi phút ¦ Setiap menit
+Trame (fond) ¦ Nền (tô nền) ¦ Arsiran (latar)
+Trame de la cellule… ¦ Nền của ô… ¦ Arsiran sel…
+Transcription (machine à écrire) ¦ Bản chép lại (máy đánh chữ) ¦ Transkripsi (mesin ketik)
+Transcription d’acte mise au propre ¦ Bản chép lại giấy tờ đã chỉnh sửa sạch ¦ Transkripsi akta yang sudah dirapikan
+Triple (3) ¦ Ba (3) ¦ Tiga (3)
+Tu cherches des renseignements sur qui ? ¦ Bạn đang tìm thông tin về ai? ¦ Kamu mencari keterangan tentang siapa?
+Typographie française ¦ Quy tắc in ấn kiểu Pháp ¦ Tipografi Prancis
+Un arrêt tous les ¦ Một điểm dừng mỗi ¦ Satu perhentian setiap
+Un cadre autour du paragraphe ¦ Khung quanh đoạn văn ¦ Bingkai di sekeliling paragraf
+Un champ vide s’écrit ¦ Trường trống được viết là ¦ Kolom isian kosong ditulis sebagai
+Un compte rendu de cette visite dans le traitement de texte (cotes, résultats, la suite) ¦ Biên bản chuyến thăm này trong soạn thảo văn bản (ký hiệu lưu trữ, kết quả, việc tiếp theo) ¦ Laporan kunjungan ini di pengolah kata (nomor arsip, hasil, langkah berikutnya)
+Un document garde au moins un onglet. ¦ Tài liệu phải giữ ít nhất một thẻ. ¦ Dokumen harus punya paling sedikit satu tab.
+Un lieu de la base ¦ Một địa điểm trong cơ sở dữ liệu ¦ Tempat dari basis data
+Un nom pour cette version (facultatif) : ¦ Tên cho phiên bản này (không bắt buộc): ¦ Nama untuk versi ini (opsional):
+Un style porte déjà ce nom. ¦ Đã có một kiểu mang tên này. ¦ Sudah ada gaya dengan nama ini.
+Une adresse qui commence par https:// (ou mailto:). ¦ Một địa chỉ bắt đầu bằng https:// (hoặc mailto:). ¦ Alamat yang diawali https:// (atau mailto:).
+Une autre fenêtre a enregistré ce document entre-temps. Garder ta version effacera la sienne. ¦ Một cửa sổ khác đã lưu tài liệu này trong lúc đó. Giữ bản của bạn sẽ xoá bản kia. ¦ Jendela lain sudah menyimpan dokumen ini sementara itu. Mempertahankan versimu akan menghapus versinya.
+Une copie de ce document par personne, chaque champ « » rempli avec sa fiche ; les copies se suivent dans un nouveau document (une nouvelle page pour chacune). Champs utilisés : {list}. ¦ Mỗi người một bản sao của tài liệu này, mỗi trường « » được điền theo hồ sơ của người đó; các bản sao nối tiếp nhau trong một tài liệu mới (mỗi bản một trang mới). Các trường được dùng: {list}. ¦ Satu salinan dokumen ini per orang, setiap kolom isian « » diisi dari profilnya; salinan-salinan itu berurutan dalam dokumen baru (halaman baru untuk masing-masing). Kolom isian yang dipakai: {list}.
+Une espace après la virgule ¦ Một dấu cách sau dấu phẩy ¦ Satu spasi sesudah koma
+Une image du web n’a pas été reprise : enregistre-la sur l’ordinateur, puis glisse-la ici. ¦ Một hình từ web không được lấy vào: hãy lưu nó vào máy tính, rồi kéo vào đây. ¦ Sebuah gambar dari web tidak diambil: simpan ke komputer, lalu seret ke sini.
+Une image d’une sorte que le navigateur ne montre pas (EMF, WMF, TIFF…) a été laissée de côté. ¦ Một hình thuộc loại trình duyệt không hiển thị được (EMF, WMF, TIFF…) đã bị bỏ qua. ¦ Sebuah gambar dengan jenis yang tidak ditampilkan peramban (EMF, WMF, TIFF…) dilewati.
+Une image d’une sorte que le navigateur ne montre pas (SVG, EMF, WMF…) a été laissée de côté. ¦ Một hình thuộc loại trình duyệt không hiển thị được (SVG, EMF, WMF…) đã bị bỏ qua. ¦ Sebuah gambar dengan jenis yang tidak ditampilkan peramban (SVG, EMF, WMF…) dilewati.
+Une largeur de 16 px au moins. ¦ Chiều rộng ít nhất 16 px. ¦ Lebar paling sedikit 16 px.
+Une ligne d’en-tête (répétée sur chaque page) ¦ Một dòng tiêu đề (lặp lại trên mỗi trang) ¦ Baris judul (diulang di setiap halaman)
+Une personne de la base ¦ Một người trong cơ sở dữ liệu ¦ Orang dari basis data
+Utilise {key} dans le texte. ¦ Hãy dùng {key} trong văn bản. ¦ Gunakan {key} di teks.
+Utilise {key}. ¦ Hãy dùng {key}. ¦ Gunakan {key}.
+Version du {date} ¦ Phiên bản ngày {date} ¦ Versi tanggal {date}
+Version enregistrée (Fichier → 🕘 Versions…). ¦ Đã lưu phiên bản (Tệp → 🕘 Phiên bản…). ¦ Versi disimpan (Berkas → 🕘 Versi…).
+Vitesse de lecture à voix haute ¦ Tốc độ đọc to ¦ Kecepatan membaca dengan suara
+Voir ¦ Xem ¦ Lihat
+Vérification de l’orthographe arrêtée. ¦ Đã dừng kiểm tra chính tả. ¦ Pemeriksaan ejaan dihentikan.
+Vérification impossible. ¦ Không kiểm tra được. ¦ Pemeriksaan tidak bisa dilakukan.
+Vérifier avec les fiches ¦ Kiểm tra với hồ sơ ¦ Periksa dengan profil
+Vérifier l’orthographe pendant la frappe ¦ Kiểm tra chính tả khi gõ ¦ Periksa ejaan saat mengetik
+Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, texte, HTML, impression ¦ Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, văn bản, HTML, in ¦ Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, teks, HTML, cetak
+Word, Pages, Google Docs ¦ Word, Pages, Google Docs ¦ Word, Pages, Google Docs
+a ajouté ¦ đã thêm ¦ menambahkan
+a supprimé ¦ đã xoá ¦ menghapus
+automatique ¦ tự động ¦ otomatis
+aux archives : cotes vues, trouvailles, suite ¦ ở cơ quan lưu trữ: các ký hiệu lưu trữ đã xem, phát hiện, việc tiếp theo ¦ di arsip: nomor arsip yang dilihat, temuan, langkah berikutnya
+ce fichier .{ext} est abîmé (ce n’est pas un zip) ¦ tệp .{ext} này bị hỏng (không phải tệp zip) ¦ berkas .{ext} ini rusak (bukan zip)
+ce fichier LibreOffice n’est pas un texte (c’est un classeur ou une présentation) ¦ tệp LibreOffice này không phải văn bản (mà là sổ tính hoặc bài trình bày) ¦ berkas LibreOffice ini bukan teks (melainkan buku kerja atau presentasi)
+ce fichier zip n’est ni un document Word (.docx) ni un document LibreOffice (.odt) ¦ tệp zip này không phải tài liệu Word (.docx) cũng không phải tài liệu LibreOffice (.odt) ¦ berkas zip ini bukan dokumen Word (.docx) maupun dokumen LibreOffice (.odt)
+ce n’est pas un document LibreOffice (.odt) ¦ đây không phải tài liệu LibreOffice (.odt) ¦ ini bukan dokumen LibreOffice (.odt)
+ce n’est pas un document Word (.docx) : il manque son texte ¦ đây không phải tài liệu Word (.docx): thiếu phần văn bản ¦ ini bukan dokumen Word (.docx): teksnya tidak ada
+ce n’est pas un fichier RTF ¦ đây không phải tệp RTF ¦ ini bukan berkas RTF
+ce n’est pas un fichier du traitement de texte ¦ đây không phải tệp của soạn thảo văn bản ¦ ini bukan berkas pengolah kata
+ces réglages du traitement de texte ¦ các cài đặt soạn thảo văn bản này ¦ pengaturan pengolah kata ini
+demande de recherche à un service d’archives ¦ yêu cầu tìm kiếm gửi cơ quan lưu trữ ¦ permintaan pencarian ke kantor arsip
+divorcé ¦ đã ly hôn ¦ bercerai
+droite ¦ phải ¦ kanan
+décédé (croix) ¦ đã mất (dấu thập) ¦ meninggal (salib)
+d’autres changements ont suivi : utilise ↶ ({key}) ¦ đã có các thay đổi khác sau đó: hãy dùng ↶ ({key}) ¦ ada perubahan lain sesudahnya: gunakan ↶ ({key})
+d’autres changements ont suivi : utilise ↶ dans le document ¦ đã có các thay đổi khác sau đó: hãy dùng ↶ trong tài liệu ¦ ada perubahan lain sesudahnya: gunakan ↶ di dokumen
+espace fine insécable (avant ; : ! ? ») ¦ dấu cách hẹp không ngắt (trước ; : ! ? ») ¦ spasi tipis tak terputus (sebelum ; : ! ? »)
+espace insécable ¦ dấu cách không ngắt ¦ spasi tak terputus
+et (note tironienne) ¦ et (ký hiệu Tiro) ¦ dan (tanda Tiro)
+ex. BROUILLON, COPIE ¦ vd. BẢN NHÁP, BẢN SAO ¦ mis. DRAF, SALINAN
+fichier RTF trop imbriqué ¦ tệp RTF lồng nhau quá nhiều ¦ berkas RTF terlalu bertingkat
+fichier du traitement de texte ¦ tệp của soạn thảo văn bản ¦ berkas pengolah kata
+fichier refusé : beaucoup trop de paragraphes ¦ tệp bị từ chối: quá nhiều đoạn văn ¦ berkas ditolak: terlalu banyak paragraf
+fichier refusé : trop compliqué ¦ tệp bị từ chối: quá phức tạp ¦ berkas ditolak: terlalu rumit
+fichier refusé : trop gros ¦ tệp bị từ chối: quá lớn ¦ berkas ditolak: terlalu besar
+fichier trop gros (plus de {n} Mo) ¦ tệp quá lớn (hơn {n} MB) ¦ berkas terlalu besar (lebih dari {n} MB)
+https://…, mailto:… ¦ https://…, mailto:… ¦ https://…, mailto:…
+il / elle ¦ anh ấy / cô ấy ¦ dia
+inhumé ¦ đã mai táng ¦ dimakamkan
+je cherche des renseignements sur cette personne ¦ tôi đang tìm thông tin về người này ¦ saya mencari keterangan tentang orang ini
+la biographie F5 de la fiche, à compléter ¦ tiểu sử F5 của hồ sơ, cần bổ sung ¦ biografi F5 dari profil, untuk dilengkapi
+le texte seul ¦ chỉ văn bản ¦ teks saja
+le texte à l’écran ¦ văn bản trên màn hình ¦ teks di layar
+les anciens fichiers Word (.doc) ne se lisent pas : ouvre-le dans Word ou LibreOffice et enregistre-le en .docx ¦ không đọc được các tệp Word cũ (.doc): hãy mở nó trong Word hoặc LibreOffice và lưu thành .docx ¦ berkas Word lama (.doc) tidak bisa dibaca: buka di Word atau LibreOffice lalu simpan sebagai .docx
+marié ¦ đã kết hôn ¦ menikah
+marié (autre signe) ¦ đã kết hôn (ký hiệu khác) ¦ menikah (tanda lain)
+minuscules ¦ chữ thường ¦ huruf kecil
+naissance, mariage ou décès : la personne, les dates et les lieux déjà écrits ¦ sinh, kết hôn hoặc mất: người đó, ngày và địa điểm đã ghi ¦ kelahiran, pernikahan, atau kematian: orangnya, tanggal dan tempat yang sudah ditulis
+nom, naissance, parents, métier, mariage, décès ¦ tên, ngày sinh, cha mẹ, nghề nghiệp, kết hôn, mất ¦ nama, kelahiran, orang tua, pekerjaan, pernikahan, kematian
+numéro ¦ số ¦ nomor
+né / née ¦ sinh ¦ lahir
+p barré (par) ¦ p gạch ngang (per) ¦ p bercoret (per)
+p à crosse (pro) ¦ p có móc (pro) ¦ p berkait (pro)
+page web ¦ trang web ¦ halaman web
+pour partager une découverte ¦ để chia sẻ một phát hiện ¦ untuk berbagi temuan
+question, sources, analyse, conclusion ¦ câu hỏi, nguồn, phân tích, kết luận ¦ pertanyaan, sumber, analisis, kesimpulan
+ruban|Caractères ¦ Ký tự ¦ Karakter
+ruban|Centre ¦ Giữa ¦ Tengah
+ruban|Couleur ¦ Màu ¦ Warna
+ruban|Effacer ¦ Xoá ¦ Hapus
+ruban|Interligne ¦ Giãn dòng ¦ Spasi baris
+ruban|Note ¦ Chú thích ¦ Catatan
+ruban|Numéros ¦ Đánh số ¦ Nomor
+ruban|Petites ¦ Chữ hoa nhỏ ¦ Kapital kecil
+ruban|Puces ¦ Gạch đầu dòng ¦ Poin
+ruban|Retrait + ¦ Thụt lề + ¦ Indentasi +
+ruban|Retrait − ¦ Thụt lề − ¦ Indentasi −
+ruban|Suivi ¦ Theo dõi ¦ Lacak
+ruban|Surligner ¦ Tô sáng ¦ Stabilo
+récit en parties, images, notes ¦ câu chuyện chia phần, hình ảnh, chú thích ¦ kisah per bagian, gambar, catatan
+texte avec les titres ¦ văn bản có tiêu đề ¦ teks dengan judul
+texte de l’acte, notes, références ¦ nội dung giấy tờ, ghi chú, tham chiếu ¦ teks akta, catatan, referensi
+tous les traitements de texte ¦ mọi trình soạn thảo văn bản ¦ semua pengolah kata
+un PDF ne se transforme pas en texte modifiable ici : ouvre la Transcription d’actes pour le recopier ¦ ở đây không thể biến một tệp PDF thành văn bản sửa được: hãy mở Chép lại giấy tờ để gõ lại ¦ PDF tidak bisa diubah jadi teks yang bisa disunting di sini: buka Transkripsi akta untuk mengetiknya ulang
+un ancêtre ¦ một tổ tiên ¦ seorang leluhur
+{added} ajouté, {removed} retiré. ¦ Đã thêm {added}, đã gỡ {removed}. ¦ {added} ditambahkan, {removed} dilepas.
+{added} ajouté, {removed} retirés. ¦ Đã thêm {added}, đã gỡ {removed}. ¦ {added} ditambahkan, {removed} dilepas.
+{added} ajoutés, {removed} retiré. ¦ Đã thêm {added}, đã gỡ {removed}. ¦ {added} ditambahkan, {removed} dilepas.
+{added} ajoutés, {removed} retirés. ¦ Đã thêm {added}, đã gỡ {removed}. ¦ {added} ditambahkan, {removed} dilepas.
+{name} (copie) ¦ {name} (bản sao) ¦ {name} (salinan)
+{name} — publipostage ({n}) ¦ {name} — trộn thư ({n}) ¦ {name} — gabung surat ({n})
+{name} — que faut-il écrire ? ¦ {name} — cần viết gì? ¦ {name} — apa yang perlu ditulis?
+{n} avec la fiche de {name} (↶ pour revenir). ¦ {n} theo hồ sơ của {name} (↶ để quay lại). ¦ {n} dengan profil {name} (↶ untuk kembali).
+{n} du fichier (scripts, formulaires, cadres…) retiré : ils ne sont jamais lancés. ¦ Đã gỡ {n} khỏi tệp (script, biểu mẫu, khung…): chúng không bao giờ được chạy. ¦ {n} dilepas dari berkas (skrip, formulir, bingkai…): tidak pernah dijalankan.
+{n} du fichier (scripts, formulaires, cadres…) retirés : ils ne sont jamais lancés. ¦ Đã gỡ {n} khỏi tệp (script, biểu mẫu, khung…): chúng không bao giờ được chạy. ¦ {n} dilepas dari berkas (skrip, formulir, bingkai…): tidak pernah dijalankan.
+{n} du web non reprise. ¦ {n} từ web không được lấy vào. ¦ {n} dari web tidak diambil.
+{n} du web non reprises. ¦ {n} từ web không được lấy vào. ¦ {n} dari web tidak diambil.
+{n} envoyé vers la mise en page : vérifie, puis enregistre le livre. ¦ Đã gửi {n} sang Dàn trang: hãy kiểm tra, rồi lưu cuốn sách. ¦ {n} dikirim ke tata letak: periksa, lalu simpan bukunya.
+{n} envoyés vers la mise en page : vérifie, puis enregistre le livre. ¦ Đã gửi {n} sang Dàn trang: hãy kiểm tra, rồi lưu cuốn sách. ¦ {n} dikirim ke tata letak: periksa, lalu simpan bukunya.
+{n} images du web n’ont pas été reprises : enregistre-la sur l’ordinateur, puis glisse-la ici. ¦ {n} hình từ web không được lấy vào: hãy lưu chúng vào máy tính, rồi kéo vào đây. ¦ {n} gambar dari web tidak diambil: simpan ke komputer, lalu seret ke sini.
+{n} mis à jour d’après les fiches. ¦ Đã cập nhật {n} theo hồ sơ. ¦ {n} diperbarui berdasarkan profil.
+{n} modifications acceptées ¦ Đã chấp nhận {n} thay đổi ¦ {n} perubahan diterima
+{n} modifications refusées ¦ Đã từ chối {n} thay đổi ¦ {n} perubahan ditolak
+{n} rangée dans les médias. ¦ Đã xếp {n} vào tư liệu. ¦ {n} disimpan di media.
+{n} rangées dans les médias. ¦ Đã xếp {n} vào tư liệu. ¦ {n} disimpan di media.
+{n} repris de « {name} » ¦ {n} lấy từ “{name}” ¦ {n} diambil dari “{name}”
+{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies. ¦ {pages} · {words}. Word và LibreOffice giữ các kiểu, danh sách, bảng, hình ảnh, chú thích, đầu trang và chân trang, bình luận và các thay đổi được theo dõi. ¦ {pages} · {words}. Word dan LibreOffice mempertahankan gaya, daftar, tabel, gambar, catatan, header dan footer, komentar, serta perubahan terlacak.
+« ________ » (à remplir à la main) ¦ “________” (để điền bằng tay) ¦ “________” (diisi dengan tangan)
+« … » (pour le voir) ¦ “…” (để thấy được) ¦ “…” (agar terlihat)
+¶ Marques de mise en forme ¦ ¶ Ký hiệu định dạng ¦ ¶ Tanda format
+¶ Paragraphe ¦ ¶ Đoạn văn ¦ ¶ Paragraf
+¶ Paragraphe (espacements, retraits, interligne)… ¦ ¶ Đoạn văn (khoảng cách, thụt lề, giãn dòng)… ¦ ¶ Paragraf (jarak, indentasi, spasi baris)…
+¹ Note de bas de page ¦ ¹ Chú thích cuối trang ¦ ¹ Catatan kaki
+À quoi ça sert ? ¦ Cái này dùng để làm gì? ¦ Ini untuk apa?
+Écrire sur cette personne ¦ Viết về người này ¦ Tulis tentang orang ini
+Écris le texte du lien. ¦ Hãy viết chữ cho liên kết. ¦ Tulis teks tautannya.
+Écris, choisis un style à gauche de la barre ; clic droit pour les actions. ¦ Hãy viết, chọn một kiểu ở bên trái thanh công cụ; nhấp chuột phải để xem các thao tác. ¦ Tulis, pilih gaya di kiri bilah; klik kanan untuk tindakan.
+à lire, à envoyer ¦ để đọc, để gửi ¦ untuk dibaca, untuk dikirim
+à ouvrir dans un navigateur ¦ để mở trong trình duyệt ¦ untuk dibuka di peramban
+à une mairie : naissance, mariage, décès ¦ gửi uỷ ban xã: sinh, kết hôn, mất ¦ ke kantor wali kota: kelahiran, pernikahan, kematian
+Ω Caractères spéciaux ¦ Ω Ký tự đặc biệt ¦ Ω Karakter khusus
+Ω Caractères spéciaux… ¦ Ω Ký tự đặc biệt… ¦ Ω Karakter khusus…
+― Ligne horizontale ¦ ― Đường kẻ ngang ¦ ― Garis horizontal
+• Liste à puces ¦ • Danh sách gạch đầu dòng ¦ • Daftar berpoin
+ⁱ Note de fin ¦ ⁱ Chú thích cuối tài liệu ¦ ⁱ Catatan akhir
+ℹ️ Propriétés du document… ¦ ℹ️ Thuộc tính tài liệu… ¦ ℹ️ Properti dokumen…
+↕ Trier A → Z (cette colonne) ¦ ↕ Sắp xếp A → Z (cột này) ¦ ↕ Urutkan A → Z (kolom ini)
+↕ Trier Z → A (cette colonne) ¦ ↕ Sắp xếp Z → A (cột này) ¦ ↕ Urutkan Z → A (kolom ini)
+↶ Annulé ¦ ↶ Đã hoàn tác ¦ ↶ Diurungkan
+↷ Rétabli ¦ ↷ Đã làm lại ¦ ↷ Diulangi
+↺ Rouvrir ¦ ↺ Mở lại ¦ ↺ Buka lagi
+⇄ Comparer deux versions… ¦ ⇄ So sánh hai phiên bản… ¦ ⇄ Bandingkan dua versi…
+⇥ Tabulations ¦ ⇥ Điểm dừng tab ¦ ⇥ Tabulasi
+⇥ Tabulations… ¦ ⇥ Điểm dừng tab… ¦ ⇥ Tabulasi…
+∑ Nombre de pages ¦ ∑ Số trang ¦ ∑ Jumlah halaman
+⊞ Fusionner les cellules ¦ ⊞ Gộp ô ¦ ⊞ Gabungkan sel
+⌨️ Raccourcis du traitement de texte ¦ ⌨️ Phím tắt soạn thảo văn bản ¦ ⌨️ Pintasan pengolah kata
+⌨️ Raccourcis du traitement de texte… ¦ ⌨️ Phím tắt soạn thảo văn bản… ¦ ⌨️ Pintasan pengolah kata…
+▢ Bordure et trame… ¦ ▢ Viền và nền… ¦ ▢ Batas dan arsiran…
+▥ Colonnes ¦ ▥ Cột ¦ ▥ Kolom
+▥ Colonnes… ¦ ▥ Cột… ¦ ▥ Kolom…
+▦ Insérer un tableau… ¦ ▦ Chèn bảng… ¦ ▦ Sisipkan tabel…
+▦ Nouveau tableau ¦ ▦ Bảng mới ¦ ▦ Tabel baru
+▦ Tableau… ¦ ▦ Bảng… ¦ ▦ Tabel…
+▭ Paysage ¦ ▭ Khổ ngang ¦ ▭ Lanskap
+▯ Portrait ¦ ▯ Khổ dọc ¦ ▯ Potret
+♿ Accessibilité : {n} point ¦ ♿ Trợ năng: {n} điểm ¦ ♿ Aksesibilitas: {n} poin
+♿ Accessibilité : {n} points ¦ ♿ Trợ năng: {n} điểm ¦ ♿ Aksesibilitas: {n} poin
+♿ Rien à signaler : images décrites, titres en ordre, tableaux avec titres, liens clairs. ¦ ♿ Không có gì cần lưu ý: hình có mô tả, tiêu đề đúng thứ tự, bảng có tiêu đề, liên kết rõ ràng. ¦ ♿ Tidak ada masalah: gambar berdeskripsi, judul berurutan, tabel berjudul, tautan jelas.
+♿ Vérifier l’accessibilité… ¦ ♿ Kiểm tra trợ năng… ¦ ♿ Periksa aksesibilitas…
+⚙️ Personnaliser ¦ ⚙️ Tuỳ chỉnh ¦ ⚙️ Sesuaikan
+⚙️ Réglages du traitement de texte ¦ ⚙️ Cài đặt soạn thảo văn bản ¦ ⚙️ Pengaturan pengolah kata
+⚙️ Réglages du traitement de texte… ¦ ⚙️ Cài đặt soạn thảo văn bản… ¦ ⚙️ Pengaturan pengolah kata…
+✍ Les modifications sont suivies : chaque ajout et chaque suppression restent visibles. ¦ ✍ Các thay đổi đang được theo dõi: mỗi lần thêm và mỗi lần xoá đều hiện rõ. ¦ ✍ Perubahan sedang dilacak: setiap penambahan dan penghapusan tetap terlihat.
+✍ Suivi ¦ ✍ Theo dõi ¦ ✍ Lacak
+✍ Suivre les modifications ¦ ✍ Theo dõi thay đổi ¦ ✍ Lacak perubahan
+✍ modifications à relire ¦ ✍ thay đổi cần đọc lại ¦ ✍ perubahan untuk diperiksa
+✎ Auteur ¦ ✎ Tác giả ¦ ✎ Penulis
+✎ Le style « {name} » ¦ ✎ Kiểu “{name}” ¦ ✎ Gaya “{name}”
+✎ Modifier le style ¦ ✎ Sửa kiểu ¦ ✎ Ubah gaya
+✏️ À mes mesures ¦ ✏️ Theo kích thước của tôi ¦ ✏️ Ukuran sendiri
+✓ Accepter ¦ ✓ Chấp nhận ¦ ✓ Terima
+✓ Accepter la modification ¦ ✓ Chấp nhận thay đổi ¦ ✓ Terima perubahan
+✓ En-tête et pied de page repris. ¦ ✓ Đã lấy lại đầu trang và chân trang. ¦ ✓ Header dan footer diambil.
+✓ Repris : {list}. ¦ ✓ Đã lấy lại: {list}. ¦ ✓ Diambil: {list}.
+✓ Résolu ¦ ✓ Đã giải quyết ¦ ✓ Selesai
+✓ Tout accepter ¦ ✓ Chấp nhận tất cả ¦ ✓ Terima semua
+✓ Tout concorde avec les fiches. ¦ ✓ Mọi thứ khớp với hồ sơ. ¦ ✓ Semuanya cocok dengan profil.
+✗ Refuser ¦ ✗ Từ chối ¦ ✗ Tolak
+✗ Refuser la modification ¦ ✗ Từ chối thay đổi ¦ ✗ Tolak perubahan
+✗ Tout refuser ¦ ✗ Từ chối tất cả ¦ ✗ Tolak semua
+✳️ Markdown (.md) ¦ ✳️ Markdown (.md) ¦ ✳️ Markdown (.md)
+❝ Citer une source ¦ ❝ Trích dẫn một nguồn ¦ ❝ Kutip sumber
+❝ Source citée… ¦ ❝ Nguồn đã trích dẫn… ¦ ❝ Sumber yang dikutip…
+⤒ Importer (Word, LibreOffice…)… ¦ ⤒ Nhập (Word, LibreOffice…)… ¦ ⤒ Impor (Word, LibreOffice…)…
+⤒ Importer le document ¦ ⤒ Nhập tài liệu ¦ ⤒ Impor dokumen
+⤒ Importer un document ¦ ⤒ Nhập một tài liệu ¦ ⤒ Impor dokumen
+⤓ Exporter… ¦ ⤓ Xuất… ¦ ⤓ Ekspor…
+⤓ Saut de page ¦ ⤓ Ngắt trang ¦ ⤓ Pemisah halaman
+＋ Ajouter des personnes… ¦ ＋ Thêm người… ¦ ＋ Tambah orang…
+＋ Description… ¦ ＋ Mô tả… ¦ ＋ Deskripsi…
+＋ Les personnes d’une de mes listes… ¦ ＋ Những người trong một danh sách của tôi… ¦ ＋ Orang dari salah satu daftarku…
+＋ Nouveau commentaire ¦ ＋ Bình luận mới ¦ ＋ Komentar baru
+＋ Nouveau document ¦ ＋ Tài liệu mới ¦ ＋ Dokumen baru
+＋ Nouveau style ¦ ＋ Kiểu mới ¦ ＋ Gaya baru
+＋ Nouveau style d’après la sélection… ¦ ＋ Kiểu mới theo phần đã chọn… ¦ ＋ Gaya baru dari pilihan…
+🌐 Langue du document ¦ 🌐 Ngôn ngữ của tài liệu ¦ 🌐 Bahasa dokumen
+🌐 Langue… ¦ 🌐 Ngôn ngữ… ¦ 🌐 Bahasa…
+🌐 Page web (.html) ¦ 🌐 Trang web (.html) ¦ 🌐 Halaman web (.html)
+🌳 Un petit arbre… ¦ 🌳 Một cây nhỏ… ¦ 🌳 Pohon kecil…
+🎞 Un média (lien)… ¦ 🎞 Một tư liệu (liên kết)… ¦ 🎞 Media (tautan)…
+🎨 Choisir… ¦ 🎨 Chọn… ¦ 🎨 Pilih…
+🎨 Couleur de page… ¦ 🎨 Màu trang… ¦ 🎨 Warna halaman…
+🎨 Forme ¦ 🎨 Hình thức ¦ 🎨 Bentuk
+🎨 Styles… ¦ 🎨 Kiểu… ¦ 🎨 Gaya…
+👤 Remplir avec une fiche ¦ 👤 Điền bằng một hồ sơ ¦ 👤 Isi dengan profil
+👤 Remplir avec une fiche… ¦ 👤 Điền bằng một hồ sơ… ¦ 👤 Isi dengan profil…
+👤 Une personne de la base… ¦ 👤 Một người trong cơ sở dữ liệu… ¦ 👤 Orang dari basis data…
+💬 Montrer les commentaires ¦ 💬 Hiện bình luận ¦ 💬 Tampilkan komentar
+💬 Nouveau commentaire ¦ 💬 Bình luận mới ¦ 💬 Komentar baru
+💾 Fichier de l’outil ¦ 💾 Tệp của công cụ ¦ 💾 Berkas alat
+📁 Ranger une copie dans les médias ¦ 📁 Xếp một bản sao vào tư liệu ¦ 📁 Simpan salinan di media
+📄 Format, marges et orientation… ¦ 📄 Khổ giấy, lề và hướng… ¦ 📄 Format, margin, dan orientasi…
+📄 PDF ¦ 📄 PDF ¦ 📄 PDF
+📄 Pages ¦ 📄 Trang ¦ 📄 Halaman
+📄 Saut de section ¦ 📄 Ngắt phần ¦ 📄 Pemisah bagian
+📄 Saut de section (autre orientation)… ¦ 📄 Ngắt phần (hướng giấy khác)… ¦ 📄 Pemisah bagian (orientasi lain)…
+📅 Date ¦ 📅 Ngày ¦ 📅 Tanggal
+📅 Date du jour ¦ 📅 Ngày hôm nay ¦ 📅 Tanggal hari ini
+📊 Un diagramme… ¦ 📊 Một sơ đồ… ¦ 📊 Diagram…
+📋 Partir d’un modèle ¦ 📋 Bắt đầu từ một mẫu ¦ 📋 Mulai dari templat
+📋 Partir d’un modèle… ¦ 📋 Bắt đầu từ một mẫu… ¦ 📋 Mulai dari templat…
+📍 Un lieu de la base… ¦ 📍 Một địa điểm trong cơ sở dữ liệu… ¦ 📍 Tempat dari basis data…
+📐 Envoyer vers la mise en page ¦ 📐 Gửi sang Dàn trang ¦ 📐 Kirim ke Tata letak
+📐 Envoyer vers la mise en page… ¦ 📐 Gửi sang Dàn trang… ¦ 📐 Kirim ke Tata letak…
+📐 Reprendre les styles d’un livre… ¦ 📐 Lấy lại các kiểu của một cuốn sách… ¦ 📐 Ambil gaya dari sebuah buku…
+📐 Styles d’un livre… ¦ 📐 Kiểu của một cuốn sách… ¦ 📐 Gaya sebuah buku…
+📑 Sommaire ¦ 📑 Mục lục ¦ 📑 Daftar isi
+📖 La biographie d’une personne… ¦ 📖 Tiểu sử của một người… ¦ 📖 Biografi seseorang…
+📗 LibreOffice (.odt) ¦ 📗 LibreOffice (.odt) ¦ 📗 LibreOffice (.odt)
+📘 Word (.docx) ¦ 📘 Word (.docx) ¦ 📘 Word (.docx)
+📚 Bibliographie ¦ 📚 Thư mục tham khảo ¦ 📚 Daftar pustaka
+📜 Brouillon (sans les pages) ¦ 📜 Bản nháp (không chia trang) ¦ 📜 Draf (tanpa halaman)
+📝 Compte rendu ¦ 📝 Biên bản ¦ 📝 Laporan
+📝 RTF ¦ 📝 RTF ¦ 📝 RTF
+📝 Écrire sur cette personne : un document du traitement de texte, avec sa biographie déjà posée ¦ 📝 Viết về người này: một tài liệu soạn thảo văn bản, đã có sẵn tiểu sử của người đó ¦ 📝 Tulis tentang orang ini: dokumen pengolah kata, dengan biografinya sudah terpasang
+📨 Champ de fusion ¦ 📨 Trường trộn thư ¦ 📨 Kolom gabung surat
+📨 Champ de fusion (prénom, dates…) ¦ 📨 Trường trộn thư (tên, ngày…) ¦ 📨 Kolom gabung surat (nama depan, tanggal…)
+📨 Publipostage ¦ 📨 Trộn thư ¦ 📨 Gabung surat
+📨 Publipostage… ¦ 📨 Trộn thư… ¦ 📨 Gabung surat…
+🔁 Synonymes de « {word} » ¦ 🔁 Từ đồng nghĩa của “{word}” ¦ 🔁 Sinonim “{word}”
+🔁 Synonymes… ¦ 🔁 Từ đồng nghĩa… ¦ 🔁 Sinonim…
+🔊 Lecture… (Échap ou Outils → ⏹ Arrêter la lecture) ¦ 🔊 Đang đọc… (Esc hoặc Công cụ → ⏹ Dừng đọc) ¦ 🔊 Membaca… (Esc atau Alat → ⏹ Hentikan pembacaan)
+🔊 Lire à voix haute ¦ 🔊 Đọc to ¦ 🔊 Bacakan
+🔍 Rechercher ¦ 🔍 Tìm ¦ 🔍 Cari
+🔎 Corrigé dans {n} passage (↶ pour revenir). ¦ 🔎 Đã sửa ở {n} chỗ (↶ để quay lại). ¦ 🔎 Dikoreksi di {n} tempat (↶ untuk kembali).
+🔎 Corrigé dans {n} passages (↶ pour revenir). ¦ 🔎 Đã sửa ở {n} chỗ (↶ để quay lại). ¦ 🔎 Dikoreksi di {n} tempat (↶ untuk kembali).
+🔎 Relecture (typographie, répétitions)… ¦ 🔎 Đọc soát (quy tắc in ấn, từ lặp lại)… ¦ 🔎 Pemeriksaan (tipografi, pengulangan)…
+🔎 Rien à reprendre : typographie et répétitions sont bonnes. ¦ 🔎 Không có gì cần sửa: quy tắc in ấn và từ lặp lại đều ổn. ¦ 🔎 Tidak ada yang perlu diperbaiki: tipografi dan pengulangan sudah baik.
+🔎 Vérification avec les fiches… ¦ 🔎 Đang kiểm tra với hồ sơ… ¦ 🔎 Memeriksa dengan profil…
+🔎 Vérifier avec les fiches ¦ 🔎 Kiểm tra với hồ sơ ¦ 🔎 Periksa dengan profil
+🔎 {n} à regarder. ¦ 🔎 {n} chỗ cần xem lại. ¦ 🔎 {n} untuk diperiksa.
+🔗 Lien… ¦ 🔗 Liên kết… ¦ 🔗 Tautan…
+🔗 Modifier le lien ¦ 🔗 Sửa liên kết ¦ 🔗 Ubah tautan
+🔗 Nouveau lien ¦ 🔗 Liên kết mới ¦ 🔗 Tautan baru
+🔢 Nombre de mots ¦ 🔢 Số từ ¦ 🔢 Jumlah kata
+🔢 Nombre de mots… ¦ 🔢 Số từ… ¦ 🔢 Jumlah kata…
+🔤 Index ¦ 🔤 Bảng chỉ mục ¦ 🔤 Indeks
+🕘 Enregistrer comme nouvelle version ¦ 🕘 Lưu thành phiên bản mới ¦ 🕘 Simpan sebagai versi baru
+🕘 Nouvelle version ¦ 🕘 Phiên bản mới ¦ 🕘 Versi baru
+🕘 Versions… ¦ 🕘 Phiên bản… ¦ 🕘 Versi…
+🖍 Surlignage… ¦ 🖍 Tô sáng… ¦ 🖍 Stabilo…
+🖨 Imprimer… ¦ 🖨 In… ¦ 🖨 Cetak…
+🖼 Image… ¦ 🖼 Hình ảnh… ¦ 🖼 Gambar…
+🧭 Panneau de navigation ¦ 🧭 Bảng điều hướng ¦ 🧭 Panel navigasi
+🧾 Ouvrir ce tableau dans le Tableur ¦ 🧾 Mở bảng này trong Bảng tính ¦ 🧾 Buka tabel ini di Spreadsheet
+🧾 Tableau venu du Tableur… ¦ 🧾 Bảng lấy từ Bảng tính… ¦ 🧾 Tabel dari Spreadsheet…
+🧾 Texte (.txt) ¦ 🧾 Văn bản (.txt) ¦ 🧾 Teks (.txt)
+=remplacement ¦ chỗ thay thế ¦ penggantian
+=commentaire ¦ bình luận ¦ komentar
+=modification suivie ¦ thay đổi được theo dõi ¦ perubahan terlacak
+=tableau ¦ bảng ¦ tabel
+=style ¦ kiểu ¦ gaya
+=paragraphe ¦ đoạn văn ¦ paragraf
+=champ rempli ¦ trường đã điền ¦ kolom isian terisi
+texte|Caractère ¦ Ký tự ¦ Karakter
+icone-gras|G ¦ B ¦ B
+icone-italique|I ¦ I ¦ I
+icone-souligne|S ¦ U ¦ U
+icone-petites-capitales|Pᴄ ¦ Cᴄ ¦ Kᴋ

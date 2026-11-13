@@ -1,0 +1,1565 @@
+fr ¦ fi ¦ hu
+Tu peins le masque de la personne : ⬛ cacher (du fond resté), ⬜ montrer (un bout de la personne oublié). ¦ Maalaat henkilön maskia: ⬛ piilota (jäänyttä taustaa), ⬜ näytä (unohtunut pala henkilöä). ¦ A személy maszkját festd: ⬛ elrejtés (megmaradt háttér), ⬜ megmutatás (a személy kimaradt része).
+Tu peins le masque du fond : ⬛ cacher (là c’est la personne), ⬜ montrer (là c’est du fond). ¦ Maalaat taustan maskia: ⬛ piilota (siinä on henkilö), ⬜ näytä (siinä on taustaa). ¦ A háttér maszkját festd: ⬛ elrejtés (ott a személy van), ⬜ megmutatás (ott háttér van).
+Détourage : fond transparent ¦ Rajaus: läpinäkyvä tausta ¦ Kivágás: átlátszó háttér
+Détourage : fond flou ¦ Rajaus: sumea tausta ¦ Kivágás: elmosott háttér
+Détourage : fond uni ¦ Rajaus: yksivärinen tausta ¦ Kivágás: egyszínű háttér
+Détourage : personne sur un calque ¦ Rajaus: henkilö omalla tasollaan ¦ Kivágás: a személy külön rétegen
+Fond rendu transparent (masque de la photo) : l’image sera enregistrée en PNG. ¦ Tausta tehty läpinäkyväksi (valokuvan maski): kuva tallennetaan PNG-muodossa. ¦ A háttér átlátszóvá téve (a fénykép maszkja): a kép PNG-ként lesz mentve.
+Détourage fait : tout est sur des calques, avec des masques à retoucher au besoin. ¦ Rajaus valmis: kaikki on tasoilla, maskeineen, joita voi tarvittaessa hienosäätää. ¦ Kivágás kész: minden rétegeken van, szükség esetén javítható maszkokkal.
+Trace un rectangle autour de la personne (⬚), ou « ✂️ Détourer » directement pour toute la photo. ¦ Piirrä suorakulmio henkilön ympärille (⬚) tai ”✂️ Rajaa” suoraan koko kuvalle. ¦ Rajzolj téglalapot a személy köré (⬚), vagy „✂️ Kivágás” közvetlenül az egész fényképre.
+Préparation de l’image en pleine taille… ¦ Valmistellaan kuvaa täysikokoisena… ¦ A kép előkészítése teljes méretben…
+🔍 Agrandir l’image ¦ 🔍 Suurenna kuvaa ¦ 🔍 A kép felnagyítása
+Netteté des contours ¦ Reunojen terävyys ¦ Élek élessége
+Renforce les contours sans faire de halo ; les aplats (ciel, peau) restent doux. ¦ Vahvistaa reunoja ilman haloja; tasaiset alueet (taivas, iho) pysyvät pehmeinä. ¦ Erősíti az éleket glória nélkül; az egyszínű felületek (ég, bőr) lágyak maradnak.
+Clique pour choisir l’endroit de l’aperçu ¦ Napsauta valitaksesi esikatselun kohdan ¦ Kattints az előnézet helyének kiválasztásához
+Lissage du grain ¦ Rakeisuuden tasoitus ¦ Szemcsésség simítása
+Avant (agrandi simplement) ¦ Ennen (pelkästään suurennettu) ¦ Előtte (csak felnagyítva)
+Après, à 100 % ¦ Jälkeen, 100 % ¦ Utána, 100 %-on
+Une nouvelle version de la photo, affichée partout (l’original reste) ¦ Uusi versio valokuvasta, näytetään kaikkialla (alkuperäinen säilyy) ¦ A fénykép új változata, mindenhol ez látszik (az eredeti megmarad)
+Agrandir → nouvelle version ¦ Suurenna → uusi versio ¦ Nagyítás → új változat
+→ copie séparée ¦ → erillinen kopio ¦ → külön másolat
+Agrandir → dans les médias ¦ Suurenna → mediaan ¦ Nagyítás → a médiába
+Agrandir ne retrouve pas les détails qui n’ont jamais été photographiés : l’image est plus grande et plus nette, pas plus précise. ¦ Suurentaminen ei palauta yksityiskohtia, joita ei koskaan kuvattu: kuva on isompi ja terävämpi, ei tarkempi. ¦ A nagyítás nem hozza vissza a soha le nem fényképezett részleteket: a kép nagyobb és élesebb lesz, de nem pontosabb.
+Cette image est déjà trop grande pour être agrandie. ¦ Tämä kuva on jo liian suuri suurennettavaksi. ¦ Ez a kép már túl nagy a nagyításhoz.
+Filtre : {what} ¦ Suodin: {what} ¦ Szűrő: {what}
+🎨 Teinte/Saturation {num} ¦ 🎨 Sävy/Kylläisyys {num} ¦ 🎨 Színárnyalat/Telítettség {num}
+Motif {num} ¦ Kuvio {num} ¦ Minta {num}
+Bruit ¦ Kohina ¦ Zaj
+Artistiques ¦ Taiteelliset ¦ Művészi
+Pixellisation ¦ Pikselöinti ¦ Pixelesítés
+Rendu ¦ Renderöinti ¦ Megjelenítés
+Autres ¦ Muut ¦ Egyéb
+Flou gaussien ¦ Gaussin sumennus ¦ Gauss-elmosás
+Flou de mouvement ¦ Liikesumennus ¦ Mozgási elmosás
+Flou radial (zoom) ¦ Säteittäinen sumennus (zoom) ¦ Sugaras elmosás (zoom)
+Flou rotatif ¦ Pyörimissumennus ¦ Forgó elmosás
+Accentuation (masque flou) ¦ Terävöinti (epäterävä maski) ¦ Élesítés (életlen maszk)
+Estampage (relief) ¦ Kohokuviointi (reliefi) ¦ Dombornyomás (relief)
+Solarisation ¦ Solarisointi ¦ Szolarizáció
+Diffusion ¦ Hajautus ¦ Diffúzió
+Vent ¦ Tuuli ¦ Szél
+Aquarelle ¦ Vesiväri ¦ Akvarell
+Vieux film ¦ Vanha filmi ¦ Régi film
+Cristallisation ¦ Kiteytys ¦ Kristályosítás
+Pointillisme ¦ Pointillismi ¦ Pointillizmus
+Nuages (texture) ¦ Pilvet (tekstuuri) ¦ Felhők (textúra)
+Lueur diffuse ¦ Pehmeä hehku ¦ Szórt ragyogás
+Tourbillon ¦ Pyörre ¦ Örvény
+Onde ¦ Aalto ¦ Hullám
+Rayon ¦ Säde ¦ Sugár
+Centre X ¦ Keskipiste X ¦ Középpont X
+Centre Y ¦ Keskipiste Y ¦ Középpont Y
+Seuil ¦ Kynnys ¦ Küszöb
+Bande nette, hauteur ¦ Terävä kaista, korkeus ¦ Éles sáv, magasság
+Points lumineux ¦ Kirkkaat pisteet ¦ Fényes pontok
+Monochrome (0 / 1) ¦ Yksivärinen (0 / 1) ¦ Egyszínű (0 / 1)
+Gain ¦ Määrä ¦ Erősítés
+Niveaux ¦ Tasot ¦ Szintek
+Longueur ¦ Pituus ¦ Hossz
+Contours ¦ Reunat ¦ Körvonalak
+Trait ¦ Viiva ¦ Vonal
+Traits noirs ¦ Mustat viivat ¦ Fekete vonalak
+Usure ¦ Kuluminen ¦ Kopás
+Position X ¦ Sijainti X ¦ Pozíció X
+Position Y ¦ Sijainti Y ¦ Pozíció Y
+Amplitude ¦ Amplitudi ¦ Amplitúdó
+Horizontale (0) / verticale (1) ¦ Vaakasuora (0) / pystysuora (1) ¦ Vízszintes (0) / függőleges (1)
+Horizontal ¦ Vaakasuora ¦ Vízszintes
+Contraste ¦ Kontrasti ¦ Kontraszt
+Ombres ¦ Varjot ¦ Árnyékok
+Chaleur ¦ Lämpö ¦ Melegség
+Rouge ¦ Punainen ¦ Piros
+Vert ¦ Vihreä ¦ Zöld
+Bleu ¦ Sininen ¦ Kék
+RVB ¦ RGB ¦ RGB
+Assombrir ¦ Tummenna ¦ Sötétítés
+Grain ¦ Rakeisuus ¦ Szemcse
+Vignette ¦ Vinjetti ¦ Vignetta
+Force ¦ Voimakkuus ¦ Erősség
+Couleurs ¦ Värit ¦ Színek
+Auto ¦ Auto ¦ Auto
+Document lisible ¦ Luettava asiakirja ¦ Olvasható dokumentum
+Niveaux : point noir, tons moyens, point blanc ¦ Tasot: mustapiste, keskisävyt, valkopiste ¦ Szintek: fekete pont, középtónusok, fehér pont
+Niveaux automatiques ¦ Automaattiset tasot ¦ Automatikus szintek
+Monter la courbe éclaircit, la creuser assombrit, un « S » donne du contraste. Rouge, vert, bleu : corriger une dominante de couleur. ¦ Käyrän nostaminen vaalentaa, painaminen tummentaa, ”S” lisää kontrastia. Punainen, vihreä, sininen: korjaa värivirhe. ¦ A görbe emelése világosít, a süllyesztése sötétít, egy „S” kontrasztot ad. Piros, zöld, kék: színeltolódás javítása.
+✨ Menu ¦ ✨ Valikko ¦ ✨ Menü
+Déplacer : glisse la poignée, ou Alt + ↑ / ↓ ¦ Siirrä: vedä kahvasta tai Alt + ↑ / ↓ ¦ Mozgatás: húzd a fogantyút, vagy Alt + ↑ / ↓
+Auto : les points les plus sombres deviennent noirs et les plus clairs blancs ; cliquer une 2ᵉ fois revient à l’état d’avant. ¦ Auto: tummimmista pisteistä tulee mustia ja vaaleimmista valkoisia; toinen napsautus palauttaa entiseen. ¦ Auto: a legsötétebb pontok feketék, a legvilágosabbak fehérek lesznek; a 2. kattintás visszaállítja a korábbi állapotot.
+Éclaircit seulement les parties sombres (ou les assombrit vers la gauche), sans toucher aux claires. ¦ Vaalentaa vain tummia osia (tai tummentaa niitä vasemmalle), koskematta vaaleisiin. ¦ Csak a sötét részeket világosítja (balra húzva sötétíti), a világosakhoz nem nyúl.
+Cliquer à nouveau pour revenir à l’état d’avant ¦ Napsauta uudelleen palataksesi entiseen ¦ Kattints újra a korábbi állapothoz
+Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou la touche ⌫), ou le glisser hors du cadre. ¦ Napsautus käyrään: lisää piste · vedä: siirrä sitä · poistaaksesi: valitse se ja ”Poista piste” (tai ⌫-näppäin) tai vedä se kehyksen ulkopuolelle. ¦ Kattintás a görbére: pont hozzáadása · húzás: mozgatás · eltávolítás: válaszd ki, majd „Pont eltávolítása” (vagy ⌫ billentyű), vagy húzd ki a keretből.
+fx ¦ fx ¦ fx
+Normal italique ¦ Normaali kursiivi ¦ Normál dőlt
+Extra-fin italique ¦ Erittäin ohut kursiivi ¦ Extravékony dőlt
+Ultra-léger italique ¦ Ultrakevyt kursiivi ¦ Ultrakönnyű dőlt
+Léger italique ¦ Kevyt kursiivi ¦ Könnyű dőlt
+Médium italique ¦ Keskilihava kursiivi ¦ Közepes dőlt
+Demi-gras italique ¦ Puolilihava kursiivi ¦ Félkövér dőlt
+Gras italique ¦ Lihava kursiivi ¦ Félkövér-vastag dőlt
+Extra-gras italique ¦ Erittäin lihava kursiivi ¦ Extra vastag dőlt
+Noir italique ¦ Musta kursiivi ¦ Fekete dőlt
+Unicode : Latin-1 ¦ Unicode: Latin-1 ¦ Unicode: Latin-1
+Unicode : grec ¦ Unicode: kreikka ¦ Unicode: görög
+Unicode : cyrillique ¦ Unicode: kyrillinen ¦ Unicode: cirill
+Unicode : ponctuation ¦ Unicode: välimerkit ¦ Unicode: írásjelek
+Unicode : monnaies ¦ Unicode: valuutat ¦ Unicode: pénznemek
+Unicode : symboles de lettres ¦ Unicode: kirjainmaiset symbolit ¦ Unicode: betűszerű szimbólumok
+Unicode : nombres ¦ Unicode: numerot ¦ Unicode: számok
+Unicode : traits de tableau ¦ Unicode: taulukkoviivat ¦ Unicode: keretrajzoló jelek
+Unicode : symboles divers ¦ Unicode: sekalaiset symbolit ¦ Unicode: vegyes szimbólumok
+Unicode : casseau (dingbats) ¦ Unicode: koristemerkit (dingbats) ¦ Unicode: díszjelek (dingbats)
+Unicode : ligatures ¦ Unicode: ligatuurit ¦ Unicode: ligatúrák
+Grain de papier ¦ Paperin rakeisuus ¦ Papírszemcse
+Rond ¦ Pyöreä ¦ Kerek
+Plume calligraphique ¦ Kalligrafiakynä ¦ Kalligrafikus toll
+Crayon ¦ Lyijykynä ¦ Ceruza
+Pinceau sec ¦ Kuiva sivellin ¦ Száraz ecset
+Herbe ¦ Ruoho ¦ Fű
+Peau claire ¦ Vaalea iho ¦ Világos bőr
+Peau hâlée ¦ Ruskettunut iho ¦ Barnult bőr
+Peau mate ¦ Tumma iho ¦ Olajbarna bőr
+Joues, lèvres ¦ Posket, huulet ¦ Arc, ajkak
+Cheveux bruns ¦ Ruskeat hiukset ¦ Barna haj
+Cheveux blonds ¦ Vaaleat hiukset ¦ Szőke haj
+Cheveux gris ¦ Harmaat hiukset ¦ Ősz haj
+Feuillage ¦ Lehvistö ¦ Lombozat
+Uniforme, costume bleu ¦ Univormu, sininen puku ¦ Egyenruha, kék öltöny
+Robe bordeaux ¦ Viininpunainen mekko ¦ Bordó ruha
+Habit noir ¦ Musta asu ¦ Fekete öltözet
+Mur, pierre ¦ Muuri, kivi ¦ Fal, kő
+Brique, tuile ¦ Tiili, kattotiili ¦ Tégla, cserép
+Bois ¦ Puu ¦ Fa
+🩹 Correcteur ¦ 🩹 Korjaustyökalu ¦ 🩹 Javítóecset
+🧬 Tampon (morceau manquant) ¦ 🧬 Kloonaus (puuttuva pala) ¦ 🧬 Klónozóbélyegző (hiányzó darab)
+Zoom : ajuster, 50 %, 100 %, 200 % ¦ Zoomaus: sovita, 50 %, 100 %, 200 % ¦ Nagyítás: igazítás, 50 %, 100 %, 200 %
+photo|Restaurer ¦ Entisöi ¦ Restaurálás
+menu|Sélection ¦ Valinta ¦ Kijelölés
+retouche|Courbe ¦ Käyrä ¦ Görbe
+motif|D’après ¦ Pohjana ¦ Alapján
+pinceau|Feuille ¦ Lehti ¦ Levél
+pinceau|Étoile ¦ Tähti ¦ Csillag
+pinceau|Carré ¦ Neliö ¦ Négyzet
+Glisse pour comparer ¦ Vedä vertaillaksesi ¦ Húzd az összehasonlításhoz
+Rideau avant / après ¦ Ennen / jälkeen -verho ¦ Előtte / utána függöny
+Image importée ¦ Tuotu kuva ¦ Importált kép
+La fenêtre d’export n’est pas encore prête. ¦ Vientiikkuna ei ole vielä valmis. ¦ Az exportálási ablak még nincs kész.
+Image téléchargée ; une copie est rangée dans les médias. ¦ Kuva ladattu; kopio on tallennettu mediaan. ¦ Kép letöltve; egy másolat a médiába került.
+Aperçu de l’avant / après ¦ Ennen / jälkeen -esikatselu ¦ Előtte / utána előnézet
+Rideau vertical (avant à gauche) ¦ Pystysuora verho (ennen vasemmalla) ¦ Függőleges függöny (előtte balra)
+Rideau horizontal (avant en haut) ¦ Vaakasuora verho (ennen ylhäällä) ¦ Vízszintes függöny (előtte felül)
+L’une sous l’autre ¦ Allekkain ¦ Egymás alatt
+Position du rideau ¦ Verhon sijainti ¦ A függöny helyzete
+ex. Mariage de Jean et Marie, 1925 ¦ esim. Jeanin ja Marien häät, 1925 ¦ pl. Jean és Marie esküvője, 1925
+Écrire « Avant » et « Après » ¦ Kirjoita ”Ennen” ja ”Jälkeen” ¦ „Előtte” és „Utána” felirat
+Avant / après téléchargé ; une copie est rangée dans les médias. ¦ Ennen / jälkeen ladattu; kopio on tallennettu mediaan. ¦ Előtte / utána letöltve; egy másolat a médiába került.
+Garder appuyé pour voir l’original ¦ Pidä painettuna nähdäksesi alkuperäisen ¦ Tartsd lenyomva az eredeti megtekintéséhez
+👁 Avant / après ¦ 👁 Ennen / jälkeen ¦ 👁 Előtte / utána
+◧ Rideau ¦ ◧ Verho ¦ ◧ Függöny
+Comparer avec un rideau qu’on glisse sur la photo ¦ Vertaa verholla, jota liu'utetaan kuvan yli ¦ Összehasonlítás a fénykép fölött húzható függönnyel
+Rideau vertical ou horizontal ¦ Pysty- tai vaakasuora verho ¦ Függőleges vagy vízszintes függöny
+Exporter l’avant / après en image (côte à côte ou rideau, avec légende) ¦ Vie ennen / jälkeen kuvana (rinnakkain tai verhona, kuvatekstin kanssa) ¦ Az előtte / utána exportálása képként (egymás mellett vagy függönnyel, felirattal)
+Rideau horizontal ¦ Vaakasuora verho ¦ Vízszintes függöny
+Rideau vertical ¦ Pystysuora verho ¦ Függőleges függöny
+De combien le cadre dépasse autour du visage : petit = visage serré, grand = épaules et un peu de fond. ¦ Kuinka paljon kehys ulottuu kasvojen ympärille: pieni = tiiviit kasvot, suuri = olkapäät ja vähän taustaa. ¦ Mennyire nyúlik túl a keret az arcon: kicsi = szoros arc, nagy = vállak és egy kis háttér.
+La hauteur des yeux dans le cadre, depuis le haut : la même pour tous les portraits, ils s’alignent quand on les met côte à côte. ¦ Silmien korkeus kehyksessä ylhäältä: sama kaikille muotokuville, jotta ne asettuvat rinnakkain linjaan. ¦ A szemek magassága a keretben, felülről mérve: minden portrén ugyanaz, így egymás mellé téve egy vonalba kerülnek.
+Faible : le bord du pinceau est doux et se fond ; forte : le bord est net. ¦ Heikko: siveltimen reuna on pehmeä ja sulautuu; vahva: reuna on terävä. ¦ Gyenge: az ecset széle lágy és beleolvad; erős: a széle éles.
+Filtres ¦ Suotimet ¦ Szűrők
+✨ Filtres ¦ ✨ Suotimet ¦ ✨ Szűrők
+Classique : comme avant. Perceptuel : un passage plus égal à l’œil, sans zone grise ni trop sombre au milieu. Par les teintes : en passant par les couleurs de l’arc-en-ciel. ¦ Klassinen: kuten ennen. Havainnollinen: silmälle tasaisempi siirtymä ilman harmaata tai liian tummaa aluetta keskellä. Sävyjen kautta: sateenkaaren värien kautta. ¦ Klasszikus: mint korábban. Érzékelés szerinti: a szemnek egyenletesebb átmenet, középen szürke vagy túl sötét sáv nélkül. Árnyalatokon át: a szivárvány színein keresztül.
+Plus haut : des lignes plus pâles ou plus courtes sont aussi prises. Trop haut, des détails de la photo (cheveux, écriture) peuvent l’être : regarde le rouge. ¦ Korkeampi: myös vaaleammat tai lyhyemmät viivat otetaan. Liian korkealla myös kuvan yksityiskohtia (hiukset, käsiala) voidaan ottaa: seuraa punaista. ¦ Magasabban: a halványabb vagy rövidebb vonalakat is elkapja. Túl magasan a fénykép részleteit (haj, írás) is elkaphatja: figyeld a pirosat.
+La force de toutes les étapes d’un coup : bas = une restauration discrète, haut = plus marquée (mais attention au « trop lisse »). ¦ Kaikkien vaiheiden voimakkuus kerralla: matala = hienovarainen entisöinti, korkea = voimakkaampi (mutta varo ”liian sileää”). ¦ Az összes lépés erőssége egyszerre: alacsony = visszafogott restaurálás, magas = erősebb (de vigyázz a „túl simára”).
+Sens ¦ Suunta ¦ Irány
+De combien ¦ Kuinka paljon ¦ Mennyivel
+↻ Horaire ¦ ↻ Myötäpäivään ¦ ↻ Óramutató járásával egyező
+↺ Antihoraire ¦ ↺ Vastapäivään ¦ ↺ Óramutató járásával ellentétes
+↻ Faire pivoter ¦ ↻ Kierrä ¦ ↻ Forgatás
+Garde le plus grand rectangle droit dans la photo tournée : plus de coins vides. C’est un recadrage : « Annuler le recadrage » le retire. ¦ Säilyttää käännetyn kuvan suurimman suoran suorakulmion: ei enää tyhjiä kulmia. Se on rajaus: ”Kumoa rajaus” poistaa sen. ¦ A forgatott fényképen belül a legnagyobb egyenes téglalapot tartja meg: nincs több üres sarok. Ez egy vágás: „A vágás visszavonása” eltávolítja.
+Enlever ¦ Poista ¦ Eltávolítás
+Coché : le nombre de pixels change (l’image est recalculée). Décoché : seuls la résolution et la taille à l’impression changent, les pixels restent les mêmes. ¦ Rastitettu: pikselimäärä muuttuu (kuva lasketaan uudelleen). Ei rastitettu: vain tarkkuus ja tulostuskoko muuttuvat, pikselit pysyvät samoina. ¦ Bejelölve: a pixelek száma változik (a kép újraszámolódik). Nincs bejelölve: csak a felbontás és a nyomtatási méret változik, a pixelek ugyanazok maradnak.
+Coché : tu écris ce qu’on ajoute (ou enlève, avec un nombre négatif) autour de l’image. ¦ Rastitettu: kirjoitat, mitä kuvan ympärille lisätään (tai poistetaan negatiivisella luvulla). ¦ Bejelölve: beírod, mennyi kerüljön a kép köré (vagy negatív számmal mennyi tűnjön el).
+Avant d’agrandir, adoucit le grain et le bruit (les contours restent) : utile pour une photo scannée granuleuse. ¦ Ennen suurentamista pehmentää rakeisuutta ja kohinaa (reunat säilyvät): hyödyllinen rakeiselle skannatulle valokuvalle. ¦ Nagyítás előtt lágyítja a szemcsét és a zajt (az élek megmaradnak): hasznos szemcsés, szkennelt fényképhez.
+Pour un négatif photographié ou scanné : les clairs et les sombres s’échangent. ¦ Kuvatulle tai skannatulle negatiiville: vaaleat ja tummat vaihtavat paikkaa. ¦ Lefényképezett vagy szkennelt negatívhoz: a világos és sötét részek helyet cserélnek.
+Nom de la photo retouchée ¦ Muokatun valokuvan nimi ¦ A retusált fénykép neve
+Le nom de la copie et des fichiers exportés ¦ Kopion ja vietyjen tiedostojen nimi ¦ A másolat és az exportált fájlok neve
+La retouche complète : calques, sélections, masques, texte, formes, filtres, projets ¦ Täysi kuvankäsittely: tasot, valinnat, maskit, teksti, muodot, suotimet, projektit ¦ Teljes retusálás: rétegek, kijelölések, maszkok, szöveg, alakzatok, szűrők, projektek
+Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup (dans la retouche complète) ¦ Kohinanpoisto, pölyt, taitokset, kontrasti, terävyys ja väritys kerralla (täydessä kuvankäsittelyssä) ¦ Zajszűrés, por, gyűrődések, kontraszt, élesség és színezés egyszerre (a teljes retusálásban)
+🎛️ Retouche complète ¦ 🎛️ Täysi kuvankäsittely ¦ 🎛️ Teljes retusálás
+Retouche complète ¦ Täysi kuvankäsittely ¦ Teljes retusálás
+Exporter : la photo retouchée (PNG, JPG, imprimer) ou l’avant / après ¦ Vie: muokattu valokuva (PNG, JPG, tulosta) tai ennen / jälkeen ¦ Exportálás: a retusált fénykép (PNG, JPG, nyomtatás) vagy az előtte / utána
+Enregistrer et afficher cette version de la photo (l’original est gardé) ¦ Tallenna ja näytä tämä valokuvan versio (alkuperäinen säilytetään) ¦ A fénykép ezen változatának mentése és megjelenítése (az eredeti megmarad)
+🖼 La photo retouchée (PNG, JPG, imprimer)… ¦ 🖼 Muokattu valokuva (PNG, JPG, tulosta)… ¦ 🖼 A retusált fénykép (PNG, JPG, nyomtatás)…
+Barre des outils ¦ Työkalupalkki ¦ Eszköztár
+Réglages : couleur, lumière, courbe ¦ Säädöt: väri, valo, käyrä ¦ Beállítások: szín, fény, görbe
+Correcteur de taches : clique sur une tache, une poussière, une rayure ¦ Täplänkorjaus: napsauta täplää, pölyhiukkasta, naarmua ¦ Foltjavítás: kattints egy foltra, porszemre, karcolásra
+Tampon de duplication : {key} + clic sur l’endroit à recopier, puis peins sur la zone à couvrir ¦ Kloonaus: {key} + napsautus kopioitavaan kohtaan, maalaa sitten peitettävä alue ¦ Klónozóbélyegző: {key} + kattintás a másolandó helyre, majd fesd be a takarandó területet
+{key} + clic pour choisir l’endroit à recopier, puis peins sur la zone à couvrir. ¦ {key} + napsautus valitaksesi kopioitavan kohdan, maalaa sitten peitettävä alue. ¦ {key} + kattintás a másolandó hely kiválasztásához, majd fesd be a takarandó területet.
+Faire pivoter de 90° vers la gauche (antihoraire) ¦ Kierrä 90° vasemmalle (vastapäivään) ¦ Forgatás 90°-kal balra (óramutatóval ellentétesen)
+Pivoter à gauche ¦ Kierrä vasemmalle ¦ Forgatás balra
+Faire pivoter de 90° vers la droite (horaire) ¦ Kierrä 90° oikealle (myötäpäivään) ¦ Forgatás 90°-kal jobbra (óramutató járásával)
+Pivoter à droite ¦ Kierrä oikealle ¦ Forgatás jobbra
+Retouche complète : calques, sélections, masques, texte, filtres ¦ Täysi kuvankäsittely: tasot, valinnat, maskit, teksti, suotimet ¦ Teljes retusálás: rétegek, kijelölések, maszkok, szöveg, szűrők
+Les corrections en cours seront perdues. ¦ Keskeneräiset korjaukset menetetään. ¦ A folyamatban lévő javítások elvesznek.
+Passer à la retouche complète ? ¦ Siirrytäänkö täyteen kuvankäsittelyyn? ¦ Átváltasz a teljes retusálásra?
+Passer à la retouche complète ¦ Siirry täyteen kuvankäsittelyyn ¦ Átváltás a teljes retusálásra
+Règle la couleur et la lumière à droite · garde « 👁 Avant / après » appuyé pour comparer ¦ Säädä väri ja valo oikealla · pidä ”👁 Ennen / jälkeen” painettuna vertaillaksesi ¦ A színt és a fényt jobbra állítsd be · az összehasonlításhoz tartsd lenyomva az „👁 Előtte / utána” gombot
+Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long. ¦ Napsauta täplää, pölyhiukkasta tai naarmua: se korvataan ympäristöllään. Naarmua pitkin vedä. ¦ Kattints egy foltra, porszemre vagy karcolásra: a környezetével helyettesítjük. Karcolásnál húzd végig rajta.
+Choisis d’abord l’endroit à recopier : Alt + clic (⌥ + clic sur Mac). ¦ Valitse ensin kopioitava kohta: Alt + napsautus (⌥ + napsautus Macissa). ¦ Előbb válaszd ki a másolandó helyet: Alt + kattintás (Macen ⌥ + kattintás).
+Versions de la photo ¦ Valokuvan versiot ¦ A fénykép változatai
+Enregistrer sans l’afficher (gardée dans les versions) ¦ Tallenna näyttämättä (säilytetään versioissa) ¦ Mentés megjelenítés nélkül (a változatok között marad)
+Copie séparée (un autre média, relié aux mêmes fiches) ¦ Erillinen kopio (toinen mediakohde, yhdistetty samoihin kortteihin) ¦ Külön másolat (másik médiaelem, ugyanazokhoz az adatlapokhoz kapcsolva)
+Exporter la photo retouchée (PNG, JPG, imprimer)… ¦ Vie muokattu valokuva (PNG, JPG, tulosta)… ¦ A retusált fénykép exportálása (PNG, JPG, nyomtatás)…
+Exporter l’avant / après… ¦ Vie ennen / jälkeen… ¦ Az előtte / utána exportálása…
+Restaurer en une fois… ¦ Entisöi kerralla… ¦ Restaurálás egy lépésben…
+Pivoter de 90° à droite (horaire) ¦ Kierrä 90° oikealle (myötäpäivään) ¦ Forgatás 90°-kal jobbra (óramutató járásával)
+Pivoter de 90° à gauche (antihoraire) ¦ Kierrä 90° vasemmalle (vastapäivään) ¦ Forgatás 90°-kal balra (óramutatóval ellentétesen)
+Avant / après en rideau ¦ Ennen / jälkeen verhona ¦ Előtte / utána függönnyel
+La photo est ajoutée aux médias (sans fiche). Les réglages en cours sur cette photo-ci sont abandonnés. ¦ Valokuva lisätään mediaan (ilman korttia). Tämän kuvan keskeneräiset säädöt hylätään. ¦ A fénykép a médiába kerül (adatlap nélkül). Ennek a fényképnek a folyamatban lévő beállításai elvesznek.
+Retoucher « {name} » à la place ? ¦ Muokataanko sen sijaan kuvaa ”{name}”? ¦ Inkább ezt retusálod: „{name}”?
+💧 Fluidité ¦ 💧 Nesteytys ¦ 💧 Folyósítás
+Fluidité ¦ Nesteytys ¦ Folyósítás
+Peins sur la photo pour la déformer, comme une pâte souple ¦ Maalaa kuvaan muuttaaksesi sen muotoa kuin pehmeää taikinaa ¦ Fess a fényképre, hogy eltorzítsd, mint egy puha tésztát
+L’image suit la main ¦ Kuva seuraa kättä ¦ A kép követi a kezed
+Agrandit sous le pinceau (garder appuyé) ¦ Suurentaa siveltimen alla (pidä painettuna) ¦ Nagyít az ecset alatt (tartsd lenyomva)
+Rétrécit sous le pinceau (garder appuyé) ¦ Kutistaa siveltimen alla (pidä painettuna) ¦ Zsugorít az ecset alatt (tartsd lenyomva)
+Fait tourner dans le sens des aiguilles d’une montre ¦ Kiertää myötäpäivään ¦ Az óramutató járásával megegyezően csavar
+Fait tourner dans l’autre sens ¦ Kiertää toiseen suuntaan ¦ A másik irányba csavar
+Ramène peu à peu l’image d’origine ¦ Palauttaa vähitellen alkuperäisen kuvan ¦ Fokozatosan visszahozza az eredeti képet
+➡ Pousser ¦ ➡ Työnnä ¦ ➡ Tolás
+⊕ Gonfler ¦ ⊕ Pullista ¦ ⊕ Felfújás
+⊖ Dégonfler ¦ ⊖ Kutista ¦ ⊖ Összehúzás
+Dégonfler ¦ Kutista ¦ Összehúzás
+Gonfler ¦ Pullista ¦ Felfújás
+Pousser ¦ Työnnä ¦ Tolás
+↻ Tourbillon ¦ ↻ Pyörre ¦ ↻ Örvény
+↺ Tourbillon inverse ¦ ↺ Käänteinen pyörre ¦ ↺ Fordított örvény
+Tourbillon inverse ¦ Käänteinen pyörre ¦ Fordított örvény
+↩ Reconstruire ¦ ↩ Palauta ¦ ↩ Visszaépítés
+Reconstruire ¦ Palauta ¦ Visszaépítés
+Image trop grande pour la Fluidité. ¦ Kuva on liian suuri nesteytykselle. ¦ A kép túl nagy a folyósításhoz.
+↶ Annuler le coup ¦ ↶ Kumoa veto ¦ ↶ A vonás visszavonása
+✓ Appliquer (calque « Fluidité ») ¦ ✓ Käytä (taso ”Nesteytys”) ¦ ✓ Alkalmazás („Folyósítás” réteg)
+Rien n’a été déformé. ¦ Mitään ei muotoiltu. ¦ Semmi sem torzult.
+💧 Fluidité appliquée sur le calque « Fluidité » (la photo reste dessous : 👁 pour comparer). ¦ 💧 Nesteytys tehty tasolle ”Nesteytys” (valokuva pysyy alla: 👁 vertaillaksesi). ¦ 💧 Folyósítás alkalmazva a „Folyósítás” rétegen (a fénykép alatta marad: 👁 az összehasonlításhoz).
+🪄 Gomme magique ¦ 🪄 Taikapyyhin ¦ 🪄 Varázsradír
+Clique sur le fond à rendre transparent (plusieurs clics s’ajoutent) ¦ Napsauta taustaa, joka tehdään läpinäkyväksi (useat napsautukset lasketaan yhteen) ¦ Kattints az átlátszóvá teendő háttérre (több kattintás összeadódik)
+Zone voisine seulement (sinon : cette couleur partout) ¦ Vain viereinen alue (muuten: tämä väri kaikkialla) ¦ Csak a szomszédos terület (különben: ez a szín mindenhol)
+↶ Annuler le clic ¦ ↶ Kumoa napsautus ¦ ↶ A kattintás visszavonása
+✓ Appliquer (masque de la photo) ¦ ✓ Käytä (valokuvan maski) ¦ ✓ Alkalmazás (a fénykép maszkja)
+La photo a déjà un masque : la gomme magique le remplace. ¦ Valokuvalla on jo maski: taikapyyhin korvaa sen. ¦ A fényképnek már van maszkja: a varázsradír lecseréli.
+Remplacer le masque de la photo ? ¦ Korvataanko valokuvan maski? ¦ Lecseréled a fénykép maszkját?
+🪄 Fond rendu transparent (masque de la photo, à retoucher au pinceau) : l’image s’enregistre en PNG. ¦ 🪄 Tausta tehty läpinäkyväksi (valokuvan maski, hienosäädä siveltimellä): kuva tallennetaan PNG-muodossa. ¦ 🪄 A háttér átlátszóvá téve (a fénykép maszkja, ecsettel javítható): a kép PNG-ként mentődik.
+Masque de « {name} » ¦ Kohteen ”{name}” maski ¦ „{name}” maszkja
+Il n’y a pas encore de masque : détoure (✂️), gomme le fond (🪄) ou ajoute un masque à un calque, puis affine son bord. ¦ Maskia ei vielä ole: rajaa (✂️), pyyhi tausta (🪄) tai lisää tasolle maski ja hienosäädä sitten sen reunaa. ¦ Még nincs maszk: vágd ki (✂️), radírozd ki a hátteret (🪄), vagy adj maszkot egy réteghez, aztán finomítsd a szélét.
+✨ Affiner le bord ¦ ✨ Hienosäädä reunaa ¦ ✨ Él finomítása
+Décaler le bord ¦ Siirrä reunaa ¦ Él eltolása
+Voir le masque seul (blanc : gardé) ¦ Näytä pelkkä maski (valkoinen: säilytetty) ¦ Csak a maszk megtekintése (fehér: megtartva)
+Bord du masque affiné ¦ Maskin reuna hienosäädetty ¦ A maszk széle finomítva
+✨ Bord affiné (↶ pour revenir ; le pinceau corrige le reste). ¦ ✨ Reuna hienosäädetty (↶ palataksesi; sivellin korjaa loput). ¦ ✨ Él finomítva (↶ a visszalépéshez; az ecset javítja a többit).
+Lissage du bord ¦ Reunan tasoitus ¦ Él simítása
+Contraste du bord ¦ Reunan kontrasti ¦ Él kontrasztja
+Image trop grande ({w} × {h} points) : réduis la taille des photos. ¦ Kuva on liian suuri ({w} × {h} pikseliä): pienennä valokuvien kokoa. ¦ A kép túl nagy ({w} × {h} képpont): csökkentsd a fényképek méretét.
+Recherche… ({i}/{total}) ¦ Haetaan… ({i}/{total}) ¦ Keresés… ({i}/{total})
+« {name} » : décalage {dx} × {dy} points, rotation {rot}°, ressemblance {pct} %. ¦ ”{name}”: siirtymä {dx} × {dy} pikseliä, kierto {rot}°, samankaltaisuus {pct} %. ¦ „{name}”: eltolás {dx} × {dy} képpont, forgatás {rot}°, hasonlóság {pct} %.
+Pas de partie commune sûre pour {names} : place-la à la main (glisser, flèches ; « Mode différence » pour vérifier). ¦ Ei varmaa yhteistä osaa kuvalle {names}: sijoita se käsin (vedä, nuolet; ”Erotustila” tarkistukseen). ¦ Nincs biztos közös rész ehhez: {names}. Helyezd el kézzel (húzás, nyilak; ellenőrzéshez „Különbség mód”).
+Photos alignées : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement. ¦ Valokuvat kohdistettu: tarkista (vedä, nuolet säätöön). ”Sulauta saumat” pehmentää liitoksen tallennettaessa. ¦ Fényképek igazítva: ellenőrizd (húzás, nyilak a finomításhoz). A „Varratok elsimítása” mentéskor lágyítja az illesztést.
+Photo alignée : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement. ¦ Valokuva kohdistettu: tarkista (vedä, nuolet säätöön). ”Sulauta saumat” pehmentää liitoksen tallennettaessa. ¦ Fénykép igazítva: ellenőrizd (húzás, nyilak a finomításhoz). A „Varratok elsimítása” mentéskor lágyítja az illesztést.
+Image assemblée enregistrée, rattachée aux mêmes fiches que « {name} ». Les photos d’origine restent. ¦ Yhdistetty kuva tallennettu ja liitetty samoihin kortteihin kuin ”{name}”. Alkuperäiset valokuvat säilyvät. ¦ Az összeillesztett kép mentve, ugyanazokhoz az adatlapokhoz kapcsolva, mint „{name}”. Az eredeti fényképek megmaradnak.
+Titre de l’image assemblée ¦ Yhdistetyn kuvan otsikko ¦ Az összeillesztett kép címe
+Le titre de l’image assemblée (et le nom des fichiers exportés) ¦ Yhdistetyn kuvan otsikko (ja vietyjen tiedostojen nimi) ¦ Az összeillesztett kép címe (és az exportált fájlok neve)
+L’image assemblée : PNG, JPG ou imprimer ¦ Yhdistetty kuva: PNG, JPG tai tulosta ¦ Az összeillesztett kép: PNG, JPG vagy nyomtatás
+Enregistrer l’image assemblée dans les médias, rattachée aux mêmes fiches que la première photo de la base ¦ Tallenna yhdistetty kuva mediaan, liitettynä samoihin kortteihin kuin tietokannan ensimmäinen valokuva ¦ Az összeillesztett kép mentése a médiába, ugyanazokhoz az adatlapokhoz kapcsolva, mint az adatbázisból származó első fénykép
+Clique une photo pour la choisir, glisse pour la déplacer · Maj + molette : taille · Alt + molette : rotation · molette : zoom · flèches : 1 px (Maj : 10 px) · glisse ici une photo de l’ordinateur pour l’ajouter ¦ Napsauta valokuvaa valitaksesi sen, vedä siirtääksesi · Vaihto + rulla: koko · Alt + rulla: kierto · rulla: zoomaus · nuolet: 1 px (Vaihto: 10 px) · pudota tähän valokuva tietokoneelta lisätäksesi sen ¦ Kattints egy fényképre a kiválasztáshoz, húzd a mozgatáshoz · Shift + görgő: méret · Alt + görgő: forgatás · görgő: nagyítás · nyilak: 1 px (Shift: 10 px) · húzz ide egy fényképet a számítógépről a hozzáadáshoz
+Fond blanc (sinon transparent en PNG) ¦ Valkoinen tausta (muuten läpinäkyvä PNG:ssä) ¦ Fehér háttér (különben PNG-ben átlátszó)
+Coché : le fond autour des photos est blanc. Décoché, il reste transparent (seulement en PNG ; le JPG met toujours du blanc). ¦ Rastitettu: valokuvien ympärillä oleva tausta on valkoinen. Ilman rastia se pysyy läpinäkyvänä (vain PNG; JPG käyttää aina valkoista). ¦ Bejelölve: a fényképek körüli háttér fehér. Bejelölés nélkül átlátszó marad (csak PNG-ben; a JPG mindig fehéret használ).
+Ce qui se superpose bien devient noir : idéal pour aligner deux photos du même endroit ¦ Hyvin päällekkäin osuva muuttuu mustaksi: ihanteellinen kahden saman paikan valokuvan kohdistamiseen ¦ Ami jól fedi egymást, fekete lesz: ideális ugyanarról a helyről készült két fénykép igazításához
+Les parties identiques des deux photos deviennent noires : quand l’écriture disparaît presque, elles sont parfaitement alignées. ¦ Kahden valokuvan samat osat muuttuvat mustiksi: kun käsiala melkein katoaa, ne ovat täydellisesti kohdakkain. ¦ A két fénykép azonos részei feketék lesznek: amikor az írás szinte eltűnik, tökéletesen fedik egymást.
+Mode différence ¦ Erotustila ¦ Különbség mód
+Boutons des photos ¦ Valokuvien painikkeet ¦ A fényképek gombjai
+Panorama, page photographiée en deux fois : chaque photo est posée sur la précédente là où elles se recouvrent (décalage, petite rotation) ¦ Panoraama, kahdessa osassa kuvattu sivu: kukin valokuva asetetaan edellisen päälle sinne, missä ne menevät päällekkäin (siirtymä, pieni kierto) ¦ Panoráma, két részletben lefényképezett oldal: minden fénykép az előzőre kerül ott, ahol átfedik egymást (eltolás, kis forgatás)
+🪄 Aligner tout seul ¦ 🪄 Kohdista automaattisesti ¦ 🪄 Automatikus igazítás
+Image enregistrée ¦ Tallennettu kuva ¦ Mentett kép
+JPEG (léger) ¦ JPEG (kevyt) ¦ JPEG (kis méret)
+PNG (sans perte) ¦ PNG (häviötön) ¦ PNG (veszteségmentes)
+Fondre les raccords ¦ Sulauta saumat ¦ Varratok elsimítása
+Là où deux photos se recouvrent, le bord de celle du dessus s’efface en douceur : pas de marche visible au raccord. ¦ Missä kaksi valokuvaa menee päällekkäin, päällimmäisen reuna häivytetään pehmeästi: liitoksessa ei näy porrasta. ¦ Ahol két fénykép átfedi egymást, a felső széle finoman elhalványul: nem látszik lépcső az illesztésnél.
+Largeur du fondu ¦ Häivytyksen leveys ¦ Az átmenet szélessége
+Rogner aux parties couvertes (sans coins vides) ¦ Rajaa peitettyihin osiin (ei tyhjiä kulmia) ¦ Vágás a lefedett részekre (üres sarkok nélkül)
+Garde le plus grand rectangle entièrement couvert par les photos : plus de coins blancs autour d’un panorama. ¦ Säilyttää suurimman valokuvien kokonaan peittämän suorakulmion: ei enää valkoisia kulmia panoraaman ympärillä. ¦ A fényképekkel teljesen lefedett legnagyobb téglalapot tartja meg: nincs több fehér sarok a panoráma körül.
+L’assemblage non enregistré sera perdu. ¦ Tallentamaton yhdistelmä menetetään. ¦ A nem mentett összeillesztés elvész.
+Fermer sans enregistrer l’assemblage ? ¦ Suljetaanko tallentamatta yhdistelmää? ¦ Bezárod az összeillesztés mentése nélkül?
+Mettre devant ¦ Tuo eteen ¦ Előre hozás
+Mettre derrière ¦ Vie taakse ¦ Hátra küldés
+Aucune photo à assembler pour l’instant ¦ Ei vielä yhdistettäviä valokuvia ¦ Még nincs összeillesztendő fénykép
+« ＋ Photos », ou glisse une photo de l’ordinateur sur le plan de travail. ¦ ”＋ Valokuvat”, tai pudota valokuva tietokoneelta työtilaan. ¦ „＋ Fényképek”, vagy húzz egy fényképet a számítógépről a munkaterületre.
+＋ Photos ¦ ＋ Valokuvat ¦ ＋ Fényképek
+Clique une photo pour la régler. ¦ Napsauta valokuvaa säätääksesi sitä. ¦ Kattints egy fényképre a beállításához.
+La taille de la photo par rapport à ses vrais points : pour mettre deux photos à la même échelle. ¦ Valokuvan koko suhteessa sen todellisiin pikseleihin: kahden valokuvan saamiseksi samaan mittakaavaan. ¦ A fénykép mérete a valódi képpontjaihoz képest: két fénykép azonos léptékre hozásához.
+À moitié transparente, la photo du dessus laisse voir celle du dessous : on aligne les écritures. ¦ Puoliksi läpinäkyvänä päällimmäinen valokuva näyttää alla olevan: käsialat kohdistetaan. ¦ Félig átlátszóan a felső fénykép átengedi az alatta lévőt: így igazíthatod az írásokat.
+À moitié transparente ¦ Puoliksi läpinäkyvä ¦ Félig átlátszó
+Pour mettre deux photos à la même échelle : rends celle du dessus à moitié transparente (ou coche « Mode différence »), puis ajuste sa taille et sa rotation jusqu’à ce que les écritures se superposent. ¦ Kahden valokuvan saamiseksi samaan mittakaavaan: tee päällimmäisestä puoliksi läpinäkyvä (tai rastita ”Erotustila”), säädä sitten sen kokoa ja kiertoa, kunnes käsialat ovat päällekkäin. ¦ Két fénykép azonos léptékre hozásához: tedd a felsőt félig átlátszóvá (vagy jelöld be a „Különbség mód”-ot), majd állítsd a méretét és a forgatását, amíg az írások fedik egymást.
+Opaque ¦ Peittävä ¦ Átlátszatlan
+Aucune photo visible. ¦ Ei näkyviä valokuvia. ¦ Nincs látható fénykép.
+Ajoute au moins deux photos qui se recouvrent (« ＋ Photos »). ¦ Lisää vähintään kaksi päällekkäin menevää valokuvaa (”＋ Valokuvat”). ¦ Adj hozzá legalább két, egymást átfedő fényképet („＋ Fényképek”).
+Le navigateur n’a pas pu créer l’image. ¦ Selain ei pystynyt luomaan kuvaa. ¦ A böngésző nem tudta létrehozni a képet.
+Pour enregistrer dans la base, l’une des photos doit venir de la base (sinon : ⤓ Télécharger). ¦ Tietokantaan tallentamiseksi yhden valokuvista on oltava tietokannasta (muuten: ⤓ Lataa). ¦ Az adatbázisba mentéshez az egyik fényképnek az adatbázisból kell származnia (különben: ⤓ Letöltés).
+Création de l’image… ¦ Luodaan kuvaa… ¦ A kép létrehozása…
+ASSEMBLER ¦ YHDISTÄ ¦ ÖSSZEILLESZTÉS
+ce n’est pas un fichier PSD ¦ tämä ei ole PSD-tiedosto ¦ ez nem PSD-fájl
+les très grands PSD (PSB) ne sont pas lus ¦ hyvin suuria PSD-tiedostoja (PSB) ei lueta ¦ a nagyon nagy PSD-fájlokat (PSB) nem olvassuk be
+version de PSD inconnue ¦ tuntematon PSD-versio ¦ ismeretlen PSD-verzió
+profondeur {n} bits non lue (seulement 8 bits) ¦ {n} bitin syvyyttä ei lueta (vain 8 bittiä) ¦ {n} bites mélységet nem olvasunk be (csak 8 bitet)
+seuls les PSD en RVB ou en niveaux de gris sont lus ¦ vain RGB- tai harmaasävy-PSD:t luetaan ¦ csak RGB vagy szürkeárnyalatos PSD-ket olvasunk be
+image trop grande ¦ kuva liian suuri ¦ túl nagy kép
+compression ZIP non lue ¦ ZIP-pakkausta ei lueta ¦ a ZIP-tömörítést nem olvassuk be
+=🗂 PSD prêt : {n} calques, {w} × {h} px (les calques de réglage sont dans l’image aplatie). ¦ 🗂 PSD valmis: {n} taso, {w} × {h} px (säätötasot ovat litistetyssä kuvassa).|🗂 PSD valmis: {n} tasoa, {w} × {h} px (säätötasot ovat litistetyssä kuvassa). ¦ 🗂 PSD kész: {n} réteg, {w} × {h} px (a korrekciós rétegek az egyesített képben vannak).|🗂 PSD kész: {n} réteg, {w} × {h} px (a korrekciós rétegek az egyesített képben vannak).
+=🗂 PSD prêt : {n} calque, {w} × {h} px (les calques de réglage sont dans l’image aplatie). ¦ 🗂 PSD valmis: {n} taso, {w} × {h} px (säätötasot ovat litistetyssä kuvassa).|🗂 PSD valmis: {n} tasoa, {w} × {h} px (säätötasot ovat litistetyssä kuvassa). ¦ 🗂 PSD kész: {n} réteg, {w} × {h} px (a korrekciós rétegek az egyesített képben vannak).|🗂 PSD kész: {n} réteg, {w} × {h} px (a korrekciós rétegek az egyesített képben vannak).
+PSD illisible : {err}. ¦ PSD ei ole luettavissa: {err}. ¦ Olvashatatlan PSD: {err}.
+Calque PSD ¦ PSD-taso ¦ PSD-réteg
+PSD importé : {file} ¦ PSD tuotu: {file} ¦ PSD importálva: {file}
+=🗂 {n} calques importés de « {file} » (proportions différentes : ajusté à la photo). ¦ 🗂 {n} taso tuotu tiedostosta ”{file}” (eri mittasuhteet: sovitettu valokuvaan).|🗂 {n} tasoa tuotu tiedostosta ”{file}” (eri mittasuhteet: sovitettu valokuvaan). ¦ 🗂 {n} réteg importálva innen: „{file}” (eltérő arányok: a fényképhez igazítva).|🗂 {n} réteg importálva innen: „{file}” (eltérő arányok: a fényképhez igazítva).
+=🗂 {n} calques importés de « {file} ». ¦ 🗂 {n} taso tuotu tiedostosta ”{file}”.|🗂 {n} tasoa tuotu tiedostosta ”{file}”. ¦ 🗂 {n} réteg importálva innen: „{file}”.|🗂 {n} réteg importálva innen: „{file}”.
+=🗂 {n} calque importé de « {file} » (proportions différentes : ajusté à la photo). ¦ 🗂 {n} taso tuotu tiedostosta ”{file}” (eri mittasuhteet: sovitettu valokuvaan).|🗂 {n} tasoa tuotu tiedostosta ”{file}” (eri mittasuhteet: sovitettu valokuvaan). ¦ 🗂 {n} réteg importálva innen: „{file}” (eltérő arányok: a fényképhez igazítva).|🗂 {n} réteg importálva innen: „{file}” (eltérő arányok: a fényképhez igazítva).
+=🗂 {n} calque importé de « {file} ». ¦ 🗂 {n} taso tuotu tiedostosta ”{file}”.|🗂 {n} tasoa tuotu tiedostosta ”{file}”. ¦ 🗂 {n} réteg importálva innen: „{file}”.|🗂 {n} réteg importálva innen: „{file}”.
+Cocher pour comparer ¦ Rastita vertaillaksesi ¦ Jelöld be az összehasonlításhoz
+Coche deux versions pour les comparer. ¦ Rastita kaksi versiota vertaillaksesi niitä. ¦ Jelölj be két változatot az összehasonlításukhoz.
+Plus ancien ¦ Vanhemmat ¦ Régebbi
+léger ¦ kevyt ¦ könnyű
+Taille des vignettes ¦ Pikkukuvien koko ¦ Bélyegképek mérete
+Utiliser ces images ¦ Käytä näitä kuvia ¦ Ezen képek használata
+Chercher : titre, cote, personne, lieu, année ¦ Hae: otsikko, arkistotunnus, henkilö, paikka, vuosi ¦ Keresés: cím, jelzet, személy, hely, év
+Titre, cote, personne, lieu, année… ¦ Otsikko, arkistotunnus, henkilö, paikka, vuosi… ¦ Cím, jelzet, személy, hely, év…
+↑ ↓ ← → · Espace : cocher · Entrée : valider ¦ ↑ ↓ ← → · Välilyönti: rastita · Enter: vahvista ¦ ↑ ↓ ← → · Szóköz: bejelölés · Enter: jóváhagyás
+↑ ↓ ← → · Entrée : valider ¦ ↑ ↓ ← → · Enter: vahvista ¦ ↑ ↓ ← → · Enter: jóváhagyás
+Retouche ¦ Kuvankäsittely ¦ Retusálás
+RETOUCHE ¦ KUVANKÄSITTELY ¦ RETUSÁLÁS
+photo|Légende ¦ Kuvateksti ¦ Felirat
+Propriétés ¦ Ominaisuudet ¦ Tulajdonságok
+Préréglage ¦ Esiasetus ¦ Előbeállítás
+Aucun. ¦ Ei mitään. ¦ Nincs.
+trop petite pour imprimer en A5 ¦ liian pieni tulostettavaksi A5-koossa ¦ túl kicsi A5-ös nyomtatáshoz
+assez grande pour imprimer en A5 ¦ riittävän suuri tulostettavaksi A5-koossa ¦ elég nagy A5-ös nyomtatáshoz
+Écran 16:9 (1920 × 1080) ¦ Näyttö 16:9 (1920 × 1080) ¦ Képernyő 16:9 (1920 × 1080)
+Écran 4:3 (1600 × 1200) ¦ Näyttö 4:3 (1600 × 1200) ¦ Képernyő 4:3 (1600 × 1200)
+Carré 1:1 (1080 × 1080) ¦ Neliö 1:1 (1080 × 1080) ¦ Négyzet 1:1 (1080 × 1080)
+Vertical 9:16 (1080 × 1920) ¦ Pystysuora 9:16 (1080 × 1920) ¦ Álló 9:16 (1080 × 1920)
+photo|Exposition ¦ Valotus ¦ Expozíció
+photo|Luminosité ¦ Kirkkaus ¦ Fényerő
+Colorisation : {what} ¦ Väritys: {what} ¦ Színezés: {what}
+{what} oui ¦ {what} päällä ¦ {what} be
+{what} non ¦ {what} pois ¦ {what} ki
+Courbe {what} ¦ Käyrä {what} ¦ Görbe: {what}
+{layer} verrouillé ¦ {layer} lukittu ¦ {layer} zárolva
+{layer} déverrouillé ¦ {layer} lukitus avattu ¦ {layer} feloldva
+« {name} » seulement sur l’élément dessous ¦ ”{name}” vain alla olevaan kohteeseen ¦ „{name}” csak az alatta lévő elemre
+« {name} » sur tout ce qui est dessous ¦ ”{name}” kaikkeen alla olevaan ¦ „{name}” mindenre, ami alatta van
+Teinte/Saturation : {what} ¦ Sävy/Kylläisyys: {what} ¦ Színárnyalat/Telítettség: {what}
+{dpi} ppp ¦ {dpi} ppi ¦ {dpi} dpi
+Envoi ({w} × {h} points, {size} Mo)… ¦ Lähetetään ({w} × {h} pikseliä, {size} Mt)… ¦ Feltöltés ({w} × {h} képpont, {size} MB)…
+Barre du haut (groupes) ¦ Yläpalkki (ryhmät) ¦ Felső sáv (csoportok)
+Les outils ¦ Työkalut ¦ Az eszközök
+Options des outils (pinceau, texte…) ¦ Työkalujen asetukset (sivellin, teksti…) ¦ Eszközbeállítások (ecset, szöveg…)
+Colonne d’outils ¦ Työkalupalsta ¦ Eszközoszlop
+Panneau Réglages ¦ Säädöt-paneeli ¦ Beállítások panel
+Préréglages ¦ Esiasetukset ¦ Előbeállítások
+Import des réglages indisponible. ¦ Asetusten tuonti ei ole käytettävissä. ¦ A beállítások importálása nem érhető el.
+Espace de travail « {name} » appliqué. ¦ Työtila ”{name}” otettu käyttöön. ¦ A(z) „{name}” munkaterület alkalmazva.
+Réglages « {name} » importés : « Appliquer » pour les utiliser. ¦ Asetukset ”{name}” tuotu: ota ne käyttöön valinnalla ”Käytä”. ¦ A(z) „{name}” beállítások importálva: az „Alkalmaz” gombbal használhatod őket.
+{layer} (avant / après) ¦ {layer} (ennen / jälkeen) ¦ {layer} (előtte / utána)
+Avant / après — {name} ¦ Ennen / jälkeen — {name} ¦ Előtte / utána — {name}
+Modèle des visages : {what} ¦ Kasvomalli: {what} ¦ Arcmodell: {what}
+Portrait de {name} (photo d’identité) ¦ Muotokuva: {name} (passikuva) ¦ {name} portréja (igazolványkép)
+Portrait (photo d’identité) ¦ Muotokuva (passikuva) ¦ Portré (igazolványkép)
+Fiche {num} ¦ Kortti {num} ¦ {num}. adatlap
+⚠️ visage non trouvé sur « {name} » : cadrage au centre, à vérifier (ou identifie le visage dans la visionneuse) ¦ ⚠️ kasvoja ei löytynyt kuvasta ”{name}”: rajattu keskeltä, tarkista (tai tunnista kasvot katseluohjelmassa) ¦ ⚠️ nem található arc ezen: „{name}”: középre vágva, ellenőrizd (vagy jelöld meg az arcot a képnézegetőben)
+={n} portraits prêts : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ {n} muotokuva valmiina: poista rasti, jos se ei sovi, ja valitse sitten ”Käytä muotokuvina”.|{n} muotokuvaa valmiina: poista rasti niistä, jotka eivät sovi, ja valitse sitten ”Käytä muotokuvina”. ¦ {n} portré kész: vedd ki a jelölést, ha nem jó, aztán „Használat portréként”.|{n} portré kész: vedd ki a jelölést azokból, amelyek nem jók, aztán „Használat portréként”.
+={n} portrait prêt : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ {n} muotokuva valmiina: poista rasti, jos se ei sovi, ja valitse sitten ”Käytä muotokuvina”.|{n} muotokuvaa valmiina: poista rasti niistä, jotka eivät sovi, ja valitse sitten ”Käytä muotokuvina”. ¦ {n} portré kész: vedd ki a jelölést, ha nem jó, aztán „Használat portréként”.|{n} portré kész: vedd ki a jelölést azokból, amelyek nem jók, aztán „Használat portréként”.
+Aucun visage trouvé tout seul. ¦ Kasvoja ei löytynyt automaattisesti. ¦ Automatikusan nem található arc.
+={n} autres sont cadrés au centre : coche-les seulement s’ils vont. ¦ {n} muu on rajattu keskeltä: rastita se vain, jos se sopii.|{n} muuta on rajattu keskeltä: rastita ne vain, jos ne sopivat. ¦ {n} másik középre van vágva: csak akkor jelöld be, ha jó.|{n} másik középre van vágva: csak akkor jelöld be őket, ha jók.
+={n} autre est cadré au centre : coche-le seulement s’il va. ¦ {n} muu on rajattu keskeltä: rastita se vain, jos se sopii.|{n} muuta on rajattu keskeltä: rastita ne vain, jos ne sopivat. ¦ {n} másik középre van vágva: csak akkor jelöld be, ha jó.|{n} másik középre van vágva: csak akkor jelöld be őket, ha jók.
+Calque {num} ¦ Taso {num} ¦ {num}. réteg
+Groupe {num} ¦ Ryhmä {num} ¦ {num}. csoport
+calque|Réglages ¦ Säädöt ¦ Korrekciók
+Masque d’écrêtage : ne touche que « {name} » juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Leikkausmaski: vaikuttaa vain suoraan alla olevaan ”{name}” (⌥ Alt + napsautus kahden tason välissä Photoshopissa) ¦ Vágómaszk: csak a közvetlenül alatta lévő „{name}” elemre hat (⌥ Alt + kattintás két réteg között a Photoshopban)
+Masque d’écrêtage : ne touche que l’élément juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Leikkausmaski: vaikuttaa vain suoraan alla olevaan kohteeseen (⌥ Alt + napsautus kahden tason välissä Photoshopissa) ¦ Vágómaszk: csak a közvetlenül alatta lévő elemre hat (⌥ Alt + kattintás két réteg között a Photoshopban)
+seulement sur « {name} » ¦ vain kohteessa ”{name}” ¦ csak ezen: „{name}”
+seulement sur ce qui est juste dessous ¦ vain suoraan alla olevassa ¦ csak a közvetlenül alatta lévőn
+touche tout ce qui est dessous dans « {name} » ¦ vaikuttaa kaikkeen alla olevaan ryhmässä ”{name}” ¦ minden alatta lévőre hat ebben: „{name}”
+réglages, {n} corrections ¦ säädöt, {n} korjausta ¦ korrekciók, {n} javítás
+réglages, {n} correction ¦ säädöt, {n} korjaus ¦ korrekciók, {n} javítás
+« {name} » mis dans un groupe ¦ ”{name}” laitettu ryhmään ¦ „{name}” csoportba helyezve
+{layer} montré ¦ {layer} näytetty ¦ {layer} megjelenítve
+{layer} masqué ¦ {layer} piilotettu ¦ {layer} elrejtve
+Masque qui cache la sélection ajouté à {name} ¦ Valinnan piilottava maski lisätty kohteeseen {name} ¦ A kijelölést elrejtő maszk hozzáadva: {name}
+Masque qui cache tout ajouté à {name} ¦ Kaiken piilottava maski lisätty kohteeseen {name} ¦ Mindent elrejtő maszk hozzáadva: {name}
+Masque ajouté à {name} ¦ Maski lisätty kohteeseen {name} ¦ Maszk hozzáadva: {name}
+Masque de {name} désactivé ¦ Kohteen {name} maski poistettu käytöstä ¦ {name} maszkja kikapcsolva
+Masque de {name} réactivé ¦ Kohteen {name} maski otettu taas käyttöön ¦ {name} maszkja újra bekapcsolva
+Masque de {name} inversé ¦ Kohteen {name} maski käännetty ¦ {name} maszkja megfordítva
+Masque de {name} retiré ¦ Kohteen {name} maski poistettu ¦ {name} maszkja eltávolítva
+« {name} » à sa taille d’origine ¦ ”{name}” alkuperäisessä koossaan ¦ „{name}” eredeti méretben
+✨ Filtre sur « {name} » ¦ ✨ Suodin kohteessa ”{name}” ¦ ✨ Szűrő ezen: „{name}”
+« {name} » pixellisé ¦ ”{name}” rasteroitu ¦ „{name}” raszterizálva
+« {name} » pixellisé : figé à sa taille actuelle (l’agrandir le rendra flou) ¦ ”{name}” rasteroitu: lukittu nykyiseen kokoonsa (suurentaminen tekee siitä epäterävän) ¦ „{name}” raszterizálva: a jelenlegi méretén rögzítve (nagyítva elmosódott lesz)
+Groupe « {name} » supprimé (son contenu reste) ¦ Ryhmä ”{name}” poistettu (sen sisältö säilyy) ¦ A(z) „{name}” csoport törölve (a tartalma megmarad)
+{layer} supprimé ¦ {layer} poistettu ¦ {layer} törölve
+« {name} » retiré des calques ¦ ”{name}” poistettu tasoista ¦ „{name}” eltávolítva a rétegek közül
+Calque « {name} » supprimé avec ce qui est dessus ¦ Taso ”{name}” poistettu sisältöineen ¦ A(z) „{name}” réteg törölve a tartalmával együtt
+{layer} dupliquée ¦ {layer} monistettu ¦ {layer} megkettőzve
+{layer} dupliqué ¦ {layer} monistettu ¦ {layer} megkettőzve
+{layer} vidé ¦ {layer} tyhjennetty ¦ {layer} kiürítve
+{layer} déplacé ¦ {layer} siirretty ¦ {layer} áthelyezve
+Opacité de {name} : {n} % ¦ Kohteen {name} peittävyys: {n} % ¦ {name} átlátszatlansága: {n}%
+Fond de {name} : {n} % ¦ Kohteen {name} täyttö: {n} % ¦ {name} kitöltése: {n}%
+Renommé « {name} » ¦ Nimetty uudelleen: ”{name}” ¦ Átnevezve: „{name}”
+Fusion de {name} : {what} ¦ Kohteen {name} sekoitustila: {what} ¦ {name} keverési módja: {what}
+« {name} » rangé dans « {group} » ¦ ”{name}” siirretty ryhmään ”{group}” ¦ „{name}” áthelyezve ide: „{group}”
+« {name} » sorti du groupe ¦ ”{name}” otettu pois ryhmästä ¦ „{name}” kivéve a csoportból
+« {name} » rangé tout en bas ¦ ”{name}” siirretty aivan alimmaksi ¦ „{name}” a legaljára helyezve
+« {name} » rangé au-dessus de « {other} » ¦ ”{name}” siirretty kohteen ”{other}” yläpuolelle ¦ „{name}” áthelyezve e fölé: „{other}”
+« {name} » rangé sous « {other} » ¦ ”{name}” siirretty kohteen ”{other}” alapuolelle ¦ „{name}” áthelyezve ez alá: „{other}”
+🎚 Calque de réglage {name} ¦ 🎚 Säätötaso {name} ¦ 🎚 Korrekciós réteg: {name}
+🖼 Réglages de <b>la photo</b> ¦ 🖼 <b>Kuvan</b> säädöt ¦ 🖼 <b>A fotó</b> korrekciói
+Sur le masque, le pinceau ⬜ montre (fait revenir ce qui était caché) — X pour changer ¦ Maskissa sivellin ⬜ paljastaa (tuo takaisin piilotetun) — X vaihtaa ¦ A maszkon az ⬜ ecset megmutat (visszahozza, ami el volt rejtve) — X a váltáshoz
+Sur le masque, le pinceau ⬛ cache — X pour changer ¦ Maskissa sivellin ⬛ piilottaa — X vaihtaa ¦ A maszkon a ⬛ ecset elrejt — X a váltáshoz
+Texte choisi : « {text} » ¦ Valittu teksti: ”{text}” ¦ Kiválasztott szöveg: „{text}”
+Glyphe {what} ajouté ¦ Merkki {what} lisätty ¦ {what} karakter hozzáadva
+« {what} » copié : colle-le dans un texte (⌘V). ¦ ”{what}” kopioitu: liitä se tekstiin (⌘V). ¦ „{what}” kimásolva: illeszd be egy szövegbe (⌘V).
+calque « {name} » (seulement l’élément dessous) ¦ taso ”{name}” (vain alla oleva kohde) ¦ „{name}” réteg (csak az alatta lévő elem)
+calque « {name} » ¦ taso ”{name}” ¦ „{name}” réteg
+Gamme : {a}° / {b}° — {c}° \ {d}° (glisse les repères) ¦ Alue: {a}° / {b}° — {c}° \ {d}° (vedä merkkejä) ¦ Tartomány: {a}° / {b}° — {c}° \ {d}° (húzd el a jelölőket)
+Propriétés de « {name} » ¦ Kohteen ”{name}” ominaisuudet ¦ „{name}” tulajdonságai
+🎨 Teinte/Saturation sur « {name} » ¦ 🎨 Sävy/kylläisyys kohteessa ”{name}” ¦ 🎨 Színárnyalat/telítettség ezen: „{name}”
+Motif « {what} » : calque « {name} » ¦ Kuvio ”{what}”: taso ”{name}” ¦ „{what}” minta: „{name}” réteg
+Motif de « {name} » ¦ Kohteen ”{name}” kuvio ¦ „{name}” mintája
+Motif « {what} » sur « {name} » ¦ Kuvio ”{what}” kohteessa ”{name}” ¦ „{what}” minta ezen: „{name}”
+Motif « {what} » retiré de la bibliothèque (les calques qui l’utilisent le gardent) ¦ Kuvio ”{what}” poistettu kirjastosta (sitä käyttävät tasot säilyttävät sen) ¦ „{what}” minta eltávolítva a könyvtárból (az azt használó rétegek megtartják)
+le calque « {name} » ¦ taso ”{name}” ¦ a(z) „{name}” réteg
+🖌 {name} : peins sur un calque. ¦ 🖌 {name}: maalaa tasolle. ¦ 🖌 {name}: fess egy rétegre.
+Dégradé : {what} ¦ Liukuväri: {what} ¦ Színátmenet: {what}
+Dégradé {num} ¦ Liukuväri {num} ¦ {num}. színátmenet
+Calque « {name} » ¦ Taso ”{name}” ¦ „{name}” réteg
+« {name} » · son masque (noir = caché, blanc = montré) : tout se voit tout de suite ¦ ”{name}” · sen maski (musta = piilotettu, valkoinen = näkyvissä): näet kaiken heti ¦ „{name}” · a maszkja (fekete = rejtett, fehér = látható): mindent azonnal látsz
+« {name} » : tout se voit tout de suite ¦ ”{name}”: näet kaiken heti ¦ „{name}”: mindent azonnal látsz
+le prochain dégradé que tu traceras ¦ seuraava piirtämäsi liukuväri ¦ a következő színátmenet, amit rajzolsz
+Préréglage « {name} » gardé : il reste dans cette liste. ¦ Esiasetus ”{name}” säilytetty: se pysyy tässä luettelossa. ¦ A(z) „{name}” előbeállítás megtartva: ebben a listában marad.
+Dégradé modifié sur « {name} » ¦ Liukuväriä muutettu kohteessa ”{name}” ¦ Színátmenet módosítva ezen: „{name}”
+Texte « {text} » ¦ Teksti ”{text}” ¦ „{text}” szöveg
+Objet dynamique « {name} » : image remplacée ¦ Älykäs objekti ”{name}”: kuva korvattu ¦ „{name}” intelligens objektum: kép lecserélve
+Image placée : « {name} » ¦ Kuva sijoitettu: ”{name}” ¦ Kép elhelyezve: „{name}”
+Image placée, mais pas rangée dans les médias : {err} ¦ Kuva sijoitettu, mutta sitä ei tallennettu mediaan: {err} ¦ Kép elhelyezve, de nem került a médiába: {err}
+Élément supprimé de « {name} » ¦ Kohde poistettu kohteesta ”{name}” ¦ Elem törölve innen: „{name}”
+Image tournée sur « {name} » ¦ Kuva käännetty kohteessa ”{name}” ¦ Kép elforgatva ezen: „{name}”
+Image agrandie / réduite sur « {name} » ¦ Kuva suurennettu / pienennetty kohteessa ”{name}” ¦ Kép nagyítva / kicsinyítve ezen: „{name}”
+Dégradé ajusté (masque) sur « {name} » ¦ Liukuväri säädetty (maski) kohteessa ”{name}” ¦ Színátmenet igazítva (maszk) ezen: „{name}”
+Dégradé ajusté sur « {name} » ¦ Liukuväri säädetty kohteessa ”{name}” ¦ Színátmenet igazítva ezen: „{name}”
+Élément déplacé sur « {name} » ¦ Kohde siirretty kohteessa ”{name}” ¦ Elem áthelyezve ezen: „{name}”
+Masque en dégradé sur « {name} » ¦ Liukuvärimaski kohteessa ”{name}” ¦ Színátmenetes maszk ezen: „{name}”
+Dégradé {what} : « {name} » ¦ Liukuväri {what}: ”{name}” ¦ {what} színátmenet: „{name}”
+{what} sur « {name} » ¦ {what} kohteessa ”{name}” ¦ {what} ezen: „{name}”
+Masque : caché au pinceau ¦ Maski: piilotettu siveltimellä ¦ Maszk: ecsettel elrejtve
+Masque : montré au pinceau ¦ Maski: paljastettu siveltimellä ¦ Maszk: ecsettel megmutatva
+Pli réparé ({n} touches) (calque ✨ Retouches) ¦ Taite korjattu ({n} vetoa) (taso ✨ Korjaukset) ¦ Gyűrődés javítva ({n} húzás) (✨ Retusálás réteg)
+Pli réparé (calque ✨ Retouches) ¦ Taite korjattu (taso ✨ Korjaukset) ¦ Gyűrődés javítva (✨ Retusálás réteg)
+Recadrage enlevé ¦ Rajaus poistettu ¦ Körbevágás eltávolítva
+Recadrage et redressement ({a}°) ¦ Rajaus ja suoristus ({a}°) ¦ Körbevágás és kiegyenesítés ({a}°)
+Recadrage ¦ Rajaus ¦ Körbevágás
+Filtre « {what} » (refait) ¦ Suodin ”{what}” (toistettu) ¦ „{what}” szűrő (megismételve)
+« {what} » refait sur un nouveau calque. ¦ ”{what}” toistettu uudella tasolla. ¦ „{what}” megismételve egy új rétegen.
+limité à la sélection ¦ rajattu valintaan ¦ a kijelölésre korlátozva
+Filtre « {what} » ¦ Suodin ”{what}” ¦ „{what}” szűrő
+Filtre « {what} » ajouté au calque ¦ Suodin ”{what}” lisätty tasoon ¦ „{what}” szűrő hozzáadva a réteghez
+Filtre « {what} » réglé ¦ Suodin ”{what}” säädetty ¦ „{what}” szűrő beállítva
+Action « {name} » ¦ Toiminto ”{name}” ¦ „{name}” művelet
+Action du {date} ¦ Toiminto {date} ¦ Művelet – {date}
+Action « {name} » enregistrée. ¦ Toiminto ”{name}” tallennettu. ¦ „{name}” művelet mentve.
+Action « {name} » importée : « Sur cette photo » ou « Sur plusieurs photos… ». ¦ Toiminto ”{name}” tuotu: ”Tähän kuvaan” tai ”Useisiin kuviin…”. ¦ „{name}” művelet importálva: „Erre a fotóra” vagy „Több fotóra…”.
+Action « {name} » supprimée ¦ Toiminto ”{name}” poistettu ¦ „{name}” művelet törölve
+« {name} » sur plusieurs photos ¦ ”{name}” useisiin kuviin ¦ „{name}” több fotóra
+Terminé : {n} photos sur {total}, nouvelle version affichée. ¦ Valmis: {n} kuvaa / {total}, uusi versio näytetään. ¦ Kész: {n} fotó / {total}, az új változat látható.
+Terminé : {n} photo sur {total}, nouvelle version affichée. ¦ Valmis: {n} kuva / {total}, uusi versio näytetään. ¦ Kész: {n} fotó / {total}, az új változat látható.
+Terminé : {n} photos sur {total}. ¦ Valmis: {n} kuvaa / {total}. ¦ Kész: {n} fotó / {total}.
+Terminé : {n} photo sur {total}. ¦ Valmis: {n} kuva / {total}. ¦ Kész: {n} fotó / {total}.
+{layer} (retouchée) ¦ {layer} (korjattu) ¦ {layer} (retusálva)
+« {name} » · comme le style de calque de Photoshop ¦ ”{name}” · kuten Photoshopin tasotyyli ¦ „{name}” · mint a Photoshop rétegstílusa
+Effets de {layer} enlevés ¦ Kohteen {layer} tehosteet poistettu ¦ {layer} effektusai eltávolítva
+Effets de {layer} ¦ Kohteen {layer} tehosteet ¦ {layer} effektusai
+Les lignes fines, claires ou sombres, sont repérées en rouge (dans la sélection). Vérifie, puis « Réparer ces lignes ». ¦ Ohuet vaaleat tai tummat viivat merkitään punaisella (valinnan sisällä). Tarkista ja valitse sitten ”Korjaa nämä viivat”. ¦ A vékony, világos vagy sötét vonalak pirossal jelölve (a kijelölésen belül). Ellenőrizd, aztán „Vonalak javítása”.
+Les lignes fines, claires ou sombres, sont repérées en rouge. Vérifie, puis « Réparer ces lignes ». ¦ Ohuet vaaleat tai tummat viivat merkitään punaisella. Tarkista ja valitse sitten ”Korjaa nämä viivat”. ¦ A vékony, világos vagy sötét vonalak pirossal jelölve. Ellenőrizd, aztán „Vonalak javítása”.
+{what} (en rouge sur la photo). ¦ {what} (punaisella kuvassa). ¦ {what} (pirossal a fotón).
+Plis réparés ({what}) ¦ Taitteet korjattu ({what}) ¦ Gyűrődések javítva ({what})
+{what} : compare avec 👁 ou ◧ ; ↶ pour revenir. ¦ {what}: vertaa 👁 tai ◧; ↶ palauttaa. ¦ {what}: hasonlítsd össze a 👁 vagy ◧ gombbal; ↶ a visszalépéshez.
+={n} lignes repérées puis comblées ¦ {n} viiva löydetty ja täytetty|{n} viivaa löydetty ja täytetty ¦ {n} vonal megtalálva és kitöltve|{n} vonal megtalálva és kitöltve
+={n} ligne repérée puis comblée ¦ {n} viiva löydetty ja täytetty|{n} viivaa löydetty ja täytetty ¦ {n} vonal megtalálva és kitöltve|{n} vonal megtalálva és kitöltve
+=pli|{n} lignes ¦ {n} viiva|{n} viivaa ¦ {n} vonal|{n} vonal
+=pli|{n} ligne ¦ {n} viiva|{n} viivaa ¦ {n} vonal|{n} vonal
+=retouche|{n} étapes ¦ {n} vaihe|{n} vaihetta ¦ {n} lépés|{n} lépés
+=retouche|{n} étape ¦ {n} vaihe|{n} vaihetta ¦ {n} lépés|{n} lépés
+=ligne repérée ¦ löydetty viiva|löydettyä viivaa ¦ talált vonal|talált vonal
+=ligne réparée ¦ korjattu viiva|korjattua viivaa ¦ javított vonal|javított vonal
+=calque de réglage ¦ säätötaso|säätötasoa ¦ korrekciós réteg|korrekciós réteg
+=portrait mis à jour ¦ päivitetty muotokuva|päivitettyä muotokuvaa ¦ frissített portré|frissített portré
+✨ Restauration en une fois ({what}) ¦ ✨ Entistys kerralla ({what}) ¦ ✨ Restaurálás egy lépésben ({what})
+Restauration faite ({what}) : chaque étape est un calque « ✨ » (Calques) que tu peux cacher ou doser ; ↶ défait tout. ¦ Entistys tehty ({what}): jokainen vaihe on ”✨”-taso (Tasot), jonka voit piilottaa tai jonka voimakkuutta voit säätää; ↶ kumoaa kaiken. ¦ Restaurálás kész ({what}): minden lépés egy „✨” réteg (Rétegek), amelyet elrejthetsz vagy gyengíthetsz; ↶ mindent visszavon.
+Portrait de la fiche « {name} » mis à jour (la photo recadrée est dans ses médias). ¦ Kortin ”{name}” muotokuva päivitetty (rajattu kuva on sen mediassa). ¦ A(z) „{name}” adatlap portréja frissítve (a körbevágott fotó a médiái között van).
+Portrait de la fiche mis à jour (la photo recadrée est dans ses médias). ¦ Kortin muotokuva päivitetty (rajattu kuva on sen mediassa). ¦ Az adatlap portréja frissítve (a körbevágott fotó a médiái között van).
+{w} × {h} px (recadrée) ¦ {w} × {h} px (rajattu) ¦ {w} × {h} px (körbevágva)
+Horizon redressé ({a}°) ¦ Horisontti suoristettu ({a}°) ¦ Horizont kiegyenesítve ({a}°)
+Redressée de {a}° : ajuste le cadre puis « ✓ Valider ». ¦ Suoristettu {a}°: säädä kehystä ja valitse sitten ”✓ Vahvista”. ¦ {a}°-kal kiegyenesítve: igazítsd a keretet, aztán „✓ Jóváhagyás”.
+Photo redressée de {a}° (et recadrée pour ne pas voir les coins). ⌗ Recadrer pour ajuster. ¦ Kuva suoristettu {a}° (ja rajattu, jotta kulmat eivät näy). ⌗ Rajaa säätääksesi. ¦ A fotó {a}°-kal kiegyenesítve (és körbevágva, hogy a sarkok ne látsszanak). ⌗ Körbevágás az igazításhoz.
+Redressée automatiquement ({a}°) ¦ Suoristettu automaattisesti ({a}°) ¦ Automatikusan kiegyenesítve ({a}°)
+Reflets retirés sur un calque à part (seulement dans la sélection : fais d’abord une sélection de la vitre pour limiter) : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Heijastukset poistettu erilliselle tasolle (vain valinnassa: valitse ensin lasi rajataksesi): säädä voimakkuus ja koko; peittävyys heikentää, 🎭 rajaa, 👁 piilottaa. Kuvaan ei kosketa. ¦ Tükröződések eltávolítva egy külön rétegen (csak a kijelölésen belül: előbb jelöld ki az üveget a korlátozáshoz): állítsd be az erősséget és a méretet; az átlátszatlanság gyengít, 🎭 korlátoz, 👁 elrejt. A fotó érintetlen marad.
+Reflets retirés sur un calque à part : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Heijastukset poistettu erilliselle tasolle: säädä voimakkuus ja koko; peittävyys heikentää, 🎭 rajaa, 👁 piilottaa. Kuvaan ei kosketa. ¦ Tükröződések eltávolítva egy külön rétegen: állítsd be az erősséget és a méretet; az átlátszatlanság gyengít, 🎭 korlátoz, 👁 elrejt. A fotó érintetlen marad.
+Colorisation dans un calque de réglage (limitée à la sélection) : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Väritys säätötasossa (rajattu valintaan): valitse värit ja voimakkuus; 🎭 rajaa, 👁 piilottaa. Kuvaan ei kosketa. ¦ Színezés egy korrekciós rétegen (a kijelölésre korlátozva): válaszd ki a színeket és az erősséget; 🎭 a korlátozáshoz, 👁 az elrejtéshez. A fotó érintetlen marad.
+Colorisation dans un calque de réglage : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Väritys säätötasossa: valitse värit ja voimakkuus; 🎭 rajaa, 👁 piilottaa. Kuvaan ei kosketa. ¦ Színezés egy korrekciós rétegen: válaszd ki a színeket és az erősséget; 🎭 a korlátozáshoz, 👁 az elrejtéshez. A fotó érintetlen marad.
+={n} taches enlevées, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ {n} tahra poistettu tasolla ”{layer}” (kuvaan ei kosketa): piilota tai heikennä sitä verrataksesi; ↶ jos se on liikaa.|{n} tahraa poistettu tasolla ”{layer}” (kuvaan ei kosketa): piilota tai heikennä sitä verrataksesi; ↶ jos se on liikaa. ¦ {n} folt eltávolítva a(z) „{layer}” rétegen (a fotó érintetlen): rejtsd el vagy gyengítsd az összehasonlításhoz; ↶ ha túl sok.|{n} folt eltávolítva a(z) „{layer}” rétegen (a fotó érintetlen): rejtsd el vagy gyengítsd az összehasonlításhoz; ↶ ha túl sok.
+={n} tache enlevée, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ {n} tahra poistettu tasolla ”{layer}” (kuvaan ei kosketa): piilota tai heikennä sitä verrataksesi; ↶ jos se on liikaa.|{n} tahraa poistettu tasolla ”{layer}” (kuvaan ei kosketa): piilota tai heikennä sitä verrataksesi; ↶ jos se on liikaa. ¦ {n} folt eltávolítva a(z) „{layer}” rétegen (a fotó érintetlen): rejtsd el vagy gyengítsd az összehasonlításhoz; ↶ ha túl sok.|{n} folt eltávolítva a(z) „{layer}” rétegen (a fotó érintetlen): rejtsd el vagy gyengítsd az összehasonlításhoz; ↶ ha túl sok.
+✨ Taches enlevées ¦ ✨ Tahrat poistettu ¦ ✨ Foltok eltávolítva
+Taches enlevées automatiquement ({n}) ¦ Tahrat poistettu automaattisesti ({n}) ¦ Foltok automatikusan eltávolítva ({n})
+Sélection remplie ({what}) ¦ Valinta täytetty ({what}) ¦ Kijelölés kitöltve ({what})
+Sélection effacée sur « {name} » ¦ Valinta pyyhitty kohteesta ”{name}” ¦ Kijelölés törölve ezen: „{name}”
+Masque d’après la sélection ({name}) ¦ Maski valinnan pohjalta ({name}) ¦ Maszk a kijelölésből ({name})
+Préréglage « {name} » retiré ¦ Esiasetus ”{name}” poistettu ¦ A(z) „{name}” előbeállítás eltávolítva
+Préréglage « {name} » ¦ Esiasetus ”{name}” ¦ „{name}” előbeállítás
+Projet « {name} » (📂 Fichier → Ouvrir un projet pour le retrouver) ¦ Projekti ”{name}” (📂 Tiedosto → Avaa projekti löytääksesi sen uudelleen) ¦ „{name}” projekt (📂 Fájl → Projekt megnyitása az újbóli megtaláláshoz)
+Versions de la photo ({n}) ¦ Kuvan versiot ({n}) ¦ A fotó változatai ({n})
+{w} × {h} cm à {dpi} ppp ¦ {w} × {h} cm, {dpi} ppi ¦ {w} × {h} cm, {dpi} dpi mellett
+≈ {size} Mo en mémoire ¦ ≈ {size} Mt muistissa ¦ ≈ {size} MB a memóriában
+Taille de l’image : {w} × {h} px ¦ Kuvan koko: {w} × {h} px ¦ Képméret: {w} × {h} px
+Zone de travail : {w} × {h} px ¦ Työalue: {w} × {h} px ¦ Vászon: {w} × {h} px
+Zone de travail de départ ¦ Alkuperäinen työalue ¦ Eredeti vászon
+Cette image est très grande ({n} millions de points) : l’enregistrement peut être long, voire échouer. ¦ Kuva on hyvin suuri ({n} miljoonaa pistettä): tallennus voi kestää kauan tai jopa epäonnistua. ¦ Ez a kép nagyon nagy ({n} millió képpont): a mentés sokáig tarthat, vagy akár meg is hiúsulhat.
+Enregistrer quand même ? ¦ Tallennetaanko silti? ¦ Mégis mented?
+Projet « {name} » rouvert ¦ Projekti ”{name}” avattu uudelleen ¦ „{name}” projekt újra megnyitva
+Projet en partie illisible : {err} ¦ Projekti osittain lukukelvoton: {err} ¦ A projekt részben olvashatatlan: {err}
+photo de départ introuvable ¦ alkuperäistä kuvaa ei löydy ¦ a kiinduló fotó nem található
+Supprimer le projet « {name} » ? ¦ Poistetaanko projekti ”{name}”? ¦ Törlöd a(z) „{name}” projektet?
+Quitter le plein écran ¦ Poistu koko näytöstä ¦ Kilépés a teljes képernyőből
+Plus de place pour enregistrer : supprime un espace de travail. ¦ Tallennustila loppui: poista jokin työtila. ¦ Nincs több hely a mentéshez: törölj egy munkaterületet.
+Ranger, montrer ou cacher les boutons et les options ¦ Järjestä, näytä tai piilota painikkeet ja asetukset ¦ A gombok és beállítások rendezése, megjelenítése vagy elrejtése
+⚙️ Boutons et options ¦ ⚙️ Painikkeet ja asetukset ¦ ⚙️ Gombok és beállítások
+Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). Gardé pour la prochaine fois. Comme les espaces de travail de Photoshop : enregistre une disposition sous un nom (« Restauration », « Montage rapide »…) et passe de l’une à l’autre. ¦ Rastita näytettävät, järjestä ↑ ↓ (tai vetämällä ⠿). Säilyy seuraavaan kertaan. Kuten Photoshopin työtilat: tallenna asettelu nimellä (”Entistys”, ”Pikamuokkaus”…) ja vaihda niiden välillä. ¦ Jelöld be, mit mutasson, rendezd ↑ ↓ gombbal (vagy a ⠿ húzásával). Legközelebbre is megmarad. Mint a Photoshop munkaterületei: ments el egy elrendezést egy néven („Restaurálás”, „Gyors szerkesztés”…), és válts köztük.
+les boutons montrés, cachés et rangés ¦ näytetyt, piilotetut ja järjestetyt painikkeet ¦ a megjelenített, elrejtett és rendezett gombok
+Boutons remis comme au départ (rouvre la fenêtre pour retrouver l’ordre de départ). ¦ Painikkeet palautettu alkuperäisiksi (avaa ikkuna uudelleen nähdäksesi alkuperäisen järjestyksen). ¦ Gombok visszaállítva alapra (nyisd meg újra az ablakot az eredeti sorrendhez).
+Boutons rangés. ¦ Painikkeet järjestetty. ¦ Gombok rendezve.
+Hautes lumières ¦ Kirkkaat sävyt ¦ Csúcsfények
+Vibrance (couleurs ternes d’abord) ¦ Eloisuus (haaleat värit ensin) ¦ Rezgés (a fakó színek először)
+Teinte (tourner les couleurs) ¦ Sävy (värien kierto) ¦ Színárnyalat (a színek elforgatása)
+Noir d’entrée ¦ Tulon musta ¦ Bemeneti fekete
+Blanc d’entrée ¦ Tulon valkoinen ¦ Bemeneti fehér
+Tons moyens (gamma ×100) ¦ Keskisävyt (gamma ×100) ¦ Középtónusok (gamma ×100)
+Noir de sortie ¦ Lähdön musta ¦ Kimeneti fekete
+Blanc de sortie ¦ Lähdön valkoinen ¦ Kimeneti fehér
+Naturelle : ciel, verdure, peau, habits (conseillé) ¦ Luonnollinen: taivas, kasvillisuus, iho, vaatteet (suositus) ¦ Természetes: ég, növényzet, bőr, ruhák (ajánlott)
+Sépia chaud ¦ Lämmin seepia ¦ Meleg szépia
+Autochrome (couleurs d’autrefois) ¦ Autokromi (menneen ajan värit) ¦ Autokróm (régi idők színei)
+Portrait (peau rosée) ¦ Muotokuva (punertava iho) ¦ Portré (rózsás bőr)
+Paysage : ciel en haut, terre en bas ¦ Maisema: taivas ylhäällä, maa alhaalla ¦ Tájkép: fent ég, lent föld
+Saturation augmentée ¦ Lisätty kylläisyys ¦ Növelt telítettség
+Saturation plus forte ¦ Voimakkaampi kylläisyys ¦ Erősebb telítettség
+Rouges plus saturés ¦ Kylläisemmät punaiset ¦ Telítettebb vörösek
+Jaune intensifié ¦ Voimistettu keltainen ¦ Erősebb sárga
+Ciel plus bleu ¦ Sinisempi taivas ¦ Kékebb ég
+Peau plus douce ¦ Pehmeämpi iho ¦ Lágyabb bőr
+Désaturer ¦ Poista kylläisyys ¦ Telítettség csökkentése
+Verts d’automne ¦ Syksyn vihreät ¦ Őszi zöldek
+Reflets en moins (vitre, verre, vernis) ¦ Vähemmän heijastuksia (lasi, lakka) ¦ Kevesebb tükröződés (üveg, lakk)
+Taille des reflets (0 = moyenne) ¦ Heijastusten koko (0 = keskikoko) ¦ A tükröződések mérete (0 = közepes)
+Poussière et rayures (automatique) ¦ Pöly ja naarmut (automaattinen) ¦ Por és karcolások (automatikus)
+Réduire le bruit ¦ Vähennä kohinaa ¦ Zajcsökkentés
+Netteté ¦ Terävyys ¦ Élesség
+Clarté (contraste local) ¦ Selkeys (paikallinen kontrasti) ¦ Tisztaság (helyi kontraszt)
+Flou de surface (garde les contours) ¦ Pintasumennus (säilyttää reunat) ¦ Felületi elmosás (megtartja a széleket)
+Décentrement (maquette, tilt-shift) ¦ Tilt-shift (pienoismalli) ¦ Tilt-shift (makett)
+Largeur de la bande ¦ Kaistan leveys ¦ A sáv szélessége
+Flou de l’objectif (bokeh) ¦ Objektiivin sumennus (bokeh) ¦ Lencseelmosás (bokeh)
+Ajouter du bruit ¦ Lisää kohinaa ¦ Zaj hozzáadása
+Poussière et rayures ¦ Pöly ja naarmut ¦ Por és karcolások
+Passe-haut (pour accentuer en Incrustation) ¦ Ylipäästö (terävöitykseen Peitto-tilassa) ¦ Felüláteresztő (élesítéshez Átfedés módban)
+Esthétiques ¦ Tyylittely ¦ Stilizálás
+Garder les couleurs (0 / 1) ¦ Säilytä värit (0 / 1) ¦ Színek megtartása (0 / 1)
+Tracé des contours ¦ Ääriviivojen jäljitys ¦ Kontúrkövetés
+Contours lumineux (néon) ¦ Hehkuvat reunat (neon) ¦ Izzó szélek (neon)
+Postérisation ¦ Posterisointi ¦ Poszterizálás
+Seuil (noir et blanc pur) ¦ Kynnys (puhdas mustavalko) ¦ Küszöb (tiszta fekete-fehér)
+Vers la droite (1) / gauche (0) ¦ Oikealle (1) / vasemmalle (0) ¦ Jobbra (1) / balra (0)
+Peinture à l’huile ¦ Öljymaalaus ¦ Olajfestmény
+Taille de la touche ¦ Siveltimenvedon koko ¦ Az ecsetvonás mérete
+Taille des taches ¦ Täplien koko ¦ A foltok mérete
+Dessin au crayon ¦ Lyijykynäpiirros ¦ Ceruzarajz
+En couleur (0 / 1) ¦ Värillisenä (0 / 1) ¦ Színesben (0 / 1)
+Taille des carreaux ¦ Laattojen koko ¦ A csempék mérete
+Demi-teinte (points d’imprimerie) ¦ Rasteri (painopisteet) ¦ Féltónus (nyomdai pontok)
+Taille des cristaux ¦ Kiteiden koko ¦ A kristályok mérete
+Éclairage (projecteur) ¦ Valaistus (kohdevalo) ¦ Megvilágítás (reflektor)
+Lumière X ¦ Valo X ¦ Fény X
+Lumière Y ¦ Valo Y ¦ Fény Y
+Lumière ambiante ¦ Ympäristön valo ¦ Környezeti fény
+Halo de lumière (flare) ¦ Linssiheijastus (flare) ¦ Lencsecsillogás (flare)
+À partir de (luminosité) ¦ Alkaen (kirkkaus) ¦ Ettől kezdve (fényerő)
+Déformation ¦ Vääristys ¦ Torzítás
+Pincement / sphérisation ¦ Nipistys / pallomaisuus ¦ Becsípés / gömbösítés
+Force (− sphère, + pincement) ¦ Voimakkuus (− pallo, + nipistys) ¦ Erősség (− gömb, + becsípés)
+Longueur d’onde ¦ Aallonpituus ¦ Hullámhossz
+Ondulation (ronds dans l’eau) ¦ Väreily (renkaat vedessä) ¦ Fodrozódás (gyűrűk a vízen)
+Écart des ronds ¦ Renkaiden väli ¦ A gyűrűk távolsága
+Coordonnées polaires ¦ Napakoordinaatit ¦ Polárkoordináták
+Rectangle → polaire (0) / l’inverse (1) ¦ Suorakulmainen → napa (0) / päinvastoin (1) ¦ Derékszögű → polár (0) / fordítva (1)
+Minimum (assombrit, épaissit le sombre) ¦ Minimi (tummentaa, paksuntaa tummaa) ¦ Minimum (sötétít, vastagítja a sötétet)
+Maximum (éclaircit, épaissit le clair) ¦ Maksimi (vaalentaa, paksuntaa vaaleaa) ¦ Maximum (világosít, vastagítja a világosat)
+Décalage (avec retour de l’autre côté) ¦ Siirtymä (jatkuu toiselta puolelta) ¦ Eltolás (a másik oldalon visszatér)
+Enlever les reflets (vitre) ¦ Poista heijastukset (lasi) ¦ Tükröződések eltávolítása (üveg)
+Reflets en moins ¦ Vähemmän heijastuksia ¦ Kevesebb tükröződés
+Vieille photo ravivée ¦ Vanha kuva elvytetty ¦ Feléledt régi fotó
+Négatif → positif ¦ Negatiivi → positiivi ¦ Negatív → pozitív
+🖌 Forme du panneau Formes ¦ 🖌 Muoto Muodot-paneelista ¦ 🖌 Alakzat az Alakzatok panelről
+Avec empattement ¦ Pääteviivallinen ¦ Talpas
+Sans empattement ¦ Pääteviivaton ¦ Talpatlan
+Manuscrite ¦ Käsinkirjoitettu ¦ Kézírásos
+Extra-fin ¦ Erittäin ohut ¦ Extravékony
+Ultra-léger ¦ Ultrakevyt ¦ Ultrakönnyű
+Léger ¦ Kevyt ¦ Könnyű
+Médium ¦ Keskivahva ¦ Közepes
+Demi-gras ¦ Puolilihava ¦ Félkövér
+Extra-gras ¦ Erittäin lihava ¦ Extrakövér
+Aligné à gauche ¦ Tasattu vasemmalle ¦ Balra igazítva
+Aligné à droite ¦ Tasattu oikealle ¦ Jobbra igazítva
+Justifié, dernière ligne à gauche ¦ Tasattu, viimeinen rivi vasemmalle ¦ Sorkizárt, utolsó sor balra
+Justifié, dernière ligne centrée ¦ Tasattu, viimeinen rivi keskelle ¦ Sorkizárt, utolsó sor középre
+Justifié, dernière ligne à droite ¦ Tasattu, viimeinen rivi oikealle ¦ Sorkizárt, utolsó sor jobbra
+Tout justifié ¦ Täysin tasattu ¦ Teljesen sorkizárt
+Ligatures et formes ¦ Ligatuurit ja muodot ¦ Ligatúrák és formák
+Unicode : Latin étendu A ¦ Unicode: laajennettu latina A ¦ Unicode: bővített latin A
+Unicode : Latin étendu B ¦ Unicode: laajennettu latina B ¦ Unicode: bővített latin B
+Unicode : hébreu ¦ Unicode: heprea ¦ Unicode: héber
+Unicode : exposants et indices ¦ Unicode: ylä- ja alaindeksit ¦ Unicode: felső és alsó indexek
+Unicode : flèches ¦ Unicode: nuolet ¦ Unicode: nyilak
+Unicode : mathématiques ¦ Unicode: matematiikka ¦ Unicode: matematika
+Unicode : formes géométriques ¦ Unicode: geometriset muodot ¦ Unicode: geometriai alakzatok
+Unicode : latin étendu D (abréviations anciennes) ¦ Unicode: laajennettu latina D (vanhat lyhenteet) ¦ Unicode: bővített latin D (régi rövidítések)
+espace fine ¦ kapea välilyönti ¦ keskeny szóköz
+tiret conditionnel (césure) ¦ tavutusviiva (pehmeä) ¦ feltételes kötőjel (elválasztás)
+mort au combat ¦ kaatunut taistelussa ¦ hősi halált halt
+et (abréviation ancienne) ¦ ja (vanha lyhenne) ¦ és (régi rövidítés)
+s long ¦ pitkä s ¦ hosszú s
+Linéaire ¦ Lineaarinen ¦ Lineáris
+Radial ¦ Säteittäinen ¦ Sugaras
+Angle (conique) ¦ Kulma (kartiomainen) ¦ Szög (kúpos)
+Réfléchi ¦ Heijastettu ¦ Tükrözött
+Losange ¦ Vinoneliö ¦ Rombusz
+Premier plan → arrière-plan ¦ Edusta → tausta ¦ Előtér → háttér
+Hachures croisées ¦ Ristiviivoitus ¦ Keresztsraffozás
+Écailles ¦ Suomut ¦ Pikkelyek
+Brin d’herbe ¦ Ruohonkorsi ¦ Fűszál
+Éclaboussure ¦ Roiske ¦ Fröccs
+Ma forme (d’après une sélection) ¦ Oma muotoni (valinnan pohjalta) ¦ Saját alakzatom (kijelölés alapján)
+Aérographe ¦ Airbrush ¦ Festékszóró
+Carré net ¦ Terävä neliö ¦ Éles négyzet
+Étoiles semées ¦ Siroteltuja tähtiä ¦ Szórt csillagok
+Éclaboussures ¦ Roiskeet ¦ Fröccsök
+Superposition (Écran) ¦ Rasteri ¦ Szórás
+⌗ Cadrer et redresser ¦ ⌗ Rajaa ja suorista ¦ ⌗ Körbevágás és kiegyenesítés
+Une photo scannée de travers, avec ses bords blancs ou abîmés : on la redresse, puis on garde ce qui compte. ¦ Vinoon skannattu kuva, jossa on valkoiset tai vaurioituneet reunat: suorista se ja säilytä olennainen. ¦ Ferdén beszkennelt fotó, fehér vagy sérült szélekkel: kiegyenesítjük, aztán megtartjuk, ami fontos.
+📐 Redresser tout seul ¦ 📐 Suorista automaattisesti ¦ 📐 Automatikus kiegyenesítés
+⌗ Recadrer ¦ ⌗ Rajaa ¦ ⌗ Körbevágás
+⧈ Photo prise de biais ¦ ⧈ Vinosti otettu kuva ¦ ⧈ Ferdén készült fotó
+🎨 Couleurs passées, photo jaunie ¦ 🎨 Haalistuneet värit, kellastunut kuva ¦ 🎨 Kifakult színek, megsárgult fotó
+Le temps jaunit, pâlit ou rosit les photos. « Enlever le jaunissement » remet chaque couleur à sa place ; « Raviver » redonne du contraste. ¦ Aika kellastuttaa, haalistaa tai punertaa kuvia. ”Poista kellastuminen” palauttaa jokaisen värin paikalleen; ”Elvytä” tuo kontrastin takaisin. ¦ Az idő megsárgítja, kifakítja vagy rózsaszínűvé teszi a fotókat. A „Sárgulás eltávolítása” minden színt a helyére tesz; az „Élénkítés” visszaadja a kontrasztot.
+🟨 Enlever le jaunissement ¦ 🟨 Poista kellastuminen ¦ 🟨 Sárgulás eltávolítása
+✨ Raviver une vieille photo ¦ ✨ Elvytä vanha kuva ¦ ✨ Régi fotó élénkítése
+Réglage automatique ¦ Automaattinen säätö ¦ Automatikus beállítás
+🧹 Poussières et petites taches ¦ 🧹 Pöly ja pienet tahrat ¦ 🧹 Por és apró foltok
+Les points blancs ou noirs, les piqûres : l’app les cherche et les enlève une par une (avec le correcteur). Pour ne traiter qu’une partie, sélectionne-la d’abord. Ce qui reste : le correcteur 🩹 à la main. ¦ Valkoiset tai mustat pisteet, ruostetäplät: sovellus etsii ne ja poistaa ne yksi kerrallaan (korjaustyökalulla). Jos haluat käsitellä vain osan, valitse se ensin. Jäljelle jäävät: 🩹 korjaustyökalu käsin. ¦ Fehér vagy fekete pöttyök, rozsdafoltok: az alkalmazás megkeresi és egyenként eltávolítja őket (a javítóeszközzel). Ha csak egy részt kezelnél, előbb jelöld ki. Ami marad: 🩹 javítóeszköz kézzel.
+Sensibilité ¦ Herkkyys ¦ Érzékenység
+Taille maximale d’une tache ¦ Tahran enimmäiskoko ¦ Egy folt legnagyobb mérete
+🔍 Repérer et enlever les taches ¦ 🔍 Etsi ja poista tahrat ¦ 🔍 Foltok felismerése és eltávolítása
+🩹 Correcteur à la main ¦ 🩹 Korjaustyökalu käsin ¦ 🩹 Javítóeszköz kézzel
+Filtre poussière et rayures ¦ Pöly ja naarmut -suodin ¦ Por és karcolások szűrő
+🩹 Déchirures, plis, rayures ¦ 🩹 Repeämät, taitteet, naarmut ¦ 🩹 Szakadások, gyűrődések, karcolások
+« Repérer les plis » trouve les lignes fines claires ou sombres et propose de les combler. À la main : le pinceau 🪡 Réparer — peins sur le pli, il est refait d’après ce qui l’entoure. Pour un morceau manquant (coin arraché), le tampon recopie une partie voisine. ¦ ”Etsi taitteet” löytää ohuet vaaleat tai tummat viivat ja ehdottaa niiden täyttämistä. Käsin: sivellin 🪡 Korjaa — maalaa taitteen päälle, ja se rakennetaan uudelleen ympäristön perusteella. Puuttuvaan palaan (revennyt kulma) leimasin kopioi läheisen kohdan. ¦ A „Gyűrődések felismerése” megtalálja a vékony világos vagy sötét vonalakat, és felajánlja kitöltésüket. Kézzel: a 🪡 Javítás ecset — fess a gyűrődésre, és a környezete alapján újraépül. Hiányzó darabhoz (leszakadt sarok) a klónbélyegző lemásol egy közeli részt.
+🔍 Repérer les plis et rayures ¦ 🔍 Etsi taitteet ja naarmut ¦ 🔍 Gyűrődések és karcolások felismerése
+🪡 Réparer au pinceau ¦ 🪡 Korjaa siveltimellä ¦ 🪡 Javítás ecsettel
+➰ Entourer une zone… ¦ ➰ Rajaa alue… ¦ ➰ Terület körberajzolása…
+🌫️ Grain et bruit ¦ 🌫️ Rakeisuus ja kohina ¦ 🌫️ Szemcsésség és zaj
+Une photo granuleuse ou un tirage abîmé : on adoucit sans perdre les contours. ¦ Rakeinen kuva tai vaurioitunut vedos: pehmennetään menettämättä reunoja. ¦ Szemcsés fotó vagy sérült nagyítás: lágyítjuk, a szélek elvesztése nélkül.
+🙂 Netteté des visages ¦ 🙂 Terävämmät kasvot ¦ 🙂 Élesebb arcok
+Entoure un visage avec l’ellipse ◯, puis « Visage plus net » : il est débruité et accentué, seulement là (calque à part, que tu peux doser). ¦ Rajaa kasvot ellipsillä ◯ ja valitse sitten ”Terävämmät kasvot”: kohina poistetaan ja kuvaa terävöitetään vain siinä kohdassa (erillinen taso, jonka voimakkuutta voit säätää). ¦ Rajzold körbe az arcot az ◯ ellipszissel, aztán „Élesebb arc”: zajmentesítve és élesítve, csak ott (külön rétegen, amelyet gyengíthetsz).
+◯ Entourer le visage ¦ ◯ Rajaa kasvot ¦ ◯ Az arc körberajzolása
+✨ Visage plus net ¦ ✨ Terävämmät kasvot ¦ ✨ Élesebb arc
+Visage plus net ¦ Terävämmät kasvot ¦ Élesebb arc
+🎯 Sélectionner le sujet ¦ 🎯 Valitse kohde ¦ 🎯 Téma kijelölése
+🌈 Coloriser une photo en noir et blanc ¦ 🌈 Väritä mustavalkoinen kuva ¦ 🌈 Fekete-fehér fotó színezése
+Tout seul (un dégradé de couleurs d’époque), ou à la main : choisis une couleur ci-dessous et peins doucement, la lumière de la photo est gardée. ¦ Automaattisesti (aikakauden värien liukuväri) tai käsin: valitse väri alta ja maalaa kevyesti; kuvan valo säilyy. ¦ Automatikusan (korabeli színek átmenete), vagy kézzel: válassz egy színt lent, és fess finoman; a fotó fényei megmaradnak.
+🎨 Coloriser tout seul ¦ 🎨 Väritä automaattisesti ¦ 🎨 Automatikus színezés
+🖌 Coloriser au pinceau ¦ 🖌 Väritä siveltimellä ¦ 🖌 Színezés ecsettel
+✅ Comparer et enregistrer ¦ ✅ Vertaa ja tallenna ¦ ✅ Összehasonlítás és mentés
+Garde appuyé « 👁 Avant / après » (sous la photo) pour comparer, ou « ◧ Rideau » pour glisser de l’un à l’autre. La photo restaurée devient une nouvelle version : l’original reste. ¦ Pidä painettuna ”👁 Ennen / jälkeen” (kuvan alla) vertaillaksesi, tai ”◧ Verho” liukuaksesi niiden välillä. Entistetystä kuvasta tulee uusi versio: alkuperäinen säilyy. ¦ Tartsd lenyomva a „👁 Előtte / utána” gombot (a fotó alatt) az összehasonlításhoz, vagy a „◧ Függöny” gombbal csúsztass egyikről a másikra. A restaurált fotó új változat lesz: az eredeti megmarad.
+💾 Enregistrer et afficher ¦ 💾 Tallenna ja näytä ¦ 💾 Mentés és megjelenítés
+Garder le travail pour plus tard ¦ Säilytä työ myöhempää varten ¦ A munka megtartása későbbre
+Impossible d’ouvrir cette image. ¦ Tätä kuvaa ei voi avata. ¦ Ezt a képet nem lehet megnyitni.
+Chaque étape est facultative et se défait (↶). Rien n’abîme l’original : la photo restaurée devient une nouvelle version. ¦ Jokainen vaihe on valinnainen ja kumottavissa (↶). Mikään ei vahingoita alkuperäistä: entistetystä kuvasta tulee uusi versio. ¦ Minden lépés választható és visszavonható (↶). Semmi sem rontja az eredetit: a restaurált fotó új változat lesz.
+Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup : tu vois chaque étape et tu choisis ¦ Kohinanpoisto, pöly, taitteet, kontrasti, terävyys ja väritys kerralla: näet jokaisen vaiheen ja valitset ¦ Zajcsökkentés, por, gyűrődések, kontraszt, élesség és színezés egyszerre: minden lépést látsz, és te döntesz
+✨ Restaurer en une fois ¦ ✨ Entistä kerralla ¦ ✨ Restaurálás egy lépésben
+ou étape par étape : ¦ tai vaihe vaiheelta: ¦ vagy lépésről lépésre:
+Réparer ¦ Korjaa ¦ Javítás
+🪡 Réparer ¦ 🪡 Korjaa ¦ 🪡 Javítás
+Déplacer la vue ¦ Siirrä näkymää ¦ A nézet mozgatása
+Réparer un pli ou une déchirure (R) : peins dessus, c’est refait d’après les alentours ¦ Korjaa taite tai repeämä (R): maalaa sen päälle, ja se rakennetaan uudelleen ympäristön perusteella ¦ Gyűrődés vagy szakadás javítása (R): fess rá, és a környezete alapján újraépül
+Gomme (E) : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu) ¦ Pyyhekumi (E): pyyhkii valitun tason; kuvassa se piilottaa maskilla (mitään ei menetetä) ¦ Radír (E): törli a kiválasztott réteget; a fotón maszkkal elrejti (semmi sem vész el)
+Dégradé (G) : glisse pour le tracer ; sur un masque, il fond le calque ¦ Liukuväri (G): piirrä vetämällä; maskissa se häivyttää tason ¦ Színátmenet (G): húzással rajzold meg; maszkon elhalványítja a réteget
+Déplacer un élément d’un calque (V) ¦ Siirrä tason kohdetta (V) ¦ Egy réteg elemének mozgatása (V)
+Déplacer un élément d’un calque ¦ Siirrä tason kohdetta ¦ Egy réteg elemének mozgatása
+Sélection rectangle (M) ¦ Suorakulmiovalinta (M) ¦ Téglalap-kijelölés (M)
+Sélection rectangle ¦ Suorakulmiovalinta ¦ Téglalap-kijelölés
+Sélection ellipse (⇧M) ¦ Ellipsivalinta (⇧M) ¦ Ellipszis-kijelölés (⇧M)
+Sélection ellipse ¦ Ellipsivalinta ¦ Ellipszis-kijelölés
+Lasso : entourer à main levée (L) ¦ Lasso: rajaa vapaalla kädellä (L) ¦ Lasszó: körberajzolás szabadkézzel (L)
+Lasso : entourer à main levée ¦ Lasso: rajaa vapaalla kädellä ¦ Lasszó: körberajzolás szabadkézzel
+Plume : sélection point par point (P) — double-clic ou Entrée pour fermer ¦ Kynä: valinta piste pisteeltä (P) — kaksoisnapsautus tai Enter sulkee ¦ Toll: kijelölés pontról pontra (P) — dupla kattintás vagy Enter a lezáráshoz
+Plume : sélection point par point — double-clic ou Entrée pour fermer ¦ Kynä: valinta piste pisteeltä — kaksoisnapsautus tai Enter sulkee ¦ Toll: kijelölés pontról pontra — dupla kattintás vagy Enter a lezáráshoz
+Sélection automatique (baguette magique) (W) ¦ Automaattinen valinta (taikasauva) (W) ¦ Automatikus kijelölés (varázspálca) (W)
+Sélection automatique (baguette magique) ¦ Automaattinen valinta (taikasauva) ¦ Automatikus kijelölés (varázspálca)
+Recadrer et redresser (C) ¦ Rajaa ja suorista (C) ¦ Körbevágás és kiegyenesítés (C)
+Recadrer et redresser ¦ Rajaa ja suorista ¦ Körbevágás és kiegyenesítés
+Correcteur de taches (J) ¦ Tahrankorjaus (J) ¦ Foltjavító (J)
+Correcteur de taches ¦ Tahrankorjaus ¦ Foltjavító
+🩹 Correcteur de taches ¦ 🩹 Tahrankorjaus ¦ 🩹 Foltjavító
+Réparer un pli ou une déchirure : peins dessus, c’est refait d’après les alentours ¦ Korjaa taite tai repeämä: maalaa sen päälle, ja se rakennetaan uudelleen ympäristön perusteella ¦ Gyűrődés vagy szakadás javítása: fess rá, és a környezete alapján újraépül
+Tampon : un endroit, ou une zone sélectionnée (S) ¦ Leimasin: yksi kohta tai valittu alue (S) ¦ Klónbélyegző: egy pont vagy egy kijelölt terület (S)
+Tampon : un endroit, ou une zone sélectionnée ¦ Leimasin: yksi kohta tai valittu alue ¦ Klónbélyegző: egy pont vagy egy kijelölt terület
+Pinceau (B) ¦ Sivellin (B) ¦ Ecset (B)
+Gomme : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu) ¦ Pyyhekumi: pyyhkii valitun tason; kuvassa se piilottaa maskilla (mitään ei menetetä) ¦ Radír: törli a kiválasztott réteget; a fotón maszkkal elrejti (semmi sem vész el)
+Formes : rectangle, ellipse, ligne, flèche (U) ¦ Muodot: suorakulmio, ellipsi, viiva, nuoli (U) ¦ Alakzatok: téglalap, ellipszis, vonal, nyíl (U)
+Formes : rectangle, ellipse, ligne, flèche ¦ Muodot: suorakulmio, ellipsi, viiva, nuoli ¦ Alakzatok: téglalap, ellipszis, vonal, nyíl
+Dégradé : glisse pour le tracer ; sur un masque, il fond le calque ¦ Liukuväri: piirrä vetämällä; maskissa se häivyttää tason ¦ Színátmenet: húzással rajzold meg; maszkon elhalványítja a réteget
+Texte (T) ¦ Teksti (T) ¦ Szöveg (T)
+Main, ou barre d’espace (H) ¦ Käsi tai välilyöntinäppäin (H) ¦ Kéz vagy szóköz (H)
+Main, ou barre d’espace ¦ Käsi tai välilyöntinäppäin ¦ Kéz vagy szóköz
+Zoom (Z) — ⌥ pour reculer ¦ Zoomaus (Z) — ⌥ loitontaa ¦ Nagyítás (Z) — ⌥ a kicsinyítéshez
+Zoom — ⌥ pour reculer ¦ Zoomaus — ⌥ loitontaa ¦ Nagyítás — ⌥ a kicsinyítéshez
+💾 Enregistrer le projet (pour continuer plus tard) ¦ 💾 Tallenna projekti (jatkaaksesi myöhemmin) ¦ 💾 Projekt mentése (későbbi folytatáshoz)
+📂 Ouvrir un projet… ¦ 📂 Avaa projekti… ¦ 📂 Projekt megnyitása…
+Enregistrer et afficher cette version ¦ Tallenna ja näytä tämä versio ¦ E változat mentése és megjelenítése
+Enregistrer sans l’afficher ¦ Tallenna näyttämättä ¦ Mentés megjelenítés nélkül
+Copie séparée ¦ Erillinen kopio ¦ Külön másolat
+ℹ️ Informations… ¦ ℹ️ Tiedot… ¦ ℹ️ Információk…
+⤓ Exporter l’image (PNG, JPG, imprimer)… ¦ ⤓ Vie kuva (PNG, JPG, tulosta)… ¦ ⤓ Kép exportálása (PNG, JPG, nyomtatás)…
+⤓ Exporter l’avant / après… ¦ ⤓ Vie ennen / jälkeen… ¦ ⤓ Előtte / utána exportálása…
+🗂 Exporter en PSD (avec les calques)… ¦ 🗂 Vie PSD-muodossa (tasoineen)… ¦ 🗂 Exportálás PSD-be (rétegekkel)…
+🗂 Importer les calques d’un PSD… ¦ 🗂 Tuo PSD-tiedoston tasot… ¦ 🗂 PSD-fájl rétegeinek importálása…
+⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos… ¦ ⚡ Toiminnot: tallennetut säädöt toistettaviksi useisiin kuviin… ¦ ⚡ Műveletek: mentett beállítások több fotón való ismétléshez…
+⚡ Passer à la retouche rapide ¦ ⚡ Siirry pikakorjaukseen ¦ ⚡ Váltás gyors retusálásra
+🕘 Historique ¦ 🕘 Historia ¦ 🕘 Előzmények
+🎚 Réglages, niveaux et courbe ¦ 🎚 Säädöt, tasot ja käyrä ¦ 🎚 Korrekciók, szintek és görbe
+🎨 Teinte/Saturation… ¦ 🎨 Sävy/kylläisyys… ¦ 🎨 Színárnyalat/telítettség…
+⌗ Recadrer et redresser ¦ ⌗ Rajaa ja suorista ¦ ⌗ Körbevágás és kiegyenesítés
+📐 Redresser automatiquement ¦ 📐 Suorista automaattisesti ¦ 📐 Automatikus kiegyenesítés
+Annuler le recadrage ¦ Kumoa rajaus ¦ Körbevágás visszavonása
+⧈ Redresser la perspective (photo prise de biais)… ¦ ⧈ Korjaa perspektiivi (vinosti otettu kuva)… ¦ ⧈ Perspektíva javítása (ferdén készült fotó)…
+Enlever la perspective ¦ Poista perspektiivi ¦ Perspektíva eltávolítása
+📏 Taille de l’image… ¦ 📏 Kuvan koko… ¦ 📏 Képméret…
+⬚ Taille de la zone de travail… ¦ ⬚ Työalueen koko… ¦ ⬚ Vászonméret…
+🔄 Rotation de l’image ¦ 🔄 Kuvan kierto ¦ 🔄 Kép forgatása
+↻ 90° horaire ¦ ↻ 90° myötäpäivään ¦ ↻ 90° az óra járásával megegyezően
+↺ 90° antihoraire ¦ ↺ 90° vastapäivään ¦ ↺ 90° az óra járásával ellentétesen
+Angle… ¦ Kulma… ¦ Szög…
+📐 Redresser l’horizon (tracer une ligne)… ¦ 📐 Suorista horisontti (piirrä viiva)… ¦ 📐 Horizont kiegyenesítése (húzz egy vonalat)…
+⇆ Symétrie horizontale de l’image ¦ ⇆ Peilaa kuva vaakasuunnassa ¦ ⇆ Kép vízszintes tükrözése
+⇅ Symétrie verticale de l’image ¦ ⇅ Peilaa kuva pystysuunnassa ¦ ⇅ Kép függőleges tükrözése
+✨ Restaurer en une fois… ¦ ✨ Entistä kerralla… ¦ ✨ Restaurálás egy lépésben…
+🧭 Restaurer une vieille photo (pas à pas) ¦ 🧭 Entistä vanha kuva (vaihe vaiheelta) ¦ 🧭 Régi fotó restaurálása (lépésről lépésre)
+🔍 Repérer les plis et rayures… ¦ 🔍 Etsi taitteet ja naarmut… ¦ 🔍 Gyűrődések és karcolások felismerése…
+🪡 Réparer au pinceau (plis, déchirures) ¦ 🪡 Korjaa siveltimellä (taitteet, repeämät) ¦ 🪡 Javítás ecsettel (gyűrődések, szakadások)
+🧹 Poussière et rayures (Filtres) ¦ 🧹 Pöly ja naarmut (Suotimet) ¦ 🧹 Por és karcolások (Szűrők)
+🪟 Enlever les reflets (vitre) : calque à part ¦ 🪟 Poista heijastukset (lasi): erillinen taso ¦ 🪟 Tükröződések eltávolítása (üveg): külön réteg
+🎨 Coloriser : calque de réglage (dégradé) ¦ 🎨 Väritä: säätötaso (liukuväri) ¦ 🎨 Színezés: korrekciós réteg (színátmenet)
+🖌 Coloriser au pinceau : calque « Couleur » ¦ 🖌 Väritä siveltimellä: ”Väri”-taso ¦ 🖌 Színezés ecsettel: „Szín” réteg
+🪪 Recadrer en photo d’identité… ¦ 🪪 Rajaa passikuvaksi… ¦ 🪪 Körbevágás igazolványképnek…
+🪪 Portraits de plusieurs fiches… ¦ 🪪 Useiden korttien muotokuvat… ¦ 🪪 Több adatlap portréi…
+💧 Fluidité (déformer au pinceau)… ¦ 💧 Nesteytys (vääristä siveltimellä)… ¦ 💧 Folyósítás (torzítás ecsettel)…
+🪄 Gomme magique (fond uni → transparent)… ¦ 🪄 Taikapyyhekumi (yksivärinen tausta → läpinäkyvä)… ¦ 🪄 Varázsradír (egyszínű háttér → átlátszó)…
+✨ Affiner le bord du masque (cheveux, contours)… ¦ ✨ Hienosäädä maskin reunaa (hiukset, ääriviivat)… ¦ ✨ A maszk szélének finomítása (haj, körvonalak)…
+☁️ Remplacer le ciel… ¦ ☁️ Vaihda taivas… ¦ ☁️ Égbolt cseréje…
+✂️ Détourer une personne (fond transparent, flou, uni)… ¦ ✂️ Irrota henkilö taustasta (läpinäkyvä, sumea tai yksivärinen tausta)… ¦ ✂️ Személy kivágása (átlátszó, elmosott vagy egyszínű háttér)…
+🔍 Agrandir ×2 / ×4… ¦ 🔍 Suurenna ×2 / ×4… ¦ 🔍 Nagyítás ×2 / ×4…
+🧩 Panorama : assembler avec d’autres photos… ¦ 🧩 Panoraama: yhdistä muihin kuviin… ¦ 🧩 Panoráma: összeillesztés más fotókkal…
+Calque ¦ Taso ¦ Réteg
+＋ Nouveau calque ¦ ＋ Uusi taso ¦ ＋ Új réteg
+📁 Nouveau groupe ¦ 📁 Uusi ryhmä ¦ 📁 Új csoport
+Grouper le calque choisi ¦ Ryhmitä valittu taso ¦ A kiválasztott réteg csoportosítása
+🎚 Nouveau calque de réglage ¦ 🎚 Uusi säätötaso ¦ 🎚 Új korrekciós réteg
+🎨 Nouveau réglage Teinte/Saturation ¦ 🎨 Uusi sävy/kylläisyys-säätö ¦ 🎨 Új színárnyalat/telítettség korrekció
+Nouveau réglage Teinte/Saturation ¦ Uusi sävy/kylläisyys-säätö ¦ Új színárnyalat/telítettség korrekció
+🖼️ Placer une image… ¦ 🖼️ Sijoita kuva… ¦ 🖼️ Kép elhelyezése…
+▦ Nouveau calque de dégradé… ¦ ▦ Uusi liukuväritaso… ¦ ▦ Új színátmenetes réteg…
+▩ Nouveau calque de motif… ¦ ▩ Uusi kuviotaso… ¦ ▩ Új mintaréteg…
+▩ Créer un motif… ¦ ▩ Luo kuvio… ¦ ▩ Minta létrehozása…
+▩ Créer un motif ¦ ▩ Luo kuvio ¦ ▩ Minta létrehozása
+＋ Créer un motif… ¦ ＋ Luo kuvio… ¦ ＋ Minta létrehozása…
+Copier la sélection sur un calque ¦ Kopioi valinta tasolle ¦ Kijelölés másolása rétegre
+🎭 Ajouter un masque au calque choisi ¦ 🎭 Lisää maski valittuun tasoon ¦ 🎭 Maszk hozzáadása a kiválasztott réteghez
+🎭 Masque qui cache tout (⌥ + clic sur 🎭) ¦ 🎭 Kaiken piilottava maski (⌥ + napsautus 🎭) ¦ 🎭 Mindent elrejtő maszk (⌥ + kattintás a 🎭-ra)
+Masque d’après la sélection ¦ Maski valinnan pohjalta ¦ Maszk a kijelölésből
+Masque qui cache la sélection ¦ Valinnan piilottava maski ¦ A kijelölést elrejtő maszk
+Inverser le masque ¦ Käännä maski ¦ Maszk megfordítása
+Retirer le masque ¦ Poista maski ¦ Maszk eltávolítása
+inverser le masque ¦ käännä maski ¦ maszk megfordítása
+retirer le masque ¦ poista maski ¦ maszk eltávolítása
+🗂 Calques ¦ 🗂 Tasot ¦ 🗂 Rétegek
+🎯 Sélectionner le sujet (automatique) ¦ 🎯 Valitse kohde (automaattinen) ¦ 🎯 Téma kijelölése (automatikus)
+✂️ Détourer une personne… ¦ ✂️ Irrota henkilö taustasta… ¦ ✂️ Személy kivágása…
+Désélectionner ¦ Poista valinta ¦ Kijelölés megszüntetése
+Inverser ¦ Käännä ¦ Megfordítás
+Contour progressif… ¦ Pehmennä reunaa… ¦ Lágy szél…
+Contour progressif ¦ Pehmennä reunaa ¦ Lágy szél
+Agrandir… ¦ Laajenna… ¦ Kiterjesztés…
+Réduire… ¦ Supista… ¦ Szűkítés…
+Remplir avec la couleur ¦ Täytä värillä ¦ Kitöltés a színnel
+Effacer (transparent) ¦ Pyyhi (läpinäkyvä) ¦ Törlés (átlátszó)
+Recadrer sur la sélection ¦ Rajaa valintaan ¦ Körbevágás a kijelölésre
+Filtre ¦ Suodin ¦ Szűrő
+↻ Refaire le dernier filtre ¦ ↻ Toista viimeisin suodin ¦ ↻ Az utolsó szűrő megismétlése
+✨ Filtres rapides et filtres du calque (panneau) ¦ ✨ Pikasuotimet ja tason suotimet (paneeli) ¦ ✨ Gyorsszűrők és rétegszűrők (panel)
+Enlever les filtres rapides ¦ Poista pikasuotimet ¦ Gyorsszűrők eltávolítása
+Replier / ouvrir le panneau de droite ¦ Pienennä / avaa oikea paneeli ¦ A jobb oldali panel összecsukása / kinyitása
+◧ Avant / après en rideau ¦ ◧ Ennen / jälkeen verhona ¦ ◧ Előtte / utána függönyként
+Toute l’image ¦ Koko kuva ¦ A teljes kép
+Nom du projet de retouche ¦ Korjausprojektin nimi ¦ A retusálási projekt neve
+Le nom du projet de retouche (tape pour le changer) ¦ Korjausprojektin nimi (kirjoita muuttaaksesi) ¦ A retusálási projekt neve (gépeléssel módosítható)
+Passer à la retouche rapide (celle de la version 0.5.0) : réglages, courbe, taches, tampon — moins de boutons ¦ Siirry pikakorjaukseen (versiosta 0.5.0): säädöt, käyrä, tahrat, leimasin — vähemmän painikkeita ¦ Váltás gyors retusálásra (a 0.5.0-s verzióból): korrekciók, görbe, foltok, klónbélyegző — kevesebb gomb
+⚡ Rapide ¦ ⚡ Pika ¦ ⚡ Gyors
+Exporter : l’image retouchée (PNG, JPG, imprimer) ou l’avant / après ¦ Vie: korjattu kuva (PNG, JPG, tulosta) tai ennen / jälkeen ¦ Exportálás: a retusált kép (PNG, JPG, nyomtatás) vagy az előtte / utána
+Enregistrer le projet : tout le travail (calques, masques, réglages…) pour le rouvrir et continuer ¦ Tallenna projekti: kaikki työ (tasot, maskit, säädöt…) avattavaksi uudelleen ja jatkettavaksi ¦ Projekt mentése: a teljes munka (rétegek, maszkok, korrekciók…), hogy újra megnyithasd és folytathasd
+🖼 L’image retouchée (PNG, JPG, imprimer)… ¦ 🖼 Korjattu kuva (PNG, JPG, tulosta)… ¦ 🖼 A retusált kép (PNG, JPG, nyomtatás)…
+◧ Avant / après (côte à côte ou rideau)… ¦ ◧ Ennen / jälkeen (rinnakkain tai verhona)… ¦ ◧ Előtte / utána (egymás mellett vagy függönyként)…
+Dureté ¦ Kovuus ¦ Keménység
+Sorte de pinceau ¦ Siveltimen tyyppi ¦ Ecsettípus
+Couleurs rapides ¦ Pikavärit ¦ Gyorsszínek
+contour ¦ ääriviiva ¦ körvonal
+Contour du texte ¦ Tekstin ääriviiva ¦ A szöveg körvonala
+Couleur du contour ¦ Ääriviivan väri ¦ A körvonal színe
+Épaisseur du contour ¦ Ääriviivan paksuus ¦ A körvonal vastagsága
+épaisseur ¦ paksuus ¦ vastagság
+ombre ¦ varjo ¦ árnyék
+Ombre du texte ¦ Tekstin varjo ¦ A szöveg árnyéka
+Couleur de l’ombre ¦ Varjon väri ¦ Az árnyék színe
+Tampon : endroit à recopier, aligné ¦ Leimasin: kopioitava kohta, kohdistettu ¦ Klónbélyegző: a másolandó pont, igazítva
+🎯 Choisir l’endroit à recopier ¦ 🎯 Valitse kopioitava kohta ¦ 🎯 A másolandó pont kiválasztása
+Coché : l’endroit recopié suit le pinceau d’un trait à l’autre. Décoché : chaque trait repart du même endroit. ¦ Rastitettuna: kopioitava kohta seuraa sivellintä vedosta toiseen. Ilman rastia: jokainen veto alkaa samasta kohdasta. ¦ Bejelölve: a másolt pont vonásról vonásra követi az ecsetet. Bejelölés nélkül: minden vonás ugyanarról a pontról indul.
+aligné ¦ kohdistettu ¦ igazítva
+Réparer : grain, repérer les plis ¦ Korjaus: rakeisuus, taitteiden etsintä ¦ Javítás: szemcsésség, gyűrődések felismerése
+Coché : un peu du grain de la photo autour est remis dans la zone réparée, pour qu’elle ne paraisse pas trop lisse. ¦ Rastitettuna: korjattuun kohtaan palautetaan hieman ympäröivää rakeisuutta, jotta se ei näytä liian sileältä. ¦ Bejelölve: a környező szemcsézet egy része visszakerül a javított területre, hogy ne tűnjön túl simának.
+garder le grain ¦ säilytä rakeisuus ¦ szemcsézet megtartása
+Trouver tout seul les lignes fines (plis, rayures) et proposer de les combler ¦ Etsi ohuet viivat (taitteet, naarmut) automaattisesti ja ehdota niiden täyttämistä ¦ A vékony vonalak (gyűrődések, karcolások) automatikus felismerése és kitöltésük felajánlása
+🔍 Repérer les plis ¦ 🔍 Etsi taitteet ¦ 🔍 Gyűrődések felismerése
+Texte gras ¦ Lihavoitu teksti ¦ Félkövér szöveg
+Texte italique ¦ Kursivoitu teksti ¦ Dőlt szöveg
+Forme (rectangle, ellipse, flèche…) ¦ Muoto (suorakulmio, ellipsi, nuoli…) ¦ Alakzat (téglalap, ellipszis, nyíl…)
+Rectangle arrondi ¦ Pyöristetty suorakulmio ¦ Lekerekített téglalap
+Forme remplie ¦ Täytetty muoto ¦ Kitöltött alakzat
+remplie ¦ täytetty ¦ kitöltött
+Couleur de fond des formes ¦ Muotojen täyttöväri ¦ Az alakzatok kitöltőszíne
+Baguette : tolérance ¦ Taikasauva: toleranssi ¦ Varázspálca: tűrés
+Jusqu’où une couleur peut s’écarter de celle cliquée pour être prise : petit = la même teinte seulement, grand = des teintes voisines aussi. ¦ Kuinka paljon väri saa poiketa napsautetusta, jotta se valitaan: pieni = vain sama sävy, suuri = myös lähisävyt. ¦ Mennyire térhet el egy szín a kattintottól, hogy még bekerüljön: kicsi = csak ugyanaz az árnyalat, nagy = a szomszédos árnyalatok is.
+Tolérance ¦ Toleranssi ¦ Tűrés
+Baguette : contiguë ¦ Taikasauva: yhtenäinen ¦ Varázspálca: összefüggő
+contiguë ¦ yhtenäinen ¦ összefüggő
+Sélectionner le sujet ¦ Valitse kohde ¦ Téma kijelölése
+Le fond est reconnu sur les bords de la photo ; la tolérance règle jusqu’où il va ¦ Tausta tunnistetaan kuvan reunoista; toleranssi määrää, kuinka pitkälle se ulottuu ¦ A háttér a fotó széleiről ismerhető fel; a tűrés szabja meg, meddig terjed
+🎯 Sujet ¦ 🎯 Kohde ¦ 🎯 Téma
+Actions de la sélection ¦ Valinnan toiminnot ¦ A kijelölés műveletei
+⇧ ajouter · ⌥ enlever ¦ ⇧ lisää · ⌥ poista ¦ ⇧ hozzáadás · ⌥ kivonás
+→ Calque ¦ → Taso ¦ → Réteg
+Remplir ¦ Täytä ¦ Kitöltés
+Effacer ¦ Pyyhi ¦ Törlés
+Masque ¦ Maski ¦ Maszk
+Recadrer ¦ Rajaa ¦ Körbevágás
+Recadrage : proportions, redresser ¦ Rajaus: mittasuhteet, suoristus ¦ Körbevágás: arányok, kiegyenesítés
+Proportions ¦ Mittasuhteet ¦ Arányok
+Libres ¦ Vapaat ¦ Szabad
+Celles de la photo ¦ Kuvan omat ¦ A fotóé
+Carré 1:1 ¦ Neliö 1:1 ¦ Négyzet 1:1
+A4 portrait ¦ A4 pysty ¦ A4 álló
+Redresser ¦ Suorista ¦ Kiegyenesítés
+Trouve l’angle des grandes lignes (horizon, murs, cadres) ¦ Etsii päälinjojen kulman (horisontti, seinät, kehykset) ¦ Megkeresi a fő vonalak szögét (horizont, falak, keretek)
+📐 Auto ¦ 📐 Auto ¦ 📐 Auto
+✓ Valider ¦ ✓ Vahvista ¦ ✓ Jóváhagyás
+Perspective ¦ Perspektiivi ¦ Perspektíva
+Place les 4 coins sur les coins de ce qui doit devenir rectangulaire (la photo, le document, la façade). ¦ Aseta 4 kulmaa sen kohteen kulmiin, josta pitää tulla suorakulmainen (kuva, asiakirja, julkisivu). ¦ Tedd a 4 sarkot annak a sarkaira, aminek téglalap alakúvá kell válnia (a fotó, a dokumentum, a homlokzat).
+Coins aux bords ¦ Kulmat reunoihin ¦ Sarkok a szélekre
+Dégradé : couleurs, forme, options ¦ Liukuväri: värit, muoto, asetukset ¦ Színátmenet: színek, alak, beállítások
+Modifier le dégradé : couleurs, transparence, préréglages ¦ Muokkaa liukuväriä: värit, läpinäkyvyys, esiasetukset ¦ A színátmenet szerkesztése: színek, átlátszóság, előbeállítások
+Forme du dégradé ¦ Liukuvärin muoto ¦ A színátmenet alakja
+Inverser le dégradé ¦ Käännä liukuväri ¦ A színátmenet megfordítása
+inverser ¦ käännä ¦ megfordítás
+Tramage ¦ Rasterointi ¦ Árnyalás (dither)
+tramage ¦ rasterointi ¦ árnyalás
+Un très léger grain qui évite les « marches » visibles dans les dégradés doux. ¦ Hyvin kevyt rakeisuus, joka estää näkyvät ”portaat” pehmeissä liukuväreissä. ¦ Nagyon finom szemcsézet, amely megakadályozza a látható „lépcsőket” a lágy színátmenetekben.
+Masque : cacher / montrer ¦ Maski: piilota / paljasta ¦ Maszk: elrejtés / megmutatás
+⬛ cacher ¦ ⬛ piilota ¦ ⬛ elrejtés
+⬜ montrer ¦ ⬜ paljasta ¦ ⬜ megmutatás
+Aide de l’outil ¦ Työkalun ohje ¦ Az eszköz súgója
+Couleurs (premier plan et arrière-plan) ¦ Värit (edusta ja tausta) ¦ Színek (előtér és háttér)
+Noir et blanc (D) ¦ Musta ja valkoinen (D) ¦ Fekete és fehér (D)
+Couleurs par défaut : noir et blanc ¦ Oletusvärit: musta ja valkoinen ¦ Alapszínek: fekete és fehér
+Intervertir les deux couleurs (X) ¦ Vaihda värit keskenään (X) ¦ A két szín felcserélése (X)
+Intervertir les couleurs ¦ Vaihda värit keskenään ¦ Színek felcserélése
+Couleur d’arrière-plan (fond des formes) : clic pour la changer ¦ Taustaväri (muotojen täyttö): napsauta vaihtaaksesi ¦ Háttérszín (az alakzatok kitöltése): kattints a módosításhoz
+Couleur de premier plan (pinceau, texte, formes) : clic pour la changer ¦ Edustaväri (sivellin, teksti, muodot): napsauta vaihtaaksesi ¦ Előtérszín (ecset, szöveg, alakzatok): kattints a módosításhoz
+Replier le panneau (plus de place pour la photo) — Tab ¦ Pienennä paneeli (enemmän tilaa kuvalle) — Tab ¦ A panel összecsukása (több hely a fotónak) — Tab
+Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ) ¦ Vedä levittääksesi tai kaventaaksesi paneelia (kaksoisnapsautus: alkuperäinen koko) ¦ Húzd a panel szélesítéséhez vagy keskenyítéséhez (dupla kattintás: eredeti méret)
+Onglets du panneau de droite ¦ Oikean paneelin välilehdet ¦ A jobb oldali panel lapjai
+Propriétés : Teinte/Saturation, masque, position et taille du calque choisi ¦ Ominaisuudet: valitun tason sävy/kylläisyys, maski, sijainti ja koko ¦ Tulajdonságok: a kiválasztott réteg színárnyalata/telítettsége, maszkja, helyzete és mérete
+ⓘ Propriétés ¦ ⓘ Ominaisuudet ¦ ⓘ Tulajdonságok
+Caractère : police, variante (graisse), taille, interligne, approche… ¦ Merkki: fontti, tyyli (paino), koko, riviväli, merkkiväli… ¦ Karakter: betűtípus, stílus (vastagság), méret, sorköz, betűköz…
+🔤 Caractère ¦ 🔤 Merkki ¦ 🔤 Karakter
+Motifs : remplir d’un motif, créer les siens ¦ Kuviot: täytä kuviolla, luo omia ¦ Minták: kitöltés mintával, saját minták létrehozása
+▩ Motifs ¦ ▩ Kuviot ¦ ▩ Minták
+Motifs ¦ Kuviot ¦ Minták
+Formes de pinceau : préréglages, pas, angle, dispersion, forme d’après une sélection ¦ Siveltimen kärjet: esiasetukset, väli, kulma, sirotus, muoto valinnan pohjalta ¦ Ecsethegyek: előbeállítások, térköz, szög, szórás, alakzat kijelölésből
+🖌 Formes ¦ 🖌 Muodot ¦ 🖌 Alakzatok
+Restaurer une vieille photo, pas à pas ¦ Entistä vanha kuva vaihe vaiheelta ¦ Régi fotó restaurálása lépésről lépésre
+🧭 Restaurer ¦ 🧭 Entistä ¦ 🧭 Restaurálás
+Comme la saturation, mais les couleurs déjà vives bougent peu : les teintes ternes (peau, ciel pâle) se ravivent d’abord. ¦ Kuten kylläisyys, mutta jo kirkkaat värit muuttuvat vähän: haaleat sävyt (iho, vaalea taivas) elpyvät ensin. ¦ Mint a telítettség, de a már élénk színek alig változnak: a fakó árnyalatok (bőr, halvány ég) élénkülnek először.
+Éclaircit ou assombrit les tons moyens sans toucher au noir ni au blanc : au-dessus de 100, plus clair ; en dessous, plus sombre. ¦ Vaalentaa tai tummentaa keskisävyjä koskematta mustaan tai valkoiseen: yli 100 vaaleampi, alle tummempi. ¦ Világosítja vagy sötétíti a középtónusokat, a feketéhez és a fehérhez nem nyúl: 100 felett világosabb, alatta sötétebb.
+Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou ⌫), ou le glisser hors du cadre. ¦ Napsauta käyrää: lisää piste · vedä: siirrä sitä · poistaaksesi: valitse se ja sitten ”Poista piste” (tai ⌫), tai vedä se kehyksen ulkopuolelle. ¦ Kattintás a görbére: pont hozzáadása · húzás: mozgatás · eltávolítás: válaszd ki, majd „Pont eltávolítása” (vagy ⌫), vagy húzd ki a keretből.
+Enlever le point ¦ Poista piste ¦ Pont eltávolítása
+🎨 Colorisation douce (photo en noir et blanc) ¦ 🎨 Pehmeä väritys (mustavalkoinen kuva) ¦ 🎨 Finom színezés (fekete-fehér fotó)
+Mieux dans un calque de réglage (Image → Coloriser) : on le dose, on le masque, on l’enlève. Pour colorier à la main : Image → Coloriser au pinceau. ¦ Parempi säätötasossa (Kuva → Väritä): voit heikentää sitä, maskata sen tai poistaa sen. Käsin värittämiseen: Kuva → Väritä siveltimellä. ¦ Jobb egy korrekciós rétegben (Kép → Színezés): gyengítheted, maszkolhatod, eltávolíthatod. Kézi színezéshez: Kép → Színezés ecsettel.
+Filtres rapides, après les réglages : sur la photo, ou dans un calque de réglage (sur tout ce qui est dessous, ou seulement le calque juste dessous). Les mêmes sur l’image enregistrée en pleine taille. ¦ Pikasuotimet säätöjen jälkeen: kuvassa tai säätötasossa (kaikkeen alla olevaan tai vain suoraan alla olevaan tasoon). Samat koskevat täysikokoisena tallennettua kuvaa. ¦ Gyorsszűrők a korrekciók után: a fotón, vagy egy korrekciós rétegben (mindenen, ami alatta van, vagy csak a közvetlenül alatta lévő rétegen). Ugyanezek a teljes méretben mentett képen is.
+Renforce le contraste des détails moyens (rides, plis d’un tissu, écriture) sans changer le contraste général. ¦ Vahvistaa keskikokoisten yksityiskohtien kontrastia (rypyt, kankaan laskokset, käsiala) muuttamatta yleistä kontrastia. ¦ Erősíti a közepes részletek kontrasztját (ráncok, anyaggyűrődések, kézírás) az általános kontraszt megváltoztatása nélkül.
+Enlever les filtres ¦ Poista suotimet ¦ Szűrők eltávolítása
+Variante : la graisse (Light, Regular, Bold, Black…) et l’italique ¦ Tyyli: paino (Light, Regular, Bold, Black…) ja kursiivi ¦ Stílus: a vastagság (Light, Regular, Bold, Black…) és a dőlt
+Taille (en points de l’image) ¦ Koko (kuvan pikseleinä) ¦ Méret (a kép képpontjaiban)
+Interligne (vide = automatique, 120 % de la taille) ¦ Riviväli (tyhjä = automaattinen, 120 % koosta) ¦ Sorköz (üres = automatikus, a méret 120%-a)
+Crénage : les paires de lettres rapprochées selon la police (Métrique) ou pas du tout (0) ¦ Parivälistys: kirjainparit lähennetään fontin mukaan (Metrinen) tai ei lainkaan (0) ¦ Alávágás: a betűpárok közelítése a betűtípus szerint (Metrikus) vagy egyáltalán nem (0)
+Approche : l’espace entre toutes les lettres, en millièmes de la taille ¦ Merkkiväli: kaikkien kirjainten välinen tila koon tuhannesosina ¦ Betűköz: az összes betű közötti távolság, a méret ezredrészében
+Échelle verticale ¦ Pystyskaalaus ¦ Függőleges méretezés
+Échelle horizontale ¦ Vaakaskaalaus ¦ Vízszintes méretezés
+Décalage vertical (au-dessus de la ligne de base si positif) ¦ Perusviivan siirto (perusviivan yläpuolelle, jos positiivinen) ¦ Alapvonal-eltolás (pozitív értéknél az alapvonal fölé)
+Lissage des bords des lettres ¦ Kirjainten reunojen pehmennys ¦ A betűszélek simítása
+Lissage ¦ Pehmennys ¦ Simítás
+Lissé ¦ Pehmeä ¦ Simított
+Aucun (bords nets, pixels) ¦ Ei mitään (terävät reunat, pikselit) ¦ Nincs (éles szélek, képpontok)
+Alignement du paragraphe ¦ Kappaleen tasaus ¦ Bekezdés igazítása
+Pour les prochains textes. Choisis un texte avec ➤ pour le changer. ¦ Seuraaville teksteille. Valitse teksti ➤-työkalulla muuttaaksesi sitä. ¦ A következő szövegekhez. Egy szöveg módosításához válaszd ki a ➤ eszközzel.
+Pour les prochains textes. Clique sur un texte (outil Texte ou ➤) pour le changer. ¦ Seuraaville teksteille. Napsauta tekstiä (Teksti-työkalu tai ➤) muuttaaksesi sitä. ¦ A következő szövegekhez. Egy szöveg módosításához kattints rá (Szöveg eszköz vagy ➤).
+✍️ Texte en cours d’écriture : chaque réglage s’y applique tout de suite. ¦ ✍️ Kirjoitettava teksti: jokainen asetus koskee sitä heti. ¦ ✍️ Éppen írt szöveg: minden beállítás azonnal érvényes rá.
+Métrique ¦ Metrinen ¦ Metrikus
+Les variantes viennent des polices de l’ordinateur (Mac, Windows, Linux) quand l’app peut les lire ; sinon les graisses habituelles. ¦ Tyylit tulevat tietokoneen fonteista (Mac, Windows, Linux), kun sovellus pystyy lukemaan ne; muuten tavalliset painot. ¦ A stílusok a számítógép betűtípusaiból jönnek (Mac, Windows, Linux), ha az alkalmazás be tudja olvasni őket; különben a szokásos vastagságok.
+Retrait de la première ligne (négatif : en saillie) ¦ Ensimmäisen rivin sisennys (negatiivinen: riippuva) ¦ Első sor behúzása (negatív: függő)
+Largeur du bloc de texte : les lignes se coupent toutes seules (vide = texte simple, une ligne par paragraphe) ¦ Tekstilohkon leveys: rivit rivittyvät itsestään (tyhjä = pelkkä teksti, yksi rivi kappaletta kohden) ¦ A szövegdoboz szélessége: a sorok maguktól törnek (üres = egyszerű szöveg, bekezdésenként egy sor)
+Espace avant chaque paragraphe ¦ Tila ennen kutakin kappaletta ¦ Térköz minden bekezdés előtt
+Espace après chaque paragraphe ¦ Tila jokaisen kappaleen jälkeen ¦ Térköz minden bekezdés után
+Couper les mots longs en fin de ligne, avec un tiret (règles simples du français ; un tiret conditionnel ⌥- dans un mot est pris en premier) ¦ Tavuta pitkät sanat rivin lopussa yhdysmerkillä (yksinkertaiset ranskan säännöt; sanan sisällä oleva tavutusviiva ⌥- otetaan ensin) ¦ Hosszú szavak elválasztása a sor végén kötőjellel (egyszerű francia szabályok; a szóban lévő feltételes kötőjel ⌥- élvez elsőbbséget)
+Ω Glyphes ¦ Ω Merkit ¦ Ω Karakterjelek
+Police (famille) ¦ Fontti (perhe) ¦ Betűtípus (család)
+(Auto) ¦ (Auto) ¦ (Auto)
+⟸ gauche ¦ ⟸ vasen ¦ ⟸ bal
+≡ centre ¦ ≡ keskellä ¦ ≡ közép
+droite ⟹ ¦ oikea ⟹ ¦ jobb ⟹
+Symboles ¦ Symbolit ¦ Szimbólumok
+Code (U+00E9) ou caractère ¦ Koodi (U+00E9) tai merkki ¦ Kód (U+00E9) vagy karakter
+Chercher un glyphe ¦ Hae merkkiä ¦ Karakterjel keresése
+Pour un bloc de texte, glisse un cadre avec l’outil Texte T au lieu de cliquer, ou donne sa largeur ici. La justification ne vaut que pour un bloc. ¦ Tekstilohkoa varten vedä kehys Teksti-työkalulla T napsauttamisen sijaan, tai anna sen leveys tässä. Tasaus koskee vain lohkoa. ¦ Szövegdobozhoz kattintás helyett húzz egy keretet a T Szöveg eszközzel, vagy add meg itt a szélességét. A sorkizárás csak dobozra vonatkozik.
+Clic : ajouté au texte en cours d’écriture (ou à la fin du texte choisi). Sans texte : copié. ¦ Napsautus: lisätään kirjoitettavaan tekstiin (tai valitun tekstin loppuun). Ilman tekstiä: kopioidaan. ¦ Kattintás: hozzáadás az éppen írt szöveghez (vagy a kiválasztott szöveg végéhez). Szöveg nélkül: másolás.
+Choisis d’abord un texte (outil T). ¦ Valitse ensin teksti (T-työkalu). ¦ Előbb válassz ki egy szöveget (T eszköz).
+Un autre média, rattaché aux mêmes fiches ¦ Toinen media, yhdistetty samoihin kortteihin ¦ Egy másik médiaelem, ugyanazokhoz az adatlapokhoz kapcsolva
+Gardée dans les versions, la photo affichée ne change pas ¦ Säilytetään versioissa, näytettävä kuva ei muutu ¦ A változatok között megmarad, a megjelenített fotó nem változik
+avec les annotations (calques visibles) ¦ merkintöineen (näkyvät tasot) ¦ a jegyzetekkel (látható rétegek)
+Avec les annotations (calques visibles) ¦ Merkintöineen (näkyvät tasot) ¦ A jegyzetekkel (látható rétegek)
+L’original n’est jamais modifié : chaque retouche est une version de la photo, et tu choisis celle qui s’affiche partout. ¦ Alkuperäistä ei koskaan muuteta: jokainen korjaus on kuvan versio, ja sinä valitset, mikä niistä näytetään kaikkialla. ¦ Az eredeti sosem módosul: minden retusálás a fotó egy változata, és te választod ki, melyik jelenjen meg mindenhol.
+🖼 Enregistrer l’image dans les Médias ¦ 🖼 Tallenna kuva Mediaan ¦ 🖼 A kép mentése a Médiába
+L’image (calques compris) remplace celle du média ; le projet, lui, garde tous les calques pour continuer ¦ Kuva (tasoineen) korvaa median kuvan; projekti puolestaan säilyttää kaikki tasot, jotta voit jatkaa ¦ A kép (a rétegekkel együtt) lecseréli a médiaelemét; a projekt pedig minden réteget megtart a folytatáshoz
+Enregistrer le projet (calques, masques, réglages) ¦ Tallenna projekti (tasot, maskit, säädöt) ¦ Projekt mentése (rétegek, maszkok, korrekciók)
+la retouche est fermée ¦ korjaus on suljettu ¦ a retusálás be van zárva
+Clique sur une étape pour revenir à ce moment-là ; les étapes suivantes restent (en gris) tant que tu ne fais rien d’autre. ¦ Napsauta vaihetta palataksesi siihen hetkeen; seuraavat vaiheet säilyvät (harmaina), kunnes teet jotain muuta. ¦ Kattints egy lépésre, hogy visszatérj abba a pillanatba; a későbbi lépések (szürkén) megmaradnak, amíg mást nem csinálsz.
+Tu peins le masque (pinceau : ⬛ cacher / ⬜ montrer). Clic : revenir au calque ¦ Maalaat maskia (sivellin: ⬛ piilota / ⬜ paljasta). Napsautus: takaisin tasoon ¦ A maszkot festeted (ecset: ⬛ elrejtés / ⬜ megmutatás). Kattintás: vissza a réteghez
+Masque : clic pour le peindre au pinceau ¦ Maski: napsauta maalataksesi sitä siveltimellä ¦ Maszk: kattints, hogy ecsettel fesd
+⇧ Maj + clic : désactiver / réactiver le masque ¦ ⇧ Vaihto + napsautus: poista maski käytöstä / ota käyttöön ¦ ⇧ Shift + kattintás: maszk ki- / bekapcsolása
+⌥ Alt + clic : voir le masque seul ¦ ⌥ Alt + napsautus: näytä pelkkä maski ¦ ⌥ Alt + kattintás: csak a maszk megtekintése
+touche \ : le masque en rouge par-dessus ¦ näppäin \: maski punaisena päällä ¦ \ billentyű: a maszk pirosan felül
+Ajouter un masque (cacher une partie sans l’effacer) — ⌥ / Alt + clic : un masque qui cache tout (ou cache la sélection) ¦ Lisää maski (piilota osa pyyhkimättä sitä) — ⌥ / Alt + napsautus: kaiken piilottava maski (tai valinnan piilottava) ¦ Maszk hozzáadása (egy rész elrejtése törlés nélkül) — ⌥ / Alt + kattintás: mindent elrejtő maszk (vagy a kijelölést elrejtő)
+masque ¦ maski ¦ maszk
+Ranger dans un groupe ¦ Laita ryhmään ¦ Csoportba helyezés
+(hors groupe) ¦ (ei ryhmää) ¦ (csoporton kívül)
+Glisser pour ranger : au-dessus, en dessous, ou dans un groupe (lâcher au milieu d’un groupe) ¦ Vedä järjestääksesi: yläpuolelle, alapuolelle tai ryhmään (pudota ryhmän keskelle) ¦ Húzd a rendezéshez: fölé, alá vagy egy csoportba (ejtsd egy csoport közepére)
+Calque de réglage ¦ Säätötaso ¦ Korrekciós réteg
+La photo (réglages, taches, tampon) ¦ Kuva (säädöt, tahrat, leimasin) ¦ A fotó (korrekciók, foltok, klónbélyegző)
+Supprimer le groupe (ce qu’il contient reste) ¦ Poista ryhmä (sen sisältö säilyy) ¦ Csoport törlése (a tartalma megmarad)
+Retirer la photo des calques (⌘Z pour la remettre) ¦ Poista kuva tasoista (⌘Z palauttaa sen) ¦ A fotó eltávolítása a rétegek közül (⌘Z visszateszi)
+Mode de fusion : comment le calque se mélange à ce qui est dessous ¦ Sekoitustila: miten taso sekoittuu alla olevaan ¦ Keverési mód: hogyan keveredik a réteg az alatta lévővel
+Fond : dose seulement le contenu du calque, pas ses effets (ombre, lueur, contour). À 0 %, il ne reste que les effets. ¦ Täyttö: heikentää vain tason sisältöä, ei sen tehosteita (varjo, hehku, ääriviiva). 0 %:ssa jäljelle jäävät vain tehosteet. ¦ Kitöltés: csak a réteg tartalmát gyengíti, az effektusait nem (árnyék, ragyogás, körvonal). 0%-nál csak az effektusok maradnak.
+Effets du calque : ombre portée, lueur externe, contour, incrustation de couleur ¦ Tasotehosteet: pudotusvarjo, ulkohehku, ääriviiva, värin peitto ¦ Rétegeffektusok: vetett árnyék, külső ragyogás, körvonal, színátfedés
+Objet dynamique : agrandir, réduire, tourner sans perte (l’image d’origine est gardée) ¦ Älykäs objekti: suurenna, pienennä, kierrä häviöttä (alkuperäinen kuva säilyy) ¦ Intelligens objektum: nagyítás, kicsinyítés, forgatás veszteség nélkül (az eredeti kép megmarad)
+🧩 Objet dynamique ¦ 🧩 Älykäs objekti ¦ 🧩 Intelligens objektum
+Une autre image à la même place, même taille, même rotation ¦ Toinen kuva samaan paikkaan, samankokoisena, samalla kierrolla ¦ Egy másik kép ugyanoda, ugyanakkora méretben, ugyanolyan elforgatással
+Remplacer… ¦ Korvaa… ¦ Csere…
+Remettre l’image à sa taille d’origine (et droite) ¦ Palauta kuva alkuperäiseen kokoonsa (ja suoraksi) ¦ A kép visszaállítása eredeti méretére (és egyenesre)
+Un calque de filtres juste au-dessus, qui ne touche que cette image : on peut le régler, le doser, le cacher ¦ Suodintaso suoraan yläpuolella, joka vaikuttaa vain tähän kuvaan: voit säätää sitä, heikentää sitä, piilottaa sen ¦ Egy szűrőréteg közvetlenül fölötte, amely csak erre a képre hat: beállíthatod, gyengítheted, elrejtheted
+✨ Filtre dynamique ¦ ✨ Älykäs suodin ¦ ✨ Intelligens szűrő
+Figer l’image en pixels, à la taille où elle est (plus d’agrandissement sans perte) ¦ Lukitse kuva pikseleiksi nykyiseen kokoonsa (ei enää häviötöntä suurennusta) ¦ A kép rögzítése képpontokként a jelenlegi méretén (nincs többé veszteségmentes nagyítás)
+Pixelliser ¦ Rasteroi ¦ Raszterizálás
+Couleurs, transparence, forme, préréglages ¦ Värit, läpinäkyvyys, muoto, esiasetukset ¦ Színek, átlátszóság, alak, előbeállítások
+▦ Modifier le dégradé… ¦ ▦ Muokkaa liukuväriä… ¦ ▦ Színátmenet szerkesztése…
+Motif, échelle, angle, décalage ¦ Kuvio, mittakaava, kulma, siirtymä ¦ Minta, méretarány, szög, eltolás
+▩ Modifier le motif… ¦ ▩ Muokkaa kuviota… ¦ ▩ Minta szerkesztése…
+Comme un masque d’écrêtage de Photoshop ¦ Kuten Photoshopin leikkausmaski ¦ Mint egy Photoshop vágómaszk
+régler… ¦ säädä… ¦ beállítás…
+ne touche que l’élément juste dessous ¦ vaikuttaa vain suoraan alla olevaan kohteeseen ¦ csak a közvetlenül alatta lévő elemre hat
+touche tout ce qui est dessous ¦ vaikuttaa kaikkeen alla olevaan ¦ minden alatta lévőre hat
+(seulement l’élément dessous) ¦ (vain alla oleva kohde) ¦ (csak az alatta lévő elem)
+(tout ce qui est dessous) ¦ (kaikki alla oleva) ¦ (minden alatta lévő)
+régler la photo ¦ säädä kuvaa ¦ a fotó beállítása
+＋ dans un calque de réglage ¦ ＋ säätötasoon ¦ ＋ korrekciós rétegben
+Réglages et filtres dans un calque à part, qu’on peut masquer, doser ou limiter à un calque ¦ Säädöt ja suotimet erillisellä tasolla, jonka voi maskata, heikentää tai rajata yhteen tasoon ¦ Korrekciók és szűrők külön rétegen, amelyet maszkolhatsz, gyengíthetsz vagy egy rétegre korlátozhatsz
+✨ Filtres : ¦ ✨ Suotimet: ¦ ✨ Szűrők:
+Changer les réglages de ce filtre ¦ Muuta tämän suotimen asetuksia ¦ E szűrő beállításainak módosítása
+vider ¦ tyhjennä ¦ kiürítés
+groupe vide : glisse un calque ici (⠿), ou range-le avec 📁 ¦ tyhjä ryhmä: vedä taso tähän (⠿) tai laita se ryhmään 📁-painikkeella ¦ üres csoport: húzz ide egy réteget (⠿), vagy tedd bele a 📁 gombbal
+Le pinceau, les formes et le texte vont sur le calque choisi (en bleu). 📁 un groupe peut contenir des calques et d’autres groupes ; 🎚 un calque de réglage applique réglages et filtres à ce qui est dessous (ou seulement à l’élément juste dessous). 🎭 un masque cache sans effacer. ¦ Sivellin, muodot ja teksti menevät valitulle tasolle (sinisellä). 📁 ryhmä voi sisältää tasoja ja muita ryhmiä; 🎚 säätötaso soveltaa säätöjä ja suotimia alla olevaan (tai vain suoraan alla olevaan kohteeseen). 🎭 maski piilottaa pyyhkimättä. ¦ Az ecset, az alakzatok és a szöveg a kiválasztott rétegre kerülnek (kékkel). 📁 egy csoport rétegeket és más csoportokat tartalmazhat; 🎚 a korrekciós réteg az alatta lévőre alkalmaz korrekciókat és szűrőket (vagy csak a közvetlenül alatta lévő elemre). 🎭 a maszk elrejt, de nem töröl.
+＋ Calque ¦ ＋ Taso ¦ ＋ Réteg
+＋ Groupe ¦ ＋ Ryhmä ¦ ＋ Csoport
+＋ Réglage ¦ ＋ Säätö ¦ ＋ Korrekció
+🖼️ Image ¦ 🖼️ Kuva ¦ 🖼️ Kép
+Une image de la base ou de l’ordinateur, sur un nouveau calque, en objet dynamique (agrandir, réduire, tourner sans perte) ¦ Kuva tietokannasta tai tietokoneelta uudelle tasolle älykkäänä objektina (suurenna, pienennä, kierrä häviöttä) ¦ Kép az adatbázisból vagy a számítógépről, új rétegen, intelligens objektumként (nagyítás, kicsinyítés, forgatás veszteség nélkül)
+Un groupe vide au-dessus du calque choisi ¦ Tyhjä ryhmä valitun tason yläpuolelle ¦ Üres csoport a kiválasztott réteg fölé
+Réglages et filtres dans un calque ¦ Säädöt ja suotimet tasossa ¦ Korrekciók és szűrők egy rétegben
+La photo a été retirée des calques : la remettre tout en bas ¦ Kuva on poistettu tasoista: palauta se aivan alimmaksi ¦ A fotó ki lett véve a rétegek közül: tedd vissza a legaljára
+↺ Remettre la photo ¦ ↺ Palauta kuva ¦ ↺ A fotó visszahelyezése
+Met le calque choisi dans un nouveau groupe (⌘G) ¦ Laittaa valitun tason uuteen ryhmään (⌘G) ¦ A kiválasztott réteget új csoportba teszi (⌘G)
+Grouper ¦ Ryhmitä ¦ Csoportosítás
+Sélection → calque ¦ Valinta → taso ¦ Kijelölés → réteg
+Aucun calque. ¦ Ei tasoja. ¦ Nincs réteg.
+Choisis d’abord un calque. ¦ Valitse ensin taso. ¦ Előbb válassz egy réteget.
+Nouveau calque ¦ Uusi taso ¦ Új réteg
+Nouveau calque de réglage ¦ Uusi säätötaso ¦ Új korrekciós réteg
+Photo remise dans les calques ¦ Kuva palautettu tasoihin ¦ A fotó visszakerült a rétegek közé
+Masque ajouté : la sélection est cachée. ¦ Maski lisätty: valinta on piilotettu. ¦ Maszk hozzáadva: a kijelölés el van rejtve.
+Masque ajouté : tout est caché ; peins en ⬜ pour montrer. ¦ Maski lisätty: kaikki on piilotettu; maalaa ⬜:lla paljastaaksesi. ¦ Maszk hozzáadva: minden el van rejtve; fess ⬜ színnel a megmutatáshoz.
+Masque ajouté : peins en ⬛ pour cacher, en ⬜ pour montrer. ¦ Maski lisätty: maalaa ⬛:lla piilottaaksesi, ⬜:lla paljastaaksesi. ¦ Maszk hozzáadva: fess ⬛ színnel az elrejtéshez, ⬜ színnel a megmutatáshoz.
+Masque seul : blanc = montré, noir = caché (⌥ + clic pour revenir) ¦ Pelkkä maski: valkoinen = näkyvissä, musta = piilotettu (⌥ + napsautus palaa) ¦ Csak a maszk: fehér = látható, fekete = rejtett (⌥ + kattintás a visszatéréshez)
+Ce calque est verrouillé. ¦ Tämä taso on lukittu. ¦ Ez a réteg zárolva van.
+Filtre dynamique : choisis un filtre (« ＋ Ajouter un filtre… ») ; il ne touche que cette image, et reste réglable. ¦ Älykäs suodin: valitse suodin (”＋ Lisää suodin…”); se vaikuttaa vain tähän kuvaan ja pysyy säädettävänä. ¦ Intelligens szűrő: válassz egy szűrőt („＋ Szűrő hozzáadása…”); csak erre a képre hat, és állítható marad.
+verrouillé ¦ lukittu ¦ zárolva
+déverrouillé ¦ lukitus avattu ¦ zárolás feloldva
+seulement sur l’élément dessous ¦ vain alla olevassa kohteessa ¦ csak az alatta lévő elemen
+sur tout ce qui est dessous ¦ kaikessa alla olevassa ¦ mindenen, ami alatta van
+Ouvrir le panneau (Réglages, Calques…) — Tab ¦ Avaa paneeli (Säädöt, Tasot…) — Tab ¦ A panel megnyitása (Korrekciók, Rétegek…) — Tab
+Glisse pour te déplacer dans l’image zoomée (la barre d’espace fait pareil avec n’importe quel outil). ¦ Vedä liikkuaksesi zoomatussa kuvassa (välilyöntinäppäin tekee saman millä tahansa työkalulla). ¦ Húzd, hogy mozogj a nagyított képen (a szóköz bármelyik eszközzel ugyanezt teszi).
+Clique sur un trait, une forme, un texte ou une zone copiée d’un calque, puis glisse-le. ⌫ le supprime, double-clic sur un texte pour le réécrire. ¦ Napsauta vetoa, muotoa, tekstiä tai tason kopioitua aluetta ja vedä sitä. ⌫ poistaa sen; kaksoisnapsauta tekstiä kirjoittaaksesi sen uudelleen. ¦ Kattints egy réteg vonására, alakzatára, szövegére vagy másolt területére, majd húzd el. ⌫ törli; egy szövegre duplán kattintva átírhatod.
+Glisse pour sélectionner un rectangle (⇧ en plus : ajouter, ⌥ : enlever). Les réglages de la barre agissent ensuite sur la sélection. ¦ Vedä valitaksesi suorakulmion (⇧ lisäksi: lisää, ⌥: poista). Palkin asetukset koskevat sitten valintaa. ¦ Húzással jelölj ki egy téglalapot (⇧ mellé: hozzáadás, ⌥: kivonás). A sáv beállításai ezután a kijelölésre hatnak.
+Glisse pour sélectionner un ovale (⇧ : ajouter, ⌥ : enlever). ¦ Vedä valitaksesi soikion (⇧: lisää, ⌥: poista). ¦ Húzással jelölj ki egy oválist (⇧: hozzáadás, ⌥: kivonás).
+Entoure à main levée la zone à sélectionner (⇧ : ajouter, ⌥ : enlever). ¦ Rajaa valittava alue vapaalla kädellä (⇧: lisää, ⌥: poista). ¦ Rajzold körbe szabadkézzel a kijelölendő területet (⇧: hozzáadás, ⌥: kivonás).
+Plume : clique point par point autour de la zone ; double-clic, Entrée ou clic sur le premier point pour fermer. Échap : abandonner. ¦ Kynä: napsauta piste pisteeltä alueen ympäri; kaksoisnapsautus, Enter tai napsautus ensimmäiseen pisteeseen sulkee. Esc: luovu. ¦ Toll: kattints pontról pontra a terület körül; dupla kattintás, Enter vagy kattintás az első pontra a lezáráshoz. Esc: elvetés.
+Clique sur une couleur : tous les points voisins de teinte proche sont sélectionnés (Tolérance). ⇧ : ajouter, ⌥ : enlever. ¦ Napsauta väriä: kaikki samansävyiset viereiset pisteet valitaan (Toleranssi). ⇧: lisää, ⌥: poista. ¦ Kattints egy színre: minden hasonló árnyalatú szomszédos pont kijelölődik (Tűrés). ⇧: hozzáadás, ⌥: kivonás.
+Glisse les poignées du cadre (ou trace un nouveau cadre), choisis des proportions, redresse avec le curseur, puis « ✓ Valider ». ¦ Vedä kehyksen kahvoja (tai piirrä uusi kehys), valitse mittasuhteet, suorista liukusäätimellä ja valitse sitten ”✓ Vahvista”. ¦ Húzd a keret fogantyúit (vagy rajzolj új keretet), válassz arányokat, egyenesíts a csúszkával, aztán „✓ Jóváhagyás”.
+Clic : zoomer ici · ⌥ + clic : reculer · ou glisse pour zoomer sur une zone. ¦ Napsautus: zoomaa tähän · ⌥ + napsautus: loitonna · tai vedä zoomataksesi alueeseen. ¦ Kattintás: nagyítás ide · ⌥ + kattintás: kicsinyítés · vagy húzással nagyíts rá egy területre.
+Glisse les 4 coins sur les coins de la photo, du document ou de la façade prise de biais, puis « ✓ Valider » : elle est remise à plat. À faire de préférence avant les corrections de taches. ¦ Vedä 4 kulmaa vinosti kuvatun valokuvan, asiakirjan tai julkisivun kulmiin ja valitse sitten ”✓ Vahvista”: se oikaistaan. Tee mieluiten ennen tahrojen korjausta. ¦ Húzd a 4 sarkot a ferdén fényképezett fotó, dokumentum vagy homlokzat sarkaira, aztán „✓ Jóváhagyás”: kiegyenesedik. Lehetőleg a foltjavítás előtt végezd.
+Glisse pour tracer la forme sur le calque choisi (⇧ : carré, cercle ou angle droit). ¦ Vedä piirtääksesi muodon valitulle tasolle (⇧: neliö, ympyrä tai suora kulma). ¦ Húzással rajzold meg az alakzatot a kiválasztott rétegre (⇧: négyzet, kör vagy derékszög).
+Glisse du début à la fin du dégradé (⇧ : tous les 45°) : il va sur un calque « Dégradé » (dans la sélection s’il y en a une ; sur le masque choisi, il fond le calque). Tire ensuite ses ronds pour l’ajuster ; clic sur la barre colorée pour changer ses couleurs. ¦ Vedä liukuvärin alusta loppuun (⇧: 45°:n välein): se menee ”Liukuväri”-tasolle (valintaan, jos sellainen on; valitussa maskissa se häivyttää tason). Säädä sitä sitten vetämällä sen ympyröitä; napsauta väripalkkia vaihtaaksesi värit. ¦ Húzd a színátmenet elejétől a végéig (⇧: 45°-onként): egy „Színátmenet” rétegre kerül (a kijelölésbe, ha van; a kiválasztott maszkon elhalványítja a réteget). Aztán a köreit húzva igazítsd; a színes sávra kattintva cseréld a színeit.
+Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long. Zoome (⌘ + molette) pour être précis. ¦ Napsauta tahraa, pölyhiukkasta tai naarmua: se korvataan ympäristöllään. Naarmun kohdalla vedä sitä pitkin. Zoomaa (⌘ + rulla) ollaksesi tarkka. ¦ Kattints egy foltra, porszemre vagy karcolásra: a környezetével helyettesítődik. Karcolásnál húzd végig rajta. A pontossághoz nagyíts (⌘ + görgő).
+« Choisir l’endroit à recopier » (ou ⌥ + clic), puis peins sur la zone à couvrir. « Aligné » : la source suit ton pinceau d’un trait à l’autre. Avec une sélection : glisse pour poser une copie de la zone ailleurs. ¦ ”Valitse kopioitava kohta” (tai ⌥ + napsautus), ja maalaa sitten peitettävän alueen päälle. ”Kohdistettu”: lähde seuraa sivellintäsi vedosta toiseen. Valinnan kanssa: vedä asettaaksesi alueen kopion muualle. ¦ „A másolandó pont kiválasztása” (vagy ⌥ + kattintás), aztán fess a lefedendő területre. „Igazítva”: a forrás vonásról vonásra követi az ecsetet. Kijelöléssel: húzással máshová teheted a terület másolatát.
+Peins sur le calque choisi (Calques) : annoter, entourer, flécher à la main. La gomme efface ce qui a été peint, jamais la photo. ¦ Maalaa valitulle tasolle (Tasot): merkitse, ympyröi, piirrä nuolia käsin. Pyyhekumi pyyhkii maalatun, ei koskaan kuvaa. ¦ Fess a kiválasztott rétegre (Rétegek): jegyzetelj, karikázz, rajzolj nyilakat kézzel. A radír a festést törli, sosem a fotót.
+Tu peins le MASQUE du calque : ⬛ cacher, ⬜ montrer. Rien n’est effacé. Clique sur la vignette du masque (Calques) pour revenir au calque. ¦ Maalaat tason MASKIA: ⬛ piilota, ⬜ paljasta. Mitään ei pyyhitä. Napsauta maskin pikkukuvaa (Tasot) palataksesi tasoon. ¦ A réteg MASZKJÁT festeted: ⬛ elrejtés, ⬜ megmutatás. Semmi sem törlődik. Kattints a maszk bélyegképére (Rétegek), hogy visszatérj a réteghez.
+Clique dans l’image à l’endroit du texte, écris, puis Entrée (⇧ + Entrée pour aller à la ligne). ¦ Napsauta kuvaa kohdassa, johon teksti tulee, kirjoita ja paina Enter (⇧ + Enter uudelle riville). ¦ Kattints a képen oda, ahová a szöveg kerül, írj, majd Enter (⇧ + Enter új sorhoz).
+Peins sur le pli, la rayure ou la déchirure (en rouge pendant le geste) : au lâcher, la zone est refaite d’après ce qui l’entoure. Zoome pour être précis ; « 🔍 Repérer les plis » les trouve tout seul. ¦ Maalaa taitteen, naarmun tai repeämän päälle (punaisena maalatessa): kun päästät irti, alue rakennetaan uudelleen ympäristön perusteella. Zoomaa ollaksesi tarkka; ”🔍 Etsi taitteet” löytää ne automaattisesti. ¦ Fess a gyűrődésre, karcolásra vagy szakadásra (festés közben piros): elengedéskor a terület a környezete alapján újraépül. A pontossághoz nagyíts; a „🔍 Gyűrődések felismerése” magától megtalálja őket.
+Glisse les deux ronds sur les yeux si besoin : le cadre suit (yeux à l’horizontale, toujours à la même hauteur). Règle la marge dans le panneau, puis « ✓ Recadrer » ou « 👤 Utiliser comme portrait ». ¦ Vedä tarvittaessa kaksi ympyrää silmien päälle: kehys seuraa (silmät vaakatasossa, aina samalla korkeudella). Säädä marginaali paneelissa ja valitse sitten ”✓ Rajaa” tai ”👤 Käytä muotokuvana”. ¦ Ha kell, húzd a két kört a szemekre: a keret követi (a szemek vízszintesen, mindig ugyanabban a magasságban). Állítsd be a margót a panelen, aztán „✓ Körbevágás” vagy „👤 Használat portréként”.
+Calque « Annotations » créé ¦ Taso ”Merkinnät” luotu ¦ „Jegyzetek” réteg létrehozva
+Annotations ¦ Merkinnät ¦ Jegyzetek
+Masque ajouté à la photo (gomme) ¦ Maski lisätty kuvaan (pyyhekumi) ¦ Maszk hozzáadva a fotóhoz (radír)
+Gomme sur la photo : elle est cachée par un masque, rien n’est effacé. Pour la faire revenir : touche X (⬜ montrer), puis repasse dessus. ¦ Pyyhekumi kuvassa: se piilotetaan maskilla, mitään ei pyyhitä. Tuodaksesi sen takaisin: näppäin X (⬜ paljasta), ja kulje sitten uudelleen sen yli. ¦ Radír a fotón: maszk rejti el, semmi sem törlődik. A visszahozáshoz: X billentyű (⬜ megmutatás), majd menj át rajta újra.
+⬜ Montrer : le pinceau (ou la gomme) fait revenir ce qui était caché. X pour revenir à ⬛ cacher. ¦ ⬜ Paljasta: sivellin (tai pyyhekumi) tuo takaisin piilotetun. X palaa tilaan ⬛ piilota. ¦ ⬜ Megmutatás: az ecset (vagy a radír) visszahozza, ami el volt rejtve. X: vissza a ⬛ elrejtéshez.
+⬛ Cacher : le pinceau (ou la gomme) cache. X pour ⬜ montrer. ¦ ⬛ Piilota: sivellin (tai pyyhekumi) piilottaa. X vaihtaa tilaan ⬜ paljasta. ¦ ⬛ Elrejtés: az ecset (vagy a radír) elrejt. X: ⬜ megmutatás.
+Style du texte ¦ Tekstin tyyli ¦ A szöveg stílusa
+Caractère du texte ¦ Tekstin merkki ¦ A szöveg karakterformázása
+🔎 Lire les variantes de l’ordinateur… ¦ 🔎 Lue tietokoneen fonttityylit… ¦ 🔎 A számítógép betűstílusainak beolvasása…
+Réglage ciblé : appuie sur une couleur de la photo et glisse à droite (plus saturé) ou à gauche (moins) ; avec ⌘ / Ctrl, c’est la teinte qui change ¦ Kohdistettu säätö: paina kuvan väriä ja vedä oikealle (kylläisempi) tai vasemmalle (vähemmän); ⌘ / Ctrl -näppäimellä muuttuu sävy ¦ Célzott korrekció: nyomd le az egeret a fotó egy színén és húzd jobbra (telítettebb) vagy balra (kevésbé); ⌘ / Ctrl lenyomásával a színárnyalat változik
+Réglage ciblé ¦ Kohdistettu säätö ¦ Célzott korrekció
+Pipettes de la gamme ¦ Alueen pipetit ¦ A tartomány pipettái
+Pipette : la gamme se centre sur la couleur cliquée dans la photo ¦ Pipetti: alue keskitetään kuvassa napsautettuun väriin ¦ Pipetta: a tartomány a fotón kattintott színre középre igazodik
+Ajouter à la gamme la couleur cliquée ¦ Lisää napsautettu väri alueeseen ¦ A kattintott szín hozzáadása a tartományhoz
+Retirer de la gamme la couleur cliquée ¦ Poista napsautettu väri alueesta ¦ A kattintott szín eltávolítása a tartományból
+Bord intérieur : plein effet jusqu’ici ¦ Sisäreuna: täysi vaikutus tähän asti ¦ Belső szél: teljes hatás eddig
+Bord extérieur : l’effet s’éteint ici ¦ Ulkoreuna: vaikutus häviää tässä ¦ Külső szél: itt múlik el a hatás
+Haut : les couleurs avant ; bas : après. ¦ Ylhäällä: värit ennen; alhaalla: jälkeen. ¦ Fent: a színek előtte; lent: utána.
+🎚 Autres réglages… ¦ 🎚 Muut säädöt… ¦ 🎚 További korrekciók…
+🖌 Peindre le masque ¦ 🖌 Maalaa maski ¦ 🖌 A maszk festése
+Réactiver ¦ Ota uudelleen käyttöön ¦ Újra bekapcsolás
+Désactiver ¦ Poista käytöstä ¦ Kikapcsolás
+▦ Calque de dégradé ¦ ▦ Liukuväritaso ¦ ▦ Színátmenetes réteg
+garder les proportions ¦ säilytä mittasuhteet ¦ arányok megtartása
+Un calque de réglage juste au-dessus, qui ne touche que ce calque ¦ Säätötaso suoraan yläpuolella, joka vaikuttaa vain tähän tasoon ¦ Egy korrekciós réteg közvetlenül fölötte, amely csak erre a rétegre hat
+🎨 Teinte/Saturation sur ce calque ¦ 🎨 Sävy/kylläisyys tähän tasoon ¦ 🎨 Színárnyalat/telítettség erre a rétegre
+Choisis la photo ou un calque de réglage 🎚 (Calques) pour Teinte/Saturation. ¦ Valitse kuva tai säätötaso 🎚 (Tasot) sävyä/kylläisyyttä varten. ¦ Válaszd ki a fotót vagy egy 🎚 korrekciós réteget (Rétegek) a színárnyalathoz/telítettséghez.
+👆 Appuie sur une couleur de la photo et glisse à gauche ou à droite (⌘ / Ctrl : la teinte). ¦ 👆 Paina kuvan väriä ja vedä vasemmalle tai oikealle (⌘ / Ctrl: sävy). ¦ 👆 Nyomd le az egeret a fotó egy színén, és húzd balra vagy jobbra (⌘ / Ctrl: a színárnyalat).
+💧 Clique sur une couleur de la photo. ¦ 💧 Napsauta kuvan väriä. ¦ 💧 Kattints a fotó egy színére.
+C’est un gris : il n’a pas de teinte. ¦ Se on harmaa: sillä ei ole sävyä. ¦ Ez szürke: nincs színárnyalata.
+Gamme choisie à la pipette ¦ Alue valittu pipetillä ¦ Tartomány pipettával kiválasztva
+Gamme élargie ¦ Aluetta laajennettu ¦ Tartomány kibővítve
+Gamme réduite ¦ Aluetta kavennettu ¦ Tartomány szűkítve
+Coloriser : oui ¦ Väritä: kyllä ¦ Színezés: igen
+Coloriser : non ¦ Väritä: ei ¦ Színezés: nem
+Coloriser ¦ Väritä ¦ Színezés
+Propriétés du masque ¦ Maskin ominaisuudet ¦ A maszk tulajdonságai
+Teinte/Saturation remise à zéro ¦ Sävy/kylläisyys nollattu ¦ Színárnyalat/telítettség nullázva
+Masque inversé ¦ Maski käännetty ¦ Maszk megfordítva
+Masque désactivé ¦ Maski poistettu käytöstä ¦ Maszk kikapcsolva
+Masque réactivé ¦ Maski otettu taas käyttöön ¦ Maszk újra bekapcsolva
+Masque retiré ¦ Maski poistettu ¦ Maszk eltávolítva
+Masque ajouté ¦ Maski lisätty ¦ Maszk hozzáadva
+Ce calque a déjà un masque. ¦ Tällä tasolla on jo maski. ¦ Ennek a rétegnek már van maszkja.
+Teinte/Saturation sur un calque ¦ Sävy/kylläisyys tasossa ¦ Színárnyalat/telítettség egy rétegen
+Teinte/Saturation ¦ Sävy/kylläisyys ¦ Színárnyalat/telítettség
+Ancien style ¦ Vanha tyyli ¦ Régi stílus
+Global ¦ Kaikki ¦ Mind
+Rouges ¦ Punaiset ¦ Vörösek
+Jaunes ¦ Keltaiset ¦ Sárgák
+Verts ¦ Vihreät ¦ Zöldek
+Cyans ¦ Syaanit ¦ Ciánok
+Bleus ¦ Siniset ¦ Kékek
+Magentas ¦ Magentat ¦ Bíborok
+Cyanotype ¦ Syanotypia ¦ Cianotípia
+Supprimer ce motif ¦ Poista tämä kuvio ¦ A minta törlése
+Calque de motif <b>« {name} »</b> : tout se règle ici, tout de suite. ¦ Kuviotaso <b>”{name}”</b>: kaikki säädetään tässä, heti. ¦ <b>„{name}”</b> mintaréteg: itt mindent azonnal beállíthatsz.
+Choisis un motif, puis « Remplir » : il va sur son propre calque (dans la sélection s’il y en a une). Les motifs de l’app prennent tes deux couleurs. ¦ Valitse kuvio ja sitten ”Täytä”: se menee omalle tasolleen (valintaan, jos sellainen on). Sovelluksen kuviot käyttävät kahta väriäsi. ¦ Válassz egy mintát, aztán „Kitöltés”: saját rétegre kerül (a kijelölésbe, ha van). Az alkalmazás mintái a két színedet használják.
+fond transparent (motifs de l’app) ¦ läpinäkyvä tausta (sovelluksen kuviot) ¦ átlátszó háttér (az alkalmazás mintái)
+Décalage horizontal ¦ Vaakasiirtymä ¦ Vízszintes eltolás
+Décalage vertical ¦ Pystysiirtymä ¦ Függőleges eltolás
+▩ Remplir : nouveau calque de motif ¦ ▩ Täytä: uusi kuviotaso ¦ ▩ Kitöltés: új mintaréteg
+Il rejoint la bibliothèque des motifs (gardée sur cet ordinateur). ¦ Se lisätään kuviokirjastoon (säilyy tällä tietokoneella). ¦ Bekerül a mintakönyvtárba (ezen a számítógépen marad meg).
+l’image visible ¦ näkyvä kuva ¦ a látható kép
+Taille du carreau ¦ Laatan koko ¦ A csempe mérete
+raccord sans couture (les bords se fondent) ¦ saumaton (reunat sulautuvat) ¦ varrat nélküli (a szélek összeolvadnak)
+Garder et remplir ¦ Säilytä ja täytä ¦ Megtartás és kitöltés
+Plus de place pour garder ce motif : supprime des motifs, ou fais-le plus petit. ¦ Tallennustila ei riitä tälle kuviolle: poista kuvioita tai tee siitä pienempi. ¦ Nincs több hely ennek a mintának: törölj mintákat, vagy készítsd kisebbre.
+Motif gardé dans la bibliothèque ▩. ¦ Kuvio säilytetty kirjastossa ▩. ¦ Minta elmentve a ▩ könyvtárba.
+Mon motif ¦ Oma kuvioni ¦ Saját mintám
+Clic sur une forme : le pinceau 🖌 la prend. La taille se règle en haut (ou [ et ]). ¦ Napsauta muotoa: sivellin 🖌 ottaa sen käyttöön. Koko säädetään ylhäällä (tai [ ja ]). ¦ Kattints egy alakzatra: a 🖌 ecset átveszi. A méretet fent állíthatod (vagy [ és ]).
+Forme de la pointe ¦ Kärjen muoto ¦ A hegy alakja
+Pas (écart entre les empreintes) ¦ Väli (jälkien välinen etäisyys) ¦ Térköz (a lenyomatok közti távolság)
+Petit : un trait continu. Grand : des empreintes séparées (étoiles, feuilles). ¦ Pieni: yhtenäinen veto. Suuri: erilliset jäljet (tähdet, lehdet). ¦ Kicsi: folyamatos vonás. Nagy: különálló lenyomatok (csillagok, levelek).
+À 100 % la forme est entière ; plus bas, elle est aplatie (plume, pinceau plat). ¦ 100 %:ssa muoto on kokonainen; pienemmällä se litistyy (sulkakynä, litteä sivellin). ¦ 100%-nál az alakzat teljes; alacsonyabb értéknél lapított (lúdtoll, lapos ecset).
+l’angle suit le trait ¦ kulma seuraa vetoa ¦ a szög követi a vonást
+Dynamique et dispersion ¦ Dynamiikka ja sirotus ¦ Dinamika és szórás
+Variation de taille ¦ Koon vaihtelu ¦ Méretingadozás
+Variation d’angle ¦ Kulman vaihtelu ¦ Szögingadozás
+Dispersion ¦ Sirotus ¦ Szórás
+Nombre par empreinte ¦ Määrä jälkeä kohden ¦ Darabszám lenyomatonként
+Transfert et couleur ¦ Siirto ja väri ¦ Átvitel és szín
+Flux (chaque empreinte) ¦ Virtaus (jokainen jälki) ¦ Áramlás (minden lenyomat)
+Variation d’opacité ¦ Peittävyyden vaihtelu ¦ Átlátszatlanság-ingadozás
+Variation de couleur ¦ Värin vaihtelu ¦ Színingadozás
+Fais d’abord une sélection autour du dessin ¦ Tee ensin valinta piirroksen ympärille ¦ Előbb jelöld ki a rajz körüli területet
+Fais d’abord une sélection autour du dessin. ¦ Tee ensin valinta piirroksen ympärille. ¦ Előbb jelöld ki a rajz körüli területet.
+＋ Forme d’après la sélection ¦ ＋ Muoto valinnan pohjalta ¦ ＋ Alakzat a kijelölésből
+Garder comme préréglage ¦ Säilytä esiasetuksena ¦ Megtartás előbeállításként
+＋ Garder comme préréglage ¦ ＋ Säilytä esiasetuksena ¦ ＋ Megtartás előbeállításként
+Garder cette forme de pinceau ¦ Säilytä tämä siveltimen kärki ¦ Az ecsethegy megtartása
+Nom du préréglage : ¦ Esiasetuksen nimi: ¦ Az előbeállítás neve:
+Plus de place pour garder ce pinceau. ¦ Tallennustila ei riitä tälle siveltimelle. ¦ Nincs több hely ennek az ecsetnek.
+🖌 Ta forme est prête : peins avec ; « Garder comme préréglage » pour la retrouver. ¦ 🖌 Muotosi on valmis: maalaa sillä; ”Säilytä esiasetuksena” löytääksesi sen uudelleen. ¦ 🖌 Az alakzatod kész: fess vele; „Megtartás előbeállításként”, hogy később is megtaláld.
+Rond net ¦ Terävä pyöreä ¦ Éles kerek
+Rond doux ¦ Pehmeä pyöreä ¦ Lágy kerek
+Surligneur ¦ Korostuskynä ¦ Kiemelő
+Crayon fin ¦ Ohut lyijykynä ¦ Vékony ceruza
+Craie (grain) ¦ Liitu (rakeinen) ¦ Kréta (szemcsés)
+Craie ¦ Liitu ¦ Kréta
+Fusain ¦ Hiili ¦ Szén
+Dégradé inversé ¦ Liukuväri käännetty ¦ Színátmenet megfordítva
+Dégradé : tramage ¦ Liukuväri: rasterointi ¦ Színátmenet: árnyalással
+Dégradé : sans tramage ¦ Liukuväri: ei rasterointia ¦ Színátmenet: árnyalás nélkül
+▦ Dégradé ¦ ▦ Liukuväri ¦ ▦ Színátmenet
+Clic : ajouter un arrêt de couleur à cet endroit ¦ Napsautus: lisää värikohta tähän ¦ Kattintás: színpont hozzáadása ide
+Clic sur la barre : un arrêt de plus · glisse un arrêt pour le déplacer, vers le bas pour l’enlever ¦ Napsauta palkkia: yksi kohta lisää · vedä kohtaa siirtääksesi sitä, alaspäin poistaaksesi sen ¦ Kattintás a sávra: még egy pont · húzz el egy pontot a mozgatáshoz, lefelé az eltávolításhoz
+Mélange ¦ Sekoitus ¦ Keverés
+Classique (RVB) ¦ Perinteinen (RGB) ¦ Klasszikus (RGB)
+Perceptuel (plus doux) ¦ Havaintoon perustuva (pehmeämpi) ¦ Érzékelésalapú (lágyabb)
+Par les teintes ¦ Sävyjen kautta ¦ A színárnyalatokon át
+Au-delà des bouts ¦ Päiden ulkopuolella ¦ A végeken túl
+Couleur des bouts ¦ Päiden väri ¦ A végek színe
+Répéter ¦ Toista ¦ Ismétlés
+Répéter en miroir ¦ Toista peilattuna ¦ Ismétlés tükrözve
+Le début devient la fin ¦ Alusta tulee loppu ¦ Az elejéből lesz a vége
+⇄ Retourner les arrêts ¦ ⇄ Käännä kohdat ¦ ⇄ A pontok megfordítása
+Espacer également ¦ Tasaa välit ¦ Egyenletes elosztás
+Couleur de l’arrêt ¦ Kohdan väri ¦ A pont színe
+Arrêt choisi ¦ Valittu kohta ¦ Kiválasztott pont
+Milieu vers le suivant ¦ Keskikohta seuraavaan ¦ Félút a következőig
+Où se trouve le mélange à moitié entre cet arrêt et le suivant (le petit losange de Photoshop). ¦ Missä tämän kohdan ja seuraavan välinen puoliväli on (Photoshopin pieni vinoneliö). ¦ Hol van a félúton lévő keverék e pont és a következő között (a Photoshop kis rombusza).
+✕ Enlever cet arrêt ¦ ✕ Poista tämä kohta ¦ ✕ A pont eltávolítása
+Supprimer ce préréglage ¦ Poista tämä esiasetus ¦ Az előbeállítás törlése
+Garder ce dégradé ¦ Säilytä tämä liukuväri ¦ A színátmenet megtartása
+Mon dégradé ¦ Oma liukuvärini ¦ Saját színátmenetem
+Premier plan → transparent ¦ Edusta → läpinäkyvä ¦ Előtér → átlátszó
+Noir → blanc ¦ Musta → valkoinen ¦ Fekete → fehér
+Blanc → transparent ¦ Valkoinen → läpinäkyvä ¦ Fehér → átlátszó
+Vignette (bords sombres) ¦ Vinjetti (tummat reunat) ¦ Vignetta (sötét szélek)
+Arc-en-ciel ¦ Sateenkaari ¦ Szivárvány
+Cuivre ¦ Kupari ¦ Réz
+Chrome ¦ Kromi ¦ Króm
+Or ¦ Kulta ¦ Arany
+Vieux papier ¦ Vanha paperi ¦ Régi papír
+Nuit ¦ Yö ¦ Éjszaka
+Printemps ¦ Kevät ¦ Tavasz
+Mer ¦ Meri ¦ Tenger
+Coucher de soleil ¦ Auringonlasku ¦ Naplemente
+▭ Linéaire ¦ ▭ Lineaarinen ¦ ▭ Lineáris
+◉ Radial ¦ ◉ Säteittäinen ¦ ◉ Sugaras
+◔ Angle (conique) ¦ ◔ Kulma (kartiomainen) ¦ ◔ Szög (kúpos)
+⇋ Réfléchi ¦ ⇋ Heijastettu ¦ ⇋ Tükrözött
+◇ Losange ¦ ◇ Vinoneliö ¦ ◇ Rombusz
+Damier ¦ Shakkiruudukko ¦ Sakktábla
+Pois ¦ Pallokuvio ¦ Pöttyök
+Rayures ¦ Raidat ¦ Csíkok
+Hachures ¦ Viivoitus ¦ Sraffozás
+Briques ¦ Tiilet ¦ Téglák
+Chevrons ¦ Sahalaita ¦ Halszálka
+Losanges ¦ Vinoneliöt ¦ Rombuszok
+Vagues ¦ Aallot ¦ Hullámok
+Toile ¦ Kangas ¦ Vászon
+Croix ¦ Ristit ¦ Keresztek
+Fleurs de lys ¦ Liljat ¦ Liliomok
+Clique maintenant à l’endroit à recopier. ¦ Napsauta nyt kopioitavaa kohtaa. ¦ Most kattints a másolandó pontra.
+Ce calque est verrouillé : déverrouille-le dans Calques. ¦ Tämä taso on lukittu: avaa lukitus Tasot-kohdassa. ¦ Ez a réteg zárolva van: oldd fel a Rétegek alatt.
+Texte effacé ¦ Teksti pyyhitty ¦ Szöveg törölve
+Sélection vide ¦ Tyhjä valinta ¦ Üres kijelölés
+Sélection ajoutée ¦ Valinta lisätty ¦ Kijelölés hozzáadva
+Sélection retirée ¦ Valinta vähennetty ¦ Kijelölés kivonva
+Image remplacée : même place, même taille, même rotation. ¦ Kuva korvattu: sama paikka, sama koko, sama kierto. ¦ Kép lecserélve: ugyanott, ugyanakkora, ugyanolyan elforgatással.
+Image placée : ➤ glisse-la, tire un coin pour la taille (⇧ : libre), la poignée ronde pour la tourner. ¦ Kuva sijoitettu: ➤ vedä sitä, vedä kulmasta muuttaaksesi kokoa (⇧: vapaa), pyöreästä kahvasta kiertääksesi sitä. ¦ Kép elhelyezve: ➤ húzd el, egy sarkát húzva méretezd (⇧: szabadon), a kerek fogantyúval forgasd.
+Ce fichier n’est pas une image. ¦ Tämä tiedosto ei ole kuva. ¦ Ez a fájl nem kép.
+Remplacer l’image de l’objet dynamique ¦ Korvaa älykkään objektin kuva ¦ Az intelligens objektum képének cseréje
+Remplacer par cette image ¦ Korvaa tällä kuvalla ¦ Csere erre a képre
+La nouvelle image prend la place, la taille et la rotation de l’ancienne. ¦ Uusi kuva ottaa vanhan paikan, koon ja kierron. ¦ Az új kép átveszi a régi helyét, méretét és elforgatását.
+Elle arrive sur un nouveau calque, en objet dynamique 🧩 (agrandir, réduire, tourner sans perte). Tu peux aussi glisser un fichier sur la photo, ou coller une image copiée (⌘V). ¦ Se tulee uudelle tasolle älykkäänä objektina 🧩 (suurenna, pienennä, kierrä häviöttä). Voit myös vetää tiedoston kuvan päälle tai liittää kopioidun kuvan (⌘V). ¦ Új rétegre kerül, intelligens objektumként 🧩 (nagyítás, kicsinyítés, forgatás veszteség nélkül). Egy fájlt a fotóra is húzhatsz, vagy beilleszthetsz egy kimásolt képet (⌘V).
+Sélection automatique ¦ Automaattinen valinta ¦ Automatikus kijelölés
+Ce calque est verrouillé : choisis-en un autre dans Calques. ¦ Tämä taso on lukittu: valitse toinen Tasot-kohdassa. ¦ Ez a réteg zárolva van: válassz egy másikat a Rétegek alatt.
+Endroit à recopier choisi : peins maintenant sur la zone à couvrir. ¦ Kopioitava kohta valittu: maalaa nyt peitettävän alueen päälle. ¦ Másolandó pont kiválasztva: most fess a lefedendő területre.
+Choisis d’abord l’endroit à recopier (bouton 🎯 ou ⌥ + clic). ¦ Valitse ensin kopioitava kohta (painike 🎯 tai ⌥ + napsautus). ¦ Előbb válaszd ki a másolandó pontot (🎯 gomb vagy ⌥ + kattintás).
+La photo n’est plus dans les calques : « ↺ Remettre la photo » (onglet Calques). ¦ Kuva ei ole enää tasoissa: ”↺ Palauta kuva” (Tasot-välilehti). ¦ A fotó már nincs a rétegek között: „↺ A fotó visszahelyezése” (Rétegek lap).
+La photo est verrouillée (🔒 dans Calques). ¦ Kuva on lukittu (🔒 Tasot-kohdassa). ¦ A fotó zárolva van (🔒 a Rétegek alatt).
+Tampon : zone recopiée (calque ✨ Retouches) ¦ Leimasin: alue kopioitu (taso ✨ Korjaukset) ¦ Klónbélyegző: terület lemásolva (✨ Retusálás réteg)
+Fais d’abord une sélection (outils ⬚ ◯ ➰ ✒︎ 🪄). ¦ Tee ensin valinta (työkalut ⬚ ◯ ➰ ✒︎ 🪄). ¦ Előbb jelölj ki valamit (⬚ ◯ ➰ ✒︎ 🪄 eszközök).
+Aucun filtre utilisé pour l’instant (menu Filtre). ¦ Suotimia ei ole vielä käytetty (Suodin-valikko). ¦ Még nem használtál szűrőt (Szűrő menü).
+Opacité du calque (dosage) ¦ Tason peittävyys (voimakkuus) ¦ A réteg átlátszatlansága (adagolás)
+Valeurs de départ ¦ Oletusarvot ¦ Alapértékek
+Rien n’est détruit : le filtre est sur son propre calque. Plus tard : Calques → le calque → onglet ✨ Filtres → « régler… ». ¦ Mitään ei tuhota: suodin on omalla tasollaan. Myöhemmin: Tasot → taso → välilehti ✨ Suotimet → ”säädä…”. ¦ Semmi sem vész el: a szűrő a saját rétegén van. Később: Rétegek → a réteg → ✨ Szűrők lap → „beállítás…”.
+Filtre enlevé du calque ¦ Suodin poistettu tasosta ¦ Szűrő eltávolítva a rétegről
+Ordre des filtres ¦ Suodinten järjestys ¦ A szűrők sorrendje
+Filtres enlevés ¦ Suotimet poistettu ¦ Szűrők eltávolítva
+Plus de place pour les actions : supprimes-en une. ¦ Toiminnoille ei ole enää tilaa: poista yksi. ¦ Nincs több hely a műveleteknek: törölj egyet.
+⚡ Actions ¦ ⚡ Toiminnot ¦ ⚡ Műveletek
+Nom de l’action (ex. « Photos de l’album 1930 ») ¦ Toiminnon nimi (esim. ”Vuoden 1930 albumin kuvat”) ¦ A művelet neve (pl. „Az 1930-as album fotói”)
+Une action garde les réglages de la photo (exposition, niveaux, courbe, teinte, filtres, poussière, colorisation…) et ses calques de réglage sans masque. On la remet sur une autre photo, ou sur plusieurs d’un coup : chacune reçoit une <b>nouvelle version</b>, l’original est gardé. ¦ Toiminto säilyttää kuvan säädöt (valotus, tasot, käyrä, sävy, suotimet, pöly, väritys…) ja sen maskittomat säätötasot. Sen voi toistaa toiseen kuvaan tai useaan kerralla: kukin saa <b>uuden version</b>, alkuperäinen säilyy. ¦ Egy művelet megőrzi a fotó korrekcióit (expozíció, szintek, görbe, színárnyalat, szűrők, por, színezés…) és maszk nélküli korrekciós rétegeit. Egy másik fotóra vagy egyszerre többre is alkalmazhatod: mindegyik <b>új változatot</b> kap, az eredeti megmarad.
+Enregistrer cette action dans un fichier, pour la garder ou la donner ¦ Tallenna tämä toiminto tiedostoon säilyttääksesi sen tai antaaksesi sen jollekulle ¦ A művelet mentése fájlba, hogy megtartsd vagy odaadd valakinek
+Sur cette photo ¦ Tähän kuvaan ¦ Erre a fotóra
+Sur plusieurs photos… ¦ Useisiin kuviin… ¦ Több fotóra…
+Aucune action enregistrée pour l’instant ¦ Ei vielä tallennettuja toimintoja ¦ Még nincs mentett művelet
+« ＋ Enregistrer les réglages actuels » les garde pour les rejouer sur d’autres photos. ¦ ”＋ Tallenna nykyiset säädöt” säilyttää ne toistettaviksi muissa kuvissa. ¦ A „＋ Jelenlegi korrekciók mentése” megtartja őket, hogy más fotókon is alkalmazhasd.
+Les photos à retoucher ¦ Korjattavat kuvat ¦ A retusálandó fotók
+Prendre ces photos ¦ Ota nämä kuvat ¦ Ezeket a fotókat
+＋ Choisir des photos… ¦ ＋ Valitse kuvia… ¦ ＋ Fotók kiválasztása…
+afficher la nouvelle version ¦ näytä uusi versio ¦ az új változat megjelenítése
+Aucune photo choisie. ¦ Kuvaa ei valittu. ¦ Nincs kiválasztott fotó.
+refusé ¦ hylätty ¦ elutasítva
+fx Effets du calque ¦ fx Tasotehosteet ¦ fx Rétegeffektusok
+Fond (le contenu seulement, pas les effets) ¦ Täyttö (vain sisältö, ei tehosteita) ¦ Kitöltés (csak a tartalom, az effektusok nem)
+Lueur externe ¦ Ulkohehku ¦ Külső ragyogás
+Incrustation de couleur ¦ Värin peitto ¦ Színátfedés
+à l’extérieur ¦ ulkopuolella ¦ kívül
+au milieu ¦ keskellä ¦ középen
+à l’intérieur ¦ sisäpuolella ¦ belül
+Tout enlever ¦ Poista kaikki ¦ Az összes eltávolítása
+🔍 Plis et rayures ¦ 🔍 Taitteet ja naarmut ¦ 🔍 Gyűrődések és karcolások
+Recherche des plis… ¦ Etsitään taitteita… ¦ Gyűrődések keresése…
+garder le grain autour ¦ säilytä ympäröivä rakeisuus ¦ a környező szemcsézet megtartása
+🪡 Plutôt à la main ¦ 🪡 Mieluummin käsin ¦ 🪡 Inkább kézzel
+✓ Réparer ces lignes ¦ ✓ Korjaa nämä viivat ¦ ✓ Vonalak javítása
+Aucun pli trouvé : monte la sensibilité, ou répare à la main avec le pinceau 🪡. ¦ Taitteita ei löytynyt: nosta herkkyyttä tai korjaa käsin siveltimellä 🪡. ¦ Nem található gyűrődés: növeld az érzékenységet, vagy javítsd kézzel a 🪡 ecsettel.
+Réparation… ¦ Korjataan… ¦ Javítás…
+✨ Plis et rayures comblés ¦ ✨ Taitteet ja naarmut täytetty ¦ ✨ Gyűrődések és karcolások kitöltve
+🌫️ Débruitage ¦ 🌫️ Kohinanpoisto ¦ 🌫️ Zajcsökkentés
+adoucit le grain sans perdre les contours ¦ pehmentää rakeisuutta menettämättä reunoja ¦ lágyítja a szemcsézetet a szélek elvesztése nélkül
+🧹 Poussières et rayures ¦ 🧹 Pöly ja naarmut ¦ 🧹 Por és karcolások
+les petits points blancs ou noirs ¦ pienet valkoiset tai mustat pisteet ¦ az apró fehér vagy fekete pöttyök
+🩹 Plis et fines déchirures ¦ 🩹 Taitteet ja ohuet repeämät ¦ 🩹 Gyűrődések és vékony szakadások
+lignes fines repérées puis comblées ¦ ohuet viivat löydetty ja täytetty ¦ vékony vonalak megtalálva és kitöltve
+🎚 Contraste et niveaux automatiques ¦ 🎚 Automaattinen kontrasti ja tasot ¦ 🎚 Automatikus kontraszt és szintek
+noirs bien noirs, blancs bien blancs ¦ mustat todella mustia, valkoiset todella valkoisia ¦ a feketék igazán feketék, a fehérek igazán fehérek
+🔎 Netteté douce ¦ 🔎 Pehmeä terävöitys ¦ 🔎 Finom élesítés
+un peu plus de piqué ¦ hieman enemmän terävyyttä ¦ egy kicsit több élesség
+🌈 Colorisation ¦ 🌈 Väritys ¦ 🌈 Színezés
+couleurs d’époque (photo en noir et blanc) ¦ aikakauden värit (mustavalkoinen kuva) ¦ korabeli színek (fekete-fehér fotó)
+la photo a déjà des couleurs : coche si tu veux quand même ¦ kuvassa on jo värejä: rastita, jos haluat silti ¦ a fotó már színes: jelöld be, ha mégis szeretnéd
+Coche les étapes à garder ; chacune devient un calque « ✨ » que tu peux ensuite cacher ou doser. ↶ défait tout d’un coup. ¦ Rastita säilytettävät vaiheet; kustakin tulee ”✨”-taso, jonka voit myöhemmin piilottaa tai heikentää. ↶ kumoaa kaiken kerralla. ¦ Jelöld be a megtartandó lépéseket; mindegyik egy „✨” réteg lesz, amelyet később elrejthetsz vagy gyengíthetsz. ↶ mindent egyszerre visszavon.
+Garder : {what} ¦ Säilytä: {what} ¦ Megtartás: {what}
+détail au centre ¦ yksityiskohta keskeltä ¦ részlet középen
+Aperçus… ¦ Esikatselut… ¦ Előnézetek…
+aucun pli trouvé à cette intensité ¦ tällä voimakkuudella ei löytynyt taitteita ¦ ezen az erősségen nem található gyűrődés
+Coche au moins une étape. ¦ Rastita vähintään yksi vaihe. ¦ Jelölj be legalább egy lépést.
+✨ Plis et fines déchirures ¦ ✨ Taitteet ja ohuet repeämät ¦ ✨ Gyűrődések és vékony szakadások
+✨ Poussières et rayures ¦ ✨ Pöly ja naarmut ¦ ✨ Por és karcolások
+✨ Débruitage ¦ ✨ Kohinanpoisto ¦ ✨ Zajcsökkentés
+✨ Contraste et niveaux ¦ ✨ Kontrasti ja tasot ¦ ✨ Kontraszt és szintek
+✨ Netteté douce ¦ ✨ Pehmeä terävöitys ¦ ✨ Finom élesítés
+✨ Colorisation ¦ ✨ Väritys ¦ ✨ Színezés
+Colorisation ¦ Väritys ¦ Színezés
+Couleurs (pinceau) ¦ Värit (sivellin) ¦ Színek (ecset)
+✨ Retouches (taches, plis, tampon) ¦ ✨ Korjaukset (tahrat, taitteet, leimasin) ¦ ✨ Retusálás (foltok, gyűrődések, klónbélyegző)
+🪪 Photo d’identité ¦ 🪪 Passikuva ¦ 🪪 Igazolványkép
+Les yeux à l’horizontale, toujours à la même hauteur : tous les portraits faits ainsi ont le même format. ¦ Silmät vaakatasossa, aina samalla korkeudella: kaikki näin tehdyt muotokuvat ovat samassa muodossa. ¦ A szemek vízszintesen, mindig ugyanabban a magasságban: az így készült portrék mind azonos formátumúak.
+✓ Yeux trouvés sur le visage. ¦ ✓ Silmät löytyivät kasvoista. ¦ ✓ A szemek megtalálva az arcon.
+✓ D’après l’identification de la photo : ajuste les ronds sur les yeux. ¦ ✓ Kuvan tunnistuksen perusteella: säädä ympyrät silmien päälle. ¦ ✓ A fotó azonosítása alapján: igazítsd a köröket a szemekre.
+⚠️ Visage non trouvé : glisse les deux ronds sur les yeux. ¦ ⚠️ Kasvoja ei löytynyt: vedä kaksi ympyrää silmien päälle. ¦ ⚠️ Nem található arc: húzd a két kört a szemekre.
+Plusieurs fiches… ¦ Useita kortteja… ¦ Több adatlap…
+✓ Recadrer ¦ ✓ Rajaa ¦ ✓ Körbevágás
+👤 Utiliser comme portrait… ¦ 👤 Käytä muotokuvana… ¦ 👤 Használat portréként…
+Recadré en photo d’identité ¦ Rajattu passikuvaksi ¦ Igazolványképnek körbevágva
+3:4 (portrait classique) ¦ 3:4 (perinteinen muotokuva) ¦ 3:4 (klasszikus portré)
+35 × 45 mm (photo d’identité) ¦ 35 × 45 mm (passikuva) ¦ 35 × 45 mm (igazolványkép)
+Marge autour du visage ¦ Marginaali kasvojen ympärillä ¦ Margó az arc körül
+Hauteur des yeux ¦ Silmien korkeus ¦ A szemek magassága
+modèle absent ¦ malli puuttuu ¦ hiányzik a modell
+Recherche du visage… ¦ Etsitään kasvoja… ¦ Arc keresése…
+Photo non enregistrée. ¦ Kuvaa ei tallennettu. ¦ A fotó nincs mentve.
+Utiliser comme portrait de quelle fiche ? ¦ Minkä kortin muotokuvaksi? ¦ Melyik adatlap portréjaként?
+PHOTO D’IDENTITÉ ¦ PASSIKUVA ¦ IGAZOLVÁNYKÉP
+La photo recadrée est ajoutée aux médias de la fiche, puis devient son portrait (l’ancien portrait reste dans ses médias). ¦ Rajattu kuva lisätään kortin mediaan, ja siitä tulee sen muotokuva (vanha muotokuva jää sen mediaan). ¦ A körbevágott fotó bekerül az adatlap médiái közé, és ez lesz a portréja (a régi portré a médiái között marad).
+Choisis une personne dans la liste. ¦ Valitse henkilö luettelosta. ¦ Válassz egy személyt a listából.
+RETOUCHE · PHOTO D’IDENTITÉ ¦ KORJAUS · PASSIKUVA ¦ RETUSÁLÁS · IGAZOLVÁNYKÉP
+🪪 Portraits de plusieurs fiches ¦ 🪪 Useiden korttien muotokuvat ¦ 🪪 Több adatlap portréi
+Choisis les fiches : pour chacune, l’app prend son portrait (ou sa première photo), trouve le visage et le cadre au même format que les autres (yeux à la même hauteur). Tu vérifies, puis « Utiliser comme portraits » : chaque photo recadrée entre dans les médias de sa fiche et devient son portrait (l’ancien reste). ¦ Valitse kortit: kullekin sovellus ottaa sen muotokuvan (tai ensimmäisen kuvan), löytää kasvot ja rajaa ne samaan muotoon kuin muut (silmät samalla korkeudella). Tarkistat ja valitset sitten ”Käytä muotokuvina”: jokainen rajattu kuva menee kortin mediaan ja siitä tulee sen muotokuva (vanha säilyy). ¦ Válaszd ki az adatlapokat: mindegyiknél az alkalmazás fogja a portréját (vagy az első fotóját), megkeresi az arcot, és ugyanabban a formátumban vágja körbe, mint a többit (a szemek ugyanabban a magasságban). Ellenőrzöd, aztán „Használat portréként”: minden körbevágott fotó bekerül a saját adatlapja médiái közé, és az lesz a portréja (a régi megmarad).
+🔍 Préparer les portraits ¦ 🔍 Valmistele muotokuvat ¦ 🔍 Portrék előkészítése
+Aucune fiche choisie pour l’instant ¦ Kortteja ei ole vielä valittu ¦ Még nincs kiválasztott adatlap
+Choisis une ou plusieurs personnes ci-dessus, puis « 🔍 Préparer les portraits ». ¦ Valitse yksi tai useampi henkilö yllä ja sitten ”🔍 Valmistele muotokuvat”. ¦ Válassz ki fent egy vagy több személyt, aztán „🔍 Portrék előkészítése”.
+Choisis d’abord une ou plusieurs fiches. ¦ Valitse ensin yksi tai useampi kortti. ¦ Előbb válassz ki egy vagy több adatlapot.
+aucune photo dans la fiche ¦ kortissa ei ole kuvaa ¦ nincs fotó az adatlapon
+yeux trouvés ¦ silmät löytyivät ¦ szemek megtalálva
+d’après l’identification ¦ tunnistuksen perusteella ¦ az azonosítás alapján
+✓ portrait mis à jour ¦ ✓ muotokuva päivitetty ¦ ✓ portré frissítve
+Utiliser comme portraits ¦ Käytä muotokuvina ¦ Használat portréként
+La rotation n’est pas encore prête : réessaie dans un instant. ¦ Kierto ei ole vielä valmis: yritä hetken päästä uudelleen. ¦ A forgatás még nem áll készen: próbáld újra egy pillanat múlva.
+Rotation de l’image ¦ Kuvan kierto ¦ Kép forgatása
+Rotation de l’image : 90° horaire ¦ Kuvan kierto: 90° myötäpäivään ¦ Kép forgatása: 90° az óra járásával megegyezően
+Rotation de l’image : 90° antihoraire ¦ Kuvan kierto: 90° vastapäivään ¦ Kép forgatása: 90° az óra járásával ellentétesen
+Rotation de l’image : 180° ¦ Kuvan kierto: 180° ¦ Kép forgatása: 180°
+Rotation de l’image : {a}° horaire ¦ Kuvan kierto: {a}° myötäpäivään ¦ Kép forgatása: {a}° az óra járásával megegyezően
+Rotation de l’image : {a}° antihoraire ¦ Kuvan kierto: {a}° vastapäivään ¦ Kép forgatása: {a}° az óra járásával ellentétesen
+Symétrie horizontale de l’image ¦ Peilaa kuva vaakasuunnassa ¦ Kép vízszintes tükrözése
+Symétrie verticale de l’image ¦ Peilaa kuva pystysuunnassa ¦ Kép függőleges tükrözése
+Perspective figée ¦ Perspektiivi lukittu ¦ Perspektíva rögzítve
+Le recadrage d’avant a été retiré (il ne tenait plus droit) : refais-le si besoin, ou ↶ Annuler. ¦ Edellinen rajaus poistettiin (se ei ollut enää suorassa): tee se tarvittaessa uudelleen, tai ↶ Kumoa. ¦ Az előző körbevágás eltávolítva (már nem volt egyenes): ha kell, csináld meg újra, vagy ↶ Visszavonás.
+📐 Redresser l’horizon ¦ 📐 Suorista horisontti ¦ 📐 Horizont kiegyenesítése
+L’angle mesuré sur ta ligne : la photo tourne de cet angle pour la remettre droite. ¦ Viivastasi mitattu kulma: kuvaa kierretään tämän verran sen suoristamiseksi. ¦ A vonaladon mért szög: a fotó ennyivel fordul el, hogy kiegyenesedjen.
+Coins ajoutés autour ¦ Ympärille lisätyt kulmat ¦ Körben hozzáadott sarkok
+Transparents (PNG) ¦ Läpinäkyvät (PNG) ¦ Átlátszók (PNG)
+✂️ Recadrer pour enlever les coins vides ¦ ✂️ Rajaa poistaaksesi tyhjät kulmat ¦ ✂️ Körbevágás az üres sarkok eltávolításához
+Tous les calques, masques, textes et la sélection tournent avec la photo. ↶ Annuler (⌘Z) revient comme avant. ¦ Kaikki tasot, maskit, tekstit ja valinta kiertyvät kuvan mukana. ↶ Kumoa (⌘Z) palauttaa entiselleen. ¦ Minden réteg, maszk, szöveg és a kijelölés a fotóval együtt fordul. ↶ Visszavonás (⌘Z): vissza a korábbi állapotra.
+Donne un angle entre 0,01 et 359,99°. ¦ Anna kulma väliltä 0,01–359,99°. ¦ Adj meg egy szöget 0,01 és 359,99° között.
+Trace une ligne le long de l’horizon (ou d’un mur bien droit) : la photo tournera pour la remettre droite. Échap pour arrêter. ¦ Piirrä viiva horisonttia (tai suoraa seinää) pitkin: kuva kiertyy suoraksi. Esc lopettaa. ¦ Húzz egy vonalat a horizont (vagy egy egyenes fal) mentén: a fotó elfordul, hogy kiegyenesedjen. Esc a leállításhoz.
+Cette ligne est déjà droite : rien à tourner. ¦ Tämä viiva on jo suora: ei kierrettävää. ¦ Ez a vonal már egyenes: nincs mit forgatni.
+Photo prise avec le téléphone tourné : elle est enregistrée couchée. ¦ Kuva otettu puhelin käännettynä: se on tallennettu kyljellään. ¦ A fotó elforgatott telefonnal készült: oldalt fekve van mentve.
+↻ Remettre droite ¦ ↻ Käännä pystyyn ¦ ↻ Állítsd egyenesbe
+Photo remise droite (orientation du téléphone) ¦ Kuva käännetty pystyyn (puhelimen suunta) ¦ Fotó egyenesbe állítva (a telefon tájolása)
+Les retouches en cours seront perdues (💾 Enregistrer le projet les garde pour plus tard). ¦ Keskeneräiset korjaukset menetetään (💾 Tallenna projekti säilyttää ne myöhempää varten). ¦ A folyamatban lévő retusálások elvesznek (a 💾 Projekt mentése megőrzi őket későbbre).
+Passer à la retouche simple ? ¦ Siirrytäänkö yksinkertaiseen korjaukseen? ¦ Váltasz az egyszerű retusálásra?
+Passer sans enregistrer ¦ Siirry tallentamatta ¦ Váltás mentés nélkül
+Le PSD n’est pas encore prêt : réessaie dans un instant. ¦ PSD ei ole vielä valmis: yritä hetken päästä uudelleen. ¦ A PSD még nem áll készen: próbáld újra egy pillanat múlva.
+L’assemblage de photos n’est pas encore prêt. ¦ Kuvien yhdistäminen ei ole vielä valmis. ¦ A fotók összeillesztése még nem áll készen.
+Cet outil n’est pas encore prêt : réessaie dans un instant. ¦ Tämä työkalu ei ole vielä valmis: yritä hetken päästä uudelleen. ¦ Ez az eszköz még nem áll készen: próbáld újra egy pillanat múlva.
+Recherche du sujet… ¦ Etsitään kohdetta… ¦ A téma keresése…
+Sujet introuvable : le fond touche tout le bord. Essaie avec moins de tolérance (🪄), ou le lasso. ¦ Kohdetta ei löytynyt: tausta koskettaa koko reunaa. Kokeile pienemmällä toleranssilla (🪄) tai lassolla. ¦ Nem található téma: a háttér az egész szélet érinti. Próbáld kisebb tűréssel (🪄), vagy a lasszóval.
+Sujet sélectionné : ⇧ + baguette ou lasso pour ajouter, ⌥ pour enlever ; « Masque » pour l’appliquer. Tolérance (🪄) : jusqu’où va le fond. ¦ Kohde valittu: ⇧ + taikasauva tai lasso lisää, ⌥ poistaa; ”Maski” soveltaa sen. Toleranssi (🪄): kuinka pitkälle tausta ulottuu. ¦ Téma kijelölve: ⇧ + varázspálca vagy lasszó a hozzáadáshoz, ⌥ a kivonáshoz; „Maszk” az alkalmazáshoz. Tűrés (🪄): meddig terjed a háttér.
+Sujet sélectionné ¦ Kohde valittu ¦ Téma kijelölve
+La photo semble déjà droite. ¦ Kuva näyttää jo suoralta. ¦ A fotó már egyenesnek tűnik.
+Des corrections (taches, tampon) sont déjà faites : elles vont bouger avec la remise à plat. ¦ Joitakin korjauksia (tahrat, leimasin) on jo tehty: ne liikkuvat oikaisun mukana. ¦ Néhány javítás (foltok, klónbélyegző) már elkészült: a kiegyenesítéssel együtt elmozdulnak.
+Redresser la perspective ? ¦ Korjataanko perspektiivi? ¦ Javítod a perspektívát?
+Perspective redressée ¦ Perspektiivi korjattu ¦ Perspektíva javítva
+Perspective enlevée ¦ Perspektiivi poistettu ¦ Perspektíva eltávolítva
+Peins les couleurs (pinceau doux) : le calque est en fusion « Couleur », la lumière de la photo est gardée. 🧽 pour corriger, opacité du calque pour doser. ¦ Maalaa värit (pehmeä sivellin): tason sekoitustila on ”Väri”, joten kuvan valo säilyy. 🧽 korjaa, tason peittävyys säätää voimakkuutta. ¦ Fesd a színeket (lágy ecset): a réteg „Szín” keverési módban van, a fotó fényei megmaradnak. 🧽 a javításhoz, a réteg átlátszatlansága az adagoláshoz.
+Recherche des taches… ¦ Etsitään tahroja… ¦ Foltok keresése…
+Aucune tache trouvée : augmente la sensibilité ou la taille. ¦ Tahroja ei löytynyt: lisää herkkyyttä tai kokoa. ¦ Nem található folt: növeld az érzékenységet vagy a méretet.
+✨ Jaunissement enlevé ¦ ✨ Kellastuminen poistettu ¦ ✨ Sárgulás eltávolítva
+Jaunissement enlevé sur le calque de réglage « ✨ Jaunissement enlevé » : la photo n’est pas touchée. ¦ Kellastuminen poistettu säätötasolla ”✨ Kellastuminen poistettu”: kuvaan ei kosketa. ¦ Sárgulás eltávolítva a „✨ Sárgulás eltávolítva” korrekciós rétegen: a fotó érintetlen.
+Jaunissement enlevé (calque de réglage) ¦ Kellastuminen poistettu (säätötaso) ¦ Sárgulás eltávolítva (korrekciós réteg)
+Entoure d’abord le visage avec l’ellipse ◯ (glisse sur la photo), puis reclique « Visage plus net ». ¦ Rajaa ensin kasvot ellipsillä ◯ (vedä kuvan päällä) ja napsauta sitten uudelleen ”Terävämmät kasvot”. ¦ Előbb rajzold körbe az arcot az ◯ ellipszissel (húzd a fotón), aztán kattints újra az „Élesebb arc” gombra.
+Visage débruité et accentué sur un calque à part : son opacité dose l’effet. ¦ Kasvoista poistettu kohina ja niitä terävöitetty erillisellä tasolla: sen peittävyys säätää vaikutusta. ¦ Az arc zajmentesítve és élesítve egy külön rétegen: az átlátszatlansága adagolja a hatást.
+Correcteur prêt : glisse le long de la rayure ou du pli (zoome pour être précis). ¦ Korjaustyökalu valmis: vedä naarmua tai taitetta pitkin (zoomaa ollaksesi tarkka). ¦ A javítóeszköz kész: húzd végig a karcoláson vagy gyűrődésen (a pontossághoz nagyíts).
+✨ Vieille photo ravivée ¦ ✨ Vanha kuva elvytetty ¦ ✨ Régi fotó élénkítve
+✨ Réglage automatique ¦ ✨ Automaattinen säätö ¦ ✨ Automatikus beállítás
+Fais d’abord une sélection. ¦ Tee ensin valinta. ¦ Előbb jelölj ki valamit.
+Masque qui cache tout ¦ Kaiken piilottava maski ¦ Mindent elrejtő maszk
+Ce calque n’a pas de masque (Calque → Ajouter un masque). ¦ Tällä tasolla ei ole maskia (Taso → Lisää maski). ¦ Ennek a rétegnek nincs maszkja (Réteg → Maszk hozzáadása).
+Ce calque n’a pas de masque. ¦ Tällä tasolla ei ole maskia. ¦ Ennek a rétegnek nincs maszkja.
+Sélection inversée ¦ Valinta käännetty ¦ Kijelölés megfordítva
+Agrandir la sélection ¦ Laajenna valintaa ¦ Kijelölés kiterjesztése
+Réduire la sélection ¦ Supista valintaa ¦ Kijelölés szűkítése
+De combien de points (de l’aperçu) ? ¦ Kuinka monta pikseliä (esikatselun)? ¦ Hány képponttal (az előnézetben)?
+Sélection agrandie ¦ Valintaa laajennettu ¦ Kijelölés kiterjesztve
+Sélection réduite ¦ Valintaa supistettu ¦ Kijelölés szűkítve
+Contour progressif de la sélection ¦ Valinnan reunan pehmennys ¦ A kijelölés lágy széle
+Copie de la sélection ¦ Valinnan kopio ¦ A kijelölés másolata
+Sélection copiée sur un calque ¦ Valinta kopioitu tasolle ¦ Kijelölés rétegre másolva
+Remplissage ¦ Täyttö ¦ Kitöltés
+Zone effacée de la photo : elle sera transparente (image enregistrée en PNG). ¦ Alue pyyhitty kuvasta: siitä tulee läpinäkyvä (kuva tallennetaan PNG-muodossa). ¦ Terület törölve a fotóról: átlátszó lesz (a kép PNG-ként mentődik).
+Sélection effacée ¦ Valinta pyyhitty ¦ Kijelölés törölve
+Recadré sur la sélection ¦ Rajattu valintaan ¦ Körbevágva a kijelölésre
+Filtres de ce calque ¦ Tämän tason suotimet ¦ E réteg szűrői
+Plus tôt ¦ Aiemmin ¦ Korábban
+un filtre… ¦ suodin… ¦ egy szűrő…
+＋ Ajouter ¦ ＋ Lisää ¦ ＋ Hozzáadás
+✨ Menu <b>Filtre</b> : chaque filtre se pose sur son propre calque (rien n’est détruit) : on le règle, on le dose avec l’opacité du calque, on le limite avec un masque 🎭, on le cache 👁. ¦ ✨ <b>Suodin</b>-valikko: jokainen suodin asettuu omalle tasolleen (mitään ei tuhota): voit säätää sitä, heikentää sitä tason peittävyydellä, rajata sitä maskilla 🎭, piilottaa sen 👁. ¦ ✨ <b>Szűrő</b> menü: minden szűrő a saját rétegére kerül (semmi sem vész el): beállíthatod, a réteg átlátszatlanságával gyengítheted, maszkkal korlátozhatod 🎭, elrejtheted 👁.
+Réglages remis à zéro ¦ Säädöt nollattu ¦ Korrekciók nullázva
+Point de courbe enlevé ¦ Käyrän piste poistettu ¦ Görbepont eltávolítva
+Supprimer ce point ¦ Poista tämä piste ¦ A pont törlése
+Point de la courbe ¦ Käyrän piste ¦ Görbepont
+Masque en rouge : ce qui est caché (touche \ pour revenir) ¦ Maski punaisena: piilotettu osa (näppäin \ palaa) ¦ Maszk pirosan: ami el van rejtve (\ billentyű a visszatéréshez)
+Pas encore enregistré comme projet : 💾 Enregistrer garde tout le travail pour continuer plus tard ¦ Ei vielä tallennettu projektina: 💾 Tallenna säilyttää kaiken työn myöhempää jatkamista varten ¦ Még nincs projektként mentve: a 💾 Mentés megőrzi a teljes munkát a későbbi folytatáshoz
+Enregistrer le projet sous un autre nom ¦ Tallenna projekti toisella nimellä ¦ Projekt mentése más néven
+Nom du nouveau projet (pour le retrouver dans « 📂 Projets… ») : ¦ Uuden projektin nimi (löydät sen kohdasta ”📂 Projektit…”): ¦ Az új projekt neve (a „📂 Projektek…” alatt találod meg):
+Les retouches en cours seront perdues. ¦ Keskeneräiset korjaukset menetetään. ¦ A folyamatban lévő retusálások elvesznek.
+Ouvrir un autre projet sans enregistrer ce travail ? ¦ Avataanko toinen projekti tallentamatta tätä työtä? ¦ Megnyitsz egy másik projektet e munka mentése nélkül?
+Ouvrir sans enregistrer ¦ Avaa tallentamatta ¦ Megnyitás mentés nélkül
+affichée ¦ näytetään ¦ megjelenítve
+en cours de retouche ¦ korjattavana ¦ retusálás alatt
+Voir, comparer, revenir, renommer, supprimer (L3) ¦ Näytä, vertaa, palaa, nimeä uudelleen, poista (L3) ¦ Megtekintés, összehasonlítás, visszatérés, átnevezés, törlés (L3)
+Voir, comparer, revenir, renommer, supprimer ¦ Näytä, vertaa, palaa, nimeä uudelleen, poista ¦ Megtekintés, összehasonlítás, visszatérés, átnevezés, törlés
+l’original est toujours gardé ¦ alkuperäinen säilyy aina ¦ az eredeti mindig megmarad
+Original ¦ Alkuperäinen ¦ Eredeti
+Quitter cette retouche sans l’enregistrer ? ¦ Poistutaanko tästä korjauksesta tallentamatta? ¦ Kilépsz ebből a retusálásból mentés nélkül?
+Pas de versions pour cette image. ¦ Tällä kuvalla ei ole versioita. ¦ Ennek a képnek nincsenek változatai.
+Bicubique, plus lisse (pour agrandir) ¦ Bikuubinen, pehmeämpi (suurentamiseen) ¦ Bikubikus, simább (nagyításhoz)
+Bicubique, plus net (pour réduire) ¦ Bikuubinen, terävämpi (pienentämiseen) ¦ Bikubikus, élesebb (kicsinyítéshez)
+Bilinéaire ¦ Bilineaarinen ¦ Bilineáris
+Au plus proche (contours nets, pixels) ¦ Lähin naapuri (terävät reunat, pikselit) ¦ Legközelebbi szomszéd (éles szélek, képpontok)
+La taille de l’image enregistrée ou exportée (Image → Taille de l’image, Taille de la zone de travail) ¦ Tallennetun tai viedyn kuvan koko (Kuva → Kuvan koko, Työalueen koko) ¦ A mentett vagy exportált kép mérete (Kép → Képméret, Vászonméret)
+📏 Taille de l’image ¦ 📏 Kuvan koko ¦ 📏 Képméret
+pixels ¦ pikseliä ¦ képpont
+pour cent ¦ prosenttia ¦ százalék
+Ajuster à un format ¦ Sovita muotoon ¦ Igazítás egy formátumhoz
+— garder ces mesures — ¦ — säilytä nämä mitat — ¦ — e méretek megtartása —
+🔗 Conserver les proportions ¦ 🔗 Säilytä mittasuhteet ¦ 🔗 Arányok megtartása
+Résolution ¦ Tarkkuus ¦ Felbontás
+Rééchantillonner ¦ Uudelleennäytteistä ¦ Újramintavételezés
+Méthode ¦ Menetelmä ¦ Módszer
+À l’impression ¦ Tulosteessa ¦ Nyomtatásban
+↺ Remettre la taille d’origine ¦ ↺ Palauta alkuperäinen koko ¦ ↺ Visszaállítás az eredeti méretre
+La photo reste en pleine qualité pendant la retouche : la taille choisie s’applique quand tu enregistres ou exportes l’image. ↶ Annuler (⌘Z) revient à la taille d’avant. ¦ Kuva pysyy täydessä laadussa korjauksen ajan: valittu koko otetaan käyttöön, kun tallennat tai viet kuvan. ↶ Kumoa (⌘Z) palauttaa edellisen koon. ¦ A fotó a retusálás alatt teljes minőségű marad: a választott méret a kép mentésekor vagy exportálásakor érvényesül. ↶ Visszavonás (⌘Z): vissza az előző méretre.
+✓ Assez grande pour imprimer en A5 à 300 ppp. ¦ ✓ Riittävän suuri A5-tulosteeseen 300 ppi:n tarkkuudella. ¦ ✓ Elég nagy az A5-ös nyomtatáshoz 300 dpi-vel.
+⚠️ Trop petite pour imprimer en A5 à 300 ppp (il faut 1748 × 2480 px). ¦ ⚠️ Liian pieni A5-tulosteeseen 300 ppi:n tarkkuudella (tarvitaan 1748 × 2480 px). ¦ ⚠️ Túl kicsi az A5-ös nyomtatáshoz 300 dpi-vel (1748 × 2480 px kell).
+Choisis une taille entre 1 et 30 000 pixels de côté (260 millions de pixels au plus). ¦ Valitse koko väliltä 1–30 000 pikseliä sivua kohden (enintään 260 miljoonaa pikseliä). ¦ Válassz oldalanként 1 és 30 000 képpont közötti méretet (legfeljebb 260 millió képpont).
+⬚ Taille de la zone de travail ¦ ⬚ Työalueen koko ¦ ⬚ Vászonméret
+Nouvelle taille ¦ Uusi koko ¦ Új méret
+Ancrage ¦ Ankkuri ¦ Horgony
+Où reste l’image ¦ Mihin kuva jää ¦ Hol marad a kép
+Relative (ajouter à la taille actuelle) ¦ Suhteellinen (lisää nykyiseen kokoon) ¦ Relatív (hozzáadás a jelenlegi mérethez)
+Au centre ¦ Keskellä ¦ Középen
+L’image reste à cet endroit ; la toile s’agrandit (ou se coupe) autour. ¦ Kuva pysyy tässä kohdassa; työalue kasvaa (tai leikkautuu) sen ympärillä. ¦ A kép ezen a helyen marad; a vászon körülötte nő (vagy vágódik le).
+Fond de la zone ajoutée ¦ Lisätyn alueen tausta ¦ A hozzáadott terület háttere
+Transparent (PNG) ¦ Läpinäkyvä (PNG) ¦ Átlátszó (PNG)
+↺ Remettre la zone de départ ¦ ↺ Palauta alkuperäinen työalue ¦ ↺ Visszaállítás az eredeti vászonra
+↶ Annuler (⌘Z) revient à la zone d’avant. ¦ ↶ Kumoa (⌘Z) palauttaa edellisen työalueen. ¦ ↶ Visszavonás (⌘Z): vissza az előző vászonra.
+Choisis une taille entre 1 et 30 000 pixels de côté. ¦ Valitse koko väliltä 1–30 000 pikseliä sivua kohden. ¦ Válassz oldalanként 1 és 30 000 képpont közötti méretet.
+Informations de l’image ¦ Kuvan tiedot ¦ A kép adatai
+Ces informations sont écrites dans l’image enregistrée ou exportée (XMP, lisible par Photoshop, Lightroom, l’Explorateur…). ¦ Nämä tiedot kirjoitetaan tallennettuun tai vietyyn kuvaan (XMP, luettavissa Photoshopilla, Lightroomilla, Resurssienhallinnalla…). ¦ Ezek az adatok a mentett vagy exportált képbe íródnak (XMP, a Photoshop, a Lightroom, az Intéző… olvassa).
+Droits (copyright) ¦ Oikeudet (tekijänoikeus) ¦ Jogok (szerzői jog)
+Personnes reliées ¦ Yhdistetyt henkilöt ¦ Kapcsolt személyek
+Image trop grande pour être enregistrée par le navigateur. ¦ Kuva on liian suuri selaimen tallennettavaksi. ¦ A kép túl nagy ahhoz, hogy a böngésző elmentse.
+Image trop grande pour le navigateur. ¦ Kuva on liian suuri selaimelle. ¦ A kép túl nagy a böngészőnek.
+Copie retouchée ajoutée aux mêmes fiches. ¦ Korjattu kopio lisätty samoihin kortteihin. ¦ A retusált másolat hozzáadva ugyanazokhoz az adatlapokhoz.
+Image enregistrée dans les Médias. ¦ Kuva tallennettu Mediaan. ¦ Kép mentve a Médiába.
+Nouvelle version affichée. L’original est gardé dans les versions. ¦ Uusi versio näytetään. Alkuperäinen säilyy versioissa. ¦ Az új változat látható. Az eredeti a változatok között megmarad.
+Version enregistrée (non affichée). ¦ Versio tallennettu (ei näytetä). ¦ Változat mentve (nincs megjelenítve).
+Ouverture de la photo ¦ Avataan kuvaa ¦ A fotó megnyitása
+La photo de départ n’a plus la même taille : vérifie les calques. ¦ Alkuperäisen kuvan koko on muuttunut: tarkista tasot. ¦ A kiinduló fotó mérete megváltozott: ellenőrizd a rétegeket.
+Supprimer le projet (les photos et leurs versions restent) ¦ Poista projekti (kuvat ja niiden versiot säilyvät) ¦ Projekt törlése (a fotók és változataik megmaradnak)
+Aucun projet de retouche pour l’instant ¦ Ei vielä korjausprojekteja ¦ Még nincs retusálási projekt
+Dans la Retouche, « 💾 Enregistrer le projet ». ¦ Korjauksessa: ”💾 Tallenna projekti”. ¦ A Retusálásban: „💾 Projekt mentése”.
+Renommer le projet ¦ Nimeä projekti uudelleen ¦ Projekt átnevezése
+La photo et ses versions restent. ¦ Kuva ja sen versiot säilyvät. ¦ A fotó és a változatai megmaradnak.
+Écran 16:9 — 1920 × 1080 ¦ Näyttö 16:9 — 1920 × 1080 ¦ Képernyő 16:9 — 1920 × 1080
+Carré — 1080 × 1080 ¦ Neliö — 1080 × 1080 ¦ Négyzet — 1080 × 1080
+Carte postale — 1500 × 2100 ¦ Postikortti — 1500 × 2100 ¦ Képeslap — 1500 × 2100
+A4 portrait (150 dpi) — 1240 × 1754 ¦ A4 pysty (150 dpi) — 1240 × 1754 ¦ A4 álló (150 dpi) — 1240 × 1754
+A4 paysage (150 dpi) — 1754 × 1240 ¦ A4 vaaka (150 dpi) — 1754 × 1240 ¦ A4 fekvő (150 dpi) — 1754 × 1240
+A4 portrait (300 dpi) — 2480 × 3508 ¦ A4 pysty (300 dpi) — 2480 × 3508 ¦ A4 álló (300 dpi) — 2480 × 3508
+Autre taille… ¦ Muu koko… ¦ Más méret…
+⬜ Partir d’un canevas vide ¦ ⬜ Aloita tyhjästä pohjasta ¦ ⬜ Kezdés üres vászonnal
+⬜ Canevas vide ¦ ⬜ Tyhjä pohja ¦ ⬜ Üres vászon
+Créer et ouvrir ¦ Luo ja avaa ¦ Létrehozás és megnyitás
+Une couleur… ¦ Väri… ¦ Egy szín…
+Le canevas est ajouté aux Médias ; on y met ensuite des calques, des groupes, du texte, des formes, des photos (Sélection → calque)… ¦ Pohja lisätään Mediaan; sen päälle lisätään sitten tasoja, ryhmiä, tekstiä, muotoja, kuvia (Valinta → taso)… ¦ A vászon bekerül a Médiába; aztán rétegeket, csoportokat, szöveget, alakzatokat, fotókat teszel rá (Kijelölés → réteg)…
+Taille entre 16 et 8 000 pixels de côté. ¦ Koko väliltä 16–8 000 pikseliä sivua kohden. ¦ Oldalanként 16 és 8000 képpont közötti méret.
+Canevas trop grand pour le navigateur. ¦ Pohja on liian suuri selaimelle. ¦ A vászon túl nagy a böngészőnek.
+Création impossible. ¦ Luominen ei onnistu. ¦ Nem sikerült létrehozni.
+Canevas ¦ Pohja ¦ Vászon
+Restaurer cette photo ¦ Entistä tämä kuva ¦ A fotó restaurálása
+Retoucher cette photo ¦ Korjaa tämä kuva ¦ A fotó retusálása
+Une photo importée est ajoutée aux Médias (sans être rattachée à une fiche) ; ses retouches sont gardées comme versions. ¦ Tuotu kuva lisätään Mediaan (yhdistämättä sitä korttiin); sen korjaukset säilytetään versioina. ¦ Az importált fotó bekerül a Médiába (adatlaphoz kapcsolás nélkül); a retusálásai változatként maradnak meg.
+Rouvrir un travail de retouche enregistré ¦ Avaa uudelleen tallennettu korjaustyö ¦ Mentett retusálási munka újbóli megnyitása
+📂 Projets… ¦ 📂 Projektit… ¦ 📂 Projektek…
+Une image vide, pour dessiner, écrire ou assembler des calques ¦ Tyhjä kuva piirtämiseen, kirjoittamiseen tai tasojen yhdistämiseen ¦ Üres kép rajzoláshoz, íráshoz vagy rétegek összeállításához
+Trop grande : {w} × {h} points. L’agrandissement est limité à {max} points de côté (et {mp} millions de points). ¦ Liian suuri: {w} × {h} pikseliä. Suurennus on rajoitettu {max} pikseliin sivua kohden (ja {mp} miljoonaan pikseliin). ¦ Túl nagy: {w} × {h} képpont. A nagyítás oldalanként {max} képpontra (és {mp} millió képpontra) korlátozott.
+Ta sélection est prise comme ciel ¦ Valintasi käytetään taivaana ¦ A kijelölésed lesz az ég
+Ciel trouvé : {cov} de la photo ¦ Taivas löytyi: {cov} kuvasta ¦ Ég megtalálva: a fotó {cov} része
+calques « Ciel » et « Harmonisation » ¦ tasot ”Taivas” ja ”Harmonisointi” ¦ „Ég” és „Harmonizálás” rétegek
+Ciel remplacé ({what}) ¦ Taivas vaihdettu ({what}) ¦ Ég lecserélve ({what})
+Personne détourée (dans ton rectangle) : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Henkilö irrotettu (suorakulmiosi sisällä): valitse tausta; ”Viimeistele ääriviiva” korjataksesi siveltimellä. ¦ Személy kivágva (a téglalapodon belül): válaszd ki a hátteret; „A körvonal javítása” az ecsetes korrekcióhoz.
+Personne détourée : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Henkilö irrotettu: valitse tausta; ”Viimeistele ääriviiva” korjataksesi siveltimellä. ¦ Személy kivágva: válaszd ki a hátteret; „A körvonal javítása” az ecsetes korrekcióhoz.
+{w} × {h} points aujourd’hui ¦ {w} × {h} pikseliä nyt ¦ jelenleg {w} × {h} képpont
+Cette image est déjà grande : l’agrandissement est limité à {max} points de côté. ¦ Kuva on jo suuri: suurennus on rajoitettu {max} pikseliin sivua kohden. ¦ Ez a kép már nagy: a nagyítás oldalanként {max} képpontra korlátozott.
+×4 donnerait plus de {max} points de côté : seulement ×2. ¦ ×4 tuottaisi yli {max} pikseliä sivua kohden: vain ×2. ¦ ×4: oldalanként több mint {max} képpontot adna: csak ×2.
+Image agrandie téléchargée ({w} × {h}). ¦ Suurennettu kuva ladattu ({w} × {h}). ¦ A nagyított kép letöltve ({w} × {h}).
+Image agrandie ×{k} ({w} × {h}) rangée dans les médias. ¦ Kuva suurennettu ×{k} ({w} × {h}) ja tallennettu mediaan. ¦ ×{k} nagyított kép ({w} × {h}) a médiába mentve.
+Nouvelle version agrandie ×{k} ({w} × {h}) affichée ; l’original reste dans les versions. ¦ Uusi ×{k} suurennettu versio ({w} × {h}) näytetään; alkuperäinen jää versioihin. ¦ Az új, ×{k} nagyított változat ({w} × {h}) látható; az eredeti a változatok között marad.
+☀️ Bleu dégagé ¦ ☀️ Kirkas sininen ¦ ☀️ Tiszta kék
+⛅ Beaux nuages ¦ ⛅ Kauniit pilvet ¦ ⛅ Szép felhők
+🌅 Coucher de soleil ¦ 🌅 Auringonlasku ¦ 🌅 Naplemente
+⛈️ Ciel orageux ¦ ⛈️ Myrskyinen taivas ¦ ⛈️ Viharos ég
+🌫️ Ciel blanc d’hiver ¦ 🌫️ Valkoinen talvitaivas ¦ 🌫️ Fehér téli ég
+Agrandissement arrêté. ¦ Suurennus keskeytetty. ¦ Nagyítás leállítva.
+Fil de calcul en panne. ¦ Laskentasäie kaatui. ¦ A számítási szál hibára futott.
+Recherche du ciel… ¦ Etsitään taivasta… ¦ Az ég keresése…
+Je ne trouve pas de ciel : il doit toucher le haut de la photo et être assez uni. Sélectionne-le toi-même (🪄 baguette, ➰ lasso), puis recommence : ta sélection sera prise comme ciel. ¦ En löydä taivasta: sen täytyy koskettaa kuvan yläreunaa ja olla melko tasainen. Valitse se itse (🪄 taikasauva, ➰ lasso) ja aloita uudelleen: valintasi käytetään taivaana. ¦ Nem találok eget: a fotó tetejéig kell érnie, és elég egyenletesnek kell lennie. Jelöld ki magad (🪄 varázspálca, ➰ lasszó), aztán kezdd újra: a kijelölésed lesz az ég.
+Harmonisation du premier plan ¦ Edustan harmonisointi ¦ Az előtér harmonizálása
+Ciel ¦ Taivas ¦ Ég
+☁️ Remplacer le ciel ¦ ☁️ Vaihda taivas ¦ ☁️ Égbolt cseréje
+Une photo de ciel : de la base, ou de l’ordinateur ¦ Taivaskuva: tietokannasta tai tietokoneelta ¦ Egy égboltfotó: az adatbázisból vagy a számítógépről
+Une image… ¦ Kuva… ¦ Egy kép…
+Taille du nouveau ciel ¦ Uuden taivaan koko ¦ Az új ég mérete
+Position verticale ¦ Pystysijainti ¦ Függőleges helyzet
+Position horizontale ¦ Vaakasijainti ¦ Vízszintes helyzet
+Avec une taille au-dessus de 100 % : quelle partie du ciel se voit (0 = le haut). ¦ Kun koko on yli 100 %: mikä osa taivaasta näkyy (0 = yläosa). ¦ 100% feletti méretnél: az ég melyik része látszik (0 = a teteje).
+Fondu à l’horizon ¦ Häivytys horisontissa ¦ Átmenet a horizontnál
+Adoucit la limite entre le ciel et la terre (arbres, toits) : plus haut, plus fondu. ¦ Pehmentää taivaan ja maan rajaa (puut, katot): suurempi arvo, enemmän häivytystä. ¦ Lágyítja az ég és a föld határát (fák, tetők): magasabb érték, több átmenet.
+Harmoniser le premier plan ¦ Harmonisoi edusta ¦ Az előtér harmonizálása
+Le paysage prend un peu la couleur et la lumière du nouveau ciel, pour que tout aille ensemble. ¦ Maisema saa hieman uuden taivaan väriä ja valoa, jotta kaikki sopii yhteen. ¦ A táj kicsit átveszi az új ég színét és fényét, hogy minden összeillő legyen.
+Opacité du ciel ¦ Taivaan peittävyys ¦ Az ég átlátszatlansága
+Peindre le masque du calque « Ciel » : ⬛ cacher (là où le ciel ne doit pas passer), ⬜ montrer ¦ Maalaa ”Taivas”-tason maskia: ⬛ piilota (missä taivas ei saa näkyä), ⬜ paljasta ¦ Az „Ég” réteg maszkjának festése: ⬛ elrejtés (ahol az ég nem látszhat), ⬜ megmutatás
+🖌 Corriger le masque ¦ 🖌 Korjaa maskia ¦ 🖌 A maszk javítása
+Rien n’est détruit : le ciel est un calque avec un masque. Si un bout de ciel manque ou déborde : « Corriger le masque », ou sélectionne le ciel toi-même (🪄, ➰) et relance. ¦ Mitään ei tuhota: taivas on taso, jolla on maski. Jos taivasta puuttuu tai se valuu yli: ”Korjaa maskia”, tai valitse taivas itse (🪄, ➰) ja käynnistä uudelleen. ¦ Semmi sem vész el: az ég egy maszkos réteg. Ha hiányzik egy darab ég, vagy túllóg: „A maszk javítása”, vagy jelöld ki magad az eget (🪄, ➰), és indítsd újra.
+Une photo de ciel ¦ Taivaskuva ¦ Egy égboltfotó
+Prendre ce ciel ¦ Käytä tätä taivasta ¦ Ez az ég legyen
+Une photo de la base, ou une image de l’ordinateur (elle entre dans les médias). ¦ Kuva tietokannasta tai kuva tietokoneelta (se lisätään mediaan). ¦ Egy fotó az adatbázisból, vagy egy kép a számítógépről (bekerül a médiába).
+Tu peins le masque du ciel : ⬛ cacher là où le ciel déborde (feuillage, toits), ⬜ montrer là où il manque. Puis « ✓ OK ». ¦ Maalaat taivaan maskia: ⬛ piilota, missä taivas valuu yli (lehvistö, katot), ⬜ paljasta, missä sitä puuttuu. Sitten ”✓ OK”. ¦ Az ég maszkját festeted: ⬛ elrejtés, ahol az ég túllóg (lombozat, tetők), ⬜ megmutatás, ahol hiányzik. Aztán „✓ OK”.
+Ciel remplacé : calques « Ciel » et « Harmonisation du premier plan » (opacité, masque, 👁 pour comparer). ¦ Taivas vaihdettu: tasot ”Taivas” ja ”Edustan harmonisointi” (peittävyys, maski, 👁 vertailuun). ¦ Ég lecserélve: „Ég” és „Az előtér harmonizálása” rétegek (átlátszatlanság, maszk, 👁 az összehasonlításhoz).
+✂️ Détourer une personne ¦ ✂️ Irrota henkilö taustasta ¦ ✂️ Személy kivágása
+Sans intelligence artificielle : tout se calcule ici ¦ Ilman tekoälyä: kaikki lasketaan täällä ¦ MI nélkül: itt minden helyben számolódik
+1. Trace un rectangle autour de la personne (⬚), pas trop serré — ou laisse tout : la photo entière sert de cadre. ¦ 1. Piirrä suorakulmio henkilön ympärille (⬚), ei liian tiukasti — tai jätä kaikki: koko kuva toimii kehyksenä. ¦ 1. Rajzolj egy téglalapot a személy köré (⬚), nem túl szorosan — vagy hagyd az egészet: a teljes fotó lesz a keret.
+2. « Détourer » : l’app apprend les couleurs de la personne (dans le rectangle) et du fond (autour), puis suit les contours. ¦ 2. ”Irrota”: sovellus oppii henkilön (suorakulmion sisällä) ja taustan (ympärillä) värit ja seuraa sitten ääriviivoja. ¦ 2. „Kivágás”: az alkalmazás megtanulja a személy (a téglalapban) és a háttér (körülötte) színeit, majd követi a körvonalakat.
+⬚ Tracer un rectangle ¦ ⬚ Piirrä suorakulmio ¦ ⬚ Téglalap rajzolása
+✂️ Détourer ¦ ✂️ Irrota ¦ ✂️ Kivágás
+Fond transparent (image en PNG) ¦ Läpinäkyvä tausta (PNG-kuva) ¦ Átlátszó háttér (PNG-kép)
+Fond flou ¦ Sumea tausta ¦ Elmosott háttér
+Fond uni ¦ Yksivärinen tausta ¦ Egyszínű háttér
+Garder la personne sur un calque à part ¦ Säilytä henkilö erillisellä tasolla ¦ A személy megtartása külön rétegen
+Flou du fond ¦ Taustan sumennus ¦ A háttér elmosása
+Peindre le masque : ⬛ cacher, ⬜ montrer ¦ Maalaa maski: ⬛ piilota, ⬜ paljasta ¦ A maszk festése: ⬛ elrejtés, ⬜ megmutatás
+🖌 Retoucher le contour ¦ 🖌 Viimeistele ääriviiva ¦ 🖌 A körvonal javítása
+Marche bien quand la personne se détache de son fond (couleurs différentes, fond assez simple). Cheveux fins, fond chargé ou vêtements de la couleur du fond : il faudra retoucher au pinceau (« Retoucher le contour »). ¦ Toimii hyvin, kun henkilö erottuu taustastaan (eri värit, melko yksinkertainen tausta). Ohuet hiukset, kirjava tausta tai taustan väriset vaatteet: täytyy viimeistellä siveltimellä (”Viimeistele ääriviiva”). ¦ Jól működik, ha a személy elválik a hátterétől (eltérő színek, elég egyszerű háttér). Vékony haj, zsúfolt háttér vagy a háttér színével egyező ruha: ecsettel kell javítani („A körvonal javítása”).
+Personne détourée ¦ Henkilö irrotettu ¦ Személy kivágva
+Trace un rectangle autour de la personne (en laissant un peu de fond tout autour), puis « ✂️ Détourer ». ¦ Piirrä suorakulmio henkilön ympärille (jättäen hieman taustaa joka puolelle) ja valitse sitten ”✂️ Irrota”. ¦ Rajzolj egy téglalapot a személy köré (hagyj körben egy kis hátteret), aztán „✂️ Kivágás”.
+Détourage… ¦ Irrotetaan… ¦ Kivágás…
+Personne introuvable : trace le rectangle plus près d’elle, puis recommence. ¦ Henkilöä ei löytynyt: piirrä suorakulmio lähemmäs häntä ja aloita uudelleen. ¦ A személy nem található: rajzold a téglalapot közelebb hozzá, aztán kezdd újra.
+✂️ Détourer à nouveau ¦ ✂️ Irrota uudelleen ¦ ✂️ Kivágás újra

@@ -14,6 +14,7 @@
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     ext.lists = ext.lists || {};
     const esc = v => A().escapeHtml(v ?? '');
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const toast = (...a) => A().toast(...a);
     const api = (...a) => A().api(...a);
     const post = (action, body) => api(action, {}, {method: 'POST', body});
@@ -149,7 +150,7 @@
         const invs = [...new Map([...D.issues, ...D.articles].flatMap(r => (r.links || []).filter(l => l.type !== 'person')).map(l => l.type === 'investigation' ? [l.id, l] : [l.inv, {id: l.inv, name: l.name.split(' — ').slice(1).join(' — ') || l.name}])).values()];
         const opt = (v, l, cur) => `<option value="${esc(v)}" ${String(cur) === String(v) ? 'selected' : ''}>${esc(l)}</option>`;
         const sortSel = k => `<select data-pr-sort="${k}">${opt('', '—', f.sort[k] || '')}${Object.entries(SORTS).map(([v, [l]]) => opt(v, l, f.sort[k] || '')).join('')}</select>`;
-        const views = [['issues', `${w.ic} ${w.items} (${issues.length})`], ['articles', `📄 ${w.parts} (${articles.length})`], ['periodicals', `🗂️ ${w.conts} (${conts.length})`], ['wanted', `🛒 À acheter (${wanted.length})`]];
+        const views = [['issues', `${w.ic} ${w.items} (${issues.length})`], ['articles', `📄 ${w.parts} (${articles.length})`], ['periodicals', `🗂️ ${w.conts} (${conts.length})`], ['wanted', i18n('🛒 À acheter ({n})', {n: wanted.length})]];
         const fams = [['', '📚 Tout'], ...allFams().map(k => [k, famName(k)])];
         const kinds = Object.entries(D.kinds).filter(([k]) => !f.fam || (D.family_kinds?.[baseOf(f.fam)] || []).includes(k));
         const total = wanted.reduce((s, i) => s + (money(i.data?.cover_price) || 0), 0);
@@ -207,7 +208,7 @@
         if (!conts.length) return A().emptyState({icon: '📚', text: 'Aucune revue, collection ou série pour l’instant', hint: 'Un livre ou un documentaire n’a pas besoin d’être dans une collection ou une série.', action: {label: '＋ Revue, collection, série', attrs: 'data-pr-new="periodical"'}});
         return `<div class="h-pr-cards">${conts.map(p => { const fm = p.family || 'revue', is = D.issues.filter(i => i.periodical_id === p.id), own = is.filter(i => ['owned', 'subscribed', 'digital'].includes(i.status)).length, want = is.filter(i => ['wanted', 'ordered'].includes(i.status)).length, last = [...is].sort(cmp(['date_desc']))[0];
             return `<article class="h-pr-card" data-pr-periodical="${p.id}"><header><strong>${Wf(fm).ic} ${esc(p.title)}</strong><small>${esc(D.kinds[p.kind] || '')}${p.publisher ? ' · ' + esc(p.publisher) : ''}</small></header>
-                <p>${is.length} ${esc(Wf(fm).items.toLowerCase())} · ${own} à moi · ${want} à acheter${p.data?.subscribed ? ` · 📬 abonné${p.data.subscription_end ? ' jusqu’au ' + esc(p.data.subscription_end) : ''}` : ''}</p>
+                <p>${is.length} ${esc(Wf(fm).items.toLowerCase())} · ${i18n('{own} à moi · {want} à acheter', {own, want})}${p.data?.subscribed ? ` · ${p.data.subscription_end ? i18n('📬 abonné jusqu’au {dt}', {dt: esc(p.data.subscription_end)}) : i18n('📬 abonné')}` : ''}</p>
                 ${last ? `<small class="muted">Dernier : ${esc(issueName(last))} ${esc(last.date_text || '')}</small>` : ''}${labelChips(p.labels)}
                 <div class="page-actions compact"><button type="button" class="button small secondary" data-pr-only="${p.id}">Voir tout</button><button type="button" class="button small secondary" data-pr-addissue="${p.id}">＋ ${esc(Wf(fm).item)}</button></div></article>`; }).join('')}</div>`;
     }
@@ -310,7 +311,7 @@
     function periodicalDialog(p, fam0 = 'revue') {
         const d = p?.data || {}, fam = p?.family || fam0, w = Wf(fam), bf = baseOf(fam);
         const kinds = Object.entries(D.kinds).filter(([k]) => (D.family_kinds?.[bf] || Object.keys(D.kinds)).includes(k));
-        ext.openDialog({eyebrow: w.cont.toUpperCase(), title: p ? p.title : `Nouvelle ${bf === 'revue' ? 'revue' : bf === 'livre' ? 'collection ou série' : bf === 'podcast' ? 'émission (podcast, radio)' : 'série ou émission'}`, wide: true, labels: ['periodical_periodical', p?.labels || []],
+        ext.openDialog({eyebrow: w.cont.toUpperCase(), title: p ? p.title : (bf === 'revue' ? i18n('Nouvelle revue') : bf === 'livre' ? i18n('Nouvelle collection ou série') : bf === 'podcast' ? i18n('Nouvelle émission (podcast, radio)') : i18n('Nouvelle série ou émission')), wide: true, labels: ['periodical_periodical', p?.labels || []],
             body: `<div class="form-grid">${field('family', 'Type', fam, {type: 'select', list: allFams().map(k => [k, D.families?.[k] || Wf(k).items])})}${field('kind', 'Sorte', p?.kind || kinds[0]?.[0], {type: 'select', list: kinds})}
                 ${field('title', 'Nom', p?.title || '', {span: true, ph: bf === 'revue' ? 'Revue française de généalogie, bulletin du cercle…' : bf === 'livre' ? 'Que sais-je ?, Les Rougon-Macquart…' : bf === 'podcast' ? 'La Fabrique de l’histoire, Affaires sensibles, Généalogie pour tous…' : 'Secrets d’histoire, Apocalypse, Retour aux sources…'})}
                 ${field('publisher', bf === 'doc' ? 'Chaîne, producteur' : bf === 'podcast' ? 'Producteur, radio, plateforme' : 'Éditeur', p?.publisher || '')}${field('website', 'Site internet', d.website, {ph: 'https://'})}
@@ -319,7 +320,7 @@
                 ${field('country', 'Pays, région', d.country)}${field('language', 'Langue', d.language)}${field('start_year', 'Depuis (année)', d.start_year)}${field('end_year', 'Jusqu’à (année)', d.end_year)}
                 ${field('where_buy', 'Où l’acheter, le voir', d.where_buy, {ph: 'kiosque, librairie, replay…'})}${field('contact', 'Contact', d.contact)}${field('notes', 'Notes', d.notes, {type: 'textarea', span: true})}</div>`,
             onSubmit: async form => { const v = A().formObject(form); await post('save_periodical', {id: p?.id || 0, family: v.family, title: v.title, kind: v.kind, publisher: v.publisher, data: dataOf(form, ['association', 'issn', 'frequency', 'website', 'country', 'language', 'start_year', 'end_year', 'subscribed', 'subscription_end', 'subscription_price', 'where_buy', 'contact', 'notes']), label_ids: readLabels(form)}); toast('Enregistré.'); await reload(); },
-            onDelete: p ? async () => { if (!await A().confirmBox(`Supprimer « ${p.title} » et tout ce qu’il contient ? (les images restent dans les Médias)`, {title: 'Supprimer le périodique', okLabel: 'Supprimer'})) return false; await post('delete_periodical_item', {what: 'periodical', id: p.id}); await reload(); } : null});
+            onDelete: p ? async () => { if (!await A().confirmBox(i18n('Supprimer « {title} » et tout ce qu’il contient ? (les images restent dans les Médias)', {title: p.title}), {title: 'Supprimer le périodique', okLabel: 'Supprimer'})) return false; await post('delete_periodical_item', {what: 'periodical', id: p.id}); await reload(); } : null});
     }
 
     /* ─── Les champs d'un élément : un catalogue, un ordre de départ par type, et les réglages de chacun (montrés, ordre, champs à soi) ─── */
@@ -380,7 +381,7 @@
         const per0 = D.periodicals.find(p => p.id === Number(periodicalId));
         const fam = i ? famOf(i) : (per0?.family || fam0 || prefs().fam || 'revue'), w = Wf(fam), bf = baseOf(fam), isT = timed(fam);
         const conts = D.periodicals.filter(p => (p.family || 'revue') === fam);
-        if (bf === 'revue' && !conts.length) { toast(`Ajoute d’abord ${fam === 'revue' ? 'une revue' : `une « ${w.cont} »`}.`); return periodicalDialog(null, fam); }
+        if (bf === 'revue' && !conts.length) { toast(fam === 'revue' ? i18n('Ajoute d’abord une revue.') : i18n('Ajoute d’abord une « {kind} ».', {kind: w.cont})); return periodicalDialog(null, fam); }
         const d = i?.data || {}, arts = i ? partsOf(i) : [], vid = i && bf === 'doc' ? videoOf(i) : null, aud = i && bf === 'podcast' ? audioOf(i) : null;
         const pid = i?.periodical_id ?? (per0 && (per0.family || 'revue') === fam ? per0.id : (bf === 'revue' ? conts[0].id : 0));
         const one = f => { const c = FIELD_CAT[f.k] || {}, lab = fieldLabel(f, bf), v = c.data || f.k.startsWith('cf_') ? d[f.k] : i?.[f.k], ph = typeof c.ph === 'function' ? c.ph(bf) : c.ph || '';
@@ -402,8 +403,8 @@
                 <div class="h-pr-playbar"><b data-pr-now>0:00</b><button type="button" class="button small" data-pr-grab>📸 Capturer cette image</button><button type="button" class="button small secondary" data-pr-mark>📌 Noter ce moment</button><small class="muted">La capture s’ouvre dans un nouveau moment, à annoter.</small></div></div>`
             : aud ? `<div class="h-pr-player is-audio"><audio controls preload="metadata" src="media/${encodeURIComponent(aud.filename)}" data-pr-video></audio>
                 <div class="h-pr-playbar"><b data-pr-now>0:00</b><button type="button" class="button small" data-pr-mark>📌 Noter ce moment</button><small class="muted">Le minutage du moment se remplit tout seul.</small></div></div>`
-            : bf === 'podcast' ? `<p class="muted h-pr-hint">🎧 Pour écouter l’épisode ici et noter ses moments d’un clic, ajoute le fichier audio plus bas. Sinon : écoute-le ${urlAt(d.audio_url, null) ? `<a href="${esc(urlAt(d.audio_url, null))}" target="_blank" rel="noopener">en ligne ↗</a>` : 'où tu veux'}, puis « ＋ Moment » avec son minutage.</p>`
-            : `<p class="muted h-pr-hint">🎞️ Pour regarder le film ici et capturer ses images d’un clic, ajoute le fichier vidéo plus bas. Sinon : regarde-le ${urlAt(d.video_url, null) ? `<a href="${esc(urlAt(d.video_url, null))}" target="_blank" rel="noopener">en ligne ↗</a>` : 'où tu veux'}, fais une capture d’écran (${/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent || '') ? '⌘⇧4' : 'Win+Maj+S'}), puis « ＋ Moment » et colle-la (⌘V).</p>`;
+            : bf === 'podcast' ? `<p class="muted h-pr-hint">${i18n('🎧 Pour écouter l’épisode ici et noter ses moments d’un clic, ajoute le fichier audio plus bas. Sinon : écoute-le {where}, puis « ＋ Moment » avec son minutage.', {where: urlAt(d.audio_url, null) ? `<a href="${esc(urlAt(d.audio_url, null))}" target="_blank" rel="noopener">${i18n('en ligne ↗')}</a>` : i18n('où tu veux')})}</p>`
+            : `<p class="muted h-pr-hint">${i18n('🎞️ Pour regarder le film ici et capturer ses images d’un clic, ajoute le fichier vidéo plus bas. Sinon : regarde-le {where}, fais une capture d’écran ({keys}), puis « ＋ Moment » et colle-la (⌘V).', {where: urlAt(d.video_url, null) ? `<a href="${esc(urlAt(d.video_url, null))}" target="_blank" rel="noopener">${i18n('en ligne ↗')}</a>` : i18n('où tu veux'), keys: /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent || '') ? '⌘⇧4' : (window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? 'Win+Shift+S' : 'Win+Maj+S')})}</p>`;
         const newTitle = {revue: 'Nouveau numéro', livre: 'Nouveau livre', doc: 'Nouveau documentaire', podcast: 'Nouvel épisode'}[fam] || `Nouveau : ${w.item}`;
         ext.openDialog({eyebrow: w.item.toUpperCase(), title: i ? issueName(i) : newTitle, wide: true, labels: ['periodical_issue', i?.labels || []],
             body: `<div class="form-grid">${fields}${field('notes', 'Notes', d.notes, {type: 'textarea', span: true})}</div>
@@ -411,7 +412,7 @@
                 ${linksField(i?.links || [])}
                 ${ext.mediaEditorHtml ? ext.mediaEditorHtml('periodical_issue', i?.id || 0, i?.media || [], roles) : ''}
                 <section class="h-pr-arts"><h3>${isT ? (bf === 'podcast' ? '🎙️' : '🎬') : '📄'} ${esc(w.parts)}${arts.length ? ` (${arts.length})` : ''}</h3>${player}
-                    ${i ? `${arts.length ? `<ol class="${isT ? 'is-moments' : ''}">${arts.map(partLine).join('')}</ol>` : `<p class="muted">${esc(w.none)}</p>`}<div class="page-actions compact"><button type="button" class="button small" data-art-add>＋ ${esc(w.part)}</button><button type="button" class="button small secondary" data-to-atelier>📚 Vers l’Atelier</button></div>` : `<p class="muted">Enregistre d’abord, puis ajoute ${isT ? 'ses moments' : bf === 'livre' ? 'ses chapitres et passages' : 'ses articles'}.</p>`}</section>`,
+                    ${i ? `${arts.length ? `<ol class="${isT ? 'is-moments' : ''}">${arts.map(partLine).join('')}</ol>` : `<p class="muted">${esc(w.none)}</p>`}<div class="page-actions compact"><button type="button" class="button small" data-art-add>＋ ${esc(w.part)}</button><button type="button" class="button small secondary" data-to-atelier>📚 Vers l’Atelier</button></div>` : `<p class="muted">${isT ? i18n('Enregistre d’abord, puis ajoute ses moments.') : bf === 'livre' ? i18n('Enregistre d’abord, puis ajoute ses chapitres et passages.') : i18n('Enregistre d’abord, puis ajoute ses articles.')}</p>`}</section>`,
             onOpen: dl => {
                 bindLinks(dl);
                 const video = dl.querySelector('[data-pr-video]');
@@ -443,7 +444,7 @@
                 const hadPlayer = !!player0, nowPlayer = isT && [...form.querySelectorAll('[data-h-upload-role="video"],[data-h-upload-role="audio"]')].some(x => x.files?.length);
                 if (!i || (nowPlayer && !hadPlayer)) setTimeout(() => issueDialog(D.issues.find(x => x.id === id)), 50); // on reste dessus pour ajouter le contenu, ou regarder / écouter
             },
-            onDelete: i ? async () => { if (!await A().confirmBox(`Supprimer ${issueName(i)} et tout son contenu ? (les images restent dans les Médias)`, {title: 'Supprimer le numéro', okLabel: 'Supprimer le numéro'})) return false; await post('delete_periodical_item', {what: 'issue', id: i.id}); await reload(); } : null});
+            onDelete: i ? async () => { if (!await A().confirmBox(i18n('Supprimer {nm} et tout son contenu ? (les images restent dans les Médias)', {nm: issueName(i)}), {title: 'Supprimer le numéro', okLabel: 'Supprimer le numéro'})) return false; await post('delete_periodical_item', {what: 'issue', id: i.id}); await reload(); } : null});
     }
 
     /* ─── ⚙️ Réglages des types : ceux de départ et les tiens ; pour chacun, les champs (montrés, ordre, champs à soi) et l'affichage ─── */
@@ -486,7 +487,7 @@
                     if (b.matches('[data-ty-addfield]')) { let k; do { k = 'cf_' + Math.random().toString(36).slice(2, 8); } while (t.fields.some(f => f.k === k)); t.fields.push({k, show: true, label: '', type: 'text'}); paint(dl); [...dl.querySelectorAll('[data-ty-flabel]')].pop()?.focus(); return; }
                     if (b.matches('[data-ty-reset]')) { const own = t.fields.filter(f => f.k.startsWith('cf_')), def = FIELD_ORDER[t.base]; t.fields = [...def.map(k => ({k, show: true})), ...Object.keys(FIELD_CAT).filter(k => !def.includes(k)).map(k => ({k, show: false})), ...own]; return paint(dl); }
                     if (b.matches('[data-ty-del]')) { const n2 = D.issues.filter(i => i.family === t.key).length + D.periodicals.filter(x => x.family === t.key).length;
-                        if (!await A().confirmBox(`Supprimer le type « ${t.name} » ?${n2 ? ` ${n2 > 1 ? `Ses ${n2} éléments passeront` : `Son élément passera`} dans « ${BASE_NAMES[t.base]} » (rien n’est effacé).` : ''}`, {title: 'Supprimer le type', okLabel: 'Supprimer le type'})) return; T = T.filter(x => x !== t); cur = 'revue'; return paint(dl); }
+                        if (!await A().confirmBox(`${i18n('Supprimer le type « {nm} » ?', {nm: t.name})}${n2 ? ` ${n2 > 1 ? i18n('Ses {n} éléments passeront dans « {base} » (rien n’est effacé).', {n: n2, base: i18n(BASE_NAMES[t.base])}) : i18n('Son élément passera dans « {base} » (rien n’est effacé).', {base: i18n(BASE_NAMES[t.base])})}` : ''}`, {title: 'Supprimer le type', okLabel: 'Supprimer le type'})) return; T = T.filter(x => x !== t); cur = 'revue'; return paint(dl); }
                 });
             },
             onSubmit: async () => {
@@ -599,8 +600,8 @@
         try { projects = (await api('atelier_projects')).projects || []; } catch (e) { return toast(e.message, 'error'); }
         if (!projects.length) return toast('Crée d’abord un projet dans Enquêtes → Atelier.');
         const hasParts = withParts && items.some(x => D.articles.some(a => a.issue_id === x.id));
-        ext.openDialog({eyebrow: 'VERS L’ATELIER', title: `${items.length} élément${items.length > 1 ? 's' : ''} à mettre dans un projet`, submitLabel: 'Mettre dans le projet',
-            body: `<p class="muted">Chaque élément devient une <b>référence</b> du projet (auteurs, revue, numéro, pages ou minutage, résumé, étiquettes, captures) ; un passage à retenir ou ce qui est dit devient en plus une <b>citation</b>.</p>
+        ext.openDialog({eyebrow: 'VERS L’ATELIER', title: i18n('{count} à mettre dans un projet', {count: A().plural(items.length, 'élément', 'éléments')}), submitLabel: 'Mettre dans le projet',
+            body: `<p class="muted">${i18n('Chaque élément devient une <b>référence</b> du projet (auteurs, revue, numéro, pages ou minutage, résumé, étiquettes, captures) ; un passage à retenir ou ce qui est dit devient en plus une <b>citation</b>.')}</p>
                 <div class="form-grid"><label>Projet<select name="project">${projects.map(p => `<option value="${p.id}">${esc(p.title)}</option>`).join('')}</select></label><label>Dossier<select name="folder"><option value="0">— à la racine —</option></select></label>
                 ${hasParts ? '<label class="checkbox-line span-2"><input type="checkbox" name="parts" value="1" checked> avec leur contenu (articles, chapitres, moments)</label>' : ''}</div>`,
             onOpen: dl => {
@@ -615,7 +616,7 @@
                 let list = items;
                 if (form.elements.parts?.checked) list = items.flatMap(x => x.type === 'issue' ? [x, ...partsOf(D.issues.find(i => i.id === x.id) || {id: 0}).map(a => ({type: 'article', id: a.id}))] : [x]);
                 const r = await post('periodicals_to_atelier', {project_id: form.elements.project.value, folder_id: form.elements.folder.value, items: list});
-                toast(`${A().plural((r.result || r).created, 'élément ajouté', 'éléments ajoutés')} au projet de l’Atelier.`);
+                toast(i18n('{count} au projet de l’Atelier.', {count: A().plural((r.result || r).created, 'élément ajouté', 'éléments ajoutés')}));
             }});
     }
     /** Depuis l'Atelier : « ＋ Ajouter ▾ → 📚 Revues, livres, documentaires… » */

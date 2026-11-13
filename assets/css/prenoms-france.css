@@ -1,0 +1,45 @@
+/* 👶 Transmission des prénoms et 📊 Ta famille et l'histoire de France (assets/js/heritage-prenoms-france.js).
+ * Couleurs : variables de l'app (--ink, --muted, --line, --card-bg, --white) : le mode sombre suit tout seul ;
+ * les couleurs des sortes de pistes (bleu parrain, vert grand-parent…) restent les mêmes dans les deux modes. */
+.pf-page { min-width: 0; }
+.pf-filters { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin: 0 0 12px; }
+.pf-filters label { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; }
+.pf-filters input[type=text] { width: 76px; }
+.pf-filters select { max-width: 220px; }
+.pf-stage { display: grid; gap: 16px; min-width: 0; }
+.pf-sum { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+.pf-tile { border: 1px solid var(--line, #e3e6ea); border-radius: 10px; padding: 10px 12px; background: var(--card-bg, #fff); display: grid; gap: 2px; min-width: 0; }
+.pf-tile b { font-size: 22px; line-height: 1.15; color: var(--ink); }
+.pf-tile span { font-size: 13px; color: var(--muted); line-height: 1.35; }
+.pf-tile.is-kind b { font-size: 18px; }
+.pf-block { border: 1px solid var(--line, #e3e6ea); border-radius: 12px; padding: 12px 14px; background: var(--card-bg, #fff); min-width: 0; }
+.pf-block > h3 { margin: 0 0 4px; font-size: 16px; }
+.pf-block .ui-hint { margin: 0 0 8px; }
+.pf-charts { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
+.pf-charts > div, .ff-chart { min-width: 0; overflow: hidden; }
+.pf-charts svg, .ff-chart svg { max-width: 100%; height: auto; }
+.pf-chains { overflow-x: auto; color: var(--ink); --pf-node: var(--white, #fff); }
+.pf-chains-svg { min-width: 560px; display: block; }
+.pf-chains .pf-node { cursor: pointer; }
+.pf-chains .pf-node:hover circle, .pf-chains .pf-node:focus-visible circle { stroke-width: 3; }
+.pf-chains .pf-node:focus { outline: none; }
+.pf-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 6px; font-size: 13px; color: var(--muted); }
+.pf-legend i { display: inline-block; width: 18px; height: 3px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+.pf-table td { vertical-align: top; }
+.pf-table small { overflow-wrap: anywhere; }
+.ff-table td:nth-child(2) b { white-space: nowrap; }
+.ff-sources ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 13.5px; }
+.ff-sources li { overflow-wrap: anywhere; }
+/* la petite ligne de la fiche (bloc Identité) */
+.pf-line { display: flex; align-items: flex-start; gap: 8px; margin: 8px 0 2px; padding: 6px 8px; border-radius: 8px; background: color-mix(in srgb, var(--blue-soft, #eef4ff) 60%, transparent); font-size: 14px; }
+.pf-line-ico { font-size: 16px; line-height: 1.3; }
+.pf-line-text { flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 2px 6px; overflow-wrap: anywhere; }
+.pf-line-text .ui-hint { flex-basis: 100%; margin: 0; }
+.pf-line .icon-button { flex: none; }
+:root[data-theme="dark"] .pf-line { background: rgba(90, 140, 255, .14); color: var(--ink); }
+@media (max-width: 600px) {
+    .pf-sum { grid-template-columns: 1fr 1fr; }
+    .pf-tile b { font-size: 18px; }
+    .pf-table th:nth-child(3), .pf-table td:nth-child(3) { display: none; }
+    .pf-block { padding: 10px; }
+}

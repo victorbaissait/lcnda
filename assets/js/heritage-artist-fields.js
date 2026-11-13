@@ -7,6 +7,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ART = window.LCNDA_ART; if (!ART) return;
     const A = () => window.LCNDA_APP, P = () => window.LCNDA_PICKER || window.LCNDA_APP, ext = window.LCNDA_EXT || {};
     const U = ART.util, esc = U.esc;
@@ -217,7 +218,7 @@
         const host = e.target.closest?.('[data-art-create]'), dlg = e.target.closest?.('.ar-dlg'); if (!host || !dlg || e.detail.kind !== 'artwork') return;
         const kind = host.dataset.artCreate; if (!kind || !ART.defs[kind]) return; e.preventDefault();
         const C0 = dlg._C, def = ART.defs[kind];
-        try { const data = {title: e.detail.text, ...(def.newData ? def.newData(C0.store) : {})}; const id = await ART.saveItem(C0.store, kind, 0, data); await C0.store.load(); e.detail.pick({id, title: e.detail.text, kind: 'artwork', art_kind: kind}); A().toast(`${def.fem ? 'Nouvelle' : 'Nouveau'} ${def.label.toLowerCase()} « ${e.detail.text} » ajouté${def.fem ? 'e' : ''} au catalogue.`); }
+        try { const data = {title: e.detail.text, ...(def.newData ? def.newData(C0.store) : {})}; const id = await ART.saveItem(C0.store, kind, 0, data); await C0.store.load(); e.detail.pick({id, title: e.detail.text, kind: 'artwork', art_kind: kind}); A().toast(def.fem ? i18n('Nouvelle {kind} « {nm} » ajoutée au catalogue.', {kind: i18n(def.label).toLowerCase(), nm: e.detail.text}) : i18n('Nouveau {kind} « {nm} » ajouté au catalogue.', {kind: i18n(def.label).toLowerCase(), nm: e.detail.text})); }
         catch (er) { if (er.message) A().toast(er.message, 'error'); }
     });
     // « ↗ Ouvrir » d'une fiche du catalogue, « ↗ Fiche » d'une personne : sans fermer brutalement le catalogue

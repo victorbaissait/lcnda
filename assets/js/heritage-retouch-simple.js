@@ -5,6 +5,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => { const I = typeof window !== 'undefined' && window.LCNDA_I18N; return I ? I.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s); }; // 🌐 traduction (docs/I18N.md)
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const esc = value => A().escapeHtml(value ?? '');
@@ -170,11 +171,11 @@
             <div class="h-rs-paint" data-tbg="rs-paint" data-tbg-label="Barre des outils">
                 <label class="h-rs-size" hidden>Taille <input type="range" min="3" max="120" value="18" data-rs-size> <output data-rs-size-out>18</output></label>
                 </div>
-            <div class="h-rs-body"><nav class="h-rs-rail" data-tbg="rs-modes" data-tbg-label="Colonne d’outils">${[['adjust', '🎚', 'Réglages : couleur, lumière, courbe', 'A'], ['heal', '🩹', 'Correcteur de taches : clique sur une tache, une poussière, une rayure', 'J'], ['clone', '🧬', `Tampon de duplication : ${/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent || '') ? '⌥' : 'Alt'} + clic sur l’endroit à recopier, puis peins sur la zone à couvrir`, 'S']].map(([k, i, l, sc]) => `<button type="button" class="${k === 'adjust' ? 'is-active' : ''}" data-rs-mode="${k}" title="${esc(l)}" aria-label="${esc(l.split(' :')[0])}" data-shortcut="${sc}">${i}</button>`).join('')}<button type="button" data-rs-rot="ccw" title="Faire pivoter de 90° vers la gauche (antihoraire)" aria-label="Pivoter à gauche">↺</button><button type="button" data-rs-rot="cw" title="Faire pivoter de 90° vers la droite (horaire)" aria-label="Pivoter à droite">↻</button><button type="button" data-rs-railcmd="advanced" title="Retouche complète : calques, sélections, masques, texte, filtres" aria-label="Retouche complète">🎛️</button></nav><div class="h-rs-stage"><canvas data-rs-canvas width="${pw}" height="${ph}"></canvas><span class="h-rs-brush" data-rs-brush hidden></span><span class="h-rs-src" data-rs-src hidden></span>${ext.rtBaButtons ? ext.rtBaButtons('rs') : '<button type="button" class="button small secondary h-rs-before" data-rs-before title="Garder appuyé pour voir l’original">👁 Avant / après</button>'}</div>
-            <div class="h-rs-tools" data-tbg="rs-tools" data-tbg-label="Panneau de droite"><div class="h-rs-presets" data-tb-label="Préréglages">${RT_PRESETS.map(([l], i) => `<button type="button" class="button small secondary" data-rs-preset="${i}"${i === 0 ? ' data-help="Auto : les points les plus sombres deviennent noirs et les plus clairs blancs ; cliquer une 2ᵉ fois revient à l’état d’avant."' : ''}>${esc(l)}</button>`).join('')}</div>
-                ${sec('Couleur', 'rs-color', `${RT_SLIDERS.map(([k, l, mn, mx]) => `<label class="h-rs-slider"><span${k === 'shadows' ? ' data-help="Éclaircit seulement les parties sombres (ou les assombrit vers la gauche), sans toucher aux claires."' : ''}>${esc(l)} <output data-rs-out="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rs="${k}"></label>`).join('')}
-                <div class="h-rs-toggles"><label class="ui-toggle"><input type="checkbox" data-rs-t="bw"><i></i>Noir et blanc</label><label class="ui-toggle"><input type="checkbox" data-rs-t="sepia"><i></i>Sépia</label><label class="ui-toggle"><input type="checkbox" data-rs-t="invert" data-help="Pour un négatif photographié ou scanné : les clairs et les sombres s’échangent."><i></i>Négatif</label></div>`)}
-                ${sec('Courbe', 'rs-curve', `<div class="h-rs-curve-head"><strong data-help="Monter la courbe éclaircit, la creuser assombrit, un « S » donne du contraste. Rouge, vert, bleu : corriger une dominante de couleur.">Courbe</strong><span>${RT_CHANNELS.map(([k, l]) => `<button type="button" class="h-rs-ch ${k === 'rgb' ? 'is-active' : ''}" data-rs-ch="${k}">${l}</button>`).join('')}</span></div>
+            <div class="h-rs-body"><nav class="h-rs-rail" data-tbg="rs-modes" data-tbg-label="Colonne d’outils">${[['adjust', '🎚', 'Réglages : couleur, lumière, courbe', 'A'], ['heal', '🩹', 'Correcteur de taches : clique sur une tache, une poussière, une rayure', 'J'], ['clone', '🧬', i18n('Tampon de duplication : {key} + clic sur l’endroit à recopier, puis peins sur la zone à couvrir', {key: /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent || '') ? '⌥' : 'Alt'}), 'S']].map(([k, i, l0, sc]) => { const l = i18n(l0); return `<button type="button" class="${k === 'adjust' ? 'is-active' : ''}" data-rs-mode="${k}" title="${esc(l)}" aria-label="${esc(l.split(/\s*:\s/)[0])}" data-shortcut="${sc}">${i}</button>`; }).join('')}<button type="button" data-rs-rot="ccw" title="Faire pivoter de 90° vers la gauche (antihoraire)" aria-label="Pivoter à gauche">↺</button><button type="button" data-rs-rot="cw" title="Faire pivoter de 90° vers la droite (horaire)" aria-label="Pivoter à droite">↻</button><button type="button" data-rs-railcmd="advanced" title="Retouche complète : calques, sélections, masques, texte, filtres" aria-label="Retouche complète">🎛️</button></nav><div class="h-rs-stage"><canvas data-rs-canvas width="${pw}" height="${ph}"></canvas><span class="h-rs-brush" data-rs-brush hidden></span><span class="h-rs-src" data-rs-src hidden></span>${ext.rtBaButtons ? ext.rtBaButtons('rs') : '<button type="button" class="button small secondary h-rs-before" data-rs-before title="Garder appuyé pour voir l’original">👁 Avant / après</button>'}</div>
+            <div class="h-rs-tools" data-tbg="rs-tools" data-tbg-label="Panneau de droite"><div class="h-rs-presets" data-tb-label="Préréglages">${RT_PRESETS.map(([l], i) => `<button type="button" class="button small secondary" data-rs-preset="${i}"${i === 0 ? ' data-help="' + esc(i18n('Auto : les points les plus sombres deviennent noirs et les plus clairs blancs ; cliquer une 2ᵉ fois revient à l’état d’avant.')) + '"' : ''}>${esc(l)}</button>`).join('')}</div>
+                ${sec('Couleur', 'rs-color', `${RT_SLIDERS.map(([k, l, mn, mx]) => `<label class="h-rs-slider"><span${k === 'shadows' ? ' data-help="' + esc(i18n('Éclaircit seulement les parties sombres (ou les assombrit vers la gauche), sans toucher aux claires.')) + '"' : ''}>${esc(i18n(l, {ctx: 'photo'}))} <output data-rs-out="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rs="${k}"></label>`).join('')}
+                <div class="h-rs-toggles"><label class="ui-toggle"><input type="checkbox" data-rs-t="bw"><i></i>Noir et blanc</label><label class="ui-toggle"><input type="checkbox" data-rs-t="sepia"><i></i>Sépia</label><label class="ui-toggle"><input type="checkbox" data-rs-t="invert" data-help="${esc(i18n('Pour un négatif photographié ou scanné : les clairs et les sombres s’échangent.'))}"><i></i>Négatif</label></div>`)}
+                ${sec('Courbe', 'rs-curve', `<div class="h-rs-curve-head"><strong data-help="${esc(i18n('Monter la courbe éclaircit, la creuser assombrit, un « S » donne du contraste. Rouge, vert, bleu : corriger une dominante de couleur.'))}">Courbe</strong><span>${RT_CHANNELS.map(([k, l]) => `<button type="button" class="h-rs-ch ${k === 'rgb' ? 'is-active' : ''}" data-rs-ch="${k}">${l}</button>`).join('')}</span></div>
                 <svg class="h-rs-curve" viewBox="-6 -6 268 268" data-rs-curve><path class="h-rs-hist" d="${histPath}"/><g class="h-rs-grid">${[64, 128, 192].map(v => `<line x1="${v}" y1="0" x2="${v}" y2="256"/><line x1="0" y1="${v}" x2="256" y2="${v}"/>`).join('')}<line x1="0" y1="256" x2="256" y2="0" class="h-rs-diag"/></g><path class="h-rs-line" data-rs-line/><g data-rs-points></g></svg>
                 <div class="h-rs-curve-tools"><button type="button" class="button small secondary" data-rs-ptdel disabled>Enlever le point</button></div>
                 <p class="muted h-rs-help">Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou la touche ⌫), ou le glisser hors du cadre.</p>`)}
@@ -219,7 +220,7 @@
         };
         let sbar = null; // K18 : la barre du bas commune (la photo · l'aide de l'outil · le zoom)
         const MODE_NAME = {adjust: 'Réglages', heal: 'Correcteur de taches', clone: 'Tampon'};
-        const HELP = {adjust: 'Règle la couleur et la lumière à droite · garde « 👁 Avant / après » appuyé pour comparer', heal: 'Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long.', clone: (/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent || '') ? '⌥' : 'Alt') + ' + clic pour choisir l’endroit à recopier, puis peins sur la zone à couvrir.'};
+        const HELP = {adjust: 'Règle la couleur et la lumière à droite · garde « 👁 Avant / après » appuyé pour comparer', heal: 'Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long.', clone: i18n('{key} + clic pour choisir l’endroit à recopier, puis peins sur la zone à couvrir.', {key: /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent || '') ? '⌥' : 'Alt'})};
         // l'image est centrée dans le cadre (marges sur les côtés ou en haut et en bas) : on en tient compte
         const fit = () => { const r = canvas.getBoundingClientRect(), k = Math.min(r.width / pw, r.height / ph); return {r, k, ox: r.left + (r.width - pw * k) / 2, oy: r.top + (r.height - ph * k) / 2}; };
         const toCanvas = e => { const f = fit(); return [(e.clientX - f.ox) / f.k, (e.clientY - f.oy) / f.k, f]; };
@@ -393,7 +394,7 @@
         dlg.querySelectorAll('[data-rs-save]').forEach(b => b.addEventListener('click', async () => {
             const mode = b.dataset.rsSave, label0 = b.textContent;
             const mpx = img.naturalWidth * img.naturalHeight / 1e6;
-            if (mpx > 60 && !await A().confirmBox(`Cette image est très grande (${Math.round(mpx)} millions de points) : l’enregistrement peut être long, voire échouer.`, {title: 'Enregistrer quand même ?', okLabel: 'Enregistrer'})) return;
+            if (mpx > 60 && !await A().confirmBox(i18n('Cette image est très grande ({n} millions de points) : l’enregistrement peut être long, voire échouer.', {n: Math.round(mpx)}), {title: i18n('Enregistrer quand même ?'), okLabel: i18n('Enregistrer')})) return;
             dlg.querySelectorAll('.modal-actions button').forEach(x => { x.disabled = true; });
             b.textContent = 'Enregistrement…';
             try {
@@ -403,7 +404,7 @@
                 const blob = await new Promise(res => full.toBlob(res, type, 0.93));
                 if (!blob) throw new Error('Image trop grande pour être enregistrée par le navigateur.');
                 const fd = new FormData(); fd.append('file', blob, 'retouche.' + (type.split('/')[1] === 'jpeg' ? 'jpg' : type.split('/')[1])); fd.append('media_id', item.id); fd.append('mode', mode === 'copy' ? 'copy' : 'version'); fd.append('show', mode === 'show' ? '1' : '0'); fd.append('csrf', A().state.csrf);
-                if (mode === 'copy') fd.append('title', `${docTitle()} (retouchée)`);
+                if (mode === 'copy') fd.append('title', i18n('{layer} (retouchée)', {layer: docTitle()}));
                 const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}});
                 const j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
                 if (!r.ok || j.error) throw new Error(j.error || 'Enregistrement impossible.');
@@ -431,7 +432,7 @@
         dlg.addEventListener('click', e => {
             const x = e.target.closest('[data-rs-export]'); if (!x) return; x.closest('details')?.removeAttribute('open');
             if (x.dataset.rsExport === 'ba') return ext.rtBeforeAfterExport?.({title: docTitle(), mediaId: item.id || 0, pos: curtain?.pos ?? 0.5, vertical: curtain?.vertical !== false, getBefore: async () => img, getAfter: async () => renderFull()});
-            ext.rtExportImage?.({title: docTitle(), mediaId: item.id || 0, copyTitle: `${docTitle()} (retouchée)`, render: async () => renderFull()});
+            ext.rtExportImage?.({title: docTitle(), mediaId: item.id || 0, copyTitle: i18n('{layer} (retouchée)', {layer: docTitle()}), render: async () => renderFull()});
         });
         dlg.querySelector('[data-rs-topsave]').addEventListener('click', () => dlg.querySelector('[data-rs-save="show"]').click());
         const press = sel0 => () => dlg.querySelector(sel0)?.click();
@@ -452,7 +453,7 @@
         // E4 : une photo glissée ou collée sur l'image entre dans les médias, et on peut la retoucher à la place
         UI?.bindFileDrop?.(stage, async files => {
             const f = files[0]; if (!f) return;
-            if (!await A().confirmBox('La photo est ajoutée aux médias (sans fiche). Les réglages en cours sur cette photo-ci sont abandonnés.', {title: `Retoucher « ${f.name} » à la place ?`, okLabel: 'Retoucher cette photo'})) return;
+            if (!await A().confirmBox('La photo est ajoutée aux médias (sans fiche). Les réglages en cours sur cette photo-ci sont abandonnés.', {title: i18n('Retoucher « {name} » à la place ?', {name: f.name}), okLabel: i18n('Retoucher cette photo')})) return;
             try { const r = await ext.rtImportImage(f); saved = true; dlg.close(); const s0 = A().state; s0.lightboxMedia = [{id: r.media_id, filename: r.filename, thumbnail: r.filename, title: f.name.replace(/\.[a-z0-9]{2,5}$/i, ''), media_type: 'image'}]; s0.lightboxIndex = 0; openRetouchSimple(); }
             catch (err) { toast(err.message, 'error'); }
         }, {accept: 'image/*'});

@@ -15,6 +15,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s)); // 🌐 traduction (docs/I18N.md)
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     if (ext.audioEngine) return;
     const E = ext.audioEngine = {};
@@ -448,7 +449,24 @@
         if (f.bass) { const x = b('lowshelf', 200, clamp(Number(f.bass), -15, 15)); tail.connect(x); tail = x; }
         if (f.treble) { const x = b('highshelf', 4000, clamp(Number(f.treble), -15, 15)); tail.connect(x); tail = x; }
         if (f.mono) { const m = ctx.createGain(); m.channelCount = 1; m.channelCountMode = 'explicit'; m.channelInterpretation = 'speakers'; tail.connect(m); tail = m; }
+        // 🗜 volume plus égal : le compresseur du rack (réglage « voix ») joué en direct
+        if (f.comp) { const cp = ctx.createDynamicsCompressor(); cp.threshold.value = -26; cp.ratio.value = 4; cp.attack.value = 0.01; cp.release.value = 0.2; const mk = ctx.createGain(); mk.gain.value = dbToLin(6); tail.connect(cp).connect(mk); tail = mk; }
+        // ⛪ réverbération : la même réponse calculée que l'effet du rack (ROOMS, impulse), mêlée au son direct
+        if (Number(f.reverb) > 0) { const room = ROOMS[f.room] || ROOMS.piece, mix = clamp(Number(f.reverb), 0, 1), cv = ctx.createConvolver(); cv.normalize = true; cv.buffer = impulse(ctx.sampleRate, 2, room.dur, room.pre);
+            const lp = b('lowpass', room.lp, 0, 0.7), wet = ctx.createGain(), dry = ctx.createGain(), out = ctx.createGain(); wet.gain.value = mix * 1.6; dry.gain.value = 1 - mix * 0.5;
+            tail.connect(dry).connect(out); tail.connect(cv).connect(lp).connect(wet).connect(out); tail = out; }
+        // ↔ panoramique (−1 à gauche, +1 à droite)
+        if (Number(f.pan) && ctx.createStereoPanner) { const pn = ctx.createStereoPanner(); pn.pan.value = clamp(Number(f.pan), -1, 1); tail.connect(pn); tail = pn; }
         return tail;
+    };
+    /** Le volume d'un morceau du montage à un instant : fondus d'entrée et de sortie, puis sa courbe de volume (points {t, v}, t = temps
+     *  dans le fichier d'origine, comme les images clés). x : secondes depuis le début du morceau ; len : sa durée ; local : temps dans le fichier. */
+    E.clipGain = (c, x, len, local) => {
+        let v = 1; const fi = Number(c?.fadeIn) || 0, fo = Number(c?.fadeOut) || 0;
+        if (fi > 0 && x < fi) v *= clamp(x / fi, 0, 1);
+        if (fo > 0 && len - x < fo) v *= clamp((len - x) / fo, 0, 1);
+        if (Array.isArray(c?.env) && c.env.length) v *= clamp(E.autoAt(c.env, local, 1), 0, 4);
+        return v;
     };
 
     /* ═════ ⚡ Son rapide ⇄ rack : les mêmes réglages vus de deux façons ═════ */

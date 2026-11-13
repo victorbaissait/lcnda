@@ -79,6 +79,12 @@ function photo_cmp_settings(mixed $raw): string
     $out['mix'] = round($num($raw['mix'] ?? 50, 0, 100, 50));
     $out['sync'] = !array_key_exists('sync', $raw) || !empty($raw['sync']);
     $out['aligned'] = !empty($raw['aligned']);
+    // 📍 « Hier et aujourd'hui » (images de lieux) : repères gardés dans leur ordre, ajustement à la main de la photo B
+    if (($raw['purpose'] ?? '') === 'place') {
+        $out['purpose'] = 'place';
+        $adj = is_array($raw['adj'] ?? null) ? $raw['adj'] : [];
+        $out['adj'] = ['x' => round($num($adj['x'] ?? 0, -20000, 20000, 0), 1), 'y' => round($num($adj['y'] ?? 0, -20000, 20000, 0), 1), 'k' => round($num($adj['k'] ?? 100, 20, 300, 100)), 'r' => round($num($adj['r'] ?? 0, -180, 180, 0), 1)];
+    }
     $json = json_encode($out, JSON_UNESCAPED_UNICODE);
     return strlen((string) $json) > PHOTO_CMP_MAX_SETTINGS ? '{}' : (string) $json;
 }

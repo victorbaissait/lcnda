@@ -277,7 +277,11 @@
                 list.addEventListener('change',e=>{const row=e.target.closest('[data-room-piece]');if(row&&e.target.matches('[data-room-pshow]'))dialog._archiveRoomPieces.toggle(row.dataset.roomPiece,e.target.checked);});}
         }catch(error){console.warn('Impossible de charger la pièce 3D.',error);mount.remove();}
     }
-    function openArchiveRoom(){
+    async function openArchiveRoom(){
+        // les fiches de la pièce : chargées à la première ouverture (plus dans « bootstrap » : trop lourd pour une grosse base)
+        if(state.bootstrap&&!state.bootstrap.archivePeople&&!state.bootstrap.persons){
+            try{state.bootstrap.archivePeople=(await window.LCNDA_APP.api('archive_people')).people||[];}catch(_){state.bootstrap.archivePeople=[];}
+        }
         $('#archive-room-dialog')?.remove();
         document.body.insertAdjacentHTML('beforeend',archiveRoomHtml());
         const dialog=$('#archive-room-dialog'),stage=$('.archive-room-stage',dialog);

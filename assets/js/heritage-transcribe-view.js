@@ -11,6 +11,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => { const I = (typeof window !== 'undefined' ? window : globalThis).LCNDA_I18N; if (v) v = Object.fromEntries(Object.entries(v).map(([k, x]) => [k, typeof x === 'number' ? String(x) : x])); return I ? I.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m)) : s); }; // 🌐 textes traduits (docs/I18N.md) ; nombres gardés tels quels
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
@@ -124,7 +125,7 @@
             if (worker || !ok || dead) return worker;
             try { if (workerUrl) URL.revokeObjectURL(workerUrl); workerUrl = URL.createObjectURL(new Blob([`(${WORKER.toString()})(self)`], {type: 'text/javascript'})); worker = new Worker(workerUrl); } catch (_) { worker = null; return null; }
             // le worker tombe (mémoire…) : on le remplace au prochain calcul, et l'image est préparée de nouveau (hasSource)
-            worker.onerror = e => { e.preventDefault?.(); console.warn('Mieux voir :', e.message || 'calcul interrompu'); try { worker?.terminate(); } catch (_) {} worker = null; failAll('Le calcul de l’image s’est arrêté (image trop grande ?).'); };
+            worker.onerror = e => { e.preventDefault?.(); console.warn('Mieux voir :', e.message || 'calcul interrompu'); try { worker?.terminate(); } catch (_) {} worker = null; failAll(i18n('Le calcul de l’image s’est arrêté (image trop grande ?).')); };
             worker.onmessage = e => {
                 const m = e.data;
                 if (m.type === 'ready') { if (ready && ready.id === m.id) ready.res(true); return; }
@@ -171,48 +172,48 @@
             },
             /** l'image améliorée en pleine taille (lecture, export) → Blob PNG */
             async full(v) {
-                if (!start() || !srcEl || !natW || !natH) throw new Error('Calcul impossible ici.');
+                if (!start() || !srcEl || !natW || !natH) throw new Error(i18n('Calcul impossible ici.'));
                 const k = Math.min(1, FULL_MAX / Math.max(natW, natH), Math.sqrt(FULL_AREA / (natW * natH))), W = Math.max(1, Math.round(natW * k)), H = Math.max(1, Math.round(natH * k));
                 let bm; try { bm = await createImageBitmap(await (await fetch(srcEl.currentSrc || srcEl.src)).blob(), {resizeWidth: W, resizeHeight: H, resizeQuality: 'high'}); } catch (_) { bm = await createImageBitmap(srcEl, {resizeWidth: W, resizeHeight: H, resizeQuality: 'high'}); }
-                if (dead || !worker) { bm.close?.(); throw new Error('Outil fermé.'); }
+                if (dead || !worker) { bm.close?.(); throw new Error(i18n('Outil fermé.')); }
                 const id = ++seq;
                 return new Promise((okp, ko) => { onceWait.set(id, {ok: okp, ko}); worker.postMessage({type: 'once', id, bitmap: bm, w: W, h: H, p: {...v, sharpR: v.sharpR * k}}, [bm]); });
             },
             /** l'outil se ferme : le worker s'arrête, les attentes se terminent, les images en mémoire sont rendues */
-            stop() { dead = true; clearTimeout(fullTimer); worker?.terminate(); worker = null; failAll('Outil fermé.'); if (url) URL.revokeObjectURL(url); url = ''; if (workerUrl) URL.revokeObjectURL(workerUrl); workerUrl = ''; },
+            stop() { dead = true; clearTimeout(fullTimer); worker?.terminate(); worker = null; failAll(i18n('Outil fermé.')); if (url) URL.revokeObjectURL(url); url = ''; if (workerUrl) URL.revokeObjectURL(workerUrl); workerUrl = ''; },
         };
         return api;
     }
 
     /* ═════════ La barre d'outils : A (tout dans la barre) ou B (barre courte + « 🎚️ Mieux voir ») ═════════ */
-    const RUBRICS = [['ink', 'Faire ressortir l’encre'], ['bw', 'Noir et blanc'], ['pos', 'Position'], ['nav', 'Autres outils'], ['act', '']];
-    const rg = (key, label, min, max, step, val, unit, def, extra = '') => `<label class="h-tx-rg" title="${esc(label)} — double-clic : valeur de départ"><span class="h-tx-rgl">${label}</span><input type="range" data-tx-view="${key}" min="${min}" max="${max}" step="${step}" value="${val}" data-unit="${unit}" data-default="${def}" aria-label="${esc(label)}"${extra}></label>`;
+    const RUBRICS = [['ink', i18n('Faire ressortir l’encre')], ['bw', i18n('Noir et blanc')], ['pos', 'Position'], ['nav', 'Autres outils'], ['act', '']];
+    const rg = (key, label, min, max, step, val, unit, def, extra = '') => `<label class="h-tx-rg" title="${esc(i18n('{label} — double-clic : valeur de départ', {label: esc(label)}))}"><span class="h-tx-rgl">${label}</span><input type="range" data-tx-view="${key}" min="${min}" max="${max}" step="${step}" value="${val}" data-unit="${unit}" data-default="${def}" aria-label="${esc(label)}"${extra}></label>`;
     const ck = (key, label, v, title = '') => `<label class="ui-toggle h-tx-ck"${title ? ` title="${esc(title)}"` : ''}><input type="checkbox" data-tx-view="${key}" ${v[key] ? 'checked' : ''}><i></i>${label}</label>`;
     /** [clé, nom (Réglages), rubrique, html(v, dansLePanneau)] — l'ordre est celui de départ */
     // K18 / K19 : ✋ Déplacer, ▭ Zone et 🔍 Loupe sont dans la colonne d'outils de gauche, le zoom dans la barre du bas (heritage-transcribe.js)
     const ITEMS = [
-        ['image', '🖼️ Image de l’acte', 'nav', () => `<button type="button" data-tx-cmd="image" title="Choisir l’image de l’acte (base ou ordinateur)">🖼️ Image…</button>`],
-        ['rot', '⟳ Tourner de 90°', 'pos', () => `<button type="button" data-tx-cmd="rot" title="Tourner de 90°">⟳</button>`],
+        ['image', `🖼️ ${i18n('Image de l’acte')}`, 'nav', () => `<button type="button" data-tx-cmd="image" title="${esc(i18n('Choisir l’image de l’acte (base ou ordinateur)'))}">🖼️ Image…</button>`],
+        ['rot', `⟳ ${i18n('Tourner de 90°')}`, 'pos', () => `<button type="button" data-tx-cmd="rot" title="${esc(i18n('Tourner de 90°'))}">⟳</button>`],
         ['contrast', '◐ Contraste', 'ink', v => rg('contrast', '◐', 50, 300, 1, v.contrast, '%', 100)],
-        ['bright', '☀ Luminosité', 'ink', v => rg('bright', '☀', 40, 220, 1, v.bright, '%', 100)],
+        ['bright', `☀ ${i18n('Luminosité')}`, 'ink', v => rg('bright', '☀', 40, 220, 1, v.bright, '%', 100)],
         ['clahe', 'Contraste local', 'ink', v => rg('clahe', 'Contraste local', 0, 100, 1, v.clahe, '', 0)],
-        ['sharp', 'Netteté (et son rayon)', 'ink', (v, inPanel) => `<span class="h-tx-pair">${rg('sharp', 'Netteté', 0, 300, 5, v.sharp, '%', 0)}${rg('sharpR', inPanel ? 'rayon' : 'r', .5, 5, .1, v.sharpR, 'px', 1.5)}</span>`],
-        ['channel', 'Canal de couleur', 'ink', (v, inPanel) => `<span class="h-tx-chanw">${inPanel ? '<span class="h-tx-rgl">Canal de couleur</span>' : ''}<span class="segmented h-tx-seg" role="group" aria-label="Canal de couleur" title="Un seul canal : l’encre ferro-gallique ressort souvent mieux sur le rouge ou le bleu">${[['', inPanel ? 'Tout' : 'RVB', 'Toutes les couleurs'], ['r', inPanel ? 'Rouge' : 'R', 'Canal rouge seul'], ['g', inPanel ? 'Vert' : 'V', 'Canal vert seul'], ['b', inPanel ? 'Bleu' : 'B', 'Canal bleu seul']].map(([k, l, ti]) => `<button type="button" data-tx-chan="${k}" class="${v.channel === k ? 'is-active' : ''}" title="${ti}" aria-pressed="${v.channel === k}">${l}</button>`).join('')}</span></span>`],
-        ['bg', 'Effacer le fond', 'ink', v => ck('bg', 'Effacer le fond', v, 'Jaunissement et taches : le papier redevient blanc, l’encre reste')],
-        ['thr', 'Seuil noir et blanc', 'bw', v => rg('thr', 'Seuil', 0, 254, 1, v.thr, '', 0, ' title="Seuil noir et blanc (0 = sans)"')],
+        ['sharp', i18n('Netteté (et son rayon)'), 'ink', (v, inPanel) => `<span class="h-tx-pair">${rg('sharp', i18n('Netteté'), 0, 300, 5, v.sharp, '%', 0)}${rg('sharpR', inPanel ? 'rayon' : 'r', .5, 5, .1, v.sharpR, 'px', 1.5)}</span>`],
+        ['channel', i18n('Canal de couleur'), 'ink', (v, inPanel) => `<span class="h-tx-chanw">${inPanel ? `<span class="h-tx-rgl">${i18n('Canal de couleur')}</span>` : ''}<span class="segmented h-tx-seg" role="group" aria-label="${esc(i18n('Canal de couleur'))}" title="${esc(i18n('Un seul canal : l’encre ferro-gallique ressort souvent mieux sur le rouge ou le bleu'))}">${[['', inPanel ? i18n('Tout') : 'RVB', i18n('Toutes les couleurs')], ['r', inPanel ? 'Rouge' : 'R', 'Canal rouge seul'], ['g', inPanel ? 'Vert' : 'V', 'Canal vert seul'], ['b', inPanel ? 'Bleu' : 'B', 'Canal bleu seul']].map(([k, l, ti]) => `<button type="button" data-tx-chan="${k}" class="${v.channel === k ? 'is-active' : ''}" title="${ti}" aria-pressed="${v.channel === k}">${l}</button>`).join('')}</span></span>`],
+        ['bg', i18n('Effacer le fond'), 'ink', v => ck('bg', i18n('Effacer le fond'), v, i18n('Jaunissement et taches : le papier redevient blanc, l’encre reste'))],
+        ['thr', i18n('Seuil noir et blanc'), 'bw', v => rg('thr', 'Seuil', 0, 254, 1, v.thr, '', 0, ' title="Seuil noir et blanc (0 = sans)"')],
         ['levels', 'Niveaux (noir, blanc, gamma)', 'bw', (v, inPanel) => `<span class="h-tx-pair h-tx-levels">${inPanel ? '' : '<span class="h-tx-rgl">Niveaux</span>'}${rg('lvB', inPanel ? 'Point noir' : 'noir', 0, 200, 1, v.lvB, '', 0)}${rg('lvW', inPanel ? 'Point blanc' : 'blanc', 55, 255, 1, v.lvW, '', 255)}${rg('lvG', inPanel ? 'Gamma' : 'γ', .3, 3, .05, v.lvG, '', 1)}</span>`],
-        ['tilt', 'Redresser (au degré près)', 'pos', v => rg('tilt', 'Redresser', -10, 10, .1, v.tilt, '°', 0)],
-        ['invert', 'Négatif', 'pos', v => ck('invert', 'Négatif', v, 'Négatif : encre claire sur fond sombre')],
+        ['tilt', i18n('Redresser (au degré près)'), 'pos', v => rg('tilt', 'Redresser', -10, 10, .1, v.tilt, '°', 0)],
+        ['invert', i18n('Négatif'), 'pos', v => ck('invert', i18n('Négatif'), v, i18n('Négatif : encre claire sur fond sombre'))],
         ['gray', 'Gris', 'pos', v => ck('gray', 'Gris', v)],
-        ['mirror', 'Miroir', 'pos', v => ck('mirror', 'Miroir', v, 'Retourner l’image : pour lire un texte vu par transparence (le verso)')],
-        ['keep', '💾 Retenir pour cet acte', 'act', () => `<button type="button" data-tx-cmd="keepview" title="Ces réglages de l’image sont enregistrés avec l’acte et reviennent à la prochaine ouverture">💾 Retenir pour cet acte</button>`],
-        ['reset', '↺ Image d’origine', 'act', (v, inPanel, layout) => `<button type="button" data-tx-cmd="resetview" title="Remettre l’image d’origine (tous les réglages de l’image à zéro)">↺ ${layout === 'B' && !inPanel ? 'Origine' : 'Image d’origine'}</button>`],
+        ['mirror', 'Miroir', 'pos', v => ck('mirror', 'Miroir', v, i18n('Retourner l’image : pour lire un texte vu par transparence (le verso)'))],
+        ['keep', `💾 ${i18n('Retenir pour cet acte')}`, 'act', () => `<button type="button" data-tx-cmd="keepview" title="${esc(i18n('Ces réglages de l’image sont enregistrés avec l’acte et reviennent à la prochaine ouverture'))}">💾 ${i18n('Retenir pour cet acte')}</button>`],
+        ['reset', `↺ ${i18n('Image d’origine')}`, 'act', (v, inPanel, layout) => `<button type="button" data-tx-cmd="resetview" title="${esc(i18n('Remettre l’image d’origine (tous les réglages de l’image à zéro)'))}">↺ ${layout === 'B' && !inPanel ? 'Origine' : i18n('Image d’origine')}</button>`],
     ];
     const ITEM_KEYS = ITEMS.map(i => i[0]), itemOf = k => ITEMS.find(i => i[0] === k);
     const DEFAULT_PANEL = ['clahe', 'sharp', 'channel', 'bg', 'thr', 'levels', 'tilt', 'invert', 'gray', 'mirror', 'keep'];
     const BAR_KEY = 'genealogie-transcribe-bar', SETS_KEY = 'genealogie-toolbar-sets', SETS_ID = 'transcribe';
     const readJson = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v && typeof v === 'object' ? v : d; } catch (_) { return d; } };
-    const writeJson = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (_) { toast('Plus de place pour garder ce réglage.', 'error'); return false; } };
+    const writeJson = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (_) { toast(i18n('Plus de place pour garder ce réglage.'), 'error'); return false; } };
     /** {layout: 'A'|'B', order: [clés], hidden: [clés], panel: [clés dans « Mieux voir » en B]} */
     const cleanBar = v => { v = v && typeof v === 'object' ? v : {}; const keys = a => (Array.isArray(a) ? a : []).filter(k => ITEM_KEYS.includes(k));
         const order = [...new Set([...keys(v.order), ...ITEM_KEYS])]; return {layout: v.layout === 'B' ? 'B' : 'A', order, hidden: keys(v.hidden), panel: Array.isArray(v.panel) ? keys(v.panel) : [...DEFAULT_PANEL]}; };
@@ -227,13 +228,13 @@
         if (cfg.layout !== 'B') return `<div class="h-tx-tools h-tx-tools-a" data-tx-bar data-layout="A">${shown.map(k => piece(k)).join('')}<span class="h-tx-ctl h-tx-cfg">${cfgButton()}</span></div>`;
         const inBar = shown.filter(k => !cfg.panel.includes(k)), inPanel = shown.filter(k => cfg.panel.includes(k));
         const rubric = ([rk, rl]) => { const list = inPanel.filter(k => itemOf(k)[2] === rk); if (!list.length) return ''; return `<section class="h-tx-rub${rk === 'act' ? ' h-tx-rub-act' : ''}">${rl ? `<h4>${esc(rl)}</h4>` : ''}${list.map(k => piece(k, true)).join('')}</section>`; };
-        const better = inPanel.length ? `<span class="h-tx-ctl h-tx-betterw" data-tx-item="better"><button type="button" class="h-tx-betterbtn" data-tx-cmd="better" aria-expanded="false" aria-haspopup="true" title="Les autres réglages de l’image : contraste local, netteté, canal, seuil, niveaux, redresser…">🎚️ Mieux voir ▾ <b class="h-tx-badge" data-tx-badge hidden></b></button>
+        const better = inPanel.length ? `<span class="h-tx-ctl h-tx-betterw" data-tx-item="better"><button type="button" class="h-tx-betterbtn" data-tx-cmd="better" aria-expanded="false" aria-haspopup="true" title="${esc(i18n('Les autres réglages de l’image : contraste local, netteté, canal, seuil, niveaux, redresser…'))}">🎚️ Mieux voir ▾ <b class="h-tx-badge" data-tx-badge hidden></b></button>
             <div class="h-tx-better" data-tx-panel hidden role="dialog" aria-label="Mieux voir">${RUBRICS.map(rubric).join('')}</div></span>` : '';
         // « Mieux voir » prend la place du premier réglage rangé dans le panneau (après Contraste et Luminosité au départ)
         const firstPanelIdx = shown.findIndex(k => cfg.panel.includes(k)), before = inBar.filter(k => shown.indexOf(k) < firstPanelIdx || firstPanelIdx < 0), after = inBar.filter(k => !before.includes(k));
-        return `<div class="h-tx-tools h-tx-tools-b" data-tx-bar data-layout="B"${cfg.auto ? ' data-auto="1" title="Écran étroit : les réglages sont rangés dans « 🎚️ Mieux voir »"' : ''}>${before.map(k => piece(k)).join('')}${better}${after.map(k => piece(k)).join('')}<span class="h-tx-ctl h-tx-cfg">${cfgButton()}</span></div>`;
+        return `<div class="h-tx-tools h-tx-tools-b" data-tx-bar data-layout="B"${cfg.auto ? ` data-auto="1" title="${esc(i18n('Écran étroit : les réglages sont rangés dans « 🎚️ Mieux voir »'))}"` : ''}>${before.map(k => piece(k)).join('')}${better}${after.map(k => piece(k)).join('')}<span class="h-tx-ctl h-tx-cfg">${cfgButton()}</span></div>`;
     }
-    const cfgButton = () => `<button type="button" class="h-tx-cfgbtn" data-tx-cmd="barcfg" title="Ranger, montrer ou cacher les boutons de cette barre ; disposition A ou B (aussi dans Réglages → Montage, retouche, mise en page et son)" aria-label="Personnaliser la barre">⚙️</button>`;
+    const cfgButton = () => `<button type="button" class="h-tx-cfgbtn" data-tx-cmd="barcfg" title="${esc(i18n('Ranger, montrer ou cacher les boutons de cette barre ; disposition A ou B (aussi dans Réglages → Montage, retouche, mise en page et son)'))}" aria-label="${esc(i18n('Personnaliser la barre'))}">⚙️</button>`;
     const panelKeys = (cfg = barCfg(), narrow = false) => (cfg.layout === 'B' || narrow ? cfg.order.filter(k => !cfg.hidden.includes(k) && cfg.panel.includes(k)) : []);
     const badgeKeys = (cfg = barCfg()) => panelKeys(cfg).flatMap(k => (k === 'sharp' ? ['sharp'] : [k]));
 
@@ -242,32 +243,32 @@
     const setsSave = list => { const all = readJson(SETS_KEY, {}); all[SETS_ID] = list.slice(-60); return writeJson(SETS_KEY, all); };
     function prefsHtml(cfg = barCfg()) {
         const B = cfg.layout === 'B';
-        const row = k => { const [, label, rub] = itemOf(k); return `<li class="h-pet-lrow h-txb-row" data-k="${k}"><input type="checkbox" ${cfg.hidden.includes(k) ? '' : 'checked'} title="👁 Montrer dans la barre" aria-label="Montrer ${esc(label)}"><span>${esc(label)}</span>
-            ${B ? `<select data-txb-place aria-label="Où va ${esc(label)}" title="Dans la barre, ou dans le panneau « 🎚️ Mieux voir »"><option value="bar" ${cfg.panel.includes(k) ? '' : 'selected'}>Dans la barre</option><option value="panel" ${cfg.panel.includes(k) ? 'selected' : ''}>Dans « Mieux voir »${rub === 'nav' || rub === 'act' ? '' : ` · ${esc((RUBRICS.find(r => r[0] === rub) || [])[1] || '')}`}</option></select>` : ''}
+        const row = k => { const [, label, rub] = itemOf(k); return `<li class="h-pet-lrow h-txb-row" data-k="${k}"><input type="checkbox" ${cfg.hidden.includes(k) ? '' : 'checked'} title="👁 ${esc(i18n('Montrer dans la barre'))}" aria-label="Montrer ${esc(label)}"><span>${esc(label)}</span>
+            ${B ? `<select data-txb-place aria-label="${esc(i18n('Où va {label}', {label: esc(label)}))}" title="${esc(i18n('Dans la barre, ou dans le panneau « 🎚️ Mieux voir »'))}"><option value="bar" ${cfg.panel.includes(k) ? '' : 'selected'}>${i18n('Dans la barre')}</option><option value="panel" ${cfg.panel.includes(k) ? 'selected' : ''}>${i18n('Dans « Mieux voir »')}${rub === 'nav' || rub === 'act' ? '' : ` · ${esc((RUBRICS.find(r => r[0] === rub) || [])[1] || '')}`}</option></select>` : ''}
             <button type="button" class="h-bt" data-txb-up title="Monter">↑</button><button type="button" class="h-bt" data-txb-down title="Descendre">↓</button></li>`; };
         return `<div class="h-txb">
-            <div class="h-txb-layout"><span class="h-txb-lab">Disposition</span><span class="segmented h-txb-seg" role="group" aria-label="Disposition de la barre">
-                <button type="button" data-txb-layout="A" class="${B ? '' : 'is-active'}" aria-pressed="${!B}" title="Tous les réglages dans la barre ; elle passe à la ligne s’il le faut">A · Tout dans la barre</button>
-                <button type="button" data-txb-layout="B" class="${B ? 'is-active' : ''}" aria-pressed="${B}" title="Une barre courte ; les autres réglages dans le panneau « 🎚️ Mieux voir », rangés en trois rubriques">B · Barre courte + « 🎚️ Mieux voir »</button></span></div>
+            <div class="h-txb-layout"><span class="h-txb-lab">Disposition</span><span class="segmented h-txb-seg" role="group" aria-label="${esc(i18n('Disposition de la barre'))}">
+                <button type="button" data-txb-layout="A" class="${B ? '' : 'is-active'}" aria-pressed="${!B}" title="${esc(i18n('Tous les réglages dans la barre ; elle passe à la ligne s’il le faut'))}">${i18n('A · Tout dans la barre')}</button>
+                <button type="button" data-txb-layout="B" class="${B ? 'is-active' : ''}" aria-pressed="${B}" title="${esc(i18n('Une barre courte ; les autres réglages dans le panneau « 🎚️ Mieux voir », rangés en trois rubriques'))}">${i18n('B · Barre courte + « 🎚️ Mieux voir »')}</button></span></div>
             <div data-presets-slot="txb"></div>
-            <p class="muted">Coche ce qu’on montre (👁), range avec ↑ ↓ (ou en glissant ⠿)${B ? ', et choisis ce qui va dans la barre ou dans le panneau « 🎚️ Mieux voir »' : ''}. Gardé aussitôt ; l’outil ouvert suit tout de suite.</p>
+            <p class="muted">${i18n('Coche ce qu’on montre (👁), range avec ↑ ↓ (ou en glissant ⠿){x}. Gardé aussitôt ; l’outil ouvert suit tout de suite.', {x: B ? i18n(', et choisis ce qui va dans la barre ou dans le panneau « 🎚️ Mieux voir »') : ''})}</p>
             <ol class="h-pet-layout h-txb-list" data-txb-list>${cfg.order.map(row).join('')}</ol>
-            <button type="button" class="button small secondary" data-txb-reset>↺ Remettre comme au départ</button></div>`;
+            <button type="button" class="button small secondary" data-txb-reset>↺ ${i18n('Remettre comme au départ')}</button></div>`;
     }
     function prefsBind(box, redraw) {
         const cur = () => { const lis = [...box.querySelectorAll('[data-txb-list] > li')], c = barCfg(); return cleanBar({layout: c.layout, order: lis.map(l => l.dataset.k), hidden: lis.filter(l => !l.querySelector('input[type=checkbox]').checked).map(l => l.dataset.k),
             panel: lis.some(l => l.querySelector('[data-txb-place]')) ? lis.filter(l => l.querySelector('[data-txb-place]')?.value === 'panel').map(l => l.dataset.k) : c.panel}); };
         const keep = () => saveBar(cur()), today = () => new Date().toLocaleDateString('fr-FR'), UI = window.LCNDA_UI;
-        const frame = UI.presetsFrame({id: 'boutons-transcribe', what: 'cette barre (disposition, ordre, boutons montrés)', list: setsList,
+        const frame = UI.presetsFrame({id: 'boutons-transcribe', what: i18n('cette barre (disposition, ordre, boutons montrés)'), list: setsList,
             apply: i => { const x = setsList()[i]; if (!x) return false; saveBar(x.v); redraw2(); },
             save: name => setsSave([...setsList().filter(y => y.name !== name), {name, date: today(), v: cur()}]),
             replace: i => { const l = setsList(); l[i] = {...l[i], date: today(), v: cur()}; return setsSave(l); },
             rename: (i, name) => { const l = setsList(); l[i] = {...l[i], name}; return setsSave(l); },
-            duplicate: i => { const l = setsList(), name = UI.freeName(l[i].name, l.map(y => y.name)); l.splice(i + 1, 0, {...JSON.parse(JSON.stringify(l[i])), name, date: today()}); if (!setsSave(l)) return false; toast(`Copie « ${name} » créée.`); },
+            duplicate: i => { const l = setsList(), name = UI.freeName(l[i].name, l.map(y => y.name)); l.splice(i + 1, 0, {...JSON.parse(JSON.stringify(l[i])), name, date: today()}); if (!setsSave(l)) return false; toast(i18n('Copie « {name} » créée.', {name})); },
             exportOne: i => { const x = setsList()[i]; if (x) ext.reglageExport?.('boutons-transcribe', x.name, x.v); return false; },
-            remove: i => { const l = setsList(), x = l[i]; A().undoLocalChange?.(`Réglages « ${x.name} » supprimés`, [SETS_KEY], () => { l.splice(i, 1); setsSave(l); }, () => { if (frame.isConnected) frame.refresh(); }); },
+            remove: i => { const l = setsList(), x = l[i]; A().undoLocalChange?.(i18n('Réglages « {name} » supprimés', {name: x.name}), [SETS_KEY], () => { l.splice(i, 1); setsSave(l); }, () => { if (frame.isConnected) frame.refresh(); }); },
             importOne: async () => { const r = await ext.reglageImport?.('boutons-transcribe', {names: setsList().map(y => y.name), check: v => !!v && typeof v === 'object'}); if (!r) return false;
-                if (!setsSave([...setsList().filter(y => y.name !== r.nom), {name: r.nom, date: today(), v: cleanBar(r.donnees)}])) return false; toast(`Réglages « ${r.nom} » importés : « Appliquer » pour les utiliser.`); }});
+                if (!setsSave([...setsList().filter(y => y.name !== r.nom), {name: r.nom, date: today(), v: cleanBar(r.donnees)}])) return false; toast(i18n('Réglages « {nom} » importés : « Appliquer » pour les utiliser.', {nom: r.nom})); }});
         // la liste se redessine (innerHTML) : le cadre reprend sa place à chaque fois
         const mount = () => { const slot = box.querySelector('[data-presets-slot="txb"]'); if (slot) { slot.replaceWith(frame); frame.refresh(); } };
         const redraw2 = () => { redraw(); mount(); };
@@ -278,7 +279,7 @@
             if (e.target.closest('[data-txb-down]') && li?.nextElementSibling) { li.parentNode.insertBefore(li.nextElementSibling, li); keep(); return; }
             const lay = e.target.closest('[data-txb-layout]'); if (lay) { const c = cur(); c.layout = lay.dataset.txbLayout; saveBar(c); redraw2(); return; }
             if (e.target.closest('[data-txb-reset]')) { const before = readJson(BAR_KEY, null); try { localStorage.removeItem(BAR_KEY); } catch (_) {} window.dispatchEvent(new CustomEvent('lcnda-txbar-change')); redraw2();
-                A().undoToast?.('Barre de la transcription remise comme au départ', {undo: () => { if (before) saveBar(before); redraw2(); }, redo: () => { try { localStorage.removeItem(BAR_KEY); } catch (_) {} window.dispatchEvent(new CustomEvent('lcnda-txbar-change')); redraw2(); }}); return; }
+                A().undoToast?.(i18n('Barre de la transcription remise comme au départ'), {undo: () => { if (before) saveBar(before); redraw2(); }, redo: () => { try { localStorage.removeItem(BAR_KEY); } catch (_) {} window.dispatchEvent(new CustomEvent('lcnda-txbar-change')); redraw2(); }}); return; }
         });
         box.addEventListener('change', e => { if (e.target.closest('[data-txb-list]')) keep(); });
     }
@@ -286,8 +287,8 @@
     function openBarDialog(parent) {
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-tbcfg h-txb-dlg';
         const paint = () => { dlg.querySelector('[data-txb-box]').innerHTML = prefsHtml(); };
-        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">PERSONNALISER</span><h2>⚙️ Barre de la transcription</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-            <div class="h-tbcfg-body" data-txb-box></div><div class="modal-actions"><span class="spacer"></span><button type="button" class="button" data-x>Fermer</button></div>`;
+        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">PERSONNALISER</span><h2>⚙️ ${i18n('Barre de la transcription')}</h2></div><button type="button" class="icon-button" data-x aria-label="${esc(i18n('Fermer'))}">×</button></div>
+            <div class="h-tbcfg-body" data-txb-box></div><div class="modal-actions"><span class="spacer"></span><button type="button" class="button" data-x>${i18n('Fermer')}</button></div>`;
         (parent || document.body).appendChild(dlg); paint(); prefsBind(dlg.querySelector('[data-txb-box]'), paint);
         dlg.addEventListener('click', e => { if (e.target.closest('[data-x]')) dlg.close(); });
         dlg.addEventListener('close', () => dlg.remove()); dlg.showModal();

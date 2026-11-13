@@ -1,0 +1,111 @@
+fr ¦ ru ¦ uk
+# ═════ zone « premier » : russe (ru), ukrainien (uk) ═════
+INSTALLATION ¦ УСТАНОВКА ¦ ВСТАНОВЛЕННЯ
+La base généalogique doit être importée. ¦ Нужно импортировать генеалогическую базу. ¦ Потрібно імпортувати генеалогічну базу.
+Choisis comment démarrer : importer un fichier existant, ou créer une première personne pour partir d'une base vide. ¦ Выбери, как начать: импортировать существующий файл или создать первого человека и начать с пустой базы. ¦ Вибери, як почати: імпортувати наявний файл або створити першу людину й почати з порожньої бази.
+GEDCOM (.ged, aussi d’Ancestry, MyHeritage, Geneanet), Gramps (.gramps ou paquet .gpkg avec les photos), Hérédis (.hmw ou .heredis), MacFamilyTree (.mftpkg), base LCNDA (.db) ou sauvegarde complète LCNDA (.zip, base + médias). Les fichiers JSON et CSV sont analysés mais pas encore importés. ¦ GEDCOM (.ged, в том числе из Ancestry, MyHeritage, Geneanet), Gramps (.gramps или пакет .gpkg с фотографиями), Hérédis (.hmw или .heredis), MacFamilyTree (.mftpkg), база LCNDA (.db) или полная резервная копия LCNDA (.zip, база + медиафайлы). Файлы JSON и CSV анализируются, но пока не импортируются. ¦ GEDCOM (.ged, також з Ancestry, MyHeritage, Geneanet), Gramps (.gramps або пакет .gpkg з фотографіями), Hérédis (.hmw або .heredis), MacFamilyTree (.mftpkg), база LCNDA (.db) або повна резервна копія LCNDA (.zip, база + медіафайли). Файли JSON і CSV аналізуються, але поки не імпортуються.
+Fichier ¦ Файл ¦ Файл
+Créer une première personne ¦ Создать первого человека ¦ Створити першу людину
+Initialise une base vide avec une première fiche, à compléter ensuite. ¦ Создаёт пустую базу с первой карточкой, которую можно дополнить потом. ¦ Створює порожню базу з першою карткою, яку можна доповнити згодом.
+Prénom ¦ Имя ¦ Ім’я
+Nom ¦ Фамилия ¦ Прізвище
+Créer et ouvrir la base ¦ Создать и открыть базу ¦ Створити й відкрити базу
+Je veux faire autre chose ▾ ¦ Я хочу сделать другое ▾ ¦ Я хочу зробити інше ▾
+▴ Replier ¦ ▴ Свернуть ¦ ▴ Згорнути
+Qu’est-ce que tu veux faire avec l’app ? ¦ Что ты хочешь делать в приложении? ¦ Що ти хочеш робити в застосунку?
+Choisis ce qui te ressemble : l’app s’ouvre avec les bons onglets et le bon premier écran. Tu pourras tout changer après. ¦ Выбери, что тебе подходит: приложение откроется с нужными вкладками и нужным первым экраном. Всё можно будет поменять потом. ¦ Вибери, що тобі підходить: застосунок відкриється з потрібними вкладками й потрібним першим екраном. Усе можна буде змінити згодом.
+Ta famille, tes ancêtres, leurs actes et leurs photos. ¦ Твоя семья, твои предки, их записи актов и фотографии. ¦ Твоя родина, твої предки, їхні актові записи та фотографії.
+Une lignée d’animaux ¦ Родословная животных ¦ Родовід тварин
+Un élevage, le pedigree de tes chiens, chats, chevaux… ¦ Разведение, родословная твоих собак, кошек, лошадей… ¦ Розведення, родовід твоїх собак, котів, коней…
+Recenser des animaux ¦ Учёт животных ¦ Облік тварин
+Suivre des animaux : baguage, puces, observations, trajets. ¦ Наблюдать за животными: кольцевание, чипы, наблюдения, маршруты. ¦ Спостерігати за тваринами: кільцювання, чипи, спостереження, маршрути.
+L’histoire d’une maison ou d’un village ¦ История дома или деревни ¦ Історія будинку чи села
+Maison ou village ¦ Дом или деревня ¦ Будинок або село
+Qui a vécu où, de génération en génération, pièce par pièce. ¦ Кто где жил, из поколения в поколение, комната за комнатой. ¦ Хто де жив, з покоління в покоління, кімната за кімнатою.
+Le catalogue d’un artiste ou d’une collection ¦ Каталог художника или коллекции ¦ Каталог митця чи колекції
+Artiste ou collection ¦ Художник или коллекция ¦ Митець або колекція
+Ses œuvres, ses expositions, son catalogue raisonné. ¦ Произведения, выставки, каталог-резоне. ¦ Твори, виставки, каталог-резоне.
+Un fonds d’archives ou un musée familial ¦ Архивный фонд или семейный музей ¦ Архівний фонд або родинний музей
+Archives ou musée ¦ Архив или музей ¦ Архів або музей
+Des photos, des lettres, des objets à classer et à décrire. ¦ Фотографии, письма, предметы, которые нужно упорядочить и описать. ¦ Фотографії, листи, предмети, які треба впорядкувати й описати.
+L’étude d’un nom de famille ¦ Изучение фамилии ¦ Дослідження прізвища
+Un nom de famille ¦ Фамилия ¦ Прізвище
+Tous les porteurs d’un nom, ses variantes, d’où ils viennent. ¦ Все носители фамилии, её варианты, откуда они родом. ¦ Усі носії прізвища, його варіанти, звідки вони походять.
+L’histoire d’une entreprise ou d’une association ¦ История предприятия или объединения ¦ Історія підприємства чи об’єднання
+Entreprise ou association ¦ Предприятие или объединение ¦ Підприємство або об’єднання
+Ses lieux, ses dirigeants, ses salariés ou ses membres. ¦ Его места, руководители, сотрудники или участники. ¦ Його місця, керівники, працівники або учасники.
+Transmettre des souvenirs ¦ Передать воспоминания ¦ Передати спогади
+Des lettres à ouvrir plus tard, des recettes, des chansons, des souvenirs à laisser. ¦ Письма, которые откроют позже, рецепты, песни, воспоминания на память. ¦ Листи, які відкриють пізніше, рецепти, пісні, спогади на згадку.
+Ce qui change ¦ Что меняется ¦ Що змінюється
+Commencer avec une base vide ¦ Начать с пустой базы ¦ Почати з порожньої бази
+🧪 Essayer avec une base d’exemple ¦ 🧪 Попробовать на примерной базе ¦ 🧪 Спробувати на прикладовій базі
+🧪 Base d’exemple ¦ 🧪 Примерная база ¦ 🧪 Прикладова база
+Une famille imaginaire pour essayer l’app : ta généalogie n’est pas touchée. ¦ Вымышленная семья, чтобы попробовать приложение: твою генеалогию это не затрагивает. ¦ Вигадана родина, щоб спробувати застосунок: твоєї генеалогії це не зачіпає.
+Revenir à ma généalogie ¦ Вернуться к моей генеалогии ¦ Повернутися до моєї генеалогії
+Repartir d’une base vide ¦ Начать заново с пустой базы ¦ Почати знову з порожньої бази
+Ou bien : ¦ Или: ¦ Або:
+🐾 Créer le premier animal ¦ 🐾 Создать первое животное ¦ 🐾 Створити першу тварину
+Créer le premier animal ¦ Создать первое животное ¦ Створити першу тварину
+Espèce ¦ Вид ¦ Вид
+Création de la base… ¦ Создание базы… ¦ Створення бази…
+Préparation de la base d’exemple… ¦ Подготовка примерной базы… ¦ Підготовка прикладової бази…
+✓ Base créée ¦ ✓ База создана ¦ ✓ Базу створено
+ℹ️ Rien n’est figé : Réglages → Apparence → « 🧭 Usage de l’app ». ¦ ℹ️ Ничто не окончательно: Настройки → Внешний вид → «🧭 Назначение приложения». ¦ ℹ️ Ніщо не остаточне: Налаштування → Вигляд → «🧭 Призначення застосунку».
+🧭 Usage de l’app ¦ 🧭 Назначение приложения ¦ 🧭 Призначення застосунку
+🧭 Revoir le premier lancement ¦ 🧭 Снова показать первый запуск ¦ 🧭 Знову показати перший запуск
+Premier écran à l’ouverture ¦ Первый экран при открытии ¦ Перший екран під час відкриття
+Le dernier écran ouvert (comme avant) ¦ Последний открытый экран (как раньше) ¦ Останній відкритий екран (як раніше)
+Usage enregistré. ¦ Назначение сохранено. ¦ Призначення збережено.
+(la page va se recharger) ¦ (страница перезагрузится) ¦ (сторінка перезавантажиться)
+Langue · Language ¦ Язык · Language ¦ Мова · Language
+Une petite visite ? ¦ Небольшая экскурсия? ¦ Невелика екскурсія?
+En {n} étapes, l’app te montre où créer une fiche, ajouter un parent, une photo, un événement, faire une sauvegarde et trouver l’aide. Ça prend deux minutes. ¦ За {n} шагов приложение покажет тебе, где создать карточку, добавить родителя, фото, событие, сделать резервную копию и найти помощь. Это займёт две минуты. ¦ За {n} кроків застосунок покаже тобі, де створити картку, додати батька чи матір, фото, подію, зробити резервну копію та знайти довідку. Це займе дві хвилини.
+▶ Commencer ¦ ▶ Начать ¦ ▶ Почати
+Plus tard ¦ Позже ¦ Пізніше
+Ne plus proposer ¦ Больше не предлагать ¦ Більше не пропонувати
+Passer la visite ¦ Пропустить экскурсию ¦ Пропустити екскурсію
+← Précédent ¦ ← Назад ¦ ← Назад
+Suivant → ¦ Далее → ¦ Далі →
+✓ Terminer ¦ ✓ Завершить ¦ ✓ Завершити
+Étape {i} sur {n} ¦ Шаг {i} из {n} ¦ Крок {i} з {n}
+Visite guidée, étape {i} sur {n} : {what} ¦ Экскурсия, шаг {i} из {n}: {what} ¦ Екскурсія, крок {i} з {n}: {what}
+Tu peux cliquer le bouton entouré pour le faire pour de vrai, ou juste avancer. ¦ Можешь нажать на обведённую кнопку, чтобы сделать это по-настоящему, или просто идти дальше. ¦ Можеш натиснути обведену кнопку, щоб зробити це насправді, або просто йти далі.
+Ajouter un parent ¦ Добавить родителя ¦ Додати батька чи матір
+Ajouter une photo ¦ Добавить фото ¦ Додати фото
+Un événement et son lieu ¦ Событие и его место ¦ Подія та її місце
+Faire une sauvegarde ¦ Сделать резервную копию ¦ Зробити резервну копію
+Les Réglages et l’aide ¦ Настройки и помощь ¦ Налаштування та довідка
+Chaque personne a sa fiche. Ce bouton en crée une : un prénom, un nom, et c’est parti. ¦ У каждого человека своя карточка. Эта кнопка создаёт новую: имя, фамилия — и вперёд. ¦ Кожна людина має свою картку. Ця кнопка створює нову: ім’я, прізвище — і вперед.
+Sur une fiche, le « ＋ » de « Parents » relie un père ou une mère : choisis une fiche qui existe, ou crée-la. C’est comme ça que l’arbre se construit. ¦ На карточке «＋» у «Родителей» связывает отца или мать: выбери существующую карточку или создай её. Так растёт древо. ¦ На картці «＋» біля «Батьків» пов’язує батька чи матір: вибери наявну картку або створи її. Так росте дерево.
+Ici, tu ajoutes des photos et des actes à la fiche : prends-les dans tes médias, ou glisse-les depuis l’ordinateur. ¦ Здесь ты добавляешь фото и записи актов к карточке: возьми их из своих медиафайлов или перетащи с компьютера. ¦ Тут ти додаєш фото й актові записи до картки: візьми їх зі своїх медіафайлів або перетягни з комп’ютера.
+Naissance, mariage, décès… Ajoute un événement avec sa date et son lieu : tape les premières lettres de la commune, l’app la trouve. ¦ Рождение, брак, смерть… Добавь событие с датой и местом: набери первые буквы населённого пункта, приложение его найдёт. ¦ Народження, шлюб, смерть… Додай подію з датою та місцем: набери перші літери населеного пункту, застосунок його знайде.
+De temps en temps, fais une sauvegarde : ce fichier garde toute ta généalogie et tes photos. Range-le sur une clé USB ou un autre disque. ¦ Время от времени делай резервную копию: в этом файле хранится вся твоя генеалогия и фотографии. Храни его на флешке или другом диске. ¦ Час від часу роби резервну копію: у цьому файлі зберігається вся твоя генеалогія та фотографії. Тримай його на флешці або іншому диску.
+Tout se règle ici : apparence, import, sauvegardes… Dans les Réglages, la page « FAQ / tuto » répond à tes questions ; tu peux aussi y relancer cette visite. ¦ Здесь настраивается всё: внешний вид, импорт, резервные копии… В Настройках страница «FAQ / инструкции» отвечает на твои вопросы; там же можно снова запустить эту экскурсию. ¦ Тут налаштовується все: вигляд, імпорт, резервні копії… У Налаштуваннях сторінка «FAQ / інструкції» відповідає на твої запитання; там само можна знову запустити цю екскурсію.
+✓ Visite terminée. Pour la revoir : Réglages → FAQ / tuto → « ▶ Relancer la visite guidée ». ¦ ✓ Экскурсия завершена. Чтобы посмотреть её снова: Настройки → FAQ / инструкции → «▶ Снова запустить экскурсию». ¦ ✓ Екскурсію завершено. Щоб переглянути її знову: Налаштування → FAQ / інструкції → «▶ Знову запустити екскурсію».
+Visite guidée fermée. Tu la retrouves dans Réglages → FAQ / tuto. ¦ Экскурсия закрыта. Она есть в Настройки → FAQ / инструкции. ¦ Екскурсію закрито. Вона є в Налаштування → FAQ / інструкції.
+Une petite visite guidée de l’app est proposée. Commencer, plus tard, ou ne plus proposer. ¦ Предлагается небольшая экскурсия по приложению. Начать, позже или больше не предлагать. ¦ Пропонується невелика екскурсія застосунком. Почати, пізніше або більше не пропонувати.
+Rien à montrer sur cet écran pour l’instant. ¦ На этом экране пока нечего показать. ¦ На цьому екрані поки нічого показати.
+Pas de visite guidée en mode consultation. ¦ В режиме просмотра экскурсии нет. ¦ У режимі перегляду екскурсії немає.
+La visite guidée n’est pas possible ici. ¦ Экскурсия здесь недоступна. ¦ Екскурсія тут недоступна.
+🐞 Signaler un problème ¦ 🐞 Сообщить о проблеме ¦ 🐞 Повідомити про проблему
+AIDE ¦ ПОМОЩЬ ¦ ДОВІДКА
+Ce qui s’est passé ¦ Что произошло ¦ Що сталося
+Ce que j’attendais ¦ Чего я ожидал(а) ¦ Чого я очікував(ла)
+Écris avec tes mots. Évite les noms de ta famille si tu ne veux pas qu’ils soient lus. ¦ Пиши своими словами. Не упоминай фамилии своей семьи, если не хочешь, чтобы их прочитали. ¦ Пиши своїми словами. Не згадуй прізвищ своєї родини, якщо не хочеш, щоб їх прочитали.
+Joindre le rapport technique ¦ Приложить технический отчёт ¦ Додати технічний звіт
+Joindre le rapport technique ({x}) ¦ Приложить технический отчёт ({x}) ¦ Додати технічний звіт ({x})
+aucune erreur captée ¦ ошибок не поймано ¦ помилок не зафіксовано
+Rapport technique ¦ Технический отчёт ¦ Технічний звіт
+🗑 Vider le journal ¦ 🗑 Очистить журнал ¦ 🗑 Очистити журнал
+Vider le journal des erreurs captées sur cet ordinateur ¦ Очистить журнал ошибок, пойманных на этом компьютере ¦ Очистити журнал помилок, зафіксованих на цьому комп’ютері
+✉️ Écrire un e-mail ¦ ✉️ Написать письмо ¦ ✉️ Написати листа
+Ouvrir une demande sur GitHub ¦ Создать запрос на GitHub ¦ Створити запит на GitHub
+Journal des erreurs vidé ¦ Журнал ошибок очищен ¦ Журнал помилок очищено
+✓ Message copié : colle-le où tu veux (e-mail, forum, GitHub). ¦ ✓ Сообщение скопировано: вставь его куда хочешь (письмо, форум, GitHub). ¦ ✓ Повідомлення скопійовано: встав його куди хочеш (лист, форум, GitHub).
+La copie n’a pas marché : sélectionne le texte et copie-le à la main. ¦ Копирование не сработало: выдели текст и скопируй его вручную. ¦ Копіювання не спрацювало: виділи текст і скопіюй його вручну.
+Dis en quelques mots ce qui s’est passé. ¦ Опиши в нескольких словах, что произошло. ¦ Опиши кількома словами, що сталося.
+Ex. : j’ai cliqué sur « Enregistrer » dans la fiche, et la fenêtre est restée grise. ¦ Напр.: я нажал(а) «Сохранить» в карточке, и окно осталось серым. ¦ Напр.: я натиснув(ла) «Зберегти» в картці, і вікно залишилося сірим.
+Ex. : que la fiche soit enregistrée et que la fenêtre se ferme. ¦ Напр.: чтобы карточка сохранилась, а окно закрылось. ¦ Напр.: щоб картка збереглася, а вікно закрилося.
+Pour écrire un e-mail plutôt qu’ouvrir une demande sur GitHub : règle une adresse dans Réglages → « 🔄 Mises à jour ». ¦ Чтобы писать письмо, а не создавать запрос на GitHub: укажи адрес в Настройки → «🔄 Обновления». ¦ Щоб писати листа, а не створювати запит на GitHub: вкажи адресу в Налаштування → «🔄 Оновлення».
+La base d’exemple est une famille imaginaire (5 générations, des photos d’époque dessinées) rangée à part dans « Mes généalogies » : ta généalogie n’est jamais touchée. ¦ Примерная база — это вымышленная семья (5 поколений, нарисованные старинные фото), хранящаяся отдельно в «Мои генеалогии»: твою генеалогию это никогда не затрагивает. ¦ Прикладова база — це вигадана родина (5 поколінь, намальовані старовинні фото), що зберігається окремо в «Мої генеалогії»: твоєї генеалогії це ніколи не зачіпає.
+Aucun fichier choisi ¦ Файл не выбран ¦ Файл не вибрано

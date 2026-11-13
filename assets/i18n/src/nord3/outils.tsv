@@ -1,0 +1,980 @@
+fr ¦ ro
+Génération {g} ¦ Generația {g}
+★ ancêtre commun ¦ ★ strămoș comun
+Comment sont-ils parents ? ¦ Cum sunt rude?
+cousins issus de germains aussi par {name} (implexe) ¦ veri de gradul doi și prin {name} (implex)
+⚠ Lieux sans position : {list} — écris « Nom 48.11, -1.68 » ¦ ⚠ Locuri fără poziție: {list} — scrie „Nume 48.11, -1.68”
+De la génération {a} à la génération {b}, le centre de la famille s’est déplacé de {km} km. ¦ De la generația {a} la generația {b}, centrul familiei s-a deplasat cu {km} km.
+Centre de gravité de {n} générations, {km} km parcourus. ¦ Centrul de greutate a {n} generații, {km} km parcurși.
+Centre de gravité de {n} générations. ¦ Centrul de greutate a {n} generații.
+Ajoute des lieux avec leur génération (ou « Depuis l’app »). ¦ Adaugă locuri cu generația lor (sau „Din aplicație”).
+Gén. {g} ({max}) ¦ Gen. {g} ({max})
+{found} ancêtres trouvés sur {max} possibles en {n} générations ({pct} %). ¦ {found} strămoși găsiți din {max} posibili în {n} generații ({pct} %).
+Complétude : {pct} % des ancêtres sur {n} générations. ¦ Completitudine: {pct} % din strămoși pe {n} generații.
+… et {n} lignes de plus (« 🖨 Imprimer le tableau » les met toutes) ¦ … și încă {n} rânduri („🖨 Tipărește tabelul” le pune pe toate)
+Tableau d’ascendance : {n} ancêtres. ¦ Tabel de ascendență: {n} strămoși.
+Tableau d’ascendance ¦ Tabel de ascendență
+Ajoute des correspondances de {lo} à {hi} cM avec leurs correspondances en commun (ou « Depuis l’app »). ¦ Adaugă potriviri de la {lo} la {hi} cM cu potrivirile lor în comun (sau „Din aplicație”).
+dates · surtout en {month} ¦ date · mai ales în {month}
+Roue de l’année : {n} dates, surtout en {month}. ¦ Roata anului: {n} date, mai ales în {month}.
+{name} (à gauche) ¦ {name} (în stânga)
+{name} (à droite) ¦ {name} (în dreapta)
+Barres et courbe : {n} lignes. ¦ Bare și curbă: {n} rânduri.
+Sous {v} ¦ Sub {v}
+Au-dessus de {v} ¦ Peste {v}
+Collines empilées : {s} séries sur {n} périodes. ¦ Dealuri suprapuse: {s} serii pe {n} perioade.
+Coordonnées parallèles : {n} lignes sur {a} axes. ¦ Coordonate paralele: {n} linii pe {a} axe.
+Chemin trouvé en {n} étapes. ¦ Drum găsit în {n} etape.
+Chemin trouvé en 1 étape. ¦ Drum găsit într-o etapă.
+Aucun ancêtre dont le lieu de naissance a des coordonnées ({n} sans lieu situé). ¦ Niciun strămoș al cărui loc de naștere are coordonate ({n} fără loc localizat).
+Aucun ancêtre dont le lieu de naissance a des coordonnées. ¦ Niciun strămoș al cărui loc de naștere are coordonate.
+Le centre de la famille de {name} ¦ Centrul familiei lui {name}
+Les générations de {name} ¦ Generațiile lui {name}
+{n} lieux de naissance pris dans ta base ({m} sans lieu situé). ¦ {n} locuri de naștere luate din baza ta ({m} fără loc localizat).
+{n} lieux de naissance pris dans ta base. ¦ {n} locuri de naștere luate din baza ta.
+L’arbre de {name} : ce qu’on connaît ¦ Arborele lui {name}: ce se cunoaște
+Tableau d’ascendance de {name} ¦ Tabelul de ascendență al lui {name}
+{n} ancêtres pris dans ta base (arrêt à 4 096 lignes). ¦ {n} strămoși luați din baza ta (oprire la 4 096 de rânduri).
+{n} ancêtres pris dans ta base. ¦ {n} strămoși luați din baza ta.
+Aucune naissance ni aucun décès daté. ¦ Nicio naștere și niciun deces datat.
+Filles ¦ Fete
+Garçons ¦ Băieți
+{n} noms sur {p} périodes. ¦ {n} nume pe {p} perioade.
+{n} personnes comptées, {y} années. ¦ {n} persoane numărate, {y} ani.
+Arrière-arrière-grands-parents ¦ Răstrăbunici
+Arrière-arrière-arrière-grands-parents ¦ Stră-răstrăbunici
+Les cartes ne sont pas chargées. ¦ Hărțile nu sunt încărcate.
+Ancêtres connus ¦ Strămoși cunoscuți
+Grand-père paternel ¦ Bunicul patern
+Grand-mère paternelle ¦ Bunica paternă
+Grand-père maternel ¦ Bunicul matern
+Grand-mère maternelle ¦ Bunica maternă
+Fêtes des prénoms ¦ Onomastici
+Âge au 1er enfant ¦ Vârsta la primul copil
+Les métiers ¦ Meseriile
+Un titre par génération ¦ Un titlu pe generație
+Tous mes tests ¦ Toate testele mele
+Par décennie ¦ Pe deceniu
+Par demi-siècle ¦ Pe jumătate de secol
+Par siècle ¦ Pe secol
+Décès ↔ naissances ¦ Decese ↔ nașteri
+Périodes ¦ Perioade
+Personnes au plus ¦ Persoane cel mult
+Âge au 1er mariage ¦ Vârsta la prima căsătorie
+Aucune naissance datée. ¦ Nicio naștere datată.
+Un dégradé ¦ Un degrade
+Une couleur chacune ¦ Câte o culoare fiecare
+Lien avec la personne d’avant ¦ Legătura cu persoana dinainte
+son époux / épouse ¦ soțul / soția sa
+Selon la place ¦ După spațiu
+En liste, étape par étape ¦ Ca listă, pas cu pas
+La phrase du lien ¦ Fraza legăturii
+Une seule ¦ Una singură
+Sens des flèches ¦ Sensul săgeților
+Des plus anciens vers toi ¦ De la cei mai vechi spre tine
+De toi vers les plus anciens ¦ De la tine spre cei mai vechi
+La trajectoire ¦ Traiectoria
+Taille des lieux ¦ Mărimea locurilor
+La phrase du déplacement ¦ Fraza deplasării
+Écarter les points d’un même lieu ¦ Depărtează punctele aceluiași loc
+Noms des lieux les plus remplis ¦ Numele locurilor celor mai pline
+D’où viennent mes ancêtres ¦ De unde vin strămoșii mei
+Trouvés ¦ Găsiți
+Longueur des barres ¦ Lungimea barelor
+Écrire les % ¦ Scrie procentele
+Les ancêtres ¦ Strămoșii
+Lignes montrées au plus ¦ Rânduri afișate cel mult
+Les correspondances ¦ Potrivirile
+ADN partagé ¦ ADN comun
+Correspondances au plus ¦ Potriviri cel mult
+Mes cousins ADN, par grand-parent ¦ Verii mei ADN, pe bunic
+La courbe = la colonne n° ¦ Curba = coloana nr.
+Largeur des barres ¦ Lățimea barelor
+Une colonne autour du centre ¦ O coloană în jurul centrului
+Par écart ¦ După diferență
+Par total ¦ După total
+Écrire les chiffres ¦ Scrie cifrele
+Écart entre les collines ¦ Distanța dintre dealuri
+À l’envers ¦ Pe dos
+Une par série ¦ Una pe serie
+Opacité des lignes ¦ Opacitatea liniilor
+La marche ¦ Treapta
+Carte des générations : {n} lieux de naissance. ¦ Harta generațiilor: {n} locuri de naștere.
+Génération {g} ({name}) : {found} sur {max} possibles ¦ Generația {g} ({name}): {found} din {max} posibili
+{n} personnes différentes (implexe) ¦ {n} persoane diferite (implex)
+Méthode de Leeds : {n} groupes de couleur. ¦ Metoda Leeds: {n} grupuri de culoare.
+{name} : {n} en tout, le plus en {peak} ({v}) ¦ {name}: {n} în total, cei mai mulți în {peak} ({v})
+Courbe en escalier : {n} points. ¦ Curbă în trepte: {n} puncte.
+n° de fiche ¦ nr. fișei
+liens de sang par {n} branches (implexe) ¦ legături de sânge prin {n} ramuri (implex)
+{n} générations prises dans ta base. ¦ {n} generații luate din baza ta.
+{n} correspondances prises dans l’onglet ADN. ¦ {n} potriviri luate din fila ADN.
+{n} dates prises dans ta base. ¦ {n} date luate din baza ta.
+{n} périodes prises dans ta base. ¦ {n} perioade luate din baza ta.
+{n} vies prises dans ta base. ¦ {n} vieți luate din baza ta.
+Choisis deux personnes (« Depuis l’app ») ou écris le chemin, une personne par ligne. ¦ Alege două persoane („Din aplicație”) sau scrie drumul, o persoană pe rând.
+{gen} : centre de {n} lieux de naissance ¦ {gen}: centrul a {n} locuri de naștere
+{gen} : centre de {n} lieu de naissance ¦ {gen}: centrul a {n} loc de naștere
+écart moyen {km} km ¦ abatere medie {km} km
+Ajoute des lieux de naissance avec leur génération (ou « Depuis l’app »). ¦ Adaugă locuri de naștere cu generația lor (sau „Din aplicație”).
+Ajoute des générations : la génération et le nombre d’ancêtres trouvés. ¦ Adaugă generații: generația și numărul de strămoși găsiți.
+Encore à trouver ¦ Încă de găsit
+Personnes différentes (implexe) ¦ Persoane diferite (implex)
+Ajoute des ancêtres : leur numéro Sosa et leur nom (ou « Depuis l’app »). ¦ Adaugă strămoși: numărul lor Sosa și numele (sau „Din aplicație”).
+Ajoute des dates (« 14/07 » ou « 07-14 »), une sorte et un nom (ou « Depuis l’app »). ¦ Adaugă date („14/07” sau „07-14”), un fel și un nume (sau „Din aplicație”).
+Il faut au moins deux colonnes de chiffres : des barres à gauche, une courbe à droite. ¦ Sunt necesare cel puțin două coloane de cifre: bare în stânga, o curbă în dreapta.
+Aucun chiffre dans le tableau. ¦ Nicio cifră în tabel.
+Ajoute des lignes : un nom et deux chiffres (gauche, droite), ou un seul chiffre autour du centre. ¦ Adaugă rânduri: un nume și două cifre (stânga, dreapta), sau o singură cifră în jurul centrului.
+Sous le centre ¦ Sub centru
+Ajoute des lignes (années, décennies…) et une colonne de chiffres par colline. ¦ Adaugă rânduri (ani, decenii…) și câte o coloană de cifre pentru fiecare deal.
+Il faut au moins deux colonnes de chiffres (les axes) et une ligne par personne ou par chose. ¦ Sunt necesare cel puțin două coloane de cifre (axele) și un rând pentru fiecare persoană sau lucru.
+Ajoute des lignes : une année (ou un nom) et un chiffre. ¦ Adaugă rânduri: un an (sau un nume) și o cifră.
+🔒 Pour partager : sans les noms des personnes en vie ¦ 🔒 Pentru partajare: fără numele persoanelor în viață
+Les ancêtres de la personne de départ ¦ Strămoșii persoanei de pornire
+Lecture de ta généalogie… ¦ Se citește genealogia ta…
+Données prises dans ta base. ¦ Date luate din baza ta.
+🔗 Deux personnes de ma base ¦ 🔗 Două persoane din baza mea
+L’app cherche le plus court chemin : on remonte jusqu’à l’ancêtre commun et on redescend ; avec les alliances, elle passe aussi par les époux (beau-frère, cousin de l’épouse…). Un même lien par plusieurs ancêtres (implexe) est signalé. ¦ Aplicația caută drumul cel mai scurt: urcăm până la strămoșul comun și coborâm din nou; cu alianțele, trece și prin soți (cumnat, văr al soției…). O aceeași legătură prin mai mulți strămoși (implex) este semnalată.
+Passer aussi par les alliances (époux, épouses) ¦ Treci și prin alianțe (soți, soții)
+Trouver le chemin ¦ Găsește drumul
+Choisis les deux personnes dans les menus. ¦ Alege cele două persoane din meniuri.
+Aucun lien trouvé entre ces deux personnes dans ta base. ¦ Nicio legătură găsită între aceste două persoane în baza ta.
+Aucun ancêtre commun : essaie avec les alliances. ¦ Niciun strămoș comun: încearcă cu alianțele.
+🎯 Les lieux de naissance de mes ancêtres ¦ 🎯 Locurile de naștere ale strămoșilor mei
+🌈 Les lieux de naissance de mes ancêtres ¦ 🌈 Locurile de naștere ale strămoșilor mei
+Chaque ancêtre (numéro Sosa) est placé à son lieu de naissance (ou de baptême), avec sa génération. Les lieux sans coordonnées sont laissés de côté. ¦ Fiecare strămoș (număr Sosa) este plasat la locul său de naștere (sau de botez), cu generația sa. Locurile fără coordonate sunt lăsate deoparte.
+🧩 L’ascendance d’une personne ¦ 🧩 Ascendența unei persoane
+Pour chaque génération : les ancêtres possibles (1, 2, 4, 8…), les places trouvées et les personnes différentes (implexe). ¦ Pentru fiecare generație: strămoșii posibili (1, 2, 4, 8…), locurile găsite și persoanele diferite (implex).
+Aucun ancêtre trouvé pour cette personne. ¦ Niciun strămoș găsit pentru această persoană.
+📜 Les ancêtres d’une personne ¦ 📜 Strămoșii unei persoane
+Une ligne par numéro Sosa : nom, naissance, mariage, décès (dates et lieux). Un ancêtre présent plusieurs fois (implexe) renvoie à son premier numéro. ¦ Un rând pe număr Sosa: nume, naștere, căsătorie, deces (date și locuri). Un strămoș prezent de mai multe ori (implex) trimite la primul său număr.
+🖨 Imprimer le tableau… ¦ 🖨 Tipărește tabelul…
+Depuis l’onglet ADN : les correspondances d’un test et leurs « correspondances en commun ». La méthode de Leeds range celles de 90 à 400 cM (cousins de 2e et 3e degré) en groupes de couleur, souvent un par grand-parent. ¦ Din fila ADN: potrivirile unui test și „potrivirile lor în comun”. Metoda Leeds le grupează pe cele de la 90 la 400 cM (veri de gradul 2 și 3) în grupuri de culoare, adesea unul pe bunic.
+Aucune correspondance ADN dans ta base (onglet ADN → Correspondances). ¦ Nicio potrivire ADN în baza ta (fila ADN → Potriviri).
+Il manque les « correspondances en commun » : remplis-les dans l’onglet ADN (ou importe-les). ¦ Lipsesc „potrivirile în comun”: completează-le în fila ADN (sau importă-le).
+Méthode de Leeds ¦ Metoda Leeds
+🎡 Les dates de ma famille ¦ 🎡 Datele familiei mele
+Les naissances, mariages et décès datés au jour près, et la fête du prénom de chacun (calendrier des saints). Les fiches confidentielles ne sont jamais prises. ¦ Nașterile, căsătoriile și decesele datate la zi, și onomastica fiecăruia (calendarul sfinților). Fișele confidențiale nu sunt luate niciodată.
+Les personnes en vie (et leurs mariages) ¦ Persoanele în viață (și căsătoriile lor)
+Coche au moins une sorte de date. ¦ Bifează cel puțin un fel de dată.
+Aucune date au jour près pour ce choix. ¦ Nicio dată exactă la zi pentru această alegere.
+L’année de la famille ¦ Anul familiei
+Par quart de siècle ¦ Pe sfert de secol
+📊 Naissances et âge au décès ¦ 📊 Nașteri și vârsta la deces
+↔️ Naissances et décès ¦ ↔️ Nașteri și decese
+Les naissances de chaque période en barres (à gauche), l’âge moyen au décès en courbe (à droite). ¦ Nașterile fiecărei perioade ca bare (în stânga), vârsta medie la deces ca o curbă (în dreapta).
+Les décès à gauche, les naissances à droite, période par période (ou les femmes et les hommes). ¦ Decesele în stânga, nașterile în dreapta, perioadă cu perioadă (sau femeile și bărbații).
+Face à face ¦ Față în față
+Naissances : filles ↔ garçons ¦ Nașteri: fete ↔ băieți
+Âge moyen au décès ¦ Vârsta medie la deces
+Naissances et âge moyen au décès ¦ Nașteri și vârsta medie la deces
+Filles et garçons à la naissance ¦ Fete și băieți la naștere
+Décès et naissances ¦ Decese și nașteri
+🏔 Les noms de famille au fil du temps ¦ 🏔 Numele de familie de-a lungul timpului
+Les noms les plus portés : une colline par nom, la hauteur = les naissances de chaque période. ¦ Numele cele mai purtate: un deal pe nume, înălțimea = nașterile din fiecare perioadă.
+Aucune naissance datée avec un nom de famille. ¦ Nicio naștere datată cu un nume de familie.
+Les noms de famille au fil du temps ¦ Numele de familie de-a lungul timpului
+🧵 Les vies de ma base ¦ 🧵 Viețile din baza mea
+Pour chaque personne (vies finies seulement) : l’âge au premier mariage, au premier enfant, le nombre d’enfants et l’âge au décès ; une couleur par siècle de naissance. ¦ Pentru fiecare persoană (doar vieți încheiate): vârsta la prima căsătorie, la primul copil, numărul de copii și vârsta la deces; o culoare pe secol de naștere.
+Pas assez de vies datées (il faut au moins 3 des 4 chiffres). ¦ Nu sunt destule vieți datate (e nevoie de cel puțin 3 din cele 4 cifre).
+Les vies de la famille ¦ Viețile familiei
+📶 Combien en vie, année par année ¦ 📶 Câți în viață, an cu an
+Une personne compte de sa naissance à son décès ; décès inconnu : en vie si elle est née il y a moins de 100 ans, sinon jusqu’à 60 ans (comme « Les vivants de l’arbre »). ¦ O persoană contează de la naștere până la deces; deces necunoscut: în viață dacă s-a născut acum mai puțin de 100 de ani, altfel până la 60 de ani (ca la „Cei vii din arbore”).
+Personnes en vie ¦ Persoane în viață
+Combien de la famille étaient en vie ¦ Câți din familie erau în viață
+Couleurs des générations ¦ Culorile generațiilor
+Dégradé : la plus proche ¦ Degrade: cea mai apropiată
+Dégradé : la plus ancienne ¦ Degrade: cea mai veche
+Les ancêtres (lieu de naissance « Nom 48.11, -1.68 » et génération : 2 = parents, 3 = grands-parents…) ¦ Strămoșii (locul de naștere „Nume 48.11, -1.68” și generația: 2 = părinți, 3 = bunici…)
+Le chemin (une personne par ligne, de la première à la seconde) ¦ Drumul (o persoană pe rând, de la prima la a doua)
+son père / sa mère (on monte) ¦ tatăl / mama sa (urcăm)
+son enfant (on descend) ¦ copilul său (coborâm)
+En V (montée puis descente) ¦ În V (urcare apoi coborâre)
+Les autres liens (implexe) ¦ Celelalte legături (implex)
+Couleur des cases ¦ Culoarea căsuțelor
+Cadrer tout seul sur les lieux ¦ Încadrează singur pe locuri
+Montrer chaque lieu (pâle) ¦ Arată fiecare loc (estompat)
+Cercle de l’écart moyen ¦ Cercul abaterii medii
+Couleur de la trajectoire ¦ Culoarea traiectoriei
+Le centre de la famille, génération par génération ¦ Centrul familiei, generație cu generație
+Nom écrit à partir de … ancêtres ¦ Nume scris de la … strămoși
+Les générations (1 = la personne) ¦ Generațiile (1 = persoana)
+Éventail (une case par ancêtre) ¦ Evantai (o căsuță pe strămoș)
+Éventail : générations ¦ Evantai: generații
+Toutes pareilles (en %) ¦ Toate la fel (în %)
+Selon le nombre possible ¦ După numărul posibil
+Montrer les personnes différentes (implexe) ¦ Arată persoanele diferite (implex)
+Phrase de résumé ¦ Frază de rezumat
+Couleur des connus ¦ Culoarea celor cunoscuți
+Couleur des manquants ¦ Culoarea celor lipsă
+Couleur de l’implexe ¦ Culoarea implexului
+Ce que je connais de mon arbre ¦ Ce cunosc din arborele meu
+Correspondances en commun (séparées par ;) ¦ Potriviri în comun (separate prin ;)
+Groupes de couleur au plus ¦ Grupuri de culoare cel mult
+Noms des groupes (séparés par des virgules) ¦ Numele grupurilor (separate prin virgule)
+Noms en haut des colonnes ¦ Nume în capul coloanelor
+Jour (14/07 ou 07-14) ¦ Zi (14/07 sau 07-14)
+Le trait « aujourd’hui » ¦ Linia „azi”
+Le nombre au centre ¦ Numărul din centru
+Les chiffres (la dernière colonne = la courbe) ¦ Cifrele (ultima coloană = curba)
+Nom de l’axe de gauche ¦ Numele axei din stânga
+Nom de l’axe de droite ¦ Numele axei din dreapta
+Unité à gauche ¦ Unitate în stânga
+Unité à droite ¦ Unitate în dreapta
+Axe de droite à partir de zéro ¦ Axa din dreapta de la zero
+Épaisseur de la courbe ¦ Grosimea curbei
+Points de la courbe ¦ Punctele curbei
+Écrire les chiffres de la courbe ¦ Scrie cifrele curbei
+Les lignes (1re colonne à gauche, 2e à droite) ¦ Rândurile (coloana 1 în stânga, a 2-a în dreapta)
+Deux colonnes face à face ¦ Două coloane față în față
+Le centre (une colonne) ¦ Centrul (o coloană)
+Titre à gauche ¦ Titlu în stânga
+Titre à droite ¦ Titlu în dreapta
+Couleur à gauche ¦ Culoare în stânga
+Couleur à droite ¦ Culoare în dreapta
+Comme dans le tableau ¦ Ca în tabel
+Sur le trait du milieu ¦ Pe linia din mijloc
+Décès et naissances dans la famille ¦ Decese și nașteri în familie
+Les chiffres (une ligne par période, une colonne par colline) ¦ Cifrele (un rând pe perioadă, o coloană pe deal)
+Chaque colline à sa hauteur ¦ Fiecare deal la înălțimea sa
+Même échelle pour toutes ¦ Aceeași scară pentru toate
+Dégradé : première ¦ Degrade: prima
+Dégradé : dernière ¦ Degrade: ultima
+Écrire le sommet ¦ Scrie vârful
+Les lignes (une par personne ; une colonne par axe) ¦ Rândurile (unul pe persoană; o coloană pe axă)
+Mettre en avant (un groupe ou un nom) ¦ Evidențiază (un grup sau un nume)
+Les chiffres (une année ou un nom par ligne) ¦ Cifrele (un an sau un nume pe rând)
+Après le point ¦ După punct
+Avant le point ¦ Înainte de punct
+Remplir dessous (une série) ¦ Umple dedesubt (o serie)
+Axe à partir de zéro ¦ Axă de la zero
+Montrer le plus haut ¦ Arată cel mai înalt
+Gén. {g} ¦ Gen. {g}
+gén. {g} ¦ gen. {g}
+Arbre en frise : {n} vies sur {g} générations, de {from} à {to}. ¦ Arbore cronologic: {n} vieți pe {g} generații, de la {from} la {to}.
+{name} : décès inconnu ¦ {name}: deces necunoscut
+{name} ({years}) : {age} ans (en vie) ¦ {name} ({years}): {age} ani (în viață)
+{name} ({years}) : {age} ans ¦ {name} ({years}): {age} ani
+Mariage à {age} ans ({year}) ¦ Căsătorie la {age} ani ({year})
+Naissance d’un enfant à {age} ans ({year}) ¦ Nașterea unui copil la {age} ani ({year})
+naissance d’un enfant ¦ nașterea unui copil
+{n} ans et + ¦ {n} ani și peste
+{n} personnes en vie ¦ {n} persoane în viață
+Pyramide des âges en {year} : {n} personnes en vie (sur {total}). ¦ Piramida vârstelor în {year}: {n} persoane în viață (din {total}).
+Degré {d} ¦ Gradul {d}
+Déplier {name} ¦ Desfășoară {name}
+Plier {name} ¦ Pliază {name}
+Déplier ({n} personnes) ¦ Desfășoară ({n} persoane)
+Graphe des cousinages : {n} personnes, {l} liens. ¦ Graful verilor: {n} persoane, {l} legături.
+{a} est {kin} de {b} ¦ {a} este {kin} lui {b}
+(degré {d}) ¦ (gradul {d})
+{a} et {b} : pas de lien trouvé ¦ {a} și {b}: nicio legătură găsită
+Degré 1 (parent, enfant) ¦ Gradul 1 (părinte, copil)
+Degré 2 (frère, grand-parent) ¦ Gradul 2 (frate, bunic)
+Degré 4 (cousin germain) ¦ Gradul 4 (văr primar)
+Matrice de parenté de {n} personnes : {l} liens trouvés. ¦ Matricea de rudenie a {n} persoane: {l} legături găsite.
+entre à la génération {g} par {who} ¦ intră la generația {g} prin {who}
+entre à la génération {g} ¦ intră la generația {g}
+porteurs par génération : {list} ¦ purtători pe generație: {list}
+Entre à la génération {g} ¦ Intră la generația {g}
+Arbre des patronymes : {n} noms sur {g} générations. ¦ Arborele numelor de familie: {n} nume pe {g} generații.
+Aucun mariage entre ces lieux. ¦ Nicio căsătorie între aceste locuri.
+Diagramme d’accord : {n} lieux, environ {v} {unit}. ¦ Diagramă coardă: {n} locuri, aproximativ {v} {unit}.
+mariages ¦ căsătorii
+Violon : {c} catégories, {n} valeurs. ¦ Vioară: {c} categorii, {n} valori.
+pas encore trouvé ¦ încă negăsit
+Quadrillage de {g} générations : {found} ancêtres trouvés sur {total} places ({pct} %). ¦ Grilă de {g} generații: {found} strămoși găsiți din {total} locuri ({pct} %).
+Les vies de mes ancêtres ({name}) ¦ Viețile strămoșilor mei ({name})
+Les vies de mes ancêtres ¦ Viețile strămoșilor mei
+Aucune naissance ni aucun décès daté à {place}. ¦ Nicio naștere și niciun deces datat la {place}.
+{n} années prises dans ta base. ¦ {n} ani luați din baza ta.
+Qui vivait en … ? ¦ Cine trăia în …?
+Qui vivait en {year} ? ¦ Cine trăia în {year}?
+{n} personnes prises dans ta base. ¦ {n} persoane luate din baza ta.
+Les cousins de {name} ¦ Verii lui {name}
+{n} personnes prises dans ta base (les 1 500 premières). ¦ {n} persoane luate din baza ta (primele 1 500).
+Les cousinages ¦ Legăturile dintre veri
+{n} personnes et {l} liens pris dans ta base. ¦ {n} persoane și {l} legături luate din baza ta.
+{n} personnes, {l} liens trouvés. ¦ {n} persoane, {l} legături găsite.
+Les noms de famille de {name} ¦ Numele de familie ale lui {name}
+{n} noms pris dans ta base. ¦ {n} nume luate din baza ta.
+Aucun mariage avec des lieux connus. ¦ Nicio căsătorie cu locuri cunoscute.
+Où l’on venait se marier ¦ Unde se venea la căsătorie
+Mariages entre villages ¦ Căsătorii între sate
+{n} paires de lieux prises dans ta base. ¦ {n} perechi de locuri luate din baza ta.
+Aucune personne avec les deux dates. ¦ Nicio persoană cu ambele date.
+{n} valeurs prises dans ta base. ¦ {n} valori luate din baza ta.
+{c}e siècle ¦ secolul {c}
+Les enfants de {name} ¦ Copiii lui {name}
+D’où viennent mes noms ¦ De unde vin numele mele
+Âge au décès par siècle ¦ Vârsta la deces pe secol
+Âge au décès par sexe ¦ Vârsta la deces pe sex
+Âge au mariage par sexe ¦ Vârsta la căsătorie pe sex
+Âge au mariage par siècle ¦ Vârsta la căsătorie pe secol
+{name} : ferme l’éditeur et clique à nouveau pour ouvrir sa fiche. ¦ {name}: închide editorul și fă clic din nou ca să-i deschizi fișa.
+Ajoute des personnes : un nom, une génération (ou un n° Sosa), une naissance et un décès. ¦ Adaugă persoane: un nume, o generație (sau un nr. Sosa), o naștere și un deces.
+Ajoute des années avec leurs naissances et leurs décès. ¦ Adaugă ani cu nașterile și decesele lor.
+Plus de décès que de naissances ¦ Mai multe decese decât nașteri
+{b} naissances et {d} décès de {from} à {to}, {c} crises marquées. ¦ {b} nașteri și {d} decese de la {from} la {to}, {c} crize marcate.
+{b} naissances et {d} décès de {from} à {to}, {c} crise marquée. ¦ {b} nașteri și {d} decese de la {from} la {to}, {c} criză marcată.
+Ajoute les enfants : un nom, une naissance, un décès (et leurs mariages, leurs enfants). ¦ Adaugă copiii: un nume, o naștere, un deces (și căsătoriile lor, copiii lor).
+Ajoute des personnes (naissance, décès, sexe) ou prends celles de ta base (« Depuis l’app »). ¦ Adaugă persoane (naștere, deces, sex) sau ia-le pe cele din baza ta („Din aplicație”).
+Issus d’issus de germains ¦ Veri de gradul trei
+Ligne directe ¦ Linie directă
+Oncles, tantes, neveux ¦ Unchi, mătuși, nepoți
+Cousins germains ¦ Veri primari
+Cousins issus de germains ¦ Veri de gradul doi
+Sans lien de sang ¦ Fără legătură de sânge
+Ajoute des personnes : un nom, la personne au-dessus (vide pour le haut), les années, le lien. ¦ Adaugă persoane: un nume, persoana de deasupra (gol pentru vârf), anii, legătura.
+Arbre en accordéon : {n} personnes, {r} sommets. ¦ Arbore acordeon: {n} persoane, {r} vârfuri.
+Arbre en accordéon : {n} personnes, {r} sommet. ¦ Arbore acordeon: {n} persoane, {r} vârf.
+parente|arrière-grand-père ¦ străbunic
+parente|grand-père ¦ bunic
+parente|père ¦ tată
+parente|moi ¦ eu
+parente|sœur ¦ soră
+parente|frère ¦ frate
+parente|tante ¦ mătușă
+parente|oncle ¦ unchi
+parente|cousin germain ¦ văr primar
+parente|cousine germaine ¦ verișoară primară
+parente|grand-oncle ¦ unchi mare
+parente|cousin germain de mon père ¦ vărul primar al tatălui meu
+parente|cousin issu de germains ¦ văr de gradul doi
+parente|cousine issue de germains ¦ verișoară de gradul doi
+parente|fils ¦ fiu
+parente|fille ¦ fiică
+parente|petit-fils ¦ nepot (de bunic)
+parente|petite-fille ¦ nepoată (de bunic)
+parente|arrière-petit-fils ¦ strănepot
+parente|neveu ¦ nepot (de unchi)
+parente|petit-neveu ¦ strănepot (de unchi)
+parente|parent ¦ rudă
+parente|frères et sœurs ¦ frați și surori
+parente|cousins germains ¦ veri primari
+parente|cousins issus de germains ¦ veri de gradul doi
+parente|cousins issus d’issus de germains ¦ veri de gradul trei
+parente|parent et enfant ¦ părinte și copil
+parente|oncle ou tante et neveu ou nièce ¦ unchi sau mătușă și nepot sau nepoată
+parente|à la mode de Bretagne ¦ „în stil breton” (legătură dublă)
+parente|époux ¦ soți
+Ajoute des liens : deux personnes et leur lien (cousins germains…), ou prends-les dans ta base. ¦ Adaugă legături: două persoane și legătura lor (veri primari…), sau ia-le din baza ta.
+Ajoute au moins deux personnes, puis ce que chacune est pour l’autre (ou prends-les dans ta base). ¦ Adaugă cel puțin două persoane, apoi ce este fiecare pentru cealaltă (sau ia-le din baza ta).
+Ajoute des noms : le nom, le nom d’où il vient (vide pour le premier), la génération où il entre. ¦ Adaugă nume: numele, numele din care provine (gol pentru primul), generația în care intră.
+Ajoute des paires de lieux et combien de mariages les relient. ¦ Adaugă perechi de locuri și câte căsătorii le leagă.
+Ajoute des valeurs : une catégorie (siècle, sexe…) et un chiffre par ligne. ¦ Adaugă valori: o categorie (secol, sex…) și o cifră pe rând.
+{name} : {n} valeurs, médiane {med}, la moitié entre {q1} et {q3}, de {min} à {max} ¦ {name}: {n} valori, mediana {med}, jumătate între {q1} și {q3}, de la {min} la {max}
+{name} : {n} valeur, médiane {med}, la moitié entre {q1} et {q3}, de {min} à {max} ¦ {name}: {n} valoare, mediana {med}, jumătate între {q1} și {q3}, de la {min} la {max}
+Nom seulement ¦ Doar numele
+Une date ¦ O dată
+Dates et lieux ¦ Date și locuri
+Sourcé ¦ Cu sursă
+Ajoute des ancêtres : un n° Sosa, un nom et une valeur (ou prends-les dans ta base). ¦ Adaugă strămoși: un nr. Sosa, un nume și o valoare (sau ia-i din baza ta).
+🧬 Mes ancêtres, génération par génération ¦ 🧬 Strămoșii mei, generație cu generație
+Chaque ancêtre devient une barre, de sa naissance à son décès ; les générations s’empilent, la couleur montre la branche (paternelle ou maternelle). ¦ Fiecare strămoș devine o bară, de la naștere la deces; generațiile se suprapun, culoarea arată ramura (paternă sau maternă).
+Aucun ancêtre daté pour cette personne. ¦ Niciun strămoș datat pentru această persoană.
+{n} enfants pris dans ta base. ¦ {n} copii luați din baza ta.
+{n} enfant pris dans ta base. ¦ {n} copil luat din baza ta.
+📉 Naissances et décès de ma base ¦ 📉 Nașteri și decese din baza mea
+Compte les naissances (ou baptêmes) et les décès (ou sépultures) de chaque année. Laisse le lieu vide pour toute la base. ¦ Numără nașterile (sau botezurile) și decesele (sau înmormântările) din fiecare an. Lasă locul gol pentru toată baza.
+Un seul lieu (facultatif) ¦ Un singur loc (opțional)
+Année par année ¦ An cu an
+Par 5 ans ¦ La 5 ani
+Par 10 ans ¦ La 10 ani
+Naissances et décès ¦ Nașteri și decese
+👨‍👩‍👧 Une fratrie de ma base ¦ 👨‍👩‍👧 O fratrie din baza mea
+Choisis une personne : ses frères et sœurs (ou ses enfants) deviennent des barres sur le même axe des âges, avec leurs mariages et la naissance de leurs enfants. ¦ Alege o persoană: frații și surorile ei (sau copiii ei) devin bare pe aceeași axă a vârstelor, cu căsătoriile lor și nașterea copiilor lor.
+Sa fratrie (elle comprise) ¦ Frații săi (inclusiv persoana)
+Personne : aucun enfant trouvé. ¦ Nimeni: niciun copil găsit.
+🔺 Toutes les personnes de ma base ¦ 🔺 Toate persoanele din baza mea
+Chaque personne née, et pas encore morte, l’année choisie compte dans sa tranche d’âge. Ensuite : le curseur sous le dessin change l’année, ▶ fait défiler le temps. ¦ Fiecare persoană născută, și încă nedecedată, în anul ales contează în grupa ei de vârstă. Apoi: cursorul de sub desen schimbă anul, ▶ derulează timpul.
+Année de départ ¦ Anul de pornire
+Décès inconnu ¦ Deces necunoscut
+Ne pas compter la personne ¦ Nu număra persoana
+Supposer une vie de 60 ans ¦ Presupune o viață de 60 de ani
+Supposer une vie de 80 ans ¦ Presupune o viață de 80 de ani
+Aucune personne avec une date de naissance. ¦ Nicio persoană cu dată de naștere.
+🪗 Mes ancêtres et leurs descendants ¦ 🪗 Strămoșii mei și descendenții lor
+Les ancêtres de la personne sur quelques générations, puis tous leurs descendants jusqu’à sa génération : frères et sœurs, oncles, cousins germains, issus de germains… avec le lien de parenté de chacun. ¦ Strămoșii persoanei pe câteva generații, apoi toți descendenții lor până la generația ei: frați și surori, unchi, veri primari, veri de gradul doi… cu legătura de rudenie a fiecăruia.
+Pas assez de parents connus pour cette personne. ¦ Nu sunt destule rude cunoscute pentru această persoană.
+🧶 Les cousins de ma base ¦ 🧶 Verii din baza mea
+Choisis des personnes (au moins deux), ou laisse vide : l’app prend la personne de départ et tous ses cousins de la même génération jusqu’à l’ancêtre commun choisi. ¦ Alege persoane (cel puțin două), sau lasă gol: aplicația ia persoana de pornire și toți verii ei din aceeași generație până la strămoșul comun ales.
+Personnes (facultatif) ¦ Persoane (opțional)
+Ancêtre commun jusqu’à ¦ Strămoș comun până la
+Les plus proches (et de quoi tout relier) ¦ Cele mai apropiate (și ce trebuie ca să lege totul)
+Aucun lien de parenté trouvé entre ces personnes. ¦ Nicio legătură de rudenie găsită între aceste persoane.
+🔢 Des personnes de ma base ¦ 🔢 Persoane din baza mea
+Choisis jusqu’à 20 personnes : chaque case dit ce que la personne de la colonne est pour celle de la ligne (père, oncle, cousin germain…), et se colore selon la proximité. ¦ Alege până la 20 de persoane: fiecare căsuță spune ce este persoana din coloană pentru cea din rând (tată, unchi, văr primar…) și se colorează după apropiere.
+Qui est quoi pour qui ¦ Cine ce este pentru cine
+🌳 Les noms de mes ancêtres ¦ 🌳 Numele strămoșilor mei
+Chaque nom de famille de l’ascendance : par qui et quand il entre dans l’arbre (une femme et son nom), ses variantes d’écriture regroupées, et combien d’ancêtres le portent à chaque génération. ¦ Fiecare nume de familie din ascendență: prin cine și când intră în arbore (o femeie și numele ei), variantele lui de scriere grupate și câți strămoși îl poartă în fiecare generație.
+Aucun nom de famille dans cette ascendance. ¦ Niciun nume de familie în această ascendență.
+🎼 Les mariages de ma base ¦ 🎼 Căsătoriile din baza mea
+Chaque mariage relie deux lieux : les lieux de naissance des deux époux, ou le lieu de naissance de chacun et le lieu du mariage. Les lieux les plus fréquents gardent leur nom, les autres vont dans « Autres ». ¦ Fiecare căsătorie leagă două locuri: locurile de naștere ale celor doi soți, sau locul de naștere al fiecăruia și locul căsătoriei. Locurile cele mai frecvente își păstrează numele, celelalte merg în „Altele”.
+Le village de l’époux et celui de l’épouse ¦ Satul soțului și cel al soției
+Le village de chacun → le lieu du mariage ¦ Satul fiecăruia → locul căsătoriei
+Lieux gardés ¦ Locuri păstrate
+🎻 Des âges de ma base ¦ 🎻 Vârste din baza mea
+Chaque personne donne une valeur (son âge au décès, ou au mariage), rangée dans une catégorie (son siècle, son sexe). ¦ Fiecare persoană dă o valoare (vârsta la deces sau la căsătorie), pusă într-o categorie (secolul, sexul).
+🟩 Mes ancêtres (numéros Sosa) ¦ 🟩 Strămoșii mei (numere Sosa)
+Une case par place d’ancêtre ; les cases grises sont les ancêtres pas encore trouvés. Clic sur une case (hors de l’éditeur) : sa fiche. ¦ O căsuță pentru fiecare loc de strămoș; căsuțele gri sunt strămoșii încă negăsiți. Clic pe o căsuță (în afara editorului): fișa sa.
+Ce que je sais (nom, dates, lieux, sources) ¦ Ce știu (nume, date, locuri, surse)
+Région de naissance ¦ Regiunea de naștere
+Siècle de naissance ¦ Secolul nașterii
+Les personnes (une barre par vie) ¦ Persoanele (o bară pe viață)
+Génération (vide = d’après le n° Sosa) ¦ Generație (gol = după nr. Sosa)
+Décès (vide = vivant ; ? = inconnu) ¦ Deces (gol = în viață; ? = necunoscut)
+Les événements historiques en fond (facultatif) ¦ Evenimentele istorice în fundal (opțional)
+Couleur des barres ¦ Culoarea barelor
+Branche paternelle ou maternelle ¦ Ramura paternă sau maternă
+Homme ou femme ¦ Bărbat sau femeie
+Colonne « Groupe » ¦ Coloana „Grup”
+Serrée (noms dans les barres) ¦ Strânsă (nume în bare)
+Une ligne par personne (noms à gauche) ¦ Un rând pe persoană (nume în stânga)
+Les plus anciennes en haut ¦ Cele mai vechi sus
+Les plus récentes en haut ¦ Cele mai recente sus
+Noms dans les barres ¦ Nume în bare
+Montrer les événements ¦ Arată evenimentele
+Les crises (à changer ou compléter) ¦ Crizele (de schimbat sau completat)
+Fin (vide = une année) ¦ Sfârșit (gol = un an)
+Lisser les courbes (moyenne sur … ans) ¦ Netezește curbele (medie pe … ani)
+Montrer les crises ¦ Arată crizele
+Colorer quand les décès dépassent les naissances ¦ Colorează când decesele depășesc nașterile
+Couleur des naissances ¦ Culoarea nașterilor
+Couleur des décès ¦ Culoarea deceselor
+Nom de l’axe des valeurs ¦ Numele axei valorilor
+Naissances et décès au village ¦ Nașteri și decese în sat
+Les enfants (dans l’ordre de naissance) ¦ Copiii (în ordinea nașterii)
+Prénom / nom ¦ Prenume / nume
+Décès (vide = vivant ou inconnu) ¦ Deces (gol = în viață sau necunoscut)
+Mariages (dates, séparées par des virgules) ¦ Căsătorii (date, separate prin virgule)
+Naissance de ses enfants (dates) ¦ Nașterea copiilor săi (date)
+Les âges (tous partent de 0) ¦ Vârstele (toate pornesc de la 0)
+Les années (calendrier) ¦ Anii (calendar)
+Par date de naissance ¦ După data nașterii
+Les personnes (à la main ; celles de ta base : « Depuis l’app ») ¦ Persoanele (de mână; cele din baza ta: „Din aplicație”)
+Année montrée ¦ Anul arătat
+Tranches d’âge ¦ Grupe de vârstă
+Dernière tranche à partir de ¦ Ultima grupă începând de la
+Décès inconnu : supposer une vie de … ans (0 = ne pas compter) ¦ Deces necunoscut: presupune o viață de … ani (0 = nu număra)
+Même échelle pour toutes les années (lecture) ¦ Aceeași scară pentru toți anii (redare)
+Afficher les nombres ¦ Afișează numerele
+Couleur des hommes ¦ Culoarea bărbaților
+Couleur des femmes ¦ Culoarea femeilor
+Hauteur des barres (px, au total) ¦ Înălțimea barelor (px, în total)
+Les personnes (même nom au-dessus = branche) ¦ Persoanele (același nume deasupra = ramură)
+Au-dessus (nom ; vide pour le haut) ¦ Deasupra (nume; gol pentru vârf)
+Lien de parenté ¦ Legătură de rudenie
+Degré (couleur) ¦ Grad (culoare)
+Montrer le lien de parenté ¦ Arată legătura de rudenie
+Générations ouvertes au départ (0 = toutes) ¦ Generații deschise la pornire (0 = toate)
+Décalage d’une génération ¦ Decalaj pe generație
+Les liens (deux personnes et leur lien) ¦ Legăturile (două persoane și legătura lor)
+Les personnes (facultatif : famille pour la couleur) ¦ Persoanele (opțional: familie pentru culoare)
+Noms des liens sur les traits ¦ Numele legăturilor pe linii
+Si pas trop nombreux (60) ¦ Dacă nu sunt prea multe (60)
+Les cousinages de la famille ¦ Legăturile dintre verii familiei
+Les personnes (lignes et colonnes, 40 au plus) ¦ Persoanele (rânduri și coloane, cel mult 40)
+Les cases : ce que B est pour A ¦ Căsuțele: ce este B pentru A
+Lien (père, cousin germain…) ¦ Legătură (tată, văr primar…)
+Le lien ¦ Legătura
+Le degré ¦ Gradul
+Rien (couleurs seules) ¦ Nimic (doar culori)
+Les noms (d’où vient chacun) ¦ Numele (de unde vine fiecare)
+Arrive par (nom ; vide pour le premier) ¦ Vine prin (nume; gol pentru primul)
+Génération d’entrée ¦ Generația de intrare
+Porteurs par génération (1,2,4…) ¦ Purtători pe generație (1,2,4…)
+Les ancêtres (n° Sosa → valeur) ¦ Strămoșii (nr. Sosa → valoare)
+Valeur (chiffre ou catégorie) ¦ Valoare (cifră sau categorie)
+Les catégories et leur couleur (facultatif) ¦ Categoriile și culoarea lor (opțional)
+Une ligne par génération ¦ Un rând pe generație
+Un carré (cases dans l’ordre des numéros) ¦ Un pătrat (căsuțe în ordinea numerelor)
+Le nom (si la place le permet) ¦ Numele (dacă e loc)
+Le n° Sosa ¦ Nr. Sosa
+Le nom et le n° Sosa ¦ Numele și nr. Sosa
+Un dégradé (chiffres) ¦ Un degrade (cifre)
+Une couleur par catégorie ¦ O culoare pe categorie
+Dégradé : minimum ¦ Degrade: minim
+Dégradé : maximum ¦ Degrade: maxim
+Couleur des ancêtres pas trouvés ¦ Culoarea strămoșilor negăsiți
+Ce que je sais de mes ancêtres ¦ Ce știu despre strămoșii mei
+Les paires de lieux ¦ Perechile de locuri
+Lieu A ¦ Locul A
+Lieu B ¦ Locul B
+Lieux gardés (les autres : « Autres ») ¦ Locuri păstrate (celelalte: „Altele”)
+Mariages dans le même lieu (boucles) ¦ Căsătorii în același loc (bucle)
+Opacité des rubans ¦ Opacitatea panglicilor
+Là où il y a la place ¦ Acolo unde e loc
+Unité (ex. : mariages) ¦ Unitate (ex.: căsătorii)
+Les valeurs (une par ligne) ¦ Valorile (una pe rând)
+Catégorie (siècle, sexe…) ¦ Categorie (secol, sex…)
+Médiane et quartiles ¦ Mediană și cuartile
+Écrire la médiane ¦ Scrie mediana
+Par médiane ¦ După mediană
+Unité (ex. : ans) ¦ Unitate (ex.: ani)
+Nom de l’axe ¦ Numele axei
+Faire défiler les années ¦ Derulează anii
+=segment ¦ segment|segmente|de segmente
+=correspondance ¦ potrivire|potriviri|de potriviri
+=valeur ¦ valoare|valori|de valori
+=couple ¦ pereche|perechi|de perechi
+Peint : {p} % côté père · {m} % côté mère ¦ Pictat: {p} % pe partea tatălui · {m} % pe partea mamei
+Peint : {p} % du génome ¦ Pictat: {p} % din genom
+({n} petits segments non montrés) ¦ ({n} segmente mici neafișate)
+Chromosome {c} — copie reçue du père ({mb} Mb) ¦ Cromozomul {c} — copia primită de la tată ({mb} Mb)
+Chromosome {c} — copie reçue de la mère ¦ Cromozomul {c} — copia primită de la mamă
+Chromosome {c} ({mb} Mb) ¦ Cromozomul {c} ({mb} Mb)
+chromosome {c} : {a} à {b} Mb ¦ cromozomul {c}: {a} până la {b} Mb
+(clic : sa fiche) ¦ (clic: fișa sa)
+(clic : la liste) ¦ (clic: lista)
+Côté père ¦ Partea tatălui
+Côté mère ¦ Partea mamei
+Côté inconnu ¦ Parte necunoscută
+côté père ¦ partea tatălui
+côté mère ¦ partea mamei
+des deux côtés ¦ din ambele părți
+côté inconnu ¦ parte necunoscută
+Branche inconnue ¦ Ramură necunoscută
+Peinture des chromosomes : {s} de {m} ¦ Pictarea cromozomilor: {s} din {m}
+{p} % du génome côté père et {m} % côté mère ¦ {p} % din genom pe partea tatălui și {m} % pe partea mamei
+Peinture des chromosomes — {name} ¦ Pictarea cromozomilor — {name}
+Correspondance {n} ¦ Potrivirea {n}
+parenté connue : {k} ¦ rudenie cunoscută: {k}
+parentés possibles : {k} ¦ rudenii posibile: {k}
+{rel} : en moyenne {avg} cM, de {min} à {max} cM — {n} de tes correspondances dans cette fourchette ¦ {rel}: în medie {avg} cM, de la {min} la {max} cM — {n} dintre potrivirile tale în acest interval
+pour {name} : {p} % ¦ pentru {name}: {p} %
+{n} correspondances placées ¦ {n} potriviri plasate
+{n} correspondance placée ¦ {n} potrivire plasată
+Règle des cM : {n} sur une échelle logarithmique de {r} parentés (Shared cM Project). ¦ Rigla cM: {n} pe o scară logaritmică de {r} rudenii (Shared cM Project).
+Règle des cM : {n} sur une échelle linéaire de {r} parentés (Shared cM Project). ¦ Rigla cM: {n} pe o scară liniară de {r} rudenii (Shared cM Project).
+{name} : {n}, médiane {med}, moyenne {mean}, de {min} à {max} ¦ {name}: {n}, mediana {med}, media {mean}, de la {min} la {max}
+{name} : médiane {v} ¦ {name}: mediana {v}
+Vagues : {g}, {n} valeurs, de {min} à {max}. ¦ Valuri: {g}, {n} valori, de la {min} la {max}.
+({p} % de {label}, {t} % du tout) ¦ ({p} % din {label}, {t} % din total)
+Mosaïque de {c} colonnes (largeur = part du total {t}) et {s} séries. ¦ Mozaic de {c} coloane (lățime = parte din totalul {t}) și {s} serii.
+(écart {v}) ¦ (diferență {v})
+Échelle de points : {n} lignes, {s}. ¦ Scară de puncte: {n} rânduri, {s}.
+(total {v}) ¦ (total {v})
+Rose de Nightingale : {n} parts, {s}, l’aire de chaque part suit le chiffre. ¦ Roza lui Nightingale: {n} părți, {s}, aria fiecărei părți urmează cifra.
+Rose de Nightingale : {n} parts, {s}. ¦ Roza lui Nightingale: {n} părți, {s}.
+Même métier que le père : {n} sur {t} ({p} %) ¦ Aceeași meserie ca tatăl: {n} din {t} ({p} %)
+Père {a} → {kid} {b} : {n} ¦ Tată {a} → {kid} {b}: {n}
+{p} % des enfants de {job}, {t} % du tout ¦ {p} % din copiii celor cu meseria {job}, {t} % din total
+Père ↓ · {kid} → ¦ Tată ↓ · {kid} →
+Chiffres en % des enfants de chaque métier du père ¦ Cifre în % din copiii fiecărei meserii a tatălui
+Chiffres en % de chaque métier de {kid} ¦ Cifre în % din fiecare meserie a {kid}
+Chiffres en % du tout ¦ Cifre în % din total
+Chiffres en nombre ¦ Cifre în număr
+cadre de couleur : même métier que le père. ¦ cadru colorat: aceeași meserie ca tatăl.
+Cadre de couleur : même métier que le père. ¦ Cadru colorat: aceeași meserie ca tatăl.
+Tableau de mobilité : {t} couples père et {kid}, {n} métiers ; {p} % font le métier du père. ¦ Tabel de mobilitate: {t} perechi tată și {kid}, {n} meserii; {p} % practică meseria tatălui.
+, femmes et hommes ¦ , femei și bărbați
+, par siècle du mariage ¦ , pe secolul căsătoriei
+, par siècle de naissance ¦ , pe secolul nașterii
+, par siècle ¦ , pe secol
+D’après {n} de l’arbre ¦ După {n} din arbore
+largeur : le nombre de personnes de la période ; hauteur : la part de chacun ¦ lățime: numărul de persoane din perioadă; înălțime: partea fiecăruia
+D’après les fiches de l’arbre ¦ După fișele din arbore
+femmes et hommes ¦ femei și bărbați
+D’après {n} au mois près ¦ După {n} cu precizie de o lună
+D’après {n} père et {kid} dont les deux métiers sont connus ¦ După {n} tată și {kid} ale căror două meserii sunt cunoscute
+{n} pris dans l’onglet ADN. ¦ {n} luate din fila ADN.
+{n} prises dans l’onglet ADN. ¦ {n} luate din fila ADN.
+(les 300 premières) ¦ (primele 300)
+clic : la fiche. ¦ clic: fișa.
+Cette partie ¦ Această parte
+{name} : ferme l’éditeur et clique à nouveau pour voir la liste des personnes. ¦ {name}: închide editorul și fă clic din nou ca să vezi lista persoanelor.
+Aucun segment à montrer (vérifie le chromosome, le début et la fin, ou le minimum de cM). ¦ Niciun segment de arătat (verifică cromozomul, începutul și sfârșitul, sau minimul de cM).
+Ajoute des segments : chromosome, début, fin (en Mb ou en paires de bases), cM, correspondance. ¦ Adaugă segmente: cromozom, început, sfârșit (în Mb sau în perechi de baze), cM, potrivire.
+▲ père ▼ mère ¦ ▲ tată ▼ mamă
+Ajoute tes correspondances (nom, cM) : elles se placent sur la règle. ¦ Adaugă-ți potrivirile (nume, cM): se plasează pe riglă.
+Ajoute des valeurs avec leur groupe (siècle, sexe, branche…) : une vague par groupe. ¦ Adaugă valori cu grupul lor (secol, sex, ramură…): un val pe grup.
+Ajoute des colonnes (lignes du tableau) et leurs parts (séries) : la largeur suit le total. ¦ Adaugă coloane (rânduri ale tabelului) și părțile lor (serii): lățimea urmează totalul.
+Ajoute des lignes et leurs valeurs (une colonne par série, ex. femmes et hommes). ¦ Adaugă rânduri și valorile lor (o coloană pe serie, ex. femei și bărbați).
+Ajoute des parts (mois, saisons…) et leurs chiffres (une colonne par série). ¦ Adaugă părți (luni, anotimpuri…) și cifrele lor (o coloană pe serie).
+Ajoute des lignes : métier du père, métier de l’enfant, combien. ¦ Adaugă rânduri: meseria tatălui, meseria copilului, câți.
+Aucune donnée dans l’arbre pour ce choix (dates manquantes ?). ¦ Nicio dată în arbore pentru această alegere (date lipsă?).
+Aucune donnée dans l’arbre pour ce choix. ¦ Nicio dată în arbore pentru această alegere.
+Les métiers de la famille, siècle par siècle ¦ Meseriile familiei, secol cu secol
+Les communes de naissance, siècle par siècle ¦ Localitățile de naștere, secol cu secol
+Les noms de famille, siècle par siècle ¦ Numele de familie, secol cu secol
+Pas assez de dates de naissance et de décès (ou de mariage) pour ce choix. ¦ Nu sunt destule date de naștere și de deces (sau de căsătorie) pentru această alegere.
+Âge moyen au décès, par siècle de naissance ¦ Vârsta medie la deces, pe secolul nașterii
+Âge moyen au mariage, par siècle ¦ Vârsta medie la căsătorie, pe secol
+Âge moyen au décès, par commune de naissance ¦ Vârsta medie la deces, pe localitatea de naștere
+Âge moyen au décès, par nom de famille ¦ Vârsta medie la deces, pe nume de familie
+Aucune date au mois près dans l’arbre pour ce choix. ¦ Nicio dată cu precizie de o lună în arbore pentru această alegere.
+Naissances, mariages et décès, mois par mois ¦ Nașteri, căsătorii și decese, lună cu lună
+Les naissances, mois par mois ¦ Nașterile, lună cu lună
+Les mariages, mois par mois ¦ Căsătoriile, lună cu lună
+Les décès, mois par mois ¦ Decesele, lună cu lună
+Les conceptions (naissance − 9 mois), mois par mois ¦ Concepțiile (naștere − 9 luni), lună cu lună
+Aucun couple père / enfant dont les deux métiers sont connus. ¦ Nicio pereche tată / copil cu ambele meserii cunoscute.
+Métier du père, métier de l’enfant ¦ Meseria tatălui, meseria copilului
+Métier du père, métier du fils ¦ Meseria tatălui, meseria fiului
+Métier du père, métier de la fille ¦ Meseria tatălui, meseria fiicei
+Âge au décès, par siècle de naissance ¦ Vârsta la deces, pe secolul nașterii
+Âge au décès, femmes et hommes ¦ Vârsta la deces, femei și bărbați
+Âge au mariage, par siècle ¦ Vârsta la căsătorie, pe secol
+Âge au mariage, femmes et hommes ¦ Vârsta la căsătorie, femei și bărbați
+Métiers, siècle par siècle ¦ Meserii, secol cu secol
+Communes de naissance, siècle par siècle ¦ Localități de naștere, secol cu secol
+Noms de famille, siècle par siècle ¦ Nume de familie, secol cu secol
+Métiers, par 50 ans ¦ Meserii, la 50 de ani
+Âge moyen au décès (femmes, hommes), par siècle de naissance ¦ Vârsta medie la deces (femei, bărbați), pe secolul nașterii
+Âge moyen au mariage (femmes, hommes), par siècle ¦ Vârsta medie la căsătorie (femei, bărbați), pe secol
+Naissances, mariages et décès, par mois ¦ Nașteri, căsătorii și decese, pe lună
+Naissances par mois, par siècle ¦ Nașteri pe lună, pe secol
+Conceptions par mois (naissance − 9 mois), par siècle ¦ Concepții pe lună (naștere − 9 luni), pe secol
+Mariages par mois, par siècle ¦ Căsătorii pe lună, pe secol
+Décès par mois, par siècle ¦ Decese pe lună, pe secol
+Métier du père → métier du fils ¦ Meseria tatălui → meseria fiului
+Métier du père → métier de la fille ¦ Meseria tatălui → meseria fiicei
+Métier du père → métier de l’enfant (fils et filles) ¦ Meseria tatălui → meseria copilului (fii și fiice)
+La personne qui a fait le test… ¦ Persoana care a făcut testul…
+ℹ️ Aucun test ADN dans ta base : ajoute-le dans l’onglet ADN (🧬 Mes tests), ou remplis le tableau à la main. ¦ ℹ️ Niciun test ADN în baza ta: adaugă-l în fila ADN (🧬 Testele mele), sau completează tabelul de mână.
+ℹ️ Cette personne n’a pas de test : voici tous les tests de ta base. ¦ ℹ️ Această persoană nu are test: iată toate testele din baza ta.
+Lecture de tes données ADN… ¦ Se citesc datele tale ADN…
+Aucun test ADN dans ta base. ¦ Niciun test ADN în baza ta.
+🧬 Les segments d’un test ¦ 🧬 Segmentele unui test
+Les segments partagés avec chaque cousin (onglet ADN → 🧩 Chromosomes) sont peints sur ses chromosomes, colorés par branche (les groupes de l’onglet ADN, ou l’ancêtre noté sur le segment). ¦ Segmentele comune cu fiecare văr (fila ADN → 🧩 Cromozomi) sunt pictate pe cromozomii săi, colorate pe ramură (grupurile din fila ADN, sau strămoșul notat pe segment).
+Segments d’au moins ¦ Segmente de cel puțin
+Ce test n’a pas encore de segments : importe-les dans l’onglet ADN (🧩 Chromosomes → ⤒ Importer des segments). ¦ Acest test nu are încă segmente: importă-le în fila ADN (🧩 Cromozomi → ⤒ Importă segmente).
+D’après l’onglet ADN (segments partagés) ¦ După fila ADN (segmente comune)
+📏 Les correspondances d’un test ¦ 📏 Potrivirile unui test
+Chaque correspondance se place sur la règle d’après ses cM partagés ; survole un point pour voir les parentés possibles. ¦ Fiecare potrivire se plasează pe riglă după cM-ii comuni; treci cu mouse-ul peste un punct ca să vezi rudeniile posibile.
+Correspondances d’au moins ¦ Potriviri de cel puțin
+Combien au plus ¦ Câte cel mult
+Aucune correspondance avec des cM pour ce test (ou au-dessus du minimum choisi). ¦ Nicio potrivire cu cM pentru acest test (sau peste minimul ales).
+segments partagés, colorés par branche ¦ segmente comune, colorate pe ramură
+Mes chromosomes peints ¦ Cromozomii mei pictați
+Mes cousins ADN sur la règle des cM ¦ Verii mei ADN pe rigla cM
+par siècle de naissance ¦ pe secolul nașterii
+Les métiers, siècle par siècle ¦ Meseriile, secol cu secol
+largeur : nombre de personnes ; hauteur : part du métier ¦ lățime: numărul de persoane; înălțime: partea meseriei
+par commune de naissance, femmes et hommes ¦ pe localitatea de naștere, femei și bărbați
+Les mois de la vie ¦ Lunile vieții
+naissances, mariages et décès ¦ nașteri, căsătorii și decese
+Les segments partagés (un par ligne) ¦ Segmentele comune (unul pe rând)
+Chromosome (1 à 22, X) ¦ Cromozom (1 până la 22, X)
+Début (Mb ou paires de bases) ¦ Început (Mb sau perechi de baze)
+Branche (couple d’ancêtres) ¦ Ramură (cuplu de strămoși)
+Couleur (sinon celle de la branche) ¦ Culoare (altfel cea a ramurii)
+Les branches et leur couleur (facultatif) ¦ Ramurile și culoarea lor (opțional)
+Deux copies par chromosome (père en haut, mère en bas) ¦ Două copii pe cromozom (tatăl sus, mama jos)
+Une seule barre par chromosome ¦ O singură bară pe cromozom
+Couleur des segments ¦ Culoarea segmentelor
+Par correspondance ¦ Pe potrivire
+Par côté (père, mère) ¦ Pe parte (tată, mamă)
+Couleur du côté père ¦ Culoarea părții tatălui
+Couleur du côté mère ¦ Culoarea părții mamei
+Cacher les segments de moins de ¦ Ascunde segmentele mai mici de
+Épaisseur des chromosomes ¦ Grosimea cromozomilor
+Colonnes (0 = selon la largeur) ¦ Coloane (0 = după lățime)
+Montrer le chromosome X ¦ Arată cromozomul X
+Noms dans les segments (s’ils tiennent) ¦ Nume în segmente (dacă încap)
+Parenté connue (facultatif) ¦ Rudenie cunoscută (opțional)
+Montrer les parentés possibles de… (un nom) ¦ Arată rudeniile posibile ale… (un nume)
+Régulière ¦ Regulată
+Parentés ¦ Rudenii
+Les principales ¦ Cele principale
+Toutes (demi-parentés, générations d’écart…) ¦ Toate (semi-rudenii, generații de diferență…)
+Noms écrits (les plus proches d’abord) ¦ Nume scrise (cele mai apropiate întâi)
+Trait à la moyenne de chaque parenté ¦ Linie la media fiecărei rudenii
+Couleur des autres points ¦ Culoarea celorlalte puncte
+Couleur des fourchettes ¦ Culoarea intervalelor
+Fin de l’échelle ¦ Sfârșitul scării
+Les valeurs et leur groupe (une vague par groupe) ¦ Valorile și grupul lor (un val pe grup)
+Nom (personne…) ¦ Nume (persoană…)
+Groupe (siècle, sexe…) ¦ Grup (secol, sex…)
+Couleur du groupe ¦ Culoarea grupului
+Chevauchement des vagues ¦ Suprapunerea valurilor
+Écart entre les vagues ¦ Distanța dintre valuri
+Hauteur des vagues ¦ Înălțimea valurilor
+Chaque vague à sa hauteur ¦ Fiecare val la înălțimea sa
+Selon le nombre de valeurs ¦ După numărul de valori
+Par nombre de valeurs ¦ După numărul de valori
+Une par groupe ¦ Una pe grup
+Dégradé : première couleur ¦ Degrade: prima culoare
+Dégradé : dernière couleur ¦ Degrade: ultima culoare
+Montrer la médiane ¦ Arată mediana
+Écrire le nombre de valeurs ¦ Scrie numărul de valori
+Début de l’axe (vide = automatique) ¦ Începutul axei (gol = automat)
+Fin de l’axe (vide = automatique) ¦ Sfârșitul axei (gol = automat)
+Les colonnes (lignes) et leurs parts (séries) ¦ Coloanele (rândurile) și părțile lor (seriile)
+La part en % ¦ Partea în %
+Le chiffre ¦ Cifra
+Part de chaque colonne sous l’axe ¦ Partea fiecărei coloane sub axă
+Ordre des colonnes ¦ Ordinea coloanelor
+Les plus larges d’abord ¦ Cele mai late întâi
+Écart entre les colonnes ¦ Distanța dintre coloane
+Couleur des traits ¦ Culoarea liniilor
+Les lignes et leurs valeurs (une colonne par série) ¦ Rândurile și valorile lor (o coloană pe serie)
+Par écart entre les deux séries ¦ După diferența dintre cele două serii
+Pointillé sur toute la largeur ¦ Punctat pe toată lățimea
+Entre les points (écart) ¦ Între puncte (diferență)
+Couleur des points (une seule série) ¦ Culoarea punctelor (o singură serie)
+Écrire la valeur ¦ Scrie valoarea
+Écrire l’écart (deux séries) ¦ Scrie diferența (două serii)
+Mettre en avant (un nom ; les autres pâlissent) ¦ Evidențiază (un nume; celelalte pălesc)
+Les parts (mois, saisons…) et leurs chiffres ¦ Părțile (luni, anotimpuri…) și cifrele lor
+Plusieurs séries ¦ Mai multe serii
+Empilées ¦ Stivuite
+Superposées (comme Florence Nightingale) ¦ Suprapuse (ca la Florence Nightingale)
+L’aire suit le chiffre (sinon : la longueur) ¦ Aria urmează cifra (altfel: lungimea)
+Départ (degrés, 0 = en haut) ¦ Pornire (grade, 0 = sus)
+Noms des parts ¦ Numele părților
+Cercles de l’échelle ¦ Cercurile scării
+Couleur des traits entre les parts ¦ Culoarea liniilor dintre părți
+Les couples de métiers ¦ Perechile de meserii
+Métier du père ¦ Meseria tatălui
+Métier de l’enfant ¦ Meseria copilului
+Regrouper des métiers (facultatif : un mot → une famille de métiers) ¦ Grupează meserii (opțional: un cuvânt → o familie de meserii)
+Métier (ou un morceau du mot) ¦ Meserie (sau o bucată din cuvânt)
+Famille de métiers ¦ Familie de meserii
+En % des enfants de chaque métier du père ¦ În % din copiii fiecărei meserii a tatălui
+En % de chaque métier de l’enfant ¦ În % din fiecare meserie a copilului
+En nombre ¦ În număr
+Combien de métiers ¦ Câte meserii
+Regrouper les autres dans « Autres » ¦ Grupează-le pe celelalte în „Altele”
+Les plus fréquents d’abord ¦ Cele mai frecvente întâi
+Cadre « même métier que le père » ¦ Cadru „aceeași meserie ca tatăl”
+Le mot pour l’enfant (ex. : le fils) ¦ Cuvântul pentru copil (ex.: fiul)
+Ces personnes ne sont plus dans la base. ¦ Aceste persoane nu mai sunt în bază.
+Naissances ¦ Nașteri
+=lignée ¦ linie|linii|de linii
+=mère ¦ mamă|mame|de mame
+personne de départ ¦ persoană de pornire
+ancêtre ({k} générations) ¦ strămoș ({k} generații)
+descendant ({k} générations) ¦ descendent ({k} generații)
+descendante ({k} générations) ¦ descendentă ({k} generații)
+{k} générations au-dessus ¦ {k} generații mai sus
+{k} générations en dessous ¦ {k} generații mai jos
+Arrière-arrière-petits-enfants ¦ Răstrănepoți
+Arrière-arrière-arrière-petits-enfants ¦ Stră-răstrănepoți
+parente|mère ¦ mamă
+parente|grand-mère ¦ bunică
+parente|grand-parent ¦ bunic sau bunică
+parente|enfant ¦ copil
+parente|petit-enfant ¦ nepot (de bunic)
+parente|arrière-grand-mère ¦ străbunică
+parente|arrière-grand-parent ¦ străbunic sau străbunică
+parente|arrière-arrière-grand-père ¦ răstrăbunic
+parente|arrière-arrière-grand-mère ¦ răstrăbunică
+parente|arrière-arrière-grand-parent ¦ răstrăbunic sau răstrăbunică
+parente|arrière-arrière-arrière-grand-père ¦ stră-răstrăbunic
+parente|arrière-arrière-arrière-grand-mère ¦ stră-răstrăbunică
+parente|arrière-arrière-arrière-grand-parent ¦ stră-răstrăbunic sau stră-răstrăbunică
+parente|arrière-petite-fille ¦ strănepoată
+parente|arrière-petit-enfant ¦ strănepot
+parente|arrière-arrière-petit-fils ¦ răstrănepot
+parente|arrière-arrière-petite-fille ¦ răstrănepoată
+parente|arrière-arrière-petit-enfant ¦ răstrănepot
+parente|arrière-arrière-arrière-petit-fils ¦ stră-răstrănepot
+parente|arrière-arrière-arrière-petite-fille ¦ stră-răstrănepoată
+parente|arrière-arrière-arrière-petit-enfant ¦ stră-răstrănepot
+{n} générations en vie en même temps : {a} – {b} ¦ {n} generații în viață în același timp: {a} – {b}
+(en vie) ¦ (în viață)
+(décès inconnu : vie supposée) ¦ (deces necunoscut: viață presupusă)
+(décès inconnu) ¦ (deces necunoscut)
+{a} ({ra}) a connu {b} ({rb}) pendant {years} ({period}). ¦ {a} ({ra}) l-a cunoscut pe {b} ({rb}) timp de {years} ({period}).
+{a} a connu {b} ({k} générations plus tard) pendant {years} ({period}). ¦ {a} l-a cunoscut pe {b} ({k} generații mai târziu) timp de {years} ({period}).
+Personne de ces vies ne se chevauche sur {n} générations ou plus. ¦ Niciuna dintre aceste vieți nu se suprapune pe {n} generații sau mai multe.
+Qui a connu qui : {n} vies sur {g} générations ; {s} rencontres racontées. ¦ Cine pe cine a cunoscut: {n} vieți pe {g} generații; {s} întâlniri povestite.
+Qui a connu qui : {n} vies sur {g} générations ; {s} rencontre racontée. ¦ Cine pe cine a cunoscut: {n} vieți pe {g} generații; {s} întâlnire povestită.
+Âge (ans) ¦ Vârstă (ani)
+médiane {n} ans ¦ mediană {n} ani
+{name} : la moitié a passé {n} ans ¦ {name}: jumătate au trecut de {n} ani
+{name} : {p} % encore en vie à {a} ans ({n}) · {d} entre {a} et {b} ans ¦ {name}: {p} % încă în viață la {a} ani ({n}) · {d} între {a} și {b} ani
+Courbe de survie : {n} personnes en {g} groupes. ¦ Curbă de supraviețuire: {n} persoane în {g} grupuri.
+Courbe de survie : {n} personnes en {g} groupe. ¦ Curbă de supraviețuire: {n} persoane în {g} grup.
+Même métier que la génération d’avant — {list} ¦ Aceeași meserie ca generația dinainte — {list}
+Métiers sur {n} générations : {l}. ¦ Meserii pe {n} generații: {l}.
+{a} et {b} : {d} ¦ {a} și {b}: {d}
+(né à {p}) ¦ (născut la {p})
+(née à {p}) ¦ (născută la {p})
+même lieu de naissance ¦ același loc de naștere
+mariage {y} ¦ căsătorie {y}
+(au-delà du cercle) ¦ (dincolo de cerc)
+le village de l’époux ¦ satul soțului
+{n} du même lieu ¦ {n} din același loc
+{c} : la moitié des mariages à moins de {km} km ¦ {c}: jumătate din căsătorii la mai puțin de {km} km
+Rayon des mariages : {n}, médiane {km} km. ¦ Raza căsătoriilor: {n}, mediană {km} km.
+Génération {g} : {t} ancêtres possibles, {f} places trouvées ({p} %), {d} personnes différentes ¦ Generația {g}: {t} strămoși posibili, {f} locuri găsite ({p} %), {d} persoane diferite
+implexe {p} % ¦ implex {p} %
+Ancêtres présents plusieurs fois à la génération {g} ¦ Strămoși prezenți de mai multe ori în generația {g}
+Sur {n} générations : {t} ancêtres possibles, {f} places trouvées ({p} %), {d} personnes différentes (génération par génération) — implexe {i} %. ¦ Pe {n} generații: {t} strămoși posibili, {f} locuri găsite ({p} %), {d} persoane diferite (generație cu generație) — implex {i} %.
+Implexe sur {n} générations : {p} %. ¦ Implex pe {n} generații: {p} %.
+Mariages datés au jour près : {l} pendant le Carême et {a} pendant l’Avent, sur {t} ({p} %). ¦ Căsătorii datate la zi: {l} în Postul Mare și {a} în Advent, din {t} ({p} %).
+Conceptions pendant le Carême : {n} sur {t} ({p} % ; {e} % si tout était égal). ¦ Concepții în Postul Mare: {n} din {t} ({p} %; {e} % dacă totul ar fi egal).
+En mars (Carême) : {a} % des {what} ; en décembre (Avent) : {b} % ; {e} % si tout était égal. ¦ În martie (Postul Mare): {a} % din {what}; în decembrie (Advent): {b} %; {e} % dacă totul ar fi egal.
+Mois des {a} et des {b} : {x} et {y}. ¦ Lunile {a} și {b}: {x} și {y}.
+Mois des {a} : {x}. ¦ Lunile {a}: {x}.
+nés en {month} ¦ născuți în {month}
+Si {what} étaient répartis également sur l’année (selon le nombre de jours du mois) ¦ Dacă {what} ar fi repartizate egal pe parcursul anului (după numărul de zile ale lunii)
+(naissance inconnue : âges estimés) ¦ (naștere necunoscută: vârste estimate)
+{name} : née en {y} (mère : {age} ans, estimé) ¦ {name}: născută în {y} (mama: {age} ani, estimat)
+{name} : née en {y} (mère : {age} ans) ¦ {name}: născută în {y} (mama: {age} ani)
+{name} : né en {y} (mère : {age} ans, estimé) ¦ {name}: născut în {y} (mama: {age} ani, estimat)
+{name} : né en {y} (mère : {age} ans) ¦ {name}: născut în {y} (mama: {age} ani)
+{n} mois entre {a} et {b} ¦ {n} luni între {a} și {b}
+le suivant ¦ următorul
+{k} chez {m} ¦ {k} la {m}
+écart médian entre deux naissances : {n} mois ¦ diferența mediană între două nașteri: {n} luni
+{p} % morts avant {n} ans. ¦ {p} % morți înainte de {n} ani.
+Espacement des naissances : {m}, {k}, écart médian {n} mois. ¦ Distanțarea nașterilor: {m}, {k}, diferență mediană {n} luni.
+Espacement des naissances : {m}, {k}. ¦ Distanțarea nașterilor: {m}, {k}.
+Lieux de vie de {n} : {l}. ¦ Locurile de viață ale {n}: {l}.
+Qui a connu qui autour de {name} ¦ Cine pe cine a cunoscut în jurul lui {name}
+Survie par {what} ¦ Supraviețuire după {what}
+{n} personnes prises dans ta base ({u} sans date de décès laissées de côté). ¦ {n} persoane luate din baza ta ({u} fără dată de deces lăsate deoparte).
+{n} lignées prises dans ta base. ¦ {n} linii luate din baza ta.
+Aucun couple dont les deux lieux de naissance ont des coordonnées ({n} couples sans lieu situé). ¦ Niciun cuplu ale cărui două locuri de naștere au coordonate ({n} cupluri fără loc localizat).
+Aucun couple dont les deux lieux de naissance ont des coordonnées. ¦ Niciun cuplu ale cărui două locuri de naștere au coordonate.
+{n} couples pris dans ta base ({m} sans lieux situés). ¦ {n} cupluri luate din baza ta ({m} fără locuri localizate).
+{n} couples pris dans ta base. ¦ {n} cupluri luate din baza ta.
+{n} générations prises dans ta base (arrêt à 250 000 places). ¦ {n} generații luate din baza ta (oprire la 250 000 de locuri).
+{m} mariages et {c} naissances pris dans ta base. ¦ {m} căsătorii și {c} nașteri luate din baza ta.
+Les naissances de {name} ¦ Nașterile lui {name}
+{m} et {n} enfants pris dans ta base. ¦ {m} și {n} copii luați din baza ta.
+{n} personnes et {l} lieux pris dans ta base. ¦ {n} persoane și {l} locuri luate din baza ta.
+Combien étaient encore en vie à chaque âge ¦ Câți mai erau în viață la fiecare vârstă
+Métiers de père en fils ¦ Meserii din tată în fiu
+Mariages et conceptions par mois (Bretagne, XVIIIe s.) ¦ Căsătorii și concepții pe lună (Bretania, sec. XVIII)
+Les naissances de quatre mères de la famille ¦ Nașterile a patru mame din familie
+Où vivait la famille Martin ¦ Unde a trăit familia Martin
+ferme l’éditeur pour ouvrir une fiche ¦ închide editorul ca să deschizi o fișă
+un clic ouvre la fiche ¦ un clic deschide fișa
+Ajoute des personnes : un nom, la naissance, le décès et la génération (0 = toi, −1 = parents, 1 = enfants…). ¦ Adaugă persoane: un nume, nașterea, decesul și generația (0 = tu, −1 = părinți, 1 = copii…).
+Ajoute des lignes : un groupe (siècle, sexe, branche…), un âge, et « décédé » ou « encore en vie ». ¦ Adaugă rânduri: un grup (secol, sex, ramură…), o vârstă și „decedat” sau „încă în viață”.
+Aucune personne de la liste n’a une date de naissance et une date de décès. ¦ Nicio persoană din listă nu are și dată de naștere, și dată de deces.
+Trisaïeul ¦ Răstrăbunic
+Trisaïeuls ¦ Răstrăbunici
+Arrière-grand-père ¦ Străbunic
+Grand-père ¦ Bunic
+Ajoute des lignées : le métier de l’ancêtre, puis de son fils, de son petit-fils… et combien de fois. ¦ Adaugă linii: meseria strămoșului, apoi a fiului său, a nepotului său… și de câte ori.
+Même métier que le père ¦ Aceeași meserie ca tatăl
+Ajoute des mariages : les deux époux, la distance entre leurs lieux de naissance (km) et l’année. ¦ Adaugă căsătorii: cei doi soți, distanța dintre locurile lor de naștere (km) și anul.
+Ajoute des générations : le numéro, les places trouvées et les personnes différentes. ¦ Adaugă generații: numărul, locurile găsite și persoanele diferite.
+Ajoute les chiffres de chaque mois (janvier à décembre) : mariages, et conceptions ou naissances. ¦ Adaugă cifrele fiecărei luni (ianuarie până la decembrie): căsătorii și concepții sau nașteri.
+Carême : du mercredi des Cendres (entre le 4 février et le 10 mars) à Pâques (entre le 22 mars et le 25 avril) — l’Église ne mariait pas ¦ Postul Mare: de la Miercurea Cenușii (între 4 februarie și 10 martie) până la Paști (între 22 martie și 25 aprilie) — Biserica nu cununa
+Avent : du 4e dimanche avant Noël (entre le 27 novembre et le 3 décembre) au 24 décembre — pas de mariage non plus ¦ Advent: din a 4-a duminică dinainte de Crăciun (între 27 noiembrie și 3 decembrie) până la 24 decembrie — nici atunci nu erau căsătorii
+Aucune personne de la liste n’a un mois de naissance. ¦ Nicio persoană din listă nu are o lună de naștere.
+Ajoute des enfants : le nom de la mère, sa naissance, puis chaque enfant et sa date de naissance. ¦ Adaugă copii: numele mamei, nașterea ei, apoi fiecare copil și data lui de naștere.
+Moins de 15 mois d’écart ¦ Mai puțin de 15 luni diferență
+Ajoute des lieux : la personne, le lieu, le début et la fin (années ou dates). ¦ Adaugă locuri: persoana, locul, începutul și sfârșitul (ani sau date).
+Les descendants de la personne de départ ¦ Descendenții persoanei de pornire
+Ses ancêtres et ses descendants, chacun sur sa ligne : l’app cherche ceux qui se sont connus à plusieurs générations d’écart. ¦ Strămoșii și descendenții săi, fiecare pe linia lui: aplicația îi caută pe cei care s-au cunoscut la mai multe generații distanță.
+Pas assez de personnes datées autour de cette personne. ¦ Nu sunt destule persoane datate în jurul acestei persoane.
+📉 Les âges de ma base ¦ 📉 Vârstele din baza mea
+L’âge au décès de chacun ; les personnes encore en vie comptent jusqu’à leur âge d’aujourd’hui. Les décès inconnus sont laissés de côté. ¦ Vârsta la deces a fiecăruia; persoanele încă în viață contează până la vârsta lor de azi. Decesele necunoscute sunt lăsate deoparte.
+Génération (ancêtres) ¦ Generație (strămoși)
+Aucune personne avec une naissance et un décès (ou en vie). ¦ Nicio persoană cu naștere și deces (sau în viață).
+🔀 Les métiers de ma base ¦ 🔀 Meseriile din baza mea
+Chaque lignée (père, grand-père… ou parents) donne un chemin de métiers ; le métier vient de la fiche ou du premier événement « Profession ». ¦ Fiecare linie (tată, bunic… sau părinți) dă un drum de meserii; meseria vine din fișă sau din primul eveniment „Profesie”.
+Parents → enfants (pères et mères) ¦ Părinți → copii (tați și mame)
+Aucune lignée avec au moins deux métiers connus. ¦ Nicio linie cu cel puțin două meserii cunoscute.
+Aucun métier dans ta base (fiche ou événement « Profession »). ¦ Nicio meserie în baza ta (fișă sau eveniment „Profesie”).
+Métiers de parents à enfants ¦ Meserii de la părinți la copii
+💍 Les couples de ma base ¦ 💍 Cuplurile din baza mea
+La distance entre les lieux de naissance des deux époux (les lieux ont besoin de leurs coordonnées), et la direction vue depuis le village de l’époux. ¦ Distanța dintre locurile de naștere ale celor doi soți (locurile au nevoie de coordonate) și direcția văzută din satul soțului.
+Génération par génération : les ancêtres possibles (2, 4, 8…), les places trouvées et les personnes différentes (un même ancêtre peut occuper plusieurs places). ¦ Generație cu generație: strămoșii posibili (2, 4, 8…), locurile găsite și persoanele diferite (același strămoș poate ocupa mai multe locuri).
+📅 Les mariages et les naissances de ma base ¦ 📅 Căsătoriile și nașterile din baza mea
+Les mariages datés au mois près ; les conceptions = la naissance (ou le baptême) moins 9 mois. Carême et Avent sont comptés au jour près quand la date est complète. ¦ Căsătoriile datate la lună; concepțiile = nașterea (sau botezul) minus 9 luni. Postul Mare și Adventul sunt numărate la zi când data este completă.
+À (année) ¦ Până la (an)
+Aucun mariage ni aucune naissance datés au mois près. ¦ Nicio căsătorie și nicio naștere datată la lună.
+Mariages et conceptions par mois ¦ Căsătorii și concepții pe lună
+👶 Les mères de ma base ¦ 👶 Mamele din baza mea
+Chaque mère sur une ligne, ses enfants à l’âge qu’elle avait à leur naissance, l’écart en mois entre deux naissances et les enfants morts jeunes. ¦ Fiecare mamă pe un rând, copiii ei la vârsta pe care o avea la nașterea lor, diferența în luni dintre două nașteri și copiii morți de mici.
+Celles qui ont le plus d’enfants ¦ Cele care au cei mai mulți copii
+La mère (pour « une seule mère ») ¦ Mama (pentru „o singură mamă”)
+Personne de départ (pour les ancêtres) ¦ Persoana de pornire (pentru strămoși)
+Combien de mères au plus ¦ Câte mame cel mult
+Choisis la mère dans le menu. ¦ Alege mama din meniu.
+Aucune mère avec des enfants dans ta base. ¦ Nicio mamă cu copii în baza ta.
+🏘️ Les lieux de vie de ma base ¦ 🏘️ Locurile de viață din baza mea
+Pour chaque personne, ses lieux dans l’ordre du temps : naissance, baptême, domiciles, recensements, mariage, métier, décès… Une couleur par commune. ¦ Pentru fiecare persoană, locurile ei în ordinea timpului: naștere, botez, domicilii, recensăminte, căsătorie, meserie, deces… O culoare pe localitate.
+La personne de départ et ses ancêtres ¦ Persoana de pornire și strămoșii ei
+Ses parents, elle et ses enfants ¦ Părinții săi, ea și copiii săi
+Personnes (pour « que je choisis ») ¦ Persoane (pentru „pe care le aleg”)
+Choisis au moins une personne dans le menu. ¦ Alege cel puțin o persoană din meniu.
+Aucun événement avec un lieu pour ces personnes. ¦ Niciun eveniment cu loc pentru aceste persoane.
+Les lieux de vie de la famille ¦ Locurile de viață ale familiei
+Les personnes (génération : 0 = la personne de départ, −1 = parents, 1 = enfants…) ¦ Persoanele (generație: 0 = persoana de pornire, −1 = părinți, 1 = copii…)
+Vers (son enfant ou parent du côté de la personne de départ) ¦ Spre (copilul sau părintele său din partea persoanei de pornire)
+Rencontres racontées ¦ Întâlniri povestite
+Écart de générations au moins ¦ Diferență de generații cel puțin
+Montrer quand le plus de générations vivaient ensemble ¦ Arată când trăiau împreună cele mai multe generații
+Noms à gauche ¦ Nume în stânga
+Âge dans la barre ¦ Vârsta în bară
+Décès inconnu : vie supposée (ans, 0 = non) ¦ Deces necunoscut: viață presupusă (ani, 0 = nu)
+Groupe (siècle, sexe, branche…) ¦ Grup (secol, sex, ramură…)
+À cet âge ¦ La această vârstă
+Encore en vie ¦ Încă în viață
+Montrer l’âge médian (la moitié encore en vie) ¦ Arată vârsta mediană (jumătate încă în viață)
+Lire la part en vie à l’âge de… ¦ Citește partea în viață la vârsta de…
+Compter les vivants (jusqu’à leur âge d’aujourd’hui) ¦ Numără persoanele în viață (până la vârsta lor de azi)
+Lignes droites (au lieu des marches) ¦ Linii drepte (în loc de trepte)
+Épaisseur des courbes ¦ Grosimea curbelor
+Âge au plus (vide = auto) ¦ Vârsta maximă (gol = automat)
+Éditeur de graphiques : une courbe par ¦ Editor de grafice: o curbă pe
+Bulles au survol tous les … ans ¦ Bule la trecerea mouse-ului la fiecare … ani
+Les lignées (métier à chaque génération, du plus ancien au plus jeune) ¦ Liniile (meseria la fiecare generație, de la cel mai vechi la cel mai tânăr)
+Génération 1 ¦ Generația 1
+Génération 2 ¦ Generația 2
+Génération 3 ¦ Generația 3
+Génération 4 ¦ Generația 4
+Génération 5 ¦ Generația 5
+Combien de lignées ¦ Câte linii
+Couleur de chaque métier (facultatif) ¦ Culoarea fiecărei meserii (opțional)
+Métiers montrés (les autres : « Autres métiers ») ¦ Meserii afișate (celelalte: „Alte meserii”)
+Le métier de départ ¦ Meseria de pornire
+Vert si le métier est gardé ¦ Verde dacă meseria e păstrată
+Noms des colonnes (séparés par des virgules) ¦ Numele coloanelor (separate prin virgule)
+Noms des métiers ¦ Numele meseriilor
+Nombres à côté des noms ¦ Numere lângă nume
+Phrase « même métier que la génération d’avant » ¦ Fraza „aceeași meserie ca generația dinainte”
+Largeur des colonnes ¦ Lățimea coloanelor
+Espace entre les métiers ¦ Spațiu între meserii
+Nom des métiers inconnus ¦ Numele meseriilor necunoscute
+Arrière-grand-père, Grand-père, Père, Fils ¦ Străbunic, Bunic, Tată, Fiu
+Née à ¦ Născută la
+Direction (N, NE… ou degrés) ¦ Direcție (N, NE… sau grade)
+Couleur de chaque siècle (facultatif) ¦ Culoarea fiecărui secol (opțional)
+Siècle (ex. XIXe s.) ¦ Secol (ex. sec. XIX)
+Échelle des distances ¦ Scara distanțelor
+Douce (racine carrée) ¦ Blândă (rădăcină pătrată)
+Logarithmique (le proche en grand) ¦ Logaritmică (cele apropiate mărite)
+Cercle extérieur (km, vide = auto) ¦ Cerc exterior (km, gol = automat)
+Cercle de la distance médiane de chaque siècle ¦ Cercul distanței mediane a fiecărui secol
+Tableau par siècle ¦ Tabel pe secol
+Nom du centre ¦ Numele centrului
+Les générations ¦ Generațiile
+Génération (1 = la personne) ¦ Generație (1 = persoana)
+Taux d’implexe à droite ¦ Rata implexului în dreapta
+Couleur des possibles ¦ Culoarea celor posibili
+Couleur des places trouvées ¦ Culoarea locurilor găsite
+Couleur des personnes différentes ¦ Culoarea persoanelor diferite
+Les mois (janvier à décembre) ¦ Lunile (ianuarie până la decembrie)
+Deux bandeaux (l’un sous l’autre) ¦ Două benzi (una sub alta)
+Seulement la première série ¦ Doar prima serie
+Repérer le Carême et l’Avent ¦ Marchează Postul Mare și Adventul
+Ligne « si tout était égal » (selon les jours du mois) ¦ Linia „dacă totul ar fi egal” (după zilele lunii)
+Écrire les nombres ¦ Scrie numerele
+Les enfants (une ligne par enfant) ¦ Copiii (un rând pe copil)
+Naissance de la mère ¦ Nașterea mamei
+Décès de la mère ¦ Decesul mamei
+Naissance de l’enfant ¦ Nașterea copilului
+Décès de l’enfant ¦ Decesul copilului
+L’âge de la mère ¦ Vârsta mamei
+Écarts en mois entre deux naissances ¦ Diferențe în luni între două nașteri
+Mères au plus ¦ Mame cel mult
+Les lieux (une ligne par lieu et par période) ¦ Locurile (un rând pe loc și perioadă)
+De (année ou date) ¦ De la (an sau dată)
+Couleur de chaque lieu (facultatif) ¦ Culoarea fiecărui loc (opțional)
+Une couleur par ¦ O culoare pe
+Lieux en couleur (les autres en gris) ¦ Locuri colorate (celelalte în gri)
+Nom du lieu dans la bande ¦ Numele locului în bandă
+Par date de début ¦ După data de început
+Épaisseur des bandes ¦ Grosimea benzilor
+{n} génération ¦ {n} generație

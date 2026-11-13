@@ -13,6 +13,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     ext.lists = ext.lists || {};
     const A = () => window.LCNDA_APP, UI = () => window.LCNDA_UI || {}, ART = () => window.LCNDA_ART || null;
@@ -58,7 +59,7 @@
 
     /** la personne de la fiche (et deux personnes citées) */
     function whoHtml(it, short = false) {
-        const own = it.owner ? `<button type="button" class="table-link cr-who" data-cr-person="${Number(it.person_id)}" title="Ouvrir la fiche de ${esc(it.owner)}">${window.LCNDA_UI?.avatarOn?.() ? window.LCNDA_UI.avatar({id: it.person_id, name: it.owner, gender: it.owner_gender}, 22) : `<span class="cr-av ${{male: 'm', female: 'f'}[it.owner_gender] || 'u'}" aria-hidden="true">${esc(initials(it.owner))}</span>`}${esc(it.owner)}</button>` : '';
+        const own = it.owner ? `<button type="button" class="table-link cr-who" data-cr-person="${Number(it.person_id)}" title="${i18n("Ouvrir la fiche de {nm}", {nm: esc(it.owner)})}">${window.LCNDA_UI?.avatarOn?.() ? window.LCNDA_UI.avatar({id: it.person_id, name: it.owner, gender: it.owner_gender}, 22) : `<span class="cr-av ${{male: 'm', female: 'f'}[it.owner_gender] || 'u'}" aria-hidden="true">${esc(initials(it.owner))}</span>`}${esc(it.owner)}</button>` : '';
         if (short) return own;
         const others = (it.people || []).filter(p => p.pid !== Number(it.person_id) && p.zone !== 'secondary').slice(0, 2);
         return own + (others.length ? `<small class="cr-with">avec ${others.map(p => esc(p.name) + (p.role ? ` <i>(${esc(p.role)})</i>` : '')).join(', ')}</small>` : '');
@@ -156,7 +157,7 @@
             const st = bar.state, types = data.types || {}, total = Number(data.total || 0), counts = data.counts || {};
             if (!items.length) {
                 body.innerHTML = filtersOn(st) ? A().emptyState({icon: '🔎', text: 'Rien ne correspond', hint: 'Change les mots cherchés ou retire un filtre (« Tout effacer »).'})
-                    : A().emptyState({icon: F.icon, text: famKey === 'all' ? 'Aucune création ni carrière pour l’instant' : `Aucune fiche « ${F.label} » pour l’instant`,
+                    : A().emptyState({icon: F.icon, text: famKey === 'all' ? 'Aucune création ni carrière pour l’instant' : i18n('Aucune fiche « {nm} » pour l’instant', {nm: i18n(F.label)}),
                         hint: famKey === 'mine' ? 'Crée d’abord ton type (« ＋ Créer mon propre type… » dans « ＋ Nouvelle œuvre »), puis ses fiches.' : 'Choisis la personne, puis la sorte de fiche : elle se range sur sa page et apparaît ici.',
                         action: ro ? null : {label: '＋ Nouveau…', attrs: 'data-cr-new'}});
                 more.innerHTML = ''; return;
@@ -172,14 +173,14 @@
                     return {thumb: thumb(it, 'cr-cov', types), name: it.title, open: `data-cr-open="${it.id}"`, cls: 'cr-card',
                         // K9 : 2 lignes grises, la sorte en pastille, l'année en date ; « ↗ Fiche » dans ⋯
                         lines: [{html: whoHtml(it, true)}, it.place || ''], badges: [{text: `${i.icon} ${i.label}`, kind: 'blue'}, it.av?.length ? {text: it.av.includes('video') ? '🎞 vidéo' : '🔊 son', kind: 'grey'} : null].filter(Boolean), date: yearOf(it) || '',
-                        menu: it.person_id ? [`<button type="button" data-cr-person="${Number(it.person_id)}">↗ Fiche de ${esc(it.owner)}</button>`] : []}; }))).join('');
+                        menu: it.person_id ? [`<button type="button" data-cr-person="${Number(it.person_id)}">↗ ${i18n("Fiche de {nm}", {nm: esc(it.owner)})}</button>`] : []}; }))).join('');
             } else {
                 const cols = F.cols || [];
                 const thead = `<thead><tr><th class="cr-c-img"><span class="cr-sr">Image</span></th><th>Titre</th><th>Sorte</th><th>Personne(s)</th><th>Année</th>${cols.map(([l]) => `<th>${esc(l)}</th>`).join('')}<th class="cr-c-go"><span class="cr-sr">Ouvrir</span></th></tr></thead>`;
                 const row = it => { const i = kindInfo(it.kind, types);
                     return `<tr data-cr-open="${it.id}" class="is-click" tabindex="0"><td class="cr-c-img">${thumb(it, 'cr-thumb', types)}</td><td class="cr-c-title"><b>${esc(it.title)}</b>${it.av?.length ? ` <span class="cr-av-badge" title="${it.av.includes('video') ? 'Avec une vidéo' : 'Avec un son'}">${it.av.includes('video') ? '🎞' : '🔊'}</span>` : ''}${it.sub && !cols.some(c => c[1].includes('_sub')) && !subSame(it) ? `<small class="muted cr-sub">${esc(it.sub)}</small>` : ''}</td>
                         <td class="cr-c-kind"><span class="cr-kind">${esc(i.icon)} ${esc(i.label)}</span></td><td class="cr-c-who">${whoHtml(it)}</td><td class="cr-c-year">${esc(yearOf(it))}</td>${cols.map(([, ks]) => `<td>${esc(valOf(it, ks))}</td>`).join('')}
-                        <td class="cr-c-go">${it.person_id ? `<button type="button" class="icon-button small" data-cr-person="${Number(it.person_id)}" title="Ouvrir la fiche de ${esc(it.owner)}" aria-label="Ouvrir la fiche de ${esc(it.owner)}">↗</button>` : ''}</td></tr>`; };
+                        <td class="cr-c-go">${it.person_id ? `<button type="button" class="icon-button small" data-cr-person="${Number(it.person_id)}" title="${i18n("Ouvrir la fiche de {nm}", {nm: esc(it.owner)})}" aria-label="${i18n("Ouvrir la fiche de {nm}", {nm: esc(it.owner)})}">↗</button>` : ''}</td></tr>`; };
                 // un seul tableau (colonnes alignées) ; une ligne d'intertitre par sorte
                 const span = 6 + cols.length, ghead = r => { const i = kindInfo(r.kind, types); return `<tr class="cr-grouprow"><th colspan="${span}" scope="rowgroup"><span class="cr-kindh">${esc(i.icon)} ${esc(i.many)} <small>(${(counts[r.kind] || r.list.length).toLocaleString('fr-FR')})</small></span></th></tr>`; };
                 body.innerHTML = `<div class="ar-scroll cr-scroll"><table class="ar-t cr-table">${thead}${runs.map(r => `<tbody>${groupHeads ? ghead(r) : ''}${r.list.map(row).join('')}</tbody>`).join('')}</table></div>`;
@@ -239,7 +240,7 @@
         if (!kinds.length) { toast('Cette sorte de fiche n’est pas disponible.', 'error'); return; }
         const go = kind => (F.blocs && ext.blocs?.open ? ext.blocs.open({kind, pid, add: true}) : art.open(pid, {kind, add: true}));
         if (kinds.length === 1) return go(kinds[0]);
-        ext.openDialog?.({eyebrow: 'NOUVELLE FICHE', title: `${F.icon} ${F.label} : quelle sorte ?`, submitLabel: 'Fermer',
+        ext.openDialog?.({eyebrow: 'NOUVELLE FICHE', title: `${F.icon} ${i18n("{nm} : quelle sorte ?", {nm: i18n(F.label)})}`, submitLabel: 'Fermer',
             body: `<div class="cr-choose">${kinds.map(k => { const i = kindInfo(k); return `<button type="button" class="cr-fam" data-cr-kind="${esc(k)}">${esc(i.icon)} ${esc(i.label)}</button>`; }).join('')}</div>`,
             onOpen: dg => dg.addEventListener('click', ev => { const b = ev.target.closest('[data-cr-kind]'); if (!b) return; dg.close(); go(b.dataset.crKind); }),
             onSubmit: () => true});

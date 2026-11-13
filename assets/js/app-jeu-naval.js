@@ -7,6 +7,7 @@
 (() => {
     'use strict';
     const J = () => window.LCNDA_JEUX_FAMILLE, L = () => window.LCNDA_JEUX_LOGIQUE;
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s));
     const FLEETS = {petite: [4, 3, 3, 2], classique: [5, 4, 3, 3, 2], grande: [5, 4, 4, 3, 3, 2, 2]};
     const KIND = {5: 'Porte-avions', 4: 'Croiseur', 3: 'Frégate', 2: 'Sous-marin'};
     const AIS = [['', '🙂 Une personne'], ['simple', '🤖 Ordinateur (simple)'], ['moyen', '🤖 Ordinateur (malin)']];
@@ -27,7 +28,7 @@
             }
             if (ok) return ships;
         }
-        throw new Error('La flotte ne tient pas dans cette grille : prends une grille plus grande ou une flotte plus petite.');
+        throw new Error(i18n('La flotte ne tient pas dans cette grille : prends une grille plus grande ou une flotte plus petite.'));
     }
     const grid = (rows, cols) => Array.from({length: rows}, () => Array(cols).fill(0)); // 0 rien, 1 à l'eau, 2 touché, 3 coulé
     /** un tir sur un plateau {ships, shots} → {res: 'eau'|'touche'|'coule'|'deja', ship} */
@@ -74,52 +75,52 @@
         clean: c => { c.players.forEach(p => { p.ai = ['simple', 'moyen'].includes(p.ai) ? p.ai : ''; }); return {...c, size: Math.max(6, Math.min(15, Number(c.size) || 10)), fleet: FLEETS[c.fleet] ? c.fleet : 'classique', again: !!c.again, names: c.names !== false}; },
         ready: [{k: 'mini', name: 'Petite mer', hint: '7×7, petite flotte', cfg: {size: 7, fleet: 'petite'}}, {k: 'classic', name: 'Bataille classique', hint: '10×10, 5 navires', cfg: {size: 10, fleet: 'classique'}},
             {k: 'big', name: 'Grande escadre', hint: '14×14, 7 navires', cfg: {size: 14, fleet: 'grande'}}, {k: 'rafale', name: 'En rafale', hint: '10×10, on rejoue quand on touche', cfg: {size: 10, fleet: 'classique', again: true}}],
-        fieldsHtml: (c, h) => `<div data-jfn-size></div><div class="jf-row"><span class="jf-lab">La flotte</span>${h.seg('fleet', [['petite', 'Petite (4 navires)'], ['classique', 'Classique (5)'], ['grande', 'Grande (7)']], c.fleet)}</div>
-            <div class="jf-checks">${h.toggle('data-jfn-again', c.again, '🎯 On rejoue quand on touche')}${h.toggle('data-jfn-names', c.names, '⚓ Les navires portent le nom d’ancêtres')}</div>`,
-        bindFields: (form, c, save, {range}) => range(form.querySelector('[data-jfn-size]'), {label: 'Taille de la mer', min: 6, max: 15, value: c.size, unit: 'cases de côté', def: 10}, v => { c.size = v; save(); }),
+        fieldsHtml: (c, h) => `<div data-jfn-size></div><div class="jf-row"><span class="jf-lab">${h.esc(i18n('La flotte'))}</span>${h.seg('fleet', [['petite', h.esc(i18n('Petite (4 navires)'))], ['classique', h.esc(i18n('Classique (5)'))], ['grande', h.esc(i18n('Grande (7)'))]], c.fleet)}</div>
+            <div class="jf-checks">${h.toggle('data-jfn-again', c.again, i18n('🎯 On rejoue quand on touche'))}${h.toggle('data-jfn-names', c.names, i18n('⚓ Les navires portent le nom d’ancêtres'))}</div>`,
+        bindFields: (form, c, save, {range}) => range(form.querySelector('[data-jfn-size]'), {label: i18n('Taille de la mer'), min: 6, max: 15, value: c.size, unit: i18n('cases de côté'), def: 10}, v => { c.size = v; save(); }),
         onSeg: (k, v, c) => { if (k === 'fleet') c.fleet = v; },
         onChange(t, c) { if (t.matches('[data-jfn-again]')) c.again = t.checked; if (t.matches('[data-jfn-names]')) c.names = t.checked; if (t.name === 'pai') c.players[Number(t.closest('[data-i]').dataset.i)].ai = t.value; },
-        playerFields: (p, i, h) => `<label>Qui joue<select name="pai">${AIS.map(([v, t]) => `<option value="${v}" ${p.ai === v ? 'selected' : ''}>${t}</option>`).join('')}</select></label>`,
+        playerFields: (p, i, h) => `<label>${h.esc(i18n('Qui joue'))}<select name="pai">${AIS.map(([v, t]) => `<option value="${v}" ${p.ai === v ? 'selected' : ''}>${h.esc(i18n(t))}</option>`).join('')}</select></label>`,
         async start(c, src, prev) {
-            if (c.players.every(p => p.ai)) return {error: 'Il faut au moins une personne pour jouer.'};
+            if (c.players.every(p => p.ai)) return {error: i18n('Il faut au moins une personne pour jouer.')};
             const R = L().rng(c.seed + (prev ? prev.round : '')), sizes = FLEETS[c.fleet];
             let names = [];
-            if (c.names) { try { const d = await J().loadData(); names = L().shuffle(d.persons.filter(x => !x.living && !x.priv && x.first && x.last).map(x => `${x.first} ${String(x.last).toUpperCase()}`), L().rng(c.seed + ":noms")); } catch (_) {} }
+            if (c.names) { try { const d = await J().loadData(); names = L().shuffle(d.persons.filter(x => !x.living && !x.priv && !x.mem && x.first && x.last).map(x => `${x.first} ${String(x.last).toUpperCase()}`), L().rng(c.seed + ":noms")); } catch (_) {} }
             let boards;
-            try { boards = [0, 1].map(i => ({ships: placeFleet(c.size, c.size, sizes, R).map((s, k) => ({...s, name: names[i * sizes.length + k] ? `le ${names[i * sizes.length + k]}` : `${KIND[s.size] || 'Navire'} ${k + 1}`, kind: KIND[s.size] || 'Navire'})), shots: grid(c.size, c.size)})); }
+            try { boards = [0, 1].map(i => ({ships: placeFleet(c.size, c.size, sizes, R).map((s, k) => ({...s, name: names[i * sizes.length + k] ? i18n('le {name}', {name: names[i * sizes.length + k]}) : `${i18n(KIND[s.size] || 'Navire')} ${k + 1}`, kind: KIND[s.size] || 'Navire'})), shots: grid(c.size, c.size)})); }
             catch (e) { return {error: e.message}; }
             const turn = prev ? ((prev.starter ?? 0) + 1) % 2 : 0;
-            return {boards, turn, starter: turn, winner: -1, log: [], veil: c.players.every(p => !p.ai), score: prev?.score?.length === 2 ? prev.score : [0, 0], round: (prev?.round || 0) + 1, shots: [0, 0], status: 'Bataille en cours'};
+            return {boards, turn, starter: turn, winner: -1, log: [], veil: c.players.every(p => !p.ai), score: prev?.score?.length === 2 ? prev.score : [0, 0], round: (prev?.round || 0) + 1, shots: [0, 0], status: i18n('Bataille en cours')};
         },
         mount(host, g, api) {
-            const {esc} = api, c = g.cfg, P = c.players, name = i => P[i]?.name || `Joueur ${i + 1}`, R = L().rng(c.seed + 'ia' + g.round + g.log.length), two = P.every(p => !p.ai);
+            const {esc} = api, c = g.cfg, P = c.players, name = i => P[i]?.name || i18n('Joueur {n}', {n: i + 1}), R = L().rng(c.seed + 'ia' + g.round + g.log.length), two = P.every(p => !p.ai);
             let aiT = 0;
             const viewer = () => (two ? g.turn : P.findIndex(p => !p.ai)), over = () => g.winner >= 0;
             const cellHtml = (b, r, cc, own, shoot) => { const s = b.shots[r][cc], ship = own || s === 3 ? b.ships.find(x => x.cells.some(([y, x2]) => y === r && x2 === cc)) : null;
                 const cls = s === 1 ? 'is-miss' : s === 2 ? 'is-hit' : s === 3 ? 'is-sunk' : ship ? 'is-ship' : '';
-                return `<button type="button" class="jfn-cell ${cls}" data-r="${r}" data-c="${cc}" ${shoot && !s ? '' : 'aria-disabled="true"'} title="${ship && (own || s === 3) ? esc(ship.name) : ''}" aria-label="${String.fromCharCode(65 + cc)}${r + 1}${s === 1 ? ' : à l’eau' : s === 2 ? ' : touché' : s === 3 ? ' : coulé' : ''}">${s === 1 ? '•' : s >= 2 ? '✕' : ''}</button>`; };
+                return `<button type="button" class="jfn-cell ${cls}" data-r="${r}" data-c="${cc}" ${shoot && !s ? '' : 'aria-disabled="true"'} title="${ship && (own || s === 3) ? esc(ship.name) : ''}" aria-label="${String.fromCharCode(65 + cc)}${r + 1}${s === 1 ? ` : ${esc(i18n('à l’eau'))}` : s === 2 ? ` : ${esc(i18n('touché'))}` : s === 3 ? ` : ${esc(i18n('coulé'))}` : ''}">${s === 1 ? '•' : s >= 2 ? '✕' : ''}</button>`; };
             const gridHtml = (bi, own, shoot) => { const b = g.boards[bi], n = c.size, cell = Math.max(22, Math.min(40, Math.floor(Math.min(420, ((host.clientWidth || 900) - 80) / 2) / (n + 1))));
                 return `<div class="jfn-sea ${shoot ? 'is-target' : ''}" style="--n:${n};--cell:${cell}px" ${shoot ? 'data-shoot' : ''}><span></span>${Array.from({length: n}, (_, k) => `<b>${String.fromCharCode(65 + k)}</b>`).join('')}${b.shots.map((row, r) => `<b>${r + 1}</b>${row.map((_, cc) => cellHtml(b, r, cc, own, shoot)).join('')}`).join('')}</div>`; };
             const fleetHtml = (bi, reveal) => `<ul class="jfn-fleet">${g.boards[bi].ships.map(s => `<li class="${s.sunk ? 'is-sunk' : ''}">${'■'.repeat(s.size)} <span>${reveal || s.sunk ? esc(s.name) : '?'}</span></li>`).join('')}</ul>`; // les noms de l'adversaire : quand le navire est coulé
             const draw = () => {
                 const v = viewer(), foe = 1 - v, myTurn = !over() && g.turn === v && !P[g.turn].ai;
-                api.sub(`Manche ${g.round} · ${c.size}×${c.size} · ${g.boards[0].ships.length} navires${c.again ? ' · on rejoue quand on touche' : ''}`);
-                if (two && g.veil && !over()) { host.innerHTML = `<div class="jfn-veil"><p class="jf-big">🙈 ${esc(name(g.turn))}, à toi : que ${esc(name(1 - g.turn))} détourne les yeux.</p><button type="button" class="button" data-jfn-lift>Je suis ${esc(name(g.turn))} : voir ma mer</button></div>`;
+                api.sub([i18n('Manche {n}', {n: g.round}), `${c.size}×${c.size}`, api.plural(g.boards[0].ships.length, 'navire'), c.again && i18n('on rejoue quand on touche')].filter(Boolean).join(' · '));
+                if (two && g.veil && !over()) { host.innerHTML = `<div class="jfn-veil"><p class="jf-big">🙈 ${esc(i18n('{a}, à toi : que {b} détourne les yeux.', {a: name(g.turn), b: name(1 - g.turn)}))}</p><button type="button" class="button" data-jfn-lift>${esc(i18n('Je suis {name} : voir ma mer', {name: name(g.turn)}))}</button></div>`;
                     host.querySelector('[data-jfn-lift]').addEventListener('click', () => { g.veil = false; draw(); }, {signal: api.signal}); return; }
                 host.innerHTML = `<div class="goose-game-layout jfn"><div class="jfn-seas">
-                    <section><h3>🎯 La mer de ${esc(name(foe))}</h3>${gridHtml(foe, over(), myTurn)}${fleetHtml(foe, over())}</section>
-                    <section><h3>⚓ Ta flotte${two ? ` (${esc(name(v))})` : ''}</h3>${gridHtml(v, true, false)}${fleetHtml(v, true)}</section></div>
-                  <aside class="goose-panel"><div class="jf-turns">${P.map((p, i) => `<span class="jf-turn ${i === g.turn && !over() ? 'is-on' : ''}" style="--pc:${esc(p.color)}">${esc(p.name)}${p.ai ? ' 🤖' : ''}<small>${api.plural(g.boards[1 - i].ships.filter(s => s.sunk).length, 'navire coulé', 'navires coulés')} · ${api.plural(g.score[i], 'manche gagnée', 'manches gagnées')}</small></span>`).join('')}</div>
-                    <p class="goose-status jf-big" role="status">${over() ? `🎉 ${esc(name(g.winner))} a coulé toute la flotte !` : myTurn ? `À toi de tirer, ${esc(name(v))} : clique sur la mer de ${esc(name(foe))}.` : `${esc(name(g.turn))} vise…`}</p>
-                    <ol class="jfn-log">${g.log.slice(-8).reverse().map(l => `<li>${esc(l)}</li>`).join('')}</ol>${over() ? '<p class="muted jf-small">« ↻ Rejouer » en haut : une nouvelle manche, les scores sont gardés.</p>' : ''}</aside></div>`;
+                    <section><h3>🎯 ${esc(i18n('La mer de {name}', {name: name(foe)}))}</h3>${gridHtml(foe, over(), myTurn)}${fleetHtml(foe, over())}</section>
+                    <section><h3>⚓ ${esc(two ? i18n('Ta flotte ({name})', {name: name(v)}) : i18n('Ta flotte'))}</h3>${gridHtml(v, true, false)}${fleetHtml(v, true)}</section></div>
+                  <aside class="goose-panel"><div class="jf-turns">${P.map((p, i) => `<span class="jf-turn ${i === g.turn && !over() ? 'is-on' : ''}" style="--pc:${esc(p.color)}">${esc(p.name)}${p.ai ? ' 🤖' : ''}<small>${esc(api.plural(g.boards[1 - i].ships.filter(s => s.sunk).length, 'navire coulé', 'navires coulés'))} · ${esc(api.plural(g.score[i], 'manche gagnée', 'manches gagnées'))}</small></span>`).join('')}</div>
+                    <p class="goose-status jf-big" role="status">${esc(over() ? i18n('🎉 {name} a coulé toute la flotte !', {name: name(g.winner)}) : myTurn ? i18n('À toi de tirer, {a} : clique sur la mer de {b}.', {a: name(v), b: name(foe)}) : i18n('{name} vise…', {name: name(g.turn)}))}</p>
+                    <ol class="jfn-log">${g.log.slice(-8).reverse().map(l => `<li>${esc(l)}</li>`).join('')}</ol>${over() ? `<p class="muted jf-small">${esc(i18n('« ↻ Rejouer » en haut : une nouvelle manche, les scores sont gardés.'))}</p>` : ''}</aside></div>`;
                 host.querySelector('[data-shoot]')?.addEventListener('click', e => { const b = e.target.closest('[data-r]'); if (b) shoot(Number(b.dataset.r), Number(b.dataset.c)); }, {signal: api.signal});
                 maybeAI();
             };
             const shoot = (r, cc) => {
                 if (over()) return; const who = g.turn, b = g.boards[1 - who], res = fire(b, r, cc); if (res.res === 'deja' || res.res === 'hors') return;
                 g.shots[who]++; const at = `${String.fromCharCode(65 + cc)}${r + 1}`;
-                g.log.push(`${name(who)} : ${at} — ${res.res === 'eau' ? 'à l’eau' : res.res === 'touche' ? 'touché !' : `coulé : ${res.ship.name} (${res.ship.kind.toLowerCase()})`}`);
-                if (allSunk(b)) { g.winner = who; g.score[who]++; g.finished = true; g.status = `${name(who)} a gagné en ${g.shots[who]} tirs`; }
+                g.log.push(`${name(who)} : ${at} — ${res.res === 'eau' ? i18n('à l’eau') : res.res === 'touche' ? i18n('touché !') : i18n('coulé : {ship} ({kind})', {ship: res.ship.name, kind: i18n(res.ship.kind).toLowerCase()})}`);
+                if (allSunk(b)) { g.winner = who; g.score[who]++; g.finished = true; g.status = i18n('{name} a gagné en {n} tirs', {name: name(who), n: g.shots[who]}); }
                 else if (!(c.again && res.res !== 'eau')) { g.turn = 1 - who; if (two) g.veil = true; }
                 api.save(); api.sidebar(); draw();
             };

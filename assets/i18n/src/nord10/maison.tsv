@@ -1,0 +1,2121 @@
+fr ¦ sq ¦ mt
+Rez-de-chaussée ¦ Kati përdhes ¦ Sular terran
+Cave ¦ Bodrum ¦ Kantina
+1er étage ¦ Kati i 1-rë ¦ L-1 sular
+{level}e étage ¦ Kati i {level}-të ¦ Sular {level}
+Maison de famille ¦ Shtëpia e familjes ¦ Dar tal-familja
+Époque sans nom ¦ Periudhë pa emër ¦ Perjodu bla isem
+Barre du haut ¦ Shiriti i sipërm ¦ Il-bar ta’ fuq
+Barre de la vue 3D ¦ Shiriti i pamjes 3D ¦ Il-bar tal-veduta 3D
+Vues dessus / face / côté ¦ Pamje nga lart / përpara / anash ¦ Vedut minn fuq / minn quddiem / mill-ġenb
+Revêtement sur {what} de mur ¦ Veshje mbi {what} muri ¦ Kisja fuq {what} tal-ħajt
+=face ¦ faqe|faqe ¦ wiċċ|uċuħ|uċuħ|wiċċ|wiċċ
+=mur ¦ mur|mure ¦ ħajt|ħitan|ħitan|ħajt|ħajt
+=étage ¦ kat|kate ¦ sular|sulari|sulari|sular|sular
+=trait ¦ vijë|vija ¦ linja|linji|linji|linja|linja
+=objet trouvé ¦ objekt i gjetur|objekte të gjetura ¦ oġġett misjub|oġġetti misjuba|oġġetti misjuba|oġġett misjub|oġġett misjub
+Aucune pièce tracée ¦ Asnjë dhomë e vizatuar ¦ L-ebda kamra mpinġija
+Pièces et surfaces ¦ Dhomat dhe sipërfaqet ¦ Kmamar u erjas
+Plan du ¦ Plani i ¦ Pjanta tal-
+double hauteur (vide au-dessus) ¦ lartësi e dyfishtë (bosh sipër) ¦ għoli doppju (vojt fuq)
+trémie de l’escalier ¦ hapja e shkallës ¦ il-fetħa tat-taraġ
+escalier (plancher fermé) ¦ shkallë (dysheme e mbyllur) ¦ taraġ (art magħluqa)
+VIDE ¦ BOSH ¦ VOJT
+vide sur {name} ¦ bosh mbi {name} ¦ vojt fuq {name}
+maison|Vide ¦ Boshllëk ¦ Vojt
+sans plancher ¦ pa dysheme ¦ mingħajr art
+m² Carrez ¦ m² Carrez ¦ m² Carrez
+Moins de 1,80 m sous la pente du toit ¦ Më pak se 1,80 m nën pjerrësinë e çatisë ¦ Inqas minn 1.80 m taħt l-inklinazzjoni tas-saqaf
+🕰 Fantôme : {name} ¦ 🕰 Fantazmë: {name} ¦ 🕰 Fatat: {name}
+⌒ {len} · flèche {arrow} ¦ ⌒ {len} · shigjeta {arrow} ¦ ⌒ {len} · għoli tal-ark {arrow}
+{len} pour fermer en rectangle ¦ {len} për ta mbyllur si drejtkëndësh ¦ {len} biex tagħlaq f’rettangolu
+départ (clic : fermer) ¦ fillimi (kliko: mbyll) ¦ bidu (ikklikkja: agħlaq)
+maison|départ ¦ fillimi ¦ bidu
+Posé sous l’étage « {name} ». ¦ Vendosur nën katin «{name}». ¦ Imqiegħed taħt is-sular “{name}”.
+📐 {area} m² au sol ¦ 📐 {area} m² dysheme ¦ 📐 {area} m² ta’ art
+{area} m² au sol ¦ {area} m² dysheme ¦ {area} m² ta’ art
+{carrez} m² loi Carrez ¦ {carrez} m² sipas ligjit Carrez ¦ {carrez} m² skont il-liġi Carrez
+{area} m² loi Carrez (hauteur ≥ 1,80 m) ¦ {area} m² sipas ligjit Carrez (lartësia ≥ 1,80 m) ¦ {area} m² skont il-liġi Carrez (għoli ≥ 1.80 m)
+(là où l’on tient debout : 1,80 m et plus, hachuré sur le plan) ¦ (aty ku mund të qëndrosh në këmbë: 1,80 m e më shumë, me vija në plan) ¦ (fejn tista’ toqgħod bilwieqfa: 1.80 m jew aktar, imsaħħab fuq il-pjanta)
+Habitant : {role} — ouvrir la fiche ¦ Banor: {role} — hap kartelën ¦ Abitant: {role} — iftaħ l-iskeda
+Habitant — ouvrir la fiche ¦ Banor — hap kartelën ¦ Abitant — iftaħ l-iskeda
+Liée à la pièce « {room} » — ouvrir la fiche ¦ Lidhur me dhomën «{room}» — hap kartelën ¦ Marbuta mal-kamra “{room}” — iftaħ l-iskeda
+{label} — époque : {era} — ouvrir la fiche où il est ¦ {label} — periudha: {era} — hap kartelën ku ndodhet ¦ {label} — perjodu: {era} — iftaħ l-iskeda fejn jinsab
+{label} — ouvrir la fiche où il est ¦ {label} — hap kartelën ku ndodhet ¦ {label} — iftaħ l-iskeda fejn jinsab
+🏷 Les souvenirs de la maison ¦ 🏷 Kujtimet e shtëpisë ¦ 🏷 It-tifkiriet tad-dar
+Aller à « {where} » et voir le souvenir ¦ Shko te «{where}» dhe shiko kujtimin ¦ Mur għal “{where}” u ara t-tifkira
+Soleil calculé pour {place} ({lat}° N). ¦ Dielli i llogaritur për {place} ({lat}° V). ¦ Ix-xemx ikkalkulata għal {place} ({lat}° T).
+le lieu de la maison ¦ vendi i shtëpisë ¦ il-post tad-dar
+Le lieu de la maison n’a pas de coordonnées : soleil calculé pour le centre de la France. ¦ Vendi i shtëpisë nuk ka koordinata: dielli llogaritet për qendrën e Francës. ¦ Il-post tad-dar m’għandux koordinati: ix-xemx ikkalkulata għaċ-ċentru ta’ Franza.
+La nuit, les lampes posées s’allument (Vue 3D → ☀️ Lumière). ¦ Natën, llambat e vendosura ndizen (Pamja 3D → ☀️ Drita). ¦ Bil-lejl, il-lampi mqiegħda jinxtegħlu (Veduta 3D → ☀️ Dawl).
+Pour commencer : ⬚ <b>glisse une pièce</b> (ses murs se font tout seuls), ou ▬ trace les murs un par un. ▨ Un <b>vide</b> (mezzanine, double hauteur) se dessine à l’étage du dessus. Puis 🚪 portes et 🪟 fenêtres (un clic sur un mur), et le <b>mobilier</b> (onglet à côté). ¦ Për të filluar: ⬚ <b>tërhiq një dhomë</b> (muret bëhen vetë), ose ▬ vizato muret një nga një. ▨ Një <b>boshllëk</b> (mezaninë, lartësi e dyfishtë) vizatohet në katin sipër. Pastaj 🚪 dyert dhe 🪟 dritaret (një klik mbi një mur), dhe <b>mobiliet</b> (skeda ngjitur). ¦ Biex tibda: ⬚ <b>kaxkar kamra</b> (il-ħitan isiru waħedhom), jew ▬ iddisinja l-ħitan wieħed wieħed. ▨ <b>Vojt</b> (mezzanin, għoli doppju) jitpinġa fis-sular ta’ fuq. Imbagħad 🚪 bibien u 🪟 twieqi (klikk fuq ħajt), u l-<b>għamara</b> (it-tab ta’ ħdejh).
+{area} m² habitables ¦ {area} m² të banueshme ¦ {area} m² abitabbli
+Face côté {rooms} ¦ Faqja nga ana e {rooms} ¦ Wiċċ lejn {rooms}
+Face extérieure (façade) ¦ Faqja e jashtme (fasada) ¦ Wiċċ ta’ barra (faċċata)
+Les murs de « {name} » ¦ Muret e «{name}» ¦ Il-ħitan ta’ “{name}”
+la pièce ¦ dhoma ¦ il-kamra
+Les murs de toutes les pièces de cet étage ¦ Muret e të gjitha dhomave të këtij kati ¦ Il-ħitan tal-kmamar kollha ta’ dan is-sular
+Toutes les façades de cet étage ¦ Të gjitha fasadat e këtij kati ¦ Il-faċċati kollha ta’ dan is-sular
+Les murs de toutes les pièces de la maison (tous les étages) ¦ Muret e të gjitha dhomave të shtëpisë (të gjitha katet) ¦ Il-ħitan tal-kmamar kollha tad-dar (is-sulari kollha)
+Toutes les façades de la maison (tous les étages) ¦ Të gjitha fasadat e shtëpisë (të gjitha katet) ¦ Il-faċċati kollha tad-dar (is-sulari kollha)
+Vide sur « {room} » ({floor}). ¦ Bosh mbi «{room}» ({floor}). ¦ Vojt fuq “{room}” ({floor}).
+Vide sur l’étage « {floor} ». ¦ Bosh mbi katin «{floor}». ¦ Vojt fuq is-sular “{floor}”.
+⚠️ C’est l’étage le plus bas : ce vide n’ouvre sur rien. ¦ ⚠️ Ky është kati më i ulët: ky boshllëk nuk hapet mbi asgjë. ¦ ⚠️ Dan huwa l-iktar sular baxx: dan il-vojt ma jagħti fuq xejn.
+{w} × {d} hors tout · périmètre {p} ¦ {w} × {d} gjithsej · perimetri {p} ¦ {w} × {d} b’kollox · perimetru {p}
+La face de {walls} tournée vers la pièce. ¦ Faqja e {walls} e kthyer nga dhoma. ¦ Il-wiċċ ta’ {walls} iħares lejn il-kamra.
+Années de {name} ¦ Vitet e {name} ¦ Is-snin ta’ {name}
+Hauteur : celle de l’étage + le plancher ({h}) ¦ Lartësia: ajo e katit + dyshemeja ({h}) ¦ Għoli: dak tas-sular + l-art ({h})
+={n} marches de {rise} cm, giron {going} cm · 2 h + g = {sum} cm ¦ {n} shkallë prej {rise} cm, shkelja {going} cm · 2 l + s = {sum} cm|{n} shkallë prej {rise} cm, shkelja {going} cm · 2 l + s = {sum} cm ¦ {n} tarġa ta’ {rise} cm, wisa’ {going} cm · 2 g + w = {sum} cm|{n} turġien ta’ {rise} cm, wisa’ {going} cm · 2 g + w = {sum} cm|{n} turġien ta’ {rise} cm, wisa’ {going} cm · 2 g + w = {sum} cm|{n} tarġa ta’ {rise} cm, wisa’ {going} cm · 2 g + w = {sum} cm|{n} tarġa ta’ {rise} cm, wisa’ {going} cm · 2 g + w = {sum} cm
+Ouvrir le plancher au-dessus (« {name} ») ¦ Hap dyshemenë sipër («{name}») ¦ Iftaħ l-art ta’ fuq (“{name}”)
+Ouvrir le plancher au-dessus ¦ Hap dyshemenë sipër ¦ Iftaħ l-art ta’ fuq
+posé sur « {name} » : il le suit ¦ vendosur mbi «{name}»: e ndjek ¦ imqiegħed fuq “{name}”: isegwih
+un objet ¦ një objekt ¦ oġġett
+Georgia (de départ) ¦ Georgia (fillestare) ¦ Georgia (tal-bidu)
+État d’origine ¦ Gjendja origjinale ¦ L-istat oriġinali
+Époque modifiée ¦ Periudha u ndryshua ¦ Perjodu mibdul
+Nouvelle époque : {name} ¦ Periudhë e re: {name} ¦ Perjodu ġdid: {name}
+Époques retirées (le plan « {name} » reste, sans date) ¦ Periudhat u hoqën (plani «{name}» mbetet, pa datë) ¦ Perjodi mneħħija (il-pjanta “{name}” tibqa’, mingħajr data)
+Époque « {name} » supprimée avec son plan ¦ Periudha «{name}» u fshi bashkë me planin e saj ¦ Il-perjodu “{name}” tħassar flimkien mal-pjanta tiegħu
+{name} est déjà rattaché. ¦ {name} është lidhur tashmë. ¦ {name} diġà marbut.
+🏠 un habitant y est ¦ 🏠 aty jeton një banor ¦ 🏠 hemm abitant
+Posé sur « {name} » ¦ Vendosur mbi «{name}» ¦ Imqiegħed fuq “{name}”
+Posé au sol ¦ Vendosur në dysheme ¦ Imqiegħed mal-art
+Pièce {n} ¦ Dhoma {n} ¦ Kamra {n}
+Pièce de {area} m² ¦ Dhomë prej {area} m² ¦ Kamra ta’ {area} m²
+Vide sur {name} ¦ Bosh mbi {name} ¦ Vojt fuq {name}
+Mezzanine ¦ Mezaninë ¦ Mezzanin
+🏗 Mezzanine posée (étage « Mezzanine » ajouté) : vide sur {room}, garde-corps et escalier. ¦ 🏗 Mezanina u vendos (u shtua kati «Mezaninë»): bosh mbi {room}, parmak dhe shkallë. ¦ 🏗 Il-mezzanin tqiegħed (żdied is-sular “Mezzanin”): vojt fuq {room}, poġġaman u taraġ.
+🏗 Mezzanine posée à l’étage « {floor} » : vide sur {room}, garde-corps et escalier. ¦ 🏗 Mezanina u vendos në katin «{floor}»: bosh mbi {room}, parmak dhe shkallë. ¦ 🏗 Il-mezzanin tqiegħed fis-sular “{floor}”: vojt fuq {room}, poġġaman u taraġ.
+{len} cm, c’est trop court : pour des mètres, écris « {typed} m ». ¦ {len} cm është shumë e shkurtër: për metra, shkruaj «{typed} m». ¦ {len} cm qasir wisq: għall-metri, ikteb “{typed} m”.
+{name} posé ¦ {name} u vendos ¦ {name} tqiegħed
+{msg} — et maintenant le deuxième point. ¦ {msg} — dhe tani pika e dytë. ¦ {msg} — u issa t-tieni punt.
+À l’échelle : la longueur choisie mesure {len}. Puis « ✏️ Décalquer les murs » (onglet Étage). ¦ Në shkallë: gjatësia e zgjedhur mat {len}. Pastaj «✏️ Kopjo muret» (skeda Kati). ¦ Skala: it-tul magħżul ikejjel {len}. Imbagħad “✏️ Ikkopja l-ħitan” (tab Sular).
+Plan ancien redressé ({deg}°) ¦ Plan i vjetër i drejtuar ({deg}°) ¦ Pjanta antika mdawra dritta ({deg}°)
+Souvenir ¦ Kujtim ¦ Tifkira
+🔗 Relier un souvenir à « {name} » ¦ 🔗 Lidh një kujtim me «{name}» ¦ 🔗 Għaqqad tifkira ma’ “{name}”
+Un souvenir pour « {name} » ¦ Një kujtim për «{name}» ¦ Tifkira għal “{name}”
+✍ Un récit pour « {name} » ¦ ✍ Një rrëfim për «{name}» ¦ ✍ Rakkont għal “{name}”
+👤 Une personne liée à « {name} » ¦ 👤 Një person i lidhur me «{name}» ¦ 👤 Persuna marbuta ma’ “{name}”
+Ce qui s’y est passé ¦ Çfarë ndodhi aty ¦ X’ġara hemmhekk
+Réglage « {name} » appliqué ¦ Cilësimi «{name}» u zbatua ¦ L-issettjar “{name}” ġie applikat
+Ce réglage est celui d’un autre outil (« {tool} ») : importe-le dans cet outil-là, pas dans la Maison. ¦ Ky cilësim i përket një mjeti tjetër («{tool}»): importoje te ai mjet, jo te Shtëpia. ¦ Dan l-issettjar huwa ta’ għodda oħra (“{tool}”): importah f’dik l-għodda, mhux fid-Dar.
+Un réglage s’appelle déjà « {name} ». Nom du réglage importé : ¦ Një cilësim quhet tashmë «{name}». Emri i cilësimit të importuar: ¦ Diġà hemm issettjar jismu “{name}”. Isem l-issettjar importat:
+{lines} et {texts}. ¦ {lines} dhe {texts}. ¦ {lines} u {texts}.
+Chaque trait devient un mur ; un contour fermé sur un calque « pièce / room » devient une pièce, nommée par le texte posé dedans. ¦ Çdo vijë bëhet mur; një kontur i mbyllur në një shtresë «pièce / room» bëhet dhomë, me emrin e tekstit të vendosur brenda. ¦ Kull linja ssir ħajt; kontorn magħluq fuq saff “pièce / room” isir kamra, imsemmija għat-test li hemm ġewwa.
+Pas repris : {what}. ¦ Nuk u mor: {what}. ¦ Mhux meħud: {what}.
+Cet étage ({name}), en plus de ce qui y est ¦ Ky kat ({name}), përveç asaj që ka tashmë ¦ Dan is-sular ({name}), flimkien ma’ dak li diġà fih
+{walls}, {rooms} et {texts} importés. ¦ {walls}, {rooms} dhe {texts} u importuan. ¦ {walls}, {rooms} u {texts} importati.
+🔁 Répéter cette fenêtre ¦ 🔁 Përsërit këtë dritare ¦ 🔁 Irrepeti din it-tieqa
+🔁 Répéter cette porte ¦ 🔁 Përsërit këtë derë ¦ 🔁 Irrepeti dan il-bieb
+Des copies le long du même mur, vers son autre bout (mur de {len}). ¦ Kopje përgjatë të njëjtit mur, drejt skajit tjetër (mur prej {len}). ¦ Kopji tul l-istess ħajt, lejn it-tarf l-ieħor (ħajt ta’ {len}).
+🔁 Répéter « {name} » ¦ 🔁 Përsërit «{name}» ¦ 🔁 Irrepeti “{name}”
+{name} (à {len}) ¦ {name} (në {len}) ¦ {name} (f’{len})
+{copies} de « {name} ». ¦ {copies} të «{name}». ¦ {copies} ta’ “{name}”.
+Vue 3D ¦ Pamja 3D ¦ Veduta 3D
+Au-dessus : {name} ¦ Sipër: {name} ¦ Fuq: {name}
+En dessous : {name} (cave, sous-sol) ¦ Poshtë: {name} (bodrum, nëntokë) ¦ Taħt: {name} (kantina, kantina taħt l-art)
+Reprendre les murs de « {name} » (et ses fenêtres) ¦ Merr muret e «{name}» (dhe dritaret e tij) ¦ Ħu l-ħitan ta’ “{name}” (u t-twieqi tiegħu)
+{name} ajouté ¦ {name} u shtua ¦ {name} miżjud
+Étages ¦ Katet ¦ Sulari
+{name} (murs repris) ¦ {name} (muret e marra) ¦ {name} (ħitan meħuda)
+Étage « {name} » supprimé ¦ Kati «{name}» u fshi ¦ Is-sular “{name}” tħassar
+Maison de {place} ¦ Shtëpia e {place} ¦ Dar ta’ {place}
+✓ Toit retiré ¦ ✓ Çatia u hoq ¦ ✓ Is-saqaf tneħħa
+✓ Toit ajouté : il se voit depuis « {name} », l’étage du haut ¦ ✓ Çatia u shtua: duket nga «{name}», kati i sipërm ¦ ✓ Is-saqaf żdied: jidher minn “{name}”, l-ogħla sular
+✓ Toit ajouté : il se pose sur les murs (aucun mur pour l’instant) ¦ ✓ Çatia u shtua: vendoset mbi muret (ende asnjë mur) ¦ ✓ Is-saqaf żdied: jitqiegħed fuq il-ħitan (għalissa l-ebda ħajt)
+✓ Toit ajouté ¦ ✓ Çatia u shtua ¦ ✓ Is-saqaf żdied
+Arrêt {n} de la visite guidée ¦ Ndalesa {n} e vizitës me guidë ¦ Waqfa {n} taż-żjara gwidata
+{label} — ouvrir la fiche ¦ {label} — hap kartelën ¦ {label} — iftaħ l-iskeda
+Habitant ¦ Banor ¦ Abitant
+{label} — époque : {era} ¦ {label} — periudha: {era} ¦ {label} — perjodu: {era}
+{what} sur {total} ¦ {what} nga {total} ¦ {what} minn {total}
+Supprimer la maison « {name} » ? ¦ Ta fshish shtëpinë «{name}»? ¦ Tħassar id-dar “{name}”?
+Supprimer la maison ¦ Fshi shtëpinë ¦ Ħassar id-dar
+🕰 époque : {name} ¦ 🕰 periudha: {name} ¦ 🕰 perjodu: {name}
+aucune époque choisie ¦ asnjë periudhë e zgjedhur ¦ l-ebda perjodu magħżul
+mètres ¦ metra ¦ metri
+centimètres ¦ centimetra ¦ ċentimetri
+millimètres ¦ milimetra ¦ millimetri
+pieds ¦ këmbë ¦ piedi
+toises (1,949 m) ¦ toises (1,949 m) ¦ toises (1.949 m)
+pieds du roi (32,48 cm) ¦ këmbë mbretërore (32,48 cm) ¦ piedi tar-re (32.48 cm)
+aunes de Paris (1,188 m) ¦ aunes të Parisit (1,188 m) ¦ aunes ta’ Pariġi (1.188 m)
+perches de Paris (18 pieds, 5,847 m) ¦ perches të Parisit (18 këmbë, 5,847 m) ¦ perches ta’ Pariġi (18-il pied, 5.847 m)
+perches royales (22 pieds, 7,146 m) ¦ perches mbretërore (22 këmbë, 7,146 m) ¦ perches irjali (22 pied, 7.146 m)
+pas (environ 75 cm) ¦ hapa (rreth 75 cm) ¦ passi (madwar 75 cm)
+Plâtre blanc ¦ Suva e bardhë ¦ Ġibs abjad
+Enduit à la chaux ¦ Suva me gëlqere ¦ Kisja tal-ġir
+Pierre apparente ¦ Gur i dukshëm ¦ Ġebel mikxuf
+Brique ¦ Tullë ¦ Briks
+Colombage (pans de bois) ¦ Skelet druri (mure me trarë) ¦ Qafas tal-injam (travi mikxufa)
+Lambris de bois ¦ Veshje druri ¦ Kisja tal-injam
+Papier peint ¦ Letër muri ¦ Wallpaper
+Carrelage ¦ Pllaka ¦ Madum
+Béton ¦ Beton ¦ Konkrit
+Torchis ¦ Qerpiç (baltë dhe kashtë) ¦ Torchis (tafal u tiben)
+Enduit, crépi ¦ Suva, llaç i ashpër ¦ Kisja, lixx ħoxn
+Pierre de taille ¦ Gur i gdhendur ¦ Ġebel maqtugħ
+Papier peint à rayures ¦ Letër muri me vija ¦ Wallpaper bl-istrixxi
+Papier peint à fleurs ¦ Letër muri me lule ¦ Wallpaper bil-fjuri
+Toile de Jouy ¦ Toile de Jouy ¦ Toile de Jouy
+Parquet ¦ Parket ¦ Parkè
+Parquet à bâtons rompus ¦ Parket kurriz peshku ¦ Parkè bix-xewka tal-ħuta
+Tomettes ¦ Pllaka balte gjashtëkëndore ¦ Madum tat-terrakotta eżagonali
+Carreaux de ciment ¦ Pllaka çimentoje ¦ Madum tas-siment
+Damier noir et blanc ¦ Shah bardhë e zi ¦ Ċess iswed u abjad
+Dalles de pierre ¦ Pllaka guri ¦ Ċangar tal-ġebel
+Terre battue ¦ Tokë e ngjeshur ¦ Art tal-ħamrija mgħaffġa
+Moquette, tapis ¦ Moketë, qilim ¦ Moquette, tapit
+Herbe (extérieur) ¦ Bar (jashtë) ¦ Ħaxix (barra)
+Gravier, cour ¦ Zhavorr, oborr ¦ Żrar, bitħa
+Bois clair (hêtre, pin) ¦ Dru i çelët (ah, pishë) ¦ Injam ċar (fagu, arżnu)
+Chêne ¦ Lis ¦ Ballut
+Noyer ¦ Arrë ¦ Ġewż
+Merisier ¦ Qershi e egër ¦ Ċirasa
+Bois foncé (ébène, bois ciré) ¦ Dru i errët (eben, dru i dyllosur) ¦ Injam skur (ebanu, injam bix-xama’)
+Bois peint ¦ Dru i lyer ¦ Injam miżbugħ
+Métal, acier ¦ Metal, çelik ¦ Metall, azzar
+Fonte, fer forgé ¦ Gizë, hekur i farkëtuar ¦ Ħadid fondut, ħadid maħdum
+Laiton, bronze, doré ¦ Tunxh, bronz, i praruar ¦ Ram isfar, bronż, indurat
+Zinc, fer-blanc ¦ Zink, teneqe ¦ Żingu, landa
+Pierre ¦ Gur ¦ Ġebel
+Marbre ¦ Mermer ¦ Irħam
+Grès, terre cuite ¦ Gres, terrakotë ¦ Gres, terrakotta
+Faïence, porcelaine, émail ¦ Fajancë, porcelan, smalt ¦ Majolika, porċellana, enamel
+Tissu ¦ Pëlhurë ¦ Drapp
+Velours ¦ Kadife ¦ Bellus
+Cuir ¦ Lëkurë ¦ Ġilda
+Osier, rotin ¦ Thupra shelgu, rattan ¦ Qasab, rattan
+Paille ¦ Kashtë ¦ Tiben
+Verre ¦ Xham ¦ Ħġieġ
+Sans pieds ¦ Pa këmbë ¦ Mingħajr saqajn
+Pieds droits ¦ Këmbë të drejta ¦ Saqajn dritti
+Pieds tournés ¦ Këmbë të tornuara ¦ Saqajn imdawra fit-tornu
+Pieds boules (miches) ¦ Këmbë topth ¦ Saqajn tondi
+Patins ¦ Rrëshqitëse ¦ Skejtjiet
+Roulettes ¦ Rrotëza ¦ Roti żgħar
+Barreaux de bois ¦ Shufra druri ¦ Vireg tal-injam
+Métal (barreaux fins) ¦ Metal (shufra të holla) ¦ Metall (vireg irqaq)
+Muret plein ¦ Mur i ulët i plotë ¦ Ħajt baxx mimli
+Métiers, ferme ¦ Zanate, fermë ¦ Snajja’, razzett
+Extérieur ¦ Jashtë ¦ Barra
+sa chambre ¦ dhoma e tij ¦ il-kamra tiegħu
+né ici ¦ i lindur këtu ¦ twieled hawn
+née ici ¦ e lindur këtu ¦ twieldet hawn
+y a vécu ¦ ka jetuar këtu ¦ għex hawn
+y est mort ¦ vdiq këtu ¦ miet hawn
+y est morte ¦ vdiq këtu ¦ mietet hawn
+les parents ¦ prindërit ¦ il-ġenituri
+les enfants ¦ fëmijët ¦ it-tfal
+locataire ¦ qiramarrës ¦ inkwilin
+fermier ¦ bujk me qira ¦ bidwi b’kera
+domestique ¦ shërbëtor ¦ qaddej
+servante ¦ shërbëtore ¦ qaddejja
+valet ¦ shërbëtor ¦ lakkè
+nourrice ¦ tajë ¦ nannarella
+pensionnaire ¦ pensionist ¦ pensjonant
+atelier ¦ punishte ¦ ħanut tax-xogħol
+boutique ¦ dyqan ¦ ħanut
+Nom de la maison ¦ Emri i shtëpisë ¦ Isem id-dar
+Réglages de l’aimant : grille, coins, angles, précision et 💾 réglages enregistrés ¦ Cilësimet e magnetit: rrjeta, qoshet, këndet, saktësia dhe 💾 cilësimet e ruajtura ¦ Issettjar tal-kalamita: grilja, kantunieri, angoli, preċiżjoni u 💾 issettjar issejvjat
+Réglages de l’aimant ¦ Cilësimet e magnetit ¦ Issettjar tal-kalamita
+📐 Un plan ancien, un cadastre, à calquer… ¦ 📐 Një plan i vjetër, një kadastër, për ta kopjuar… ¦ 📐 Pjanta antika, katasta, biex tikkopja…
+🖼️ Un objet en image (vue de dessus)… ¦ 🖼️ Një objekt si imazh (pamje nga lart)… ¦ 🖼️ Oġġett bħala stampa (veduta minn fuq)…
+🧊 Un objet 3D (OBJ, STL, glTF, GLB)… ¦ 🧊 Një objekt 3D (OBJ, STL, glTF, GLB)… ¦ 🧊 Oġġett 3D (OBJ, STL, glTF, GLB)…
+🏠 Une maison (fichier .json)… ¦ 🏠 Një shtëpi (skedar .json)… ¦ 🏠 Dar (fajl .json)…
+📐 Un plan DXF (AutoCAD, LibreCAD, architecte, notaire)… ¦ 📐 Një plan DXF (AutoCAD, LibreCAD, arkitekt, noter)… ¦ 📐 Pjanta DXF (AutoCAD, LibreCAD, perit, nutar)…
+Le plan (PNG, JPG, PDF, SVG, impression), la vue 3D, le fichier de la maison ¦ Plani (PNG, JPG, PDF, SVG, printim), pamja 3D, skedari i shtëpisë ¦ Il-pjanta (PNG, JPG, PDF, SVG, stampar), il-veduta 3D, il-fajl tad-dar
+Choisir, déplacer ¦ Zgjidh, zhvendos ¦ Agħżel, ċaqlaq
+Déplacer la vue, ou barre d’espace ¦ Zhvendos pamjen, ose tasti i hapësirës ¦ Ċaqlaq il-veduta, jew l-ispace bar
+Pièce rectangulaire, murs compris : glisser ¦ Dhomë drejtkëndore, me mure: tërhiq ¦ Kamra rettangolari, bil-ħitan: kaxkar
+Vide, trémie, double hauteur : glisser, sans murs ¦ Boshllëk, hapje, lartësi e dyfishtë: tërhiq, pa mure ¦ Vojt, fetħa, għoli doppju: kaxkar, mingħajr ħitan
+Mur : un clic par coin, double-clic ou Entrée pour finir ¦ Mur: një klik për çdo qoshe, klik i dyfishtë ose Enter për të mbaruar ¦ Ħajt: klikk għal kull kantuniera, klikk doppju jew Enter biex tispiċċa
+Pièce de forme libre, sans murs : un clic par coin ¦ Dhomë me formë të lirë, pa mure: një klik për çdo qoshe ¦ Kamra b’forma libera, mingħajr ħitan: klikk għal kull kantuniera
+Porte : clic sur un mur ¦ Derë: kliko mbi një mur ¦ Bieb: ikklikkja fuq ħajt
+Fenêtre : clic sur un mur ¦ Dritare: kliko mbi një mur ¦ Tieqa: ikklikkja fuq ħajt
+Cote, mesure : deux clics ¦ Kuotë, matje: dy klikime ¦ Kejl, qisien: żewġ klikks
+Étiquette à flèche : un clic sur le point, un clic où écrire ¦ Etiketë me shigjetë: një klik mbi pikën, një klik ku të shkruash ¦ Tikketta bi vleġġa: klikk fuq il-punt, klikk fejn tikteb
+Une autre époque de la maison en fantôme (celle du calque 🕰, sinon l’époque d’avant) : murs très transparents, arêtes en pointillés ¦ Një periudhë tjetër e shtëpisë si fantazmë (ajo e shtresës 🕰, përndryshe periudha e mëparshme): mure shumë të tejdukshme, brinjë me pika ¦ Perjodu ieħor tad-dar bħala fatat (dak tas-saff 🕰, inkella l-perjodu ta’ qabel): ħitan trasparenti ħafna, truf bit-tikki
+Deux clics sur la maison : la distance (et la hauteur entre les deux points) ¦ Dy klikime mbi shtëpi: largësia (dhe lartësia midis dy pikave) ¦ Żewġ klikks fuq id-dar: id-distanza (u l-għoli bejn iż-żewġ punti)
+Tous les étages ¦ Të gjitha katet ¦ Is-sulari kollha
+Murs coupés (voir dedans) ¦ Mure të prera (shiko brenda) ¦ Ħitan maqtugħa (ara ġewwa)
+Murs coupés ¦ Mure të prera ¦ Ħitan maqtugħa
+🕰 Autre époque ¦ 🕰 Periudhë tjetër ¦ 🕰 Perjodu ieħor
+Vue de dessus ¦ Pamje nga lart ¦ Veduta minn fuq
+Vue de face ¦ Pamje përpara ¦ Veduta minn quddiem
+Vue de côté ¦ Pamje anash ¦ Veduta mill-ġenb
+Dessus ¦ Sipër ¦ Fuq
+Face ¦ Përpara ¦ Quddiem
+Le soleil selon l’heure, la date et le lieu ; la nuit, les lampes ¦ Dielli sipas orës, datës dhe vendit; natën, llambat ¦ Ix-xemx skont il-ħin, id-data u l-post; bil-lejl, il-lampi
+Visiter la maison à hauteur d’yeux ¦ Vizito shtëpinë në lartësinë e syve ¦ Żur id-dar fl-għoli tal-għajnejn
+☀️ Lumière ¦ ☀️ Drita ¦ ☀️ Dawl
+🚶 Visiter ¦ 🚶 Vizito ¦ 🚶 Żur
+📏 Mesurer ¦ 📏 Mat ¦ 📏 Kejjel
+Plan 2D ¦ Plani 2D ¦ Pjanta 2D
+Toit ¦ Çatia ¦ Saqaf
+Cotes ¦ Kuotat ¦ Kejl
+Mobilier ¦ Mobiliet ¦ Għamara
+Propriétés de l’élément choisi ¦ Vetitë e elementit të zgjedhur ¦ Il-karatteristiċi tal-element magħżul
+Mobilier : meubles, portes, fenêtres à poser ¦ Mobiliet: orendi, dyer, dritare për t’u vendosur ¦ Għamara: għamara, bibien, twieqi biex tqiegħed
+L’étage affiché : niveaux, hauteur, sol ¦ Kati i shfaqur: nivelet, lartësia, dyshemeja ¦ Is-sular muri: livelli, għoli, art
+La maison : nom, époque, réglages généraux ¦ Shtëpia: emri, periudha, cilësimet e përgjithshme ¦ Id-dar: isem, perjodu, issettjar ġenerali
+la maison est fermée ¦ shtëpia është mbyllur ¦ id-dar magħluqa
+d’autres changements ont suivi : utilise ↶ dans la barre du haut ¦ pasuan ndryshime të tjera: përdor ↶ te shiriti i sipërm ¦ saru bidliet oħra wara: uża ↶ fil-bar ta’ fuq
+Aimanter : grille, coins et milieux des murs, angles (Alt pour s’en passer) ¦ Magnetizo: rrjeta, qoshet dhe mesi i mureve, këndet (Alt për ta shmangur) ¦ Manjetizza: grilja, kantunieri u nofs il-ħitan, angoli (Alt biex tgħaddi mingħajru)
+{walls} ajouté depuis {when} ¦ {walls} u shtua që nga {when} ¦ {walls} miżjud minn {when}
+{walls} ajoutés depuis {when} ¦ {walls} u shtuan që nga {when} ¦ {walls} miżjuda minn {when}
+{walls} disparu depuis {when} ¦ {walls} u zhduk që nga {when} ¦ {walls} sparixxa minn {when}
+{walls} disparus depuis {when} ¦ {walls} u zhdukën që nga {when} ¦ {walls} sparixxew minn {when}
+{walls} plus là en {when} ¦ {walls} nuk është më aty në {when} ¦ {walls} m’għadux hemm f’{when}
+{walls} ajouté en {when} ¦ {walls} u shtua në {when} ¦ {walls} miżjud f’{when}
+{walls} ajoutés en {when} ¦ {walls} u shtuan në {when} ¦ {walls} miżjuda f’{when}
+={n} souvenir : clic pour voir ¦ {n} kujtim: kliko për ta parë|{n} kujtime: kliko për t’i parë ¦ {n} tifkira: ikklikkja biex tara|{n} tifkiriet: ikklikkja biex tara|{n} tifkiriet: ikklikkja biex tara|{n} tifkira: ikklikkja biex tara|{n} tifkira: ikklikkja biex tara
+={n} souvenirs : clic pour voir ¦ {n} kujtim: kliko për ta parë|{n} kujtime: kliko për t’i parë ¦ {n} tifkira: ikklikkja biex tara|{n} tifkiriet: ikklikkja biex tara|{n} tifkiriet: ikklikkja biex tara|{n} tifkira: ikklikkja biex tara|{n} tifkira: ikklikkja biex tara
+Glisser : la pointe de la flèche ¦ Tërhiq: maja e shigjetës ¦ Kaxkar: il-ponta tal-vleġġa
+Voir un autre étage, ou le même étage à une autre époque, en transparence ¦ Shiko një kat tjetër, ose të njëjtin kat në një periudhë tjetër, me tejdukshmëri ¦ Ara sular ieħor, jew l-istess sular f’perjodu ieħor, bi trasparenza
+Calque d’un autre étage ou d’une autre époque ¦ Shtresë e një kati tjetër ose e një periudhe tjetër ¦ Saff ta’ sular ieħor jew ta’ perjodu ieħor
+Calque d’un autre étage ou d’une époque ¦ Shtresë e një kati tjetër ose e një periudhe ¦ Saff ta’ sular ieħor jew ta’ perjodu
+👻 Calque : non ¦ 👻 Shtresa: jo ¦ 👻 Saff: le
+👻 Dessous ¦ 👻 Poshtë ¦ 👻 Taħt
+👻 Dessus ¦ 👻 Sipër ¦ 👻 Fuq
+👻 Les deux ¦ 👻 Të dyja ¦ 👻 It-tnejn
+🕰 Époque d’avant ¦ 🕰 Periudha e mëparshme ¦ 🕰 Il-perjodu ta’ qabel
+🕰 Époque d’après ¦ 🕰 Periudha pasardhëse ¦ 🕰 Il-perjodu ta’ wara
+🕰 Choisir une époque… ¦ 🕰 Zgjidh një periudhë… ¦ 🕰 Agħżel perjodu…
+Ajouter un étage ou une cave ¦ Shto një kat ose një bodrum ¦ Żid sular jew kantina
+Les étages : gérer, ajouter, dupliquer, supprimer ¦ Katet: menaxho, shto, dyfisho, fshi ¦ Is-sulari: immaniġġja, żid, idduplika, ħassar
+Plus d’actions sur les étages ¦ Më shumë veprime për katet ¦ Aktar azzjonijiet fuq is-sulari
+Chercher : lit, poêle, rouet… ¦ Kërko: shtrat, sobë, çikrik… ¦ Fittex: sodda, stufa, magħżel…
+Mes objets ¦ Objektet e mia ¦ L-oġġetti tiegħi
+Aucun objet importé pour l’instant ¦ Ende asnjë objekt i importuar ¦ Għalissa l-ebda oġġett importat
+« ⤒ Importer » (en haut) un fichier 3D (OBJ, STL, glTF, GLB) ou une image. ¦ «⤒ Importo» (lart) një skedar 3D (OBJ, STL, glTF, GLB) ose një imazh. ¦ “⤒ Importa” (fuq) fajl 3D (OBJ, STL, glTF, GLB) jew stampa.
+Clic sur un objet : il se pose au milieu de la vue ; glisse-le ensuite à sa place (R ou la poignée ronde pour tourner). ¦ Kliko mbi një objekt: vendoset në mes të pamjes; pastaj tërhiqe në vendin e tij (R ose doreza e rrumbullakët për ta rrotulluar). ¦ Ikklikkja fuq oġġett: jitqiegħed f’nofs il-veduta; imbagħad kaxkru f’postu (R jew il-manku tond biex iddawru).
+Nom de l’étage ¦ Emri i katit ¦ Isem is-sular
+Épaisseur des nouveaux murs ¦ Trashësia e mureve të reja ¦ Il-ħxuna tal-ħitan ġodda
+Épaisseur des planchers ¦ Trashësia e dyshemeve ¦ Il-ħxuna tal-art
+Pas de la grille ¦ Hapi i rrjetës ¦ Il-pass tal-grilja
+⧉ Dupliquer cet étage (murs) ¦ ⧉ Dyfisho këtë kat (muret) ¦ ⧉ Idduplika dan is-sular (ħitan)
+Supprimer l’étage ¦ Fshi katin ¦ Ħassar is-sular
+Cotes des murs ¦ Kuotat e mureve ¦ Il-kejl tal-ħitan
+Cotes d’ensemble ¦ Kuotat e përgjithshme ¦ Il-kejl ġenerali
+Tableau des pièces sur le plan ¦ Tabela e dhomave në plan ¦ Tabella tal-kmamar fuq il-pjanta
+Cartouche (nom, lieu, époque, étage) ¦ Kartusha (emri, vendi, periudha, kati) ¦ Kartuċ (isem, post, perjodu, sular)
+Affichage sombre (dessin technique) ¦ Pamje e errët (vizatim teknik) ¦ Wiri skur (disinn tekniku)
+Plafond (visite 3D) ¦ Tavani (vizita 3D) ¦ Saqaf ta’ ġewwa (żjara 3D)
+Aucun (ouvert) ¦ Asnjë (i hapur) ¦ Xejn (miftuħ)
+Plafond uni ¦ Tavan i lëmuar ¦ Saqaf lixx
+Poutres apparentes ¦ Trarë të dukshëm ¦ Travi mikxufa
+Couleur du plafond ¦ Ngjyra e tavanit ¦ Il-kulur tas-saqaf
+Légende : ― ajouté · ┄ disparu ¦ Legjenda: ― u shtua · ┄ u zhduk ¦ Leġġenda: ― miżjud · ┄ sparixxa
+Transparence du calque ¦ Tejdukshmëria e shtresës ¦ It-trasparenza tas-saff
+📐 Plan ancien, cadastre ¦ 📐 Plan i vjetër, kadastër ¦ 📐 Pjanta antika, katasta
+Un cadastre napoléonien, un plan ancien, un croquis : pose-le en fond, mets-le à l’échelle, puis décalque les murs par-dessus. ¦ Një kadastër napoleonian, një plan i vjetër, një skicë: vendose në sfond, vendose në shkallë, pastaj kopjo muret sipër. ¦ Katasta Napoleonika, pjanta antika, abbozz: poġġih fl-isfond, poġġih fl-iskala, imbagħad ikkopja l-ħitan minn fuqu.
+🖼 Choisir l’image… ¦ 🖼 Zgjidh imazhin… ¦ 🖼 Agħżel l-istampa…
+Le mettre sous cet étage ¦ Vendose nën këtë kat ¦ Poġġih taħt dan is-sular
+Visible ¦ I dukshëm ¦ Viżibbli
+🔒 Verrouillé ¦ 🔒 I kyçur ¦ 🔒 Imsakkar
+📏 Mettre à l’échelle ¦ 📏 Vendos në shkallë ¦ 📏 Poġġi fl-iskala
+Deux clics le long d’un mur de l’image : il devient droit (horizontal ou vertical) ¦ Dy klikime përgjatë një muri të imazhit: bëhet i drejtë (horizontal ose vertikal) ¦ Żewġ klikks tul ħajt tal-istampa: isir dritt (orizzontali jew vertikali)
+✓ Fin du décalque ¦ ✓ Fundi i kopjimit ¦ ✓ Tmiem l-ikkupjar
+✏️ Décalquer les murs ¦ ✏️ Kopjo muret ¦ ✏️ Ikkopja l-ħitan
+🖼 Changer d’image… ¦ 🖼 Ndrysho imazhin… ¦ 🖼 Ibdel l-istampa…
+🏠 Combles (sous le toit) ¦ 🏠 Papafingo (nën çati) ¦ 🏠 Attic (taħt is-saqaf)
+Pour l’étage le plus haut, sous un toit en pente (onglet Étage → 🏠 Toit) : le plafond suit alors la pente, et la hauteur sous plafond se lit partout sur le plan. ¦ Për katin më të lartë, nën një çati të pjerrët (skeda Kati → 🏠 Çatia): tavani ndjek pjerrësinë dhe lartësia nën tavan lexohet kudo në plan. ¦ Għall-ogħla sular, taħt saqaf inklinat (tab Sular → 🏠 Saqaf): is-saqaf ta’ ġewwa jsegwi l-inklinazzjoni, u l-għoli taħt is-saqaf jinqara kullimkien fuq il-pjanta.
+Combles : le plafond suit la pente du toit ¦ Papafingo: tavani ndjek pjerrësinë e çatisë ¦ Attic: is-saqaf ta’ ġewwa jsegwi l-inklinazzjoni tas-saqaf
+Hauteur des murs sous le toit ¦ Lartësia e mureve nën çati ¦ L-għoli tal-ħitan taħt is-saqaf
+🏠 Toit (vue 3D) ¦ 🏠 Çatia (pamja 3D) ¦ 🏠 Saqaf (veduta 3D)
+Un toit sur l’étage le plus haut ¦ Një çati mbi katin më të lartë ¦ Saqaf fuq l-ogħla sular
+Deux pans (pignons) ¦ Dy faqe (frontone) ¦ Żewġ naħat (ġmiemel)
+Quatre pans (croupes) ¦ Katër faqe (kulmë të pjerrët) ¦ Erba’ naħat (saqaf b’erba’ żbalji)
+Pavillon (pointe) ¦ Piramidal (majë) ¦ Piramidali (bil-ponta)
+Un pan (appentis) ¦ Një faqe (strehë) ¦ Naħa waħda (lean-to)
+Mansardé ¦ Mansardë ¦ Mansard
+Plat (toit-terrasse) ¦ I sheshtë (tarracë) ¦ Ċatt (bejt)
+Faîtage ¦ Kulmi ¦ Il-quċċata
+Dans la longueur ¦ Për së gjati ¦ Fit-tul
+Dans la largeur ¦ Për së gjeri ¦ Fil-wisa’
+Est – ouest ¦ Lindje – perëndim ¦ Lvant – punent
+Nord – sud ¦ Veri – jug ¦ Tramuntana – nofsinhar
+Débord ¦ Zgjatja e strehës ¦ Ħarġa
+Couverture ¦ Mbulesa ¦ Kisja tas-saqaf
+Tuiles canal ¦ Tjegulla kanal ¦ Madum tal-kanal
+Tuiles plates ¦ Tjegulla të sheshta ¦ Madum ċatt
+Tuiles vernissées ¦ Tjegulla të smaltuara ¦ Madum ilellex
+Ardoises ¦ Rrasa ¦ Lavanja
+Lauzes (pierre) ¦ Rrasa guri ¦ Ċangar tal-ġebel
+Chaume ¦ Kashtë ¦ Tiben
+Zinc ¦ Zink ¦ Żingu
+Bac acier ¦ Llamarinë çeliku ¦ Folji tal-azzar
+Pignons, acrotères ¦ Frontone, parapete ¦ Ġmiemel, parapetti
+Acrotère (toit plat) ¦ Parapet (çati e sheshtë) ¦ Parapett (saqaf ċatt)
+Une cheminée ¦ Një oxhak ¦ Ċumnija
+Place de la cheminée ¦ Vendi i oxhakut ¦ Il-post taċ-ċumnija
+Gouttières et descentes ¦ Ulluqe dhe gypa shkarkimi ¦ Kanali u pajpijiet tal-ilma
+Un toit par aile (maison en L, en T, en U) ¦ Një çati për çdo krah (shtëpi në L, në T, në U) ¦ Saqaf għal kull ala (dar f’forma ta’ L, T, U)
+Verrières, lanterneaux et édicules ¦ Xhamllëqe, dritëza dhe dalje në çati ¦ Ħġieġ tas-saqaf, lanterni u kmamar tal-bejt
+Fenêtres de toit et lucarnes ¦ Dritare çatie dhe frëngji ¦ Twieqi tas-saqaf u dormers
+🪟 Verrière ¦ 🪟 Xhamllëk ¦ 🪟 Ħġieġ tas-saqaf
+🚪 Édicule (sortie sur le toit) ¦ 🚪 Dalje në çati ¦ 🚪 Kamra tal-bejt (ħruġ għas-saqaf)
+🔆 Lanterneau ¦ 🔆 Dritëz ¦ 🔆 Lanterna
+🪟 Fenêtre de toit ¦ 🪟 Dritare çatie ¦ 🪟 Tieqa tas-saqaf
+🏠 Lucarne ¦ 🏠 Frëngji ¦ 🏠 Dormer
+🏚 Chien-assis ¦ 🏚 Frëngji me dy faqe ¦ 🏚 Dormer b’saqaf ta’ żewġ naħat
+Lucarne ¦ Frëngji ¦ Dormer
+Aile ¦ Krahu ¦ Ala
+Arrière ¦ Prapa ¦ Wara
+En travers ¦ Tërthor ¦ Mill-wisa’
+Vers l’égout ¦ Drejt strehës ¦ Lejn il-kanal
+Profondeur ¦ Thellësia ¦ Fond
+＋ Verrière ¦ ＋ Xhamllëk ¦ ＋ Ħġieġ tas-saqaf
+＋ Édicule ¦ ＋ Dalje në çati ¦ ＋ Kamra tal-bejt
+＋ Lanterneau ¦ ＋ Dritëz ¦ ＋ Lanterna
+＋ Fenêtre de toit ¦ ＋ Dritare çatie ¦ ＋ Tieqa tas-saqaf
+＋ Lucarne ¦ ＋ Frëngji ¦ ＋ Dormer
+＋ Chien-assis ¦ ＋ Frëngji me dy faqe ¦ ＋ Dormer b’saqaf ta’ żewġ naħat
+Rien pour l’instant : ajoute des habitants et des recensements (plus bas). ¦ Ende asgjë: shto banorë dhe regjistrime të popullsisë (më poshtë). ¦ Għalissa xejn: żid abitanti u ċensimenti (aktar ’l isfel).
+📍 Lieu et époque ¦ 📍 Vendi dhe periudha ¦ 📍 Post u perjodu
+Époque (en quelques mots) ¦ Periudha (me pak fjalë) ¦ Perjodu (fi ftit kliem)
+Aucun souvenir posé pour l’instant ¦ Ende asnjë kujtim i vendosur ¦ Għalissa l-ebda tifkira mqiegħda
+Clic sur un meuble ou une pièce, puis « 🔗 Relier un souvenir » : une photo, un récit, une personne, un souvenir de famille. ¦ Kliko mbi një mobilie ose një dhomë, pastaj «🔗 Lidh një kujtim»: një foto, një rrëfim, një person, një kujtim familjar. ¦ Ikklikkja fuq għamara jew kamra, imbagħad “🔗 Għaqqad tifkira”: ritratt, rakkont, persuna, tifkira tal-familja.
+☀️ Orientation et lumière ¦ ☀️ Orientimi dhe drita ¦ ☀️ Orjentazzjoni u dawl
+Nord du plan ¦ Veriu i planit ¦ It-tramuntana tal-pjanta
+Heure ¦ Ora ¦ Ħin
+Jour ¦ Dita ¦ Jum
+Jour de l’année ¦ Dita e vitit ¦ Jum tas-sena
+Hauteur des yeux pour la visite ¦ Lartësia e syve për vizitën ¦ L-għoli tal-għajnejn għaż-żjara
+👥 Les habitants ¦ 👥 Banorët ¦ 👥 L-abitanti
+rôle, années (né ici, 1880–1920…) ¦ roli, vitet (i lindur këtu, 1880–1920…) ¦ rwol, snin (twieled hawn, 1880–1920…)
+＋ Ajouter un habitant… ¦ ＋ Shto një banor… ¦ ＋ Żid abitant…
+📋 Les recensements ¦ 📋 Regjistrimet e popullsisë ¦ 📋 Iċ-ċensimenti
+Ouvrir la fiche où est ce recensement ¦ Hap kartelën ku ndodhet ky regjistrim ¦ Iftaħ l-iskeda fejn jinsab dan iċ-ċensiment
+L’époque de la maison qui correspond à ce recensement ¦ Periudha e shtëpisë që përputhet me këtë regjistrim ¦ Il-perjodu tad-dar li jaqbel ma’ dan iċ-ċensiment
+— époque — ¦ — periudha — ¦ — perjodu —
+Aucun recensement rattaché. ¦ Asnjë regjistrim i popullsisë i lidhur. ¦ L-ebda ċensiment marbut.
+＋ Ajouter un recensement… ¦ ＋ Shto një regjistrim të popullsisë… ¦ ＋ Żid ċensiment…
+🕰 Les époques ¦ 🕰 Periudhat ¦ 🕰 Il-perjodi
+Montrer la maison à cette époque ¦ Shfaq shtëpinë në këtë periudhë ¦ Uri d-dar f’dan il-perjodu
+Renommer, changer la date, rattacher à un recensement ¦ Riemërto, ndrysho datën, lidh me një regjistrim ¦ Ibdel l-isem, ibdel id-data, għaqqad ma’ ċensiment
+Supprimer cette époque ¦ Fshi këtë periudhë ¦ Ħassar dan il-perjodu
+La maison a changé avec le temps ? Crée une époque par année ou par date (1850, 1900, 1936…), chacune avec son plan : tu la verras évoluer, et chacune peut être rattachée à un recensement. ¦ Shtëpia ka ndryshuar me kohën? Krijo një periudhë për çdo vit ose datë (1850, 1900, 1936…), secila me planin e saj: do ta shohësh si ndryshon, dhe secila mund të lidhet me një regjistrim të popullsisë. ¦ Id-dar inbidlet maż-żmien? Oħloq perjodu għal kull sena jew data (1850, 1900, 1936…), kull wieħed bil-pjanta tiegħu: tara kif tevolvi, u kull wieħed jista’ jiġi marbut ma’ ċensiment.
+＋ Nouvelle époque (copie de celle-ci) ¦ ＋ Periudhë e re (kopje e kësaj) ¦ ＋ Perjodu ġdid (kopja ta’ dan)
+＋ Nouvelle époque (copie de celle-ci)… ¦ ＋ Periudhë e re (kopje e kësaj)… ¦ ＋ Perjodu ġdid (kopja ta’ dan)…
+▶ Voir évoluer ¦ ▶ Shiko si ndryshon ¦ ▶ Ara kif tevolvi
+⏹ Arrêter ¦ ⏹ Ndalo ¦ ⏹ Waqqaf
+📖 Histoire de la maison ¦ 📖 Historia e shtëpisë ¦ 📖 L-istorja tad-dar
+Histoire de la maison ¦ Historia e shtëpisë ¦ L-istorja tad-dar
+Construite par…, agrandie en…, vendue en… ¦ Ndërtuar nga…, zgjeruar në…, shitur në… ¦ Mibnija minn…, imkabbra fl-…, mibjugħa fl-…
+Clic sur un mur, une pièce, un meuble : ses réglages viennent ici (matériau, couleur, taille, nom, souvenirs). Molette : zoomer ; barre d’espace : déplacer la vue ; Alt : sans aimant. ¦ Kliko mbi një mur, një dhomë, një mobilie: cilësimet e saj shfaqen këtu (materiali, ngjyra, madhësia, emri, kujtimet). Rrota: zmadhim; tasti i hapësirës: zhvendos pamjen; Alt: pa magnet. ¦ Ikklikkja fuq ħajt, kamra, għamara: l-issettjar tagħha jidher hawn (materjal, kulur, daqs, isem, tifkiriet). Rota tal-maws: żum; space bar: ċaqlaq il-veduta; Alt: mingħajr kalamita.
+Cet étage ¦ Ky kat ¦ Dan is-sular
+={n} pièce ¦ {n} dhomë|{n} dhoma ¦ {n} kamra|{n} kmamar|{n} kmamar|{n} kamra|{n} kamra
+={n} pièces ¦ {n} dhomë|{n} dhoma ¦ {n} kamra|{n} kmamar|{n} kmamar|{n} kamra|{n} kamra
+={n} étage ¦ {n} kat|{n} kate ¦ {n} sular|{n} sulari|{n} sulari|{n} sular|{n} sular
+={n} étages ¦ {n} kat|{n} kate ¦ {n} sular|{n} sulari|{n} sulari|{n} sular|{n} sular
+={n} habitant ¦ {n} banor|{n} banorë ¦ {n} abitant|{n} abitanti|{n} abitanti|{n} abitant|{n} abitant
+={n} habitants ¦ {n} banor|{n} banorë ¦ {n} abitant|{n} abitanti|{n} abitanti|{n} abitant|{n} abitant
+={n} époque ¦ {n} periudhë|{n} periudha ¦ {n} perjodu|{n} perjodi|{n} perjodi|{n} perjodu|{n} perjodu
+={n} époques ¦ {n} periudhë|{n} periudha ¦ {n} perjodu|{n} perjodi|{n} perjodi|{n} perjodu|{n} perjodu
+={n} arrêt ¦ {n} ndalesë|{n} ndalesa ¦ {n} waqfa|{n} waqfiet|{n} waqfiet|{n} waqfa|{n} waqfa
+={n} arrêts ¦ {n} ndalesë|{n} ndalesa ¦ {n} waqfa|{n} waqfiet|{n} waqfiet|{n} waqfa|{n} waqfa
+={n} modèle ¦ {n} model|{n} modele ¦ {n} mudell|{n} mudelli|{n} mudelli|{n} mudell|{n} mudell
+={n} modèles ¦ {n} model|{n} modele ¦ {n} mudell|{n} mudelli|{n} mudelli|{n} mudell|{n} mudell
+={n} recensement rattaché ¦ {n} regjistrim i popullsisë i lidhur|{n} regjistrime të popullsisë të lidhura ¦ {n} ċensiment marbut|{n} ċensimenti marbuta|{n} ċensimenti marbuta|{n} ċensiment marbut|{n} ċensiment marbut
+={n} recensements rattachés ¦ {n} regjistrim i popullsisë i lidhur|{n} regjistrime të popullsisë të lidhura ¦ {n} ċensiment marbut|{n} ċensimenti marbuta|{n} ċensimenti marbuta|{n} ċensiment marbut|{n} ċensiment marbut
+={n} habitant ajouté depuis le recensement. ¦ {n} banor u shtua nga regjistrimi i popullsisë.|{n} banorë u shtuan nga regjistrimi i popullsisë. ¦ {n} abitant miżjud miċ-ċensiment.|{n} abitanti miżjuda miċ-ċensiment.|{n} abitanti miżjuda miċ-ċensiment.|{n} abitant miżjud miċ-ċensiment.|{n} abitant miżjud miċ-ċensiment.
+={n} habitants ajoutés depuis le recensement. ¦ {n} banor u shtua nga regjistrimi i popullsisë.|{n} banorë u shtuan nga regjistrimi i popullsisë. ¦ {n} abitant miżjud miċ-ċensiment.|{n} abitanti miżjuda miċ-ċensiment.|{n} abitanti miżjuda miċ-ċensiment.|{n} abitant miżjud miċ-ċensiment.|{n} abitant miżjud miċ-ċensiment.
+={n} trémie ouverte ¦ {n} hapje shkalle e hapur|{n} hapje shkalle të hapura ¦ {n} fetħa miftuħa|{n} fetħiet miftuħa|{n} fetħiet miftuħa|{n} fetħa miftuħa|{n} fetħa miftuħa
+={n} trémies ouvertes ¦ {n} hapje shkalle e hapur|{n} hapje shkalle të hapura ¦ {n} fetħa miftuħa|{n} fetħiet miftuħa|{n} fetħiet miftuħa|{n} fetħa miftuħa|{n} fetħa miftuħa
+={n} étage supprimé ¦ {n} kat u fshi|{n} kate u fshinë ¦ {n} sular imħassar|{n} sulari mħassra|{n} sulari mħassra|{n} sular imħassar|{n} sular imħassar
+={n} étages supprimés ¦ {n} kat u fshi|{n} kate u fshinë ¦ {n} sular imħassar|{n} sulari mħassra|{n} sulari mħassra|{n} sular imħassar|{n} sular imħassar
+={n} copie seulement : le mur est trop court pour plus. ¦ Vetëm {n} kopje: muri është shumë i shkurtër për më shumë.|Vetëm {n} kopje: muri është shumë i shkurtër për më shumë. ¦ {n} kopja biss: il-ħajt qasir wisq għal aktar.|{n} kopji biss: il-ħajt qasir wisq għal aktar.|{n} kopji biss: il-ħajt qasir wisq għal aktar.|{n} kopja biss: il-ħajt qasir wisq għal aktar.|{n} kopja biss: il-ħajt qasir wisq għal aktar.
+={n} copies seulement : le mur est trop court pour plus. ¦ Vetëm {n} kopje: muri është shumë i shkurtër për më shumë.|Vetëm {n} kopje: muri është shumë i shkurtër për më shumë. ¦ {n} kopja biss: il-ħajt qasir wisq għal aktar.|{n} kopji biss: il-ħajt qasir wisq għal aktar.|{n} kopji biss: il-ħajt qasir wisq għal aktar.|{n} kopja biss: il-ħajt qasir wisq għal aktar.|{n} kopja biss: il-ħajt qasir wisq għal aktar.
+={n} lampe allumée ¦ {n} llambë e ndezur|{n} llamba të ndezura ¦ {n} lampa mixgħula|{n} lampi mixgħula|{n} lampi mixgħula|{n} lampa mixgħula|{n} lampa mixgħula
+={n} lampes allumées ¦ {n} llambë e ndezur|{n} llamba të ndezura ¦ {n} lampa mixgħula|{n} lampi mixgħula|{n} lampi mixgħula|{n} lampa mixgħula|{n} lampa mixgħula
+={n} refusé : {list} ¦ {n} u refuzua: {list}|{n} u refuzuan: {list} ¦ {n} miċħud: {list}|{n} miċħuda: {list}|{n} miċħuda: {list}|{n} miċħud: {list}|{n} miċħud: {list}
+={n} refusés : {list} ¦ {n} u refuzua: {list}|{n} u refuzuan: {list} ¦ {n} miċħud: {list}|{n} miċħuda: {list}|{n} miċħuda: {list}|{n} miċħud: {list}|{n} miċħud: {list}
+=✓ {n} image : à glisser dans le 🎬 Montage pour en faire un film (avec les textes en voix off). ¦ ✓ {n} imazh: tërhiqe te 🎬 Montazhi për të bërë një film (me tekstet si zë jashtë kamere).|✓ {n} imazhe: tërhiqi te 🎬 Montazhi për të bërë një film (me tekstet si zë jashtë kamere). ¦ ✓ {n} stampa: kaxkarha fil-🎬 Immuntar biex tagħmel film (bit-testi bħala voice-over).|✓ {n} stampi: kaxkarhom fil-🎬 Immuntar biex tagħmel film (bit-testi bħala voice-over).|✓ {n} stampi: kaxkarhom fil-🎬 Immuntar biex tagħmel film (bit-testi bħala voice-over).|✓ {n} stampa: kaxkarhom fil-🎬 Immuntar biex tagħmel film (bit-testi bħala voice-over).|✓ {n} stampa: kaxkarhom fil-🎬 Immuntar biex tagħmel film (bit-testi bħala voice-over).
+=✓ {n} images : à glisser dans le 🎬 Montage pour en faire un film (avec les textes en voix off). ¦ ✓ {n} imazh: tërhiqe te 🎬 Montazhi për të bërë një film (me tekstet si zë jashtë kamere).|✓ {n} imazhe: tërhiqi te 🎬 Montazhi për të bërë një film (me tekstet si zë jashtë kamere). ¦ ✓ {n} stampa: kaxkarha fil-🎬 Immuntar biex tagħmel film (bit-testi bħala voice-over).|✓ {n} stampi: kaxkarhom fil-🎬 Immuntar biex tagħmel film (bit-testi bħala voice-over).|✓ {n} stampi: kaxkarhom fil-🎬 Immuntar biex tagħmel film (bit-testi bħala voice-over).|✓ {n} stampa: kaxkarhom fil-🎬 Immuntar biex tagħmel film (bit-testi bħala voice-over).|✓ {n} stampa: kaxkarhom fil-🎬 Immuntar biex tagħmel film (bit-testi bħala voice-over).
+🔗 Relier un souvenir… ¦ 🔗 Lidh një kujtim… ¦ 🔗 Għaqqad tifkira…
+Angle (°, 0 = vers la droite, 90 = vers le haut) ¦ Këndi (°, 0 = djathtas, 90 = lart) ¦ Angolu (°, 0 = lejn il-lemin, 90 = ’il fuq)
+Début X ¦ Fillimi X ¦ Bidu X
+Début Y ¦ Fillimi Y ¦ Bidu Y
+Fin X ¦ Fundi X ¦ Tmiem X
+Fin Y ¦ Fundi Y ¦ Tmiem Y
+Hauteur (cm, vide = celle de l’étage) ¦ Lartësia (cm, bosh = ajo e katit) ¦ Għoli (cm, vojt = dak tas-sular)
+⌒ Courbure (flèche) ¦ ⌒ Lakimi (shigjeta) ¦ ⌒ Kurvatura (għoli tal-ark)
+✂ Couper en deux ¦ ✂ Prije në dy ¦ ✂ Aqsam fi tnejn
+Revêtement ¦ Veshja ¦ Kisja
+Pareil pour : ¦ Njësoj për: ¦ L-istess għal:
+tout l’étage ¦ gjithë katin ¦ is-sular kollu
+toute la maison ¦ gjithë shtëpinë ¦ id-dar kollha
+Couleur et texture ¦ Ngjyra dhe tekstura ¦ Kulur u tessut
+Taille du motif ¦ Madhësia e motivit ¦ Daqs tad-disinn
+Allège (cm du sol) ¦ Parvazi (cm nga dyshemeja) ¦ Ħajt taħt it-tieqa (cm mill-art)
+Position sur le mur ¦ Pozicioni në mur ¦ Pożizzjoni fuq il-ħajt
+Du début du mur ¦ Nga fillimi i murit ¦ Mill-bidu tal-ħajt
+Jusqu’à la fin ¦ Deri në fund ¦ Sat-tarf
+🚪 Genre et ouverture ¦ 🚪 Lloji dhe hapja ¦ 🚪 Tip u ftuħ
+Porte ¦ Derë ¦ Bieb
+Porte double ¦ Derë dyshe ¦ Bieb doppju
+Porte d’entrée ¦ Dera e hyrjes ¦ Bieb ta’ barra
+Passage, arche ¦ Kalim, hark ¦ Passaġġ, arkata
+Porte de grange ¦ Derë hambari ¦ Bieb tal-maqjel
+Une rangée de fenêtres (ou de portes) le long du mur ¦ Një rresht dritaresh (ose dyersh) përgjatë murit ¦ Ringiela twieqi (jew bibien) tul il-ħajt
+🔁 Répéter… ¦ 🔁 Përsërit… ¦ 🔁 Irrepeti…
+↔ Sens d’ouverture ¦ ↔ Drejtimi i hapjes ¦ ↔ Direzzjoni tal-ftuħ
+▨ Plancher : plein ou vide ¦ ▨ Dyshemeja: e plotë ose bosh ¦ ▨ Art: mimlija jew vojta
+Pas de plancher : vide sur l’étage du dessous ¦ Pa dysheme: bosh mbi katin poshtë ¦ L-ebda art: vojt fuq is-sular ta’ taħt
+Garde-corps ¦ Parmak ¦ Poġġaman
+Garde-corps autour ¦ Parmak përreth ¦ Poġġaman madwar
+Ajoute l’étage du dessus s’il manque, une mezzanine sur une partie de cette pièce, le vide sur le reste, son garde-corps et l’escalier ¦ Shton katin sipër nëse mungon, një mezaninë mbi një pjesë të kësaj dhome, boshllëkun mbi pjesën tjetër, parmakun e saj dhe shkallën ¦ Iżżid is-sular ta’ fuq jekk nieqes, mezzanin fuq parti minn din il-kamra, il-vojt fuq il-bqija, il-poġġaman tiegħu u t-taraġ
+🏗 Mezzanine ouverte sur cette pièce ¦ 🏗 Mezaninë e hapur mbi këtë dhomë ¦ 🏗 Mezzanin miftuħ fuq din il-kamra
+Mezzanine ouverte ¦ Mezaninë e hapur ¦ Mezzanin miftuħ
+🔗 Les murs et les meubles suivent la pièce ¦ 🔗 Muret dhe mobiliet ndjekin dhomën ¦ 🔗 Il-ħitan u l-għamara jsegwu l-kamra
+🧱 Murs de la pièce ¦ 🧱 Muret e dhomës ¦ 🧱 Il-ħitan tal-kamra
+Sol ¦ Dyshemeja ¦ Art
+Salle commune ¦ Dhoma e përbashkët ¦ Kamra komuni
+Chambre des parents ¦ Dhoma e prindërve ¦ Il-kamra tal-ġenituri
+Chambre des enfants ¦ Dhoma e fëmijëve ¦ Il-kamra tat-tfal
+Salle à manger ¦ Dhoma e ngrënies ¦ Kamra tal-ikel
+Grenier ¦ Papafingo ¦ Attic
+Cellier ¦ Qiler ¦ Maħżen tal-ikel
+Étable ¦ Stallë ¦ Stalla
+Grange ¦ Hambar ¦ Maqjel
+Fournil ¦ Furra e bukës ¦ Forn tal-ħobż
+Boutique ¦ Dyqan ¦ Ħanut
+Couloir ¦ Korridor ¦ Kuritur
+Cour ¦ Oborr ¦ Bitħa
+Jardin ¦ Kopsht ¦ Ġnien
+Potager ¦ Kopsht perimesh ¦ Ġnien tal-ħxejjex
+Basse-cour ¦ Kotec ¦ Ħawlija tat-tiġieġ
+🕯 Souvenirs de la pièce ¦ 🕯 Kujtimet e dhomës ¦ 🕯 It-tifkiriet tal-kamra
+La chambre où est née Marie en 1890 ; la veillée… ¦ Dhoma ku lindi Marie në 1890; mbrëmjet rreth zjarrit… ¦ Il-kamra fejn twieldet Marie fl-1890; is-serati madwar in-nar…
+Les personnes de la pièce ¦ Personat e dhomës ¦ Il-persuni tal-kamra
+Leurs années dans cette pièce ¦ Vitet e tyre në këtë dhomë ¦ Is-snin tagħhom f’din il-kamra
+années : 1890 – 1925 ¦ vitet: 1890 – 1925 ¦ snin: 1890 – 1925
+🪜 Escalier ¦ 🪜 Shkallë ¦ 🪜 Taraġ
+✓ confortable (60 à 66 cm) ¦ ✓ e rehatshme (60 deri 66 cm) ¦ ✓ komdu (minn 60 sa 66 cm)
+⚠️ un peu raide : allonge l’escalier ou choisis un escalier tournant ¦ ⚠️ pak e pjerrët: zgjate shkallën ose zgjidh një shkallë spirale ¦ ⚠️ ftit wieqaf: tawwal it-taraġ jew agħżel taraġ idur
+⚠️ marches très longues : raccourcis l’escalier ¦ ⚠️ shkallë shumë të gjata: shkurtoje shkallën ¦ ⚠️ turġien twal ħafna: qassar it-taraġ
+Quart tournant ¦ Kthesë me një të katërt ¦ Kwart ta’ dawra
+Vers la gauche ¦ Majtas ¦ Lejn ix-xellug
+Vers la droite ¦ Djathtas ¦ Lejn il-lemin
+Le haut devient le bas ¦ Sipër bëhet poshtë ¦ Ta’ fuq isir ta’ taħt
+⇅ Inverser le sens de montée ¦ ⇅ Kthe drejtimin e ngjitjes ¦ ⇅ Aqleb id-direzzjoni tat-tlugħ
+Pas d’étage au-dessus : ajoute-le avec ＋ en haut. ¦ Nuk ka kat sipër: shtoje me ＋ lart. ¦ L-ebda sular fuq: żidu b’＋ fuq.
+Pour les maisons dessinées avant : chaque escalier perce le plancher de l’étage du dessus ¦ Për shtëpitë e vizatuara më parë: çdo shkallë shpon dyshemenë e katit sipër ¦ Għad-djar imfassla qabel: kull taraġ jifqa’ l-art tas-sular ta’ fuq
+Ouvrir les trémies de tous les escaliers ¦ Hap hapjet e të gjitha shkallëve ¦ Iftaħ il-fetħiet tat-taraġ kollu
+Du sol ¦ Nga dyshemeja ¦ Mill-art
+Les prochains objets de ce modèle seront posés à cette taille ¦ Objektet e ardhshme të këtij modeli do të vendosen me këtë madhësi ¦ L-oġġetti li jmiss ta’ dan il-mudell jitqiegħdu f’dan id-daqs
+💾 Garder pour ce modèle ¦ 💾 Mbaje për këtë model ¦ 💾 Żommu għal dan il-mudell
+Le poser sur le meuble qui est dessous (table, commode, cheminée…) ¦ Vendose mbi mobilien poshtë (tavolinë, komo, oxhak…) ¦ Poġġih fuq l-għamara ta’ taħt (mejda, kmoda, ċumnija…)
+⬆ Sur l’objet dessous ¦ ⬆ Mbi objektin poshtë ¦ ⬆ Fuq l-oġġett ta’ taħt
+⬇ Au sol ¦ ⬇ Në dysheme ¦ ⬇ Mal-art
+Plusieurs copies d’un coup : en ligne, en grille, ou en cercle autour d’un objet (6 chaises autour d’une table) ¦ Disa kopje njëherësh: në rresht, në rrjetë, ose në rreth rreth një objekti (6 karrige rreth një tavoline) ¦ Diversi kopji f’daqqa: f’ringiela, fi grilja, jew f’ċirku madwar oġġett (6 siġġijiet madwar mejda)
+Pieds ¦ Këmbët ¦ Saqajn
+Pieds, poignées, filets, ferrures ¦ Këmbë, doreza, vija zbukuruese, hekurishte ¦ Saqajn, maniki, filetti, ħadid tal-għamara
+Sans deuxième couleur ¦ Pa ngjyrë të dytë ¦ Mingħajr it-tieni kulur
+Époque, style ¦ Periudha, stili ¦ Perjodu, stil
+Effets : pieds et détails ¦ Efektet: këmbët dhe detajet ¦ Effetti: saqajn u dettalji
+🏷 Souvenirs de cet objet ¦ 🏷 Kujtimet e këtij objekti ¦ 🏷 It-tifkiriet ta’ dan l-oġġett
+Son histoire (objet de famille) ¦ Historia e tij (objekt familjar) ¦ L-istorja tiegħu (oġġett tal-familja)
+Flèche vers un point ¦ Shigjetë drejt një pike ¦ Vleġġa lejn punt
+Couleur de la flèche ¦ Ngjyra e shigjetës ¦ Il-kulur tal-vleġġa
+Police de départ ¦ Shkronja fillestare ¦ Font tal-bidu
+Des versions de la maison selon les années ou des dates : la voir évoluer, rattacher une époque à un recensement ¦ Versione të shtëpisë sipas viteve ose datave: shiko si ndryshon, lidh një periudhë me një regjistrim të popullsisë ¦ Verżjonijiet tad-dar skont is-snin jew id-dati: ara kif tevolvi, għaqqad perjodu ma’ ċensiment
+🕰 Époques ¦ 🕰 Periudhat ¦ 🕰 Perjodi
+L’époque d’avant ¦ Periudha e mëparshme ¦ Il-perjodu ta’ qabel
+L’époque montrée (plan 2D et vue 3D) ¦ Periudha e shfaqur (plani 2D dhe pamja 3D) ¦ Il-perjodu muri (pjanta 2D u veduta 3D)
+L’époque d’après ¦ Periudha pasardhëse ¦ Il-perjodu ta’ wara
+⋯ Gérer les époques… ¦ ⋯ Menaxho periudhat… ¦ ⋯ Immaniġġja l-perjodi…
+▶ Voir évoluer : les époques l’une après l’autre ¦ ▶ Shiko si ndryshon: periudhat njëra pas tjetrës ¦ ▶ Ara kif tevolvi: il-perjodi wieħed wara l-ieħor
+MAISON · ÉPOQUES ¦ SHTËPIA · PERIUDHAT ¦ DAR · PERJODI
+MAISON ¦ SHTËPIA ¦ DAR
+Créer l’époque ¦ Krijo periudhën ¦ Oħloq il-perjodu
+La maison telle qu’elle est dessinée maintenant devient la première époque : donne-lui un nom et une date. La nouvelle époque part d’une copie, que tu changes ensuite (une pièce ajoutée, un mur abattu, d’autres meubles…). ¦ Shtëpia siç është vizatuar tani bëhet periudha e parë: jepi një emër dhe një datë. Periudha e re nis nga një kopje, të cilën e ndryshon pastaj (një dhomë e shtuar, një mur i rrëzuar, mobilie të tjera…). ¦ Id-dar kif inhi mpinġija issa ssir l-ewwel perjodu: agħtih isem u data. Il-perjodu l-ġdid jibda minn kopja, li tibdel wara (kamra miżjuda, ħajt imwaqqa’, għamara oħra…).
+La maison dessinée maintenant ¦ Shtëpia e vizatuar tani ¦ Id-dar kif mpinġija issa
+Année ou date ¦ Viti ose data ¦ Sena jew data
+La nouvelle époque ¦ Periudha e re ¦ Il-perjodu l-ġdid
+ex. Après l’agrandissement ¦ p.sh. Pas zgjerimit ¦ eż. Wara t-tkabbir
+Rattachée au recensement ¦ E lidhur me regjistrimin e popullsisë ¦ Marbut maċ-ċensiment
+Pour la rattacher à un recensement : onglet Maison → « 📋 Les recensements » → ＋ Un recensement. ¦ Për ta lidhur me një regjistrim të popullsisë: skeda Shtëpia → «📋 Regjistrimet e popullsisë» → ＋ Një regjistrim. ¦ Biex tgħaqqdu ma’ ċensiment: tab Dar → “📋 Iċ-ċensimenti” → ＋ Ċensiment.
+Donne un nom ou une date à cette époque. ¦ Jepi një emër ose një datë kësaj periudhe. ¦ Agħti isem jew data lil dan il-perjodu.
+Nouvelle époque créée (copie) : change ce qui était différent. « ‹ › » en haut pour passer d’une époque à l’autre. ¦ Periudha e re u krijua (kopje): ndrysho atë që ishte ndryshe. «‹ ›» lart për të kaluar nga një periudhë te tjetra. ¦ Perjodu ġdid maħluq (kopja): ibdel dak li kien differenti. “‹ ›” fuq biex tgħaddi minn perjodu għall-ieħor.
+Époque supprimée ¦ Periudha u fshi ¦ Il-perjodu tħassar
+Crée au moins deux époques (＋ Nouvelle époque) pour voir la maison évoluer. ¦ Krijo të paktën dy periudha (＋ Periudhë e re) për të parë si ndryshon shtëpia. ¦ Oħloq mill-inqas żewġ perjodi (＋ Perjodu ġdid) biex tara d-dar tevolvi.
+＋ Un recensement ¦ ＋ Një regjistrim i popullsisë ¦ ＋ Ċensiment
+Recensements à rattacher ¦ Regjistrime të popullsisë për t’u lidhur ¦ Ċensimenti biex tgħaqqad
+Ajouter aussi les personnes du foyer comme habitants ¦ Shto edhe personat e familjes si banorë ¦ Żid ukoll il-persuni tad-dar bħala abitanti
+À l’époque ¦ Në atë kohë ¦ Dak iż-żmien
+Choisis au moins un recensement. ¦ Zgjidh të paktën një regjistrim të popullsisë. ¦ Agħżel mill-inqas ċensiment wieħed.
+Clique sur un mur. ¦ Kliko mbi një mur. ¦ Ikklikkja fuq ħajt.
+Une étiquette à flèche ¦ Një etiketë me shigjetë ¦ Tikketta bi vleġġa
+La note (ex. « Double vitrage posé en 1978 », « Ici était le puits ») ¦ Shënimi (p.sh. «Xhami i dyfishtë u vendos në 1978», «Këtu ishte pusi») ¦ In-nota (eż. “Ħġieġ doppju mqiegħed fl-1978”, “Hawn kien hemm il-bir”)
+Étiquette à flèche ¦ Etiketë me shigjetë ¦ Tikketta bi vleġġa
+Un texte sur le plan ¦ Një tekst në plan ¦ Test fuq il-pjanta
+Le texte à écrire (nom d’une pièce, d’un lieu, une remarque…) ¦ Teksti për t’u shkruar (emri i një dhome, i një vendi, një vërejtje…) ¦ It-test li trid tikteb (isem ta’ kamra, ta’ post, rimarka…)
+Mur modifié ¦ Muri u ndryshua ¦ Ħajt mibdul
+Pièce modifiée ¦ Dhoma u ndryshua ¦ Kamra mibdula
+Flèche déplacée ¦ Shigjeta u zhvendos ¦ Vleġġa mċaqalqa
+Objet tourné ¦ Objekti u rrotullua ¦ Oġġett imdawwar
+Plan ancien déplacé ¦ Plani i vjetër u zhvendos ¦ Pjanta antika mċaqalqa
+Une pièce d’au moins 50 cm de côté. ¦ Një dhomë me të paktën 50 cm brinjë. ¦ Kamra ta’ mill-inqas 50 cm kull naħa.
+Un vide d’au moins 40 cm de côté. ¦ Një boshllëk me të paktën 40 cm brinjë. ¦ Vojt ta’ mill-inqas 40 cm kull naħa.
+Ce vide est à l’étage le plus bas : il n’ouvre sur rien. Pour une mezzanine, dessine le vide à l’étage du dessus. ¦ Ky boshllëk është në katin më të ulët: nuk hapet mbi asgjë. Për një mezaninë, vizato boshllëkun në katin sipër. ¦ Dan il-vojt jinsab fl-iktar sular baxx: ma jagħti fuq xejn. Għal mezzanin, pinġi l-vojt fis-sular ta’ fuq.
+Choisis d’abord la pièce (le séjour) sur le plan. ¦ Zgjidh fillimisht dhomën (dhomën e ndenjes) në plan. ¦ L-ewwel agħżel il-kamra (is-salott) fuq il-pjanta.
+La pièce est un peu petite pour une mezzanine (au moins 2,5 m × 4 m). ¦ Dhoma është pak e vogël për një mezaninë (të paktën 2,5 m × 4 m). ¦ Il-kamra kemmxejn żgħira għal mezzanin (mill-inqas 2.5 m × 4 m).
+Clic : choisir · glisser : déplacer · poignées : allonger un mur, déformer une pièce · ⌫ : supprimer ¦ Kliko: zgjidh · tërhiq: zhvendos · dorezat: zgjat një mur, deformo një dhomë · ⌫: fshi ¦ Ikklikkja: agħżel · kaxkar: ċaqlaq · manki: tawwal ħajt, ibdel il-forma ta’ kamra · ⌫: ħassar
+Glisser pour déplacer la vue ¦ Tërhiq për të zhvendosur pamjen ¦ Kaxkar biex iċċaqlaq il-veduta
+Glisse en diagonale : une pièce rectangulaire avec ses quatre murs (la surface s’affiche) ¦ Tërhiq diagonalisht: një dhomë drejtkëndore me katër muret e saj (sipërfaqja shfaqet) ¦ Kaxkar djagonalment: kamra rettangolari bl-erba’ ħitan tagħha (l-erja tidher)
+Glisse en diagonale : un vide sans plancher (mezzanine, double hauteur, trémie) ; un garde-corps se pose tout seul le long des bords sans mur ¦ Tërhiq diagonalisht: një boshllëk pa dysheme (mezaninë, lartësi e dyfishtë, hapje shkalle); një parmak vendoset vetë përgjatë skajeve pa mur ¦ Kaxkar djagonalment: vojt mingħajr art (mezzanin, għoli doppju, fetħa tat-taraġ); poġġaman jitqiegħed waħdu tul it-truf mingħajr ħajt
+Un clic par coin (aimant : grille, coins, angles droits ; Alt : libre) · double-clic ou Entrée : finir · clic sur le 1er point : fermer (et créer la pièce) ¦ Një klik për çdo qoshe (magneti: rrjeta, qoshet, kënde të drejta; Alt: i lirë) · klik i dyfishtë ose Enter: mbaro · klik mbi pikën e 1-rë: mbyll (dhe krijo dhomën) ¦ Klikk għal kull kantuniera (kalamita: grilja, kantunieri, angoli retti; Alt: liberu) · klikk doppju jew Enter: spiċċa · klikk fuq l-1 punt: agħlaq (u oħloq il-kamra)
+Une pièce de forme libre (sans murs) : un clic par coin, double-clic pour finir ¦ Një dhomë me formë të lirë (pa mure): një klik për çdo qoshe, klik i dyfishtë për të mbaruar ¦ Kamra b’forma libera (mingħajr ħitan): klikk għal kull kantuniera, klikk doppju biex tispiċċa
+Clic sur un mur : une porte (glisse-la ensuite le long du mur) ¦ Kliko mbi një mur: një derë (pastaj rrëshqite përgjatë murit) ¦ Ikklikkja fuq ħajt: bieb (imbagħad żerżqu tul il-ħajt)
+Clic sur un mur : une fenêtre ¦ Kliko mbi një mur: një dritare ¦ Ikklikkja fuq ħajt: tieqa
+Deux clics : une cote (la distance s’affiche) ¦ Dy klikime: një kuotë (largësia shfaqet) ¦ Żewġ klikks: kejl (id-distanza tidher)
+Clic : écrire un texte sur le plan ¦ Kliko: shkruaj një tekst në plan ¦ Ikklikkja: ikteb test fuq il-pjanta
+Clic sur le point à montrer (le puits, une fenêtre…), puis clic là où écrire la note ¦ Kliko mbi pikën që do të tregosh (pusi, një dritare…), pastaj kliko aty ku do të shkruash shënimin ¦ Ikklikkja fuq il-punt li trid turi (il-bir, tieqa…), imbagħad ikklikkja fejn trid tikteb in-nota
+largeur x profondeur (ex. 420 x 350, 4,2 x 3,5 m) ↵ ¦ gjerësi x thellësi (p.sh. 420 x 350, 4,2 x 3,5 m) ↵ ¦ wisa’ x fond (eż. 420 x 350, 4.2 x 3.5 m) ↵
+longueur (cm, ou 3,5 m) puis @angle ↵ ¦ gjatësia (cm, ose 3,5 m) pastaj @kënd ↵ ¦ tul (cm, jew 3.5 m) imbagħad @angolu ↵
+Écris largeur x profondeur : 420 x 350 (cm) ou 4,2 x 3,5 m (50 cm au moins). ¦ Shkruaj gjerësi x thellësi: 420 x 350 (cm) ose 4,2 x 3,5 m (të paktën 50 cm). ¦ Ikteb wisa’ x fond: 420 x 350 (cm) jew 4.2 x 3.5 m (mill-inqas 50 cm).
+Clique d’abord le point de départ sur le plan, puis tape la longueur. ¦ Kliko fillimisht pikën e nisjes në plan, pastaj shkruaj gjatësinë. ¦ L-ewwel ikklikkja l-punt tal-bidu fuq il-pjanta, imbagħad ittajpja t-tul.
+Longueur incomprise : 350, 3,5 m, ou 350 @ 90 pour l’angle. ¦ Gjatësi e pakuptueshme: 350, 3,5 m, ose 350 @ 90 për këndin. ¦ Tul mhux mifhum: 350, 3.5 m, jew 350 @ 90 għall-angolu.
+Angle incompris (en degrés : 0 à droite, 90 en haut). ¦ Kënd i pakuptueshëm (në gradë: 0 djathtas, 90 lart). ¦ Angolu mhux mifhum (fi gradi: 0 lejn il-lemin, 90 ’il fuq).
+Grille ¦ Rrjeta ¦ Grilja
+Coins des murs et des pièces ¦ Qoshet e mureve dhe të dhomave ¦ Kantunieri tal-ħitan u tal-kmamar
+Milieu des murs ¦ Mesi i mureve ¦ Nofs il-ħitan
+Le long des murs (au cm) ¦ Përgjatë mureve (me saktësi cm) ¦ Tul il-ħitan (sa ċentimetru)
+Alignements (lignes de rappel) ¦ Rreshtime (vija ndihmëse) ¦ Allinjamenti (linji gwida)
+Pas des angles ¦ Hapi i këndeve ¦ Pass tal-angoli
+Alt : aucun aimant (au mm près) · ⇧ : angles à 45° · flèches : décaler ce qui est choisi de 1 cm (⇧ : d’un pas de grille) · en traçant, tape la longueur au clavier. ¦ Alt: pa magnet (me saktësi mm) · ⇧: kënde 45° · shigjetat: zhvendos atë që është zgjedhur me 1 cm (⇧: me një hap rrjete) · gjatë vizatimit, shkruaj gjatësinë me tastierë. ¦ Alt: l-ebda kalamita (sa millimetru) · ⇧: angoli ta’ 45° · vleġeġ: ċaqlaq dak magħżul b’1 cm (⇧: b’pass tal-grilja) · waqt li tiddisinja, ittajpja t-tul bit-tastiera.
+Décalé ¦ U zhvendos ¦ Imċaqlaq
+Il faut un fichier OBJ, STL, GLB ou glTF. ¦ Duhet një skedar OBJ, STL, GLB ose glTF. ¦ Trid fajl OBJ, STL, GLB jew glTF.
+Lecture du modèle… ¦ Po lexohet modeli… ¦ Qed jinqara l-mudell…
+Objet importé ¦ Objekti u importua ¦ Oġġett importat
+Objet 3D importé : il est aussi dans Mobilier → « Mes objets », pour toutes les maisons. ¦ Objekti 3D u importua: është edhe te Mobiliet → «Objektet e mia», për të gjitha shtëpitë. ¦ Oġġett 3D importat: jinsab ukoll f’Għamara → “L-oġġetti tiegħi”, għad-djar kollha.
+Objet posé (vue de dessus) : règle sa taille réelle dans Propriétés. ¦ Objekti u vendos (pamje nga lart): rregullo madhësinë e tij të vërtetë te Vetitë. ¦ Oġġett imqiegħed (veduta minn fuq): irranġa d-daqs veru tiegħu fil-Karatteristiċi.
+Envoi de l’image dans les médias… ¦ Po dërgohet imazhi te mediat… ¦ Qed tintbagħat l-istampa lill-midja…
+MAISON · PLAN ANCIEN ¦ SHTËPIA · PLAN I VJETËR ¦ DAR · PJANTA ANTIKA
+Le plan à calquer ¦ Plani për t’u kopjuar ¦ Il-pjanta biex tikkopja
+Un cadastre napoléonien, un plan ancien, un croquis… « 📁 Importer » en prend un sur l’ordinateur (il entre dans les médias). ¦ Një kadastër napoleonian, një plan i vjetër, një skicë… «📁 Importo» merr një nga kompjuteri (hyn te mediat). ¦ Katasta Napoleonika, pjanta antika, abbozz… “📁 Importa” tieħu waħda mill-kompjuter (tidħol fil-midja).
+Poser ce plan ¦ Vendos këtë plan ¦ Poġġi din il-pjanta
+Cette image ne peut pas servir de plan. ¦ Ky imazh nuk mund të përdoret si plan. ¦ Din l-istampa ma tistax isservi bħala pjanta.
+Plan ancien posé ¦ Plani i vjetër u vendos ¦ Pjanta antika mqiegħda
+📏 Clique les deux bouts d’une longueur connue sur le plan ancien (un mur, l’échelle dessinée) ¦ 📏 Kliko dy skajet e një gjatësie të njohur në planin e vjetër (një mur, shkalla e vizatuar) ¦ 📏 Ikklikkja ż-żewġ truf ta’ tul magħruf fuq il-pjanta antika (ħajt, l-iskala mpinġija)
+Les deux points sont trop proches. ¦ Dy pikat janë shumë afër. ¦ Iż-żewġ punti qrib wisq.
+📏 Mettre le plan à l’échelle ¦ 📏 Vendos planin në shkallë ¦ 📏 Poġġi l-pjanta fl-iskala
+Mettre à l’échelle ¦ Vendos në shkallë ¦ Poġġi fl-iskala
+Quelle est la vraie longueur entre ces deux points ? ¦ Sa është gjatësia e vërtetë midis këtyre dy pikave? ¦ X’inhu t-tul veru bejn dawn iż-żewġ punti?
+Le cadastre napoléonien est souvent au 1/2500 ou au 1/1250 ; les plans anciens comptent en toises (6 pieds, 1,949 m) et en pieds du roi (32,48 cm) : écris le nombre, la conversion se fait toute seule. ¦ Kadastra napoleoniane është shpesh në 1/2500 ose 1/1250; planet e vjetra numërojnë në toises (6 këmbë, 1,949 m) dhe në këmbë mbretërore (32,48 cm): shkruaj numrin, konvertimi bëhet vetë. ¦ Il-katasta Napoleonika spiss tkun fl-iskala 1/2500 jew 1/1250; il-pjanti antiki jgħoddu bit-toises (6 piedi, 1.949 m) u bil-piedi tar-re (32.48 cm): ikteb in-numru, il-konverżjoni ssir waħedha.
+Écris une longueur, par exemple 12 ou 3,5. ¦ Shkruaj një gjatësi, për shembull 12 ose 3,5. ¦ Ikteb tul, pereżempju 12 jew 3.5.
+Plan ancien mis à l’échelle ¦ Plani i vjetër u vendos në shkallë ¦ Pjanta antika mqiegħda fl-iskala
+↻ Clique deux points le long d’un mur du plan ancien : il deviendra droit ¦ ↻ Kliko dy pika përgjatë një muri të planit të vjetër: do të bëhet i drejtë ¦ ↻ Ikklikkja żewġ punti tul ħajt tal-pjanta antika: isir dritt
+Ce mur est déjà droit. ¦ Ky mur është tashmë i drejtë. ¦ Dan il-ħajt diġà dritt.
+↻ Redresser ¦ ↻ Drejto ¦ ↻ Iddrittja
+✥ Déplacer ¦ ✥ Zhvendos ¦ ✥ Ċaqlaq
+✏️ Décalque : un clic par coin de mur, en suivant le plan ancien · double-clic ou Entrée pour finir un mur · ⬚ pour une pièce entière ¦ ✏️ Kopjim: një klik për çdo qoshe muri, duke ndjekur planin e vjetër · klik i dyfishtë ose Enter për të mbaruar një mur · ⬚ për një dhomë të tërë ¦ ✏️ Ikkupjar: klikk għal kull kantuniera tal-ħajt, wara l-pjanta antika · klikk doppju jew Enter biex tispiċċa ħajt · ⬚ għal kamra sħiħa
+Photo, document ¦ Foto, dokument ¦ Ritratt, dokument
+Récit ¦ Rrëfim ¦ Rakkont
+Souvenir de famille ¦ Kujtim familjar ¦ Tifkira tal-familja
+Objet de famille ¦ Objekt familjar ¦ Oġġett tal-familja
+Voir ce souvenir ¦ Shiko këtë kujtim ¦ Ara din it-tifkira
+Retirer ce souvenir (sans le supprimer de la base) ¦ Hiq këtë kujtim (pa e fshirë nga baza) ¦ Neħħi din it-tifkira (mingħajr ma tħassarha mid-database)
+Aucun souvenir rattaché : une photo, un récit, une personne… ¦ Asnjë kujtim i lidhur: një foto, një rrëfim, një person… ¦ L-ebda tifkira marbuta: ritratt, rakkont, persuna…
+Aucun souvenir ne correspond. ¦ Asnjë kujtim nuk përputhet. ¦ L-ebda tifkira ma taqbel.
+Aucun souvenir de famille pour l’instant ¦ Ende asnjë kujtim familjar ¦ Għalissa l-ebda tifkira tal-familja
+Essaie un autre mot. ¦ Provo një fjalë tjetër. ¦ Ipprova kelma oħra.
+Listes → Mémoire familiale (recettes, expressions, chansons…) ou Objets de famille. ¦ Listat → Kujtesa familjare (receta, shprehje, këngë…) ose Objektet familjare. ¦ Listi → Memorja tal-familja (riċetti, espressjonijiet, kanzunetti…) jew Oġġetti tal-familja.
+MAISON · SOUVENIRS ¦ SHTËPIA · KUJTIMET ¦ DAR · TIFKIRIET
+📜 Un souvenir de famille ¦ 📜 Një kujtim familjar ¦ 📜 Tifkira tal-familja
+Chercher… (recette, montre, surnom) ¦ Kërko… (recetë, orë, nofkë) ¦ Fittex… (riċetta, arloġġ, laqam)
+Chercher un souvenir ¦ Kërko një kujtim ¦ Fittex tifkira
+Choisis d’abord un meuble, un objet ou une pièce. ¦ Zgjidh fillimisht një mobilie, një objekt ose një dhomë. ¦ L-ewwel agħżel għamara, oġġett jew kamra.
+🖼 Une photo, un document ¦ 🖼 Një foto, një dokument ¦ 🖼 Ritratt, dokument
+pris dans les médias (ou importé depuis l’ordinateur) ¦ marrë nga mediat (ose importuar nga kompjuteri) ¦ meħud mill-midja (jew importat mill-kompjuter)
+✍ Un récit ¦ ✍ Një rrëfim ¦ ✍ Rakkont
+ce qui s’est passé ici, ce qu’on en raconte ¦ çfarë ndodhi këtu, çfarë tregohet për të ¦ x’ġara hawn, x’jgħidu fuqu
+👤 Une personne ¦ 👤 Një person ¦ 👤 Persuna
+qui a vécu ici, qui s’en servait ¦ kush ka jetuar këtu, kush e përdorte ¦ min għex hawn, min kien jużah
+une recette, une expression, un objet de famille… ¦ një recetë, një shprehje, një objekt familjar… ¦ riċetta, espressjoni, oġġett tal-familja…
+ex. La veillée de Noël 1912 ¦ p.sh. Nata e Krishtlindjes 1912 ¦ eż. Lejlet il-Milied 1912
+Ce qui s’est passé ici, ce qu’on en raconte… ¦ Çfarë ndodhi këtu, çfarë tregohet për të… ¦ X’ġara hawn, x’jgħidu fuqu…
+Le récit ¦ Rrëfimi ¦ Ir-rakkont
+Écris un titre ou un récit. ¦ Shkruaj një titull ose një rrëfim. ¦ Ikteb titlu jew rakkont.
+Souvenir rattaché ¦ Kujtimi u lidh ¦ Tifkira marbuta
+Ce média n’existe plus. ¦ Ky media nuk ekziston më. ¦ Din il-midja m’għadhiex teżisti.
+La maison non enregistrée sera perdue (💾 d’abord). ¦ Shtëpia e paruajtur do të humbasë (💾 fillimisht). ¦ Id-dar mhux issejvjata tintilef (💾 l-ewwel).
+Ouvrir la fiche ? ¦ Ta hap kartelën? ¦ Tiftaħ l-iskeda?
+les aimants, la grille, l’épaisseur des murs, la hauteur des yeux et la lumière ¦ magnetët, rrjeta, trashësia e mureve, lartësia e syve dhe drita ¦ il-kalamiti, il-grilja, il-ħxuna tal-ħitan, l-għoli tal-għajnejn u d-dawl
+Fichier prêt : il s’importe dans 🧲 Aimants → « ⤒ Importer ». ¦ Skedari është gati: importohet te 🧲 Magnetët → «⤒ Importo». ¦ Il-fajl lest: jiġi importat fi 🧲 Kalamiti → “⤒ Importa”.
+Ce fichier n’est pas lisible (il faut un fichier .json de réglage). ¦ Ky skedar nuk lexohet (duhet një skedar .json cilësimi). ¦ Dan il-fajl ma jinqarax (trid fajl .json ta’ issettjar).
+Ce fichier n’est pas un réglage LCNDA (⤓ Exporter un réglage, dans un outil). ¦ Ky skedar nuk është cilësim LCNDA (⤓ Eksporto një cilësim, në një mjet). ¦ Dan il-fajl mhuwiex issettjar LCNDA (⤓ Esporta issettjar, f’għodda).
+Le plan de cet étage est vide. ¦ Plani i këtij kati është bosh. ¦ Il-pjanta ta’ dan is-sular vojta.
+le plan de l’étage ¦ plani i katit ¦ il-pjanta tas-sular
+le plan, plus léger ¦ plani, më i lehtë ¦ il-pjanta, eħfef
+le plan sur une page A4 ¦ plani në një faqe A4 ¦ il-pjanta fuq paġna A4
+le plan, en dessin ¦ plani, si vizatim ¦ il-pjanta, bħala disinn
+le plan, tout de suite ¦ plani, menjëherë ¦ il-pjanta, minnufih
+le plan de l’étage pour AutoCAD, LibreCAD… (calques, en cm) ¦ plani i katit për AutoCAD, LibreCAD… (shtresa, në cm) ¦ il-pjanta tas-sular għal AutoCAD, LibreCAD… (saffi, f’cm)
+image de la vue 3D ¦ imazh i pamjes 3D ¦ stampa tal-veduta 3D
+🧊 Vue 3D ¦ 🧊 Pamja 3D ¦ 🧊 Veduta 3D
+💾 Fichier de la maison ¦ 💾 Skedari i shtëpisë ¦ 💾 Il-fajl tad-dar
+à réimporter (⤒ Importer) ¦ për ta riimportuar (⤒ Importo) ¦ biex terġa’ timportah (⤒ Importa)
+Ce fichier DXF n’est pas lisible. ¦ Ky skedar DXF nuk lexohet. ¦ Dan il-fajl DXF ma jinqarax.
+Aucun trait trouvé dans ce DXF (un DXF « binaire » ne se lit pas : enregistre-le en DXF texte, ASCII). ¦ Asnjë vijë nuk u gjet në këtë DXF (një DXF «binar» nuk lexohet: ruaje si DXF tekst, ASCII). ¦ L-ebda linja ma nstabet f’dan id-DXF (DXF “binarju” ma jinqarax: issejvjah bħala DXF test, ASCII).
+MAISON · IMPORT DXF ¦ SHTËPIA · IMPORT DXF ¦ DAR · IMPORTAZZJONI DXF
+Importer le plan ¦ Importo planin ¦ Importa l-pjanta
+Unité du dessin ¦ Njësia e vizatimit ¦ Unità tad-disinn
+Épaisseur des murs ¦ Trashësia e mureve ¦ Il-ħxuna tal-ħitan
+Où le mettre ¦ Ku ta vendosësh ¦ Fejn tpoġġih
+Un nouvel étage ¦ Një kat i ri ¦ Sular ġdid
+Calques à prendre ¦ Shtresat për t’u marrë ¦ Saffi li trid tieħu
+Un plan exporté d’ici : ses murs sont repris par leur axe (MURS_AXES). ¦ Një plan i eksportuar nga këtu: muret e tij merren sipas boshtit (MURS_AXES). ¦ Pjanta esportata minn hawn: il-ħitan tagħha jittieħdu mill-assi tagħhom (MURS_AXES).
+Un plan d’architecte dessine souvent chaque mur avec deux traits : garde une petite épaisseur, ou décoche les calques de meubles, de cotes et de hachures. ¦ Një plan arkitekti shpesh e vizaton çdo mur me dy vija: mbaj një trashësi të vogël, ose hiq shenjën nga shtresat e mobilieve, kuotave dhe vijëzimeve. ¦ Pjanta ta’ perit spiss tpinġi kull ħajt b’żewġ linji: żomm ħxuna żgħira, jew neħħi l-marka mis-saffi tal-għamara, tal-kejl u tal-isfumaturi.
+Coche au moins un calque. ¦ Shëno të paktën një shtresë. ¦ Immarka mill-inqas saff wieħed.
+Rien à reprendre dans ces calques. ¦ Asgjë për t’u marrë në këto shtresa. ¦ Xejn x’tieħu f’dawn is-saffi.
+Plan importé ¦ Plani u importua ¦ Pjanta importata
+Plan DXF importé ¦ Plani DXF u importua ¦ Pjanta DXF importata
+Nombre en tout ¦ Numri gjithsej ¦ Numru b’kollox
+Espace entre deux ¦ Hapësira midis dyve ¦ Spazju bejn tnejn
+Pas la place sur ce mur : moins d’espace, ou déplace la première vers le début du mur. ¦ Nuk ka vend në këtë mur: më pak hapësirë, ose zhvendos të parën drejt fillimit të murit. ¦ M’hemmx post fuq dan il-ħajt: inqas spazju, jew ċaqlaq l-ewwel waħda lejn il-bidu tal-ħajt.
+Répété ¦ U përsërit ¦ Ripetut
+Choisis d’abord un objet, une porte ou une fenêtre. ¦ Zgjidh fillimisht një objekt, një derë ose një dritare. ¦ L-ewwel agħżel oġġett, bieb jew tieqa.
+En ligne ¦ Në rresht ¦ F’ringiela
+En grille (rangées) ¦ Në rrjetë (rreshta) ¦ Fi grilja (ringieli)
+En cercle (autour d’un objet) ¦ Në rreth (rreth një objekti) ¦ F’ċirku (madwar oġġett)
+Sens (en ligne) ¦ Drejtimi (në rresht) ¦ Direzzjoni (f’ringiela)
+→ vers la droite ¦ → djathtas ¦ → lejn il-lemin
+↓ vers le bas ¦ ↓ poshtë ¦ ↓ ’l isfel
+← vers la gauche ¦ ← majtas ¦ ← lejn ix-xellug
+↑ vers le haut ¦ ↑ lart ¦ ↑ ’il fuq
+Par rangée (en grille) ¦ Për rresht (në rrjetë) ¦ Għal kull ringiela (grilja)
+Autour de (en cercle) ¦ Rreth (në rreth) ¦ Madwar (ċirku)
+Un point, au rayon ci-dessous ¦ Një pikë, me rrezen më poshtë ¦ Punt, bir-raġġ hawn taħt
+Rayon (si autour d’un point) ¦ Rrezja (nëse rreth një pike) ¦ Raġġ (jekk madwar punt)
+En cercle : place d’abord un seul objet (une chaise) à sa place autour de la table, choisis-le, puis répète : les copies tournent autour de la table et regardent vers elle, comme la première. ¦ Në rreth: vendos fillimisht vetëm një objekt (një karrige) në vendin e tij rreth tavolinës, zgjidhe, pastaj përsërit: kopjet rrotullohen rreth tavolinës dhe shikojnë nga ajo, si e para. ¦ F’ċirku: l-ewwel poġġi oġġett wieħed biss (siġġu) f’postu madwar il-mejda, agħżlu, imbagħad irrepeti: il-kopji jduru madwar il-mejda u jħarsu lejha, bħall-ewwel wieħed.
+Ce fichier n’est pas lisible. ¦ Ky skedar nuk lexohet. ¦ Dan il-fajl ma jinqarax.
+Ce fichier n’est pas une maison LCNDA (⤓ Exporter → 💾 Fichier de la maison). ¦ Ky skedar nuk është shtëpi LCNDA (⤓ Eksporto → 💾 Skedari i shtëpisë). ¦ Dan il-fajl mhuwiex dar LCNDA (⤓ Esporta → 💾 Il-fajl tad-dar).
+Le plan dessiné ici sera remplacé par celui du fichier (↶ pour revenir en arrière). ¦ Plani i vizatuar këtu do të zëvendësohet nga ai i skedarit (↶ për t’u kthyer pas). ¦ Il-pjanta mpinġija hawn tinbidel b’dik tal-fajl (↶ biex terġa’ lura).
+Remplacer le plan par celui du fichier ? ¦ Ta zëvendësosh planin me atë të skedarit? ¦ Tibdel il-pjanta b’dik tal-fajl?
+Remplacer le plan ¦ Zëvendëso planin ¦ Ibdel il-pjanta
+Maison importée ¦ Shtëpia u importua ¦ Dar importata
+Dépose une image, un objet 3D (OBJ, STL, glTF, GLB) ou un fichier de maison. ¦ Lësho një imazh, një objekt 3D (OBJ, STL, glTF, GLB) ose një skedar shtëpie. ¦ Itlaq stampa, oġġett 3D (OBJ, STL, glTF, GLB) jew fajl ta’ dar.
+📁 Que faire de cette image ? ¦ 📁 Çfarë të bësh me këtë imazh? ¦ 📁 X’tagħmel b’din l-istampa?
+🖼 L’image de ce tableau, de ce cadre ¦ 🖼 Imazhi i këtij pikture, i kësaj kornize ¦ 🖼 L-istampa ta’ dan il-pittura, ta’ dan il-gwarniċ
+posée sur l’objet choisi, en 2D et en 3D ¦ vendosur mbi objektin e zgjedhur, në 2D dhe në 3D ¦ imqiegħda fuq l-oġġett magħżul, f’2D u f’3D
+📐 Un plan ancien, un cadastre, à calquer ¦ 📐 Një plan i vjetër, një kadastër, për ta kopjuar ¦ 📐 Pjanta antika, katasta, biex tikkopja
+posé en fond, à mettre à l’échelle ¦ vendosur në sfond, për ta vënë në shkallë ¦ imqiegħda fl-isfond, biex tpoġġiha fl-iskala
+🖼 Un objet vu de dessus ¦ 🖼 Një objekt i parë nga lart ¦ 🖼 Oġġett muri minn fuq
+posé sur le plan comme un meuble ¦ vendosur në plan si një mobilie ¦ imqiegħed fuq il-pjanta bħal għamara
+🏷 Un souvenir pour ce qui est choisi ¦ 🏷 Një kujtim për atë që është zgjedhur ¦ 🏷 Tifkira għal dak li hu magħżul
+rattaché au meuble ou à la pièce ¦ lidhur me mobilien ose me dhomën ¦ marbuta mal-għamara jew mal-kamra
+Construction de la maison en 3D… ¦ Po ndërtohet shtëpia në 3D… ¦ Qed tinbena d-dar f’3D…
+Vue 3D indisponible. ¦ Pamja 3D nuk është e disponueshme. ¦ Il-veduta 3D mhix disponibbli.
+Glisser : tourner · clic droit ou ⇧ glisser : déplacer · molette : approcher · ☀️ Lumière : l’heure et la saison · 🚶 Visiter : Z Q S D ou flèches · ✦ : un souvenir ¦ Tërhiq: rrotullo · klik i djathtë ose ⇧ tërhiq: zhvendos · rrota: afro · ☀️ Drita: ora dhe stina · 🚶 Vizito: W A S D ose shigjetat · ✦: një kujtim ¦ Kaxkar: dawwar · klikk lemin jew ⇧ kaxkar: ċaqlaq · rota: qarreb · ☀️ Dawl: il-ħin u l-istaġun · 🚶 Żur: W A S D jew vleġeġ · ✦: tifkira
+Les dernières modifications de la maison seront perdues. ¦ Ndryshimet e fundit të shtëpisë do të humbasin. ¦ L-aħħar bidliet tad-dar jintilfu.
+Fermer sans enregistrer la maison ? ¦ Ta mbyllësh pa e ruajtur shtëpinë? ¦ Tagħlaq mingħajr ma tissejvja d-dar?
+Supprimé ¦ U fshi ¦ Imħassar
+Dupliqué ¦ U dyfishua ¦ Duplikat
+Sens de l’escalier ¦ Drejtimi i shkallës ¦ Direzzjoni tat-taraġ
+Tous les escaliers ouvrent déjà le plancher. ¦ Të gjitha shkallët e hapin tashmë dyshemenë. ¦ It-taraġ kollu diġà jiftaħ l-art.
+Verrière ajoutée ¦ Xhamllëku u shtua ¦ Ħġieġ tas-saqaf miżjud
+Édicule ajouté ¦ Dalja në çati u shtua ¦ Kamra tal-bejt miżjuda
+Lanterneau ajouté ¦ Dritëza u shtua ¦ Lanterna miżjuda
+Fenêtre de toit ajoutée ¦ Dritarja e çatisë u shtua ¦ Tieqa tas-saqaf miżjuda
+Lucarne ajoutée ¦ Frëngjia u shtua ¦ Dormer miżjud
+Chien-assis ajouté ¦ Frëngjia me dy faqe u shtua ¦ Dormer b’saqaf ta’ żewġ naħat miżjud
+✓ Elle se voit dans la vue 3D, avec le toit. ¦ ✓ Duket në pamjen 3D, me çatinë. ¦ ✓ Tidher fil-veduta 3D, mas-saqaf.
+Retiré du toit ¦ U hoq nga çatia ¦ Imneħħi mis-saqaf
+Fenêtre de toit ou lucarne retirée ¦ Dritarja e çatisë ose frëngjia u hoq ¦ Tieqa tas-saqaf jew dormer imneħħi
+Rien sous cet objet : glisse-le d’abord au-dessus du meuble (une table, une commode…). ¦ Asgjë nën këtë objekt: tërhiqe fillimisht sipër mobilies (një tavolinë, një komo…). ¦ Xejn taħt dan l-oġġett: l-ewwel kaxkru fuq l-għamara (mejda, kmoda…).
+Taille hors limites (de 1 cm à 50 m). ¦ Madhësi jashtë kufijve (nga 1 cm deri 50 m). ¦ Daqs barra mil-limiti (minn 1 cm sa 50 m).
+Agrandi ¦ U zmadhua ¦ Imkabbar
+Réduit ¦ U zvogëlua ¦ Imċekken
+Taille gardée pour ce modèle : les prochains seront posés comme celui-ci. ¦ Madhësia u mbajt për këtë model: të ardhshmit do të vendosen si ky. ¦ Daqs miżmum għal dan il-mudell: dawk li jmiss jitqiegħdu bħal dan.
+Sens d’ouverture ¦ Drejtimi i hapjes ¦ Direzzjoni tal-ftuħ
+Côté d’ouverture ¦ Ana e hapjes ¦ Naħa tal-ftuħ
+Mur coupé ¦ Muri u pre ¦ Ħajt maqsum
+＋ Un étage ¦ ＋ Një kat ¦ ＋ Sular
+Hauteur sous plafond ¦ Lartësia nën tavan ¦ Għoli tas-saqaf
+Gérer les étages… ¦ Menaxho katet… ¦ Immaniġġja s-sulari…
+Renommer, hauteur sous plafond, supprimer ¦ Riemërto, lartësia nën tavan, fshi ¦ Ibdel l-isem, għoli tas-saqaf, ħassar
+Ajouter un étage… ¦ Shto një kat… ¦ Żid sular…
+Les étages ¦ Katet ¦ Is-sulari
+Du plus haut au plus bas. Renomme, change la hauteur, ou supprime un étage (avec tout ce qu’il contient). ¦ Nga më i larti te më i ulëti. Riemërto, ndrysho lartësinë, ose fshi një kat (me gjithçka që përmban). ¦ Mill-ogħla sal-iktar baxx. Ibdel l-isem, ibdel l-għoli, jew ħassar sular (b’dak kollu li fih).
+Niveau ¦ Niveli ¦ Livell
+Il faut au moins un étage. ¦ Duhet të paktën një kat. ¦ Trid mill-inqas sular wieħed.
+{names} supprimés avec ce qu’ils contenaient ¦ {names} u fshinë me gjithçka që përmbanin ¦ {names} tħassru b’dak kollu li kien fihom
+{names} supprimé avec ce qu’il contenait ¦ {names} u fshi me gjithçka që përmbante ¦ {names} tħassar b’dak kollu li kien fih
+Étage supprimé ¦ Kati u fshi ¦ Sular imħassar
+Étage renommé ¦ Kati u riemërtua ¦ Sular b’isem ġdid
+Renommer l’étage ¦ Riemërto katin ¦ Ibdel l-isem tas-sular
+✥ Glisse le plan ancien (sur un endroit vide du plan) ; reclique « ✥ Déplacer » pour finir. ¦ ✥ Tërhiq planin e vjetër (mbi një vend bosh të planit); kliko përsëri «✥ Zhvendos» për të mbaruar. ¦ ✥ Kaxkar il-pjanta antika (fuq post vojt tal-pjanta); ikklikkja mill-ġdid “✥ Ċaqlaq” biex tispiċċa.
+Plan ancien retiré ¦ Plani i vjetër u hoq ¦ Pjanta antika mneħħija
+Plan ancien retiré du fond (l’image reste dans les médias) ¦ Plani i vjetër u hoq nga sfondi (imazhi mbetet te mediat) ¦ Pjanta antika mneħħija mill-isfond (l-istampa tibqa’ fil-midja)
+Plan ancien sous cet étage ¦ Plani i vjetër nën këtë kat ¦ Pjanta antika taħt dan is-sular
+Plan ancien ¦ Plan i vjetër ¦ Pjanta antika
+Plan ancien verrouillé ¦ Plani i vjetër u kyç ¦ Pjanta antika msakkra
+Plan ancien déverrouillé ¦ Plani i vjetër u zhkyç ¦ Pjanta antika miftuħa
+Un habitant de la maison ¦ Një banor i shtëpisë ¦ Abitant tad-dar
+Habitant ajouté ¦ Banori u shtua ¦ Abitant miżjud
+Habitant retiré ¦ Banori u hoq ¦ Abitant imneħħi
+Une personne liée à cette pièce ¦ Një person i lidhur me këtë dhomë ¦ Persuna marbuta ma’ din il-kamra
+Personne liée à la pièce ¦ Personi u lidh me dhomën ¦ Persuna marbuta mal-kamra
+Le plan est vide. ¦ Plani është bosh. ¦ Il-pjanta vojta.
+Fenêtre bloquée. ¦ Dritarja u bllokua. ¦ Tieqa mblukkata.
+Ce recensement n’est relié à aucune fiche. ¦ Ky regjistrim i popullsisë nuk është i lidhur me asnjë kartelë. ¦ Dan iċ-ċensiment mhuwa marbut ma’ l-ebda skeda.
+Recensement retiré ¦ Regjistrimi i popullsisë u hoq ¦ Ċensiment imneħħi
+Personne retirée ¦ Personi u hoq ¦ Persuna mneħħija
+Souvenir retiré ¦ Kujtimi u hoq ¦ Tifkira mneħħija
+Légende des époques ¦ Legjenda e periudhave ¦ Leġġenda tal-perjodi
+Personnes de la pièce ¦ Personat e dhomës ¦ Persuni tal-kamra
+Flèche ajoutée ¦ Shigjeta u shtua ¦ Vleġġa miżjuda
+Flèche retirée ¦ Shigjeta u hoq ¦ Vleġġa mneħħija
+Lumière ¦ Drita ¦ Dawl
+Années de la personne ¦ Vitet e personit ¦ Is-snin tal-persuna
+Recensement rattaché à l’époque ¦ Regjistrimi i popullsisë i lidhur me periudhën ¦ Ċensiment marbut mal-perjodu
+Revêtement du mur ¦ Veshja e murit ¦ Kisja tal-ħajt
+Murs de la pièce ¦ Muret e dhomës ¦ Ħitan tal-kamra
+Autre époque en 3D ¦ Periudhë tjetër në 3D ¦ Perjodu ieħor f’3D
+📍 Un arrêt de la visite guidée ¦ 📍 Një ndalesë e vizitës me guidë ¦ 📍 Waqfa taż-żjara gwidata
+Ce qu’on dit ici (lu à voix haute pendant la visite guidée) : ¦ Çfarë thuhet këtu (lexohet me zë gjatë vizitës me guidë): ¦ X’jingħad hawn (jinqara b’leħen għoli waqt iż-żjara gwidata):
+Ici, la salle commune : on y veillait l’hiver… ¦ Këtu, dhoma e përbashkët: këtu rrinin mbrëmjeve të dimrit… ¦ Hawn, il-kamra komuni: fix-xitwa kienu jqattgħu s-serati hawn…
+Ajouter l’arrêt ¦ Shto ndalesën ¦ Żid il-waqfa
+MAISON · PHOTO D’ÉPOQUE ¦ SHTËPIA · FOTO E ASAJ KOHE ¦ DAR · RITRATT TA’ DAK IŻ-ŻMIEN
+La photo prise d’ici ¦ Fotoja e bërë nga këtu ¦ Ir-ritratt meħud minn hawn
+La photo ancienne prise à cet endroit, dans cette direction : tu pourras la comparer avec la maison (curseur Autrefois ⟷ Aujourd’hui). ¦ Fotoja e vjetër e bërë në këtë vend, në këtë drejtim: do ta krahasosh me shtëpinë (rrëshqitësi Dikur ⟷ Sot). ¦ Ir-ritratt antik meħud f’dan il-post, f’din id-direzzjoni: tista’ tqabblu mad-dar (slider Qabel ⟷ Illum).
+Poser la photo ¦ Vendos foton ¦ Poġġi r-ritratt
+Cette image ne peut pas servir ici. ¦ Ky imazh nuk mund të përdoret këtu. ¦ Din l-istampa ma tistax isservi hawn.
+Photo d’époque ¦ Foto e asaj kohe ¦ Ritratt ta’ dak iż-żmien
+Photo d’époque posée ¦ Fotoja e asaj kohe u vendos ¦ Ritratt ta’ dak iż-żmien imqiegħed
+Le nord du plan : clic pour le régler (☀️ Orientation et lumière) ¦ Veriu i planit: kliko për ta rregulluar (☀️ Orientimi dhe drita) ¦ It-tramuntana tal-pjanta: ikklikkja biex tirranġaha (☀️ Orjentazzjoni u dawl)
+Aucune maison ne correspond. ¦ Asnjë shtëpi nuk përputhet. ¦ L-ebda dar ma taqbel.
+Époques ¦ Periudhat ¦ Perjodi
+🏰 Notice Mérimée (patrimoine)… ¦ 🏰 Fletë Mérimée (trashëgimi)… ¦ 🏰 Skeda Mérimée (wirt)…
+🏠 Maisons ¦ 🏠 Shtëpitë ¦ 🏠 Djar
+Les plans des maisons de la famille, en 2D et en 3D : leurs pièces, leurs meubles, leurs habitants, leurs recensements, leurs époques et leurs souvenirs. ¦ Planet e shtëpive të familjes, në 2D dhe në 3D: dhomat, mobiliet, banorët, regjistrimet e popullsisë, periudhat dhe kujtimet e tyre. ¦ Il-pjanti tad-djar tal-familja, f’2D u f’3D: il-kmamar, l-għamara, l-abitanti, iċ-ċensimenti, il-perjodi u t-tifkiriet tagħhom.
+Renommer la maison ¦ Riemërto shtëpinë ¦ Ibdel l-isem tad-dar
+Ouvrir la maison ¦ Hap shtëpinë ¦ Iftaħ id-dar
+↗ Ouvrir la maison ¦ ↗ Hap shtëpinë ¦ ↗ Iftaħ id-dar
+Cette maison est déjà rattachée. ¦ Kjo shtëpi është lidhur tashmë. ¦ Din id-dar diġà marbuta.
+🏠 Maison ¦ 🏠 Shtëpia ¦ 🏠 Dar
+Enregistre d’abord le recensement : tu pourras ensuite lui rattacher la maison où vivait le foyer (et l’époque de la maison). ¦ Ruaj fillimisht regjistrimin e popullsisë: pastaj do të mund të lidhësh shtëpinë ku jetonte familja (dhe periudhën e shtëpisë). ¦ L-ewwel issejvja ċ-ċensiment: imbagħad tista’ tgħaqqad miegħu d-dar fejn kienet tgħix il-familja (u l-perjodu tad-dar).
+Détacher la maison de ce recensement ¦ Hiq shtëpinë nga ky regjistrim ¦ Neħħi d-dar minn dan iċ-ċensiment
+Relier une maison : nom, lieu… ¦ Lidh një shtëpi: emri, vendi… ¦ Għaqqad dar: isem, post…
+Époque de la maison ¦ Periudha e shtëpisë ¦ Perjodu tad-dar
+Dessiner la maison de ce foyer ¦ Vizato shtëpinë e kësaj familjeje ¦ Iddisinja d-dar ta’ din il-familja
+Rattachée tout de suite (sans attendre « Enregistrer »). Dans la maison : onglet Maison → « 📋 Les recensements ». ¦ Lidhet menjëherë (pa pritur «Ruaj»). Te shtëpia: skeda Shtëpia → «📋 Regjistrimet e popullsisë». ¦ Marbuta minnufih (mingħajr ma tistenna “Issejvja”). Fid-dar: tab Dar → “📋 Iċ-ċensimenti”.
+— époque de la maison — ¦ — periudha e shtëpisë — ¦ — perjodu tad-dar —
+Le recensement a des changements non enregistrés. ¦ Regjistrimi i popullsisë ka ndryshime të paruajtura. ¦ Iċ-ċensiment għandu bidliet mhux issejvjati.
+Ouvrir la maison quand même ? ¦ Ta hap shtëpinë gjithsesi? ¦ Tiftaħ id-dar xorta waħda?
+Maison détachée du recensement. ¦ Shtëpia u hoq nga regjistrimi i popullsisë. ¦ Id-dar tneħħiet miċ-ċensiment.
+Choisis une maison. ¦ Zgjidh një shtëpi. ¦ Agħżel dar.
+Maison rattachée au recensement. ¦ Shtëpia u lidh me regjistrimin e popullsisë. ¦ Id-dar ġiet marbuta maċ-ċensiment.
+La longueur et la largeur de tout l’étage, sous le plan et à sa gauche (en plus des cotes de chaque mur). ¦ Gjatësia dhe gjerësia e gjithë katit, poshtë planit dhe në të majtë të tij (përveç kuotave të çdo muri). ¦ It-tul u l-wisa’ tas-sular kollu, taħt il-pjanta u fuq ix-xellug tagħha (flimkien mal-kejl ta’ kull ħajt).
+Un tableau posé à droite du plan : chaque pièce et sa surface, et le total. Il se met à jour tout seul et part avec le plan (image, PDF, impression). ¦ Një tabelë në të djathtë të planit: çdo dhomë me sipërfaqen e saj dhe totali. Përditësohet vetë dhe shkon me planin (imazh, PDF, printim). ¦ Tabella fuq il-lemin tal-pjanta: kull kamra bl-erja tagħha, u t-total. Tiġi aġġornata waħedha u tmur mal-pjanta (stampa, PDF, stampar).
+Le cadre en bas à droite des vrais plans : le nom de la maison, le lieu, l’époque, l’étage et la date du jour. ¦ Korniza poshtë djathtas e planeve të vërteta: emri i shtëpisë, vendi, periudha, kati dhe data e ditës. ¦ Il-kwadru isfel fuq il-lemin tal-pjanti veri: isem id-dar, il-post, il-perjodu, is-sular u d-data tal-lum.
+Le plan en clair sur fond sombre, comme dans un logiciel de dessin technique. Seulement à l’écran : les images, PDF et impressions restent sur fond blanc. ¦ Plani i çelët mbi sfond të errët, si në një program vizatimi teknik. Vetëm në ekran: imazhet, PDF-të dhe printimet mbeten me sfond të bardhë. ¦ Il-pjanta ċara fuq sfond skur, bħal fi programm tad-disinn tekniku. Fuq l-iskrin biss: l-istampi, il-PDF u l-istampar jibqgħu fuq sfond abjad.
+L’étage du dessous (ou du dessus) apparaît en transparence sous celui-ci : pratique pour poser les murs du 1er étage juste au-dessus de ceux du rez-de-chaussée. 🕰 Une autre époque : le même étage, tel qu’il était (ou sera), en sépia. ¦ Kati poshtë (ose sipër) shfaqet me tejdukshmëri nën këtë: e dobishme për të vendosur muret e katit të 1-rë pikërisht mbi ato të katit përdhes. 🕰 Një periudhë tjetër: i njëjti kat, siç ishte (ose do të jetë), në ngjyrë sepia. ¦ Is-sular ta’ taħt (jew ta’ fuq) jidher bi trasparenza taħt dan: utli biex tpoġġi l-ħitan tal-1 sular eżatt fuq dawk tas-sular terran. 🕰 Perjodu ieħor: l-istess sular, kif kien (jew kif se jkun), f’sepja.
+Clique les deux bouts d’une longueur connue sur l’image (un mur, l’échelle du plan), puis donne sa vraie longueur : en mètres, ou en toises et pieds anciens (convertis tout seuls). ¦ Kliko dy skajet e një gjatësie të njohur në imazh (një mur, shkalla e planit), pastaj jep gjatësinë e saj të vërtetë: në metra, ose në toises dhe këmbë të vjetra (konvertohen vetë). ¦ Ikklikkja ż-żewġ truf ta’ tul magħruf fuq l-istampa (ħajt, l-iskala tal-pjanta), imbagħad agħti t-tul veru tiegħu: f’metri, jew f’toises u piedi antiki (jinbidlu waħedhom).
+Le plafond suit la pente du toit (vue 3D, coupe, visite) ; la surface « loi Carrez » ne compte que là où la hauteur fait au moins 1,80 m. ¦ Tavani ndjek pjerrësinë e çatisë (pamja 3D, prerja, vizita); sipërfaqja «ligji Carrez» llogaritet vetëm aty ku lartësia është të paktën 1,80 m. ¦ Is-saqaf ta’ ġewwa jsegwi l-inklinazzjoni tas-saqaf (veduta 3D, sezzjoni, żjara); l-erja “liġi Carrez” tgħodd biss fejn l-għoli huwa mill-inqas 1.80 m.
+Le mur bas sous la pente (le « jambage ») : 0 si le toit part du plancher, 100 cm souvent. ¦ Muri i ulët nën pjerrësi («jambage»): 0 nëse çatia nis nga dyshemeja, shpesh 100 cm. ¦ Il-ħajt baxx taħt l-inklinazzjoni (il-“jambage”): 0 jekk is-saqaf jibda mill-art, spiss 100 cm.
+Pour une maison en L, en T ou en U : un toit par aile, à la même pente ; les noues (là où deux toits se rejoignent) se font toutes seules. Les ailes suivent les pièces de l’étage du haut. ¦ Për një shtëpi në L, në T ose në U: një çati për çdo krah, me të njëjtën pjerrësi; luginat (aty ku takohen dy çati) bëhen vetë. Krahët ndjekin dhomat e katit të sipërm. ¦ Għal dar f’forma ta’ L, T jew U: saqaf għal kull ala, bl-istess inklinazzjoni; il-widien (fejn jiltaqgħu żewġ soqfa) isiru waħedhom. L-ali jsegwu l-kmamar tal-ogħla sular.
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Le soleil et les ombres de la vue 3D suivent. ¦ Rrotullo planin në lidhje me veriun: 0° = pjesa e sipërme e planit është në veri, 90° = pjesa e sipërme e planit shikon nga lindja. Dielli dhe hijet e pamjes 3D ndjekin. ¦ Dawwar il-pjanta skont it-tramuntana: 0° = in-naħa ta’ fuq tal-pjanta lejn it-tramuntana, 90° = in-naħa ta’ fuq tħares lejn il-lvant. Ix-xemx u d-dellijiet tal-veduta 3D isegwu.
+La hauteur de tes yeux pendant la visite (🚶 Visiter, vue 3D) : 1,60 m pour un adulte, 1 m pour voir comme un enfant. ¦ Lartësia e syve të tu gjatë vizitës (🚶 Vizito, pamja 3D): 1,60 m për një të rritur, 1 m për të parë si fëmijë. ¦ L-għoli tal-għajnejn tiegħek waqt iż-żjara (🚶 Żur, veduta 3D): 1.60 m għal adult, 1 m biex tara bħal tifel.
+La hauteur de tes yeux dans la maison : 1,60 m pour un adulte, 1 m pour voir comme un enfant. ¦ Lartësia e syve të tu në shtëpi: 1,60 m për një të rritur, 1 m për të parë si fëmijë. ¦ L-għoli tal-għajnejn tiegħek fid-dar: 1.60 m għal adult, 1 m biex tara bħal tifel.
+De combien le milieu du mur sort de la ligne droite : + d’un côté, − de l’autre ; 0 = un mur droit. Pour une tour ronde, une abside, un mur cintré. ¦ Sa del mesi i murit nga vija e drejtë: + nga njëra anë, − nga tjetra; 0 = mur i drejtë. Për një kullë të rrumbullakët, një absidë, një mur të harkuar. ¦ Kemm joħroġ in-nofs tal-ħajt mil-linja dritta: + minn naħa, − mill-oħra; 0 = ħajt dritt. Għal torri tond, absida, ħajt mgħawweġ.
+Agrandit ou rapetisse le motif (briques, pierres, papier peint) sur ce mur : 100 % = taille réelle. ¦ Zmadhon ose zvogëlon motivin (tulla, gurë, letër muri) në këtë mur: 100 % = madhësia e vërtetë. ¦ Ikabbar jew iċekken id-disinn (briks, ġebel, wallpaper) fuq dan il-ħajt: 100 % = daqs veru.
+La hauteur du bas de la fenêtre au-dessus du plancher (souvent 90 cm). ¦ Lartësia e pjesës së poshtme të dritares mbi dysheme (shpesh 90 cm). ¦ L-għoli tal-qiegħ tat-tieqa ’l fuq mill-art (spiss 90 cm).
+Une zone sans plancher : on voit l’étage du dessous (mezzanine, séjour en double hauteur, cage d’escalier). En 3D le plancher est percé, et pendant la visite on ne peut pas y marcher. ¦ Një zonë pa dysheme: shihet kati poshtë (mezaninë, dhomë ndenjeje me lartësi të dyfishtë, kafaz shkalle). Në 3D dyshemeja është e shpuar, dhe gjatë vizitës nuk mund të ecësh aty. ¦ Żona mingħajr art: jidher is-sular ta’ taħt (mezzanin, salott b’għoli doppju, kaxxa tat-taraġ). F’3D l-art hija mtaqqba, u waqt iż-żjara ma tistax timxi fuqha.
+Posé tout seul le long des bords du vide qui ne touchent pas un mur (et laissé ouvert là où arrive un escalier). ¦ Vendoset vetë përgjatë skajeve të boshllëkut që nuk prekin një mur (dhe lihet i hapur aty ku vjen një shkallë). ¦ Jitqiegħed waħdu tul it-truf tal-vojt li ma jmissux ma’ ħajt (u jitħalla miftuħ fejn jasal taraġ).
+En déplaçant la pièce, ses murs (portes et fenêtres comprises), ses meubles et ses textes suivent. ⇧ en glissant : la pièce seule. ¦ Kur zhvendos dhomën, muret e saj (përfshirë dyert dhe dritaret), mobiliet dhe tekstet e saj e ndjekin. ⇧ duke tërhequr: vetëm dhoma. ¦ Meta ċċaqlaq il-kamra, il-ħitan tagħha (inklużi bibien u twieqi), l-għamara u t-testi jsegwuha. ⇧ waqt li tkaxkar: il-kamra biss.
+La hauteur à monter : celle de l’étage plus l’épaisseur du plancher (réglée dans l’onglet Maison). Décoche pour la fixer à la main dans « Hauteur ». ¦ Lartësia për t’u ngjitur: ajo e katit plus trashësia e dyshemesë (rregulluar te skeda Shtëpia). Hiq shenjën për ta caktuar me dorë te «Lartësia». ¦ L-għoli li trid titla’: dak tas-sular flimkien mal-ħxuna tal-art (irranġat fit-tab Dar). Neħħi l-marka biex tiffissah bl-idejn f’“Għoli”.
+Perce le plancher de l’étage du dessus au-dessus de l’escalier (la trémie), avec un garde-corps autour sauf du côté de l’arrivée. ¦ Shpon dyshemenë e katit sipër mbi shkallën (hapja), me një parmak përreth përveç anës së mbërritjes. ¦ Jifqa’ l-art tas-sular ta’ fuq ’il fuq mit-taraġ (il-fetħa), b’poġġaman madwar ħlief min-naħa tal-wasla.
+La hauteur du dessous de l’objet au-dessus du plancher : 0 pour un meuble posé au sol, 140 pour une horloge accrochée au mur. ¦ Lartësia e pjesës së poshtme të objektit mbi dysheme: 0 për një mobilie në dysheme, 140 për një orë të varur në mur. ¦ L-għoli tal-qiegħ tal-oġġett ’il fuq mill-art: 0 għal għamara mal-art, 140 għal arloġġ imdendel mal-ħajt.
+Agrandit ou réduit l’objet en gardant ses proportions : pratique pour un modèle importé arrivé trop petit ou trop grand. ¦ Zmadhon ose zvogëlon objektin duke ruajtur përmasat: e dobishme për një model të importuar që erdhi shumë i vogël ose shumë i madh. ¦ Ikabbar jew iċekken l-oġġett filwaqt li jżomm il-proporzjonijiet: utli għal mudell importat li wasal żgħir wisq jew kbir wisq.
+Une flèche du texte vers un point du plan (le puits, une fenêtre, une cheminée…). Glisse la poignée rouge pour la pointer. ¦ Një shigjetë nga teksti drejt një pike të planit (pusi, një dritare, një oxhak…). Tërhiq dorezën e kuqe për ta drejtuar. ¦ Vleġġa mit-test lejn punt fuq il-pjanta (il-bir, tieqa, ċumnija…). Kaxkar il-manku l-aħmar biex tippuntaha.
+Quand l’aimant des angles est mis, un mur tracé se cale sur des angles de ce pas : 90° = seulement des angles droits, 45° = aussi les diagonales, 15° = plus fin. ¦ Kur magneti i këndeve është aktiv, një mur i vizatuar përshtatet në kënde me këtë hap: 90° = vetëm kënde të drejta, 45° = edhe diagonalet, 15° = më imët. ¦ Meta l-kalamita tal-angoli tkun mixgħula, ħajt imfassal jaqbad ma’ angoli ta’ dan il-pass: 90° = angoli retti biss, 45° = anki d-djagonali, 15° = aktar fin.
+Glisse : la maison prend l’époque la plus proche de l’année (avant ou égale). ¦ Rrëshqit: shtëpia merr periudhën më të afërt me vitin (para ose të barabartë). ¦ Żerżaq: id-dar tieħu l-perjodu l-eqreb lejn is-sena (qabel jew ugwali).
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Les ombres suivent. ¦ Rrotullo planin në lidhje me veriun: 0° = pjesa e sipërme e planit është në veri, 90° = pjesa e sipërme e planit shikon nga lindja. Hijet ndjekin. ¦ Dawwar il-pjanta skont it-tramuntana: 0° = in-naħa ta’ fuq tal-pjanta lejn it-tramuntana, 90° = in-naħa ta’ fuq tħares lejn il-lvant. Id-dellijiet isegwu.
+Licence : {x} ¦ Licenca: {x} ¦ Liċenzja: {x}
+Auteur : {x} ¦ Autori: {x} ¦ Awtur: {x}
+Source : {x} ¦ Burimi: {x} ¦ Sors: {x}
+🕰 ancien ¦ 🕰 i vjetër ¦ 🕰 antik
+Forme « {name} » ¦ Forma «{name}» ¦ Forma “{name}”
+{w} × {d} cm, {h} cm de haut, à {elev} cm du sol ¦ {w} × {d} cm, {h} cm i lartë, {elev} cm nga dyshemeja ¦ {w} × {d} cm, {h} cm għoli, {elev} cm mill-art
+{w} × {d} cm, {h} cm de haut ¦ {w} × {d} cm, {h} cm i lartë ¦ {w} × {d} cm, {h} cm għoli
+{name} (à moi) ¦ {name} (imi) ¦ {name} (tiegħi)
+Comme « {name} » ¦ Si «{name}» ¦ Bħal “{name}”
+Supprimer l’objet « {name} » de la bibliothèque ? ¦ Ta fshish objektin «{name}» nga biblioteka? ¦ Tħassar l-oġġett “{name}” mil-librerija?
+« {name} » est dans « {cat} » : clique-le pour le poser. ¦ «{name}» është te «{cat}»: klikoje për ta vendosur. ¦ “{name}” jinsab f’“{cat}”: ikklikkjah biex tqiegħdu.
+Supprimer « {name} » de « Mes objets » ? ¦ Ta fshish «{name}» nga «Objektet e mia»? ¦ Tħassar “{name}” minn “L-oġġetti tiegħi”?
+Des modèles 3D <b>libres de droit</b> (CC0 : domaine public, utilisables sans condition) à poser dans tes maisons. Ils arrivent dans <b>Mobilier → « Mes objets »</b>, avec leur licence, leur auteur et leur source. ¦ Modele 3D <b>pa të drejta autori</b> (CC0: domen publik, të përdorshme pa kusht) për t’i vendosur në shtëpitë e tua. Mbërrijnë te <b>Mobiliet → «Objektet e mia»</b>, me licencën, autorin dhe burimin e tyre. ¦ Mudelli 3D <b>ħielsa mid-drittijiet</b> (CC0: dominju pubbliku, jistgħu jintużaw mingħajr kundizzjonijiet) biex tpoġġihom fid-djar tiegħek. Jaslu f’<b>Għamara → “L-oġġetti tiegħi”</b>, bil-liċenzja, l-awtur u s-sors tagħhom.
+Modèles fournis par {ph} (Powered by Poly Haven) — licence {cc0}. Le téléchargement passe par ton serveur (environ 1 à 10 Mo par modèle, textures comprises). ¦ Modele të ofruara nga {ph} (Powered by Poly Haven) — licenca {cc0}. Shkarkimi kalon përmes serverit tënd (rreth 1 deri 10 MB për model, përfshirë teksturat). ¦ Mudelli pprovduti minn {ph} (Powered by Poly Haven) — liċenzja {cc0}. It-tniżżil jgħaddi mis-server tiegħek (madwar 1 sa 10 MB għal kull mudell, inklużi t-textures).
+Télécharge d’abord un pack <b>CC0</b> sur le site de son auteur (un fichier .zip), puis choisis-le ici : tu coches les modèles à garder (GLB, glTF, OBJ, STL). ¦ Shkarko fillimisht një paketë <b>CC0</b> nga faqja e autorit të saj (një skedar .zip), pastaj zgjidhe këtu: shënon modelet që do të mbash (GLB, glTF, OBJ, STL). ¦ L-ewwel niżżel pakkett <b>CC0</b> mis-sit tal-awtur tiegħu (fajl .zip), imbagħad agħżlu hawn: timmarka l-mudelli li trid iżżomm (GLB, glTF, OBJ, STL).
+{models} (les {n} plus téléchargés sur {total}) ¦ {models} ({n} më të shkarkuarit nga {total}) ¦ {models} (l-{n} l-aktar imniżżla minn {total})
+« {name} » est dans Mobilier → « Mes objets » (CC0, Poly Haven). ¦ «{name}» është te Mobiliet → «Objektet e mia» (CC0, Poly Haven). ¦ “{name}” jinsab f’Għamara → “L-oġġetti tiegħi” (CC0, Poly Haven).
+Licence trouvée dans le pack ¦ Licenca e gjetur në paketë ¦ Liċenzja misjuba fil-pakkett
+Mesure et vignettes… ¦ Matje dhe miniatura… ¦ Kejl u thumbnails…
+{models} dans « Mes objets ». ¦ {models} te «Objektet e mia». ¦ {models} f’“L-oġġetti tiegħi”.
+Renommer, ranger, voir la licence, supprimer ¦ Riemërto, rendit, shiko licencën, fshi ¦ Ibdel l-isem, irranġa, ara l-liċenzja, ħassar
+Modifier ou supprimer cet objet ¦ Ndrysho ose fshi këtë objekt ¦ Editja jew ħassar dan l-oġġett
+Rien ne correspond. ＋ Crée l’objet, ou cherche-le dans la 📦 Bibliothèque en ligne. ¦ Asgjë nuk përputhet. ＋ Krijo objektin, ose kërkoje te 📦 Biblioteka në internet. ¦ Xejn ma jaqbel. ＋ Oħloq l-oġġett, jew fittxu fil-📦 Librerija online.
+Ici : les objets que tu crées (＋ Créer un objet), ceux téléchargés dans la 📦 Bibliothèque en ligne, et les fichiers 3D importés (⤒ Importer, en haut). ¦ Këtu: objektet që krijon (＋ Krijo një objekt), ato të shkarkuara te 📦 Biblioteka në internet, dhe skedarët 3D të importuar (⤒ Importo, lart). ¦ Hawn: l-oġġetti li toħloq (＋ Oħloq oġġett), dawk imniżżla mil-📦 Librerija online, u l-fajls 3D importati (⤒ Importa, fuq).
+Rien d’ancien dans cette catégorie (décoche « 🕰 Ancien seulement »). ¦ Asgjë e vjetër në këtë kategori (hiq shenjën nga «🕰 Vetëm të vjetrat»). ¦ Xejn antik f’din il-kategorija (neħħi l-marka minn “🕰 Antiki biss”).
+Aucun objet montré dans cette catégorie (⚙️ Ranger pour en remontrer). ¦ Asnjë objekt i shfaqur në këtë kategori (⚙️ Rendit për t’i shfaqur sërish). ¦ L-ebda oġġett muri f’din il-kategorija (⚙️ Irranġa biex terġa’ turihom).
+Chercher… lit, lampe, piano, vache, salon… ¦ Kërko… shtrat, llambë, piano, lopë, sallon… ¦ Fittex… sodda, lampa, pjanu, baqra, salott…
+Chercher un objet ¦ Kërko një objekt ¦ Fittex oġġett
+Un objet à toi : nom, taille, couleur, forme, image ¦ Një objekt yti: emri, madhësia, ngjyra, forma, imazhi ¦ Oġġett tiegħek: isem, daqs, kulur, forma, stampa
+Des modèles 3D libres de droit (CC0) à télécharger ¦ Modele 3D pa të drejta autori (CC0) për t’u shkarkuar ¦ Mudelli 3D ħielsa mid-drittijiet (CC0) biex tniżżel
+Montrer, cacher, ranger les catégories et les objets ¦ Shfaq, fshih, rendit kategoritë dhe objektet ¦ Uri, aħbi, irranġa l-kategoriji u l-oġġetti
+Ne montrer que le mobilier et les objets d’autrefois ¦ Shfaq vetëm mobiliet dhe objektet e dikurshme ¦ Uri biss l-għamara u l-oġġetti ta’ żmien ilu
+＋ Créer un objet ¦ ＋ Krijo një objekt ¦ ＋ Oħloq oġġett
+📦 Bibliothèque en ligne ¦ 📦 Biblioteka në internet ¦ 📦 Librerija online
+⚙️ Ranger ¦ ⚙️ Rendit ¦ ⚙️ Irranġa
+🕰 Ancien seulement ¦ 🕰 Vetëm të vjetrat ¦ 🕰 Antiki biss
+Ovale ¦ Ovale ¦ Ovali
+Triangle ¦ Trekëndësh ¦ Trijangolu
+En L ¦ Në L ¦ F’forma ta’ L
+Lit simple ¦ Shtrat njëvendësh ¦ Sodda singola
+Lit clos ¦ Shtrat i mbyllur ¦ Sodda magħluqa
+Meuble à portes ¦ Mobilie me dyer ¦ Għamara bil-bibien
+Banc-coffre à dossier ¦ Stol-sënduk me mbështetëse ¦ Bank-kaxxa bid-dahar
+Horloge ¦ Orë muri ¦ Arloġġ
+Cheminée à manteau ¦ Oxhak me mantel ¦ Ċumnija bil-mantell
+Cheminée à manteau (hotte) ¦ Oxhak me mantel (kapuç) ¦ Ċumnija bil-mantell (kappa)
+Poêle ¦ Sobë ¦ Stufa
+Cuisinière ¦ Sobë kuzhine ¦ Kuker
+Évier ¦ Lavaman kuzhine ¦ Sink
+Lavabo, toilette ¦ Lavaman, tualet ¦ Lavaman, toilette
+Maie, pétrin ¦ Magje ¦ Maxtura tal-għaġin
+Broc et cuvette ¦ Ibrik dhe legen ¦ Buqar u lifgħen
+Fontaine ¦ Burim uji ¦ Funtana
+Baratte ¦ Tundës ¦ Magħżna tal-butir
+Lampe ¦ Llambë ¦ Lampa
+Bougeoir ¦ Shandan ¦ Lasta tax-xemgħa
+Chenets ¦ Mbajtëse druri të zjarrit ¦ Ħadid tal-ħatab
+Fer à repasser ¦ Hekur për hekurosje ¦ Ħadida tal-moglija
+Banc d’école ¦ Bankë shkolle ¦ Bank tal-iskola
+Miroir, cadre au mur ¦ Pasqyrë, kornizë në mur ¦ Mera, gwarniċ mal-ħajt
+Statue ¦ Statujë ¦ Statwa
+Animal ¦ Kafshë ¦ Annimal
+Cabane ¦ Kasolle ¦ Barrakka
+Cône, tipi ¦ Kon, tipi ¦ Kon, tipi
+Bloc (boîte pleine) ¦ Bllok (kuti e plotë) ¦ Blokk (kaxxa mimlija)
+Cylindre ¦ Cilindër ¦ Ċilindru
+Bassine, baquet (ouvert) ¦ Legen, govatë (e hapur) ¦ Bieqja, banju tal-injam (miftuħ)
+Table (plateau et 4 pieds) ¦ Tavolinë (pllakë dhe 4 këmbë) ¦ Mejda (wiċċ u 4 saqajn)
+Table ovale ¦ Tavolinë ovale ¦ Mejda ovali
+Caisson sur pieds ¦ Kuti mbi këmbë ¦ Kaxxa fuq saqajn
+Comptoir, plan de travail ¦ Banak, sipërfaqe pune ¦ Kontrabank, wiċċ tax-xogħol
+Buffet deux-corps, vaisselier ¦ Bufe me dy pjesë, raft enësh ¦ Kredenza b’żewġ partijiet, armarju tal-platti
+Vitrine ¦ Vitrinë ¦ Vetrina
+Armoire (corniche) ¦ Dollap (korniza) ¦ Armarju (korniċun)
+Commode à tiroirs ¦ Komo me sirtarë ¦ Kmoda bil-kexxun
+Coffre à couvercle ¦ Sënduk me kapak ¦ Kaxxa bl-għatu
+Étagère ouverte ¦ Raft i hapur ¦ Xkaffa miftuħa
+Lit ¦ Shtrat ¦ Sodda
+Poêle rond (Godin) ¦ Sobë e rrumbullakët (Godin) ¦ Stufa tonda (Godin)
+Crémaillère et chaudron ¦ Zinxhir oxhaku dhe kazan ¦ Katina tal-fuklar u borma
+Baignoire sur pieds ¦ Vaskë me këmbë ¦ Banju fuq saqajn
+Lavabo sur colonne ¦ Lavaman me këmbë ¦ Lavaman fuq kolonna
+Fontaine sur support ¦ Burim uji mbi mbajtëse ¦ Funtana fuq stand
+Baratte à piston ¦ Tundës me piston ¦ Magħżna tal-butir bil-pistun
+Lampe à pétrole ¦ Llambë me vajguri ¦ Lampa tal-pitrolju
+Bougeoir, chandelier ¦ Shandan, shandan me shumë krahë ¦ Lasta tax-xemgħa, kandelabru
+Poste TSF ¦ Radio e vjetër ¦ Radju antik
+Phonographe ¦ Fonograf ¦ Fonografu
+Machine à coudre à pédale ¦ Makinë qepëse me pedal ¦ Magna tal-ħjata bil-pedala
+Banc d’école à pupitre ¦ Bankë shkolle me tryezë shkrimi ¦ Bank tal-iskola bid-deskijiet
+Pressoir, presse ¦ Shtrydhëse, presë ¦ Magħsar, pressa
+Miroir ¦ Pasqyrë ¦ Mera
+Cadre au mur ¦ Kornizë në mur ¦ Gwarniċ mal-ħajt
+Statue sur socle ¦ Statujë mbi piedestal ¦ Statwa fuq pedestall
+Plante en pot ¦ Bimë në vazo ¦ Pjanta f’qasrija
+Boule ¦ Sferë ¦ Sfera
+Cône ¦ Kon ¦ Kon
+Cabane (toit) ¦ Kasolle (çati) ¦ Barrakka (saqaf)
+À plat (tapis) ¦ Rrafsh (qilim) ¦ Ċatt (tapit)
+Plateau avec l’image dessus ¦ Pllakë me imazhin sipër ¦ Wiċċ bl-istampa fuqu
+MAISON · MOBILIER ¦ SHTËPIA · MOBILIET ¦ DAR · GĦAMARA
+MAISON · MES OBJETS ¦ SHTËPIA · OBJEKTET E MIA ¦ DAR · L-OĠĠETTI TIEGĦI
+Créer l’objet ¦ Krijo objektin ¦ Oħloq l-oġġett
+Partir d’un objet existant (facultatif) ¦ Nis nga një objekt ekzistues (opsionale) ¦ Ibda minn oġġett eżistenti (mhux obbligatorju)
+— un objet vide — ¦ — një objekt bosh — ¦ — oġġett vojt —
+ex. Armoire de la grand-mère, pressoir du moulin… ¦ p.sh. Dollapi i gjyshes, shtrydhësja e mullirit… ¦ eż. L-armarju tan-nanna, il-magħsar tal-mitħna…
+Nouvelle catégorie… ¦ Kategori e re… ¦ Kategorija ġdida…
+ex. Grenier ¦ p.sh. Papafingo ¦ eż. Attic
+Vu de dessus (2D) ¦ Parë nga lart (2D) ¦ Muri minn fuq (2D)
+En volume (3D) ¦ Në vëllim (3D) ¦ Fil-volum (3D)
+2ᵉ couleur (pieds, poignées, filets) ¦ Ngjyra e 2-të (këmbë, doreza, vija zbukuruese) ¦ It-2 kulur (saqajn, maniki, filetti)
+2ᵉ couleur ¦ Ngjyra e 2-të ¦ It-2 kulur
+Une deuxième couleur ¦ Një ngjyrë e dytë ¦ It-tieni kulur
+Posé au sol (0), sur une table (75), accroché au mur (140)… ¦ Në dysheme (0), mbi tavolinë (75), varur në mur (140)… ¦ Mal-art (0), fuq mejda (75), imdendel mal-ħajt (140)…
+Tourné de ¦ Rrotulluar me ¦ Imdawwar b’
+Image vue de dessus (facultatif) ¦ Imazh i parë nga lart (opsional) ¦ Stampa minn fuq (mhux obbligatorja)
+🖼️ Une photo des médias… ¦ 🖼️ Një foto nga mediat… ¦ 🖼️ Ritratt mill-midja…
+Retirer l’image ¦ Hiq imazhin ¦ Neħħi l-istampa
+Note (souvenir, provenance) ¦ Shënim (kujtim, prejardhje) ¦ Nota (tifkira, provenjenza)
+Aperçu en 3D ¦ Paraparje në 3D ¦ Preview f’3D
+⏳ Mesure… ¦ ⏳ Matje… ¦ ⏳ Kejl…
+Une photo de l’objet (vue de dessus) ¦ Një foto e objektit (pamje nga lart) ¦ Ritratt tal-oġġett (veduta minn fuq)
+L’image se pose sur le plan, à la taille de l’objet. ¦ Imazhi vendoset në plan, në madhësinë e objektit. ¦ L-istampa titqiegħed fuq il-pjanta, fid-daqs tal-oġġett.
+Ceux déjà posés dans les maisons restent. ¦ Ato që janë vendosur tashmë në shtëpi mbeten. ¦ Dawk diġà mqiegħda fid-djar jibqgħu.
+Donne un nom à la nouvelle catégorie. ¦ Jepi një emër kategorisë së re. ¦ Agħti isem lill-kategorija l-ġdida.
+Objet modifié (ceux déjà posés gardent leur ancienne forme). ¦ Objekti u ndryshua (ato që janë vendosur tashmë mbajnë formën e vjetër). ¦ Oġġett mibdul (dawk diġà mqiegħda jżommu l-forma l-qadima).
+Montrer aussi dans la catégorie ¦ Shfaq edhe në kategorinë ¦ Uri wkoll fil-kategorija
+— seulement dans « Mes objets » — ¦ — vetëm te «Objektet e mia» — ¦ — f’“L-oġġetti tiegħi” biss —
+« Mes objets » seulement ¦ Vetëm «Objektet e mia» ¦ “L-oġġetti tiegħi” biss
+Licence ¦ Licenca ¦ Liċenzja
+non précisée (fichier importé) ¦ e papërcaktuar (skedar i importuar) ¦ mhux speċifikata (fajl importat)
+Le fichier 3D est supprimé : là où il est posé, il redevient une simple boîte. ¦ Skedari 3D fshihet: aty ku është vendosur, bëhet sërish një kuti e thjeshtë. ¦ Il-fajl 3D jitħassar: fejn hu mqiegħed, jerġa’ jsir kaxxa sempliċi.
+Aucun objet. ¦ Asnjë objekt. ¦ L-ebda oġġett.
+⚙️ Ranger le mobilier ¦ ⚙️ Rendit mobiliet ¦ ⚙️ Irranġa l-għamara
+Coche ce que tu veux voir et range avec ↑ ↓ : les catégories, puis les objets de chaque catégorie. ¦ Shëno atë që do të shohësh dhe rendit me ↑ ↓: kategoritë, pastaj objektet e secilës kategori. ¦ Immarka dak li trid tara u rranġa b’↑ ↓: il-kategoriji, imbagħad l-oġġetti ta’ kull kategorija.
+Objets de ¦ Objektet e ¦ Oġġetti ta’
+Mobilier remis comme au départ. ¦ Mobiliet u kthyen si në fillim. ¦ L-għamara reġgħet tqiegħdet kif kienet.
+Garde au moins une catégorie. ¦ Mbaj të paktën një kategori. ¦ Żomm mill-inqas kategorija waħda.
+Kenney — tous les packs 3D ¦ Kenney — të gjitha paketat 3D ¦ Kenney — il-pakketti 3D kollha
+OpenGameArt — filtre « CC0 » ¦ OpenGameArt — filtri «CC0» ¦ OpenGameArt — filtru “CC0”
+📦 Bibliothèque en ligne (libre de droit) ¦ 📦 Biblioteka në internet (pa të drejta autori) ¦ 📦 Librerija online (ħielsa mid-drittijiet)
+Chercher (en français ou en anglais) : chaise, tonneau, lampe, vase… ¦ Kërko (në frëngjisht ose në anglisht): karrige, fuçi, llambë, vazo… ¦ Fittex (bil-Franċiż jew bl-Ingliż): siġġu, btija, lampa, vażun…
+🌐 Poly Haven (en ligne) ¦ 🌐 Poly Haven (në internet) ¦ 🌐 Poly Haven (online)
+🗜️ Un pack ZIP (Kenney, Quaternius…) ¦ 🗜️ Një paketë ZIP (Kenney, Quaternius…) ¦ 🗜️ Pakkett ZIP (Kenney, Quaternius…)
+Ranger aussi dans ¦ Vendos edhe te ¦ Poġġi wkoll f’
+Chargement de la liste… ¦ Po ngarkohet lista… ¦ Qed titgħabba l-lista…
+Recherche… ¦ Po kërkohet… ¦ Qed infittex…
+🗜️ Choisir le fichier ZIP… ¦ 🗜️ Zgjidh skedarin ZIP… ¦ 🗜️ Agħżel il-fajl ZIP…
+Voir sur Poly Haven ¦ Shiko në Poly Haven ¦ Ara fuq Poly Haven
+Aucun modèle ne correspond. ¦ Asnjë model nuk përputhet. ¦ L-ebda mudell ma jaqbel.
+Sans internet, tu peux toujours importer un pack ZIP déjà téléchargé (onglet à côté), ou ＋ créer tes objets. ¦ Pa internet, mund të importosh gjithmonë një paketë ZIP të shkarkuar më parë (skeda ngjitur), ose ＋ të krijosh objektet e tua. ¦ Mingħajr internet, xorta tista’ timporta pakkett ZIP diġà mniżżel (it-tab ta’ ħdejh), jew ＋ toħloq l-oġġetti tiegħek.
+Un téléchargement est en cours… ¦ Një shkarkim është në vazhdim… ¦ Hemm tniżżil għaddej…
+⏳ Téléchargement… ¦ ⏳ Po shkarkohet… ¦ ⏳ Qed jitniżżel…
+✓ Dans « Mes objets » ¦ ✓ Te «Objektet e mia» ¦ ✓ F’“L-oġġetti tiegħi”
+Envoi et lecture du pack… ¦ Po dërgohet dhe lexohet paketa… ¦ Qed jintbagħat u jinqara l-pakkett…
+Envoi impossible (fichier trop gros pour le serveur ?). ¦ Dërgimi është i pamundur (skedar shumë i madh për serverin?). ¦ Ma jistax jintbagħat (fajl kbir wisq għas-server?).
+Envoi impossible. ¦ Dërgimi është i pamundur. ¦ Ma jistax jintbagħat.
+Image impossible. ¦ Imazh i pamundur. ¦ Stampa impossibbli.
+Aucun fichier de licence dans le pack : vérifie sur le site de l’auteur qu’il est bien libre de droit. ¦ Asnjë skedar licence në paketë: kontrollo në faqen e autorit që është vërtet pa të drejta autori. ¦ L-ebda fajl ta’ liċenzja fil-pakkett: iċċekkja fuq is-sit tal-awtur li verament ħieles mid-drittijiet.
+Auteur, source ¦ Autori, burimi ¦ Awtur, sors
+Adresse du pack (facultatif) ¦ Adresa e paketës (opsionale) ¦ Indirizz tal-pakkett (mhux obbligatorju)
+⤒ Importer les modèles cochés ¦ ⤒ Importo modelet e shënuara ¦ ⤒ Importa l-mudelli mmarkati
+Coche au moins un modèle. ¦ Shëno të paktën një model. ¦ Immarka mill-inqas mudell wieħed.
+Indique la licence du pack (par exemple CC0 1.0). ¦ Trego licencën e paketës (për shembull CC0 1.0). ¦ Indika l-liċenzja tal-pakkett (pereżempju CC0 1.0).
+Surface (m²) ¦ Sipërfaqja (m²) ¦ Erja (m²)
+Loi Carrez ≥ 1,80 m (m²) ¦ Ligji Carrez ≥ 1,80 m (m²) ¦ Liġi Carrez ≥ 1.80 m (m²)
+Hauteur mini (cm) ¦ Lartësia min. (cm) ¦ Għoli minimu (cm)
+Hauteur maxi (cm) ¦ Lartësia maks. (cm) ¦ Għoli massimu (cm)
+Un mur de moins de 5 cm (un double-clic de trop ?) ¦ Një mur më i shkurtër se 5 cm (një klik i dyfishtë i tepërt?) ¦ Ħajt ta’ inqas minn 5 cm (klikk doppju żejjed?)
+« {name} » n’a pas de porte ¦ «{name}» nuk ka derë ¦ “{name}” m’għandux bieb
+=Escalier un peu raide : {n} marches de {rise} cm, giron {going} cm (2 h + g = {sum} cm) ¦ Shkallë pak e pjerrët: {n} shkallë prej {rise} cm, shkelja {going} cm (2 l + s = {sum} cm)|Shkallë pak e pjerrët: {n} shkallë prej {rise} cm, shkelja {going} cm (2 l + s = {sum} cm) ¦ Taraġ ftit wieqaf: {n} tarġa ta’ {rise} cm, wisa’ {going} cm (2 g + w = {sum} cm)|Taraġ ftit wieqaf: {n} turġien ta’ {rise} cm, wisa’ {going} cm (2 g + w = {sum} cm)|Taraġ ftit wieqaf: {n} turġien ta’ {rise} cm, wisa’ {going} cm (2 g + w = {sum} cm)|Taraġ ftit wieqaf: {n} tarġa ta’ {rise} cm, wisa’ {going} cm (2 g + w = {sum} cm)|Taraġ ftit wieqaf: {n} tarġa ta’ {rise} cm, wisa’ {going} cm (2 g + w = {sum} cm)
+Un escalier sans étage au-dessus ¦ Një shkallë pa kat sipër ¦ Taraġ mingħajr sular fuq
+L’escalier ne perce pas le plancher de « {name} » (Propriétés → « Ouvrir le plancher au-dessus ») ¦ Shkalla nuk e shpon dyshemenë e «{name}» (Vetitë → «Hap dyshemenë sipër») ¦ It-taraġ ma jiftaħx l-art ta’ “{name}” (Karatteristiċi → “Iftaħ l-art ta’ fuq”)
+Un vide à l’étage le plus bas : il n’ouvre sur rien ¦ Një boshllëk në katin më të ulët: nuk hapet mbi asgjë ¦ Vojt fl-iktar sular baxx: ma jagħti fuq xejn
+Des pièces sans aucun mur ¦ Dhoma pa asnjë mur ¦ Kmamar mingħajr l-ebda ħajt
+maison|Mur ¦ Mur ¦ Ħajt
+maison|Ouverture ¦ Hapje ¦ Fetħa
+maison|Combles ¦ Papafingo ¦ Attic
+maison|Pièce ¦ Dhomë ¦ Kamra
+maison|Escalier ¦ Shkallë ¦ Taraġ
+maison|Étage ¦ Kat ¦ Sular
+Mur ¦ Mur ¦ Ħajt
+Escalier ¦ Shkallë ¦ Taraġ
+Combles ¦ Papafingo ¦ Attic
+Plans ¦ Planet ¦ Pjanti
+▶ Visite guidée ¦ ▶ Vizitë me guidë ¦ ▶ Żjara gwidata
+Visite en lecture seule, ouverte sans l’application. Souris ou doigt pour tourner, molette pour zoomer, « 🚶 Visiter » pour marcher (Z Q S D ou flèches). ¦ Vizitë vetëm për lexim, e hapur pa aplikacionin. Miu ose gishti për të rrotulluar, rrota për zmadhim, «🚶 Vizito» për të ecur (W A S D ose shigjetat). ¦ Żjara għall-qari biss, miftuħa mingħajr l-app. Maws jew saba’ biex iddawwar, rota għaż-żum, “🚶 Żur” biex timxi (W A S D jew vleġeġ).
+📐 Surfaces ¦ 📐 Sipërfaqet ¦ 📐 Erjas
+Surfaces ¦ Sipërfaqet ¦ Erjas
+⚠️ Vérifier le plan ¦ ⚠️ Kontrollo planin ¦ ⚠️ Iċċekkja l-pjanta
+🗺 Visite guidée ¦ 🗺 Vizitë me guidë ¦ 🗺 Żjara gwidata
+aucun arrêt ¦ asnjë ndalesë ¦ l-ebda waqfa
+📷 Photos d’époque ¦ 📷 Foto të asaj kohe ¦ 📷 Ritratti ta’ dak iż-żmien
+🏘 Le hameau ¦ 🏘 Fshati i vogël ¦ 🏘 Ir-raħal
+cette maison seule ¦ vetëm kjo shtëpi ¦ din id-dar biss
+foyer n° {n} ¦ familja nr. {n} ¦ familja nru {n}
+{a} à {b} m ¦ {a} deri {b} m ¦ minn {a} sa {b} m
+un clic : aller à l’endroit ¦ një klik: shko te vendi ¦ klikk: mur fil-post
+{name} — coupe ¦ {name} — prerje ¦ {name} — sezzjoni
+Texte de l’arrêt {n} ¦ Teksti i ndalesës {n} ¦ Test tal-waqfa {n}
+Texte de l’arrêt ¦ Teksti i ndalesës ¦ Test tal-waqfa
+⤓ Exporter la vidéo en {fmt} ¦ ⤓ Eksporto videon në {fmt} ¦ ⤓ Esporta l-vidjo f’{fmt}
+{stops} : la caméra glisse de l’un à l’autre, et le texte de chaque arrêt s’affiche en sous-titre. La vidéo se fait en temps réel (environ {s} secondes) : laisse la fenêtre ouverte. ¦ {stops}: kamera rrëshqet nga njëra te tjetra, dhe teksti i çdo ndalese shfaqet si titra. Videoja bëhet në kohë reale (rreth {s} sekonda): lëre dritaren të hapur. ¦ {stops}: il-kamera tiżżerżaq minn waħda għall-oħra, u t-test ta’ kull waqfa jidher bħala sottotitlu. Il-vidjo ssir f’ħin reali (madwar {s} sekonda): ħalli t-tieqa miftuħa.
+Une fenêtre est posée sur un mur qui n’existe plus ¦ Një dritare është vendosur mbi një mur që nuk ekziston më ¦ Tieqa qiegħda fuq ħajt li m’għadux jeżisti
+Une porte est posée sur un mur qui n’existe plus ¦ Një derë është vendosur mbi një mur që nuk ekziston më ¦ Bieb qiegħed fuq ħajt li m’għadux jeżisti
+Une fenêtre est plus large que son mur ¦ Një dritare është më e gjerë se muri i saj ¦ Tieqa usa’ mill-ħajt tagħha
+Une porte est plus large que son mur ¦ Një derë është më e gjerë se muri i saj ¦ Bieb usa’ mill-ħajt tiegħu
+Une fenêtre dépasse le plafond ({top} cm pour {wall} cm de mur) : elle est coupée par le plancher ¦ Një dritare kalon tavanin ({top} cm për {wall} cm mur): pritet nga dyshemeja ¦ Tieqa taqbeż is-saqaf ({top} cm għal {wall} cm ta’ ħajt): l-art tal-fuq taqtagħha
+Une porte dépasse le plafond ({top} cm pour {wall} cm de mur) : elle est coupée par le plancher ¦ Një derë kalon tavanin ({top} cm për {wall} cm mur): pritet nga dyshemeja ¦ Bieb jaqbeż is-saqaf ({top} cm għal {wall} cm ta’ ħajt): l-art tal-fuq taqtgħu
+Une fenêtre passe sous la pente du toit à cet endroit ¦ Një dritare kalon nën pjerrësinë e çatisë në këtë vend ¦ Tieqa tgħaddi taħt l-inklinazzjoni tas-saqaf f’dan il-post
+Une porte passe sous la pente du toit à cet endroit ¦ Një derë kalon nën pjerrësinë e çatisë në këtë vend ¦ Bieb jgħaddi taħt l-inklinazzjoni tas-saqaf f’dan il-post
+🧰 Outils de la maison ¦ 🧰 Mjetet e shtëpisë ¦ 🧰 L-għodod tad-dar
+Le tableau des surfaces, ouvert dans le 🧾 Tableur ¦ Tabela e sipërfaqeve, e hapur te 🧾 Fletë llogaritëse ¦ It-tabella tal-erjas, miftuħa fil-🧾 Folja elettronika
+Clique deux points sur le plan : la ligne de coupe ¦ Kliko dy pika në plan: vija e prerjes ¦ Ikklikkja żewġ punti fuq il-pjanta: il-linja tas-sezzjoni
+📐 Surfaces par pièce ¦ 📐 Sipërfaqet sipas dhomës ¦ 📐 Erjas għal kull kamra
+✂ Tracer la ligne de coupe ¦ ✂ Vizato vijën e prerjes ¦ ✂ Iddisinja l-linja tas-sezzjoni
+✂ Voir la coupe ¦ ✂ Shiko prerjen ¦ ✂ Ara s-sezzjoni
+🕰 L’année ¦ 🕰 Viti ¦ 🕰 Is-sena
+Pendant que tu glisses l’année, l’époque d’avant reste visible en pointillés sépia ¦ Ndërsa rrëshqet vitin, periudha e mëparshme mbetet e dukshme me pika sepia ¦ Waqt li żżerżaq is-sena, il-perjodu ta’ qabel jibqa’ jidher bit-tikki sepja
+👻 Voir l’époque d’avant en fantôme ¦ 👻 Shiko periudhën e mëparshme si fantazmë ¦ 👻 Ara l-perjodu ta’ qabel bħala fatat
+La visite guidée en vidéo, toute faite : on glisse d’un arrêt à l’autre, le texte en sous-titre ¦ Vizita me guidë në video, e gatshme: rrëshqet nga një ndalesë te tjetra, teksti si titra ¦ Iż-żjara gwidata bil-vidjo, lesta: tiżżerżaq minn waqfa għall-oħra, it-test bħala sottotitlu
+Une image par arrêt et les textes, dans un fichier .zip : à glisser dans le 🎬 Montage ¦ Një imazh për çdo ndalesë dhe tekstet, në një skedar .zip: për ta tërhequr te 🎬 Montazhi ¦ Stampa għal kull waqfa u t-testi, f’fajl .zip: biex tkaxkarhom fl-🎬 Immuntar
+✎ Les arrêts ¦ ✎ Ndalesat ¦ ✎ Il-waqfiet
+🎬 Vidéo de la visite… ¦ 🎬 Video e vizitës… ¦ 🎬 Vidjo taż-żjara…
+⤓ Images de la visite ¦ ⤓ Imazhet e vizitës ¦ ⤓ Stampi taż-żjara
+Les arrêts et les photos se posent pendant la visite (🚶 Visiter, vue 3D) ¦ Ndalesat dhe fotot vendosen gjatë vizitës (🚶 Vizito, pamja 3D) ¦ Il-waqfiet u r-ritratti jitqiegħdu waqt iż-żjara (🚶 Żur, veduta 3D)
+＋ Arrêt, 📷 photo… ¦ ＋ Ndalesë, 📷 foto… ¦ ＋ Waqfa, 📷 ritratt…
+Un fichier .html à envoyer : la maison en 3D et ses plans, sans l’app, en lecture seule (sans personnes ni souvenirs) ¦ Një skedar .html për ta dërguar: shtëpia në 3D dhe planet e saj, pa aplikacionin, vetëm për lexim (pa persona as kujtime) ¦ Fajl .html biex tibgħat: id-dar f’3D u l-pjanti tagħha, mingħajr l-app, għall-qari biss (mingħajr persuni u lanqas tifkiriet)
+🏘 Bâtiments du terrain… ¦ 🏘 Ndërtesat e truallit… ¦ 🏘 Il-bini tal-art…
+📤 Partager la visite ¦ 📤 Ndaj vizitën ¦ 📤 Aqsam iż-żjara
+Aucune pièce dessinée. ¦ Asnjë dhomë e vizatuar. ¦ L-ebda kamra mpinġija.
+Toute la maison ¦ Gjithë shtëpia ¦ Id-dar kollha
+Loi Carrez ¦ Ligji Carrez ¦ Liġi Carrez
+Surface ¦ Sipërfaqja ¦ Erja
+Loi Carrez : seules comptent les parties où l’on tient debout (hauteur sous plafond d’au moins 1,80 m, combles comprises). Les vides et les escaliers ne comptent pas. ¦ Ligji Carrez: llogariten vetëm pjesët ku mund të qëndrosh në këmbë (lartësi nën tavan të paktën 1,80 m, përfshirë papafingon). Boshllëqet dhe shkallët nuk llogariten. ¦ Liġi Carrez: jgħoddu biss il-partijiet fejn tista’ toqgħod bilwieqfa (għoli taħt is-saqaf ta’ mill-inqas 1.80 m, inkluż l-attic). Il-vojt u t-taraġ ma jgħoddux.
+Le Tableur n’est pas prêt. ¦ Fleta llogaritëse nuk është gati. ¦ Il-Folja elettronika mhix lesta.
+Rien à signaler : portes, fenêtres, escaliers et pièces sont cohérents. ¦ Asgjë për të sinjalizuar: dyert, dritaret, shkallët dhe dhomat janë koherente. ¦ Xejn x’tirrapporta: bibien, twieqi, taraġ u kmamar huma koerenti.
+✓ Rien à signaler. ¦ ✓ Asgjë për të sinjalizuar. ¦ ✓ Xejn x’tirrapporta.
+✂ Clique les deux bouts de la ligne de coupe sur le plan ¦ ✂ Kliko dy skajet e vijës së prerjes në plan ¦ ✂ Ikklikkja ż-żewġ truf tal-linja tas-sezzjoni fuq il-pjanta
+Ligne de coupe ¦ Vija e prerjes ¦ Linja tas-sezzjoni
+Trace d’abord la ligne de coupe sur le plan. ¦ Vizato fillimisht vijën e prerjes në plan. ¦ L-ewwel iddisinja l-linja tas-sezzjoni fuq il-pjanta.
+✂ Coupe de la maison ¦ ✂ Prerja e shtëpisë ¦ ✂ Sezzjoni tad-dar
+⤓ Exporter en SVG ¦ ⤓ Eksporto në SVG ¦ ⤓ Esporta f’SVG
+⤓ Exporter en PNG ¦ ⤓ Eksporto në PNG ¦ ⤓ Esporta f’PNG
+Ouvre la vue 3D, puis « 🚶 Visiter » : en bas de la visite, « 📍 Arrêt ici » pose un arrêt (avec un texte lu à voix haute) et « 📷 Photo d’époque ici » pose une photo prise de cet endroit. ¦ Hap pamjen 3D, pastaj «🚶 Vizito»: poshtë në vizitë, «📍 Ndalesë këtu» vendos një ndalesë (me një tekst që lexohet me zë) dhe «📷 Foto e asaj kohe këtu» vendos një foto të bërë nga ky vend. ¦ Iftaħ il-veduta 3D, imbagħad “🚶 Żur”: isfel fiż-żjara, “📍 Waqfa hawn” tqiegħed waqfa (b’test moqri b’leħen għoli) u “📷 Ritratt ta’ dak iż-żmien hawn” iqiegħed ritratt meħud minn dan il-post.
+🗺 Les arrêts de la visite guidée ¦ 🗺 Ndalesat e vizitës me guidë ¦ 🗺 Il-waqfiet taż-żjara gwidata
+Arrêt retiré ¦ Ndalesa u hoq ¦ Waqfa mneħħija
+Arrêts rangés ¦ Ndalesat u renditën ¦ Waqfiet irranġati
+Impossible de faire les images. ¦ Imazhet nuk mund të bëhen. ¦ Ma jistgħux isiru l-istampi.
+Une image par arrêt… ¦ Një imazh për çdo ndalesë… ¦ Stampa għal kull waqfa…
+Pose d’abord des arrêts : vue 3D → 🚶 Visiter → 📍 Arrêt ici. ¦ Vendos fillimisht ndalesa: pamja 3D → 🚶 Vizito → 📍 Ndalesë këtu. ¦ L-ewwel poġġi xi waqfiet: veduta 3D → 🚶 Żur → 📍 Waqfa hawn.
+🎬 La vidéo de la visite guidée ¦ 🎬 Videoja e vizitës me guidë ¦ 🎬 Il-vidjo taż-żjara gwidata
+Paysage 1280 × 720 (écran) ¦ Horizontale 1280 × 720 (ekran) ¦ Pajsaġġ 1280 × 720 (skrin)
+Carré 1080 × 1080 (messageries) ¦ Katror 1080 × 1080 (mesazhe) ¦ Kwadru 1080 × 1080 (messaġġi)
+Titre au début ¦ Titulli në fillim ¦ Titlu fil-bidu
+⛔ Ce navigateur ne sait pas enregistrer de vidéo : garde « ⤓ Images de la visite ». ¦ ⛔ Ky shfletues nuk di të regjistrojë video: përdor «⤓ Imazhet e vizitës». ¦ ⛔ Dan il-browser ma jafx jirrekordja vidjo: żomm “⤓ Stampi taż-żjara”.
+🔴 Enregistrement de la visite… ¦ 🔴 Po regjistrohet vizita… ¦ 🔴 Qed tiġi rrekordjata ż-żjara…
+fenêtre des médias indisponible ¦ dritarja e mediave nuk është e disponueshme ¦ it-tieqa tal-midja mhix disponibbli
+✓ Vidéo exportée, et une copie rangée dans les médias. ¦ ✓ Videoja u eksportua, dhe një kopje u ruajt te mediat. ¦ ✓ Vidjo esportat, u kopja tqiegħdet fil-midja.
+✓ Vidéo exportée. ¦ ✓ Videoja u eksportua. ¦ ✓ Vidjo esportat.
+Photo retirée ¦ Fotoja u hoq ¦ Ritratt imneħħi
+Fichier prêt : envoie-le, il s’ouvre d’un double-clic dans un navigateur, sans l’app. ¦ Skedari është gati: dërgoje, hapet me klik të dyfishtë në një shfletues, pa aplikacionin. ¦ Il-fajl lest: ibagħtu, jinfetaħ bi klikk doppju f’browser, mingħajr l-app.
+Retirer du terrain ¦ Hiq nga trualli ¦ Neħħi mill-art
+🏘 Le hameau : les bâtiments du terrain ¦ 🏘 Fshati i vogël: ndërtesat e truallit ¦ 🏘 Ir-raħal: il-bini tal-art
+La ferme, la grange, le four, le puits, les maisons voisines : chacune est une maison de la liste « 🏠 Maisons de famille », posée ici à côté (en 3D et en pointillés sur le plan). ¦ Ferma, hambari, furra, pusi, shtëpitë fqinje: secila është një shtëpi e listës «🏠 Shtëpitë e familjes», e vendosur këtu pranë (në 3D dhe me pika në plan). ¦ Ir-razzett, il-maqjel, il-forn, il-bir, id-djar tal-ġirien: kull waħda hija dar mil-lista “🏠 Djar tal-familja”, imqiegħda hawn ħdejha (f’3D u bit-tikki fuq il-pjanta).
+＋ Ajouter un bâtiment ¦ ＋ Shto një ndërtesë ¦ ＋ Żid bini
+N° de foyer au recensement (facultatif) ¦ Nr. i familjes në regjistrimin e popullsisë (opsional) ¦ Nru tal-familja fiċ-ċensiment (mhux obbligatorju)
+Bâtiment ajouté ¦ Ndërtesa u shtua ¦ Bini miżjud
+Bâtiment déplacé ¦ Ndërtesa u zhvendos ¦ Bini mċaqlaq
+Bâtiment retiré ¦ Ndërtesa u hoq ¦ Bini mneħħi
+Soleil à {deg}° de haut, au {dir} ¦ Dielli {deg}° lart, në {dir} ¦ Xemx {deg}° fl-għoli, lejn {dir}
+boussole|nord ¦ veri ¦ tramuntana
+boussole|nord-est ¦ verilindje ¦ grigal
+boussole|est ¦ lindje ¦ lvant
+boussole|sud-est ¦ juglindje ¦ xlokk
+boussole|sud ¦ jug ¦ nofsinhar
+boussole|sud-ouest ¦ jugperëndim ¦ lbiċ
+boussole|ouest ¦ perëndim ¦ punent
+boussole|nord-ouest ¦ veriperëndim ¦ majjistral
+🌙 Nuit ¦ 🌙 Natë ¦ 🌙 Lejl
+Crépuscule ¦ Muzg ¦ Krepuskolu
+(pose une lampe pour éclairer) ¦ (vendos një llambë për të ndriçuar) ¦ (poġġi lampa biex iddawwal)
+nuit polaire ¦ natë polare ¦ lejl polari
+soleil de minuit ¦ diell i mesnatës ¦ xemx ta’ nofsillejl
+lever {rise}, coucher {set} ¦ lindja {rise}, perëndimi {set} ¦ tlugħ {rise}, nżul {set}
+France (lieu de la maison inconnu) ¦ Franca (vendi i shtëpisë i panjohur) ¦ Franza (il-post tad-dar mhux magħruf)
+au sol {len} ¦ në dysheme {len} ¦ mal-art {len}
+🗺 Arrêt {n} sur {total} ¦ 🗺 Ndalesa {n} nga {total} ¦ 🗺 Waqfa {n} minn {total}
+🪜 Un escalier : ¦ 🪜 Një shkallë: ¦ 🪜 Taraġ:
+⬆ Monter (E) ¦ ⬆ Ngjitu (E) ¦ ⬆ Itla’ (E)
+⬇ Descendre (C) ¦ ⬇ Zbrit (C) ¦ ⬇ Inżel (C)
+Ce glTF utilise des fichiers à part : exporte-le plutôt en GLB (un seul fichier). ¦ Ky glTF përdor skedarë të veçantë: eksportoje më mirë në GLB (një skedar i vetëm). ¦ Dan il-glTF juża fajls separati: aħjar esportah f’GLB (fajl wieħed biss).
+Format 3D inconnu. ¦ Format 3D i panjohur. ¦ Format 3D mhux magħruf.
+✦ Les souvenirs de la pièce ¦ ✦ Kujtimet e dhomës ¦ ✦ It-tifkiriet tal-kamra
+☀️ Lumière du jour ¦ ☀️ Drita e ditës ¦ ☀️ Dawl tal-jum
+Le soleil passe d’une heure à l’autre ¦ Dielli kalon nga një orë te tjetra ¦ Ix-xemx tgħaddi minn siegħa għall-oħra
+À cette heure-ci, du 1er janvier au 31 décembre : les ombres s’allongent l’hiver ¦ Në këtë orë, nga 1 janari deri më 31 dhjetor: hijet zgjaten në dimër ¦ F’dan il-ħin, mill-1 ta’ Jannar sal-31 ta’ Diċembru: id-dellijiet jitwalu fix-xitwa
+▶ Voir la journée ¦ ▶ Shiko ditën ¦ ▶ Ara l-ġurnata
+▶ Voir l’année ¦ ▶ Shiko vitin ¦ ▶ Ara s-sena
+❄️ Hiver ¦ ❄️ Dimër ¦ ❄️ Xitwa
+🌱 Printemps ¦ 🌱 Pranverë ¦ 🌱 Rebbiegħa
+☀️ Été ¦ ☀️ Verë ¦ ☀️ Sajf
+🍂 Automne ¦ 🍂 Vjeshtë ¦ 🍂 Ħarifa
+📅 Aujourd’hui ¦ 📅 Sot ¦ 📅 Illum
+Ombres portées ¦ Hijet e hedhura ¦ Dellijiet mitfugħa
+🚶 Visite ¦ 🚶 Vizita ¦ 🚶 Żjara
+Monter à l’étage du dessus (E ou Page ↑) ¦ Ngjitu në katin sipër (E ose Page ↑) ¦ Itla’ fis-sular ta’ fuq (E jew Page ↑)
+Descendre à l’étage du dessous (C ou Page ↓) ¦ Zbrit në katin poshtë (C ose Page ↓) ¦ Inżel fis-sular ta’ taħt (C jew Page ↓)
+Yeux à ¦ Sytë në ¦ Għajnejn f’
+Un arrêt de la visite guidée, ici, regardant par là (avec un texte lu à voix haute) ¦ Një ndalesë e vizitës me guidë, këtu, duke parë andej (me një tekst që lexohet me zë) ¦ Waqfa taż-żjara gwidata, hawn, tħares lejn hemm (b’test moqri b’leħen għoli)
+Une photo ancienne prise de cet endroit, dans cette direction : on la compare avec la maison d’aujourd’hui ¦ Një foto e vjetër e bërë nga ky vend, në këtë drejtim: krahasohet me shtëpinë e sotme ¦ Ritratt antik meħud minn dan il-post, f’din id-direzzjoni: jitqabbel mad-dar tal-lum
+📍 Arrêt ici ¦ 📍 Ndalesë këtu ¦ 📍 Waqfa hawn
+📷 Photo d’époque ici ¦ 📷 Foto e asaj kohe këtu ¦ 📷 Ritratt ta’ dak iż-żmien hawn
+Petite carte : clic pour t’y rendre ¦ Hartë e vogël: kliko për të shkuar atje ¦ Mappa żgħira: ikklikkja biex tmur hemm
+Z Q S D, W A S D ou flèches : marcher · Maj : courir · la souris regarde · Échap : libérer la souris ¦ W A S D ose shigjetat: ec · Shift: vrapo · miu shikon · Esc: liro miun ¦ W A S D jew vleġeġ: imxi · Shift: iġri · il-maws iħares · Esc: ħalli l-maws
+Le rond en bas à gauche : marcher · glisser sur la vue : regarder · ✦ : toucher pour voir le souvenir ¦ Rrethi poshtë majtas: ec · tërhiq mbi pamjen: shiko · ✦: prek për të parë kujtimin ¦ Iċ-ċirku isfel fuq ix-xellug: imxi · kaxkar fuq il-veduta: ħares · ✦: mess biex tara t-tifkira
+Z Q S D, W A S D ou flèches : marcher · clic sur la vue : regarder avec la souris · ✦ : clic pour voir le souvenir · Échap : sortir ¦ W A S D ose shigjetat: ec · kliko mbi pamjen: shiko me miun · ✦: kliko për të parë kujtimin · Esc: dil ¦ W A S D jew vleġeġ: imxi · ikklikkja fuq il-veduta: ħares bil-maws · ✦: ikklikkja biex tara t-tifkira · Esc: oħroġ
+✋ Arrêter la visite ¦ ✋ Ndalo vizitën ¦ ✋ Waqqaf iż-żjara
+Autrefois ¦ Dikur ¦ Qabel
+Autrefois ou aujourd’hui ¦ Dikur apo sot ¦ Qabel jew illum
+Arrêt suivant ¦ Ndalesa tjetër ¦ Il-waqfa li jmiss
+Arrêter la visite guidée ¦ Ndalo vizitën me guidë ¦ Waqqaf iż-żjara gwidata
+Pose d’abord des arrêts (🚶 Visiter → 📍 Arrêt ici). ¦ Vendos fillimisht ndalesa (🚶 Vizito → 📍 Ndalesë këtu). ¦ L-ewwel poġġi xi waqfiet (🚶 Żur → 📍 Waqfa hawn).
+Ce navigateur ne sait pas enregistrer de vidéo. ¦ Ky shfletues nuk di të regjistrojë video. ¦ Dan il-browser ma jafx jirrekordja vidjo.
+Remettre la vue comme au départ ¦ Ktheje pamjen si në fillim ¦ Erġa’ poġġi l-veduta kif kienet
+L’image du média n° {n} est introuvable : une toile neutre la remplace. ¦ Imazhi i medias nr. {n} nuk gjendet: një pëlhurë neutrale e zëvendëson. ¦ L-istampa tal-midja nru {n} ma tinstabx: tila newtrali tieħu postha.
+Cadre {n} : une image ¦ Korniza {n}: një imazh ¦ Gwarniċ {n}: stampa
+Cadre {n} : vide ¦ Korniza {n}: bosh ¦ Gwarniċ {n}: vojt
+Image du cadre {n} ¦ Imazhi i kornizës {n} ¦ Stampa tal-gwarniċ {n}
+Prise dans les médias ¦ Marrë nga mediat ¦ Meħuda mill-midja
+L’image de « {name} » ¦ Imazhi i «{name}» ¦ L-istampa ta’ “{name}”
+🖼 Déposer sur « {name} » (cadre {n}) ¦ 🖼 Lësho mbi «{name}» (korniza {n}) ¦ 🖼 Itlaq fuq “{name}” (gwarniċ {n})
+🖼 Déposer sur « {name} » ¦ 🖼 Lësho mbi «{name}» ¦ 🖼 Itlaq fuq “{name}”
+Remplir (recadrer) ¦ Mbush (prit) ¦ Imla (aqta’)
+Ajuster (toute l’image) ¦ Përshtat (gjithë imazhin) ¦ Aġġusta (l-istampa kollha)
+Centrer (taille réelle) ¦ Në qendër (madhësia e vërtetë) ¦ Iċċentra (daqs veru)
+Pas d’image. ¦ Asnjë imazh. ¦ L-ebda stampa.
+Image introuvable ¦ Imazhi nuk gjendet ¦ Stampa ma nstabitx
+Le cadre ¦ Korniza ¦ Il-gwarniċ
+MAISON · IMAGE ¦ SHTËPIA · IMAZH ¦ DAR · STAMPA
+Poser cette image ¦ Vendos këtë imazh ¦ Poġġi din l-istampa
+Ou un souvenir de cet objet : ¦ Ose një kujtim i këtij objekti: ¦ Jew tifkira ta’ dan l-oġġett:
+La rattacher aussi aux souvenirs de cet objet ¦ Lidhe edhe me kujtimet e këtij objekti ¦ Għaqqadha wkoll mat-tifkiriet ta’ dan l-oġġett
+🏷 Garder aussi comme souvenir ¦ 🏷 Mbaje edhe si kujtim ¦ 🏷 Żommha wkoll bħala tifkira
+⚠️ Cette image est introuvable dans les médias : une toile neutre la remplace. Choisis-en une autre. ¦ ⚠️ Ky imazh nuk gjendet te mediat: një pëlhurë neutrale e zëvendëson. Zgjidh një tjetër. ¦ ⚠️ Din l-istampa ma tinstabx fil-midja: tila newtrali tieħu postha. Agħżel oħra.
+Aperçu : glisse pour déplacer l’image, molette pour zoomer ¦ Paraparje: tërhiq për të zhvendosur imazhin, rrota për zmadhim ¦ Preview: kaxkar biex iċċaqlaq l-istampa, rota għaż-żum
+Glisse pour déplacer l’image · molette pour zoomer ¦ Tërhiq për të zhvendosur imazhin · rrota për zmadhim ¦ Kaxkar biex iċċaqlaq l-istampa · rota għaż-żum
+Dans le cadre ¦ Në kornizë ¦ Fil-gwarniċ
+Remettre l’image au centre, sans zoom ¦ Ktheje imazhin në qendër, pa zmadhim ¦ Erġa’ poġġi l-istampa fiċ-ċentru, mingħajr żum
+↺ Recadrage de départ ¦ ↺ Prerja fillestare ¦ ↺ Qtugħ tal-bidu
+Recadrage de départ ¦ Prerja fillestare ¦ Qtugħ tal-bidu
+Sa couleur ¦ Ngjyra e saj ¦ Il-kulur tiegħu
+Passe-partout ¦ Passe-partout ¦ Passe-partout
+🖼 Images des cadres ¦ 🖼 Imazhet e kornizave ¦ 🖼 Stampi tal-gwarniċi
+🖼 Image ¦ 🖼 Imazh ¦ 🖼 Stampa
+📁 Tu peux aussi glisser une image de l’ordinateur sur l’objet, dans le plan ou dans la vue 3D : elle entre dans les médias. ¦ 📁 Mund të tërheqësh edhe një imazh nga kompjuteri mbi objektin, në plan ose në pamjen 3D: hyn te mediat. ¦ 📁 Tista’ wkoll tkaxkar stampa mill-kompjuter fuq l-oġġett, fil-pjanta jew fil-veduta 3D: tidħol fil-midja.
+Image posée ¦ Imazhi u vendos ¦ Stampa mqiegħda
+Image retirée ¦ Imazhi u hoq ¦ Stampa mneħħija
+Import de l’image… ¦ Po importohet imazhi… ¦ Qed tiġi importata l-istampa…
+Image déposée sur l’objet ¦ Imazhi u lëshua mbi objektin ¦ Stampa mitluqa fuq l-oġġett
+✓ L’image est rangée dans les médias et posée sur l’objet. ¦ ✓ Imazhi është ruajtur te mediat dhe vendosur mbi objektin. ¦ ✓ L-istampa tqiegħdet fil-midja u fuq l-oġġett.
+Image prise dans les souvenirs ¦ Imazhi u mor nga kujtimet ¦ Stampa meħuda mit-tifkiriet
+Image tournée ¦ Imazhi u rrotullua ¦ Stampa mdawra
+Image réglée ¦ Imazhi u rregullua ¦ Stampa aġġustata
+Image recadrée ¦ Imazhi u rikornizua ¦ Stampa rranġata mill-ġdid
+Image zoomée ¦ Imazhi u zmadhua ¦ Stampa mkabbra
+Cote ¦ Kuota ¦ Kejl
+Hauteur (cm) ¦ Lartësia (cm) ¦ Għoli (cm)
+Contenu ¦ Përmbajtja ¦ Kontenut
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Le soleil et les ombres suivent. ¦ Rrotullon planin në raport me veriun: 0° = pjesa e sipërme e planit është në veri, 90° = pjesa e sipërme e planit shikon nga lindja. Dielli dhe hijet ndjekin. ¦ Iddawwar il-pjanta skont it-tramuntana: 0° = in-naħa ta’ fuq tal-pjanta hija lejn it-tramuntana, 90° = in-naħa ta’ fuq tħares lejn il-lvant. Ix-xemx u d-dellijiet isegwu.
+Lit d’une personne ¦ Shtrat për një person ¦ Sodda singla
+Chambre ¦ Dhomë gjumi ¦ Kamra tas-sodda
+Lit double ¦ Shtrat dopio ¦ Sodda doppja
+Lit clos (breton) ¦ Shtrat i mbyllur (breton) ¦ Sodda magħluqa (Brittanja)
+Berceau ¦ Djep ¦ Benniena
+Lit d’enfant ¦ Shtrat fëmijësh ¦ Sodda tat-tfal
+Table de chevet ¦ Komodinë ¦ Komodina
+Commode ¦ Komo ¦ Kmand
+Coiffeuse ¦ Tualetë me pasqyrë ¦ Toilette
+Prie-Dieu ¦ Gjunjëzuese lutjeje ¦ Inginokkjatorju
+Religion, souvenirs ¦ Fe, kujtime ¦ Reliġjon, tifkiriet
+Table ¦ Tryezë ¦ Mejda
+Séjour ¦ Dhomë ndenjeje ¦ Salott
+Table ronde ¦ Tryezë e rrumbullakët ¦ Mejda tonda
+Chaise ¦ Karrige ¦ Siġġu
+Fauteuil ¦ Kolltuk ¦ Pultruna
+Canapé ¦ Divan ¦ Sufan
+Banc ¦ Stol ¦ Bank
+Buffet ¦ Bufe ¦ Kredenza
+Vaisselier ¦ Raft për enë ¦ Vetrina tal-platti
+Horloge comtoise ¦ Sahat comtoise ¦ Arloġġ comtoise
+Piano droit ¦ Piano vertikale ¦ Pjanu vertikali
+Bibliothèque ¦ Bibliotekë ¦ Librerija
+Cheminée ¦ Oxhak ¦ Ċumnija
+Poêle à bois ¦ Sobë me dru ¦ Stufa tal-injam
+Tapis ¦ Qilim ¦ Tapit
+Lampadaire ¦ Llambadar në këmbë ¦ Lampier tal-art
+Plante ¦ Bimë ¦ Pjanta
+Poste de radio (TSF) ¦ Aparat radioje (TSF) ¦ Radju (TSF)
+Cuisinière à bois ¦ Sobë kuzhine me dru ¦ Kuċina tal-injam
+Cuisine ¦ Kuzhinë ¦ Kċina
+Évier en pierre ¦ Lavaman prej guri ¦ Sink tal-ġebel
+Pétrin ¦ Magje ¦ Maxtura tal-għaġin
+Garde-manger ¦ Dollap ushqimesh ¦ Gwardamanġa
+Réfrigérateur ¦ Frigorifer ¦ Friġġ
+Plan de travail ¦ Banak pune ¦ Wiċċ tax-xogħol
+Baignoire ¦ Vaskë ¦ Banju
+Salle d’eau ¦ Banjë me dush ¦ Kamra tad-doċċa
+Douche ¦ Dush ¦ Doċċa
+WC ¦ WC ¦ WC
+Lavabo ¦ Lavaman ¦ Lavandin
+Table de toilette (broc et cuvette) ¦ Tryezë larjeje (ibrik dhe legen) ¦ Mejda tal-ħasil (buqar u kafetiera)
+Armoire ¦ Dollap ¦ Armarju
+Rangement ¦ Vend për sende ¦ Ħażna
+Coffre ¦ Arkë ¦ Sandar
+Étagère ¦ Raft ¦ Xkaffa
+Rouet ¦ Çikrik ¦ Magħżel
+Métiers, atelier ¦ Zanate, punishte ¦ Snajja, workshop
+Métier à tisser ¦ Vegjë ¦ Newl
+Établi ¦ Tezgjah ¦ Bank tax-xogħol
+Tonneau ¦ Fuçi ¦ Bettija
+Machine à coudre ¦ Makinë qepëse ¦ Magna tal-ħjata
+Enclume ¦ Kudhër ¦ Inkwina
+Mangeoire, crèche ¦ Koritë, grazhd ¦ Maxtura tal-bhejjem, maxtura tal-għalf
+Ferme, animaux ¦ Fermë, kafshë ¦ Razzett, annimali
+Charrette ¦ Qerre ¦ Karettun
+Puits ¦ Pus ¦ Bir
+Jardin, extérieur ¦ Kopsht, jashtë ¦ Ġnien, barra
+Arbre ¦ Pemë ¦ Siġra
+Voiture ¦ Makinë ¦ Karozza
+Banc de jardin ¦ Stol kopshti ¦ Bank tal-ġnien
+Escalier droit ¦ Shkallë e drejtë ¦ Taraġ dritt
+Structure ¦ Strukturë ¦ Struttura
+Escalier tournant ¦ Shkallë rrotulluese ¦ Taraġ idur
+Poteau, pilier ¦ Shtyllë ¦ Arblu, pilastru
+Placard ¦ Dollap në mur ¦ Kexxun
+Lit bateau (Empire) ¦ Shtrat varkë (Empire) ¦ Sodda bastiment (Empire)
+Lit Louis-Philippe ¦ Shtrat Louis-Philippe ¦ Sodda Louis-Philippe
+Lit à baldaquin ¦ Shtrat me baldakin ¦ Sodda b’baldakkin
+Lit en fer forgé ¦ Shtrat prej hekuri të farkëtuar ¦ Sodda tal-ħadid maħdum
+Grand lit (160) ¦ Shtrat i madh (160) ¦ Sodda kbira (160)
+Paillasse (lit de paille) ¦ Dyshek kashte ¦ Pajjiżza (sodda tat-tiben)
+Armoire normande ¦ Dollap normand ¦ Armarju Normann
+Armoire à glace ¦ Dollap me pasqyrë ¦ Armarju bil-mera
+Chiffonnier, semainier ¦ Komo e lartë me sirtarë ¦ Kmand għoli, semainier
+Table de nuit à marbre ¦ Komodinë me mermer ¦ Komodina bl-irħam
+Lampe de chevet ¦ Llambë komodine ¦ Lampa tal-komodina
+Pot de chambre ¦ Oturak ¦ Pital
+Paravent ¦ Paravan ¦ Paraventu
+Psyché (miroir sur pied) ¦ Pasqyrë në këmbë ¦ Psyché (mera fuq sieq)
+Fauteuil Voltaire ¦ Kolltuk Voltaire ¦ Pultruna Voltaire
+Banquette de pied de lit ¦ Stol në fund të shtratit ¦ Bank ta’ tarf is-sodda
+Descente de lit ¦ Qilim pranë shtratit ¦ Tapit ħdejn is-sodda
+Dressing ¦ Dhomë veshjesh ¦ Walk-in wardrobe
+Chaise paillée ¦ Karrige me kashtë ¦ Siġġu tal-ħalfa
+Coffre de mariage ¦ Arkë martese ¦ Sandar taż-żwieġ
+Malle-cabine ¦ Baule kabine ¦ Bawl tal-kabina
+Table de toilette à miroir ¦ Tryezë larjeje me pasqyrë ¦ Mejda tal-ħasil bil-mera
+Chaufferette, bassinoire ¦ Ngrohëse këmbësh, ngrohëse shtrati ¦ Saħħan tas-saqajn, saħħan tas-sodda
+Cheminée de chambre ¦ Oxhak dhome ¦ Ċumnija tal-kamra
+Table ovale à rallonges ¦ Tryezë ovale e zgjatshme ¦ Mejda ovali li tittawwal
+Table de ferme ¦ Tryezë ferme ¦ Mejda tar-razzett
+Table basse ¦ Tryezë e ulët ¦ Mejda baxxa
+Guéridon ¦ Tryezë e vogël e rrumbullakët ¦ Gueridon
+Bergère ¦ Kolltuk bergère ¦ Pultruna bergère
+Fauteuil à bascule ¦ Kolltuk lëkundës ¦ Siġġu tat-tbandil
+Canapé trois places ¦ Divan treshe ¦ Sufan ta’ tliet postijiet
+Méridienne ¦ Divan pushimi ¦ Meridjana
+Pouf ¦ Puf ¦ Pouf
+Pendule de cheminée ¦ Sahat oxhaku ¦ Arloġġ tal-ċumnija
+Grande cheminée à manteau ¦ Oxhak i madh me mantel ¦ Ċumnija kbira b’mantell
+Poêle en faïence ¦ Sobë me pllaka fajance ¦ Stufa tal-majolika
+Meuble TV ¦ Mobilje televizori ¦ Għamara tat-TV
+Gramophone ¦ Gramafon ¦ Gramofonu
+Harmonium ¦ Harmonium ¦ Armonju
+Piano à queue ¦ Piano me bisht ¦ Pjanu grand
+Lustre ¦ Llambadar ¦ Lampier
+Tapis rond ¦ Qilim i rrumbullakët ¦ Tapit tond
+Bibliothèque vitrée ¦ Bibliotekë me xhama ¦ Librerija bil-ħġieġ
+Chaise cannée ¦ Karrige me thurje kallami ¦ Siġġu tal-qasab
+Jardinière ¦ Vazo lulesh e gjatë ¦ Ġardinjiera
+Cage à oiseaux ¦ Kafaz zogjsh ¦ Gaġġa tal-għasafar
+Aquarium ¦ Akuarium ¦ Akkwarju
+Console ¦ Konsol ¦ Konsola
+Bonheur-du-jour ¦ Tryezë shkrimi bonheur-du-jour ¦ Skrivanija bonheur-du-jour
+Canapé-lit, clic-clac ¦ Divan-shtrat ¦ Sufan-sodda
+Potager (fourneau maçonné) ¦ Furrë e muruar (potager) ¦ Kuċina tal-ġebel (potager)
+Âtre avec crémaillère ¦ Vatër me kremaliere ¦ Fuklar bil-katina tal-borma
+Four encastrable ¦ Furrë e integruar ¦ Forn inkorporat
+Plaques de cuisson ¦ Pllaka gatimi ¦ Ħotplates
+Lave-vaisselle ¦ Makinë larëse enësh ¦ Dishwasher
+Congélateur coffre ¦ Ngrirës sënduk ¦ Friża tat-tip sandar
+Glacière (armoire à glace) ¦ Akullore druri (dollap akulli) ¦ Kexxun tas-silġ
+Évier double ¦ Lavaman dyfish ¦ Sink doppju
+Îlot central ¦ Ishull qendror ¦ Gżira ċentrali
+Plan de travail en L ¦ Banak pune në formë L ¦ Wiċċ tax-xogħol f’forma ta’ L
+Hotte ¦ Aspirator ¦ Kappa
+Meuble haut ¦ Dollap i sipërm ¦ Kabinett ta’ fuq
+Meuble bas ¦ Dollap i poshtëm ¦ Kabinett ta’ isfel
+Tabouret ¦ Stol pa mbështetëse ¦ Bank żgħir
+Table de cuisine ¦ Tryezë kuzhine ¦ Mejda tal-kċina
+Panetière ¦ Raft buke ¦ Panettiera
+Billot de boucher ¦ Kërcu kasapi ¦ Zokk tal-biċċier
+Seau, cruche ¦ Kovë, shtambë ¦ Barmil, ġarra
+Saloir, jarre ¦ Kade kripe, qyp ¦ Kexxun tal-melħ, ġarra
+Micro-ondes ¦ Mikrovalë ¦ Microwave
+Cuisinière à gaz ¦ Sobë me gaz ¦ Kuker tal-gass
+Chaudron ¦ Kazan ¦ Kaldarun
+Moulin à café ¦ Mulli kafeje ¦ Mitħna tal-kafè
+Réfrigérateur américain ¦ Frigorifer amerikan ¦ Friġġ Amerikan
+Égouttoir, vaisselier mural ¦ Kullesë enësh, raft muri për enë ¦ Qattara tal-platti, xkaffa tal-platti
+Baignoire sabot ¦ Vaskë ulëse ¦ Banju żgħir bil-qagħda
+Baignoire sur pieds (fonte) ¦ Vaskë me këmbë (gize) ¦ Banju fuq saqajn (ħadid fondut)
+Cuvier, baquet ¦ Govatë, legen druri ¦ Lifgħa tal-injam, baqra
+Bidet ¦ Bide ¦ Bidet
+Double vasque ¦ Lavaman dyfish ¦ Lavandin doppju
+Douche à l’italienne ¦ Dush në nivel të dyshemesë ¦ Doċċa walk-in
+Machine à laver ¦ Makinë larëse ¦ Washing machine
+Sèche-linge ¦ Tharëse rrobash ¦ Dryer
+Chauffe-eau, ballon ¦ Ngrohës uji, bojler ¦ Water heater, boiler
+Radiateur ¦ Radiator ¦ Radjatur
+Sèche-serviettes ¦ Ngrohëse peshqirësh ¦ Saħħan tax-xugamani
+Meuble vasque ¦ Mobilje lavamani ¦ Kabinett tal-lavandin
+Miroir de salle de bains ¦ Pasqyrë banjoje ¦ Mera tal-kamra tal-banju
+WC à la turque ¦ WC turke ¦ WC Tork
+Chaise percée ¦ Karrige me oturak ¦ Siġġu tal-pital
+Lessiveuse ¦ Kazan larjeje ¦ Kaldarun tal-ħasil
+Étendoir à linge ¦ Tharëse rrobash me tela ¦ Stenditur tal-ħwejjeġ
+Panier à linge ¦ Shportë rrobash ¦ Basket tal-ħwejjeġ
+Colonne de rangement ¦ Kolonë me rafte ¦ Kabinett għoli
+WC suspendu ¦ WC i varur ¦ WC imdendel
+Bac à douche ¦ Pjatë dushi ¦ Shower tray
+Malle de voyage ¦ Baule udhëtimi ¦ Bawl tal-ivvjaġġar
+Bahut ¦ Sënduk-bufe ¦ Kredenza baxxa
+Buffet deux corps ¦ Bufe me dy pjesë ¦ Kredenza b’żewġ partijiet
+Enfilade ¦ Bufe i gjatë ¦ Kredenza twila
+Confiturier ¦ Dollap reçelrash ¦ Armarju tal-ġamm
+Étagère métallique ¦ Raft metalik ¦ Xkaffa tal-metall
+Penderie, portant ¦ Varëse rrobash, mbajtëse ¦ Armarju tal-ħwejjeġ, rack
+Portemanteau ¦ Varëse pallto ¦ Kapputtiera
+Meuble à cases ¦ Mobilje me kuti ¦ Għamara bil-kaxxi
+Placard mural ¦ Dollap muri ¦ Kexxun fil-ħajt
+Meuble à chaussures ¦ Mobilje këpucësh ¦ Għamara taż-żraben
+Casier à bouteilles ¦ Raft shishesh ¦ Rack tal-fliexken
+Pile de cartons ¦ Grumbull kartonësh ¦ Munzell kaxxi tal-kartun
+Cantine militaire ¦ Arkë ushtarake ¦ Bawl militari
+Armoire à linge ¦ Dollap rrobash të shtëpisë ¦ Armarju tal-bjankerija
+Porte-parapluies ¦ Mbajtëse çadrash ¦ Porta-umbrelel
+Meuble d’entrée ¦ Mobilje hyrjeje ¦ Għamara tal-entratura
+Vestiaire métallique ¦ Dollap metalik veshjesh ¦ Locker tal-metall
+Commode basse ¦ Komo e ulët ¦ Kmand baxx
+Coffre à bois ¦ Arkë druri për zjarr ¦ Kaxxa tal-ħatab
+Secrétaire à abattant ¦ Sekreter me kapak ¦ Skrivanija b’wiċċ li jinżel
+Bureau plat (ministre) ¦ Tryezë pune e sheshtë (ministrore) ¦ Skrivanija ċatta (tal-ministru)
+Bureau à cylindre ¦ Tryezë pune me cilindër ¦ Skrivanija biċ-ċilindru
+Fauteuil de bureau ¦ Kolltuk zyre ¦ Pultruna tal-uffiċċju
+Chaise de bureau en bois ¦ Karrige zyre prej druri ¦ Siġġu tal-uffiċċju tal-injam
+Cartonnier ¦ Dollap me kuti dosjesh ¦ Kabinett tal-fajls
+Classeur à tiroirs ¦ Dosjer me sirtarë ¦ Kabinett bil-kexxuni
+Ordinateur (écran) ¦ Kompjuter (ekran) ¦ Kompjuter (skrin)
+Imprimante, scanner ¦ Printer, skaner ¦ Printer, scanner
+Globe terrestre ¦ Glob tokësor ¦ Globu
+Coffre-fort ¦ Kasafortë ¦ Kaxxa-forti
+Lampe de bureau ¦ Llambë tavoline ¦ Lampa tal-iskrivanija
+Bibliothèque murale ¦ Bibliotekë muri ¦ Librerija tal-ħajt
+Table à dessin ¦ Tryezë vizatimi ¦ Mejda tat-tpinġija
+Boîtes d’archives ¦ Kuti arkivi ¦ Kaxxi tal-arkivju
+Téléphone mural (ancien) ¦ Telefon muri (i vjetër) ¦ Telefon tal-ħajt (antik)
+Tableau noir, tableau blanc ¦ Dërrasë e zezë, dërrasë e bardhë ¦ Blackboard, whiteboard
+Bureau moderne ¦ Tryezë pune moderne ¦ Skrivanija moderna
+Caisson à tiroirs ¦ Kuti me sirtarë ¦ Kabinett bil-kexxuni
+Fauteuil club ¦ Kolltuk klubi ¦ Pultruna club
+Berceau en osier ¦ Djep me thupra ¦ Benniena tal-qasab
+Lit à barreaux ¦ Shtrat me hekura ¦ Sodda bil-vireg
+Lits superposés ¦ Shtretër marinari ¦ Bunk beds
+Table à langer ¦ Tryezë ndërrimi pelenash ¦ Mejda tat-tibdil tal-ħrieqi
+Coffre à jouets ¦ Arkë lodrash ¦ Kaxxa tal-ġugarelli
+Cheval à bascule ¦ Kalë lëkundës ¦ Żiemel tat-tbandil
+Parc ¦ Kënd lojërash për foshnja ¦ Playpen
+Chaise haute ¦ Karrige e lartë ¦ High chair
+Pupitre d’écolier ¦ Bankë nxënësi ¦ Desk tal-iskola
+Landau ¦ Karrocë foshnjeje ¦ Pram
+Maison de poupée ¦ Shtëpi kukullash ¦ Dar tal-pupi
+Tipi ¦ Tipi ¦ Tipi
+Petite table ¦ Tryezë e vogël ¦ Mejda żgħira
+Petite chaise ¦ Karrige e vogël ¦ Siġġu żgħir
+Tapis de jeu ¦ Qilim lojërash ¦ Tapit tal-logħob
+Ours en peluche ¦ Arush pelushi ¦ Teddy bear
+Bibliothèque basse ¦ Bibliotekë e ulët ¦ Librerija baxxa
+Trotteur, porteur ¦ Ecëse, lodër për t’u hipur ¦ Walker, ġugarell tar-rikba
+Crucifix ¦ Kryq me Krishtin ¦ Kurċifiss
+Bénitier ¦ Enë uji të bekuar ¦ Fonti tal-ilma mbierek
+Petit autel, oratoire ¦ Altar i vogël, faltore ¦ Artal żgħir, oratorju
+Statue de la Vierge ¦ Statujë e Virgjëreshës ¦ Statwa tal-Madonna
+Chandelier, cierge ¦ Shandan, qiri ¦ Gandlier, xemgħa
+Portrait de famille ¦ Portret familjar ¦ Ritratt tal-familja
+Photo de mariage encadrée ¦ Foto martese në kornizë ¦ Ritratt taż-żwieġ fil-gwarniċ
+Arbre généalogique encadré ¦ Pemë gjenealogjike në kornizë ¦ Siġra tal-familja fil-gwarniċ
+Globe de mariée ¦ Glob nusërie ¦ Globu tal-għarusa
+Cadre de médailles ¦ Kornizë medaljesh ¦ Gwarniċ tal-midalji
+Bible familiale sur lutrin ¦ Bibël familjare mbi analog ¦ Bibbja tal-familja fuq leġġiju
+Coffret à souvenirs ¦ Kuti kujtimesh ¦ Kaxxa tat-tifkiriet
+Vitrine à souvenirs ¦ Vitrinë kujtimesh ¦ Vetrina tat-tifkiriet
+Lampe à huile ¦ Llambë vaji ¦ Lampa taż-żejt
+Buste sur colonne ¦ Bust mbi kolonë ¦ Bust fuq kolonna
+Icône, image pieuse ¦ Ikonë, figurë e shenjtë ¦ Ikona, xbieha qaddisa
+Pile d’albums de famille ¦ Grumbull albumesh familjare ¦ Munzell albums tal-familja
+Plaque commémorative ¦ Pllakë përkujtimore ¦ Plakka kommemorattiva
+Malle aux souvenirs ¦ Baule kujtimesh ¦ Bawl tat-tifkiriet
+Croix de bois au mur ¦ Kryq druri në mur ¦ Salib tal-injam mal-ħajt
+Retable, armoire d’église ¦ Altar me pala, dollap kishe ¦ Retablu, armarju tal-knisja
+Forge (foyer) ¦ Farkë (vatër) ¦ Forġa (fuklar)
+Soufflet de forge ¦ Fryrëse farke ¦ Minfaħ tal-forġa
+Tour à bois ¦ Torno druri ¦ Tornu tal-injam
+Presse à imprimer ¦ Makinë shtypi ¦ Pressa tal-istampar
+Meule à aiguiser ¦ Gur mprehës ¦ Mola tal-ilqit
+Cuve de vigneron ¦ Vozë vreshtari ¦ Tank tal-inbid
+Pressoir à vin ¦ Shtypëse rrushi ¦ Magħsar tal-inbid
+Alambic ¦ Kazan rakie ¦ Lambik
+Comptoir de boutique ¦ Banak dyqani ¦ Kontrol tal-ħanut
+Balance à bascule ¦ Peshore me platformë ¦ Miżien tal-pjattaforma
+Caisse enregistreuse ¦ Arkë regjistruese ¦ Cash register
+Étalage de magasin ¦ Vitrinë dyqani ¦ Wirja tal-ħanut
+Fauteuil de barbier ¦ Kolltuk berberi ¦ Siġġu tal-barbier
+Établi de cordonnier ¦ Tezgjah këpucari ¦ Bank tal-iskarpan
+Chevalet de peintre ¦ Kavalet piktori ¦ Kavalett tal-pittur
+Carreau de dentellière ¦ Jastëk dantelle ¦ Trajbu tal-bizzilla
+Four de boulanger ¦ Furrë bukëpjekësi ¦ Forn tal-furnar
+Barrique ¦ Fuçi e madhe ¦ Bettija kbira
+Meule de moulin ¦ Gur mulliri ¦ Ġebla tal-mitħna
+Chevalet de scieur ¦ Kavalet sharrëxhiu ¦ Kavalett tas-serrieq
+Établi de menuisier ¦ Tezgjah zdrukthëtari ¦ Bank tal-mastrudaxxa
+Panneau à outils ¦ Panel veglash ¦ Pannell tal-għodda
+Vache ¦ Lopë ¦ Baqra
+Cheval ¦ Kalë ¦ Żiemel
+Âne ¦ Gomar ¦ Ħmar
+Cochon ¦ Derr ¦ Ħanżir
+Mouton ¦ Dele ¦ Nagħġa
+Chèvre ¦ Dhi ¦ Mogħża
+Poule ¦ Pulë ¦ Tiġieġa
+Chien ¦ Qen ¦ Kelb
+Chat ¦ Mace ¦ Qattus
+Clapier à lapins ¦ Kotec lepujsh ¦ Ħawla tal-fniek
+Poulailler ¦ Kotec pulash ¦ Ħawla tat-tiġieġ
+Niche ¦ Kolibe qeni ¦ Għorfa tal-kelb
+Stalle, box d’écurie ¦ Ndarje stalle, boks ¦ Stalla, box
+Abreuvoir ¦ Koritë uji ¦ Ħawt tal-ilma
+Râtelier à foin ¦ Grazhd për bar ¦ Rastrell tal-ħaxix
+Meule de foin ¦ Mullar bari ¦ Munzell tal-ħuxlief
+Botte de paille ¦ Deng kashte ¦ Balla tat-tiben
+Charrue ¦ Plug ¦ Moħriet
+Herse ¦ Lesë ¦ Erpiċi
+Tracteur ancien ¦ Traktor i vjetër ¦ Trattur antik
+Brouette ¦ Karrocë dore ¦ Karettun tal-id
+Baratte à beurre ¦ Dybek ¦ Żangola tal-butir
+Ruche ¦ Koshere ¦ Doqqajs
+Coffre à grain ¦ Arkë drithi ¦ Kaxxa tal-qamħ
+Bidon à lait ¦ Bidon qumështi ¦ Bidun tal-ħalib
+Tombereau ¦ Karrocë shkarkuese ¦ Karettun li jinqaleb
+Arbre fruitier ¦ Pemë frutore ¦ Siġra tal-frott
+Sapin, conifère ¦ Bredh, halore ¦ Arżnu, koniferu
+Haie ¦ Gardh i gjallë ¦ Ħajt ta’ sġajriet
+Buisson, arbuste ¦ Shkurre ¦ Arbuxxell
+Massif de fleurs ¦ Lehe me lule ¦ Ġnien tal-fjuri
+Potager (planches) ¦ Kopsht perimesh (lehe) ¦ Ġnien tal-ħxejjex (roqgħat)
+Mare, bassin ¦ Pellg ¦ Għadira, ġibja
+Lavoir ¦ Vend larjeje i përbashkët ¦ Ħasselin
+Four à pain ¦ Furrë buke ¦ Forn tal-ħobż
+Pompe à bras ¦ Pompë dore ¦ Pompa tal-id
+Croix de chemin, calvaire ¦ Kryq rrugor, kalvar ¦ Salib tat-triq, kalvarju
+Pierre tombale ¦ Gur varri ¦ Lapida
+Table de jardin ¦ Tryezë kopshti ¦ Mejda tal-ġnien
+Chaise de jardin ¦ Karrige kopshti ¦ Siġġu tal-ġnien
+Transat, chaise longue ¦ Shezlong ¦ Deck chair
+Parasol ¦ Çadër dielli ¦ Umbrella tax-xemx
+Barbecue ¦ Skarë ¦ Barbecue
+Balançoire ¦ Kolovajzë ¦ Bandla
+Toboggan ¦ Rrëshqitëse ¦ Slide
+Pergola, tonnelle ¦ Pergolë, tendë me hardhi ¦ Pergola, pergola tad-dielja
+Clôture, barrière ¦ Gardh, pengesë ¦ Ċint, barriera
+Portail ¦ Portë e madhe ¦ Xatba
+Muret de pierre ¦ Mur i ulët prej guri ¦ Ħajt baxx tal-ġebel
+Bicyclette ¦ Biçikletë ¦ Rota
+Cabane de jardin ¦ Kasolle kopshti ¦ Kabina tal-ġnien
+Serre ¦ Serë ¦ Serra
+Tas de bois ¦ Grumbull drush ¦ Munzell ħatab
+Bouleau, arbre fin ¦ Mështekën, pemë e hollë ¦ Betula, siġra rqiqa
+Banc de pierre ¦ Stol guri ¦ Bank tal-ġebel
+Escalier en colimaçon ¦ Shkallë spirale ¦ Taraġ spirali
+Échelle de meunier ¦ Shkallë mulliri ¦ Sellum tal-mitħna
+Colonne ronde ¦ Kolonë e rrumbullakët ¦ Kolonna tonda
+Poutre apparente ¦ Tra i dukshëm ¦ Travu mikxuf
+Trappe de cave ¦ Kapak bodrumi ¦ Bieb tal-kantina
+Marche, seuil ¦ Shkallë, prag ¦ Tarġa, għatba
+Garde-corps, rampe ¦ Parmak, kangjella ¦ Parapett, poġġaman
+Conduit de cheminée ¦ Tub oxhaku ¦ Kanna taċ-ċumnija
+Verrière, cloison vitrée ¦ Xhami çatie, ndarëse me xham ¦ Saqaf tal-ħġieġ, diviżorju tal-ħġieġ
+Radiateur en fonte ¦ Radiator gize ¦ Radjatur tal-ħadid fondut
+Chaudière ¦ Kaldajë ¦ Boiler
+Pilier de pierre ¦ Shtyllë guri ¦ Pilastru tal-ġebel
+Estrade, palier ¦ Podium, sheshi i shkallës ¦ Pjattaforma, pjanerottlu
+Muret, demi-cloison ¦ Mur i ulët, gjysmëndarëse ¦ Ħajt baxx, nofs diviżorju
+Niche, alcôve ¦ Kamare, alkovë ¦ Niċċa, alkova
+Bonnetière (armoire à une porte) ¦ Dollap me një derë (bonnetière) ¦ Armarju b’bieb wieħed (bonnetière)
+Armoire de mariage (de dot) ¦ Dollap martese (i pajës) ¦ Armarju taż-żwieġ (tad-dota)
+Lit clos à portes coulissantes ¦ Shtrat i mbyllur me dyer rrëshqitëse ¦ Sodda magħluqa b’bibien li jiżżerżqu
+Lit-armoire, lit clos d’angle ¦ Shtrat-dollap, shtrat i mbyllur në qoshe ¦ Sodda-armarju, sodda magħluqa tal-kantuniera
+Lit d’alcôve à rideaux ¦ Shtrat alkove me perde ¦ Sodda tal-alkova bil-purtieri
+Berceau ancien en bois (à bascule) ¦ Djep i vjetër prej druri (lëkundës) ¦ Benniena antika tal-injam (li titbandal)
+Berceau à capote en osier ¦ Djep me tendë prej thuprash ¦ Benniena tal-qasab b’kappa
+Bassinoire en cuivre (à long manche) ¦ Ngrohëse shtrati prej bakri (me dorezë të gjatë) ¦ Saħħan tas-sodda tar-ram (b’manku twil)
+Table de toilette à marbre ¦ Tryezë larjeje me mermer ¦ Mejda tal-ħasil bl-irħam
+Cuvette et broc en faïence ¦ Legen dhe ibrik prej fajance ¦ Lifgħa u buqar tal-majolika
+Commode galbée (Louis XV) ¦ Komo e lakuar (Louis XV) ¦ Kmand mgħawweġ (Louis XV)
+Bougeoir de chevet ¦ Shandan komodine ¦ Gandlier tal-komodina
+Chaufferette à braises ¦ Ngrohëse këmbësh me prush ¦ Saħħan tas-saqajn bil-ġamar
+Malle en osier ¦ Baule thuprash ¦ Bawl tal-qasab
+Horloge comtoise à ventre (violonée) ¦ Sahat comtoise me bark (violonée) ¦ Arloġġ comtoise biż-żaqq (violonée)
+Horloge comtoise peinte ¦ Sahat comtoise i pikturuar ¦ Arloġġ comtoise miżbugħ
+Horloge de parquet (régulateur) ¦ Sahat dyshemeje (rregullator) ¦ Arloġġ tal-art (regolatur)
+Buffet bas à deux portes ¦ Bufe i ulët me dy dyer ¦ Kredenza baxxa b’żewġ bibien
+Vaisselier breton ¦ Raft enësh breton ¦ Vetrina tal-platti Brittanja
+Vaisselier normand ¦ Raft enësh normand ¦ Vetrina tal-platti Normanna
+Banc-coffre à dossier (archebanc) ¦ Stol-arkë me mbështetëse (archebanc) ¦ Bank-sandar b’dahar (archebanc)
+Banc-coffre de lit clos ¦ Stol-arkë i shtratit të mbyllur ¦ Bank-sandar tas-sodda magħluqa
+Chaise paillée à barreaux ¦ Karrige me kashtë dhe tërthore ¦ Siġġu tal-ħalfa bil-vireg
+Fauteuil paillé (de grand-mère) ¦ Kolltuk me kashtë (i gjyshes) ¦ Pultruna tal-ħalfa (tan-nanna)
+Table à volets ¦ Tryezë me kapakë ¦ Mejda bil-ġwienaħ
+Table de ferme en chêne (à tiroir) ¦ Tryezë ferme prej lisi (me sirtar) ¦ Mejda tar-razzett tal-ballut (b’kexxun)
+Lampe tempête ¦ Llambë stuhie ¦ Lampa tar-riħ
+Chandelier, bougeoir ¦ Shandan, mbajtëse qiriu ¦ Gandlier, xemgħadan
+Suspension à pétrole ¦ Llambë e varur me vajguri ¦ Lampa mdendla tal-pitrolju
+Poste TSF à lampes ¦ Radio TSF me llamba ¦ Radju TSF bil-valvoli
+Phonographe à pavillon ¦ Fonograf me bori ¦ Fonografu bit-tromba
+Poêle Godin (fonte émaillée) ¦ Sobë Godin (gize e emaluar) ¦ Stufa Godin (ħadid fondut enamellat)
+Poêle à bois en fonte (cloche) ¦ Sobë me dru prej gize (kambanë) ¦ Stufa tal-injam tal-ħadid fondut (qanpiena)
+Chenets (la paire) ¦ Hekura vatre (çifti) ¦ Ħadid tan-nar (il-par)
+Cheminée à manteau (à hotte) ¦ Oxhak me mantel (me kapuç) ¦ Ċumnija b’mantell (b’kappa)
+Cheminée de pierre à linteau de bois ¦ Oxhak guri me arkitra druri ¦ Ċumnija tal-ġebel b’ħajta tal-injam
+Cantou (coin du feu) ¦ Cantou (këndi i zjarrit) ¦ Cantou (kantuniera tan-nar)
+Bergère Louis XVI ¦ Bergère Louis XVI ¦ Bergère Louis XVI
+Fauteuil crapaud ¦ Kolltuk bretkosë ¦ Pultruna crapaud
+Sellette (porte-plante) ¦ Mbajtëse bimësh ¦ Stand tal-pjanti
+Portrait des ancêtres (ovale) ¦ Portret i paraardhësve (oval) ¦ Ritratt tal-antenati (ovali)
+Maie (pétrin sur pieds) ¦ Magje në këmbë ¦ Maxtura fuq saqajn
+Maie-coffre à couvercle ¦ Magje-arkë me kapak ¦ Maxtura-sandar b’għatu
+Huche à pain ¦ Arkë buke ¦ Kaxxa tal-ħobż
+Cuisinière à bois en fonte (à barre de laiton) ¦ Sobë kuzhine me dru prej gize (me shufër bronzi) ¦ Kuċina tal-injam tal-ħadid fondut (b’virga tar-ram isfar)
+Cuisinière émaillée bois et charbon ¦ Sobë e emaluar me dru dhe qymyr ¦ Kuċina enamellata tal-injam u l-faħam
+Potager carrelé (fourneau à braises) ¦ Furrë me pllaka (vatër me prush) ¦ Potager bil-madum (fuklar tal-ġamar)
+Évier taillé dans la pierre ¦ Lavaman i gdhendur në gur ¦ Sink maqtugħ fil-ġebel
+Évier en grès émaillé ¦ Lavaman prej guri të emaluar ¦ Sink tal-gres enamellat
+Fontaine en cuivre sur son support ¦ Çezmë bakri mbi mbajtësen e saj ¦ Funtana tar-ram fuq l-istand tagħha
+Fontaine en grès ¦ Çezmë prej guri qeramik ¦ Funtana tal-gres
+Saloir en grès ¦ Kade kripe prej qeramike ¦ Ġarra tal-melħ tal-gres
+Saloir en bois (coffre à sel) ¦ Kade kripe prej druri (arkë kripe) ¦ Kaxxa tal-melħ tal-injam
+Garde-manger grillagé (mural) ¦ Dollap ushqimesh me rrjetë (në mur) ¦ Gwardamanġa bix-xibka (tal-ħajt)
+Buffet de cuisine (années 1930-1950) ¦ Bufe kuzhine (vitet 1930-1950) ¦ Kredenza tal-kċina (snin 1930-1950)
+Moulin à café mural ¦ Mulli kafeje në mur ¦ Mitħna tal-kafè tal-ħajt
+Fer à repasser en fonte ¦ Hekur hekurosjeje prej gize ¦ Ħadida tal-ħadid fondut
+Marmite en fonte ¦ Tenxhere gize ¦ Borma tal-ħadid fondut
+Cruche, pichet en grès ¦ Shtambë, kanë prej qeramike ¦ Ġarra, buqar tal-gres
+Tue-mouches en verre (piège à mouches) ¦ Kurth mizash prej xhami ¦ Nassa tad-dubbien tal-ħġieġ
+Balance Roberval et ses poids ¦ Peshore Roberval dhe peshat e saj ¦ Miżien Roberval bil-piżijiet tiegħu
+Glacière en bois doublée de zinc ¦ Akullore druri e veshur me zink ¦ Kaxxa tas-silġ tal-injam miksija biż-żingu
+Tub (grand bassin en zinc) ¦ Tub (legen i madh zinku) ¦ Tub (lifgħa kbira taż-żingu)
+Baquet de lessive en bois ¦ Govatë rrobash prej druri ¦ Lifgħa tal-ħasil tal-injam
+Lessiveuse à champignon ¦ Kazan larjeje me kërpudhë ¦ Kaldarun tal-ħasil bil-faqqiegħa
+Baignoire en zinc ¦ Vaskë zinku ¦ Banju taż-żingu
+Lave-mains en fonte émaillée ¦ Lavaman duarsh prej gize të emaluar ¦ Lavandin żgħir tal-ħadid fondut enamellat
+Planche à laver ¦ Dërrasë larjeje ¦ Washboard
+Buffet deux-corps vitré ¦ Bufe me dy pjesë me xhama ¦ Kredenza b’żewġ partijiet bil-ħġieġ
+Buffet deux-corps normand ¦ Bufe normand me dy pjesë ¦ Kredenza Normanna b’żewġ partijiet
+Armoire lorraine ¦ Dollap lorenez ¦ Armarju tal-Lorena
+Armoire bressane ¦ Dollap bressan ¦ Armarju tal-Bresse
+Coffre de mariage sculpté ¦ Arkë martese e gdhendur ¦ Sandar taż-żwieġ minqux
+Malle bombée de voyage ¦ Baule udhëtimi e harkuar ¦ Bawl tal-ivvjaġġar bil-għatu mgħawweġ
+Coffre à linge à pentures de fer ¦ Arkë rrobash me mentesha hekuri ¦ Sandar tal-bjankerija b’ċappetti tal-ħadid
+Panetière provençale (murale) ¦ Raft buke provansal (në mur) ¦ Panettiera Provenzali (tal-ħajt)
+Étagère à cuivres ¦ Raft për enë bakri ¦ Xkaffa tar-ram
+Bureau de pente (dos d’âne) ¦ Tryezë shkrimi e pjerrët ¦ Skrivanija inklinata
+Scriban (pente et vitrine) ¦ Skriban (i pjerrët me vitrinë) ¦ Scriban (inklinata u vetrina)
+Écritoire, encrier et plumier ¦ Tryezë shkrimi, bojë dhe kuti pendash ¦ Skrivanija, inkwatur u kaxxa tal-pinen
+Lampe bouillotte ¦ Llambë bouillotte ¦ Lampa bouillotte
+Banc d’école à pupitre (deux places) ¦ Bankë shkolle me tavolinë (dy vende) ¦ Bank tal-iskola bid-desk (żewġ postijiet)
+Pupitre d’écolier à abattant ¦ Bankë nxënësi me kapak ¦ Desk tal-iskola b’għatu
+Ardoise d’écolier ¦ Dërrasë shkrimi nxënësi ¦ Lavanja tal-iskola
+Cheval de bois ¦ Kalë druri ¦ Żiemel tal-injam
+Poupée de porcelaine ¦ Kukull porcelani ¦ Pupa tal-porċellana
+Chaise d’enfant paillée ¦ Karrige fëmijësh me kashtë ¦ Siġġu tat-tfal tal-ħalfa
+Trotteur d’enfant en bois ¦ Ecëse fëmijësh prej druri ¦ Walker tat-tfal tal-injam
+Prie-Dieu sculpté ¦ Gjunjëzuese lutjeje e gdhendur ¦ Inginokkjatorju minqux
+Bénitier de chambre en faïence ¦ Enë uji të bekuar për dhomë, prej fajance ¦ Fonti tal-ilma mbierek tal-kamra, tal-majolika
+Crucifix de chevet (Christ en bronze) ¦ Kryq komodine (Krishti prej bronzi) ¦ Kurċifiss tal-komodina (Kristu tal-bronż)
+Globe de mariée sur son socle ¦ Glob nusërie mbi bazamentin e tij ¦ Globu tal-għarusa fuq il-bażi tiegħu
+Statuette de saint ¦ Statujë e vogël shenjtori ¦ Statwa żgħira ta’ qaddis
+Image de communion encadrée ¦ Figurë kungimi në kornizë ¦ Xbieha tat-tqarbin fil-gwarniċ
+Couronne de perles (mortuaire) ¦ Kurorë me rruaza (mortore) ¦ Kuruna tal-ħriezi (tal-mejtin)
+Rouet flamand (à fuseau) ¦ Çikrik flamand (me boshte) ¦ Magħżel Fjamming (bil-mażra)
+Grand rouet à laine ¦ Çikrik i madh për lesh ¦ Magħżel kbir tas-suf
+Métier à tisser à bras ¦ Vegjë dore ¦ Newl tal-id
+Métier à tapisserie (vertical) ¦ Vegjë tapiceri (vertikale) ¦ Newl tat-tapizzerija (vertikali)
+Dévidoir à écheveaux ¦ Rrotullues lëmshesh ¦ Rukkell tal-ħasel
+Machine à coudre à pédale (Singer) ¦ Makinë qepëse me pedale (Singer) ¦ Magna tal-ħjata bil-pedala (Singer)
+Machine à coudre à main ¦ Makinë qepëse dore ¦ Magna tal-ħjata tal-id
+Mannequin de couturière ¦ Manekin rrobaqepëseje ¦ Manikin tal-ħajjata
+Fourneau à fers de repasseuse ¦ Furrë për hekurat e hekurosëses ¦ Fuklar tal-ħadid tal-mgħaddija
+Banc de sabotier ¦ Bankë e nallanexhiut ¦ Bank ta’ min jagħmel iz-zokkli
+Presse à fromage ¦ Shtypëse djathi ¦ Pressa tal-ġobon
+Baratte à piston en bois ¦ Dybek me piston prej druri ¦ Żangola tal-injam bil-pistun
+Baratte-tonneau à manivelle ¦ Dybek-fuçi me manivelë ¦ Żangola-bettija bil-manivella
+Écrémeuse ¦ Ndarëse ajke ¦ Separatur tal-krema
+Joug de bœufs ¦ Zgjedhë qesh ¦ Madmad tal-barrin
+Outils (fourche, faux, râteau) ¦ Vegla (sfurk, kosë, rrastel) ¦ Għodda (furketta, minġel, rastell)
+Pressoir à pommes (cidre) ¦ Shtypëse mollësh (musht) ¦ Magħsar tat-tuffieħ (sidru)
+Charreton à bras ¦ Karrocë dore e vogël ¦ Karettun żgħir tal-id
+Ruche en paille (panier) ¦ Koshere kashte (shportë) ¦ Doqqajs tat-tiben (basket)
+Puits à margelle et petit toit ¦ Pus me grykë dhe çati të vogël ¦ Bir b’ħajt madwaru u saqaf żgħir
+Pompe à eau en fonte et son auge ¦ Pompë uji prej gize me koritën e saj ¦ Pompa tal-ilma tal-ħadid fondut bil-ħawt tagħha
+Auge en pierre ¦ Koritë guri ¦ Ħawt tal-ġebel
+Banc à laver (de lavoir) ¦ Bankë larjeje (e lavatores) ¦ Bank tal-ħasil (tal-ħasselin)
+Canapé moderne trois places ¦ Divan modern treshe ¦ Sufan modern ta’ tliet postijiet
+Canapé deux places ¦ Divan dyshe ¦ Sufan ta’ żewġ postijiet
+Canapé d’angle ¦ Divan qoshe ¦ Sufan tal-kantuniera
+Canapé Chesterfield (capitonné) ¦ Divan Chesterfield (i kapitonuar) ¦ Sufan Chesterfield (ikkapitonat)
+Fauteuil scandinave ¦ Kolltuk skandinav ¦ Pultruna Skandinava
+Fauteuil suspendu (œuf) ¦ Kolltuk i varur (vezë) ¦ Pultruna mdendla (bajda)
+Pouf poire ¦ Puf dardhë ¦ Beanbag
+Pouf capitonné ¦ Puf i kapitonuar ¦ Pouf ikkapitonat
+Repose-pieds ¦ Mbështetëse këmbësh ¦ Mistrieħ tas-saqajn
+Table basse en verre ¦ Tryezë e ulët prej xhami ¦ Mejda baxxa tal-ħġieġ
+Bout de canapé ¦ Tryezë anësore divani ¦ Mejda tal-ġenb tas-sufan
+Bibliothèque garnie de livres ¦ Bibliotekë plot me libra ¦ Librerija mimlija kotba
+Meuble à disques vinyles ¦ Mobilje për disqe vinili ¦ Għamara tad-diski tal-vinil
+Cheminée moderne à insert ¦ Oxhak modern me insert ¦ Ċumnija moderna b’insert
+Poêle à granulés ¦ Sobë me pelet ¦ Stufa tal-pellets
+Porte-revues ¦ Mbajtëse revistash ¦ Porta-rivisti
+Table d’échecs ¦ Tryezë shahu ¦ Mejda tal-chess
+Billard ¦ Bilardo ¦ Biljard
+Pare-feu de cheminée ¦ Mbrojtëse zjarri oxhaku ¦ Skrin tan-nar taċ-ċumnija
+Panier à bûches ¦ Shportë drush ¦ Basket tal-ħatab
+Table de salle à manger (8 couverts) ¦ Tryezë ngrënieje (8 vende) ¦ Mejda tal-ikel (8 postijiet)
+Table dressée pour un repas de famille ¦ Tryezë e shtruar për një drekë familjare ¦ Mejda lesta għal ikla tal-familja
+Table ronde à pied central ¦ Tryezë e rrumbullakët me këmbë qendrore ¦ Mejda tonda b’sieq ċentrali
+Table à rallonges ouverte ¦ Tryezë e zgjatshme e hapur ¦ Mejda li tittawwal, miftuħa
+Chaise à barreaux (bistrot) ¦ Karrige me tërthore (bistro) ¦ Siġġu bil-vireg (bistro)
+Chaise rembourrée ¦ Karrige e mbushur ¦ Siġġu imbottit
+Chaise scandinave ¦ Karrige skandinave ¦ Siġġu Skandinav
+Chaise médaillon (Louis XVI) ¦ Karrige medaljon (Louis XVI) ¦ Siġġu medaljun (Louis XVI)
+Buffet scandinave sur pieds ¦ Bufe skandinav në këmbë ¦ Kredenza Skandinava fuq saqajn
+Vitrine à vaisselle ¦ Vitrinë enësh ¦ Vetrina tal-platti
+Banc de table ¦ Stol tryeze ¦ Bank tal-mejda
+Desserte, chariot de service ¦ Tryezë shërbimi, karrocë shërbimi ¦ Mejda tas-servizz, trolley
+Candélabre à cinq branches ¦ Shandan me pesë krahë ¦ Kandelabru b’ħames friegħi
+Coupe de fruits ¦ Pjatë frutash ¦ Skutella tal-frott
+Bouquet dans un vase ¦ Buqetë në vazo ¦ Bukkett f’vażun
+Piano de cuisson ¦ Sobë profesionale gatimi ¦ Range cooker
+Colonne de cuisine (four et micro-ondes) ¦ Kolonë kuzhine (furrë dhe mikrovalë) ¦ Kolonna tal-kċina (forn u microwave)
+Évier timbre d’office (céramique) ¦ Lavaman i thellë qeramik ¦ Sink fond taċ-ċeramika
+Suspension à casseroles ¦ Varëse tenxheresh ¦ Rack imdendel tal-borom
+Poubelle à pédale ¦ Kosh plehrash me pedale ¦ Landa taż-żibel bil-pedala
+Étagère à épices et bocaux ¦ Raft erëzash dhe kavanozësh ¦ Xkaffa tal-ħwawar u l-vażetti
+Desserte à roulettes de cuisine ¦ Tryezë kuzhine me rrota ¦ Trolley tal-kċina bir-roti
+Mange-debout ¦ Tryezë e lartë për të ngrënë në këmbë ¦ Mejda għolja
+Tabouret de bar ¦ Stol bari ¦ Bar stool
+Table en formica (années 60) ¦ Tryezë formike (vitet ’60) ¦ Mejda tal-formika (snin 60)
+Chaise en formica (années 60) ¦ Karrige formike (vitet ’60) ¦ Siġġu tal-formika (snin 60)
+Pots d’herbes aromatiques ¦ Vazo me barishte aromatike ¦ Qsari tal-ħxejjex aromatiċi
+Échelle à pain (suspendue) ¦ Raft buke i varur ¦ Sellum tal-ħobż (imdendel)
+Lit double moderne (140) ¦ Shtrat dopio modern (140) ¦ Sodda doppja moderna (140)
+Lit king size (180) ¦ Shtrat king size (180) ¦ Sodda king size (180)
+Lit simple moderne (90) ¦ Shtrat teke modern (90) ¦ Sodda singla moderna (90)
+Lit mezzanine avec bureau ¦ Shtrat i lartë me tryezë pune ¦ Sodda mezzanine bi skrivanija
+Futon, lit bas ¦ Futon, shtrat i ulët ¦ Futon, sodda baxxa
+Table de chevet moderne ¦ Komodinë moderne ¦ Komodina moderna
+Armoire à portes coulissantes (miroir) ¦ Dollap me dyer rrëshqitëse (pasqyrë) ¦ Armarju b’bibien li jiżżerżqu (mera)
+Coiffeuse moderne à miroir rond ¦ Tualetë moderne me pasqyrë të rrumbullakët ¦ Toilette moderna b’mera tonda
+Valet de chambre ¦ Varëse rrobash në këmbë ¦ Valet stand
+Lit de fer à barreaux ¦ Shtrat hekuri me hekura ¦ Sodda tal-ħadid bil-vireg
+Chaise de nourrice (basse) ¦ Karrige e ulët dadoje ¦ Siġġu baxx tat-treddigħ
+Baignoire d’angle ¦ Vaskë qoshe ¦ Banju tal-kantuniera
+Baignoire îlot (moderne) ¦ Vaskë ishull (moderne) ¦ Banju freestanding (modern)
+Cabine de douche ¦ Kabinë dushi ¦ Kabina tad-doċċa
+Porte-serviettes sur pied ¦ Mbajtëse peshqirësh në këmbë ¦ Stand tax-xugamani
+Pèse-personne ¦ Peshore personale ¦ Miżien tal-persuna
+Vasque à poser sur plan en bois ¦ Lavaman mbi banak druri ¦ Lavandin fuq wiċċ tal-injam
+WC à réservoir ¦ WC me depozitë ¦ WC biċ-ċisterna
+WC à chasse d’eau haute (à chaîne) ¦ WC me depozitë të lartë (me zinxhir) ¦ WC biċ-ċisterna għolja (bil-katina)
+Armoire à pharmacie murale ¦ Dollap barnash në mur ¦ Kabinett tal-mediċini tal-ħajt
+Colonne lave-linge et sèche-linge ¦ Kolonë larëse dhe tharëse ¦ Kolonna tal-washing machine u d-dryer
+Buanderie ¦ Lavanderi ¦ Kamra tal-ħasil
+Planche à repasser et son fer ¦ Tryezë hekurosjeje dhe hekuri i saj ¦ Bord tal-mogħdija u l-ħadida
+Bac à laver (évier de buanderie) ¦ Lavaman larjeje (i lavanderisë) ¦ Sink tal-ħasil (tal-kamra tal-ħasil)
+Balai, seau et serpillière ¦ Fshesë, kovë dhe leckë dyshemeje ¦ Xkupa, barmil u mselħa
+Étagère à linge plié ¦ Raft për rroba të palosura ¦ Xkaffa tal-ħwejjeġ mitwija
+Corbeille à linge en osier ¦ Shportë rrobash prej thuprash ¦ Basket tal-ħwejjeġ tal-qasab
+Séchoir à linge (accordéon) ¦ Tharëse rrobash (fizarmonikë) ¦ Stenditur tal-ħwejjeġ (akkordjin)
+Aspirateur traîneau ¦ Fshesë elektrike me karrocë ¦ Vacuum cleaner bir-roti
+Aspirateur balai ¦ Fshesë elektrike vertikale ¦ Vacuum cleaner wieqaf
+Essoreuse à rouleaux (ancienne) ¦ Shtrydhëse me rrotulla (e vjetër) ¦ Magna tal-għasir bir-rombli (antika)
+Machine à laver à manivelle (ancienne) ¦ Makinë larëse me manivelë (e vjetër) ¦ Washing machine bil-manivella (antika)
+Patère murale et manteaux ¦ Varëse muri dhe pallto ¦ Kullarini tal-ħajt u kowtijiet
+Vestiaire d’entrée à miroir (ancien) ¦ Varëse hyrjeje me pasqyrë (e vjetër) ¦ Kapputtiera tal-entratura bil-mera (antika)
+Banc à chaussures ¦ Stol për këpucë ¦ Bank taż-żraben
+Console et miroir d’entrée ¦ Konsol dhe pasqyrë hyrjeje ¦ Konsola u mera tal-entratura
+Paillasson ¦ Fshirëse këmbësh ¦ Tapit tal-bieb
+Boîte à clés murale ¦ Kuti çelësash në mur ¦ Kaxxa taċ-ċwievet tal-ħajt
+Boîte aux lettres sur pied ¦ Kuti postare në këmbë ¦ Kaxxa tal-ittri fuq sieq
+Ordinateur portable ¦ Laptop ¦ Laptop
+Ordinateur de bureau (écran, tour, clavier) ¦ Kompjuter tavoline (ekran, kuti, tastierë) ¦ Kompjuter desktop (skrin, tower, keyboard)
+Minitel ¦ Minitel ¦ Minitel
+Téléphone à cadran ¦ Telefon me disk ¦ Telefon bid-diska
+Échelle de bibliothèque ¦ Shkallë biblioteke ¦ Sellum tal-librerija
+Tableau en liège (pense-bête) ¦ Tabelë tape (kujtesë) ¦ Bord tas-sufra (noti)
+Corbeille à papier ¦ Kosh letrash ¦ Basket tal-karti
+Bureau assis-debout ¦ Tryezë pune ulur-në këmbë ¦ Skrivanija bilqiegħda u bil-wieqfa
+Rayonnage d’archives (généalogie) ¦ Rafte arkivi (gjenealogji) ¦ Xkafef tal-arkivju (ġenealoġija)
+Circuit de train électrique ¦ Pistë treni elektrik ¦ Ferrovija elettrika tal-logħob
+Cubes empilés ¦ Kuba të vendosura njëra mbi tjetrën ¦ Kubi f’munzell
+Tricycle ¦ Triçikël ¦ Triċiklu
+Cuisine pour enfant (dînette) ¦ Kuzhinë fëmijësh (lodër) ¦ Kċina tat-tfal (ġugarell)
+Théâtre de marionnettes (castelet) ¦ Teatër kukullash ¦ Teatru tal-pupazzi
+Ballon ¦ Top ¦ Ballun
+Trottinette ¦ Patinë ¦ Scooter tat-tfal
+Baby-foot ¦ Futboll tavoline ¦ Table football
+Luge en bois ¦ Slitë druri ¦ Slitta tal-injam
+Lit de fer d’enfant ¦ Shtrat hekuri për fëmijë ¦ Sodda tal-ħadid tat-tfal
+Lampadaire à abat-jour ¦ Llambadar në këmbë me abazhur ¦ Lampier tal-art bil-lampshade
+Luminaires ¦ Ndriçim ¦ Dawl
+Lampadaire arc ¦ Llambadar në këmbë me hark ¦ Lampier tal-art bl-ark
+Lampadaire trépied ¦ Llambadar trekëmbësh ¦ Lampier tal-art fuq tripod
+Lampe de salon (pied boule) ¦ Llambë salloni (këmbë top) ¦ Lampa tas-salott (sieq tonda)
+Lampe de banquier (verte) ¦ Llambë bankieri (e gjelbër) ¦ Lampa tal-bankier (ħadra)
+Lampe d’architecte ¦ Llambë arkitekti ¦ Lampa tal-perit
+Suspension de cuisine ¦ Llambë e varur kuzhine ¦ Lampa mdendla tal-kċina
+Suspension à trois globes ¦ Llambë e varur me tre globe ¦ Lampa mdendla bi tliet globi
+Lustre à pampilles ¦ Llambadar me varëse kristali ¦ Lampier bil-kristalli
+Suspension boule en papier ¦ Llambë e varur top letre ¦ Lampa mdendla tal-karta tonda
+Applique murale ¦ Aplikë muri ¦ Lampa tal-ħajt
+Rail de spots ¦ Shinë me spote ¦ Binarju tal-ispots
+Lanterne ¦ Fener ¦ Fanal
+Bougies (groupe) ¦ Qirinj (grup) ¦ Xemgħat (grupp)
+Guirlande lumineuse ¦ Varg dritash ¦ Fairy lights
+Lampe Tiffany (vitrail) ¦ Llambë Tiffany (vitrazh) ¦ Lampa Tiffany (ħġieġ ikkulurit)
+Lampe à lave ¦ Llambë lave ¦ Lava lamp
+Lampe champignon ¦ Llambë kërpudhë ¦ Lampa faqqiegħa
+Réverbère (lampadaire de jardin) ¦ Fanar rruge (llambadar kopshti) ¦ Lampier tat-triq (tal-ġnien)
+Lampe Pigeon ¦ Llambë Pigeon ¦ Lampa Pigeon
+Mur de cadres photo ¦ Mur me korniza fotosh ¦ Ħajt ta’ gwarniċi tar-ritratti
+Cadre photo à poser ¦ Kornizë fotoje për t’u vendosur ¦ Gwarniċ tar-ritratti fuq mejda
+Tableau : paysage ¦ Pikturë: peizazh ¦ Pittura: pajsaġġ
+Tableau : marine ¦ Pikturë: detare ¦ Pittura: marina
+Tableau abstrait ¦ Pikturë abstrakte ¦ Pittura astratta
+Tableau : nature morte ¦ Pikturë: natyrë e qetë ¦ Pittura: natura morta
+Carte ancienne encadrée ¦ Hartë e vjetër në kornizë ¦ Mappa antika fil-gwarniċ
+Papillons encadrés ¦ Flutura në kornizë ¦ Friefet fil-gwarniċ
+Miroir rond ¦ Pasqyrë e rrumbullakët ¦ Mera tonda
+Miroir soleil ¦ Pasqyrë diell ¦ Mera xemx
+Grand miroir doré (trumeau) ¦ Pasqyrë e madhe e praruar (trumeau) ¦ Mera kbira indurata (trumeau)
+Tapis persan ¦ Qilim persian ¦ Tapit Persjan
+Tapis berbère ¦ Qilim berber ¦ Tapit Berber
+Tapis kilim ¦ Qilim kilim ¦ Tapit kilim
+Tapis de couloir ¦ Qilim korridori ¦ Tapit tal-kuritur
+Tapis à poils longs ¦ Qilim me push të gjatë ¦ Tapit bix-xagħar twil
+Rideaux sur tringle ¦ Perde mbi shufër ¦ Purtieri fuq virga
+Ficus en pot ¦ Fikus në vazo ¦ Ficus f’qasrija
+Monstera (grandes feuilles) ¦ Monstera (gjethe të mëdha) ¦ Monstera (weraq kbar)
+Cactus en pot ¦ Kaktus në vazo ¦ Kaktus f’qasrija
+Palmier d’intérieur (kentia) ¦ Palmë shtëpie (kentia) ¦ Palma ta’ ġewwa (kentia)
+Bambou en bac ¦ Bambu në saksi ¦ Bambu f’kaxxa
+Orchidée ¦ Orkide ¦ Orkidea
+Fougère en pot ¦ Fier në vazo ¦ Felċi f’qasrija
+Grand vase de sol (branches) ¦ Vazo e madhe dyshemeje (degë) ¦ Vażun kbir tal-art (friegħi)
+Horloge murale ¦ Sahat muri ¦ Arloġġ tal-ħajt
+Horloge à coucou ¦ Sahat me qyqe ¦ Arloġġ tal-kukkù
+Horloge œil-de-bœuf ¦ Sahat sy-demi ¦ Arloġġ œil-de-bœuf
+Sculpture moderne sur socle ¦ Skulpturë moderne mbi bazament ¦ Skultura moderna fuq bażi
+Maquette de voilier ¦ Maketë anijeje me vela ¦ Mudell ta’ dgħajsa bil-qlugħ
+Coupe, trophée ¦ Kupë, trofe ¦ Tazza, trofew
+Bocal à poisson rouge ¦ Kavanoz peshku të kuq ¦ Vażett tal-ħuta ħamra
+Réfrigérateur rétro (années 50) ¦ Frigorifer retro (vitet ’50) ¦ Friġġ retro (snin 50)
+Électroménager ¦ Pajisje shtëpiake ¦ Apparat tad-dar
+Réfrigérateur combiné moderne ¦ Frigorifer i kombinuar modern ¦ Friġġ-friża modern
+Congélateur armoire ¦ Ngrirës dollap ¦ Friża wieqfa
+Cave à vin réfrigérée ¦ Frigorifer verërash ¦ Friġġ tal-inbid
+Grille-pain ¦ Thekëse buke ¦ Toaster
+Bouilloire ¦ Çajnik elektrik ¦ Kitla
+Machine à café expresso ¦ Makinë kafeje ekspres ¦ Magna tal-espresso
+Robot pâtissier ¦ Mikser ëmbëlsirash ¦ Mixer tal-ħelu
+Téléviseur des années 60 (à pieds) ¦ Televizor i viteve ’60 (me këmbë) ¦ Televixin tas-snin 60 (fuq saqajn)
+Chaîne hi-fi et enceintes ¦ Sistem hi-fi dhe altoparlantë ¦ Hi-fi u speakers
+Enceinte colonne ¦ Altoparlant kolonë ¦ Speaker kolonna
+Platine vinyle ¦ Gramafon vinili ¦ Turntable tal-vinil
+Radiocassette (années 80) ¦ Radiokasetofon (vitet ’80) ¦ Radju-cassette (snin 80)
+Console de jeux et manettes ¦ Konsolë lojërash dhe levë ¦ Console tal-logħob u controllers
+Ventilateur sur pied ¦ Ventilator në këmbë ¦ Fann fuq sieq
+Radiateur bain d’huile ¦ Radiator me vaj ¦ Radjatur biż-żejt
+Poêle à pétrole ¦ Sobë me vajguri ¦ Stufa tal-pitrolju
+Aspirateur robot ¦ Fshesë elektrike robot ¦ Vacuum robot
+Climatiseur mural ¦ Kondicioner muri ¦ Air conditioner tal-ħajt
+Guitare sur son support ¦ Kitarë mbi mbajtësen e saj ¦ Kitarra fuq l-istand tagħha
+Musique ¦ Muzikë ¦ Mużika
+Guitare électrique et ampli ¦ Kitarë elektrike dhe amplifikator ¦ Kitarra elettrika u amplifikatur
+Violon sur son support ¦ Violinë mbi mbajtësen e saj ¦ Vjolin fuq l-istand tiegħu
+Violoncelle ¦ Violonçel ¦ Vjolonċell
+Contrebasse ¦ Kontrabas ¦ Kontrabaxx
+Harpe ¦ Harpë ¦ Arpa
+Batterie ¦ Bateri ¦ Drum kit
+Clavier électronique sur pied ¦ Tastierë elektronike në këmbë ¦ Keyboard elettroniku fuq stand
+Pupitre à musique ¦ Mbajtëse notash ¦ Leġġiju tal-mużika
+Tuba ¦ Tubë ¦ Tuba
+Djembé ¦ Xhembe ¦ Djembe
+Clavecin ¦ Klaviçembal ¦ Klaviċembalu
+Vielle à roue ¦ Lirë me rrotë ¦ Lira bir-rota
+Juke-box ¦ Juke-box ¦ Jukebox
+Orgue de Barbarie ¦ Organo rruge ¦ Organett
+Moto ¦ Motoçikletë ¦ Mutur
+Garage ¦ Garazh ¦ Garaxx
+Mobylette (cyclomoteur) ¦ Motoçikletë e vogël (motorinë) ¦ Moped
+Servante d’atelier ¦ Karrocë veglash punishteje ¦ Trolley tal-għodda
+Établi et panneau à outils ¦ Tezgjah dhe panel veglash ¦ Bank tax-xogħol u pannell tal-għodda
+Rayonnage métallique et caisses ¦ Rafte metalike dhe kuti ¦ Xkafef tal-metall u kaxxi
+Perceuse à colonne ¦ Trapan me kolonë ¦ Drill tal-kolonna
+Scie sur table ¦ Sharrë tryeze ¦ Serrieqa tal-mejda
+Jerrican ¦ Bidon karburanti ¦ Jerrycan
+Pile de pneus ¦ Grumbull gomash ¦ Munzell tajers
+Escabeau ¦ Shkallë e vogël ¦ Sellum żgħir
+Remorque ¦ Rimorkio ¦ Trejler
+Kayak ¦ Kajak ¦ Kajak
+Table de ping-pong ¦ Tryezë pingpongu ¦ Mejda tal-ping-pong
+Tondeuse à gazon ¦ Kositëse bari ¦ Lawnmower
+Tracteur tondeuse ¦ Traktor kositës ¦ Trattur tal-ħaxix
+Trampoline ¦ Trampolinë ¦ Trampolin
+Piscine hors-sol ¦ Pishinë mbi tokë ¦ Pixxina fuq l-art
+Piscine creusée ¦ Pishinë e gërmuar ¦ Pixxina mħaffra
+Spa (jacuzzi) ¦ Spa (xhakuzi) ¦ Spa (jacuzzi)
+Hamac sur support ¦ Shtrat i varur mbi mbajtëse ¦ Ħammock fuq stand
+Balancelle de jardin ¦ Kolovajzë kopshti me ndenjëse ¦ Bank tal-ġnien li jitbandal
+Kiosque, gloriette ¦ Kioskë, pavijon kopshti ¦ Kjosk, gazebo
+Salon de jardin bistrot ¦ Set kopshti bistro ¦ Sett tal-ġnien bistro
+Barbecue boule ¦ Skarë top ¦ Barbecue tond
+Brasero ¦ Mangall ¦ Kanun
+Bac à sable ¦ Kuti me rërë ¦ Kaxxa tar-ramel
+Nichoir sur poteau ¦ Fole zogjsh mbi shtyllë ¦ Bejta tal-għasafar fuq arblu
+Composteur ¦ Kompostues ¦ Kompostjiera
+Récupérateur d’eau de pluie ¦ Mbledhës uji shiu ¦ Ġabra tal-ilma tax-xita
+Nain de jardin ¦ Xhuxh kopshti ¦ Nanu tal-ġnien
+Cadran solaire ¦ Sahat diellor ¦ Arloġġ tax-xemx
+Pots de fleurs ¦ Vazo lulesh ¦ Qsari tal-fjuri
+Olivier en pot ¦ Ulli në vazo ¦ Żebbuġa f’qasrija
+Carré potager surélevé ¦ Lehe perimesh e ngritur ¦ Kaxxa tal-ħxejjex mgħollija
+Dévidoir à tuyau d’arrosage ¦ Rrotull zorre ujitjeje ¦ Rukkell tal-pajp tat-tisqija
+Arrosoir ¦ Ujitëse ¦ Sprejja tat-tisqija
+Étendoir parapluie ¦ Tharëse rrobash çadër ¦ Stenditur umbrella
+Petit pont de jardin ¦ Urë e vogël kopshti ¦ Pont żgħir tal-ġnien
+Mât et drapeau ¦ Shtizë dhe flamur ¦ Arblu u bandiera
+Roue de charrette (décor) ¦ Rrotë qerreje (dekor) ¦ Rota tal-karettun (dekorazzjoni)
+Tarare (vanneuse à grain) ¦ Makinë pastrimi drithi ¦ Magna tat-tidrija tal-qamħ
+Égrenoir à maïs ¦ Shkokëzuese misri ¦ Magna tat-tqaxxir tal-qamħirrum
+Hache-paille ¦ Copëtuese kashte ¦ Qattiegħ tat-tiben
+Selle sur chevalet ¦ Shalë mbi kavalet ¦ Sarġ fuq kavalett
+Faucheuse à cheval ¦ Korrëse me kalë ¦ Magna tal-ħsad biż-żiemel
+Rouleau agricole en pierre ¦ Rul bujqësor prej guri ¦ Romblu agrikolu tal-ġebel
+Palanche et ses deux seaux ¦ Zgjedhë supi me dy kovat e saj ¦ Madmad tal-ispalla biż-żewġ bramel
+Tonneaux sur leur chantier ¦ Fuçi mbi mbajtëset e tyre ¦ Btieti fuq l-istand tagħhom
+Tabouret de traite et seau ¦ Stol mjeljeje dhe kovë ¦ Bank tal-ħlib u barmil
+Sacs de grain ¦ Thasë drithi ¦ Xkejjer tal-qamħ
+Éolienne de pompage (ancienne) ¦ Mulli me erë për pompim (i vjetër) ¦ Mitħna tar-riħ tal-ippumpjar (antika)
+Pigeonnier ¦ Kullë pëllumbash ¦ Barumbara
+Épouvantail ¦ Dordolec ¦ Mbeżża’ tal-għasafar
+Encoignure (meuble d’angle) ¦ Dollap qoshe ¦ Kantuniera
+Placard à portes coulissantes ¦ Dollap me dyer rrëshqitëse ¦ Kexxun b’bibien li jiżżerżqu
+Étagère à chaussures ¦ Raft këpucësh ¦ Xkaffa taż-żraben
+Coin des icônes (« beau coin » orthodoxe) ¦ Këndi i ikonave («këndi i bukur» ortodoks) ¦ Kantuniera tal-ikoni (“kantuniera sabiħa” ortodossa)
+Veilleuse d’icône (lampada) ¦ Kandil ikone (lampada) ¦ Lampa tal-ikona (lampada)
+Croix orthodoxe murale ¦ Kryq ortodoks muri ¦ Salib ortodoss tal-ħajt
+Croix murale sans Christ (protestante) ¦ Kryq muri pa Krishtin (protestant) ¦ Salib tal-ħajt mingħajr Kristu (protestant)
+Grande Bible ouverte sur pupitre ¦ Bibël e madhe e hapur mbi analog ¦ Bibbja kbira miftuħa fuq leġġiju
+Image du Sacré-Cœur encadrée ¦ Figurë e Zemrës së Shenjtë në kornizë ¦ Xbieha tal-Qalb ta’ Ġesù fil-gwarniċ
+Ex-voto (plaque de remerciement) ¦ Ex-voto (pllakë falënderimi) ¦ Ex-voto (plakka ta’ radd il-ħajr)
+Couronne de l’Avent ¦ Kurorë Advente ¦ Kuruna tal-Avvent
+Crèche de Noël ¦ Grazhd i Krishtlindjes ¦ Presepju
+Chapelet accroché (rosaire) ¦ Rruzare e varur ¦ Kuruna tar-Rużarju mdendla
+Ménorah (chandelier à sept branches) ¦ Menorah (shandan me shtatë krahë) ¦ Menorah (gandlier b’seba’ friegħi)
+Hanoukia (chandelier à neuf branches) ¦ Hanukkiah (shandan me nëntë krahë) ¦ Hanukkiah (gandlier b’disa’ friegħi)
+Chandeliers de shabbat (paire) ¦ Shandanë të Shabatit (çift) ¦ Gandlieri tax-Shabbat (par)
+Mézouza (au montant de la porte) ¦ Mezuzah (në kornizën e derës) ¦ Mezuzah (mal-ġenb tal-bieb)
+Étoile de David murale ¦ Yll i Davidit në mur ¦ Stilla ta’ David tal-ħajt
+Mizrah (plaque tournée vers Jérusalem) ¦ Mizrah (pllakë e kthyer nga Jerusalemi) ¦ Mizrah (plakka lejn Ġerusalemm)
+Armoire de la Torah (aron, avec son rideau) ¦ Dollapi i Torës (aron, me perden e tij) ¦ Armarju tat-Torah (aron, bil-purtiera tiegħu)
+Pupitre de lecture (bimah) ¦ Analog leximi (bimah) ¦ Leġġiju tal-qari (bimah)
+Coupe de kiddouch et plateau ¦ Kupë kiddush dhe tabaka ¦ Kalċi tal-kiddush u trej
+Plat du séder (Pessah) ¦ Pjata e Sederit (Pesah) ¦ Platt tas-Seder (Pesaħ)
+Châle de prière (talit) sur son cintre ¦ Shall lutjeje (tallit) mbi varësen e tij ¦ Xalla tat-talb (tallit) fuq il-kullarina tagħha
+Tirelire de tsedaka ¦ Kumbara tzedakah ¦ Kaxxa tat-tzedakah
+Tapis de prière ¦ Qilim lutjeje ¦ Tapit tat-talb
+Porte-Coran pliant (rahle) ¦ Mbajtëse Kurani e palosshme (rahle) ¦ Stand tal-Koran li jintewa (rahle)
+Croissant et étoile muraux ¦ Gjysmëhënë dhe yll në mur ¦ Nofs qamar u stilla tal-ħajt
+Calligraphie encadrée (Bismillah) ¦ Kaligrafi në kornizë (Bismillah) ¦ Kaligrafija fil-gwarniċ (Bismillah)
+Chapelet (misbaha) sur sa coupelle ¦ Tespihe (misbaha) mbi pjatëzën e saj ¦ Kuruna tat-talb (misbaha) fuq il-platt żgħir tagħha
+Lanterne du ramadan (fanous) ¦ Fener Ramazani (fanous) ¦ Fanal tar-Ramadan (fanous)
+Niche de prière murale (mihrab décoratif) ¦ Kamare lutjeje në mur (mihrab dekorativ) ¦ Niċċa tat-talb tal-ħajt (mihrab dekorattiv)
+Coran sur l’étagère du haut ¦ Kurani në raftin e sipërm ¦ Il-Koran fuq l-ixkaffa ta’ fuq
+Brûleur d’encens (mabkhara) ¦ Temjanicë (mabkhara) ¦ Ħarqa tal-inċens (mabkhara)
+Bouddha assis ¦ Buda ulur ¦ Buddha bilqiegħda
+Grand Bouddha de jardin ¦ Buda i madh kopshti ¦ Buddha kbir tal-ġnien
+Autel bouddhique (butsudan) ¦ Altar budist (butsudan) ¦ Artal Buddist (butsudan)
+Stupa miniature (chorten) ¦ Stupë e vogël (chorten) ¦ Stupa żgħira (chorten)
+Moulin à prières ¦ Rrotë lutjeje ¦ Rota tat-talb
+Drapeaux de prière (guirlande) ¦ Flamuj lutjeje (varg) ¦ Bnadar tat-talb (girlanda)
+Thangka (peinture sur rouleau) ¦ Thangka (pikturë në rrotull) ¦ Thangka (pittura fuq romblu)
+Roue du dharma murale ¦ Rrota e dharmës në mur ¦ Rota tad-dharma tal-ħajt
+Bol chantant sur coussin ¦ Tas këndues mbi jastëk ¦ Skutella li tkanta fuq investa
+Gong sur portique ¦ Gong mbi mbajtëse ¦ Gong fuq qafas
+Coussin de méditation (zafu et zabuton) ¦ Jastëk meditimi (zafu dhe zabuton) ¦ Investa tal-meditazzjoni (zafu u zabuton)
+Brûle-parfum et bâtons d’encens ¦ Temjanicë dhe shkopinj temjani ¦ Ħarqa tal-fwieħa u vireg tal-inċens
+Temple de maison (mandir) ¦ Tempull shtëpie (mandir) ¦ Tempju tad-dar (mandir)
+Statue de Ganesh ¦ Statujë e Ganeshit ¦ Statwa ta’ Ganesh
+Nataraja (Shiva dansant) ¦ Nataraja (Shiva që kërcen) ¦ Nataraja (Shiva jiżfen)
+Om mural ¦ Om në mur ¦ Om tal-ħajt
+Lampe à huile (diya) ¦ Llambë vaji (diya) ¦ Lampa taż-żejt (diya)
+Pot de tulsi (basilic sacré) ¦ Vazo tulsi (borzilok i shenjtë) ¦ Qasrija tat-tulsi (ħabaq sagru)
+Rangoli (motif coloré au sol) ¦ Rangoli (motiv me ngjyra në dysheme) ¦ Rangoli (disinn ikkulurit fuq l-art)
+Cloche de puja ¦ Zile puja ¦ Qanpiena tal-puja
+Guirlande de fleurs (œillets d’Inde) ¦ Kurorë lulesh (kadifeja) ¦ Girlanda tal-fjuri (tagetes)
+Khanda mural ¦ Khanda në mur ¦ Khanda tal-ħajt
+Palki Sahib (dais du Guru Granth Sahib) ¦ Palki Sahib (tendë e Guru Granth Sahib) ¦ Palki Sahib (baldakkin tal-Guru Granth Sahib)
+Manji Sahib (petit lit du livre saint) ¦ Manji Sahib (shtrat i vogël i librit të shenjtë) ¦ Manji Sahib (sodda żgħira tal-ktieb sagru)
+Kamidana (autel shinto mural) ¦ Kamidana (altar shinto në mur) ¦ Kamidana (artal shinto tal-ħajt)
+Torii de jardin ¦ Torii kopshti ¦ Torii tal-ġnien
+Lanterne de pierre (tōrō) ¦ Fener guri (tōrō) ¦ Fanal tal-ġebel (tōrō)
+Corde sacrée (shimenawa) ¦ Litar i shenjtë (shimenawa) ¦ Ħabel sagru (shimenawa)
+Autel des ancêtres ¦ Altari i paraardhësve ¦ Artal tal-antenati
+Tablettes des ancêtres ¦ Pllakat e paraardhësve ¦ Plakek tal-antenati
+Brûle-parfum tripode (bronze) ¦ Temjanicë trekëmbëshe (bronz) ¦ Ħarqa tal-fwieħa fuq tliet saqajn (bronż)
+Yin et yang mural ¦ Yin dhe yang në mur ¦ Yin u yang tal-ħajt
+Lanterne rouge en papier ¦ Fener i kuq prej letre ¦ Fanal aħmar tal-karta
+Vase à feu sacré (afrinagan) ¦ Vazo e zjarrit të shenjtë (afrinagan) ¦ Vażun tan-nar sagru (afrinagan)
+Coin mémoire (photo, bougie, fleurs) ¦ Kënd kujtimi (foto, qiri, lule) ¦ Kantuniera tal-memorja (ritratt, xemgħa, fjuri)
+Urne funéraire ¦ Urnë funerale ¦ Urna funebri
+Cadre de deuil (photo et ruban noir) ¦ Kornizë zie (foto dhe shirit i zi) ¦ Gwarniċ tal-luttu (ritratt u żigarella sewda)
+Bougie du souvenir ¦ Qiri kujtimi ¦ Xemgħa tal-memorja
+Boîte à lettres d’amour (correspondance) ¦ Kuti letrash dashurie (korrespondencë) ¦ Kaxxa tal-ittri tal-imħabba (korrispondenza)
+Vitrine à médailles et souvenirs militaires ¦ Vitrinë medaljesh dhe kujtimesh ushtarake ¦ Vetrina tal-midalji u tifkiriet militari
+Lave-linge à hublot ¦ Makinë larëse me derë përpara ¦ Washing machine bil-bieb quddiem
+Lave-linge à ouverture par le dessus ¦ Makinë larëse me hapje nga lart ¦ Washing machine li tinfetaħ minn fuq
+Lave-vaisselle compact (à poser) ¦ Makinë larëse enësh kompakte (mbi banak) ¦ Dishwasher kompatt (fuq il-wiċċ)
+Four à micro-ondes ¦ Furrë mikrovalë ¦ Forn microwave
+Mini-four ¦ Furrë e vogël ¦ Forn żgħir
+Four encastrable sous le plan ¦ Furrë e integruar nën banak ¦ Forn inkorporat taħt il-wiċċ
+Plaque à induction ¦ Pllakë me induksion ¦ Ħotplate tal-induzzjoni
+Table de cuisson au gaz (4 feux) ¦ Sipërfaqe gatimi me gaz (4 vatra) ¦ Ħob tal-gass (4 fuklari)
+Plancha électrique ¦ Plançë elektrike ¦ Plancha elettrika
+Appareil à raclette ¦ Aparat raclette ¦ Magna tar-raclette
+Hotte aspirante murale ¦ Aspirator muri ¦ Kappa tal-ħajt
+Hotte îlot (suspendue) ¦ Aspirator ishulli (i varur) ¦ Kappa tal-gżira (imdendla)
+Cuiseur à riz ¦ Gatuese orizi ¦ Rice cooker
+Mijoteuse ¦ Tenxhere për gatim të ngadaltë ¦ Slow cooker
+Autocuiseur (cocotte-minute) ¦ Tenxhere me presion ¦ Pressure cooker
+Friteuse ¦ Fritezë ¦ Fryer
+Friteuse sans huile ¦ Fritezë pa vaj ¦ Air fryer
+Machine à pain ¦ Makinë buke ¦ Magna tal-ħobż
+Gaufrier ¦ Aparat vaflash ¦ Magna tal-waffles
+Blender ¦ Blender ¦ Blender
+Centrifugeuse (presse-fruits) ¦ Shtrydhëse frutash ¦ Juicer
+Robot multifonction ¦ Robot kuzhine shumëfunksional ¦ Food processor
+Cafetière à filtre ¦ Makinë kafeje me filtër ¦ Kafetiera bil-filtru
+Machine à café à capsules ¦ Makinë kafeje me kapsula ¦ Magna tal-kafè bil-kapsuli
+Bouilloire émaillée ¦ Çajnik i emaluar ¦ Kitla enamellata
+Mini-réfrigérateur ¦ Frigorifer i vogël ¦ Mini-friġġ
+Téléviseur écran plat sur pied ¦ Televizor me ekran të sheshtë në këmbë ¦ Televixin flat screen fuq stand
+Grand téléviseur au mur ¦ Televizor i madh në mur ¦ Televixin kbir mal-ħajt
+Écran de projection ¦ Ekran projeksioni ¦ Skrin tal-projezzjoni
+Vidéoprojecteur ¦ Videoprojektor ¦ Projector
+Barre de son ¦ Shirit zanor ¦ Soundbar
+Magnétoscope (VHS) ¦ Videoregjistrues (VHS) ¦ Video recorder (VHS)
+Lecteur DVD / Blu-ray ¦ Lexues DVD / Blu-ray ¦ Plejer DVD / Blu-ray
+Box internet ¦ Modem interneti ¦ Router tal-internet
+Poste de radio TSF ¦ Aparat radioje TSF ¦ Radju TSF
+Transistor ¦ Radio me transistor ¦ Radju transistor
+Téléphone sans fil et sa base ¦ Telefon pa kordon dhe baza e tij ¦ Telefon cordless bil-bażi tiegħu
+Nettoyeur vapeur (balai) ¦ Pastrues me avull (fshesë) ¦ Steam mop
+Centrale vapeur ¦ Hekur me stacion avulli ¦ Steam station
+Déshumidificateur ¦ Thithës lagështie ¦ Dehumidifier
+Purificateur d’air ¦ Pastrues ajri ¦ Purifikatur tal-arja
+Ventilateur colonne ¦ Ventilator kolonë ¦ Fann kolonna
+Chauffe-eau (ballon d’eau chaude) ¦ Ngrohës uji (bojler) ¦ Water heater (boiler)
+Chaudière murale ¦ Kaldajë muri ¦ Boiler tal-ħajt
+Radiateur électrique mural ¦ Radiator elektrik muri ¦ Radjatur elettriku tal-ħajt
+Machine à coudre électrique ¦ Makinë qepëse elektrike ¦ Magna tal-ħjata elettrika
+Fauteuil de bureau à roulettes ¦ Kolltuk zyre me rrota ¦ Siġġu tal-uffiċċju bir-roti
+Siège ergonomique (dossier filet) ¦ Karrige ergonomike (mbështetëse me rrjetë) ¦ Siġġu ergonomiku (dahar tax-xibka)
+Fauteuil de direction en cuir ¦ Kolltuk drejtori prej lëkure ¦ Pultruna tad-direttur tal-ġilda
+Bureau informatique ¦ Tryezë kompjuteri ¦ Skrivanija tal-kompjuter
+Grand bureau (plateau 180 cm) ¦ Tryezë pune e madhe (pllakë 180 cm) ¦ Skrivanija kbira (wiċċ ta’ 180 cm)
+Table à dessin inclinable ¦ Tryezë vizatimi e pjerrët ¦ Mejda tat-tpinġija inklinabbli
+Caisson à tiroirs à roulettes ¦ Kuti me sirtarë me rrota ¦ Kabinett bil-kexxuni bir-roti
+Classeur métallique à tiroirs ¦ Dosjer metalik me sirtarë ¦ Kabinett tal-fajls tal-metall
+Armoire à rideaux ¦ Dollap me kapakë rrëshqitës ¦ Armarju bil-bibien tar-rombli
+Meuble à plans ¦ Mobilje për plane ¦ Kabinett tal-pjanti
+Fichier à fiches en bois ¦ Skedar me kartela prej druri ¦ Kaxxa tal-kards tal-injam
+Étagère de classeurs ¦ Raft dosjesh ¦ Xkaffa tal-binders
+Imprimante ¦ Printer ¦ Printer
+Imprimante multifonction (scanner) ¦ Printer shumëfunksional (skaner) ¦ Printer multifunzjonali (scanner)
+Photocopieur ¦ Fotokopjues ¦ Fotokopjatriċi
+Scanner à plat ¦ Skaner i sheshtë ¦ Flatbed scanner
+Écran d’ordinateur ¦ Ekran kompjuteri ¦ Skrin tal-kompjuter
+Deux écrans côte à côte ¦ Dy ekrane krah për krah ¦ Żewġ skrins ħdejn xulxin
+Ordinateur tout-en-un ¦ Kompjuter i gjithë-në-një ¦ Kompjuter all-in-one
+Globe sur pied ¦ Glob në këmbë ¦ Globu fuq sieq
+Tableau blanc ¦ Dërrasë e bardhë ¦ Whiteboard
+Destructeur de documents ¦ Copëtues dokumentesh ¦ Shredder
+Trieur à courrier ¦ Renditës postash ¦ Organizzatur tal-posta
+Plante de bureau ¦ Bimë zyre ¦ Pjanta tal-uffiċċju
+Lampe de bureau LED ¦ Llambë tavoline LED ¦ Lampa tal-iskrivanija LED
+Repose-pieds de bureau ¦ Mbështetëse këmbësh zyre ¦ Mistrieħ tas-saqajn tal-uffiċċju
+Fontaine à eau ¦ Burim uji ¦ Water dispenser
+Voiture citadine ¦ Makinë qyteti ¦ Karozza tal-belt
+Voiture familiale (break) ¦ Makinë familjare (break) ¦ Karozza tal-familja (estate)
+Camionnette ¦ Furgon i vogël ¦ Van
+2 CV ¦ 2 CV ¦ 2 CV
+Renault 4 L ¦ Renault 4 L ¦ Renault 4 L
+Traction avant ¦ Traction avant ¦ Traction avant
+Caravane ¦ Karavan ¦ Karavan
+Vélo ¦ Biçikletë ¦ Rota
+Vélo électrique ¦ Biçikletë elektrike ¦ Rota elettrika
+Vélo d’enfant ¦ Biçikletë fëmijësh ¦ Rota tat-tfal
+Vélo ancien (de facteur) ¦ Biçikletë e vjetër (postieri) ¦ Rota antika (tal-pustier)
+Râtelier à vélos ¦ Mbajtëse biçikletash ¦ Rack tar-roti
+Scooter ¦ Skuter ¦ Scooter
+Panneau à outils mural ¦ Panel veglash në mur ¦ Pannell tal-għodda tal-ħajt
+Armoire métallique d’atelier ¦ Dollap metalik punishteje ¦ Armarju tal-metall tal-workshop
+Étagère de garage en bois ¦ Raft garazhi prej druri ¦ Xkaffa tal-garaxx tal-injam
+Établi pliant ¦ Tezgjah i palosshëm ¦ Bank tax-xogħol li jintewa
+Scie à onglet ¦ Sharrë këndore ¦ Mitre saw
+Poste à souder ¦ Aparat saldimi ¦ Magna tal-iwweldjar
+Nettoyeur haute pression ¦ Pastrues me presion të lartë ¦ Pressure washer
+Groupe électrogène ¦ Gjenerator elektrik ¦ Ġeneratur
+Aspirateur d’atelier ¦ Fshesë elektrike punishteje ¦ Vacuum tal-workshop
+Cric rouleur ¦ Krik me rrota ¦ Ġakk bir-roti
+Borne de recharge (voiture électrique) ¦ Stacion karikimi (makinë elektrike) ¦ Charging point (karozza elettrika)
+Échelle d’appui ¦ Shkallë mbështetëse ¦ Sellum li jistrieħ mal-ħajt
+Réfrigérateur de garage ¦ Frigorifer garazhi ¦ Friġġ tal-garaxx
+Congélateur coffre de garage ¦ Ngrirës sënduk garazhi ¦ Friża tat-tip sandar tal-garaxx
+Poubelles de tri (conteneurs) ¦ Kosha ricikilimi (kontejnerë) ¦ Landi tar-riċiklaġġ (kontejners)
+Canoë ¦ Kanoe ¦ Kenura
+Planche de surf ¦ Dërrasë surfi ¦ Surfboard
+Réglette d’atelier ¦ Llambë punishteje me shufër ¦ Batten light tal-workshop
+Plafonnier rond ¦ Llambë tavani e rrumbullakët ¦ Lampa tas-saqaf tonda
+Plafonnier Art déco ¦ Llambë tavani Art déco ¦ Lampa tas-saqaf Art déco
+Dalle LED ¦ Panel LED ¦ Pannell LED
+Lustre à bras ¦ Llambadar me krahë ¦ Lampier bil-friegħi
+Lustre en fer forgé (à bougies) ¦ Llambadar hekuri të farkëtuar (me qirinj) ¦ Lampier tal-ħadid maħdum (bix-xemgħat)
+Lustre roue de charrette ¦ Llambadar rrotë qerreje ¦ Lampier rota tal-karettun
+Réglette lumineuse ¦ Shufër ndriçuese ¦ Batten light
+Néon décoratif (enseigne) ¦ Neon dekorativ (tabelë) ¦ Neon dekorattiv (tabella)
+Bandeau LED ¦ Shirit LED ¦ LED strip
+Lampadaire vasque (halogène) ¦ Llambadar në këmbë me kupë (halogjen) ¦ Lampier tal-art bl-iskutella (aloġenu)
+Lampadaire vasque Art déco ¦ Llambadar në këmbë me kupë Art déco ¦ Lampier tal-art bl-iskutella Art déco
+Lampadaire liseuse ¦ Llambadar leximi në këmbë ¦ Lampier tal-art għall-qari
+Lampe à abat-jour plissé ¦ Llambë me abazhur të rrudhosur ¦ Lampa b’lampshade pliżżat
+Lampe globe en opaline ¦ Llambë glob prej opaline ¦ Lampa globu tal-opalina
+Lampe de sel ¦ Llambë kripe ¦ Salt lamp
+Veilleuse d’enfant ¦ Dritë nate për fëmijë ¦ Dawl tal-lejl tat-tfal
+Lampe de lecture articulée ¦ Llambë leximi me krah të lëvizshëm ¦ Lampa tal-qari artikolata
+Lampe à carbure (de mineur) ¦ Llambë karburi (e minatorit) ¦ Lampa tal-karbur (tal-minatur)
+Bougeoir à main ¦ Shandan dore ¦ Xemgħadan tal-id
+Applique double ¦ Aplikë dyshe ¦ Lampa tal-ħajt doppja
+Applique de salle de bain ¦ Aplikë banjoje ¦ Lampa tal-ħajt tal-kamra tal-banju
+Suspension industrielle ¦ Llambë e varur industriale ¦ Lampa mdendla industrijali
+Ampoule nue (filament) ¦ Llambë e zhveshur (filament) ¦ Bozza mikxufa (filament)
+Suspension en rotin ¦ Llambë e varur prej rattani ¦ Lampa mdendla tar-rattan
+Boule à facettes ¦ Top me faseta ¦ Disco ball
+Projecteur extérieur ¦ Prozhektor i jashtëm ¦ Floodlight ta’ barra
+Borne lumineuse de jardin ¦ Shtyllë ndriçuese kopshti ¦ Bollard light tal-ġnien
+Balise solaire de jardin ¦ Dritë diellore kopshti ¦ Dawl solari tal-ġnien
+maison|Genre ¦ Lloji ¦ Tip
+maison|Avant ¦ Përpara ¦ Quddiem
+maison|Poser ¦ Vendos ¦ Poġġi
+maison|Angles ¦ Këndet ¦ Angoli
+maison|Écurie ¦ Stallë ¦ Stalla
+maison|Croix ¦ Kryq ¦ Salib
+couleur|aucune ¦ asnjë ¦ xejn

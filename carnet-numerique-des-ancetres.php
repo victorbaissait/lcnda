@@ -168,7 +168,7 @@
     <main id="haut">
         <section class="presentation-hero">
             <div class="presentation-hero-copy">
-                <span class="eyebrow">VERSION BÊTA · 0.9.1</span>
+                <span class="eyebrow">VERSION BÊTA · 0.9.2</span>
                 <p class="presentation-acronym" aria-hidden="true">LCNDA</p>
                 <h1>Le Carnet numérique<br>des ancêtres</h1>
                 <p class="presentation-lead">Un logiciel de généalogie local, open source, gratuit et modulable pour travailler avec son histoire familiale, mais aussi pour vos inventaires et le suivi de vos animaux. Pensé et designé par Victor Baissait, codé par Codex (ChatGPT) &amp; Claude.</p>
@@ -198,8 +198,8 @@
                     <h3>macOS</h3>
                     <p class="presentation-os-req">macOS 13 Ventura ou plus récent</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.9.1-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 548 Mo</small></span><span aria-hidden="true">↓</span></a>
-                        <a class="button secondary" href="download/LCNDA-0.9.1-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 554 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.9.2-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 548 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button secondary" href="download/LCNDA-0.9.2-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 554 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Votre Mac : menu Pomme → À propos de ce Mac → « Puce » (Apple Silicon) ou « Processeur » (Intel). Ouvrez le fichier .dmg et glissez LCNDA dans Applications.</p>
                 </article>
@@ -208,7 +208,7 @@
                     <h3>Windows</h3>
                     <p class="presentation-os-req">Windows 10 / 11 (64 bits) — PC Intel ou AMD, et Windows 11 sur processeur ARM</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.9.1-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 564 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.9.2-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 564 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Lancez le fichier et suivez l'installation. Le composant Microsoft Visual C++ nécessaire est installé automatiquement s'il manque.</p>
                 </article>
@@ -219,16 +219,16 @@
                     <div class="presentation-os-groups">
                         <div class="presentation-os-group">
                             <strong>PC Intel ou AMD</strong>
-                            <a class="button" href="download/LCNDA-0.9.1-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 543 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.9.1-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 517 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.9.2-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 543 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.9.2-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 517 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                         <div class="presentation-os-group">
                             <strong>Processeur ARM (Raspberry Pi…)</strong>
-                            <a class="button" href="download/LCNDA-0.9.1-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 545 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.9.1-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 513 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.9.2-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 545 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.9.2-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 513 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                     </div>
-                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.9.1-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
+                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.9.2-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
                 </article>
             </div>
 
@@ -236,17 +236,43 @@
                 <div>
                     <h3>Code source</h3>
                     <p class="presentation-os-req">Pour les développeurs : LCNDA est un logiciel libre (licence AGPL-3.0)</p>
-                    <p class="presentation-os-help">Le code complet de la version 0.9.1, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique tout seul au premier lancement (ou avec <code>npm run fetch:geo</code>).</p>
+                    <p class="presentation-os-help">Le code complet de la version 0.9.2, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique tout seul au premier lancement (ou avec <code>npm run fetch:geo</code>).</p>
                 </div>
                 <div class="presentation-os-group">
-                    <a class="button" href="download/lcnda-0.9.1.zip"><span>Archive .zip<small>Windows, macOS · 270 Mo</small></span><span aria-hidden="true">↓</span></a>
-                    <a class="button secondary" href="download/lcnda-0.9.1.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 269 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button" href="download/lcnda-0.9.2.zip"><span>Archive .zip<small>Windows, macOS · 270 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button secondary" href="download/lcnda-0.9.2.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 269 Mo</small></span><span aria-hidden="true">↓</span></a>
                 </div>
             </article>
 
             <details class="presentation-changes">
-                <summary><span>Nouveautés de la version 0.9.1<small>La même barre au-dessus de toutes les listes, une seule fenêtre « Imprimer » et « Versions », recherche dans les Réglages, bunker bien plus riche, couleurs plus lisibles, beaucoup de corrections</small></span></summary>
+                <summary><span>Nouveautés de la version 0.9.2<small>L'app en 32 langues, premier lancement guidé avec base d'exemple, archives en ligne réunies, preuves et solidité des liens, nouveaux outils, imports et exports, cartes et diagrammes, jeux</small></span></summary>
                 <div class="presentation-changes-body">
+                    <h4>🌐 L'app en 32 langues</h4>
+                    <p>Français, English, Español, Deutsch, Italiano, Português, Polski, Nederlands, Čeština, Svenska, Dansk, Slovenčina, Norsk (bokmål), Română, Suomi, Magyar, Hrvatski, Slovenščina, Lietuvių, Latviešu, Eesti, Íslenska, Türkçe, Lëtzebuergesch, Shqip, Malti, Tiếng Việt, Bahasa Indonesia, Русский, Українська, Ελληνικά, Български. Toute l'app est traduite (menus, fiches, outils, Réglages, jeux, éditeurs), ainsi que les 806 réponses de la FAQ. La première fois, l'app s'ouvre dans la langue de l'ordinateur (sinon en anglais), avec deux boutons « Français » / « English ». Les traductions sont faites par une IA : un bandeau le rappelle, avec « Signaler une erreur ». Vos données (noms, notes, lieux) ne sont jamais traduites.</p>
+                    <h4>🧭 Premier lancement et visite guidée</h4>
+                    <p>Choisissez vos usages (les onglets utiles s'affichent), importez votre fichier, partez d'une base vide ou d'une base d'exemple (une famille imaginaire sur 5 générations, sans aucun vivant). Une visite guidée en 6 étapes présente l'app.</p>
+                    <h4>🔍 Archives en ligne réunies</h4>
+                    <p>Une seule fenêtre « Chercher dans les archives en ligne » pour 132 sites (Mémoire des hommes, Léonore, matricules, presse, Archives nationales, Antenati, FreeBMD, FamilySearch, Yad Vashem…), rangés par pays et par thème, avec « Gratuites seulement ». L'import demande « c'est la même personne ? », n'écrase rien et se défait. Recensements SocFace avec repérage des erreurs de lecture automatique.</p>
+                    <h4>⚖️ Preuves et solidité des liens</h4>
+                    <p>Dossier de preuve (indices pour et contre, conflits, conclusion), solidité de chaque lien parent-enfant (prouvé, probable, supposé, sans source, réfuté) avec une pastille sur la fiche, une « Vue solidité » dans les arbres et la liste « Branches fragiles ». Aide à la lecture des actes dans 29 langues, et lecture des actes manuscrits ligne par ligne (installation guidée).</p>
+                    <h4>🧰 Nouveaux outils</h4>
+                    <p>Où chercher ?, Murs de brique, Ma semaine de recherche, Héritages et successions, Cousinade, Transmission des prénoms, Ta famille et l'histoire de France, Une journée dans la vie de…, Arbre des métiers, Carte de la vie, Courriers tout prêts, sauvegarde automatique et travail à deux ordinateurs sur un dossier partagé.</p>
+                    <h4>⤒ Imports et exports</h4>
+                    <p>Gramps, GeneWeb, GEDCOM-X, GEDCOM d'Ancestry, MyHeritage, Généatique, FTM, RootsMagic et 11 autres logiciels, relevés Nimègue, exports ADN de 5 sociétés, Google Photos et Apple Photos. Exports pour Geneanet, Gramps, GedZip avec les photos, Obsidian, agenda, contacts et cartes (KML, GeoJSON).</p>
+                    <h4>📊 Diagrammes et cartes</h4>
+                    <p>12 diagrammes de plus (chemin de parenté, complétude, ahnentafel, matrice de Leeds…) et « ⚙️ Personnaliser » pour tous. Cartes : comparer deux époques, frontières anciennes des communes (fichiers officiels de l'INSEE livrés avec l'app), patronymes, cousins ADN, trajets d'autrefois, relief 3D, grande carte à imprimer.</p>
+                    <h4>🎲 Jeux, montage et le reste</h4>
+                    <p>Échecs, dames, dominos, Yams, 8 jeux de cartes contre l'ordinateur (belote, tarot, rami…) et 131 patiences. Montage : volume dans le temps, compresseur, réverbération, panoramique, textes enrichis. L'app vérifie les nouvelles versions ; un bouton 🐞 « Signaler un bug » envoie un rapport sans aucune donnée de généalogie. Les grosses bases (jusqu'à 100 000 personnes) restent fluides.</p>
+                    <p>La base se met à jour toute seule à la première ouverture : rien à faire.</p>
+                </div>
+            </details>
+
+            <details class="presentation-changes presentation-changes-old">
+                <summary><span>Nouveautés des anciennes versions<small>Ce qu'ont apporté les versions précédentes</small></span></summary>
+                <div class="presentation-changes-body">
+                    <details class="presentation-version">
+                        <summary>Version 0.9.1 <small>La même barre au-dessus de toutes les listes, une seule fenêtre « Imprimer » et « Versions », recherche dans les Réglages, bunker bien plus riche, couleurs plus lisibles, beaucoup de corrections</small></summary>
+                        <div class="presentation-version-body">
                     <h4>🔍 La même barre au-dessus de toutes les listes</h4>
                     <p>Plus de quarante listes de plus ont maintenant la barre commune : 🔍 Chercher · Filtrer ▾ · Liste | Fiches · Trier (papiers de famille, passeports, armoiries, objets et mémoire familiale, métiers anciens, lieux précis, villages, paroisses, cartes anciennes, circuits, poilus, résistants, départs, enfants placés, salons, demandes d'entraide, visites d'archives, recensements, Trésors, gazettes, Mes listes…). Les anciens petits boutons (« À faire / Faits », « Tous / Intérieurs / Étranger »…) passent dans Filtrer, avec le nombre trouvé à côté de chaque choix ; les filtres actifs se voient en pastilles bleues qu'on retire d'un clic. Chaque liste retient sa recherche, ses filtres, son tri et son affichage ; les cartes au-dessus d'une liste suivent les filtres. Les deux calendriers ont 🔍 et Filtrer. <b>Mes listes</b> gagne « ⤓ Exporter ▾ » (CSV, tableur, Excel), « 🖨 Imprimer » et « Plus ▾ » pour ses autres présentations. Une lettre scellée n'est jamais fouillée par la recherche.</p>
                     <h4>🖨 Une seule fenêtre pour imprimer, une seule pour les versions</h4>
@@ -262,12 +288,8 @@
                     <h4>🐞 Bugs corrigés</h4>
                     <p>Une longue relecture, et un test « utilisateur qui fait n'importe quoi » : une adresse abîmée ne plante plus l'app ; des écrans ne s'ouvrent plus en erreur quand l'ordinateur est lent ; « ↶ Annuler » ne se perd plus dans les Réglages ; une taille de texte absurde venue d'un fichier importé n'est plus acceptée ; des réglages abîmés ne font plus planter les pages ; la bataille navale et les câbles retrouvent les noms des ancêtres ; une fenêtre restée sur une autre généalogie ne montre plus les personnes de celle-ci ; les archives GedZip, Hérédis et MacFamilyTree reçues d'ailleurs sont mieux vérifiées ; double cadre de la recherche des Réglages et nombreux petits défauts d'affichage.</p>
                     <p>La base se met à jour toute seule à la première ouverture (quelques index et une colonne de plus) : rien à faire.</p>
-                </div>
-            </details>
-
-            <details class="presentation-changes presentation-changes-old">
-                <summary><span>Nouveautés des anciennes versions<small>Ce qu'ont apporté les versions précédentes</small></span></summary>
-                <div class="presentation-changes-body">
+                        </div>
+                    </details>
                     <details class="presentation-version">
                         <summary>Version 0.9.0 <small>Trésors de famille, 108 patiences et deux nouveaux jeux, fond des pages, réglages réorganisés, gazette, broderie, ciel de naissance, ambiance sonore, nombreuses corrections</small></summary>
                         <div class="presentation-version-body">
@@ -1095,7 +1117,7 @@
     </main>
 
      <footer class="presentation-footer">
-        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.9.1 · LICENCE AGPL-3.0</span>
+        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.9.2 · LICENCE AGPL-3.0</span>
         <a href="#haut">Retour en haut ↑</a>
     </footer>
     <script src="faq-data.js"></script>

@@ -22,6 +22,7 @@
     const DI = () => ext.diagramsInternals;
     const esc = v => (A()?.escapeHtml ? A().escapeHtml(v ?? '') : String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c])));
     const toast = (...a) => A().toast(...a);
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const api = (...a) => A().api(...a);
     const plural = (n, w, p) => (A()?.plural ? A().plural(n, w, p) : `${n} ${n > 1 ? p || w + 's' : w}`);
     const fmtN = n => (Number.isFinite(n) ? n.toLocaleString('fr-FR', {maximumFractionDigits: 6, useGrouping: false}) : '');
@@ -34,12 +35,12 @@
     function numOf(v) {
         if (typeof v === 'number') return {n: Number.isFinite(v) ? v : null};
         if (v == null || v === '') return {n: null};
-        if (typeof v === 'boolean') return {n: v ? 1 : 0, warn: `contient « ${v ? 'VRAI' : 'FAUX'} » : compté comme ${v ? 1 : 0}`};
+        if (typeof v === 'boolean') return {n: v ? 1 : 0, warn: i18n('contient « {text} » : compté comme {n}', {text: v ? 'VRAI' : 'FAUX', n: String(v ? 1 : 0)})};
         const t = String(v).trim(), n0 = X().toNum(t); if (n0 !== null) return {n: n0};
-        if (/^#[A-Z/0-9!?]+$/.test(t)) return {n: null, warn: `contient l’erreur « ${t} » : laissée vide`};
+        if (/^#[A-Z/0-9!?]+$/.test(t)) return {n: null, warn: i18n('contient l’erreur « {text} » : laissée vide', {text: t})};
         const m = t.match(/-?\d[\d   ]*(?:[.,]\d+)?/);
-        if (m) { const n = X().toNum(m[0].replace(/[   ]/g, '')); if (n !== null) return {n, warn: `contient « ${t.slice(0, 40)} » : compté comme ${fmtN(n)}`}; }
-        return {n: null, warn: `« ${t.slice(0, 40)} » n’est pas un nombre : laissé vide`};
+        if (m) { const n = X().toNum(m[0].replace(/[   ]/g, '')); if (n !== null) return {n, warn: i18n('contient « {text} » : compté comme {n}', {text: t.slice(0, 40), n: fmtN(n)})}; }
+        return {n: null, warn: i18n('« {text} » n’est pas un nombre : laissé vide', {text: t.slice(0, 40)})};
     }
     const isColor = v => typeof v === 'string' && !!X()?.safeCol(v) && /^#|^rgb|^hsl/i.test(v.trim());
     const fold = s => (X() ? X().fold(s) : String(s ?? '').toLowerCase()).replace(/[^a-z0-9]+/g, ' ').trim();
@@ -105,7 +106,7 @@
         const status = columns.map(c => {
             const j = map[c.k], idx = Array.isArray(j) ? j : j >= 0 ? [j] : [];
             const name = x => `${X().colName((g.c0 || 0) + x)}${table.header[x] ? ' · ' + table.header[x] : ''}`;
-            if (!idx.length) return {col: c, idx, state: c.optional || c.many && c.min === 0 ? 'none' : 'missing', text: c.optional ? '— aucune —' : 'à trouver'};
+            if (!idx.length) return {col: c, idx, state: c.optional || c.many && c.min === 0 ? 'none' : 'missing', text: c.optional ? i18n('— aucune —') : i18n('à trouver')};
             const w = warnings.filter(x => x.k === c.k).length;
             return {col: c, idx, state: w ? 'warn' : 'ok', text: idx.map(name).join(', '), warn: w};
         });
@@ -186,7 +187,7 @@
             return s;
         },
         preview: data => (R()?.svg ? `<div class="h-dg-svg">${R().svg(data, 520)}</div>` : ''),
-        create(data, ctx) { if (!ext.openDiagramEditor) return toast('L’éditeur de diagrammes n’est pas chargé.', 'error'); return ext.openDiagramEditor(null, {spec: data, name: ctx.name || data.o?.title || 'Diagramme'}); },
+        create(data, ctx) { if (!ext.openDiagramEditor) return toast(i18n('L’éditeur de diagrammes n’est pas chargé.'), 'error'); return ext.openDiagramEditor(null, {spec: data, name: ctx.name || data.o?.title || 'Diagramme'}); },
     };
 
     /* 📈 Un graphique (Éditeur de graphiques, « ✍️ Mes propres chiffres ») : {series: [{name, color}], rows: [{label, v: ['42', …]}]} */
@@ -204,10 +205,10 @@
         back(ed, free) { const table = sheetTable(ed, 0, true), res = mapColumns(table, FREE_COLS, {fixed: {label: 0}}); return this.build(res.objs, {free}, table, res.status); },
         preview: f => (R()?.svg ? `<div class="h-dg-svg">${R().svg({kind: 'columns', o: {title: ''}, series: f.series.map(s => ({name: s.name})), rows: f.rows.map(r => Object.fromEntries([['label', r.label], ...r.v.map((x, j) => ['s' + j, X().toNum(x) ?? 0])]))}, 520)}</div>` : ''),
         create(free, ctx) {
-            if (!ext.importCustomStat) return toast('L’éditeur de graphiques n’est pas chargé.', 'error');
+            if (!ext.importCustomStat) return toast(i18n('L’éditeur de graphiques n’est pas chargé.'), 'error');
             const name = String(ctx.name || 'Mon graphique').slice(0, 80), r = ext.importCustomStat({format: 'lcnda-widget', widget: {name, kind: 'chart', style: free.series.length > 1 ? 'columns' : 'bars', src: {source: 'manual'}, free}});
             const id = String(r.key || '').replace(/^my:/, '');
-            toast(`Graphique « ${name} » ajouté à Mes graphiques (Graphiques, tableau de bord…).`, 'success', {action: {label: '↗ Ouvrir', run: () => ctx.editor?.close(() => ext.editStatFor?.(id))}});
+            toast(i18n('Graphique « {name} » ajouté à Mes graphiques (Graphiques, tableau de bord…).', {name}), 'success', {action: {label: i18n('↗ Ouvrir'), run: () => ctx.editor?.close(() => ext.editStatFor?.(id))}});
         },
     };
 
@@ -217,7 +218,7 @@
     const tsv = rows => rows.map(r => r.map(v => String(v ?? '').replace(/[\t\r\n]+/g, ' ')).join('\t')).join('\n');
     async function copyText(text, msg) {
         try { await navigator.clipboard.writeText(text); toast(msg, 'success'); return true; }
-        catch (_) { toast('Le navigateur refuse de copier ici : sélectionne la plage et fais ' + (A()?.keys?.text ? A().keys.text('⌘C') : '⌘C') + '.', 'error'); return false; }
+        catch (_) { toast(i18n('Le navigateur refuse de copier ici : sélectionne la plage et fais {key}.', {key: A()?.keys?.text ? A().keys.text('⌘C') : '⌘C'}), 'error'); return false; }
     }
     T.board = {
         icon: '🧩', label: 'Un tableau', hint: 'objet ▦ Tableur', createLabel: '📋 Copier pour un tableau', keepRaw: true,
@@ -239,7 +240,7 @@
         },
         fromRange: (ed, g) => rawGrid(ed, ed.si, g),
         preview: rows => miniTable(rows),
-        create: rows => copyText(tsv(rows), 'Copié : dans un tableau (Enquêtes → 🧩 Tableaux), colle-le (⌘V) : il devient un objet ▦ Tableur, formules comprises.'),
+        create: rows => copyText(tsv(rows), i18n('Copié : dans un tableau (Enquêtes → 🧩 Tableaux), colle-le ({key}) : il devient un objet ▦ Tableur, formules comprises.', {key: A()?.keys?.text ? A().keys.text('⌘V') : '⌘V'})),
     };
 
     /* 📚 Un recueil (tableur d'une page) : {cols: [{id, name}], rows: [{id, c: {colId: texte}, person}], merges} */
@@ -273,7 +274,7 @@
         },
         fromRange: (ed, g) => X().matrix(ed.wb, ed.calc, ed.si, g, {display: true}),
         preview: rows => miniTable(rows),
-        create: rows => copyText(tsv(rows), 'Copié : dans la page d’un recueil, clique une case du tableau et colle (⌘V).'),
+        create: rows => copyText(tsv(rows), i18n('Copié : dans la page d’un recueil, clique une case du tableau et colle ({key}).', {key: A()?.keys?.text ? A().keys.text('⌘V') : '⌘V'})),
     };
 
     /* 🎤 Une présentation : un objet Tableau (rows : [[texte]]) ou Graphique (spec d'un diagramme « Catégorie ; Série… ») */
@@ -289,12 +290,12 @@
         fromRange: (ed, g) => X().matrix(ed.wb, ed.calc, ed.si, g, {display: true}).slice(0, 40).map(r => r.slice(0, 16)),
         preview: rows => miniTable(rows),
         create(rows, ctx) {
-            if (!ext.keynoteWithObject) return toast('La présentation n’est pas chargée.', 'error');
+            if (!ext.keynoteWithObject) return toast(i18n('La présentation n’est pas chargée.'), 'error');
             if (ctx.asChart && ctx.chart) return ext.keynoteWithObject({t: 'chart', spec: ctx.chart}, ctx.name);
             return ext.keynoteWithObject({t: 'table', head: true, rows}, ctx.name);
         },
     };
-    const miniTable = rows => `<div class="xl-prev"><table><tbody>${(rows || []).slice(0, 8).map((r, i) => `<tr>${(r || []).slice(0, 8).map(v => `<${i ? 'td' : 'th'}>${esc(str(v))}</${i ? 'td' : 'th'}>`).join('')}</tr>`).join('')}</tbody></table>${(rows || []).length > 8 ? `<small class="muted">… et ${plural(rows.length - 8, 'autre ligne', 'autres lignes')}</small>` : ''}</div>`;
+    const miniTable = rows => `<div class="xl-prev"><table><tbody>${(rows || []).slice(0, 8).map((r, i) => `<tr>${(r || []).slice(0, 8).map(v => `<${i ? 'td' : 'th'}>${esc(str(v))}</${i ? 'td' : 'th'}>`).join('')}</tr>`).join('')}</tbody></table>${(rows || []).length > 8 ? `<small class="muted">${esc(i18n('… et {n}', {n: plural(rows.length - 8, 'autre ligne', 'autres lignes')}))}</small>` : ''}</div>`;
 
     /* ═════════ « 🧾 Modifier les données » : ouvrir le tableur déjà préparé, puis revenir ═════════ */
     /**
@@ -303,16 +304,16 @@
      * onSave(données au format de l'endroit, éditeur) ; rendre false garde le tableur ouvert.
      */
     function openSheetEditor({target = null, data = null, opts = undefined, name = '', title = '', onSave = null, onClose = null, id = 0, select = null} = {}) {
-        if (!X() || !ext.openWorkbook) { toast('Le tableur n’est pas chargé.', 'error'); return null; }
+        if (!X() || !ext.openWorkbook) { toast(i18n('Le tableur n’est pas chargé.'), 'error'); return null; }
         if (id) return ext.openWorkbook({id, select, onSaved: onSave, onClose});
         const t = typeof target === 'string' ? T[target] : target;
         const o = opts === undefined ? data : opts;
         const wb = t ? bookOf(t.fromData(data).sheets) : Array.isArray(data) ? bookOf([{name: 'Données', rows: data}]) : X().normalize(data || X().newWorkbook());
         const cols = t?.columns ? t.columns(typeof o === 'object' && o?.kind ? {kind: o.kind, spec: o} : {}) : [];
-        const expect = cols.length ? `Colonnes attendues : ${cols.map(c => `${c.label}${c.many ? ' (une ou plusieurs)' : ''}${c.optional ? ' (facultatif)' : ''}`).join(', ')}` : '';
-        const label = title || `${t?.icon || '🧾'} Les données de « ${name || t?.label || 'l’outil'} »`;
-        return ext.openWorkbook({data: wb, name: `${name || 'Données'} (données)`, onClose,
-            back: {label, title: 'Renvoyer les données là d’où elles viennent', html: `<b>${esc(label)}</b><small>${esc(expect ? expect + ' · ' : '')}Formules, tri, coller depuis Excel… « Fichier → Enregistrer une copie… » garde aussi ce classeur dans le Tableur.</small>`,
+        const expect = cols.length ? i18n('Colonnes attendues : {list}', {list: cols.map(c => `${i18n(c.label)}${c.many ? ' ' + i18n('(une ou plusieurs)') : ''}${c.optional ? ' ' + i18n('(facultatif)') : ''}`).join(', ')}) : '';
+        const label = title || `${t?.icon || '🧾'} ${i18n('Les données de « {name} »', {name: name || (t?.label ? i18n(t.label) : i18n('l’outil'))})}`;
+        return ext.openWorkbook({data: wb, name: i18n('{name} (données)', {name: name || i18n('Données')}), onClose,
+            back: {label, title: i18n('Renvoyer les données là d’où elles viennent'), html: `<b>${esc(label)}</b><small>${esc(expect ? expect + ' · ' : '')}${esc(i18n('Formules, tri, coller depuis Excel… « Fichier → Enregistrer une copie… » garde aussi ce classeur dans le Tableur.'))}</small>`,
                 save: async ed => { const out = t ? (t.back ? t.back(ed, o) : null) : X().compact(ed.wb); return onSave ? onSave(out, ed) : true; }}});
     }
     ext.openSheetEditor = openSheetEditor;
@@ -320,32 +321,32 @@
     /* ═════════ « ⤓ Exporter ▾ → 🧾 Ouvrir dans le tableur » (listes, statistiques) ═════════ */
     /** rows : [[…]] (la première ligne = les titres) ou le texte d'un CSV ; un nouveau classeur, pas encore rangé */
     function openRowsInSheet({name = 'Tableau', rows = [], csv = '', header = true, sheet = ''} = {}) {
-        if (!X() || !ext.openWorkbook) return toast('Le tableur n’est pas chargé.', 'error');
+        if (!X() || !ext.openWorkbook) return toast(i18n('Le tableur n’est pas chargé.'), 'error');
         let m = rows; if (!m?.length && csv) m = X().parseCSV(String(csv).replace(/^﻿/, ''), {sep: X().sniffSep(String(csv).slice(0, 4000))});
         m = (m || []).filter(r => r && r.some(v => v != null && String(v).trim() !== ''));
         if (m.length > 1 && m[0].filter(v => String(v ?? '').trim()).length === 1 && m[1].length > 1) m = m.slice(1); // une première ligne qui n'est que le titre (export d'un graphique)
-        if (!m.length) return toast('Rien à ouvrir : la liste est vide.');
+        if (!m.length) return toast(i18n('Rien à ouvrir : la liste est vide.'));
         const wb = bookOf([{name: sheet || name, header: header ? m[0].map(str) : null, rows: header ? m.slice(1) : m, widths: {A: 160}}]);
         return ext.openWorkbook({data: wb, name: String(name).slice(0, 180)});
     }
     ext.openRowsInSheet = openRowsInSheet;
     /** le format « 🧾 Tableur » d'une fenêtre d'export E3 */
-    ext.sheetExportFormat = (getRows, name) => ({id: 'sheet', label: '🧾 Tableur', hint: 'ouvrir dans le tableur', ext: '', quality: false, copy: false, goLabel: '🧾 Ouvrir dans le tableur', run: async () => { const r = await getRows(); setTimeout(() => (typeof r === 'string' ? openRowsInSheet({name: typeof name === 'function' ? name() : name, csv: r}) : openRowsInSheet({name: typeof name === 'function' ? name() : name, rows: r})), 30); }});
+    ext.sheetExportFormat = (getRows, name) => ({id: 'sheet', label: i18n('🧾 Tableur'), hint: i18n('ouvrir dans le tableur'), ext: '', quality: false, copy: false, goLabel: i18n('🧾 Ouvrir dans le tableur'), run: async () => { const r = await getRows(); setTimeout(() => (typeof r === 'string' ? openRowsInSheet({name: typeof name === 'function' ? name() : name, csv: r}) : openRowsInSheet({name: typeof name === 'function' ? name() : name, rows: r})), 30); }});
 
     /* ═════════ 🎯 Préparer pour… ═════════ */
     function prepare(ed, key = '') {
         const S = X(), g = rangeOf(ed), si = ed.si, rng = `${S.quoteSheet(ed.S().name)} ! ${S.rangeStr(g)}`;
-        if (!S.usedRange(ed.S())) return toast('La feuille est vide : écris ou colle un tableau, puis choisis-le.');
+        if (!S.usedRange(ed.S())) return toast(i18n('La feuille est vide : écris ou colle un tableau, puis choisis-le.'));
         const list = Object.entries(T).filter(([, t]) => t && t.label && typeof t.create === 'function');
         let cur = key && T[key] ? key : '', head = null, kind = 'columns', keepLink = true, asChart = false;
         const tbl = () => tableOf(ed.wb, ed.calc, si, g, head);
-        ext.openDialog({eyebrow: 'TABLEUR · PRÉPARER POUR…', title: `🎯 Préparer pour… (${rng})`, wide: true, submitLabel: 'Continuer',
+        ext.openDialog({eyebrow: i18n('TABLEUR · PRÉPARER POUR…'), title: i18n('🎯 Préparer pour… ({range})', {range: rng}), wide: true, submitLabel: i18n('Continuer'),
             body: '<div class="xl-prep" data-xl-prep></div>',
             onOpen: dlg => {
                 const box = dlg.querySelector('[data-xl-prep]'), go = dlg.querySelector('.modal-actions [type=submit]');
                 const paint = () => {
                     if (!cur) {
-                        box.innerHTML = `<p class="muted">Le tableur sait ce que chaque endroit de l’app attend : choisis où vont ces données. Il vérifie les colonnes de la plage <b>${esc(rng)}</b> et les range comme il faut.</p><div class="xl-prep-tiles">${list.map(([k, t]) => `<button type="button" class="xl-tpl" data-prep-to="${esc(k)}"><b>${esc(t.icon)} ${esc(t.label)}</b><small>${esc(t.hint || '')}</small></button>`).join('')}</div>`;
+                        box.innerHTML = `<p class="muted">${i18n('Le tableur sait ce que chaque endroit de l’app attend : choisis où vont ces données. Il vérifie les colonnes de la plage <b>{range}</b> et les range comme il faut.', {range: esc(rng)})}</p><div class="xl-prep-tiles">${list.map(([k, t]) => `<button type="button" class="xl-tpl" data-prep-to="${esc(k)}"><b>${esc(t.icon)} ${esc(i18n(t.label))}</b><small>${esc(t.hint ? i18n(t.hint) : '')}</small></button>`).join('')}</div>`;
                         go.hidden = true; return;
                     }
                     const t = T[cur], table = tbl(); go.hidden = false;
@@ -354,7 +355,7 @@
                         const kinds = t.kinds(); if (!kinds.some(x => x.kind === kind)) kind = 'columns';
                         res = mapColumns(table, t.columns({kind}));
                         data = t.build(res.objs, {kind, title: table.head && table.header[0] && !/^\d/.test(table.header[0]) ? `${ed.S().name}` : ed.S().name}, table, res.status);
-                        body = `<label class="xl-prep-kind">Dessin<select data-prep-kind>${kinds.map(x => `<option value="${esc(x.kind)}"${x.kind === kind ? ' selected' : ''}>${esc(x.icon)} ${esc(x.label)}</option>`).join('')}</select></label>`;
+                        body = `<label class="xl-prep-kind">${esc(i18n('Dessin'))}<select data-prep-kind>${kinds.map(x => `<option value="${esc(x.kind)}"${x.kind === kind ? ' selected' : ''}>${esc(x.icon)} ${esc(i18n(x.label))}</option>`).join('')}</select></label>`;
                     } else if (cur === 'graph') { res = mapColumns(table, t.columns(), {fixed: {label: 0}}); data = t.build(res.objs, {}, table, res.status); }
                     else if (cur === 'keynote') {
                         const all = t.fromRange(ed, g); data = all;
@@ -363,29 +364,29 @@
                         if (!chartOk) asChart = false;
                         const chart = chartOk ? T.diagram.build(cr.objs, {kind: 'columns', title: ed.S().name}, table, cr.status) : null;
                         box._chart = chart; if (asChart) { res = cr; }
-                        body = `<div class="segmented xl-prep-seg" role="tablist"><button type="button" data-prep-as="table" class="${asChart ? '' : 'is-active'}">▦ Un tableau</button><button type="button" data-prep-as="chart" class="${asChart ? 'is-active' : ''}"${chartOk ? '' : ' disabled title="Il faut une colonne de chiffres"'}>📊 Un graphique</button></div>`;
+                        body = `<div class="segmented xl-prep-seg" role="tablist"><button type="button" data-prep-as="table" class="${asChart ? '' : 'is-active'}">${esc(i18n('▦ Un tableau'))}</button><button type="button" data-prep-as="chart" class="${asChart ? 'is-active' : ''}"${chartOk ? '' : ` disabled title="${esc(i18n('Il faut une colonne de chiffres'))}"`}>${esc(i18n('📊 Un graphique'))}</button></div>`;
                         if (asChart) data = chart;
                     } else if (t.keepRaw) data = t.fromRange(ed, g);
                     else { res = mapColumns(table, t.columns({})); data = t.build ? t.build(res.objs, {}, table, res.status) : res.objs; }
                     box._data = data; box._res = res;
                     const st = res ? res.status : [];
-                    const statusHtml = st.length ? `<table class="xl-prep-map"><thead><tr><th>Ce que ${esc(t.label.replace(/^(Un|Une) /, 'le ').toLowerCase())} attend</th><th>Dans la plage</th><th></th></tr></thead><tbody>${st.map(s => `<tr class="is-${s.state}"><td>${esc(s.col.label)} <small>(${s.col.type === 'number' ? 'nombre' : s.col.type === 'color' ? 'couleur' : s.col.type === 'select' ? 'choix' : 'texte'}${s.col.many ? ', une ou plusieurs' : ''}${s.col.optional ? ', facultatif' : ''})</small></td><td>${esc(s.text)}</td><td>${s.state === 'ok' ? '✓' : s.state === 'warn' ? `⚠️ ${plural(s.warn, 'case', 'cases')}` : s.state === 'none' ? '—' : '⛔'}</td></tr>`).join('')}</tbody></table>` : '';
+                    const statusHtml = st.length ? `<table class="xl-prep-map"><thead><tr><th>${esc(i18n(`Ce que ${t.label.replace(/^(Un|Une) /, 'le ').toLowerCase()} attend`))}</th><th>${esc(i18n('Dans la plage'))}</th><th></th></tr></thead><tbody>${st.map(s => `<tr class="is-${s.state}"><td>${esc(i18n(s.col.label))} <small>(${esc(i18n(s.col.type === 'number' ? 'nombre' : s.col.type === 'color' ? 'couleur' : s.col.type === 'select' ? 'choix' : 'texte'))}${s.col.many ? esc(i18n(', une ou plusieurs')) : ''}${s.col.optional ? esc(i18n(', facultatif')) : ''})</small></td><td>${esc(s.text)}</td><td>${s.state === 'ok' ? '✓' : s.state === 'warn' ? `⚠️ ${plural(s.warn, 'case', 'cases')}` : s.state === 'none' ? '—' : '⛔'}</td></tr>`).join('')}</tbody></table>` : '';
                     const warns = res?.warnings || [];
-                    const wHtml = warns.length ? `<div class="xl-prep-warns">${warns.slice(0, 6).map(w => `<div class="ui-notice ui-notice-warn"><span class="ui-notice-ico" aria-hidden="true">⚠️</span><span>${esc(w.cell)} ${esc(w.text)}. <button type="button" class="link-button" data-prep-cell="${w.r}:${w.c}">Voir la cellule</button></span></div>`).join('')}${warns.length > 6 ? `<small class="muted">… et ${plural(warns.length - 6, 'autre case', 'autres cases')} à vérifier.</small>` : ''}</div>` : '';
-                    const miss = res && !res.ok ? UI().notice('error', 'Il manque une colonne : ajoute-la dans la plage, ou choisis une autre plage.') : '';
+                    const wHtml = warns.length ? `<div class="xl-prep-warns">${warns.slice(0, 6).map(w => `<div class="ui-notice ui-notice-warn"><span class="ui-notice-ico" aria-hidden="true">⚠️</span><span>${esc(w.cell)} ${esc(w.text)}. <button type="button" class="link-button" data-prep-cell="${w.r}:${w.c}">${esc(i18n('Voir la cellule'))}</button></span></div>`).join('')}${warns.length > 6 ? `<small class="muted">${esc(i18n('… et {n} à vérifier.', {n: plural(warns.length - 6, 'autre case', 'autres cases')}))}</small>` : ''}</div>` : '';
+                    const miss = res && !res.ok ? UI().notice('error', i18n('Il manque une colonne : ajoute-la dans la plage, ou choisis une autre plage.')) : '';
                     let prev = ''; try { prev = t.preview ? t.preview(data) : ''; } catch (_) { prev = ''; }
-                    const link = t.link ? `<label class="checkbox-line"><input type="checkbox" data-prep-link${keepLink ? ' checked' : ''}> Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change)${ed.id ? '' : ' — le classeur sera enregistré dans le Tableur'}</label>` : '';
-                    box.innerHTML = `<p><button type="button" class="link-button" data-prep-back>← Autre endroit</button> · <b>${esc(t.icon)} ${esc(t.label)}</b> <span class="muted">${esc(t.hint || '')}</span></p>${body}
-                        <label class="checkbox-line"><input type="checkbox" data-prep-head${table.head ? ' checked' : ''}> La première ligne donne les titres</label>
-                        <div class="xl-prep-cols"><div>${statusHtml}${wHtml}${miss}${link}</div><div class="xl-prep-prev"><span class="section-label">Aperçu</span>${prev || '<p class="muted">Pas d’aperçu.</p>'}</div></div>`;
-                    go.textContent = cur === 'keynote' ? '🎤 Créer la présentation' : t.createLabel || 'Continuer'; go.disabled = !!(res && !res.ok);
+                    const link = t.link ? `<label class="checkbox-line"><input type="checkbox" data-prep-link${keepLink ? ' checked' : ''}> ${esc(ed.id ? i18n('Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change)') : i18n('Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) — le classeur sera enregistré dans le Tableur'))}</label>` : '';
+                    box.innerHTML = `<p><button type="button" class="link-button" data-prep-back>${esc(i18n('← Autre endroit'))}</button> · <b>${esc(t.icon)} ${esc(i18n(t.label))}</b> <span class="muted">${esc(t.hint ? i18n(t.hint) : '')}</span></p>${body}
+                        <label class="checkbox-line"><input type="checkbox" data-prep-head${table.head ? ' checked' : ''}> ${esc(i18n('La première ligne donne les titres'))}</label>
+                        <div class="xl-prep-cols"><div>${statusHtml}${wHtml}${miss}${link}</div><div class="xl-prep-prev"><span class="section-label">${esc(i18n('Aperçu'))}</span>${prev || `<p class="muted">${esc(i18n('Pas d’aperçu.'))}</p>`}</div></div>`;
+                    go.textContent = cur === 'keynote' ? i18n('🎤 Créer la présentation') : t.createLabel ? i18n(t.createLabel) : i18n('Continuer'); go.disabled = !!(res && !res.ok);
                 };
                 box.addEventListener('click', e => {
                     const b = e.target.closest('button'); if (!b) return;
                     if (b.dataset.prepTo) { cur = b.dataset.prepTo; paint(); }
                     else if (b.hasAttribute('data-prep-back')) { cur = ''; paint(); }
                     else if (b.dataset.prepAs) { asChart = b.dataset.prepAs === 'chart'; paint(); }
-                    else if (b.dataset.prepCell) { const [r, c] = b.dataset.prepCell.split(':').map(Number); dlg.close(); ed.select(r, c); ed.focusGrid(); toast('Corrige la cellule, puis rouvre « 🎯 Préparer pour… ».'); }
+                    else if (b.dataset.prepCell) { const [r, c] = b.dataset.prepCell.split(':').map(Number); dlg.close(); ed.select(r, c); ed.focusGrid(); toast(i18n('Corrige la cellule, puis rouvre « 🎯 Préparer pour… ».')); }
                 });
                 box.addEventListener('change', e => {
                     if (e.target.matches('[data-prep-kind]')) { kind = e.target.value; paint(); }
@@ -412,7 +413,7 @@
     }
     function suggest(shape) {
         const {n, rows, years, ages} = shape, out = [];
-        const add = (kind, label) => { if (kindOf(kind) && !out.some(x => x.kind === kind)) out.push({kind, label, icon: kindOf(kind).icon}); };
+        const add = (kind, label) => { if (kindOf(kind) && !out.some(x => x.kind === kind)) out.push({kind, label: i18n(label), icon: kindOf(kind).icon}); };
         if (ages && n === 2) add('pyramid', 'Pyramide des âges');
         if (years) { add('line', n > 1 ? 'Courbes' : 'Courbe'); add('columns', n > 1 ? 'Colonnes groupées' : 'Colonnes'); add('area', 'Aire'); }
         if (n > 1) { add('columns', 'Colonnes groupées'); add('stacked', 'Colonnes empilées'); add('line', 'Courbes'); if (rows >= 3 && rows <= 12) add('radar', 'Radar'); add('bars', 'Barres groupées'); }
@@ -421,7 +422,7 @@
     }
     /** un diagramme lié à la plage : le classeur est enregistré au besoin ; rend la spec avec spec.live.sheet */
     async function linkSpec(ed, spec, g, head) {
-        if (ed.ctx?.back) { toast('Ces données reviennent dans leur outil : le diagramme est fait d’une copie (pas de lien).'); return spec; }
+        if (ed.ctx?.back) { toast(i18n('Ces données reviennent dans leur outil : le diagramme est fait d’une copie (pas de lien).')); return spec; }
         if (!ed.id || ed.dirty) { const id = await ed.save(); if (!id && !ed.id) return null; }
         const S = X(), sh = ed.S(), range = S.rangeStr(g);
         return {...spec, live: {sheet: {wb: ed.id, sh: sh.id, name: ed.name, sheet: sh.name, range, grow: true, head: !!head}, label: `« ${ed.name} » ! ${range}`}};
@@ -434,17 +435,17 @@
     };
     ext.sheetChartMenu = (ed, btn) => {
         const S = X(), g = rangeOf(ed), table = tableOf(ed.wb, ed.calc, ed.si, g), shape = shapeOf(table);
-        if (!shape.n || !shape.rows) return toast('Choisis une plage avec des nombres (par exemple : Décennie, Hommes, Femmes).');
-        if (!ext.openDiagramEditor) return toast('L’éditeur de diagrammes n’est pas chargé.', 'error');
+        if (!shape.n || !shape.rows) return toast(i18n('Choisis une plage avec des nombres (par exemple : Décennie, Hommes, Femmes).'));
+        if (!ext.openDiagramEditor) return toast(i18n('L’éditeur de diagrammes n’est pas chargé.'), 'error');
         const open = async kind => {
             const spec = T.diagram.build(mapColumns(table, T.diagram.columns({kind})).objs, {kind, title: table.head && table.header[0] ? `${ed.S().name}` : ed.S().name}, table, mapColumns(table, T.diagram.columns({kind})).status);
             const linked = await linkSpec(ed, spec, g, table.head); if (!linked) return;
             ext.openDiagramEditor(null, {spec: linked, name: `${ed.S().name === 'Feuille 1' ? ed.name : ed.S().name} (${S.rangeStr(g)})`});
         };
         const items = suggest(shape).map(x => ({icon: x.icon, label: x.label, run: () => open(x.kind)}));
-        items.push('-', {icon: '🎯', label: 'Tous les types de diagrammes…', run: () => prepare(ed, 'diagram')});
+        items.push('-', {icon: '🎯', label: i18n('Tous les types de diagrammes…'), run: () => prepare(ed, 'diagram')});
         const anchor = btn && btn.isConnected && btn.offsetParent ? btn : ed.$('[data-xl-cmd="chart"]');
-        UI().menuAt(anchor || {x: innerWidth / 2, y: 120}, items, {title: `Conseillés pour ${S.rangeStr(g)}`});
+        UI().menuAt(anchor || {x: innerWidth / 2, y: 120}, items, {title: i18n('Conseillés pour {range}', {range: S.rangeStr(g)})});
     };
 
     /* ═════════ Plage liée : relue à l'affichage (diagrammes) ═════════ */
@@ -465,37 +466,37 @@
             return out;
         },
         /** le bandeau : « 🔗 Données : « Classeur » ! A1:C4 · tenu à jour · 🧾 Modifier les données » */
-        bannerHtml(spec) { const L = spec.live.sheet; return `<p class="h-dg-live xl-linkbar">🔗 Données : « ${esc(L.name || 'Classeur')} » ! ${esc(L.range)}${L.sheet ? ` <small>(feuille « ${esc(L.sheet)} »)</small>` : ''} · tenu à jour · <button type="button" class="link-button" data-dg-sheet>🧾 Modifier les données</button> · <button type="button" class="link-button" data-dg-unlive>Les figer</button>${spec._sheetMissing ? '<br>⚠️ Classeur introuvable (supprimé ?) : le dessin garde les derniers chiffres lus.' : ''}</p>`; },
+        bannerHtml(spec) { const L = spec.live.sheet; return `<p class="h-dg-live xl-linkbar">${i18n('🔗 Données : « {name} » ! {range}', {name: esc(L.name || i18n('Classeur')), range: esc(L.range)})}${L.sheet ? ` <small>${esc(i18n('(feuille « {name} »)', {name: L.sheet}))}</small>` : ''} · ${esc(i18n('tenu à jour'))} · <button type="button" class="link-button" data-dg-sheet>${esc(i18n('🧾 Modifier les données'))}</button> · <button type="button" class="link-button" data-dg-unlive>${esc(i18n('Les figer'))}</button>${spec._sheetMissing ? `<br>${esc(i18n('⚠️ Classeur introuvable (supprimé ?) : le dessin garde les derniers chiffres lus.'))}` : ''}</p>`; },
         open(spec, onSaved) { const L = spec.live.sheet; return ext.openWorkbook?.({id: Number(L.wb), select: {sheet: L.sh || L.sheet, range: L.range}, onSaved}); },
     };
 
     /* ═════════ 🧾 Prendre un classeur du Tableur (Diagrammes → Données) : le classeur (menu de choix), la feuille, la plage ═════════ */
     /** → Promise<{mode: 'copy'|'link', cells: [[texte]], link: {wb, sh, name, sheet, range, grow, head}} | null> */
-    ext.chooseSheetRange = ({title = 'Prendre un classeur du Tableur', link = true} = {}) => new Promise(resolve => {
+    ext.chooseSheetRange = ({title = i18n('Prendre un classeur du Tableur'), link = true} = {}) => new Promise(resolve => {
         const P = window.LCNDA_PICKER || A(); let done = false, book = null;
-        const S = X(); if (!S) { toast('Le tableur n’est pas chargé.', 'error'); return resolve(null); }
+        const S = X(); if (!S) { toast(i18n('Le tableur n’est pas chargé.'), 'error'); return resolve(null); }
         const cur = dlg => { const si = Number(dlg.querySelector('[name=xl_sheet]')?.value || 0), g = S.parseRange(dlg.querySelector('[name=xl_range]')?.value || ''); return {si, g}; };
-        ext.openDialog({eyebrow: 'TABLEUR', title: `🧾 ${title}`, wide: true, submitLabel: 'Prendre ces données',
-            body: `<div class="xl-take"><label>Classeur</label>${P.pickerField({name: 'xl_book', kind: 'workbook', placeholder: 'Nom du classeur…'})}<div data-xl-take></div></div>`,
+        ext.openDialog({eyebrow: i18n('TABLEUR'), title: `🧾 ${title}`, wide: true, submitLabel: i18n('Prendre ces données'),
+            body: `<div class="xl-take"><label>${esc(i18n('Classeur'))}</label>${P.pickerField({name: 'xl_book', kind: 'workbook', placeholder: i18n('Nom du classeur…')})}<div data-xl-take></div></div>`,
             onOpen: dlg => {
                 dlg.addEventListener('close', () => { if (!done) resolve(null); }, {once: true});
                 const box = dlg.querySelector('[data-xl-take]');
-                const prev = () => { const {si, g} = cur(dlg), out = box.querySelector('[data-xl-takeprev]'); if (!out || !book) return; if (!g) { out.innerHTML = UI().notice('warn', 'Plage illisible : écris par exemple A1:C12.'); return; } out.innerHTML = miniTable(S.matrix(book.wb, book.calc, si, {...g, r1: Math.min(g.r1, g.r0 + 8)}, {display: true})) + `<small class="muted">${plural(g.r1 - g.r0 + 1, 'ligne')} · ${plural(g.c1 - g.c0 + 1, 'colonne')}</small>`; };
+                const prev = () => { const {si, g} = cur(dlg), out = box.querySelector('[data-xl-takeprev]'); if (!out || !book) return; if (!g) { out.innerHTML = UI().notice('warn', i18n('Plage illisible : écris par exemple A1:C12.')); return; } out.innerHTML = miniTable(S.matrix(book.wb, book.calc, si, {...g, r1: Math.min(g.r1, g.r0 + 8)}, {display: true})) + `<small class="muted">${plural(g.r1 - g.r0 + 1, 'ligne')} · ${plural(g.c1 - g.c0 + 1, 'colonne')}</small>`; };
                 const paintBook = () => {
                     const sh = book.wb.sheets, used = si => { const g = S.usedRange(sh[si]); return g ? S.rangeStr(g) : 'A1'; };
-                    box.innerHTML = `<div class="form-grid"><label>Feuille<select name="xl_sheet">${sh.map((x, i) => `<option value="${i}">${esc(x.name)}</option>`).join('')}</select></label><label>Plage<input name="xl_range" value="${esc(used(0))}" spellcheck="false" placeholder="A1:C12"></label></div>
+                    box.innerHTML = `<div class="form-grid"><label>${esc(i18n('Feuille'))}<select name="xl_sheet">${sh.map((x, i) => `<option value="${i}">${esc(x.name)}</option>`).join('')}</select></label><label>${esc(i18n('Plage'))}<input name="xl_range" value="${esc(used(0))}" spellcheck="false" placeholder="A1:C12"></label></div>
                         <div data-xl-takeprev></div>
-                        <fieldset class="xl-take-mode"><label class="checkbox-line"><input type="radio" name="xl_mode" value="copy" checked> Copier une fois (les chiffres ne bougent plus)</label>${link ? '<label class="checkbox-line"><input type="radio" name="xl_mode" value="link"> Garder le lien : le diagramme suit le classeur (tenu à jour)</label>' : ''}</fieldset>`;
+                        <fieldset class="xl-take-mode"><label class="checkbox-line"><input type="radio" name="xl_mode" value="copy" checked> ${esc(i18n('Copier une fois (les chiffres ne bougent plus)'))}</label>${link ? `<label class="checkbox-line"><input type="radio" name="xl_mode" value="link"> ${esc(i18n('Garder le lien : le diagramme suit le classeur (tenu à jour)'))}</label>` : ''}</fieldset>`;
                     box.querySelector('[name=xl_sheet]').addEventListener('change', e => { box.querySelector('[name=xl_range]').value = used(Number(e.target.value)); prev(); });
                     box.querySelector('[name=xl_range]').addEventListener('input', prev); prev();
                 };
                 dlg.addEventListener('picker-change', async e => { const id = Number(e.detail?.value) || 0; if (!id) { book = null; box.innerHTML = ''; return; }
-                    box.innerHTML = UI()?.spinner ? UI().spinner('Lecture du classeur…') : '…';
+                    box.innerHTML = UI()?.spinner ? UI().spinner(i18n('Lecture du classeur…')) : '…';
                     try { const r = await api('workbook', {id}); const wb = S.normalize(r.data); book = {id, name: r.name, wb, calc: new S.Calc(wb)}; paintBook(); } catch (err) { box.innerHTML = UI().notice('error', err.message); } });
             },
             onSubmit: form => {
-                if (!book) return UI().fail(form.querySelector('.pk, [name=xl_book]') || form, 'Choisis un classeur.');
-                const {si, g} = cur(form); if (!g) return UI().fail(form.querySelector('[name=xl_range]'), 'Écris une plage, par exemple A1:C12.');
+                if (!book) return UI().fail(form.querySelector('.pk, [name=xl_book]') || form, i18n('Choisis un classeur.'));
+                const {si, g} = cur(form); if (!g) return UI().fail(form.querySelector('[name=xl_range]'), i18n('Écris une plage, par exemple A1:C12.'));
                 const m = S.matrix(book.wb, book.calc, si, g).map(r => r.map(str)), mode = form.querySelector('[name=xl_mode]:checked')?.value || 'copy';
                 done = true; resolve({mode, cells: m, link: {wb: book.id, sh: book.wb.sheets[si].id, name: book.name, sheet: book.wb.sheets[si].name, range: S.rangeStr(g), grow: true, head: guessHead(S.matrix(book.wb, book.calc, si, g))}});
             }});

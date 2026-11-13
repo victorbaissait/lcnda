@@ -15,6 +15,8 @@
     'use strict';
     const A = () => window.LCNDA_APP || {};
     const UI = () => window.LCNDA_UI || {};
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s);
+    const tl = list => list.map(x => x.map((v, i) => (i && typeof v === 'string' && /\p{L}{2}/u.test(v) ? i18n(v) : v))); // les libellés d’une liste [clé, (icône), texte]
     const PK = () => window.LCNDA_PICKER || window.LCNDA_APP || {};
     const L = () => window.LCNDA_LABY_CORE;
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
@@ -46,7 +48,7 @@
     ];
 
     /* ═════ Mémoire du navigateur ═════ */
-    const ls = {get: (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v ?? d; } catch (_) { return d; } }, set: (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (_) { toast('Plus de place dans ce navigateur pour garder la partie.', 'error'); return false; } }};
+    const ls = {get: (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v ?? d; } catch (_) { return d; } }, set: (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (_) { toast(i18n('Plus de place dans ce navigateur pour garder la partie.'), 'error'); return false; } }};
     const games = () => { const v = ls.get(GAMES_KEY, []); return Array.isArray(v) ? v.filter(g => g && typeof g.id === 'string').slice(0, MAX_GAMES) : []; };
     const saveGames = list => ls.set(GAMES_KEY, list.slice(0, MAX_GAMES));
     const gameById = id => games().find(g => g.id === id) || null;
@@ -71,7 +73,7 @@
         o.fog = !!r.fog; o.fogR = clamp(Math.round(Number(r.fogR) || 3), 1, 8); o.trail = r.trail !== false; o.hints = r.hints !== false;
         o.mode = r.mode === 'course' ? 'course' : 'tour';
         const pl = Array.isArray(r.players) && r.players.length ? r.players.slice(0, 4) : o.players;
-        o.players = pl.map((p, i) => ({name: String(p?.name || `Joueur ${i + 1}`).replace(/[<>]/g, '').slice(0, 30) || `Joueur ${i + 1}`, color: /^#[0-9a-f]{6}$/i.test(p?.color || '') ? p.color : COLORS[i]}));
+        o.players = pl.map((p, i) => ({name: String(p?.name || i18n('Joueur {n}', {n: i + 1})).replace(/[<>]/g, '').slice(0, 30) || i18n('Joueur {n}', {n: i + 1}), color: /^#[0-9a-f]{6}$/i.test(p?.color || '') ? p.color : COLORS[i]}));
         return o;
     }
     const mazeCfg = c => ({seed: c.seed, shape: c.shape, w: c.w, h: c.h, rings: c.rings, algo: c.algo, loops: c.loops, ends: c.ends});
@@ -88,9 +90,9 @@
     const yearOf = ev => ev?.date?.y || null;
     function index(D) {
         const P = new Map((D.persons || []).map(p => [p.id, p]));
-        const ok = p => p && !p.living && !p.priv;
+        const ok = p => p && !p.living && !p.priv && !p.mem; // mem : déporté(e) ou fusillé(e), jamais dans un jeu
         const parents = new Map(); (D.families || []).forEach(f => f.c.forEach(c => parents.set(c, f)));
-        const name = p => `${p.first || ''} ${(p.last || '').toUpperCase()}`.trim() || 'Sans nom';
+        const name = p => `${p.first || ''} ${(p.last || '').toUpperCase()}`.trim() || i18n('Sans nom');
         const years = p => { const b = yearOf(p.birth) || yearOf(p.bapt), d = yearOf(p.death); return b || d ? `${b || '?'}–${d || '?'}` : ''; };
         /** les numéros Sosa à partir d'une personne (1 = elle) */
         const sosaFrom = root => {
@@ -111,7 +113,7 @@
     async function buildItems(cfg, seed) {
         const s = cfg.st, n = s.n; if (!n) return {items: []};
         const r = L().rng(`${seed}|choix`);
-        let D; try { D = await loadData(); } catch (e) { return {items: [], error: `Les données de ta généalogie n’ont pas pu être lues : ${e.message || e}`}; }
+        let D; try { D = await loadData(); } catch (e) { return {items: [], error: i18n('Les données de ta généalogie n’ont pas pu être lues : {err}', {err: e.message || e})}; }
         const X = index(D);
         const people = () => {
             const start = Number(D.start) || 0;
@@ -135,22 +137,22 @@
         const places = () => {
             const only = ancestorsSet(), seen = new Map();
             const add = (place, what, year) => { if (!place || seen.has(place)) return; seen.set(place, {kind: 'place', icon: '📍', title: place, sub: [what, year].filter(Boolean).join(' · '), year}); };
-            (D.persons || []).filter(X.ok).filter(p => !only || only.has(p.id)).forEach(p => { if (p.birth?.place) add(p.birth.place, `Naissance de ${X.name(p)}`, yearOf(p.birth)); if (p.death?.place) add(p.death.place, `Décès de ${X.name(p)}`, yearOf(p.death)); });
-            (D.families || []).forEach(f => { const a = X.P.get(f.a), b = X.P.get(f.b); if (!f.marr?.place || ![a, b].some(X.ok) || [a, b].some(x => x && !X.ok(x))) return; if (only && ![f.a, f.b].some(x => only.has(x))) return; add(f.marr.place, `Mariage de ${[a, b].filter(Boolean).map(X.name).join(' et ')}`, yearOf(f.marr)); });
+            (D.persons || []).filter(X.ok).filter(p => !only || only.has(p.id)).forEach(p => { if (p.birth?.place) add(p.birth.place, i18n('Naissance de {name}', {name: X.name(p)}), yearOf(p.birth)); if (p.death?.place) add(p.death.place, i18n('Décès de {name}', {name: X.name(p)}), yearOf(p.death)); });
+            (D.families || []).forEach(f => { const a = X.P.get(f.a), b = X.P.get(f.b); if (!f.marr?.place || ![a, b].some(X.ok) || [a, b].some(x => x && !X.ok(x))) return; if (only && ![f.a, f.b].some(x => only.has(x))) return; add(f.marr.place, a && b ? i18n('Mariage de {a} et {b}', {a: X.name(a), b: X.name(b)}) : i18n('Mariage de {name}', {name: X.name(a || b)}), yearOf(f.marr)); });
             return [...seen.values()];
         };
         const events = () => {
             const only = ancestorsSet(), out = [];
             (D.persons || []).filter(X.ok).filter(p => !only || only.has(p.id)).forEach(p => {
-                if (p.birth && yearOf(p.birth)) out.push({kind: 'event', icon: '👶', pid: p.id, title: `Naissance de ${X.name(p)}`, sub: [yearOf(p.birth), p.birth.place].filter(Boolean).join(' · '), year: yearOf(p.birth)});
-                if (p.death && yearOf(p.death)) out.push({kind: 'event', icon: '✝️', pid: p.id, title: `Décès de ${X.name(p)}`, sub: [yearOf(p.death), p.death.place].filter(Boolean).join(' · '), year: yearOf(p.death)});
+                if (p.birth && yearOf(p.birth)) out.push({kind: 'event', icon: '👶', pid: p.id, title: i18n('Naissance de {name}', {name: X.name(p)}), sub: [yearOf(p.birth), p.birth.place].filter(Boolean).join(' · '), year: yearOf(p.birth)});
+                if (p.death && yearOf(p.death)) out.push({kind: 'event', icon: '✝️', pid: p.id, title: i18n('Décès de {name}', {name: X.name(p)}), sub: [yearOf(p.death), p.death.place].filter(Boolean).join(' · '), year: yearOf(p.death)});
             });
             (D.families || []).forEach(f => { const a = X.P.get(f.a), b = X.P.get(f.b); if (!f.marr || !yearOf(f.marr) || [a, b].some(x => x && !X.ok(x)) || ![a, b].some(Boolean)) return; if (only && ![f.a, f.b].some(x => only.has(x))) return;
-                out.push({kind: 'event', icon: '💍', pid: (a || b).id, title: `Mariage de ${[a, b].filter(Boolean).map(X.name).join(' et ')}`, sub: [yearOf(f.marr), f.marr.place].filter(Boolean).join(' · '), year: yearOf(f.marr)}); });
+                out.push({kind: 'event', icon: '💍', pid: (a || b).id, title: a && b ? i18n('Mariage de {a} et {b}', {a: X.name(a), b: X.name(b)}) : i18n('Mariage de {name}', {name: X.name(a || b)}), sub: [yearOf(f.marr), f.marr.place].filter(Boolean).join(' · '), year: yearOf(f.marr)}); });
             return out;
         };
-        const photos = () => (D.media || []).filter(m => !m.doc && m.thumb && (m.people || []).every(id => X.ok(X.P.get(id)))).map(m => ({kind: 'photo', icon: '📷', mid: m.id, title: m.title || 'Une photo de famille', sub: [m.date?.y, m.place].filter(Boolean).join(' · '), year: m.date?.y || null, thumb: m.thumb}));
-        const houses = async () => (await loadHouses()).map(h => ({kind: 'house', icon: '🏠', hid: h.id, title: h.name || h.title || 'Une maison', sub: [h.address || h.place || '', h.year || ''].filter(Boolean).join(' · '), year: Number(h.year) || null}));
+        const photos = () => (D.media || []).filter(m => !m.doc && m.thumb && (m.people || []).every(id => X.ok(X.P.get(id)))).map(m => ({kind: 'photo', icon: '📷', mid: m.id, title: m.title || i18n('Une photo de famille'), sub: [m.date?.y, m.place].filter(Boolean).join(' · '), year: m.date?.y || null, thumb: m.thumb}));
+        const houses = async () => (await loadHouses()).map(h => ({kind: 'house', icon: '🏠', hid: h.id, title: h.name || h.title || i18n('Une maison'), sub: [h.address || h.place || '', h.year || ''].filter(Boolean).join(' · '), year: Number(h.year) || null}));
         let pool;
         if (s.kind === 'ancetres') pool = people();
         else if (s.kind === 'lieux') pool = places();
@@ -159,8 +161,8 @@
         else if (s.kind === 'maisons') pool = await houses();
         else { const groups = [people(), places(), events(), photos()].map(g => r.shuffle(g)); pool = []; for (let i = 0; pool.length < n * 3 && groups.some(g => g.length); i++) { const g = groups[i % groups.length]; if (g.length) pool.push(g.shift()); } }
         if (pool.length < n) {
-            const what = KINDS.find(k => k[0] === s.kind)?.[2]?.toLowerCase() || 'étapes';
-            return {items: [], error: pool.length ? `Ta généalogie n’a que ${plural(pool.length, 'élément')} pour « ${what} » : baisse le nombre d’étapes à ${pool.length}, ou choisis « Un peu de tout ».` : `Rien à aller chercher pour « ${what} » dans ta généalogie (les personnes vivantes et les fiches confidentielles ne sont jamais montrées).`};
+            const what = i18n(KINDS.find(k => k[0] === s.kind)?.[2] || 'étapes').toLowerCase();
+            return {items: [], error: pool.length ? i18n('Ta généalogie n’a que {what} pour « {kind} » : baisse le nombre d’étapes à {n}, ou choisis « Un peu de tout ».', {what: plural(pool.length, 'élément'), kind: what, n: pool.length}) : i18n('Rien à aller chercher pour « {kind} » dans ta généalogie (les personnes vivantes et les fiches confidentielles ne sont jamais montrées).', {kind: what})};
         }
         let items = s.order === 'lignee' && s.kind === 'ancetres' ? pool.slice(0, n) : r.shuffle(pool.slice()).slice(0, n);
         if (s.order === 'chrono') items.sort((a, b) => (a.year || 9999) - (b.year || 9999));
@@ -179,64 +181,64 @@
     let setup = null, preview = null, stopper = null;
     const prefsCfg = () => cleanCfg(ls.get(PREFS_KEY, null) || DEF);
     function stop() { if (stopper) { try { stopper(); } catch (_) {} stopper = null; } }
-    const seg = (name, list, val, cls = '') => `<div class="segmented lb-seg ${cls}" role="radiogroup" data-lb-seg="${name}">${list.map(([v, ico, t]) => `<button type="button" class="${String(v) === String(val) ? 'is-active' : ''}" aria-pressed="${String(v) === String(val)}" data-v="${esc(v)}">${ico ? `<span aria-hidden="true">${ico}</span> ` : ''}${esc(t)}</button>`).join('')}</div>`;
-    const opt = (list, val) => list.map(([v, t]) => `<option value="${esc(v)}"${String(v) === String(val) ? ' selected' : ''}>${esc(t)}</option>`).join('');
+    const seg = (name, list, val, cls = '') => `<div class="segmented lb-seg ${cls}" role="radiogroup" data-lb-seg="${name}">${tl(list).map(([v, ico, t]) => `<button type="button" class="${String(v) === String(val) ? 'is-active' : ''}" aria-pressed="${String(v) === String(val)}" data-v="${esc(v)}">${ico ? `<span aria-hidden="true">${ico}</span> ` : ''}${esc(t)}</button>`).join('')}</div>`;
+    const opt = (list, val) => tl(list).map(([v, t]) => `<option value="${esc(v)}"${String(v) === String(val) ? ' selected' : ''}>${esc(t)}</option>`).join('');
     const check = (name, on, text, sub = '') => (UI().checkHtml ? UI().checkHtml(text, {checked: on, attrs: `name="${name}"`, sub}) : `<label class="checkbox-line"><input type="checkbox" name="${name}"${on ? ' checked' : ''}> ${esc(text)}${sub ? ` <small>${esc(sub)}</small>` : ''}</label>`);
     function setupHtml(ctx, c) {
         const variants = (ctx.variants || [['laby', '🌀 Labyrinthe']]).map(([v, l]) => `<option value="${esc(v)}"${v === 'laby' ? ' selected' : ''}>${esc(l)}</option>`).join('');
         const full = gameCount() >= MAX_GAMES, s = c.st, P = PK();
-        const players = c.players.map((p, i) => `<div class="lb-player" data-i="${i}"><span class="lb-dot" style="--pawn:${esc(p.color)}" aria-hidden="true"></span><label>Joueur ${i + 1}<input name="pname" value="${esc(p.name)}" maxlength="30"></label><span class="lb-pcolor" data-lb-pcolor="${i}"></span>${c.players.length > 1 ? `<button type="button" class="icon-button small" data-lb-pdel="${i}" aria-label="Retirer ${esc(p.name)}" title="Retirer ce joueur">×</button>` : ''}</div>`).join('');
-        return `<section class="goose-page lb-page"><header class="goose-head"><span class="eyebrow">TABLE DE JEU · LABYRINTHE</span><h2>${esc(TITLE)}</h2><p>Un labyrinthe fait pour toi, et si tu veux des ancêtres, des lieux ou des souvenirs à aller chercher dedans. La partie se garde dans ce navigateur.</p></header>
-            ${full ? `<div class="lb-msgline">${notice('warn', `Les ${MAX_GAMES} labyrinthes en cours sont gardés : supprimes-en un pour en commencer un autre.`)}</div>` : ''}
+        const players = c.players.map((p, i) => `<div class="lb-player" data-i="${i}"><span class="lb-dot" style="--pawn:${esc(p.color)}" aria-hidden="true"></span><label>${esc(i18n('Joueur {n}', {n: i + 1}))}<input name="pname" value="${esc(p.name)}" maxlength="30"></label><span class="lb-pcolor" data-lb-pcolor="${i}"></span>${c.players.length > 1 ? `<button type="button" class="icon-button small" data-lb-pdel="${i}" aria-label="${esc(i18n('Retirer {name}', {name: p.name}))}" title="${esc(i18n('Retirer ce joueur'))}">×</button>` : ''}</div>`).join('');
+        return `<section class="goose-page lb-page"><header class="goose-head"><span class="eyebrow">${esc(i18n('TABLE DE JEU · {what}', {what: i18n('LABYRINTHE')}))}</span><h2>${esc(i18n(TITLE))}</h2><p>${esc(i18n('Un labyrinthe fait pour toi, et si tu veux des ancêtres, des lieux ou des souvenirs à aller chercher dedans. La partie se garde dans ce navigateur.'))}</p></header>
+            ${full ? `<div class="lb-msgline">${notice('warn', i18n('Les {n} labyrinthes en cours sont gardés : supprimes-en un pour en commencer un autre.', {n: MAX_GAMES}))}</div>` : ''}
             <form class="goose-setup lb-setup" id="lb-setup-form" novalidate>
               <div class="lb-cols"><div class="lb-main">
-                <div class="goose-setup-grid lb-top"><label>Jeu<select name="variant" data-lb-variant>${variants}</select></label><label>Nom de la partie<input name="name" value="${esc(c.name)}" placeholder="Ex : Le labyrinthe de Mamie" maxlength="80"></label>
-                    <label>Graine <span class="lb-seedrow"><input name="seed" value="${esc(c.seed)}" maxlength="24" spellcheck="false" title="La même graine redonne le même labyrinthe : partage-la pour jouer au même"><button type="button" class="button small secondary" data-lb-reseed title="Un autre labyrinthe (nouvelle graine)">🎲 Un autre</button></span></label></div>
-                <fieldset class="lb-fs"><legend>1 · La forme</legend>
+                <div class="goose-setup-grid lb-top"><label>${esc(i18n('Jeu'))}<select name="variant" data-lb-variant>${variants}</select></label><label>${esc(i18n('Nom de la partie'))}<input name="name" value="${esc(c.name)}" placeholder="${esc(i18n('Ex : Le labyrinthe de Mamie'))}" maxlength="80"></label>
+                    <label>${esc(i18n('Graine'))} <span class="lb-seedrow"><input name="seed" value="${esc(c.seed)}" maxlength="24" spellcheck="false" title="${esc(i18n('La même graine redonne le même labyrinthe : partage-la pour jouer au même'))}"><button type="button" class="button small secondary" data-lb-reseed title="${esc(i18n('Un autre labyrinthe (nouvelle graine)'))}">🎲 ${esc(i18n('Un autre'))}</button></span></label></div>
+                <fieldset class="lb-fs"><legend>${esc(i18n('1 · La forme'))}</legend>
                     ${seg('shape', SHAPES, c.shape, 'lb-shapes')}
                     <div class="lb-ranges" data-lb-sizes></div>
-                    <div class="goose-setup-grid lb-grid2"><label>Les couloirs<select name="algo">${opt(ALGOS, c.algo)}</select></label><label>Départ et arrivée<select name="ends">${opt(ENDS, c.ends)}</select></label></div>
+                    <div class="goose-setup-grid lb-grid2"><label>${esc(i18n('Les couloirs'))}<select name="algo">${opt(ALGOS, c.algo)}</select></label><label>${esc(i18n('Départ et arrivée'))}<select name="ends">${opt(ENDS, c.ends)}</select></label></div>
                     <div class="lb-ranges" data-lb-loops></div>
                 </fieldset>
-                <fieldset class="lb-fs"><legend>2 · L’aspect</legend>
+                <fieldset class="lb-fs"><legend>${esc(i18n('2 · L’aspect'))}</legend>
                     ${seg('style', STYLES, c.style)}
                     <div class="lb-ranges" data-lb-thick></div>
-                    <div class="lb-colors"><span class="lb-cl"><span class="pk-lab">Murs</span><span data-lb-color="wall"></span></span><span class="lb-cl"><span class="pk-lab">Sol</span><span data-lb-color="floor"></span></span><span class="lb-cl"><span class="pk-lab">Chemin et solution</span><span data-lb-color="path"></span></span></div>
-                    <p class="muted lb-small">« Aucune » : la couleur du style choisi.</p>
+                    <div class="lb-colors"><span class="lb-cl"><span class="pk-lab">${esc(i18n('Murs'))}</span><span data-lb-color="wall"></span></span><span class="lb-cl"><span class="pk-lab">${esc(i18n('Sol'))}</span><span data-lb-color="floor"></span></span><span class="lb-cl"><span class="pk-lab">${esc(i18n('Chemin et solution'))}</span><span data-lb-color="path"></span></span></div>
+                    <p class="muted lb-small">${esc(i18n('« Aucune » : la couleur du style choisi.'))}</p>
                 </fieldset>
-                <fieldset class="lb-fs"><legend>3 · Des choses à aller chercher <small>(facultatif)</small></legend>
+                <fieldset class="lb-fs"><legend>${esc(i18n('3 · Des choses à aller chercher'))} <small>(${esc(i18n('facultatif'))})</small></legend>
                     <div class="lb-ranges" data-lb-count></div>
                     <div class="lb-stage-opts" ${s.n ? '' : 'hidden'} data-lb-stopts>
                         <div class="lb-kinds">${seg('kind', KINDS, s.kind)}</div>
                         <div class="goose-setup-grid lb-grid2">
-                            <label data-lb-sub>Lesquels<select name="sub"></select></label>
-                            <label>Ordre<select name="order"></select></label>
+                            <label data-lb-sub>${esc(i18n('Lesquels'))}<select name="sub"></select></label>
+                            <label>${esc(i18n('Ordre'))}<select name="order"></select></label>
                         </div>
                         <div data-lb-gen class="lb-ranges"></div>
-                        <div data-lb-root hidden><span class="pk-lab">À partir de la personne</span>${P.pickerField ? P.pickerField({name: 'root', kind: 'person', value: Number(s.root) || null}) : '<input name="root">'}</div>
-                        <div data-lb-people hidden><span class="pk-lab">Les personnes à aller chercher</span>${P.pickerField ? P.pickerField({name: 'people', kind: 'person', multiple: true, value: s.people ? s.people.split(',').map(Number).filter(Boolean) : []}) : '<input name="people">'}</div>
-                        ${check('needAll', s.needAll, 'Sortir seulement après avoir tout ramassé')}
-                        <p class="muted lb-small">Ni les personnes vivantes ni les fiches confidentielles ne sont jamais montrées.</p>
+                        <div data-lb-root hidden><span class="pk-lab">${esc(i18n('À partir de la personne'))}</span>${P.pickerField ? P.pickerField({name: 'root', kind: 'person', value: Number(s.root) || null}) : '<input name="root">'}</div>
+                        <div data-lb-people hidden><span class="pk-lab">${esc(i18n('Les personnes à aller chercher'))}</span>${P.pickerField ? P.pickerField({name: 'people', kind: 'person', multiple: true, value: s.people ? s.people.split(',').map(Number).filter(Boolean) : []}) : '<input name="people">'}</div>
+                        ${check('needAll', s.needAll, i18n('Sortir seulement après avoir tout ramassé'))}
+                        <p class="muted lb-small">${esc(i18n('Ni les personnes vivantes ni les fiches confidentielles ne sont jamais montrées.'))}</p>
                     </div>
                     <div data-lb-sterr></div>
                 </fieldset>
-                <fieldset class="lb-fs"><legend>4 · Les joueurs</legend>
+                <fieldset class="lb-fs"><legend>${esc(i18n('4 · Les joueurs'))}</legend>
                     <div class="lb-players">${players}</div>
-                    <div class="lb-prow">${c.players.length < 4 ? '<button type="button" class="button small secondary" data-lb-padd>＋ Ajouter un joueur</button>' : ''}
-                        <label ${c.players.length > 1 ? '' : 'hidden'} data-lb-modewrap>Comment<select name="mode"><option value="tour"${c.mode === 'tour' ? ' selected' : ''}>Chacun son tour, on compare les temps</option><option value="course"${c.mode === 'course' ? ' selected' : ''}>Tous en même temps (course)</option></select></label></div>
+                    <div class="lb-prow">${c.players.length < 4 ? `<button type="button" class="button small secondary" data-lb-padd>＋ ${esc(i18n('Ajouter un joueur'))}</button>` : ''}
+                        <label ${c.players.length > 1 ? '' : 'hidden'} data-lb-modewrap>${esc(i18n('Comment'))}<select name="mode"><option value="tour"${c.mode === 'tour' ? ' selected' : ''}>${esc(i18n('Chacun son tour, on compare les temps'))}</option><option value="course"${c.mode === 'course' ? ' selected' : ''}>${esc(i18n('Tous en même temps (course)'))}</option></select></label></div>
                     <p class="muted lb-small" data-lb-keys></p>
                 </fieldset>
-                <fieldset class="lb-fs"><legend>5 · Pour corser ou aider</legend>
-                    <div class="lb-checks">${check('fog', c.fog, 'Brouillard', 'on ne voit qu’autour de son pion')}${check('trail', c.trail, 'Montrer les cases déjà parcourues')}${check('hints', c.hints, 'Permettre les indices et la solution')}</div>
+                <fieldset class="lb-fs"><legend>${esc(i18n('5 · Pour corser ou aider'))}</legend>
+                    <div class="lb-checks">${check('fog', c.fog, i18n('Brouillard'), i18n('on ne voit qu’autour de son pion'))}${check('trail', c.trail, i18n('Montrer les cases déjà parcourues'))}${check('hints', c.hints, i18n('Permettre les indices et la solution'))}</div>
                     <div class="lb-ranges" data-lb-fogr ${c.fog ? '' : 'hidden'}></div>
                 </fieldset>
               </div>
               <aside class="lb-aside">
-                <div class="lb-pv-card"><div class="lb-pv-head"><b>Aperçu</b><small data-lb-info></small></div><div class="lb-pv" data-lb-pv></div></div>
-                <div class="lb-ready"><b>✨ Ensembles prêts</b><div class="lb-ready-list">${READY.map(x => `<button type="button" class="lb-ready-b" data-lb-ready="${x.k}"><b>${esc(x.name)}</b><small>${esc(x.hint)}</small></button>`).join('')}</div></div>
+                <div class="lb-pv-card"><div class="lb-pv-head"><b>${esc(i18n('Aperçu'))}</b><small data-lb-info></small></div><div class="lb-pv" data-lb-pv></div></div>
+                <div class="lb-ready"><b>✨ ${esc(i18n('Ensembles prêts'))}</b><div class="lb-ready-list">${READY.map(x => `<button type="button" class="lb-ready-b" data-lb-ready="${x.k}"><b>${esc(i18n(x.name))}</b><small>${esc(i18n(x.hint))}</small></button>`).join('')}</div></div>
                 <div data-lb-presets></div>
               </aside></div>
-              <footer class="lb-foot"><small>Flèches ou ZQSD pour avancer · glisse ton pion à la souris ou au doigt · Espace : pause.</small><button type="submit" class="button lb-start"${full ? ' disabled' : ''}>▶ Démarrer la partie</button></footer>
+              <footer class="lb-foot"><small>${esc(i18n('Flèches ou ZQSD pour avancer · glisse ton pion à la souris ou au doigt · Espace : pause.'))}</small><button type="submit" class="button lb-start"${full ? ' disabled' : ''}>▶ ${esc(i18n('Démarrer la partie'))}</button></footer>
             </form></section>`;
     }
     function renderSetup(ws, ctx, cfg = null) {
@@ -256,11 +258,11 @@
             if (!form.isConnected) return;
             const t = performance.now(), m = L().generate(mazeCfg(c)), st = L().placeStages(m, c.st.n, c.seed).map((cell, i) => ({cell, icon: KINDS.find(k => k[0] === c.st.kind)?.[1] || '★', n: c.st.order === 'libre' ? 0 : i + 1}));
             preview = m;
-            q('[data-lb-pv]').innerHTML = L().toSvg(m, {...look(c), stages: st, title: 'Aperçu du labyrinthe'});
-            q('[data-lb-info]').textContent = `${plural(m.cells.length, 'case')} · solution en ${plural(m.solution.length - 1, 'pas', 'pas')} · ${plural(m.deadEnds, 'impasse')}${performance.now() - t > 400 ? ' · grand !' : ''}`;
+            q('[data-lb-pv]').innerHTML = L().toSvg(m, {...look(c), stages: st, title: i18n('Aperçu du labyrinthe')});
+            q('[data-lb-info]').textContent = `${i18n('{n} cases', {n: m.cells.length})} · ${i18n('solution en {what}', {what: i18n('{n} pas', {n: Number(m.solution.length - 1) || 0, ctx: 'laby'})})} · ${plural(m.deadEnds, 'impasse')}${performance.now() - t > 400 ? ` · ${i18n('grand !')}` : ''}`;
         }, 60); };
         const ranges = () => {
-            const R = UI().rangeField, put = (slot, list) => { const box = q(slot); box.innerHTML = ''; list.forEach(([k, label, min, max, unit, step = 1, obj = c]) => { if (!R) return; const f = R({label, min, max, step, value: obj[k], unit, default: DEF[k] ?? (DEF.st[k] ?? min)}); f.input.dataset.lbK = k; if (obj !== c) f.input.dataset.lbSt = '1'; box.appendChild(f); }); };
+            const R = UI().rangeField, put = (slot, list) => { const box = q(slot); box.innerHTML = ''; list.forEach(([k, label, min, max, unit, step = 1, obj = c]) => { if (!R) return; const f = R({label: i18n(label), min, max, step, value: obj[k], unit: unit && unit !== '%' ? i18n(unit) : unit, default: DEF[k] ?? (DEF.st[k] ?? min)}); f.input.dataset.lbK = k; if (obj !== c) f.input.dataset.lbSt = '1'; box.appendChild(f); }); };
             put('[data-lb-sizes]', c.shape === 'round' ? [['rings', 'Anneaux', 3, 30, 'anneaux']] : [['w', 'Largeur', 4, 60, 'cases'], ['h', 'Hauteur', 4, 60, 'cases']]);
             put('[data-lb-loops]', [['loops', 'Boucles (plusieurs chemins)', 0, 30, '%']]);
             put('[data-lb-thick]', [['thick', 'Épaisseur des murs', 3, 45, '%']]);
@@ -279,7 +281,7 @@
             q('[data-lb-stopts]').hidden = !s.n; q('[data-lb-root]').hidden = s.sub !== 'root'; q('[data-lb-people]').hidden = !(isAnc && s.sub === 'people');
             q('[data-lb-sterr]').innerHTML = '';
         };
-        const keysHelp = () => { q('[data-lb-keys]').innerHTML = c.players.length > 1 && c.mode === 'course' ? `Touches : ${c.players.map((p, i) => `<b>${esc(p.name)}</b> ${['flèches', 'Z Q S D', 'I J K L', 'pavé 8 4 5 6'][i]}`).join(' · ')} — ou glisse son pion.` : 'Flèches ou Z Q S D (ou glisse le pion). Chacun joue à son tour sur le même labyrinthe.'; };
+        const keysHelp = () => { q('[data-lb-keys]').innerHTML = c.players.length > 1 && c.mode === 'course' ? i18n('Touches : {list} — ou glisse son pion.', {list: c.players.map((p, i) => `<b>${esc(p.name)}</b> ${esc(i18n(['flèches', 'Z Q S D', 'I J K L', 'pavé 8 4 5 6'][i]))}`).join(' · ')}) : esc(i18n('Flèches ou Z Q S D (ou glisse le pion). Chacun joue à son tour sur le même labyrinthe.')); };
         const colors = () => {
             const CF = UI().colorField; form.querySelectorAll('[data-lb-color]').forEach(slot => { const k = slot.dataset.lbColor; if (!CF) return; const f = CF({value: c[k] || '', allowNone: true, compact: false}); f.input.dataset.lbColorK = k; slot.replaceChildren(f); });
             form.querySelectorAll('[data-lb-pcolor]').forEach(slot => { const i = Number(slot.dataset.lbPcolor); if (!CF) return; const f = CF({value: c.players[i].color, compact: true}); f.input.dataset.lbPc = i; slot.replaceChildren(f); });
@@ -317,7 +319,7 @@
             if (b.matches('[data-lb-reseed]')) { c.seed = L().newSeed(); q('[name="seed"]').value = c.seed; save(); redraw(); return; }
             if (b.matches('[data-lb-padd]')) { const used = c.players.map(p => p.color); c.players.push({name: `Joueur ${c.players.length + 1}`, color: COLORS.find(x => !used.includes(x)) || COLORS[c.players.length]}); save(); full(); return; }
             if (b.dataset.lbPdel != null) { c.players.splice(Number(b.dataset.lbPdel), 1); save(); full(); return; }
-            if (b.dataset.lbReady) { const x = READY.find(r => r.k === b.dataset.lbReady); if (!x) return; setup = cleanCfg({...c, ...x.cfg, st: {...c.st, ...(x.cfg.st || {})}, players: c.players, name: c.name, seed: L().newSeed()}); save(); renderSetup(ws, ctx); toast(`Ensemble « ${x.name.replace(/^\S+\s/, '')} » appliqué : tu peux tout retoucher.`); }
+            if (b.dataset.lbReady) { const x = READY.find(r => r.k === b.dataset.lbReady); if (!x) return; setup = cleanCfg({...c, ...x.cfg, st: {...c.st, ...(x.cfg.st || {})}, players: c.players, name: c.name, seed: L().newSeed()}); save(); renderSetup(ws, ctx); toast(i18n('Ensemble « {name} » appliqué : tu peux tout retoucher.', {name: i18n(x.name).replace(/^\S+\s/, '')})); }
         }, sig);
         // 💾 Réglages enregistrés (le cadre commun)
         const slot = q('[data-lb-presets]'), U = UI();
@@ -325,15 +327,15 @@
             const list = () => { const v = ls.get(PRESETS_KEY, []); return Array.isArray(v) ? v.filter(x => x && typeof x.name === 'string').slice(0, 60) : []; };
             const put = l => ls.set(PRESETS_KEY, l.slice(0, 60));
             const now = () => ({...cleanCfg(c), name: '', seed: ''}), today = () => new Date().toISOString();
-            const frame = U.presetsFrame({id: 'labyrinthe', what: 'les réglages du labyrinthe (forme, aspect, étapes, joueurs)', list: () => list().map(x => ({name: x.name, date: x.date})), quietApply: true,
-                apply: i => { const x = list()[i]; if (!x) return false; setup = cleanCfg({...x.data, name: c.name, seed: L().newSeed()}); save(); renderSetup(ws, ctx); toast(`Réglages « ${x.name} » appliqués.`); return false; },
+            const frame = U.presetsFrame({id: 'labyrinthe', what: i18n('les réglages du labyrinthe (forme, aspect, étapes, joueurs)'), list: () => list().map(x => ({name: x.name, date: x.date})), quietApply: true,
+                apply: i => { const x = list()[i]; if (!x) return false; setup = cleanCfg({...x.data, name: c.name, seed: L().newSeed()}); save(); renderSetup(ws, ctx); toast(i18n('Réglages « {name} » appliqués.', {name: x.name})); return false; },
                 save: name => { const l = list(), it = {name, date: today(), data: now()}, i = l.findIndex(x => x.name === name); if (i >= 0) l[i] = it; else l.push(it); put(l); },
                 replace: i => { const l = list(); if (!l[i]) return false; l[i] = {...l[i], date: today(), data: now()}; put(l); },
                 rename: (i, name) => { const l = list(); if (!l[i]) return false; l[i].name = name; put(l); },
                 duplicate: i => { const l = list(), x = l[i]; if (!x) return false; l.splice(i + 1, 0, {name: U.freeName ? U.freeName(x.name, l.map(y => y.name)) : `${x.name} (copie)`, date: today(), data: x.data}); put(l); },
                 exportOne: i => { const x = list()[i]; if (x) A().exportSettingFile?.('labyrinthe', x.name, {data: x.data}); return false; },
                 remove: i => { const l = list(), x = l[i]; if (!x) return false; if (A().undoLocalChange) A().undoLocalChange(`Réglage « ${x.name} » supprimé`, [PRESETS_KEY], () => { l.splice(i, 1); put(l); }, () => frame.isConnected && frame.refresh()); else { l.splice(i, 1); put(l); } },
-                importOne: async () => { const got = await A().importSettingFile?.('labyrinthe', {names: list().map(x => x.name), check: d => d && typeof d.data === 'object'}); if (!got) return false; const l = list(); l.push({name: got.nom, date: today(), data: {...cleanCfg(got.donnees.data), name: '', seed: ''}}); put(l); toast(`Réglage « ${got.nom} » importé : clique « Appliquer » pour t’en servir.`); },
+                importOne: async () => { const got = await A().importSettingFile?.('labyrinthe', {names: list().map(x => x.name), check: d => d && typeof d.data === 'object'}); if (!got) return false; const l = list(); l.push({name: got.nom, date: today(), data: {...cleanCfg(got.donnees.data), name: '', seed: ''}}); put(l); toast(i18n('Réglage « {name} » importé : clique « Appliquer » pour t’en servir.', {name: got.nom})); },
             });
             slot.appendChild(frame);
         }
@@ -344,10 +346,10 @@
             c.name = q('[name="name"]').value.trim().slice(0, 80);
             c.st.root = String(form.elements.root?.value || c.st.root || '').replace(/[^\d]/g, '');
             c.st.people = String(form.elements.people?.value || c.st.people || '').split(',').filter(x => /^\d+$/.test(x)).join(',');
-            if (c.st.n && c.st.sub === 'root' && !c.st.root) return UI().fail ? UI().fail(q('[data-lb-root] .pk-field, [data-lb-root] input') || q('[name="sub"]'), 'Choisis la personne de départ.') : toast('Choisis la personne de départ.', 'error');
-            if (c.st.n && c.st.kind === 'ancetres' && c.st.sub === 'people' && !c.st.people) return UI().fail ? UI().fail(q('[data-lb-people] .pk-field, [data-lb-people] input') || q('[name="sub"]'), 'Choisis au moins une personne.') : toast('Choisis au moins une personne.', 'error');
+            if (c.st.n && c.st.sub === 'root' && !c.st.root) return UI().fail ? UI().fail(q('[data-lb-root] .pk-field, [data-lb-root] input') || q('[name="sub"]'), i18n('Choisis la personne de départ.')) : toast(i18n('Choisis la personne de départ.'), 'error');
+            if (c.st.n && c.st.kind === 'ancetres' && c.st.sub === 'people' && !c.st.people) return UI().fail ? UI().fail(q('[data-lb-people] .pk-field, [data-lb-people] input') || q('[name="sub"]'), i18n('Choisis au moins une personne.')) : toast(i18n('Choisis au moins une personne.'), 'error');
             if (gameCount() >= MAX_GAMES) return;
-            btn.disabled = true; const label = btn.textContent; btn.textContent = 'Préparation…';
+            btn.disabled = true; const label = btn.textContent; btn.textContent = i18n('Préparation…');
             try {
                 const cfg = cleanCfg(c); if (!cfg.seed) cfg.seed = L().newSeed();
                 const m = L().generate(mazeCfg(cfg));
@@ -361,7 +363,7 @@
     }
     function newGame(cfg, maze, items) {
         const stages = placeItems(maze, items, cfg, cfg.seed);
-        const name = cfg.name || `Labyrinthe ${SHAPES.find(s => s[0] === cfg.shape)?.[2]?.toLowerCase() || ''} du ${new Date().toLocaleDateString('fr-FR')}`.replace(/\s+/g, ' ');
+        const name = cfg.name || i18n('Labyrinthe {shape} du {date}', {shape: i18n(SHAPES.find(s => s[0] === cfg.shape)?.[2] || '').toLowerCase(), date: new Date().toLocaleDateString(window.LCNDA_I18N?.locale?.() || 'fr-FR')}).replace(/\s+/g, ' ');
         return {id: `laby-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`, name, created: Date.now(), cfg: {...cfg, name}, stages,
             players: cfg.players.map(p => ({...p, pos: maze.start, steps: 0, ms: 0, got: [], done: false, trail: [maze.start]})), turn: 0, finished: false, hints: 0, showSol: false};
     }
@@ -387,23 +389,23 @@
         active() { return this.course ? this.g.players.filter(p => !p.done) : [this.g.players[this.g.turn]].filter(Boolean); }
         html() {
             const g = this.g, c = this.cfg, hintsOk = c.hints;
-            this.ws.innerHTML = `<section class="goose-page lb-page lb-play"><header class="goose-head goose-game-head"><div><span class="eyebrow">${g.finished ? 'LABYRINTHE TERMINÉ' : 'LABYRINTHE EN COURS'} · ${esc(SHAPES.find(s => s[0] === c.shape)?.[2] || '')} · ${plural(this.maze.cells.length, 'case')}${g.stages.length ? ` · ${plural(g.stages.length, 'étape')}` : ''}</span><h2>${esc(g.name)}</h2><p>Graine <code>${esc(c.seed)}</code> : la même graine redonne ce labyrinthe.</p></div>
-                <div class="page-actions"><button type="button" class="button small secondary" data-lb-new>＋ Nouvelle partie</button><button type="button" class="icon-button" data-lb-more aria-label="Plus d’actions" title="Plus d’actions">⋯</button></div></header>
+            this.ws.innerHTML = `<section class="goose-page lb-page lb-play"><header class="goose-head goose-game-head"><div><span class="eyebrow">${esc(g.finished ? i18n('LABYRINTHE TERMINÉ') : i18n('LABYRINTHE EN COURS'))} · ${esc(i18n(SHAPES.find(s => s[0] === c.shape)?.[2] || ''))} · ${esc(i18n('{n} cases', {n: this.maze.cells.length}))}${g.stages.length ? ` · ${esc(plural(g.stages.length, 'étape'))}` : ''}</span><h2>${esc(g.name)}</h2><p>${i18n('Graine <code>{seed}</code> : la même graine redonne ce labyrinthe.', {seed: esc(c.seed)})}</p></div>
+                <div class="page-actions"><button type="button" class="button small secondary" data-lb-new>＋ ${esc(i18n('Nouvelle partie', {ctx: 'jeu'}))}</button><button type="button" class="icon-button" data-lb-more aria-label="${esc(i18n('Plus d’actions'))}" title="${esc(i18n('Plus d’actions'))}">⋯</button></div></header>
                 <div class="lb-game">
-                  <div class="lb-board" data-lb-board tabindex="0" aria-label="Le labyrinthe : flèches ou Z Q S D pour avancer"><div class="lb-svg" data-lb-svg></div></div>
+                  <div class="lb-board" data-lb-board tabindex="0" aria-label="${esc(i18n('Le labyrinthe : flèches ou Z Q S D pour avancer'))}"><div class="lb-svg" data-lb-svg></div></div>
                   <aside class="lb-side">
                     <div class="lb-bar">
-                      ${g.finished ? '' : `<button type="button" class="button small secondary" data-lb-pause data-shortcut="Espace" title="Pause (Espace)">⏸ Pause</button>`}
-                      ${hintsOk && !g.finished ? '<button type="button" class="button small secondary" data-lb-hint title="Montre quelques cases du bon chemin (H)" data-shortcut="H">💡 Un indice</button>' : ''}
-                      ${hintsOk ? `<button type="button" class="button small secondary" data-lb-sol aria-pressed="${!!g.showSol}">${g.showSol ? '🙈 Cacher la solution' : '👁 Montrer la solution'}</button>` : ''}
-                      <button type="button" class="button small secondary" data-lb-print>🖨 Imprimer</button>
-                      <button type="button" class="button small secondary" data-lb-export>⤓ Exporter ▾</button>
+                      ${g.finished ? '' : `<button type="button" class="button small secondary" data-lb-pause data-shortcut="Espace" title="${esc(i18n('Pause (Espace)'))}">⏸ ${esc(i18n('Pause'))}</button>`}
+                      ${hintsOk && !g.finished ? `<button type="button" class="button small secondary" data-lb-hint title="${esc(i18n('Montre quelques cases du bon chemin (H)'))}" data-shortcut="H">💡 ${esc(i18n('Un indice'))}</button>` : ''}
+                      ${hintsOk ? `<button type="button" class="button small secondary" data-lb-sol aria-pressed="${!!g.showSol}">${esc(g.showSol ? i18n('🙈 Cacher la solution') : i18n('👁 Montrer la solution'))}</button>` : ''}
+                      <button type="button" class="button small secondary" data-lb-print>🖨 ${esc(i18n('Imprimer'))}</button>
+                      <button type="button" class="button small secondary" data-lb-export>⤓ ${esc(i18n('Exporter'))} ▾</button>
                     </div>
                     <div class="lb-players-st" data-lb-pst></div>
                     <div class="lb-live" aria-live="polite" data-lb-live></div>
                     <div class="lb-found" data-lb-found></div>
                     <div class="lb-end" data-lb-end></div>
-                    <p class="muted lb-small lb-help">${this.course ? g.players.map((p, i) => `<b style="color:${esc(p.color)}">●</b> ${esc(p.name)} : ${['flèches', 'Z Q S D', 'I J K L', 'pavé 8 4 5 6'][i]}`).join(' · ') : 'Flèches ou Z Q S D · glisse le pion · Espace : pause'}${hintsOk ? ' · H : un indice' : ''}</p>
+                    <p class="muted lb-small lb-help">${this.course ? g.players.map((p, i) => `<b style="color:${esc(p.color)}">●</b> ${esc(p.name)} : ${esc(i18n(['flèches', 'Z Q S D', 'I J K L', 'pavé 8 4 5 6'][i]))}`).join(' · ') : esc(i18n('Flèches ou Z Q S D · glisse le pion · Espace : pause'))}${hintsOk ? ` · ${esc(i18n('H : un indice'))}` : ''}</p>
                   </aside>
                 </div></section>`;
         }
@@ -412,7 +414,7 @@
         paint() {
             const g = this.g, c = this.cfg, m = this.maze;
             const showSol = g.showSol && c.hints;
-            const svg = L().toSvg(m, {...look(c), solution: [], title: `Labyrinthe « ${g.name} »`});
+            const svg = L().toSvg(m, {...look(c), solution: [], title: i18n('Labyrinthe « {name} »', {name: g.name})});
             this.q('[data-lb-svg]').innerHTML = svg;
             const s = this.svgEl(), NS = 'http://www.w3.org/2000/svg', mk = (tag, attrs = {}) => { const e = document.createElementNS(NS, tag); Object.entries(attrs).forEach(([k, v]) => e.setAttribute(k, v)); return e; };
             this.layers = {};
@@ -462,9 +464,9 @@
         nextOrdered(p) { if (this.cfg.st.order === 'libre') return 0; const left = this.g.stages.filter(s => !p.got.includes(s.cell)).sort((a, b) => a.n - b.n); return left[0]?.n || 0; }
         status() {
             const g = this.g, act = new Set(this.active()), tot = g.stages.length;
-            this.q('[data-lb-pst]').innerHTML = g.players.map((p, i) => `<div class="lb-pcard${act.has(p) && !g.finished ? ' is-turn' : ''}${p.done ? ' is-done' : ''}"><span class="lb-dot" style="--pawn:${esc(p.color)}" aria-hidden="true"></span><b>${esc(p.name)}</b>${!this.course && g.players.length > 1 && act.has(p) && !g.finished ? ' <small class="lb-tag">à toi</small>' : ''}${p.done ? ' <small class="lb-tag is-ok">🏁 arrivé</small>' : ''}
-                <span class="lb-stats"><span data-lb-time="${i}">⏱ ${fmtTime(p.ms)}</span><span>👣 ${plural(p.steps, 'pas', 'pas')}</span>${tot ? `<span>★ ${p.got.length}/${tot}</span>` : ''}</span></div>`).join('');
-            const pb = this.q('[data-lb-pause]'); if (pb) pb.textContent = this.paused ? '▶ Reprendre' : '⏸ Pause';
+            this.q('[data-lb-pst]').innerHTML = g.players.map((p, i) => `<div class="lb-pcard${act.has(p) && !g.finished ? ' is-turn' : ''}${p.done ? ' is-done' : ''}"><span class="lb-dot" style="--pawn:${esc(p.color)}" aria-hidden="true"></span><b>${esc(p.name)}</b>${!this.course && g.players.length > 1 && act.has(p) && !g.finished ? ` <small class="lb-tag">${esc(i18n('à toi'))}</small>` : ''}${p.done ? ` <small class="lb-tag is-ok">🏁 ${esc(i18n('arrivé'))}</small>` : ''}
+                <span class="lb-stats"><span data-lb-time="${i}">⏱ ${fmtTime(p.ms)}</span><span>👣 ${esc(i18n('{n} pas', {n: Number(p.steps) || 0, ctx: 'laby'}))}</span>${tot ? `<span>★ ${p.got.length}/${tot}</span>` : ''}</span></div>`).join('');
+            const pb = this.q('[data-lb-pause]'); if (pb) pb.textContent = this.paused ? `▶ ${i18n('Reprendre')}` : `⏸ ${i18n('Pause')}`;
             this.q('[data-lb-board]').classList.toggle('is-paused', this.paused);
         }
         clock() {
@@ -491,7 +493,7 @@
             const st = this.g.stages.find(s => s.cell === to);
             if (st && !p.got.includes(to)) {
                 const next = this.nextOrdered(p);
-                if (next && st.n !== next) this.say(`D’abord l’étape ${next}, puis celle-ci (la ${st.n}).`, 'warn');
+                if (next && st.n !== next) this.say(i18n('D’abord l’étape {a}, puis celle-ci (la {b}).', {a: next, b: st.n}), 'warn');
                 else { p.got.push(to); this.found(st, p); }
             }
             if (to === this.maze.end) this.arrive(p);
@@ -501,17 +503,17 @@
         found(st, p) {
             const box = this.q('[data-lb-found]'), U = UI();
             const pic = st.kind === 'person' ? (U.avatar ? U.avatar({id: st.pid, first_name: st.first, last_name: st.last, gender: st.g, photo: st.photo, sosa: st.sosa}, 48) : `<span class="lb-ico">👤</span>`) : st.thumb ? `<img src="${esc(st.thumb)}" alt="" loading="lazy">` : `<span class="lb-ico">${esc(st.icon)}</span>`;
-            box.innerHTML = `<div class="lb-card"><span class="eyebrow">${this.course ? `${esc(p.name)} a trouvé` : 'Trouvé !'}${st.n ? ` · étape ${st.n}` : ''}</span><div class="lb-card-in">${pic}<div><b>${esc(st.title)}</b>${st.sosa ? ` ${U.badge ? U.badge(`Sosa ${st.sosa}`, 'sosa') : ''}` : ''}<small>${esc(st.sub || '')}</small></div></div></div>`;
+            box.innerHTML = `<div class="lb-card"><span class="eyebrow">${esc(this.course ? i18n('{name} a trouvé', {name: p.name}) : i18n('Trouvé !'))}${st.n ? ` · ${esc(i18n('étape {n}', {n: st.n}))}` : ''}</span><div class="lb-card-in">${pic}<div><b>${esc(st.title)}</b>${st.sosa ? ` ${U.badge ? U.badge(`Sosa ${st.sosa}`, 'sosa') : ''}` : ''}<small>${esc(st.sub || '')}</small></div></div></div>`;
             const left = this.g.stages.length - p.got.length;
-            this.say(`★ ${st.title}${left ? ` — encore ${plural(left, 'étape')}` : ' — tout est ramassé : file à la sortie 🏁'}`, 'ok');
+            this.say(`★ ${st.title} — ${left ? i18n('encore {what}', {what: plural(left, 'étape')}) : i18n('tout est ramassé : file à la sortie 🏁')}`, 'ok');
         }
         arrive(p) {
             const left = this.g.stages.length - p.got.length;
-            if (left && this.cfg.st.needAll) { this.say(`🏁 La sortie est fermée : il te reste ${plural(left, 'étape')} à ramasser.`, 'warn'); return; }
+            if (left && this.cfg.st.needAll) { this.say(i18n('🏁 La sortie est fermée : il te reste {what} à ramasser.', {what: plural(left, 'étape')}), 'warn'); return; }
             p.done = true; this.pauseRunFor(p);
-            if (this.course) { const rank = this.g.players.filter(x => x.done).length; this.say(`🏁 ${p.name} arrive ${rank === 1 ? 'en premier !' : `${rank}ᵉ`}`, 'ok'); if (this.g.players.every(x => x.done)) this.finish(); return; }
+            if (this.course) { const rank = this.g.players.filter(x => x.done).length; this.say(rank === 1 ? i18n('🏁 {name} arrive en premier !', {name: p.name}) : i18n('🏁 {name} arrive {n}ᵉ', {name: p.name, n: rank}), 'ok'); if (this.g.players.every(x => x.done)) this.finish(); return; }
             const next = this.g.players.findIndex((x, i) => i > this.g.turn && !x.done);
-            if (next >= 0) { this.g.turn = next; this.runAt = 0; this.say(`🏁 ${p.name} est sorti en ${fmtTime(p.ms)}. À ${this.g.players[next].name} !`, 'ok'); this.g.showSol = false; this.drawSol(false); }
+            if (next >= 0) { this.g.turn = next; this.runAt = 0; this.say(i18n('🏁 {name} est sorti en {time}. À {next} !', {name: p.name, time: fmtTime(p.ms), next: this.g.players[next].name}), 'ok'); this.g.showSol = false; this.drawSol(false); }
             else this.finish();
         }
         pauseRunFor() { this.clock(); if (!this.active().length) this.runAt = 0; }
@@ -521,12 +523,12 @@
         }
         endHtml() {
             const g = this.g, U = UI(), ranked = [...g.players].sort((a, b) => (b.done - a.done) || (a.ms - b.ms) || (a.steps - b.steps));
-            const met = g.stages.map(s => `<li><span>${esc(s.icon)}</span><div><b>${esc(s.title)}</b><small>${esc(s.sub || '')}</small></div>${s.pid ? `<button type="button" class="button small secondary" data-lb-person="${Number(s.pid)}">↗ Fiche</button>` : ''}</li>`).join('');
-            this.q('[data-lb-end]').innerHTML = `<div class="lb-endbox"><h3>🏁 Bravo !</h3>
-                <table class="data-table lb-score"><thead><tr><th>Joueur</th><th>Temps</th><th>Pas</th>${g.stages.length ? '<th>Étapes</th>' : ''}</tr></thead><tbody>${ranked.map((p, i) => `<tr><td><span class="lb-dot" style="--pawn:${esc(p.color)}"></span> ${g.players.length > 1 ? `${i + 1}. ` : ''}${esc(p.name)}</td><td>${p.done ? fmtTime(p.ms) : '—'}</td><td>${p.steps}</td>${g.stages.length ? `<td>${p.got.length}/${g.stages.length}</td>` : ''}</tr>`).join('')}</tbody></table>
-                ${g.hints ? `<p class="muted lb-small">${plural(g.hints, 'indice demandé', 'indices demandés')}.</p>` : ''}
-                ${met ? `<h4>Rencontrés en chemin</h4><ul class="lb-met">${met}</ul>` : ''}
-                <div class="lb-endacts"><button type="button" class="button" data-lb-again>↺ Rejouer le même</button><button type="button" class="button secondary" data-lb-other>🎲 Un autre</button><button type="button" class="button secondary" data-lb-edit>✎ Changer les réglages</button></div></div>`;
+            const met = g.stages.map(s => `<li><span>${esc(s.icon)}</span><div><b>${esc(s.title)}</b><small>${esc(s.sub || '')}</small></div>${s.pid ? `<button type="button" class="button small secondary" data-lb-person="${Number(s.pid)}">↗ ${esc(i18n('Fiche'))}</button>` : ''}</li>`).join('');
+            this.q('[data-lb-end]').innerHTML = `<div class="lb-endbox"><h3>🏁 ${esc(i18n('Bravo !'))}</h3>
+                <table class="data-table lb-score"><thead><tr><th>${esc(i18n('Joueur'))}</th><th>${esc(i18n('Temps'))}</th><th>${esc(i18n('Pas'))}</th>${g.stages.length ? `<th>${esc(i18n('Étapes'))}</th>` : ''}</tr></thead><tbody>${ranked.map((p, i) => `<tr><td><span class="lb-dot" style="--pawn:${esc(p.color)}"></span> ${g.players.length > 1 ? `${i + 1}. ` : ''}${esc(p.name)}</td><td>${p.done ? fmtTime(p.ms) : '—'}</td><td>${p.steps}</td>${g.stages.length ? `<td>${p.got.length}/${g.stages.length}</td>` : ''}</tr>`).join('')}</tbody></table>
+                ${g.hints ? `<p class="muted lb-small">${esc(plural(g.hints, 'indice demandé', 'indices demandés'))}.</p>` : ''}
+                ${met ? `<h4>${esc(i18n('Rencontrés en chemin'))}</h4><ul class="lb-met">${met}</ul>` : ''}
+                <div class="lb-endacts"><button type="button" class="button" data-lb-again>↺ ${esc(i18n('Rejouer le même'))}</button><button type="button" class="button secondary" data-lb-other>🎲 ${esc(i18n('Un autre'))}</button><button type="button" class="button secondary" data-lb-edit>✎ ${esc(i18n('Changer les réglages'))}</button></div></div>`;
             void U;
         }
         hint() {
@@ -535,7 +537,7 @@
             const L0 = this.layers.hint; L0.replaceChildren();
             path.forEach((i, k) => { const c = this.cell(i); L0.appendChild(this.mk('circle', {cx: c.cx, cy: c.cy, r: String(.16 - k * .012), fill: '#f5b400', class: 'lb-hintdot', style: `animation-delay:${k * 80}ms`})); });
             clearTimeout(this.hintT); this.hintT = setTimeout(() => L0.replaceChildren(), 3000);
-            this.say('💡 Suis les points jaunes.', 'ok'); this.save();
+            this.say(i18n('💡 Suis les points jaunes.'), 'ok'); this.save();
         }
         restart(newSeed) {
             const c = cleanCfg(this.g.cfg); if (newSeed) c.seed = L().newSeed();
@@ -554,8 +556,8 @@
             const png = async sol => { const txt = svgText(sol), img = new Image(), url = URL.createObjectURL(new Blob([txt], {type: 'image/svg+xml'})); await new Promise((ok, ko) => { img.onload = ok; img.onerror = ko; img.src = url; });
                 const k = Math.min(1, 4000 / Math.max(img.width, img.height)), cv = document.createElement('canvas'); cv.width = Math.round(img.width * k); cv.height = Math.round(img.height * k); cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height); URL.revokeObjectURL(url);
                 cv.toBlob(b => b && dl(b, `${name}${sol ? '-solution' : ''}.png`), 'image/png'); };
-            const items = [{icon: '🖼', label: 'Image PNG', run: () => png(false)}, {icon: '🖼', label: 'Image PNG avec la solution', run: () => png(true)}, '-', {icon: '✒️', label: 'Dessin SVG', run: () => dl(new Blob([svgText(false)], {type: 'image/svg+xml'}), `${name}.svg`)}, {icon: '✒️', label: 'Dessin SVG avec la solution', run: () => dl(new Blob([svgText(true)], {type: 'image/svg+xml'}), `${name}-solution.svg`)}];
-            if (UI().menuAt) UI().menuAt(btn, items, {title: '⤓ Exporter'}); else items[0].run();
+            const items = [{icon: '🖼', label: i18n('Image PNG'), run: () => png(false)}, {icon: '🖼', label: i18n('Image PNG avec la solution'), run: () => png(true)}, '-', {icon: '✒️', label: i18n('Dessin SVG'), run: () => dl(new Blob([svgText(false)], {type: 'image/svg+xml'}), `${name}.svg`)}, {icon: '✒️', label: i18n('Dessin SVG avec la solution'), run: () => dl(new Blob([svgText(true)], {type: 'image/svg+xml'}), `${name}-solution.svg`)}];
+            if (UI().menuAt) UI().menuAt(btn, items, {title: `⤓ ${i18n('Exporter')}`}); else items[0].run();
         }
         print() {
             const m = this.maze, c = this.cfg, st = this.g.stages.map(s => ({cell: s.cell, icon: s.icon, n: s.n}));
@@ -563,8 +565,8 @@
             const legend = this.g.stages.length ? `<ol class="lb-pr-legend">${this.g.stages.slice().sort((a, b) => (a.n || 0) - (b.n || 0)).map(s => `<li>${esc(s.icon)} <b>${esc(s.title)}</b>${s.sub ? ` — ${esc(s.sub)}` : ''}</li>`).join('')}</ol>` : '';
             const page = (title, svg) => `<section class="lb-pr-page"><h2>${esc(title)}</h2><div class="lb-pr-svg">${svg}</div></section>`;
             const html = `<style>.lb-pr-page{break-after:page;page-break-after:always}.lb-pr-page:last-child{break-after:auto;page-break-after:auto}.lb-pr-svg svg{width:100%;height:auto;max-height:23cm}h2{font:700 18px system-ui;margin:0 0 8px}.lb-pr-legend{font:12px system-ui;columns:2}</style>
-                ${page(this.g.name, L().toSvg(m, {...look(c), stages: st, title: this.g.name}))}${legend ? `<section>${legend}</section>` : ''}${page(`${this.g.name} — la solution`, L().toSvg(m, {...look(c), stages: st, solution: sol, title: 'La solution'}))}`;
-            if (UI().openPrintDialog) UI().openPrintDialog({title: `Labyrinthe « ${this.g.name} »`, html, photos: false});
+                ${page(this.g.name, L().toSvg(m, {...look(c), stages: st, title: this.g.name}))}${legend ? `<section>${legend}</section>` : ''}${page(i18n('{name} — la solution', {name: this.g.name}), L().toSvg(m, {...look(c), stages: st, solution: sol, title: i18n('La solution')}))}`;
+            if (UI().openPrintDialog) UI().openPrintDialog({title: i18n('Labyrinthe « {name} »', {name: this.g.name}), html, photos: false});
         }
         bind(rebind = false) {
             if (rebind) { this.ac.abort(); this.ac = new AbortController(); }
@@ -574,7 +576,7 @@
                 if (b.matches('[data-lb-new]')) return this.ctx.newGame?.();
                 if (b.matches('[data-lb-pause]')) return this.togglePause();
                 if (b.matches('[data-lb-hint]')) return this.hint();
-                if (b.matches('[data-lb-sol]')) { this.g.showSol = !this.g.showSol; b.setAttribute('aria-pressed', String(this.g.showSol)); b.textContent = this.g.showSol ? '🙈 Cacher la solution' : '👁 Montrer la solution'; this.drawSol(this.g.showSol); this.save(); return; }
+                if (b.matches('[data-lb-sol]')) { this.g.showSol = !this.g.showSol; b.setAttribute('aria-pressed', String(this.g.showSol)); b.textContent = this.g.showSol ? i18n('🙈 Cacher la solution') : i18n('👁 Montrer la solution'); this.drawSol(this.g.showSol); this.save(); return; }
                 if (b.matches('[data-lb-print]')) return this.print();
                 if (b.matches('[data-lb-export]')) return this.exportMenu(b);
                 if (b.matches('[data-lb-again]')) return this.restart(false);
@@ -582,8 +584,8 @@
                 if (b.matches('[data-lb-edit]')) { setup = cleanCfg({...this.g.cfg, seed: L().newSeed()}); this.ctx.newGame?.(); return; }
                 if (b.dataset.lbPerson) { const A0 = A(); A0.state.currentPersonId = Number(b.dataset.lbPerson); A0.setModule?.('personnes'); return; }
                 if (b.matches('[data-lb-more]')) {
-                    const items = [{icon: '↺', label: 'Recommencer ce labyrinthe', run: () => this.restart(false)}, {icon: '🎲', label: 'Un autre labyrinthe (mêmes réglages)', run: () => this.restart(true)}, {icon: '✎', label: 'Changer les réglages', run: () => { setup = cleanCfg({...this.g.cfg, seed: L().newSeed()}); this.ctx.newGame?.(); }}, '-',
-                        {icon: '🗑', label: 'Supprimer cette partie', danger: true, run: () => this.remove()}];
+                    const items = [{icon: '↺', label: i18n('Recommencer ce labyrinthe'), run: () => this.restart(false)}, {icon: '🎲', label: i18n('Un autre labyrinthe (mêmes réglages)'), run: () => this.restart(true)}, {icon: '✎', label: i18n('Changer les réglages'), run: () => { setup = cleanCfg({...this.g.cfg, seed: L().newSeed()}); this.ctx.newGame?.(); }}, '-',
+                        {icon: '🗑', label: i18n('Supprimer cette partie'), danger: true, run: () => this.remove()}];
                     UI().menuAt ? UI().menuAt(b, items, {title: `« ${this.g.name} »`}) : this.remove();
                 }
             }, sig);
@@ -617,10 +619,10 @@
                 if (best < 0 || p.done || this.g.finished) return; this.moveTo(p, best);
             }
         }
-        togglePause() { if (this.g.finished) return; if (this.paused) { this.paused = false; this.say('C’est reparti !'); } else { this.pauseRun(); this.paused = true; this.say('⏸ En pause — Espace pour reprendre.'); } this.status(); this.save(); }
+        togglePause() { if (this.g.finished) return; if (this.paused) { this.paused = false; this.say(i18n('C’est reparti !')); } else { this.pauseRun(); this.paused = true; this.say(i18n('⏸ En pause — Espace pour reprendre.')); } this.status(); this.save(); }
         async remove() {
-            const ok = !A().confirmBox || await A().confirmBox('Le labyrinthe et la progression des joueurs seront supprimés.', {title: `Supprimer « ${this.g.name} » ?`, okLabel: 'Supprimer la partie', danger: true});
-            if (!ok) return; this.removed = true; clearTimeout(this.saveT); saveGames(games().filter(x => x.id !== this.g.id)); toast(`« ${this.g.name} » est supprimé.`); this.ctx.newGame?.();
+            const ok = !A().confirmBox || await A().confirmBox(i18n('Le labyrinthe et la progression des joueurs seront supprimés.'), {title: i18n('Supprimer « {name} » ?', {name: this.g.name}), okLabel: i18n('Supprimer la partie'), danger: true});
+            if (!ok) return; this.removed = true; clearTimeout(this.saveT); saveGames(games().filter(x => x.id !== this.g.id)); toast(i18n('« {name} » est supprimé.', {name: this.g.name})); this.ctx.newGame?.();
         }
     }
 
@@ -628,7 +630,7 @@
     function sidebarHtml(active) {
         const list = games(); if (!list.length) return '';
         return list.map(g => { const tot = g.stages?.length || 0, p = g.players?.[0] || {}, best = Math.min(...(g.players || []).filter(x => x.done).map(x => x.ms), Infinity);
-            return `<button class="side-button lb-side ${g.id === active ? 'is-active' : ''}" type="button" data-lb-open="${esc(g.id)}" title="Reprendre ce labyrinthe"><strong>🌀 ${esc(g.name)}</strong><small>Labyrinthe · ${esc(SHAPES.find(s => s[0] === g.cfg?.shape)?.[2] || '')}${tot ? ` · ${plural(tot, 'étape')}` : ''}</small><small>${g.finished ? `🏁 terminé${isFinite(best) ? ` en ${fmtTime(best)}` : ''}` : `⏱ ${fmtTime(p.ms)} · ${plural(p.steps || 0, 'pas', 'pas')}`}</small></button>`; }).join('');
+            return `<button class="side-button lb-side ${g.id === active ? 'is-active' : ''}" type="button" data-lb-open="${esc(g.id)}" title="${esc(i18n('Reprendre ce labyrinthe'))}"><strong>🌀 ${esc(g.name)}</strong><small>${esc(i18n('Labyrinthe'))} · ${esc(i18n(SHAPES.find(s => s[0] === g.cfg?.shape)?.[2] || ''))}${tot ? ` · ${esc(plural(tot, 'étape'))}` : ''}</small><small>${g.finished ? `🏁 ${esc(isFinite(best) ? i18n('terminé en {time}', {time: fmtTime(best)}) : i18n('terminé'))}` : `⏱ ${fmtTime(p.ms)} · ${esc(i18n('{n} pas', {n: Number(p.steps || 0) || 0, ctx: 'laby'}))}`}</small></button>`; }).join('');
     }
     function bindSidebar(content, ctx, signal) { content.querySelectorAll('[data-lb-open]').forEach(b => b.addEventListener('click', () => ctx.open?.(b.dataset.lbOpen), signal ? {signal} : undefined)); }
 

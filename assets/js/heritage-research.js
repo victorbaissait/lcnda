@@ -18,7 +18,8 @@
     const empty = (text, o) => A().empty(text, o);
     const S = () => A().state;
     const fmt = (n, d = 0) => Number(n || 0).toLocaleString('fr-FR', {maximumFractionDigits: d});
-    const plural = (n, one, many) => `${fmt(n)} ${n > 1 ? many : one}`;
+    const plural = (n, one, many) => (A().plural ? A().plural(n, one, many) : `${fmt(n)} ${n > 1 ? many : one}`); // 🌐 accord selon la langue (app-i18n.js)
+    const i18n = (text, vars) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(text, vars) : String(text ?? ''));
     const isCurrent = token => token === S().workspaceToken && S().module === 'enquetes';
     const dialog = opts => ext.openDialog(opts);
     const pname = p => p ? A().personName(p) : '';
@@ -130,7 +131,7 @@
             const f = {author: names(['auteur', 'graveur', 'photographe', 'illustrateur', 'autre']), editor: names(['dir']), translator: names(['trad']), title: i.title,
                 [d.kind === 'article' || d.kind === 'presse' ? 'journal' : 'booktitle']: d.container, [d.kind === 'these' ? 'school' : 'publisher']: d.publisher, address: d.place, year: year(i), volume: d.volume, number: d.issue,
                 pages: (d.pages || '').replace(/\s*[–-]+\s*/, '--'), edition: d.edition, isbn: d.isbn, doi: d.doi, url: d.url, language: d.language, abstract: d.abstract, keywords: (i.tags || []).join(', '),
-                note: [d.archive, d.call_number].filter(Boolean).join(', ')};
+                date: d.date && String(d.date) !== String(year(i)) ? d.date : '', urldate: d.accessed, archive: d.archive, callnumber: d.call_number, note: d.notes}; // archive et cote à part : relus tels quels (lib/atelier.php)
             const texEsc = (k, v) => ['url', 'doi'].includes(k) ? String(v).replace(/[{}]/g, '') : String(v).replace(/[{}]/g, '').replace(/([&%#_$])/g, '\\$1');
             return `@${BIB_TYPES[d.kind] || 'misc'}{${key},\n${Object.entries(f).filter(([, v]) => v).map(([k, v]) => `  ${k} = {${texEsc(k, v)}}`).join(',\n')}\n}`;
         }).join('\n\n') + '\n';
@@ -140,7 +141,7 @@
             const d = i.data || {}, L = [['TY', RIS_TYPES[d.kind] || 'GEN'], ['TI', i.title]];
             creatorsOf(i).forEach(c => L.push([{dir: 'ED', trad: 'A4', editeur: 'A3'}[c.role] || 'AU', [c.last, c.first].filter(Boolean).join(', ')]));
             const [sp, ep] = String(d.pages || '').split(/\s*[–-]+\s*/);
-            [['PY', year(i)], ['T2', d.container], ['PB', d.publisher], ['CY', d.place], ['VL', d.volume], ['IS', d.issue], ['SP', sp], ['EP', ep], ['SN', d.isbn], ['DO', d.doi], ['UR', d.url], ['LA', d.language], ['AB', d.abstract], ['AV', d.archive], ['CN', d.call_number]].forEach(([k, v]) => { if (v) L.push([k, v]); });
+            [['PY', year(i)], ['DA', d.date && String(d.date) !== String(year(i)) ? d.date : ''], ['Y2', d.accessed], ['ET', d.edition], ['N1', d.notes], ['T2', d.container], ['PB', d.publisher], ['CY', d.place], ['VL', d.volume], ['IS', d.issue], ['SP', sp], ['EP', ep], ['SN', d.isbn], ['DO', d.doi], ['UR', d.url], ['LA', d.language], ['AB', d.abstract], ['AV', d.archive], ['CN', d.call_number]].forEach(([k, v]) => { if (v) L.push([k, v]); });
             (i.tags || []).forEach(t => L.push(['KW', t]));
             L.push(['ER', '']);
             return L.map(([k, v]) => `${k}  - ${String(v).replace(/\n/g, ' ')}`).join('\n');
@@ -169,14 +170,14 @@
     /* ═══════════ Les projets ═══════════ */
     const firstNode = () => CFG.nav.find(x => !x.hidden)?.key || 'all';
     /** Choisir un fichier : son nom et son texte (ou null). */
-    const pickNamedFile = accept => new Promise(resolve => { const input = Object.assign(document.createElement('input'), {type: 'file', accept}); input.addEventListener('change', async () => { const f = input.files[0]; resolve(f ? {name: f.name, text: await f.text()} : null); }); input.click(); });
-    const importSummary = r => [plural(r.count, 'référence', 'références'), r.notes ? plural(r.notes, 'note', 'notes') : '', r.links ? plural(r.links, 'lien', 'liens') : '', r.folders ? plural(r.folders, 'dossier', 'dossiers') : ''].filter(Boolean).join(', ') + ` (${r.format})` + (r.files_skipped ? ` — ${plural(r.files_skipped, 'fichier joint', 'fichiers joints')} (PDF…) à rajouter à la main` : '');
+    const pickNamedFile = accept => new Promise(resolve => { const input = Object.assign(document.createElement('input'), {type: 'file', accept}); input.addEventListener('change', async () => { const f = input.files[0]; if (!f) return resolve(null); const SH = window.LCNDA_SHEET; resolve({name: f.name, text: SH?.decodeBytes ? SH.decodeBytes(new Uint8Array(await f.arrayBuffer())).text : await f.text()}); }); input.click(); }); // RIS d'un vieil EndNote en Windows-1252 : accents gardés
+    const importSummary = r => [plural(r.count, 'référence', 'références'), r.notes ? plural(r.notes, 'note', 'notes') : '', r.links ? plural(r.links, 'lien', 'liens') : '', r.folders ? plural(r.folders, 'dossier', 'dossiers') : ''].filter(Boolean).join(', ') + ` (${r.format})` + (r.files_skipped ? ' — ' + i18n('{n} (PDF…) à rajouter à la main', {n: plural(r.files_skipped, 'fichier joint', 'fichiers joints')}) : '');
     const IMPORT_ACCEPT = '.rdf,.json,.xml,.bib,.ris,.txt,application/json,text/xml,application/rdf+xml';
     function importProjectDialog(kinds) {
         dialog({eyebrow: 'IMPORTER UN PROJET', title: 'Depuis Zotero ou un autre logiciel', wide: true, submitLabel: 'Choisir le fichier et importer',
             body: `<p>Le projet est créé avec ses dossiers, ses références et ses notes.</p>
                 <ul class="h-at-howto"><li><b>Zotero</b> (avec les collections et sous-collections, qui deviennent des dossiers, et les notes) : clic droit sur une collection → <i>Exporter la collection…</i> → format <b>Zotero RDF</b>.</li>
-                <li><b>Zotero, Mendeley, Zettlr…</b> : export <b>CSL JSON</b> (.json).</li><li><b>EndNote</b> : <i>File → Export</i> → <b>XML</b>.</li><li>Tout logiciel de bibliographie : <b>BibTeX</b> (.bib) ou <b>RIS</b> (.ris).</li></ul>
+                <li><b>Zotero, Mendeley, Zettlr…</b> : export <b>CSL JSON</b> (.json).</li><li><b>EndNote</b> : <i>File → Export</i> → <b>XML</b>.</li><li>${i18n('Tout logiciel de bibliographie : <b>BibTeX</b> (.bib) ou <b>RIS</b> (.ris).')}</li></ul>
                 <p class="muted">Les fichiers PDF joints ne voyagent pas dans ces exports : ils sont comptés, et tu pourras les rajouter dans chaque référence.</p>
                 <div class="form-grid"><label>Nom du projet <small>(vide : le nom de la collection)</small><input name="title" placeholder="Les montreurs de vues d’optique"></label>
                 <label>Sorte de projet<select name="kind">${Object.entries(kinds).map(([k, l]) => `<option value="${k}" ${k === 'these' ? 'selected' : ''}>${KIND_ICONS[k] || ''} ${esc(l)}</option>`).join('')}</select></label></div>`,
@@ -191,6 +192,7 @@
             },
         });
     }
+    ext.atelierRefs = {toBibtex, toRis}; // pour les essais (aller-retour .bib / .ris : tests/test-imports-exports-3b.js)
     ext.atelier = async token => {
         CFG = loadCfg();
         const v = st();
@@ -209,10 +211,10 @@
         const card = p => { const words = Number(p.words), target = Number(p.target_words);
             const days = p.deadline ? Math.ceil((new Date(p.deadline + 'T12:00:00') - new Date()) / 864e5) : null;
             return `<article class="h-at-project ${['archived', 'done'].includes(p.status) ? 'is-archived' : p.status === 'paused' ? 'is-paused' : ''}" style="--at-color:${esc(p.color)}" data-at-open="${p.id}" tabindex="0">
-                <div class="h-at-project-icon">${esc(p.icon || KIND_ICONS[p.kind] || '📚')}</div><div class="h-at-project-body"><span class="eyebrow">${esc(data.kinds[p.kind] || '')}${['archived', 'done'].includes(p.status) ? ' · terminé' : p.status === 'paused' ? ' · en pause' : ''}</span><h3>${esc(p.title)}</h3>${p.subtitle ? `<p class="muted">${esc(p.subtitle)}</p>` : ''}
-                <p class="h-at-project-stats">${plural(Number(p.item_count), 'élément', 'éléments')} · ${plural(Number(p.folder_count), 'dossier', 'dossiers')}${Number(p.open_tasks) ? ` · ${plural(Number(p.open_tasks), 'tâche', 'tâches')} à faire` : ''}</p>
-                ${target ? `<div class="h-at-words"><div class="h-progress"><span style="width:${Math.min(100, Math.round(100 * words / target))}%"></span></div><small>${fmt(words)} mots sur ${fmt(target)}</small></div>` : words ? `<small>${fmt(words)} mots écrits</small>` : ''}
-                ${days !== null ? `<small class="${days < 0 ? 'h-at-late' : ''}">${days < 0 ? `échéance dépassée de ${plural(-days, 'jour', 'jours')}` : `rendu dans ${plural(days, 'jour', 'jours')}`}</small>` : ''}</div></article>`; };
+                <div class="h-at-project-icon">${esc(p.icon || KIND_ICONS[p.kind] || '📚')}</div><div class="h-at-project-body"><span class="eyebrow">${esc(data.kinds[p.kind] || '')}${['archived', 'done'].includes(p.status) ? ' · ' + i18n('terminé') : p.status === 'paused' ? ' · ' + i18n('en pause') : ''}</span><h3>${esc(p.title)}</h3>${p.subtitle ? `<p class="muted">${esc(p.subtitle)}</p>` : ''}
+                <p class="h-at-project-stats">${plural(Number(p.item_count), 'élément', 'éléments')} · ${plural(Number(p.folder_count), 'dossier', 'dossiers')}${Number(p.open_tasks) ? ` · ${plural(Number(p.open_tasks), 'tâche à faire', 'tâches à faire')}` : ''}</p>
+                ${target ? `<div class="h-at-words"><div class="h-progress"><span style="width:${Math.min(100, Math.round(100 * words / target))}%"></span></div><small>${i18n('{n} mots sur {total}', {n: Number(words || 0), total: Number(target || 0)})}</small></div>` : words ? `<small>${i18n('{n} mots écrits', {n: Number(words || 0)})}</small>` : ''}
+                ${days !== null ? `<small class="${days < 0 ? 'h-at-late' : ''}">${days < 0 ? i18n('échéance dépassée de {d}', {d: plural(-days, 'jour', 'jours')}) : i18n('rendu dans {d}', {d: plural(days, 'jour', 'jours')})}</small>` : ''}</div></article>`; };
         ws.innerHTML = `<section class="page collection-page h-at">${`<header class="page-header"><div><span class="eyebrow">ENQUÊTES</span><h2>📚 Atelier de recherche</h2><p>Pour écrire une thèse, un livre, un article ou préparer une exposition : un projet, ses dossiers et sous-dossiers sans limite (parties, chapitres, sources…), et tout ce que tu y ranges — références, archives, gravures, citations, notes, personnes de ta base, lieux, dates, tâches, brouillons. Bibliographie toute prête, chronologie, carte.</p></div><div class="page-actions"><button type="button" class="button" data-at-new>＋ Projet</button><button type="button" class="button secondary" data-at-importproject>⤒ Importer un projet (Zotero…)</button><button type="button" class="button secondary" data-at-settings title="Réglages → Atelier de recherche">⚙️ Réglages</button></div></header>`}
             ${projects.length ? `<div class="h-at-projects">${projects.map(card).join('')}</div>` : A().emptyState({icon: '🔬', text: 'Aucun projet pour l’instant', hint: 'Par exemple « Les montreurs de vues d’optique, XVIIIe-XIXe siècles ».', action: {label: '＋ Projet', attrs: 'data-at-new'}})}</section>`;
         ws.querySelectorAll('[data-at-new]').forEach(b => b.addEventListener('click', () => projectDialog(null, data.kinds)));
@@ -252,7 +254,7 @@
                 ext.atelier(++S().workspaceToken);
             },
             onDelete: isNew ? null : async () => {
-                if (!await A().confirmBox(`Supprimer « ${p.title} » avec tous ses dossiers et ses ${plural(P?.items.length || 0, 'élément', 'éléments')} ? C’est définitif.`, {title: 'Supprimer le projet', okLabel: 'Supprimer le projet'})) return false;
+                if (!await A().confirmBox(i18n('Supprimer « {name} » avec tous ses dossiers et ses {items} ? C’est définitif.', {name: p.title, items: plural(P?.items.length || 0, 'élément', 'éléments')}), {title: 'Supprimer le projet', okLabel: 'Supprimer le projet'})) return false;
                 await post('delete_atelier_project', {id: p.id}); st().project = 0; toast('Projet supprimé.'); ext.atelier(++S().workspaceToken);
             },
         });
@@ -386,7 +388,7 @@
         const sortTh = (col, label) => `<th><button type="button" class="h-lv-sort" data-at-sort="${col}">${label}${v.sort.col === col ? (v.sort.dir > 0 ? ' ▲' : ' ▼') : ''}</button></th>`;
         const trash = node === 'trash';
         return `${head}
-            ${folder ? `<details class="h-at-fnotes" ${folder.notes ? 'open' : ''}><summary>📝 Notes du dossier${folder.notes ? '' : ' <small class="muted">(vides)</small>'}</summary><textarea data-at-fnotes rows="4" placeholder="Ce que ce dossier doit contenir, le plan de la section, les idées…">${esc(folder.notes || '')}</textarea></details>` : ''}
+            ${folder ? `<details class="h-at-fnotes" ${folder.notes ? 'open' : ''}><summary>${i18n('📝 Notes du dossier')}${folder.notes ? '' : ` <small class="muted">${i18n('(vides)')}</small>`}</summary><textarea data-at-fnotes rows="4" placeholder="Ce que ce dossier doit contenir, le plan de la section, les idées…">${esc(folder.notes || '')}</textarea></details>` : ''}
             ${sub.length ? `<div class="h-at-subs">${sub.map(f => `<button type="button" class="h-at-sub" data-at-go="${f.id}" data-at-folder-drop="${f.id}">${esc(f.icon || CFG.folders.closed)} ${esc(f.name)}</button>`).join('')}</div>` : ''}
             <div class="h-at-toolbar">${trash ? (items.length ? '<button type="button" class="button small danger" data-at-emptytrash>Vider la corbeille</button>' : '') : `<div class="h-at-addmenu"><button type="button" class="button small" data-at-addmenu>＋ Ajouter ▾</button><div class="h-at-menu" hidden>${CFG.types.filter(t => !t.hidden).map(t => `<button type="button" data-at-add="${esc(t.key)}" title="${esc(t.help || '')}">${esc(t.icon)} ${esc(t.label)}</button>`).join('')}<button type="button" data-at-library title="Des numéros de revue, des articles, des livres, des chapitres, des documentaires et leurs moments">📚 Revues, livres, documentaires…</button><button type="button" class="h-at-menu-cfg" data-at-settings>⚙️ Réglages des sortes…</button></div></div>
                 <button type="button" class="button small secondary" data-at-import title="Zotero (.rdf), CSL JSON, EndNote (.xml), BibTeX (.bib), RIS (.ris)">⤒ Importer…</button>`}
@@ -405,7 +407,7 @@
                     <td>${esc(i.type === 'reference' ? creatorsOf(i).map(c => c.last || c.first).slice(0, 3).join(', ') : i.type === 'media' ? i.data.creator : i.type === 'quote' && i.data.source_id ? firstAuthor(P.byId.get(Number(i.data.source_id)) || {data: {}}) : '')}</td>
                     <td class="h-at-c-year">${esc(i.type === 'task' ? (i.data.due ? new Date(i.data.due + 'T12:00:00').toLocaleDateString('fr-FR') : '') : year(i) || (i.type === 'event' ? i.data.date : ''))}</td>
                     <td class="h-at-c-att">${i.media?.length ? fmt(i.media.length) : ''}</td></tr>`).join('')}</tbody></table>
-                <p class="muted h-at-hint">Clic : voir · double-clic : modifier · ⌘/Ctrl-clic ou Maj-clic : en choisir plusieurs · glisser sur un dossier pour l’y ranger${typeof node === 'number' ? ' (⌥/Alt en glissant : le garder aussi ici)' : ''}.</p>`
+                <p class="muted h-at-hint">${i18n(typeof node === 'number' ? 'Clic : voir · double-clic : modifier · ⌘/Ctrl-clic ou Maj-clic : en choisir plusieurs · glisser sur un dossier pour l’y ranger (⌥/Alt en glissant : le garder aussi ici).' : 'Clic : voir · double-clic : modifier · ⌘/Ctrl-clic ou Maj-clic : en choisir plusieurs · glisser sur un dossier pour l’y ranger.')}</p>`
                 : empty(trash ? 'La corbeille est vide.' : v.q || v.tags.length || v.type ? 'Rien ne correspond à ta recherche.' : folder ? 'Ce dossier est vide : « ＋ Ajouter », ou glisse ici des éléments d’un autre dossier.' : 'Rien ici pour l’instant.')}`;
     }
     const folderOptions = (selected = []) => { const out = []; const walk = (parent, depth) => kids(parent).forEach(f => { out.push(`<option value="${f.id}" ${selected.includes(Number(f.id)) ? 'selected' : ''}>${'  '.repeat(depth)}${esc(f.icon || '📁')} ${esc(f.name)}</option>`); walk(Number(f.id), depth + 1); }); walk(0, 0); return out.join(''); };
@@ -429,11 +431,11 @@
             return `<h3 class="h-at-ftitle">📊 Vue d’ensemble</h3>
                 ${p.description ? `<div class="h-at-problem"><span class="section-label">Problématique</span><p>${nl(p.description)}</p></div>` : ''}
                 <div class="h-at-stats">${byType.map(([k, c]) => `<button type="button" class="h-at-stat" data-at-typejump="${k}"><span>${ti(k)}</span><b>${fmt(c)}</b><small>${esc(c > 1 ? plabel(k) : tl(k))}</small></button>`).join('') || '<p class="muted">Le projet est vide : choisis un dossier à gauche, puis « ＋ Ajouter ».</p>'}</div>
-                ${days !== null ? `<p class="${days < 0 ? 'h-at-late' : ''}">📆 ${days < 0 ? `Date de rendu dépassée de ${plural(-days, 'jour', 'jours')}` : `Rendu le ${new Date(p.deadline + 'T12:00:00').toLocaleDateString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'})} : encore ${plural(days, 'jour', 'jours')}`}${Number(p.target_words) && days > 0 ? ` · ${fmt(Math.max(0, Math.ceil((Number(p.target_words) - Number(p.words)) / days)))} mots par jour pour tenir l’objectif` : ''}</p>` : ''}
+                ${days !== null ? `<p class="${days < 0 ? 'h-at-late' : ''}">📆 ${days < 0 ? i18n('Date de rendu dépassée de {d}', {d: plural(-days, 'jour', 'jours')}) : i18n('Rendu le {date} : encore {d}', {date: (window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? window.LCNDA_I18N.fmtDate(p.deadline + 'T12:00:00', {day: 'numeric', month: 'long', year: 'numeric'}) : new Date(p.deadline + 'T12:00:00').toLocaleDateString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'})), d: plural(days, 'jour', 'jours')})}${Number(p.target_words) && days > 0 ? ` · ${i18n('{n} mots par jour pour tenir l’objectif', {n: Math.max(0, Math.ceil((Number(p.target_words) - Number(p.words)) / days))})}` : ''}</p>` : ''}
                 <div class="h-at-cols">
                 ${refs.length ? `<section><h4>📖 Lectures</h4>${reads.map(([k, c]) => `<div class="h-at-bar"><span>${esc(READ[k])}</span><b style="width:${refs.length ? Math.round(100 * c / refs.length) : 0}%"></b><em>${fmt(c)}</em></div>`).join('')}<small class="muted">${plural(refs.length, 'référence', 'références')}</small></section>` : ''}
                 ${drafts.length ? `<section><h4>✍️ Brouillons</h4>${drafts.map(d => { const w = wc(d.data.text), t = Number(d.data.target); return `<button type="button" class="h-at-line" data-at-pick="${d.id}">${esc(d.title)} <small class="muted">${fmt(w)}${t ? ' / ' + fmt(t) : ''} mots · ${esc(STAGES[d.data.stage] || '')}</small></button>`; }).join('')}</section>` : ''}
-                ${tasks.length ? `<section><h4>✅ À faire</h4>${tasks.slice(0, 8).map(t => `<label class="checkbox-line h-at-task ${t.data.due && t.data.due < todayIso() ? 'h-at-late' : ''}"><input type="checkbox" data-at-taskdone="${t.id}"> ${esc(t.title)}${t.data.due ? ` <small>${new Date(t.data.due + 'T12:00:00').toLocaleDateString('fr-FR')}</small>` : ''}</label>`).join('')}${tasks.length > 8 ? `<button type="button" class="link-button" data-at-go="tasks">Toutes les tâches (${fmt(tasks.length)})</button>` : ''}</section>` : ''}
+                ${tasks.length ? `<section><h4>✅ À faire</h4>${tasks.slice(0, 8).map(t => `<label class="checkbox-line h-at-task ${t.data.due && t.data.due < todayIso() ? 'h-at-late' : ''}"><input type="checkbox" data-at-taskdone="${t.id}"> ${esc(t.title)}${t.data.due ? ` <small>${new Date(t.data.due + 'T12:00:00').toLocaleDateString('fr-FR')}</small>` : ''}</label>`).join('')}${tasks.length > 8 ? `<button type="button" class="link-button" data-at-go="tasks">${i18n('Toutes les tâches ({n})', {n: tasks.length})}</button>` : ''}</section>` : ''}
                 ${recent.length ? `<section><h4>🕘 Derniers changements</h4>${recent.map(i => `<button type="button" class="h-at-line" data-at-pick="${i.id}">${ti(i)} ${esc(i.title)}</button>`).join('')}</section>` : ''}</div>
                 <div data-rc-host data-rc-type="atelier_project" data-rc-key="${p.id}" data-rc-hide-empty></div>
                 ${widgetsInOverview(p.id) ? widgetsBox(p) : ''}`;
@@ -443,7 +445,7 @@
             const today = todayIso();
             return `<h3 class="h-at-ftitle">✅ Tâches</h3><div class="h-at-toolbar"><button type="button" class="button small" data-at-add="task">＋ Tâche</button></div>
                 ${tasks.map(t => `<div class="h-at-taskrow ${Number(t.data.done) ? 'is-done' : ''} ${!Number(t.data.done) && t.data.due && t.data.due < today ? 'h-at-late' : ''}"><input type="checkbox" data-at-taskdone="${t.id}" ${Number(t.data.done) ? 'checked' : ''}><button type="button" class="link-button" data-at-pick="${t.id}">${esc(t.title)}</button>
-                    <small class="muted">${[t.data.priority === 'haute' ? '🔴 haute' : t.data.priority === 'basse' ? 'basse' : '', t.data.due ? 'pour le ' + new Date(t.data.due + 'T12:00:00').toLocaleDateString('fr-FR') : '', t.folders.map(f => P.fById.get(f)?.name).filter(Boolean).join(', ')].filter(Boolean).join(' · ')}</small></div>`).join('') || empty('Aucune tâche.')}`;
+                    <small class="muted">${[t.data.priority === 'haute' ? i18n('🔴 haute') : t.data.priority === 'basse' ? i18n('basse') : '', t.data.due ? i18n('pour le {date}', {date: new Date(t.data.due + 'T12:00:00').toLocaleDateString('fr-FR')}) : '', t.folders.map(f => P.fById.get(f)?.name).filter(Boolean).join(', ')].filter(Boolean).join(' · ')}</small></div>`).join('') || empty('Aucune tâche.')}`;
         }
         if (node === 'timeline') {
             const dated = items.filter(i => dateKey(i) && ['event', 'reference', 'media', 'task', 'person'].includes(i.type)).sort((a, b) => dateKey(a).localeCompare(dateKey(b)));
@@ -457,7 +459,7 @@
             return `<h3 class="h-at-ftitle">👥 Personnes</h3><div class="h-at-toolbar"><button type="button" class="button small" data-at-add="person">＋ Personne</button></div>
                 ${rows.length || inEvents.size ? `<table class="data-table"><thead><tr><th>Personne</th><th>Rôle</th><th>Dates</th><th>Lieux</th></tr></thead><tbody>${rows.map(i => { const b = i.data.person_id ? people[i.data.person_id] : null;
                     return `<tr><td>${b ? `<button type="button" class="table-link" data-h-person="${b.id}">${esc(pname(b))}</button> <small class="muted">dans ta base</small>` : `<button type="button" class="link-button" data-at-pick="${i.id}">${esc(i.title)}</button>`}</td><td>${esc(i.data.role)}</td><td>${esc(i.data.dates || (b ? [b.birth_year, b.death_year].filter(Boolean).join('–') : ''))}</td><td>${esc(i.data.places)}</td></tr>`; }).join('')}
-                    ${[...inEvents.entries()].filter(([pid]) => !rows.some(r => Number(r.data.person_id) === Number(pid))).map(([pid, evs]) => `<tr><td><button type="button" class="table-link" data-h-person="${pid}">${esc(pname(people[pid]))}</button></td><td class="muted">dans ${plural(evs.length, 'événement', 'événements')}</td><td></td><td></td></tr>`).join('')}</tbody></table>` : empty('Aucune personne : « ＋ Personne » (de ta base, ou quelqu’un d’autre : un montreur, un graveur, un éditeur…).')}`;
+                    ${[...inEvents.entries()].filter(([pid]) => !rows.some(r => Number(r.data.person_id) === Number(pid))).map(([pid, evs]) => `<tr><td><button type="button" class="table-link" data-h-person="${pid}">${esc(pname(people[pid]))}</button></td><td class="muted">${i18n('dans {n}', {n: plural(evs.length, 'événement', 'événements')})}</td><td></td><td></td></tr>`).join('')}</tbody></table>` : empty('Aucune personne : « ＋ Personne » (de ta base, ou quelqu’un d’autre : un montreur, un graveur, un éditeur…).')}`;
         }
         if (node === 'map') {
             const pts = [];
@@ -485,7 +487,7 @@
         const v = st();
         if (v.sel.length !== 1) {
             if (typeof v.node === 'number' && v.sel.length === 0) { const f = P.fById.get(v.node); const all = new Set(descendants(v.node)); const n = live().filter(i => i.folders.some(x => all.has(x))).length;
-                return `<div class="h-at-dempty"><p class="h-at-big">${esc(f.icon || CFG.folders.open)}</p><h3>${esc(f.name)}</h3><p class="muted">${plural(n, 'élément', 'éléments')} avec les sous-dossiers</p><button type="button" class="button small secondary" data-at-fedit="${f.id}">Renommer, icône, couleur…</button></div>`; }
+                return `<div class="h-at-dempty"><p class="h-at-big">${esc(f.icon || CFG.folders.open)}</p><h3>${esc(f.name)}</h3><p class="muted">${i18n('{n} avec les sous-dossiers', {n: plural(n, 'élément', 'éléments')})}</p><button type="button" class="button small secondary" data-at-fedit="${f.id}">Renommer, icône, couleur…</button></div>`; }
             return `<div class="h-at-dempty"><p class="h-at-big">📚</p><p class="muted">${v.sel.length > 1 ? plural(v.sel.length, 'élément choisi', 'éléments choisis') : 'Choisis un élément pour le voir ici.'}</p></div>`;
         }
         const i = P.byId.get(v.sel[0]); if (!i) return '';
@@ -522,7 +524,7 @@
         }
         const related = (d.related || []).map(id => P.byId.get(Number(id))).filter(Boolean);
         const backlinks = live().filter(x => (x.data?.related || []).map(Number).includes(Number(i.id)) && !related.includes(x));
-        return `<div class="h-at-dhead"><span class="eyebrow">${ti(i)} ${esc(tl(i))}${Number(i.trashed) ? ' · dans la corbeille' : ''}</span><h3>${esc(i.title)}</h3>
+        return `<div class="h-at-dhead"><span class="eyebrow">${ti(i)} ${esc(tl(i))}${Number(i.trashed) ? ' · ' + i18n('dans la corbeille') : ''}</span><h3>${esc(i.title)}</h3>
             <div class="h-at-dactions">${Number(i.trashed) ? `<button type="button" class="button small" data-at-restore="${i.id}">Restaurer</button>` : `<button type="button" class="button small" data-at-edit="${i.id}">✎ Modifier</button>${i.type === 'reference' ? `<button type="button" class="button small secondary" data-at-copy="${i.id}" title="Copier la référence">📋 Citer</button>` : ''}<button type="button" class="button small secondary" data-at-dup="${i.id}" title="Dupliquer">⧉</button><button type="button" class="button small secondary danger" data-at-trash="${i.id}" title="Mettre à la corbeille">🗑</button>`}</div></div>
             ${body}
             ${i.media?.length && ext.thumbs ? `<h4>📎 Fichiers</h4>${ext.thumbs('at-' + i.id, i.media)}` : ''}
@@ -553,7 +555,7 @@
             } };
         const folderIds = item ? item.folders : (typeof v.node === 'number' ? [v.node] : []);
         let savedId = 0;
-        dialog({eyebrow: (isNew ? 'AJOUTER · ' : 'MODIFIER · ') + def.label.toUpperCase(), title: isNew ? `${def.icon} ${def.label}` : item.title, wide: true, submitLabel: 'Enregistrer',
+        dialog({eyebrow: (isNew ? i18n('AJOUTER') + ' · ' : i18n('MODIFIER') + ' · ') + def.label.toUpperCase(), title: isNew ? `${def.icon} ${def.label}` : item.title, wide: true, submitLabel: 'Enregistrer',
             body: `<div class="form-grid"><label class="span-2">${esc(def.titleLabel || 'Titre')}<input name="title" value="${esc(item?.title || '')}" ${def.fields?.some(f => f.type === 'text') ? '' : 'required'}></label>${(def.fields || []).map(fieldHtml).join('')}
                 <label class="span-2">Notes<textarea name="notes" rows="3">${esc(d.notes || '')}</textarea></label>
                 <label class="span-2">Étiquettes <small>(séparées par des virgules)</small><input name="tags" value="${esc((item?.tags || []).join(', '))}"></label>
@@ -593,7 +595,7 @@
         let chosen = item ? {key: d.key, label: d.label, extra: d.extra} : null, pages = [];
         const blocks = (A().defaultPersonBlocks || []).filter(([k]) => !['person_exports'].includes(k));
         dialog({eyebrow: 'VENANT DU LOGICIEL', title: item ? 'Modifier' : 'Ajouter un élément du logiciel', wide: true, submitLabel: item ? 'Enregistrer' : 'Ajouter',
-            body: `<p class="muted">L’élément reste <b>vivant</b> : il montre toujours ce qu’il y a dans le logiciel, et « ↗ Ouvrir » y mène.</p>
+            body: `<p class="muted">${i18n('L’élément reste <b>vivant</b> : il montre toujours ce qu’il y a dans le logiciel, et « ↗ Ouvrir » y mène.')}</p>
                 <div class="form-grid"><label>Quoi ?<select name="kind">${Object.entries(APP_KINDS).map(([k, [ic, l]]) => `<option value="${k}" ${(d.kind || 'person') === k ? 'selected' : ''}>${ic} ${esc(l)}</option>`).join('')}</select></label>
                 <label data-app-qbox>Chercher<input type="search" data-app-q value="${esc(item ? d.label : '')}" placeholder="Nom, titre, commune…"></label></div>
                 <div data-app-pk hidden></div>
@@ -673,7 +675,7 @@
                 const ev = (r.events || []).slice(0, 8);
                 html = `<p><b>${esc(A().personName(p))}</b> ${esc(A().years ? A().years(p) : '')}</p>${d.kind === 'person_block' ? `<p class="muted">Bloc montré : <b>${esc((A().defaultPersonBlocks.find(b => b[0] === d.sub) || [, d.sub])[1])}</b> (↗ Ouvrir mène à ce bloc)</p>` : ''}
                     ${ev.length ? `<ul class="h-at-applist">${ev.map(e => `<li>${esc(e.type_label || 'Événement')} — ${esc(e.date_text || e.year || '')}${e.place_name ? ' · ' + esc(e.place_name) : ''}</li>`).join('')}</ul>` : ''}`; }
-            else if (d.kind === 'village') { const v = await api('village', {key: d.key}); html = `<p><b>${esc(v.name)}</b> ${esc([v.county, v.country].filter(Boolean).join(', '))}</p><p class="muted">${[v.people_count && `${plural(v.people_count, 'personne', 'personnes')} de la famille`, (v.baptemes || v.mariages || v.deces) && `${plural((v.baptemes || 0) + (v.mariages || 0) + (v.deces || 0), 'acte', 'actes')} (baptêmes, mariages, décès)`, (v.families || []).length && `familles : ${(v.families || []).slice(0, 6).map(f => f.name || f.surname || f).join(', ')}`].filter(Boolean).join(' · ')}</p>`; }
+            else if (d.kind === 'village') { const v = await api('village', {key: d.key}); html = `<p><b>${esc(v.name)}</b> ${esc([v.county, v.country].filter(Boolean).join(', '))}</p><p class="muted">${[v.people_count && i18n('{n} de la famille', {n: plural(v.people_count, 'personne', 'personnes')}), (v.baptemes || v.mariages || v.deces) && i18n('{n} (baptêmes, mariages, décès)', {n: plural((v.baptemes || 0) + (v.mariages || 0) + (v.deces || 0), 'acte', 'actes')}), (v.families || []).length && i18n('familles : {list}', {list: (v.families || []).slice(0, 6).map(f => f.name || f.surname || f).join(', ')})].filter(Boolean).join(' · ')}</p>`; }
             else if (d.kind === 'recueil') { const r = await api('recueil', {id: d.key}); const imgs = new Map(r.images.map(x => [x.id, x]));
                 let pg = r.pages; if (d.page_from) { const a = r.pages.find(p => p.id === Number(d.page_from)), b = r.pages.find(p => p.id === Number(d.page_to)) || a; if (a) pg = r.pages.filter(p => p.num >= Math.min(a.num, b.num) && p.num <= Math.max(a.num, b.num)); }
                 html = `<p><b>${esc(r.recueil.title)}</b> · ${plural(pg.length, 'page', 'pages')}</p><div class="h-rc-for-strip">${pg.slice(0, 12).map(p => { const im = imgs.get(p.shown_image_id); return `<button type="button" class="h-rc-thumb" data-open-recueil="${d.key}" data-recueil-page="${p.id}" title="Page ${p.num}">${im ? `<img src="media/${encodeURIComponent(im.thumbnail)}" alt="">` : ''}<small>${p.num}</small></button>`; }).join('')}</div>`; }
@@ -682,7 +684,7 @@
             else if (d.kind === 'workbook') { const r = await api('workbook', {id: d.key}); const sh0 = r.data?.sheets?.[0], S = window.LCNDA_SHEET, wb = S ? S.normalize(r.data) : null, m = wb ? S.matrix(wb, new S.Calc(wb), 0, null, {display: true}).slice(0, 8).map(row => row.slice(0, 6)) : [];
                 html = `<p><b>🧾 ${esc(r.name)}</b> · ${plural((r.data?.sheets || []).length, 'feuille', 'feuilles')}${sh0 ? ` (${esc((r.data.sheets || []).map(x => x.name).slice(0, 5).join(', '))})` : ''}</p>${m.length ? `<div class="xl-prev"><table><tbody>${m.map((row, i) => `<tr>${row.map(v => `<${i ? 'td' : 'th'}>${esc(v)}</${i ? 'td' : 'th'}>`).join('')}</tr>`).join('')}</tbody></table></div>` : ''}`; }
             else html = `<p class="muted">${esc(d.extra || '')}</p>`;
-        } catch (e) { html = `<p class="muted">Aperçu impossible : ${esc(e.message)}</p>`; }
+        } catch (e) { html = `<p class="muted">${i18n('Aperçu impossible : {err}', {err: esc(e.message)})}</p>`; }
         if (box.isConnected) box.innerHTML = html;
     }
     function itemDialog(type, item = null, preset = {}) {
@@ -735,7 +737,7 @@
         }
         const folderIds = item ? item.folders : (preset.folders || (typeof v.node === 'number' ? [v.node] : []));
         let savedId = 0; // si l'envoi d'un fichier échoue après l'enregistrement, réessayer ne crée pas de doublon
-        dialog({eyebrow: (isNew ? 'AJOUTER · ' : 'MODIFIER · ') + tl(type).toUpperCase(), title: isNew ? `${ti(type)} ${tl(type)}` : item.title, wide: true, submitLabel: 'Enregistrer',
+        dialog({eyebrow: (isNew ? i18n('AJOUTER') + ' · ' : i18n('MODIFIER') + ' · ') + tl(type).toUpperCase(), title: isNew ? `${ti(type)} ${tl(type)}` : item.title, wide: true, submitLabel: 'Enregistrer',
             body: `<div class="form-grid">${fields}
                 ${type === 'note' ? '' : area('notes', 'Notes', d.notes, 3, 'span-2', 'Ce que j’en pense, comment je vais m’en servir…')}
                 <label class="span-2">Étiquettes <small>(séparées par des virgules)</small><input name="tags" value="${esc((item?.tags || preset.tags || []).join(', '))}" list="h-at-taglist2" placeholder="optique, colportage, foires"><datalist id="h-at-taglist2">${[...new Set(live().flatMap(x => x.tags || []))].map(t => `<option value="${esc(t)}">`).join('')}</datalist></label>
@@ -778,7 +780,7 @@
     }
     function folderDialog(folder, parentId = 0) {
         const isNew = !folder;
-        dialog({eyebrow: 'DOSSIER', title: isNew ? (parentId ? `Sous-dossier de « ${P.fById.get(parentId)?.name} »` : 'Nouveau dossier') : 'Modifier le dossier', submitLabel: isNew ? 'Créer' : 'Enregistrer',
+        dialog({eyebrow: 'DOSSIER', title: isNew ? (parentId ? i18n('Sous-dossier de « {name} »', {name: P.fById.get(parentId)?.name}) : 'Nouveau dossier') : 'Modifier le dossier', submitLabel: isNew ? 'Créer' : 'Enregistrer',
             body: `<div class="form-grid"><label class="span-2">Nom<input name="name" required value="${esc(folder?.name || '')}" placeholder="Chapitre 3 : les images montrées"></label>
                 <label>Icône <small>(facultatif)</small><input name="icon" value="${esc(folder?.icon || '')}" maxlength="16" placeholder="📁" class="h-be-icon"></label><label>Couleur<input type="color" name="color" value="${esc(folder?.color || '#0066cc')}"></label>
                 <label class="span-2">Dans<select name="parent_id"><option value="0">— à la racine du projet —</option>${(() => { const ban = folder ? new Set(descendants(Number(folder.id))) : new Set(); const out = []; const walk = (p, depth) => kids(p).forEach(f => { if (!ban.has(Number(f.id))) { out.push(`<option value="${f.id}" ${Number(folder ? folder.parent_id || 0 : parentId) === Number(f.id) ? 'selected' : ''}>${'  '.repeat(depth)}${esc(f.name)}</option>`); walk(Number(f.id), depth + 1); } }); walk(0, 0); return out.join(''); })()}</select></label>
@@ -798,7 +800,7 @@
             },
             onDelete: isNew ? null : async () => {
                 const sub = descendants(Number(folder.id)).length - 1;
-                if (!await A().confirmBox(`Supprimer le dossier « ${folder.name} »${sub ? ` et ses ${plural(sub, 'sous-dossier', 'sous-dossiers')}` : ''} ? Les éléments ne sont pas supprimés : ils restent dans le projet (dans « Non classés » s’ils ne sont rangés nulle part ailleurs).`, {title: 'Supprimer le dossier', okLabel: 'Supprimer le dossier'})) return false;
+                if (!await A().confirmBox(i18n(sub ? 'Supprimer le dossier « {name} » et ses {sub} ? Les éléments ne sont pas supprimés : ils restent dans le projet (dans « Non classés » s’ils ne sont rangés nulle part ailleurs).' : 'Supprimer le dossier « {name} » ? Les éléments ne sont pas supprimés : ils restent dans le projet (dans « Non classés » s’ils ne sont rangés nulle part ailleurs).', {name: folder.name, sub: plural(sub, 'sous-dossier', 'sous-dossiers')}), {title: 'Supprimer le dossier', okLabel: 'Supprimer le dossier'})) return false;
                 await post('delete_atelier_folder', {id: folder.id}); if (st().node === Number(folder.id)) st().node = 'all'; await reload();
             },
         });
@@ -810,7 +812,7 @@
         const slug = String(P.project.title).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9]+/g, '-').toLowerCase().slice(0, 60) || 'projet';
         dialog({eyebrow: 'EXPORTER', title: P.project.title, body: `<div class="h-at-exports">
             <button type="button" class="button secondary" data-x="md">📄 Plan et textes (.md)<small>Les dossiers dans l’ordre, avec leurs notes, brouillons, citations et références : à ouvrir dans un traitement de texte</small></button>
-            <button type="button" class="button secondary" data-x="bib">📚 Références (.bib)<small>${plural(refs.length, 'référence', 'références')}, pour un gestionnaire de bibliographie ou LaTeX</small></button>
+            <button type="button" class="button secondary" data-x="bib">📚 Références (.bib)<small>${i18n('{n}, pour un gestionnaire de bibliographie ou LaTeX', {n: plural(refs.length, 'référence', 'références')})}</small></button>
             <button type="button" class="button secondary" data-x="ris">📚 Références (.ris)<small>Le format accepté par presque tous les logiciels de bibliographie</small></button>
             <button type="button" class="button secondary" data-x="docx">📝 Plan et textes pour Word (.docx)<small>Avec de vrais titres de chapitres : s’ouvre dans Word, Pages, LibreOffice ; prêt à mettre en page</small></button>
             <button type="button" class="button secondary" data-x="print">🖨 Imprimer ou enregistrer en PDF<small>Le plan et les textes, mis en page, avec la bibliographie à la fin</small></button>
@@ -831,7 +833,7 @@
                 if (x === 'print') { printProject(); return; }
                 const allRows = () => [['Sorte', 'Titre', 'Auteurs', 'Date', 'Dossiers', 'Étiquettes', 'Référence'], ...live().map(i => [tl(i), i.title, i.type === 'reference' ? creatorsOf(i).map(c => [c.last, c.first].filter(Boolean).join(' ')).join(' ; ') : '', year(i) || i.data.date || '', i.folders.map(f => pathOf(f).map(y => y.name).join(' › ')).join(' ; '), (i.tags || []).join(', '), i.type === 'reference' ? cite(i, false) : ''])];
                 if (x === 'csv') { const q = s => '"' + (A().csvSafe || (x => String(x ?? '')))(s).replace(/"/g, '""') + '"'; /* pas de formule glissée dans un tableur */ ext.downloadText(slug + '.csv', '﻿' + allRows().map(r => r.map(q).join(';')).join('\n'), 'text/csv'); }
-                if (x === 'sheet') { dl.close(); const rows = allRows().map(r => r.map(v => (typeof v === 'string' && /^[='+]/.test(v) ? "'" + v : v))); /* une formule glissée reste du texte */ if (ext.openRowsInSheet) ext.openRowsInSheet({name: `${P.project.title} — éléments`, rows}); else { const S = window.LCNDA_SHEET, wb = S.newWorkbook(); wb.sheets[0].cells = S.rowsToCells(rows); wb.sheets[0].name = 'Éléments'; ext.openWorkbook({data: wb, name: `${P.project.title} — éléments`}); } return; }
+                if (x === 'sheet') { dl.close(); const rows = allRows().map(r => r.map(v => (typeof v === 'string' && /^[='+]/.test(v) ? "'" + v : v))); /* une formule glissée reste du texte */ if (ext.openRowsInSheet) ext.openRowsInSheet({name: i18n('{name} — éléments', {name: P.project.title}), rows}); else { const S = window.LCNDA_SHEET, wb = S.newWorkbook(); wb.sheets[0].cells = S.rowsToCells(rows); wb.sheets[0].name = 'Éléments'; ext.openWorkbook({data: wb, name: i18n('{name} — éléments', {name: P.project.title})}); } return; }
                 toast('Fichier prêt.');
             })),
         });
@@ -858,7 +860,7 @@
     /** Un projet complet reçu apporte ses sortes d'éléments à soi : on les ajoute aux réglages si elles manquent. */
     function mergeImportedTypes(text) {
         if (!String(text).slice(0, 200).includes('lcnda-atelier-projet')) return;
-        try { const doc = JSON.parse(text); let n = 0; (doc.custom_types || []).forEach(t => { if (t?.key && !CFG.types.some(x => x.key === t.key)) { CFG.types.push({...t, custom: true}); n++; } }); if (n) { saveCfg(); toast(`${n > 1 ? `${fmt(n)} sortes d’élément ajoutées` : '1 sorte d’élément ajoutée'} aux réglages de l’Atelier.`); } } catch (_) {}
+        try { const doc = JSON.parse(text); let n = 0; (doc.custom_types || []).forEach(t => { if (t?.key && !CFG.types.some(x => x.key === t.key)) { CFG.types.push({...t, custom: true}); n++; } }); if (n) { saveCfg(); toast(plural(n, 'sorte d’élément ajoutée aux réglages de l’Atelier.', 'sortes d’élément ajoutées aux réglages de l’Atelier.')); } } catch (_) {}
     }
     /** Les blocs du document (titres, paragraphes, citations, références) dans l'ordre du plan. */
     function projectBlocks() {
@@ -979,12 +981,12 @@
             if (q('[data-at-untag]')) return act('untag', v.sel, {tag: q('[data-at-untag]').dataset.atUntag});
             if (q('[data-at-unfile]')) return act('remove', v.sel, {folder_id: Number(q('[data-at-unfile]').dataset.atUnfile)});
             if (q('[data-at-unrel]')) { const i = P.byId.get(v.sel[0]); const rel = (i.data.related || []).filter(x => Number(x) !== Number(q('[data-at-unrel]').dataset.atUnrel)); return saveData(i, {related: rel}); }
-            if (q('[data-at-emptytrash]')) { const ids = P.items.filter(i => Number(i.trashed)).map(i => Number(i.id)); if (await A().confirmBox(`Supprimer définitivement ${plural(ids.length, 'élément', 'éléments')} ?`, {title: 'Vider la corbeille', okLabel: 'Supprimer définitivement'})) { await act('delete', ids); v.sel = []; } return; }
+            if (q('[data-at-emptytrash]')) { const ids = P.items.filter(i => Number(i.trashed)).map(i => Number(i.id)); if (await A().confirmBox(i18n('Supprimer définitivement {n} ?', {n: plural(ids.length, 'élément', 'éléments')}), {title: 'Vider la corbeille', okLabel: 'Supprimer définitivement'})) { await act('delete', ids); v.sel = []; } return; }
             if (q('[data-at-unsel]')) { v.sel = []; return renderProject(S().workspaceToken, true); }
             if (q('[data-at-bulk]')) {
                 const a = q('[data-at-bulk]').dataset.atBulk;
                 if (a === 'tag') { const tg = await A().askText({title: 'Étiquette', message: 'Étiquette à ajouter aux éléments choisis :', okLabel: 'Ajouter'}); if (tg?.trim()) await act('tag', v.sel, {tag: tg.trim()}); return; }
-                if (a === 'delete' && !await A().confirmBox(`Supprimer définitivement ${plural(v.sel.length, 'élément', 'éléments')} ?`, {title: 'Supprimer définitivement', okLabel: 'Supprimer définitivement'})) return;
+                if (a === 'delete' && !await A().confirmBox(i18n('Supprimer définitivement {n} ?', {n: plural(v.sel.length, 'élément', 'éléments')}), {title: 'Supprimer définitivement', okLabel: 'Supprimer définitivement'})) return;
                 await act(a, v.sel, {folder_id: typeof v.node === 'number' ? v.node : 0}); if (['trash', 'delete', 'restore', 'remove'].includes(a)) { v.sel = []; renderProject(S().workspaceToken, true); }
                 return;
             }
@@ -1044,7 +1046,7 @@
             if (tg.dataset.atDrop === 'starred') return act('star', d.items);
             if (tg.dataset.atDrop === 'unfiled') { if (await act('unfile', d.items)) toast('Sorti de tous les dossiers (« Non classés »).'); return; }
             const folder = Number(id), moving = typeof v.node === 'number' && v.node !== folder && !e.altKey;
-            if (await act(moving ? 'move' : 'add', d.items, {folder_id: folder, from: moving ? v.node : 0, from_deep: moving && v.deep ? 1 : 0})) toast(`${moving ? 'Déplacé' : 'Rangé'} dans « ${P.fById.get(folder)?.name} ».`);
+            if (await act(moving ? 'move' : 'add', d.items, {folder_id: folder, from: moving ? v.node : 0, from_deep: moving && v.deep ? 1 : 0})) toast(i18n(moving ? 'Déplacé dans « {name} ».' : 'Rangé dans « {name} ».', {name: P.fById.get(folder)?.name}));
         });
     }
     async function saveData(i, patch) {
@@ -1096,7 +1098,7 @@
         return {nav, types, plans, folders};
     }
     const cfgSummary = c => { const n = c || {}; const mine = list => (list || []).filter(x => x.custom).length; const hidden = list => (list || []).filter(x => x.hidden).length;
-        return [`menu : ${mine(n.nav) ? plural(mine(n.nav), 'vue à moi', 'vues à moi') : 'pas de vue à moi'}${hidden(n.nav) ? `, ${plural(hidden(n.nav), 'masqué', 'masqués')}` : ''}`, `${plural(mine(n.types), 'sorte à moi', 'sortes à moi')}${hidden(n.types) ? `, ${plural(hidden(n.types), 'masquée', 'masquées')}` : ''}`, `dossiers ${n.folders?.closed || '📁'}${n.folders?.open || '📂'}`, `${plural(mine(n.plans), 'plan à moi', 'plans à moi')}`].join(' · '); };
+        return [`${i18n('menu : {what}', {what: mine(n.nav) ? plural(mine(n.nav), 'vue à moi', 'vues à moi') : i18n('pas de vue à moi')})}${hidden(n.nav) ? `, ${plural(hidden(n.nav), 'masqué', 'masqués')}` : ''}`, `${plural(mine(n.types), 'sorte à moi', 'sortes à moi')}${hidden(n.types) ? `, ${plural(hidden(n.types), 'masquée', 'masquées')}` : ''}`, i18n('dossiers {icons}', {icons: `${n.folders?.closed || '📁'}${n.folders?.open || '📂'}`}), `${plural(mine(n.plans), 'plan à moi', 'plans à moi')}`].join(' · '); };
     const applyCfg = settings => { try { localStorage.setItem(CFG_KEY, JSON.stringify(cleanCfg(settings))); } catch (_) {} CFG = loadCfg(); };
     // ⤓ un fichier « lcnda-reglage-atelier-<nom>.json » (le format commun des réglages enregistrés)
     const downloadCfg = (name, settings) => A().exportSettingFile ? A().exportSettingFile('atelier', name, {settings: cleanCfg(settings)}) : ext.downloadText(`reglages-atelier-${String(name).normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^A-Za-z0-9]+/g, '-').toLowerCase().slice(0, 50) || 'lcnda'}.lcnda-atelier.json`,
@@ -1106,7 +1108,7 @@
         const walk = parent => kids(parent).map(f => ({name: f.name, icon: f.icon || '', children: walk(Number(f.id))}));
         const tree = walk(0);
         if (!tree.length) return toast('Ce projet n’a pas de dossiers.', 'error');
-        CFG.plans.push({key: uid('p_'), label: 'Plan de « ' + P.project.title.slice(0, 50) + ' »', tree, custom: true}); saveCfg();
+        CFG.plans.push({key: uid('p_'), label: i18n('Plan de « {name} »', {name: P.project.title.slice(0, 50)}), tree, custom: true}); saveCfg();
         toast('Plan enregistré : il est proposé à la création d’un projet (Réglages → Atelier pour le renommer).');
     };
     /** « Copier pour le modifier » une entrée de l'app : la vue équivalente en critères… */
@@ -1143,14 +1145,14 @@
             ${sec === 'plans' ? '' : iconInput('data-cfg="icon"', x.icon)}<input data-cfg="label" value="${esc(x.label)}" class="h-cfg-label" aria-label="Nom">
             ${x.key === 'trash' ? '<small class="muted">toujours visible</small>' : `<label class="checkbox-line"><input type="checkbox" data-cfg="hidden" ${x.hidden ? 'checked' : ''}> masquer</label>`}
             ${x.builtin ? '<small class="muted h-cfg-tag">de l’app</small>' : '<small class="h-cfg-tag is-mine">à moi</small>'}${extra}</div>`;
-        const copyBtn = (attr, what) => `<button type="button" class="button small secondary h-cfg-copy" ${attr} title="Faire ${what} à moi à partir de celle-ci, pour la modifier (l’originale ne change pas)"><span aria-hidden="true">⧉</span><span class="h-cfg-copy-text"> Copier pour le modifier</span></button>`;
+        const copyBtn = (attr, what) => `<button type="button" class="button small secondary h-cfg-copy" ${attr} title="${i18n('Faire {what} à moi à partir de celle-ci, pour la modifier (l’originale ne change pas)', {what: i18n(what)})}"><span aria-hidden="true">⧉</span><span class="h-cfg-copy-text"> Copier pour le modifier</span></button>`;
         const navExtra = x => `<span class="h-cfg-actions">${x.key === 'trash' ? '' : copyBtn('data-cfg-view-copy', 'une vue')}${x.custom ? `<button type="button" class="button small secondary" data-cfg-view-edit>Filtre…</button><button type="button" class="icon-button danger" data-cfg-del title="Supprimer">🗑</button>` : ''}</span>`;
         const typeExtra = x => `<span class="h-cfg-actions">${copyBtn('data-cfg-type-copy', 'une sorte d’élément')}${x.custom ? `<button type="button" class="button small secondary" data-cfg-type-edit>Champs (${(x.fields || []).length})…</button><button type="button" class="icon-button danger" data-cfg-del title="Supprimer">🗑</button>` : ''}</span>`;
         const planExtra = x => `<small class="muted">${plural(countTree(x.tree), 'dossier', 'dossiers')}</small><span class="h-cfg-actions">${x.custom ? `<button type="button" class="button small secondary" data-cfg-plan-edit>Modifier…</button><button type="button" class="icon-button danger" data-cfg-del title="Supprimer">🗑</button>` : copyBtn('data-cfg-plan-copy', 'un plan')}</span>`;
         ws.innerHTML = `<section class="page collection-page h-cfg">${`<header class="page-header"><div><span class="eyebrow">RÉGLAGES</span><h2>📚 Atelier de recherche</h2><p>Les réglages de l’Atelier (Enquêtes → Atelier) : l’ordre et les émojis du menu d’un projet, tes propres vues, les sortes d’éléments (et les tiennes, avec leurs champs), les émojis des dossiers et tes plans de départ. Tout est enregistré tout de suite.</p></div><div class="page-actions"><button type="button" class="button secondary" data-cfg-open>Ouvrir l’Atelier</button></div></header>`}
-            <section class="maintenance-panel"><div class="h-cfg-head"><h3>1. Le menu de gauche d’un projet <small class="muted">et mes vues (filtres)</small></h3><button type="button" class="button small secondary" data-cfg-reset-sec="nav" title="Remettre cette partie comme au départ">↺ Remettre comme au départ</button></div><p class="muted">Monte, descends, change l’émoji ou le nom, masque ce dont tu ne te sers pas (la Corbeille reste toujours). Une <b>vue à toi</b> regroupe les éléments selon tes critères (ex. « 📕 À lire » : les références à lire ; « 🖼 Gravures » : les images et références « gravure »).</p>
+            <section class="maintenance-panel"><div class="h-cfg-head"><h3>1. Le menu de gauche d’un projet <small class="muted">et mes vues (filtres)</small></h3><button type="button" class="button small secondary" data-cfg-reset-sec="nav" title="Remettre cette partie comme au départ">↺ Remettre comme au départ</button></div><p class="muted">${i18n('Monte, descends, change l’émoji ou le nom, masque ce dont tu ne te sers pas (la Corbeille reste toujours). Une <b>vue à toi</b> regroupe les éléments selon tes critères (ex. « 📕 À lire » : les références à lire ; « 🖼 Gravures » : les images et références « gravure »).')}</p>
                 <div class="h-cfg-list">${CFG.nav.map((x, i, l) => row('nav', x, i, l, navExtra(x))).join('')}</div><button type="button" class="button small" data-cfg-view-add>＋ Ma propre vue (un filtre)</button></section>
-            <section class="maintenance-panel"><div class="h-cfg-head"><h3>2. Les sortes d’éléments <small class="muted">ce qu’on ajoute avec « ＋ Ajouter », avec ses champs</small></h3><button type="button" class="button small secondary" data-cfg-reset-sec="types" title="Remettre cette partie comme au départ">↺ Remettre comme au départ</button></div><p class="muted">L’ordre du menu « ＋ Ajouter » et de « Toutes les sortes ». Une sorte masquée ne se propose plus, mais ce qui existe déjà reste visible. <b>Ta propre sorte</b> a les champs que tu veux (ex. « 🎞 Plaque de lanterne » : sujet, fabricant, dimensions, état, lieu de conservation…).</p>
+            <section class="maintenance-panel"><div class="h-cfg-head"><h3>2. Les sortes d’éléments <small class="muted">ce qu’on ajoute avec « ＋ Ajouter », avec ses champs</small></h3><button type="button" class="button small secondary" data-cfg-reset-sec="types" title="Remettre cette partie comme au départ">↺ Remettre comme au départ</button></div><p class="muted">${i18n('L’ordre du menu « ＋ Ajouter » et de « Toutes les sortes ». Une sorte masquée ne se propose plus, mais ce qui existe déjà reste visible. <b>Ta propre sorte</b> a les champs que tu veux (ex. « 🎞 Plaque de lanterne » : sujet, fabricant, dimensions, état, lieu de conservation…).')}</p>
                 <div class="h-cfg-list">${CFG.types.map((x, i, l) => row('types', x, i, l, typeExtra(x))).join('')}</div><button type="button" class="button small" data-cfg-type-add>＋ Ma propre sorte d’élément (avec mes champs : texte, lien, date…)</button></section>
             <section class="maintenance-panel"><div class="h-cfg-head"><h3>3. Les dossiers</h3><button type="button" class="button small secondary" data-cfg-reset-sec="folders" title="Remettre cette partie comme au départ">↺ Remettre comme au départ</button></div><p class="muted">L’émoji des dossiers qui n’en ont pas. Chaque dossier peut aussi avoir le sien : dans un projet, survole le dossier puis ✎.</p>
                 <div class="form-grid"><label>Dossier fermé ${iconInput('data-cfg-folder="closed"', CFG.folders.closed)}</label><label>Dossier ouvert ${iconInput('data-cfg-folder="open"', CFG.folders.open)}</label></div></section>
@@ -1162,21 +1164,21 @@
         const again = () => ext.maintenance.atelier(S().workspaceToken);
         const putProfile = (name, settings, at = -1) => { const l = profiles(), i = l.findIndex(x => x.name === name), it = {name, saved: new Date().toISOString(), settings}; if (i >= 0) l[i] = it; else if (at >= 0) l.splice(at, 0, it); else l.push(it); saveProfiles(l); };
         const frame = window.LCNDA_UI.presetsFrame({id: 'atelier', what: 'tous ces réglages (menu, sortes d’éléments, dossiers, plans)', quietApply: true,
-            list: () => profiles().map(x => ({name: String(x?.name || 'Sans nom'), date: [x?.saved ? new Date(x.saved).toISOString() : '', x?.from ? `reçus de ${x.from}` : ''].filter(Boolean).join(' · ')})),
-            apply: async i => { const x = profiles()[i]; if (!await A().confirmBox(`Appliquer les réglages « ${x.name} » ?\n\nLes réglages actuels de l’Atelier seront remplacés (enregistre-les avant si tu veux les garder). Tes projets ne changent pas.`, {title: 'Appliquer des réglages', okLabel: 'Appliquer les réglages'})) return false; applyCfg(x.settings); toast(`Réglages « ${x.name} » appliqués.`); again(); return false; },
+            list: () => profiles().map(x => ({name: String(x?.name || 'Sans nom'), date: [x?.saved ? new Date(x.saved).toISOString() : '', x?.from ? i18n('reçus de {name}', {name: x.from}) : ''].filter(Boolean).join(' · ')})),
+            apply: async i => { const x = profiles()[i]; if (!await A().confirmBox(i18n('Appliquer les réglages « {name} » ?', {name: x.name}) + '\n\n' + i18n('Les réglages actuels de l’Atelier seront remplacés (enregistre-les avant si tu veux les garder). Tes projets ne changent pas.'), {title: 'Appliquer des réglages', okLabel: 'Appliquer les réglages'})) return false; applyCfg(x.settings); toast(i18n('Réglages « {name} » appliqués.', {name: x.name})); again(); return false; },
             save: name => putProfile(name, cleanCfg(readCfg())),
             replace: i => { const l = profiles(); l[i] = {...l[i], saved: new Date().toISOString(), settings: cleanCfg(readCfg())}; saveProfiles(l); },
             rename: (i, name) => { const l = profiles(); l[i].name = name; saveProfiles(l); },
-            duplicate: i => { const l = profiles(), x = l[i], nm = window.LCNDA_UI.freeName(x.name, l.map(y => y.name)); putProfile(nm, JSON.parse(JSON.stringify(x.settings || {})), i + 1); toast(`Copie « ${nm} » créée.`); },
+            duplicate: i => { const l = profiles(), x = l[i], nm = window.LCNDA_UI.freeName(x.name, l.map(y => y.name)); putProfile(nm, JSON.parse(JSON.stringify(x.settings || {})), i + 1); toast(i18n('Copie « {name} » créée.', {name: nm})); },
             exportOne: i => { const x = profiles()[i]; downloadCfg(x.name, x.settings); return false; },
-            remove: i => { const l = profiles(), x = l[i]; A().undoLocalChange(`Réglages « ${x.name} » supprimés`, [PROFILES_KEY], () => { l.splice(i, 1); saveProfiles(l); }, () => { if (A().state?.module === 'maintenance') again(); }); },
+            remove: i => { const l = profiles(), x = l[i]; A().undoLocalChange(i18n('Réglages « {name} » supprimés', {name: x.name}), [PROFILES_KEY], () => { l.splice(i, 1); saveProfiles(l); }, () => { if (A().state?.module === 'maintenance') again(); }); },
             importOne: async () => {
                 // le format commun, et aussi les fichiers d'avant (« lcnda-atelier-reglages »)
                 const got = await A().importSettingFile('atelier', {names: profiles().map(x => x.name), check: d => d.settings && typeof d.settings === 'object',
                     legacy: j => j?.type === 'lcnda-atelier-reglages' && j.settings && typeof j.settings === 'object' ? {nom: str(j.name, 60) || 'Réglages reçus', donnees: {settings: j.settings, author: j.author}} : null});
                 if (!got) return false;
                 const l = profiles(); l.push({name: got.nom, saved: new Date().toISOString(), from: str(got.donnees.author, 60), settings: cleanCfg(got.donnees.settings)}); saveProfiles(l);
-                toast(`Réglages « ${got.nom} » importés : clique sur « Appliquer » pour les utiliser.`); }});
+                toast(i18n('Réglages « {name} » importés : clique sur « Appliquer » pour les utiliser.', {name: got.nom})); }});
         ws.querySelector('[data-presets-slot]').replaceWith(frame);
         const listOf = sec => CFG[sec];
         const at = el => { const r = el.closest('[data-cfg-i]'); return r ? [r.dataset.cfgSec, Number(r.dataset.cfgI)] : [null, -1]; };
@@ -1196,7 +1198,7 @@
             const t = e.target, [sec, i] = at(t);
             if (t.closest('[data-cfg-emoji]')) { const input = t.closest('.h-at-iconfield').querySelector('input'); return ext.pickEmoji?.(input); }
             if (t.closest('[data-cfg-move]')) { const l = listOf(sec), j = i + Number(t.closest('[data-cfg-move]').dataset.cfgMove); if (j >= 0 && j < l.length) { [l[i], l[j]] = [l[j], l[i]]; saveCfg(); again(); } return; }
-            if (t.closest('[data-cfg-del]')) { const x = listOf(sec)[i]; A().undoLocalChange(`« ${x.label} » supprimé${sec === 'types' ? ' (les éléments déjà faits gardent leurs valeurs)' : ''}`, [CFG_KEY], () => { listOf(sec).splice(i, 1); saveCfg(); }, () => { CFG = loadCfg(); if (A().state?.module === 'maintenance') again(); }); again(); return; }
+            if (t.closest('[data-cfg-del]')) { const x = listOf(sec)[i]; A().undoLocalChange(i18n(sec === 'types' ? '« {name} » supprimé (les éléments déjà faits gardent leurs valeurs)' : '« {name} » supprimé', {name: x.label}), [CFG_KEY], () => { listOf(sec).splice(i, 1); saveCfg(); }, () => { CFG = loadCfg(); if (A().state?.module === 'maintenance') again(); }); again(); return; }
             if (t.closest('[data-cfg-view-add]')) return viewDialog(null);
             if (t.closest('[data-cfg-view-edit]')) return viewDialog(CFG.nav[i]);
             if (t.closest('[data-cfg-type-add]')) return typeDialog(null);
@@ -1233,14 +1235,14 @@
                 });
                 try { localStorage.setItem(CFG_KEY, JSON.stringify(raw)); } catch (_) {}
                 CFG = loadCfg();
-                toast(keep && mine.length ? `Remis comme au départ ; ${plural(mine.length, 'élément à toi gardé', 'éléments à toi gardés')} à la fin.` : 'Remis comme au départ.');
+                toast(keep && mine.length ? i18n('Remis comme au départ ; {n} à la fin.', {n: plural(mine.length, 'élément à toi gardé', 'éléments à toi gardés')}) : i18n('Remis comme au départ.'));
                 again();
             };
-            if (!mine.length) { if (await A().confirmBox(`Remettre ${what} comme au départ ?`, {title: 'Comme au départ', okLabel: 'Remettre comme au départ', danger: true})) doIt(false); return; }
-            dialog({eyebrow: 'RÉINITIALISER', title: `Remettre ${what} comme au départ`, submitLabel: 'Garder mes éléments (mis à la fin)',
+            if (!mine.length) { if (await A().confirmBox(i18n('Remettre {what} comme au départ ?', {what: i18n(what)}), {title: 'Comme au départ', okLabel: 'Remettre comme au départ', danger: true})) doIt(false); return; }
+            dialog({eyebrow: 'RÉINITIALISER', title: i18n('Remettre {what} comme au départ', {what: i18n(what)}), submitLabel: 'Garder mes éléments (mis à la fin)',
                 body: `<p>Les réglages de l’app reviennent comme au départ : ordre, noms, émojis, éléments masqués.</p>
-                    <p>Tu as aussi créé toi-même :</p><ul class="h-cfg-mine">${mine.map(({sec, x}) => `<li>${esc(x.icon || '')} <b>${esc(x.label)}</b> <small class="muted">(${KIND[sec]})</small></li>`).join('')}</ul>
-                    <p><b>Garder mes éléments</b> : ils restent, placés à la fin${secs.includes('nav') ? ' (dans le menu, juste avant la Corbeille)' : ''}.<br><b>Supprimer</b> : ils sont supprimés aussi${secs.includes('types') ? ' (les éléments déjà faits dans tes projets gardent leurs valeurs)' : ''}.</p>`,
+                    <p>Tu as aussi créé toi-même :</p><ul class="h-cfg-mine">${mine.map(({sec, x}) => `<li>${esc(x.icon || '')} <b>${esc(x.label)}</b> <small class="muted">(${i18n(KIND[sec])})</small></li>`).join('')}</ul>
+                    <p>${i18n(secs.includes('nav') ? '<b>Garder mes éléments</b> : ils restent, placés à la fin (dans le menu, juste avant la Corbeille).' : '<b>Garder mes éléments</b> : ils restent, placés à la fin.')}<br>${i18n(secs.includes('types') ? '<b>Supprimer</b> : ils sont supprimés aussi (les éléments déjà faits dans tes projets gardent leurs valeurs).' : '<b>Supprimer</b> : ils sont supprimés aussi.')}</p>`,
                 onSubmit: () => doIt(true),
                 onDelete: () => doIt(false),
             });
@@ -1268,10 +1270,10 @@
                 <label class="checkbox-line h-vr-not" title="Inverser : tout sauf ça"><input type="checkbox" data-vr="not" ${r.not ? 'checked' : ''}> pas</label>
                 <span class="h-rb-tools"><button type="button" class="icon-button" data-vr-move="-1" title="Monter" ${i === 0 ? 'disabled' : ''}>↑</button><button type="button" class="icon-button" data-vr-move="1" title="Descendre" ${i === rules.length - 1 ? 'disabled' : ''}>↓</button><button type="button" class="icon-button danger" data-vr-del title="Retirer">🗑</button></span></div>`;
             dialog({eyebrow: 'MA PROPRE VUE', title: copy ? 'Copie à modifier' : isNew ? 'Nouvelle vue' : view.label, wide: true, submitLabel: 'Enregistrer',
-                body: `<div class="h-cfg-explain"><b>Une vue est un filtre</b> : une entrée du menu de gauche qui montre les éléments du projet répondant à tes critères (ex. « 📕 À lire »). Elle n’a pas de champs à remplir.
-                    ${isNew && !copy ? '<br>Tu veux plutôt <b>une nouvelle sorte d’élément</b>, avec tes champs à remplir (texte libre, lien internet, date, personne, lieu…) ? <button type="button" class="link-button" data-vr-totype>Créer une sorte d’élément à la place →</button>' : ''}</div>
+                body: `<div class="h-cfg-explain">${i18n('<b>Une vue est un filtre</b> : une entrée du menu de gauche qui montre les éléments du projet répondant à tes critères (ex. « 📕 À lire »). Elle n’a pas de champs à remplir.')}
+                    ${isNew && !copy ? '<br>' + i18n('Tu veux plutôt <b>une nouvelle sorte d’élément</b>, avec tes champs à remplir (texte libre, lien internet, date, personne, lieu…) ?') + ' <button type="button" class="link-button" data-vr-totype>' + i18n('Créer une sorte d’élément à la place →') + '</button>' : ''}</div>
                     <div class="form-grid"><label>Nom<input name="label" required value="${esc(view?.label || '')}" placeholder="À lire"></label><label>Émoji${iconInput('name="icon"', view?.icon || '🔎')}</label></div>
-                    <h4>Les critères</h4><p class="muted">Clique sur un critère pour l’ajouter, puis règle-le. Range-les avec ↑ ↓ ; « pas » garde tout <i>sauf</i> ce critère. Sans critère : tout le projet.</p>
+                    <h4>Les critères</h4><p class="muted">${i18n('Clique sur un critère pour l’ajouter, puis règle-le. Range-les avec ↑ ↓ ; « pas » garde tout <i>sauf</i> ce critère. Sans critère : tout le projet.')}</p>
                     <div class="h-be-palette">${Object.entries(VIEW_RULES).map(([k, [icon, label]]) => `<button type="button" class="button small secondary" data-vr-add="${k}">${icon} ${esc(label)}</button>`).join('')}</div>
                     <div class="h-tabs h-vr-match"><label class="checkbox-line"><input type="radio" name="match" value="all" ${f.match !== 'any' ? 'checked' : ''}> tous les critères (ET)</label><label class="checkbox-line"><input type="radio" name="match" value="any" ${f.match === 'any' ? 'checked' : ''}> au moins un (OU)</label></div>
                     <div class="h-vr-list" data-vr-list></div>
@@ -1312,7 +1314,7 @@
                 <input data-cf="placeholder" value="${esc(f.placeholder || '')}" placeholder="exemple grisé (facultatif)"><label class="checkbox-line"><input type="checkbox" data-cf="required" ${f.required ? 'checked' : ''}> obligatoire</label>
                 <span class="h-rb-tools"><button type="button" class="icon-button" data-cf-move="-1">↑</button><button type="button" class="icon-button" data-cf-move="1">↓</button><button type="button" class="icon-button danger" data-cf-del>🗑</button></span></div>`;
             dialog({eyebrow: 'MA PROPRE SORTE D’ÉLÉMENT', title: copy ? 'Copie à modifier' : isNew ? 'Nouvelle sorte' : type.label, wide: true, submitLabel: 'Enregistrer',
-                body: `<div class="h-cfg-explain"><b>Une sorte d’élément</b> s’ajoute dans un projet avec « ＋ Ajouter », comme une référence ou une note, avec <b>tes champs</b> : texte court ou long, lien internet, date, nombre, liste de choix, case à cocher, personne de ta base, lieu sur la carte. Elle apparaît aussi dans « Toutes les sortes ».</div>
+                body: `<div class="h-cfg-explain">${i18n('<b>Une sorte d’élément</b> s’ajoute dans un projet avec « ＋ Ajouter », comme une référence ou une note, avec <b>tes champs</b> : texte court ou long, lien internet, date, nombre, liste de choix, case à cocher, personne de ta base, lieu sur la carte. Elle apparaît aussi dans « Toutes les sortes ».')}</div>
                     <div class="form-grid"><label>Nom<input name="label" required value="${esc(def.label)}" placeholder="Plaque de lanterne magique"></label><label>Émoji${iconInput('name="icon"', def.icon)}</label>
                     <label>Nom du champ titre<input name="titleLabel" value="${esc(def.titleLabel || 'Titre')}" placeholder="Titre, Sujet, Nom…"></label><label>Aide dans le menu <small>(facultatif)</small><input name="help" value="${esc(def.help || '')}" placeholder="Une plaque vue ou achetée"></label></div>
                     <h4>Les champs</h4><div data-cf-list>${def.fields.map(fieldRow).join('')}</div><button type="button" class="button small secondary" data-cf-add>＋ Champ</button>`,

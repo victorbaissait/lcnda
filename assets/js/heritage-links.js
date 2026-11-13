@@ -22,7 +22,8 @@
     const card = (...args) => A().card(...args);
     const S = () => A().state;
     const fmt = (n, d = 0) => Number(n || 0).toLocaleString('fr-FR', {maximumFractionDigits: d});
-    const plural = (n, one, many) => `${fmt(n)} ${n > 1 ? many : one}`;
+    const plural = (n, one, many) => (window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? window.LCNDA_I18N.plural(n, one, many) : `${fmt(n)} ${n > 1 ? many : one}`);
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const isCurrent = token => token === S().workspaceToken && ['listes', 'maintenance'].includes(S().module);
     const personLink = (id, name, extra = '') => id ? `<button type="button" class="table-link" data-h-person="${Number(id)}">${esc(name || 'Personne')}</button>${extra ? ` <small>${esc(extra)}</small>` : ''}` : esc(name || '');
     // K5 : l’en-tête unique (app-pages.js) ; le sur-titre est l’endroit où l’on est, calculé d’après le menu
@@ -50,7 +51,7 @@
         if (!name) return;
         try {
             const r = await api('save_saved_search', {}, {method: 'POST', body: {name, criteria}});
-            toast(`Recherche « ${name} » enregistrée (${plural(r.result.count, 'fiche', 'fiches')}).`);
+            toast(i18n('Recherche « {nm} » enregistrée ({count}).', {nm: name, count: plural(r.result.count, 'fiche', 'fiches')}));
             after?.();
         } catch (error) { toast(error.message, 'error'); }
     }
@@ -65,10 +66,10 @@
             if (seq !== questionSeq) return; // une question plus récente a été posée entre-temps
             S().hQuestion = q;
             // Homonymes : toutes les fiches qui portent ce nom, pour répondre pour une autre
-            const homonyms = (r.homonyms || []).length > 1 ? `<div class="h-question-homonyms"><p><strong>${r.homonyms.length} fiches portent ce nom :</strong></p><ul>${r.homonyms.map(h => `<li>${personLink(h.id, h.name, h.life ? `(${h.life})` : '')} <small class="muted">fiche n°${h.id}</small> ${h.chosen ? '<span class="collection-kind">réponse ci-dessous</span>' : `<button type="button" class="button small secondary" data-h-question-person="${h.id}">Répondre pour celle-ci</button>`}</li>`).join('')}</ul></div>` : '';
+            const homonyms = (r.homonyms || []).length > 1 ? `<div class="h-question-homonyms"><p><strong>${i18n('{n} fiches portent ce nom :', {n: r.homonyms.length})}</strong></p><ul>${r.homonyms.map(h => `<li>${personLink(h.id, h.name, h.life ? `(${h.life})` : '')} <small class="muted">${i18n('fiche n°{id}', {id: String(h.id)})}</small> ${h.chosen ? `<span class="collection-kind">${i18n('réponse ci-dessous')}</span>` : `<button type="button" class="button small secondary" data-h-question-person="${h.id}">Répondre pour celle-ci</button>`}</li>`).join('')}</ul></div>` : '';
             // plusieurs villes du même nom ont des actes : laquelle ?
             const placeChoices = (r.place_choices || []).length ? `<div class="h-question-homonyms"><ul>${r.place_choices.map(c => `<li><strong>${esc(c.label)}</strong> <small class="muted">${plural(c.n, 'acte', 'actes')}</small> <button type="button" class="button small secondary" data-h-question-place="${esc(c.key)}">Répondre pour celle-ci</button></li>`).join('')}</ul></div>` : '';
-            out.innerHTML = `<p class="h-understood">J’ai compris : ${r.understood.map(u => `<span class="collection-kind">${esc(u)}</span>`).join(' ')}</p>${homonyms}${placeChoices}
+            out.innerHTML = `<p class="h-understood">${i18n('J’ai compris :')} ${r.understood.map(u => `<span class="collection-kind">${esc(u)}</span>`).join(' ')}</p>${homonyms}${placeChoices}
                 ${r.answer ? `<p class="h-question-answer">${esc(r.answer)}</p>` : ''}
                 ${(r.facts || []).length ? `<dl class="h-question-facts">${r.facts.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>` : ''}
                 ${(r.rows || []).length ? `<table class="data-table h-question-rank"><tbody>${r.rows.map((row, i) => `<tr><td class="muted">${i + 1}</td><td>${!row.group && row.ids.length && row.ids.length <= 2 ? personLink(row.ids[0], row.label) : esc(row.label)}${(row.group ? row.ids.length : row.ids.length > 2) ? ` <button type="button" class="link-button" data-h-question-ids="${row.ids.join(',')}">voir</button>` : ''}</td><td>${esc(row.value)}</td></tr>`).join('')}</tbody></table>` : ''}
@@ -146,8 +147,8 @@
         const shown = (ext.flagShown ? ext.flagShown(p, 'show_language_block') : Number(p.show_language_block)) || L.own.length || L.inherited.length;
         if (!shown || ext.flagSettings?.().hidden.includes('show_language_block')) return '';
         const events = Object.entries(detail.heritage?.event_languages || {}).map(([id, langs]) => { const ev = (detail.events || []).find(e => Number(e.id) === Number(id)); return ev ? `<li>${esc(ev.type_label)} ${esc(ev.date_text || '')} : ${langs.map(l => langChip(l)).join(' ')}</li>` : ''; }).join('');
-        const body = `${L.own.length ? `<div class="h-lang-list">${L.own.map(l => `<div class="h-lang-row">${langChip(l)}${Number(l.to_descendants) ? ' <small class="muted">→ transmise à la descendance</small>' : ''}${l.note ? ` <small>${esc(l.note)}</small>` : ''}${editOnly(tools(`data-h-lang-edit="${l.id}"`, `data-h-lang-delete="${l.id}"`, 'cette langue'))}</div>`).join('')}</div>` : ''}
-            ${L.inherited.length ? `<p class="h-lang-inherited">Par sa famille : ${L.inherited.map(l => `${langChip(l)} <small class="muted">de ${personLink(l.person_id, l.from_name)}${l.generations > 1 ? `, ${l.generations} générations au-dessus` : ''}</small>`).join(' · ')}</p>` : ''}
+        const body = `${L.own.length ? `<div class="h-lang-list">${L.own.map(l => `<div class="h-lang-row">${langChip(l)}${Number(l.to_descendants) ? ` <small class="muted">${i18n('→ transmise à la descendance')}</small>` : ''}${l.note ? ` <small>${esc(l.note)}</small>` : ''}${editOnly(tools(`data-h-lang-edit="${l.id}"`, `data-h-lang-delete="${l.id}"`, 'cette langue'))}</div>`).join('')}</div>` : ''}
+            ${L.inherited.length ? `<p class="h-lang-inherited">${i18n('Par sa famille :')} ${L.inherited.map(l => `${langChip(l)} <small class="muted">${l.generations > 1 ? i18n('de {who}, {n} générations au-dessus', {who: personLink(l.person_id, l.from_name), n: l.generations}) : i18n('de {who} (langue)', {who: personLink(l.person_id, l.from_name)})}</small>`).join(' · ')}</p>` : ''}
             ${!L.own.length && !L.inherited.length ? '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔤</span><span class="empty-line-text">Aucune langue notée.</span></p>' : ''}
             ${events ? `<h5>Langue des actes</h5><ul class="h-lang-events">${events}</ul>` : ''}
             ${editOnly(`<label class="ui-toggle h-lang-noinherit"><input type="checkbox" data-h-lang-noinherit="${p.id}" ${Number(L.no_inherited) ? 'checked' : ''}><i></i>Ne pas reprendre les langues de ses ancêtres</label>`)}`;
@@ -179,7 +180,7 @@
     /** Petit éditeur de langues (actes et documents) : ajout et retrait enregistrés tout de suite. */
     function recordLanguagesEditor(container, type, id, langs = []) {
         const draw = () => {
-            container.innerHTML = `<div class="h-lang-editor"><span class="section-label">Langue(s) ${type === 'event' ? 'de l’acte' : 'du document'}</span> ${langs.map((l, i) => `${langChip(l, ` <button type="button" class="h-lang-x" data-i="${i}" aria-label="Retirer">×</button>`)}`).join(' ') || '<small class="muted">non précisée</small>'}
+            container.innerHTML = `<div class="h-lang-editor"><span class="section-label">${type === 'event' ? i18n('Langue(s) de l’acte') : i18n('Langue(s) du document')}</span> ${langs.map((l, i) => `${langChip(l, ` <button type="button" class="h-lang-x" data-i="${i}" aria-label="Retirer">×</button>`)}`).join(' ') || `<small class="muted">${i18n('non précisée')}</small>`}
                 <span class="h-lang-add"><input list="h-lang-list" placeholder="latin, flamand…" class="h-lang-input">${certaintySelect('certain', 'h_cert')}<button type="button" class="button small secondary" data-add>Ajouter</button></span>${langDatalist()}</div>`;
             container.querySelectorAll('.h-lang-x').forEach(b => b.addEventListener('click', () => { langs.splice(Number(b.dataset.i), 1); save(); }));
             container.querySelector('[data-add]').addEventListener('click', () => { const v = container.querySelector('.h-lang-input').value.trim(); if (!v) return; langs.push({language: v.toLowerCase(), certainty: container.querySelector('[name=h_cert]').value}); save(); });
@@ -232,7 +233,7 @@
         const map = ext.miniMap ? ext.miniMap(points, [], {height: 420, emptyText: 'Aucun lieu de naissance connu pour les personnes dont la langue est notée.'}) : '';
         A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', 'Langues de la famille', 'La langue parlée par chacun ou par une branche (flamand, picard, breton, occitan, alsacien, yiddish, italien…). Elle éclaire les noms mal orthographiés par un curé qui ne comprenait pas la langue de la famille, et indique dans quelle langue chercher : dans le Nord, une partie des registres et des actes notariés est en flamand. Une langue notée sur une personne vaut aussi pour sa descendance, sauf refus explicite sur une fiche.')}
             ${langs.length ? `<div class="h-lang-legend">${langs.map((l, i) => `<span><i style="background:${langColors[i % langColors.length]}"></i>${esc(l.language)} <small>(${l.people.length})</small></span>`).join('')}</div>${map}
-            ${langs.map((l, i) => `<details class="maintenance-panel"><summary><strong style="color:${langColors[i % langColors.length]}">${esc(l.language)}</strong> — ${plural(l.people.length, 'personne', 'personnes')} (${l.declared} déclarée${l.declared > 1 ? 's' : ''})</summary><table class="data-table"><tbody>${l.people.slice(0, 300).map(p => `<tr><td>${personLink(p.person.id, A().personName(p.person), A().years(p.person))}</td><td><small>${esc(p.how)}${p.certainty !== 'certain' ? ` · ${esc(p.certainty)}` : ''}</small></td><td><small>${esc(p.place?.place || '')}</small></td></tr>`).join('')}</tbody></table></details>`).join('')}`
+            ${langs.map((l, i) => `<details class="maintenance-panel"><summary><strong style="color:${langColors[i % langColors.length]}">${esc(l.language)}</strong> — ${plural(l.people.length, 'personne', 'personnes')} (${plural(l.declared, 'déclarée', 'déclarées')})</summary><table class="data-table"><tbody>${l.people.slice(0, 300).map(p => `<tr><td>${personLink(p.person.id, A().personName(p.person), A().years(p.person))}</td><td><small>${esc(p.how)}${p.certainty !== 'certain' ? ` · ${esc(p.certainty)}` : ''}</small></td><td><small>${esc(p.place?.place || '')}</small></td></tr>`).join('')}</tbody></table></details>`).join('')}`
             : A().emptyState({text: 'Aucune langue notée pour l’instant', icon: '🗣️', hint: 'Sur une fiche, coche « Langues » dans IDENTITÉ → Modifier la personne, puis « ＋ Langue ».'})}
             <h3>Langue des actes et des documents</h3>${(data.records || []).length ? `<table class="data-table"><thead><tr><th>Langue</th><th>Acte ou document</th><th>Certitude</th></tr></thead><tbody>${data.records.map(r => `<tr><td>${esc(r.language)}</td><td>${r.entity_type === 'event' ? '📜 ' : '📄 '}${r.person_id ? personLink(r.person_id, r.label) : esc(r.label || '')}</td><td>${esc(data.certainties?.[r.certainty] || r.certainty)}</td></tr>`).join('')}</tbody></table>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Aucune. La langue d’un acte se note dans la fenêtre de l’événement ; celle d’un document dans sa transcription (Listes → Noms cités).</span></p>'}</section>`;
         A().bindTableLinks();
@@ -261,7 +262,7 @@
             if (dialog && mentionBox.parentElement !== dialog) dialog.appendChild(mentionBox); else if (!dialog && mentionBox.parentElement !== document.body) document.body.appendChild(mentionBox);
             const r = ta.getBoundingClientRect();
             mentionBox.style.left = `${r.left + 8}px`; mentionBox.style.top = `${Math.min(r.bottom, window.innerHeight - 220)}px`;
-            mentionBox.innerHTML = `<small class="muted">Relier à une fiche :</small>${rows.map(p => `<button type="button" data-id="${p.id}" data-name="${esc(A().personName(p))}">${esc(A().personName(p))} <small>${esc(A().years(p))}</small></button>`).join('')}`;
+            mentionBox.innerHTML = `<small class="muted">${i18n('Relier à une fiche :')}</small>${rows.map(p => `<button type="button" data-id="${p.id}" data-name="${esc(A().personName(p))}">${esc(A().personName(p))} <small>${esc(A().years(p))}</small></button>`).join('')}`;
             mentionBox.hidden = false;
             mentionBox.onmousedown = e => {
                 const b = e.target.closest('button[data-id]');
@@ -295,7 +296,7 @@
             while ((m = MENTION_RE.exec(text))) {
                 frag.append(text.slice(last, m.index));
                 const b = document.createElement('button');
-                b.type = 'button'; b.className = 'table-link h-mention'; b.dataset.hPerson = m[2]; b.textContent = '@' + m[1]; b.title = 'Ouvrir la fiche de ' + m[1];
+                b.type = 'button'; b.className = 'table-link h-mention'; b.dataset.hPerson = m[2]; b.textContent = '@' + m[1]; b.title = i18n('Ouvrir la fiche de {nm}', {nm: m[1]});
                 frag.append(b);
                 last = m.index + m[0].length;
             }
@@ -357,7 +358,7 @@
 
     /* ═══════════════════════ 🤝 DEMANDES D'ENTRAIDE ═══════════════════════ */
 
-    const helpTargets = {parents: 'ses parents', birth: 'sa naissance (date et lieu)', baptism: 'son baptême', marriage: 'son mariage', death: 'son décès (date et lieu)', origin: 'son origine (d’où venait la famille)', other: 'autre chose'};
+    const helpTargets = {parents: 'ses parents', birth: 'sa naissance (date et lieu)', baptism: 'son baptême', marriage: 'son mariage', death: 'son décès (date et lieu)', origin: 'son origine (d’où venait la famille)', place_photo: 'où a été prise une image', other: 'autre chose'};
     const helpStatuses = {draft: 'Brouillon', posted: 'Publiée', answered: 'Réponse reçue', solved: 'Résolue', abandoned: 'Abandonnée'};
     const helpWhere = [['Geneanet — Entraide', 'https://www.geneanet.org/entraide/'], ['Forum Geneanet', 'https://www.geneanet.org/forum/'], ['Groupes Facebook de généalogie', 'https://www.facebook.com/search/groups/?q=g%C3%A9n%C3%A9alogie'], ['Cercle généalogique du département', 'https://www.google.com/search?q=cercle+g%C3%A9n%C3%A9alogique+entraide']];
     ext.lists.help_requests = async (token, edit = null) => {
@@ -387,7 +388,7 @@
                 filters: [{id: 'status', label: 'État', type: 'check', value: ['draft', 'posted', 'answered'], options: Object.entries(helpStatuses).map(([k, l]) => [k, l, l, cnt(k, r => r.status)])},
                     {id: 'target', label: 'Ce qu’on cherche', type: 'check', options: Object.entries(helpTargets).filter(([k]) => cnt(k, r => r.target)).map(([k, l]) => [k, l, `Cherche ${l}`, cnt(k, r => r.target)])},
                     {id: 'person', label: 'Personne', type: 'person', allowFree: false, chipPrefix: 'Pour :'},
-                    {id: 'where', label: 'Publiée sur', type: 'check', options: WHERE.filter(([k]) => cnt(k, whereOf)).map(([k, l]) => [k, l, k === 'none' ? l : `Sur ${l}`, cnt(k, whereOf)])}],
+                    {id: 'where', label: 'Publiée sur', type: 'check', options: WHERE.filter(([k]) => cnt(k, whereOf)).map(([k, l]) => [k, l, k === 'none' ? l : i18n('Sur {where}', {where: i18n(l)}), cnt(k, whereOf)])}],
                 sort: {options: [['recent', 'Les plus récentes'], ['old', 'Les plus anciennes'], ['az', 'A → Z'], ['za', 'Z → A']], value: 'recent'},
                 onChange: () => paint()});
             ws.querySelector('[data-h10-bar]').replaceWith(bar);
@@ -397,7 +398,7 @@
                     && (!words.length || words.every(w => fold([r.person_name, r.question, r.answer, r.posted_where, r.posted_url, helpTargets[r.target]].join(' ')).includes(w))));
                 list = UIx.sortItems(list, b.sort, {name: r => r.person_name || '', date: r => r.updated_at || r.created_at || ''});
                 bar.setCount(`${plural(list.length, 'demande', 'demandes')}${list.length !== rows.length ? ` sur ${fmt(rows.length)}` : ''}`);
-                ws.querySelector('[data-h10-rows]').innerHTML = list.length ? `<div class="h-records">${list.map(r => `<article class="h-record"><header><div><strong>🤝 ${esc(helpTargets[r.target] || 'Demande')}</strong>${LC(r.labels)} — ${personLink(r.person_id, r.person_name)} <span class="collection-kind">${esc(helpStatuses[r.status] || r.status)}</span>${r.posted_where ? ` <small>· ${esc(r.posted_where)}</small>` : ''}${r.posted_url ? ` <a href="${esc(r.posted_url)}" target="_blank" rel="noopener noreferrer">voir ↗</a>` : ''}</div>${tools(`data-h-help-edit="${r.id}"`, `data-h-help-delete="${r.id}"`, 'cette demande')}</header>${r.question ? `<p>${nl(r.question)}</p>` : ''}${r.answer ? `<p class="h-transcription"><strong>Réponse :</strong> ${nl(r.answer)}</p>` : ''}<small class="muted">${window.LCNDA_UI?.when?.(r.updated_at, {label: 'Mise à jour'}) || esc(r.updated_at)}</small></article>`).join('')}</div>`
+                ws.querySelector('[data-h10-rows]').innerHTML = list.length ? `<div class="h-records">${list.map(r => `<article class="h-record"><header><div><strong>🤝 ${esc(helpTargets[r.target] || 'Demande')}</strong>${LC(r.labels)} — ${personLink(r.person_id, r.person_name)} <span class="collection-kind">${esc(helpStatuses[r.status] || r.status)}</span>${r.posted_where ? ` <small>· ${esc(r.posted_where)}</small>` : ''}${r.posted_url ? ` <a href="${esc(r.posted_url)}" target="_blank" rel="noopener noreferrer">voir ↗</a>` : ''}</div>${tools(`data-h-help-edit="${r.id}"`, `data-h-help-delete="${r.id}"`, 'cette demande')}</header>${(r.media || []).length ? `<p class="pp-help-media">${r.media.slice(0, 4).map(m => `<button type="button" class="pp-help-thumb" data-pp-open="${Number(m.id)}" title="📍 Où a-t-elle été prise ? (hypothèses, carte, réponses)"><img src="media/${esc(encodeURIComponent(m.thumbnail || m.filename))}" alt="" loading="lazy"><span>📍 Les hypothèses de lieu</span></button>`).join('')}</p>` : ''}${r.question ? `<p>${nl(r.question)}</p>` : ''}${r.answer ? `<p class="h-transcription"><strong>Réponse :</strong> ${nl(r.answer)}</p>` : ''}<small class="muted">${window.LCNDA_UI?.when?.(r.updated_at, {label: 'Mise à jour'}) || esc(r.updated_at)}</small></article>`).join('')}</div>`
                     : A().emptyState({icon: '🔍', text: 'Aucune demande ne correspond', hint: 'Change les mots cherchés ou retire un filtre (« Tout effacer » montre aussi les demandes terminées).'});
                 A().bindTableLinks();
                 ws.querySelectorAll('[data-h10-rows] [data-h-help-edit]').forEach(x => x.addEventListener('click', () => ext.lists.help_requests(++S().workspaceToken, {id: Number(x.dataset.hHelpEdit)})));
@@ -471,7 +472,7 @@
         const mime = filmMime();
         ext.openDialog({
             eyebrow: 'FILM', title: 'Le film de la famille', submitLabel: 'Enregistrer la vidéo',
-            body: `<p>La carte animée montre la famille se déplacer au fil des siècles : chaque événement (naissance, mariage, décès, résidence…) apparaît à son année, puis s’estompe ; les déplacements d’une même personne sont tracés. La vidéo se télécharge en <strong>${mime?.startsWith('video/mp4') ? 'MP4' : 'WebM'}</strong>${mime?.startsWith('video/mp4') ? ' (lisible partout : messages, mails, téléphones)' : ' (si un téléphone ne la lit pas, VLC ou un convertisseur en ligne la passent en MP4)'}.</p>
+            body: `<p>${mime?.startsWith('video/mp4') ? i18n('La carte animée montre la famille se déplacer au fil des siècles : chaque événement (naissance, mariage, décès, résidence…) apparaît à son année, puis s’estompe ; les déplacements d’une même personne sont tracés. La vidéo se télécharge en <strong>MP4</strong> (lisible partout : messages, mails, téléphones).') : i18n('La carte animée montre la famille se déplacer au fil des siècles : chaque événement (naissance, mariage, décès, résidence…) apparaît à son année, puis s’estompe ; les déplacements d’une même personne sont tracés. La vidéo se télécharge en <strong>WebM</strong> (si un téléphone ne la lit pas, VLC ou un convertisseur en ligne la passent en MP4).')}</p>
                 <div class="form-grid"><label>Titre<input name="title" value="${esc(filmTitle())}"></label><label>Nom de famille seulement (facultatif)<input name="surname" placeholder="Dupont"></label>
                 <label>De l’année<input type="number" name="from" placeholder="auto"></label><label>À l’année<input type="number" name="to" placeholder="auto"></label>
                 <label>Durée de la vidéo<select name="seconds"><option value="20">20 secondes</option><option value="40" selected>40 secondes</option><option value="60">1 minute</option><option value="90">1 min 30</option><option value="120">2 minutes</option></select></label>
@@ -582,7 +583,7 @@
                     const t = Math.min(1, (now - t0) / (seconds * 1000));
                     frame(from + span * t);
                     bar.style.width = `${Math.round(100 * Math.min(1, (now - t0) / total))}%`;
-                    status.textContent = `Enregistrement… ${Math.floor(from + span * t)} (laisse cette fenêtre ouverte)`;
+                    status.textContent = i18n('Enregistrement… {year} (laisse cette fenêtre ouverte)', {year: String(Math.floor(from + span * t))});
                     if (now - t0 < total) requestAnimationFrame(tick); else resolve();
                 };
                 requestAnimationFrame(tick);
@@ -595,7 +596,7 @@
             a.href = URL.createObjectURL(blob); a.download = `film-de-la-famille-${from}-${to}.${ext2}`;
             document.body.appendChild(a); a.click(); a.remove();
             setTimeout(() => URL.revokeObjectURL(a.href), 60000);
-            status.textContent = `Vidéo enregistrée (${(blob.size / 1048576).toFixed(1)} Mo, ${ext2.toUpperCase()}) : regarde dans tes Téléchargements.`;
+            status.textContent = i18n('Vidéo enregistrée ({size} Mo, {fmt}) : regarde dans tes Téléchargements.', {size: window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? Math.round(blob.size / 104857.6) / 10 : (blob.size / 1048576).toFixed(1), fmt: ext2.toUpperCase()});
             toast('🎬 Film de la famille enregistré.');
         } catch (error) { status.textContent = error.message; toast(error.message, 'error'); }
         finally { submit.disabled = false; }

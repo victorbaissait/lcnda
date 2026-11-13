@@ -1,0 +1,1543 @@
+fr ¦ el ¦ bg
+son {x} (lien) ¦ {x} του/της ¦ {x} му/ѝ
+sa {x} (lien) ¦ {x} του/της ¦ {x} му/ѝ
+père ¦ πατέρας ¦ баща
+mère ¦ μητέρα ¦ майка
+grand-père ¦ παππούς ¦ дядо
+grand-mère ¦ γιαγιά ¦ баба
+arrière-grand-père ¦ προπάππους ¦ прадядо
+arrière-grand-mère ¦ προγιαγιά ¦ прабаба
+arrière-arrière-grand-père ¦ προ-προπάππους ¦ прапрадядо
+arrière-arrière-grand-mère ¦ προ-προγιαγιά ¦ прапрабаба
+arrière-arrière-arrière-grand-père ¦ προ-προ-προπάππους ¦ прапрапрадядо
+arrière-arrière-arrière-grand-mère ¦ προ-προ-προγιαγιά ¦ прапрапрабаба
+ancêtre à la {n}e génération ¦ πρόγονος της {n}ης γενιάς ¦ предшественик в {n}-о поколение
+{kin} de {name} ¦ {kin} του/της {name} ¦ {kin} на {name}
+Il est né {when}{where}. ¦ Γεννήθηκε {when}{where}. ¦ Роден е {when}{where}.
+Elle est née {when}{where}. ¦ Γεννήθηκε {when}{where}. ¦ Родена е {when}{where}.
+Il était {occ}. ¦ Ήταν {occ}. ¦ Беше {occ}.
+Elle était {occ}. ¦ Ήταν {occ}. ¦ Беше {occ}.
+Il a épousé {name}{when}{where}. ¦ Παντρεύτηκε με {name}{when}{where}. ¦ Сключи брак с {name}{when}{where}.
+Elle a épousé {name}{when}{where}. ¦ Παντρεύτηκε με {name}{when}{where}. ¦ Сключи брак с {name}{when}{where}.
+Il a eu un enfant : {list}. ¦ Απέκτησε ένα παιδί: {list}. ¦ Имаше едно дете: {list}.
+Elle a eu un enfant : {list}. ¦ Απέκτησε ένα παιδί: {list}. ¦ Имаше едно дете: {list}.
+Il a eu {n} enfants : {list}. ¦ Απέκτησε {n} παιδιά: {list}. ¦ Имаше {n} деца: {list}.
+Elle a eu {n} enfants : {list}. ¦ Απέκτησε {n} παιδιά: {list}. ¦ Имаше {n} деца: {list}.
+Il est mort {when}{age}{where}. ¦ Πέθανε {when}{age}{where}. ¦ Почина {when}{age}{where}.
+Elle est morte {when}{age}{where}. ¦ Πέθανε {when}{age}{where}. ¦ Почина {when}{age}{where}.
+, à {n} ans ¦ , σε ηλικία {n} ετών ¦ , на {n} години
+, à {n} an ¦ , σε ηλικία {n} έτους ¦ , на {n} година
+avec {name} ¦ με {name} ¦ с {name}
+se mariait{with}{where}{date} ¦ παντρευόταν{with}{where}{date} ¦ сключваше брак{with}{where}{date}
+se mariait civilement{with}{where}{date} ¦ παντρευόταν με πολιτικό γάμο{with}{where}{date} ¦ сключваше граждански брак{with}{where}{date}
+se mariait religieusement{with}{where}{date} ¦ παντρευόταν με θρησκευτικό γάμο{with}{where}{date} ¦ сключваше църковен брак{with}{where}{date}
+mourait{with}{where}{date} ¦ πέθαινε{with}{where}{date} ¦ умираше{with}{where}{date}
+était inhumé{with}{where}{date} ¦ θαβόταν{with}{where}{date} ¦ беше погребан{with}{where}{date}
+était inhumée{with}{where}{date} ¦ θαβόταν{with}{where}{date} ¦ беше погребана{with}{where}{date}
+habitait{with}{where}{date} ¦ κατοικούσε{with}{where}{date} ¦ живееше{with}{where}{date}
+travaillait comme{what}{with}{where}{date} ¦ δούλευε ως{what}{with}{where}{date} ¦ работеше като{what}{with}{where}{date}
+partait{with}{where}{date} ¦ έφευγε{with}{where}{date} ¦ заминаваше{with}{where}{date}
+arrivait{with}{where}{date} ¦ έφτανε{with}{where}{date} ¦ пристигаше{with}{where}{date}
+était recensé{with}{where}{date} ¦ καταγραφόταν στην απογραφή{with}{where}{date} ¦ беше преброен{with}{where}{date}
+était recensée{with}{where}{date} ¦ καταγραφόταν στην απογραφή{with}{where}{date} ¦ беше преброена{with}{where}{date}
+était sous les drapeaux{with}{where}{date} ¦ υπηρετούσε στον στρατό{with}{where}{date} ¦ служеше в армията{with}{where}{date}
+obtenait un diplôme{with}{where}{date} ¦ έπαιρνε δίπλωμα{with}{where}{date} ¦ получаваше диплома{with}{where}{date}
+devenait français{with}{where}{date} ¦ γινόταν Γάλλος πολίτης{with}{where}{date} ¦ ставаше френски гражданин{with}{where}{date}
+devenait française{with}{where}{date} ¦ γινόταν Γαλλίδα πολίτης{with}{where}{date} ¦ ставаше френска гражданка{with}{where}{date}
+était baptisé{with}{where}{date} ¦ βαπτιζόταν{with}{where}{date} ¦ беше кръстен{with}{where}{date}
+était baptisée{with}{where}{date} ¦ βαπτιζόταν{with}{where}{date} ¦ беше кръстена{with}{where}{date}
+faisait sa confirmation{with}{where}{date} ¦ έκανε το χρίσμα{with}{where}{date} ¦ получаваше конфирмация{with}{where}{date}
+était à l’école{with}{where}{date} ¦ πήγαινε σχολείο{with}{where}{date} ¦ ходеше на училище{with}{where}{date}
+vivait un événement ({label}){where}{date} ¦ ζούσε ένα γεγονός ({label}){where}{date} ¦ преживяваше събитие ({label}){where}{date}
+devenait père de {name}{where}{date} ¦ γινόταν πατέρας του/της {name}{where}{date} ¦ ставаше баща на {name}{where}{date}
+devenait mère de {name}{where}{date} ¦ γινόταν μητέρα του/της {name}{where}{date} ¦ ставаше майка на {name}{where}{date}
+n’était plus là : il était mort à {n} ans ¦ δεν ήταν πια εδώ: είχε πεθάνει σε ηλικία {n} ετών ¦ вече го нямаше: беше починал на {n} години
+n’était plus là : elle était morte à {n} ans ¦ δεν ήταν πια εδώ: είχε πεθάνει σε ηλικία {n} ετών ¦ вече я нямаше: беше починала на {n} години
+vivait sans doute du côté de {place} en {y}{occ} ¦ μάλλον ζούσε κοντά στο {place} το {y}{occ} ¦ вероятно живееше около {place} през {y}{occ}
+vivait sa vie en {y}{occ} ¦ ζούσε τη ζωή του/της το {y}{occ} ¦ живееше живота си през {y}{occ}
+À {n} ans… ¦ Σε ηλικία {n} ετών… ¦ На {n} години…
+À {n} ans, il {facts}. ¦ Στα {n} του χρόνια, {facts}. ¦ На {n} години той {facts}.
+À {n} ans, elle {facts}. ¦ Στα {n} της χρόνια, {facts}. ¦ На {n} години тя {facts}.
+{who} de {name} dont on connaît la naissance. ¦ {who} του/της {name} με γνωστή γέννηση. ¦ {who} на {name} с известно раждане.
+{who} de {name} dont on connaît la naissance ({k} sans date de naissance ne sont pas comptés). ¦ {who} του/της {name} με γνωστή γέννηση (δεν μετρώνται {k} χωρίς ημερομηνία γέννησης). ¦ {who} на {name} с известно раждане ({k} без дата на раждане не се броят).
+{who}{y}, comme {kin} {from}{fy} ¦ {who}{y}, όπως {kin} {from}{fy} ¦ {who}{y}, като {kin} {from}{fy}
+C’est un homme. ¦ Είναι άνδρας. ¦ Това е мъж.
+C’est une femme. ¦ Είναι γυναίκα. ¦ Това е жена.
+C’est un homme, né au XVIIIe siècle ou avant. ¦ Είναι άνδρας, γεννημένος τον 18ο αιώνα ή νωρίτερα. ¦ Това е мъж, роден през XVIII век или по-рано.
+C’est un homme, né au XIXe siècle. ¦ Είναι άνδρας, γεννημένος τον 19ο αιώνα. ¦ Това е мъж, роден през XIX век.
+C’est un homme, né au XXe siècle. ¦ Είναι άνδρας, γεννημένος τον 20ό αιώνα. ¦ Това е мъж, роден през XX век.
+C’est une femme, née au XVIIIe siècle ou avant. ¦ Είναι γυναίκα, γεννημένη τον 18ο αιώνα ή νωρίτερα. ¦ Това е жена, родена през XVIII век или по-рано.
+C’est une femme, née au XIXe siècle. ¦ Είναι γυναίκα, γεννημένη τον 19ο αιώνα. ¦ Това е жена, родена през XIX век.
+C’est une femme, née au XXe siècle. ¦ Είναι γυναίκα, γεννημένη τον 20ό αιώνα. ¦ Това е жена, родена през XX век.
+Il est né à {place}. ¦ Τόπος γέννησής του: {place}. ¦ Роден е в {place}.
+Elle est née à {place}. ¦ Τόπος γέννησής της: {place}. ¦ Родена е в {place}.
+Son métier : {occ}. ¦ Επάγγελμα: {occ}. ¦ Професия: {occ}.
+Il a vécu {n} ans. ¦ Έζησε {n} χρόνια. ¦ Живял е {n} години.
+Elle a vécu {n} ans. ¦ Έζησε {n} χρόνια. ¦ Живяла е {n} години.
+Il a eu {n} enfant. ¦ Απέκτησε {n} παιδί. ¦ Имал е {n} дете.
+Elle a eu {n} enfant. ¦ Απέκτησε {n} παιδί. ¦ Имала е {n} дете.
+Il a eu {n} enfants. ¦ Απέκτησε {n} παιδιά. ¦ Имал е {n} деца.
+Elle a eu {n} enfants. ¦ Απέκτησε {n} παιδιά. ¦ Имала е {n} деца.
+On ne lui connaît pas d’enfant. ¦ Δεν είναι γνωστά παιδιά. ¦ Не са известни деца.
+Né dans les années {y}. ¦ Γεννήθηκε τη δεκαετία του {y}. ¦ Роден през {y}-те години.
+Née dans les années {y}. ¦ Γεννήθηκε τη δεκαετία του {y}. ¦ Родена през {y}-те години.
+Sa femme s’appelait {name}. ¦ Η γυναίκα του λεγόταν {name}. ¦ Съпругата му се казваше {name}.
+Son mari s’appelait {name}. ¦ Ο άνδρας της λεγόταν {name}. ¦ Съпругът ѝ се казваше {name}.
+Un de ses enfants s’appelait {name}. ¦ Ένα από τα παιδιά του/της λεγόταν {name}. ¦ Едно от децата му/ѝ се казваше {name}.
+Son nom commence par {l}… et compte {n} lettres. ¦ Το όνομα αρχίζει από {l}… και έχει {n} γράμματα. ¦ Името започва с {l}… и има {n} букви.
+Ta naissance ¦ Η γέννησή σου ¦ Твоето раждане
+Tu es {name}. ¦ Είσαι ο/η {name}. ¦ Ти си {name}.
+Tu nais {when}{where}{parents}. ¦ Γεννιέσαι {when}{where}{parents}. ¦ Раждаш се {when}{where}{parents}.
+fils de {names} ¦ γιος του {names} ¦ син на {names}
+fille de {names} ¦ κόρη του {names} ¦ дъщеря на {names}
+{a} et de {b} ¦ {a} και {b} ¦ {a} и {b}
+Ton père est {occ}. ¦ Ο πατέρας σου είναι {occ}. ¦ Баща ти е {occ}.
+Le métier ¦ Το επάγγελμα ¦ Професията
+Tu as quinze ans, c’est l’année {y}. Il faut gagner ta vie. Que vas-tu faire ? ¦ Είσαι δεκαπέντε χρονών και είναι το έτος {y}. Πρέπει να βγάλεις το ψωμί σου. Τι θα κάνεις; ¦ На петнайсет години си, годината е {y}. Трябва да си изкарваш прехраната. Какво ще правиш?
+Tu as quinze ans. Il faut gagner ta vie. Que vas-tu faire ? ¦ Είσαι δεκαπέντε χρονών. Πρέπει να βγάλεις το ψωμί σου. Τι θα κάνεις; ¦ На петнайсет години си. Трябва да си изкарваш прехраната. Какво ще правиш?
+Devenir {occ} ¦ Γίνε {occ} ¦ Стани {occ}
+Dans la vraie vie, {name} est devenu {occ}. ¦ Στην πραγματική ζωή, {name} έγινε {occ}. ¦ В истинския живот {name} стана {occ}.
+Dans la vraie vie, {name} est devenue {occ}. ¦ Στην πραγματική ζωή, {name} έγινε {occ}. ¦ В истинския живот {name} стана {occ}.
+L’amour ¦ Ο έρωτας ¦ Любовта
+Tu as {n} ans. ¦ Είσαι {n} χρονών. ¦ На {n} години си.
+À {place}, deux personnes ont attiré ton regard… ¦ Στο {place}, δύο άνθρωποι τράβηξαν το βλέμμα σου… ¦ В {place} двама души привлякоха погледа ти…
+deux personnes ont attiré ton regard… ¦ δύο άνθρωποι τράβηξαν το βλέμμα σου… ¦ двама души привлякоха погледа ти…
+Épouser {name} ¦ Παντρέψου τον/την {name} ¦ Сключи брак с {name}
+Rester libre encore un peu ¦ Μείνε ελεύθερος/η λίγο ακόμα ¦ Остани свободен/свободна още малко
+Dans la vraie vie, {first} a épousé {name}{when}{where}. ¦ Στην πραγματική ζωή, {first} παντρεύτηκε με {name}{when}{where}. ¦ В истинския живот {first} сключи брак с {name}{when}{where}.
+Partir ? ¦ Να φύγεις; ¦ Да заминеш ли?
+La vie est dure{where}. On parle de partir… ¦ Η ζωή είναι σκληρή{where}. Γίνεται λόγος για φευγιό… ¦ Животът е тежък{where}. Говори се за заминаване…
+Partir pour {place} ¦ Φύγε για {place} ¦ Замини за {place}
+Rester au pays ¦ Μείνε στον τόπο σου ¦ Остани в родния край
+Dans la vraie vie, {name} a fini sa route à {place}. ¦ Στην πραγματική ζωή, {name} ολοκλήρωσε τη διαδρομή του/της στο {place}. ¦ В истинския живот {name} завърши пътя си в {place}.
+On parle de partir pour la ville… ¦ Γίνεται λόγος για φευγιό στην πόλη… ¦ Говори се за заминаване в града…
+Partir ¦ Φύγε ¦ Замини
+Rester à {place} ¦ Μείνε στο {place} ¦ Остани в {place}
+Dans la vraie vie, {name} est resté à {place}. ¦ Στην πραγματική ζωή, {name} έμεινε στο {place}. ¦ В истинския живот {name} остана в {place}.
+Dans la vraie vie, {name} est restée à {place}. ¦ Στην πραγματική ζωή, {name} έμεινε στο {place}. ¦ В истинския живот {name} остана в {place}.
+Les enfants ¦ Τα παιδιά ¦ Децата
+Un enfant arrive : {list}. Tu les regardes grandir. ¦ Έρχεται ένα παιδί: {list}. Το βλέπεις να μεγαλώνει. ¦ Идва едно дете: {list}. Гледаш го как расте.
+{n} enfants arrivent : {list}. Tu les regardes grandir. ¦ Έρχονται {n} παιδιά: {list}. Τα βλέπεις να μεγαλώνουν. ¦ Идват {n} деца: {list}. Гледаш ги как растат.
+La fin du voyage ¦ Το τέλος του ταξιδιού ¦ Краят на пътуването
+Tu t’éteins {when}{where}{age}. ¦ Φεύγεις από τη ζωή {when}{where}{age}. ¦ Угасваш {when}{where}{age}.
+Ton histoire continue… ¦ Η ιστορία σου συνεχίζεται… ¦ Историята ти продължава…
+{n} personnes nées un {date} : {list}. ¦ {n} άτομα γεννήθηκαν στις {date}: {list}. ¦ {n} души, родени на {date}: {list}.
+{name} est mort le jour de son anniversaire, à {n} ans ({date}). ¦ {name} πέθανε τη μέρα των γενεθλίων του, σε ηλικία {n} ετών ({date}). ¦ {name} почина на рождения си ден, на {n} години ({date}).
+{name} est morte le jour de son anniversaire, à {n} ans ({date}). ¦ {name} πέθανε τη μέρα των γενεθλίων της, σε ηλικία {n} ετών ({date}). ¦ {name} почина на рождения си ден, на {n} години ({date}).
+{name} est né un {date}, jour anniversaire de la mort de {kin} {who} ({y}). ¦ {name} γεννήθηκε στις {date}, επέτειο θανάτου: {kin} {who} ({y}). ¦ {name} е роден на {date}, годишнината от смъртта на {kin} {who} ({y}).
+{name} est née un {date}, jour anniversaire de la mort de {kin} {who} ({y}). ¦ {name} γεννήθηκε στις {date}, επέτειο θανάτου: {kin} {who} ({y}). ¦ {name} е родена на {date}, годишнината от смъртта на {kin} {who} ({y}).
+son ancêtre ¦ ο πρόγονός του/της ¦ предшественика си
+{n} mariages le même jour de l’année : {list}. ¦ {n} γάμοι την ίδια μέρα του χρόνου: {list}. ¦ {n} брака в един и същи ден от годината: {list}.
+{a} et {b} sont nés à {n} ans pile d’écart, jour pour jour ({y1} et {y2}). ¦ {a} και {b} γεννήθηκαν με διαφορά ακριβώς {n} ετών, μέρα με τη μέρα ({y1} και {y2}). ¦ {a} и {b} са родени с точно {n} години разлика, ден за ден ({y1} и {y2}).
+{name} est né le jour de Noël {y}. ¦ {name} γεννήθηκε τα Χριστούγεννα του {y}. ¦ {name} е роден на Коледа {y}.
+{name} est née le jour de Noël {y}. ¦ {name} γεννήθηκε τα Χριστούγεννα του {y}. ¦ {name} е родена на Коледа {y}.
+{name} est né le jour de l’An {y}. ¦ {name} γεννήθηκε την Πρωτοχρονιά του {y}. ¦ {name} е роден на Нова година {y}.
+{name} est née le jour de l’An {y}. ¦ {name} γεννήθηκε την Πρωτοχρονιά του {y}. ¦ {name} е родена на Нова година {y}.
+{name} est né un vendredi 13 ({date}). ¦ {name} γεννήθηκε Παρασκευή και 13 ({date}). ¦ {name} е роден в петък 13-и ({date}).
+{name} est née un vendredi 13 ({date}). ¦ {name} γεννήθηκε Παρασκευή και 13 ({date}). ¦ {name} е родена в петък 13-и ({date}).
+{name} s’est marié à {n} ans, au même âge que son père {father}. ¦ {name} παντρεύτηκε σε ηλικία {n} ετών, στην ίδια ηλικία με τον πατέρα του, {father}. ¦ {name} сключи брак на {n} години, на същата възраст като баща си {father}.
+{name} s’est mariée à {n} ans, au même âge que son père {father}. ¦ {name} παντρεύτηκε σε ηλικία {n} ετών, στην ίδια ηλικία με τον πατέρα της, {father}. ¦ {name} сключи брак на {n} години, на същата възраст като баща си {father}.
+En quelle année est né {name} ? ¦ Ποια χρονιά γεννήθηκε {name}; ¦ През коя година е роден {name}?
+En quelle année est née {name} ? ¦ Ποια χρονιά γεννήθηκε {name}; ¦ През коя година е родена {name}?
+Où est né {name} ? ¦ Πού γεννήθηκε {name}; ¦ Къде е роден {name}?
+Où est née {name} ? ¦ Πού γεννήθηκε {name}; ¦ Къде е родена {name}?
+Quel était le métier de {name} ? ¦ Ποιο ήταν το επάγγελμα του/της {name}; ¦ Каква беше професията на {name}?
+{name} était {occ}. ¦ {name} ήταν {occ}. ¦ {name} беше {occ}.
+Qui a épousé {name} ? ¦ Με ποιον/ποια παντρεύτηκε {name}; ¦ С кого сключи брак {name}?
+{a} et {b} se sont mariés{when}{where}. ¦ {a} και {b} παντρεύτηκαν{when}{where}. ¦ {a} и {b} сключиха брак{when}{where}.
+Qui est le père de {name} ? ¦ Ποιος είναι ο πατέρας του/της {name}; ¦ Кой е бащата на {name}?
+Qui est la mère de {name} ? ¦ Ποια είναι η μητέρα του/της {name}; ¦ Коя е майката на {name}?
+{name} est le fils de {parent}. ¦ {name} είναι ο γιος του/της {parent}. ¦ {name} е син на {parent}.
+{name} est la fille de {parent}. ¦ {name} είναι η κόρη του/της {parent}. ¦ {name} е дъщеря на {parent}.
+Combien d’enfants a eus {name} ? ¦ Πόσα παιδιά απέκτησε {name}; ¦ Колко деца е имал/а {name}?
+À quel âge est mort {name} ? ¦ Σε ποια ηλικία πέθανε {name}; ¦ На каква възраст почина {name}?
+À quel âge est morte {name} ? ¦ Σε ποια ηλικία πέθανε {name}; ¦ На каква възраст почина {name}?
+Qui est né le premier ? ¦ Ποιος γεννήθηκε πρώτος; ¦ Кой е роден пръв?
+Ici est né {name}, {when}. ¦ Εδώ γεννήθηκε {name}, {when}. ¦ Тук е роден {name}, {when}.
+Ici est née {name}, {when}. ¦ Εδώ γεννήθηκε {name}, {when}. ¦ Тук е родена {name}, {when}.
+C’est aussi ici que est né {name}, {when}. ¦ Εδώ γεννήθηκε επίσης {name}, {when}. ¦ Тук също е роден {name}, {when}.
+C’est aussi ici que est née {name}, {when}. ¦ Εδώ γεννήθηκε επίσης {name}, {when}. ¦ Тук също е родена {name}, {when}.
+Ici est né {name}, {when} ; il sera {occ}. ¦ Εδώ γεννήθηκε {name}, {when}· θα γίνει {occ}. ¦ Тук е роден {name}, {when}; ще стане {occ}.
+Ici est née {name}, {when} ; elle sera {occ}. ¦ Εδώ γεννήθηκε {name}, {when}· θα γίνει {occ}. ¦ Тук е родена {name}, {when}; ще стане {occ}.
+C’est aussi ici que est né {name}, {when} ; il sera {occ}. ¦ Εδώ γεννήθηκε επίσης {name}, {when}· θα γίνει {occ}. ¦ Тук също е роден {name}, {when}; ще стане {occ}.
+C’est aussi ici que est née {name}, {when} ; elle sera {occ}. ¦ Εδώ γεννήθηκε επίσης {name}, {when}· θα γίνει {occ}. ¦ Тук също е родена {name}, {when}; ще стане {occ}.
+Ici, {when}, {name} : {label}{what}. ¦ Εδώ, {when}, {name}: {label}{what}. ¦ Тук, {when}, {name}: {label}{what}.
+Puis, {when}, {name} : {label}{what}. ¦ Έπειτα, {when}, {name}: {label}{what}. ¦ После, {when}, {name}: {label}{what}.
+Ici, {when}, {name} a épousé {other}. ¦ Εδώ, {when}, {name} παντρεύτηκε με {other}. ¦ Тук, {when}, {name} сключи брак с {other}.
+Puis, {when}, {name} a épousé {other}. ¦ Έπειτα, {when}, {name} παντρεύτηκε με {other}. ¦ После, {when}, {name} сключи брак с {other}.
+Ici est mort {name}, {when}{age}. ¦ Εδώ πέθανε {name}, {when}{age}. ¦ Тук почина {name}, {when}{age}.
+Ici est morte {name}, {when}{age}. ¦ Εδώ πέθανε {name}, {when}{age}. ¦ Тук почина {name}, {when}{age}.
+C’est aussi ici que est mort {name}, {when}{age}. ¦ Εδώ πέθανε επίσης {name}, {when}{age}. ¦ Тук също почина {name}, {when}{age}.
+C’est aussi ici que est morte {name}, {when}{age}. ¦ Εδώ πέθανε επίσης {name}, {when}{age}. ¦ Тук също почина {name}, {when}{age}.
+son conjoint ¦ ο/η σύζυγός του/της ¦ съпруга си
+Naissance ({date}) ¦ Γέννηση ({date}) ¦ Раждане ({date})
+Mariage avec {name} ({date}) ¦ Γάμος με {name} ({date}) ¦ Брак с {name} ({date})
+Mariage avec {name} ¦ Γάμος με {name} ¦ Брак с {name}
+Mariage ({date}) ¦ Γάμος ({date}) ¦ Брак ({date})
+Décès ({date}) ¦ Θάνατος ({date}) ¦ Смърт ({date})
+ont la joie de vous annoncer la naissance de leur fils ¦ ανακοινώνουν με χαρά τη γέννηση του γιου τους ¦ с радост съобщават за раждането на сина си
+ont la joie de vous annoncer la naissance de leur fille ¦ ανακοινώνουν με χαρά τη γέννηση της κόρης τους ¦ с радост съобщават за раждането на дъщеря си
+a la joie de vous annoncer la naissance de son fils ¦ ανακοινώνει με χαρά τη γέννηση του γιου του/της ¦ с радост съобщава за раждането на сина си
+a la joie de vous annoncer la naissance de sa fille ¦ ανακοινώνει με χαρά τη γέννηση της κόρης του/της ¦ с радост съобщава за раждането на дъщеря си
+a la joie de vous annoncer la naissance de ¦ ανακοινώνει με χαρά τη γέννηση του/της ¦ с радост съобщава за раждането на
+On nous prie d’annoncer le décès de ¦ Με λύπη ανακοινώνουμε τον θάνατο του/της ¦ С прискърбие съобщаваме за смъртта на
+survenu {when}{age} ¦ που επήλθε {when}{age} ¦ настъпила {when}{age}
+survenue {when}{age} ¦ που επήλθε {when}{age} ¦ настъпила {when}{age}
+, dans sa {n}e année ¦ , στο {n}ο έτος της ηλικίας του/της ¦ , на {n}-ата си година
+De la part de ¦ Εκ μέρους ¦ От името на
+Monsieur {name}, son époux ¦ Κύριος {name}, ο σύζυγός της ¦ Г-н {name}, неин съпруг
+Madame {name}, son épouse ¦ Κυρία {name}, η σύζυγός του ¦ Г-жа {name}, негова съпруга
+{names}, ses enfants ¦ {names}, τα παιδιά ¦ {names}, децата
+{names}, son fils ¦ {names}, ο γιος ¦ {names}, син
+{names}, sa fille ¦ {names}, η κόρη ¦ {names}, дъщеря
+ont l’honneur de vous faire part du mariage de leurs enfants ¦ έχουν την τιμή να ανακοινώσουν τον γάμο των παιδιών τους ¦ имат честта да съобщят за брака на децата си
+ont la joie de vous faire part de leur mariage ¦ ανακοινώνουν με χαρά τον γάμο τους ¦ с радост съобщават за своя брак
+célébré {when} ¦ που τελέστηκε {when} ¦ сключен {when}
+{names} se sont dit oui ! ¦ {names} είπαν το «ναι»! ¦ {names} си казаха „да“!
+Bienvenue à {name} ! ¦ Καλώς ήρθες, {name}! ¦ Добре дошъл/дошла, {name}!
+Adieu à {name} ¦ Αντίο, {name} ¦ Сбогом, {name}
+Une année tranquille ¦ Μια ήσυχη χρονιά ¦ Една спокойна година
+C’est {when} que {a} a épousé {b}. ¦ Ήταν {when} που {a} παντρεύτηκε με {b}. ¦ Именно {when} {a} сключи брак с {b}.
+{name} est le fils de {parents} ¦ {name} είναι ο γιος των {parents} ¦ {name} е син на {parents}
+{name} est la fille de {parents} ¦ {name} είναι η κόρη των {parents} ¦ {name} е дъщеря на {parents}
+Tous nos vœux de bonheur aux jeunes époux. ¦ Ευχόμαστε κάθε ευτυχία στους νεόνυμφους. ¦ Пожелаваме много щастие на младоженците.
+Les heureux parents, {names}, reçoivent les félicitations de toute la famille. ¦ Οι ευτυχισμένοι γονείς, {names}, δέχονται τα συγχαρητήρια όλης της οικογένειας. ¦ Щастливите родители, {names}, приемат поздравленията на цялото семейство.
+Rien de notable à signaler cette année dans la famille, ce qui est aussi une bonne nouvelle. ¦ Τίποτα αξιοσημείωτο φέτος στην οικογένεια, κι αυτό είναι επίσης καλό νέο. ¦ Нищо особено тази година в семейството — и това е добра новина.
+{name} fête ses {n} ans. ¦ {name} κλείνει τα {n}. ¦ {name} навършва {n} години.
+{names} : {n} ans de mariage ! ¦ {names}: {n} χρόνια γάμου! ¦ {names}: {n} години брак!
+Né il y a {n} ans, jour pour jour. ¦ Γεννήθηκε πριν από {n} χρόνια, μέρα με τη μέρα. ¦ Роден преди {n} години, ден за ден.
+Née il y a {n} ans, jour pour jour. ¦ Γεννήθηκε πριν από {n} χρόνια, μέρα με τη μέρα. ¦ Родена преди {n} години, ден за ден.
+Disparu il y a {n} ans, jour pour jour. ¦ Έφυγε πριν από {n} χρόνια, μέρα με τη μέρα. ¦ Почина преди {n} години, ден за ден.
+Disparue il y a {n} ans, jour pour jour. ¦ Έφυγε πριν από {n} χρόνια, μέρα με τη μέρα. ¦ Почина преди {n} години, ден за ден.
+Fils de {names}. ¦ Γιος των {names}. ¦ Син на {names}.
+Fille de {names}. ¦ Κόρη των {names}. ¦ Дъщеря на {names}.
+{name}, son frère, est né {when} : moins de neuf mois d’écart (des jumeaux auraient la même date). ¦ {name}, ο αδελφός του/της, γεννήθηκε {when}: διαφορά μικρότερη από εννέα μήνες (τα δίδυμα θα είχαν την ίδια ημερομηνία). ¦ {name}, брат му/ѝ, е роден {when}: по-малко от девет месеца разлика (близнаците биха имали една и съща дата).
+{name}, sa sœur, est née {when} : moins de neuf mois d’écart (des jumeaux auraient la même date). ¦ {name}, η αδελφή του/της, γεννήθηκε {when}: διαφορά μικρότερη από εννέα μήνες (τα δίδυμα θα είχαν την ίδια ημερομηνία). ¦ {name}, сестра му/ѝ, е родена {when}: по-малко от девет месеца разлика (близнаците биха имали една и съща дата).
+{name} est mort {when}, avant ce mariage. ¦ {name} πέθανε {when}, πριν από αυτόν τον γάμο. ¦ {name} е починал {when}, преди този брак.
+{name} est morte {when}, avant ce mariage. ¦ {name} πέθανε {when}, πριν από αυτόν τον γάμο. ¦ {name} е починала {when}, преди този брак.
+La même année, {label} à {place}, à {km} km : possible, mais à vérifier. ¦ Την ίδια χρονιά, {label} στο {place}, σε απόσταση {km} km: πιθανό, αλλά θέλει έλεγχο. ¦ Същата година — {label} в {place}, на {km} km: възможно, но трябва да се провери.
+Un métier à {n} ans : c’est jeune. ¦ Επάγγελμα στα {n}: είναι νωρίς. ¦ Професия на {n} години: това е рано.
+🔎 À regarder aussi ¦ 🔎 Δες επίσης ¦ 🔎 Виж също
+{name} naît {when} {where}. ¦ {name} γεννιέται {when} {where}. ¦ {name} се ражда {when} {where}.
+Ses parents : {list}. ¦ Οι γονείς: {list}. ¦ Родители: {list}.
+Parent connu : {list}. ¦ Γνωστός γονέας: {list}. ¦ Известен родител: {list}.
+Ses frères et sœurs ¦ Τα αδέλφια ¦ Братя и сестри
+Son frère ou sa sœur ¦ Ο αδελφός ή η αδελφή ¦ Брат или сестра
+{name} reçoit le baptême {when} {where}. ¦ {name} βαπτίζεται {when} {where}. ¦ {name} е кръстен/а {when} {where}.
+Présents : {list}. ¦ Παρόντες: {list}. ¦ Присъстват: {list}.
+Le mariage religieux est célébré {when} {where}. ¦ Ο θρησκευτικός γάμος τελείται {when} {where}. ¦ Църковният брак е сключен {when} {where}.
+Le mariage civil est célébré {when} {where}. ¦ Ο πολιτικός γάμος τελείται {when} {where}. ¦ Гражданският брак е сключен {when} {where}.
+{name} se marie avec {who} {when} {where}. ¦ {name} παντρεύεται με {who} {when} {where}. ¦ {name} сключва брак с {who} {when} {where}.
+{name} se marie {when} {where}. ¦ {name} παντρεύεται {when} {where}. ¦ {name} сключва брак {when} {where}.
+{name} meurt {when} {where}{age}. ¦ {name} πεθαίνει {when} {where}{age}. ¦ {name} умира {when} {where}{age}.
+Cause notée : {cause}. ¦ Καταγεγραμμένη αιτία: {cause}. ¦ Записана причина: {cause}.
+{name} repose {where} ¦ {name} αναπαύεται {where} ¦ {name} почива {where}
+{name} est inhumé ¦ {name} θάφτηκε ¦ {name} е погребан
+{name} est inhumée ¦ {name} θάφτηκε ¦ {name} е погребана
+{name} est inhumé(e) ¦ {name} θάφτηκε ¦ {name} е погребан/а
+(inhumation {when}) ¦ (ταφή {when}) ¦ (погребение {when})
+{kind} {when} {where}. ¦ {kind} {when} {where}. ¦ {kind} {when} {where}.
+{name} exerce le métier de {job}{where}. ¦ {name} εργάζεται ως {job}{where}. ¦ {name} работи като {job}{where}.
+{name} s’installe {where}{addr}. ¦ {name} εγκαθίσταται {where}{addr}. ¦ {name} се установява {where}{addr}.
+{name} habite {where}{addr}. ¦ {name} κατοικεί {where}{addr}. ¦ {name} живее {where}{addr}.
+Au recensement de {y}, {name} vit {where}{desc}. ¦ Στην απογραφή του {y}, {name} ζει {where}{desc}. ¦ При преброяването от {y} {name} живее {where}{desc}.
+Au recensement {when}, {name} vit {where}{desc}. ¦ Στην απογραφή {when}, {name} ζει {where}{desc}. ¦ При преброяването {when} {name} живее {where}{desc}.
+à l’adresse « {ad} » ¦ στη διεύθυνση «{ad}» ¦ на адрес „{ad}“
+Métier noté : {job}. ¦ Καταγεγραμμένο επάγγελμα: {job}. ¦ Записана професия: {job}.
+Le foyer compte {who}. ¦ Το νοικοκυριό αποτελείται από: {who}. ¦ Домакинството: {who}.
+{label} {when} {where}. ¦ {label} {when} {where}. ¦ {label} {when} {where}.
+Recensement de {y} ¦ Απογραφή του {y} ¦ Преброяване от {y}
+Déménagement ¦ Μετακόμιση ¦ Преместване
+Domicile ¦ Κατοικία ¦ Местоживеене
+Sépulture ¦ Τάφος ¦ Гроб
+Crémation ¦ Αποτέφρωση ¦ Кремация
+Obsèques ¦ Κηδεία ¦ Погребение
+Ses enfants ¦ Τα παιδιά ¦ Децата
+Son enfant ¦ Το παιδί ¦ Детето
+{n} enfants connus : {list}. ¦ {n} γνωστά παιδιά: {list}. ¦ {n} известни деца: {list}.
+Un enfant connu : {list}. ¦ Ένα γνωστό παιδί: {list}. ¦ Едно известно дете: {list}.
+Pendant sa vie ¦ Κατά τη ζωή του/της ¦ През живота си
+Sa vie en quelques mots ¦ Η ζωή του/της με λίγα λόγια ¦ Животът с няколко думи
+Ta version de la biographie (📖 sur la fiche). ¦ Η δική σου εκδοχή της βιογραφίας (📖 στην καρτέλα). ¦ Твоята версия на биографията (📖 в картона).
+Biographie écrite par l’app d’après la fiche. ¦ Βιογραφία γραμμένη από την εφαρμογή με βάση την καρτέλα. ¦ Биография, написана от приложението по картона.
+Les lieux de sa vie ¦ Οι τόποι της ζωής του/της ¦ Местата в живота
+Sa descendance ¦ Οι απόγονοι ¦ Потомството
+{list} dans la généalogie. ¦ {list} στη γενεαλογία. ¦ {list} в генеалогията.
+Récit d’une vie — {name} ¦ Η ιστορία μιας ζωής — {name} ¦ Разказ за един живот — {name}
+=petit-enfant ¦ εγγόνι|εγγόνια ¦ внук|внуци
+=arrière-petit-enfant ¦ δισέγγονο|δισέγγονα ¦ правнук|правнуци
+=autre descendant ¦ άλλος απόγονος|άλλοι απόγονοι ¦ друг потомък|други потомци
+=signature ¦ υπογραφή|υπογραφές ¦ подпис|подписа
+=visage ¦ πρόσωπο|πρόσωπα ¦ лице|лица
+=trésor caché ¦ κρυμμένος θησαυρός|κρυμμένοι θησαυροί ¦ скрито съкровище|скрити съкровища
+Garder la mémoire ¦ Να κρατήσουμε τη μνήμη ¦ Да запазим паметта
+← Tous les trésors ¦ ← Όλοι οι θησαυροί ¦ ← Всички съкровища
+Trésors · {fam} ¦ Θησαυροί · {fam} ¦ Съкровища · {fam}
+Un texte, un son ou une vidéo qui ne s’ouvre qu’à une date : « pour les 18 ans de Léa », « en 2050 ». ¦ Ένα κείμενο, ένας ήχος ή ένα βίντεο που ανοίγει μόνο σε μια ημερομηνία: «για τα 18 της Λέας», «το 2050». ¦ Текст, звук или видео, които се отварят едва на определена дата: „за 18-ия рожден ден на Леа“, „през 2050“.
+{n} scellée ¦ {n} σφραγισμένη ¦ {n} запечатано
+{n} ouverte ¦ {n} ανοιγμένη ¦ {n} отворено
+📬 Ouvertes ¦ 📬 Ανοιγμένες ¦ 📬 Отворени
+Aucune lettre ouverte pour l’instant ¦ Κανένα ανοιγμένο γράμμα προς το παρόν ¦ Още няма отворени писма
+Une lettre scellée s’ouvre toute seule le jour venu. ¦ Ένα σφραγισμένο γράμμα ανοίγει μόνο του την κατάλληλη μέρα. ¦ Запечатаното писмо се отваря само в уречения ден.
+Souvenirs des sens ¦ Αναμνήσεις των αισθήσεων ¦ Спомени на сетивата
+L’odeur de la cire, le bruit du moulin, le goût des confitures : ce qu’aucun acte ne garde. ¦ Η μυρωδιά του κεριού, ο θόρυβος του μύλου, η γεύση της μαρμελάδας: ό,τι καμία πράξη δεν κρατά. ¦ Мирисът на восъка, шумът на мелницата, вкусът на сладкото: това, което никой акт не пази.
+Le sens ¦ Η αίσθηση ¦ Сетивото
+👃 Une odeur ¦ 👃 Μια μυρωδιά ¦ 👃 Мирис
+👂 Un son ¦ 👂 Ένας ήχος ¦ 👂 Звук
+👅 Un goût ¦ 👅 Μια γεύση ¦ 👅 Вкус
+✋ Au toucher ¦ ✋ Στην αφή ¦ ✋ На допир
+👁 Une image ¦ 👁 Μια εικόνα ¦ 👁 Образ
+Les souvenirs qui ne tiennent dans aucun acte : une odeur, un bruit, un goût. Joins-y un son enregistré ou une photo si tu en as. ¦ Οι αναμνήσεις που δεν χωρούν σε καμία πράξη: μια μυρωδιά, ένας θόρυβος, μια γεύση. Πρόσθεσε έναν ηχογραφημένο ήχο ή μια φωτογραφία, αν έχεις. ¦ Спомените, които не се побират в никой акт: мирис, шум, вкус. Добави записан звук или снимка, ако имаш.
+Noter un souvenir ¦ Κατάγραψε μια ανάμνηση ¦ Запиши спомен
+📋 Voir dans Listes › Mémoire familiale ¦ 📋 Δες στις Λίστες › Οικογενειακή μνήμη ¦ 📋 Виж в Списъци › Семейна памет
+Rangé avec les expressions, surnoms, traditions et témoignages ¦ Μαζί με τις εκφράσεις, τα παρατσούκλια, τις παραδόσεις και τις μαρτυρίες ¦ Заедно с изразите, прякорите, традициите и свидетелствата
+Aucun souvenir noté pour l’instant : l’odeur de la cire dans l’escalier, le bruit du moulin, le goût des confitures de Mémé… ¦ Καμία ανάμνηση προς το παρόν: η μυρωδιά του κεριού στη σκάλα, ο θόρυβος του μύλου, η γεύση της μαρμελάδας της γιαγιάς… ¦ Още няма записани спомени: мирисът на восъка по стълбите, шумът на мелницата, вкусът на бабиното сладко…
+Le livre de recettes ¦ Το βιβλίο συνταγών ¦ Книгата с рецепти
+Les recettes de la famille, avec qui les faisait et leur histoire, puis un vrai livre à imprimer. ¦ Οι συνταγές της οικογένειας, ποιος τις έφτιαχνε και η ιστορία τους, και μετά ένα αληθινό βιβλίο για εκτύπωση. ¦ Рецептите на семейството — кой ги е приготвял и тяхната история, а после истинска книга за печат.
+Rubrique ¦ Ενότητα ¦ Раздел
+Entrées et soupes ¦ Ορεκτικά και σούπες ¦ Предястия и супи
+Plats ¦ Κυρίως πιάτα ¦ Основни ястия
+Desserts et gâteaux ¦ Επιδόρπια και κέικ ¦ Десерти и сладкиши
+Confitures et conserves ¦ Μαρμελάδες και κονσέρβες ¦ Сладка и консерви
+Boissons ¦ Ποτά ¦ Напитки
+Ajouter une recette ¦ Προσθήκη συνταγής ¦ Добави рецепта
+Imprimer le livre ¦ Εκτύπωση του βιβλίου ¦ Отпечатай книгата
+{label} : couverture, sommaire, une page chacun ¦ {label}: εξώφυλλο, περιεχόμενα, μία σελίδα για το καθένα ¦ {label}: корица, съдържание, по една страница за всяко
+Aucune recette pour l’instant : le far de Mamie, la soupe aux choux du dimanche… ¦ Καμία συνταγή προς το παρόν: το γλυκό της γιαγιάς, η λαχανόσουπα της Κυριακής… ¦ Още няма рецепти: баничката на баба, неделната зелева чорба…
+Rien à mettre dans le livre pour l’instant : commence par « ＋ {what} ». ¦ Τίποτα για το βιβλίο προς το παρόν: ξεκίνα με «＋ {what}». ¦ Още няма нищо за книгата: започни с „＋ {what}“.
+Les chansons de la famille ¦ Τα τραγούδια της οικογένειας ¦ Песните на семейството
+Berceuses, chansons de banquet, de conscrits : paroles, air, qui la chantait, l’enregistrement, et un carnet à imprimer. ¦ Νανουρίσματα, τραγούδια του τραπεζιού, των κληρωτών: στίχοι, μελωδία, ποιος το τραγουδούσε, η ηχογράφηση, και ένα τετράδιο για εκτύπωση. ¦ Приспивни песни, трапезни и наборски песни: текст, мелодия, кой я пееше, записът и тетрадка за печат.
+Berceuses ¦ Νανουρίσματα ¦ Приспивни песни
+Chansons de fête et de repas ¦ Τραγούδια γιορτής και τραπεζιού ¦ Празнични и трапезни песни
+Chansons de travail ¦ Τραγούδια της δουλειάς ¦ Трудови песни
+Conscrits et soldats ¦ Κληρωτοί και στρατιώτες ¦ Наборници и войници
+Noël ¦ Χριστούγεννα ¦ Коледа
+En patois ¦ Σε τοπική διάλεκτο ¦ На местен диалект
+Les paroles, l’air, qui la chantait — et, si tu peux, l’enregistrement (un son choisi dans les médias). ¦ Οι στίχοι, η μελωδία, ποιος το τραγουδούσε — και, αν μπορείς, η ηχογράφηση (ένας ήχος από τα πολυμέσα). ¦ Текстът, мелодията, кой я пееше — и ако можеш, записът (звук, избран от медиите).
+Ajouter une chanson ¦ Προσθήκη τραγουδιού ¦ Добави песен
+Imprimer le carnet ¦ Εκτύπωση του τετραδίου ¦ Отпечатай тетрадката
+Aucune chanson pour l’instant : la berceuse de Mémé, la chanson des fins de banquet… ¦ Κανένα τραγούδι προς το παρόν: το νανούρισμα της γιαγιάς, το τραγούδι στο τέλος του γλεντιού… ¦ Още няма песни: приспивната песен на баба, песента в края на гощавката…
+L’entretien guidé ¦ Η καθοδηγούμενη συνέντευξη ¦ Интервюто с насоки
+Les bonnes questions à poser à un grand-parent, lues à voix haute ; l’enregistrement est rangé sur sa fiche, avec un repère par question. ¦ Οι σωστές ερωτήσεις για έναν παππού ή μια γιαγιά, διαβασμένες φωναχτά· η ηχογράφηση αποθηκεύεται στην καρτέλα του/της, με ένα σημάδι για κάθε ερώτηση. ¦ Правилните въпроси към дядо или баба, прочетени на глас; записът се пази в картона му/ѝ, с отметка за всеки въпрос.
+Les questions s’affichent en grand (et peuvent être lues à voix haute) ; l’entretien s’enregistre au micro, chaque question est marquée dans l’enregistrement, puis le son est rangé dans les médias de la fiche. ¦ Οι ερωτήσεις εμφανίζονται σε μεγάλα γράμματα (και μπορούν να διαβαστούν φωναχτά)· η συνέντευξη ηχογραφείται από το μικρόφωνο, κάθε ερώτηση σημειώνεται στην ηχογράφηση και μετά ο ήχος μπαίνει στα πολυμέσα της καρτέλας. ¦ Въпросите се показват в едър шрифт (и могат да се четат на глас); интервюто се записва с микрофона, всеки въпрос се отбелязва в записа, после звукът отива в медиите на картона.
+La personne interrogée ¦ Το άτομο που ρωτάμε ¦ Интервюираният човек
+Lire les questions à voix haute ¦ Ανάγνωση των ερωτήσεων φωναχτά ¦ Чети въпросите на глас
+Les thèmes ¦ Τα θέματα ¦ Темите
+🧒 L’enfance ¦ 🧒 Τα παιδικά χρόνια ¦ 🧒 Детството
+✏️ L’école ¦ ✏️ Το σχολείο ¦ ✏️ Училището
+👪 La famille ¦ 👪 Η οικογένεια ¦ 👪 Семейството
+🔨 Le travail ¦ 🔨 Η δουλειά ¦ 🔨 Работата
+💞 L’amour ¦ 💞 Ο έρωτας ¦ 💞 Любовта
+🪖 La guerre ¦ 🪖 Ο πόλεμος ¦ 🪖 Войната
+🏡 La maison ¦ 🏡 Το σπίτι ¦ 🏡 Домът
+🎉 Les fêtes ¦ 🎉 Οι γιορτές ¦ 🎉 Празниците
+💬 Pour plus tard ¦ 💬 Για αργότερα ¦ 💬 За по-късно
+Les entretiens enregistrés ¦ Οι ηχογραφημένες συνεντεύξεις ¦ Записаните интервюта
+🎙️ Commencer l’entretien ¦ 🎙️ Έναρξη της συνέντευξης ¦ 🎙️ Започни интервюто
+Les questions sur papier, avec la place pour noter les réponses ¦ Οι ερωτήσεις σε χαρτί, με χώρο για να γράψεις τις απαντήσεις ¦ Въпросите на хартия, с място за отговорите
+Aucun entretien pour l’instant ¦ Καμία συνέντευξη προς το παρόν ¦ Още няма интервюта
+Choisis la personne et les thèmes, puis « 🎙️ Commencer l’entretien ». ¦ Διάλεξε το άτομο και τα θέματα, μετά «🎙️ Έναρξη της συνέντευξης». ¦ Избери човека и темите, после „🎙️ Започни интервюто“.
+La veillée en un clic ¦ Η οικογενειακή βραδιά με ένα κλικ ¦ Семейната вечер с едно щракване
+En plein écran, les portraits d’une branche défilent, chaque vie est racontée à voix haute, avec une musique douce. ¦ Σε πλήρη οθόνη, τα πορτρέτα ενός κλάδου περνούν το ένα μετά το άλλο, κάθε ζωή αφηγείται φωναχτά, με απαλή μουσική. ¦ На цял екран портретите от един клон се сменят, всеки живот се разказва на глас, с тиха музика.
+Autour de ¦ Γύρω από ¦ Около
+Secondes par vie ¦ Δευτερόλεπτα ανά ζωή ¦ Секунди за живот
+Raconter à voix haute ¦ Αφήγηση φωναχτά ¦ Разказвай на глас
+Musique douce ¦ Απαλή μουσική ¦ Тиха музика
+En plein écran : les portraits défilent, chaque vie est racontée. Espace = pause, flèches = avant / après, Échap = fin. ¦ Σε πλήρη οθόνη: τα πορτρέτα περνούν, κάθε ζωή αφηγείται. Space = παύση, βέλη = πίσω / μπροστά, Esc = τέλος. ¦ На цял екран: портретите се сменят, всеки живот се разказва. Интервал = пауза, стрелки = напред / назад, Esc = край.
+La veillée de la famille {name} ¦ Η βραδιά της οικογένειας {name} ¦ Вечерта на семейство {name}
+Ce soir, on raconte {n} vies de la famille de {name}. ¦ Απόψε αφηγούμαστε {n} ζωές της οικογένειας του/της {name}. ¦ Тази вечер разказваме {n} живота от семейството на {name}.
+Bonne nuit ¦ Καληνύχτα ¦ Лека нощ
+Et maintenant, à vous de raconter ce dont vous vous souvenez. ¦ Και τώρα, ας πει ο καθένας ό,τι θυμάται. ¦ А сега нека всеки разкаже какво си спомня.
+{n} vies à raconter : {list} ¦ {n} ζωές για αφήγηση: {list} ¦ {n} живота за разказване: {list}
+🕯️ Lancer la veillée ¦ 🕯️ Ξεκίνα τη βραδιά ¦ 🕯️ Започни вечерта
+Découvrir ¦ Ανακάλυψε ¦ Открий
+À ton âge… ¦ Στην ηλικία σου… ¦ На твоята възраст…
+Ce que faisait chaque ancêtre au même âge que toi : il se mariait, partait, devenait parent… ¦ Τι έκανε κάθε πρόγονος στην ίδια ηλικία με σένα: παντρευόταν, έφευγε, γινόταν γονιός… ¦ Какво е правил всеки предшественик на твоята възраст: сключвал брак, заминавал, ставал родител…
+L’âge ¦ Η ηλικία ¦ Възрастта
+Mon âge ¦ Η ηλικία μου ¦ Моята възраст
+Aperçu, A4 ou A5, ⤓ PDF ¦ Προεπισκόπηση, A4 ή A5, ⤓ PDF ¦ Преглед, A4 или A5, ⤓ PDF
+Les prénoms qui sautent une génération ¦ Τα ονόματα που πηδούν μια γενιά ¦ Имената, които прескачат поколение
+Henri comme son grand-père, Rose comme son arrière-grand-mère : les prénoms transmis par-dessus les parents. ¦ Ερρίκος όπως ο παππούς του, Ρόζα όπως η προγιαγιά της: ονόματα που περνούν πάνω από τους γονείς. ¦ Анри като дядо си, Роза като прабаба си: имена, предадени през главата на родителите.
+Un prénom qui « saute » une génération : l’enfant le reçoit d’un grand-parent (ou d’un arrière-grand-parent), alors que ni son père ni sa mère ne le portaient. La popularité de chaque prénom en France (INSEE) est dans <b>Patrimoine → Prénoms</b>. ¦ Ένα όνομα που «πηδά» μια γενιά: το παιδί το παίρνει από έναν παππού ή γιαγιά (ή προπάππου/προγιαγιά), ενώ ούτε ο πατέρας ούτε η μητέρα του το είχαν. Η δημοτικότητα κάθε ονόματος στη Γαλλία (INSEE) βρίσκεται στο <b>Κληρονομιά → Ονόματα</b>. ¦ Име, което „прескача“ поколение: детето го получава от дядо или баба (или прадядо/прабаба), а нито баща му, нито майка му са го носили. Популярността на всяко име във Франция (INSEE) е в <b>Наследство → Имена</b>.
+{n} prénom transmis par-dessus une génération ¦ {n} όνομα που πέρασε πάνω από μια γενιά ¦ {n} име, предадено през поколение
+{n} fois ¦ {n} φορές ¦ {n} пъти
+Les prénoms qui reviennent ¦ Τα ονόματα που επανέρχονται ¦ Имената, които се повтарят
+Le pouvoir d’achat d’autrefois ¦ Η αγοραστική δύναμη άλλοτε ¦ Покупателната способност някога
+Une dot de 1 200 francs en 1880 : combien d’euros d’aujourd’hui, de kilos de pain, de journées de travail ? ¦ Μια προίκα 1.200 φράγκων το 1880: πόσα σημερινά ευρώ, πόσα κιλά ψωμί, πόσα μεροκάματα; ¦ Зестра от 1200 франка през 1880 г.: колко днешни евро, колко килограма хляб, колко надници?
+La somme ¦ Το ποσό ¦ Сумата
+livres (ou francs de l’époque) ¦ λίβρες (ή φράγκα της εποχής) ¦ ливри (или франкове от епохата)
+sous (1/20 de livre ou de franc) ¦ σου (1/20 της λίβρας ή του φράγκου) ¦ су (1/20 от ливра или франк)
+deniers (1/240 de livre) ¦ ντενιέ (1/240 της λίβρας) ¦ денуери (1/240 от ливра)
+anciens francs (après 1960) ¦ παλαιά φράγκα (μετά το 1960) ¦ стари франкове (след 1960)
+centimes ¦ λεπτά ¦ сантима
+euros ¦ ευρώ ¦ евро
+Repères : à partir de 1901, l’indice des prix de l’INSEE ; avant, un ordre de grandeur d’après le prix des denrées. Le pain : prix moyen du kilo de pain ordinaire. Les journées : le salaire d’un journalier. Un écu = 3 livres. ¦ Σημεία αναφοράς: από το 1901, ο δείκτης τιμών της INSEE· πριν, μια τάξη μεγέθους με βάση τις τιμές των τροφίμων. Το ψωμί: μέση τιμή του κιλού κοινού ψωμιού. Τα μεροκάματα: ο μισθός ενός εργάτη με τη μέρα. Ένα εκί = 3 λίβρες. ¦ Ориентири: от 1901 г. — индексът на цените на INSEE; преди това — порядък на величината според цените на храните. Хлябът: средна цена на килограм обикновен хляб. Надниците: заплатата на надничар. Едно екю = 3 ливри.
+🪙 Le calcul pas à pas dans le Convertisseur d’autrefois ↗ ¦ 🪙 Ο υπολογισμός βήμα βήμα στον Μετατροπέα του παρελθόντος ↗ ¦ 🪙 Изчислението стъпка по стъпка в Конвертора на старото ↗
+Les sommes de ton arbre ¦ Τα ποσά του δέντρου σου ¦ Сумите в твоето дърво
+{sum} en {y} ¦ {sum} το {y} ¦ {sum} през {y}
+≈ {eur} d’aujourd’hui ¦ ≈ {eur} σημερινά ¦ ≈ {eur} днешни
+{kg} kg de pain ¦ {kg} kg ψωμί ¦ {kg} kg хляб
+{d} journées de travail ¦ {d} μεροκάματα ¦ {d} надници
+En euros d’aujourd’hui ¦ Σε σημερινά ευρώ ¦ В днешни евро
+En pain ¦ Σε ψωμί ¦ В хляб
+soit {n} baguettes d’aujourd’hui ¦ δηλαδή {n} σημερινές μπαγκέτες ¦ т.е. {n} днешни багети
+En journées de travail ¦ Σε μεροκάματα ¦ В надници
+d’un journalier en {y} ¦ ενός εργάτη με τη μέρα το {y} ¦ на надничар през {y}
+≈ {eur} au SMIC d’aujourd’hui ¦ ≈ {eur} με τον σημερινό κατώτατο μισθό ¦ ≈ {eur} по днешната минимална заплата
+francs ¦ φράγκα ¦ франка
+{n} {unit} de {y}. ¦ {n} {unit} του {y}. ¦ {n} {unit} от {y}.
+Les deux chiffres ne disent pas la même chose : le pain coûtait proportionnellement bien plus cher autrefois, le travail beaucoup moins. ¦ Οι δύο αριθμοί δεν λένε το ίδιο: το ψωμί κόστιζε αναλογικά πολύ ακριβότερα άλλοτε, η εργασία πολύ φθηνότερα. ¦ Двете числа не казват едно и също: хлябът е струвал пропорционално много по-скъпо някога, а трудът — много по-евтино.
+Les vieux mots des actes ¦ Οι παλιές λέξεις των πράξεων ¦ Старите думи в актовете
+Laboureur, ondoyé, brumaire, douaire… Colle un acte : les mots anciens sont surlignés et expliqués. ¦ Laboureur, ondoyé, brumaire, douaire… Επικόλλησε μια πράξη: οι παλιές λέξεις επισημαίνονται και εξηγούνται. ¦ Laboureur, ondoyé, brumaire, douaire… Постави акт: старите думи се маркират и обясняват.
+Colle ici le texte d’un acte ¦ Επικόλλησε εδώ το κείμενο μιας πράξης ¦ Постави тук текста на акт
+Dans ton arbre ¦ Στο δέντρο σου ¦ В твоето дърво
+Chercher un mot ¦ Αναζήτηση λέξης ¦ Търси дума
+{n} mots ¦ {n} λέξεις ¦ {n} думи
+📜 Le latin, les abréviations et les anciennes lettres ↗ ¦ 📜 Τα λατινικά, οι συντομογραφίες και τα παλιά γράμματα ↗ ¦ 📜 Латинският, съкращенията и старите букви ↗
+Ces mots et leurs explications sont ceux des actes français : ils restent en français. ¦ Αυτές οι λέξεις και οι εξηγήσεις τους είναι αυτές των γαλλικών πράξεων: μένουν στα γαλλικά. ¦ Тези думи и обясненията им са от френските актове: остават на френски.
+Jouer en famille ¦ Παιχνίδια με την οικογένεια ¦ Игри със семейството
+Jeu des 7 familles ¦ Παιχνίδι των 7 οικογενειών ¦ Игра на 7-те семейства
+Les cartes faites depuis ton arbre : la photo de chacun au choix et recadrée, six styles de cartes, les couleurs, le dos ; à imprimer et découper. ¦ Οι κάρτες φτιαγμένες από το δέντρο σου: η φωτογραφία του καθενός κατ' επιλογή και περικομμένη, έξι στιλ καρτών, τα χρώματα, η πίσω όψη· για εκτύπωση και κόψιμο. ¦ Карти, направени от твоето дърво: снимката на всеки по избор и изрязана, шест стила карти, цветовете, гърбът; за печат и изрязване.
+Les familles ¦ Οι οικογένειες ¦ Семействата
+par nom de famille ¦ ανά επώνυμο ¦ по фамилно име
+par branche (arrière-grands-parents) ¦ ανά κλάδο (προπάπποι) ¦ по клон (прадядовци)
+Le style ¦ Το στιλ ¦ Стилът
+🃏 Classique ¦ 🃏 Κλασικό ¦ 🃏 Класически
+📜 Ancien (papier jauni) ¦ 📜 Παλιό (κιτρινισμένο χαρτί) ¦ 📜 Старинен (пожълтяла хартия)
+◻️ Moderne (grande photo) ¦ ◻️ Μοντέρνο (μεγάλη φωτογραφία) ¦ ◻️ Модерен (голяма снимка)
+🧸 Pour les petits ¦ 🧸 Για τους μικρούς ¦ 🧸 За малките
+🎩 Années folles ¦ 🎩 Τρελά χρόνια του '20 ¦ 🎩 Лудите двайсет
+🪵 Bois gravé ¦ 🪵 Ξυλογραφία ¦ 🪵 Дърворезба
+Couleurs d’origine ¦ Αρχικά χρώματα ¦ Оригинални цветове
+Le dos ¦ Η πίσω όψη ¦ Гърбът
+Un dos à motif (à imprimer au verso) ¦ Πίσω όψη με μοτίβο (για εκτύπωση στο πίσω μέρος) ¦ Гръб с мотив (за печат на обратната страна)
+Sans dos ¦ Χωρίς πίσω όψη ¦ Без гръб
+Le lieu de naissance ¦ Ο τόπος γέννησης ¦ Мястото на раждане
+La liste de la famille ¦ Η λίστα της οικογένειας ¦ Списъкът на семейството
+Les photos choisies, les couleurs et le style de départ ¦ Οι επιλεγμένες φωτογραφίες, τα χρώματα και το αρχικό στιλ ¦ Избраните снимки, цветовете и началният стил
+📷 sur une carte : choisir et recadrer sa photo. ¦ 📷 σε μια κάρτα: διάλεξε και περίκοψε τη φωτογραφία. ¦ 📷 върху карта: избери и изрежи снимката.
+{n} familles de 6 cartes ({total} cartes). ¦ {n} οικογένειες των 6 καρτών ({total} κάρτες). ¦ {n} семейства по 6 карти ({total} карти).
+Choisir et recadrer la photo de {name} ¦ Διάλεξε και περίκοψε τη φωτογραφία του/της {name} ¦ Избери и изрежи снимката на {name}
+Le grand-père ¦ Ο παππούς ¦ Дядото
+Le fils ¦ Ο γιος ¦ Синът
+Jeu des familles ¦ Παιχνίδι των οικογενειών ¦ Игра на семействата
+La grand-mère ¦ Η γιαγιά ¦ Бабата
+La fille ¦ Η κόρη ¦ Дъщерята
+Les planches de cartes (et leurs dos), avec la règle du jeu ¦ Οι σελίδες με τις κάρτες (και τις πίσω όψεις), με τους κανόνες του παιχνιδιού ¦ Листовете с карти (и гърбовете им), с правилата на играта
+Arbre à colorier ¦ Δέντρο για ζωγραφική ¦ Дърво за оцветяване
+Les vrais ancêtres d’un enfant en traits noirs : un arbre, un jardin de fleurs, un village, des blasons, des montgolfières, une ruche, un éventail ou une rosace. ¦ Οι αληθινοί πρόγονοι ενός παιδιού σε μαύρες γραμμές: ένα δέντρο, ένας κήπος με λουλούδια, ένα χωριό, θυρεοί, αερόστατα, μια κυψέλη, μια βεντάλια ή ένας ρόδακας. ¦ Истинските предци на едно дете с черни линии: дърво, цветна градина, село, гербове, балони, кошер, ветрило или розетка.
+L’enfant (ou la personne) au pied de l’arbre ¦ Το παιδί (ή το άτομο) στη ρίζα του δέντρου ¦ Детето (или човекът) в основата на дървото
+5 (petites cases) ¦ 5 (μικρά κουτάκια) ¦ 5 (малки клетки)
+Le dessin ¦ Το σχέδιο ¦ Рисунката
+🌳 Le grand arbre ¦ 🌳 Το μεγάλο δέντρο ¦ 🌳 Голямото дърво
+🌷 Le jardin de fleurs ¦ 🌷 Ο κήπος με τα λουλούδια ¦ 🌷 Цветната градина
+🏡 Le village (une maison chacun) ¦ 🏡 Το χωριό (ένα σπίτι για τον καθένα) ¦ 🏡 Селото (по една къща за всеки)
+🛡️ Les blasons ¦ 🛡️ Οι θυρεοί ¦ 🛡️ Гербовете
+🎈 Les montgolfières ¦ 🎈 Τα αερόστατα ¦ 🎈 Балоните
+🐝 La ruche (alvéoles) ¦ 🐝 Η κυψέλη (κελιά) ¦ 🐝 Кошерът (килийки)
+🪭 L’éventail ¦ 🪭 Η βεντάλια ¦ 🪭 Ветрилото
+🏵️ La rosace ¦ 🏵️ Ο ρόδακας ¦ 🏵️ Розетката
+Le prénom seul (petits) ¦ Μόνο το όνομα (μικρά παιδιά) ¦ Само малкото име (за малките)
+Prénom et nom ¦ Όνομα και επώνυμο ¦ Име и фамилия
+Prénom, nom et année ¦ Όνομα, επώνυμο και έτος ¦ Име, фамилия и година
+L’écriture ¦ Η γραφή ¦ Почеркът
+D’écolier ¦ Σχολική ¦ Ученически
+Bâton (lettres rondes) ¦ Κεφαλαία (στρογγυλά γράμματα) ¦ Печатни букви (заоблени)
+Le trait ¦ Η γραμμή ¦ Линията
+Fin (grands) ¦ Λεπτή (μεγάλα παιδιά) ¦ Тънка (за големите)
+Épais (petits, gros feutres) ¦ Χοντρή (μικρά παιδιά, χοντροί μαρκαδόροι) ¦ Дебела (за малките, дебели флумастери)
+Sans ¦ Χωρίς ¦ Без
+Double trait ¦ Διπλή γραμμή ¦ Двойна линия
+Guirlande de feuilles ¦ Γιρλάντα από φύλλα ¦ Гирлянд от листа
+Le titre ¦ Ο τίτλος ¦ Заглавието
+L’arbre de … ¦ Το δέντρο του/της … ¦ Дървото на …
+Dessiner ¦ Σχεδίασε ¦ Нарисувай
+Enregistrer un fichier sur l’ordinateur, ou ranger une copie dans les médias ¦ Αποθήκευση αρχείου στον υπολογιστή ή αντιγράφου στα πολυμέσα ¦ Запази файл на компютъра или копие в медиите
+L’arbre de {name} ¦ Το δέντρο του/της {name} ¦ Дървото на {name}
+Le quiz du repas ¦ Το κουίζ του τραπεζιού ¦ Викторината на трапезата
+Sur la télé, en équipes : des questions tirées de l’arbre (qui a épousé qui, où, quel métier), compte à rebours et scores. ¦ Στην τηλεόραση, σε ομάδες: ερωτήσεις από το δέντρο (ποιος παντρεύτηκε ποιον, πού, ποιο επάγγελμα), αντίστροφη μέτρηση και σκορ. ¦ На телевизора, в отбори: въпроси от дървото (кой с кого е сключил брак, къде, каква професия), обратно броене и точки.
+Les équipes (séparées par des virgules) ¦ Οι ομάδες (χωρισμένες με κόμματα) ¦ Отборите (разделени със запетаи)
+Les {name}, Les cousins ¦ Οι {name}, Τα ξαδέρφια ¦ Семейство {name}, Братовчедите
+Secondes pour répondre ¦ Δευτερόλεπτα για απάντηση ¦ Секунди за отговор
+Branche l’ordinateur sur la télé : la question et les quatre réponses s’affichent en grand ; à la fin du compte à rebours (ou avec <b>Entrée</b>), la bonne réponse apparaît, puis on donne le point à l’équipe qui a trouvé (touches <b>1</b> à <b>9</b>). Répondre depuis les téléphones demanderait que l’application soit joignable depuis tout le réseau de la maison : ce n’est pas possible pour l’instant, on joue devant l’écran. ¦ Σύνδεσε τον υπολογιστή με την τηλεόραση: η ερώτηση και οι τέσσερις απαντήσεις εμφανίζονται σε μεγάλα γράμματα· στο τέλος της αντίστροφης μέτρησης (ή με <b>Enter</b>), εμφανίζεται η σωστή απάντηση και μετά δίνεις τον πόντο στην ομάδα που τη βρήκε (πλήκτρα <b>1</b> έως <b>9</b>). Για απαντήσεις από τα κινητά θα έπρεπε η εφαρμογή να είναι προσβάσιμη από όλο το δίκτυο του σπιτιού: αυτό δεν είναι δυνατό προς το παρόν, παίζουμε μπροστά στην οθόνη. ¦ Свържи компютъра с телевизора: въпросът и четирите отговора се показват в едър шрифт; в края на обратното броене (или с <b>Enter</b>) се появява верният отговор, после даваш точката на отбора, който е познал (клавиши <b>1</b> до <b>9</b>). За отговори от телефоните приложението трябва да е достъпно от цялата домашна мрежа: това засега не е възможно, играем пред екрана.
+📺 Lancer le quiz ¦ 📺 Ξεκίνα το κουίζ ¦ 📺 Започни викторината
+Un avant-goût ¦ Μια πρώτη γεύση ¦ Малко предвкусване
+Créer et fabriquer ¦ Δημιουργία και κατασκευή ¦ Създай и изработи
+Le faire-part d’un événement ¦ Η αναγγελία ενός γεγονότος ¦ Съобщение за събитие
+Une naissance, un mariage ou un décès de l’arbre : le faire-part se compose tout seul, dans le style de l’époque. ¦ Μια γέννηση, ένας γάμος ή ένας θάνατος από το δέντρο: η αναγγελία συντάσσεται μόνη της, στο στιλ της εποχής. ¦ Раждане, брак или смърт от дървото: съобщението се съставя само, в стила на епохата.
+L’événement ¦ Το γεγονός ¦ Събитието
+Classique (1900) ¦ Κλασικό (1900) ¦ Класически (1900)
+Art déco (1925) ¦ Αρ ντεκό (1925) ¦ Ар деко (1925)
+Fleuri ¦ Λουλουδάτο ¦ На цветя
+Deuil (liseré noir) ¦ Πένθιμο (μαύρο περίγραμμα) ¦ Траурен (черен кант)
+Romantique (dentelle, 1880) ¦ Ρομαντικό (δαντέλα, 1880) ¦ Романтичен (дантела, 1880)
+Art nouveau (1900) ¦ Αρ νουβό (1900) ¦ Ар нуво (1900)
+Champêtre (papier kraft) ¦ Αγροτικό (χαρτί kraft) ¦ Селски (крафт хартия)
+Bleu et or ¦ Μπλε και χρυσό ¦ Синьо и злато
+Layette (naissance) ¦ Βρεφικό (γέννηση) ¦ Бебешки (раждане)
+Épuré ¦ Λιτό ¦ Изчистен
+🎨 Plus d’options ¦ 🎨 Περισσότερες επιλογές ¦ 🎨 Още опции
+Le format ¦ Η μορφή ¦ Форматът
+Carte A6 (portrait) ¦ Κάρτα A6 (κατακόρυφη) ¦ Картичка A6 (портрет)
+Marque-page ¦ Σελιδοδείκτης ¦ Книгоразделител
+Celle du style ¦ Αυτή του στιλ ¦ Тази на стила
+Écriture à la plume ¦ Γραφή με πένα ¦ Писане с перо
+Élégante (Didot) ¦ Κομψή (Didot) ¦ Елегантен (Didot)
+Bâton ¦ Απλά κεφαλαία ¦ Печатни букви
+Les ornements ¦ Τα διακοσμητικά ¦ Орнаментите
+Ceux du style ¦ Αυτά του στιλ ¦ Тези на стила
+Mes couleurs ¦ Τα χρώματά μου ¦ Моите цветове
+La photo de la personne ¦ Η φωτογραφία του ατόμου ¦ Снимката на човека
+Sa forme ¦ Το σχήμα της ¦ Формата ѝ
+Couleurs de la photo ¦ Χρώματα της φωτογραφίας ¦ Цветове на снимката
+D’origine ¦ Αρχικά ¦ Оригинални
+Le texte (une ligne par ligne ; * devant une ligne = en grand) ¦ Το κείμενο (μία σειρά ανά γραμμή· * μπροστά από μια γραμμή = σε μεγάλα γράμματα) ¦ Текстът (по един ред на линия; * пред ред = едро)
+Le mur des signatures ¦ Ο τοίχος των υπογραφών ¦ Стената на подписите
+Toutes les signatures repérées sur les actes, découpées et rangées par époque : l’écriture de chaque génération. ¦ Όλες οι υπογραφές που εντοπίστηκαν στις πράξεις, κομμένες και ταξινομημένες ανά εποχή: η γραφή κάθε γενιάς. ¦ Всички подписи, открити в актовете, изрязани и подредени по епохи: почеркът на всяко поколение.
+La Belle Époque ¦ Η Μπελ Επόκ ¦ Бел епок
+L’affiche (image PNG) ¦ Η αφίσα (εικόνα PNG) ¦ Плакатът (PNG изображение)
+Lieux et voyages ¦ Τόποι και ταξίδια ¦ Места и пътувания
+Le film des migrations ¦ Η ταινία των μεταναστεύσεων ¦ Филмът на миграциите
+Année après année, chacun se déplace sur la carte, de sa naissance à sa mort ; le film s’enregistre en vidéo. ¦ Χρονιά με τη χρονιά, ο καθένας μετακινείται στον χάρτη, από τη γέννηση ως τον θάνατό του· η ταινία καταγράφεται σε βίντεο. ¦ Година след година всеки се придвижва по картата, от раждането до смъртта си; филмът се записва като видео.
+Durée du film ¦ Διάρκεια της ταινίας ¦ Продължителност на филма
+Sans carte ¦ Χωρίς χάρτη ¦ Без карта
+▶ Jouer ¦ ▶ Αναπαραγωγή ¦ ▶ Пусни
+{n} parcours, de {y0} à {y1} ¦ {n} διαδρομές, από το {y0} ως το {y1} ¦ {n} маршрута, от {y0} до {y1}
+famille {name} ¦ οικογένεια {name} ¦ семейство {name}
+Le fond de carte se charge… ¦ Ο χάρτης φορτώνει… ¦ Картата се зарежда…
+{n} personne en vie ¦ {n} άτομο εν ζωή ¦ {n} жив човек
+Fond de carte © OpenStreetMap, Esri ¦ Υπόβαθρο χάρτη © OpenStreetMap, Esri ¦ Основа на картата © OpenStreetMap, Esri
+La vidéo (WebM) ¦ Το βίντεο (WebM) ¦ Видеото (WebM)
+Le film se joue une fois pendant l’enregistrement ¦ Η ταινία παίζει μία φορά κατά την εγγραφή ¦ Филмът се пуска веднъж по време на записа
+Cette image (PNG) ¦ Αυτή η εικόνα (PNG) ¦ Това изображение (PNG)
+Le film des migrations — {title} ¦ Η ταινία των μεταναστεύσεων — {title} ¦ Филмът на миграциите — {title}
+La vidéo, enregistrée pendant que le film se joue ¦ Το βίντεο, που εγγράφεται ενώ παίζει η ταινία ¦ Видеото, записано докато филмът се пуска
+Le village des ancêtres sur la carte de Cassini et sur la carte d’aujourd’hui, avec un rideau à faire glisser. ¦ Το χωριό των προγόνων στον χάρτη Cassini και στον σημερινό χάρτη, με μια κουρτίνα που σέρνεις. ¦ Селото на предците върху картата на Касини и върху днешната карта, със завеса, която плъзгаш.
+Hier ¦ Χθες ¦ Вчера
+Carte de Cassini (XVIIIe s.) ¦ Χάρτης Cassini (18ος αι.) ¦ Карта на Касини (XVIII в.)
+Cassini, exemplaire du roi ¦ Cassini, αντίτυπο του βασιλιά ¦ Касини, екземпляр на краля
+Carte d’État-major (1820-1866) ¦ Χάρτης του Επιτελείου (1820-1866) ¦ Карта на Генералния щаб (1820-1866)
+OpenHistoricalMap ¦ OpenHistoricalMap ¦ OpenHistoricalMap
+Fais glisser le rideau (ou les flèches du clavier). ¦ Σύρε την κουρτίνα (ή χρησιμοποίησε τα βέλη του πληκτρολογίου). ¦ Плъзни завесата (или използвай стрелките на клавиатурата).
+Rideau entre la carte d’hier et celle d’aujourd’hui ¦ Κουρτίνα ανάμεσα στον χάρτη του χθες και στον σημερινό ¦ Завеса между вчерашната и днешната карта
+Cartes : Géoplateforme IGN (Cassini, État-major), © OpenStreetMap, Esri. Dans l’onglet Carte, le mode « superposition » compare aussi deux fonds avec l’opacité. ¦ Χάρτες: Géoplateforme IGN (Cassini, Επιτελείο), © OpenStreetMap, Esri. Στην καρτέλα Χάρτης, η λειτουργία «επικάλυψη» συγκρίνει επίσης δύο υπόβαθρα με τη διαφάνεια. ¦ Карти: Géoplateforme IGN (Касини, Генерален щаб), © OpenStreetMap, Esri. В раздела Карта режимът „наслагване“ също сравнява две основи с прозрачността.
+La promenade guidée ¦ Ο ξεναγημένος περίπατος ¦ Разходката с екскурзовод
+Les lieux d’une vie dans l’ordre, l’histoire de chaque étape lue à voix haute — même toute seule, en arrivant sur place. ¦ Οι τόποι μιας ζωής με τη σειρά, η ιστορία κάθε σταθμού διαβασμένη φωναχτά — ακόμα και μόνη της, όταν φτάνεις επιτόπου. ¦ Местата от един живот по ред, историята на всяка спирка, прочетена на глас — дори сама, когато пристигнеш на място.
+La promenade de ¦ Ο περίπατος του/της ¦ Разходката на
+Le parcours ¦ Η διαδρομή ¦ Маршрутът
+les lieux de sa vie ¦ οι τόποι της ζωής του/της ¦ местата от живота му/ѝ
+les villages de ses ancêtres ¦ τα χωριά των προγόνων του/της ¦ селата на предците му/ѝ
+🔊 Tout le guide ¦ 🔊 Όλος ο οδηγός ¦ 🔊 Целият пътеводител
+📍 Me guider en marchant ¦ 📍 Καθοδήγησέ με καθώς περπατώ ¦ 📍 Води ме, докато вървя
+⏹ Silence ¦ ⏹ Σιωπή ¦ ⏹ Тишина
+Le guide de la promenade, étape par étape ¦ Ο οδηγός του περιπάτου, βήμα βήμα ¦ Пътеводителят на разходката, стъпка по стъпка
+🔊 Écouter ¦ 🔊 Άκου ¦ 🔊 Слушай
+🧭 Itinéraire ¦ 🧭 Διαδρομή ¦ 🧭 Маршрут
+{km} km en tout (à vol d’oiseau) ¦ {km} km συνολικά (σε ευθεία γραμμή) ¦ {km} km общо (по права линия)
+Outils malins ¦ Έξυπνα εργαλεία ¦ Хитри инструменти
+Dater une vieille photo ¦ Χρονολόγηση μιας παλιάς φωτογραφίας ¦ Датирай стара снимка
+Le support, le carton, les vêtements, les coiffures : une fourchette d’années, et qui de l’arbre ça peut être. ¦ Το υλικό, το χαρτόνι, τα ρούχα, τα χτενίσματα: ένα εύρος ετών, και ποιος από το δέντρο μπορεί να είναι. ¦ Носителят, картонът, дрехите, прическите: диапазон от години и кой от дървото може да е.
+Coche ce que tu vois sur la photo (une ou plusieurs réponses par question, ou rien si tu ne sais pas). Les repères sont volontairement larges. ¦ Τσέκαρε ό,τι βλέπεις στη φωτογραφία (μία ή περισσότερες απαντήσεις ανά ερώτηση, ή τίποτα αν δεν ξέρεις). Τα όρια είναι σκόπιμα ευρεία. ¦ Отметни какво виждаш на снимката (един или повече отговора на въпрос, или нищо, ако не знаеш). Ориентирите са нарочно широки.
+Le support ¦ Το υλικό ¦ Носителят
+Plaque de métal argentée, comme un miroir, dans un écrin ¦ Ασημένια μεταλλική πλάκα, σαν καθρέφτης, σε θήκη ¦ Посребрена метална плочка, като огледало, в кутийка
+Image sur verre, dans un écrin (ambrotype) ¦ Εικόνα σε γυαλί, σε θήκη (αμβροτυπία) ¦ Изображение върху стъкло, в кутийка (амбротипия)
+Image sur une fine plaque de fer, sombre (ferrotype) ¦ Εικόνα σε λεπτή σιδερένια πλάκα, σκούρα (φερροτυπία) ¦ Изображение върху тънка железна плочка, тъмно (феротипия)
+Petite carte (6 × 10 cm) collée sur un carton : carte de visite ¦ Μικρή κάρτα (6 × 10 cm) κολλημένη σε χαρτόνι: carte de visite ¦ Малка карта (6 × 10 cm), залепена на картон: carte de visite
+Grande carte (11 × 16 cm) sur carton : carte cabinet ¦ Μεγάλη κάρτα (11 × 16 cm) σε χαρτόνι: carte cabinet ¦ Голяма карта (11 × 16 cm) на картон: carte cabinet
+Carte postale photo (dos imprimé « carte postale ») ¦ Φωτογραφική καρτ ποστάλ (τυπωμένη πίσω όψη «καρτ ποστάλ») ¦ Фотографска пощенска картичка (отпечатан гръб „пощенска картичка“)
+Tirage papier aux bords dentelés ¦ Χάρτινη εκτύπωση με οδοντωτές άκρες ¦ Хартиен отпечатък с назъбени краища
+Petit tirage papier noir et blanc sans carton, bords blancs droits ¦ Μικρή ασπρόμαυρη χάρτινη εκτύπωση χωρίς χαρτόνι, ίσιες λευκές άκρες ¦ Малък черно-бял хартиен отпечатък без картон, прави бели краища
+Photo couleur aux couleurs passées (orange, magenta) ¦ Έγχρωμη φωτογραφία με ξεθωριασμένα χρώματα (πορτοκαλί, ματζέντα) ¦ Цветна снимка с избелели цветове (оранжево, пурпурно)
+Tirage carré à bord blanc large (type Polaroid / Instamatic) ¦ Τετράγωνη εκτύπωση με φαρδύ λευκό περιθώριο (τύπου Polaroid / Instamatic) ¦ Квадратен отпечатък с широк бял кант (тип Polaroid / Instamatic)
+Le carton (carte de visite ou cabinet) ¦ Το χαρτόνι (carte de visite ή cabinet) ¦ Картонът (carte de visite или cabinet)
+Coins carrés, carton fin et clair ¦ Τετράγωνες γωνίες, λεπτό και ανοιχτόχρωμο χαρτόνι ¦ Квадратни ъгли, тънък и светъл картон
+Carton épais et coloré (crème, noir, bordeaux), tranche dorée ¦ Χοντρό και χρωματιστό χαρτόνι (κρεμ, μαύρο, μπορντό), χρυσή ακμή ¦ Дебел и цветен картон (кремав, черен, бордо), позлатен ръб
+Nom du photographe en grandes lettres décorées au dos, médailles ¦ Όνομα του φωτογράφου με μεγάλα διακοσμημένα γράμματα στην πίσω όψη, μετάλλια ¦ Името на фотографа с големи украсени букви на гърба, медали
+Bord biseauté doré ¦ Χρυσή λοξή άκρη ¦ Позлатен скосен ръб
+Les vêtements des femmes ¦ Τα γυναικεία ρούχα ¦ Женските дрехи
+Jupe très large en cloche (crinoline), épaules tombantes ¦ Πολύ φαρδιά φούστα σε σχήμα καμπάνας (κρινολίνο), πεσμένοι ώμοι ¦ Много широка пола камбана (кринолин), спуснати рамене
+Jupe plate devant et gonflée derrière (tournure) ¦ Φούστα ίσια μπροστά και φουσκωμένη πίσω (tournure) ¦ Пола, права отпред и издута отзад (турнюр)
+Manches très bouffantes en haut (gigot) ¦ Μανίκια πολύ φουσκωτά στο πάνω μέρος (gigot) ¦ Ръкави, много бухнали горе (жиго)
+Silhouette en S, col montant, grand chapeau ¦ Σιλουέτα σε σχήμα S, ψηλός γιακάς, μεγάλο καπέλο ¦ Силует във форма на S, висока яка, голяма шапка
+Robe droite, taille basse, jupe au genou ¦ Ίσιο φόρεμα, χαμηλή μέση, φούστα ως το γόνατο ¦ Права рокля, ниска талия, пола до коляното
+Épaules carrées, jupe sous le genou ¦ Τετράγωνοι ώμοι, φούστα κάτω από το γόνατο ¦ Квадратни рамене, пола под коляното
+Jupe ample et taille fine (New Look) ¦ Φαρδιά φούστα και λεπτή μέση (New Look) ¦ Широка пола и тънка талия (New Look)
+Coiffe régionale ou bonnet de paysanne ¦ Τοπική κόμμωση ή σκουφί χωρικής ¦ Регионално забрадило или селска шапчица
+Les coiffures ¦ Τα χτενίσματα ¦ Прическите
+Raie au milieu, cheveux plaqués sur les oreilles ¦ Χωρίστρα στη μέση, μαλλιά κολλημένα στα αυτιά ¦ Път по средата, коса, прилепнала към ушите
+Frange frisée sur le front ¦ Σγουρή φράντζα στο μέτωπο ¦ Къдрав бретон на челото
+Chignon haut et volumineux ¦ Ψηλός και ογκώδης κότσος ¦ Висок и обемен кок
+Cheveux courts « à la garçonne » ¦ Κοντά μαλλιά «αλά γκαρσόν» ¦ Къса коса „а ла гарсон“
+Mise en plis ondulée ¦ Κυματιστό χτένισμα ¦ Вълнообразна прическа
+Les hommes ¦ Οι άνδρες ¦ Мъжете
+Haut-de-forme ¦ Ημίψηλο καπέλο ¦ Цилиндър
+Canotier (chapeau de paille plat) ¦ Ψάθινο καπέλο (επίπεδο ψάθινο) ¦ Канотие (плоска сламена шапка)
+Moustache fournie, sans barbe ¦ Πυκνό μουστάκι, χωρίς γένια ¦ Гъсти мустаци, без брада
+Barbe entière fournie ¦ Πυκνά γένια ¦ Гъста цяла брада
+Col cassé et nœud papillon ¦ Γιακάς με γυρισμένες άκρες και παπιγιόν ¦ Яка с подгънати върхове и папийонка
+Uniforme bleu horizon ¦ Στολή χρώματος bleu horizon ¦ Униформа в цвят „синьо хоризонт“
+Costume trois-pièces large, chapeau mou ¦ Φαρδύ τρίκομμάτι κοστούμι, μαλακό καπέλο ¦ Широк костюм от три части, мека шапка
+Pantalon pattes d’éléphant, cheveux longs ¦ Παντελόνι καμπάνα, μακριά μαλλιά ¦ Панталон чарлстон, дълга коса
+Le décor ¦ Το σκηνικό ¦ Декорът
+Fond peint, colonne, balustrade, rideau drapé ¦ Ζωγραφισμένο φόντο, κολόνα, κάγκελο, κουρτίνα με πτυχώσεις ¦ Рисуван фон, колона, балюстрада, драпирана завеса
+Fond uni, simple chaise ¦ Μονόχρωμο φόντο, απλή καρέκλα ¦ Едноцветен фон, обикновен стол
+Dehors, photo prise sur le vif (pas en atelier) ¦ Έξω, αυθόρμητη φωτογραφία (όχι σε στούντιο) ¦ Навън, моментна снимка (не в ателие)
+Et toi, que sais-tu ? ¦ Κι εσύ, τι ξέρεις; ¦ А ти какво знаеш?
+Photographe ou date notée : de ¦ Φωτογράφος ή σημειωμένη ημερομηνία: από ¦ Фотограф или записана дата: от
+Âge apparent de la personne ¦ Φαινομενική ηλικία του ατόμου ¦ Видима възраст на човека
+C’est ¦ Είναι ¦ Това е
+un homme, un garçon ¦ άνδρας, αγόρι ¦ мъж, момче
+une femme, une fille ¦ γυναίκα, κορίτσι ¦ жена, момиче
+Lieu (nom du photographe, ville) ¦ Τόπος (όνομα του φωτογράφου, πόλη) ¦ Място (име на фотографа, град)
+Coche au moins un indice ¦ Τσέκαρε τουλάχιστον μία ένδειξη ¦ Отметни поне една следа
+Les rappels de recherche ¦ Οι υπενθυμίσεις έρευνας ¦ Напомнянията за проучване
+« Tu n’as pas touché à la branche FAURE depuis 8 mois » : les branches endormies, ce qui y manque, un rappel en un clic. ¦ «Δεν έχεις αγγίξει τον κλάδο FAURE εδώ και 8 μήνες»: οι αδρανείς κλάδοι, τι τους λείπει, μια υπενθύμιση με ένα κλικ. ¦ „Не си пипал клона FAURE от 8 месеца“: заспалите клонове, какво липсва в тях, напомняне с едно щракване.
+Les branches de ¦ Οι κλάδοι του/της ¦ Клоновете на
+Endormie depuis au moins ¦ Αδρανής εδώ και τουλάχιστον ¦ Заспал поне от
+peu importe ¦ δεν έχει σημασία ¦ без значение
+La date est celle de la dernière modification d’une fiche de la branche. Un rappel se crée en un clic : il rejoint les rappels de l’application (Listes → Rappels) et le widget « À venir ». ¦ Η ημερομηνία είναι αυτή της τελευταίας αλλαγής σε μια καρτέλα του κλάδου. Μια υπενθύμιση δημιουργείται με ένα κλικ: μπαίνει στις υπενθυμίσεις της εφαρμογής (Λίστες → Υπενθυμίσεις) και στο widget «Επερχόμενα». ¦ Датата е на последната промяна на картон от клона. Напомнянето се създава с едно щракване: отива в напомнянията на приложението (Списъци → Напомняния) и в уиджета „Предстоящи“.
+Branche {name} ({first}) ¦ Κλάδος {name} ({first}) ¦ Клон {name} ({first})
+Reprendre la branche {name} ({first}) ¦ Ξαναπιάσε τον κλάδο {name} ({first}) ¦ Поднови клона {name} ({first})
+Aucune branche endormie depuis aussi longtemps ¦ Κανένας κλάδος αδρανής εδώ και τόσο καιρό ¦ Няма клон, заспал от толкова време
+Les actes manquants ¦ Οι πράξεις που λείπουν ¦ Липсващите актове
+Ce qui manque à la lignée, rangé par archives où chercher (l’assistant de l’onglet Recherche). ¦ Ό,τι λείπει στη γενεαλογική γραμμή, ταξινομημένο ανά αρχείο όπου θα ψάξεις (ο βοηθός της καρτέλας Έρευνα). ¦ Какво липсва на рода, подредено по архиви, където да търсиш (помощникът от раздела Проучване).
+Je regarde ce qui manque… ¦ Κοιτάζω τι λείπει… ¦ Гледам какво липсва…
+L’assistant <b>« Que manque-t-il ? »</b> (onglet Recherche) liste les actes qui manquent à la lignée, rangés par service d’archives, avec la commune, les années et les séries à consulter (état civil, tables décennales, registres paroissiaux, notaires, recensements, registres matricules), et un lien vers FranceArchives. ¦ Ο βοηθός <b>«Τι λείπει;»</b> (καρτέλα Έρευνα) απαριθμεί τις πράξεις που λείπουν στη γενεαλογική γραμμή, ταξινομημένες ανά υπηρεσία αρχείων, με τον δήμο, τα έτη και τις σειρές που πρέπει να δεις (ληξιαρχείο, δεκαετείς πίνακες, ενοριακά βιβλία, συμβολαιογράφοι, απογραφές, μητρώα στρατολογίας), και έναν σύνδεσμο προς το FranceArchives. ¦ Помощникът <b>„Какво липсва?“</b> (раздел Проучване) изброява липсващите актове на рода, подредени по архивна служба, с общината, годините и сериите за преглед (гражданско състояние, десетгодишни таблици, енорийски регистри, нотариуси, преброявания, военни регистри), и връзка към FranceArchives.
+{n} recherches à faire sur 6 générations ¦ {n} έρευνες για 6 γενιές ¦ {n} проучвания за 6 поколения
+L’assistant « Que manque-t-il ? » de l’onglet Recherche ¦ Ο βοηθός «Τι λείπει;» της καρτέλας Έρευνα ¦ Помощникът „Какво липсва?“ от раздела Проучване
+Le thème d’époque ¦ Το θέμα της εποχής ¦ Темата на епохата
+Chaque fiche aux couleurs de son temps : parchemin, sépia, Belle Époque, art déco, Trente Glorieuses. ¦ Κάθε καρτέλα στα χρώματα της εποχής της: περγαμηνή, σέπια, Μπελ Επόκ, αρ ντεκό, Τριάντα Ένδοξα Χρόνια. ¦ Всеки картон в цветовете на своето време: пергамент, сепия, Бел епок, ар деко, Трийсетте славни години.
+Habiller chaque fiche aux couleurs de son époque ¦ Ντύσε κάθε καρτέλα με τα χρώματα της εποχής της ¦ Облечи всеки картон в цветовете на неговата епоха
+La fiche d’un ancêtre prend l’allure du temps où il a vécu (ses 25 ans) : parchemin pour l’Ancien Régime, sépia au XIXe, art déco pour les années folles… Le reste de l’application ne change pas. Ce réglage est gardé sur cet ordinateur. ¦ Η καρτέλα ενός προγόνου παίρνει την όψη της εποχής που έζησε (στα 25 του): περγαμηνή για το Παλαιό Καθεστώς, σέπια για τον 19ο αιώνα, αρ ντεκό για τα τρελά χρόνια… Η υπόλοιπη εφαρμογή δεν αλλάζει. Αυτή η ρύθμιση κρατιέται σε αυτόν τον υπολογιστή. ¦ Картонът на предшественика придобива облика на времето, в което е живял (на 25 години): пергамент за Стария режим, сепия за XIX век, ар деко за лудите двайсет… Останалата част от приложението не се променя. Тази настройка се пази на този компютър.
+📜 Ancien Régime ¦ 📜 Παλαιό Καθεστώς ¦ 📜 Старият режим
+avant ¦ πριν ¦ преди
+🎖️ Révolution et Empire ¦ 🎖️ Επανάσταση και Αυτοκρατορία ¦ 🎖️ Революцията и Империята
+🎩 Le XIXe siècle ¦ 🎩 Ο 19ος αιώνας ¦ 🎩 XIX век
+🌿 La Belle Époque ¦ 🌿 Η Μπελ Επόκ ¦ 🌿 Бел епок
+🍸 Les années folles et la guerre ¦ 🍸 Τα τρελά χρόνια και ο πόλεμος ¦ 🍸 Лудите двайсет и войната
+🚗 Les Trente Glorieuses ¦ 🚗 Τα Τριάντα Ένδοξα Χρόνια ¦ 🚗 Трийсетте славни години
+📻 Les années 70 et après ¦ 📻 Η δεκαετία του '70 και μετά ¦ 📻 70-те години и след това
+Les étoiles, la Lune et les planètes au-dessus du village, la nuit de la naissance : une image à garder ou à offrir. ¦ Τα αστέρια, η Σελήνη και οι πλανήτες πάνω από το χωριό, τη νύχτα της γέννησης: μια εικόνα για να την κρατήσεις ή να τη χαρίσεις. ¦ Звездите, Луната и планетите над селото в нощта на раждането: образ за пазене или за подарък.
+La naissance de ¦ Η γέννηση του/της ¦ Раждането на
+Vers quelle heure (heure solaire du lieu) ¦ Περίπου τι ώρα (ηλιακή ώρα του τόπου) ¦ Около кой час (слънчево време на мястото)
+Nuit bleue ¦ Μπλε νύχτα ¦ Синя нощ
+Affiche (fond crème) ¦ Αφίσα (κρεμ φόντο) ¦ Плакат (кремав фон)
+Noir et or ¦ Μαύρο και χρυσό ¦ Черно и злато
+Encre sur papier (à imprimer) ¦ Μελάνι σε χαρτί (για εκτύπωση) ¦ Мастило на хартия (за печат)
+Aube (rose et bleu) ¦ Αυγή (ροζ και μπλε) ¦ Зора (розово и синьо)
+Vert forêt ¦ Πράσινο του δάσους ¦ Горско зелено
+Ronde ¦ Στρογγυλή ¦ Кръгла
+Carrée ¦ Τετράγωνη ¦ Квадратна
+Fenêtre en arc ¦ Τοξωτό παράθυρο ¦ Сводест прозорец
+Affiche ¦ Αφίσα ¦ Плакат
+A4 (portrait) ¦ A4 (κατακόρυφο) ¦ A4 (портрет)
+Élégante ¦ Κομψή ¦ Елегантен
+À la plume ¦ Με πένα ¦ С перо
+Les constellations ¦ Οι αστερισμοί ¦ Съзвездията
+La Voie lactée (évocation) ¦ Ο Γαλαξίας (υπαινιγμός) ¦ Млечният път (загатнат)
+Les repères (hauteur, directions) ¦ Τα σημεία αναφοράς (ύψος, κατευθύνσεις) ¦ Ориентирите (височина, посоки)
+✏️ Les textes ¦ ✏️ Τα κείμενα ¦ ✏️ Текстовете
+(le nom) ¦ (το όνομα) ¦ (името)
+(le lieu et la date) ¦ (ο τόπος και η ημερομηνία) ¦ (мястото и датата)
+Dernière ligne ¦ Τελευταία γραμμή ¦ Последен ред
+(la lune, les planètes) ¦ (η σελήνη, οι πλανήτες) ¦ (луната, планетите)
+Aussi rangée sur sa fiche ¦ Αποθηκεύεται και στην καρτέλα του/της ¦ Пази се и в картона му/ѝ
+{place} — {when}, vers {h} ¦ {place} — {when}, περίπου στις {h} ¦ {place} — {when}, около {h}
+pleine lune ¦ πανσέληνος ¦ пълнолуние
+Jupiter ¦ Δίας ¦ Юпитер
+{list} brillait ¦ {list} έλαμπε ¦ {list} блестеше
+Grande Ourse ¦ Μεγάλη Άρκτος ¦ Голямата мечка
+Orion ¦ Ωρίων ¦ Орион
+Cassiopée ¦ Κασσιόπη ¦ Касиопея
+Lion ¦ Λέων ¦ Лъв
+Gémeaux ¦ Δίδυμοι ¦ Близнаци
+Bouvier ¦ Βοώτης ¦ Воловар
+Taureau ¦ Ταύρος ¦ Телец
+Petite Ourse ¦ Μικρή Άρκτος ¦ Малката мечка
+Cocher ¦ Ηνίοχος ¦ Колар
+Grand Chien ¦ Μεγάλος Κύων ¦ Голямо куче
+Vierge ¦ Παρθένος ¦ Дева
+boussole|N ¦ Β ¦ С
+boussole|E ¦ Α ¦ И
+boussole|S ¦ Ν ¦ Ю
+boussole|O ¦ Δ ¦ З
+{n} % éclairée ¦ {n} % φωτισμένη ¦ {n} % осветена
+coucher du soleil vers {h} ¦ δύση του ηλίου περίπου στις {h} ¦ залез около {h}
+lever vers {h} ¦ ανατολή περίπου στις {h} ¦ изгрев около {h}
+{n} étoiles brillantes au-dessus de l’horizon ¦ {n} λαμπρά αστέρια πάνω από τον ορίζοντα ¦ {n} ярки звезди над хоризонта
+Allumer une bougie ¦ Άναψε ένα κερί ¦ Запали свещ
+Une bougie pour un ancêtre, avec un mot : elle brûle sept jours. Les anniversaires de naissance et de décès à venir. ¦ Ένα κερί για έναν πρόγονο, με λίγα λόγια: καίει επτά μέρες. Οι επερχόμενες επέτειοι γέννησης και θανάτου. ¦ Свещ за предшественик, с няколко думи: гори седем дни. Предстоящите годишнини от раждане и смърт.
+{n} bougie allumée ¦ {n} αναμμένο κερί ¦ {n} запалена свещ
+{n} au registre ¦ {n} στο βιβλίο ¦ {n} в регистъра
+Aucune bougie allumée en ce moment ¦ Κανένα αναμμένο κερί αυτή τη στιγμή ¦ В момента няма запалени свещи
+📅 Dans les trente jours ¦ 📅 Μέσα στις επόμενες τριάντα μέρες ¦ 📅 В следващите трийсет дни
+{n} ans de sa naissance ({date}) ¦ {n} χρόνια από τη γέννησή του/της ({date}) ¦ {n} години от раждането му/ѝ ({date})
+dans {n} jours ¦ σε {n} μέρες ¦ след {n} дни
+{n} ans de son décès ({date}) ¦ {n} χρόνια από τον θάνατό του/της ({date}) ¦ {n} години от смъртта му/ѝ ({date})
+L’ambiance sonore d’époque ¦ Ο ηχητικός κόσμος της εποχής ¦ Звуците на епохата
+Le feu et l’horloge de la veillée, les cloches du dimanche, la forge, la gare, le moulin : les bruits du temps des ancêtres. ¦ Η φωτιά και το ρολόι της βραδιάς, οι καμπάνες της Κυριακής, το σιδηρουργείο, ο σταθμός, ο μύλος: οι ήχοι της εποχής των προγόνων. ¦ Огънят и часовникът на седянката, неделните камбани, ковачницата, гарата, мелницата: звуците от времето на предците.
+🔥 La veillée au coin du feu (vers 1880) ¦ 🔥 Βραδιά δίπλα στο τζάκι (περίπου 1880) ¦ 🔥 Седянка край огнището (около 1880)
+🔔 Le village un dimanche matin ¦ 🔔 Το χωριό ένα κυριακάτικο πρωινό ¦ 🔔 Селото в неделя сутрин
+⚒️ L’atelier du forgeron ¦ ⚒️ Το εργαστήρι του σιδερά ¦ ⚒️ Работилницата на ковача
+🚂 La gare (vers 1900) ¦ 🚂 Ο σταθμός (περίπου 1900) ¦ 🚂 Гарата (около 1900)
+💧 Le moulin au bord de l’eau ¦ 💧 Ο μύλος δίπλα στο νερό ¦ 💧 Мелницата край водата
+🌧️ La nuit d’orage ¦ 🌧️ Η νύχτα της καταιγίδας ¦ 🌧️ Бурната нощ
+🌊 Le port ¦ 🌊 Το λιμάνι ¦ 🌊 Пристанището
+🐓 La ferme au petit matin ¦ 🐓 Το αγρόκτημα νωρίς το πρωί ¦ 🐓 Фермата рано сутрин
+🌙 Une nuit d’été à la campagne ¦ 🌙 Μια καλοκαιρινή νύχτα στην εξοχή ¦ 🌙 Лятна нощ на село
+🧺 Le lavoir ¦ 🧺 Το πλυσταριό ¦ 🧺 Перачницата
+🧺 Le jour de marché ¦ 🧺 Η μέρα του παζαριού ¦ 🧺 Пазарният ден
+🍷 Le café du village ¦ 🍷 Το καφενείο του χωριού ¦ 🍷 Селската кръчма
+🪗 Le bal musette ¦ 🪗 Ο χορός με ακορντεόν ¦ 🪗 Танцова забава с акордеон
+⛪ La messe à l’église ¦ ⛪ Η λειτουργία στην εκκλησία ¦ ⛪ Литургията в църквата
+🪡 L’atelier de couture ¦ 🪡 Το ραφείο ¦ 🪡 Шивашкото ателие
+🧵 La filature et le tissage ¦ 🧵 Η κλωστοϋφαντουργία ¦ 🧵 Предачницата и тъкането
+🧶 La veillée des fileuses ¦ 🧶 Η βραδιά των κλωστριών ¦ 🧶 Седянката на предачките
+🪚 L’atelier du menuisier ¦ 🪚 Το εργαστήρι του ξυλουργού ¦ 🪚 Работилницата на дърводелеца
+🏫 La classe (vers 1900) ¦ 🏫 Η τάξη (περίπου 1900) ¦ 🏫 Класната стая (около 1900)
+✒️ L’étude du notaire ¦ ✒️ Το γραφείο του συμβολαιογράφου ¦ ✒️ Кантората на нотариуса
+🌾 Les moissons ¦ 🌾 Ο θερισμός ¦ 🌾 Жътвата
+🐝 Le rucher ¦ 🐝 Το μελισσοκομείο ¦ 🐝 Пчелинът
+🐴 La route en diligence ¦ 🐴 Ο δρόμος με την άμαξα ¦ 🐴 Пътят с дилижанса
+Ou celle du métier de ¦ Ή αυτή του επαγγέλματος ¦ Или тази на професията
+▶ Écouter ¦ ▶ Άκου ¦ ▶ Слушай
+🔈 Volume ¦ 🔈 Ένταση ¦ 🔈 Сила на звука
+⏲️ S’arrêter après ¦ ⏲️ Διακοπή μετά από ¦ ⏲️ Спри след
+Un mélange au hasard de 3 à 5 couches ¦ Ένα τυχαίο μείγμα από 3 έως 5 επίπεδα ¦ Случаен микс от 3 до 5 слоя
+🎲 Au hasard ¦ 🎲 Στην τύχη ¦ 🎲 Случайно
+Tout à zéro ¦ Όλα στο μηδέν ¦ Всичко на нула
+Durée du fichier son ¦ Διάρκεια του αρχείου ήχου ¦ Продължителност на звуковия файл
+⭐ Mes ambiances ¦ ⭐ Οι ατμόσφαιρές μου ¦ ⭐ Моите атмосфери
+💾 Garder ce mélange ¦ 💾 Κράτα αυτό το μείγμα ¦ 💾 Запази този микс
+Tout est fabriqué par l’ordinateur, à partir de bruit et de sons purs : une évocation, pas un enregistrement. Règle chaque couche à ton goût ({n} couches). ¦ Όλα τα φτιάχνει ο υπολογιστής, από θόρυβο και καθαρούς τόνους: μια αναπαράσταση, όχι ηχογράφηση. Ρύθμισε κάθε επίπεδο όπως θέλεις ({n} επίπεδα). ¦ Всичко се създава от компютъра, от шум и чисти тонове: внушение, а не запис. Настрой всеки слой по свой вкус ({n} слоя).
+Chercher une couche (cloches, eau, atelier…) ¦ Αναζήτηση επιπέδου (καμπάνες, νερό, εργαστήρι…) ¦ Търси слой (камбани, вода, работилница…)
+Chercher une couche ¦ Αναζήτηση επιπέδου ¦ Търси слой
+🌬️ Le vent ¦ 🌬️ Ο άνεμος ¦ 🌬️ Вятърът
+🌧️ La pluie ¦ 🌧️ Η βροχή ¦ 🌧️ Дъждът
+🔥 Le feu de cheminée ¦ 🔥 Η φωτιά στο τζάκι ¦ 🔥 Огънят в камината
+🕰️ L’horloge comtoise ¦ 🕰️ Το εκκρεμές ρολόι ¦ 🕰️ Старинният стенен часовник
+🔔 Les cloches du village ¦ 🔔 Οι καμπάνες του χωριού ¦ 🔔 Камбаните на селото
+⚒️ L’enclume du forgeron ¦ ⚒️ Το αμόνι του σιδερά ¦ ⚒️ Наковалнята на ковача
+🐦 Les oiseaux ¦ 🐦 Τα πουλιά ¦ 🐦 Птиците
+💧 La rivière et le moulin ¦ 💧 Το ποτάμι και ο μύλος ¦ 💧 Реката и мелницата
+🚂 Le train à vapeur ¦ 🚂 Το ατμοκίνητο τρένο ¦ 🚂 Парният влак
+🌊 La mer ¦ 🌊 Η θάλασσα ¦ 🌊 Морето
+🦗 Les grillons ¦ 🦗 Τα τριζόνια ¦ 🦗 Щурците
+🐸 Les grenouilles de la mare ¦ 🐸 Οι βάτραχοι της λιμνούλας ¦ 🐸 Жабите в локвата
+🦉 La chouette ¦ 🦉 Η κουκουβάγια ¦ 🦉 Совата
+🐓 Le coq ¦ 🐓 Ο κόκορας ¦ 🐓 Петелът
+🐄 Les sonnailles des vaches ¦ 🐄 Τα κουδούνια των αγελάδων ¦ 🐄 Хлопките на кравите
+🐴 Les sabots du cheval ¦ 🐴 Οι οπλές του αλόγου ¦ 🐴 Копитата на коня
+🛞 La charrette sur les pavés ¦ 🛞 Το κάρο στο λιθόστρωτο ¦ 🛞 Каруцата по калдъръма
+🐝 Les abeilles du rucher ¦ 🐝 Οι μέλισσες του μελισσοκομείου ¦ 🐝 Пчелите в пчелина
+🌾 Le vent dans les blés ¦ 🌾 Ο άνεμος στα στάχυα ¦ 🌾 Вятърът в житото
+⛈️ Le tonnerre au loin ¦ ⛈️ Η βροντή από μακριά ¦ ⛈️ Далечен гръм
+⛲ La fontaine du lavoir ¦ ⛲ Η βρύση του πλυσταριού ¦ ⛲ Чешмата на перачницата
+🧺 Les battoirs des lavandières ¦ 🧺 Οι κόπανοι των πλυστρών ¦ 🧺 Бухалките на перачките
+🧶 Le rouet qui file ¦ 🧶 Η ρόκα που γνέθει ¦ 🧶 Чекръкът, който преде
+🧵 Le métier à tisser ¦ 🧵 Ο αργαλειός ¦ 🧵 Тъкачният стан
+🪡 La machine à coudre ¦ 🪡 Η ραπτομηχανή ¦ 🪡 Шевната машина
+🪚 La scie du menuisier ¦ 🪚 Το πριόνι του ξυλουργού ¦ 🪚 Трионът на дърводелеца
+✒️ La plume sur le papier ¦ ✒️ Η πένα στο χαρτί ¦ ✒️ Перото по хартията
+🗣️ Le murmure de la foule ¦ 🗣️ Το μουρμουρητό του πλήθους ¦ 🗣️ Шумът на тълпата
+🍷 Les verres du café ¦ 🍷 Τα ποτήρια του καφενείου ¦ 🍷 Чашите в кръчмата
+⛪ L’orgue de l’église ¦ ⛪ Το εκκλησιαστικό όργανο ¦ ⛪ Органът в църквата
+🪗 L’accordéon du bal musette ¦ 🪗 Το ακορντεόν του χορού ¦ 🪗 Акордеонът на танцовата забава
+🏫 La craie au tableau ¦ 🏫 Η κιμωλία στον πίνακα ¦ 🏫 Тебеширът по дъската
+🪵 Le bois qui craque ¦ 🪵 Το ξύλο που τρίζει ¦ 🪵 Дървото, което пука
+👣 Des pas sur le gravier ¦ 👣 Βήματα στο χαλίκι ¦ 👣 Стъпки по чакъла
+🕊️ Les mouettes ¦ 🕊️ Οι γλάροι ¦ 🕊️ Чайките
+🎶 Le bourdon de la vielle ¦ 🎶 Το βόμβο της λύρας με τροχό ¦ 🎶 Бучането на колесната лира
+© Crédits et droits des sons ¦ © Πιστώσεις και δικαιώματα των ήχων ¦ © Автори и права на звуците
+Aucun enregistrement n’est utilisé : <b>chaque son est calculé par ton navigateur</b> au moment où tu l’écoutes (Web Audio), à partir de bruit et de sons purs. Il n’y a donc aucun auteur à créditer en dehors de LCNDA, et rien n’est téléchargé. ¦ Δεν χρησιμοποιείται καμία ηχογράφηση: <b>κάθε ήχος υπολογίζεται από τον περιηγητή σου</b> τη στιγμή που τον ακούς (Web Audio), από θόρυβο και καθαρούς τόνους. Δεν υπάρχει λοιπόν κανένας δημιουργός να αναφερθεί εκτός από το LCNDA, και τίποτα δεν κατεβαίνει. ¦ Не се използва никакъв запис: <b>всеки звук се изчислява от браузъра ти</b> в момента, в който го слушаш (Web Audio), от шум и чисти тонове. Затова няма автор за посочване освен LCNDA и нищо не се изтегля.
+<b>Libres de droits</b> : tu peux les écouter, les enregistrer, les mettre dans un montage ou une présentation, même les partager, sans rien demander (comme le domaine public, CC0). ¦ <b>Ελεύθεροι δικαιωμάτων</b>: μπορείς να τους ακούς, να τους ηχογραφείς, να τους βάζεις σε μοντάζ ή παρουσίαση, ακόμα και να τους μοιράζεσαι, χωρίς να ζητήσεις τίποτα (όπως το δημόσιο κτήμα, CC0). ¦ <b>Свободни от права</b>: можеш да ги слушаш, записваш, слагаш в монтаж или презентация, дори да ги споделяш, без да питаш (като общественото достояние, CC0).
+bruit blanc filtré, qui ondule lentement ¦ φιλτραρισμένος λευκός θόρυβος, που κυματίζει αργά ¦ филтриран бял шум, който бавно се вълнува
+bruit aigu et milliers de petites gouttes au hasard ¦ οξύς θόρυβος και χιλιάδες μικρές σταγόνες στην τύχη ¦ остър шум и хиляди малки капки на случаен принцип
+bruit grave et crépitements au hasard ¦ βαθύς θόρυβος και τυχαία τριξίματα ¦ нисък шум и случайно пращене
+deux « tic » de sons purs, un carillon toutes les 40 secondes ¦ δύο «τικ» από καθαρούς τόνους, ένα κουδούνισμα κάθε 40 δευτερόλεπτα ¦ две „тик“ от чисти тонове, звънене на всеки 40 секунди
+sons purs aux harmoniques des cloches de bronze ¦ καθαροί τόνοι με τις αρμονικές των χάλκινων καμπανών ¦ чисти тонове с хармониците на бронзови камбани
+coups métalliques : trois sons purs qui s’éteignent ¦ μεταλλικά χτυπήματα: τρεις καθαροί τόνοι που σβήνουν ¦ метални удари: три чисти тона, които заглъхват
+petits sifflets de sons purs qui montent ¦ μικρά σφυρίγματα από καθαρούς τόνους που ανεβαίνουν ¦ малки свирки от чисти тонове, които се изкачват
+bruit filtré et le battement grave de la roue ¦ φιλτραρισμένος θόρυβος και ο βαθύς χτύπος του τροχού ¦ филтриран шум и ниското туптене на колелото
+souffles de vapeur rythmés et un sifflet à deux notes ¦ ρυθμικές ανάσες ατμού και ένα σφύριγμα δύο νοτών ¦ ритмични пухтения на пара и свирка с две ноти
+bruit grave qui monte et descend comme les vagues ¦ βαθύς θόρυβος που ανεβαίνει και κατεβαίνει σαν τα κύματα ¦ нисък шум, който се надига и спада като вълни
+trilles de sons purs très aigus ¦ τρίλιες από πολύ οξείς καθαρούς τόνους ¦ трели от много високи чисти тонове
+sons en dents de scie qui montent ¦ πριονωτοί ήχοι που ανεβαίνουν ¦ трионообразни звуци, които се изкачват
+trois sons purs graves qui glissent ¦ τρεις βαθιοί καθαροί τόνοι που γλιστρούν ¦ три ниски чисти тона, които се плъзгат
+trois sons qui montent puis retombent ¦ τρεις ήχοι που ανεβαίνουν και μετά πέφτουν ¦ три звука, които се изкачват и после спадат
+sons métalliques aux harmoniques de cloche ¦ μεταλλικοί ήχοι με αρμονικές καμπάνας ¦ метални звуци с хармоници на камбана
+petits chocs de bruit au rythme du pas ¦ μικρά χτυπήματα θορύβου στον ρυθμό του βήματος ¦ малки удари от шум в ритъма на стъпките
+grondement grave qui tremble et cailloux de bruit ¦ βαθύ βουητό που τρέμει και πετραδάκια θορύβου ¦ ниско бучене, което трепери, и камъчета от шум
+trois notes graves qui vibrent ¦ τρεις βαθιές νότες που πάλλονται ¦ три ниски ноти, които вибрират
+bruit très aigu qui ondule ¦ πολύ οξύς θόρυβος που κυματίζει ¦ много висок шум, който се вълнува
+grondements de bruit très grave ¦ βουητά από πολύ βαθύ θόρυβο ¦ тътен от много нисък шум
+bruit d’eau et gouttes de sons purs ¦ θόρυβος νερού και σταγόνες από καθαρούς τόνους ¦ шум на вода и капки от чисти тонове
+deux chocs sourds ¦ δύο υπόκωφα χτυπήματα ¦ два глухи удара
+ronronnement et petit clic de la roue ¦ βόμβος και μικρό κλικ του τροχού ¦ бръмчене и малко щракане на колелото
+le claquement de la navette et le coup du battant ¦ ο κρότος της σαΐτας και το χτύπημα του χτενιού ¦ тракането на совалката и ударът на бърдото
+cliquetis rapides par séries ¦ γρήγορα κροταλίσματα σε σειρές ¦ бързо тракане на серии
+bruit filtré qui va et vient ¦ φιλτραρισμένος θόρυβος που πηγαινοέρχεται ¦ филтриран шум, който идва и си отива
+grattements de bruit aigu ¦ ξυσίματα από οξύ θόρυβο ¦ стъргане от висок шум
+quatre bandes de bruit qui imitent les voix ¦ τέσσερις ζώνες θορύβου που μιμούνται φωνές ¦ четири ленти шум, които имитират гласове
+tintements de sons purs ¦ κουδουνίσματα από καθαρούς τόνους ¦ звънтене от чисти тонове
+accords tenus de sons doux ¦ παρατεταμένες συγχορδίες απαλών ήχων ¦ задържани акорди от меки звуци
+une petite valse de sons en dents de scie, basse et accords ¦ ένα μικρό βαλς από πριονωτούς ήχους, μπάσο και συγχορδίες ¦ малък валс от трионообразни звуци, бас и акорди
+traits de bruit et le petit coup du point ¦ γραμμές θορύβου και το μικρό χτύπημα της τελείας ¦ щрихи от шум и малкото почукване на точката
+craquements de bruit ¦ τριξίματα θορύβου ¦ пукане от шум
+pas de bruit filtré ¦ βήματα από φιλτραρισμένο θόρυβο ¦ стъпки от филтриран шум
+cris en dents de scie qui descendent ¦ πριονωτές κραυγές που κατεβαίνουν ¦ трионообразни крясъци, които слизат
+trois notes graves tenues, qui vibrent un peu ¦ τρεις βαθιές παρατεταμένες νότες, που πάλλονται λίγο ¦ три ниски задържани ноти, които леко вибрират
+Fichier son (WebM) ¦ Αρχείο ήχου (WebM) ¦ Звуков файл (WebM)
+Ce qu’on entend, pendant la durée choisie ¦ Ό,τι ακούγεται, για τη διάρκεια που διάλεξες ¦ Това, което се чува, за избраната продължителност
+L’arbre qui pousse ¦ Το δέντρο που μεγαλώνει ¦ Дървото, което расте
+Les descendants d’un ancêtre apparaissent année après année, les branches poussent, les feuilles roussissent. ¦ Οι απόγονοι ενός προγόνου εμφανίζονται χρονιά με τη χρονιά, τα κλαδιά μεγαλώνουν, τα φύλλα κοκκινίζουν. ¦ Потомците на един предшественик се появяват година след година, клоните растат, листата пожълтяват.
+▶ Faire pousser ¦ ▶ Κάνε το να μεγαλώσει ¦ ▶ Отгледай го
+lente ¦ αργή ¦ бавна
+normale ¦ κανονική ¦ нормална
+rapide ¦ γρήγορη ¦ бърза
+La musique de l’arbre ¦ Η μουσική του δέντρου ¦ Музиката на дървото
+L’arbre joué comme une partition : une note par naissance, un accord par mariage ; à écouter ou à télécharger. ¦ Το δέντρο παιγμένο σαν παρτιτούρα: μία νότα για κάθε γέννηση, μία συγχορδία για κάθε γάμο· για ακρόαση ή λήψη. ¦ Дървото, изсвирено като партитура: по една нота за всяко раждане, по един акорд за всеки брак; за слушане или изтегляне.
+tout l’arbre ¦ όλο το δέντρο ¦ цялото дърво
+Tempo ¦ Ρυθμός ¦ Темпо
+lent ¦ αργός ¦ бавно
+normal ¦ κανονικός ¦ нормално
+vif ¦ ζωηρός ¦ живо
+Chaque naissance est une note : plus aiguë pour les générations proches, plus longue pour une longue vie, au timbre plus doux pour les femmes ; chaque mariage, un accord ; chaque décès, une note grave. ¦ Κάθε γέννηση είναι μια νότα: πιο οξεία για τις κοντινές γενιές, πιο μακριά για μια μακρά ζωή, με πιο απαλή χροιά για τις γυναίκες· κάθε γάμος, μια συγχορδία· κάθε θάνατος, μια βαθιά νότα. ¦ Всяко раждане е нота: по-висока за близките поколения, по-дълга за дълъг живот, с по-мек тембър за жените; всеки брак — акорд; всяка смърт — ниска нота.
+Fichier son (WAV) ¦ Αρχείο ήχου (WAV) ¦ Звуков файл (WAV)
+{b} naissances, {m} mariages, {d} décès — {s} secondes ¦ {b} γεννήσεις, {m} γάμοι, {d} θάνατοι — {s} δευτερόλεπτα ¦ {b} раждания, {m} брака, {d} смърти — {s} секунди
+La chasse au trésor ¦ Το κυνήγι θησαυρού ¦ Търсенето на съкровище
+Des énigmes sur les ancêtres cachées dans la maison : seule la bonne réponse mène à la cachette suivante. ¦ Γρίφοι για τους προγόνους κρυμμένοι στο σπίτι: μόνο η σωστή απάντηση οδηγεί στην επόμενη κρυψώνα. ¦ Гатанки за предците, скрити в къщата: само верният отговор води до следващото скривалище.
+🗝️ Préparer la chasse ¦ 🗝️ Ετοίμασε το κυνήγι ¦ 🗝️ Подготви търсенето
+Le nom de la chasse ¦ Το όνομα του κυνηγιού ¦ Името на търсенето
+La chasse au trésor de la famille {name} ¦ Το κυνήγι θησαυρού της οικογένειας {name} ¦ Търсенето на съкровище на семейство {name}
+Les cachettes, dans l’ordre (une par ligne ; la dernière est celle du trésor) ¦ Οι κρυψώνες, με τη σειρά (μία ανά γραμμή· η τελευταία είναι του θησαυρού) ¦ Скривалищата, по ред (по едно на ред; последното е на съкровището)
+sous le paillasson ¦ κάτω από το χαλάκι της πόρτας ¦ под изтривалката
+dans la boîte aux lettres ¦ στο γραμματοκιβώτιο ¦ в пощенската кутия
+derrière l’horloge ¦ πίσω από το ρολόι ¦ зад часовника
+au fond du placard de l’entrée ¦ στο βάθος της ντουλάπας της εισόδου ¦ в дъното на гардероба в антрето
+Le trésor (ce qu’on trouve à la fin) ¦ Ο θησαυρός (αυτό που βρίσκεις στο τέλος) ¦ Съкровището (това, което се намира накрая)
+le gâteau d’anniversaire de Mamie ¦ η τούρτα γενεθλίων της γιαγιάς ¦ тортата за рождения ден на баба
+Chaque énigme porte sur un ancêtre ; chaque réponse renvoie à une cachette : il faut la bonne réponse pour trouver la suite. ¦ Κάθε γρίφος αφορά έναν πρόγονο· κάθε απάντηση παραπέμπει σε μια κρυψώνα: χρειάζεται η σωστή απάντηση για να βρεις τη συνέχεια. ¦ Всяка гатанка е за един предшественик; всеки отговор води до скривалище: трябва верният отговор, за да намериш продължението.
+L’ancêtre mystère ¦ Ο μυστηριώδης πρόγονος ¦ Тайнственият предшественик
+Un ancêtre caché, des indices un par un : le même pour toute la famille chaque jour. Qui le trouve le plus vite ? ¦ Ένας κρυμμένος πρόγονος, ενδείξεις μία μία: ο ίδιος για όλη την οικογένεια κάθε μέρα. Ποιος θα τον βρει πιο γρήγορα; ¦ Скрит предшественик, следи една по една: един и същ за цялото семейство всеки ден. Кой ще го открие най-бързо?
+🕵️ L’ancêtre mystère du {date} ¦ 🕵️ Ο μυστηριώδης πρόγονος της {date} ¦ 🕵️ Тайнственият предшественик за {date}
+Proposer ¦ Πρότεινε ¦ Предложи
+Un indice de plus ({n}) ¦ Μία ένδειξη ακόμα ({n}) ¦ Още една следа ({n})
+Je donne ma langue au chat ¦ Τα παρατάω ¦ Предавам се
+Trouvé maintenant : {n} points. ¦ Αν βρεθεί τώρα: {n} πόντοι. ¦ Ако го откриеш сега: {n} точки.
+Le livre dont tu es le héros ¦ Το βιβλίο όπου ο ήρωας είσαι εσύ ¦ Книгата, в която ти си героят
+Vis la vie d’un ancêtre et fais ses choix — métier, mariage, départ — puis découvre ce qu’il a vraiment choisi. ¦ Ζήσε τη ζωή ενός προγόνου και κάνε τις επιλογές του — επάγγελμα, γάμος, φευγιό — και μετά ανακάλυψε τι διάλεξε στ' αλήθεια. ¦ Изживей живота на предшественик и направи неговите избори — професия, брак, заминаване — после открий какво е избрал наистина.
+Tu seras ¦ Θα είσαι ¦ Ще бъдеш
+📖 Commencer l’histoire ¦ 📖 Ξεκίνα την ιστορία ¦ 📖 Започни историята
+Les coïncidences ¦ Οι συμπτώσεις ¦ Съвпаденията
+Nés le même jour, mort le jour de son anniversaire, mariés à cent ans d’écart jour pour jour : les hasards de l’arbre. ¦ Γεννημένοι την ίδια μέρα, πέθανε τη μέρα των γενεθλίων του, παντρεύτηκαν με διαφορά εκατό ετών μέρα με τη μέρα: οι συμπτώσεις του δέντρου. ¦ Родени в един и същи ден, починал на рождения си ден, сключили брак с точно сто години разлика ден за ден: случайностите на дървото.
+Plus l’arbre a de dates précises (jour et mois), plus il y en a. ¦ Όσο περισσότερες ακριβείς ημερομηνίες (μέρα και μήνας) έχει το δέντρο, τόσο περισσότερες βρίσκονται. ¦ Колкото повече точни дати (ден и месец) има дървото, толкова повече са те.
+« Et si… » ¦ «Κι αν…» ¦ „Ами ако…“
+Et si ces deux-là ne s’étaient pas rencontrés ? Toutes les vies qui n’auraient jamais existé — peut-être la tienne. ¦ Κι αν αυτοί οι δύο δεν είχαν συναντηθεί; Όλες οι ζωές που δεν θα είχαν υπάρξει ποτέ — ίσως και η δική σου. ¦ Ами ако тези двамата не се бяха срещнали? Всички животи, които никога нямаше да съществуват — може би и твоят.
+Et si… ¦ Κι αν… ¦ Ами ако…
+ces deux-là ne s’étaient jamais rencontrés ¦ αυτοί οι δύο δεν είχαν συναντηθεί ποτέ ¦ тези двамата никога не се бяха срещнали
+cette personne n’avait pas vécu ¦ αυτό το άτομο δεν είχε ζήσει ¦ този човек не беше живял
+🦋 {n} vies n’auraient jamais existé ¦ 🦋 {n} ζωές δεν θα είχαν υπάρξει ποτέ ¦ 🦋 {n} живота никога нямаше да съществуват
+{pct} % de l’arbre, dont {who} en vie aujourd’hui. ¦ {pct} % του δέντρου, από τους οποίους {who} ζουν σήμερα. ¦ {pct} % от дървото, от които {who} живи днес.
+Et {name} non plus. ¦ Ούτε {name}. ¦ Нито {name}.
+La broderie au point de croix ¦ Το κέντημα σταυροβελονιά ¦ Бродерията на кръстат бод
+Un marquoir à l’ancienne : le nom de la famille, un couple, une date, un arbre ; la grille et les fils. ¦ Ένα παλιό δείγμα κεντήματος: το όνομα της οικογένειας, ένα ζευγάρι, μια ημερομηνία, ένα δέντρο· το σχέδιο και οι κλωστές. ¦ Старинна мострена бродерия: името на семейството, двойка, дата, дърво; схемата и конците.
+FAMILLE {name} ¦ ΟΙΚΟΓΕΝΕΙΑ {name} ¦ СЕМЕЙСТВО {name}
+La date ¦ Η ημερομηνία ¦ Датата
+Le lieu (facultatif) ¦ Ο τόπος (προαιρετικά) ¦ Мястото (по желание)
+La couleur du titre ¦ Το χρώμα του τίτλου ¦ Цветът на заглавието
+Brun ¦ Καφέ ¦ Кафяво
+Bleu ciel ¦ Γαλάζιο ¦ Небесносиньо
+La couleur du couple ¦ Το χρώμα του ζευγαριού ¦ Цветът на двойката
+Le titre en grandes lettres (double) ¦ Ο τίτλος με μεγάλα γράμματα (διπλά) ¦ Заглавието с едри букви (двойни)
+Le motif ¦ Το μοτίβο ¦ Мотивът
+❤️ Le cœur ¦ ❤️ Η καρδιά ¦ ❤️ Сърцето
+👑 Le cœur couronné ¦ 👑 Η στεφανωμένη καρδιά ¦ 👑 Коронованото сърце
+🌷 Les tulipes ¦ 🌷 Οι τουλίπες ¦ 🌷 Лалетата
+⛪ L’église ¦ ⛪ Η εκκλησία ¦ ⛪ Църквата
+🕊️ Les colombes ¦ 🕊️ Τα περιστέρια ¦ 🕊️ Гълъбите
+— Aucun motif ¦ — Κανένα μοτίβο ¦ — Без мотив
+Ses couleurs ¦ Τα χρώματά του ¦ Цветовете му
+celle du motif ¦ αυτό του μοτίβου ¦ този на мотива
+Deux petits cœurs de chaque côté ¦ Δύο μικρές καρδιές σε κάθε πλευρά ¦ Две малки сърца от всяка страна
+La bordure ¦ Το περίγραμμα ¦ Бордюрът
+· Les points (à l’ancienne) ¦ · Οι βελονιές (παλιού τύπου) ¦ · Бодовете (по старинен начин)
+♥ La frise de cœurs ¦ ♥ Η ζωφόρος με καρδιές ¦ ♥ Фризът от сърца
+⌇ La frise en zigzag ¦ ⌇ Η ζιγκ-ζαγκ ζωφόρος ¦ ⌇ Зигзагообразният фриз
+▭ Le double trait ¦ ▭ Η διπλή γραμμή ¦ ▭ Двойната линия
+— Sans bordure ¦ — Χωρίς περίγραμμα ¦ — Без бордюр
+La toile ¦ Το ύφασμα ¦ Платното
+Aïda 11 ¦ Aïda 11 ¦ Aïda 11
+Aïda 14 ¦ Aïda 14 ¦ Aïda 14
+Aïda 16 ¦ Aïda 16 ¦ Aïda 16
+Aïda 18 ¦ Aïda 18 ¦ Aïda 18
+Lin 28 fils (un point sur 2 fils) ¦ Λινό 28 κλωστών (μία βελονιά σε 2 κλωστές) ¦ Лен 28 нишки (един бод на 2 нишки)
+Sa couleur (aperçu) ¦ Το χρώμα του (προεπισκόπηση) ¦ Цветът му (преглед)
+Écru ¦ Εκρού ¦ Екрю
+Lin ¦ Λινό ¦ Ленен
+Bleu nuit ¦ Μπλε της νύχτας ¦ Тъмносин
+l’aperçu brodé ¦ η κεντημένη προεπισκόπηση ¦ избродираният преглед
+la grille à symboles ¦ το σχέδιο με σύμβολα ¦ схемата със символи
+La grille (dessin SVG) ¦ Το σχέδιο (σχέδιο SVG) ¦ Схемата (SVG рисунка)
+L’aperçu brodé (image PNG) ¦ Η κεντημένη προεπισκόπηση (εικόνα PNG) ¦ Избродираният преглед (PNG изображение)
+La grille à symboles et la liste des fils ¦ Το σχέδιο με σύμβολα και η λίστα των κλωστών ¦ Схемата със символи и списъкът на конците
+{w} × {h} points · sur {cloth} : {cw} × {ch} cm (prévoir 5 cm de marge tout autour) ¦ {w} × {h} βελονιές · σε {cloth}: {cw} × {ch} cm (υπολόγισε 5 cm περιθώριο γύρω γύρω) ¦ {w} × {h} бода · върху {cloth}: {cw} × {ch} cm (предвиди 5 cm поле наоколо)
+{n} points ¦ {n} βελονιές ¦ {n} бода
+La gravure au laser ¦ Η χάραξη με λέιζερ ¦ Лазерното гравиране
+L’éventail des ancêtres en fichier SVG aux vraies dimensions, prêt pour une graveuse laser (gravure et découpe). ¦ Η βεντάλια των προγόνων σε αρχείο SVG σε πραγματικές διαστάσεις, έτοιμη για χαράκτη λέιζερ (χάραξη και κοπή). ¦ Ветрилото на предците като SVG файл в реални размери, готово за лазерен гравьор (гравиране и рязане).
+Les ancêtres de ¦ Οι πρόγονοι του/της ¦ Предците на
+Le fichier est aux vraies dimensions, en millimètres : <b>noir = gravure</b> (traits et noms), <b>rouge = découpe</b> (le contour, trait fin). Convient à LightBurn, Glowforge, xTool, Inkscape. Vérifie toujours la taille à l’import. ¦ Το αρχείο είναι σε πραγματικές διαστάσεις, σε χιλιοστά: <b>μαύρο = χάραξη</b> (γραμμές και ονόματα), <b>κόκκινο = κοπή</b> (το περίγραμμα, λεπτή γραμμή). Κατάλληλο για LightBurn, Glowforge, xTool, Inkscape. Έλεγχε πάντα το μέγεθος κατά την εισαγωγή. ¦ Файлът е в реални размери, в милиметри: <b>черно = гравиране</b> (линии и имена), <b>червено = рязане</b> (контурът, тънка линия). Подходящ за LightBurn, Glowforge, xTool, Inkscape. Винаги проверявай размера при импортиране.
+Dessin SVG pour la graveuse ¦ Σχέδιο SVG για τον χαράκτη ¦ SVG рисунка за гравьора
+Aux vraies dimensions : noir = gravure, rouge = découpe ¦ Σε πραγματικές διαστάσεις: μαύρο = χάραξη, κόκκινο = κοπή ¦ В реални размери: черно = гравиране, червено = рязане
+La mosaïque de portraits ¦ Το μωσαϊκό από πορτρέτα ¦ Мозайката от портрети
+Tous les visages de l’arbre en une image, ou un portrait refait avec les visages de toute la famille. ¦ Όλα τα πρόσωπα του δέντρου σε μία εικόνα, ή ένα πορτρέτο φτιαγμένο ξανά με τα πρόσωπα όλης της οικογένειας. ¦ Всички лица от дървото в едно изображение или портрет, пресъздаден с лицата на цялото семейство.
+Je rassemble les visages… ¦ Μαζεύω τα πρόσωπα… ¦ Събирам лицата…
+La mosaïque ¦ Το μωσαϊκό ¦ Мозайката
+tous les visages, en grille ¦ όλα τα πρόσωπα, σε πλέγμα ¦ всички лица, в мрежа
+un portrait refait avec tous les autres ¦ ένα πορτρέτο φτιαγμένο ξανά με όλα τα άλλα ¦ портрет, пресъздаден с всички останали
+Le portrait à refaire ¦ Το πορτρέτο που θα ξαναφτιαχτεί ¦ Портретът за пресъздаване
+Finesse ¦ Λεπτομέρεια ¦ Финост
+Le visage de la lignée ¦ Το πρόσωπο της γενεαλογικής γραμμής ¦ Лицето на рода
+De père en père ou de mère en mère : les visages côte à côte, en fondu, et le visage moyen des générations. ¦ Από πατέρα σε πατέρα ή από μητέρα σε μητέρα: τα πρόσωπα το ένα δίπλα στο άλλο, σε σταδιακή μετάβαση, και το μέσο πρόσωπο των γενιών. ¦ От баща на баща или от майка на майка: лицата едно до друго, с преливане, и средното лице на поколенията.
+La lignée ¦ Η γενεαλογική γραμμή ¦ Родът
+de père en père ¦ από πατέρα σε πατέρα ¦ от баща на баща
+de mère en mère ¦ από μητέρα σε μητέρα ¦ от майка на майка
+▶ Le fondu ¦ ▶ Η μετάβαση ¦ ▶ Преливането
+Les visages (image PNG) ¦ Τα πρόσωπα (εικόνα PNG) ¦ Лицата (PNG изображение)
+Le visage moyen de {n} générations ¦ Το μέσο πρόσωπο {n} γενιών ¦ Средното лице на {n} поколения
+Le fondu ¦ Η μετάβαση ¦ Преливането
+La gazette de l’année ¦ Η εφημερίδα της χρονιάς ¦ Вестникът на годината
+La une d’un journal pour une année de la famille : mariages, naissances, nouvelles des nôtres, le prix du pain. ¦ Το πρωτοσέλιδο μιας εφημερίδας για μια χρονιά της οικογένειας: γάμοι, γεννήσεις, νέα των δικών μας, η τιμή του ψωμιού. ¦ Първата страница на вестник за една година от семейството: бракове, раждания, новини от нашите, цената на хляба.
+Les années les plus riches : ¦ Οι πιο πλούσιες χρονιές: ¦ Най-богатите години:
+🎨 Le style du journal ¦ 🎨 Το στιλ της εφημερίδας ¦ 🎨 Стилът на вестника
+📜 Ancien (1900) ¦ 📜 Παλιό (1900) ¦ 📜 Старинен (1900)
+🎨 Supplément illustré (en couleurs) ¦ 🎨 Εικονογραφημένο ένθετο (έγχρωμο) ¦ 🎨 Илюстровано приложение (цветно)
+🗞️ Le quotidien (papier journal) ¦ 🗞️ Η καθημερινή (χαρτί εφημερίδας) ¦ 🗞️ Ежедневникът (вестникарска хартия)
+🎩 Années 30 ¦ 🎩 Δεκαετία του '30 ¦ 🎩 30-те години
+◻️ Moderne ¦ ◻️ Μοντέρνο ¦ ◻️ Модерен
+💖 Magazine ¦ 💖 Περιοδικό ¦ 💖 Списание
+📣 À sensation (gros titres) ¦ 📣 Κίτρινος τύπος (μεγάλοι τίτλοι) ¦ 📣 Сензационен (големи заглавия)
+🧸 Le journal des enfants ¦ 🧸 Η εφημερίδα των παιδιών ¦ 🧸 Детският вестник
+Le nom du journal ¦ Το όνομα της εφημερίδας ¦ Името на вестника
+Le bandeau ¦ Η κεφαλίδα ¦ Шапката
+Édition unique ¦ Μοναδική έκδοση ¦ Единствено издание
+Le papier ¦ Το χαρτί ¦ Хартията
+Celui du style ¦ Αυτό του στιλ ¦ Тази на стила
+Crème ¦ Κρεμ ¦ Кремава
+Jauni ¦ Κιτρινισμένο ¦ Пожълтяла
+Papier journal ¦ Χαρτί εφημερίδας ¦ Вестникарска хартия
+Ma couleur ¦ Το χρώμα μου ¦ Моят цвят
+Les colonnes ¦ Οι στήλες ¦ Колоните
+L’article de une ¦ Το άρθρο του πρωτοσέλιδου ¦ Водещата статия
+Les nouvelles ¦ Τα νέα ¦ Новините
+Le coin pratique ¦ Η πρακτική γωνιά ¦ Практичното кътче
+5 centimes ¦ 5 λεπτά ¦ 5 сантима
+Prix : {price} ¦ Τιμή: {price} ¦ Цена: {price}
+{n} membres de la famille en vie ¦ {n} μέλη της οικογένειας εν ζωή ¦ {n} живи членове на семейството
+Carnet ¦ Κοινωνικά ¦ Семейна хроника
+Nouvelles des nôtres ¦ Νέα των δικών μας ¦ Новини от нашите
+Anniversaires ¦ Επέτειοι ¦ Годишнини
+{n} centimes ¦ {n} λεπτά ¦ {n} сантима
+Le kilo de pain : environ {price}. ¦ Το κιλό ψωμί: περίπου {price}. ¦ Килограм хляб: около {price}.
+Qui fait quoi ¦ Ποιος κάνει τι ¦ Кой какво прави
+Composée à partir de l’arbre de famille · {y} ¦ Συντάχθηκε από το οικογενειακό δέντρο · {y} ¦ Съставен от родословното дърво · {y}
+Le fond d’écran du jour ¦ Η ταπετσαρία της ημέρας ¦ Тапетът на деня
+Chaque jour un ancêtre en image, aux dimensions de ton écran : couleurs, motif, photo, textes, calendrier… tout se règle. ¦ Κάθε μέρα ένας πρόγονος σε εικόνα, στις διαστάσεις της οθόνης σου: χρώματα, μοτίβο, φωτογραφία, κείμενα, ημερολόγιο… όλα ρυθμίζονται. ¦ Всеки ден предшественик в картина, в размерите на твоя екран: цветове, мотив, снимка, текстове, календар… всичко се настройва.
+L’ANCÊTRE DU JOUR ¦ Ο ΠΡΟΓΟΝΟΣ ΤΗΣ ΗΜΕΡΑΣ ¦ ПРЕДШЕСТВЕНИКЪТ НА ДЕНЯ
+Ordinateur ¦ Υπολογιστής ¦ Компютър
+Grand écran (2K) ¦ Μεγάλη οθόνη (2K) ¦ Голям екран (2K)
+Écran 4K ¦ Οθόνη 4K ¦ Екран 4K
+Écran très large ¦ Πολύ φαρδιά οθόνη ¦ Много широк екран
+Mac Retina ¦ Mac Retina ¦ Mac Retina
+Tablette ¦ Tablet ¦ Таблет
+Tablette debout ¦ Tablet όρθιο ¦ Таблет изправен
+Téléphone Android ¦ Κινητό Android ¦ Телефон с Android
+L’ancêtre (celui du jour par défaut) ¦ Ο πρόγονος (της ημέρας από προεπιλογή) ¦ Предшественикът (по подразбиране този на деня)
+🎨 Couleurs et fond ¦ 🎨 Χρώματα και φόντο ¦ 🎨 Цветове и фон
+Les couleurs ¦ Τα χρώματα ¦ Цветовете
+Selon l’époque de l’ancêtre ¦ Ανάλογα με την εποχή του προγόνου ¦ Според епохата на предшественика
+Crème et encre ¦ Κρεμ και μελάνι ¦ Кремаво и мастило
+Vert sauge ¦ Πράσινο φασκόμηλο ¦ Градински чай
+Océan ¦ Ωκεανός ¦ Океан
+Poudre ¦ Πούδρα ¦ Пудра
+Le dégradé ¦ Η διαβάθμιση ¦ Преливането
+En biais ¦ Διαγώνια ¦ Диагонално
+De haut en bas ¦ Από πάνω προς τα κάτω ¦ Отгоре надолу
+De gauche à droite ¦ Από αριστερά προς τα δεξιά ¦ Отляво надясно
+En rond ¦ Κυκλικά ¦ Кръгово
+Aucun (uni) ¦ Καμία (μονόχρωμο) ¦ Без (едноцветно)
+Rayures fines ¦ Λεπτές ρίγες ¦ Тънки райета
+Un arbre en filigrane ¦ Ένα δέντρο σε υδατογράφημα ¦ Дърво като воден знак
+La photo floutée en fond ¦ Η θολή φωτογραφία στο φόντο ¦ Размазаната снимка на фона
+🖼️ La photo ¦ 🖼️ Η φωτογραφία ¦ 🖼️ Снимката
+En arc ¦ Σε τόξο ¦ В дъга
+La place ¦ Η θέση ¦ Мястото
+En haut, centrée ¦ Πάνω, στο κέντρο ¦ Горе, в средата
+La taille ¦ Το μέγεθος ¦ Размерът
+L’alignement ¦ Η στοίχιση ¦ Подравняването
+L’étiquette ¦ Η ετικέτα ¦ Етикетът
+Sa vie en deux phrases ¦ Η ζωή του/της σε δύο φράσεις ¦ Животът му/ѝ в две изречения
+Une phrase à moi ¦ Μια δική μου φράση ¦ Мое изречение
+Une devise, un souvenir… ¦ Ένα ρητό, μια ανάμνηση… ¦ Девиз, спомен…
+🧩 En plus ¦ 🧩 Επιπλέον ¦ 🧩 Допълнително
+Le calendrier du mois ¦ Το ημερολόγιο του μήνα ¦ Календарът на месеца
+Laisser la place pour ¦ Άφησε χώρο για ¦ Остави място за
+les icônes du bureau (à gauche) ¦ τα εικονίδια της επιφάνειας εργασίας (αριστερά) ¦ иконите на работния плот (вляво)
+l’heure du téléphone (en haut) ¦ την ώρα του κινητού (πάνω) ¦ часа на телефона (горе)
+Chaque jour un autre ancêtre — en priorité celui dont c’est l’anniversaire de naissance ou de décès. Tes réglages sont gardés sur cet ordinateur. ¦ Κάθε μέρα ένας άλλος πρόγονος — κατά προτεραιότητα αυτός που έχει επέτειο γέννησης ή θανάτου. Οι ρυθμίσεις σου κρατιούνται σε αυτόν τον υπολογιστή. ¦ Всеки ден друг предшественик — с предимство този, който има годишнина от раждане или смърт. Настройките ти се пазят на този компютър.
+Le fond d’écran (image PNG) ¦ Η ταπετσαρία (εικόνα PNG) ¦ Тапетът (PNG изображение)
+Fond d’écran du jour ¦ Ταπετσαρία της ημέρας ¦ Тапет на деня
+Les passeports ¦ Τα διαβατήρια ¦ Паспортите
+Le passeport intérieur ou pour l’étranger d’un ancêtre voyageur, son signalement, son portrait-robot, et l’import des relevés publiés (Saint-Brieuc…). ¦ Το εσωτερικό ή εξωτερικό διαβατήριο ενός προγόνου που ταξίδευε, η περιγραφή του, το σκίτσο του, και η εισαγωγή δημοσιευμένων καταλόγων (Saint-Brieuc…). ¦ Вътрешният или задграничният паспорт на пътуващ предшественик, описанието му, фотороботът му и импортирането на публикувани извлечения (Saint-Brieuc…).
+＋ Ajouter un passeport ¦ ＋ Προσθήκη διαβατηρίου ¦ ＋ Добави паспорт
+⤒ Importer un relevé (XML, CSV)… ¦ ⤒ Εισαγωγή καταλόγου (XML, CSV)… ¦ ⤒ Импортирай извлечение (XML, CSV)…
+Un relevé publié (par exemple sur data.gouv.fr) ¦ Ένας δημοσιευμένος κατάλογος (για παράδειγμα στο data.gouv.fr) ¦ Публикувано извлечение (например в data.gouv.fr)
+{n} passeport rattaché ¦ {n} συνδεδεμένο διαβατήριο ¦ {n} свързан паспорт
+« ＋ Ajouter un passeport », ou importe un relevé publié. ¦ «＋ Προσθήκη διαβατηρίου», ή εισήγαγε έναν δημοσιευμένο κατάλογο. ¦ „＋ Добави паспорт“ или импортирай публикувано извлечение.
+Grand-parent raconte ¦ Ο παππούς ή η γιαγιά διηγείται ¦ Дядо или баба разказва
+Un récit dicté ou collé : les naissances, mariages, métiers et domiciles repérés, comparés à l’arbre, à ajouter en un clic. ¦ Μια αφήγηση υπαγορευμένη ή επικολλημένη: οι γεννήσεις, οι γάμοι, τα επαγγέλματα και οι κατοικίες που εντοπίζονται, συγκρίνονται με το δέντρο και προστίθενται με ένα κλικ. ¦ Разказ, продиктуван или поставен: откритите раждания, бракове, професии и местоживеения се сравняват с дървото и се добавят с едно щракване.
+Qui raconte ¦ Ποιος διηγείται ¦ Кой разказва
+🎤 Dicter ¦ 🎤 Υπαγόρευσε ¦ 🎤 Диктувай
+🔍 Repérer les faits ¦ 🔍 Εντόπισε τα γεγονότα ¦ 🔍 Открий фактите
+Le repérage des faits lit les récits écrits en français. ¦ Ο εντοπισμός γεγονότων διαβάζει αφηγήσεις γραμμένες στα γαλλικά. ¦ Откриването на факти чете разкази, написани на френски.
+Le récit (dicté, collé, ou recopié d’un enregistrement) ¦ Η αφήγηση (υπαγορευμένη, επικολλημένη ή αντιγραμμένη από ηχογράφηση) ¦ Разказът (продиктуван, поставен или преписан от запис)
+💾 Enregistrer le récit ¦ 💾 Αποθήκευση της αφήγησης ¦ 💾 Запази разказа
+Rangé dans le bloc ✨ Trésors de la fiche ¦ Αποθηκεύεται στο μπλοκ ✨ Θησαυροί της καρτέλας ¦ Пази се в блока ✨ Съкровища на картона
+Partager une branche (pour un temps) ¦ Κοινοποίηση ενός κλάδου (για ένα διάστημα) ¦ Сподели клон (за известно време)
+Un fichier à envoyer à un cousin : la branche sans les vivants, protégée par un mot de passe, qui expire à la date choisie. ¦ Ένα αρχείο για να το στείλεις σε έναν ξάδερφο: ο κλάδος χωρίς τους ζωντανούς, προστατευμένος με κωδικό, που λήγει την ημερομηνία που θα διαλέξεις. ¦ Файл за изпращане на братовчед: клонът без живите, защитен с парола, който изтича на избраната дата.
+La branche de ¦ Ο κλάδος του/της ¦ Клонът на
+Valable jusqu’au ¦ Ισχύει έως ¦ Валиден до
+Mot de passe (le fichier est chiffré, illisible sans lui) ¦ Κωδικός πρόσβασης (το αρχείο είναι κρυπτογραφημένο, δυσανάγνωστο χωρίς αυτόν) ¦ Парола (файлът е шифрован, нечетим без нея)
+à donner à part, par téléphone par exemple ¦ να τον δώσεις χωριστά, για παράδειγμα τηλεφωνικά ¦ дай я отделно, например по телефона
+Montrer ou cacher le mot de passe ¦ Εμφάνιση ή απόκρυψη του κωδικού ¦ Покажи или скрий паролата
+Quatre mots et un nombre, faciles à dicter ¦ Τέσσερις λέξεις και ένας αριθμός, εύκολα στην υπαγόρευση ¦ Четири думи и число, лесни за диктуване
+🎲 En proposer un ¦ 🎲 Πρότεινε έναν ¦ 🎲 Предложи една
+Copier le mot de passe ¦ Αντιγραφή του κωδικού ¦ Копирай паролата
+Sans mot de passe (déconseillé : quiconque reçoit le fichier peut le lire, et la date limite ne protège plus rien) ¦ Χωρίς κωδικό (δεν συνιστάται: όποιος λάβει το αρχείο μπορεί να το διαβάσει και η ημερομηνία λήξης δεν προστατεύει πια τίποτα) ¦ Без парола (не се препоръчва: всеки, който получи файла, може да го прочете, а крайната дата вече не защитава нищо)
+Un seul fichier HTML, qui s’ouvre dans n’importe quel navigateur, sans l’application : à envoyer par courriel ou à déposer sur un nuage. Retirées, avec les phrases qui les nomment : les personnes vivantes ou probablement vivantes (même règle que l’export GEDCOM « Pour partager »), les fiches confidentielles. Les numéros de fiche ne sortent pas. ¦ Ένα μόνο αρχείο HTML, που ανοίγει σε οποιονδήποτε περιηγητή, χωρίς την εφαρμογή: για αποστολή με email ή για ανέβασμα σε cloud. Αφαιρούνται, μαζί με τις φράσεις που τα κατονομάζουν: τα άτομα που ζουν ή μάλλον ζουν (ίδιος κανόνας με την εξαγωγή GEDCOM «Για κοινοποίηση»), οι εμπιστευτικές καρτέλες. Οι αριθμοί των καρτελών δεν βγαίνουν. ¦ Един-единствен HTML файл, който се отваря във всеки браузър, без приложението: за изпращане по имейл или качване в облак. Премахнати, заедно с изреченията, които ги назовават: живите или вероятно живите хора (същото правило като експорта GEDCOM „За споделяне“), поверителните картони. Номерата на картоните не излизат.
+🔐 Ce que protège ce fichier, et ce qu’il ne protège pas ¦ 🔐 Τι προστατεύει αυτό το αρχείο και τι όχι ¦ 🔐 Какво защитава този файл и какво не
+Chiffrement AES-256-GCM, clé tirée du mot de passe (PBKDF2, {n} tours) : sans le mot de passe, le contenu (noms compris, titre compris) est illisible. ¦ Κρυπτογράφηση AES-256-GCM, κλειδί που προκύπτει από τον κωδικό (PBKDF2, {n} γύροι): χωρίς τον κωδικό, το περιεχόμενο (μαζί με τα ονόματα και τον τίτλο) είναι δυσανάγνωστο. ¦ Шифроване AES-256-GCM, ключ, получен от паролата (PBKDF2, {n} кръга): без паролата съдържанието (включително имената и заглавието) е нечетимо.
+Le fichier ne se connecte à rien (aucune adresse internet n’est appelée, ce que le navigateur fait respecter). ¦ Το αρχείο δεν συνδέεται πουθενά (δεν καλείται καμία διεύθυνση internet, κάτι που επιβάλλει ο περιηγητής). ¦ Файлът не се свързва с нищо (не се извиква никакъв интернет адрес, което браузърът гарантира).
+La date limite est vérifiée à l’ouverture, mais quelqu’un qui a le mot de passe et recule l’horloge de son ordinateur peut la contourner, ou recopier ce qu’il voit : un partage ne se reprend pas. Ne partage que ce que tu acceptes de voir circuler. ¦ Η ημερομηνία λήξης ελέγχεται κατά το άνοιγμα, αλλά όποιος έχει τον κωδικό και γυρίσει πίσω το ρολόι του υπολογιστή του μπορεί να την παρακάμψει, ή να αντιγράψει ό,τι βλέπει: μια κοινοποίηση δεν παίρνεται πίσω. Μοιράσου μόνο ό,τι δέχεσαι να κυκλοφορεί. ¦ Крайната дата се проверява при отваряне, но някой, който има паролата и върне часовника на компютъра си назад, може да я заобиколи или да препише каквото вижда: споделеното не може да се върне. Споделяй само това, което си съгласен да се разпространява.
+Envoie le mot de passe par un autre chemin que le fichier (téléphone, SMS) : les deux ensemble dans le même courriel ne protègent rien. ¦ Στείλε τον κωδικό από άλλο δρόμο από το αρχείο (τηλέφωνο, SMS): και τα δύο μαζί στο ίδιο email δεν προστατεύουν τίποτα. ¦ Изпрати паролата по друг път, различен от файла (телефон, SMS): двете заедно в един имейл не защитават нищо.
+{n} personnes partagées ¦ {n} κοινοποιημένα άτομα ¦ {n} споделени души
+{n} retirées (vivantes ou récentes) ¦ {n} αφαιρέθηκαν (ζωντανοί ή πρόσφατοι) ¦ {n} премахнати (живи или скорошни)
+🔗 Fabriquer le fichier à partager ¦ 🔗 Δημιουργία του αρχείου κοινοποίησης ¦ 🔗 Създай файла за споделяне
+Le passeport des lieux ¦ Το διαβατήριο των τόπων ¦ Паспортът на местата
+Un tampon par village de l’arbre : quand tu y vas, il se colore. Combien en as-tu visité ? ¦ Μια σφραγίδα για κάθε χωριό του δέντρου: όταν πηγαίνεις, χρωματίζεται. Πόσα έχεις επισκεφτεί; ¦ Печат за всяко село от дървото: когато отидеш там, той се оцветява. Колко си посетил?
+Le carnet des tampons, à imprimer ¦ Το τετράδιο των σφραγίδων, για εκτύπωση ¦ Тетрадката с печатите, за печат
+{n} / {total} lieux visités ¦ {n} / {total} τόποι που επισκέφτηκες ¦ {n} / {total} посетени места
+Chaque lieu de l’arbre a son tampon. Quand tu y vas — le village, l’église, la mairie, le cimetière —, clique dessus : « J’y suis allé ». ¦ Κάθε τόπος του δέντρου έχει τη σφραγίδα του. Όταν πηγαίνεις — στο χωριό, στην εκκλησία, στο δημαρχείο, στο νεκροταφείο —, κάνε κλικ πάνω της: «Πήγα εκεί». ¦ Всяко място от дървото има свой печат. Когато отидеш — в селото, църквата, кметството, гробището, — щракни върху него: „Бях там“.
+{n} pers. ¦ {n} άτ. ¦ {n} д.
+Le tour du monde des ancêtres ¦ Ο γύρος του κόσμου των προγόνων ¦ Обиколката на света на предците
+Les kilomètres parcourus de lieu en lieu, le plus long voyage, le plus loin du berceau, siècle après siècle. ¦ Τα χιλιόμετρα που διανύθηκαν από τόπο σε τόπο, το μακρύτερο ταξίδι, το πιο μακριά από τη γενέτειρα, αιώνα με τον αιώνα. ¦ Изминатите километри от място на място, най-дългото пътуване, най-далеч от родното място, век след век.
+Tous ensemble ¦ Όλοι μαζί ¦ Всички заедно
+{n} % du chemin vers la Lune ¦ {n} % της απόστασης ως τη Σελήνη ¦ {n} % от пътя до Луната
+Le plus long voyage ¦ Το μακρύτερο ταξίδι ¦ Най-дългото пътуване
+Le plus loin du berceau ({place}) ¦ Το πιο μακριά από τη γενέτειρα ({place}) ¦ Най-далеч от родното място ({place})
+Les grands voyageurs ¦ Οι μεγάλοι ταξιδευτές ¦ Големите пътешественици
+Entre le berceau des parents et celui des enfants ¦ Ανάμεσα στη γενέτειρα των γονιών και σε αυτή των παιδιών ¦ Между родното място на родителите и това на децата
+La distance moyenne, siècle par siècle, entre le lieu de naissance d’un parent et celui de son enfant : la famille qui s’éloigne de son village. ¦ Η μέση απόσταση, αιώνα με τον αιώνα, ανάμεσα στον τόπο γέννησης ενός γονιού και σε αυτόν του παιδιού του: η οικογένεια που απομακρύνεται από το χωριό της. ¦ Средното разстояние, век по век, между мястото на раждане на родител и това на детето му: семейството, което се отдалечава от селото си.
+Les maisons dans le temps ¦ Τα σπίτια μέσα στον χρόνο ¦ Къщите във времето
+Un village, une maison : qui y a vécu, de quand à quand, génération après génération. ¦ Ένα χωριό, ένα σπίτι: ποιος έζησε εκεί, από πότε ως πότε, γενιά με τη γενιά. ¦ Едно село, една къща: кой е живял там, от кога до кога, поколение след поколение.
+{n} personnes sur {y} ans ¦ {n} άτομα σε {y} χρόνια ¦ {n} души за {y} години
+{place} : {y} ans de présence de la famille, sur {n} générations d’ancêtres ¦ {place}: {y} χρόνια παρουσίας της οικογένειας, σε {n} γενιές προγόνων ¦ {place}: {y} години присъствие на семейството, в {n} поколения предци
+1 sou ¦ 1 σου ¦ 1 су
+{n} membre de la famille en vie ¦ {n} μέλος της οικογένειας εν ζωή ¦ {n} жив член на семейството
+Pas d’autres nouvelles. ¦ Κανένα άλλο νέο. ¦ Няма други новини.
+Rien cette année. ¦ Τίποτα φέτος. ¦ Нищо тази година.
+1 franc ¦ 1 φράγκο ¦ 1 франк
+5 francs ¦ 5 φράγκα ¦ 5 франка
+Ce soir, on raconte {n} vie de la famille de {name}. ¦ Απόψε αφηγούμαστε {n} ζωή της οικογένειας του/της {name}. ¦ Тази вечер разказваме {n} живот от семейството на {name}.
+⏳ Ce partage a expiré. ¦ ⏳ Αυτή η κοινοποίηση έχει λήξει. ¦ ⏳ Това споделяне е изтекло.
+Parents : ¦ Γονείς: ¦ Родители:
+Enfants : ¦ Παιδιά: ¦ Деца:
+Chercher un nom… ¦ Αναζήτηση ονόματος… ¦ Търси име…
+🔒 Ce partage est protégé. ¦ 🔒 Αυτή η κοινοποίηση είναι προστατευμένη. ¦ 🔒 Това споделяне е защитено.
+Partage valable jusqu’au {date}. Les personnes vivantes ne sont pas incluses. ¦ Η κοινοποίηση ισχύει έως {date}. Τα άτομα εν ζωή δεν περιλαμβάνονται. ¦ Споделянето е валидно до {date}. Живите хора не са включени.
+l’arbre dit {what} ¦ το δέντρο λέει {what} ¦ дървото казва {what}
+concorde avec l’arbre ({what}) ¦ συμφωνεί με το δέντρο ({what}) ¦ съвпада с дървото ({what})
+nouvelle lune ¦ νέα σελήνη ¦ новолуние
+(sous l’horizon) ¦ (κάτω από τον ορίζοντα) ¦ (под хоризонта)
+astre|Mars ¦ Άρης ¦ Марс
+{list} brillaient ¦ {list} έλαμπαν ¦ {list} блестяха
+dernier croissant ¦ τελευταίος μηνίσκος ¦ последен сърп
+lune gibbeuse décroissante ¦ φθίνουσα αμφίκυρτη σελήνη ¦ намаляваща изпъкнала луна
+Saturne ¦ Κρόνος ¦ Сатурн
+dernier quartier ¦ τελευταίο τέταρτο ¦ последна четвърт
+{km} km depuis l’étape d’avant ¦ {km} km από τον προηγούμενο σταθμό ¦ {km} km от предишната спирка
+🕯️ Garder la mémoire ¦ 🕯️ Να κρατήσουμε τη μνήμη ¦ 🕯️ Да запазим паметта
+🔭 Découvrir ¦ 🔭 Ανακάλυψε ¦ 🔭 Открий
+Trésor ¦ Θησαυρός ¦ Съкровище
+Récits ¦ Αφηγήσεις ¦ Разкази
+Chasses au trésor ¦ Κυνήγια θησαυρού ¦ Търсения на съкровище
+TRÉSORS ¦ ΘΗΣΑΥΡΟΙ ¦ СЪКРОВИЩА
+trésors ¦ θησαυροί ¦ съкровища
+Garde au moins un trésor affiché. ¦ Κράτα τουλάχιστον έναν θησαυρό εμφανή. ¦ Остави поне едно съкровище видимо.
+Dossier vide ¦ Κενός φάκελος ¦ Празна папка
+Les trésors n’ont pas pu être lus. ¦ Οι θησαυροί δεν μπόρεσαν να διαβαστούν. ¦ Съкровищата не можаха да бъдат прочетени.
+Broderie — {title} ¦ Κέντημα — {title} ¦ Бродерия — {title}
+Aucun visage connu dans cette lignée ¦ Κανένα γνωστό πρόσωπο σε αυτή τη γενεαλογική γραμμή ¦ Няма известни лица в този род
+La Gazette {y} ¦ Η Εφημερίδα {y} ¦ Вестникът {y}
+Fond d’écran ¦ Ταπετσαρία ¦ Тапет
+Pégase ¦ Πήγασος ¦ Пегас
+Andromède ¦ Ανδρομέδα ¦ Андромеда
+Persée ¦ Περσέας ¦ Персей
+sous l’horizon ¦ κάτω από τον ορίζοντα ¦ под хоризонта
+date exacte inconnue ¦ άγνωστη ακριβής ημερομηνία ¦ точната дата е неизвестна
+Les deux guerres ¦ Οι δύο πόλεμοι ¦ Двете войни
+(aucun événement daté) ¦ (κανένα χρονολογημένο γεγονός) ¦ (няма датирани събития)
+Faire-part — {name} ¦ Αναγγελία — {name} ¦ Съобщение — {name}
+Faire-part ¦ Αναγγελία ¦ Съобщение
+L’arbre est vide ¦ Το δέντρο είναι άδειο ¦ Дървото е празно
+{n} prénoms transmis par-dessus une génération ¦ {n} ονόματα που πέρασαν πάνω από μια γενιά ¦ {n} имена, предадени през поколение
+{n} mots expliqués ¦ {n} λέξεις με εξήγηση ¦ {n} обяснени думи
+{n} mot expliqué ¦ {n} λέξη με εξήγηση ¦ {n} обяснена дума
+Aucun vieux mot reconnu. ¦ Δεν αναγνωρίστηκε καμία παλιά λέξη. ¦ Не е разпозната нито една стара дума.
+sous l’évier ¦ κάτω από τον νεροχύτη ¦ под мивката
+Les chasses préparées ¦ Τα έτοιμα κυνήγια ¦ Подготвените търсения
+{n} cachettes ¦ {n} κρυψώνες ¦ {n} скривалища
+Donne au moins deux cachettes. ¦ Δώσε τουλάχιστον δύο κρυψώνες. ¦ Дай поне две скривалища.
+Chasse au trésor ¦ Κυνήγι θησαυρού ¦ Търсене на съкровище
+La chasse sera effacée. ¦ Το κυνήγι θα διαγραφεί. ¦ Търсенето ще бъде изтрито.
+Carte {n} ¦ Κάρτα {n} ¦ Карта {n}
+(à donner au départ) ¦ (δίνεται στην αρχή) ¦ (дава се в началото)
+{answer} → cherchez {where} ¦ {answer} → ψάξε {where} ¦ {answer} → търси {where}
+Il faut quelques ancêtres avec une date, un lieu ou un métier ¦ Χρειάζονται μερικοί πρόγονοι με ημερομηνία, τόπο ή επάγγελμα ¦ Трябват няколко предци с дата, място или професия
+🕵️ Un ancêtre mystère au hasard ¦ 🕵️ Ένας τυχαίος μυστηριώδης πρόγονος ¦ 🕵️ Случаен тайнствен предшественик
+{n} parties ¦ {n} παιχνίδια ¦ {n} игри
+{n} partie ¦ {n} παιχνίδι ¦ {n} игра
+🎉 Bravo ! ¦ 🎉 Μπράβο! ¦ 🎉 Браво!
+😶 C’était… ¦ 😶 Ήταν… ¦ 😶 Това беше…
+🎲 Un autre, au hasard ¦ 🎲 Άλλος ένας, στην τύχη ¦ 🎲 Друг, случайно
+{n} essais ratés ¦ {n} αποτυχημένες προσπάθειες ¦ {n} неуспешни опита
+Choisis quelqu’un. ¦ Διάλεξε κάποιον. ¦ Избери някого.
+Une autre vie aurait été possible… mais c’est celle-là qui a mené jusqu’à toi. ¦ Μια άλλη ζωή θα ήταν δυνατή… αλλά αυτή είναι που οδήγησε ως εσένα. ¦ Друг живот е бил възможен… но именно този е довел до теб.
+📖 Recommencer ¦ 📖 Από την αρχή ¦ 📖 Започни отначало
+Tourner la page → ¦ Γύρνα σελίδα → ¦ Обърни страницата →
+Aucune coïncidence trouvée ¦ Δεν βρέθηκε καμία σύμπτωση ¦ Няма открити съвпадения
+🦋 {n} vie n’aurait jamais existé ¦ 🦋 {n} ζωή δεν θα είχε υπάρξει ποτέ ¦ 🦋 {n} живот никога нямаше да съществува
+la fenêtre d’impression n’est pas prête. ¦ το παράθυρο εκτύπωσης δεν είναι έτοιμο. ¦ прозорецът за печат не е готов.
+🃏 7 FAMILLES ¦ 🃏 7 ΟΙΚΟΓΕΝΕΙΕΣ ¦ 🃏 7 СЕМЕЙСТВА
+(visage repéré) ¦ (εντοπισμένο πρόσωπο) ¦ (открито лице)
+Ajoute-en depuis sa fiche (Médias), puis reviens ici. ¦ Πρόσθεσε από την καρτέλα του/της (Πολυμέσα) και μετά γύρνα εδώ. ¦ Добави от картона му/ѝ (Медии), после се върни тук.
+Jeu remis comme au départ. ¦ Το παιχνίδι επανήλθε στην αρχική κατάσταση. ¦ Играта е върната както в началото.
+Donne au moins une équipe. ¦ Δώσε τουλάχιστον μία ομάδα. ¦ Дай поне един отбор.
+Égalité ! ¦ Ισοπαλία! ¦ Равенство!
+{n} point ¦ {n} πόντος ¦ {n} точка
+Question {n} / {total} ¦ Ερώτηση {n} / {total} ¦ Въпрос {n} / {total}
+Question suivante ▶ ¦ Επόμενη ερώτηση ▶ ¦ Следващ въпрос ▶
+Vidéo prête. ¦ Το βίντεο είναι έτοιμο. ¦ Видеото е готово.
+Donne-lui un titre. ¦ Δώσε του έναν τίτλο. ¦ Дай му заглавие.
+SOUVENIR DES SENS ¦ ΑΝΑΜΝΗΣΗ ΤΩΝ ΑΙΣΘΗΣΕΩΝ ¦ СПОМЕН НА СЕТИВАТА
+Chaque samedi, elle cirait les marches… ¦ Κάθε Σάββατο, γυάλιζε τα σκαλιά με κερί… ¦ Всяка събота тя лъскаше стъпалата с восък…
+La préparation ¦ Η προετοιμασία ¦ Приготвянето
+CHANSONS DE LA FAMILLE ¦ ΤΑ ΤΡΑΓΟΥΔΙΑ ΤΗΣ ΟΙΚΟΓΕΝΕΙΑΣ ¦ ПЕСНИТЕ НА СЕМЕЙСТВОТО
+Les paroles ¦ Οι στίχοι ¦ Текстът
+Quand on la chantait ¦ Πότε το τραγουδούσαν ¦ Кога се пееше
+Raconte-moi une journée ordinaire quand tu avais dix ans. ¦ Πες μου μια συνηθισμένη μέρα όταν ήσουν δέκα χρονών. ¦ Разкажи ми за един обикновен ден, когато беше на десет години.
+Qu’est-ce qu’on apprenait par cœur ? ¦ Τι μάθαινες απέξω; ¦ Какво учеше наизуст?
+Y avait-il des histoires qu’on se racontait toujours dans la famille ? ¦ Υπήρχαν ιστορίες που λέγονταν πάντα στην οικογένεια; ¦ Имаше ли истории, които винаги се разказваха в семейството?
+Quel outil ou quel geste te reste dans les mains ? ¦ Ποιο εργαλείο ή ποια κίνηση σού έχει μείνει στα χέρια; ¦ Кой инструмент или кое движение ти е останало в ръцете?
+Comment as-tu rencontré ton mari, ta femme, ton amour ? ¦ Πώς γνώρισες τον άντρα σου, τη γυναίκα σου, την αγάπη σου; ¦ Как се запозна със съпруга си, съпругата си, любовта си?
+Où avez-vous habité au début ? ¦ Πού μείνατε στην αρχή; ¦ Къде живяхте в началото?
+Où étais-tu pendant la guerre ? ¦ Πού ήσουν στον πόλεμο; ¦ Къде беше по време на войната?
+Y a-t-il un jour que tu n’as jamais oublié ? ¦ Υπάρχει μια μέρα που δεν ξέχασες ποτέ; ¦ Има ли ден, който никога не си забравил/а?
+Comment se chauffait-on, comment s’éclairait-on ? ¦ Πώς ζεσταίνονταν, πώς φωτίζονταν; ¦ Как са се отоплявали, как са си светели?
+Comment fêtait-on Noël ? ¦ Πώς γιόρταζαν τα Χριστούγεννα; ¦ Как се празнуваше Коледа?
+S’ouvre ¦ Ανοίγει ¦ Отваря се
+L’anniversaire de ¦ Τα γενέθλια του/της ¦ Рожденият ден на
+À ses ¦ Στα ¦ На
+La lettre ¦ Το γράμμα ¦ Писмото
+Écris ici… ¦ Γράψε εδώ… ¦ Пиши тук…
+LETTRE AUX DESCENDANTS ¦ ΓΡΑΜΜΑ ΣΤΟΥΣ ΑΠΟΓΟΝΟΥΣ ¦ ПИСМО ДО ПОТОМЦИТЕ
+✉️ La lettre ¦ ✉️ Το γράμμα ¦ ✉️ Писмото
+✉️ Nouvelle lettre ¦ ✉️ Νέο γράμμα ¦ ✉️ Ново писмо
+🔒 Sceller la lettre ¦ 🔒 Σφράγισε το γράμμα ¦ 🔒 Запечатай писмото
+Choisis une personne dont on connaît la naissance. ¦ Διάλεξε ένα άτομο με γνωστή ημερομηνία γέννησης. ¦ Избери човек с известно раждане.
+Écris quelque chose ou joins un son, une vidéo ou une photo. ¦ Γράψε κάτι ή επισύναψε έναν ήχο, ένα βίντεο ή μια φωτογραφία. ¦ Напиши нещо или приложи звук, видео или снимка.
+{n} scellées ¦ {n} σφραγισμένα ¦ {n} запечатани
+{n} ouvertes ¦ {n} ανοιγμένα ¦ {n} отворени
+De {from} ¦ Από {from} ¦ От {from}
+écrite ¦ γραμμένο ¦ написано
+Sommaire ¦ Περιεχόμενα ¦ Съдържание
+ça rappelle {who} ¦ θυμίζει {who} ¦ напомня за {who}
+{n} recettes transmises ¦ {n} συνταγές που πέρασαν ¦ {n} предадени рецепти
+{n} recette transmise ¦ {n} συνταγή που πέρασε ¦ {n} предадена рецепта
+Chantée par {who} ¦ Το τραγουδούσε {who} ¦ Пееше я {who}
+Sans enregistrement ¦ Χωρίς ηχογράφηση ¦ Без запис
+(le son reste dans les médias) ¦ (ο ήχος μένει στα πολυμέσα) ¦ (звукът остава в медиите)
+Entretien avec {name} ¦ Συνέντευξη με {name} ¦ Интервю с {name}
+Choisis au moins un thème. ¦ Διάλεξε τουλάχιστον ένα θέμα. ¦ Избери поне една тема.
+Question suivante → ¦ Επόμενη ερώτηση → ¦ Следващ въпрос →
+Passer ¦ Παράλειψη ¦ Пропусни
+🔊 Relire ¦ 🔊 Ξανάκουσε ¦ 🔊 Прочети отново
+J’enregistre l’entretien… ¦ Ηχογραφώ τη συνέντευξη… ¦ Записвам интервюто…
+Entretien gardé (sans son). ¦ Η συνέντευξη αποθηκεύτηκε (χωρίς ήχο). ¦ Интервюто е запазено (без звук).
+{n} bougies allumées ¦ {n} αναμμένα κεριά ¦ {n} запалени свещи
+mélange ¦ μείγμα ¦ микс
+UNE BOUGIE ¦ ΕΝΑ ΚΕΡΙ ¦ ЕДНА СВЕЩ
+encore {n} j ¦ ακόμα {n} μ. ¦ още {n} дни
+demain ¦ αύριο ¦ утре
+allumée ¦ αναμμένο ¦ запалена
+par {name} ¦ από {name} ¦ от {name}
+Bougie supprimée ¦ Το κερί διαγράφηκε ¦ Свещта е изтрита
+Bougie supprimée. ¦ Το κερί διαγράφηκε. ¦ Свещта е изтрита.
+Ambiance arrêtée (minuterie). ¦ Η ατμόσφαιρα σταμάτησε (χρονοδιακόπτης). ¦ Атмосферата е спряна (таймер).
+Monte au moins une couche. ¦ Ανέβασε τουλάχιστον ένα επίπεδο. ¦ Усили поне един слой.
+Garder ce mélange ¦ Κράτα αυτό το μείγμα ¦ Запази този микс
+Mélange gardé. ¦ Το μείγμα αποθηκεύτηκε. ¦ Миксът е запазен.
+« {name} » supprimé. ¦ Το «{name}» διαγράφηκε. ¦ „{name}“ е изтрит.
+Ce navigateur ne sait pas enregistrer. ¦ Αυτός ο περιηγητής δεν μπορεί να ηχογραφήσει. ¦ Този браузър не може да записва.
+Ambiance — {name} ¦ Ατμόσφαιρα — {name} ¦ Атмосфера — {name}
+à ¦ στις ¦ в
+Tous les indices s’accordent (vers {y}). ¦ Όλες οι ενδείξεις συμφωνούν (περίπου {y}). ¦ Всички следи съвпадат (около {y}).
+Qui cela peut être ¦ Ποιος μπορεί να είναι ¦ Кой може да е
+Avait {n} ans vers {y} ¦ Ήταν {n} χρονών περίπου το {y} ¦ Бил/а е на {n} години около {y}
+Reprendre la branche {name} ¦ Ξαναπιάσε τον κλάδο {name} ¦ Поднови клона {name}
+RAPPEL DE RECHERCHE ¦ ΥΠΕΝΘΥΜΙΣΗ ΕΡΕΥΝΑΣ ¦ НАПОМНЯНЕ ЗА ПРОУЧВАНЕ
+Pas touchée depuis {d} ¦ Χωρίς αλλαγές εδώ και {d} ¦ Непипан от {d}
+modifiée ¦ τροποποιήθηκε ¦ променен
+Jamais modifiée ¦ Ποτέ δεν τροποποιήθηκε ¦ Никога не е променян
+rien d’évident ne manque ¦ δεν λείπει κάτι προφανές ¦ не липсва нищо очевидно
+Thème d’époque arrêté. ¦ Το θέμα εποχής απενεργοποιήθηκε. ¦ Темата на епохата е изключена.
+châtains ¦ καστανά ¦ кестеняви
+coloré ¦ κόκκινο ¦ румено
+cicatrice au front ¦ ουλή στο μέτωπο ¦ белег на челото
+{n} passeports rattachés ¦ {n} συνδεδεμένα διαβατήρια ¦ Свързани паспорти: {n}
+{n} affichés ¦ {n} εμφανίζονται ¦ Показани: {n}
+{n} affiché ¦ {n} εμφανίζεται ¦ Показан: {n}
+Dans l’arbre ¦ Στο δέντρο ¦ В дървото
+Délivré ¦ Εκδόθηκε ¦ Издаден
+son grand-père ¦ ο παππούς του ¦ дядо му
+sa grand-mère ¦ η γιαγιά του ¦ баба му
+un frère ou une sœur ¦ ένας αδελφός ή μια αδελφή ¦ брат или сестра
+{n} faits repérés ¦ {n} γεγονότα εντοπίστηκαν ¦ Открити факти: {n}
+{n} fait repéré ¦ {n} γεγονός εντοπίστηκε ¦ Открит факт: {n}
+{n} personne partagée ¦ {n} κοινόχρηστο άτομο ¦ Споделен човек: {n}
+PASSEPORT ¦ ΔΙΑΒΑΤΗΡΙΟ ¦ ПАСПОРТ
+🛂 Nouveau passeport ¦ 🛂 Νέο διαβατήριο ¦ 🛂 Нов паспорт
+Passeport enregistré. ¦ Το διαβατήριο αποθηκεύτηκε. ¦ Паспортът е запазен.
+je ne trouve pas d’enregistrements répétés dans ce XML ¦ δεν βρίσκω επαναλαμβανόμενες εγγραφές σε αυτό το XML ¦ не намирам повтарящи се записи в този XML
+{n} passeports ¦ {n} διαβατήρια ¦ Паспорти: {n}
+aucune ¦ καμία ¦ няма
+un nom, une commune, un métier… ¦ ένα όνομα, ένας δήμος, ένα επάγγελμα… ¦ име, община, професия…
+Ce relevé est trop gros (20 Mo au plus). ¦ Αυτή η καταγραφή είναι πολύ μεγάλη (το πολύ 20 MB). ¦ Този опис е твърде голям (най-много 20 MB).
+{n} passeports lus. ¦ {n} διαβατήρια διαβάστηκαν. ¦ Прочетени паспорти: {n}.
+Passeport intérieur ¦ Εσωτερικό διαβατήριο ¦ Вътрешен паспорт
+＋ Passeport ¦ ＋ Διαβατήριο ¦ ＋ Паспорт
+Les passeports n’ont pas pu être lus. ¦ Δεν ήταν δυνατή η ανάγνωση των διαβατηρίων. ¦ Паспортите не можаха да бъдат прочетени.
+Modifier ce passeport ¦ Επεξεργασία αυτού του διαβατηρίου ¦ Редактирай този паспорт
+Aucun passeport ne correspond ¦ Κανένα διαβατήριο δεν ταιριάζει ¦ Няма съвпадащ паспорт
+Passeports ¦ Διαβατήρια ¦ Паспорти
+Voyageur ¦ Ταξιδιώτης ¦ Пътник
+Délivré à ¦ Εκδόθηκε σε ¦ Издаден в
+📍 Délivré à ¦ 📍 Εκδόθηκε σε ¦ 📍 Издаден в
+sorte d’événement introuvable ¦ το είδος γεγονότος δεν βρέθηκε ¦ видът събитие не е намерен
+Aucun fait repéré ¦ Κανένα γεγονός δεν εντοπίστηκε ¦ Няма открити факти
+⏹ Arrêter la dictée ¦ ⏹ Διακοπή υπαγόρευσης ¦ ⏹ Спри диктовката
+Solide. ¦ Ισχυρός. ¦ Силна.
+Oui, quand même ¦ Ναι, παρ’ όλα αυτά ¦ Да, все пак
+La branche {name} — partagée par la famille ¦ Ο κλάδος {name} — κοινόχρηστος από την οικογένεια ¦ Клонът {name} — споделен от семейството
+PASSEPORT DES LIEUX ¦ ΔΙΑΒΑΤΗΡΙΟ ΤΩΝ ΤΟΠΩΝ ¦ ПАСПОРТ НА МЕСТАТА
+Où es-tu né, et dans quelle maison as-tu grandi ? ¦ Πού γεννήθηκες, και σε ποιο σπίτι μεγάλωσες; ¦ Къде си роден и в коя къща си израснал?
+Où es-tu née, et dans quelle maison as-tu grandi ? ¦ Πού γεννήθηκες, και σε ποιο σπίτι μεγάλωσες; ¦ Къде си родена и в коя къща си израснала?
+À quoi jouais-tu, et avec qui ? ¦ Τι έπαιζες, και με ποιον; ¦ Какво играеше и с кого?
+Quelle odeur ou quel bruit te ramène tout de suite à ton enfance ? ¦ Ποια μυρωδιά ή ποιος ήχος σε γυρίζει αμέσως στα παιδικά σου χρόνια; ¦ Коя миризма или кой звук те връща веднага в детството?
+Qui était la personne la plus importante pour toi, petit ? ¦ Ποιος ήταν ο πιο σημαντικός άνθρωπος για σένα όταν ήσουν μικρός; ¦ Кой беше най-важният човек за теб, когато беше малък?
+Qui était la personne la plus importante pour toi, petite ? ¦ Ποιος ήταν ο πιο σημαντικός άνθρωπος για σένα όταν ήσουν μικρή; ¦ Кой беше най-важният човек за теб, когато беше малка?
+Comment allais-tu à l’école ? ¦ Πώς πήγαινες στο σχολείο; ¦ Как ходеше на училище?
+Te souviens-tu de ton maître ou de ta maîtresse ? ¦ Θυμάσαι τον δάσκαλο ή τη δασκάλα σου; ¦ Помниш ли учителя или учителката си?
+Jusqu’à quel âge es-tu allé à l’école, et pourquoi ? ¦ Μέχρι ποια ηλικία πήγες στο σχολείο, και γιατί; ¦ До каква възраст ходи на училище и защо?
+Jusqu’à quel âge es-tu allée à l’école, et pourquoi ? ¦ Μέχρι ποια ηλικία πήγες στο σχολείο, και γιατί; ¦ До каква възраст ходи на училище и защо?
+Que sais-tu de tes grands-parents ? ¦ Τι ξέρεις για τους παππούδες σου; ¦ Какво знаеш за баба си и дядо си?
+Quels étaient les métiers de tes parents ? ¦ Ποια ήταν τα επαγγέλματα των γονιών σου; ¦ Какви бяха професиите на родителите ти?
+Y a-t-il un secret ou une brouille dont on parlait à voix basse ? ¦ Υπάρχει κάποιο μυστικό ή κάποια κόντρα για την οποία μιλούσαν χαμηλόφωνα; ¦ Има ли тайна или скарване, за което се говореше шепнешком?
+Quels prénoms revenaient dans la famille, et pourquoi ? ¦ Ποια ονόματα επαναλαμβάνονταν στην οικογένεια, και γιατί; ¦ Кои имена се повтаряха в семейството и защо?
+Quel a été ton premier travail, et combien gagnais-tu ? ¦ Ποια ήταν η πρώτη σου δουλειά, και πόσα κέρδιζες; ¦ Каква беше първата ти работа и колко печелеше?
+Raconte une journée de travail. ¦ Διηγήσου μια μέρα δουλειάς. ¦ Разкажи един работен ден.
+De quoi es-tu le plus fier dans ton métier ? ¦ Για τι είσαι πιο περήφανος/η στη δουλειά σου; ¦ С какво се гордееш най-много в професията си?
+Comment s’est passé le mariage ? ¦ Πώς έγινε ο γάμος; ¦ Как мина сватбата?
+Qu’est-ce qui manquait le plus ? ¦ Τι έλειπε περισσότερο; ¦ Какво липсваше най-много?
+Qui est parti, et qui est revenu ? ¦ Ποιος έφυγε, και ποιος γύρισε; ¦ Кой замина и кой се върна?
+Décris-moi la maison : les pièces, la cuisine, le jardin. ¦ Περίγραψέ μου το σπίτι: τα δωμάτια, την κουζίνα, τον κήπο. ¦ Опиши ми къщата: стаите, кухнята, градината.
+Qu’est-ce qu’on mangeait le dimanche ? ¦ Τι τρώγατε την Κυριακή; ¦ Какво се ядеше в неделя?
+Quelles étaient les fêtes du village ? ¦ Ποιες ήταν οι γιορτές του χωριού; ¦ Кои бяха празниците на селото?
+Quelle chanson chantait-on à la fin des repas ? ¦ Ποιο τραγούδι τραγουδούσατε στο τέλος του φαγητού; ¦ Коя песен се пееше в края на трапезата?
+Qu’est-ce que tu aimerais que tes arrière-petits-enfants sachent de toi ? ¦ Τι θα ήθελες να ξέρουν για σένα τα δισέγγονά σου; ¦ Какво би искал правнуците ти да знаят за теб?
+Quel conseil donnerais-tu à quelqu’un de vingt ans ? ¦ Ποια συμβουλή θα έδινες σε κάποιον είκοσι χρονών; ¦ Какъв съвет би дал на някой на двайсет години?
+Qu’est-ce qui a le plus changé dans ta vie ? ¦ Τι άλλαξε περισσότερο στη ζωή σου; ¦ Какво се промени най-много в живота ти?
+{n} livre ¦ {n} λίβρα ¦ {n} ливра
+{n} livres ¦ {n} λίβρες ¦ {n} ливри
+{n} franc ¦ {n} φράγκο ¦ {n} франк
+{n} francs ¦ {n} φράγκα ¦ {n} франка
+{n} euro ¦ {n} ευρώ ¦ {n} евро
+unité|en ¦ σε ¦ в
+année|à ¦ έως ¦ до
+date|Le ¦ Στις ¦ На
+force|faible ¦ αδύναμος ¦ слаба
+force|correct ¦ μέτριος ¦ прилична
+force|solide ¦ ισχυρός ¦ силна
+aucune|personne ¦ κανείς ¦ никой
+signalement|1 m 65 ¦ 1,65 μ. ¦ 1,65 м
+signalement|châtains ¦ καστανά ¦ кестеняви
+signalement|gris ¦ γκρίζα ¦ сиви
+signalement|aquilin ¦ γρυπή ¦ орлов
+signalement|rond ¦ στρογγυλό ¦ кръгло
+signalement|ovale ¦ οβάλ ¦ овално
+signalement|coloré ¦ κόκκινο ¦ румено
+signalement|brune ¦ μελαχρινή ¦ мургава
+signalement|cicatrice au front ¦ ουλή στο μέτωπο ¦ белег на челото
+soit {n} baguette d’aujourd’hui ¦ δηλαδή {n} μπαγκέτες σημερινές ¦ тоест {n} днешни багети
+De la Révolution au Second Empire, il fallait un passeport pour aller d’un département à l’autre ; il portait le <b>signalement</b> du voyageur, une description qui remplace souvent la photo qu’on n’a pas. Les relevés publiés (par exemple les passeports intérieurs de Saint-Brieuc, 1830-1839, sur data.gouv.fr) s’importent ici : télécharge le fichier, puis « Importer un relevé ». ¦ Από την Επανάσταση ως τη Δεύτερη Αυτοκρατορία, χρειαζόταν διαβατήριο για να πας από έναν νομό σε άλλον· έγραφε την <b>περιγραφή</b> του ταξιδιώτη, μια περιγραφή που συχνά αντικαθιστά τη φωτογραφία που δεν έχουμε. Οι δημοσιευμένες καταγραφές (για παράδειγμα τα εσωτερικά διαβατήρια του Saint-Brieuc, 1830-1839, στο data.gouv.fr) εισάγονται εδώ: κατέβασε το αρχείο και μετά «Εισαγωγή καταγραφής». ¦ От Революцията до Втората империя е бил нужен паспорт, за да отидеш от един департамент в друг; в него е било <b>описанието</b> на пътника — описание, което често замества снимката, която нямаме. Публикуваните описи (например вътрешните паспорти от Saint-Brieuc, 1830-1839, в data.gouv.fr) се импортират тук: изтегли файла, после „Импортирай опис“.
+🎲 Jouer en famille ¦ 🎲 Παιχνίδι με την οικογένεια ¦ 🎲 Игри със семейството
+🎨 Créer et fabriquer ¦ 🎨 Δημιουργία και κατασκευή ¦ 🎨 Създавай и майстори
+🗺️ Lieux et voyages ¦ 🗺️ Τόποι και ταξίδια ¦ 🗺️ Места и пътувания
+🧰 Outils malins ¦ 🧰 Έξυπνα εργαλεία ¦ 🧰 Хитри инструменти
+L’atelier de mise en page n’est pas disponible ici. ¦ Το εργαστήρι σελιδοποίησης δεν είναι διαθέσιμο εδώ. ¦ Работилницата за оформление не е налична тук.
+Une copie est rangée dans les médias (et sur la fiche) : « {title} ». ¦ Ένα αντίγραφο αποθηκεύτηκε στα πολυμέσα (και στην καρτέλα): «{title}». ¦ Копие е подредено в медиите (и в картона): „{title}“.
+Une copie est rangée dans les médias : « {title} ». ¦ Ένα αντίγραφο αποθηκεύτηκε στα πολυμέσα: «{title}». ¦ Копие е подредено в медиите: „{title}“.
+Ouvrir dans la mise en page ¦ Άνοιγμα στη σελιδοποίηση ¦ Отвори в оформлението
+Pour tout retravailler (textes, cadres, pages) ¦ Για να τα ξαναδουλέψεις όλα (κείμενα, πλαίσια, σελίδες) ¦ За да преработиш всичко (текстове, рамки, страници)
+⤓ Exporter ¦ ⤓ Εξαγωγή ¦ ⤓ Експортирай
+🖨 Imprimer ▾ ¦ 🖨 Εκτύπωση ▾ ¦ 🖨 Печат ▾
+Les trésors et leurs dossiers ¦ Οι θησαυροί και οι φάκελοί τους ¦ Съкровищата и техните папки
+Réordonner les trésors ¦ Αναδιάταξη των θησαυρών ¦ Пренареди съкровищата
+Ordre et trésors affichés enregistrés. ¦ Η σειρά και οι θησαυροί που εμφανίζονται αποθηκεύτηκαν. ¦ Редът и показваните съкровища са запазени.
+Pour s’émerveiller, jouer, créer et garder la mémoire, à partir de ton arbre. ¦ Για να θαυμάσεις, να παίξεις, να δημιουργήσεις και να κρατήσεις τη μνήμη, ξεκινώντας από το δέντρο σου. ¦ За да се удивляваш, да играеш, да създаваш и да пазиш паметта, като тръгваш от дървото си.
+⚙️ Réglages pour y ranger des trésors (ou l’effacer). ¦ ⚙️ Ρυθμίσεις για να τακτοποιήσεις θησαυρούς (ή να το κρύψεις). ¦ ⚙️ Настройки, за да подредиш съкровища (или да го скриеш).
+＋ Souvenir ¦ ＋ Ανάμνηση ¦ ＋ Спомен
+＋ Lettre ¦ ＋ Γράμμα ¦ ＋ Писмо
+Aucun trésor pour l’instant ¦ Κανένας θησαυρός προς το παρόν ¦ Засега няма съкровища
+Un souvenir (une odeur, un bruit), une recette, une chanson, une lettre pour plus tard, un entretien enregistré… tout se garde dans l’onglet ✨ Trésors. ¦ Μια ανάμνηση (μια μυρωδιά, ένας ήχος), μια συνταγή, ένα τραγούδι, ένα γράμμα για αργότερα, μια ηχογραφημένη συνέντευξη… όλα φυλάγονται στην καρτέλα του μενού ✨ Θησαυροί. ¦ Спомен (миризма, звук), рецепта, песен, писмо за по-късно, записано интервю… всичко се пази в раздела ✨ Съкровища.
+Grille de broderie ¦ Σχέδιο κεντήματος ¦ Схема за бродерия
+Un carré = un point de croix ; les traits épais tous les 10 points. ¦ Ένα τετράγωνο = μια σταυροβελονιά· οι χοντρές γραμμές κάθε 10 βελονιές. ¦ Едно квадратче = един кръстат бод; дебелите линии на всеки 10 бода.
+Aucun portrait dans l’arbre ¦ Κανένα πορτρέτο στο δέντρο ¦ Няма портрети в дървото
+Ajoute une photo de portrait sur les fiches, ou encadre les visages dans la visionneuse. ¦ Πρόσθεσε μια φωτογραφία πορτρέτου στις καρτέλες, ή πλαισίωσε τα πρόσωπα στο πρόγραμμα προβολής. ¦ Добави портретна снимка в картоните или огради лицата във визуализатора.
+{list}. Ajoute des portraits ou encadre les visages sur les photos. ¦ {list}. Πρόσθεσε πορτρέτα ή πλαισίωσε τα πρόσωπα στις φωτογραφίες. ¦ {list}. Добави портрети или огради лицата на снимките.
+Le visage moyen de {n} génération ¦ Το μέσο πρόσωπο της γενιάς {n} ¦ Средното лице на поколение {n}
+{n} sous ¦ {n} σου ¦ {n} су
+Il faut des ancêtres avec une date de naissance ¦ Χρειάζονται πρόγονοι με ημερομηνία γέννησης ¦ Нужни са предци с дата на раждане
+premier croissant ¦ πρώτη ημισέληνος ¦ млад месец
+premier quartier ¦ πρώτο τέταρτο ¦ първа четвърт
+lune gibbeuse croissante ¦ αύξων αμφίκυρτος ¦ нарастваща луна
+{place} (pas placé sur la carte : ciel de Paris) ¦ {place} (δεν είναι στον χάρτη: ουρανός του Παρισιού) ¦ {place} (не е на картата: небето над Париж)
+il faisait jour : voici les étoiles cachées par le soleil ¦ ήταν μέρα: να τα αστέρια που έκρυβε ο ήλιος ¦ беше ден: ето звездите, скрити от слънцето
+Il faut au moins l’année de naissance. ¦ Χρειάζεται τουλάχιστον το έτος γέννησης. ¦ Нужна е поне годината на раждане.
+⚠️ Date exacte inconnue : ciel du 1er juillet. ¦ ⚠️ Άγνωστη ακριβής ημερομηνία: ουρανός της 1ης Ιουλίου. ¦ ⚠️ Точната дата е неизвестна: небето на 1 юли.
+⚠️ Lieu non placé sur la carte. ¦ ⚠️ Ο τόπος δεν είναι τοποθετημένος στον χάρτη. ¦ ⚠️ Мястото не е поставено на картата.
+Il faut au moins l’année de naissance pour voir le ciel. ¦ Χρειάζεται τουλάχιστον το έτος γέννησης για να δεις τον ουρανό. ¦ Нужна е поне годината на раждане, за да видиш небето.
+Pas de portrait sur cette fiche. ¦ Κανένα πορτρέτο σε αυτή την καρτέλα. ¦ Няма портрет в този картон.
+Avant 1700 ¦ Πριν από το 1700 ¦ Преди 1700
+Le XVIIIe siècle ¦ Ο 18ος αιώνας ¦ XVIII век
+Révolution et Empire ¦ Επανάσταση και Αυτοκρατορία ¦ Революция и Империя
+Le XIXe siècle ¦ Ο 19ος αιώνας ¦ XIX век
+Depuis 1946 ¦ Από το 1946 ¦ От 1946
+Aucune signature repérée pour l’instant ¦ Καμία υπογραφή δεν εντοπίστηκε προς το παρόν ¦ Засега няма открити подписи
+Ouvre un acte dans la visionneuse des médias, puis « ＋ Identifier une signature » : encadre la signature et dis de qui elle est. Elle viendra se poser ici, rangée par époque. ¦ Άνοιξε μια πράξη στο πρόγραμμα προβολής πολυμέσων, και μετά «＋ Αναγνώριση υπογραφής»: πλαισίωσε την υπογραφή και πες ποιανού είναι. Θα έρθει εδώ, ταξινομημένη ανά εποχή. ¦ Отвори акт във визуализатора на медии, после „＋ Разпознай подпис“: огради подписа и кажи чий е. Той ще дойде тук, подреден по епоха.
+Pas d’ancêtres connus pour cette personne ¦ Κανένας γνωστός πρόγονος για αυτό το άτομο ¦ Няма известни предци на този човек
+Aucun prénom ne saute de génération dans l’arbre pour l’instant ¦ Κανένα όνομα δεν πηδάει γενιά στο δέντρο προς το παρόν ¦ Засега в дървото няма име, което прескача поколение
+laboureur, brumaire, dot… ¦ laboureur, brumaire, dot… ¦ laboureur, brumaire, dot…
+(passe la souris dessus) : ¦ (πέρνα το ποντίκι από πάνω): ¦ (мини с мишката отгоре):
+L’arbre ne donne que {n} énigmes : enlève des cachettes. ¦ Το δέντρο δίνει μόνο {n} γρίφους: αφαίρεσε κρυψώνες. ¦ Дървото дава само загадки: {n}. Махни скривалища.
+L’arbre ne donne que {n} énigme : enlève des cachettes. ¦ Το δέντρο δίνει μόνο {n} γρίφο: αφαίρεσε κρυψώνες. ¦ Дървото дава само загадки: {n}. Махни скривалища.
+Chasse prête : imprime les cartes. ¦ Το κυνήγι είναι έτοιμο: τύπωσε τις κάρτες. ¦ Търсенето е готово: отпечатай картите.
+Supprimer ? ¦ Διαγραφή; ¦ Да се изтрие ли?
+sous le lit ¦ κάτω από το κρεβάτι ¦ под леглото
+dans le four ¦ μέσα στον φούρνο ¦ във фурната
+derrière le canapé ¦ πίσω από τον καναπέ ¦ зад дивана
+dans la baignoire ¦ μέσα στην μπανιέρα ¦ във ваната
+dans le panier à linge ¦ μέσα στο καλάθι των ρούχων ¦ в коша за пране
+derrière la porte du garage ¦ πίσω από την πόρτα του γκαράζ ¦ зад вратата на гаража
+dans la boîte à chaussures ¦ μέσα στο κουτί παπουτσιών ¦ в кутията за обувки
+sous le coussin ¦ κάτω από το μαξιλάρι ¦ под възглавницата
+dans le pot de fleurs ¦ μέσα στη γλάστρα ¦ в саксията
+au fond du frigo ¦ στο βάθος του ψυγείου ¦ в дъното на хладилника
+sous la table de la cuisine ¦ κάτω από το τραπέζι της κουζίνας ¦ под кухненската маса
+sous le tapis ¦ κάτω από το χαλί ¦ под килима
+(à cacher : {where}) ¦ (για κρύψιμο: {where}) ¦ (за скриване: {where})
+C’est la dernière : le trésor vous attend ! ¦ Είναι η τελευταία: ο θησαυρός σας περιμένει! ¦ Това е последната: съкровището ви чака!
+<b>Pour l’organisateur.</b> Donnez la carte 1 aux joueurs. Cachez chaque carte suivante à l’endroit indiqué en haut de la carte. Le trésor ({treasure}) va à : {where}. ¦ <b>Για τον διοργανωτή.</b> Δώσε την κάρτα 1 στους παίκτες. Κρύψε κάθε επόμενη κάρτα στο σημείο που γράφει πάνω στην κάρτα. Ο θησαυρός ({treasure}) πηγαίνει: {where}. ¦ <b>За организатора.</b> Дай карта 1 на играчите. Скрий всяка следваща карта на мястото, посочено горе на картата. Съкровището ({treasure}) отива: {where}.
+à vous de choisir ¦ διάλεξε εσύ ¦ ти избираш
+{n} essai raté ¦ {n} αποτυχημένη προσπάθεια ¦ Неуспешни опити: {n}
+Non, ce n’est pas ça… un indice de plus. ¦ Όχι, δεν είναι αυτό… ένα στοιχείο ακόμη. ¦ Не, не е това… още една подсказка.
+Il faut un ancêtre avec une date de naissance et un métier ou un mariage ¦ Χρειάζεται ένας πρόγονος με ημερομηνία γέννησης και ένα επάγγελμα ή έναν γάμο ¦ Нужен е предшественик с дата на раждане и професия или брак
+Tu as fait {n} choix sur {total} comme {name}. ¦ Έκανες {n} επιλογές από {total} όπως ο/η {name}. ¦ Направи {n} от {total} избора като {name}.
+Une vie vécue à l’identique : tu connais bien ton ancêtre ! ¦ Μια ζωή ίδια ακριβώς: ξέρεις καλά τον πρόγονό σου! ¦ Живот, изживян по същия начин: познаваш добре предшественика си!
+Avec tes choix, l’histoire de la famille aurait été tout autre. ¦ Με τις επιλογές σου, η ιστορία της οικογένειας θα ήταν εντελώς άλλη. ¦ С твоите избори историята на семейството щеше да е съвсем друга.
+✨ Le même choix que ton ancêtre ! ¦ ✨ Η ίδια επιλογή με τον πρόγονό σου! ¦ ✨ Същият избор като предшественика ти!
+🌀 Une autre vie commence… mais revenons à la vraie. ¦ 🌀 Μια άλλη ζωή αρχίζει… αλλά ας γυρίσουμε στην αληθινή. ¦ 🌀 Започва друг живот… но да се върнем към истинския.
+Il faut des dates précises (jour et mois). ¦ Χρειάζονται ακριβείς ημερομηνίες (ημέρα και μήνας). ¦ Нужни са точни дати (ден и месец).
+{pct} % de l’arbre. ¦ {pct} % του δέντρου. ¦ {pct} % от дървото.
+Personne ne descend de ce choix dans l’arbre ¦ Κανείς στο δέντρο δεν κατάγεται από αυτή την επιλογή ¦ Никой в дървото не произлиза от този избор
+Portrait de la fiche ¦ Πορτρέτο της καρτέλας ¦ Портрет от картона
+Aucune photo jointe à cette fiche, ni de visage encadré sur une photo ¦ Καμία φωτογραφία συνδεδεμένη με αυτή την καρτέλα, ούτε πλαισιωμένο πρόσωπο σε φωτογραφία ¦ Няма снимка към този картон, нито оградено лице на снимка
+🔍 Zoom ¦ 🔍 Ζουμ ¦ 🔍 Мащаб
+Glisse la photo dans le cadre pour la placer ; la molette (ou + et −) zoome. ¦ Σύρε τη φωτογραφία μέσα στο πλαίσιο για να την τοποθετήσεις· η ροδέλα (ή + και −) κάνει ζουμ. ¦ Плъзни снимката в рамката, за да я наместиш; колелцето (или + и −) променя мащаба.
+Les photos marquées d’un visage se recadrent toutes seules sur lui. ¦ Οι φωτογραφίες με σημειωμένο πρόσωπο περικόπτονται μόνες τους γύρω του. ¦ Снимките с отбелязано лице се изрязват сами около него.
+Pas encore assez de familles ¦ Δεν υπάρχουν ακόμη αρκετές οικογένειες ¦ Все още няма достатъчно семейства
+Il faut au moins deux familles d’au moins six personnes (décédées) : complète l’arbre, ou essaie « par branche ». ¦ Χρειάζονται τουλάχιστον δύο οικογένειες με τουλάχιστον έξι άτομα (αποθανόντα): συμπλήρωσε το δέντρο, ή δοκίμασε «ανά κλάδο». ¦ Нужни са поне две семейства с поне шестима души (починали): допълни дървото или опитай „по клон“.
+{n} famille de 6 cartes ({total} cartes). ¦ {n} οικογένεια με 6 κάρτες ({total} κάρτες). ¦ Семейства по 6 карти: {n} ({total} карти).
+🃏 Le jeu des {n} familles ¦ 🃏 Το παιχνίδι των {n} οικογενειών ¦ 🃏 Играта на семействата ({n})
+Distribuez 6 cartes à chacun, le reste fait la pioche. À ton tour, demande à un joueur une carte d’une famille dont tu as déjà une carte (« Dans la famille {fam}, je voudrais {role} »). S’il l’a, il te la donne et tu rejoues ; sinon, « Pioche ! ». Une famille complète se pose devant soi. Celui qui a le plus de familles a gagné. ¦ Μοιράστε 6 κάρτες στον καθένα, οι υπόλοιπες είναι η τράπουλα. Στη σειρά σου, ζήτα από έναν παίκτη μια κάρτα από οικογένεια από την οποία έχεις ήδη μια κάρτα («Από την οικογένεια {fam}, θα ήθελα {role}»). Αν την έχει, σου τη δίνει και ξαναπαίζεις· αλλιώς, «Τράβα!». Μια πλήρης οικογένεια τοποθετείται μπροστά σου. Όποιος έχει τις περισσότερες οικογένειες κερδίζει. ¦ Раздайте по 6 карти на всеки, останалите са тестето. Когато е твой ред, поискай от играч карта от семейство, от което вече имаш карта („От семейство {fam} искам {role}“). Ако я има, ти я дава и играеш отново; иначе — „Тегли!“. Пълното семейство се слага пред теб. Който има най-много семейства, печели.
+Les familles : {list}. ¦ Οι οικογένειες: {list}. ¦ Семействата: {list}.
+Impression recto verso (bord long) : chaque page de dos suit sa page de cartes, déjà retournée pour tomber pile derrière. ¦ Εκτύπωση διπλής όψης (μακριά πλευρά): κάθε σελίδα πλάτης ακολουθεί τη σελίδα καρτών της, ήδη αναποδογυρισμένη για να πέσει ακριβώς από πίσω. ¦ Двустранен печат (по дългия ръб): всяка страница с гърбове следва страницата си с карти, вече обърната, за да легне точно отзад.
+Ajoute des personnes pour dessiner leur arbre. ¦ Πρόσθεσε άτομα για να σχεδιάσεις το δέντρο τους. ¦ Добави хора, за да нарисуваш дървото им.
+L’arbre est trop petit pour faire des questions. ¦ Το δέντρο είναι πολύ μικρό για να γίνουν ερωτήσεις. ¦ Дървото е твърде малко за въпроси.
+Voir la réponse (Entrée) ¦ Δες την απάντηση (Enter) ¦ Виж отговора (Enter)
+✕ Fin ¦ ✕ Τέλος ¦ ✕ Край
+Il faut des lieux placés sur la carte (latitude et longitude) et datés pour faire le film ¦ Χρειάζονται τόποι τοποθετημένοι στον χάρτη (γεωγραφικό πλάτος και μήκος) και με ημερομηνία για να γίνει η ταινία ¦ Нужни са места, поставени на картата (ширина и дължина) и с дати, за да се направи филмът
+🔴 Enregistrement… ¦ 🔴 Εγγραφή… ¦ 🔴 Запис…
+Aucun lieu de l’arbre n’est placé sur la carte (latitude et longitude) ¦ Κανένας τόπος του δέντρου δεν είναι τοποθετημένος στον χάρτη (γεωγραφικό πλάτος και μήκος) ¦ Нито едно място от дървото не е поставено на картата (ширина и дължина)
+Aucun lieu placé sur la carte pour cette personne ¦ Κανένας τόπος τοποθετημένος στον χάρτη για αυτό το άτομο ¦ Няма място, поставено на картата, за този човек
+La position n’est pas disponible sur cet appareil. ¦ Η θέση δεν είναι διαθέσιμη σε αυτή τη συσκευή. ¦ Местоположението не е налично на това устройство.
+📍 Je cherche ta position… (l’histoire de chaque étape se lira toute seule à moins de 300 m) ¦ 📍 Ψάχνω τη θέση σου… (η ιστορία κάθε σταθμού θα διαβάζεται μόνη της σε λιγότερο από 300 μ.) ¦ 📍 Търся местоположението ти… (историята на всяка спирка ще се чете сама на по-малко от 300 м)
+dans {n} jour ¦ σε {n} ημέρα ¦ след {n} ден
+dans {n} mois ¦ σε {n} μήνες ¦ след {n} месеца
+dans {n} ans ¦ σε {n} χρόνια ¦ след {n} години
+De la part de (une fiche, ou un nom) ¦ Από (μια καρτέλα, ή ένα όνομα) ¦ От (картон или име)
+Pour (ex. « Léa », « mes petits-enfants », « celui qui reprendra la maison ») ¦ Για (π.χ. «Léa», «τα εγγόνια μου», «αυτόν που θα πάρει το σπίτι») ¦ За (напр. „Léa“, „внуците ми“, „който ще поеме къщата“)
+à une date ¦ σε μια ημερομηνία ¦ на дата
+à un anniversaire ¦ σε ένα γενέθλιο ¦ на рожден ден
+Un son, une vidéo ou une photo (facultatif) ¦ Ένας ήχος, ένα βίντεο ή μια φωτογραφία (προαιρετικό) ¦ Звук, видео или снимка (по избор)
+Choisis le jour où la lettre s’ouvrira. ¦ Διάλεξε την ημέρα που θα ανοίξει το γράμμα. ¦ Избери деня, в който писмото ще се отвори.
+La date doit être dans le futur (sinon ce n’est plus une surprise). ¦ Η ημερομηνία πρέπει να είναι στο μέλλον (αλλιώς δεν είναι πια έκπληξη). ¦ Датата трябва да е в бъдещето (иначе вече не е изненада).
+Pour ses {n} ans ¦ Για τα {n} χρόνια του ¦ За {n}-ия му рожден ден
+à ses {n} ans ¦ στα {n} χρόνια του ¦ на {n} години
+Lettre enregistrée. ¦ Το γράμμα αποθηκεύτηκε. ¦ Писмото е запазено.
+🔒 Lettre scellée : elle s’ouvrira le {date}. ¦ 🔒 Σφραγισμένο γράμμα: θα ανοίξει στις {date}. ¦ 🔒 Запечатано писмо: ще се отвори на {date}.
+🔒 En attente ¦ 🔒 Σε αναμονή ¦ 🔒 Чака
+La lettre sera effacée pour de bon. ¦ Το γράμμα θα σβηστεί οριστικά. ¦ Писмото ще бъде изтрито окончателно.
+Supprimer la lettre ? ¦ Διαγραφή του γράμματος; ¦ Да се изтрие ли писмото?
+Cet élément sera effacé pour de bon. ¦ Αυτό το στοιχείο θα σβηστεί οριστικά. ¦ Този елемент ще бъде изтрит окончателно.
+Rien à mettre dans le livre pour l’instant. ¦ Τίποτα για να μπει στο βιβλίο προς το παρόν. ¦ Засега няма какво да влезе в книгата.
+de la famille ¦ της οικογένειας ¦ на семейството
+Le souvenir en quelques mots ¦ Η ανάμνηση με λίγα λόγια ¦ Споменът с няколко думи
+L’odeur de la cire dans l’escalier ¦ Η μυρωδιά του κεριού στη σκάλα ¦ Миризмата на восък по стълбите
+Ça rappelle (une fiche, ou un nom) ¦ Θυμίζει (μια καρτέλα, ή ένα όνομα) ¦ Напомня за (картон или име)
+la maison de Naves ¦ το σπίτι στο Naves ¦ къщата в Naves
+vers 1950, l’été ¦ γύρω στο 1950, το καλοκαίρι ¦ около 1950, през лятото
+Un son, une photo (facultatif) ¦ Ένας ήχος, μια φωτογραφία (προαιρετικό) ¦ Звук, снимка (по избор)
+LIVRE DE RECETTES ¦ ΒΙΒΛΙΟ ΣΥΝΤΑΓΩΝ ¦ КНИГА С РЕЦЕПТИ
+Le nom de la recette ¦ Το όνομα της συνταγής ¦ Името на рецептата
+Le clafoutis de Rose ¦ Το clafoutis της Rose ¦ Клафутито на Rose
+La recette de (une fiche, ou un nom) ¦ Η συνταγή του/της (μια καρτέλα, ή ένα όνομα) ¦ Рецептата на (картон или име)
+Pour combien ¦ Για πόσους ¦ За колко души
+pour 6 ¦ για 6 ¦ за 6
+Les ingrédients (un par ligne) ¦ Τα υλικά (ένα ανά γραμμή) ¦ Съставките (по една на ред)
+500 g de cerises noires ¦ 500 g μαύρα κεράσια ¦ 500 g черни череши
+3 œufs ¦ 3 αυγά ¦ 3 яйца
+Son histoire (d’où elle vient, quand on la faisait) ¦ Η ιστορία της (από πού προέρχεται, πότε τη φτιάχναμε) ¦ Историята ѝ (откъде идва, кога се е приготвяла)
+Une photo du plat ou de la fiche écrite à la main ¦ Μια φωτογραφία του φαγητού ή της χειρόγραφης κάρτας ¦ Снимка на ястието или на ръкописната рецепта
+sur l’air de « {tune} » ¦ στον σκοπό του «{tune}» ¦ по мелодията на „{tune}“
+Le titre (ou le premier vers) ¦ Ο τίτλος (ή ο πρώτος στίχος) ¦ Заглавието (или първият стих)
+Chantée par (une fiche, ou un nom) ¦ Τραγουδισμένο από (μια καρτέλα, ή ένα όνομα) ¦ Изпълнявана от (картон или име)
+Sur l’air de ¦ Στον σκοπό του ¦ По мелодията на
+L’enregistrement (son ou vidéo) ¦ Η ηχογράφηση (ήχος ή βίντεο) ¦ Записът (звук или видео)
+Le carnet de chansons ¦ Το τετράδιο τραγουδιών ¦ Песнопойката
+{n} chansons de la famille ¦ {n} τραγούδια της οικογένειας ¦ Песни на семейството: {n}
+{n} chanson de la famille ¦ {n} τραγούδι της οικογένειας ¦ Песни на семейството: {n}
+Supprimer la fiche de l’entretien ¦ Διαγραφή της καρτέλας της συνέντευξης ¦ Изтрий картона на интервюто
+La fiche de l’entretien (les questions et les repères) sera effacée ; le son reste dans les médias. ¦ Η καρτέλα της συνέντευξης (οι ερωτήσεις και τα σημεία) θα σβηστεί· ο ήχος μένει στα πολυμέσα. ¦ Картонът на интервюто (въпросите и отметките) ще бъде изтрит; звукът остава в медиите.
+Le micro n’est pas disponible : l’entretien continue sans enregistrement (note les réponses). ¦ Το μικρόφωνο δεν είναι διαθέσιμο: η συνέντευξη συνεχίζεται χωρίς ηχογράφηση (σημείωσε τις απαντήσεις). ¦ Микрофонът не е наличен: интервюто продължава без запис (записвай отговорите).
+Notes rapides (facultatif) ¦ Γρήγορες σημειώσεις (προαιρετικό) ¦ Бързи бележки (по избор)
+← Précédente ¦ ← Προηγούμενη ¦ ← Предишен
+Dernière question : terminer ¦ Τελευταία ερώτηση: τέλος ¦ Последен въпрос: завърши
+▶ Reprendre ¦ ▶ Συνέχεια ¦ ▶ Продължи
+⏸ Pause ¦ ⏸ Παύση ¦ ⏸ Пауза
+⏹ Terminer ¦ ⏹ Τέλος ¦ ⏹ Завърши
+Entretien enregistré : le son est dans les médias de la fiche. ¦ Η συνέντευξη αποθηκεύτηκε: ο ήχος είναι στα πολυμέσα της καρτέλας. ¦ Интервюто е запазено: звукът е в медиите на картона.
+Personne à raconter de ce côté-là. ¦ Κανείς για να διηγηθείς από αυτή την πλευρά. ¦ Няма за кого да се разказва от тази страна.
+Un mot (facultatif) ¦ Μια λέξη (προαιρετικό) ¦ Няколко думи (по избор)
+Choisis pour qui. ¦ Διάλεξε για ποιον. ¦ Избери за кого.
+🕯️ Une bougie brûle pour {name} pendant {n} jours. ¦ 🕯️ Ένα κερί καίει για τον/την {name} για {n} ημέρες. ¦ 🕯️ Свещ гори за {name} в продължение на дни: {n}.
+📖 Le registre ¦ 📖 Το μητρώο ¦ 📖 Регистърът
+Son nom : ¦ Το όνομά του: ¦ Името му:
+Le nom de ce mélange ¦ Το όνομα αυτής της μίξης ¦ Името на този микс
+Choisis d’abord un de tes mélanges. ¦ Διάλεξε πρώτα μία από τις μίξεις σου. ¦ Първо избери един от миксовете си.
+Enregistrement de {d} : le fichier arrive à la fin (⤓ Exporter → fichier son, de nouveau, pour finir plus tôt). ¦ Εγγραφή {d}: το αρχείο έρχεται στο τέλος (⤓ Εξαγωγή → αρχείο ήχου, ξανά, για να τελειώσεις νωρίτερα). ¦ Запис от {d}: файлът идва накрая (⤓ Експортирай → звуков файл, отново, за да приключиш по-рано).
+Ce navigateur ne sait pas fabriquer de fichier son. ¦ Αυτός ο φυλλομετρητής δεν μπορεί να φτιάξει αρχείο ήχου. ¦ Този браузър не може да направи звуков файл.
+Je fabrique le fichier son… ¦ Φτιάχνω το αρχείο ήχου… ¦ Правя звуковия файл…
+Les indices ne s’accordent pas tous : {n} sur {total} tombent dans cette période. Revois celui qui détonne. ¦ Τα στοιχεία δεν συμφωνούν όλα: {n} από {total} πέφτουν σε αυτή την περίοδο. Ξαναδές αυτό που ξεφεύγει. ¦ Уликите не съвпадат всички: {n} от {total} попадат в този период. Прегледай тази, която не пасва.
+Personne dans l’arbre n’avait cet âge pendant cette période. ¦ Κανείς στο δέντρο δεν είχε αυτή την ηλικία σε αυτή την περίοδο. ¦ Никой в дървото не е бил на тази възраст през този период.
+Indique l’âge apparent pour voir qui ça peut être. ¦ Δώσε τη φαινομενική ηλικία για να δεις ποιος μπορεί να είναι. ¦ Посочи видимата възраст, за да видиш кой може да е.
+⏰ Me le rappeler ¦ ⏰ Υπενθύμισέ μου ¦ ⏰ Напомни ми
+Le rappel ¦ Η υπενθύμιση ¦ Напомнянето
+Écris le rappel. ¦ Γράψε την υπενθύμιση. ¦ Напиши напомнянето.
+Choisis la date du rappel. ¦ Διάλεξε την ημερομηνία της υπενθύμισης. ¦ Избери датата на напомнянето.
+⏰ Rappel créé pour le {date} (Listes → Rappels). ¦ ⏰ Η υπενθύμιση δημιουργήθηκε για τις {date} (Λίστες → Υπενθυμίσεις). ¦ ⏰ Напомнянето е създадено за {date} (Списъци → Напомняния).
+Archives à trouver ¦ Αρχεία προς εύρεση ¦ Архиви за намиране
+{n} recherche à faire sur 6 générations ¦ {n} αναζήτηση να γίνει σε 6 γενιές ¦ Търсения за правене в 6 поколения: {n}
+Rien ne manque sur 6 générations, ou l’assistant n’a pas pu être lu ¦ Δεν λείπει τίποτα σε 6 γενιές, ή ο βοηθός δεν μπόρεσε να διαβαστεί ¦ Нищо не липсва в 6 поколения или помощникът не можа да бъде прочетен
+Les fiches prennent maintenant les couleurs de leur époque. ¦ Οι καρτέλες παίρνουν τώρα τα χρώματα της εποχής τους. ¦ Картоните вече приемат цветовете на своята епоха.
+Signes particuliers ¦ Ιδιαίτερα σημάδια ¦ Особени белези
+pour voyager d’un département à l’autre ¦ για να ταξιδέψεις από έναν νομό σε άλλον ¦ за пътуване от един департамент в друг
+pour aller à l’étranger ¦ για να πας στο εξωτερικό ¦ за пътуване в чужбина
+Date de délivrance ¦ Ημερομηνία έκδοσης ¦ Дата на издаване
+Motif du voyage ¦ Σκοπός του ταξιδιού ¦ Цел на пътуването
+Le signalement ¦ Η περιγραφή ¦ Описанието
+🛂 Le passeport ¦ 🛂 Το διαβατήριο ¦ 🛂 Паспортът
+Le voyageur ¦ Ο ταξιδιώτης ¦ Пътникът
+Choisis le voyageur. ¦ Διάλεξε τον ταξιδιώτη. ¦ Избери пътника.
+{what} de {name} ({date}) ¦ {what} του/της {name} ({date}) ¦ {what} на {name} ({date})
+ce XML contient des déclarations (DOCTYPE ou ENTITY) : il est refusé par prudence ¦ αυτό το XML περιέχει δηλώσεις (DOCTYPE ή ENTITY): απορρίπτεται για λόγους προφύλαξης ¦ този XML съдържа декларации (DOCTYPE или ENTITY): отхвърлен е от предпазливост
+le fichier XML est abîmé ¦ το αρχείο XML είναι κατεστραμμένο ¦ XML файлът е повреден
+Fermer le relevé ¦ Κλείσιμο της καταγραφής ¦ Затвори описа
+Le passeport sera effacé. ¦ Το διαβατήριο θα σβηστεί. ¦ Паспортът ще бъде изтрит.
+Rattaché à {name}. ¦ Συνδέθηκε με τον/την {name}. ¦ Свързан с {name}.
+{n} correspondances possibles avec l’arbre (en tête) ¦ {n} πιθανές αντιστοιχίες με το δέντρο (πρώτα) ¦ Възможни съвпадения с дървото: {n} (най-отгоре)
+{n} correspondance possible avec l’arbre (en tête) ¦ {n} πιθανή αντιστοιχία με το δέντρο (πρώτα) ¦ Възможни съвпадения с дървото: {n} (най-отгоре)
+Aucun passeport pour l’instant. ¦ Κανένα διαβατήριο προς το παρόν. ¦ Засега няма паспорти.
+Avant 1860, pour voyager en France, il fallait un passeport intérieur avec son signalement : s’il en existe un, ajoute-le ici. ¦ Πριν από το 1860, για να ταξιδέψεις στη Γαλλία, χρειαζόταν εσωτερικό διαβατήριο με την περιγραφή σου: αν υπάρχει, πρόσθεσέ το εδώ. ¦ Преди 1860 за пътуване из Франция е бил нужен вътрешен паспорт с описание: ако има такъв, добави го тук.
+＋ Nouveau passeport intérieur ¦ ＋ Νέο εσωτερικό διαβατήριο ¦ ＋ Нов вътрешен паспорт
+Les passeports de la famille : le passeport intérieur (pour voyager d’un département à l’autre, jusque vers 1860) et le passeport pour l’étranger. Ils se saisissent sur la fiche (bloc 🛂 Passeports) ou dans ✨ Trésors. ¦ Τα διαβατήρια της οικογένειας: το εσωτερικό διαβατήριο (για να ταξιδεύεις από νομό σε νομό, μέχρι περίπου το 1860) και το διαβατήριο για το εξωτερικό. Καταχωρίζονται στην καρτέλα (μπλοκ 🛂 Διαβατήρια) ή στους ✨ Θησαυρούς. ¦ Паспортите на семейството: вътрешният паспорт (за пътуване от един департамент в друг, до около 1860) и паспортът за чужбина. Въвеждат се в картона (блок 🛂 Паспорти) или в ✨ Съкровища.
+Chercher… (voyageur, destination, motif, profession) ¦ Αναζήτηση… (ταξιδιώτης, προορισμός, σκοπός, επάγγελμα) ¦ Търси… (пътник, местоназначение, цел, професия)
+Passeport pour l’étranger ¦ Διαβατήριο για το εξωτερικό ¦ Паспорт за чужбина
+Pour l’étranger ¦ Για το εξωτερικό ¦ За чужбина
+pas encore dans l’arbre ¦ δεν είναι ακόμη στο δέντρο ¦ още не е в дървото
+mariage pas encore daté dans l’arbre ¦ ο γάμος δεν έχει ακόμη ημερομηνία στο δέντρο ¦ бракът още няма дата в дървото
+concorde ({what}) ¦ συμφωνεί ({what}) ¦ съвпада ({what})
+pas de métier dans l’arbre ¦ κανένα επάγγελμα στο δέντρο ¦ няма професия в дървото
+ce lieu est déjà dans l’arbre ¦ αυτός ο τόπος είναι ήδη στο δέντρο ¦ това място вече е в дървото
+ce lieu n’est pas encore sur la fiche ¦ αυτός ο τόπος δεν είναι ακόμη στην καρτέλα ¦ това място още не е в картона
+👶 Naissance ¦ 👶 Γέννηση ¦ 👶 Раждане
+🕯️ Décès ¦ 🕯️ Θάνατος ¦ 🕯️ Смърт
+💍 Mariage ¦ 💍 Γάμος ¦ 💍 Брак
+🔨 Métier ¦ 🔨 Επάγγελμα ¦ 🔨 Професия
+🏠 Domicile ¦ 🏠 Κατοικία ¦ 🏠 Местожителство
+un mariage s’ajoute depuis la fiche du couple ¦ ένας γάμος προστίθεται από την καρτέλα του ζευγαριού ¦ бракът се добавя от картона на двойката
+D’après le récit de {name} : « {text} » ¦ Σύμφωνα με την αφήγηση του/της {name}: «{text}» ¦ Според разказа на {name}: „{text}“
+＋ Ajouter à la fiche ¦ ＋ Προσθήκη στην καρτέλα ¦ ＋ Добави в картона
+Rien n’est changé sans ton accord : « Ajouter à la fiche » crée un événement avec la phrase du récit comme source. ¦ Τίποτα δεν αλλάζει χωρίς τη συμφωνία σου: το «Προσθήκη στην καρτέλα» δημιουργεί ένα γεγονός με τη φράση της αφήγησης ως πηγή. ¦ Нищо не се променя без твоето съгласие: „Добави в картона“ създава събитие с изречението от разказа като източник.
+Essaie des phrases comme « Mon père était boulanger », « Ma mère est née en 1932 à Tulle ». ¦ Δοκίμασε φράσεις όπως «Ο πατέρας μου ήταν φούρναρης», «Η μητέρα μου γεννήθηκε το 1932 στο Tulle». ¦ Опитай изречения като „Баща ми беше хлебар“, „Майка ми е родена през 1932 в Tulle“.
+Ajouté à la fiche. ¦ Προστέθηκε στην καρτέλα. ¦ Добавено в картона.
+Le récit est vide : dicte-le, colle-le ou recopie-le. ¦ Η αφήγηση είναι κενή: υπαγόρευσέ την, επικόλλησέ την ή αντίγραψέ την. ¦ Разказът е празен: продиктувай го, постави го или го препиши.
+Le récit de {name} ({date}) ¦ Η αφήγηση του/της {name} ({date}) ¦ Разказът на {name} ({date})
+Récit enregistré (bloc ✨ Trésors de la fiche). ¦ Η αφήγηση αποθηκεύτηκε (μπλοκ ✨ Θησαυροί της καρτέλας). ¦ Разказът е запазен (блок ✨ Съкровища в картона).
+Trop court : quelqu’un d’obstiné pourrait le deviner en essayant beaucoup de mots de passe sur le fichier. ¦ Πολύ σύντομος: κάποιος επίμονος θα μπορούσε να τον μαντέψει δοκιμάζοντας πολλούς κωδικούς στο αρχείο. ¦ Твърде кратка: упорит човек би могъл да я познае, като опитва много пароли върху файла.
+Correct pour un partage de quelques semaines. ¦ Εντάξει για κοινή χρήση λίγων εβδομάδων. ¦ Прилична за споделяне за няколко седмици.
+Une branche de famille partagée ¦ Ένας κοινόχρηστος οικογενειακός κλάδος ¦ Споделен семеен клон
+{n} retirée (vivantes ou récentes) ¦ {n} αφαιρέθηκε (ζωντανά ή πρόσφατα) ¦ Премахнати: {n} (живи или скорошни)
+Mot de passe copié. ¦ Ο κωδικός αντιγράφηκε. ¦ Паролата е копирана.
+Personne à partager dans cette branche. ¦ Κανείς για κοινή χρήση σε αυτόν τον κλάδο. ¦ Няма кого да споделиш в този клон.
+Choisis un mot de passe (ou « 🎲 En proposer un »), ou coche « Sans mot de passe ». ¦ Διάλεξε κωδικό (ή «🎲 Πρότεινε έναν»), ή επίλεξε «Χωρίς κωδικό». ¦ Избери парола (или „🎲 Предложи една“), или отметни „Без парола“.
+Ce mot de passe est court : quelqu’un d’obstiné pourrait le trouver en essayant beaucoup de mots de passe. Fabriquer le fichier quand même ? ¦ Αυτός ο κωδικός είναι σύντομος: κάποιος επίμονος θα μπορούσε να τον βρει δοκιμάζοντας πολλούς κωδικούς. Να φτιαχτεί το αρχείο παρ’ όλα αυτά; ¦ Тази парола е кратка: упорит човек би могъл да я открие, като опитва много пароли. Да се направи ли файлът все пак?
+Mot de passe faible ¦ Αδύναμος κωδικός ¦ Слаба парола
+Choisis jusqu’à quand le partage est valable. ¦ Διάλεξε μέχρι πότε ισχύει η κοινή χρήση. ¦ Избери до кога е валидно споделянето.
+Une branche de la famille — partagée par la famille ¦ Ένας κλάδος της οικογένειας — κοινόχρηστος από την οικογένεια ¦ Клон от семейството — споделен от семейството
+Fichier prêt : envoie-le, et donne le mot de passe à part. ¦ Το αρχείο είναι έτοιμο: στείλ’ το, και δώσε τον κωδικό χωριστά. ¦ Файлът е готов: изпрати го и дай паролата отделно.
+Aucun lieu dans l’arbre ¦ Κανένας τόπος στο δέντρο ¦ Няма места в дървото
+✅ J’y suis allé ¦ ✅ Πήγα ¦ ✅ Бях там
+Retirer le tampon ¦ Αφαίρεση της σφραγίδας ¦ Премахни печата
+Il faut des lieux placés sur la carte et datés pour compter les kilomètres ¦ Χρειάζονται τόποι τοποθετημένοι στον χάρτη και με ημερομηνία για να μετρηθούν τα χιλιόμετρα ¦ Нужни са места, поставени на картата и с дати, за да се преброят километрите
+Il faut au moins un lieu où deux personnes de l’arbre ont vécu ¦ Χρειάζεται τουλάχιστον ένας τόπος όπου έζησαν δύο άτομα του δέντρου ¦ Нужно е поне едно място, където са живели двама души от дървото
+{place} : {y} ans de présence de la famille, sur {n} génération d’ancêtres ¦ {place}: {y} χρόνια παρουσίας της οικογένειας, σε {n} γενιά προγόνων ¦ {place}: {y} години присъствие на семейството, в поколения предци: {n}
+{place} : {y} ans de présence de la famille ¦ {place}: {y} χρόνια παρουσίας της οικογένειας ¦ {place}: {y} години присъствие на семейството
+portrait ✓ ¦ πορτρέτο ✓ ¦ портрет ✓
+✨ Récit d’une vie : un diaporama tout fait à partir de cette fiche ¦ ✨ Αφήγηση μιας ζωής: ένα έτοιμο slideshow από αυτή την καρτέλα ¦ ✨ Разказ за един живот: готово слайдшоу от този картон
+Récit d’une vie en diaporama ¦ Αφήγηση μιας ζωής σε slideshow ¦ Разказ за един живот в слайдшоу
+Pour tes 18 ans ¦ Για τα 18 σου χρόνια ¦ За 18-ия ти рожден ден
+Quand ¦ Πότε ¦ Кога
+Raconte ¦ Διηγήσου ¦ Разкажи
+Passeport ¦ Διαβατήριο ¦ Паспорт
+Barbe ¦ Γένια ¦ Брада

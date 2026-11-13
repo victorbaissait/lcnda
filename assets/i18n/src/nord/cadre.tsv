@@ -1,0 +1,318 @@
+fr ¦ cs ¦ sv ¦ da
+# ═════ Le cadre de l'app : bandeau IA, menus, colonne de gauche, tableau de bord (zone « cadre ») ═════
+Carnet numérique des ancêtres ¦ Digitální zápisník předků ¦ Digital anteckningsbok om anfäderna ¦ Digital notesbog om aner
+Traduction faite par une IA, pas par une personne — tu as vu une erreur ? ¦ Překlad vytvořila AI, ne člověk — všiml(a) sis chyby? ¦ Översatt av en AI, inte av en människa — har du sett ett fel? ¦ Oversat af en AI, ikke af et menneske — har du set en fejl?
+Signaler une erreur ¦ Nahlásit chybu ¦ Rapportera ett fel ¦ Rapportér en fejl
+Erreur de traduction sur l’écran ¦ Chyba překladu na obrazovce ¦ Översättningsfel på skärmen ¦ Oversættelsesfejl på skærmen
+🌐 Langue de l’app ¦ 🌐 Jazyk aplikace ¦ 🌐 Appens språk ¦ 🌐 Appens sprog
+Les traductions sont faites par une IA : le français reste la langue de référence. ¦ Překlady vytváří AI: referenčním jazykem zůstává francouzština. ¦ Översättningarna görs av en AI: franska förblir referensspråket. ¦ Oversættelserne er lavet af en AI: fransk forbliver referencesproget.
+Remontrer le bandeau ¦ Znovu zobrazit pruh ¦ Visa banderollen igen ¦ Vis banneret igen
+Tableau de bord ¦ Přehled ¦ Översikt ¦ Oversigt
+Personnes ¦ Osoby ¦ Personer ¦ Personer
+🐾 Suivi des animaux ¦ 🐾 Sledování zvířat ¦ 🐾 Djuruppföljning ¦ 🐾 Dyreopfølgning
+Suivi des animaux ¦ Sledování zvířat ¦ Djuruppföljning ¦ Dyreopfølgning
+📄 Documents ¦ 📄 Dokumenty ¦ 📄 Dokument ¦ 📄 Dokumenter
+Documents ¦ Dokumenty ¦ Dokument ¦ Dokumenter
+🎨 Catalogue raisonné ¦ 🎨 Soupis díla ¦ 🎨 Verkförteckning ¦ 🎨 Værkfortegnelse
+Catalogue raisonné ¦ Soupis díla ¦ Verkförteckning ¦ Værkfortegnelse
+Graphiques ¦ Grafy ¦ Diagram ¦ Diagrammer
+Carte ¦ Mapa ¦ Karta ¦ Kort
+Listes ¦ Seznamy ¦ Listor ¦ Lister
+Chronologie ¦ Časová osa ¦ Tidslinje ¦ Tidslinje
+Recherche ¦ Výzkum ¦ Forskning ¦ Forskning
+Enquêtes ¦ Pátrání ¦ Undersökningar ¦ Undersøgelser
+📒 Fiches ¦ 📒 Poznámkové karty ¦ 📒 Anteckningskort ¦ 📒 Notekort
+🧬 ADN ¦ 🧬 DNA ¦ 🧬 DNA ¦ 🧬 DNA
+ADN ¦ DNA ¦ DNA ¦ DNA
+Comparaison ¦ Porovnání ¦ Jämförelse ¦ Sammenligning
+✨ Trésors ¦ ✨ Poklady ¦ ✨ Skatter ¦ ✨ Skatte
+Trésors ¦ Poklady ¦ Skatter ¦ Skatte
+Réglages ¦ Nastavení ¦ Inställningar ¦ Indstillinger
+Navigation principale ¦ Hlavní navigace ¦ Huvudnavigering ¦ Hovednavigation
+Accueil de la généalogie ¦ Úvod rodokmenu ¦ Släktforskningens startsida ¦ Slægtsforskningens forside
+GÉNÉALOGIE ¦ GENEALOGIE ¦ SLÄKTFORSKNING ¦ SLÆGTSFORSKNING
+Base locale ¦ Místní databáze ¦ Lokal databas ¦ Lokal database
+Diviser l’écran en deux — ou ⇧ + Entrée dans la recherche rapide ¦ Rozdělit obrazovku na dvě — nebo ⇧ + Enter v rychlém hledání ¦ Dela skärmen i två — eller ⇧ + Enter i snabbsökningen ¦ Del skærmen i to — eller ⇧ + Enter i hurtigsøgningen
+Diviser l’écran en deux ¦ Rozdělit obrazovku na dvě ¦ Dela skärmen i två ¦ Del skærmen i to
+Ouvrir cet écran dans une nouvelle fenêtre ¦ Otevřít tuto obrazovku v novém okně ¦ Öppna den här skärmen i ett nytt fönster ¦ Åbn denne skærm i et nyt vindue
+Ouvrir dans une nouvelle fenêtre ¦ Otevřít v novém okně ¦ Öppna i ett nytt fönster ¦ Åbn i et nyt vindue
+Mode consultation : la famille peut tout parcourir sans rien modifier ¦ Režim prohlížení: rodina si může vše prohlédnout, aniž by cokoli změnila ¦ Visningsläge: familjen kan bläddra i allt utan att ändra något ¦ Visningstilstand: familien kan se alt uden at ændre noget
+Mode consultation ¦ Režim prohlížení ¦ Visningsläge ¦ Visningstilstand
+Mode simple : montrer l’arbre à quelqu’un qui n’est pas à l’aise avec l’ordinateur (gros boutons, rien à modifier) ¦ Jednoduchý režim: ukázat strom někomu, kdo si s počítačem moc nerozumí (velká tlačítka, nic se nemění) ¦ Enkelt läge: visa trädet för någon som inte är van vid datorer (stora knappar, inget att ändra) ¦ Enkel tilstand: vis træet for en, der ikke er vant til computere (store knapper, intet at ændre)
+Mode simple ¦ Jednoduchý režim ¦ Enkelt läge ¦ Enkel tilstand
+🧓 Mode simple ¦ 🧓 Jednoduchý režim ¦ 🧓 Enkelt läge ¦ 🧓 Enkel tilstand
+Calculette : simple, scientifique, courbes, mesures anciennes, dates ¦ Kalkulačka: jednoduchá, vědecká, grafy, staré míry, data ¦ Miniräknare: enkel, vetenskaplig, kurvor, gamla mått, datum ¦ Lommeregner: enkel, videnskabelig, kurver, gamle mål, datoer
+Calculette ¦ Kalkulačka ¦ Miniräknare ¦ Lommeregner
+🧮 Calculette ¦ 🧮 Kalkulačka ¦ 🧮 Miniräknare ¦ 🧮 Lommeregner
+Mes généalogies (ouverte : {name}) : changer, en créer une autre ¦ Moje rodokmeny (otevřený: {name}): přepnout, vytvořit další ¦ Mina släktträd (öppet: {name}): byt, skapa ett till ¦ Mine slægtstræer (åben: {name}): skift, opret et nyt
+Mes généalogies : changer, en créer une autre ¦ Moje rodokmeny: přepnout, vytvořit další ¦ Mina släktträd: byt, skapa ett till ¦ Mine slægtstræer: skift, opret et nyt
+Mes généalogies ¦ Moje rodokmeny ¦ Mina släktträd ¦ Mine slægtstræer
+Ma généalogie ¦ Můj rodokmen ¦ Mitt släktträd ¦ Mit slægtstræ
+{x} (Outil de modification) ¦ {x} (Nástroj úprav) ¦ {x} (Redigeringsverktyg) ¦ {x} (Redigeringsværktøj)
+{x} (Action) ¦ {x} (Akce) ¦ {x} (Åtgärd) ¦ {x} (Handling)
+{x} (Enquêtes) ¦ {x} (Pátrání) ¦ {x} (Undersökningar) ¦ {x} (Undersøgelser)
+{x} (Recherche) ¦ {x} (Výzkum) ¦ {x} (Forskning) ¦ {x} (Forskning)
+{x} (Listes) ¦ {x} (Seznamy) ¦ {x} (Listor) ¦ {x} (Lister)
+Nouvelle personne ¦ Nová osoba ¦ Ny person ¦ Ny person
+Montage vidéo ¦ Střih videa ¦ Videoredigering ¦ Videoredigering
+Son ¦ Zvuk ¦ Ljud ¦ Lyd
+Retouche des photos ¦ Úprava fotek ¦ Fotoretusch ¦ Fotoretouchering
+Dessin vectoriel ¦ Vektorová kresba ¦ Vektorritning ¦ Vektortegning
+Mise en page (livres) ¦ Sazba (knihy) ¦ Layout (böcker) ¦ Layout (bøger)
+Tableaux ¦ Tabule ¦ Tavlor ¦ Tavler
+Arbre décoratif ¦ Ozdobný strom ¦ Dekorativt träd ¦ Dekorativt træ
+Faire-part et affiches ¦ Oznámení a plakáty ¦ Kort och affischer ¦ Kort og plakater
+Signatures et sceaux ¦ Podpisy a pečeti ¦ Namnteckningar och sigill ¦ Underskrifter og segl
+Comparer deux photos ¦ Porovnat dvě fotky ¦ Jämför två foton ¦ Sammenlign to fotos
+Cousinades ¦ Rodinná setkání ¦ Släktträffar ¦ Slægtsstævner
+Transcription d’actes ¦ Přepis záznamů ¦ Transkribering av handlingar ¦ Transskription af dokumenter
+Présentation et diaporama ¦ Prezentace a promítání ¦ Presentation och bildspel ¦ Præsentation og diasshow
+Tableur ¦ Tabulkový procesor ¦ Kalkylblad ¦ Regneark
+Traitement de texte ¦ Textový editor ¦ Ordbehandlare ¦ Tekstbehandling
+Mon site web ¦ Můj web ¦ Min webbplats ¦ Min hjemmeside
+Traitements par lot ¦ Hromadné úpravy ¦ Massbearbetning ¦ Massebehandling
+Maison (plan et 3D) ¦ Dům (plán a 3D) ¦ Hus (planritning och 3D) ¦ Hus (plantegning og 3D)
+Battue ¦ Hromadné pátrání ¦ Sökinsats ¦ Eftersøgning
+Battues ¦ Hromadná pátrání ¦ Sökinsatser ¦ Eftersøgninger
+Atelier ¦ Dílna ¦ Verkstad ¦ Værksted
+01 — PILOTER ¦ 01 — ŘÍDIT ¦ 01 — STYRA ¦ 01 — STYRE
+02 — EXPLORER ¦ 02 — PROZKOUMAT ¦ 02 — UTFORSKA ¦ 02 — UDFORSKE
+02 — SUIVRE ¦ 02 — SLEDOVAT ¦ 02 — FÖLJA ¦ 02 — FØLGE
+02 — RANGER ¦ 02 — TŘÍDIT ¦ 02 — ORDNA ¦ 02 — ORDNE
+02 — CRÉER ¦ 02 — TVOŘIT ¦ 02 — SKAPA ¦ 02 — SKABE
+03 — VISUALISER ¦ 03 — ZOBRAZIT ¦ 03 — VISUALISERA ¦ 03 — VISUALISERE
+04 — LOCALISER ¦ 04 — UMÍSTIT ¦ 04 — LOKALISERA ¦ 04 — LOKALISERE
+05 — INVENTORIER ¦ 05 — SEPSAT ¦ 05 — INVENTERA ¦ 05 — REGISTRERE
+06 — RACONTER ¦ 06 — VYPRÁVĚT ¦ 06 — BERÄTTA ¦ 06 — FORTÆLLE
+07 — RECHERCHER ¦ 07 — HLEDAT ¦ 07 — SÖKA ¦ 07 — SØGE
+08 — ENQUÊTER ¦ 08 — PÁTRAT ¦ 08 — UNDERSÖKA ¦ 08 — UNDERSØGE
+08 — DOCUMENTER ¦ 08 — DOLOŽIT ¦ 08 — DOKUMENTERA ¦ 08 — DOKUMENTERE
+08 — ADN ¦ 08 — DNA ¦ 08 — DNA ¦ 08 — DNA
+09 — COMPARER ¦ 09 — POROVNAT ¦ 09 — JÄMFÖRA ¦ 09 — SAMMENLIGNE
+09 — S’ÉMERVEILLER ¦ 09 — ŽASNOUT ¦ 09 — FÖRUNDRAS ¦ 09 — UNDRE SIG
+10 — VÉRIFIER ¦ 10 — OVĚŘIT ¦ 10 — KONTROLLERA ¦ 10 — KONTROLLERE
+Replier la liste ¦ Sbalit seznam ¦ Fäll ihop listan ¦ Fold listen sammen
+Afficher la liste ¦ Zobrazit seznam ¦ Visa listan ¦ Vis listen
+Liste → ¦ Seznam → ¦ Lista → ¦ Liste →
+Réordonner ¦ Změnit pořadí ¦ Ändra ordning ¦ Skift rækkefølge
+⠿ Réordonner les widgets ¦ ⠿ Změnit pořadí widgetů ¦ ⠿ Ändra ordning på widgetarna ¦ ⠿ Skift rækkefølge på widgets
+Réordonner les widgets ¦ Změnit pořadí widgetů ¦ Ändra ordning på widgetarna ¦ Skift rækkefølge på widgets
+⠿ Réordonner les graphiques ¦ ⠿ Změnit pořadí grafů ¦ ⠿ Ändra ordning på diagrammen ¦ ⠿ Skift rækkefølge på diagrammer
+Signets ¦ Záložky ¦ Bokmärken ¦ Bogmærker
+Prénom, nom (de naissance ou mariage) ou variante ¦ Jméno, příjmení (rodné nebo po sňatku) nebo varianta ¦ Förnamn, efternamn (födelse- eller giftnamn) eller variant ¦ Fornavn, efternavn (fødenavn eller giftenavn) eller variant
+Dupont, Dupond… ¦ Novák, Nowak… ¦ Andersson, Anderson… ¦ Nielsen, Nilsen…
+Recherche phonétique ¦ Fonetické hledání ¦ Fonetisk sökning ¦ Fonetisk søgning
+Tolère les variantes orthographiques d'époque et rattrape les erreurs de transcription via un Soundex français combiné ¦ Snese dobové pravopisné varianty a zachytí chyby přepisu díky kombinovanému francouzskému Soundexu ¦ Tål äldre stavningsvarianter och fångar transkriberingsfel med en kombinerad fransk Soundex ¦ Tåler gamle stavemåder og fanger transskriptionsfejl med en kombineret fransk Soundex
+＋ Nouvelle fiche ¦ ＋ Nová karta ¦ ＋ Ny post ¦ ＋ Ny post
+{what} dans la base ¦ {what} v databázi ¦ {what} i databasen ¦ {what} i databasen
+Les exceptions restent mémorisées. ¦ Výjimky zůstávají uložené. ¦ Undantagen sparas. ¦ Undtagelserne gemmes.
+Pièce d’archives ¦ Archiválie ¦ Arkivhandling ¦ Arkivalie
+Ranger, cacher ou montrer les entrées de cette colonne ¦ Uspořádat, skrýt nebo zobrazit položky tohoto sloupce ¦ Ordna, dölj eller visa posterna i den här kolumnen ¦ Ordn, skjul eller vis punkterne i denne kolonne
+En groupes ou en une seule liste, l’ordre, ce qui s’affiche ¦ Ve skupinách nebo v jednom seznamu, pořadí, co se zobrazuje ¦ I grupper eller i en enda lista, ordningen, vad som visas ¦ I grupper eller i én liste, rækkefølgen, hvad der vises
+En groupes ou en une seule liste, l’ordre des pages, l’ouverture des groupes ¦ Ve skupinách nebo v jednom seznamu, pořadí stránek, otevírání skupin ¦ I grupper eller i en enda lista, sidornas ordning, vilka grupper som är öppna ¦ I grupper eller i én liste, sidernes rækkefølge, hvilke grupper der er åbne
+Chercher une liste… ¦ Hledat seznam… ¦ Sök en lista… ¦ Søg efter en liste…
+Chercher un réglage… ¦ Hledat nastavení… ¦ Sök en inställning… ¦ Søg efter en indstilling…
+＋ Nouveau groupe ¦ ＋ Nová skupina ¦ ＋ Ny grupp ¦ ＋ Ny gruppe
+Nouveau groupe ¦ Nová skupina ¦ Ny grupp ¦ Ny gruppe
+Ranger en groupes ¦ Uspořádat do skupin ¦ Ordna i grupper ¦ Ordn i grupper
+Nom du groupe ¦ Název skupiny ¦ Gruppens namn ¦ Gruppens navn
+Icône du groupe ¦ Ikona skupiny ¦ Gruppens ikon ¦ Gruppens ikon
+Monter le groupe ¦ Posunout skupinu nahoru ¦ Flytta upp gruppen ¦ Flyt gruppen op
+Descendre le groupe ¦ Posunout skupinu dolů ¦ Flytta ned gruppen ¦ Flyt gruppen ned
+Enregistré tout seul. ¦ Uloženo automaticky. ¦ Sparas automatiskt. ¦ Gemmes automatisk.
+Afficher dans la colonne ¦ Zobrazit ve sloupci ¦ Visa i kolumnen ¦ Vis i kolonnen
+Les groupes, dans la colonne ¦ Skupiny ve sloupci ¦ Grupperna i kolumnen ¦ Grupperne i kolonnen
+Tous ouverts ¦ Všechny otevřené ¦ Alla öppna ¦ Alle åbne
+Tous fermés (sauf celui de la page affichée) ¦ Všechny zavřené (kromě té se zobrazenou stránkou) ¦ Alla stängda (utom den för sidan som visas) ¦ Alle lukkede (undtagen den for den viste side)
+Toujours tout refermer ¦ Vždy vše zavřít ¦ Stäng alltid allt ¦ Luk altid alt
+Garder ouvert ce que j’ai ouvert ¦ Nechat otevřené, co jsem otevřel(a) ¦ Håll öppet det jag har öppnat ¦ Hold det åbent, som jeg har åbnet
+Rangé en groupes. ¦ Uspořádáno do skupin. ¦ Ordnat i grupper. ¦ Ordnet i grupper.
+Rangé en une seule liste. ¦ Uspořádáno do jednoho seznamu. ¦ Ordnat i en enda lista. ¦ Ordnet i én liste.
+Il faut au moins un groupe. ¦ Je potřeba alespoň jedna skupina. ¦ Det behövs minst en grupp. ¦ Der skal være mindst én gruppe.
+TABLEAU DE BORD ¦ PŘEHLED ¦ ÖVERSIKT ¦ OVERSIGT
+Vue d’ensemble ¦ Celkový pohled ¦ Helhetsbild ¦ Helhedsbillede
+Vue générale ¦ Celkový přehled ¦ Allmän översikt ¦ Generel oversigt
+Un point rapide sur la base, les dates qui approchent, les modifications récentes et le travail à suivre. ¦ Rychlý pohled na databázi, blížící se data, nedávné změny a práci, kterou je třeba sledovat. ¦ En snabb överblick över databasen, kommande datum, senaste ändringar och arbete att följa upp. ¦ Et hurtigt overblik over databasen, kommende datoer, seneste ændringer og arbejde, der skal følges op.
+🧩 Bibliothèque des widgets ¦ 🧩 Knihovna widgetů ¦ 🧩 Widgetbibliotek ¦ 🧩 Widgetbibliotek
+Bibliothèque des widgets ¦ Knihovna widgetů ¦ Widgetbibliotek ¦ Widgetbibliotek
+L’ordre des sortes de widgets dans cette colonne, et celles qu’on cache ¦ Pořadí druhů widgetů v tomto sloupci a které jsou skryté ¦ Ordningen på widgettyperna i den här kolumnen, och vilka som döljs ¦ Rækkefølgen af widgettyper i denne kolonne, og hvilke der skjules
+Changer l’ordre des widgets de la vue générale ¦ Změnit pořadí widgetů celkového přehledu ¦ Ändra ordningen på widgetarna i översikten ¦ Skift rækkefølgen af widgets i oversigten
+Créer ton propre widget, de zéro ou à partir d’un widget existant ¦ Vytvoř si vlastní widget, od nuly nebo z existujícího widgetu ¦ Skapa din egen widget, från början eller utifrån en befintlig widget ¦ Lav din egen widget, fra bunden eller ud fra en eksisterende widget
+＋ Créer un widget ¦ ＋ Vytvořit widget ¦ ＋ Skapa en widget ¦ ＋ Opret en widget
+Ce jour-là, un ancêtre, la photo du jour, un compte à rebours, la calculette : sur le bureau de l’ordinateur ¦ Ten den, předek, fotka dne, odpočet, kalkulačka: na ploše počítače ¦ Den dagen, en anfader, dagens foto, en nedräkning, miniräknaren: på datorns skrivbord ¦ Den dag, en ane, dagens foto, en nedtælling, lommeregneren: på computerens skrivebord
+🪟 Widgets sur le bureau… ¦ 🪟 Widgety na ploše… ¦ 🪟 Widgetar på skrivbordet… ¦ 🪟 Widgets på skrivebordet…
+Widgets duplicables et configurables. ¦ Widgety lze duplikovat a nastavit. ¦ Widgetarna kan dupliceras och ställas in. ¦ Widgets kan dubleres og indstilles.
+Modifier le widget ¦ Upravit widget ¦ Redigera widgeten ¦ Rediger widgetten
+Supprimer ce widget ¦ Smazat tento widget ¦ Radera den här widgeten ¦ Slet denne widget
+Mettre sur le bureau ¦ Dát na plochu ¦ Lägg på skrivbordet ¦ Læg på skrivebordet
+Infos {x} ¦ Informace: {x} ¦ Info: {x} ¦ Info: {x}
+Ajouter {x} ¦ Přidat {x} ¦ Lägg till {x} ¦ Tilføj {x}
+Chiffres clés ¦ Klíčová čísla ¦ Nyckeltal ¦ Nøgletal
+Bilan de recherche ¦ Shrnutí výzkumu ¦ Forskningsöversikt ¦ Forskningsstatus
+Cette semaine dans l’histoire familiale ¦ Tento týden v rodinné historii ¦ Den här veckan i familjens historia ¦ Denne uge i familiens historie
+🎂 Dates à fêter ¦ 🎂 Data k oslavě ¦ 🎂 Datum att fira ¦ 🎂 Datoer at fejre
+Prénom et saint du jour ¦ Jméno a světec dne ¦ Dagens namn och helgon ¦ Dagens navn og helgen
+Rappels ¦ Připomínky ¦ Påminnelser ¦ Påmindelser
+Dernières modifications ¦ Poslední změny ¦ Senaste ändringar ¦ Seneste ændringer
+Dernières suppressions ¦ Poslední smazání ¦ Senaste raderingar ¦ Seneste sletninger
+Personnes verrouillées récemment ¦ Nedávno zamčené osoby ¦ Nyligen låsta personer ¦ Nyligt låste personer
+Dernières fiches consultées ¦ Naposledy zobrazené karty ¦ Senast visade poster ¦ Senest viste poster
+Personne au hasard ¦ Náhodná osoba ¦ Slumpad person ¦ Tilfældig person
+Personne choisie ¦ Vybraná osoba ¦ Vald person ¦ Valgt person
+Quiz personne ¦ Kvíz o osobě ¦ Personquiz ¦ Personquiz
+Bloc de fiche personne ¦ Blok karty osoby ¦ Block från personposten ¦ Blok fra personposten
+Chercher sur internet ¦ Hledat na internetu ¦ Sök på internet ¦ Søg på internettet
+Objets de famille ¦ Rodinné předměty ¦ Släktföremål ¦ Familiegenstande
+Mémoire familiale ¦ Rodinná paměť ¦ Familjeminnen ¦ Familiens minder
+Ascendants / descendants ¦ Předkové / potomci ¦ Anfäder / ättlingar ¦ Aner / efterkommere
+Image au hasard ¦ Náhodný obrázek ¦ Slumpad bild ¦ Tilfældigt billede
+Image favorite ¦ Oblíbený obrázek ¦ Favoritbild ¦ Yndlingsbillede
+Lien entre deux personnes ¦ Vztah mezi dvěma osobami ¦ Släktskap mellan två personer ¦ Slægtskab mellem to personer
+Personnes favorites ¦ Oblíbené osoby ¦ Favoritpersoner ¦ Yndlingspersoner
+Travail à suivre ¦ Práce k dořešení ¦ Arbete att följa upp ¦ Arbejde at følge op
+Personnes à compléter ¦ Osoby k doplnění ¦ Personer att komplettera ¦ Personer, der skal udfyldes
+Personnes sans source ¦ Osoby bez pramene ¦ Personer utan källa ¦ Personer uden kilde
+Événements sans source ¦ Události bez pramene ¦ Händelser utan källa ¦ Begivenheder uden kilde
+Événements sans média ¦ Události bez médií ¦ Händelser utan media ¦ Begivenheder uden medier
+Derniers médias ajoutés ¦ Naposledy přidaná média ¦ Senast tillagda media ¦ Senest tilføjede medier
+Médias non rattachés ¦ Nepropojená média ¦ Ej kopplade media ¦ Ikke-forbundne medier
+Médias à transcrire ¦ Média k přepsání ¦ Media att transkribera ¦ Medier, der skal transskriberes
+Médias à identifier ¦ Média k identifikaci ¦ Media att identifiera ¦ Medier, der skal identificeres
+Signatures à comparer ¦ Podpisy k porovnání ¦ Namnteckningar att jämföra ¦ Underskrifter, der skal sammenlignes
+Communes à compléter ¦ Obce k doplnění ¦ Orter att komplettera ¦ Byer, der skal udfyldes
+Branches les moins documentées ¦ Nejméně doložené větve ¦ Minst dokumenterade grenar ¦ Mindst dokumenterede grene
+Couples sans mariage ¦ Páry bez sňatku ¦ Par utan vigsel ¦ Par uden vielse
+Enfants sans parents complets ¦ Děti bez obou rodičů ¦ Barn utan båda föräldrarna ¦ Børn uden begge forældre
+✅ Contrôle de la base ¦ ✅ Kontrola databáze ¦ ✅ Databaskontroll ¦ ✅ Databasekontrol
+Contrôle de la base ¦ Kontrola databáze ¦ Databaskontroll ¦ Databasekontrol
+Baptêmes sans parrain/marraine ¦ Křty bez kmotra/kmotry ¦ Dop utan faddrar ¦ Dåb uden faddere
+SOSA manquants proches ¦ Chybějící blízká čísla Sosa ¦ Saknade nära Sosa-nummer ¦ Manglende nære Sosa-numre
+Communes à explorer ¦ Obce k prozkoumání ¦ Orter att utforska ¦ Byer at udforske
+Battues prioritaires ¦ Prioritní hromadná pátrání ¦ Prioriterade sökinsatser ¦ Prioriterede eftersøgninger
+Sources à vérifier ¦ Prameny k ověření ¦ Källor att kontrollera ¦ Kilder, der skal kontrolleres
+Archives favorites ¦ Oblíbené archivy ¦ Favoritarkiv ¦ Yndlingsarkiver
+🗓 Ma semaine de recherche ¦ 🗓 Můj týden výzkumu ¦ 🗓 Min forskningsvecka ¦ 🗓 Min forskningsuge
+🧩 Murs de brique ¦ 🧩 Slepé uličky ¦ 🧩 Återvändsgränder ¦ 🧩 Blindgyder
+À relire ¦ K přečtení ¦ Att korrekturläsa ¦ Til korrektur
+Progression SOSA ¦ Postup Sosa ¦ Sosa-framsteg ¦ Sosa-fremskridt
+Doublons probables ¦ Pravděpodobné duplicity ¦ Troliga dubbletter ¦ Sandsynlige dubletter
+Étiquettes ¦ Štítky ¦ Etiketter ¦ Etiketter
+Carte globale ¦ Celková mapa ¦ Översiktskarta ¦ Oversigtskort
+Carte d’une branche ¦ Mapa větve ¦ Karta över en gren ¦ Kort over en gren
+Carte d’une personne ¦ Mapa osoby ¦ Karta över en person ¦ Kort over en person
+Timeline d’une personne ¦ Časová osa osoby ¦ Tidslinje för en person ¦ Tidslinje for en person
+Stat rapide ¦ Rychlá statistika ¦ Snabbstatistik ¦ Hurtig statistik
+Objectif de session ¦ Cíl sezení ¦ Mål för passet ¦ Mål for sessionen
+Couverture de la base ¦ Pokrytí databáze ¦ Databasens täckning ¦ Databasens dækning
+Lieux les plus présents ¦ Nejčastější místa ¦ Vanligaste platser ¦ Hyppigste steder
+Accomplissements ¦ Úspěchy ¦ Prestationer ¦ Bedrifter
+Animaux de compagnie ¦ Domácí zvířata ¦ Husdjur ¦ Kæledyr
+Suggestions de recherche ¦ Návrhy k výzkumu ¦ Forskningsförslag ¦ Forskningsforslag
+💡 Suggestions de recherche ¦ 💡 Návrhy k výzkumu ¦ 💡 Forskningsförslag ¦ 💡 Forskningsforslag
+Écran de l’app (une liste, un diagramme, une fiche…) ¦ Obrazovka aplikace (seznam, diagram, karta…) ¦ Appskärm (en lista, ett diagram, en post…) ¦ Appskærm (en liste, et diagram, en post…)
+Texte libre (titre, note, consigne) ¦ Volný text (nadpis, poznámka, pokyn) ¦ Fri text (rubrik, anteckning, instruktion) ¦ Fri tekst (overskrift, note, instruktion)
+Mon agenda : à venir ¦ Můj diář: nadcházející ¦ Min kalender: kommande ¦ Min kalender: kommende
+Mon agenda : 7 jours ¦ Můj diář: 7 dní ¦ Min kalender: 7 dagar ¦ Min kalender: 7 dage
+Départs et émigration ¦ Odchody a vystěhovalectví ¦ Avfärder och emigration ¦ Afrejser og udvandring
+Enfants placés ¦ Děti v náhradní péči ¦ Fosterbarn ¦ Plejebørn
+Armoiries ¦ Erby ¦ Vapen ¦ Våbenskjolde
+Poilus 14-18 ¦ Vojáci 1914-18 ¦ Soldater 1914-18 ¦ Soldater 1914-18
+Recherches enregistrées ¦ Uložená hledání ¦ Sparade sökningar ¦ Gemte søgninger
+Circuits sur le terrain ¦ Výpravy v terénu ¦ Fältturer ¦ Ture i marken
+Copie hors de l’ordinateur ¦ Kopie mimo počítač ¦ Kopia utanför datorn ¦ Kopi uden for computeren
+Dossier Scans ¦ Složka Skeny ¦ Mappen Skanningar ¦ Mappen Scanninger
+Le cercle des ancêtres ¦ Kruh předků ¦ Anfädernas cirkel ¦ Anernes cirkel
+Demandes d’entraide ¦ Žádosti o pomoc ¦ Förfrågningar om hjälp ¦ Anmodninger om hjælp
+📊 Noms ¦ 📊 Příjmení ¦ 📊 Efternamn ¦ 📊 Efternavne
+📊 Vies ¦ 📊 Životy ¦ 📊 Liv ¦ 📊 Liv
+📊 Migrations ¦ 📊 Migrace ¦ 📊 Migrationer ¦ 📊 Migrationer
+🗓 Sauvegarde automatique ¦ 🗓 Automatická záloha ¦ 🗓 Automatisk säkerhetskopia ¦ 🗓 Automatisk sikkerhedskopi
+🌌 Le ciel de naissance ¦ 🌌 Nebe v den narození ¦ 🌌 Himlen vid födseln ¦ 🌌 Himlen ved fødslen
+📰 La gazette de l’année ¦ 📰 Noviny roku ¦ 📰 Årets tidning ¦ 📰 Årets avis
+🎂 À ton âge… ¦ 🎂 Ve tvém věku… ¦ 🎂 I din ålder… ¦ 🎂 I din alder…
+🎯 La coïncidence du jour ¦ 🎯 Náhoda dne ¦ 🎯 Dagens sammanträffande ¦ 🎯 Dagens sammentræf
+🕵️ L’ancêtre mystère du jour ¦ 🕵️ Záhadný předek dne ¦ 🕵️ Dagens mystiska anfader ¦ 🕵️ Dagens mystiske ane
+🕯️ Bougies allumées ¦ 🕯️ Zapálené svíčky ¦ 🕯️ Tända ljus ¦ 🕯️ Tændte lys
+✉️ Prochaine lettre à ouvrir ¦ ✉️ Další dopis k otevření ¦ ✉️ Nästa brev att öppna ¦ ✉️ Næste brev at åbne
+📜 Le vieux mot du jour ¦ 📜 Staré slovo dne ¦ 📜 Dagens gamla ord ¦ 📜 Dagens gamle ord
+💰 Le prix d’autrefois ¦ 💰 Ceny za starých časů ¦ 💰 Priser förr i tiden ¦ 💰 Priser i gamle dage
+🏛️ Actes manquants ¦ 🏛️ Chybějící záznamy ¦ 🏛️ Saknade handlingar ¦ 🏛️ Manglende dokumenter
+🌍 Le tour du monde des ancêtres ¦ 🌍 Cesta kolem světa předků ¦ 🌍 Anfädernas jorden runt ¦ 🌍 Anernes jorden rundt
+📍 Passeport des lieux ¦ 📍 Pas míst ¦ 📍 Platspass ¦ 📍 Stedpas
+🖥️ L’ancêtre du jour ¦ 🖥️ Předek dne ¦ 🖥️ Dagens anfader ¦ 🖥️ Dagens ane
+🌳 L’arbre qui pousse ¦ 🌳 Rostoucí strom ¦ 🌳 Trädet som växer ¦ 🌳 Træet, der vokser
+🔊 L’ambiance d’époque ¦ 🔊 Dobová atmosféra ¦ 🔊 Tidsstämning ¦ 🔊 Tidsstemning
+🛡 Branches fragiles ¦ 🛡 Křehké větve ¦ 🛡 Sköra grenar ¦ 🛡 Skrøbelige grene
+Branches fragiles ¦ Křehké větve ¦ Sköra grenar ¦ Skrøbelige grene
+📸 Carte de photos ¦ 📸 Mapa fotek ¦ 📸 Fotokarta ¦ 📸 Fotokort
+🗺 Une de mes cartes ¦ 🗺 Jedna z mých map ¦ 🗺 En av mina kartor ¦ 🗺 Et af mine kort
+🌦 Météo d’autrefois ¦ 🌦 Počasí v minulosti ¦ 🌦 Vädret förr i tiden ¦ 🌦 Vejret i gamle dage
+Météo d’autrefois ¦ Počasí v minulosti ¦ Vädret förr i tiden ¦ Vejret i gamle dage
+Carte des observations ¦ Mapa pozorování ¦ Observationskarta ¦ Observationskort
+Dernières observations ¦ Poslední pozorování ¦ Senaste observationer ¦ Seneste observationer
+Animaux suivis ¦ Sledovaná zvířata ¦ Följda djur ¦ Fulgte dyr
+Trajet GPS du jour ¦ Dnešní trasa GPS ¦ Dagens GPS-spår ¦ Dagens GPS-rute
+Chiffres ¦ Čísla ¦ Siffror ¦ Tal
+📊 Chiffres ¦ 📊 Čísla ¦ 📊 Siffror ¦ 📊 Tal
+Comptages d’un site ¦ Sčítání na lokalitě ¦ Räkningar på en lokal ¦ Optællinger på en lokalitet
+Animaux à retrouver ¦ Zvířata k nalezení ¦ Djur att återfinna ¦ Dyr, der skal genfindes
+Retrouver par bague ou puce ¦ Najít podle kroužku nebo čipu ¦ Hitta via ring eller chip ¦ Find via ring eller chip
+Import GPS rapide ¦ Rychlý import GPS ¦ Snabb GPS-import ¦ Hurtig GPS-import
+Météo du jour d’observation ¦ Počasí v den pozorování ¦ Vädret på observationsdagen ¦ Vejret på observationsdagen
+🩺 Suivi vétérinaire et état ¦ 🩺 Veterinární péče a stav ¦ 🩺 Veterinärvård och tillstånd ¦ 🩺 Dyrlægepleje og tilstand
+👥 Groupes ¦ 👥 Skupiny ¦ 👥 Grupper ¦ 👥 Grupper
+🐾 {x} ¦ 🐾 {x} ¦ 🐾 {x} ¦ 🐾 {x}
+🛟 Pense à une copie hors de cet ordinateur (disque externe, clé, iCloud, Dropbox) : Réglages → Export propre. ¦ 🛟 Mysli na kopii mimo tento počítač (externí disk, flash disk, iCloud, Dropbox): Nastavení → Čistý export. ¦ 🛟 Tänk på en kopia utanför den här datorn (extern disk, USB-minne, iCloud, Dropbox): Inställningar → Ren export. ¦ 🛟 Husk en kopi uden for denne computer (ekstern disk, USB-nøgle, iCloud, Dropbox): Indstillinger → Ren eksport.
+Journal ¦ Deník ¦ Logg ¦ Log
+Descendants ¦ Potomci ¦ Ättlingar ¦ Efterkommere
+Ascendants ¦ Předkové ¦ Anfäder ¦ Aner
+Comparer ¦ Porovnat ¦ Jämför ¦ Sammenlign
+Événements ¦ Události ¦ Händelser ¦ Begivenheder
+Voir les médias ¦ Zobrazit média ¦ Visa media ¦ Vis medier
+Signatures ¦ Podpisy ¦ Namnteckningar ¦ Underskrifter
+Lieux ¦ Místa ¦ Platser ¦ Steder
+SOSA ¦ SOSA ¦ SOSA ¦ SOSA
+Sosa ¦ Sosa ¦ Sosa ¦ Sosa
+Archives ¦ Archivy ¦ Arkiv ¦ Arkiver
+Voir en grand ¦ Zobrazit zvětšené ¦ Visa i stort format ¦ Vis i stor størrelse
+Tout voir ↗ ¦ Zobrazit vše ↗ ¦ Visa allt ↗ ¦ Vis alt ↗
+Doublons ¦ Duplicity ¦ Dubbletter ¦ Dubletter
+Ouvrir la carte ¦ Otevřít mapu ¦ Öppna kartan ¦ Åbn kortet
+Voir les lieux ¦ Zobrazit místa ¦ Visa platserna ¦ Vis stederne
+Ouvrir cet écran en grand ¦ Otevřít tuto obrazovku zvětšenou ¦ Öppna den här skärmen i stort format ¦ Åbn denne skærm i stor størrelse
+↗ En grand ¦ ↗ Zvětšit ¦ ↗ Stort format ¦ ↗ Stor størrelse
+Note ¦ Poznámka ¦ Anteckning ¦ Note
+Agrandir ¦ Zvětšit ¦ Förstora ¦ Forstør
+Lire la gazette ¦ Číst noviny ¦ Läs tidningen ¦ Læs avisen
+D’autres ancêtres ¦ Další předkové ¦ Andra anfäder ¦ Andre aner
+Deviner ¦ Hádat ¦ Gissa ¦ Gæt
+🕯️ Allumer ¦ 🕯️ Zapálit ¦ 🕯️ Tänd ¦ 🕯️ Tænd
+✉️ Écrire une lettre ¦ ✉️ Napsat dopis ¦ ✉️ Skriv ett brev ¦ ✉️ Skriv et brev
+Tous les mots ¦ Všechna slova ¦ Alla ord ¦ Alle ord
+Calculer ¦ Vypočítat ¦ Beräkna ¦ Beregn
+Le carnet ¦ Zápisník ¦ Anteckningsboken ¦ Notesbogen
+🖥️ Le fond d’écran ¦ 🖥️ Tapeta ¦ 🖥️ Skrivbordsbakgrunden ¦ 🖥️ Baggrundsbilledet
+▶ Voir pousser ¦ ▶ Sledovat růst ¦ ▶ Se det växa ¦ ▶ Se det vokse
+Régler les couches ¦ Nastavit vrstvy ¦ Ställ in lagren ¦ Indstil lagene
+📸 Toutes mes cartes de photos ¦ 📸 Všechny moje mapy fotek ¦ 📸 Alla mina fotokartor ¦ 📸 Alle mine fotokort
+30 jours ¦ 30 dní ¦ 30 dagar ¦ 30 dage
+＋ Événement de santé ¦ ＋ Zdravotní událost ¦ ＋ Hälsohändelse ¦ ＋ Helbredshændelse
+Autres widgets de l’app ¦ Další widgety aplikace ¦ Andra widgetar i appen ¦ Andre widgets i appen
+Tes animaux suivis, ce qu’on a vu d’eux et leurs trajets. ¦ Tvoje sledovaná zvířata, co se o nich vidělo a jejich trasy. ¦ Dina följda djur, vad man har sett av dem och deras rörelser. ¦ Dine fulgte dyr, hvad man har set af dem, og deres ruter.
+＋ Nouvelle observation ¦ ＋ Nové pozorování ¦ ＋ Ny observation ¦ ＋ Ny observation
+＋ Nouvelle page ¦ ＋ Nová stránka ¦ ＋ Ny sida ¦ ＋ Ny side
+📤 Partager… ¦ 📤 Sdílet… ¦ 📤 Dela… ¦ 📤 Del…
+Réglages · {x} ¦ Nastavení · {x} ¦ Inställningar · {x} ¦ Indstillinger · {x}
+Listes · {x} ¦ Seznamy · {x} ¦ Listor · {x} ¦ Lister · {x}
+🪟 Mettre sur le bureau (« {x} » : un fichier .html autonome dans un navigateur) ¦ 🪟 Dát na plochu („{x}“: samostatný soubor .html v prohlížeči) ¦ 🪟 Lägg på skrivbordet (”{x}”: en fristående .html-fil i en webbläsare) ¦ 🪟 Læg på skrivebordet (»{x}«: en selvstændig .html-fil i en browser)
+Ce jour-là ¦ Ten den ¦ Den dagen ¦ Den dag
+Un ancêtre ¦ Předek ¦ En anfader ¦ En ane
+Photo du jour ¦ Fotka dne ¦ Dagens foto ¦ Dagens foto
+Tous les murs de brique (Recherche) ¦ Všechny slepé uličky (Výzkum) ¦ Alla återvändsgränder (Forskning) ¦ Alle blindgyder (Forskning)
+Tous les liens fragiles de ta lignée (Listes) ¦ Všechny křehké články tvé linie (Seznamy) ¦ Alla sköra länkar i din släktlinje (Listor) ¦ Alle skrøbelige led i din slægtslinje (Lister)
+Carte d’une branche · {name} ¦ Mapa větve · {name} ¦ Karta över en gren · {name} ¦ Kort over en gren · {name}
+Timeline · {name} ¦ Časová osa · {name} ¦ Tidslinje · {name} ¦ Tidslinje · {name}
+Identité · {name} ¦ Identita · {name} ¦ Identitet · {name} ¦ Identitet · {name}
+Ajouter aux raccourcis ¦ Přidat do zkratek ¦ Lägg till i genvägar ¦ Føj til genveje
+Ajouter aux raccourcis (un widget « Raccourcis » du tableau de bord, d’un onglet ou d’une Fiche) ¦ Přidat do zkratek (widget „Zkratky“ na přehledu, na kartě aplikace nebo v poznámkové kartě) ¦ Lägg till i genvägar (en widget ”Genvägar” i översikten, på en flik eller ett anteckningskort) ¦ Føj til genveje (en widget »Genveje« i oversigten, på en fane eller et notekort)
+Retirer des raccourcis ¦ Odebrat ze zkratek ¦ Ta bort från genvägar ¦ Fjern fra genveje

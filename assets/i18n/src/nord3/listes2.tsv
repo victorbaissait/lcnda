@@ -1,0 +1,429 @@
+fr ¦ ro
+=invité ¦ invitat|invitați|de invitați
+=descendant vivant ¦ descendent în viață|descendenți în viață|de descendenți în viață
+=conjoint ¦ soț/soție|soți|de soți
+=fiche confidentielle ¦ fișă confidențială|fișe confidențiale|de fișe confidențiale
+=invité trouvé ¦ invitat găsit|invitați găsiți|de invitați găsiți
+=nouvel invité ¦ invitat nou|invitați noi|de invitați noi
+=invitée ¦ invitată|invitate|de invitate
+=invité déjà là ¦ invitat deja existent|invitați deja existenți|de invitați deja existenți
+=colonne ¦ coloană|coloane|de coloane
+=invité ajouté ¦ invitat adăugat|invitați adăugați|de invitați adăugați
+=invité complété ¦ invitat completat|invitați completați|de invitați completați
+=foyer ¦ gospodărie|gospodării|de gospodării
+=avec adresse ¦ cu adresă|cu adresă|cu adresă
+=avec courriel ¦ cu e-mail|cu e-mail|cu e-mail
+=badge ¦ ecuson|ecusoane|de ecusoane
+=présent ¦ prezent|prezenți|de prezenți
+=personne attendue ¦ persoană așteptată|persoane așteptate|de persoane așteptate
+=table ¦ masă|mese|de mese
+=personne placée ¦ persoană așezată|persoane așezate|de persoane așezate
+=photo ajoutée ¦ fotografie adăugată|fotografii adăugate|de fotografii adăugate
+=personne présente ¦ persoană prezentă|persoane prezente|de persoane prezente
+Sans réponse ¦ Fără răspuns
+👥 Invités ¦ 👥 Invitați
+✉️ Invitations ¦ ✉️ Invitații
+🏷 Badges ¦ 🏷 Ecusoane
+🌳 Grand arbre ¦ 🌳 Arborele mare
+📅 Jour J ¦ 📅 Ziua cea mare
+Réunir les descendants d’un ancêtre : invités, invitations, badges, grand arbre, jour J. ¦ Reunește descendenții unui strămoș: invitați, invitații, ecusoane, arborele mare, ziua cea mare.
+＋ Nouvelle cousinade ¦ ＋ Reuniune de familie nouă
+Nouvelle cousinade ¦ Reuniune de familie nouă
+Lecture des cousinades… ¦ Se citesc reuniunile de familie…
+Aucune cousinade pour l’instant ¦ Nicio reuniune de familie deocamdată
+Choisis un ancêtre (ou un couple) : l’app trouve ses descendants vivants, branche par branche, et prépare la liste des invités. ¦ Alege un strămoș (sau un cuplu): aplicația găsește descendenții lui în viață, ramură cu ramură, și pregătește lista invitaților.
+Chercher… (ex. Martin, 2026, Tulle) ¦ Caută… (ex. Martin, 2026, Tulle)
+{n} oui ¦ {n} da
+{n} sans réponse ¦ {n} fără răspuns
+Aucune cousinade ne correspond. ¦ Nicio reuniune de familie nu se potrivește.
+Renommer la cousinade ¦ Redenumește reuniunea de familie
+Cousinade renommée. ¦ Reuniunea de familie a fost redenumită.
+Cousinade supprimée : « {name} » ¦ Reuniune de familie ștearsă: „{name}”
+Modifier la cousinade ¦ Modifică reuniunea de familie
+L’ancêtre dont on réunit les descendants ¦ Strămoșul ai cărui descendenți se reunesc
+Avec son conjoint (le couple) — facultatif ¦ Cu soțul/soția (cuplul) — opțional
+Seulement les enfants du couple. Vide : tous les enfants de l’ancêtre. ¦ Doar copiii cuplului. Gol: toți copiii strămoșului.
+Nom de la cousinade ¦ Numele reuniunii de familie
+Personne de référence pour les liens de parenté ¦ Persoana de referință pentru legăturile de rudenie
+Chaque invité aura son lien avec elle (« cousin issu de germains de … »). Toi, le plus souvent. ¦ Fiecare invitat va avea legătura sa cu ea („văr de gradul al doilea al lui …”). De cele mai multe ori, tu.
+Inviter aussi les conjoints des descendants ¦ Invită și soții descendenților
+🔒 Les fiches confidentielles ne sont jamais montrées. Les adresses des vivants restent dans ce projet. ¦ 🔒 Fișele confidențiale nu sunt arătate niciodată. Adresele persoanelor în viață rămân în acest proiect.
+Choisis l’ancêtre : l’app cherche ses descendants vivants. ¦ Alege strămoșul: aplicația îi caută descendenții în viață.
+Recherche des descendants vivants… ¦ Se caută descendenții în viață…
+{who} dans {branches}, et {spouses}. ¦ {who} în {branches} și {spouses}.
+{who} dans {branches}. ¦ {who} în {branches}.
+{n} sans décès noté, née il y a moins de 100 ans : marquée « vivant ? ». ¦ {n} fără deces notat, născute acum mai puțin de 100 de ani: marcate „în viață?”.
+{n} laissées de côté. ¦ {n} lăsate deoparte.
+{n} laissée de côté. ¦ {n} lăsată deoparte.
+Choisis l’ancêtre dont on réunit les descendants. ¦ Alege strămoșul ai cărui descendenți se reunesc.
+Cousinade créée : {n}. ¦ Reuniune de familie creată: {n}.
+Cousinade enregistrée : {n}. ¦ Reuniune de familie salvată: {n}.
+Cousinade enregistrée. ¦ Reuniune de familie salvată.
+Lecture de la cousinade… ¦ Se citește reuniunea de familie…
+← Toutes les cousinades ¦ ← Toate reuniunile de familie
+↻ Chercher les nouveaux descendants ¦ ↻ Caută descendenții noi
+Chercher les nouveaux descendants ¦ Caută descendenții noi
+↗ Fiche de l’ancêtre ¦ ↗ Fișa strămoșului
+{n} n’apparaissent plus : sa fiche est devenue confidentielle (ou a été supprimée). ¦ {n} nu mai apar: fișa lor a devenit confidențială (sau a fost ștearsă).
+{n} n’apparaît plus : sa fiche est devenue confidentielle (ou a été supprimée). ¦ {n} nu mai apare: fișa a devenit confidențială (sau a fost ștearsă).
+la personne de référence ¦ persoana de referință
+Liens de parenté avec ¦ Legături de rudenie cu
+＋ Ajouter un invité ¦ ＋ Adaugă un invitat
+⤒ Importer une liste… ¦ ⤒ Importă o listă…
+Aucun invité pour l’instant ¦ Niciun invitat deocamdată
+Aucun descendant vivant trouvé. Ajoute les invités à la main, importe une liste, ou complète l’arbre puis « ↻ Chercher les nouveaux descendants ». ¦ Niciun descendent în viață găsit. Adaugă invitații de mână, importă o listă sau completează arborele, apoi „↻ Caută descendenții noi”.
+Chercher… (ex. Martin, Brive, végétarien) ¦ Caută… (ex. Martin, Brive, vegetarian)
+Invités (cochés) ¦ Invitați (bifați)
+Pas invités ¦ Neinvitați
+Seulement « vivant ? » ¦ Doar „în viață?”
+Par branche et par foyer ¦ Pe ramuri și gospodării
+Par génération ¦ Pe generații
+Par réponse ¦ După răspuns
+{n} · {inv} en tout ¦ {n} · {inv} în total
+Aucun invité ne correspond. ¦ Niciun invitat nu se potrivește.
+Pas invité ¦ Neinvitat
+Invité (coché) ¦ Invitat (bifat)
+Régime ¦ Regim alimentar
+Rien de noté sur son décès, née il y a moins de 100 ans : vérifie avant d’inviter ¦ Nimic notat despre decesul ei, născută acum mai puțin de 100 de ani: verifică înainte să inviți
+Sans fiche ¦ Fără fișă
+Pas d’adresse ¦ Fără adresă
+Nombre de personnes ¦ Număr de persoane
+{name} est invitée. ¦ {name} este invitată.
+{name} est invité. ¦ {name} este invitat.
+{name} n’est plus invitée. ¦ {name} nu mai este invitată.
+{name} n’est plus invité. ¦ {name} nu mai este invitat.
+Réponse de {name} : {answer}. ¦ Răspunsul lui {name}: {answer}.
+Inviter les {n} affichées ¦ Invită cele {n} afișate
+{n} invitées. ¦ {n} invitate.
+{n} invitée. ¦ {n} invitată.
+Ne plus inviter les personnes affichées ¦ Nu mai invita persoanele afișate
+{n} retirées des invitations. ¦ {n} scoase din invitații.
+{n} retirée des invitations. ¦ {n} scoasă din invitații.
+Tableau des invités (CSV)… ¦ Tabelul invitaților (CSV)…
+Imprimer la liste des invités… ¦ Tipărește lista invitaților…
+Écrire un courriel ¦ Scrie un e-mail
+Retirer de la liste ¦ Scoate din listă
+🗑 Retirer de la liste ¦ 🗑 Scoate din listă
+{name} retirée de la liste. ¦ {name} a fost scoasă din listă.
+{name} retiré de la liste. ¦ {name} a fost scos din listă.
+Aucun nouveau descendant vivant : la liste est à jour. ¦ Niciun descendent nou în viață: lista este la zi.
+{n} ajoutés. ¦ {n} adăugați.
+{n} ajouté. ¦ {n} adăugat.
+Son propre foyer ¦ Propria gospodărie
+Garder son foyer ¦ Păstrează-i gospodăria
+🎉 COUSINADE · INVITÉ ¦ 🎉 REUNIUNE DE FAMILIE · INVITAT
+🎉 COUSINADE ¦ 🎉 REUNIUNE DE FAMILIE
+Nouvel invité ¦ Invitat nou
+Une fiche de ta généalogie (facultatif) ¦ O fișă din genealogia ta (opțional)
+Sinon, écris le prénom et le nom ci-dessous. ¦ Altfel, scrie prenumele și numele mai jos.
+Foyer (une invitation par foyer) ¦ Gospodărie (o invitație pe gospodărie)
+12 rue des Écoles ¦ 12 rue des Écoles
+Régime, allergies ¦ Regim alimentar, alergii
+végétarien, sans gluten… ¦ vegetarian, fără gluten…
+Mettre aussi l’adresse, le courriel et le téléphone dans le répertoire des vivants (sa fiche) ¦ Pune și adresa, e-mailul și telefonul în agenda persoanelor în viață (fișa lui)
+Décoché : seulement dans cette cousinade. ¦ Debifat: doar în această reuniune de familie.
+Écris au moins un prénom ou un nom (ou choisis une fiche). ¦ Scrie cel puțin un prenume sau un nume (sau alege o fișă).
+Ce courriel n’a pas la bonne forme (exemple : prenom.nom@exemple.fr). ¦ Acest e-mail nu are forma corectă (exemplu: prenume.nume@exemplu.ro).
+Invité ajouté. ¦ Invitat adăugat.
+Enregistré, et aussi dans le répertoire des vivants. ¦ Salvat, și în agenda persoanelor în viață.
+Le lecteur de tableaux n’est pas chargé. ¦ Cititorul de tabele nu este încărcat.
+Importer une liste d’invités ¦ Importă o listă de invitați
+Un tableau avec une ligne de titres : Prénom, Nom, Courriel, Téléphone, Adresse, Code postal, Ville, Réponse (oui / non / peut-être), Nombre, Régime, Note. ¦ Un tabel cu un rând de titluri: Prenume, Nume, E-mail, Telefon, Adresă, Cod poștal, Oraș, Răspuns (da / nu / poate), Număr, Regim, Notă.
+Je ne trouve ni prénom ni nom : la première ligne doit donner les titres des colonnes (Prénom, Nom, Courriel…). ¦ Nu găsesc nici prenume, nici nume: primul rând trebuie să dea titlurile coloanelor (Prenume, Nume, E-mail…).
+{n} (coordonnées et réponse complétées) ¦ {n} (date de contact și răspuns completate)
+{n} non reconnues : laissées de côté. ¦ {n} nerecunoscute: lăsate deoparte.
+{n} non reconnue : laissée de côté. ¦ {n} nerecunoscută: lăsată deoparte.
+⤓ Exporter le tableau des invités ¦ ⤓ Exportă tabelul invitaților
+Un fichier CSV (tableur) avec les invités, leur branche, leur lien de parenté et leur réponse. ¦ Un fișier CSV (tabel de calcul) cu invitații, ramura lor, legătura lor de rudenie și răspunsul lor.
+Avec les adresses, courriels et téléphones ¦ Cu adresele, e-mailurile și telefoanele
+🔒 Ce sont des données de personnes vivantes : ne partage ce fichier qu’avec ceux qui organisent. ¦ 🔒 Sunt date despre persoane în viață: partajează acest fișier doar cu cei care organizează.
+Seulement les invités cochés ¦ Doar invitații bifați
+Lien avec l’ancêtre ¦ Legătura cu strămoșul
+Lien avec la référence ¦ Legătura cu persoana de referință
+Tableau exporté, avec les coordonnées. ¦ Tabel exportat, cu datele de contact.
+Tableau exporté, sans les coordonnées. ¦ Tabel exportat, fără datele de contact.
+Invités — {name} ¦ Invitați — {name}
+Liste des invités ¦ Lista invitaților
+Les invités cochés ¦ Invitații bifați
+Ceux qui viennent ¦ Cei care vin
+Avec les coordonnées ¦ Cu datele de contact
+Le texte de l’invitation ¦ Textul invitației
+Une invitation par foyer. Ces mots se remplacent tout seuls : ¦ O invitație pe gospodărie. Aceste cuvinte se înlocuiesc singure:
+Répondre avant le ¦ Răspunde până la
+Contact pour répondre ¦ Contact pentru răspuns
+Objet du courriel ¦ Subiectul e-mailului
+🖨 Imprimer les invitations… ¦ 🖨 Tipărește invitațiile…
+📝 Dans le traitement de texte ¦ 📝 În procesorul de text
+📁 Copie dans les médias ¦ 📁 Copie în fișierele media
+{n} à inviter ¦ {n} de invitat
+✉️ Un courriel à tous (en copie cachée) ¦ ✉️ Un e-mail pentru toți (în copie ascunsă)
+Ta messagerie s’ouvre avec le texte prêt : rien n’est envoyé par l’app. ¦ Programul tău de e-mail se deschide cu textul gata: aplicația nu trimite nimic.
+✉️ Courriel prêt ¦ ✉️ E-mail gata
+Aucun invité coché : coche des invités dans l’onglet « 👥 Invités ». ¦ Niciun invitat bifat: bifează invitați în fila „👥 Invitați”.
+Aucun foyer à inviter : coche des invités d’abord. ¦ Nicio gospodărie de invitat: bifează mai întâi invitați.
+L’adresse du foyer en haut à droite (enveloppe à fenêtre) ¦ Adresa gospodăriei în dreapta sus (plic cu fereastră)
+Le traitement de texte n’est pas chargé. ¦ Procesorul de text nu este încărcat.
+Les faire-part ne sont pas chargés. ¦ Anunțurile nu sunt încărcate.
+Tous les descendants de {name} ¦ Toți descendenții lui {name}
+Réponse avant le {date} ¦ Răspuns până la {date}
+Envoi vers les médias indisponible. ¦ Trimiterea către fișierele media nu este disponibilă.
+Une copie de l’invitation est rangée dans les médias. ¦ O copie a invitației este păstrată în fișierele media.
+Copie non rangée dans les médias : {err} ¦ Copia nu a fost pusă în fișierele media: {err}
+Le lien écrit sous le nom ¦ Legătura scrisă sub nume
+Avec l’ancêtre ¦ Cu strămoșul
+Avec la référence ¦ Cu persoana de referință
+Pour qui ¦ Pentru cine
+Invités cochés ¦ Invitați bifați
+Qui viennent ¦ Care vin
+Présents ¦ Prezenți
+Par page A4 ¦ Pe pagină A4
+Petite photo (si la fiche en a une) ¦ Fotografie mică (dacă fișa are una)
+QR code (nom, branche et lien, lu par un téléphone) ¦ Cod QR (nume, ramură și legătură, citit de un telefon)
+Chaque branche a sa couleur (onglet « 📊 Chiffres » pour la changer). ¦ Fiecare ramură are culoarea ei (fila „📊 Cifre” ca s-o schimbi).
+Personne à qui faire un badge. ¦ Nimeni pentru care să faci un ecuson.
+L’arbre décoratif n’est pas chargé. ¦ Arborele decorativ nu este încărcat.
+Toute la descendance de {name}, en grand, une couleur par branche, à afficher le jour de la cousinade. Le dessin s’ouvre ensuite pour tout retoucher, puis « ⤓ Exporter » (PDF pour l’imprimeur, avec fond perdu et traits de coupe, PNG, SVG…). ¦ Toată descendența lui {name}, în mare, o culoare pe ramură, de afișat în ziua reuniunii. Desenul se deschide apoi ca să retușezi tot, apoi „⤓ Exportă” (PDF pentru tipografie, cu margine de tăiere și semne de tăiere, PNG, SVG…).
+l’ancêtre ¦ strămoșul
+Les conjoints sous chaque nom ¦ Soții sub fiecare nume
+Une place pour coller les photos du jour (à côté des vivants) ¦ Un loc pentru a lipi fotografiile zilei (lângă cei în viață)
+🌳 Fabriquer le grand arbre ¦ 🌳 Creează arborele mare
+Fabrication du grand arbre… ¦ Se creează arborele mare…
+Aucune descendance pour cet ancêtre. ¦ Nicio descendență pentru acest strămoș.
+Cet ancêtre est confidentiel. ¦ Acest strămoș este confidențial.
+Photos du jour ¦ Fotografiile zilei
+✅ Présence ¦ ✅ Prezență
+{here} sur {n} ¦ {here} din {n}
+🖨 Imprimer la liste de présence… ¦ 🖨 Tipărește lista de prezență…
+Personne n’a encore dit oui : les réponses se notent dans « 👥 Invités ». ¦ Nimeni nu a spus încă da: răspunsurile se notează în „👥 Invitați”.
+{name} est là. ¦ {name} este aici.
+{name} n’est plus notée présente. ¦ {name} nu mai este notată prezentă.
+{name} n’est plus noté présent. ¦ {name} nu mai este notat prezent.
+Présence — {name} ¦ Prezență — {name}
+{name} — présence ¦ {name} — prezență
+Liste de présence ¦ Lista de prezență
+Places par table ¦ Locuri la masă
+Compter aussi les « peut-être » ¦ Numără și pe cei cu „poate”
+Les petites branches partagent une table ¦ Ramurile mici împart o masă
+✨ Faire le plan par branche ¦ ✨ Fă planul pe ramuri
+🖨 Imprimer le plan… ¦ 🖨 Tipărește planul…
+Un foyer n’est jamais séparé. Change la table d’une personne avec sa case ; ↶ Annuler défait le plan. ¦ O gospodărie nu este niciodată despărțită. Schimbă masa unei persoane din caseta ei; ↶ Anulează desface planul.
+Pas encore de plan de table : note les réponses, puis « ✨ Faire le plan par branche ». ¦ Încă niciun plan al meselor: notează răspunsurile, apoi „✨ Fă planul pe ramuri”.
+{name} va à la table {no}. ¦ {name} merge la masa {no}.
+Personne ne vient encore : note les réponses « Oui » d’abord. ¦ Încă nu vine nimeni: notează mai întâi răspunsurile „Da”.
+＋ Ajouter des photos… ¦ ＋ Adaugă fotografii…
+Retirer de l’album ¦ Scoate din album
+L’album est vide ¦ Albumul este gol
+Les photos du jour : importe-les depuis l’ordinateur ou choisis-les dans les médias. ¦ Fotografiile zilei: importă-le din calculator sau alege-le din fișierele media.
+＋ Ajouter des photos ¦ ＋ Adaugă fotografii
+Les photos de la cousinade ¦ Fotografiile reuniunii de familie
+Ajouter à l’album ¦ Adaugă în album
+{n} à l’album. ¦ {n} în album.
+Photo retirée de l’album (elle reste dans les médias). ¦ Fotografie scoasă din album (rămâne în fișierele media).
+invités ¦ invitați
+oui ¦ da
+peut-être ¦ poate
+non ¦ nu
+sans réponse ¦ fără răspuns
+personnes attendues ¦ persoane așteptate
+Par branche ¦ Pe ramuri
+Invités ¦ Invitați
+Réponses ¦ Răspunsuri
+Couleur de la branche {name} ¦ Culoarea ramurii {name}
+{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse ¦ {yes} da, {maybe} poate, {no} nu, {wait} fără răspuns
+Régimes et allergies (de ceux qui viennent) ¦ Regimuri alimentare și alergii (ale celor care vin)
+Le jour J : {n}. ¦ În ziua cea mare: {n}.
+Couleur de la branche enregistrée. ¦ Culoarea ramurii a fost salvată.
+Organiser une cousinade… ¦ Organizează o reuniune de familie…
+Descendants de {name} · {n} ¦ Descendenții lui {name} · {n}
+=passage dans les médias ¦ apariție în presă|apariții în presă|de apariții în presă
+passages dans les médias ¦ apariții în presă
+1980 et après ¦ 1980 și după
+avant 1900 ¦ înainte de 1900
+Ajoute un fichier MP3, M4A, WAV, AIFF ou OGG sur une fiche, une battue, une enquête… (ou glisse-le ici) et il apparaîtra ici. ¦ Adaugă un fișier MP3, M4A, WAV, AIFF sau OGG pe o fișă, o căutare amplă, o investigație… (sau trage-l aici) și va apărea aici.
+Ajoute un fichier MP4, MOV ou WEBM sur une fiche, une battue, une enquête… (ou glisse-le ici) et elle apparaîtra ici. ¦ Adaugă un fișier MP4, MOV sau WEBM pe o fișă, o căutare amplă, o investigație… (sau trage-l aici) și va apărea aici.
+Ajoute une carte : l’image de la vue, celle du dos, puis le lieu montré pour la retrouver sur la Carte. ¦ Adaugă o carte poștală: imaginea vederii, cea a versoului, apoi locul înfățișat ca s-o regăsești pe Hartă.
+Ajoute-les sur la fiche d’une personne (bloc 🛂 Passeports) ou dans ✨ Trésors → Les passeports, où l’on peut aussi importer un relevé. ¦ Adaugă-le pe fișa unei persoane (blocul 🛂 Pașapoarte) sau în ✨ Comori → Pașapoartele, unde poți importa și un extras.
+Allume-en une dans ✨ Trésors → Allumer une bougie. ¦ Aprinde una în ✨ Comori → Aprinde o lumânare.
+Amérique du Nord ¦ America de Nord
+Assembler et retoucher des sons ¦ Asamblează și retușează sunete
+Aucun acte pour l’instant ¦ Niciun act deocamdată
+Aucun dossier de preuve ¦ Niciun dosar de dovezi
+Aucun lieu dans l’arbre pour l’instant ¦ Niciun loc în arbore deocamdată
+Aucun livret pour l’instant ¦ Nicio broșură deocamdată
+Aucun nom indexé pour l’instant ¦ Niciun nume indexat deocamdată
+Aucun partage pour l’instant ¦ Nicio partajare deocamdată
+Aucun passage dans les médias pour l’instant ¦ Nicio apariție în presă deocamdată
+Aucun passeport pour l’instant ¦ Niciun pașaport deocamdată
+Aucun projet de montage pour l’instant ¦ Niciun proiect de montaj deocamdată
+Aucun questionnaire pour l’instant ¦ Niciun chestionar deocamdată
+Aucun rattachement pour l’instant ¦ Nicio apartenență deocamdată
+Aucun recueil pour l’instant ¦ Nicio culegere deocamdată
+Aucun son pour l’instant ¦ Niciun sunet deocamdată
+Aucune annonce pour l’instant ¦ Niciun anunț deocamdată
+Aucune bougie au registre ¦ Nicio lumânare în registru
+Aucune carte d’électeur pour l’instant ¦ Nicio carte de alegător deocamdată
+Aucune carte postale pour l’instant ¦ Nicio carte poștală deocamdată
+Aucune création ni carrière pour l’instant ¦ Nicio creație și nicio carieră deocamdată
+Aucune demande : ouvre une photo et clique « 📤 Demander qui c’est ». ¦ Nicio cerere: deschide o fotografie și fă clic pe „📤 Întreabă cine este”.
+Aucune demande pour l’instant ¦ Nicio cerere deocamdată
+Aucune gazette pour l’instant ¦ Nicio gazetă deocamdată
+Aucune image de lieu pour l’instant ¦ Nicio imagine de loc deocamdată
+Aucune langue notée pour l’instant ¦ Nicio limbă notată deocamdată
+Aucune lettre pour l’instant ¦ Nicio scrisoare deocamdată
+Aucune maison pour l’instant : « ＋ Nouvelle maison ». ¦ Nicio casă deocamdată: „＋ Casă nouă”.
+Aucune personne n’a encore de profil ¦ Nimeni nu are încă un profil
+Aucune règle pour l’instant ¦ Nicio regulă deocamdată
+Aucune récompense pour l’instant ¦ Nicio distincție deocamdată
+Aucune transcription d’acte pour l’instant ¦ Nicio transcriere de act deocamdată
+Aucune vidéo pour l’instant ¦ Niciun videoclip deocamdată
+Auteur, réalisation ¦ Autor, regie
+Bravo ! L’assistant peut chercher plus loin (jusqu’à 12 générations). ¦ Bravo! Asistentul poate căuta mai departe (până la 12 generații).
+Carte du droit de vote ¦ Harta dreptului de vot
+Cette liste est cachée ¦ Această listă este ascunsă
+Ce que tu notes ici reprend les actes : ce n’est pas un conseil juridique. ¦ Ce notezi aici urmează actele: nu este o consiliere juridică.
+Ce sont des informations privées : montre-les d’abord dans les Réglages. ¦ Sunt informații private: afișează-le mai întâi din Setări.
+Chercher un nom, une commune… ¦ Caută un nume, o localitate…
+Chercher un projet… (nom, photo, détails) ¦ Caută un proiect… (nume, fotografie, detalii)
+Chercher un questionnaire… (ex. Anne, guerre, Marie) ¦ Caută un chestionar… (ex. Anne, război, Marie)
+Chercher une carte… (ex. Bretagne, 1978, Lucie) ¦ Caută o hartă… (ex. Bretania, 1978, Lucie)
+Chercher une maison… (nom, lieu, époque, personne, recensement) ¦ Caută o casă… (nume, loc, epocă, persoană, recensământ)
+Chercher une personne… (ex. Martin, maire, sportif) ¦ Caută o persoană… (ex. Martin, primar, sportiv)
+Chercher… (commune, cote, année, service d’archives) ¦ Caută… (localitate, cotă, an, serviciu de arhive)
+Chercher… (commune, section, numéro, lieu-dit, propriétaire) ¦ Caută… (localitate, secțiune, număr, loc numit, proprietar)
+Chercher… (personne, bien, notaire, lieu, cote) ¦ Caută… (persoană, bun, notar, loc, cotă)
+Chercher… (titre, auteur, lieu, nom cité, ce qu’on voit, notes) ¦ Caută… (titlu, autor, loc, nume citat, ce se vede, note)
+Chercher… (titre, lieu) ¦ Caută… (titlu, loc)
+Chercher… (titre, personne, lieu, année) ¦ Caută… (titlu, persoană, loc, an)
+Chercher… (titre, texte, personne, lieu, cote) ¦ Caută… (titlu, text, persoană, loc, cotă)
+Choisir la personne, puis la sorte de fiche ¦ Alege persoana, apoi felul fișei
+Choisir les colonnes (« ⚙️ Champs affichés », onglet « La liste ») ¦ Alege coloanele („⚙️ Câmpuri afișate”, fila „Lista”)
+Choisir une personne, puis cocher ce qu’elle était (artiste, sportif, élu…) ¦ Alege o persoană, apoi bifează ce a fost (artist, sportiv, ales…)
+Choisis la personne de départ (Sosa 1) et ajoute ses parents. ¦ Alege persoana de pornire (Sosa 1) și adaugă-i părinții.
+Choisis la personne, puis la sorte de fiche : elle se range sur sa page et apparaît ici. ¦ Alege persoana, apoi felul fișei: se așază pe pagina ei și apare aici.
+Choisis l’image d’un acte (baptême, mariage, sépulture…) et transcris-le à côté. ¦ Alege imaginea unui act (botez, căsătorie, înmormântare…) și transcrie-l alături.
+Clique sur un pays pour voir ses dates (et les cantons suisses, les provinces canadiennes…). ¦ Fă clic pe o țară ca să-i vezi datele (și cantoanele elvețiene, provinciile canadiene…).
+Clubs et équipes, résultats, records, saisons. ¦ Cluburi și echipe, rezultate, recorduri, sezoane.
+Commence par « ＋ Numéro », « ＋ Livre » ou « ＋ Documentaire », en haut de la page. ¦ Începe cu „＋ Număr”, „＋ Carte” sau „＋ Documentar”, în partea de sus a paginii.
+Commence-en un : il apparaîtra ici, avec les autres, pour le rouvrir plus tard. ¦ Începe unul: va apărea aici, cu celelalte, ca să-l redeschizi mai târziu.
+Commune, section, numéro ¦ Localitate, secțiune, număr
+Crée d’abord ton type (« ＋ Créer mon propre type… » dans « ＋ Nouvelle œuvre »), puis ses fiches. ¦ Creează mai întâi tipul tău („＋ Creează-mi propriul tip…” în „＋ Operă nouă”), apoi fișele lui.
+Crée le recueil (registre, liste, cahier…), puis ajoute tes photos : chaque photo devient une page. ¦ Creează culegerea (registru, listă, caiet…), apoi adaugă fotografiile: fiecare fotografie devine o pagină.
+Crée une carte, puis ajoute des photos de l’app ou importe-les : celles qui ont des coordonnées GPS se placent toutes seules. ¦ Creează o hartă, apoi adaugă fotografii din aplicație sau importă-le: cele care au coordonate GPS se plasează singure.
+Créer ce jour-là ¦ Creează în ziua aceea
+Date (récent d’abord) ¦ Dată (cele recente întâi)
+Date de l’acte ¦ Data actului
+Date pour les femmes ¦ Data pentru femei
+Date pour les hommes ¦ Data pentru bărbați
+Décennie ¦ Deceniu
+Siècle ¦ Secol
+Précédent ¦ Anterior
+Elles s’ajoutent sur la fiche d’une personne (bloc Cartes d’électeur). ¦ Se adaugă pe fișa unei persoane (blocul Cărți de alegător).
+Ensuite par ¦ Apoi după
+Grouper par catégorie ¦ Grupează pe categorii
+Héritages et successions ¦ Moșteniri și succesiuni
+Il faut des dates dans l’arbre : une naissance, un mariage, un décès… ¦ Arborele are nevoie de date: o naștere, o căsătorie, un deces…
+Index des noms ¦ Indexul numelor
+Inventions et leurs brevets, découvertes (espèce, comète, site…), publications scientifiques. ¦ Invenții și brevetele lor, descoperiri (specie, cometă, sit…), publicații științifice.
+La liste « Palmarès » ¦ Lista „Palmares”
+La liste « Revue de presse » ¦ Lista „Revista presei”
+Palmarès ¦ Palmares
+🏆 Palmarès ¦ 🏆 Palmares
+Langue des actes et des documents ¦ Limba actelor și a documentelor
+Le cercle autour des ancêtres ¦ Cercul din jurul strămoșilor
+Le plus de fiches ¦ Cele mai multe fișe
+Le plus de photos ¦ Cele mai multe fotografii
+Le plus de profils ¦ Cele mai multe profiluri
+Les autres listes ¦ Celelalte liste
+Les lieux viennent des naissances, mariages et décès de l’arbre. ¦ Locurile vin din nașterile, căsătoriile și decesele din arbore.
+Les plus grandes ¦ Cele mai mari
+Lettres aux descendants ¦ Scrisori către descendenți
+L’ordre des outils, et ceux qu’on montre ¦ Ordinea instrumentelor și cele afișate
+Marquer dans les transcriptions ¦ Marchează în transcrieri
+Mes annonces et courriers ¦ Anunțurile și scrisorile mele
+Mettre ce qui est affiché dans un projet de l’Atelier ¦ Pune ce este afișat într-un proiect din Atelier
+Modifiés récemment ¦ Modificate recent
+Monter des vidéos : morceaux, titres, fondus, incrustations, musiques ¦ Montează videoclipuri: secvențe, titluri, tranziții, suprapuneri, muzică
+Morceaux, albums et disques, enregistrements, concerts, tournées, œuvres de musique savante. ¦ Piese, albume și discuri, înregistrări, concerte, turnee, opere de muzică cultă.
+Note de quelle paroisse dépendait chaque hameau ou village avant la Révolution. ¦ Notează de ce parohie depindea fiecare cătun sau sat înainte de Revoluție.
+Numéro, tome, épisode ¦ Număr, volum, episod
+Ou « 📷 Lire une capture des règles » pour les remplir toutes seules. ¦ Sau „📷 Citește o captură a regulilor” ca să se completeze singure.
+Où j’en suis ¦ Unde am ajuns
+Par commune ¦ Pe localități
+Par date de l’œuvre ¦ După data operei
+Par date, récentes d’abord ¦ După dată, cele recente întâi
+Par personne ¦ Pe persoane
+Par période ¦ Pe perioade
+Partage une branche dans ✨ Trésors → Partager une branche (pour un temps). ¦ Partajează o ramură în ✨ Comori → Partajează o ramură (pentru o vreme).
+Pas encore de lignée ¦ Încă nicio linie
+Passeport des lieux ¦ Pașaportul locurilor
+Peintures, dessins, gravures, sculptures et fontes, photographies, affiches, expositions… ¦ Picturi, desene, gravuri, sculpturi și turnări, fotografii, afișe, expoziții…
+Plus anciens ¦ Cele mai vechi
+Priorité d’achat ¦ Prioritate de cumpărare
+Précisions ¦ Precizări
+Ranger les fiches par sorte, avec un intertitre pour chacune ¦ Aranjează fișele pe feluri, cu un subtitlu pentru fiecare
+Ranger par sorte ¦ Aranjează pe feluri
+Revenir sur un son en cours de travail ¦ Revino la un sunet la care lucrezi
+Revue, collection, série ¦ Revistă, colecție, serie
+＋ Revue, collection, série ¦ ＋ Revistă, colecție, serie
+Rien ne manque sur 5 générations ¦ Nu lipsește nimic pe 5 generații
+Règles des journaux ¦ Regulile ziarelor
+Région, puis pays ¦ Regiune, apoi țară
+Pays (A → Z) ¦ Țară (A → Z)
+Tous les pays, dans l’ordre que tu veux ¦ Toate țările, în ordinea pe care o vrei
+Un fichier .ics à ouvrir dans ton calendrier (Apple, Google, Outlook…) ¦ Un fișier .ics de deschis în calendarul tău (Apple, Google, Outlook…)
+Un son de la base ou de l’ordinateur, à travailler et à garder comme projet ¦ Un sunet din bază sau din calculator, de lucrat și de păstrat ca proiect
+Une fiche rassemble texte, images, personnes, cartes et listes sur un sujet. ¦ O fișă adună text, imagini, persoane, hărți și liste despre un subiect.
+Voir qui pouvait voter en ¦ Vezi cine putea vota în
+pas de date ¦ fără dată
+Écart ¦ Diferență
+↔ Écart ¦ ↔ Diferență
+Écart hommes / femmes ¦ Diferența bărbați / femei
+Écoles, études et apprentissages, diplômes, établissements. ¦ Școli, studii și ucenicii, diplome, instituții.
+Écris ton annonce et vois tout de suite combien elle coûtera d’après les règles du journal. ¦ Scrie-ți anunțul și vezi imediat cât va costa după regulile ziarului.
+Écris ton annonce, vois tout de suite combien elle coûtera d’après les règles du journal, et suis ce qu’elle devient. ¦ Scrie-ți anunțul, vezi imediat cât va costa după regulile ziarului și urmărește ce se întâmplă cu el.
+Écris-en une dans ✨ Trésors → Lettres aux descendants : « pour les 18 ans de Léa », « en 2050 ». ¦ Scrie una în ✨ Comori → Scrisori către descendenți: „pentru cei 18 ani ai Léei”, „în 2050”.
+↗ Ouvrir dans Recherche ¦ ↗ Deschide în Cercetare
+⚙️ Ouvrir les Réglages ¦ ⚙️ Deschide Setările
+⚙️ Ranger les outils ¦ ⚙️ Aranjează instrumentele
+✅ Tâches de l’Atelier ¦ ✅ Sarcinile Atelierului
+✉️ Courriers envoyés ¦ ✉️ Scrisori trimise
+✉️ Ouvrir les lettres dans ✨ Trésors ¦ ✉️ Deschide scrisorile în ✨ Comori
+✝️ Décès, sépultures ¦ ✝️ Decese, înmormântări
+👶 Naissances, baptêmes ¦ 👶 Nașteri, botezuri
+❓ Ce qu’on peut récupérer (licences) ¦ ❓ Ce se poate prelua (licențe)
+❓ Comment noter un héritage ? ¦ ❓ Cum notez o moștenire?
+⤒ Importer des relevés ¦ ⤒ Importă extrase
+⤒ Importer les réponses ¦ ⤒ Importă răspunsurile
+⤓ Exporter les anniversaires (.ics) ¦ ⤓ Exportă aniversările (.ics)
+＋ Ajouter une image ¦ ＋ Adaugă o imagine
+＋ Ajouter une parcelle ¦ ＋ Adaugă o parcelă
+＋ Annonce ou courrier ¦ ＋ Anunț sau scrisoare
+＋ Nouveau dossier de preuve ¦ ＋ Dosar de dovezi nou
+＋ Nouveau livret ¦ ＋ Broșură nouă
+＋ Nouveau montage ¦ ＋ Montaj nou
+＋ Nouveau passage dans les médias ¦ ＋ Apariție nouă în presă
+＋ Nouveau passeport ¦ ＋ Pașaport nou
+＋ Nouveau projet son ¦ ＋ Proiect de sunet nou
+＋ Nouveau questionnaire ¦ ＋ Chestionar nou
+＋ Nouveau recueil ¦ ＋ Culegere nouă
+＋ Nouvelle carte ¦ ＋ Hartă nouă
+＋ Nouvelle carte postale ¦ ＋ Carte poștală nouă
+＋ Nouvelle demande… ¦ ＋ Cerere nouă…
+＋ Nouvelle maison ¦ ＋ Casă nouă
+＋ Nouvelle transcription ¦ ＋ Transcriere nouă
+＋ Règles d’un journal ¦ ＋ Regulile unui ziar
+＋ Épisode ¦ ＋ Episod
+🌍 Le droit de vote dans le monde ¦ 🌍 Dreptul de vot în lume
+📂 Projets son ¦ 📂 Proiecte de sunet
+📚 Vers l’Atelier ¦ 📚 Spre Atelier
+📷 Lire une capture des règles ¦ 📷 Citește o captură a regulilor
+🔍 Ouvrir l’assistant ¦ 🔍 Deschide asistentul
+🔍 Ouvrir l’assistant « Que manque-t-il ? » ¦ 🔍 Deschide asistentul „Ce lipsește?”
+🔍 Qui est sur cette photo ? ¦ 🔍 Cine este în această fotografie?
+🔍 Rappels d’enquête ¦ 🔍 Mementourile investigației
+🔗 Partager une branche ¦ 🔗 Partajează o ramură
+🕯️ Allumer une bougie ¦ 🕯️ Aprinde o lumânare
+🖼️ Tous les médias ¦ 🖼️ Toate fișierele media
+🗺 Toutes mes cartes ¦ 🗺 Toate hărțile mele
+🛂 Ouvrir dans ✨ Trésors ¦ 🛂 Deschide în ✨ Comori
+🛡 Les règles ¦ 🛡 Regulile

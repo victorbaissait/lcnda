@@ -1,0 +1,1692 @@
+fr ¦ tr
+donnees|Tableaux ¦ Tablolar
+Types de diagrammes enregistrés (galerie des diagrammes et Éditeur de graphiques). ¦ Kayıtlı diyagram türleri (diyagram galerisi ve Grafik düzenleyici).
+Les mêmes types pour <b>Mes diagrammes</b> et pour l’<b>Éditeur de graphiques</b> : ↑ ↓ pour l’ordre, décoche pour cacher un type, choisis un groupe (ou « ＋ Nouveau groupe… ») pour les regrouper à ta façon ; ✎ renomme un groupe, ↑ ↓ de l’en-tête range les groupes. ¦ <b>Diyagramlarım</b> ve <b>Grafik düzenleyici</b> için aynı türler: sıralamak için ↑ ↓, bir türü gizlemek için işaretini kaldır, türleri kendi yöntemine göre toplamak için bir grup seç (ya da “＋ Yeni grup…”); ✎ bir grubu yeniden adlandırır, başlıktaki ↑ ↓ grupları sıralar.
+⤒ Mon propre graphique à partir de données d’ailleurs ¦ ⤒ Başka yerden alınan verilerle kendi grafiğim
+<b>Un tableau</b> (tableur, site, CSV) : copie-le, puis <b>Graphiques → Mes diagrammes → ＋ Nouveau</b> (ou « ⤒ Importer » là où l’on pose un diagramme : fiche, personne, enquête, Atelier) → « Coller un tableau ». Première colonne = les noms, colonnes suivantes = les chiffres ; une première ligne de titres devient le nom des séries. ¦ <b>Bir tablo</b> (tablo, site, CSV): kopyala, sonra <b>Grafikler → Diyagramlarım → ＋ Yeni</b> (ya da bir diyagram yerleştirilen yerde “⤒ İçe aktar”: not kartı, kişi, inceleme, Atölye) → “Tablo yapıştır”. İlk sütun = adlar, sonraki sütunlar = sayılar; ilk satırdaki başlıklar serilerin adı olur.
+<b>Un fichier CSV</b> : « ⤒ Importer » → « Fichier » (séparateur virgule, point-virgule ou tabulation). ¦ <b>Bir CSV dosyası</b>: “⤒ İçe aktar” → “Dosya” (ayırıcı: virgül, noktalı virgül ya da sekme).
+<b>Une page Wikipédia</b> : « ⤒ Importer » → « Page Wikipédia », colle son adresse : ses tableaux et ses images de graphiques s’affichent, choisis-en un. ¦ <b>Bir Vikipedi sayfası</b>: “⤒ İçe aktar” → “Vikipedi sayfası”, adresini yapıştır: tabloları ve grafik resimleri görünür, birini seç.
+<b>Une image de graphique</b> (camembert, barres, courbe, hémicycle) : « ⤒ Importer » → « Image » : l’app repère les couleurs et propose les chiffres (parts, hauteurs, sièges) ; corrige les noms et les valeurs dans le tableau avant de créer le diagramme. ¦ <b>Bir grafik resmi</b> (pasta, çubuklar, eğri, yarım daire): “⤒ İçe aktar” → “Resim”: uygulama renkleri bulur ve sayıları önerir (paylar, yükseklikler, sandalyeler); diyagramı oluşturmadan önce tablodaki adları ve değerleri düzelt.
+<b>Un graphique partagé</b> par quelqu’un (fichier <code>.lcnda-widget.json</code>) : « ⤒ Importer » → « Fichier » : il rejoint « Mes graphiques » et se dessine avec les données de ton arbre. ¦ Birinin <b>paylaştığı bir grafik</b> (<code>.lcnda-widget.json</code> dosyası): “⤒ İçe aktar” → “Dosya”: “Grafiklerim” arasına girer ve senin ağacının verileriyle çizilir.
+Ensuite, le diagramme se choisit parmi tous les types (parts, chiffres, frises, liens…), se règle, s’exporte (PNG, SVG, PDF) et se pose partout. ¦ Sonra diyagram için tüm türlerden biri seçilir (paylar, sayılar, zaman şeritleri, bağlantılar…), ayarlanır, dışa aktarılır (PNG, SVG, PDF) ve her yere yerleştirilir.
+(avec des personnes) ¦ (kişilerle)
+Ce dessin a besoin d’une liste de personnes (source « Personnes »). ¦ Bu çizim için bir kişi listesi gerekir (“Kişiler” kaynağı).
+Aucune personne avec un lieu de naissance et un lieu de décès. ¦ Hem doğum yeri hem ölüm yeri olan kimse yok.
+Créer le diagramme ¦ Diyagramı oluştur
+Un de tes graphiques (Réglages → Éditeur de graphiques), un exemple, ou une statistique de l’app (naissances par décennie, prénoms…), dessiné avec le type de ton choix. ¦ Grafiklerinden biri (Ayarlar → Grafik düzenleyici), bir örnek ya da uygulamanın bir istatistiği (on yıllara göre doğumlar, adlar…), seçtiğin türle çizilir.
+Chiffres tenus à jour (relus dans l’arbre à chaque affichage) ¦ Güncel tutulan sayılar (her gösterimde ağaçtan yeniden okunur)
+＋ Créer un nouveau graphique (Éditeur de graphiques)… ¦ ＋ Yeni bir grafik oluştur (Grafik düzenleyici)…
+🌐 Page Wikipédia ¦ 🌐 Vikipedi sayfası
+Copie un tableau (tableur, site web…) et colle-le ici. Première colonne = les noms, colonnes suivantes = les chiffres. ¦ Bir tablo kopyala (tablo, web sitesi…) ve buraya yapıştır. İlk sütun = adlar, sonraki sütunlar = sayılar.
+L’adresse d’une page Wikipédia (n’importe quelle langue) : ses tableaux et ses graphiques s’affichent, choisis-en un. Il faut Internet. ¦ Bir Vikipedi sayfasının adresi (herhangi bir dilde): tabloları ve grafikleri görünür, birini seç. İnternet gerekir.
+Un camembert, des barres ou colonnes, une courbe ou un hémicycle en image : l’app regarde ses couleurs et propose des chiffres, à corriger ensuite. ¦ Resim olarak bir pasta, çubuklar ya da sütunlar, bir eğri ya da yarım daire: uygulama renklerine bakar ve sayılar önerir, sonra düzeltirsin.
+Graphique « {name} » ajouté à Mes graphiques. ¦ Grafik Grafiklerim’e eklendi: “{name}”.
+Lecture de la page… ¦ Sayfa okunuyor…
+{n} lignes ¦ {n} satır
+<b>Images</b> (graphiques à convertir en chiffres) ¦ <b>Resimler</b> (sayıya dönüştürülecek grafikler)
+Image illisible (ou refusée par le site). ¦ Resim okunamıyor (ya da site izin vermedi).
+Pas de couleur franche trouvée (graphique en noir et blanc ?) : remplis le tableau à la main. ¦ Belirgin bir renk bulunamadı (siyah beyaz grafik mi?): tabloyu elle doldur.
+Parts en % de la surface colorée. Les textes ne sont pas lus : donne un nom à chaque part. ¦ Paylar, renkli alanın %’si olarak. Yazılar okunmaz: her paya bir ad ver.
+Sièges comptés (une tache = un siège ; deux sièges collés comptent pour deux). Nomme les groupes. ¦ Sayılan sandalyeler (bir leke = bir sandalye; yapışık iki sandalye iki sayılır). Grupları adlandır.
+Hauteur de la courbe (0 à 100 % de l’image) en 12 points : règle l’échelle avec « Valeur du haut ». ¦ Eğrinin yüksekliği (resmin %0 ile %100’ü arası), 12 noktada: ölçeği “Üst değer” ile ayarla.
+Longueur de chaque barre, la plus longue = 100 : indique sa vraie valeur dans « Valeur du haut », et nomme les barres. ¦ Her çubuğun uzunluğu, en uzunu = 100: gerçek değerini “Üst değer” alanına yaz ve çubukları adlandır.
+C’est un… ¦ Bu bir…
+Sorte de média ¦ Medya türü
+en vie ou décédés ¦ yaşayan ya da ölmüş
+avec ou sans source ¦ kaynaklı ya da kaynaksız
+par sorte de média ¦ medya türüne göre
+l’âge au décès ¦ ölüm yaşı
+l’âge au mariage ¦ evlilik yaşı
+le nombre d’enfants ¦ çocuk sayısı
+l’âge au premier enfant ¦ ilk çocuktaki yaş
+Une de mes listes ¦ Listelerimden biri
+de A à Z ¦ A’dan Z’ye
+de Z à A ¦ Z’den A’ya
+dans l’ordre ¦ sırayla
+Part en % ¦ % olarak pay
+Une personne qui a plusieurs de ces événements dans le même groupe ne compte qu’une fois. ¦ Aynı grupta bu olaylardan birkaçı olan bir kişi yalnızca bir kez sayılır.
+Pour ne garder que certaines personnes : un métier, un nombre d’enfants, un lieu de naissance, une période, un âge au décès, une étiquette, une génération Sosa… Ajoute autant de critères que tu veux : « tous » les veut tous (ET), « au moins un » se contente d’un seul (OU). ¦ Yalnızca bazı kişileri tutmak için: bir meslek, bir çocuk sayısı, bir doğum yeri, bir dönem, bir ölüm yaşı, bir etiket, bir Sosa kuşağı… İstediğin kadar ölçüt ekle: “tümü” hepsini ister (VE), “en az biri” bir tanesiyle yetinir (VEYA).
+Les personnes prises en compte : toute ta base, tes ancêtres ou tes descendants, une branche, une étiquette, une de tes listes, une recherche, ou des personnes que tu choisis. ¦ Hesaba katılan kişiler: tüm veritabanın, ataların ya da torunların, bir kol, bir etiket, listelerinden biri, bir arama ya da seçtiğin kişiler.
+La personne d’où l’on part pour ses ancêtres, ses descendants ou ses branches (elle est comptée avec ses ancêtres et ses descendants). ¦ Ataları, torunları ya da kolları için başlangıç alınan kişi (atalarıyla ve torunlarıyla birlikte sayılır).
+Jusqu’à combien de générations on remonte (ou on descend). 0 = toutes. ¦ Kaç kuşak yukarı (ya da aşağı) gidilir. 0 = tümü.
+Seulement les personnes d’une de tes listes (Réglages → Mes listes). ¦ Yalnızca listelerinden birindeki kişiler (Ayarlar → Listelerim).
+Seulement les personnes dont le nom ou le prénom contient ces lettres. ¦ Yalnızca soyadı ya da adı bu harfleri içeren kişiler.
+Seulement ce qui s’est passé entre ces deux dates, écrites comme dans un acte (1789, vers 1850, mai 1900…). Une seule date suffit. ¦ Yalnızca bu iki tarih arasında olanlar; tarihleri belgedeki gibi yaz (1789, vers 1850, mai 1900…). Tek bir tarih yeterli.
+Seulement les personnes nées entre ces deux dates, écrites comme dans un acte (1789, vers 1850, mai 1900…). Une seule date suffit. ¦ Yalnızca bu iki tarih arasında doğan kişiler; tarihleri belgedeki gibi yaz (1789, vers 1850, mai 1900…). Tek bir tarih yeterli.
+Pour les colonnes empilées, la pyramide, la carte de chaleur… : chaque groupe est coupé en séries (hommes et femmes, ou siècles). ¦ Yığılmış sütunlar, piramit, ısı haritası… için: her grup serilere bölünür (erkekler ve kadınlar ya da yüzyıllar).
+L’ordre des valeurs. « Automatique » : du plus grand au plus petit, ou dans l’ordre du temps pour les dates et les âges. ¦ Değerlerin sırası. “Otomatik”: büyükten küçüğe ya da tarihler ve yaşlar için zaman sırasıyla.
+Combien de valeurs garder, les premières après le tri. 0 = toutes. ¦ Sıralamadan sonra ilk kaç değerin tutulacağı. 0 = tümü.
+Les valeurs au-delà des N premières sont additionnées dans une dernière barre « Autres ». ¦ İlk N değerden sonrakiler son bir “Diğerleri” çubuğunda toplanır.
+Montrer aussi ce qui n’est pas renseigné (sans lieu, sans date, sans métier…) sous le nom « Inconnu ». ¦ Doldurulmamış olanları da (yersiz, tarihsiz, mesleksiz…) “Bilinmiyor” adıyla göster.
+Un nombre, une part en %, ou la moyenne (la médiane) d’une valeur : âge au décès, âge au mariage, nombre d’enfants. ¦ Bir sayı, % olarak bir pay ya da bir değerin ortalaması (ortancası): ölüm yaşı, evlilik yaşı, çocuk sayısı.
+Le diagramme se recalcule à chaque affichage : il suit les changements de ta base. ¦ Diyagram her gösterimde yeniden hesaplanır: veritabanındaki değişiklikleri izler.
+✏️ Sur mesure (critères, ce qu’on compte, regroupé par…) ¦ ✏️ Özel (ölçütler, sayılan şey, gruplama…)
+Âge au décès, hommes et femmes ¦ Ölüm yaşı, erkekler ve kadınlar
+Causes de décès, par siècle ¦ Ölüm nedenleri, yüzyıla göre
+Mariages par mois ¦ Aylara göre evlilikler
+Âge au mariage, hommes et femmes ¦ Evlilik yaşı, erkekler ve kadınlar
+Âge moyen au mariage, par siècle de naissance ¦ Ortalama evlilik yaşı, doğum yüzyılına göre
+Âge au premier enfant, pères et mères ¦ İlk çocuktaki yaş, babalar ve anneler
+Âge moyen au premier enfant, par siècle de naissance ¦ İlk çocuktaki ortalama yaş, doğum yüzyılına göre
+Lieux de naissance (communes) ¦ Doğum yerleri (yerleşim yerleri)
+Métiers des femmes et des hommes ¦ Kadınların ve erkeklerin meslekleri
+Décès par mois ¦ Aylara göre ölümler
+Mes ancêtres, côté père et côté mère ¦ Atalarım, baba tarafı ve anne tarafı
+Médias par nom de famille ¦ Soyadına göre medya
+nées en {a} ¦ doğum yılı: {a}
+periode|en {a} ¦ dönem: {a}
+nées entre {a} et {b} ¦ doğum: {a} ile {b} arası
+periode|entre {a} et {b} ¦ {a} ile {b} arası
+nées depuis {a} ¦ doğum: {a} ve sonrası
+periode|depuis {a} ¦ başlangıç: {a}
+nées jusqu’en {b} ¦ doğum: en geç {b}
+periode|jusqu’en {b} ¦ bitiş: {b}
+au moins un de ces critères (OU) ¦ bu ölçütlerden en az biri (VEYA)
+critere|qui ont ¦ şunlara sahip olan
+critere|{a} ans ¦ {a} yaş
+critere|de {a} à {b} ans ¦ {a} – {b} yaş
+critere|de {a} à {b} ¦ {a} – {b}
+critere|au moins {a} ans ¦ en az {a} yaş
+critere|au moins {a} ¦ en az {a}
+critere|au plus {b} ans ¦ en çok {b} yaş
+critere|au plus {b} ¦ en çok {b}
+nés en {a} ¦ doğum yılı: {a}
+nés entre {a} et {b} ¦ doğum: {a} ile {b} arası
+nés depuis {a} ¦ doğum: {a} ve sonrası
+nés jusqu’en {b} ¦ doğum: en geç {b}
+morts en {a} ¦ ölüm yılı: {a}
+morts entre {a} et {b} ¦ ölüm: {a} ile {b} arası
+morts depuis {a} ¦ ölüm: {a} ve sonrası
+morts jusqu’en {b} ¦ ölüm: en geç {b}
+liste|ou ¦ ya da
+métier « {v} » ¦ meslek “{v}”
+nom « {v} » ¦ soyadı “{v}”
+prénom « {v} » ¦ ad “{v}”
+nés à « {v} » ¦ doğum yeri “{v}”
+morts ou inhumés à « {v} » ¦ ölüm ya da defin yeri “{v}”
+avec un événement à « {v} » ¦ olay yeri “{v}”
+avec un événement dans « {v} » ¦ olay yeri içinde: “{v}”
+à moins de {km} km de « {v} » ¦ “{v}” yerine {km} km’den yakın
+critere|femmes ¦ kadınlar
+critere|hommes ¦ erkekler
+sexe inconnu ¦ cinsiyeti bilinmiyor
+critere|en vie ¦ yaşayan
+critere|décédés ¦ ölmüş
+statut à vérifier ¦ durumu kontrol edilecek
+ayant vécu {r} ¦ yaşadığı dönem: {r}
+âgés {r} à : {types} ¦ yaş {r}, şu olaylarda: {types}
+âgés {r} ¦ yaş: {r}
+mes ancêtres (Sosa) ¦ atalarım (Sosa)
+génération Sosa {r} ¦ Sosa kuşağı {r}
+critere|sans source ¦ kaynaksız
+avec une photo ou un document ¦ fotoğrafı ya da belgesi olan
+critere|parents inconnus ¦ ebeveynleri bilinmiyor
+dans mes favoris ¦ sık kullanılanlarımda
+cause de décès « {v} » ¦ ölüm nedeni “{v}”
+ayant eu : {types} ¦ yaşadığı olaylar: {types}
+étiquette « {v} » ¦ etiket “{v}”
+critere|sauf {x} ¦ hariç: {x}
+Groupe de personnes ¦ Kişi grubu
+gén. ¦ kuş.
+periode|à ¦ –
+🔄 Tenir à jour (relire les chiffres à chaque affichage) ¦ 🔄 Güncel tut (sayıları her gösterimde yeniden oku)
+({n} générations) ¦ ({n} kuşak)
+({n} génération) ¦ ({n} kuşak)
+les ancêtres de {name} ¦ atalar: {name}
+critere|mes ancêtres ¦ atalarım
+les descendants de {name} ¦ torunlar: {name}
+critere|mes descendants ¦ torunlarım
+la branche paternelle de {name} ¦ baba tarafı kolu: {name}
+ma branche paternelle ¦ baba tarafı kolum
+la branche maternelle de {name} ¦ anne tarafı kolu: {name}
+ma branche maternelle ¦ anne tarafı kolum
+l’étiquette « {name} » ¦ etiket “{name}”
+critere|une étiquette ¦ bir etiket
+la liste « {name} » ¦ liste “{name}”
+critere|une de mes listes ¦ listelerimden biri
+les noms qui contiennent « {q} » ¦ “{q}” içeren adlar
+critere|une recherche ¦ bir arama
+{n} personnes choisies ¦ {n} seçili kişi
+{n} personne choisie ¦ {n} seçili kişi
+toute ma base ¦ tüm veritabanım
+Un graphique de l’app ¦ Uygulamadan bir grafik
+Médiane de {value} ({what}) ¦ Ortanca: {value} ({what})
+chaque personne une fois ¦ her kişi bir kez
+personnes {p} ¦ kişiler {p}
+une série par sexe ¦ cinsiyete göre birer seri
+une série par siècle ¦ yüzyıla göre birer seri
+{n} premiers et « Autres » ¦ ilk {n} ve “Diğerleri”
+{n} premier et « Autres » ¦ ilk {n} ve “Diğerleri”
+toutes les valeurs ¦ tüm değerler
+« Inconnu » montré ¦ “Bilinmiyor” gösteriliyor
+unite|en % ¦ % olarak
+Moyenne de {value} ({what}) ¦ Ortalama: {value} ({what})
+{n} premiers ¦ ilk {n}
+{n} premier ¦ ilk {n}
+ayant {t} enfant ¦ çocuk sayısı: {t}
+ayant {t} enfants ¦ çocuk sayısı: {t}
+ayant {t} union ¦ birliktelik sayısı: {t}
+ayant {t} unions ¦ birliktelik sayısı: {t}
+ayant {t} source ¦ kaynak sayısı: {t}
+ayant {t} sources ¦ kaynak sayısı: {t}
+Gris-bleu calme, traits fins, quadrillage léger. ¦ Sakin gri-mavi, ince çizgiler, hafif ızgara.
+Papier ancien, encre brune, police à empattements. ¦ Eski kâğıt, kahverengi mürekkep, tırnaklı yazı tipi.
+Couleurs franches, traits épais, coins arrondis. ¦ Canlı renkler, kalın çizgiler, yuvarlak köşeler.
+Noir et blanc imprimable ¦ Yazdırılabilir siyah beyaz
+Gris du noir au clair, quadrillage marqué : lisible imprimé sans couleur. ¦ Siyahtan açığa griler, belirgin ızgara: renksiz yazdırınca da okunur.
+Couleurs qu’on distingue même en voyant mal certaines couleurs (Okabe-Ito). ¦ Bazı renkleri iyi göremeyenlerin bile ayırt edebildiği renkler (Okabe-Ito).
+{n} petits diagrammes, même échelle (de {lo} à {hi}) ¦ {n} küçük diyagram, aynı ölçek ({lo} – {hi})
+Repère de date ¦ Tarih işareti
+Revenir au dessin complet ¦ Tam çizime dön
+Enregistrer la lecture en vidéo ¦ Oynatmayı video olarak kaydet
+Réglages → Accessibilité → Mouvement ¦ Ayarlar → Erişilebilirlik → Hareket
+Mouvements réduits : une étape à la fois, sans glisser ¦ Azaltılmış hareket: her seferinde bir adım, kaydırma yok
+Lire les années ¦ Yılları oynat
+Mettre en pause ¦ Duraklat
+rien à filmer ¦ kaydedilecek bir şey yok
+✓ Vidéo exportée ({format}). ¦ ✓ Video dışa aktarıldı ({format}).
+Vidéo impossible : {err} ¦ Video yapılamıyor: {err}
+Les couleurs et réglages du type, comme avant ¦ Türün renkleri ve ayarları, eskisi gibi
+Selon le type ¦ Türe göre
+Marqué ¦ Belirgin
+Tous mes diagrammes prennent ce style (même ceux qui avaient le leur) ¦ Tüm diyagramlarım bu stili alır (kendi stili olanlar bile)
+Les nouveaux diagrammes, et ceux sans style à eux, le prennent ¦ Yeni diyagramlar ve kendi stili olmayanlar bunu alır
+Appliquer à tous les diagrammes ¦ Tüm diyagramlara uygula
+⭐ Style par défaut ¦ ⭐ Varsayılan stil
+à (facultatif) ¦ bitiş (isteğe bağlı)
+Retirer l’annotation ¦ Notu çıkar
+Aucune annotation : ajoute une flèche, un texte, une zone ou un repère de date. ¦ Not yok: bir ok, bir yazı, bir alan ya da bir tarih işareti ekle.
+Toutes les séries ¦ Tüm seriler
+Nom de la ligne ¦ Çizginin adı
+Échelle logarithmique (très grands écarts) ¦ Logaritmik ölçek (çok büyük farklar)
+Deuxième axe (à droite) ¦ İkinci eksen (sağda)
+{name} (en courbe) ¦ {name} (eğri olarak)
+Les séries du tableau ¦ Tablonun serileri
+Le sexe ¦ Cinsiyet
+Le siècle ¦ Yüzyıl
+La branche (côté père / côté mère) ¦ Kol (baba tarafı / anne tarafı)
+Le lieu (département) ¦ Yer (département)
+Le lieu (pays) ¦ Yer (ülke)
+La génération ¦ Kuşak
+Un seul diagramme ¦ Tek bir diyagram
+Répéter le diagramme par ¦ Diyagramı şuna göre tekrarla
+Pour répéter par sexe, siècle, branche, lieu ou génération : prends tes chiffres avec « 🧮 Compter dans ma base » (onglet « Depuis l’app ») et coche « Tenir à jour ». ¦ Cinsiyete, yüzyıla, kola, yere ya da kuşağa göre tekrarlamak için: sayılarını “🧮 Veritabanımda say” ile al (“Uygulamadan” sekmesi) ve “Güncel tut”u işaretle.
+Les données vont de {a} à {b} : le curseur ▶ sous l’aperçu les fait apparaître année après année. ¦ Veriler {a} ile {b} arasında: önizlemenin altındaki ▶ kaydırıcısı onları yıl yıl gösterir.
+Montrer aussi le curseur ▶ là où le diagramme est posé (Graphiques, fiches, tableau de bord) ¦ ▶ kaydırıcısını diyagramın yerleştirildiği yerde de göster (Grafikler, not kartları, gösterge paneli)
+Recommencer au début (boucle) ¦ Baştan yeniden başla (döngü)
+Un pas de ¦ Adım
+unite|ans ¦ yıl
+« Réduire les animations » est demandé : la lecture avance d’une étape par seconde, sans glisser. ¦ “Animasyonları azalt” açık: oynatma saniyede bir adım ilerler, kaydırma yok.
+Palette, police, fond, traits, coins, taille du texte, quadrillage : choisis un style prêt, retouche-le, garde-le sous un nom. ¦ Palet, yazı tipi, arka plan, çizgiler, köşeler, yazı boyutu, ızgara: hazır bir stil seç, düzenle, bir adla sakla.
+Pose-les ici, puis glisse-les sur l’aperçu (et leurs poignées pour les agrandir). Elles partent avec le diagramme à l’export et à l’impression. ¦ Onları buraya yerleştir, sonra önizlemede sürükle (büyütmek için tutamaçlarını da). Dışa aktarırken ve yazdırırken diyagramla birlikte giderler.
+📏 Lignes de repère et axes ¦ 📏 Referans çizgileri ve eksenler
+Moyenne et médiane se calculent seules ; l’objectif et la valeur sont à toi. ¦ Ortalama ve ortanca kendiliğinden hesaplanır; hedef ve değer senin elinde.
+Un petit diagramme par groupe, côte à côte, avec la même échelle pour comparer d’un coup d’œil. ¦ Her grup için küçük bir diyagram, yan yana, bir bakışta karşılaştırmak için aynı ölçekle.
+▶ Lecture dans le temps ¦ ▶ Zaman içinde oynatma
+Aucun chiffre pour ce découpage. ¦ Bu bölme için sayı yok.
+{n} petits diagrammes, même échelle. ¦ {n} küçük diyagram, aynı ölçek.
+Baptêmes et sépultures ¦ Vaftizler ve defin kayıtları
+Police du diagramme ¦ Diyagramın yazı tipi
+⭐ « {name} » : style par défaut des nouveaux diagrammes et de ceux sans style à eux. ¦ ⭐ “{name}”: yeni diyagramların ve kendi stili olmayanların varsayılan stili.
+Plus de style par défaut ¦ Varsayılan stil yok
+60 annotations au plus. ¦ En çok 60 not.
+Guerre de 14 ¦ 1914 Savaşı
+Mon repère ¦ İşaretim
+Mon texte ¦ Yazım
+Ligne de repère retirée ¦ Referans çizgisi çıkarıldı
+Annotation retirée ¦ Not çıkarıldı
+(retouché) ¦ (düzenlendi)
+Style « {name} » appliqué à {n} diagrammes ¦ “{name}” stili {n} diyagrama uygulandı
+Style « {name} » appliqué à {n} diagramme ¦ “{name}” stili {n} diyagrama uygulandı
+Mes styles enregistrés ¦ Kayıtlı stillerim
+ce style (palette, police, fond, traits, coins, taille du texte, quadrillage) ¦ bu stil (palet, yazı tipi, arka plan, çizgiler, köşeler, yazı boyutu, ızgara)
+Style « {name} » appliqué à ce diagramme. ¦ “{name}” stili bu diyagrama uygulandı.
+Style « {name} » importé. ¦ “{name}” stili içe aktarıldı.
+Annotation : glisser pour la déplacer, Suppr pour la retirer ¦ Not: taşımak için sürükle, çıkarmak için Sil tuşu
+Texte de l’annotation ¦ Notun yazısı
+Hauteur du dessin (0 = automatique) ¦ Çizimin yüksekliği (0 = otomatik)
+Ajoute la personne du milieu (génération 0), puis ses ascendants (−1, −2…) et ses descendants (1, 2…). ¦ Ortadaki kişiyi (kuşak 0), sonra atalarını (−1, −2…) ve torunlarını (1, 2…) ekle.
+Gén. +{g} ¦ Kuş. +{g}
+Le sablier de {name} ¦ Kum saati: {name}
+Ajoute des tâches : nom, début, fin (dates ou années), avancement en %. ¦ Görev ekle: ad, başlangıç, bitiş (tarih ya da yıl), % olarak ilerleme.
+Diagramme de Gantt : {n} tâches. ¦ Gantt şeması: {n} görev.
+Diagramme de Gantt : {n} tâche. ¦ Gantt şeması: {n} görev.
+Ma recherche sur les {name} ¦ Araştırmam: {name} ailesi
+Relevés de Naves (1700-1792) ¦ Naves dökümleri (1700-1792)
+État civil de Tulle ¦ Tulle nüfus kayıtları
+Notaires (contrats de mariage) ¦ Noterler (evlilik sözleşmeleri)
+Recensements 1836-1936 ¦ Nüfus sayımları 1836-1936
+Registres matricules ¦ Askerlik kayıt defterleri
+Visite à Arnac-la-Poste ¦ Arnac-la-Poste ziyareti
+Terrain ¦ Saha çalışması
+Mon idée ¦ Fikrim
+Ajoute des branches (et, à côté, leurs idées). ¦ Dallar ekle (ve yanlarına fikirlerini).
+Carte mentale « {name} » : {n} branches. ¦ Zihin haritası “{name}”: {n} dal.
+Carte mentale « {name} » : {n} branche. ¦ Zihin haritası “{name}”: {n} dal.
+Mes pistes de recherche ¦ Araştırma ipuçlarım
+Famille {name} ¦ {name} ailesi
+Registres de Naves ¦ Naves kayıt defterleri
+Notaires de Tulle ¦ Tulle noterleri
+Laboureurs ¦ Çiftçiler
+Tisserands ¦ Dokumacılar
+Qui était Jeanne Roux ? ¦ Jeanne Roux kimdi?
+Pourquoi le départ en 1902 ? ¦ 1902’de neden gidildi?
+Photos ¦ Fotoğraflar
+Mariage 1919 ¦ Evlilik 1919
+Maison de Naves ¦ Naves’teki ev
+Cousins ¦ Kuzenler
+Branche de Paris ¦ Paris kolu
+ADN : 3 correspondances ¦ DNA: 3 eşleşme
+Ajoute des noms et leurs chiffres. ¦ Adlar ve sayılarını ekle.
+Barres en cercle : {n} lignes, la plus longue « {name} » ({v}). ¦ Daire şeklinde çubuklar: {n} satır, en uzunu “{name}” ({v}).
+Les prénoms les plus donnés ¦ En çok verilen adlar
+fois ¦ kez
+Ajoute des noms (patronymes, métiers, lieux…) et leurs chiffres. ¦ Adlar (soyadları, meslekler, yerler…) ve sayılarını ekle.
+Bulles groupées : {n} bulles ({k} trop petites pour la place). ¦ Gruplanmış baloncuklar: {n} baloncuk ({k} tanesi yer için çok küçük).
+Bulles groupées : {n} bulles. ¦ Gruplanmış baloncuklar: {n} baloncuk.
+Les noms de famille de l’arbre ¦ Ağaçtaki soyadları
+Ajoute des objectifs : un nom, où tu en es, et le but (ex. 12 sur 16 ancêtres trouvés). ¦ Hedef ekle: bir ad, nerede olduğun ve hedef (örn. 16 atadan 12’si bulundu).
+{name} : {v} sur {goal} ¦ {name}: {v} / {goal}
+Anneaux d’avancement : {n} objectifs. ¦ İlerleme halkaları: {n} hedef.
+Anneaux d’avancement : {n} objectifs, de {a} à {b} %. ¦ İlerleme halkaları: {n} hedef, %{a} – %{b}.
+Grands-parents trouvés ¦ Bulunan büyükanne ve büyükbabalar
+Actes de naissance sourcés ¦ Kaynaklı doğum belgeleri
+Photos identifiées ¦ Tanımlanmış fotoğraflar
+Quadrisaïeuls ¦ Dördüncü kuşak büyükanne ve büyükbabalar
+Génération 6 ¦ Kuşak 6
+Génération 7 ¦ Kuşak 7
+Génération +4 ¦ Kuşak +4
+Génération +{g} ¦ Kuşak +{g}
+Les noms de famille ¦ Soyadları
+Les communes de naissance ¦ Doğum yerleşim yerleri
+Les siècles de naissance ¦ Doğum yüzyılları
+{n}e siècle ¦ {n}. yüzyıl
+Prendre dans mon arbre ¦ Ağacımdan al
+Rien trouvé dans l’arbre pour ce choix. ¦ Bu seçim için ağaçta bir şey bulunamadı.
+{n} lignes prises dans l’arbre. ¦ Ağaçtan {n} satır alındı.
+⏳ Le sablier de quelqu’un de mon arbre ¦ ⏳ Ağacımdaki birinin kum saati
+Ses ancêtres au-dessus, ses descendants au-dessous, avec leurs dates. ¦ Ataları yukarıda, torunları aşağıda, tarihleriyle.
+Générations au-dessus ¦ Yukarıdaki kuşaklar
+Générations au-dessous ¦ Aşağıdaki kuşaklar
+📅 Les vies côte à côte ¦ 📅 Yan yana hayatlar
+Une barre par personne, de sa naissance à son décès (ou à aujourd’hui). ¦ Her kişi için bir çubuk, doğumundan ölümüne (ya da bugüne).
+Ses ancêtres directs ¦ Doğrudan ataları
+Sa famille proche (parents, frères et sœurs, enfants) ¦ Yakın ailesi (anne baba, kardeşler, çocuklar)
+Ses descendants ¦ Torunları
+Les vies autour de {name} ¦ Çevresindeki hayatlar: {name}
+🧠 Une personne et ses branches ¦ 🧠 Bir kişi ve kolları
+Au centre la personne ; autour, ses enfants (et leurs enfants), ou les métiers et les communes de ses ancêtres. ¦ Ortada kişi; çevresinde çocukları (ve onların çocukları) ya da atalarının meslekleri ve yerleşim yerleri.
+Les branches ¦ Kollar
+Ses enfants, et leurs enfants ¦ Çocukları ve onların çocukları
+Les métiers de ses ancêtres ¦ Atalarının meslekleri
+Les communes de naissance de ses ancêtres ¦ Atalarının doğum yerleşim yerleri
+La descendance de {name} ¦ Torunları: {name}
+D’où viennent les ancêtres de {name} ¦ Ataları nereden geliyor: {name}
+🎯 Un classement de mon arbre ¦ 🎯 Ağacımdan bir sıralama
+Les plus fréquents dans toute la base, en barres autour d’un cercle. ¦ Tüm veritabanında en sık görülenler, bir dairenin çevresinde çubuklar halinde.
+fiches ¦ kart
+🫧 Les bulles de mon arbre ¦ 🫧 Ağacımın baloncukları
+Une bulle par nom, métier ou commune : plus il y a de fiches, plus elle est grosse. ¦ Her ad, meslek ya da yerleşim yeri için bir baloncuk: kart ne kadar çoksa baloncuk o kadar büyük.
+Les bulles ¦ Baloncuklar
+⭕ Où j’en suis dans mon arbre ¦ ⭕ Ağacımda nerede olduğum
+Un anneau par objectif : plein, c’est fini. ¦ Her hedef için bir halka: doluysa bitmiştir.
+Les objectifs ¦ Hedefler
+Les ancêtres trouvés, génération par génération ¦ Bulunan atalar, kuşak kuşak
+Les fiches complètes (dates, lieux, métier) ¦ Tam kartlar (tarihler, yerler, meslek)
+Date de décès (personnes décédées) ¦ Ölüm tarihi (ölmüş kişiler)
+Mes fiches complètes ¦ Tam kartlarım
+Les ancêtres de {name} : où j’en suis ¦ Nerede olduğum — ataları: {name}
+Les personnes (génération : 0 = la personne, −1 = parents, 1 = enfants…) ¦ Kişiler (kuşak: 0 = kişi, −1 = anne baba, 1 = çocuklar…)
+Couleur des ascendants ¦ Ataların rengi
+Couleur de la personne ¦ Kişinin rengi
+Couleur des descendants ¦ Torunların rengi
+Hauteur d’une case ¦ Kutu yüksekliği
+Écart entre générations ¦ Kuşaklar arası boşluk
+Traits vers la personne ¦ Kişiye giden çizgiler
+Nom des générations à gauche ¦ Kuşak adları solda
+Les tâches ¦ Görevler
+Début (date ou année) ¦ Başlangıç (tarih ya da yıl)
+Une par tâche ¦ Her görev için bir tane
+Couleur (une seule) ¦ Renk (tek)
+Montrer l’avancement ¦ İlerlemeyi göster
+Écrire le % ¦ %’yi yaz
+Trait « aujourd’hui » ¦ “Bugün” çizgisi
+Couleur du trait « aujourd’hui » ¦ “Bugün” çizgisinin rengi
+Les branches et leurs idées (une ligne par idée) ¦ Dallar ve fikirleri (her fikir için bir satır)
+Le mot du centre ¦ Ortadaki sözcük
+Couleur du centre ¦ Ortanın rengi
+Branches en courbes ¦ Eğri dallar
+Épaisseur des branches ¦ Dalların kalınlığı
+Une par ligne ¦ Her satır için bir tane
+Chiffre d’un tour complet (vide = le plus grand) ¦ Tam bir turun değeri (boş = en büyüğü)
+Une par bulle ¦ Her baloncuk için bir tane
+Écart entre les bulles ¦ Baloncuklar arası boşluk
+Le but ¦ Hedef
+Anneaux l’un dans l’autre ¦ İç içe halkalar
+Un anneau par objectif, côte à côte ¦ Her hedef için bir halka, yan yana
+Par ligne (côte à côte) ¦ Satır başına (yan yana)
+1er siècle ¦ 1. yüzyıl
+nombre|{n}e siècle ¦ {n}. yüzyıl
+⚠ Lieux sans position : {list} ¦ ⚠ Konumu olmayan yerler: {list}
+mentions par département ¦ département başına geçiş sayısı
+Choisis un nom dans « Depuis l’app » (ou tape des lieux et des dates). ¦ “Uygulamadan” içinde bir ad seç (ya da yerler ve tarihler yaz).
+Aucune mention au {when}. ¦ {when} için hiç geçmiyor.
+Aucune mention pour ce nom. ¦ Bu ad hiç geçmiyor.
+Carte du nom {name} : {n} au {when} dans {d}. ¦ Ad haritası: {name} — {n} ({when}, {d}).
+Carte du nom {name} : {n} au {when}. ¦ Ad haritası: {name} — {n} ({when}).
+Carte du nom {name} : {n} dans {d}. ¦ Ad haritası: {name} — {n} ({d}).
+Carte du nom {name} : {n}. ¦ Ad haritası: {name} — {n}.
+jusqu’en {y} ¦ en geç {y}
+années {y} ¦ {y} yılları
+peu → beaucoup ¦ az → çok
+peu ¦ az
+beaucoup ¦ çok
+Prends les événements de ton arbre (« Depuis l’app »). ¦ Ağacındaki olayları al (“Uygulamadan”).
+Carte de chaleur : {n} ({when}). ¦ Isı haritası: {n} ({when}).
+Carte de chaleur : {n}. ¦ Isı haritası: {n}.
+Relie des correspondances ADN à leur fiche (onglet ADN), puis « Depuis l’app ». ¦ DNA eşleşmelerini kartlarına bağla (DNA sekmesi), sonra “Uygulamadan”.
+=lieu d’ancêtre commun ¦ ortak ata yeri|ortak ata yeri
+=mention ¦ geçiş|geçiş
+=recherche vue ¦ yapılan arama|yapılan arama
+=à faire ou à revoir ¦ yapılacak ya da yeniden bakılacak|yapılacak ya da yeniden bakılacak
+Carte des cousins ADN : {n}. ¦ DNA kuzenleri haritası: {n}.
+En partie, à revoir ¦ Kısmen, yeniden bakılacak
+Prévu, pas fait ¦ Planlandı, yapılmadı
+Toutes les sortes d’actes ¦ Tüm belge türleri
+Naissances et baptêmes ¦ Doğumlar ve vaftizler
+Décès et sépultures ¦ Ölümler ve defin kayıtları
+Tout vu ¦ Hepsine bakıldı
+Trous à couvrir ¦ Doldurulacak boşluklar
+Clic : le détail ¦ Tıkla: ayrıntılar
+Rien pour ce choix (sorte d’acte, période). ¦ Bu seçim için bir şey yok (belge türü, dönem).
+Prends tes dépouillements, battues et trous (« Depuis l’app »). ¦ Dökümlerini, taramalarını ve boşluklarını al (“Uygulamadan”).
+Carte de tes recherches : {n} — {g} tout vu, {o} en partie, {r} avec des trous. ¦ Araştırmalarının haritası: {n} — {g} tamamen bakıldı, {o} kısmen, {r} boşluklu.
+✓ Ce qui a été vu ¦ ✓ Bakılanlar
+⚠️ Ce qui manque ou reste à revoir ¦ ⚠️ Eksik olanlar ya da yeniden bakılacaklar
+Rien de vu ici pour l’instant. ¦ Burada henüz bakılan bir şey yok.
+Rien ne manque ici. ¦ Burada eksik bir şey yok.
+CARTE DE TES RECHERCHES ¦ ARAŞTIRMALARININ HARİTASI
+Données prises dans l’app. ¦ Uygulamadan alınan veriler.
+Quels événements ¦ Hangi olaylar
+Naissances, mariages, décès, résidences ¦ Doğumlar, evlilikler, ölümler, ikametler
+🔤 Un nom de ta généalogie ¦ 🔤 Soy ağacından bir ad
+Choisis un nom dans la liste (les plus fréquents d’abord) ou une personne : son nom est pris. Jamais un vivant ni une fiche confidentielle. ¦ Listeden bir ad (en sık görülenler önce) ya da bir kişi seç: kişinin soyadı alınır. Asla yaşayan biri ya da gizli bir kart değil.
+ou une personne ¦ ya da bir kişi
+Avec les variantes du même groupe de noms ¦ Aynı ad grubundaki varyantlarla
+Aucun nom ¦ Ad yok
+Choisis un nom. ¦ Bir ad seç.
+Le nom {name}, siècle par siècle ¦ Ad: {name}, yüzyıl yüzyıl
+Avec {list} ¦ Şunlarla: {list}
+Aucun événement avec un lieu pour ce nom. ¦ Bu ad için yeri olan bir olay yok.
+{n} du nom {name}. ¦ Ad: {name} — {n}.
+🔥 Les événements de ton arbre ¦ 🔥 Ağacındaki olaylar
+Chaque événement daté qui a un lieu compte. Le curseur ▶ passe les décennies une à une. ¦ Tarihli ve yeri olan her olay sayılır. ▶ kaydırıcısı on yılları tek tek geçer.
+Aucun événement daté avec un lieu. ¦ Tarihli ve yeri olan bir olay yok.
+🧬 Tes correspondances ADN ¦ 🧬 DNA eşleşmelerin
+Les correspondances reliées à une fiche de l’arbre (onglet ADN) : l’ancêtre commun calculé et ses lieux. Les noms des correspondances (souvent vivantes) ne sont mis que si tu le demandes. ¦ Ağaçtaki bir karta bağlı eşleşmeler (DNA sekmesi): hesaplanan ortak ata ve onun yerleri. Eşleşmelerin adları (çoğu zaman yaşayan kişiler) yalnızca sen istersen yazılır.
+Écrire le nom des correspondances (pas pour un export partagé) ¦ Eşleşmelerin adlarını yaz (paylaşılan bir dışa aktarım için değil)
+Aucun test ADN ¦ DNA testi yok
+Aucun ancêtre commun avec un lieu : relie des correspondances à leur fiche dans l’onglet ADN. ¦ Yeri olan ortak ata yok: DNA sekmesinde eşleşmeleri kartlarına bağla.
+🔎 Tes recherches ¦ 🔎 Araştırmaların
+Les dépouillements (registres consultés), les communes des battues et les actes qui manquent à tes ancêtres (« Que manque-t-il ? »). ¦ Dökümler (bakılan kayıt defterleri), taramaların yerleşim yerleri ve atalarında eksik olan belgeler (“Ne eksik?”).
+Aucune recherche ni aucun trou avec une commune placée. ¦ Yerleşim yeri konumlanmış bir araştırma ya da boşluk yok.
+Correspondance n° 1 ¦ Eşleşme no. 1
+Correspondance n° 2 ¦ Eşleşme no. 2
+Correspondance n° 3 ¦ Eşleşme no. 3
+Correspondance n° 4 ¦ Eşleşme no. 4
+Correspondance n° 5 ¦ Eşleşme no. 5
+Registres paroissiaux ¦ Kilise kayıt defterleri
+Registre abîmé ¦ Hasarlı kayıt defteri
+Prévu ¦ Planlandı
+Cadrer tout seul sur les points ¦ Noktalara göre kendiliğinden çerçevele
+Comme le type ¦ Türdeki gibi
+Couleur de « peu » ¦ “Az” rengi
+Couleur de « beaucoup » ¦ “Çok” rengi
+Les mentions du nom (une par ligne) ¦ Adın geçtiği yerler (her biri için bir satır)
+Lieu (« Auch », « Auch 43.65, 0.59 ») ¦ Yer (“Auch”, “Auch 43.65, 0.59”)
+N° du département ¦ Département no.
+Nom montré (vide = toutes les lignes) ¦ Gösterilen ad (boş = tüm satırlar)
+🔤 Ce nom sur Géopatronyme (1891-1990) ↗ ¦ 🔤 Bu ad Géopatronyme’de (1891-1990) ↗
+Choisis un nom : un lien ouvrira sa répartition en France de 1891 à 1990 (Géopatronyme). ¦ Bir ad seç: bir bağlantı, adın 1891’den 1990’a Fransa’daki dağılımını açar (Géopatronyme).
+Départements colorés ¦ Renkli départementlar
+Des ronds par lieu ¦ Yer başına daireler
+Siècle montré (une année ; vide = tous) ¦ Gösterilen yüzyıl (bir yıl; boş = tümü)
+Écrire le nombre sur les départements ¦ Sayıyı départementların üstüne yaz
+Carte des patronymes : {n} mentions. ¦ Soyadları haritası: {n} geçiş.
+Les événements (un par ligne) ¦ Olaylar (her biri için bir satır)
+Décennie montrée (une année ; vide = toutes) ¦ Gösterilen on yıl (bir yıl; boş = tümü)
+La décennie seule ¦ Yalnızca o on yıl
+Tout jusqu’à cette décennie ¦ Bu on yıla kadar her şey
+La même pour toutes les décennies ¦ Tüm on yıllar için aynı
+Propre à chaque décennie ¦ Her on yıla özgü
+Finesse (cases sur la largeur) ¦ İncelik (genişlik boyunca hücre)
+Étalement ¦ Yayılma
+Où vivait la famille, décennie par décennie ¦ Ailenin yaşadığı yer, on yıl on yıl
+Carte de chaleur : {n} événements. ¦ Isı haritası: {n} olay.
+Les lieux des ancêtres communs ¦ Ortak ataların yerleri
+Selon le groupe ¦ Gruba göre
+Selon les cM partagés ¦ Paylaşılan cM’ye göre
+Là où plusieurs correspondances ¦ Birden çok eşleşmenin olduğu yerler
+Mes cousins ADN : où vivaient nos ancêtres communs ¦ DNA kuzenlerim: ortak atalarımızın yaşadığı yerler
+Carte des cousins ADN : {n} lieux. ¦ DNA kuzenleri haritası: {n} yer.
+Les recherches, commune par commune ¦ Araştırmalar, yerleşim yeri yerleşim yeri
+Noms des communes ¦ Yerleşim yerlerinin adları
+Les trous et les plus remplies ¦ Boşluklar ve en dolu olanlar
+Mes recherches dans le Gers ¦ Gers’teki araştırmalarım
+Carte de tes recherches : {n} lignes. ¦ Araştırmalarının haritası: {n} satır.
+{g} générations ¦ {g} kuşak
+Ma branche paternelle (côté père) ¦ Baba tarafı kolum
+Ma branche maternelle (côté mère) ¦ Anne tarafı kolum
+Avant la Révolution (jusqu’en 1789) ¦ Devrim’den önce (1789’a kadar)
+Au XVIIIe siècle ¦ 18. yüzyılda
+Au XIXe siècle ¦ 19. yüzyılda
+Naissances par lieu ¦ Yere göre doğumlar
+Naissances de mes ancêtres ¦ Atalarımın doğumları
+Décès par lieu ¦ Yere göre ölümler
+Mariages par lieu ¦ Yere göre evlilikler
+Naissances, mariages et décès ¦ Doğumlar, evlilikler ve ölümler
+Personnes différentes par lieu ¦ Yere göre farklı kişiler
+Familles (patronymes différents) par lieu ¦ Yere göre aileler (farklı soyadları)
+Âge moyen au décès par lieu ¦ Yere göre ortalama ölüm yaşı
+Actes trouvés (événements avec une source) ¦ Bulunan belgeler (kaynaklı olaylar)
+Naissances au XIXe siècle ¦ 19. yüzyılda doğumlar
+Naissances avant la Révolution ¦ Devrim’den önceki doğumlar
+Tout au XIXe siècle ¦ 19. yüzyıldaki her şey
+Tout, avant la Révolution ¦ Her şey, Devrim’den önce
+Les anniversaires de mes ancêtres ¦ Atalarımın doğum günleri
+Mariages de mes ancêtres ¦ Atalarımın evlilikleri
+Ses parents et ses enfants ¦ Anne babası ve çocukları
+Grands-parents et petits-enfants ¦ Büyükanne ve büyükbabalar ile torunlar
+Le plus loin possible ¦ Olabildiğince uzağa
+Les vies de ses ancêtres (3 générations) ¦ Atalarının hayatları (3 kuşak)
+Sa famille proche ¦ Yakın ailesi
+Les vies de ses descendants ¦ Torunlarının hayatları
+Ses enfants et petits-enfants ¦ Çocukları ve torunları
+Les communes de ses ancêtres ¦ Atalarının yerleşim yerleri
+Les ancêtres trouvés par génération ¦ Kuşağa göre bulunan atalar
+Les fiches complètes ¦ Tam kartlar
+Taux de recherche de mes ancêtres (5 générations) ¦ Atalarımın araştırma oranı (5 kuşak)
+Régions de naissance (6 générations) ¦ Doğum bölgeleri (6 kuşak)
+Départements de naissance (6 générations) ¦ Doğum départementları (6 kuşak)
+Pays de naissance (8 générations) ¦ Doğum ülkeleri (8 kuşak)
+Communes de naissance (5 générations) ¦ Doğum yerleşim yerleri (5 kuşak)
+Métiers de mes ancêtres (5 générations) ¦ Atalarımın meslekleri (5 kuşak)
+Siècles de naissance (8 générations) ¦ Doğum yüzyılları (8 kuşak)
+Noms de famille (6 générations) ¦ Soyadları (6 kuşak)
+Hommes et femmes (4 générations) ¦ Erkekler ve kadınlar (4 kuşak)
+Le plus loin possible (10 générations) ¦ Olabildiğince uzağa (10 kuşak)
+Toute la descendance connue (8 générations) ¦ Bilinen tüm torunlar (8 kuşak)
+Toute la descendance connue (10 générations) ¦ Bilinen tüm torunlar (10 kuşak)
+Ses liens directs (témoins, parrains, marraines) ¦ Doğrudan bağları (tanıklar, vaftiz babaları, vaftiz anneleri)
+Ses liens et les liens de ses liens ¦ Bağları ve bağlarının bağları
+Tous les liens de ma base ¦ Veritabanımdaki tüm bağlar
+Implexe : un même ancêtre par plusieurs chemins ¦ Implex (tekrarlanan atalar): aynı ataya birkaç yoldan ulaşmak
+Témoins, parrains et marraines ¦ Tanıklar, vaftiz babaları ve vaftiz anneleri
+Mes ancêtres et les fiches avec une source ¦ Atalarım ve kaynaklı kartlar
+Avec un portrait, avec une source ¦ Portreli, kaynaklı
+Mes ancêtres, avec portrait, avec source ¦ Atalarım, portreli, kaynaklı
+Vivants, avec un portrait, avec une source ¦ Yaşayanlar, portreli, kaynaklı
+Mes ancêtres, hommes, avec source ¦ Atalarım, erkekler, kaynaklı
+Les vies de toute ma base ¦ Tüm veritabanımdaki hayatlar
+Décès seulement ¦ Yalnızca ölümler
+Lieu de naissance → lieu de décès ¦ Doğum yeri → ölüm yeri
+Lieu de naissance → lieu du mariage ¦ Doğum yeri → evlilik yeri
+D’une génération à l’autre ¦ Bir kuşaktan ötekine
+Mes ancêtres : naissance → décès ¦ Atalarım: doğum → ölüm
+Mes ancêtres : d’une génération à l’autre ¦ Atalarım: bir kuşaktan ötekine
+Au XIXe siècle : naissance → décès ¦ 19. yüzyılda: doğum → ölüm
+Sa vie : les étapes avec un lieu ¦ Hayatı: yeri olan aşamalar
+Sa vie : toutes les étapes (même sans lieu) ¦ Hayatı: tüm aşamalar (yeri olmasa da)
+Avant la Révolution ¦ Devrim’den önce
+Mes parents et grands-parents (3 générations) ¦ Anne babam ve büyükanne ve büyükbabalarım (3 kuşak)
+Le XVIIIe siècle, année par année ¦ 18. yüzyıl, yıl yıl
+Le XIXe siècle, année par année ¦ 19. yüzyıl, yıl yıl
+Mes ancêtres, par 5 ans ¦ Atalarım, 5 yıllık dilimlerle
+Qui vit aujourd’hui ¦ Bugün kim yaşıyor
+Qui vivait en {y} ¦ Kim yaşıyordu — yıl: {y}
+Ses frères et sœurs (1 génération) ¦ Kardeşleri (1 kuşak)
+Ses cousins germains (2 générations) ¦ Birinci dereceden kuzenleri (2 kuşak)
+Ses cousins issus de germains (3 générations) ¦ İkinci dereceden kuzenleri (3 kuşak)
+Les cousins germains (2 générations) ¦ Birinci dereceden kuzenler (2 kuşak)
+Les cousins issus de germains (3 générations) ¦ İkinci dereceden kuzenler (3 kuşak)
+Jusqu’à 4 générations, tous les liens ¦ 4 kuşağa kadar, tüm bağlar
+Jusqu’à 6 générations, tous les liens ¦ 6 kuşağa kadar, tüm bağlar
+Moi, mes parents et mes grands-parents ¦ Ben, anne babam ve büyükanne ve büyükbabalarım
+Moi et mes parents ¦ Ben ve anne babam
+Mes parents, moi et mes enfants ¦ Anne babam, ben ve çocuklarım
+Le plus loin possible (14 générations) ¦ Olabildiğince uzağa (14 kuşak)
+Ce que je sais (6 générations) ¦ Bildiklerim (6 kuşak)
+Taux de recherche (8 générations) ¦ Araştırma oranı (8 kuşak)
+Métiers (5 générations) ¦ Meslekler (5 kuşak)
+Hommes et femmes (5 générations) ¦ Erkekler ve kadınlar (5 kuşak)
+Les villages des deux époux (10 lieux) ¦ İki eşin köyleri (10 yer)
+Les villages des deux époux (20 lieux) ¦ İki eşin köyleri (20 yer)
+Le village de chacun → le lieu du mariage (10 lieux) ¦ Her birinin köyü → evlilik yeri (10 yer)
+Les 6 villages principaux ¦ 6 ana köy
+Âge au décès, par siècle ¦ Ölüm yaşı, yüzyıla göre
+Mes ancêtres : âge au décès, par siècle ¦ Atalarım: ölüm yaşı, yüzyıla göre
+Ses grands-parents et ses petits-enfants ¦ Büyükanne ve büyükbabaları ile torunları
+Quatre générations d’ancêtres ¦ Dört kuşak ata
+Six générations d’ancêtres ¦ Altı kuşak ata
+Ses descendants sur 4 générations ¦ 4 kuşak boyunca torunları
+Trois générations de chaque côté ¦ Her iki taraftan üç kuşak
+Une courbe par siècle de naissance ¦ Her doğum yüzyılı için bir eğri
+Branche paternelle et maternelle ¦ Baba tarafı ve anne tarafı kolu
+Mes ancêtres, génération par génération ¦ Atalarım, kuşak kuşak
+Une seule courbe pour toute ma base ¦ Tüm veritabanım için tek bir eğri
+Nés au XIXe siècle, femmes et hommes ¦ 19. yüzyılda doğanlar, kadınlar ve erkekler
+Père → fils, sur 3 générations ¦ Baba → oğul, 3 kuşak boyunca
+Père → fils, sur 5 générations ¦ Baba → oğul, 5 kuşak boyunca
+Parents → enfants, sur 3 générations ¦ Anne baba → çocuklar, 3 kuşak boyunca
+Mes ancêtres : père → fils ¦ Atalarım: baba → oğul
+Les 5 mères qui ont eu le plus d’enfants ¦ En çok çocuğu olan 5 anne
+Les 10 mères qui ont eu le plus d’enfants ¦ En çok çocuğu olan 10 anne
+Les mères parmi mes ancêtres ¦ Atalarım arasındaki anneler
+Mes ancêtres sur 2 générations ¦ 2 kuşak boyunca atalarım
+Mes ancêtres sur 3 générations ¦ 3 kuşak boyunca atalarım
+Mes ancêtres sur 4 générations ¦ 4 kuşak boyunca atalarım
+Mes ancêtres sur 5 générations ¦ 5 kuşak boyunca atalarım
+Mes ancêtres sur 3 générations (parents, grands-parents) ¦ 3 kuşak boyunca atalarım (anne baba, büyükanne ve büyükbabalar)
+Mes ancêtres, par siècle ¦ Atalarım, yüzyıla göre
+Au XIXe siècle, par décennie ¦ 19. yüzyılda, on yıla göre
+Les 20 couples qui ont eu le plus d’enfants ¦ En çok çocuğu olan 20 çift
+Les 40 couples ¦ 40 çift
+Adulte à 21 ans (majorité d’autrefois) ¦ 21 yaşında yetişkin (eski reşit olma yaşı)
+Par siècle, moins de 8 mois ¦ Yüzyıla göre, 8 aydan az
+Par demi-siècle, moins de 8 mois ¦ Yarım yüzyıla göre, 8 aydan az
+Par décennie, moins de 8 mois ¦ On yıla göre, 8 aydan az
+Très tôt : moins de 7 mois, par siècle ¦ Çok erken: 7 aydan az, yüzyıla göre
+Depuis son lieu de naissance (8 générations) ¦ Doğum yerinden (8 kuşak)
+Depuis son lieu de naissance (5 générations) ¦ Doğum yerinden (5 kuşak)
+Depuis le berceau des plus anciens (10 générations) ¦ En eskilerin beşiğinden (10 kuşak)
+Les 8 communes les plus suivies ¦ En çok izlenen 8 yerleşim yeri
+Tous les segments ¦ Tüm segmentler
+Segments d’au moins 7 cM (les plus sûrs) ¦ En az 7 cM’lik segmentler (en güvenilirleri)
+Segments d’au moins 10 cM ¦ En az 10 cM’lik segmentler
+Gros segments (20 cM et plus) ¦ Büyük segmentler (20 cM ve üstü)
+Toutes les correspondances (150 au plus) ¦ Tüm eşleşmeler (en çok 150)
+Au moins 20 cM (150 au plus) ¦ En az 20 cM (en çok 150)
+Cousins proches (90 cM et plus) ¦ Yakın kuzenler (90 cM ve üstü)
+Au moins 50 cM, toutes ¦ En az 50 cM, hepsi
+Graphique : un point de départ tout prêt ¦ Grafik: hazır bir başlangıç noktası
+✏️ Sur mesure (les réglages ci-dessous) ¦ ✏️ Özel (aşağıdaki ayarlar)
+Ce point de départ n’a pas pu être réglé. ¦ Bu başlangıç noktası ayarlanamadı.
+Réglé. Clique sur « {label} » pour voir le dessin. ¦ Ayarlandı. Çizimi görmek için “{label}” düğmesine tıkla.
+Pas d’ascendance : choisis une personne de départ (Personnes → sa fiche → « Personne de départ »). ¦ Ata soyu yok: bir başlangıç kişisi seç (Kişiler → kişinin kartı → “Başlangıç kişisi”).
+Pas d’enfant connu pour la personne de départ. ¦ Başlangıç kişisinin bilinen çocuğu yok.
+Pas de fratrie connue. ¦ Bilinen kardeş yok.
+La fratrie de la personne de départ ¦ Başlangıç kişisinin kardeşleri
+Les enfants de la personne de départ ¦ Başlangıç kişisinin çocukları
+Les vies de mes ancêtres ({n} générations) ¦ Atalarımın hayatları ({n} kuşak)
+Pas de descendance connue. ¦ Bilinen torun yok.
+Homme ¦ Erkek
+Femme ¦ Kadın
+Aucune date de naissance pour ces personnes. ¦ Bu kişiler için doğum tarihi yok.
+La vie de la personne de départ, étape par étape ¦ Başlangıç kişisinin hayatı, adım adım
+Naissances et décès de mes ancêtres (3 générations) ¦ Atalarımın doğumları ve ölümleri (3 kuşak)
+Naissances et décès de mes ancêtres (4 générations) ¦ Atalarımın doğumları ve ölümleri (4 kuşak)
+Naissances, mariages et décès de sa fratrie ¦ Kardeşlerinin doğumları, evlilikleri ve ölümleri
+La naissance de ses enfants ¦ Çocuklarının doğumu
+{what} avec {who} à {place} ¦ {what} — kiminle: {who} — yer: {place}
+{what} avec {who} ¦ {what} — kiminle: {who}
+{what} à {place} ¦ {what} — yer: {place}
+Mes ancêtres : naissances et décès ¦ Atalarım: doğumlar ve ölümler
+Aucune date pour ce choix. ¦ Bu seçim için tarih yok.
+Année de naissance et âge au décès (une personne = un point) ¦ Doğum yılı ve ölüm yaşı (bir kişi = bir nokta)
+Âge de l’époux et âge de l’épouse au mariage ¦ Evlilikte kocanın yaşı ve karının yaşı
+Âge de l’époux ¦ Kocanın yaşı
+Âge de l’épouse ¦ Karının yaşı
+Âge des époux au mariage ¦ Eşlerin evlilik yaşı
+Âge au décès selon l’année de naissance ¦ Doğum yılına göre ölüm yaşı
+Âge au mariage et âge au décès ¦ Evlilik yaşı ve ölüm yaşı
+Pas assez de dates dans l’arbre pour ce choix. ¦ Bu seçim için ağaçta yeterli tarih yok.
+bleu : hommes · rouge : femmes ¦ mavi: erkekler · kırmızı: kadınlar
+Département de naissance → département de décès ¦ Doğum départementı → ölüm départementı
+Département de naissance → département du mariage ¦ Doğum départementı → evlilik départementı
+Département du parent → département de l’enfant ¦ Ebeveynin départementı → çocuğun départementı
+Pays de naissance → pays de décès ¦ Doğum ülkesi → ölüm ülkesi
+Commune de naissance → commune de décès ¦ Doğum yerleşim yeri → ölüm yerleşim yeri
+Fils ¦ Oğul
+Fille ¦ Kız
+Père : {x} ¦ Baba: {x}
+Parent : ¦ Ebeveyn:
+Enfant : ¦ Çocuk:
+Pas assez de lieux connus des deux côtés. ¦ İki tarafta da yeterli bilinen yer yok.
+Sa descendance sur 2 générations ¦ 2 kuşak boyunca torunları
+Sa descendance sur 3 générations ¦ 3 kuşak boyunca torunları
+Rien à dessiner pour ce choix. ¦ Bu seçim için çizilecek bir şey yok.
+Mes ancêtres ({n} générations) ¦ Atalarım ({n} kuşak)
+Mes ancêtres en chiffres (trouvés, sourcés, taux de recherche) ¦ Sayılarla atalarım (bulunan, kaynaklı, araştırma oranı)
+La qualité de ma base (sources, noms, lieux) ¦ Veritabanımın kalitesi (kaynaklar, adlar, yerler)
+Ancêtres trouvés (10 générations) ¦ Bulunan atalar (10 kuşak)
+Trouvés sur 8 générations ¦ 8 kuşakta bulunanlar
+Ancêtres avec une source ¦ Kaynaklı atalar
+Taux de recherche moyen ¦ Ortalama araştırma oranı
+Génération la plus lointaine ¦ En uzak kuşak
+Mes ancêtres en chiffres ¦ Sayılarla atalarım
+à partir de {name} ¦ başlangıç: {name}
+Les chiffres ne sont pas encore prêts. ¦ Sayılar henüz hazır değil.
+Fiches avec une source ¦ Kaynaklı kartlar
+Personnes décédées ¦ Ölmüş kişiler
+Noms de famille différents ¦ Farklı soyadları
+La qualité de ma base ¦ Veritabanımın kalitesi
+Ancêtres avec une source, génération par génération ¦ Kaynaklı atalar, kuşak kuşak
+Taux de recherche moyen, génération par génération ¦ Ortalama araştırma oranı, kuşak kuşak
+Ancêtres dont on connaît la date de naissance, par génération ¦ Doğum tarihi bilinen atalar, kuşağa göre
+Génér. {g} ¦ Kuş. {g}
+Pas d’ancêtre trouvé. ¦ Ata bulunamadı.
+Taux de recherche, génération par génération ¦ Araştırma oranı, kuşak kuşak
+Date de naissance connue ¦ Doğum tarihi biliniyor
+à partir de {name} (parmi les ancêtres trouvés) ¦ başlangıç: {name} (bulunan atalar arasında)
+Objectif à changer dans le tableau ¦ Hedefi tabloda değiştir
+Ajoute des noms (lignes) et au moins deux périodes (colonnes). ¦ Adlar (satırlar) ve en az iki dönem (sütunlar) ekle.
+Aucun rang à montrer : vérifie les chiffres. ¦ Gösterilecek sıra yok: sayıları kontrol et.
+Ajoute au moins deux périodes (lignes) et des catégories (colonnes). ¦ En az iki dönem (satırlar) ve kategoriler (sütunlar) ekle.
+Ajoute des valeurs (une par ligne) : l’app les range dans les tranches. ¦ Değerler ekle (her satıra bir tane): uygulama onları dilimlere yerleştirir.
+médiane ¦ ortanca
+Ajoute des valeurs avec leur groupe (siècle, sexe…) : médiane et quartiles sont calculés. ¦ Değerleri gruplarıyla (yüzyıl, cinsiyet…) ekle: ortanca ve çeyrekler hesaplanır.
+{name} — {n} valeurs : médiane {md}{u}, quartiles {q1} et {q3}, de {min} à {max}{u}, moyenne {mean} ¦ {name} — {n} değer: ortanca {md}{u}, çeyrekler {q1} ve {q3}, {min} – {max}{u}, ortalama {mean}
+{name} — {n} valeur : médiane {md}{u}, quartiles {q1} et {q3}, de {min} à {max}{u}, moyenne {mean} ¦ {name} — {n} değer: ortanca {md}{u}, çeyrekler {q1} ve {q3}, {min} – {max}{u}, ortalama {mean}
+moyenne {v}{u} ¦ ortalama {v}{u}
+{v}{u} (valeur à part) ¦ {v}{u} (aykırı değer)
+Ajoute des lignes avec deux valeurs (ex. âge du mari, âge de la femme). ¦ İki değerli satırlar ekle (örn. kocanın yaşı, karının yaşı).
+écart ¦ fark
+Ajoute des lignes avec une valeur « avant » et une valeur « après ». ¦ “Önce” değeri ve “sonra” değeri olan satırlar ekle.
+Ajoute des étapes : un départ, des hausses (+) et des baisses (−), des sous-totaux. ¦ Aşamalar ekle: bir başlangıç, artışlar (+) ve azalışlar (−), ara toplamlar.
+Ajoute des lignes : un nom et un nombre. ¦ Satır ekle: bir ad ve bir sayı.
+Ajoute des valeurs : une ligne = une personne (nom, valeur, groupe). ¦ Değer ekle: bir satır = bir kişi (ad, değer, grup).
+médiane {v}{u} ¦ ortanca {v}{u}
+5 000 premiers points sur {n} ¦ {n} noktanın ilk 5 000’i
+Ajoute des périodes (lignes) et une colonne par petite courbe. ¦ Dönemler (satırlar) ve her küçük eğri için bir sütun ekle.
+Ajoute une carte : un nom, un chiffre (et la valeur d’avant, une mini-courbe, des seuils…). ¦ Bir kart ekle: bir ad, bir sayı (ve önceki değer, bir mini eğri, eşikler…).
+Ajoute une ligne : un nom, une valeur, un objectif (et des zones). ¦ Bir satır ekle: bir ad, bir değer, bir hedef (ve bölgeler).
+tout le monde ¦ herkes
+les femmes ¦ kadınlar
+les hommes ¦ erkekler
+Âge au décès (tout le monde) ¦ Ölüm yaşı (herkes)
+Âge au décès (les femmes) ¦ Ölüm yaşı (kadınlar)
+Âge au décès (les hommes) ¦ Ölüm yaşı (erkekler)
+D’après {n} personnes de l’arbre ¦ Ağaçtaki {n} kişiye göre
+Les métiers de la famille ¦ Ailenin meslekleri
+Naissances par commune ¦ Yerleşim yerine göre doğumlar
+Naissances par nom de famille ¦ Soyadına göre doğumlar
+par tranches de {n} ans ¦ {n} yıllık dilimlerle
+Prénoms les plus donnés par décennie ({who}) ¦ On yıla göre en çok verilen adlar ({who})
+Pas assez de naissances datées. ¦ Yeterli tarihli doğum yok.
+Les 10 prénoms les plus donnés par décennie ¦ On yıla göre en çok verilen 10 ad
+D’après les naissances de l’arbre ¦ Ağaçtaki doğumlara göre
+Métiers (par 25 ans) ¦ Meslekler (25 yıllık)
+Métiers (par 50 ans) ¦ Meslekler (50 yıllık)
+Naissances par nom de famille (par décennie) ¦ Soyadına göre doğumlar (on yıla göre)
+Naissances par commune (par 25 ans) ¦ Yerleşim yerine göre doğumlar (25 yıllık)
+Naissances par commune (par décennie) ¦ Yerleşim yerine göre doğumlar (on yıla göre)
+Âges des époux au mariage (25 couples les plus récents) ¦ Eşlerin evlilik yaşı (en yeni 25 çift)
+Âges des époux au mariage (50 couples) ¦ Eşlerin evlilik yaşı (50 çift)
+Aucun couple marié avec les deux dates de naissance. ¦ İki doğum tarihi de bilinen evli çift yok.
+Lui ¦ Erkek
+D’après les mariages de l’arbre ¦ Ağaçtaki evliliklere göre
+Naissances par commune : un siècle et le suivant ¦ Yerleşim yerine göre doğumlar: bir yüzyıl ve sonraki
+Il faut des naissances sur au moins deux siècles. ¦ En az iki yüzyıla yayılan doğumlar gerekir.
+Naissances par commune, d’un siècle à l’autre ¦ Yerleşim yerine göre doğumlar, bir yüzyıldan ötekine
+Naissances et décès dans l’arbre (par 50 ans) ¦ Ağaçtaki doğumlar ve ölümler (50 yıllık)
+Naissances et décès dans l’arbre (par 25 ans) ¦ Ağaçtaki doğumlar ve ölümler (25 yıllık)
+Naissances et décès dans l’arbre (par siècle) ¦ Ağaçtaki doğumlar ve ölümler (yüzyıla göre)
+Les vivants de l’arbre, période par période ¦ Ağaçtaki yaşayanlar, dönem dönem
+naissances (+) et décès (−) ; décès inconnu d’une naissance ancienne : compté 60 ans après ¦ doğumlar (+) ve ölümler (−); eski bir doğumun ölümü bilinmiyorsa: 60 yıl sonra sayılır
+Les compteurs de ma base (personnes, familles, médias…) ¦ Veritabanımın sayaçları (kişiler, aileler, medya…)
+il y a un mois ¦ bir ay önce
+Ancêtres trouvés (8 générations) ¦ Bulunan atalar (8 kuşak)
+Ma base en chiffres ¦ Sayılarla veritabanım
+mini-courbes : les 12 derniers mois ¦ mini eğriler: son 12 ay
+Ancêtres trouvés par génération (SOSA) ¦ Kuşağa göre bulunan atalar (SOSA)
+Pas d’ascendance SOSA : choisis une personne de départ. ¦ SOSA ata soyu yok: bir başlangıç kişisi seç.
+Génér. ¦ Kuş.
+Ancêtres trouvés, génération par génération ¦ Bulunan atalar, kuşak kuşak
+Objectif : 75 % (à changer dans le tableau) ¦ Hedef: %75 (tabloda değiştir)
+Unité (ex. : ans, personnes) ¦ Birim (örn.: yıl, kişi)
+Les prénoms les plus donnés, décennie par décennie ¦ En çok verilen adlar, on yıl on yıl
+rang de 1 (le plus donné) à 8 ; dans le tableau : le nombre de naissances ¦ 1’den (en çok verilen) 8’e sıra; tabloda: doğum sayısı
+Laboureur ¦ Çiftçi
+Tisserand ¦ Dokumacı
+Instituteur ¦ Öğretmen
+Employé ¦ Memur
+Journalier ¦ Gündelikçi
+Domestique ¦ Hizmetçi
+Les métiers de la famille sur 200 ans ¦ 200 yıl boyunca ailenin meslekleri
+nombre de personnes, par tranches de 25 ans ¦ kişi sayısı, 25 yıllık dilimlerle
+par tranches de 5 ans ¦ 5 yıllık dilimlerle
+Jean et Marie (1789) ¦ Jean ve Marie (1789)
+Pierre et Anne (1812) ¦ Pierre ve Anne (1812)
+Louis et Rose (1838) ¦ Louis ve Rose (1838)
+Joseph et Jeanne (1861) ¦ Joseph ve Jeanne (1861)
+François et Louise (1889) ¦ François ve Louise (1889)
+Henri et Germaine (1919) ¦ Henri ve Germaine (1919)
+André et Simone (1946) ¦ André ve Simone (1946)
+XVIIIe siècle ¦ 18. yüzyıl
+XIXe siècle ¦ 19. yüzyıl
+Les vivants de la famille ¦ Ailenin yaşayanları
+naissances (+), décès et départs (−) ¦ doğumlar (+), ölümler ve gidişler (−)
+En 1800 ¦ 1800’de
+Naissances 1800-1849 ¦ Doğumlar 1800-1849
+Décès 1800-1849 ¦ Ölümler 1800-1849
+En 1850 ¦ 1850’de
+Naissances 1850-1899 ¦ Doğumlar 1850-1899
+Départs (Amérique) ¦ Gidişler (Amerika)
+Décès 1850-1899 ¦ Ölümler 1850-1899
+En 1900 ¦ 1900’de
+Févr. ¦ Şub.
+Mars ¦ Mart
+Avril ¦ Nis.
+Mai ¦ May.
+Juin ¦ Haz.
+Août ¦ Ağu.
+Déc. ¦ Ara.
+Âge au décès : une personne, un point ¦ Ölüm yaşı: bir kişi, bir nokta
+Naissances par branche ¦ Kola göre doğumlar
+tous les 20 ans, même échelle ¦ her 20 yılda bir, aynı ölçek
+Ma généalogie en chiffres ¦ Sayılarla soy ağacım
+l’an dernier ¦ geçen yıl
+Actes numérisés ¦ Dijitalleştirilmiş belgeler
+Fiches sans source ¦ Kaynaksız kartlar
+Photos légendées ¦ Açıklamalı fotoğraflar
+pareil ¦ aynı
+Objectif : 75 % ¦ Hedef: %75
+Génér. 2 (parents) ¦ Kuş. 2 (anne baba)
+Génér. 3 ¦ Kuş. 3
+Génér. 4 ¦ Kuş. 4
+Génér. 5 ¦ Kuş. 5
+Génér. 6 ¦ Kuş. 6
+Génér. 7 ¦ Kuş. 7
+Génér. 8 ¦ Kuş. 8
+Génér. 9 ¦ Kuş. 9
+Par la 1re valeur ¦ 1. değere göre
+Par la 2e valeur ¦ 2. değere göre
+Les noms (lignes) et les périodes (colonnes) ¦ Adlar (satırlar) ve dönemler (sütunlar)
+Nom / prénom ¦ Soyadı / ad
+Les chiffres du tableau sont ¦ Tablodaki sayılar
+Des nombres : l’app calcule le rang ¦ Sayılar: sırayı uygulama hesaplar
+Déjà des rangs (1 = premier) ¦ Zaten sıralar (1 = birinci)
+Hauteur d’un rang ¦ Bir sıranın yüksekliği
+Les périodes (lignes) et les catégories (colonnes) ¦ Dönemler (satırlar) ve kategoriler (sütunlar)
+Courants (centrés, le moins de mouvement) ¦ Akıntılar (ortalanmış, en az hareket)
+Centrés sur l’axe ¦ Eksene ortalanmış
+Empilés sur le sol ¦ Zemine yığılmış
+En parts (100 %) ¦ Paylar olarak (%100)
+Noms dans les courants ¦ Akıntıların içinde adlar
+Les valeurs (une par ligne : l’app les range en tranches) ¦ Değerler (her satıra bir tane: uygulama onları dilimlere yerleştirir)
+Largeur des tranches (0 = automatique) ¦ Dilim genişliği (0 = otomatik)
+Début de la première tranche (vide = automatique) ¦ İlk dilimin başlangıcı (boş = otomatik)
+Couleur des colonnes ¦ Sütunların rengi
+Montrer la moyenne ¦ Ortalamayı göster
+Les valeurs et leur groupe (médiane, quartiles et extrêmes sont calculés) ¦ Değerler ve grupları (ortanca, çeyrekler ve uç değerler hesaplanır)
+Boîtes debout ¦ Dikey kutular
+Boîtes couchées ¦ Yatay kutular
+Jusqu’à 1,5 × l’écart des quartiles (valeurs à part en ronds) ¦ Çeyrekler arası farkın 1,5 katına kadar (aykırı değerler daire olarak)
+Du minimum au maximum ¦ En küçükten en büyüğe
+Montrer la moyenne (◆) ¦ Ortalamayı göster (◆)
+Les lignes et leurs deux valeurs ¦ Satırlar ve iki değerleri
+Écrire l’écart ¦ Farkı yaz
+Les lignes : la valeur avant, la valeur après ¦ Satırlar: önceki değer, sonraki değer
+Une couleur par ligne ¦ Her satıra bir renk
+Couleur des hausses ¦ Artışların rengi
+Couleur des baisses ¦ Azalışların rengi
+Les étapes (dans l’ordre) ¦ Aşamalar (sırayla)
+Valeur (+ ou −) ¦ Değer (+ ya da −)
+Hausse ou baisse ¦ Artış ya da azalış
+Sous-total (calculé) ¦ Ara toplam (hesaplanır)
+Total (calculé) ¦ Toplam (hesaplanır)
+Traits entre les marches ¦ Basamaklar arası çizgiler
+Couleur des totaux ¦ Toplamların rengi
+Les points (une ligne = une personne) ¦ Noktalar (bir satır = bir kişi)
+Les périodes (lignes) et une colonne par petite courbe ¦ Dönemler (satırlar) ve her küçük eğri için bir sütun
+Courbes par ligne (0 = automatique) ¦ Satır başına eğri (0 = otomatik)
+Hauteur d’une courbe ¦ Bir eğrinin yüksekliği
+Remplir sous la courbe ¦ Eğrinin altını doldur
+Écrire la dernière valeur ¦ Son değeri yaz
+Valeur d’avant (flèche, écart) ¦ Önceki değer (ok, fark)
+Texte « avant » (ex. : l’an dernier) ¦ “Önce” yazısı (örn.: geçen yıl)
+Mini-courbe (chiffres séparés par des espaces) ¦ Mini eğri (boşlukla ayrılmış sayılar)
+C’est plus haut ¦ Daha yüksek
+C’est plus bas ¦ Daha düşük
+Couleur (sinon selon les seuils) ¦ Renk (yoksa eşiklere göre)
+Cartes par ligne (0 = automatique) ¦ Satır başına kart (0 = otomatik)
+En valeur et en % ¦ Değer ve % olarak
+En valeur ¦ Değer olarak
+En % ¦ % olarak
+Chiffres après la virgule (au plus) ¦ Virgülden sonraki basamak (en çok)
+Couleur « bien » ¦ “İyi” rengi
+Couleur « moyen » ¦ “Orta” rengi
+Couleur « à surveiller » ¦ “Dikkat” rengi
+Les barres ¦ Çubuklar
+Unité (ex. : %) ¦ Birim (örn.: %)
+Graduations sous la dernière barre ¦ Son çubuğun altında ölçek
+Couleur de la valeur ¦ Değerin rengi
+Couleur de l’objectif ¦ Hedefin rengi
+Couleur des zones ¦ Bölgelerin rengi
+Ajoute des périodes : le nombre d’enfants nés, ceux morts avant 1 an et avant 5 ans. ¦ Dönemler ekle: doğan çocuk sayısı, 1 yaşından önce ve 5 yaşından önce ölenler.
+En tout : {a} % des enfants morts avant 1 an, {b} % avant 5 ans ({n}). ¦ Toplam: 1 yaşından önce ölen çocuklar: %{a}; 5 yaşından önce: %{b} ({n}).
+Mortalité des enfants ¦ Çocuk ölümleri
+Ajoute des couples : enfants nés, arrivés à l’âge adulte, morts jeunes. ¦ Çift ekle: doğan çocuklar, yetişkinliğe ulaşanlar, genç ölenler.
+{name} : {n} sans date de décès ¦ {name}: ölüm tarihi olmayan {n}
+Sur {n}, {p} % sont arrivés à l’âge adulte. ¦ {n} içinden %{p} yetişkinliğe ulaştı.
+Arrivés à l’âge adulte ¦ Yetişkinliğe ulaşanlar
+Ajoute des lignes : une période, « Naissances » ou « Décès », et les 12 mois. ¦ Satır ekle: bir dönem, “Doğumlar” ya da “Ölümler” ve 12 ay.
+{n} naissances ({p} % de l’année) ¦ {n} doğum (yılın %{p})
+{n} naissances ¦ {n} doğum
+{n} décès ({p} % de l’année) ¦ {n} ölüm (yılın %{p})
+Saisons des naissances et des décès (plus foncé = plus d’actes) ¦ Doğumların ve ölümlerin mevsimleri (daha koyu = daha çok belge)
+moins de 6 mois ¦ 6 aydan az
+6 mois à 1 an ¦ 6 ay – 1 yıl
+1 à 2 ans ¦ 1 – 2 yıl
+2 à 5 ans ¦ 2 – 5 yıl
+5 à 10 ans ¦ 5 – 10 yıl
+10 ans et plus ¦ 10 yıl ve üstü
+Ajoute des remariages : le nom, le sexe et le délai en mois depuis la mort du premier conjoint. ¦ Yeniden evlilik ekle: ad, cinsiyet ve ilk eşin ölümünden bu yana geçen ay sayısı.
+Hommes remariés {when} après : {n} ¦ {when} sonra yeniden evlenen erkekler: {n}
+Femmes remariées {when} après : {n} ¦ {when} sonra yeniden evlenen kadınlar: {n}
+Délai médian avant de se remarier : {a} pour les hommes, {b} pour les femmes. ¦ Yeniden evlenmeden önceki ortanca süre: erkekler için {a}, kadınlar için {b}.
+Veuvage et remariage ¦ Dulluk ve yeniden evlilik
+Ajoute des couples : l’année du mariage et sa durée en années. ¦ Çift ekle: evlilik yılı ve yıl olarak süresi.
+Durée médiane : {a} ans ({n} terminés par un décès). ¦ Ortanca süre: {a} yıl ({n} tanesi bir ölümle sona erdi).
+Durée médiane : {a} ans ({n} terminé par un décès). ¦ Ortanca süre: {a} yıl ({n} tanesi bir ölümle sona erdi).
+Durée des mariages ¦ Evliliklerin süresi
+Ajoute des naissances : l’année, l’âge du père, l’âge de la mère. ¦ Doğum ekle: yıl, babanın yaşı, annenin yaşı.
+le père ¦ baba
+la mère ¦ anne
+Âge du père (médiane {n} ans) ¦ Babanın yaşı (ortanca {n} yıl)
+Âge de la mère (médiane {n} ans) ¦ Annenin yaşı (ortanca {n} yıl)
+Âge des parents à chaque naissance ¦ Her doğumda anne babanın yaşı
+Ajoute des périodes : le nombre de couples, les premiers enfants nés avant le mariage et ceux nés moins de 8 mois après. ¦ Dönemler ekle: çift sayısı, evlilikten önce doğan ilk çocuklar ve evlilikten 8 aydan kısa süre sonra doğanlar.
+{name} : {a} premiers enfants nés avant le mariage, sur {n} ¦ {name}: evlilikten önce doğan ilk çocuk {a} / {n}
+{name} : {a} premier enfant né avant le mariage, sur {n} ¦ {name}: evlilikten önce doğan ilk çocuk {a} / {n}
+{name} : {a} nés moins de 8 mois après, sur {n} ¦ {name}: 8 aydan kısa süre sonra doğan {a} / {n}
+{name} : {a} né moins de 8 mois après, sur {n} ¦ {name}: 8 aydan kısa süre sonra doğan {a} / {n}
+Né avant le mariage ¦ Evlilikten önce doğdu
+Né moins de 8 mois après ¦ 8 aydan kısa süre sonra doğdu
+{p} % des premiers enfants ont été conçus avant le mariage ({n}). ¦ İlk çocukların %{p} kadarı evlilikten önce döllenmiş ({n}).
+Conceptions avant mariage ¦ Evlilikten önce gebelikler
+moins d’1 an ¦ 1 yıldan az
+1 à 3 ans ¦ 1 – 3 yıl
+3 à 5 ans ¦ 3 – 5 yıl
+10 à 15 ans ¦ 10 – 15 yıl
+15 ans et plus ¦ 15 yıl ve üstü
+Ajoute des couples : l’écart d’âge en années (positif = le mari est plus âgé). ¦ Çift ekle: yıl olarak yaş farkı (artı = koca daha yaşlı).
+Le mari est plus âgé ¦ Koca daha yaşlı
+La femme est plus âgée ¦ Karı daha yaşlı
+Mari plus âgé de {gap} : {n} ¦ Koca daha yaşlı, fark {gap}: {n}
+Femme plus âgée de {gap} : {n} ¦ Karı daha yaşlı, fark {gap}: {n}
+Écart médian : {a} ans ; la femme est plus âgée dans {p} % des couples. ¦ Ortanca fark: {a} yıl; çiftlerin %{p} kadarında karı daha yaşlı.
+Écart médian : {a} an ; la femme est plus âgée dans {p} % des couples. ¦ Ortanca fark: {a} yıl; çiftlerin %{p} kadarında karı daha yaşlı.
+Écart d’âge entre époux ¦ Eşler arasındaki yaş farkı
+Ajoute des générations : la distance moyenne (km) au lieu de référence. ¦ Kuşak ekle: referans yerine ortalama uzaklık (km).
+Génération {g} : {km} km en médiane ({n}, le plus loin à {max} km) ¦ Kuşak {g}: ortanca {km} km ({n}, en uzak {max} km)
+Génération {g} : {km} km en moyenne ({n}, le plus loin à {max} km) ¦ Kuşak {g}: ortalama {km} km ({n}, en uzak {max} km)
+=lieu connu ¦ bilinen yer|bilinen yer
+Distance au {ref}. ¦ Uzaklık ölçüsü: {ref}.
+Loin du berceau ¦ Beşikten uzakta
+Note qui a signé : dans « Modifier un événement », « ✍️ A signé » pour les époux et chaque témoin. ¦ Kimin imzaladığını not et: “Olayı düzenle” içinde eşler ve her tanık için “✍️ İmzaladı”.
+Hommes (époux…) ¦ Erkekler (kocalar…)
+Femmes (épouses…) ¦ Kadınlar (karılar…)
+{a} ont signé sur {b} ¦ {b} kişiden {a} kişi imzaladı
+Part de ceux qui savaient signer ¦ İmza atabilenlerin payı
+Ajoute des générations : pour chaque acte, combien sont sourcés, sans source, manquants. ¦ Kuşak ekle: her belge için kaçının kaynaklı, kaynaksız, eksik olduğu.
+Génération 12 ¦ Kuşak 12
+sourcé ¦ kaynaklı
+sans source ¦ kaynaksız
+manquant ¦ eksik
+{n} sourcés ¦ {n} kaynaklı
+{n} sourcé ¦ {n} kaynaklı
+{n} sans source ¦ {n} kaynaksız
+{n} manquants ¦ {n} eksik
+{n} manquant ¦ {n} eksik
+{p} % des actes attendus sont prouvés par une source. ¦ Beklenen belgelerin %{p} kadarı bir kaynakla kanıtlandı.
+Ce que tu as prouvé ¦ Kanıtladıkların
+Dépouillé ¦ Dökümü yapıldı
+Vu, rien trouvé ¦ Bakıldı, bir şey bulunamadı
+Acte trouvé (source) ¦ Belge bulundu (kaynak)
+Ajoute des lignes : la commune, les années vues (de… à…) et la sorte (dépouillé, vu sans rien, à faire, acte). ¦ Satır ekle: yerleşim yeri, bakılan yıllar (…’den …’e) ve tür (dökümü yapıldı, bakıldı ama bir şey yok, yapılacak, belge).
+{place} : de {a} à {b} — en rouge pâle, les années pas encore vues ¦ {place}: {a} – {b} — soluk kırmızıyla henüz bakılmayan yıllar
+Pas encore vu ¦ Henüz bakılmadı
+Registres consultés ¦ Bakılan kayıt defterleri
+Couple {n} ¦ Çift {n}
+Enfant {n} ¦ Çocuk {n}
+Quart de siècle ¦ Çeyrek yüzyıl
+Demi-siècle ¦ Yarım yüzyıl
+👶 Les enfants de ma base ¦ 👶 Veritabanımdaki çocuklar
+Chaque enfant né (ou baptisé) avec une date : mort avant 1 an, avant 5 ans, ou plus tard. Ceux dont on ne connaît pas le décès sont laissés de côté. ¦ Tarihi olan her doğan (ya da vaftiz edilen) çocuk: 1 yaşından önce, 5 yaşından önce ya da daha sonra ölmüş. Ölümü bilinmeyenler dışarıda bırakılır.
+Aucun enfant avec une naissance et un décès connus. ¦ Doğumu ve ölümü bilinen çocuk yok.
+{n} périodes prises dans ta base ({k} personnes sans date de décès laissées de côté). ¦ Veritabanından {n} dönem alındı (ölüm tarihi olmayan {k} kişi dışarıda bırakıldı).
+👨‍👩‍👧 Les couples de ma base ¦ 👨‍👩‍👧 Veritabanımdaki çiftler
+Pour chaque couple : ses enfants, ceux arrivés à l’âge adulte et ceux morts jeunes. ¦ Her çift için: çocukları, yetişkinliğe ulaşanlar ve genç ölenler.
+Adulte à partir de ¦ Yetişkin sayılma yaşı
+Aucun couple avec des enfants. ¦ Çocuklu çift yok.
+Les fratries qui ont survécu ¦ Hayatta kalan kardeş grupları
+{n} couples pris dans ta base (sur {k}). ¦ Veritabanından {n} çift alındı ({k} çift içinden).
+🗓 Les naissances et les décès de ma base ¦ 🗓 Veritabanımdaki doğumlar ve ölümler
+Datés au mois près : combien chaque mois, période par période. ¦ Ay düzeyinde tarihli: dönem dönem, her ay kaç tane.
+Aucune naissance ni aucun décès datés au mois près. ¦ Ay düzeyinde tarihli doğum ya da ölüm yok.
+💔 Les remariages de ma base ¦ 💔 Veritabanımdaki yeniden evlilikler
+Les personnes mariées deux fois ou plus : le temps entre la mort du conjoint et le mariage suivant (les deux dates connues). ¦ İki ya da daha çok kez evlenen kişiler: eşin ölümüyle sonraki evlilik arasındaki süre (iki tarih de biliniyorsa).
+Aucun remariage avec la date du décès du conjoint et celle du nouveau mariage. ¦ Hem eşin ölüm tarihi hem yeni evliliğin tarihi olan yeniden evlilik yok.
+{n} remariages pris dans ta base. ¦ Veritabanından {n} yeniden evlilik alındı.
+⏳ Les mariages de ma base ¦ ⏳ Veritabanımdaki evlilikler
+De la date du mariage à la mort du premier des deux époux. ¦ Evlilik tarihinden iki eşten ilkinin ölümüne kadar.
+Aucun mariage daté dont un des époux a une date de décès. ¦ Eşlerden birinin ölüm tarihi olan tarihli evlilik yok.
+{n} mariages pris dans ta base ({k} encore en cours ou sans date de décès). ¦ Veritabanından {n} evlilik alındı ({k} tanesi hâlâ sürüyor ya da ölüm tarihi yok).
+{n} mariages pris dans ta base. ¦ Veritabanından {n} evlilik alındı.
+👴 Les naissances de ma base ¦ 👴 Veritabanımdaki doğumlar
+Pour chaque enfant : l’âge de son père et de sa mère le jour de sa naissance. ¦ Her çocuk için: doğduğu gün babasının ve annesinin yaşı.
+Aucun enfant dont un parent a une date de naissance. ¦ Ebeveynlerinden birinin doğum tarihi olan çocuk yok.
+{n} naissances prises dans ta base. ¦ Veritabanından {n} doğum alındı.
+🤰 Les premiers enfants de ma base ¦ 🤰 Veritabanımdaki ilk çocuklar
+Pour chaque mariage daté au mois près : le premier enfant est-il né avant, ou moins de 8 mois après ? ¦ Ay düzeyinde tarihli her evlilik için: ilk çocuk evlilikten önce mi, yoksa 8 aydan kısa süre sonra mı doğdu?
+« Tôt » : moins de ¦ “Erken”: şundan az
+Aucun mariage daté au mois près avec un enfant daté. ¦ Ay düzeyinde tarihli ve tarihli bir çocuğu olan evlilik yok.
+💑 Les couples de ma base ¦ 💑 Veritabanımdaki çiftler
+L’écart entre les dates de naissance du mari et de la femme. ¦ Kocanın ve karının doğum tarihleri arasındaki fark.
+Aucun couple dont les deux époux ont une date de naissance. ¦ İki eşin de doğum tarihi olan çift yok.
+🧭 L’ascendance d’une personne ¦ 🧭 Bir kişinin ata soyu
+Génération par génération : à quelle distance du lieu de référence sont nés ses ancêtres (les lieux ont besoin de leurs coordonnées). ¦ Kuşak kuşak: ataları referans yerinden ne kadar uzakta doğmuş (yerlerin koordinatları gerekir).
+Distance mesurée depuis ¦ Uzaklığın ölçüldüğü yer
+Le lieu de naissance de la personne ¦ Kişinin doğum yeri
+Le centre des lieux de la génération la plus ancienne ¦ En eski kuşağın yerlerinin merkezi
+Un lieu que je choisis ¦ Seçtiğim bir yer
+Le lieu (si « un lieu que je choisis ») ¦ Yer (“Seçtiğim bir yer” ise)
+Choisis le lieu dans le menu. ¦ Yeri menüden seç.
+Le lieu de référence n’a pas de coordonnées. ¦ Referans yerinin koordinatları yok.
+Aucun ancêtre né dans un lieu situé. ¦ Konumu bilinen bir yerde doğan ata yok.
+Loin du berceau — {name} ¦ Beşikten uzakta — {name}
+✍️ Les signatures notées dans ma base ¦ ✍️ Veritabanımda not edilen imzalar
+Ceux qui ont signé l’acte, ou « ne sait pas signer » : à noter dans « Modifier un événement » (✍️ pour les époux, et pour chaque témoin). ¦ Belgeyi imzalayanlar ya da “ne sait pas signer” (imza atamaz): “Olayı düzenle” içinde not et (eşler ve her tanık için ✍️).
+Aucune signature notée pour l’instant : dans un événement, choisis « ✍️ A signé : oui / non » pour les époux et les témoins. ¦ Henüz not edilmiş imza yok: bir olayda eşler ve tanıklar için “✍️ İmzaladı: evet / hayır” seç.
+✅ L’ascendance d’une personne ¦ ✅ Bir kişinin ata soyu
+Pour chaque génération d’ancêtres : les naissances, mariages et décès prouvés par une source, présents sans source, ou pas encore trouvés. ¦ Her ata kuşağı için: bir kaynakla kanıtlanmış, kaynaksız var olan ya da henüz bulunamamış doğumlar, evlilikler ve ölümler.
+Ce que j’ai prouvé — {name} ¦ Kanıtladıklarım — {name}
+📚 Mes dépouillements et mes actes ¦ 📚 Dökümlerim ve belgelerim
+Pour chaque commune : les années des registres dépouillés (suivi des dépouillements) et des actes trouvés avec une source. ¦ Her yerleşim yeri için: dökümü yapılan kayıt defterlerinin yılları (döküm takibi) ve kaynakla bulunan belgelerin yılları.
+Aucun dépouillement avec des années, ni d’acte sourcé avec un lieu. ¦ Yıllı döküm de, yeri olan kaynaklı belge de yok.
+{n} communes prises dans ta base. ¦ Veritabanından {n} yerleşim yeri alındı.
+Les périodes ¦ Dönemler
+Période (ex. 1780) ¦ Dönem (örn. 1780)
+Enfants nés ¦ Doğan çocuklar
+Le nombre ¦ Sayı
+Aussi « avant 5 ans » ¦ “5 yaşından önce” de
+Couleur « avant 1 an » ¦ “1 yaşından önce” rengi
+Couleur « avant 5 ans » ¦ “5 yaşından önce” rengi
+Arrivés adultes ¦ Yetişkinliğe ulaşanlar
+Le plus de morts jeunes d’abord ¦ Önce en çok genç ölümü olanlar
+Couples au plus ¦ En çok çift
+Couleur « adultes » ¦ “Yetişkinler” rengi
+Couleur « morts jeunes » ¦ “Genç ölenler” rengi
+Couleur « on ne sait pas » ¦ “Bilinmiyor” rengi
+Les fratries de la famille ¦ Ailenin kardeş grupları
+Les lignes (une période et une sorte, puis les 12 mois) ¦ Satırlar (bir dönem ve bir tür, sonra 12 ay)
+Les naissances ¦ Doğumlar
+Les décès ¦ Ölümler
+Comparer les mois (part de l’année, en %) ¦ Ayları karşılaştır (yılın payı, % olarak)
+Hauteur des cases ¦ Hücre yüksekliği
+Saisons des naissances et des décès ¦ Doğumların ve ölümlerin mevsimleri
+Les remariages ¦ Yeniden evlilikler
+Année du veuvage ¦ Dul kalma yılı
+Combien de temps avant de se remarier ¦ Yeniden evlenmeden önce geçen süre
+Les mariages ¦ Evlilikler
+Âge du père ¦ Babanın yaşı
+Âge de la mère ¦ Annenin yaşı
+Le père et la mère ¦ Baba ve anne
+Moyenne par quart de siècle (ligne) ¦ Çeyrek yüzyıl başına ortalama (çizgi)
+Couleur du père ¦ Babanın rengi
+Couleur de la mère ¦ Annenin rengi
+Couleur « avant » ¦ “Önce” rengi
+Couleur « moins de 8 mois » ¦ “8 aydan az” rengi
+Conceptions avant le mariage ¦ Evlilikten önce gebelikler
+Écart (ans, + = le mari est plus âgé) ¦ Fark (yıl, + = koca daha yaşlı)
+Couleur « mari plus âgé » ¦ “Koca daha yaşlı” rengi
+Couleur « femme plus âgée » ¦ “Karı daha yaşlı” rengi
+Lieux connus ¦ Bilinen yerler
+Distance médiane ¦ Ortanca uzaklık
+Le plus loin ¦ En uzak
+Trait : le plus loin ¦ Çizgi: en uzak
+Phrase sous le dessin ¦ Çizimin altındaki cümle
+lieu de naissance de la personne ¦ kişinin doğum yeri
+Hommes : ont signé ¦ Erkekler: imzaladı
+Hommes : n’ont pas signé ¦ Erkekler: imzalamadı
+Femmes : ont signé ¦ Kadınlar: imzaladı
+Femmes : n’ont pas signé ¦ Kadınlar: imzalamadı
+Témoins : ont signé ¦ Tanıklar: imzaladı
+Témoins : n’ont pas signé ¦ Tanıklar: imzalamadı
+Couleur des témoins ¦ Tanıkların rengi
+Savoir signer ¦ İmza atabilmek
+Ancêtres possibles ¦ Olası atalar
+{what} : sourcée ¦ {what}: kaynaklı
+{what} : sans source ¦ {what}: kaynaksız
+{what} : manquante ¦ {what}: eksik
+Couleur « sourcé » ¦ “Kaynaklı” rengi
+Couleur « sans source » ¦ “Kaynaksız” rengi
+Couleur « manquant » ¦ “Eksik” rengi
+Ce que j’ai prouvé ¦ Kanıtladıklarım
+Les registres ¦ Kayıt defterleri
+Montrer les trous (rouge pâle) ¦ Boşlukları göster (soluk kırmızı)
+Communes au plus ¦ En çok yerleşim yeri
+Couleur « {what} » ¦ “{what}” rengi
+{name} : {n} adultes ¦ {name}: {n} yetişkin
+{name} : {n} adulte ¦ {name}: {n} yetişkin
+{name} : {n} morts jeunes ¦ {name}: {n} genç ölen
+{name} : {n} mort jeune ¦ {name}: {n} genç ölen
+Éventail d’ascendance de {g} générations : {n} sur {max} places. ¦ {g} kuşaklık ata yelpazesi: {max} yerden {n} tanesi dolu.
+🪭 Mes ancêtres (numéros Sosa) ¦ 🪭 Atalarım (Sosa numaraları)
+Chaque case reçoit un ancêtre et se colore selon ce que tu choisis. Les cases vides sont les ancêtres pas encore trouvés. ¦ Her kutuya bir ata gelir ve seçtiğin şeye göre renklenir. Boş kutular henüz bulunamamış atalardır.
+Personne au centre ¦ Ortadaki kişi
+Taux de recherche (dates, lieux, mariage, source) ¦ Araştırma oranı (tarihler, yerler, evlilik, kaynak)
+Département de naissance ¦ Doğum départementı
+Prendre mes ancêtres ¦ Atalarımı al
+{n} ancêtres pris dans l’app. ¦ Uygulamadan {n} ata alındı.
+Ajoute des lignes : un nom, le nom au-dessus (vide pour le centre) et un chiffre. ¦ Satır ekle: bir ad, üstündeki ad (orta için boş) ve bir sayı.
+Soleil de {n} parts sur {d} anneaux, total {t}. ¦ {d} halka üzerinde {n} parçalı güneş, toplam {t}.
+🌞 Une descendance ¦ 🌞 Bir torun soyu
+Chaque enfant devient une part de son parent ; la taille d’une part = le nombre de descendants (la personne comprise). ¦ Her çocuk ebeveyninin bir parçası olur; bir parçanın büyüklüğü = torun sayısı (kişi dahil).
+Ancêtre au centre ¦ Ortadaki ata
+Aucun descendant trouvé pour cette personne. ¦ Bu kişi için torun bulunamadı.
+{n} personnes prises dans l’app (les 3 000 premières). ¦ Uygulamadan {n} kişi alındı (ilk 3 000 kişi).
+{n} personnes prises dans l’app. ¦ Uygulamadan {n} kişi alındı.
+Ajoute des liens : une personne, une autre, et la sorte de lien (témoin, parrain, voisin…). ¦ Bağ ekle: bir kişi, başka bir kişi ve bağın türü (tanık, vaftiz babası, komşu…).
+Réseau de {n} personnes et {k} liens. ¦ {n} kişi ve {k} bağdan oluşan ağ.
+Arcs : {n} personnes et {k} liens. ¦ Yaylar: {n} kişi ve {k} bağ.
+Aucun témoin, parrain ou marraine noté dans les actes de ces personnes. ¦ Bu kişilerin belgelerinde not edilmiş tanık, vaftiz babası ya da vaftiz annesi yok.
+Pas d’implexe : aucun ancêtre n’apparaît deux fois. ¦ Implex yok: hiçbir ata iki kez görünmüyor.
+Aucun mariage entre deux familles. ¦ İki aile arasında evlilik yok.
+Implexe : {n} à plusieurs places ¦ Implex: {n} ata birden çok yerde
+Mariages entre familles ¦ Aileler arası evlilikler
+{n} liens pris dans l’app. ¦ Uygulamadan {n} bağ alındı.
+{n} lien pris dans l’app. ¦ Uygulamadan {n} bağ alındı.
+🕸 Témoins, parrains, marraines ¦ 🕸 Tanıklar, vaftiz babaları, vaftiz anneleri
+Les personnes notées dans les actes (témoins, parrains, déclarants…) et celles pour qui elles l’ont été. Couleur = nom de famille. ¦ Belgelerde not edilen kişiler (tanıklar, vaftiz babaları, bildirenler…) ve kimin için not edildikleri. Renk = soyadı.
+Jusqu’où ¦ Ne kadar uzağa
+Ses liens directs ¦ Doğrudan bağları
+Et les liens de ses liens ¦ Ve bağlarının bağları
+Toute ma base (les 2 500 premiers liens) ¦ Tüm veritabanım (ilk 2 500 bağ)
+Prendre ces liens ¦ Bu bağları al
+Ajoute des liens : une personne, une autre, et la sorte de lien (mariage, implexe…). ¦ Bağ ekle: bir kişi, başka bir kişi ve bağın türü (evlilik, implex…).
+🌈 Des liens de l’app ¦ 🌈 Uygulamadan bağlar
+Implexe : un même ancêtre à plusieurs numéros Sosa ¦ Implex: aynı ata birden çok Sosa numarasında
+Témoins, parrains, marraines ¦ Tanıklar, vaftiz babaları, vaftiz anneleri
+Personne de départ (implexe, témoins) ¦ Başlangıç kişisi (implex, tanıklar)
+Il faut 2, 3 ou 4 ensembles. ¦ 2, 3 ya da 4 küme gerekir.
+⭕ Des ensembles de l’app ¦ ⭕ Uygulamadan kümeler
+Choisis 2 à 4 ensembles : chaque zone reçoit le nombre de personnes qui sont dans ces ensembles-là, et pas dans les autres. ¦ 2 ile 4 arası küme seç: her alana yalnızca o kümelerde olup ötekilerde olmayan kişilerin sayısı gelir.
+Personne de départ (pour « Mes ancêtres ») ¦ Başlangıç kişisi (“Atalarım” için)
+Rien d’autre pour l’instant. ¦ Şimdilik başka bir şey yok.
+Choisis 2 à 4 ensembles (là : {n}). ¦ 2 ile 4 arası küme seç (şu an: {n}).
+{n} personnes comptées. ¦ {n} kişi sayıldı.
+{n} personne comptée. ¦ {n} kişi sayıldı.
+Février ¦ Şubat
+Décembre ¦ Aralık
+Aucune date avec le jour et le mois (ex. : 7 mai 1925, 08/12/1960). ¦ Günü ve ayı olan tarih yok (örn.: 7 mai 1925, 08/12/1960).
+Ajoute des dates (7 mai 1925, 08/12/1960, 12 thermidor an II…) et, si tu veux, un nombre. ¦ Tarih ekle (7 mai 1925, 08/12/1960, 12 thermidor an II…) ve istersen bir sayı.
+{d} {month} {y} : {v} ¦ {d} {month} {y}: {v}
+{d} {month} : {v} ¦ {d} {month}: {v}
+jour|1er ¦ 1
+{n} dates sans jour précis (non montrées) ¦ Kesin günü olmayan {n} tarih (gösterilmedi)
+{n} date sans jour précis (non montrée) ¦ Kesin günü olmayan {n} tarih (gösterilmedi)
+Calendrier : {n} événements montrés, au plus {m} le même jour. ¦ Takvim: {n} olay gösteriliyor, aynı günde en çok {m}.
+Calendrier : {n} événement montré, au plus {m} le même jour. ¦ Takvim: {n} olay gösteriliyor, aynı günde en çok {m}.
+Personne (pour ses ancêtres) ¦ Kişi (ataları için)
+🗓 Des événements de l’app, jour par jour ¦ 🗓 Uygulamadan olaylar, gün gün
+Seules les dates avec le jour comptent. « Toutes années ensemble » montre la saison (366 cases) ; « Une ligne par année » montre les années choisies. ¦ Yalnızca günü olan tarihler sayılır. “Tüm yıllar bir arada” mevsimi gösterir (366 kutu); “Her yıl için bir satır” seçilen yılları gösterir.
+Prendre ces dates ¦ Bu tarihleri al
+Coche au moins une sorte d’événement. ¦ En az bir olay türünü işaretle.
+Aucune date complète (jour, mois, année) pour ces événements. ¦ Bu olaylar için tam tarih (gün, ay, yıl) yok.
+{what} jour par jour ¦ {what}, gün gün
+{n} dates complètes prises ({k} sans jour précis laissées de côté). ¦ {n} tam tarih alındı (kesin günü olmayan {k} tarih dışarıda bırakıldı).
+Ajoute des chiffres pour chaque mois (janvier à décembre). ¦ Her ay için sayılar ekle (ocaktan aralığa).
+Rose des mois : {list}. ¦ Ayların gülü: {list}.
+{name} {n} (le plus en {month}) ¦ {name} {n} (en çok: {month})
+🌸 Des événements de l’app, mois par mois ¦ 🌸 Uygulamadan olaylar, ay ay
+Une série par sorte d’événement ; seules les dates avec le mois comptent. ¦ Her olay türü için bir seri; yalnızca ayı olan tarihler sayılır.
+Compter par mois ¦ Aya göre say
+Aucune date avec le mois pour ces événements. ¦ Bu olaylar için ayı olan tarih yok.
+Chiffres pris dans l’app. ¦ Uygulamadan alınan sayılar.
+Ajoute des événements : une date (ou un début et une fin) et un nom. ¦ Olay ekle: bir tarih (ya da bir başlangıç ve bir bitiş) ve bir ad.
+Spirale du temps de {a} à {b}, {per} ans par tour : {n}. ¦ Zaman sarmalı, {a} – {b}, tur başına {per} yıl: {n}.
+Mariage à Rennes ¦ Rennes’de evlilik
+Départ pour Nantes ¦ Nantes’a gidiş
+Achat de la ferme ¦ Çiftliğin satın alınması
+Arrivée à Paris ¦ Paris’e varış
+🌀 Des vies et des événements de l’app ¦ 🌀 Uygulamadan hayatlar ve olaylar
+Les vies (de la naissance au décès) ¦ Hayatlar (doğumdan ölüme)
+Des événements (points) ¦ Olaylar (noktalar)
+Aucune personne avec une date de naissance ou de décès. ¦ Doğum ya da ölüm tarihi olan kimse yok.
+Vies de la famille ¦ Ailenin hayatları
+Les événements de la famille ¦ Ailenin olayları
+{n} lignes prises dans l’app. ¦ Uygulamadan {n} satır alındı.
+{n} ligne prise dans l’app. ¦ Uygulamadan {n} satır alındı.
+Les plus reliés (30) ¦ En çok bağlantılı olanlar (30)
+Par groupe (colonne « Groupe ») ¦ Gruba göre (“Grup” sütunu)
+Groupes trouvés tout seuls ¦ Kendiliğinden bulunan gruplar
+Une seule (les liens en couleur) ¦ Tek bir renk (bağlar renkli)
+Couleur du tableau ¦ Tablonun rengi
+Les liens (une ligne par lien) ¦ Bağlar (her bağ için bir satır)
+Sorte de lien (témoin, parrain…) ¦ Bağ türü (tanık, vaftiz babası…)
+Les personnes (facultatif : groupe et couleur) ¦ Kişiler (isteğe bağlı: grup ve renk)
+Couleur des sortes de liens (facultatif) ¦ Bağ türlerinin rengi (isteğe bağlı)
+Détail (dates, lieu…) ¦ Ayrıntı (tarihler, yer…)
+Le nom ¦ Ad
+Le nom et la valeur ¦ Ad ve değer
+Le nom et le détail ¦ Ad ve ayrıntı
+La valeur ¦ Değer
+Dégradé : minimum (vide = auto) ¦ Renk geçişi: en küçük (boş = otomatik)
+Dégradé : maximum (vide = auto) ¦ Renk geçişi: en büyük (boş = otomatik)
+Unité (%, ans…) ¦ Birim (%, yıl…)
+Taille du centre ¦ Ortanın büyüklüğü
+Numéro des générations ¦ Kuşak numaraları
+Origines de mes ancêtres ¦ Atalarımın kökenleri
+Les parts (parent → enfant → chiffre) ¦ Parçalar (ebeveyn → çocuk → sayı)
+Au-dessus (vide = au centre) ¦ Üstte (boş = ortada)
+Taille des parts ¦ Parçaların büyüklüğü
+Le chiffre (ou la somme des parts) ¦ Sayı (ya da parçaların toplamı)
+Le nombre de descendants ¦ Torun sayısı
+Le nombre de bouts de branche ¦ Dal uçlarının sayısı
+Anneaux au plus ¦ En çok halka
+Une par branche (plus clair vers l’extérieur) ¦ Her kol için bir renk (dışa doğru daha açık)
+Une par anneau ¦ Her halka için bir renk
+Le nom et le chiffre ¦ Ad ve sayı
+Ordre des parts ¦ Parçaların sırası
+De la plus grande à la plus petite ¦ En büyükten en küçüğe
+Texte au centre ¦ Ortadaki yazı
+Rapprocher les points de même couleur ¦ Aynı renkteki noktaları yaklaştır
+Liens colorés selon leur sorte ¦ Bağlar türlerine göre renkli
+Selon le nombre de liens ¦ Bağ sayısına göre
+Tous pareils ¦ Hepsi aynı
+Écartement ¦ Aralık
+Témoins et parrains au village ¦ Köyde tanıklar ve vaftiz babaları
+Les personnes, dans l’ordre de la ligne (facultatif) ¦ Kişiler, satırdaki sırayla (isteğe bağlı)
+Ordre sur la ligne ¦ Çizgideki sıra
+Comme dans les tableaux ¦ Tablolardaki gibi
+Les plus reliés d’abord ¦ En çok bağlantılılar önce
+Par numéro (Sosa 2, 3, 10…) ¦ Numaraya göre (Sosa 2, 3, 10…)
+Au-dessus et en dessous selon la sorte ¦ Türe göre üstte ve altta
+Hauteur des arcs ¦ Yayların yüksekliği
+Arcs colorés selon leur sorte ¦ Türüne göre renkli yaylar
+Sous la ligne ¦ Çizginin altında
+Mariages entre familles du village ¦ Köy aileleri arasındaki evlilikler
+Les ensembles (2 à 4) : A, B, C, D ¦ Kümeler (2 ile 4 arası): A, B, C, D
+Ce qu’on écrit dans chaque zone (AB = dans A et B, pas dans les autres) ¦ Her alana ne yazılır (AB = A’da ve B’de, diğerlerinde değil)
+Nombre ou texte ¦ Sayı veya metin
+Ajouter le pourcentage ¦ Yüzdeyi ekle
+Total de chaque ensemble à côté de son nom ¦ Her kümenin toplamı adının yanında
+Transparence des formes ¦ Şekillerin saydamlığı
+Mes sources ¦ Kaynaklarım
+Les dates (une ligne par événement, ou une date et un nombre) ¦ Tarihler (olay başına bir satır ya da bir tarih ve bir sayı)
+Toutes années ensemble (12 mois × 31 jours) ¦ Tüm yıllar bir arada (12 ay × 31 gün)
+Une ligne par année (semaines) ¦ Yıl başına bir satır (haftalar)
+Années (ex. 1890-1895, 1900 ; vide = auto) ¦ Yıllar (ör. 1890-1895, 1900; boş = otomatik)
+Doux (racine carrée) ¦ Yumuşak (karekök)
+Écrire les nombres dans les cases ¦ Sayıları kutulara yaz
+Dire combien de dates n’ont pas de jour ¦ Kaç tarihin günü olmadığını söyle
+Jours de naissance de mes ancêtres ¦ Atalarımın doğum günleri
+Superposées (transparentes) ¦ Üst üste (saydam)
+Longueur des rayons ¦ Işınların uzunluğu
+Surface juste (racine carrée) ¦ Gerçek alan (karekök)
+Écrire les nombres (une seule série) ¦ Sayıları yaz (tek seri)
+Mois en abrégé ¦ Kısaltılmış aylar
+Naissances, mariages et décès par mois ¦ Aylara göre doğumlar, evlilikler ve ölümler
+Les événements (une date = un point ; un début et une fin = un trait) ¦ Olaylar (bir tarih = bir nokta; bir başlangıç ve bir bitiş = bir çizgi)
+Date ou début ¦ Tarih veya başlangıç
+Un tour de spirale ¦ Sarmalın bir turu
+Un siècle ¦ Bir yüzyıl
+Une décennie ¦ On yıl
+Autant d’années que… ¦ Şu kadar yıl…
+Années par tour ¦ Tur başına yıl
+Tous (sans chevauchement) ¦ Tümü (çakışmadan)
+Trois siècles de la famille Martin ¦ Martin ailesinin üç yüzyılı
+Remettre comme au départ (ou double-clic sur le fond) ¦ Başlangıçtaki gibi yap (ya da arka plana çift tıkla)
+Arrêter / relancer le mouvement ¦ Hareketi durdur / yeniden başlat
+Arrêter ou relancer le mouvement ¦ Hareketi durdur veya yeniden başlat
+Zoomer avec la molette (sinon : Ctrl + molette) ¦ Tekerlekle yakınlaştır (yoksa: Ctrl + tekerlek)
+Zoom à la molette ¦ Tekerlekle yakınlaştırma
+Glisse un point pour le placer · double-clic pour le libérer ¦ Bir noktayı yerleştirmek için sürükle · serbest bırakmak için çift tıkla
+⚠ Lieux sans position : {list} — tape « Nom 48.11, -1.68 » ou « Depuis l’app » → Retrouver les lieux ¦ ⚠ Konumu olmayan yerler: {list} — “Ad 48.11, -1.68” yaz ya da “Uygulamadan” → Yerleri bul
+né(e) en {y} ¦ doğum yılı: {y}
+{a} → {b} : même premier prénom ¦ {a} → {b}: aynı ilk ad
+{a} → {b} : un autre de ses prénoms ¦ {a} → {b}: adlarından bir diğeri
+{a} → {b} : prénom différent ¦ {a} → {b}: farklı ad
+Ajoute des événements : un lieu, une date, une sorte (ou « Depuis l’app »). ¦ Olay ekle: bir yer, bir tarih, bir tür (ya da “Uygulamadan”).
+Carte en points : {n} événements dans {k}. ¦ Nokta haritası: {k} içinde {n} olay.
+{unit} par alvéole ¦ Hücre başına {unit}
+Ajoute des événements : un lieu et une date (ou « Depuis l’app »). ¦ Olay ekle: bir yer ve bir tarih (ya da “Uygulamadan”).
+=alvéole ¦ hücre|hücre
+=filleul ¦ vaftiz çocuğu|vaftiz çocuğu
+=cause ¦ neden|neden
+=grande famille ¦ ana grup|ana grup
+=descendant ¦ torun|torun
+=lieu retrouvé ¦ bulunan yer|bulunan yer
+=lieu sans position ¦ konumu olmayan yer|konumu olmayan yer
+=étape placée ¦ yerleştirilen durak|yerleştirilen durak
+Carte en hexagones : {n} événements dans {k} ; la plus remplie en compte {max}. ¦ Altıgen haritası: {k} içinde {n} olay; en dolu olanda {max} var.
+{name} : de {lo} (clair) à {hi} (foncé) ¦ {name}: {lo} (açık) ile {hi} (koyu) arası
+⚠ Pas trouvé sur ce fond : {list} ¦ ⚠ Bu temel haritada bulunamadı: {list}
+Carte déformée : {n} grossies selon leur chiffre (carrés). ¦ Deforme harita: {n}, rakamlarına göre büyütüldü (kareler).
+Carte déformée : {n} grossies selon leur chiffre (ronds). ¦ Deforme harita: {n}, rakamlarına göre büyütüldü (daireler).
+Étape {k} sur {n} : {what} ¦ Durak {k} / {n}: {what}
+{n} de {a} à {b} — {k} sur la carte ¦ {n}, {a} ile {b} arası — haritada {k}
+{n} — {k} sur la carte ¦ {n} — haritada {k}
+Ajoute les étapes d’une vie : une date, ce qui s’est passé, un lieu. ¦ Bir hayatın duraklarını ekle: bir tarih, ne olduğu, bir yer.
+Carte qui raconte : aucune étape. ¦ Anlatan harita: hiç durak yok.
+Carte qui raconte : {n}, étape {k} : {what}. ¦ Anlatan harita: {n}, durak {k}: {what}.
+Carte qui raconte : {n}. ¦ Anlatan harita: {n}.
+Diagrammes Généalogie indisponibles. ¦ Soy ağacı diyagramları kullanılamıyor.
+Ajoute des lignes : un nom, le nom du parent (vide pour l’ancêtre) et un chiffre si tu veux. ¦ Satır ekle: bir ad, ebeveynin adı (ata için boş) ve istersen bir rakam.
+{n} · {p} % de la descendance ¦ {n} · torunlar içinde %{p}
+Descendance en rectangles : {n} sur {g}. ¦ Dikdörtgenlerle torunlar: {g} kuşakta {n}.
+Ajoute des lignes : le parrain ou la marraine, le filleul, et leurs années de naissance. ¦ Satır ekle: vaftiz babası ya da vaftiz annesi, vaftiz çocuğu ve doğum yılları.
+Aucun filleul ne porte le prénom de son parrain ou de sa marraine ({n}). ¦ Hiçbir vaftiz çocuğu vaftiz babasının ya da vaftiz annesinin adını taşımıyor ({n}).
+{n} filleuls sur {t} ({p} %) portent le prénom de leur parrain ou marraine ¦ {t} vaftiz çocuğundan {n} tanesi (%{p}) vaftiz babasının ya da annesinin adını taşıyor
+{n} filleul sur {t} ({p} %) portent le prénom de leur parrain ou marraine ¦ {t} vaftiz çocuğundan {n} tanesi (%{p}) vaftiz babasının ya da annesinin adını taşıyor
+Pointillés : un autre de ses prénoms ¦ Noktalı: adlarından bir diğeri
+Prénoms transmis : {n} filleuls sur {t} portent le prénom de leur parrain ou marraine ; le plus transmis : {name}. ¦ Aktarılan adlar: {t} vaftiz çocuğundan {n} tanesi vaftiz babasının ya da annesinin adını taşıyor; en çok aktarılan: {name}.
+Naissance et petite enfance ¦ Doğum ve erken çocukluk
+Reins, sang et autres maladies ¦ Böbrekler, kan ve diğer hastalıklar
+Ajoute des causes de décès et leur nombre (ou « Depuis l’app »). ¦ Ölüm nedenlerini ve sayılarını ekle (ya da “Uygulamadan”).
+{name} : {v} ({a} % des décès, {b} % de « {fam} ») ¦ {name}: {v} (ölümler içinde %{a}, “{fam}” içinde %{b})
+Causes de décès : {n} décès en {k} ; la plus fréquente : {name}. ¦ Ölüm nedenleri: {k} içinde {n} ölüm; en sık görülen: {name}.
+Naissances, mariages et décès de la famille ¦ Ailenin doğumları, evlilikleri ve ölümleri
+un point par événement ¦ olay başına bir nokta
+Village {n} (près de {place}) ¦ Köy {n} ({place} yakınında)
+nombre d’événements par alvéole ¦ hücre başına olay sayısı
+chaque département grossi selon le nombre d’ancêtres ¦ her departman ata sayısına göre büyütüldü
+ancêtres ¦ atalar
+Descendance de {name} ¦ Torunları: {name}
+Prénoms transmis par les parrains et marraines ¦ Vaftiz babaları ve vaftiz anneleri tarafından aktarılan adlar
+causes relevées dans les actes de décès ¦ ölüm kayıtlarında belirtilen nedenler
+{n} : vérifie-les sur la carte. ¦ {n}: haritada kontrol et.
+Aucun lieu retrouvé : tape leurs coordonnées dans le tableau (« Nom 48.11, -1.68 »). ¦ Hiçbir yer bulunamadı: koordinatlarını tabloya yaz (“Ad 48.11, -1.68”).
+📍 Les événements de ton arbre ¦ 📍 Ağacındaki olaylar
+Chaque événement qui a un lieu devient un point (un mariage compte pour chacun des deux époux). Les lieux sans coordonnées sont retrouvés dans les communes de France par leur nom et leur département. Le tableau est remplacé. ¦ Yeri olan her olay bir nokta olur (bir evlilik iki eşin her biri için sayılır). Koordinatı olmayan yerler, adları ve departmanlarıyla Fransa’nın yerleşim yerleri arasında aranır. Tablonun yerine yenisi konur.
+Aucun événement avec un lieu pour ce choix. ¦ Bu seçim için yeri olan hiçbir olay yok.
+{what} de mes ancêtres ¦ Atalarımın olayları: {what}
+{what} de la famille ¦ Ailenin olayları: {what}
+{n} pris dans l’arbre (les 12 000 premiers). ¦ Ağaçtan alınan: {n} (ilk 12 000).
+{n} pris dans l’arbre. ¦ Ağaçtan alınan: {n}.
+{n} : « 🔎 Retrouver les lieux sans position ». ¦ {n}: “🔎 Konumu olmayan yerleri bul”.
+Ses événements (naissance, baptême, mariages, résidences, métiers, décès…) deviennent les étapes, dans l’ordre des dates. Le tableau est remplacé. ¦ Olayları (doğum, vaftiz, evlilikler, ikamet yerleri, meslekler, ölüm…) tarih sırasıyla duraklar olur. Tablonun yerine yenisi konur.
+Garder aussi les étapes sans lieu (sur la frise seulement) ¦ Yeri olmayan durakları da tut (yalnızca zaman çizelgesinde)
+Aucun événement avec un lieu pour cette personne. ¦ Bu kişi için yeri olan hiçbir olay yok.
+{n} prises dans la vie de {name}. ¦ Hayatından alınan: {n} ({name}).
+{n} prise dans la vie de {name}. ¦ Hayatından alınan: {n} ({name}).
+Chaque enfant devient une case sous son parent ; sa largeur = le nombre de ses descendants (la personne comprise). Un clic sur une case ouvre la fiche. ¦ Her çocuk ebeveyninin altında bir kutu olur; genişliği = torunlarının sayısı (kişinin kendisi dahil). Bir kutuya tıklamak kartı açar.
+Ancêtre en haut ¦ Ata en üstte
+{n} personne prise dans l’app. ¦ Uygulamadan alınan kişi: {n}.
+🎀 Parrains, marraines et filleuls ¦ 🎀 Vaftiz babaları, vaftiz anneleri ve vaftiz çocukları
+Les témoins des naissances et des baptêmes dont le rôle dit « parrain » ou « marraine ». Le lien de parenté (grand-père, oncle, sœur…) est trouvé dans l’arbre. ¦ Doğum ve vaftizlerin rolü “vaftiz babası” ya da “vaftiz annesi” olan tanıkları. Akrabalık bağı (büyükbaba, amca, kız kardeş…) ağaçta bulunur.
+Seulement autour de mes ancêtres (lignée Sosa) ¦ Yalnızca atalarımın çevresinde (Sosa soyu)
+Prendre les parrains et marraines ¦ Vaftiz babalarını ve annelerini al
+Aucun parrain ni marraine dans les témoins des naissances et baptêmes (rôle « parrain » ou « marraine »). ¦ Doğum ve vaftiz tanıkları arasında hiç vaftiz babası ya da vaftiz annesi yok (rol “vaftiz babası” ya da “vaftiz annesi”).
+{n} pris dans l’app (les 3 000 premiers). ¦ Uygulamadan alınan: {n} (ilk 3 000).
+{n} pris dans l’app. ¦ Uygulamadan alınan: {n}.
+🎗 Les causes de décès de ton arbre ¦ 🎗 Ağacındaki ölüm nedenleri
+La cause écrite sur le décès (ou la sépulture) de chaque personne. Les grandes familles (maladies infectieuses, cœur, accidents, guerre…) sont devinées d’après les mots ; corrige-les dans la colonne « Grande famille ». ¦ Her kişinin ölümüne (ya da defnine) yazılan neden. Ana gruplar (bulaşıcı hastalıklar, kalp, kazalar, savaş…) kelimelerden tahmin edilir; bunları “Ana grup” sütununda düzelt.
+Prendre les causes de décès ¦ Ölüm nedenlerini al
+Aucune cause de décès relevée : elle s’écrit dans le champ « Cause » d’un décès. ¦ Hiç ölüm nedeni belirtilmemiş: neden, bir ölümün “Neden” alanına yazılır.
+Causes de décès dans la famille ¦ Ailedeki ölüm nedenleri
+{n} avec une cause, en {k} différentes. ¦ Nedeni olan: {n}, {k} farklı neden.
+{n} avec une cause, en {k} différente. ¦ Nedeni olan: {n}, {k} farklı neden.
+Pas de fiche derrière ce point : les lignes ont été tapées à la main (« Depuis l’app » les relie aux fiches). ¦ Bu noktanın arkasında kart yok: satırlar elle yazıldı (“Uygulamadan” onları kartlara bağlar).
+Étapes de la vie ¦ Hayatın durakları
+Étape précédente ¦ Önceki durak
+Vitesse de la lecture ¦ Oynatma hızı
+Seulement à partir de l’année ¦ Yalnızca şu yıldan itibaren
+Lieu (« Rennes », « Rennes 48.11, -1.68 », « 35 »…) ¦ Yer (“Rennes”, “Rennes 48.11, -1.68”, “35”…)
+Selon le siècle ¦ Yüzyıla göre
+Mot pour un point (ex. : naissance) ¦ Bir nokta için kelime (ör.: doğum)
+Carte en points : {n} événements. ¦ Nokta haritası: {n} olay.
+Taille des alvéoles (% de la largeur) ¦ Hücre boyutu (genişliğin %’si)
+Échelle douce (très grands écarts) ¦ Yumuşak ölçek (çok büyük farklar)
+Écrire le nombre dans les alvéoles ¦ Sayıyı hücrelere yaz
+Carte en hexagones : {n} événements. ¦ Altıgen haritası: {n} olay.
+Les zones et leurs chiffres ¦ Alanlar ve rakamları
+Zone (nom ou code : 35, Gers, FR, Vaud…) ¦ Alan (ad veya kod: 35, Gers, FR, Vaud…)
+Taille des formes (% de la carte) ¦ Şekillerin boyutu (haritanın %’si)
+Écart entre les formes ¦ Şekiller arasındaki boşluk
+Selon le chiffre (dégradé) ¦ Rakama göre (renk geçişi)
+La vraie carte en fond (pâle) ¦ Arka planda gerçek harita (soluk)
+Couleur de la carte en fond ¦ Arka plandaki haritanın rengi
+Un trait vers la vraie place quand une forme a bougé ¦ Bir şekil yer değiştirdiğinde gerçek yerine doğru bir çizgi
+Carte déformée : {n} zones. ¦ Deforme harita: {n} alan.
+Lieu (« Rennes », « Rennes 48.11, -1.68 ») ¦ Yer (“Rennes”, “Rennes 48.11, -1.68”)
+Étape montrée (-1 = toute la vie) ¦ Gösterilen durak (-1 = tüm hayat)
+Suit l’étape en cours (zoom) ¦ Geçerli durağı izler (yakınlaştırma)
+Zoom sur l’étape (degrés autour) ¦ Durağa yakınlaştır (çevresindeki derece)
+Montrer les étapes à venir (pointillés) ¦ Gelecek durakları göster (noktalı)
+Carte qui raconte : {n} étapes. ¦ Anlatan harita: {n} durak.
+De haut en bas (générations en lignes) ¦ Yukarıdan aşağıya (kuşaklar satırlarda)
+De gauche à droite (générations en colonnes) ¦ Soldan sağa (kuşaklar sütunlarda)
+Une par branche (plus clair en descendant) ¦ Kol başına bir tane (aşağı indikçe daha açık)
+Selon le sexe ¦ Cinsiyete göre
+Le nom et l’année ¦ Ad ve yıl
+Le nom et le nombre ¦ Ad ve sayı
+Les parrains, marraines et filleuls ¦ Vaftiz babaları, vaftiz anneleri ve vaftiz çocukları
+Parrain ou marraine (Prénom NOM) ¦ Vaftiz babası ya da vaftiz annesi (Ad SOYADI)
+Filleul ou filleule (Prénom NOM) ¦ Vaftiz çocuğu (Ad SOYADI)
+Lien (grand-père, oncle…) ¦ Bağ (büyükbaba, amca…)
+Année de naissance (parrain) ¦ Doğum yılı (vaftiz babası/annesi)
+Année de naissance (filleul) ¦ Doğum yılı (vaftiz çocuğu)
+Prénoms au plus (lignes) ¦ En fazla ad sayısı (satır)
+Les causes de décès ¦ Ölüm nedenleri
+Grande famille (vide = devinée) ¦ Ana grup (boş = tahmin edilir)
+Deviner les grandes familles d’après les mots ¦ Ana grupları kelimelerden tahmin et
+Épaisseur des grandes familles ¦ Ana grupların kalınlığı
+Les noms et les nombres ¦ Adlar ve sayılar
+Les noms et les pourcentages ¦ Adlar ve yüzdeler
+Ranger les causes de la plus fréquente à la plus rare ¦ Nedenleri en sıktan en seyreğe sırala
+migration|{n} flux ¦ {n} akış
+le département ¦ departman
+la province ¦ eyalet
+le canton ¦ kanton
+un département ¦ bir departman
+des départements ¦ departmanlar
+une province ¦ bir eyalet
+des provinces ¦ eyaletler
+un canton ¦ bir kanton
+des cantons ¦ kantonlar
+Province ¦ Eyalet
+Canton ¦ Kanton
+Zoomer sur {what} ¦ Yakınlaştır: {what}
+{what} (nom ou numéro : {ex}) ¦ {what} (ad veya numara: {ex})
+Limites {what} par-dessus les communes ¦ Sınırlar ({what}) yerleşim yerlerinin üstünde
+{what} entière ¦ {what} (tamamı)
+Îles Britanniques ¦ Britanya Adaları
+Péninsule Ibérique ¦ İber Yarımadası
+Allemagne et Benelux ¦ Almanya ve Benelüks
+Méditerranée ¦ Akdeniz
+Afrique du Nord ¦ Kuzey Afrika
+Afrique de l’Ouest ¦ Batı Afrika
+Proche et Moyen-Orient ¦ Yakın ve Orta Doğu
+Océan Indien ¦ Hint Okyanusu
+Asie du Sud-Est ¦ Güneydoğu Asya
+Atlantique Nord (vers l’Amérique) ¦ Kuzey Atlantik (Amerika’ya doğru)
+Québec et Acadie ¦ Québec ve Akadya
+Antilles et Caraïbes ¦ Antiller ve Karayipler
+Amérique centrale ¦ Orta Amerika
+Centre et Massif central ¦ Merkez ve Massif Central
+Sud-Est et Alpes ¦ Güneydoğu ve Alpler
+Paris et petite couronne ¦ Paris ve yakın çevresi
+Fond de carte illisible. ¦ Temel harita okunamıyor.
+Ce navigateur ne sait pas ouvrir ce fond de carte. ¦ Bu tarayıcı bu temel haritayı açamıyor.
+Fond de carte inconnu. ¦ Bilinmeyen temel harita.
+Fond de carte introuvable. ¦ Temel harita bulunamadı.
+Fond de carte indisponible. ¦ Temel harita kullanılamıyor.
+(homonymes : précise {what}) ¦ (aynı adlı yerler — şunu belirt: {what})
+(plusieurs villes de ce nom : choisis-en une) ¦ (bu adda birkaç şehir var: birini seç)
+{name} : pas de chiffre ¦ {name}: rakam yok
+moins de {a} ¦ {a} altı
+{a} et plus ¦ {a} ve üstü
+de {a} à moins de {b} ¦ {a} ile {b} arası (üst sınır hariç)
+pas de chiffre ¦ rakam yok
+Ajoute des zones et leurs chiffres (onglet Données ou « Depuis l’app »). ¦ Alanları ve rakamlarını ekle (Veriler sekmesi ya da “Uygulamadan”).
+⚠ Lieux sans position : {list} — « Depuis l’app » → Lieux ¦ ⚠ Konumu olmayan yerler: {list} — “Uygulamadan” → Yerler
+⚠ Lieux sans position : {list} — tape « Nom 48.11, -1.68 » ou « Depuis l’app » ¦ ⚠ Konumu olmayan yerler: {list} — “Ad 48.11, -1.68” yaz ya da “Uygulamadan”
+Ajoute des lieux (ou des zones) et leurs chiffres. ¦ Yerleri (ya da alanları) ve rakamlarını ekle.
+Carte à symboles proportionnels : {n} ronds, le plus gros vaut {max}. ¦ Orantılı sembol haritası: {n} daire, en büyüğünün değeri {max}.
+Niveau de détail ¦ Ayrıntı düzeyi
+Partie de la carte (cadrage) ¦ Haritanın bölümü (çerçeveleme)
+Lambert azimutale équivalente (Europe, pays) ¦ Lambert azimutal eşalan (Avrupa, ülkeler)
+Outre-mer en encarts ¦ Denizaşırı topraklar ek kutularda
+Encart zoomé sur l’Île-de-France ¦ Île-de-France üzerine yakınlaştırılmış ek kutu
+Toute l’Île-de-France ¦ Tüm Île-de-France
+Pays voisins en gris ¦ Komşu ülkeler gri
+Mer en couleur ¦ Renkli deniz
+Couleur de la mer ¦ Denizin rengi
+Hauteur du dessin (px, vide = selon la carte) ¦ Çizimin yüksekliği (px, boş = haritaya göre)
+Autant de zones dans chaque classe (quantiles) ¦ Her sınıfta aynı sayıda alan (kantiller)
+Classes de même largeur ¦ Eşit genişlikte sınıflar
+Épaisseur des limites ¦ Sınırların kalınlığı
+Épaisseur des limites des communes ¦ Yerleşim yeri sınırlarının kalınlığı
+Bulle aussi sur les zones sans chiffre ¦ Rakamı olmayan alanlarda da baloncuk
+Bulle aussi sur les communes sans chiffre (plus lent) ¦ Rakamı olmayan yerleşim yerlerinde de baloncuk (daha yavaş)
+Signaler les lignes pas trouvées sur la carte ¦ Haritada bulunamayan satırları bildir
+Épaisseur du plus gros flux ¦ En büyük akışın kalınlığı
+Épaisseur du plus petit flux ¦ En küçük akışın kalınlığı
+Pointes de flèche ¦ Ok uçları
+Selon le lieu de départ ¦ Çıkış yerine göre
+Selon le lieu d’arrivée ¦ Varış yerine göre
+Ronds sur les lieux ¦ Yerlerin üzerinde daireler
+Regrouper par zone (un rond au centre de chaque zone du fond) ¦ Alana göre grupla (temel haritanın her alanının ortasında bir daire)
+Rayon du plus gros rond (px, vide = auto) ¦ En büyük dairenin yarıçapı (px, boş = otomatik)
+Chiffre à côté du nom ¦ Adın yanında rakam
+un rond par commune ¦ yerleşim yeri başına bir daire
+naissances ¦ doğumlar
+naissances par département ¦ departman başına doğumlar
+Les migrations de la famille ¦ Ailenin göçleri
+du lieu de naissance au lieu de décès ¦ doğum yerinden ölüm yerine
+personnes ¦ kişiler
+Âge moyen au décès (en années) ¦ Ölümde ortalama yaş (yıl olarak)
+Actes trouvés (événements avec une source ou un document) ¦ Bulunan belgeler (kaynağı ya da dokümanı olan olaylar)
+D’une génération à l’autre (naissance du parent → de l’enfant) ¦ Bir kuşaktan diğerine (ebeveynin doğumu → çocuğunki)
+Cadrage de la carte ¦ Haritanın çerçevelenmesi
+Tracer un cadre sur la carte (ou Maj + glisser) ¦ Harita üzerinde bir çerçeve çiz (ya da Shift + sürükle)
+Revenir au cadrage de départ ¦ Başlangıçtaki çerçevelemeye dön
+Molette : zoomer · glisser : déplacer · Maj + glisser : tracer un cadre ¦ Tekerlek: yakınlaştır · sürükle: taşı · Shift + sürükle: çerçeve çiz
+(famille) ¦ (aile)
+pas encore utilisée ¦ henüz kullanılmadı
+Les migrations de ton arbre ¦ Ağacındaki göçler
+Les lieux de ton arbre ¦ Ağacındaki yerler
+Chaque lieu de ta base devient un rond, plus gros quand plus de personnes y sont nées (mariées, décédées). Les lieux avec des coordonnées sont placés exactement ; les autres sont cherchés par leur nom sur la carte. Le tableau est remplacé. ¦ Veritabanındaki her yer bir daire olur; orada daha çok kişi doğmuşsa (evlenmişse, ölmüşse) daha büyük olur. Koordinatı olan yerler tam olarak yerleştirilir; diğerleri haritada adlarıyla aranır. Tablonun yerine yenisi konur.
+Chaque personne relie deux lieux de ta base (ceux qui ont des coordonnées, ou une zone de la carte reconnue). Le tableau est remplacé. ¦ Her kişi veritabanındaki iki yeri birbirine bağlar (koordinatı olanlar ya da haritada tanınan bir alan). Tablonun yerine yenisi konur.
+Chaque lieu de ta base est rattaché à sa zone (d’après ses coordonnées, sinon son département, sa région ou son pays ; pour les communes : son code INSEE, puis son nom et son département), puis les zones sont comptées. Le tableau est remplacé. ¦ Veritabanındaki her yer kendi alanına bağlanır (koordinatlarına göre, yoksa departmanına, bölgesine ya da ülkesine göre; yerleşim yerleri için: INSEE koduna, sonra adına ve departmanına göre), ardından alanlar sayılır. Tablonun yerine yenisi konur.
+🔄 Tenir à jour (relire l’arbre à chaque affichage) ¦ 🔄 Güncel tut (ağacı her gösterimde yeniden oku)
+＋ Ajouter un flux ¦ ＋ Akış ekle
+＋ Ajouter ce flux ¦ ＋ Bu akışı ekle
+Un lieu sans position (⚠) : choisis-le dans ta base ou dans les communes et villes du monde, ou tape ses coordonnées dans le tableau (« Rennes 48.11, -1.68 »). ¦ Konumu olmayan bir yer (⚠): onu veritabanından ya da yerleşim yerleri ve dünya şehirleri arasından seç, ya da koordinatlarını tabloya yaz (“Rennes 48.11, -1.68”).
+⏳ Lecture de l’arbre… ¦ ⏳ Ağaç okunuyor…
+(mes ancêtres) ¦ (atalarım)
+{n} : cherchés par leur nom sur la carte. ¦ {n}: haritada adlarıyla arandı.
+{n} : cherché par leur nom sur la carte. ¦ {n}: haritada adıyla arandı.
+=lieu sans coordonnées ¦ koordinatı olmayan yer|koordinatı olmayan yer
+=lieu rattaché ¦ bağlanan yer|bağlanan yer
+Aucun lieu dans ton arbre pour ce choix. ¦ Bu seçim için ağacında hiç yer yok.
+Aucun déplacement trouvé (il faut deux lieux différents pour une même personne). ¦ Hiç yer değiştirme bulunamadı (aynı kişi için iki farklı yer gerekir).
+{n} : voir « Les lieux du tableau ». ¦ {n}: “Tablodaki yerler” bölümüne bak.
+{n} à {z} (âge moyen sur {p} ; la carte montre des années, pas un nombre). ¦ {n} – {z} ({p} üzerinden ortalama yaş; harita sayı değil yıl gösteriyor).
+{n} à {z}. ¦ {n} – {z}.
+{n} hors de cette carte ou sans position ({list}). ¦ Bu haritanın dışında ya da konumu olmayan: {n} ({list}).
+Aucun lieu de ton arbre ne tombe sur cette carte : change de carte ou de niveau dans Réglages. ¦ Ağacındaki hiçbir yer bu haritaya düşmüyor: Ayarlar’da haritayı ya da düzeyi değiştir.
+Où est « {name} » ? ¦ “{name}” nerede?
+Le tableau n’a pas encore de lieux. ¦ Tabloda henüz yer yok.
+Ce lieu n’a pas de coordonnées : choisis-en un autre, ou tape ses coordonnées dans le tableau. ¦ Bu yerin koordinatı yok: başka bir yer seç ya da koordinatlarını tabloya yaz.
+Choisis le lieu de départ et le lieu d’arrivée. ¦ Çıkış yerini ve varış yerini seç.
+Flux ajouté. ¦ Akış eklendi.
+niveau|ville ¦ şehir
+niveau|département ¦ departman
+niveau|province ¦ eyalet
+niveau|canton ¦ kanton
+niveau|région ¦ bölge
+niveau|grande région ¦ büyük bölge
+niveau|pays ¦ ülke
+niveau|continent ¦ kıta
+niveau|zone ¦ alan
+sa commune ¦ yerleşim yeri
+leur commune ¦ yerleşim yerleri
+une ville ¦ bir şehir
+son département ¦ departmanı
+leur département ¦ departmanları
+sa province ¦ eyaleti
+leur province ¦ eyaletleri
+son canton ¦ kantonu
+leur canton ¦ kantonları
+région ¦ bölge
+sa région ¦ bölgesi
+leur région ¦ bölgeleri
+une région ¦ bir bölge
+grande région ¦ büyük bölge
+sa grande région ¦ büyük bölgesi
+leur grande région ¦ büyük bölgeleri
+une grande région ¦ bir büyük bölge
+son pays ¦ ülkesi
+leur pays ¦ ülkeleri
+un pays ¦ bir ülke
+son continent ¦ kıtası
+leur continent ¦ kıtaları
+un continent ¦ bir kıta
+sa zone ¦ alanı
+leur zone ¦ alanları
+une zone ¦ bir alan
+aussi « {name} » ¦ ayrıca “{name}”
+autre niveau : « {name} » ¦ başka düzey: “{name}”
+ancienne commune ¦ eski yerleşim yeri
+Plusieurs villes s’appellent {name} ({n}) : choisis-en une dans la liste. ¦ Bu adda birkaç şehir var ({n}): {name}. Listeden birini seç.
+Plusieurs villes s’appellent {name} : choisis-en une dans la liste. ¦ Bu adda birkaç şehir var: {name}. Listeden birini seç.
+{name} est {a}, mais la carte montre le niveau « {level} » : choisis {b} dans la liste, ou change le niveau de détail (Réglages). ¦ {name}: {a}; ama harita “{level}” düzeyini gösteriyor. Listeden şunu seç: {b}, ya da ayrıntı düzeyini değiştir (Ayarlar).
+Pas trouvé sur cette carte : vérifie l’orthographe, ou choisis dans la liste. ¦ Bu haritada bulunamadı: yazımı kontrol et ya da listeden seç.
+{n} villes comptent dans {where} sur cette carte (niveau « {level} »). ¦ Bu haritada {n} şehir şuraya sayılıyor: {where} (düzey “{level}”).
+1 ville compte dans {where} sur cette carte (niveau « {level} »). ¦ Bu haritada 1 şehir şuraya sayılıyor: {where} (düzey “{level}”).
+Rien de ce nom sur cette carte. ¦ Bu haritada bu adda hiçbir şey yok.
+chargement des communes… ¦ yerleşim yerleri yükleniyor…
+↑ ↓ pour choisir · Entrée pour valider · Échap pour fermer ¦ ↑ ↓ seçmek için · Enter onaylamak için · Esc kapatmak için
+Une ville compte dans {where} sur cette carte. ¦ Bu haritada bir şehir şuraya sayılıyor: {where}.
+Niveau « Communes » : chaque ville a sa couleur. ¦ “Yerleşim yerleri” düzeyi: her şehrin kendi rengi var.
+Zone (nom ou code : 35, FRH03, BE, Vaud…) ¦ Alan (ad veya kod: 35, FRH03, BE, Vaud…)
+Carte colorée : {n} zones ({map}, {level}). ¦ Renkli harita: {n} alan ({map}, {level}).
+Carte des migrations : {n} flux. ¦ Göç haritası: {n} akış.
+Les lieux (ou zones) et leurs chiffres ¦ Yerler (ya da alanlar) ve rakamları
+Lieu ou zone (« Rennes », « Rennes 48.11, -1.68 », « 35 »…) ¦ Yer ya da alan (“Rennes”, “Rennes 48.11, -1.68”, “35”…)
+Carte à symboles proportionnels : {n} lieux. ¦ Orantılı sembol haritası: {n} yer.
+Rien à dessiner pour l’instant. ¦ Şimdilik çizilecek bir şey yok.
+Graphique introuvable : supprimé, ou fait dans un autre navigateur. ¦ Grafik bulunamadı: silinmiş ya da başka bir tarayıcıda yapılmış.
+L’ouvrir en grand dans Graphiques ¦ Grafiklerde büyük olarak aç
+Ajuster à la page ¦ Sayfaya sığdır
+par l’impression : « Enregistrer en PDF » ¦ yazdırma yoluyla: “PDF olarak kaydet”
+ouvrir les chiffres dans le tableur ¦ rakamları tabloda aç
+du diagramme, à réimporter ¦ diyagramın, yeniden içe aktarmak için
+à coller ailleurs (⌘V) ¦ başka bir yere yapıştırmak için (⌘V)
+Revenir à la couleur automatique ¦ Otomatik renge dön
+🧾 Tout voir dans le tableur ¦ 🧾 Hepsini tabloda gör
+{a} lignes sur {b} (toutes comptent dans le dessin) ¦ {b} satırdan {a} tanesi (hepsi çizimde sayılır)
+Couleur de la série ¦ Serinin rengi
+Supprimer cette série ¦ Bu seriyi sil
+Copier des cellules dans Excel, LibreOffice, Numbers… et les coller ici ¦ Excel, LibreOffice, Numbers… içinde hücreleri kopyala ve buraya yapıştır
+⤒ Importer un CSV ¦ ⤒ CSV içe aktar
+Un classeur déjà fait dans le Tableur : une feuille, une plage, copiée une fois ou liée ¦ Tablo’da önceden yapılmış bir çalışma kitabı: bir sayfa, bir aralık, bir kez kopyalanmış ya da bağlı
+Relevés paroissiaux ¦ Kilise kayıt dökümleri
+Visite aux AD ¦ Arşiv ziyareti (AD)
+Déplacement ¦ Yolculuk
+Rédaction ¦ Yazım
+Planning de recherche ¦ Araştırma planı
+Style, annotations, lignes de repère, petits multiples, lecture dans le temps ¦ Stil, açıklamalar, referans çizgileri, küçük çoklular, zaman içinde oynatma
+Les figer (les modifier à la main) ¦ Sabitle (elle düzenle)
+Le tableur en grand, préparé avec les colonnes de ce diagramme : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir » ¦ Bu diyagramın sütunlarıyla hazırlanmış büyük tablo: formüller, sıralama, Excel’den yapıştırma… sonra “✓ Kaydet ve geri dön”
+dans le tableur (formules, tri, Excel…) ¦ tabloda (formüller, sıralama, Excel…)
+🔄 Chiffres tenus à jour depuis « {src} » : ils sont relus à chaque affichage. ¦ 🔄 Rakamlar “{src}” kaynağından güncel tutuluyor: her gösterimde yeniden okunur.
+l’app ¦ uygulama
+Pas de réglage particulier. ¦ Özel bir ayar yok.
+🌳 Des données de mon arbre ¦ 🌳 Ağacımdaki veriler
+Remplace le tableau par des chiffres calculés dans ta base (tu peux ensuite les retoucher à la main). ¦ Tabloyu veritabanında hesaplanan rakamlarla değiştirir (sonra elle düzeltebilirsin).
+📊 Des chiffres de l’app ¦ 📊 Uygulamadaki rakamlar
+Remplace le tableau par des chiffres calculés dans ta base : « 🧮 Compter dans ma base » (ce qu’on compte, le groupe de personnes, la période, le regroupement… tout se règle ci-dessous), un exemple, une statistique de l’app ou un de « Mes graphiques » (faits dans Réglages → Éditeur de graphiques). ¦ Tabloyu veritabanında hesaplanan rakamlarla değiştirir: “🧮 Veritabanımda say” (ne sayılacağı, kişi grubu, dönem, gruplama… hepsi aşağıda ayarlanır), bir örnek, uygulamanın bir istatistiği ya da “Grafiklerim”den biri (Ayarlar → Grafik düzenleyici’de yapılmış).
+👥 Des personnes de la base ¦ 👥 Veritabanındaki kişiler
+Chaque personne devient une ligne, de sa naissance à son décès (rôle : Homme ou Femme, à changer à volonté). ¦ Her kişi doğumundan ölümüne bir satır olur (rol: Erkek ya da Kadın, istediğin gibi değiştir).
+Leurs naissances, mariages et décès deviennent des dates de la frise. ¦ Doğumları, evlilikleri ve ölümleri zaman çizelgesinde tarihler olur.
+Ce type de diagramme se remplit à la main, en collant un tableau ou avec un CSV (onglet Données). ¦ Bu diyagram türü elle, bir tablo yapıştırarak ya da bir CSV ile doldurulur (Veriler sekmesi).
+Données prises dans ton arbre. ¦ Ağacından alınan veriler.
+Ces chiffres sont déjà comptés : tu peux les trier, garder les premiers, montrer « Inconnu » ou les passer en %. Pour choisir ce qu’on compte, le groupe de personnes ou la période, prends « 🧮 Compter dans ma base » ¦ Bu rakamlar zaten sayıldı: onları sıralayabilir, ilklerini tutabilir, “Bilinmiyor”u gösterebilir ya da % olarak gösterebilirsin. Ne sayılacağını, kişi grubunu ya da dönemi seçmek için “🧮 Veritabanımda say”ı kullan
+{name} — pas pour ce diagramme ¦ {name} — bu diyagram için değil
+Aucun chiffre pour ces réglages : essaie un autre groupe, une autre période ou montre « Inconnu ». ¦ Bu ayarlar için hiç rakam yok: başka bir grup, başka bir dönem dene ya da “Bilinmiyor”u göster.
+{n} valeurs prises dans ta base ({k} comptés). ¦ Veritabanından alınan değer: {n} (sayılan: {k}).
+{n} valeur prise dans ta base ({k} comptés). ¦ Veritabanından alınan değer: {n} (sayılan: {k}).
+{n} valeur prise dans ta base. ¦ Veritabanından alınan değer: {n}.
+{n} valeurs prises dans l’app. ¦ Uygulamadan alınan değer: {n}.
+{n} valeur prise dans l’app. ¦ Uygulamadan alınan değer: {n}.
+{name} : pas de date de naissance dans sa fiche. ¦ {name}: kartında doğum tarihi yok.
+{name} ajouté. ¦ Eklendi: {name}.
+{name} ajoutée. ¦ Eklendi: {name}.
+{name} ajouté(e). ¦ Eklendi: {name}.
+Le diagramme apparaît alors sur la fiche de la personne, dans l’enquête ou dans le projet de l’Atelier. Pour le poser ailleurs : un widget (Réglages → Éditeur de widgets), un bloc de fiche, la mise en page. ¦ Diyagram böylece kişinin kartında, incelemede ya da Atölye projesinde görünür. Başka bir yere koymak için: bir widget (Ayarlar → Widget düzenleyici), bir not kartı bloğu, sayfa düzeni.
+ou une partie d’enquête, un projet de l’Atelier… ¦ ya da bir incelemenin bir bölümü, bir Atölye projesi…
+Supprimer la série « {name} » et ses chiffres ? ¦ “{name}” serisi ve rakamları silinsin mi?
+Supprimer la série ¦ Seriyi sil
+Vider le tableau ¦ Tabloyu boşalt
+une feuille, une plage : copiée une fois ou liée (tenue à jour) ¦ bir sayfa, bir aralık: bir kez kopyalanmış ya da bağlı (güncel tutulur)
+Sélectionne des cellules dans Excel, LibreOffice, Numbers ou Google Sheets, copie-les (⌘C) et colle-les ici. Si la première ligne contient des titres, ils deviennent les noms des séries. Le tableau actuel est remplacé. ¦ Excel, LibreOffice, Numbers ya da Google Sheets içinde hücreleri seç, kopyala (⌘C) ve buraya yapıştır. İlk satırda başlıklar varsa serilerin adı olurlar. Mevcut tablonun yerine yenisi konur.
+Données liées au classeur : elles suivent le Tableur. ¦ Çalışma kitabına bağlı veriler: Tablo’yu izler.
+{n} lignes copiées du classeur. ¦ Çalışma kitabından kopyalanan satır: {n}.
+Ce type ne lit pas le même tableau : l’exemple remplace tes données. Continuer ? ¦ Bu tür aynı tabloyu okumuyor: örnek verilerinin yerine geçer. Devam edilsin mi?
+D’un graphique (à moi ou de l’app, tenu à jour) ¦ Bir grafikten (benim ya da uygulamanın, güncel tutulur)
+Un de mes graphiques (Éditeur de graphiques, tenu à jour) ¦ Grafiklerimden biri (Grafik düzenleyici, güncel tutulur)
+Hémicycle d’une assemblée, fer à cheval, frise des membres d’un groupe de musique façon Wikipédia, frise de vies, camembert, flux de migrations, organigramme, nuage de noms… avec tes propres chiffres ou ceux de l’app. Ils se posent ensuite partout : tableau de bord, fiches, fiche d’une personne, enquêtes, Atelier, mise en page. ¦ Meclis yarım dairesi, at nalı, Wikipedia tarzı müzik grubu üyeleri çizelgesi, hayatlar çizelgesi, pasta grafiği, göç akışları, organizasyon şeması, ad bulutu… kendi rakamlarınla ya da uygulamanınkilerle. Sonra her yere konabilir: gösterge paneli, not kartları, bir kişinin kartı, incelemeler, Atölye, sayfa düzeni.
+MES DIAGRAMMES ¦ DİYAGRAMLARIM
+📈 Ce diagramme montre ton graphique « {name} » (Éditeur de graphiques) : son dessin et ses chiffres le suivent, partout où il est posé. ¦ 📈 Bu diyagram “{name}” grafiğini gösteriyor (Grafik düzenleyici): çizimi ve rakamları, konduğu her yerde onu izler.
+🔗 Données : {src} · tenu à jour. ¦ 🔗 Veriler: {src} · güncel tutulur.
+🔄 Chiffres tenus à jour depuis « {src} ». ¦ 🔄 Rakamlar “{src}” kaynağından güncel tutuluyor.
+✎ Modifier le graphique ¦ ✎ Grafiği düzenle
+Une copie figée, à retoucher comme un diagramme ¦ Bir diyagram gibi düzeltilecek sabit bir kopya
+Une copie à modifier ¦ Düzenlenecek bir kopya
+Le poser sur le tableau de bord, comme un widget ¦ Gösterge paneline bir widget gibi koy
+Pour le poser ailleurs : <b>Réglages → Éditeur de widgets</b> (partie « Diagramme ») pour le tableau de bord ou un onglet, un bloc « 📊 Diagramme » dans une <b>Fiche</b>, « Relier » (onglet de l’éditeur) pour la fiche d’une personne, une enquête ou un projet de l’Atelier, et « Insérer → Diagramme » dans la <b>mise en page</b>. Tous tes graphiques et diagrammes : <b>Listes → Graphiques et diagrammes</b>. ¦ Başka bir yere koymak için: gösterge paneli ya da bir sekme için <b>Ayarlar → Widget düzenleyici</b> (“Diyagram” bölümü), bir <b>Not kartı</b> içinde “📊 Diyagram” bloğu, bir kişinin kartı, bir inceleme ya da bir Atölye projesi için “Bağla” (düzenleyicinin sekmesi) ve <b>sayfa düzeninde</b> “Ekle → Diyagram”. Tüm grafiklerin ve diyagramların: <b>Listeler → Grafikler ve diyagramlar</b>.
+Rien à copier : le graphique est introuvable. ¦ Kopyalanacak bir şey yok: grafik bulunamadı.
+Supprimer le diagramme « {name} » ? Il disparaît aussi des widgets, fiches et enquêtes où il est posé. ¦ “{name}” diyagramı silinsin mi? Konduğu widget’lardan, not kartlarından ve incelemelerden de kaybolur.
+Supprimer le diagramme ¦ Diyagramı sil
+Passe par les Réglages → Éditeur de widgets. ¦ Ayarlar → Widget düzenleyici’den geç.
+Ajouter un diagramme ¦ Diyagram ekle
+Ajoute des groupes et leur nombre de sièges. ¦ Grupları ve sandalye sayılarını ekle.
+{n} sièges ¦ {n} sandalye
+Tribune · {n} sièges ¦ Kürsü · {n} sandalye
+Majorité absolue : {n} sièges ¦ Salt çoğunluk: {n} sandalye
+Ajoute des lignes : un nom, des rôles, une date de début et de fin. ¦ Satır ekle: bir ad, roller, bir başlangıç ve bitiş tarihi.
+Ajoute des dates et ce qui s’est passé. ¦ Tarihleri ve ne olduğunu ekle.
+Ajoute des lignes de chiffres. ¦ Rakam satırları ekle.
+Ajoute des tranches (âges…) et deux séries (hommes, femmes…). ¦ Dilimler (yaşlar…) ve iki seri (erkekler, kadınlar…) ekle.
+Ajoute des lignes et des colonnes de chiffres. ¦ Rakam satırları ve sütunları ekle.
+Ajoute des points : X, Y (et une taille pour des bulles). ¦ Nokta ekle: X, Y (baloncuklar için bir boyut da).
+Ajoute des cases : un nom et, pour chacune, sa case « au-dessus ». ¦ Kutu ekle: bir ad ve her biri için “üstündeki” kutu.
+Ajoute des mots (noms, prénoms, lieux…) et leur poids. ¦ Kelimeler (soyadları, adlar, yerler…) ve ağırlıklarını ekle.
+Texte au centre (sinon le total) ¦ Ortadaki metin (yoksa toplam)
+Total au centre ¦ Ortada toplam
+Les groupes (de gauche à droite) ¦ Gruplar (soldan sağa)
+Côté (Westminster) ¦ Taraf (Westminster)
+Salle (rangées face à la tribune) ¦ Salon (kürsüye bakan sıralar)
+Angle de l’arc ¦ Yayın açısı
+Nombre de rangées (0 = automatique) ¦ Sıra sayısı (0 = otomatik)
+Texte au centre (sinon le nombre de sièges) ¦ Ortadaki metin (yoksa sandalye sayısı)
+Petit texte sous le nombre ¦ Sayının altında küçük metin
+En texte et ligne au milieu ¦ Metin olarak ve ortada çizgi
+Écologistes ¦ Yeşiller
+Libéraux ¦ Liberaller
+Les rôles et leur couleur ¦ Roller ve renkleri
+Début de la frise (vide = auto) ¦ Çizelgenin başlangıcı (boş = otomatik)
+Fin de la frise (vide = auto) ¦ Çizelgenin sonu (boş = otomatik)
+Écrire le nom des traits verticaux ¦ Dikey çizgilerin adını yaz
+Les Cousins — membres ¦ Les Cousins — üyeler
+Guitare solo, Chœurs ¦ Solo gitar, Vokal
+Deuxième ¦ İkinci
+Tous en dessous ¦ Hepsi altta
+Décès de Jean ¦ Jean’ın ölümü
+La famille Martin ¦ Martin ailesi
+Sur les parts ¦ Dilimlerin üzerinde
+Avec une date de naissance ¦ Doğum tarihi olan
+Où en sont mes recherches ¦ Araştırmalarım ne durumda
+Maximum de l’échelle (vide = auto) ¦ Ölçeğin en büyük değeri (boş = otomatik)
+Première ligne en bas ¦ İlk satır en altta
+Naissances par mois et par siècle ¦ Aylara ve yüzyıllara göre doğumlar
+Nom de l’axe X ¦ X ekseninin adı
+Nom de l’axe Y ¦ Y ekseninin adı
+Taille de la plus grosse bulle ¦ En büyük baloncuğun boyutu
+Âge au mariage et nombre d’enfants ¦ Evlilik yaşı ve çocuk sayısı
+Au-dessus (nom de la case) ¦ Üstünde (kutunun adı)
+Présidente ¦ Başkan
+Trésorier ¦ Sayman
+Secrétaire ¦ Sekreter
+3 bénévoles ¦ 3 gönüllü
+Fêtes ¦ Şenlikler
+5 bénévoles ¦ 5 gönüllü
+Association des Amis du village ¦ Köyün Dostları Derneği
+Diagramme de Venn (2 ou 3 ensembles) ¦ Venn diyagramı (2 ya da 3 küme)
+Mes objectifs ¦ Hedeflerim
+Jean et Marie ¦ Jean ve Marie
+Pierre et Anne ¦ Pierre ve Anne
+Louis et Rose ¦ Louis ve Rose
+Enfants par couple ¦ Çift başına çocuk
+Source / note en bas ¦ Kaynak / altta not
+Largeur de l’image ¦ Resmin genişliği
+Notaires ¦ Noterler
+↺ Police de l’app ¦ ↺ Uygulamanın yazı tipi
+{name} : {a} sur {n} enfants morts avant 1 an ({p} %) ¦ {name}: {n} çocuktan {a} tanesi 1 yaşından önce öldü (%{p})
+{name} : {a} sur {n} morts avant 5 ans ({p} %) ¦ {name}: {n} kişiden {a} tanesi 5 yaşından önce öldü (%{p})
+parrains : {a} sur {b} · marraines : {c} sur {d} ¦ vaftiz babaları: {b} kişiden {a} · vaftiz anneleri: {d} kişiden {c}

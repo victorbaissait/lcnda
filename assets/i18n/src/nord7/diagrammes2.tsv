@@ -1,0 +1,1692 @@
+fr ¦ is
+donnees|Tableaux ¦ Töflur
+Types de diagrammes enregistrés (galerie des diagrammes et Éditeur de graphiques). ¦ Vistaðar gerðir skýringarmynda (myndasafn skýringarmynda og grafaritill).
+Les mêmes types pour <b>Mes diagrammes</b> et pour l’<b>Éditeur de graphiques</b> : ↑ ↓ pour l’ordre, décoche pour cacher un type, choisis un groupe (ou « ＋ Nouveau groupe… ») pour les regrouper à ta façon ; ✎ renomme un groupe, ↑ ↓ de l’en-tête range les groupes. ¦ Sömu gerðir fyrir <b>Skýringarmyndirnar mínar</b> og fyrir <b>Grafaritilinn</b>: ↑ ↓ fyrir röðina, taktu hakið af til að fela gerð, veldu hóp (eða „＋ Nýr hópur…“) til að flokka þær eins og þú vilt; ✎ endurnefnir hóp, ↑ ↓ í hausnum raðar hópunum.
+⤒ Mon propre graphique à partir de données d’ailleurs ¦ ⤒ Mitt eigið graf úr gögnum annars staðar frá
+<b>Un tableau</b> (tableur, site, CSV) : copie-le, puis <b>Graphiques → Mes diagrammes → ＋ Nouveau</b> (ou « ⤒ Importer » là où l’on pose un diagramme : fiche, personne, enquête, Atelier) → « Coller un tableau ». Première colonne = les noms, colonnes suivantes = les chiffres ; une première ligne de titres devient le nom des séries. ¦ <b>Tafla</b> (töflureiknir, vefsíða, CSV): afritaðu hana, síðan <b>Gröf → Skýringarmyndirnar mínar → ＋ Nýtt</b> (eða „⤒ Flytja inn“ þar sem skýringarmynd er sett: spjald, einstaklingur, athugun, Verkstæði) → „Líma töflu“. Fyrsti dálkur = nöfnin, næstu dálkar = tölurnar; fyrsta lína með fyrirsögnum verður nafn raðanna.
+<b>Un fichier CSV</b> : « ⤒ Importer » → « Fichier » (séparateur virgule, point-virgule ou tabulation). ¦ <b>CSV-skrá</b>: „⤒ Flytja inn“ → „Skrá“ (aðgreint með kommu, semíkommu eða dálkhoppi).
+<b>Une page Wikipédia</b> : « ⤒ Importer » → « Page Wikipédia », colle son adresse : ses tableaux et ses images de graphiques s’affichent, choisis-en un. ¦ <b>Wikipedia-síða</b>: „⤒ Flytja inn“ → „Wikipedia-síða“, límdu slóðina: töflur hennar og myndir af gröfum birtast, veldu eina.
+<b>Une image de graphique</b> (camembert, barres, courbe, hémicycle) : « ⤒ Importer » → « Image » : l’app repère les couleurs et propose les chiffres (parts, hauteurs, sièges) ; corrige les noms et les valeurs dans le tableau avant de créer le diagramme. ¦ <b>Mynd af grafi</b> (kökurit, súlur, ferill, þingsalur): „⤒ Flytja inn“ → „Mynd“: appið finnur litina og leggur til tölur (hluta, hæðir, sæti); leiðréttu nöfnin og gildin í töflunni áður en þú býrð til skýringarmyndina.
+<b>Un graphique partagé</b> par quelqu’un (fichier <code>.lcnda-widget.json</code>) : « ⤒ Importer » → « Fichier » : il rejoint « Mes graphiques » et se dessine avec les données de ton arbre. ¦ <b>Deilt graf</b> frá einhverjum (skrá <code>.lcnda-widget.json</code>): „⤒ Flytja inn“ → „Skrá“: það bætist í „Gröfin mín“ og er teiknað með gögnunum úr ættartrénu þínu.
+Ensuite, le diagramme se choisit parmi tous les types (parts, chiffres, frises, liens…), se règle, s’exporte (PNG, SVG, PDF) et se pose partout. ¦ Síðan er skýringarmyndin valin úr öllum gerðum (hlutar, tölur, tímalínur, tengsl…), stillt, flutt út (PNG, SVG, PDF) og sett hvar sem er.
+(avec des personnes) ¦ (með einstaklingum)
+Ce dessin a besoin d’une liste de personnes (source « Personnes »). ¦ Þessi teikning þarf lista af einstaklingum (heimild „Einstaklingar“).
+Aucune personne avec un lieu de naissance et un lieu de décès. ¦ Enginn einstaklingur með fæðingarstað og dánarstað.
+Créer le diagramme ¦ Búa til skýringarmyndina
+Un de tes graphiques (Réglages → Éditeur de graphiques), un exemple, ou une statistique de l’app (naissances par décennie, prénoms…), dessiné avec le type de ton choix. ¦ Eitt af gröfunum þínum (Stillingar → Grafaritill), dæmi, eða tölfræði úr appinu (fæðingar eftir áratugum, eiginnöfn…), teiknað með þeirri gerð sem þú velur.
+Chiffres tenus à jour (relus dans l’arbre à chaque affichage) ¦ Tölur haldnar uppfærðar (lesnar aftur úr ættartrénu í hvert sinn sem þær birtast)
+＋ Créer un nouveau graphique (Éditeur de graphiques)… ¦ ＋ Búa til nýtt graf (Grafaritill)…
+🌐 Page Wikipédia ¦ 🌐 Wikipedia-síða
+Copie un tableau (tableur, site web…) et colle-le ici. Première colonne = les noms, colonnes suivantes = les chiffres. ¦ Afritaðu töflu (töflureiknir, vefsíða…) og límdu hana hér. Fyrsti dálkur = nöfnin, næstu dálkar = tölurnar.
+L’adresse d’une page Wikipédia (n’importe quelle langue) : ses tableaux et ses graphiques s’affichent, choisis-en un. Il faut Internet. ¦ Slóð Wikipedia-síðu (á hvaða tungumáli sem er): töflur hennar og gröf birtast, veldu eitt. Netsamband þarf.
+Un camembert, des barres ou colonnes, une courbe ou un hémicycle en image : l’app regarde ses couleurs et propose des chiffres, à corriger ensuite. ¦ Kökurit, súlur eða dálkar, ferill eða þingsalur á mynd: appið skoðar litina og leggur til tölur sem þú leiðréttir síðan.
+Graphique « {name} » ajouté à Mes graphiques. ¦ Grafinu „{name}“ bætt við Gröfin mín.
+Lecture de la page… ¦ Les síðuna…
+{n} lignes ¦ Línur: {n}
+<b>Images</b> (graphiques à convertir en chiffres) ¦ <b>Myndir</b> (gröf sem á að breyta í tölur)
+Image illisible (ou refusée par le site). ¦ Ólæsileg mynd (eða vefsíðan hafnaði henni).
+Pas de couleur franche trouvée (graphique en noir et blanc ?) : remplis le tableau à la main. ¦ Enginn skýr litur fannst (graf í svarthvítu?): fylltu töfluna út í höndunum.
+Parts en % de la surface colorée. Les textes ne sont pas lus : donne un nom à chaque part. ¦ Hlutar í % af lituðum fleti. Textinn er ekki lesinn: gefðu hverjum hluta nafn.
+Sièges comptés (une tache = un siège ; deux sièges collés comptent pour deux). Nomme les groupes. ¦ Sæti talin (einn blettur = eitt sæti; tvö samföst sæti teljast tvö). Nefndu hópana.
+Hauteur de la courbe (0 à 100 % de l’image) en 12 points : règle l’échelle avec « Valeur du haut ». ¦ Hæð ferilsins (0 til 100 % af myndinni) í 12 punktum: stilltu kvarðann með „Efsta gildi“.
+Longueur de chaque barre, la plus longue = 100 : indique sa vraie valeur dans « Valeur du haut », et nomme les barres. ¦ Lengd hverrar súlu, sú lengsta = 100: settu raunverulegt gildi hennar í „Efsta gildi“ og nefndu súlurnar.
+C’est un… ¦ Þetta er…
+Sorte de média ¦ Tegund miðils
+en vie ou décédés ¦ á lífi eða látnir
+avec ou sans source ¦ með eða án heimildar
+par sorte de média ¦ eftir tegund miðils
+l’âge au décès ¦ aldur við andlát
+l’âge au mariage ¦ aldur við hjónaband
+le nombre d’enfants ¦ fjöldi barna
+l’âge au premier enfant ¦ aldur við fyrsta barn
+Une de mes listes ¦ Einn af listunum mínum
+de A à Z ¦ frá A til Ö
+de Z à A ¦ frá Ö til A
+dans l’ordre ¦ í röð
+Part en % ¦ Hlutfall í %
+Une personne qui a plusieurs de ces événements dans le même groupe ne compte qu’une fois. ¦ Einstaklingur sem á fleiri en einn af þessum atburðum í sama hópi telst aðeins einu sinni.
+Pour ne garder que certaines personnes : un métier, un nombre d’enfants, un lieu de naissance, une période, un âge au décès, une étiquette, une génération Sosa… Ajoute autant de critères que tu veux : « tous » les veut tous (ET), « au moins un » se contente d’un seul (OU). ¦ Til að halda aðeins sumum einstaklingum: starf, fjöldi barna, fæðingarstaður, tímabil, aldur við andlát, merki, Sosa-kynslóð… Bættu við eins mörgum skilyrðum og þú vilt: „öll“ krefst þeirra allra (OG), „að minnsta kosti eitt“ lætur eitt nægja (EÐA).
+Les personnes prises en compte : toute ta base, tes ancêtres ou tes descendants, une branche, une étiquette, une de tes listes, une recherche, ou des personnes que tu choisis. ¦ Einstaklingarnir sem eru teknir með: allur gagnagrunnurinn þinn, forfeður þínir eða afkomendur, grein, merki, einn af listunum þínum, leit, eða einstaklingar sem þú velur.
+La personne d’où l’on part pour ses ancêtres, ses descendants ou ses branches (elle est comptée avec ses ancêtres et ses descendants). ¦ Einstaklingurinn sem byrjað er frá fyrir forfeður, afkomendur eða greinar (hann er talinn með forfeðrum sínum og afkomendum).
+Jusqu’à combien de générations on remonte (ou on descend). 0 = toutes. ¦ Hve margar kynslóðir farið er upp (eða niður). 0 = allar.
+Seulement les personnes d’une de tes listes (Réglages → Mes listes). ¦ Aðeins einstaklingar á einum af listunum þínum (Stillingar → Listarnir mínir).
+Seulement les personnes dont le nom ou le prénom contient ces lettres. ¦ Aðeins einstaklingar þar sem eftirnafn eða eiginnafn inniheldur þessa stafi.
+Seulement ce qui s’est passé entre ces deux dates, écrites comme dans un acte (1789, vers 1850, mai 1900…). Une seule date suffit. ¦ Aðeins það sem gerðist milli þessara tveggja dagsetninga, skrifaðra eins og í skjali (1789, vers 1850, mai 1900…). Ein dagsetning nægir.
+Seulement les personnes nées entre ces deux dates, écrites comme dans un acte (1789, vers 1850, mai 1900…). Une seule date suffit. ¦ Aðeins einstaklingar fæddir milli þessara tveggja dagsetninga, skrifaðra eins og í skjali (1789, vers 1850, mai 1900…). Ein dagsetning nægir.
+Pour les colonnes empilées, la pyramide, la carte de chaleur… : chaque groupe est coupé en séries (hommes et femmes, ou siècles). ¦ Fyrir staflaða dálka, píramídann, hitakortið…: hverjum hópi er skipt í raðir (karlar og konur, eða aldir).
+L’ordre des valeurs. « Automatique » : du plus grand au plus petit, ou dans l’ordre du temps pour les dates et les âges. ¦ Röð gildanna. „Sjálfvirkt“: frá stærsta til minnsta, eða í tímaröð fyrir dagsetningar og aldur.
+Combien de valeurs garder, les premières après le tri. 0 = toutes. ¦ Hve mörgum gildum á að halda, þeim fyrstu eftir röðun. 0 = öllum.
+Les valeurs au-delà des N premières sont additionnées dans une dernière barre « Autres ». ¦ Gildin umfram fyrstu N eru lögð saman í síðustu súlu „Annað“.
+Montrer aussi ce qui n’est pas renseigné (sans lieu, sans date, sans métier…) sous le nom « Inconnu ». ¦ Sýna einnig það sem vantar (án staðar, án dagsetningar, án starfs…) undir heitinu „Óþekkt“.
+Un nombre, une part en %, ou la moyenne (la médiane) d’une valeur : âge au décès, âge au mariage, nombre d’enfants. ¦ Fjöldi, hlutfall í %, eða meðaltal (miðgildi) gildis: aldur við andlát, aldur við hjónaband, fjöldi barna.
+Le diagramme se recalcule à chaque affichage : il suit les changements de ta base. ¦ Skýringarmyndin er reiknuð aftur í hvert sinn sem hún birtist: hún fylgir breytingum í gagnagrunninum þínum.
+✏️ Sur mesure (critères, ce qu’on compte, regroupé par…) ¦ ✏️ Sérsniðið (skilyrði, hvað er talið, flokkað eftir…)
+Âge au décès, hommes et femmes ¦ Aldur við andlát, karlar og konur
+Causes de décès, par siècle ¦ Dánarorsakir, eftir öldum
+Mariages par mois ¦ Hjónabönd eftir mánuðum
+Âge au mariage, hommes et femmes ¦ Aldur við hjónaband, karlar og konur
+Âge moyen au mariage, par siècle de naissance ¦ Meðalaldur við hjónaband, eftir fæðingaröld
+Âge au premier enfant, pères et mères ¦ Aldur við fyrsta barn, feður og mæður
+Âge moyen au premier enfant, par siècle de naissance ¦ Meðalaldur við fyrsta barn, eftir fæðingaröld
+Lieux de naissance (communes) ¦ Fæðingarstaðir (sveitarfélög)
+Métiers des femmes et des hommes ¦ Störf kvenna og karla
+Décès par mois ¦ Andlát eftir mánuðum
+Mes ancêtres, côté père et côté mère ¦ Forfeður mínir, föðurmegin og móðurmegin
+Médias par nom de famille ¦ Miðlar eftir eftirnafni
+nées en {a} ¦ fæddar árið {a}
+periode|en {a} ¦ árið {a}
+nées entre {a} et {b} ¦ fæddar milli {a} og {b}
+periode|entre {a} et {b} ¦ milli {a} og {b}
+nées depuis {a} ¦ fæddar frá {a}
+periode|depuis {a} ¦ frá {a}
+nées jusqu’en {b} ¦ fæddar til {b}
+periode|jusqu’en {b} ¦ til {b}
+au moins un de ces critères (OU) ¦ að minnsta kosti eitt þessara skilyrða (EÐA)
+critere|qui ont ¦ sem hafa
+critere|{a} ans ¦ {a} ára
+critere|de {a} à {b} ans ¦ {a} til {b} ára
+critere|de {a} à {b} ¦ frá {a} til {b}
+critere|au moins {a} ans ¦ að minnsta kosti {a} ára
+critere|au moins {a} ¦ að minnsta kosti {a}
+critere|au plus {b} ans ¦ í mesta lagi {b} ára
+critere|au plus {b} ¦ í mesta lagi {b}
+nés en {a} ¦ fæddir árið {a}
+nés entre {a} et {b} ¦ fæddir milli {a} og {b}
+nés depuis {a} ¦ fæddir frá {a}
+nés jusqu’en {b} ¦ fæddir til {b}
+morts en {a} ¦ dánir árið {a}
+morts entre {a} et {b} ¦ dánir milli {a} og {b}
+morts depuis {a} ¦ dánir frá {a}
+morts jusqu’en {b} ¦ dánir til {b}
+liste|ou ¦ eða
+métier « {v} » ¦ starf „{v}“
+nom « {v} » ¦ eftirnafn „{v}“
+prénom « {v} » ¦ eiginnafn „{v}“
+nés à « {v} » ¦ fæddir í „{v}“
+morts ou inhumés à « {v} » ¦ dánir eða grafnir í „{v}“
+avec un événement à « {v} » ¦ með atburð í „{v}“
+avec un événement dans « {v} » ¦ með atburð innan „{v}“
+à moins de {km} km de « {v} » ¦ í innan við {km} km fjarlægð frá „{v}“
+critere|femmes ¦ konur
+critere|hommes ¦ karlar
+sexe inconnu ¦ kyn óþekkt
+critere|en vie ¦ á lífi
+critere|décédés ¦ látnir
+statut à vérifier ¦ staða sem þarf að athuga
+ayant vécu {r} ¦ sem lifðu {r}
+âgés {r} à : {types} ¦ á aldrinum {r} við: {types}
+âgés {r} ¦ á aldrinum {r}
+mes ancêtres (Sosa) ¦ forfeður mínir (Sosa)
+génération Sosa {r} ¦ Sosa-kynslóð {r}
+critere|sans source ¦ án heimildar
+avec une photo ou un document ¦ með mynd eða skjali
+critere|parents inconnus ¦ foreldrar óþekktir
+dans mes favoris ¦ í eftirlætunum mínum
+cause de décès « {v} » ¦ dánarorsök „{v}“
+ayant eu : {types} ¦ sem hafa átt: {types}
+étiquette « {v} » ¦ merki „{v}“
+critere|sauf {x} ¦ nema {x}
+Groupe de personnes ¦ Hópur einstaklinga
+gén. ¦ kyns.
+periode|à ¦ til
+🔄 Tenir à jour (relire les chiffres à chaque affichage) ¦ 🔄 Halda uppfærðu (lesa tölurnar aftur í hvert sinn sem þær birtast)
+({n} générations) ¦ ({n} kynslóðir)
+({n} génération) ¦ ({n} kynslóð)
+les ancêtres de {name} ¦ forfeður {name}
+critere|mes ancêtres ¦ forfeður mínir
+les descendants de {name} ¦ afkomendur {name}
+critere|mes descendants ¦ afkomendur mínir
+la branche paternelle de {name} ¦ föðurgrein {name}
+ma branche paternelle ¦ föðurgreinin mín
+la branche maternelle de {name} ¦ móðurgrein {name}
+ma branche maternelle ¦ móðurgreinin mín
+l’étiquette « {name} » ¦ merkið „{name}“
+critere|une étiquette ¦ merki
+la liste « {name} » ¦ listinn „{name}“
+critere|une de mes listes ¦ einn af listunum mínum
+les noms qui contiennent « {q} » ¦ nöfnin sem innihalda „{q}“
+critere|une recherche ¦ leit
+{n} personnes choisies ¦ Valdir einstaklingar: {n}
+{n} personne choisie ¦ Valinn einstaklingur: {n}
+toute ma base ¦ allur gagnagrunnurinn minn
+Un graphique de l’app ¦ Graf úr appinu
+Médiane de {value} ({what}) ¦ Miðgildi {value} ({what})
+chaque personne une fois ¦ hver einstaklingur einu sinni
+personnes {p} ¦ einstaklingar {p}
+une série par sexe ¦ ein röð fyrir hvort kyn
+une série par siècle ¦ ein röð fyrir hverja öld
+{n} premiers et « Autres » ¦ fyrstu {n} og „Annað“
+{n} premier et « Autres » ¦ fyrsta {n} og „Annað“
+toutes les valeurs ¦ öll gildi
+« Inconnu » montré ¦ „Óþekkt“ sýnt
+unite|en % ¦ í %
+Moyenne de {value} ({what}) ¦ Meðaltal {value} ({what})
+{n} premiers ¦ fyrstu {n}
+{n} premier ¦ fyrsta {n}
+ayant {t} enfant ¦ sem eiga {t} barn
+ayant {t} enfants ¦ sem eiga {t} börn
+ayant {t} union ¦ sem eiga {t} hjúskap
+ayant {t} unions ¦ sem eiga {t} hjúskapi
+ayant {t} source ¦ sem hafa {t} heimild
+ayant {t} sources ¦ sem hafa {t} heimildir
+Gris-bleu calme, traits fins, quadrillage léger. ¦ Rólegt gráblátt, fínar línur, létt hnitanet.
+Papier ancien, encre brune, police à empattements. ¦ Gamall pappír, brúnt blek, letur með þverendum.
+Couleurs franches, traits épais, coins arrondis. ¦ Skærir litir, þykkar línur, ávöl horn.
+Noir et blanc imprimable ¦ Svarthvítt til prentunar
+Gris du noir au clair, quadrillage marqué : lisible imprimé sans couleur. ¦ Grátónar frá svörtu til ljóss, skýrt hnitanet: læsilegt prentað án lita.
+Couleurs qu’on distingue même en voyant mal certaines couleurs (Okabe-Ito). ¦ Litir sem má greina í sundur jafnvel þótt sumir litir sjáist illa (Okabe-Ito).
+{n} petits diagrammes, même échelle (de {lo} à {hi}) ¦ {n} litlar skýringarmyndir, sami kvarði (frá {lo} til {hi})
+Repère de date ¦ Dagsetningarmerki
+Revenir au dessin complet ¦ Aftur í heildarteikninguna
+Enregistrer la lecture en vidéo ¦ Vista spilunina sem myndband
+Réglages → Accessibilité → Mouvement ¦ Stillingar → Aðgengi → Hreyfing
+Mouvements réduits : une étape à la fois, sans glisser ¦ Minni hreyfing: eitt skref í einu, án rennslis
+Lire les années ¦ Spila árin
+Mettre en pause ¦ Gera hlé
+rien à filmer ¦ ekkert til að taka upp
+✓ Vidéo exportée ({format}). ¦ ✓ Myndband flutt út ({format}).
+Vidéo impossible : {err} ¦ Ekki hægt að gera myndband: {err}
+Les couleurs et réglages du type, comme avant ¦ Litir og stillingar gerðarinnar, eins og áður
+Selon le type ¦ Eftir gerð
+Marqué ¦ Skýrt
+Tous mes diagrammes prennent ce style (même ceux qui avaient le leur) ¦ Allar skýringarmyndirnar mínar fá þennan stíl (líka þær sem höfðu sinn eigin)
+Les nouveaux diagrammes, et ceux sans style à eux, le prennent ¦ Nýjar skýringarmyndir, og þær sem hafa ekki eigin stíl, fá hann
+Appliquer à tous les diagrammes ¦ Nota á allar skýringarmyndir
+⭐ Style par défaut ¦ ⭐ Sjálfgefinn stíll
+à (facultatif) ¦ til (valfrjálst)
+Retirer l’annotation ¦ Fjarlægja athugasemdina
+Aucune annotation : ajoute une flèche, un texte, une zone ou un repère de date. ¦ Engin athugasemd: bættu við ör, texta, svæði eða dagsetningarmerki.
+Toutes les séries ¦ Allar raðir
+Nom de la ligne ¦ Heiti línunnar
+Échelle logarithmique (très grands écarts) ¦ Lógaritmískur kvarði (mjög mikill munur)
+Deuxième axe (à droite) ¦ Annar ás (til hægri)
+{name} (en courbe) ¦ {name} (sem ferill)
+Les séries du tableau ¦ Raðir töflunnar
+Le sexe ¦ Kynið
+Le siècle ¦ Öldin
+La branche (côté père / côté mère) ¦ Greinin (föðurmegin / móðurmegin)
+Le lieu (département) ¦ Staðurinn (sýsla)
+Le lieu (pays) ¦ Staðurinn (land)
+La génération ¦ Kynslóðin
+Un seul diagramme ¦ Ein skýringarmynd
+Répéter le diagramme par ¦ Endurtaka skýringarmyndina eftir
+Pour répéter par sexe, siècle, branche, lieu ou génération : prends tes chiffres avec « 🧮 Compter dans ma base » (onglet « Depuis l’app ») et coche « Tenir à jour ». ¦ Til að endurtaka eftir kyni, öld, grein, stað eða kynslóð: sæktu tölurnar með „🧮 Telja í gagnagrunninum mínum“ (flipinn „Úr appinu“) og hakaðu við „Halda uppfærðu“.
+Les données vont de {a} à {b} : le curseur ▶ sous l’aperçu les fait apparaître année après année. ¦ Gögnin ná frá {a} til {b}: sleðinn ▶ undir forskoðuninni lætur þau birtast ár eftir ár.
+Montrer aussi le curseur ▶ là où le diagramme est posé (Graphiques, fiches, tableau de bord) ¦ Sýna einnig sleðann ▶ þar sem skýringarmyndin er sett (Gröf, spjöld, stjórnborð)
+Recommencer au début (boucle) ¦ Byrja aftur frá byrjun (lykkja)
+Un pas de ¦ Skref upp á
+unite|ans ¦ ár
+« Réduire les animations » est demandé : la lecture avance d’une étape par seconde, sans glisser. ¦ Beðið er um „Minnka hreyfimyndir“: spilunin færist um eitt skref á sekúndu, án rennslis.
+Palette, police, fond, traits, coins, taille du texte, quadrillage : choisis un style prêt, retouche-le, garde-le sous un nom. ¦ Litaspjald, letur, bakgrunnur, línur, horn, textastærð, hnitanet: veldu tilbúinn stíl, lagfærðu hann, geymdu hann undir nafni.
+Pose-les ici, puis glisse-les sur l’aperçu (et leurs poignées pour les agrandir). Elles partent avec le diagramme à l’export et à l’impression. ¦ Settu þær hér, dragðu þær svo á forskoðunina (og handföngin þeirra til að stækka þær). Þær fylgja skýringarmyndinni við útflutning og prentun.
+📏 Lignes de repère et axes ¦ 📏 Viðmiðunarlínur og ásar
+Moyenne et médiane se calculent seules ; l’objectif et la valeur sont à toi. ¦ Meðaltal og miðgildi reiknast sjálfkrafa; markmiðið og gildið eru þín.
+Un petit diagramme par groupe, côte à côte, avec la même échelle pour comparer d’un coup d’œil. ¦ Ein lítil skýringarmynd fyrir hvern hóp, hlið við hlið, með sama kvarða til að bera saman í fljótu bragði.
+▶ Lecture dans le temps ¦ ▶ Spilun í tíma
+Aucun chiffre pour ce découpage. ¦ Engar tölur fyrir þessa skiptingu.
+{n} petits diagrammes, même échelle. ¦ {n} litlar skýringarmyndir, sami kvarði.
+Baptêmes et sépultures ¦ Skírnir og greftranir
+Police du diagramme ¦ Letur skýringarmyndarinnar
+⭐ « {name} » : style par défaut des nouveaux diagrammes et de ceux sans style à eux. ¦ ⭐ „{name}“: sjálfgefinn stíll nýrra skýringarmynda og þeirra sem hafa ekki eigin stíl.
+Plus de style par défaut ¦ Enginn sjálfgefinn stíll lengur
+60 annotations au plus. ¦ Í mesta lagi 60 athugasemdir.
+Guerre de 14 ¦ Fyrri heimsstyrjöldin
+Mon repère ¦ Merkið mitt
+Mon texte ¦ Textinn minn
+Ligne de repère retirée ¦ Viðmiðunarlína fjarlægð
+Annotation retirée ¦ Athugasemd fjarlægð
+(retouché) ¦ (lagfært)
+Style « {name} » appliqué à {n} diagrammes ¦ Stíllinn „{name}“ notaður á skýringarmyndir: {n}
+Style « {name} » appliqué à {n} diagramme ¦ Stíllinn „{name}“ notaður á skýringarmynd: {n}
+Mes styles enregistrés ¦ Vistuðu stílarnir mínir
+ce style (palette, police, fond, traits, coins, taille du texte, quadrillage) ¦ þessi stíll (litaspjald, letur, bakgrunnur, línur, horn, textastærð, hnitanet)
+Style « {name} » appliqué à ce diagramme. ¦ Stíllinn „{name}“ notaður á þessa skýringarmynd.
+Style « {name} » importé. ¦ Stíllinn „{name}“ fluttur inn.
+Annotation : glisser pour la déplacer, Suppr pour la retirer ¦ Athugasemd: dragðu til að færa hana, Delete til að fjarlægja hana
+Texte de l’annotation ¦ Texti athugasemdarinnar
+Hauteur du dessin (0 = automatique) ¦ Hæð teikningarinnar (0 = sjálfvirkt)
+Ajoute la personne du milieu (génération 0), puis ses ascendants (−1, −2…) et ses descendants (1, 2…). ¦ Bættu við einstaklingnum í miðjunni (kynslóð 0), síðan forfeðrum hans (−1, −2…) og afkomendum (1, 2…).
+Gén. +{g} ¦ Kyns. +{g}
+Le sablier de {name} ¦ Stundaglas {name}
+Ajoute des tâches : nom, début, fin (dates ou années), avancement en %. ¦ Bættu við verkum: heiti, upphaf, lok (dagsetningar eða ár), framvinda í %.
+Diagramme de Gantt : {n} tâches. ¦ Gantt-rit: {n} verk.
+Diagramme de Gantt : {n} tâche. ¦ Gantt-rit: {n} verk.
+Ma recherche sur les {name} ¦ Rannsókn mín á {name}
+Relevés de Naves (1700-1792) ¦ Relevés de Naves (1700-1792)
+État civil de Tulle ¦ État civil de Tulle
+Notaires (contrats de mariage) ¦ Lögbókendur (kaupmálar)
+Recensements 1836-1936 ¦ Manntöl 1836-1936
+Registres matricules ¦ Herskráningarbækur
+Visite à Arnac-la-Poste ¦ Heimsókn til Arnac-la-Poste
+Terrain ¦ Vettvangur
+Mon idée ¦ Hugmyndin mín
+Ajoute des branches (et, à côté, leurs idées). ¦ Bættu við greinum (og, við hliðina, hugmyndum þeirra).
+Carte mentale « {name} » : {n} branches. ¦ Hugarkort „{name}“: {n} greinar.
+Carte mentale « {name} » : {n} branche. ¦ Hugarkort „{name}“: {n} grein.
+Mes pistes de recherche ¦ Rannsóknarleiðirnar mínar
+Famille {name} ¦ Fjölskyldan {name}
+Registres de Naves ¦ Kirkjubækur Naves
+Notaires de Tulle ¦ Lögbókendur í Tulle
+Laboureurs ¦ Bændur
+Tisserands ¦ Vefarar
+Qui était Jeanne Roux ? ¦ Hver var Jeanne Roux?
+Pourquoi le départ en 1902 ? ¦ Hvers vegna brottförin árið 1902?
+Photos ¦ Myndir
+Mariage 1919 ¦ Hjónaband 1919
+Maison de Naves ¦ Húsið í Naves
+Cousins ¦ Frændfólk
+Branche de Paris ¦ Parísargreinin
+ADN : 3 correspondances ¦ DNA: 3 samsvaranir
+Ajoute des noms et leurs chiffres. ¦ Bættu við nöfnum og tölum þeirra.
+Barres en cercle : {n} lignes, la plus longue « {name} » ({v}). ¦ Súlur í hring: línur {n}, sú lengsta „{name}“ ({v}).
+Les prénoms les plus donnés ¦ Algengustu eiginnöfnin
+fois ¦ sinnum
+Ajoute des noms (patronymes, métiers, lieux…) et leurs chiffres. ¦ Bættu við nöfnum (eftirnöfnum, störfum, stöðum…) og tölum þeirra.
+Bulles groupées : {n} bulles ({k} trop petites pour la place). ¦ Hópaðar bólur: {n} ({k} of litlar fyrir plássið).
+Bulles groupées : {n} bulles. ¦ Hópaðar bólur: {n}.
+Les noms de famille de l’arbre ¦ Eftirnöfnin í ættartrénu
+Ajoute des objectifs : un nom, où tu en es, et le but (ex. 12 sur 16 ancêtres trouvés). ¦ Bættu við markmiðum: heiti, hvar þú ert stödd/staddur, og markið (t.d. 12 af 16 forfeðrum fundnir).
+{name} : {v} sur {goal} ¦ {name}: {v} af {goal}
+Anneaux d’avancement : {n} objectifs. ¦ Framvinduhringir: markmið {n}.
+Anneaux d’avancement : {n} objectifs, de {a} à {b} %. ¦ Framvinduhringir: markmið {n}, frá {a} til {b} %.
+Grands-parents trouvés ¦ Afar og ömmur fundin
+Actes de naissance sourcés ¦ Fæðingarskjöl með heimild
+Photos identifiées ¦ Myndir sem búið er að bera kennsl á
+Quadrisaïeuls ¦ Langalangalangafar og -ömmur
+Génération 6 ¦ Kynslóð 6
+Génération 7 ¦ Kynslóð 7
+Génération +4 ¦ Kynslóð +4
+Génération +{g} ¦ Kynslóð +{g}
+Les noms de famille ¦ Eftirnöfnin
+Les communes de naissance ¦ Fæðingarsveitarfélögin
+Les siècles de naissance ¦ Fæðingaraldirnar
+{n}e siècle ¦ {n}. öld
+Prendre dans mon arbre ¦ Sækja úr ættartrénu mínu
+Rien trouvé dans l’arbre pour ce choix. ¦ Ekkert fannst í ættartrénu fyrir þetta val.
+{n} lignes prises dans l’arbre. ¦ Línur sóttar úr ættartrénu: {n}.
+⏳ Le sablier de quelqu’un de mon arbre ¦ ⏳ Stundaglas einhvers úr ættartrénu mínu
+Ses ancêtres au-dessus, ses descendants au-dessous, avec leurs dates. ¦ Forfeðurnir fyrir ofan, afkomendurnir fyrir neðan, með dagsetningum.
+Générations au-dessus ¦ Kynslóðir fyrir ofan
+Générations au-dessous ¦ Kynslóðir fyrir neðan
+📅 Les vies côte à côte ¦ 📅 Ævirnar hlið við hlið
+Une barre par personne, de sa naissance à son décès (ou à aujourd’hui). ¦ Ein súla fyrir hvern einstakling, frá fæðingu til andláts (eða til dagsins í dag).
+Ses ancêtres directs ¦ Beinir forfeður hans
+Sa famille proche (parents, frères et sœurs, enfants) ¦ Nánasta fjölskylda (foreldrar, systkini, börn)
+Ses descendants ¦ Afkomendur hans
+Les vies autour de {name} ¦ Ævirnar í kringum {name}
+🧠 Une personne et ses branches ¦ 🧠 Einstaklingur og greinar hans
+Au centre la personne ; autour, ses enfants (et leurs enfants), ou les métiers et les communes de ses ancêtres. ¦ Einstaklingurinn í miðjunni; í kring, börn hans (og börn þeirra), eða störf og sveitarfélög forfeðra hans.
+Les branches ¦ Greinarnar
+Ses enfants, et leurs enfants ¦ Börn hans, og börn þeirra
+Les métiers de ses ancêtres ¦ Störf forfeðra hans
+Les communes de naissance de ses ancêtres ¦ Fæðingarsveitarfélög forfeðra hans
+La descendance de {name} ¦ Afkomendur {name}
+D’où viennent les ancêtres de {name} ¦ Hvaðan forfeður {name} koma
+🎯 Un classement de mon arbre ¦ 🎯 Röðun úr ættartrénu mínu
+Les plus fréquents dans toute la base, en barres autour d’un cercle. ¦ Algengast í öllum gagnagrunninum, í súlum í kringum hring.
+fiches ¦ spjöld
+🫧 Les bulles de mon arbre ¦ 🫧 Bólurnar í ættartrénu mínu
+Une bulle par nom, métier ou commune : plus il y a de fiches, plus elle est grosse. ¦ Ein bóla fyrir hvert nafn, starf eða sveitarfélag: því fleiri spjöld, því stærri er hún.
+Les bulles ¦ Bólurnar
+⭕ Où j’en suis dans mon arbre ¦ ⭕ Hvar ég er stödd/staddur í ættartrénu
+Un anneau par objectif : plein, c’est fini. ¦ Einn hringur fyrir hvert markmið: fullur þýðir lokið.
+Les objectifs ¦ Markmiðin
+Les ancêtres trouvés, génération par génération ¦ Forfeður fundnir, kynslóð fyrir kynslóð
+Les fiches complètes (dates, lieux, métier) ¦ Fullgerð spjöld (dagsetningar, staðir, starf)
+Date de décès (personnes décédées) ¦ Dánardagur (látnir einstaklingar)
+Mes fiches complètes ¦ Fullgerðu spjöldin mín
+Les ancêtres de {name} : où j’en suis ¦ Forfeður {name}: hvar ég er stödd/staddur
+Les personnes (génération : 0 = la personne, −1 = parents, 1 = enfants…) ¦ Einstaklingarnir (kynslóð: 0 = einstaklingurinn, −1 = foreldrar, 1 = börn…)
+Couleur des ascendants ¦ Litur forfeðra
+Couleur de la personne ¦ Litur einstaklingsins
+Couleur des descendants ¦ Litur afkomenda
+Hauteur d’une case ¦ Hæð reits
+Écart entre générations ¦ Bil milli kynslóða
+Traits vers la personne ¦ Línur að einstaklingnum
+Nom des générations à gauche ¦ Heiti kynslóða til vinstri
+Les tâches ¦ Verkin
+Début (date ou année) ¦ Upphaf (dagsetning eða ár)
+Une par tâche ¦ Einn fyrir hvert verk
+Couleur (une seule) ¦ Litur (aðeins einn)
+Montrer l’avancement ¦ Sýna framvindu
+Écrire le % ¦ Skrifa %
+Trait « aujourd’hui » ¦ Lína „í dag“
+Couleur du trait « aujourd’hui » ¦ Litur línunnar „í dag“
+Les branches et leurs idées (une ligne par idée) ¦ Greinarnar og hugmyndir þeirra (ein lína fyrir hverja hugmynd)
+Le mot du centre ¦ Orðið í miðjunni
+Couleur du centre ¦ Litur miðjunnar
+Branches en courbes ¦ Bognar greinar
+Épaisseur des branches ¦ Þykkt greinanna
+Une par ligne ¦ Einn fyrir hverja línu
+Chiffre d’un tour complet (vide = le plus grand) ¦ Tala fyrir heilan hring (autt = sú stærsta)
+Une par bulle ¦ Einn fyrir hverja bólu
+Écart entre les bulles ¦ Bil milli bólanna
+Le but ¦ Markið
+Anneaux l’un dans l’autre ¦ Hringir hver innan í öðrum
+Un anneau par objectif, côte à côte ¦ Einn hringur fyrir hvert markmið, hlið við hlið
+Par ligne (côte à côte) ¦ Eftir línu (hlið við hlið)
+1er siècle ¦ 1. öld
+nombre|{n}e siècle ¦ {n}. öld
+⚠ Lieux sans position : {list} ¦ ⚠ Staðir án staðsetningar: {list}
+mentions par département ¦ tilvísanir eftir sýslu
+Choisis un nom dans « Depuis l’app » (ou tape des lieux et des dates). ¦ Veldu nafn í „Úr appinu“ (eða sláðu inn staði og dagsetningar).
+Aucune mention au {when}. ¦ Engin tilvísun á {when}.
+Aucune mention pour ce nom. ¦ Engin tilvísun fyrir þetta nafn.
+Carte du nom {name} : {n} au {when} dans {d}. ¦ Kort nafnsins {name}: {n} á {when} í {d}.
+Carte du nom {name} : {n} au {when}. ¦ Kort nafnsins {name}: {n} á {when}.
+Carte du nom {name} : {n} dans {d}. ¦ Kort nafnsins {name}: {n} í {d}.
+Carte du nom {name} : {n}. ¦ Kort nafnsins {name}: {n}.
+jusqu’en {y} ¦ til {y}
+années {y} ¦ áratugurinn {y}
+peu → beaucoup ¦ lítið → mikið
+peu ¦ lítið
+beaucoup ¦ mikið
+Prends les événements de ton arbre (« Depuis l’app »). ¦ Sæktu atburðina úr ættartrénu þínu („Úr appinu“).
+Carte de chaleur : {n} ({when}). ¦ Hitakort: {n} ({when}).
+Carte de chaleur : {n}. ¦ Hitakort: {n}.
+Relie des correspondances ADN à leur fiche (onglet ADN), puis « Depuis l’app ». ¦ Tengdu DNA-samsvaranir við spjald þeirra (flipinn DNA), síðan „Úr appinu“.
+=lieu d’ancêtre commun ¦ staður sameiginlegs forföður|staðir sameiginlegra forfeðra
+=mention ¦ tilvísun|tilvísanir
+=recherche vue ¦ leit lokið|leitir loknar
+=à faire ou à revoir ¦ til að gera eða endurskoða|til að gera eða endurskoða
+Carte des cousins ADN : {n}. ¦ Kort DNA-frændfólks: {n}.
+En partie, à revoir ¦ Að hluta, þarf að endurskoða
+Prévu, pas fait ¦ Áætlað, ekki gert
+Toutes les sortes d’actes ¦ Allar tegundir skjala
+Naissances et baptêmes ¦ Fæðingar og skírnir
+Décès et sépultures ¦ Andlát og greftranir
+Tout vu ¦ Allt skoðað
+Trous à couvrir ¦ Göt sem þarf að fylla
+Clic : le détail ¦ Smelltu: nánar
+Rien pour ce choix (sorte d’acte, période). ¦ Ekkert fyrir þetta val (tegund skjals, tímabil).
+Prends tes dépouillements, battues et trous (« Depuis l’app »). ¦ Sæktu skráningar, leitir og göt („Úr appinu“).
+Carte de tes recherches : {n} — {g} tout vu, {o} en partie, {r} avec des trous. ¦ Kort af rannsóknum þínum: {n} — {g} allt skoðað, {o} að hluta, {r} með götum.
+✓ Ce qui a été vu ¦ ✓ Það sem hefur verið skoðað
+⚠️ Ce qui manque ou reste à revoir ¦ ⚠️ Það sem vantar eða þarf að endurskoða
+Rien de vu ici pour l’instant. ¦ Ekkert skoðað hér enn.
+Rien ne manque ici. ¦ Ekkert vantar hér.
+CARTE DE TES RECHERCHES ¦ KORT AF RANNSÓKNUM ÞÍNUM
+Données prises dans l’app. ¦ Gögn sótt úr appinu.
+Quels événements ¦ Hvaða atburðir
+Naissances, mariages, décès, résidences ¦ Fæðingar, hjónabönd, andlát, búsetur
+🔤 Un nom de ta généalogie ¦ 🔤 Nafn úr ættfræðinni þinni
+Choisis un nom dans la liste (les plus fréquents d’abord) ou une personne : son nom est pris. Jamais un vivant ni une fiche confidentielle. ¦ Veldu nafn af listanum (algengustu fyrst) eða einstakling: nafn hans er notað. Aldrei lifandi einstaklingur né trúnaðarspjald.
+ou une personne ¦ eða einstaklingur
+Avec les variantes du même groupe de noms ¦ Með afbrigðum úr sama nafnahópi
+Aucun nom ¦ Ekkert nafn
+Choisis un nom. ¦ Veldu nafn.
+Le nom {name}, siècle par siècle ¦ Nafnið {name}, öld fyrir öld
+Avec {list} ¦ Með {list}
+Aucun événement avec un lieu pour ce nom. ¦ Enginn atburður með stað fyrir þetta nafn.
+{n} du nom {name}. ¦ {n} með nafninu {name}.
+🔥 Les événements de ton arbre ¦ 🔥 Atburðirnir í ættartrénu þínu
+Chaque événement daté qui a un lieu compte. Le curseur ▶ passe les décennies une à une. ¦ Hver atburður með dagsetningu og stað telst með. Sleðinn ▶ fer yfir áratugina einn af öðrum.
+Aucun événement daté avec un lieu. ¦ Enginn atburður með dagsetningu og stað.
+🧬 Tes correspondances ADN ¦ 🧬 DNA-samsvaranir þínar
+Les correspondances reliées à une fiche de l’arbre (onglet ADN) : l’ancêtre commun calculé et ses lieux. Les noms des correspondances (souvent vivantes) ne sont mis que si tu le demandes. ¦ Samsvaranirnar sem tengdar eru spjaldi í ættartrénu (flipinn DNA): reiknaður sameiginlegur forfaðir og staðir hans. Nöfn samsvarananna (oft lifandi fólk) eru aðeins sett ef þú biður um það.
+Écrire le nom des correspondances (pas pour un export partagé) ¦ Skrifa nöfn samsvarananna (ekki fyrir deildan útflutning)
+Aucun test ADN ¦ Ekkert DNA-próf
+Aucun ancêtre commun avec un lieu : relie des correspondances à leur fiche dans l’onglet ADN. ¦ Enginn sameiginlegur forfaðir með stað: tengdu samsvaranir við spjald þeirra í flipanum DNA.
+🔎 Tes recherches ¦ 🔎 Rannsóknir þínar
+Les dépouillements (registres consultés), les communes des battues et les actes qui manquent à tes ancêtres (« Que manque-t-il ? »). ¦ Skráningarnar (kirkjubækur sem skoðaðar voru), sveitarfélög leitanna og skjölin sem vantar hjá forfeðrum þínum („Hvað vantar?“).
+Aucune recherche ni aucun trou avec une commune placée. ¦ Engin rannsókn né gat með staðsettu sveitarfélagi.
+Correspondance n° 1 ¦ Samsvörun nr. 1
+Correspondance n° 2 ¦ Samsvörun nr. 2
+Correspondance n° 3 ¦ Samsvörun nr. 3
+Correspondance n° 4 ¦ Samsvörun nr. 4
+Correspondance n° 5 ¦ Samsvörun nr. 5
+Registres paroissiaux ¦ Kirkjubækur
+Registre abîmé ¦ Skemmd bók
+Prévu ¦ Áætlað
+Cadrer tout seul sur les points ¦ Ramma sjálfkrafa inn á punktana
+Comme le type ¦ Eins og gerðin
+Couleur de « peu » ¦ Litur fyrir „lítið“
+Couleur de « beaucoup » ¦ Litur fyrir „mikið“
+Les mentions du nom (une par ligne) ¦ Tilvísanir í nafnið (ein í hverri línu)
+Lieu (« Auch », « Auch 43.65, 0.59 ») ¦ Staður („Auch“, „Auch 43.65, 0.59“)
+N° du département ¦ Nr. sýslu
+Nom montré (vide = toutes les lignes) ¦ Nafn sem er sýnt (autt = allar línur)
+🔤 Ce nom sur Géopatronyme (1891-1990) ↗ ¦ 🔤 Þetta nafn á Géopatronyme (1891-1990) ↗
+Choisis un nom : un lien ouvrira sa répartition en France de 1891 à 1990 (Géopatronyme). ¦ Veldu nafn: tengill opnar dreifingu þess í Frakklandi frá 1891 til 1990 (Géopatronyme).
+Départements colorés ¦ Litaðar sýslur
+Des ronds par lieu ¦ Hringir fyrir hvern stað
+Siècle montré (une année ; vide = tous) ¦ Öld sem er sýnd (ár; autt = allar)
+Écrire le nombre sur les départements ¦ Skrifa fjöldann á sýslurnar
+Carte des patronymes : {n} mentions. ¦ Kort eftirnafna: tilvísanir {n}.
+Les événements (un par ligne) ¦ Atburðirnir (einn í hverri línu)
+Décennie montrée (une année ; vide = toutes) ¦ Áratugur sem er sýndur (ár; autt = allir)
+La décennie seule ¦ Aðeins áratugurinn
+Tout jusqu’à cette décennie ¦ Allt fram að þessum áratug
+La même pour toutes les décennies ¦ Sá sami fyrir alla áratugi
+Propre à chaque décennie ¦ Sérstakur fyrir hvern áratug
+Finesse (cases sur la largeur) ¦ Fínleiki (reitir á breiddina)
+Étalement ¦ Dreifing
+Où vivait la famille, décennie par décennie ¦ Hvar fjölskyldan bjó, áratug fyrir áratug
+Carte de chaleur : {n} événements. ¦ Hitakort: atburðir {n}.
+Les lieux des ancêtres communs ¦ Staðir sameiginlegu forfeðranna
+Selon le groupe ¦ Eftir hópi
+Selon les cM partagés ¦ Eftir sameiginlegum cM
+Là où plusieurs correspondances ¦ Þar sem samsvaranir eru fleiri en ein
+Mes cousins ADN : où vivaient nos ancêtres communs ¦ DNA-frændfólk mitt: hvar sameiginlegir forfeður okkar bjuggu
+Carte des cousins ADN : {n} lieux. ¦ Kort DNA-frændfólks: staðir {n}.
+Les recherches, commune par commune ¦ Rannsóknirnar, sveitarfélag fyrir sveitarfélag
+Noms des communes ¦ Heiti sveitarfélaga
+Les trous et les plus remplies ¦ Götin og þau fullskráðustu
+Mes recherches dans le Gers ¦ Rannsóknir mínar í Gers
+Carte de tes recherches : {n} lignes. ¦ Kort af rannsóknum þínum: línur {n}.
+{g} générations ¦ Kynslóðir: {g}
+Ma branche paternelle (côté père) ¦ Föðurgreinin mín (föðurmegin)
+Ma branche maternelle (côté mère) ¦ Móðurgreinin mín (móðurmegin)
+Avant la Révolution (jusqu’en 1789) ¦ Fyrir byltinguna (til 1789)
+Au XVIIIe siècle ¦ Á 18. öld
+Au XIXe siècle ¦ Á 19. öld
+Naissances par lieu ¦ Fæðingar eftir stað
+Naissances de mes ancêtres ¦ Fæðingar forfeðra minna
+Décès par lieu ¦ Andlát eftir stað
+Mariages par lieu ¦ Hjónabönd eftir stað
+Naissances, mariages et décès ¦ Fæðingar, hjónabönd og andlát
+Personnes différentes par lieu ¦ Mismunandi einstaklingar eftir stað
+Familles (patronymes différents) par lieu ¦ Fjölskyldur (mismunandi eftirnöfn) eftir stað
+Âge moyen au décès par lieu ¦ Meðalaldur við andlát eftir stað
+Actes trouvés (événements avec une source) ¦ Skjöl fundin (atburðir með heimild)
+Naissances au XIXe siècle ¦ Fæðingar á 19. öld
+Naissances avant la Révolution ¦ Fæðingar fyrir byltinguna
+Tout au XIXe siècle ¦ Allt á 19. öld
+Tout, avant la Révolution ¦ Allt, fyrir byltinguna
+Les anniversaires de mes ancêtres ¦ Afmæli forfeðra minna
+Mariages de mes ancêtres ¦ Hjónabönd forfeðra minna
+Ses parents et ses enfants ¦ Foreldrar hans og börn
+Grands-parents et petits-enfants ¦ Afar og ömmur og barnabörn
+Le plus loin possible ¦ Eins langt og hægt er
+Les vies de ses ancêtres (3 générations) ¦ Ævir forfeðra hans (3 kynslóðir)
+Sa famille proche ¦ Nánasta fjölskylda hans
+Les vies de ses descendants ¦ Ævir afkomenda hans
+Ses enfants et petits-enfants ¦ Börn hans og barnabörn
+Les communes de ses ancêtres ¦ Sveitarfélög forfeðra hans
+Les ancêtres trouvés par génération ¦ Forfeður fundnir eftir kynslóð
+Les fiches complètes ¦ Fullgerðu spjöldin
+Taux de recherche de mes ancêtres (5 générations) ¦ Rannsóknarhlutfall forfeðra minna (5 kynslóðir)
+Régions de naissance (6 générations) ¦ Fæðingarhéruð (6 kynslóðir)
+Départements de naissance (6 générations) ¦ Fæðingarsýslur (6 kynslóðir)
+Pays de naissance (8 générations) ¦ Fæðingarlönd (8 kynslóðir)
+Communes de naissance (5 générations) ¦ Fæðingarsveitarfélög (5 kynslóðir)
+Métiers de mes ancêtres (5 générations) ¦ Störf forfeðra minna (5 kynslóðir)
+Siècles de naissance (8 générations) ¦ Fæðingaraldir (8 kynslóðir)
+Noms de famille (6 générations) ¦ Eftirnöfn (6 kynslóðir)
+Hommes et femmes (4 générations) ¦ Karlar og konur (4 kynslóðir)
+Le plus loin possible (10 générations) ¦ Eins langt og hægt er (10 kynslóðir)
+Toute la descendance connue (8 générations) ¦ Allir þekktir afkomendur (8 kynslóðir)
+Toute la descendance connue (10 générations) ¦ Allir þekktir afkomendur (10 kynslóðir)
+Ses liens directs (témoins, parrains, marraines) ¦ Bein tengsl hans (vottar, guðfeður, guðmæður)
+Ses liens et les liens de ses liens ¦ Tengsl hans og tengsl tengsla hans
+Tous les liens de ma base ¦ Öll tengsl í gagnagrunninum mínum
+Implexe : un même ancêtre par plusieurs chemins ¦ Forfeðrahrun: sami forfaðir eftir fleiri en einni leið
+Témoins, parrains et marraines ¦ Vottar, guðfeður og guðmæður
+Mes ancêtres et les fiches avec une source ¦ Forfeður mínir og spjöld með heimild
+Avec un portrait, avec une source ¦ Með andlitsmynd, með heimild
+Mes ancêtres, avec portrait, avec source ¦ Forfeður mínir, með andlitsmynd, með heimild
+Vivants, avec un portrait, avec une source ¦ Lifandi, með andlitsmynd, með heimild
+Mes ancêtres, hommes, avec source ¦ Forfeður mínir, karlar, með heimild
+Les vies de toute ma base ¦ Ævir alls gagnagrunnsins míns
+Décès seulement ¦ Aðeins andlát
+Lieu de naissance → lieu de décès ¦ Fæðingarstaður → dánarstaður
+Lieu de naissance → lieu du mariage ¦ Fæðingarstaður → giftingarstaður
+D’une génération à l’autre ¦ Frá einni kynslóð til annarrar
+Mes ancêtres : naissance → décès ¦ Forfeður mínir: fæðing → andlát
+Mes ancêtres : d’une génération à l’autre ¦ Forfeður mínir: frá einni kynslóð til annarrar
+Au XIXe siècle : naissance → décès ¦ Á 19. öld: fæðing → andlát
+Sa vie : les étapes avec un lieu ¦ Ævi hans: áfangar með stað
+Sa vie : toutes les étapes (même sans lieu) ¦ Ævi hans: allir áfangar (líka án staðar)
+Avant la Révolution ¦ Fyrir byltinguna
+Mes parents et grands-parents (3 générations) ¦ Foreldrar mínir og afar og ömmur (3 kynslóðir)
+Le XVIIIe siècle, année par année ¦ 18. öldin, ár fyrir ár
+Le XIXe siècle, année par année ¦ 19. öldin, ár fyrir ár
+Mes ancêtres, par 5 ans ¦ Forfeður mínir, í 5 ára bilum
+Qui vit aujourd’hui ¦ Hver er á lífi í dag
+Qui vivait en {y} ¦ Hver var á lífi árið {y}
+Ses frères et sœurs (1 génération) ¦ Systkini hans (1 kynslóð)
+Ses cousins germains (2 générations) ¦ Systkinabörn hans (2 kynslóðir)
+Ses cousins issus de germains (3 générations) ¦ Þremenningar hans (3 kynslóðir)
+Les cousins germains (2 générations) ¦ Systkinabörnin (2 kynslóðir)
+Les cousins issus de germains (3 générations) ¦ Þremenningarnir (3 kynslóðir)
+Jusqu’à 4 générations, tous les liens ¦ Allt að 4 kynslóðir, öll tengsl
+Jusqu’à 6 générations, tous les liens ¦ Allt að 6 kynslóðir, öll tengsl
+Moi, mes parents et mes grands-parents ¦ Ég, foreldrar mínir og afar og ömmur
+Moi et mes parents ¦ Ég og foreldrar mínir
+Mes parents, moi et mes enfants ¦ Foreldrar mínir, ég og börnin mín
+Le plus loin possible (14 générations) ¦ Eins langt og hægt er (14 kynslóðir)
+Ce que je sais (6 générations) ¦ Það sem ég veit (6 kynslóðir)
+Taux de recherche (8 générations) ¦ Rannsóknarhlutfall (8 kynslóðir)
+Métiers (5 générations) ¦ Störf (5 kynslóðir)
+Hommes et femmes (5 générations) ¦ Karlar og konur (5 kynslóðir)
+Les villages des deux époux (10 lieux) ¦ Þorp beggja hjóna (10 staðir)
+Les villages des deux époux (20 lieux) ¦ Þorp beggja hjóna (20 staðir)
+Le village de chacun → le lieu du mariage (10 lieux) ¦ Þorp hvors um sig → giftingarstaðurinn (10 staðir)
+Les 6 villages principaux ¦ 6 helstu þorpin
+Âge au décès, par siècle ¦ Aldur við andlát, eftir öldum
+Mes ancêtres : âge au décès, par siècle ¦ Forfeður mínir: aldur við andlát, eftir öldum
+Ses grands-parents et ses petits-enfants ¦ Afar hans og ömmur og barnabörn
+Quatre générations d’ancêtres ¦ Fjórar kynslóðir forfeðra
+Six générations d’ancêtres ¦ Sex kynslóðir forfeðra
+Ses descendants sur 4 générations ¦ Afkomendur hans í 4 kynslóðir
+Trois générations de chaque côté ¦ Þrjár kynslóðir hvorum megin
+Une courbe par siècle de naissance ¦ Einn ferill fyrir hverja fæðingaröld
+Branche paternelle et maternelle ¦ Föðurgrein og móðurgrein
+Mes ancêtres, génération par génération ¦ Forfeður mínir, kynslóð fyrir kynslóð
+Une seule courbe pour toute ma base ¦ Einn ferill fyrir allan gagnagrunninn minn
+Nés au XIXe siècle, femmes et hommes ¦ Fædd á 19. öld, konur og karlar
+Père → fils, sur 3 générations ¦ Faðir → sonur, í 3 kynslóðir
+Père → fils, sur 5 générations ¦ Faðir → sonur, í 5 kynslóðir
+Parents → enfants, sur 3 générations ¦ Foreldrar → börn, í 3 kynslóðir
+Mes ancêtres : père → fils ¦ Forfeður mínir: faðir → sonur
+Les 5 mères qui ont eu le plus d’enfants ¦ Þær 5 mæður sem eignuðust flest börn
+Les 10 mères qui ont eu le plus d’enfants ¦ Þær 10 mæður sem eignuðust flest börn
+Les mères parmi mes ancêtres ¦ Mæðurnar meðal forfeðra minna
+Mes ancêtres sur 2 générations ¦ Forfeður mínir í 2 kynslóðir
+Mes ancêtres sur 3 générations ¦ Forfeður mínir í 3 kynslóðir
+Mes ancêtres sur 4 générations ¦ Forfeður mínir í 4 kynslóðir
+Mes ancêtres sur 5 générations ¦ Forfeður mínir í 5 kynslóðir
+Mes ancêtres sur 3 générations (parents, grands-parents) ¦ Forfeður mínir í 3 kynslóðir (foreldrar, afar og ömmur)
+Mes ancêtres, par siècle ¦ Forfeður mínir, eftir öldum
+Au XIXe siècle, par décennie ¦ Á 19. öld, eftir áratugum
+Les 20 couples qui ont eu le plus d’enfants ¦ Þau 20 pör sem eignuðust flest börn
+Les 40 couples ¦ 40 pörin
+Adulte à 21 ans (majorité d’autrefois) ¦ Fullorðinn 21 árs (lögræðisaldur fyrri tíma)
+Par siècle, moins de 8 mois ¦ Eftir öldum, innan við 8 mánuðir
+Par demi-siècle, moins de 8 mois ¦ Eftir hálfum öldum, innan við 8 mánuðir
+Par décennie, moins de 8 mois ¦ Eftir áratugum, innan við 8 mánuðir
+Très tôt : moins de 7 mois, par siècle ¦ Mjög snemma: innan við 7 mánuðir, eftir öldum
+Depuis son lieu de naissance (8 générations) ¦ Frá fæðingarstað sínum (8 kynslóðir)
+Depuis son lieu de naissance (5 générations) ¦ Frá fæðingarstað sínum (5 kynslóðir)
+Depuis le berceau des plus anciens (10 générations) ¦ Frá vöggu þeirra elstu (10 kynslóðir)
+Les 8 communes les plus suivies ¦ 8 mest skoðuðu sveitarfélögin
+Tous les segments ¦ Allir bútar
+Segments d’au moins 7 cM (les plus sûrs) ¦ Bútar sem eru að minnsta kosti 7 cM (þeir öruggustu)
+Segments d’au moins 10 cM ¦ Bútar sem eru að minnsta kosti 10 cM
+Gros segments (20 cM et plus) ¦ Stórir bútar (20 cM og meira)
+Toutes les correspondances (150 au plus) ¦ Allar samsvaranir (í mesta lagi 150)
+Au moins 20 cM (150 au plus) ¦ Að minnsta kosti 20 cM (í mesta lagi 150)
+Cousins proches (90 cM et plus) ¦ Náið frændfólk (90 cM og meira)
+Au moins 50 cM, toutes ¦ Að minnsta kosti 50 cM, allar
+Graphique : un point de départ tout prêt ¦ Graf: tilbúinn upphafspunktur
+✏️ Sur mesure (les réglages ci-dessous) ¦ ✏️ Sérsniðið (stillingarnar hér fyrir neðan)
+Ce point de départ n’a pas pu être réglé. ¦ Ekki tókst að stilla þennan upphafspunkt.
+Réglé. Clique sur « {label} » pour voir le dessin. ¦ Stillt. Smelltu á „{label}“ til að sjá teikninguna.
+Pas d’ascendance : choisis une personne de départ (Personnes → sa fiche → « Personne de départ »). ¦ Engir forfeður: veldu upphafseinstakling (Einstaklingar → spjald hans → „Upphafseinstaklingur“).
+Pas d’enfant connu pour la personne de départ. ¦ Ekkert þekkt barn hjá upphafseinstaklingnum.
+Pas de fratrie connue. ¦ Engin þekkt systkini.
+La fratrie de la personne de départ ¦ Systkini upphafseinstaklingsins
+Les enfants de la personne de départ ¦ Börn upphafseinstaklingsins
+Les vies de mes ancêtres ({n} générations) ¦ Ævir forfeðra minna (kynslóðir: {n})
+Pas de descendance connue. ¦ Engir þekktir afkomendur.
+Homme ¦ Karl
+Femme ¦ Kona
+Aucune date de naissance pour ces personnes. ¦ Enginn fæðingardagur fyrir þessa einstaklinga.
+La vie de la personne de départ, étape par étape ¦ Ævi upphafseinstaklingsins, skref fyrir skref
+Naissances et décès de mes ancêtres (3 générations) ¦ Fæðingar og andlát forfeðra minna (3 kynslóðir)
+Naissances et décès de mes ancêtres (4 générations) ¦ Fæðingar og andlát forfeðra minna (4 kynslóðir)
+Naissances, mariages et décès de sa fratrie ¦ Fæðingar, hjónabönd og andlát systkina hans
+La naissance de ses enfants ¦ Fæðing barna hans
+{what} avec {who} à {place} ¦ {what} með {who} í {place}
+{what} avec {who} ¦ {what} með {who}
+{what} à {place} ¦ {what} í {place}
+Mes ancêtres : naissances et décès ¦ Forfeður mínir: fæðingar og andlát
+Aucune date pour ce choix. ¦ Engin dagsetning fyrir þetta val.
+Année de naissance et âge au décès (une personne = un point) ¦ Fæðingarár og aldur við andlát (einn einstaklingur = einn punktur)
+Âge de l’époux et âge de l’épouse au mariage ¦ Aldur eiginmanns og eiginkonu við hjónaband
+Âge de l’époux ¦ Aldur eiginmannsins
+Âge de l’épouse ¦ Aldur eiginkonunnar
+Âge des époux au mariage ¦ Aldur hjónanna við hjónaband
+Âge au décès selon l’année de naissance ¦ Aldur við andlát eftir fæðingarári
+Âge au mariage et âge au décès ¦ Aldur við hjónaband og aldur við andlát
+Pas assez de dates dans l’arbre pour ce choix. ¦ Ekki nógu margar dagsetningar í ættartrénu fyrir þetta val.
+bleu : hommes · rouge : femmes ¦ blátt: karlar · rautt: konur
+Département de naissance → département de décès ¦ Fæðingarsýsla → dánarsýsla
+Département de naissance → département du mariage ¦ Fæðingarsýsla → giftingarsýsla
+Département du parent → département de l’enfant ¦ Sýsla foreldris → sýsla barnsins
+Pays de naissance → pays de décès ¦ Fæðingarland → dánarland
+Commune de naissance → commune de décès ¦ Fæðingarsveitarfélag → dánarsveitarfélag
+Fils ¦ Sonur
+Fille ¦ Dóttir
+Père : {x} ¦ Faðir: {x}
+Parent : ¦ Foreldri:
+Enfant : ¦ Barn:
+Pas assez de lieux connus des deux côtés. ¦ Ekki nógu margir þekktir staðir báðum megin.
+Sa descendance sur 2 générations ¦ Afkomendur hans í 2 kynslóðir
+Sa descendance sur 3 générations ¦ Afkomendur hans í 3 kynslóðir
+Rien à dessiner pour ce choix. ¦ Ekkert að teikna fyrir þetta val.
+Mes ancêtres ({n} générations) ¦ Forfeður mínir (kynslóðir: {n})
+Mes ancêtres en chiffres (trouvés, sourcés, taux de recherche) ¦ Forfeður mínir í tölum (fundnir, með heimild, rannsóknarhlutfall)
+La qualité de ma base (sources, noms, lieux) ¦ Gæði gagnagrunnsins míns (heimildir, nöfn, staðir)
+Ancêtres trouvés (10 générations) ¦ Forfeður fundnir (10 kynslóðir)
+Trouvés sur 8 générations ¦ Fundnir í 8 kynslóðir
+Ancêtres avec une source ¦ Forfeður með heimild
+Taux de recherche moyen ¦ Meðalrannsóknarhlutfall
+Génération la plus lointaine ¦ Fjarlægasta kynslóðin
+Mes ancêtres en chiffres ¦ Forfeður mínir í tölum
+à partir de {name} ¦ frá {name}
+Les chiffres ne sont pas encore prêts. ¦ Tölurnar eru ekki tilbúnar enn.
+Fiches avec une source ¦ Spjöld með heimild
+Personnes décédées ¦ Látnir einstaklingar
+Noms de famille différents ¦ Mismunandi eftirnöfn
+La qualité de ma base ¦ Gæði gagnagrunnsins míns
+Ancêtres avec une source, génération par génération ¦ Forfeður með heimild, kynslóð fyrir kynslóð
+Taux de recherche moyen, génération par génération ¦ Meðalrannsóknarhlutfall, kynslóð fyrir kynslóð
+Ancêtres dont on connaît la date de naissance, par génération ¦ Forfeður með þekktan fæðingardag, eftir kynslóð
+Génér. {g} ¦ Kyns. {g}
+Pas d’ancêtre trouvé. ¦ Enginn forfaðir fundinn.
+Taux de recherche, génération par génération ¦ Rannsóknarhlutfall, kynslóð fyrir kynslóð
+Date de naissance connue ¦ Fæðingardagur þekktur
+à partir de {name} (parmi les ancêtres trouvés) ¦ frá {name} (meðal fundinna forfeðra)
+Objectif à changer dans le tableau ¦ Markmiði má breyta í töflunni
+Ajoute des noms (lignes) et au moins deux périodes (colonnes). ¦ Bættu við nöfnum (línur) og að minnsta kosti tveimur tímabilum (dálkar).
+Aucun rang à montrer : vérifie les chiffres. ¦ Ekkert sæti til að sýna: athugaðu tölurnar.
+Ajoute au moins deux périodes (lignes) et des catégories (colonnes). ¦ Bættu við að minnsta kosti tveimur tímabilum (línur) og flokkum (dálkar).
+Ajoute des valeurs (une par ligne) : l’app les range dans les tranches. ¦ Bættu við gildum (eitt í hverri línu): appið raðar þeim í bil.
+médiane ¦ miðgildi
+Ajoute des valeurs avec leur groupe (siècle, sexe…) : médiane et quartiles sont calculés. ¦ Bættu við gildum með hópi þeirra (öld, kyn…): miðgildi og fjórðungsmörk eru reiknuð.
+{name} — {n} valeurs : médiane {md}{u}, quartiles {q1} et {q3}, de {min} à {max}{u}, moyenne {mean} ¦ {name} — gildi: {n}: miðgildi {md}{u}, fjórðungsmörk {q1} og {q3}, frá {min} til {max}{u}, meðaltal {mean}
+{name} — {n} valeur : médiane {md}{u}, quartiles {q1} et {q3}, de {min} à {max}{u}, moyenne {mean} ¦ {name} — gildi: {n}: miðgildi {md}{u}, fjórðungsmörk {q1} og {q3}, frá {min} til {max}{u}, meðaltal {mean}
+moyenne {v}{u} ¦ meðaltal {v}{u}
+{v}{u} (valeur à part) ¦ {v}{u} (útlagi)
+Ajoute des lignes avec deux valeurs (ex. âge du mari, âge de la femme). ¦ Bættu við línum með tveimur gildum (t.d. aldur eiginmanns, aldur eiginkonu).
+écart ¦ munur
+Ajoute des lignes avec une valeur « avant » et une valeur « après ». ¦ Bættu við línum með gildi „fyrir“ og gildi „eftir“.
+Ajoute des étapes : un départ, des hausses (+) et des baisses (−), des sous-totaux. ¦ Bættu við skrefum: upphaf, hækkanir (+) og lækkanir (−), millisummur.
+Ajoute des lignes : un nom et un nombre. ¦ Bættu við línum: nafn og tala.
+Ajoute des valeurs : une ligne = une personne (nom, valeur, groupe). ¦ Bættu við gildum: ein lína = einn einstaklingur (nafn, gildi, hópur).
+médiane {v}{u} ¦ miðgildi {v}{u}
+5 000 premiers points sur {n} ¦ Fyrstu 5 000 punktar af {n}
+Ajoute des périodes (lignes) et une colonne par petite courbe. ¦ Bættu við tímabilum (línur) og einum dálki fyrir hvert smárit.
+Ajoute une carte : un nom, un chiffre (et la valeur d’avant, une mini-courbe, des seuils…). ¦ Bættu við spjaldi: nafn, tala (og fyrra gildi, smárit, mörk…).
+Ajoute une ligne : un nom, une valeur, un objectif (et des zones). ¦ Bættu við línu: nafn, gildi, markmið (og svæði).
+tout le monde ¦ allir
+les femmes ¦ konurnar
+les hommes ¦ karlarnir
+Âge au décès (tout le monde) ¦ Aldur við andlát (allir)
+Âge au décès (les femmes) ¦ Aldur við andlát (konurnar)
+Âge au décès (les hommes) ¦ Aldur við andlát (karlarnir)
+D’après {n} personnes de l’arbre ¦ Samkvæmt einstaklingum í ættartrénu: {n}
+Les métiers de la famille ¦ Störf fjölskyldunnar
+Naissances par commune ¦ Fæðingar eftir sveitarfélagi
+Naissances par nom de famille ¦ Fæðingar eftir eftirnafni
+par tranches de {n} ans ¦ í {n} ára bilum
+Prénoms les plus donnés par décennie ({who}) ¦ Algengustu eiginnöfnin eftir áratugum ({who})
+Pas assez de naissances datées. ¦ Ekki nógu margar fæðingar með dagsetningu.
+Les 10 prénoms les plus donnés par décennie ¦ 10 algengustu eiginnöfnin eftir áratugum
+D’après les naissances de l’arbre ¦ Samkvæmt fæðingum í ættartrénu
+Métiers (par 25 ans) ¦ Störf (í 25 ára bilum)
+Métiers (par 50 ans) ¦ Störf (í 50 ára bilum)
+Naissances par nom de famille (par décennie) ¦ Fæðingar eftir eftirnafni (eftir áratugum)
+Naissances par commune (par 25 ans) ¦ Fæðingar eftir sveitarfélagi (í 25 ára bilum)
+Naissances par commune (par décennie) ¦ Fæðingar eftir sveitarfélagi (eftir áratugum)
+Âges des époux au mariage (25 couples les plus récents) ¦ Aldur hjónanna við hjónaband (25 nýjustu pörin)
+Âges des époux au mariage (50 couples) ¦ Aldur hjónanna við hjónaband (50 pör)
+Aucun couple marié avec les deux dates de naissance. ¦ Ekkert gift par með báða fæðingardaga.
+Lui ¦ Hann
+D’après les mariages de l’arbre ¦ Samkvæmt hjónaböndum í ættartrénu
+Naissances par commune : un siècle et le suivant ¦ Fæðingar eftir sveitarfélagi: ein öld og sú næsta
+Il faut des naissances sur au moins deux siècles. ¦ Það þarf fæðingar á að minnsta kosti tveimur öldum.
+Naissances par commune, d’un siècle à l’autre ¦ Fæðingar eftir sveitarfélagi, frá einni öld til annarrar
+Naissances et décès dans l’arbre (par 50 ans) ¦ Fæðingar og andlát í ættartrénu (í 50 ára bilum)
+Naissances et décès dans l’arbre (par 25 ans) ¦ Fæðingar og andlát í ættartrénu (í 25 ára bilum)
+Naissances et décès dans l’arbre (par siècle) ¦ Fæðingar og andlát í ættartrénu (eftir öldum)
+Les vivants de l’arbre, période par période ¦ Lifandi fólk í ættartrénu, tímabil fyrir tímabil
+naissances (+) et décès (−) ; décès inconnu d’une naissance ancienne : compté 60 ans après ¦ fæðingar (+) og andlát (−); óþekkt andlát eftir gamla fæðingu: talið 60 árum síðar
+Les compteurs de ma base (personnes, familles, médias…) ¦ Teljarar gagnagrunnsins míns (einstaklingar, fjölskyldur, miðlar…)
+il y a un mois ¦ fyrir mánuði
+Ancêtres trouvés (8 générations) ¦ Forfeður fundnir (8 kynslóðir)
+Ma base en chiffres ¦ Gagnagrunnurinn minn í tölum
+mini-courbes : les 12 derniers mois ¦ smárit: síðustu 12 mánuðir
+Ancêtres trouvés par génération (SOSA) ¦ Forfeður fundnir eftir kynslóð (SOSA)
+Pas d’ascendance SOSA : choisis une personne de départ. ¦ Engir SOSA-forfeður: veldu upphafseinstakling.
+Génér. ¦ Kyns.
+Ancêtres trouvés, génération par génération ¦ Forfeður fundnir, kynslóð fyrir kynslóð
+Objectif : 75 % (à changer dans le tableau) ¦ Markmið: 75 % (má breyta í töflunni)
+Unité (ex. : ans, personnes) ¦ Eining (t.d.: ár, einstaklingar)
+Les prénoms les plus donnés, décennie par décennie ¦ Algengustu eiginnöfnin, áratug fyrir áratug
+rang de 1 (le plus donné) à 8 ; dans le tableau : le nombre de naissances ¦ sæti frá 1 (algengast) til 8; í töflunni: fjöldi fæðinga
+Laboureur ¦ Bóndi
+Tisserand ¦ Vefari
+Instituteur ¦ Kennari
+Employé ¦ Starfsmaður
+Journalier ¦ Daglaunamaður
+Domestique ¦ Vinnuhjú
+Les métiers de la famille sur 200 ans ¦ Störf fjölskyldunnar í 200 ár
+nombre de personnes, par tranches de 25 ans ¦ fjöldi einstaklinga, í 25 ára bilum
+par tranches de 5 ans ¦ í 5 ára bilum
+Jean et Marie (1789) ¦ Jean og Marie (1789)
+Pierre et Anne (1812) ¦ Pierre og Anne (1812)
+Louis et Rose (1838) ¦ Louis og Rose (1838)
+Joseph et Jeanne (1861) ¦ Joseph og Jeanne (1861)
+François et Louise (1889) ¦ François og Louise (1889)
+Henri et Germaine (1919) ¦ Henri og Germaine (1919)
+André et Simone (1946) ¦ André og Simone (1946)
+XVIIIe siècle ¦ 18. öld
+XIXe siècle ¦ 19. öld
+Les vivants de la famille ¦ Lifandi fólk í fjölskyldunni
+naissances (+), décès et départs (−) ¦ fæðingar (+), andlát og brottfarir (−)
+En 1800 ¦ Árið 1800
+Naissances 1800-1849 ¦ Fæðingar 1800-1849
+Décès 1800-1849 ¦ Andlát 1800-1849
+En 1850 ¦ Árið 1850
+Naissances 1850-1899 ¦ Fæðingar 1850-1899
+Départs (Amérique) ¦ Brottfarir (Ameríka)
+Décès 1850-1899 ¦ Andlát 1850-1899
+En 1900 ¦ Árið 1900
+Févr. ¦ Feb.
+Mars ¦ Mars
+Avril ¦ Apríl
+Mai ¦ Maí
+Juin ¦ Júní
+Août ¦ Ágúst
+Déc. ¦ Des.
+Âge au décès : une personne, un point ¦ Aldur við andlát: einn einstaklingur, einn punktur
+Naissances par branche ¦ Fæðingar eftir grein
+tous les 20 ans, même échelle ¦ á 20 ára fresti, sami kvarði
+Ma généalogie en chiffres ¦ Ættfræðin mín í tölum
+l’an dernier ¦ í fyrra
+Actes numérisés ¦ Skönnuð skjöl
+Fiches sans source ¦ Spjöld án heimildar
+Photos légendées ¦ Myndir með myndatexta
+pareil ¦ óbreytt
+Objectif : 75 % ¦ Markmið: 75 %
+Génér. 2 (parents) ¦ Kyns. 2 (foreldrar)
+Génér. 3 ¦ Kyns. 3
+Génér. 4 ¦ Kyns. 4
+Génér. 5 ¦ Kyns. 5
+Génér. 6 ¦ Kyns. 6
+Génér. 7 ¦ Kyns. 7
+Génér. 8 ¦ Kyns. 8
+Génér. 9 ¦ Kyns. 9
+Par la 1re valeur ¦ Eftir 1. gildi
+Par la 2e valeur ¦ Eftir 2. gildi
+Les noms (lignes) et les périodes (colonnes) ¦ Nöfnin (línur) og tímabilin (dálkar)
+Nom / prénom ¦ Eftirnafn / eiginnafn
+Les chiffres du tableau sont ¦ Tölurnar í töflunni eru
+Des nombres : l’app calcule le rang ¦ Tölur: appið reiknar sætið
+Déjà des rangs (1 = premier) ¦ Þegar sæti (1 = fyrsta)
+Hauteur d’un rang ¦ Hæð sætis
+Les périodes (lignes) et les catégories (colonnes) ¦ Tímabilin (línur) og flokkarnir (dálkar)
+Courants (centrés, le moins de mouvement) ¦ Straumar (miðjaðir, sem minnst hreyfing)
+Centrés sur l’axe ¦ Miðjaðir á ásinn
+Empilés sur le sol ¦ Staflaðir á gólfið
+En parts (100 %) ¦ Í hlutum (100 %)
+Noms dans les courants ¦ Nöfn í straumunum
+Les valeurs (une par ligne : l’app les range en tranches) ¦ Gildin (eitt í hverri línu: appið raðar þeim í bil)
+Largeur des tranches (0 = automatique) ¦ Breidd bilanna (0 = sjálfvirkt)
+Début de la première tranche (vide = automatique) ¦ Upphaf fyrsta bils (autt = sjálfvirkt)
+Couleur des colonnes ¦ Litur dálkanna
+Montrer la moyenne ¦ Sýna meðaltalið
+Les valeurs et leur groupe (médiane, quartiles et extrêmes sont calculés) ¦ Gildin og hópur þeirra (miðgildi, fjórðungsmörk og útgildi eru reiknuð)
+Boîtes debout ¦ Lóðréttir kassar
+Boîtes couchées ¦ Láréttir kassar
+Jusqu’à 1,5 × l’écart des quartiles (valeurs à part en ronds) ¦ Allt að 1,5 × fjórðungsbilið (útlagar sem hringir)
+Du minimum au maximum ¦ Frá lágmarki til hámarks
+Montrer la moyenne (◆) ¦ Sýna meðaltalið (◆)
+Les lignes et leurs deux valeurs ¦ Línurnar og tvö gildi þeirra
+Écrire l’écart ¦ Skrifa muninn
+Les lignes : la valeur avant, la valeur après ¦ Línurnar: gildið fyrir, gildið eftir
+Une couleur par ligne ¦ Einn litur fyrir hverja línu
+Couleur des hausses ¦ Litur hækkana
+Couleur des baisses ¦ Litur lækkana
+Les étapes (dans l’ordre) ¦ Skrefin (í röð)
+Valeur (+ ou −) ¦ Gildi (+ eða −)
+Hausse ou baisse ¦ Hækkun eða lækkun
+Sous-total (calculé) ¦ Millisumma (reiknuð)
+Total (calculé) ¦ Samtals (reiknað)
+Traits entre les marches ¦ Línur milli þrepanna
+Couleur des totaux ¦ Litur samtalnanna
+Les points (une ligne = une personne) ¦ Punktarnir (ein lína = einn einstaklingur)
+Les périodes (lignes) et une colonne par petite courbe ¦ Tímabilin (línur) og einn dálkur fyrir hvert smárit
+Courbes par ligne (0 = automatique) ¦ Ferlar í hverri línu (0 = sjálfvirkt)
+Hauteur d’une courbe ¦ Hæð ferils
+Remplir sous la courbe ¦ Fylla undir ferilinn
+Écrire la dernière valeur ¦ Skrifa síðasta gildið
+Valeur d’avant (flèche, écart) ¦ Fyrra gildi (ör, munur)
+Texte « avant » (ex. : l’an dernier) ¦ Texti „fyrir“ (t.d.: í fyrra)
+Mini-courbe (chiffres séparés par des espaces) ¦ Smárit (tölur aðskildar með bilum)
+C’est plus haut ¦ Það er hærra
+C’est plus bas ¦ Það er lægra
+Couleur (sinon selon les seuils) ¦ Litur (annars eftir mörkum)
+Cartes par ligne (0 = automatique) ¦ Spjöld í hverri línu (0 = sjálfvirkt)
+En valeur et en % ¦ Í gildi og í %
+En valeur ¦ Í gildi
+En % ¦ Í %
+Chiffres après la virgule (au plus) ¦ Aukastafir (í mesta lagi)
+Couleur « bien » ¦ Litur „gott“
+Couleur « moyen » ¦ Litur „miðlungs“
+Couleur « à surveiller » ¦ Litur „þarf að fylgjast með“
+Les barres ¦ Súlurnar
+Unité (ex. : %) ¦ Eining (t.d.: %)
+Graduations sous la dernière barre ¦ Kvarðastrik undir síðustu súlunni
+Couleur de la valeur ¦ Litur gildisins
+Couleur de l’objectif ¦ Litur markmiðsins
+Couleur des zones ¦ Litur svæðanna
+Ajoute des périodes : le nombre d’enfants nés, ceux morts avant 1 an et avant 5 ans. ¦ Bættu við tímabilum: fjöldi fæddra barna, þeirra sem dóu fyrir 1 árs aldur og fyrir 5 ára aldur.
+En tout : {a} % des enfants morts avant 1 an, {b} % avant 5 ans ({n}). ¦ Alls: {a} % barnanna dóu fyrir 1 árs aldur, {b} % fyrir 5 ára aldur ({n}).
+Mortalité des enfants ¦ Barnadauði
+Ajoute des couples : enfants nés, arrivés à l’âge adulte, morts jeunes. ¦ Bættu við pörum: börn fædd, sem náðu fullorðinsaldri, sem dóu ung.
+{name} : {n} sans date de décès ¦ {name}: án dánardags: {n}
+Sur {n}, {p} % sont arrivés à l’âge adulte. ¦ Af {n} náðu {p} % fullorðinsaldri.
+Arrivés à l’âge adulte ¦ Náðu fullorðinsaldri
+Ajoute des lignes : une période, « Naissances » ou « Décès », et les 12 mois. ¦ Bættu við línum: tímabil, „Fæðingar“ eða „Andlát“, og mánuðirnir 12.
+{n} naissances ({p} % de l’année) ¦ Fæðingar: {n} ({p} % ársins)
+{n} naissances ¦ Fæðingar: {n}
+{n} décès ({p} % de l’année) ¦ Andlát: {n} ({p} % ársins)
+Saisons des naissances et des décès (plus foncé = plus d’actes) ¦ Árstíðir fæðinga og andláta (dekkra = fleiri skjöl)
+moins de 6 mois ¦ innan við 6 mánuðir
+6 mois à 1 an ¦ 6 mánuðir til 1 árs
+1 à 2 ans ¦ 1 til 2 ár
+2 à 5 ans ¦ 2 til 5 ár
+5 à 10 ans ¦ 5 til 10 ár
+10 ans et plus ¦ 10 ár og meira
+Ajoute des remariages : le nom, le sexe et le délai en mois depuis la mort du premier conjoint. ¦ Bættu við endurgiftingum: nafnið, kynið og tíminn í mánuðum frá andláti fyrri maka.
+Hommes remariés {when} après : {n} ¦ Karlar sem giftust aftur {when} síðar: {n}
+Femmes remariées {when} après : {n} ¦ Konur sem giftust aftur {when} síðar: {n}
+Délai médian avant de se remarier : {a} pour les hommes, {b} pour les femmes. ¦ Miðgildistími fram að endurgiftingu: {a} hjá körlum, {b} hjá konum.
+Veuvage et remariage ¦ Ekkjudómur og endurgifting
+Ajoute des couples : l’année du mariage et sa durée en années. ¦ Bættu við pörum: giftingarárið og lengd hjónabandsins í árum.
+Durée médiane : {a} ans ({n} terminés par un décès). ¦ Miðgildislengd: {a} ár (lokið með andláti: {n}).
+Durée médiane : {a} ans ({n} terminé par un décès). ¦ Miðgildislengd: {a} ár (lokið með andláti: {n}).
+Durée des mariages ¦ Lengd hjónabanda
+Ajoute des naissances : l’année, l’âge du père, l’âge de la mère. ¦ Bættu við fæðingum: árið, aldur föðurins, aldur móðurinnar.
+le père ¦ faðirinn
+la mère ¦ móðirin
+Âge du père (médiane {n} ans) ¦ Aldur föðurins (miðgildi {n} ár)
+Âge de la mère (médiane {n} ans) ¦ Aldur móðurinnar (miðgildi {n} ár)
+Âge des parents à chaque naissance ¦ Aldur foreldranna við hverja fæðingu
+Ajoute des périodes : le nombre de couples, les premiers enfants nés avant le mariage et ceux nés moins de 8 mois après. ¦ Bættu við tímabilum: fjöldi para, fyrstu börn fædd fyrir hjónaband og þau sem fæddust innan 8 mánaða eftir það.
+{name} : {a} premiers enfants nés avant le mariage, sur {n} ¦ {name}: fyrstu börn fædd fyrir hjónaband: {a} af {n}
+{name} : {a} premier enfant né avant le mariage, sur {n} ¦ {name}: fyrsta barn fætt fyrir hjónaband: {a} af {n}
+{name} : {a} nés moins de 8 mois après, sur {n} ¦ {name}: fædd innan 8 mánaða eftir: {a} af {n}
+{name} : {a} né moins de 8 mois après, sur {n} ¦ {name}: fætt innan 8 mánaða eftir: {a} af {n}
+Né avant le mariage ¦ Fætt fyrir hjónaband
+Né moins de 8 mois après ¦ Fætt innan 8 mánaða eftir
+{p} % des premiers enfants ont été conçus avant le mariage ({n}). ¦ {p} % fyrstu barna voru getin fyrir hjónaband ({n}).
+Conceptions avant mariage ¦ Getnaður fyrir hjónaband
+moins d’1 an ¦ innan við 1 ár
+1 à 3 ans ¦ 1 til 3 ár
+3 à 5 ans ¦ 3 til 5 ár
+10 à 15 ans ¦ 10 til 15 ár
+15 ans et plus ¦ 15 ár og meira
+Ajoute des couples : l’écart d’âge en années (positif = le mari est plus âgé). ¦ Bættu við pörum: aldursmunurinn í árum (jákvætt = eiginmaðurinn er eldri).
+Le mari est plus âgé ¦ Eiginmaðurinn er eldri
+La femme est plus âgée ¦ Eiginkonan er eldri
+Mari plus âgé de {gap} : {n} ¦ Eiginmaður eldri um {gap}: {n}
+Femme plus âgée de {gap} : {n} ¦ Eiginkona eldri um {gap}: {n}
+Écart médian : {a} ans ; la femme est plus âgée dans {p} % des couples. ¦ Miðgildismunur: {a} ár; eiginkonan er eldri í {p} % para.
+Écart médian : {a} an ; la femme est plus âgée dans {p} % des couples. ¦ Miðgildismunur: {a} ár; eiginkonan er eldri í {p} % para.
+Écart d’âge entre époux ¦ Aldursmunur hjóna
+Ajoute des générations : la distance moyenne (km) au lieu de référence. ¦ Bættu við kynslóðum: meðalfjarlægð (km) frá viðmiðunarstaðnum.
+Génération {g} : {km} km en médiane ({n}, le plus loin à {max} km) ¦ Kynslóð {g}: {km} km að miðgildi ({n}, fjærst {max} km)
+Génération {g} : {km} km en moyenne ({n}, le plus loin à {max} km) ¦ Kynslóð {g}: {km} km að meðaltali ({n}, fjærst {max} km)
+=lieu connu ¦ þekktur staður|þekktir staðir
+Distance au {ref}. ¦ Fjarlægð frá {ref}.
+Loin du berceau ¦ Fjarri vöggunni
+Note qui a signé : dans « Modifier un événement », « ✍️ A signé » pour les époux et chaque témoin. ¦ Skráðu hver skrifaði undir: í „Breyta atburði“, „✍️ Skrifaði undir“ fyrir hjónin og hvern vott.
+Hommes (époux…) ¦ Karlar (eiginmenn…)
+Femmes (épouses…) ¦ Konur (eiginkonur…)
+{a} ont signé sur {b} ¦ {a} skrifuðu undir af {b}
+Part de ceux qui savaient signer ¦ Hlutfall þeirra sem kunnu að skrifa nafn sitt
+Ajoute des générations : pour chaque acte, combien sont sourcés, sans source, manquants. ¦ Bættu við kynslóðum: fyrir hvert skjal, hve mörg eru með heimild, án heimildar, vantar.
+Génération 12 ¦ Kynslóð 12
+sourcé ¦ með heimild
+sans source ¦ án heimildar
+manquant ¦ vantar
+{n} sourcés ¦ Með heimild: {n}
+{n} sourcé ¦ Með heimild: {n}
+{n} sans source ¦ Án heimildar: {n}
+{n} manquants ¦ Vantar: {n}
+{n} manquant ¦ Vantar: {n}
+{p} % des actes attendus sont prouvés par une source. ¦ {p} % væntanlegra skjala eru sönnuð með heimild.
+Ce que tu as prouvé ¦ Það sem þú hefur sannað
+Dépouillé ¦ Skráð
+Vu, rien trouvé ¦ Skoðað, ekkert fannst
+Acte trouvé (source) ¦ Skjal fundið (heimild)
+Ajoute des lignes : la commune, les années vues (de… à…) et la sorte (dépouillé, vu sans rien, à faire, acte). ¦ Bættu við línum: sveitarfélagið, árin sem skoðuð voru (frá… til…) og tegundin (skráð, skoðað án árangurs, eftir að gera, skjal).
+{place} : de {a} à {b} — en rouge pâle, les années pas encore vues ¦ {place}: frá {a} til {b} — í fölrauðu, árin sem ekki hafa verið skoðuð enn
+Pas encore vu ¦ Ekki skoðað enn
+Registres consultés ¦ Kirkjubækur sem skoðaðar voru
+Couple {n} ¦ Par {n}
+Enfant {n} ¦ Barn {n}
+Quart de siècle ¦ Aldarfjórðungur
+Demi-siècle ¦ Hálf öld
+👶 Les enfants de ma base ¦ 👶 Börnin í gagnagrunninum mínum
+Chaque enfant né (ou baptisé) avec une date : mort avant 1 an, avant 5 ans, ou plus tard. Ceux dont on ne connaît pas le décès sont laissés de côté. ¦ Hvert barn fætt (eða skírt) með dagsetningu: dó fyrir 1 árs aldur, fyrir 5 ára aldur, eða síðar. Þau sem ekki er vitað um andlát hjá eru skilin útundan.
+Aucun enfant avec une naissance et un décès connus. ¦ Ekkert barn með þekkta fæðingu og andlát.
+{n} périodes prises dans ta base ({k} personnes sans date de décès laissées de côté). ¦ Tímabil sótt úr gagnagrunninum þínum: {n} (einstaklingar án dánardags skildir útundan: {k}).
+👨‍👩‍👧 Les couples de ma base ¦ 👨‍👩‍👧 Pörin í gagnagrunninum mínum
+Pour chaque couple : ses enfants, ceux arrivés à l’âge adulte et ceux morts jeunes. ¦ Fyrir hvert par: börn þess, þau sem náðu fullorðinsaldri og þau sem dóu ung.
+Adulte à partir de ¦ Fullorðinn frá
+Aucun couple avec des enfants. ¦ Ekkert par með börn.
+Les fratries qui ont survécu ¦ Systkinahóparnir sem komust af
+{n} couples pris dans ta base (sur {k}). ¦ Pör sótt úr gagnagrunninum þínum: {n} (af {k}).
+🗓 Les naissances et les décès de ma base ¦ 🗓 Fæðingar og andlát í gagnagrunninum mínum
+Datés au mois près : combien chaque mois, période par période. ¦ Dagsett upp á mánuð: hve mörg í hverjum mánuði, tímabil fyrir tímabil.
+Aucune naissance ni aucun décès datés au mois près. ¦ Engin fæðing né andlát dagsett upp á mánuð.
+💔 Les remariages de ma base ¦ 💔 Endurgiftingar í gagnagrunninum mínum
+Les personnes mariées deux fois ou plus : le temps entre la mort du conjoint et le mariage suivant (les deux dates connues). ¦ Einstaklingar sem giftust tvisvar eða oftar: tíminn frá andláti makans til næsta hjónabands (báðar dagsetningar þekktar).
+Aucun remariage avec la date du décès du conjoint et celle du nouveau mariage. ¦ Engin endurgifting með dánardegi makans og dagsetningu nýja hjónabandsins.
+{n} remariages pris dans ta base. ¦ Endurgiftingar sóttar úr gagnagrunninum þínum: {n}.
+⏳ Les mariages de ma base ¦ ⏳ Hjónaböndin í gagnagrunninum mínum
+De la date du mariage à la mort du premier des deux époux. ¦ Frá giftingardegi til andláts þess hjónanna sem dó fyrst.
+Aucun mariage daté dont un des époux a une date de décès. ¦ Ekkert dagsett hjónaband þar sem annað hjónanna hefur dánardag.
+{n} mariages pris dans ta base ({k} encore en cours ou sans date de décès). ¦ Hjónabönd sótt úr gagnagrunninum þínum: {n} ({k} standa enn eða án dánardags).
+{n} mariages pris dans ta base. ¦ Hjónabönd sótt úr gagnagrunninum þínum: {n}.
+👴 Les naissances de ma base ¦ 👴 Fæðingarnar í gagnagrunninum mínum
+Pour chaque enfant : l’âge de son père et de sa mère le jour de sa naissance. ¦ Fyrir hvert barn: aldur föður þess og móður á fæðingardegi þess.
+Aucun enfant dont un parent a une date de naissance. ¦ Ekkert barn þar sem foreldri hefur fæðingardag.
+{n} naissances prises dans ta base. ¦ Fæðingar sóttar úr gagnagrunninum þínum: {n}.
+🤰 Les premiers enfants de ma base ¦ 🤰 Fyrstu börnin í gagnagrunninum mínum
+Pour chaque mariage daté au mois près : le premier enfant est-il né avant, ou moins de 8 mois après ? ¦ Fyrir hvert hjónaband dagsett upp á mánuð: fæddist fyrsta barnið fyrir, eða innan 8 mánaða eftir?
+« Tôt » : moins de ¦ „Snemma“: innan við
+Aucun mariage daté au mois près avec un enfant daté. ¦ Ekkert hjónaband dagsett upp á mánuð með dagsettu barni.
+💑 Les couples de ma base ¦ 💑 Pörin í gagnagrunninum mínum
+L’écart entre les dates de naissance du mari et de la femme. ¦ Munurinn á fæðingardögum eiginmanns og eiginkonu.
+Aucun couple dont les deux époux ont une date de naissance. ¦ Ekkert par þar sem bæði hjónin hafa fæðingardag.
+🧭 L’ascendance d’une personne ¦ 🧭 Forfeður einstaklings
+Génération par génération : à quelle distance du lieu de référence sont nés ses ancêtres (les lieux ont besoin de leurs coordonnées). ¦ Kynslóð fyrir kynslóð: í hvaða fjarlægð frá viðmiðunarstaðnum forfeður hans fæddust (staðirnir þurfa hnit).
+Distance mesurée depuis ¦ Fjarlægð mæld frá
+Le lieu de naissance de la personne ¦ Fæðingarstað einstaklingsins
+Le centre des lieux de la génération la plus ancienne ¦ Miðju staða elstu kynslóðarinnar
+Un lieu que je choisis ¦ Stað sem ég vel
+Le lieu (si « un lieu que je choisis ») ¦ Staðurinn (ef „stað sem ég vel“)
+Choisis le lieu dans le menu. ¦ Veldu staðinn í valmyndinni.
+Le lieu de référence n’a pas de coordonnées. ¦ Viðmiðunarstaðurinn hefur engin hnit.
+Aucun ancêtre né dans un lieu situé. ¦ Enginn forfaðir fæddur á staðsettum stað.
+Loin du berceau — {name} ¦ Fjarri vöggunni — {name}
+✍️ Les signatures notées dans ma base ¦ ✍️ Undirskriftir skráðar í gagnagrunninum mínum
+Ceux qui ont signé l’acte, ou « ne sait pas signer » : à noter dans « Modifier un événement » (✍️ pour les époux, et pour chaque témoin). ¦ Þeir sem skrifuðu undir skjalið, eða „kann ekki að skrifa“: skráð í „Breyta atburði“ (✍️ fyrir hjónin, og fyrir hvern vott).
+Aucune signature notée pour l’instant : dans un événement, choisis « ✍️ A signé : oui / non » pour les époux et les témoins. ¦ Engin undirskrift skráð enn: í atburði, veldu „✍️ Skrifaði undir: já / nei“ fyrir hjónin og vottana.
+✅ L’ascendance d’une personne ¦ ✅ Forfeður einstaklings
+Pour chaque génération d’ancêtres : les naissances, mariages et décès prouvés par une source, présents sans source, ou pas encore trouvés. ¦ Fyrir hverja kynslóð forfeðra: fæðingar, hjónabönd og andlát sönnuð með heimild, skráð án heimildar, eða ekki fundin enn.
+Ce que j’ai prouvé — {name} ¦ Það sem ég hef sannað — {name}
+📚 Mes dépouillements et mes actes ¦ 📚 Skráningar mínar og skjöl
+Pour chaque commune : les années des registres dépouillés (suivi des dépouillements) et des actes trouvés avec une source. ¦ Fyrir hvert sveitarfélag: ár kirkjubókanna sem hafa verið skráðar (eftirfylgni skráninga) og skjala sem fundist hafa með heimild.
+Aucun dépouillement avec des années, ni d’acte sourcé avec un lieu. ¦ Engin skráning með árum, né skjal með heimild og stað.
+{n} communes prises dans ta base. ¦ Sveitarfélög sótt úr gagnagrunninum þínum: {n}.
+Les périodes ¦ Tímabilin
+Période (ex. 1780) ¦ Tímabil (t.d. 1780)
+Enfants nés ¦ Börn fædd
+Le nombre ¦ Fjöldinn
+Aussi « avant 5 ans » ¦ Einnig „fyrir 5 ára aldur“
+Couleur « avant 1 an » ¦ Litur „fyrir 1 árs aldur“
+Couleur « avant 5 ans » ¦ Litur „fyrir 5 ára aldur“
+Arrivés adultes ¦ Náðu fullorðinsaldri
+Le plus de morts jeunes d’abord ¦ Flest látin ung fyrst
+Couples au plus ¦ Pör í mesta lagi
+Couleur « adultes » ¦ Litur „fullorðin“
+Couleur « morts jeunes » ¦ Litur „dóu ung“
+Couleur « on ne sait pas » ¦ Litur „ekki vitað“
+Les fratries de la famille ¦ Systkinahóparnir í fjölskyldunni
+Les lignes (une période et une sorte, puis les 12 mois) ¦ Línurnar (tímabil og tegund, síðan mánuðirnir 12)
+Les naissances ¦ Fæðingarnar
+Les décès ¦ Andlátin
+Comparer les mois (part de l’année, en %) ¦ Bera saman mánuðina (hlutfall ársins, í %)
+Hauteur des cases ¦ Hæð reitanna
+Saisons des naissances et des décès ¦ Árstíðir fæðinga og andláta
+Les remariages ¦ Endurgiftingarnar
+Année du veuvage ¦ Ár makamissis
+Combien de temps avant de se remarier ¦ Hve langur tími leið fram að endurgiftingu
+Les mariages ¦ Hjónaböndin
+Âge du père ¦ Aldur föðurins
+Âge de la mère ¦ Aldur móðurinnar
+Le père et la mère ¦ Faðirinn og móðirin
+Moyenne par quart de siècle (ligne) ¦ Meðaltal eftir aldarfjórðungi (lína)
+Couleur du père ¦ Litur föðurins
+Couleur de la mère ¦ Litur móðurinnar
+Couleur « avant » ¦ Litur „fyrir“
+Couleur « moins de 8 mois » ¦ Litur „innan við 8 mánuðir“
+Conceptions avant le mariage ¦ Getnaður fyrir hjónaband
+Écart (ans, + = le mari est plus âgé) ¦ Munur (ár, + = eiginmaðurinn er eldri)
+Couleur « mari plus âgé » ¦ Litur „eiginmaður eldri“
+Couleur « femme plus âgée » ¦ Litur „eiginkona eldri“
+Lieux connus ¦ Þekktir staðir
+Distance médiane ¦ Miðgildisfjarlægð
+Le plus loin ¦ Fjærst
+Trait : le plus loin ¦ Lína: fjærst
+Phrase sous le dessin ¦ Setning undir teikningunni
+lieu de naissance de la personne ¦ fæðingarstaður einstaklingsins
+Hommes : ont signé ¦ Karlar: skrifuðu undir
+Hommes : n’ont pas signé ¦ Karlar: skrifuðu ekki undir
+Femmes : ont signé ¦ Konur: skrifuðu undir
+Femmes : n’ont pas signé ¦ Konur: skrifuðu ekki undir
+Témoins : ont signé ¦ Vottar: skrifuðu undir
+Témoins : n’ont pas signé ¦ Vottar: skrifuðu ekki undir
+Couleur des témoins ¦ Litur vottanna
+Savoir signer ¦ Að kunna að skrifa nafn sitt
+Ancêtres possibles ¦ Mögulegir forfeður
+{what} : sourcée ¦ {what}: með heimild
+{what} : sans source ¦ {what}: án heimildar
+{what} : manquante ¦ {what}: vantar
+Couleur « sourcé » ¦ Litur „með heimild“
+Couleur « sans source » ¦ Litur „án heimildar“
+Couleur « manquant » ¦ Litur „vantar“
+Ce que j’ai prouvé ¦ Það sem ég hef sannað
+Les registres ¦ Kirkjubækurnar
+Montrer les trous (rouge pâle) ¦ Sýna götin (fölrautt)
+Communes au plus ¦ Sveitarfélög í mesta lagi
+Couleur « {what} » ¦ Litur „{what}“
+{name} : {n} adultes ¦ {name}: fullorðin: {n}
+{name} : {n} adulte ¦ {name}: fullorðið: {n}
+{name} : {n} morts jeunes ¦ {name}: dóu ung: {n}
+{name} : {n} mort jeune ¦ {name}: dó ungt: {n}
+Éventail d’ascendance de {g} générations : {n} sur {max} places. ¦ Forfeðrablævængur {g} kynslóða: {n} af {max} sætum.
+🪭 Mes ancêtres (numéros Sosa) ¦ 🪭 Forfeður mínir (Sosa-númer)
+Chaque case reçoit un ancêtre et se colore selon ce que tu choisis. Les cases vides sont les ancêtres pas encore trouvés. ¦ Hver reitur fær forföður og er litaður eftir því sem þú velur. Auðu reitirnir eru forfeðurnir sem hafa ekki fundist enn.
+Personne au centre ¦ Einstaklingur í miðjunni
+Taux de recherche (dates, lieux, mariage, source) ¦ Rannsóknarhlutfall (dagsetningar, staðir, hjónaband, heimild)
+Département de naissance ¦ Fæðingarsýsla
+Prendre mes ancêtres ¦ Sækja forfeður mína
+{n} ancêtres pris dans l’app. ¦ Forfeður sóttir úr appinu: {n}.
+Ajoute des lignes : un nom, le nom au-dessus (vide pour le centre) et un chiffre. ¦ Bættu við línum: nafn, nafnið fyrir ofan (autt fyrir miðjuna) og tala.
+Soleil de {n} parts sur {d} anneaux, total {t}. ¦ Sólrit með {n} hlutum á {d} hringjum, samtals {t}.
+🌞 Une descendance ¦ 🌞 Afkomendur
+Chaque enfant devient une part de son parent ; la taille d’une part = le nombre de descendants (la personne comprise). ¦ Hvert barn verður hluti af foreldri sínu; stærð hluta = fjöldi afkomenda (einstaklingurinn meðtalinn).
+Ancêtre au centre ¦ Forfaðir í miðjunni
+Aucun descendant trouvé pour cette personne. ¦ Enginn afkomandi fannst fyrir þennan einstakling.
+{n} personnes prises dans l’app (les 3 000 premières). ¦ Einstaklingar sóttir úr appinu: {n} (fyrstu 3 000).
+{n} personnes prises dans l’app. ¦ Einstaklingar sóttir úr appinu: {n}.
+Ajoute des liens : une personne, une autre, et la sorte de lien (témoin, parrain, voisin…). ¦ Bættu við tengslum: einn einstaklingur, annar, og tegund tengsla (vottur, guðfaðir, nágranni…).
+Réseau de {n} personnes et {k} liens. ¦ Net: einstaklingar {n} og tengsl {k}.
+Arcs : {n} personnes et {k} liens. ¦ Bogar: einstaklingar {n} og tengsl {k}.
+Aucun témoin, parrain ou marraine noté dans les actes de ces personnes. ¦ Enginn vottur, guðfaðir eða guðmóðir skráð í skjölum þessara einstaklinga.
+Pas d’implexe : aucun ancêtre n’apparaît deux fois. ¦ Ekkert forfeðrahrun: enginn forfaðir kemur fyrir tvisvar.
+Aucun mariage entre deux familles. ¦ Ekkert hjónaband milli tveggja fjölskyldna.
+Implexe : {n} à plusieurs places ¦ Forfeðrahrun: {n} á fleiri en einum stað
+Mariages entre familles ¦ Hjónabönd milli fjölskyldna
+{n} liens pris dans l’app. ¦ Tengsl sótt úr appinu: {n}.
+{n} lien pris dans l’app. ¦ Tengsl sótt úr appinu: {n}.
+🕸 Témoins, parrains, marraines ¦ 🕸 Vottar, guðfeður, guðmæður
+Les personnes notées dans les actes (témoins, parrains, déclarants…) et celles pour qui elles l’ont été. Couleur = nom de famille. ¦ Einstaklingarnir sem skráðir eru í skjölunum (vottar, guðfeður, tilkynnendur…) og þeir sem þeir voru það fyrir. Litur = eftirnafn.
+Jusqu’où ¦ Hve langt
+Ses liens directs ¦ Bein tengsl hans
+Et les liens de ses liens ¦ Og tengsl tengsla hans
+Toute ma base (les 2 500 premiers liens) ¦ Allur gagnagrunnurinn minn (fyrstu 2 500 tengslin)
+Prendre ces liens ¦ Sækja þessi tengsl
+Ajoute des liens : une personne, une autre, et la sorte de lien (mariage, implexe…). ¦ Bættu við tengslum: einn einstaklingur, annar, og tegund tengsla (hjónaband, forfeðrahrun…).
+🌈 Des liens de l’app ¦ 🌈 Tengsl úr appinu
+Implexe : un même ancêtre à plusieurs numéros Sosa ¦ Forfeðrahrun: sami forfaðir með fleiri en eitt Sosa-númer
+Témoins, parrains, marraines ¦ Vottar, guðfeður, guðmæður
+Personne de départ (implexe, témoins) ¦ Upphafseinstaklingur (forfeðrahrun, vottar)
+Il faut 2, 3 ou 4 ensembles. ¦ Það þarf 2, 3 eða 4 mengi.
+⭕ Des ensembles de l’app ¦ ⭕ Mengi úr appinu
+Choisis 2 à 4 ensembles : chaque zone reçoit le nombre de personnes qui sont dans ces ensembles-là, et pas dans les autres. ¦ Veldu 2 til 4 mengi: hvert svæði fær fjölda einstaklinga sem eru í þeim mengjum, en ekki í hinum.
+Personne de départ (pour « Mes ancêtres ») ¦ Upphafseinstaklingur (fyrir „Forfeður mínir“)
+Rien d’autre pour l’instant. ¦ Ekkert annað í bili.
+Choisis 2 à 4 ensembles (là : {n}). ¦ Veldu 2 til 4 mengi (núna: {n}).
+{n} personnes comptées. ¦ Taldir einstaklingar: {n}.
+{n} personne comptée. ¦ Talinn einstaklingur: {n}.
+Février ¦ Febrúar
+Décembre ¦ Desember
+Aucune date avec le jour et le mois (ex. : 7 mai 1925, 08/12/1960). ¦ Engin dagsetning með degi og mánuði (t.d.: 7 mai 1925, 08/12/1960).
+Ajoute des dates (7 mai 1925, 08/12/1960, 12 thermidor an II…) et, si tu veux, un nombre. ¦ Bættu við dagsetningum (7 mai 1925, 08/12/1960, 12 thermidor an II…) og, ef þú vilt, tölu.
+{d} {month} {y} : {v} ¦ {d}. {month} {y}: {v}
+{d} {month} : {v} ¦ {d}. {month}: {v}
+jour|1er ¦ 1.
+{n} dates sans jour précis (non montrées) ¦ Dagsetningar án nákvæms dags (ekki sýndar): {n}
+{n} date sans jour précis (non montrée) ¦ Dagsetning án nákvæms dags (ekki sýnd): {n}
+Calendrier : {n} événements montrés, au plus {m} le même jour. ¦ Dagatal: atburðir sýndir: {n}, í mesta lagi {m} sama dag.
+Calendrier : {n} événement montré, au plus {m} le même jour. ¦ Dagatal: atburður sýndur: {n}, í mesta lagi {m} sama dag.
+Personne (pour ses ancêtres) ¦ Einstaklingur (fyrir forfeður hans)
+🗓 Des événements de l’app, jour par jour ¦ 🗓 Atburðir úr appinu, dag fyrir dag
+Seules les dates avec le jour comptent. « Toutes années ensemble » montre la saison (366 cases) ; « Une ligne par année » montre les années choisies. ¦ Aðeins dagsetningar með degi teljast. „Öll ár saman“ sýnir árstíðina (366 reitir); „Ein lína fyrir hvert ár“ sýnir valin ár.
+Prendre ces dates ¦ Sækja þessar dagsetningar
+Coche au moins une sorte d’événement. ¦ Hakaðu við að minnsta kosti eina tegund atburðar.
+Aucune date complète (jour, mois, année) pour ces événements. ¦ Engin heil dagsetning (dagur, mánuður, ár) fyrir þessa atburði.
+{what} jour par jour ¦ {what} dag fyrir dag
+{n} dates complètes prises ({k} sans jour précis laissées de côté). ¦ Heilar dagsetningar sóttar: {n} (án nákvæms dags, skildar útundan: {k}).
+Ajoute des chiffres pour chaque mois (janvier à décembre). ¦ Bættu við tölum fyrir hvern mánuð (janúar til desember).
+Rose des mois : {list}. ¦ Mánaðarós: {list}.
+{name} {n} (le plus en {month}) ¦ {name} {n} (mest í {month})
+🌸 Des événements de l’app, mois par mois ¦ 🌸 Atburðir úr appinu, mánuð fyrir mánuð
+Une série par sorte d’événement ; seules les dates avec le mois comptent. ¦ Ein röð fyrir hverja tegund atburðar; aðeins dagsetningar með mánuði teljast.
+Compter par mois ¦ Telja eftir mánuði
+Aucune date avec le mois pour ces événements. ¦ Engin dagsetning með mánuði fyrir þessa atburði.
+Chiffres pris dans l’app. ¦ Tölur sóttar úr appinu.
+Ajoute des événements : une date (ou un début et une fin) et un nom. ¦ Bættu við atburðum: dagsetning (eða upphaf og lok) og heiti.
+Spirale du temps de {a} à {b}, {per} ans par tour : {n}. ¦ Tímaspírall frá {a} til {b}, {per} ár á hring: {n}.
+Mariage à Rennes ¦ Hjónaband í Rennes
+Départ pour Nantes ¦ Brottför til Nantes
+Achat de la ferme ¦ Kaup á bænum
+Arrivée à Paris ¦ Koma til Parísar
+🌀 Des vies et des événements de l’app ¦ 🌀 Ævir og atburðir úr appinu
+Les vies (de la naissance au décès) ¦ Ævirnar (frá fæðingu til andláts)
+Des événements (points) ¦ Atburðir (punktar)
+Aucune personne avec une date de naissance ou de décès. ¦ Enginn einstaklingur með fæðingar- eða dánardag.
+Vies de la famille ¦ Ævir fjölskyldunnar
+Les événements de la famille ¦ Atburðir fjölskyldunnar
+{n} lignes prises dans l’app. ¦ Línur sóttar úr appinu: {n}.
+{n} ligne prise dans l’app. ¦ Lína sótt úr appinu: {n}.
+Les plus reliés (30) ¦ Mest tengdir (30)
+Par groupe (colonne « Groupe ») ¦ Eftir hópi (dálkurinn „Hópur“)
+Groupes trouvés tout seuls ¦ Hópar fundnir sjálfkrafa
+Une seule (les liens en couleur) ¦ Aðeins einn (tengslin í lit)
+Couleur du tableau ¦ Litur töflunnar
+Les liens (une ligne par lien) ¦ Tengslin (ein lína fyrir hver tengsl)
+Sorte de lien (témoin, parrain…) ¦ Tegund tengsla (vottur, guðfaðir…)
+Les personnes (facultatif : groupe et couleur) ¦ Einstaklingarnir (valfrjálst: hópur og litur)
+Couleur des sortes de liens (facultatif) ¦ Litur tegunda tengsla (valfrjálst)
+Détail (dates, lieu…) ¦ Nánar (dagsetningar, staður…)
+Le nom ¦ Nafnið
+Le nom et la valeur ¦ Nafnið og gildið
+Le nom et le détail ¦ Nafnið og nánari upplýsingar
+La valeur ¦ Gildið
+Dégradé : minimum (vide = auto) ¦ Litabreyting: lágmark (autt = sjálfvirkt)
+Dégradé : maximum (vide = auto) ¦ Litabreyting: hámark (autt = sjálfvirkt)
+Unité (%, ans…) ¦ Eining (%, ár…)
+Taille du centre ¦ Stærð miðjunnar
+Numéro des générations ¦ Númer kynslóðanna
+Origines de mes ancêtres ¦ Uppruni forfeðra minna
+Les parts (parent → enfant → chiffre) ¦ Hlutarnir (foreldri → barn → tala)
+Au-dessus (vide = au centre) ¦ Fyrir ofan (autt = í miðjunni)
+Taille des parts ¦ Stærð hlutanna
+Le chiffre (ou la somme des parts) ¦ Talan (eða summa hlutanna)
+Le nombre de descendants ¦ Fjöldi afkomenda
+Le nombre de bouts de branche ¦ Fjöldi greinarenda
+Anneaux au plus ¦ Hringir í mesta lagi
+Une par branche (plus clair vers l’extérieur) ¦ Einn fyrir hverja grein (ljósari út á við)
+Une par anneau ¦ Einn fyrir hvern hring
+Le nom et le chiffre ¦ Nafnið og talan
+Ordre des parts ¦ Röð hlutanna
+De la plus grande à la plus petite ¦ Frá þeim stærsta til þess minnsta
+Texte au centre ¦ Texti í miðjunni
+Rapprocher les points de même couleur ¦ Færa punkta í sama lit nær hver öðrum
+Liens colorés selon leur sorte ¦ Tengsl lituð eftir tegund
+Selon le nombre de liens ¦ Eftir fjölda tengsla
+Tous pareils ¦ Allir eins
+Écartement ¦ Bil
+Témoins et parrains au village ¦ Vottar og guðfeður í þorpinu
+Les personnes, dans l’ordre de la ligne (facultatif) ¦ Einstaklingarnir, í röð línunnar (valfrjálst)
+Ordre sur la ligne ¦ Röð á línunni
+Comme dans les tableaux ¦ Eins og í töflunum
+Les plus reliés d’abord ¦ Mest tengdu fyrst
+Par numéro (Sosa 2, 3, 10…) ¦ Eftir númeri (Sosa 2, 3, 10…)
+Au-dessus et en dessous selon la sorte ¦ Fyrir ofan og neðan eftir tegund
+Hauteur des arcs ¦ Hæð boganna
+Arcs colorés selon leur sorte ¦ Bogar litaðir eftir tegund
+Sous la ligne ¦ Undir línunni
+Mariages entre familles du village ¦ Hjónabönd milli fjölskyldna í þorpinu
+Les ensembles (2 à 4) : A, B, C, D ¦ Mengin (2 til 4): A, B, C, D
+Ce qu’on écrit dans chaque zone (AB = dans A et B, pas dans les autres) ¦ Það sem er skrifað í hvert svæði (AB = í A og B, ekki í hinum)
+Nombre ou texte ¦ Tala eða texti
+Ajouter le pourcentage ¦ Bæta við prósentunni
+Total de chaque ensemble à côté de son nom ¦ Samtala hvers mengis við hlið nafns þess
+Transparence des formes ¦ Gegnsæi formanna
+Mes sources ¦ Heimildirnar mínar
+Les dates (une ligne par événement, ou une date et un nombre) ¦ Dagsetningarnar (ein lína á hvern atburð, eða dagsetning og tala)
+Toutes années ensemble (12 mois × 31 jours) ¦ Öll árin saman (12 mánuðir × 31 dagur)
+Une ligne par année (semaines) ¦ Ein lína á hvert ár (vikur)
+Années (ex. 1890-1895, 1900 ; vide = auto) ¦ Ár (t.d. 1890-1895, 1900; autt = sjálfvirkt)
+Doux (racine carrée) ¦ Mjúkt (kvaðratrót)
+Écrire les nombres dans les cases ¦ Skrifa tölurnar í reitina
+Dire combien de dates n’ont pas de jour ¦ Segja hve margar dagsetningar vantar dag
+Jours de naissance de mes ancêtres ¦ Fæðingardagar forfeðra minna
+Superposées (transparentes) ¦ Hvert ofan á öðru (gegnsæ)
+Longueur des rayons ¦ Lengd geislanna
+Surface juste (racine carrée) ¦ Rétt flatarmál (kvaðratrót)
+Écrire les nombres (une seule série) ¦ Skrifa tölurnar (aðeins ein röð)
+Mois en abrégé ¦ Styttir mánuðir
+Naissances, mariages et décès par mois ¦ Fæðingar, hjónabönd og andlát eftir mánuðum
+Les événements (une date = un point ; un début et une fin = un trait) ¦ Atburðirnir (dagsetning = punktur; upphaf og endir = strik)
+Date ou début ¦ Dagsetning eða upphaf
+Un tour de spirale ¦ Einn hringur spíralsins
+Un siècle ¦ Ein öld
+Une décennie ¦ Einn áratugur
+Autant d’années que… ¦ Jafnmörg ár og…
+Années par tour ¦ Ár á hvern hring
+Tous (sans chevauchement) ¦ Allir (án skörunar)
+Trois siècles de la famille Martin ¦ Þrjár aldir Martin-fjölskyldunnar
+Remettre comme au départ (ou double-clic sur le fond) ¦ Upphafsstilla (eða tvísmelltu á bakgrunninn)
+Arrêter / relancer le mouvement ¦ Stöðva / endurræsa hreyfinguna
+Arrêter ou relancer le mouvement ¦ Stöðva eða endurræsa hreyfinguna
+Zoomer avec la molette (sinon : Ctrl + molette) ¦ Þysja með skrunhjólinu (annars: Ctrl + skrunhjól)
+Zoom à la molette ¦ Þysjun með skrunhjóli
+Glisse un point pour le placer · double-clic pour le libérer ¦ Dragðu punkt til að staðsetja hann · tvísmelltu til að losa hann
+⚠ Lieux sans position : {list} — tape « Nom 48.11, -1.68 » ou « Depuis l’app » → Retrouver les lieux ¦ ⚠ Staðir án staðsetningar: {list} — sláðu inn „Nafn 48.11, -1.68“ eða „Úr appinu“ → Finna staðina
+né(e) en {y} ¦ fædd(ur) árið {y}
+{a} → {b} : même premier prénom ¦ {a} → {b}: sama fyrsta skírnarnafn
+{a} → {b} : un autre de ses prénoms ¦ {a} → {b}: annað af skírnarnöfnum viðkomandi
+{a} → {b} : prénom différent ¦ {a} → {b}: annað skírnarnafn
+Ajoute des événements : un lieu, une date, une sorte (ou « Depuis l’app »). ¦ Bættu við atburðum: stað, dagsetningu, tegund (eða „Úr appinu“).
+Carte en points : {n} événements dans {k}. ¦ Punktakort: {n} atburðir í {k}.
+{unit} par alvéole ¦ {unit} á hvert hólf
+Ajoute des événements : un lieu et une date (ou « Depuis l’app »). ¦ Bættu við atburðum: stað og dagsetningu (eða „Úr appinu“).
+=alvéole ¦ hólf|hólf
+=filleul ¦ guðbarn|guðbörn
+=cause ¦ orsök|orsakir
+=grande famille ¦ meginflokkur|meginflokkar
+=descendant ¦ afkomandi|afkomendur
+=lieu retrouvé ¦ fundinn staður|fundnir staðir
+=lieu sans position ¦ staður án staðsetningar|staðir án staðsetningar
+=étape placée ¦ staðsettur áfangi|staðsettir áfangar
+Carte en hexagones : {n} événements dans {k} ; la plus remplie en compte {max}. ¦ Sexhyrningakort: {n} atburðir í {k}; það fyllsta hefur {max}.
+{name} : de {lo} (clair) à {hi} (foncé) ¦ {name}: frá {lo} (ljóst) til {hi} (dökkt)
+⚠ Pas trouvé sur ce fond : {list} ¦ ⚠ Fannst ekki á þessu grunnkorti: {list}
+Carte déformée : {n} grossies selon leur chiffre (carrés). ¦ Bjagað kort: {n} stækkuð eftir tölu sinni (ferningar).
+Carte déformée : {n} grossies selon leur chiffre (ronds). ¦ Bjagað kort: {n} stækkuð eftir tölu sinni (hringir).
+Étape {k} sur {n} : {what} ¦ Áfangi {k} af {n}: {what}
+{n} de {a} à {b} — {k} sur la carte ¦ {n} frá {a} til {b} — {k} á kortinu
+{n} — {k} sur la carte ¦ {n} — {k} á kortinu
+Ajoute les étapes d’une vie : une date, ce qui s’est passé, un lieu. ¦ Bættu við áföngum lífs: dagsetningu, því sem gerðist, stað.
+Carte qui raconte : aucune étape. ¦ Kort sem segir sögu: enginn áfangi.
+Carte qui raconte : {n}, étape {k} : {what}. ¦ Kort sem segir sögu: {n}, áfangi {k}: {what}.
+Carte qui raconte : {n}. ¦ Kort sem segir sögu: {n}.
+Diagrammes Généalogie indisponibles. ¦ Ættfræðiskýringarmyndir eru ekki tiltækar.
+Ajoute des lignes : un nom, le nom du parent (vide pour l’ancêtre) et un chiffre si tu veux. ¦ Bættu við línum: nafni, nafni foreldris (autt fyrir forföðurinn) og tölu ef þú vilt.
+{n} · {p} % de la descendance ¦ {n} · {p} % afkomendanna
+Descendance en rectangles : {n} sur {g}. ¦ Afkomendur í rétthyrningum: {n} í {g}.
+Ajoute des lignes : le parrain ou la marraine, le filleul, et leurs années de naissance. ¦ Bættu við línum: guðföðurnum eða guðmóðurinni, guðbarninu og fæðingarárum þeirra.
+Aucun filleul ne porte le prénom de son parrain ou de sa marraine ({n}). ¦ Ekkert guðbarn ber skírnarnafn guðföður síns eða guðmóður ({n}).
+{n} filleuls sur {t} ({p} %) portent le prénom de leur parrain ou marraine ¦ {n} guðbörn af {t} ({p} %) bera skírnarnafn guðföður síns eða guðmóður
+{n} filleul sur {t} ({p} %) portent le prénom de leur parrain ou marraine ¦ {n} guðbarn af {t} ({p} %) ber skírnarnafn guðföður síns eða guðmóður
+Pointillés : un autre de ses prénoms ¦ Punktalína: annað af skírnarnöfnum viðkomandi
+Prénoms transmis : {n} filleuls sur {t} portent le prénom de leur parrain ou marraine ; le plus transmis : {name}. ¦ Nöfn sem ganga áfram: {n} guðbörn af {t} bera skírnarnafn guðföður síns eða guðmóður; oftast gefið áfram: {name}.
+Naissance et petite enfance ¦ Fæðing og frumbernska
+Reins, sang et autres maladies ¦ Nýru, blóð og aðrir sjúkdómar
+Ajoute des causes de décès et leur nombre (ou « Depuis l’app »). ¦ Bættu við dánarorsökum og fjölda þeirra (eða „Úr appinu“).
+{name} : {v} ({a} % des décès, {b} % de « {fam} ») ¦ {name}: {v} ({a} % andláta, {b} % af „{fam}“)
+Causes de décès : {n} décès en {k} ; la plus fréquente : {name}. ¦ Dánarorsakir: {n} andlát í {k}; algengust: {name}.
+Naissances, mariages et décès de la famille ¦ Fæðingar, hjónabönd og andlát fjölskyldunnar
+un point par événement ¦ einn punktur á hvern atburð
+Village {n} (près de {place}) ¦ Þorp {n} (nálægt {place})
+nombre d’événements par alvéole ¦ fjöldi atburða á hvert hólf
+chaque département grossi selon le nombre d’ancêtres ¦ hvert umdæmi stækkað eftir fjölda forfeðra
+ancêtres ¦ forfeður
+Descendance de {name} ¦ Afkomendur {name}
+Prénoms transmis par les parrains et marraines ¦ Skírnarnöfn sem guðfeður og guðmæður gefa áfram
+causes relevées dans les actes de décès ¦ orsakir skráðar í dánarskjölum
+{n} : vérifie-les sur la carte. ¦ {n}: athugaðu þá á kortinu.
+Aucun lieu retrouvé : tape leurs coordonnées dans le tableau (« Nom 48.11, -1.68 »). ¦ Enginn staður fannst: sláðu inn hnit þeirra í töfluna („Nafn 48.11, -1.68“).
+📍 Les événements de ton arbre ¦ 📍 Atburðirnir í ættartrénu þínu
+Chaque événement qui a un lieu devient un point (un mariage compte pour chacun des deux époux). Les lieux sans coordonnées sont retrouvés dans les communes de France par leur nom et leur département. Le tableau est remplacé. ¦ Hver atburður sem hefur stað verður að punkti (hjónaband telst fyrir hvort hjónanna). Staðir án hnita eru fundnir meðal sveitarfélaga í Frakklandi eftir nafni og umdæmi. Töflunni er skipt út.
+Aucun événement avec un lieu pour ce choix. ¦ Enginn atburður með stað fyrir þetta val.
+{what} de mes ancêtres ¦ {what} forfeðra minna
+{what} de la famille ¦ {what} fjölskyldunnar
+{n} pris dans l’arbre (les 12 000 premiers). ¦ {n} tekið úr ættartrénu (fyrstu 12 000).
+{n} pris dans l’arbre. ¦ {n} tekið úr ættartrénu.
+{n} : « 🔎 Retrouver les lieux sans position ». ¦ {n}: „🔎 Finna staði án staðsetningar“.
+Ses événements (naissance, baptême, mariages, résidences, métiers, décès…) deviennent les étapes, dans l’ordre des dates. Le tableau est remplacé. ¦ Atburðir viðkomandi (fæðing, skírn, hjónabönd, búseta, störf, andlát…) verða að áföngum, í tímaröð. Töflunni er skipt út.
+Garder aussi les étapes sans lieu (sur la frise seulement) ¦ Halda líka áföngum án staðar (aðeins á tímalínunni)
+Aucun événement avec un lieu pour cette personne. ¦ Enginn atburður með stað fyrir þennan einstakling.
+{n} prises dans la vie de {name}. ¦ {n} tekin úr lífi {name}.
+{n} prise dans la vie de {name}. ¦ {n} tekinn úr lífi {name}.
+Chaque enfant devient une case sous son parent ; sa largeur = le nombre de ses descendants (la personne comprise). Un clic sur une case ouvre la fiche. ¦ Hvert barn verður að reit undir foreldri sínu; breidd reitsins = fjöldi afkomenda þess (einstaklingurinn meðtalinn). Smelltu á reit til að opna spjaldið.
+Ancêtre en haut ¦ Forfaðir efst
+{n} personne prise dans l’app. ¦ {n} einstaklingur tekinn úr appinu.
+🎀 Parrains, marraines et filleuls ¦ 🎀 Guðfeður, guðmæður og guðbörn
+Les témoins des naissances et des baptêmes dont le rôle dit « parrain » ou « marraine ». Le lien de parenté (grand-père, oncle, sœur…) est trouvé dans l’arbre. ¦ Vottar við fæðingar og skírnir þar sem hlutverkið er „guðfaðir“ eða „guðmóðir“. Skyldleikinn (afi, frændi, systir…) finnst í ættartrénu.
+Seulement autour de mes ancêtres (lignée Sosa) ¦ Aðeins í kringum forfeður mína (Sosa-lína)
+Prendre les parrains et marraines ¦ Sækja guðfeður og guðmæður
+Aucun parrain ni marraine dans les témoins des naissances et baptêmes (rôle « parrain » ou « marraine »). ¦ Enginn guðfaðir né guðmóðir meðal votta við fæðingar og skírnir (hlutverk „guðfaðir“ eða „guðmóðir“).
+{n} pris dans l’app (les 3 000 premiers). ¦ {n} tekið úr appinu (fyrstu 3 000).
+{n} pris dans l’app. ¦ {n} tekið úr appinu.
+🎗 Les causes de décès de ton arbre ¦ 🎗 Dánarorsakirnar í ættartrénu þínu
+La cause écrite sur le décès (ou la sépulture) de chaque personne. Les grandes familles (maladies infectieuses, cœur, accidents, guerre…) sont devinées d’après les mots ; corrige-les dans la colonne « Grande famille ». ¦ Orsökin sem skrifuð er við andlát (eða greftrun) hvers einstaklings. Meginflokkarnir (smitsjúkdómar, hjarta, slys, stríð…) eru giskaðir út frá orðunum; leiðréttu þá í dálknum „Meginflokkur“.
+Prendre les causes de décès ¦ Sækja dánarorsakirnar
+Aucune cause de décès relevée : elle s’écrit dans le champ « Cause » d’un décès. ¦ Engin dánarorsök skráð: hún er skrifuð í reitinn „Orsök“ við andlát.
+Causes de décès dans la famille ¦ Dánarorsakir í fjölskyldunni
+{n} avec une cause, en {k} différentes. ¦ {n} með orsök, alls {k}.
+{n} avec une cause, en {k} différente. ¦ {n} með orsök, alls {k}.
+Pas de fiche derrière ce point : les lignes ont été tapées à la main (« Depuis l’app » les relie aux fiches). ¦ Ekkert spjald á bak við þennan punkt: línurnar voru slegnar inn í höndunum („Úr appinu“ tengir þær við spjöldin).
+Étapes de la vie ¦ Áfangar lífsins
+Étape précédente ¦ Fyrri áfangi
+Vitesse de la lecture ¦ Spilunarhraði
+Seulement à partir de l’année ¦ Aðeins frá árinu
+Lieu (« Rennes », « Rennes 48.11, -1.68 », « 35 »…) ¦ Staður („Rennes“, „Rennes 48.11, -1.68“, „35“…)
+Selon le siècle ¦ Eftir öld
+Mot pour un point (ex. : naissance) ¦ Orð fyrir punkt (t.d.: fæðing)
+Carte en points : {n} événements. ¦ Punktakort: {n} atburðir.
+Taille des alvéoles (% de la largeur) ¦ Stærð hólfanna (% af breiddinni)
+Échelle douce (très grands écarts) ¦ Mjúkur kvarði (mjög mikill munur)
+Écrire le nombre dans les alvéoles ¦ Skrifa fjöldann í hólfin
+Carte en hexagones : {n} événements. ¦ Sexhyrningakort: {n} atburðir.
+Les zones et leurs chiffres ¦ Svæðin og tölur þeirra
+Zone (nom ou code : 35, Gers, FR, Vaud…) ¦ Svæði (nafn eða kóði: 35, Gers, FR, Vaud…)
+Taille des formes (% de la carte) ¦ Stærð formanna (% af kortinu)
+Écart entre les formes ¦ Bil milli formanna
+Selon le chiffre (dégradé) ¦ Eftir tölu (litbrigði)
+La vraie carte en fond (pâle) ¦ Raunverulega kortið í bakgrunni (fölt)
+Couleur de la carte en fond ¦ Litur bakgrunnskortsins
+Un trait vers la vraie place quand une forme a bougé ¦ Strik að réttum stað þegar form hefur færst
+Carte déformée : {n} zones. ¦ Bjagað kort: {n} svæði.
+Lieu (« Rennes », « Rennes 48.11, -1.68 ») ¦ Staður („Rennes“, „Rennes 48.11, -1.68“)
+Étape montrée (-1 = toute la vie) ¦ Áfangi sem er sýndur (-1 = allt lífið)
+Suit l’étape en cours (zoom) ¦ Fylgir núverandi áfanga (þysjun)
+Zoom sur l’étape (degrés autour) ¦ Þysja að áfanganum (gráður í kring)
+Montrer les étapes à venir (pointillés) ¦ Sýna komandi áfanga (punktalína)
+Carte qui raconte : {n} étapes. ¦ Kort sem segir sögu: {n} áfangar.
+De haut en bas (générations en lignes) ¦ Ofan frá og niður (kynslóðir í línum)
+De gauche à droite (générations en colonnes) ¦ Frá vinstri til hægri (kynslóðir í dálkum)
+Une par branche (plus clair en descendant) ¦ Einn á hverja grein (ljósari neðar)
+Selon le sexe ¦ Eftir kyni
+Le nom et l’année ¦ Nafnið og árið
+Le nom et le nombre ¦ Nafnið og fjöldinn
+Les parrains, marraines et filleuls ¦ Guðfeðurnir, guðmæðurnar og guðbörnin
+Parrain ou marraine (Prénom NOM) ¦ Guðfaðir eða guðmóðir (Fornafn EFTIRNAFN)
+Filleul ou filleule (Prénom NOM) ¦ Guðbarn (Fornafn EFTIRNAFN)
+Lien (grand-père, oncle…) ¦ Tengsl (afi, frændi…)
+Année de naissance (parrain) ¦ Fæðingarár (guðforeldris)
+Année de naissance (filleul) ¦ Fæðingarár (guðbarns)
+Prénoms au plus (lignes) ¦ Skírnarnöfn að hámarki (línur)
+Les causes de décès ¦ Dánarorsakirnar
+Grande famille (vide = devinée) ¦ Meginflokkur (autt = giskað)
+Deviner les grandes familles d’après les mots ¦ Giska á meginflokkana út frá orðunum
+Épaisseur des grandes familles ¦ Þykkt meginflokkanna
+Les noms et les nombres ¦ Nöfnin og tölurnar
+Les noms et les pourcentages ¦ Nöfnin og prósenturnar
+Ranger les causes de la plus fréquente à la plus rare ¦ Raða orsökunum frá þeirri algengustu til þeirrar sjaldgæfustu
+migration|{n} flux ¦ Straumar: {n}
+le département ¦ umdæmið
+la province ¦ héraðið
+le canton ¦ kantónan
+un département ¦ umdæmi
+des départements ¦ umdæmanna
+une province ¦ hérað
+des provinces ¦ héraðanna
+un canton ¦ kantóna
+des cantons ¦ kantónanna
+Province ¦ Hérað
+Canton ¦ Kantóna
+Zoomer sur {what} ¦ Þysja: {what}
+{what} (nom ou numéro : {ex}) ¦ {what} (nafn eða númer: {ex})
+Limites {what} par-dessus les communes ¦ Mörk {what} ofan á sveitarfélögunum
+{what} entière ¦ {what} í heild
+Îles Britanniques ¦ Bretlandseyjar
+Péninsule Ibérique ¦ Íberíuskagi
+Allemagne et Benelux ¦ Þýskaland og Benelúx
+Méditerranée ¦ Miðjarðarhaf
+Afrique du Nord ¦ Norður-Afríka
+Afrique de l’Ouest ¦ Vestur-Afríka
+Proche et Moyen-Orient ¦ Nær- og Mið-Austurlönd
+Océan Indien ¦ Indlandshaf
+Asie du Sud-Est ¦ Suðaustur-Asía
+Atlantique Nord (vers l’Amérique) ¦ Norður-Atlantshaf (í átt að Ameríku)
+Québec et Acadie ¦ Québec og Akadía
+Antilles et Caraïbes ¦ Antillaeyjar og Karíbahaf
+Amérique centrale ¦ Mið-Ameríka
+Centre et Massif central ¦ Centre og Massif central
+Sud-Est et Alpes ¦ Suðaustur og Alparnir
+Paris et petite couronne ¦ París og næstu úthverfi
+Fond de carte illisible. ¦ Grunnkortið er ólæsilegt.
+Ce navigateur ne sait pas ouvrir ce fond de carte. ¦ Þessi vafri getur ekki opnað þetta grunnkort.
+Fond de carte inconnu. ¦ Óþekkt grunnkort.
+Fond de carte introuvable. ¦ Grunnkortið fannst ekki.
+Fond de carte indisponible. ¦ Grunnkortið er ekki tiltækt.
+(homonymes : précise {what}) ¦ (samnefni: tilgreindu {what})
+(plusieurs villes de ce nom : choisis-en une) ¦ (nokkrar borgir heita þessu nafni: veldu eina)
+{name} : pas de chiffre ¦ {name}: engin tala
+moins de {a} ¦ undir {a}
+{a} et plus ¦ {a} og meira
+de {a} à moins de {b} ¦ frá {a} upp að {b}
+pas de chiffre ¦ engin tala
+Ajoute des zones et leurs chiffres (onglet Données ou « Depuis l’app »). ¦ Bættu við svæðum og tölum þeirra (flipinn Gögn eða „Úr appinu“).
+⚠ Lieux sans position : {list} — « Depuis l’app » → Lieux ¦ ⚠ Staðir án staðsetningar: {list} — „Úr appinu“ → Staðir
+⚠ Lieux sans position : {list} — tape « Nom 48.11, -1.68 » ou « Depuis l’app » ¦ ⚠ Staðir án staðsetningar: {list} — sláðu inn „Nafn 48.11, -1.68“ eða „Úr appinu“
+Ajoute des lieux (ou des zones) et leurs chiffres. ¦ Bættu við stöðum (eða svæðum) og tölum þeirra.
+Carte à symboles proportionnels : {n} ronds, le plus gros vaut {max}. ¦ Kort með hlutfallslegum táknum: {n} hringir, sá stærsti jafngildir {max}.
+Niveau de détail ¦ Nákvæmnisstig
+Partie de la carte (cadrage) ¦ Hluti kortsins (afmörkun)
+Lambert azimutale équivalente (Europe, pays) ¦ Flatarmálsrétt jafnfjarlægðarvörpun Lamberts (Evrópa, lönd)
+Outre-mer en encarts ¦ Svæði handan hafs í innfelldum kortum
+Encart zoomé sur l’Île-de-France ¦ Stækkað innfellt kort af Île-de-France
+Toute l’Île-de-France ¦ Allt Île-de-France
+Pays voisins en gris ¦ Nágrannalönd í gráu
+Mer en couleur ¦ Hafið í lit
+Couleur de la mer ¦ Litur hafsins
+Hauteur du dessin (px, vide = selon la carte) ¦ Hæð teikningarinnar (px, autt = eftir kortinu)
+Autant de zones dans chaque classe (quantiles) ¦ Jafnmörg svæði í hverjum flokki (fjórðungsmörk)
+Classes de même largeur ¦ Jafnbreiðir flokkar
+Épaisseur des limites ¦ Þykkt markanna
+Épaisseur des limites des communes ¦ Þykkt marka sveitarfélaganna
+Bulle aussi sur les zones sans chiffre ¦ Bóla líka á svæðum án tölu
+Bulle aussi sur les communes sans chiffre (plus lent) ¦ Bóla líka á sveitarfélögum án tölu (hægara)
+Signaler les lignes pas trouvées sur la carte ¦ Benda á línur sem fundust ekki á kortinu
+Épaisseur du plus gros flux ¦ Þykkt stærsta straumsins
+Épaisseur du plus petit flux ¦ Þykkt minnsta straumsins
+Pointes de flèche ¦ Örvaroddar
+Selon le lieu de départ ¦ Eftir brottfararstað
+Selon le lieu d’arrivée ¦ Eftir komustað
+Ronds sur les lieux ¦ Hringir á stöðunum
+Regrouper par zone (un rond au centre de chaque zone du fond) ¦ Flokka eftir svæði (einn hringur í miðju hvers svæðis á grunnkortinu)
+Rayon du plus gros rond (px, vide = auto) ¦ Geisli stærsta hringsins (px, autt = sjálfvirkt)
+Chiffre à côté du nom ¦ Tala við hlið nafnsins
+un rond par commune ¦ einn hringur á hvert sveitarfélag
+naissances ¦ fæðingar
+naissances par département ¦ fæðingar eftir umdæmum
+Les migrations de la famille ¦ Fólksflutningar fjölskyldunnar
+du lieu de naissance au lieu de décès ¦ frá fæðingarstað til dánarstaðar
+personnes ¦ einstaklingar
+Âge moyen au décès (en années) ¦ Meðalaldur við andlát (í árum)
+Actes trouvés (événements avec une source ou un document) ¦ Skjöl sem fundust (atburðir með heimild eða skjali)
+D’une génération à l’autre (naissance du parent → de l’enfant) ¦ Frá einni kynslóð til annarrar (fæðing foreldris → barns)
+Cadrage de la carte ¦ Afmörkun kortsins
+Tracer un cadre sur la carte (ou Maj + glisser) ¦ Draga ramma á kortið (eða Shift + draga)
+Revenir au cadrage de départ ¦ Aftur í upphaflega afmörkun
+Molette : zoomer · glisser : déplacer · Maj + glisser : tracer un cadre ¦ Skrunhjól: þysja · draga: færa · Shift + draga: draga ramma
+(famille) ¦ (fjölskylda)
+pas encore utilisée ¦ ekki notað enn
+Les migrations de ton arbre ¦ Fólksflutningarnir í ættartrénu þínu
+Les lieux de ton arbre ¦ Staðirnir í ættartrénu þínu
+Chaque lieu de ta base devient un rond, plus gros quand plus de personnes y sont nées (mariées, décédées). Les lieux avec des coordonnées sont placés exactement ; les autres sont cherchés par leur nom sur la carte. Le tableau est remplacé. ¦ Hver staður í gagnagrunninum þínum verður að hring, stærri eftir því sem fleiri fæddust (giftust, dóu) þar. Staðir með hnit eru settir nákvæmlega; hinir eru fundnir eftir nafni á kortinu. Töflunni er skipt út.
+Chaque personne relie deux lieux de ta base (ceux qui ont des coordonnées, ou une zone de la carte reconnue). Le tableau est remplacé. ¦ Hver einstaklingur tengir tvo staði í gagnagrunninum þínum (þá sem hafa hnit, eða þekkt svæði á kortinu). Töflunni er skipt út.
+Chaque lieu de ta base est rattaché à sa zone (d’après ses coordonnées, sinon son département, sa région ou son pays ; pour les communes : son code INSEE, puis son nom et son département), puis les zones sont comptées. Le tableau est remplacé. ¦ Hver staður í gagnagrunninum þínum er tengdur við sitt svæði (eftir hnitum, annars eftir umdæmi, landshluta eða landi; fyrir sveitarfélög: eftir INSEE-kóða, síðan nafni og umdæmi), síðan eru svæðin talin. Töflunni er skipt út.
+🔄 Tenir à jour (relire l’arbre à chaque affichage) ¦ 🔄 Halda uppfærðu (lesa ættartréð aftur í hvert sinn sem það er sýnt)
+＋ Ajouter un flux ¦ ＋ Bæta við straumi
+＋ Ajouter ce flux ¦ ＋ Bæta við þessum straumi
+Un lieu sans position (⚠) : choisis-le dans ta base ou dans les communes et villes du monde, ou tape ses coordonnées dans le tableau (« Rennes 48.11, -1.68 »). ¦ Staður án staðsetningar (⚠): veldu hann í gagnagrunninum þínum eða meðal sveitarfélaga og borga heimsins, eða sláðu inn hnit hans í töfluna („Rennes 48.11, -1.68“).
+⏳ Lecture de l’arbre… ¦ ⏳ Les ættartréð…
+(mes ancêtres) ¦ (forfeður mínir)
+{n} : cherchés par leur nom sur la carte. ¦ {n}: leitað eftir nafni á kortinu.
+{n} : cherché par leur nom sur la carte. ¦ {n}: leitað eftir nafni á kortinu.
+=lieu sans coordonnées ¦ staður án hnita|staðir án hnita
+=lieu rattaché ¦ tengdur staður|tengdir staðir
+Aucun lieu dans ton arbre pour ce choix. ¦ Enginn staður í ættartrénu þínu fyrir þetta val.
+Aucun déplacement trouvé (il faut deux lieux différents pour une même personne). ¦ Enginn flutningur fannst (sami einstaklingur þarf tvo ólíka staði).
+{n} : voir « Les lieux du tableau ». ¦ {n}: sjá „Staðirnir í töflunni“.
+{n} à {z} (âge moyen sur {p} ; la carte montre des années, pas un nombre). ¦ {n} í {z} (meðalaldur yfir {p}; kortið sýnir ár, ekki fjölda).
+{n} à {z}. ¦ {n} í {z}.
+{n} hors de cette carte ou sans position ({list}). ¦ {n} utan þessa korts eða án staðsetningar ({list}).
+Aucun lieu de ton arbre ne tombe sur cette carte : change de carte ou de niveau dans Réglages. ¦ Enginn staður í ættartrénu þínu lendir á þessu korti: skiptu um kort eða stig í Stillingum.
+Où est « {name} » ? ¦ Hvar er „{name}“?
+Le tableau n’a pas encore de lieux. ¦ Taflan hefur enga staði enn.
+Ce lieu n’a pas de coordonnées : choisis-en un autre, ou tape ses coordonnées dans le tableau. ¦ Þessi staður hefur engin hnit: veldu annan, eða sláðu inn hnit hans í töfluna.
+Choisis le lieu de départ et le lieu d’arrivée. ¦ Veldu brottfararstað og komustað.
+Flux ajouté. ¦ Straumi bætt við.
+niveau|ville ¦ borg
+niveau|département ¦ umdæmi
+niveau|province ¦ hérað
+niveau|canton ¦ kantóna
+niveau|région ¦ landshluti
+niveau|grande région ¦ stór landshluti
+niveau|pays ¦ land
+niveau|continent ¦ heimsálfa
+niveau|zone ¦ svæði
+sa commune ¦ sveitarfélagið
+leur commune ¦ sveitarfélagið
+une ville ¦ borg
+son département ¦ umdæmið
+leur département ¦ umdæmið
+sa province ¦ héraðið
+leur province ¦ héraðið
+son canton ¦ kantónuna
+leur canton ¦ kantónuna
+région ¦ landshluti
+sa région ¦ landshlutann
+leur région ¦ landshlutann
+une région ¦ landshluta
+grande région ¦ stór landshluti
+sa grande région ¦ stóra landshlutann
+leur grande région ¦ stóra landshlutann
+une grande région ¦ stóran landshluta
+son pays ¦ landið
+leur pays ¦ landið
+un pays ¦ land
+son continent ¦ heimsálfuna
+leur continent ¦ heimsálfuna
+un continent ¦ heimsálfu
+sa zone ¦ svæðið
+leur zone ¦ svæðið
+une zone ¦ svæði
+aussi « {name} » ¦ líka „{name}“
+autre niveau : « {name} » ¦ annað stig: „{name}“
+ancienne commune ¦ fyrrverandi sveitarfélag
+Plusieurs villes s’appellent {name} ({n}) : choisis-en une dans la liste. ¦ Nokkrar borgir heita {name} ({n}): veldu eina af listanum.
+Plusieurs villes s’appellent {name} : choisis-en une dans la liste. ¦ Nokkrar borgir heita {name}: veldu eina af listanum.
+{name} est {a}, mais la carte montre le niveau « {level} » : choisis {b} dans la liste, ou change le niveau de détail (Réglages). ¦ {name} er {a}, en kortið sýnir stigið „{level}“: veldu {b} af listanum, eða breyttu nákvæmnisstiginu (Stillingar).
+Pas trouvé sur cette carte : vérifie l’orthographe, ou choisis dans la liste. ¦ Fannst ekki á þessu korti: athugaðu stafsetninguna, eða veldu af listanum.
+{n} villes comptent dans {where} sur cette carte (niveau « {level} »). ¦ Borgir sem teljast með í {where} á þessu korti (stig „{level}“): {n}.
+1 ville compte dans {where} sur cette carte (niveau « {level} »). ¦ 1 borg telst með í {where} á þessu korti (stig „{level}“).
+Rien de ce nom sur cette carte. ¦ Ekkert með þessu nafni á þessu korti.
+chargement des communes… ¦ hleð inn sveitarfélögum…
+↑ ↓ pour choisir · Entrée pour valider · Échap pour fermer ¦ ↑ ↓ til að velja · Enter til að staðfesta · Esc til að loka
+Une ville compte dans {where} sur cette carte. ¦ Ein borg telst með í {where} á þessu korti.
+Niveau « Communes » : chaque ville a sa couleur. ¦ Stigið „Sveitarfélög“: hver borg hefur sinn lit.
+Zone (nom ou code : 35, FRH03, BE, Vaud…) ¦ Svæði (nafn eða kóði: 35, FRH03, BE, Vaud…)
+Carte colorée : {n} zones ({map}, {level}). ¦ Litað kort: {n} svæði ({map}, {level}).
+Carte des migrations : {n} flux. ¦ Kort yfir fólksflutninga: {n} straumar.
+Les lieux (ou zones) et leurs chiffres ¦ Staðirnir (eða svæðin) og tölur þeirra
+Lieu ou zone (« Rennes », « Rennes 48.11, -1.68 », « 35 »…) ¦ Staður eða svæði („Rennes“, „Rennes 48.11, -1.68“, „35“…)
+Carte à symboles proportionnels : {n} lieux. ¦ Kort með hlutfallslegum táknum: {n} staðir.
+Rien à dessiner pour l’instant. ¦ Ekkert að teikna í bili.
+Graphique introuvable : supprimé, ou fait dans un autre navigateur. ¦ Grafið fannst ekki: því var eytt, eða það var gert í öðrum vafra.
+L’ouvrir en grand dans Graphiques ¦ Opna það í fullri stærð í Gröfum
+Ajuster à la page ¦ Laga að síðunni
+par l’impression : « Enregistrer en PDF » ¦ með prentun: „Vista sem PDF“
+ouvrir les chiffres dans le tableur ¦ opna tölurnar í töflureikninum
+du diagramme, à réimporter ¦ skýringarmyndarinnar, til að flytja inn aftur
+à coller ailleurs (⌘V) ¦ til að líma annars staðar (⌘V)
+Revenir à la couleur automatique ¦ Aftur í sjálfvirka litinn
+🧾 Tout voir dans le tableur ¦ 🧾 Sjá allt í töflureikninum
+{a} lignes sur {b} (toutes comptent dans le dessin) ¦ {a} línur af {b} (allar teljast með í teikningunni)
+Couleur de la série ¦ Litur raðarinnar
+Supprimer cette série ¦ Eyða þessari röð
+Copier des cellules dans Excel, LibreOffice, Numbers… et les coller ici ¦ Afritaðu hólf í Excel, LibreOffice, Numbers… og límdu þau hér
+⤒ Importer un CSV ¦ ⤒ Flytja inn CSV
+Un classeur déjà fait dans le Tableur : une feuille, une plage, copiée une fois ou liée ¦ Vinnubók sem er þegar til í Töflureikninum: eitt blað, eitt svið, afritað einu sinni eða tengt
+Relevés paroissiaux ¦ Skráningar úr kirkjubókum
+Visite aux AD ¦ Heimsókn á skjalasafn
+Déplacement ¦ Ferð
+Rédaction ¦ Skrif
+Planning de recherche ¦ Rannsóknaráætlun
+Style, annotations, lignes de repère, petits multiples, lecture dans le temps ¦ Stíll, athugasemdir, viðmiðunarlínur, smámargfeldi, spilun í tíma
+Les figer (les modifier à la main) ¦ Festa þær (breyta þeim í höndunum)
+Le tableur en grand, préparé avec les colonnes de ce diagramme : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir » ¦ Töflureiknirinn í fullri stærð, undirbúinn með dálkum þessarar skýringarmyndar: formúlur, röðun, líma úr Excel… síðan „✓ Vista og fara til baka“
+dans le tableur (formules, tri, Excel…) ¦ í töflureikninum (formúlur, röðun, Excel…)
+🔄 Chiffres tenus à jour depuis « {src} » : ils sont relus à chaque affichage. ¦ 🔄 Tölur haldnar uppfærðar úr „{src}“: þær eru lesnar aftur í hvert sinn sem þær eru sýndar.
+l’app ¦ appinu
+Pas de réglage particulier. ¦ Engar sérstakar stillingar.
+🌳 Des données de mon arbre ¦ 🌳 Gögn úr ættartrénu mínu
+Remplace le tableau par des chiffres calculés dans ta base (tu peux ensuite les retoucher à la main). ¦ Setur í stað töflunnar tölur reiknaðar í gagnagrunninum þínum (þú getur síðan lagfært þær í höndunum).
+📊 Des chiffres de l’app ¦ 📊 Tölur úr appinu
+Remplace le tableau par des chiffres calculés dans ta base : « 🧮 Compter dans ma base » (ce qu’on compte, le groupe de personnes, la période, le regroupement… tout se règle ci-dessous), un exemple, une statistique de l’app ou un de « Mes graphiques » (faits dans Réglages → Éditeur de graphiques). ¦ Setur í stað töflunnar tölur reiknaðar í gagnagrunninum þínum: „🧮 Telja í gagnagrunninum mínum“ (hvað er talið, hópur einstaklinga, tímabil, flokkun… allt er stillt hér fyrir neðan), dæmi, tölfræði úr appinu eða eitt af „Gröfin mín“ (gerð í Stillingar → Grafaritill).
+👥 Des personnes de la base ¦ 👥 Einstaklingar úr gagnagrunninum
+Chaque personne devient une ligne, de sa naissance à son décès (rôle : Homme ou Femme, à changer à volonté). ¦ Hver einstaklingur verður að línu, frá fæðingu til andláts (hlutverk: Karl eða Kona, breyttu að vild).
+Leurs naissances, mariages et décès deviennent des dates de la frise. ¦ Fæðingar, hjónabönd og andlát þeirra verða að dagsetningum á tímalínunni.
+Ce type de diagramme se remplit à la main, en collant un tableau ou avec un CSV (onglet Données). ¦ Þessi tegund skýringarmyndar er fyllt út í höndunum, með því að líma töflu eða með CSV (flipinn Gögn).
+Données prises dans ton arbre. ¦ Gögn tekin úr ættartrénu þínu.
+Ces chiffres sont déjà comptés : tu peux les trier, garder les premiers, montrer « Inconnu » ou les passer en %. Pour choisir ce qu’on compte, le groupe de personnes ou la période, prends « 🧮 Compter dans ma base » ¦ Þessar tölur eru þegar taldar: þú getur raðað þeim, haldið þeim fyrstu, sýnt „Óþekkt“ eða breytt þeim í %. Til að velja hvað er talið, hóp einstaklinga eða tímabil, notaðu „🧮 Telja í gagnagrunninum mínum“
+{name} — pas pour ce diagramme ¦ {name} — ekki fyrir þessa skýringarmynd
+Aucun chiffre pour ces réglages : essaie un autre groupe, une autre période ou montre « Inconnu ». ¦ Engar tölur fyrir þessar stillingar: prófaðu annan hóp, annað tímabil eða sýndu „Óþekkt“.
+{n} valeurs prises dans ta base ({k} comptés). ¦ {n} gildi tekin úr gagnagrunninum þínum ({k} talin).
+{n} valeur prise dans ta base ({k} comptés). ¦ {n} gildi tekið úr gagnagrunninum þínum ({k} talin).
+{n} valeur prise dans ta base. ¦ {n} gildi tekið úr gagnagrunninum þínum.
+{n} valeurs prises dans l’app. ¦ {n} gildi tekin úr appinu.
+{n} valeur prise dans l’app. ¦ {n} gildi tekið úr appinu.
+{name} : pas de date de naissance dans sa fiche. ¦ {name}: engin fæðingardagsetning á spjaldinu.
+{name} ajouté. ¦ {name} bætt við.
+{name} ajoutée. ¦ {name} bætt við.
+{name} ajouté(e). ¦ {name} bætt við.
+Le diagramme apparaît alors sur la fiche de la personne, dans l’enquête ou dans le projet de l’Atelier. Pour le poser ailleurs : un widget (Réglages → Éditeur de widgets), un bloc de fiche, la mise en page. ¦ Skýringarmyndin birtist þá á spjaldi einstaklingsins, í athuguninni eða í verkefni Verkstæðisins. Til að setja hana annars staðar: græja (Stillingar → Græjuritill), kubbur í minnisblaði, umbrotið.
+ou une partie d’enquête, un projet de l’Atelier… ¦ eða hluti af athugun, verkefni í Verkstæðinu…
+Supprimer la série « {name} » et ses chiffres ? ¦ Eyða röðinni „{name}“ og tölum hennar?
+Supprimer la série ¦ Eyða röðinni
+Vider le tableau ¦ Tæma töfluna
+une feuille, une plage : copiée une fois ou liée (tenue à jour) ¦ eitt blað, eitt svið: afritað einu sinni eða tengt (haldið uppfærðu)
+Sélectionne des cellules dans Excel, LibreOffice, Numbers ou Google Sheets, copie-les (⌘C) et colle-les ici. Si la première ligne contient des titres, ils deviennent les noms des séries. Le tableau actuel est remplacé. ¦ Veldu hólf í Excel, LibreOffice, Numbers eða Google Sheets, afritaðu þau (⌘C) og límdu þau hér. Ef fyrsta línan inniheldur fyrirsagnir verða þær nöfn raðanna. Núverandi töflu er skipt út.
+Données liées au classeur : elles suivent le Tableur. ¦ Gögn tengd vinnubókinni: þau fylgja Töflureikninum.
+{n} lignes copiées du classeur. ¦ {n} línur afritaðar úr vinnubókinni.
+Ce type ne lit pas le même tableau : l’exemple remplace tes données. Continuer ? ¦ Þessi tegund les ekki sömu töflu: dæmið kemur í stað gagnanna þinna. Halda áfram?
+D’un graphique (à moi ou de l’app, tenu à jour) ¦ Úr grafi (mínu eða appsins, haldið uppfærðu)
+Un de mes graphiques (Éditeur de graphiques, tenu à jour) ¦ Eitt af gröfunum mínum (Grafaritill, haldið uppfærðu)
+Hémicycle d’une assemblée, fer à cheval, frise des membres d’un groupe de musique façon Wikipédia, frise de vies, camembert, flux de migrations, organigramme, nuage de noms… avec tes propres chiffres ou ceux de l’app. Ils se posent ensuite partout : tableau de bord, fiches, fiche d’une personne, enquêtes, Atelier, mise en page. ¦ Hálfhringur þingsalar, skeifa, tímalína yfir meðlimi hljómsveitar að hætti Wikipedia, tímalína ævi, kökurit, straumar fólksflutninga, skipurit, nafnaský… með þínum eigin tölum eða tölum appsins. Þær má síðan setja hvar sem er: stjórnborð, minnisblöð, spjald einstaklings, athuganir, Verkstæði, umbrot.
+MES DIAGRAMMES ¦ SKÝRINGARMYNDIRNAR MÍNAR
+📈 Ce diagramme montre ton graphique « {name} » (Éditeur de graphiques) : son dessin et ses chiffres le suivent, partout où il est posé. ¦ 📈 Þessi skýringarmynd sýnir grafið þitt „{name}“ (Grafaritill): teikning þess og tölur fylgja því, hvar sem það er sett.
+🔗 Données : {src} · tenu à jour. ¦ 🔗 Gögn: {src} · haldið uppfærðu.
+🔄 Chiffres tenus à jour depuis « {src} ». ¦ 🔄 Tölur haldnar uppfærðar úr „{src}“.
+✎ Modifier le graphique ¦ ✎ Breyta grafinu
+Une copie figée, à retoucher comme un diagramme ¦ Fest afrit, til að lagfæra eins og skýringarmynd
+Une copie à modifier ¦ Afrit til að breyta
+Le poser sur le tableau de bord, comme un widget ¦ Setja það á stjórnborðið, eins og græju
+Pour le poser ailleurs : <b>Réglages → Éditeur de widgets</b> (partie « Diagramme ») pour le tableau de bord ou un onglet, un bloc « 📊 Diagramme » dans une <b>Fiche</b>, « Relier » (onglet de l’éditeur) pour la fiche d’une personne, une enquête ou un projet de l’Atelier, et « Insérer → Diagramme » dans la <b>mise en page</b>. Tous tes graphiques et diagrammes : <b>Listes → Graphiques et diagrammes</b>. ¦ Til að setja hana annars staðar: <b>Stillingar → Græjuritill</b> (hlutinn „Skýringarmynd“) fyrir stjórnborðið eða flipa, kubbur „📊 Skýringarmynd“ í <b>Minnisblaði</b>, „Tengja“ (flipi ritilsins) fyrir spjald einstaklings, athugun eða verkefni í Verkstæðinu, og „Setja inn → Skýringarmynd“ í <b>umbrotinu</b>. Öll gröfin þín og skýringarmyndir: <b>Listar → Gröf og skýringarmyndir</b>.
+Rien à copier : le graphique est introuvable. ¦ Ekkert að afrita: grafið finnst ekki.
+Supprimer le diagramme « {name} » ? Il disparaît aussi des widgets, fiches et enquêtes où il est posé. ¦ Eyða skýringarmyndinni „{name}“? Hún hverfur líka úr græjum, minnisblöðum og athugunum þar sem hún er sett.
+Supprimer le diagramme ¦ Eyða skýringarmyndinni
+Passe par les Réglages → Éditeur de widgets. ¦ Farðu í Stillingar → Græjuritill.
+Ajouter un diagramme ¦ Bæta við skýringarmynd
+Ajoute des groupes et leur nombre de sièges. ¦ Bættu við hópum og fjölda sæta þeirra.
+{n} sièges ¦ Sæti: {n}
+Tribune · {n} sièges ¦ Ræðupallur · sæti: {n}
+Majorité absolue : {n} sièges ¦ Hreinn meirihluti: {n} sæti
+Ajoute des lignes : un nom, des rôles, une date de début et de fin. ¦ Bættu við línum: nafni, hlutverkum, upphafs- og lokadagsetningu.
+Ajoute des dates et ce qui s’est passé. ¦ Bættu við dagsetningum og því sem gerðist.
+Ajoute des lignes de chiffres. ¦ Bættu við línum með tölum.
+Ajoute des tranches (âges…) et deux séries (hommes, femmes…). ¦ Bættu við bilum (aldur…) og tveimur röðum (karlar, konur…).
+Ajoute des lignes et des colonnes de chiffres. ¦ Bættu við línum og dálkum með tölum.
+Ajoute des points : X, Y (et une taille pour des bulles). ¦ Bættu við punktum: X, Y (og stærð fyrir bólur).
+Ajoute des cases : un nom et, pour chacune, sa case « au-dessus ». ¦ Bættu við reitum: nafni og, fyrir hvern, reitnum „fyrir ofan“.
+Ajoute des mots (noms, prénoms, lieux…) et leur poids. ¦ Bættu við orðum (eftirnöfnum, skírnarnöfnum, stöðum…) og vægi þeirra.
+Texte au centre (sinon le total) ¦ Texti í miðjunni (annars samtalan)
+Total au centre ¦ Samtala í miðjunni
+Les groupes (de gauche à droite) ¦ Hóparnir (frá vinstri til hægri)
+Côté (Westminster) ¦ Hliðar (Westminster)
+Salle (rangées face à la tribune) ¦ Salur (raðir sem snúa að ræðupallinum)
+Angle de l’arc ¦ Horn bogans
+Nombre de rangées (0 = automatique) ¦ Fjöldi raða (0 = sjálfvirkt)
+Texte au centre (sinon le nombre de sièges) ¦ Texti í miðjunni (annars fjöldi sæta)
+Petit texte sous le nombre ¦ Lítill texti undir tölunni
+En texte et ligne au milieu ¦ Sem texti og lína í miðjunni
+Écologistes ¦ Græningjar
+Libéraux ¦ Frjálslyndir
+Les rôles et leur couleur ¦ Hlutverkin og litur þeirra
+Début de la frise (vide = auto) ¦ Upphaf tímalínunnar (autt = sjálfvirkt)
+Fin de la frise (vide = auto) ¦ Lok tímalínunnar (autt = sjálfvirkt)
+Écrire le nom des traits verticaux ¦ Skrifa nöfn lóðréttu strikanna
+Les Cousins — membres ¦ Les Cousins — meðlimir
+Guitare solo, Chœurs ¦ Sólógítar, bakraddir
+Deuxième ¦ Annar
+Tous en dessous ¦ Allir fyrir neðan
+Décès de Jean ¦ Andlát Jeans
+La famille Martin ¦ Martin-fjölskyldan
+Sur les parts ¦ Á sneiðunum
+Avec une date de naissance ¦ Með fæðingardagsetningu
+Où en sont mes recherches ¦ Hvar rannsóknir mínar standa
+Maximum de l’échelle (vide = auto) ¦ Hámark kvarðans (autt = sjálfvirkt)
+Première ligne en bas ¦ Fyrsta lína neðst
+Naissances par mois et par siècle ¦ Fæðingar eftir mánuðum og öldum
+Nom de l’axe X ¦ Heiti X-ássins
+Nom de l’axe Y ¦ Heiti Y-ássins
+Taille de la plus grosse bulle ¦ Stærð stærstu bólunnar
+Âge au mariage et nombre d’enfants ¦ Aldur við hjónaband og fjöldi barna
+Au-dessus (nom de la case) ¦ Fyrir ofan (heiti reitsins)
+Présidente ¦ Formaður
+Trésorier ¦ Gjaldkeri
+Secrétaire ¦ Ritari
+3 bénévoles ¦ 3 sjálfboðaliðar
+Fêtes ¦ Hátíðir
+5 bénévoles ¦ 5 sjálfboðaliðar
+Association des Amis du village ¦ Vinafélag þorpsins
+Diagramme de Venn (2 ou 3 ensembles) ¦ Venn-mynd (2 eða 3 mengi)
+Mes objectifs ¦ Markmiðin mín
+Jean et Marie ¦ Jean og Marie
+Pierre et Anne ¦ Pierre og Anne
+Louis et Rose ¦ Louis og Rose
+Enfants par couple ¦ Börn á hver hjón
+Source / note en bas ¦ Heimild / athugasemd neðst
+Largeur de l’image ¦ Breidd myndarinnar
+Notaires ¦ Lögbókendur
+↺ Police de l’app ¦ ↺ Leturgerð appsins
+{name} : {a} sur {n} enfants morts avant 1 an ({p} %) ¦ {name}: {a} af {n} börnum dóu fyrir 1 árs aldur ({p} %)
+{name} : {a} sur {n} morts avant 5 ans ({p} %) ¦ {name}: {a} af {n} dóu fyrir 5 ára aldur ({p} %)
+parrains : {a} sur {b} · marraines : {c} sur {d} ¦ guðfeður: {a} af {b} · guðmæður: {c} af {d}

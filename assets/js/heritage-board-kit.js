@@ -3,10 +3,44 @@
  * ext.boardKit.prefs() : les réglages (couleurs par catégorie et palettes, pointes, formes, polices, plages d'épaisseur
  * et de taille du texte, arrondi, tableur par défaut, pinceaux à soi, ordre des menus) — Réglages → Tableaux.
  */
+/* 🌐 Les noms des formes dans la langue choisie : le nom, puis chaque précision entre parenthèses (« Flèche courbée (gauche, haut)
+ * (trait fin) »), traduits à part (clés « forme|… » de assets/i18n/src/tableaux.tsv) ; « Lettre {x} », « Chiffre {x} », « Nombre {x} ».
+ * Aussi pour Node (tests/test-i18n-tableaux.js) : require(…).shapeNameParts(nom) → les clés à traduire. */
+(function (root) {
+    'use strict';
+    const LETTERS = /\p{L}{2}/u;
+    function parse(n) {
+        let base = String(n || ''); const groups = []; let m;
+        while ((m = base.match(/^(.*\S)\s*\(([^()]*)\)$/))) { groups.unshift(m[2].split(/,\s*/)); base = m[1]; }
+        const lm = base.match(/^(Lettre|Chiffre|Nombre) (\S+)( minuscule)?$/);
+        if (lm) return {base: `${lm[1]} {x}${lm[3] || ''}`, x: lm[2], groups};
+        // un seul nombre dans le nom (« Polygone à 5 côtés », « Nombre 15 ») : « Polygone à {x} côtés »
+        const nm = (base.match(/\d+/g) || []).length === 1 ? base.match(/^(.*?\S)\s(\d+)(\s.*)?$/) : null;
+        return nm ? {base: `${nm[1]} {x}${nm[3] || ''}`, x: nm[2], groups} : {base, x: null, groups};
+    }
+    const shapeNameParts = n => { const {base, groups} = parse(n); return [base, ...groups.flat()].filter(w => LETTERS.test(w)).map(w => `forme|${w}`); };
+    function shapeName(n) {
+        const I = root && root.LCNDA_I18N; if (!I || (I.getLang ? I.getLang() : I.lang) === 'fr') return n;
+        const {base, x, groups} = parse(n), tr = w => (LETTERS.test(w) ? I.t(w, x != null && w === base ? {x, ctx: 'forme'} : {ctx: 'forme'}) : w);
+        return [tr(base), ...groups.map(g => `(${g.map(tr).join(', ')})`)].join(' ');
+    }
+    // une forme de l'app : « n » rend le nom dans la langue du moment (gardé tant que la langue ne change pas), « fr » le nom français
+    function named(o) {
+        let memo = null, memoLang = '';
+        Object.defineProperty(o, 'n', {enumerable: true, configurable: true, get() { const I = root && root.LCNDA_I18N, L = I ? (I.getLang ? I.getLang() : I.lang) : 'fr'; if (memo === null || memoLang !== L) { memoLang = L; memo = shapeName(o.fr); } return memo; }, set(v) { o.fr = v; memo = null; }});
+        return o;
+    }
+    const api = {shapeNameParts, shapeName, named};
+    if (typeof module === 'object' && module.exports) module.exports = api;
+    if (root) (root.LCNDA_EXT = root.LCNDA_EXT || {}).shapeNameI18n = api;
+})(typeof window !== 'undefined' ? window : null);
 (() => {
     'use strict';
+    if (typeof document === 'undefined') return; // Node : seulement les noms des formes (plus haut)
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     ext.maintenance = ext.maintenance || {};
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
+    const named = o => ext.shapeNameI18n.named(o);
     const A = () => window.LCNDA_APP;
     const esc = v => A().escapeHtml(v ?? '');
     const toast = (...a) => A().toast(...a);
@@ -19,7 +53,7 @@
     const CATS = [['elem', 'Élémentaire', '◻️'], ['geo', 'Géométrie', '🔷'], ['arrows', 'Flèches', '➡️'], ['bubbles', 'Bulles', '💬'], ['stars', 'Étoiles et badges', '⭐'], ['symbols', 'Symboles', '❤️'],
         ['genea', 'Généalogie', '🌳'], ['people', 'Personnes', '👪'], ['faith', 'Croyances et mémoire', '🕯️'], ['docs', 'Écrits et documents', '📜'], ['places', 'Lieux et bâtiments', '⛪'], ['house', 'Maison et objets', '🏠'],
         ['clothes', 'Vêtements et parures', '👔'], ['jobs', 'Métiers et outils', '🔨'], ['transport', 'Transports et voyages', '🚂'], ['animals', 'Animaux', '🐾'], ['nature', 'Nature', '🍃'], ['weather', 'Météo et ciel', '🌦️'],
-        ['food', 'Cuisine et repas', '🍞'], ['leisure', 'Musique, jeux et sport', '🎻'], ['health', 'Santé et corps', '🩺'], ['objects', 'Objets', '🔑'], ['mine', 'Mes formes', '✏️']];
+        ['food', 'Cuisine et repas', '🍞'], ['leisure', 'Musique, jeux et sport', '🎻'], ['health', 'Santé et corps', '🩺'], ['objects', 'Objets', '🔑'], ['mine', 'Mes formes', '✏️']].map(([k, n, i]) => [k, i18n(n), i]);
     // [clé, nom, catégorie, chemin, evenodd?, mots pour la recherche]
     const RAW = [
         ['rect', 'Rectangle', 'elem', 'M0 0H100V100H0Z'], ['round', 'Rectangle arrondi', 'elem', 'M18 0H82A18 18 0 0 1 100 18V82A18 18 0 0 1 82 100H18A18 18 0 0 1 0 82V18A18 18 0 0 1 18 0Z'], ['ellipse', 'Ovale', 'elem', circ(50, 50, 50), 0, 'rond cercle'],
@@ -119,9 +153,10 @@
         ['label_round', 'Étiquette ronde', 'elem', 'M20 20H100V80H20L0 50Z' + circ(18, 50, 5), 1, 'étiquette'], ['speech_oval', 'Bulle ovale', 'bubbles', 'M50 4C78 4 98 18 98 38S78 72 50 72C46 72 42 72 38 71L18 92L24 66C10 59 2 49 2 38C2 18 22 4 50 4Z', 0, 'bulle'],
         ['speech_round_r', 'Bulle (droite)', 'bubbles', 'M50 6C76 6 96 22 96 42C96 53 91 63 81 70L88 96L67 76C61 77 56 78 50 78C24 78 4 62 4 42S24 6 50 6Z', 0, 'bulle'], ['thought_small', 'Petite pensée', 'bubbles', circ(50, 40, 34) + circ(24, 82, 8) + circ(12, 94, 4), 0, 'pensée'],
     ];
-    const SHAPES = [...RAW, ...GEN].map(([k, n, c, d, eo, tags]) => ({k, n, c, d, eo: !!eo, tags: tags || '', s: 100}));
+    // n : le nom dans la langue choisie ; fr : le nom français (la recherche trouve les deux)
+    const SHAPES = [...RAW, ...GEN].map(([k, n, c, d, eo, tags]) => named({k, fr: n, c, d, eo: !!eo, tags: tags || '', s: 100}));
     // pictogrammes ajoutés (heritage-board-shapes.js) : boîte 24 × 24
-    for (const [c, rows] of Object.entries(ext.boardShapesExtra || {})) for (const [k, n, d, tags] of rows) SHAPES.push({k, n, c, d, eo: false, tags: tags || '', s: 24});
+    for (const [c, rows] of Object.entries(ext.boardShapesExtra || {})) for (const [k, n, d, tags] of rows) SHAPES.push(named({k, fr: n, c, d, eo: false, tags: tags || '', s: 24}));
     const SHAPE_MAP = Object.fromEntries(SHAPES.map(s => [s.k, s]));
 
     /* ═════════ Préférences ═════════ */
@@ -137,23 +172,23 @@
         labelbg: ['transparent', '#ffffff', '#fff3a3', '#e8f0ff', '#eef6ee', '#fdf0f4', '#111111'],
         labelborder: ['#111111', '#555555', '#d0021b', '#2a7de1', '#2b8a3e', '#c2185b'],
     };
-    const COLOR_CATS = [['fill', 'Fond des formes, étiquettes, dossiers'], ['stroke', 'Bord des formes et contour des médias'], ['text', 'Couleur du texte, des traits et flèches'], ['pen', 'Dessin à main levée'], ['note', 'Notes'], ['bg', 'Fond du tableau'], ['label', 'Légendes des traits : texte'], ['labelbg', 'Légendes des traits : fond du cadre'], ['labelborder', 'Légendes des traits : bord du cadre']];
+    const COLOR_CATS = [['fill', 'Fond des formes, étiquettes, dossiers'], ['stroke', 'Bord des formes et contour des médias'], ['text', 'Couleur du texte, des traits et flèches'], ['pen', 'Dessin à main levée'], ['note', 'Notes'], ['bg', 'Fond du tableau'], ['label', 'Légendes des traits : texte'], ['labelbg', 'Légendes des traits : fond du cadre'], ['labelborder', 'Légendes des traits : bord du cadre']].map(([k, l, ...r]) => [k, i18n(l), ...r]);
     const PALETTE_PRESETS = {
         'Archives': {fill: ['transparent', '#f4ecd8', '#e9dcc0', '#d8c3a5', '#b08968', '#7f5539', '#9c6644', '#e6ccb2', '#ffffff'], stroke: ['transparent', '#3b2f2f', '#7f5539', '#b08968', '#9c6644', '#d8c3a5'], text: ['#2b2118', '#5c4033', '#7f5539', '#9c6644', '#8b0000', '#1f3a5f'], pen: ['#2b2118', '#5c4033', '#8b0000', '#1f3a5f', '#556b2f'], note: ['#f4ecd8', '#e9dcc0', '#efe3c8', '#e6ccb2'], bg: ['#fbf6ea', '#f4ecd8', '#efe6d2']},
         'Pastel': {fill: ['transparent', '#ffd6e0', '#ffefcf', '#fdffb6', '#caffbf', '#9bf6ff', '#a0c4ff', '#bdb2ff', '#ffc6ff', '#ffffff'], stroke: ['transparent', '#6c757d', '#ffadad', '#ffd6a5', '#9bf6ff', '#a0c4ff', '#bdb2ff'], text: ['#343a40', '#6c757d', '#e5989b', '#6d6875', '#457b9d'], pen: ['#343a40', '#e5989b', '#457b9d', '#6d6875', '#b5838d'], note: ['#ffd6e0', '#ffefcf', '#fdffb6', '#caffbf', '#bdb2ff'], bg: ['#ffffff', '#fdf0f4', '#f1f7ff']},
         'Contraste fort': {fill: ['transparent', '#000000', '#ffffff', '#ff0000', '#ffff00', '#00a000', '#0000ff'], stroke: ['transparent', '#000000', '#ffffff', '#ff0000', '#0000ff'], text: ['#000000', '#ffffff', '#ff0000', '#0000ff'], pen: ['#000000', '#ff0000', '#0000ff', '#00a000'], note: ['#ffff00', '#ffffff', '#00ffff'], bg: ['#ffffff', '#000000']},
     };
-    const TOOLS = [['select', 'Choisir'], ['hand', 'Se déplacer'], ['text', 'Texte'], ['note', 'Note'], ['shape', 'Formes'], ['line', 'Trait'], ['arrow', 'Flèche'], ['pen', 'Dessin'], ['eraser', 'Gomme'], ['table', 'Tableur']];
-    const HEADER = [['undo', '↶ Annuler'], ['redo', '↷ Rétablir'], ['bg', 'Fond'], ['snaps', '📸 Instantanés'], ['copy', '⧉ Copie'], ['export', '⤓ Exporter / imprimer'], ['full', '⛶ Plein écran'], ['lockall', '🔒 Verrouiller'], ['hyp', '❓ Pistes à vérifier (compteur)'], ['search', '🔍 Chercher dans le tableau'], ['layers', '🗂 Calques'], ['snapgrid', '🧲 Grille aimantée'], ['minimap', '🗺 Mini-carte'], ['present', '▶ Présenter'], ['prefs', '⚙️ Réglages des tableaux'], ['delete', '🗑 Supprimer'], ['close', '✕ Fermer']];
-    const INSPECTOR = [['fill', 'Fond'], ['stroke', 'Bord / contour'], ['color', 'Couleur du texte ou du trait'], ['sw', 'Épaisseur et style du trait'], ['shape', 'Forme'], ['radius', 'Arrondi'], ['text', 'Taille et style du texte'], ['list', 'Puces et numéros'], ['font', 'Police'], ['heads', 'Pointes des flèches'], ['linepath', 'Forme du trait et légende'], ['table', 'Tableur'], ['brush', 'Pinceau'], ['title', 'Titre, étiquette, adresse'], ['preview', 'Aperçu vivant'], ['pshow', 'Fiche : ce qu’elle montre'], ['hyp', 'Piste : à vérifier, confirmée, fausse'], ['tl', 'Frise vivante'], ['map', 'Carte et repères'], ['connector', 'Liens tout prêts (frère de…)'], ['align', 'Aligner et répartir'], ['layer', 'Calque'], ['comments', 'Commentaires'], ['opacity', 'Opacité'], ['actions', 'Boutons (dupliquer, verrouiller…)']];
-    const ADD = [['files', 'Des fichiers'], ['media', 'Un média de l’app'], ['web', 'D’ailleurs (web)'], ['person', 'Une fiche'], ['screen', 'Un écran de l’app'], ['widget', 'Un de mes widgets'], ['recueil', 'Un recueil'], ['tag', 'Une étiquette'], ['table', 'Un tableur'], ['folder', 'Un dossier'], ['tree', 'Un arbre automatique'], ['timeline', 'Une frise vivante'], ['map', 'Une carte'], ['frame', 'Un cadre (section)'], ['memo', 'Un mémo vocal'], ['import', 'Importer un tableau']];
+    const TOOLS = [['select', 'Choisir'], ['hand', 'Se déplacer'], ['text', 'Texte'], ['note', 'Note'], ['shape', 'Formes'], ['line', 'Trait'], ['arrow', 'Flèche'], ['pen', 'Dessin'], ['eraser', 'Gomme'], ['table', 'Tableur']].map(([k, l, ...r]) => [k, i18n(l), ...r]);
+    const HEADER = [['undo', '↶ Annuler'], ['redo', '↷ Rétablir'], ['bg', 'Fond'], ['snaps', '📸 Instantanés'], ['copy', '⧉ Copie'], ['export', '⤓ Exporter / imprimer'], ['full', '⛶ Plein écran'], ['lockall', '🔒 Verrouiller'], ['hyp', '❓ Pistes à vérifier (compteur)'], ['search', '🔍 Chercher dans le tableau'], ['layers', '🗂 Calques'], ['snapgrid', '🧲 Grille aimantée'], ['minimap', '🗺 Mini-carte'], ['present', '▶ Présenter'], ['prefs', '⚙️ Réglages des tableaux'], ['delete', '🗑 Supprimer'], ['close', '✕ Fermer']].map(([k, l, ...r]) => [k, i18n(l), ...r]);
+    const INSPECTOR = [['fill', 'Fond'], ['stroke', 'Bord / contour'], ['color', 'Couleur du texte ou du trait'], ['sw', 'Épaisseur et style du trait'], ['shape', 'Forme'], ['radius', 'Arrondi'], ['text', 'Taille et style du texte'], ['list', 'Puces et numéros'], ['font', 'Police'], ['heads', 'Pointes des flèches'], ['linepath', 'Forme du trait et légende'], ['table', 'Tableur'], ['brush', 'Pinceau'], ['title', 'Titre, étiquette, adresse'], ['preview', 'Aperçu vivant'], ['pshow', 'Fiche : ce qu’elle montre'], ['hyp', 'Piste : à vérifier, confirmée, fausse'], ['tl', 'Frise vivante'], ['map', 'Carte et repères'], ['connector', 'Liens tout prêts (frère de…)'], ['align', 'Aligner et répartir'], ['layer', 'Calque'], ['comments', 'Commentaires'], ['opacity', 'Opacité'], ['actions', 'Boutons (dupliquer, verrouiller…)']].map(([k, l, ...r]) => [k, i18n(l), ...r]);
+    const ADD = [['files', 'Des fichiers'], ['media', 'Un média de l’app'], ['web', 'D’ailleurs (web)'], ['person', 'Une fiche'], ['screen', 'Un écran de l’app'], ['widget', 'Un de mes widgets'], ['recueil', 'Un recueil'], ['tag', 'Une étiquette'], ['table', 'Un tableur'], ['folder', 'Un dossier'], ['tree', 'Un arbre automatique'], ['timeline', 'Une frise vivante'], ['map', 'Une carte'], ['frame', 'Un cadre (section)'], ['memo', 'Un mémo vocal'], ['import', 'Importer un tableau']].map(([k, l, ...r]) => [k, i18n(l), ...r]);
     // les réglages d'une légende de trait (panneau de droite), dans l'ordre voulu
-    const LEGEND = [['lbSize', 'Taille du texte'], ['lbFont', 'Police'], ['lbStyle', 'Gras, italique'], ['lbColor', 'Couleur du texte'], ['lbBg', 'Fond du cadre'], ['lbBorder', 'Bord du cadre'], ['lbBw', 'Épaisseur du bord'], ['lbPad', 'Marge dans le cadre'], ['lbRadius', 'Arrondi du cadre'], ['lbPos', 'Position le long du trait'], ['lbSide', 'Côté'], ['lbOffset', 'Écart avec le trait'], ['lbRotate', 'Suivre l’angle du trait']];
+    const LEGEND = [['lbSize', 'Taille du texte'], ['lbFont', 'Police'], ['lbStyle', 'Gras, italique'], ['lbColor', 'Couleur du texte'], ['lbBg', 'Fond du cadre'], ['lbBorder', 'Bord du cadre'], ['lbBw', 'Épaisseur du bord'], ['lbPad', 'Marge dans le cadre'], ['lbRadius', 'Arrondi du cadre'], ['lbPos', 'Position le long du trait'], ['lbSide', 'Côté'], ['lbOffset', 'Écart avec le trait'], ['lbRotate', 'Suivre l’angle du trait']].map(([k, l, ...r]) => [k, i18n(l), ...r]);
     const HEADS = ['none', 'triangle', 'stealth', 'open', 'double', 'half', 'circle', 'ring', 'dot', 'square', 'square_o', 'diamond', 'diamond_o', 'bar', 'fork', 'tail',
         'triangle_o', 'line_arrow', 'chevron2', 'cross', 'plus', 'star', 'heart', 'one', 'many', 'semicircle'];
     /* Les pointes des traits : dessin (boîte 10 × 10, pointe vers la droite), point d'accroche, nom ; et les pointes à soi (réglages) */
-    const HEAD_NAMES = {none: 'aucune', triangle: '▶ triangle', stealth: '➤ flèche fine', open: '› ouverte', double: '⏩ double', half: '◣ demi-flèche', circle: '● rond', ring: '○ rond vide', dot: '• point', square: '■ carré', square_o: '□ carré vide', diamond: '◆ losange', diamond_o: '◇ losange vide', bar: '| barre', fork: '⋔ patte d’oie', tail: '» plumes',
-        triangle_o: '▷ triangle vide', line_arrow: '⟶ flèche longue', chevron2: '» double chevron', cross: '✕ croix', plus: '＋ plus', star: '★ étoile', heart: '♥ cœur', one: '‖ un (deux barres)', many: '⋲ plusieurs (pied de corbeau)', semicircle: '◗ demi-rond'};
+    const HEAD_NAMES = Object.fromEntries(Object.entries({none: 'aucune', triangle: '▶ triangle', stealth: '➤ flèche fine', open: '› ouverte', double: '⏩ double', half: '◣ demi-flèche', circle: '● rond', ring: '○ rond vide', dot: '• point', square: '■ carré', square_o: '□ carré vide', diamond: '◆ losange', diamond_o: '◇ losange vide', bar: '| barre', fork: '⋔ patte d’oie', tail: '» plumes',
+        triangle_o: '▷ triangle vide', line_arrow: '⟶ flèche longue', chevron2: '» double chevron', cross: '✕ croix', plus: '＋ plus', star: '★ étoile', heart: '♥ cœur', one: '‖ un (deux barres)', many: '⋲ plusieurs (pied de corbeau)', semicircle: '◗ demi-rond'}).map(([k, l]) => [k, i18n(l, {ctx: 'pointe'})]));
     const HEAD_REF = {triangle: 8, open: 8, stealth: 8, double: 8, half: 8, circle: 5, ring: 5, dot: 5, square: 5, square_o: 5, diamond: 5, diamond_o: 5, bar: 5, fork: 9, tail: 3,
         triangle_o: 8, line_arrow: 9, chevron2: 8, cross: 5, plus: 5, star: 5, heart: 5, one: 7, many: 9, semicircle: 3};
     const HEAD_SVG = {
@@ -196,14 +231,14 @@
     const allHeads = p => [...HEADS, ...((p || prefs()).customHeads || []).map(h => h.k)];
     const headPreview = (k, p, c = '#333') => k === 'none' ? '<svg viewBox="0 0 44 12" width="44" height="12"><line x1="2" y1="6" x2="40" y2="6" stroke="#333" stroke-width="2"/></svg>' : `<svg viewBox="0 0 44 12" width="44" height="12" style="overflow:visible"><line x1="2" y1="6" x2="${34 - (10 - headRef(k, p))}" y2="6" stroke="${c}" stroke-width="2"/><g transform="translate(30,1)">${headSvg(k, c, p)}</g></svg>`;
     const DEFAULTS = () => ({
-        palettes: [{id: 'p0', name: 'Couleurs de l’app', colors: JSON.parse(JSON.stringify(PALETTE0))}], palette: 'p0',
+        palettes: [{id: 'p0', name: i18n('Couleurs de l’app'), colors: JSON.parse(JSON.stringify(PALETTE0))}], palette: 'p0',
         heads: HEADS.slice(), headsHidden: [], headStart: 'none', headEnd: 'triangle',
         shapeCats: CATS.map(c => c[0]), shapeOrder: {}, shapesHidden: [], quickShapes: ['rect', 'round', 'ellipse', 'triangle', 'diamond', 'star', 'hexagon', 'bubble', 'cloud', 'arrow_r', 'heart', 'tree'],
         customShapes: [],
-        fontLists: [{name: 'Pour tous les jours', fonts: ['system-ui', 'Georgia', 'Helvetica Neue', 'Times New Roman', 'Courier New']}, {name: 'Écritures anciennes', fonts: ['Garamond', 'Baskerville', 'Didot', 'Palatino', 'Apple Chancery', 'Snell Roundhand']}],
+        fontLists: [{name: i18n('Pour tous les jours'), fonts: ['system-ui', 'Georgia', 'Helvetica Neue', 'Times New Roman', 'Courier New']}, {name: i18n('Écritures anciennes'), fonts: ['Garamond', 'Baskerville', 'Didot', 'Palatino', 'Apple Chancery', 'Snell Roundhand']}],
         strokeMin: 0.5, strokeMax: 60, textMin: 6, textMax: 200, radius: 14,
-        table: {rows: 4, cols: 3, header: true, hcol: false, stripes: true, hfill: '#e8eef7', fs: 14, headers: 'Nom;Année;Lieu'},
-        brushes: [], cmtWords: ['À vérifier', 'Question', 'Idée', 'Source ?', 'Important'],
+        table: {rows: 4, cols: 3, header: true, hcol: false, stripes: true, hfill: '#e8eef7', fs: 14, headers: i18n('Nom;Année;Lieu')},
+        brushes: [], cmtWords: ['À vérifier', 'Question', 'Idée', 'Source ?', 'Important'].map(w => i18n(w)),
         toolsOrder: TOOLS.map(t => t[0]), toolsHidden: [], headerOrder: HEADER.map(t => t[0]), headerHidden: [],
         layout: {toolbar: 'top', inspector: 'right', size: 'm', title: 'show'},
         inspectorOrder: INSPECTOR.map(t => t[0]), inspectorHidden: [], addOrder: ADD.map(t => t[0]), addHidden: [], legendOrder: LEGEND.map(t => t[0]), legendHidden: [],
@@ -244,11 +279,11 @@
     // des ensembles de réglages gardés sous un nom (comme les designs d'Apparence)
     const SETS_KEY = 'genealogie-board-prefs-sets';
     const sets = () => { try { const l = JSON.parse(localStorage.getItem(SETS_KEY) || '[]'); return Array.isArray(l) ? l.filter(x => x && typeof x.name === 'string' && x.prefs && typeof x.prefs === 'object').slice(0, 50) : []; } catch (_) { return []; } };
-    const saveSets = l => { try { localStorage.setItem(SETS_KEY, JSON.stringify(l)); return true; } catch (_) { toast('Trop lourd pour être gardé (retire des formes faites d’une image).', 'error'); return false; } };
+    const saveSets = l => { try { localStorage.setItem(SETS_KEY, JSON.stringify(l)); return true; } catch (_) { toast(i18n('Trop lourd pour être gardé (retire des formes faites d’une image).'), 'error'); return false; } };
     const prefs = () => { if (cache) return cache; let raw = null; try { raw = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (_) {} try { cache = clean(raw); } catch (_) { cache = clean(null); } return cache; };
     // réglages changés ailleurs (autre fenêtre, réglages du site) : on relit
     window.addEventListener('storage', e => { if (e.key === KEY) cache = null; });
-    const savePrefs = p => { cache = clean(p); try { localStorage.setItem(KEY, JSON.stringify(cache)); } catch (e) { toast('Réglages trop lourds pour être gardés (retire des formes faites d’une image).', 'error'); } return cache; };
+    const savePrefs = p => { cache = clean(p); try { localStorage.setItem(KEY, JSON.stringify(cache)); } catch (e) { toast(i18n('Réglages trop lourds pour être gardés (retire des formes faites d’une image).'), 'error'); } return cache; };
     const palette = (cat, p = prefs()) => (p.palettes.find(x => x.id === p.palette) || p.palettes[0]).colors[cat] || PALETTE0[cat];
     const allShapes = (p = prefs()) => [...SHAPES, ...p.customShapes];
     const shapesOf = (cat, p = prefs()) => { const l = allShapes(p).filter(s => s.c === cat); return sortBy(l.map(s => s.k), p.shapeOrder[cat] || []).map(k => l.find(s => s.k === k)); };
@@ -335,7 +370,7 @@
             return {d: pathStr(fitSegs(segs)), eo};
         };
         const picker = (attr, cur) => `<div class="h-cmp-pick" ${attr}><input type="search" placeholder="Chercher une forme (cœur, maison, chien…)" data-cmp-q><div class="h-cmp-res" data-cmp-res>${resHtml('', cur)}</div></div>`;
-        const resHtml = (q, cur) => { const n = q.toLowerCase(); let l = usable().filter(sh => !n || (sh.n + ' ' + sh.tags).toLowerCase().includes(n)).slice(0, n ? 60 : 36); const curSh = cur && byKey(cur); if (curSh && !l.includes(curSh)) l = [curSh, ...l]; return l.map(sh => `<button type="button" class="h-bd-shcell ${sh.k === cur ? 'is-on' : ''}" data-cmp-k="${esc(sh.k)}" title="${esc(sh.n)}">${shapeSvg(sh, 28)}</button>`).join('') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Rien trouvé.</span></p>'; };
+        const resHtml = (q, cur) => { const n = q.toLowerCase(); let l = usable().filter(sh => !n || (sh.n + ' ' + sh.tags + ' ' + (sh.fr || '')).toLowerCase().includes(n)).slice(0, n ? 60 : 36); const curSh = cur && byKey(cur); if (curSh && !l.includes(curSh)) l = [curSh, ...l]; return l.map(sh => `<button type="button" class="h-bd-shcell ${sh.k === cur ? 'is-on' : ''}" data-cmp-k="${esc(sh.k)}" title="${esc(sh.n)}">${shapeSvg(sh, 28)}</button>`).join('') || `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">${esc(i18n('Rien trouvé.'))}</span></p>`; };
         const pieceRow = (pc, i) => `<div class="h-cmp-piece" data-pc="${i}"><span class="h-cmp-pshape">${shapeSvg(byKey(pc.k), 26)}</span><label>${esc(byKey(pc.k)?.n || '')}<select data-pcf="op"><option value="add" ${pc.op === 'add' ? 'selected' : ''}>＋ ajouter (réunir)</option><option value="hole" ${pc.op === 'hole' ? 'selected' : ''}>⭕ percer (trou)</option></select></label>
             <label>Gauche → droite<input type="range" min="-20" max="120" value="${pc.x}" data-pcf="x"></label><label>Haut → bas<input type="range" min="-20" max="120" value="${pc.y}" data-pcf="y"></label><label>Taille<input type="range" min="5" max="150" value="${pc.size}" data-pcf="size"></label><label>Rotation<input type="range" min="-180" max="180" value="${pc.rot}" data-pcf="rot"></label>
             <label class="ui-toggle"><input type="checkbox" data-pcf="flipH" ${pc.flipH ? 'checked' : ''}><i></i><span>miroir</span></label><button type="button" class="h-pet-x" data-pc-del title="Retirer" aria-label="Retirer">×</button></div>`;
@@ -351,7 +386,7 @@
             onOpen: d => {
                 const prev = () => { const r = compute(); d.querySelector('[data-cmp-prev]').innerHTML = `<svg viewBox="-4 -4 108 108" width="220" height="220"><path d="${r.d}" ${r.eo ? 'fill-rule="evenodd"' : ''} fill="#2a7de1" stroke="#1d3557" stroke-width="1"/></svg>`; };
                 const drawPieces = () => { d.querySelector('[data-cmp-pieces]').innerHTML = st.pieces.map(pieceRow).join(''); prev(); };
-                const nameIn = d.querySelector('[data-cmp-name]'); nameIn.value = (byKey(st.base)?.n || 'Forme') + ' (à moi)';
+                const nameIn = d.querySelector('[data-cmp-name]'); nameIn.value = i18n('{name} (à moi)', {name: byKey(st.base)?.n || i18n('Forme')});
                 d.addEventListener('input', e => {
                     const q = e.target.closest('[data-cmp-q]'); if (q) { const box = q.closest('.h-cmp-pick'); box.querySelector('[data-cmp-res]').innerHTML = resHtml(q.value.trim(), box.matches('[data-cmp-base]') ? st.base : ''); return; }
                     const n = e.target.closest('[data-cmp-n]'); if (n) { st[n.dataset.cmpN] = Number(n.value); d.querySelector(`[data-cmp-o="${n.dataset.cmpN}"]`).textContent = n.value + (n.dataset.cmpN === 'rot' ? '°' : ' %'); prev(); return; }
@@ -360,7 +395,7 @@
                 d.addEventListener('change', e => { const f = e.target.closest('[data-pcf]'); if (f && (f.type === 'checkbox' || f.tagName === 'SELECT')) { const pc = st.pieces[Number(f.closest('[data-pc]').dataset.pc)]; pc[f.dataset.pcf] = f.type === 'checkbox' ? f.checked : f.value; prev(); } });
                 d.addEventListener('click', e => {
                     const c = e.target.closest('[data-cmp-k]');
-                    if (c && c.closest('[data-cmp-base]')) { st.base = c.dataset.cmpK; c.closest('[data-cmp-res]').querySelectorAll('.is-on').forEach(x => x.classList.remove('is-on')); c.classList.add('is-on'); if (!nameIn.dataset.touched) nameIn.value = (byKey(st.base)?.n || 'Forme') + ' (à moi)'; prev(); return; }
+                    if (c && c.closest('[data-cmp-base]')) { st.base = c.dataset.cmpK; c.closest('[data-cmp-res]').querySelectorAll('.is-on').forEach(x => x.classList.remove('is-on')); c.classList.add('is-on'); if (!nameIn.dataset.touched) nameIn.value = i18n('{name} (à moi)', {name: byKey(st.base)?.n || i18n('Forme')}); prev(); return; }
                     if (c && c.closest('[data-cmp-addpick]')) { st.pieces.push({k: c.dataset.cmpK, op: 'add', x: 75, y: 25, size: 40, rot: 0, flipH: false}); c.closest('details').open = false; drawPieces(); return; }
                     const fl = e.target.closest('[data-cmp-flip]'); if (fl) { st[fl.dataset.cmpFlip] = !st[fl.dataset.cmpFlip]; fl.classList.toggle('is-on', st[fl.dataset.cmpFlip]); prev(); return; }
                     const rt = e.target.closest('[data-cmp-rot]'); if (rt) { st.rot = ((st.rot + Number(rt.dataset.cmpRot) + 540) % 360) - 180; d.querySelector('[data-cmp-n="rot"]').value = st.rot; d.querySelector('[data-cmp-o="rot"]').textContent = st.rot + '°'; prev(); return; }
@@ -370,14 +405,14 @@
                 prev();
             },
             onSubmit: () => {
-                const r = compute(); if (!r.d) return window.LCNDA_UI.fail('.pk, select, input', 'Choisis une forme de départ.');
-                if (r.d.length > 29000) { toast('Forme trop détaillée : retire des formes ajoutées.', 'error'); return false; }
+                const r = compute(); if (!r.d) return window.LCNDA_UI.fail('.pk, select, input', i18n('Choisis une forme de départ.'));
+                if (r.d.length > 29000) { toast(i18n('Forme trop détaillée : retire des formes ajoutées.'), 'error'); return false; }
                 const name = (document.querySelector('dialog[open] [data-cmp-name]')?.value || '').trim().slice(0, 60) || 'Ma forme';
                 const p = JSON.parse(JSON.stringify(prefs())), k = 'my_' + Date.now().toString(36);
                 p.customShapes.push({k, n: name, c: 'mine', d: r.d, eo: r.eo, mask: ''});
                 if (!p.quickShapes.includes(k)) p.quickShapes.push(k);
                 savePrefs(p);
-                toast(`Forme « ${name} » créée : elle est dans « Mes formes ».`);
+                toast(i18n('Forme « {name} » créée : elle est dans « Mes formes ».', {name}));
                 onSave?.(k);
             }});
     }
@@ -400,7 +435,7 @@
                 <path d="${live}" fill="#2a7de1" fill-opacity=".25" fill-rule="evenodd" stroke="#1d3557" stroke-width=".6"/>
                 ${handles.map(({n, h}) => `<line x1="${n.x}" y1="${n.y}" x2="${n.x + n[h][0]}" y2="${n.y + n[h][1]}" stroke="#888" stroke-width=".35"/>`).join('')}
                 ${handles.map(({n, pi, ni, h}) => `<circle cx="${n.x + n[h][0]}" cy="${n.y + n[h][1]}" r="1.4" fill="#fff" stroke="#d0021b" stroke-width=".4" data-ph="${pi}:${ni}:${h}" style="cursor:move"/>`).join('')}
-                ${nodes.map(({n, pi, ni, first}) => `<rect x="${n.x - 1.4}" y="${n.y - 1.4}" width="2.8" height="2.8" fill="${sel && sel[0] === pi && sel[1] === ni ? '#1d3557' : first ? '#ffd166' : '#fff'}" stroke="#1d3557" stroke-width=".4" data-pn="${pi}:${ni}" style="cursor:${first ? 'pointer' : 'move'}"><title>${first ? 'Fermer la forme' : 'Point'}</title></rect>`).join('')}`;
+                ${nodes.map(({n, pi, ni, first}) => `<rect x="${n.x - 1.4}" y="${n.y - 1.4}" width="2.8" height="2.8" fill="${sel && sel[0] === pi && sel[1] === ni ? '#1d3557' : first ? '#ffd166' : '#fff'}" stroke="#1d3557" stroke-width=".4" data-pn="${pi}:${ni}" style="cursor:${first ? 'pointer' : 'move'}"><title>${esc(i18n(first ? 'Fermer la forme' : 'Point'))}</title></rect>`).join('')}`;
             onChange();
         }
         svg.addEventListener('pointerdown', e => {
@@ -445,9 +480,9 @@
             if (mode === 'pen') { const d = pen?.path() || ''; return d ? {d, box: 100, rot, fill, eo: (pen?.count() || 0) > 1, ref} : null; }
             if (!picked?.d) return null; return {d: picked.d, box: picked.s || 100, rot, fill, eo: !!picked.eo, ref};
         };
-        const prev = () => { const h = cur(), box = document.querySelector('[data-hm-prev]'); if (!box) return; if (!h) { box.innerHTML = '<p class="muted">Choisis une forme ou trace la pointe.</p>'; return; } const pp = {...p, customHeads: [{...h, k: 'myh_prev', n: ''}]}; box.innerHTML = `<svg viewBox="0 0 120 40" width="240" height="80" style="overflow:visible"><line x1="6" y1="20" x2="${96 - (10 - h.ref) * 2.4}" y2="20" stroke="#1d3557" stroke-width="3"/><g transform="translate(84,8) scale(2.4)">${headSvg('myh_prev', '#1d3557', pp)}</g></svg>`; };
+        const prev = () => { const h = cur(), box = document.querySelector('[data-hm-prev]'); if (!box) return; if (!h) { box.innerHTML = `<p class="muted">${esc(i18n('Choisis une forme ou trace la pointe.'))}</p>`; return; } const pp = {...p, customHeads: [{...h, k: 'myh_prev', n: ''}]}; box.innerHTML = `<svg viewBox="0 0 120 40" width="240" height="80" style="overflow:visible"><line x1="6" y1="20" x2="${96 - (10 - h.ref) * 2.4}" y2="20" stroke="#1d3557" stroke-width="3"/><g transform="translate(84,8) scale(2.4)">${headSvg('myh_prev', '#1d3557', pp)}</g></svg>`; };
         const shapes = allShapes(p).filter(s => s.d && !s.mask);
-        const grid = q => shapes.filter(s => !q || (s.n + ' ' + (s.tags || '')).toLowerCase().includes(q.toLowerCase())).slice(0, 240).map(s => `<button type="button" class="h-bd-shcell ${picked?.k === s.k ? 'is-on' : ''}" data-hm-shape="${esc(s.k)}" title="${esc(s.n)}">${shapeSvg(s, 30)}</button>`).join('');
+        const grid = q => shapes.filter(s => !q || (s.n + ' ' + (s.tags || '') + ' ' + (s.fr || '')).toLowerCase().includes(q.toLowerCase())).slice(0, 240).map(s => `<button type="button" class="h-bd-shcell ${picked?.k === s.k ? 'is-on' : ''}" data-hm-shape="${esc(s.k)}" title="${esc(s.n)}">${shapeSvg(s, 30)}</button>`).join('');
         ext.openDialog({eyebrow: 'RÉGLAGES DES TABLEAUX', title: 'Créer une pointe', wide: true, submitLabel: 'Créer la pointe',
             body: `<div class="h-hm"><div class="h-bd-makertabs"><button type="button" class="is-on" data-hm-mode="shape">⬠ À partir d’une forme</button><button type="button" data-hm-mode="pen">✒️ Tracée à la plume</button></div>
                 <div data-hm-pane="shape"><input type="search" placeholder="Chercher une forme (flèche, cœur, étoile…)" data-hm-q><div class="h-bd-shgrid h-hm-grid" data-hm-grid>${grid('')}</div></div>
@@ -468,8 +503,8 @@
                 d.addEventListener('change', prev); prev();
             },
             onSubmit: form => {
-                const h = cur(); if (!h) { toast(mode === 'pen' ? 'Trace la pointe (au moins trois points, puis ferme-la).' : 'Choisis une forme.', 'error'); return false; }
-                if (h.d.length > 29000) { toast('Cette forme est trop détaillée pour une pointe.', 'error'); return false; }
+                const h = cur(); if (!h) { toast(i18n(mode === 'pen' ? 'Trace la pointe (au moins trois points, puis ferme-la).' : 'Choisis une forme.'), 'error'); return false; }
+                if (h.d.length > 29000) { toast(i18n('Cette forme est trop détaillée pour une pointe.'), 'error'); return false; }
                 onSave({k: 'myh_' + Date.now().toString(36), n: form.querySelector('[data-hm-name]').value.trim() || 'Ma pointe', ...h});
             }});
     }
@@ -499,8 +534,13 @@
         ext.maintenance.board_prefs.ac?.abort(); const ac = ext.maintenance.board_prefs.ac = new AbortController(), signal = ac.signal;
         const pal = () => p.palettes.find(x => x.id === p.palette) || p.palettes[0];
         // H7 : retirer une palette, une pointe, une forme, une liste de polices : tout de suite, « ↶ Annuler » remet le brouillon d'avant (gardé tout de suite, K2)
-        const draftUndo = msg => { const before = JSON.stringify(p), tk = token; setTimeout(() => { const after = JSON.stringify(p); const here = () => { if (tk !== st.workspaceToken) throw new Error('les réglages des tableaux sont fermés'); }; A().undoToast?.(msg, {undo: () => { here(); p = JSON.parse(before); draw(); }, redo: () => { here(); p = JSON.parse(after); draw(); }}); }); };
-        const TABS = [['colors', '🎨 Couleurs'], ['heads', '➤ Pointes'], ['shapes', '⬠ Formes'], ['fonts', '🔤 Polices'], ['sizes', '📏 Tailles et arrondi'], ['table', '▦ Tableur'], ['brushes', '🖌 Pinceaux'], ['menus', '☰ Menus et options']];
+        const draftUndo = msg => { const before = JSON.stringify(p), tk = token; setTimeout(() => { const after = JSON.stringify(p); const here = () => { if (tk !== st.workspaceToken) throw new Error(i18n('les réglages des tableaux sont fermés')); }; A().undoToast?.(msg, {undo: () => { here(); p = JSON.parse(before); draw(); }, redo: () => { here(); p = JSON.parse(after); draw(); }}); }); };
+        // les mots répétés sur chaque forme (≈ 3 000 formes) : traduits une fois
+        const T = {showHide: i18n('Montrer / cacher'), inQuick: i18n('Déjà dans l’accès rapide'), toQuick: i18n('Ajouter à l’accès rapide'),
+            shTools: `<button type="button" data-bp-shfrom title="${esc(i18n('Créer une forme à partir de celle-ci'))}">✏️</button><button type="button" data-bp-shvec title="${esc(i18n('La reprendre dans le dessin vectoriel (plume, points, Pathfinder…)'))}">✒️</button>`,
+            shDel: `<button type="button" data-bp-shdel title="${esc(i18n('Supprimer cette forme'))}">🗑</button>`};
+        const BRUSH_NAMES = Object.fromEntries(Object.entries({pen: 'Stylo', mono: 'Monoligne', marker: 'Marqueur', pencil: 'Crayon', pastel: 'Pastel', fountain: 'Stylo-plume', calligraphy: 'Calame', brushstroke: 'Pinceau', watercolor: 'Aquarelle', fill: 'Remplissage', highlight: 'Surligneur', chalk: 'Craie', neon: 'Néon', spray: 'Aérographe', dotted: 'Pointillé'}).map(([k, n]) => [k, i18n(n, {ctx: 'pinceau'})]));
+        const TABS = [['colors', '🎨 Couleurs'], ['heads', '➤ Pointes'], ['shapes', '⬠ Formes'], ['fonts', '🔤 Polices'], ['sizes', '📏 Tailles et arrondi'], ['table', '▦ Tableur'], ['brushes', '🖌 Pinceaux'], ['menus', '☰ Menus et options']].map(([k, l]) => [k, i18n(l)]);
         const draw = () => {
             if (token !== st.workspaceToken) return;
             // (les noms des pointes : headName)
@@ -517,12 +557,12 @@
                 shapes: () => `<p class="muted">Les catégories de formes et leurs formes, dans l’ordre voulu ; décoche ce que tu ne veux pas voir. « Accès rapide » : les formes proposées directement dans la barre de l’outil Formes.</p>
                     ${ext.openVectorEditor ? '<p class="h-bp-vecbar"><button type="button" class="button small" data-bp-shvecnew>✒️ Dessiner une nouvelle forme (dessin vectoriel)</button> <small class="muted">ou ✒️ sur une forme ci-dessous pour la reprendre : plume, points et poignées, Pathfinder, import SVG…</small></p>' : ''}
                     ${ext.boardKit?.loadLibrary && !ext.boardKit.libraryLoaded ? '<p class="h-bp-vecbar"><button type="button" class="button small secondary" data-bp-shlib>📚 Montrer aussi les 2 900 formes de la grande bibliothèque</button> <small class="muted">lettres et chiffres, armoiries, cadres, étiquettes, drapeaux, symboles… (elles sont toujours dans la bibliothèque des tableaux ; ici, pour les cacher, les ranger ou les mettre dans l’accès rapide)</small></p>' : ''}
-                    <section class="h-bp-sec"><h4>Accès rapide <small class="muted">${p.quickShapes.length}</small></h4><div class="h-bp-quick" data-bp-quick>${p.quickShapes.map(k => shapeByKey(k, p)).filter(Boolean).map(s => `<span class="h-bp-shape is-quick" draggable="true" data-k="${esc(s.k)}" title="${esc(s.n)}">${shapeSvg(s, 30)}<button type="button" class="h-bp-x" data-bp-unquick title="Retirer">×</button><span class="h-bp-qmv"><button type="button" data-bp-qleft title="Avant">‹</button><button type="button" data-bp-qright title="Après">›</button></span></span>`).join('')}</div><small class="muted">Glisse une forme (ou ‹ ›) pour changer l’ordre ; ⚡ sur une forme ci-dessous l’ajoute ici ; ✏️ crée une forme à partir d’elle.</small></section>
+                    <section class="h-bp-sec"><h4>Accès rapide <small class="muted">${p.quickShapes.length}</small></h4><div class="h-bp-quick" data-bp-quick>${p.quickShapes.map(k => shapeByKey(k, p)).filter(Boolean).map(s => `<span class="h-bp-shape is-quick" draggable="true" data-k="${esc(s.k)}" title="${esc(s.n)}" data-i18n-off>${shapeSvg(s, 30)}<button type="button" class="h-bp-x" data-bp-unquick title="Retirer">×</button><span class="h-bp-qmv"><button type="button" data-bp-qleft title="Avant">‹</button><button type="button" data-bp-qright title="Après">›</button></span></span>`).join('')}</div><small class="muted">Glisse une forme (ou ‹ ›) pour changer l’ordre ; ⚡ sur une forme ci-dessous l’ajoute ici ; ✏️ crée une forme à partir d’elle.</small></section>
                     <section class="h-bp-sec"><h4>Catégories</h4>${orderList('cats', CATS.map(c => [c[0], c[1], c[2] + ' ']), p.shapeCats, p.shapesHidden.filter(k => k.startsWith('cat:')).map(k => k.slice(4)))}</section>
-                    ${p.shapeCats.map(c => { const cat = CATS.find(x => x[0] === c); const l = shapesOf(c, p); return `<section class="h-bp-sec"><h4>${cat[2]} ${esc(cat[1])} <small class="muted">${l.length}</small></h4><div class="h-bp-shapes" data-bp-shapes="${c}">${l.map(s => `<span class="h-bp-shape ${p.shapesHidden.includes(s.k) ? 'is-off' : ''}" draggable="true" data-k="${esc(s.k)}" title="${esc(s.n)}">${shapeSvg(s, 30)}<small>${esc(s.n)}</small><span class="h-bp-shtools"><button type="button" data-bp-shtoggle title="Montrer / cacher">${p.shapesHidden.includes(s.k) ? '🙈' : '👁'}</button><button type="button" data-bp-shquick class="${p.quickShapes.includes(s.k) ? 'is-on' : ''}" title="${p.quickShapes.includes(s.k) ? 'Déjà dans l’accès rapide' : 'Ajouter à l’accès rapide'}">⚡</button>${s.d && !s.mask ? '<button type="button" data-bp-shfrom title="Créer une forme à partir de celle-ci">✏️</button><button type="button" data-bp-shvec title="La reprendre dans le dessin vectoriel (plume, points, Pathfinder…)">✒️</button>' : ''}${s.c === 'mine' ? '<button type="button" data-bp-shdel title="Supprimer cette forme">🗑</button>' : ''}</span></span>`).join('') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Aucune pour l’instant : dans un tableau, outil Formes → « ＋ Créer une forme ».</span></p>'}</div></section>`; }).join('')}`,
+                    ${p.shapeCats.map(c => { const cat = CATS.find(x => x[0] === c); const l = shapesOf(c, p); return `<section class="h-bp-sec"><h4>${cat[2]} ${esc(cat[1])} <small class="muted">${l.length}</small></h4><div class="h-bp-shapes" data-bp-shapes="${c}">${l.map(s => `<span class="h-bp-shape ${p.shapesHidden.includes(s.k) ? 'is-off' : ''}" draggable="true" data-k="${esc(s.k)}" title="${esc(s.n)}">${shapeSvg(s, 30)}<small data-i18n-off>${esc(s.n)}</small><span class="h-bp-shtools"><button type="button" data-bp-shtoggle title="${esc(T.showHide)}">${p.shapesHidden.includes(s.k) ? '🙈' : '👁'}</button><button type="button" data-bp-shquick class="${p.quickShapes.includes(s.k) ? 'is-on' : ''}" title="${esc(p.quickShapes.includes(s.k) ? T.inQuick : T.toQuick)}">⚡</button>${s.d && !s.mask ? T.shTools : ''}${s.c === 'mine' ? T.shDel : ''}</span></span>`).join('') || `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">${esc(i18n('Aucune pour l’instant : dans un tableau, outil Formes → « ＋ Créer une forme ».'))}</span></p>`}</div></section>`; }).join('')}`,
                 fonts: () => `<p class="muted">Des listes de polices à toi, proposées dans le choix de la police d’un texte. « Toutes les polices » ouvre la liste commune (polices de l’app et de l’ordinateur, chacune écrite dans sa police).</p>
                     <div class="h-bp-fontbar"><button type="button" class="button small secondary" data-bp-local>Aa Toutes les polices…</button><button type="button" class="button small secondary" data-bp-flnew>＋ Nouvelle liste</button></div><div class="h-bp-localfonts" data-bp-localbox hidden></div>
-                    ${p.fontLists.map((l, i) => `<section class="h-bp-sec h-bp-fontlist" data-fl="${i}"><div class="h-bp-flhead"><input value="${esc(l.name)}" data-bp-flname maxlength="60"><button type="button" class="button small secondary danger" data-bp-fldel>Supprimer la liste</button></div>
+                    ${p.fontLists.map((l, i) => `<section class="h-bp-sec h-bp-fontlist" data-fl="${i}"><div class="h-bp-flhead"><input value="${esc(l.name)}" data-bp-flname maxlength="60"><button type="button" class="button small secondary danger" data-bp-fldel>${esc(i18n('Supprimer la liste'))}</button></div>
                         <div class="h-bp-fonts">${l.fonts.map((f, j) => `<span class="h-bp-font" data-j="${j}" style="font-family:'${esc(f)}',${esc(f)}">${esc(f)}<button type="button" class="h-bp-x" data-bp-fdel title="Retirer">×</button></span>`).join('')}</div>
                         <div class="h-bp-fadd"><button type="button" class="button small secondary" data-bp-fpick>＋ Ajouter une police…</button></div></section>`).join('')}`,
                 sizes: () => `<p class="muted">De quelle taille à quelle taille vont les curseurs (épaisseur des traits et des contours : de 0,5 à 500 px ; texte : jusqu’à 500 px). La case de saisie à côté du curseur accepte toujours toute la plage.</p>
@@ -535,16 +575,16 @@
                     <label class="ui-toggle"><input type="checkbox" data-bp-tc="header" ${p.table.header ? 'checked' : ''}><i></i><span>première ligne en titre</span></label><label class="ui-toggle"><input type="checkbox" data-bp-tc="hcol" ${p.table.hcol ? 'checked' : ''}><i></i><span>première colonne en titre</span></label><label class="ui-toggle"><input type="checkbox" data-bp-tc="stripes" ${p.table.stripes ? 'checked' : ''}><i></i><span>une ligne sur deux teintée</span></label>`,
                 brushes: () => `<p class="muted">Tes pinceaux à toi : un pinceau de départ, une épaisseur, une opacité, une <strong>dureté</strong> (100 % = bord net ; plus bas = bord flou, comme dans Photoshop), une couleur si tu veux. Ils apparaissent en tête du menu des pinceaux.</p>
                     <div class="h-bp-brushes">${p.brushes.map((b0, i) => `<div class="h-bp-brush" data-bi="${i}"><input value="${esc(b0.icon)}" data-bp-b="icon" class="h-bp-icon" maxlength="4" aria-label="Icône"><input value="${esc(b0.name)}" data-bp-b="name" maxlength="40" aria-label="Nom">
-                        <label>Départ <select data-bp-b="base">${['pen', 'mono', 'marker', 'pencil', 'pastel', 'fountain', 'calligraphy', 'brushstroke', 'watercolor', 'fill', 'highlight', 'chalk', 'neon', 'spray', 'dotted'].map(k => `<option value="${k}" ${b0.base === k ? 'selected' : ''}>${k}</option>`).join('')}</select></label>
+                        <label>Départ <select data-bp-b="base">${['pen', 'mono', 'marker', 'pencil', 'pastel', 'fountain', 'calligraphy', 'brushstroke', 'watercolor', 'fill', 'highlight', 'chalk', 'neon', 'spray', 'dotted'].map(k => `<option value="${k}" ${b0.base === k ? 'selected' : ''}>${esc(BRUSH_NAMES[k] || k)}</option>`).join('')}</select></label>
                         <label>Épaisseur <input data-unit="px" type="number" min="0.5" max="500" step="0.5" value="${b0.sw}" data-bp-b="sw"></label><label>Opacité <input data-unit="%" type="number" min="5" max="100" value="${Math.round(b0.opacity * 100)}" data-bp-b="opacity"></label><label>Dureté <input type="range" min="0" max="100" value="${b0.hardness}" data-bp-b="hardness"><output>${b0.hardness} %</output></label>
-                        <label>Couleur <input type="checkbox" data-bp-bc ${b0.color ? 'checked' : ''} title="Imposer une couleur"><input type="color" value="${b0.color || '#111111'}" data-bp-b="color"></label><label>Trait <select data-bp-b="dash">${[['', 'plein'], ['dash', 'tirets'], ['long', 'longs tirets'], ['dot', 'points'], ['dashdot', 'tiret-point']].map(([k, l]) => `<option value="${k}" ${b0.dash === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
-                        <button type="button" class="button small secondary danger" data-bp-bdel>Supprimer</button></div>`).join('') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧱</span><span class="empty-line-text">Pas encore de pinceau à toi.</span></p>'}</div><button type="button" class="button small secondary" data-bp-bnew>＋ Nouveau pinceau</button>`,
+                        <label>Couleur <input type="checkbox" data-bp-bc ${b0.color ? 'checked' : ''} title="Imposer une couleur"><input type="color" value="${b0.color || '#111111'}" data-bp-b="color"></label><label>Trait <select data-bp-b="dash">${[['', 'plein'], ['dash', 'tirets'], ['long', 'longs tirets'], ['dot', 'points'], ['dashdot', 'tiret-point']].map(([k, l]) => `<option value="${k}" ${b0.dash === k ? 'selected' : ''}>${esc(i18n(l))}</option>`).join('')}</select></label>
+                        <button type="button" class="button small secondary danger" data-bp-bdel>Supprimer</button></div>`).join('') || `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧱</span><span class="empty-line-text">${esc(i18n('Pas encore de pinceau à toi.'))}</span></p>`}</div><button type="button" class="button small secondary" data-bp-bnew>＋ Nouveau pinceau</button>`,
                 menus: () => `<p class="muted">La place de chaque partie, puis l’ordre de tout ce qu’on voit dans un tableau ; décoche pour cacher. Glisse les lignes, ou ↑ ↓.</p>
                     <section class="h-bp-sec h-bp-layout"><h4>🧭 Disposition du tableau</h4><div class="h-bp-grid">
-                        <label>Barre d’outils<select data-bp-layout="toolbar">${[['top', 'en haut'], ['left', 'à gauche (en colonne)'], ['right', 'à droite (en colonne)'], ['bottom', 'en bas']].map(([k, l]) => `<option value="${k}" ${p.layout.toolbar === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
-                        <label>Réglages (texte, forme, trait…)<select data-bp-layout="inspector">${[['right', 'à droite'], ['left', 'à gauche'], ['hidden', 'cachés (plus de place)']].map(([k, l]) => `<option value="${k}" ${p.layout.inspector === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
-                        <label>Taille des boutons<select data-bp-layout="size">${[['s', 'petits'], ['m', 'normaux'], ['l', 'grands']].map(([k, l]) => `<option value="${k}" ${p.layout.size === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
-                        <label>En-tête (titre, propriétaire, état)<select data-bp-layout="title">${[['show', 'complet'], ['compact', 'compact (une ligne)']].map(([k, l]) => `<option value="${k}" ${p.layout.title === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label></div></section>
+                        <label>Barre d’outils<select data-bp-layout="toolbar">${[['top', 'en haut'], ['left', 'à gauche (en colonne)'], ['right', 'à droite (en colonne)'], ['bottom', 'en bas']].map(([k, l]) => `<option value="${k}" ${p.layout.toolbar === k ? 'selected' : ''}>${esc(i18n(l))}</option>`).join('')}</select></label>
+                        <label>Réglages (texte, forme, trait…)<select data-bp-layout="inspector">${[['right', 'à droite'], ['left', 'à gauche'], ['hidden', 'cachés (plus de place)']].map(([k, l]) => `<option value="${k}" ${p.layout.inspector === k ? 'selected' : ''}>${esc(i18n(l))}</option>`).join('')}</select></label>
+                        <label>Taille des boutons<select data-bp-layout="size">${[['s', 'petits'], ['m', 'normaux'], ['l', 'grands']].map(([k, l]) => `<option value="${k}" ${p.layout.size === k ? 'selected' : ''}>${esc(i18n(l))}</option>`).join('')}</select></label>
+                        <label>En-tête (titre, propriétaire, état)<select data-bp-layout="title">${[['show', 'complet'], ['compact', 'compact (une ligne)']].map(([k, l]) => `<option value="${k}" ${p.layout.title === k ? 'selected' : ''}>${esc(i18n(l))}</option>`).join('')}</select></label></div></section>
                     <div class="h-bp-cols"><section class="h-bp-sec"><h4>Outils (barre du haut)</h4>${orderList('tools', TOOLS, p.toolsOrder, p.toolsHidden)}</section>
                     <section class="h-bp-sec"><h4>Boutons de l’en-tête</h4><p class="muted"><small>↶ ↷ restent à côté du nom ; ⚙️ Personnaliser, ⤓ Exporter, ⛶ et × restent à droite, dans cet ordre (comme dans tous les éditeurs) : ici, tu peux seulement les montrer ou les cacher.</small></p>${orderList('header', HEADER, p.headerOrder, p.headerHidden)}</section>
                     <section class="h-bp-sec"><h4>Réglages à droite (texte, forme, trait…)</h4>${orderList('inspector', INSPECTOR, p.inspectorOrder, p.inspectorHidden)}</section>
@@ -577,22 +617,22 @@
             p = clean(p);
         };
         const putSet = (name, pr, at = -1) => { const l = sets(), i = l.findIndex(x => x.name === name), it = {name, prefs: pr, saved_at: new Date().toISOString()}; if (i >= 0) l[i] = it; else if (at >= 0) l.splice(at, 0, it); else l.push(it); return saveSets(l); };
-        const frame = window.LCNDA_UI.presetsFrame({id: 'tableaux', what: 'tous les réglages des tableaux (couleurs, pointes, formes, polices, tailles, tableur, pinceaux, menus)', quietApply: true,
+        const frame = window.LCNDA_UI.presetsFrame({id: 'tableaux', what: i18n('tous les réglages des tableaux (couleurs, pointes, formes, polices, tailles, tableur, pinceaux, menus)'), quietApply: true,
             list: () => sets().map(x => ({name: x.name, date: x.saved_at || ''})),
-            apply: async i => { const it = sets()[i]; if (!await A().confirmBox(`Reprendre les réglages « ${it.name} » ? Les réglages actuels sont remplacés (enregistre-les d’abord sous un nom si tu veux les garder).`, {title: 'Reprendre ces réglages', okLabel: 'Reprendre les réglages'})) return false; p = clean(it.prefs); savePrefs(p); draw(); toast(`Réglages « ${it.name} » appliqués.`); return false; },
-            save: name => { collect(); if (!putSet(name, clean(p))) return false; savePrefs(p); toast(`Réglages enregistrés sous « ${name} » (et utilisés dès maintenant).`); },
+            apply: async i => { const it = sets()[i]; if (!await A().confirmBox(i18n('Reprendre les réglages « {name} » ? Les réglages actuels sont remplacés (enregistre-les d’abord sous un nom si tu veux les garder).', {name: it.name}), {title: i18n('Reprendre ces réglages'), okLabel: i18n('Reprendre les réglages')})) return false; p = clean(it.prefs); savePrefs(p); draw(); toast(i18n('Réglages « {name} » appliqués.', {name: it.name})); return false; },
+            save: name => { collect(); if (!putSet(name, clean(p))) return false; savePrefs(p); toast(i18n('Réglages enregistrés sous « {name} » (et utilisés dès maintenant).', {name})); },
             replace: i => { collect(); if (!putSet(sets()[i].name, clean(p))) return false; savePrefs(p); },
             rename: (i, name) => { const l = sets(); l[i].name = name; return saveSets(l); },
-            duplicate: i => { const l = sets(), it = l[i], nm = window.LCNDA_UI.freeName(it.name, l.map(x => x.name)); if (putSet(nm, JSON.parse(JSON.stringify(it.prefs)), i + 1)) toast(`Copie « ${nm} » créée.`); },
+            duplicate: i => { const l = sets(), it = l[i], nm = window.LCNDA_UI.freeName(it.name, l.map(x => x.name)); if (putSet(nm, JSON.parse(JSON.stringify(it.prefs)), i + 1)) toast(i18n('Copie « {name} » créée.', {name: nm})); },
             exportOne: i => { const it = sets()[i]; A().exportSettingFile?.('tableaux', it.name, {prefs: clean(it.prefs)}); return false; },
             // H7 : supprimés tout de suite, « ↶ Annuler » les remet (gardés sur cet ordinateur)
-            remove: i => { const l = sets(), it = l[i], tk = token; A().undoLocalChange(`Réglages « ${it.name} » supprimés`, [SETS_KEY], () => { l.splice(i, 1); saveSets(l); }, () => { if (tk === st.workspaceToken && frame.isConnected) frame.refresh(); }); },
+            remove: i => { const l = sets(), it = l[i], tk = token; A().undoLocalChange(i18n('Réglages « {name} » supprimés', {name: it.name}), [SETS_KEY], () => { l.splice(i, 1); saveSets(l); }, () => { if (tk === st.workspaceToken && frame.isConnected) frame.refresh(); }); },
             importOne: async () => {
                 const got = await A().importSettingFile?.('tableaux', {names: sets().map(x => x.name), check: d => d.prefs && typeof d.prefs === 'object' && !Array.isArray(d.prefs)});
                 if (!got) return false;
                 const l = sets(); l.push({name: got.nom, prefs: clean(got.donnees.prefs), saved_at: new Date().toISOString()});
                 if (!saveSets(l)) return false;
-                toast(`Réglages « ${got.nom} » importés : « Appliquer » pour t’en servir.`); }});
+                toast(i18n('Réglages « {name} » importés : « Appliquer » pour t’en servir.', {name: got.nom})); }});
         draw();
         window.LCNDA_UI?.autoSave?.(ws, {save: () => { if (token !== st.workspaceToken || !ws.querySelector('.h-bp')) return; collect(); savePrefs(p); }, redraw: () => { cache = null; p = JSON.parse(JSON.stringify(prefs())); draw(); }});
         ws.addEventListener('click', async e => {
@@ -611,33 +651,33 @@
                 return;
             }
             if (e.target.closest('[data-bp-palnew], [data-bp-paldup]')) { collect(); const dup = !!e.target.closest('[data-bp-paldup]'); const n = {id: 'p' + Date.now().toString(36), name: dup ? pal().name + ' (copie)' : 'Ma palette', colors: JSON.parse(JSON.stringify(dup ? pal().colors : PALETTE0))}; p.palettes.push(n); p.palette = n.id; draw(); return; }
-            if (e.target.closest('[data-bp-paldel]')) { draftUndo(`Palette « ${pal().name} » retirée`); p.palettes = p.palettes.filter(x => x.id !== p.palette); p.palette = p.palettes[0].id; draw(); return; }
+            if (e.target.closest('[data-bp-paldel]')) { draftUndo(i18n('Palette « {name} » retirée', {name: pal().name})); p.palettes = p.palettes.filter(x => x.id !== p.palette); p.palette = p.palettes[0].id; draw(); return; }
             // formes
             const sh = e.target.closest('.h-bp-shape');
             if (sh && e.target.closest('[data-bp-shtoggle]')) { collect(); const k = sh.dataset.k; p.shapesHidden = p.shapesHidden.includes(k) ? p.shapesHidden.filter(x => x !== k) : [...p.shapesHidden, k]; draw(); return; }
-            if (e.target.closest('[data-bp-hnew]')) { collect(); headMaker(p, h => { p.customHeads.push(h); p.heads.push(h.k); draw(); toast(`Pointe « ${h.n} » créée : elle est dans la liste.`); }); return; }
-            const hd = e.target.closest('[data-bp-hdel]'); if (hd) { collect(); draftUndo('Pointe retirée (les traits qui l’utilisent prennent un triangle)'); p.customHeads = p.customHeads.filter(h => h.k !== hd.dataset.bpHdel); p.heads = p.heads.filter(h => h !== hd.dataset.bpHdel); if (p.headStart === hd.dataset.bpHdel) p.headStart = 'none'; if (p.headEnd === hd.dataset.bpHdel) p.headEnd = 'triangle'; draw(); return; }
-            if (sh && e.target.closest('[data-bp-shquick]')) { collect(); const nm = shapeByKey(sh.dataset.k, p)?.n || 'La forme'; if (p.quickShapes.includes(sh.dataset.k)) { toast(`⚡ « ${nm} » est déjà dans l’accès rapide (en haut de cet onglet ; ✕ sur elle pour l’en retirer).`); return; } p.quickShapes.push(sh.dataset.k); draw(); toast(`⚡ « ${nm} » ajoutée à l’accès rapide : elle est en haut de cet onglet, et dans la barre de l’outil Formes. N’oublie pas « Enregistrer ».`); return; }
+            if (e.target.closest('[data-bp-hnew]')) { collect(); headMaker(p, h => { p.customHeads.push(h); p.heads.push(h.k); draw(); toast(i18n('Pointe « {name} » créée : elle est dans la liste.', {name: h.n})); }); return; }
+            const hd = e.target.closest('[data-bp-hdel]'); if (hd) { collect(); draftUndo(i18n('Pointe retirée (les traits qui l’utilisent prennent un triangle)')); p.customHeads = p.customHeads.filter(h => h.k !== hd.dataset.bpHdel); p.heads = p.heads.filter(h => h !== hd.dataset.bpHdel); if (p.headStart === hd.dataset.bpHdel) p.headStart = 'none'; if (p.headEnd === hd.dataset.bpHdel) p.headEnd = 'triangle'; draw(); return; }
+            if (sh && e.target.closest('[data-bp-shquick]')) { collect(); const nm = shapeByKey(sh.dataset.k, p)?.n || i18n('La forme'); if (p.quickShapes.includes(sh.dataset.k)) { toast(i18n('⚡ « {name} » est déjà dans l’accès rapide (en haut de cet onglet ; ✕ sur elle pour l’en retirer).', {name: nm})); return; } p.quickShapes.push(sh.dataset.k); draw(); toast(i18n('⚡ « {name} » ajoutée à l’accès rapide : elle est en haut de cet onglet, et dans la barre de l’outil Formes. N’oublie pas « Enregistrer ».', {name: nm})); return; }
             if (sh && e.target.closest('[data-bp-qleft], [data-bp-qright]')) { const sib = e.target.closest('[data-bp-qleft]') ? sh.previousElementSibling : sh.nextElementSibling; if (sib) sh.parentNode.insertBefore(...(e.target.closest('[data-bp-qleft]') ? [sh, sib] : [sib, sh])); return; }
             const vecDone = k => { const made = prefs().customShapes.find(x => x.k === k); if (made) { const i = p.customShapes.findIndex(x => x.k === k); if (i >= 0) p.customShapes[i] = made; else p.customShapes.push(made); if (!p.quickShapes.includes(k)) p.quickShapes.push(k); savePrefs(p); } draw(); };
             if (e.target.closest('[data-bp-shvecnew]')) { collect(); ext.openVectorEditor?.({onShape: vecDone}); return; }
-            if (e.target.closest('[data-bp-shlib]')) { collect(); const bt = e.target.closest('[data-bp-shlib]'); bt.disabled = true; bt.textContent = 'Chargement des formes…'; ext.boardKit.loadLibrary().then(() => draw()).catch(() => { bt.disabled = false; bt.textContent = '📚 Réessayer de charger les formes'; toast('Les formes n’ont pas pu être chargées. Réessaie.', 'error'); }); return; }
+            if (e.target.closest('[data-bp-shlib]')) { collect(); const bt = e.target.closest('[data-bp-shlib]'); bt.disabled = true; bt.textContent = i18n('Chargement des formes…'); ext.boardKit.loadLibrary().then(() => draw()).catch(() => { bt.disabled = false; bt.textContent = i18n('📚 Réessayer de charger les formes'); toast(i18n('Les formes n’ont pas pu être chargées. Réessaie.'), 'error'); }); return; }
             if (sh && e.target.closest('[data-bp-shvec]')) { collect(); const s0 = shapeByKey(sh.dataset.k, p); if (s0) ext.openVectorEditor?.({shape: {...s0, d: s0.s && s0.s !== 100 ? s0.d : s0.d}, onShape: vecDone}); return; }
             if (sh && e.target.closest('[data-bp-shfrom]')) { collect(); openComposer({base: sh.dataset.k, onSave: k => { const made = prefs().customShapes.find(x => x.k === k); if (made) { p.customShapes.push(made); if (!p.quickShapes.includes(k)) p.quickShapes.push(k); savePrefs(p); } draw(); }}); return; }
             if (sh && e.target.closest('[data-bp-unquick]')) { collect(); p.quickShapes = p.quickShapes.filter(k => k !== sh.dataset.k); draw(); return; }
-            if (sh && e.target.closest('[data-bp-shdel]')) { collect(); draftUndo('Forme retirée (les tableaux qui l’utilisent la gardent)'); p.customShapes = p.customShapes.filter(s => s.k !== sh.dataset.k); p.quickShapes = p.quickShapes.filter(k => k !== sh.dataset.k); draw(); return; }
+            if (sh && e.target.closest('[data-bp-shdel]')) { collect(); draftUndo(i18n('Forme retirée (les tableaux qui l’utilisent la gardent)')); p.customShapes = p.customShapes.filter(s => s.k !== sh.dataset.k); p.quickShapes = p.quickShapes.filter(k => k !== sh.dataset.k); draw(); return; }
             // polices
-            if (e.target.closest('[data-bp-flnew]')) { collect(); p.fontLists.push({name: 'Ma liste', fonts: []}); draw(); return; }
+            if (e.target.closest('[data-bp-flnew]')) { collect(); p.fontLists.push({name: i18n('Ma liste'), fonts: []}); draw(); return; }
             const fl = e.target.closest('[data-fl]');
-            if (fl && e.target.closest('[data-bp-fldel]')) { collect(); draftUndo('Liste de polices retirée'); p.fontLists.splice(Number(fl.dataset.fl), 1); draw(); return; }
+            if (fl && e.target.closest('[data-bp-fldel]')) { collect(); draftUndo(i18n('Liste de polices retirée')); p.fontLists.splice(Number(fl.dataset.fl), 1); draw(); return; }
             if (fl && e.target.closest('[data-bp-fdel]')) { collect(); p.fontLists[Number(fl.dataset.fl)].fonts.splice(Number(e.target.closest('[data-j]').dataset.j), 1); draw(); return; }
             if (fl && e.target.closest('[data-bp-fpick]')) {
-                const f = await window.LCNDA_UI?.openFontPicker?.({title: 'Ajouter une police à la liste'}); if (!f) return;
-                collect(); const l = p.fontLists[Number(fl.dataset.fl)]; if (!l.fonts.includes(f)) l.fonts.push(f); draw(); toast(`« ${f} » ajoutée à « ${l.name} ».`); return;
+                const f = await window.LCNDA_UI?.openFontPicker?.({title: i18n('Ajouter une police à la liste')}); if (!f) return;
+                collect(); const l = p.fontLists[Number(fl.dataset.fl)]; if (!l.fonts.includes(f)) l.fonts.push(f); draw(); toast(i18n('« {font} » ajoutée à « {list} ».', {font: f, list: l.name})); return;
             }
             if (e.target.closest('[data-bp-local]')) { // la liste de polices commune : la police choisie va dans la première liste
-                const f = await window.LCNDA_UI?.openFontPicker?.({title: 'Toutes les polices'}); if (!f) return;
-                collect(); if (!p.fontLists.length) p.fontLists.push({name: 'Ma liste', fonts: []}); if (!p.fontLists[0].fonts.includes(f)) p.fontLists[0].fonts.push(f); draw(); toast(`« ${f} » ajoutée à « ${p.fontLists[0].name} ».`);
+                const f = await window.LCNDA_UI?.openFontPicker?.({title: i18n('Toutes les polices')}); if (!f) return;
+                collect(); if (!p.fontLists.length) p.fontLists.push({name: i18n('Ma liste'), fonts: []}); if (!p.fontLists[0].fonts.includes(f)) p.fontLists[0].fonts.push(f); draw(); toast(i18n('« {font} » ajoutée à « {list} ».', {font: f, list: p.fontLists[0].name}));
                 return;
             }
             // pinceaux

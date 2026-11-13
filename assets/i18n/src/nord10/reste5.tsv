@@ -1,0 +1,134 @@
+fr ¦ sq ¦ mt
+# ═════ zone « reste5 » : albanais (sq), maltais (mt) ═════
+Les traits, les ombres et les coins des fiches des personnes et des animaux : blocs, boutons, champs. Le reste de l’app ne change pas ; les couleurs et la police restent celles de l’Apparence. ¦ Vijat, hijet dhe qoshet e kartelave të personave dhe kafshëve: blloqe, butona, fusha. Pjesa tjetër e aplikacionit nuk ndryshon; ngjyrat dhe shkronjat mbeten ato të Pamjes. ¦ Il-linji, id-dellijiet u l-kantunieri tal-iskedi tal-persuni u tal-annimali: blokki, buttuni, oqsma. Il-bqija tal-app ma jinbidilx; il-kuluri u l-font jibqgħu dawk tad-Dehra.
+L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. ¦ Hapësira brenda dhe midis blloqeve, lartësia e rreshtave të listës, mbushja e butonave. ¦ L-ispazju ġewwa u bejn il-blokki, l-għoli tar-ringieli tal-lista, il-marġni tal-buttuni.
+Les petits dessins des boutons, des barres d’outils et des rubriques. ¦ Vizatimet e vogla të butonave, shiritave të veglave dhe rubrikave. ¦ L-istampi żgħar tal-buttuni, tal-vireg tal-għodod u tat-taqsimiet.
+Le haut de la fiche : portrait, nom, dates, pastilles et boutons. ¦ Pjesa e sipërme e kartelës: portreti, emri, datat, shenjat dhe butonat. ¦ In-naħa ta’ fuq tal-iskeda: ritratt, isem, dati, badges u buttuni.
+Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…) ; le bouton principal reste toujours plein, à la couleur principale de l’Apparence. ¦ Butonat dytësorë (Anulo, Ndrysho, ＋ Shto…); butoni kryesor mbetet gjithmonë i mbushur, me ngjyrën kryesore të Pamjes. ¦ Il-buttuni sekondarji (Ikkanċella, Editja, ＋ Żid…); il-buttuna prinċipali tibqa’ dejjem mimlija, bil-kulur prinċipali tad-Dehra.
+Les fenêtres qui s’ouvrent, les menus, les messages en bas à gauche, les boutons au survol. L’aperçu tourne en boucle. ¦ Dritaret që hapen, menytë, mesazhet poshtë majtas, butonat kur kalon miu. Parapamja luhet në lak. ¦ It-twieqi li jinfetħu, il-menus, il-messaġġi isfel fuq ix-xellug, il-buttuni meta tgħaddi l-maws. Il-preview jindaqq f’ċiklu.
+Les listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. ¦ Listat (Listat, Personat, Kërkime…), kolona e personave dhe tabelat. ¦ Il-listi (Listi, Persuni, Riċerka…), il-kolonna tal-persuni u t-tabelli.
+{label} (nombre) ¦ {label} (numër) ¦ {label} (numru)
+Pour les listes, les tableaux et le menu de choix. Plus haut = plus facile à viser ; plus bas = plus de lignes visibles. ¦ Për listat, tabelat dhe menynë e zgjedhjes. Më e lartë = më e lehtë për t’u shënjestruar; më e ulët = më shumë rreshta të dukshëm. ¦ Għal-listi, it-tabelli u l-menu tal-għażla. Ogħla = aktar faċli timmira; iktar baxx = aktar ringieli jidhru.
+Le haut de la fiche. Les traits, les ombres et les coins de la fiche se règlent juste en dessous ¦ Pjesa e sipërme e kartelës. Vijat, hijet dhe qoshet e kartelës rregullohen pak më poshtë ¦ In-naħa ta’ fuq tal-iskeda. Il-linji, id-dellijiet u l-kantunieri tal-iskeda jiġu rranġati eżatt taħt
+Les traits, les ombres et les coins des fiches (personnes et animaux) seulement : le reste de l’app ne change pas. La colonne de gauche a les siens (Menus, colonne et listes → Colonne) ¦ Vetëm vijat, hijet dhe qoshet e kartelave (persona dhe kafshë): pjesa tjetër e aplikacionit nuk ndryshon. Kolona e majtë ka të vetat (Menytë, kolona dhe listat → Kolona) ¦ Il-linji, id-dellijiet u l-kantunieri tal-iskedi biss (persuni u annimali): il-bqija tal-app ma jinbidilx. Il-kolonna tax-xellug għandha tagħha (Menus, kolonna u listi → Kolonna)
+L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. Une colonne de gauche réglée « Compacte » (onglet Colonne) garde sa propre taille : les deux ne s’additionnent pas ¦ Hapësira brenda dhe midis blloqeve, lartësia e rreshtave të listës, mbushja e butonave. Një kolonë e majtë e vendosur «Kompakte» (skeda Kolona) ruan madhësinë e vet: të dyja nuk mblidhen ¦ L-ispazju ġewwa u bejn il-blokki, l-għoli tar-ringieli tal-lista, il-marġni tal-buttuni. Kolonna tax-xellug issettjata “Kompatta” (tab Kolonna) iżżomm id-daqs tagħha: it-tnejn ma jingħaddux flimkien
+Les petits dessins des boutons, des barres d’outils et des rubriques. Les traits et les ombres suivent ¦ Vizatimet e vogla të butonave, shiritave të veglave dhe rubrikave. Vijat dhe hijet ndjekin ¦ L-istampi żgħar tal-buttuni, tal-vireg tal-għodod u tat-taqsimiet. Il-linji u d-dellijiet isegwu
+Les lignes des listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. Les traits et les ombres suivent ¦ Rreshtat e listave (Listat, Personat, Kërkime…), kolona e personave dhe tabelat. Vijat dhe hijet ndjekin ¦ Ir-ringieli tal-listi (Listi, Persuni, Riċerka…), il-kolonna tal-persuni u t-tabelli. Il-linji u d-dellijiet isegwu
+Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…). Les traits et les ombres suivent ¦ Butonat dytësorë (Anulo, Ndrysho, ＋ Shto…). Vijat dhe hijet ndjekin ¦ Il-buttuni sekondarji (Ikkanċella, Editja, ＋ Żid…). Il-linji u d-dellijiet isegwu
+Comment les fenêtres, les menus et les messages apparaissent. L’aperçu tourne en boucle ¦ Si shfaqen dritaret, menytë dhe mesazhet. Parapamja luhet në lak ¦ Kif jidhru t-twieqi, il-menus u l-messaġġi. Il-preview jindaqq f’ċiklu
+{group} : {choice} ¦ {group}: {choice} ¦ {group}: {choice}
+Rien ne bouge : chaque écran garde le dessin que tu connais. ¦ Asgjë nuk lëviz: çdo ekran ruan vizatimin që njeh. ¦ Xejn ma jiċċaqlaq: kull skrin iżomm id-dehra li taf.
+7 dessins différents ; tes couleurs homme / femme et ta forme d’avatar ne s’y appliquent pas. ¦ 7 vizatime të ndryshme; ngjyrat e tua burrë / grua dhe forma e avatarit nuk zbatohen tek to. ¦ 7 dehriet differenti; il-kuluri tiegħek raġel / mara u l-forma tal-avatar ma japplikawx għalihom.
+Un seul dessin partout, à la couleur du genre : homme, femme, animal se voient d’un coup d’œil. ¦ Një vizatim i vetëm kudo, me ngjyrën e gjinisë: burri, gruaja, kafsha dallohen me një shikim. ¦ Dehra waħda kullimkien, bil-kulur tas-sess: raġel, mara, annimal tagħrafhom b’daqqa t’għajn.
+Léger dans les listes serrées et le menu de choix (c’est déjà le modèle validé du menu). ¦ I lehtë në listat e ngjeshura dhe në menynë e zgjedhjes (është tashmë modeli i miratuar i menysë). ¦ Ħafif fil-listi dojoq u fil-menu tal-għażla (diġà huwa l-mudell approvat tal-menu).
+Le style « archive » de ta fiche : bord noir, photo en noir et blanc, comme une photo d’identité collée. ¦ Stili «arkiv» i kartelës sate: buzë e zezë, foto bardh e zi, si një foto identiteti e ngjitur. ¦ L-istil “arkivju” tal-iskeda tiegħek: tarf iswed, ritratt iswed u abjad, bħal ritratt tal-identità mwaħħal.
+Nouveau nom de l’onglet {tab} ¦ Emër i ri i skedës {tab} ¦ Isem ġdid għat-tab {tab}
+Émoji de l’onglet {tab} ¦ Emoji e skedës {tab} ¦ Emoji tat-tab {tab}
+La personne n°1 (le de cujus) ; son père a le n°2, sa mère le n°3, et ainsi de suite : le père d’un numéro N a toujours 2N, la mère 2N+1. ¦ Personi nr. 1 (de cujus); babai i tij ka nr. 2, nëna nr. 3, e kështu me radhë: babai i numrit N ka gjithmonë 2N, nëna 2N+1. ¦ Il-persuna nru 1 (id-de cujus); missierha għandu n-nru 2, ommha n-nru 3, u hekk ’il quddiem: il-missier tan-numru N dejjem għandu 2N, l-omm 2N+1.
+Pour les descendants : la personne n°1, ses enfants 1.1, 1.2, 1.3…, les enfants de 1.2 sont 1.2.1, 1.2.2… Chaque point = une génération de plus. ¦ Për pasardhësit: personi nr. 1, fëmijët e tij 1.1, 1.2, 1.3…, fëmijët e 1.2 janë 1.2.1, 1.2.2… Çdo pikë = një brez më shumë. ¦ Għad-dixxendenti: il-persuna nru 1, uliedha 1.1, 1.2, 1.3…, l-ulied ta’ 1.2 huma 1.2.1, 1.2.2… Kull punt = ġenerazzjoni oħra.
+Un thème règle les couleurs de toute l’app : la couleur principale, le fond de la page, des panneaux, des cartes et de leurs en-têtes, le texte, et les traits qui entourent (couleur et épaisseur). Crée le tien à partir d’un thème existant : il s’ajoute à la liste « Preset », dans « ✎ Mes thèmes ». ¦ Një temë rregullon ngjyrat e gjithë aplikacionit: ngjyrën kryesore, sfondin e faqes, të paneleve, të kartave dhe të kokave të tyre, tekstin, dhe vijat rrethuese (ngjyra dhe trashësia). Krijo tënden nga një temë ekzistuese: shtohet në listën «Preset», te «✎ Temat e mia». ¦ Tema tirranġa l-kuluri tal-app kollha: il-kulur prinċipali, l-isfond tal-paġna, tal-pannelli, tal-kards u tal-intestaturi tagħhom, it-test, u l-linji ta’ madwar (kulur u ħxuna). Oħloq tiegħek minn tema eżistenti: tiżdied mal-lista “Preset”, f’“✎ It-temi tiegħi”.
+La forme des petits carrés numérotés des blocs et des initiales des fiches. Ajoute tes formes (bibliothèque des tableaux, polygone dessiné, SVG importé), range la liste du menu « Forme des avatars », cache celles qui ne te servent pas. ¦ Forma e katrorëve të vegjël me numër të blloqeve dhe e inicialeve të kartelave. Shto format e tua (biblioteka e tabelave, shumëkëndësh i vizatuar, SVG e importuar), rendit listën e menysë «Forma e avatarëve», fshih ato që nuk të duhen. ¦ Il-forma tal-kwadri żgħar innumerati tal-blokki u tal-inizjali tal-iskedi. Żid il-forom tiegħek (librerija tat-tabelli, poligonu mpinġi, SVG importat), irranġa l-lista tal-menu “Forma tal-avatars”, aħbi dawk li m’għandekx bżonn.
+Le grand cadre en haut de chaque fiche : le nom, les badges (Sosa, À vérifier, Hors généalogie, Artiste) et la colonne de boutons carrés. Tu peux le masquer pour une fiche épurée (diaporama), ranger les boutons, les cacher, les mettre sur 2 colonnes. ¦ Korniza e madhe në krye të çdo kartele: emri, shenjat (Sosa, Për t’u kontrolluar, Jashtë gjenealogjisë, Artist) dhe kolona e butonave katrorë. Mund ta fshehësh për një kartelë të pastër (diapozitiva), të rendisësh butonat, t’i fshehësh, t’i vendosësh në 2 kolona. ¦ Il-qafas il-kbir fuq nett ta’ kull skeda: l-isem, il-badges (Sosa, Biex jiġi ċċekkjat, Barra l-ġenealoġija, Artist) u l-kolonna tal-buttuni kwadri. Tista’ taħbih għal skeda nadifa (slideshow), tirranġa l-buttuni, taħbihom, tqegħedhom f’2 kolonni.
+Les petits boutons carrés en haut à droite, à côté du nombre de personnes : écran en deux, nouvelle fenêtre, mode consultation, mode simple, calculette, Mes généalogies. Décoche pour cacher, glisse ⠿ pour changer l’ordre. ¦ Butonat e vegjël katrorë lart djathtas, pranë numrit të personave: ekran i ndarë, dritare e re, mënyra e leximit, mënyra e thjeshtë, makina llogaritëse, Gjenealogjitë e mia. Hiq shenjën për ta fshehur, tërhiq ⠿ për të ndryshuar rendin. ¦ Il-buttuni kwadri żgħar fuq il-lemin, ħdejn in-numru ta’ persuni: skrin maqsum, tieqa ġdida, modalità ta’ qari, modalità sempliċi, kalkulatriċi, Il-ġenealoġiji tiegħi. Neħħi l-marka biex taħbi, kaxkar ⠿ biex tbiddel l-ordni.
+Les boutons de la barre du haut, à côté du nombre de personnes. Glisse ⠿ (ou Alt + ↑ / ↓) pour changer leur ordre ; décoche un bouton pour le cacher. Plus bas, « 👤 Nouvelle personne » et un raccourci vers chaque outil de modification (tableur, montage, retouche…) et chaque partie d’Enquêtes : coche ceux que tu veux en haut, et choisis ce que le clic ouvre (la liste des projets ou un nouveau projet). C’est gardé tout de suite. ¦ Butonat e shiritit të sipërm, pranë numrit të personave. Tërhiq ⠿ (ose Alt + ↑ / ↓) për të ndryshuar rendin e tyre; hiq shenjën e një butoni për ta fshehur. Më poshtë, «👤 Person i ri» dhe një shkurtore për çdo mjet ndryshimi (fletë llogaritëse, montazh, retushim…) dhe çdo pjesë të Hetimeve: shëno ato që do lart, dhe zgjidh çfarë hap klikimi (listën e projekteve ose një projekt të ri). Ruhet menjëherë. ¦ Il-buttuni tal-istrixxa ta’ fuq, ħdejn in-numru ta’ persuni. Kaxkar ⠿ (jew Alt + ↑ / ↓) biex tbiddel l-ordni tagħhom; neħħi l-marka minn buttuna biex taħbiha. Aktar ’l isfel, “👤 Persuna ġdida” u shortcut għal kull għodda tal-editjar (folja elettronika, immuntar, irtokk…) u għal kull parti tal-Investigazzjonijiet: immarka dawk li trid fuq, u agħżel x’jiftaħ il-klikk (il-lista tal-proġetti jew proġett ġdid). Jinżamm minnufih.
+Les blocs d’une fiche se rangent en sections nommées (Identité, Famille…). Ici, où vont leurs titres et leurs options ; la forme (traits, coins, ombres) se règle plus bas, avec l’en-tête (« Style des fiches »). ¦ Blloqet e një kartele renditen në seksione me emër (Identiteti, Familja…). Këtu, ku shkojnë titujt dhe opsionet e tyre; forma (vija, qoshe, hije) rregullohet më poshtë, me kokën («Stili i kartelave»). ¦ Il-blokki ta’ skeda jitqassmu f’taqsimiet bl-isem (Identità, Familja…). Hawn, fejn imorru t-titli u l-għażliet tagħhom; il-forma (linji, kantunieri, dellijiet) tiġi rranġata aktar ’l isfel, mal-intestatura (“Stil tal-iskedi”).
+Glisse les sections et les blocs pour changer leur ordre. Décoche une section ou un bloc pour le masquer. ¦ Tërhiq seksionet dhe blloqet për të ndryshuar rendin e tyre. Hiq shenjën e një seksioni ose blloku për ta fshehur. ¦ Kaxkar it-taqsimiet u l-blokki biex tbiddel l-ordni tagħhom. Neħħi l-marka minn taqsima jew blokk biex taħbih.
+La façon dont les listes à ranger de cette page sont dessinées. Ne change que cet écran de réglage (et la fenêtre « ⚙️ Ranger les sections » d’une fiche) : ni les fiches, ni les données. ¦ Si vizatohen listat për t’u renditur të kësaj faqeje. Ndryshon vetëm këtë ekran cilësimesh (dhe dritaren «⚙️ Rendit seksionet» të një kartele): as kartelat, as të dhënat. ¦ Kif jitpinġew il-listi li jirranġaw f’din il-paġna. Ibiddel biss dan l-iskrin tal-issettjar (u t-tieqa “⚙️ Irranġa t-taqsimiet” ta’ skeda): la l-iskedi, la d-data.
+Les blocs se rangent en sections nommées (Identité, Famille…). Ici, la façon de dessiner leurs titres et leurs options. Chaque changement est gardé tout de suite. ¦ Blloqet renditen në seksione me emër (Identiteti, Familja…). Këtu, mënyra e vizatimit të titujve dhe opsioneve të tyre. Çdo ndryshim ruhet menjëherë. ¦ Il-blokki jitqassmu f’taqsimiet bl-isem (Identità, Familja…). Hawn, kif jitpinġew it-titli u l-għażliet tagħhom. Kull bidla tinżamm minnufih.
+Retenu d’une fiche à l’autre. ¦ Mbahet mend nga një kartelë te tjetra. ¦ Jibqa’ mfakkar minn skeda għal oħra.
+Sans trait ni cadre : juste le nom, en grand, comme un chapitre. ¦ Pa vijë e pa kornizë: vetëm emri, i madh, si një kapitull. ¦ Mingħajr linja jew qafas: l-isem biss, kbir, bħal kapitlu.
+Un cadre autour de la section, le titre dans une étiquette sur le bord. ¦ Një kornizë rreth seksionit, titulli në një etiketë në buzë. ¦ Qafas madwar it-taqsima, it-titlu f’tikketta fit-tarf.
+Un petit titre en capitales posé sur un trait. Sobre, prend peu de place. ¦ Një titull i vogël me shkronja të mëdha mbi një vijë. I thjeshtë, zë pak vend. ¦ Titlu żgħir b’ittri kbar fuq linja. Sempliċi, jieħu ftit spazju.
+Une bande de la couleur principale (celle de l’Apparence), titre en blanc. ¦ Një shirit me ngjyrën kryesore (atë të Pamjes), titulli me të bardhë. ¦ Strixxa bil-kulur prinċipali (dak tad-Dehra), titlu bl-abjad.
+« Nouveau » : sections en bandes, ⠿ et 👁. ¦ «E re»: seksione në shirita, ⠿ dhe 👁. ¦ “Ġdid”: taqsimiet fi strixxi, ⠿ u 👁.
+Ce que tu fais avec l’app : ses onglets et son premier écran. Aucune fiche n’est supprimée. ¦ Çfarë bën me aplikacionin: skedat e tij dhe ekrani i parë. Asnjë kartelë nuk fshihet. ¦ X’tagħmel bl-app: it-tabs tagħha u l-ewwel skrin. L-ebda skeda ma titħassar.
+Changer d’usage change <b>seulement les onglets et le premier écran</b>. Aucune fiche n’est supprimée : les personnes restent là, même quand l’onglet est caché. On peut en allumer plusieurs : leurs onglets s’additionnent. ¦ Ndryshimi i përdorimit ndryshon <b>vetëm skedat dhe ekranin e parë</b>. Asnjë kartelë nuk fshihet: personat mbeten aty, edhe kur skeda është e fshehur. Mund të ndezësh disa: skedat e tyre mblidhen. ¦ Li tbiddel l-użu jbiddel <b>it-tabs u l-ewwel skrin biss</b>. L-ebda skeda ma titħassar: il-persuni jibqgħu hemm, anke meta t-tab ikun moħbi. Tista’ tixgħel diversi: it-tabs tagħhom jingħaddu flimkien.
+Personnes, arbre, actes. ¦ Persona, pemë, akte. ¦ Persuni, siġra, atti.
+« 🌳 Ma généalogie » seule ¦ Vetëm «🌳 Gjenealogjia ime» ¦ “🌳 Il-ġenealoġija tiegħi” biss
+Trésors de famille. ¦ Thesaret e familjes. ¦ Teżori tal-familja.
+Catalogue raisonné. ¦ Katalog i arsyetuar. ¦ Katalgu raġunat.
+Maisons et lieux. ¦ Shtëpi dhe vende. ¦ Djar u postijiet.
+L’entreprise, 👥 Membres. ¦ Ndërmarrja, 👥 Anëtarët. ¦ Il-kumpanija, 👥 Membri.
+Animaux, portées, pedigree. ¦ Kafshë, pjellë, pedigre. ¦ Annimali, boton, pedigree.
+Suivi des animaux. ¦ Ndjekja e kafshëve. ¦ Segwitu tal-annimali.
+Documents, ✨ Trésors. ¦ Dokumente, ✨ Thesare. ¦ Dokumenti, ✨ Teżori.
+Les onglets se rangent, se renomment et se cachent un par un dans « Ordre et noms du menu principal ». ¦ Skedat renditen, riemërohen dhe fshihen një nga një te «Rendi dhe emrat e menysë kryesore». ¦ It-tabs jirranġaw, jingħataw isem ġdid u jinħbew wieħed wieħed f’“Ordni u ismijiet tal-menu prinċipali”.
+Au féminin ¦ Në femërore ¦ Fil-femminil
+Au masculin ¦ Në mashkullore ¦ Fil-maskil
+Avec un point médian ¦ Me pikë në mes ¦ B’punt fin-nofs
+Entre parenthèses ¦ Në kllapa ¦ Bejn parentesi
+Sexe « Autre / non binaire » ¦ Gjinia «Tjetër / jobinare» ¦ Sess “Ieħor / mhux binarju”
+Sexe « Non renseigné » (et les animaux dont on ne connaît pas le sexe) ¦ Gjinia «E pa plotësuar» (dhe kafshët gjinia e të cilave nuk dihet) ¦ Sess “Mhux mogħti” (u annimali li s-sess tagħhom mhux magħruf)
+Sur les fiches d’hommes et de femmes, les mots s’accordent tout seuls : « né le » ou « née le », « décédé » ou « décédée ». Choisis ici comment les écrire pour les autres fiches. Chaque choix est gardé tout de suite. ¦ Në kartelat e burrave dhe grave, fjalët përshtaten vetë (në frëngjisht: «né le» ose «née le», «décédé» ose «décédée»). Zgjidh këtu si t’i shkruash për kartelat e tjera. Çdo zgjedhje ruhet menjëherë. ¦ Fuq l-iskedi tal-irġiel u n-nisa, il-kliem jaqbel waħdu (bil-Franċiż: “né le” jew “née le”, “décédé” jew “décédée”). Agħżel hawn kif tiktibhom għall-iskedi l-oħra. Kull għażla tinżamm minnufih.
+comme on dit « la personne » : « née », « décédée » ¦ si në «la personne» (femërore): «née», «décédée» ¦ bħal f’“la personne” (femminil): “née”, “décédée”
+rien ne change : « né(e) », sauf « Vivante », « Décédée » sur la fiche ¦ asgjë nuk ndryshon: «né(e)», përveç «Vivante», «Décédée» në kartelë ¦ xejn ma jinbidel: “né(e)”, ħlief “Vivante”, “Décédée” fuq l-iskeda
+une tournure neutre quand il y en a une (« Naissance le … », « Décès »), sinon « né(e) » ¦ një shprehje asnjanëse kur ka («Naissance le …», «Décès»), përndryshe «né(e)» ¦ espressjoni newtrali meta jkun hemm (“Naissance le …”, “Décès”), inkella “né(e)”
+« né », « décédé » ¦ «né», «décédé» (mashkullore) ¦ “né”, “décédé” (maskil)
+« né(e) », « décédé(e) », partout ¦ «né(e)», «décédé(e)», kudo ¦ “né(e)”, “décédé(e)”, kullimkien
+« né·e », « décédé·e » ¦ «né·e», «décédé·e» (pikë në mes) ¦ “né·e”, “décédé·e” (punt fin-nofs)
+autre / non binaire ¦ tjetër / jobinare ¦ ieħor / mhux binarju
+sexe non renseigné ¦ gjini e pa plotësuar ¦ sess mhux mogħti
+Arbre en filigrane ¦ Pemë në filigran ¦ Siġra fil-filigrana
+Bleu pâle (comme avant) ¦ Blu e zbehtë (si më parë) ¦ Blu ċar (bħal qabel)
+Gris neutre ¦ Gri neutrale ¦ Griż newtrali
+Les traits de mon thème (✎ Mes thèmes) ¦ Vijat e temës sime (✎ Temat e mia) ¦ Il-linji tat-tema tiegħi (✎ It-temi tiegħi)
+Les traits de mon thème : choisis d’abord un thème à toi (✎ Mes thèmes) ¦ Vijat e temës sime: zgjidh fillimisht një temë tënden (✎ Temat e mia) ¦ Il-linji tat-tema tiegħi: l-ewwel agħżel tema tiegħek (✎ It-temi tiegħi)
+Bleu pâle = comme avant · gris · la couleur principale de l’Apparence (elle suit si tu la changes) · sépia · la couleur des traits de ton thème (✎ Mes thèmes) · une couleur à toi. ¦ Blu e zbehtë = si më parë · gri · ngjyra kryesore e Pamjes (ndjek nëse e ndryshon) · sepia · ngjyra e vijave të temës sate (✎ Temat e mia) · një ngjyrë e jotja. ¦ Blu ċar = bħal qabel · griż · il-kulur prinċipali tad-Dehra (isegwi jekk tbiddlu) · sepja · il-kulur tal-linji tat-tema tiegħek (✎ It-temi tiegħi) · kulur tiegħek.
+Cahier ligné ¦ Fletore me vija ¦ Kopjakitba bil-linji
+Papier millimétré ¦ Letër milimetrike ¦ Karta millimetrata
+Papier vergé ¦ Letër me vija uji ¦ Karta vergata
+Ce qu’on voit derrière les blocs, sur toutes les pages. Le fond reste très pâle pour ne jamais gêner la lecture ; la couleur du papier vient du Preset (ou de ton thème). ¦ Çfarë shihet pas blloqeve, në të gjitha faqet. Sfondi mbetet shumë i zbehtë që të mos pengojë kurrë leximin; ngjyra e letrës vjen nga Preset-i (ose nga tema jote). ¦ Dak li jidher wara l-blokki, fil-paġni kollha. L-isfond jibqa’ ċar ħafna biex qatt ma jfixkel il-qari; il-kulur tal-karta ġej mill-Preset (jew mit-tema tiegħek).
+Choisir une photo ¦ Zgjidh një foto ¦ Agħżel ritratt
+Couleur du motif ¦ Ngjyra e motivit ¦ Kulur tal-motiv
+Couleur principale (suit l’Apparence) ¦ Ngjyra kryesore (ndjek Pamjen) ¦ Kulur prinċipali (isegwi d-Dehra)
+De « à peine visible » à « bien marqué ». Au départ : comme aujourd’hui. ¦ Nga «mezi e dukshme» te «shumë e theksuar». Në fillim: si sot. ¦ Minn “bilkemm tidher” sa “immarkata sew”. Fil-bidu: bħal-lum.
+Décoché : fond uni sur ces pages. La carte et les éditeurs plein écran gardent toujours le leur. ¦ Pa shenjë: sfond i njëtrajtshëm në këto faqe. Harta dhe redaktuesit në ekran të plotë ruajnë gjithmonë të tyren. ¦ Mhux immarkat: sfond uniformi f’dawn il-paġni. Il-mappa u l-edituri fuq skrin sħiħ dejjem iżommu tagħhom.
+Pas encore de photo : fond uni en attendant. ¦ Ende pa foto: sfond i njëtrajtshëm ndërkohë. ¦ Għad m’hemmx ritratt: sfond uniformi sadanittant.
+Pâlie par l’intensité et floutée, pour rester derrière sans gêner. Elle reste sur cet ordinateur (pas dans le défaut du site : là-bas, fond uni). ¦ E zbehur nga intensiteti dhe e turbullt, që të qëndrojë prapa pa penguar. Mbetet në këtë kompjuter (jo në parazgjedhjen e sajtit: atje, sfond i njëtrajtshëm). ¦ Imċajpar mill-intensità u ċċassat, biex jibqa’ wara mingħajr ma jfixkel. Jibqa’ fuq dan il-kompjuter (mhux fid-default tas-sit: hemmhekk, sfond uniformi).
+bords à peine teintés, vieille photo ¦ buzë mezi të ngjyrosura, foto e vjetër ¦ truf bilkemm ikkulurit, ritratt antik
+comme aujourd’hui ¦ si sot ¦ bħal-lum
+de petites branches, très pâles ¦ degë të vogla, shumë të zbehta ¦ friegħi żgħar, ċari ħafna
+du papier vers la couleur ¦ nga letra drejt ngjyrës ¦ mill-karta lejn il-kulur
+fin, trait plus fort tous les 5 ¦ e hollë, vijë më e fortë çdo 5 ¦ fin, linja aktar qawwija kull 5
+fines rayures des vieux papiers ¦ vija të holla të letrave të vjetra ¦ strixxi rqaq tal-karti antiki
+hexagones de la maison de famille ¦ gjashtëkëndësha të shtëpisë së familjes ¦ eżagoni tad-dar tal-familja
+lignes et double marge, comme l’état civil ¦ vija dhe diferencë e dyfishtë, si gjendja civile ¦ linji u marġni doppju, bħar-reġistri ċivili
+lignes et marge rouge ¦ vija dhe diferencë e kuqe ¦ linji u marġni aħmar
+pâle et floutée derrière ¦ e zbehtë dhe e turbullt prapa ¦ ċara u ċċassata wara
+rien derrière, le plus calme ¦ asgjë prapa, më e qeta ¦ xejn wara, l-iktar kalm
+tissage léger, album de famille ¦ thurje e lehtë, album familjeje ¦ minsuġ ħafif, album tal-familja
+une grille de petits points ¦ një rrjet pikash të vogla ¦ grilja ta’ tikek żgħar
+va bien avec « Archive papier » ¦ shkon mirë me «Arkiv letre» ¦ imur tajjeb ma’ “Arkivju tal-karta”
+Une page de l’app ¦ Një faqe e aplikacionit ¦ Paġna tal-app
+Ta photo ¦ Fotoja jote ¦ Ir-ritratt tiegħek
+les Réglages ¦ Cilësimet ¦ L-Issettjar
+Dans les listes où l’on coche ce qui s’affiche (menus, listes, Réordonner, Personnaliser…) : une ligne décochée reste telle quelle, ou se grise un peu. ¦ Në listat ku shënon çfarë shfaqet (menytë, listat, Rirendit, Personalizo…): një rresht pa shenjë mbetet ashtu siç është, ose zbehet pak në gri. ¦ Fil-listi fejn timmarka x’jidher (menus, listi, Erġa’ ordna, Personalizza…): ringiela mhux immarkata tibqa’ kif inhi, jew issir ftit griża.
+Une ligne affichée ¦ Një rresht i shfaqur ¦ Ringiela murija
+Une ligne cachée ¦ Një rresht i fshehur ¦ Ringiela moħbija
+Lignes cachées dans les listes à ranger ¦ Rreshta të fshehur në listat për t’u renditur ¦ Ringieli moħbija fil-listi li jirranġaw
+Supprimer en rouge ¦ Fshi me të kuqe ¦ Ħassar bl-aħmar
+Hypothèses à comparer ¦ Hipoteza për t’u krahasuar ¦ Ipoteżi biex tqabbel
+signature ou sceau ¦ nënshkrim ose vulë ¦ firma jew siġill
+PLAN DU RECENSEMENT ¦ PLANI I REGJISTRIMIT ¦ MAPPA TAĊ-ĊENSIMENT
+Fonds de carte du plan des adresses ¦ Sfonde harte të planit të adresave ¦ Sfondi tal-mappa tal-indirizzi
+Plan, photo aérienne, carte hors ligne… ¦ Plan, foto ajrore, hartë jashtë linje… ¦ Pjanta, ritratt mill-ajru, mappa offline…
+Cassini, État-major, cartes et photos de 1950… ¦ Cassini, État-major, harta dhe foto të 1950… ¦ Cassini, État-major, mapep u ritratti tal-1950…
+Carte ancienne (par-dessus) ¦ Hartë e vjetër (sipër) ¦ Mappa antika (fuq)
+Aujourd’hui (dessous) ¦ Sot (poshtë) ¦ Illum (taħt)
+Dépouillements (onglet « Plan ») et fiche d’un village : les fonds cochés viennent en premier dans les menus ; le premier coché est celui de départ. Tous les autres restent dans les menus, par catégorie. ¦ Zbërthimet (skeda «Plani») dhe kartela e një fshati: sfondet e shënuara vijnë të parat në menytë; i pari i shënuar është ai i fillimit. Të gjithë të tjerët mbeten në menytë, sipas kategorisë. ¦ Indiċijiet tar-reġistri (tab “Mappa”) u skeda ta’ raħal: l-isfondi mmarkati jiġu l-ewwel fil-menus; l-ewwel wieħed immarkat huwa dak tal-bidu. Il-oħrajn kollha jibqgħu fil-menus, skont il-kategorija.
+naissance manquante ¦ mungon lindja ¦ twelid nieqes
+décès manquant ¦ mungon vdekja ¦ mewt nieqsa
+parents manquants ¦ mungojnë prindërit ¦ ġenituri neqsin
+source manquante ¦ mungon burimi ¦ sors nieqes
+aucun média ¦ asnjë media ¦ l-ebda midja
+1 livre en {y} ¦ 1 livre në {y} ¦ 1 livre fl-{y}
+1 franc en {y} ¦ 1 frang në {y} ¦ 1 frank fl-{y}
+1 euro en {y} ¦ 1 euro në {y} ¦ 1 ewro fl-{y}
+≈ <b>{eur} €</b> d’aujourd’hui ¦ ≈ <b>{eur} €</b> të sotme ¦ ≈ <b>€{eur}</b> tal-lum
+≈ <b>{kg} kg</b> de pain ¦ ≈ <b>{kg} kg</b> bukë ¦ ≈ <b>{kg} kg</b> ħobż
+≈ {n} jour de travail d’un journalier ¦ ≈ {n} ditë pune e një argati ¦ ≈ {n} jum xogħol ta’ ħaddiem bil-ġurnata
+≈ {n} jours de travail d’un journalier ¦ ≈ {n} ditë pune të një argati ¦ ≈ {n} ijiem xogħol ta’ ħaddiem bil-ġurnata
+🛡 Solidité des liens à côté des parents ¦ 🛡 Fortësia e lidhjeve pranë prindërve ¦ 🛡 Saħħa tar-rabtiet ħdejn il-ġenituri
+Seulement Supposé et Réfuté ¦ Vetëm E supozuar dhe E hedhur poshtë ¦ Supponut u Miċħud biss
+Toujours ¦ Gjithmonë ¦ Dejjem
+Jamais ¦ Kurrë ¦ Qatt

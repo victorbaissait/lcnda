@@ -1,0 +1,237 @@
+fr ¦ sk ¦ nb
+Mesures anciennes par région ¦ Staré miery podľa regiónov ¦ Gamle mål etter region
+Les mesures changeaient d’une province, parfois d’un village à l’autre. Choisis la région, la valeur et l’unité : l’app donne l’équivalent en mètres, ares ou litres, et dans les autres mesures du lieu. ¦ Miery sa líšili od provincie k provincii, niekedy aj od dediny k dedine. Vyber región, hodnotu a jednotku: aplikácia ukáže zodpovedajúcu hodnotu v metroch, ároch alebo litroch a v ďalších mierach daného miesta. ¦ Målene varierte fra provins til provins, noen ganger fra bygd til bygd. Velg region, verdi og enhet: appen viser tilsvarende verdi i meter, ar eller liter, og i stedets andre mål.
+Région / ville ¦ Región / mesto ¦ Region / by
+Entre une valeur. ¦ Zadaj hodnotu. ¦ Skriv inn en verdi.
+Longueurs ¦ Dĺžky ¦ Lengder
+Grains (matières sèches) ¦ Obilie (suché látky) ¦ Korn (tørrvarer)
+Liquides (vin, cidre, huile) ¦ Tekutiny (víno, mušt, olej) ¦ Væsker (vin, sider, olje)
+kilomètre ¦ kilometer ¦ kilometer
+mètre carré ¦ štvorcový meter ¦ kvadratmeter
+are ¦ ár ¦ ar
+hectare ¦ hektár ¦ hektar
+litre ¦ liter ¦ liter
+hectolitre ¦ hektoliter ¦ hektoliter
+Paris, Île-de-France (mesures du roi) ¦ Paríž, Île-de-France (kráľovské miery) ¦ Paris, Île-de-France (kongelige mål)
+Lyon, Lyonnais ¦ Lyon, Lyonnais ¦ Lyon, Lyonnais
+Bretagne (Rennes) ¦ Bretónsko (Rennes) ¦ Bretagne (Rennes)
+Normandie (Rouen) ¦ Normandia (Rouen) ¦ Normandie (Rouen)
+Bourgogne (Dijon, Beaune) ¦ Burgundsko (Dijon, Beaune) ¦ Burgund (Dijon, Beaune)
+Provence (Marseille) ¦ Provensalsko (Marseille) ¦ Provence (Marseille)
+Lorraine (Nancy) ¦ Lotrinsko (Nancy) ¦ Lorraine (Nancy)
+Alsace (Strasbourg) ¦ Alsasko (Štrasburg) ¦ Alsace (Strasbourg)
+Flandre (Lille) ¦ Flámsko (Lille) ¦ Flandern (Lille)
+très variable ¦ veľmi premenlivé ¦ svært varierende
+très variable d’une ville à l’autre ¦ veľmi premenlivé od mesta k mestu ¦ svært varierende fra by til by
+très variable (de 1 500 à 3 000 m² selon le lieu) ¦ veľmi premenlivé (1 500 až 3 000 m² podľa miesta) ¦ svært varierende (1 500 til 3 000 m² avhengig av stedet)
+de 45 à 50 litres selon le lieu ¦ 45 až 50 litrov podľa miesta ¦ 45 til 50 liter avhengig av stedet
+≈ : valeur approchée ou variable selon la ville. Sources : loi du 19 frimaire an VIII (pied du roi, toise) et « Tables de comparaison entre les mesures anciennes et celles qui les remplacent » publiées par département (an X – 1812). Pour une commune précise, cherche la table de ton département aux archives départementales. ¦ ≈: približná hodnota alebo hodnota líšiaca sa od mesta k mestu. Pramene: zákon z 19. frimairu roku VIII (pied du roi, toise) a „Tables de comparaison entre les mesures anciennes et celles qui les remplacent“ vydané pre každý departement (rok X – 1812). Pre konkrétnu obec hľadaj tabuľku svojho departementu v departementálnom archíve. ¦ ≈: omtrentlig verdi, eller en som varierte fra by til by. Kilder: loven av 19. frimaire år VIII (pied du roi, toise) og «Tables de comparaison entre les mesures anciennes et celles qui les remplacent», utgitt for hvert departement (år X – 1812). For en bestemt kommune: finn tabellen for ditt departement i departementsarkivet.
+Âge ↔ date de naissance ¦ Vek ↔ dátum narodenia ¦ Alder ↔ fødselsdato
+Les actes donnent souvent l’âge plutôt que la date de naissance. « 32 ans au décès le 12/03/1790 » → né entre deux dates. Ou l’inverse : l’âge exact à une date. ¦ Záznamy často uvádzajú vek namiesto dátumu narodenia. „32 rokov pri úmrtí 12/03/1790“ → narodený medzi dvoma dátumami. Alebo naopak: presný vek k určitému dátumu. ¦ Dokumentene oppgir ofte alderen i stedet for fødselsdatoen. «32 år ved døden 12/03/1790» → født mellom to datoer. Eller omvendt: nøyaktig alder på en dato.
+exact (ans révolus) ¦ presný (dovŕšené roky) ¦ nøyaktig (fylte år)
+« environ » (± 2 ans) ¦ „asi“ (± 2 roky) ¦ «omkring» (± 2 år)
+arrondi (± 5 ans) ¦ zaokrúhlený (± 5 rokov) ¦ avrundet (± 5 år)
+très vague (± 10 ans) ¦ veľmi nepresný (± 10 rokov) ¦ svært vag (± 10 år)
+À la date de ¦ K dátumu ¦ På datoen
+Entre un âge et la date de l’acte. ¦ Zadaj vek a dátum záznamu. ¦ Skriv inn en alder og datoen for dokumentet.
+Âge le ¦ Vek dňa ¦ Alder den
+Entre une date de naissance et une autre date. ¦ Zadaj dátum narodenia a iný dátum. ¦ Skriv inn en fødselsdato og en annen dato.
+Date non reconnue : écris par exemple 12/03/1790, 12 mars 1790, mars 1790 ou 1790. ¦ Dátum nerozpoznaný: napíš napríklad 12/03/1790, 12 mars 1790, mars 1790 alebo 1790. ¦ Datoen ble ikke gjenkjent: skriv for eksempel 12/03/1790, 12 mars 1790, mars 1790 eller 1790.
+Naissance entre le {from} et le {to} ¦ Narodenie medzi {from} a {to} ¦ Født mellom {from} og {to}
+soit vers {when} (entre {lo} et {hi} révolus) ¦ teda okolo {when} (medzi {lo} a {hi} dovŕšenými) ¦ altså omkring {when} (mellom {lo} og {hi} fylte)
+soit vers {when} ¦ teda okolo {when} ¦ altså omkring {when}
+Date non reconnue : écris par exemple 13/03/1757. ¦ Dátum nerozpoznaný: napíš napríklad 13/03/1757. ¦ Datoen ble ikke gjenkjent: skriv for eksempel 13/03/1757.
+La seconde date est avant la naissance. ¦ Druhý dátum je pred narodením. ¦ Den andre datoen ligger før fødselen.
+soit {days} de vie ¦ teda {days} života ¦ altså {days} i live
+Entre {min} et {max} ¦ Medzi {min} a {max} ¦ Mellom {min} og {max}
+Une des dates est incomplète. ¦ Jeden z dátumov je neúplný. ¦ En av datoene er ufullstendig.
+Écart entre deux dates ¦ Čas medzi dvoma dátumami ¦ Tid mellom to datoer
+Combien de temps entre deux actes ? Années, mois, jours, nombre total de jours et de semaines. Une date incomplète (« mars 1790 », « 1802 ») donne un écart minimum et maximum. ¦ Koľko času uplynulo medzi dvoma záznamami? Roky, mesiace, dni, celkový počet dní a týždňov. Neúplný dátum („mars 1790“, „1802“) dá najkratší a najdlhší čas. ¦ Hvor lang tid gikk det mellom to dokumenter? År, måneder, dager, totalt antall dager og uker. En ufullstendig dato («mars 1790», «1802») gir en minste og en største avstand.
+9 novembre 1799 ¦ 9 novembre 1799 ¦ 9 novembre 1799
+Entre deux dates. ¦ Zadaj dva dátumy. ¦ Skriv inn to datoer.
+Date non reconnue : écris par exemple 14/07/1789, 14 juillet 1789, juillet 1789 ou 1789. ¦ Dátum nerozpoznaný: napíš napríklad 14/07/1789, 14 juillet 1789, juillet 1789 alebo 1789. ¦ Datoen ble ikke gjenkjent: skriv for eksempel 14/07/1789, 14 juillet 1789, juillet 1789 eller 1789.
+(la seconde date est la plus ancienne : écart compté à l’envers) ¦ (druhý dátum je starší: počítané odzadu) ¦ (den andre datoen er den eldste: regnet baklengs)
+{weeks} et {days} ¦ {weeks} a {days} ¦ {weeks} og {days}
+Du {a} au {b} : une date est incomplète. ¦ Od {a} do {b}: jeden dátum je neúplný. ¦ Fra {a} til {b}: én dato er ufullstendig.
+=semaine ¦ týždeň|týždne|týždňov ¦ uke|uker
+Jour de la semaine ¦ Deň v týždni ¦ Ukedag
+Quel jour tombait une date ? Avant 1582, le calendrier julien s’applique : choisis l’usage. ¦ Na aký deň v týždni pripadol dátum? Pred rokom 1582 platí juliánsky kalendár: vyber zvyklosť. ¦ Hvilken ukedag falt en dato på? Før 1582 gjelder den julianske kalenderen: velg skikk.
+France (julien jusqu’au 9 déc. 1582) ¦ Francúzsko (juliánsky do 9. dec. 1582) ¦ Frankrike (juliansk til 9. des. 1582)
+Rome (julien jusqu’au 4 oct. 1582) ¦ Rím (juliánsky do 4. okt. 1582) ¦ Roma (juliansk til 4. okt. 1582)
+Toujours grégorien ¦ Vždy gregoriánsky ¦ Alltid gregoriansk
+Toujours julien ¦ Vždy juliánsky ¦ Alltid juliansk
+Indices pour la recherche (baptêmes, mariages…) ¦ Vodidlá pre výskum (krsty, sobáše…) ¦ Spor for forskningen (dåp, vielser…)
+Entre une date complète. ¦ Zadaj úplný dátum. ¦ Skriv inn en fullstendig dato.
+Il faut une date complète : jour, mois et année (ex. 14/07/1789). ¦ Treba úplný dátum: deň, mesiac a rok (napr. 14/07/1789). ¦ Det trengs en fullstendig dato: dag, måned og år (f.eks. 14/07/1789).
+Ce jour n’a pas existé en France : le 9 décembre 1582 a été suivi du 20 décembre. ¦ Tento deň vo Francúzsku neexistoval: po 9. decembri 1582 nasledoval 20. december. ¦ Denne dagen fantes ikke i Frankrike: etter 9. desember 1582 kom 20. desember.
+Ce jour n’a pas existé à Rome : le 4 octobre 1582 a été suivi du 15 octobre. ¦ Tento deň v Ríme neexistoval: po 4. októbri 1582 nasledoval 15. október. ¦ Denne dagen fantes ikke i Roma: etter 4. oktober 1582 kom 15. oktober.
+soit le {date} dans le calendrier grégorien ¦ teda {date} v gregoriánskom kalendári ¦ altså {date} i den gregorianske kalenderen
+soit le {date} dans le calendrier julien ¦ teda {date} v juliánskom kalendári ¦ altså {date} i den julianske kalenderen
+C’était un {day} ¦ Bol to deň: {day} ¦ Det var en {day}
+julien ¦ juliánsky ¦ juliansk
+Jour du Seigneur : beaucoup de baptêmes (souvent le jour même ou le lendemain de la naissance) ; mariages rares. ¦ Deň Pána: veľa krstov (často v deň narodenia alebo deň nato); sobáše zriedkavé. ¦ Herrens dag: mange dåp (ofte samme dag som fødselen eller dagen etter); få vielser.
+Jour courant des mariages à la campagne sous l’Ancien Régime. ¦ Za starého režimu bežný svadobný deň na vidieku. ¦ En vanlig bryllupsdag på landet under Ancien Régime.
+Jour préféré des mariages dans bien des paroisses sous l’Ancien Régime. ¦ Za starého režimu v mnohých farnostiach obľúbený svadobný deň. ¦ Den foretrukne bryllupsdagen i mange sogn under Ancien Régime.
+Jour maigre dans certains diocèses : mariages moins fréquents. ¦ V niektorých diecézach pôstny deň: sobáše menej časté. ¦ Fastedag i noen bispedømmer: færre vielser.
+Jour ordinaire ; fêtes de l’Ascension et de la Fête-Dieu. ¦ Bežný deň; sviatky Nanebovstúpenia a Božieho tela. ¦ Vanlig dag; Kristi himmelfartsdag og Kristi legemsfest.
+Jour maigre (souvenir de la Passion) : on évitait de s’y marier. ¦ Pôstny deň (na pamiatku umučenia): sobášom v ten deň sa ľudia vyhýbali. ¦ Fastedag (til minne om lidelseshistorien): man unngikk å gifte seg den dagen.
+Jour maigre jusqu’au XVIIIe siècle dans beaucoup de diocèses ; au XIXe, jour fréquent des mariages civils. ¦ V mnohých diecézach pôstny deň až do 18. storočia; v 19. storočí častý deň občianskych sobášov. ¦ Fastedag fram til 1700-tallet i mange bispedømmer; på 1800-tallet en vanlig dag for borgerlige vielser.
+Saint du jour et fêtes mobiles ¦ Svätec dňa a pohyblivé sviatky ¦ Dagens helgen og bevegelige helligdager
+Les fêtes mobiles dépendent de Pâques. Le saint du jour aide à comprendre un prénom : on donnait souvent celui du saint de la naissance ou du baptême. ¦ Pohyblivé sviatky závisia od Veľkej noci. Svätec dňa pomáha pochopiť krstné meno: často sa dávalo meno svätca zo dňa narodenia alebo krstu. ¦ De bevegelige helligdagene avhenger av påsken. Dagens helgen hjelper deg å forstå et fornavn: man ga ofte navnet til helgenen på fødsels- eller dåpsdagen.
+Comput ¦ Komputistika ¦ Komputistikk
+auto (julien avant 1583) ¦ automaticky (juliánsky pred 1583) ¦ auto (juliansk før 1583)
+date|Mois ¦ Mesiac ¦ Måned
+Entre une année entre 400 et 2400. ¦ Zadaj rok medzi 400 a 2400. ¦ Skriv inn et år mellom 400 og 2400.
+Dates dans le calendrier julien. ¦ Dátumy v juliánskom kalendári. ¦ Datoer i den julianske kalenderen.
+Ce jour n’existe pas. ¦ Tento deň neexistuje. ¦ Denne dagen finnes ikke.
+Dans ta base, nés ou baptisés ce jour : ¦ V tvojom rodokmeni narodení alebo pokrstení v tento deň: ¦ I slektstreet ditt, født eller døpt denne dagen:
+porte le prénom du saint du jour ¦ nesie meno svätca dňa ¦ bærer navnet til dagens helgen
+Saint du jour indisponible. ¦ Svätec dňa nie je k dispozícii. ¦ Dagens helgen er ikke tilgjengelig.
+Saints : calendrier usuel des almanachs français (celui du widget « Prénom et saint du jour ») ; il a varié selon les époques et les diocèses. ¦ Svätci: obvyklý kalendár francúzskych almanachov (ten z widgetu „Meno a svätec dňa“); líšil sa podľa doby a diecézy. ¦ Helgener: den vanlige kalenderen i franske almanakker (den i widgeten «Fornavn og dagens helgen»); den har variert med tid og bispedømme.
+dimanche, début du temps de la Septuagésime ¦ nedeľa, začiatok predpôstneho obdobia (Septuagesima) ¦ søndag, begynnelsen av septuagesima-tiden
+dimanche ¦ nedeľa ¦ søndag
+dimanche gras ¦ fašiangová nedeľa ¦ fastelavnssøndag
+veille des Cendres, fin du carnaval ¦ deň pred Popolcovou stredou, koniec fašiangov ¦ dagen før askeonsdag, slutten på karnevalet
+début du Carême : plus de mariages jusqu’à Pâques ¦ začiatok pôstu: žiadne svadby až do Veľkej noci ¦ begynnelsen av fasten: ingen vielser før påske
+dimanche des Brandons ¦ nedeľa ohňov (Brandons) ¦ bålsøndag (Brandons)
+jeudi ¦ štvrtok ¦ torsdag
+Pâques fleuries ¦ Kvetná nedeľa ¦ Palmesøndag
+baptêmes solennels ¦ slávnostné krsty ¦ høytidelige dåp
+dimanche, fin du temps pascal des mariages interdits ¦ nedeľa, koniec veľkonočného obdobia bez svadieb ¦ søndag, slutten på påsketiden uten vielser
+lundi, processions dans les champs ¦ pondelok, procesie do polí ¦ mandag, prosesjoner over jordene
+jeudi (fêtée le dimanche suivant après 1802) ¦ štvrtok (po roku 1802 slávený nasledujúcu nedeľu) ¦ torsdag (feiret søndagen etter fra 1802)
+vendredi ¦ piatok ¦ fredag
+Heures canoniques ¦ Kanonické hodinky ¦ Kanoniske tidebønner
+Les actes datent parfois à « l’heure de vêpres » ou « à l’issue de la grand-messe ». Les heures de l’Église suivaient le soleil : le jour était coupé en 12 heures, plus longues en été qu’en hiver. ¦ Záznamy niekedy uvádzajú čas „v hodinu nešpor“ alebo „po veľkej omši“. Cirkevné hodiny sa riadili slnkom: deň sa delil na 12 hodín, v lete dlhších ako v zime. ¦ Dokumentene dateres noen ganger «ved vespertimen» eller «etter høymessen». Kirkens timer fulgte solen: dagen var delt i 12 timer, lengre om sommeren enn om vinteren.
+(équinoxe) ¦ (rovnodennosť) ¦ (jevndøgn)
+(jours les plus longs) ¦ (najdlhšie dni) ¦ (lengste dager)
+(jours les plus courts) ¦ (najkratšie dni) ¦ (korteste dager)
+vers {time} ¦ okolo {time} ¦ omkring {time}
+{winter} en hiver, {summer} en été ¦ v zime {winter}, v lete {summer} ¦ {winter} om vinteren, {summer} om sommeren
+Écris la mention (« à l’heure de vêpres », « après complies »…) ou lis le tableau. ¦ Napíš údaj po francúzsky („à l’heure de vêpres“, „après complies“…) alebo si prečítaj tabuľku. ¦ Skriv angivelsen på fransk («à l’heure de vêpres», «après complies»…) eller les tabellen.
+{hour} en {month} : {time} ¦ {hour} v mesiaci {month}: {time} ¦ {hour} i {month}: {time}
+entre {dec} en décembre et {jun} en juin ¦ medzi {dec} v decembri a {jun} v júni ¦ mellom {dec} i desember og {jun} i juni
+Heure non reconnue : matines, laudes, prime, tierce, sexte, none, vêpres, complies ou angélus. ¦ Hodina nerozpoznaná: matines, laudes, prime, tierce, sexte, none, vêpres, complies alebo angélus. ¦ Timen ble ikke gjenkjent: matines, laudes, prime, tierce, sexte, none, vêpres, complies eller angélus.
+office de la nuit (dans les paroisses, souvent chanté la veille au soir ou au petit matin) ¦ nočná modlitba (vo farnostiach často spievaná predchádzajúci večer alebo skoro ráno) ¦ nattens tidebønn (i sognene ofte sunget kvelden før eller tidlig om morgenen)
+à l’aube, avant le lever du soleil ¦ za úsvitu, pred východom slnka ¦ ved daggry, før soloppgang
+6e heure, midi ¦ 6. hodina, poludnie ¦ 6. time, middag
+à la tombée du jour (le dimanche, à la paroisse, souvent dès le début de l’après-midi) ¦ za súmraku (v nedeľu vo farnosti často už od začiatku popoludnia) ¦ ved skumring (om søndagen i sognet ofte allerede tidlig på ettermiddagen)
+à la nuit, avant le coucher ¦ v noci, pred spaním ¦ når natten faller på, før sengetid
+cloche du matin, de midi et du soir ¦ ranný, poludňajší a večerný zvon ¦ morgen-, middags- og kveldsklokken
+Heure solaire (midi = soleil au plus haut), calculée pour le centre de la France ; l’heure légale n’existe qu’à partir de 1891. Les horaires réels variaient selon les paroisses et les couvents. ¦ Slnečný čas (poludnie = slnko najvyššie), počítaný pre stred Francúzska; zákonný čas existuje až od roku 1891. Skutočné časy sa líšili podľa farností a kláštorov. ¦ Soltid (middag = solen står høyest), beregnet for det midtre Frankrike; lovbestemt tid finnes først fra 1891. De faktiske tidene varierte fra sogn til sogn og fra kloster til kloster.
+Monnaies étrangères anciennes ¦ Staré cudzie mince ¦ Gamle utenlandske mynter
+Dans les contrats et inventaires, on trouve des pistoles, ducats, florins ou piastres. Leur valeur en livres tournois, monnaie de compte du royaume, selon l’époque. ¦ V zmluvách a súpisoch sa objavujú pistoly, dukáty, florény alebo piastre. Ich hodnota v livres tournois, účtovnej mene kráľovstva, podľa doby. ¦ I kontrakter og skifter finner man pistoler, dukater, floriner eller piastre. Verdien deres i livres tournois, kongerikets regnemynt, avhengig av tiden.
+Monnaie ¦ Minca ¦ Mynt
+XVIIe siècle (1640-1700) ¦ 17. storočie (1640-1700) ¦ 1600-tallet (1640-1700)
+XVIIIe siècle (1726-1789) ¦ 18. storočie (1726-1789) ¦ 1700-tallet (1726-1789)
+Toutes les monnaies à cette époque ¦ Všetky mince v tomto období ¦ Alle mynter i denne perioden
+soit ≈ {n} livres ¦ teda ≈ {n} livres ¦ altså ≈ {n} livres
+Cette monnaie n’avait pas cours en France à cette époque. ¦ Táto minca v tom čase vo Francúzsku neplatila. ¦ Denne mynten var ikke gangbar i Frankrike på den tiden.
+Louis d’or (France) ¦ Louis d’or (Francúzsko) ¦ Louis d’or (Frankrike)
+Écu d’or au soleil (France) ¦ Écu d’or au soleil (Francúzsko) ¦ Écu d’or au soleil (Frankrike)
+Écu blanc ou louis d’argent (France) ¦ Écu blanc alebo strieborný louis (Francúzsko) ¦ Écu blanc eller sølvlouis (Frankrike)
+Pistole (Espagne, Italie) ¦ Pistola (Španielsko, Taliansko) ¦ Pistol (Spania, Italia)
+Ducat d’or (Venise, Hollande, Empire) ¦ Zlatý dukát (Benátky, Holandsko, Ríša) ¦ Gulldukat (Venezia, Holland, Riket)
+Florin de Hollande (gulden) ¦ Holandský florén (gulden) ¦ Hollandsk florin (gulden)
+Gulden ou florin du Rhin (Allemagne, Alsace, Suisse) ¦ Rýnsky gulden alebo florén (Nemecko, Alsasko, Švajčiarsko) ¦ Rhinsk gylden eller florin (Tyskland, Alsace, Sveits)
+Thaler, rixdale (Empire, Saxe, Prusse) ¦ Toliar, ríšsky toliar (Ríša, Sasko, Prusko) ¦ Taler, riksdaler (Riket, Sachsen, Preussen)
+Piastre ou réal de huit (Espagne) ¦ Piaster alebo osemreál (Španielsko) ¦ Piaster eller åtterealer (Spania)
+Livre sterling (Angleterre) ¦ Libra šterlingov (Anglicko) ¦ Pund sterling (England)
+Livre de Lorraine ¦ Lotrinská livre ¦ Lothringsk livre
+créé en 1640 à 10 livres ; 24 livres de 1726 à la Révolution ¦ zavedený roku 1640 za 10 livres; 24 livres od roku 1726 do revolúcie ¦ innført i 1640 til 10 livres; 24 livres fra 1726 til revolusjonen
+plus frappé après 1640 ¦ po roku 1640 sa už nerazil ¦ ikke lenger preget etter 1640
+3 livres en 1641 ; gros écu de 6 livres (et petit écu de 3 livres) au XVIIIe ¦ 3 livres v roku 1641; veľký écu za 6 livres (a malý écu za 3 livres) v 18. storočí ¦ 3 livres i 1641; stor écu til 6 livres (og liten écu til 3 livres) på 1700-tallet
+souvent une monnaie de compte valant 10 livres ¦ často účtovná mena v hodnote 10 livres ¦ ofte en regnemynt verdt 10 livres
+« piastre gourde » des colonies ¦ koloniálny „piastre gourde“ ¦ koloniale «piastre gourde»
+monnaie de compte, d’après le cours du change ¦ účtovná mena podľa výmenného kurzu ¦ regnemynt, etter vekselkursen
+15 sols 6 deniers tournois ¦ 15 sols 6 deniers tournois ¦ 15 sols 6 deniers tournois
+Valeurs approchées (≈), d’après les ordonnances monétaires de Louis XIII à Louis XVI, le poids d’or ou d’argent fin des pièces et le cours du change à Paris (Savary, « Dictionnaire universel de commerce »). Les cours bougeaient souvent, surtout de 1689 à 1726 : c’est un ordre de grandeur. ¦ Približné hodnoty (≈) podľa mincových nariadení od Ľudovíta XIII. po Ľudovíta XVI., hmotnosti rýdzeho zlata alebo striebra v minciach a výmenného kurzu v Paríži (Savary, „Dictionnaire universel de commerce“). Kurzy sa často menili, najmä v rokoch 1689 až 1726: ide o rádovú predstavu. ¦ Omtrentlige verdier (≈), etter myntforordningene fra Ludvig XIII til Ludvig XVI, myntenes vekt i fint gull eller sølv og vekselkursen i Paris (Savary, «Dictionnaire universel de commerce»). Kursene svingte ofte, særlig fra 1689 til 1726: det er en størrelsesorden.
+Calculateur de générations ¦ Kalkulačka generácií ¦ Generasjonskalkulator
+Combien de générations entre deux années ? En moyenne 25 à 33 ans par génération : environ 30 ans en lignée masculine, 27 ans en lignée féminine. ¦ Koľko generácií je medzi dvoma rokmi? V priemere 25 až 33 rokov na generáciu: asi 30 rokov v mužskej línii, 27 rokov v ženskej línii. ¦ Hvor mange generasjoner er det mellom to år? I gjennomsnitt 25 til 33 år per generasjon: omkring 30 år i mannslinjen, 27 år i kvinnelinjen.
+Année (ta naissance) ¦ Rok (tvoje narodenie) ¦ År (din fødsel)
+Année (l’ancêtre) ¦ Rok (predok) ¦ År (stamfaren)
+Entre deux années. ¦ Zadaj dva roky. ¦ Skriv inn to år.
+Générations en arrière ¦ Generácií späť ¦ Generasjoner tilbake
+Depuis l’année ¦ Od roku ¦ Fra året
+Entre deux années différentes. ¦ Zadaj dva rôzne roky. ¦ Skriv inn to forskjellige år.
+Environ {min} à {max} générations ¦ Asi {min} až {max} generácií ¦ Omkring {min} til {max} generasjoner
+{years} : ≈ {male} générations en lignée masculine (30 ans), ≈ {female} en lignée féminine (27 ans) ¦ {years}: ≈ {male} generácií v mužskej línii (30 rokov), ≈ {female} v ženskej línii (27 rokov) ¦ {years}: ≈ {male} generasjoner i mannslinjen (30 år), ≈ {female} i kvinnelinjen (27 år)
+Entre un nombre de générations (1 à 40) et une année. ¦ Zadaj počet generácií (1 až 40) a rok. ¦ Skriv inn et antall generasjoner (1 til 40) og et år.
+ancêtres de la génération {n} ¦ predkovia generácie {n} ¦ aner i generasjon {n}
+{gens} en arrière → nés vers {from}–{to} ¦ {gens} späť → narodení okolo {from}–{to} ¦ {gens} tilbake → født omkring {from}–{to}
+≈ {male} en lignée masculine, ≈ {female} en lignée féminine ¦ ≈ {male} v mužskej línii, ≈ {female} v ženskej línii ¦ ≈ {male} i mannslinjen, ≈ {female} i kvinnelinjen
+{at} {label} en théorie (Sosa {from} à {to}) ; {total} ancêtres en tout jusqu’à cette génération ¦ {at} {label} teoreticky (Sosa {from} až {to}); celkom {total} predkov až po túto generáciu ¦ {at} {label} i teorien (Sosa {from} til {to}); {total} aner i alt fram til denne generasjonen
+Le nombre d’ancêtres double à chaque génération en théorie ; en pratique il y en a moins, car des cousins se sont mariés entre eux (l’implexe). ¦ Počet predkov sa teoreticky s každou generáciou zdvojnásobuje; v praxi ich je menej, pretože sa bratranci a sesternice brali medzi sebou (implex). ¦ I teorien dobles antallet aner for hver generasjon; i praksis er det færre, fordi søskenbarn giftet seg med hverandre (anetap).
+le jour de la Pentecôte 1754 ¦ le jour de la Pentecôte 1754 ¦ le jour de la Pentecôte 1754
+/Documents/Scans généalogie ¦ /Dokumenty/Skeny rodokmeňa ¦ /Dokumenter/Skannede slektsdokumenter
+Saint-Martin de Brive ¦ Saint-Martin de Brive ¦ Saint-Martin de Brive
+Paroisse érigée en 1792 ; voir aussi la chapelle de… ¦ Farnosť zriadená roku 1792; pozri aj kaplnku v… ¦ Sogn opprettet i 1792; se også kapellet i…
+Religion et noblesse ¦ Náboženstvo a šľachta ¦ Religion og adel
+Travail et société ¦ Práca a spoločnosť ¦ Arbeid og samfunn
+Voyages et lieux ¦ Cesty a miesta ¦ Reiser og steder
+Temps et nature ¦ Čas a príroda ¦ Tid og natur
+Formes et repères ¦ Tvary a značky ¦ Former og markører
+Artistique ¦ Umelecké ¦ Kunstnerisk
+Voyages ¦ Cesty ¦ Reiser
+Tous les emojis ¦ Všetky emoji ¦ Alle emojier
+Autres emojis ¦ Ďalšie emoji ¦ Andre emojier
+Choisir un fond ¦ Vybrať pozadie ¦ Velg en bakgrunn
+Choisir un fond… ¦ Vybrať pozadie… ¦ Velg en bakgrunn…
+Choisir un fond de carte ¦ Vybrať podklad mapy ¦ Velg et kartgrunnlag
+Choisir une icône… ¦ Vybrať ikonu… ¦ Velg et ikon…
+Aucune icône ¦ Žiadna ikona ¦ Ikke noe ikon
+Aucun fond ¦ Žiadne pozadie ¦ Ingen bakgrunn
+choisir ¦ vybrať ¦ velg
+valider ¦ potvrdiť ¦ bekreft
+fermer ¦ zavrieť ¦ lukk
+Chercher une icône ¦ Hľadať ikonu ¦ Søk etter et ikon
+Chercher un fond ¦ Hľadať pozadie ¦ Søk etter en bakgrunn
+Chercher un fond… (ex. Cassini, relief, 1850) ¦ Hľadať pozadie… (napr. Cassini, reliéf, 1850) ¦ Søk etter en bakgrunn… (f.eks. Cassini, relieff, 1850)
+Chercher… (ex. coeur, bateau, chien) ¦ Hľadať… (po francúzsky, napr. coeur, bateau, chien) ¦ Søk… (på fransk, f.eks. coeur, bateau, chien)
+Chercher… (ex. église, mariage, étoile) ¦ Hľadať… (napr. kostol, sobáš, hviezda) ¦ Søk… (f.eks. kirke, vielse, stjerne)
+Utiliser « {x} » ¦ Použiť „{x}“ ¦ Bruk «{x}»
+1 icône pour « {q} » ¦ 1 ikona pre „{q}“ ¦ 1 ikon for «{q}»
+{n} icônes pour « {q} » ¦ {n} ikon pre „{q}“ ¦ {n} ikoner for «{q}»
+1 fond pour « {q} » ¦ 1 pozadie pre „{q}“ ¦ 1 bakgrunn for «{q}»
+{n} fonds pour « {q} » ¦ {n} pozadí pre „{q}“ ¦ {n} bakgrunner for «{q}»
+Rien pour « {q} ». Vérifie l’orthographe, ou essaie un autre mot. ¦ Nič pre „{q}“. Skontroluj pravopis alebo skús iné slovo. ¦ Ingenting for «{q}». Sjekk stavemåten, eller prøv et annet ord.
+Retirer l’icône ¦ Odobrať ikonu ¦ Fjern ikonet
+Retirer le fond ¦ Odobrať pozadie ¦ Fjern bakgrunnen
+Allemand et alsacien ¦ Nemčina a alsaština ¦ Tysk og alsacisk
+Néerlandais / flamand ¦ Holandčina / flámčina ¦ Nederlandsk / flamsk
+Croate / serbe en lettres latines ¦ Chorvátčina / srbčina v latinke ¦ Kroatisk / serbisk med latinske bokstaver
+Slovène ¦ Slovinčina ¦ Slovensk
+Gaélique irlandais ¦ Írska gaelčina ¦ Irsk gælisk
+Biélorusse ¦ Bieloruština ¦ Hviterussisk
+Serbe en cyrillique ¦ Srbčina v cyrilike ¦ Serbisk med kyrilliske bokstaver
+Hébreu ¦ Hebrejčina ¦ Hebraisk
+Dates du calendrier grégorien. Les âges des actes anciens sont souvent approximatifs : « environ 40 ans » peut cacher 35 ou 45 ans. ¦ Dátumy gregoriánskeho kalendára. Vek v starých záznamoch je často len približný: „asi 40 rokov“ môže znamenať 35 alebo 45 rokov. ¦ Datoer i den gregorianske kalenderen. Aldre i gamle dokumenter er ofte omtrentlige: «omkring 40 år» kan skjule 35 eller 45 år.
+Changer dans l’onglet Personnes ¦ Zmeniť na záložke Osoby ¦ Endre under fanen Personer
+Mode de chronologie parallèle ¦ Režim súbežnej časovej osi ¦ Modus for parallell tidslinje
+Les événements sans année restent sur les fiches. ¦ Udalosti bez roku zostávajú na kartách. ¦ Hendelser uten år blir værende på oppføringene.
+Modifier la frise historique ¦ Upraviť historickú časovú os ¦ Rediger den historiske tidslinjen
+Les grands événements livrés avec l’app, et les tiens (histoire locale) ¦ Veľké udalosti dodané s aplikáciou a tvoje vlastné (miestna história) ¦ De store hendelsene som følger med appen, og dine egne (lokalhistorie)
+Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z ou en 📁 dossiers), la fiche à droite. ¦ Médiá a archiválie tvojho rodokmeňa, usporiadané ako osoby: vľavo zoznam (A → Z alebo v 📁 priečinkoch), vpravo karta. ¦ Mediene og arkivstykkene i slektstreet ditt, ordnet som personene: listen til venstre (A → Å eller i 📁 mapper), oppføringen til høyre.
+Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche (en ce moment : {n}) ¦ Priečinky pokladov (premenovať, vytvoriť, vymazať, vybrať, čo do nich patrí), poradie, čo sa zobrazuje (práve teraz: {n}) ¦ Skattemappene (gi nytt navn, opprett, slett, velg hva som skal i dem), rekkefølgen, hva som vises (akkurat nå: {n})
+Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche ¦ Priečinky pokladov (premenovať, vytvoriť, vymazať, vybrať, čo do nich patrí), poradie, čo sa zobrazuje ¦ Skattemappene (gi nytt navn, opprett, slett, velg hva som skal i dem), rekkefølgen, hva som vises
+Me le rappeler (la veille, une semaine avant…) ¦ Pripomenúť mi to (deň vopred, týždeň vopred…) ¦ Minn meg på det (dagen før, en uke før…)
+choses à vérifier ¦ veci na kontrolu ¦ ting å sjekke
+Pour montrer l’arbre à quelqu’un qui n’est pas à l’aise avec l’ordinateur : de très gros boutons, seulement l’arbre, les photos et les fiches, et rien qu’on puisse modifier par erreur. ¦ Na ukázanie stromu niekomu, kto si s počítačom veľmi nerozumie: veľmi veľké tlačidlá, len strom, fotky a karty a nič, čo by sa dalo omylom zmeniť. ¦ For å vise treet til noen som ikke er trygg på datamaskinen: svært store knapper, bare treet, bildene og oppføringene, og ingenting som kan endres ved en feil.
+Aucune hypothèse : une question à trancher (« né à Naves ou à Tulle ? »), avec les preuves pour et contre. ¦ Žiadna hypotéza: otázka na rozhodnutie („narodený v Naves, alebo v Tulle?“) s dôkazmi za a proti. ¦ Ingen hypotese: et spørsmål som skal avgjøres («født i Naves eller i Tulle?»), med bevisene for og imot.
+Détaillée ¦ Podrobná ¦ Detaljert
+Ce qu’on inclut ¦ Čo zahrnúť ¦ Hva som tas med
+Texte de l’app ¦ Text aplikácie ¦ Appens tekst
+Regénérer ¦ Vytvoriť znova ¦ Generer på nytt
+Une journée… ¦ Jeden deň… ¦ En dag…
+Réécrire le texte d’après la fiche et voir ce qui a changé ¦ Prepísať text podľa karty a pozrieť sa, čo sa zmenilo ¦ Skriv teksten om ut fra oppføringen og se hva som er endret
+Un petit récit d’un jour de sa vie : âge, famille, village, métier, calendrier, météo, contexte ¦ Krátke rozprávanie o jednom dni jeho života: vek, rodina, dedina, povolanie, kalendár, počasie, súvislosti ¦ En liten fortelling om en dag i personens liv: alder, familie, bygd, yrke, kalender, vær, sammenheng
+Ajouter un événement local ¦ Pridať miestnu udalosť ¦ Legg til en lokal hendelse
+Rien dans cette sorte pendant sa vie. ¦ Za jeho života nič tohto druhu. ¦ Ingenting av denne typen i personens levetid.
+Voir toute la liste et ses sources ¦ Zobraziť celý zoznam a jeho pramene ¦ Se hele listen og kildene
+Une fête, une inondation, un incendie au village… rattaché à une commune ¦ Slávnosť, povodeň, požiar v dedine… spojené s obcou ¦ En fest, en flom, en brann i bygda… knyttet til en kommune
+Sortes d’événements ¦ Druhy udalostí ¦ Typer hendelser
+Un article, une interview à la radio, une émission de télé, un avis de naissance ou une nécrologie, une photo publiée… ¦ Článok, rozhovor v rádiu, televízna relácia, oznámenie o narodení alebo nekrológ, zverejnená fotka… ¦ En artikkel, et radiointervju, et TV-program, en fødselsannonse eller en nekrolog, et publisert bilde…
+Ajouter un passage ¦ Pridať výstup ¦ Legg til en opptreden
+La revue de presse de cette personne ¦ Prehľad tlače o tejto osobe ¦ Presseklipp om denne personen
+Modifier l’identifiant Wikidata ¦ Upraviť identifikátor Wikidata ¦ Rediger Wikidata-ID
+Plus de détails ¦ Ďalšie podrobnosti ¦ Flere detaljer

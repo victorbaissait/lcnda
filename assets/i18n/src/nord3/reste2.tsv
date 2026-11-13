@@ -1,0 +1,710 @@
+fr ¦ ro
+=grappe ¦ cluster|clustere|de clustere
+=chevauchement ¦ suprapunere|suprapuneri|de suprapuneri
+adn|Nom ¦ Nume
+Test ¦ Test
+Segments ¦ Segmente
+Groupes ¦ Grupuri
+Paternel ¦ Patern
+Maternel ¦ Matern
+Pas de réponse ¦ Niciun răspuns
+ADN-X ¦ ADN-X
+ADN-Y ¦ ADN-Y
+ADNmt ¦ ADNmt
+Autosomal (atDNA) ¦ Autozomal (atDNA)
+ADN mitochondrial ¦ ADN mitocondrial
+Demi-oncle, demi-tante ¦ Unchi vitreg, mătușă vitregă
+vous ¦ tu
+grands-parents ¦ bunici
+arrière-arrière-grands-parents (4e génération) ¦ stră-străbunici (generația a 4-a)
+5e génération ¦ generația a 5-a
+6e génération ¦ generația a 6-a
+7e génération ¦ generația a 7-a
+8e génération ¦ generația a 8-a
+Relation proposée ¦ Relație propusă
+Correspondances en commun ¦ Potriviri comune
+Taille de l’arbre ¦ Mărimea arborelui
+Arbre (adresse) ¦ Arbore (adresă)
+Contact ¦ Contact
+cM sur le X ¦ cM pe X
+Pays ¦ Țară
+Fiche sur le site (adresse) ¦ Fișa de pe site (adresă)
+Identifiant chez la société ¦ Identificator la companie
+Haplogroupe Y ¦ Haplogrup Y
+Haplogroupe mt ¦ Haplogrup mt
+Haplogroupe mitochondrial ¦ Haplogrup mitocondrial
+% d’ADN partagé ¦ % de ADN comun
+Grappe (Genetic Affairs) ¦ Cluster (Genetic Affairs)
+Nom de la correspondance ¦ Numele potrivirii
+Chromosome ¦ Cromozom
+SNP ¦ SNP
+Groupe ou ancêtre ¦ Grup sau strămoș
+n° {n} ¦ nr. {n}
+{n} sur {total}. Clic sur un nom : sa fiche (cM, ancêtre commun, arbre, suivi). Le calculateur propose la relation la plus probable. ¦ {n} din {total}. Clic pe un nume: fișa lui (cM, strămoș comun, arbore, urmărire). Calculatorul propune relația cea mai probabilă.
+Supprimer {n} correspondances et leurs segments ? ¦ Ștergi {n} potriviri și segmentele lor?
+Supprimer cette correspondance et ses segments ? ¦ Ștergi această potrivire și segmentele ei?
+Le centiMorgan (cM) mesure l’ADN que vous avez en commun : environ 3 400 cM avec un parent, 850 avec un cousin germain, 200 avec un cousin issu de germain. Recopie le chiffre donné par le site du test. ¦ CentiMorganul (cM) măsoară ADN-ul pe care îl aveți în comun: aproximativ 3 400 cM cu un părinte, 850 cu un văr primar, 200 cu un văr de gradul doi. Copiază cifra dată de site-ul testului.
+Un long morceau d’ADN en commun (plus de 20 cM) montre souvent une parenté proche et sûre ; beaucoup de petits morceaux peuvent venir d’ancêtres très anciens. ¦ O bucată lungă de ADN comun (peste 20 cM) arată adesea o rudenie apropiată și sigură; multe bucăți mici pot veni de la strămoși foarte vechi.
+Relation probable ({cm} cM, {pct} %) ¦ Relație probabilă ({cm} cM, {pct} %)
+fichier de <b>{name}</b> ¦ fișierul lui <b>{name}</b>
+{n} de {tool} : chacune devient un groupe (« {tool} 1 »…), retrouvé dans « 🗂️ Groupes ». ¦ {n} din {tool}: fiecare devine un grup („{tool} 1”…), regăsit în „🗂️ Grupuri”.
+⤓ {file} : {n} pour DNA Painter. ¦ ⤓ {file}: {n} pentru DNA Painter.
+Branche Martin (Bretagne) ¦ Ramura Martin (Bretania)
+Supprimer le groupe « {name} » ? (les correspondances restent) ¦ Ștergi grupul „{name}”? (potrivirile rămân)
+{n} entre {lo} et {hi} cM (bornes dans ⚙️ Réglages) ¦ {n} între {lo} și {hi} cM (limite în ⚙️ Setări)
+{n} entre {lo} et {hi} cM pour ce test (bornes dans ⚙️ Réglages) ¦ {n} între {lo} și {hi} cM pentru acest test (limite în ⚙️ Setări)
+{base} ; {n} sans « correspondances en commun » notées, donc ignorées. ¦ {base}; {n} fără „potriviri comune” notate, deci ignorate.
+Créer {n} avec ces couleurs ¦ Creează {n} cu aceste culori
+Créé par la méthode de Leeds autour de {name} ({cm} cM). ¦ Creat prin metoda Leeds în jurul lui {name} ({cm} cM).
+masculin|inconnu ¦ necunoscut
+Les groupes (clusters) rassemblent les correspondances qui se partagent entre elles : chaque groupe a souvent un même couple d’ancêtres. Garde de 30 à 600 cM pour éviter les parents trop proches et le bruit. ¦ Grupurile (clusterele) adună potrivirile care se potrivesc și între ele: fiecare grup are adesea un același cuplu de strămoși. Păstrează între 30 și 600 cM ca să eviți rudele prea apropiate și zgomotul.
+{n} entre {lo} et {hi} cM ; {shared} avec des correspondances en commun, {links} de segments. Les très proches parents (au-delà de {hi} cM) sont écartés : ils correspondent à tout le monde. ¦ {n} între {lo} și {hi} cM; {shared} cu potriviri comune, {links} de segmente. Rudele foarte apropiate (peste {hi} cM) sunt lăsate deoparte: se potrivesc cu toată lumea.
+Grappe {n} ¦ Clusterul {n}
+{n} correspondances · {lo}–{hi} cM · liens {pct} % ¦ {n} potriviri · {lo}–{hi} cM · legături {pct} %
+Ancêtre commun encore inconnu (côté {side}) : place une de ces correspondances dans l’arbre (fiche liée), ou ajoute ses noms de famille. ¦ Strămoș comun încă necunoscut (partea {side}): pune una dintre aceste potriviri în arbore (fișă legată) sau adaugă numele ei de familie.
+Ancêtre commun encore inconnu : place une de ces correspondances dans l’arbre (fiche liée), ou ajoute ses noms de famille. ¦ Strămoș comun încă necunoscut: pune una dintre aceste potriviri în arbore (fișă legată) sau adaugă numele ei de familie.
+Groupe automatique : {n} correspondances qui se correspondent entre elles. ¦ Grup automat: {n} potriviri care se potrivesc între ele.
+{n} groupes créés ou mis à jour. ¦ {n} grupuri create sau actualizate.
+{n} groupe créé ou mis à jour. ¦ {n} grup creat sau actualizat.
+noms : {list} ¦ nume: {list}
+lieux : {list} ¦ locuri: {list}
+grappe {n} ¦ clusterul {n}
+plus long segment {cm} cM ¦ cel mai lung segment {cm} cM
+À {pct} % une parenté en ligne directe (parent, grand-parent, arrière-grand-parent) : regarde d’abord ta proche famille. ¦ {pct} % șanse de rudenie în linie directă (părinte, bunic, străbunic): uită-te mai întâi la familia ta apropiată.
+Dans la <b>grappe {n}</b>. ¦ În <b>clusterul {n}</b>.
+Dans la <b>grappe {n}</b> — ancêtres communs de la grappe : {couple}. ¦ În <b>clusterul {n}</b> — strămoșii comuni ai clusterului: {couple}.
+Dans la <b>grappe {n}</b> — ancêtres probables de la grappe : {couple}. ¦ În <b>clusterul {n}</b> — strămoșii probabili ai clusterului: {couple}.
+🎯 Déjà placée dans l’arbre : ancêtres communs {couple}. ¦ 🎯 Deja pus în arbore: strămoși comuni {couple}.
+{couple} (probable) ¦ {couple} (probabil)
+{name} — chr {c} : {a}–{b} Mb, {cm} cM ¦ {name} — chr {c}: {a}–{b} Mb, {cm} cM
+{pct} % de l’ADN (sur {total} cM) ¦ {pct} % din ADN (din {total} cM)
+Pour aller plus loin (outils externes, en anglais) : <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. L’endogamie (villages isolés, communautés fermées) et l’implexe gonflent les cM : une relation paraît alors plus proche qu’elle ne l’est. ¦ Ca să mergi mai departe (instrumente externe, în engleză): <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. Endogamia (sate izolate, comunități închise) și implexul umflă cM-urile: o relație pare atunci mai apropiată decât este.
+Les « origines ethniques » données par les sociétés : des <b>estimations</b>, qui changent d’une société à l’autre et d’une mise à jour à l’autre. Elles ne remplacent pas les registres. ¦ „Originile etnice” date de companii: <b>estimări</b>, care se schimbă de la o companie la alta și de la o actualizare la alta. Nu înlocuiesc registrele.
+Couleur « {name} » ¦ Culoarea „{name}”
+👥 Correspondance ADN « {name} » : <b>{cm} cM</b> ¦ 👥 Potrivire ADN „{name}”: <b>{cm} cM</b>
+ancêtre commun : {name} ¦ strămoș comun: {name}
+Code civil, article 16-10 (examen des caractéristiques génétiques : seulement à des fins médicales ou de recherche scientifique, avec consentement écrit) ¦ Codul civil francez, articolul 16-10 (examinarea caracteristicilor genetice: numai în scopuri medicale sau de cercetare științifică, cu consimțământ scris)
+Code pénal, article 226-28-1 (demander un examen génétique hors des cas prévus par la loi : 3 750 € d’amende) ¦ Codul penal francez, articolul 226-28-1 (solicitarea unui test genetic în afara cazurilor prevăzute de lege: amendă de 3 750 €)
+Loi n° 2021-1017 du 2 août 2021 relative à la bioéthique, article 16 (nouvelle rédaction de l’article 16-10) ¦ Legea franceză nr. 2021-1017 din 2 august 2021 privind bioetica, articolul 16 (noua redactare a articolului 16-10)
+Code civil sur Légifrance (articles 16-10 à 16-13 : examen génétique, empreintes génétiques, filiation) ¦ Codul civil pe Légifrance (articolele 16-10 până la 16-13: test genetic, amprente genetice, filiație)
+Code pénal sur Légifrance (articles 226-25 à 226-30) ¦ Codul penal pe Légifrance (articolele 226-25 până la 226-30)
+Code de la santé publique sur Légifrance (articles L1131-1 et suivants : examens génétiques) ¦ Codul sănătății publice pe Légifrance (articolele L1131-1 și următoarele: teste genetice)
+CNIL : les données génétiques sont des données « sensibles » (RGPD, article 9) ¦ CNIL: datele genetice sunt date „sensibile” (GDPR, articolul 9)
+Personne : mets « À contacter » dans le suivi d’une correspondance. ¦ Nimeni: pune „De contactat” în urmărirea unei potriviri.
+J’ai lu cette mise en garde (elle ne s’affichera plus en haut des autres pages). ¦ Am citit acest avertisment (nu va mai apărea în partea de sus a celorlalte pagini).
+La mise en garde reviendra en haut des pages. ¦ Avertismentul va reapărea în partea de sus a paginilor.
+Modifier le test ¦ Modifică testul
+Société / origine ¦ Companie / proveniență
+Géré par ¦ Administrat de
+Fichier brut (où il est rangé) ¦ Fișier brut (unde este păstrat)
+(qui a accepté quoi, cadre médical ou de recherche, pays…) ¦ (cine a acceptat ce, cadru medical sau de cercetare, țară…)
+(une ligne par région : « Bretagne ; 42 ») ¦ (un rând pe regiune: „Bretagne ; 42”)
+Supprimer ce test, ses correspondances et ses segments ? ¦ Ștergi acest test, potrivirile și segmentele lui?
+Supprimer le test ¦ Șterge testul
+Un test par personne et par société : type, haplogroupes, origines estimées, marqueurs. ¦ Un test pe persoană și pe companie: tip, haplogrupuri, origini estimate, markeri.
+Aucun test ADN pour l’instant ¦ Deocamdată niciun test ADN
+Ajoute ton test (Ancestry, MyHeritage, 23andMe…) pour y ranger tes correspondances. ¦ Adaugă testul tău (Ancestry, MyHeritage, 23andMe…) ca să-ți păstrezi potrivirile în el.
+⤒ Importer (CSV) ¦ ⤒ Importă (CSV)
+Ajoute d’abord un test dans « 🧬 Mes tests » : les correspondances s’y rattachent. ¦ Adaugă mai întâi un test în „🧬 Testele mele”: potrivirile țin de el.
+Nom, nom de famille, lieu, note… ¦ Nume, nume de familie, loc, notă…
+cM min ¦ cM min
+cM max ¦ cM max
+Ajouter au groupe… ¦ Adaugă în grup…
+Retirer du groupe… ¦ Scoate din grup…
+Aucune correspondance pour ces filtres. ¦ Nicio potrivire pentru aceste filtre.
+cM : les plus nombreux ¦ cM: cele mai multe
+cM : les moins nombreux ¦ cM: cele mai puține
+Nom : A → Z ¦ Nume: A → Z
+Nom : Z → A ¦ Nume: Z → A
+Segments : les plus nombreux ¦ Segmente: cele mai multe
+Les plus récemment modifiées ¦ Cele mai recent modificate
+Les plus anciennement modifiées ¦ Cele mai demult modificate
+Supprimer les correspondances ¦ Șterge potrivirile
+Nom (tel que sur le site) ¦ Nume (ca pe site)
+Relation proposée par la société ¦ Relație propusă de companie
+Ancêtre(s) commun(s) (MRCA) ¦ Strămoș(i) comun(i) (MRCA)
+Jean Martin et Marie Durand ¦ Jean Martin și Marie Durand
+Étoiles (0 à 5) ¦ Stele (de la 0 la 5)
+Aucun groupe (« 🗂️ Groupes »). ¦ Niciun grup („🗂️ Grupuri”).
+Noms de famille en commun ¦ Nume de familie comune
+Lieux en commun ¦ Locuri comune
+Arbre en ligne (adresse) ¦ Arbore online (adresă)
+Taille de son arbre ¦ Mărimea arborelui său
+(une par ligne ou séparées par ; — sert à la méthode de Leeds) ¦ (unul pe rând sau separate prin ; — folosește la metoda Leeds)
+Supprimer la correspondance ¦ Șterge potrivirea
+CSV de la société ¦ CSV-ul companiei
+Le fichier CSV exporté par la société (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch, LivingDNA) ou par un outil (DNA Painter, Genetic Affairs : AutoCluster, AutoTree) : la liste des correspondances ou les segments. Les colonnes sont reconnues toutes seules. Un fichier ADN brut (tes SNP) n’est jamais importé. ¦ Fișierul CSV exportat de companie (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch, LivingDNA) sau de un instrument (DNA Painter, Genetic Affairs: AutoCluster, AutoTree): lista potrivirilor sau segmentele. Coloanele sunt recunoscute automat. Un fișier ADN brut (SNP-urile tale) nu este importat niciodată.
+Fichier compressé : ouvre-le d’abord sur l’ordinateur et choisis le fichier .csv qu’il contient. (Un fichier ADN brut, lui, ne s’importe jamais.) ¦ Fișier comprimat: deschide-l mai întâi pe calculator și alege fișierul .csv pe care îl conține. (Un fișier ADN brut nu se importă niciodată.)
+C’est un fichier compressé (.zip) : ouvre-le d’abord et choisis le .csv qu’il contient. ¦ Este un fișier comprimat (.zip): deschide-l mai întâi și alege fișierul .csv pe care îl conține.
+Colonnes non reconnues : il faut au moins le nom et les cM (correspondances), ou le chromosome, le début et la fin (segments). ¦ Coloane nerecunoscute: trebuie cel puțin numele și cM-urile (potriviri), sau cromozomul, începutul și sfârșitul (segmente).
+Une correspondance déjà présente (même nom, même test) est mise à jour : tes notes, groupes, suivi et fiche liée sont gardés. ¦ O potrivire deja prezentă (același nume, același test) este actualizată: notele, grupurile, urmărirea și fișa legată sunt păstrate.
+Remplacer tous les segments de ce test ¦ Înlocuiește toate segmentele acestui test
+Choisis au moins la colonne du nom (« Colonnes reconnues »). ¦ Alege cel puțin coloana numelui („Coloane recunoscute”).
+Choisis les colonnes du chromosome, du début et de la fin (« Colonnes reconnues »). ¦ Alege coloanele cromozomului, începutului și sfârșitului („Coloane recunoscute”).
+Ce test n’a pas encore de segments à exporter : importe-les d’abord (⤒ Importer des segments). ¦ Acest test nu are încă segmente de exportat: importă-le mai întâi (⤒ Importă segmente).
+Modifier le groupe ¦ Modifică grupul
+Couple d’ancêtres supposé ¦ Cuplu de strămoși presupus
+Supprimer le groupe ¦ Șterge grupul
+Groupes et méthode de Leeds ¦ Grupuri și metoda Leeds
+Range tes correspondances par branche. La méthode de Leeds regroupe les cousins de 2e et 3e degré (≈ 90 à 400 cM) qui se correspondent entre eux : chaque groupe pointe souvent vers un de tes 8 arrière-grands-parents… à condition d’avoir noté leurs « correspondances en commun ». ¦ Ordonează-ți potrivirile pe ramuri. Metoda Leeds grupează verii de gradul 2 și 3 (≈ 90 până la 400 cM) care se potrivesc între ei: fiecare grup arată adesea spre unul dintre cei 8 străbunici ai tăi… cu condiția să le fi notat „potrivirile comune”.
+Aucun groupe pour l’instant ¦ Deocamdată niciun grup
+Méthode de Leeds automatique ¦ Metoda Leeds automată
+Pas encore de groupe trouvé : ouvre tes correspondances proches et remplis « Correspondances en commun » (ou importe une colonne « Shared matches »). ¦ Încă niciun grup găsit: deschide potrivirile apropiate și completează „Potriviri comune” (sau importă o coloană „Shared matches”).
+Les correspondances qui se correspondent entre elles forment des grappes : chaque grappe descend en général d’un même couple d’ancêtres. Le calcul utilise les « correspondances en commun » notées ou importées, et les segments qui se chevauchent sur un même chromosome. ¦ Potrivirile care se potrivesc între ele formează clustere: fiecare cluster coboară în general dintr-un același cuplu de strămoși. Calculul folosește „potrivirile comune” notate sau importate și segmentele care se suprapun pe același cromozom.
+(ou mettre à jour ceux déjà créés) ¦ (sau actualizează-le pe cele deja create)
+Pas encore de grappe : il faut des « correspondances en commun » (fiche d’une correspondance, ou colonne « Shared matches » à l’import) ou des segments (🧩 Chromosomes). ¦ Încă niciun cluster: trebuie „potriviri comune” (fișa unei potriviri sau coloana „Shared matches” la import) sau segmente (🧩 Cromozomi).
+Pour une correspondance (ou un nombre de cM), les relations possibles et les couples d’ancêtres de ton arbre par lesquels elle descend probablement, du plus au moins probable. On s’appuie sur les cM (Shared cM Project), le côté, les noms et lieux en commun, la grappe et l’âge : c’est une piste à vérifier, jamais une preuve. ¦ Pentru o potrivire (sau un număr de cM), relațiile posibile și cuplurile de strămoși din arborele tău din care coboară probabil, de la cel mai probabil la cel mai puțin probabil. Ne bazăm pe cM (Shared cM Project), partea, numele și locurile comune, clusterul și vârsta: este o pistă de verificat, niciodată o dovadă.
+Placer un cousin dans l’arbre ¦ Pune un văr în arbore
+— ou les cM à la main ci-dessous — ¦ — sau cM-urile de mână mai jos —
+Ce test n’est relié à aucune fiche : relie-le à la personne testée (🧬 Mes tests) pour que l’arbre serve au placement. ¦ Acest test nu este legat de nicio fișă: leagă-l de persoana testată (🧬 Testele mele) ca arborele să poată fi folosit la plasare.
+Lecture de l’arbre… ¦ Citirea arborelui…
+Ensuite : cherche les descendants de ce couple (« Descendance » dans Graphiques), compare avec l’arbre de la correspondance, et note-la dans la fiche (Ancêtre commun, Fiche liée). ¦ Apoi: caută descendenții acestui cuplu („Descendență” în Grafice), compară cu arborele potrivirii și noteaz-o în fișă (Strămoș comun, Fișă legată).
+Indices ¦ Indicii
+Retenir ¦ Reține
+Noté dans la correspondance (Ancêtre commun, côté). ¦ Notat în potrivire (Strămoș comun, parte).
+Le « navigateur de chromosomes » : où chaque correspondance partage de l’ADN avec toi. Des segments qui se chevauchent viennent peut-être du même ancêtre (triangulation — à confirmer : chacun doit aussi correspondre avec l’autre sur ce segment). ¦ „Navigatorul de cromozomi”: unde fiecare potrivire are ADN în comun cu tine. Segmentele care se suprapun vin poate de la același strămoș (triangulare — de confirmat: fiecare trebuie să se potrivească și cu celălalt pe acel segment).
+Le fichier CSV que DNA Painter sait lire (« Paint a new match » → importer) ¦ Fișierul CSV pe care DNA Painter știe să-l citească („Paint a new match” → importă)
+⤒ Importer des segments (CSV) ¦ ⤒ Importă segmente (CSV)
+⤓ Exporter pour DNA Painter ¦ ⤓ Exportă pentru DNA Painter
+Segment ¦ Segment
+Chevauchements (triangulation possible) ¦ Suprapuneri (triangulare posibilă)
+Chr ¦ Chr
+De (Mb) ¦ De la (Mb)
+À (Mb) ¦ Până la (Mb)
+Correspondance 1 ¦ Potrivirea 1
+Correspondance 2 ¦ Potrivirea 2
+Aucun pour l’instant. ¦ Deocamdată niciunul.
+Segment refusé : vérifie le chromosome, et que la fin est après le début. ¦ Segment refuzat: verifică cromozomul și ca sfârșitul să fie după început.
+Combien de centimorgans partagés pour quelle relation ? Valeurs indicatives d’après le Shared cM Project (Blaine Bettinger, version 4, 2020) : une moyenne et une fourchette observées sur des milliers de cas réels. Une même valeur peut convenir à plusieurs relations. ¦ Câți centimorgani comuni pentru ce relație? Valori orientative după Shared cM Project (Blaine Bettinger, versiunea 4, 2020): o medie și un interval observate pe mii de cazuri reale. Aceeași valoare se poate potrivi mai multor relații.
+Ex. 230 ¦ Ex. 230
+Aucune relation connue pour cette valeur (au-delà de 3 720 cM, c’est soi-même ou un vrai jumeau). ¦ Nicio relație cunoscută pentru această valoare (peste 3 720 cM, ești chiar tu sau un geamăn identic).
+Tableau de référence ¦ Tabel de referință
+Fourchette ¦ Interval
+D’après ton arbre : de qui viennent l’ADN-Y (père du père du père…), l’ADN mitochondrial (mère de la mère…) et l’ADN-X d’une personne. Utile pour savoir qui faire tester, et pour lire un haplogroupe ou une correspondance sur le X. ¦ După arborele tău: de unde vin ADN-ul Y (tatăl tatălui tatălui…), ADN-ul mitocondrial (mama mamei…) și ADN-ul X al unei persoane. Util ca să știi pe cine să testezi și ca să citești un haplogrup sau o potrivire pe X.
+Seuls les hommes ont un ADN-Y. Une femme n’a pas d’ADN-Y : ce sont ceux de son père, de ses frères ou d’un cousin du même nom qui le portent. ¦ Doar bărbații au ADN-Y. O femeie nu are ADN-Y: îl poartă tatăl ei, frații ei sau un văr cu același nume.
+Pas de père connu dans l’arbre. ¦ Niciun tată cunoscut în arbore.
+Tous ces hommes ont (presque) le même chromosome Y : un homme vivant de cette lignée peut le faire tester. ¦ Toți acești bărbați au (aproape) același cromozom Y: un bărbat în viață din această linie îl poate testa.
+Pas de mère connue dans l’arbre. ¦ Nicio mamă cunoscută în arbore.
+Transmis par les mères à tous leurs enfants ; seules les filles le transmettent à leur tour. ¦ Transmis de mame tuturor copiilor lor; doar fiicele îl transmit la rândul lor.
+Un homme reçoit son X de sa mère seulement. Un père ne transmet que le X qu’il tient de sa mère : certains ancêtres ne peuvent donc pas avoir donné d’X. {n} : ¦ Un bărbat primește X-ul doar de la mama lui. Un tată transmite doar X-ul pe care îl are de la mama lui: unii strămoși nu pot deci să fi dat un X. {n}:
+Une femme reçoit un X de chaque parent. Un père ne transmet que le X qu’il tient de sa mère : certains ancêtres ne peuvent donc pas avoir donné d’X. {n} : ¦ O femeie primește câte un X de la fiecare părinte. Un tată transmite doar X-ul pe care îl are de la mama lui: unii strămoși nu pot deci să fi dat un X. {n}:
+Aucune estimation : ajoute-les dans un test (« 🧬 Mes tests » → Origines estimées). ¦ Nicio estimare: adaugă-le într-un test („🧬 Testele mele” → Origini estimate).
+Ce que montre l’onglet, dans l’ordre voulu, et comment. ¦ Ce arată fila, în ordinea dorită, și cum.
+Rubriques de la colonne de gauche ¦ Rubricile coloanei din stânga
+Coche ce que tu veux voir ; ↑ ↓ pour l’ordre (ou glisse la poignée). ¦ Bifează ce vrei să vezi; ↑ ↓ pentru ordine (sau trage de mâner).
+Ne montrer que les correspondances d’au moins ¦ Arată doar potrivirile de cel puțin
+Lignes affichées à la fois ¦ Rânduri afișate odată
+Méthode de Leeds : de ¦ Metoda Leeds: de la
+Total de cM pour les % (6 800 Ancestry/MyHeritage, 7 400 23andMe) ¦ Total de cM pentru % (6 800 Ancestry/MyHeritage, 7 400 23andMe)
+Sauvegarde de l’onglet ¦ Copia de siguranță a filei
+Les tests, correspondances, segments et groupes sont dans la base (et ses sauvegardes). Tu peux aussi les exporter à part. ¦ Testele, potrivirile, segmentele și grupurile sunt în bază (și în copiile ei de siguranță). Le poți și exporta separat.
+Fait. ¦ Gata.
+C’est un fichier ADN brut (tes SNP, c’est-à-dire ton génome lettre par lettre) : il n’est jamais importé. Par prudence pour ta vie privée et celle de ta famille, et parce qu’en France un test génétique hors cadre médical ou de recherche est interdit, l’app ne garde que les listes de correspondances et de segments. Exporte plutôt depuis la société la liste des correspondances (matches) ou le navigateur de chromosomes. ¦ Este un fișier ADN brut (SNP-urile tale, adică genomul tău literă cu literă): nu este importat niciodată. Din prudență pentru viața ta privată și a familiei tale, și pentru că în Franța un test genetic în afara cadrului medical sau de cercetare este interzis, aplicația păstrează doar listele de potriviri și de segmente. Exportă mai bine de la companie lista potrivirilor (matches) sau navigatorul de cromozomi.
+=analysée ¦ analizată|analizate|de analizate
+=visage à nommer ¦ chip de numit|chipuri de numit|de chipuri de numit
+=photo restante ¦ fotografie rămasă|fotografii rămase|de fotografii rămase
+=photo sautée ¦ fotografie sărită|fotografii sărite|de fotografii sărite
+=visage ignoré ¦ chip ignorat|chipuri ignorate|de chipuri ignorate
+Impossible de charger le modèle de reconnaissance (connexion internet requise la première fois, ou fichier modifié refusé). ¦ Modelul de recunoaștere nu a putut fi încărcat (e nevoie de internet prima dată, sau fișierul modificat a fost refuzat).
+Bibliothèque… ¦ Bibliotecă…
+Bibliothèque illisible. ¦ Bibliotecă ilizibilă.
+Bibliothèque de reconnaissance indisponible. ¦ Biblioteca de recunoaștere nu este disponibilă.
+Repérage des visages… ¦ Căutarea chipurilor…
+Points du visage… ¦ Punctele chipului…
+Empreintes des visages… ¦ Amprentele chipurilor…
+Analyse arrêtée. ¦ Analiză oprită.
+Fil de calcul impossible : {err} ¦ Firul de calcul nu a putut porni: {err}
+Le modèle met trop de temps à se charger. ¦ Modelul se încarcă prea greu.
+le calcul a planté ¦ calculul s-a blocat
+Fil de calcul en erreur. ¦ Eroare în firul de calcul.
+Calcul sur la page (plus lent)… ¦ Calcul pe pagină (mai lent)…
+Redémarrage du calcul… ¦ Repornirea calculului…
+trop longue à analyser (plus de {n} s) ¦ prea lungă de analizat (peste {n} s)
+Étape 1 : l’app repère les visages sur les photos choisies. Étape 2 : elle propose un nom d’après les visages déjà identifiés. Tout se calcule sur cet ordinateur. ¦ Pasul 1: aplicația găsește chipurile din fotografiile alese. Pasul 2: propune un nume după chipurile deja identificate. Totul se calculează pe acest calculator.
+MÉDIAS · VISAGES ¦ MEDIA · CHIPURI
+Visages ¦ Chipuri
+Chargement des photos… ¦ Se încarcă fotografiile…
+≈ {time} sur cet ordinateur ¦ ≈ {time} pe acest calculator
+environ 1 à 3 s par photo, selon l’ordinateur ¦ cam 1–3 s pe fotografie, în funcție de calculator
+<b>{n}</b> identifiés ¦ <b>{n}</b> identificați
+<b>{n}</b> identifié ¦ <b>{n}</b> identificat
+{n} identifiés ¦ {n} identificați
+{n} identifié ¦ {n} identificat
+① Trouver les visages ¦ ① Găsește chipurile
+② Qui est-ce ? ¦ ② Cine este?
+Les {n} plus récentes ¦ Cele mai recente {n}
+{n} à analyser ¦ {n} de analizat
+<b>Analyse en pause</b> : {n} sur {total} ({what}). ¦ <b>Analiză în pauză</b>: {n} din {total} ({what}).
+analyse|Abandonner ¦ Renunță
+Quelles photos analyser ? ¦ Ce fotografii analizezi?
+Sauter les photos déjà analysées ¦ Sari peste fotografiile deja analizate
+Analyser {n} ¦ Analizează {n}
+Rien à analyser ici ¦ Nimic de analizat aici
+↻ Réessayer {n} ¦ ↻ Încearcă din nou {n}
+Photos avec des visages à nommer ¦ Fotografii cu chipuri de numit
+Ouvrir {name} ¦ Deschide {name}
+détection simple ¦ detecție simplă
+Ouvrir et identifier ¦ Deschide și identifică
+Tous les visages trouvés ont un nom ou ont été ignorés. 👍 ¦ Toate chipurile găsite au un nume sau au fost ignorate. 👍
+Lance une analyse : les photos où l’app trouve des visages apparaîtront ici. ¦ Pornește o analiză: fotografiile în care aplicația găsește chipuri vor apărea aici.
+entre 1900 et 1950, vers 1925, 1960… ¦ entre 1900 et 1950, vers 1925, 1960…
+Les photos marquées avec des visages ¦ Fotografiile marcate cu chipuri
+photo de la personne, portrait d’une fiche, visages déjà identifiés, étiquette « portrait » ou « visage » ¦ fotografia persoanei, portretul unei fișe, chipuri deja identificate, eticheta „portret” sau „chip”
+Les photos affichées dans la liste Médias ¦ Fotografiile afișate în lista Media
+avec ta recherche et tes filtres actuels ¦ cu căutarea și filtrele tale actuale
+Les photos d’une personne ¦ Fotografiile unei persoane
+rattachées à sa fiche ou où elle est identifiée ¦ legate de fișa ei sau în care este identificată
+Les photos d’une étiquette ¦ Fotografiile unei etichete
+Un album ou un dossier ¦ Un album sau un dosar
+Une période ¦ O perioadă
+d’après la date de la photo, sinon sa date d’ajout ¦ după data fotografiei, altfel data adăugării
+les dernières ajoutées ¦ ultimele adăugate
+Toutes les photos ¦ Toate fotografiile
+peut être long : tu peux mettre en pause et reprendre plus tard ¦ poate dura mult: poți pune pe pauză și relua mai târziu
+En attendant, nomme les inconnus regroupés (👥). ¦ Între timp, numește necunoscuții grupați (👥).
+Pour avoir des propositions : ouvre quelques photos et identifie les visages à la main (bouton « Identifier » de la visionneuse, ou « Ouvrir et identifier » à l’étape ①), au moins une fois par personne. ¦ Ca să primești propuneri: deschide câteva fotografii și identifică chipurile de mână (butonul „Identifică” din vizualizator sau „Deschide și identifică” la pasul ①), cel puțin o dată pentru fiecare persoană.
+Aucun visage trouvé pour l’instant. Commence par l’étape ① : choisis quelques photos et lance l’analyse. ¦ Deocamdată niciun chip găsit. Începe cu pasul ①: alege câteva fotografii și pornește analiza.
+💡 Propositions ¦ 💡 Propuneri
+👥 Inconnus regroupés ¦ 👥 Necunoscuți grupați
+❔ Autres inconnus ¦ ❔ Alți necunoscuți
+✓ Identifiés ¦ ✓ Identificați
+✓ Accepter les {n} très probables ¦ ✓ Acceptă cele {n} foarte probabile
+visage|probable ¦ probabil
+ressemblance {pct} % ¦ asemănare {pct} %
+ou {name} ? ¦ sau {name}?
+✓ Oui ¦ ✓ Da
+Quelqu’un d’autre… ¦ Altcineva…
+Pas un visage, ou personne à ne pas nommer ¦ Nu e un chip, sau o persoană care nu trebuie numită
+Aucune proposition pour l’instant : analyse plus de photos, ou identifie plus de visages à la main. ¦ Deocamdată nicio propunere: analizează mai multe fotografii sau identifică mai multe chipuri de mână.
+<b>{n} visages</b> qui se ressemblent, sur {p} photos. ¦ <b>{n} chipuri</b> care se aseamănă, pe {p} fotografii.
+Nommer… ¦ Numește…
+Demander à la famille ¦ Întreabă familia
+Personne n’est encore identifié. ¦ Nimeni nu este încă identificat.
+⏸ En pause (la photo en cours se termine) ¦ ⏸ În pauză (fotografia în curs se termină)
+{s} s par photo · reste ≈ {left} ¦ {s} s pe fotografie · mai rămân ≈ {left}
+vitesse : on mesure… ¦ viteză: se măsoară…
+■ Arrêter ¦ ■ Oprește
+Calcul sur la page (le fil à part n’a pas pu démarrer) : un peu plus lent. ¦ Calcul pe pagină (firul separat nu a putut porni): puțin mai lent.
+Modèle de reconnaissance indisponible ({why}). Détection simple du navigateur : les visages sont repérés, mais sans proposition de nom. ¦ Modelul de recunoaștere nu este disponibil ({why}). Detecție simplă a browserului: chipurile sunt găsite, dar fără propunere de nume.
+Chargement du modèle… ¦ Se încarcă modelul…
+Chargement du modèle : {step} ¦ Se încarcă modelul: {step}
+■ Analyse arrêtée : {n}{more}. ¦ ■ Analiză oprită: {n}{more}.
+✓ Analyse finie : {n}{more}. ¦ ✓ Analiză terminată: {n}{more}.
+Il reste {n} : « ▶ Reprendre » quand tu veux. ¦ Mai rămân {n}: „▶ Reia” când vrei.
+■ Analyse arrêtée. ¦ ■ Analiză oprită.
+{n} : tu pourras reprendre. ¦ {n}: vei putea relua.
+Visage ignoré ¦ Chip ignorat
+photos de {name} ¦ fotografiile lui {name}
+photos sautées ¦ fotografii sărite
+Identifié : {name} ¦ Identificat: {name}
+{n} (certitude « probable ») ¦ {n} (certitudine „probabil”)
+Qui est-ce ? ({n} visages) ¦ Cine este? ({n} chipuri)
+Certitude ¦ Certitudine
+Certaine ¦ Sigur
+Possible ¦ Posibil
+Choisis… ¦ Alege…
+Hier et aujourd’hui ¦ Ieri și azi
+Nom de la comparaison ¦ Numele comparației
+Enregistrer la comparaison (reliée aux deux photos et aux personnes) ¦ Salvează comparația (legată de cele două fotografii și de persoane)
+A — l’image ancienne ¦ A — imaginea veche
+B — la photo d’aujourd’hui ¦ B — fotografia de azi
+Photo A ¦ Fotografia A
+Photo B ¦ Fotografia B
+La photo A ¦ Fotografia A
+La photo B ¦ Fotografia B
+la photo A ¦ fotografia A
+La photo « {name} » n’a pas pu être ouverte. ¦ Fotografia „{name}” nu a putut fi deschisă.
+Choisis la photo B à droite → ¦ Alege fotografia B în dreapta →
+Choisis la photo A à droite → ¦ Alege fotografia A în dreapta →
+Clique <b>{what}</b> (à ta gauche sur l’écran). ¦ Fă clic pe <b>{what}</b> (în stânga ta pe ecran).
+Échap pour arrêter. ¦ Esc ca să oprești.
+Clique sur la photo <b>{side}</b> : {what}. ¦ Fă clic pe fotografia <b>{side}</b>: {what}.
+Aucun visage trouvé sur la photo {side} : pose les yeux en deux clics. ¦ Niciun chip găsit pe fotografia {side}: pune ochii din două clicuri.
+Le modèle de visages n’a pas pu être chargé. ¦ Modelul de chipuri nu a putut fi încărcat.
+Pose les yeux en deux clics par photo. ¦ Pune ochii din două clicuri pe fotografie.
+Pas encore de ressemblance calculée pour ces deux photos. ¦ Încă nicio asemănare calculată pentru aceste două fotografii.
+« ✨ Repérer les yeux tout seul » la calcule (modèle de visages sur cet ordinateur), ou lance <b>👤 Visages</b> sur ces photos (Listes → Médias). ¦ „✨ Găsește ochii automat” o calculează (modelul de chipuri pe acest calculator), sau pornește <b>👤 Chipuri</b> pe aceste fotografii (Liste → Media).
+Calculée par le modèle de visages, sur cet ordinateur ({from}). L’âge, la lumière, l’angle et la qualité des photos changent beaucoup le résultat ; un air de famille (parent, frère, sœur) peut aussi donner une ressemblance forte. À confirmer par les actes. ¦ Calculată de modelul de chipuri, pe acest calculator ({from}). Vârsta, lumina, unghiul și calitatea fotografiilor schimbă mult rezultatul; un aer de familie (părinte, frate, soră) poate da și el o asemănare puternică. De confirmat prin acte.
+visages repérés à l’instant ¦ chipuri găsite chiar acum
+visages trouvés par 👤 Visages ¦ chipuri găsite de 👤 Chipuri
+Rideau ¦ Cortină
+Part de B ¦ Partea lui B
+La photo B, à poser à côté de « {name} ». ¦ Fotografia B, de pus lângă „{name}”.
+Une photo de cette personne ; ensuite, la photo à comparer. ¦ O fotografie a acestei persoane; apoi, fotografia de comparat.
+Comparer deux photos (ressemblance, même personne à deux âges…) ¦ Compară două fotografii (asemănare, aceeași persoană la două vârste…)
+Ressemblance très forte — ce n’est pas une preuve ¦ Asemănare foarte puternică — nu este o dovadă
+Ressemblance forte — ce n’est pas une preuve ¦ Asemănare puternică — nu este o dovadă
+Ressemblance moyenne — ce n’est pas une preuve ¦ Asemănare medie — nu este o dovadă
+Ressemblance faible — ce n’est pas une preuve ¦ Asemănare slabă — nu este o dovadă
+Affichage des deux photos ¦ Afișarea celor două fotografii
+Zoomer et déplacer les deux photos ensemble ¦ Mărește și mută cele două fotografii împreună
+Zoomer ¦ Mărește
+Toute la photo ¦ Toată fotografia
+Toute la photo (double-clic) ¦ Toată fotografia (dublu clic)
+Les deux photos : molette pour zoomer, glisser pour déplacer, double-clic pour revoir toute la photo ¦ Cele două fotografii: rotița pentru zoom, tragi ca să muți, dublu clic ca să revezi toată fotografia
+Les deux photos ¦ Cele două fotografii
+Mettre A à la place de B et B à la place de A ¦ Pune A în locul lui B și B în locul lui A
+⇄ Échanger A et B ¦ ⇄ Schimbă A cu B
+Caler la photo d’aujourd’hui ¦ Potrivește fotografia de azi
+Clique deux mêmes repères sur chaque photo (le haut du clocher, le coin d’un toit…) : la photo d’aujourd’hui est tournée et mise à la même taille. ¦ Fă clic pe aceleași două repere pe fiecare fotografie (vârful clopotniței, colțul unui acoperiș…): fotografia de azi este rotită și adusă la aceeași mărime.
+Deux clics sur la photo A, puis les deux mêmes repères sur la photo B ¦ Două clicuri pe fotografia A, apoi aceleași două repere pe fotografia B
+📌 Poser 2 repères par photo ¦ 📌 Pune 2 repere pe fotografie
+Caler sur les repères ¦ Potrivește după repere
+✕ Retirer les repères ¦ ✕ Scoate reperele
+Ajuster à la main ¦ Ajustează de mână
+Glisser sur l’image déplace seulement la photo d’aujourd’hui ¦ Tragerea pe imagine mută doar fotografia de azi
+Glisser déplace la photo B ¦ Tragerea mută fotografia B
+Les yeux (alignement) ¦ Ochii (aliniere)
+Les deux visages sont mis à la même taille, les yeux à la même hauteur : la comparaison est bien plus juste. ¦ Cele două chipuri sunt aduse la aceeași mărime, ochii la aceeași înălțime: comparația este mult mai corectă.
+✨ Repérer les yeux tout seul ¦ ✨ Găsește ochii automat
+Clique l’œil gauche puis l’œil droit sur chaque photo ¦ Fă clic pe ochiul stâng, apoi pe ochiul drept, pe fiecare fotografie
+👁 Poser les yeux (2 clics par photo) ¦ 👁 Pune ochii (2 clicuri pe fotografie)
+Aligner sur les yeux ¦ Aliniază după ochi
+✕ Retirer les yeux posés ¦ ✕ Scoate ochii puși
+Prises sur les deux photos ; ajoute ou retire qui tu veux. ¦ Luate de pe cele două fotografii; adaugă sau scoate pe cine vrei.
+Ce que tu remarques : forme du nez, des oreilles, implantation des cheveux, grain de beauté, âge supposé… ¦ Ce observi: forma nasului, a urechilor, linia părului, alunițe, vârsta presupusă…
+Fondu : part de la photo B ; rideau : place du rideau ¦ Estompare: partea fotografiei B; cortină: poziția cortinei
+Choisis une photo (image). ¦ Alege o fotografie (imagine).
+C’est déjà l’autre photo : choisis-en une autre. ¦ Aceasta este deja cealaltă fotografie: alege alta.
+Choisis les deux photos à comparer ¦ Alege cele două fotografii de comparat
+Deux portraits : la même personne à deux âges, deux personnes qu’on croit parentes… ¦ Două portrete: aceeași persoană la două vârste, două persoane despre care se crede că sunt rude…
+🖼 Choisir la photo A ¦ 🖼 Alege fotografia A
+Pose d’abord deux repères sur chaque photo (📌). ¦ Pune mai întâi două repere pe fiecare fotografie (📌).
+Pose d’abord les yeux sur les deux photos (✨ tout seul, ou 👁 deux clics par photo). ¦ Pune mai întâi ochii pe cele două fotografii (✨ automat sau 👁 două clicuri pe fotografie).
+le repère 1 sur l’image ancienne (A) ¦ reperul 1 pe imaginea veche (A)
+le repère 2 sur l’image ancienne (A) ¦ reperul 2 pe imaginea veche (A)
+le même repère 1 sur la photo d’aujourd’hui (B) ¦ același reper 1 pe fotografia de azi (B)
+le même repère 2 sur la photo d’aujourd’hui (B) ¦ același reper 2 pe fotografia de azi (B)
+l’œil de gauche de la photo A ¦ ochiul stâng din fotografia A
+l’œil de droite de la photo A ¦ ochiul drept din fotografia A
+l’œil de gauche de la photo B ¦ ochiul stâng din fotografia B
+l’œil de droite de la photo B ¦ ochiul drept din fotografia B
+Choisis d’abord les deux photos. ¦ Alege mai întâi cele două fotografii.
+Repères non posés : rien n’a changé. ¦ Repere nepuse: nu s-a schimbat nimic.
+Yeux non posés : rien n’a changé. ¦ Ochi nepuși: nu s-a schimbat nimic.
+Repères posés : la photo d’aujourd’hui est calée sur l’ancienne. ¦ Repere puse: fotografia de azi este potrivită pe cea veche.
+Yeux posés : les deux visages sont alignés. ¦ Ochi puși: cele două chipuri sunt aliniate.
+Le modèle de visages n’est pas disponible ici : pose les yeux en deux clics par photo. ¦ Modelul de chipuri nu este disponibil aici: pune ochii din două clicuri pe fotografie.
+Le modèle de visages (≈ 13 Mo, sur cet ordinateur seulement) se charge une fois, au premier clic. ¦ Modelul de chipuri (≈ 13 MB, doar pe acest calculator) se încarcă o singură dată, la primul clic.
+Visages trouvés : les yeux sont alignés. ¦ Chipuri găsite: ochii sunt aliniați.
+Le modèle de visages n’a pas pu être chargé (il faut internet la première fois) : pose les yeux en deux clics par photo. ¦ Modelul de chipuri nu a putut fi încărcat (e nevoie de internet prima dată): pune ochii din două clicuri pe fotografie.
+Choisis les deux photos. ¦ Alege cele două fotografii.
+Choisis les deux photos avant d’enregistrer. ¦ Alege cele două fotografii înainte de a salva.
+Les derniers changements de la comparaison ne sont pas enregistrés. ¦ Ultimele schimbări ale comparației nu sunt salvate.
+C’est la même photo : choisis-en une autre. ¦ Este aceeași fotografie: alege alta.
+comparaison de photos ¦ comparație de fotografii
+Deux photos ¦ Două fotografii
+=autre déplacement ¦ altă deplasare|alte deplasări|de alte deplasări
+=déplacement ¦ deplasare|deplasări|de deplasări
+=personne vivante ou confidentielle ¦ persoană în viață sau confidențială|persoane în viață sau confidențiale|de persoane în viață sau confidențiale
+=lieu de la famille ¦ loc al familiei|locuri ale familiei|de locuri ale familiei
+=couche importée ¦ strat importat|straturi importate|de straturi importate
+=couche ¦ strat|straturi|de straturi
+{n} jours ({w} semaines) ¦ {n} zile ({w} săptămâni)
+Il faut environ {dur} pour aller de {from} à {to} ({how}, ≈ {what}). ¦ Ca să mergi de la {from} la {to} îți trebuie cam {dur} ({how}, ≈ {what}).
+Il faut environ {dur} pour aller de {from} à {to} en {year} ({how}, ≈ {what}). ¦ Ca să mergi de la {from} la {to} în {year} îți trebuie cam {dur} ({how}, ≈ {what}).
+Il fallait environ {dur} pour aller de {from} à {to} en {year} ({how}, ≈ {what}). ¦ În {year} trebuia cam {dur} ca să mergi de la {from} la {to} ({how}, ≈ {what}).
+{km} sur l’eau ¦ {km} pe apă
+{km} de voie ¦ {km} de cale ferată
+{km} de route ¦ {km} de drum
+À pied ¦ Pe jos
+à pied ¦ pe jos
+À cheval ¦ Călare
+à cheval ¦ călare
+En diligence ¦ Cu diligența
+en diligence ¦ cu diligența
+Bateau (rivière) ¦ Vapor (râu)
+en bateau sur la rivière ¦ cu vaporul pe râu
+Bateau (mer) ¦ Corabie (mare)
+en bateau ¦ cu corabia
+En train ¦ Cu trenul
+en train ¦ cu trenul
+4 à 5 km/h, 8 heures de marche par jour ¦ 4–5 km/h, 8 ore de mers pe zi
+au pas et au trot, en ménageant sa monture (un courrier qui change de cheval aux relais va deux fois plus loin) ¦ la pas și la trap, cruțând calul (un curier care schimbă calul la poște merge de două ori mai departe)
+coches puis diligences et malles-poste ; on roule de plus en plus la nuit ¦ trăsuri, apoi diligențe și poștalioane; se circulă tot mai mult noaptea
+coche d’eau, halage, puis bateaux à vapeur ¦ bărci de pasageri, tragere la edec, apoi vapoare cu aburi
+à la voile jusque vers 1840, puis à la vapeur ¦ cu pânze până pe la 1840, apoi cu aburi
+selon les lignes ouvertes : grandes lignes de 1840 à 1860, petites lignes jusque vers 1910 ¦ după liniile deschise: liniile mari între 1840 și 1860, liniile mici până pe la 1910
+par la route ¦ pe drum
+par la rivière ¦ pe râu
+par la mer ¦ pe mare
+par le rail ¦ pe calea ferată
+Fernand Braudel, « Civilisation matérielle, économie et capitalisme » (1979) et « L’identité de la France » (1986) : à pied, 30 à 40 km par jour ; à cheval, 50 à 60 km par jour pour un voyageur qui garde sa monture. ¦ Fernand Braudel, „Civilisation matérielle, économie et capitalisme” (1979) și „L’identité de la France” (1986): pe jos, 30–40 km pe zi; călare, 50–60 km pe zi pentru un călător care își păstrează calul.
+Règlements militaires (XVIIIᵉ–XIXᵉ s.) : l’étape ordinaire d’une troupe à pied est de 24 à 28 km par jour ; un marcheur seul fait davantage. ¦ Regulamente militare (sec. XVIII–XIX): etapa obișnuită a unei trupe pedestre este de 24–28 km pe zi; un drumeț singur face mai mult.
+Guy Arbellot, « La grande mutation des routes de France au milieu du XVIIIᵉ siècle », Annales ESC, 1973, et « Atlas de la Révolution française », t. 1 « Routes et communications » (1987) : les temps de parcours depuis Paris sont presque divisés par deux entre 1765 et 1780 (turgotines). ¦ Guy Arbellot, „La grande mutation des routes de France au milieu du XVIIIᵉ siècle”, Annales ESC, 1973, și „Atlas de la Révolution française”, vol. 1 „Routes et communications” (1987): duratele drumurilor de la Paris s-au înjumătățit aproape între 1765 și 1780 (turgotines).
+Christophe Studeny, « L’invention de la vitesse. France, XVIIIᵉ–XXᵉ siècle » (Gallimard, 1995) : diligences des Messageries roulant jour et nuit vers 1830, malles-poste à près de 10 km/h vers 1845. ¦ Christophe Studeny, „L’invention de la vitesse. France, XVIIIᵉ–XXᵉ siècle” (Gallimard, 1995): diligențele Messageries circulă zi și noapte pe la 1830, poștalioanele cu aproape 10 km/h pe la 1845.
+François Caron, « Histoire des chemins de fer en France », t. 1 (1997) : première ligne de voyageurs en 1837 (Paris – Saint-Germain), grandes lignes ouvertes de 1840 à 1860, environ 40 km/h de moyenne arrêts compris vers 1860. ¦ François Caron, „Histoire des chemins de fer en France”, vol. 1 (1997): prima linie de călători în 1837 (Paris – Saint-Germain), liniile mari deschise între 1840 și 1860, cam 40 km/h în medie cu opriri cu tot pe la 1860.
+Traversées de l’Atlantique Nord : 30 à 45 jours à la voile ; 12 à 14 jours en vapeur vers 1860 ; 6 à 7 jours vers 1900 ; 4 à 5 jours pour les grands paquebots des années 1930. ¦ Traversări ale Atlanticului de Nord: 30–45 de zile cu pânze; 12–14 zile cu aburi pe la 1860; 6–7 zile pe la 1900; 4–5 zile pentru marile pachebote din anii 1930.
+Coches d’eau et halage : 20 à 40 km par jour en remontant, davantage en descendant ; premiers bateaux à vapeur sur la Saône et le Rhône vers 1830. ¦ Bărci de pasageri și tragere la edec: 20–40 km pe zi în amonte, mai mult în aval; primele vapoare cu aburi pe Saône și Rhône pe la 1830.
+réglé ¦ setat
+Vitesse réglée par toi ¦ Viteză setată de tine
+Pas avant {year} ¦ Nu înainte de {year}
+km/j ¦ km/zi
+{name} : kilomètres par jour ¦ {name}: kilometri pe zi
+Détour {how} ¦ Ocol {how}
+Vitesses de trajet enregistrées ¦ Vitezele de drum au fost salvate
+Vitesses remises comme au départ ¦ Vitezele au fost readuse la starea inițială
+Tulle, Brive… ¦ Tulle, Brive…
+Paris… ¦ Paris…
+Un des deux lieux n’a pas de position sur la carte ({name}) : place-le d’abord. ¦ Unul dintre cele două locuri nu are poziție pe hartă ({name}): plasează-l mai întâi.
+À vol d’oiseau : <b>{km}</b> ¦ În linie dreaptă: <b>{km}</b>
+Je relis ses événements… ¦ Recitesc evenimentele…
+Au total, environ <b>{km}</b> à vol d’oiseau d’un lieu de vie à l’autre ({n}). ¦ În total, cam <b>{km}</b> în linie dreaptă de la un loc de viață la altul ({n}).
+Distance parcourue ¦ Distanță parcursă
+Par jour ¦ Pe zi
+⚙️ Vitesses et sources ¦ ⚙️ Viteze și surse
+Les vitesses suivent l’époque (ordres de grandeur pour la France et l’Europe de l’Ouest). Écris une autre distance par jour pour un moyen ; vide = selon l’époque. ¦ Vitezele urmează epoca (ordine de mărime pentru Franța și Europa de Vest). Scrie o altă distanță pe zi pentru un mijloc; gol = după epocă.
+Le détour : la route n’est jamais droite. 1,25 = 25 % de plus que la distance à vol d’oiseau. ¦ Ocolul: drumul nu e niciodată drept. 1,25 = cu 25 % mai mult decât distanța în linie dreaptă.
+📍 Entre deux lieux ¦ 📍 Între două locuri
+👤 Le long d’une vie ¦ 👤 De-a lungul unei vieți
+Année du voyage ¦ Anul călătoriei
+Distances et temps de trajet ¦ Distanțe și durate de drum
+Distances et temps de trajet… ¦ Distanțe și durate de drum…
+Choisis le lieu de départ et le lieu d’arrivée ¦ Alege locul de plecare și locul de sosire
+Choisis une personne pour suivre ses déplacements ¦ Alege o persoană ca să-i urmărești deplasările
+Pas de déplacement : il faut au moins deux lieux placés sur la carte ¦ Nicio deplasare: trebuie cel puțin două locuri plasate pe hartă
+Pas de déplacement entre deux lieux placés ¦ Nicio deplasare între două locuri plasate
+🧭 Ses déplacements ¦ 🧭 Deplasările sale
+🧭 Calculer un trajet… ¦ 🧭 Calculează un traseu…
+📜 Ancienne (parchemin) ¦ 📜 Veche (pergament)
+🎖 État-major (XIXᵉ) ¦ 🎖 Stat-major (sec. XIX)
+🌙 Bleu nuit et or ¦ 🌙 Albastru-noapte și auriu
+🎯 Autour des lieux ¦ 🎯 În jurul locurilor
+CARTE · À IMPRIMER ¦ HARTĂ · DE TIPĂRIT
+Grande carte à imprimer ¦ Hartă mare de tipărit
+Grande carte à imprimer… ¦ Hartă mare de tipărit…
+Grande carte ¦ Hartă mare
+Cartouche ¦ Cartuș
+Les BORIE ¦ Familia BORIE
+Ce qu’on met dessus ¦ Ce punem pe ea
+● Lieux de naissance ¦ ● Locuri de naștere
+◆ Lieux de mariage ¦ ◆ Locuri de căsătorie
+✝ Lieux de décès ¦ ✝ Locuri de deces
+Migrations (naissance → décès) ¦ Migrații (naștere → deces)
+➜ Migrations (naissance → décès) ¦ ➜ Migrații (naștere → deces)
+👤 Portraits en médaillon ¦ 👤 Portrete în medalion
+Une branche (ses ancêtres seulement) ¦ O ramură (doar strămoșii ei)
+Toute la famille ¦ Toată familia
+Habillage ¦ Decor
+Cartouche (titre, famille, dates) ¦ Cartuș (titlu, familie, date)
+Jamais de personne vivante ni de fiche confidentielle sur cette carte. Le fond est dessiné par l’app (Natural Earth, IGN), sans tuiles d’Internet : il reste net à toutes les tailles. ¦ Niciodată o persoană în viață sau o fișă confidențială pe această hartă. Fundalul este desenat de aplicație (Natural Earth, IGN), fără plăci de pe internet: rămâne clar la orice mărime.
+Les {name} ¦ Familia {name}
+Notre famille ¦ Familia noastră
+Les lieux de la famille ¦ Locurile familiei
+Fond : {src} ¦ Fundal: {src}
+Natural Earth (domaine public) · IGN Admin Express (Licence Ouverte) ¦ Natural Earth (domeniu public) · IGN Admin Express (Licence Ouverte)
+Natural Earth (domaine public) ¦ Natural Earth (domeniu public)
+dessin impossible ¦ desen imposibil
+image trop grande pour ce navigateur ¦ imagine prea mare pentru acest browser
+{n} laissées de côté ¦ {n} lăsate deoparte
+{n} laissée de côté ¦ {n} lăsată deoparte
+image : jusqu’à {w} × {h} px ({dpi} ppp) ¦ imagine: până la {w} × {h} px ({dpi} ppi)
+Aucun lieu placé sur la carte pour ces choix : place les lieux de la famille (fiche du lieu → position) ou coche d’autres événements. ¦ Niciun loc plasat pe hartă pentru aceste alegeri: plasează locurile familiei (fișa locului → poziție) sau bifează alte evenimente.
+Qualité ramenée à {dpi} ppp (taille de l’affiche, mémoire du navigateur). ¦ Calitate redusă la {dpi} ppi (mărimea afișului, memoria browserului).
+{paper}, prêt pour l’imprimeur ¦ {paper}, gata pentru tipografie
+haute définition ¦ înaltă definiție
+📍 Lieux de la famille en épingles ¦ 📍 Locurile familiei ca ace cu gămălie
+Glisse pour tourner, molette pour zoomer. Au clavier : ← → pour tourner, ↑ ↓ pour pencher, + et − pour zoomer, 0 pour revenir. ¦ Trage ca să rotești, rotița ca să mărești. De la tastatură: ← → ca să rotești, ↑ ↓ ca să înclini, + și − pentru zoom, 0 ca să revii.
+Relief en 3D ¦ Relief în 3D
+Relief 3D ¦ Relief 3D
+Relief 3D… ¦ Relief 3D…
+CARTE · RELIEF ¦ HARTĂ · RELIEF
+Exagération du relief ¦ Exagerarea reliefului
+Choisis le lieu du centre (un lieu placé sur la carte) ¦ Alege locul din centru (un loc plasat pe hartă)
+Je lis les altitudes… ¦ Citesc altitudinile…
+La carte du relief n’est pas installée : elle vient avec la Météo d’autrefois (Réglages → 🌦 Météo d’autrefois). ¦ Harta reliefului nu este instalată: vine cu Vremea de odinioară (Setări → 🌦 Vremea de odinioară).
+Pas d’altitude pour cette zone : la carte du relief couvre {n} pays ({list}). ¦ Nicio altitudine pentru această zonă: harta reliefului acoperă {n} țări ({list}).
+Pas d’altitude pour cette zone : la carte du relief couvre seulement quelques pays. ¦ Nicio altitudine pentru această zonă: harta reliefului acoperă doar câteva țări.
+{km} de côté ¦ {km} latura
+Altitudes : {min} m à {max} m ¦ Altitudini: de la {min} m la {max} m
+{pct} % sans altitude (mer ou hors de la carte) ¦ {pct} % fără altitudine (mare sau în afara hărții)
+{n} dans la zone ¦ {n} în zonă
+Altitudes : Copernicus DEM GLO-90 (grille de 30″), © DLR / Airbus, Copernicus. ¦ Altitudini: Copernicus DEM GLO-90 (grilă de 30″), © DLR / Airbus, Copernicus.
+Le moteur 3D ne se charge pas. ¦ Motorul 3D nu se încarcă.
+Ce navigateur ne sait pas dessiner en 3D (WebGL éteint). ¦ Acest browser nu știe să deseneze în 3D (WebGL oprit).
+Ma couche ¦ Stratul meu
+Mes couches ¦ Straturile mele
+Mes couches (dessiner) ¦ Straturile mele (desenează)
+Cacher mes couches ¦ Ascunde straturile mele
+Clique sur la carte pour poser le point. Échap pour arrêter. ¦ Fă clic pe hartă ca să pui punctul. Esc ca să oprești.
+Clique point par point. ¦ Fă clic punct cu punct.
+Entrée ou double-clic pour finir, ⌫ pour retirer le dernier, Échap pour arrêter. ¦ Enter sau dublu clic ca să termini, ⌫ ca să scoți ultimul, Esc ca să oprești.
+Couleur de la couche ¦ Culoarea stratului
+Dessiner dans cette couche ¦ Desenează în acest strat
+Aucune couche pour l’instant ¦ Deocamdată niciun strat
+Importer des couches ¦ Importă straturi
+GeoJSON ou KML ¦ GeoJSON sau KML
+Aucune forme lisible dans ce fichier. ¦ Nicio formă lizibilă în acest fișier.
+⬠ Nom de la zone ¦ ⬠ Numele zonei
+〰 Nom de l’itinéraire ¦ 〰 Numele traseului
+Facultatif. ¦ Opțional.
+Les terres de la famille ¦ Pământurile familiei
+Le chemin de l’école ¦ Drumul spre școală
+📝 La note ¦ 📝 Nota
+📍 Nom du point ¦ 📍 Numele punctului
+Ce que tu veux noter à cet endroit. ¦ Ce vrei să notezi în acest loc.
+Ici se trouvait le moulin ¦ Aici era moara
+〰 Itinéraire ¦ 〰 Traseu
+⬠ Zone ¦ ⬠ Zonă
+📍 Point ¦ 📍 Punct
+📝 Note ¦ 📝 Notă
+Zone ajoutée à « {name} » ¦ Zonă adăugată în „{name}”
+Itinéraire ajouté à « {name} » ¦ Traseu adăugat în „{name}”
+Note ajoutée à « {name} » ¦ Notă adăugată în „{name}”
+Point ajouté à « {name} » ¦ Punct adăugat în „{name}”
+{dur} aujourd’hui ¦ {dur} astăzi
+« {name} » supprimé de la couche ¦ „{name}” a fost șters din strat
+« {name} » modifié ¦ „{name}” a fost modificat
+« Aucune » = la couleur de la couche ¦ „Niciuna” = culoarea stratului
+MES COUCHES ¦ STRATURILE MELE
+Renommer la couche ¦ Redenumește stratul
+Couche renommée « {name} » ¦ Strat redenumit „{name}”
+Exporter en GeoJSON ¦ Exportă în GeoJSON
+Exporter en KML ¦ Exportă în KML
+Supprimer la couche ¦ Șterge stratul
+Couche « {name} » supprimée ¦ Stratul „{name}” a fost șters
+Couleur de la couche changée ¦ Culoarea stratului a fost schimbată
+Couche « {name} » créée ¦ Stratul „{name}” a fost creat
+Toutes en GeoJSON ¦ Toate în GeoJSON
+Toutes en KML ¦ Toate în KML
+Zone ¦ Zonă
+{n} Ko ¦ {n} KB
+Fond à comparer ¦ Fundal de comparat
+Façon de comparer ¦ Mod de comparare
+▏ Trait ¦ ▏ Linie
+◐ Transparence ¦ ◐ Transparență
+Transparence du fond à comparer ¦ Transparența fundalului de comparat
+Transparence en % ¦ Transparență în %
+Trait de comparaison : glisse-le, ou flèches gauche et droite ¦ Linia de comparare: trage-o sau folosește săgețile stânga și dreapta
+(approximatif) ¦ (aproximativ)
+Frontières ¦ Granițe
+🏛 Province : {name} ¦ 🏛 Provincie: {name}
+🏛 Département de 1790 : {name} ¦ 🏛 Departament din 1790: {name}
+Tracé approximatif, d’après les départements d’aujourd’hui ({list}). ¦ Contur aproximativ, după departamentele de azi ({list}).
+Tracé approximatif, d’après les départements d’aujourd’hui. ¦ Contur aproximativ, după departamentele de azi.
+🏚 Communes disparues : à télécharger une fois (Réglages → 🏛 Frontières anciennes). ¦ 🏚 Comune dispărute: de descărcat o singură dată (Setări → 🏛 Granițe vechi).
+🏚 Zoome sur une région pour voir les communes disparues. ¦ 🏚 Mărește o regiune ca să vezi comunele dispărute.
+Pas français en 1789 : royaume de Sardaigne (français en 1860). L’ouest (Grasse) était en Provence. ¦ Nu era francez în 1789: Regatul Sardiniei (francez în 1860). Vestul (Grasse) era în Provence.
+Pas française en 1789 : royaume de Sardaigne (française en 1860). ¦ Nu era franceză în 1789: Regatul Sardiniei (franceză în 1860).
+Pas français en 1789 : Avignon et le Comtat appartenaient au pape (réunis en 1791). ¦ Nu era francez în 1789: Avignon și Comtat aparțineau papei (alipite în 1791).
+Mulhouse était une république alliée des Suisses (réunie en 1798). ¦ Mulhouse era o republică aliată a elvețienilor (alipită în 1798).
+Montbéliard appartenait au Wurtemberg (réuni en 1793). ¦ Montbéliard aparținea de Württemberg (alipit în 1793).
+Coupé en Rhône et Loire en 1793. ¦ Împărțit în Rhône și Loire în 1793.
+Le département de Paris (puis de la Seine, 1795). ¦ Departamentul Paris (apoi Seine, 1795).
+Partagé en 1968 (Yvelines, Essonne, Val-d’Oise…). ¦ Împărțit în 1968 (Yvelines, Essonne, Val-d’Oise…).
+Le Tarn-et-Garonne n’existe qu’en 1808 (pris au Lot surtout, et à 5 départements voisins) : ici rangé avec le Lot. ¦ Tarn-et-Garonne există abia din 1808 (luat mai ales din Lot și din 5 departamente vecine): aici trecut la Lot.
+Un seul département en 1790 (coupé en deux de 1793 à 1811, puis en 1976). ¦ Un singur departament în 1790 (împărțit în două între 1793 și 1811, apoi în 1976).
+Devenu Maine-et-Loire en 1791. ¦ Devenit Maine-et-Loire în 1791.
+Limites changées en 1871 (Meurthe-et-Moselle). ¦ Limite schimbate în 1871 (Meurthe-et-Moselle).
+Limites changées en 1871. ¦ Limite schimbate în 1871.
+Belfort en faisait partie jusqu’en 1871. ¦ Belfort a făcut parte din el până în 1871.
+Devenu Alpes-de-Haute-Provence en 1970. ¦ Devenit Alpes-de-Haute-Provence în 1970.
+Comté de Nice (royaume de Sardaigne) : pas français en 1790 ¦ Comitatul Nisa (Regatul Sardiniei): nu era francez în 1790
+Savoie (royaume de Sardaigne) : pas française en 1790 ¦ Savoia (Regatul Sardiniei): nu era franceză în 1790
+Avignon et Comtat Venaissin (au pape) : réunis en 1791 ¦ Avignon și Comtat Venaissin (ale papei): alipite în 1791
+Pas en France en 1790. ¦ Nu era în Franța în 1790.
+réunie en commune nouvelle ¦ unită într-o comună nouă
+Réglages · Cartes ¦ Setări · Hărți
+Provinces, départements de 1790 et communes disparues, sur la Carte (bouton « 🏛 Frontières »). ¦ Provincii, departamente din 1790 și comune dispărute, pe Hartă (butonul „🏛 Granițe”).
+↗ Voir sur la Carte ¦ ↗ Vezi pe Hartă
+🏛 Provinces (≈ 1789) et départements de 1790 ¦ 🏛 Provincii (≈ 1789) și departamente din 1790
+Livrés avec l’app : rien à télécharger. Ce sont des tracés <b>approximatifs</b>, faits d’après les départements d’aujourd’hui (chaque département rangé dans la province qui en couvre la plus grande partie). Aucune source libre et officielle de leurs vrais contours n’a été trouvée. ¦ Livrate cu aplicația: nimic de descărcat. Sunt contururi <b>aproximative</b>, făcute după departamentele de azi (fiecare departament trecut la provincia care acoperă cea mai mare parte din el). Nu s-a găsit nicio sursă liberă și oficială a contururilor lor reale.
+{size} ({bytes} octets) · empreinte sha256 {hash}… · vérifié : {when} ¦ {size} ({bytes} octeți) · amprentă sha256 {hash}… · verificat: {when}
+taille inconnue ¦ mărime necunoscută
+enfants ¦ copii
+Grand-parent ¦ Bunic sau bunică
+Parrain ou marraine ¦ Naș sau nașă
+Frère ou sœur mort avant ¦ Frate sau soră mort(ă) înainte
+Choisi à la main ¦ Ales de mână
+choisi à la main ¦ ales de mână
+vérifié ¦ verificat
+Corrigé ou confirmé à la main ¦ Corectat sau confirmat de mână
+Indice de confiance : {n} sur 100 ¦ Indice de încredere: {n} din 100
+Ma branche paternelle ¦ Ramura mea paternă
+Ma branche maternelle ¦ Ramura mea maternă
+D’où vient le prénom, par époque ¦ De unde vine prenumele, pe epoci
+Enfants qui portent le prénom de leur parrain ou marraine ¦ Copii care poartă prenumele nașului sau nașei
+% des enfants qui ont un parrain ou une marraine notés ¦ % din copiii care au un naș sau o nașă notați
+Tous les prénoms ¦ Toate prenumele
+Pour chaque enfant, d’où vient probablement son prénom : parrain, marraine, grand-parent, frère ou sœur mort avant (prénom « relevé »), oncle, tante, saint du jour. Chaque piste a sa règle et un indice de confiance ; tu peux la corriger sur la fiche ou ici avec ⋯. Sans les personnes en vie ni les fiches confidentielles. ¦ Pentru fiecare copil, de unde vine probabil prenumele: naș, nașă, bunic, frate sau soră mort(ă) înainte (prenume „reluat”), unchi, mătușă, sfântul zilei. Fiecare pistă are regula ei și un indice de încredere; o poți corecta pe fișă sau aici cu ⋯. Fără persoanele în viață și fără fișele confidențiale.
+prénoms expliqués sur {n} ¦ prenume explicate din {n}
+prénom expliqué sur {n} ¦ prenume explicat din {n}
+des enfants qui ont un parrain ou une marraine notés portent son prénom ({n} sur {total}) ¦ din copiii care au un naș sau o nașă notați îi poartă prenumele ({n} din {total})
+🌳 Les flèches de transmission ¦ 🌳 Săgețile de transmitere
+Une ligne par prénom, les années en travers : chaque flèche va de la personne qui transmet à l’enfant. Clique sur un rond pour ouvrir la fiche. ¦ Un rând pe prenume, anii pe orizontală: fiecare săgeată merge de la persoana care transmite la copil. Fă clic pe un cerc ca să deschizi fișa.
+Chaque enfant ¦ Fiecare copil
+Prénom reçu de ¦ Prenume primit de la
+La liste s’arrête à {n} enfants (les prénoms les plus transmis d’abord) ; les chiffres du haut comptent tout le monde. Choisis un prénom pour voir les autres. ¦ Lista se oprește la {n} copii (prenumele cele mai transmise mai întâi); cifrele de sus îi numără pe toți. Alege un prenume ca să-i vezi pe ceilalți.
+Aucun enfant prénommé {name} ¦ Niciun copil cu prenumele {name}
+Rien à comparer pour l’instant ¦ Deocamdată nimic de comparat
+Il faut des enfants reliés à leurs parents (ou des parrains et marraines notés comme témoins « parrain », « marraine » de la naissance ou du baptême). ¦ E nevoie de copii legați de părinții lor (sau de nași și nașe notați ca martori „naș”, „nașă” la naștere sau la botez).
+Les plus sûrs d’abord ¦ Cele mai sigure mai întâi
+Les moins sûrs d’abord ¦ Cele mai puțin sigure mai întâi
+Aucune transmission entre deux fiches datées (le saint du jour n’a pas de flèche). ¦ Nicio transmitere între două fișe datate (sfântul zilei nu are săgeată).
+{name} ({year}) : ouvrir la fiche ¦ {name} ({year}): deschide fișa
+Les {n} prénoms les plus transmis ; choisis un prénom dans « Prénom » pour le voir seul. ¦ Cele mai transmise {n} prenume; alege un prenume în „Prenume” ca să-l vezi singur.
+Flèches de transmission des prénoms ¦ Săgețile de transmitere a prenumelor
+C’est bien ça ¦ Exact așa e
+Garder cette piste comme sûre ¦ Păstrează această pistă ca sigură
+Prénom reçu de {name} : confirmé. ¦ Prenume primit de la {name}: confirmat.
+Ce n’est pas ça ¦ Nu e asta
+Écarter cette piste ¦ Înlătură această pistă
+Piste écartée. ¦ Pistă înlăturată.
+Plutôt : {who} ¦ Mai degrabă: {who}
+Prénom reçu de {name}. ¦ Prenume primit de la {name}.
+Celle dont il ou elle tient son prénom ¦ Persoana de la care și-a primit prenumele
+De qui tient-il son prénom ? ¦ De la cine și-a primit prenumele?
+la personne choisie ¦ persoana aleasă
+Oublier les corrections à la main ¦ Uită corecturile făcute de mână
+Corrections oubliées : le calcul de l’app revient. ¦ Corecturi uitate: calculul aplicației revine.
+Voir la transmission de ce prénom ¦ Vezi transmiterea acestui prenume
+Prénom reçu de… ¦ Prenume primit de la…
+saint du jour : ¦ sfântul zilei:
+Prénom reçu de {who} ¦ Prenume primit de la {who}
+indice {n} sur 100 ¦ indice {n} din 100
+Ta famille ¦ Familia ta
+France ≈ ¦ Franța ≈
+personnes {who} ¦ persoane {who}
+pas de données ¦ fără date
+Moins de 10 : à lire avec prudence ¦ Mai puțin de 10: de citit cu prudență
+Aucune époque dans cette période ¦ Nicio epocă în această perioadă
+Les repères français vont de 1686 à 1999 : élargis la période. ¦ Reperele franceze merg de la 1686 la 1999: lărgește perioada.
+Les moyennes de ta famille à côté des moyennes françaises de la même époque (≈ : des ordres de grandeur, avec leur source). Une famille compte quelques dizaines d’actes : la comparaison se lit en gros. Sans les personnes en vie ni les fiches confidentielles. ¦ Mediile familiei tale alături de mediile franceze din aceeași epocă (≈: ordine de mărime, cu sursa lor). O familie are câteva zeci de acte: comparația se citește în mare. Fără persoanele în viață și fără fișele confidențiale.
+📚 D’où viennent les chiffres de la France ¦ 📚 De unde vin cifrele Franței
+TA FAMILLE ET LA FRANCE ¦ FAMILIA TA ȘI FRANȚA
+Lecture impossible. ¦ Citire imposibilă.
+Simple ¦ Simplu
+Scientifique ¦ Științific
+Ruban ¦ Bandă
+RUBAN ¦ BANDĂ
+chiffres ¦ cifre
+ex. mariage-1925 ¦ ex. nunta-1925
+Janv. ¦ Ian.
+Juil. ¦ Iul.
+Sept. ¦ Sept.
+Oct. ¦ Oct.
+Nov. ¦ Nov.
+Archive ¦ Arhivă
+{n} vie à raconter : {list} ¦ {n} viață de povestit: {list}
+JEU ¦ JOC
+côté ¦ parte
+Comparer avec… ¦ Compară cu…
+Choisir la personne… ¦ Alege persoana…
+Âge moyen au premier mariage ¦ Vârsta medie la prima căsătorie
+L’âge de chaque époux à son premier mariage (date de naissance et date du mariage connues). ¦ Vârsta fiecărui soț la prima căsătorie (data nașterii și data căsătoriei cunoscute).
+Le nombre d’enfants connus des couples mariés pendant la période (couples qui ont au moins un enfant dans ta base). En France : enfants par femme (indicateur de fécondité), qui se compare seulement en gros. ¦ Numărul de copii cunoscuți ai cuplurilor căsătorite în perioada respectivă (cupluri care au cel puțin un copil în baza ta). În Franța: copii pe femeie (indicele de fertilitate), care se compară doar în mare.
+baby-boom (1946-1964) ¦ baby-boom (1946-1964)
+Mortalité infantile (morts avant 1 an) ¦ Mortalitate infantilă (decese înainte de 1 an)
+Sur 1 000 enfants nés pendant la période dont on connaît le décès (ou qui ont vécu), combien sont morts avant 1 an. Les bébés morts manquent souvent dans les arbres : le chiffre de la famille est souvent trop bas. ¦ Din 1 000 de copii născuți în perioada respectivă al căror deces e cunoscut (sau care au trăit), câți au murit înainte de 1 an. Bebelușii morți lipsesc adesea din arbori: cifra familiei e adesea prea mică.
+Espérance de vie à la naissance ¦ Speranța de viață la naștere
+L’âge moyen au décès des personnes nées pendant la période (naissance et décès connus). Les bébés morts manquent souvent dans les arbres : le chiffre de la famille est souvent trop haut. ¦ Vârsta medie la deces a persoanelor născute în perioada respectivă (naștere și deces cunoscute). Bebelușii morți lipsesc adesea din arbori: cifra familiei e adesea prea mare.
+Savoir signer son acte de mariage ¦ Știa să semneze actul de căsătorie
+La part des époux et des épouses qui ont signé leur acte de mariage (case « a signé » des mariages). En France : mesuré sur les années indiquées ; ta famille : sur les années autour. ¦ Proporția mirilor și a mireselor care și-au semnat actul de căsătorie (căsuța „a semnat” a căsătoriilor). În Franța: măsurat pe anii indicați; familia ta: pe anii din jur.
+Part des métiers de la terre (agriculture, forêt) ¦ Proporția meseriilor pământului (agricultură, pădure)
+Parmi les personnes de la famille en âge de travailler à cette date (20 à 60 ans) et dont le métier est reconnu, la part des métiers de la terre et de la forêt (laboureur, cultivateur, journalier agricole, bûcheron…). ¦ Dintre persoanele din familie în vârstă de muncă la acea dată (20–60 de ani) și a căror meserie e recunoscută, proporția meseriilor pământului și ale pădurii (plugar, cultivator, zilier agricol, tăietor de lemne…).
+Ordres de grandeur arrondis, toujours précédés de « ≈ ». Une fourchette quand les travaux donnent des chiffres un peu différents selon l’échantillon ou les années. Un chiffre dont on n’était pas sûr n’a pas été mis : il vaut mieux une case vide qu’un chiffre inventé. Les moyennes d’une famille (quelques dizaines d’actes) ne se comparent qu’en gros à celles de toute la France. ¦ Ordine de mărime rotunjite, mereu precedate de „≈”. Un interval când studiile dau cifre puțin diferite după eșantion sau ani. O cifră de care nu eram siguri nu a fost pusă: mai bine o căsuță goală decât o cifră inventată. Mediile unei familii (câteva zeci de acte) se compară doar în mare cu cele ale întregii Franțe.
+nées entre 1846 et 1886 ¦ născute între 1846 și 1886
+{type} publiée par {from} ¦ {type} publicat de {from}
+LCNDA (fichiers livrés avec l’app) ¦ LCNDA (fișiere livrate cu aplicația)
+Événements survenus aux communes depuis 1943 (INSEE) ¦ Schimbări survenite la comune din 1943 (INSEE)
+Communes depuis 1943 (INSEE) ¦ Comune din 1943 (INSEE)

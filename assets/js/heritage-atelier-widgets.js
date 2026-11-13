@@ -90,7 +90,7 @@
                     : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Rien ${w.type === 'reminders' ? 'à te rappeler' : 'de prévu pour ce projet'} d’ici ${c.days} jours.${w.type === 'agenda' && !c.pins.length && !c.word ? ' ⚙ pour épingler des visites, salons…' : ''}</span></p>`; }
             case 'notes': return `<textarea class="h-atw-notes" data-atw-notes rows="6" placeholder="Idées, pistes, choses à ne pas oublier…">${esc(c.text)}</textarea>`;
             case 'dash': { const d = ext.dashboard?.[c.type]; if (!d) return '<p class="muted">Ce widget n’existe plus.</p>';
-                const data = await d.load?.().catch(() => null); const html = d.render('·', {id: w.id, type: c.type, limit: c.limit || 8, config: c.config || {}}, '12', data) || '';
+                const data = await d.load?.([{type: c.type, config: c.config || {}}])?.catch?.(() => null); const html = d.render('·', {id: w.id, type: c.type, limit: c.limit || 8, config: c.config || {}}, '12', data) || '';
                 return `<div class="h-atw-dash">${html}</div>`; }
         }
         return '';

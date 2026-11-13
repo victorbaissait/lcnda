@@ -95,49 +95,52 @@ function gaps_where(string $kind, ?int $from, ?int $to, array $arch, string $pla
     $from = $from ?? $to; $to = $to ?? $from;
     $mid = $from !== null ? (int) round(($from + $to) / 2) : null;
     $old = $mid !== null && $mid < 1792;
-    $commune = $place !== '' ? $place : 'la commune';
+    // 🌐 séries et conseils dans la langue de la page (i18n_t) ; le nom du service d'archives reste tel quel (il sert à retrouver les dépouillements)
+    $T = static fn(string $s, array $v = []): string => i18n_t($s, $v);
+    $commune = $place !== '' ? $place : $T('la commune');
+    $c = ['commune' => $commune];
     $steps = [];
     $td = ($to !== null && $to >= 1792) ? gaps_decennial((int) $from, (int) $to) : [];
-    $tdLine = $td ? 'Commence par les tables décennales (un index alphabétique par décennie), puis le registre de l’année trouvée.' : '';
+    $tdLine = $td ? $T('Commence par les tables décennales (un index alphabétique par décennie), puis le registre de l’année trouvée.') : '';
     $young = static fn(int $years) => $to !== null && $to > (int) date('Y') - $years;
     switch ($kind) {
         case 'birth':
-            if ($old || ($from !== null && $from < 1792)) { $steps[] = ['series' => 'Registres paroissiaux (BMS)', 'detail' => "Les baptêmes de la paroisse de $commune (collection communale, série E dépôt ou GG ; ou celle du greffe). Le baptême suit la naissance de 0 à 3 jours."]; }
-            if ($to === null || $to >= 1792) { $steps[] = ['series' => 'État civil — naissances', 'detail' => trim("Les registres de naissances de $commune. $tdLine")]; }
-            if ($young(75)) { $steps[] = ['series' => 'Mairie', 'detail' => 'Un acte de naissance de moins de 75 ans n’est pas en ligne : copie intégrale à demander à la mairie (avec la preuve de ta filiation).']; }
+            if ($old || ($from !== null && $from < 1792)) { $steps[] = ['series' => $T('Registres paroissiaux (BMS)'), 'detail' => $T('Les baptêmes de la paroisse de {commune} (collection communale, série E dépôt ou GG ; ou celle du greffe). Le baptême suit la naissance de 0 à 3 jours.', $c)]; }
+            if ($to === null || $to >= 1792) { $steps[] = ['series' => $T('État civil — naissances'), 'detail' => trim($T('Les registres de naissances de {commune}. {td}', $c + ['td' => $tdLine]))]; }
+            if ($young(75)) { $steps[] = ['series' => $T('Mairie'), 'detail' => $T('Un acte de naissance de moins de 75 ans n’est pas en ligne : copie intégrale à demander à la mairie (avec la preuve de ta filiation).')]; }
             break;
         case 'marriage':
-            if ($old || ($from !== null && $from < 1792)) { $steps[] = ['series' => 'Registres paroissiaux (BMS)', 'detail' => "Les mariages de la paroisse de $commune, d’ordinaire celle de l’épouse ; regarde aussi les bans dans la paroisse de l’époux."]; }
-            if ($to === null || $to >= 1792) { $steps[] = ['series' => 'État civil — mariages', 'detail' => trim("Les registres de mariages de $commune (commune de l’épouse le plus souvent). $tdLine Les publications de bans sont parfois dans un registre à part.")]; }
-            $steps[] = ['series' => $old ? 'Notaires (série E) et contrôle des actes (2 C)' : 'Minutes notariales (série 3 E)', 'detail' => 'Le contrat de mariage, signé chez un notaire quelques jours ou semaines avant ; depuis 1850 l’acte de mariage dit s’il y en a un, et chez quel notaire.' . ($old ? ' Le registre du contrôle des actes (série 2 C) donne le notaire et la date.' : ' Les registres de l’enregistrement (série 3 Q, actes civils publics) le retrouvent aussi.')];
-            if ($young(75)) { $steps[] = ['series' => 'Mairie', 'detail' => 'Un acte de mariage de moins de 75 ans n’est pas en ligne : copie à demander à la mairie.']; }
+            if ($old || ($from !== null && $from < 1792)) { $steps[] = ['series' => $T('Registres paroissiaux (BMS)'), 'detail' => $T('Les mariages de la paroisse de {commune}, d’ordinaire celle de l’épouse ; regarde aussi les bans dans la paroisse de l’époux.', $c)]; }
+            if ($to === null || $to >= 1792) { $steps[] = ['series' => $T('État civil — mariages'), 'detail' => trim($T('Les registres de mariages de {commune} (commune de l’épouse le plus souvent). {td} Les publications de bans sont parfois dans un registre à part.', $c + ['td' => $tdLine]))]; }
+            $steps[] = ['series' => $old ? $T('Notaires (série E) et contrôle des actes (2 C)') : $T('Minutes notariales (série 3 E)'), 'detail' => $T($old ? 'Le contrat de mariage, signé chez un notaire quelques jours ou semaines avant ; depuis 1850 l’acte de mariage dit s’il y en a un, et chez quel notaire. Le registre du contrôle des actes (série 2 C) donne le notaire et la date.' : 'Le contrat de mariage, signé chez un notaire quelques jours ou semaines avant ; depuis 1850 l’acte de mariage dit s’il y en a un, et chez quel notaire. Les registres de l’enregistrement (série 3 Q, actes civils publics) le retrouvent aussi.')];
+            if ($young(75)) { $steps[] = ['series' => $T('Mairie'), 'detail' => $T('Un acte de mariage de moins de 75 ans n’est pas en ligne : copie à demander à la mairie.')]; }
             break;
         case 'death':
-            if ($old || ($from !== null && $from < 1792)) { $steps[] = ['series' => 'Registres paroissiaux (BMS)', 'detail' => "Les sépultures de la paroisse de $commune (inhumation le lendemain du décès, en général)."]; }
-            if ($to === null || $to >= 1792) { $steps[] = ['series' => 'État civil — décès', 'detail' => trim("Les décès de $commune, mais aussi de la commune d’un enfant chez qui la personne a pu finir sa vie, ou de l’hospice voisin. $tdLine")]; }
-            if ($to === null || $to >= 1791) { $steps[] = ['series' => 'Enregistrement (série 3 Q)', 'detail' => 'Les tables des successions et absences du bureau de l’enregistrement du canton : la date et le lieu du décès, les héritiers, parfois les biens.']; }
-            if ($from !== null && $from <= 1921 && $to >= 1914) { $steps[] = ['series' => 'Mémoire des hommes', 'detail' => 'Pour un homme mort entre 1914 et 1921 : la base des « morts pour la France » (ministère des Armées).']; }
+            if ($old || ($from !== null && $from < 1792)) { $steps[] = ['series' => $T('Registres paroissiaux (BMS)'), 'detail' => $T('Les sépultures de la paroisse de {commune} (inhumation le lendemain du décès, en général).', $c)]; }
+            if ($to === null || $to >= 1792) { $steps[] = ['series' => $T('État civil — décès'), 'detail' => trim($T('Les décès de {commune}, mais aussi de la commune d’un enfant chez qui la personne a pu finir sa vie, ou de l’hospice voisin. {td}', $c + ['td' => $tdLine]))]; }
+            if ($to === null || $to >= 1791) { $steps[] = ['series' => $T('Enregistrement (série 3 Q)'), 'detail' => $T('Les tables des successions et absences du bureau de l’enregistrement du canton : la date et le lieu du décès, les héritiers, parfois les biens.')]; }
+            if ($from !== null && $from <= 1921 && $to >= 1914) { $steps[] = ['series' => 'Mémoire des hommes', 'detail' => $T('Pour un homme mort entre 1914 et 1921 : la base des « morts pour la France » (ministère des Armées).')]; }
             break;
         case 'parents':
-            $steps[] = ['series' => $old ? 'Registres paroissiaux (BMS)' : 'État civil — mariages', 'detail' => "Son acte de mariage nomme ses parents (et dit s’ils sont vivants) ; à défaut, son acte de " . ($old ? 'baptême' : 'naissance') . '. Avant 1792, les actes de mariage nomment souvent les parents, pas toujours.'];
-            $steps[] = ['series' => 'Recensements (série 6 M), à partir de 1836', 'detail' => 'La famille sous le même toit, avec les âges : pour trouver la commune et l’année de naissance.'];
+            $steps[] = ['series' => $old ? $T('Registres paroissiaux (BMS)') : $T('État civil — mariages'), 'detail' => $T($old ? 'Son acte de mariage nomme ses parents (et dit s’ils sont vivants) ; à défaut, son acte de baptême. Avant 1792, les actes de mariage nomment souvent les parents, pas toujours.' : 'Son acte de mariage nomme ses parents (et dit s’ils sont vivants) ; à défaut, son acte de naissance. Avant 1792, les actes de mariage nomment souvent les parents, pas toujours.')];
+            $steps[] = ['series' => $T('Recensements (série 6 M), à partir de 1836'), 'detail' => $T('La famille sous le même toit, avec les âges : pour trouver la commune et l’année de naissance.')];
             break;
         case 'census':
-            $steps[] = ['series' => 'Recensements (série 6 M)', 'detail' => "Les listes nominatives de $commune, tous les 5 ans de 1836 à 1936 (avec l’âge, le métier, toute la maisonnée) ; beaucoup sont en ligne. Dans une grande ville, il faut l’adresse (rue)."];
+            $steps[] = ['series' => $T('Recensements (série 6 M)'), 'detail' => $T('Les listes nominatives de {commune}, tous les 5 ans de 1836 à 1936 (avec l’âge, le métier, toute la maisonnée) ; beaucoup sont en ligne. Dans une grande ville, il faut l’adresse (rue).', $c)];
             break;
         case 'military':
-            $steps[] = ['series' => 'Recrutement militaire (série 1 R)', 'detail' => 'Le registre matricule de sa classe (année de naissance + 20), au bureau de recrutement du département où il habitait à 20 ans : signalement (taille, yeux, cheveux), adresses successives, campagnes, blessures. Index alphabétique par classe.'];
+            $steps[] = ['series' => $T('Recrutement militaire (série 1 R)'), 'detail' => $T('Le registre matricule de sa classe (année de naissance + 20), au bureau de recrutement du département où il habitait à 20 ans : signalement (taille, yeux, cheveux), adresses successives, campagnes, blessures. Index alphabétique par classe.')];
             break;
         case 'succession':
-            $steps[] = ['series' => 'Enregistrement (série 3 Q)', 'detail' => 'Les tables des successions et absences puis les registres des mutations après décès, au bureau de l’enregistrement du canton du décès : héritiers, biens, valeur. Souvent dans les 6 mois après le décès.'];
+            $steps[] = ['series' => $T('Enregistrement (série 3 Q)'), 'detail' => $T('Les tables des successions et absences puis les registres des mutations après décès, au bureau de l’enregistrement du canton du décès : héritiers, biens, valeur. Souvent dans les 6 mois après le décès.')];
             break;
         case 'contract':
-            $steps[] = ['series' => $old ? 'Notaires (série E) et contrôle des actes (2 C)' : 'Minutes notariales (série 3 E)', 'detail' => 'Le contrat de mariage chez le notaire du bourg ou du canton, peu avant le mariage : la dot, les témoins, la famille élargie.' . ($old ? '' : ' L’acte de mariage (après 1850) dit s’il y a un contrat et chez quel notaire.')];
+            $steps[] = ['series' => $old ? $T('Notaires (série E) et contrôle des actes (2 C)') : $T('Minutes notariales (série 3 E)'), 'detail' => $T($old ? 'Le contrat de mariage chez le notaire du bourg ou du canton, peu avant le mariage : la dot, les témoins, la famille élargie.' : 'Le contrat de mariage chez le notaire du bourg ou du canton, peu avant le mariage : la dot, les témoins, la famille élargie. L’acte de mariage (après 1850) dit s’il y a un contrat et chez quel notaire.')];
             break;
     }
-    if (!$arch['france']) { $steps[] = ['series' => $arch['label'], 'detail' => 'Hors de France : les registres sont aux archives de la région ou de la paroisse ; FamilySearch en a numérisé beaucoup.']; }
-    elseif (in_array($arch['code'], ['971', '972', '973', '974', '976'], true)) { $steps[] = ['series' => 'ANOM (Aix-en-Provence)', 'detail' => 'Les Archives nationales d’outre-mer gardent les doubles des registres (état civil en ligne).']; }
-    elseif ($arch['code'] === '75' && $mid !== null && $mid < 1860) { $steps[] = ['series' => 'État civil reconstitué', 'detail' => 'L’état civil parisien d’avant 1860 a brûlé en 1871 : chercher dans les fichiers de l’état civil reconstitué (Archives de Paris).']; }
+    if (!$arch['france']) { $steps[] = ['series' => $arch['label'], 'detail' => $T('Hors de France : les registres sont aux archives de la région ou de la paroisse ; FamilySearch en a numérisé beaucoup.')]; }
+    elseif (in_array($arch['code'], ['971', '972', '973', '974', '976'], true)) { $steps[] = ['series' => 'ANOM (Aix-en-Provence)', 'detail' => $T('Les Archives nationales d’outre-mer gardent les doubles des registres (état civil en ligne).')]; }
+    elseif ($arch['code'] === '75' && $mid !== null && $mid < 1860) { $steps[] = ['series' => $T('État civil reconstitué'), 'detail' => $T('L’état civil parisien d’avant 1860 a brûlé en 1871 : chercher dans les fichiers de l’état civil reconstitué (Archives de Paris).')]; }
     return $steps;
 }
 
@@ -180,12 +183,14 @@ function research_gaps_data(PDO $pdo, array $q = []): array
         if (!$p['census'] && ($by || $dy)) {
             $a = $by ?? ($dy - 60); $b = $dy ?? min($now, $a + 85);
             $ys = array_values(array_filter($census, static fn($y) => $y >= $a && $y <= $b));
-            if ($ys) { $add($pid, 'census', 'recensements', $ys[0], end($ys), $p['lplace'] ?: $p['bplace'], 'vivant' . ($p['gender'] === 'female' ? 'e' : '') . ' aux recensements de ' . (count($ys) > 6 ? $ys[0] . ' à ' . end($ys) . ' (' . count($ys) . ')' : implode(', ', $ys))); }
+            if ($ys) { $fem = $p['gender'] === 'female'; $add($pid, 'census', 'recensements', $ys[0], end($ys), $p['lplace'] ?: $p['bplace'], count($ys) > 6
+                ? i18n_t($fem ? 'vivante aux recensements de {a} à {b} ({n})' : 'vivant aux recensements de {a} à {b} ({n})', ['a' => $ys[0], 'b' => end($ys), 'n' => count($ys)])
+                : i18n_t($fem ? 'vivante aux recensements de {years}' : 'vivant aux recensements de {years}', ['years' => implode(', ', $ys)])); }
         }
         // registre matricule : homme né de 1847 à 1921 (classes 1867 à 1941), sans dossier militaire
-        if ($male && $by && $by >= 1847 && $by <= 1921 && trim((string) $p['mil'], " {}[]\n") === '') { $add($pid, 'military', 'registre matricule', $by + 20, $by + 20, $p['bplace'], 'classe ' . ($by + 20) . ' (né en ' . $by . ')'); }
+        if ($male && $by && $by >= 1847 && $by <= 1921 && trim((string) $p['mil'], " {}[]\n") === '') { $add($pid, 'military', 'registre matricule', $by + 20, $by + 20, $p['bplace'], i18n_t('classe {c} (né en {y})', ['c' => $by + 20, 'y' => $by])); }
         // succession : décès connu entre 1791 et 1960, sans succession ni testament
-        if ($dy && $dy >= 1791 && $dy <= 1960 && empty($p['tags']['PROB']) && empty($p['tags']['WILL'])) { $add($pid, 'succession', 'succession', $dy, $dy + 1, $p['dplace'] ?: $p['lplace'], 'décès en ' . $dy); }
+        if ($dy && $dy >= 1791 && $dy <= 1960 && empty($p['tags']['PROB']) && empty($p['tags']['WILL'])) { $add($pid, 'succession', 'succession', $dy, $dy + 1, $p['dplace'] ?: $p['lplace'], i18n_t('décès en {y}', ['y' => $dy])); }
     }
     // contrats de mariage : mariage connu (avant 1940) sans contrat
     if ($ids) {
@@ -200,9 +205,12 @@ function research_gaps_data(PDO $pdo, array $q = []): array
             if ((int) $m['has_contract'] || (int) $m['year'] >= 1940 || isset($done[(int) $m['id']])) { continue; } $done[(int) $m['id']] = true;
             $husband = isset($people[(int) $m['partner1_id']]) && $people[(int) $m['partner1_id']]['gender'] === 'male' ? (int) $m['partner1_id'] : (int) $m['partner2_id'];
             if (!isset($people[$husband])) { continue; }
-            $add($husband, 'contract', 'contrat de mariage', (int) $m['year'] - 1, (int) $m['year'], (string) $m['place'], 'mariage en ' . $m['year']);
+            $add($husband, 'contract', 'contrat de mariage', (int) $m['year'] - 1, (int) $m['year'], (string) $m['place'], i18n_t('mariage en {y}', ['y' => $m['year']]));
         }
     }
+
+    // 🧾 recensements SocFace (FranceArchives) : une ligne par année de recensement où l'ancêtre vivait dans une commune connue (lib/socface.php)
+    if (function_exists('socface_gap_items')) { foreach (socface_gap_items($pdo, $ids, $sosaOf, $people) as $it) { $items[] = $it; } }
 
     // le lieu → le service d'archives
     $placeCache = [];
@@ -218,7 +226,7 @@ function research_gaps_data(PDO $pdo, array $q = []): array
     $digest = [];
     try { foreach ($pdo->query("SELECT * FROM archive_digest_entries") as $r) { $digest[] = $r; } } catch (Throwable $_) {}
     $resultLabels = function_exists('journal_results') ? journal_results() : [];
-    $recType = ['birth' => 'naissance', 'marriage' => 'mariage', 'death' => 'deces', 'parents' => 'mariage', 'census' => 'recensement', 'military' => 'fiche_militaire', 'succession' => 'succession', 'contract' => 'autre'];
+    $recType = ['birth' => 'naissance', 'marriage' => 'mariage', 'death' => 'deces', 'parents' => 'mariage', 'census' => 'recensement', 'socface' => 'recensement', 'military' => 'fiche_militaire', 'succession' => 'succession', 'contract' => 'autre'];
     $archives = [];
     foreach ($items as &$it) {
         $pl = $placeRow((string) $it['place']);
@@ -237,7 +245,7 @@ function research_gaps_data(PDO $pdo, array $q = []): array
         if ($it['place'] !== '') { $archives[$k]['communes'][$it['place']] = ($archives[$k]['communes'][$it['place']] ?? 0) + 1; }
     }
     unset($it);
-    $order = ['birth' => 0, 'marriage' => 1, 'death' => 2, 'parents' => 3, 'contract' => 4, 'succession' => 5, 'census' => 6, 'military' => 7];
+    $order = ['birth' => 0, 'marriage' => 1, 'death' => 2, 'parents' => 3, 'contract' => 4, 'succession' => 5, 'census' => 6, 'socface' => 7, 'military' => 8];
     usort($items, static fn($a, $b) => [$a['generation'], $order[$a['kind']] ?? 9, $a['sosa']] <=> [$b['generation'], $order[$b['kind']] ?? 9, $b['sosa']]);
     $archives = array_values($archives);
     usort($archives, static fn($a, $b) => $b['count'] <=> $a['count']);

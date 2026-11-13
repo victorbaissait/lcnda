@@ -1,0 +1,42 @@
+0 HEAD
+1 SOUR WikiTree
+2 NAME WikiTree.com
+2 CORP WikiTree
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 CHAR UTF-8
+0 @I1@ INDI
+1 NAME Marie /CURIE/
+1 SEX F
+1 BIRT
+2 DATE 7 NOV 1867
+2 PLAC Varsovie, Pologne
+1 DEAT
+2 DATE 4 JUL 1934
+2 PLAC Passy, Haute-Savoie, France
+1 WWW https://www.wikitree.com/wiki/Sklodowska-2
+1 _WIKITREE_ID Sklodowska-2
+1 _WIKIDATA Q7186
+1 FAMS @F1@
+0 @I2@ INDI
+1 NAME Pierre /CURIE/
+1 SEX M
+1 BIRT
+2 DATE 15 MAY 1859
+1 WWW https://www.wikitree.com/wiki/Curie-1
+1 FAMS @F1@
+0 @I3@ INDI
+1 NAME Irène /CURIE/
+1 SEX F
+1 BIRT
+2 DATE 12 SEP 1897
+1 FAMC @F1@
+0 @F1@ FAM
+1 HUSB @I2@
+1 WIFE @I1@
+1 CHIL @I3@
+1 MARR
+2 DATE 26 JUL 1895
+2 PLAC Sceaux, France
+0 TRLR

@@ -28,11 +28,15 @@
         const m = t.match(/^(nouveaux|nouvelles|nouveau|nouvelle|nouvel)(?:\s+(.*))?$/iu);
         if (!m) return null;
         let what = (m[2] || '').split(/\s+[—–:(«]|\s+-\s|…/)[0].replace(/[\s.!?]+$/, '').trim();
-        if (!what) return WORDS.create;
-        if (what.length > 32) return WORDS.create; // un long titre : le mot seul
+        if (!what) return typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(WORDS.create) : WORDS.create;
+        if (what.length > 32) return typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(WORDS.create) : WORDS.create; // un long titre : le mot seul
         const w = m[1].toLowerCase();
         const art = /^nouve(aux|lles)$/.test(w) ? 'les ' : w === 'nouvel' || VOWEL.test(what) ? 'l’' : w === 'nouvelle' ? 'la ' : 'le ';
-        return `${WORDS.create} ${art}${what}`;
+        const fr = `${WORDS.create} ${art}${what}`;
+        // 🌐 dans une autre langue (app-i18n.js) : la traduction de « Créer le … » si elle est connue, sinon « Créer » seul
+        const I = typeof window !== 'undefined' && window.LCNDA_I18N;
+        if (I && I.lang !== 'fr') return I.has(fr) ? I.t(fr) : I.t(WORDS.create);
+        return fr;
     }
     const GENERIC = new Set(['enregistrer', 'créer', 'valider', 'ok']);
     function primaryOf(dlg) {

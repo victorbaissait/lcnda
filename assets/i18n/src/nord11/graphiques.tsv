@@ -1,0 +1,1800 @@
+fr ¦ vi ¦ id
+Règle un diagramme puis enregistre-le comme vue pour le retrouver ici. ¦ Hãy thiết lập một biểu đồ rồi lưu nó thành chế độ xem để tìm lại ở đây. ¦ Atur sebuah grafik, lalu simpan sebagai tampilan agar bisa ditemukan di sini.
+Vue enregistrée supprimée ¦ Đã xoá chế độ xem đã lưu ¦ Tampilan tersimpan dihapus
+Première personne ¦ Người thứ nhất ¦ Orang pertama
+Deuxième personne ¦ Người thứ hai ¦ Orang kedua
+Afficher le lien ¦ Hiện mối quan hệ ¦ Tampilkan hubungan
+Année non renseignée ¦ Chưa có năm ¦ Tahun belum diisi
+Adresse non renseignée ¦ Chưa có địa chỉ ¦ Alamat belum diisi
+Membre du foyer ¦ Thành viên hộ ¦ Anggota rumah tangga
+Aucun membre relevé. ¦ Chưa ghi nhận thành viên nào. ¦ Belum ada anggota yang dicatat.
+Aucune maisonnée recensée pour cette personne. ¦ Không có hộ nào trong điều tra dân số cho người này. ¦ Tidak ada rumah tangga sensus untuk orang ini.
+Ajoute des recensements depuis sa fiche. ¦ Hãy thêm điều tra dân số từ hồ sơ của người này. ¦ Tambahkan sensus dari profilnya.
+Aucun déplacement entre deux lieux géocodés n’est encore disponible pour cette branche. ¦ Chưa có lần di chuyển nào giữa hai địa điểm đã định vị cho nhánh này. ¦ Belum ada perpindahan antara dua tempat yang sudah digeokode untuk cabang ini.
+Pas encore assez de liens renseignés pour dessiner ce graphe. ¦ Chưa đủ liên kết được điền để vẽ đồ thị này. ¦ Belum cukup hubungan yang diisi untuk menggambar grafik ini.
+Réseau social ¦ Mạng lưới xã hội ¦ Jaringan sosial
+Métiers transmis ¦ Nghề nghiệp truyền lại ¦ Pekerjaan yang diwariskan
+Migrations de la branche ¦ Các cuộc di cư của nhánh ¦ Migrasi cabang
+Réseau ¦ Mạng lưới ¦ Jaringan
+=nœud ¦ nút ¦ simpul
+{nodes} · {links}. Survole un lien pour voir sa nature et clique sur une personne pour ouvrir sa fiche. ¦ {nodes} · {links}. Di chuột lên một liên kết để xem loại của nó và bấm vào một người để mở hồ sơ. ¦ {nodes} · {links}. Arahkan kursor ke sebuah hubungan untuk melihat jenisnya, dan klik seseorang untuk membuka profilnya.
+Tous les actes ¦ Tất cả giấy tờ ¦ Semua akta
+Actes rattachés ¦ Giấy tờ đã gắn ¦ Akta yang terhubung
+Actes liés ¦ Giấy tờ liên quan ¦ Akta terkait
+Sépultures ¦ Mai táng ¦ Pemakaman
+Aucun acte pour ces filtres. ¦ Không có giấy tờ nào với các bộ lọc này. ¦ Tidak ada akta untuk saringan ini.
+Sans précision ¦ Không rõ chi tiết ¦ Tanpa rincian
+Aucun recensement pour ces filtres. ¦ Không có điều tra dân số nào với các bộ lọc này. ¦ Tidak ada sensus untuk saringan ini.
+Aucun dépouillement enregistré pour ces filtres. ¦ Không có bảng trích lục nào được lưu với các bộ lọc này. ¦ Tidak ada indeks catatan tersimpan untuk saringan ini.
+GRAPHIQUES · LIEUX ¦ BIỂU ĐỒ · ĐỊA ĐIỂM ¦ GRAFIK · TEMPAT
+SYNTHÈSE LOCALE ¦ TỔNG HỢP ĐỊA PHƯƠNG ¦ RINGKASAN SETEMPAT
+Regroupe les sources et recherches déjà rattachées à un même lieu. ¦ Gom các nguồn và nghiên cứu đã gắn với cùng một địa điểm. ¦ Mengumpulkan sumber dan riset yang sudah terhubung ke satu tempat.
+Choisis une commune pour afficher les actes, dépouillements, battues et sépultures liés à ce lieu. ¦ Hãy chọn một xã để hiện các giấy tờ, bảng trích lục, cuộc tìm kiếm diện rộng và mai táng liên quan đến địa điểm này. ¦ Pilih sebuah kota untuk menampilkan akta, indeks catatan, penyisiran, dan pemakaman yang terkait dengan tempat ini.
+génération {list} ¦ thế hệ {list} ¦ generasi {list}
+générations {list} ¦ các thế hệ {list} ¦ generasi {list}
+est {list} ¦ là {list} ¦ adalah {list}
+(… {n} places en tout) ¦ (… tổng cộng {n} vị trí) ¦ (… total {n} posisi)
+Ancêtres répétés de {name} ¦ Tổ tiên lặp lại của {name} ¦ Leluhur berulang dari {name}
+Voir aussi leurs ancêtres répétés ({n}) ¦ Xem cả tổ tiên lặp lại của họ ({n}) ¦ Lihat juga leluhur berulang mereka ({n})
+Quand deux ancêtres sont cousins, leurs propres ancêtres apparaissent plusieurs fois dans l’arbre : c’est l’implexe. Seules les filiations biologiques comptent. Le taux = 1 − personnes différentes ÷ places connues. ¦ Khi hai tổ tiên là anh chị em họ, tổ tiên của chính họ xuất hiện nhiều lần trong cây: đó là trùng lặp tổ tiên. Chỉ tính quan hệ huyết thống. Tỷ lệ = 1 − số người khác nhau ÷ số vị trí đã biết. ¦ Jika dua leluhur bersepupu, leluhur mereka sendiri muncul beberapa kali di pohon: inilah implex. Hanya garis keturunan biologis yang dihitung. Rasio = 1 − orang berbeda ÷ posisi yang diketahui.
+Places théoriques ¦ Vị trí lý thuyết ¦ Posisi teoretis
+Places connues ¦ Vị trí đã biết ¦ Posisi diketahui
+places connues ¦ vị trí đã biết ¦ posisi diketahui
+Personnes différentes ¦ Người khác nhau ¦ Orang berbeda
+Implexe ¦ Trùng lặp tổ tiên ¦ Implex
+IMPLEXE ¦ TRÙNG LẶP TỔ TIÊN ¦ IMPLEX
+Implexe cumulé ¦ Trùng lặp tổ tiên cộng dồn ¦ Implex kumulatif
+implexe global ¦ trùng lặp tổ tiên tổng thể ¦ implex keseluruhan
+ancêtres différents ¦ tổ tiên khác nhau ¦ leluhur berbeda
+ancêtres répétés ¦ tổ tiên lặp lại ¦ leluhur berulang
+Calcul arrêté : arbre trop grand. ¦ Đã dừng tính: cây quá lớn. ¦ Perhitungan dihentikan: pohon terlalu besar.
+Les couples communs les plus proches ¦ Các cặp vợ chồng chung gần nhất ¦ Pasangan bersama yang terdekat
+C’est ici que les branches se rejoignent ; leurs ancêtres sont répétés à leur suite. ¦ Đây là nơi các nhánh gặp nhau; tổ tiên của họ được lặp lại phía sau. ¦ Di sinilah cabang-cabang bertemu; leluhur mereka berulang setelahnya.
+Aucun ancêtre répété : chaque ancêtre connu n’apparaît qu’une fois. ¦ Không có tổ tiên lặp lại: mỗi tổ tiên đã biết chỉ xuất hiện một lần. ¦ Tidak ada leluhur berulang: setiap leluhur yang diketahui hanya muncul sekali.
+LIENS DE PARENTÉ ¦ QUAN HỆ HỌ HÀNG ¦ HUBUNGAN KEKERABATAN
+Choisis deux personnes ¦ Hãy chọn hai người ¦ Pilih dua orang
+Recherche les deux individus dans la colonne de gauche pour afficher le chemin familial le plus court. ¦ Hãy tìm hai người ở cột bên trái để hiện đường quan hệ gia đình ngắn nhất. ¦ Cari kedua orang di kolom kiri untuk menampilkan jalur keluarga terpendek.
+lié à ¦ liên kết với ¦ terhubung dengan
+{links} entre les deux personnes. ¦ {links} giữa hai người. ¦ {links} antara kedua orang.
+Aucun chemin familial trouvé entre ces deux personnes. ¦ Không tìm thấy đường quan hệ gia đình giữa hai người này. ¦ Tidak ditemukan jalur keluarga antara kedua orang ini.
+Aucune relation disponible. ¦ Không có quan hệ nào. ¦ Tidak ada hubungan.
+Ajoute des parents, conjoints ou enfants sur la fiche. ¦ Hãy thêm cha mẹ, vợ chồng hoặc con cái trên hồ sơ. ¦ Tambahkan orang tua, pasangan, atau anak di profil.
+Molette : zoomer · Maj + molette ou glisser : déplacer ¦ Con lăn: phóng to · Shift + con lăn hoặc kéo: di chuyển ¦ Roda: perbesar · Shift + roda atau seret: geser
+Choisir dans Personnes ¦ Chọn trong Người ¦ Pilih di Orang
+Aucune ascendance disponible. ¦ Không có dữ liệu tổ tiên. ¦ Tidak ada data leluhur.
+Ajoute des parents sur la fiche pour voir l’arbre. ¦ Hãy thêm cha mẹ trên hồ sơ để xem cây. ¦ Tambahkan orang tua di profil untuk melihat pohon.
+♂ Masculin ¦ ♂ Nam ¦ ♂ Laki-laki
+♀ Féminin ¦ ♀ Nữ ¦ ♀ Perempuan
+□ Masculin ¦ □ Nam ¦ □ Laki-laki
+○ Féminin ¦ ○ Nữ ¦ ○ Perempuan
+◇ Sexe non renseigné ¦ ◇ Chưa rõ giới tính ¦ ◇ Jenis kelamin belum diisi
+Les traits relient les générations connues. ¦ Các đường nối các thế hệ đã biết. ¦ Garis menghubungkan generasi yang diketahui.
+Distribution des noms ¦ Phân bố họ ¦ Sebaran nama keluarga
+DISTRIBUTION ¦ PHÂN BỐ ¦ SEBARAN
+=naissance regroupée ¦ lần sinh được gộp ¦ kelahiran terkelompok
+{births} par année et patronyme. ¦ {births} theo năm và họ. ¦ {births} per tahun dan nama keluarga.
+Vivant·e ¦ Còn sống ¦ Masih hidup
+Décédé·e ¦ Đã mất ¦ Sudah meninggal
+D’autres générations existent ¦ Còn các thế hệ khác ¦ Masih ada generasi lain
+Côte à côte ¦ Cạnh nhau ¦ Berdampingan
+Dessus / dessous ¦ Trên / dưới ¦ Atas / bawah
+Aucune vue enregistrée pour l’instant ¦ Chưa có chế độ xem nào được lưu ¦ Belum ada tampilan tersimpan
+Montrer les animaux de chacun à côté de leur maître (trait pointillé) ¦ Hiện các con vật của mỗi người bên cạnh chủ (đường chấm) ¦ Tampilkan hewan milik setiap orang di samping pemiliknya (garis titik-titik)
+Couleur et épaisseur des traits selon la solidité de chaque lien parent-enfant ¦ Màu và độ dày của đường theo độ chắc chắn của từng liên kết cha mẹ - con ¦ Warna dan tebal garis sesuai kekuatan setiap hubungan orang tua-anak
+🛡 Vue solidité ¦ 🛡 Xem độ chắc chắn ¦ 🛡 Tampilan kekuatan
+Tableau des chiffres ¦ Bảng số liệu ¦ Tabel angka
+Graphique d’une statistique de l’app ¦ Biểu đồ của một thống kê trong ứng dụng ¦ Grafik dari statistik aplikasi
+Ce graphique n’existe plus. ¦ Biểu đồ này không còn nữa. ¦ Grafik ini sudah tidak ada.
+Un de mes graphiques ¦ Một biểu đồ của tôi ¦ Salah satu grafikku
+📈 Un de mes graphiques ¦ 📈 Một biểu đồ của tôi ¦ 📈 Salah satu grafikku
+Un graphique de l’Éditeur de graphiques, tenu à jour ¦ Một biểu đồ từ Trình sửa biểu đồ, luôn được cập nhật ¦ Grafik dari Editor grafik, selalu diperbarui
+Données de l’app ¦ Dữ liệu của ứng dụng ¦ Data aplikasi
+🔄 Données de l’app ¦ 🔄 Dữ liệu của ứng dụng ¦ 🔄 Data aplikasi
+✍️ Mes chiffres ¦ ✍️ Số liệu của tôi ¦ ✍️ Angkaku
+Mon diagramme ¦ Sơ đồ của tôi ¦ Diagramku
+Posé : {where} ¦ Đã đặt: {where} ¦ Ditempatkan di: {where}
+LISTES · GRAPHIQUES ¦ DANH SÁCH · BIỂU ĐỒ ¦ DAFTAR · GRAFIK
+📈 Graphiques et diagrammes ¦ 📈 Biểu đồ và sơ đồ ¦ 📈 Grafik dan diagram
+Tous tes graphiques (faits dans <b>Réglages → Éditeur de graphiques</b>, avec tes propres chiffres ou ceux de l’app) et tes diagrammes (hémicycle, frise d’un groupe, camembert…). Chacun se pose partout : un widget du tableau de bord, une Fiche, une enquête, l’Atelier, la page d’une personne, la mise en page — bouton « ＋ Diagramme », puis « 📈 Un de mes graphiques ». ¦ Tất cả biểu đồ của bạn (làm trong <b>Cài đặt → Trình sửa biểu đồ</b>, với số liệu của bạn hoặc của ứng dụng) và sơ đồ của bạn (bán nguyệt, dải thời gian của một nhóm, biểu đồ tròn…). Mỗi cái có thể đặt ở bất cứ đâu: một tiện ích của bảng điều khiển, một Phiếu ghi, một cuộc tìm hiểu, Xưởng, trang của một người, dàn trang — nút “＋ Sơ đồ”, rồi “📈 Một biểu đồ của tôi”. ¦ Semua grafikmu (dibuat di <b>Pengaturan → Editor grafik</b>, dengan angkamu sendiri atau dari aplikasi) dan diagrammu (setengah lingkaran, linimasa kelompok, diagram lingkaran…). Masing-masing bisa ditaruh di mana saja: widget dasbor, Kartu catatan, penelusuran, Bengkel, halaman seseorang, tata letak — tombol “＋ Diagram”, lalu “📈 Salah satu grafikku”.
+＋ Nouveau diagramme ¦ ＋ Sơ đồ mới ¦ ＋ Diagram baru
+Aucun graphique ni diagramme pour l’instant ¦ Chưa có biểu đồ hay sơ đồ nào ¦ Belum ada grafik atau diagram
+Un graphique compte ce que tu veux (tes propres chiffres, des personnes, des événements, une statistique de l’app) ; un diagramme dessine une assemblée, une frise, un organigramme… ¦ Biểu đồ đếm những gì bạn muốn (số liệu của bạn, người, sự kiện, một thống kê của ứng dụng); sơ đồ vẽ một hội đồng, một dải thời gian, một sơ đồ tổ chức… ¦ Grafik menghitung apa saja yang kamu mau (angkamu sendiri, orang, peristiwa, statistik aplikasi); diagram menggambar dewan, linimasa, bagan organisasi…
+Rien ne correspond : retire un filtre ou change la recherche. ¦ Không có gì phù hợp: hãy bỏ một bộ lọc hoặc đổi từ tìm kiếm. ¦ Tidak ada yang cocok: lepas satu saringan atau ubah pencarian.
+Chercher un graphique, un diagramme… (ex. naissances, Rennes) ¦ Tìm một biểu đồ, một sơ đồ… (vd. sinh, Rennes) ¦ Cari grafik, diagram… (mis. kelahiran, Rennes)
+Seulement ceux posés quelque part ¦ Chỉ những cái đã đặt ở đâu đó ¦ Hanya yang sudah ditempatkan di suatu tempat
+Posés quelque part ¦ Đã đặt ở đâu đó ¦ Ditempatkan di suatu tempat
+Posé nulle part pour l’instant ¦ Chưa đặt ở đâu ¦ Belum ditempatkan di mana pun
+Courbe ¦ Đường ¦ Garis
+Aire ¦ Vùng ¦ Area
+Anneau ¦ Vành khuyên ¦ Cincin
+Camembert ¦ Biểu đồ tròn ¦ Diagram lingkaran
+Barres ¦ Cột ¦ Batang
+Revenir à la personne ¦ Quay lại người này ¦ Kembali ke orang tersebut
+Prénom contient ¦ Tên có chứa ¦ Nama depan berisi
+Statut (vivant, décédé) ¦ Tình trạng (còn sống, đã mất) ¦ Status (hidup, meninggal)
+Métier contient ¦ Nghề nghiệp có chứa ¦ Pekerjaan berisi
+Dans mes favoris ¦ Trong mục yêu thích của tôi ¦ Di favoritku
+Naissance entre (années) ¦ Sinh trong khoảng (năm) ¦ Lahir antara (tahun)
+Naissance entre deux dates précises ¦ Sinh giữa hai ngày cụ thể ¦ Lahir antara dua tanggal pasti
+Naissance en (mois) ¦ Sinh vào (tháng) ¦ Lahir pada (bulan)
+Décès entre (années) ¦ Mất trong khoảng (năm) ¦ Meninggal antara (tahun)
+Âge à un événement entre ¦ Tuổi tại một sự kiện trong khoảng ¦ Usia saat peristiwa antara
+A vécu entre … ans ¦ Đã sống từ … tuổi ¦ Hidup antara … tahun
+Lieu de naissance (contient) ¦ Nơi sinh (có chứa) ¦ Tempat lahir (berisi)
+Lieu de décès ou d’inhumation (contient) ¦ Nơi mất hoặc nơi chôn cất (có chứa) ¦ Tempat meninggal atau pemakaman (berisi)
+A un événement à (lieu contient) ¦ Có một sự kiện tại (địa điểm có chứa) ¦ Punya peristiwa di (tempat berisi)
+A un événement dans le département, la région ou le pays ¦ Có một sự kiện trong tỉnh, vùng hoặc quốc gia ¦ Punya peristiwa di departemen, wilayah, atau negara
+A un événement à moins de … km de ¦ Có một sự kiện cách … km quanh ¦ Punya peristiwa dalam jarak … km dari
+A eu un événement (mariage, divorce, voyage…) ¦ Đã có một sự kiện (kết hôn, ly hôn, chuyến đi…) ¦ Pernah punya peristiwa (pernikahan, perceraian, perjalanan…)
+Nombre d’événements d’un type entre ¦ Số sự kiện của một loại trong khoảng ¦ Jumlah peristiwa satu jenis antara
+Nombre d’unions (mariages) entre ¦ Số cuộc hôn nhân (kết hôn) trong khoảng ¦ Jumlah ikatan (pernikahan) antara
+Nombre d’enfants entre ¦ Số con trong khoảng ¦ Jumlah anak antara
+Conjoint : nom ou prénom contient ¦ Vợ/chồng: họ hoặc tên có chứa ¦ Pasangan: nama keluarga atau nama depan berisi
+Parent : nom ou prénom contient ¦ Cha/mẹ: họ hoặc tên có chứa ¦ Orang tua: nama keluarga atau nama depan berisi
+Cause de décès contient ¦ Nguyên nhân mất có chứa ¦ Penyebab kematian berisi
+Seulement mes ancêtres (Sosa) ¦ Chỉ tổ tiên của tôi (Sosa) ¦ Hanya leluhurku (Sosa)
+Par rapport à la personne de la fiche (ses ancêtres, sa famille…) ¦ So với người của hồ sơ (tổ tiên, gia đình…) ¦ Relatif terhadap orang di profil (leluhurnya, keluarganya…)
+Génération Sosa entre ¦ Thế hệ Sosa trong khoảng ¦ Generasi Sosa antara
+Sans source ¦ Không có nguồn ¦ Tanpa sumber
+Nombre de sources entre ¦ Số nguồn trong khoảng ¦ Jumlah sumber antara
+A une photo ou un document ¦ Có ảnh hoặc tài liệu ¦ Punya foto atau dokumen
+Les filtres ci-dessus (années, limite, sexe et critères) peuvent devenir ceux de départ de ¦ Các bộ lọc ở trên (năm, giới hạn, giới tính và tiêu chí) có thể trở thành bộ lọc ban đầu của ¦ Saringan di atas (tahun, batas, jenis kelamin, dan kriteria) bisa menjadi saringan awal untuk
+les distributions. ¦ các phân bố. ¦ sebaran.
+Usage des noms de famille dans la base. ¦ Cách dùng họ trong cơ sở dữ liệu. ¦ Penggunaan nama keluarga di basis data.
+Années de naissance (par décennie) ¦ Năm sinh (theo thập niên) ¦ Tahun kelahiran (per dekade)
+Années de décès (par décennie) ¦ Năm mất (theo thập niên) ¦ Tahun kematian (per dekade)
+Mes ancêtres par siècle ¦ Tổ tiên của tôi theo thế kỷ ¦ Leluhurku per abad
+Métiers les plus fréquents ¦ Nghề nghiệp phổ biến nhất ¦ Pekerjaan paling umum
+Femmes et hommes ¦ Nữ và nam ¦ Perempuan dan laki-laki
+Ancêtres à sourcer ¦ Tổ tiên cần tìm nguồn ¦ Leluhur yang perlu bersumber
+Toutes les personnes récentes ont au moins une source. ¦ Mọi người gần đây đều có ít nhất một nguồn. ¦ Semua orang terbaru punya setidaknya satu sumber.
+Tous les événements récents ont un média. ¦ Mọi sự kiện gần đây đều có tư liệu. ¦ Semua peristiwa terbaru punya media.
+Aucun média. ¦ Không có tư liệu nào. ¦ Tidak ada media.
+Aucun média isolé. ¦ Không có tư liệu nào đứng riêng. ¦ Tidak ada media yang tidak terhubung.
+Toutes les images récentes ont au moins une zone identifiée. ¦ Mọi hình ảnh gần đây đều có ít nhất một vùng đã nhận diện. ¦ Semua gambar terbaru punya setidaknya satu area yang dikenali.
+Aucune fiche récente avec parent manquant. ¦ Không có hồ sơ gần đây nào thiếu cha mẹ. ¦ Tidak ada profil terbaru yang kurang orang tua.
+Aucun baptême récent sans parrain/marraine. ¦ Không có lễ rửa tội gần đây nào thiếu cha đỡ đầu/mẹ đỡ đầu. ¦ Tidak ada baptis terbaru tanpa wali baptis.
+✎ Modifier l’onglet ¦ ✎ Sửa thẻ ¦ ✎ Ubah tab
+Aucun widget affiché ¦ Không có tiện ích nào được hiện ¦ Tidak ada widget yang ditampilkan
+Onglet vide ¦ Thẻ trống ¦ Tab kosong
+Ajoute des widgets, tes listes ou tes graphiques depuis la colonne de gauche. ¦ Hãy thêm tiện ích, danh sách hoặc biểu đồ của bạn từ cột bên trái. ¦ Tambahkan widget, daftarmu, atau grafikmu dari kolom kiri.
+Ajoute-en depuis la colonne de gauche, ou crée le tien. ¦ Hãy thêm từ cột bên trái, hoặc tự tạo của riêng bạn. ¦ Tambahkan dari kolom kiri, atau buat sendiri.
+Widget « {name} » retiré du tableau de bord. ¦ Đã gỡ tiện ích “{name}” khỏi bảng điều khiển. ¦ Widget “{name}” dilepas dari dasbor.
+Widget retiré du tableau de bord. ¦ Đã gỡ tiện ích khỏi bảng điều khiển. ¦ Widget dilepas dari dasbor.
+Widget supprimé du tableau de bord. ¦ Đã xoá tiện ích khỏi bảng điều khiển. ¦ Widget dihapus dari dasbor.
+Widget modifié. ¦ Đã sửa tiện ích. ¦ Widget diubah.
+Revenir au widget ¦ Quay lại tiện ích ¦ Kembali ke widget
+Enquêtes ouvertes ¦ Cuộc tìm hiểu đang mở ¦ Penelusuran yang terbuka
+Battues ouvertes ¦ Cuộc tìm kiếm diện rộng đang mở ¦ Penyisiran yang terbuka
+Rappels proches ¦ Lời nhắc sắp tới ¦ Pengingat terdekat
+Incohérences ¦ Điểm không nhất quán ¦ Ketidakcocokan
+Seulement les SOSA ¦ Chỉ tổ tiên Sosa ¦ Hanya leluhur Sosa
+Types d’évènements ¦ Loại sự kiện ¦ Jenis peristiwa
+Ex : trouver la date de naissance de Jean Dupont ¦ Vd: tìm ngày sinh của Jean Dupont ¦ Mis.: cari tanggal lahir Jean Dupont
+Personne liée (facultatif) ¦ Người liên quan (không bắt buộc) ¦ Orang terkait (opsional)
+Réglages du widget ¦ Cài đặt tiện ích ¦ Pengaturan widget
+Statistique affichée ¦ Thống kê được hiện ¦ Statistik yang ditampilkan
+Dernière fiche consultée ¦ Hồ sơ xem gần nhất ¦ Profil terakhir dilihat
+Les descendants ¦ Con cháu ¦ Keturunan
+Les ascendants ¦ Tổ tiên ¦ Leluhur
+Sites affichés ¦ Các điểm được hiện ¦ Situs yang ditampilkan
+Prendre cette image ¦ Lấy hình này ¦ Pakai gambar ini
+Provenance affichée ¦ Nguồn gốc được hiện ¦ Asal yang ditampilkan
+Ex : Jean Dupont · Enquête ¦ Vd: Jean Dupont · Cuộc tìm hiểu ¦ Mis.: Jean Dupont · Penelusuran
+Personne affichée ¦ Người được hiện ¦ Orang yang ditampilkan
+Aléatoire ¦ Ngẫu nhiên ¦ Acak
+Personne précise ¦ Một người cụ thể ¦ Orang tertentu
+📁 ou glisse une image ici, ou colle-la (⌘V). ¦ 📁 hoặc kéo một hình vào đây, hoặc dán nó (⌘V). ¦ 📁 atau seret gambar ke sini, atau tempelkan (⌘V).
+Pages du suivi ¦ Các trang theo dõi ¦ Halaman pemantauan
+Pages du tableau de bord ¦ Các trang của bảng điều khiển ¦ Halaman dasbor
+Chaque page a ses widgets ; les boutons des pages sont en haut du Suivi des animaux. La page cochée s’affiche à l’ouverture. ¦ Mỗi trang có tiện ích riêng; nút của các trang nằm ở đầu Theo dõi động vật. Trang được đánh dấu sẽ hiện khi mở. ¦ Setiap halaman punya widget sendiri; tombol halaman ada di bagian atas Pemantauan hewan. Halaman yang dicentang tampil saat dibuka.
+Chaque page a ses widgets ; les boutons des pages sont en haut du tableau de bord. La page cochée s’affiche à l’ouverture. ¦ Mỗi trang có tiện ích riêng; nút của các trang nằm ở đầu bảng điều khiển. Trang được đánh dấu sẽ hiện khi mở. ¦ Setiap halaman punya widget sendiri; tombol halaman ada di bagian atas dasbor. Halaman yang dicentang tampil saat dibuka.
+Ranger ses widgets ¦ Sắp xếp các tiện ích ¦ Atur widget-nya
+✎ en cours ¦ ✎ đang làm ¦ ✎ sedang berjalan
+Titre de l’ensemble ¦ Tiêu đề của nhóm ¦ Judul kelompok
+Un niveau plus haut ¦ Lên một cấp ¦ Naik satu tingkat
+Sous-ensemble (un niveau plus bas) ¦ Nhóm con (xuống một cấp) ¦ Subkelompok (turun satu tingkat)
+SUIVI DES ANIMAUX ¦ THEO DÕI ĐỘNG VẬT ¦ PEMANTAUAN HEWAN
+MON ONGLET ¦ THẺ CỦA TÔI ¦ TAB-KU
+Son widget sera supprimé avec elle. ¦ Tiện ích của trang sẽ bị xoá cùng trang. ¦ Widget-nya akan ikut dihapus.
+Ses {widgets} seront supprimés avec elle. ¦ {widgets} của trang sẽ bị xoá cùng trang. ¦ {widgets}-nya akan ikut dihapus.
+=widget ¦ tiện ích ¦ widget
+Supprimer la page « {name} » ? ¦ Xoá trang “{name}”? ¦ Hapus halaman “{name}”?
+Page ¦ Trang ¦ Halaman
+Pages du suivi enregistrées. ¦ Đã lưu các trang theo dõi. ¦ Halaman pemantauan tersimpan.
+Tableau de bord enregistré. ¦ Đã lưu bảng điều khiển. ¦ Dasbor tersimpan.
+=fiche créée ¦ hồ sơ được tạo ¦ profil dibuat
+=événement ajouté ¦ sự kiện được thêm ¦ peristiwa ditambahkan
+=source ajoutée ¦ nguồn được thêm ¦ sumber ditambahkan
+=recensement ajouté ¦ điều tra dân số được thêm ¦ sensus ditambahkan
+=nouvel ancêtre Sosa ¦ tổ tiên Sosa mới ¦ leluhur Sosa baru
+=battue terminée ¦ cuộc tìm kiếm diện rộng đã xong ¦ penyisiran selesai
+=enquête terminée ¦ cuộc tìm hiểu đã xong ¦ penelusuran selesai
+=évènement ¦ sự kiện ¦ peristiwa
+=doublon ¦ bản trùng ¦ duplikat
+pas encore de modification ce mois-ci ¦ tháng này chưa có thay đổi nào ¦ belum ada perubahan bulan ini
+rien pour l’instant ¦ chưa có gì ¦ belum ada apa-apa
+En {month} : ¦ Trong {month}: ¦ Pada {month}:
+En {year} : ¦ Trong năm {year}: ¦ Pada {year}:
+{days} de recherche. ¦ {days} nghiên cứu. ¦ {days} riset.
+{days} de recherche, {changes}. ¦ {days} nghiên cứu, {changes}. ¦ {days} riset, {changes}.
+↑ plus actif que le mois dernier ¦ ↑ tích cực hơn tháng trước ¦ ↑ lebih aktif dari bulan lalu
+Modifications par mois sur un an ¦ Thay đổi theo tháng trong một năm ¦ Perubahan per bulan selama setahun
+D’après le journal des modifications : le travail fait à la main (les imports de fichiers ne comptent pas comme fiches créées). ¦ Theo nhật ký thay đổi: công việc làm bằng tay (việc nhập tệp không được tính là hồ sơ được tạo). ¦ Menurut log perubahan: pekerjaan yang dilakukan manual (impor berkas tidak dihitung sebagai profil yang dibuat).
+Bilan indisponible. ¦ Không có bản tổng kết. ¦ Ringkasan tidak tersedia.
+dernière fiche consultée ¦ hồ sơ xem gần nhất ¦ profil terakhir dilihat
+Aucun anniversaire aujourd’hui. ¦ Hôm nay không có ngày kỷ niệm nào. ¦ Tidak ada peringatan hari ini.
+Aucune personne verrouillée récemment. ¦ Gần đây không có người nào bị khoá. ¦ Tidak ada orang yang dikunci baru-baru ini.
+Aucune personne disponible pour ce widget. ¦ Không có người nào cho tiện ích này. ¦ Tidak ada orang untuk widget ini.
+Aucun événement renseigné. ¦ Chưa có sự kiện nào được điền. ¦ Belum ada peristiwa yang diisi.
+Aucune note. ¦ Không có ghi chú nào. ¦ Tidak ada catatan.
+Aucun recensement. ¦ Không có điều tra dân số nào. ¦ Tidak ada sensus.
+Aucune source ou citation. ¦ Không có nguồn hay trích dẫn nào. ¦ Tidak ada sumber atau kutipan.
+Bloc surtout utile pour une fiche féminine. ¦ Khối này chủ yếu hữu ích cho hồ sơ của phụ nữ. ¦ Blok ini terutama berguna untuk profil perempuan.
+Aucune enquête ou battue liée. ¦ Không có cuộc tìm hiểu hay tìm kiếm diện rộng nào liên quan. ¦ Tidak ada penelusuran atau penyisiran terkait.
+Aucun détail ¦ Không có chi tiết ¦ Tanpa rincian
+Décision ¦ Quyết định ¦ Keputusan
+Bureau ¦ Văn phòng ¦ Kantor
+Œuvre ¦ Tác phẩm ¦ Karya
+Ouvrir fiche ¦ Mở hồ sơ ¦ Buka profil
+Tous les événements récents ont une source. ¦ Mọi sự kiện gần đây đều có nguồn. ¦ Semua peristiwa terbaru punya sumber.
+Aucun lieu prioritaire à compléter. ¦ Không có địa điểm ưu tiên nào cần bổ sung. ¦ Tidak ada tempat prioritas yang perlu dilengkapi.
+Coordonnées ou pays à compléter ¦ Cần bổ sung toạ độ hoặc quốc gia ¦ Koordinat atau negara perlu dilengkapi
+Aucun couple prioritaire sans mariage. ¦ Không có cặp ưu tiên nào thiếu kết hôn. ¦ Tidak ada pasangan prioritas tanpa pernikahan.
+Personne 1 ¦ Người 1 ¦ Orang 1
+Personne 2 ¦ Người 2 ¦ Orang 2
+Aucune incohérence de dates détectée. ¦ Không phát hiện ngày tháng nào không nhất quán. ¦ Tidak ditemukan ketidakcocokan tanggal.
+Incohérences et conflits ¦ Không nhất quán và mâu thuẫn ¦ Ketidakcocokan dan konflik
+Vérifier ¦ Kiểm tra ¦ Periksa
+Aucun SOSA manquant proche. ¦ Không thiếu tổ tiên Sosa gần nào. ¦ Tidak ada leluhur Sosa dekat yang hilang.
+Aucune battue prioritaire. ¦ Không có cuộc tìm kiếm diện rộng ưu tiên nào. ¦ Tidak ada penyisiran prioritas.
+Commune de départ inconnue ¦ Chưa rõ xã xuất phát ¦ Kota asal tidak diketahui
+Aucune action prioritaire pour le moment. ¦ Hiện chưa có việc ưu tiên nào. ¦ Belum ada tindakan prioritas untuk saat ini.
+À traiter ¦ Cần xử lý ¦ Perlu ditangani
+Liste de travail quotidienne ¦ Danh sách việc hằng ngày ¦ Daftar kerja harian
+Aucune archive disponible. ¦ Không có kho lưu trữ nào. ¦ Tidak ada arsip.
+Aucune racine SOSA définie. ¦ Chưa đặt gốc Sosa. ¦ Akar Sosa belum ditentukan.
+Aucun doublon probable repéré. ¦ Không phát hiện bản trùng khả nghi nào. ¦ Tidak ditemukan kemungkinan duplikat.
+Aucun point géographique exploitable. ¦ Không có điểm địa lý nào dùng được. ¦ Tidak ada titik geografis yang bisa dipakai.
+Aperçu cartographique ¦ Xem trước bản đồ ¦ Pratinjau peta
+Aucune personne avec lieux datés. ¦ Không có người nào có địa điểm kèm ngày. ¦ Tidak ada orang dengan tempat bertanggal.
+Aucune personne disponible. ¦ Không có người nào. ¦ Tidak ada orang.
+Aucun événement daté. ¦ Không có sự kiện nào có ngày. ¦ Tidak ada peristiwa bertanggal.
+Éléments datés ou localisés ¦ Mục có ngày hoặc có địa điểm ¦ Item bertanggal atau berlokasi
+Documents et images ¦ Tài liệu và hình ảnh ¦ Dokumen dan gambar
+Sources enregistrées ¦ Nguồn đã lưu ¦ Sumber tersimpan
+En cours ou en pause ¦ Đang làm hoặc tạm dừng ¦ Sedang berjalan atau dijeda
+Recherches commune par commune ¦ Tìm kiếm từng xã một ¦ Pencarian kota demi kota
+À vérifier dans maintenance ¦ Cần kiểm tra trong Cài đặt ¦ Perlu diperiksa di Pengaturan
+100 fiches ¦ 100 hồ sơ ¦ 100 profil
+Au moins 100 personnes enregistrées ¦ Ít nhất 100 người đã lưu ¦ Setidaknya 100 orang tersimpan
+100 médias ¦ 100 tư liệu ¦ 100 media
+Au moins 100 documents conservés ¦ Ít nhất 100 tài liệu được lưu giữ ¦ Setidaknya 100 dokumen disimpan
+Au moins la moitié des fiches sourcées ¦ Ít nhất một nửa số hồ sơ có nguồn ¦ Setidaknya separuh profil bersumber
+Illustrée ¦ Có minh hoạ ¦ Bergambar
+Au moins la moitié des fiches avec un média ¦ Ít nhất một nửa số hồ sơ có tư liệu ¦ Setidaknya separuh profil punya media
+5 générations SOSA ¦ 5 thế hệ Sosa ¦ 5 generasi Sosa
+Cinq générations complètes ¦ Năm thế hệ đầy đủ ¦ Lima generasi lengkap
+Au moins une battue créée ¦ Đã tạo ít nhất một cuộc tìm kiếm diện rộng ¦ Setidaknya satu penyisiran dibuat
+Aucune suppression récente. ¦ Gần đây không có gì bị xoá. ¦ Tidak ada penghapusan baru-baru ini.
+Aucune modification récente. ¦ Gần đây không có thay đổi nào. ¦ Tidak ada perubahan baru-baru ini.
+Aucun événement exploitable pour ce quiz avec les filtres choisis. ¦ Không có sự kiện nào dùng được cho câu đố này với các bộ lọc đã chọn. ¦ Tidak ada peristiwa yang bisa dipakai untuk kuis ini dengan saringan yang dipilih.
+Pas assez de dates distinctes pour générer des propositions. ¦ Không đủ ngày khác nhau để tạo các lựa chọn. ¦ Tidak cukup tanggal berbeda untuk membuat pilihan.
+Quelle est la date de <strong>{what}</strong> de <strong>{name}</strong> ? ¦ Ngày <strong>{what}</strong> của <strong>{name}</strong> là ngày nào? ¦ Kapan tanggal <strong>{what}</strong> <strong>{name}</strong>?
+Aucune image disponible. ¦ Không có hình ảnh nào. ¦ Tidak ada gambar.
+Choisis une image dans les réglages du widget. ¦ Hãy chọn một hình trong cài đặt tiện ích. ¦ Pilih gambar di pengaturan widget.
+Choisis deux personnes dans les réglages du widget. ¦ Hãy chọn hai người trong cài đặt tiện ích. ¦ Pilih dua orang di pengaturan widget.
+Personne liée ¦ Người liên quan ¦ Orang terkait
+Ouvre Comparaison pour analyser le lien. ¦ Hãy mở So sánh để phân tích mối liên hệ. ¦ Buka Perbandingan untuk menganalisis hubungannya.
+Aucune personne favorite. ¦ Không có người yêu thích nào. ¦ Tidak ada orang favorit.
+Rappels à traiter ¦ Lời nhắc cần xử lý ¦ Pengingat yang perlu ditangani
+Alertes cohérence ¦ Cảnh báo nhất quán ¦ Peringatan konsistensi
+Naissance renseignée ¦ Đã có ngày sinh ¦ Kelahiran sudah diisi
+Décès renseigné ¦ Đã có ngày mất ¦ Kematian sudah diisi
+Au moins un média ¦ Ít nhất một tư liệu ¦ Setidaknya satu media
+Au moins une source ¦ Ít nhất một nguồn ¦ Setidaknya satu sumber
+Aucun lieu renseigné. ¦ Chưa có địa điểm nào được điền. ¦ Belum ada tempat yang diisi.
+Ajoute un objectif dans les réglages du widget. ¦ Hãy thêm một mục tiêu trong cài đặt tiện ích. ¦ Tambahkan target di pengaturan widget.
+Ajouter {what} ¦ Thêm {what} ¦ Tambah {what}
+Aucun rappel à venir. ¦ Không có lời nhắc sắp tới. ¦ Tidak ada pengingat mendatang.
+Aucune fiche consultée sur ce navigateur. ¦ Chưa xem hồ sơ nào trên trình duyệt này. ¦ Belum ada profil yang dilihat di peramban ini.
+Aucun média à transcrire. ¦ Không có tư liệu nào cần chép lại. ¦ Tidak ada media untuk ditranskripsi.
+Aucune signature identifiée à comparer. ¦ Không có chữ ký đã nhận diện nào để so sánh. ¦ Tidak ada tanda tangan yang dikenali untuk dibandingkan.
+Aucune commune de battue à reprendre. ¦ Không có xã nào của cuộc tìm kiếm diện rộng cần làm tiếp. ¦ Tidak ada kota penyisiran yang perlu dilanjutkan.
+Aucune source ou piste à vérifier. ¦ Không có nguồn hay manh mối nào cần kiểm tra. ¦ Tidak ada sumber atau petunjuk yang perlu diperiksa.
+Rien à relire pour le moment. ¦ Hiện chưa có gì cần đọc lại. ¦ Belum ada yang perlu ditinjau untuk saat ini.
+Aucun départ enregistré : coche « Départs / émigration » sur une fiche. ¦ Chưa lưu lần ra đi nào: hãy đánh dấu “Ra đi / di cư” trên một hồ sơ. ¦ Belum ada keberangkatan tersimpan: centang “Keberangkatan / emigrasi” di sebuah profil.
+Aucun enfant placé enregistré. ¦ Chưa lưu trẻ được gửi nuôi nào. ¦ Belum ada anak asuh tersimpan.
+Aucune armoirie. ¦ Không có huy hiệu nào. ¦ Tidak ada lambang.
+Ajouter des armoiries ¦ Thêm huy hiệu ¦ Tambah lambang
+Aucun poilu : coche « Poilu 14-18 » sur une fiche. ¦ Không có lính Thế chiến I nào: hãy đánh dấu “Lính 14-18” trên một hồ sơ. ¦ Tidak ada prajurit PD I: centang “Prajurit 14-18” di sebuah profil.
+Aucune recherche enregistrée (Recherche → Recherche multicritère). ¦ Chưa lưu tìm kiếm nào (Nghiên cứu → Tìm kiếm nhiều tiêu chí). ¦ Belum ada pencarian tersimpan (Riset → Pencarian multikriteria).
+Aucun circuit à faire. ¦ Không có chuyến đi nào cần làm. ¦ Tidak ada perjalanan yang perlu dilakukan.
+Préparer un circuit ¦ Chuẩn bị một chuyến đi ¦ Siapkan perjalanan
+⚠ Aucun dossier hors de cet ordinateur n’est réglé : si le Mac est volé ou tombe en panne, tout part avec lui. ¦ ⚠ Chưa thiết lập thư mục nào ngoài máy tính này: nếu máy Mac bị mất cắp hoặc hỏng, mọi thứ sẽ mất theo. ¦ ⚠ Belum ada folder di luar komputer ini yang diatur: jika Mac dicuri atau rusak, semuanya ikut hilang.
+Régler ¦ Thiết lập ¦ Atur
+Aucun dossier surveillé pour l’instant ¦ Chưa có thư mục nào được theo dõi ¦ Belum ada folder yang dipantau
+Choisir un dossier ¦ Chọn một thư mục ¦ Pilih folder
+Aucun nom indexé dans les transcriptions. ¦ Chưa có tên nào được lập chỉ mục trong các bản chép. ¦ Tidak ada nama yang diindeks di transkripsi.
+Rien de prévu sur les 7 prochains jours. ¦ Không có gì dự kiến trong 7 ngày tới. ¦ Tidak ada rencana untuk 7 hari ke depan.
+Aucune date récurrente repérée dans les 7 prochains jours. ¦ Không thấy ngày lặp lại nào trong 7 ngày tới. ¦ Tidak ditemukan tanggal berulang dalam 7 hari ke depan.
+Texte vide : écris-le avec le crayon ✎. ¦ Văn bản trống: hãy viết bằng bút chì ✎. ¦ Teks kosong: tulis dengan pensil ✎.
+↗ Ouvrir mon agenda ¦ ↗ Mở lịch của tôi ¦ ↗ Buka agendaku
+Ce mois-ci ¦ Tháng này ¦ Bulan ini
+Voir le mois ¦ Xem tháng ¦ Lihat bulan
+Qui ¦ Ai ¦ Siapa
+Entrée : calculer · ↑ : reprendre le dernier ¦ Enter: tính · ↑: dùng lại phép tính trước ¦ Enter: hitung · ↑: pakai lagi yang terakhir
+⛶ Ouvrir la calculette ¦ ⛶ Mở máy tính bỏ túi ¦ ⛶ Buka kalkulator
+Fond de carte indisponible (pas d’Internet ?) : les photos restent à leur place. ¦ Không tải được nền bản đồ (không có Internet?): các ảnh vẫn ở nguyên chỗ. ¦ Peta dasar tidak tersedia (tidak ada Internet?): foto tetap di tempatnya.
+Pas précédent ¦ Bước trước ¦ Langkah sebelumnya
+Pas suivant ¦ Bước sau ¦ Langkah berikutnya
+Aucune date pour l’instant. ¦ Chưa có ngày nào. ¦ Belum ada tanggal.
+Frise : glisse pour choisir une période, molette pour zoomer, double-clic pour tout voir ¦ Dòng thời gian: kéo để chọn một giai đoạn, con lăn để phóng to, bấm đúp để xem tất cả ¦ Linimasa: seret untuk memilih periode, roda untuk memperbesar, klik dua kali untuk melihat semua
+Choisis une carte dans les réglages du widget (✎). ¦ Hãy chọn một bản đồ trong cài đặt tiện ích (✎). ¦ Pilih peta di pengaturan widget (✎).
+Des barres ou un camembert : par métier, par lieu, par décennie, par siècle… ¦ Cột hoặc biểu đồ tròn: theo nghề, theo địa điểm, theo thập niên, theo thế kỷ… ¦ Batang atau diagram lingkaran: per pekerjaan, per tempat, per dekade, per abad…
+Écran de l’app ¦ Màn hình của ứng dụng ¦ Layar aplikasi
+Une liste, un diagramme, une statistique, la fiche d’une personne, la carte… tel quel. ¦ Một danh sách, một sơ đồ, một thống kê, hồ sơ của một người, bản đồ… nguyên như vậy. ¦ Daftar, diagram, statistik, profil seseorang, peta… apa adanya.
+Un pense-bête, une citation, une consigne, avec des émojis. ¦ Một ghi nhớ, một câu trích dẫn, một lời dặn, có biểu tượng cảm xúc. ¦ Catatan pengingat, kutipan, instruksi, dengan emoji.
+Raccourcis ¦ Lối tắt ¦ Pintasan
+Des boutons vers les écrans, les listes ou des sites que tu utilises souvent. ¦ Các nút dẫn đến màn hình, danh sách hoặc trang web bạn hay dùng. ¦ Tombol ke layar, daftar, atau situs web yang sering kamu pakai.
+Parcours jour par jour ¦ Hành trình từng ngày ¦ Perjalanan hari demi hari
+Widget de l’app habillé ¦ Tiện ích của ứng dụng có trang trí ¦ Widget aplikasi bergaya
+Widget de l’app ¦ Tiện ích của ứng dụng ¦ Widget aplikasi
+toute la largeur ¦ toàn bộ chiều rộng ¦ lebar penuh
+Mosaïque (carrés proportionnels) ¦ Khảm (ô vuông theo tỷ lệ) ¦ Mozaik (kotak proporsional)
+Aire (courbe remplie) ¦ Vùng (đường được tô) ¦ Area (garis berisi)
+cliquer pour voir qui ¦ bấm để xem là ai ¦ klik untuk melihat siapa
+Tout voir ({n}) ¦ Xem tất cả ({n}) ¦ Lihat semua ({n})
+{n} autres valeurs ¦ {n} giá trị khác ¦ {n} nilai lain
+Aucune ligne. ¦ Không có dòng nào. ¦ Tidak ada baris.
+Personne ne correspond. ¦ Không ai phù hợp. ¦ Tidak ada yang cocok.
+=personne différente ¦ người khác nhau ¦ orang berbeda
+{people} pour {n} comptés (les 3 000 premières lignes seulement). ¦ {people} cho {n} lượt đếm (chỉ 3 000 dòng đầu). ¦ {people} untuk {n} hitungan (hanya 3.000 baris pertama).
+{people} pour {n} comptés : une même personne peut compter plusieurs fois (deux événements, deux étiquettes…). ¦ {people} cho {n} lượt đếm: một người có thể được đếm nhiều lần (hai sự kiện, hai nhãn…). ¦ {people} untuk {n} hitungan: orang yang sama bisa dihitung beberapa kali (dua peristiwa, dua label…).
+Chercher un nom, un métier… ¦ Tìm một tên, một nghề… ¦ Cari nama, pekerjaan…
+Par nom, A → Z ¦ Theo tên, A → Z ¦ Menurut nama, A → Z
+Par nom, Z → A ¦ Theo tên, Z → A ¦ Menurut nama, Z → A
+Par naissance, les plus anciennes ¦ Theo ngày sinh, cũ nhất trước ¦ Menurut kelahiran, terlama dulu
+Par naissance, les plus récentes ¦ Theo ngày sinh, mới nhất trước ¦ Menurut kelahiran, terbaru dulu
+Aucun raccourci. ¦ Không có lối tắt nào. ¦ Tidak ada pintasan.
+Frise verticale ¦ Dòng thời gian dọc ¦ Linimasa vertikal
+Frise horizontale (défile) ¦ Dòng thời gian ngang (cuộn) ¦ Linimasa horizontal (bergulir)
+Cartes en grille ¦ Thẻ dạng lưới ¦ Kartu dalam kisi
+Liste compacte ¦ Danh sách gọn ¦ Daftar ringkas
+jusqu’au… (facultatif) ¦ đến ngày… (không bắt buộc) ¦ sampai… (opsional)
+Titre de l’étape ¦ Tiêu đề của chặng ¦ Judul tahap
+Couleur de l’étape ¦ Màu của chặng ¦ Warna tahap
+Ce qui s’est passé ce jour-là ¦ Những gì đã xảy ra ngày hôm đó ¦ Apa yang terjadi hari itu
+Aucun événement daté pour cette personne. ¦ Không có sự kiện có ngày nào cho người này. ¦ Tidak ada peristiwa bertanggal untuk orang ini.
+Étape ¦ Chặng ¦ Tahap
+Ancêtres trouvés (Sosa) ¦ Tổ tiên đã tìm thấy (Sosa) ¦ Leluhur yang ditemukan (Sosa)
+Ancêtres sans source ¦ Tổ tiên không có nguồn ¦ Leluhur tanpa sumber
+décès avant 1800 ¦ mất trước 1800 ¦ kematian sebelum 1800
+Pense-bête ¦ Ghi nhớ ¦ Catatan pengingat
+Crée tes propres graphiques, sans rien programmer : avec ¦ Tạo biểu đồ của riêng bạn, không cần lập trình: với ¦ Buat grafikmu sendiri, tanpa pemrograman: dengan
+tes propres chiffres ¦ số liệu của riêng bạn ¦ angkamu sendiri
+＋ Nouveau widget ¦ ＋ Tiện ích mới ¦ ＋ Widget baru
+Importer un widget reçu ¦ Nhập một tiện ích nhận được ¦ Impor widget yang kamu terima
+Un fichier « .lcnda-widget.json » envoyé par un proche : seul le modèle du widget est partagé, jamais les données. ¦ Một tệp “.lcnda-widget.json” do người thân gửi: chỉ mẫu tiện ích được chia sẻ, không bao giờ có dữ liệu. ¦ Berkas “.lcnda-widget.json” yang dikirim orang dekat: hanya templat widget yang dibagikan, tidak pernah datanya.
+sur le tableau de bord ¦ trên bảng điều khiển ¦ di dasbor
+↗ Ouvrir dans Graphiques ¦ ↗ Mở trong Biểu đồ ¦ ↗ Buka di Grafik
+＋ Ajouter au tableau de bord ¦ ＋ Thêm vào bảng điều khiển ¦ ＋ Tambahkan ke dasbor
+Widget supprimé. ¦ Đã xoá tiện ích. ¦ Widget dihapus.
+Mon widget ¦ Tiện ích của tôi ¦ Widget-ku
+Supprimer le widget ¦ Xoá tiện ích ¦ Hapus widget
+Supprimer le widget « {name} » ? Il disparaît aussi du tableau de bord. ¦ Xoá tiện ích “{name}”? Nó cũng biến mất khỏi bảng điều khiển. ¦ Hapus widget “{name}”? Widget ini juga hilang dari dasbor.
+Supprimer le widget « {name} » ? Il disparaît aussi du tableau de bord et de tous les endroits où ce graphique est posé (fiches, enquêtes, mise en page…). ¦ Xoá tiện ích “{name}”? Nó cũng biến mất khỏi bảng điều khiển và khỏi mọi nơi đặt biểu đồ này (hồ sơ, cuộc tìm hiểu, dàn trang…). ¦ Hapus widget “{name}”? Widget ini juga hilang dari dasbor dan dari semua tempat grafik ini ditaruh (profil, penelusuran, tata letak…).
+« {name} » importé : il est dans Graphiques → « Mes graphiques ». ¦ Đã nhập “{name}”: nó nằm trong Biểu đồ → “Biểu đồ của tôi”. ¦ “{name}” diimpor: ada di Grafik → “Grafikku”.
+Widget « {name} » importé : ajoute-le au tableau de bord. ¦ Đã nhập tiện ích “{name}”: hãy thêm nó vào bảng điều khiển. ¦ Widget “{name}” diimpor: tambahkan ke dasbor.
+📌 Le poser aussi sur… ¦ 📌 Cũng đặt nó lên… ¦ 📌 Taruh juga di…
+(à l’enregistrement) ¦ (khi lưu) ¦ (saat disimpan)
+Posé nulle part pour l’instant. ¦ Chưa đặt ở đâu. ¦ Belum ditempatkan di mana pun.
+La page d’une personne, une enquête… ¦ Trang của một người, một cuộc tìm hiểu… ¦ Halaman seseorang, penelusuran…
+Graphique posé : {name}. ¦ Đã đặt biểu đồ: {name}. ¦ Grafik ditempatkan: {name}.
+Graphique retiré de cet endroit ¦ Đã gỡ biểu đồ khỏi chỗ này ¦ Grafik dilepas dari tempat ini
+L’ouvrir dans Graphiques ¦ Mở nó trong Biểu đồ ¦ Buka di Grafik
+… et {n} autres (Listes → Graphiques et diagrammes) ¦ … và {n} chỗ khác (Danh sách → Biểu đồ và sơ đồ) ¦ … dan {n} lainnya (Daftar → Grafik dan diagram)
+Widget ajouté au tableau de bord. ¦ Đã thêm tiện ích vào bảng điều khiển. ¦ Widget ditambahkan ke dasbor.
+NOUVEAU WIDGET ¦ TIỆN ÍCH MỚI ¦ WIDGET BARU
+NOUVEAU GRAPHIQUE ¦ BIỂU ĐỒ MỚI ¦ GRAFIK BARU
+Par quoi commencer ? ¦ Bắt đầu từ đâu? ¦ Mulai dari mana?
+Partir de rien ¦ Bắt đầu từ đầu ¦ Mulai dari nol
+Partir d’un élément de l’app ¦ Bắt đầu từ một mục của ứng dụng ¦ Mulai dari item aplikasi
+N’importe quel écran devient un widget : une liste (fiche d’un village, recensements, rappels…), un diagramme, une statistique, une de tes listes, la fiche d’une personne, la carte, un outil des Réglages. ¦ Bất kỳ màn hình nào cũng có thể thành tiện ích: một danh sách (hồ sơ của một làng, điều tra dân số, lời nhắc…), một sơ đồ, một thống kê, một danh sách của bạn, hồ sơ của một người, bản đồ, một công cụ trong Cài đặt. ¦ Layar apa pun bisa menjadi widget: daftar (profil desa, sensus, pengingat…), diagram, statistik, salah satu daftarmu, profil seseorang, peta, alat di Pengaturan.
+Créer ce widget ¦ Tạo tiện ích này ¦ Buat widget ini
+Partir d’un widget de l’app ¦ Bắt đầu từ một tiện ích của ứng dụng ¦ Mulai dari widget aplikasi
+Partir d’un de mes widgets ¦ Bắt đầu từ một tiện ích của tôi ¦ Mulai dari salah satu widget-ku
+Avec mes propres chiffres ¦ Với số liệu của riêng tôi ¦ Dengan angkaku sendiri
+Un tableau à remplir (des noms et des chiffres, en une ou plusieurs séries), collé d’un tableur ou importé d’un fichier CSV. ¦ Một bảng cần điền (tên và số liệu, một hoặc nhiều chuỗi), dán từ bảng tính hoặc nhập từ tệp CSV. ¦ Tabel untuk diisi (nama dan angka, dalam satu atau beberapa seri), ditempel dari spreadsheet atau diimpor dari berkas CSV.
+Mes propres chiffres ¦ Số liệu của riêng tôi ¦ Angkaku sendiri
+Un diagramme ¦ Một sơ đồ ¦ Sebuah diagram
+Hémicycle d’une assemblée, frise des membres d’un groupe, organigramme, flux, nuage de mots… (Mes diagrammes). ¦ Hình bán nguyệt của một hội đồng, dải thời gian thành viên một nhóm, sơ đồ tổ chức, luồng, đám mây từ… (Sơ đồ của tôi). ¦ Setengah lingkaran sebuah dewan, linimasa anggota kelompok, bagan organisasi, alur, awan kata… (Diagramku).
+Partir de rien, avec les données de l’app ¦ Bắt đầu từ đầu, với dữ liệu của ứng dụng ¦ Mulai dari nol, dengan data aplikasi
+Un ou plusieurs nombres : combien de personnes, d’événements, de lieux… répondent à tes critères. ¦ Một hoặc nhiều con số: bao nhiêu người, sự kiện, địa điểm… khớp với tiêu chí của bạn. ¦ Satu atau beberapa angka: berapa orang, peristiwa, tempat… yang cocok dengan kriteriamu.
+Les premières lignes d’une liste, avec les colonnes et l’ordre que tu veux. ¦ Những dòng đầu của một danh sách, với các cột và thứ tự bạn muốn. ¦ Baris-baris pertama sebuah daftar, dengan kolom dan urutan yang kamu mau.
+Partir d’une statistique de l’app ¦ Bắt đầu từ một thống kê của ứng dụng ¦ Mulai dari statistik aplikasi
+Les mêmes chiffres que dans Graphiques → Statistiques, avec ton dessin (barres, camembert, courbe, mosaïque…), tes couleurs, et autant de critères que tu veux : métier, lieu et rayon en km, dates précises, mariage, nombre d’enfants, durée de vie, divorce, voyage… ¦ Cùng các số liệu như trong Biểu đồ → Thống kê, với hình vẽ của bạn (cột, tròn, đường, khảm…), màu của bạn và bao nhiêu tiêu chí tuỳ ý: nghề nghiệp, địa điểm và bán kính tính bằng km, ngày cụ thể, kết hôn, số con, tuổi thọ, ly hôn, chuyến đi… ¦ Angka yang sama seperti di Grafik → Statistik, dengan gambarmu (batang, lingkaran, garis, mozaik…), warnamu, dan kriteria sebanyak yang kamu mau: pekerjaan, tempat dan radius dalam km, tanggal pasti, pernikahan, jumlah anak, lama hidup, perceraian, perjalanan…
+D’une statistique de l’app ¦ Từ một thống kê của ứng dụng ¦ Dari statistik aplikasi
+Partir d’un de mes widgets ou de mes graphiques ¦ Bắt đầu từ một tiện ích hoặc biểu đồ của tôi ¦ Mulai dari salah satu widget atau grafikku
+── ou des données de l’app ── ¦ ── hoặc dữ liệu của ứng dụng ── ¦ ── atau data aplikasi ──
+Listes de l’app ¦ Danh sách của ứng dụng ¦ Daftar aplikasi
+Aucun critère : toute la base. ¦ Không có tiêu chí: toàn bộ cơ sở dữ liệu. ¦ Tanpa kriteria: seluruh basis data.
+Toutes les lignes de cette liste de l’app. ¦ Tất cả các dòng của danh sách này. ¦ Semua baris dari daftar aplikasi ini.
+(ce que montre cette partie, affichée dessous) ¦ (những gì phần này hiện, hiển thị bên dưới) ¦ (yang ditampilkan bagian ini, terlihat di bawah)
+Ex. : Les baptêmes de la paroisse, du plus ancien au plus récent ¦ Vd: Các lễ rửa tội của giáo xứ, từ cũ nhất đến mới nhất ¦ Mis.: Baptis di paroki, dari terlama ke terbaru
+✨ Proposer une légende d’après les critères ¦ ✨ Gợi ý chú thích theo tiêu chí ¦ ✨ Usulkan keterangan dari kriteria
+Tableau vide : « ＋ Ligne » ou « 📋 Coller un tableau ». ¦ Bảng trống: “＋ Dòng” hoặc “📋 Dán một bảng”. ¦ Tabel kosong: “＋ Baris” atau “📋 Tempel tabel”.
+＋ Série (colonne de chiffres) ¦ ＋ Chuỗi (cột số liệu) ¦ ＋ Seri (kolom angka)
+Recopier les chiffres d’un graphique (à toi, un exemple, ou une statistique de l’app) pour les retoucher ¦ Chép lại số liệu của một biểu đồ (của bạn, một ví dụ, hoặc một thống kê của ứng dụng) để chỉnh sửa ¦ Salin angka dari sebuah grafik (milikmu, contoh, atau statistik aplikasi) untuk diubah
+📋 Coller un tableau ¦ 📋 Dán một bảng ¦ 📋 Tempel tabel
+📊 Partir d’un graphique ¦ 📊 Bắt đầu từ một biểu đồ ¦ 📊 Mulai dari grafik
+🧾 Modifier les données ¦ 🧾 Sửa dữ liệu ¦ 🧾 Ubah data
+Fichier trop gros (5 Mo au plus). ¦ Tệp quá lớn (tối đa 5 MB). ¦ Berkas terlalu besar (maksimal 5 MB).
+Ligne retirée ¦ Đã gỡ dòng ¦ Baris dilepas
+Tableau vidé ¦ Đã làm trống bảng ¦ Tabel dikosongkan
+Remplacer le tableau ¦ Thay bảng ¦ Ganti tabel
+La première ligne ¦ Dòng đầu tiên ¦ Baris pertama
+à deviner ¦ để đoán ¦ akan ditebak
+donne les titres (noms des séries) ¦ là tiêu đề (tên các chuỗi) ¦ berisi judul (nama seri)
+est une ligne de chiffres ¦ là một dòng số liệu ¦ adalah baris angka
+Aucun graphique disponible. ¦ Không có biểu đồ nào. ¦ Tidak ada grafik.
+Recopier ces chiffres ¦ Chép lại các số liệu này ¦ Salin angka ini
+Aucun chiffre pour ce graphique. ¦ Không có số liệu cho biểu đồ này. ¦ Tidak ada angka untuk grafik ini.
+=valeur recopiée ¦ giá trị đã chép ¦ nilai disalin
+=série ¦ chuỗi ¦ seri
+Série {num} ¦ Chuỗi {num} ¦ Seri {num}
+Nom de la série {num} ¦ Tên chuỗi {num} ¦ Nama seri {num}
+Tableau importé ({rows}) ¦ Đã nhập bảng ({rows}) ¦ Tabel diimpor ({rows})
+Série « {name} » retirée ¦ Đã gỡ chuỗi “{name}” ¦ Seri “{name}” dilepas
+Chiffres repris du tableur ({rows}) ¦ Số liệu lấy từ bảng tính ({rows}) ¦ Angka diambil dari spreadsheet ({rows})
+Tableau collé ({rows}) ¦ Đã dán bảng ({rows}) ¦ Tabel ditempel ({rows})
+Retirer cette série ¦ Gỡ chuỗi này ¦ Lepas seri ini
+(type masqué) ¦ (loại bị ẩn) ¦ (jenis tersembunyi)
+Dessins simples ¦ Hình vẽ đơn giản ¦ Gambar sederhana
+Sépia (photos anciennes) ¦ Nâu đỏ (ảnh xưa) ¦ Sepia (foto lama)
+Une couleur en dégradé ¦ Một màu chuyển sắc ¦ Satu warna bergradasi
+Couleur du dégradé ¦ Màu chuyển sắc ¦ Warna gradasi
+Les valeurs apparaissent ici après le calcul de l’aperçu. ¦ Các giá trị sẽ hiện ở đây sau khi tính bản xem trước. ¦ Nilai akan muncul di sini setelah pratinjau dihitung.
+Valeurs les plus fréquentes ¦ Giá trị thường gặp nhất ¦ Nilai paling sering
+Écrans indisponibles. ¦ Không có màn hình nào. ¦ Layar tidak tersedia.
+(date précise ou année, facultatif) ¦ (ngày cụ thể hoặc năm, không bắt buộc) ¦ (tanggal pasti atau tahun, opsional)
+Nés à partir du ¦ Sinh từ ngày ¦ Lahir sejak
+12 mars 1750 ou 1700 ¦ 12 mars 1750 hoặc 1700 ¦ 12 mars 1750 atau 1700
+jusqu’au ¦ đến ngày ¦ sampai
+31/12/1850 ou 1900 ¦ 31/12/1850 hoặc 1900 ¦ 31/12/1850 atau 1900
+Cette statistique garde ses seuls filtres (années, sexe, lignée). ¦ Thống kê này chỉ giữ các bộ lọc riêng của nó (năm, giới tính, dòng dõi). ¦ Statistik ini hanya memakai saringannya sendiri (tahun, jenis kelamin, garis keturunan).
+ne pas montrer les valeurs vides ¦ không hiện các giá trị trống ¦ jangan tampilkan nilai kosong
+Libellé ¦ Nhãn ghi ¦ Keterangan
+retirer ce chiffre ¦ gỡ số liệu này ¦ lepas angka ini
+ordre de la liste ¦ thứ tự danh sách ¦ urutan daftar
+croissant ¦ tăng dần ¦ naik
+décroissant ¦ giảm dần ¦ turun
+Compter par ¦ Đếm theo ¦ Hitung menurut
+Regrouper ¦ Gom nhóm ¦ Kelompokkan
+par valeur ¦ theo giá trị ¦ menurut nilai
+par année ¦ theo năm ¦ per tahun
+par décennie ¦ theo thập niên ¦ per dekade
+par tranche (de … ans, ou de … pour un nombre) ¦ theo khoảng (… năm, hoặc … cho một số) ¦ per rentang (… tahun, atau … untuk angka)
+par siècle ¦ theo thế kỷ ¦ per abad
+par mois de l’année ¦ theo tháng trong năm ¦ per bulan dalam setahun
+Tranche de ¦ Khoảng ¦ Rentang
+Seulement du ¦ Chỉ từ ¦ Hanya dari
+12 mars 1750 ou 1750 ¦ 12 mars 1750 hoặc 1750 ¦ 12 mars 1750 atau 1750
+au ¦ đến ¦ sampai
+31/12/1800 ou 1800 ¦ 31/12/1800 hoặc 1800 ¦ 31/12/1800 atau 1800
+ne pas compter les cases vides ¦ không đếm các ô trống ¦ jangan hitung sel kosong
+Les étapes viennent ¦ Các chặng lấy từ ¦ Tahapnya berasal
+écrites à la main ¦ viết bằng tay ¦ ditulis manual
+des événements d’une personne ¦ các sự kiện của một người ¦ dari peristiwa seseorang
+Présentation ¦ Cách trình bày ¦ Tampilan
+par date ¦ theo ngày ¦ menurut tanggal
+dans l’ordre écrit ¦ theo thứ tự đã viết ¦ sesuai urutan tulisan
+Hauteur de la carte ¦ Chiều cao bản đồ ¦ Tinggi peta
+Carte du parcours ¦ Bản đồ hành trình ¦ Peta perjalanan
+« Jour 1, Jour 2… » ¦ “Ngày 1, Ngày 2…” ¦ “Hari 1, Hari 2…”
+Textes des étapes ¦ Văn bản của các chặng ¦ Teks tahap
+Seulement les événements avec un lieu ¦ Chỉ các sự kiện có địa điểm ¦ Hanya peristiwa dengan tempat
+✎ Modifier ce diagramme ¦ ✎ Sửa sơ đồ này ¦ ✎ Ubah diagram ini
+Le widget montre toujours la dernière version du diagramme (Graphiques → Mes diagrammes). ¦ Tiện ích luôn hiện phiên bản mới nhất của sơ đồ (Biểu đồ → Sơ đồ của tôi). ¦ Widget selalu menampilkan versi terbaru diagram (Grafik → Diagramku).
+Un pense-bête, une citation… Les émojis marchent 🌳 ¦ Một ghi nhớ, một câu trích dẫn… Biểu tượng cảm xúc dùng được 🌳 ¦ Catatan pengingat, kutipan… Emoji bisa dipakai 🌳
+Un site internet… ¦ Một trang web… ¦ Sebuah situs web…
+Texte du bouton ¦ Chữ trên nút ¦ Teks tombol
+Sous-titre de cette partie ¦ Tiêu đề phụ của phần này ¦ Subjudul bagian ini
+Ex. : À faire, Mes chiffres, Liens utiles ¦ Vd: Việc cần làm, Số liệu của tôi, Liên kết hữu ích ¦ Mis.: Tugas, Angkaku, Tautan berguna
+ÉDITEUR DE GRAPHIQUES ¦ TRÌNH SỬA BIỂU ĐỒ ¦ EDITOR GRAFIK
+ÉDITEUR DE WIDGETS ¦ TRÌNH SỬA TIỆN ÍCH ¦ EDITOR WIDGET
+Nouveau widget ¦ Tiện ích mới ¦ Widget baru
+Règle ton widget à gauche ; l’aperçu se met à jour à droite. ¦ Hãy thiết lập tiện ích ở bên trái; bản xem trước cập nhật ở bên phải. ¦ Atur widget-mu di kiri; pratinjau diperbarui di kanan.
+1. Le widget ¦ 1. Tiện ích ¦ 1. Widget
+Mes ancêtres bretons ¦ Tổ tiên người Bretagne của tôi ¦ Leluhurku dari Bretagne
+Texte en haut du widget ¦ Chữ ở đầu tiện ích ¦ Teks di bagian atas widget
+Une phrase pour expliquer ce widget ¦ Một câu giải thích tiện ích này ¦ Satu kalimat untuk menjelaskan widget ini
+Où l’afficher ¦ Hiện ở đâu ¦ Tampilkan di mana
+Enregistrer et ouvrir dans Graphiques ¦ Lưu và mở trong Biểu đồ ¦ Simpan dan buka di Grafik
+Enregistrer et ajouter au tableau de bord ¦ Lưu và thêm vào bảng điều khiển ¦ Simpan dan tambahkan ke dasbor
+la courbe ¦ đường biểu diễn ¦ garisnya
+Aucune valeur. ¦ Không có giá trị nào. ¦ Tidak ada nilai.
+remettre les couleurs de la palette ¦ đặt lại màu theo bảng màu ¦ kembalikan ke warna palet
+Donne un titre au widget. ¦ Hãy đặt tiêu đề cho tiện ích. ¦ Beri judul pada widget.
+Widget enregistré : ajoute-le depuis la colonne de gauche du tableau de bord. ¦ Đã lưu tiện ích: hãy thêm nó từ cột bên trái của bảng điều khiển. ¦ Widget tersimpan: tambahkan dari kolom kiri dasbor.
+Graphique enregistré : il est dans Graphiques → Statistiques, rubrique « Mes graphiques ». ¦ Đã lưu biểu đồ: nó nằm trong Biểu đồ → Thống kê, mục “Biểu đồ của tôi”. ¦ Grafik tersimpan: ada di Grafik → Statistik, bagian “Grafikku”.
+ce n’est pas un widget LCNDA. ¦ đây không phải là tiện ích LCNDA. ¦ ini bukan widget LCNDA.
+Liste absente de ta base ({name}) : remplacée par « Personnes ». ¦ Danh sách không có trong dữ liệu của bạn ({name}): được thay bằng “Người”. ¦ Daftar tidak ada di basis datamu ({name}): diganti dengan “Orang”.
+Widget importé ¦ Tiện ích đã nhập ¦ Widget yang diimpor
+Ce widget n’existe plus. ¦ Tiện ích này không còn nữa. ¦ Widget ini sudah tidak ada.
+Statistiques de l’app ¦ Thống kê của ứng dụng ¦ Statistik aplikasi
+Source introuvable (graphique supprimé ?). ¦ Không tìm thấy nguồn (biểu đồ đã bị xoá?). ¦ Sumber tidak ditemukan (grafik dihapus?).
+MES GRAPHIQUES ¦ BIỂU ĐỒ CỦA TÔI ¦ GRAFIKKU
+Graphique introuvable ¦ Không tìm thấy biểu đồ ¦ Grafik tidak ditemukan
+Il a peut-être été supprimé. ¦ Có thể nó đã bị xoá. ¦ Mungkin sudah dihapus.
+Image PNG ou JPG, PDF, impression, tableau CSV ¦ Ảnh PNG hoặc JPG, PDF, in, bảng CSV ¦ Gambar PNG atau JPG, PDF, cetak, tabel CSV
+léger, pour un courriel ¦ nhẹ, để gửi thư điện tử ¦ ringan, untuk email
+les chiffres, pour un tableur ¦ các số liệu, cho bảng tính ¦ angka-angkanya, untuk spreadsheet
+Fenêtre d’impression bloquée. ¦ Cửa sổ in bị chặn. ¦ Jendela cetak diblokir.
+Une photo de tes médias, une nouvelle chaque jour. ¦ Một ảnh từ tư liệu của bạn, mỗi ngày một ảnh mới. ¦ Satu foto dari mediamu, foto baru setiap hari.
+Compte à rebours ¦ Đếm ngược ¦ Hitung mundur
+Les jours qui restent avant une date : la cousinade, un anniversaire, un voyage aux archives… ¦ Số ngày còn lại trước một ngày: buổi họp mặt họ hàng, một sinh nhật, một chuyến đến kho lưu trữ… ¦ Hari yang tersisa sebelum suatu tanggal: reuni keluarga, ulang tahun, kunjungan ke arsip…
+Le widget n’a pas pu être fabriqué. ¦ Không tạo được tiện ích. ¦ Widget tidak bisa dibuat.
+Widget prêt : {file}. Ouvre-le d’un double-clic et garde l’onglet ouvert (ou épingle-le) : il change tout seul chaque jour. ¦ Tiện ích đã sẵn sàng: {file}. Hãy bấm đúp để mở và giữ thẻ mở (hoặc ghim nó): nó tự cập nhật mỗi ngày. ¦ Widget siap: {file}. Buka dengan klik dua kali dan biarkan tab terbuka (atau sematkan): widget ini berubah sendiri setiap hari.
+La cousinade ¦ Buổi họp mặt họ hàng ¦ Reuni keluarga
+ton ordinateur ¦ máy tính của bạn ¦ komputermu
+Toujours au-dessus ¦ Luôn ở trên cùng ¦ Selalu di atas
+× Retirer du bureau ¦ × Gỡ khỏi màn hình nền ¦ × Lepas dari desktop
+⤓ Télécharger le widget (.html) ¦ ⤓ Tải tiện ích về (.html) ¦ ⤓ Unduh widget (.html)
+Démarrer avec l’ordinateur (les widgets s’ouvrent seuls, sans la grande fenêtre) ¦ Khởi động cùng máy tính (các tiện ích tự mở, không cần cửa sổ chính) ¦ Mulai bersama komputer (widget terbuka sendiri, tanpa jendela utama)
+⛔ Je ne comprends pas cette date : écris par exemple « 14 juillet 2027 » ou « 14/07/2027 ». ¦ ⛔ Tôi không hiểu ngày này: hãy viết ví dụ “14 juillet 2027” hoặc “14/07/2027”. ¦ ⛔ Aku tidak memahami tanggal ini: tulis misalnya “14 juillet 2027” atau “14/07/2027”.
+⛔ Donne la date du compte à rebours. ¦ ⛔ Hãy nhập ngày của đếm ngược. ¦ ⛔ Isi tanggal hitung mundur.
+Donne la date. ¦ Hãy nhập ngày. ¦ Isi tanggalnya.
+Le widget n’a pas pu s’ouvrir. ¦ Không mở được tiện ích. ¦ Widget tidak bisa dibuka.
+Retiré du bureau. ¦ Đã gỡ khỏi màn hình nền. ¦ Dilepas dari desktop.
+« {name} » retiré du bureau ¦ Đã gỡ “{name}” khỏi màn hình nền ¦ “{name}” dilepas dari desktop
+Les widgets démarreront avec l’ordinateur. ¦ Các tiện ích sẽ khởi động cùng máy tính. ¦ Widget akan mulai bersama komputer.
+Les widgets ne démarreront plus avec l’ordinateur. ¦ Các tiện ích sẽ không còn khởi động cùng máy tính. ¦ Widget tidak akan lagi mulai bersama komputer.
+🪟 Mettre sur le bureau (« {name} », une petite fenêtre à part) ¦ 🪟 Đặt lên màn hình nền (“{name}”, một cửa sổ nhỏ riêng) ¦ 🪟 Taruh di desktop (“{name}”, jendela kecil terpisah)
+🪟 Mettre sur le bureau (« {name} » : un fichier .html autonome dans un navigateur) ¦ 🪟 Đặt lên màn hình nền (“{name}”: một tệp .html độc lập trong trình duyệt) ¦ 🪟 Taruh di desktop (“{name}”: berkas .html mandiri di peramban)
+Retirer {name} ¦ Gỡ {name} ¦ Lepas {name}
+Aucune personne ¦ Không có ai ¦ Tidak ada orang
+Flèches ¦ Mũi tên ¦ Panah
+▶ Carte de la vie animée ¦ ▶ Bản đồ cuộc đời động ¦ ▶ Peta kehidupan beranimasi
+Ajoute une personne. ¦ Hãy thêm một người. ¦ Tambahkan seseorang.
+Aucun lieu daté. ¦ Không có địa điểm có ngày nào. ¦ Tidak ada tempat bertanggal.
+Comparer avec ¦ So sánh với ¦ Bandingkan dengan
+Opacité ¦ Độ mờ ¦ Opasitas
+Année de ¦ Năm từ ¦ Tahun dari
+Âge de ¦ Tuổi từ ¦ Usia dari
+Famille / groupe ¦ Gia đình / nhóm ¦ Keluarga / kelompok
+Fond ¦ Nền ¦ Latar
+Recentrer ¦ Căn giữa lại ¦ Pusatkan ulang
+carte|sépulture ¦ mai táng ¦ pemakaman
+carte|évt ¦ sự kiện ¦ peristiwa
+contributeurs OpenStreetMap ¦ những người đóng góp OpenStreetMap ¦ kontributor OpenStreetMap
+· connexion requise pour les tuiles ¦ · cần kết nối để tải ô bản đồ ¦ · perlu koneksi untuk ubin peta
+connexion requise pour les tuiles ¦ cần kết nối để tải ô bản đồ ¦ perlu koneksi untuk ubin peta
+Aucun événement dans cette zone ¦ Không có sự kiện nào trong vùng này ¦ Tidak ada peristiwa di area ini
+⤢ Voir tout ¦ ⤢ Xem tất cả ¦ ⤢ Lihat semua
+Lieu non précisé ¦ Chưa rõ địa điểm ¦ Tempat tidak disebutkan
+Voir la tombe ¦ Xem mộ ¦ Lihat makam
+Événement non rattaché ¦ Sự kiện chưa gắn ¦ Peristiwa tidak terhubung
+🚢 voyage ¦ 🚢 chuyến đi ¦ 🚢 perjalanan
+👶 placement ¦ 👶 gửi nuôi ¦ 👶 penitipan asuh
+🎖 armée ¦ 🎖 quân đội ¦ 🎖 militer
+💞 conjoint ¦ 💞 vợ/chồng ¦ 💞 pasangan
+👶 enfant ¦ 👶 con ¦ 👶 anak
+🏫 école ¦ 🏫 trường học ¦ 🏫 sekolah
+École ¦ Trường học ¦ Sekolah
+Les étapes ¦ Các chặng ¦ Tahap-tahap
+📍 Lieux sans position ¦ 📍 Địa điểm chưa có vị trí ¦ 📍 Tempat tanpa posisi
+🗓 Sans lieu ¦ 🗓 Không có địa điểm ¦ 🗓 Tanpa tempat
+CARTE · LA VIE D’UNE PERSONNE ¦ BẢN ĐỒ · CUỘC ĐỜI MỘT NGƯỜI ¦ PETA · KEHIDUPAN SESEORANG
+Carte de sa vie ¦ Bản đồ cuộc đời ¦ Peta kehidupannya
+👪 Avec la famille (le couple, les enfants) ¦ 👪 Cùng gia đình (vợ chồng, con cái) ¦ 👪 Bersama keluarga (pasangan, anak-anak)
+Les étapes l’une après l’autre, en vidéo (MP4 ou WebM) ¦ Các chặng lần lượt, thành video (MP4 hoặc WebM) ¦ Tahap demi tahap, sebagai video (MP4 atau WebM)
+Ce navigateur ne sait pas enregistrer de vidéo ¦ Trình duyệt này không quay được video ¦ Peramban ini tidak bisa merekam video
+🎬 Exporter en vidéo ¦ 🎬 Xuất thành video ¦ 🎬 Ekspor sebagai video
+Chargement de la carte… ¦ Đang tải bản đồ… ¦ Memuat peta…
+La carte de sa vie se remplit avec ses événements, ses résidences, ses recensements, ses voyages… ¦ Bản đồ cuộc đời được lấp đầy bằng các sự kiện, nơi ở, điều tra dân số, chuyến đi… ¦ Peta kehidupannya terisi dengan peristiwa, tempat tinggal, sensus, perjalanannya…
+🗺 La vie de {name} ¦ 🗺 Cuộc đời của {name} ¦ 🗺 Kehidupan {name}
+La vie de {name} ¦ Cuộc đời của {name} ¦ Kehidupan {name}
+Aucun lieu dans cette vie ¦ Không có địa điểm nào trong cuộc đời này ¦ Tidak ada tempat dalam kehidupan ini
+Ajoute un lieu à ses événements (naissance, mariage, résidence…) pour voir sa vie sur la carte. ¦ Hãy thêm địa điểm cho các sự kiện (sinh, kết hôn, nơi ở…) để xem cuộc đời trên bản đồ. ¦ Tambahkan tempat pada peristiwanya (kelahiran, pernikahan, tempat tinggal…) untuk melihat kehidupannya di peta.
+Le moteur vidéo n’est pas chargé. ¦ Bộ máy video chưa được tải. ¦ Mesin video belum dimuat.
+Durée d’une étape ¦ Thời lượng một chặng ¦ Durasi satu tahap
+aucune étape avec un lieu. ¦ không có chặng nào có địa điểm. ¦ tidak ada tahap dengan tempat.
+🎬 Vidéo {file} ¦ 🎬 Video {file} ¦ 🎬 Video {file}
+les étapes animées ¦ các chặng động ¦ tahap beranimasi
+⤓ Exporter la vidéo en {file} ¦ ⤓ Xuất video thành {file} ¦ ⤓ Ekspor video sebagai {file}
+Vidéo exportée, mais pas rangée dans les médias : {err} ¦ Đã xuất video, nhưng chưa cất vào tư liệu: {err} ¦ Video diekspor, tetapi tidak disimpan di media: {err}
+✓ Vidéo exportée ({file}). ¦ ✓ Đã xuất video ({file}). ¦ ✓ Video diekspor ({file}).
+Montrer la même vie, étape par étape, avec la lecture ▶ et la vidéo ¦ Hiện cùng cuộc đời này, từng chặng một, với nút phát ▶ và video ¦ Tampilkan kehidupan yang sama, tahap demi tahap, dengan pemutaran ▶ dan video
+Comparer deux époques ¦ So sánh hai thời kỳ ¦ Bandingkan dua zaman
+Fermer la comparaison ¦ Đóng phần so sánh ¦ Tutup perbandingan
+Glisse le trait (← →) ¦ Kéo đường kẻ (← →) ¦ Seret garisnya (← →)
+Transparence ¦ Độ trong suốt ¦ Transparansi
+Deux fonds sur la même zone : un trait à glisser, côte à côte ou en transparence ¦ Hai nền trên cùng một vùng: một đường kẻ để kéo, cạnh nhau hoặc trong suốt ¦ Dua latar di area yang sama: garis yang bisa digeser, berdampingan, atau transparan
+Fond des départements introuvable. ¦ Không tìm thấy nền các tỉnh. ¦ Latar departemen tidak ditemukan.
+supprimée (partagée entre ses voisines) ¦ bị giải thể (chia cho các xã lân cận) ¦ dihapus (dibagi ke tetangganya)
+fusionnée ¦ đã sáp nhập ¦ digabung
+fusionnée (fusion-association) ¦ đã sáp nhập (sáp nhập liên kết) ¦ digabung (penggabungan-asosiasi)
+disparue ¦ đã biến mất ¦ hilang
+renommée ¦ đã đổi tên ¦ berganti nama
+renommée « {name} » le {date} ¦ đổi tên thành “{name}” ngày {date} ¦ berganti nama menjadi “{name}” pada {date}
+{what} le {date} ¦ {what} ngày {date} ¦ {what} pada {date}
+dans {name} ¦ vào {name} ¦ ke {name}
+(devenue commune {name}) ¦ (đã thành xã {name}) ¦ (menjadi kota {name})
+Aujourd’hui : <b>{name}</b> ¦ Ngày nay: <b>{name}</b> ¦ Sekarang: <b>{name}</b>
+Rétablie le {date}. ¦ Được lập lại ngày {date}. ¦ Dipulihkan pada {date}.
+Position approximative : le centre de la commune d’aujourd’hui. ¦ Vị trí gần đúng: trung tâm của xã ngày nay. ¦ Posisi perkiraan: pusat kota masa kini.
+Source : INSEE, Code officiel géographique (depuis 1943). ¦ Nguồn: INSEE, Mã địa lý chính thức (từ 1943). ¦ Sumber: INSEE, Kode Geografis Resmi (sejak 1943).
+{name}, commune renommée ¦ {name}, xã đã đổi tên ¦ {name}, kota yang berganti nama
+{name}, commune disparue ¦ {name}, xã đã biến mất ¦ {name}, kota yang hilang
+{name} — renommée en {year} ¦ {name} — đổi tên năm {year} ¦ {name} — berganti nama pada {year}
+{name} — disparue en {year} ¦ {name} — biến mất năm {year} ¦ {name} — hilang pada {year}
+🏛 Frontières ▾ ¦ 🏛 Biên giới ▾ ¦ 🏛 Perbatasan ▾
+Provinces, départements de 1790, communes disparues ¦ Các tỉnh cũ, các tỉnh năm 1790, các xã đã biến mất ¦ Provinsi, departemen tahun 1790, kota yang hilang
+Tracé approximatif, d’après les départements d’aujourd’hui ¦ Đường nét gần đúng, dựa theo các tỉnh ngày nay ¦ Garis perkiraan, berdasarkan departemen masa kini
+Frontières anciennes ¦ Biên giới xưa ¦ Perbatasan lama
+Provinces d’Ancien Régime (≈ 1789) ¦ Các tỉnh thời Chế độ cũ (≈ 1789) ¦ Provinsi Ancien Régime (≈ 1789)
+Approximatif : d’après les départements d’aujourd’hui. ¦ Gần đúng: dựa theo các tỉnh ngày nay. ¦ Perkiraan: berdasarkan departemen masa kini.
+Départements de 1790 ¦ Các tỉnh năm 1790 ¦ Departemen tahun 1790
+Les 83 départements, noms d’alors ; approximatif. ¦ 83 tỉnh, tên thời đó; gần đúng. ¦ 83 departemen, nama pada masa itu; perkiraan.
+Communes disparues ou fusionnées ¦ Các xã đã biến mất hoặc sáp nhập ¦ Kota yang hilang atau digabung
+🏚 Communes disparues ou fusionnées ¦ 🏚 Các xã đã biến mất hoặc sáp nhập ¦ 🏚 Kota yang hilang atau digabung
+Depuis 1943 (INSEE). Zoome sur une région. ¦ Từ 1943 (INSEE). Hãy phóng to một vùng. ¦ Sejak 1943 (INSEE). Perbesar ke satu wilayah.
+Avec les communes renommées ¦ Kèm các xã đã đổi tên ¦ Dengan kota yang berganti nama
+Les communes disparues se téléchargent une fois : ¦ Các xã đã biến mất được tải về một lần: ¦ Kota yang hilang diunduh sekali:
+Réglages → Frontières anciennes ↗ ¦ Cài đặt → Biên giới xưa ↗ ¦ Pengaturan → Perbatasan lama ↗
+Pas encore téléchargé ¦ Chưa tải về ¦ Belum diunduh
+Téléchargé ¦ Đã tải về ¦ Sudah diunduh
+Installé ¦ Đã cài ¦ Terpasang
+Pas installé ¦ Chưa cài ¦ Belum terpasang
+=commune disparue ¦ xã đã biến mất ¦ kota yang hilang
+=commune renommée ¦ xã đã đổi tên ¦ kota yang berganti nama
+=placée sur la carte ¦ đã đặt trên bản đồ ¦ ditempatkan di peta
+L’historique officiel des communes de l’INSEE (depuis 1943) : chaque commune disparue avec sa date et sa commune d’aujourd’hui. Livré avec l’app (5,5 Mo, Licence Ouverte 2.0 de l’INSEE) : installé tout seul, sans Internet. Les anciens noms aident aussi le menu de choix des lieux (« anc. « … » »). ¦ Lịch sử chính thức các xã của INSEE (từ 1943): mỗi xã đã biến mất kèm ngày và xã ngày nay. Đi kèm ứng dụng (5,5 MB, Giấy phép Mở 2.0 của INSEE): tự cài, không cần Internet. Các tên cũ cũng giúp menu chọn địa điểm (“anc. “…””). ¦ Riwayat resmi kota dari INSEE (sejak 1943): setiap kota yang hilang dengan tanggalnya dan kota masa kininya. Disertakan dalam aplikasi (5,5 MB, Lisensi Terbuka 2.0 INSEE): terpasang sendiri, tanpa Internet. Nama-nama lama juga membantu menu pilihan tempat (“anc. “…””).
+⤓ Télécharger de nouveau (mise à jour) ¦ ⤓ Tải về lại (cập nhật) ¦ ⤓ Unduh lagi (pembaruan)
+🗑 Retirer ¦ 🗑 Gỡ ra ¦ 🗑 Lepas
+⤓ Installer les frontières anciennes ¦ ⤓ Cài biên giới xưa ¦ ⤓ Pasang perbatasan lama
+(taille…) ¦ (kích thước…) ¦ (ukuran…)
+dossier des données ¦ thư mục dữ liệu ¦ folder data
+Rangé dans le {name}, commun à toutes tes généalogies. ¦ Được cất trong {name}, dùng chung cho mọi gia phả của bạn. ¦ Disimpan di {name}, dipakai bersama oleh semua silsilahmu.
+Téléchargement et vérification… ¦ Đang tải về và kiểm tra… ¦ Mengunduh dan memeriksa…
+Frontières anciennes retirées ¦ Đã gỡ biên giới xưa ¦ Perbatasan lama dilepas
+pas d’Internet ¦ không có Internet ¦ tidak ada Internet
+Adresse de téléchargement injoignable pour l’instant ({err}). ¦ Hiện không kết nối được địa chỉ tải về ({err}). ¦ Alamat unduhan tidak bisa dijangkau untuk saat ini ({err}).
+✓ Frontières anciennes installées : {n}. ¦ ✓ Đã cài biên giới xưa: {n}. ¦ ✓ Perbatasan lama terpasang: {n}.
+Départ, voyage ¦ Ra đi, chuyến đi ¦ Keberangkatan, perjalanan
+Tous les autres ¦ Tất cả những cái khác ¦ Semua yang lain
+Couvert ¦ Nhiều mây ¦ Mendung
+Pluie toute la journée ¦ Mưa cả ngày ¦ Hujan sepanjang hari
+Pluie faible ¦ Mưa nhỏ ¦ Hujan ringan
+Matin de brouillard glacé ¦ Buổi sáng sương mù giá buốt ¦ Pagi berkabut beku
+Brouillard le matin ¦ Sương mù buổi sáng ¦ Kabut di pagi hari
+Il faisait très froid ¦ Trời rất lạnh ¦ Udara sangat dingin
+Grand soleil et chaleur ¦ Nắng to và nóng ¦ Cerah terik dan panas
+Gris et frais ¦ Xám và mát ¦ Kelabu dan sejuk
+Nuages et éclaircies ¦ Có mây, lúc hửng nắng ¦ Berawan dan sesekali cerah
+Froid mais ensoleillé ¦ Lạnh nhưng có nắng ¦ Dingin tetapi cerah
+Beau temps ¦ Trời đẹp ¦ Cuaca cerah
+Neige ¦ Tuyết ¦ Salju
+Orage ¦ Dông ¦ Badai petir
+Mesuré ¦ Đo được ¦ Terukur
+Station à moins de 15 km (et moins de 150 m d’écart d’altitude) ¦ Trạm cách chưa đến 15 km (và chênh độ cao dưới 150 m) ¦ Stasiun kurang dari 15 km (dan selisih ketinggian kurang dari 150 m)
+Station à {n} km ¦ Trạm cách {n} km ¦ Stasiun berjarak {n} km
+Station entre 15 et 40 km : indicatif (la pluie change vite d’un village à l’autre) ¦ Trạm cách 15 đến 40 km: chỉ để tham khảo (mưa thay đổi nhanh từ làng này sang làng khác) ¦ Stasiun berjarak 15 sampai 40 km: hanya perkiraan (hujan cepat berubah dari satu desa ke desa lain)
+Estimé (carreau ≈ 30 km) ¦ Ước tính (ô lưới ≈ 30 km) ¦ Perkiraan (petak ≈ 30 km)
+Réanalyse ERA5 : aucune station à moins de 40 km ¦ Tái phân tích ERA5: không có trạm nào trong vòng 40 km ¦ Reanalisis ERA5: tidak ada stasiun dalam jarak 40 km
+Reconstitution grossière (≈ 100 km) ¦ Tái dựng sơ lược (≈ 100 km) ¦ Rekonstruksi kasar (≈ 100 km)
+Réanalyse 20CR (1836–1939) : une idée du temps, pas une mesure ¦ Tái phân tích 20CR (1836–1939): một ý niệm về thời tiết, không phải số đo ¦ Reanalisis 20CR (1836–1939): gambaran cuaca, bukan hasil pengukuran
+Les données météo ne sont pas installées. ¦ Dữ liệu thời tiết chưa được cài. ¦ Data cuaca belum terpasang.
+Le lieu n’a pas de coordonnées : place-le sur la carte pour avoir sa météo. ¦ Địa điểm chưa có toạ độ: hãy đặt nó lên bản đồ để có thời tiết. ¦ Tempat ini tidak punya koordinat: taruh di peta untuk mendapatkan cuacanya.
+La date n’est pas connue au jour près. ¦ Ngày tháng không biết chính xác đến từng ngày. ¦ Tanggalnya tidak diketahui sampai ke hari.
+Pas de météo pour ce lieu : les données installées couvrent la France, la Belgique, la Suisse et le Luxembourg (le pack Europe ajoute le reste). ¦ Không có thời tiết cho địa điểm này: dữ liệu đã cài bao gồm Pháp, Bỉ, Thuỵ Sĩ và Luxembourg (gói châu Âu thêm phần còn lại). ¦ Tidak ada cuaca untuk tempat ini: data yang terpasang mencakup Prancis, Belgia, Swiss, dan Luksemburg (paket Eropa menambahkan sisanya).
+Pas de relevé connu près d’ici avant {year} (première station : {name}). ¦ Không có số đo nào được biết gần đây trước năm {year} (trạm đầu tiên: {name}). ¦ Tidak ada catatan yang diketahui di dekat sini sebelum {year} (stasiun pertama: {name}).
+Pas de relevé connu près d’ici avant {year}. ¦ Không có số đo nào được biết gần đây trước năm {year}. ¦ Tidak ada catatan yang diketahui di dekat sini sebelum {year}.
+Cliquer pour le détail ¦ Bấm để xem chi tiết ¦ Klik untuk rinciannya
+À propos des données ¦ Về dữ liệu ¦ Tentang data
+🙈 Météo masquée pour cet événement ¦ 🙈 Đã ẩn thời tiết cho sự kiện này ¦ 🙈 Cuaca disembunyikan untuk peristiwa ini
+🙈 Météo masquée pour cette personne ¦ 🙈 Đã ẩn thời tiết cho người này ¦ 🙈 Cuaca disembunyikan untuk orang ini
+{what} (la retrouver : Réglages → 🌦 Météo d’autrefois) ¦ {what} (tìm lại: Cài đặt → 🌦 Thời tiết ngày xưa) ¦ {what} (untuk menemukannya lagi: Pengaturan → 🌦 Cuaca masa lalu)
+Ton lieu ¦ Địa điểm của bạn ¦ Tempatmu
+(carte du relief) ¦ (bản đồ địa hình) ¦ (peta relief)
+Fiabilité ¦ Độ tin cậy ¦ Keandalan
+3 jours avant · 3 jours après ¦ 3 ngày trước · 3 ngày sau ¦ 3 hari sebelum · 3 hari sesudah
+Tout le détail… ¦ Toàn bộ chi tiết… ¦ Semua rincian…
+⛰ Altitude du lieu ¦ ⛰ Độ cao của địa điểm ¦ ⛰ Ketinggian tempat
+Lecture des données météo… ¦ Đang đọc dữ liệu thời tiết… ¦ Membaca data cuaca…
+Météo ¦ Thời tiết ¦ Cuaca
+🌦 MÉTÉO D’AUTREFOIS ¦ 🌦 THỜI TIẾT NGÀY XƯA ¦ 🌦 CUACA MASA LALU
+Le lieu, la station et le carreau ¦ Địa điểm, trạm và ô lưới ¦ Tempat, stasiun, dan petak
+↺ Altitude remise à celle de la carte ¦ ↺ Đã đặt lại độ cao theo bản đồ ¦ ↺ Ketinggian dikembalikan ke ketinggian peta
+⛰ Altitude enregistrée : {n} ¦ ⛰ Đã lưu độ cao: {n} ¦ ⛰ Ketinggian tersimpan: {n}
+⛰ LIEU ¦ ⛰ ĐỊA ĐIỂM ¦ ⛰ TEMPAT
+Altitude de {name} ¦ Độ cao của {name} ¦ Ketinggian {name}
+ce lieu ¦ địa điểm này ¦ tempat ini
+Ce qu’elle donne ¦ Nó cho biết gì ¦ Apa yang diberikannya
+Licence et mention ¦ Giấy phép và ghi công ¦ Lisensi dan atribusi
+Une météo ancienne reste une estimation : elle aide à imaginer la journée, elle ne remplace pas ce que dit l’acte ou un journal de l’époque. ¦ Thời tiết ngày xưa vẫn chỉ là ước tính: nó giúp hình dung ngày hôm đó, nhưng không thay thế những gì giấy tờ hay một tờ báo thời đó nói. ¦ Cuaca masa lalu tetaplah perkiraan: membantu membayangkan hari itu, bukan pengganti isi akta atau surat kabar pada masa itu.
+Rien n’est envoyé sur Internet : toutes ces données sont dans l’app ou dans les packs importés. Les règles de fiabilité : station à moins de 15 km et moins de 150 m d’écart d’altitude → « Mesuré » ; de 15 à 40 km → « Station à … km » ; sinon la réanalyse ERA5 (1940 →) → « Estimé » ; de 1836 à 1939 la reconstitution 20CR → « Reconstitution grossière ». ¦ Không có gì được gửi lên Internet: mọi dữ liệu này nằm trong ứng dụng hoặc trong các gói đã nhập. Quy tắc độ tin cậy: trạm cách chưa đến 15 km và chênh độ cao dưới 150 m → “Đo được”; từ 15 đến 40 km → “Trạm cách … km”; nếu không thì tái phân tích ERA5 (1940 →) → “Ước tính”; từ 1836 đến 1939 là tái dựng 20CR → “Tái dựng sơ lược”. ¦ Tidak ada yang dikirim lewat Internet: semua data ini ada di aplikasi atau di paket yang diimpor. Aturan keandalan: stasiun kurang dari 15 km dan selisih ketinggian kurang dari 150 m → “Terukur”; 15 sampai 40 km → “Stasiun berjarak … km”; selain itu reanalisis ERA5 (1940 →) → “Perkiraan”; dari 1836 sampai 1939 rekonstruksi 20CR → “Rekonstruksi kasar”.
+Comment les obtenir ¦ Cách lấy chúng ¦ Cara mendapatkannya
+Comment l’obtenir ¦ Cách lấy nó ¦ Cara mendapatkannya
+(avant 1940, la météo montre la journée) ¦ (trước 1940, thời tiết hiện cả ngày) ¦ (sebelum 1940, cuaca menampilkan sepanjang hari)
+Socle inclus ¦ Phần nền có sẵn ¦ Dasar bawaan
+Pack complet ¦ Gói đầy đủ ¦ Paket lengkap
+Pack Europe ¦ Gói châu Âu ¦ Paket Eropa
+Pack ¦ Gói ¦ Paket
+1836 à 2025 · France, Belgique, Suisse, Luxembourg · ≈ 300 stations chaque jour, 4 heures par jour depuis 1940 · ≈ 550 Mo ¦ 1836 đến 2025 · Pháp, Bỉ, Thuỵ Sĩ, Luxembourg · ≈ 300 trạm mỗi ngày, 4 giờ mỗi ngày từ 1940 · ≈ 550 MB ¦ 1836 sampai 2025 · Prancis, Belgia, Swiss, Luksemburg · ≈ 300 stasiun setiap hari, 4 jam per hari sejak 1940 · ≈ 550 MB
+Toutes les stations (≈ 14 700), heure par heure depuis 1950 · ≈ 3 Go ¦ Tất cả các trạm (≈ 14 700), từng giờ một từ 1950 · ≈ 3 GB ¦ Semua stasiun (≈ 14.700), jam demi jam sejak 1950 · ≈ 3 GB
+🗑 Supprimer le pack ¦ 🗑 Xoá gói ¦ 🗑 Hapus paket
+⤒ Importer le fichier… ¦ ⤒ Nhập tệp… ¦ ⤒ Impor berkas…
+🗑 {name} supprimé ¦ 🗑 Đã xoá {name} ¦ 🗑 {name} dihapus
+Le temps qu’il faisait le jour de chaque événement, sans Internet. ¦ Thời tiết vào ngày của mỗi sự kiện, không cần Internet. ¦ Cuaca pada hari setiap peristiwa, tanpa Internet.
+Météo sur les fiches ¦ Thời tiết trên hồ sơ ¦ Cuaca di profil
+Au survol ¦ Khi di chuột ¦ Saat kursor di atasnya
+Au clic sur la pastille ¦ Khi bấm vào nhãn ¦ Saat mengklik lencana
+Fenêtre ¦ Cửa sổ ¦ Jendela
+Sous l’événement ¦ Dưới sự kiện ¦ Di bawah peristiwa
+Températures ¦ Nhiệt độ ¦ Suhu
+Pluie ¦ Mưa ¦ Hujan
+pouces ¦ inch ¦ inci
+La phrase simple ¦ Câu đơn giản ¦ Kalimat sederhana
+« Il faisait froid : −4 °C au matin… » ¦ “Trời lạnh: −4 °C vào buổi sáng…” ¦ “Udaranya dingin: −4 °C di pagi hari…”
+Comparer à la normale ¦ So với mức bình thường ¦ Bandingkan dengan normal
+Ligne des sources sous le détail ¦ Dòng nguồn dưới phần chi tiết ¦ Baris sumber di bawah rincian
+Obligatoire pour certaines licences : elle reste dans le détail et à l’export. ¦ Bắt buộc với một số giấy phép: nó vẫn có trong phần chi tiết và khi xuất. ¦ Wajib untuk beberapa lisensi: tetap ada di rincian dan saat ekspor.
+Bloc « 🌦 Météo de sa vie » sur les fiches ¦ Khối “🌦 Thời tiết trong đời” trên hồ sơ ¦ Blok “🌦 Cuaca sepanjang hidupnya” di profil
+Phrases curieuses (« Né le jour le plus froid… ») ¦ Câu thú vị (“Sinh vào ngày lạnh nhất…”) ¦ Fakta unik (“Lahir pada hari terdingin…”)
+Dans « Ce jour-là » et le tableau de bord ¦ Trong “Ngày này” và bảng điều khiển ¦ Di “Hari itu” dan dasbor
+Montrer aussi les reconstitutions grossières (avant 1940) ¦ Hiện cả các bản tái dựng sơ lược (trước 1940) ¦ Tampilkan juga rekonstruksi kasar (sebelum 1940)
+Pour quels événements ¦ Cho những sự kiện nào ¦ Untuk peristiwa apa saja
+Tous les types d’événements de ta base (avec leur nombre). Décoche ceux qui n’ont pas besoin de la météo. ¦ Mọi loại sự kiện trong dữ liệu của bạn (kèm số lượng). Hãy bỏ chọn những loại không cần thời tiết. ¦ Semua jenis peristiwa di basis datamu (beserta jumlahnya). Hapus centang yang tidak memerlukan cuaca.
+Météo masquée ¦ Thời tiết đã ẩn ¦ Cuaca tersembunyi
+Remontrer la météo ¦ Hiện lại thời tiết ¦ Tampilkan lagi cuaca
+Rien n’est masqué. ¦ Không có gì bị ẩn. ¦ Tidak ada yang disembunyikan.
+Sur une fiche : clic droit sur la pastille météo (ou ⋯ du détail) → « Masquer la météo ». ¦ Trên một hồ sơ: bấm chuột phải vào nhãn thời tiết (hoặc ⋯ của phần chi tiết) → “Ẩn thời tiết”. ¦ Di profil: klik kanan lencana cuaca (atau ⋯ di rincian) → “Sembunyikan cuaca”.
+Les données dans l’app ¦ Dữ liệu trong ứng dụng ¦ Data di aplikasi
+Le téléchargement se fait une fois, depuis n’importe quel ordinateur. Ensuite on importe le fichier ici et l’app n’a plus besoin d’Internet. ¦ Chỉ tải về một lần, từ bất kỳ máy tính nào. Sau đó bạn nhập tệp vào đây và ứng dụng không cần Internet nữa. ¦ Unduhan dilakukan sekali, dari komputer mana pun. Lalu impor berkasnya di sini dan aplikasi tidak lagi memerlukan Internet.
+le socle ¦ phần nền ¦ dasarnya
+le pack complet ¦ gói đầy đủ ¦ paket lengkap
+le pack Europe ¦ gói châu Âu ¦ paket Eropa
+le pack ¦ gói ¦ paketnya
+Obtenir {name} ¦ Lấy {name} ¦ Dapatkan {name}
+Importer un pack météo ¦ Nhập một gói thời tiết ¦ Impor paket cuaca
+aucun fichier ¦ không có tệp nào ¦ tidak ada berkas
+l’en-tête du pack est abîmé. ¦ phần đầu của gói bị hỏng. ¦ kepala paket rusak.
+le fichier est incomplet (téléchargement interrompu ?). ¦ tệp chưa đầy đủ (tải về bị gián đoạn?). ¦ berkas tidak lengkap (unduhan terputus?).
+heure par heure ¦ từng giờ một ¦ jam demi jam
+sur le disque ¦ trên ổ đĩa ¦ di disk
+Le socle reste : le pack s’ajoute par-dessus. ¦ Phần nền vẫn giữ: gói được thêm lên trên. ¦ Dasarnya tetap: paket ditambahkan di atasnya.
+Vérifié ¦ Đã kiểm tra ¦ Sudah diperiksa
+Envoi du fichier… ¦ Đang gửi tệp… ¦ Mengirim berkas…
+Envoi du fichier… {n} % ¦ Đang gửi tệp… {n} % ¦ Mengirim berkas… {n} %
+réponse illisible ¦ phản hồi không đọc được ¦ respons tidak terbaca
+Vérification du pack… ¦ Đang kiểm tra gói… ¦ Memeriksa paket…
+La météo est masquée ici (Réglages → 🌦 Météo d’autrefois). ¦ Thời tiết bị ẩn ở đây (Cài đặt → 🌦 Thời tiết ngày xưa). ¦ Cuaca disembunyikan di sini (Pengaturan → 🌦 Cuaca masa lalu).
+Aucun anniversaire rond avec une météo connue aujourd’hui. ¦ Hôm nay không có ngày kỷ niệm tròn nào có thời tiết đã biết. ¦ Tidak ada peringatan bulat dengan cuaca yang diketahui hari ini.
+Bague métal lue ¦ Đã đọc vòng kim loại ¦ Cincin logam terbaca
+Photo-identifié ¦ Nhận diện qua ảnh ¦ Dikenali lewat foto
+(pas tout lu) ¦ (chưa đọc hết) ¦ (belum terbaca semua)
+Éloigner ¦ Thu nhỏ ¦ Perkecil
+Le temps ¦ Thời gian ¦ Waktu
+1 heure par seconde ¦ 1 giờ mỗi giây ¦ 1 jam per detik
+1 jour par seconde ¦ 1 ngày mỗi giây ¦ 1 hari per detik
+1 semaine par seconde ¦ 1 tuần mỗi giây ¦ 1 minggu per detik
+1 mois par seconde ¦ 1 tháng mỗi giây ¦ 1 bulan per detik
+↗ Ouvrir l’observation ¦ ↗ Mở lần quan sát ¦ ↗ Buka pengamatan
+cette année ¦ năm nay ¦ tahun ini
+période choisie ¦ giai đoạn đã chọn ¦ periode terpilih
+La journée (ou la nuit) d’un animal qui porte une balise ou un collier GPS. ¦ Ngày (hoặc đêm) của một con vật đeo thẻ hoặc vòng cổ GPS. ¦ Siang (atau malam) seekor hewan yang memakai tag atau kalung GPS.
+Animaux vus par mois, distance parcourue, zone fréquentée, jamais revus. ¦ Số con vật thấy mỗi tháng, quãng đường đi, vùng thường lui tới, không bao giờ thấy lại. ¦ Hewan yang terlihat per bulan, jarak tempuh, area yang dikunjungi, tidak pernah terlihat lagi.
+Une case pour retrouver un animal par ses couleurs, un code gravé, une bague métal, une puce, un tatouage ou une boucle. ¦ Một ô để tìm lại con vật theo màu, mã khắc, vòng kim loại, chip, hình xăm hoặc thẻ tai. ¦ Kotak untuk menemukan hewan menurut warna, kode ukir, cincin logam, cip, tato, atau anting telinga.
+Déposer un fichier GPX, KML ou CSV d’une balise ou d’un collier. ¦ Thả một tệp GPX, KML hoặc CSV từ thẻ hoặc vòng cổ. ¦ Letakkan berkas GPX, KML, atau CSV dari tag atau kalung.
+Le suivi n’a pas pu se charger. ¦ Không tải được phần theo dõi. ¦ Pemantauan tidak bisa dimuat.
+dernière position GPS ¦ vị trí GPS cuối cùng ¦ posisi GPS terakhir
+Aucune observation pour l’instant. ¦ Chưa có lần quan sát nào. ¦ Belum ada pengamatan.
+Tous ont été revus récemment. ¦ Tất cả đều đã được thấy lại gần đây. ¦ Semua sudah terlihat lagi baru-baru ini.
+Tous ont été revus. ¦ Tất cả đều đã được thấy lại. ¦ Semua sudah terlihat lagi.
+pas encore vu ¦ chưa thấy ¦ belum terlihat
+Aucun animal suivi pour l’instant. ¦ Chưa theo dõi con vật nào. ¦ Belum ada hewan yang dipantau.
+Ouvre la fiche d’un animal (Listes → Animaux) et ajoute-lui une marque ou une observation. ¦ Hãy mở hồ sơ của một con vật (Danh sách → Động vật) và thêm cho nó một dấu hiệu hoặc một lần quan sát. ¦ Buka profil seekor hewan (Daftar → Hewan) dan tambahkan tanda atau pengamatan.
+Le plus suivi ¦ Được theo dõi nhiều nhất ¦ Paling banyak dipantau
+Code, couleurs ou numéro ¦ Mã, màu hoặc số ¦ Kode, warna, atau nomor
+Chercher… (« 7K », « vert rouge », n° de puce) ¦ Tìm… (“7K”, “xanh đỏ”, số chip) ¦ Cari… (“7K”, “hijau merah”, no. cip)
+Couleurs (« vert rouge »), code gravé, bague métal, puce, tatouage, boucle. « ? » = pas lu, [K|X] = j’hésite. ¦ Màu (“xanh đỏ”), mã khắc, vòng kim loại, chip, hình xăm, thẻ tai. “?” = chưa đọc, [K|X] = tôi phân vân. ¦ Warna (“hijau merah”), kode ukir, cincin logam, cip, tato, anting telinga. “?” = belum terbaca, [K|X] = ragu.
+Aucun trajet GPS pour l’instant. ¦ Chưa có lộ trình GPS nào. ¦ Belum ada jejak GPS.
+＋ Nouveau site ¦ ＋ Khu mới ¦ ＋ Situs baru
+＋ Nouveau site de suivi ¦ ＋ Khu theo dõi mới ¦ ＋ Situs pemantauan baru
+Nouveau site de suivi ¦ Khu theo dõi mới ¦ Situs pemantauan baru
+Aucun site de suivi pour l’instant. ¦ Chưa có khu theo dõi nào. ¦ Belum ada situs pemantauan.
+Aucun comptage. ¦ Không có lần đếm nào. ¦ Tidak ada penghitungan.
+↗ Le site ¦ ↗ Khu này ¦ ↗ Situsnya
+La météo… ¦ Thời tiết… ¦ Cuacanya…
+Dernier événement ¦ Sự kiện gần nhất ¦ Peristiwa terakhir
+Aucun groupe pour l’instant. ¦ Chưa có nhóm nào. ¦ Belum ada kelompok.
+🪺 Nids occupés ¦ 🪺 Tổ có chim ¦ 🪺 Sarang terisi
+🐣 Poussins bagués ¦ 🐣 Chim non đã đeo vòng ¦ 🐣 Anak burung bercincin
+Courbe des comptages ¦ Đường biểu diễn các lần đếm ¦ Kurva penghitungan
+Cette année ¦ Năm nay ¦ Tahun ini
+Montrer les trajets GPS ¦ Hiện các lộ trình GPS ¦ Tampilkan jejak GPS
+Pas revus depuis ¦ Không thấy lại từ ¦ Tidak terlihat lagi selama
+Le même seuil que « 👁 Vu la dernière fois » des fiches d’animaux. ¦ Cùng ngưỡng với “👁 Lần cuối nhìn thấy” trên hồ sơ động vật. ¦ Ambang yang sama dengan “👁 Terakhir terlihat” di profil hewan.
+Seulement ceux qui ne vont pas bien ¦ Chỉ những con không khoẻ ¦ Hanya yang kondisinya kurang baik
+Réglages du bloc remis comme au départ. ¦ Đã đặt lại cài đặt của khối như ban đầu. ¦ Pengaturan blok dikembalikan seperti semula.
+un site ¦ một khu ¦ sebuah situs
+⤒ Recevoir un suivi partagé… ¦ ⤒ Nhận một bản theo dõi được chia sẻ… ¦ ⤒ Terima pemantauan yang dibagikan…
+Toutes les espèces ¦ Tất cả các loài ¦ Semua spesies
+Corneilles, Hérissons, Chats du quartier… ¦ Quạ, Nhím, Mèo trong xóm… ¦ Gagak, Landak, Kucing sekitar…
+Corneille noire, Hérisson d’Europe… ¦ Quạ đen, Nhím châu Âu… ¦ Gagak bangkai, Landak Eropa…
+Renommer la page ¦ Đổi tên trang ¦ Ganti nama halaman
+Un émoji : 🐦 🦔 🐈 🐬 🐺… ¦ Một biểu tượng cảm xúc: 🐦 🦔 🐈 🐬 🐺… ¦ Sebuah emoji: 🐦 🦔 🐈 🐬 🐺…
+Icône changée. ¦ Đã đổi biểu tượng. ¦ Ikon diganti.
+Espèce et site par défaut… ¦ Loài và khu mặc định… ¦ Spesies dan situs bawaan…
+Dupliquer la page ¦ Nhân bản trang ¦ Duplikat halaman
+Bloc dupliqué. ¦ Đã nhân bản khối. ¦ Blok diduplikat.
+Copier vers une autre page… ¦ Chép sang trang khác… ¦ Salin ke halaman lain…
+Copier vers la page… ¦ Chép sang trang… ¦ Salin ke halaman…
+Pages rangées. ¦ Đã sắp xếp các trang. ¦ Halaman sudah diatur.
+📁 Glisse ici un trajet (GPX, KML, CSV), colle-le (⌘V) ou choisis-le ¦ 📁 Kéo một lộ trình vào đây (GPX, KML, CSV), dán nó (⌘V) hoặc chọn nó ¦ 📁 Seret jejak ke sini (GPX, KML, CSV), tempelkan (⌘V), atau pilih
+Balises de la faune sauvage (Movebank…) ou colliers (Tractive, Weenect, Invoxia, Kippy…). ¦ Thẻ cho động vật hoang dã (Movebank…) hoặc vòng cổ (Tractive, Weenect, Invoxia, Kippy…). ¦ Tag satwa liar (Movebank…) atau kalung (Tractive, Weenect, Invoxia, Kippy…).
+Aucune observation datée et placée. ¦ Không có lần quan sát nào có ngày và vị trí. ¦ Tidak ada pengamatan yang bertanggal dan berlokasi.
+Aucun événement de santé pour l’instant. ¦ Chưa có sự kiện sức khoẻ nào. ¦ Belum ada peristiwa kesehatan.
+Aucun passage sur cette période. ¦ Không có lượt qua nào trong giai đoạn này. ¦ Tidak ada kunjungan pada periode ini.
+Ce mois ¦ Tháng này ¦ Bulan ini
+Météo trouvée ¦ Đã tìm thấy thời tiết ¦ Cuaca ditemukan
+=animal trouvé ¦ con vật được tìm thấy ¦ hewan ditemukan
+SUIVI DES ANIMAUX · EN GRAND ¦ THEO DÕI ĐỘNG VẬT · CỠ LỚN ¦ PEMANTAUAN HEWAN · UKURAN PENUH
+SUIVI DES ANIMAUX · CHIFFRES ¦ THEO DÕI ĐỘNG VẬT · SỐ LIỆU ¦ PEMANTAUAN HEWAN · ANGKA
+Par animal ¦ Theo con vật ¦ Per hewan
+Par année ¦ Theo năm ¦ Per tahun
+relié dans l’ordre ¦ nối theo thứ tự ¦ dihubungkan berurutan
+Les chiffres… ¦ Các số liệu… ¦ Angka-angkanya…
+Tous les animaux ¦ Tất cả động vật ¦ Semua hewan
+Par site · observations ¦ Theo khu · quan sát ¦ Per situs · pengamatan
+Aucune observation. ¦ Không có lần quan sát nào. ¦ Tidak ada pengamatan.
+Zone fréquentée ¦ Vùng thường lui tới ¦ Area yang dikunjungi
+enveloppe des points vus ¦ đường bao các điểm đã thấy ¦ selubung titik-titik yang terlihat
+Il faut au moins 3 points pour une zone. ¦ Cần ít nhất 3 điểm để có một vùng. ¦ Sebuah area perlu setidaknya 3 titik.
+Délai ¦ Thời hạn ¦ Batas waktu
+Ce qu’il faisait ¦ Nó đang làm gì ¦ Apa yang sedang dilakukannya
+Vu par ¦ Người thấy ¦ Dilihat oleh
+Avec qui ¦ Cùng với ai ¦ Bersama siapa
+Chaque caractère du code ¦ Từng ký tự của mã ¦ Setiap karakter kode
+Pas lu : clique pour dire « j’hésite entre… » ¦ Chưa đọc: bấm để nói “tôi phân vân giữa…” ¦ Belum terbaca: klik untuk mengatakan “ragu antara…”
+J’hésite : clique pour dire que c’est sûr ¦ Phân vân: bấm để nói là chắc chắn ¦ Ragu: klik untuk mengatakan sudah pasti
+Sûr : clique pour dire « pas lu » ¦ Chắc chắn: bấm để nói “chưa đọc” ¦ Pasti: klik untuk mengatakan “belum terbaca”
+un clic : sûr → pas lu → j’hésite entre… ¦ một lần bấm: chắc chắn → chưa đọc → tôi phân vân giữa… ¦ satu klik: pasti → belum terbaca → ragu antara…
+Modifier l’observation ¦ Sửa lần quan sát ¦ Ubah pengamatan
+Nouvelle observation ¦ Lần quan sát mới ¦ Pengamatan baru
+Retrouver l’animal · selon l’espèce : ¦ Tìm lại con vật · theo loài: ¦ Temukan hewannya · menurut spesies:
+Photos, sons ou vidéos ¦ Ảnh, âm thanh hoặc video ¦ Foto, suara, atau video
+Dis quand tu l’as vu. ¦ Hãy cho biết khi nào bạn thấy nó. ¦ Sebutkan kapan kamu melihatnya.
+Dis où tu l’as vu (un lieu, un site, ou 📍 Ma position). ¦ Hãy cho biết bạn thấy nó ở đâu (một địa điểm, một khu, hoặc 📍 Vị trí của tôi). ¦ Sebutkan di mana kamu melihatnya (tempat, situs, atau 📍 Posisiku).
+Observation enregistrée. ¦ Đã lưu lần quan sát. ¦ Pengamatan tersimpan.
+Observation créée. ¦ Đã tạo lần quan sát. ¦ Pengamatan dibuat.
+🌊 En mer ¦ 🌊 Trên biển ¦ 🌊 Di laut
+Taille du groupe ¦ Quy mô nhóm ¦ Ukuran kelompok
+📷 Piège photo ¦ 📷 Bẫy ảnh ¦ 📷 Kamera jebak
+Vu par un piège photo ¦ Được bẫy ảnh ghi lại ¦ Terlihat oleh kamera jebak
+Piège n° ¦ Bẫy số ¦ No. kamera
+mise toute seule d’après ce que tu as cliqué ¦ tự điền theo những gì bạn đã bấm ¦ terisi sendiri dari yang kamu klik
+＋ Créer la fiche d’un nouvel animal ¦ ＋ Tạo hồ sơ cho một con vật mới ¦ ＋ Buat profil untuk hewan baru
+✎ Garder sans fiche ¦ ✎ Giữ mà không có hồ sơ ¦ ✎ Simpan tanpa profil
+Deux animaux correspondent autant : la lecture sera marquée « Doute ». ¦ Hai con vật khớp như nhau: lần đọc sẽ được đánh dấu “Nghi ngờ”. ¦ Dua hewan sama cocoknya: pembacaan akan ditandai “Ragu”.
+Couleurs des bagues ¦ Màu vòng ¦ Warna cincin
+Bague vue mais couleur pas sûre ¦ Thấy vòng nhưng không chắc màu ¦ Cincin terlihat tetapi warnanya tidak pasti
+Une autre couleur (pipette, code #…) ¦ Một màu khác (ống hút màu, mã #…) ¦ Warna lain (pipet, kode #…)
+Pas regardé ¦ Chưa nhìn ¦ Belum dilihat
+J’hésite entre… ¦ Tôi phân vân giữa… ¦ Ragu antara…
+L’observation sera gardée sans fiche, avec la lecture. ¦ Lần quan sát sẽ được giữ mà không có hồ sơ, kèm lần đọc. ¦ Pengamatan akan disimpan tanpa profil, beserta pembacaannya.
+Son nom (ou un code : « 7K », « Sans nom 2C9 ») ¦ Tên của nó (hoặc một mã: “7K”, “Không tên 2C9”) ¦ Namanya (atau kode: “7K”, “Tanpa nama 2C9”)
+En quelques mots (« se baigne », « chasse un goéland »…) ¦ Vài chữ (“đang tắm”, “đuổi một con mòng biển”…) ¦ Dalam beberapa kata (“sedang mandi”, “mengejar camar”…)
+Cet appareil ne donne pas sa position. ¦ Thiết bị này không cho biết vị trí. ¦ Perangkat ini tidak memberikan posisinya.
+La fenêtre d’import n’est pas chargée. ¦ Cửa sổ nhập chưa được tải. ¦ Jendela impor belum dimuat.
+Un trajet GPS ¦ Một lộ trình GPS ¦ Jejak GPS
+Fichier trop gros (40 Mo au plus). ¦ Tệp quá lớn (tối đa 40 MB). ¦ Berkas terlalu besar (maksimal 40 MB).
+Fichier trop gros (200 Mo au plus). ¦ Tệp quá lớn (tối đa 200 MB). ¦ Berkas terlalu besar (maksimal 200 MB).
+{rows} sans date ou sans position seront sautées. ¦ {rows} không có ngày hoặc vị trí sẽ bị bỏ qua. ¦ {rows} tanpa tanggal atau posisi akan dilewati.
+{rows} sans date ou sans position sera sautée. ¦ {rows} không có ngày hoặc vị trí sẽ bị bỏ qua. ¦ {rows} tanpa tanggal atau posisi akan dilewati.
+=point importé ¦ điểm đã nhập ¦ titik diimpor
+{points} pour {name} ¦ {points} cho {name} ¦ {points} untuk {name}
+({n} déjà là, sautés) ¦ ({n} đã có, bỏ qua) ¦ ({n} sudah ada, dilewati)
+({n} déjà là, sauté) ¦ ({n} đã có, bỏ qua) ¦ ({n} sudah ada, dilewati)
+{points} en tout ¦ tổng cộng {points} ¦ total {points}
+{name} a déjà {points} : ils restent, ce fichier s’y ajoute (un instant déjà là n’est pas repris deux fois). ¦ {name} đã có {points}: chúng vẫn được giữ, tệp này được thêm vào (một thời điểm đã có sẽ không lấy hai lần). ¦ {name} sudah punya {points}: semuanya tetap ada, berkas ini ditambahkan (momen yang sudah ada tidak diambil dua kali).
+l’animal ¦ con vật ¦ hewan itu
+Ne va pas bien ¦ Không khoẻ ¦ Kondisi kurang baik
+Chercher… (nom, code « 7K », bague EA…, lieu, observateur) ¦ Tìm… (tên, mã “7K”, vòng EA…, địa điểm, người quan sát) ¦ Cari… (nama, kode “7K”, cincin EA…, tempat, pengamat)
+Chercher… (nom, code « 7K », puce…) ¦ Tìm… (tên, mã “7K”, chip…) ¦ Cari… (nama, kode “7K”, cip…)
+Vus récemment ¦ Thấy gần đây ¦ Terlihat baru-baru ini
+＋ Nouveau comptage ¦ ＋ Lần đếm mới ¦ ＋ Penghitungan baru
+Nouveau comptage ¦ Lần đếm mới ¦ Penghitungan baru
+＋ Nouvelle observation ici ¦ ＋ Lần quan sát mới ở đây ¦ ＋ Pengamatan baru di sini
+🗑 Supprimer le site ¦ 🗑 Xoá khu ¦ 🗑 Hapus situs
+Aucun comptage pour l’instant. ¦ Chưa có lần đếm nào. ¦ Belum ada penghitungan.
+? Non identifiés ¦ ? Chưa nhận diện ¦ ? Belum dikenali
+Personne encore. ¦ Chưa có ai. ¦ Belum ada siapa pun.
+contour du site ¦ đường bao của khu ¦ garis batas situs
+Site enregistré. ¦ Đã lưu khu. ¦ Situs tersimpan.
+Site créé. ¦ Đã tạo khu. ¦ Situs dibuat.
+île, colonie nord… ¦ đảo, đàn phía bắc… ¦ pulau, koloni utara…
+Ce qu’on compte ¦ Đếm cái gì ¦ Yang dihitung
+Donne la date du comptage. ¦ Hãy nhập ngày đếm. ¦ Isi tanggal penghitungan.
+Comptage enregistré. ¦ Đã lưu lần đếm. ¦ Penghitungan tersimpan.
+Comptage supprimé. ¦ Đã xoá lần đếm. ¦ Penghitungan dihapus.
+＋ Ajouter un membre ¦ ＋ Thêm một thành viên ¦ ＋ Tambah anggota
+Aucun membre pour l’instant. ¦ Chưa có thành viên nào. ¦ Belum ada anggota.
+Membres passés ¦ Thành viên cũ ¦ Mantan anggota
+Personne n’est parti. ¦ Chưa ai rời đi. ¦ Belum ada yang pergi.
+Frise du groupe ¦ Dòng thời gian của nhóm ¦ Linimasa kelompok
+🗑 Supprimer le groupe ¦ 🗑 Xoá nhóm ¦ 🗑 Hapus kelompok
+Loup gris, chimpanzé, orque… ¦ Sói xám, tinh tinh, cá voi sát thủ… ¦ Serigala abu-abu, simpanse, orca…
+Territoire ¦ Lãnh thổ ¦ Wilayah
+Donne un nom au groupe. ¦ Hãy đặt tên cho nhóm. ¦ Beri nama kelompok.
+Groupe enregistré. ¦ Đã lưu nhóm. ¦ Kelompok tersimpan.
+Groupe créé. ¦ Đã tạo nhóm. ¦ Kelompok dibuat.
+Groupe supprimé (son histoire aussi). ¦ Đã xoá nhóm (cả lịch sử của nó). ¦ Kelompok dihapus (beserta riwayatnya).
+✓ Onglet « 🐾 Suivi des animaux » affiché ¦ ✓ Đã hiện thẻ “🐾 Theo dõi động vật” ¦ ✓ Tab “🐾 Pemantauan hewan” ditampilkan
+Tu suis des animaux sauvages ou un chat avec un collier GPS ? ¦ Bạn theo dõi động vật hoang dã hay một con mèo đeo vòng cổ GPS? ¦ Kamu memantau hewan liar atau kucing dengan kalung GPS?
+L’onglet « 🐾 Suivi des animaux » est caché. Pour l’afficher : Réglages → Apparence → Onglets du haut. ¦ Thẻ “🐾 Theo dõi động vật” đang bị ẩn. Để hiện nó: Cài đặt → Giao diện → Các thẻ phía trên. ¦ Tab “🐾 Pemantauan hewan” tersembunyi. Untuk menampilkannya: Pengaturan → Tampilan → Tab atas.
+↗ Afficher l’onglet ¦ ↗ Hiện thẻ ¦ ↗ Tampilkan tab
+Observation dupliquée. ¦ Đã nhân bản lần quan sát. ¦ Pengamatan diduplikat.
+Observation supprimée. ¦ Đã xoá lần quan sát. ¦ Pengamatan dihapus.
+Voir les {n} autres médias ¦ Xem {n} tư liệu khác ¦ Lihat {n} media lainnya
+{n} sans bague ¦ {n} không đeo vòng ¦ {n} tanpa cincin
+Animal sans fiche ¦ Con vật chưa có hồ sơ ¦ Hewan tanpa profil
+pas revus depuis {days} ¦ không thấy lại từ {days} ¦ tidak terlihat lagi selama {days}
+Suivi des animaux · Page « {name} » ¦ Theo dõi động vật · Trang “{name}” ¦ Pemantauan hewan · Halaman “{name}”
+Cette page montre seulement : <b>{what}</b>. Tous ses blocs s’y règlent d’office (un bloc peut garder son propre choix). ¦ Trang này chỉ hiện: <b>{what}</b>. Mọi khối của trang tự động theo lựa chọn này (một khối có thể giữ lựa chọn riêng). ¦ Halaman ini hanya menampilkan: <b>{what}</b>. Semua bloknya otomatis mengikuti (sebuah blok bisa mempertahankan pilihannya sendiri).
+Cette page montre seulement : <b>{what}</b> · tous les sites. Tous ses blocs s’y règlent d’office (un bloc peut garder son propre choix). ¦ Trang này chỉ hiện: <b>{what}</b> · mọi khu. Mọi khối của trang tự động theo lựa chọn này (một khối có thể giữ lựa chọn riêng). ¦ Halaman ini hanya menampilkan: <b>{what}</b> · semua situs. Semua bloknya otomatis mengikuti (sebuah blok bisa mempertahankan pilihannya sendiri).
+Nouvelle page ¦ Trang mới ¦ Halaman baru
+Espèce et site de la page « {name} » ¦ Loài và khu của trang “{name}” ¦ Spesies dan situs halaman “{name}”
+Page « {name} » créée. ¦ Đã tạo trang “{name}”. ¦ Halaman “{name}” dibuat.
+Page « {name} » supprimée (ses blocs, pas les animaux). ¦ Đã xoá trang “{name}” (các khối của nó, không phải các con vật). ¦ Halaman “{name}” dihapus (bloknya, bukan hewannya).
+Bloc copié vers « {name} ». ¦ Đã chép khối sang “{name}”. ¦ Blok disalin ke “{name}”.
+Aucun animal pour « {q} ». ¦ Không có con vật nào cho “{q}”. ¦ Tidak ada hewan untuk “{q}”.
+première observation ¦ lần quan sát đầu tiên ¦ pengamatan pertama
+dernière : {date} ¦ gần nhất: {date} ¦ terakhir: {date}
+parcourus par {name} ({from} → {to}) ¦ do {name} đi được ({from} → {to}) ¦ ditempuh oleh {name} ({from} → {to})
+pas de trajet GPS ¦ không có lộ trình GPS ¦ tidak ada jejak GPS
+Fiche de « {name} » créée. ¦ Đã tạo hồ sơ của “{name}”. ¦ Profil “{name}” dibuat.
+vu sur {sites} ¦ thấy tại {sites} ¦ terlihat di {sites}
+Pas revu depuis {when} ¦ Không thấy lại từ {when} ¦ Tidak terlihat sejak {when}
+Jamais vu ¦ Chưa bao giờ thấy ¦ Tidak pernah terlihat
+Suivi en cours ¦ Đang theo dõi ¦ Pemantauan berjalan
+Ce qu’on partage ¦ Những gì được chia sẻ ¦ Yang dibagikan
+Des animaux choisis ¦ Các con vật được chọn ¦ Hewan pilihan
+Tous les animaux d’une espèce ¦ Mọi con vật của một loài ¦ Semua hewan dari satu spesies
+Les animaux d’un site ¦ Các con vật của một khu ¦ Hewan di satu situs
+Les points GPS ¦ Các điểm GPS ¦ Titik GPS
+Choisis au moins un animal. ¦ Hãy chọn ít nhất một con vật. ¦ Pilih setidaknya satu hewan.
+Choisis l’espèce. ¦ Hãy chọn loài. ¦ Pilih spesiesnya.
+📤 Fichier prêt : {animals}. ¦ 📤 Tệp đã sẵn sàng: {animals}. ¦ 📤 Berkas siap: {animals}.
+📤 Fichier prêt : {animals} (sans les noms des observateurs). ¦ 📤 Tệp đã sẵn sàng: {animals} (không kèm tên người quan sát). ¦ 📤 Berkas siap: {animals} (tanpa nama pengamat).
+Ce fichier n’est pas un suivi partagé (suivi.json manque). ¦ Tệp này không phải là bản theo dõi được chia sẻ (thiếu suivi.json). ¦ Berkas ini bukan pemantauan yang dibagikan (suivi.json tidak ada).
+Fichier abîmé : il ne se lit pas. ¦ Tệp bị hỏng: không đọc được. ¦ Berkas rusak: tidak bisa dibaca.
+Ce fichier n’est pas un suivi d’animaux partagé (format inconnu). ¦ Tệp này không phải là bản theo dõi động vật được chia sẻ (định dạng không rõ). ¦ Berkas ini bukan pemantauan hewan yang dibagikan (format tidak dikenal).
+Un suivi partagé ¦ Một bản theo dõi được chia sẻ ¦ Pemantauan yang dibagikan
+=nouvel animal ¦ con vật mới ¦ hewan baru
+=animal déjà là ¦ con vật đã có ¦ hewan sudah ada
+=ligne nouvelle ¦ dòng mới ¦ baris baru
+=ligne déjà là, écartée ¦ dòng đã có, bị bỏ qua ¦ baris sudah ada, disisihkan
+=conflit ¦ mâu thuẫn ¦ konflik
+<b>{new}</b>, {known} (à compléter), <b>{rows}</b> (observations, marques, santé, groupes) ¦ <b>{new}</b>, {known} (cần bổ sung), <b>{rows}</b> (quan sát, dấu hiệu, sức khoẻ, nhóm) ¦ <b>{new}</b>, {known} (perlu dilengkapi), <b>{rows}</b> (pengamatan, tanda, kesehatan, kelompok)
+{n} points GPS ¦ {n} điểm GPS ¦ {n} titik GPS
+{rows} (doublons exacts). ¦ {rows} (trùng hoàn toàn). ¦ {rows} (duplikat persis).
+{conflicts} : tu choisiras pour chacun, à l’étape suivante. ¦ {conflicts}: bạn sẽ chọn cho từng cái ở bước sau. ¦ {conflicts}: kamu akan memilih untuk masing-masing di langkah berikutnya.
+{name} chez toi (reconnu par {how}) ¦ {name} trong dữ liệu của bạn (nhận ra nhờ {how}) ¦ {name} di silsilahmu (dikenali lewat {how})
+reçu · chez toi : {name} (reconnu par {how}) ¦ đã nhận · trong dữ liệu của bạn: {name} (nhận ra nhờ {how}) ¦ diterima · di silsilahmu: {name} (dikenali lewat {how})
+Comparer et fusionner… ¦ So sánh và hợp nhất… ¦ Bandingkan dan gabungkan…
+⤒ Importer {animals} ¦ ⤒ Nhập {animals} ¦ ⤒ Impor {animals}
+Suivi reçu : {what} ¦ Đã nhận bản theo dõi: {what} ¦ Pemantauan diterima: {what}
+conflit restant ¦ mâu thuẫn còn lại ¦ konflik tersisa
+conflits restants ¦ mâu thuẫn còn lại ¦ konflik tersisa
+nouveaux ¦ mới ¦ baru
+lignes nouvelles ¦ dòng mới ¦ baris baru
+doublons écartés ¦ bản trùng đã bỏ qua ¦ duplikat disisihkan
+média reçu non importé ¦ tư liệu nhận được chưa nhập ¦ media yang diterima tidak diimpor
+Fusionner avec ma fiche ¦ Hợp nhất với hồ sơ của tôi ¦ Gabungkan dengan profilku
+En faire une nouvelle fiche ¦ Tạo thành hồ sơ mới ¦ Jadikan profil baru
+Ne pas le prendre ¦ Không lấy ¦ Jangan ambil
+Le mien : ¦ Của tôi: ¦ Milikku:
+Le sien : ¦ Của họ: ¦ Milik mereka:
+Observation modifiée ¦ Lần quan sát đã thay đổi ¦ Pengamatan berubah
+Marque modifiée ¦ Dấu hiệu đã thay đổi ¦ Tanda berubah
+Événement de santé modifié ¦ Sự kiện sức khoẻ đã thay đổi ¦ Peristiwa kesehatan berubah
+Rôle dans le groupe ¦ Vai trò trong nhóm ¦ Peran dalam kelompok
+Choisis d’abord pour chaque conflit ¦ Trước hết hãy chọn cho từng mâu thuẫn ¦ Pilih dulu untuk setiap konflik
+Fusionner ¦ Hợp nhất ¦ Gabungkan
+vert foncé ¦ xanh lá đậm ¦ hijau tua
+bleu foncé ¦ xanh dương đậm ¦ biru tua
+métal ¦ kim loại ¦ logam
+👥 En groupe ¦ 👥 Theo nhóm ¦ 👥 Berkelompok
+💤 Au dortoir ¦ 💤 Ở chỗ ngủ ¦ 💤 Di tempat bertengger
+🕊 En vol ¦ 🕊 Đang bay ¦ 🕊 Sedang terbang
+💞 En couple ¦ 💞 Theo cặp ¦ 💞 Berpasangan
+🏠 Rentré ¦ 🏠 Đã về ¦ 🏠 Sudah pulang
+🐄 En troupeau ¦ 🐄 Theo đàn ¦ 🐄 Dalam kawanan
+😴 Au repos ¦ 😴 Đang nghỉ ¦ 😴 Sedang beristirahat
+🌊 En surface ¦ 🌊 Trên mặt nước ¦ 🌊 Di permukaan
+⛵ À la proue ¦ ⛵ Ở mũi thuyền ¦ ⛵ Di haluan
+🧭 Marque son territoire ¦ 🧭 Đánh dấu lãnh thổ ¦ 🧭 Menandai wilayahnya
+🍼 Avec des jeunes ¦ 🍼 Cùng con non ¦ 🍼 Bersama anak
+🪵 Utilise un outil ¦ 🪵 Dùng công cụ ¦ 🪵 Memakai alat
+🔖 Bague changée ¦ 🔖 Đã thay vòng ¦ 🔖 Cincin diganti
+🪤 Piège ¦ 🪤 Bẫy ¦ 🪤 Perangkap
+🚧 Clôture ¦ 🚧 Hàng rào ¦ 🚧 Pagar
+🌬 Éolienne ¦ 🌬 Tua-bin gió ¦ 🌬 Turbin angin
+🏖 Échouage ¦ 🏖 Mắc cạn ¦ 🏖 Terdampar
+⚔️ Conflit avec un autre ¦ ⚔️ Xung đột với con khác ¦ ⚔️ Berkelahi dengan yang lain
+Bonne santé ¦ Khoẻ mạnh ¦ Sehat
+Blessé ¦ Bị thương ¦ Terluka
+En soins ¦ Đang được chăm sóc ¦ Sedang dirawat
+Relâché ¦ Đã thả ¦ Dilepaskan
+Mammifère sauvage ¦ Thú hoang dã ¦ Mamalia liar
+Vache, mouton, chèvre ¦ Bò, cừu, dê ¦ Sapi, domba, kambing
+Format inconnu : GPX, KML, GeoJSON ou CSV. ¦ Định dạng không rõ: GPX, KML, GeoJSON hoặc CSV. ¦ Format tidak dikenal: GPX, KML, GeoJSON, atau CSV.
+Le tableau est vide. ¦ Bảng trống. ¦ Tabelnya kosong.
+Fichier refusé : il contient une déclaration DOCTYPE ou ENTITY. ¦ Tệp bị từ chối: nó chứa khai báo DOCTYPE hoặc ENTITY. ¦ Berkas ditolak: berisi deklarasi DOCTYPE atau ENTITY.
+3 février 2026 ¦ 3 février 2026 ¦ 3 février 2026
+⚖️ Mise en garde : en France, les tests ADN « récréatifs » ne sont pas légaux ¦ ⚖️ Lưu ý: tại Pháp, xét nghiệm ADN “giải trí” là không hợp pháp ¦ ⚖️ Peringatan: di Prancis, tes DNA “rekreasi” tidak legal
+En France, l’examen des caractéristiques génétiques d’une personne n’est permis <b>qu’à des fins médicales ou de recherche scientifique</b>, avec son <b>consentement écrit</b> (Code civil, article 16-10). L’identification par empreintes génétiques est réservée à la justice et à quelques cas prévus par la loi (article 16-11). <b>Demander</b> un tel examen hors de ces cas — par exemple commander un test généalogique sur internet — est puni d’une <b>amende de 3 750 €</b> (Code pénal, article 226-28-1), même si le laboratoire est à l’étranger. ¦ Tại Pháp, việc xét nghiệm đặc điểm di truyền của một người chỉ được phép <b>vì mục đích y tế hoặc nghiên cứu khoa học</b>, với <b>sự đồng ý bằng văn bản</b> của người đó (Bộ luật Dân sự, điều 16-10). Việc nhận dạng bằng dấu vân di truyền chỉ dành cho tư pháp và một vài trường hợp luật định (điều 16-11). <b>Yêu cầu</b> một xét nghiệm như vậy ngoài các trường hợp này — ví dụ đặt mua một xét nghiệm gia phả trên mạng — bị phạt <b>3 750 €</b> (Bộ luật Hình sự, điều 226-28-1), kể cả khi phòng xét nghiệm ở nước ngoài. ¦ Di Prancis, pemeriksaan karakteristik genetik seseorang hanya diizinkan <b>untuk tujuan medis atau riset ilmiah</b>, dengan <b>persetujuan tertulis</b> orang tersebut (Kitab Undang-Undang Hukum Perdata, pasal 16-10). Identifikasi lewat sidik genetik hanya untuk pengadilan dan beberapa kasus yang diatur undang-undang (pasal 16-11). <b>Meminta</b> pemeriksaan seperti itu di luar kasus ini — misalnya memesan tes silsilah lewat internet — diancam <b>denda 3.750 €</b> (Kitab Undang-Undang Hukum Pidana, pasal 226-28-1), meskipun laboratoriumnya di luar negeri.
+<b>Vérifie toujours le texte en vigueur</b> sur Légifrance : la loi peut changer (les débats sur la généalogie génétique sont réguliers). Cet onglet ne donne pas de conseil juridique. ¦ <b>Hãy luôn kiểm tra văn bản đang có hiệu lực</b> trên Légifrance: luật có thể thay đổi (gia phả di truyền thường xuyên được tranh luận). Thẻ này không đưa ra tư vấn pháp lý. ¦ <b>Selalu periksa teks yang berlaku</b> di Légifrance: undang-undang bisa berubah (silsilah genetik rutin diperdebatkan). Tab ini tidak memberi nasihat hukum.
+<b>Ce que fait LCNDA</b> : rien n’est analysé ni envoyé. L’onglet sert à <b>ranger des informations</b> (par exemple des résultats obtenus légalement à l’étranger, par un parent résidant hors de France, dans un cadre médical ou de recherche, ou des renseignements donnés par d’autres personnes) et à <b>comprendre</b> ce que signifient des cM, des segments, un haplogroupe. ¦ <b>LCNDA làm gì</b>: không phân tích hay gửi đi bất cứ thứ gì. Thẻ này dùng để <b>sắp xếp thông tin</b> (ví dụ kết quả có được hợp pháp ở nước ngoài, do một người thân sống ngoài nước Pháp, trong khuôn khổ y tế hoặc nghiên cứu, hoặc thông tin do người khác cung cấp) và để <b>hiểu</b> cM, đoạn gen, nhóm đơn bội có nghĩa là gì. ¦ <b>Apa yang dilakukan LCNDA</b>: tidak ada yang dianalisis atau dikirim. Tab ini untuk <b>menyimpan informasi</b> (misalnya hasil yang diperoleh secara legal di luar negeri, oleh kerabat yang tinggal di luar Prancis, dalam rangka medis atau riset, atau keterangan dari orang lain) dan untuk <b>memahami</b> arti cM, segmen, dan haplogrup.
+<b>Données sensibles</b> : l’ADN révèle des choses sur toi <i>et sur ta famille</i> (parents, frères et sœurs, enfants, cousins), qui n’ont pas consenti. Il peut révéler un secret de famille : naissance hors mariage, adoption, don de gamètes, parent inconnu. Prends le temps d’y penser avant de partager. ¦ <b>Dữ liệu nhạy cảm</b>: ADN tiết lộ những điều về bạn <i>và về gia đình bạn</i> (cha mẹ, anh chị em, con cái, anh chị em họ), những người chưa đồng ý. Nó có thể tiết lộ một bí mật gia đình: sinh ngoài hôn nhân, con nuôi, hiến giao tử, cha mẹ không rõ. Hãy dành thời gian suy nghĩ trước khi chia sẻ. ¦ <b>Data sensitif</b>: DNA mengungkap hal tentang dirimu <i>dan keluargamu</i> (orang tua, saudara kandung, anak, sepupu), yang belum memberi persetujuan. DNA bisa mengungkap rahasia keluarga: kelahiran di luar nikah, adopsi, donor gamet, orang tua yang tidak diketahui. Luangkan waktu untuk memikirkannya sebelum berbagi.
+<b>Les sociétés de test</b> gardent les données selon leurs conditions (vente de société, fuites de données, demandes de la justice dans certains pays). Lis leurs conditions, choisis ce que tu partages, supprime ce que tu ne veux plus voir conservé. ¦ <b>Các công ty xét nghiệm</b> lưu giữ dữ liệu theo điều khoản của họ (bán công ty, rò rỉ dữ liệu, yêu cầu của tư pháp ở một số nước). Hãy đọc điều khoản của họ, chọn những gì bạn chia sẻ, xoá những gì bạn không muốn bị lưu giữ nữa. ¦ <b>Perusahaan tes</b> menyimpan data sesuai ketentuan mereka (penjualan perusahaan, kebocoran data, permintaan pengadilan di beberapa negara). Baca ketentuan mereka, pilih apa yang kamu bagikan, hapus apa yang tidak ingin lagi disimpan.
+<b>Personnes vivantes</b> : les noms, cM et contacts de correspondances sont des données personnelles. Garde-les pour ta recherche, ne les publie pas sans accord. ¦ <b>Người còn sống</b>: tên, cM và liên lạc của những người trùng khớp là dữ liệu cá nhân. Hãy giữ chúng cho việc nghiên cứu của bạn, đừng công bố khi chưa được đồng ý. ¦ <b>Orang yang masih hidup</b>: nama, cM, dan kontak kecocokan adalah data pribadi. Simpan untuk risetmu, jangan publikasikan tanpa persetujuan.
+Textes officiels ¦ Văn bản chính thức ¦ Teks resmi
+Lire la mise en garde complète et les textes officiels → ¦ Đọc toàn bộ lưu ý và các văn bản chính thức → ¦ Baca peringatan lengkap dan teks resmi →
+Commencer ¦ Bắt đầu ¦ Memulai
+Lis la <button type="button" class="link-button" data-dna-go="law">mise en garde sur la loi française</button>. ¦ Hãy đọc <button type="button" class="link-button" data-dna-go="law">lưu ý về luật pháp Pháp</button>. ¦ Baca <button type="button" class="link-button" data-dna-go="law">peringatan tentang hukum Prancis</button>.
+« 🧬 Mes tests » : ajoute le test d’une personne (société, type, haplogroupes, origines). ¦ “🧬 Xét nghiệm của tôi”: thêm xét nghiệm của một người (công ty, loại, nhóm đơn bội, nguồn gốc). ¦ “🧬 Tes-ku”: tambahkan tes seseorang (perusahaan, jenis, haplogrup, asal-usul).
+« 👥 Correspondances » : importe le fichier CSV de la société, ou ajoute-les à la main. ¦ “👥 Người trùng khớp”: nhập tệp CSV của công ty, hoặc thêm bằng tay. ¦ “👥 Kecocokan”: impor berkas CSV dari perusahaan, atau tambahkan secara manual.
+Le calculateur de cM, la méthode de Leeds et le navigateur de chromosomes t’aident à placer chacun dans l’arbre. ¦ Công cụ tính cM, phương pháp Leeds và trình xem nhiễm sắc thể giúp bạn đặt từng người vào cây. ¦ Kalkulator cM, metode Leeds, dan penjelajah kromosom membantumu menempatkan masing-masing di pohon.
+Tes tests, tes correspondances et où tu en es. Tout se règle dans « ⚙️ Réglages » (rubriques montrées, ordre, colonnes, couleurs). ¦ Các xét nghiệm, người trùng khớp của bạn và bạn đang ở đâu. Mọi thứ được chỉnh trong “⚙️ Cài đặt” (mục hiển thị, thứ tự, cột, màu). ¦ Tes-mu, kecocokanmu, dan sejauh mana kamu sudah sampai. Semuanya diatur di “⚙️ Pengaturan” (bagian yang ditampilkan, urutan, kolom, warna).
+🧬 Synthèse ¦ 🧬 Tổng quan ¦ 🧬 Ringkasan
+Loi et mises en garde ¦ Luật và lưu ý ¦ Hukum dan peringatan
+⚖️ Loi et mises en garde ¦ ⚖️ Luật và lưu ý ¦ ⚖️ Hukum dan peringatan
+À lire avant d’utiliser cet onglet. ¦ Hãy đọc trước khi dùng thẻ này. ¦ Baca sebelum memakai tab ini.
+Mes tests ¦ Xét nghiệm của tôi ¦ Tes-ku
+Correspondances ¦ Người trùng khớp ¦ Kecocokan
+Groupes (méthode de Leeds) ¦ Nhóm (phương pháp Leeds) ¦ Kelompok (metode Leeds)
+🗂️ Groupes (méthode de Leeds) ¦ 🗂️ Nhóm (phương pháp Leeds) ¦ 🗂️ Kelompok (metode Leeds)
+Groupes automatiques ¦ Nhóm tự động ¦ Kelompok otomatis
+Placer un cousin ¦ Đặt một người họ hàng ¦ Tempatkan sepupu
+📍 Placer un cousin ¦ 📍 Đặt một người họ hàng ¦ 📍 Tempatkan sepupu
+Chromosomes et segments ¦ Nhiễm sắc thể và đoạn gen ¦ Kromosom dan segmen
+🧩 Chromosomes et segments ¦ 🧩 Nhiễm sắc thể và đoạn gen ¦ 🧩 Kromosom dan segmen
+Calculateur de cM ¦ Công cụ tính cM ¦ Kalkulator cM
+📐 Calculateur de cM ¦ 📐 Công cụ tính cM ¦ 📐 Kalkulator cM
+Lignées Y, mt et X ¦ Dòng Y, mt và X ¦ Garis Y, mt, dan X
+🌳 Lignées Y, mt et X ¦ 🌳 Dòng Y, mt và X ¦ 🌳 Garis Y, mt, dan X
+Origines estimées ¦ Nguồn gốc ước tính ¦ Asal-usul perkiraan
+🌍 Origines estimées ¦ 🌍 Nguồn gốc ước tính ¦ 🌍 Asal-usul perkiraan
+Comprendre l’ADN ¦ Hiểu về ADN ¦ Memahami DNA
+📚 Comprendre l’ADN ¦ 📚 Hiểu về ADN ¦ 📚 Memahami DNA
+cM partagés ¦ cM chung ¦ cM bersama
+% partagé ¦ % chung ¦ % bersama
+Plus long segment ¦ Đoạn dài nhất ¦ Segmen terpanjang
+Relation (société) ¦ Quan hệ (theo công ty) ¦ Hubungan (perusahaan)
+Relation probable ¦ Quan hệ có thể ¦ Kemungkinan hubungan
+Fiche liée ¦ Hồ sơ liên kết ¦ Profil terhubung
+Ancêtre commun ¦ Tổ tiên chung ¦ Leluhur bersama
+Noms en commun ¦ Họ chung ¦ Nama keluarga bersama
+Des deux côtés ¦ Cả hai bên ¦ Kedua sisi
+Contacté ¦ Đã liên hệ ¦ Sudah dihubungi
+A répondu ¦ Đã trả lời ¦ Sudah membalas
+Arbre échangé ¦ Đã trao đổi cây ¦ Pohon sudah ditukar
+Placé dans l’arbre ✓ ¦ Đã đặt vào cây ✓ ¦ Sudah ditempatkan di pohon ✓
+À ignorer ¦ Bỏ qua ¦ Abaikan
+Placées dans l’arbre ¦ Đã đặt vào cây ¦ Sudah ditempatkan di pohon
+Tests ¦ Xét nghiệm ¦ Tes
+Correspondances par nombre de cM ¦ Người trùng khớp theo số cM ¦ Kecocokan menurut jumlah cM
+Par côté ¦ Theo bên ¦ Per sisi
+Les plus proches ¦ Gần nhất ¦ Yang terdekat
+Autosomal (atDNA) : tous les ancêtres récents ¦ Nhiễm sắc thể thường (atDNA): mọi tổ tiên gần ¦ Autosomal (atDNA): semua leluhur dekat
+ADN-Y : lignée paternelle directe ¦ ADN-Y: dòng nội trực hệ ¦ DNA-Y: garis ayah langsung
+ADN mitochondrial : lignée maternelle directe ¦ ADN ty thể: dòng ngoại trực hệ ¦ DNA mitokondria: garis ibu langsung
+Nebula / séquençage complet ¦ Nebula / giải trình tự toàn bộ ¦ Nebula / sekuensing lengkap
+Labo médical ¦ Phòng xét nghiệm y khoa ¦ Lab medis
+Parent / enfant ¦ Cha mẹ / con ¦ Orang tua / anak
+Frère ou sœur ¦ Anh chị em ruột ¦ Saudara laki-laki atau perempuan
+Demi-frère ou demi-sœur ¦ Anh chị em cùng cha khác mẹ hoặc cùng mẹ khác cha ¦ Saudara tiri seayah atau seibu
+Grand-parent / petit-enfant ¦ Ông bà / cháu ¦ Kakek-nenek / cucu
+Oncle, tante / neveu, nièce ¦ Chú bác, cô dì / cháu ¦ Paman, bibi / keponakan
+Arrière-grand-parent ¦ Cụ ¦ Kakek-nenek buyut
+Grand-oncle, grand-tante ¦ Ông bà chú bác, ông bà cô dì ¦ Kakek paman, nenek bibi
+Cousin germain (1C) ¦ Anh chị em họ đời thứ nhất (1C) ¦ Sepupu pertama (1C)
+Cousin germain, une génération d’écart (1C1R) ¦ Anh chị em họ đời thứ nhất, cách một thế hệ (1C1R) ¦ Sepupu pertama berselisih satu generasi (1C1R)
+Cousin germain, deux générations d’écart (1C2R) ¦ Anh chị em họ đời thứ nhất, cách hai thế hệ (1C2R) ¦ Sepupu pertama berselisih dua generasi (1C2R)
+Demi-cousin germain ¦ Anh chị em họ nửa huyết thống đời thứ nhất ¦ Sepupu pertama separuh
+Demi-cousin germain, une génération d’écart ¦ Anh chị em họ nửa huyết thống đời thứ nhất, cách một thế hệ ¦ Sepupu pertama separuh, berselisih satu generasi
+Cousin issu de germain (2C) ¦ Anh chị em họ đời thứ hai (2C) ¦ Sepupu kedua (2C)
+Cousin issu de germain, une génération d’écart (2C1R) ¦ Anh chị em họ đời thứ hai, cách một thế hệ (2C1R) ¦ Sepupu kedua berselisih satu generasi (2C1R)
+Cousin issu de germain, deux générations d’écart (2C2R) ¦ Anh chị em họ đời thứ hai, cách hai thế hệ (2C2R) ¦ Sepupu kedua berselisih dua generasi (2C2R)
+Demi-cousin issu de germain ¦ Anh chị em họ nửa huyết thống đời thứ hai ¦ Sepupu kedua separuh
+Cousin au 3e degré (3C, issu d’issu de germain) ¦ Anh chị em họ đời thứ ba (3C) ¦ Sepupu ketiga (3C)
+Demi-cousin au 3e degré ¦ Anh chị em họ nửa huyết thống đời thứ ba ¦ Sepupu ketiga separuh
+Cousin au 4e degré (4C) ¦ Anh chị em họ đời thứ tư (4C) ¦ Sepupu keempat (4C)
+Cousin au 5e degré (5C) ¦ Anh chị em họ đời thứ năm (5C) ¦ Sepupu kelima (5C)
+Cousin au 6e degré ou plus ¦ Anh chị em họ đời thứ sáu trở lên ¦ Sepupu keenam atau lebih
+Noté. ¦ Đã ghi nhận. ¦ Dicatat.
+Nouveau test ¦ Xét nghiệm mới ¦ Tes baru
+Personne testée ¦ Người được xét nghiệm ¦ Orang yang dites
+Nom du test ¦ Tên xét nghiệm ¦ Nama tes
+(si la personne n’est pas dans l’arbre) ¦ (nếu người này không có trong cây) ¦ (jika orangnya tidak ada di pohon)
+Test supprimé. ¦ Đã xoá xét nghiệm. ¦ Tes dihapus.
+Test enregistré. ¦ Đã lưu xét nghiệm. ¦ Tes tersimpan.
+les voir ¦ xem chúng ¦ lihat semuanya
+Tous les tests ¦ Tất cả xét nghiệm ¦ Semua tes
+Tous les côtés ¦ Tất cả các bên ¦ Semua sisi
+Tout suivi ¦ Mọi tình trạng theo dõi ¦ Semua tindak lanjut
+Tous les groupes ¦ Tất cả các nhóm ¦ Semua kelompok
+Sans groupe ¦ Không có nhóm ¦ Tanpa kelompok
+Côté… ¦ Bên… ¦ Sisi…
+Étoiles ¦ Sao ¦ Bintang
+Afficher la suite ¦ Hiện tiếp ¦ Tampilkan lagi
+Ajoute d’abord un test (« 🧬 Mes tests »). ¦ Trước hết hãy thêm một xét nghiệm (“🧬 Xét nghiệm của tôi”). ¦ Tambahkan tes dulu (“🧬 Tes-ku”).
+Ajoute d’abord un test. ¦ Trước hết hãy thêm một xét nghiệm. ¦ Tambahkan tes dulu.
+Nouvelle correspondance ¦ Người trùng khớp mới ¦ Kecocokan baru
+Fiche dans l’arbre ¦ Hồ sơ trong cây ¦ Profil di pohon
+Si tu sais qui c’est… ¦ Nếu bạn biết đó là ai… ¦ Jika kamu tahu siapa dia…
+Tape les cM partagés : la relation probable s’affiche ici. ¦ Hãy gõ số cM chung: quan hệ có thể sẽ hiện ở đây. ¦ Ketik cM bersama: kemungkinan hubungan tampil di sini.
+Supprimée. ¦ Đã xoá. ¦ Dihapus.
+Correspondance enregistrée. ¦ Đã lưu người trùng khớp. ¦ Kecocokan tersimpan.
+Importer des segments ADN ¦ Nhập các đoạn ADN ¦ Impor segmen DNA
+Importer des correspondances ADN ¦ Nhập người trùng khớp ADN ¦ Impor kecocokan DNA
+Fichier vide ou illisible. ¦ Tệp trống hoặc không đọc được. ¦ Berkas kosong atau tidak terbaca.
+Colonnes reconnues (à vérifier) ¦ Các cột nhận ra được (cần kiểm tra) ¦ Kolom yang dikenali (perlu diperiksa)
+— ne pas prendre — ¦ — không lấy — ¦ — jangan dipakai —
+=correspondance ajoutée ¦ người trùng khớp được thêm ¦ kecocokan ditambahkan
+=segment importé ¦ đoạn đã nhập ¦ segmen diimpor
+=groupe créé ¦ nhóm đã tạo ¦ kelompok dibuat
+=cochée ¦ đã đánh dấu ¦ dicentang
+=ancêtre possible ¦ tổ tiên có thể ¦ kemungkinan leluhur
+Un groupe range ensemble les correspondances d’une même branche. ¦ Một nhóm gom lại những người trùng khớp thuộc cùng một nhánh. ¦ Kelompok menyatukan kecocokan dari cabang yang sama.
+arrière-grands-parents ¦ các cụ ¦ kakek-nenek buyut
+🎯 Ancêtres communs ¦ 🎯 Tổ tiên chung ¦ 🎯 Leluhur bersama
+🤔 Ancêtres probables ¦ 🤔 Tổ tiên có thể ¦ 🤔 Kemungkinan leluhur
+Ancêtre commun encore inconnu ¦ Chưa biết tổ tiên chung ¦ Leluhur bersama belum diketahui
+📍 Placer un cousin dans l’arbre ¦ 📍 Đặt một người họ hàng vào cây ¦ 📍 Tempatkan sepupu di pohon
+Hors des valeurs connues. ¦ Ngoài các giá trị đã biết. ¦ Di luar nilai yang diketahui.
+Probabilité ¦ Xác suất ¦ Probabilitas
+Couple d’ancêtres ¦ Cặp tổ tiên ¦ Pasangan leluhur
+(un seul des deux : demi-cousin) ¦ (chỉ một trong hai: họ hàng nửa huyết thống) ¦ (hanya salah satu dari keduanya: sepupu separuh)
+Choisis une correspondance ou entre des cM. ¦ Hãy chọn một người trùng khớp hoặc nhập số cM. ¦ Pilih kecocokan atau masukkan cM.
+Aucun test ¦ Không có xét nghiệm nào ¦ Tidak ada tes
+Couleur par correspondance ¦ Màu theo người trùng khớp ¦ Warna per kecocokan
+Par groupe ¦ Theo nhóm ¦ Per kelompok
+Aucun segment. ¦ Không có đoạn nào. ¦ Tidak ada segmen.
+Nouveau segment ¦ Đoạn mới ¦ Segmen baru
+Ancêtre supposé ¦ Tổ tiên giả định ¦ Leluhur dugaan
+♂ ADN-Y — lignée paternelle directe ¦ ♂ ADN-Y — dòng nội trực hệ ¦ ♂ DNA-Y — garis ayah langsung
+♀ ADN mitochondrial — lignée maternelle directe ¦ ♀ ADN ty thể — dòng ngoại trực hệ ¦ ♀ DNA mitokondria — garis ibu langsung
+✕ ADN-X — ancêtres possibles ¦ ✕ ADN-X — tổ tiên có thể ¦ ✕ DNA-X — kemungkinan leluhur
+Endogamie et implexe ¦ Nội hôn và trùng lặp tổ tiên ¦ Endogami dan implex
+Placer une correspondance ¦ Đặt một người trùng khớp ¦ Menempatkan kecocokan
+Confidentialité et éthique ¦ Quyền riêng tư và đạo đức ¦ Privasi dan etika
+Colonnes du tableau des correspondances ¦ Các cột của bảng người trùng khớp ¦ Kolom tabel kecocokan
+Chiffres et couleurs ¦ Số liệu và màu sắc ¦ Angka dan warna
+⤓ Exporter tout l’ADN (JSON) ¦ ⤓ Xuất toàn bộ ADN (JSON) ¦ ⤓ Ekspor semua DNA (JSON)
+Ouvrir l’onglet ADN → ¦ Mở thẻ ADN → ¦ Buka tab DNA →
+Nouveau diagramme ¦ Sơ đồ mới ¦ Diagram baru
+Choisis un dessin : il arrive avec un exemple que tu remplaces par tes chiffres (à la main, collés d’un tableur, d’un CSV, ou pris dans l’app). ¦ Hãy chọn một hình vẽ: nó đi kèm một ví dụ mà bạn thay bằng số liệu của mình (bằng tay, dán từ bảng tính, từ CSV, hoặc lấy trong ứng dụng). ¦ Pilih sebuah gambar: gambar ini disertai contoh yang kamu ganti dengan angkamu (manual, ditempel dari spreadsheet, dari CSV, atau diambil dari aplikasi).
+Ordre, types montrés ou cachés, groupes à toi ¦ Thứ tự, loại hiện hoặc ẩn, nhóm của riêng bạn ¦ Urutan, jenis yang ditampilkan atau disembunyikan, kelompokmu sendiri
+⚙️ Ranger les types ¦ ⚙️ Sắp xếp các loại ¦ ⚙️ Atur jenis
+Assemblées ¦ Hội đồng ¦ Dewan
+Parlement, assemblée, conseil ¦ Nghị viện, quốc hội, hội đồng ¦ Parlemen, majelis, dewan
+Arc élargi (Assemblée en éventail) ¦ Vòng cung rộng (hội trường hình quạt) ¦ Busur lebar (majelis berbentuk kipas)
+Fer à cheval ¦ Hình móng ngựa ¦ Tapal kuda
+Westminster (bancs face à face) ¦ Westminster (ghế đối diện nhau) ¦ Westminster (bangku saling berhadapan)
+Salle face à la tribune (conseil municipal…) ¦ Phòng hướng về bục (hội đồng xã…) ¦ Ruangan menghadap mimbar (dewan kota…)
+Frise des membres (groupe de musique, association…) ¦ Dòng thời gian thành viên (ban nhạc, hội…) ¦ Linimasa anggota (grup musik, perkumpulan…)
+Frise de vies (des personnes de la base) ¦ Dòng thời gian cuộc đời (những người trong cơ sở dữ liệu) ¦ Linimasa kehidupan (orang-orang dari basis data)
+Planning (tâches d’une enquête, Gantt) ¦ Lịch công việc (nhiệm vụ của một cuộc tìm hiểu, Gantt) ¦ Jadwal (tugas penelusuran, Gantt)
+Frise chronologique (dates clés) ¦ Dòng thời gian (các mốc chính) ¦ Linimasa (tanggal penting)
+Calendrier coloré (jour par jour) ¦ Lịch tô màu (từng ngày) ¦ Kalender berwarna (hari demi hari)
+Rose des mois (12 parts) ¦ Hoa hồng các tháng (12 phần) ¦ Mawar bulan (12 bagian)
+Spirale du temps (une spire par siècle) ¦ Xoắn ốc thời gian (một vòng mỗi thế kỷ) ¦ Spiral waktu (satu putaran per abad)
+Arbre en frise (vies par génération) ¦ Cây dạng dòng thời gian (cuộc đời theo thế hệ) ¦ Pohon sebagai linimasa (kehidupan per generasi)
+Naissances, décès et crises ¦ Sinh, mất và khủng hoảng ¦ Kelahiran, kematian, dan krisis
+Âges comparés d’une fratrie ¦ So sánh tuổi của anh chị em ¦ Perbandingan usia saudara kandung
+Pyramide « qui vivait en … » ¦ Tháp “ai còn sống năm …” ¦ Piramida “siapa yang hidup pada …”
+Les vies de plusieurs générations superposées : qui a connu son arrière-petit-enfant, et combien d’années. ¦ Cuộc đời của nhiều thế hệ chồng lên nhau: ai đã biết chắt của mình, và trong bao nhiêu năm. ¦ Kehidupan beberapa generasi ditumpuk: siapa yang sempat mengenal cicitnya, dan berapa tahun.
+Qui a connu qui (vies de plusieurs générations) ¦ Ai đã biết ai (cuộc đời của nhiều thế hệ) ¦ Siapa kenal siapa (kehidupan beberapa generasi)
+Les mariages et les conceptions (naissance − 9 mois) mois par mois, avec le Carême et l’Avent repérés. ¦ Các cuộc kết hôn và thụ thai (sinh − 9 tháng) theo từng tháng, có đánh dấu Mùa Chay và Mùa Vọng. ¦ Pernikahan dan pembuahan (kelahiran − 9 bulan) bulan demi bulan, dengan masa Prapaskah dan Adven ditandai.
+Mois des mariages et des conceptions (Carême, Avent) ¦ Tháng kết hôn và thụ thai (Mùa Chay, Mùa Vọng) ¦ Bulan pernikahan dan pembuahan (Prapaskah, Adven)
+Une ligne par mère : ses enfants à l’âge qu’elle avait, l’écart entre deux naissances et les enfants morts jeunes. ¦ Mỗi người mẹ một dòng: các con theo tuổi của bà lúc đó, khoảng cách giữa hai lần sinh và những đứa con mất sớm. ¦ Satu baris per ibu: anak-anaknya menurut usianya saat itu, jarak antara dua kelahiran, dan anak-anak yang meninggal muda.
+Espacement des naissances (les enfants de chaque mère) ¦ Khoảng cách giữa các lần sinh (các con của mỗi người mẹ) ¦ Jarak kelahiran (anak-anak setiap ibu)
+Une bande par personne, colorée selon la commune (ou le département, le pays) où elle vivait à chaque époque. ¦ Mỗi người một dải, tô màu theo xã (hoặc tỉnh, quốc gia) nơi người đó sống ở từng thời kỳ. ¦ Satu pita per orang, diwarnai menurut kota (atau provinsi, negara) tempat ia tinggal di setiap masa.
+Frise des lieux de vie (une bande par personne) ¦ Dòng thời gian nơi sống (mỗi người một dải) ¦ Garis waktu tempat tinggal (satu pita per orang)
+Une ligne par tâche, de sa date de début à sa date de fin, avec ce qui est déjà fait. ¦ Mỗi việc một dòng, từ ngày bắt đầu đến ngày kết thúc, kèm phần đã làm xong. ¦ Satu baris per tugas, dari tanggal mulai hingga tanggal selesai, beserta bagian yang sudah dikerjakan.
+Diagramme de Gantt (tâches, chantiers de recherche) ¦ Biểu đồ Gantt (việc cần làm, dự án nghiên cứu) ¦ Diagram Gantt (tugas, proyek riset)
+Les anniversaires, mariages, décès et fêtes des prénoms autour d’un cercle de douze mois. ¦ Sinh nhật, kết hôn, ngày mất và ngày lễ tên thánh quanh một vòng tròn mười hai tháng. ¦ Ulang tahun, pernikahan, kematian, dan hari nama di sekeliling lingkaran dua belas bulan.
+Roue de l’année (anniversaires et fêtes de la famille) ¦ Vòng tròn của năm (sinh nhật và ngày lễ trong gia đình) ¦ Roda tahun (ulang tahun dan perayaan keluarga)
+Colonnes empilées ¦ Cột chồng ¦ Kolom bertumpuk
+Colonnes empilées à 100 % ¦ Cột chồng 100 % ¦ Kolom bertumpuk 100 %
+Pyramide (des âges…) ¦ Tháp (tuổi…) ¦ Piramida (usia…)
+Carte de chaleur (tableau coloré) ¦ Bản đồ nhiệt (bảng tô màu) ¦ Peta panas (tabel berwarna)
+Classement qui évolue (prénoms par décennie…) ¦ Bảng xếp hạng thay đổi (tên theo thập niên…) ¦ Peringkat yang berubah (nama depan per dekade…)
+Courants empilés (métiers sur 200 ans…) ¦ Dòng chảy chồng (nghề nghiệp qua 200 năm…) ¦ Arus bertumpuk (pekerjaan selama 200 tahun…)
+Histogramme (valeurs rangées en tranches) ¦ Biểu đồ tần suất (giá trị chia theo khoảng) ¦ Histogram (nilai dikelompokkan dalam rentang)
+Boîte à moustaches (médiane, quartiles) ¦ Biểu đồ hộp (trung vị, tứ phân vị) ¦ Diagram kotak (median, kuartil)
+Haltères (deux valeurs par ligne) ¦ Quả tạ (hai giá trị mỗi dòng) ¦ Barbel (dua nilai per baris)
+Pente avant / après ¦ Độ dốc trước / sau ¦ Kemiringan sebelum / sesudah
+Cascade (un total qui monte et descend) ¦ Thác nước (một tổng tăng và giảm) ¦ Air terjun (total yang naik dan turun)
+Sucettes couchées ¦ Kẹo mút nằm ngang ¦ Lolipop mendatar
+Essaim de points (une personne = un point) ¦ Đàn điểm (một người = một điểm) ¦ Kawanan titik (satu orang = satu titik)
+Petites courbes en grille ¦ Lưới các đường cong nhỏ ¦ Kisi kurva kecil
+Violon (répartition par catégorie) ¦ Đàn vĩ cầm (phân bố theo loại) ¦ Biola (sebaran per kategori)
+Pour chaque âge, la part des personnes encore en vie : une courbe par siècle, par sexe ou par branche. ¦ Với mỗi độ tuổi, tỷ lệ người còn sống: mỗi thế kỷ, mỗi giới tính hoặc mỗi nhánh một đường cong. ¦ Untuk setiap usia, bagian orang yang masih hidup: satu kurva per abad, jenis kelamin, atau cabang.
+Courbe de survie (part encore en vie à chaque âge) ¦ Đường cong sống sót (tỷ lệ còn sống ở mỗi độ tuổi) ¦ Kurva kelangsungan hidup (bagian yang masih hidup di setiap usia)
+Vagues (une répartition par siècle…) ¦ Sóng (mỗi thế kỷ một phân bố…) ¦ Gelombang (satu sebaran per abad…)
+Échelle de points (Cleveland) ¦ Thang điểm (Cleveland) ¦ Skala titik (Cleveland)
+Tableau de mobilité (métier du père × métier de l’enfant) ¦ Bảng dịch chuyển (nghề của cha × nghề của con) ¦ Tabel mobilitas (pekerjaan ayah × pekerjaan anak)
+Barres en cercle (classement qui s’enroule) ¦ Cột hình tròn (bảng xếp hạng cuộn tròn) ¦ Batang melingkar (peringkat yang melingkar)
+Des barres sur l’axe de gauche et une courbe sur un deuxième axe à droite, pour comparer deux sortes de chiffres. ¦ Các cột trên trục bên trái và một đường cong trên trục thứ hai bên phải, để so sánh hai loại số liệu. ¦ Batang pada sumbu kiri dan kurva pada sumbu kedua di kanan, untuk membandingkan dua jenis angka.
+Barres + courbe (deuxième axe à droite) ¦ Cột + đường cong (trục thứ hai bên phải) ¦ Batang + kurva (sumbu kedua di kanan)
+Deux chiffres face à face de chaque côté d’un trait (décès et naissances, femmes et hommes), ou un chiffre au-dessus et en dessous d’un centre. ¦ Hai số liệu đối diện nhau ở hai bên một đường (mất và sinh, nữ và nam), hoặc một số liệu ở trên và dưới một tâm. ¦ Dua angka berhadapan di kedua sisi sebuah garis (kematian dan kelahiran, perempuan dan laki-laki), atau satu angka di atas dan di bawah titik tengah.
+Barres divergentes (gauche / droite d’un centre) ¦ Cột phân kỳ (trái / phải của tâm) ¦ Batang divergen (kiri / kanan titik tengah)
+Une colline par série (un nom de famille, un prénom, une commune…), l’une derrière l’autre, au fil du temps. ¦ Mỗi chuỗi một ngọn đồi (một họ, một tên, một xã…), nối tiếp nhau, theo thời gian. ¦ Satu bukit per seri (nama keluarga, nama depan, kota…), satu di belakang yang lain, seiring waktu.
+Collines empilées (une courbe par série, décalées) ¦ Đồi chồng (mỗi chuỗi một đường cong, lệch nhau) ¦ Bukit bertumpuk (satu kurva per seri, bergeser)
+Chaque personne est une ligne qui passe par plusieurs axes (âge au mariage, enfants, âge au décès…) : les profils se voient d’un coup d’œil. ¦ Mỗi người là một đường đi qua nhiều trục (tuổi kết hôn, số con, tuổi lúc mất…): nhìn qua là thấy ngay các kiểu người. ¦ Setiap orang adalah garis yang melewati beberapa sumbu (usia menikah, anak, usia saat meninggal…): profilnya terlihat sekilas.
+Coordonnées parallèles (plusieurs chiffres par personne) ¦ Tọa độ song song (nhiều số liệu cho mỗi người) ¦ Koordinat paralel (beberapa angka per orang)
+Une courbe qui avance par marches : le chiffre reste le même jusqu’au prochain changement (vivants de la famille, ancêtres trouvés…). ¦ Một đường cong đi theo bậc: số liệu giữ nguyên cho đến lần thay đổi tiếp theo (người còn sống trong gia đình, tổ tiên đã tìm thấy…). ¦ Kurva yang bergerak bertingkat: angkanya tetap sampai perubahan berikutnya (anggota keluarga yang masih hidup, leluhur yang ditemukan…).
+Courbe en escalier (ex. combien de vivants, année par année) ¦ Đường bậc thang (vd. bao nhiêu người còn sống, từng năm) ¦ Kurva tangga (mis. berapa yang masih hidup, tahun demi tahun)
+Mosaïque (100 carrés) ¦ Khảm (100 ô vuông) ¦ Mozaik (100 kotak)
+Carte proportionnelle (rectangles) ¦ Bản đồ tỷ lệ (hình chữ nhật) ¦ Peta proporsional (persegi panjang)
+Pictogrammes (symboles répétés) ¦ Biểu tượng hình (ký hiệu lặp lại) ¦ Piktogram (simbol berulang)
+Mosaïque à largeur variable (Marimekko) ¦ Khảm độ rộng thay đổi (Marimekko) ¦ Mozaik lebar variabel (Marimekko)
+Bulles groupées (noms, métiers, lieux) ¦ Bong bóng nhóm (tên, nghề nghiệp, địa điểm) ¦ Gelembung berkelompok (nama, pekerjaan, tempat)
+Flux (Sankey) : migrations, métiers… ¦ Dòng chảy (Sankey): di cư, nghề nghiệp… ¦ Aliran (Sankey): migrasi, pekerjaan…
+Diagramme d’accord (mariages entre villages) ¦ Sơ đồ dây cung (kết hôn giữa các làng) ¦ Diagram kord (pernikahan antardesa)
+Une idée au centre, des branches autour, et les idées de chaque branche. ¦ Một ý ở giữa, các nhánh xung quanh, và các ý của mỗi nhánh. ¦ Satu gagasan di tengah, cabang-cabang di sekelilingnya, dan gagasan di setiap cabang.
+Carte mentale (une idée, ses branches) ¦ Sơ đồ tư duy (một ý, các nhánh của nó) ¦ Peta pikiran (satu gagasan, cabang-cabangnya)
+Éventail d’ascendance (mes chiffres) ¦ Quạt tổ tiên (số liệu của tôi) ¦ Kipas leluhur (angka-angkaku)
+Soleil des lignées (anneaux) ¦ Mặt trời dòng dõi (vòng) ¦ Matahari garis keturunan (cincin)
+Réseau de relations (témoins, parrains…) ¦ Mạng quan hệ (người làm chứng, cha đỡ đầu…) ¦ Jaringan hubungan (saksi, ayah baptis…)
+Diagramme de Venn (2 à 4 ensembles) ¦ Biểu đồ Venn (2 đến 4 tập hợp) ¦ Diagram Venn (2 sampai 4 himpunan)
+Arbre en accordéon (cousins) ¦ Cây xếp nếp (anh chị em họ) ¦ Pohon akordeon (sepupu)
+Graphe des cousinages ¦ Đồ thị quan hệ họ hàng ¦ Grafik persepupuan
+Matrice de parenté (qui est quoi pour qui) ¦ Ma trận quan hệ (ai là gì của ai) ¦ Matriks kekerabatan (siapa apa bagi siapa)
+Arbre des patronymes (transmission du nom) ¦ Cây họ (truyền họ) ¦ Pohon nama keluarga (pewarisan nama)
+Quadrillage des ancêtres (une case par Sosa) ¦ Lưới tổ tiên (mỗi Sosa một ô) ¦ Kisi leluhur (satu kotak per Sosa)
+Les métiers d’une génération à l’autre : chaque bande suit des lignées, du trisaïeul au fils. ¦ Nghề nghiệp từ thế hệ này sang thế hệ khác: mỗi dải theo một dòng dõi, từ ông sơ đến con trai. ¦ Pekerjaan dari satu generasi ke generasi berikutnya: setiap pita mengikuti garis keturunan, dari canggah hingga anak laki-laki.
+Métiers de père en fils (flux sur plusieurs générations) ¦ Nghề cha truyền con nối (dòng chảy qua nhiều thế hệ) ¦ Pekerjaan dari ayah ke anak (aliran lintas beberapa generasi)
+Chaque couple est un point : sa distance au centre est celle qui séparait les lieux de naissance des deux époux. ¦ Mỗi cặp vợ chồng là một điểm: khoảng cách đến tâm là khoảng cách giữa nơi sinh của hai vợ chồng. ¦ Setiap pasangan adalah satu titik: jaraknya dari pusat adalah jarak antara tempat lahir kedua pasangan.
+Rayon des mariages (distance entre les villages des époux) ¦ Bán kính kết hôn (khoảng cách giữa làng của hai vợ chồng) ¦ Radius pernikahan (jarak antara desa kedua pasangan)
+Par génération : les ancêtres qu’on devrait avoir (2, 4, 8…), les places trouvées et les personnes différentes. ¦ Theo thế hệ: số tổ tiên lẽ ra phải có (2, 4, 8…), số vị trí đã tìm thấy và số người khác nhau. ¦ Per generasi: leluhur yang seharusnya ada (2, 4, 8…), posisi yang ditemukan, dan orang yang berbeda.
+Implexe (ancêtres théoriques et réels) ¦ Trùng lặp tổ tiên (tổ tiên lý thuyết và thực tế) ¦ Implex (leluhur teoretis dan nyata)
+Descendance en rectangles (icicle) ¦ Con cháu dạng hình chữ nhật (icicle) ¦ Keturunan dalam persegi panjang (icicle)
+Prénoms transmis (parrain, marraine → filleul) ¦ Tên được truyền lại (cha đỡ đầu, mẹ đỡ đầu → con đỡ đầu) ¦ Nama depan yang diwariskan (ayah baptis, ibu baptis → anak baptis)
+Causes de décès en anneaux (familles puis détail) ¦ Nguyên nhân mất dạng vòng (nhóm rồi chi tiết) ¦ Penyebab kematian dalam cincin (kelompok lalu rincian)
+Une personne au milieu ; ses parents, grands-parents… au-dessus ; ses enfants, petits-enfants… au-dessous. ¦ Một người ở giữa; cha mẹ, ông bà… ở trên; con cái, cháu… ở dưới. ¦ Satu orang di tengah; orang tua, kakek-nenek… di atas; anak, cucu… di bawah.
+Sablier (ascendants et descendants d’une personne) ¦ Đồng hồ cát (tổ tiên và con cháu của một người) ¦ Jam pasir (leluhur dan keturunan seseorang)
+Le plus court chemin entre deux personnes, étape par étape, et la phrase qui dit le lien (« cousin issu de germains », « beau-frère »…). ¦ Đường ngắn nhất giữa hai người, từng bước một, và câu nói rõ mối quan hệ (“anh chị em họ đời thứ hai”, “anh rể”…). ¦ Jalur terpendek antara dua orang, langkah demi langkah, dan kalimat yang menyebut hubungannya (“sepupu dua kali”, “ipar”…).
+Chemin de parenté entre deux personnes ¦ Đường quan hệ họ hàng giữa hai người ¦ Jalur kekerabatan antara dua orang
+La part des ancêtres connus à chaque génération (1, 2, 4, 8… possibles), en barres ou en éventail. ¦ Tỷ lệ tổ tiên đã biết ở mỗi thế hệ (1, 2, 4, 8… có thể có), dạng cột hoặc dạng quạt. ¦ Bagian leluhur yang diketahui di setiap generasi (1, 2, 4, 8… yang mungkin), dalam batang atau kipas.
+Complétude de l’arbre (ancêtres connus par génération) ¦ Độ đầy đủ của cây (tổ tiên đã biết theo thế hệ) ¦ Kelengkapan pohon (leluhur yang diketahui per generasi)
+La liste des ancêtres par numéro Sosa, génération par génération, prête à imprimer. ¦ Danh sách tổ tiên theo số Sosa, từng thế hệ, sẵn sàng để in. ¦ Daftar leluhur menurut nomor Sosa, generasi demi generasi, siap dicetak.
+Tableau d’ascendance (ahnentafel, une ligne par Sosa) ¦ Bảng tổ tiên (ahnentafel, mỗi Sosa một dòng) ¦ Tabel leluhur (ahnentafel, satu baris per Sosa)
+Cartes de chiffres (KPI) ¦ Thẻ số liệu (KPI) ¦ Kartu angka (KPI)
+Barre d’objectif (valeur, objectif, zones) ¦ Thanh mục tiêu (giá trị, mục tiêu, vùng) ¦ Batang target (nilai, target, zona)
+Un anneau par objectif : plein quand c’est fini (ancêtres trouvés, actes sourcés, photos identifiées…). ¦ Mỗi mục tiêu một vòng: đầy khi xong (tổ tiên đã tìm thấy, giấy tờ có nguồn, ảnh đã nhận diện…). ¦ Satu cincin per target: penuh jika sudah selesai (leluhur ditemukan, akta bersumber, foto teridentifikasi…).
+Anneaux d’avancement (objectifs de recherche) ¦ Vòng tiến độ (mục tiêu nghiên cứu) ¦ Cincin kemajuan (target riset)
+Carte colorée par zones (départements, régions, pays…) ¦ Bản đồ tô màu theo vùng (tỉnh, vùng, quốc gia…) ¦ Peta berwarna per wilayah (provinsi, region, negara…)
+Carte des migrations (flèches d’un lieu à un autre) ¦ Bản đồ di cư (mũi tên từ nơi này đến nơi khác) ¦ Peta migrasi (panah dari satu tempat ke tempat lain)
+Carte à symboles proportionnels (ronds par lieu) ¦ Bản đồ ký hiệu tỷ lệ (vòng tròn cho mỗi địa điểm) ¦ Peta simbol proporsional (lingkaran per tempat)
+Carte en points (un point par événement) ¦ Bản đồ điểm (mỗi sự kiện một điểm) ¦ Peta titik (satu titik per peristiwa)
+Carte en hexagones (densité en alvéoles) ¦ Bản đồ lục giác (mật độ theo ô) ¦ Peta heksagon (kepadatan dalam sel)
+Carte déformée (zones grossies selon leur chiffre) ¦ Bản đồ biến dạng (vùng phóng to theo số liệu) ¦ Peta terdistorsi (wilayah diperbesar menurut angkanya)
+Carte qui raconte (une vie étape par étape) ¦ Bản đồ kể chuyện (một cuộc đời từng bước) ¦ Peta bercerita (satu kehidupan langkah demi langkah)
+Carte des patronymes (siècle par siècle) ¦ Bản đồ họ (từng thế kỷ) ¦ Peta nama keluarga (abad demi abad)
+Carte de chaleur dans le temps (décennie par décennie) ¦ Bản đồ nhiệt theo thời gian (từng thập niên) ¦ Peta panas seiring waktu (dekade demi dekade)
+Carte des cousins ADN (lieux des ancêtres communs) ¦ Bản đồ họ hàng ADN (nơi ở của tổ tiên chung) ¦ Peta sepupu DNA (tempat leluhur bersama)
+Carte de tes recherches (vu, en partie, trous) ¦ Bản đồ nghiên cứu của bạn (đã xem, một phần, lỗ hổng) ¦ Peta risetmu (sudah dilihat, sebagian, celah)
+Le point moyen des lieux de naissance de chaque génération, et le chemin qu’il a fait jusqu’à toi. ¦ Điểm trung bình của nơi sinh mỗi thế hệ, và con đường nó đã đi đến tận bạn. ¦ Titik rata-rata tempat lahir setiap generasi, dan jalur yang ditempuhnya sampai kepadamu.
+Centre de gravité de la famille par génération ¦ Trọng tâm của gia đình theo thế hệ ¦ Titik pusat keluarga per generasi
+Les lieux de naissance des ancêtres, une couleur par génération : on voit la famille venir de plus loin. ¦ Nơi sinh của tổ tiên, mỗi thế hệ một màu: bạn thấy gia đình đến từ những nơi xa hơn. ¦ Tempat lahir para leluhur, satu warna per generasi: kamu melihat keluarga datang dari tempat yang makin jauh.
+Carte des générations (une couleur par génération) ¦ Bản đồ các thế hệ (mỗi thế hệ một màu) ¦ Peta generasi (satu warna per generasi)
+Vie et mort ¦ Sống và chết ¦ Hidup dan mati
+La part des enfants morts avant 1 an et avant 5 ans, période par période. ¦ Tỷ lệ trẻ em mất trước 1 tuổi và trước 5 tuổi, theo từng giai đoạn. ¦ Bagian anak yang meninggal sebelum usia 1 tahun dan sebelum 5 tahun, periode demi periode.
+Mortalité des enfants (avant 1 an, avant 5 ans) ¦ Tử vong trẻ em (trước 1 tuổi, trước 5 tuổi) ¦ Kematian anak (sebelum 1 tahun, sebelum 5 tahun)
+Pour chaque couple, ses enfants : arrivés à l’âge adulte, morts jeunes, ou dont on ne sait pas. ¦ Với mỗi cặp vợ chồng, các con: đã trưởng thành, mất sớm, hoặc không rõ. ¦ Untuk setiap pasangan, anak-anaknya: mencapai dewasa, meninggal muda, atau tidak diketahui.
+Fratries qui survivent (enfants nés, arrivés adultes) ¦ Anh chị em còn sống (con được sinh ra, lớn đến tuổi trưởng thành) ¦ Saudara yang bertahan hidup (anak yang lahir, mencapai dewasa)
+Un damier : chaque mois de l’année, pour chaque époque. Plus c’est foncé, plus il y a de naissances (ou de décès). ¦ Một bàn cờ: mỗi tháng trong năm, cho mỗi thời kỳ. Màu càng đậm, càng nhiều ca sinh (hoặc mất). ¦ Papan catur: setiap bulan dalam setahun, untuk setiap masa. Makin gelap, makin banyak kelahiran (atau kematian).
+Saisons des naissances et des décès (mois × époque) ¦ Mùa sinh và mùa mất (tháng × thời kỳ) ¦ Musim kelahiran dan kematian (bulan × masa)
+Couples et familles ¦ Vợ chồng và gia đình ¦ Pasangan dan keluarga
+Combien de temps attendaient les veufs et les veuves avant de se remarier. ¦ Người goá vợ và goá chồng đã chờ bao lâu trước khi tái hôn. ¦ Berapa lama duda dan janda menunggu sebelum menikah lagi.
+Veuvage et remariage (délai avant de se remarier) ¦ Goá bụa và tái hôn (thời gian trước khi tái hôn) ¦ Menjanda/menduda dan menikah lagi (jeda sebelum menikah lagi)
+Combien d’années duraient les mariages, de la noce à la mort du premier des deux. ¦ Các cuộc hôn nhân kéo dài bao nhiêu năm, từ đám cưới đến khi người đầu tiên trong hai người mất. ¦ Berapa tahun pernikahan berlangsung, dari pesta pernikahan hingga kematian salah satu dari keduanya.
+Durée des mariages (jusqu’à la mort d’un époux) ¦ Thời gian hôn nhân (đến khi một người mất) ¦ Lama pernikahan (sampai salah satu pasangan meninggal)
+Chaque naissance est un point : l’âge du père (et celui de la mère) selon l’année. ¦ Mỗi ca sinh là một điểm: tuổi của cha (và của mẹ) theo năm. ¦ Setiap kelahiran adalah satu titik: usia ayah (dan ibu) menurut tahun.
+Âge des parents à chaque naissance (nuage de points) ¦ Tuổi cha mẹ ở mỗi lần sinh (biểu đồ phân tán) ¦ Usia orang tua di setiap kelahiran (diagram sebar)
+La part des premiers enfants nés avant le mariage, ou moins de 8 mois après. ¦ Tỷ lệ con đầu lòng sinh trước khi kết hôn, hoặc chưa đến 8 tháng sau đó. ¦ Bagian anak pertama yang lahir sebelum pernikahan, atau kurang dari 8 bulan sesudahnya.
+Conceptions avant mariage (premier enfant « trop tôt ») ¦ Thụ thai trước hôn nhân (con đầu lòng “quá sớm”) ¦ Pembuahan sebelum menikah (anak pertama “terlalu cepat”)
+À gauche les couples où le mari est plus âgé, à droite ceux où la femme est plus âgée, par tranches d’écart. ¦ Bên trái là các cặp người chồng lớn tuổi hơn, bên phải là các cặp người vợ lớn tuổi hơn, theo khoảng chênh lệch. ¦ Di kiri pasangan yang suaminya lebih tua, di kanan yang istrinya lebih tua, menurut rentang selisih.
+Écart d’âge entre époux (pyramide) ¦ Chênh lệch tuổi giữa vợ chồng (tháp) ¦ Selisih usia antara suami istri (piramida)
+À chaque génération d’ancêtres, la distance moyenne entre leur lieu de naissance et le lieu de référence. ¦ Ở mỗi thế hệ tổ tiên, khoảng cách trung bình giữa nơi sinh của họ và địa điểm tham chiếu. ¦ Untuk setiap generasi leluhur, jarak rata-rata antara tempat lahir mereka dan tempat acuan.
+Loin du berceau (distance par génération) ¦ Xa quê gốc (khoảng cách theo thế hệ) ¦ Jauh dari tanah asal (jarak per generasi)
+La part de ceux qui ont signé l’acte (époux, épouses, témoins), période par période. ¦ Tỷ lệ người đã ký vào giấy tờ (chú rể, cô dâu, người làm chứng), theo từng giai đoạn. ¦ Bagian orang yang menandatangani akta (mempelai pria, mempelai wanita, saksi), periode demi periode.
+Savoir signer (époux, épouses, témoins) ¦ Biết ký tên (chú rể, cô dâu, người làm chứng) ¦ Bisa tanda tangan (mempelai pria, mempelai wanita, saksi)
+Pour chaque génération d’ancêtres : naissances, mariages et décès prouvés par une source (vert), sans source (jaune) ou manquants (gris). ¦ Với mỗi thế hệ tổ tiên: sinh, kết hôn và mất được chứng minh bằng nguồn (xanh lá), không có nguồn (vàng) hoặc còn thiếu (xám). ¦ Untuk setiap generasi leluhur: kelahiran, pernikahan, dan kematian yang dibuktikan dengan sumber (hijau), tanpa sumber (kuning), atau belum ada (abu-abu).
+Ce que tu as prouvé (actes sourcés par génération) ¦ Những gì bạn đã chứng minh (giấy tờ có nguồn theo thế hệ) ¦ Yang sudah kamu buktikan (akta bersumber per generasi)
+Pour chaque commune, une frise des années : dépouillées, vues sans rien trouver, à faire, actes trouvés ; en rouge pâle, les trous. ¦ Với mỗi xã, một dòng thời gian các năm: đã trích lục, đã xem mà không tìm thấy gì, cần làm, đã tìm thấy giấy tờ; màu đỏ nhạt là các lỗ hổng. ¦ Untuk setiap kota, garis waktu tahun-tahun: sudah diindeks, dilihat tanpa menemukan apa pun, perlu dikerjakan, akta ditemukan; merah pucat untuk celah.
+Registres consultés (années vues et trous) ¦ Sổ bộ đã tra cứu (các năm đã xem và lỗ hổng) ¦ Register yang sudah diperiksa (tahun yang dilihat dan celah)
+Peinture des chromosomes (segments ADN par branche) ¦ Tô màu nhiễm sắc thể (đoạn ADN theo nhánh) ¦ Pewarnaan kromosom (segmen DNA per cabang)
+Règle des cM (parentés possibles) ¦ Thước cM (các quan hệ có thể có) ¦ Penggaris cM (kekerabatan yang mungkin)
+Les correspondances ADN qui se correspondent entre elles, rangées en groupes de couleur (souvent un par grand-parent). ¦ Các kết quả trùng khớp ADN khớp với nhau, xếp thành nhóm màu (thường mỗi ông bà một nhóm). ¦ Kecocokan DNA yang saling cocok, dikelompokkan dalam grup warna (sering satu per kakek atau nenek).
+Matrice des correspondances ADN (méthode de Leeds) ¦ Ma trận trùng khớp ADN (phương pháp Leeds) ¦ Matriks kecocokan DNA (metode Leeds)
+Chargement du diagramme… ¦ Đang tải sơ đồ… ¦ Memuat diagram…
+Diagramme introuvable (supprimé ?). ¦ Không tìm thấy sơ đồ (đã bị xoá?). ¦ Diagram tidak ditemukan (sudah dihapus?).
+la fenêtre « Imprimer » n’est pas chargée ¦ cửa sổ “In” chưa được tải ¦ jendela “Cetak” belum dimuat
+Titre et légende ¦ Tiêu đề và chú thích ¦ Judul dan keterangan
+Tableau des données dessous ¦ Bảng dữ liệu bên dưới ¦ Tabel data di bawah
+Taille réelle ¦ Kích thước thật ¦ Ukuran sebenarnya
+Image copiée : colle-la où tu veux (⌘V). ¦ Đã sao chép ảnh: hãy dán vào nơi bạn muốn (⌘V). ¦ Gambar disalin: tempelkan di mana pun kamu mau (⌘V).
+Copie impossible ici : utilise « Image PNG ». ¦ Không thể sao chép ở đây: hãy dùng “Ảnh PNG”. ¦ Tidak bisa menyalin di sini: gunakan “Gambar PNG”.
+image trop grande : baisse la qualité ¦ ảnh quá lớn: hãy giảm chất lượng ¦ gambar terlalu besar: turunkan kualitasnya
+📋 Copier l’image ¦ 📋 Sao chép ảnh ¦ 📋 Salin gambar
+🧾 Prendre un classeur du Tableur ¦ 🧾 Lấy một sổ tính từ Bảng tính ¦ 🧾 Ambil buku kerja dari Spreadsheet
+Prendre un classeur du Tableur ¦ Lấy một sổ tính từ Bảng tính ¦ Ambil buku kerja dari Spreadsheet
+Nom du diagramme ¦ Tên sơ đồ ¦ Nama diagram
+PNG, JPG, SVG, PDF, impression, CSV, fichier du diagramme ¦ PNG, JPG, SVG, PDF, in, CSV, tệp sơ đồ ¦ PNG, JPG, SVG, PDF, cetak, CSV, berkas diagram
+Depuis l’app ¦ Từ ứng dụng ¦ Dari aplikasi
+Personnaliser n’est pas chargé. ¦ Chưa tải được phần Tùy chỉnh. ¦ Kustomisasi belum dimuat.
+Dans l’ordre du tableau ¦ Theo thứ tự của bảng ¦ Sesuai urutan tabel
+Prendre ces données ¦ Lấy dữ liệu này ¦ Ambil data ini
+Prendre ces chiffres ¦ Lấy các số liệu này ¦ Ambil angka-angka ini
+🧮 Refaire avec « Compter dans ma base » ¦ 🧮 Làm lại bằng “Đếm trong dữ liệu của tôi” ¦ 🧮 Ulangi dengan “Hitung di basis dataku”
+🧮 Compter dans ma base ¦ 🧮 Đếm trong dữ liệu của tôi ¦ 🧮 Hitung di basis dataku
+Une personne, une enquête… ¦ Một người, một cuộc tìm hiểu… ¦ Seseorang, sebuah penelusuran…
+Tableau importé. ¦ Đã nhập bảng. ¦ Tabel diimpor.
+Vider ce tableau ? ¦ Làm trống bảng này? ¦ Kosongkan tabel ini?
+Coller un tableau ¦ Dán một bảng ¦ Tempel tabel
+Données reprises du tableur. ¦ Dữ liệu lấy từ bảng tính. ¦ Data diambil dari spreadsheet.
+Fermer sans enregistrer les changements ? ¦ Đóng mà không lưu các thay đổi? ¦ Tutup tanpa menyimpan perubahan?
+Changements non enregistrés ¦ Thay đổi chưa được lưu ¦ Perubahan belum disimpan
+Remplacer mes données ¦ Thay dữ liệu của tôi ¦ Ganti dataku
+Choisir un diagramme ¦ Chọn một sơ đồ ¦ Pilih diagram
+Importer (fichier, tableau, Wikipédia, image) ¦ Nhập (tệp, bảng, Wikipedia, ảnh) ¦ Impor (berkas, tabel, Wikipedia, gambar)
+un classeur du Tableur ¦ một sổ tính từ Bảng tính ¦ buku kerja dari Spreadsheet
+Copie créée. ¦ Đã tạo bản sao. ¦ Salinan dibuat.
+Diagramme supprimé. ¦ Đã xoá sơ đồ. ¦ Diagram dihapus.
+Ce fichier n’est pas un diagramme. ¦ Tệp này không phải là sơ đồ. ¦ Berkas ini bukan diagram.
+Diagramme importé ¦ Sơ đồ đã nhập ¦ Diagram yang diimpor
+Diagramme importé. ¦ Đã nhập sơ đồ. ¦ Diagram diimpor.
+Naissances (ou baptêmes) ¦ Sinh (hoặc rửa tội) ¦ Kelahiran (atau baptis)
+Baptêmes ¦ Rửa tội ¦ Baptis
+Décès (ou sépultures) ¦ Mất (hoặc an táng) ¦ Kematian (atau pemakaman)
+Rien (un seul total) ¦ Không có (chỉ một tổng) ¦ Tidak ada (satu total saja)
+Âge (par 5 ans) ¦ Tuổi (mỗi 5 năm) ¦ Usia (per 5 tahun)
+Âge (par 10 ans) ¦ Tuổi (mỗi 10 năm) ¦ Usia (per 10 tahun)
+Nombre d’enfants ¦ Số con ¦ Jumlah anak
+Âge au mariage (par 5 ans) ¦ Tuổi kết hôn (mỗi 5 năm) ¦ Usia menikah (per 5 tahun)
+Âge au premier enfant (par 5 ans) ¦ Tuổi khi có con đầu lòng (mỗi 5 năm) ¦ Usia saat anak pertama (per 5 tahun)
+Nombre d’unions ¦ Số cuộc hôn phối ¦ Jumlah perkawinan
+Branche (côté père, côté mère) ¦ Nhánh (bên cha, bên mẹ) ¦ Cabang (pihak ayah, pihak ibu)
+En vie ou décédé ¦ Còn sống hay đã mất ¦ Masih hidup atau sudah meninggal
+En vie ou décédés ¦ Còn sống hay đã mất ¦ Masih hidup atau sudah meninggal
+Avec ou sans source ¦ Có hoặc không có nguồn ¦ Dengan atau tanpa sumber
+par nom ¦ theo họ ¦ per nama keluarga
+par prénom ¦ theo tên ¦ per nama depan
+par sexe ¦ theo giới tính ¦ per jenis kelamin
+par métier ¦ theo nghề nghiệp ¦ per pekerjaan
+par génération ¦ theo thế hệ ¦ per generasi
+par commune ¦ theo xã ¦ per kota
+par département ¦ theo tỉnh ¦ per provinsi
+par région ¦ theo vùng ¦ per region
+par pays ¦ theo quốc gia ¦ per negara
+par âge (5 ans) ¦ theo tuổi (5 năm) ¦ per usia (5 tahun)
+par âge (10 ans) ¦ theo tuổi (10 năm) ¦ per usia (10 tahun)
+par nombre d’enfants ¦ theo số con ¦ per jumlah anak
+par âge au mariage ¦ theo tuổi kết hôn ¦ per usia menikah
+par âge au premier enfant ¦ theo tuổi khi có con đầu lòng ¦ per usia saat anak pertama
+par nombre d’unions ¦ theo số cuộc hôn phối ¦ per jumlah perkawinan
+par branche ¦ theo nhánh ¦ per cabang
+par cause ¦ theo nguyên nhân ¦ per penyebab
+par sorte d’événement ¦ theo loại sự kiện ¦ per jenis peristiwa
+Mes ancêtres ¦ Tổ tiên của tôi ¦ Leluhurku
+Branche paternelle (côté père) ¦ Nhánh nội (bên cha) ¦ Cabang ayah (pihak ayah)
+Branche maternelle (côté mère) ¦ Nhánh ngoại (bên mẹ) ¦ Cabang ibu (pihak ibu)
+Une étiquette ¦ Một nhãn ¦ Sebuah label
+Une recherche dans les noms ¦ Tìm trong các tên ¦ Pencarian dalam nama
+Les personnes que je choisis ¦ Những người tôi chọn ¦ Orang-orang yang kupilih
+Une seule série ¦ Một chuỗi duy nhất ¦ Satu seri saja
+Une série par sexe ¦ Mỗi giới tính một chuỗi ¦ Satu seri per jenis kelamin
+Une série par siècle ¦ Mỗi thế kỷ một chuỗi ¦ Satu seri per abad
+Une série par branche (côté père / mère) ¦ Mỗi nhánh một chuỗi (bên cha / mẹ) ¦ Satu seri per cabang (pihak ayah / ibu)
+Une série par génération ¦ Mỗi thế hệ một chuỗi ¦ Satu seri per generasi
+Une série par département ¦ Mỗi tỉnh một chuỗi ¦ Satu seri per provinsi
+Une série par pays ¦ Mỗi quốc gia một chuỗi ¦ Satu seri per negara
+Du plus grand au plus petit ¦ Từ lớn nhất đến nhỏ nhất ¦ Dari terbesar ke terkecil
+Du plus petit au plus grand ¦ Từ nhỏ nhất đến lớn nhất ¦ Dari terkecil ke terbesar
+Dans l’ordre (temps, âges…) ¦ Theo thứ tự (thời gian, tuổi…) ¦ Berurutan (waktu, usia…)
+Médiane ¦ Trung vị ¦ Median
+Ce que chaque barre (ou part) compte : des personnes, des naissances, des mariages, des lieux, des médias… ¦ Mỗi cột (hoặc phần) đếm gì: người, ca sinh, cuộc kết hôn, địa điểm, tư liệu… ¦ Apa yang dihitung setiap batang (atau bagian): orang, kelahiran, pernikahan, tempat, media…
+Seulement les fiches qui portent cette étiquette. ¦ Chỉ các hồ sơ có nhãn này. ¦ Hanya profil yang memiliki label ini.
+Seulement les personnes que tu choisis ici, une par une. ¦ Chỉ những người bạn chọn ở đây, từng người một. ¦ Hanya orang yang kamu pilih di sini, satu per satu.
+Comment on range ce qu’on compte : par nom, par lieu (commune, département, pays), par siècle, décennie ou année, par âge, par génération… ¦ Cách sắp xếp những gì được đếm: theo tên, theo địa điểm (xã, tỉnh, quốc gia), theo thế kỷ, thập niên hoặc năm, theo tuổi, theo thế hệ… ¦ Cara mengelompokkan yang dihitung: per nama, per tempat (kota, provinsi, negara), per abad, dekade, atau tahun, per usia, per generasi…
+Prénoms, par siècle ¦ Tên, theo thế kỷ ¦ Nama depan, per abad
+Âge au décès (par 5 ans) ¦ Tuổi lúc mất (mỗi 5 năm) ¦ Usia saat meninggal (per 5 tahun)
+Mariages par décennie ¦ Kết hôn theo thập niên ¦ Pernikahan per dekade
+Nombre d’unions par personne ¦ Số cuộc hôn phối mỗi người ¦ Jumlah perkawinan per orang
+Nombre moyen d’enfants par famille, par siècle ¦ Số con trung bình mỗi gia đình, theo thế kỷ ¦ Rata-rata jumlah anak per keluarga, per abad
+Naissances par département ¦ Sinh theo tỉnh ¦ Kelahiran per provinsi
+Mariages par département, par siècle ¦ Kết hôn theo tỉnh, theo thế kỷ ¦ Pernikahan per provinsi, per abad
+Lieux par département ¦ Địa điểm theo tỉnh ¦ Tempat per provinsi
+Métiers, par siècle ¦ Nghề nghiệp, theo thế kỷ ¦ Pekerjaan, per abad
+Âge moyen au décès, par métier ¦ Tuổi trung bình lúc mất, theo nghề nghiệp ¦ Usia rata-rata saat meninggal, per pekerjaan
+Décès par décennie ¦ Mất theo thập niên ¦ Kematian per dekade
+Événements par siècle ¦ Sự kiện theo thế kỷ ¦ Peristiwa per abad
+Mes ancêtres par génération ¦ Tổ tiên của tôi theo thế hệ ¦ Leluhurku per generasi
+Fiches avec ou sans source ¦ Hồ sơ có hoặc không có nguồn ¦ Profil dengan atau tanpa sumber
+Mes ancêtres avec ou sans source ¦ Tổ tiên của tôi có hoặc không có nguồn ¦ Leluhurku dengan atau tanpa sumber
+Événements par sorte ¦ Sự kiện theo loại ¦ Peristiwa per jenis
+Médias par sorte ¦ Tư liệu theo loại ¦ Media per jenis
+Médias par décennie ¦ Tư liệu theo thập niên ¦ Media per dekade
+Seulement les personnes… ¦ Chỉ những người… ¦ Hanya orang…
+tous ces critères (ET) ¦ tất cả các tiêu chí này (VÀ) ¦ semua kriteria ini (DAN)
+choisir… (métier, enfants, lieu, période…) ¦ chọn… (nghề nghiệp, con, địa điểm, thời kỳ…) ¦ pilih… (pekerjaan, anak, tempat, periode…)
+Compter chaque personne une seule fois ¦ Mỗi người chỉ đếm một lần ¦ Hitung setiap orang hanya sekali
+Jusqu’à (générations, 0 = toutes) ¦ Đến (số thế hệ, 0 = tất cả) ¦ Sampai (generasi, 0 = semua)
+Nom ou prénom qui contient ¦ Họ hoặc tên có chứa ¦ Nama keluarga atau nama depan yang mengandung
+Chercher… (Martin, Jean) ¦ Tìm… (Martin, Jean) ¦ Cari… (Martin, Jean)
+Nées entre (période) ¦ Sinh trong khoảng (thời kỳ) ¦ Lahir antara (periode)
+Regrouper par ¦ Nhóm theo ¦ Kelompokkan menurut
+Garder les premiers (0 = tous) ¦ Giữ những mục đầu (0 = tất cả) ¦ Simpan yang pertama (0 = semua)
+Le reste dans « Autres » ¦ Phần còn lại vào “Khác” ¦ Sisanya di “Lainnya”
+Montrer « Inconnu » (les valeurs vides) ¦ Hiện “Không rõ” (các giá trị trống) ¦ Tampilkan “Tidak diketahui” (nilai kosong)
+De quoi ¦ Của cái gì ¦ Dari apa
+Écris une année (ex. 1800, vers 1850). ¦ Hãy viết một năm (vd. 1800, vers 1850). ¦ Tulis tahun (mis. 1800, vers 1850).
+Choisis une étiquette. ¦ Hãy chọn một nhãn. ¦ Pilih label.
+Écris au moins 2 lettres. ¦ Hãy viết ít nhất 2 chữ cái. ¦ Tulis paling sedikit 2 huruf.
+Choisis au moins une personne. ¦ Hãy chọn ít nhất một người. ¦ Pilih paling sedikit satu orang.
+=siège ¦ ghế ¦ kursi
+Ajoute des valeurs positives. ¦ Hãy thêm các giá trị dương. ¦ Tambahkan nilai positif.
+Il faut au moins 3 lignes (les axes). ¦ Cần ít nhất 3 dòng (các trục). ¦ Perlu paling sedikit 3 baris (sumbu).
+Ajoute des valeurs. ¦ Hãy thêm giá trị. ¦ Tambahkan nilai.
+Ajoute des flux : de, vers, combien. ¦ Hãy thêm các dòng chảy: từ, đến, bao nhiêu. ¦ Tambahkan aliran: dari, ke, berapa banyak.
+Il faut 2 ou 3 ensembles. ¦ Cần 2 hoặc 3 tập hợp. ¦ Perlu 2 atau 3 himpunan.
+Ajoute une jauge : un nom, une valeur, un maximum. ¦ Hãy thêm một đồng hồ đo: tên, giá trị, mức tối đa. ¦ Tambahkan meteran: nama, nilai, maksimum.
+Ajoute des lignes : un nom, un nombre, un symbole (👤, 👶, ⚓…). ¦ Hãy thêm dòng: tên, một số, một ký hiệu (👤, 👶, ⚓…). ¦ Tambahkan baris: nama, angka, simbol (👤, 👶, ⚓…).
+Majorité (banc du haut) ¦ Đa số (dãy ghế trên) ¦ Mayoritas (bangku atas)
+Opposition (banc du bas) ¦ Đối lập (dãy ghế dưới) ¦ Oposisi (bangku bawah)
+Non-inscrits (bout) ¦ Không đảng phái (cuối) ¦ Nonpartisan (ujung)
+Présidence ¦ Chủ tọa ¦ Pimpinan sidang
+Les chiffres ¦ Các số liệu ¦ Angka-angka
+Afficher les valeurs ¦ Hiện các giá trị ¦ Tampilkan nilai
+Hauteur du dessin ¦ Chiều cao hình vẽ ¦ Tinggi gambar
+Unité (ex. : personnes, €) ¦ Đơn vị (vd.: người, €) ¦ Satuan (mis.: orang, €)
+Trou au centre ¦ Lỗ ở giữa ¦ Lubang di tengah
+Sièges ¦ Ghế ¦ Kursi
+Hémicycle (demi-cercle) ¦ Hình bán nguyệt (nửa vòng tròn) ¦ Hemisiklus (setengah lingkaran)
+Arc élargi (angle au choix) ¦ Cung mở rộng (góc tùy chọn) ¦ Busur lebar (sudut sesukamu)
+Longueur des bancs droits ¦ Độ dài các dãy ghế thẳng ¦ Panjang bangku lurus
+Forme des sièges ¦ Hình dạng ghế ¦ Bentuk kursi
+Carrés ¦ Hình vuông ¦ Persegi
+Carrés arrondis ¦ Hình vuông bo góc ¦ Persegi membulat
+Espace entre les sièges ¦ Khoảng cách giữa các ghế ¦ Jarak antarkursi
+Contour des sièges ¦ Viền ghế ¦ Garis tepi kursi
+Majorité absolue ¦ Đa số tuyệt đối ¦ Mayoritas mutlak
+Ne pas montrer ¦ Không hiện ¦ Jangan tampilkan
+En texte ¦ Dạng chữ ¦ Sebagai teks
+Sièges dans la légende ¦ Ghế trong chú giải ¦ Kursi di legenda
+Assemblée ¦ Hội đồng ¦ Majelis
+Les membres (une ligne par période ; même nom = même ligne) ¦ Các thành viên (mỗi thời kỳ một dòng; cùng tên = cùng dòng) ¦ Anggota (satu baris per periode; nama sama = baris sama)
+Rôles (séparés par des virgules) ¦ Vai trò (cách nhau bằng dấu phẩy) ¦ Peran (dipisahkan koma)
+1987 ou 03/1987 ¦ 1987 hoặc 03/1987 ¦ 1987 atau 03/1987
+Fin (vide = aujourd’hui) ¦ Kết thúc (trống = hôm nay) ¦ Akhir (kosong = hari ini)
+Les traits verticaux (albums, tournées, événements) ¦ Các vạch dọc (album, lưu diễn, sự kiện) ¦ Garis vertikal (album, tur, peristiwa)
+Tournée (rouge, pointillés) ¦ Lưu diễn (đỏ, chấm chấm) ¦ Tur (merah, titik-titik)
+Autre (bleu, pointillés) ¦ Khác (xanh dương, chấm chấm) ¦ Lainnya (biru, titik-titik)
+Un repère tous les … ans (vide = auto) ¦ Một mốc mỗi … năm (trống = tự động) ¦ Satu penanda setiap … tahun (kosong = otomatis)
+Épaisseur des barres ¦ Độ dày của cột ¦ Ketebalan batang
+Espace entre les lignes ¦ Khoảng cách giữa các dòng ¦ Jarak antarbaris
+Ordre des lignes ¦ Thứ tự các dòng ¦ Urutan baris
+Par date d’arrivée ¦ Theo ngày gia nhập ¦ Menurut tanggal bergabung
+Rôle par défaut (si vide) ¦ Vai trò mặc định (nếu trống) ¦ Peran bawaan (jika kosong)
+Les événements ¦ Các sự kiện ¦ Peristiwa
+En alternance dessus / dessous ¦ Xen kẽ trên / dưới ¦ Bergantian di atas / di bawah
+Tous au-dessus ¦ Tất cả ở trên ¦ Semua di atas
+Étages au plus (pour éviter les chevauchements) ¦ Số tầng tối đa (để tránh chồng lên nhau) ¦ Tingkat maksimum (untuk menghindari tumpang tindih)
+Carrés par ligne ¦ Số ô vuông mỗi dòng ¦ Kotak per baris
+Personnes trouvées ¦ Người đã tìm thấy ¦ Orang yang ditemukan
+Avec un acte ¦ Có giấy tờ ¦ Dengan akta
+Acte vérifié ¦ Giấy tờ đã kiểm tra ¦ Akta sudah diperiksa
+Sourcées ¦ Có nguồn ¦ Bersumber
+Complétude par branche ¦ Độ đầy đủ theo nhánh ¦ Kelengkapan per cabang
+Couleur des petites valeurs ¦ Màu cho giá trị nhỏ ¦ Warna nilai kecil
+Couleur des grandes valeurs ¦ Màu cho giá trị lớn ¦ Warna nilai besar
+Les points ¦ Các điểm ¦ Titik-titik
+Une seule couleur ¦ Một màu duy nhất ¦ Satu warna saja
+Les flux ¦ Các dòng chảy ¦ Aliran
+D’où venaient les conjoints ¦ Vợ hoặc chồng đến từ đâu ¦ Dari mana pasangan berasal
+Les cases ¦ Các ô ¦ Kotak-kotak
+Largeur des cases (vide = auto) ¦ Độ rộng ô (trống = tự động) ¦ Lebar kotak (kosong = otomatis)
+Les ensembles (2 ou 3) ¦ Các tập hợp (2 hoặc 3) ¦ Himpunan (2 atau 3)
+Ce qu’on écrit dans chaque zone ¦ Nội dung ghi trong mỗi vùng ¦ Yang ditulis di setiap area
+Texte ou nombre ¦ Chữ hoặc số ¦ Teks atau angka
+Les mots ¦ Các từ ¦ Kata-kata
+Taille du plus gros mot ¦ Cỡ của từ lớn nhất ¦ Ukuran kata terbesar
+Les jauges ¦ Các đồng hồ đo ¦ Meteran
+Les lignes ¦ Các dòng ¦ Baris
+Un symbole vaut ¦ Một ký hiệu bằng ¦ Satu simbol bernilai
+Taille des symboles ¦ Cỡ ký hiệu ¦ Ukuran simbol
+Légende ¦ Chú giải ¦ Legenda
+En bas ¦ Ở dưới ¦ Di bawah
+Couleurs par défaut ¦ Màu mặc định ¦ Warna bawaan
+Sépia (ancien) ¦ Nâu đỏ (cổ) ¦ Sepia (kuno)
+Taille des textes ¦ Cỡ chữ ¦ Ukuran teks
+Couleur du fond ¦ Màu nền ¦ Warna latar
+Couleur des textes ¦ Màu chữ ¦ Warna teks
+Types remis comme au départ. ¦ Đã đặt lại các loại như ban đầu. ¦ Jenis dikembalikan seperti semula.
+Nom du groupe (ex. « Mes favoris », « Pour la famille ») : ¦ Tên nhóm (vd. “Mục yêu thích của tôi”, “Cho gia đình”): ¦ Nama grup (mis. “Favoritku”, “Untuk keluarga”):
+Un tableau ¦ Một bảng ¦ Sebuah tabel
+Un fichier CSV ¦ Một tệp CSV ¦ Sebuah berkas CSV
+Une page Wikipédia ¦ Một trang Wikipedia ¦ Sebuah halaman Wikipedia
+Un graphique partagé ¦ Một biểu đồ được chia sẻ ¦ Grafik yang dibagikan
+📊 D’un graphique ¦ 📊 Từ một biểu đồ ¦ 📊 Dari grafik
+Avec quel dessin ? ¦ Vẽ theo kiểu nào? ¦ Dengan gambar apa?
+🖼️ Image d’un graphique ¦ 🖼️ Ảnh của một biểu đồ ¦ 🖼️ Gambar sebuah grafik
+Un diagramme LCNDA (.json), un graphique partagé (.lcnda-widget.json) ou un tableau CSV. ¦ Một sơ đồ LCNDA (.json), một biểu đồ được chia sẻ (.lcnda-widget.json) hoặc một bảng CSV. ¦ Diagram LCNDA (.json), grafik yang dibagikan (.lcnda-widget.json), atau tabel CSV.
+Lire la page ¦ Đọc trang ¦ Baca halaman
+Comment faire mon propre graphique avec des données d’ailleurs ? ¦ Làm sao để tạo biểu đồ của riêng tôi với dữ liệu từ nơi khác? ¦ Bagaimana membuat grafikku sendiri dengan data dari tempat lain?
+Ce fichier JSON n’est ni un diagramme ni un graphique LCNDA. ¦ Tệp JSON này không phải là sơ đồ cũng không phải là biểu đồ LCNDA. ¦ Berkas JSON ini bukan diagram maupun grafik LCNDA.
+Colle un tableau. ¦ Hãy dán một bảng. ¦ Tempel sebuah tabel.
+Tableau collé ¦ Bảng đã dán ¦ Tabel ditempel
+Clique « Lire la page », puis choisis un tableau ou une image. ¦ Hãy bấm “Đọc trang”, rồi chọn một bảng hoặc một ảnh. ¦ Klik “Baca halaman”, lalu pilih tabel atau gambar.
+Colle l’adresse d’une page Wikipédia (https://xx.wikipedia.org/wiki/…). ¦ Hãy dán địa chỉ của một trang Wikipedia (https://xx.wikipedia.org/wiki/…). ¦ Tempel alamat halaman Wikipedia (https://xx.wikipedia.org/wiki/…).
+Aucun tableau. ¦ Không có bảng nào. ¦ Tidak ada tabel.
+＋ Une ligne ¦ ＋ Một dòng ¦ ＋ Satu baris
+Je ne sais pas (barres ou colonnes) ¦ Tôi không biết (thanh ngang hay cột) ¦ Aku tidak tahu (batang atau kolom)
+Hémicycle (sièges) ¦ Hình bán nguyệt (ghế) ¦ Hemisiklus (kursi)
+Valeur du haut (la plus grande barre, ou 100 %) ¦ Giá trị trên cùng (cột lớn nhất, hoặc 100 %) ¦ Nilai teratas (batang terbesar, atau 100 %)
+D’après une image ¦ Theo một ảnh ¦ Dari gambar
+Président ¦ Chủ tịch ¦ Ketua
+Majorité ¦ Đa số ¦ Mayoritas
+Indépendants ¦ Độc lập ¦ Independen
+Liste du maire ¦ Danh sách của thị trưởng ¦ Daftar wali kota
+Sens de l’arbre ¦ Hướng của cây ¦ Arah pohon
+Chercher un métier… (tisserand, laboureur) ¦ Tìm một nghề… (thợ dệt, nông dân) ¦ Cari pekerjaan… (penenun, petani)
+Chercher un métier ¦ Tìm một nghề ¦ Cari pekerjaan
+Pour montrer ou imprimer l’arbre : les vivants et les fiches confidentielles n’apparaissent plus ¦ Để hiển thị hoặc in cây: người còn sống và hồ sơ bảo mật không còn xuất hiện ¦ Untuk menampilkan atau mencetak pohon: orang yang masih hidup dan profil rahasia tidak lagi muncul
+🔒 Sans les vivants ni les fiches confidentielles ¦ 🔒 Không có người còn sống và hồ sơ bảo mật ¦ 🔒 Tanpa orang yang masih hidup dan profil rahasia
+ARBRE DES MÉTIERS ¦ CÂY NGHỀ NGHIỆP ¦ POHON PEKERJAAN
+Les métiers des ancêtres de {name} ¦ Nghề nghiệp của tổ tiên {name} ¦ Pekerjaan para leluhur {name}
+🧬 Les métiers des ancêtres de {name} ¦ 🧬 Nghề nghiệp của tổ tiên {name} ¦ 🧬 Pekerjaan para leluhur {name}
+métier inconnu ¦ nghề không rõ ¦ pekerjaan tidak diketahui
+Aucun métier noté dans cet arbre. ¦ Cây này chưa ghi nghề nghiệp nào. ¦ Belum ada pekerjaan yang dicatat di pohon ini.
+Même métier que le parent ¦ Cùng nghề với cha hoặc mẹ ¦ Pekerjaan sama dengan orang tua
+Changement de métier ¦ Đổi nghề ¦ Ganti pekerjaan
+Métier inconnu pour l’un des deux ¦ Không rõ nghề của một trong hai người ¦ Pekerjaan salah satu dari keduanya tidak diketahui
+📊 La transmission du métier ¦ 📊 Truyền nghề ¦ 📊 Pewarisan pekerjaan
+Un enfant « reprend » le métier quand au moins un de ses métiers est aussi celui du parent (mêmes mots du dictionnaire des métiers anciens : « laboureur » et « laboureur à bras » comptent pareil). ¦ Một người con “nối” nghề khi ít nhất một nghề của người đó cũng là nghề của cha hoặc mẹ (cùng từ trong từ điển nghề xưa: “laboureur” và “laboureur à bras” được tính như nhau). ¦ Seorang anak “meneruskan” pekerjaan jika paling sedikit satu pekerjaannya juga pekerjaan orang tuanya (kata yang sama dalam kamus pekerjaan lama: “laboureur” dan “laboureur à bras” dihitung sama).
+Pas encore de quoi compter : il faut le métier d’un parent et celui de son enfant du même sexe. ¦ Chưa có gì để đếm: cần nghề của cha hoặc mẹ và nghề của người con cùng giới tính. ¦ Belum ada yang bisa dihitung: perlu pekerjaan orang tua dan pekerjaan anaknya yang berjenis kelamin sama.
+Arrivée au bagne ¦ Đến trại khổ sai ¦ Tiba di koloni hukuman
+Autre événement ¦ Sự kiện khác ¦ Peristiwa lain
+Décoration ¦ Huân chương ¦ Tanda jasa
+Décès en déportation ¦ Mất khi bị lưu đày ¦ Meninggal dalam deportasi
+Déportation ¦ Lưu đày ¦ Deportasi
+Fusillé ¦ Bị xử bắn ¦ Dieksekusi tembak
+Libération ou décès au bagne ¦ Được thả hoặc mất ở trại khổ sai ¦ Dibebaskan atau meninggal di koloni hukuman
+Lieu de résidence ¦ Nơi cư trú ¦ Tempat tinggal
+Obsèques ¦ Tang lễ ¦ Pemakaman
+Séparation ¦ Ly thân ¦ Pisah
+{name} : {n} — voir les personnes ¦ {name}: {n} — xem những người này ¦ {name}: {n} — lihat orang-orangnya
+Personne de ta base n’est né ou baptisé un {date}. ¦ Không ai trong dữ liệu của bạn sinh hoặc được rửa tội vào ngày {date}. ¦ Tidak ada orang di basis datamu yang lahir atau dibaptis pada {date}.
+{n} coïncidences dans l’arbre ¦ {n} sự trùng hợp trong cây ¦ {n} kebetulan di pohon
+Aucune bougie allumée cette semaine. ¦ Tuần này không có ngọn nến nào được thắp. ¦ Tidak ada lilin yang dinyalakan minggu ini.
+Aucune lettre scellée. ¦ Không có lá thư niêm phong nào. ¦ Tidak ada surat bersegel.
+Le détail ¦ Chi tiết ¦ Rinciannya
+Prochain à voir : ¦ Cần xem tiếp: ¦ Berikutnya untuk dilihat:
+L’ambiance ¦ Không khí ¦ Suasana
+La veillée au coin du feu (vers 1880) ¦ Buổi tối bên bếp lửa (khoảng 1880) ¦ Malam di dekat perapian (sekitar 1880)
+Le village un dimanche matin ¦ Ngôi làng một sáng Chủ nhật ¦ Desa pada Minggu pagi
+L’atelier du forgeron ¦ Xưởng thợ rèn ¦ Bengkel pandai besi
+La gare (vers 1900) ¦ Nhà ga (khoảng 1900) ¦ Stasiun kereta (sekitar 1900)
+Le moulin au bord de l’eau ¦ Cối xay bên bờ nước ¦ Kincir di tepi air
+La nuit d’orage ¦ Đêm giông bão ¦ Malam badai
+Le port ¦ Bến cảng ¦ Pelabuhan
+La ferme au petit matin ¦ Trang trại lúc sáng sớm ¦ Pertanian di pagi buta
+Une nuit d’été à la campagne ¦ Một đêm hè ở nông thôn ¦ Malam musim panas di pedesaan
+Le lavoir ¦ Chỗ giặt chung ¦ Tempat mencuci umum
+Le jour de marché ¦ Ngày chợ phiên ¦ Hari pasar
+Le café du village ¦ Quán cà phê trong làng ¦ Kedai kopi desa
+Le bal musette ¦ Buổi khiêu vũ đàn accordion ¦ Pesta dansa akordeon
+La messe à l’église ¦ Thánh lễ ở nhà thờ ¦ Misa di gereja
+L’atelier de couture ¦ Xưởng may ¦ Bengkel jahit
+La filature et le tissage ¦ Kéo sợi và dệt vải ¦ Pemintalan dan penenunan
+La veillée des fileuses ¦ Buổi tối của những người kéo sợi ¦ Malam para pemintal
+L’atelier du menuisier ¦ Xưởng thợ mộc ¦ Bengkel tukang kayu
+La classe (vers 1900) ¦ Lớp học (khoảng 1900) ¦ Ruang kelas (sekitar 1900)
+L’étude du notaire ¦ Văn phòng công chứng ¦ Kantor notaris
+Les moissons ¦ Mùa gặt ¦ Panen
+Le rucher ¦ Trại nuôi ong ¦ Peternakan lebah
+La route en diligence ¦ Đường xe ngựa trạm ¦ Jalan kereta pos
+Sons fabriqués par l’ordinateur, libres de droits. ¦ Âm thanh do máy tính tạo ra, không có bản quyền. ¦ Suara buatan komputer, bebas royalti.
+Montrer les cartes postales anciennes à l’endroit qu’elles montrent (avec la direction de la vue) ¦ Hiện các bưu thiếp cũ tại nơi chúng chụp (kèm hướng nhìn) ¦ Tampilkan kartu pos lama di tempat yang ditunjukkannya (dengan arah pandang)
+＋ Nouvelle couche ¦ ＋ Lớp mới ¦ ＋ Lapisan baru
+Départements ¦ Tỉnh ¦ Provinsi
+Grandes régions ¦ Vùng lớn ¦ Region besar
+Grandes régions (NUTS 1) ¦ Vùng lớn (NUTS 1) ¦ Region besar (NUTS 1)
+Régions (NUTS 2) ¦ Vùng (NUTS 2) ¦ Region (NUTS 2)
+Le monde entier ¦ Toàn thế giới ¦ Seluruh dunia
+France et voisins ¦ Pháp và các nước láng giềng ¦ Prancis dan negara tetangga
+France entière ¦ Toàn nước Pháp ¦ Seluruh Prancis
+Ajoute des flux : départ, arrivée, combien. ¦ Hãy thêm các dòng chảy: nơi đi, nơi đến, bao nhiêu. ¦ Tambahkan aliran: asal, tujuan, berapa banyak.
+📍 Zoomer sur ¦ 📍 Phóng to vào ¦ 📍 Perbesar ke
+✋ Mon cadrage (souris ou cadre tracé) ¦ ✋ Khung của tôi (chuột hoặc khung vẽ) ¦ ✋ Bingkaiku (tetikus atau kotak yang digambar)
+Mon cadrage : ouest, sud, est, nord (degrés) ¦ Khung của tôi: tây, nam, đông, bắc (độ) ¦ Bingkaiku: barat, selatan, timur, utara (derajat)
+Dégradé continu ¦ Dải màu liên tục ¦ Gradasi berkesinambungan
+Par classes (tranches) ¦ Theo lớp (khoảng) ¦ Per kelas (rentang)
+Du jaune au rouge ¦ Từ vàng đến đỏ ¦ Dari kuning ke merah
+Du bleu au rouge (écarts) ¦ Từ xanh dương đến đỏ (chênh lệch) ¦ Dari biru ke merah (selisih)
+Couleur des petits chiffres ¦ Màu cho số nhỏ ¦ Warna angka kecil
+Couleur des grands chiffres ¦ Màu cho số lớn ¦ Warna angka besar
+Découpage des classes ¦ Cách chia lớp ¦ Pembagian kelas
+Couleur des zones sans chiffre ¦ Màu các vùng không có số liệu ¦ Warna area tanpa angka
+Couleur des limites ¦ Màu đường ranh giới ¦ Warna batas
+Automatiques (là où il y a la place) ¦ Tự động (ở chỗ còn trống) ¦ Otomatis (di tempat yang cukup)
+Noms des zones ¦ Tên các vùng ¦ Nama area
+Noms et chiffres ¦ Tên và số liệu ¦ Nama dan angka
+Taille des étiquettes ¦ Cỡ nhãn ¦ Ukuran label
+Unité (ex. : naissances, %) ¦ Đơn vị (vd.: ca sinh, %) ¦ Satuan (mis.: kelahiran, %)
+Courbure des flèches ¦ Độ cong của mũi tên ¦ Kelengkungan panah
+Opacité des flèches ¦ Độ mờ của mũi tên ¦ Opasitas panah
+Couleur des flèches ¦ Màu mũi tên ¦ Warna panah
+Taille des ronds ¦ Cỡ vòng tròn ¦ Ukuran lingkaran
+Couleur du tour des ronds ¦ Màu viền vòng tròn ¦ Warna tepi lingkaran
+Tous (sans se chevaucher) ¦ Tất cả (không chồng lên nhau) ¦ Semua (tanpa tumpang tindih)
+Les 12 plus importants ¦ 12 mục lớn nhất ¦ 12 yang terbesar
+Taille des noms ¦ Cỡ tên ¦ Ukuran nama
+Couleur des terres ¦ Màu đất liền ¦ Warna daratan
+Unité (ex. : personnes) ¦ Đơn vị (vd.: người) ¦ Satuan (mis.: orang)
+Signaler les lieux sans position ¦ Báo các địa điểm chưa có vị trí ¦ Tandai tempat tanpa posisi
+Couleur des ronds ¦ Màu vòng tròn ¦ Warna lingkaran
+Opacité des ronds ¦ Độ mờ của vòng tròn ¦ Opasitas lingkaran
+Les 15 plus gros (sans se chevaucher) ¦ 15 mục lớn nhất (không chồng lên nhau) ¦ 15 yang terbesar (tanpa tumpang tindih)
+Unité (ex. : naissances) ¦ Đơn vị (vd.: ca sinh) ¦ Satuan (mis.: kelahiran)
+Où sont nés mes ancêtres ¦ Tổ tiên của tôi sinh ở đâu ¦ Di mana leluhurku lahir
+Baptêmes seuls ¦ Chỉ rửa tội ¦ Hanya baptis
+Sépultures seules ¦ Chỉ an táng ¦ Hanya pemakaman
+Recensements (personnes recensées) ¦ Điều tra dân số (người được ghi nhận) ¦ Sensus (orang yang tercatat)
+Métiers (lieux où on les exerçait) ¦ Nghề nghiệp (nơi hành nghề) ¦ Pekerjaan (tempat menjalankannya)
+Départs (nés ici, morts ailleurs) ¦ Rời đi (sinh ở đây, mất ở nơi khác) ¦ Kepergian (lahir di sini, meninggal di tempat lain)
+Arrivées (nés ailleurs, morts ici) ¦ Đến (sinh ở nơi khác, mất ở đây) ¦ Kedatangan (lahir di tempat lain, meninggal di sini)
+Familles (patronymes différents) ¦ Gia đình (các họ khác nhau) ¦ Keluarga (nama keluarga berbeda)
+Une sorte d’événement ¦ Một loại sự kiện ¦ Satu jenis peristiwa
+▭ Tracer un cadre ¦ ▭ Vẽ một khung ¦ ▭ Gambar kotak
+Chargement des sortes d’événements… ¦ Đang tải các loại sự kiện… ¦ Memuat jenis peristiwa…
+Quelle sorte d’événement ¦ Loại sự kiện nào ¦ Jenis peristiwa apa
+Seulement mes ancêtres (lignée Sosa) ¦ Chỉ tổ tiên của tôi (dòng Sosa) ¦ Hanya leluhurku (garis Sosa)
+Jusqu’à l’année ¦ Đến năm ¦ Sampai tahun
+Départ ¦ Nơi đi ¦ Asal
+Arrivée ¦ Nơi đến ¦ Tujuan
+📍 Les lieux du tableau ¦ 📍 Các địa điểm trong bảng ¦ 📍 Tempat-tempat dalam tabel
+🔎 Retrouver les lieux sans position ¦ 🔎 Tìm lại các địa điểm chưa có vị trí ¦ 🔎 Temukan tempat tanpa posisi
+Choisis d’abord une sorte d’événement. ¦ Hãy chọn một loại sự kiện trước. ¦ Pilih jenis peristiwa dulu.
+Choisis une sorte d’événement. ¦ Hãy chọn một loại sự kiện. ¦ Pilih jenis peristiwa.
+Aucun lieu retrouvé : choisis-les un par un. ¦ Không tìm thấy địa điểm nào: hãy chọn từng cái một. ¦ Tidak ada tempat yang ditemukan: pilih satu per satu.
+Colorer les villes elles-mêmes ¦ Tô màu chính các thành phố ¦ Warnai kota-kotanya sendiri
+Zones proposées ¦ Vùng gợi ý ¦ Area yang disarankan
+Tape un nom ou un code… ¦ Gõ tên hoặc mã… ¦ Ketik nama atau kode…
+Note (dans la bulle) ¦ Ghi chú (trong bong bóng) ¦ Catatan (di gelembung)
+Les flux (départ → arrivée) ¦ Các dòng chảy (nơi đi → nơi đến) ¦ Aliran (asal → tujuan)
+Départ (lieu) ¦ Nơi đi (địa điểm) ¦ Asal (tempat)
+Arrivée (lieu) ¦ Nơi đến (địa điểm) ¦ Tujuan (tempat)
+Hauteur au plus ¦ Chiều cao tối đa ¦ Tinggi maksimum
+Clic : ouvrir la fiche ¦ Bấm: mở hồ sơ ¦ Klik: buka profil
+Oncle ou tante ¦ Chú bác hoặc cô dì ¦ Paman atau bibi
+Père ou mère ¦ Cha hoặc mẹ ¦ Ayah atau ibu
+Autre lien (ou inconnu) ¦ Quan hệ khác (hoặc không rõ) ¦ Hubungan lain (atau tidak diketahui)
+Autre prénom ¦ Tên khác ¦ Nama depan lain
+Trait plein : même premier prénom ¦ Nét liền: cùng tên đầu tiên ¦ Garis penuh: nama depan pertama sama
+Guerre et violence ¦ Chiến tranh và bạo lực ¦ Perang dan kekerasan
+Poumons et respiration ¦ Phổi và hô hấp ¦ Paru-paru dan pernapasan
+Cœur et vaisseaux ¦ Tim và mạch máu ¦ Jantung dan pembuluh darah
+Cancers et tumeurs ¦ Ung thư và khối u ¦ Kanker dan tumor
+Ventre et digestion ¦ Bụng và tiêu hoá ¦ Perut dan pencernaan
+Nerfs et cerveau ¦ Thần kinh và não ¦ Saraf dan otak
+Autres et inconnues ¦ Khác và không rõ ¦ Lainnya dan tidak diketahui
+Où vivait la famille ¦ Gia đình đã sống ở đâu ¦ Di mana keluarga tinggal
+Ancêtres ¦ Tổ tiên ¦ Leluhur
+De quoi sont morts mes ancêtres ¦ Tổ tiên của tôi mất vì gì ¦ Leluhurku meninggal karena apa
+Tous les lieux ont une position. ¦ Tất cả địa điểm đều có vị trí. ¦ Semua tempat sudah punya posisi.
+Résidences et recensements ¦ Nơi cư trú và điều tra dân số ¦ Tempat tinggal dan sensus
+Prendre ces événements ¦ Lấy các sự kiện này ¦ Ambil peristiwa ini
+📖 La vie d’une personne ¦ 📖 Cuộc đời một người ¦ 📖 Kehidupan seseorang
+Prendre sa vie ¦ Lấy cuộc đời người này ¦ Ambil kehidupannya
+🧱 Une descendance ¦ 🧱 Một dòng con cháu ¦ 🧱 Satu garis keturunan
+Prendre la descendance ¦ Lấy dòng con cháu ¦ Ambil keturunannya
+Ces personnes ¦ Những người này ¦ Orang-orang ini
+Toute la vie ¦ Cả cuộc đời ¦ Seluruh hidup
+Voir toute la vie ¦ Xem cả cuộc đời ¦ Lihat seluruh hidup
+Lecture : les étapes défilent ¦ Phát: các bước lần lượt hiện ra ¦ Putar: langkah-langkah berjalan
+⤢ Toute la vie ¦ ⤢ Cả cuộc đời ¦ ⤢ Seluruh hidup
+Les événements (un point par ligne) ¦ Các sự kiện (mỗi dòng một điểm) ¦ Peristiwa (satu titik per baris)
+Date ou année ¦ Ngày hoặc năm ¦ Tanggal atau tahun
+Couleur des points ¦ Màu điểm ¦ Warna titik
+Selon la sorte d’événement ¦ Theo loại sự kiện ¦ Menurut jenis peristiwa
+Taille des points ¦ Cỡ điểm ¦ Ukuran titik
+Opacité des points ¦ Độ mờ của điểm ¦ Opasitas titik
+Les 10 plus remplis ¦ 10 ô đầy nhất ¦ 10 yang paling penuh
+Opacité des alvéoles ¦ Độ mờ của các ô ¦ Opasitas sel
+Traits blancs entre les alvéoles ¦ Nét trắng giữa các ô ¦ Garis putih antarsel
+Des ronds (Dorling) ¦ Vòng tròn (Dorling) ¦ Lingkaran (Dorling)
+Des carrés (Demers) ¦ Hình vuông (Demers) ¦ Persegi (Demers)
+Couleur des formes ¦ Màu các hình ¦ Warna bentuk
+Nom et chiffre (là où il y a la place) ¦ Tên và số liệu (ở chỗ còn trống) ¦ Nama dan angka (di tempat yang cukup)
+Légende des tailles ¦ Chú giải kích thước ¦ Legenda ukuran
+Unité (ex. : ancêtres) ¦ Đơn vị (vd.: tổ tiên) ¦ Satuan (mis.: leluhur)
+Signaler les zones pas trouvées ¦ Báo các vùng không tìm thấy ¦ Tandai area yang tidak ditemukan
+Les étapes, dans l’ordre ¦ Các bước, theo thứ tự ¦ Langkah-langkah, berurutan
+Détail (dans la bulle) ¦ Chi tiết (trong bong bóng) ¦ Rincian (di gelembung)
+La carte ¦ Bản đồ ¦ Peta
+Montre toute la vie (fixe) ¦ Hiện cả cuộc đời (cố định) ¦ Menampilkan seluruh hidup (tetap)
+Couleur du chemin ¦ Màu đường đi ¦ Warna jalur
+Oui (sans se chevaucher) ¦ Có (không chồng lên nhau) ¦ Ya (tanpa tumpang tindih)
+Les personnes (parent → enfant) ¦ Những người (cha mẹ → con) ¦ Orang-orang (orang tua → anak)
+Parent (vide = l’ancêtre) ¦ Cha mẹ (trống = tổ tiên) ¦ Orang tua (kosong = leluhurnya)
+Le chiffre (ou la somme) ¦ Số liệu (hoặc tổng) ¦ Angka (atau jumlahnya)
+Une par génération ¦ Mỗi thế hệ một ¦ Satu per generasi
+Hauteur d’une génération ¦ Chiều cao một thế hệ ¦ Tinggi satu generasi
+Dans les cases ¦ Trong các ô ¦ Di dalam kotak
+Ordre des enfants ¦ Thứ tự các con ¦ Urutan anak
+Les plus grandes familles d’abord ¦ Gia đình lớn nhất trước ¦ Keluarga terbesar dulu
+Traits blancs entre les cases ¦ Nét trắng giữa các ô ¦ Garis putih antarkotak
+Traits blancs entre les parts ¦ Nét trắng giữa các phần ¦ Garis putih antarbagian
+Seulement les prénoms transmis ¦ Chỉ các tên được truyền lại ¦ Hanya nama depan yang diwariskan
+Aussi les filleuls au prénom différent ¦ Cả con đỡ đầu có tên khác ¦ Juga anak baptis dengan nama depan berbeda
+Hauteur d’une ligne ¦ Chiều cao một dòng ¦ Tinggi satu baris
+Noms sous les ronds ¦ Tên dưới vòng tròn ¦ Nama di bawah lingkaran
+Quand il y a la place ¦ Khi còn chỗ ¦ Jika ada tempat
+Les noms ¦ Các tên ¦ Nama-nama
+Qui a connu qui dans la famille ¦ Ai đã biết ai trong gia đình ¦ Siapa kenal siapa dalam keluarga
+Autres métiers ¦ Nghề khác ¦ Pekerjaan lain
+Métier différent ¦ Nghề khác nhau ¦ Pekerjaan berbeda
+Même lieu ¦ Cùng địa điểm ¦ Tempat yang sama
+Tout près ¦ Rất gần ¦ Sangat dekat
+Ancêtres possibles (2, 4, 8…) ¦ Tổ tiên có thể có (2, 4, 8…) ¦ Leluhur yang mungkin (2, 4, 8…)
+Places trouvées ¦ Vị trí đã tìm thấy ¦ Posisi yang ditemukan
+Carême et Avent ¦ Mùa Chay và Mùa Vọng ¦ Prapaskah dan Adven
+Si tout était égal ¦ Nếu mọi thứ đều như nhau ¦ Jika semuanya sama rata
+Garçon ¦ Con trai ¦ Anak laki-laki
+Autres lieux ¦ Địa điểm khác ¦ Tempat lain
+Prendre dans ma base ¦ Lấy từ dữ liệu của tôi ¦ Ambil dari basis dataku
+Personnes comptées ¦ Số người được đếm ¦ Orang yang dihitung
+🤝 Les vies autour d’une personne ¦ 🤝 Những cuộc đời quanh một người ¦ 🤝 Kehidupan di sekitar seseorang
+Une courbe par ¦ Mỗi đường cong cho ¦ Satu kurva per
+Une seule courbe ¦ Một đường cong duy nhất ¦ Satu kurva saja
+Lignées ¦ Dòng dõi ¦ Garis keturunan
+Père → fils (lignées d’hommes) ¦ Cha → con trai (dòng nam) ¦ Ayah → anak laki-laki (garis laki-laki)
+Rayon des mariages ¦ Bán kính kết hôn ¦ Radius pernikahan
+🧮 L’ascendance d’une personne ¦ 🧮 Tổ tiên của một người ¦ 🧮 Leluhur seseorang
+De (année) ¦ Từ (năm) ¦ Dari (tahun)
+Quelles mères ¦ Những người mẹ nào ¦ Ibu yang mana
+Une seule mère ¦ Một người mẹ duy nhất ¦ Satu ibu saja
+Espacement des naissances ¦ Khoảng cách giữa các lần sinh ¦ Jarak kelahiran
+Quelles personnes ¦ Những người nào ¦ Orang yang mana
+Générations d’ancêtres ¦ Các thế hệ tổ tiên ¦ Generasi leluhur
+Début (année, vide = auto) ¦ Bắt đầu (năm, trống = tự động) ¦ Awal (tahun, kosong = otomatis)
+Fin (année, vide = auto) ¦ Kết thúc (năm, trống = tự động) ¦ Akhir (tahun, kosong = otomatis)
+Les personnes (une ligne chacune) ¦ Những người (mỗi người một dòng) ¦ Orang-orang (masing-masing satu baris)
+Ordre des groupes ¦ Thứ tự các nhóm ¦ Urutan kelompok
+Les plus nombreux d’abord ¦ Đông nhất trước ¦ Yang terbanyak dulu
+Couleur des bandes ¦ Màu các dải ¦ Warna pita
+Cacher les métiers inconnus ¦ Ẩn các nghề không rõ ¦ Sembunyikan pekerjaan yang tidak diketahui
+Les couples ¦ Các cặp vợ chồng ¦ Pasangan-pasangan
+Année du mariage ¦ Năm kết hôn ¦ Tahun pernikahan
+Par siècle du mariage ¦ Theo thế kỷ kết hôn ¦ Per abad pernikahan
+Selon la distance ¦ Theo khoảng cách ¦ Menurut jarak
+Où allait-on chercher son conjoint ? ¦ Người ta đi tìm vợ hoặc chồng ở đâu? ¦ Ke mana orang mencari pasangan?
+Montrer les ancêtres possibles ¦ Hiện các tổ tiên có thể có ¦ Tampilkan leluhur yang mungkin
+Mon implexe, génération par génération ¦ Trùng lặp tổ tiên của tôi, từng thế hệ ¦ Implex-ku, generasi demi generasi
+En % du total ¦ Theo % tổng số ¦ Dalam % dari total
+Les années ¦ Các năm ¦ Tahun-tahun
+Ordre des mères ¦ Thứ tự các người mẹ ¦ Urutan ibu
+Le plus d’enfants d’abord ¦ Nhiều con nhất trước ¦ Anak terbanyak dulu
+Chargement des personnes… ¦ Đang tải danh sách người… ¦ Memuat orang…
+Aucune fiche trouvée. ¦ Không tìm thấy hồ sơ nào. ¦ Tidak ada profil yang ditemukan.
+Frères et sœurs ¦ Anh chị em ¦ Saudara laki-laki dan perempuan
+Plier cette branche ¦ Thu gọn nhánh này ¦ Lipat cabang ini

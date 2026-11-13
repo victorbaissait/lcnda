@@ -5,6 +5,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ART = window.LCNDA_ART; if (!ART?.define) return;
     const U = ART.util, esc = U.esc;
     const BOOK_ROLES = [['auteur', 'De lui / d’elle (auteur)'], ['sur', 'Sur lui / sur elle'], ['illustrateur', 'Illustrations'], ['traducteur', 'Traduction'], ['prefacier', 'Préface'], ['contribution', 'Contribution'], ['catalogue', 'Catalogue d’exposition']];

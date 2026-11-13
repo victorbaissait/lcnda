@@ -12,6 +12,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s).replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? String(v[k]) : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI;
@@ -39,7 +40,7 @@
     const VALUE_L = {age_death: 'l’âge au décès', age_marriage: 'l’âge au mariage', kids: 'le nombre d’enfants', age_first_child: 'l’âge au premier enfant'};
     const POP = [['', 'Toute ma base'], ['anc', 'Mes ancêtres'], ['desc', 'Mes descendants'], ['pat', 'Branche paternelle (côté père)'], ['mat', 'Branche maternelle (côté mère)'],
         ['label', 'Une étiquette'], ['list', 'Une de mes listes'], ['search', 'Une recherche dans les noms'], ['people', 'Les personnes que je choisis']];
-    const SERIES = [['', 'Une seule série'], ['sex', 'Une série par sexe'], ['century', 'Une série par siècle']];
+    const SERIES = [['', 'Une seule série'], ['sex', 'Une série par sexe'], ['century', 'Une série par siècle'], ['branch', 'Une série par branche (côté père / mère)'], ['generation', 'Une série par génération'], ['county', 'Une série par département'], ['country', 'Une série par pays']];
     const SORT = [['', 'Automatique'], ['big', 'Du plus grand au plus petit'], ['small', 'Du plus petit au plus grand'], ['az', 'A → Z'], ['za', 'Z → A'], ['natural', 'Dans l’ordre (temps, âges…)']];
     const SORT_SUM = {big: 'du plus grand au plus petit', small: 'du plus petit au plus grand', az: 'de A à Z', za: 'de Z à A', natural: 'dans l’ordre'};
     const UNIT = [['count', 'Nombre'], ['pct', 'Part en %'], ['avg', 'Moyenne'], ['median', 'Médiane']];
@@ -138,9 +139,9 @@
     function periodText(q, born = false) {
         const f = fromYear(q.from), t = toYear(q.to);
         if (f === null && t === null) return '';
-        const w = born ? 'nées ' : '';
-        if (f !== null && t !== null) return f === t ? `${w}en ${f}` : `${w}entre ${f} et ${t}`;
-        return f !== null ? `${w}depuis ${f}` : `${w}jusqu’en ${t}`;
+        const a = String(f), b = String(t);
+        if (f !== null && t !== null) return f === t ? (born ? i18n('nées en {a}', {a}) : i18n('en {a}', {a, ctx: 'periode'})) : (born ? i18n('nées entre {a} et {b}', {a, b}) : i18n('entre {a} et {b}', {a, b, ctx: 'periode'}));
+        return f !== null ? (born ? i18n('nées depuis {a}', {a}) : i18n('depuis {a}', {a, ctx: 'periode'})) : (born ? i18n('nées jusqu’en {b}', {b}) : i18n('jusqu’en {b}', {b, ctx: 'periode'}));
     }
     /** les paramètres communs (groupe, période) pour toutes les données de diagrammes */
     function dgParams(q, {period = true} = {}) {
@@ -175,51 +176,55 @@
     const RULE_DEF = {gender: 'female', living: 'deceased', of_person: 'ancestors'};
     const ruleRows = rules => ruleMeta && ext.listRuleRowHtml ? rules.map((r, i) => ext.listRuleRowHtml(r, i, 'persons', ruleMeta)).join('') : '';
     const rulesBlock = q => `<div class="h-dgo-row h-dgo-rules" data-dgo-row="rules">${lab('rules', 'Seulement les personnes…')}<div class="h-dgo-rulebox">
-        <label class="h-dgo-match" ${q.rules.length > 1 ? '' : 'hidden'}>qui ont <select data-dgo="match">${opt([['all', 'tous ces critères (ET)'], ['any', 'au moins un de ces critères (OU)']], q.match)}</select></label>
+        <label class="h-dgo-match" ${q.rules.length > 1 ? '' : 'hidden'}>${i18n('qui ont', {ctx: 'critere'})} <select data-dgo="match">${opt([['all', 'tous ces critères (ET)'], ['any', 'au moins un de ces critères (OU)']], q.match)}</select></label>
         <div class="h-dgo-rulelist" data-dgo-rules data-rules="${esc(JSON.stringify(q.rules))}">${ruleRows(q.rules)}</div>
         <label class="h-dgo-addrule">＋ Critère <select data-dgo-addrule><option value="">choisir… (métier, enfants, lieu, période…)</option>${ext.ruleOptionsHtml ? ext.ruleOptionsHtml('pe') : ''}</select></label></div></div>`;
     /** un critère en clair : « métier « bûcheron » », « ayant 3 enfants », « nés à « Pernay » » */
     function ruleText(r) {
-        const not = r.not ? 'sauf ' : '', v = r.value ? `« ${r.value} »` : '';
+        const v = r.value ? String(r.value) : '';
         const n = x => (x === null || x === undefined || x === '' ? null : Number(x));
         const a = n(r.from), b = n(r.to);
-        const range = (u = '') => a !== null && b !== null ? (a === b ? `${a}${u}` : `de ${a} à ${b}${u}`) : a !== null ? `au moins ${a}${u}` : b !== null ? `au plus ${b}${u}` : '';
-        const years = () => a !== null && b !== null ? (a === b ? `en ${a}` : `entre ${a} et ${b}`) : a !== null ? `depuis ${a}` : b !== null ? `jusqu’en ${b}` : '';
-        const many = (x, w) => { const t = range(); const m = b ?? a; return t ? `ayant ${t} ${w}${m !== null && m > 1 ? 's' : ''}` : ''; };
-        const types = () => (ruleMeta?.event_types || []).filter(t => (r.values || []).map(Number).includes(Number(t.id))).map(t => String(t.label).toLowerCase()).join(' ou ');
+        const sa = String(a), sb = String(b);
+        const range = (u = '') => a !== null && b !== null ? (a === b ? (u ? i18n('{a} ans', {a: sa, ctx: 'critere'}) : sa) : (u ? i18n('de {a} à {b} ans', {a: sa, b: sb, ctx: 'critere'}) : i18n('de {a} à {b}', {a: sa, b: sb, ctx: 'critere'}))) : a !== null ? (u ? i18n('au moins {a} ans', {a: sa, ctx: 'critere'}) : i18n('au moins {a}', {a: sa, ctx: 'critere'})) : b !== null ? (u ? i18n('au plus {b} ans', {b: sb, ctx: 'critere'}) : i18n('au plus {b}', {b: sb, ctx: 'critere'})) : '';
+        const YRS = {nés: ['nés en {a}', 'nés entre {a} et {b}', 'nés depuis {a}', 'nés jusqu’en {b}'], morts: ['morts en {a}', 'morts entre {a} et {b}', 'morts depuis {a}', 'morts jusqu’en {b}']};
+        const years = w => { const k = YRS[w]; return a !== null && b !== null ? (a === b ? i18n(k[0], {a: sa}) : i18n(k[1], {a: sa, b: sb})) : a !== null ? i18n(k[2], {a: sa}) : b !== null ? i18n(k[3], {b: sb}) : ''; };
+        const MANY = {enfant: ['ayant {t} enfant', 'ayant {t} enfants'], union: ['ayant {t} union', 'ayant {t} unions'], source: ['ayant {t} source', 'ayant {t} sources']};
+        const many = (x, w) => { const t = range(); const m = b ?? a; return t ? i18n(MANY[w][m !== null && m > 1 ? 1 : 0], {t}) : ''; };
+        const OR = ` ${i18n('ou', {ctx: 'liste'})} `;
+        const types = () => (ruleMeta?.event_types || []).filter(t => (r.values || []).map(Number).includes(Number(t.id))).map(t => String(t.label).toLowerCase()).join(OR);
         let t = '';
         switch (r.field) {
-            case 'occupation': t = v && `métier ${v}`; break;
-            case 'last_name': t = v && `nom ${v}`; break;
-            case 'first_name': t = v && `prénom ${v}`; break;
+            case 'occupation': t = v && i18n('métier « {v} »', {v}); break;
+            case 'last_name': t = v && i18n('nom « {v} »', {v}); break;
+            case 'first_name': t = v && i18n('prénom « {v} »', {v}); break;
             case 'children_count': t = many(null, 'enfant'); break;
             case 'unions_count': t = many(null, 'union'); break;
             case 'source_count': t = many(null, 'source'); break;
-            case 'place': t = v && `nés à ${v}`; break;
-            case 'death_place': t = v && `morts ou inhumés à ${v}`; break;
-            case 'any_place': t = v && `avec un événement à ${v}`; break;
-            case 'county': t = v && `avec un événement dans ${v}`; break;
-            case 'near_place': t = v && `à moins de ${r.km || 20} km de ${v}`; break;
-            case 'gender': t = {female: 'femmes', male: 'hommes', unknown: 'sexe inconnu'}[r.value] || ''; break;
-            case 'living': t = {living: 'en vie', deceased: 'décédés', unknown: 'statut à vérifier'}[r.value] || ''; break;
-            case 'year': t = years() && `nés ${years()}`; break;
-            case 'death_year': t = years() && `morts ${years()}`; break;
-            case 'lifespan': t = range(' ans') && `ayant vécu ${range(' ans')}`; break;
-            case 'age_at': t = range(' ans') && `âgés ${range(' ans')}${types() ? ' à : ' + types() : ''}`; break;
-            case 'sosa': t = 'mes ancêtres (Sosa)'; break;
-            case 'sosa_generation': t = range() && `génération Sosa ${range()}`; break;
-            case 'no_source': t = 'sans source'; break;
-            case 'has_media': t = 'avec une photo ou un document'; break;
-            case 'no_parents': t = 'parents inconnus'; break;
-            case 'bookmarked': t = 'dans mes favoris'; break;
-            case 'death_cause': t = v && `cause de décès ${v}`; break;
-            case 'event_type': t = types() && `ayant eu : ${types()}`; break;
-            case 'label': t = (ruleMeta?.labels || []).filter(x => (r.values || []).map(Number).includes(Number(x.id))).map(x => x.name).join(' ou '); t = t && `étiquette « ${t} »`; break;
-            default: { const L = ext.listRules?.()?.[r.field]?.pe; t = L ? `${L.toLowerCase().replace(/\s*\(lieu contient\)/, '')}${v ? ' ' + v : range() ? ' ' + range() : ''}` : ''; }
+            case 'place': t = v && i18n('nés à « {v} »', {v}); break;
+            case 'death_place': t = v && i18n('morts ou inhumés à « {v} »', {v}); break;
+            case 'any_place': t = v && i18n('avec un événement à « {v} »', {v}); break;
+            case 'county': t = v && i18n('avec un événement dans « {v} »', {v}); break;
+            case 'near_place': t = v && i18n('à moins de {km} km de « {v} »', {km: String(r.km || 20), v}); break;
+            case 'gender': t = {female: i18n('femmes', {ctx: 'critere'}), male: i18n('hommes', {ctx: 'critere'}), unknown: i18n('sexe inconnu')}[r.value] || ''; break;
+            case 'living': t = {living: i18n('en vie', {ctx: 'critere'}), deceased: i18n('décédés', {ctx: 'critere'}), unknown: i18n('statut à vérifier')}[r.value] || ''; break;
+            case 'year': t = years('nés'); break;
+            case 'death_year': t = years('morts'); break;
+            case 'lifespan': t = range(' ans') && i18n('ayant vécu {r}', {r: range(' ans')}); break;
+            case 'age_at': t = range(' ans') && (types() ? i18n('âgés {r} à : {types}', {r: range(' ans'), types: types()}) : i18n('âgés {r}', {r: range(' ans')})); break;
+            case 'sosa': t = i18n('mes ancêtres (Sosa)'); break;
+            case 'sosa_generation': t = range() && i18n('génération Sosa {r}', {r: range()}); break;
+            case 'no_source': t = i18n('sans source', {ctx: 'critere'}); break;
+            case 'has_media': t = i18n('avec une photo ou un document'); break;
+            case 'no_parents': t = i18n('parents inconnus', {ctx: 'critere'}); break;
+            case 'bookmarked': t = i18n('dans mes favoris'); break;
+            case 'death_cause': t = v && i18n('cause de décès « {v} »', {v}); break;
+            case 'event_type': t = types() && i18n('ayant eu : {types}', {types: types()}); break;
+            case 'label': t = (ruleMeta?.labels || []).filter(x => (r.values || []).map(Number).includes(Number(x.id))).map(x => x.name).join(OR); t = t && i18n('étiquette « {v} »', {v: t}); break;
+            default: { const L = ext.listRules?.()?.[r.field]?.pe; t = L ? `${L.toLowerCase().replace(/\s*\(lieu contient\)/, '')}${v ? ' « ' + v + ' »' : range() ? ' ' + range() : ''}` : ''; }
         }
-        return t ? not + t : '';
+        return t ? (r.not ? i18n('sauf {x}', {x: t, ctx: 'critere'}) : t) : '';
     }
-    const rulesText = q => q.rules.map(ruleText).filter(Boolean).join(q.match === 'any' ? ' ou ' : ', ');
+    const rulesText = q => q.rules.map(ruleText).filter(Boolean).join(q.match === 'any' ? ` ${i18n('ou', {ctx: 'liste'})} ` : ', ');
 
     /** cfg : {fields: [...], kind, period: 'event' | 'birth', locked: true (les champs de « Compter » grisés), note} */
     function html(q0, cfg = {}) {
@@ -236,7 +241,7 @@
                 rows.push(`<label class="h-dgo-row" data-dgo-row="pop">${lab('pop', 'Groupe de personnes')}<select data-dgo="pop" ${dis('pop')}>${opt(POP, q.pop)}</select></label>`);
                 const rootish = ['anc', 'desc', 'pat', 'mat'].includes(q.pop);
                 rows.push(`<div class="h-dgo-row h-dgo-sub" data-dgo-row="root" ${rootish ? '' : 'hidden'}>${lab('root', 'Personne de départ')}${P?.pickerField ? P.pickerField({name: 'dgo_root', kind: 'person', value: q.root || startId() || null}) : ''}</div>`);
-                rows.push(`<label class="h-dgo-row h-dgo-sub" data-dgo-row="gens" ${rootish ? '' : 'hidden'}>${lab('gens', 'Jusqu’à (générations, 0 = toutes)')}<input type="range" data-dgo="gens" min="0" max="40" step="1" value="${q.gens}" data-unit="gén." ${dis('pop')}></label>`);
+                rows.push(`<label class="h-dgo-row h-dgo-sub" data-dgo-row="gens" ${rootish ? '' : 'hidden'}>${lab('gens', 'Jusqu’à (générations, 0 = toutes)')}<input type="range" data-dgo="gens" min="0" max="40" step="1" value="${q.gens}" data-unit="${i18n('gén.')}" ${dis('pop')}></label>`);
                 rows.push(`<div class="h-dgo-row h-dgo-sub" data-dgo-row="label" ${q.pop === 'label' ? '' : 'hidden'}>${lab('label', 'Étiquette')}${P?.pickerField ? P.pickerField({name: 'dgo_label', kind: 'label', value: q.label || null}) : ''}</div>`);
                 rows.push(`<div class="h-dgo-row h-dgo-sub" data-dgo-row="list" ${q.pop === 'list' ? '' : 'hidden'}>${lab('list', 'Liste')}${P?.pickerField ? P.pickerField({name: 'dgo_list', kind: 'mylist', value: q.list || null}) : ''}</div>`);
                 rows.push(`<label class="h-dgo-row h-dgo-sub" data-dgo-row="search" ${q.pop === 'search' ? '' : 'hidden'}>${lab('search', 'Nom ou prénom qui contient')}<input type="search" data-dgo="search" value="${esc(q.search)}" maxlength="80" placeholder="Chercher… (Martin, Jean)" ${dis('pop')}></label>`);
@@ -244,7 +249,7 @@
             }
             if (k === 'period') {
                 const born = cfg.period === 'birth', h = born ? HELP.period_birth : HELP.period;
-                rows.push(`<div class="h-dgo-row h-dgo-period" data-dgo-row="period">${lab('period', born ? 'Nées entre (période)' : 'Période', h)}<span class="h-dgo-two"><label>De<input data-ui-date="nocal" data-dgo="from" value="${esc(q.from)}" placeholder="1800, vers 1750…" ${dis('period')}></label><label>à<input data-ui-date="nocal" data-dgo="to" value="${esc(q.to)}" placeholder="1900, 1914…" ${dis('period')}></label></span></div>`);
+                rows.push(`<div class="h-dgo-row h-dgo-period" data-dgo-row="period">${lab('period', born ? 'Nées entre (période)' : 'Période', h)}<span class="h-dgo-two"><label>De<input data-ui-date="nocal" data-dgo="from" value="${esc(q.from)}" placeholder="1800, vers 1750…" ${dis('period')}></label><label>${i18n('à', {ctx: 'periode'})}<input data-ui-date="nocal" data-dgo="to" value="${esc(q.to)}" placeholder="1900, 1914…" ${dis('period')}></label></span></div>`);
             }
             if (k === 'by') rows.push(`<label class="h-dgo-row" data-dgo-row="by">${lab('by', 'Regrouper par')}<select data-dgo="by" ${dis('by')}>${opt(byOptions(q), q.by)}</select></label>`);
             if (k === 'series') rows.push(`<label class="h-dgo-row" data-dgo-row="series">${lab('series', 'Séries')}<select data-dgo="series" ${dis('series')}>${opt(SERIES.filter(([v]) => !(v === 'sex' && ['places', 'media', 'marriages', 'families'].includes(q.what))), q.series)}</select></label>`);
@@ -340,39 +345,39 @@
     /* ─── La phrase du réglage (« Personnes nées entre 1800 et 1900, mes ancêtres, par département, 10 premiers ») ─── */
     function popText(q) {
         const root = q.root && q.root !== startId() && q.rootName ? q.rootName : '';
-        const gens = q.gens ? ` (${q.gens} génération${q.gens > 1 ? 's' : ''})` : '';
+        const gens = q.gens ? ' ' + (q.gens > 1 ? i18n('({n} générations)', {n: q.gens}) : i18n('({n} génération)', {n: q.gens})) : '';
         switch (q.pop) {
-            case 'anc': return (root ? `les ancêtres de ${root}` : 'mes ancêtres') + gens;
-            case 'desc': return (root ? `les descendants de ${root}` : 'mes descendants') + gens;
-            case 'pat': return (root ? `la branche paternelle de ${root}` : 'ma branche paternelle') + gens;
-            case 'mat': return (root ? `la branche maternelle de ${root}` : 'ma branche maternelle') + gens;
-            case 'label': return q.labelName ? `l’étiquette « ${q.labelName} »` : 'une étiquette';
-            case 'list': return q.listName ? `la liste « ${q.listName} »` : 'une de mes listes';
-            case 'search': return q.search ? `les noms qui contiennent « ${q.search} »` : 'une recherche';
-            case 'people': { const n = q.idsCount || String(q.ids || '').split(',').filter(Boolean).length; return `${n} personne${n > 1 ? 's' : ''} choisie${n > 1 ? 's' : ''}`; }
-            default: return 'toute ma base';
+            case 'anc': return (root ? i18n('les ancêtres de {name}', {name: root}) : i18n('mes ancêtres', {ctx: 'critere'})) + gens;
+            case 'desc': return (root ? i18n('les descendants de {name}', {name: root}) : i18n('mes descendants', {ctx: 'critere'})) + gens;
+            case 'pat': return (root ? i18n('la branche paternelle de {name}', {name: root}) : i18n('ma branche paternelle')) + gens;
+            case 'mat': return (root ? i18n('la branche maternelle de {name}', {name: root}) : i18n('ma branche maternelle')) + gens;
+            case 'label': return q.labelName ? i18n('l’étiquette « {name} »', {name: q.labelName}) : i18n('une étiquette', {ctx: 'critere'});
+            case 'list': return q.listName ? i18n('la liste « {name} »', {name: q.listName}) : i18n('une de mes listes', {ctx: 'critere'});
+            case 'search': return q.search ? i18n('les noms qui contiennent « {q} »', {q: q.search}) : i18n('une recherche', {ctx: 'critere'});
+            case 'people': { const n = q.idsCount || String(q.ids || '').split(',').filter(Boolean).length; return n > 1 ? i18n('{n} personnes choisies', {n}) : i18n('{n} personne choisie', {n}); }
+            default: return i18n('toute ma base');
         }
     }
     function summary(q0, cfg = {}) {
         const q = norm(q0), F = new Set(cfg.fields || ORDER), parts = [];
         if (cfg.locked) {
-            parts.push(cfg.source || 'Un graphique de l’app');
+            parts.push(cfg.source ? i18n(cfg.source) : i18n('Un graphique de l’app'));
         } else if (F.has('what')) {
-            const p = periodText(q, q.what === 'persons'), w = WHAT_SUM[q.what];
-            const head = ['avg', 'median'].includes(q.unit) ? `${q.unit === 'avg' ? 'Moyenne' : 'Médiane'} de ${VALUE_L[q.value]} (${w.toLowerCase()}${p ? ' ' + p : ''})` : `${w}${p ? ' ' + p : ''}`;
-            parts.push(head + (q.distinct && ['baptisms', 'burials', 'events'].includes(q.what) ? ', chaque personne une fois' : ''));
-        } else if (cfg.source) parts.push(cfg.source);
+            const p = periodText(q, q.what === 'persons'), w = i18n(WHAT_SUM[q.what]), wl = window.LCNDA_I18N?.lang === 'de' ? w : w.toLowerCase();
+            const head = ['avg', 'median'].includes(q.unit) ? i18n(q.unit === 'avg' ? 'Moyenne de {value} ({what})' : 'Médiane de {value} ({what})', {value: i18n(VALUE_L[q.value]), what: `${wl}${p ? ' ' + p : ''}`}) : `${w}${p ? ' ' + p : ''}`;
+            parts.push(head + (q.distinct && ['baptisms', 'burials', 'events'].includes(q.what) ? ', ' + i18n('chaque personne une fois') : ''));
+        } else if (cfg.source) parts.push(i18n(cfg.source));
         const crit = F.has('rules') && !cfg.locked ? rulesText(q) : '';
         if (F.has('pop') && !cfg.locked && !(crit && !q.pop)) parts.push(popText(q));
         if (crit) parts.push(crit);
-        if (!F.has('what') && F.has('period') && !cfg.locked) { const p = periodText(q, cfg.period === 'birth'); if (p) parts.push(cfg.period === 'birth' ? `personnes ${p}` : p); }
-        if (F.has('by') && !cfg.locked && BY_SUM[q.by]) parts.push(BY_SUM[q.by]);
-        if (F.has('series') && !cfg.locked && q.series) parts.push(q.series === 'sex' ? 'une série par sexe' : 'une série par siècle');
-        if (F.has('sort') && q.sort) parts.push(SORT_SUM[q.sort]);
-        if (F.has('limit')) parts.push(q.limit ? `${q.limit} premier${q.limit > 1 ? 's' : ''}${q.others ? ' et « Autres »' : ''}` : 'toutes les valeurs');
-        if (F.has('empty') && q.empty) parts.push('« Inconnu » montré');
-        if (F.has('unit') && q.unit === 'pct') parts.push('en %');
-        if (F.has('live') && q.live) parts.push('tenu à jour');
+        if (!F.has('what') && F.has('period') && !cfg.locked) { const p = periodText(q, cfg.period === 'birth'); if (p) parts.push(cfg.period === 'birth' ? i18n('personnes {p}', {p}) : p); }
+        if (F.has('by') && !cfg.locked && BY_SUM[q.by]) parts.push(i18n(BY_SUM[q.by]));
+        if (F.has('series') && !cfg.locked && q.series) parts.push(q.series === 'sex' ? i18n('une série par sexe') : i18n('une série par siècle'));
+        if (F.has('sort') && q.sort) parts.push(i18n(SORT_SUM[q.sort]));
+        if (F.has('limit')) parts.push(q.limit ? i18n(q.limit > 1 ? (q.others ? '{n} premiers et « Autres »' : '{n} premiers') : (q.others ? '{n} premier et « Autres »' : '{n} premier'), {n: q.limit}) : i18n('toutes les valeurs'));
+        if (F.has('empty') && q.empty) parts.push(i18n('« Inconnu » montré'));
+        if (F.has('unit') && q.unit === 'pct') parts.push(i18n('en %', {ctx: 'unite'}));
+        if (F.has('live') && q.live) parts.push(i18n('tenu à jour'));
         const s = parts.filter(Boolean).join(', ');
         const found = Number.isFinite(cfg.found) ? ` — ${A()?.plural ? A().plural(cfg.found, 'personne trouvée', 'personnes trouvées') : cfg.found + ' personnes'}` : '';
         return s ? s.charAt(0).toUpperCase() + s.slice(1) + found + '.' : '';

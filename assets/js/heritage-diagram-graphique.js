@@ -8,6 +8,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s).replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? String(v[k]) : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
     const R = () => ext.diagramRender;
@@ -170,9 +171,9 @@
             const p = list[Number(sel.value)]; hint.hidden = true; if (sel.value === '' || !p) return;
             keys.forEach(k => { if (!(k in snap)) { const els = find(pane, k); if (els.length) snap[k] = els.length > 1 && els[0].type === 'checkbox' ? els.map(e => e.checked) : readVal(els[0], k); } }); // venus après (ensembles, tests ADN…)
             sel.disabled = true;
-            try { await applySet(pane, p[1], snap); } catch (err) { A().toast(err.message || 'Ce point de départ n’a pas pu être réglé.', 'error'); } finally { sel.disabled = false; }
+            try { await applySet(pane, p[1], snap); } catch (err) { A().toast(err.message || i18n('Ce point de départ n’a pas pu être réglé.'), 'error'); } finally { sel.disabled = false; }
             const go = pane.querySelector(GO);
-            if (go) { hint.textContent = `Réglé. Clique sur « ${go.textContent.trim()} » pour voir le dessin.`; hint.hidden = false; }
+            if (go) { hint.textContent = i18n('Réglé. Clique sur « {label} » pour voir le dessin.', {label: go.textContent.trim()}); hint.hidden = false; }
             onApply?.(p);
         });
         // une main sur un réglage du panneau : on repasse en « Sur mesure »
@@ -181,85 +182,85 @@
     }
 
     /* ═════════ 2. Des données de l'arbre pour les types qui n'en avaient pas (ou une seule) ═════════ */
-    const need = (cond, msg) => { if (!cond) throw new Error(msg); };
+    const need = (cond, msg) => { if (!cond) throw new Error(i18n(msg)); };
     const fan = async gens => { const r = await api('diagram_genea', {what: 'fan', root: startId(), gens: Math.max(3, gens)}); need(r.rows?.length, 'Pas d’ascendance : choisis une personne de départ (Personnes → sa fiche → « Personne de départ »).'); return r; };
     const genOf = sosa => Math.floor(Math.log2(sosa)) + 1;
     const numbers = (what, extra = {}) => api('diagram_numbers', {what, ...extra});
     const lifeRow = (p, role) => { const b = dateTxt(p.birth), alive = !p.death && p.living !== false && (yearOf(p.birth) || 0) > NOW - 105;
-        return b ? {name: p.name, roles: role, start: b, end: p.death ? dateTxt(p.death) : alive ? '' : b, note: !p.death && !alive ? 'décès inconnu' : ''} : null; };
+        return b ? {name: p.name, roles: role, start: b, end: p.death ? dateTxt(p.death) : alive ? '' : b, note: !p.death && !alive ? i18n('décès inconnu') : ''} : null; };
     const GEN_COLORS = ['#4e79a7', '#f28e2b', '#59a14f', '#e15759', '#b07aa1', '#76b7b2', '#edc948', '#9c755f'];
-    const genWord = g => g === 1 ? 'La personne de départ' : g === 2 ? 'Parents' : g === 3 ? 'Grands-parents' : g === 4 ? 'Arrière-grands-parents' : `Génération ${g}`;
+    const genWord = g => g === 1 ? i18n('La personne de départ') : g === 2 ? i18n('Parents') : g === 3 ? i18n('Grands-parents') : g === 4 ? i18n('Arrière-grands-parents') : i18n('Génération {g}', {g: String(g)});
     async function sibs(mode) { need(startId(), 'Choisis d’abord une personne de départ.'); const r = await api('diagram_more', {what: 'siblings', person: startId(), mode}); need(r.people?.length, mode === 'children' ? 'Pas d’enfant connu pour la personne de départ.' : 'Pas de fratrie connue.'); return r; }
     const APP = {
         timeline: {sources: [['anc:3', 'Mes ancêtres sur 3 générations (parents, grands-parents)'], ['anc:4', 'Mes ancêtres sur 4 générations'], ['anc:5', 'Mes ancêtres sur 5 générations'],
             ['sib', 'La fratrie de la personne de départ'], ['kids', 'Les enfants de la personne de départ'], ['desc:2', 'Ses enfants et petits-enfants']],
             fill: async (spec, key) => { const [w, n] = key.split(':'); let rows = [], roles = [], title = '';
                 if (w === 'anc') { const r = await fan(Number(n)); const list = r.rows.filter(x => x.sosa < 2 ** Number(n)).sort((a, b) => a.sosa - b.sosa);
-                    rows = list.map(p => lifeRow(p, genWord(genOf(p.sosa)))).filter(Boolean); roles = [...new Set(list.map(p => genWord(genOf(p.sosa))))].map((role, i) => ({role, color: GEN_COLORS[i % 8]})); title = `Les vies de mes ancêtres (${n} générations)`; }
-                else if (w === 'desc') { const r = await api('diagram_genea', {what: 'desc', root: startId(), gens: Number(n) || 2}); const ids = (r.nodes || []).map(x => x.id).slice(0, 120); need(ids.length > 1, 'Pas de descendance connue.');
+                    rows = list.map(p => lifeRow(p, genWord(genOf(p.sosa)))).filter(Boolean); roles = [...new Set(list.map(p => genWord(genOf(p.sosa))))].map((role, i) => ({role, color: GEN_COLORS[i % 8]})); title = i18n('Les vies de mes ancêtres ({n} générations)', {n: String(n)}); }
+                else if (w === 'desc') { const r = await api('diagram_genea', {what: 'desc', root: startId(), gens: Number(n) || 2}); const ids = (r.nodes || []).map(x => x.id).slice(0, 120); need(ids.length > 1, i18n('Pas de descendance connue.'));
                     const pp = await api('diagram_people', {ids: ids.join(',')}), gen = Object.fromEntries((r.nodes || []).map(x => [x.id, x.gen]));
-                    rows = (pp.people || []).map(p => lifeRow(p, ['La personne de départ', 'Enfants', 'Petits-enfants', 'Arrière-petits-enfants'][gen[p.id]] || 'Descendants')).filter(Boolean); roles = ['La personne de départ', 'Enfants', 'Petits-enfants'].map((role, i) => ({role, color: GEN_COLORS[i]})); title = 'Sa descendance'; }
-                else { const r = await sibs(w === 'kids' ? 'children' : 'siblings'); rows = r.people.map(p => lifeRow(p, p.sex === 'h' ? 'Homme' : p.sex === 'f' ? 'Femme' : 'Vie')).filter(Boolean); roles = [{role: 'Homme', color: '#4e79a7'}, {role: 'Femme', color: '#e15759'}]; title = r.title || ''; }
-                need(rows.length, 'Aucune date de naissance pour ces personnes.');
+                    rows = (pp.people || []).map(p => lifeRow(p, [i18n('La personne de départ'), i18n('Enfants'), i18n('Petits-enfants'), i18n('Arrière-petits-enfants')][gen[p.id]] || i18n('Descendants'))).filter(Boolean); roles = [i18n('La personne de départ'), i18n('Enfants'), i18n('Petits-enfants')].map((role, i) => ({role, color: GEN_COLORS[i]})); title = i18n('Sa descendance'); }
+                else { const r = await sibs(w === 'kids' ? 'children' : 'siblings'); rows = r.people.map(p => lifeRow(p, p.sex === 'h' ? i18n('Homme') : p.sex === 'f' ? i18n('Femme') : i18n('Vie'))).filter(Boolean); roles = [{role: i18n('Homme'), color: '#4e79a7'}, {role: i18n('Femme'), color: '#e15759'}]; title = r.title || ''; }
+                need(rows.length, i18n('Aucune date de naissance pour ces personnes.'));
                 spec.rows = rows; spec.roles = roles; spec.events = spec.events?.filter(e => e.date) || []; spec.o = {...(spec.o || {}), title, order: 'start'}; return spec; }},
         chrono: {sources: [['story', 'La vie de la personne de départ, étape par étape'], ['anc:3', 'Naissances et décès de mes ancêtres (3 générations)'], ['anc:4', 'Naissances et décès de mes ancêtres (4 générations)'],
             ['sib', 'Naissances, mariages et décès de sa fratrie'], ['kids', 'La naissance de ses enfants']],
             fill: async (spec, key) => { const [w, n] = key.split(':'); let rows = [], title = '';
-                if (w === 'story') { need(startId(), 'Choisis d’abord une personne de départ.'); const r = await api('diagram_cartes2', {what: 'story', person: startId()});
-                    rows = (r.steps || []).filter(s => s.date || s.year).map(s => ({date: s.date || String(s.year), label: `${s.kind}${s.with ? ' avec ' + s.with : ''}${s.place ? ' à ' + s.place : ''}`})); title = r.name ? `La vie de ${r.name}` : ''; }
-                else if (w === 'anc') { const r = await fan(Number(n)); r.rows.filter(x => x.sosa < 2 ** Number(n)).forEach(p => { if (p.birth) rows.push({date: dateTxt(p.birth), label: `Naissance de ${p.name}`}); if (p.death) rows.push({date: dateTxt(p.death), label: `Décès de ${p.name}`}); }); title = 'Mes ancêtres : naissances et décès'; }
-                else { const r = await sibs(w === 'kids' ? 'children' : 'siblings'); r.people.forEach(p => { if (p.birth) rows.push({date: dateTxt(p.birth), label: `Naissance de ${p.name}`});
-                    if (w === 'sib') { String(p.marriages || '').split(', ').filter(Boolean).slice(0, 2).forEach(m => rows.push({date: dateTxt(m), label: `Mariage de ${p.name}`})); if (p.death) rows.push({date: dateTxt(p.death), label: `Décès de ${p.name}`}); } }); title = r.title || ''; }
-                need(rows.length, 'Aucune date pour ce choix.');
+                if (w === 'story') { need(startId(), i18n('Choisis d’abord une personne de départ.')); const r = await api('diagram_cartes2', {what: 'story', person: startId()});
+                    rows = (r.steps || []).filter(s => s.date || s.year).map(s => ({date: s.date || String(s.year), label: s.with ? (s.place ? i18n('{what} avec {who} à {place}', {what: s.kind, who: s.with, place: s.place}) : i18n('{what} avec {who}', {what: s.kind, who: s.with})) : s.place ? i18n('{what} à {place}', {what: s.kind, place: s.place}) : s.kind})); title = r.name ? i18n('La vie de {name}', {name: r.name}) : ''; }
+                else if (w === 'anc') { const r = await fan(Number(n)); r.rows.filter(x => x.sosa < 2 ** Number(n)).forEach(p => { if (p.birth) rows.push({date: dateTxt(p.birth), label: i18n('Naissance de {name}', {name: p.name})}); if (p.death) rows.push({date: dateTxt(p.death), label: i18n('Décès de {name}', {name: p.name})}); }); title = i18n('Mes ancêtres : naissances et décès'); }
+                else { const r = await sibs(w === 'kids' ? 'children' : 'siblings'); r.people.forEach(p => { if (p.birth) rows.push({date: dateTxt(p.birth), label: i18n('Naissance de {name}', {name: p.name})});
+                    if (w === 'sib') { String(p.marriages || '').split(', ').filter(Boolean).slice(0, 2).forEach(m => rows.push({date: dateTxt(m), label: i18n('Mariage de {name}', {name: p.name})})); if (p.death) rows.push({date: dateTxt(p.death), label: i18n('Décès de {name}', {name: p.name})}); } }); title = r.title || ''; }
+                need(rows.length, i18n('Aucune date pour ce choix.'));
                 rows.sort((a, b) => (yearOf(a.date) ?? 9999) - (yearOf(b.date) ?? 9999)); spec.rows = rows.slice(0, 80); spec.o = {...(spec.o || {}), title}; return spec; }},
         scatter: {sources: [['birth_death', 'Année de naissance et âge au décès (une personne = un point)'], ['marr_death', 'Âge au mariage et âge au décès'], ['couples', 'Âge de l’époux et âge de l’épouse au mariage']],
             fill: async (spec, key) => { let rows = [], xl = '', yl = '', title = '';
-                if (key === 'couples') { const r = await numbers('couples'); rows = (r.items || []).slice(0, 400).map(x => ({label: `${x.label} (${x.year})`, x: x.a, y: x.b, size: 1})); xl = 'Âge de l’époux'; yl = 'Âge de l’épouse'; title = 'Âge des époux au mariage'; }
+                if (key === 'couples') { const r = await numbers('couples'); rows = (r.items || []).slice(0, 400).map(x => ({label: `${x.label} (${x.year})`, x: x.a, y: x.b, size: 1})); xl = i18n('Âge de l’époux'); yl = i18n('Âge de l’épouse'); title = i18n('Âge des époux au mariage'); }
                 else { const [d, o] = await Promise.all([numbers('ages_death'), numbers(key === 'birth_death' ? 'birth_years' : 'ages_marriage')]); const other = new Map((o.items || []).map(x => [x.id, x.value]));
                     rows = (d.items || []).filter(x => other.has(x.id)).slice(0, 600).map(x => ({label: x.name, x: other.get(x.id), y: x.value, size: 1, color: x.group === 'Femmes' ? '#e15759' : x.group === 'Hommes' ? '#4e79a7' : ''}));
-                    xl = key === 'birth_death' ? 'Année de naissance' : 'Âge au mariage'; yl = 'Âge au décès'; title = key === 'birth_death' ? 'Âge au décès selon l’année de naissance' : 'Âge au mariage et âge au décès'; }
-                need(rows.length, 'Pas assez de dates dans l’arbre pour ce choix.');
-                spec.rows = rows; spec.o = {...(spec.o || {}), title, xLabel: xl, yLabel: yl, maxBubble: 8, subtitle: key === 'couples' ? '' : 'bleu : hommes · rouge : femmes'}; return spec; }},
+                    xl = key === 'birth_death' ? i18n('Année de naissance') : i18n('Âge au mariage'); yl = i18n('Âge au décès'); title = key === 'birth_death' ? i18n('Âge au décès selon l’année de naissance') : i18n('Âge au mariage et âge au décès'); }
+                need(rows.length, i18n('Pas assez de dates dans l’arbre pour ce choix.'));
+                spec.rows = rows; spec.o = {...(spec.o || {}), title, xLabel: xl, yLabel: yl, maxBubble: 8, subtitle: key === 'couples' ? '' : i18n('bleu : hommes · rouge : femmes')}; return spec; }},
         sankey: {sources: [['mob:sons', 'Métier du père → métier du fils'], ['mob:daughters', 'Métier du père → métier de la fille'], ['geo:birth_death:county', 'Département de naissance → département de décès'],
             ['geo:birth_marriage:county', 'Département de naissance → département du mariage'], ['geo:generation:county', 'Département du parent → département de l’enfant'], ['geo:birth_death:country', 'Pays de naissance → pays de décès'], ['geo:birth_death:name', 'Commune de naissance → commune de décès']],
             fill: async (spec, key) => { const [w, a, b] = key.split(':'); let rows = [], title = '';
-                if (w === 'mob') { const r = await api('diagram_adn_numbers', {what: 'mobility', who: a}); need(r.rows?.length, 'Aucun couple père / enfant dont les deux métiers sont connus.');
-                    const kid = a === 'sons' ? 'Fils' : 'Fille'; rows = r.rows.filter(x => x.count > 0).sort((x, y) => y.count - x.count).slice(0, 30).map(x => ({from: `Père : ${x.from}`, to: `${kid} : ${x.to}`, value: x.count})); title = `Métier du père, métier ${a === 'sons' ? 'du fils' : 'de la fille'}`; }
+                if (w === 'mob') { const r = await api('diagram_adn_numbers', {what: 'mobility', who: a}); need(r.rows?.length, i18n('Aucun couple père / enfant dont les deux métiers sont connus.'));
+                    const kid = a === 'sons' ? i18n('Fils') : i18n('Fille'); rows = r.rows.filter(x => x.count > 0).sort((x, y) => y.count - x.count).slice(0, 30).map(x => ({from: i18n('Père : {x}', {x: x.from}), to: `${kid} : ${x.to}`, value: x.count})); title = a === 'sons' ? i18n('Métier du père, métier du fils') : i18n('Métier du père, métier de la fille'); }
                 else { const r = await api('diagram_geo', {what: a}); const pl = new Map((r.places || []).map(p => [Number(p.id), p])), name = id => { const p = pl.get(Number(id)); return p ? (String(p[b] || '').trim() || (b === 'name' ? '' : p.name)) : ''; };
                     const agg = new Map(); (r.pairs || []).forEach(([x, y, n]) => { const f = name(x), t = name(y); if (!f || !t) return; const k = f + '\u0000' + t; agg.set(k, (agg.get(k) || 0) + Number(n || 0)); });
-                    const [s1, s2] = a === 'birth_death' ? ['°', '†'] : a === 'birth_marriage' ? ['°', '⚭'] : ['Parent :', 'Enfant :'];
+                    const [s1, s2] = a === 'birth_death' ? ['°', '†'] : a === 'birth_marriage' ? ['°', '⚭'] : [i18n('Parent :'), i18n('Enfant :')];
                     rows = [...agg].sort((x, y) => y[1] - x[1]).slice(0, 30).map(([k, value]) => { const [f, t] = k.split('\u0000'); return {from: `${s1} ${f}`, to: `${s2} ${t}`, value}; });
-                    need(rows.length, 'Pas assez de lieux connus des deux côtés.'); title = (SANKEY_L[key] || ''); }
+                    need(rows.length, i18n('Pas assez de lieux connus des deux côtés.')); title = i18n(SANKEY_L[key] || ''); }
                 spec.rows = rows; spec.o = {...(spec.o || {}), title}; return spec; }},
         orgchart: {sources: [['anc:3', 'Mes ancêtres sur 3 générations'], ['anc:4', 'Mes ancêtres sur 4 générations'], ['desc:2', 'Sa descendance sur 2 générations'], ['desc:3', 'Sa descendance sur 3 générations']],
             fill: async (spec, key) => { const [w, n] = key.split(':'); const used = new Map(), uniq = nm => { let k = nm, i = 2; while (used.has(k)) k = `${nm} (${i++})`; used.set(k, 1); return k; }; let rows = [];
                 if (w === 'anc') { const r = await fan(Number(n)), bySosa = new Map(); r.rows.filter(x => x.sosa < 2 ** Number(n)).sort((a, b) => a.sosa - b.sosa).forEach(p => { const nm = uniq(p.name); bySosa.set(p.sosa, nm);
                     rows.push({name: nm, parent: p.sosa > 1 ? bySosa.get(Math.floor(p.sosa / 2)) || '' : '', detail: [p.birth_year, p.death_year].some(Boolean) ? `${p.birth_year || '?'} – ${p.death_year || ''}` : '', color: p.gender === 'female' ? '#e15759' : p.gender === 'male' ? '#4e79a7' : ''}); }); }
-                else { const r = await api('diagram_genea', {what: 'desc', root: startId(), gens: Number(n) || 2}); need((r.nodes || []).length > 1, 'Pas de descendance connue.'); const byId = new Map();
+                else { const r = await api('diagram_genea', {what: 'desc', root: startId(), gens: Number(n) || 2}); need((r.nodes || []).length > 1, i18n('Pas de descendance connue.')); const byId = new Map();
                     r.nodes.slice(0, 120).forEach(x => { const nm = uniq(x.name); byId.set(x.id, nm); rows.push({name: nm, parent: x.parent ? byId.get(x.parent) || '' : '', detail: x.year ? `° ${x.year}` : '', color: x.gender === 'female' ? '#e15759' : x.gender === 'male' ? '#4e79a7' : ''}); }); }
-                need(rows.length, 'Rien à dessiner pour ce choix.');
-                spec.rows = rows; spec.o = {...(spec.o || {}), title: w === 'anc' ? `Mes ancêtres (${n} générations)` : 'Sa descendance', oneColor: false}; return spec; }},
+                need(rows.length, i18n('Rien à dessiner pour ce choix.'));
+                spec.rows = rows; spec.o = {...(spec.o || {}), title: w === 'anc' ? i18n('Mes ancêtres ({n} générations)', {n: String(n)}) : i18n('Sa descendance'), oneColor: false}; return spec; }},
         kpi: {sources: [['ancestors', 'Mes ancêtres en chiffres (trouvés, sourcés, taux de recherche)'], ['quality', 'La qualité de ma base (sources, noms, lieux)']],
             fill: async (spec, key) => {
                 if (key === 'ancestors') { const r = await fan(10), byG = {}; r.rows.forEach(p => { const g = genOf(p.sosa); (byG[g] = byG[g] || []).push(p); });
                     const anc = r.rows.filter(p => p.sosa > 1), found8 = anc.filter(p => genOf(p.sosa) <= 8).length, exp8 = 2 ** 8 - 2, src = anc.filter(p => p.sourced).length, sc = anc.length ? Math.round(anc.reduce((a, p) => a + (p.score || 0), 0) / anc.length) : 0;
                     const far = Math.max(...Object.keys(byG).map(Number));
-                    spec.rows = [{label: 'Ancêtres trouvés (10 générations)', value: anc.length, spark: Object.keys(byG).sort((a, b) => a - b).map(g => byG[g].length).join(' ')}, {label: 'Trouvés sur 8 générations', value: Math.round(found8 / exp8 * 1000) / 10, unit: '%', good: 75, bad: 40, note: `${found8} sur ${exp8}`},
-                        {label: 'Ancêtres avec une source', value: anc.length ? Math.round(src / anc.length * 1000) / 10 : 0, unit: '%', good: 60, bad: 25, note: `${src} sur ${anc.length}`}, {label: 'Taux de recherche moyen', value: sc, unit: '%', good: 70, bad: 40}, {label: 'Génération la plus lointaine', value: far}];
-                    spec.o = {...(spec.o || {}), title: 'Mes ancêtres en chiffres', subtitle: r.root_name ? `à partir de ${r.root_name}` : '', source: ''}; return spec; }
-                const O = ext.diagramAppOpts; need(O?.count, 'Les chiffres ne sont pas encore prêts.');
+                    spec.rows = [{label: i18n('Ancêtres trouvés (10 générations)'), value: anc.length, spark: Object.keys(byG).sort((a, b) => a - b).map(g => byG[g].length).join(' ')}, {label: i18n('Trouvés sur 8 générations'), value: Math.round(found8 / exp8 * 1000) / 10, unit: '%', good: 75, bad: 40, note: i18n('{a} sur {b}', {a: found8, b: exp8})},
+                        {label: i18n('Ancêtres avec une source'), value: anc.length ? Math.round(src / anc.length * 1000) / 10 : 0, unit: '%', good: 60, bad: 25, note: i18n('{a} sur {b}', {a: src, b: anc.length})}, {label: i18n('Taux de recherche moyen'), value: sc, unit: '%', good: 70, bad: 40}, {label: i18n('Génération la plus lointaine'), value: far}];
+                    spec.o = {...(spec.o || {}), title: i18n('Mes ancêtres en chiffres'), subtitle: r.root_name ? i18n('à partir de {name}', {name: r.root_name}) : '', source: ''}; return spec; }
+                const O = ext.diagramAppOpts; need(O?.count, i18n('Les chiffres ne sont pas encore prêts.'));
                 const [src, liv, names, places] = await Promise.all([O.count({what: 'persons', by: 'sourced', limit: 0}), O.count({what: 'persons', by: 'living', limit: 0}), O.count({what: 'persons', by: 'last_name', limit: 0}), O.count({what: 'births', by: 'commune', limit: 0})]);
                 const part = (res, re) => { const rows = res?.rows || [], tot = rows.reduce((a, x) => a + Number(x.value || 0), 0), hit = rows.filter(x => re.test(String(x.label))).reduce((a, x) => a + Number(x.value || 0), 0); return [tot ? Math.round(hit / tot * 1000) / 10 : 0, hit, tot]; };
                 const [ps, hs, ts] = part(src, /^avec/i), [pd] = part(liv, /décéd/i);
-                spec.rows = [{label: 'Fiches avec une source', value: ps, unit: '%', good: 60, bad: 25, note: `${hs} sur ${ts}`}, {label: 'Personnes décédées', value: pd, unit: '%'},
-                    {label: 'Noms de famille différents', value: (names?.rows || []).filter(x => !/^(inconnu|sans nom|autres)$/i.test(x.label)).length}, {label: 'Communes de naissance', value: (places?.rows || []).filter(x => !/^(inconnu|autres)$/i.test(x.label)).length}];
-                spec.o = {...(spec.o || {}), title: 'La qualité de ma base', subtitle: '', source: ''}; return spec; }},
+                spec.rows = [{label: i18n('Fiches avec une source'), value: ps, unit: '%', good: 60, bad: 25, note: i18n('{a} sur {b}', {a: hs, b: ts})}, {label: i18n('Personnes décédées'), value: pd, unit: '%'},
+                    {label: i18n('Noms de famille différents'), value: (names?.rows || []).filter(x => !/^(inconnu|sans nom|autres)$/i.test(x.label)).length}, {label: i18n('Communes de naissance'), value: (places?.rows || []).filter(x => !/^(inconnu|autres)$/i.test(x.label)).length}];
+                spec.o = {...(spec.o || {}), title: i18n('La qualité de ma base'), subtitle: '', source: ''}; return spec; }},
         bullet: {sources: [['sourced', 'Ancêtres avec une source, génération par génération'], ['score', 'Taux de recherche moyen, génération par génération'], ['dated', 'Ancêtres dont on connaît la date de naissance, par génération']],
             fill: async (spec, key) => { const r = await fan(8), byG = {}; r.rows.filter(p => p.sosa > 1).forEach(p => { const g = genOf(p.sosa); (byG[g] = byG[g] || []).push(p); });
                 const val = l => key === 'score' ? Math.round(l.reduce((a, p) => a + (p.score || 0), 0) / l.length) : Math.round(l.filter(p => key === 'sourced' ? p.sourced : !!p.birth).length / l.length * 100);
-                spec.rows = Object.keys(byG).map(Number).sort((a, b) => a - b).map(g => ({label: `Génér. ${g}`, value: val(byG[g]), target: key === 'dated' ? 90 : 75, max: 100, zones: '50;75'}));
-                need(spec.rows.length, 'Pas d’ancêtre trouvé.');
-                spec.o = {...(spec.o || {}), unit: ' %', title: {sourced: 'Ancêtres avec une source', score: 'Taux de recherche, génération par génération', dated: 'Date de naissance connue'}[key], subtitle: r.root_name ? `à partir de ${r.root_name} (parmi les ancêtres trouvés)` : '', source: 'Objectif à changer dans le tableau'}; return spec; }},
+                spec.rows = Object.keys(byG).map(Number).sort((a, b) => a - b).map(g => ({label: i18n('Génér. {g}', {g: String(g)}), value: val(byG[g]), target: key === 'dated' ? 90 : 75, max: 100, zones: '50;75'}));
+                need(spec.rows.length, i18n('Pas d’ancêtre trouvé.'));
+                spec.o = {...(spec.o || {}), unit: ' %', title: {sourced: i18n('Ancêtres avec une source'), score: i18n('Taux de recherche, génération par génération'), dated: i18n('Date de naissance connue')}[key], subtitle: r.root_name ? i18n('à partir de {name} (parmi les ancêtres trouvés)', {name: r.root_name}) : '', source: i18n('Objectif à changer dans le tableau')}; return spec; }},
     };
     const SANKEY_L = Object.fromEntries(APP.sankey.sources);
     // brancher : un type sans sources en reçoit ; un type qui en a déjà (cartes de chiffres, barre d'objectif) garde les siennes en premier

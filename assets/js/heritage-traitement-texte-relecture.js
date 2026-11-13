@@ -10,6 +10,7 @@
  */
 (function (root) {
     'use strict';
+    const i18n = (s, v) => (root.LCNDA_I18N ? root.LCNDA_I18N.t(s, v) : s);
     const ext = root.LCNDA_EXT = root.LCNDA_EXT || {};
     const A = () => root.LCNDA_APP;
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
@@ -104,11 +105,11 @@ naissance,origine,commencement,début|fin,terme,achèvement,clôture|suite,conti
         const r = document.createRange(); r.setStart(n, a); r.setEnd(n, b); return {range: r, word: t.slice(a, b)};
     }
     function synDialog(ed) {
-        const at = wordAt(ed); if (!at) return toast('Choisis un mot (double-clic) ou mets le curseur dedans, puis 🔁 Synonymes.');
+        const at = wordAt(ed); if (!at) return toast(i18n('Choisis un mot (double-clic) ou mets le curseur dedans, puis 🔁 Synonymes.'));
         const list = synonyms(at.word);
-        ext.openDialog({eyebrow: 'OUTILS', title: `🔁 Synonymes de « ${at.word} »`, submitLabel: 'Fermer',
-            body: list.length ? `<p class="muted">Clic sur un mot : il remplace « ${esc(at.word)} » (↶ pour revenir).</p><div class="wp-syn">${list.map(w => `<button type="button" class="button small secondary" data-syn="${esc(w)}">${esc(keepCase(at.word, w))}</button>`).join('')}</div>`
-                : `<p>Pas de synonyme connu pour « ${esc(at.word)} ». Le dictionnaire intégré compte ${LIST.length} groupes de mots, surtout ceux d’un récit de famille.</p>`,
+        ext.openDialog({eyebrow: i18n('OUTILS'), title: i18n('🔁 Synonymes de « {word} »', {word: at.word}), submitLabel: i18n('Fermer'),
+            body: list.length ? `<p class="muted">${esc(i18n('Clic sur un mot : il remplace « {word} » (↶ pour revenir).', {word: at.word}))}</p><div class="wp-syn">${list.map(w => `<button type="button" class="button small secondary" data-syn="${esc(w)}">${esc(keepCase(at.word, w))}</button>`).join('')}</div>`
+                : `<p>${esc(i18n('Pas de synonyme connu pour « {word} ». Le dictionnaire intégré compte {n} groupes de mots, surtout ceux d’un récit de famille.', {word: at.word, n: LIST.length}))}</p>`,
             onOpen: d => d.addEventListener('click', e => { const b = e.target.closest('[data-syn]'); if (!b) return;
                 ed.commit(); const t = document.createTextNode(keepCase(at.word, b.dataset.syn)); at.range.deleteContents(); at.range.insertNode(t); ed.commit(); ed.layoutSoon?.(0); d.close?.(); d.remove?.();
                 ed.status?.flash?.(`« ${at.word} » → « ${t.nodeValue} »`); }),
@@ -118,43 +119,43 @@ naissance,origine,commencement,début|fin,terme,achèvement,clôture|suite,conti
     const textNodes = ed => { const out = []; ed.bodies().forEach(b => { const w = document.createTreeWalker(b, NodeFilter.SHOW_TEXT); while (w.nextNode()) { const n = w.currentNode; if (n.parentElement?.closest('.wp-field, code, pre, [contenteditable="false"]')) continue; const is = issues(n.nodeValue); if (is.length) out.push({node: n, issues: is}); } }); return out; };
     function proofDialog(ed) {
         const found = textNodes(ed), all = found.flatMap(f => f.issues.map(x => ({...x, node: f.node})));
-        if (!all.length) return toast('🔎 Rien à reprendre : typographie et répétitions sont bonnes.', 'success');
+        if (!all.length) return toast(i18n('🔎 Rien à reprendre : typographie et répétitions sont bonnes.'), 'success');
         const ctx = (x) => { const t = x.node.nodeValue, a = Math.max(0, x.i - 25), b = Math.min(t.length, x.i + x.len + 25); return `${a ? '…' : ''}${esc(t.slice(a, x.i))}<mark>${esc(x.was).replace(/ /g, '·')}</mark>${esc(t.slice(x.i + x.len, b))}${b < t.length ? '…' : ''}`; };
         const counts = {}; all.forEach(x => { counts[x.msg] = (counts[x.msg] || 0) + 1; });
-        ext.openDialog({eyebrow: 'OUTILS', title: `🔎 Relecture : ${all.length} point${all.length > 1 ? 's' : ''}`, submitLabel: 'Tout corriger', wide: true,
-            body: `<p class="muted">${Object.entries(counts).map(([m, n]) => `${esc(m)} (${n})`).join(' · ')}</p><ol class="wp-proof">${all.slice(0, 300).map((x, i) => `<li data-pf="${i}"><span class="wp-pf-ctx">${ctx(x)}</span> <small class="muted">${esc(x.msg)} → « ${esc(x.fix).replace(/ | /g, '⍽')} »</small> <button type="button" class="button small secondary" data-pf-go="${i}">Voir</button> <button type="button" class="button small" data-pf-fix="${i}">Corriger</button></li>`).join('')}</ol>${all.length > 300 ? `<p class="muted">Et ${all.length - 300} de plus (« Tout corriger » les prend aussi).</p>` : ''}`,
+        ext.openDialog({eyebrow: i18n('OUTILS'), title: i18n(all.length > 1 ? '🔎 Relecture : {n} points' : '🔎 Relecture : {n} point', {n: all.length}), submitLabel: i18n('Tout corriger'), wide: true,
+            body: `<p class="muted">${Object.entries(counts).map(([m, n]) => `${esc(i18n(m))} (${n})`).join(' · ')}</p><ol class="wp-proof">${all.slice(0, 300).map((x, i) => `<li data-pf="${i}"><span class="wp-pf-ctx">${ctx(x)}</span> <small class="muted">${esc(i18n(x.msg))} → « ${esc(x.fix).replace(/ | /g, '⍽')} »</small> <button type="button" class="button small secondary" data-pf-go="${i}">${esc(i18n('Voir'))}</button> <button type="button" class="button small" data-pf-fix="${i}">${esc(i18n('Corriger'))}</button></li>`).join('')}</ol>${all.length > 300 ? `<p class="muted">${esc(i18n('Et {n} de plus (« Tout corriger » les prend aussi).', {n: all.length - 300}))}</p>` : ''}`,
             onOpen: d => d.addEventListener('click', e => {
                 const go = e.target.closest('[data-pf-go]'), fx = e.target.closest('[data-pf-fix]'); if (!go && !fx) return; const x = all[Number((go || fx).dataset.pfGo ?? fx.dataset.pfFix)]; if (!x || !x.node.isConnected) return;
                 if (go) { const r = document.createRange(); r.setStart(x.node, Math.min(x.i, x.node.length)); r.setEnd(x.node, Math.min(x.i + x.len, x.node.length)); const s = getSelection(); s.removeAllRanges(); s.addRange(r); x.node.parentElement?.scrollIntoView({block: 'center'}); return; }
-                if (x.node.nodeValue.slice(x.i, x.i + x.len) !== x.was) return toast('Ce passage a changé : relance la relecture.');
+                if (x.node.nodeValue.slice(x.i, x.i + x.len) !== x.was) return toast(i18n('Ce passage a changé : relance la relecture.'));
                 ed.commit(); x.node.nodeValue = x.node.nodeValue.slice(0, x.i) + x.fix + x.node.nodeValue.slice(x.i + x.len); ed.commit(); ed.layoutSoon?.(0);
                 const diff = x.fix.length - x.len; all.forEach(y => { if (y.node === x.node && y.i > x.i) y.i += diff; }); fx.closest('li').classList.add('is-done'); fx.disabled = true; fx.textContent = '✓'; }),
-            onSubmit: () => { ed.commit(); let n = 0; textNodes(ed).forEach(f => { const v = fixAll(f.node.nodeValue); if (v !== f.node.nodeValue) { f.node.nodeValue = v; n++; } }); ed.commit(); ed.layoutSoon?.(0); toast(`🔎 Corrigé dans ${n} passage${n > 1 ? 's' : ''} (↶ pour revenir).`, 'success'); }});
+            onSubmit: () => { ed.commit(); let n = 0; textNodes(ed).forEach(f => { const v = fixAll(f.node.nodeValue); if (v !== f.node.nodeValue) { f.node.nodeValue = v; n++; } }); ed.commit(); ed.layoutSoon?.(0); toast(i18n(n > 1 ? '🔎 Corrigé dans {n} passages (↶ pour revenir).' : '🔎 Corrigé dans {n} passage (↶ pour revenir).', {n}), 'success'); }});
     }
     /* ── ♿ L'accessibilité du document ── */
     function a11yIssues(ed) {
-        const out = [], add = (el, msg, fix) => out.push({el, msg, fix}); let last = 0;
+        const out = [], add = (el, msg, fix, vars) => out.push({el, msg: i18n(msg, vars), fix}); let last = 0;
         ed.bodies().forEach(b => {
             b.querySelectorAll('img').forEach(im => { if (!(im.getAttribute('alt') || '').trim()) add(im, 'Image sans description (lue à voix haute aux personnes qui ne voient pas)', 'alt'); });
-            b.querySelectorAll('h1,h2,h3,h4,h5,h6').forEach(h => { const n = Number(h.tagName[1]); if (!h.textContent.trim()) add(h, 'Titre vide'); if (last && n > last + 1) add(h, `Titre de niveau ${n} juste après un niveau ${last} : un niveau est sauté`); last = n; });
+            b.querySelectorAll('h1,h2,h3,h4,h5,h6').forEach(h => { const n = Number(h.tagName[1]); if (!h.textContent.trim()) add(h, 'Titre vide'); if (last && n > last + 1) add(h, 'Titre de niveau {n} juste après un niveau {last} : un niveau est sauté', '', {n: String(n), last: String(last)}); last = n; });
             b.querySelectorAll('table').forEach(t => { if (!t.querySelector('th, tr[data-head], thead')) add(t, 'Tableau sans ligne de titres (Tableau → « Ligne d’en-tête »)'); });
-            b.querySelectorAll('a').forEach(a => { if (/^(ici|cliquez ici|clique ici|lien|voir|ce lien|plus)$/i.test(a.textContent.trim())) add(a, `Lien « ${a.textContent.trim()} » : écris plutôt où il mène`); });
+            b.querySelectorAll('a').forEach(a => { if (/^(ici|cliquez ici|clique ici|lien|voir|ce lien|plus)$/i.test(a.textContent.trim())) add(a, 'Lien « {text} » : écris plutôt où il mène', '', {text: a.textContent.trim()}); });
             b.querySelectorAll('[style*="font-size"]').forEach(s => { const px = parseFloat(s.style.fontSize) * (/pt$/.test(s.style.fontSize) ? 1.333 : 1); if (px && px < 10) add(s, 'Texte très petit (moins de 8 points)'); });
         });
         return out;
     }
     function a11yDialog(ed) {
-        const list = a11yIssues(ed); if (!list.length) return toast('♿ Rien à signaler : images décrites, titres en ordre, tableaux avec titres, liens clairs.', 'success');
-        ext.openDialog({eyebrow: 'OUTILS', title: `♿ Accessibilité : ${list.length} point${list.length > 1 ? 's' : ''}`, submitLabel: 'Fermer', wide: true,
-            body: `<p class="muted">Pour que le document se lise bien avec un lecteur d’écran, à voix haute ou en grand.</p><ol class="wp-proof">${list.map((x, i) => `<li>${esc(x.msg)} <button type="button" class="button small secondary" data-ax-go="${i}">Voir</button>${x.fix === 'alt' ? ` <button type="button" class="button small" data-ax-alt="${i}">＋ Description…</button>` : ''}</li>`).join('')}</ol>`,
+        const list = a11yIssues(ed); if (!list.length) return toast(i18n('♿ Rien à signaler : images décrites, titres en ordre, tableaux avec titres, liens clairs.'), 'success');
+        ext.openDialog({eyebrow: i18n('OUTILS'), title: i18n(list.length > 1 ? '♿ Accessibilité : {n} points' : '♿ Accessibilité : {n} point', {n: list.length}), submitLabel: i18n('Fermer'), wide: true,
+            body: `<p class="muted">${esc(i18n('Pour que le document se lise bien avec un lecteur d’écran, à voix haute ou en grand.'))}</p><ol class="wp-proof">${list.map((x, i) => `<li>${esc(x.msg)} <button type="button" class="button small secondary" data-ax-go="${i}">${esc(i18n('Voir'))}</button>${x.fix === 'alt' ? ` <button type="button" class="button small" data-ax-alt="${i}">${esc(i18n('＋ Description…'))}</button>` : ''}</li>`).join('')}</ol>`,
             onOpen: d => d.addEventListener('click', async e => { const go = e.target.closest('[data-ax-go]'), al = e.target.closest('[data-ax-alt]'); if (!go && !al) return; const x = list[Number((go || al).dataset.axGo ?? al.dataset.axAlt)]; if (!x?.el.isConnected) return;
                 x.el.scrollIntoView({block: 'center'}); x.el.classList.add('wp-ax-flash'); setTimeout(() => x.el.classList.remove('wp-ax-flash'), 1600);
-                if (al) { const t = await A().askText({title: 'Description de l’image', message: 'Ce que montre l’image, en une phrase (ex. « Mariage de Jean et Marie devant l’église, 1923 »)', value: '', okLabel: 'Enregistrer'}); if (!t?.trim()) return; ed.commit(); x.el.setAttribute('alt', t.trim().slice(0, 300)); ed.commit(); al.disabled = true; al.textContent = '✓'; } }),
+                if (al) { const t = await A().askText({title: i18n('Description de l’image'), message: i18n('Ce que montre l’image, en une phrase (ex. « Mariage de Jean et Marie devant l’église, 1923 »)'), value: '', okLabel: i18n('Enregistrer')}); if (!t?.trim()) return; ed.commit(); x.el.setAttribute('alt', t.trim().slice(0, 300)); ed.commit(); al.disabled = true; al.textContent = '✓'; } }),
             onSubmit: () => {}});
     }
 
     ext.textDocMenuExtra = ext.textDocMenuExtra || [];
-    ext.textDocMenuExtra.push({menu: 'Outils', cmd: 'synonyms', label: '🔁 Synonymes…'}, {menu: 'Outils', cmd: 'proof', label: '🔎 Relecture (typographie, répétitions)…'}, {menu: 'Outils', cmd: 'a11y', label: '♿ Vérifier l’accessibilité…'});
+    ext.textDocMenuExtra.push({menu: 'Outils', cmd: 'synonyms', label: i18n('🔁 Synonymes…')}, {menu: 'Outils', cmd: 'proof', label: i18n('🔎 Relecture (typographie, répétitions)…')}, {menu: 'Outils', cmd: 'a11y', label: i18n('♿ Vérifier l’accessibilité…')});
     ext.textDocCommands = ext.textDocCommands || {};
     Object.assign(ext.textDocCommands, {synonyms: ed => synDialog(ed), proof: ed => proofDialog(ed), a11y: ed => a11yDialog(ed)});
 })(typeof window !== 'undefined' ? window : globalThis);

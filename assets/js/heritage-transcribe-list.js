@@ -6,6 +6,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     ext.lists = ext.lists || {};
     const A = () => window.LCNDA_APP;
@@ -114,7 +115,7 @@
                     items = items.filter(r => r.id !== id); total = Math.max(0, total - 1); paint();
                     const put = async () => { await A().api('save_act_transcription', {}, {method: 'POST', body: {id, restore: 1, title: full.title, kind: full.kind, media_id: full.media_id, date_text: full.date_text, place: full.place, source: full.source, body: full.body, data: full.data}}); if (isCurrent()) load(false); };
                     const del = async () => { await A().api('delete_act_transcription', {}, {method: 'POST', body: {id}}); if (isCurrent()) load(false); };
-                    (A().undoToast || A().toast)(`Transcription « ${full.title || 'Acte'} » supprimée`, {undo: put, redo: del});
+                    (A().undoToast || A().toast)(i18n('Transcription « {title} » supprimée', {title: full.title || i18n('Acte')}), {undo: put, redo: del});
                 } catch (err) { A().toast(err.message, 'error'); }
             }
         });

@@ -1,0 +1,980 @@
+fr ¦ lb
+Génération {g} ¦ Generatioun {g}
+★ ancêtre commun ¦ ★ gemeinsame Virfahr
+Comment sont-ils parents ? ¦ Wéi si se mateneen verwandt?
+cousins issus de germains aussi par {name} (implexe) ¦ Cousinen zweete Grads och iwwer {name} (Implex)
+⚠ Lieux sans position : {list} — écris « Nom 48.11, -1.68 » ¦ ⚠ Plazen ouni Positioun: {list} — schreif „Numm 48.11, -1.68“
+De la génération {a} à la génération {b}, le centre de la famille s’est déplacé de {km} km. ¦ Vun der Generatioun {a} bis bei d’Generatioun {b} ass de Mëttelpunkt vun der Famill ëm {km} km geréckelt.
+Centre de gravité de {n} générations, {km} km parcourus. ¦ Schwéierpunkt vun {n} Generatiounen, {km} km zeréckgeluecht.
+Centre de gravité de {n} générations. ¦ Schwéierpunkt vun {n} Generatiounen.
+Ajoute des lieux avec leur génération (ou « Depuis l’app »). ¦ Setz Plaze mat hirer Generatioun derbäi (oder „Aus der App“).
+Gén. {g} ({max}) ¦ Gen. {g} ({max})
+{found} ancêtres trouvés sur {max} possibles en {n} générations ({pct} %). ¦ {found} Virfahre fonnt vun {max} méiglechen iwwer {n} Generatiounen ({pct} %).
+Complétude : {pct} % des ancêtres sur {n} générations. ¦ Vollstännegkeet: {pct} % vun de Virfahren iwwer {n} Generatiounen.
+… et {n} lignes de plus (« 🖨 Imprimer le tableau » les met toutes) ¦ … an {n} Zeilen derzou („🖨 Tabell drécken“ hëlt se all mat)
+Tableau d’ascendance : {n} ancêtres. ¦ Virfahrentabell: {n} Virfahren.
+Tableau d’ascendance ¦ Virfahrentabell
+Ajoute des correspondances de {lo} à {hi} cM avec leurs correspondances en commun (ou « Depuis l’app »). ¦ Setz Matches vun {lo} bis {hi} cM mat hire gemeinsame Matches derbäi (oder „Aus der App“).
+dates · surtout en {month} ¦ Datumer · virun allem am {month}
+Roue de l’année : {n} dates, surtout en {month}. ¦ Joresrad: {n} Datumer, virun allem am {month}.
+{name} (à gauche) ¦ {name} (lénks)
+{name} (à droite) ¦ {name} (riets)
+Barres et courbe : {n} lignes. ¦ Balken a Kurv: {n} Zeilen.
+Sous {v} ¦ Ënner {v}
+Au-dessus de {v} ¦ Iwwer {v}
+Collines empilées : {s} séries sur {n} périodes. ¦ Gestapelt Hiwwelen: {s} Serien iwwer {n} Perioden.
+Coordonnées parallèles : {n} lignes sur {a} axes. ¦ Parallel Koordinaten: {n} Linnen iwwer {a} Achsen.
+Chemin trouvé en {n} étapes. ¦ Wee an {n} Etappe fonnt.
+Chemin trouvé en 1 étape. ¦ Wee an 1 Etapp fonnt.
+Aucun ancêtre dont le lieu de naissance a des coordonnées ({n} sans lieu situé). ¦ Kee Virfahr, deem seng Gebuertsplaz Koordinaten huet ({n} ouni lokaliséiert Plaz).
+Aucun ancêtre dont le lieu de naissance a des coordonnées. ¦ Kee Virfahr, deem seng Gebuertsplaz Koordinaten huet.
+Le centre de la famille de {name} ¦ De Mëttelpunkt vun der Famill vun {name}
+Les générations de {name} ¦ D’Generatioune vun {name}
+{n} lieux de naissance pris dans ta base ({m} sans lieu situé). ¦ {n} Gebuertsplazen aus denger Datebank geholl ({m} ouni lokaliséiert Plaz).
+{n} lieux de naissance pris dans ta base. ¦ {n} Gebuertsplazen aus denger Datebank geholl.
+L’arbre de {name} : ce qu’on connaît ¦ De Stammbaum vun {name}: wat mer wëssen
+Tableau d’ascendance de {name} ¦ Virfahrentabell vun {name}
+{n} ancêtres pris dans ta base (arrêt à 4 096 lignes). ¦ {n} Virfahren aus denger Datebank geholl (Stopp bei 4 096 Zeilen).
+{n} ancêtres pris dans ta base. ¦ {n} Virfahren aus denger Datebank geholl.
+Aucune naissance ni aucun décès daté. ¦ Keng datéiert Gebuert a keen datéierten Doud.
+Filles ¦ Meedercher
+Garçons ¦ Jongen
+{n} noms sur {p} périodes. ¦ {n} Nimm iwwer {p} Perioden.
+{n} personnes comptées, {y} années. ¦ {n} Persoune gezielt, {y} Joer.
+Arrière-arrière-grands-parents ¦ Ur-Urgrousselteren
+Arrière-arrière-arrière-grands-parents ¦ Ur-Ur-Urgrousselteren
+Les cartes ne sont pas chargées. ¦ D’Kaarte sinn net gelueden.
+Ancêtres connus ¦ Bekannte Virfahren
+Grand-père paternel ¦ Grousspapp vu Papps Säit
+Grand-mère paternelle ¦ Groussmamm vu Papps Säit
+Grand-père maternel ¦ Grousspapp vu Mammes Säit
+Grand-mère maternelle ¦ Groussmamm vu Mammes Säit
+Fêtes des prénoms ¦ Nummendeeg
+Âge au 1er enfant ¦ Alter beim 1. Kand
+Les métiers ¦ D’Beruffer
+Un titre par génération ¦ Een Titel pro Generatioun
+Tous mes tests ¦ All meng Tester
+Par décennie ¦ Pro Joerzéngt
+Par demi-siècle ¦ Pro hallwem Joerhonnert
+Par siècle ¦ Pro Joerhonnert
+Décès ↔ naissances ¦ Doudesfäll ↔ Gebuerten
+Périodes ¦ Perioden
+Personnes au plus ¦ Persoune maximal
+Âge au 1er mariage ¦ Alter beim 1. Bestietnes
+Aucune naissance datée. ¦ Keng datéiert Gebuert.
+Un dégradé ¦ E Faarfverlaf
+Une couleur chacune ¦ All eng Faarf
+Lien avec la personne d’avant ¦ Link mat der Persoun virdrun
+son époux / épouse ¦ säi Mann / seng Fra
+Selon la place ¦ Jee no Plaz
+En liste, étape par étape ¦ Als Lëscht, Etapp fir Etapp
+La phrase du lien ¦ De Saz vun der Verwandtschaft
+Une seule ¦ Eng eenzeg
+Sens des flèches ¦ Richtung vun de Feiler
+Des plus anciens vers toi ¦ Vun deenen Eelsten bis bei dech
+De toi vers les plus anciens ¦ Vun dir bis bei déi Eelst
+La trajectoire ¦ D’Trajectoire
+Taille des lieux ¦ Gréisst vun de Plazen
+La phrase du déplacement ¦ De Saz vun der Verréckelung
+Écarter les points d’un même lieu ¦ Punkte vun der selwechter Plaz ausernee setzen
+Noms des lieux les plus remplis ¦ Nimm vun de vollste Plazen
+D’où viennent mes ancêtres ¦ Wou meng Virfahre hierkommen
+Trouvés ¦ Fonnt
+Longueur des barres ¦ Längt vun de Balken
+Écrire les % ¦ D’% uweisen
+Les ancêtres ¦ D’Virfahren
+Lignes montrées au plus ¦ Gewisen Zeile maximal
+Les correspondances ¦ D’Matches
+ADN partagé ¦ Gedeelten DNA
+Correspondances au plus ¦ Matches maximal
+Mes cousins ADN, par grand-parent ¦ Meng DNA-Cousinen, pro Grousselterendeel
+La courbe = la colonne n° ¦ D’Kurv = d’Kolonn Nr.
+Largeur des barres ¦ Breet vun de Balken
+Une colonne autour du centre ¦ Eng Kolonn ronderëm de Mëttelpunkt
+Par écart ¦ No Ënnerscheed
+Par total ¦ No Total
+Écrire les chiffres ¦ D’Zuelen uweisen
+Écart entre les collines ¦ Ofstand tëscht den Hiwwelen
+À l’envers ¦ Ëmgedréint
+Une par série ¦ Eng pro Serie
+Opacité des lignes ¦ Opazitéit vun de Linnen
+La marche ¦ D’Trap
+Carte des générations : {n} lieux de naissance. ¦ Generatiounekaart: {n} Gebuertsplazen.
+Génération {g} ({name}) : {found} sur {max} possibles ¦ Generatioun {g} ({name}): {found} vun {max} méiglechen
+{n} personnes différentes (implexe) ¦ {n} verschidde Persounen (Implex)
+Méthode de Leeds : {n} groupes de couleur. ¦ Leeds-Method: {n} Faarfgruppen.
+{name} : {n} en tout, le plus en {peak} ({v}) ¦ {name}: {n} am Ganzen, déi meescht am {peak} ({v})
+Courbe en escalier : {n} points. ¦ Trapekurv: {n} Punkten.
+n° de fiche ¦ Fiche Nr.
+liens de sang par {n} branches (implexe) ¦ Bluttsverwandtschaft iwwer {n} Zweeger (Implex)
+{n} générations prises dans ta base. ¦ {n} Generatiounen aus denger Datebank geholl.
+{n} correspondances prises dans l’onglet ADN. ¦ {n} Matches aus dem DNA-Reiter geholl.
+{n} dates prises dans ta base. ¦ {n} Datumer aus denger Datebank geholl.
+{n} périodes prises dans ta base. ¦ {n} Perioden aus denger Datebank geholl.
+{n} vies prises dans ta base. ¦ {n} Liewen aus denger Datebank geholl.
+Choisis deux personnes (« Depuis l’app ») ou écris le chemin, une personne par ligne. ¦ Wiel zwou Persounen („Aus der App“) oder schreif de Wee, eng Persoun pro Zeil.
+{gen} : centre de {n} lieux de naissance ¦ {gen}: Mëttelpunkt vun {n} Gebuertsplazen
+{gen} : centre de {n} lieu de naissance ¦ {gen}: Mëttelpunkt vun {n} Gebuertsplaz
+écart moyen {km} km ¦ duerchschnëttlech Streeung {km} km
+Ajoute des lieux de naissance avec leur génération (ou « Depuis l’app »). ¦ Setz Gebuertsplaze mat hirer Generatioun derbäi (oder „Aus der App“).
+Ajoute des générations : la génération et le nombre d’ancêtres trouvés. ¦ Setz Generatiounen derbäi: d’Generatioun an d’Zuel vun de fonnte Virfahren.
+Encore à trouver ¦ Nach ze fannen
+Personnes différentes (implexe) ¦ Verschidde Persounen (Implex)
+Ajoute des ancêtres : leur numéro Sosa et leur nom (ou « Depuis l’app »). ¦ Setz Virfahren derbäi: hir Sosa-Nummer an hiren Numm (oder „Aus der App“).
+Ajoute des dates (« 14/07 » ou « 07-14 »), une sorte et un nom (ou « Depuis l’app »). ¦ Setz Datumer derbäi („14/07“ oder „07-14“), eng Zort an en Numm (oder „Aus der App“).
+Il faut au moins deux colonnes de chiffres : des barres à gauche, une courbe à droite. ¦ Et brauch op d’mannst zwou Kolonne mat Zuelen: Balke lénks, eng Kurv riets.
+Aucun chiffre dans le tableau. ¦ Keng Zuelen an der Tabell.
+Ajoute des lignes : un nom et deux chiffres (gauche, droite), ou un seul chiffre autour du centre. ¦ Setz Zeilen derbäi: en Numm an zwou Zuelen (lénks, riets), oder eng eenzeg Zuel ronderëm de Mëttelpunkt.
+Sous le centre ¦ Ënner dem Mëttelpunkt
+Ajoute des lignes (années, décennies…) et une colonne de chiffres par colline. ¦ Setz Zeilen derbäi (Joren, Joerzéngten…) an eng Kolonn mat Zuelen pro Hiwwel.
+Il faut au moins deux colonnes de chiffres (les axes) et une ligne par personne ou par chose. ¦ Et brauch op d’mannst zwou Kolonne mat Zuelen (d’Achsen) an eng Zeil pro Persoun oder Saach.
+Ajoute des lignes : une année (ou un nom) et un chiffre. ¦ Setz Zeilen derbäi: e Joer (oder en Numm) an eng Zuel.
+🔒 Pour partager : sans les noms des personnes en vie ¦ 🔒 Fir ze deelen: ouni d’Nimm vu Persounen, déi nach liewen
+Les ancêtres de la personne de départ ¦ D’Virfahre vun der Startpersoun
+Lecture de ta généalogie… ¦ Denger Genealogie gëtt gelies…
+Données prises dans ta base. ¦ Donnéeën aus denger Datebank geholl.
+🔗 Deux personnes de ma base ¦ 🔗 Zwou Persounen aus menger Datebank
+L’app cherche le plus court chemin : on remonte jusqu’à l’ancêtre commun et on redescend ; avec les alliances, elle passe aussi par les époux (beau-frère, cousin de l’épouse…). Un même lien par plusieurs ancêtres (implexe) est signalé. ¦ D’App sicht de kierzte Wee: bis bei de gemeinsame Virfahr erop an nees erof; mat de Schwéierverwandten geet se och iwwer d’Ehepartner (Schwoer, Cousin vun der Fra…). Déi selwecht Verwandtschaft iwwer méi Virfahren (Implex) gëtt gemellt.
+Passer aussi par les alliances (époux, épouses) ¦ Och iwwer d’Schwéierverwandte goen (Ehepartner)
+Trouver le chemin ¦ De Wee fannen
+Choisis les deux personnes dans les menus. ¦ Wiel déi zwou Persounen an de Menüen.
+Aucun lien trouvé entre ces deux personnes dans ta base. ¦ Keng Verwandtschaft tëscht dësen zwou Persounen an denger Datebank fonnt.
+Aucun ancêtre commun : essaie avec les alliances. ¦ Kee gemeinsame Virfahr: probéier et mat de Schwéierverwandten.
+🎯 Les lieux de naissance de mes ancêtres ¦ 🎯 D’Gebuertsplaze vu menge Virfahren
+🌈 Les lieux de naissance de mes ancêtres ¦ 🌈 D’Gebuertsplaze vu menge Virfahren
+Chaque ancêtre (numéro Sosa) est placé à son lieu de naissance (ou de baptême), avec sa génération. Les lieux sans coordonnées sont laissés de côté. ¦ All Virfahr (Sosa-Nummer) gëtt op seng Gebuertsplaz (oder Dafplaz) gesat, mat senger Generatioun. Plazen ouni Koordinate ginn ewechgelooss.
+🧩 L’ascendance d’une personne ¦ 🧩 D’Virfahre vun enger Persoun
+Pour chaque génération : les ancêtres possibles (1, 2, 4, 8…), les places trouvées et les personnes différentes (implexe). ¦ Fir all Generatioun: déi méiglech Virfahren (1, 2, 4, 8…), déi fonnte Plazen an déi verschidde Persounen (Implex).
+Aucun ancêtre trouvé pour cette personne. ¦ Kee Virfahr fir dës Persoun fonnt.
+📜 Les ancêtres d’une personne ¦ 📜 D’Virfahre vun enger Persoun
+Une ligne par numéro Sosa : nom, naissance, mariage, décès (dates et lieux). Un ancêtre présent plusieurs fois (implexe) renvoie à son premier numéro. ¦ Eng Zeil pro Sosa-Nummer: Numm, Gebuert, Bestietnes, Doud (Datumer a Plazen). E Virfahr, deen e puermol virkënnt (Implex), verweist op seng éischt Nummer.
+🖨 Imprimer le tableau… ¦ 🖨 Tabell drécken…
+Depuis l’onglet ADN : les correspondances d’un test et leurs « correspondances en commun ». La méthode de Leeds range celles de 90 à 400 cM (cousins de 2e et 3e degré) en groupes de couleur, souvent un par grand-parent. ¦ Aus dem DNA-Reiter: d’Matches vun engem Test an hir „gemeinsam Matches“. D’Leeds-Method sortéiert déi vun 90 bis 400 cM (Cousinen 2. an 3. Grads) a Faarfgruppen, dacks eng pro Grousselterendeel.
+Aucune correspondance ADN dans ta base (onglet ADN → Correspondances). ¦ Keen DNA-Match an denger Datebank (DNA-Reiter → Matches).
+Il manque les « correspondances en commun » : remplis-les dans l’onglet ADN (ou importe-les). ¦ D’„gemeinsam Matches“ feelen: fëll se am DNA-Reiter aus (oder importéier se).
+Méthode de Leeds ¦ Leeds-Method
+🎡 Les dates de ma famille ¦ 🎡 D’Datumer vu menger Famill
+Les naissances, mariages et décès datés au jour près, et la fête du prénom de chacun (calendrier des saints). Les fiches confidentielles ne sont jamais prises. ¦ D’Gebuerten, Bestietnesser an Doudesfäll, op den Dag genau datéiert, an den Nummendag vun all eenzelem (Hellegekalenner). Vertraulech Fiche ginn ni geholl.
+Les personnes en vie (et leurs mariages) ¦ D’Persounen, déi nach liewen (an hir Bestietnesser)
+Coche au moins une sorte de date. ¦ Kräiz op d’mannst eng Zort Datum un.
+Aucune date au jour près pour ce choix. ¦ Keen Datum op den Dag genau fir dës Wiel.
+L’année de la famille ¦ D’Joer vun der Famill
+Par quart de siècle ¦ Pro Véierel Joerhonnert
+📊 Naissances et âge au décès ¦ 📊 Gebuerten an Alter beim Doud
+↔️ Naissances et décès ¦ ↔️ Gebuerten an Doudesfäll
+Les naissances de chaque période en barres (à gauche), l’âge moyen au décès en courbe (à droite). ¦ D’Gebuerte vun all Period als Balken (lénks), dat duerchschnëttlecht Alter beim Doud als Kurv (riets).
+Les décès à gauche, les naissances à droite, période par période (ou les femmes et les hommes). ¦ D’Doudesfäll lénks, d’Gebuerte riets, Period fir Period (oder d’Fraen an d’Männer).
+Face à face ¦ Vis-à-vis
+Naissances : filles ↔ garçons ¦ Gebuerten: Meedercher ↔ Jongen
+Âge moyen au décès ¦ Duerchschnëttlecht Alter beim Doud
+Naissances et âge moyen au décès ¦ Gebuerten an duerchschnëttlecht Alter beim Doud
+Filles et garçons à la naissance ¦ Meedercher a Jongen bei der Gebuert
+Décès et naissances ¦ Doudesfäll a Gebuerten
+🏔 Les noms de famille au fil du temps ¦ 🏔 D’Familljennimm am Laf vun der Zäit
+Les noms les plus portés : une colline par nom, la hauteur = les naissances de chaque période. ¦ Déi heefegst Nimm: en Hiwwel pro Numm, d’Héicht = d’Gebuerte vun all Period.
+Aucune naissance datée avec un nom de famille. ¦ Keng datéiert Gebuert mat engem Familljennumm.
+Les noms de famille au fil du temps ¦ D’Familljennimm am Laf vun der Zäit
+🧵 Les vies de ma base ¦ 🧵 D’Liewen a menger Datebank
+Pour chaque personne (vies finies seulement) : l’âge au premier mariage, au premier enfant, le nombre d’enfants et l’âge au décès ; une couleur par siècle de naissance. ¦ Fir all Persoun (nëmmen ofgeschloss Liewen): d’Alter beim éischte Bestietnes, beim éischte Kand, d’Zuel vun de Kanner an d’Alter beim Doud; eng Faarf pro Gebuertsjoerhonnert.
+Pas assez de vies datées (il faut au moins 3 des 4 chiffres). ¦ Net genuch datéiert Liewen (et brauch op d’mannst 3 vun de 4 Zuelen).
+Les vies de la famille ¦ D’Liewe vun der Famill
+📶 Combien en vie, année par année ¦ 📶 Wéi vill am Liewen, Joer fir Joer
+Une personne compte de sa naissance à son décès ; décès inconnu : en vie si elle est née il y a moins de 100 ans, sinon jusqu’à 60 ans (comme « Les vivants de l’arbre »). ¦ Eng Persoun zielt vun hirer Gebuert bis zu hirem Doud; Doud onbekannt: am Liewen, wa se viru manner wéi 100 Joer gebuer ass, soss bis 60 Joer (wéi „Déi Lieweg am Stammbaum“).
+Personnes en vie ¦ Persounen am Liewen
+Combien de la famille étaient en vie ¦ Wéi vill vun der Famill am Liewe waren
+Couleurs des générations ¦ Faarwe vun de Generatiounen
+Dégradé : la plus proche ¦ Faarfverlaf: déi nooste
+Dégradé : la plus ancienne ¦ Faarfverlaf: déi eelst
+Les ancêtres (lieu de naissance « Nom 48.11, -1.68 » et génération : 2 = parents, 3 = grands-parents…) ¦ D’Virfahren (Gebuertsplaz „Numm 48.11, -1.68“ a Generatioun: 2 = Elteren, 3 = Grousselteren…)
+Le chemin (une personne par ligne, de la première à la seconde) ¦ De Wee (eng Persoun pro Zeil, vun der éischter bis bei déi zweet)
+son père / sa mère (on monte) ¦ säi Papp / seng Mamm (mer ginn erop)
+son enfant (on descend) ¦ säi Kand (mer ginn erof)
+En V (montée puis descente) ¦ Als V (erop an dann erof)
+Les autres liens (implexe) ¦ Déi aner Verbindungen (Implex)
+Couleur des cases ¦ Faarf vun de Këschten
+Cadrer tout seul sur les lieux ¦ Automatesch op d’Plazen ausriichten
+Montrer chaque lieu (pâle) ¦ All Plaz uweisen (blass)
+Cercle de l’écart moyen ¦ Krees vun der duerchschnëttlecher Streeung
+Couleur de la trajectoire ¦ Faarf vun der Trajectoire
+Le centre de la famille, génération par génération ¦ De Mëttelpunkt vun der Famill, Generatioun fir Generatioun
+Nom écrit à partir de … ancêtres ¦ Numm geschriwwen ab … Virfahren
+Les générations (1 = la personne) ¦ D’Generatiounen (1 = d’Persoun)
+Éventail (une case par ancêtre) ¦ Fächer (eng Këscht pro Virfahr)
+Éventail : générations ¦ Fächer: Generatiounen
+Toutes pareilles (en %) ¦ All gläich (an %)
+Selon le nombre possible ¦ No der méiglecher Zuel
+Montrer les personnes différentes (implexe) ¦ Verschidde Persounen uweisen (Implex)
+Phrase de résumé ¦ Resuméssaz
+Couleur des connus ¦ Faarf vun de bekannten
+Couleur des manquants ¦ Faarf vun de feelenden
+Couleur de l’implexe ¦ Faarf vum Implex
+Ce que je connais de mon arbre ¦ Wat ech vu mengem Stammbaum weess
+Correspondances en commun (séparées par ;) ¦ Gemeinsam Matches (getrennt mat ;)
+Groupes de couleur au plus ¦ Faarfgruppe maximal
+Noms des groupes (séparés par des virgules) ¦ Nimm vun de Gruppen (getrennt mat Kommaen)
+Noms en haut des colonnes ¦ Nimm uewen un de Kolonnen
+Jour (14/07 ou 07-14) ¦ Dag (14/07 oder 07-14)
+Le trait « aujourd’hui » ¦ De Stréch „haut“
+Le nombre au centre ¦ D’Zuel an der Mëtt
+Les chiffres (la dernière colonne = la courbe) ¦ D’Zuelen (déi lescht Kolonn = d’Kurv)
+Nom de l’axe de gauche ¦ Numm vun der lénker Achs
+Nom de l’axe de droite ¦ Numm vun der rietser Achs
+Unité à gauche ¦ Eenheet lénks
+Unité à droite ¦ Eenheet riets
+Axe de droite à partir de zéro ¦ Riets Achs ab null
+Épaisseur de la courbe ¦ Déckt vun der Kurv
+Points de la courbe ¦ Punkte vun der Kurv
+Écrire les chiffres de la courbe ¦ D’Zuele vun der Kurv uweisen
+Les lignes (1re colonne à gauche, 2e à droite) ¦ D’Zeilen (1. Kolonn lénks, 2. riets)
+Deux colonnes face à face ¦ Zwou Kolonne vis-à-vis
+Le centre (une colonne) ¦ D’Mëtt (eng Kolonn)
+Titre à gauche ¦ Titel lénks
+Titre à droite ¦ Titel riets
+Couleur à gauche ¦ Faarf lénks
+Couleur à droite ¦ Faarf riets
+Comme dans le tableau ¦ Wéi an der Tabell
+Sur le trait du milieu ¦ Um Stréch an der Mëtt
+Décès et naissances dans la famille ¦ Doudesfäll a Gebuerten an der Famill
+Les chiffres (une ligne par période, une colonne par colline) ¦ D’Zuelen (eng Zeil pro Period, eng Kolonn pro Hiwwel)
+Chaque colline à sa hauteur ¦ All Hiwwel op senger Héicht
+Même échelle pour toutes ¦ Selwechte Moossstaf fir all
+Dégradé : première ¦ Faarfverlaf: déi éischt
+Dégradé : dernière ¦ Faarfverlaf: déi lescht
+Écrire le sommet ¦ De Spëtzewäert uweisen
+Les lignes (une par personne ; une colonne par axe) ¦ D’Zeilen (eng pro Persoun; eng Kolonn pro Achs)
+Mettre en avant (un groupe ou un nom) ¦ Ervirhiewen (eng Grupp oder en Numm)
+Les chiffres (une année ou un nom par ligne) ¦ D’Zuelen (ee Joer oder een Numm pro Zeil)
+Après le point ¦ Nom Punkt
+Avant le point ¦ Virum Punkt
+Remplir dessous (une série) ¦ Ënnendrënner ausfëllen (eng Serie)
+Axe à partir de zéro ¦ Achs ab null
+Montrer le plus haut ¦ Den héchste Wäert uweisen
+Gén. {g} ¦ Gen. {g}
+gén. {g} ¦ Gen. {g}
+Arbre en frise : {n} vies sur {g} générations, de {from} à {to}. ¦ Stammbaum als Zäitlinn: {n} Liewen iwwer {g} Generatiounen, vun {from} bis {to}.
+{name} : décès inconnu ¦ {name}: Doud onbekannt
+{name} ({years}) : {age} ans (en vie) ¦ {name} ({years}): {age} Joer (lieft nach)
+{name} ({years}) : {age} ans ¦ {name} ({years}): {age} Joer
+Mariage à {age} ans ({year}) ¦ Bestietnes mat {age} Joer ({year})
+Naissance d’un enfant à {age} ans ({year}) ¦ Gebuert vun engem Kand mat {age} Joer ({year})
+naissance d’un enfant ¦ Gebuert vun engem Kand
+{n} ans et + ¦ {n} Joer a méi
+{n} personnes en vie ¦ {n} Persounen am Liewen
+Pyramide des âges en {year} : {n} personnes en vie (sur {total}). ¦ Alterspyramid am Joer {year}: {n} Persounen am Liewen (vun {total}).
+Degré {d} ¦ Grad {d}
+Déplier {name} ¦ {name} opklappen
+Plier {name} ¦ {name} zouklappen
+Déplier ({n} personnes) ¦ Opklappen ({n} Persounen)
+Graphe des cousinages : {n} personnes, {l} liens. ¦ Graf vun de Cousinagen: {n} Persounen, {l} Verbindungen.
+{a} est {kin} de {b} ¦ {a} ass {kin} vun {b}
+(degré {d}) ¦ (Grad {d})
+{a} et {b} : pas de lien trouvé ¦ {a} an {b}: keng Verwandtschaft fonnt
+Degré 1 (parent, enfant) ¦ Grad 1 (Elterendeel, Kand)
+Degré 2 (frère, grand-parent) ¦ Grad 2 (Brudder, Grousselterendeel)
+Degré 4 (cousin germain) ¦ Grad 4 (Cousin éischte Grads)
+Matrice de parenté de {n} personnes : {l} liens trouvés. ¦ Verwandtschaftsmatrix vun {n} Persounen: {l} Verbindunge fonnt.
+entre à la génération {g} par {who} ¦ kënnt bei der Generatioun {g} iwwer {who} eran
+entre à la génération {g} ¦ kënnt bei der Generatioun {g} eran
+porteurs par génération : {list} ¦ Dréier pro Generatioun: {list}
+Entre à la génération {g} ¦ Kënnt bei der Generatioun {g} eran
+Arbre des patronymes : {n} noms sur {g} générations. ¦ Familljennummebaum: {n} Nimm iwwer {g} Generatiounen.
+Aucun mariage entre ces lieux. ¦ Kee Bestietnes tëscht dëse Plazen.
+Diagramme d’accord : {n} lieux, environ {v} {unit}. ¦ Sehnendiagramm: {n} Plazen, ongeféier {v} {unit}.
+mariages ¦ Bestietnesser
+Violon : {c} catégories, {n} valeurs. ¦ Gei: {c} Kategorien, {n} Wäerter.
+pas encore trouvé ¦ nach net fonnt
+Quadrillage de {g} générations : {found} ancêtres trouvés sur {total} places ({pct} %). ¦ Gitter vun {g} Generatiounen: {found} Virfahre fonnt vun {total} Plazen ({pct} %).
+Les vies de mes ancêtres ({name}) ¦ D’Liewe vu menge Virfahren ({name})
+Les vies de mes ancêtres ¦ D’Liewe vu menge Virfahren
+Aucune naissance ni aucun décès daté à {place}. ¦ Keng datéiert Gebuert a keen datéierten Doud zu {place}.
+{n} années prises dans ta base. ¦ {n} Joer aus denger Datebank geholl.
+Qui vivait en … ? ¦ Wien huet am Joer … gelieft?
+Qui vivait en {year} ? ¦ Wien huet am Joer {year} gelieft?
+{n} personnes prises dans ta base. ¦ {n} Persounen aus denger Datebank geholl.
+Les cousins de {name} ¦ D’Cousine vun {name}
+{n} personnes prises dans ta base (les 1 500 premières). ¦ {n} Persounen aus denger Datebank geholl (déi éischt 1 500).
+Les cousinages ¦ D’Cousinagen
+{n} personnes et {l} liens pris dans ta base. ¦ {n} Persounen an {l} Verbindungen aus denger Datebank geholl.
+{n} personnes, {l} liens trouvés. ¦ {n} Persounen, {l} Verbindunge fonnt.
+Les noms de famille de {name} ¦ D’Familljennimm vun {name}
+{n} noms pris dans ta base. ¦ {n} Nimm aus denger Datebank geholl.
+Aucun mariage avec des lieux connus. ¦ Kee Bestietnes mat bekannte Plazen.
+Où l’on venait se marier ¦ Wou d’Leit sech bestuede komm sinn
+Mariages entre villages ¦ Bestietnesser tëscht Dierfer
+{n} paires de lieux prises dans ta base. ¦ {n} Puer Plazen aus denger Datebank geholl.
+Aucune personne avec les deux dates. ¦ Keng Persoun mat deenen zwee Datumer.
+{n} valeurs prises dans ta base. ¦ {n} Wäerter aus denger Datebank geholl.
+{c}e siècle ¦ {c}. Joerhonnert
+Les enfants de {name} ¦ D’Kanner vun {name}
+D’où viennent mes noms ¦ Wou meng Nimm hierkommen
+Âge au décès par siècle ¦ Alter beim Doud pro Joerhonnert
+Âge au décès par sexe ¦ Alter beim Doud no Geschlecht
+Âge au mariage par sexe ¦ Alter beim Bestietnes no Geschlecht
+Âge au mariage par siècle ¦ Alter beim Bestietnes pro Joerhonnert
+{name} : ferme l’éditeur et clique à nouveau pour ouvrir sa fiche. ¦ {name}: maach den Editeur zou a klick nach eng Kéier, fir d’Fiche opzemaachen.
+Ajoute des personnes : un nom, une génération (ou un n° Sosa), une naissance et un décès. ¦ Setz Persounen derbäi: en Numm, eng Generatioun (oder eng Sosa-Nr.), eng Gebuert an en Doud.
+Ajoute des années avec leurs naissances et leurs décès. ¦ Setz Joren derbäi mat hire Gebuerten an hiren Doudesfäll.
+Plus de décès que de naissances ¦ Méi Doudesfäll wéi Gebuerten
+{b} naissances et {d} décès de {from} à {to}, {c} crises marquées. ¦ {b} Gebuerten an {d} Doudesfäll vun {from} bis {to}, {c} Krise markéiert.
+{b} naissances et {d} décès de {from} à {to}, {c} crise marquée. ¦ {b} Gebuerten an {d} Doudesfäll vun {from} bis {to}, {c} Kris markéiert.
+Ajoute les enfants : un nom, une naissance, un décès (et leurs mariages, leurs enfants). ¦ Setz d’Kanner derbäi: en Numm, eng Gebuert, en Doud (an hir Bestietnesser, hir Kanner).
+Ajoute des personnes (naissance, décès, sexe) ou prends celles de ta base (« Depuis l’app »). ¦ Setz Persounen derbäi (Gebuert, Doud, Geschlecht) oder huel déi aus denger Datebank („Aus der App“).
+Issus d’issus de germains ¦ Cousinen drëtte Grads
+Ligne directe ¦ Direkt Linn
+Oncles, tantes, neveux ¦ Monnecher, Tattaen, Neveuen
+Cousins germains ¦ Cousinen éischte Grads
+Cousins issus de germains ¦ Cousinen zweete Grads
+Sans lien de sang ¦ Ouni Bluttsverwandtschaft
+Ajoute des personnes : un nom, la personne au-dessus (vide pour le haut), les années, le lien. ¦ Setz Persounen derbäi: en Numm, d’Persoun driwwer (eidel fir uewen), d’Joren, d’Verwandtschaft.
+Arbre en accordéon : {n} personnes, {r} sommets. ¦ Akkordeonbaum: {n} Persounen, {r} Spëtzten.
+Arbre en accordéon : {n} personnes, {r} sommet. ¦ Akkordeonbaum: {n} Persounen, {r} Spëtzt.
+parente|arrière-grand-père ¦ Urgrousspapp
+parente|grand-père ¦ Grousspapp
+parente|père ¦ Papp
+parente|moi ¦ ech
+parente|sœur ¦ Schwëster
+parente|frère ¦ Brudder
+parente|tante ¦ Tatta
+parente|oncle ¦ Monni
+parente|cousin germain ¦ Cousin éischte Grads
+parente|cousine germaine ¦ Cousine éischte Grads
+parente|grand-oncle ¦ Grousmonni
+parente|cousin germain de mon père ¦ Cousin éischte Grads vu mengem Papp
+parente|cousin issu de germains ¦ Cousin zweete Grads
+parente|cousine issue de germains ¦ Cousine zweete Grads
+parente|fils ¦ Jong
+parente|fille ¦ Duechter
+parente|petit-fils ¦ Enkel
+parente|petite-fille ¦ Enkelin
+parente|arrière-petit-fils ¦ Urenkel
+parente|neveu ¦ Neveu
+parente|petit-neveu ¦ Grousneveu
+parente|parent ¦ Verwandten
+parente|frères et sœurs ¦ Geschwëster
+parente|cousins germains ¦ Cousinen éischte Grads
+parente|cousins issus de germains ¦ Cousinen zweete Grads
+parente|cousins issus d’issus de germains ¦ Cousinen drëtte Grads
+parente|parent et enfant ¦ Elterendeel a Kand
+parente|oncle ou tante et neveu ou nièce ¦ Monni oder Tatta an Neveu oder Niècce
+parente|à la mode de Bretagne ¦ „op Bretonesch“ (duebel Verwandtschaft)
+parente|époux ¦ Ehepartner
+Ajoute des liens : deux personnes et leur lien (cousins germains…), ou prends-les dans ta base. ¦ Setz Verbindungen derbäi: zwou Persounen an hir Verwandtschaft (Cousinen éischte Grads…), oder huel se aus denger Datebank.
+Ajoute au moins deux personnes, puis ce que chacune est pour l’autre (ou prends-les dans ta base). ¦ Setz op d’mannst zwou Persounen derbäi, an dann, wat all eng fir déi aner ass (oder huel se aus denger Datebank).
+Ajoute des noms : le nom, le nom d’où il vient (vide pour le premier), la génération où il entre. ¦ Setz Nimm derbäi: den Numm, den Numm, vun deem e kënnt (eidel fir den éischten), d’Generatioun, wou en erakënnt.
+Ajoute des paires de lieux et combien de mariages les relient. ¦ Setz Puer Plazen derbäi a wéi vill Bestietnesser se verbannen.
+Ajoute des valeurs : une catégorie (siècle, sexe…) et un chiffre par ligne. ¦ Setz Wäerter derbäi: eng Kategorie (Joerhonnert, Geschlecht…) an eng Zuel pro Zeil.
+{name} : {n} valeurs, médiane {med}, la moitié entre {q1} et {q3}, de {min} à {max} ¦ {name}: {n} Wäerter, Median {med}, d’Hallschent tëscht {q1} an {q3}, vun {min} bis {max}
+{name} : {n} valeur, médiane {med}, la moitié entre {q1} et {q3}, de {min} à {max} ¦ {name}: {n} Wäert, Median {med}, d’Hallschent tëscht {q1} an {q3}, vun {min} bis {max}
+Nom seulement ¦ Nëmmen den Numm
+Une date ¦ En Datum
+Dates et lieux ¦ Datumer a Plazen
+Sourcé ¦ Mat Quell
+Ajoute des ancêtres : un n° Sosa, un nom et une valeur (ou prends-les dans ta base). ¦ Setz Virfahren derbäi: eng Sosa-Nr., en Numm an e Wäert (oder huel se aus denger Datebank).
+🧬 Mes ancêtres, génération par génération ¦ 🧬 Meng Virfahren, Generatioun fir Generatioun
+Chaque ancêtre devient une barre, de sa naissance à son décès ; les générations s’empilent, la couleur montre la branche (paternelle ou maternelle). ¦ All Virfahr gëtt e Balken, vu senger Gebuert bis zu sengem Doud; d’Generatioune stapele sech, d’Faarf weist den Zweig (vu Papps oder vu Mammes Säit).
+Aucun ancêtre daté pour cette personne. ¦ Keen datéierte Virfahr fir dës Persoun.
+{n} enfants pris dans ta base. ¦ {n} Kanner aus denger Datebank geholl.
+{n} enfant pris dans ta base. ¦ {n} Kand aus denger Datebank geholl.
+📉 Naissances et décès de ma base ¦ 📉 Gebuerten an Doudesfäll a menger Datebank
+Compte les naissances (ou baptêmes) et les décès (ou sépultures) de chaque année. Laisse le lieu vide pour toute la base. ¦ Zielt d’Gebuerten (oder Daf) an d’Doudesfäll (oder Begriefnesser) vun all Joer. Looss d’Plaz eidel fir déi ganz Datebank.
+Un seul lieu (facultatif) ¦ Eng eenzeg Plaz (fakultativ)
+Année par année ¦ Joer fir Joer
+Par 5 ans ¦ All 5 Joer
+Par 10 ans ¦ All 10 Joer
+Naissances et décès ¦ Gebuerten an Doudesfäll
+👨‍👩‍👧 Une fratrie de ma base ¦ 👨‍👩‍👧 Geschwëster aus menger Datebank
+Choisis une personne : ses frères et sœurs (ou ses enfants) deviennent des barres sur le même axe des âges, avec leurs mariages et la naissance de leurs enfants. ¦ Wiel eng Persoun: hir Bridder a Schwësteren (oder hir Kanner) ginn zu Balken op derselwechter Altersachs, mat hire Bestietnesser an der Gebuert vun hire Kanner.
+Sa fratrie (elle comprise) ¦ Hir Geschwëster (si selwer mat)
+Personne : aucun enfant trouvé. ¦ Persoun: kee Kand fonnt.
+🔺 Toutes les personnes de ma base ¦ 🔺 All d’Persounen a menger Datebank
+Chaque personne née, et pas encore morte, l’année choisie compte dans sa tranche d’âge. Ensuite : le curseur sous le dessin change l’année, ▶ fait défiler le temps. ¦ All Persoun, déi am gewielte Joer gebuer an nach net gestuerwen ass, zielt a senger Altersklass. Duerno: de Schieber ënner der Zeechnung ännert d’Joer, ▶ léisst d’Zäit lafen.
+Année de départ ¦ Startjoer
+Décès inconnu ¦ Doud onbekannt
+Ne pas compter la personne ¦ D’Persoun net zielen
+Supposer une vie de 60 ans ¦ E Liewe vu 60 Joer unhuelen
+Supposer une vie de 80 ans ¦ E Liewe vun 80 Joer unhuelen
+Aucune personne avec une date de naissance. ¦ Keng Persoun mat engem Gebuertsdatum.
+🪗 Mes ancêtres et leurs descendants ¦ 🪗 Meng Virfahren an hir Nokommen
+Les ancêtres de la personne sur quelques générations, puis tous leurs descendants jusqu’à sa génération : frères et sœurs, oncles, cousins germains, issus de germains… avec le lien de parenté de chacun. ¦ D’Virfahre vun der Persoun iwwer e puer Generatiounen, an dann all hir Nokomme bis bei hir Generatioun: Geschwëster, Monnecher, Cousinen éischte Grads, zweete Grads… mat der Verwandtschaft vun all eenzelem.
+Pas assez de parents connus pour cette personne. ¦ Net genuch bekannte Verwandte fir dës Persoun.
+🧶 Les cousins de ma base ¦ 🧶 D’Cousinen a menger Datebank
+Choisis des personnes (au moins deux), ou laisse vide : l’app prend la personne de départ et tous ses cousins de la même génération jusqu’à l’ancêtre commun choisi. ¦ Wiel Persounen (op d’mannst zwou), oder looss eidel: d’App hëlt d’Startpersoun an all hir Cousine vun der selwechter Generatioun bis bei de gewielte gemeinsame Virfahr.
+Personnes (facultatif) ¦ Persounen (fakultativ)
+Ancêtre commun jusqu’à ¦ Gemeinsame Virfahr bis
+Les plus proches (et de quoi tout relier) ¦ Déi nooste (an der genuch, fir alles ze verbannen)
+Aucun lien de parenté trouvé entre ces personnes. ¦ Keng Verwandtschaft tëscht dëse Persoune fonnt.
+🔢 Des personnes de ma base ¦ 🔢 Persounen aus menger Datebank
+Choisis jusqu’à 20 personnes : chaque case dit ce que la personne de la colonne est pour celle de la ligne (père, oncle, cousin germain…), et se colore selon la proximité. ¦ Wiel bis zu 20 Persounen: all Feld seet, wat d’Persoun vun der Kolonn fir déi vun der Zeil ass (Papp, Monni, Cousin éischte Grads…), a gëtt no der Noperschaft gefierft.
+Qui est quoi pour qui ¦ Wien ass wat fir wien
+🌳 Les noms de mes ancêtres ¦ 🌳 D’Nimm vu menge Virfahren
+Chaque nom de famille de l’ascendance : par qui et quand il entre dans l’arbre (une femme et son nom), ses variantes d’écriture regroupées, et combien d’ancêtres le portent à chaque génération. ¦ All Familljennumm aus der Virfahrelinn: iwwer wien a wéini en an de Stammbaum kënnt (eng Fra an hiren Numm), seng Schreifvarianten zesummegeholl, a wéi vill Virfahren en an all Generatioun droen.
+Aucun nom de famille dans cette ascendance. ¦ Kee Familljennumm an dëser Virfahrelinn.
+🎼 Les mariages de ma base ¦ 🎼 D’Bestietnesser a menger Datebank
+Chaque mariage relie deux lieux : les lieux de naissance des deux époux, ou le lieu de naissance de chacun et le lieu du mariage. Les lieux les plus fréquents gardent leur nom, les autres vont dans « Autres ». ¦ All Bestietnes verbënnt zwou Plazen: d’Gebuertsplaze vu béide Partner, oder d’Gebuertsplaz vun all eenzelem an d’Plaz vum Bestietnes. Déi heefegst Plaze behalen hiren Numm, déi aner kommen an „Aner“.
+Le village de l’époux et celui de l’épouse ¦ D’Duerf vum Mann an dat vun der Fra
+Le village de chacun → le lieu du mariage ¦ D’Duerf vun all eenzelem → d’Plaz vum Bestietnes
+Lieux gardés ¦ Behale Plazen
+🎻 Des âges de ma base ¦ 🎻 Alter aus menger Datebank
+Chaque personne donne une valeur (son âge au décès, ou au mariage), rangée dans une catégorie (son siècle, son sexe). ¦ All Persoun gëtt e Wäert (hiert Alter beim Doud, oder beim Bestietnes), an eng Kategorie sortéiert (hiert Joerhonnert, hiert Geschlecht).
+🟩 Mes ancêtres (numéros Sosa) ¦ 🟩 Meng Virfahren (Sosa-Nummeren)
+Une case par place d’ancêtre ; les cases grises sont les ancêtres pas encore trouvés. Clic sur une case (hors de l’éditeur) : sa fiche. ¦ Ee Feld pro Virfahreplaz; déi gro Felder sinn d’Virfahren, déi nach net fonnt sinn. Klick op e Feld (ausserhalb vum Editeur): seng Fiche.
+Ce que je sais (nom, dates, lieux, sources) ¦ Wat ech weess (Numm, Datumer, Plazen, Quellen)
+Région de naissance ¦ Gebuertsregioun
+Siècle de naissance ¦ Gebuertsjoerhonnert
+Les personnes (une barre par vie) ¦ D’Persounen (ee Balke pro Liewen)
+Génération (vide = d’après le n° Sosa) ¦ Generatioun (eidel = no der Sosa-Nr.)
+Décès (vide = vivant ; ? = inconnu) ¦ Doud (eidel = lieft nach; ? = onbekannt)
+Les événements historiques en fond (facultatif) ¦ D’historesch Evenementer am Hannergrond (fakultativ)
+Couleur des barres ¦ Faarf vun de Balken
+Branche paternelle ou maternelle ¦ Zweig vu Papps oder vu Mammes Säit
+Homme ou femme ¦ Mann oder Fra
+Colonne « Groupe » ¦ Kolonn „Grupp“
+Serrée (noms dans les barres) ¦ Kompakt (Nimm an de Balken)
+Une ligne par personne (noms à gauche) ¦ Eng Zeil pro Persoun (Nimm lénks)
+Les plus anciennes en haut ¦ Déi eelst uewen
+Les plus récentes en haut ¦ Déi neist uewen
+Noms dans les barres ¦ Nimm an de Balken
+Montrer les événements ¦ D’Evenementer uweisen
+Les crises (à changer ou compléter) ¦ D’Krisen (z’änneren oder ze ergänzen)
+Fin (vide = une année) ¦ Enn (eidel = ee Joer)
+Lisser les courbes (moyenne sur … ans) ¦ D’Kurve glätten (Duerchschnëtt iwwer … Joer)
+Montrer les crises ¦ D’Krisen uweisen
+Colorer quand les décès dépassent les naissances ¦ Fierwen, wann d’Doudesfäll d’Gebuerten iwwersteigen
+Couleur des naissances ¦ Faarf vun de Gebuerten
+Couleur des décès ¦ Faarf vun den Doudesfäll
+Nom de l’axe des valeurs ¦ Numm vun der Wäerteachs
+Naissances et décès au village ¦ Gebuerten an Doudesfäll am Duerf
+Les enfants (dans l’ordre de naissance) ¦ D’Kanner (an der Gebuertsreiefolleg)
+Prénom / nom ¦ Virnumm / Numm
+Décès (vide = vivant ou inconnu) ¦ Doud (eidel = lieft nach oder onbekannt)
+Mariages (dates, séparées par des virgules) ¦ Bestietnesser (Datumer, getrennt mat Kommaen)
+Naissance de ses enfants (dates) ¦ Gebuert vu senge Kanner (Datumer)
+Les âges (tous partent de 0) ¦ D’Alter (all fänken op 0 un)
+Les années (calendrier) ¦ D’Joren (Kalenner)
+Par date de naissance ¦ No Gebuertsdatum
+Les personnes (à la main ; celles de ta base : « Depuis l’app ») ¦ D’Persounen (mat der Hand; déi aus denger Datebank: „Aus der App“)
+Année montrée ¦ Gewisent Joer
+Tranches d’âge ¦ Altersklassen
+Dernière tranche à partir de ¦ Lescht Klass ab
+Décès inconnu : supposer une vie de … ans (0 = ne pas compter) ¦ Doud onbekannt: e Liewe vun … Joer unhuelen (0 = net zielen)
+Même échelle pour toutes les années (lecture) ¦ Selwechte Moossstaf fir all d’Joren (Ofspillen)
+Afficher les nombres ¦ D’Zuelen uweisen
+Couleur des hommes ¦ Faarf vun de Männer
+Couleur des femmes ¦ Faarf vun de Fraen
+Hauteur des barres (px, au total) ¦ Héicht vun de Balken (px, am Ganzen)
+Les personnes (même nom au-dessus = branche) ¦ D’Persounen (selwechten Numm driwwer = Zweig)
+Au-dessus (nom ; vide pour le haut) ¦ Driwwer (Numm; eidel fir uewen)
+Lien de parenté ¦ Verwandtschaft
+Degré (couleur) ¦ Grad (Faarf)
+Montrer le lien de parenté ¦ D’Verwandtschaft uweisen
+Générations ouvertes au départ (0 = toutes) ¦ Generatiounen am Ufank opgeklappt (0 = all)
+Décalage d’une génération ¦ Aréckung pro Generatioun
+Les liens (deux personnes et leur lien) ¦ D’Verbindungen (zwou Persounen an hir Verwandtschaft)
+Les personnes (facultatif : famille pour la couleur) ¦ D’Persounen (fakultativ: Famill fir d’Faarf)
+Noms des liens sur les traits ¦ Nimm vun de Verbindungen op de Stréchen
+Si pas trop nombreux (60) ¦ Wann et net ze vill sinn (60)
+Les cousinages de la famille ¦ D’Cousinage vun der Famill
+Les personnes (lignes et colonnes, 40 au plus) ¦ D’Persounen (Zeilen a Kolonnen, maximal 40)
+Les cases : ce que B est pour A ¦ D’Felder: wat B fir A ass
+Lien (père, cousin germain…) ¦ Verwandtschaft (Papp, Cousin éischte Grads…)
+Le lien ¦ D’Verwandtschaft
+Le degré ¦ De Grad
+Rien (couleurs seules) ¦ Näischt (nëmme Faarwen)
+Les noms (d’où vient chacun) ¦ D’Nimm (wou all eenzelen hierkënnt)
+Arrive par (nom ; vide pour le premier) ¦ Kënnt iwwer (Numm; eidel fir den éischten)
+Génération d’entrée ¦ Generatioun vum Antrëtt
+Porteurs par génération (1,2,4…) ¦ Dréier pro Generatioun (1,2,4…)
+Les ancêtres (n° Sosa → valeur) ¦ D’Virfahren (Sosa-Nr. → Wäert)
+Valeur (chiffre ou catégorie) ¦ Wäert (Zuel oder Kategorie)
+Les catégories et leur couleur (facultatif) ¦ D’Kategorien an hir Faarf (fakultativ)
+Une ligne par génération ¦ Eng Zeil pro Generatioun
+Un carré (cases dans l’ordre des numéros) ¦ E Quadrat (Felder an der Reiefolleg vun den Nummeren)
+Le nom (si la place le permet) ¦ Den Numm (wann d’Plaz duergeet)
+Le n° Sosa ¦ D’Sosa-Nr.
+Le nom et le n° Sosa ¦ Den Numm an d’Sosa-Nr.
+Un dégradé (chiffres) ¦ E Faarfverlaf (Zuelen)
+Une couleur par catégorie ¦ Eng Faarf pro Kategorie
+Dégradé : minimum ¦ Faarfverlaf: Minimum
+Dégradé : maximum ¦ Faarfverlaf: Maximum
+Couleur des ancêtres pas trouvés ¦ Faarf vun de Virfahren, déi net fonnt sinn
+Ce que je sais de mes ancêtres ¦ Wat ech vu menge Virfahre weess
+Les paires de lieux ¦ D’Puer Plazen
+Lieu A ¦ Plaz A
+Lieu B ¦ Plaz B
+Lieux gardés (les autres : « Autres ») ¦ Behale Plazen (déi aner: „Aner“)
+Mariages dans le même lieu (boucles) ¦ Bestietnesser op der selwechter Plaz (Schleifen)
+Opacité des rubans ¦ Opazitéit vun de Bänner
+Là où il y a la place ¦ Do, wou Plaz ass
+Unité (ex. : mariages) ¦ Eenheet (z. B.: Bestietnesser)
+Les valeurs (une par ligne) ¦ D’Wäerter (ee pro Zeil)
+Catégorie (siècle, sexe…) ¦ Kategorie (Joerhonnert, Geschlecht…)
+Médiane et quartiles ¦ Median a Quartilen
+Écrire la médiane ¦ De Median uweisen
+Par médiane ¦ No Median
+Unité (ex. : ans) ¦ Eenheet (z. B.: Joer)
+Nom de l’axe ¦ Numm vun der Achs
+Faire défiler les années ¦ D’Joren ofspillen
+=segment ¦ Segment|Segmenter
+=correspondance ¦ Match|Matches
+=valeur ¦ Wäert|Wäerter
+=couple ¦ Koppel|Koppelen
+Peint : {p} % côté père · {m} % côté mère ¦ Gemoolt: {p} % vu Papps Säit · {m} % vu Mammes Säit
+Peint : {p} % du génome ¦ Gemoolt: {p} % vum Genom
+({n} petits segments non montrés) ¦ ({n} kleng Segmenter net gewisen)
+Chromosome {c} — copie reçue du père ({mb} Mb) ¦ Chromosom {c} — Kopie vum Papp ({mb} Mb)
+Chromosome {c} — copie reçue de la mère ¦ Chromosom {c} — Kopie vun der Mamm
+Chromosome {c} ({mb} Mb) ¦ Chromosom {c} ({mb} Mb)
+chromosome {c} : {a} à {b} Mb ¦ Chromosom {c}: {a} bis {b} Mb
+(clic : sa fiche) ¦ (Klick: seng Fiche)
+(clic : la liste) ¦ (Klick: d’Lëscht)
+Côté père ¦ Vu Papps Säit
+Côté mère ¦ Vu Mammes Säit
+Côté inconnu ¦ Onbekannt Säit
+côté père ¦ vu Papps Säit
+côté mère ¦ vu Mammes Säit
+des deux côtés ¦ vu béide Säiten
+côté inconnu ¦ onbekannt Säit
+Branche inconnue ¦ Onbekannten Zweig
+Peinture des chromosomes : {s} de {m} ¦ Chromosomemolerei: {s} vun {m}
+{p} % du génome côté père et {m} % côté mère ¦ {p} % vum Genom vu Papps Säit an {m} % vu Mammes Säit
+Peinture des chromosomes — {name} ¦ Chromosomemolerei — {name}
+Correspondance {n} ¦ Match {n}
+parenté connue : {k} ¦ bekannt Verwandtschaft: {k}
+parentés possibles : {k} ¦ méiglech Verwandtschaften: {k}
+{rel} : en moyenne {avg} cM, de {min} à {max} cM — {n} de tes correspondances dans cette fourchette ¦ {rel}: am Duerchschnëtt {avg} cM, vun {min} bis {max} cM — {n} vun denge Matches an dësem Beräich
+pour {name} : {p} % ¦ fir {name}: {p} %
+{n} correspondances placées ¦ {n} Matches placéiert
+{n} correspondance placée ¦ {n} Match placéiert
+Règle des cM : {n} sur une échelle logarithmique de {r} parentés (Shared cM Project). ¦ cM-Lineal: {n} op enger logarithmescher Skala vun {r} Verwandtschaften (Shared cM Project).
+Règle des cM : {n} sur une échelle linéaire de {r} parentés (Shared cM Project). ¦ cM-Lineal: {n} op enger linearer Skala vun {r} Verwandtschaften (Shared cM Project).
+{name} : {n}, médiane {med}, moyenne {mean}, de {min} à {max} ¦ {name}: {n}, Median {med}, Duerchschnëtt {mean}, vun {min} bis {max}
+{name} : médiane {v} ¦ {name}: Median {v}
+Vagues : {g}, {n} valeurs, de {min} à {max}. ¦ Wellen: {g}, {n} Wäerter, vun {min} bis {max}.
+({p} % de {label}, {t} % du tout) ¦ ({p} % vun {label}, {t} % vum Ganzen)
+Mosaïque de {c} colonnes (largeur = part du total {t}) et {s} séries. ¦ Mosaik vun {c} Kolonnen (Breet = Undeel um Total {t}) an {s} Serien.
+(écart {v}) ¦ (Ënnerscheed {v})
+Échelle de points : {n} lignes, {s}. ¦ Punktediagramm: {n} Zeilen, {s}.
+(total {v}) ¦ (Total {v})
+Rose de Nightingale : {n} parts, {s}, l’aire de chaque part suit le chiffre. ¦ Nightingale-Rous: {n} Deeler, {s}, d’Fläch vun all Deel follegt der Zuel.
+Rose de Nightingale : {n} parts, {s}. ¦ Nightingale-Rous: {n} Deeler, {s}.
+Même métier que le père : {n} sur {t} ({p} %) ¦ Selwechte Beruff wéi de Papp: {n} vun {t} ({p} %)
+Père {a} → {kid} {b} : {n} ¦ Papp {a} → {kid} {b}: {n}
+{p} % des enfants de {job}, {t} % du tout ¦ {p} % vun de Kanner vun {job}, {t} % vum Ganzen
+Père ↓ · {kid} → ¦ Papp ↓ · {kid} →
+Chiffres en % des enfants de chaque métier du père ¦ Zuelen an % vun de Kanner vun all Beruff vum Papp
+Chiffres en % de chaque métier de {kid} ¦ Zuelen an % vun all Beruff vun {kid}
+Chiffres en % du tout ¦ Zuelen an % vum Ganzen
+Chiffres en nombre ¦ Zuelen als Unzuel
+cadre de couleur : même métier que le père. ¦ faarwege Kader: selwechte Beruff wéi de Papp.
+Cadre de couleur : même métier que le père. ¦ Faarwege Kader: selwechte Beruff wéi de Papp.
+Tableau de mobilité : {t} couples père et {kid}, {n} métiers ; {p} % font le métier du père. ¦ Mobilitéitstabell: {t} Koppele Papp an {kid}, {n} Beruffer; {p} % maachen de Beruff vum Papp.
+, femmes et hommes ¦ , Fraen a Männer
+, par siècle du mariage ¦ , pro Joerhonnert vum Bestietnes
+, par siècle de naissance ¦ , pro Gebuertsjoerhonnert
+, par siècle ¦ , pro Joerhonnert
+D’après {n} de l’arbre ¦ No {n} aus dem Stammbaum
+largeur : le nombre de personnes de la période ; hauteur : la part de chacun ¦ Breet: d’Zuel vu Persounen aus der Period; Héicht: den Undeel vun all eenzelem
+D’après les fiches de l’arbre ¦ No de Fiche vum Stammbaum
+femmes et hommes ¦ Fraen a Männer
+D’après {n} au mois près ¦ No {n} op de Mount genau
+D’après {n} père et {kid} dont les deux métiers sont connus ¦ No {n} Papp an {kid}, vun deenen allebéid Beruffer bekannt sinn
+{n} pris dans l’onglet ADN. ¦ {n} aus dem DNA-Reiter geholl.
+{n} prises dans l’onglet ADN. ¦ {n} aus dem DNA-Reiter geholl.
+(les 300 premières) ¦ (déi éischt 300)
+clic : la fiche. ¦ Klick: d’Fiche.
+Cette partie ¦ Dësen Deel
+{name} : ferme l’éditeur et clique à nouveau pour voir la liste des personnes. ¦ {name}: maach den Editeur zou a klick nach eng Kéier, fir d’Lëscht vun de Persounen ze gesinn.
+Aucun segment à montrer (vérifie le chromosome, le début et la fin, ou le minimum de cM). ¦ Kee Segment fir ze weisen (kontrolléier de Chromosom, den Ufank an d’Enn, oder de Minimum u cM).
+Ajoute des segments : chromosome, début, fin (en Mb ou en paires de bases), cM, correspondance. ¦ Setz Segmenter derbäi: Chromosom, Ufank, Enn (a Mb oder a Basepueren), cM, Match.
+▲ père ▼ mère ¦ ▲ Papp ▼ Mamm
+Ajoute tes correspondances (nom, cM) : elles se placent sur la règle. ¦ Setz deng Matches derbäi (Numm, cM): si ginn um Lineal placéiert.
+Ajoute des valeurs avec leur groupe (siècle, sexe, branche…) : une vague par groupe. ¦ Setz Wäerter mat hirer Grupp derbäi (Joerhonnert, Geschlecht, Zweig…): eng Well pro Grupp.
+Ajoute des colonnes (lignes du tableau) et leurs parts (séries) : la largeur suit le total. ¦ Setz Kolonnen (Zeile vun der Tabell) an hir Undeeler (Serien) derbäi: d’Breet follegt dem Total.
+Ajoute des lignes et leurs valeurs (une colonne par série, ex. femmes et hommes). ¦ Setz Zeilen an hir Wäerter derbäi (eng Kolonn pro Serie, z. B. Fraen a Männer).
+Ajoute des parts (mois, saisons…) et leurs chiffres (une colonne par série). ¦ Setz Deeler (Méint, Joreszäiten…) an hir Zuelen derbäi (eng Kolonn pro Serie).
+Ajoute des lignes : métier du père, métier de l’enfant, combien. ¦ Setz Zeilen derbäi: Beruff vum Papp, Beruff vum Kand, wéi vill.
+Aucune donnée dans l’arbre pour ce choix (dates manquantes ?). ¦ Keng Donnéeën am Stammbaum fir dës Wiel (feelen Datumer?).
+Aucune donnée dans l’arbre pour ce choix. ¦ Keng Donnéeën am Stammbaum fir dës Wiel.
+Les métiers de la famille, siècle par siècle ¦ D’Beruffer vun der Famill, Joerhonnert fir Joerhonnert
+Les communes de naissance, siècle par siècle ¦ D’Gebuertsgemengen, Joerhonnert fir Joerhonnert
+Les noms de famille, siècle par siècle ¦ D’Familljennimm, Joerhonnert fir Joerhonnert
+Pas assez de dates de naissance et de décès (ou de mariage) pour ce choix. ¦ Net genuch Gebuerts- an Doudesdatumer (oder Bestietnesdatumer) fir dës Wiel.
+Âge moyen au décès, par siècle de naissance ¦ Duerchschnëttlecht Alter beim Doud, pro Gebuertsjoerhonnert
+Âge moyen au mariage, par siècle ¦ Duerchschnëttlecht Alter beim Bestietnes, pro Joerhonnert
+Âge moyen au décès, par commune de naissance ¦ Duerchschnëttlecht Alter beim Doud, pro Gebuertsgemeng
+Âge moyen au décès, par nom de famille ¦ Duerchschnëttlecht Alter beim Doud, pro Familljennumm
+Aucune date au mois près dans l’arbre pour ce choix. ¦ Keen Datum op de Mount genau am Stammbaum fir dës Wiel.
+Naissances, mariages et décès, mois par mois ¦ Gebuerten, Bestietnesser an Doudesfäll, Mount fir Mount
+Les naissances, mois par mois ¦ D’Gebuerten, Mount fir Mount
+Les mariages, mois par mois ¦ D’Bestietnesser, Mount fir Mount
+Les décès, mois par mois ¦ D’Doudesfäll, Mount fir Mount
+Les conceptions (naissance − 9 mois), mois par mois ¦ D’Zeugungen (Gebuert − 9 Méint), Mount fir Mount
+Aucun couple père / enfant dont les deux métiers sont connus. ¦ Keng Koppel Papp / Kand, vun där allebéid Beruffer bekannt sinn.
+Métier du père, métier de l’enfant ¦ Beruff vum Papp, Beruff vum Kand
+Métier du père, métier du fils ¦ Beruff vum Papp, Beruff vum Jong
+Métier du père, métier de la fille ¦ Beruff vum Papp, Beruff vun der Duechter
+Âge au décès, par siècle de naissance ¦ Alter beim Doud, pro Gebuertsjoerhonnert
+Âge au décès, femmes et hommes ¦ Alter beim Doud, Fraen a Männer
+Âge au mariage, par siècle ¦ Alter beim Bestietnes, pro Joerhonnert
+Âge au mariage, femmes et hommes ¦ Alter beim Bestietnes, Fraen a Männer
+Métiers, siècle par siècle ¦ Beruffer, Joerhonnert fir Joerhonnert
+Communes de naissance, siècle par siècle ¦ Gebuertsgemengen, Joerhonnert fir Joerhonnert
+Noms de famille, siècle par siècle ¦ Familljennimm, Joerhonnert fir Joerhonnert
+Métiers, par 50 ans ¦ Beruffer, pro 50 Joer
+Âge moyen au décès (femmes, hommes), par siècle de naissance ¦ Duerchschnëttlecht Alter beim Doud (Fraen, Männer), pro Gebuertsjoerhonnert
+Âge moyen au mariage (femmes, hommes), par siècle ¦ Duerchschnëttlecht Alter beim Bestietnes (Fraen, Männer), pro Joerhonnert
+Naissances, mariages et décès, par mois ¦ Gebuerten, Bestietnesser an Doudesfäll, pro Mount
+Naissances par mois, par siècle ¦ Gebuerte pro Mount, pro Joerhonnert
+Conceptions par mois (naissance − 9 mois), par siècle ¦ Zeugunge pro Mount (Gebuert − 9 Méint), pro Joerhonnert
+Mariages par mois, par siècle ¦ Bestietnesser pro Mount, pro Joerhonnert
+Décès par mois, par siècle ¦ Doudesfäll pro Mount, pro Joerhonnert
+Métier du père → métier du fils ¦ Beruff vum Papp → Beruff vum Jong
+Métier du père → métier de la fille ¦ Beruff vum Papp → Beruff vun der Duechter
+Métier du père → métier de l’enfant (fils et filles) ¦ Beruff vum Papp → Beruff vum Kand (Jongen an Duechteren)
+La personne qui a fait le test… ¦ D’Persoun, déi den Test gemaach huet…
+ℹ️ Aucun test ADN dans ta base : ajoute-le dans l’onglet ADN (🧬 Mes tests), ou remplis le tableau à la main. ¦ ℹ️ Keen DNA-Test an denger Datebank: setz en am DNA-Reiter derbäi (🧬 Meng Tester), oder fëll d’Tabell mat der Hand aus.
+ℹ️ Cette personne n’a pas de test : voici tous les tests de ta base. ¦ ℹ️ Dës Persoun huet keen Test: hei sinn all d’Tester aus denger Datebank.
+Lecture de tes données ADN… ¦ Deng DNA-Donnéeë gi gelies…
+Aucun test ADN dans ta base. ¦ Keen DNA-Test an denger Datebank.
+🧬 Les segments d’un test ¦ 🧬 D’Segmenter vun engem Test
+Les segments partagés avec chaque cousin (onglet ADN → 🧩 Chromosomes) sont peints sur ses chromosomes, colorés par branche (les groupes de l’onglet ADN, ou l’ancêtre noté sur le segment). ¦ D’Segmenter, déi mat all Cousin gedeelt sinn (DNA-Reiter → 🧩 Chromosomen), ginn op seng Chromosome gemoolt, no Zweig gefierft (d’Gruppe vum DNA-Reiter, oder de Virfahr, deen um Segment notéiert ass).
+Segments d’au moins ¦ Segmenter vun op d’mannst
+Ce test n’a pas encore de segments : importe-les dans l’onglet ADN (🧩 Chromosomes → ⤒ Importer des segments). ¦ Dësen Test huet nach keng Segmenter: importéier se am DNA-Reiter (🧩 Chromosomen → ⤒ Segmenter importéieren).
+D’après l’onglet ADN (segments partagés) ¦ No dem DNA-Reiter (gedeelt Segmenter)
+📏 Les correspondances d’un test ¦ 📏 D’Matches vun engem Test
+Chaque correspondance se place sur la règle d’après ses cM partagés ; survole un point pour voir les parentés possibles. ¦ All Match gëtt no senge gedeelte cM um Lineal placéiert; fuer mat der Maus iwwer e Punkt, fir déi méiglech Verwandtschaften ze gesinn.
+Correspondances d’au moins ¦ Matches vun op d’mannst
+Combien au plus ¦ Wéi vill maximal
+Aucune correspondance avec des cM pour ce test (ou au-dessus du minimum choisi). ¦ Kee Match mat cM fir dësen Test (oder iwwer dem gewielte Minimum).
+segments partagés, colorés par branche ¦ gedeelt Segmenter, no Zweig gefierft
+Mes chromosomes peints ¦ Meng gemoolt Chromosomen
+Mes cousins ADN sur la règle des cM ¦ Meng DNA-Cousinen um cM-Lineal
+par siècle de naissance ¦ pro Gebuertsjoerhonnert
+Les métiers, siècle par siècle ¦ D’Beruffer, Joerhonnert fir Joerhonnert
+largeur : nombre de personnes ; hauteur : part du métier ¦ Breet: Zuel vu Persounen; Héicht: Undeel vum Beruff
+par commune de naissance, femmes et hommes ¦ pro Gebuertsgemeng, Fraen a Männer
+Les mois de la vie ¦ D’Méint vum Liewen
+naissances, mariages et décès ¦ Gebuerten, Bestietnesser an Doudesfäll
+Les segments partagés (un par ligne) ¦ D’gedeelt Segmenter (eent pro Zeil)
+Chromosome (1 à 22, X) ¦ Chromosom (1 bis 22, X)
+Début (Mb ou paires de bases) ¦ Ufank (Mb oder Basepueren)
+Branche (couple d’ancêtres) ¦ Zweig (Virfahrekoppel)
+Couleur (sinon celle de la branche) ¦ Faarf (soss déi vum Zweig)
+Les branches et leur couleur (facultatif) ¦ D’Zweeger an hir Faarf (fakultativ)
+Deux copies par chromosome (père en haut, mère en bas) ¦ Zwou Kopië pro Chromosom (Papp uewen, Mamm ënnen)
+Une seule barre par chromosome ¦ Ee Balken pro Chromosom
+Couleur des segments ¦ Faarf vun de Segmenter
+Par correspondance ¦ Pro Match
+Par côté (père, mère) ¦ No Säit (Papp, Mamm)
+Couleur du côté père ¦ Faarf vu Papps Säit
+Couleur du côté mère ¦ Faarf vu Mammes Säit
+Cacher les segments de moins de ¦ Segmenter verstoppen, déi méi kleng si wéi
+Épaisseur des chromosomes ¦ Déckt vun de Chromosomen
+Colonnes (0 = selon la largeur) ¦ Kolonnen (0 = no der Breet)
+Montrer le chromosome X ¦ Den X-Chromosom uweisen
+Noms dans les segments (s’ils tiennent) ¦ Nimm an de Segmenter (wa se drapassen)
+Parenté connue (facultatif) ¦ Bekannt Verwandtschaft (fakultativ)
+Montrer les parentés possibles de… (un nom) ¦ Déi méiglech Verwandtschafte weise vun… (en Numm)
+Régulière ¦ Reegelméisseg
+Parentés ¦ Verwandtschaften
+Les principales ¦ Déi wichtegst
+Toutes (demi-parentés, générations d’écart…) ¦ All (Hallefverwandtschaften, Generatiounen Ofstand…)
+Noms écrits (les plus proches d’abord) ¦ Geschriwwen Nimm (déi nooste fir d’éischt)
+Trait à la moyenne de chaque parenté ¦ Stréch beim Duerchschnëtt vun all Verwandtschaft
+Couleur des autres points ¦ Faarf vun deenen anere Punkten
+Couleur des fourchettes ¦ Faarf vun de Beräicher
+Fin de l’échelle ¦ Enn vun der Skala
+Les valeurs et leur groupe (une vague par groupe) ¦ D’Wäerter an hir Grupp (eng Well pro Grupp)
+Nom (personne…) ¦ Numm (Persoun…)
+Groupe (siècle, sexe…) ¦ Grupp (Joerhonnert, Geschlecht…)
+Couleur du groupe ¦ Faarf vun der Grupp
+Chevauchement des vagues ¦ Iwwerlappung vun de Wellen
+Écart entre les vagues ¦ Ofstand tëscht de Wellen
+Hauteur des vagues ¦ Héicht vun de Wellen
+Chaque vague à sa hauteur ¦ All Well op hirer Héicht
+Selon le nombre de valeurs ¦ No der Zuel vu Wäerter
+Par nombre de valeurs ¦ No der Zuel vu Wäerter
+Une par groupe ¦ Eng pro Grupp
+Dégradé : première couleur ¦ Faarfverlaf: éischt Faarf
+Dégradé : dernière couleur ¦ Faarfverlaf: lescht Faarf
+Montrer la médiane ¦ De Median uweisen
+Écrire le nombre de valeurs ¦ D’Zuel vu Wäerter uweisen
+Début de l’axe (vide = automatique) ¦ Ufank vun der Achs (eidel = automatesch)
+Fin de l’axe (vide = automatique) ¦ Enn vun der Achs (eidel = automatesch)
+Les colonnes (lignes) et leurs parts (séries) ¦ D’Kolonnen (Zeilen) an hir Undeeler (Serien)
+La part en % ¦ Den Undeel an %
+Le chiffre ¦ D’Zuel
+Part de chaque colonne sous l’axe ¦ Undeel vun all Kolonn ënner der Achs
+Ordre des colonnes ¦ Reiefolleg vun de Kolonnen
+Les plus larges d’abord ¦ Déi breetst fir d’éischt
+Écart entre les colonnes ¦ Ofstand tëscht de Kolonnen
+Couleur des traits ¦ Faarf vun de Stréchen
+Les lignes et leurs valeurs (une colonne par série) ¦ D’Zeilen an hir Wäerter (eng Kolonn pro Serie)
+Par écart entre les deux séries ¦ Nom Ënnerscheed tëscht deenen zwou Serien
+Pointillé sur toute la largeur ¦ Punktéiert iwwer déi ganz Breet
+Entre les points (écart) ¦ Tëscht de Punkten (Ënnerscheed)
+Couleur des points (une seule série) ¦ Faarf vun de Punkten (eng eenzeg Serie)
+Écrire la valeur ¦ De Wäert uweisen
+Écrire l’écart (deux séries) ¦ Den Ënnerscheed uweisen (zwou Serien)
+Mettre en avant (un nom ; les autres pâlissent) ¦ Ervirhiewen (en Numm; déi aner gi blass)
+Les parts (mois, saisons…) et leurs chiffres ¦ D’Deeler (Méint, Joreszäiten…) an hir Zuelen
+Plusieurs séries ¦ Méi Serien
+Empilées ¦ Gestapelt
+Superposées (comme Florence Nightingale) ¦ Iwwerenee geluecht (wéi Florence Nightingale)
+L’aire suit le chiffre (sinon : la longueur) ¦ D’Fläch follegt der Zuel (soss: d’Längt)
+Départ (degrés, 0 = en haut) ¦ Start (Grad, 0 = uewen)
+Noms des parts ¦ Nimm vun den Deeler
+Cercles de l’échelle ¦ Kreeser vun der Skala
+Couleur des traits entre les parts ¦ Faarf vun de Stréchen tëscht den Deeler
+Les couples de métiers ¦ D’Beruffskoppelen
+Métier du père ¦ Beruff vum Papp
+Métier de l’enfant ¦ Beruff vum Kand
+Regrouper des métiers (facultatif : un mot → une famille de métiers) ¦ Beruffer zesummefaassen (fakultativ: e Wuert → eng Beruffsfamill)
+Métier (ou un morceau du mot) ¦ Beruff (oder en Deel vum Wuert)
+Famille de métiers ¦ Beruffsfamill
+En % des enfants de chaque métier du père ¦ An % vun de Kanner vun all Beruff vum Papp
+En % de chaque métier de l’enfant ¦ An % vun all Beruff vum Kand
+En nombre ¦ Als Unzuel
+Combien de métiers ¦ Wéi vill Beruffer
+Regrouper les autres dans « Autres » ¦ Déi aner an „Aner“ zesummefaassen
+Les plus fréquents d’abord ¦ Déi heefegst fir d’éischt
+Cadre « même métier que le père » ¦ Kader „selwechte Beruff wéi de Papp“
+Le mot pour l’enfant (ex. : le fils) ¦ D’Wuert fir d’Kand (z. B.: de Jong)
+Ces personnes ne sont plus dans la base. ¦ Dës Persoune sinn net méi an der Datebank.
+Naissances ¦ Gebuerten
+=lignée ¦ Linn|Linnen
+=mère ¦ Mamm|Mammen
+personne de départ ¦ Startpersoun
+ancêtre ({k} générations) ¦ Virfahr ({k} Generatiounen)
+descendant ({k} générations) ¦ Nokomm ({k} Generatiounen)
+descendante ({k} générations) ¦ Nokommin ({k} Generatiounen)
+{k} générations au-dessus ¦ {k} Generatiounen driwwer
+{k} générations en dessous ¦ {k} Generatiounen drënner
+Arrière-arrière-petits-enfants ¦ Ur-Urenkelkanner
+Arrière-arrière-arrière-petits-enfants ¦ Ur-Ur-Urenkelkanner
+parente|mère ¦ Mamm
+parente|grand-mère ¦ Groussmamm
+parente|grand-parent ¦ Grousselterendeel
+parente|enfant ¦ Kand
+parente|petit-enfant ¦ Enkelkand
+parente|arrière-grand-mère ¦ Urgroussmamm
+parente|arrière-grand-parent ¦ Urgrousselterendeel
+parente|arrière-arrière-grand-père ¦ Ur-Urgrousspapp
+parente|arrière-arrière-grand-mère ¦ Ur-Urgroussmamm
+parente|arrière-arrière-grand-parent ¦ Ur-Urgrousselterendeel
+parente|arrière-arrière-arrière-grand-père ¦ Ur-Ur-Urgrousspapp
+parente|arrière-arrière-arrière-grand-mère ¦ Ur-Ur-Urgroussmamm
+parente|arrière-arrière-arrière-grand-parent ¦ Ur-Ur-Urgrousselterendeel
+parente|arrière-petite-fille ¦ Urenkelin
+parente|arrière-petit-enfant ¦ Urenkelkand
+parente|arrière-arrière-petit-fils ¦ Ur-Urenkel
+parente|arrière-arrière-petite-fille ¦ Ur-Urenkelin
+parente|arrière-arrière-petit-enfant ¦ Ur-Urenkelkand
+parente|arrière-arrière-arrière-petit-fils ¦ Ur-Ur-Urenkel
+parente|arrière-arrière-arrière-petite-fille ¦ Ur-Ur-Urenkelin
+parente|arrière-arrière-arrière-petit-enfant ¦ Ur-Ur-Urenkelkand
+{n} générations en vie en même temps : {a} – {b} ¦ {n} Generatiounen zur selwechter Zäit am Liewen: {a} – {b}
+(en vie) ¦ (lieft nach)
+(décès inconnu : vie supposée) ¦ (Doud onbekannt: ugeholl Liewensdauer)
+(décès inconnu) ¦ (Doud onbekannt)
+{a} ({ra}) a connu {b} ({rb}) pendant {years} ({period}). ¦ {a} ({ra}) huet {b} ({rb}) während {years} gekannt ({period}).
+{a} a connu {b} ({k} générations plus tard) pendant {years} ({period}). ¦ {a} huet {b} ({k} Generatioune méi spéit) während {years} gekannt ({period}).
+Personne de ces vies ne se chevauche sur {n} générations ou plus. ¦ Keent vun dëse Liewen iwwerlappt sech iwwer {n} Generatiounen oder méi.
+Qui a connu qui : {n} vies sur {g} générations ; {s} rencontres racontées. ¦ Wien huet wie gekannt: {n} Liewen iwwer {g} Generatiounen; {s} Begéinunge beschriwwen.
+Qui a connu qui : {n} vies sur {g} générations ; {s} rencontre racontée. ¦ Wien huet wie gekannt: {n} Liewen iwwer {g} Generatiounen; {s} Begéinung beschriwwen.
+Âge (ans) ¦ Alter (Joer)
+médiane {n} ans ¦ Median {n} Joer
+{name} : la moitié a passé {n} ans ¦ {name}: d’Hallschent ass méi al ginn wéi {n} Joer
+{name} : {p} % encore en vie à {a} ans ({n}) · {d} entre {a} et {b} ans ¦ {name}: {p} % mat {a} Joer nach am Liewen ({n}) · {d} tëscht {a} a {b} Joer
+Courbe de survie : {n} personnes en {g} groupes. ¦ Iwwerliewenskurv: {n} Persounen an {g} Gruppen.
+Courbe de survie : {n} personnes en {g} groupe. ¦ Iwwerliewenskurv: {n} Persounen an {g} Grupp.
+Même métier que la génération d’avant — {list} ¦ Selwechte Beruff wéi d’Generatioun virdrun — {list}
+Métiers sur {n} générations : {l}. ¦ Beruffer iwwer {n} Generatiounen: {l}.
+{a} et {b} : {d} ¦ {a} an {b}: {d}
+(né à {p}) ¦ (gebuer zu {p})
+(née à {p}) ¦ (gebuer zu {p})
+même lieu de naissance ¦ selwecht Gebuertsplaz
+mariage {y} ¦ Bestietnes {y}
+(au-delà du cercle) ¦ (ausserhalb vum Krees)
+le village de l’époux ¦ d’Duerf vum Mann
+{n} du même lieu ¦ {n} vun der selwechter Plaz
+{c} : la moitié des mariages à moins de {km} km ¦ {c}: d’Hallschent vun de Bestietnesser op manner wéi {km} km
+Rayon des mariages : {n}, médiane {km} km. ¦ Bestietnesradius: {n}, Median {km} km.
+Génération {g} : {t} ancêtres possibles, {f} places trouvées ({p} %), {d} personnes différentes ¦ Generatioun {g}: {t} méiglech Virfahren, {f} Plaze fonnt ({p} %), {d} verschidde Persounen
+implexe {p} % ¦ Implex {p} %
+Ancêtres présents plusieurs fois à la génération {g} ¦ Virfahren, déi an der Generatioun {g} e puermol virkommen
+Sur {n} générations : {t} ancêtres possibles, {f} places trouvées ({p} %), {d} personnes différentes (génération par génération) — implexe {i} %. ¦ Iwwer {n} Generatiounen: {t} méiglech Virfahren, {f} Plaze fonnt ({p} %), {d} verschidde Persounen (Generatioun fir Generatioun) — Implex {i} %.
+Implexe sur {n} générations : {p} %. ¦ Implex iwwer {n} Generatiounen: {p} %.
+Mariages datés au jour près : {l} pendant le Carême et {a} pendant l’Avent, sur {t} ({p} %). ¦ Bestietnesser op den Dag genau datéiert: {l} an der Faaschtenzäit an {a} am Advent, vun {t} ({p} %).
+Conceptions pendant le Carême : {n} sur {t} ({p} % ; {e} % si tout était égal). ¦ Zeugungen an der Faaschtenzäit: {n} vun {t} ({p} %; {e} % wann alles gläich wier).
+En mars (Carême) : {a} % des {what} ; en décembre (Avent) : {b} % ; {e} % si tout était égal. ¦ Am Mäerz (Faaschtenzäit): {a} % vun {what}; am Dezember (Advent): {b} %; {e} % wann alles gläich wier.
+Mois des {a} et des {b} : {x} et {y}. ¦ Méint vun {a} a vun {b}: {x} an {y}.
+Mois des {a} : {x}. ¦ Méint vun {a}: {x}.
+nés en {month} ¦ gebuer am {month}
+Si {what} étaient répartis également sur l’année (selon le nombre de jours du mois) ¦ Wann {what} gläichméisseg iwwer d’Joer verdeelt wieren (no der Zuel vun den Deeg am Mount)
+(naissance inconnue : âges estimés) ¦ (Gebuert onbekannt: Alter geschat)
+{name} : née en {y} (mère : {age} ans, estimé) ¦ {name}: gebuer {y} (Mamm: {age} Joer, geschat)
+{name} : née en {y} (mère : {age} ans) ¦ {name}: gebuer {y} (Mamm: {age} Joer)
+{name} : né en {y} (mère : {age} ans, estimé) ¦ {name}: gebuer {y} (Mamm: {age} Joer, geschat)
+{name} : né en {y} (mère : {age} ans) ¦ {name}: gebuer {y} (Mamm: {age} Joer)
+{n} mois entre {a} et {b} ¦ {n} Méint tëscht {a} an {b}
+le suivant ¦ dee nächsten
+{k} chez {m} ¦ {k} bei {m}
+écart médian entre deux naissances : {n} mois ¦ Median vum Ofstand tëscht zwou Gebuerten: {n} Méint
+{p} % morts avant {n} ans. ¦ {p} % gestuerwe virun {n} Joer.
+Espacement des naissances : {m}, {k}, écart médian {n} mois. ¦ Ofstand tëscht de Gebuerten: {m}, {k}, Median vum Ofstand {n} Méint.
+Espacement des naissances : {m}, {k}. ¦ Ofstand tëscht de Gebuerten: {m}, {k}.
+Lieux de vie de {n} : {l}. ¦ Liewensplaze vun {n}: {l}.
+Qui a connu qui autour de {name} ¦ Wien huet wie gekannt ronderëm {name}
+Survie par {what} ¦ Iwwerliewen no {what}
+{n} personnes prises dans ta base ({u} sans date de décès laissées de côté). ¦ {n} Persounen aus denger Datebank geholl ({u} ouni Doudesdatum ewechgelooss).
+{n} lignées prises dans ta base. ¦ {n} Linnen aus denger Datebank geholl.
+Aucun couple dont les deux lieux de naissance ont des coordonnées ({n} couples sans lieu situé). ¦ Kee Koppel, vun deem allebéid Gebuertsplazen Koordinaten hunn ({n} Koppelen ouni lokaliséiert Plaz).
+Aucun couple dont les deux lieux de naissance ont des coordonnées. ¦ Kee Koppel, vun deem allebéid Gebuertsplazen Koordinaten hunn.
+{n} couples pris dans ta base ({m} sans lieux situés). ¦ {n} Koppelen aus denger Datebank geholl ({m} ouni lokaliséiert Plazen).
+{n} couples pris dans ta base. ¦ {n} Koppelen aus denger Datebank geholl.
+{n} générations prises dans ta base (arrêt à 250 000 places). ¦ {n} Generatiounen aus denger Datebank geholl (Stopp bei 250 000 Plazen).
+{m} mariages et {c} naissances pris dans ta base. ¦ {m} Bestietnesser an {c} Gebuerten aus denger Datebank geholl.
+Les naissances de {name} ¦ D’Gebuerte vun {name}
+{m} et {n} enfants pris dans ta base. ¦ {m} an {n} Kanner aus denger Datebank geholl.
+{n} personnes et {l} lieux pris dans ta base. ¦ {n} Persounen an {l} Plazen aus denger Datebank geholl.
+Combien étaient encore en vie à chaque âge ¦ Wéi vill bei all Alter nach am Liewe waren
+Métiers de père en fils ¦ Beruffer vum Papp op de Jong
+Mariages et conceptions par mois (Bretagne, XVIIIe s.) ¦ Bestietnesser an Zeugunge pro Mount (Bretagne, 18. Jh.)
+Les naissances de quatre mères de la famille ¦ D’Gebuerte vu véier Mammen aus der Famill
+Où vivait la famille Martin ¦ Wou d’Famill Martin gewunnt huet
+ferme l’éditeur pour ouvrir une fiche ¦ maach den Editeur zou, fir eng Fiche opzemaachen
+un clic ouvre la fiche ¦ e Klick mécht d’Fiche op
+Ajoute des personnes : un nom, la naissance, le décès et la génération (0 = toi, −1 = parents, 1 = enfants…). ¦ Setz Persounen derbäi: en Numm, d’Gebuert, den Doud an d’Generatioun (0 = du, −1 = Elteren, 1 = Kanner…).
+Ajoute des lignes : un groupe (siècle, sexe, branche…), un âge, et « décédé » ou « encore en vie ». ¦ Setz Zeilen derbäi: eng Grupp (Joerhonnert, Geschlecht, Zweig…), en Alter, an „gestuerwen“ oder „nach am Liewen“.
+Aucune personne de la liste n’a une date de naissance et une date de décès. ¦ Keng Persoun aus der Lëscht huet e Gebuertsdatum an en Doudesdatum.
+Trisaïeul ¦ Ur-Urgrousspapp
+Trisaïeuls ¦ Ur-Urgrousselteren
+Arrière-grand-père ¦ Urgrousspapp
+Grand-père ¦ Grousspapp
+Ajoute des lignées : le métier de l’ancêtre, puis de son fils, de son petit-fils… et combien de fois. ¦ Setz Linnen derbäi: de Beruff vum Virfahr, dann dee vu sengem Jong, vu sengem Enkel… a wéi oft.
+Même métier que le père ¦ Selwechte Beruff wéi de Papp
+Ajoute des mariages : les deux époux, la distance entre leurs lieux de naissance (km) et l’année. ¦ Setz Bestietnesser derbäi: déi zwee Partner, d’Distanz tëscht hire Gebuertsplazen (km) an d’Joer.
+Ajoute des générations : le numéro, les places trouvées et les personnes différentes. ¦ Setz Generatiounen derbäi: d’Nummer, déi fonnte Plazen an déi verschidde Persounen.
+Ajoute les chiffres de chaque mois (janvier à décembre) : mariages, et conceptions ou naissances. ¦ Setz d’Zuele vun all Mount derbäi (Januar bis Dezember): Bestietnesser, an Zeugungen oder Gebuerten.
+Carême : du mercredi des Cendres (entre le 4 février et le 10 mars) à Pâques (entre le 22 mars et le 25 avril) — l’Église ne mariait pas ¦ Faaschtenzäit: vum Äschermëttwoch (tëscht dem 4. Februar an dem 10. Mäerz) bis Ouschteren (tëscht dem 22. Mäerz an dem 25. Abrëll) — d’Kierch huet keng Leit bestuet
+Avent : du 4e dimanche avant Noël (entre le 27 novembre et le 3 décembre) au 24 décembre — pas de mariage non plus ¦ Advent: vum 4. Sonndeg viru Chrëschtdag (tëscht dem 27. November an dem 3. Dezember) bis den 24. Dezember — och keng Bestietnesser
+Aucune personne de la liste n’a un mois de naissance. ¦ Keng Persoun aus der Lëscht huet e Gebuertsmount.
+Ajoute des enfants : le nom de la mère, sa naissance, puis chaque enfant et sa date de naissance. ¦ Setz Kanner derbäi: den Numm vun der Mamm, hir Gebuert, dann all Kand a säi Gebuertsdatum.
+Moins de 15 mois d’écart ¦ Manner wéi 15 Méint Ofstand
+Ajoute des lieux : la personne, le lieu, le début et la fin (années ou dates). ¦ Setz Plazen derbäi: d’Persoun, d’Plaz, den Ufank an d’Enn (Joren oder Datumer).
+Les descendants de la personne de départ ¦ D’Nokomme vun der Startpersoun
+Ses ancêtres et ses descendants, chacun sur sa ligne : l’app cherche ceux qui se sont connus à plusieurs générations d’écart. ¦ Hir Virfahren an hir Nokommen, all op senger Zeil: d’App sicht déi, déi sech iwwer e puer Generatiounen Ofstand gekannt hunn.
+Pas assez de personnes datées autour de cette personne. ¦ Net genuch datéiert Persounen ronderëm dës Persoun.
+📉 Les âges de ma base ¦ 📉 D’Alter a menger Datebank
+L’âge au décès de chacun ; les personnes encore en vie comptent jusqu’à leur âge d’aujourd’hui. Les décès inconnus sont laissés de côté. ¦ D’Alter beim Doud vun all eenzelem; d’Persounen, déi nach liewen, zielen bis zu hirem Alter vun haut. Onbekannt Doudesfäll ginn ewechgelooss.
+Génération (ancêtres) ¦ Generatioun (Virfahren)
+Aucune personne avec une naissance et un décès (ou en vie). ¦ Keng Persoun mat enger Gebuert an engem Doud (oder am Liewen).
+🔀 Les métiers de ma base ¦ 🔀 D’Beruffer a menger Datebank
+Chaque lignée (père, grand-père… ou parents) donne un chemin de métiers ; le métier vient de la fiche ou du premier événement « Profession ». ¦ All Linn (Papp, Grousspapp… oder Elteren) gëtt e Wee vu Beruffer; de Beruff kënnt vun der Fiche oder vum éischten Evenement „Beruff“.
+Parents → enfants (pères et mères) ¦ Elteren → Kanner (Pappen a Mammen)
+Aucune lignée avec au moins deux métiers connus. ¦ Keng Linn mat op d’mannst zwee bekannte Beruffer.
+Aucun métier dans ta base (fiche ou événement « Profession »). ¦ Kee Beruff an denger Datebank (Fiche oder Evenement „Beruff“).
+Métiers de parents à enfants ¦ Beruffer vun den Elteren op d’Kanner
+💍 Les couples de ma base ¦ 💍 D’Koppelen a menger Datebank
+La distance entre les lieux de naissance des deux époux (les lieux ont besoin de leurs coordonnées), et la direction vue depuis le village de l’époux. ¦ D’Distanz tëscht de Gebuertsplaze vu béide Partner (d’Plaze brauchen hir Koordinaten), an d’Richtung, gesi vum Duerf vum Mann aus.
+Génération par génération : les ancêtres possibles (2, 4, 8…), les places trouvées et les personnes différentes (un même ancêtre peut occuper plusieurs places). ¦ Generatioun fir Generatioun: déi méiglech Virfahren (2, 4, 8…), déi fonnte Plazen an déi verschidde Persounen (dee selwechte Virfahr ka méi Plazen anhuelen).
+📅 Les mariages et les naissances de ma base ¦ 📅 D’Bestietnesser an d’Gebuerten a menger Datebank
+Les mariages datés au mois près ; les conceptions = la naissance (ou le baptême) moins 9 mois. Carême et Avent sont comptés au jour près quand la date est complète. ¦ D’Bestietnesser op de Mount genau datéiert; d’Zeugungen = d’Gebuert (oder den Daf) minus 9 Méint. Faaschtenzäit an Advent ginn op den Dag genau gezielt, wann den Datum komplett ass.
+À (année) ¦ Bis (Joer)
+Aucun mariage ni aucune naissance datés au mois près. ¦ Kee Bestietnes a keng Gebuert op de Mount genau datéiert.
+Mariages et conceptions par mois ¦ Bestietnesser an Zeugunge pro Mount
+👶 Les mères de ma base ¦ 👶 D’Mammen a menger Datebank
+Chaque mère sur une ligne, ses enfants à l’âge qu’elle avait à leur naissance, l’écart en mois entre deux naissances et les enfants morts jeunes. ¦ All Mamm op enger Zeil, hir Kanner beim Alter, deen si bei hirer Gebuert hat, den Ofstand a Méint tëscht zwou Gebuerten an d’Kanner, déi jonk gestuerwe sinn.
+Celles qui ont le plus d’enfants ¦ Déi mat de meeschte Kanner
+La mère (pour « une seule mère ») ¦ D’Mamm (fir „eng eenzeg Mamm“)
+Personne de départ (pour les ancêtres) ¦ Startpersoun (fir d’Virfahren)
+Combien de mères au plus ¦ Wéi vill Mamme maximal
+Choisis la mère dans le menu. ¦ Wiel d’Mamm am Menü.
+Aucune mère avec des enfants dans ta base. ¦ Keng Mamm mat Kanner an denger Datebank.
+🏘️ Les lieux de vie de ma base ¦ 🏘️ D’Liewensplazen a menger Datebank
+Pour chaque personne, ses lieux dans l’ordre du temps : naissance, baptême, domiciles, recensements, mariage, métier, décès… Une couleur par commune. ¦ Fir all Persoun hir Plazen an der zäitlecher Reiefolleg: Gebuert, Daf, Wunnsëtzer, Vollekszielungen, Bestietnes, Beruff, Doud… Eng Faarf pro Gemeng.
+La personne de départ et ses ancêtres ¦ D’Startpersoun an hir Virfahren
+Ses parents, elle et ses enfants ¦ Hir Elteren, si selwer an hir Kanner
+Personnes (pour « que je choisis ») ¦ Persounen (fir „déi ech wielen“)
+Choisis au moins une personne dans le menu. ¦ Wiel op d’mannst eng Persoun am Menü.
+Aucun événement avec un lieu pour ces personnes. ¦ Keen Evenement mat enger Plaz fir dës Persounen.
+Les lieux de vie de la famille ¦ D’Liewensplaze vun der Famill
+Les personnes (génération : 0 = la personne de départ, −1 = parents, 1 = enfants…) ¦ D’Persounen (Generatioun: 0 = d’Startpersoun, −1 = Elteren, 1 = Kanner…)
+Vers (son enfant ou parent du côté de la personne de départ) ¦ Richtung (säi Kand oder Elterendeel op der Säit vun der Startpersoun)
+Rencontres racontées ¦ Beschriwwe Begéinungen
+Écart de générations au moins ¦ Generatiounenofstand op d’mannst
+Montrer quand le plus de générations vivaient ensemble ¦ Weisen, wéini déi meescht Generatiounen zesumme gelieft hunn
+Noms à gauche ¦ Nimm lénks
+Âge dans la barre ¦ Alter am Balken
+Décès inconnu : vie supposée (ans, 0 = non) ¦ Doud onbekannt: ugeholl Liewensdauer (Joer, 0 = nee)
+Groupe (siècle, sexe, branche…) ¦ Grupp (Joerhonnert, Geschlecht, Zweig…)
+À cet âge ¦ Bei dësem Alter
+Encore en vie ¦ Nach am Liewen
+Montrer l’âge médian (la moitié encore en vie) ¦ D’Medianalter uweisen (d’Hallschent nach am Liewen)
+Lire la part en vie à l’âge de… ¦ Den Undeel am Liewe liesen beim Alter vun…
+Compter les vivants (jusqu’à leur âge d’aujourd’hui) ¦ Déi Lieweg zielen (bis zu hirem Alter vun haut)
+Lignes droites (au lieu des marches) ¦ Riicht Linnen (amplaz vun Trapen)
+Épaisseur des courbes ¦ Déckt vun de Kurven
+Âge au plus (vide = auto) ¦ Maximalt Alter (eidel = automatesch)
+Éditeur de graphiques : une courbe par ¦ Grafikeditor: eng Kurv pro
+Bulles au survol tous les … ans ¦ Bubbelen beim Driwwerfueren all … Joer
+Les lignées (métier à chaque génération, du plus ancien au plus jeune) ¦ D’Linnen (Beruff an all Generatioun, vum eelsten bis bei de jéngsten)
+Génération 1 ¦ Generatioun 1
+Génération 2 ¦ Generatioun 2
+Génération 3 ¦ Generatioun 3
+Génération 4 ¦ Generatioun 4
+Génération 5 ¦ Generatioun 5
+Combien de lignées ¦ Wéi vill Linnen
+Couleur de chaque métier (facultatif) ¦ Faarf vun all Beruff (fakultativ)
+Métiers montrés (les autres : « Autres métiers ») ¦ Gewise Beruffer (déi aner: „Aner Beruffer“)
+Le métier de départ ¦ De Startberuff
+Vert si le métier est gardé ¦ Gréng, wann de Beruff behale gëtt
+Noms des colonnes (séparés par des virgules) ¦ Nimm vun de Kolonnen (getrennt mat Kommaen)
+Noms des métiers ¦ Nimm vun de Beruffer
+Nombres à côté des noms ¦ Zuelen nieft den Nimm
+Phrase « même métier que la génération d’avant » ¦ Saz „selwechte Beruff wéi d’Generatioun virdrun“
+Largeur des colonnes ¦ Breet vun de Kolonnen
+Espace entre les métiers ¦ Ofstand tëscht de Beruffer
+Nom des métiers inconnus ¦ Numm fir onbekannt Beruffer
+Arrière-grand-père, Grand-père, Père, Fils ¦ Urgrousspapp, Grousspapp, Papp, Jong
+Née à ¦ Gebuer zu
+Direction (N, NE… ou degrés) ¦ Richtung (N, NO… oder Grad)
+Couleur de chaque siècle (facultatif) ¦ Faarf vun all Joerhonnert (fakultativ)
+Siècle (ex. XIXe s.) ¦ Joerhonnert (z. B. 19. Jh.)
+Échelle des distances ¦ Distanzskala
+Douce (racine carrée) ¦ Mëll (Quadratwuerzel)
+Logarithmique (le proche en grand) ¦ Logarithmesch (dat Noent grouss)
+Cercle extérieur (km, vide = auto) ¦ Bausse Krees (km, eidel = automatesch)
+Cercle de la distance médiane de chaque siècle ¦ Krees vun der Mediandistanz vun all Joerhonnert
+Tableau par siècle ¦ Tabell pro Joerhonnert
+Nom du centre ¦ Numm vum Mëttelpunkt
+Les générations ¦ D’Generatiounen
+Génération (1 = la personne) ¦ Generatioun (1 = d’Persoun)
+Taux d’implexe à droite ¦ Implexquot riets
+Couleur des possibles ¦ Faarf vun de méiglechen
+Couleur des places trouvées ¦ Faarf vun de fonnte Plazen
+Couleur des personnes différentes ¦ Faarf vun de verschiddene Persounen
+Les mois (janvier à décembre) ¦ D’Méint (Januar bis Dezember)
+Deux bandeaux (l’un sous l’autre) ¦ Zwee Bänner (eent ënner deem aneren)
+Seulement la première série ¦ Nëmmen déi éischt Serie
+Repérer le Carême et l’Avent ¦ Faaschtenzäit an Advent markéieren
+Ligne « si tout était égal » (selon les jours du mois) ¦ Linn „wann alles gläich wier“ (no den Deeg vum Mount)
+Écrire les nombres ¦ D’Zuelen uweisen
+Les enfants (une ligne par enfant) ¦ D’Kanner (eng Zeil pro Kand)
+Naissance de la mère ¦ Gebuert vun der Mamm
+Décès de la mère ¦ Doud vun der Mamm
+Naissance de l’enfant ¦ Gebuert vum Kand
+Décès de l’enfant ¦ Doud vum Kand
+L’âge de la mère ¦ D’Alter vun der Mamm
+Écarts en mois entre deux naissances ¦ Ofstänn a Méint tëscht zwou Gebuerten
+Mères au plus ¦ Mamme maximal
+Les lieux (une ligne par lieu et par période) ¦ D’Plazen (eng Zeil pro Plaz a pro Period)
+De (année ou date) ¦ Vun (Joer oder Datum)
+Couleur de chaque lieu (facultatif) ¦ Faarf vun all Plaz (fakultativ)
+Une couleur par ¦ Eng Faarf pro
+Lieux en couleur (les autres en gris) ¦ Plazen a Faarf (déi aner a gro)
+Nom du lieu dans la bande ¦ Numm vun der Plaz am Band
+Par date de début ¦ No Startdatum
+Épaisseur des bandes ¦ Déckt vun de Bänner
+{n} génération ¦ {n} Generatioun

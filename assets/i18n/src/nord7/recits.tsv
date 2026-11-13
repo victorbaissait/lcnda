@@ -1,0 +1,1543 @@
+fr ¦ is
+son {x} (lien) ¦ {x} viðkomandi
+sa {x} (lien) ¦ {x} viðkomandi
+père ¦ faðir
+mère ¦ móðir
+grand-père ¦ afi
+grand-mère ¦ amma
+arrière-grand-père ¦ langafi
+arrière-grand-mère ¦ langamma
+arrière-arrière-grand-père ¦ langalangafi
+arrière-arrière-grand-mère ¦ langalangamma
+arrière-arrière-arrière-grand-père ¦ langalangalangafi
+arrière-arrière-arrière-grand-mère ¦ langalangalangamma
+ancêtre à la {n}e génération ¦ forfaðir í {n}. kynslóð
+{kin} de {name} ¦ {kin} {name}
+Il est né {when}{where}. ¦ Hann fæddist {when}{where}.
+Elle est née {when}{where}. ¦ Hún fæddist {when}{where}.
+Il était {occ}. ¦ Hann var {occ}.
+Elle était {occ}. ¦ Hún var {occ}.
+Il a épousé {name}{when}{where}. ¦ Hann kvæntist {name}{when}{where}.
+Elle a épousé {name}{when}{where}. ¦ Hún giftist {name}{when}{where}.
+Il a eu un enfant : {list}. ¦ Hann eignaðist eitt barn: {list}.
+Elle a eu un enfant : {list}. ¦ Hún eignaðist eitt barn: {list}.
+Il a eu {n} enfants : {list}. ¦ Hann eignaðist {n} börn: {list}.
+Elle a eu {n} enfants : {list}. ¦ Hún eignaðist {n} börn: {list}.
+Il est mort {when}{age}{where}. ¦ Hann lést {when}{age}{where}.
+Elle est morte {when}{age}{where}. ¦ Hún lést {when}{age}{where}.
+, à {n} ans ¦ , {n} ára að aldri
+, à {n} an ¦ , {n} árs að aldri
+avec {name} ¦ með {name}
+se mariait{with}{where}{date} ¦ gekk í hjónaband{with}{where}{date}
+se mariait civilement{with}{where}{date} ¦ gekk í borgaralegt hjónaband{with}{where}{date}
+se mariait religieusement{with}{where}{date} ¦ gekk í hjónaband í kirkju{with}{where}{date}
+mourait{with}{where}{date} ¦ lést{with}{where}{date}
+était inhumé{with}{where}{date} ¦ var jarðsettur{with}{where}{date}
+était inhumée{with}{where}{date} ¦ var jarðsett{with}{where}{date}
+habitait{with}{where}{date} ¦ bjó{with}{where}{date}
+travaillait comme{what}{with}{where}{date} ¦ starfaði sem{what}{with}{where}{date}
+partait{with}{where}{date} ¦ fór burt{with}{where}{date}
+arrivait{with}{where}{date} ¦ kom{with}{where}{date}
+était recensé{with}{where}{date} ¦ var skráður í manntal{with}{where}{date}
+était recensée{with}{where}{date} ¦ var skráð í manntal{with}{where}{date}
+était sous les drapeaux{with}{where}{date} ¦ gegndi herþjónustu{with}{where}{date}
+obtenait un diplôme{with}{where}{date} ¦ lauk prófi{with}{where}{date}
+devenait français{with}{where}{date} ¦ fékk franskan ríkisborgararétt{with}{where}{date}
+devenait française{with}{where}{date} ¦ fékk franskan ríkisborgararétt{with}{where}{date}
+était baptisé{with}{where}{date} ¦ var skírður{with}{where}{date}
+était baptisée{with}{where}{date} ¦ var skírð{with}{where}{date}
+faisait sa confirmation{with}{where}{date} ¦ var fermdur{with}{where}{date}
+était à l’école{with}{where}{date} ¦ var í skóla{with}{where}{date}
+vivait un événement ({label}){where}{date} ¦ upplifði atburð ({label}){where}{date}
+devenait père de {name}{where}{date} ¦ varð faðir {name}{where}{date}
+devenait mère de {name}{where}{date} ¦ varð móðir {name}{where}{date}
+n’était plus là : il était mort à {n} ans ¦ var ekki lengur á lífi: hann hafði látist {n} ára
+n’était plus là : elle était morte à {n} ans ¦ var ekki lengur á lífi: hún hafði látist {n} ára
+vivait sans doute du côté de {place} en {y}{occ} ¦ bjó líklega í grennd við {place} árið {y}{occ}
+vivait sa vie en {y}{occ} ¦ lifði sínu lífi árið {y}{occ}
+À {n} ans… ¦ {n} ára…
+À {n} ans, il {facts}. ¦ Hann var {n} ára og {facts}.
+À {n} ans, elle {facts}. ¦ Hún var {n} ára og {facts}.
+{who} de {name} dont on connaît la naissance. ¦ {who} {name} með þekkta fæðingu.
+{who} de {name} dont on connaît la naissance ({k} sans date de naissance ne sont pas comptés). ¦ {who} {name} með þekkta fæðingu ({k} án fæðingardags eru ekki talin með).
+{who}{y}, comme {kin} {from}{fy} ¦ {who}{y}, eins og {kin} {from}{fy}
+C’est un homme. ¦ Þetta er karl.
+C’est une femme. ¦ Þetta er kona.
+C’est un homme, né au XVIIIe siècle ou avant. ¦ Þetta er karl, fæddur á 18. öld eða fyrr.
+C’est un homme, né au XIXe siècle. ¦ Þetta er karl, fæddur á 19. öld.
+C’est un homme, né au XXe siècle. ¦ Þetta er karl, fæddur á 20. öld.
+C’est une femme, née au XVIIIe siècle ou avant. ¦ Þetta er kona, fædd á 18. öld eða fyrr.
+C’est une femme, née au XIXe siècle. ¦ Þetta er kona, fædd á 19. öld.
+C’est une femme, née au XXe siècle. ¦ Þetta er kona, fædd á 20. öld.
+Il est né à {place}. ¦ Hann fæddist í {place}.
+Elle est née à {place}. ¦ Hún fæddist í {place}.
+Son métier : {occ}. ¦ Starf: {occ}.
+Il a vécu {n} ans. ¦ Hann lifði í {n} ár.
+Elle a vécu {n} ans. ¦ Hún lifði í {n} ár.
+Il a eu {n} enfant. ¦ Hann eignaðist {n} barn.
+Elle a eu {n} enfant. ¦ Hún eignaðist {n} barn.
+Il a eu {n} enfants. ¦ Hann eignaðist {n} börn.
+Elle a eu {n} enfants. ¦ Hún eignaðist {n} börn.
+On ne lui connaît pas d’enfant. ¦ Engin þekkt börn.
+Né dans les années {y}. ¦ Fæddur á áratugnum sem hófst {y}.
+Née dans les années {y}. ¦ Fædd á áratugnum sem hófst {y}.
+Sa femme s’appelait {name}. ¦ Konan hans hét {name}.
+Son mari s’appelait {name}. ¦ Maðurinn hennar hét {name}.
+Un de ses enfants s’appelait {name}. ¦ Eitt barnanna hét {name}.
+Son nom commence par {l}… et compte {n} lettres. ¦ Eftirnafnið byrjar á {l}… og er {n} stafir.
+Ta naissance ¦ Fæðing þín
+Tu es {name}. ¦ Þú ert {name}.
+Tu nais {when}{where}{parents}. ¦ Þú fæðist {when}{where}{parents}.
+fils de {names} ¦ sonur {names}
+fille de {names} ¦ dóttir {names}
+{a} et de {b} ¦ {a} og {b}
+Ton père est {occ}. ¦ Faðir þinn er {occ}.
+Le métier ¦ Starfið
+Tu as quinze ans, c’est l’année {y}. Il faut gagner ta vie. Que vas-tu faire ? ¦ Þú ert fimmtán ára, það er árið {y}. Þú þarft að vinna fyrir þér. Hvað ætlarðu að gera?
+Tu as quinze ans. Il faut gagner ta vie. Que vas-tu faire ? ¦ Þú ert fimmtán ára. Þú þarft að vinna fyrir þér. Hvað ætlarðu að gera?
+Devenir {occ} ¦ Gerast {occ}
+Dans la vraie vie, {name} est devenu {occ}. ¦ Í raunveruleikanum varð {name} {occ}.
+Dans la vraie vie, {name} est devenue {occ}. ¦ Í raunveruleikanum varð {name} {occ}.
+L’amour ¦ Ástin
+Tu as {n} ans. ¦ Þú ert {n} ára.
+À {place}, deux personnes ont attiré ton regard… ¦ Í {place} hafa tvær manneskjur vakið athygli þína…
+deux personnes ont attiré ton regard… ¦ tvær manneskjur hafa vakið athygli þína…
+Épouser {name} ¦ Giftast {name}
+Rester libre encore un peu ¦ Vera frjáls aðeins lengur
+Dans la vraie vie, {first} a épousé {name}{when}{where}. ¦ Í raunveruleikanum giftist {first} {name}{when}{where}.
+Partir ? ¦ Fara burt?
+La vie est dure{where}. On parle de partir… ¦ Lífið er erfitt{where}. Fólk talar um að fara burt…
+Partir pour {place} ¦ Fara til {place}
+Rester au pays ¦ Vera um kyrrt heima
+Dans la vraie vie, {name} a fini sa route à {place}. ¦ Í raunveruleikanum endaði {name} í {place}.
+On parle de partir pour la ville… ¦ Fólk talar um að flytja í bæinn…
+Partir ¦ Fara
+Rester à {place} ¦ Vera um kyrrt í {place}
+Dans la vraie vie, {name} est resté à {place}. ¦ Í raunveruleikanum varð {name} um kyrrt í {place}.
+Dans la vraie vie, {name} est restée à {place}. ¦ Í raunveruleikanum varð {name} um kyrrt í {place}.
+Les enfants ¦ Börnin
+Un enfant arrive : {list}. Tu les regardes grandir. ¦ Barn kemur í heiminn: {list}. Þú horfir á það vaxa úr grasi.
+{n} enfants arrivent : {list}. Tu les regardes grandir. ¦ {n} börn koma í heiminn: {list}. Þú horfir á þau vaxa úr grasi.
+La fin du voyage ¦ Ferðalokin
+Tu t’éteins {when}{where}{age}. ¦ Þú kveður {when}{where}{age}.
+Ton histoire continue… ¦ Sagan þín heldur áfram…
+{n} personnes nées un {date} : {list}. ¦ {n} einstaklingar fæddir {date}: {list}.
+{name} est mort le jour de son anniversaire, à {n} ans ({date}). ¦ {name} lést á afmælisdaginn sinn, {n} ára ({date}).
+{name} est morte le jour de son anniversaire, à {n} ans ({date}). ¦ {name} lést á afmælisdaginn sinn, {n} ára ({date}).
+{name} est né un {date}, jour anniversaire de la mort de {kin} {who} ({y}). ¦ {name} fæddist {date}, á dánarafmæli {kin} {who} ({y}).
+{name} est née un {date}, jour anniversaire de la mort de {kin} {who} ({y}). ¦ {name} fæddist {date}, á dánarafmæli {kin} {who} ({y}).
+son ancêtre ¦ forföður síns
+{n} mariages le même jour de l’année : {list}. ¦ {n} hjónavígslur á sama degi ársins: {list}.
+{a} et {b} sont nés à {n} ans pile d’écart, jour pour jour ({y1} et {y2}). ¦ {a} og {b} fæddust með nákvæmlega {n} ára millibili, upp á dag ({y1} og {y2}).
+{name} est né le jour de Noël {y}. ¦ {name} fæddist á jóladag {y}.
+{name} est née le jour de Noël {y}. ¦ {name} fæddist á jóladag {y}.
+{name} est né le jour de l’An {y}. ¦ {name} fæddist á nýársdag {y}.
+{name} est née le jour de l’An {y}. ¦ {name} fæddist á nýársdag {y}.
+{name} est né un vendredi 13 ({date}). ¦ {name} fæddist föstudaginn 13. ({date}).
+{name} est née un vendredi 13 ({date}). ¦ {name} fæddist föstudaginn 13. ({date}).
+{name} s’est marié à {n} ans, au même âge que son père {father}. ¦ {name} kvæntist {n} ára, á sama aldri og faðir hans {father}.
+{name} s’est mariée à {n} ans, au même âge que son père {father}. ¦ {name} giftist {n} ára, á sama aldri og faðir hennar {father}.
+En quelle année est né {name} ? ¦ Hvaða ár fæddist {name}?
+En quelle année est née {name} ? ¦ Hvaða ár fæddist {name}?
+Où est né {name} ? ¦ Hvar fæddist {name}?
+Où est née {name} ? ¦ Hvar fæddist {name}?
+Quel était le métier de {name} ? ¦ Hvert var starf {name}?
+{name} était {occ}. ¦ {name} var {occ}.
+Qui a épousé {name} ? ¦ Hver giftist {name}?
+{a} et {b} se sont mariés{when}{where}. ¦ {a} og {b} gengu í hjónaband{when}{where}.
+Qui est le père de {name} ? ¦ Hver er faðir {name}?
+Qui est la mère de {name} ? ¦ Hver er móðir {name}?
+{name} est le fils de {parent}. ¦ {name} er sonur {parent}.
+{name} est la fille de {parent}. ¦ {name} er dóttir {parent}.
+Combien d’enfants a eus {name} ? ¦ Hvað eignaðist {name} mörg börn?
+À quel âge est mort {name} ? ¦ Hvað var {name} gamall við andlátið?
+À quel âge est morte {name} ? ¦ Hvað var {name} gömul við andlátið?
+Qui est né le premier ? ¦ Hver fæddist fyrst?
+Ici est né {name}, {when}. ¦ Hér fæddist {name}, {when}.
+Ici est née {name}, {when}. ¦ Hér fæddist {name}, {when}.
+C’est aussi ici que est né {name}, {when}. ¦ Hér fæddist líka {name}, {when}.
+C’est aussi ici que est née {name}, {when}. ¦ Hér fæddist líka {name}, {when}.
+Ici est né {name}, {when} ; il sera {occ}. ¦ Hér fæddist {name}, {when}; hann átti eftir að verða {occ}.
+Ici est née {name}, {when} ; elle sera {occ}. ¦ Hér fæddist {name}, {when}; hún átti eftir að verða {occ}.
+C’est aussi ici que est né {name}, {when} ; il sera {occ}. ¦ Hér fæddist líka {name}, {when}; hann átti eftir að verða {occ}.
+C’est aussi ici que est née {name}, {when} ; elle sera {occ}. ¦ Hér fæddist líka {name}, {when}; hún átti eftir að verða {occ}.
+Ici, {when}, {name} : {label}{what}. ¦ Hér, {when}, {name}: {label}{what}.
+Puis, {when}, {name} : {label}{what}. ¦ Síðan, {when}, {name}: {label}{what}.
+Ici, {when}, {name} a épousé {other}. ¦ Hér, {when}, gekk {name} í hjónaband með {other}.
+Puis, {when}, {name} a épousé {other}. ¦ Síðan, {when}, gekk {name} í hjónaband með {other}.
+Ici est mort {name}, {when}{age}. ¦ Hér lést {name}, {when}{age}.
+Ici est morte {name}, {when}{age}. ¦ Hér lést {name}, {when}{age}.
+C’est aussi ici que est mort {name}, {when}{age}. ¦ Hér lést líka {name}, {when}{age}.
+C’est aussi ici que est morte {name}, {when}{age}. ¦ Hér lést líka {name}, {when}{age}.
+son conjoint ¦ maki viðkomandi
+Naissance ({date}) ¦ Fæðing ({date})
+Mariage avec {name} ({date}) ¦ Hjónavígsla með {name} ({date})
+Mariage avec {name} ¦ Hjónavígsla með {name}
+Mariage ({date}) ¦ Hjónavígsla ({date})
+Décès ({date}) ¦ Andlát ({date})
+ont la joie de vous annoncer la naissance de leur fils ¦ tilkynna með gleði fæðingu sonar síns
+ont la joie de vous annoncer la naissance de leur fille ¦ tilkynna með gleði fæðingu dóttur sinnar
+a la joie de vous annoncer la naissance de son fils ¦ tilkynnir með gleði fæðingu sonar
+a la joie de vous annoncer la naissance de sa fille ¦ tilkynnir með gleði fæðingu dóttur
+a la joie de vous annoncer la naissance de ¦ tilkynnir með gleði fæðingu
+On nous prie d’annoncer le décès de ¦ Okkur er falið að tilkynna andlát
+survenu {when}{age} ¦ sem varð {when}{age}
+survenue {when}{age} ¦ sem varð {when}{age}
+, dans sa {n}e année ¦ , á {n}. aldursári
+De la part de ¦ Fyrir hönd
+Monsieur {name}, son époux ¦ {name}, eiginmanns hennar
+Madame {name}, son épouse ¦ {name}, eiginkonu hans
+{names}, ses enfants ¦ {names}, barna hins látna
+{names}, son fils ¦ {names}, sonar
+{names}, sa fille ¦ {names}, dóttur
+ont l’honneur de vous faire part du mariage de leurs enfants ¦ hafa þann heiður að tilkynna hjónavígslu barna sinna
+ont la joie de vous faire part de leur mariage ¦ tilkynna með gleði hjónavígslu sína
+célébré {when} ¦ sem fór fram {when}
+{names} se sont dit oui ! ¦ {names} sögðu já!
+Bienvenue à {name} ! ¦ Velkomin(n), {name}!
+Adieu à {name} ¦ Kveðja til {name}
+Une année tranquille ¦ Rólegt ár
+C’est {when} que {a} a épousé {b}. ¦ Það var {when} sem {a} gekk í hjónaband með {b}.
+{name} est le fils de {parents} ¦ {name} er sonur {parents}
+{name} est la fille de {parents} ¦ {name} er dóttir {parents}
+Tous nos vœux de bonheur aux jeunes époux. ¦ Bestu hamingjuóskir til nýgiftu hjónanna.
+Les heureux parents, {names}, reçoivent les félicitations de toute la famille. ¦ Hamingjusömu foreldrarnir, {names}, fá hamingjuóskir allrar fjölskyldunnar.
+Rien de notable à signaler cette année dans la famille, ce qui est aussi une bonne nouvelle. ¦ Ekkert markvert að frétta af fjölskyldunni í ár, sem eru líka góðar fréttir.
+{name} fête ses {n} ans. ¦ {name} verður {n} ára.
+{names} : {n} ans de mariage ! ¦ {names}: {n} ára hjónaband!
+Né il y a {n} ans, jour pour jour. ¦ Fæddur fyrir {n} árum, upp á dag.
+Née il y a {n} ans, jour pour jour. ¦ Fædd fyrir {n} árum, upp á dag.
+Disparu il y a {n} ans, jour pour jour. ¦ Lést fyrir {n} árum, upp á dag.
+Disparue il y a {n} ans, jour pour jour. ¦ Lést fyrir {n} árum, upp á dag.
+Fils de {names}. ¦ Sonur {names}.
+Fille de {names}. ¦ Dóttir {names}.
+{name}, son frère, est né {when} : moins de neuf mois d’écart (des jumeaux auraient la même date). ¦ {name}, bróðir hans eða hennar, fæddist {when}: innan við níu mánuðir á milli (tvíburar hefðu sömu dagsetningu).
+{name}, sa sœur, est née {when} : moins de neuf mois d’écart (des jumeaux auraient la même date). ¦ {name}, systir hans eða hennar, fæddist {when}: innan við níu mánuðir á milli (tvíburar hefðu sömu dagsetningu).
+{name} est mort {when}, avant ce mariage. ¦ {name} lést {when}, fyrir þessa hjónavígslu.
+{name} est morte {when}, avant ce mariage. ¦ {name} lést {when}, fyrir þessa hjónavígslu.
+La même année, {label} à {place}, à {km} km : possible, mais à vérifier. ¦ Sama ár, {label} í {place}, í {km} km fjarlægð: mögulegt, en vert að athuga.
+Un métier à {n} ans : c’est jeune. ¦ Starf {n} ára: það er ungt.
+🔎 À regarder aussi ¦ 🔎 Líka vert að skoða
+{name} naît {when} {where}. ¦ {name} fæðist {when} {where}.
+Ses parents : {list}. ¦ Foreldrar: {list}.
+Parent connu : {list}. ¦ Þekkt foreldri: {list}.
+Ses frères et sœurs ¦ Systkini
+Son frère ou sa sœur ¦ Bróðir eða systir
+{name} reçoit le baptême {when} {where}. ¦ {name} er skírður {when} {where}.
+Présents : {list}. ¦ Viðstödd: {list}.
+Le mariage religieux est célébré {when} {where}. ¦ Kirkjubrúðkaupið fer fram {when} {where}.
+Le mariage civil est célébré {when} {where}. ¦ Borgaralega hjónavígslan fer fram {when} {where}.
+{name} se marie avec {who} {when} {where}. ¦ {name} gengur í hjónaband með {who} {when} {where}.
+{name} se marie {when} {where}. ¦ {name} gengur í hjónaband {when} {where}.
+{name} meurt {when} {where}{age}. ¦ {name} deyr {when} {where}{age}.
+Cause notée : {cause}. ¦ Skráð dánarorsök: {cause}.
+{name} repose {where} ¦ {name} hvílir {where}
+{name} est inhumé ¦ {name} er jarðsettur
+{name} est inhumée ¦ {name} er jarðsett
+{name} est inhumé(e) ¦ {name} er jarðsett(ur)
+(inhumation {when}) ¦ (greftrun {when})
+{kind} {when} {where}. ¦ {kind} {when} {where}.
+{name} exerce le métier de {job}{where}. ¦ {name} starfar sem {job}{where}.
+{name} s’installe {where}{addr}. ¦ {name} sest að {where}{addr}.
+{name} habite {where}{addr}. ¦ {name} býr {where}{addr}.
+Au recensement de {y}, {name} vit {where}{desc}. ¦ Í manntalinu {y} býr {name} {where}{desc}.
+Au recensement {when}, {name} vit {where}{desc}. ¦ Í manntalinu {when} býr {name} {where}{desc}.
+à l’adresse « {ad} » ¦ á heimilisfanginu „{ad}“
+Métier noté : {job}. ¦ Skráð starf: {job}.
+Le foyer compte {who}. ¦ Á heimilinu eru {who}.
+{label} {when} {where}. ¦ {label} {when} {where}.
+Recensement de {y} ¦ Manntal {y}
+Déménagement ¦ Flutningur
+Domicile ¦ Heimili
+Sépulture ¦ Greftrun
+Crémation ¦ Líkbrennsla
+Obsèques ¦ Útför
+Ses enfants ¦ Börn
+Son enfant ¦ Barn
+{n} enfants connus : {list}. ¦ {n} þekkt börn: {list}.
+Un enfant connu : {list}. ¦ Eitt þekkt barn: {list}.
+Pendant sa vie ¦ Á lífsleiðinni
+Sa vie en quelques mots ¦ Lífið í fáum orðum
+Ta version de la biographie (📖 sur la fiche). ¦ Þín útgáfa af ævisögunni (📖 á spjaldinu).
+Biographie écrite par l’app d’après la fiche. ¦ Ævisaga skrifuð af appinu eftir spjaldinu.
+Les lieux de sa vie ¦ Staðir lífsins
+Sa descendance ¦ Afkomendur
+{list} dans la généalogie. ¦ {list} í ættfræðinni.
+Récit d’une vie — {name} ¦ Ævisaga — {name}
+=petit-enfant ¦ barnabarn|barnabörn
+=arrière-petit-enfant ¦ barnabarnabarn|barnabarnabörn
+=autre descendant ¦ annar afkomandi|aðrir afkomendur
+=signature ¦ undirskrift|undirskriftir
+=visage ¦ andlit|andlit
+=trésor caché ¦ falinn fjársjóður|faldir fjársjóðir
+Garder la mémoire ¦ Að varðveita minningarnar
+← Tous les trésors ¦ ← Allir fjársjóðir
+Trésors · {fam} ¦ Fjársjóðir · {fam}
+Un texte, un son ou une vidéo qui ne s’ouvre qu’à une date : « pour les 18 ans de Léa », « en 2050 ». ¦ Texti, hljóð eða myndband sem opnast aðeins á ákveðnum degi: „fyrir 18 ára afmæli Léu“, „árið 2050“.
+{n} scellée ¦ Innsiglað: {n}
+{n} ouverte ¦ Opnað: {n}
+📬 Ouvertes ¦ 📬 Opnuð
+Aucune lettre ouverte pour l’instant ¦ Ekkert opnað bréf enn
+Une lettre scellée s’ouvre toute seule le jour venu. ¦ Innsiglað bréf opnast sjálfkrafa þegar dagurinn kemur.
+Souvenirs des sens ¦ Minningar skynfæranna
+L’odeur de la cire, le bruit du moulin, le goût des confitures : ce qu’aucun acte ne garde. ¦ Ilmur af bóni, hljóðið í myllunni, bragðið af sultunni: það sem ekkert skjal varðveitir.
+Le sens ¦ Skynfærið
+👃 Une odeur ¦ 👃 Lykt
+👂 Un son ¦ 👂 Hljóð
+👅 Un goût ¦ 👅 Bragð
+✋ Au toucher ¦ ✋ Snerting
+👁 Une image ¦ 👁 Sjón
+Les souvenirs qui ne tiennent dans aucun acte : une odeur, un bruit, un goût. Joins-y un son enregistré ou une photo si tu en as. ¦ Minningar sem passa ekki í neitt skjal: lykt, hljóð, bragð. Bættu við hljóðupptöku eða mynd ef þú átt.
+Noter un souvenir ¦ Skrá minningu
+📋 Voir dans Listes › Mémoire familiale ¦ 📋 Sjá í Listar › Minningar fjölskyldunnar
+Rangé avec les expressions, surnoms, traditions et témoignages ¦ Geymt með orðatiltækjum, gælunöfnum, hefðum og frásögnum
+Aucun souvenir noté pour l’instant : l’odeur de la cire dans l’escalier, le bruit du moulin, le goût des confitures de Mémé… ¦ Engin minning skráð enn: ilmur af bóni í stiganum, hljóðið í myllunni, bragðið af sultunni hennar ömmu…
+Le livre de recettes ¦ Uppskriftabókin
+Les recettes de la famille, avec qui les faisait et leur histoire, puis un vrai livre à imprimer. ¦ Uppskriftir fjölskyldunnar, hver eldaði þær og saga þeirra, og svo alvöru bók til að prenta.
+Rubrique ¦ Flokkur
+Entrées et soupes ¦ Forréttir og súpur
+Plats ¦ Aðalréttir
+Desserts et gâteaux ¦ Eftirréttir og kökur
+Confitures et conserves ¦ Sultur og niðursuða
+Boissons ¦ Drykkir
+Ajouter une recette ¦ Bæta við uppskrift
+Imprimer le livre ¦ Prenta bókina
+{label} : couverture, sommaire, une page chacun ¦ {label}: kápa, efnisyfirlit, ein síða fyrir hverja
+Aucune recette pour l’instant : le far de Mamie, la soupe aux choux du dimanche… ¦ Engin uppskrift enn: búðingurinn hennar ömmu, kálsúpan á sunnudögum…
+Rien à mettre dans le livre pour l’instant : commence par « ＋ {what} ». ¦ Ekkert til að setja í bókina enn: byrjaðu á „＋ {what}“.
+Les chansons de la famille ¦ Söngvar fjölskyldunnar
+Berceuses, chansons de banquet, de conscrits : paroles, air, qui la chantait, l’enregistrement, et un carnet à imprimer. ¦ Vögguvísur, veislusöngvar, söngvar nýliða: texti, lag, hver söng, upptakan, og söngbók til að prenta.
+Berceuses ¦ Vögguvísur
+Chansons de fête et de repas ¦ Veislu- og borðsöngvar
+Chansons de travail ¦ Vinnusöngvar
+Conscrits et soldats ¦ Nýliðar og hermenn
+Noël ¦ Jól
+En patois ¦ Á mállýsku
+Les paroles, l’air, qui la chantait — et, si tu peux, l’enregistrement (un son choisi dans les médias). ¦ Textinn, lagið, hver söng — og, ef þú getur, upptakan (hljóð valið úr miðlunum).
+Ajouter une chanson ¦ Bæta við söng
+Imprimer le carnet ¦ Prenta söngbókina
+Aucune chanson pour l’instant : la berceuse de Mémé, la chanson des fins de banquet… ¦ Enginn söngur enn: vögguvísan hennar ömmu, söngurinn í lok veislunnar…
+L’entretien guidé ¦ Leiðsagnarviðtalið
+Les bonnes questions à poser à un grand-parent, lues à voix haute ; l’enregistrement est rangé sur sa fiche, avec un repère par question. ¦ Réttu spurningarnar til að spyrja afa eða ömmu, lesnar upphátt; upptakan er geymd á spjaldi viðkomandi, með merki fyrir hverja spurningu.
+Les questions s’affichent en grand (et peuvent être lues à voix haute) ; l’entretien s’enregistre au micro, chaque question est marquée dans l’enregistrement, puis le son est rangé dans les médias de la fiche. ¦ Spurningarnar birtast í stóru letri (og má lesa upphátt); viðtalið er tekið upp með hljóðnemanum, hver spurning er merkt í upptökunni og hljóðið er svo geymt í miðlum spjaldsins.
+La personne interrogée ¦ Viðmælandinn
+Lire les questions à voix haute ¦ Lesa spurningarnar upphátt
+Les thèmes ¦ Efnin
+🧒 L’enfance ¦ 🧒 Æskan
+✏️ L’école ¦ ✏️ Skólinn
+👪 La famille ¦ 👪 Fjölskyldan
+🔨 Le travail ¦ 🔨 Vinnan
+💞 L’amour ¦ 💞 Ástin
+🪖 La guerre ¦ 🪖 Stríðið
+🏡 La maison ¦ 🏡 Húsið
+🎉 Les fêtes ¦ 🎉 Hátíðir
+💬 Pour plus tard ¦ 💬 Fyrir síðar
+Les entretiens enregistrés ¦ Viðtöl sem hafa verið tekin upp
+🎙️ Commencer l’entretien ¦ 🎙️ Hefja viðtalið
+Les questions sur papier, avec la place pour noter les réponses ¦ Spurningarnar á pappír, með plássi til að skrifa svörin
+Aucun entretien pour l’instant ¦ Ekkert viðtal enn
+Choisis la personne et les thèmes, puis « 🎙️ Commencer l’entretien ». ¦ Veldu einstaklinginn og efnin, og svo „🎙️ Hefja viðtalið“.
+La veillée en un clic ¦ Kvöldvakan í einum smelli
+En plein écran, les portraits d’une branche défilent, chaque vie est racontée à voix haute, avec une musique douce. ¦ Á öllum skjánum renna myndir einnar greinar hjá, hver ævi er sögð upphátt, með mjúkri tónlist.
+Autour de ¦ Í kringum
+Secondes par vie ¦ Sekúndur á hverja ævi
+Raconter à voix haute ¦ Segja frá upphátt
+Musique douce ¦ Mjúk tónlist
+En plein écran : les portraits défilent, chaque vie est racontée. Espace = pause, flèches = avant / après, Échap = fin. ¦ Á öllum skjánum: myndirnar renna hjá, hver ævi er sögð. Bilslá = hlé, örvar = aftur / áfram, Esc = lok.
+La veillée de la famille {name} ¦ Kvöldvaka fjölskyldu {name}
+Ce soir, on raconte {n} vies de la famille de {name}. ¦ Í kvöld segjum við frá {n} ævum úr fjölskyldu {name}.
+Bonne nuit ¦ Góða nótt
+Et maintenant, à vous de raconter ce dont vous vous souvenez. ¦ Og nú er komið að ykkur að segja frá því sem þið munið.
+{n} vies à raconter : {list} ¦ {n} ævir til að segja frá: {list}
+🕯️ Lancer la veillée ¦ 🕯️ Hefja kvöldvökuna
+Découvrir ¦ Uppgötva
+À ton âge… ¦ Á þínum aldri…
+Ce que faisait chaque ancêtre au même âge que toi : il se mariait, partait, devenait parent… ¦ Hvað hver forfaðir var að gera á sama aldri og þú: gifti sig, fór burt, varð foreldri…
+L’âge ¦ Aldurinn
+Mon âge ¦ Aldurinn minn
+Aperçu, A4 ou A5, ⤓ PDF ¦ Forskoðun, A4 eða A5, ⤓ PDF
+Les prénoms qui sautent une génération ¦ Fornöfn sem hoppa yfir kynslóð
+Henri comme son grand-père, Rose comme son arrière-grand-mère : les prénoms transmis par-dessus les parents. ¦ Henri eins og afi hans, Rose eins og langamma hennar: nöfn sem ganga í arf fram hjá foreldrunum.
+Un prénom qui « saute » une génération : l’enfant le reçoit d’un grand-parent (ou d’un arrière-grand-parent), alors que ni son père ni sa mère ne le portaient. La popularité de chaque prénom en France (INSEE) est dans <b>Patrimoine → Prénoms</b>. ¦ Nafn sem „hoppar“ yfir kynslóð: barnið fær það frá afa eða ömmu (eða langafa eða langömmu), þótt hvorki faðir þess né móðir hafi borið það. Vinsældir hvers fornafns í Frakklandi (INSEE) eru í <b>Arfleifð → Fornöfn</b>.
+{n} prénom transmis par-dessus une génération ¦ Fornöfn sem ganga í arf yfir kynslóð: {n}
+{n} fois ¦ {n} sinnum
+Les prénoms qui reviennent ¦ Fornöfn sem koma aftur
+Le pouvoir d’achat d’autrefois ¦ Kaupmáttur fyrri tíma
+Une dot de 1 200 francs en 1880 : combien d’euros d’aujourd’hui, de kilos de pain, de journées de travail ? ¦ Heimanmundur upp á 1 200 franka árið 1880: hve margar evrur í dag, hve mörg kíló af brauði, hve margir vinnudagar?
+La somme ¦ Upphæðin
+livres (ou francs de l’époque) ¦ livres (eða frankar þess tíma)
+sous (1/20 de livre ou de franc) ¦ sous (1/20 úr livre eða franka)
+deniers (1/240 de livre) ¦ deniers (1/240 úr livre)
+anciens francs (après 1960) ¦ gamlir frankar (eftir 1960)
+centimes ¦ centimes
+euros ¦ evrur
+Repères : à partir de 1901, l’indice des prix de l’INSEE ; avant, un ordre de grandeur d’après le prix des denrées. Le pain : prix moyen du kilo de pain ordinaire. Les journées : le salaire d’un journalier. Un écu = 3 livres. ¦ Viðmið: frá 1901, verðvísitala INSEE; fyrir þann tíma gróf stærðargráða út frá verði matvæla. Brauð: meðalverð á kílói af venjulegu brauði. Dagar: laun daglaunamanns. Eitt écu = 3 livres.
+🪙 Le calcul pas à pas dans le Convertisseur d’autrefois ↗ ¦ 🪙 Útreikningurinn skref fyrir skref í Gjaldmiðlabreyti fyrri tíma ↗
+Les sommes de ton arbre ¦ Upphæðir í ættartrénu þínu
+{sum} en {y} ¦ {sum} árið {y}
+≈ {eur} d’aujourd’hui ¦ ≈ {eur} í dag
+{kg} kg de pain ¦ {kg} kg af brauði
+{d} journées de travail ¦ {d} vinnudagar
+En euros d’aujourd’hui ¦ Í evrum dagsins í dag
+En pain ¦ Í brauði
+soit {n} baguettes d’aujourd’hui ¦ það eru {n} baguette-brauð í dag
+En journées de travail ¦ Í vinnudögum
+d’un journalier en {y} ¦ daglaunamanns árið {y}
+≈ {eur} au SMIC d’aujourd’hui ¦ ≈ {eur} miðað við lágmarkslaun í dag
+francs ¦ frankar
+{n} {unit} de {y}. ¦ {n} {unit} frá {y}.
+Les deux chiffres ne disent pas la même chose : le pain coûtait proportionnellement bien plus cher autrefois, le travail beaucoup moins. ¦ Tölurnar tvær segja ekki það sama: brauð var hlutfallslega mun dýrara áður fyrr, vinnan miklu ódýrari.
+Les vieux mots des actes ¦ Gömlu orðin í skjölunum
+Laboureur, ondoyé, brumaire, douaire… Colle un acte : les mots anciens sont surlignés et expliqués. ¦ Laboureur, ondoyé, brumaire, douaire… Límdu inn skjal: gömlu (frönsku) orðin eru auðkennd og útskýrð.
+Colle ici le texte d’un acte ¦ Límdu texta skjals hér
+Dans ton arbre ¦ Í ættartrénu þínu
+Chercher un mot ¦ Leita að orði
+{n} mots ¦ Orð: {n}
+📜 Le latin, les abréviations et les anciennes lettres ↗ ¦ 📜 Latína, skammstafanir og gamlir bókstafir ↗
+Ces mots et leurs explications sont ceux des actes français : ils restent en français. ¦ Þessi orð og skýringar þeirra koma úr frönskum skjölum: þau haldast á frönsku.
+Jouer en famille ¦ Leikir fyrir fjölskylduna
+Jeu des 7 familles ¦ Fjölskylduspilið (7 fjölskyldur)
+Les cartes faites depuis ton arbre : la photo de chacun au choix et recadrée, six styles de cartes, les couleurs, le dos ; à imprimer et découper. ¦ Spil gerð úr ættartrénu þínu: mynd af hverjum og einum, valin og skorin til, sex spilastílar, litirnir, bakhliðin; til að prenta og klippa út.
+Les familles ¦ Fjölskyldurnar
+par nom de famille ¦ eftir eftirnafni
+par branche (arrière-grands-parents) ¦ eftir grein (langafar og langömmur)
+Le style ¦ Stíllinn
+🃏 Classique ¦ 🃏 Klassískt
+📜 Ancien (papier jauni) ¦ 📜 Gamalt (gulnaður pappír)
+◻️ Moderne (grande photo) ¦ ◻️ Nútímalegt (stór mynd)
+🧸 Pour les petits ¦ 🧸 Fyrir þau yngstu
+🎩 Années folles ¦ 🎩 Þriðji áratugurinn
+🪵 Bois gravé ¦ 🪵 Tréskurður
+Couleurs d’origine ¦ Upprunalegir litir
+Le dos ¦ Bakhliðin
+Un dos à motif (à imprimer au verso) ¦ Mynstruð bakhlið (prentuð á bakhliðina)
+Sans dos ¦ Engin bakhlið
+Le lieu de naissance ¦ Fæðingarstaður
+La liste de la famille ¦ Listi fjölskyldunnar
+Les photos choisies, les couleurs et le style de départ ¦ Völdu myndirnar, litirnir og upphafsstíllinn
+📷 sur une carte : choisir et recadrer sa photo. ¦ 📷 á spili: velja og skera til myndina.
+{n} familles de 6 cartes ({total} cartes). ¦ {n} fjölskyldur með 6 spilum ({total} spil).
+Choisir et recadrer la photo de {name} ¦ Velja og skera til mynd af {name}
+Le grand-père ¦ Afinn
+Le fils ¦ Sonurinn
+Jeu des familles ¦ Fjölskylduspilið
+La grand-mère ¦ Amman
+La fille ¦ Dóttirin
+Les planches de cartes (et leurs dos), avec la règle du jeu ¦ Spilaarkirnir (og bakhliðar þeirra), með leikreglunum
+Arbre à colorier ¦ Ættartré til að lita
+Les vrais ancêtres d’un enfant en traits noirs : un arbre, un jardin de fleurs, un village, des blasons, des montgolfières, une ruche, un éventail ou une rosace. ¦ Raunverulegir forfeður barns í svörtum línum: tré, blómagarður, þorp, skjaldarmerki, loftbelgir, býflugnabú, blævængur eða rósagluggi.
+L’enfant (ou la personne) au pied de l’arbre ¦ Barnið (eða einstaklingurinn) við rætur trésins
+5 (petites cases) ¦ 5 (litlir reitir)
+Le dessin ¦ Teikningin
+🌳 Le grand arbre ¦ 🌳 Stóra tréð
+🌷 Le jardin de fleurs ¦ 🌷 Blómagarðurinn
+🏡 Le village (une maison chacun) ¦ 🏡 Þorpið (eitt hús á mann)
+🛡️ Les blasons ¦ 🛡️ Skjaldarmerkin
+🎈 Les montgolfières ¦ 🎈 Loftbelgirnir
+🐝 La ruche (alvéoles) ¦ 🐝 Býflugnabúið (hólf)
+🪭 L’éventail ¦ 🪭 Blævængurinn
+🏵️ La rosace ¦ 🏵️ Rósaglugginn
+Le prénom seul (petits) ¦ Aðeins fornafnið (þau yngstu)
+Prénom et nom ¦ Fornafn og eftirnafn
+Prénom, nom et année ¦ Fornafn, eftirnafn og ár
+L’écriture ¦ Skriftin
+D’écolier ¦ Skólaskrift
+Bâton (lettres rondes) ¦ Prentstafir (ávalir stafir)
+Le trait ¦ Línan
+Fin (grands) ¦ Fín (eldri börn)
+Épais (petits, gros feutres) ¦ Þykk (yngri börn, stórir tússpennar)
+Sans ¦ Engin
+Double trait ¦ Tvöföld lína
+Guirlande de feuilles ¦ Laufsveigur
+Le titre ¦ Titillinn
+L’arbre de … ¦ Ættartré …
+Dessiner ¦ Teikna
+Enregistrer un fichier sur l’ordinateur, ou ranger une copie dans les médias ¦ Vista skrá á tölvunni, eða geyma afrit í miðlunum
+L’arbre de {name} ¦ Ættartré {name}
+Le quiz du repas ¦ Matarboðsspurningakeppnin
+Sur la télé, en équipes : des questions tirées de l’arbre (qui a épousé qui, où, quel métier), compte à rebours et scores. ¦ Í sjónvarpinu, í liðum: spurningar úr ættartrénu (hver giftist hverjum, hvar, hvaða starf), niðurtalning og stig.
+Les équipes (séparées par des virgules) ¦ Liðin (aðskilin með kommum)
+Les {name}, Les cousins ¦ {name}-fjölskyldan, Frændsystkinin
+Secondes pour répondre ¦ Sekúndur til að svara
+Branche l’ordinateur sur la télé : la question et les quatre réponses s’affichent en grand ; à la fin du compte à rebours (ou avec <b>Entrée</b>), la bonne réponse apparaît, puis on donne le point à l’équipe qui a trouvé (touches <b>1</b> à <b>9</b>). Répondre depuis les téléphones demanderait que l’application soit joignable depuis tout le réseau de la maison : ce n’est pas possible pour l’instant, on joue devant l’écran. ¦ Tengdu tölvuna við sjónvarpið: spurningin og svörin fjögur birtast í stóru letri; þegar niðurtalningunni lýkur (eða með <b>Enter</b>) birtist rétta svarið og svo gefurðu liðinu sem fann það stigið (lyklar <b>1</b> til <b>9</b>). Til að svara úr símum þyrfti appið að vera aðgengilegt á öllu heimilisnetinu: það er ekki hægt enn, svo þið spilið fyrir framan skjáinn.
+📺 Lancer le quiz ¦ 📺 Hefja spurningakeppnina
+Un avant-goût ¦ Forsmekkur
+Créer et fabriquer ¦ Skapa og búa til
+Le faire-part d’un événement ¦ Tilkynningakort fyrir atburð
+Une naissance, un mariage ou un décès de l’arbre : le faire-part se compose tout seul, dans le style de l’époque. ¦ Fæðing, hjónavígsla eða andlát úr ættartrénu: tilkynningakortið semur sig sjálft, í stíl tímabilsins.
+L’événement ¦ Atburðurinn
+Classique (1900) ¦ Klassískt (1900)
+Art déco (1925) ¦ Art deco (1925)
+Fleuri ¦ Blómlegt
+Deuil (liseré noir) ¦ Sorg (svört rönd)
+Romantique (dentelle, 1880) ¦ Rómantískt (blúnda, 1880)
+Art nouveau (1900) ¦ Art nouveau (1900)
+Champêtre (papier kraft) ¦ Sveitalegt (kraftpappír)
+Bleu et or ¦ Blátt og gyllt
+Layette (naissance) ¦ Ungbarn (fæðing)
+Épuré ¦ Stílhreint
+🎨 Plus d’options ¦ 🎨 Fleiri valkostir
+Le format ¦ Sniðið
+Carte A6 (portrait) ¦ A6-kort (skammsnið)
+Marque-page ¦ Bókamerki
+Celle du style ¦ Sú sem fylgir stílnum
+Écriture à la plume ¦ Skrift með fjaðurpenna
+Élégante (Didot) ¦ Glæsileg (Didot)
+Bâton ¦ Steinskrift
+Les ornements ¦ Skrautið
+Ceux du style ¦ Það sem fylgir stílnum
+Mes couleurs ¦ Mínir litir
+La photo de la personne ¦ Mynd af einstaklingnum
+Sa forme ¦ Lögun hennar
+Couleurs de la photo ¦ Litir myndarinnar
+D’origine ¦ Upprunalegir
+Le texte (une ligne par ligne ; * devant une ligne = en grand) ¦ Textinn (lína fyrir línu; * á undan línu = stórt)
+Le mur des signatures ¦ Undirskriftaveggurinn
+Toutes les signatures repérées sur les actes, découpées et rangées par époque : l’écriture de chaque génération. ¦ Allar undirskriftir sem fundist hafa í skjölum, klipptar út og raðaðar eftir tímabilum: rithönd hverrar kynslóðar.
+La Belle Époque ¦ La Belle Époque
+L’affiche (image PNG) ¦ Veggspjaldið (PNG-mynd)
+Lieux et voyages ¦ Staðir og ferðalög
+Le film des migrations ¦ Fólksflutningamyndin
+Année après année, chacun se déplace sur la carte, de sa naissance à sa mort ; le film s’enregistre en vidéo. ¦ Ár eftir ár færist hver og einn um kortið, frá fæðingu til dauða; myndin er vistuð sem myndband.
+Durée du film ¦ Lengd myndarinnar
+Sans carte ¦ Án korts
+▶ Jouer ¦ ▶ Spila
+{n} parcours, de {y0} à {y1} ¦ {n} leiðir, frá {y0} til {y1}
+famille {name} ¦ fjölskyldan {name}
+Le fond de carte se charge… ¦ Grunnkortið hleðst…
+{n} personne en vie ¦ {n} einstaklingur á lífi
+Fond de carte © OpenStreetMap, Esri ¦ Grunnkort © OpenStreetMap, Esri
+La vidéo (WebM) ¦ Myndbandið (WebM)
+Le film se joue une fois pendant l’enregistrement ¦ Myndin spilast einu sinni meðan á upptöku stendur
+Cette image (PNG) ¦ Þessi mynd (PNG)
+Le film des migrations — {title} ¦ Fólksflutningamyndin — {title}
+La vidéo, enregistrée pendant que le film se joue ¦ Myndbandið, tekið upp meðan myndin spilast
+Le village des ancêtres sur la carte de Cassini et sur la carte d’aujourd’hui, avec un rideau à faire glisser. ¦ Þorp forfeðranna á Cassini-kortinu og á korti nútímans, með tjaldi sem hægt er að draga.
+Hier ¦ Áður
+Carte de Cassini (XVIIIe s.) ¦ Cassini-kort (18. öld)
+Cassini, exemplaire du roi ¦ Cassini, eintak konungsins
+Carte d’État-major (1820-1866) ¦ Herforingjaráðskort (1820-1866)
+OpenHistoricalMap ¦ OpenHistoricalMap
+Fais glisser le rideau (ou les flèches du clavier). ¦ Dragðu tjaldið (eða notaðu örvatakkana).
+Rideau entre la carte d’hier et celle d’aujourd’hui ¦ Tjald á milli gamla kortsins og þess nýja
+Cartes : Géoplateforme IGN (Cassini, État-major), © OpenStreetMap, Esri. Dans l’onglet Carte, le mode « superposition » compare aussi deux fonds avec l’opacité. ¦ Kort: Géoplateforme IGN (Cassini, herforingjaráðskort), © OpenStreetMap, Esri. Í flipanum Kort ber hamurinn „yfirlögn“ líka saman tvö grunnkort með gegnsæi.
+La promenade guidée ¦ Leiðsögugangan
+Les lieux d’une vie dans l’ordre, l’histoire de chaque étape lue à voix haute — même toute seule, en arrivant sur place. ¦ Staðir einnar ævi í réttri röð, saga hvers áfanga lesin upphátt — jafnvel sjálfkrafa þegar þú kemur á staðinn.
+La promenade de ¦ Ganga
+Le parcours ¦ Leiðin
+les lieux de sa vie ¦ staðir ævi hans eða hennar
+les villages de ses ancêtres ¦ þorp forfeðra hans eða hennar
+🔊 Tout le guide ¦ 🔊 Öll leiðsögnin
+📍 Me guider en marchant ¦ 📍 Leiðbeindu mér á göngunni
+⏹ Silence ¦ ⏹ Þögn
+Le guide de la promenade, étape par étape ¦ Leiðsögn göngunnar, skref fyrir skref
+🔊 Écouter ¦ 🔊 Hlusta
+🧭 Itinéraire ¦ 🧭 Leiðarlýsing
+{km} km en tout (à vol d’oiseau) ¦ {km} km alls (í beinni loftlínu)
+Outils malins ¦ Snjöll tól
+Dater une vieille photo ¦ Tímasetja gamla mynd
+Le support, le carton, les vêtements, les coiffures : une fourchette d’années, et qui de l’arbre ça peut être. ¦ Miðillinn, pappaspjaldið, fötin, hárgreiðslurnar: árabil, og hver úr ættartrénu þetta gæti verið.
+Coche ce que tu vois sur la photo (une ou plusieurs réponses par question, ou rien si tu ne sais pas). Les repères sont volontairement larges. ¦ Hakaðu við það sem þú sérð á myndinni (eitt eða fleiri svör við hverri spurningu, eða ekkert ef þú veist ekki). Bilin eru viljandi víð.
+Le support ¦ Miðillinn
+Plaque de métal argentée, comme un miroir, dans un écrin ¦ Silfruð málmplata, eins og spegill, í öskju
+Image sur verre, dans un écrin (ambrotype) ¦ Mynd á gleri, í öskju (ambrótýpa)
+Image sur une fine plaque de fer, sombre (ferrotype) ¦ Mynd á þunnri járnplötu, dökk (ferrótýpa)
+Petite carte (6 × 10 cm) collée sur un carton : carte de visite ¦ Lítið kort (6 × 10 cm) límt á pappaspjald: carte de visite
+Grande carte (11 × 16 cm) sur carton : carte cabinet ¦ Stórt kort (11 × 16 cm) á pappaspjaldi: cabinet-kort
+Carte postale photo (dos imprimé « carte postale ») ¦ Ljósmyndapóstkort (bakhlið prentuð „carte postale“)
+Tirage papier aux bords dentelés ¦ Pappírsmynd með tenntum jöðrum
+Petit tirage papier noir et blanc sans carton, bords blancs droits ¦ Lítil svarthvít pappírsmynd án spjalds, beinir hvítir jaðrar
+Photo couleur aux couleurs passées (orange, magenta) ¦ Litmynd með upplituðum litum (appelsínugult, magenta)
+Tirage carré à bord blanc large (type Polaroid / Instamatic) ¦ Ferningslaga mynd með breiðri hvítri rönd (eins og Polaroid / Instamatic)
+Le carton (carte de visite ou cabinet) ¦ Spjaldið (carte de visite eða cabinet-kort)
+Coins carrés, carton fin et clair ¦ Ferköntuð horn, þunnt og ljóst spjald
+Carton épais et coloré (crème, noir, bordeaux), tranche dorée ¦ Þykkt og litað spjald (rjómalitað, svart, vínrautt), gylltur kantur
+Nom du photographe en grandes lettres décorées au dos, médailles ¦ Nafn ljósmyndarans með stórum skrautstöfum á bakhliðinni, medalíur
+Bord biseauté doré ¦ Gylltur skáskorinn kantur
+Les vêtements des femmes ¦ Fatnaður kvenna
+Jupe très large en cloche (crinoline), épaules tombantes ¦ Mjög vítt bjöllupils (krínólína), hallandi axlir
+Jupe plate devant et gonflée derrière (tournure) ¦ Pils slétt að framan og útblásið að aftan (lendapúði)
+Manches très bouffantes en haut (gigot) ¦ Ermar mjög púffaðar efst (lambalæri)
+Silhouette en S, col montant, grand chapeau ¦ S-laga vaxtarlag, hár kragi, stór hattur
+Robe droite, taille basse, jupe au genou ¦ Beinn kjóll, lágt mitti, pils niður að hné
+Épaules carrées, jupe sous le genou ¦ Kantaðar axlir, pils niður fyrir hné
+Jupe ample et taille fine (New Look) ¦ Vítt pils og grannt mitti (New Look)
+Coiffe régionale ou bonnet de paysanne ¦ Héraðshöfuðbúnaður eða bændakonuhúfa
+Les coiffures ¦ Hárgreiðslurnar
+Raie au milieu, cheveux plaqués sur les oreilles ¦ Skipting í miðju, hár slétt yfir eyrun
+Frange frisée sur le front ¦ Liðaður toppur á enninu
+Chignon haut et volumineux ¦ Hár og mikill hnútur
+Cheveux courts « à la garçonne » ¦ Stutt hár „à la garçonne“
+Mise en plis ondulée ¦ Bylgjaðar hárlagningar
+Les hommes ¦ Karlarnir
+Haut-de-forme ¦ Pípuhattur
+Canotier (chapeau de paille plat) ¦ Stráhattur (flatur stráhattur)
+Moustache fournie, sans barbe ¦ Þykkt yfirvaraskegg, ekkert alskegg
+Barbe entière fournie ¦ Mikið alskegg
+Col cassé et nœud papillon ¦ Vængjakragi og slaufa
+Uniforme bleu horizon ¦ Ljósblár herbúningur (bleu horizon)
+Costume trois-pièces large, chapeau mou ¦ Víð jakkaföt með vesti, mjúkur hattur
+Pantalon pattes d’éléphant, cheveux longs ¦ Útvíðar buxur, sítt hár
+Le décor ¦ Umhverfið
+Fond peint, colonne, balustrade, rideau drapé ¦ Málaður bakgrunnur, súla, handrið, gluggatjald í fellingum
+Fond uni, simple chaise ¦ Einlitur bakgrunnur, einfaldur stóll
+Dehors, photo prise sur le vif (pas en atelier) ¦ Utandyra, mynd tekin í svipinn (ekki á ljósmyndastofu)
+Et toi, que sais-tu ? ¦ Og þú, hvað veistu?
+Photographe ou date notée : de ¦ Ljósmyndari eða skráð dagsetning: frá
+Âge apparent de la personne ¦ Áætlaður aldur einstaklingsins
+C’est ¦ Þetta er
+un homme, un garçon ¦ karl, drengur
+une femme, une fille ¦ kona, stúlka
+Lieu (nom du photographe, ville) ¦ Staður (nafn ljósmyndara, bær)
+Coche au moins un indice ¦ Hakaðu við að minnsta kosti eina vísbendingu
+Les rappels de recherche ¦ Rannsóknaráminningar
+« Tu n’as pas touché à la branche FAURE depuis 8 mois » : les branches endormies, ce qui y manque, un rappel en un clic. ¦ „Þú hefur ekki snert FAURE-greinina í 8 mánuði“: sofandi greinar, það sem vantar í þær, áminning í einum smelli.
+Les branches de ¦ Greinar
+Endormie depuis au moins ¦ Sofandi í að minnsta kosti
+peu importe ¦ skiptir ekki máli
+La date est celle de la dernière modification d’une fiche de la branche. Un rappel se crée en un clic : il rejoint les rappels de l’application (Listes → Rappels) et le widget « À venir ». ¦ Dagsetningin er síðasta breyting á spjaldi í greininni. Áminning verður til í einum smelli: hún bætist við áminningar appsins (Listar → Áminningar) og græjuna „Framundan“.
+Branche {name} ({first}) ¦ Greinin {name} ({first})
+Reprendre la branche {name} ({first}) ¦ Taka upp þráðinn í greininni {name} ({first})
+Aucune branche endormie depuis aussi longtemps ¦ Engin grein hefur sofið svo lengi
+Les actes manquants ¦ Skjöl sem vantar
+Ce qui manque à la lignée, rangé par archives où chercher (l’assistant de l’onglet Recherche). ¦ Það sem vantar í ættlegginn, raðað eftir skjalasöfnum þar sem leita skal (hjálparinn í flipanum Rannsóknir).
+Je regarde ce qui manque… ¦ Ég skoða hvað vantar…
+L’assistant <b>« Que manque-t-il ? »</b> (onglet Recherche) liste les actes qui manquent à la lignée, rangés par service d’archives, avec la commune, les années et les séries à consulter (état civil, tables décennales, registres paroissiaux, notaires, recensements, registres matricules), et un lien vers FranceArchives. ¦ Hjálparinn <b>„Hvað vantar?“</b> (flipinn Rannsóknir) listar skjölin sem vantar í ættlegginn, raðað eftir skjalasöfnum, með sveitarfélaginu, árunum og skjalaflokkunum sem skal skoða (þjóðskrá, tíu ára skrár, kirkjubækur, lögbókendur, manntöl, herskráningarbækur), og tengli á FranceArchives.
+{n} recherches à faire sur 6 générations ¦ Rannsóknir sem þarf að gera yfir 6 kynslóðir: {n}
+L’assistant « Que manque-t-il ? » de l’onglet Recherche ¦ Hjálparinn „Hvað vantar?“ í flipanum Rannsóknir
+Le thème d’époque ¦ Tímabilsþemað
+Chaque fiche aux couleurs de son temps : parchemin, sépia, Belle Époque, art déco, Trente Glorieuses. ¦ Hvert spjald í litum síns tíma: bókfell, sepía, Belle Époque, art deco, eftirstríðsárin.
+Habiller chaque fiche aux couleurs de son époque ¦ Klæða hvert spjald í liti síns tímabils
+La fiche d’un ancêtre prend l’allure du temps où il a vécu (ses 25 ans) : parchemin pour l’Ancien Régime, sépia au XIXe, art déco pour les années folles… Le reste de l’application ne change pas. Ce réglage est gardé sur cet ordinateur. ¦ Spjald forföður fær yfirbragð þess tíma sem hann lifði á (25 ára gamall): bókfell fyrir Ancien Régime, sepía á 19. öld, art deco fyrir þriðja áratuginn… Restin af appinu breytist ekki. Þessi stilling er geymd á þessari tölvu.
+📜 Ancien Régime ¦ 📜 Ancien Régime
+avant ¦ fyrir
+🎖️ Révolution et Empire ¦ 🎖️ Byltingin og keisaradæmið
+🎩 Le XIXe siècle ¦ 🎩 19. öldin
+🌿 La Belle Époque ¦ 🌿 La Belle Époque
+🍸 Les années folles et la guerre ¦ 🍸 Þriðji áratugurinn og stríðið
+🚗 Les Trente Glorieuses ¦ 🚗 Eftirstríðsárin (Trente Glorieuses)
+📻 Les années 70 et après ¦ 📻 Áttundi áratugurinn og síðar
+Les étoiles, la Lune et les planètes au-dessus du village, la nuit de la naissance : une image à garder ou à offrir. ¦ Stjörnurnar, tunglið og reikistjörnurnar yfir þorpinu nóttina sem fæðingin varð: mynd til að eiga eða gefa.
+La naissance de ¦ Fæðing
+Vers quelle heure (heure solaire du lieu) ¦ Um hvaða leyti (sólartími staðarins)
+Nuit bleue ¦ Blá nótt
+Affiche (fond crème) ¦ Veggspjald (rjómalitaður bakgrunnur)
+Noir et or ¦ Svart og gyllt
+Encre sur papier (à imprimer) ¦ Blek á pappír (til að prenta)
+Aube (rose et bleu) ¦ Dögun (bleikt og blátt)
+Vert forêt ¦ Skógargrænt
+Ronde ¦ Kringlótt
+Carrée ¦ Ferningslaga
+Fenêtre en arc ¦ Bogagluggi
+Affiche ¦ Veggspjald
+A4 (portrait) ¦ A4 (skammsnið)
+Élégante ¦ Glæsileg
+À la plume ¦ Með fjaðurpenna
+Les constellations ¦ Stjörnumerkin
+La Voie lactée (évocation) ¦ Vetrarbrautin (hugmynd)
+Les repères (hauteur, directions) ¦ Viðmiðin (hæð, áttir)
+✏️ Les textes ¦ ✏️ Textarnir
+(le nom) ¦ (nafnið)
+(le lieu et la date) ¦ (staðurinn og dagsetningin)
+Dernière ligne ¦ Síðasta lína
+(la lune, les planètes) ¦ (tunglið, reikistjörnurnar)
+Aussi rangée sur sa fiche ¦ Líka geymd á spjaldi viðkomandi
+{place} — {when}, vers {h} ¦ {place} — {when}, um {h}
+pleine lune ¦ fullt tungl
+Jupiter ¦ Júpíter
+{list} brillait ¦ {list} skein
+Grande Ourse ¦ Karlsvagninn
+Orion ¦ Óríon
+Cassiopée ¦ Kassíópeia
+Lion ¦ Ljónið
+Gémeaux ¦ Tvíburarnir
+Bouvier ¦ Hjarðmaðurinn
+Taureau ¦ Nautið
+Petite Ourse ¦ Litlibjörn
+Cocher ¦ Ökumaðurinn
+Grand Chien ¦ Stórihundur
+Vierge ¦ Meyjan
+boussole|N ¦ N
+boussole|E ¦ A
+boussole|S ¦ S
+boussole|O ¦ V
+{n} % éclairée ¦ {n} % upplýst
+coucher du soleil vers {h} ¦ sólarlag um {h}
+lever vers {h} ¦ sólarupprás um {h}
+{n} étoiles brillantes au-dessus de l’horizon ¦ Bjartar stjörnur yfir sjóndeildarhringnum: {n}
+Allumer une bougie ¦ Kveikja á kerti
+Une bougie pour un ancêtre, avec un mot : elle brûle sept jours. Les anniversaires de naissance et de décès à venir. ¦ Kerti fyrir forföður, með orðsendingu: það logar í sjö daga. Komandi fæðingar- og dánarafmæli.
+{n} bougie allumée ¦ {n} kerti logar
+{n} au registre ¦ {n} í skránni
+Aucune bougie allumée en ce moment ¦ Ekkert kerti logar núna
+📅 Dans les trente jours ¦ 📅 Á næstu þrjátíu dögum
+{n} ans de sa naissance ({date}) ¦ {n} ár frá fæðingu ({date})
+dans {n} jours ¦ eftir {n} daga
+{n} ans de son décès ({date}) ¦ {n} ár frá andláti ({date})
+L’ambiance sonore d’époque ¦ Hljóðheimur fyrri tíma
+Le feu et l’horloge de la veillée, les cloches du dimanche, la forge, la gare, le moulin : les bruits du temps des ancêtres. ¦ Eldurinn og klukkan á kvöldvökunni, sunnudagsklukkurnar, smiðjan, járnbrautarstöðin, myllan: hljóð frá tíma forfeðranna.
+🔥 La veillée au coin du feu (vers 1880) ¦ 🔥 Kvöldvaka við arininn (um 1880)
+🔔 Le village un dimanche matin ¦ 🔔 Þorpið á sunnudagsmorgni
+⚒️ L’atelier du forgeron ¦ ⚒️ Smiðja járnsmiðsins
+🚂 La gare (vers 1900) ¦ 🚂 Járnbrautarstöðin (um 1900)
+💧 Le moulin au bord de l’eau ¦ 💧 Vatnsmyllan
+🌧️ La nuit d’orage ¦ 🌧️ Óveðursnóttin
+🌊 Le port ¦ 🌊 Höfnin
+🐓 La ferme au petit matin ¦ 🐓 Sveitabærinn í morgunsárið
+🌙 Une nuit d’été à la campagne ¦ 🌙 Sumarnótt í sveitinni
+🧺 Le lavoir ¦ 🧺 Þvottahúsið
+🧺 Le jour de marché ¦ 🧺 Markaðsdagurinn
+🍷 Le café du village ¦ 🍷 Þorpskaffihúsið
+🪗 Le bal musette ¦ 🪗 Harmonikkuballið
+⛪ La messe à l’église ¦ ⛪ Messa í kirkjunni
+🪡 L’atelier de couture ¦ 🪡 Saumastofan
+🧵 La filature et le tissage ¦ 🧵 Spunaverksmiðjan og vefnaðurinn
+🧶 La veillée des fileuses ¦ 🧶 Kvöldvaka spunakvennanna
+🪚 L’atelier du menuisier ¦ 🪚 Verkstæði smiðsins
+🏫 La classe (vers 1900) ¦ 🏫 Skólastofan (um 1900)
+✒️ L’étude du notaire ¦ ✒️ Skrifstofa lögbókandans
+🌾 Les moissons ¦ 🌾 Uppskeran
+🐝 Le rucher ¦ 🐝 Býflugnabúin
+🐴 La route en diligence ¦ 🐴 Ferðin með póstvagninum
+Ou celle du métier de ¦ Eða sá sem fylgir starfi
+▶ Écouter ¦ ▶ Hlusta
+🔈 Volume ¦ 🔈 Hljóðstyrkur
+⏲️ S’arrêter après ¦ ⏲️ Hætta eftir
+Un mélange au hasard de 3 à 5 couches ¦ Handahófsblanda af 3 til 5 lögum
+🎲 Au hasard ¦ 🎲 Af handahófi
+Tout à zéro ¦ Allt á núll
+Durée du fichier son ¦ Lengd hljóðskrárinnar
+⭐ Mes ambiances ¦ ⭐ Hljóðheimarnir mínir
+💾 Garder ce mélange ¦ 💾 Geyma þessa blöndu
+Tout est fabriqué par l’ordinateur, à partir de bruit et de sons purs : une évocation, pas un enregistrement. Règle chaque couche à ton goût ({n} couches). ¦ Allt er búið til af tölvunni, úr suði og hreinum tónum: hugmynd, ekki upptaka. Stilltu hvert lag að vild (lög: {n}).
+Chercher une couche (cloches, eau, atelier…) ¦ Leita að lagi (klukkur, vatn, verkstæði…)
+Chercher une couche ¦ Leita að lagi
+🌬️ Le vent ¦ 🌬️ Vindurinn
+🌧️ La pluie ¦ 🌧️ Rigningin
+🔥 Le feu de cheminée ¦ 🔥 Arineldurinn
+🕰️ L’horloge comtoise ¦ 🕰️ Gólfklukkan
+🔔 Les cloches du village ¦ 🔔 Kirkjuklukkur þorpsins
+⚒️ L’enclume du forgeron ¦ ⚒️ Steðji járnsmiðsins
+🐦 Les oiseaux ¦ 🐦 Fuglarnir
+💧 La rivière et le moulin ¦ 💧 Áin og myllan
+🚂 Le train à vapeur ¦ 🚂 Gufulestin
+🌊 La mer ¦ 🌊 Hafið
+🦗 Les grillons ¦ 🦗 Engisprettur
+🐸 Les grenouilles de la mare ¦ 🐸 Froskarnir í tjörninni
+🦉 La chouette ¦ 🦉 Uglan
+🐓 Le coq ¦ 🐓 Haninn
+🐄 Les sonnailles des vaches ¦ 🐄 Kúabjöllurnar
+🐴 Les sabots du cheval ¦ 🐴 Hófar hestsins
+🛞 La charrette sur les pavés ¦ 🛞 Kerran á steinlögninni
+🐝 Les abeilles du rucher ¦ 🐝 Býflugurnar í búinu
+🌾 Le vent dans les blés ¦ 🌾 Vindurinn í hveitinu
+⛈️ Le tonnerre au loin ¦ ⛈️ Þruma í fjarska
+⛲ La fontaine du lavoir ¦ ⛲ Brunnur þvottahússins
+🧺 Les battoirs des lavandières ¦ 🧺 Þvottaklöppur þvottakvennanna
+🧶 Le rouet qui file ¦ 🧶 Rokkurinn sem spinnur
+🧵 Le métier à tisser ¦ 🧵 Vefstóllinn
+🪡 La machine à coudre ¦ 🪡 Saumavélin
+🪚 La scie du menuisier ¦ 🪚 Sög smiðsins
+✒️ La plume sur le papier ¦ ✒️ Penninn á pappírnum
+🗣️ Le murmure de la foule ¦ 🗣️ Kliður mannfjöldans
+🍷 Les verres du café ¦ 🍷 Glösin á kaffihúsinu
+⛪ L’orgue de l’église ¦ ⛪ Kirkjuorgelið
+🪗 L’accordéon du bal musette ¦ 🪗 Harmonikkan á ballinu
+🏫 La craie au tableau ¦ 🏫 Krítin á töflunni
+🪵 Le bois qui craque ¦ 🪵 Brakandi viður
+👣 Des pas sur le gravier ¦ 👣 Fótatak í mölinni
+🕊️ Les mouettes ¦ 🕊️ Mávarnir
+🎶 Le bourdon de la vielle ¦ 🎶 Bordún snerilfiðlunnar
+© Crédits et droits des sons ¦ © Höfundarréttur og réttindi hljóðanna
+Aucun enregistrement n’est utilisé : <b>chaque son est calculé par ton navigateur</b> au moment où tu l’écoutes (Web Audio), à partir de bruit et de sons purs. Il n’y a donc aucun auteur à créditer en dehors de LCNDA, et rien n’est téléchargé. ¦ Engar upptökur eru notaðar: <b>hvert hljóð er reiknað út af vafranum þínum</b> um leið og þú hlustar (Web Audio), úr suði og hreinum tónum. Því er enginn höfundur sem þarf að geta fyrir utan LCNDA, og ekkert er sótt.
+<b>Libres de droits</b> : tu peux les écouter, les enregistrer, les mettre dans un montage ou une présentation, même les partager, sans rien demander (comme le domaine public, CC0). ¦ <b>Án höfundarréttargjalda</b>: þú mátt hlusta á þau, vista þau, setja þau í myndbandsklippingu eða kynningu, jafnvel deila þeim, án þess að spyrja neinn (eins og almenningseign, CC0).
+bruit blanc filtré, qui ondule lentement ¦ síað hvítt suð sem bylgjast hægt
+bruit aigu et milliers de petites gouttes au hasard ¦ skært suð og þúsundir lítilla dropa af handahófi
+bruit grave et crépitements au hasard ¦ djúpt suð og brak af handahófi
+deux « tic » de sons purs, un carillon toutes les 40 secondes ¦ tvö „tikk“ úr hreinum tónum, klukknahljómur á 40 sekúndna fresti
+sons purs aux harmoniques des cloches de bronze ¦ hreinir tónar með yfirtónum bronsklukkna
+coups métalliques : trois sons purs qui s’éteignent ¦ málmhögg: þrír hreinir tónar sem dvína
+petits sifflets de sons purs qui montent ¦ litlar hækkandi flautur úr hreinum tónum
+bruit filtré et le battement grave de la roue ¦ síað suð og djúpur sláttur hjólsins
+souffles de vapeur rythmés et un sifflet à deux notes ¦ taktfastir gufublástrar og tveggja tóna flauta
+bruit grave qui monte et descend comme les vagues ¦ djúpt suð sem rís og hnígur eins og öldur
+trilles de sons purs très aigus ¦ mjög skærir trillur úr hreinum tónum
+sons en dents de scie qui montent ¦ hækkandi sagtannarhljóð
+trois sons purs graves qui glissent ¦ þrír djúpir hreinir tónar sem renna
+trois sons qui montent puis retombent ¦ þrír tónar sem hækka og falla svo
+sons métalliques aux harmoniques de cloche ¦ málmhljóð með yfirtónum klukkna
+petits chocs de bruit au rythme du pas ¦ smá suðhögg í göngutakti
+grondement grave qui tremble et cailloux de bruit ¦ djúpur titrandi dynur og suðsteinar
+trois notes graves qui vibrent ¦ þrír djúpir titrandi tónar
+bruit très aigu qui ondule ¦ mjög skært suð sem bylgjast
+grondements de bruit très grave ¦ mjög djúpir suðdrunur
+bruit d’eau et gouttes de sons purs ¦ vatnssuð og dropar úr hreinum tónum
+deux chocs sourds ¦ tvö dumb högg
+ronronnement et petit clic de la roue ¦ suð og lítill smellur hjólsins
+le claquement de la navette et le coup du battant ¦ smellur skyttunnar og högg skeiðarinnar
+cliquetis rapides par séries ¦ hraðir glamrar í lotum
+bruit filtré qui va et vient ¦ síað suð sem kemur og fer
+grattements de bruit aigu ¦ skært klórsuð
+quatre bandes de bruit qui imitent les voix ¦ fjögur suðbönd sem líkja eftir röddum
+tintements de sons purs ¦ klingjandi hreinir tónar
+accords tenus de sons doux ¦ haldnir hljómar úr mjúkum tónum
+une petite valse de sons en dents de scie, basse et accords ¦ lítill vals úr sagtannarhljóðum, bassi og hljómar
+traits de bruit et le petit coup du point ¦ suðstrokur og lítið bank punktsins
+craquements de bruit ¦ suðbrak
+pas de bruit filtré ¦ fótatak úr síuðu suði
+cris en dents de scie qui descendent ¦ lækkandi sagtannaróp
+trois notes graves tenues, qui vibrent un peu ¦ þrír djúpir haldnir tónar sem titra örlítið
+Fichier son (WebM) ¦ Hljóðskrá (WebM)
+Ce qu’on entend, pendant la durée choisie ¦ Það sem heyrist, í valinn tíma
+L’arbre qui pousse ¦ Tréð sem vex
+Les descendants d’un ancêtre apparaissent année après année, les branches poussent, les feuilles roussissent. ¦ Afkomendur forföður birtast ár eftir ár, greinarnar vaxa, laufin roðna.
+▶ Faire pousser ¦ ▶ Láta vaxa
+lente ¦ hægt
+normale ¦ venjulegt
+rapide ¦ hratt
+La musique de l’arbre ¦ Tónlist ættartrésins
+L’arbre joué comme une partition : une note par naissance, un accord par mariage ; à écouter ou à télécharger. ¦ Ættartréð leikið eins og nótur: ein nóta fyrir hverja fæðingu, hljómur fyrir hverja hjónavígslu; til að hlusta á eða sækja.
+tout l’arbre ¦ allt ættartréð
+Tempo ¦ Hraði
+lent ¦ hægur
+normal ¦ venjulegur
+vif ¦ líflegur
+Chaque naissance est une note : plus aiguë pour les générations proches, plus longue pour une longue vie, au timbre plus doux pour les femmes ; chaque mariage, un accord ; chaque décès, une note grave. ¦ Hver fæðing er nóta: hærri fyrir nýlegar kynslóðir, lengri fyrir langa ævi, mýkri hljómblær fyrir konur; hver hjónavígsla hljómur; hvert andlát djúp nóta.
+Fichier son (WAV) ¦ Hljóðskrá (WAV)
+{b} naissances, {m} mariages, {d} décès — {s} secondes ¦ Fæðingar: {b}, hjónavígslur: {m}, andlát: {d} — {s} sekúndur
+La chasse au trésor ¦ Fjársjóðsleitin
+Des énigmes sur les ancêtres cachées dans la maison : seule la bonne réponse mène à la cachette suivante. ¦ Gátur um forfeðurna faldar í húsinu: aðeins rétta svarið vísar á næsta felustað.
+🗝️ Préparer la chasse ¦ 🗝️ Undirbúa leitina
+Le nom de la chasse ¦ Heiti leitarinnar
+La chasse au trésor de la famille {name} ¦ Fjársjóðsleit fjölskyldunnar {name}
+Les cachettes, dans l’ordre (une par ligne ; la dernière est celle du trésor) ¦ Felustaðirnir, í röð (einn í hverja línu; sá síðasti geymir fjársjóðinn)
+sous le paillasson ¦ undir dyramottunni
+dans la boîte aux lettres ¦ í póstkassanum
+derrière l’horloge ¦ bak við klukkuna
+au fond du placard de l’entrée ¦ innst í forstofuskápnum
+Le trésor (ce qu’on trouve à la fin) ¦ Fjársjóðurinn (það sem finnst í lokin)
+le gâteau d’anniversaire de Mamie ¦ afmæliskakan hennar ömmu
+Chaque énigme porte sur un ancêtre ; chaque réponse renvoie à une cachette : il faut la bonne réponse pour trouver la suite. ¦ Hver gáta fjallar um forföður; hvert svar vísar á felustað: rétta svarið þarf til að finna framhaldið.
+L’ancêtre mystère ¦ Leyndardómsforfaðirinn
+Un ancêtre caché, des indices un par un : le même pour toute la famille chaque jour. Qui le trouve le plus vite ? ¦ Falinn forfaðir, vísbendingar ein af annarri: sá sami fyrir alla fjölskylduna hvern dag. Hver finnur hann fyrst?
+🕵️ L’ancêtre mystère du {date} ¦ 🕵️ Leyndardómsforfaðir dagsins {date}
+Proposer ¦ Giska
+Un indice de plus ({n}) ¦ Ein vísbending í viðbót ({n})
+Je donne ma langue au chat ¦ Ég gefst upp
+Trouvé maintenant : {n} points. ¦ Fundið núna: {n} stig.
+Le livre dont tu es le héros ¦ Bókin þar sem þú ert hetjan
+Vis la vie d’un ancêtre et fais ses choix — métier, mariage, départ — puis découvre ce qu’il a vraiment choisi. ¦ Lifðu lífi forföður og taktu ákvarðanir hans — starf, hjónaband, brottför — og komstu svo að því hvað hann valdi í raun.
+Tu seras ¦ Þú verður
+📖 Commencer l’histoire ¦ 📖 Hefja söguna
+Les coïncidences ¦ Tilviljanirnar
+Nés le même jour, mort le jour de son anniversaire, mariés à cent ans d’écart jour pour jour : les hasards de l’arbre. ¦ Fædd sama dag, dáin á afmælisdaginn, gift með hundrað ára millibili upp á dag: tilviljanir ættartrésins.
+Plus l’arbre a de dates précises (jour et mois), plus il y en a. ¦ Því fleiri nákvæmar dagsetningar (dagur og mánuður) sem ættartréð hefur, því fleiri eru þær.
+« Et si… » ¦ „Hvað ef…“
+Et si ces deux-là ne s’étaient pas rencontrés ? Toutes les vies qui n’auraient jamais existé — peut-être la tienne. ¦ Hvað ef þessi tvö hefðu aldrei hist? Allar ævirnar sem hefðu aldrei orðið til — kannski þín.
+Et si… ¦ Hvað ef…
+ces deux-là ne s’étaient jamais rencontrés ¦ þessi tvö hefðu aldrei hist
+cette personne n’avait pas vécu ¦ þessi einstaklingur hefði ekki lifað
+🦋 {n} vies n’auraient jamais existé ¦ 🦋 Ævir sem hefðu aldrei orðið til: {n}
+{pct} % de l’arbre, dont {who} en vie aujourd’hui. ¦ {pct} % ættartrésins, þar á meðal {who} á lífi í dag.
+Et {name} non plus. ¦ Og ekki heldur {name}.
+La broderie au point de croix ¦ Krosssaumur
+Un marquoir à l’ancienne : le nom de la famille, un couple, une date, un arbre ; la grille et les fils. ¦ Stafaklútur að gömlum sið: ættarnafnið, hjón, dagsetning, tré; mynstrið og garnið.
+FAMILLE {name} ¦ FJÖLSKYLDAN {name}
+La date ¦ Dagsetningin
+Le lieu (facultatif) ¦ Staðurinn (valfrjálst)
+La couleur du titre ¦ Litur titilsins
+Brun ¦ Brúnt
+Bleu ciel ¦ Himinblátt
+La couleur du couple ¦ Litur hjónanna
+Le titre en grandes lettres (double) ¦ Titillinn með stórum stöfum (tvöfaldur)
+Le motif ¦ Myndefnið
+❤️ Le cœur ¦ ❤️ Hjartað
+👑 Le cœur couronné ¦ 👑 Krýnda hjartað
+🌷 Les tulipes ¦ 🌷 Túlípanarnir
+⛪ L’église ¦ ⛪ Kirkjan
+🕊️ Les colombes ¦ 🕊️ Dúfurnar
+— Aucun motif ¦ — Ekkert myndefni
+Ses couleurs ¦ Litir þess
+celle du motif ¦ litur myndefnisins
+Deux petits cœurs de chaque côté ¦ Tvö lítil hjörtu hvoru megin
+La bordure ¦ Bryddingin
+· Les points (à l’ancienne) ¦ · Punktarnir (að gömlum sið)
+♥ La frise de cœurs ¦ ♥ Hjartabekkur
+⌇ La frise en zigzag ¦ ⌇ Sikksakkbekkur
+▭ Le double trait ¦ ▭ Tvöföld lína
+— Sans bordure ¦ — Engin brydding
+La toile ¦ Efnið
+Aïda 11 ¦ Aida 11
+Aïda 14 ¦ Aida 14
+Aïda 16 ¦ Aida 16
+Aïda 18 ¦ Aida 18
+Lin 28 fils (un point sur 2 fils) ¦ Hör 28 þræðir (eitt spor yfir 2 þræði)
+Sa couleur (aperçu) ¦ Litur þess (forskoðun)
+Écru ¦ Ófleginn
+Lin ¦ Hör
+Bleu nuit ¦ Næturblátt
+l’aperçu brodé ¦ saumaða forskoðunin
+la grille à symboles ¦ táknamynstrið
+La grille (dessin SVG) ¦ Mynstrið (SVG-teikning)
+L’aperçu brodé (image PNG) ¦ Saumaða forskoðunin (PNG-mynd)
+La grille à symboles et la liste des fils ¦ Táknamynstrið og listi yfir garnið
+{w} × {h} points · sur {cloth} : {cw} × {ch} cm (prévoir 5 cm de marge tout autour) ¦ {w} × {h} spor · á {cloth}: {cw} × {ch} cm (gerðu ráð fyrir 5 cm spássíu allan hringinn)
+{n} points ¦ Spor: {n}
+La gravure au laser ¦ Lasergröftur
+L’éventail des ancêtres en fichier SVG aux vraies dimensions, prêt pour une graveuse laser (gravure et découpe). ¦ Blævængur forfeðranna sem SVG-skrá í raunstærð, tilbúin fyrir lasergrafara (gröftur og skurður).
+Les ancêtres de ¦ Forfeður
+Le fichier est aux vraies dimensions, en millimètres : <b>noir = gravure</b> (traits et noms), <b>rouge = découpe</b> (le contour, trait fin). Convient à LightBurn, Glowforge, xTool, Inkscape. Vérifie toujours la taille à l’import. ¦ Skráin er í raunstærð, í millimetrum: <b>svart = gröftur</b> (línur og nöfn), <b>rautt = skurður</b> (útlínan, fín lína). Hentar LightBurn, Glowforge, xTool, Inkscape. Athugaðu alltaf stærðina við innflutning.
+Dessin SVG pour la graveuse ¦ SVG-teikning fyrir grafarann
+Aux vraies dimensions : noir = gravure, rouge = découpe ¦ Í raunstærð: svart = gröftur, rautt = skurður
+La mosaïque de portraits ¦ Myndamósaíkin
+Tous les visages de l’arbre en une image, ou un portrait refait avec les visages de toute la famille. ¦ Öll andlit ættartrésins á einni mynd, eða andlitsmynd endurgerð úr andlitum allrar fjölskyldunnar.
+Je rassemble les visages… ¦ Safna saman andlitunum…
+La mosaïque ¦ Mósaíkin
+tous les visages, en grille ¦ öll andlitin, í töflu
+un portrait refait avec tous les autres ¦ andlitsmynd endurgerð úr öllum hinum
+Le portrait à refaire ¦ Andlitsmyndin sem á að endurgera
+Finesse ¦ Fínleiki
+Le visage de la lignée ¦ Andlit ættleggsins
+De père en père ou de mère en mère : les visages côte à côte, en fondu, et le visage moyen des générations. ¦ Frá föður til föður eða frá móður til móður: andlitin hlið við hlið, í mjúkum skiptum, og meðalandlit kynslóðanna.
+La lignée ¦ Ættleggurinn
+de père en père ¦ frá föður til föður
+de mère en mère ¦ frá móður til móður
+▶ Le fondu ¦ ▶ Mjúk skipti
+Les visages (image PNG) ¦ Andlitin (PNG-mynd)
+Le visage moyen de {n} générations ¦ Meðalandlit {n} kynslóða
+Le fondu ¦ Mjúk skipti
+La gazette de l’année ¦ Fréttablað ársins
+La une d’un journal pour une année de la famille : mariages, naissances, nouvelles des nôtres, le prix du pain. ¦ Forsíða dagblaðs fyrir eitt ár í lífi fjölskyldunnar: hjónavígslur, fæðingar, fréttir af okkar fólki, brauðverðið.
+Les années les plus riches : ¦ Viðburðaríkustu árin:
+🎨 Le style du journal ¦ 🎨 Stíll blaðsins
+📜 Ancien (1900) ¦ 📜 Gamalt (1900)
+🎨 Supplément illustré (en couleurs) ¦ 🎨 Myndskreytt fylgirit (í lit)
+🗞️ Le quotidien (papier journal) ¦ 🗞️ Dagblaðið (dagblaðapappír)
+🎩 Années 30 ¦ 🎩 Fjórði áratugurinn
+◻️ Moderne ¦ ◻️ Nútímalegt
+💖 Magazine ¦ 💖 Tímarit
+📣 À sensation (gros titres) ¦ 📣 Æsifréttablað (stórar fyrirsagnir)
+🧸 Le journal des enfants ¦ 🧸 Barnablaðið
+Le nom du journal ¦ Heiti blaðsins
+Le bandeau ¦ Hausborðinn
+Édition unique ¦ Eina útgáfa
+Le papier ¦ Pappírinn
+Celui du style ¦ Sá sem fylgir stílnum
+Crème ¦ Rjómalitaður
+Jauni ¦ Gulnaður
+Papier journal ¦ Dagblaðapappír
+Ma couleur ¦ Minn litur
+Les colonnes ¦ Dálkarnir
+L’article de une ¦ Forsíðugreinin
+Les nouvelles ¦ Fréttirnar
+Le coin pratique ¦ Hagnýtt horn
+5 centimes ¦ 5 centimes
+Prix : {price} ¦ Verð: {price}
+{n} membres de la famille en vie ¦ Fjölskyldumeðlimir á lífi: {n}
+Carnet ¦ Tilkynningar
+Nouvelles des nôtres ¦ Fréttir af okkar fólki
+Anniversaires ¦ Afmæli
+{n} centimes ¦ {n} centimes
+Le kilo de pain : environ {price}. ¦ Kíló af brauði: um {price}.
+Qui fait quoi ¦ Hver gerir hvað
+Composée à partir de l’arbre de famille · {y} ¦ Samið út frá ættartré fjölskyldunnar · {y}
+Le fond d’écran du jour ¦ Skjáborðsmynd dagsins
+Chaque jour un ancêtre en image, aux dimensions de ton écran : couleurs, motif, photo, textes, calendrier… tout se règle. ¦ Á hverjum degi forfaðir á mynd, í stærð skjásins þíns: litir, mynstur, mynd, textar, dagatal… allt má stilla.
+L’ANCÊTRE DU JOUR ¦ FORFAÐIR DAGSINS
+Ordinateur ¦ Tölva
+Grand écran (2K) ¦ Stór skjár (2K)
+Écran 4K ¦ 4K-skjár
+Écran très large ¦ Mjög breiður skjár
+Mac Retina ¦ Mac Retina
+Tablette ¦ Spjaldtölva
+Tablette debout ¦ Spjaldtölva (skammsnið)
+Téléphone Android ¦ Android-sími
+L’ancêtre (celui du jour par défaut) ¦ Forfaðirinn (sá sem er dagsins sjálfgefið)
+🎨 Couleurs et fond ¦ 🎨 Litir og bakgrunnur
+Les couleurs ¦ Litirnir
+Selon l’époque de l’ancêtre ¦ Eftir tímabili forföðurins
+Crème et encre ¦ Rjómalitur og blek
+Vert sauge ¦ Salvíugrænt
+Océan ¦ Haf
+Poudre ¦ Púður
+Le dégradé ¦ Litaskiptin
+En biais ¦ Á ská
+De haut en bas ¦ Ofan frá og niður
+De gauche à droite ¦ Frá vinstri til hægri
+En rond ¦ Hringlaga
+Aucun (uni) ¦ Engin (einlitt)
+Rayures fines ¦ Fínar rendur
+Un arbre en filigrane ¦ Tré sem vatnsmerki
+La photo floutée en fond ¦ Móðuð mynd í bakgrunni
+🖼️ La photo ¦ 🖼️ Myndin
+En arc ¦ Í boga
+La place ¦ Staðsetningin
+En haut, centrée ¦ Efst, miðjað
+La taille ¦ Stærðin
+L’alignement ¦ Jöfnunin
+L’étiquette ¦ Merkimiðinn
+Sa vie en deux phrases ¦ Ævin í tveimur setningum
+Une phrase à moi ¦ Setning frá mér
+Une devise, un souvenir… ¦ Kjörorð, minning…
+🧩 En plus ¦ 🧩 Aukalega
+Le calendrier du mois ¦ Dagatal mánaðarins
+Laisser la place pour ¦ Skilja eftir pláss fyrir
+les icônes du bureau (à gauche) ¦ tákn skjáborðsins (vinstra megin)
+l’heure du téléphone (en haut) ¦ klukku símans (efst)
+Chaque jour un autre ancêtre — en priorité celui dont c’est l’anniversaire de naissance ou de décès. Tes réglages sont gardés sur cet ordinateur. ¦ Nýr forfaðir á hverjum degi — helst sá sem á fæðingar- eða dánarafmæli. Stillingarnar þínar eru geymdar á þessari tölvu.
+Le fond d’écran (image PNG) ¦ Skjáborðsmyndin (PNG-mynd)
+Fond d’écran du jour ¦ Skjáborðsmynd dagsins
+Les passeports ¦ Vegabréfin
+Le passeport intérieur ou pour l’étranger d’un ancêtre voyageur, son signalement, son portrait-robot, et l’import des relevés publiés (Saint-Brieuc…). ¦ Innanlands- eða utanlandsvegabréf forföður á ferðalagi, persónulýsing hans, samsett andlitsmynd, og innflutningur útgefinna útdrátta (Saint-Brieuc…).
+＋ Ajouter un passeport ¦ ＋ Bæta við vegabréfi
+⤒ Importer un relevé (XML, CSV)… ¦ ⤒ Flytja inn útdrátt (XML, CSV)…
+Un relevé publié (par exemple sur data.gouv.fr) ¦ Útgefinn útdráttur (til dæmis á data.gouv.fr)
+{n} passeport rattaché ¦ {n} vegabréf tengt
+« ＋ Ajouter un passeport », ou importe un relevé publié. ¦ „＋ Bæta við vegabréfi“, eða fluttu inn útgefinn útdrátt.
+Grand-parent raconte ¦ Afi og amma segja frá
+Un récit dicté ou collé : les naissances, mariages, métiers et domiciles repérés, comparés à l’arbre, à ajouter en un clic. ¦ Frásögn, lesin fyrir eða límd inn: fæðingar, hjónavígslur, störf og heimili sem finnast, borin saman við ættartréð, til að bæta við í einum smelli.
+Qui raconte ¦ Hver segir frá
+🎤 Dicter ¦ 🎤 Lesa fyrir
+🔍 Repérer les faits ¦ 🔍 Finna staðreyndirnar
+Le repérage des faits lit les récits écrits en français. ¦ Leitin að staðreyndum les frásagnir sem eru skrifaðar á frönsku.
+Le récit (dicté, collé, ou recopié d’un enregistrement) ¦ Frásögnin (lesin fyrir, límd inn, eða skrifuð upp eftir upptöku)
+💾 Enregistrer le récit ¦ 💾 Vista frásögnina
+Rangé dans le bloc ✨ Trésors de la fiche ¦ Geymt í reitnum ✨ Fjársjóðir á spjaldinu
+Partager une branche (pour un temps) ¦ Deila grein (um tíma)
+Un fichier à envoyer à un cousin : la branche sans les vivants, protégée par un mot de passe, qui expire à la date choisie. ¦ Skrá til að senda frænda: greinin án lifandi fólks, varin með lykilorði, sem rennur út á völdum degi.
+La branche de ¦ Grein
+Valable jusqu’au ¦ Gildir til
+Mot de passe (le fichier est chiffré, illisible sans lui) ¦ Lykilorð (skráin er dulkóðuð, ólæsileg án þess)
+à donner à part, par téléphone par exemple ¦ til að gefa sér, til dæmis í síma
+Montrer ou cacher le mot de passe ¦ Sýna eða fela lykilorðið
+Quatre mots et un nombre, faciles à dicter ¦ Fjögur orð og tala, auðvelt að lesa upp
+🎲 En proposer un ¦ 🎲 Stinga upp á einu
+Copier le mot de passe ¦ Afrita lykilorðið
+Sans mot de passe (déconseillé : quiconque reçoit le fichier peut le lire, et la date limite ne protège plus rien) ¦ Án lykilorðs (ekki mælt með: hver sem fær skrána getur lesið hana og gildistíminn verndar þá ekkert)
+Un seul fichier HTML, qui s’ouvre dans n’importe quel navigateur, sans l’application : à envoyer par courriel ou à déposer sur un nuage. Retirées, avec les phrases qui les nomment : les personnes vivantes ou probablement vivantes (même règle que l’export GEDCOM « Pour partager »), les fiches confidentielles. Les numéros de fiche ne sortent pas. ¦ Ein HTML-skrá sem opnast í hvaða vafra sem er, án appsins: til að senda í tölvupósti eða setja í skýið. Fjarlægt, ásamt setningunum sem nefna það: lifandi eða líklega lifandi fólk (sama regla og í GEDCOM-útflutningnum „Til að deila“), trúnaðarspjöld. Númer spjaldanna fylgja ekki með.
+🔐 Ce que protège ce fichier, et ce qu’il ne protège pas ¦ 🔐 Hvað þessi skrá verndar, og hvað hún verndar ekki
+Chiffrement AES-256-GCM, clé tirée du mot de passe (PBKDF2, {n} tours) : sans le mot de passe, le contenu (noms compris, titre compris) est illisible. ¦ AES-256-GCM-dulkóðun, lykill leiddur af lykilorðinu (PBKDF2, {n} umferðir): án lykilorðsins er innihaldið (nöfn og titill meðtalin) ólæsilegt.
+Le fichier ne se connecte à rien (aucune adresse internet n’est appelée, ce que le navigateur fait respecter). ¦ Skráin tengist engu (engin vefslóð er kölluð, og vafrinn framfylgir því).
+La date limite est vérifiée à l’ouverture, mais quelqu’un qui a le mot de passe et recule l’horloge de son ordinateur peut la contourner, ou recopier ce qu’il voit : un partage ne se reprend pas. Ne partage que ce que tu acceptes de voir circuler. ¦ Gildistíminn er athugaður við opnun, en sá sem hefur lykilorðið og færir klukku tölvunnar aftur getur komist fram hjá honum, eða afritað það sem hann sér: deilingu er ekki hægt að taka til baka. Deildu aðeins því sem þú sættir þig við að fari á flakk.
+Envoie le mot de passe par un autre chemin que le fichier (téléphone, SMS) : les deux ensemble dans le même courriel ne protègent rien. ¦ Sendu lykilorðið eftir annarri leið en skrána (sími, SMS): hvort tveggja í sama tölvupósti verndar ekkert.
+{n} personnes partagées ¦ Einstaklingum deilt: {n}
+{n} retirées (vivantes ou récentes) ¦ Fjarlægð (lifandi eða nýleg): {n}
+🔗 Fabriquer le fichier à partager ¦ 🔗 Búa til skrána til að deila
+Le passeport des lieux ¦ Vegabréf staðanna
+Un tampon par village de l’arbre : quand tu y vas, il se colore. Combien en as-tu visité ? ¦ Stimpill fyrir hvert þorp ættartrésins: þegar þú ferð þangað fær hann lit. Hve marga hefurðu heimsótt?
+Le carnet des tampons, à imprimer ¦ Stimplabókin, til að prenta
+{n} / {total} lieux visités ¦ {n} / {total} staðir heimsóttir
+Chaque lieu de l’arbre a son tampon. Quand tu y vas — le village, l’église, la mairie, le cimetière —, clique dessus : « J’y suis allé ». ¦ Hver staður ættartrésins á sinn stimpil. Þegar þú ferð þangað — þorpið, kirkjan, ráðhúsið, kirkjugarðurinn — smelltu á hann: „Ég hef farið þangað“.
+{n} pers. ¦ {n} manns
+Le tour du monde des ancêtres ¦ Heimsreisa forfeðranna
+Les kilomètres parcourus de lieu en lieu, le plus long voyage, le plus loin du berceau, siècle après siècle. ¦ Kílómetrarnir sem farnir voru á milli staða, lengsta ferðin, lengst frá upprunanum, öld eftir öld.
+Tous ensemble ¦ Öll saman
+{n} % du chemin vers la Lune ¦ {n} % af leiðinni til tunglsins
+Le plus long voyage ¦ Lengsta ferðin
+Le plus loin du berceau ({place}) ¦ Lengst frá upprunanum ({place})
+Les grands voyageurs ¦ Miklu ferðalangarnir
+Entre le berceau des parents et celui des enfants ¦ Á milli fæðingarstaðar foreldranna og barnanna
+La distance moyenne, siècle par siècle, entre le lieu de naissance d’un parent et celui de son enfant : la famille qui s’éloigne de son village. ¦ Meðalfjarlægðin, öld eftir öld, á milli fæðingarstaðar foreldris og barns þess: fjölskyldan sem fjarlægist þorpið sitt.
+Les maisons dans le temps ¦ Húsin í tímans rás
+Un village, une maison : qui y a vécu, de quand à quand, génération après génération. ¦ Þorp, hús: hver bjó þar, frá hvenær til hvenær, kynslóð eftir kynslóð.
+{n} personnes sur {y} ans ¦ Einstaklingar: {n}, á {y} árum
+{place} : {y} ans de présence de la famille, sur {n} générations d’ancêtres ¦ {place}: fjölskyldan hefur verið þar í {y} ár, yfir {n} kynslóðir forfeðra
+1 sou ¦ 1 sou
+{n} membre de la famille en vie ¦ {n} fjölskyldumeðlimur á lífi
+Pas d’autres nouvelles. ¦ Engar aðrar fréttir.
+Rien cette année. ¦ Ekkert í ár.
+1 franc ¦ 1 franki
+5 francs ¦ 5 frankar
+Ce soir, on raconte {n} vie de la famille de {name}. ¦ Í kvöld segjum við frá {n} ævi úr fjölskyldu {name}.
+⏳ Ce partage a expiré. ¦ ⏳ Þessi deiling er útrunnin.
+Parents : ¦ Foreldrar:
+Enfants : ¦ Börn:
+Chercher un nom… ¦ Leita að nafni…
+🔒 Ce partage est protégé. ¦ 🔒 Þessi deiling er varin.
+Partage valable jusqu’au {date}. Les personnes vivantes ne sont pas incluses. ¦ Deiling gildir til {date}. Lifandi fólk er ekki tekið með.
+l’arbre dit {what} ¦ ættartréð segir {what}
+concorde avec l’arbre ({what}) ¦ kemur heim og saman við ættartréð ({what})
+nouvelle lune ¦ nýtt tungl
+(sous l’horizon) ¦ (undir sjóndeildarhring)
+astre|Mars ¦ Mars
+{list} brillaient ¦ {list} skinu
+dernier croissant ¦ minnkandi sigð
+lune gibbeuse décroissante ¦ minnkandi tungl, meira en hálft
+Saturne ¦ Satúrnus
+dernier quartier ¦ síðasta kvartil
+{km} km depuis l’étape d’avant ¦ {km} km frá síðasta áfanga
+🕯️ Garder la mémoire ¦ 🕯️ Að varðveita minningarnar
+🔭 Découvrir ¦ 🔭 Uppgötva
+Trésor ¦ Fjársjóður
+Récits ¦ Frásagnir
+Chasses au trésor ¦ Fjársjóðsleitir
+TRÉSORS ¦ FJÁRSJÓÐIR
+trésors ¦ fjársjóðir
+Garde au moins un trésor affiché. ¦ Hafðu að minnsta kosti einn fjársjóð sýnilegan.
+Dossier vide ¦ Tóm mappa
+Les trésors n’ont pas pu être lus. ¦ Ekki tókst að lesa fjársjóðina.
+Broderie — {title} ¦ Útsaumur — {title}
+Aucun visage connu dans cette lignée ¦ Engin þekkt andlit í þessum ættlegg
+La Gazette {y} ¦ Fréttablaðið {y}
+Fond d’écran ¦ Skjáborðsmynd
+Pégase ¦ Pegasus
+Andromède ¦ Andrómeda
+Persée ¦ Perseifur
+sous l’horizon ¦ undir sjóndeildarhring
+date exacte inconnue ¦ nákvæm dagsetning óþekkt
+Les deux guerres ¦ Stríðin tvö
+(aucun événement daté) ¦ (enginn dagsettur atburður)
+Faire-part — {name} ¦ Tilkynningakort — {name}
+Faire-part ¦ Tilkynningakort
+L’arbre est vide ¦ Ættartréð er tómt
+{n} prénoms transmis par-dessus une génération ¦ Fornöfn sem ganga í arf yfir kynslóð: {n}
+{n} mots expliqués ¦ Útskýrð orð: {n}
+{n} mot expliqué ¦ {n} orð útskýrt
+Aucun vieux mot reconnu. ¦ Engin gömul orð fundust.
+sous l’évier ¦ undir vaskinum
+Les chasses préparées ¦ Undirbúnar leitir
+{n} cachettes ¦ Felustaðir: {n}
+Donne au moins deux cachettes. ¦ Tilgreindu að minnsta kosti tvo felustaði.
+Chasse au trésor ¦ Fjársjóðsleit
+La chasse sera effacée. ¦ Leitinni verður eytt.
+Carte {n} ¦ Spjald {n}
+(à donner au départ) ¦ (til að afhenda í upphafi)
+{answer} → cherchez {where} ¦ {answer} → leitið {where}
+Il faut quelques ancêtres avec une date, un lieu ou un métier ¦ Það þarf nokkra forfeður með dagsetningu, stað eða starfi
+🕵️ Un ancêtre mystère au hasard ¦ 🕵️ Leyndardómsforfaðir af handahófi
+{n} parties ¦ Leikir: {n}
+{n} partie ¦ {n} leikur
+🎉 Bravo ! ¦ 🎉 Vel gert!
+😶 C’était… ¦ 😶 Þetta var…
+🎲 Un autre, au hasard ¦ 🎲 Annar, af handahófi
+{n} essais ratés ¦ Röng ágiskun: {n}
+Choisis quelqu’un. ¦ Veldu einhvern.
+Une autre vie aurait été possible… mais c’est celle-là qui a mené jusqu’à toi. ¦ Annað líf hefði verið mögulegt… en það var þetta sem leiddi til þín.
+📖 Recommencer ¦ 📖 Byrja aftur
+Tourner la page → ¦ Fletta →
+Aucune coïncidence trouvée ¦ Engar tilviljanir fundust
+🦋 {n} vie n’aurait jamais existé ¦ 🦋 {n} ævi hefði aldrei orðið til
+la fenêtre d’impression n’est pas prête. ¦ prentglugginn er ekki tilbúinn.
+🃏 7 FAMILLES ¦ 🃏 7 FJÖLSKYLDUR
+(visage repéré) ¦ (andlit fannst)
+Ajoute-en depuis sa fiche (Médias), puis reviens ici. ¦ Bættu við myndum af spjaldi viðkomandi (Miðlar) og komdu svo aftur hingað.
+Jeu remis comme au départ. ¦ Leikurinn upphafsstilltur.
+Donne au moins une équipe. ¦ Tilgreindu að minnsta kosti eitt lið.
+Égalité ! ¦ Jafntefli!
+{n} point ¦ {n} stig
+Question {n} / {total} ¦ Spurning {n} / {total}
+Question suivante ▶ ¦ Næsta spurning ▶
+Vidéo prête. ¦ Myndbandið er tilbúið.
+Donne-lui un titre. ¦ Gefðu því titil.
+SOUVENIR DES SENS ¦ MINNING SKYNFÆRANNA
+Chaque samedi, elle cirait les marches… ¦ Á hverjum laugardegi bónaði hún tröppurnar…
+La préparation ¦ Aðferð
+CHANSONS DE LA FAMILLE ¦ SÖNGVAR FJÖLSKYLDUNNAR
+Les paroles ¦ Textinn
+Quand on la chantait ¦ Hvenær hann var sunginn
+Raconte-moi une journée ordinaire quand tu avais dix ans. ¦ Segðu mér frá venjulegum degi þegar þú varst tíu ára.
+Qu’est-ce qu’on apprenait par cœur ? ¦ Hvað lærðuð þið utanbókar?
+Y avait-il des histoires qu’on se racontait toujours dans la famille ? ¦ Voru til sögur sem alltaf voru sagðar í fjölskyldunni?
+Quel outil ou quel geste te reste dans les mains ? ¦ Hvaða verkfæri eða handtak situr enn í höndunum á þér?
+Comment as-tu rencontré ton mari, ta femme, ton amour ? ¦ Hvernig kynntistu manninum þínum, konunni þinni, ástinni þinni?
+Où avez-vous habité au début ? ¦ Hvar bjugguð þið fyrst?
+Où étais-tu pendant la guerre ? ¦ Hvar varstu í stríðinu?
+Y a-t-il un jour que tu n’as jamais oublié ? ¦ Er einhver dagur sem þú hefur aldrei gleymt?
+Comment se chauffait-on, comment s’éclairait-on ? ¦ Hvernig var húsið hitað, hvernig var það lýst upp?
+Comment fêtait-on Noël ? ¦ Hvernig voru jólin haldin?
+S’ouvre ¦ Opnast
+L’anniversaire de ¦ Afmæli
+À ses ¦ Við aldurinn
+La lettre ¦ Bréfið
+Écris ici… ¦ Skrifaðu hér…
+LETTRE AUX DESCENDANTS ¦ BRÉF TIL AFKOMENDA
+✉️ La lettre ¦ ✉️ Bréfið
+✉️ Nouvelle lettre ¦ ✉️ Nýtt bréf
+🔒 Sceller la lettre ¦ 🔒 Innsigla bréfið
+Choisis une personne dont on connaît la naissance. ¦ Veldu einstakling með þekkta fæðingu.
+Écris quelque chose ou joins un son, une vidéo ou une photo. ¦ Skrifaðu eitthvað eða hengdu við hljóð, myndband eða mynd.
+{n} scellées ¦ Innsigluð: {n}
+{n} ouvertes ¦ Opnuð: {n}
+De {from} ¦ Frá {from}
+écrite ¦ skrifað
+Sommaire ¦ Efnisyfirlit
+ça rappelle {who} ¦ minnir á {who}
+{n} recettes transmises ¦ Uppskriftir sem gengu í arf: {n}
+{n} recette transmise ¦ {n} uppskrift gekk í arf
+Chantée par {who} ¦ Sungið af {who}
+Sans enregistrement ¦ Engin upptaka
+(le son reste dans les médias) ¦ (hljóðið verður eftir í miðlunum)
+Entretien avec {name} ¦ Viðtal við {name}
+Choisis au moins un thème. ¦ Veldu að minnsta kosti eitt efni.
+Question suivante → ¦ Næsta spurning →
+Passer ¦ Sleppa
+🔊 Relire ¦ 🔊 Lesa aftur
+J’enregistre l’entretien… ¦ Tek upp viðtalið…
+Entretien gardé (sans son). ¦ Viðtal geymt (án hljóðs).
+{n} bougies allumées ¦ Kerti sem loga: {n}
+mélange ¦ blanda
+UNE BOUGIE ¦ KERTI
+encore {n} j ¦ {n} d. eftir
+demain ¦ á morgun
+allumée ¦ kveikt
+par {name} ¦ eftir {name}
+Bougie supprimée ¦ Kerti eytt
+Bougie supprimée. ¦ Kerti eytt.
+Ambiance arrêtée (minuterie). ¦ Hljóðheimur stöðvaður (tímastillir).
+Monte au moins une couche. ¦ Hækkaðu í að minnsta kosti einu lagi.
+Garder ce mélange ¦ Geyma þessa blöndu
+Mélange gardé. ¦ Blanda geymd.
+« {name} » supprimé. ¦ „{name}“ eytt.
+Ce navigateur ne sait pas enregistrer. ¦ Þessi vafri getur ekki tekið upp.
+Ambiance — {name} ¦ Hljóðheimur — {name}
+à ¦ til
+Tous les indices s’accordent (vers {y}). ¦ Allar vísbendingarnar ber að sama brunni (um {y}).
+Qui cela peut être ¦ Hver þetta gæti verið
+Avait {n} ans vers {y} ¦ Var {n} ára um {y}
+Reprendre la branche {name} ¦ Taka upp þráðinn í greininni {name}
+RAPPEL DE RECHERCHE ¦ RANNSÓKNARÁMINNING
+Pas touchée depuis {d} ¦ Ekki snert síðan {d}
+modifiée ¦ breytt
+Jamais modifiée ¦ Aldrei breytt
+rien d’évident ne manque ¦ ekkert augljóst vantar
+Thème d’époque arrêté. ¦ Slökkt á tíðarandaþema.
+châtains ¦ jarpt
+coloré ¦ rjóður
+cicatrice au front ¦ ör á enni
+{n} passeports rattachés ¦ {n} vegabréf tengd
+{n} affichés ¦ {n} sýnd
+{n} affiché ¦ {n} sýnt
+Dans l’arbre ¦ Í trénu
+Délivré ¦ Gefið út
+son grand-père ¦ afi hans / hennar
+sa grand-mère ¦ amma hans / hennar
+un frère ou une sœur ¦ bróðir eða systir
+{n} faits repérés ¦ {n} staðreyndir fundnar
+{n} fait repéré ¦ {n} staðreynd fundin
+{n} personne partagée ¦ {n} einstaklingi deilt
+PASSEPORT ¦ VEGABRÉF
+🛂 Nouveau passeport ¦ 🛂 Nýtt vegabréf
+Passeport enregistré. ¦ Vegabréf vistað.
+je ne trouve pas d’enregistrements répétés dans ce XML ¦ ég finn engar endurteknar færslur í þessu XML-skjali
+{n} passeports ¦ {n} vegabréf
+aucune ¦ engin
+un nom, une commune, un métier… ¦ nafn, sveitarfélag, starf…
+Ce relevé est trop gros (20 Mo au plus). ¦ Þessi skrá er of stór (20 MB hið mesta).
+{n} passeports lus. ¦ {n} vegabréf lesin.
+Passeport intérieur ¦ Innanlandsvegabréf
+＋ Passeport ¦ ＋ Vegabréf
+Les passeports n’ont pas pu être lus. ¦ Ekki tókst að lesa vegabréfin.
+Modifier ce passeport ¦ Breyta þessu vegabréfi
+Aucun passeport ne correspond ¦ Ekkert vegabréf passar
+Passeports ¦ Vegabréf
+Voyageur ¦ Ferðalangur
+Délivré à ¦ Gefið út í
+📍 Délivré à ¦ 📍 Gefið út í
+sorte d’événement introuvable ¦ tegund atburðar fannst ekki
+Aucun fait repéré ¦ Engar staðreyndir fundust
+⏹ Arrêter la dictée ¦ ⏹ Stöðva upplestur
+Solide. ¦ Sterkt.
+Oui, quand même ¦ Já, samt
+La branche {name} — partagée par la famille ¦ Greinin {name} — sem fjölskyldan deilir
+PASSEPORT DES LIEUX ¦ STAÐAVEGABRÉF
+Où es-tu né, et dans quelle maison as-tu grandi ? ¦ Hvar fæddist þú, og í hvaða húsi ólstu upp?
+Où es-tu née, et dans quelle maison as-tu grandi ? ¦ Hvar fæddist þú, og í hvaða húsi ólstu upp?
+À quoi jouais-tu, et avec qui ? ¦ Hvað lékstu þér að, og með hverjum?
+Quelle odeur ou quel bruit te ramène tout de suite à ton enfance ? ¦ Hvaða lykt eða hljóð flytur þig strax aftur til bernskunnar?
+Qui était la personne la plus importante pour toi, petit ? ¦ Hver var mikilvægasta manneskjan fyrir þig þegar þú varst lítill?
+Qui était la personne la plus importante pour toi, petite ? ¦ Hver var mikilvægasta manneskjan fyrir þig þegar þú varst lítil?
+Comment allais-tu à l’école ? ¦ Hvernig fórstu í skólann?
+Te souviens-tu de ton maître ou de ta maîtresse ? ¦ Manstu eftir kennaranum þínum?
+Jusqu’à quel âge es-tu allé à l’école, et pourquoi ? ¦ Til hvaða aldurs gekkstu í skóla, og hvers vegna?
+Jusqu’à quel âge es-tu allée à l’école, et pourquoi ? ¦ Til hvaða aldurs gekkstu í skóla, og hvers vegna?
+Que sais-tu de tes grands-parents ? ¦ Hvað veistu um afa þína og ömmur?
+Quels étaient les métiers de tes parents ? ¦ Við hvað unnu foreldrar þínir?
+Y a-t-il un secret ou une brouille dont on parlait à voix basse ? ¦ Var til leyndarmál eða ósætti sem talað var um í hálfum hljóðum?
+Quels prénoms revenaient dans la famille, et pourquoi ? ¦ Hvaða skírnarnöfn komu aftur og aftur í fjölskyldunni, og hvers vegna?
+Quel a été ton premier travail, et combien gagnais-tu ? ¦ Hvert var fyrsta starfið þitt, og hvað þénaðirðu mikið?
+Raconte une journée de travail. ¦ Segðu frá einum vinnudegi.
+De quoi es-tu le plus fier dans ton métier ? ¦ Hvað ertu stoltastur af í starfi þínu?
+Comment s’est passé le mariage ? ¦ Hvernig gekk brúðkaupið?
+Qu’est-ce qui manquait le plus ? ¦ Hvað vantaði helst?
+Qui est parti, et qui est revenu ? ¦ Hver fór, og hver kom aftur?
+Décris-moi la maison : les pièces, la cuisine, le jardin. ¦ Lýstu húsinu fyrir mér: herbergjunum, eldhúsinu, garðinum.
+Qu’est-ce qu’on mangeait le dimanche ? ¦ Hvað borðuðuð þið á sunnudögum?
+Quelles étaient les fêtes du village ? ¦ Hvaða hátíðir voru í þorpinu?
+Quelle chanson chantait-on à la fin des repas ? ¦ Hvaða lag var sungið í lok máltíðar?
+Qu’est-ce que tu aimerais que tes arrière-petits-enfants sachent de toi ? ¦ Hvað viltu að barnabarnabörnin þín viti um þig?
+Quel conseil donnerais-tu à quelqu’un de vingt ans ? ¦ Hvaða ráð myndirðu gefa tvítugri manneskju?
+Qu’est-ce qui a le plus changé dans ta vie ? ¦ Hvað hefur breyst mest í lífi þínu?
+{n} livre ¦ {n} livre
+{n} livres ¦ {n} livres
+{n} franc ¦ {n} franki
+{n} francs ¦ {n} frankar
+{n} euro ¦ {n} evra
+unité|en ¦ í
+année|à ¦ til
+date|Le ¦ Þann
+force|faible ¦ veikt
+force|correct ¦ sæmilegt
+force|solide ¦ sterkt
+aucune|personne ¦ enginn
+signalement|1 m 65 ¦ 1,65 m
+signalement|châtains ¦ jarpt
+signalement|gris ¦ grá
+signalement|aquilin ¦ arnarnef
+signalement|rond ¦ kringlótt
+signalement|ovale ¦ sporöskjulaga
+signalement|coloré ¦ rjóður
+signalement|brune ¦ dökk
+signalement|cicatrice au front ¦ ör á enni
+soit {n} baguette d’aujourd’hui ¦ þ.e. {n} baguette-brauð í dag
+De la Révolution au Second Empire, il fallait un passeport pour aller d’un département à l’autre ; il portait le <b>signalement</b> du voyageur, une description qui remplace souvent la photo qu’on n’a pas. Les relevés publiés (par exemple les passeports intérieurs de Saint-Brieuc, 1830-1839, sur data.gouv.fr) s’importent ici : télécharge le fichier, puis « Importer un relevé ». ¦ Frá frönsku byltingunni til annars keisaradæmisins þurfti vegabréf til að ferðast frá einu umdæmi (département) til annars; í því var <b>persónulýsing</b> ferðalangsins, lýsing sem kemur oft í stað myndarinnar sem við eigum ekki. Útgefnar skrár (til dæmis innanlandsvegabréfin frá Saint-Brieuc, 1830-1839, á data.gouv.fr) má flytja inn hér: sæktu skrána, síðan „Flytja inn skrá“.
+🎲 Jouer en famille ¦ 🎲 Leikir fyrir fjölskylduna
+🎨 Créer et fabriquer ¦ 🎨 Skapa og búa til
+🗺️ Lieux et voyages ¦ 🗺️ Staðir og ferðir
+🧰 Outils malins ¦ 🧰 Snjöll verkfæri
+L’atelier de mise en page n’est pas disponible ici. ¦ Umbrotsverkstæðið er ekki aðgengilegt hér.
+Une copie est rangée dans les médias (et sur la fiche) : « {title} ». ¦ Afrit er geymt í miðlunum (og á spjaldinu): „{title}“.
+Une copie est rangée dans les médias : « {title} ». ¦ Afrit er geymt í miðlunum: „{title}“.
+Ouvrir dans la mise en page ¦ Opna í umbroti
+Pour tout retravailler (textes, cadres, pages) ¦ Til að vinna allt upp á nýtt (texta, ramma, síður)
+⤓ Exporter ¦ ⤓ Flytja út
+🖨 Imprimer ▾ ¦ 🖨 Prenta ▾
+Les trésors et leurs dossiers ¦ Fjársjóðirnir og möppur þeirra
+Réordonner les trésors ¦ Endurraða fjársjóðunum
+Ordre et trésors affichés enregistrés. ¦ Röð og sýndir fjársjóðir vistuð.
+Pour s’émerveiller, jouer, créer et garder la mémoire, à partir de ton arbre. ¦ Til að undrast, leika, skapa og varðveita minningar, út frá ættartrénu þínu.
+⚙️ Réglages pour y ranger des trésors (ou l’effacer). ¦ ⚙️ Stillingar til að setja fjársjóði í hana (eða eyða henni).
+＋ Souvenir ¦ ＋ Minning
+＋ Lettre ¦ ＋ Bréf
+Aucun trésor pour l’instant ¦ Engir fjársjóðir enn
+Un souvenir (une odeur, un bruit), une recette, une chanson, une lettre pour plus tard, un entretien enregistré… tout se garde dans l’onglet ✨ Trésors. ¦ Minning (lykt, hljóð), uppskrift, lag, bréf til seinni tíma, hljóðritað viðtal… allt er geymt í flipanum ✨ Fjársjóðir.
+Grille de broderie ¦ Útsaumsmynstur
+Un carré = un point de croix ; les traits épais tous les 10 points. ¦ Einn reitur = eitt krossspor; þykk strik á 10 spora fresti.
+Aucun portrait dans l’arbre ¦ Engar andlitsmyndir í trénu
+Ajoute une photo de portrait sur les fiches, ou encadre les visages dans la visionneuse. ¦ Bættu andlitsmynd við spjöldin, eða rammaðu andlitin inn í myndaskoðaranum.
+{list}. Ajoute des portraits ou encadre les visages sur les photos. ¦ {list}. Bættu við andlitsmyndum eða rammaðu inn andlitin á myndunum.
+Le visage moyen de {n} génération ¦ Meðalandlit {n} kynslóðar
+{n} sous ¦ {n} sous
+Il faut des ancêtres avec une date de naissance ¦ Það þarf forfeður með fæðingardag
+premier croissant ¦ vaxandi sigð
+premier quartier ¦ fyrsta kvartil
+lune gibbeuse croissante ¦ vaxandi tungl
+{place} (pas placé sur la carte : ciel de Paris) ¦ {place} (ekki á kortinu: himinninn yfir París)
+il faisait jour : voici les étoiles cachées par le soleil ¦ það var dagur: hér eru stjörnurnar sem sólin faldi
+Il faut au moins l’année de naissance. ¦ Það þarf að minnsta kosti fæðingarárið.
+⚠️ Date exacte inconnue : ciel du 1er juillet. ¦ ⚠️ Nákvæm dagsetning óþekkt: himinninn 1. júlí.
+⚠️ Lieu non placé sur la carte. ¦ ⚠️ Staðurinn er ekki á kortinu.
+Il faut au moins l’année de naissance pour voir le ciel. ¦ Það þarf að minnsta kosti fæðingarárið til að sjá himininn.
+Pas de portrait sur cette fiche. ¦ Engin andlitsmynd á þessu spjaldi.
+Avant 1700 ¦ Fyrir 1700
+Le XVIIIe siècle ¦ 18. öld
+Révolution et Empire ¦ Byltingin og keisaradæmið
+Le XIXe siècle ¦ 19. öld
+Depuis 1946 ¦ Frá 1946
+Aucune signature repérée pour l’instant ¦ Engar undirskriftir fundnar enn
+Ouvre un acte dans la visionneuse des médias, puis « ＋ Identifier une signature » : encadre la signature et dis de qui elle est. Elle viendra se poser ici, rangée par époque. ¦ Opnaðu skjal í myndaskoðara miðlanna, síðan „＋ Greina undirskrift“: rammaðu undirskriftina inn og segðu hver á hana. Hún birtist hér, raðað eftir tímabilum.
+Pas d’ancêtres connus pour cette personne ¦ Engir þekktir forfeður fyrir þennan einstakling
+Aucun prénom ne saute de génération dans l’arbre pour l’instant ¦ Ekkert skírnarnafn hoppar yfir kynslóð í trénu enn
+laboureur, brumaire, dot… ¦ laboureur, brumaire, dot…
+(passe la souris dessus) : ¦ (færðu músina yfir):
+L’arbre ne donne que {n} énigmes : enlève des cachettes. ¦ Tréð gefur aðeins {n} gátur: fjarlægðu nokkra felustaði.
+L’arbre ne donne que {n} énigme : enlève des cachettes. ¦ Tréð gefur aðeins {n} gátu: fjarlægðu nokkra felustaði.
+Chasse prête : imprime les cartes. ¦ Leitin er tilbúin: prentaðu spjöldin.
+Supprimer ? ¦ Eyða?
+sous le lit ¦ undir rúminu
+dans le four ¦ í ofninum
+derrière le canapé ¦ bak við sófann
+dans la baignoire ¦ í baðkerinu
+dans le panier à linge ¦ í óhreinatauskörfunni
+derrière la porte du garage ¦ bak við bílskúrshurðina
+dans la boîte à chaussures ¦ í skókassanum
+sous le coussin ¦ undir púðanum
+dans le pot de fleurs ¦ í blómapottinum
+au fond du frigo ¦ innst í ísskápnum
+sous la table de la cuisine ¦ undir eldhúsborðinu
+sous le tapis ¦ undir teppinu
+(à cacher : {where}) ¦ (á að fela: {where})
+C’est la dernière : le trésor vous attend ! ¦ Þetta er það síðasta: fjársjóðurinn bíður ykkar!
+<b>Pour l’organisateur.</b> Donnez la carte 1 aux joueurs. Cachez chaque carte suivante à l’endroit indiqué en haut de la carte. Le trésor ({treasure}) va à : {where}. ¦ <b>Fyrir skipuleggjandann.</b> Gefðu leikmönnunum spjald 1. Feldu hvert næsta spjald á staðnum sem stendur efst á spjaldinu. Fjársjóðurinn ({treasure}) fer: {where}.
+à vous de choisir ¦ þið veljið
+{n} essai raté ¦ {n} röng ágiskun
+Non, ce n’est pas ça… un indice de plus. ¦ Nei, þetta er ekki rétt… ein vísbending í viðbót.
+Il faut un ancêtre avec une date de naissance et un métier ou un mariage ¦ Það þarf forföður með fæðingardag og starf eða hjónaband
+Tu as fait {n} choix sur {total} comme {name}. ¦ Þú valdir {n} af {total} eins og {name}.
+Une vie vécue à l’identique : tu connais bien ton ancêtre ! ¦ Nákvæmlega eins líf: þú þekkir forföður þinn vel!
+Avec tes choix, l’histoire de la famille aurait été tout autre. ¦ Með þínum valkostum hefði saga fjölskyldunnar orðið allt önnur.
+✨ Le même choix que ton ancêtre ! ¦ ✨ Sama val og forfaðir þinn!
+🌀 Une autre vie commence… mais revenons à la vraie. ¦ 🌀 Annað líf hefst… en snúum aftur til þess raunverulega.
+Il faut des dates précises (jour et mois). ¦ Það þarf nákvæmar dagsetningar (dag og mánuð).
+{pct} % de l’arbre. ¦ {pct} % af trénu.
+Personne ne descend de ce choix dans l’arbre ¦ Enginn í trénu er kominn af þessu vali
+Portrait de la fiche ¦ Andlitsmynd spjaldsins
+Aucune photo jointe à cette fiche, ni de visage encadré sur une photo ¦ Engin mynd tengd þessu spjaldi, né andlit rammað inn á mynd
+🔍 Zoom ¦ 🔍 Aðdráttur
+Glisse la photo dans le cadre pour la placer ; la molette (ou + et −) zoome. ¦ Dragðu myndina í rammanum til að staðsetja hana; músarhjólið (eða + og −) breytir aðdrætti.
+Les photos marquées d’un visage se recadrent toutes seules sur lui. ¦ Myndir þar sem andlit er merkt skerast sjálfkrafa utan um það.
+Pas encore assez de familles ¦ Ekki nógu margar fjölskyldur enn
+Il faut au moins deux familles d’au moins six personnes (décédées) : complète l’arbre, ou essaie « par branche ». ¦ Það þarf minnst tvær fjölskyldur með minnst sex (látnum) einstaklingum: bættu við tréð, eða reyndu „eftir grein“.
+{n} famille de 6 cartes ({total} cartes). ¦ {n} fjölskylda með 6 spilum ({total} spil).
+🃏 Le jeu des {n} familles ¦ 🃏 Spilið um {n} fjölskyldur
+Distribuez 6 cartes à chacun, le reste fait la pioche. À ton tour, demande à un joueur une carte d’une famille dont tu as déjà une carte (« Dans la famille {fam}, je voudrais {role} »). S’il l’a, il te la donne et tu rejoues ; sinon, « Pioche ! ». Une famille complète se pose devant soi. Celui qui a le plus de familles a gagné. ¦ Gefðu hverjum 6 spil, afgangurinn er bunkinn. Þegar röðin kemur að þér, biddu leikmann um spil úr fjölskyldu sem þú átt þegar spil úr („Í fjölskyldunni {fam} langar mig í {role}“). Ef hann á það, gefur hann þér það og þú gerir aftur; annars „Dragðu!“. Heil fjölskylda er lögð fram fyrir framan þig. Sá sem á flestar fjölskyldur vinnur.
+Les familles : {list}. ¦ Fjölskyldurnar: {list}.
+Impression recto verso (bord long) : chaque page de dos suit sa page de cartes, déjà retournée pour tomber pile derrière. ¦ Prentun báðum megin (langhlið): hver bakhlið fylgir spilasíðu sinni, þegar snúið til að lenda nákvæmlega fyrir aftan.
+Ajoute des personnes pour dessiner leur arbre. ¦ Bættu við einstaklingum til að teikna tréð þeirra.
+L’arbre est trop petit pour faire des questions. ¦ Tréð er of lítið til að búa til spurningar.
+Voir la réponse (Entrée) ¦ Sjá svarið (Enter)
+✕ Fin ¦ ✕ Ljúka
+Il faut des lieux placés sur la carte (latitude et longitude) et datés pour faire le film ¦ Til að búa til myndina þarf staði á kortinu (breidd og lengd) með dagsetningum
+🔴 Enregistrement… ¦ 🔴 Tekur upp…
+Aucun lieu de l’arbre n’est placé sur la carte (latitude et longitude) ¦ Enginn staður í trénu er á kortinu (breidd og lengd)
+Aucun lieu placé sur la carte pour cette personne ¦ Engir staðir á kortinu fyrir þennan einstakling
+La position n’est pas disponible sur cet appareil. ¦ Staðsetning er ekki í boði á þessu tæki.
+📍 Je cherche ta position… (l’histoire de chaque étape se lira toute seule à moins de 300 m) ¦ 📍 Leita að staðsetningu þinni… (saga hvers viðkomustaðar er lesin sjálfkrafa innan 300 m)
+dans {n} jour ¦ eftir {n} dag
+dans {n} mois ¦ eftir {n} mánuði
+dans {n} ans ¦ eftir {n} ár
+De la part de (une fiche, ou un nom) ¦ Frá (spjald, eða nafn)
+Pour (ex. « Léa », « mes petits-enfants », « celui qui reprendra la maison ») ¦ Til (t.d. „Léa“, „barnabörnin mín“, „sá sem tekur við húsinu“)
+à une date ¦ á tilteknum degi
+à un anniversaire ¦ á afmælisdegi
+Un son, une vidéo ou une photo (facultatif) ¦ Hljóð, myndband eða mynd (valfrjálst)
+Choisis le jour où la lettre s’ouvrira. ¦ Veldu daginn sem bréfið opnast.
+La date doit être dans le futur (sinon ce n’est plus une surprise). ¦ Dagsetningin verður að vera í framtíðinni (annars er það ekki lengur óvænt).
+Pour ses {n} ans ¦ Á {n} ára afmælinu
+à ses {n} ans ¦ við {n} ára aldur
+Lettre enregistrée. ¦ Bréf vistað.
+🔒 Lettre scellée : elle s’ouvrira le {date}. ¦ 🔒 Bréfið er innsiglað: það opnast {date}.
+🔒 En attente ¦ 🔒 Í bið
+La lettre sera effacée pour de bon. ¦ Bréfinu verður eytt fyrir fullt og allt.
+Supprimer la lettre ? ¦ Eyða bréfinu?
+Cet élément sera effacé pour de bon. ¦ Þessu atriði verður eytt fyrir fullt og allt.
+Rien à mettre dans le livre pour l’instant. ¦ Ekkert til að setja í bókina enn.
+de la famille ¦ í fjölskyldunni
+Le souvenir en quelques mots ¦ Minningin í fáum orðum
+L’odeur de la cire dans l’escalier ¦ Vaxlyktin í stiganum
+Ça rappelle (une fiche, ou un nom) ¦ Það minnir á (spjald, eða nafn)
+la maison de Naves ¦ húsið í Naves
+vers 1950, l’été ¦ um 1950, að sumri
+Un son, une photo (facultatif) ¦ Hljóð, mynd (valfrjálst)
+LIVRE DE RECETTES ¦ UPPSKRIFTABÓK
+Le nom de la recette ¦ Heiti uppskriftarinnar
+Le clafoutis de Rose ¦ Clafoutis Rose
+La recette de (une fiche, ou un nom) ¦ Uppskrift frá (spjald, eða nafn)
+Pour combien ¦ Fyrir hve marga
+pour 6 ¦ fyrir 6
+Les ingrédients (un par ligne) ¦ Hráefnin (eitt í hverja línu)
+500 g de cerises noires ¦ 500 g dökk kirsuber
+3 œufs ¦ 3 egg
+Son histoire (d’où elle vient, quand on la faisait) ¦ Saga hennar (hvaðan hún kemur, hvenær hún var gerð)
+Une photo du plat ou de la fiche écrite à la main ¦ Mynd af réttinum eða handskrifuðu uppskriftinni
+sur l’air de « {tune} » ¦ við lagið „{tune}“
+Le titre (ou le premier vers) ¦ Titillinn (eða fyrsta ljóðlínan)
+Chantée par (une fiche, ou un nom) ¦ Sungið af (spjald, eða nafn)
+Sur l’air de ¦ Við lagið
+L’enregistrement (son ou vidéo) ¦ Upptakan (hljóð eða myndband)
+Le carnet de chansons ¦ Söngbókin
+{n} chansons de la famille ¦ {n} lög fjölskyldunnar
+{n} chanson de la famille ¦ {n} lag fjölskyldunnar
+Supprimer la fiche de l’entretien ¦ Eyða viðtalsblaðinu
+La fiche de l’entretien (les questions et les repères) sera effacée ; le son reste dans les médias. ¦ Viðtalsblaðinu (spurningum og merkjum) verður eytt; hljóðið verður áfram í miðlunum.
+Le micro n’est pas disponible : l’entretien continue sans enregistrement (note les réponses). ¦ Hljóðneminn er ekki tiltækur: viðtalið heldur áfram án upptöku (skrifaðu svörin niður).
+Notes rapides (facultatif) ¦ Stuttar athugasemdir (valfrjálst)
+← Précédente ¦ ← Fyrri
+Dernière question : terminer ¦ Síðasta spurning: ljúka
+▶ Reprendre ¦ ▶ Halda áfram
+⏸ Pause ¦ ⏸ Hlé
+⏹ Terminer ¦ ⏹ Ljúka
+Entretien enregistré : le son est dans les médias de la fiche. ¦ Viðtal vistað: hljóðið er í miðlum spjaldsins.
+Personne à raconter de ce côté-là. ¦ Enginn til að segja frá á þeirri hlið.
+Un mot (facultatif) ¦ Kveðja (valfrjálst)
+Choisis pour qui. ¦ Veldu fyrir hvern.
+🕯️ Une bougie brûle pour {name} pendant {n} jours. ¦ 🕯️ Kerti logar fyrir {name} í {n} daga.
+📖 Le registre ¦ 📖 Skráin
+Son nom : ¦ Nafn þess:
+Le nom de ce mélange ¦ Heiti þessarar blöndu
+Choisis d’abord un de tes mélanges. ¦ Veldu fyrst eina af blöndunum þínum.
+Enregistrement de {d} : le fichier arrive à la fin (⤓ Exporter → fichier son, de nouveau, pour finir plus tôt). ¦ Upptaka {d}: skráin kemur í lokin (⤓ Flytja út → hljóðskrá, aftur, til að ljúka fyrr).
+Ce navigateur ne sait pas fabriquer de fichier son. ¦ Þessi vafri getur ekki búið til hljóðskrá.
+Je fabrique le fichier son… ¦ Bý til hljóðskrána…
+Les indices ne s’accordent pas tous : {n} sur {total} tombent dans cette période. Revois celui qui détonne. ¦ Vísbendingarnar ber ekki allar saman: {n} af {total} falla á þetta tímabil. Skoðaðu þá sem sker sig úr.
+Personne dans l’arbre n’avait cet âge pendant cette période. ¦ Enginn í trénu var á þessum aldri á þessu tímabili.
+Indique l’âge apparent pour voir qui ça peut être. ¦ Sláðu inn sýnilegan aldur til að sjá hver þetta gæti verið.
+⏰ Me le rappeler ¦ ⏰ Minna mig á
+Le rappel ¦ Áminningin
+Écris le rappel. ¦ Skrifaðu áminninguna.
+Choisis la date du rappel. ¦ Veldu dagsetningu áminningarinnar.
+⏰ Rappel créé pour le {date} (Listes → Rappels). ¦ ⏰ Áminning búin til fyrir {date} (Listar → Áminningar).
+Archives à trouver ¦ Skjalasöfn sem þarf að finna
+{n} recherche à faire sur 6 générations ¦ {n} leit sem þarf að gera yfir 6 kynslóðir
+Rien ne manque sur 6 générations, ou l’assistant n’a pas pu être lu ¦ Ekkert vantar yfir 6 kynslóðir, eða ekki tókst að lesa aðstoðina
+Les fiches prennent maintenant les couleurs de leur époque. ¦ Spjöldin fá nú liti síns tíma.
+Signes particuliers ¦ Sérkenni
+pour voyager d’un département à l’autre ¦ til að ferðast milli umdæma
+pour aller à l’étranger ¦ til að fara til útlanda
+Date de délivrance ¦ Útgáfudagur
+Motif du voyage ¦ Tilgangur ferðar
+Le signalement ¦ Persónulýsingin
+🛂 Le passeport ¦ 🛂 Vegabréfið
+Le voyageur ¦ Ferðalangurinn
+Choisis le voyageur. ¦ Veldu ferðalanginn.
+{what} de {name} ({date}) ¦ {what} {name} ({date})
+ce XML contient des déclarations (DOCTYPE ou ENTITY) : il est refusé par prudence ¦ þetta XML inniheldur yfirlýsingar (DOCTYPE eða ENTITY): því er hafnað af varúð
+le fichier XML est abîmé ¦ XML-skráin er skemmd
+Fermer le relevé ¦ Loka skránni
+Le passeport sera effacé. ¦ Vegabréfinu verður eytt.
+Rattaché à {name}. ¦ Tengt við {name}.
+{n} correspondances possibles avec l’arbre (en tête) ¦ {n} mögulegar samsvaranir við tréð (efst)
+{n} correspondance possible avec l’arbre (en tête) ¦ {n} möguleg samsvörun við tréð (efst)
+Aucun passeport pour l’instant. ¦ Engin vegabréf enn.
+Avant 1860, pour voyager en France, il fallait un passeport intérieur avec son signalement : s’il en existe un, ajoute-le ici. ¦ Fyrir 1860 þurfti innanlandsvegabréf með persónulýsingu til að ferðast innan Frakklands: ef eitt slíkt er til, bættu því við hér.
+＋ Nouveau passeport intérieur ¦ ＋ Nýtt innanlandsvegabréf
+Les passeports de la famille : le passeport intérieur (pour voyager d’un département à l’autre, jusque vers 1860) et le passeport pour l’étranger. Ils se saisissent sur la fiche (bloc 🛂 Passeports) ou dans ✨ Trésors. ¦ Vegabréf fjölskyldunnar: innanlandsvegabréfið (til að ferðast milli umdæma, fram til um 1860) og vegabréfið til útlanda. Þau eru skráð á spjaldið (hlutinn 🛂 Vegabréf) eða í ✨ Fjársjóðum.
+Chercher… (voyageur, destination, motif, profession) ¦ Leita… (ferðalangur, áfangastaður, tilgangur, starf)
+Passeport pour l’étranger ¦ Vegabréf til útlanda
+Pour l’étranger ¦ Til útlanda
+pas encore dans l’arbre ¦ ekki enn í trénu
+mariage pas encore daté dans l’arbre ¦ hjónaband ekki enn dagsett í trénu
+concorde ({what}) ¦ passar ({what})
+pas de métier dans l’arbre ¦ ekkert starf í trénu
+ce lieu est déjà dans l’arbre ¦ þessi staður er þegar í trénu
+ce lieu n’est pas encore sur la fiche ¦ þessi staður er ekki enn á spjaldinu
+👶 Naissance ¦ 👶 Fæðing
+🕯️ Décès ¦ 🕯️ Andlát
+💍 Mariage ¦ 💍 Hjónaband
+🔨 Métier ¦ 🔨 Starf
+🏠 Domicile ¦ 🏠 Heimili
+un mariage s’ajoute depuis la fiche du couple ¦ hjónabandi er bætt við af spjaldi hjónanna
+D’après le récit de {name} : « {text} » ¦ Samkvæmt frásögn {name}: „{text}“
+＋ Ajouter à la fiche ¦ ＋ Bæta við spjaldið
+Rien n’est changé sans ton accord : « Ajouter à la fiche » crée un événement avec la phrase du récit comme source. ¦ Engu er breytt án þíns samþykkis: „Bæta við spjaldið“ býr til atburð með setningunni úr frásögninni sem heimild.
+Essaie des phrases comme « Mon père était boulanger », « Ma mère est née en 1932 à Tulle ». ¦ Prófaðu (franskar) setningar eins og „Mon père était boulanger“, „Ma mère est née en 1932 à Tulle“.
+Ajouté à la fiche. ¦ Bætt við spjaldið.
+Le récit est vide : dicte-le, colle-le ou recopie-le. ¦ Frásögnin er tóm: lestu hana upp, límdu hana inn eða skrifaðu hana upp.
+Le récit de {name} ({date}) ¦ Frásögn {name} ({date})
+Récit enregistré (bloc ✨ Trésors de la fiche). ¦ Frásögn vistuð (hlutinn ✨ Fjársjóðir á spjaldinu).
+Trop court : quelqu’un d’obstiné pourrait le deviner en essayant beaucoup de mots de passe sur le fichier. ¦ Of stutt: þrjóskur aðili gæti giskað á það með því að prófa mörg lykilorð á skrána.
+Correct pour un partage de quelques semaines. ¦ Í lagi fyrir deilingu í nokkrar vikur.
+Une branche de famille partagée ¦ Sameiginleg grein fjölskyldunnar
+{n} retirée (vivantes ou récentes) ¦ {n} fjarlægð (á lífi eða nýleg)
+Mot de passe copié. ¦ Lykilorð afritað.
+Personne à partager dans cette branche. ¦ Enginn til að deila í þessari grein.
+Choisis un mot de passe (ou « 🎲 En proposer un »), ou coche « Sans mot de passe ». ¦ Veldu lykilorð (eða „🎲 Stinga upp á einu“), eða hakaðu við „Án lykilorðs“.
+Ce mot de passe est court : quelqu’un d’obstiné pourrait le trouver en essayant beaucoup de mots de passe. Fabriquer le fichier quand même ? ¦ Þetta lykilorð er stutt: þrjóskur aðili gæti fundið það með því að prófa mörg lykilorð. Búa samt til skrána?
+Mot de passe faible ¦ Veikt lykilorð
+Choisis jusqu’à quand le partage est valable. ¦ Veldu hve lengi deilingin gildir.
+Une branche de la famille — partagée par la famille ¦ Grein fjölskyldunnar — sem fjölskyldan deilir
+Fichier prêt : envoie-le, et donne le mot de passe à part. ¦ Skráin er tilbúin: sendu hana, og gefðu lykilorðið sér.
+Aucun lieu dans l’arbre ¦ Engir staðir í trénu
+✅ J’y suis allé ¦ ✅ Ég hef komið þangað
+Retirer le tampon ¦ Fjarlægja stimpilinn
+Il faut des lieux placés sur la carte et datés pour compter les kilomètres ¦ Til að telja kílómetrana þarf staði á kortinu með dagsetningum
+Il faut au moins un lieu où deux personnes de l’arbre ont vécu ¦ Það þarf minnst einn stað þar sem tveir einstaklingar í trénu bjuggu
+{place} : {y} ans de présence de la famille, sur {n} génération d’ancêtres ¦ {place}: {y} ár sem fjölskyldan var þar, yfir {n} kynslóð forfeðra
+{place} : {y} ans de présence de la famille ¦ {place}: {y} ár sem fjölskyldan var þar
+portrait ✓ ¦ andlitsmynd ✓
+✨ Récit d’une vie : un diaporama tout fait à partir de cette fiche ¦ ✨ Lífssaga: tilbúin myndasýning út frá þessu spjaldi
+Récit d’une vie en diaporama ¦ Lífssaga sem myndasýning
+Pour tes 18 ans ¦ Fyrir 18 ára afmælið þitt
+Quand ¦ Hvenær
+Raconte ¦ Segðu frá
+Passeport ¦ Vegabréf
+Barbe ¦ Skegg

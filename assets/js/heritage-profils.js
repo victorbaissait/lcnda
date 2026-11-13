@@ -25,6 +25,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ART = window.LCNDA_ART; if (!ART?.define) return;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
@@ -94,9 +95,9 @@
         const key = spec.key, kind = `profile_${key}`;
         Object.keys(ART.pageSections).filter(k => k.startsWith(`${key}__`)).forEach(k => delete ART.pageSections[k]); // un profil redéfini (le sien, modifié)
         const groups = spec.sections.filter(s => s.fields?.length).map(s => ({key: s.key, label: s.label, icon: s.icon || '', zone: 'main', fields: s.fields}));
-        ART.define({key: kind, icon: spec.icon || '✦', label: `Profil : ${spec.label}`, many: 'Profils', fem: false, domain: 'profile', hidden: true, linked: false, profile: key,
-            eyebrow: () => `${spec.icon || ''} Profil · ${spec.label}`, newData: st => ({title: `${spec.label} — ${st.name}`}),
-            groups: [{key: 'main', label: 'Le profil', icon: spec.icon || '', zone: 'main', fields: [{key: 'title', label: 'En une ligne', type: 'text', star: true, ph: `ex. « ${spec.ph || spec.label} »`}]}, ...groups,
+        ART.define({key: kind, icon: spec.icon || '✦', label: i18n('Profil : {nm}', {nm: i18n(spec.label)}), many: 'Profils', fem: false, domain: 'profile', hidden: true, linked: false, profile: key,
+            eyebrow: () => `${spec.icon || ''} ${i18n('Profil')} · ${i18n(spec.label)}`, newData: st => ({title: `${spec.label} — ${st.name}`}),
+            groups: [{key: 'main', label: 'Le profil', icon: spec.icon || '', zone: 'main', fields: [{key: 'title', label: 'En une ligne', type: 'text', star: true, ph: i18n('ex. « {nm} »', {nm: i18n(spec.ph || spec.label)})}]}, ...groups,
                 {key: 'notes', label: 'Notes', icon: '📝', zone: 'right', fields: [{key: 'notes', label: 'Notes', type: 'longtext', star: true, bare: true}]}]});
         const secKeys = [];
         spec.sections.forEach(s => {
@@ -225,7 +226,7 @@
             if (Number(store.person.is_artist)) have.push('artist');
             if (!profs.some(k => have.includes(k))) {
                 const P = ART.profiles[profs[0]] || {label: profs[0], icon: '✦'}, def = ART.defs[kind] || {};
-                const ok = await A().confirmBox(`La fiche de ${store.name} n’est pas encore cochée « ${P.label} ». La cocher pour y ranger ${def.fem ? 'cette' : 'ce'} ${String(def.label || 'fiche').toLowerCase()} ?`, {title: `${P.icon} Cocher « ${P.label} » ?`, okLabel: `Cocher « ${P.label} »`});
+                const ok = await A().confirmBox(i18n(def.fem ? 'La fiche de {nm} n’est pas encore cochée « {p} ». La cocher pour y ranger cette {kind} ?' : 'La fiche de {nm} n’est pas encore cochée « {p} ». La cocher pour y ranger ce {kind} ?', {nm: store.name, p: i18n(P.label), kind: i18n(def.label || 'fiche').toLowerCase()}), {title: `${P.icon} ${i18n('Cocher « {nm} » ?', {nm: i18n(P.label)})}`, okLabel: i18n('Cocher « {nm} »', {nm: i18n(P.label)})});
                 if (!ok) throw new Error('');
                 await ART.write('set_profile', {person_id: store.pid, profile: profs[0], on: 1, label: P.label, icon: P.icon});
                 store.person.profiles = [...(store.person.profiles || []), {profile_key: profs[0], item_id: null}];
@@ -259,7 +260,7 @@
             const w = q.value.trim(), all = PF.all(), match = p => !w || fold(`${p.label} ${p.desc || ''} ${PF.GROUPS.find(g => g[0] === p.group)?.[1] || ''}`).includes(fold(w));
             const html = PF.GROUPS.map(([g, gl]) => { const l = all.filter(p => p.group === g && match(p)).sort((a, b) => a.label.localeCompare(b.label, 'fr')); if (!l.length && !(g === 'mine' && !w)) return '';
                 return `<div class="pf-vg ${g === 'mine' ? 'is-mine' : ''}"><div class="pf-grp">${esc(gl)}</div>${l.map(p => `<label class="pf-ck" title="${esc(p.desc || '')}" style="--pf:${esc(/^#[0-9a-f]{6}$/i.test(p.color || '') ? p.color : PF.color(p.key))}"><input type="checkbox" value="${esc(p.key)}" ${picked.has(p.key) ? 'checked' : ''}><span class="pf-ic">${esc(p.icon)}</span><span class="pf-lb">${hl(p.label, w)}${p.desc ? `<small>${esc(p.desc)}</small>` : ''}</span>${p.user ? `<span class="pf-tools"><button type="button" class="icon-button small" data-pf-editdef="${esc(p.key)}" title="Modifier ce profil">✎</button><button type="button" class="icon-button small" data-pf-deldef="${esc(p.key)}" title="Supprimer ce profil">🗑</button></span>` : ''}</label>`).join('')}${g === 'mine' && !l.length ? '<p class="empty-line pf-small"><span class="empty-line-ico" aria-hidden="true">🧩</span><span class="empty-line-text">Aucun pour l’instant : « ＋ Créer mon propre profil… ».</span></p>' : ''}</div>`; }).join('');
-            voc.innerHTML = html.replace(/<div class="pf-vg is-mine"><div class="pf-grp">[^<]*<\/div><p[^>]*>[^<]*<\/p><\/div>/, w ? '' : '$&') || `<p class="pf-none">Aucun profil pour « ${esc(w)} ». Vérifie l’orthographe, ou : <button type="button" class="ar-linkbtn" data-pf-create>＋ Créer le profil « ${esc(w.slice(0, 60))} »</button></p>`;
+            voc.innerHTML = html.replace(/<div class="pf-vg is-mine"><div class="pf-grp">[^<]*<\/div><p[^>]*>[^<]*<\/p><\/div>/, w ? '' : '$&') || `<p class="pf-none">${i18n('Aucun profil pour « {nm} ». Vérifie l’orthographe, ou :', {nm: esc(w)})} <button type="button" class="ar-linkbtn" data-pf-create>＋ ${i18n('Créer le profil « {nm} »', {nm: esc(w.slice(0, 60))})}</button></p>`;
         }
         paint();
         q.addEventListener('input', paint);
@@ -273,7 +274,7 @@
             if (b.dataset.pfEditdef) { e.preventDefault(); e.stopPropagation(); await PF.openWizard({key: b.dataset.pfEditdef}); paint(); return; }
             if (b.dataset.pfDeldef) { e.preventDefault(); e.stopPropagation(); const k = b.dataset.pfDeldef;
                 try { const r = await ART.write('delete_profile_def', {key: k}); delete ART.profiles[k]; picked.delete(k); paint();
-                    A().undoToast(`Profil « ${r.profile.label} » supprimé`, {undo: async () => { await ART.write('save_profile_def', {key: r.profile.key, label: r.profile.label, icon: r.profile.icon, def: r.profile.def}); await PF.refreshDefs(true); paint(); }, redo: async () => { await ART.write('delete_profile_def', {key: k}); delete ART.profiles[k]; paint(); }});
+                    A().undoToast(i18n('Profil « {nm} » supprimé', {nm: i18n(r.profile.label)}), {undo: async () => { await ART.write('save_profile_def', {key: r.profile.key, label: r.profile.label, icon: r.profile.icon, def: r.profile.def}); await PF.refreshDefs(true); paint(); }, redo: async () => { await ART.write('delete_profile_def', {key: k}); delete ART.profiles[k]; paint(); }});
                 } catch (er) { toast(er.message, 'error'); } return; }
         });
         dlg.querySelector('form').addEventListener('submit', async e => {
@@ -285,7 +286,7 @@
             try {
                 const r = await ART.write('set_profiles', {person_id: pid, on: order.map(meta), off});
                 dlg.close();
-                const added = order.filter(k => !cur.includes(k)), msg = added.length || off.length ? `Profils de ${name || 'la fiche'} : ${[added.length && `＋ ${added.map(k => ART.profiles[k]?.label || k).join(', ')}`, off.length && `− ${off.map(k => ART.profiles[k]?.label || k).join(', ')}`].filter(Boolean).join(' · ')}` : 'Profils enregistrés';
+                const added = order.filter(k => !cur.includes(k)), msg = added.length || off.length ? i18n('Profils de {nm} : {x}', {nm: name || i18n('la fiche'), x: [added.length && `＋ ${added.map(k => i18n(ART.profiles[k]?.label || k)).join(', ')}`, off.length && `− ${off.map(k => i18n(ART.profiles[k]?.label || k)).join(', ')}`].filter(Boolean).join(' · ')}) : i18n('Profils enregistrés');
                 const back = async () => { const r2 = await ART.write('set_profiles', {person_id: pid, on: cur.map(meta), off: order.filter(k => !cur.includes(k))}); await onDone?.(r2.profiles); };
                 A().undoToast(msg, {undo: back, redo: async () => { const r3 = await ART.write('set_profiles', {person_id: pid, on: order.map(meta), off}); await onDone?.(r3.profiles); }});
                 await onDone?.(r.profiles);
@@ -325,10 +326,10 @@
                 <div class="pf-icons">${ICONS.map(i => `<button type="button" class="pf-ib" data-w-icon="${i}">${i}</button>`).join('')}</div>`
                 : step === 2 ? `<b class="pf-sub">Sections reprises d’autres profils</b><div class="pf-lib">${reusable().map(x => `<label><input type="checkbox" data-w-reuse value="${esc(x.k)}" ${W.reuse.includes(x.k) ? 'checked' : ''}> ${esc(x.s.icon || '')} ${esc(x.s.label)} <small>${esc(x.from)}</small></label>`).join('')}</div>
                 <b class="pf-sub">Mes sections (avec mes champs)</b><div data-w-mine>${W.mine.map((s, i) => `<div class="pf-cf" data-w-sec data-key="${esc(s.key)}"><input class="ar-in" data-w-l value="${esc(s.label)}" placeholder="Nom (ex. Instruments joués)" maxlength="60"><select class="ar-in" data-w-k>${Object.entries(KIND_LABEL).map(([k, l]) => `<option value="${k}" ${s.kind === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
-                    ${s.kind === 'rows' ? `<input class="ar-in" data-w-c value="${esc(s.cols)}" placeholder="colonnes : instrument · de · à">` : s.kind === 'items' ? `<select class="ar-in" data-w-kinds>${kinds().map(d => `<option value="${esc(d.key)}" ${(s.kinds || [])[0] === d.key ? 'selected' : ''}>→ ${esc(d.icon)} ${esc(d.many)}</option>`).join('')}</select>` : '<span></span>'}<button type="button" class="icon-button small" data-w-del="${i}" title="Retirer">✕</button></div>`).join('')}</div>
+                    ${s.kind === 'rows' ? `<input class="ar-in" data-w-c value="${esc(s.cols)}" placeholder="${i18n('colonnes : instrument · de · à')}">` : s.kind === 'items' ? `<select class="ar-in" data-w-kinds>${kinds().map(d => `<option value="${esc(d.key)}" ${(s.kinds || [])[0] === d.key ? 'selected' : ''}>→ ${esc(d.icon)} ${esc(d.many)}</option>`).join('')}</select>` : '<span></span>'}<button type="button" class="icon-button small" data-w-del="${i}" title="Retirer">✕</button></div>`).join('')}</div>
                 <button type="button" class="button small secondary" data-w-add>＋ Ajouter une section</button>`
                 : `<p class="pf-small">L’ordre de départ de la page (⚙️ Organiser la page le change ensuite, personne par personne).</p><div class="ar-plist">${secList().map((x, i, l) => `<div class="ar-fr" data-w-o="${esc(x.k)}"><span class="ar-grip">⠿</span><span></span><span class="lbl">${esc(x.label)} <small class="ar-g">${esc(x.from)}</small></span><span></span><span class="tools"><button type="button" data-w-mv="-1" ${i ? '' : 'disabled'} title="Monter">↑</button><button type="button" data-w-mv="1" ${i < l.length - 1 ? '' : 'disabled'} title="Descendre">↓</button></span></div>`).join('') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧩</span><span class="empty-line-text">Aucune section : reviens à l’étape 2.</span></p>'}</div>`;
-            dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">✎ ${old ? 'MODIFIER' : 'CRÉER'} UN PROFIL</span><h2>${esc(W.icon)} ${esc(W.label || 'Mon profil')}</h2></div><button class="icon-button" type="button" data-w-x aria-label="Fermer">×</button></div>
+            dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">✎ ${old ? i18n('MODIFIER UN PROFIL') : i18n('CRÉER UN PROFIL')}</span><h2>${esc(W.icon)} ${esc(W.label || i18n('Mon profil'))}</h2></div><button class="icon-button" type="button" data-w-x aria-label="Fermer">×</button></div>
                 <div class="pf-steps">${['1 · Nom', '2 · Sections', '3 · Page'].map((s, i) => `<span class="${i + 1 < step ? 'dn' : i + 1 === step ? 'on' : ''}">${s}</span>`).join('')}</div>
                 <div class="pf-wbody">${body}<p class="pf-note">Un profil = un nom + une icône + une couleur + des sections (reprises ou tiennes) + un ordre de départ.</p></div>
                 <div class="modal-actions">${step > 1 ? '<button type="button" class="button secondary" data-w-prev>← Retour</button>' : ''}<span class="spacer"></span><button type="button" class="button secondary" data-w-x>Annuler</button><button type="submit" class="button">${step < 3 ? 'Suivant →' : old ? 'Enregistrer' : 'Créer le profil'}</button></div></form>`;
@@ -359,7 +360,7 @@
                 const r = await ART.write('save_profile_def', {key: key || '', label: W.label, icon: W.icon, def: {color: W.color, group: 'mine', sections, order: sections.map(s => s.reuse || `${key || '?'}__${s.key}`)}});
                 await PF.refreshDefs(true);
                 if (!ART.profiles[r.key]) PF.loadDefs([{key: r.key, label: W.label, icon: W.icon, origin: 'user', def: {color: W.color, sections}}]);
-                result = r.key; A().toast?.(`✓ Profil « ${W.label} » ${old ? 'enregistré' : 'créé'}`, 'success'); dlg.close();
+                result = r.key; A().toast?.(old ? i18n('✓ Profil « {nm} » enregistré', {nm: W.label}) : i18n('✓ Profil « {nm} » créé', {nm: W.label}), 'success'); dlg.close();
             } catch (er) { btn.disabled = false; toast(er.message, 'error'); } finally { dlg._busy = false; }
         });
         dlg.addEventListener('close', () => { dlg.remove(); resolve(result); });
@@ -504,9 +505,9 @@
         if (!d) { if (!st._pfLoading) { st._pfLoading = A().api('person', {id: st.pid}).then(r => { st._pfDetail = r || {}; if (C.S.view === 'page' && C.dlg.isConnected) C.paint(false); }).catch(() => { st._pfDetail = {}; }); } return {body: window.LCNDA_UI.spinner('Chargement de la fiche…')}; }
         const me = d.person || st.person, list = v => (Array.isArray(v) ? v : []).map(x => x.person || x.partner || x).filter(x => x && (x.first_name || x.last_name));
         const parents = list(d.parents), partners = list(d.partners), children = list(d.children), sibs = list(d.siblings);
-        const parts = [parents.length && `${kin(me, 'Fils', 'Fille', 'Enfant')} de ${parents.map(pChip).join(' et ')}`,
-            sibs.length && sibs.slice(0, 4).map(x => `${kin(x, 'frère', 'sœur', 'frère ou sœur')} de ${pChip(x)}`).join(', ') + (sibs.length > 4 ? ` et ${sibs.length - 4} autres` : ''),
-            partners.length && `${kin(me, 'époux', 'épouse', 'conjoint')} de ${partners.map(pChip).join(', ')}`, children.length && plural(children.length, 'enfant')].filter(Boolean);
+        const parts = [parents.length && i18n(kin(me, 'Fils de {nm}', 'Fille de {nm}', 'Enfant de {nm}'), {nm: parents.map(pChip).join(` ${i18n('et')} `)}),
+            sibs.length && sibs.slice(0, 4).map(x => i18n(kin(x, 'frère de {nm}', 'sœur de {nm}', 'frère ou sœur de {nm}'), {nm: pChip(x)})).join(', ') + (sibs.length > 4 ? ` ${i18n('et {n} autres', {n: sibs.length - 4})}` : ''),
+            partners.length && i18n(kin(me, 'époux de {nm}', 'épouse de {nm}', 'conjoint de {nm}'), {nm: partners.map(pChip).join(', ')}), children.length && plural(children.length, 'enfant')].filter(Boolean);
         const life = [st.person.birth && `° ${[st.person.birth.date || st.person.birth.year, st.person.birth.place].filter(Boolean).join(' ')}`, st.person.death && `† ${[st.person.death.date || st.person.death.year, st.person.death.place].filter(Boolean).join(' ')}`].filter(Boolean).join(' · ');
         return {body: `${life ? `<p>${esc(life)}</p>` : ''}${parts.length ? `<p>${parts.join(' · ')}</p>` : PF.muted('Pas encore de famille sur la fiche.')}<button type="button" class="ar-linkbtn" data-ar-person="${st.pid}">↗ Ouvrir la fiche</button>`, head: '<small class="ar-g">(la fiche de toujours)</small>'};
     }};
@@ -525,7 +526,7 @@
     ART.pageSections.pf_awards = {icon: '🏆', label: 'Concours et récompenses', w: '⅓', profile: 'common', render: C => {
         if (!ext.awards?.listFor) return {body: PF.muted('Bloc « 🏆 Concours et récompenses » de la fiche.'), empty: true};
         const l = PF.later(C, 'awards', () => ext.awards.listFor(C.pid)); if (!l) return {body: LOADING};
-        return {body: l.length ? ext.awards.tableHtml(l.slice(0, 6), C.pid) + (l.length > 6 ? `<p class="ar-g">… et ${esc(plural(l.length - 6, 'autre'))}.</p>` : '') : PF.muted('Aucune récompense : bloc « 🏆 Concours et récompenses » de la fiche.'), count: l.length || '', empty: !l.length};
+        return {body: l.length ? ext.awards.tableHtml(l.slice(0, 6), C.pid) + (l.length > 6 ? `<p class="ar-g">${i18n('… et {x}.', {x: esc(plural(l.length - 6, 'autre'))})}</p>` : '') : PF.muted('Aucune récompense : bloc « 🏆 Concours et récompenses » de la fiche.'), count: l.length || '', empty: !l.length};
     }};
     ART.pageSections.pf_press = {icon: '📰', label: 'Dans les médias', w: '⅓', profile: 'common', render: C => {
         if (!ext.press?.listFor) return {body: PF.muted('Bloc « 📰 Dans les médias » de la fiche.'), empty: true};
@@ -599,7 +600,7 @@
     ART.pageHead = st => {
         const ks = PF.keysOf(st);
         if (!ks.length || (ks.length === 1 && ks[0] === 'artist')) return {icon: '🎨', tab: '🎨 Page', eyebrow: 'ARTISTE · SA PAGE'};
-        if (ks.length === 1) { const P = ART.profiles[ks[0]]; return {icon: P.icon, tab: `${P.icon} Page`, eyebrow: `${P.label} · sa page`.toLocaleUpperCase('fr-FR')}; }
+        if (ks.length === 1) { const P = ART.profiles[ks[0]]; return {icon: P.icon, tab: `${P.icon} Page`, eyebrow: i18n('{nm} · sa page', {nm: i18n(P.label)}).toLocaleUpperCase('fr-FR')}; }
         return {icon: '🧩', tab: '🧩 Page', eyebrow: `${ks.length} PROFILS · SA PAGE`};
     };
 
@@ -622,13 +623,13 @@
             const cfg = one ? PF.profileCfg(s, view) : PF.allCfg(s), list = cfg.order.filter(k => PF.section(s, k));
             const ownerOf = k => one ? (commonKeys().includes(k) || k === 'pf_frise' ? 'common' : view) : cfg.owner[k];
             const nSec = pk => PF.profileCfg(s, pk).order.filter(k => k !== 'pf_frise' && !commonKeys().includes(k) && !PF.profileCfg(s, pk).hidden.has(k)).length;
-            const profCards = one ? '' : `<b class="pf-sub">Profils de cette personne</b><div class="pf-cards">${cfg.profOrder.map((k, i) => { const off = cfg.profHidden.has(k); return `<div class="pf-card ${off ? 'off' : ''}" data-pfkey="${esc(k)}" draggable="true"><span class="ar-grip">⠿</span><span>${badge({key: k})} <small class="ar-g">${off ? 'caché' : plural(nSec(k), 'section')}</small></span><span class="ar-ocol" data-p-col="${esc(k)}"></span><span class="tools"><button type="button" data-p-mv="-1" ${i ? '' : 'disabled'} title="Monter">↑</button><button type="button" data-p-mv="1" ${i < cfg.profOrder.length - 1 ? '' : 'disabled'} title="Descendre">↓</button></span><label class="ui-toggle" title="${off ? 'Montrer' : 'Cacher'} ce profil sur la page"><input type="checkbox" data-p-tog ${off ? '' : 'checked'}><i></i></label></div>`; }).join('')}</div>`;
+            const profCards = one ? '' : `<b class="pf-sub">Profils de cette personne</b><div class="pf-cards">${cfg.profOrder.map((k, i) => { const off = cfg.profHidden.has(k); return `<div class="pf-card ${off ? 'off' : ''}" data-pfkey="${esc(k)}" draggable="true"><span class="ar-grip">⠿</span><span>${badge({key: k})} <small class="ar-g">${off ? 'caché' : plural(nSec(k), 'section')}</small></span><span class="ar-ocol" data-p-col="${esc(k)}"></span><span class="tools"><button type="button" data-p-mv="-1" ${i ? '' : 'disabled'} title="Monter">↑</button><button type="button" data-p-mv="1" ${i < cfg.profOrder.length - 1 ? '' : 'disabled'} title="Descendre">↓</button></span><label class="ui-toggle" title="${off ? i18n('Montrer ce profil sur la page') : i18n('Cacher ce profil sur la page')}"><input type="checkbox" data-p-tog ${off ? '' : 'checked'}><i></i></label></div>`; }).join('')}</div>`;
             const rows = list.map((k, i) => { const S0 = PF.section(s, k), on = !cfg.hidden.has(k), w = cfg.widths[k] || S0.w, ow = ownerOf(k), lab = k === 'pf_frise' && one ? 'Frise de carrière' : S0.label;
                 const dim = !one && ow !== 'common' && cfg.profHidden.has(ow);
                 return `<div class="ar-fr ${on && !dim ? '' : 'off'} ${S0.custom ? 'cust' : ''}" data-okey="${esc(k)}" draggable="true"><span class="ar-grip">⠿</span><button type="button" class="ar-eye" data-o-eye title="${on ? 'Cacher' : 'Montrer'}">${on ? '👁' : '🚫'}</button><span class="lbl pf-lbl" style="--pf:${esc(ow !== 'common' ? PF.color(ow) : 'transparent')}">${esc(S0.icon || '')} ${esc(lab)}${dim ? ' <small class="ar-g">(profil caché)</small>' : ''}</span>
                     <select class="ty ar-wsel" data-o-w title="Largeur">${ART.widthOptions ? ART.widthOptions(w) : ''}</select><span class="ar-ocol" data-o-col="${esc(k)}"></span><span class="tools"><button type="button" data-o-mv="-1" ${i ? '' : 'disabled'} title="Monter">↑</button><button type="button" data-o-mv="1" ${i < list.length - 1 ? '' : 'disabled'} title="Descendre">↓</button>${S0.custom ? '<button type="button" data-o-del title="Retirer">🗑</button>' : ''}</span></div>`; }).join('');
             const models = one ? Object.entries(cfg.models || {}) : [];
-            aside.innerHTML = `<div class="ar-ph"><b>⚙️ ${one ? `Organiser le profil ${esc(String(P.label).toLocaleLowerCase('fr-FR'))}` : `Organiser la page de ${esc(first)}`}</b><span class="spacer"></span><button type="button" class="icon-button small" data-o-close aria-label="Fermer">×</button></div><div class="ar-pbody">
+            aside.innerHTML = `<div class="ar-ph"><b>⚙️ ${one ? i18n('Organiser le profil {nm}', {nm: esc(String(i18n(P.label)).toLocaleLowerCase('fr-FR'))}) : i18n('Organiser la page de {nm}', {nm: esc(first)})}</b><span class="spacer"></span><button type="button" class="icon-button small" data-o-close aria-label="Fermer">×</button></div><div class="ar-pbody">
                 <p class="ar-phelp">${one ? 'Comme pour l’artiste : ⠿ ou ↑ ↓ pour ranger, 👁 pour cacher, la largeur (toute la ligne, ½, ⅓, ¼, ⅔, ¾) et la couleur du liseré.' : 'Range les profils et les sections (⠿ ou ↑ ↓), cache-les (👁), choisis leur largeur et la couleur de leur liseré (la pastille d’un profil : sa couleur).'}</p>${profCards}
                 <b class="pf-sub">Sections, dans l’ordre de la page</b><div class="ar-plist">${rows}</div>
                 <div class="ar-pbtns">${one ? '' : '<button type="button" class="button small secondary" data-o-addprof>＋ Ajouter un profil</button>'}<button type="button" class="button small secondary" data-o-add>＋ Ajouter une section</button>${models.length > 1 ? `<select class="ar-in" data-o-model title="Modèle de départ">${models.map(([k, m]) => `<option value="${esc(k)}" ${k === cfg.model ? 'selected' : ''}>Modèle : ${esc(m.label)}</option>`).join('')}</select>` : ''}</div>

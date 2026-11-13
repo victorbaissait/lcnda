@@ -5,6 +5,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ART = window.LCNDA_ART; if (!ART?.define) return;
     const U = ART.util, esc = U.esc;
     const FILM_KINDS = [['long', 'Long métrage'], ['court', 'Court métrage'], ['serie', 'Série'], ['telefilm', 'Téléfilm'], ['docu', 'Documentaire'], ['clip', 'Clip'], ['pub', 'Publicité'], ['theatre', 'Pièce de théâtre'], ['opera', 'Opéra, ballet'], ['spectacle', 'Spectacle'], ['autre', 'Autre']];
@@ -13,7 +14,7 @@
     ART.define({key: 'film', icon: '🎬', label: 'Film, spectacle', many: 'Films et spectacles', tab: 'Films', domain: 'film',
         eyebrow: it => lab(FILM_KINDS, it.data?.fkind || 'long'),
         newData: () => ({fkind: 'long'}),
-        cardLine: it => [it.year, it.data?.jobs, it.data?.role && `rôle : ${it.data.role}`].filter(Boolean).join(' · '),
+        cardLine: it => [it.year, it.data?.jobs, it.data?.role && i18n('rôle : {nm}', {nm: it.data.role})].filter(Boolean).join(' · '),
         heading: (ctx, it) => `<h2 class="ar-h2">${esc(it.title)}${it.year ? ` <small>· ${esc(it.year)}</small>` : ''}</h2>${it.data?.original && it.data.original !== it.title ? `<p class="ar-g">${esc(it.data.original)}</p>` : ''}`,
         groups: [
             {key: 'main', label: 'Film', zone: 'main', fields: [

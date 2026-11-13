@@ -30,6 +30,16 @@
     /** whenText(date, {label, now}) → « aujourd’hui à 10 h 22 » ; label: 'Modifié' → « Modifié aujourd’hui à 10 h 22 » / « Modifié le 17 oct. 2026 » */
     UI.whenText = (d, {label = '', now = new Date()} = {}) => {
         const p = parse(d); if (!p) return '';
+        const I = window.LCNDA_I18N;
+        if (I && I.lang !== 'fr') { // 🌐 dans une autre langue : mêmes règles, mots et heures de la langue (app-i18n.js)
+            const x = p.date, days = Math.round((dayStart(now) - dayStart(x)) / 86400000), h = p.time ? I.fmtTime(x) : '';
+            let txt;
+            if (days === 0) txt = h ? I.t('aujourd’hui à {h}', {h}) : I.t('aujourd’hui');
+            else if (days === 1) txt = h ? I.t('hier à {h}', {h}) : I.t('hier');
+            else if (days > 1 && days < 7) { const day = I.fmtDate(x, {weekday: 'long'}); txt = h ? I.t('{day} à {h}', {day, h}) : day; }
+            else txt = I.fmtDate(x, {day: 'numeric', month: 'short', year: 'numeric'});
+            return label ? `${I.t(label)} ${txt}` : txt;
+        }
         const x = p.date, days = Math.round((dayStart(now) - dayStart(x)) / 86400000), at = p.time ? ` à ${hm(x)}` : '';
         let txt, rel = true;
         if (days === 0) txt = `aujourd’hui${at}`;
@@ -42,7 +52,8 @@
     /** whenFull(date) → « samedi 17 octobre 2026 à 23 h 39 » (la bulle au survol) */
     UI.whenFull = d => {
         const p = parse(d); if (!p) return '';
-        const x = p.date;
+        const x = p.date, I = window.LCNDA_I18N;
+        if (I && I.lang !== 'fr') return I.fmtDate(x, {weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'}) + (p.time ? ` · ${I.fmtTime(x)}` : '');
         return `${DAYS[x.getDay()]} ${x.toLocaleDateString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'})}${p.time ? ` à ${hm(x)}` : ''}`;
     };
     /** when(date, {label}) → HTML <time> avec la date complète au survol (titre) ; '' si la date est vide ou illisible */

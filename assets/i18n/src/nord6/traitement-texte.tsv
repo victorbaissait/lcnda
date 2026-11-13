@@ -1,0 +1,782 @@
+fr ¦ lt ¦ lv ¦ et
+menu|Affichage ¦ Rodinys ¦ Skats ¦ Vaade
+Insertion ¦ Įterpimas ¦ Ievietošana ¦ Lisamine
+Format ¦ Formatas ¦ Formāts ¦ Vorming
+Tableau ¦ Lentelė ¦ Tabula ¦ Tabel
+Champ (page, nombre de pages, titre, auteur)… ¦ Laukas (puslapis, puslapių skaičius, pavadinimas, autorius)… ¦ Lauks (lapa, lapu skaits, nosaukums, autors)… ¦ Väli (lehekülg, lehekülgede arv, pealkiri, autor)…
+N° de page ¦ Puslapio Nr. ¦ Lapas Nr. ¦ Lehekülje nr
+(celle de Normal) ¦ (stiliaus Normal) ¦ (stila Normal) ¦ (stiili Normal oma)
+(titre vide) ¦ (tuščia antraštė) ¦ (tukšs virsraksts) ¦ (tühi pealkiri)
+* = des lettres, ? = une lettre, # = un chiffre ¦ * = kelios raidės, ? = viena raidė, # = vienas skaitmuo ¦ * = vairāki burti, ? = viens burts, # = viens cipars ¦ * = mitu tähte, ? = üks täht, # = üks number
+.lcnda-texte (tout est gardé) ¦ .lcnda-texte (išsaugoma viskas) ¦ .lcnda-texte (viss tiek saglabāts) ¦ .lcnda-texte (kõik säilib)
+1 (retirer les colonnes) ¦ 1 (pašalinti stulpelius) ¦ 1 (noņemt kolonnas) ¦ 1 (eemalda veerud)
+1. Liste numérotée ¦ 1. Numeruotas sąrašas ¦ 1. Numurēts saraksts ¦ 1. Nummerdatud loend
+1re ligne ¦ 1-oji eilutė ¦ 1. rinda ¦ 1. rida
+1re ligne (négatif : en saillie) ¦ Pirmoji eilutė (neigiama: iškyša) ¦ Pirmā rinda (negatīva: izvirzīta) ¦ Esimene rida (negatiivne: rippuv)
+60 onglets au plus. ¦ Daugiausia 60 kortelių. ¦ Ne vairāk kā 60 ciļņu. ¦ Kuni 60 vahekaarti.
+A Couleur… ¦ A Spalva… ¦ A Krāsa… ¦ A Värv…
+Accentuation ¦ Paryškinimas ¦ Uzsvars ¦ Rõhutus
+Adresse ¦ Adresas ¦ Adrese ¦ Aadress
+Afficher : nom, dates, naissance… ¦ Rodyti: vardas, datos, gimimas… ¦ Rādīt: vārds, datumi, dzimšana… ¦ Näita: nimi, kuupäevad, sünd…
+Ajoute au moins une personne. ¦ Pridėk bent vieną asmenį. ¦ Pievieno vismaz vienu personu. ¦ Lisa vähemalt üks isik.
+Ajoute d’abord des champs : Insertion → « 📨 Champ de fusion » (Prénom, Nom, Date de naissance…). ¦ Pirmiausia pridėk laukų: Įterpimas → „📨 Suliejimo laukas“ (Vardas, Pavardė, Gimimo data…). ¦ Vispirms pievieno laukus: Ievietošana → „📨 Sapludināšanas lauks“ (Vārds, Uzvārds, Dzimšanas datums…). ¦ Lisa kõigepealt välju: Lisamine → „📨 Ühendusväli“ (Eesnimi, Perekonnanimi, Sünnikuupäev…).
+Ajouter la citation ¦ Pridėti citatą ¦ Pievienot citātu ¦ Lisa viide
+Ajouter les personnes d’une liste ¦ Pridėti asmenis iš sąrašo ¦ Pievienot personas no saraksta ¦ Lisa isikud loendist
+Ajouter une légende ¦ Pridėti antraštę ¦ Pievienot parakstu ¦ Lisa pealdis
+Album photo (21,6 × 28 cm) ¦ Nuotraukų albumas (21,6 × 28 cm) ¦ Fotoalbums (21,6 × 28 cm) ¦ Fotoalbum (21,6 × 28 cm)
+Alignement ¦ Lygiuotė ¦ Līdzinājums ¦ Joondus
+Aligner à droite ¦ Lygiuoti dešinėje ¦ Līdzināt pa labi ¦ Joonda paremale
+Aligner à gauche ¦ Lygiuoti kairėje ¦ Līdzināt pa kreisi ¦ Joonda vasakule
+Aligné sur le texte (seul sur sa ligne) ¦ Lygiai su tekstu (vienas savo eilutėje) ¦ Rindā ar tekstu (viens savā rindā) ¦ Tekstiga reas (üksi oma real)
+Allemand ¦ Vokiečių ¦ Vācu ¦ Saksa
+Aller ¦ Eiti ¦ Doties ¦ Mine
+Aller à la page ¦ Eiti į puslapį ¦ Doties uz lapu ¦ Mine leheküljele
+Anglais ¦ Anglų ¦ Angļu ¦ Inglise
+Années (1850 – 1920) ¦ Metai (1850 – 1920) ¦ Gadi (1850 – 1920) ¦ Aastad (1850 – 1920)
+Aperçu avec {name} : ¦ Peržiūra su {name}: ¦ Priekšskatījums ar {name}: ¦ Eelvaade isikuga {name}:
+Apostrophe typographique ’ ¦ Tipografinis apostrofas ’ ¦ Tipogrāfiskais apostrofs ’ ¦ Tüpograafiline ülakoma ’
+Au moins une ligne. ¦ Bent viena eilutė. ¦ Vismaz viena rinda. ¦ Vähemalt üks rida.
+Aucun champ à mettre à jour. ¦ Nėra laukų, kuriuos reikėtų atnaujinti. ¦ Nav lauku, ko atjaunināt. ¦ Uuendada pole ühtegi välja.
+Aucune modification suivie dans le document. ¦ Dokumente nėra sekamų pakeitimų. ¦ Dokumentā nav izsekotu izmaiņu. ¦ Dokumendis pole jälgitud muudatusi.
+Aucune modification suivie. ¦ Sekamų pakeitimų nėra. ¦ Nav izsekotu izmaiņu. ¦ Jälgitud muudatusi pole.
+Aucune modification suivie. « ✍ Suivre les modifications » garde la trace de chaque ajout et de chaque suppression. ¦ Sekamų pakeitimų nėra. „✍ Sekti pakeitimus“ išsaugo kiekvieno pridėjimo ir kiekvieno ištrynimo pėdsaką. ¦ Nav izsekotu izmaiņu. „✍ Izsekot izmaiņas“ saglabā katras pievienošanas un katras dzēšanas pēdas. ¦ Jälgitud muudatusi pole. „✍ Jälgi muudatusi“ jätab jälje igast lisamisest ja kustutamisest.
+Augmenter le retrait ¦ Padidinti įtrauką ¦ Palielināt atkāpi ¦ Suurenda taanet
+Auteur ¦ Autorius ¦ Autors ¦ Autor
+Autre ¦ Kita ¦ Cits ¦ Muu
+Avis de recherche (lettre aux cousins, remplie) ¦ Paieškos skelbimas (laiškas pusbroliams, užpildytas) ¦ Meklēšanas aicinājums (vēstule brālēniem, aizpildīta) ¦ Otsingukuulutus (kiri nõbudele, täidetud)
+Barre d’outils ¦ Įrankių juosta ¦ Rīkjosla ¦ Tööriistariba
+Barre d’outils en ruban (avec les noms) ¦ Juostelės tipo įrankių juosta (su pavadinimais) ¦ Lentes rīkjosla (ar nosaukumiem) ¦ Lindi-tööriistariba (nimedega)
+Barre d’outils · {what} ¦ Įrankių juosta · {what} ¦ Rīkjosla · {what} ¦ Tööriistariba · {what}
+Barré ¦ Perbrauktas ¦ Pārsvītrots ¦ Läbikriipsutatud
+Bas ¦ Apačia ¦ Apakša ¦ All
+Biographie ajoutée (écrite par l’app d’après la fiche) : modifie-la librement. ¦ Biografija pridėta (programėlė ją parašė pagal kortelę): laisvai ją redaguok. ¦ Biogrāfija pievienota (lietotne to uzrakstīja pēc kartītes): brīvi to rediģē. ¦ Elulugu lisatud (rakendus kirjutas selle kaardi põhjal): muuda seda vabalt.
+Bordure et trame ¦ Kraštinės ir šešėliavimas ¦ Apmales un ēnojums ¦ Äärised ja varjustus
+Bordure et trame… ¦ Kraštinės ir šešėliavimas… ¦ Apmales un ēnojums… ¦ Äärised ja varjustus…
+Bordures ¦ Kraštinės ¦ Apmales ¦ Äärised
+Bordures du tableau ¦ Lentelės kraštinės ¦ Tabulas apmales ¦ Tabeli äärised
+Breton ¦ Bretonų ¦ Bretoņu ¦ Bretooni
+COMPARER ¦ PALYGINTI ¦ SALĪDZINĀT ¦ VÕRDLE
+Cacher dans le texte ¦ Slėpti tekste ¦ Paslēpt tekstā ¦ Peida tekstis
+Caractères (espaces compris) ¦ Simboliai (su tarpais) ¦ Rakstzīmes (ar atstarpēm) ¦ Märgid (tühikutega)
+Caractères (sans les espaces) ¦ Simboliai (be tarpų) ¦ Rakstzīmes (bez atstarpēm) ¦ Märgid (tühikuteta)
+Caractères spéciaux ¦ Specialieji simboliai ¦ Speciālās rakstzīmes ¦ Erimärgid
+Carré (le texte autour) ¦ Kvadratas (tekstas aplink) ¦ Kvadrāts (teksts apkārt) ¦ Ruut (tekst ümber)
+Carré 15 × 15 cm ¦ Kvadratas 15 × 15 cm ¦ Kvadrāts 15 × 15 cm ¦ Ruut 15 × 15 cm
+Carré 21 × 21 cm ¦ Kvadratas 21 × 21 cm ¦ Kvadrāts 21 × 21 cm ¦ Ruut 21 × 21 cm
+Carré 30 × 30 cm ¦ Kvadratas 30 × 30 cm ¦ Kvadrāts 30 × 30 cm ¦ Ruut 30 × 30 cm
+Carte de visite ¦ Vizitinė kortelė ¦ Vizītkarte ¦ Visiitkaart
+Cartes et livres ¦ Atvirukai ir knygos ¦ Kartītes un grāmatas ¦ Kaardid ja raamatud
+Carton DL (faire-part) ¦ DL atvirukas (pranešimas) ¦ DL kartīte (paziņojums) ¦ DL-kaart (teadaanne)
+Case séparée ¦ Langelis atskirtas ¦ Šūna sadalīta ¦ Lahter poolitatud
+Cases fusionnées ¦ Langeliai sujungti ¦ Šūnas apvienotas ¦ Lahtrid ühendatud
+Casse ¦ Raidžių dydis ¦ Reģistrs ¦ Suurtähed/väiketähed
+Ce diagramme est vide. ¦ Ši schema tuščia. ¦ Šī shēma ir tukša. ¦ See diagramm on tühi.
+Ce document n’a pas encore de champ de fusion (Insertion → « 📨 Champ de fusion »). Insérer d’abord une petite fiche d’identité à l’endroit du curseur ? ¦ Šiame dokumente dar nėra suliejimo laukų (Įterpimas → „📨 Suliejimo laukas“). Pirmiausia įterpti nedidelę asmens kortelę ties žymekliu? ¦ Šajā dokumentā vēl nav sapludināšanas lauku (Ievietošana → „📨 Sapludināšanas lauks“). Vispirms ievietot nelielu identitātes kartīti kursora vietā? ¦ Selles dokumendis pole veel ühendusvälju (Lisamine → „📨 Ühendusväli“). Kas lisada kõigepealt kursori kohale väike isikukaart?
+Ce livre n’a pas de styles de paragraphe. ¦ Ši knyga neturi pastraipų stilių. ¦ Šai grāmatai nav rindkopu stilu. ¦ Sellel raamatul pole lõigustiile.
+Ce passage a changé : relance la relecture. ¦ Ši ištrauka pasikeitė: paleisk tikrinimą iš naujo. ¦ Šis fragments ir mainījies: palaid korektūru vēlreiz. ¦ See lõik on muutunud: käivita korrektuur uuesti.
+Ce que montre l’image, en une phrase (ex. « Mariage de Jean et Marie devant l’église, 1923 ») ¦ Ką rodo vaizdas, vienu sakiniu (pvz., „Jean ir Marie vestuvės prie bažnyčios, 1923“) ¦ Ko attēls rāda, vienā teikumā (piem., „Jean un Marie kāzas pie baznīcas, 1923“) ¦ Mida pilt näitab, ühe lausega (nt „Jeani ja Marie pulm kiriku ees, 1923“)
+Ce texte suit la fiche : il se met à jour à l’ouverture du document (Outils → Mettre à jour les champs). ¦ Šis tekstas seka kortelę: jis atnaujinamas atidarius dokumentą (Įrankiai → Atnaujinti laukus). ¦ Šis teksts seko kartītei: tas tiek atjaunināts, atverot dokumentu (Rīki → Atjaunināt laukus). ¦ See tekst järgib kaarti: see uueneb dokumendi avamisel (Tööriistad → Uuenda välju).
+Centrer ¦ Centruoti ¦ Centrēt ¦ Joonda keskele
+Certaines images, trop lourdes, n’ont pas été reprises. ¦ Kai kurie per sunkūs vaizdai nebuvo perkelti. ¦ Daži pārāk smagi attēli netika pārņemti. ¦ Mõned liiga suured pildid jäeti üle võtmata.
+Cette case n’est pas fusionnée. ¦ Šis langelis nesujungtas. ¦ Šī šūna nav apvienota. ¦ See lahter pole ühendatud.
+Cette feuille est vide. ¦ Šis lapas tuščias. ¦ Šī lapa ir tukša. ¦ See leht on tühi.
+Cette image n’a pas de fichier. ¦ Šis vaizdas neturi failo. ¦ Šim attēlam nav faila. ¦ Sellel pildil pole faili.
+Champ ¦ Laukas ¦ Lauks ¦ Väli
+Changer l’image ¦ Keisti vaizdą ¦ Mainīt attēlu ¦ Vaheta pilt
+Changer l’image… ¦ Keisti vaizdą… ¦ Mainīt attēlu… ¦ Vaheta pilt…
+Chaque Mot ¦ Kiekvienas Žodis ¦ Katrs Vārds ¦ Iga Sõna
+Chaque Mot Avec Une Majuscule ¦ Kiekvienas Žodis Iš Didžiosios Raidės ¦ Katrs Vārds Ar Lielo Burtu ¦ Iga Sõna Suure Algustähega
+Cherche un mot avec 🔍 : chaque endroit trouvé s’affiche ici. ¦ Ieškok žodžio su 🔍: kiekviena rasta vieta rodoma čia. ¦ Meklē vārdu ar 🔍: katra atrastā vieta parādās šeit. ¦ Otsi sõna 🔍 abil: iga leitud koht ilmub siia.
+Chercher… (un mot, un nom) ¦ Ieškoti… (žodžio, vardo) ¦ Meklēt… (vārdu, nosaukumu) ¦ Otsi… (sõna, nime)
+Choisir un classeur du Tableur ¦ Pasirinkti Skaičiuoklės knygą ¦ Izvēlēties Izklājlapas darbgrāmatu ¦ Vali Tabelarvutuse töövihik
+Choisir un média (lien) ¦ Pasirinkti mediją (nuoroda) ¦ Izvēlēties medija failu (saite) ¦ Vali meediafail (link)
+Choisis d’abord du texte. ¦ Pirmiausia pažymėk tekstą. ¦ Vispirms atlasi tekstu. ¦ Vali kõigepealt tekst.
+Choisis d’abord le texte à changer. ¦ Pirmiausia pažymėk tekstą, kurį keisi. ¦ Vispirms atlasi tekstu, ko mainīt. ¦ Vali kõigepealt muudetav tekst.
+Choisis le passage à commenter. ¦ Pažymėk ištrauką, kurią komentuosi. ¦ Atlasi fragmentu, ko komentēt. ¦ Vali kommenteeritav lõik.
+Choisis les paragraphes à mettre en colonnes. ¦ Pažymėk pastraipas, kurias dėsi į stulpelius. ¦ Atlasi rindkopas, ko likt kolonnās. ¦ Vali lõigud, mis veergudesse panna.
+Choisis un mot (double-clic) ou mets le curseur dedans, puis 🔁 Synonymes. ¦ Pažymėk žodį (dukart spustelėjus) arba įdėk į jį žymeklį, tada 🔁 Sinonimai. ¦ Atlasi vārdu (dubultklikšķis) vai novieto tajā kursoru, tad 🔁 Sinonīmi. ¦ Vali sõna (topeltklõps) või pane kursor selle sisse, siis 🔁 Sünonüümid.
+Choisis un rectangle de cases (sans morceau d’une autre fusion). ¦ Pažymėk langelių stačiakampį (be kito sujungimo dalies). ¦ Atlasi šūnu taisnstūri (bez citas apvienošanas daļas). ¦ Vali lahtrite ristkülik (ilma teise ühenduse osata).
+Classique ¦ Klasikinis ¦ Klasisks ¦ Klassikaline
+Classique (à la française) ¦ Klasikinis (prancūziškas) ¦ Klasisks (franču stilā) ¦ Klassikaline (prantsuse stiilis)
+Clic sur un mot : il remplace « {word} » (↶ pour revenir). ¦ Spustelėk žodį: jis pakeis „{word}“ (↶ – grįžti). ¦ Noklikšķini uz vārda: tas aizstās „{word}“ (↶, lai atgrieztos). ¦ Klõpsa sõnal: see asendab sõna „{word}“ (↶ tagasi).
+Clique pour l’ajouter au texte (la fenêtre reste ouverte). ¦ Spustelėk, kad pridėtum prie teksto (langas lieka atidarytas). ¦ Noklikšķini, lai pievienotu tekstam (logs paliek atvērts). ¦ Klõpsa, et lisada see teksti (aken jääb lahti).
+Coche deux versions (ou « Maintenant ») pour les comparer. ¦ Pažymėk dvi versijas (arba „Dabar“), kad jas palygintum. ¦ Atzīmē divas versijas (vai „Tagad“), lai tās salīdzinātu. ¦ Märgi võrdlemiseks kaks versiooni (või „Praegu“).
+Coller depuis Word ou le web ¦ Įklijuoti iš Word ar interneto ¦ Ielīmēt no Word vai tīmekļa ¦ Kleebi Wordist või veebist
+Coller sans la mise en forme ¦ Įklijuoti be formatavimo ¦ Ielīmēt bez formatējuma ¦ Kleebi ilma vorminguta
+Colonne ajoutée ¦ Stulpelis pridėtas ¦ Kolonna pievienota ¦ Veerg lisatud
+Colonne supprimée ¦ Stulpelis ištrintas ¦ Kolonna dzēsta ¦ Veerg kustutatud
+Commande inconnue : {cmd} ¦ Nežinoma komanda: {cmd} ¦ Nezināma komanda: {cmd} ¦ Tundmatu käsk: {cmd}
+Commencer sur une nouvelle page ¦ Pradėti naujame puslapyje ¦ Sākt jaunā lapā ¦ Alusta uuelt lehelt
+Commentaire supprimé ¦ Komentaras ištrintas ¦ Komentārs dzēsts ¦ Kommentaar kustutatud
+Commentaires ¦ Komentarai ¦ Komentāri ¦ Kommentaarid
+Commentaires (panneau) ¦ Komentarai (skydelis) ¦ Komentāri (panelis) ¦ Kommentaarid (paneel)
+Commenter ¦ Komentuoti ¦ Komentēt ¦ Kommenteeri
+Compte rendu de visite ¦ Apsilankymo ataskaita ¦ Apmeklējuma pārskats ¦ Külastuse aruanne
+Conjoint ¦ Sutuoktinis ¦ Laulātais ¦ Abikaasa
+Copie enregistrée : « {name} ». ¦ Kopija išsaugota: „{name}“. ¦ Kopija saglabāta: „{name}“. ¦ Koopia salvestatud: „{name}“.
+Copie impossible : {error} ¦ Kopijuoti nepavyko: {error} ¦ Kopēšana neizdevās: {error} ¦ Kopeerimine ei õnnestunud: {error}
+Copie rangée dans les médias ({format}). ¦ Kopija išsaugota medijoje ({format}). ¦ Kopija saglabāta medijos ({format}). ¦ Koopia pandi meediasse ({format}).
+Copie « {name} » enregistrée. ¦ Kopija „{name}“ išsaugota. ¦ Kopija „{name}“ saglabāta. ¦ Koopia „{name}“ salvestatud.
+Corriger ¦ Taisyti ¦ Labot ¦ Paranda
+Couleur du texte ¦ Teksto spalva ¦ Teksta krāsa ¦ Teksti värv
+Couleur du texte… ¦ Teksto spalva… ¦ Teksta krāsa… ¦ Teksti värv…
+Couleur et surlignage (C2) ¦ Spalva ir paryškinimas (C2) ¦ Krāsa un izcēlums (C2) ¦ Värv ja esiletõst (C2)
+Couper ici ¦ Perkelti čia ¦ Pārnest šeit ¦ Murra siit
+Créer le lien ¦ Sukurti nuorodą ¦ Izveidot saiti ¦ Loo link
+Créer le style ¦ Sukurti stilių ¦ Izveidot stilu ¦ Loo stiil
+Créer le tableau ¦ Sukurti lentelę ¦ Izveidot tabulu ¦ Loo tabel
+Créer les copies ¦ Sukurti kopijas ¦ Izveidot kopijas ¦ Loo koopiad
+Cyrillique ¦ Kirilica ¦ Kirilica ¦ Kirillitsa
+Dans la sélection : mots ¦ Pažymėjime: žodžiai ¦ Atlasē: vārdi ¦ Valikus: sõnad
+Dans le texte, entre parenthèses ¦ Tekste, skliausteliuose ¦ Tekstā, iekavās ¦ Tekstis, sulgudes
+Date (mise à jour à chaque ouverture) ¦ Data (atnaujinama kaskart atidarius) ¦ Datums (atjaunināts katrā atvēršanas reizē) ¦ Kuupäev (uueneb iga avamisega)
+Date du jour ¦ Šiandienos data ¦ Šodienas datums ¦ Tänane kuupäev
+Date du mariage ¦ Santuokos data ¦ Laulības datums ¦ Abiellumise kuupäev
+Demande d’acte (remplie avec une fiche) ¦ Dokumento užklausa (užpildyta pagal kortelę) ¦ Dokumenta pieprasījums (aizpildīts no kartītes) ¦ Dokumendi taotlus (täidetud kaardi põhjal)
+Demande d’acte d’état civil ¦ Civilinės būklės dokumento užklausa ¦ Civilstāvokļa akta dokumenta pieprasījums ¦ Perekonnaseisudokumendi taotlus
+Design ¦ Dizainas ¦ Dizains ¦ Kujundus
+Diminuer le retrait ¦ Sumažinti įtrauką ¦ Samazināt atkāpi ¦ Vähenda taanet
+Document ¦ Dokumentas ¦ Dokuments ¦ Dokument
+Document importé ¦ Dokumentas importuotas ¦ Dokuments importēts ¦ Dokument imporditud
+Document modifié ailleurs ¦ Dokumentas pakeistas kitur ¦ Dokuments mainīts citur ¦ Dokumenti muudeti mujal
+Document « {name} » importé ({words}) ¦ Dokumentas „{name}“ importuotas ({words}) ¦ Dokuments „{name}“ importēts ({words}) ¦ Dokument „{name}“ imporditud ({words})
+Donne un nom au style. ¦ Suteik stiliui pavadinimą. ¦ Piešķir stilam nosaukumu. ¦ Anna stiilile nimi.
+Double (2) ¦ Dvigubas (2) ¦ Dubults (2) ¦ Topelt (2)
+Double-clic : modifier le pied de page ¦ Dukart spustelėk: redaguoti poraštę ¦ Dubultklikšķis: rediģēt kājeni ¦ Topeltklõps: muuda jalust
+Double-clic : modifier l’en-tête ¦ Dukart spustelėk: redaguoti antraštę ¦ Dubultklikšķis: rediģēt galveni ¦ Topeltklõps: muuda päist
+Double-clic : renommer · clic droit : plus ¦ Dukart spustelėk: pervadinti · dešinysis spustelėjimas: daugiau ¦ Dubultklikšķis: pārdēvēt · labais klikšķis: vairāk ¦ Topeltklõps: nimeta ümber · paremklõps: veel
+Droite ¦ Dešinė ¦ Labā ¦ Parem
+Déplacer à droite ¦ Perkelti į dešinę ¦ Pārvietot pa labi ¦ Liiguta paremale
+Déplacer à gauche ¦ Perkelti į kairę ¦ Pārvietot pa kreisi ¦ Liiguta vasakule
+D’après le paragraphe du curseur : change ce que tu veux, puis il sera proposé dans la liste des styles. ¦ Pagal pastraipą, kurioje yra žymeklis: pakeisk, ką nori, tada jis bus siūlomas stilių sąraše. ¦ Pēc rindkopas, kurā ir kursors: maini, ko vēlies, tad tas tiks piedāvāts stilu sarakstā. ¦ Kursoriga lõigu põhjal: muuda, mida tahad, siis pakutakse seda stiilide loendis.
+Effacer la mise en forme ¦ Išvalyti formatavimą ¦ Notīrīt formatējumu ¦ Eemalda vorming
+Elle sert à l’orthographe (mots soulignés en rouge, corrections au clic droit) et à la lecture à voix haute. ¦ Ji naudojama rašybai (raudonai pabraukti žodžiai, taisymai dešiniuoju spustelėjimu) ir skaitymui balsu. ¦ Tā tiek izmantota pareizrakstībai (sarkani pasvītroti vārdi, labojumi ar labo klikšķi) un lasīšanai balsī. ¦ Seda kasutatakse õigekirja jaoks (punaselt allakriipsutatud sõnad, parandused paremklõpsuga) ja ettelugemiseks.
+En note de bas de page ¦ Kaip išnaša puslapio apačioje ¦ Kā zemsvītras piezīme ¦ Allmärkusena
+En note de fin ¦ Kaip galinė išnaša ¦ Kā beigu piezīme ¦ Lõpumärkusena
+En-tête (en haut de chaque page) ¦ Antraštė (kiekvieno puslapio viršuje) ¦ Galvene (katras lapas augšā) ¦ Päis (iga lehekülje ülaosas)
+En-tête de la première page ¦ Pirmojo puslapio antraštė ¦ Pirmās lapas galvene ¦ Esimese lehekülje päis
+En-tête et pied de page ¦ Antraštė ir poraštė ¦ Galvene un kājene ¦ Päis ja jalus
+En-tête et pied de page… ¦ Antraštė ir poraštė… ¦ Galvene un kājene… ¦ Päis ja jalus…
+En-tête et pied… ¦ Antraštė ir poraštė… ¦ Galvene un kājene… ¦ Päis ja jalus…
+Enregistre d’abord le document (💾) : ses versions seront gardées avec lui. ¦ Pirmiausia išsaugok dokumentą (💾): jo versijos bus saugomos kartu su juo. ¦ Vispirms saglabā dokumentu (💾): tā versijas tiks glabātas kopā ar to. ¦ Salvesta kõigepealt dokument (💾): selle versioone hoitakse koos sellega.
+Enregistrer comme modèle ¦ Išsaugoti kaip šabloną ¦ Saglabāt kā veidni ¦ Salvesta mallina
+Enregistrer comme modèle… ¦ Išsaugoti kaip šabloną… ¦ Saglabāt kā veidni… ¦ Salvesta mallina…
+Enregistrer comme nouvelle version ¦ Išsaugoti kaip naują versiją ¦ Saglabāt kā jaunu versiju ¦ Salvesta uue versioonina
+Enregistrer tout seul ¦ Išsaugoti automatiškai ¦ Saglabāt automātiski ¦ Salvesta automaatselt
+Enregistrer une copie ¦ Išsaugoti kopiją ¦ Saglabāt kopiju ¦ Salvesta koopia
+Envoi des images indisponible. ¦ Vaizdų siuntimas negalimas. ¦ Attēlu augšupielāde nav pieejama. ¦ Piltide üleslaadimine pole saadaval.
+Envoyer ¦ Siųsti ¦ Sūtīt ¦ Saada
+Envoyer vers la mise en page… ¦ Siųsti į maketavimą… ¦ Sūtīt uz maketu… ¦ Saada küljendusse…
+Espace après ¦ Tarpas po ¦ Atstarpe pēc ¦ Vahe pärast
+Espace après le paragraphe ¦ Tarpas po pastraipos ¦ Atstarpe pēc rindkopas ¦ Vahe pärast lõiku
+Espace avant ¦ Tarpas prieš ¦ Atstarpe pirms ¦ Vahe enne
+Espace avant le paragraphe ¦ Tarpas prieš pastraipą ¦ Atstarpe pirms rindkopas ¦ Vahe enne lõiku
+Espace fine avant ; ! ? ¦ Siauras tarpas prieš ; ! ? (prancūziška taisyklė) ¦ Šaura atstarpe pirms ; ! ? (franču likums) ¦ Kitsas tühik enne ; ! ? (prantsuse reegel)
+Espace insécable avant les deux-points ¦ Nelaužomas tarpas prieš dvitaškį (prancūziška taisyklė) ¦ Nedalāmā atstarpe pirms kola (franču likums) ¦ Mittekatkev tühik enne koolonit (prantsuse reegel)
+Espaces en trop ¦ Pertekliniai tarpai ¦ Liekas atstarpes ¦ Liigsed tühikud
+Espagnol ¦ Ispanų ¦ Spāņu ¦ Hispaania
+Et {n} de plus (« Tout corriger » les prend aussi). ¦ Ir dar {n} („Taisyti viską“ ištaiso ir juos). ¦ Un vēl {n} („Labot visu“ izlabo arī tos). ¦ Ja veel {n} („Paranda kõik“ parandab ka need).
+Exporté : {name} ¦ Eksportuota: {name} ¦ Eksportēts: {name} ¦ Eksporditud: {name}
+Exposant ¦ Viršutinis indeksas ¦ Augšraksts ¦ Ülaindeks
+Expressions simples ¦ Paprastos išraiškos ¦ Vienkārši šabloni ¦ Lihtsad mustrid
+FORMAT ¦ FORMATAS ¦ FORMĀTS ¦ VORMING
+Famille et vie ¦ Šeima ir gyvenimas ¦ Ģimene un dzīve ¦ Perekond ja elu
+Feuille trop grande pour un document (plus de 20 000 cases) : choisis une plage plus petite dans le Tableur. ¦ Lapas per didelis dokumentui (daugiau nei 20 000 langelių): Skaičiuoklėje pasirink mažesnį intervalą. ¦ Lapa ir pārāk liela dokumentam (vairāk nekā 20 000 šūnu): izvēlies mazāku diapazonu Izklājlapā. ¦ Leht on dokumendi jaoks liiga suur (üle 20 000 lahtri): vali Tabelarvutuses väiksem vahemik.
+Fiche d’identité d’un ancêtre (remplie) ¦ Protėvio asmens kortelė (užpildyta) ¦ Senča identitātes kartīte (aizpildīta) ¦ Esivanema isikukaart (täidetud)
+Fiche ouverte derrière le document (ferme-le ou réduis-le pour la voir). ¦ Kortelė atidaryta už dokumento (uždaryk arba sumažink jį, kad ją pamatytum). ¦ Kartīte atvērta aiz dokumenta (aizver vai minimizē to, lai to redzētu). ¦ Kaart avati dokumendi taga (selle nägemiseks sulge või minimeeri dokument).
+Filigrane ¦ Vandenženklis ¦ Ūdenszīme ¦ Vesimärk
+Garder avec le paragraphe suivant ¦ Laikyti su kita pastraipa ¦ Paturēt kopā ar nākamo rindkopu ¦ Hoia järgmise lõiguga koos
+Garder avec le suivant ¦ Laikyti su kita ¦ Paturēt kopā ar nākamo ¦ Hoia järgmisega koos
+Garder la mise en forme (nettoyée) ¦ Išlaikyti formatavimą (išvalytą) ¦ Saglabāt formatējumu (notīrītu) ¦ Säilita vorming (puhastatud)
+Garder ma version ¦ Palikti mano versiją ¦ Paturēt manu versiju ¦ Jäta minu versioon
+Gauche ¦ Kairė ¦ Kreisā ¦ Vasak
+Glisse la souris d’une case à l’autre pour en choisir plusieurs, puis « Fusionner ». ¦ Vilk pelę nuo vieno langelio iki kito, kad pažymėtum kelis, tada „Sujungti“. ¦ Velc peli no vienas šūnas uz citu, lai atlasītu vairākas, tad „Apvienot“. ¦ Mitme valimiseks lohista hiirt ühest lahtrist teise, siis „Ühenda“.
+Gras ¦ Pusjuodis ¦ Treknraksts ¦ Paks
+Gras, italique… ¦ Pusjuodis, kursyvas… ¦ Treknraksts, slīpraksts… ¦ Paks, kaldkiri…
+Grec ¦ Graikų ¦ Grieķu ¦ Kreeka
+Groupe de caractères ¦ Simbolių grupė ¦ Rakstzīmju grupa ¦ Märgirühm
+Guillemets français « » ¦ Prancūziškos kabutės « » ¦ Franču pēdiņas « » ¦ Prantsuse jutumärgid « »
+Haut ¦ Viršus ¦ Augša ¦ Üleval
+Hauteur ¦ Aukštis ¦ Augstums ¦ Kõrgus
+Histoire d’une maison ou d’un village ¦ Namo ar kaimo istorija ¦ Mājas vai ciema vēsture ¦ Maja või küla ajalugu
+IMAGE ¦ VAIZDAS ¦ ATTĒLS ¦ PILT
+Image ¦ Vaizdas ¦ Attēls ¦ Pilt
+Image ajoutée (et rangée dans les médias). ¦ Vaizdas pridėtas (ir išsaugotas medijoje). ¦ Attēls pievienots (un saglabāts medijos). ¦ Pilt lisatud (ja pandud meediasse).
+Image choisie : tire un coin pour la taille, clic droit pour l’habillage, ⌫ pour la supprimer. ¦ Vaizdas pasirinktas: vilk kampą dydžiui keisti, dešinysis spustelėjimas – teksto apgaubimas, ⌫ – ištrinti. ¦ Attēls atlasīts: velc stūri, lai mainītu izmēru, labais klikšķis – teksta aplaušana, ⌫ – dzēst. ¦ Pilt valitud: suuruse muutmiseks lohista nurka, paremklõps – teksti mähkimine, ⌫ kustutab.
+Image posée : clic pour la taille, clic droit pour l’habillage (carré, haut et bas) et la légende. ¦ Vaizdas padėtas: spustelėk dydžiui, dešinysis spustelėjimas – apgaubimas (kvadratas, viršus ir apačia) ir antraštė. ¦ Attēls novietots: klikšķis – izmērs, labais klikšķis – aplaušana (kvadrāts, augša un apakša) un paraksts. ¦ Pilt paigutatud: klõps – suurus, paremklõps – mähkimine (ruut, üleval ja all) ja pealdis.
+Image rangée dans les médias… ¦ Vaizdas išsaugomas medijoje… ¦ Attēls tiek saglabāts medijos… ¦ Pildi panemine meediasse…
+Image sans description (lue à voix haute aux personnes qui ne voient pas) ¦ Vaizdas be aprašymo (perskaitomas balsu neregintiems žmonėms) ¦ Attēls bez apraksta (tiek nolasīts balsī cilvēkiem, kuri neredz) ¦ Kirjelduseta pilt (loetakse ette inimestele, kes ei näe)
+Image supprimée ¦ Vaizdas ištrintas ¦ Attēls dzēsts ¦ Pilt kustutatud
+Impossible d’enregistrer : {error} ¦ Nepavyko išsaugoti: {error} ¦ Neizdevās saglabāt: {error} ¦ Salvestamine ei õnnestunud: {error}
+Indice ¦ Apatinis indeksas ¦ Apakšraksts ¦ Alaindeks
+Insérer la fiche d’identité ¦ Įterpti asmens kortelę ¦ Ievietot identitātes kartīti ¦ Lisa isikukaart
+Interligne ¦ Eilučių tarpai ¦ Rindstarpa ¦ Reavahe
+Interligne et espacement ¦ Eilučių ir pastraipų tarpai ¦ Rindstarpa un atstarpes ¦ Rea- ja lõiguvahe
+Interligne {n} ¦ Eilučių tarpai {n} ¦ Rindstarpa {n} ¦ Reavahe {n}
+Italien ¦ Italų ¦ Itāļu ¦ Itaalia
+Italique ¦ Kursyvas ¦ Slīpraksts ¦ Kaldkiri
+Jeu de styles ¦ Stilių rinkinys ¦ Stilu kopa ¦ Stiilikomplekt
+Jeu de styles des nouveaux documents ¦ Naujų dokumentų stilių rinkinys ¦ Jauno dokumentu stilu kopa ¦ Uute dokumentide stiilikomplekt
+Jeu de styles « {name} » ¦ Stilių rinkinys „{name}“ ¦ Stilu kopa „{name}“ ¦ Stiilikomplekt „{name}“
+Jeu de styles… ¦ Stilių rinkinys… ¦ Stilu kopa… ¦ Stiilikomplekt…
+Justifier ¦ Lygiuoti abipusiai ¦ Līdzināt abās pusēs ¦ Rööpjoonda
+Justifié ¦ Lygiuota abipusiai ¦ Līdzināts abās pusēs ¦ Rööpjoondatud
+La bibliographie (Insertion → 📚) reprend toute seule les sources citées. ¦ Bibliografija (Įterpimas → 📚) pati surenka cituojamus šaltinius. ¦ Bibliogrāfija (Ievietošana → 📚) pati apkopo citētos avotus. ¦ Bibliograafia (Lisamine → 📚) kogub viidatud allikad ise kokku.
+La biographie de qui ? ¦ Kieno biografija? ¦ Kura biogrāfija? ¦ Kelle elulugu?
+La demande d’acte pour qui ? ¦ Dokumento užklausa kam? ¦ Dokumenta pieprasījums kam? ¦ Dokumendi taotlus kelle kohta?
+La fenêtre des images n’est pas chargée. ¦ Vaizdų langas neįkeltas. ¦ Attēlu logs nav ielādēts. ¦ Piltide aken pole laaditud.
+La fenêtre des versions n’est pas chargée. ¦ Versijų langas neįkeltas. ¦ Versiju logs nav ielādēts. ¦ Versioonide aken pole laaditud.
+La fiche de qui ? ¦ Kieno kortelė? ¦ Kura kartīte? ¦ Kelle kaart?
+La lecture à voix haute n’existe pas dans ce navigateur. ¦ Šioje naršyklėje skaitymo balsu nėra. ¦ Šajā pārlūkprogrammā nav lasīšanas balsī. ¦ Selles brauseris ettelugemist pole.
+La naissance : date et lieu ¦ Gimimas: data ir vieta ¦ Dzimšana: datums un vieta ¦ Sünd: kuupäev ja koht
+La première ligne est répétée en haut de chaque page ¦ Pirmoji eilutė kartojama kiekvieno puslapio viršuje ¦ Pirmā rinda tiek atkārtota katras lapas augšā ¦ Esimest rida korratakse iga lehekülje ülaosas
+La suite du document commence sur une nouvelle page, avec son propre format : par exemple un grand tableau ou un arbre en paysage, puis on revient en portrait. ¦ Likusi dokumento dalis prasideda naujame puslapyje su savo formatu: pavyzdžiui, didelė lentelė ar medis gulsčiai, paskui grįžtama prie stačio. ¦ Dokumenta turpinājums sākas jaunā lapā ar savu formātu: piemēram, liela tabula vai koks ainavorientācijā, pēc tam atpakaļ portretorientācijā. ¦ Dokumendi ülejäänud osa algab uuelt lehelt oma vorminguga: näiteks suur tabel või puu rõhtpaigutuses, siis jälle tagasi püstpaigutusse.
+La touche Tab avance jusqu’au prochain arrêt. Dans un tableau, Tab passe à la case suivante ; dans une liste, elle décale d’un niveau. ¦ Klavišas Tab perkelia iki kitos tabuliacijos žymos. Lentelėje Tab pereina į kitą langelį; sąraše perstumia vienu lygiu. ¦ Taustiņš Tab pārvieto līdz nākamajai tabulēšanas pieturai. Tabulā Tab pāriet uz nākamo šūnu; sarakstā – pārbīda par vienu līmeni. ¦ Tab-klahv viib järgmise tabelduskohani. Tabelis viib Tab järgmisse lahtrisse; loendis nihutab ühe taseme võrra.
+La vérification n’est pas chargée. ¦ Tikrinimas neįkeltas. ¦ Pārbaude nav ielādēta. ¦ Kontroll pole laaditud.
+Langue ¦ Kalba ¦ Valoda ¦ Keel
+Langue des nouveaux documents ¦ Naujų dokumentų kalba ¦ Jauno dokumentu valoda ¦ Uute dokumentide keel
+Langue du document (orthographe, lecture à voix haute) ¦ Dokumento kalba (rašyba, skaitymas balsu) ¦ Dokumenta valoda (pareizrakstība, lasīšana balsī) ¦ Dokumendi keel (õigekiri, ettelugemine)
+Largeur ¦ Plotis ¦ Platums ¦ Laius
+Latin ¦ Lotynų ¦ Latīņu ¦ Ladina
+Le décès : date et lieu ¦ Mirtis: data ir vieta ¦ Nāve: datums un vieta ¦ Surm: kuupäev ja koht
+Le livre dont reprendre les styles ¦ Knyga, iš kurios imti stilius ¦ Grāmata, no kuras ņemt stilus ¦ Raamat, millest stiilid võtta
+Le mot entier seulement ¦ Tik visas žodis ¦ Tikai vesels vārds ¦ Ainult terve sõna
+Le mot tel qu’il apparaîtra dans l’index : ¦ Žodis taip, kaip jis bus rodomas rodyklėje: ¦ Vārds, kā tas parādīsies rādītājā: ¦ Sõna nii, nagu see registris ilmub:
+Le moteur du tableur n’est pas chargé. ¦ Skaičiuoklės variklis neįkeltas. ¦ Izklājlapas dzinējs nav ielādēts. ¦ Tabelarvutuse mootor pole laaditud.
+Le nom (lien vers la fiche) ¦ Vardas (nuoroda į kortelę) ¦ Vārds (saite uz kartīti) ¦ Nimi (link kaardile)
+Le nom de la copie : ¦ Kopijos pavadinimas: ¦ Kopijas nosaukums: ¦ Koopia nimi:
+Le nom du modèle (le texte reste : vide-le avant si tu veux un modèle vierge) : ¦ Šablono pavadinimas (tekstas lieka: jei nori tuščio šablono, pirmiausia jį ištuštink): ¦ Veidnes nosaukums (teksts paliek: ja vēlies tukšu veidni, vispirms to iztukšo): ¦ Malli nimi (tekst jääb alles: kui tahad tühja malli, tühjenda see enne):
+Le nom du nouvel onglet ¦ Naujos kortelės pavadinimas ¦ Jaunās cilnes nosaukums ¦ Uue vahekaardi nimi
+Le nom et les années (1850 – 1920) ¦ Vardas ir metai (1850 – 1920) ¦ Vārds un gadi (1850 – 1920) ¦ Nimi ja aastad (1850 – 1920)
+Le nom, la naissance et le décès ¦ Vardas, gimimas ir mirtis ¦ Vārds, dzimšana un nāve ¦ Nimi, sünd ja surm
+Le petit arbre de qui ? ¦ Kieno mažas medis? ¦ Kura mazais koks? ¦ Kelle väike puu?
+Le récit de qui ? ¦ Kieno istorija? ¦ Kura stāsts? ¦ Kelle lugu?
+Le texte devient des pages d’un livre (Mise en page) : les titres 1 deviennent des chapitres, les images des pages d’images avec leur légende, les notes une partie « Notes » à la fin. Ton document reste tel quel ici. ¦ Tekstas tampa knygos puslapiais (Maketavimas): 1 lygio antraštės tampa skyriais, vaizdai – vaizdų puslapiais su antraštėmis, pastabos – dalimi „Pastabos“ pabaigoje. Tavo dokumentas čia lieka toks, koks yra. ¦ Teksts kļūst par grāmatas lapām (Makets): 1. līmeņa virsraksti kļūst par nodaļām, attēli – par attēlu lapām ar parakstiem, piezīmes – par daļu „Piezīmes“ beigās. Tavs dokuments šeit paliek, kā ir. ¦ Tekstist saavad raamatu leheküljed (Küljendus): 1. taseme pealkirjad muutuvad peatükkideks, pildid pealdistega pildilehtedeks, märkmed osaks „Märkmed“ lõpus. Sinu dokument jääb siin samaks.
+Le texte seul ¦ Tik tekstas ¦ Tikai teksts ¦ Ainult tekst
+Le tri ne marche pas avec des cases fusionnées : sépare-les d’abord. ¦ Rūšiavimas neveikia su sujungtais langeliais: pirmiausia juos atskirk. ¦ Kārtošana nedarbojas ar apvienotām šūnām: vispirms tās sadali. ¦ Sortimine ei tööta ühendatud lahtritega: poolita need kõigepealt.
+Lecture arrêtée. ¦ Skaitymas sustabdytas. ¦ Lasīšana apturēta. ¦ Ettelugemine peatatud.
+Legal US ¦ US Legal ¦ US Legal ¦ US Legal
+Les champs « » prennent les valeurs d’une fiche : Fichier → « 👤 Remplir avec une fiche… », ou une copie par personne avec Outils → « 📨 Publipostage… ». ¦ Laukai „ “ gauna kortelės reikšmes: Failas → „👤 Užpildyti pagal kortelę…“ arba po kopiją kiekvienam asmeniui per Įrankiai → „📨 Laiškų suliejimas…“. ¦ Lauki „ “ saņem kartītes vērtības: Fails → „👤 Aizpildīt no kartītes…“ vai pa kopijai katrai personai ar Rīki → „📨 Vēstuļu sapludināšana…“. ¦ Väljad „ “ saavad väärtused kaardilt: Fail → „👤 Täida kaardi põhjal…“ või iga isiku jaoks oma koopia: Tööriistad → „📨 Kirjakooste…“.
+Les changements faits depuis le dernier enregistrement seront perdus. ¦ Pakeitimai, padaryti po paskutinio išsaugojimo, bus prarasti. ¦ Izmaiņas kopš pēdējās saglabāšanas tiks zaudētas. ¦ Pärast viimast salvestamist tehtud muudatused lähevad kaotsi.
+Les dates et les lieux écrits à côté d’un nom de la base sont comparés à sa fiche (naissance, baptême, mariage, décès, inhumation, âges, numéros Sosa). Rien n’est changé tout seul. ¦ Datos ir vietos, parašytos šalia vardo iš bazės, lyginamos su jo kortele (gimimas, krikštas, santuoka, mirtis, laidojimas, amžius, Sosa numeriai). Niekas nekeičiama savaime. ¦ Datumi un vietas, kas uzrakstītas blakus vārdam no datubāzes, tiek salīdzinātas ar tā kartīti (dzimšana, kristības, laulība, nāve, apbedīšana, vecumi, Sosa numuri). Nekas netiek mainīts automātiski. ¦ Andmebaasi nime kõrvale kirjutatud kuupäevi ja kohti võrreldakse tema kaardiga (sünd, ristimine, abielu, surm, matmine, vanused, Sosa numbrid). Midagi ei muudeta ise.
+Les macros du fichier sont ignorées (elles ne sont jamais lancées). ¦ Failo makrokomandos ignoruojamos (jos niekada nepaleidžiamos). ¦ Faila makrokomandas tiek ignorētas (tās nekad netiek palaistas). ¦ Faili makrosid eiratakse (neid ei käivitata kunagi).
+Les modifications ne sont plus suivies. ¦ Pakeitimai nebesekami. ¦ Izmaiņas vairs netiek izsekotas. ¦ Muudatusi enam ei jälgita.
+Les modifications sont suivies ¦ Pakeitimai sekami ¦ Izmaiņas tiek izsekotas ¦ Muudatusi jälgitakse
+Les mots mal écrits sont soulignés en rouge (clic droit pour les corrections). ¦ Klaidingai parašyti žodžiai pabraukiami raudonai (dešinysis spustelėjimas – taisymai). ¦ Nepareizi uzrakstītie vārdi ir pasvītroti sarkanā krāsā (labais klikšķis – labojumi). ¦ Valesti kirjutatud sõnad on punaselt alla kriipsutatud (paremklõps – parandused).
+Les paragraphes choisis se partagent en colonnes équilibrées (comme dans un journal). ¦ Pažymėtos pastraipos padalijamos į subalansuotus stulpelius (kaip laikraštyje). ¦ Atlasītās rindkopas tiek sadalītas līdzsvarotās kolonnās (kā avīzē). ¦ Valitud lõigud jagatakse tasakaalustatud veergudeks (nagu ajalehes).
+Les personnes du publipostage ¦ Laiškų suliejimo asmenys ¦ Vēstuļu sapludināšanas personas ¦ Kirjakooste isikud
+Les raccourcis à soi ne sont pas chargés. ¦ Tavo spartieji klavišai neįkelti. ¦ Tavi īsinājumtaustiņi nav ielādēti. ¦ Sinu kiirklahvid pole laaditud.
+Les titres et le texte changent ensemble de police et de couleur ; tes propres styles restent. ¦ Antraštės ir tekstas kartu keičia šriftą ir spalvą; tavo stiliai lieka. ¦ Virsraksti un teksts kopā maina fontu un krāsu; tavi stili paliek. ¦ Pealkirjad ja tekst muudavad fonti ja värvi koos; sinu stiilid jäävad.
+Lettre US ¦ US Letter ¦ US Letter ¦ US Letter
+Lettre aux archives ¦ Laiškas archyvui ¦ Vēstule arhīvam ¦ Kiri arhiivile
+Lettre aux archives, demande d’acte, récit d’un ancêtre, compte rendu de visite, rapport de recherche… ¦ Laiškas archyvui, dokumento užklausa, protėvio istorija, apsilankymo ataskaita, tyrimo ataskaita… ¦ Vēstule arhīvam, dokumenta pieprasījums, senča stāsts, apmeklējuma pārskats, pētījuma ziņojums… ¦ Kiri arhiivile, dokumendi taotlus, esivanema lugu, külastuse aruanne, uurimisaruanne…
+Lettre à la famille ¦ Laiškas šeimai ¦ Vēstule ģimenei ¦ Kiri perele
+Lettres accentuées ¦ Raidės su diakritikais ¦ Burti ar diakritiskām zīmēm ¦ Diakriitikutega tähed
+Lettres et abréviations anciennes ¦ Senosios raidės ir santrumpos ¦ Senie burti un saīsinājumi ¦ Vanad tähed ja lühendid
+Lettrine ¦ Inicialas ¦ Iniciālis ¦ Suur algustäht
+LibreOffice, OpenOffice ¦ LibreOffice, OpenOffice ¦ LibreOffice, OpenOffice ¦ LibreOffice, OpenOffice
+Lien « {text} » : écris plutôt où il mène ¦ Nuoroda „{text}“: verčiau parašyk, kur ji veda ¦ Saite „{text}“: labāk uzraksti, kurp tā ved ¦ Link „{text}“: kirjuta pigem, kuhu see viib
+Lieu du mariage ¦ Santuokos vieta ¦ Laulības vieta ¦ Abiellumise koht
+Ligne ajoutée ¦ Eilutė pridėta ¦ Rinda pievienota ¦ Rida lisatud
+Ligne au-dessus ¦ Eilutė virš ¦ Rinda virs ¦ Rida üles
+Ligne d’en-tête (répétée sur chaque page) ¦ Antraštės eilutė (kartojama kiekviename puslapyje) ¦ Galvenes rinda (atkārtota katrā lapā) ¦ Päiserida (korratakse igal leheküljel)
+Ligne en dessous ¦ Eilutė žemiau ¦ Rinda zemāk ¦ Rida alla
+Ligne supprimée ¦ Eilutė ištrinta ¦ Rinda dzēsta ¦ Rida kustutatud
+Lire à voix haute ¦ Skaityti balsu ¦ Lasīt balsī ¦ Loe ette
+Liste numérotée ¦ Numeruotas sąrašas ¦ Numurēts saraksts ¦ Nummerdatud loend
+Liste à puces ¦ Sąrašas su ženkleliais ¦ Aizzīmju saraksts ¦ Täpploend
+Livre (15,6 × 23,4 cm) ¦ Knyga (15,6 × 23,4 cm) ¦ Grāmata (15,6 × 23,4 cm) ¦ Raamat (15,6 × 23,4 cm)
+Livre US (6 × 9 in) ¦ JAV knyga (6 × 9 in) ¦ ASV grāmata (6 × 9 in) ¦ USA raamat (6 × 9 in)
+Livre ancien ¦ Sena knyga ¦ Veca grāmata ¦ Vana raamat
+Louise Borie, née en 1850 ¦ Louise Borie, gimusi 1850 m. ¦ Louise Borie, dzimusi 1850. gadā ¦ Louise Borie, sündinud aastal 1850
+L’onglet « {name} » et son texte seront supprimés. ¦ Kortelė „{name}“ ir jos tekstas bus ištrinti. ¦ Cilne „{name}“ un tās teksts tiks dzēsti. ¦ Vahekaart „{name}“ ja selle tekst kustutatakse.
+MAJUSCULES ¦ DIDŽIOSIOS RAIDĖS ¦ LIELIE BURTI ¦ SUURTÄHED
+Majuscule en début de phrase ¦ Didžioji raidė sakinio pradžioje ¦ Lielais burts teikuma sākumā ¦ Suur algustäht lause alguses
+Majuscules et minuscules comptent ¦ Skirti didžiąsias ir mažąsias raides ¦ Reģistrjutīgs ¦ Tõstutundlik
+Marquer ¦ Pažymėti ¦ Atzīmēt ¦ Märgi
+Marquer pour l’index ¦ Pažymėti rodyklei ¦ Atzīmēt rādītājam ¦ Märgi registri jaoks
+Marques de mise en forme ¦ Formatavimo ženklai ¦ Formatējuma zīmes ¦ Vormingumärgid
+Marques de mise en forme ¶ ¦ Formatavimo ženklai ¶ ¦ Formatējuma zīmes ¶ ¦ Vormingumärgid ¶
+Mathématiques ¦ Matematika ¦ Matemātika ¦ Matemaatika
+Mes modèles ¦ Mano šablonai ¦ Manas veidnes ¦ Minu mallid
+Mettre à jour les champs (personnes, dates) ¦ Atnaujinti laukus (asmenys, datos) ¦ Atjaunināt laukus (personas, datumi) ¦ Uuenda välju (isikud, kuupäevad)
+Mise en forme ¦ Formatavimas ¦ Formatējums ¦ Vormindus
+Mise en forme (panneau de droite) ¦ Formatavimas (dešinysis skydelis) ¦ Formatējums (labais panelis) ¦ Vormindus (parem paneel)
+Mise en évidence ¦ Stiprus paryškinimas ¦ Izcēlums ¦ Tugev rõhutus
+Moderne ¦ Modernus ¦ Moderns ¦ Moodne
+Modification acceptée ¦ Pakeitimas priimtas ¦ Izmaiņa pieņemta ¦ Muudatus vastu võetud
+Modification précédente ¦ Ankstesnis pakeitimas ¦ Iepriekšējā izmaiņa ¦ Eelmine muudatus
+Modification refusée ¦ Pakeitimas atmestas ¦ Izmaiņa noraidīta ¦ Muudatus tagasi lükatud
+Modification suivante ¦ Kitas pakeitimas ¦ Nākamā izmaiņa ¦ Järgmine muudatus
+Modifications suivies ¦ Sekami pakeitimai ¦ Izsekotās izmaiņas ¦ Jälgitud muudatused
+Modifier le lien… ¦ Redaguoti nuorodą… ¦ Rediģēt saiti… ¦ Muuda linki…
+Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles). ¦ Šablonas „{name}“ išsaugotas (Pradėti nuo šablono → Mano šablonai). ¦ Veidne „{name}“ saglabāta (Sākt no veidnes → Manas veidnes). ¦ Mall „{name}“ salvestatud (Alusta mallist → Minu mallid).
+Moi ¦ Aš ¦ Es ¦ Mina
+Mon document ¦ Mano dokumentas ¦ Mans dokuments ¦ Minu dokument
+Mon nom (pour le suivi des modifications et les commentaires) ¦ Mano vardas (pakeitimų sekimui ir komentarams) ¦ Mans vārds (izmaiņu izsekošanai un komentāriem) ¦ Minu nimi (muudatuste jälgimiseks ja kommentaarideks)
+Monnaies et chiffres ¦ Valiutos ir skaičiai ¦ Valūtas un skaitļi ¦ Valuutad ja numbrid
+Montrer dans le texte ¦ Rodyti tekste ¦ Rādīt tekstā ¦ Näita tekstis
+Montrer les marques de mise en forme ¶ ¦ Rodyti formatavimo ženklus ¶ ¦ Rādīt formatējuma zīmes ¶ ¦ Näita vormingumärke ¶
+Montrer les modifications ¦ Rodyti pakeitimus ¦ Rādīt izmaiņas ¦ Näita muudatusi
+Montrer les modifications… ¦ Rodyti pakeitimus… ¦ Rādīt izmaiņas… ¦ Näita muudatusi…
+Montrer ▾ ¦ Rodyti ▾ ¦ Rādīt ▾ ¦ Näita ▾
+Mot ancien ¦ Senas žodis ¦ Vecs vārds ¦ Vana sõna
+Mot entier ¦ Visas žodis ¦ Vesels vārds ¦ Terve sõna
+Mot répété ¦ Pasikartojantis žodis ¦ Atkārtots vārds ¦ Korduv sõna
+Mots ¦ Žodžiai ¦ Vārdi ¦ Sõnad
+NOTE DE BAS DE PAGE ¦ IŠNAŠA ¦ ZEMSVĪTRAS PIEZĪME ¦ ALLMÄRKUS
+NOTE DE FIN ¦ GALINĖ IŠNAŠA ¦ BEIGU PIEZĪME ¦ LÕPUMÄRKUS
+Naissance et décès ¦ Gimimas ir mirtis ¦ Dzimšana un nāve ¦ Sünd ja surm
+Nom de famille ¦ Pavardė ¦ Uzvārds ¦ Perekonnanimi
+Nombre de colonnes ¦ Stulpelių skaičius ¦ Kolonnu skaits ¦ Veergude arv
+Nombre de mots, de caractères, de paragraphes ¦ Žodžių, simbolių, pastraipų skaičius ¦ Vārdu, rakstzīmju, rindkopu skaits ¦ Sõnade, märkide, lõikude arv
+Nombre de pages ¦ Puslapių skaičius ¦ Lapu skaits ¦ Lehekülgede arv
+Non (avec 💾 ou ⌘S) ¦ Ne (su 💾 arba ⌘S) ¦ Nē (ar 💾 vai ⌘S) ¦ Ei (💾 või ⌘S abil)
+Normal ¦ Įprastas ¦ Parasts ¦ Tavaline
+Normal, A4, marges de 2,5 cm ¦ Įprastas, A4, 2,5 cm paraštės ¦ Parasts, A4, 2,5 cm piemales ¦ Tavaline, A4, 2,5 cm veerised
+Note de bas de page ¦ Išnaša ¦ Zemsvītras piezīme ¦ Allmärkus
+Note de fin (à la fin du document) ¦ Galinė išnaša (dokumento pabaigoje) ¦ Beigu piezīme (dokumenta beigās) ¦ Lõpumärkus (dokumendi lõpus)
+Note {n} ¦ Pastaba {n} ¦ Piezīme {n} ¦ Märkus {n}
+Nouveau commentaire ¦ Naujas komentaras ¦ Jauns komentārs ¦ Uus kommentaar
+Nouvel onglet ¦ Nauja kortelė ¦ Jauna cilne ¦ Uus vahekaart
+Nouvelle section en paysage. ¦ Naujas skyrius gulsčias. ¦ Jauna sadaļa ainavorientācijā. ¦ Uus jaotis rõhtpaigutuses.
+Nouvelle section en portrait. ¦ Naujas skyrius statmenas. ¦ Jauna sadaļa portretorientācijā. ¦ Uus jaotis püstpaigutuses.
+Numéro de la page (1 à {n}) : ¦ Puslapio numeris (nuo 1 iki {n}): ¦ Lapas numurs (no 1 līdz {n}): ¦ Lehekülje number (1 kuni {n}):
+Néerlandais ¦ Olandų ¦ Nīderlandiešu ¦ Hollandi
+OUTILS ¦ ĮRANKIAI ¦ RĪKI ¦ TÖÖRIISTAD
+Occitan ¦ Oksitanų ¦ Oksitāņu ¦ Oksitaani
+Onglet renommé ¦ Kortelė pervadinta ¦ Cilne pārdēvēta ¦ Vahekaart ümber nimetatud
+Onglet supprimé ¦ Kortelė ištrinta ¦ Cilne dzēsta ¦ Vahekaart kustutatud
+Onglet {n} ¦ Kortelė {n} ¦ Cilne {n} ¦ Vahekaart {n}
+Onglets du document ¦ Dokumento kortelės ¦ Dokumenta cilnes ¦ Dokumendi vahekaardid
+Onglets rangés ¦ Kortelės perrikiuotos ¦ Cilnes pārkārtotas ¦ Vahekaardid ümber järjestatud
+Orientation ¦ Orientacija ¦ Orientācija ¦ Paigutus
+Orientation de la suite ¦ Tolesnės dalies orientacija ¦ Turpinājuma orientācija ¦ Järgneva osa paigutus
+Ouvrir le lieu ¦ Atidaryti vietą ¦ Atvērt vietu ¦ Ava koht
+Ouvrir le panneau de navigation ¦ Atidaryti naršymo skydelį ¦ Atvērt navigācijas paneli ¦ Ava navigeerimispaan
+Page blanche ¦ Tuščias puslapis ¦ Tukša lapa ¦ Tühi lehekülg
+Page {n} ¦ Puslapis {n} ¦ Lapa {n} ¦ Lehekülg {n}
+Page {page} / {total} ¦ Puslapis {page} / {total} ¦ Lapa {page} / {total} ¦ Lehekülg {page} / {total}
+Panneau de droite ¦ Dešinysis skydelis ¦ Labais panelis ¦ Parem paneel
+Panneau de navigation : titres, pages, résultats ¦ Naršymo skydelis: antraštės, puslapiai, rezultatai ¦ Navigācijas panelis: virsraksti, lapas, rezultāti ¦ Navigeerimispaan: pealkirjad, leheküljed, tulemused
+Paragraphe ¦ Pastraipa ¦ Rindkopa ¦ Lõik
+Paragraphes ¦ Pastraipos ¦ Rindkopas ¦ Lõigud
+Paragraphe… ¦ Pastraipa… ¦ Rindkopa… ¦ Lõik…
+Pas de personne dans cette liste. ¦ Šiame sąraše nėra asmenų. ¦ Šajā sarakstā nav personu. ¦ Selles loendis pole isikuid.
+Pas de synonyme connu pour « {word} ». Le dictionnaire intégré compte {n} groupes de mots, surtout ceux d’un récit de famille. ¦ Žodžiui „{word}“ žinomų sinonimų nėra. Įtaisytame žodyne (prancūzų k.) yra {n} žodžių grupių, daugiausia iš šeimos pasakojimų. ¦ Vārdam „{word}“ nav zināmu sinonīmu. Iebūvētajā vārdnīcā (franču valodā) ir {n} vārdu grupas, galvenokārt no ģimenes stāstiem. ¦ Sõnale „{word}“ pole teadaolevaid sünonüüme. Sisseehitatud sõnastikus (prantsuse keeles) on {n} sõnarühma, peamiselt pereloo omad.
+Pas d’espace avant la virgule ou le point ¦ Jokio tarpo prieš kablelį ar tašką ¦ Nav atstarpes pirms komata vai punkta ¦ Koma või punkti ees pole tühikut
+Pas encore de commentaire : choisis un passage, puis « 💬 Nouveau commentaire ». ¦ Komentarų dar nėra: pažymėk ištrauką, tada „💬 Naujas komentaras“. ¦ Komentāru vēl nav: atlasi fragmentu, tad „💬 Jauns komentārs“. ¦ Kommentaare veel pole: vali lõik, siis „💬 Uus kommentaar“.
+Pas encore de modèle à toi : dans un document, Fichier → « Enregistrer comme modèle… ». ¦ Savo šablonų dar neturi: dokumente Failas → „Išsaugoti kaip šabloną…“. ¦ Tev vēl nav savu veidņu: dokumentā Fails → „Saglabāt kā veidni…“. ¦ Sul pole veel oma malle: dokumendis Fail → „Salvesta mallina…“.
+Pas encore de titre : choisis le style « Titre 1 » (ou Titre 2, 3…) pour un paragraphe, il apparaîtra ici. ¦ Antraščių dar nėra: pastraipai pasirink stilių „Antraštė 1“ (arba Antraštė 2, 3…), ir ji atsiras čia. ¦ Virsrakstu vēl nav: izvēlies rindkopai stilu „Virsraksts 1“ (vai Virsraksts 2, 3…), un tas parādīsies šeit. ¦ Pealkirju veel pole: vali lõigule stiil „Pealkiri 1“ (või Pealkiri 2, 3…) ja see ilmub siia.
+Personne pour l’instant. ¦ Kol kas nieko. ¦ Pagaidām neviena. ¦ Veel mitte kedagi.
+Petites capitales ¦ Mažosios didžiosios raidės ¦ Kapiteļi ¦ Kapiteelkiri
+Pied de la première page ¦ Pirmojo puslapio poraštė ¦ Pirmās lapas kājene ¦ Esimese lehekülje jalus
+Pied de page (en bas de chaque page) ¦ Poraštė (kiekvieno puslapio apačioje) ¦ Kājene (katras lapas apakšā) ¦ Jalus (iga lehekülje allosas)
+Place d’abord le curseur dans le texte. ¦ Pirmiausia įdėk žymeklį į tekstą. ¦ Vispirms novieto kursoru tekstā. ¦ Pane kõigepealt kursor teksti.
+Place le curseur dans un paragraphe. ¦ Įdėk žymeklį į pastraipą. ¦ Novieto kursoru rindkopā. ¦ Pane kursor lõiku.
+Place le curseur dans un tableau. ¦ Įdėk žymeklį į lentelę. ¦ Novieto kursoru tabulā. ¦ Pane kursor tabelisse.
+Place le curseur dans une modification (texte vert ou barré rouge). ¦ Įdėk žymeklį į pakeitimą (žalią tekstą arba raudonai perbrauktą). ¦ Novieto kursoru izmaiņā (zaļš teksts vai sarkani pārsvītrots). ¦ Pane kursor muudatusse (roheline tekst või punane läbikriipsutus).
+Place le curseur à l’endroit de la coupure. ¦ Įdėk žymeklį ten, kur turi būti lūžis. ¦ Novieto kursoru vietā, kur jābūt pārtraukumam. ¦ Pane kursor kohta, kus peab olema katkestus.
+Plein écran (⛶) ¦ Visas ekranas (⛶) ¦ Pilnekrāns (⛶) ¦ Täisekraan (⛶)
+Plus de ligne d’en-tête ¦ Nebėra antraštės eilutės ¦ Vairs nav galvenes rindas ¦ Päiserida enam pole
+Points de suspension en un seul signe ¦ Daugtaškis vienu ženklu ¦ Daudzpunkte kā viena rakstzīme ¦ Mõttepunktid ühe märgina
+Police ¦ Šriftas ¦ Fonts ¦ Font
+Police (E5) ¦ Šriftas (E5) ¦ Fonts (E5) ¦ Font (E5)
+Police et taille (E5) ¦ Šriftas ir dydis (E5) ¦ Fonts un izmērs (E5) ¦ Font ja suurus (E5)
+Police… ¦ Šriftas… ¦ Fonts… ¦ Font…
+Polonais ¦ Lenkų ¦ Poļu ¦ Poola
+Portugais ¦ Portugalų ¦ Portugāļu ¦ Portugali
+Pour que le document se lise bien avec un lecteur d’écran, à voix haute ou en grand. ¦ Kad dokumentą būtų patogu skaityti ekrano skaitytuvu, balsu arba dideliu šriftu. ¦ Lai dokumentu būtu ērti lasīt ar ekrāna lasītāju, balsī vai lielā drukā. ¦ Et dokumenti oleks hea lugeda ekraanilugeriga, ette lugeda või suures kirjas.
+Pour une fiche ou un lieu de la base : Insertion → 👤 Une personne, 📍 Un lieu. ¦ Kortelei ar vietai iš bazės: Įterpimas → 👤 Asmuo, 📍 Vieta. ¦ Kartītei vai vietai no datubāzes: Ievietošana → 👤 Persona, 📍 Vieta. ¦ Andmebaasi kaardi või koha jaoks: Lisamine → 👤 Isik, 📍 Koht.
+Première page différente (pour une page de titre ou une lettre) ¦ Kitoks pirmasis puslapis (titulinis puslapis ar laiškas) ¦ Atšķirīga pirmā lapa (titullapai vai vēstulei) ¦ Erinev esimene lehekülg (tiitellehe või kirja jaoks)
+Précédent (⇧ Entrée) ¦ Ankstesnis (⇧ Enter) ¦ Iepriekšējais (⇧ Enter) ¦ Eelmine (⇧ Enter)
+Quelle feuille ? ¦ Kuris lapas? ¦ Kura lapa? ¦ Milline leht?
+Ranger une copie dans les médias ¦ Išsaugoti kopiją medijoje ¦ Saglabāt kopiju medijos ¦ Pane koopia meediasse
+Rangé dans Listes → 🛠️ Outils de modification → 📝 Traitement de texte. ¦ Yra skiltyje Sąrašai → 🛠️ Redagavimo įrankiai → 📝 Teksto rengyklė. ¦ Atrodas sadaļā Saraksti → 🛠️ Rediģēšanas rīki → 📝 Teksta apstrāde. ¦ Asub jaotises Loendid → 🛠️ Muutmistööriistad → 📝 Tekstitöötlus.
+Rapport de recherche ¦ Tyrimo ataskaita ¦ Pētījuma ziņojums ¦ Uurimisaruanne
+Rechercher et remplacer ¦ Ieškoti ir pakeisti ¦ Meklēt un aizstāt ¦ Otsi ja asenda
+Relecture ¦ Peržiūra ¦ Pārskatīšana ¦ Läbivaatus
+Remplacer par ¦ Pakeisti į ¦ Aizstāt ar ¦ Asenda järgmisega
+Remplacer par… ¦ Pakeisti į… ¦ Aizstāt ar… ¦ Asenda…
+Remplir avec la fiche de qui ? ¦ Užpildyti kieno kortele? ¦ Aizpildīt ar kura kartīti? ¦ Täida kelle kaardiga?
+Renommer l’onglet ¦ Pervadinti kortelę ¦ Pārdēvēt cilni ¦ Nimeta vahekaart ümber
+Renommer… ¦ Pervadinti… ¦ Pārdēvēt… ¦ Nimeta ümber…
+Retirer la légende ¦ Pašalinti antraštę ¦ Noņemt parakstu ¦ Eemalda pealdis
+Retirer le lien (garder le texte) ¦ Pašalinti nuorodą (palikti tekstą) ¦ Noņemt saiti (paturēt tekstu) ¦ Eemalda link (jäta tekst alles)
+Retirer l’espace après ¦ Pašalinti tarpą po ¦ Noņemt atstarpi pēc ¦ Eemalda vahe pärast
+Retirer l’espace avant ¦ Pašalinti tarpą prieš ¦ Noņemt atstarpi pirms ¦ Eemalda vahe enne
+Retrait gauche ¦ Kairioji įtrauka ¦ Kreisā atkāpe ¦ Vasak taane
+Retrait à droite ¦ Dešinioji įtrauka ¦ Labā atkāpe ¦ Parem taane
+Retrait à gauche ¦ Kairioji įtrauka ¦ Kreisā atkāpe ¦ Vasak taane
+Rien (le texte comme s’il était accepté) ¦ Nieko (tekstas tarsi priimtas) ¦ Neko (teksts tā, it kā pieņemts) ¦ Mitte midagi (tekst nagu vastu võetud)
+Rien de changé depuis : ce que tu tapes ou effaces apparaîtra ici. ¦ Nuo tada niekas nepakeista: tai, ką įvesi ar ištrinsi, atsiras čia. ¦ Kopš tā laika nekas nav mainīts: tas, ko ieraksti vai izdzēs, parādīsies šeit. ¦ Sellest ajast pole midagi muutunud: see, mida kirjutad või kustutad, ilmub siia.
+Rien à remplacer. ¦ Nėra ką pakeisti. ¦ Nav ko aizstāt. ¦ Asendada pole midagi.
+Récents ¦ Naujausi ¦ Nesenie ¦ Hiljutised
+Récit d’un ancêtre ¦ Protėvio istorija ¦ Senča stāsts ¦ Esivanema lugu
+Récit — {name} ¦ Istorija — {name} ¦ Stāsts — {name} ¦ Lugu — {name}
+Répondre ¦ Atsakyti ¦ Atbildēt ¦ Vasta
+Répondre… ¦ Atsakyti… ¦ Atbildēt… ¦ Vasta…
+STYLES ¦ STILIAI ¦ STILI ¦ STIILID
+Saut de page : la suite commence en haut de la page suivante. ¦ Puslapio lūžis: tolesnis tekstas prasideda kito puslapio viršuje. ¦ Lappuses pārtraukums: turpinājums sākas nākamās lapas augšā. ¦ Leheküljepiir: järgnev algab järgmise lehekülje ülaosast.
+Section {n} sur {total} (comme le document). ¦ Skyrius {n} iš {total} (kaip dokumentas). ¦ Sadaļa {n} no {total} (kā dokuments). ¦ Jaotis {n} / {total} (nagu dokument).
+Section {n} sur {total} (format à elle). ¦ Skyrius {n} iš {total} (savo formatas). ¦ Sadaļa {n} no {total} (savs formāts). ¦ Jaotis {n} / {total} (oma vorming).
+Seulement un trait dessous ¦ Tik linija apačioje ¦ Tikai līnija apakšā ¦ Ainult joon all
+Signature ¦ Parašas ¦ Paraksts ¦ Allkiri
+Simple (1) ¦ Viengubas (1) ¦ Vienkāršs (1) ¦ Üksik (1)
+Simple (une marge à côté des ajouts) ¦ Paprastas (paraštė šalia pridėjimų) ¦ Vienkāršs (piemale blakus pievienotajam) ¦ Lihtne (veeris lisanduste kõrval)
+Souligné ¦ Pabrauktas ¦ Pasvītrots ¦ Allakriipsutatud
+Sous-titre ¦ Paantraštė ¦ Apakšvirsraksts ¦ Alapealkiri
+Style ¦ Stilius ¦ Stils ¦ Stiil
+Style de caractère (quelques mots) ¦ Simbolių stilius (keli žodžiai) ¦ Rakstzīmju stils (daži vārdi) ¦ Märgistiil (mõni sõna)
+Style de paragraphe ¦ Pastraipos stilius ¦ Rindkopas stils ¦ Lõigustiil
+Style du paragraphe ¦ Pastraipos stilius ¦ Rindkopas stils ¦ Lõigu stiil
+Style « {name} » ¦ Stilius „{name}“ ¦ Stils „{name}“ ¦ Stiil „{name}“
+Style « {name} » créé. ¦ Stilius „{name}“ sukurtas. ¦ Stils „{name}“ izveidots. ¦ Stiil „{name}“ loodud.
+Style « {name} » supprimé ¦ Stilius „{name}“ ištrintas ¦ Stils „{name}“ dzēsts ¦ Stiil „{name}“ kustutatud
+Styles ¦ Stiliai ¦ Stili ¦ Stiilid
+Styles de paragraphe ¦ Pastraipų stiliai ¦ Rindkopu stili ¦ Lõigustiilid
+Suivant ¦ Kitas ¦ Nākamais ¦ Järgmine
+Suivant (Entrée) ¦ Kitas (Enter) ¦ Nākamais (Enter) ¦ Järgmine (Enter)
+Suivre les modifications ¦ Sekti pakeitimus ¦ Izsekot izmaiņas ¦ Jälgi muudatusi
+Sujet ¦ Tema ¦ Temats ¦ Teema
+Supprimer la colonne ¦ Ištrinti stulpelį ¦ Dzēst kolonnu ¦ Kustuta veerg
+Supprimer le tableau ¦ Ištrinti lentelę ¦ Dzēst tabulu ¦ Kustuta tabel
+Supprimer l’image ¦ Ištrinti vaizdą ¦ Dzēst attēlu ¦ Kustuta pilt
+Supprimer l’onglet ? ¦ Ištrinti kortelę? ¦ Dzēst cilni? ¦ Kas kustutada vahekaart?
+Supprimer… ¦ Ištrinti… ¦ Dzēst… ¦ Kustuta…
+Surlignage ¦ Paryškinimas spalva ¦ Izcēlums ¦ Esiletõst
+Surlignage… ¦ Paryškinimas spalva… ¦ Izcēlums… ¦ Esiletõst…
+Symboles et flèches ¦ Simboliai ir rodyklės ¦ Simboli un bultas ¦ Sümbolid ja nooled
+Séparer la cellule ¦ Atskirti langelį ¦ Sadalīt šūnu ¦ Poolita lahter
+T Titre ¦ T Pavadinimas ¦ T Virsraksts ¦ T Pealkiri
+TRAITEMENT DE TEXTE ¦ TEKSTO RENGYKLĖ ¦ TEKSTA APSTRĀDE ¦ TEKSTITÖÖTLUS
+Retrait − ¦ Įtrauka − ¦ Atkāpe − ¦ Taane −
+Tableau de « {name} » ¦ Lentelė iš „{name}“ ¦ Tabula no „{name}“ ¦ Tabel failist „{name}“
+Tableau sans ligne de titres (Tableau → « Ligne d’en-tête ») ¦ Lentelė be antraščių eilutės (Lentelė → „Antraštės eilutė“) ¦ Tabula bez galvenes rindas (Tabula → „Galvenes rinda“) ¦ Päisereata tabel (Tabel → „Päiserida“)
+Tableau supprimé ¦ Lentelė ištrinta ¦ Tabula dzēsta ¦ Tabel kustutatud
+Tableau trié de A à Z ¦ Lentelė surūšiuota nuo A iki Z ¦ Tabula sakārtota no A līdz Z ¦ Tabel sorditud A–Z
+Tableau trié de Z à A ¦ Lentelė surūšiuota nuo Z iki A ¦ Tabula sakārtota no Z līdz A ¦ Tabel sorditud Z–A
+Tableau « {name} » ajouté ({n}). ¦ Lentelė „{name}“ pridėta ({n}). ¦ Tabula „{name}“ pievienota ({n}). ¦ Tabel „{name}“ lisatud ({n}).
+Tabloïd US ¦ US Tabloid ¦ US Tabloid ¦ US Tabloid
+Tabulations… ¦ Tabuliacija… ¦ Tabulēšana… ¦ Tabeldus…
+Taille de l’image ¦ Vaizdo dydis ¦ Attēla izmērs ¦ Pildi suurus
+Taille… ¦ Dydis… ¦ Izmērs… ¦ Suurus…
+Temps de lecture : environ {n} min. ¦ Skaitymo laikas: apie {n} min. ¦ Lasīšanas laiks: apmēram {n} min. ¦ Lugemisaeg: umbes {n} min.
+Texte affiché ¦ Rodomas tekstas ¦ Attēlotais teksts ¦ Kuvatav tekst
+Texte de la note ¦ Pastabos tekstas ¦ Piezīmes teksts ¦ Märkuse tekst
+Texte du commentaire ¦ Komentaro tekstas ¦ Komentāra teksts ¦ Kommentaari tekst
+Texte du document ¦ Dokumento tekstas ¦ Dokumenta teksts ¦ Dokumendi tekst
+Texte très petit (moins de 8 points) ¦ Labai mažas tekstas (mažiau nei 8 punktai) ¦ Ļoti mazs teksts (mazāk par 8 punktiem) ¦ Väga väike tekst (alla 8 punkti)
+Titre 1 ¦ Antraštė 1 ¦ Virsraksts 1 ¦ Pealkiri 1
+Titre 2 ¦ Antraštė 2 ¦ Virsraksts 2 ¦ Pealkiri 2
+Titre 3 ¦ Antraštė 3 ¦ Virsraksts 3 ¦ Pealkiri 3
+Titre 4 ¦ Antraštė 4 ¦ Virsraksts 4 ¦ Pealkiri 4
+Titre 5 ¦ Antraštė 5 ¦ Virsraksts 5 ¦ Pealkiri 5
+Titre 6 ¦ Antraštė 6 ¦ Virsraksts 6 ¦ Pealkiri 6
+Titre de niveau {n} juste après un niveau {last} : un niveau est sauté ¦ {n} lygio antraštė iškart po {last} lygio: praleistas lygis ¦ {n}. līmeņa virsraksts tūlīt pēc {last}. līmeņa: izlaists līmenis ¦ {n}. taseme pealkiri kohe pärast {last}. taset: üks tase on vahele jäetud
+Titre en {head}, texte en {body} ¦ Antraštės – {head}, tekstas – {body} ¦ Virsraksti – {head}, teksts – {body} ¦ Pealkirjad: {head}, tekst: {body}
+Titre vide ¦ Tuščia antraštė ¦ Tukšs virsraksts ¦ Tühi pealkiri
+Titres ¦ Antraštės ¦ Virsraksti ¦ Pealkirjad
+Ton commentaire… ¦ Tavo komentaras… ¦ Tavs komentārs… ¦ Sinu kommentaar…
+Tous les paragraphes de ce style changent ensemble. ¦ Visos šio stiliaus pastraipos keičiasi kartu. ¦ Visas šī stila rindkopas mainās kopā. ¦ Kõik selle stiiliga lõigud muutuvad koos.
+Tout accepter ¦ Priimti viską ¦ Pieņemt visu ¦ Võta kõik vastu
+Tout concorde avec les fiches. ¦ Viskas sutampa su kortelėmis. ¦ Viss sakrīt ar kartītēm. ¦ Kõik klapib kaartidega.
+Tout corriger ¦ Taisyti viską ¦ Labot visu ¦ Paranda kõik
+Tout est déjà à jour. ¦ Viskas jau atnaujinta. ¦ Viss jau ir atjaunināts. ¦ Kõik on juba ajakohane.
+Tout montrer (ajouts et suppressions) ¦ Rodyti viską (pridėjimus ir ištrynimus) ¦ Rādīt visu (pievienojumus un dzēsumus) ¦ Näita kõike (lisamised ja kustutamised)
+Tout refuser ¦ Atmesti viską ¦ Noraidīt visu ¦ Lükka kõik tagasi
+Tout remplacer ¦ Pakeisti viską ¦ Aizstāt visu ¦ Asenda kõik
+Tout retirer ¦ Pašalinti viską ¦ Noņemt visu ¦ Eemalda kõik
+Toute la largeur du texte : {n} px. La hauteur suit (pas de déformation). ¦ Visas teksto plotis: {n} px. Aukštis prisitaiko (be iškraipymo). ¦ Viss teksta platums: {n} px. Augstums pielāgojas (bez kropļojuma). ¦ Kogu teksti laius: {n} px. Kõrgus järgib (moonutuseta).
+Toutes les 10 minutes ¦ Kas 10 minučių ¦ Ik pēc 10 minūtēm ¦ Iga 10 minuti järel
+Toutes les 5 minutes ¦ Kas 5 minutes ¦ Ik pēc 5 minūtēm ¦ Iga 5 minuti järel
+Toutes les minutes ¦ Kas minutę ¦ Katru minūti ¦ Iga minut
+Trame (fond) ¦ Šešėliavimas (fonas) ¦ Ēnojums (fons) ¦ Varjustus (taust)
+Trame de la cellule… ¦ Langelio šešėliavimas… ¦ Šūnas ēnojums… ¦ Lahtri varjustus…
+Transcription (machine à écrire) ¦ Transkripcija (rašomoji mašinėlė) ¦ Transkripcija (rakstāmmašīna) ¦ Transkriptsioon (kirjutusmasin)
+Transcription d’acte mise au propre ¦ Švari dokumento transkripcija ¦ Tīra dokumenta transkripcija ¦ Dokumendi puhtand-transkriptsioon
+Triple (3) ¦ Trigubas (3) ¦ Trīskāršs (3) ¦ Kolmekordne (3)
+Tu cherches des renseignements sur qui ? ¦ Apie ką ieškai informacijos? ¦ Par ko meklē informāciju? ¦ Kelle kohta sa teavet otsid?
+Typographie française ¦ Prancūziška tipografija ¦ Franču tipogrāfija ¦ Prantsuse tüpograafia
+Un arrêt tous les ¦ Tabuliacijos žyma kas ¦ Pietura ik pēc ¦ Peatus iga
+Un cadre autour du paragraphe ¦ Rėmelis aplink pastraipą ¦ Rāmis ap rindkopu ¦ Raam ümber lõigu
+Un champ vide s’écrit ¦ Tuščias laukas rašomas ¦ Tukšs lauks tiek rakstīts kā ¦ Tühi väli kirjutatakse
+Un compte rendu de cette visite dans le traitement de texte (cotes, résultats, la suite) ¦ Šio apsilankymo ataskaita teksto rengyklėje (šifrai, rezultatai, kas toliau) ¦ Šī apmeklējuma pārskats teksta apstrādē (šifri, rezultāti, turpmākie soļi) ¦ Selle külastuse aruanne tekstitöötluses (säilikutähised, tulemused, edasised sammud)
+Un document garde au moins un onglet. ¦ Dokumente lieka bent viena kortelė. ¦ Dokumentā paliek vismaz viena cilne. ¦ Dokumendis jääb vähemalt üks vahekaart.
+Un lieu de la base ¦ Vieta iš bazės ¦ Vieta no datubāzes ¦ Koht andmebaasist
+Un nom pour cette version (facultatif) : ¦ Šios versijos pavadinimas (neprivaloma): ¦ Šīs versijas nosaukums (nav obligāti): ¦ Selle versiooni nimi (valikuline):
+Un style porte déjà ce nom. ¦ Stilius tokiu pavadinimu jau yra. ¦ Stils ar šādu nosaukumu jau pastāv. ¦ Sellise nimega stiil on juba olemas.
+Une adresse qui commence par https:// (ou mailto:). ¦ Adresas, prasidedantis https:// (arba mailto:). ¦ Adrese, kas sākas ar https:// (vai mailto:). ¦ Aadress, mis algab https:// (või mailto:).
+Une autre fenêtre a enregistré ce document entre-temps. Garder ta version effacera la sienne. ¦ Kitas langas tuo metu išsaugojo šį dokumentą. Palikus tavo versiją, jo versija bus ištrinta. ¦ Cits logs pa to laiku saglabāja šo dokumentu. Paturot tavu versiju, tā versija tiks izdzēsta. ¦ Teine aken salvestas vahepeal selle dokumendi. Kui jätad oma versiooni, kustutatakse teise oma.
+Une copie de ce document par personne, chaque champ « » rempli avec sa fiche ; les copies se suivent dans un nouveau document (une nouvelle page pour chacune). Champs utilisés : {list}. ¦ Po šio dokumento kopiją kiekvienam asmeniui, kiekvienas laukas „ “ užpildomas pagal jo kortelę; kopijos eina viena po kitos naujame dokumente (kiekviena naujame puslapyje). Naudojami laukai: {list}. ¦ Pa šī dokumenta kopijai katrai personai, katrs lauks „ “ aizpildīts no tās kartītes; kopijas seko viena otrai jaunā dokumentā (katra jaunā lapā). Izmantotie lauki: {list}. ¦ Iga isiku jaoks üks selle dokumendi koopia, iga väli „ “ täidetud tema kaardi põhjal; koopiad tulevad üksteise järel uude dokumenti (igaüks uuel lehel). Kasutatud väljad: {list}.
+Une espace après la virgule ¦ Tarpas po kablelio ¦ Atstarpe pēc komata ¦ Tühik pärast koma
+Une image du web n’a pas été reprise : enregistre-la sur l’ordinateur, puis glisse-la ici. ¦ Vaizdas iš interneto nebuvo perkeltas: išsaugok jį kompiuteryje, tada nuvilk čia. ¦ Attēls no tīmekļa netika pārņemts: saglabā to datorā, tad ievelc šeit. ¦ Veebipilti ei võetud üle: salvesta see arvutisse ja lohista siis siia.
+Une image d’une sorte que le navigateur ne montre pas (EMF, WMF, TIFF…) a été laissée de côté. ¦ Vaizdas tokio tipo, kurio naršyklė nerodo (EMF, WMF, TIFF…), praleistas. ¦ Attēls tādā veidā, ko pārlūkprogramma nerāda (EMF, WMF, TIFF…), tika izlaists. ¦ Pilt, mida brauser näidata ei oska (EMF, WMF, TIFF…), jäeti välja.
+Une image d’une sorte que le navigateur ne montre pas (SVG, EMF, WMF…) a été laissée de côté. ¦ Vaizdas tokio tipo, kurio naršyklė nerodo (SVG, EMF, WMF…), praleistas. ¦ Attēls tādā veidā, ko pārlūkprogramma nerāda (SVG, EMF, WMF…), tika izlaists. ¦ Pilt, mida brauser näidata ei oska (SVG, EMF, WMF…), jäeti välja.
+Une largeur de 16 px au moins. ¦ Plotis bent 16 px. ¦ Platums vismaz 16 px. ¦ Laius vähemalt 16 px.
+Une ligne d’en-tête (répétée sur chaque page) ¦ Antraštės eilutė (kartojama kiekviename puslapyje) ¦ Galvenes rinda (atkārtota katrā lapā) ¦ Päiserida (korratakse igal leheküljel)
+Une personne de la base ¦ Asmuo iš bazės ¦ Persona no datubāzes ¦ Isik andmebaasist
+Utilise {key} dans le texte. ¦ Tekste naudok {key}. ¦ Tekstā izmanto {key}. ¦ Kasuta tekstis {key}.
+Utilise {key}. ¦ Naudok {key}. ¦ Izmanto {key}. ¦ Kasuta {key}.
+Version du {date} ¦ {date} versija ¦ {date} versija ¦ Versioon {date}
+Version enregistrée (Fichier → 🕘 Versions…). ¦ Versija išsaugota (Failas → 🕘 Versijos…). ¦ Versija saglabāta (Fails → 🕘 Versijas…). ¦ Versioon salvestatud (Fail → 🕘 Versioonid…).
+Vitesse de lecture à voix haute ¦ Skaitymo balsu greitis ¦ Lasīšanas balsī ātrums ¦ Ettelugemise kiirus
+Voir ¦ Rodyti ¦ Rādīt ¦ Näita
+Vérification de l’orthographe arrêtée. ¦ Rašybos tikrinimas išjungtas. ¦ Pareizrakstības pārbaude izslēgta. ¦ Õigekirjakontroll välja lülitatud.
+Vérification impossible. ¦ Patikrinti nepavyko. ¦ Pārbaude neizdevās. ¦ Kontroll ei õnnestunud.
+Vérifier avec les fiches ¦ Patikrinti pagal korteles ¦ Pārbaudīt pēc kartītēm ¦ Kontrolli kaartide järgi
+Vérifier l’orthographe pendant la frappe ¦ Tikrinti rašybą rašant ¦ Pārbaudīt pareizrakstību rakstīšanas laikā ¦ Kontrolli õigekirja trükkimise ajal
+Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, texte, HTML, impression ¦ Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, tekstas, HTML, spausdinimas ¦ Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, teksts, HTML, drukāšana ¦ Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, tekst, HTML, printimine
+Word, Pages, Google Docs ¦ Word, Pages, Google Docs ¦ Word, Pages, Google Docs ¦ Word, Pages, Google Docs
+a ajouté ¦ pridėjo ¦ pievienoja ¦ lisas
+a supprimé ¦ ištrynė ¦ dzēsa ¦ kustutas
+automatique ¦ automatinis ¦ automātisks ¦ automaatne
+aux archives : cotes vues, trouvailles, suite ¦ archyve: peržiūrėti šifrai, radiniai, kas toliau ¦ arhīvā: apskatītie šifri, atradumi, turpmākie soļi ¦ arhiivis: vaadatud säilikutähised, leiud, edasised sammud
+ce fichier .{ext} est abîmé (ce n’est pas un zip) ¦ šis .{ext} failas sugadintas (tai ne zip) ¦ šis .{ext} fails ir bojāts (tas nav zip) ¦ see .{ext}-fail on rikutud (see pole zip)
+ce fichier LibreOffice n’est pas un texte (c’est un classeur ou une présentation) ¦ šis LibreOffice failas nėra tekstas (tai skaičiuoklė arba pristatymas) ¦ šis LibreOffice fails nav teksts (tā ir izklājlapa vai prezentācija) ¦ see LibreOffice’i fail pole tekst (see on tabel või esitlus)
+ce fichier zip n’est ni un document Word (.docx) ni un document LibreOffice (.odt) ¦ šis zip failas nėra nei Word dokumentas (.docx), nei LibreOffice dokumentas (.odt) ¦ šis zip fails nav ne Word dokuments (.docx), ne LibreOffice dokuments (.odt) ¦ see zip-fail pole ei Wordi dokument (.docx) ega LibreOffice’i dokument (.odt)
+ce n’est pas un document LibreOffice (.odt) ¦ tai ne LibreOffice dokumentas (.odt) ¦ tas nav LibreOffice dokuments (.odt) ¦ see pole LibreOffice’i dokument (.odt)
+ce n’est pas un document Word (.docx) : il manque son texte ¦ tai ne Word dokumentas (.docx): trūksta jo teksto ¦ tas nav Word dokuments (.docx): trūkst tā teksta ¦ see pole Wordi dokument (.docx): selle tekst puudub
+ce n’est pas un fichier RTF ¦ tai ne RTF failas ¦ tas nav RTF fails ¦ see pole RTF-fail
+ce n’est pas un fichier du traitement de texte ¦ tai ne teksto rengyklės failas ¦ tas nav teksta apstrādes fails ¦ see pole tekstitöötluse fail
+ces réglages du traitement de texte ¦ šie teksto rengyklės nustatymai ¦ šie teksta apstrādes iestatījumi ¦ need tekstitöötluse seaded
+demande de recherche à un service d’archives ¦ tyrimo užklausa archyvų tarnybai ¦ izpētes pieprasījums arhīva dienestam ¦ uurimistaotlus arhiiviteenistusele
+divorcé ¦ išsiskyręs ¦ šķīries ¦ lahutatud
+droite ¦ dešinė ¦ labā ¦ parem
+décédé (croix) ¦ miręs (kryžius) ¦ miris (krusts) ¦ surnud (rist)
+d’autres changements ont suivi : utilise ↶ ({key}) ¦ po to buvo kitų pakeitimų: naudok ↶ ({key}) ¦ pēc tam bija citas izmaiņas: izmanto ↶ ({key}) ¦ sellele järgnesid muud muudatused: kasuta ↶ ({key})
+d’autres changements ont suivi : utilise ↶ dans le document ¦ po to buvo kitų pakeitimų: naudok ↶ dokumente ¦ pēc tam bija citas izmaiņas: izmanto ↶ dokumentā ¦ sellele järgnesid muud muudatused: kasuta dokumendis ↶
+espace fine insécable (avant ; : ! ? ») ¦ siauras nelaužomas tarpas (prieš ; : ! ? ») ¦ šaura nedalāmā atstarpe (pirms ; : ! ? ») ¦ kitsas mittekatkev tühik (enne ; : ! ? »)
+espace insécable ¦ nelaužomas tarpas ¦ nedalāmā atstarpe ¦ mittekatkev tühik
+et (note tironienne) ¦ ir (Tirono ženklas) ¦ un (Tīrona zīme) ¦ ja (Tiro märk)
+ex. BROUILLON, COPIE ¦ pvz., JUODRAŠTIS, KOPIJA ¦ piem., MELNRAKSTS, KOPIJA ¦ nt MUSTAND, KOOPIA
+fichier RTF trop imbriqué ¦ RTF failas per daug įdėtinis ¦ RTF fails ir pārāk dziļi ligzdots ¦ RTF-fail on liiga sügavalt pesastatud
+fichier du traitement de texte ¦ teksto rengyklės failas ¦ teksta apstrādes fails ¦ tekstitöötluse fail
+fichier refusé : beaucoup trop de paragraphes ¦ failas atmestas: per daug pastraipų ¦ fails noraidīts: pārāk daudz rindkopu ¦ fail keelati: liiga palju lõike
+fichier refusé : trop compliqué ¦ failas atmestas: per sudėtingas ¦ fails noraidīts: pārāk sarežģīts ¦ fail keelati: liiga keeruline
+fichier refusé : trop gros ¦ failas atmestas: per didelis ¦ fails noraidīts: pārāk liels ¦ fail keelati: liiga suur
+fichier trop gros (plus de {n} Mo) ¦ failas per didelis (daugiau nei {n} MB) ¦ fails ir pārāk liels (vairāk nekā {n} MB) ¦ fail on liiga suur (üle {n} MB)
+https://…, mailto:… ¦ https://…, mailto:… ¦ https://…, mailto:… ¦ https://…, mailto:…
+il / elle ¦ jis / ji ¦ viņš / viņa ¦ tema
+inhumé ¦ palaidotas ¦ apbedīts ¦ maetud
+je cherche des renseignements sur cette personne ¦ ieškau informacijos apie šį asmenį ¦ meklēju informāciju par šo personu ¦ otsin teavet selle isiku kohta
+la biographie F5 de la fiche, à compléter ¦ kortelės F5 biografija, kurią reikia papildyti ¦ kartītes F5 biogrāfija, kas jāpapildina ¦ kaardi F5-elulugu, mida täiendada
+le texte seul ¦ tik tekstas ¦ tikai teksts ¦ ainult tekst
+le texte à l’écran ¦ tekstas ekrane ¦ teksts ekrānā ¦ tekst ekraanil
+les anciens fichiers Word (.doc) ne se lisent pas : ouvre-le dans Word ou LibreOffice et enregistre-le en .docx ¦ seni Word failai (.doc) neskaitomi: atidaryk jį Word ar LibreOffice ir išsaugok kaip .docx ¦ vecos Word failus (.doc) nevar nolasīt: atver to Word vai LibreOffice un saglabā kā .docx ¦ vanu Wordi faile (.doc) ei loeta: ava see Wordis või LibreOffice’is ja salvesta .docx-ina
+marié ¦ vedęs ¦ precējies ¦ abielus
+marié (autre signe) ¦ vedęs (kitas ženklas) ¦ precējies (cita zīme) ¦ abielus (muu märk)
+minuscules ¦ mažosios raidės ¦ mazie burti ¦ väiketähed
+naissance, mariage ou décès : la personne, les dates et les lieux déjà écrits ¦ gimimas, santuoka ar mirtis: asmuo, datos ir vietos, jau įrašytos ¦ dzimšana, laulība vai nāve: persona, datumi un vietas, kas jau ierakstītas ¦ sünd, abielu või surm: isik, kuupäevad ja kohad juba kirjas
+nom, naissance, parents, métier, mariage, décès ¦ vardas, gimimas, tėvai, profesija, santuoka, mirtis ¦ vārds, dzimšana, vecāki, nodarbošanās, laulība, nāve ¦ nimi, sünd, vanemad, amet, abielu, surm
+numéro ¦ numeris ¦ numurs ¦ number
+né / née ¦ gimęs / gimusi ¦ dzimis / dzimusi ¦ sündinud
+p barré (par) ¦ perbrauktas p (per) ¦ pārsvītrots p (per) ¦ läbikriipsutatud p (per)
+p à crosse (pro) ¦ p su užraitu (pro) ¦ p ar cilpu (pro) ¦ kaarega p (pro)
+page web ¦ tinklalapis ¦ tīmekļa lapa ¦ veebileht
+pour partager une découverte ¦ pasidalyti atradimu ¦ lai dalītos ar atklājumu ¦ avastuse jagamiseks
+question, sources, analyse, conclusion ¦ klausimas, šaltiniai, analizė, išvada ¦ jautājums, avoti, analīze, secinājums ¦ küsimus, allikad, analüüs, järeldus
+ruban|Caractères ¦ Simboliai ¦ Rakstzīmes ¦ Märgid
+ruban|Centre ¦ Centras ¦ Centrs ¦ Kesk
+ruban|Couleur ¦ Spalva ¦ Krāsa ¦ Värv
+ruban|Effacer ¦ Išvalyti ¦ Notīrīt ¦ Tühjenda
+ruban|Interligne ¦ Tarpai ¦ Atstarpes ¦ Vahe
+ruban|Note ¦ Pastaba ¦ Piezīme ¦ Märkus
+ruban|Numéros ¦ Numeriai ¦ Numuri ¦ Numbrid
+ruban|Petites ¦ Mažosios ¦ Kapiteļi ¦ Kapiteel
+ruban|Puces ¦ Ženkleliai ¦ Aizzīmes ¦ Täpid
+ruban|Retrait + ¦ Įtrauka + ¦ Atkāpe + ¦ Taane +
+ruban|Retrait − ¦ Įtrauka − ¦ Atkāpe − ¦ Taane −
+ruban|Suivi ¦ Sekimas ¦ Izsekošana ¦ Jälgimine
+ruban|Surligner ¦ Paryškinti ¦ Izcelt ¦ Tõsta esile
+récit en parties, images, notes ¦ istorija dalimis, vaizdai, pastabos ¦ stāsts daļās, attēli, piezīmes ¦ lugu osadena, pildid, märkmed
+texte avec les titres ¦ tekstas su antraštėmis ¦ teksts ar virsrakstiem ¦ tekst pealkirjadega
+texte de l’acte, notes, références ¦ dokumento tekstas, pastabos, nuorodos ¦ dokumenta teksts, piezīmes, atsauces ¦ dokumendi tekst, märkmed, viited
+tous les traitements de texte ¦ visos teksto rengyklės ¦ visas teksta apstrādes programmas ¦ kõik tekstitöötlusprogrammid
+un PDF ne se transforme pas en texte modifiable ici : ouvre la Transcription d’actes pour le recopier ¦ PDF čia nepaverčiamas redaguojamu tekstu: atidaryk Dokumentų transkripciją, kad jį perrašytum ¦ PDF šeit nevar pārvērst rediģējamā tekstā: atver Dokumentu transkripciju, lai to pārrakstītu ¦ PDF-i ei saa siin muuta muudetavaks tekstiks: ava selle ümberkirjutamiseks Dokumentide transkriptsioon
+un ancêtre ¦ protėvis ¦ sencis ¦ esivanem
+{added} ajouté, {removed} retiré. ¦ Pridėta: {added}, pašalinta: {removed}. ¦ Pievienots: {added}, noņemts: {removed}. ¦ Lisatud: {added}, eemaldatud: {removed}.
+{added} ajouté, {removed} retirés. ¦ Pridėta: {added}, pašalinta: {removed}. ¦ Pievienots: {added}, noņemts: {removed}. ¦ Lisatud: {added}, eemaldatud: {removed}.
+{added} ajoutés, {removed} retiré. ¦ Pridėta: {added}, pašalinta: {removed}. ¦ Pievienots: {added}, noņemts: {removed}. ¦ Lisatud: {added}, eemaldatud: {removed}.
+{added} ajoutés, {removed} retirés. ¦ Pridėta: {added}, pašalinta: {removed}. ¦ Pievienots: {added}, noņemts: {removed}. ¦ Lisatud: {added}, eemaldatud: {removed}.
+{name} (copie) ¦ {name} (kopija) ¦ {name} (kopija) ¦ {name} (koopia)
+{name} — publipostage ({n}) ¦ {name} — laiškų suliejimas ({n}) ¦ {name} — vēstuļu sapludināšana ({n}) ¦ {name} — kirjakooste ({n})
+{name} — que faut-il écrire ? ¦ {name} — ką reikia parašyti? ¦ {name} — kas jāraksta? ¦ {name} — mida tuleb kirjutada?
+{n} avec la fiche de {name} (↶ pour revenir). ¦ {n} su {name} kortele (↶ – grįžti). ¦ {n} ar {name} kartīti (↶, lai atgrieztos). ¦ {n} isiku {name} kaardiga (↶ tagasi).
+{n} du fichier (scripts, formulaires, cadres…) retiré : ils ne sont jamais lancés. ¦ Iš failo pašalinta: {n} (scenarijai, formos, rėmeliai…): jie niekada nepaleidžiami. ¦ No faila noņemts: {n} (skripti, veidlapas, rāmji…): tie nekad netiek palaisti. ¦ Failist eemaldatud: {n} (skriptid, vormid, raamid…): neid ei käivitata kunagi.
+{n} du fichier (scripts, formulaires, cadres…) retirés : ils ne sont jamais lancés. ¦ Iš failo pašalinta: {n} (scenarijai, formos, rėmeliai…): jie niekada nepaleidžiami. ¦ No faila noņemti: {n} (skripti, veidlapas, rāmji…): tie nekad netiek palaisti. ¦ Failist eemaldatud: {n} (skriptid, vormid, raamid…): neid ei käivitata kunagi.
+{n} du web non reprise. ¦ Iš interneto neperkelta: {n}. ¦ No tīmekļa nav pārņemts: {n}. ¦ Veebist üle võtmata: {n}.
+{n} du web non reprises. ¦ Iš interneto neperkelta: {n}. ¦ No tīmekļa nav pārņemti: {n}. ¦ Veebist üle võtmata: {n}.
+{n} envoyé vers la mise en page : vérifie, puis enregistre le livre. ¦ Išsiųsta į maketavimą: {n}. Patikrink, tada išsaugok knygą. ¦ Nosūtīts uz maketu: {n}. Pārbaudi, tad saglabā grāmatu. ¦ Küljendusse saadetud: {n}. Kontrolli ja salvesta siis raamat.
+{n} envoyés vers la mise en page : vérifie, puis enregistre le livre. ¦ Išsiųsta į maketavimą: {n}. Patikrink, tada išsaugok knygą. ¦ Nosūtīti uz maketu: {n}. Pārbaudi, tad saglabā grāmatu. ¦ Küljendusse saadetud: {n}. Kontrolli ja salvesta siis raamat.
+{n} images du web n’ont pas été reprises : enregistre-la sur l’ordinateur, puis glisse-la ici. ¦ Vaizdų iš interneto neperkelta: {n}. Išsaugok juos kompiuteryje, tada nuvilk čia. ¦ No tīmekļa nav pārņemti attēli: {n}. Saglabā tos datorā, tad ievelc šeit. ¦ Veebist üle võtmata pilte: {n}. Salvesta need arvutisse ja lohista siis siia.
+{n} mis à jour d’après les fiches. ¦ Atnaujinta pagal korteles: {n}. ¦ Atjaunināts pēc kartītēm: {n}. ¦ Kaartide põhjal uuendatud: {n}.
+{n} modifications acceptées ¦ Priimta pakeitimų: {n} ¦ Pieņemtas izmaiņas: {n} ¦ Vastu võetud muudatusi: {n}
+{n} modifications refusées ¦ Atmesta pakeitimų: {n} ¦ Noraidītas izmaiņas: {n} ¦ Tagasi lükatud muudatusi: {n}
+{n} rangée dans les médias. ¦ Išsaugota medijoje: {n}. ¦ Saglabāts medijos: {n}. ¦ Meediasse pandud: {n}.
+{n} rangées dans les médias. ¦ Išsaugota medijoje: {n}. ¦ Saglabāti medijos: {n}. ¦ Meediasse pandud: {n}.
+{n} repris de « {name} » ¦ {n} paimta iš „{name}“ ¦ {n} paņemts no „{name}“ ¦ {n} võetud failist „{name}“
+{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies. ¦ {pages} · {words}. Word ir LibreOffice išlaiko stilius, sąrašus, lenteles, vaizdus, pastabas, antraštę ir poraštę, komentarus bei sekamus pakeitimus. ¦ {pages} · {words}. Word un LibreOffice saglabā stilus, sarakstus, tabulas, attēlus, piezīmes, galveni un kājeni, komentārus un izsekotās izmaiņas. ¦ {pages} · {words}. Word ja LibreOffice säilitavad stiilid, loendid, tabelid, pildid, märkmed, päise ja jaluse, kommentaarid ning jälgitud muudatused.
+« ________ » (à remplir à la main) ¦ „________“ (pildyti ranka) ¦ „________“ (aizpildīt ar roku) ¦ „________“ (täita käsitsi)
+« … » (pour le voir) ¦ „…“ (kad jį matytum) ¦ „…“ (lai to redzētu) ¦ „…“ (et seda näha)
+¶ Marques de mise en forme ¦ ¶ Formatavimo ženklai ¦ ¶ Formatējuma zīmes ¦ ¶ Vormingumärgid
+¶ Paragraphe ¦ ¶ Pastraipa ¦ ¶ Rindkopa ¦ ¶ Lõik
+¶ Paragraphe (espacements, retraits, interligne)… ¦ ¶ Pastraipa (tarpai, įtraukos, eilučių tarpai)… ¦ ¶ Rindkopa (atstarpes, atkāpes, rindstarpa)… ¦ ¶ Lõik (vahed, taanded, reavahe)…
+¹ Note de bas de page ¦ ¹ Išnaša ¦ ¹ Zemsvītras piezīme ¦ ¹ Allmärkus
+À quoi ça sert ? ¦ Kam tai skirta? ¦ Kam tas paredzēts? ¦ Milleks see on?
+Écrire sur cette personne ¦ Rašyti apie šį asmenį ¦ Rakstīt par šo personu ¦ Kirjuta sellest isikust
+Écris le texte du lien. ¦ Parašyk nuorodos tekstą. ¦ Uzraksti saites tekstu. ¦ Kirjuta lingi tekst.
+Écris, choisis un style à gauche de la barre ; clic droit pour les actions. ¦ Rašyk, pasirink stilių juostos kairėje; dešinysis spustelėjimas – veiksmai. ¦ Raksti, izvēlies stilu joslas kreisajā pusē; labais klikšķis – darbības. ¦ Kirjuta, vali riba vasakult stiil; paremklõps – toimingud.
+à lire, à envoyer ¦ skaityti, siųsti ¦ lasīšanai, sūtīšanai ¦ lugemiseks, saatmiseks
+à ouvrir dans un navigateur ¦ atidaryti naršyklėje ¦ atvēršanai pārlūkprogrammā ¦ brauseris avamiseks
+à une mairie : naissance, mariage, décès ¦ savivaldybei: gimimas, santuoka, mirtis ¦ pašvaldībai: dzimšana, laulība, nāve ¦ vallamajale: sünd, abielu, surm
+Ω Caractères spéciaux ¦ Ω Specialieji simboliai ¦ Ω Speciālās rakstzīmes ¦ Ω Erimärgid
+Ω Caractères spéciaux… ¦ Ω Specialieji simboliai… ¦ Ω Speciālās rakstzīmes… ¦ Ω Erimärgid…
+― Ligne horizontale ¦ ― Horizontali linija ¦ ― Horizontāla līnija ¦ ― Rõhtjoon
+• Liste à puces ¦ • Sąrašas su ženkleliais ¦ • Aizzīmju saraksts ¦ • Täpploend
+ⁱ Note de fin ¦ ⁱ Galinė išnaša ¦ ⁱ Beigu piezīme ¦ ⁱ Lõpumärkus
+ℹ️ Propriétés du document… ¦ ℹ️ Dokumento ypatybės… ¦ ℹ️ Dokumenta rekvizīti… ¦ ℹ️ Dokumendi atribuudid…
+↕ Trier A → Z (cette colonne) ¦ ↕ Rūšiuoti A → Z (šį stulpelį) ¦ ↕ Kārtot A → Z (šo kolonnu) ¦ ↕ Sordi A → Z (see veerg)
+↕ Trier Z → A (cette colonne) ¦ ↕ Rūšiuoti Z → A (šį stulpelį) ¦ ↕ Kārtot Z → A (šo kolonnu) ¦ ↕ Sordi Z → A (see veerg)
+↶ Annulé ¦ ↶ Anuliuota ¦ ↶ Atsaukts ¦ ↶ Tagasi võetud
+↷ Rétabli ¦ ↷ Grąžinta ¦ ↷ Atjaunots ¦ ↷ Uuesti tehtud
+↺ Rouvrir ¦ ↺ Vėl atidaryti ¦ ↺ Atvērt atkārtoti ¦ ↺ Ava uuesti
+⇄ Comparer deux versions… ¦ ⇄ Palyginti dvi versijas… ¦ ⇄ Salīdzināt divas versijas… ¦ ⇄ Võrdle kahte versiooni…
+⇥ Tabulations ¦ ⇥ Tabuliacija ¦ ⇥ Tabulēšana ¦ ⇥ Tabeldus
+⇥ Tabulations… ¦ ⇥ Tabuliacija… ¦ ⇥ Tabulēšana… ¦ ⇥ Tabeldus…
+∑ Nombre de pages ¦ ∑ Puslapių skaičius ¦ ∑ Lapu skaits ¦ ∑ Lehekülgede arv
+⊞ Fusionner les cellules ¦ ⊞ Sujungti langelius ¦ ⊞ Apvienot šūnas ¦ ⊞ Ühenda lahtrid
+⌨️ Raccourcis du traitement de texte ¦ ⌨️ Teksto rengyklės spartieji klavišai ¦ ⌨️ Teksta apstrādes īsinājumtaustiņi ¦ ⌨️ Tekstitöötluse kiirklahvid
+⌨️ Raccourcis du traitement de texte… ¦ ⌨️ Teksto rengyklės spartieji klavišai… ¦ ⌨️ Teksta apstrādes īsinājumtaustiņi… ¦ ⌨️ Tekstitöötluse kiirklahvid…
+▢ Bordure et trame… ¦ ▢ Kraštinės ir šešėliavimas… ¦ ▢ Apmales un ēnojums… ¦ ▢ Äärised ja varjustus…
+▥ Colonnes ¦ ▥ Stulpeliai ¦ ▥ Kolonnas ¦ ▥ Veerud
+▥ Colonnes… ¦ ▥ Stulpeliai… ¦ ▥ Kolonnas… ¦ ▥ Veerud…
+▦ Insérer un tableau… ¦ ▦ Įterpti lentelę… ¦ ▦ Ievietot tabulu… ¦ ▦ Lisa tabel…
+▦ Nouveau tableau ¦ ▦ Nauja lentelė ¦ ▦ Jauna tabula ¦ ▦ Uus tabel
+▦ Tableau… ¦ ▦ Lentelė… ¦ ▦ Tabula… ¦ ▦ Tabel…
+▭ Paysage ¦ ▭ Gulsčias ¦ ▭ Ainava ¦ ▭ Rõhtpaigutus
+▯ Portrait ¦ ▯ Stačias ¦ ▯ Portrets ¦ ▯ Püstpaigutus
+♿ Accessibilité : {n} point ¦ ♿ Prieinamumas: {n} pastaba ¦ ♿ Pieejamība: {n} piezīme ¦ ♿ Ligipääsetavus: {n} märkus
+♿ Accessibilité : {n} points ¦ ♿ Prieinamumas: pastabų – {n} ¦ ♿ Pieejamība: piezīmes – {n} ¦ ♿ Ligipääsetavus: märkusi – {n}
+♿ Rien à signaler : images décrites, titres en ordre, tableaux avec titres, liens clairs. ¦ ♿ Nėra ką pranešti: vaizdai aprašyti, antraštės tvarkingos, lentelės su antraštėmis, nuorodos aiškios. ¦ ♿ Nav ko ziņot: attēli aprakstīti, virsraksti secībā, tabulām ir galvenes, saites skaidras. ¦ ♿ Pole midagi teatada: pildid on kirjeldatud, pealkirjad järjekorras, tabelitel on päised, lingid on selged.
+♿ Vérifier l’accessibilité… ¦ ♿ Tikrinti prieinamumą… ¦ ♿ Pārbaudīt pieejamību… ¦ ♿ Kontrolli ligipääsetavust…
+⚙️ Personnaliser ¦ ⚙️ Pritaikyti ¦ ⚙️ Pielāgot ¦ ⚙️ Kohanda
+⚙️ Réglages du traitement de texte ¦ ⚙️ Teksto rengyklės nustatymai ¦ ⚙️ Teksta apstrādes iestatījumi ¦ ⚙️ Tekstitöötluse seaded
+⚙️ Réglages du traitement de texte… ¦ ⚙️ Teksto rengyklės nustatymai… ¦ ⚙️ Teksta apstrādes iestatījumi… ¦ ⚙️ Tekstitöötluse seaded…
+✍ Les modifications sont suivies : chaque ajout et chaque suppression restent visibles. ¦ ✍ Pakeitimai sekami: kiekvienas pridėjimas ir kiekvienas ištrynimas lieka matomas. ¦ ✍ Izmaiņas tiek izsekotas: katra pievienošana un katra dzēšana paliek redzama. ¦ ✍ Muudatusi jälgitakse: iga lisamine ja kustutamine jääb nähtavaks.
+✍ Suivi ¦ ✍ Sekimas ¦ ✍ Izsekošana ¦ ✍ Jälgimine
+✍ Suivre les modifications ¦ ✍ Sekti pakeitimus ¦ ✍ Izsekot izmaiņas ¦ ✍ Jälgi muudatusi
+✍ modifications à relire ¦ ✍ peržiūrėtini pakeitimai ¦ ✍ pārskatāmās izmaiņas ¦ ✍ läbivaatamist vajavad muudatused
+✎ Auteur ¦ ✎ Autorius ¦ ✎ Autors ¦ ✎ Autor
+✎ Le style « {name} » ¦ ✎ Stilius „{name}“ ¦ ✎ Stils „{name}“ ¦ ✎ Stiil „{name}“
+✎ Modifier le style ¦ ✎ Redaguoti stilių ¦ ✎ Rediģēt stilu ¦ ✎ Muuda stiili
+✏️ À mes mesures ¦ ✏️ Pasirinktinis dydis ¦ ✏️ Pielāgots izmērs ¦ ✏️ Kohandatud suurus
+✓ Accepter ¦ ✓ Priimti ¦ ✓ Pieņemt ¦ ✓ Võta vastu
+✓ Accepter la modification ¦ ✓ Priimti pakeitimą ¦ ✓ Pieņemt izmaiņu ¦ ✓ Võta muudatus vastu
+✓ En-tête et pied de page repris. ¦ ✓ Antraštė ir poraštė perkeltos. ¦ ✓ Galvene un kājene pārņemtas. ¦ ✓ Päis ja jalus võeti üle.
+✓ Repris : {list}. ¦ ✓ Perkelta: {list}. ¦ ✓ Pārņemts: {list}. ¦ ✓ Üle võetud: {list}.
+✓ Résolu ¦ ✓ Išspręsta ¦ ✓ Atrisināts ¦ ✓ Lahendatud
+✓ Tout accepter ¦ ✓ Priimti viską ¦ ✓ Pieņemt visu ¦ ✓ Võta kõik vastu
+✓ Tout concorde avec les fiches. ¦ ✓ Viskas sutampa su kortelėmis. ¦ ✓ Viss sakrīt ar kartītēm. ¦ ✓ Kõik klapib kaartidega.
+✗ Refuser ¦ ✗ Atmesti ¦ ✗ Noraidīt ¦ ✗ Lükka tagasi
+✗ Refuser la modification ¦ ✗ Atmesti pakeitimą ¦ ✗ Noraidīt izmaiņu ¦ ✗ Lükka muudatus tagasi
+✗ Tout refuser ¦ ✗ Atmesti viską ¦ ✗ Noraidīt visu ¦ ✗ Lükka kõik tagasi
+✳️ Markdown (.md) ¦ ✳️ Markdown (.md) ¦ ✳️ Markdown (.md) ¦ ✳️ Markdown (.md)
+❝ Citer une source ¦ ❝ Cituoti šaltinį ¦ ❝ Citēt avotu ¦ ❝ Viita allikale
+❝ Source citée… ¦ ❝ Cituojamas šaltinis… ¦ ❝ Citētais avots… ¦ ❝ Viidatud allikas…
+⤒ Importer (Word, LibreOffice…)… ¦ ⤒ Importuoti (Word, LibreOffice…)… ¦ ⤒ Importēt (Word, LibreOffice…)… ¦ ⤒ Impordi (Word, LibreOffice…)…
+⤒ Importer le document ¦ ⤒ Importuoti dokumentą ¦ ⤒ Importēt dokumentu ¦ ⤒ Impordi dokument
+⤒ Importer un document ¦ ⤒ Importuoti dokumentą ¦ ⤒ Importēt dokumentu ¦ ⤒ Impordi dokument
+⤓ Exporter… ¦ ⤓ Eksportuoti… ¦ ⤓ Eksportēt… ¦ ⤓ Ekspordi…
+⤓ Saut de page ¦ ⤓ Puslapio lūžis ¦ ⤓ Lappuses pārtraukums ¦ ⤓ Leheküljepiir
+＋ Ajouter des personnes… ¦ ＋ Pridėti asmenų… ¦ ＋ Pievienot personas… ¦ ＋ Lisa isikuid…
+＋ Description… ¦ ＋ Aprašymas… ¦ ＋ Apraksts… ¦ ＋ Kirjeldus…
+＋ Les personnes d’une de mes listes… ¦ ＋ Asmenys iš vieno mano sąrašo… ¦ ＋ Personas no kāda mana saraksta… ¦ ＋ Isikud mõnest minu loendist…
+＋ Nouveau commentaire ¦ ＋ Naujas komentaras ¦ ＋ Jauns komentārs ¦ ＋ Uus kommentaar
+＋ Nouveau document ¦ ＋ Naujas dokumentas ¦ ＋ Jauns dokuments ¦ ＋ Uus dokument
+＋ Nouveau style ¦ ＋ Naujas stilius ¦ ＋ Jauns stils ¦ ＋ Uus stiil
+＋ Nouveau style d’après la sélection… ¦ ＋ Naujas stilius pagal pažymėjimą… ¦ ＋ Jauns stils no atlases… ¦ ＋ Uus stiil valiku põhjal…
+🌐 Langue du document ¦ 🌐 Dokumento kalba ¦ 🌐 Dokumenta valoda ¦ 🌐 Dokumendi keel
+🌐 Langue… ¦ 🌐 Kalba… ¦ 🌐 Valoda… ¦ 🌐 Keel…
+🌐 Page web (.html) ¦ 🌐 Tinklalapis (.html) ¦ 🌐 Tīmekļa lapa (.html) ¦ 🌐 Veebileht (.html)
+🌳 Un petit arbre… ¦ 🌳 Mažas medis… ¦ 🌳 Mazs koks… ¦ 🌳 Väike puu…
+🎞 Un média (lien)… ¦ 🎞 Medija (nuoroda)… ¦ 🎞 Medija fails (saite)… ¦ 🎞 Meediafail (link)…
+🎨 Choisir… ¦ 🎨 Pasirinkti… ¦ 🎨 Izvēlēties… ¦ 🎨 Vali…
+🎨 Couleur de page… ¦ 🎨 Puslapio spalva… ¦ 🎨 Lapas krāsa… ¦ 🎨 Lehekülje värv…
+🎨 Forme ¦ 🎨 Formatas ¦ 🎨 Formāts ¦ 🎨 Vorming
+🎨 Styles… ¦ 🎨 Stiliai… ¦ 🎨 Stili… ¦ 🎨 Stiilid…
+👤 Remplir avec une fiche ¦ 👤 Užpildyti pagal kortelę ¦ 👤 Aizpildīt no kartītes ¦ 👤 Täida kaardi põhjal
+👤 Remplir avec une fiche… ¦ 👤 Užpildyti pagal kortelę… ¦ 👤 Aizpildīt no kartītes… ¦ 👤 Täida kaardi põhjal…
+👤 Une personne de la base… ¦ 👤 Asmuo iš bazės… ¦ 👤 Persona no datubāzes… ¦ 👤 Isik andmebaasist…
+💬 Montrer les commentaires ¦ 💬 Rodyti komentarus ¦ 💬 Rādīt komentārus ¦ 💬 Näita kommentaare
+💬 Nouveau commentaire ¦ 💬 Naujas komentaras ¦ 💬 Jauns komentārs ¦ 💬 Uus kommentaar
+💾 Fichier de l’outil ¦ 💾 Įrankio failas ¦ 💾 Rīka fails ¦ 💾 Tööriista fail
+📁 Ranger une copie dans les médias ¦ 📁 Išsaugoti kopiją medijoje ¦ 📁 Saglabāt kopiju medijos ¦ 📁 Pane koopia meediasse
+📄 Format, marges et orientation… ¦ 📄 Formatas, paraštės ir orientacija… ¦ 📄 Formāts, piemales un orientācija… ¦ 📄 Formaat, veerised ja paigutus…
+📄 PDF ¦ 📄 PDF ¦ 📄 PDF ¦ 📄 PDF
+📄 Pages ¦ 📄 Puslapiai ¦ 📄 Lapas ¦ 📄 Leheküljed
+📄 Saut de section ¦ 📄 Skyriaus lūžis ¦ 📄 Sadaļas pārtraukums ¦ 📄 Jaotisepiir
+📄 Saut de section (autre orientation)… ¦ 📄 Skyriaus lūžis (kita orientacija)… ¦ 📄 Sadaļas pārtraukums (cita orientācija)… ¦ 📄 Jaotisepiir (muu paigutus)…
+📅 Date ¦ 📅 Data ¦ 📅 Datums ¦ 📅 Kuupäev
+📅 Date du jour ¦ 📅 Šiandienos data ¦ 📅 Šodienas datums ¦ 📅 Tänane kuupäev
+📊 Un diagramme… ¦ 📊 Schema… ¦ 📊 Shēma… ¦ 📊 Diagramm…
+📋 Partir d’un modèle ¦ 📋 Pradėti nuo šablono ¦ 📋 Sākt no veidnes ¦ 📋 Alusta mallist
+📋 Partir d’un modèle… ¦ 📋 Pradėti nuo šablono… ¦ 📋 Sākt no veidnes… ¦ 📋 Alusta mallist…
+📍 Un lieu de la base… ¦ 📍 Vieta iš bazės… ¦ 📍 Vieta no datubāzes… ¦ 📍 Koht andmebaasist…
+📐 Envoyer vers la mise en page ¦ 📐 Siųsti į maketavimą ¦ 📐 Sūtīt uz maketu ¦ 📐 Saada küljendusse
+📐 Envoyer vers la mise en page… ¦ 📐 Siųsti į maketavimą… ¦ 📐 Sūtīt uz maketu… ¦ 📐 Saada küljendusse…
+📐 Reprendre les styles d’un livre… ¦ 📐 Perimti knygos stilius… ¦ 📐 Pārņemt grāmatas stilus… ¦ 📐 Võta üle raamatu stiilid…
+📐 Styles d’un livre… ¦ 📐 Knygos stiliai… ¦ 📐 Grāmatas stili… ¦ 📐 Raamatu stiilid…
+📑 Sommaire ¦ 📑 Turinys ¦ 📑 Satura rādītājs ¦ 📑 Sisukord
+📖 La biographie d’une personne… ¦ 📖 Asmens biografija… ¦ 📖 Personas biogrāfija… ¦ 📖 Isiku elulugu…
+📗 LibreOffice (.odt) ¦ 📗 LibreOffice (.odt) ¦ 📗 LibreOffice (.odt) ¦ 📗 LibreOffice (.odt)
+📘 Word (.docx) ¦ 📘 Word (.docx) ¦ 📘 Word (.docx) ¦ 📘 Word (.docx)
+📚 Bibliographie ¦ 📚 Bibliografija ¦ 📚 Bibliogrāfija ¦ 📚 Bibliograafia
+📜 Brouillon (sans les pages) ¦ 📜 Juodraštis (be puslapių) ¦ 📜 Melnraksts (bez lapām) ¦ 📜 Mustand (ilma lehekülgedeta)
+📝 Compte rendu ¦ 📝 Ataskaita ¦ 📝 Pārskats ¦ 📝 Aruanne
+📝 RTF ¦ 📝 RTF ¦ 📝 RTF ¦ 📝 RTF
+📝 Écrire sur cette personne : un document du traitement de texte, avec sa biographie déjà posée ¦ 📝 Rašyti apie šį asmenį: teksto rengyklės dokumentas su jau įdėta jo biografija ¦ 📝 Rakstīt par šo personu: teksta apstrādes dokuments ar jau ievietotu biogrāfiju ¦ 📝 Kirjuta sellest isikust: tekstitöötluse dokument, kus tema elulugu on juba sees
+📨 Champ de fusion ¦ 📨 Suliejimo laukas ¦ 📨 Sapludināšanas lauks ¦ 📨 Ühendusväli
+📨 Champ de fusion (prénom, dates…) ¦ 📨 Suliejimo laukas (vardas, datos…) ¦ 📨 Sapludināšanas lauks (vārds, datumi…) ¦ 📨 Ühendusväli (eesnimi, kuupäevad…)
+📨 Publipostage ¦ 📨 Laiškų suliejimas ¦ 📨 Vēstuļu sapludināšana ¦ 📨 Kirjakooste
+📨 Publipostage… ¦ 📨 Laiškų suliejimas… ¦ 📨 Vēstuļu sapludināšana… ¦ 📨 Kirjakooste…
+🔁 Synonymes de « {word} » ¦ 🔁 „{word}“ sinonimai ¦ 🔁 „{word}“ sinonīmi ¦ 🔁 Sõna „{word}“ sünonüümid
+🔁 Synonymes… ¦ 🔁 Sinonimai… ¦ 🔁 Sinonīmi… ¦ 🔁 Sünonüümid…
+🔊 Lecture… (Échap ou Outils → ⏹ Arrêter la lecture) ¦ 🔊 Skaitoma… (Esc arba Įrankiai → ⏹ Sustabdyti skaitymą) ¦ 🔊 Lasa… (Esc vai Rīki → ⏹ Apturēt lasīšanu) ¦ 🔊 Ettelugemine… (Esc või Tööriistad → ⏹ Peata ettelugemine)
+🔊 Lire à voix haute ¦ 🔊 Skaityti balsu ¦ 🔊 Lasīt balsī ¦ 🔊 Loe ette
+🔍 Rechercher ¦ 🔍 Ieškoti ¦ 🔍 Meklēt ¦ 🔍 Otsi
+🔎 Corrigé dans {n} passage (↶ pour revenir). ¦ 🔎 Ištaisyta {n} ištraukoje (↶ – grįžti). ¦ 🔎 Labots {n} fragmentā (↶, lai atgrieztos). ¦ 🔎 Parandatud {n} lõigus (↶ tagasi).
+🔎 Corrigé dans {n} passages (↶ pour revenir). ¦ 🔎 Ištaisyta ištraukų: {n} (↶ – grįžti). ¦ 🔎 Laboti fragmenti: {n} (↶, lai atgrieztos). ¦ 🔎 Parandatud lõike: {n} (↶ tagasi).
+🔎 Relecture (typographie, répétitions)… ¦ 🔎 Korektūra (prancūziška tipografija, pasikartojimai)… ¦ 🔎 Korektūra (franču tipogrāfija, atkārtojumi)… ¦ 🔎 Korrektuur (prantsuse tüpograafia, kordused)…
+🔎 Rien à reprendre : typographie et répétitions sont bonnes. ¦ 🔎 Nėra ką taisyti: tipografija ir pasikartojimai tvarkingi. ¦ 🔎 Nav ko labot: tipogrāfija un atkārtojumi ir kārtībā. ¦ 🔎 Pole midagi parandada: tüpograafia ja kordused on korras.
+🔎 Vérification avec les fiches… ¦ 🔎 Tikrinama pagal korteles… ¦ 🔎 Pārbauda pēc kartītēm… ¦ 🔎 Kaartide järgi kontrollimine…
+🔎 Vérifier avec les fiches ¦ 🔎 Patikrinti pagal korteles ¦ 🔎 Pārbaudīt pēc kartītēm ¦ 🔎 Kontrolli kaartide järgi
+🔎 {n} à regarder. ¦ 🔎 Peržiūrėti: {n}. ¦ 🔎 Jāapskata: {n}. ¦ 🔎 Vaadata: {n}.
+🔗 Lien… ¦ 🔗 Nuoroda… ¦ 🔗 Saite… ¦ 🔗 Link…
+🔗 Modifier le lien ¦ 🔗 Redaguoti nuorodą ¦ 🔗 Rediģēt saiti ¦ 🔗 Muuda linki
+🔗 Nouveau lien ¦ 🔗 Nauja nuoroda ¦ 🔗 Jauna saite ¦ 🔗 Uus link
+🔢 Nombre de mots ¦ 🔢 Žodžių skaičius ¦ 🔢 Vārdu skaits ¦ 🔢 Sõnade arv
+🔢 Nombre de mots… ¦ 🔢 Žodžių skaičius… ¦ 🔢 Vārdu skaits… ¦ 🔢 Sõnade arv…
+🔤 Index ¦ 🔤 Rodyklė ¦ 🔤 Rādītājs ¦ 🔤 Register
+🕘 Enregistrer comme nouvelle version ¦ 🕘 Išsaugoti kaip naują versiją ¦ 🕘 Saglabāt kā jaunu versiju ¦ 🕘 Salvesta uue versioonina
+🕘 Nouvelle version ¦ 🕘 Nauja versija ¦ 🕘 Jauna versija ¦ 🕘 Uus versioon
+🕘 Versions… ¦ 🕘 Versijos… ¦ 🕘 Versijas… ¦ 🕘 Versioonid…
+🖍 Surlignage… ¦ 🖍 Paryškinimas spalva… ¦ 🖍 Izcēlums… ¦ 🖍 Esiletõst…
+🖨 Imprimer… ¦ 🖨 Spausdinti… ¦ 🖨 Drukāt… ¦ 🖨 Prindi…
+🖼 Image… ¦ 🖼 Vaizdas… ¦ 🖼 Attēls… ¦ 🖼 Pilt…
+🧭 Panneau de navigation ¦ 🧭 Naršymo skydelis ¦ 🧭 Navigācijas panelis ¦ 🧭 Navigeerimispaan
+🧾 Ouvrir ce tableau dans le Tableur ¦ 🧾 Atidaryti šią lentelę Skaičiuoklėje ¦ 🧾 Atvērt šo tabulu Izklājlapā ¦ 🧾 Ava see tabel Tabelarvutuses
+🧾 Tableau venu du Tableur… ¦ 🧾 Lentelė iš Skaičiuoklės… ¦ 🧾 Tabula no Izklājlapas… ¦ 🧾 Tabel Tabelarvutusest…
+🧾 Texte (.txt) ¦ 🧾 Tekstas (.txt) ¦ 🧾 Teksts (.txt) ¦ 🧾 Tekst (.txt)
+=remplacement ¦ pakeitimas|pakeitimai|pakeitimų ¦ aizstājumi|aizstājums|aizstājumi ¦ asendus|asendust
+=commentaire ¦ komentaras|komentarai|komentarų ¦ komentāri|komentārs|komentāri ¦ kommentaar|kommentaari
+=modification suivie ¦ sekamas pakeitimas|sekami pakeitimai|sekamų pakeitimų ¦ izsekotas izmaiņas|izsekota izmaiņa|izsekotas izmaiņas ¦ jälgitud muudatus|jälgitud muudatust
+=tableau ¦ lentelė|lentelės|lentelių ¦ tabulas|tabula|tabulas ¦ tabel|tabelit
+=style ¦ stilius|stiliai|stilių ¦ stili|stils|stili ¦ stiil|stiili
+=paragraphe ¦ pastraipa|pastraipos|pastraipų ¦ rindkopas|rindkopa|rindkopas ¦ lõik|lõiku
+=champ rempli ¦ užpildytas laukas|užpildyti laukai|užpildytų laukų ¦ aizpildīti lauki|aizpildīts lauks|aizpildīti lauki ¦ täidetud väli|täidetud välja
+texte|Caractère ¦ Simbolis ¦ Rakstzīme ¦ Märk
+icone-gras|G ¦ B ¦ B ¦ B
+icone-italique|I ¦ I ¦ I ¦ I
+icone-souligne|S ¦ U ¦ U ¦ U
+icone-petites-capitales|Pᴄ ¦ Aᴀ ¦ Aᴀ ¦ Aᴀ

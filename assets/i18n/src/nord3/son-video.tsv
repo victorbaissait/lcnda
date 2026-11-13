@@ -1,0 +1,1005 @@
+fr ¦ ro
+(l’original reste gardé : on peut y revenir) ¦ (originalul rămâne păstrat: te poți întoarce la el)
+(voix, plus léger) ¦ (voce, mai ușor)
+1 rush ajouté : glisse-le sur la frise. ¦ 1 clip adăugat: trage-l pe linia de timp.
+1 rush ajouté : glisse-le sur la frise. Il entre dans les Médias quand tu enregistres le projet. ¦ 1 clip adăugat: trage-l pe linia de timp. Intră în Media când salvezi proiectul.
+: l’original ne change pas du tout ¦ : originalul nu se schimbă deloc
+<b>Une copie à part</b> (un autre son, rattaché aux mêmes fiches) ¦ <b>O copie separată</b> (alt sunet, legat de aceleași fișe)
+<b>Une copie à part</b> (une autre vidéo, rattachée aux mêmes fiches) ¦ <b>O copie separată</b> (alt videoclip, legat de aceleași fișe)
+Au repère orange ({time}) ¦ La reperul portocaliu ({time})
+Boutons des pistes : {n} px ¦ Butoanele pistelor: {n} px
+Boutons des pistes : {n} px (taille de départ) ¦ Butoanele pistelor: {n} px (mărimea inițială)
+Ce fichier est un réglage pour {a}, pas pour {b} : importe-le à sa place. ¦ Acest fișier e o setare pentru {a}, nu pentru {b}: importă-l acolo.
+Ce qu’il contient ({what}) remonte dans la racine. ¦ Ce conține ({what}) urcă în rădăcină.
+Ce qu’il contient ({what}) remonte dans « {dir} ». ¦ Ce conține ({what}) urcă în „{dir}”.
+Chapitre {n} ¦ Capitolul {n}
+Clic sur la frise : se placer · clic sur un élément : le choisir · glisser : le déplacer · {play} : lire · {split} : couper ici · {del} : enlever ¦ Clic pe linia de timp: te poziționezi · clic pe un element: îl alegi · trage: îl muți · {play}: redă · {split}: taie aici · {del}: scoate
+Enregistrement du son… {n} % ¦ Se salvează sunetul… {n} %
+Ensemble « {name} » appliqué. ¦ Setul „{name}” a fost aplicat.
+Ensemble « {name} » supprimé ¦ Setul „{name}” a fost șters
+Envoi des rushes {k}/{n}… ¦ Se trimit clipurile {k}/{n}…
+Espace ¦ Spațiu
+Fichier {fmt} téléchargé ({n} Mo). Rien n’a changé dans la base. ¦ Fișierul {fmt} a fost descărcat ({n} MB). Nimic nu s-a schimbat în bază.
+Il est utilisé {n} fois sur la frise : ces passages seront retirés aussi. Le fichier reste dans les Médias s’il y est. ¦ E folosit de {n} ori pe linia de timp: aceste pasaje vor fi scoase și ele. Fișierul rămâne în Media dacă e acolo.
+Image clé {time} ¦ Cadru cheie {time}
+Le fichier importé est maintenant dans les Médias. ¦ Fișierul importat e acum în Media.
+Le fichier reste dans les Médias s’il y est. ¦ Fișierul rămâne în Media dacă e acolo.
+Le montage est rejoué pour être enregistré : cela prend <b>{time}</b> (sa durée). Laisse la fenêtre ouverte. ¦ Montajul e redat din nou ca să fie salvat: durează <b>{time}</b> (durata lui). Lasă fereastra deschisă.
+Les boutons des pistes ont déjà leur taille de départ. ¦ Butoanele pistelor au deja mărimea inițială.
+Les boutons des pistes sont déjà au plus grand. ¦ Butoanele pistelor sunt deja la maximum.
+Les boutons des pistes sont déjà au plus petit. ¦ Butoanele pistelor sunt deja la minimum.
+Les {n} fichiers importés sont maintenant dans les Médias. ¦ Cele {n} fișiere importate sunt acum în Media.
+Mettre « {name} » dans… ¦ Pune „{name}” în…
+Montage fabriqué : {what}. Retouche ce que tu veux, puis ⤓ Exporter. ¦ Montaj făcut: {what}. Retușează ce vrei, apoi ⤓ Exportă.
+Nom du dossier (dans « {name} ») : ¦ Numele dosarului (în „{name}”):
+Nom du dossier : ¦ Numele dosarului:
+Nouveau chapitre ¦ Capitol nou
+Nouvelle version, <b>sans la montrer</b> pour l’instant ¦ Versiune nouă, <b>fără s-o arăți</b> deocamdată
+Nouvelle version, montrée partout ¦ Versiune nouă, arătată peste tot
+Ouvre une fois {what} : ses boutons apparaîtront ici. ¦ Deschide o dată {what}: butoanele lui vor apărea aici.
+Où mettre « {name} » ? ¦ Unde pui „{name}”?
+Piste « {name} » ajoutée. ¦ Pista „{name}” a fost adăugată.
+Piste « {name} » supprimée ¦ Pista „{name}” a fost ștearsă
+Piste « {name} » supprimée (avec {what}) ¦ Pista „{name}” a fost ștearsă (cu {what})
+Piste « {name} » vidée ¦ Pista „{name}” a fost golită
+Ranger « {name} » dans… ¦ Mută „{name}” în…
+Remplacer les réglages actuels par l’ensemble « {name} » ? ¦ Înlocuiești setările actuale cu setul „{name}”?
+Rush supprimé, avec ses {n} passages sur la frise. ¦ Clip șters, cu cele {n} pasaje ale lui de pe linia de timp.
+Rush supprimé, avec son passage sur la frise. ¦ Clip șters, cu pasajul lui de pe linia de timp.
+Rush supprimé. ¦ Clip șters.
+Réglage « {name} » importé : « Appliquer » pour l’utiliser. ¦ Setarea „{name}” a fost importată: „Aplică” ca s-o folosești.
+Supprimer le dossier « {name} » ? ¦ Ștergi dosarul „{name}”?
+Supprimer le rush ¦ Șterge clipul
+Supprimer « {name} » du projet ? ¦ Ștergi „{name}” din proiect?
+Titre de la vidéo ¦ Titlul videoclipului
+Titre du chapitre qui commence à {time} : ¦ Titlul capitolului care începe la {time}:
+Titre du son ¦ Titlul sunetului
+Un réglage s’appelle déjà « {name} ». Quel nom pour celui-ci ? ¦ O setare se numește deja „{name}”. Ce nume pentru aceasta?
+ce rush ¦ acest clip
+comme l’original (mono) ¦ ca originalul (mono)
+comme l’original (stéréo) ¦ ca originalul (stereo)
+comme l’original ({n} kHz) ¦ ca originalul ({n} kHz)
+la copie est rattachée aux mêmes fiches ¦ copia e legată de aceleași fișe
+la disposition du montage ¦ așezarea montajului
+le plus léger pour la voix · environ {n} Mo · QuickTime ne le lit pas ¦ cel mai ușor pentru voce · aproximativ {n} MB · QuickTime nu-l redă
+le plus léger · ~{n} Mo ¦ cel mai ușor · ~{n} MB
+les boutons de « {name} » ¦ butoanele din „{name}”
+lu absolument partout (téléphones, voitures, Mac, Windows) · environ {n} Mo en 128 kbit/s ¦ redat absolut peste tot (telefoane, mașini, Mac, Windows) · aproximativ {n} MB la 128 kbit/s
+lu partout · ~{n} Mo ¦ redat peste tot · ~{n} MB
+l’original est toujours gardé · montrée : {name} ¦ originalul e păstrat mereu · arătată: {name}
+l’outil « {name} » ¦ instrumentul „{name}”
+nouvelle version, copie (réglages) ¦ versiune nouă, copie (setări)
+rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité, images par seconde et volume (📢 {n} LUFS) : Réglages → Montage ¦ redat din nou în timp real ca să fie salvat (lasă fereastra deschisă) · mărime, calitate, cadre pe secundă și volum (📢 {n} LUFS): Setări → Montaj
+rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité, images par seconde et volume standard : Réglages → Montage ¦ redat din nou în timp real ca să fie salvat (lasă fereastra deschisă) · mărime, calitate, cadre pe secundă și volum standard: Setări → Montaj
+sans perte et environ deux fois plus léger que le WAV · environ {n} Mo · lu par les navigateurs, VLC, Windows ; pas par QuickTime ¦ fără pierderi și de aproximativ două ori mai ușor decât WAV · aproximativ {n} MB · redat de browsere, VLC, Windows; nu de QuickTime
+sans perte · ~{n} Mo ¦ fără pierderi · ~{n} MB
+sans perte, lu partout (Mac, Windows, Audacity) · environ {n} Mo ¦ fără pierderi, redat peste tot (Mac, Windows, Audacity) · aproximativ {n} MB
+sans perte, léger · ~{n} Mo ¦ fără pierderi, ușor · ~{n} MB
+sans perte, pour GarageBand, Logic, QuickTime · environ {n} Mo · à télécharger seulement (l’app ne le lit pas) ¦ fără pierderi, pentru GarageBand, Logic, QuickTime · aproximativ {n} MB · doar de descărcat (aplicația nu-l redă)
+stéréo ¦ stereo
+sur chaque temps ¦ pe fiecare timp
+tourné de {n}° ¦ rotit cu {n}°
+tous les {n} temps ¦ la fiecare {n} timpi
+{file} : ni vidéo, ni photo, ni son. ¦ {file}: nici videoclip, nici fotografie, nici sunet.
+{n} images/s ¦ {n} cadre/s
+{n} rushes ajoutés : glisse-les sur la frise. ¦ {n} clipuri adăugate: trage-le pe linia de timp.
+{n} rushes ajoutés : glisse-les sur la frise. Ils entrent dans les Médias quand tu enregistres le projet. ¦ {n} clipuri adăugate: trage-le pe linia de timp. Intră în Media când salvezi proiectul.
+{n} temps repérés · environ {bpm} battements par minute. ¦ {n} timpi detectați · aproximativ {bpm} bătăi pe minut.
+{n} temps repérés. ¦ {n} timpi detectați.
+{what} : choisis-en un puis « Appliquer ». ¦ {what}: alege unul, apoi „Aplică”.
+{what} sur la piste « Sous-titres ». ¦ {what} pe pista „Subtitrări”.
+« {name} » est revenu du Studio son, nettoyé. ¦ „{name}” s-a întors din Studioul de sunet, curățat.
+« {name} » rangé dans la racine. ¦ „{name}” a fost mutat în rădăcină.
+« {name} » rangé dans « {dir} ». ¦ „{name}” a fost mutat în „{dir}”.
+À la fin ¦ La sfârșit
+◇ image clé à {time} ¦ ◇ cadru cheie la {time}
+🎥 {what} à la piste 1 (décalages : {offs}). ¦ 🎥 {what} față de pista 1 (decalaje: {offs}).
+💾 Dans les médias… ¦ 💾 În media…
+📢 Mesure du volume… {n} % ¦ 📢 Se măsoară volumul… {n} %
+📢 Volume mesuré : {a} LUFS → {b} LUFS (crêtes tenues par le limiteur). ¦ 📢 Volum măsurat: {a} LUFS → {b} LUFS (vârfuri ținute de limitator).
+📢 Volume mesuré : {a} LUFS → {b} LUFS. ¦ 📢 Volum măsurat: {a} LUFS → {b} LUFS.
+🔒 Piste « {name} » verrouillée : ses éléments ne bougent plus. ¦ 🔒 Pista „{name}” a fost blocată: elementele ei nu se mai mișcă.
+🔓 Piste « {name} » déverrouillée. ¦ 🔓 Pista „{name}” a fost deblocată.
+🕘 Versions ({n})… ¦ 🕘 Versiuni ({n})…
+🥁 {n} temps repérés (environ {bpm} par minute). ¦ 🥁 {n} timpi detectați (aproximativ {bpm} pe minut).
+🥁 {n} temps repérés. ¦ 🥁 {n} timpi detectați.
+=rush ¦ clip|clipuri|de clipuri
+=plan ajouté ¦ plan adăugat|planuri adăugate|de planuri adăugate
+=sous-titre importé ¦ subtitrare importată|subtitrări importate|de subtitrări importate
+=ensemble importé ¦ set importat|seturi importate|de seturi importate
+=réglage du Studio reste appliqué ¦ setare a Studioului rămâne aplicată|setări ale Studioului rămân aplicate|de setări ale Studioului rămân aplicate
+=morceau ¦ bucată|bucăți|de bucăți
+(rien ne change dans la base) ¦ (nimic nu se schimbă în bază)
+(un autre son, rattaché aux mêmes fiches) ¦ (alt sunet, legat de aceleași fișe)
+(une autre vidéo, rattachée aux mêmes fiches) ¦ (alt videoclip, legat de aceleași fișe)
+300 dossiers au plus. ¦ Cel mult 300 de dosare.
+bandes floues plutôt que noires ¦ benzi estompate în loc de negre
+Activer / couper ¦ Activează / oprește
+Adaptation spatiale ¦ Adaptare spațială
+Adapter (toute l’image, bandes noires) ¦ Încadrează (toată imaginea, benzi negre)
+Aide sous la frise ¦ Ajutor sub linia de timp
+Aigus ¦ Înalte
+Aimant arrêté. ¦ Alinierea magnetică a fost oprită.
+Aimanter : en glissant, un élément se colle à la tête de lecture, au début ou à la fin des autres, aux chapitres et aux temps de la musique (garder Alt / Option appuyé : sans aimant) ¦ Aliniere magnetică: când tragi, un element se lipește de capul de redare, de începutul sau sfârșitul celorlalte, de capitole și de timpii muzicii (ține apăsat Alt / Option: fără aliniere)
+Aimanter : un élément glissé se colle à la tête de lecture, aux autres éléments, aux chapitres et aux temps de la musique (Alt / Option : sans aimant) ¦ Aliniere magnetică: un element tras se lipește de capul de redare, de celelalte elemente, de capitole și de timpii muzicii (Alt / Option: fără aliniere)
+Ajouter une image clé ici (la valeur pourra changer au fil du temps) ¦ Adaugă un cadru cheie aici (valoarea se va putea schimba în timp)
+Aller à l'image clé précédente de l'élément choisi ¦ Mergi la cadrul cheie anterior al elementului ales
+Aller à l'image clé suivante de l'élément choisi ¦ Mergi la cadrul cheie următor al elementului ales
+Le nom du projet (pour le retrouver dans 📂 Projets…) ¦ Numele proiectului (ca să-l regăsești în 📂 Proiecte…)
+Le son du morceau passe sur une piste son, à part ¦ Sunetul bucății trece pe o pistă audio separată
+Le son fini : nouvelle version (l’original est gardé), copie, nouveau son ou fichier téléchargé ¦ Sunetul terminat: versiune nouă (originalul e păstrat), copie, sunet nou sau fișier descărcat
+Ancien film ¦ Film vechi
+Ancrage X ¦ Ancoră X
+Ancrage Y ¦ Ancoră Y
+Au début ¦ La început
+Aucun projet son pour l’instant ¦ Deocamdată niciun proiect de sunet
+Aucun sous-titre reconnu (fichier .srt ou .vtt). ¦ Nicio subtitrare recunoscută (fișier .srt sau .vtt).
+Aucune (taille d’origine) ¦ Niciuna (mărimea originală)
+Aussi ⌘ + et ⌘ −, ⌘ 0 pour revenir ¦ De asemenea ⌘ + și ⌘ −, ⌘ 0 ca să revii
+Avancer le morceau dans la piste 1 ¦ Mută bucata înainte în pista 1
+← Avancer ¦ ← Înainte
+Reculer → ¦ Înapoi →
+Bord adouci ¦ Margine estompată
+Boutons remis comme au départ. ¦ Butoanele au fost readuse la starea inițială.
+Cacher cette piste (ni vue ni entendue) ¦ Ascunde această pistă (nici văzută, nici auzită)
+Montrée ¦ Arătată
+Cachée ¦ Ascunsă
+Ce fichier n’est pas une disposition du montage. ¦ Acest fișier nu e o așezare a montajului.
+Ce réglage est vide ou abîmé. ¦ Această setare e goală sau deteriorată.
+Cette piste est déjà vide. ¦ Această pistă e deja goală.
+Chapitres copiés. ¦ Capitolele au fost copiate.
+Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse un élément pour le déplacer dans le temps, ou sur une autre piste du même genre (vidéos et photos vont sur toutes les pistes vidéo, texte ↔ texte, son ↔ son). Espace = lire / pause · ⌫ ou Suppr = enlever · B = couper ici · ◇ = image clé · 🧲 un élément glissé se colle aux autres (Alt / Option : sans aimant) · 🔒 une piste verrouillée ne bouge plus. ¦ Fă clic pe linia de timp ca să te poziționezi, pe un element ca să-l alegi; trage un element ca să-l muți în timp sau pe altă pistă de același fel (videoclipurile și fotografiile merg pe toate pistele video, text ↔ text, sunet ↔ sunet). Spațiu = redă / pauză · ⌫ sau Del = scoate · B = taie aici · ◇ = cadru cheie · 🧲 un element tras se lipește de celelalte (Alt / Option: fără aliniere) · 🔒 o pistă blocată nu se mai mișcă.
+Comme la 1re vidéo ¦ Ca primul videoclip
+Comme la vidéo ¦ Ca videoclipul
+Composition ¦ Compoziție
+Copie ce texte : ¦ Copiază acest text:
+Couleur du fondu ¦ Culoarea tranziției
+Couleurs vives ¦ Culori vii
+Coupe franche ¦ Tăietură directă
+Coupe le morceau choisi à la tête de lecture ¦ Taie bucata aleasă la capul de redare
+Commence ici ¦ Începe aici
+Finit ici ¦ Se termină aici
+Le morceau choisi commence à la tête de lecture ¦ Bucata aleasă începe la capul de redare
+Le morceau choisi finit à la tête de lecture ¦ Bucata aleasă se termină la capul de redare
+Dans « Modifier le son », « 💾 Enregistrer le projet ». ¦ În „Modifică sunetul”, „💾 Salvează proiectul”.
+Monter ce bloc ¦ Mută acest bloc în sus
+Descendre ce bloc ¦ Mută acest bloc în jos
+Monter la piste ¦ Mută pista în sus
+Descendre la piste ¦ Mută pista în jos
+Distorsion ¦ Distorsiune
+Doux ¦ Blând
+Durée du film : ¦ Durata filmului:
+Durée illisible ¦ Durată ilizibilă
+Durée par photo ¦ Durata pe fotografie
+Durée à l’écran ¦ Durata pe ecran
+Défiler ¦ Derulează
+Détacher le son ¦ Detașează sunetul
+🔊 Détacher le son ¦ 🔊 Detașează sunetul
+Montrer cette piste ¦ Arată această pistă
+Déverrouiller la piste ¦ Deblochează pista
+Verrouiller la piste (ses éléments ne bougent plus, ne se coupent plus, ne s’enlèvent plus) ¦ Blochează pista (elementele ei nu se mai mișcă, nu se mai taie, nu se mai scot)
+ENREGISTRER LE SON ¦ SALVEAZĂ SUNETUL
+EXPORTER LA VIDÉO ¦ EXPORTĂ VIDEOCLIPUL
+Effacer les temps ¦ Șterge timpii
+Repérer les temps ¦ Detectează timpii
+Repérer de nouveau ¦ Detectează din nou
+Effet Ken Burns ¦ Efect Ken Burns
+Effet vieux film : grain, rayures, poussières, image qui scintille, coins assombris ¦ Efect de film vechi: granulație, zgârieturi, praf, imagine care pâlpâie, colțuri întunecate
+En couple ¦ În cuplu
+Les parents ¦ Părinții
+Les enfants ¦ Copiii
+En incrustation, à la tête de lecture ¦ Suprapus, la capul de redare
+Enlever cette image clé ¦ Scoate acest cadru cheie
+Enlever l'élément choisi ¦ Scoate elementul ales
+🗑 Enlever ¦ 🗑 Scoate
+Enlever la stabilisation ¦ Scoate stabilizarea
+Enlever le reflet vert sur le sujet (cheveux, bords) ¦ Scoate reflexul verde de pe subiect (păr, margini)
+Enregistre ta voix au micro pendant que le film défile (casque conseillé) ¦ Înregistrează-ți vocea la microfon în timp ce filmul rulează (căști recomandate)
+Enregistrer le projet de montage, pour le rouvrir et continuer plus tard (⌘S) ¦ Salvează proiectul de montaj, ca să-l redeschizi și să continui mai târziu (⌘S)
+Enregistrer le projet son, pour y revenir plus tard (⌘S) ¦ Salvează proiectul de sunet, ca să revii la el mai târziu (⌘S)
+Entre deux images clés ¦ Între două cadre cheie
+en douceur ¦ lin
+régulier ¦ uniform
+Exporter un fichier (et, si tu veux, une copie dans les médias) ¦ Exportă un fișier (și, dacă vrei, o copie în media)
+Fabrique le fichier vidéo (MP4 ou WebM, plusieurs formats d’image) et le range dans les médias : nouvelle version, copie ou nouvelle vidéo ¦ Face fișierul video (MP4 sau WebM, mai multe formate de imagine) și îl pune în media: versiune nouă, copie sau videoclip nou
+Fermer sans enregistrer les modifications ? ¦ Închizi fără să salvezi modificările?
+Fondu au blanc ¦ Estompare la alb
+Fondu au noir ¦ Estompare la negru
+Fondu d’entrée ¦ Apariție treptată
+Fondu de sortie ¦ Dispariție treptată
+↗ Fondu d’entrée ¦ ↗ Apariție treptată
+↘ Fondu de sortie ¦ ↘ Dispariție treptată
+Fondu en couleur (au choix) ¦ Estompare în culoare (la alegere)
+Fondu enchaîné ¦ Tranziție încrucișată
+Fondu flou ¦ Tranziție estompată
+Genre (vidéo, photo, son) ¦ Tip (video, fotografie, sunet)
+Glisse depuis la droite ¦ Alunecă din dreapta
+Glisse depuis la gauche ¦ Alunecă din stânga
+Glisse sur l’onde pour sélectionner · clic = se placer · Espace = écouter · molette = défiler, Ctrl + molette = zoom ¦ Trage pe undă ca să selectezi · clic = te poziționezi · Spațiu = ascultă · rotiță = derulează, Ctrl + rotiță = zoom
+Glisse-le sur une piste de la frise ¦ Trage-l pe o pistă a liniei de timp
+Glissement vers la droite ¦ Alunecare spre dreapta
+Glissement vers la gauche (la suivante pousse) ¦ Alunecare spre stânga (următoarea împinge)
+Glissement vers le bas ¦ Alunecare în jos
+Glissement vers le haut ¦ Alunecare în sus
+Glisser pour élargir ou rétrécir le panneau (double-clic : largeur de départ) ¦ Trage ca să lărgești sau să îngustezi panoul (dublu clic: lățimea inițială)
+Graves ¦ Joase
+Tons moyens ¦ Medii
+Hauteur des pistes ¦ Înălțimea pistelor
+Taille des boutons des pistes ¦ Mărimea butoanelor pistelor
+Image et son ¦ Imagine și sunet
+Images par seconde ¦ Cadre pe secundă
+Importe tes vidéos et photos dans l’onglet 🎞️ Rush, puis glisse-les sur la frise (ou « ＋ Vidéo / photo à la suite »). ¦ Importă-ți videoclipurile și fotografiile în fila 🎞️ Clipuri, apoi trage-le pe linia de timp (sau „＋ Videoclip / fotografie în continuare”).
+Inclinaison horizontale ¦ Înclinare orizontală
+Inclinaison verticale ¦ Înclinare verticală
+Indique un nombre, par exemple 6 ou -3. ¦ Introdu un număr, de exemplu 6 sau -3.
+＋ Incrustation ¦ ＋ Suprapunere
+＋ Incruster ¦ ＋ Suprapune
+Une vidéo ou une photo dans un coin de l'image, à la tête de lecture ¦ Un videoclip sau o fotografie într-un colț al imaginii, la capul de redare
+Une vidéo ou une photo, à la suite dans la piste Vidéo 1 ¦ Un videoclip sau o fotografie, în continuare pe pista Video 1
+＋ Vidéo / photo à la suite ¦ ＋ Videoclip / fotografie în continuare
+Vidéo / photo à la suite ¦ Videoclip / fotografie în continuare
+Lecture ¦ Redare
+Les modifications du montage seront perdues. ¦ Modificările montajului se vor pierde.
+Les modifications du son seront perdues. ¦ Modificările sunetului se vor pierde.
+Les photos arrivent… ¦ Fotografiile sosesc…
+Les réglages s’appliquent à la sélection ; sans sélection, à tout le son. ¦ Setările se aplică selecției; fără selecție, întregului sunet.
+Les vidéos, photos et sons du projet ¦ Videoclipurile, fotografiile și sunetele proiectului
+Lettres qui se resserrent ¦ Litere care se strâng
+Lettres qui s’écartent ¦ Litere care se depărtează
+Lissage du mouvement ¦ Netezirea mișcării
+MODIFIER LE SON ¦ MODIFICĂ SUNETUL
+MODÈLE DE MONTAGE ¦ MODEL DE MONTAJ
+MONTAGE VIDÉO ¦ MONTAJ VIDEO
+🎬 MONTAGE VIDÉO ¦ 🎬 MONTAJ VIDEO
+🎬 MONTAGE ¦ 🎬 MONTAJ
+Mets la vidéo du fond vert au-dessus (incrustation, tout l’écran), et le décor (photo d’archive, autre vidéo) dessous, sur la piste 1. ¦ Pune videoclipul cu fundal verde deasupra (suprapunere, tot ecranul), iar decorul (fotografie de arhivă, alt videoclip) dedesubt, pe pista 1.
+Mettre ce dossier dans un autre ¦ Pune acest dosar în altul
+Mode de fusion ¦ Mod de îmbinare
+Mon son ¦ Sunetul meu
+Mot par mot ¦ Cuvânt cu cuvânt
+Musique pendant la voix ¦ Muzică în timpul vocii
+Nom du fichier téléchargé ¦ Numele fișierului descărcat
+Non, nettoyer la sélection ¦ Nu, curăță selecția
+Oui, c’est du bruit seul ¦ Da, e doar zgomot
+Nouveau dossier dans le dossier ouvert ¦ Dosar nou în dosarul deschis
+Nouveau montage ¦ Montaj nou
+Nouveau son enregistré, rattaché aux mêmes fiches. ¦ Sunet nou salvat, legat de aceleași fișe.
+Nouveau ⚡ Son rapide ¦ Nou ⚡ Sunet rapid
+Nouvelle version montrée partout. L’original est gardé. ¦ Versiune nouă arătată peste tot. Originalul e păstrat.
+Nouvelle vidéo enregistrée, rattachée aux mêmes fiches. ¦ Videoclip nou salvat, legat de aceleași fișe.
+Version enregistrée (l’ancienne reste montrée). ¦ Versiune salvată (cea veche rămâne arătată).
+Ordre d’arrivée ¦ Ordinea sosirii
+Trier les rushes ¦ Sortează clipurile
+Outils du montage ¦ Instrumentele montajului
+Outils du son ¦ Instrumentele sunetului
+Ouverture du son… ¦ Se deschide sunetul…
+Ouvrir ce dossier ¦ Deschide acest dosar
+Renommer ce dossier ¦ Redenumește acest dosar
+Renommer ce rush ¦ Redenumește acest clip
+Ranger ce rush dans un dossier ¦ Pune acest clip într-un dosar
+Ouvrir un autre projet sans enregistrer ce son ? ¦ Deschizi alt proiect fără să salvezi acest sunet?
+Ouvrir un autre projet sans enregistrer celui-ci ? ¦ Deschizi alt proiect fără să-l salvezi pe acesta?
+Panneau des réglages ¦ Panoul setărilor
+Part vers la droite ¦ Pleacă spre dreapta
+Part vers la gauche ¦ Pleacă spre stânga
+Pas d’image clé après. ¦ Niciun cadru cheie după.
+Pas d’image clé avant. ¦ Niciun cadru cheie înainte.
+Passer dans l’autre colonne ¦ Trece în cealaltă coloană
+Pistes ¦ Piste
+Plus chaud ¦ Mai cald
+Plus froid ¦ Mai rece
+Projets de montage ¦ Proiecte de montaj
+Projets son ¦ Proiecte de sunet
+Préparation du fichier… ¦ Se pregătește fișierul…
+Qualité MP3 ¦ Calitate MP3
+Que fait chaque outil ? ¦ Ce face fiecare instrument?
+Raccourcir les blancs ¦ Scurtează pauzele
+⏩ Raccourcir les longs blancs ¦ ⏩ Scurtează pauzele lungi
+Rebondit puis disparaît ¦ Sare, apoi dispare
+Reculer le morceau dans la piste 1 ¦ Mută bucata înapoi în pista 1
+Rejoue ce texte depuis son début ¦ Redă din nou acest text de la început
+Remplir (recadre pour remplir) ¦ Umple (decupează ca să umple)
+Rendre transparente la couleur du fond (fond vert ou bleu) : ce qui est dessous se voit ¦ Fă transparentă culoarea fundalului (fundal verde sau albastru): se vede ce e dedesubt
+Roues de couleur ¦ Roți de culoare
+Rouvrir un montage enregistré ¦ Redeschide un montaj salvat
+Rouvrir un son en cours de travail ¦ Redeschide un sunet în lucru
+Son 1 ¦ Sunet 1
+Son 2 ¦ Sunet 2
+🎵 Son 1 ¦ 🎵 Sunet 1
+Vidéo 1 ¦ Video 1
+Vidéo 2 ¦ Video 2
+Textes 1 ¦ Texte 1
+🔤 Textes 1 ¦ 🔤 Texte 1
+Son ajouté (il est sélectionné). ¦ Sunet adăugat (e selectat).
+Son illisible ¦ Sunet ilizibil
+Vidéo illisible ¦ Videoclip ilizibil
+vidéo illisible ¦ videoclip ilizibil
+son introuvable ¦ sunet negăsit
+Sort du flou ¦ Iese din ceață
+Stabilisation annulée. ¦ Stabilizare anulată.
+Superposition claire (écran) ¦ Suprapunere luminoasă (ecran)
+Supprimer cette piste ¦ Șterge această pistă
+Vider cette piste (elle reste, c’est la piste de base du film) ¦ Golește această pistă (rămâne, e pista de bază a filmului)
+Supprimer le projet (les vidéos et photos restent dans les Médias) ¦ Șterge proiectul (videoclipurile și fotografiile rămân în Media)
+Sur la frise ¦ Pe linia de timp
+Surgit avec un rebond ¦ Apare cu un salt
+Tombe et rebondit ¦ Cade și sare
+S’ajoute aux réglages de chaque morceau (onglet 🎯 Élément → « 🔊 Son de ce morceau »). ¦ Se adaugă la setările fiecărei bucăți (fila 🎯 Element → „🔊 Sunetul acestei bucăți”).
+S’ajoutent aux couleurs de chaque morceau (onglet Élément). ¦ Se adaugă la culorile fiecărei bucăți (fila Element).
+S’efface lettre par lettre ¦ Se șterge literă cu literă
+S’efface mot par mot ¦ Se șterge cuvânt cu cuvânt
+Température (froid ↔ chaud) ¦ Temperatură (rece ↔ cald)
+Titre / texte ¦ Titlu / text
+＋ Titre / texte ¦ ＋ Titlu / text
+Son / musique ¦ Sunet / muzică
+Tout reste modifiable ensuite. ¦ Totul rămâne modificabil după aceea.
+Transformer ¦ Transformă
+Transition avant ¦ Tranziție înainte
+Type ¦ Tip
+Un chapitre commence à la tête de lecture ¦ Un capitol începe la capul de redare
+Chapitre ici ¦ Capitol aici
+Un chapitre par grande étape ¦ Un capitol pentru fiecare etapă mare
+Un sous-titre de 3 s à la tête de lecture, sur la piste « Sous-titres » ¦ O subtitrare de 3 s la capul de redare, pe pista „Subtitrări”
+Sous-titre ici ¦ Subtitrare aici
+Une petite vidéo dans un coin, réglable ¦ Un mic videoclip într-un colț, reglabil
+Une piste texte reçoit des titres (« ＋ Titre / texte »). ¦ O pistă de text primește titluri („＋ Titlu / text”).
+Vidéos, photos ou sons de l’ordinateur (plusieurs à la fois), rangés dans le dossier ouvert ¦ Videoclipuri, fotografii sau sunete de pe calculator (mai multe deodată), puse în dosarul deschis
+Voix off ¦ Voce din off
+🎙 Voix off ¦ 🎙 Voce din off
+⏹ Arrêter la voix off ¦ ⏹ Oprește vocea din off
+Volet de droite à gauche ¦ Cortină de la dreapta la stânga
+Volet de gauche à droite ¦ Cortină de la stânga la dreapta
+Volet en cercle (iris) ¦ Cortină în cerc (iris)
+Volume général ¦ Volum general
+WebM — léger ¦ WebM — ușor
+Zoom ¦ Zoom
+Zoom arrière sur la frise ¦ Micșorează linia de timp
+Zoom avant sur la frise ¦ Mărește linia de timp
+Zoom avant à travers ¦ Zoom înainte prin imagine
+Zoom de la frise ¦ Zoomul liniei de timp
+Zoomer sur la sélection ¦ Zoom pe selecție
+bandes floues au lieu des bandes noires (la même image, floutée, derrière) ¦ benzi estompate în loc de benzi negre (aceeași imagine, estompată, în spate)
+centré ¦ centrat
+ces boutons ¦ aceste butoane
+cette disposition ¦ această așezare
+commence par un fondu depuis le noir ¦ începe cu o apariție din negru
+finit par un fondu au noir ¦ se termină cu o estompare la negru
+effet Ken Burns sur toutes les photos (zoom et glissement lents, variés) ¦ efect Ken Burns pe toate fotografiile (zoom și alunecare lente, variate)
+la musique baisse toute seule pendant une voix ¦ muzica scade singură în timpul unei voci
+… et aussi pendant le son des vidéos de la piste 1 ¦ … și în timpul sunetului videoclipurilor de pe pista 1
+le montage est vide ¦ montajul e gol
+l’image tremble un peu, comme dans un vieux projecteur ¦ imaginea tremură puțin, ca într-un proiector vechi
+sépia (couleurs passées, brunes) ¦ sepia (culori decolorate, maronii)
+pas de sélection ¦ nicio selecție
+plusieurs formats, nouvelle version ¦ mai multe formate, versiune nouă
+sans les blancs, voix plus nette… ¦ fără pauze, voce mai clară…
+« 🔖 Chapitre ici » pose un chapitre à la tête de lecture. ¦ „🔖 Capitol aici” pune un capitol la capul de redare.
+· tire le point vers une couleur, double-clic pour revenir ¦ · trage punctul spre o culoare, dublu clic ca să revii
+À la suite dans Vidéo 1 ¦ În continuare pe Video 1
+＋ À la suite ¦ ＋ În continuare
+＋ Son seul ¦ ＋ Doar sunet
+Échelle (tout) ¦ Scară (tot)
+Échelle X ¦ Scară X
+Échelle Y ¦ Scară Y
+Écouter, comparer, montrer partout, renommer, supprimer ¦ Ascultă, compară, arată peste tot, redenumește, șterge
+↻ Refaire l’analyse ¦ ↻ Refă analiza
+⌨️ Raccourcis du montage ¦ ⌨️ Scurtăturile montajului
+▣ Dans un coin ¦ ▣ Într-un colț
+⛶ Tout l’écran ¦ ⛶ Tot ecranul
+▶ Lire ¦ ▶ Redă
+▶ Lire / pause ¦ ▶ Redă / pauză
+✂️ Modifier un son ouvre ¦ ✂️ Modifică un sunet deschide
+⬅️ Glisse vers la gauche ¦ ⬅️ Alunecă spre stânga
+➡️ Glisse vers la droite ¦ ➡️ Alunecă spre dreapta
+⬆️ Monte ¦ ⬆️ Urcă
+⬇️ Descend ¦ ⬇️ Coboară
+⤒ Importer des rushes (vidéos, photos, sons)… ¦ ⤒ Importă clipuri (videoclipuri, fotografii, sunete)…
+⤒ Importer des sous-titres (.srt, .vtt)… ¦ ⤒ Importă subtitrări (.srt, .vtt)…
+⬚ Garder seulement la sélection ¦ ⬚ Păstrează doar selecția
+〰️ Enlever le bourdonnement ¦ 〰️ Scoate bâzâitul
+＋ Ajouter un son… ¦ ＋ Adaugă un sunet…
+＋ Piste texte ¦ ＋ Pistă de text
+🎙 Musique et voix ¦ 🎙 Muzică și voce
+🎛️ Réglages de l’image ¦ 🎛️ Setările imaginii
+🎞️ Film ¦ 🎞️ Film
+🎞️ Rush ¦ 🎞️ Clip
+🎞️ Rushes ¦ 🎞️ Clipuri
+🎯 Élément ¦ 🎯 Element
+🎞️ Vieux film (ce morceau) ¦ 🎞️ Film vechi (această bucată)
+🎞️ Vieux film (tout le film) ¦ 🎞️ Film vechi (tot filmul)
+🎧 Mono ¦ 🎧 Mono
+🎧 Mono (le même son des deux côtés) ¦ 🎧 Mono (același sunet pe ambele părți)
+🎧 SON ¦ 🎧 SUNET
+🎨 Couleurs de ce morceau ¦ 🎨 Culorile acestei bucăți
+🎨 Couleurs de tout le film ¦ 🎨 Culorile întregului film
+🎬 Disposition du montage ¦ 🎬 Așezarea montajului
+🎯 Vectorscope et histogramme ¦ 🎯 Vectorscop și histogramă
+🎲 Automatique (varié) ¦ 🎲 Automat (variat)
+💾 Garder dans les médias… ¦ 💾 Păstrează în media…
+📁＋ Dossier ¦ 📁＋ Dosar
+📏 Normaliser ¦ 📏 Normalizează
+📐 Format de l’image ¦ 📐 Formatul imaginii
+📢 Volume standard (LUFS)… ¦ 📢 Volum standard (LUFS)…
+📱 Téléphone 9:16 (vertical) ¦ 📱 Telefon 9:16 (vertical)
+📺 Ancien écran 4:3 ¦ 📺 Ecran vechi 4:3
+🖥️ Écran 16:9 ¦ 🖥️ Ecran 16:9
+🖼️ Portrait 4:5 (réseaux) ¦ 🖼️ Portret 4:5 (rețele sociale)
+🖼️ Vidéos incrustées ¦ 🖼️ Videoclipuri suprapuse
+🔇 Sans le son ¦ 🔇 Fără sunetul
+🔇 Sans son ¦ 🔇 Fără sunet
+🔇 Silence ¦ 🔇 Liniște
+🔊 Volume… ¦ 🔊 Volum…
+🔖 Chapitres ¦ 🔖 Capitole
+🖼️ Photos ¦ 🖼️ Fotografii
+🗂 De la base ¦ 🗂 Din bază
+🗣️ Voix plus nette ¦ 🗣️ Voce mai clară
+🟩 Fond vert (incrustation) ¦ 🟩 Fundal verde (suprapunere)
+🧲 Aimanter ¦ 🧲 Aliniere magnetică
+Aimanter ¦ Aliniere magnetică
+🧹 Moins de souffle et de grondement ¦ 🧹 Mai puțin fâșâit și huruit
+🧹 Réduire le souffle ¦ 🧹 Reduce fâșâitul
+🪄 « La vie de… » ¦ 🪄 „Viața lui…”
+🪄 « Une famille » ¦ 🪄 „O familie”
+{what}, et rangés dans les médias. ¦ {what} și puse în media.
+=fichier téléchargé ¦ fișier descărcat|fișiere descărcate|de fișiere descărcate
+Fichier téléchargé, et une copie est rangée dans les médias. ¦ Fișier descărcat, iar o copie e pusă în media.
+{dur} · {ch} · {khz} kHz · sonie {lufs} LUFS · crête {pk} dB ¦ {dur} · {ch} · {khz} kHz · intensitate {lufs} LUFS · vârf {pk} dB
+{dur} · {ch} · {khz} kHz · crête {pk} dB · sonie <span data-as-lufs>…</span> ¦ {dur} · {ch} · {khz} kHz · vârf {pk} dB · intensitate <span data-as-lufs>…</span>
+Chaque zone dans un fichier ({n}) ¦ Fiecare zonă într-un fișier ({n})
+Chaque piste dans un fichier ({n}) ¦ Fiecare pistă într-un fișier ({n})
+Comme l’original (stéréo) ¦ Ca originalul (stereo)
+Comme l’original (mono) ¦ Ca originalul (mono)
+Comme l’original ({n} kHz) ¦ Ca originalul ({n} kHz)
+Relier « {name} » à une personne… ¦ Leagă „{name}” de o persoană…
+Relier « {name} » à une personne ¦ Leagă „{name}” de o persoană
+Relier « {name} » à un événement ¦ Leagă „{name}” de un eveniment
+Relier « {name} » à {what} ¦ Leagă „{name}” de {what}
+Relier « {name} » ¦ Leagă „{name}”
+Insérer « {name} » ¦ Inserează „{name}”
+Enregistrement au micro ({time}) ¦ Înregistrare la microfon ({time})
+🎛️ Rack d’effets ¦ 🎛️ Rack de efecte
+Rack d’effets ¦ Rack de efecte
+=effet ¦ efect|efecte|de efecte
+Rallumer ¦ Pornește din nou
+Éteindre ¦ Oprește
+Rallumer l’effet ¦ Pornește din nou efectul
+Éteindre l’effet ¦ Oprește efectul
+Rallumer {what} ¦ Pornește din nou {what}
+Éteindre {what} ¦ Oprește {what}
+Retirer {what} ¦ Scoate {what}
+Effet « {name} » retiré ¦ Efectul „{name}” a fost scos
+Réglages « {name} » ¦ Setări „{name}”
+Égaliseur : {what} ¦ Egalizator: {what}
+à plat ¦ plat
+Empreinte : {a} → {b} ({n} s de bruit choisi). ¦ Amprentă: {a} → {b} ({n} s de zgomot ales).
+Empreinte : {a} → {b} ({n} s de bruit seul, trouvé tout seul). ¦ Amprentă: {a} → {b} ({n} s doar de zgomot, găsit automat).
+Réverbération : {what} ¦ Reverberație: {what}
+{n} Hz (trouvé) ¦ {n} Hz (găsit)
+Trouver tout seul ¦ Găsește automat
+Forme du fondu d’entrée ¦ Forma apariției treptate
+Forme du fondu de sortie ¦ Forma dispariției treptate
+Forme du fondu ¦ Forma tranziției
+{what} au pinceau. ¦ {what} cu pensula.
+=zone réparée ¦ zonă reparată|zone reparate|de zone reparate
+=réparation au pinceau ¦ reparație cu pensula|reparații cu pensula|de reparații cu pensula
+Seulement sur {a} → {b} ¦ Doar pe {a} → {b}
+Renommer « {name} » ¦ Redenumește „{name}”
+Écouter « {name} » ¦ Ascultă „{name}”
+Fichier introuvable ¦ Fișier negăsit
+Prise micro du {date} ¦ Înregistrare la microfon din {date}
+Glisse = sélectionner · <kbd>Espace</kbd> écouter · <kbd>⌘</kbd> et molette : zoom · <kbd>M</kbd> marqueur · <kbd>A</kbd> maintenu : l’avant ¦ Trage = selectezi · <kbd>Spațiu</kbd> ascultă · <kbd>⌘</kbd> și rotița: zoom · <kbd>M</kbd> marcaj · <kbd>A</kbd> ținut apăsat: înainte
+Glisse sur l’onde pour sélectionner ; clic = se placer ; ⇧ ← → agrandit la sélection. ¦ Trage pe undă ca să selectezi; clic = te poziționezi; ⇧ ← → mărește selecția.
+Peins sur la tache du spectre (toux, sonnerie), puis « 🩹 Réparer ». Taille : le curseur. ¦ Pictează pe pata din spectru (tuse, sonerie), apoi „🩹 Repară”. Mărime: cursorul.
+Entoure la tache sur le spectre, puis « 🩹 Réparer ». ¦ Încercuiește pata pe spectru, apoi „🩹 Repară”.
+Clic sur l’onde : un marqueur 🚩 à cet endroit. ¦ Clic pe undă: un marcaj 🚩 în acel loc.
+Multipiste : clic sur un morceau pour le couper en deux. Sur l’onde : supprime la sélection. ¦ Multipistă: clic pe o bucată ca s-o tai în două. Pe undă: șterge selecția.
+Garde <kbd>A</kbd> appuyée pour entendre l’avant, au même endroit. ¦ Ține apăsată <kbd>A</kbd> ca să auzi varianta de dinainte, în același loc.
+{name} — {what} (prêt) ¦ {name} — {what} (gata)
+{time} au début ¦ {time} la început
+{time} à la fin ¦ {time} la sfârșit
+Les zones hachurées seront coupées ({what}). ¦ Zonele hașurate vor fi tăiate ({what}).
+Glisse les poignées noires pour changer. ¦ Trage mânerele negre ca să schimbi.
+le « mmm » du courant (trouvé tout seul : {n} Hz) ¦ „mmm”-ul curentului (găsit automat: {n} Hz)
+le « mmm » du courant (aucun trouvé : 50 Hz par défaut) ¦ „mmm”-ul curentului (niciunul găsit: 50 Hz implicit)
+le « mmm » du courant ¦ „mmm”-ul curentului
+le « chhh » de la cassette ¦ „șșș”-ul casetei
+plus de {n} s → 0,5 s ¦ peste {n} s → 0,5 s
+{name} (nettoyé) ¦ {name} (curățat)
+Couper la fin ({time}) ¦ Taie sfârșitul ({time})
+Couper le début ({time}) ¦ Taie începutul ({time})
+Nettoyer « {name} » à la place ? ¦ Curăți „{name}” în schimb?
+Ouvrir ce son ¦ Deschide acest sunet
+Un ronflement du courant a été trouvé ({n} Hz) : il est enlevé, avec les clics. Écoute la différence. ¦ S-a găsit un zumzet al curentului ({n} Hz): e scos, împreună cu clicurile. Ascultă diferența.
+son|piste ¦ pistă
+baisse|de ¦ cu
+retour en ¦ revenire în
+Piste de la voix ¦ Pista vocii
+Piste qui baisse ¦ Pista care scade
+Baisse en dB ¦ Scădere în dB
+{name} : armée pour le micro ¦ {name}: armată pentru microfon
+{name} : désarmée ¦ {name}: dezarmată
+Renommer la piste « {name} » ¦ Redenumește pista „{name}”
+{name} : courbe du panoramique ¦ {name}: curba panoramării
+{name} : courbe du volume ¦ {name}: curba volumului
+Couper « {name} » à {time} ¦ Taie „{name}” la {time}
+Déplacer « {name} » ¦ Mută „{name}”
+le morceau ¦ bucata
+{name} : point ajouté à {time} ¦ {name}: punct adăugat la {time}
+{name} : point retiré ¦ {name}: punct scos
+Ajouter « {name} » sur {track} ¦ Adaugă „{name}” pe {track}
+Morceau « {name} » retiré ¦ Bucata „{name}” a fost scoasă
+son ¦ sunet
+(mélange) ¦ (mixaj)
+Le son ouvert ici ¦ Sunetul deschis aici
+Le son tel qu’il est (garde la touche A appuyée) ¦ Sunetul așa cum e (ține apăsată tasta A)
+Appliquer le rack pour de bon ¦ Aplică definitiv rack-ul
+Arme d’abord une piste avec ● (dans ses boutons M S ●). ¦ Armează mai întâi o pistă cu ● (din butoanele ei M S ●).
+Atténuer de ¦ Atenuează cu
+Aucun effet ¦ Niciun efect
+Aucun effet : « ＋ Ajouter un effet », ou le menu Effets. ¦ Niciun efect: „＋ Adaugă un efect” sau meniul Efecte.
+Aucun marqueur ni zone : sélectionne un passage, puis « ＋ Nouvelle zone » (ou M). ¦ Niciun marcaj sau zonă: selectează un pasaj, apoi „＋ Zonă nouă” (sau M).
+Avant ou après ¦ Înainte sau după
+Baisser la musique sous la voix ¦ Coboară muzica sub voce
+Ne plus baisser la musique ¦ Nu mai coborî muzica
+Bientôt : un moteur de reconnaissance qui tourne dans l’ordinateur (rien n’est envoyé sur Internet) ¦ În curând: un motor de recunoaștere care rulează pe calculator (nimic nu e trimis pe internet)
+Boucle ¦ Buclă
+Calcul des effets… ¦ Se calculează efectele…
+Ce fichier n’est pas un réglage du son. ¦ Acest fișier nu e o setare de sunet.
+Ce navigateur ne donne pas accès au micro. ¦ Acest browser nu dă acces la microfon.
+Ce qui est dit ¦ Ce se spune
+Choisis d’abord une zone. ¦ Alege mai întâi o zonă.
+Choisis une zone (à gauche ou au-dessus de l’onde), ou crée-en une : « ＋ Nouvelle zone ». ¦ Alege o zonă (în stânga sau deasupra undei) sau creează una: „＋ Zonă nouă”.
+Clics et craquements ¦ Clicuri și pârâituri
+Clique une étape pour y revenir ; les étapes grisées reviennent avec ↷. ¦ Fă clic pe un pas ca să revii la el; pașii gri revin cu ↷.
+Cliquer une heure fait écouter ce passage. Export en .txt, .srt, .vtt : ⤓ Exporter → 📝 Texte et repères. Le texte est cherchable dans la base. ¦ Un clic pe o oră redă acel pasaj. Export în .txt, .srt, .vtt: ⤓ Exportă → 📝 Text și repere. Textul poate fi căutat în bază.
+Copie nettoyée ajoutée aux mêmes fiches. ¦ Copie curățată adăugată la aceleași fișe.
+Copie séparée ajoutée aux mêmes fiches. ¦ Copie separată adăugată la aceleași fișe.
+Couper le début et la fin ¦ Taie începutul și sfârșitul
+Couper un morceau en deux (multipiste) ; sur l’onde : supprimer la sélection ¦ Taie o bucată în două (multipistă); pe undă: șterge selecția
+Crête ¦ Vârf
+Effacer le dessin ¦ Șterge desenul
+× Effacer le dessin ¦ × Șterge desenul
+Empreinte du bruit ¦ Amprenta zgomotului
+En S ¦ În S
+Rapide ¦ Rapidă
+Lente ¦ Lentă
+🏠 Pièce ¦ 🏠 Cameră
+⛪ Église ¦ ⛪ Biserică
+🎭 Salle ¦ 🎭 Sală
+🧱 Cave ¦ 🧱 Pivniță
+Enlever le bourdonnement ¦ Scoate bâzâitul
+Enregistrer au micro ¦ Înregistrează la microfon
+● Enregistrer au micro ¦ ● Înregistrează la microfon
+🎙️ Enregistrer au micro ¦ 🎙️ Înregistrează la microfon
+Enregistrer au micro (au repère orange ; en multipiste : sur la piste armée ●) ¦ Înregistrează la microfon (la reperul portocaliu; în multipistă: pe pista armată ●)
+Enregistrer dans les médias ¦ Salvează în media
+Enregistrer et afficher cette version (l’original est gardé) ¦ Salvează și afișează această versiune (originalul e păstrat)
+Enregistrer le projet son (rack, zones, pistes), pour y revenir ¦ Salvează proiectul de sunet (rack, zone, piste), ca să revii la el
+Enregistrer le projet sous… ¦ Salvează proiectul ca…
+Exporter : MP3, M4A, WAV, FLAC, Ogg, AIFF, texte et repères ¦ Exportă: MP3, M4A, WAV, FLAC, Ogg, AIFF, text și repere
+Exporter ce passage… ¦ Exportă acest pasaj…
+Exporter un fichier (MP3, WAV, FLAC…), et si tu veux une copie dans les médias ¦ Exportă un fișier (MP3, WAV, FLAC…) și, dacă vrei, o copie în media
+Fichiers ¦ Fișiere
+Fort ¦ Puternic
+Moyen ¦ Mediu
+Garde ¦ Păstrează
+Garder seulement la sélection ¦ Păstrează doar selecția
+Gardée dans les versions, le son affiché ne change pas ¦ Păstrată în versiuni, sunetul afișat nu se schimbă
+Insérer un son… ¦ Inserează un sunet…
+La fenêtre d’export n’est pas prête. ¦ Fereastra de export nu e gata.
+L’export n’est pas encore prêt. ¦ Exportul nu e încă gata.
+La sélection ¦ Selecția
+Lasso de réparation ¦ Lasou de reparare
+Lasso de réparation (sur le spectre) ¦ Lasou de reparare (pe spectru)
+➰ Lasso de réparation ¦ ➰ Lasou de reparare
+Pinceau de réparation ¦ Pensulă de reparare
+Pinceau de réparation (sur le spectre) ¦ Pensulă de reparare (pe spectru)
+🖌 Pinceau de réparation ¦ 🖌 Pensulă de reparare
+Les boutons ¦ Butoanele
+Les réglages du son seront perdus. ¦ Setările sunetului se vor pierde.
+Lire la sélection en boucle ¦ Redă selecția în buclă
+🔁 Lire en boucle ¦ 🔁 Redă în buclă
+🐢 Lire à 75 % ¦ 🐢 Redă la 75 %
+Marqueur ici ¦ Marcaj aici
+🚩 Marqueur ici ¦ 🚩 Marcaj aici
+Marqueurs et zones ¦ Marcaje și zone
+Zones et marqueurs ¦ Zone și marcaje
+Mono ¦ Mono
+Stéréo ¦ Stereo
+Nettoyer ¦ Curăță
+Nettoyer le souffle ¦ Curăță fâșâitul
+Nom du projet son ¦ Numele proiectului de sunet
+Nom du son ¦ Numele sunetului
+Nouvelle piste ¦ Pistă nouă
+Nouvelle version affichée partout. L’original est gardé. ¦ Versiune nouă afișată peste tot. Originalul e păstrat.
+Version enregistrée (l’ancienne reste affichée). ¦ Versiune salvată (cea veche rămâne afișată).
+Nouvelle zone ¦ Zonă nouă
+Ouverture ¦ Deschidere
+Ouvrir un autre projet sans enregistrer ? ¦ Deschizi alt proiect fără să salvezi?
+Pause quand j’écris ¦ Pauză când scriu
+Peins sur une tache (toux, sonnerie, porte), puis « 🩹 Réparer ». ¦ Pictează pe o pată (tuse, sonerie, ușă), apoi „🩹 Repară”.
+Poser des marqueurs (clic sur l’onde) ¦ Pune marcaje (clic pe undă)
+🚩 Poser des marqueurs ¦ 🚩 Pune marcaje
+Raccourcir ¦ Scurtează
+Rendre agréable ¦ Fă plăcut
+Revenir au ⚡ Son rapide : ce qu’il sait montrer revient en boutons, le reste reste appliqué ¦ Revino la ⚡ Sunet rapid: ce știe să arate revine sub formă de butoane, restul rămâne aplicat
+Réglages du Son rapide ¦ Setările Sunetului rapid
+Réglages repris ¦ Setări preluate
+Seulement sur la sélection ¦ Doar pe selecție
+Silence ¦ Liniște
+Souffle, clics, bourdonnement, voix, volume et coupe du début et de la fin, d’un coup ¦ Fâșâit, clicuri, bâzâit, voce, volum și tăierea începutului și sfârșitului, dintr-odată
+✨ Tout nettoyer en une fois ¦ ✨ Curăță totul dintr-odată
+Spectre ¦ Spectru
+Spectre : montrer / cacher ¦ Spectru: arată / ascunde
+Sélection : glisser sur l’onde ¦ Selecție: trage pe undă
+Tout le son : glisse le cadre pour te déplacer ¦ Tot sunetul: trage cadrul ca să te deplasezi
+Un autre son, rattaché aux mêmes fiches ¦ Alt sunet, legat de aceleași fișe
+Un ensemble prêt ne se supprime pas. ¦ Un set gata făcut nu se șterge.
+VU-mètres ¦ VU-metre
+Volume du morceau ¦ Volumul bucății
+Volume du morceau… ¦ Volumul bucății…
+Zoom sur la sélection ¦ Zoom pe selecție
+Zoom vertical + ¦ Zoom vertical +
+Zoom vertical − ¦ Zoom vertical −
+ces réglages du son ¦ aceste setări de sunet
+disque, bande abîmée ¦ disc, bandă deteriorată
+les voix lointaines remontent, les cris baissent ¦ vocile îndepărtate cresc, strigătele scad
+on comprend mieux les mots ¦ se înțeleg mai bine cuvintele
+nouvelle version, copie ¦ versiune nouă, copie
+trouvé tout seul, poignées sur l’onde ¦ găsit automat, mânere pe undă
+souffle, voix claire, volume égal ¦ fâșâit, voce clară, volum egal
+souffle fort, voix, coupe des blancs ¦ fâșâit puternic, voce, tăierea pauzelor
+de-hum, égaliseur, limiteur ¦ de-hum, egalizator, limitator
+📼 Cassette des années 70 ¦ 📼 Casetă din anii ’70
+🎙 Dictaphone ¦ 🎙 Reportofon
+💒 Vidéo de mariage 1987 ¦ 💒 Video de nuntă 1987
+Écoute, puis « ⏱ Insérer l’heure » (⌘T) et tape ce qui est dit. ¦ Ascultă, apoi „⏱ Inserează ora” (⌘T) și scrie ce se spune.
+⏱ Insérer l’heure ¦ ⏱ Inserează ora
+Écouter ce passage ¦ Ascultă acest pasaj
+Écouter seulement le passage peint ¦ Ascultă doar pasajul pictat
+Écouter, comparer A / B, montrer partout, renommer, supprimer ¦ Ascultă, compară A / B, arată peste tot, redenumește, șterge
+ℹ️ Infos du son ¦ ℹ️ Informații despre sunet
+▶ Écouter / pause ¦ ▶ Ascultă / pauză
+▶ Écouter 10 s du résultat ¦ ▶ Ascultă 10 s din rezultat
+✂️ Couper (dans le presse-papiers) ¦ ✂️ Taie (în clipboard)
+✂️ Couper un morceau (multipiste) ¦ ✂️ Taie o bucată (multipistă)
+〰️ Forme d’onde ¦ 〰️ Formă de undă
+＋ Ajouter un effet ▾ ¦ ＋ Adaugă un efect ▾
+🎛️ Multipiste ¦ 🎛️ Multipistă
+🎬 Ouvrir dans le montage ¦ 🎬 Deschide în montaj
+👂 Écoute d’abord ¦ 👂 Ascultă mai întâi
+👂 Écouter la zone ¦ 👂 Ascultă zona
+📝 Transcription ¦ 📝 Transcriere
+🔗 Relier ce passage ¦ 🔗 Leagă acest pasaj
+🗣️ La voix ¦ 🗣️ Vocea
+🤖 Transcrire tout seul (bientôt) ¦ 🤖 Transcrie automat (în curând)
+½ ton ¦ ½ ton
+Volume ¦ Volum
+Normaliser ¦ Normalizează
+Volume égal ¦ Volum egal
+Sonie visée ¦ Intensitate țintă
+Niveleur ¦ Nivelator
+Fondus ¦ Tranziții
+Égaliseur graphique ¦ Egalizator grafic
+Égaliseur paramétrique ¦ Egalizator parametric
+Égaliseurs ¦ Egalizatoare
+Filtre passe-haut / passe-bas ¦ Filtru trece-sus / trece-jos
+Passe-haut ¦ Trece-sus
+Passe-bas ¦ Trece-jos
+Compresseur ¦ Compresor
+Dynamique ¦ Dinamică
+Rapport ¦ Raport
+Attaque ¦ Atac
+Relâche ¦ Eliberare
+Gain de sortie ¦ Câștig de ieșire
+Limiteur ¦ Limitator
+Placé en dernier dans le rack : plus jamais de son qui « crache ». ¦ Pus ultimul în rack: niciodată un sunet care „hârâie”.
+Plafond ¦ Plafon
+Réduction de bruit ¦ Reducerea zgomotului
+Réduction ¦ Reducere
+N’écouter que le bruit enlevé ¦ Ascultă doar zgomotul scos
+De-clicker ¦ De-clicker
+Clics ¦ Clicuri
+De-hum ¦ De-hum
+Harmoniques ¦ Armonice
+De-esser ¦ De-esser
+Sifflantes ¦ Sibilante
+Baisser jusqu’à ¦ Coboară până la
+Réparations au pinceau ¦ Reparații cu pensula
+Voix plus claire ¦ Voce mai clară
+Égaliseur (moins de grondement, plus de présence) et compresseur. ¦ Egalizator (mai puțin huruit, mai multă prezență) și compresor.
+Réverbération ¦ Reverberație
+Ambiance ¦ Ambianță
+Vitesse et hauteur ¦ Viteză și înălțime
+Temps ¦ Timp
+Pour une cassette lue trop vite (voix « de canard ») : 96 % la remet à sa vraie vitesse. ¦ Pentru o casetă redată prea repede (voce „de rață”): 96 % o readuce la viteza ei reală.
+Vitesse ¦ Viteză
+Garder la hauteur de la voix ¦ Păstrează înălțimea vocii
+Blancs de plus de ¦ Pauze mai lungi de
+Ramenés à ¦ Reduse la
+Fin ¦ Sfârșit
+Diapositive {k} / {n} ¦ Diapozitivul {k} / {n}
+Aucune diapositive ¦ Niciun diapozitiv
+Aucune diapositive. ¦ Niciun diapozitiv.
+Aucune diapositive pour l’instant ¦ Deocamdată niciun diapozitiv
+{what} aux Médias (le son devient la musique). ¦ {what} în Media (sunetul devine muzica).
+{what} aux Médias. ¦ {what} în Media.
+=diapositive est prête ¦ diapozitiv e gata|diapozitive sunt gata|de diapozitive sunt gata
+{what}. Elles peuvent remplacer celles du diaporama ou venir à la suite. ¦ {what}. Pot înlocui diapozitivele prezentării sau pot veni în continuare.
+Remplacer le diaporama par le récit ? ¦ Înlocuiești prezentarea cu povestea?
+Ajouter à la suite ¦ Adaugă în continuare
+Police du style ({name}) ¦ Fontul stilului ({name})
+Avancer de {time} (réglable dans Réglages › Apparence) ¦ Avansează cu {time} (reglabil în Setări › Aspect)
+Suivi sur {n} positions. ¦ Urmărit pe {n} poziții.
+(importé) ¦ (importat)
+Durée souhaitée ¦ Durata dorită
+Mettre les sources dans les notes ¦ Pune sursele în note
+⇥ durée = voix ¦ ⇥ durată = voce
+Ajoute des photos, un titre, une carte, ou laisse « ✨ Récit d’une vie » tout préparer. Tu peux aussi glisser des photos ici. ¦ Adaugă fotografii, un titlu, o hartă sau lasă „✨ Povestea unei vieți” să pregătească totul. Poți și să tragi fotografii aici.
+Ce fichier n’est pas un diaporama exporté par LCNDA (⤓ Exporter → 💾 Fichier). ¦ Acest fișier nu e o prezentare exportată de LCNDA (⤓ Exportă → 💾 Fișier).
+Ce que raconte cette diapositive… ¦ Ce povestește acest diapozitiv…
+Changer la photo ¦ Schimbă fotografia
+🖼️ Changer la photo ¦ 🖼️ Schimbă fotografia
+Choisis d’abord une personne. ¦ Alege mai întâi o persoană.
+Couleur du trajet ¦ Culoarea traseului
+Glisse des photos ou un son. ¦ Trage fotografii sau un sunet.
+Glisser vers la droite ¦ Alunecă spre dreapta
+Glisser vers la gauche ¦ Alunecă spre stânga
+Zoom arrière lent ¦ Zoom înapoi lent
+La fenêtre des médias n’est pas encore prête. ¦ Fereastra media nu e încă gata.
+Les dernières modifications du diaporama seront perdues. ¦ Ultimele modificări ale prezentării se vor pierde.
+Les photos du récit ¦ Fotografiile poveștii
+Légendes ¦ Legende
+Personnes sous chaque photo ¦ Persoane sub fiecare fotografie
+Place du texte ¦ Locul textului
+Police des textes ¦ Fontul textelor
+Prendre ce son ¦ Ia acest sunet
+RÉCIT D’UNE VIE ¦ POVESTEA UNEI VIEȚI
+Récit d’une vie ¦ Povestea unei vieți
+✨ Récit d’une vie ¦ ✨ Povestea unei vieți
+✨ Récit d’une vie : un diaporama tout fait à partir de la fiche d’une personne ¦ ✨ Povestea unei vieți: o prezentare gata făcută pornind de la fișa unei persoane
+Un diaporama tout fait à partir de la fiche d’une personne ¦ O prezentare gata făcută pornind de la fișa unei persoane
+Selon les textes ¦ După texte
+Une musique ¦ O muzică
+Une photo par page ¦ O fotografie pe pagină
+Une photo ronde au-dessus du titre ¦ O fotografie rotundă deasupra titlului
+Une photo ronde au-dessus du titre… ¦ O fotografie rotundă deasupra titlului…
+Une présentation ou un diaporama ? ¦ O prezentare sau o prezentare de diapozitive?
+Une voix, un son ¦ O voce, un sunet
+Vidéo téléchargée. ¦ Videoclip descărcat.
+cette diapositive ¦ acest diapozitiv
+retirer la voix ¦ scoate vocea
+✨ Préparation du récit… ¦ ✨ Se pregătește povestea…
+🎙 Enregistrer ma voix ¦ 🎙 Înregistrează-mi vocea
+🎤 En faire une présentation… ¦ 🎤 Fă din ea o prezentare…
+🖼 Choisir les photos… ¦ 🖼 Alege fotografiile…
+Format de l’image (16:9 pour un écran, 9:16 pour un téléphone) ¦ Formatul imaginii (16:9 pentru un ecran, 9:16 pentru un telefon)
+Exporter : vidéo, images, PDF, impression, fichier ¦ Exportă: video, imagini, PDF, tipărire, fișier
+Ajouter un titre ¦ Adaugă un titlu
+Ajouter une carte (trajet) ¦ Adaugă o hartă (traseu)
+Ajouter une carte ¦ Adaugă o hartă
+＋ Carte (trajet) ¦ ＋ Hartă (traseu)
+Regarder en plein écran (Échap pour revenir) ¦ Privește pe tot ecranul (Esc ca să revii)
+Avancer dans le diaporama ¦ Avansează în prezentare
+Choisis une diapositive (à gauche) pour régler sa durée, sa transition, son texte, sa voix. ¦ Alege un diapozitiv (în stânga) ca să-i reglezi durata, tranziția, textul, vocea.
+🎞️ Tout le diaporama ¦ 🎞️ Toată prezentarea
+La police de tous les titres et légendes. Sans choix, c’est celle du style (Classique, Album ancien…). ¦ Fontul tuturor titlurilor și legendelor. Fără alegere, e cel al stilului (Clasic, Album vechi…).
+Une musique de fond, prise dans les sons des médias ¦ O muzică de fundal, luată din sunetele din media
+Une présentation façon Keynote faite de ces diapositives (textes, formes, animations, mode présentateur…) ; le diaporama reste tel quel ¦ O prezentare în stil Keynote făcută din aceste diapozitive (texte, forme, animații, mod prezentator…); prezentarea de diapozitive rămâne așa cum e
+Clic sur une diapositive : la régler à droite · glisse-les pour les ranger · Espace : lire ¦ Clic pe un diapozitiv: îl reglezi în dreapta · trage-le ca să le ordonezi · Spațiu: redă
+Album ancien ¦ Album vechi
+Clair ¦ Luminos
+Lire / pause ¦ Redă / pauză
+Lire ¦ Redă
+Regarder ¦ Privește
+📺 Regarder ¦ 📺 Privește
+Musique de fond ¦ Muzică de fundal
+🎵 Musique ¦ 🎵 Muzică
+🎵 Musique de fond (facultatif) ¦ 🎵 Muzică de fundal (opțional)
+=diapositive ¦ diapozitiv|diapozitive|de diapozitive
+Choisis une personne : un diaporama se prépare tout seul avec sa fiche (naissance, baptême, mariage, enfants, métiers, recensements, déménagements, décès, sépulture), ses photos, ses lieux sur une carte. Une information absente ne donne pas de diapositive ; tout reste modifiable ensuite. ¦ Alege o persoană: o prezentare se pregătește singură cu fișa ei (naștere, botez, căsătorie, copii, meserii, recensăminte, mutări, deces, înmormântare), fotografiile ei, locurile ei pe o hartă. O informație absentă nu dă un diapozitiv; totul rămâne modificabil după aceea.
+Le récit prend à peu près cette durée : chaque diapositive grandit ou rétrécit un peu. « Selon les textes » laisse le temps de lire. ¦ Povestea durează cam atât: fiecare diapozitiv se lungește sau se scurtează puțin. „După texte” lasă timp de citit.
+Aucune photo : le récit sera fait de titres et de cartes. ¦ Nicio fotografie: povestea va fi făcută din titluri și hărți.
+Inclure les frères et sœurs ¦ Include frații și surorile
+Les sources de chaque événement (titre, page) sont écrites dans les notes de sa diapositive : on les voit en modifiant, pas pendant la lecture. ¦ Sursele fiecărui eveniment (titlu, pagină) sunt scrise în notele diapozitivului lui: le vezi când modifici, nu în timpul redării.
+Ajouter les événements historiques de l’époque ¦ Adaugă evenimentele istorice ale epocii
+Les épidémies, guerres et grands hivers que l’app connaît (Listes → Épidémies, guerres, hivers) et qui ont eu lieu pendant sa vie. ¦ Epidemiile, războaiele și iernile grele pe care le cunoaște aplicația (Liste → Epidemii, războaie, ierni) și care au avut loc în timpul vieții ei.
+Le texte du bloc « 📖 Biographie » de la fiche (ta version si tu l’as modifiée), en version courte, sur une diapositive. ¦ Textul blocului „📖 Biografie” al fișei (versiunea ta, dacă ai modificat-o), în variantă scurtă, pe un diapozitiv.
+Créer le récit ¦ Creează povestea
+DIAPORAMA ¦ PREZENTARE DE DIAPOZITIVE
+Environ 1 minute ¦ Aproximativ 1 minut
+Environ 2 minutes ¦ Aproximativ 2 minute
+Environ 3 minutes ¦ Aproximativ 3 minute
+Environ 5 minutes ¦ Aproximativ 5 minute
+Environ 8 minutes ¦ Aproximativ 8 minute
+Environ 10 minutes ¦ Aproximativ 10 minute
+Choisir un son… ¦ Alege un sunet…
+Ajouter sa biographie (📖) ¦ Adaugă biografia (📖)
+🎯 Suivre ce qui bouge ¦ 🎯 Urmărește ce se mișcă
+✕ Ne plus suivre ¦ ✕ Nu mai urmări
+🎥 Plusieurs caméras ¦ 🎥 Mai multe camere
+Synchroniser et monter ¦ Sincronizează și montează
+quand quelqu’un parle plus près d’une autre caméra ¦ când cineva vorbește mai aproape de altă cameră
+Lecture des sons… ¦ Se citesc sunetele…
+dédié à {who} ¦ dedicat lui {who}
+Pas encore de {what} pour ce soir ¦ Încă nicio {what} pentru această seară
+Note les titres dans l’ordre, avec les rappels, les reprises, les invités… ou copie la setlist d’un autre soir. ¦ Notează titlurile în ordine, cu bisurile, coverurile, invitații… sau copiază setlistul altei seri.
+La sorte de ce soir ¦ Tipul acestei seri
+En faire : {what} (la setlist s’adapte) ¦ Fă din ea: {what} (setlistul se adaptează)
+{n} prévues ¦ {n} prevăzute
+d’après {what} ¦ după {what}
+{what} à la setlist. ¦ {what} în setlist.
+{what} depuis « {name} ». ¦ {what} din „{name}”.
+=ligne ajoutée ¦ rând adăugat|rânduri adăugate|de rânduri adăugate
+=ligne copiée ¦ rând copiat|rânduri copiate|de rânduri copiate
+Setlist de « {name} » copiée ({what}) ¦ Setlistul din „{name}” a fost copiat ({what})
+Ce soir devient : {what} ¦ Această seară devine: {what}
+{n} enregistrements « en public » ajoutés aux morceaux ¦ {n} înregistrări „live” adăugate la piese
+1 enregistrement « en public » ajouté au morceau ¦ 1 înregistrare „live” adăugată la piesă
+{n} enregistrements « en public » déjà tirés de ce soir. ¦ {n} înregistrări „live” deja extrase din această seară.
+1 enregistrement « en public » déjà tiré de ce soir. ¦ 1 înregistrare „live” deja extrasă din această seară.
+→ En faire des enregistrements « en public » des morceaux ({n}) ¦ → Fă din ele înregistrări „live” ale pieselor ({n})
+→ En faire un enregistrement « en public » du morceau ({n}) ¦ → Fă din ea o înregistrare „live” a piesei ({n})
+« {name} » ajouté au catalogue ({what}). ¦ „{name}” a fost adăugat la catalog ({what}).
+Aucun lieu de ta base pour ces soirs ({what} sans lieu choisi dans la base). ¦ Niciun loc din baza ta pentru aceste seri ({what} fără loc ales din bază).
+Aucun lieu de ta base pour ces soirs. ¦ Niciun loc din baza ta pentru aceste seri.
+{what} sans coordonnées ¦ {what} fără coordonate
+{what} sans lieu de ta base ¦ {what} fără loc din baza ta
+=soir ¦ seară|seri|de seri
+🔝 {what} les plus joués ¦ 🔝 {what} cele mai cântate
+{what} par soir ¦ {what} pe seară
+{n} en moyenne ¦ {n} în medie
+{what} mais jamais sur scène, et {other} : ¦ {what}, dar niciodată pe scenă, și {other}:
+{what} mais jamais sur scène : ¦ {what}, dar niciodată pe scenă:
+{what} jamais dans une setlist : ¦ {what} niciodată într-un setlist:
+=morceau enregistré ¦ piesă înregistrată|piese înregistrate|de piese înregistrate
+=autre fiche ¦ altă fișă|alte fișe|de alte fișe
+… et {n} de plus ¦ … și încă {n}
+✓ Profil « {name} » coché : ses sections sont sur sa page. ¦ ✓ Profilul „{name}” e bifat: secțiunile lui sunt pe pagina lui.
+Aucun épisode n° {a} à {b} dans cette saison. ¦ Niciun episod nr. {a} până la {b} în acest sezon.
+Aucun épisode n° {a} dans cette saison. ¦ Niciun episod nr. {a} în acest sezon.
+＋ Nouveau concert ou représentation ¦ ＋ Concert sau reprezentație nouă
+Chercher… (ville, salle, morceau joué, tournée, personne) ¦ Caută… (oraș, sală, piesă cântată, turneu, persoană)
+Aucun concert ni spectacle pour l’instant ¦ Deocamdată niciun concert sau spectacol
+Un soir = une fiche : la date, le lieu, la setlist (titres, rappels, reprises, invités), qui était sur scène et dans la salle. ¦ O seară = o fișă: data, locul, setlistul (titluri, bisuri, coveruri, invitați), cine era pe scenă și în sală.
+Concert ou représentation ¦ Concert sau reprezentație
+Concerts et représentations ¦ Concerte și reprezentații
+=concert ou représentation ¦ concert sau reprezentație|concerte sau reprezentații|de concerte sau reprezentații
+Spectacle d’humour ¦ Spectacol de umor
+Scènes jouées ¦ Scene jucate
+Concert d’orchestre ¦ Concert de orchestră
+Début d’une partie ¦ Începutul unei părți
+Bande, intro enregistrée ¦ Bandă, intro înregistrat
+Dernière fois ¦ Ultima dată
+Reprise, invités, dédicace, 1re fois, durée… ¦ Cover, invitați, dedicație, prima dată, durată…
+＋ Un rappel ¦ ＋ Un bis
+📋 Coller une liste ¦ 📋 Lipește o listă
+📋 Copier la setlist d’un autre soir ¦ 📋 Copiază setlistul altei seri
+Copier la setlist d’un autre soir ¦ Copiază setlistul altei seri
+inachevé ¦ neterminat
+Nouvelle partie ¦ Parte nouă
+critique positive ¦ critică pozitivă
+critique négative ¦ critică negativă
+neutre ¦ neutru
+Église, chapelle ¦ Biserică, capelă
+Bal, salle des fêtes ¦ Bal, sală de festivități
+Café, cabaret ¦ Cafenea, cabaret
+Soirée privée ¦ Petrecere privată
+Festival, fête ¦ Festival, sărbătoare
+création du rôle ¦ crearea rolului
+Création du rôle ¦ Crearea rolului
+chef d’orchestre ¦ dirijor
+Un ou une soliste ¦ Un solist sau o solistă
+Une personne dans la salle ¦ O persoană din sală
+🎭 Ce soir-là, au théâtre ¦ 🎭 În seara aceea, la teatru
+Rôles du soir ¦ Rolurile serii
+Titulaire ou remplaçant ¦ Titular sau înlocuitor
+La soirée ¦ Seara
+Joué ¦ Jucat
+La tournée ¦ Turneul
+Dates prévues ¦ Date prevăzute
+Les dates ¦ Datele
+📅 Les dates ¦ 📅 Datele
+＋ Ajouter une date ¦ ＋ Adaugă o dată
+＋ Ajouter une représentation ¦ ＋ Adaugă o reprezentație
+Chanson parlée, poème dit ¦ Cântec vorbit, poezie recitată
+Sketch, numéro, scène ¦ Scheci, număr, scenă
+Sketches, numéros, scènes ¦ Scheciuri, numere, scene
+Écrit, créé ¦ Scris, creat
+Tiré de ¦ Preluat din
+Son ou vidéo ¦ Sunet sau video
+Carte indisponible. ¦ Hartă indisponibilă.
+Avec une setlist ¦ Cu un setlist
+Avec une captation ¦ Cu o înregistrare
+Avec une 1re fois ¦ Cu o primă dată
+Avec un remplacement ¦ Cu o înlocuire
+Avec ce titre joué ¦ Cu acest titlu cântat
+Joué ce soir-là ¦ Cântat în seara aceea
+Carte des lieux… ¦ Harta locurilor…
+🗺 Carte des lieux ¦ 🗺 Harta locurilor
+hors tournée ¦ în afara turneului
+Dernière ¦ Ultima
+Moins ↑ ¦ Mai puțin ↑
+Soirs par année ¦ Seri pe an
+📅 Soirs par année ¦ 📅 Seri pe an
+Durée moyenne ¦ Durată medie
+Ville la plus visitée ¦ Orașul cel mai vizitat
+🚌 Setlist type d’une tournée ¦ 🚌 Setlistul tipic al unui turneu
+Choisis une tournée. ¦ Alege un turneu.
+Choisis deux soirs différents. ¦ Alege două seri diferite.
+Cinéma ¦ Cinema
+Au générique ¦ În generic
+Pas au générique ¦ Nu e în generic
+Tournage, période ¦ Filmare, perioadă
+🎭 Au théâtre ¦ 🎭 La teatru
+Théâtres, salles ¦ Teatre, săli
+Un théâtre ¦ Un teatru
+Théâtre, salle ¦ Teatru, sală
+Un remplacement ¦ O înlocuire
+📺 Télévision, radio ¦ 📺 Televiziune, radio
+Voix française de ¦ Vocea franceză a lui
+Un ou une partenaire ¦ Un partener sau o parteneră
+Prix et nominations ¦ Premii și nominalizări
+Œuvre A → Z ¦ Operă A → Z
+Fiches « Rôle » ¦ Fișe „Rol”
+Films du catalogue ¦ Filmele din catalog
+Cités dans d’autres catalogues ¦ Citate în alte cataloage
+Crédit ¦ Credit
+RÔLE ¦ ROL
+＋ En faire une fiche rôle détaillée ¦ ＋ Fă din el o fișă de rol detaliată
+D’où vient la ligne ¦ De unde vine rândul
+Chercher un rôle, un film, un partenaire… ¦ Caută un rol, un film, un partener…
+Profil d’acteur ¦ Profil de actor
+Débuts ¦ Debut
+Une école, un cours ¦ O școală, un curs
+École, conservatoire, cours ¦ Școală, conservator, curs
+Prix, diplôme ¦ Premiu, diplomă
+Un agent ¦ Un agent
+Une troupe ¦ O trupă
+Troupe, théâtre ¦ Trupă, teatru
+Un casting ¦ Un casting
+Rôle visé ¦ Rolul vizat
+pas obtenu ¦ neobținut
+Compétences, physique, voix ¦ Competențe, fizic, voce
+Tout voir, trier ¦ Vezi tot, sortează
+Aucune série, aucun téléfilm. ¦ Niciun serial, niciun film TV.
+Théâtrographie ¦ Teatrografie
+Aucun rôle au théâtre. ¦ Niciun rol în teatru.
+Aucune voix. ¦ Nicio voce.
+Publicité et mannequinat ¦ Publicitate și modeling
+Aucune publicité. ¦ Nicio reclamă.
+Aucun clip. ¦ Niciun videoclip muzical.
+=casting noté ¦ casting notat|castinguri notate|de castinguri notate
+Aucun casting noté. ¦ Niciun casting notat.
+Les statistiques viennent des rôles notés. ¦ Statisticile vin din rolurile notate.
+Rôles par décennie ¦ Roluri pe decenii
+Réalisateurs ¦ Regizori
+Aucun soir noté. ¦ Nicio seară notată.
+Feuilleton télévisé ¦ Serial de televiziune
+Websérie ¦ Serial web
+Séries et émissions ¦ Seriale și emisiuni
+La série ¦ Serialul
+Saisons et épisodes ¦ Sezoane și episoade
+Durée d’un épisode ¦ Durata unui episod
+Qui y a fait quoi ¦ Cine ce a făcut acolo
+Épisodes prévus ¦ Episoade prevăzute
+L’épisode ¦ Episodul
+N° dans la saison ¦ Nr. în sezon
+N° dans la série ¦ Nr. în serial
+Un ou une scénariste ¦ Un scenarist sau o scenaristă
+Un invité ¦ Un invitat
+Rôle ou métier ¦ Rol sau meserie
+toute la série ¦ tot serialul
+Chaîne, station, éditeur ¦ Canal, post, editor
+Un créateur, une créatrice ¦ Un creator sau o creatoare
+Comment cette image se mélange avec celle de dessous : « Produit » assombrit, « Superposition claire » éclaircit, « Normal » la pose simplement dessus. ¦ Cum se amestecă această imagine cu cea de dedesubt: „Produs” întunecă, „Suprapunere luminoasă” luminează, „Normal” o pune pur și simplu deasupra.
+Un lent mouvement de caméra sur la photo : elle s’approche, s’éloigne ou glisse doucement pendant qu’elle est à l’écran. ¦ O mișcare lentă de cameră pe fotografie: se apropie, se îndepărtează sau alunecă ușor cât timp e pe ecran.
+Une image clé fixe un réglage (taille, place, rotation…) à un moment du film ; entre deux images clés, l’image passe de l’une à l’autre, en douceur ou à vitesse régulière. ¦ Un cadru cheie fixează o setare (mărime, loc, rotire…) la un moment al filmului; între două cadre cheie, imaginea trece de la unul la altul, lin sau cu viteză uniformă.
+« Réduire le souffle » : choisis d’abord un passage où l’on n’entend que le bruit, il sert d’exemple. « Voix plus nette » rend la parole plus claire. « Normaliser » monte le volume au plus fort sans saturer. ¦ „Reduce fâșâitul”: alege mai întâi un pasaj în care se aude doar zgomotul, servește ca exemplu. „Voce mai clară” face vorbirea mai clară. „Normalizează” urcă volumul la maximum fără saturare.
+Doux : on nettoie peu, la voix reste naturelle. Fort : on enlève plus de bruit, au risque d’un son un peu « métallique ». Écoute avec 👂 Avant / ✨ Après. ¦ Blând: se curăță puțin, vocea rămâne naturală. Puternic: se scoate mai mult zgomot, cu riscul unui sunet puțin „metalic”. Ascultă cu 👂 Înainte / ✨ După.
+Supprimer ce rush du projet (et ses {n} passages sur la frise) ¦ Șterge acest clip din proiect (și cele {n} pasaje ale lui de pe linia de timp)
+Supprimer ce rush du projet (et son passage sur la frise) ¦ Șterge acest clip din proiect (și pasajul lui de pe linia de timp)
+Supprimer ce rush du projet ¦ Șterge acest clip din proiect
+{time} à l’écran ¦ {time} pe ecran
+🖼️ Photo de la piste 1 ¦ 🖼️ Fotografia de pe pista 1
+🎬 Morceau de la piste 1 ¦ 🎬 Bucata de pe pista 1

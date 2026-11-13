@@ -1,0 +1,81 @@
+/* 🏠 Héritages et successions (assets/js/heritage-successions.js) : liste, fiche d'un acte, fenêtre, frise des propriétaires, blocs.
+ * Couleurs de l'app (--ink, --card-bg, --blue, --line, --muted) ; règles sombres écrites à la main en bas, puis le bloc automatique. */
+
+.sc-sheet { display: grid; gap: 16px; }
+.sc-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.sc-card .card-head h3 small { font-weight: 400; color: var(--muted); }
+.sc-dl { display: grid; gap: 6px; margin: 0; }
+.sc-dl-row { display: grid; grid-template-columns: 9.5em minmax(0, 1fr); gap: 8px; }
+.sc-dl-row dt { color: var(--muted); }
+.sc-dl-row dd { margin: 0; overflow-wrap: anywhere; }
+.sc-legal { margin-top: 14px; }
+.sc-notes { white-space: normal; overflow-wrap: anywhere; margin: 0; }
+.sc-goods-table td { vertical-align: top; }
+.sc-gico { display: inline-block; width: 1.4em; text-align: center; }
+.sc-to-cell { min-width: 12em; }
+.sc-share { overflow-x: auto; max-width: 100%; color: var(--ink); }
+.sc-share svg { display: block; max-width: 100%; height: auto; }
+.sc-media { display: flex; flex-wrap: wrap; gap: 10px; }
+.sc-mthumb { display: grid; gap: 4px; width: 110px; padding: 6px; border: var(--line); border-radius: 8px; background: var(--card-bg); color: var(--ink); cursor: pointer; text-align: left; }
+.sc-mthumb img { width: 100%; height: 80px; object-fit: cover; border-radius: 4px; }
+.sc-mthumb span { display: grid; place-items: center; height: 80px; font-size: 28px; }
+.sc-mthumb small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* une personne : pastille (portrait K7 ou initiales, « ? » sans fiche) */
+.sc-chip { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; margin: 2px 4px 2px 0; padding: 2px 9px 2px 3px; border: var(--line); border-radius: 999px; background: var(--card-bg); color: var(--ink); font: inherit; font-size: 13px; cursor: pointer; }
+.sc-chip:disabled { cursor: default; opacity: 1; }
+.sc-chip > span:not(.sc-free):not(.sc-ini) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sc-chip small { color: var(--muted); }
+.sc-chip.is-free { border-style: dashed; }
+.sc-free, .sc-ini { display: inline-grid; place-items: center; flex: none; width: 22px; height: 22px; border-radius: 50%; background: #e3e3e3; color: #555; font-size: 10px; font-weight: 700; }
+.sc-g-male { background: #dce9fb; color: #1d4f91; }
+.sc-g-female { background: #fbe0ec; color: #8f2456; }
+.sc-lbl { display: inline-block; min-width: 2.2em; color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; margin-right: 4px; }
+
+/* la frise des propriétaires : une ligne qui descend, l'année à gauche, l'acte à droite (tient dans un panneau étroit) */
+.sc-frise { list-style: none; margin: 6px 0 10px; padding: 0; display: grid; gap: 12px; position: relative; }
+.sc-frise::before { content: ''; position: absolute; left: 2.15em; top: 6px; bottom: 6px; width: 3px; margin-left: -1px; background: var(--blue, #0066cc); opacity: .35; border-radius: 3px; }
+.sc-step { position: relative; display: grid; grid-template-columns: 4.3em minmax(0, 1fr); gap: 8px; align-items: start; margin: 0; padding: 0; }
+.sc-step-year { position: relative; z-index: 1; align-self: start; justify-self: center; height: auto; padding: 2px 8px; border-radius: 999px; background: var(--blue, #0066cc); color: #fff; font-weight: 700; font-size: 13px; line-height: 1.4; }
+.sc-step-card { border: var(--line); border-radius: 10px; background: var(--card-bg); padding: 8px 10px; display: grid; gap: 4px; min-width: 0; }
+.sc-step-head { font-weight: 600; overflow-wrap: anywhere; }
+.sc-step-row { display: flex; flex-wrap: wrap; align-items: center; }
+.sc-host { display: grid; gap: 6px; }
+.sc-host h4, .sc-pblock h4 { margin: 10px 0 4px; }
+.sc-host-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* la fenêtre de l'acte */
+.sc-edit { display: grid; gap: 10px; }
+.sc-h { margin: 12px 0 0; }
+.sc-goods { display: grid; gap: 10px; }
+.sc-good { border: var(--line); border-radius: 10px; padding: 10px; display: grid; gap: 8px; background: var(--card-bg); }
+.sc-good-top { display: grid; grid-template-columns: 13em minmax(0, 1fr) minmax(0, 1fr) auto; gap: 10px; align-items: end; }
+.sc-good-top:not(:has(.sc-good-ref)) { grid-template-columns: 13em minmax(0, 2fr) auto; }
+.sc-good-mid { display: grid; grid-template-columns: 8em 10em minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
+.sc-good label, .sc-edit .form-grid label { min-width: 0; }
+.sc-good input, .sc-good select { width: 100%; box-sizing: border-box; }
+.sc-good-x { align-self: end; }
+.sc-good-to { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
+.sc-to { margin: 0; }
+
+@media (max-width: 760px) {
+    .sc-grid { grid-template-columns: minmax(0, 1fr); }
+    .sc-good-top, .sc-good-top:not(:has(.sc-good-ref)) { grid-template-columns: minmax(0, 1fr) auto; }
+    .sc-good-top .sc-good-ref, .sc-good-top .sc-good-label { grid-column: 1 / -1; }
+    .sc-good-top .sc-good-kind { grid-column: 1; grid-row: 1; }
+    .sc-good-top .sc-good-x { grid-column: 2; grid-row: 1; }
+    .sc-good-mid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .sc-dl-row { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .sc-goods-table thead { display: none; }
+    .sc-goods-table tr { display: grid; gap: 4px; padding: 8px 0; border-bottom: var(--line); }
+    .sc-goods-table td { display: block; border: 0; padding: 0; }
+    .sc-to-cell { min-width: 0; }
+}
+
+/* mode sombre (écrit à la main) */
+:root[data-theme="dark"] .sc-free, :root[data-theme="dark"] .sc-ini { background: #444; color: #ddd; }
+:root[data-theme="dark"] .sc-g-male { background: #1e3554; color: #bcd6ff; }
+:root[data-theme="dark"] .sc-g-female { background: #4a2234; color: #ffc6dc; }
+:root[data-theme="dark"] .sc-step-year { color: #fff; }
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+/* ═════ fin du mode sombre automatique ═════ */

@@ -1,0 +1,341 @@
+{
+  "title": "Moyennes françaises par époque (repères pour « Ta famille et l’histoire de France »)",
+  "version": 1,
+  "note": "Ordres de grandeur arrondis, toujours précédés de « ≈ ». Une fourchette quand les travaux donnent des chiffres un peu différents selon l’échantillon ou les années. Un chiffre dont on n’était pas sûr n’a pas été mis : il vaut mieux une case vide qu’un chiffre inventé. Les moyennes d’une famille (quelques dizaines d’actes) ne se comparent qu’en gros à celles de toute la France.",
+  "sources": {
+    "henry_houdaille_1979": {
+      "label": "Louis Henry et Jacques Houdaille, « Célibat et âge au mariage aux XVIIIe et XIXe siècles en France. II. Âge au premier mariage », revue Population (INED), 1979 — chiffres régionaux (France du Nord : ≈ 28 ans pour les hommes, ≈ 26,6 ans pour les femmes ; Lorraine : 27-28 et 25-27 ans)",
+      "url": "https://www.persee.fr/collection/pop"
+    },
+    "fleury_henry": {
+      "label": "Michel Fleury et Louis Henry, Nouveau manuel de dépouillement et d’exploitation de l’état civil ancien, INED, 1965 (la méthode de reconstitution des familles d’où viennent les chiffres d’Ancien Régime)",
+      "url": "https://www.persee.fr/collection/pop"
+    },
+    "blayo_1975": {
+      "label": "Yves Blayo, « La mortalité en France de 1740 à 1829 » et « Mouvement naturel de la population française de 1740 à 1829 », revue Population (INED), numéro spécial, 1975",
+      "url": "https://www.persee.fr/collection/pop"
+    },
+    "vallin_mesle": {
+      "label": "Jacques Vallin et France Meslé, Tables de mortalité françaises pour les XIXe et XXe siècles, INED, 2001",
+      "url": "https://www.ined.fr"
+    },
+    "insee": {
+      "label": "INSEE, séries de l’état civil et bilans démographiques (espérance de vie, mortalité infantile, fécondité, âge au mariage)",
+      "url": "https://www.insee.fr"
+    },
+    "maggiolo": {
+      "label": "Enquête du recteur Louis Maggiolo (1877-1879) sur les signatures des époux au mariage, reprise par François Furet et Jacques Ozouf, Lire et écrire, Éditions de Minuit, 1977",
+      "url": "https://www.persee.fr/collection/pop"
+    },
+    "marchand_thelot": {
+      "label": "Olivier Marchand et Claude Thélot, Le travail en France (1800-2000), Nathan, 1997",
+      "url": "https://www.insee.fr"
+    },
+    "insee_mi": {
+      "label": "INSEE, Taux de mortalité infantile pour 1 000 naissances vivantes depuis 1901 (France métropolitaine)",
+      "url": "https://www.insee.fr/fr/statistiques/3560308"
+    },
+    "insee_mariage": {
+      "label": "INSEE, Tableaux de l’économie française 2017, « Mariages – Pacs – Divorces » (âge moyen au premier mariage, France métropolitaine)",
+      "url": "https://www.insee.fr/fr/statistiques/fichier/2569324/TEF2017_033.pdf"
+    },
+    "insee_ev": {
+      "label": "INSEE, « Espérance de vie – Mortalité », tableaux rétrospectifs (espérance de vie à la naissance par sexe depuis 1950)",
+      "url": "https://www.insee.fr/fr/statistiques/2569330"
+    }
+  },
+  "indicators": [
+    {
+      "key": "age_marriage",
+      "icon": "💍",
+      "label": "Âge moyen au premier mariage",
+      "unit": "ans",
+      "sexes": true,
+      "family": "L’âge de chaque époux à son premier mariage (date de naissance et date du mariage connues).",
+      "rows": [
+        {
+          "label": "1740-1789",
+          "from": 1740,
+          "to": 1789,
+          "h": [
+            27,
+            28.5
+          ],
+          "f": [
+            25,
+            27
+          ],
+          "source": "henry_houdaille_1979"
+        },
+        {
+          "label": "1960",
+          "from": 1955,
+          "to": 1964,
+          "h": [
+            25.7,
+            25.7
+          ],
+          "f": [
+            23.1,
+            23.1
+          ],
+          "source": "insee_mariage"
+        },
+        {
+          "label": "1970",
+          "from": 1965,
+          "to": 1974,
+          "h": [
+            24.7,
+            24.7
+          ],
+          "f": [
+            22.6,
+            22.6
+          ],
+          "source": "insee_mariage"
+        },
+        {
+          "label": "1980",
+          "from": 1975,
+          "to": 1984,
+          "h": [
+            25.1,
+            25.1
+          ],
+          "f": [
+            23.0,
+            23.0
+          ],
+          "source": "insee_mariage"
+        },
+        {
+          "label": "1990",
+          "from": 1985,
+          "to": 1994,
+          "h": [
+            27.6,
+            27.6
+          ],
+          "f": [
+            25.6,
+            25.6
+          ],
+          "source": "insee_mariage"
+        }
+      ]
+    },
+    {
+      "key": "children",
+      "icon": "👨‍👩‍👧",
+      "label": "Enfants par couple",
+      "unit": "enfants",
+      "sexes": false,
+      "family": "Le nombre d’enfants connus des couples mariés pendant la période (couples qui ont au moins un enfant dans ta base). En France : enfants par femme (indicateur de fécondité), qui se compare seulement en gros.",
+      "rows": [
+        {
+          "label": "1740-1789",
+          "from": 1740,
+          "to": 1789,
+          "all": [
+            4.5,
+            5.5
+          ],
+          "source": "blayo_1975"
+        },
+        {
+          "label": "baby-boom (1946-1964)",
+          "from": 1946,
+          "to": 1964,
+          "all": [
+            2.7,
+            3
+          ],
+          "source": "insee"
+        },
+        {
+          "label": "1975-1999",
+          "from": 1975,
+          "to": 1999,
+          "all": [
+            1.65,
+            1.95
+          ],
+          "source": "insee"
+        }
+      ]
+    },
+    {
+      "key": "infant",
+      "icon": "👶",
+      "label": "Mortalité infantile (morts avant 1 an)",
+      "unit": "‰",
+      "sexes": false,
+      "family": "Sur 1 000 enfants nés pendant la période dont on connaît le décès (ou qui ont vécu), combien sont morts avant 1 an. Les bébés morts manquent souvent dans les arbres : le chiffre de la famille est souvent trop bas.",
+      "rows": [
+        {
+          "label": "1740-1789",
+          "from": 1740,
+          "to": 1789,
+          "all": [
+            250,
+            300
+          ],
+          "source": "blayo_1975"
+        },
+        {
+          "label": "1901-1905",
+          "from": 1895,
+          "to": 1905,
+          "all": [
+            143,
+            153
+          ],
+          "source": "insee_mi"
+        },
+        {
+          "label": "1950",
+          "from": 1948,
+          "to": 1952,
+          "all": [
+            51.9,
+            51.9
+          ],
+          "source": "insee_mi"
+        },
+        {
+          "label": "1970",
+          "from": 1968,
+          "to": 1972,
+          "all": [
+            18.2,
+            18.2
+          ],
+          "source": "insee_mi"
+        }
+      ]
+    },
+    {
+      "key": "life",
+      "icon": "⏳",
+      "label": "Espérance de vie à la naissance",
+      "unit": "ans",
+      "sexes": true,
+      "family": "L’âge moyen au décès des personnes nées pendant la période (naissance et décès connus). Les bébés morts manquent souvent dans les arbres : le chiffre de la famille est souvent trop haut.",
+      "rows": [
+        {
+          "label": "1740-1789",
+          "from": 1740,
+          "to": 1789,
+          "all": [
+            25,
+            30
+          ],
+          "source": "blayo_1975"
+        },
+        {
+          "label": "1950",
+          "from": 1948,
+          "to": 1952,
+          "h": [
+            63.4,
+            63.4
+          ],
+          "f": [
+            69.2,
+            69.2
+          ],
+          "source": "insee_ev"
+        }
+      ]
+    },
+    {
+      "key": "sign",
+      "icon": "✍️",
+      "label": "Savoir signer son acte de mariage",
+      "unit": "%",
+      "sexes": true,
+      "family": "La part des époux et des épouses qui ont signé leur acte de mariage (case « a signé » des mariages). En France : mesuré sur les années indiquées ; ta famille : sur les années autour.",
+      "rows": [
+        {
+          "label": "1686-1690",
+          "from": 1670,
+          "to": 1710,
+          "h": [
+            29,
+            29
+          ],
+          "f": [
+            14,
+            14
+          ],
+          "source": "maggiolo"
+        },
+        {
+          "label": "1786-1790",
+          "from": 1770,
+          "to": 1800,
+          "h": [
+            47,
+            47
+          ],
+          "f": [
+            27,
+            27
+          ],
+          "source": "maggiolo"
+        },
+        {
+          "label": "1816-1820",
+          "from": 1801,
+          "to": 1835,
+          "h": [
+            54,
+            54
+          ],
+          "f": [
+            34,
+            34
+          ],
+          "source": "maggiolo"
+        },
+        {
+          "label": "1872-1876",
+          "from": 1860,
+          "to": 1890,
+          "h": [
+            77,
+            77
+          ],
+          "f": [
+            67,
+            67
+          ],
+          "source": "maggiolo"
+        }
+      ]
+    },
+    {
+      "key": "farm",
+      "icon": "🌾",
+      "label": "Part des métiers de la terre (agriculture, forêt)",
+      "unit": "%",
+      "sexes": false,
+      "family": "Parmi les personnes de la famille en âge de travailler à cette date (20 à 60 ans) et dont le métier est reconnu, la part des métiers de la terre et de la forêt (laboureur, cultivateur, journalier agricole, bûcheron…).",
+      "rows": [
+        {
+          "label": "1906",
+          "from": 1846,
+          "to": 1886,
+          "all": [
+            40,
+            45
+          ],
+          "source": "marchand_thelot",
+          "who": "nées entre 1846 et 1886"
+        }
+      ]
+    }
+  ],
+  "verified": "10/11/2026 : mortalité infantile 1901-1970, âge au premier mariage 1960-1990, espérance de vie 1950 et signatures 1816-1820 et 1872-1876 vérifiés dans les sources citées ; les chiffres d’avant 1800 restent des ordres de grandeur (≈) tirés des travaux cités ; l’espérance de vie vers 1900 a été retirée faute de chiffre vérifié."
+}

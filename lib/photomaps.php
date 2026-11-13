@@ -801,7 +801,7 @@ function pm_save_map(PDO $pdo, array $d): array
     $id = pm_id($d['id'] ?? 0);
     $old = $id ? pm_need_map($pdo, $id) : null;
     if (!$old && (int) $pdo->query('SELECT count(*) FROM photo_maps WHERE deleted_at IS NULL')->fetchColumn() >= PHOTOMAP_MAX_MAPS) {
-        throw new RuntimeException('Tu as déjà ' . PHOTOMAP_MAX_MAPS . ' cartes de photos : supprimes-en une pour en créer une autre.');
+        throw new RuntimeException(i18n_t('Tu as déjà {n} cartes de photos : supprimes-en une pour en créer une autre.', ['n' => PHOTOMAP_MAX_MAPS]));
     }
     $name = pm_text($d['name'] ?? '', 160);
     if ($name === '') { throw new RuntimeException('Donne un nom à la carte.'); }

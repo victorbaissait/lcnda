@@ -9,6 +9,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? v[k] : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     ext.suivi = ext.suivi || {};
     const A = () => window.LCNDA_APP, UI = () => window.LCNDA_UI || {}, P = () => window.LCNDA_PICKER, X = () => window.LCNDA_SHEET;
@@ -41,7 +42,7 @@
                 const blob = await X().makeZip(files, 'application/zip');
                 const name = q.scope === 'pets' && pkg.animals.length === 1 ? pkg.animals[0].name : q.scope === 'species' ? (q.taxon || ext.speciesLabel?.(q.species) || q.species) : q.scope === 'site' ? 'site' : 'tout';
                 const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = (A().safeExportFilename ? A().safeExportFilename(`Suivi des animaux — ${name}`) : `Suivi des animaux - ${name}`) + '.lcsuivi'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
-                U().toast(`📤 Fichier prêt : ${U().plural(pkg.animals.length, 'animal', 'animaux')}${pkg.names ? '' : ' (sans les noms des observateurs)'}.`, 'success');
+                U().toast(i18n(pkg.names ? '📤 Fichier prêt : {animals}.' : '📤 Fichier prêt : {animals} (sans les noms des observateurs).', {animals: U().plural(pkg.animals.length, 'animal', 'animaux')}), 'success');
             }});
         const form = dlg.querySelector('form');
         const show = () => { const sc = form.querySelector('[name="scope"]:checked')?.value; form.querySelectorAll('[data-for]').forEach(x => { x.hidden = x.dataset.for !== sc; }); };
@@ -80,16 +81,16 @@
                 const an = await U().write('share_analyze', {package: pkg});
                 const s = an.summary;
                 return {count: pkg.animals.length, noun: 'animal', many: 'animaux', data: {pkg, an, zip}, allowEmpty: true,
-                    summaryHtml: `<b>${U().plural(s.animals_new, 'nouvel animal', 'nouveaux animaux')}</b>, ${U().plural(s.animals_match, 'animal déjà là', 'animaux déjà là')} (à compléter), <b>${U().plural(s.lines_new + s.free_new, 'ligne nouvelle', 'lignes nouvelles')}</b> (observations, marques, santé, groupes)${s.gps ? `, ${U().fmtN(s.gps)} points GPS` : ''}`,
-                    notices: [...(s.lines_dup ? [{kind: 'info', text: `${U().plural(s.lines_dup, 'ligne déjà là, écartée', 'lignes déjà là, écartées')} (doublons exacts).`}] : []), ...(s.conflicts ? [{kind: 'warn', text: `${U().plural(s.conflicts, 'conflit')} : tu choisiras pour chacun, à l’étape suivante.`}] : [])],
-                    preview: an.animals.slice(0, 12).map(a => `<div class="sv-row"><span class="sv-what">${esc(U().speciesIcon(a.species))} <b>${esc(a.name)}</b> ${a.status === 'match' ? `<small class="muted">= ${esc(a.target_title)} chez toi (reconnu par ${esc(a.match_by)})</small>` : ''}</span>${a.status === 'new' ? U().badge('Nouveau', 'blue') : a.fields.length || a.lines.some(l => l.status === 'conflict') ? U().badge('Conflits', 'yellow') : U().badge('À compléter', 'green')}</div>`).join(''),
-                    goLabel: s.conflicts ? 'Comparer et fusionner…' : `⤒ Importer ${U().plural(pkg.animals.length, 'animal', 'animaux')}`};
+                    summaryHtml: `${i18n('<b>{new}</b>, {known} (à compléter), <b>{rows}</b> (observations, marques, santé, groupes)', {new: U().plural(s.animals_new, 'nouvel animal', 'nouveaux animaux'), known: U().plural(s.animals_match, 'animal déjà là', 'animaux déjà là'), rows: U().plural(s.lines_new + s.free_new, 'ligne nouvelle', 'lignes nouvelles')})}${s.gps ? `, ${i18n('{n} points GPS', {n: U().fmtN(s.gps)})}` : ''}`,
+                    notices: [...(s.lines_dup ? [{kind: 'info', text: i18n('{rows} (doublons exacts).', {rows: U().plural(s.lines_dup, 'ligne déjà là, écartée', 'lignes déjà là, écartées')})}] : []), ...(s.conflicts ? [{kind: 'warn', text: i18n('{conflicts} : tu choisiras pour chacun, à l’étape suivante.', {conflicts: U().plural(s.conflicts, 'conflit')})}] : [])],
+                    preview: an.animals.slice(0, 12).map(a => `<div class="sv-row"><span class="sv-what">${esc(U().speciesIcon(a.species))} <b>${esc(a.name)}</b> ${a.status === 'match' ? `<small class="muted">${'= ' + i18n('{name} chez toi (reconnu par {how})', {name: esc(a.target_title), how: esc(i18n(a.match_by))})}</small>` : ''}</span>${a.status === 'new' ? U().badge('Nouveau', 'blue') : a.fields.length || a.lines.some(l => l.status === 'conflict') ? U().badge('Conflits', 'yellow') : U().badge('À compléter', 'green')}</div>`).join(''),
+                    goLabel: s.conflicts ? i18n('Comparer et fusionner…') : i18n('⤒ Importer {animals}', {animals: U().plural(pkg.animals.length, 'animal', 'animaux')})};
             },
             run: async analysis => {
                 const {pkg, an, zip} = analysis.data;
                 if (an.summary.conflicts) { setTimeout(() => openMerge(pkg, an, zip), 50); return {message: ''}; }
                 const r = await apply(pkg, an, {}, zip);
-                return {message: `Suivi reçu : ${r.summary}`, undo: () => undo(r.receipt)};
+                return {message: i18n('Suivi reçu : {what}', {what: r.summary}), undo: () => undo(r.receipt)};
             }});
     }
     async function uploadMedia(pkg, zip) {
@@ -121,10 +122,10 @@
         const draw = () => {
             const n = left();
             dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">⤒ RECEVOIR · FUSIONNER</span><h2>Fusionner le suivi reçu</h2><p>Pour chaque différence : garde le tien, prends le sien, ou (pour une ligne) garde les deux.</p></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-                <div class="sv-merge-body"><div class="merge-summary maintenance-panel"><span><b data-left>${n}</b> ${n > 1 ? 'conflits restants' : 'conflit restant'}</span><span><b>${an.summary.animals_new}</b> nouveaux</span><span><b>${an.summary.lines_new + an.summary.free_new}</b> lignes nouvelles</span><span><b>${an.summary.lines_dup}</b> doublons écartés</span></div>
+                <div class="sv-merge-body"><div class="merge-summary maintenance-panel"><span><b data-left>${n}</b> ${i18n(n > 1 ? 'conflits restants' : 'conflit restant')}</span><span><b>${an.summary.animals_new}</b> ${i18n('nouveaux')}</span><span><b>${an.summary.lines_new + an.summary.free_new}</b> ${i18n('lignes nouvelles')}</span><span><b>${an.summary.lines_dup}</b> ${i18n('doublons écartés')}</span></div>
                 <div class="merge-bulk"><button type="button" class="button small secondary" data-all="mine">Tout garder le mien</button><button type="button" class="button small secondary" data-all="theirs">Tout prendre le sien</button></div>
                 <div class="merge-list">${withConf.map(({a, i}) => { const d = dec.animals[keyOf(a, i)], k = keyOf(a, i);
-                    return `<section class="sv-merge-animal"><h3>${esc(U().speciesIcon(a.species))} ${esc(a.name)} <small class="muted">reçu · chez toi : ${esc(a.target_title)} (reconnu par ${esc(a.match_by)})</small></h3>
+                    return `<section class="sv-merge-animal"><h3>${esc(U().speciesIcon(a.species))} ${esc(a.name)} <small class="muted">${i18n('reçu · chez toi : {name} (reconnu par {how})', {name: esc(a.target_title), how: esc(i18n(a.match_by))})}</small></h3>
                         <div class="sv-tags">${radio(`mode-${k}`, 'merge', d.mode, 'Fusionner avec ma fiche')}${radio(`mode-${k}`, 'new', d.mode, 'En faire une nouvelle fiche')}${radio(`mode-${k}`, 'skip', d.mode, 'Ne pas le prendre')}</div>
                         ${d.mode !== 'merge' ? '' : a.fields.map(f => `<article class="merge-row merge-check"><div class="merge-incoming"><span class="eyebrow">${esc(f.label)}</span><small>Le mien : <b>${esc(f.mine)}</b></small><small>Le sien : <b>${esc(f.theirs)}</b></small></div><div class="merge-choice">${radio(`f-${k}-${f.field}`, 'mine', d.fields[f.field], `Garder le mien (« ${esc(f.mine)} »)`)}${radio(`f-${k}-${f.field}`, 'theirs', d.fields[f.field], `Prendre le sien (« ${esc(f.theirs)} »)`)}</div></article>`).join('')}
                         ${d.mode !== 'merge' ? '' : a.lines.filter(l => l.status === 'conflict').map(l => `<article class="merge-row merge-check"><div class="merge-incoming"><span class="eyebrow">${esc({obs: 'Observation modifiée', mark: 'Marque modifiée', health: 'Événement de santé modifié', member: 'Rôle dans le groupe'}[l.kind])}</span><small>Le mien : <b>${esc(l.mine)}</b></small><small>Le sien : <b>${esc(l.theirs)}</b></small></div><div class="merge-choice">${radio(`l-${k}-${l.uuid}`, 'mine', d.lines[l.uuid], 'Garder le mien')}${radio(`l-${k}-${l.uuid}`, 'theirs', d.lines[l.uuid], 'Prendre le sien')}${radio(`l-${k}-${l.uuid}`, 'both', d.lines[l.uuid], 'Garder les deux')}</div></article>`).join('')}</section>`; }).join('')}</div></div>

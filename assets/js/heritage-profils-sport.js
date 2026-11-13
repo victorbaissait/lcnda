@@ -7,6 +7,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ART = window.LCNDA_ART, PF = ART?.PF; if (!ART?.define || !PF) return;
     const A = () => window.LCNDA_APP;
     const U = ART.util, esc = U.esc, plural = (n, w, pl) => U.plural(n, w, pl);
@@ -116,7 +117,7 @@
     const fmt = v => v === '' || v == null || (typeof v === 'number' && !Number.isFinite(v)) ? '' : String(v).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
     ART.ft.sportstats = {label: 'Statistiques', badge: '📊', wide: true, block: true,
         edit: (f, v, ctx) => { const sport = (ctx?.draft || {}).sport, cols = PF.statCols(ctx.store, sport).filter(c => !c.calc), val = v && typeof v === 'object' ? v : {};
-            return `<div class="pf-sfwrap" data-pf-statswrap><small class="ar-g">${esc(sport ? sportLabel(sport) : 'Choisis le sport : ses colonnes s’affichent')} · colonnes réglables dans la page (📊 → ⚙️ Colonnes)</small><div class="pf-stgrid">${cols.map(c => `<label class="pf-st"><span>${esc(c.label)}</span><input class="ar-in" data-st="${esc(c.key)}" value="${esc(val[c.key] ?? '')}" inputmode="decimal"></label>`).join('')}</div></div>`; },
+            return `<div class="pf-sfwrap" data-pf-statswrap><small class="ar-g">${esc(sport ? i18n(sportLabel(sport)) : i18n('Choisis le sport : ses colonnes s’affichent'))} · ${i18n('colonnes réglables dans la page (📊 → ⚙️ Colonnes)')}</small><div class="pf-stgrid">${cols.map(c => `<label class="pf-st"><span>${esc(c.label)}</span><input class="ar-in" data-st="${esc(c.key)}" value="${esc(val[c.key] ?? '')}" inputmode="decimal"></label>`).join('')}</div></div>`; },
         get: el => { const o = {}; el.querySelectorAll('[data-st]').forEach(i => { const v = i.value.trim(); if (v !== '') o[i.dataset.st] = v.slice(0, 40); }); return o; },
         read: (f, v, ctx) => { const val = v && typeof v === 'object' ? v : {}, cols = PF.statCols(ctx.store, ctx.item?.data?.sport).filter(c => c.on); COLS = PF.statCols(ctx.store, ctx.item?.data?.sport); const cells = cols.map(c => [c, cellVal(c, val)]).filter(([, x]) => fmt(x) !== '');
             return cells.length ? `<div class="ar-scroll"><table class="ar-t"><thead><tr>${cells.map(([c]) => `<th>${esc(c.label)}</th>`).join('')}</tr></thead><tbody><tr>${cells.map(([, x]) => `<td>${esc(fmt(x))}</td>`).join('')}</tr></tbody></table></div>` : ''; },
@@ -240,7 +241,7 @@
         const l = C.store.of('sp_result'), n = k => l.filter(r => r.data.outcome === k).length, by = PF.state.sp_by === '1';
         const comp = new Map(); l.forEach(r => { const k = (r.title || '').replace(/\s*\d{4}.*$/, '').trim() || 'Autre'; const o = comp.get(k) || {n: 0, V: 0, D: 0, N: 0}; o.n++; if (r.data.outcome) o[r.data.outcome]++; comp.set(k, o); });
         const matches = C.store.of('sp_season').reduce((t, s) => t + (num(s.data.stats?.matches) || 0), 0);
-        return {body: l.length || matches ? `<p>${esc(plural(Math.max(l.length, matches), 'match', 'matchs'))} · ${PF.res(`V ${n('V')}`, 'w')} ${PF.res(`D ${n('D')}`, 'l')} N ${n('N')} · <button type="button" class="ar-linkbtn" data-pf-state="sp_by:${by ? '0' : '1'}">par compétition ${by ? '▾' : '▸'}</button></p>${by ? [...comp.entries()].map(([k, o]) => `<div>${esc(k)} · ${o.n} <small class="ar-g">(V ${o.V} · D ${o.D} · N ${o.N})</small></div>`).join('') : ''}` : PF.muted('Aucun résultat noté.'),
+        return {body: l.length || matches ? `<p>${esc(plural(Math.max(l.length, matches), 'match', 'matchs'))} · ${PF.res(`V ${n('V')}`, 'w')} ${PF.res(`D ${n('D')}`, 'l')} N ${n('N')} · <button type="button" class="ar-linkbtn" data-pf-state="sp_by:${by ? '0' : '1'}">${i18n('par compétition')} ${by ? '▾' : '▸'}</button></p>${by ? [...comp.entries()].map(([k, o]) => `<div>${esc(k)} · ${o.n} <small class="ar-g">(V ${o.V} · D ${o.D} · N ${o.N})</small></div>`).join('') : ''}` : PF.muted('Aucun résultat noté.'),
             count: l.length || '', empty: !l.length && !matches, actions: `${PF.newBtn('sp_result', '＋')}${l.length ? PF.allBtn('sp_result') : ''}`};
     }};
     S.sp_people = {icon: '🧑‍🏫', label: 'Entraîneurs · coéquipiers', w: '⅓', profile: K, render: C => {
@@ -283,8 +284,8 @@
                 <p class="ar-phelp">👁 pour cacher une colonne, ↑ ↓ pour ranger. Tes colonnes : ✎ pour renommer, 🗑 pour retirer (les chiffres déjà écrits restent dans les fiches).</p>
                 <div class="ar-plist">${cols.map((c, i) => `<div class="ar-fr ${c.on ? '' : 'off'} ${c.custom || c.calc ? 'cust' : ''}" data-ck="${esc(c.key)}"><span class="ar-grip">⠿</span><button type="button" class="ar-eye" data-c-eye title="${c.on ? 'Cacher' : 'Montrer'}">${c.on ? '👁' : '🚫'}</button><span class="lbl">${esc(c.label)}${c.calc ? ` <small class="ar-g">= ${esc(c.formula)}</small>` : ''}</span><span class="ty">${c.calc ? 'calculée' : c.custom ? 'perso' : 'nombre'}</span><span class="tools"><button type="button" data-c-mv="-1" ${i ? '' : 'disabled'} title="Monter">↑</button><button type="button" data-c-mv="1" ${i < cols.length - 1 ? '' : 'disabled'} title="Descendre">↓</button>${c.custom || c.calc ? '<button type="button" data-c-ren title="Renommer">✎</button><button type="button" data-c-del title="Retirer">🗑</button>' : ''}</span></div>`).join('')}</div>
                 <div class="ar-pbtns"><button type="button" class="button small secondary" data-c-add>＋ Ajouter une colonne</button><button type="button" class="button small secondary" data-c-calc>🧮 Colonne calculée</button></div>
-                <p class="ar-phelp">Une colonne calculée : une formule avec les noms des colonnes (${esc(cols.filter(c => !c.calc).map(c => c.label).join(', '))}), ex. « Points / Matchs ».</p>
-                <div class="pf-side"><b>🏅 Tous les sports, chacun ses champs</b><div class="pf-kinds">${Object.values(FAM).map(F => `<div><b>${esc(F.label)}</b>${esc(F.fields.map(f => f.label).join(', '))}</div>`).join('')}</div><p class="ar-phelp">${SPORTS.length} sports en liste ; un sport qui manque : choisis le plus proche et ajoute tes colonnes.</p></div></div>`;
+                <p class="ar-phelp">${i18n('Une colonne calculée : une formule avec les noms des colonnes ({nm}), ex. « Points / Matchs ».', {nm: esc(cols.filter(c => !c.calc).map(c => i18n(c.label)).join(', '))})}</p>
+                <div class="pf-side"><b>🏅 Tous les sports, chacun ses champs</b><div class="pf-kinds">${Object.values(FAM).map(F => `<div><b>${esc(F.label)}</b>${esc(F.fields.map(f => f.label).join(', '))}</div>`).join('')}</div><p class="ar-phelp">${i18n('{n} sports en liste ; un sport qui manque : choisis le plus proche et ajoute tes colonnes.', {n: SPORTS.length})}</p></div></div>`;
         }
         aside.onclick = async e => {
             const b = e.target.closest('button'); if (!b) return; const k = b.closest('[data-ck]')?.dataset.ck;
@@ -297,7 +298,7 @@
             if (b.hasAttribute('data-c-add')) { const n = await A().askText({title: '＋ Ajouter une colonne', message: 'Son nom (ex. « Plaquages »). Les chiffres s’écrivent dans chaque saison.', value: '', okLabel: 'Ajouter'}); if (!n?.trim()) return; const c = cfg(), ck = `x_${U.slug(n).slice(0, 20)}`; if (PF.statCols(st, sport).some(x => x.key === ck)) return A().toast('Cette colonne existe déjà.', 'error'); c.custom.push({key: ck, label: n.trim().slice(0, 30)}); c.order.push(ck); return save(); }
             if (b.hasAttribute('data-c-calc')) {
                 const keys = PF.statCols(st, sport).filter(c => !c.calc).map(c => c.label).join(', ');
-                ext.openDialog({eyebrow: '⚙️ COLONNES', title: '🧮 Colonne calculée', submitLabel: 'Ajouter', body: `<label class="pf-fld">Nom<input name="label" maxlength="30" placeholder="Points par match" required></label><label class="pf-fld">Formule<input name="formula" maxlength="120" placeholder="Points / Matchs" required></label><p class="pf-small">Avec + − * / et des parenthèses. Colonnes : ${esc(keys)}.</p>`,
+                ext.openDialog({eyebrow: '⚙️ COLONNES', title: '🧮 Colonne calculée', submitLabel: 'Ajouter', body: `<label class="pf-fld">Nom<input name="label" maxlength="30" placeholder="Points par match" required></label><label class="pf-fld">Formule<input name="formula" maxlength="120" placeholder="Points / Matchs" required></label><p class="pf-small">${i18n('Avec + − * / et des parenthèses. Colonnes : {nm}.', {nm: esc(keys)})}</p>`,
                     onSubmit: async form => { const label = form.elements.label.value.trim(), formula = form.elements.formula.value.trim(); if (!label || !formula) return false;
                         const test = PF.calc(formula, Object.fromEntries(PF.statCols(st, sport).map(c => [c.key, 1])), PF.statCols(st, sport)); if (!Number.isFinite(test) && !/\/\s*0/.test(formula)) { A().toast('Formule incomprise : vérifie les noms des colonnes et les parenthèses.', 'error'); return false; }
                         const c = cfg(), ck = `k_${U.slug(label).slice(0, 20)}`; c.calc = [...c.calc.filter(x => x.key !== ck), {key: ck, label: label.slice(0, 30), formula}]; if (!c.order.includes(ck)) c.order.push(ck); await save(); return true; }});
@@ -341,6 +342,6 @@
     };
     ART.profiles.sport = {key: 'sport', label: 'Sportif · athlète', short: 'Sport', icon: '🏅', color: '#1aa34a', group: 'aventure', kinds: ['sp_club', 'sp_result', 'sp_record', 'sp_season'], type: 'profile_sport', desc: 'clubs, sélections, résultats, records, médailles, statistiques', models: M, timeline, hero,
         defaultModel: st => MODEL_OF[famOf(PF.mainSport(st))] || 'collectif', icons: st => sportsOf(st).map(sportIcon),
-        organizerNote: '<b>🏁 Un résultat</b> : compétition (édition, lieu 📍, dates) · épreuve · catégorie · date · tour / phase · classement « 3e sur 48 » · performance (temps, score, distance, points) · adversaire ou équipe adverse · partenaires 👤 · médaille · record battu · photo, vidéo, presse 📰 — et les champs propres au sport (cheval 🐾 pour l’équitation, grades pour le judo, Elo pour les échecs…).',
+        organizerNote: i18n('<b>🏁 Un résultat</b> : compétition (édition, lieu 📍, dates) · épreuve · catégorie · date · tour / phase · classement « 3e sur 48 » · performance (temps, score, distance, points) · adversaire ou équipe adverse · partenaires 👤 · médaille · record battu · photo, vidéo, presse 📰 — et les champs propres au sport (cheval 🐾 pour l’équitation, grades pour le judo, Elo pour les échecs…).'),
         sub: st => sportsOf(st).slice(0, 2).map(sportLabel).join(', ')};
 })();

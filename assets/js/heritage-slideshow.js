@@ -9,6 +9,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s)); // 🌐 traduction (docs/I18N.md)
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI || {};
@@ -202,7 +203,18 @@
     const tagOf = e => String(e.gedcom_tag || '').toUpperCase();
     const isType = (e, tags, words = []) => tags.includes(tagOf(e)) || words.some(w => fold(e.type_label).startsWith(w));
     /** « le 1er mars 1894 », « en 1894 », « vers 1784 », « en mai 1925 » */
+    const LNG = () => (typeof window !== 'undefined' && window.LCNDA_I18N?.lang) || 'fr';
+    /** 🌐 dans une autre langue : la date de la fiche réécrite dans la langue choisie quand elle est comprise (sinon telle quelle) */
+    function whenOfL(e) {
+        const d = clean(e.date_text), I = window.LCNDA_I18N, fd = (x, o) => I.fmtDate(x, o);
+        if (!d) return e.year ? i18n('en {date} (année)', {date: String(e.year)}) : '';
+        if (/^\d{3,4}$/.test(d)) return i18n('en {date} (année)', {date: d});
+        const full = fullDate(d); if (full) return i18n('le {date} (jour)', {date: fd(full, {day: 'numeric', month: 'long', year: 'numeric'})});
+        const mi = MONTHS.findIndex(m => fold(d).startsWith(fold(m))), my = d.match(/(\d{3,4})$/); if (mi >= 0 && my) { const x = new Date(2000, mi, 1); x.setFullYear(Number(my[1])); return i18n('en {date} (mois)', {date: fd(x, {month: 'long', year: 'numeric'})}); }
+        return d; // « vers 1784 », « an II »… : la date telle qu'elle est écrite (C4)
+    }
     function whenOf(e) {
+        if (LNG() !== 'fr') return whenOfL(e);
         const d = clean(e.date_text);
         if (!d) return e.year ? `en ${e.year}` : '';
         if (/^(vers|avant|apr[eè]s|entre|environ|autour|circa|an )/i.test(d)) return d;
@@ -220,7 +232,10 @@
         m = d.match(/^(\d{4})-(\d{2})-(\d{2})$/); if (m) return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
         return null;
     }
-    const whereOf = e => { const pl = clean(e.place_name), co = clean(e.county); if (pl) return `à ${pl}${co && fold(co) !== fold(pl) ? ` (${co})` : ''}`; return clean(e.country) ? `en ${clean(e.country)}` : ''; };
+    const whereOf = e => { const pl = clean(e.place_name), co = clean(e.county), fr = LNG() === 'fr';
+        if (pl) { const x = `${pl}${co && fold(co) !== fold(pl) ? ` (${co})` : ''}`; return fr ? `à ${x}` : i18n('à {place} (lieu)', {place: x}); }
+        return clean(e.country) ? (fr ? `en ${clean(e.country)}` : i18n('à {place} (lieu)', {place: clean(e.country)})) : ''; };
+    const andL = l => { if (LNG() === 'fr' || l.length < 2) return l.join(' et '); try { return new Intl.ListFormat(window.LCNDA_I18N.locale(), {type: 'conjunction'}).format(l); } catch (_) { return l.join(', '); } };
     const placeShort = e => clean(e.place_name) || clean(e.country);
     const yearOfText = t => Number((String(t || '').match(/\b(1[0-9]{3}|20[0-9]{2})\b/) || [])[1]) || 0;
     const isImage = m => (m.media_type ? m.media_type === 'image' : true) && /\.(jpe?g|png|webp|gif)$/i.test(m.filename || '');
@@ -228,7 +243,7 @@
 
     /** Fabrique le récit. o = {pid, target (s, 0 = selon les textes), theme, aspect, siblings, sources, history, photoIds ([] = aucune, null = toutes), photoItems (Map id → {filename, title, year}), music} → {name, show} */
     async function lifeStory(o) {
-        const pid = Number(o.pid); if (!pid) throw new Error('Choisis une personne.');
+        const pid = Number(o.pid); if (!pid) throw new Error(i18n('Choisis une personne.'));
         const r = await api('person', {id: pid}), p = r.person || {}, AP = A();
         const nm = AP.personName(p), first = clean(p.first_name) || nm, yrs = AP.years?.(p) || '';
         const allMedia = (r.media || []).filter(isImage), byId = new Map(allMedia.map(m => [Number(m.id), m]));
@@ -238,7 +253,7 @@
         const unused = new Set(chosen);
         const takePhoto = eid => { const m = chosen.map(id => byId.get(id)).find(x => unused.has(Number(x.id)) && String(x.event_ids || '').split(',').map(Number).includes(Number(eid))); if (m) unused.delete(Number(m.id)); return m || null; };
         const srcByEvent = new Map(), srcPerson = [];
-        if (o.sources) (r.sources || []).forEach(s => { const line = `📚 ${clean(s.title) || 'Source'}${clean(s.page) ? `, ${clean(s.page)}` : ''}${clean(s.note) ? ` — ${clean(s.note)}` : ''}`; if (s.entity_type === 'event') { const k = Number(s.entity_id); srcByEvent.set(k, [...(srcByEvent.get(k) || []), line]); } else srcPerson.push(line); });
+        if (o.sources) (r.sources || []).forEach(s => { const line = `📚 ${clean(s.title) || i18n('Source')}${clean(s.page) ? `, ${clean(s.page)}` : ''}${clean(s.note) ? ` — ${clean(s.note)}` : ''}`; if (s.entity_type === 'event') { const k = Number(s.entity_id); srcByEvent.set(k, [...(srcByEvent.get(k) || []), line]); } else srcPerson.push(line); });
         const notesOf = e => [...new Set(srcByEvent.get(Number(e?.id)) || [])].join('\n');
         const items = []; // {key (année pour ranger), order, slides[]}
         const words = t => String(t || '').split(/\s+/).filter(Boolean).length;
@@ -263,73 +278,74 @@
             const key = Number(e.year) || 0;
             if (isType(e, ['BIRT'], ['naissance'])) {
                 if (!when && !where) return;
-                const txt = clean(`${first} naît ${when} ${where}.`) + (parents.length ? ` ${parents.length > 1 ? 'Ses parents' : 'Parent connu'} : ${parents.join(' et ')}.` : '');
+                const txt = clean(i18n('{name} naît {when} {where}.', {name: first, when, where})) + (parents.length ? ' ' + (parents.length > 1 ? i18n('Ses parents : {list}.', {list: andL(parents)}) : i18n('Parent connu : {list}.', {list: parents[0]})) : '');
                 const hasXY = e.latitude && e.longitude, m = ph();
-                add(key, 0, hasXY ? newSlide('map', {title: 'Naissance', route: [{name: placeShort(e), label: placeShort(e), year: e.year || '', lat: +e.latitude, lon: +e.longitude}], mapBg: 'offline', text: txt, dur: Math.max(7, durFor(txt)), notes}) : null,
-                    m ? photoSlide(m, hasXY ? clean(m.title) || txt : txt, hasXY ? '' : notes) : !hasXY ? titleSlide('Naissance', txt, notes) : null);
-                if (o.siblings && (r.siblings || []).length) { const sib = r.siblings.map(q => `${AP.personName(q)}${q.birth_year ? ` (${q.birth_year})` : ''}`); add(key, 1, titleSlide(sib.length > 1 ? 'Ses frères et sœurs' : 'Son frère ou sa sœur', sib.join(', ') + '.')); }
+                add(key, 0, hasXY ? newSlide('map', {title: i18n('Naissance'), route: [{name: placeShort(e), label: placeShort(e), year: e.year || '', lat: +e.latitude, lon: +e.longitude}], mapBg: 'offline', text: txt, dur: Math.max(7, durFor(txt)), notes}) : null,
+                    m ? photoSlide(m, hasXY ? clean(m.title) || txt : txt, hasXY ? '' : notes) : !hasXY ? titleSlide(i18n('Naissance'), txt, notes) : null);
+                if (o.siblings && (r.siblings || []).length) { const sib = r.siblings.map(q => `${AP.personName(q)}${q.birth_year ? ` (${q.birth_year})` : ''}`); add(key, 1, titleSlide(sib.length > 1 ? i18n('Ses frères et sœurs') : i18n('Son frère ou sa sœur'), sib.join(', ') + '.')); }
                 return;
             }
             if (isType(e, ['CHR', 'BAPM'], ['bapteme'])) {
                 if (!when && !where) return;
                 const w = (e.witnesses || []).map(x => `${AP.personName(x)}${clean(x.note) ? ` (${clean(x.note)})` : ''}`);
-                const txt = clean(`${first} reçoit le baptême ${when} ${where}.`) + (w.length ? ` Présents : ${w.join(', ')}.` : ''), m = ph();
-                add(key, 2, m ? photoSlide(m, txt, notes) : titleSlide('Baptême', txt, notes)); return;
+                const txt = clean(i18n('{name} reçoit le baptême {when} {where}.', {name: first, when, where})) + (w.length ? ' ' + i18n('Présents : {list}.', {list: w.join(', ')}) : ''), m = ph();
+                add(key, 2, m ? photoSlide(m, txt, notes) : titleSlide(i18n('Baptême'), txt, notes)); return;
             }
             if (isType(e, ['MARR', 'MRCI', 'MRRE'], ['mariage'])) {
                 const fam = Number(e.family_id) || 0, again = fam && seenMarr.has(fam); seenMarr.add(fam);
                 if (!when && !where && !partnerOf(e)) return;
-                const who = partnerOf(e), txt = again ? clean(`Le mariage ${isType(e, ['MRRE']) ? 'religieux' : 'civil'} est célébré ${when} ${where}.`) : clean(`${first} se marie${who ? ` avec ${who}` : ''} ${when} ${where}.`), m = ph();
-                add(key, 3, m ? photoSlide(m, txt, notes) : titleSlide(again ? cap(String(e.type_label || 'Mariage').toLowerCase()) : 'Mariage', txt, notes)); return;
+                const who = partnerOf(e), txt = again ? clean(isType(e, ['MRRE']) ? i18n('Le mariage religieux est célébré {when} {where}.', {when, where}) : i18n('Le mariage civil est célébré {when} {where}.', {when, where})) : clean(who ? i18n('{name} se marie avec {who} {when} {where}.', {name: first, who, when, where}) : i18n('{name} se marie {when} {where}.', {name: first, when, where})), m = ph();
+                add(key, 3, m ? photoSlide(m, txt, notes) : titleSlide(again ? cap(String(e.type_label || i18n('Mariage')).toLowerCase()) : i18n('Mariage'), txt, notes)); return;
             }
             if (isType(e, ['DEAT'], ['deces'])) {
                 if (!when && !where) return;
                 const b = fullDate(birth?.date_text), dd = fullDate(e.date_text); let age = '';
-                if (b && dd && dd > b) { let n = dd.getFullYear() - b.getFullYear(); if (dd.getMonth() < b.getMonth() || (dd.getMonth() === b.getMonth() && dd.getDate() < b.getDate())) n--; if (n >= 1) age = `, à ${plural(n, 'an')}`; }
-                const txt = clean(`${first} meurt ${when} ${where}${age}.`) + (clean(e.cause) ? ` Cause notée : ${clean(e.cause)}.` : ''), m = ph();
-                add(key || 9998, 90, m ? photoSlide(m, txt, notes) : titleSlide('Décès', txt, notes)); return;
+                if (b && dd && dd > b) { let n = dd.getFullYear() - b.getFullYear(); if (dd.getMonth() < b.getMonth() || (dd.getMonth() === b.getMonth() && dd.getDate() < b.getDate())) n--; if (n >= 1) age = n === 1 ? i18n(', à {n} an', {n: String(n)}) : i18n(', à {n} ans', {n: String(n)}); }
+                const txt = clean(i18n('{name} meurt {when} {where}{age}.', {name: first, when, where, age})) + (clean(e.cause) ? ' ' + i18n('Cause notée : {cause}.', {cause: clean(e.cause)}) : ''), m = ph();
+                add(key || 9998, 90, m ? photoSlide(m, txt, notes) : titleSlide(i18n('Décès'), txt, notes)); return;
             }
             if (isType(e, ['BURI', 'CREM', 'FUNE'], ['inhumation', 'incineration', 'obseques', 'sepulture'])) {
                 if (!when && !where) return;
                 const kind = isType(e, ['CREM'], ['incineration']) ? 'Crémation' : isType(e, ['FUNE'], ['obseques']) ? 'Obsèques' : 'Sépulture';
-                const txt = kind === 'Sépulture' ? clean(`${where ? `${first} repose ${where}` : `${first} est ${(window.LCNDA_ACCORD?.accord || ((_, t) => t.replace('(e)', '')))(p.gender, 'inhumé(e)', {before: 'inhumé'})}`}${when ? ` (inhumation ${when})` : ''}.`) : clean(`${kind} ${when} ${where}.`), m = ph();
-                add(key || 9999, 91, m ? photoSlide(m, txt, notes) : titleSlide(kind, txt, notes)); return;
+                const buried = `{name} est ${(window.LCNDA_ACCORD?.accord || ((_, t) => t.replace('(e)', '')))(p.gender, 'inhumé(e)', {before: 'inhumé'})}`; // 🌐 « {name} est inhumé », « … inhumée », « … inhumé(e) » : une clé chacune
+                const txt = kind === 'Sépulture' ? clean(`${where ? i18n('{name} repose {where}', {name: first, where}) : i18n(buried, {name: first})}${when ? ' ' + i18n('(inhumation {when})', {when}) : ''}.`) : clean(i18n('{kind} {when} {where}.', {kind: i18n(kind), when, where})), m = ph();
+                add(key || 9999, 91, m ? photoSlide(m, txt, notes) : titleSlide(i18n(kind), txt, notes)); return;
             }
             if (isType(e, ['OCCU'], ['profession', 'metier'])) {
                 const job = desc || ''; if (!job) return;
-                const txt = clean(`${when ? `${cap(when)}, ` : ''}${first} exerce le métier de ${job}${where ? ` ${where}` : ''}.`), m = ph();
-                add(key, 5, m ? photoSlide(m, txt, notes) : titleSlide('Métier', txt, notes)); return;
+                const txt = clean(`${when ? `${cap(when)}, ` : ''}${i18n('{name} exerce le métier de {job}{where}.', {name: first, job, where: where ? ` ${where}` : ''})}`), m = ph();
+                add(key, 5, m ? photoSlide(m, txt, notes) : titleSlide(i18n('Métier'), txt, notes)); return;
             }
             if (isType(e, ['RESI'], ['domicile', 'lieu de residence'])) {
                 if (!where) return; const moved = lastHome && fold(lastHome) !== fold(placeShort(e)); lastHome = placeShort(e);
-                const txt = clean(`${when ? `${cap(when)}, ` : ''}${first} ${moved ? 's’installe' : 'habite'} ${where}${clean(e.address) ? `, ${clean(e.address)}` : ''}.`), m = ph();
-                add(key, 6, m ? photoSlide(m, txt, notes) : titleSlide(moved ? 'Déménagement' : 'Domicile', txt, notes)); return;
+                const txt = clean(`${when ? `${cap(when)}, ` : ''}${i18n(moved ? '{name} s’installe {where}{addr}.' : '{name} habite {where}{addr}.', {name: first, where, addr: clean(e.address) ? `, ${clean(e.address)}` : ''})}`), m = ph();
+                add(key, 6, m ? photoSlide(m, txt, notes) : titleSlide(moved ? i18n('Déménagement') : i18n('Domicile'), txt, notes)); return;
             }
             if (isType(e, ['CENS'], ['recensement'])) {
                 if (!when && !where) return; const y = Number(e.year) || 0;
                 if ((r.census?.records || []).some(c => Number(c.year) === y)) return; // le relevé du recensement dit mieux
-                const txt = clean(`${y ? `Au recensement de ${y}` : `Au recensement ${when}`}, ${first} vit ${where || ''}${desc ? ` (${desc})` : ''}.`), m = ph();
-                add(key, 7, m ? photoSlide(m, txt, notes) : titleSlide(`Recensement${y ? ` de ${y}` : ''}`, txt, notes)); return;
+                const txt = clean(y ? i18n('Au recensement de {y}, {name} vit {where}{desc}.', {y: String(y), name: first, where: where || '', desc: desc ? ` (${desc})` : ''}) : i18n('Au recensement {when}, {name} vit {where}{desc}.', {when, name: first, where: where || '', desc: desc ? ` (${desc})` : ''})), m = ph();
+                add(key, 7, m ? photoSlide(m, txt, notes) : titleSlide(y ? i18n('Recensement de {y}', {y: String(y)}) : i18n('Recensement'), txt, notes)); return;
             }
             // les autres événements : leur nom, leur date, leur lieu et ce que la fiche en dit
             if (!when && !where && !desc) return;
-            const label = clean(e.type_label) || 'Événement';
-            const txt = clean(`${cap(label.toLowerCase())} ${when} ${where}.`) + (desc && fold(desc) !== fold(label) ? ` ${cap(desc)}${/[.!?]$/.test(desc) ? '' : '.'}` : ''), m = ph();
+            const label = clean(e.type_label) || i18n('Événement');
+            const txt = clean(i18n('{label} {when} {where}.', {label: cap(label.toLowerCase()), when, where})) + (desc && fold(desc) !== fold(label) ? ` ${cap(desc)}${/[.!?]$/.test(desc) ? '' : '.'}` : ''), m = ph();
             add(key, 8, m ? photoSlide(m, txt, notes) : titleSlide(label, txt, notes));
         });
         // les recensements relevés (foyer, adresse, métier noté)
         (r.census?.records || []).forEach(c => {
             const y = Number(c.year) || 0, pl = clean(c.place_name), ad = clean(c.address); if (!y || (!pl && !ad)) return;
             const n = (c.members || []).length, job = clean(c.occupation);
-            const txt = clean(`Au recensement de ${y}, ${first} vit ${pl ? `à ${pl}${ad ? ` (${ad})` : ''}` : `à l’adresse « ${ad} »`}.`) + (job ? ` Métier noté : ${job}.` : '') + (n > 1 ? ` Le foyer compte ${plural(n, 'personne')}.` : '');
+            const txt = clean(i18n('Au recensement de {y}, {name} vit {where}{desc}.', {y: String(y), name: first, where: pl ? whereOf({place_name: `${pl}${ad ? ` (${ad})` : ''}`}) : i18n('à l’adresse « {ad} »', {ad}), desc: ''})) + (job ? ' ' + i18n('Métier noté : {job}.', {job}) : '') + (n > 1 ? ' ' + i18n('Le foyer compte {who}.', {who: plural(n, 'personne')}) : '');
             const m = chosen.map(id => byId.get(id)).find(x => unused.has(Number(x.id)) && (r.media || []).some(rm => Number(rm.id) === Number(x.id) && String(rm.census_ids || '').split(',').map(Number).includes(Number(c.id))));
             if (m) unused.delete(Number(m.id));
-            add(y, 7, m ? photoSlide(m, txt) : titleSlide(`Recensement de ${y}`, txt));
+            add(y, 7, m ? photoSlide(m, txt) : titleSlide(i18n('Recensement de {y}', {y: String(y)}), txt));
         });
         // les enfants : une diapositive, à la naissance du premier
         if (kids.length) {
             const list = kids.map(k => `${clean(k.first_name) || AP.personName(k)}${k.birth_year ? ` (${k.birth_year})` : ''}`);
-            add(Number(kids[0].birth_year) || Number(p.marr_year) || 0, 4, titleSlide(kids.length > 1 ? 'Ses enfants' : 'Son enfant', `${kids.length > 1 ? `${plural(kids.length, 'enfant')} connus` : 'Un enfant connu'} : ${list.join(', ')}.`));
+            add(Number(kids[0].birth_year) || Number(p.marr_year) || 0, 4, titleSlide(kids.length > 1 ? i18n('Ses enfants') : i18n('Son enfant'), kids.length > 1 ? i18n('{n} enfants connus : {list}.', {n: String(kids.length), list: list.join(', ')}) : i18n('Un enfant connu : {list}.', {list: list.join(', ')})));
         }
         // les autres photos choisies : à leur année, sinon avant la fin
         chosen.filter(id => unused.has(id)).forEach(id => { const m = byId.get(id), y = Number(m.event_year) || yearOfText(m.date_text) || yearOfText(m.title); const txt = clean([clean(m.title), y && !String(m.title || '').includes(String(y)) ? String(y) : ''].filter(Boolean).join(' · ')); add(y || 9997, 9, photoSlide(m, txt)); unused.delete(id); });
@@ -340,18 +356,18 @@
                 const placesTxt = evs.map(e => fold([e.county, e.state, e.country].join(' '))).join(' '), inFrance = evs.some(e => !clean(e.country) || /france/i.test(e.country));
                 const crises = (h.crises || []).filter(c => c.from <= until && c.to >= birthY && (c.scope === 'France' ? inFrance : !/^\d/.test(String(c.scope)) && String(c.scope).split(',').some(s => s.trim() && placesTxt.includes(fold(s.trim())))))
                     .sort((a, b) => a.from - b.from).slice(0, 5);
-                if (crises.length) add(Math.max(crises[0].from, birthY), 8, newSlide('title', {title: 'Pendant sa vie', sub: crises.map(c => `${c.from === c.to ? c.from : `${c.from}–${c.to}`} · ${c.title}`).join('\n'), dur: clamp(5 + crises.length * 2, 6, 14), notes: crises.map(c => `${c.title} : ${c.description}`).join('\n')}));
+                if (crises.length) add(Math.max(crises[0].from, birthY), 8, newSlide('title', {title: i18n('Pendant sa vie'), sub: crises.map(c => `${c.from === c.to ? c.from : `${c.from}–${c.to}`} · ${c.title}`).join('\n'), dur: clamp(5 + crises.length * 2, 6, 14), notes: crises.map(c => `${c.title} : ${c.description}`).join('\n')}));
             } catch (_) { /* la liste historique n'est pas là : pas de diapositive */ }
         }
         // 📖 sa biographie (lib/biographie.php : ta version, sinon le texte court de l'app), juste après le titre
         if (o.bio) {
             try { const bi = await api('biography', {id: pid, length: 'short'}); const txt = clean(String(bi.own || bi.generated || '').split(/\n\s*Notes :/)[0].replace(/\n+/g, ' '));
-                if (txt) add(-1, 0, newSlide('title', {title: 'Sa vie en quelques mots', sub: txt.length > 700 ? txt.slice(0, 697).replace(/\s+\S*$/, '') + '…' : txt, dur: durFor(txt), notes: bi.own ? 'Ta version de la biographie (📖 sur la fiche).' : 'Biographie écrite par l’app d’après la fiche.'})); } catch (_) {}
+                if (txt) add(-1, 0, newSlide('title', {title: i18n('Sa vie en quelques mots'), sub: txt.length > 700 ? txt.slice(0, 697).replace(/\s+\S*$/, '') + '…' : txt, dur: durFor(txt), notes: bi.own ? i18n('Ta version de la biographie (📖 sur la fiche).') : i18n('Biographie écrite par l’app d’après la fiche.')})); } catch (_) {}
         }
         // la carte des lieux de vie, reliés dans l'ordre (seulement s'il y a au moins deux lieux)
         const route = []; [...evs, ...(r.census?.records || []).map(c => ({...c, type_label: `recensement ${c.year}`}))].filter(e => e.latitude && e.longitude).sort((a, b) => (a.year || 9999) - (b.year || 9999))
             .forEach(e => { const last = route[route.length - 1]; if (last && Math.abs(last.lat - e.latitude) < 1e-4 && Math.abs(last.lon - e.longitude) < 1e-4) return; route.push({name: e.place_name, label: `${e.place_name}${e.type_label ? ` (${String(e.type_label).toLowerCase()})` : ''}`, year: e.year || '', lat: +e.latitude, lon: +e.longitude}); });
-        if (route.length > 1) add(deathY ? deathY - .5 : 9996, 89, newSlide('map', {title: 'Les lieux de sa vie', route, mapBg: 'offline', dur: Math.min(30, 6 + route.length * 2), text: route.map(q => q.name).filter((q, i, a) => q && q !== a[i - 1]).join(' → ')}));
+        if (route.length > 1) add(deathY ? deathY - .5 : 9996, 89, newSlide('map', {title: i18n('Les lieux de sa vie'), route, mapBg: 'offline', dur: Math.min(30, 6 + route.length * 2), text: route.map(q => q.name).filter((q, i, a) => q && q !== a[i - 1]).join(' → ')}));
         // la fin : la descendance connue
         let ending = null;
         if (kids.length) {
@@ -361,7 +377,7 @@
                 const names = [['enfant', 'enfants'], ['petit-enfant', 'petits-enfants'], ['arrière-petit-enfant', 'arrière-petits-enfants']];
                 const parts = gens.slice(0, 3).map((n, i) => n ? plural(n, names[i][0], names[i][1]) : '').filter(Boolean), rest = gens.slice(3).reduce((a, b) => a + (b || 0), 0);
                 if (rest) parts.push(plural(rest, 'autre descendant'));
-                if (parts.length) ending = newSlide('title', {title: 'Sa descendance', sub: `${parts.length > 1 ? `${parts.slice(0, -1).join(', ')} et ${parts[parts.length - 1]}` : parts[0]} dans la généalogie.`, dur: 7, trans: 'black'});
+                if (parts.length) ending = newSlide('title', {title: i18n('Sa descendance'), sub: i18n('{list} dans la généalogie.', {list: LNG() === 'fr' ? (parts.length > 1 ? `${parts.slice(0, -1).join(', ')} et ${parts[parts.length - 1]}` : parts[0]) : andL(parts)}), dur: 7, trans: 'black'});
             } catch (_) {}
         }
         // ranger : par année, puis dans l'ordre de la vie (naissance, baptême, mariage, enfants…)
@@ -372,8 +388,8 @@
         if (target > 0 && tot > 0) { const f = target / tot; slides.forEach(s => { s.dur = clamp(Math.round(s.dur * f * 2) / 2, 3, 40); }); }
         slides.forEach((s, i) => { if (!s.trans || i === 0) s.trans = 'fade'; });
         const show = {...newShow(), aspect: ASPECTS[o.aspect] ? o.aspect : '16:9', theme: THEMES[o.theme] ? o.theme : 'classique', slides, musicVol: .4, story: {pid, made: new Date().toISOString().slice(0, 10)}};
-        if (o.music?.filename) show.music = {media_id: Number(o.music.id || o.music.media_id) || 0, filename: o.music.filename, title: o.music.title || 'Musique'};
-        return {name: `Récit d’une vie — ${nm}`, show, person: p, count: slides.length, skipped: !birth && !deathE};
+        if (o.music?.filename) show.music = {media_id: Number(o.music.id || o.music.media_id) || 0, filename: o.music.filename, title: o.music.title || i18n('Musique')};
+        return {name: i18n('Récit d’une vie — {name}', {name: nm}), show, person: p, count: slides.length, skipped: !birth && !deathE};
     }
 
     /** La fenêtre des choix du récit → les options (ou null si Annuler) */
@@ -409,7 +425,7 @@
                         try { const r = await api('person', {id: pid}); if (my !== loadSeq) return; const pp = r.person || {};
                             personMedia = (r.media || []).filter(isImage).filter(m => Number(m.id) !== Number(pp.portrait_media_id));
                             const n = (r.events || []).filter(e => Number(e.person_id) === pid || e.scope === 'family').length;
-                            sum.hidden = false; sum.innerHTML = `<b>${esc(A().personName(pp))}</b> ${esc(A().years?.(pp) || '')} · ${esc(plural(n, 'événement'))} · ${esc(plural(personMedia.length, 'photo'))}${(r.children || []).length ? ` · ${esc(plural(r.children.length, 'enfant'))}` : ''}${pp.portrait_media_id || pp.portrait ? ' · portrait ✓' : ''}`;
+                            sum.hidden = false; sum.innerHTML = `<b>${esc(A().personName(pp))}</b> ${esc(A().years?.(pp) || '')} · ${esc(plural(n, 'événement'))} · ${esc(plural(personMedia.length, 'photo'))}${(r.children || []).length ? ` · ${esc(plural(r.children.length, 'enfant'))}` : ''}${pp.portrait_media_id || pp.portrait ? ' · ' + esc(i18n('portrait ✓')) : ''}`;
                             paintPhotos(); } catch (e) { toast(e.message, 'error'); }
                     };
                     dg.addEventListener('picker-change', e => { if (e.detail?.name !== 'st_person') return; pid = Number(e.detail.value) || 0; load(); });
@@ -497,7 +513,7 @@
         }
         function paintProps() {
             const s = show.slides[cur], box = $('[data-ss-props]'), th = THEMES[show.theme] || THEMES.classique;
-            const doc = sec('doc', '🎞️ Tout le diaporama', `${F('Police des textes', `<button type="button" class="button small secondary h-ss-fontbtn" data-ss-cmd="font" style="font-family:${esc(fontOf(show, th))}">${esc(show.font || `Police du style (${th.label})`)} ▾</button>`, 'La police de tous les titres et légendes. Sans choix, c’est celle du style (Classique, Album ancien…).')}${show.font ? '<button type="button" class="link-button" data-ss-cmd="fontreset">↺ Revenir à la police du style</button>' : ''}${F('Musique de fond', '<span class="h-ss-music" data-ss-music></span>')}<p class="muted">${plural(show.slides.length, 'diapositive')} · ${fmt(eng.total())}</p><button type="button" class="button small secondary" data-ss-cmd="tokeynote" title="Une présentation façon Keynote faite de ces diapositives (textes, formes, animations, mode présentateur…) ; le diaporama reste tel quel">🎤 En faire une présentation…</button>`, true);
+            const doc = sec('doc', '🎞️ Tout le diaporama', `${F('Police des textes', `<button type="button" class="button small secondary h-ss-fontbtn" data-ss-cmd="font" style="font-family:${esc(fontOf(show, th))}">${esc(show.font || i18n('Police du style ({name})', {name: i18n(th.label)}))} ▾</button>`, 'La police de tous les titres et légendes. Sans choix, c’est celle du style (Classique, Album ancien…).')}${show.font ? '<button type="button" class="link-button" data-ss-cmd="fontreset">↺ Revenir à la police du style</button>' : ''}${F('Musique de fond', '<span class="h-ss-music" data-ss-music></span>')}<p class="muted">${plural(show.slides.length, 'diapositive')} · ${fmt(eng.total())}</p><button type="button" class="button small secondary" data-ss-cmd="tokeynote" title="Une présentation façon Keynote faite de ces diapositives (textes, formes, animations, mode présentateur…) ; le diaporama reste tel quel">🎤 En faire une présentation…</button>`, true);
             if (!s) { box.innerHTML = `<p class="muted">Choisis une diapositive (à gauche) pour régler sa durée, sa transition, son texte, sa voix.</p>${doc}`; paintMusic(); return; }
             const h = [`<h4>${ICON[s.type]} Diapositive ${cur + 1}</h4>`];
             // Couleur
@@ -525,7 +541,7 @@
             h.push(sec('notes', '📝 Notes', F('Notes (sources, rappels)', `<textarea rows="3" data-ss-p="notes" placeholder="Pour toi : les sources, ce qu’il reste à vérifier…">${esc(s.notes || '')}</textarea>`, 'Les notes ne se voient pas pendant la lecture ; elles suivent la diapositive quand on en fait une présentation (notes de l’orateur).'), !!s.notes));
             box.innerHTML = h.join('') + doc; paintMusic();
         }
-        function paint() { paintList(); paintProps(); drawAt(t); ssBar?.setWhere(show.slides.length ? `Diapositive ${cur + 1} / ${show.slides.length}` : 'Aucune diapositive'); ssBar?.sync(); }
+        function paint() { paintList(); paintProps(); drawAt(t); ssBar?.setWhere(show.slides.length ? i18n('Diapositive {k} / {n}', {k: String(cur + 1), n: String(show.slides.length)}) : i18n('Aucune diapositive')); ssBar?.sync(); }
         function drawAt(tt) { t = clamp(tt, 0, eng.total()); const i = eng.frame(t); if (i >= 0 && playing && i !== cur) { cur = i; paintList(); paintProps(); } const tot = eng.total() || 1; $('[data-ss-seek]').value = Math.round(t / tot * 1000); $('[data-ss-time]').textContent = `${fmt(t)} / ${fmt(eng.total())}`; }
         const goSlide = i => { cur = clamp(i, 0, Math.max(0, show.slides.length - 1)); t = (eng.starts()[cur] || 0) + .9; paint(); };
         /* ─── son : musique et voix ─── */
@@ -563,7 +579,7 @@
             try {
                 for (const f of imgs.slice(0, 60)) { const r = await toMedia(f, f.name, 'image', f.name.replace(/\.[^.]+$/, '')); added.push({media_id: Number(r.media_id), filename: r.filename, title: f.name.replace(/\.[^.]+$/, '')}); }
                 if (snd[0]) { const f = snd[0], r = await toMedia(f, f.name, 'audio', f.name.replace(/\.[^.]+$/, '')); show.music = {media_id: Number(r.media_id), filename: r.filename, title: f.name.replace(/\.[^.]+$/, '')}; music?.pause(); music = null; touch(); paintMusic(); }
-                await addPhotoList(added); progress(''); toast(`${plural(imgs.length + (snd.length ? 1 : 0), 'fichier ajouté', 'fichiers ajoutés')} aux Médias${snd.length ? ' (le son devient la musique)' : ''}.`);
+                await addPhotoList(added); progress(''); toast(snd.length ? i18n('{what} aux Médias (le son devient la musique).', {what: plural(imgs.length + 1, 'fichier ajouté', 'fichiers ajoutés')}) : i18n('{what} aux Médias.', {what: plural(imgs.length, 'fichier ajouté', 'fichiers ajoutés')}));
             } catch (e) { progress(''); toast(e.message, 'error'); }
         }
         ui.bindFileDrop?.($('.h-ss-main'), dropFiles, {accept: 'image/*,audio/*'});
@@ -591,7 +607,7 @@
                 const st = await lifeStory(o); progress('');
                 if (!st.show.slides.length) return toast('Rien à raconter pour cette personne.', 'error');
                 let replace = !show.slides.length;
-                if (!replace) replace = await A().confirmBox(`${plural(st.count, 'diapositive est prête', 'diapositives sont prêtes')}. Elles peuvent remplacer celles du diaporama ou venir à la suite.`, {title: 'Remplacer le diaporama par le récit ?', okLabel: 'Remplacer', cancelLabel: 'Ajouter à la suite', danger: false});
+                if (!replace) replace = await A().confirmBox(i18n('{what}. Elles peuvent remplacer celles du diaporama ou venir à la suite.', {what: plural(st.count, 'diapositive est prête', 'diapositives sont prêtes')}), {title: i18n('Remplacer le diaporama par le récit ?'), okLabel: i18n('Remplacer'), cancelLabel: i18n('Ajouter à la suite'), danger: false});
                 if (replace) { show = st.show; cur = 0; } else { show.slides.push(...st.show.slides); if (!show.music && st.show.music) show.music = st.show.music; show.story = st.show.story; cur = show.slides.length - st.show.slides.length; }
                 if (replace || name === 'Mon diaporama') { name = st.name; $('[data-ss-name]').value = name; }
                 music?.pause(); music = null; syncTop(); touch(); await rebuild(); drawAt(.9);
@@ -808,7 +824,7 @@
     ext.afterPerson.push(detail => {
         const p = detail?.person; if (!p?.id || p.kind === 'animal') return;
         const row = document.querySelector('#workspace .person-hero-actions'); if (!row || row.querySelector('[data-ss-story-person]')) return;
-        row.insertAdjacentHTML('afterbegin', `<button type="button" class="icon-action h-ss-storybtn" data-ss-story-person="${Number(p.id)}" title="✨ Récit d’une vie : un diaporama tout fait à partir de cette fiche" aria-label="Récit d’une vie en diaporama">✨</button>`);
+        row.insertAdjacentHTML('afterbegin', `<button type="button" class="icon-action h-ss-storybtn" data-ss-story-person="${Number(p.id)}" title="${esc(i18n('✨ Récit d’une vie : un diaporama tout fait à partir de cette fiche'))}" aria-label="${esc(i18n('Récit d’une vie en diaporama'))}">✨</button>`);
     });
     injectCss();
     document.addEventListener('click', e => { const b = e.target.closest?.('[data-ss-story-person]'); if (!b) return; e.preventDefault(); open({story: true, personId: Number(b.dataset.ssStoryPerson)}); });

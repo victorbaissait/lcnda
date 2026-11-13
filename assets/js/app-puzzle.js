@@ -20,6 +20,7 @@
     const APP = () => window.LCNDA_APP || {};
     const PK = () => window.LCNDA_PICKER || window.LCNDA_APP || {};
     const UI = () => window.LCNDA_UI || {};
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s);
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const toast = (m, k, o) => { try { (APP().toast || (x => console.info(x)))(m, k, o); } catch (_) {} };
     const plural = (n, one, many) => { try { if (APP().plural) return APP().plural(n, one, many); } catch (_) {} return `${n} ${n > 1 ? (many || one + 's') : one}`; };
@@ -70,8 +71,8 @@
     async function send(body, {keepalive = false} = {}) {
         let r;
         try { r = await fetch('api.php?action=puzzle_write', {method: 'POST', keepalive, headers: {'Content-Type': 'application/json', Accept: 'application/json', 'X-CSRF-Token': csrf()}, body: JSON.stringify({...body, csrf: csrf()})}); }
-        catch (e) { const x = new Error('Pas de connexion avec LCNDA : la partie est gardée dans ce navigateur.'); x.network = true; throw x; }
-        const d = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
+        catch (e) { const x = new Error(i18n('Pas de connexion avec LCNDA : la partie est gardée dans ce navigateur.')); x.network = true; throw x; }
+        const d = await r.json().catch(() => ({error: i18n('Réponse illisible du serveur')}));
         if (!r.ok || d.error) { const x = new Error(d.error || `Erreur ${r.status}`); x.status = r.status; x.kiosk = r.status === 423; x.network = r.status >= 500 || r.status === 419; throw x; }
         C.offline = false; return d;
     }
@@ -149,7 +150,7 @@
                 const adopted = await adoptLegacy();
                 if (adopted > 0 || hadPending) { r = await fetch('api.php?action=puzzle', {headers: {Accept: 'application/json'}}); d = await r.json(); }
                 C.games = Array.isArray(d.games) ? d.games.filter(g => g && owns(g.id)) : []; C.history = Array.isArray(d.history) ? d.history.filter(g => g && owns(g.id)) : []; C.records = d.records && typeof d.records === 'object' ? {...d.records} : {};
-                if (adopted > 0) toast(`🧩 ${plural(adopted, 'partie de puzzle rangée', 'parties de puzzle rangées')} dans la base de la généalogie.`, 'success');
+                if (adopted > 0) toast(i18n('🧩 {what} dans la base de la généalogie.', {what: plural(adopted, 'partie de puzzle rangée', 'parties de puzzle rangées')}), 'success');
             } catch (e) {
                 C.offline = true;
                 const l = store.get(LIST_PREFIX + (C.base || 'x'), null);
@@ -250,7 +251,7 @@
     // ── nouvelle partie ──
     function createGame(setup) {
         const img = setup.image, {cols, rows} = gridFor(setup.count, img.w, img.h);
-        const meta = {id: newId(), name: String(setup.name || '').trim() || (img.title ? `Puzzle « ${img.title} »` : 'Mon puzzle'), image: img, cols, rows, shape: setup.shape === 'square' ? 'square' : 'jigsaw',
+        const meta = {id: newId(), name: String(setup.name || '').trim() || (img.title ? i18n('Puzzle « {name} »', {name: img.title}) : i18n('Mon puzzle')), image: img, cols, rows, shape: setup.shape === 'square' ? 'square' : 'jigsaw',
             rotate: !!setup.rotate, model: setup.model !== false, edges: false, seed: (Math.random() * 2 ** 31) >>> 0, elapsed: 0, placed: 0, createdAt: Date.now(), updatedAt: Date.now()};
         const G = geometry(meta), n = G.n, r = rng(meta.seed ^ 0x9e3779b9);
         const order = Array.from({length: n}, (_, i) => i);
@@ -267,38 +268,38 @@
         const s = setup, img = s.image;
         const variants = (ctx.variants || [['goose', 'Jeu de l’oie'], ['snakes', 'Serpents et échelles'], ['horses', 'Petits chevaux'], ['puzzle', '🧩 Puzzle']]).map(([v, l]) => `<option value="${esc(v)}"${v === 'puzzle' ? ' selected' : ''}>${esc(l)}</option>`).join('');
         const full = gameCount() >= MAX_GAMES;
-        return `<section class="goose-page pz-page"><header class="goose-head"><span class="eyebrow">TABLE DE JEU · PUZZLE</span><h2>${esc(TITLE)}</h2><p>Choisis une image et le nombre de pièces. Le chrono tourne pendant que tu joues ; la partie se garde dans ce navigateur, même après actualisation.</p></header>
-            ${full ? `<div class="pz-msgline">${notice('warn', `Les ${MAX_GAMES} puzzles en cours sont gardés : supprime-en un pour en commencer un autre.`)}</div>` : ''}
+        return `<section class="goose-page pz-page"><header class="goose-head"><span class="eyebrow">${esc(i18n('TABLE DE JEU · {what}', {what: i18n('PUZZLE')}))}</span><h2>${esc(i18n(TITLE))}</h2><p>${esc(i18n('Choisis une image et le nombre de pièces. Le chrono tourne pendant que tu joues ; la partie se garde dans ce navigateur, même après actualisation.'))}</p></header>
+            ${full ? `<div class="pz-msgline">${notice('warn', i18n('Les {n} puzzles en cours sont gardés : supprime-en un pour en commencer un autre.', {n: MAX_GAMES}))}</div>` : ''}
             <form class="goose-setup pz-setup" id="pz-setup-form" novalidate>
-                <div class="goose-setup-grid pz-setup-top"><label>Jeu<select name="variant" data-pz-variant>${variants}</select></label><label>Nom de la partie<input name="name" value="${esc(s.name || '')}" placeholder="${esc(img?.title ? `Puzzle « ${img.title} »` : 'Ex : La noce de 1925')}" maxlength="80"></label></div>
-                <fieldset class="pz-fs"><legend>1 · L’image</legend>
+                <div class="goose-setup-grid pz-setup-top"><label>${esc(i18n('Jeu'))}<select name="variant" data-pz-variant>${variants}</select></label><label>${esc(i18n('Nom de la partie'))}<input name="name" value="${esc(s.name || '')}" placeholder="${esc(img?.title ? i18n('Puzzle « {name} »', {name: img.title}) : i18n('Ex : La noce de 1925'))}" maxlength="80"></label></div>
+                <fieldset class="pz-fs"><legend>${esc(i18n('1 · L’image'))}</legend>
                     <div class="pz-image" data-pz-image>${imageCardHtml(img)}</div>
-                    <div class="pz-src"><button type="button" class="button secondary" data-pz-media title="Ouvre la fenêtre des images de ta base (tu peux aussi y importer ou coller une image)">🖼 Choisir dans la base</button><button type="button" class="button secondary" data-pz-person title="Choisis une personne : sa photo de fiche devient le puzzle">👤 Photo d’une personne</button></div>
+                    <div class="pz-src"><button type="button" class="button secondary" data-pz-media title="${esc(i18n('Ouvre la fenêtre des images de ta base (tu peux aussi y importer ou coller une image)'))}">${esc(i18n('🖼 Choisir dans la base'))}</button><button type="button" class="button secondary" data-pz-person title="${esc(i18n('Choisis une personne : sa photo de fiche devient le puzzle'))}">${esc(i18n('👤 Photo d’une personne'))}</button></div>
                     <div class="pz-drop" data-pz-drop></div>
                 </fieldset>
-                <fieldset class="pz-fs"><legend>2 · Le nombre de pièces</legend>
-                    <div class="pz-counts" role="group" aria-label="Nombre de pièces">${COUNTS.map(c => `<button type="button" class="pz-count${!s.custom && s.count === c ? ' is-active' : ''}" data-pz-count="${c}">${c}</button>`).join('')}<button type="button" class="pz-count${s.custom ? ' is-active' : ''}" data-pz-custom>Autre…</button><label class="pz-custom"${s.custom ? '' : ' hidden'}><span class="sr-only">Nombre de pièces</span><input type="number" inputmode="numeric" min="${MIN_PIECES}" max="${MAX_PIECES}" step="1" value="${esc(s.count)}" data-pz-custom-n aria-label="Nombre de pièces"><span>pièces</span></label></div>
+                <fieldset class="pz-fs"><legend>${esc(i18n('2 · Le nombre de pièces'))}</legend>
+                    <div class="pz-counts" role="group" aria-label="${esc(i18n('Nombre de pièces'))}">${COUNTS.map(c => `<button type="button" class="pz-count${!s.custom && s.count === c ? ' is-active' : ''}" data-pz-count="${c}">${c}</button>`).join('')}<button type="button" class="pz-count${s.custom ? ' is-active' : ''}" data-pz-custom>${esc(i18n('Autre…'))}</button><label class="pz-custom"${s.custom ? '' : ' hidden'}><span class="sr-only">${esc(i18n('Nombre de pièces'))}</span><input type="number" inputmode="numeric" min="${MIN_PIECES}" max="${MAX_PIECES}" step="1" value="${esc(s.count)}" data-pz-custom-n aria-label="${esc(i18n('Nombre de pièces'))}"><span>${esc(i18n('pièces'))}</span></label></div>
                     <p class="pz-estimate" data-pz-estimate aria-live="polite"></p>
                     <div data-pz-count-msg></div>
                 </fieldset>
-                <fieldset class="pz-fs"><legend>3 · Les options</legend>
+                <fieldset class="pz-fs"><legend>${esc(i18n('3 · Les options'))}</legend>
                     <div class="pz-opts">
-                        <label class="pz-opt-select">Forme des pièces<select name="shape"><option value="jigsaw"${s.shape !== 'square' ? ' selected' : ''}>Vraies formes de puzzle</option><option value="square"${s.shape === 'square' ? ' selected' : ''}>Carrés simples</option></select></label>
-                        <label class="ui-toggle"><input type="checkbox" name="rotate"${s.rotate ? ' checked' : ''}><i></i>Pièces tournées (clic droit ou R pour les tourner)</label>
-                        <label class="ui-toggle"><input type="checkbox" name="model"${s.model !== false ? ' checked' : ''}><i></i>Montrer l’image modèle</label>
+                        <label class="pz-opt-select">${esc(i18n('Forme des pièces'))}<select name="shape"><option value="jigsaw"${s.shape !== 'square' ? ' selected' : ''}>${esc(i18n('Vraies formes de puzzle'))}</option><option value="square"${s.shape === 'square' ? ' selected' : ''}>${esc(i18n('Carrés simples'))}</option></select></label>
+                        <label class="ui-toggle"><input type="checkbox" name="rotate"${s.rotate ? ' checked' : ''}><i></i>${esc(i18n('Pièces tournées (clic droit ou R pour les tourner)'))}</label>
+                        <label class="ui-toggle"><input type="checkbox" name="model"${s.model !== false ? ' checked' : ''}><i></i>${esc(i18n('Montrer l’image modèle'))}</label>
                     </div>
                 </fieldset>
                 <div data-pz-setup-msg></div>
-                <footer><small>Glisse les pièces à la souris ou au doigt ; elles s’aimantent quand elles sont au bon endroit ou contre leur voisine. Molette ou pincement pour zoomer.</small><button class="button pz-start" type="submit" data-pz-start${full ? ' disabled' : ''}>🧩 Commencer le puzzle</button></footer>
+                <footer><small>${esc(i18n('Glisse les pièces à la souris ou au doigt ; elles s’aimantent quand elles sont au bon endroit ou contre leur voisine. Molette ou pincement pour zoomer.'))}</small><button class="button pz-start" type="submit" data-pz-start${full ? ' disabled' : ''}>${esc(i18n('🧩 Commencer le puzzle'))}</button></footer>
             </form></section>`;
     }
     function imageCardHtml(img) {
-        if (!img) return `<div class="pz-image-empty"><span aria-hidden="true">🖼</span><div><strong>Aucune image choisie</strong><small>Prends une image de ta base, la photo d’une personne, ou glisse une image de l’ordinateur.</small></div></div>`;
+        if (!img) return `<div class="pz-image-empty"><span aria-hidden="true">🖼</span><div><strong>${esc(i18n('Aucune image choisie'))}</strong><small>${esc(i18n('Prends une image de ta base, la photo d’une personne, ou glisse une image de l’ordinateur.'))}</small></div></div>`;
         const big = Math.max(img.w, img.h);
-        return `<div class="pz-image-card"><img src="${esc(img.url)}" alt="" loading="lazy"><div><strong>${esc(img.title || 'Image')}</strong><small>${num(img.w)} × ${num(img.h)} pixels${big < 300 ? ' · petite image : les pièces seront floues' : ''}</small>${img.note ? `<small>${esc(img.note)}</small>` : ''}</div><button type="button" class="icon-button small" data-pz-clear title="Retirer cette image" aria-label="Retirer cette image">×</button></div>`;
+        return `<div class="pz-image-card"><img src="${esc(img.url)}" alt="" loading="lazy"><div><strong>${esc(img.title || i18n('Image'))}</strong><small>${num(img.w)} × ${num(img.h)} ${esc(i18n('pixels'))}${big < 300 ? ` · ${esc(i18n('petite image : les pièces seront floues'))}` : ''}</small>${img.note ? `<small>${esc(img.note)}</small>` : ''}</div><button type="button" class="icon-button small" data-pz-clear title="${esc(i18n('Retirer cette image'))}" aria-label="${esc(i18n('Retirer cette image'))}">×</button></div>`;
     }
     function loadImg(url) {
-        return new Promise((res, rej) => { const im = new Image(); im.decoding = 'async'; im.onload = () => (im.naturalWidth > 0 ? res(im) : rej(new Error('vide'))); im.onerror = () => rej(new Error('L’image n’a pas pu être lue.')); im.src = url; });
+        return new Promise((res, rej) => { const im = new Image(); im.decoding = 'async'; im.onload = () => (im.naturalWidth > 0 ? res(im) : rej(new Error('vide'))); im.onerror = () => rej(new Error(i18n('L’image n’a pas pu être lue.'))); im.src = url; });
     }
     const mediaUrl = f => `media/${encodeURIComponent(f || '')}`;
 
@@ -314,42 +315,42 @@
         const savePrefs = () => store.set(PREFS_KEY, {count: setup.count, shape: setup.shape, rotate: setup.rotate, model: setup.model});
         const showEstimate = () => {
             const img = setup.image, g = gridFor(setup.count, img?.w || 4, img?.h || 3), total = g.cols * g.rows;
-            estimate.innerHTML = `≈ <b>${num(total)} pièces</b> (${g.cols} × ${g.rows})${img ? '' : ' <small>— la grille s’adaptera à la forme de l’image</small>'}`;
+            estimate.innerHTML = `≈ <b>${esc(i18n('{n} pièces', {n: num(total)}))}</b> (${g.cols} × ${g.rows})${img ? '' : ` <small>— ${esc(i18n('la grille s’adaptera à la forme de l’image'))}</small>`}`;
         };
-        const drawImage = () => { q('[data-pz-image]').innerHTML = imageCardHtml(setup.image); form.elements.name.placeholder = setup.image?.title ? `Puzzle « ${setup.image.title} »` : 'Ex : La noce de 1925'; q('[data-pz-clear]')?.addEventListener('click', () => { setup.image = null; drawImage(); showEstimate(); }); };
-        const setImage = async (sel, busyText = 'Lecture de l’image…') => {
+        const drawImage = () => { q('[data-pz-image]').innerHTML = imageCardHtml(setup.image); form.elements.name.placeholder = setup.image?.title ? i18n('Puzzle « {name} »', {name: setup.image.title}) : i18n('Ex : La noce de 1925'); q('[data-pz-clear]')?.addEventListener('click', () => { setup.image = null; drawImage(); showEstimate(); }); };
+        const setImage = async (sel, busyText = i18n('Lecture de l’image…')) => {
             const box = q('[data-pz-image]'); box.innerHTML = UI().spinner ? UI().spinner(busyText) : esc(busyText); smsg.innerHTML = '';
             try {
                 const im = await loadImg(sel.url);
                 setup.image = {...sel, w: im.naturalWidth, h: im.naturalHeight};
                 if (!form.isConnected) return;
                 drawImage(); showEstimate();
-            } catch (e) { if (!form.isConnected) return; drawImage(); smsg.innerHTML = notice('error', `Cette image n’a pas pu être ouverte : ${e.message || e}`); }
+            } catch (e) { if (!form.isConnected) return; drawImage(); smsg.innerHTML = notice('error', i18n('Cette image n’a pas pu être ouverte : {err}', {err: e.message || e})); }
         };
         q('[data-pz-variant]')?.addEventListener('change', e => { if (e.target.value !== 'puzzle') ctx.onVariant?.(e.target.value); });
         q('[name="name"]').addEventListener('input', e => { setup.name = e.target.value; });
         q('[data-pz-media]').addEventListener('click', async () => {
-            const P = PK(); if (!P.openMediaPicker) { toast('La fenêtre des images n’est pas chargée : recharge la page.', 'error'); return; }
-            const m = await P.openMediaPicker({types: ['image'], eyebrow: 'PUZZLE', title: 'L’image du puzzle', intro: 'Choisis une image de ta base, ou importe-la depuis l’ordinateur.', okLabel: 'Prendre cette image', value: setup.image?.mediaId ? [setup.image.mediaId] : []});
+            const P = PK(); if (!P.openMediaPicker) { toast(i18n('La fenêtre des images n’est pas chargée : recharge la page.'), 'error'); return; }
+            const m = await P.openMediaPicker({types: ['image'], eyebrow: i18n('PUZZLE'), title: i18n('L’image du puzzle'), intro: i18n('Choisis une image de ta base, ou importe-la depuis l’ordinateur.'), okLabel: i18n('Prendre cette image'), value: setup.image?.mediaId ? [setup.image.mediaId] : []});
             if (m && m.filename) setImage({key: `m:${m.id}`, url: mediaUrl(m.filename), title: m.title || m.filename, mediaId: Number(m.id)});
         });
         q('[data-pz-person]').addEventListener('click', async () => {
-            const P = PK(); if (!P.openPicker) { toast('Le menu de choix n’est pas chargé : recharge la page.', 'error'); return; }
-            const it = await P.openPicker({kind: 'person', title: 'La photo de quelle personne ?'}); if (!it || !(Number(it.id) > 0)) return;
-            const who = it.title || 'cette personne';
+            const P = PK(); if (!P.openPicker) { toast(i18n('Le menu de choix n’est pas chargé : recharge la page.'), 'error'); return; }
+            const it = await P.openPicker({kind: 'person', title: i18n('La photo de quelle personne ?')}); if (!it || !(Number(it.id) > 0)) return;
+            const who = it.title || i18n('cette personne');
             let mid = 0; try { mid = Number((await APP().api('person', {id: it.id}))?.person?.portrait_media_id) || 0; } catch (_) {}
             let media = null; if (mid && P.loadMedia) { try { [media] = await P.loadMedia([mid]); } catch (_) {} }
             if (media?.filename && media.media_type === 'image') { setImage({key: `m:${media.id}`, url: mediaUrl(media.filename), title: `${who} — ${media.title || 'photo'}`, mediaId: Number(media.id), personId: Number(it.id)}); return; }
-            toast(`${who} n’a pas encore de photo de fiche : choisis une de ses images.`);
-            const m = await P.openMediaPicker?.({types: ['image'], person: {id: it.id, title: who}, eyebrow: 'PUZZLE', title: `Une image de ${who}`, okLabel: 'Prendre cette image'});
+            toast(i18n('{name} n’a pas encore de photo de fiche : choisis une de ses images.', {name: who}));
+            const m = await P.openMediaPicker?.({types: ['image'], person: {id: it.id, title: who}, eyebrow: i18n('PUZZLE'), title: i18n('Une image de {name}', {name: who}), okLabel: i18n('Prendre cette image')});
             if (m && m.filename) setImage({key: `m:${m.id}`, url: mediaUrl(m.filename), title: m.title || who, mediaId: Number(m.id), personId: Number(it.id)});
         });
         // E4 : glisser une image ici (elle entre dans les médias)
         const dropBox = q('[data-pz-drop]');
         const takeFile = async file => {
             if (!file) return;
-            if (!/^image\//.test(file.type || '')) { smsg.innerHTML = notice('error', `« ${file.name || 'Ce fichier'} » n’est pas une image.`); return; }
-            const box = q('[data-pz-image]'); box.innerHTML = UI().spinner ? UI().spinner('L’image entre dans les médias…') : '…';
+            if (!/^image\//.test(file.type || '')) { smsg.innerHTML = notice('error', i18n('« {name} » n’est pas une image.', {name: file.name || i18n('Ce fichier')})); return; }
+            const box = q('[data-pz-image]'); box.innerHTML = UI().spinner ? UI().spinner(i18n('L’image entre dans les médias…')) : '…';
             try {
                 const it = await PK().importMediaFile(file, ['image']);
                 await setImage({key: `m:${it.id}`, url: it.filename ? mediaUrl(it.filename) : it.thumb, title: it.title || file.name, mediaId: Number(it.id)});
@@ -357,19 +358,19 @@
                 // pas de serveur ou envoi refusé : on garde une copie réduite pour ce puzzle seulement
                 try {
                     const url = await shrinkFile(file, 1400);
-                    await setImage({key: `d:${file.name}:${file.size}`, url, title: file.name.replace(/\.[^.]+$/, '') || 'Image', note: 'Pas rangée dans les médias : gardée seulement pour ce puzzle.'});
-                } catch (_) { drawImage(); smsg.innerHTML = notice('error', `Cette image n’a pas pu être ouverte : ${e.message || e}`); }
+                    await setImage({key: `d:${file.name}:${file.size}`, url, title: file.name.replace(/\.[^.]+$/, '') || i18n('Image'), note: i18n('Pas rangée dans les médias : gardée seulement pour ce puzzle.')});
+                } catch (_) { drawImage(); smsg.innerHTML = notice('error', i18n('Cette image n’a pas pu être ouverte : {err}', {err: e.message || e})); }
             }
         };
         if (UI().dropZone) {
-            dropBox.appendChild(UI().dropZone({accept: 'image/*', multiple: false, text: '📁 Glisse une image ici, colle-la (⌘V) ou choisis-la sur l’ordinateur', hint: 'Elle entre dans les médias de l’app et devient le puzzle.', onFiles: files => takeFile(files[0])}));
+            dropBox.appendChild(UI().dropZone({accept: 'image/*', multiple: false, text: i18n('📁 Glisse une image ici, colle-la (⌘V) ou choisis-la sur l’ordinateur'), hint: i18n('Elle entre dans les médias de l’app et devient le puzzle.'), onFiles: files => takeFile(files[0])}));
         }
         q('[data-pz-clear]')?.addEventListener('click', () => { setup.image = null; drawImage(); showEstimate(); });
         // nombre de pièces
         const setCount = (n, fromInput = false) => {
             const raw = Math.round(Number(n)); let msg = '';
-            if (!Number.isFinite(raw) || raw < MIN_PIECES) msg = `Il faut au moins ${MIN_PIECES} pièces : je compte ${MIN_PIECES}.`;
-            else if (raw > MAX_PIECES) msg = `${num(MAX_PIECES)} pièces au plus : je compte ${num(MAX_PIECES)}.`;
+            if (!Number.isFinite(raw) || raw < MIN_PIECES) msg = i18n('Il faut au moins {n} pièces : je compte {n}.', {n: MIN_PIECES});
+            else if (raw > MAX_PIECES) msg = i18n('{n} pièces au plus : je compte {n}.', {n: num(MAX_PIECES)});
             setup.count = clamp(Number.isFinite(raw) ? raw : MIN_PIECES, MIN_PIECES, MAX_PIECES);
             cmsg.innerHTML = msg ? notice('warn', msg) : '';
             if (!fromInput) { const inp = q('[data-pz-custom-n]'); if (inp) inp.value = setup.count; }
@@ -392,10 +393,10 @@
         let starting = false;
         form.addEventListener('submit', async e => {
             e.preventDefault(); if (starting) return;
-            if (gameCount() >= MAX_GAMES) { smsg.innerHTML = notice('warn', `Les ${MAX_GAMES} puzzles en cours sont gardés : supprime-en un pour en commencer un autre.`); return; }
-            if (!setup.image) { smsg.innerHTML = notice('warn', 'Choisis d’abord une image : dans la base, la photo d’une personne, ou glisse-la ici.'); q('[data-pz-media]').focus(); return; }
+            if (gameCount() >= MAX_GAMES) { smsg.innerHTML = notice('warn', i18n('Les {n} puzzles en cours sont gardés : supprime-en un pour en commencer un autre.', {n: MAX_GAMES})); return; }
+            if (!setup.image) { smsg.innerHTML = notice('warn', i18n('Choisis d’abord une image : dans la base, la photo d’une personne, ou glisse-la ici.')); q('[data-pz-media]').focus(); return; }
             if (setup.custom) setCount(inp.value === '' ? MIN_PIECES : inp.value);
-            starting = true; const btn = q('[data-pz-start]'); btn.disabled = true; btn.textContent = 'Découpage…';
+            starting = true; const btn = q('[data-pz-start]'); btn.disabled = true; btn.textContent = i18n('Découpage…');
             setup.name = form.elements.name.value;
             try {
                 const {meta, st} = createGame(setup);
@@ -405,8 +406,8 @@
                 setup = {...setup, image: null, name: ''};
                 ctx.open?.(meta.id);
             } catch (err) {
-                starting = false; btn.disabled = false; btn.textContent = '🧩 Commencer le puzzle';
-                smsg.innerHTML = notice('error', `Le puzzle n’a pas pu commencer : ${err.message || err}`);
+                starting = false; btn.disabled = false; btn.textContent = i18n('🧩 Commencer le puzzle');
+                smsg.innerHTML = notice('error', i18n('Le puzzle n’a pas pu commencer : {err}', {err: err.message || err}));
             }
         });
     }
@@ -414,7 +415,7 @@
         return new Promise((res, rej) => {
             const u = URL.createObjectURL(file), im = new Image();
             im.onload = () => { try { const s = Math.min(1, max / Math.max(im.naturalWidth, im.naturalHeight)), c = document.createElement('canvas'); c.width = Math.max(1, Math.round(im.naturalWidth * s)); c.height = Math.max(1, Math.round(im.naturalHeight * s)); c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); URL.revokeObjectURL(u); res(c.toDataURL('image/jpeg', .85)); } catch (e) { rej(e); } };
-            im.onerror = () => { URL.revokeObjectURL(u); rej(new Error('Ce fichier n’est pas une image lisible.')); };
+            im.onerror = () => { URL.revokeObjectURL(u); rej(new Error(i18n('Ce fichier n’est pas une image lisible.'))); };
             im.src = u;
         });
     }
@@ -430,7 +431,7 @@
         stopRunning();
         const seq = ++renderSeq, f = fresh.get(id); fresh.delete(id);
         if (f) { cur = new Game(ws, f.meta, ctx, false, f.state); return true; }
-        ws.innerHTML = `<section class="goose-page pz-page"><div class="pz-wrap pz-wait" data-pz-wait="${seq}">${UI().spinner ? UI().spinner('Ouverture de la partie…') : 'Ouverture de la partie…'}</div></section>`;
+        ws.innerHTML = `<section class="goose-page pz-page"><div class="pz-wrap pz-wait" data-pz-wait="${seq}">${UI().spinner ? UI().spinner(i18n('Ouverture de la partie…')) : esc(i18n('Ouverture de la partie…'))}</div></section>`;
         const ours = () => seq === renderSeq && ws.isConnected && !!ws.querySelector(`[data-pz-wait="${seq}"]`); // un autre écran a pu prendre la place
         loadGame(id).then(g => {
             if (!ours()) return;
@@ -438,13 +439,13 @@
         }).catch(e => {
             if (!ours()) return;
             if (e.status === 404) { C.games = C.games.filter(g => g.id !== id); C.history = C.history.filter(g => g.id !== id); ctx.newGame?.(); return; }
-            ws.innerHTML = `<section class="goose-page pz-page"><div class="pz-wrap pz-wait">${notice('error', `La partie n’a pas pu être ouverte : ${e.message || e}`)}<button type="button" class="button" data-pz-retry>Réessayer</button></div></section>`;
+            ws.innerHTML = `<section class="goose-page pz-page"><div class="pz-wrap pz-wait">${notice('error', i18n('La partie n’a pas pu être ouverte : {err}', {err: e.message || e}))}<button type="button" class="button" data-pz-retry>${esc(i18n('Réessayer'))}</button></div></section>`;
             ws.querySelector('[data-pz-retry]').addEventListener('click', () => render(ws, id, ctx));
         });
         return true;
     }
 
-    const BAR_BTN = (attr, label, title, extra = '') => `<button type="button" class="pz-btn" ${attr} title="${esc(title)}" aria-label="${esc(title)}"${extra}>${label}</button>`;
+    const BAR_BTN = (attr, label, title, extra = '') => `<button type="button" class="pz-btn" ${attr} title="${esc(i18n(title))}" aria-label="${esc(i18n(title))}"${extra}>${label}</button>`;
 
     class Game {
         constructor(ws, meta, ctx, finished, state = null) {
@@ -458,13 +459,13 @@
         get G() { return this.geo; }
         html() {
             const m = this.meta, total = m.cols * m.rows, rec = C.records[recordKey(m)];
-            this.ws.innerHTML = `<section class="goose-page pz-page pz-play"><header class="goose-head goose-game-head"><div><span class="eyebrow">${this.finished ? 'PUZZLE TERMINÉ' : 'PUZZLE EN COURS'} · ${num(total)} PIÈCES (${esc(m.cols)} × ${esc(m.rows)})</span><h2><input class="pz-name" data-pz-name value="${esc(m.name)}" maxlength="120" aria-label="Nom de la partie" title="Le nom de la partie : clique pour le changer"${this.finished ? ' readonly' : ''}></h2><p>${esc(m.image?.title || '')}${m.shape === 'square' ? ' · carrés simples' : ''}${m.rotate ? ' · pièces tournées' : ''}</p></div>
-                <div class="page-actions">${this.finished ? '<button type="button" class="button small" data-pz-again title="Recommencer ce puzzle avec la même image et le même nombre de pièces">↻ Rejouer</button>' : ''}<button type="button" class="button small secondary" data-pz-new title="Préparer une autre partie">＋ Nouvelle partie</button>${this.finished ? '' : '<button type="button" class="button small secondary" data-pz-delete title="Supprimer ce puzzle (tu pourras annuler)">Supprimer</button>'}</div></header>
+            this.ws.innerHTML = `<section class="goose-page pz-page pz-play"><header class="goose-head goose-game-head"><div><span class="eyebrow">${esc(this.finished ? i18n('PUZZLE TERMINÉ') : i18n('PUZZLE EN COURS'))} · ${esc(i18n('{n} PIÈCES ({c} × {r})', {n: num(total), c: String(m.cols), r: String(m.rows)}))}</span><h2><input class="pz-name" data-pz-name value="${esc(m.name)}" maxlength="120" aria-label="${esc(i18n('Nom de la partie'))}" title="${esc(i18n('Le nom de la partie : clique pour le changer'))}"${this.finished ? ' readonly' : ''}></h2><p>${esc(m.image?.title || '')}${m.shape === 'square' ? ` · ${esc(i18n('carrés simples'))}` : ''}${m.rotate ? ` · ${esc(i18n('pièces tournées'))}` : ''}</p></div>
+                <div class="page-actions">${this.finished ? `<button type="button" class="button small" data-pz-again title="${esc(i18n('Recommencer ce puzzle avec la même image et le même nombre de pièces'))}">↻ ${esc(i18n('Rejouer'))}</button>` : ''}<button type="button" class="button small secondary" data-pz-new title="${esc(i18n('Préparer une autre partie'))}">＋ ${esc(i18n('Nouvelle partie', {ctx: 'jeu'}))}</button>${this.finished ? '' : `<button type="button" class="button small secondary" data-pz-delete title="${esc(i18n('Supprimer ce puzzle (tu pourras annuler)'))}">${esc(i18n('Supprimer'))}</button>`}</div></header>
                 <div class="pz-wrap" data-pz-wrap>
                     <div class="pz-bar">
-                        <div class="pz-clock"><span class="pz-time" data-pz-time aria-label="Temps passé">${fmtTime(this.elapsed)}</span>${this.finished ? '' : BAR_BTN('data-pz-pause', '❚❚', 'Mettre en pause (Espace)', ' data-shortcut="Espace"')}</div>
-                        ${this.finished ? '' : `<div class="pz-savebox"><span class="ui-status pz-status" data-ui-status data-pz-status aria-live="polite"></span><button type="button" class="button small pz-save" data-pz-save title="Enregistrer la partie maintenant (elle s’enregistre aussi toute seule)" data-shortcut="⌘S">💾 Enregistrer</button></div>`}
-                        <div class="pz-progress"><span data-pz-count aria-live="polite"></span><i class="pz-meter"><b data-pz-meter></b></i><small data-pz-record>${rec ? `Ton record : ${fmtTime(rec)}` : ''}</small></div>
+                        <div class="pz-clock"><span class="pz-time" data-pz-time aria-label="${esc(i18n('Temps passé'))}">${fmtTime(this.elapsed)}</span>${this.finished ? '' : BAR_BTN('data-pz-pause', '❚❚', 'Mettre en pause (Espace)', ' data-shortcut="Espace"')}</div>
+                        ${this.finished ? '' : `<div class="pz-savebox"><span class="ui-status pz-status" data-ui-status data-pz-status aria-live="polite"></span><button type="button" class="button small pz-save" data-pz-save title="${esc(i18n('Enregistrer la partie maintenant (elle s’enregistre aussi toute seule)'))}" data-shortcut="⌘S">💾 ${esc(i18n('Enregistrer'))}</button></div>`}
+                        <div class="pz-progress"><span data-pz-count aria-live="polite"></span><i class="pz-meter"><b data-pz-meter></b></i><small data-pz-record>${rec ? esc(i18n('Ton record : {time}', {time: fmtTime(rec)})) : ''}</small></div>
                         <div class="pz-tools">
                             ${BAR_BTN('data-pz-model', '🖼', 'Montrer ou cacher l’image modèle', ` aria-pressed="${m.model !== false}"`)}
                             ${this.finished ? '' : BAR_BTN('data-pz-edges', '▢', 'Ne montrer que les bords', ` aria-pressed="${!!m.edges}"`)}
@@ -475,14 +476,14 @@
                             ${BAR_BTN('data-pz-full', '⛶', 'Plein écran (Échap pour sortir)')}
                         </div>
                     </div>
-                    <div class="pz-stage" data-pz-stage tabindex="0" aria-label="Table du puzzle">
-                        <canvas data-pz-canvas role="img" aria-label="Pièces du puzzle"></canvas>
-                        <figure class="pz-model" data-pz-modelbox${m.model !== false ? '' : ' hidden'}><img alt="Image modèle" data-pz-modelimg><figcaption>Modèle</figcaption></figure>
-                        <div class="pz-loading" data-pz-loading>${UI().spinner ? UI().spinner('Découpage des pièces…') : 'Découpage des pièces…'}</div>
-                        <div class="pz-pause" data-pz-pausebox hidden><div><strong>❚❚ En pause</strong><span data-pz-pausewhy>Le chrono est arrêté.</span><button type="button" class="button" data-pz-resume title="Reprendre (Espace)">▶ Reprendre</button></div></div>
+                    <div class="pz-stage" data-pz-stage tabindex="0" aria-label="${esc(i18n('Table du puzzle'))}">
+                        <canvas data-pz-canvas role="img" aria-label="${esc(i18n('Pièces du puzzle'))}"></canvas>
+                        <figure class="pz-model" data-pz-modelbox${m.model !== false ? '' : ' hidden'}><img alt="${esc(i18n('Image modèle'))}" data-pz-modelimg><figcaption>${esc(i18n('Modèle'))}</figcaption></figure>
+                        <div class="pz-loading" data-pz-loading>${UI().spinner ? UI().spinner(i18n('Découpage des pièces…')) : esc(i18n('Découpage des pièces…'))}</div>
+                        <div class="pz-pause" data-pz-pausebox hidden><div><strong>❚❚ ${esc(i18n('En pause'))}</strong><span data-pz-pausewhy>${esc(i18n('Le chrono est arrêté.'))}</span><button type="button" class="button" data-pz-resume title="${esc(i18n('Reprendre (Espace)'))}">▶ ${esc(i18n('Reprendre'))}</button></div></div>
                         <div class="pz-win" data-pz-win hidden></div>
                     </div>
-                    <p class="pz-hint">${this.finished ? 'Puzzle terminé : « ↻ Rejouer » pour le refaire.' : `Glisse les pièces ; elles s’aimantent au bon endroit et contre leur voisine.${m.rotate ? ' Clic droit ou R : tourner.' : ''} Espace : pause. Glisse le fond pour te déplacer.`}</p>
+                    <p class="pz-hint">${esc(this.finished ? i18n('Puzzle terminé : « ↻ Rejouer » pour le refaire.') : m.rotate ? i18n('Glisse les pièces ; elles s’aimantent au bon endroit et contre leur voisine. Clic droit ou R : tourner. Espace : pause. Glisse le fond pour te déplacer.') : i18n('Glisse les pièces ; elles s’aimantent au bon endroit et contre leur voisine. Espace : pause. Glisse le fond pour te déplacer.'))}</p>
                 </div></section>`;
             const $ = s => this.ws.querySelector(s);
             this.el = {wrap: $('[data-pz-wrap]'), stage: $('[data-pz-stage]'), canvas: $('[data-pz-canvas]'), time: $('[data-pz-time]'), count: $('[data-pz-count]'), meter: $('[data-pz-meter]'), record: $('[data-pz-record]'),
@@ -495,7 +496,7 @@
             const m = this.meta;
             try {
                 const nOk = Number.isInteger(m.cols) && Number.isInteger(m.rows) && m.cols >= 1 && m.rows >= 1 && m.cols * m.rows >= MIN_PIECES && m.cols * m.rows <= MAX_PIECES;
-                if (!nOk || !m.image || typeof m.image.url !== 'string') throw new Error('partie abîmée');
+                if (!nOk || !m.image || typeof m.image.url !== 'string') throw new Error(i18n('partie abîmée'));
                 const im = await loadImg(m.image.url);
                 if (!this.alive()) return;
                 this.img = im; this.el.modelImg.src = m.image.url;
@@ -511,7 +512,7 @@
                 this.tick = setInterval(() => this.onTick(), 250);
             } catch (e) {
                 if (!this.alive()) return;
-                this.el.loading.innerHTML = `<div class="pz-loaderr">${notice('error', `L’image de ce puzzle est introuvable (${e.message || e}). Elle a peut-être été supprimée des médias.`)}</div>`;
+                this.el.loading.innerHTML = `<div class="pz-loaderr">${notice('error', i18n('L’image de ce puzzle est introuvable ({err}). Elle a peut-être été supprimée des médias.', {err: e.message || e}))}</div>`;
             }
         }
         alive() { return !this.dead && this.el.stage.isConnected; }
@@ -739,12 +740,12 @@
             c.addEventListener('pointerup', up, sig); c.addEventListener('pointercancel', up, sig);
             c.addEventListener('contextmenu', e => {
                 e.preventDefault(); if (this.paused || this.finished) return;
-                if (!this.meta.rotate) { toast('Les pièces ne tournent pas dans ce puzzle (option « Pièces tournées » à la préparation).'); return; }
+                if (!this.meta.rotate) { toast(i18n('Les pièces ne tournent pas dans ce puzzle (option « Pièces tournées » à la préparation).')); return; }
                 const pt = pos(e), w = this.toWorld(pt.x, pt.y), p = this.drag ? this.drag.p : this.pick(w.x, w.y);
                 const turn = () => { if (p >= 0 && this.alive() && !this.paused) { this.sel = p; this.rotateGroup(p); if (!this.drag) this.afterMove(this.snap(this.grp[p])); else this.requestDraw(); } };
                 // K14 : le menu de l'app (pendant qu'on tient une pièce, le clic droit la tourne tout de suite, comme avant)
                 if (this.drag || p < 0 || !window.LCNDA_UI?.contextMenu) { turn(); return; }
-                window.LCNDA_UI.contextMenu(e, [{icon: '⟳', label: 'Tourner la pièce', shortcut: 'R', run: turn}]);
+                window.LCNDA_UI.contextMenu(e, [{icon: '⟳', label: i18n('Tourner la pièce'), shortcut: 'R', run: turn}]);
             }, sig);
             c.addEventListener('wheel', e => { e.preventDefault(); if (this.paused) return; const pt = pos(e), k = e.deltaMode === 1 ? 0.05 : 0.0018; this.zoomAt(pt.x, pt.y, Math.exp(-e.deltaY * k)); }, {passive: false, signal: this.ac.signal});
             if ('ResizeObserver' in window) { this.ro = new ResizeObserver(() => { if (this.alive()) this.resize(); }); this.ro.observe(this.el.stage); }
@@ -786,7 +787,7 @@
             q('[data-pz-edges]')?.addEventListener('click', e => { this.meta.edges = !this.meta.edges; e.currentTarget.setAttribute('aria-pressed', String(this.meta.edges)); this.staticLayer = null; this.requestDraw(); this.saveMeta(); }, sig);
             q('[data-pz-shuffle]')?.addEventListener('click', () => this.shuffle(), sig);
             q('[data-pz-sort]')?.addEventListener('click', () => this.arrange(), sig);
-            q('[data-pz-rotate]')?.addEventListener('click', () => { if (this.paused) return; const p = this.sel; if (p < 0 || this.lk[p]) { toast('Touche d’abord une pièce, puis ⟳ pour la tourner.'); return; } this.rotateGroup(p); this.afterMove(this.snap(this.grp[p])); }, sig);
+            q('[data-pz-rotate]')?.addEventListener('click', () => { if (this.paused) return; const p = this.sel; if (p < 0 || this.lk[p]) { toast(i18n('Touche d’abord une pièce, puis ⟳ pour la tourner.')); return; } this.rotateGroup(p); this.afterMove(this.snap(this.grp[p])); }, sig);
             q('[data-pz-zin]')?.addEventListener('click', () => this.zoomAt(this.cw / 2, this.ch / 2, 1.25), sig);
             q('[data-pz-zout]')?.addEventListener('click', () => this.zoomAt(this.cw / 2, this.ch / 2, 0.8), sig);
             q('[data-pz-fit]')?.addEventListener('click', () => this.fit(), sig);
@@ -824,7 +825,7 @@
             }
             const ids = loose.slice(); for (let i = ids.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [ids[i], ids[j]] = [ids[j], ids[i]]; }
             ids.forEach(g => this.toTop(g));
-            this.staticLayer = null; this.fit(); this.afterMove(''); toast('🔀 Pièces mélangées.');
+            this.staticLayer = null; this.fit(); this.afterMove(''); toast(i18n('🔀 Pièces mélangées.'));
         }
         /** Range les pièces seules autour du plateau (les bords d'abord) ; les groupes déjà collés ne bougent pas. */
         arrange() {
@@ -834,7 +835,7 @@
             singles.sort((a, b) => (this.isEdge(b) - this.isEdge(a)) || a - b);
             const {slots} = ringSlots(singles.length, G);
             singles.forEach((p, i) => { this.cx[p] = slots[i][0]; this.cy[p] = slots[i][1]; });
-            this.staticLayer = null; this.fit(); this.afterMove(''); toast(`⇆ ${plural(singles.length, 'pièce rangée', 'pièces rangées')} sur les côtés.`);
+            this.staticLayer = null; this.fit(); this.afterMove(''); toast(i18n('⇆ {what} sur les côtés.', {what: plural(singles.length, 'pièce rangée', 'pièces rangées')}));
         }
 
         // ── chrono ──
@@ -845,11 +846,11 @@
             if (this.drag) this.endDrag();
             this.elapsed = this.now(); this.runStart = 0; this.paused = true; this.pauseReason = reason;
             this.el.stage.classList.add('is-paused'); this.el.pause.hidden = false;
-            this.el.why.textContent = reason === 'hidden' ? 'Le chrono s’est arrêté pendant que tu étais ailleurs.' : 'Le chrono est arrêté et l’image cachée.';
+            this.el.why.textContent = reason === 'hidden' ? i18n('Le chrono s’est arrêté pendant que tu étais ailleurs.') : i18n('Le chrono est arrêté et l’image cachée.');
             this.setPauseBtn(); this.showTime(true); this.saveNow();
         }
         resume() { if (!this.paused) return; this.start(); this.el.stage.focus({preventScroll: true}); }
-        setPauseBtn() { const b = this.ws.querySelector('[data-pz-pause]'); if (b) { b.textContent = this.paused ? '▶' : '❚❚'; b.title = this.paused ? 'Reprendre (Espace)' : 'Mettre en pause (Espace)'; b.setAttribute('aria-label', b.title); b.classList.toggle('is-on', this.paused); } }
+        setPauseBtn() { const b = this.ws.querySelector('[data-pz-pause]'); if (b) { b.textContent = this.paused ? '▶' : '❚❚'; b.title = this.paused ? i18n('Reprendre (Espace)') : i18n('Mettre en pause (Espace)'); b.setAttribute('aria-label', b.title); b.classList.toggle('is-on', this.paused); } }
         showTime(force) { const t = this.now(), s = Math.floor(t / 1000); if (force || s !== this.lastSec) { this.lastSec = s; this.el.time.textContent = fmtTime(t); } }
         onTick() {
             if (!this.alive()) { this.stop(); return; }
@@ -858,7 +859,7 @@
         }
         updateCount() {
             const n = this.geo.n, k = this.placed, pc = Math.floor(k * 100 / n);
-            this.el.count.textContent = `${num(k)} / ${num(n)} pièces posées · ${pc} %`; this.el.meter.style.width = `${pc}%`;
+            this.el.count.textContent = i18n('{a} / {b} pièces posées · {pc} %', {a: num(k), b: num(n), pc: String(pc)}); this.el.meter.style.width = `${pc}%`;
         }
 
         // ── enregistrement (retardé, sans bloquer) ──
@@ -892,10 +893,10 @@
         setStatus(kind, msg = '') {
             this.saveState = kind; const el = this.ws.querySelector('[data-pz-status]'); if (!el) return;
             if (kind === 'offline' || kind === 'kiosk' || kind === 'refused') {
-                const t = kind === 'kiosk' ? '⚠️ Consultation : gardé ici' : kind === 'refused' ? '⚠️ Pas enregistré' : '⚠️ Gardé dans ce navigateur';
+                const t = i18n(kind === 'kiosk' ? '⚠️ Consultation : gardé ici' : kind === 'refused' ? '⚠️ Pas enregistré' : '⚠️ Gardé dans ce navigateur');
                 el.innerHTML = `<span class="ui-status-txt is-error">${esc(t)}</span>`;
-                el.title = kind === 'kiosk' ? 'Mode consultation : la base ne peut pas être modifiée. La partie est gardée dans ce navigateur.' : kind === 'refused' ? msg : 'Le serveur ne répond pas : la partie est gardée dans ce navigateur et partira dans la base dès que possible.';
-            } else { if (UI().savedStatus) UI().savedStatus(el, kind); else el.textContent = kind === 'saved' ? '✓ Enregistré' : kind === 'saving' ? 'Enregistrement…' : '• modifié'; el.title = ''; }
+                el.title = kind === 'kiosk' ? i18n('Mode consultation : la base ne peut pas être modifiée. La partie est gardée dans ce navigateur.') : kind === 'refused' ? msg : i18n('Le serveur ne répond pas : la partie est gardée dans ce navigateur et partira dans la base dès que possible.');
+            } else { if (UI().savedStatus) UI().savedStatus(el, kind); else el.textContent = i18n(kind === 'saved' ? '✓ Enregistré' : kind === 'saving' ? 'Enregistrement…' : '• modifié'); el.title = ''; }
         }
         /** Enregistre tout de suite (bouton 💾, ⌘S, pause, sortie de l'écran ; keepalive au moment de quitter la page). */
         async saveNow({keepalive = false, force = false} = {}) {
@@ -935,28 +936,28 @@
             push(fin).then(res => { // la base a le dernier mot (un record battu sur un autre ordinateur)
                 if (!res.ok || !this.el.record.isConnected) return;
                 const before = Number(res.d.record_before) || 0;
-                if (before && before !== old) { C.records[key] = Math.min(before, time); this.el.record.textContent = time < before ? '🏆 Nouveau record !' : `Ton record : ${fmtTime(before)}`; }
+                if (before && before !== old) { C.records[key] = Math.min(before, time); this.el.record.textContent = time < before ? i18n('🏆 Nouveau record !') : i18n('Ton record : {time}', {time: fmtTime(before)}); }
             });
             this.ws.querySelector('.pz-savebox')?.remove(); this.ws.querySelector('[data-pz-name]')?.setAttribute('readonly', '');
-            this.el.record.textContent = best ? '🏆 Nouveau record !' : `Ton record : ${fmtTime(old)}`;
+            this.el.record.textContent = best ? i18n('🏆 Nouveau record !') : i18n('Ton record : {time}', {time: fmtTime(old)});
             this.ws.querySelector('[data-pz-pause]')?.remove();
             ['[data-pz-edges]', '[data-pz-shuffle]', '[data-pz-sort]', '[data-pz-rotate]'].forEach(s => this.ws.querySelector(s)?.remove());
-            const del = this.ws.querySelector('[data-pz-delete]'); if (del) { del.outerHTML = '<button type="button" class="button small" data-pz-again title="Recommencer ce puzzle avec la même image et le même nombre de pièces">↻ Rejouer</button>'; this.ws.querySelector('[data-pz-again]').addEventListener('click', () => this.again(), {signal: this.ac.signal}); }
-            const eb = this.ws.querySelector('.goose-head .eyebrow'); if (eb) eb.textContent = eb.textContent.replace('PUZZLE EN COURS', 'PUZZLE TERMINÉ');
-            this.el.win.innerHTML = `<div class="pz-win-card" role="status"><span class="pz-win-ico" aria-hidden="true">🧩</span><strong>Bravo, c’est fini !</strong><p>${plural(this.geo.n, 'pièce')} en <b>${fmtTime(time)}</b></p><p class="pz-win-rec">${best ? (old ? `🏆 Nouveau record ! (avant : ${fmtTime(old)})` : '🏆 C’est ton premier record pour cette image.') : `Ton record : ${fmtTime(old)}`}</p><div class="pz-win-acts"><button type="button" class="button secondary" data-pz-winclose title="Fermer ce message pour admirer l’image (Échap)">Admirer l’image</button><button type="button" class="button" data-pz-winagain>↻ Rejouer</button></div></div>`;
+            const del = this.ws.querySelector('[data-pz-delete]'); if (del) { del.outerHTML = `<button type="button" class="button small" data-pz-again title="${esc(i18n('Recommencer ce puzzle avec la même image et le même nombre de pièces'))}">↻ ${esc(i18n('Rejouer'))}</button>`; this.ws.querySelector('[data-pz-again]').addEventListener('click', () => this.again(), {signal: this.ac.signal}); }
+            const eb = this.ws.querySelector('.goose-head .eyebrow'); if (eb) eb.textContent = eb.textContent.replace(i18n('PUZZLE EN COURS'), i18n('PUZZLE TERMINÉ'));
+            this.el.win.innerHTML = `<div class="pz-win-card" role="status"><span class="pz-win-ico" aria-hidden="true">🧩</span><strong>${esc(i18n('Bravo, c’est fini !'))}</strong><p>${i18n('{what} en <b>{time}</b>', {what: esc(plural(this.geo.n, 'pièce')), time: fmtTime(time)})}</p><p class="pz-win-rec">${esc(best ? (old ? i18n('🏆 Nouveau record ! (avant : {time})', {time: fmtTime(old)}) : i18n('🏆 C’est ton premier record pour cette image.')) : i18n('Ton record : {time}', {time: fmtTime(old)}))}</p><div class="pz-win-acts"><button type="button" class="button secondary" data-pz-winclose title="${esc(i18n('Fermer ce message pour admirer l’image (Échap)'))}">${esc(i18n('Admirer l’image'))}</button><button type="button" class="button" data-pz-winagain>↻ ${esc(i18n('Rejouer'))}</button></div></div>`;
             this.el.win.hidden = false; this.winShown = true;
             this.el.win.querySelector('[data-pz-winclose]').addEventListener('click', () => { this.el.win.hidden = true; this.winShown = false; });
             this.el.win.querySelector('[data-pz-winagain]').addEventListener('click', () => this.again());
             this.fit(true);
-            toast(`🧩 Puzzle terminé en ${fmtTime(time)}${best ? ' — nouveau record !' : ''}`, 'success');
+            toast(best ? i18n('🧩 Puzzle terminé en {time} — nouveau record !', {time: fmtTime(time)}) : i18n('🧩 Puzzle terminé en {time}', {time: fmtTime(time)}), 'success');
             this.ctx.renderSidebar?.();
         }
         again() {
             const m = this.meta;
-            if (gameCount() >= MAX_GAMES) { toast(`Les ${MAX_GAMES} puzzles en cours sont gardés : supprime-en un pour en recommencer un.`, 'error'); return; }
+            if (gameCount() >= MAX_GAMES) { toast(i18n('Les {n} puzzles en cours sont gardés : supprime-en un pour en recommencer un.', {n: MAX_GAMES}), 'error'); return; }
             const {meta, st} = createGame({image: m.image, count: m.cols * m.rows, shape: m.shape, rotate: m.rotate, model: m.model, name: m.name});
             push({op: 'save', uid: meta.id, meta, state: st, saved_at: Date.now()}).then(res => {
-                if (res.refused) { toast(`Le puzzle n’a pas pu recommencer : ${res.error?.message || ''}`, 'error'); return; }
+                if (res.refused) { toast(i18n('Le puzzle n’a pas pu recommencer : {err}', {err: res.error?.message || ''}), 'error'); return; }
                 fresh.set(meta.id, {meta, state: st}); cachePut(meta); this.ctx.open?.(meta.id);
             });
         }
@@ -967,8 +968,8 @@
             this.removed = true; clearTimeout(this.saveT);
             cachePut(m, 'gone'); push({op: 'delete', uid: m.id, saved_at: Date.now()});
             this.ctx.newGame?.();
-            toast(`Puzzle « ${m.name} » supprimé.`, '', {action: {label: '↶ Annuler', run: async () => {
-                const res = await push({...snap, saved_at: Date.now()}); if (res.refused) { toast(res.error?.message || 'Impossible de remettre ce puzzle.', 'error'); return; }
+            toast(i18n('Puzzle « {name} » supprimé.', {name: m.name}), '', {action: {label: `↶ ${i18n('Annuler')}`, run: async () => {
+                const res = await push({...snap, saved_at: Date.now()}); if (res.refused) { toast(res.error?.message || i18n('Impossible de remettre ce puzzle.'), 'error'); return; }
                 fresh.set(m.id, {meta: m, state: snap.state}); cachePut(m); this.ctx.open?.(m.id);
             }}});
         }
@@ -984,8 +985,8 @@
     function sidebarHtml(active) {
         if (!C.loaded && !C.loading) loadAll(); // la liste vient de la base : la colonne se redessine quand elle arrive
         const list = C.games, hist = C.history, rec = C.records;
-        const inProgress = list.map(g => `<button class="side-button pz-side ${g.id === active ? 'is-active' : ''}" type="button" data-pz-open="${esc(g.id)}" title="Reprendre ce puzzle"><strong>🧩 ${esc(g.name)}</strong><small>Puzzle · ${num(g.cols * g.rows)} pièces</small><small>⏱ ${fmtTime(g.elapsed)} · ${Math.floor((g.placed || 0) * 100 / Math.max(1, g.cols * g.rows))} %</small></button>`).join('');
-        const done = hist.length ? `<div class="pz-side-title">🏆 Puzzles terminés</div>${hist.map(h => { const best = Number(rec[recordKey(h)]) || 0; return `<button class="side-button pz-side pz-side-done ${h.id === active ? 'is-active' : ''}" type="button" data-pz-open="${esc(h.id)}" title="Revoir ce puzzle terminé"><strong>${esc(h.name)}</strong><small>${num(h.cols * h.rows)} pièces · ⏱ ${fmtTime(h.time)}${best && best === Number(h.time) ? ' · 🏆' : ''}</small><small>${window.LCNDA_UI?.when?.(new Date(h.finishedAt || Date.now()).toISOString()) || new Date(h.finishedAt || Date.now()).toLocaleDateString('fr-FR')}${best ? ` · record ${fmtTime(best)}` : ''}</small></button>`; }).join('')}` : '';
+        const inProgress = list.map(g => `<button class="side-button pz-side ${g.id === active ? 'is-active' : ''}" type="button" data-pz-open="${esc(g.id)}" title="${esc(i18n('Reprendre ce puzzle'))}"><strong>🧩 ${esc(g.name)}</strong><small>${esc(i18n('Puzzle'))} · ${esc(i18n('{n} pièces', {n: num(g.cols * g.rows)}))}</small><small>⏱ ${fmtTime(g.elapsed)} · ${Math.floor((g.placed || 0) * 100 / Math.max(1, g.cols * g.rows))} %</small></button>`).join('');
+        const done = hist.length ? `<div class="pz-side-title">🏆 ${esc(i18n('Puzzles terminés'))}</div>${hist.map(h => { const best = Number(rec[recordKey(h)]) || 0; return `<button class="side-button pz-side pz-side-done ${h.id === active ? 'is-active' : ''}" type="button" data-pz-open="${esc(h.id)}" title="${esc(i18n('Revoir ce puzzle terminé'))}"><strong>${esc(h.name)}</strong><small>${esc(i18n('{n} pièces', {n: num(h.cols * h.rows)}))} · ⏱ ${fmtTime(h.time)}${best && best === Number(h.time) ? ' · 🏆' : ''}</small><small>${window.LCNDA_UI?.when?.(new Date(h.finishedAt || Date.now()).toISOString()) || new Date(h.finishedAt || Date.now()).toLocaleDateString(window.LCNDA_I18N?.locale?.() || 'fr-FR')}${best ? ` · ${esc(i18n('record {time}', {time: fmtTime(best)}))}` : ''}</small></button>`; }).join('')}` : '';
         return inProgress + done;
     }
     function bindSidebar(content, ctx, signal) {

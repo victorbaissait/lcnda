@@ -7,6 +7,8 @@
  */
 (() => {
     'use strict';
+    const i18n = (text, vars) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(text, vars) : String(text ?? '')); // 🌐 app-i18n.js
+    const i18nFr = () => !window.LCNDA_I18N || window.LCNDA_I18N.lang === 'fr';
     const A = () => window.LCNDA_APP || {};
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const fold = s => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
@@ -40,14 +42,21 @@
         workbook: {sym: '🧾', add: '＋ Ajouter un classeur…', one: 'classeur', none: 'Aucun classeur', label: '🧾 Classeurs'}, // lib/textdocs.php
         textdoc: {sym: '📝', add: '＋ Ajouter un document…', one: 'document', none: 'Aucun document', label: '📝 Documents'}, // 📝 Traitement de texte
         parcel: {sym: '▦', add: '＋ Ajouter une parcelle…', one: 'parcelle', fem: true, none: 'Aucune parcelle', label: '▦ Parcelles'}, // 🗺 Cadastre (heritage-cadastre.js)
+        fobject: {sym: '🏺', ph: 'Nom de l’objet, sorte… (2 lettres suffisent)', add: '＋ Ajouter un objet…', one: 'objet', none: 'Aucun objet de famille', label: '🏺 Objets de famille'}, // 🏠 Héritages et successions (heritage-successions.js)
+        probate: {sym: '⚖️', ph: 'Nom du défunt, notaire, année… (2 lettres suffisent)', add: '＋ Ajouter un inventaire…', one: 'inventaire', none: 'Aucun inventaire après décès', label: '⚖️ Inventaires après décès'},
         pet: {sym: '🐾', ph: 'Nom, espèce, code de bague, puce… (2 lettres suffisent)', add: '＋ Ajouter un animal…', one: 'animal', many: 'animaux', none: 'Aucun animal', label: '🐾 Animaux'}, // 🐾 Suivi des animaux (lib/suivi.php)
         tsite: {sym: '🏞', ph: 'Nom du site… (2 lettres suffisent)', add: '＋ Ajouter un site…', one: 'site', none: 'Aucun site', label: '🏞 Sites de suivi'},
         agroup: {sym: '👥', ph: 'Nom du groupe, de la meute… (2 lettres suffisent)', add: '＋ Ajouter un groupe…', one: 'groupe', none: 'Aucun groupe', label: '👥 Groupes d’animaux'},
+        health: {sym: '🩺', ph: 'Maladie, cause de décès… (2 lettres suffisent)', add: '＋ Choisir une maladie…', one: 'maladie', fem: true, none: 'Aucune maladie notée', label: '🩺 Santé'}, // 🩺 Santé de la famille (lib/sante.php) : rien tant qu'elle est cachée
+        custommap: {sym: '🗺', ph: 'Chercher une de mes cartes…', add: '＋ Choisir une carte…', one: 'carte', fem: true, none: 'Aucune carte', label: '🗺 Mes cartes'}, // 🗺 Mes cartes (lib/cartes_perso.php)
+        branch: {sym: '🌿', ph: 'Nom de la branche…', add: '＋ Choisir une branche…', one: 'branche', fem: true, none: 'Aucune branche', label: '🌿 Branches'},
+        maplayer: {sym: '✏️', ph: 'Nom d’une de mes couches…', add: '＋ Choisir une couche…', one: 'couche', fem: true, none: 'Aucune couche dessinée', label: '✏️ Mes couches'},
         digest: {sym: '📜', ph: 'Commune, cote, année… (2 lettres suffisent)', add: '🔗 Relier un dépouillement…', one: 'dépouillement', none: 'Aucun dépouillement', label: '📜 Dépouillements'}, // journal des recherches (lib/picker.php)
         contact: {sym: '📇', ph: 'Nom, prénom d’un contact… (2 lettres suffisent)', add: '＋ Ajouter un contact…', one: 'contact', none: 'Aucun contact', label: '📇 Contacts'}, // Répertoire des vivants (Questions aux proches)
         mylist: {sym: '📋', ph: 'Chercher une de mes listes…', add: '＋ Ajouter une liste…', one: 'liste', fem: true, none: 'Aucune liste', label: '📋 Mes listes'}, // Mes listes (lib/picker.php) : le groupe de personnes d'un diagramme
         event: {sym: '📅', ph: 'Événement, personne, année… (2 lettres suffisent)', add: '＋ Ajouter un événement…', one: 'événement', none: 'Aucun événement', label: '📅 Événements'}, // 📅 événements (Studio son : un passage relié)
         archive_service: {sym: '🏛', ph: 'Nom, sigle, ville… (ex. AD 19, Tulle)', add: '＋ Ajouter un service d’archives…', one: 'service d’archives', many: 'services d’archives', none: 'Aucun service d’archives', create: 'Créer le service', label: '🏛 Services d’archives'}, // lib/archive_services.php (heritage-archive-services.js)
+        citation: {sym: '🔖', ph: 'Source, page, nom de la personne citée…', add: '＋ Choisir une citation…', one: 'citation', fem: true, none: 'Aucune citation', label: '🔖 Citations'}, // ⚖️ dossiers de preuve (lib/preuve.php : source_links)
     };
     const kindOf = k => K[k] ? k : 'person';
     const isPerson = it => it && (it.kind === 'person' || it.kind === 'animal');
@@ -278,7 +287,7 @@
     // ── la recherche dans une case ──
     const SS = new WeakMap();
     const S = s => { if (!SS.has(s)) SS.set(s, {seq: 0, q: '', groups: [], flat: [], more: false, next: 0, active: 0, filter: 'all', counts: null, loading: false, timer: 0, kind: ''}); return SS.get(s); };
-    const EMPTY_OK = ['label', 'house', 'periodical', 'investigation', 'battue', 'source', 'employer', 'census', 'media', 'graph', 'sheet', 'atelier', 'board', 'layout', 'diagram', 'oldmap', 'act', 'photomap', 'digest'];
+    const EMPTY_OK = ['custommap', 'branch', 'maplayer', 'label', 'house', 'periodical', 'investigation', 'battue', 'source', 'employer', 'census', 'media', 'graph', 'sheet', 'atelier', 'board', 'layout', 'diagram', 'oldmap', 'act', 'photomap', 'digest'];
     function minLen(c) { const kinds = c.opts.kind.split(','); return kinds.length > 1 ? 2 : (K[kinds[0]]?.min ?? 1); }
     function onFocus(c, s) { const inp = s.querySelector('.pk-input'); if (inp.value.trim().length >= minLen(c) || (!inp.value.trim() && !c.opts.kind.includes(',') && EMPTY_OK.includes(c.kind))) { if (s.querySelector('.pk-list').hidden) run(c, s); } }
     function schedule(c, s) {
@@ -339,22 +348,23 @@
         if (!q) { if (canCreate && !mixed && K[kind]?.createEmpty) out.push({act: 'create', kind, text: '', html: `＋ ${esc(K[kind].createEmpty)}`}); return out; }
         if (canCreate && !mixed) {
             const text = kind === 'person' ? q.charAt(0).toUpperCase() + q.slice(1) : q;
-            out.push({act: 'create', kind, text, html: `＋ ${esc(K[kind]?.create || 'Créer')} « ${esc(text)} »`});
+            out.push({act: 'create', kind, text, html: `＋ ${esc(i18n(K[kind]?.create || 'Créer'))} « ${esc(text)} »`});
         }
-        if (c.opts.allowFree) out.push({act: 'free', kind, text: q, muted: true, html: `✎ Garder le texte « ${esc(q)} » sans fiche`});
-        if (kind === 'place' && !mixed) out.push({act: 'map', kind, text: q, muted: true, html: '🗺 Choisir sur la carte'});
+        if (c.opts.allowFree) out.push({act: 'free', kind, text: q, muted: true, html: i18n('✎ Garder le texte « {q} » sans fiche', {q: esc(q)})});
+        if (kind === 'place' && !mixed) out.push({act: 'map', kind, text: q, muted: true, html: i18n('🗺 Choisir sur la carte')});
         return out;
     }
     function headText(c, s) {
         const st = S(s), kind = st.kind.includes(',') ? '' : st.kind;
         if (kind === 'place') {
             const g = Object.fromEntries(st.groups.map(x => [x.key, x])), parts = [];
-            if (g.base?.total) parts.push(`${plural(g.base.total, 'lieu', 'lieux')} de ta base`);
-            if (g.fr?.total) parts.push(plural(g.fr.total, 'commune') + ' de France');
-            if (g.world?.total) parts.push(g.world.total >= 300 ? '300 villes du monde et plus' : plural(g.world.total, 'ville') + ' du monde');
+            if (g.base?.total) parts.push(i18n('{what} de ta base', {what: plural(g.base.total, 'lieu', 'lieux')}));
+            if (g.fr?.total) parts.push(i18n('{what} de France', {what: plural(g.fr.total, 'commune')}));
+            if (g.world?.total) parts.push(g.world.total >= 300 ? i18n('300 villes du monde et plus') : i18n('{what} du monde', {what: plural(g.world.total, 'ville')}));
             return parts.join(' · ');
         }
         const k = K[kind] || K.person, n = st.groups.reduce((a, g) => a + (g.total || 0), 0);
+        if (!i18nFr()) return i18n('{what} trouvés', {what: plural(n, k.one, k.many), n}); // 🌐 « 3 records found »
         return `${plural(n, k.one, k.many)} ${k.fem ? (n > 1 ? 'trouvées' : 'trouvée') : (n > 1 ? 'trouvés' : 'trouvé')}`;
     }
     function renderList(c, s, keepScroll) {
@@ -385,7 +395,8 @@
             head = `<div class="pk-head"><span>${esc(headText(c, s))}</span><span>↑ ↓ Entrée</span></div>`;
         }
         const kindNow = st.kind.includes(',') ? '' : st.kind;
-        const empty = !flat.length ? (q ? `<div class="pk-empty">${esc(kindNow ? K[kindNow]?.none || 'Rien' : 'Rien')} pour « ${esc(q)} ». Vérifie l’orthographe${acts.length ? ', ou :' : '.'}</div>` : `<div class="pk-empty">${esc(kindNow ? K[kindNow]?.none || 'Rien' : 'Rien')} pour l’instant${acts.length ? ' :' : '.'}</div>`) : '';
+        const noneW = esc(i18n(kindNow ? K[kindNow]?.none || 'Rien' : 'Rien'));
+        const empty = !flat.length ? (q ? `<div class="pk-empty">${i18n('{none} pour « {q} ». Vérifie l’orthographe', {none: noneW, q: esc(q)})}${acts.length ? i18n(', ou :') : '.'}</div>` : `<div class="pk-empty">${i18n('{none} pour l’instant', {none: noneW})}${acts.length ? ' :' : '.'}</div>`) : '';
         let ai = flat.length;
         const foot = acts.length ? `<div class="pk-foot">${acts.map(a => { const h = `<div class="pk-act pk-row${a.muted ? ' muted' : ''}${ai === st.active ? ' on' : ''}" role="option" data-row="${ai}">${a.html}</div>`; ai++; return h; }).join('')}</div>` : '';
         list.innerHTML = head + (flat.length ? `<div class="pk-scroll">${body}</div>` : empty) + foot;
@@ -622,6 +633,7 @@
         if (it.kind === 'parcel' && window.LCNDA_EXT?.cadastre?.open) { window.LCNDA_EXT.cadastre.open(it.id, {dialog: true}); return; } // 🗺 la fiche de la parcelle, par-dessus
         if (it.kind === 'artwork' && window.LCNDA_EXT?.artistCatalog?.openItem) { window.LCNDA_EXT.artistCatalog.openItem(it.id); return; }
         if (it.kind === 'graph' && window.LCNDA_EXT?.openMyGraph) { close(); window.LCNDA_EXT.openMyGraph(it.uid); return; }
+        if (it.kind === 'custommap' && app.state && app.setModule && window.LCNDA_EXT?.mesCartes) { close(); window.LCNDA_EXT.mesCartes.open(it.id); return; } // 🗺 heritage-cartes-perso.js
         if (it.kind === 'photomap' && app.state && app.setModule) { close(); app.state.mapMode = 'photos'; window.LCNDA_PHOTOMAPS?.setCurrent?.(it.id); app.setModule('carte'); return; } // 📸 heritage-photomaps.js
         // fiches, Atelier, tableaux, mises en page, diagrammes, cartes, transcriptions : comme une tuile du widget « Raccourcis »
         if (window.LCNDA_EXT?.shortcuts?.openTarget && window.LCNDA_EXT.shortcuts.canOpen?.(it.kind)) { close(); window.LCNDA_EXT.shortcuts.openTarget(`${it.kind}:${it.id}`, {title: it.title}); return; }

@@ -1,0 +1,429 @@
+fr ¦ ru ¦ uk
+=invité ¦ гость|гостя|гостей ¦ гість|гості|гостей
+=descendant vivant ¦ живой потомок|живых потомка|живых потомков ¦ живий нащадок|живі нащадки|живих нащадків
+=conjoint ¦ супруг|супруга|супругов ¦ член подружжя|члени подружжя|членів подружжя
+=fiche confidentielle ¦ конфиденциальная карточка|конфиденциальные карточки|конфиденциальных карточек ¦ конфіденційна картка|конфіденційні картки|конфіденційних карток
+=invité trouvé ¦ найденный гость|найденных гостя|найденных гостей ¦ знайдений гість|знайдені гості|знайдених гостей
+=nouvel invité ¦ новый гость|новых гостя|новых гостей ¦ новий гість|нові гості|нових гостей
+=invitée ¦ приглашённый|приглашённых|приглашённых ¦ запрошений|запрошені|запрошених
+=invité déjà là ¦ гость уже в списке|гостя уже в списке|гостей уже в списке ¦ гість уже в списку|гості вже в списку|гостей уже в списку
+=colonne ¦ столбец|столбца|столбцов ¦ стовпець|стовпці|стовпців
+=invité ajouté ¦ гость добавлен|гостя добавлено|гостей добавлено ¦ гість доданий|гості додані|гостей додано
+=invité complété ¦ гость дополнен|гостя дополнено|гостей дополнено ¦ гість доповнений|гості доповнені|гостей доповнено
+=foyer ¦ семья|семьи|семей ¦ родина|родини|родин
+=avec adresse ¦ с адресом|с адресом|с адресом ¦ з адресою|з адресою|з адресою
+=avec courriel ¦ с эл. почтой|с эл. почтой|с эл. почтой ¦ з ел. поштою|з ел. поштою|з ел. поштою
+=badge ¦ бейдж|бейджа|бейджей ¦ бейдж|бейджі|бейджів
+=présent ¦ присутствует|присутствуют|присутствуют ¦ присутній|присутні|присутніх
+=personne attendue ¦ ожидаемый человек|ожидаемых человека|ожидаемых человек ¦ очікувана людина|очікувані людини|очікуваних людей
+=table ¦ стол|стола|столов ¦ стіл|столи|столів
+=personne placée ¦ рассаженный человек|рассаженных человека|рассаженных человек ¦ посаджена людина|посаджені людини|посаджених людей
+=photo ajoutée ¦ фото добавлено|фото добавлено|фото добавлено ¦ фото додано|фото додано|фото додано
+=personne présente ¦ присутствующий человек|присутствующих человека|присутствующих человек ¦ присутня людина|присутні людини|присутніх людей
+Sans réponse ¦ Без ответа ¦ Без відповіді
+👥 Invités ¦ 👥 Гости ¦ 👥 Гості
+✉️ Invitations ¦ ✉️ Приглашения ¦ ✉️ Запрошення
+🏷 Badges ¦ 🏷 Бейджи ¦ 🏷 Бейджі
+🌳 Grand arbre ¦ 🌳 Большое древо ¦ 🌳 Велике дерево
+📅 Jour J ¦ 📅 День встречи ¦ 📅 День зустрічі
+Réunir les descendants d’un ancêtre : invités, invitations, badges, grand arbre, jour J. ¦ Собрать потомков предка: гости, приглашения, бейджи, большое древо, день встречи. ¦ Зібрати нащадків предка: гості, запрошення, бейджі, велике дерево, день зустрічі.
+＋ Nouvelle cousinade ¦ ＋ Новая встреча родни ¦ ＋ Нова зустріч родини
+Nouvelle cousinade ¦ Новая встреча родни ¦ Нова зустріч родини
+Lecture des cousinades… ¦ Загрузка встреч родни… ¦ Завантаження зустрічей родини…
+Aucune cousinade pour l’instant ¦ Пока нет встреч родни ¦ Поки немає зустрічей родини
+Choisis un ancêtre (ou un couple) : l’app trouve ses descendants vivants, branche par branche, et prépare la liste des invités. ¦ Выбери предка (или пару): приложение найдёт его живых потомков, ветвь за ветвью, и подготовит список гостей. ¦ Вибери предка (або пару): застосунок знайде його живих нащадків, гілку за гілкою, і підготує список гостей.
+Chercher… (ex. Martin, 2026, Tulle) ¦ Искать… (напр. Martin, 2026, Tulle) ¦ Шукати… (напр. Martin, 2026, Tulle)
+{n} oui ¦ Да: {n} ¦ Так: {n}
+{n} sans réponse ¦ Без ответа: {n} ¦ Без відповіді: {n}
+Aucune cousinade ne correspond. ¦ Ни одна встреча родни не подходит. ¦ Жодна зустріч родини не підходить.
+Renommer la cousinade ¦ Переименовать встречу родни ¦ Перейменувати зустріч родини
+Cousinade renommée. ¦ Встреча родни переименована. ¦ Зустріч родини перейменовано.
+Cousinade supprimée : « {name} » ¦ Встреча родни удалена: «{name}» ¦ Зустріч родини видалено: «{name}»
+Modifier la cousinade ¦ Изменить встречу родни ¦ Змінити зустріч родини
+L’ancêtre dont on réunit les descendants ¦ Предок, чьих потомков собирают ¦ Предок, чиїх нащадків збирають
+Avec son conjoint (le couple) — facultatif ¦ С его супругом (пара) — необязательно ¦ З його подружжям (пара) — необов’язково
+Seulement les enfants du couple. Vide : tous les enfants de l’ancêtre. ¦ Только дети этой пары. Пусто: все дети предка. ¦ Лише діти цієї пари. Порожньо: усі діти предка.
+Nom de la cousinade ¦ Название встречи родни ¦ Назва зустрічі родини
+Personne de référence pour les liens de parenté ¦ Опорный человек для степеней родства ¦ Опорна людина для ступенів спорідненості
+Chaque invité aura son lien avec elle (« cousin issu de germains de … »). Toi, le plus souvent. ¦ У каждого гостя будет указано родство с ним («троюродный брат …»). Чаще всего это ты. ¦ У кожного гостя буде вказано спорідненість із нею («троюрідний брат …»). Найчастіше це ти.
+Inviter aussi les conjoints des descendants ¦ Приглашать также супругов потомков ¦ Запрошувати також подружжя нащадків
+🔒 Les fiches confidentielles ne sont jamais montrées. Les adresses des vivants restent dans ce projet. ¦ 🔒 Конфиденциальные карточки никогда не показываются. Адреса живых остаются в этом проекте. ¦ 🔒 Конфіденційні картки ніколи не показуються. Адреси живих залишаються в цьому проєкті.
+Choisis l’ancêtre : l’app cherche ses descendants vivants. ¦ Выбери предка: приложение ищет его живых потомков. ¦ Вибери предка: застосунок шукає його живих нащадків.
+Recherche des descendants vivants… ¦ Поиск живых потомков… ¦ Пошук живих нащадків…
+{who} dans {branches}, et {spouses}. ¦ {who} в {branches}, и {spouses}. ¦ {who} у {branches}, і {spouses}.
+{who} dans {branches}. ¦ {who} в {branches}. ¦ {who} у {branches}.
+{n} sans décès noté, née il y a moins de 100 ans : marquée « vivant ? ». ¦ {n}: смерть не отмечена, рождение менее 100 лет назад — отмечено «жив?». ¦ {n}: смерть не зазначено, народження менш ніж 100 років тому — позначено «живий?».
+{n} laissées de côté. ¦ Пропущено: {n}. ¦ Пропущено: {n}.
+{n} laissée de côté. ¦ Пропущено: {n}. ¦ Пропущено: {n}.
+Choisis l’ancêtre dont on réunit les descendants. ¦ Выбери предка, чьих потомков собирают. ¦ Вибери предка, чиїх нащадків збирають.
+Cousinade créée : {n}. ¦ Встреча родни создана: {n}. ¦ Зустріч родини створено: {n}.
+Cousinade enregistrée : {n}. ¦ Встреча родни сохранена: {n}. ¦ Зустріч родини збережено: {n}.
+Cousinade enregistrée. ¦ Встреча родни сохранена. ¦ Зустріч родини збережено.
+Lecture de la cousinade… ¦ Загрузка встречи родни… ¦ Завантаження зустрічі родини…
+← Toutes les cousinades ¦ ← Все встречи родни ¦ ← Усі зустрічі родини
+↻ Chercher les nouveaux descendants ¦ ↻ Искать новых потомков ¦ ↻ Шукати нових нащадків
+Chercher les nouveaux descendants ¦ Искать новых потомков ¦ Шукати нових нащадків
+↗ Fiche de l’ancêtre ¦ ↗ Карточка предка ¦ ↗ Картка предка
+{n} n’apparaissent plus : sa fiche est devenue confidentielle (ou a été supprimée). ¦ Больше не показываются: {n}. Их карточки стали конфиденциальными (или были удалены). ¦ Більше не показуються: {n}. Їхні картки стали конфіденційними (або їх видалено).
+{n} n’apparaît plus : sa fiche est devenue confidentielle (ou a été supprimée). ¦ Больше не показывается: {n}. Карточка стала конфиденциальной (или была удалена). ¦ Більше не показується: {n}. Картка стала конфіденційною (або її видалено).
+la personne de référence ¦ опорный человек ¦ опорна людина
+Liens de parenté avec ¦ Степени родства с ¦ Ступені спорідненості з
+＋ Ajouter un invité ¦ ＋ Добавить гостя ¦ ＋ Додати гостя
+⤒ Importer une liste… ¦ ⤒ Импорт списка… ¦ ⤒ Імпорт списку…
+Aucun invité pour l’instant ¦ Пока нет гостей ¦ Поки немає гостей
+Aucun descendant vivant trouvé. Ajoute les invités à la main, importe une liste, ou complète l’arbre puis « ↻ Chercher les nouveaux descendants ». ¦ Живых потомков не найдено. Добавь гостей вручную, импортируй список или дополни древо, а потом «↻ Искать новых потомков». ¦ Живих нащадків не знайдено. Додай гостей вручну, імпортуй список або доповни дерево, а потім «↻ Шукати нових нащадків».
+Chercher… (ex. Martin, Brive, végétarien) ¦ Искать… (напр. Martin, Brive, вегетарианец) ¦ Шукати… (напр. Martin, Brive, вегетаріанець)
+Invités (cochés) ¦ Приглашённые (отмечены) ¦ Запрошені (позначені)
+Pas invités ¦ Не приглашены ¦ Не запрошені
+Seulement « vivant ? » ¦ Только «жив?» ¦ Лише «живий?»
+Par branche et par foyer ¦ По ветвям и семьям ¦ За гілками й родинами
+Par génération ¦ По поколениям ¦ За поколіннями
+Par réponse ¦ По ответам ¦ За відповідями
+{n} · {inv} en tout ¦ {n} · всего {inv} ¦ {n} · усього {inv}
+Aucun invité ne correspond. ¦ Ни один гость не подходит. ¦ Жоден гість не підходить.
+Pas invité ¦ Не приглашён ¦ Не запрошений
+Invité (coché) ¦ Приглашён (отмечен) ¦ Запрошений (позначений)
+Régime ¦ Питание ¦ Харчування
+Rien de noté sur son décès, née il y a moins de 100 ans : vérifie avant d’inviter ¦ О смерти ничего не записано, рождение менее 100 лет назад: проверь, прежде чем приглашать ¦ Про смерть нічого не записано, народження менш ніж 100 років тому: перевір, перш ніж запрошувати
+Sans fiche ¦ Без карточки ¦ Без картки
+Pas d’adresse ¦ Нет адреса ¦ Немає адреси
+Nombre de personnes ¦ Число человек ¦ Кількість людей
+{name} est invitée. ¦ {name} приглашена. ¦ {name} запрошена.
+{name} est invité. ¦ {name} приглашён. ¦ {name} запрошений.
+{name} n’est plus invitée. ¦ {name} больше не приглашена. ¦ {name} більше не запрошена.
+{name} n’est plus invité. ¦ {name} больше не приглашён. ¦ {name} більше не запрошений.
+Réponse de {name} : {answer}. ¦ Ответ от {name}: {answer}. ¦ Відповідь від {name}: {answer}.
+Inviter les {n} affichées ¦ Пригласить показанных ({n}) ¦ Запросити показаних ({n})
+{n} invitées. ¦ Приглашено: {n}. ¦ Запрошено: {n}.
+{n} invitée. ¦ Приглашено: {n}. ¦ Запрошено: {n}.
+Ne plus inviter les personnes affichées ¦ Больше не приглашать показанных людей ¦ Більше не запрошувати показаних людей
+{n} retirées des invitations. ¦ Убрано из приглашений: {n}. ¦ Прибрано із запрошень: {n}.
+{n} retirée des invitations. ¦ Убрано из приглашений: {n}. ¦ Прибрано із запрошень: {n}.
+Tableau des invités (CSV)… ¦ Таблица гостей (CSV)… ¦ Таблиця гостей (CSV)…
+Imprimer la liste des invités… ¦ Печать списка гостей… ¦ Друк списку гостей…
+Écrire un courriel ¦ Написать письмо ¦ Написати листа
+Retirer de la liste ¦ Убрать из списка ¦ Прибрати зі списку
+🗑 Retirer de la liste ¦ 🗑 Убрать из списка ¦ 🗑 Прибрати зі списку
+{name} retirée de la liste. ¦ {name} убрана из списка. ¦ {name} прибрано зі списку.
+{name} retiré de la liste. ¦ {name} убран из списка. ¦ {name} прибрано зі списку.
+Aucun nouveau descendant vivant : la liste est à jour. ¦ Новых живых потомков нет: список актуален. ¦ Нових живих нащадків немає: список актуальний.
+{n} ajoutés. ¦ Добавлено: {n}. ¦ Додано: {n}.
+{n} ajouté. ¦ Добавлено: {n}. ¦ Додано: {n}.
+Son propre foyer ¦ Своя семья ¦ Власна родина
+Garder son foyer ¦ Оставить его семью ¦ Залишити його родину
+🎉 COUSINADE · INVITÉ ¦ 🎉 ВСТРЕЧА РОДНИ · ГОСТЬ ¦ 🎉 ЗУСТРІЧ РОДИНИ · ГІСТЬ
+🎉 COUSINADE ¦ 🎉 ВСТРЕЧА РОДНИ ¦ 🎉 ЗУСТРІЧ РОДИНИ
+Nouvel invité ¦ Новый гость ¦ Новий гість
+Une fiche de ta généalogie (facultatif) ¦ Карточка из твоей генеалогии (необязательно) ¦ Картка з твоєї генеалогії (необов’язково)
+Sinon, écris le prénom et le nom ci-dessous. ¦ Иначе напиши имя и фамилию ниже. ¦ Інакше напиши ім’я та прізвище нижче.
+Foyer (une invitation par foyer) ¦ Семья (одно приглашение на семью) ¦ Родина (одне запрошення на родину)
+12 rue des Écoles ¦ 12 rue des Écoles ¦ 12 rue des Écoles
+Régime, allergies ¦ Питание, аллергии ¦ Харчування, алергії
+végétarien, sans gluten… ¦ вегетарианец, без глютена… ¦ вегетаріанець, без глютену…
+Mettre aussi l’adresse, le courriel et le téléphone dans le répertoire des vivants (sa fiche) ¦ Добавить также адрес, эл. почту и телефон в справочник живых (его карточка) ¦ Додати також адресу, ел. пошту й телефон до довідника живих (його картка)
+Décoché : seulement dans cette cousinade. ¦ Без галочки: только в этой встрече родни. ¦ Без позначки: лише в цій зустрічі родини.
+Écris au moins un prénom ou un nom (ou choisis une fiche). ¦ Напиши хотя бы имя или фамилию (или выбери карточку). ¦ Напиши хоча б ім’я або прізвище (або вибери картку).
+Ce courriel n’a pas la bonne forme (exemple : prenom.nom@exemple.fr). ¦ У этого адреса эл. почты неверный вид (пример: prenom.nom@exemple.fr). ¦ Ця адреса ел. пошти має неправильний вигляд (приклад: prenom.nom@exemple.fr).
+Invité ajouté. ¦ Гость добавлен. ¦ Гостя додано.
+Enregistré, et aussi dans le répertoire des vivants. ¦ Сохранено, а также в справочнике живых. ¦ Збережено, а також у довіднику живих.
+Le lecteur de tableaux n’est pas chargé. ¦ Модуль чтения таблиц не загружен. ¦ Модуль читання таблиць не завантажено.
+Importer une liste d’invités ¦ Импорт списка гостей ¦ Імпорт списку гостей
+Un tableau avec une ligne de titres : Prénom, Nom, Courriel, Téléphone, Adresse, Code postal, Ville, Réponse (oui / non / peut-être), Nombre, Régime, Note. ¦ Таблица со строкой заголовков: Prénom, Nom, Courriel, Téléphone, Adresse, Code postal, Ville, Réponse (oui / non / peut-être), Nombre, Régime, Note. ¦ Таблиця з рядком заголовків: Prénom, Nom, Courriel, Téléphone, Adresse, Code postal, Ville, Réponse (oui / non / peut-être), Nombre, Régime, Note.
+Je ne trouve ni prénom ni nom : la première ligne doit donner les titres des colonnes (Prénom, Nom, Courriel…). ¦ Не нахожу ни имени, ни фамилии: первая строка должна содержать заголовки столбцов (Prénom, Nom, Courriel…). ¦ Не знаходжу ні імені, ні прізвища: перший рядок має містити заголовки стовпців (Prénom, Nom, Courriel…).
+{n} (coordonnées et réponse complétées) ¦ {n} (контакты и ответ дополнены) ¦ {n} (контакти й відповідь доповнено)
+{n} non reconnues : laissées de côté. ¦ Не распознано и пропущено: {n}. ¦ Не розпізнано й пропущено: {n}.
+{n} non reconnue : laissée de côté. ¦ Не распознано и пропущено: {n}. ¦ Не розпізнано й пропущено: {n}.
+⤓ Exporter le tableau des invités ¦ ⤓ Экспорт таблицы гостей ¦ ⤓ Експорт таблиці гостей
+Un fichier CSV (tableur) avec les invités, leur branche, leur lien de parenté et leur réponse. ¦ Файл CSV (для таблиц) с гостями, их ветвью, степенью родства и ответом. ¦ Файл CSV (для таблиць) із гостями, їхньою гілкою, ступенем спорідненості та відповіддю.
+Avec les adresses, courriels et téléphones ¦ С адресами, эл. почтой и телефонами ¦ З адресами, ел. поштою і телефонами
+🔒 Ce sont des données de personnes vivantes : ne partage ce fichier qu’avec ceux qui organisent. ¦ 🔒 Это данные живых людей: делись этим файлом только с организаторами. ¦ 🔒 Це дані живих людей: ділися цим файлом лише з організаторами.
+Seulement les invités cochés ¦ Только отмеченные гости ¦ Лише позначені гості
+Lien avec l’ancêtre ¦ Родство с предком ¦ Спорідненість із предком
+Lien avec la référence ¦ Родство с опорным человеком ¦ Спорідненість з опорною людиною
+Tableau exporté, avec les coordonnées. ¦ Таблица экспортирована, с контактами. ¦ Таблицю експортовано, з контактами.
+Tableau exporté, sans les coordonnées. ¦ Таблица экспортирована, без контактов. ¦ Таблицю експортовано, без контактів.
+Invités — {name} ¦ Гости — {name} ¦ Гості — {name}
+Liste des invités ¦ Список гостей ¦ Список гостей
+Les invités cochés ¦ Отмеченные гости ¦ Позначені гості
+Ceux qui viennent ¦ Те, кто придёт ¦ Ті, хто прийде
+Avec les coordonnées ¦ С контактами ¦ З контактами
+Le texte de l’invitation ¦ Текст приглашения ¦ Текст запрошення
+Une invitation par foyer. Ces mots se remplacent tout seuls : ¦ Одно приглашение на семью. Эти слова заменяются сами: ¦ Одне запрошення на родину. Ці слова замінюються самі:
+Répondre avant le ¦ Ответить до ¦ Відповісти до
+Contact pour répondre ¦ Контакт для ответа ¦ Контакт для відповіді
+Objet du courriel ¦ Тема письма ¦ Тема листа
+🖨 Imprimer les invitations… ¦ 🖨 Печать приглашений… ¦ 🖨 Друк запрошень…
+📝 Dans le traitement de texte ¦ 📝 В текстовом редакторе ¦ 📝 У текстовому редакторі
+📁 Copie dans les médias ¦ 📁 Копия в медиафайлах ¦ 📁 Копія в медіафайлах
+{n} à inviter ¦ Пригласить: {n} ¦ Запросити: {n}
+✉️ Un courriel à tous (en copie cachée) ¦ ✉️ Одно письмо всем (в скрытой копии) ¦ ✉️ Один лист усім (у прихованій копії)
+Ta messagerie s’ouvre avec le texte prêt : rien n’est envoyé par l’app. ¦ Твоя почта откроется с готовым текстом: приложение ничего не отправляет. ¦ Твоя пошта відкриється з готовим текстом: застосунок нічого не надсилає.
+✉️ Courriel prêt ¦ ✉️ Письмо готово ¦ ✉️ Лист готовий
+Aucun invité coché : coche des invités dans l’onglet « 👥 Invités ». ¦ Нет отмеченных гостей: отметь гостей на вкладке «👥 Гости». ¦ Немає позначених гостей: познач гостей на вкладці «👥 Гості».
+Aucun foyer à inviter : coche des invités d’abord. ¦ Нет семей для приглашения: сначала отметь гостей. ¦ Немає родин для запрошення: спершу познач гостей.
+L’adresse du foyer en haut à droite (enveloppe à fenêtre) ¦ Адрес семьи вверху справа (конверт с окошком) ¦ Адреса родини вгорі праворуч (конверт з віконцем)
+Le traitement de texte n’est pas chargé. ¦ Текстовый редактор не загружен. ¦ Текстовий редактор не завантажено.
+Les faire-part ne sont pas chargés. ¦ Модуль извещений не загружен. ¦ Модуль оголошень не завантажено.
+Tous les descendants de {name} ¦ Все потомки {name} ¦ Усі нащадки {name}
+Réponse avant le {date} ¦ Ответ до {date} ¦ Відповідь до {date}
+Envoi vers les médias indisponible. ¦ Отправка в медиафайлы недоступна. ¦ Надсилання до медіафайлів недоступне.
+Une copie de l’invitation est rangée dans les médias. ¦ Копия приглашения сохранена в медиафайлах. ¦ Копію запрошення збережено в медіафайлах.
+Copie non rangée dans les médias : {err} ¦ Копия не сохранена в медиафайлах: {err} ¦ Копію не збережено в медіафайлах: {err}
+Le lien écrit sous le nom ¦ Родство, написанное под именем ¦ Спорідненість, написана під ім’ям
+Avec l’ancêtre ¦ С предком ¦ З предком
+Avec la référence ¦ С опорным человеком ¦ З опорною людиною
+Pour qui ¦ Для кого ¦ Для кого
+Invités cochés ¦ Отмеченные гости ¦ Позначені гості
+Qui viennent ¦ Кто придёт ¦ Хто прийде
+Présents ¦ Присутствующие ¦ Присутні
+Par page A4 ¦ На страницу A4 ¦ На сторінку A4
+Petite photo (si la fiche en a une) ¦ Маленькое фото (если оно есть в карточке) ¦ Маленьке фото (якщо воно є в картці)
+QR code (nom, branche et lien, lu par un téléphone) ¦ QR-код (имя, ветвь и родство, читается телефоном) ¦ QR-код (ім’я, гілка і спорідненість, читається телефоном)
+Chaque branche a sa couleur (onglet « 📊 Chiffres » pour la changer). ¦ У каждой ветви свой цвет (вкладка «📊 Цифры», чтобы его изменить). ¦ Кожна гілка має свій колір (вкладка «📊 Цифри», щоб його змінити).
+Personne à qui faire un badge. ¦ Человек, для которого сделать бейдж. ¦ Людина, для якої зробити бейдж.
+L’arbre décoratif n’est pas chargé. ¦ Декоративное древо не загружено. ¦ Декоративне дерево не завантажено.
+Toute la descendance de {name}, en grand, une couleur par branche, à afficher le jour de la cousinade. Le dessin s’ouvre ensuite pour tout retoucher, puis « ⤓ Exporter » (PDF pour l’imprimeur, avec fond perdu et traits de coupe, PNG, SVG…). ¦ Все потомки {name} крупно, по цвету на ветвь, чтобы повесить в день встречи родни. Затем рисунок откроется, чтобы всё подправить, а потом «⤓ Экспорт» (PDF для типографии с вылетами и метками обреза, PNG, SVG…). ¦ Усі нащадки {name} великим планом, по кольору на гілку, щоб повісити в день зустрічі родини. Потім малюнок відкриється, щоб усе підправити, а далі «⤓ Експорт» (PDF для друкарні з випусками під обріз і мітками обрізу, PNG, SVG…).
+l’ancêtre ¦ предок ¦ предок
+Les conjoints sous chaque nom ¦ Супруги под каждым именем ¦ Подружжя під кожним ім’ям
+Une place pour coller les photos du jour (à côté des vivants) ¦ Место, чтобы наклеить фото дня (рядом с живыми) ¦ Місце, щоб наклеїти фото дня (поруч із живими)
+🌳 Fabriquer le grand arbre ¦ 🌳 Сделать большое древо ¦ 🌳 Зробити велике дерево
+Fabrication du grand arbre… ¦ Создание большого древа… ¦ Створення великого дерева…
+Aucune descendance pour cet ancêtre. ¦ У этого предка нет потомков. ¦ Цей предок не має нащадків.
+Cet ancêtre est confidentiel. ¦ Этот предок конфиденциален. ¦ Цей предок конфіденційний.
+Photos du jour ¦ Фото дня ¦ Фото дня
+✅ Présence ¦ ✅ Присутствие ¦ ✅ Присутність
+{here} sur {n} ¦ {here} из {n} ¦ {here} з {n}
+🖨 Imprimer la liste de présence… ¦ 🖨 Печать списка присутствующих… ¦ 🖨 Друк списку присутніх…
+Personne n’a encore dit oui : les réponses se notent dans « 👥 Invités ». ¦ Пока никто не ответил «да»: ответы отмечаются в «👥 Гости». ¦ Поки ніхто не відповів «так»: відповіді позначаються в «👥 Гості».
+{name} est là. ¦ {name} здесь. ¦ {name} тут.
+{name} n’est plus notée présente. ¦ {name} больше не отмечена как присутствующая. ¦ {name} більше не позначена як присутня.
+{name} n’est plus noté présent. ¦ {name} больше не отмечен как присутствующий. ¦ {name} більше не позначений як присутній.
+Présence — {name} ¦ Присутствие — {name} ¦ Присутність — {name}
+{name} — présence ¦ {name} — присутствие ¦ {name} — присутність
+Liste de présence ¦ Список присутствующих ¦ Список присутніх
+Places par table ¦ Мест за столом ¦ Місць за столом
+Compter aussi les « peut-être » ¦ Учитывать также «может быть» ¦ Враховувати також «можливо»
+Les petites branches partagent une table ¦ Маленькие ветви делят один стол ¦ Малі гілки ділять один стіл
+✨ Faire le plan par branche ¦ ✨ Рассадить по ветвям ¦ ✨ Розсадити за гілками
+🖨 Imprimer le plan… ¦ 🖨 Печать плана рассадки… ¦ 🖨 Друк плану розсадки…
+Un foyer n’est jamais séparé. Change la table d’une personne avec sa case ; ↶ Annuler défait le plan. ¦ Семья никогда не разделяется. Меняй стол человека в его поле; ↶ Отменить отменяет рассадку. ¦ Родина ніколи не розділяється. Змінюй стіл людини в її полі; ↶ Відмінити скасовує розсадку.
+Pas encore de plan de table : note les réponses, puis « ✨ Faire le plan par branche ». ¦ Плана рассадки пока нет: отметь ответы, затем «✨ Рассадить по ветвям». ¦ Плану розсадки поки немає: познач відповіді, потім «✨ Розсадити за гілками».
+{name} va à la table {no}. ¦ {name} — за стол {no}. ¦ {name} — за стіл {no}.
+Personne ne vient encore : note les réponses « Oui » d’abord. ¦ Пока никто не придёт: сначала отметь ответы «Да». ¦ Поки ніхто не прийде: спершу познач відповіді «Так».
+＋ Ajouter des photos… ¦ ＋ Добавить фото… ¦ ＋ Додати фото…
+Retirer de l’album ¦ Убрать из альбома ¦ Прибрати з альбому
+L’album est vide ¦ Альбом пуст ¦ Альбом порожній
+Les photos du jour : importe-les depuis l’ordinateur ou choisis-les dans les médias. ¦ Фото дня: импортируй их с компьютера или выбери в медиафайлах. ¦ Фото дня: імпортуй їх із комп’ютера або вибери в медіафайлах.
+＋ Ajouter des photos ¦ ＋ Добавить фото ¦ ＋ Додати фото
+Les photos de la cousinade ¦ Фото встречи родни ¦ Фото зустрічі родини
+Ajouter à l’album ¦ Добавить в альбом ¦ Додати до альбому
+{n} à l’album. ¦ В альбом: {n}. ¦ До альбому: {n}.
+Photo retirée de l’album (elle reste dans les médias). ¦ Фото убрано из альбома (оно остаётся в медиафайлах). ¦ Фото прибрано з альбому (воно залишається в медіафайлах).
+invités ¦ гости ¦ гості
+oui ¦ да ¦ так
+peut-être ¦ может быть ¦ можливо
+non ¦ нет ¦ ні
+sans réponse ¦ без ответа ¦ без відповіді
+personnes attendues ¦ ожидаемые люди ¦ очікувані люди
+Par branche ¦ По ветвям ¦ За гілками
+Invités ¦ Гости ¦ Гості
+Réponses ¦ Ответы ¦ Відповіді
+Couleur de la branche {name} ¦ Цвет ветви {name} ¦ Колір гілки {name}
+{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse ¦ да: {yes}, может быть: {maybe}, нет: {no}, без ответа: {wait} ¦ так: {yes}, можливо: {maybe}, ні: {no}, без відповіді: {wait}
+Régimes et allergies (de ceux qui viennent) ¦ Питание и аллергии (тех, кто придёт) ¦ Харчування й алергії (тих, хто прийде)
+Le jour J : {n}. ¦ В день встречи: {n}. ¦ У день зустрічі: {n}.
+Couleur de la branche enregistrée. ¦ Цвет ветви сохранён. ¦ Колір гілки збережено.
+Organiser une cousinade… ¦ Организовать встречу родни… ¦ Організувати зустріч родини…
+Descendants de {name} · {n} ¦ Потомки {name} · {n} ¦ Нащадки {name} · {n}
+=passage dans les médias ¦ упоминание в СМИ|упоминания в СМИ|упоминаний в СМИ ¦ згадка в ЗМІ|згадки в ЗМІ|згадок у ЗМІ
+passages dans les médias ¦ упоминания в СМИ ¦ згадки в ЗМІ
+1980 et après ¦ 1980 и позже ¦ 1980 і пізніше
+avant 1900 ¦ до 1900 ¦ до 1900
+Ajoute un fichier MP3, M4A, WAV, AIFF ou OGG sur une fiche, une battue, une enquête… (ou glisse-le ici) et il apparaîtra ici. ¦ Добавь файл MP3, M4A, WAV, AIFF или OGG в карточку, облаву, расследование… (или перетащи его сюда), и он появится здесь. ¦ Додай файл MP3, M4A, WAV, AIFF або OGG до картки, облави, розслідування… (або перетягни його сюди), і він з’явиться тут.
+Ajoute un fichier MP4, MOV ou WEBM sur une fiche, une battue, une enquête… (ou glisse-le ici) et elle apparaîtra ici. ¦ Добавь файл MP4, MOV или WEBM в карточку, облаву, расследование… (или перетащи его сюда), и видео появится здесь. ¦ Додай файл MP4, MOV або WEBM до картки, облави, розслідування… (або перетягни його сюди), і відео з’явиться тут.
+Ajoute une carte : l’image de la vue, celle du dos, puis le lieu montré pour la retrouver sur la Carte. ¦ Добавь открытку: изображение лицевой стороны, оборота, затем показанное место, чтобы найти его на Карте. ¦ Додай листівку: зображення лицьового боку, звороту, потім показане місце, щоб знайти його на Мапі.
+Ajoute-les sur la fiche d’une personne (bloc 🛂 Passeports) ou dans ✨ Trésors → Les passeports, où l’on peut aussi importer un relevé. ¦ Добавляй их в карточку человека (блок 🛂 Паспорта) или в ✨ Сокровища → Паспорта, где можно также импортировать выписку. ¦ Додавай їх до картки людини (блок 🛂 Паспорти) або в ✨ Скарби → Паспорти, де можна також імпортувати виписку.
+Allume-en une dans ✨ Trésors → Allumer une bougie. ¦ Зажги свечу в ✨ Сокровища → Зажечь свечу. ¦ Запали свічку в ✨ Скарби → Запалити свічку.
+Amérique du Nord ¦ Северная Америка ¦ Північна Америка
+Assembler et retoucher des sons ¦ Собирать и обрабатывать звуки ¦ Збирати й обробляти звуки
+Aucun acte pour l’instant ¦ Пока нет записей актов ¦ Поки немає актових записів
+Aucun dossier de preuve ¦ Нет досье доказательств ¦ Немає досьє доказів
+Aucun lieu dans l’arbre pour l’instant ¦ Пока в древе нет мест ¦ Поки в дереві немає місць
+Aucun livret pour l’instant ¦ Пока нет буклетов ¦ Поки немає буклетів
+Aucun nom indexé pour l’instant ¦ Пока нет проиндексированных имён ¦ Поки немає проіндексованих імен
+Aucun partage pour l’instant ¦ Пока нет общих доступов ¦ Поки немає спільних доступів
+Aucun passage dans les médias pour l’instant ¦ Пока нет упоминаний в СМИ ¦ Поки немає згадок у ЗМІ
+Aucun passeport pour l’instant ¦ Пока нет паспортов ¦ Поки немає паспортів
+Aucun projet de montage pour l’instant ¦ Пока нет проектов монтажа ¦ Поки немає проєктів монтажу
+Aucun questionnaire pour l’instant ¦ Пока нет анкет ¦ Поки немає анкет
+Aucun rattachement pour l’instant ¦ Пока нет привязок ¦ Поки немає прив’язок
+Aucun recueil pour l’instant ¦ Пока нет сборников ¦ Поки немає збірників
+Aucun son pour l’instant ¦ Пока нет звуков ¦ Поки немає звуків
+Aucune annonce pour l’instant ¦ Пока нет объявлений ¦ Поки немає оголошень
+Aucune bougie au registre ¦ В реестре нет свечей ¦ У реєстрі немає свічок
+Aucune carte d’électeur pour l’instant ¦ Пока нет карточек избирателя ¦ Поки немає карток виборця
+Aucune carte postale pour l’instant ¦ Пока нет открыток ¦ Поки немає листівок
+Aucune création ni carrière pour l’instant ¦ Пока нет ни творчества, ни карьеры ¦ Поки немає ні творчості, ні кар’єри
+Aucune demande : ouvre une photo et clique « 📤 Demander qui c’est ». ¦ Запросов нет: открой фото и нажми «📤 Спросить, кто это». ¦ Запитів немає: відкрий фото і натисни «📤 Запитати, хто це».
+Aucune demande pour l’instant ¦ Пока нет запросов ¦ Поки немає запитів
+Aucune gazette pour l’instant ¦ Пока нет газет ¦ Поки немає газет
+Aucune image de lieu pour l’instant ¦ Пока нет изображений мест ¦ Поки немає зображень місць
+Aucune langue notée pour l’instant ¦ Пока не отмечено ни одного языка ¦ Поки не зазначено жодної мови
+Aucune lettre pour l’instant ¦ Пока нет писем ¦ Поки немає листів
+Aucune maison pour l’instant : « ＋ Nouvelle maison ». ¦ Пока нет домов: «＋ Новый дом». ¦ Поки немає будинків: «＋ Новий будинок».
+Aucune personne n’a encore de profil ¦ Пока ни у кого нет профиля ¦ Поки ні в кого немає профілю
+Aucune règle pour l’instant ¦ Пока нет правил ¦ Поки немає правил
+Aucune récompense pour l’instant ¦ Пока нет наград ¦ Поки немає нагород
+Aucune transcription d’acte pour l’instant ¦ Пока нет расшифровок актов ¦ Поки немає розшифровок актів
+Aucune vidéo pour l’instant ¦ Пока нет видео ¦ Поки немає відео
+Auteur, réalisation ¦ Автор, постановка ¦ Автор, постановка
+Bravo ! L’assistant peut chercher plus loin (jusqu’à 12 générations). ¦ Браво! Помощник может искать дальше (до 12 поколений). ¦ Браво! Помічник може шукати далі (до 12 поколінь).
+Carte du droit de vote ¦ Карта избирательного права ¦ Мапа виборчого права
+Cette liste est cachée ¦ Этот список скрыт ¦ Цей список сховано
+Ce que tu notes ici reprend les actes : ce n’est pas un conseil juridique. ¦ То, что ты записываешь здесь, основано на актах: это не юридическая консультация. ¦ Те, що ти записуєш тут, ґрунтується на актах: це не юридична консультація.
+Ce sont des informations privées : montre-les d’abord dans les Réglages. ¦ Это личные сведения: сначала покажи их в Настройках. ¦ Це особисті відомості: спершу покажи їх у Налаштуваннях.
+Chercher un nom, une commune… ¦ Искать имя, коммуну… ¦ Шукати ім’я, комуну…
+Chercher un projet… (nom, photo, détails) ¦ Искать проект… (название, фото, подробности) ¦ Шукати проєкт… (назва, фото, подробиці)
+Chercher un questionnaire… (ex. Anne, guerre, Marie) ¦ Искать анкету… (напр. Anne, война, Marie) ¦ Шукати анкету… (напр. Anne, війна, Marie)
+Chercher une carte… (ex. Bretagne, 1978, Lucie) ¦ Искать карту… (напр. Bretagne, 1978, Lucie) ¦ Шукати мапу… (напр. Bretagne, 1978, Lucie)
+Chercher une maison… (nom, lieu, époque, personne, recensement) ¦ Искать дом… (название, место, эпоха, человек, перепись) ¦ Шукати будинок… (назва, місце, епоха, людина, перепис)
+Chercher une personne… (ex. Martin, maire, sportif) ¦ Искать человека… (напр. Martin, мэр, спортсмен) ¦ Шукати людину… (напр. Martin, мер, спортсмен)
+Chercher… (commune, cote, année, service d’archives) ¦ Искать… (коммуна, шифр, год, архивная служба) ¦ Шукати… (комуна, шифр, рік, архівна служба)
+Chercher… (commune, section, numéro, lieu-dit, propriétaire) ¦ Искать… (коммуна, секция, номер, урочище, владелец) ¦ Шукати… (комуна, секція, номер, урочище, власник)
+Chercher… (personne, bien, notaire, lieu, cote) ¦ Искать… (человек, имущество, нотариус, место, шифр) ¦ Шукати… (людина, майно, нотаріус, місце, шифр)
+Chercher… (titre, auteur, lieu, nom cité, ce qu’on voit, notes) ¦ Искать… (название, автор, место, упомянутое имя, что изображено, заметки) ¦ Шукати… (назва, автор, місце, згадане ім’я, що зображено, нотатки)
+Chercher… (titre, lieu) ¦ Искать… (название, место) ¦ Шукати… (назва, місце)
+Chercher… (titre, personne, lieu, année) ¦ Искать… (название, человек, место, год) ¦ Шукати… (назва, людина, місце, рік)
+Chercher… (titre, texte, personne, lieu, cote) ¦ Искать… (название, текст, человек, место, шифр) ¦ Шукати… (назва, текст, людина, місце, шифр)
+Choisir la personne, puis la sorte de fiche ¦ Выбрать человека, затем вид карточки ¦ Вибрати людину, потім вид картки
+Choisir les colonnes (« ⚙️ Champs affichés », onglet « La liste ») ¦ Выбрать столбцы («⚙️ Показываемые поля», вкладка «Список») ¦ Вибрати стовпці («⚙️ Показувані поля», вкладка «Список»)
+Choisir une personne, puis cocher ce qu’elle était (artiste, sportif, élu…) ¦ Выбрать человека, затем отметить, кем он был (художник, спортсмен, выборное лицо…) ¦ Вибрати людину, потім позначити, ким вона була (митець, спортсмен, обрана особа…)
+Choisis la personne de départ (Sosa 1) et ajoute ses parents. ¦ Выбери начального человека (Sosa 1) и добавь его родителей. ¦ Вибери початкову людину (Sosa 1) і додай її батьків.
+Choisis la personne, puis la sorte de fiche : elle se range sur sa page et apparaît ici. ¦ Выбери человека, затем вид карточки: она займёт место на его странице и появится здесь. ¦ Вибери людину, потім вид картки: вона стане на її сторінці й з’явиться тут.
+Choisis l’image d’un acte (baptême, mariage, sépulture…) et transcris-le à côté. ¦ Выбери изображение акта (крещение, брак, погребение…) и расшифруй его рядом. ¦ Вибери зображення акта (хрещення, шлюб, поховання…) і розшифруй його поруч.
+Clique sur un pays pour voir ses dates (et les cantons suisses, les provinces canadiennes…). ¦ Нажми на страну, чтобы увидеть её даты (а также швейцарские кантоны, канадские провинции…). ¦ Натисни на країну, щоб побачити її дати (а також швейцарські кантони, канадські провінції…).
+Clubs et équipes, résultats, records, saisons. ¦ Клубы и команды, результаты, рекорды, сезоны. ¦ Клуби й команди, результати, рекорди, сезони.
+Commence par « ＋ Numéro », « ＋ Livre » ou « ＋ Documentaire », en haut de la page. ¦ Начни с «＋ Номер», «＋ Книга» или «＋ Документальный фильм» вверху страницы. ¦ Почни з «＋ Номер», «＋ Книга» або «＋ Документальний фільм» угорі сторінки.
+Commence-en un : il apparaîtra ici, avec les autres, pour le rouvrir plus tard. ¦ Начни один: он появится здесь вместе с остальными, чтобы открыть его позже. ¦ Почни один: він з’явиться тут разом з іншими, щоб відкрити його пізніше.
+Commune, section, numéro ¦ Коммуна, секция, номер ¦ Комуна, секція, номер
+Crée d’abord ton type (« ＋ Créer mon propre type… » dans « ＋ Nouvelle œuvre »), puis ses fiches. ¦ Сначала создай свой тип («＋ Создать свой тип…» в «＋ Новое произведение»), затем его карточки. ¦ Спершу створи свій тип («＋ Створити власний тип…» у «＋ Новий твір»), потім його картки.
+Crée le recueil (registre, liste, cahier…), puis ajoute tes photos : chaque photo devient une page. ¦ Создай сборник (реестр, список, тетрадь…), затем добавь свои фото: каждое фото становится страницей. ¦ Створи збірник (реєстр, список, зошит…), потім додай свої фото: кожне фото стає сторінкою.
+Crée une carte, puis ajoute des photos de l’app ou importe-les : celles qui ont des coordonnées GPS se placent toutes seules. ¦ Создай карту, затем добавь фото из приложения или импортируй их: фото с GPS-координатами встанут на место сами. ¦ Створи мапу, потім додай фото із застосунку або імпортуй їх: фото з GPS-координатами стануть на місце самі.
+Créer ce jour-là ¦ Создать в этот день ¦ Створити в цей день
+Date (récent d’abord) ¦ Дата (сначала новые) ¦ Дата (спершу нові)
+Date de l’acte ¦ Дата акта ¦ Дата акта
+Date pour les femmes ¦ Дата для женщин ¦ Дата для жінок
+Date pour les hommes ¦ Дата для мужчин ¦ Дата для чоловіків
+Décennie ¦ Десятилетие ¦ Десятиліття
+Siècle ¦ Век ¦ Століття
+Précédent ¦ Предыдущий ¦ Попередній
+Elles s’ajoutent sur la fiche d’une personne (bloc Cartes d’électeur). ¦ Они добавляются в карточку человека (блок «Карточки избирателя»). ¦ Вони додаються до картки людини (блок «Картки виборця»).
+Ensuite par ¦ Затем по ¦ Потім за
+Grouper par catégorie ¦ Группировать по категориям ¦ Групувати за категоріями
+Héritages et successions ¦ Наследства и наследование ¦ Спадщини та спадкування
+Il faut des dates dans l’arbre : une naissance, un mariage, un décès… ¦ В древе нужны даты: рождение, брак, смерть… ¦ У дереві потрібні дати: народження, шлюб, смерть…
+Index des noms ¦ Указатель имён ¦ Покажчик імен
+Inventions et leurs brevets, découvertes (espèce, comète, site…), publications scientifiques. ¦ Изобретения и их патенты, открытия (вид, комета, памятник…), научные публикации. ¦ Винаходи та їхні патенти, відкриття (вид, комета, пам’ятка…), наукові публікації.
+La liste « Palmarès » ¦ Список «Достижения» ¦ Список «Досягнення»
+La liste « Revue de presse » ¦ Список «Обзор прессы» ¦ Список «Огляд преси»
+Palmarès ¦ Достижения ¦ Досягнення
+🏆 Palmarès ¦ 🏆 Достижения ¦ 🏆 Досягнення
+Langue des actes et des documents ¦ Язык актов и документов ¦ Мова актів і документів
+Le cercle autour des ancêtres ¦ Круг вокруг предков ¦ Коло навколо предків
+Le plus de fiches ¦ Больше всего карточек ¦ Найбільше карток
+Le plus de photos ¦ Больше всего фото ¦ Найбільше фото
+Le plus de profils ¦ Больше всего профилей ¦ Найбільше профілів
+Les autres listes ¦ Другие списки ¦ Інші списки
+Les lieux viennent des naissances, mariages et décès de l’arbre. ¦ Места берутся из рождений, браков и смертей в древе. ¦ Місця беруться з народжень, шлюбів і смертей у дереві.
+Les plus grandes ¦ Самые большие ¦ Найбільші
+Lettres aux descendants ¦ Письма потомкам ¦ Листи нащадкам
+L’ordre des outils, et ceux qu’on montre ¦ Порядок инструментов и какие из них показывать ¦ Порядок інструментів і які з них показувати
+Marquer dans les transcriptions ¦ Отмечать в расшифровках ¦ Позначати в розшифровках
+Mes annonces et courriers ¦ Мои объявления и письма ¦ Мої оголошення й листи
+Mettre ce qui est affiché dans un projet de l’Atelier ¦ Поместить показанное в проект Мастерской ¦ Помістити показане в проєкт Майстерні
+Modifiés récemment ¦ Недавно изменённые ¦ Нещодавно змінені
+Monter des vidéos : morceaux, titres, fondus, incrustations, musiques ¦ Монтировать видео: фрагменты, титры, переходы, наложения, музыка ¦ Монтувати відео: фрагменти, титри, переходи, накладання, музика
+Morceaux, albums et disques, enregistrements, concerts, tournées, œuvres de musique savante. ¦ Песни, альбомы и пластинки, записи, концерты, туры, произведения академической музыки. ¦ Пісні, альбоми й платівки, записи, концерти, тури, твори академічної музики.
+Note de quelle paroisse dépendait chaque hameau ou village avant la Révolution. ¦ Запиши, к какому приходу относились каждый хутор или деревня до Революции. ¦ Запиши, до якої парафії належав кожен хутір чи село до Революції.
+Numéro, tome, épisode ¦ Номер, том, эпизод ¦ Номер, том, епізод
+Ou « 📷 Lire une capture des règles » pour les remplir toutes seules. ¦ Или «📷 Прочитать снимок правил», чтобы они заполнились сами. ¦ Або «📷 Прочитати знімок правил», щоб вони заповнилися самі.
+Où j’en suis ¦ Где я сейчас ¦ Де я зараз
+Par commune ¦ По коммунам ¦ За комунами
+Par date de l’œuvre ¦ По дате произведения ¦ За датою твору
+Par date, récentes d’abord ¦ По дате, сначала новые ¦ За датою, спершу нові
+Par personne ¦ По людям ¦ За людьми
+Par période ¦ По периодам ¦ За періодами
+Partage une branche dans ✨ Trésors → Partager une branche (pour un temps). ¦ Поделись ветвью в ✨ Сокровища → Поделиться ветвью (на время). ¦ Поділися гілкою в ✨ Скарби → Поділитися гілкою (на певний час).
+Pas encore de lignée ¦ Родовой линии пока нет ¦ Родової лінії поки немає
+Passeport des lieux ¦ Паспорт мест ¦ Паспорт місць
+Peintures, dessins, gravures, sculptures et fontes, photographies, affiches, expositions… ¦ Живопись, рисунки, гравюры, скульптуры и отливки, фотографии, плакаты, выставки… ¦ Живопис, малюнки, гравюри, скульптури й відливки, фотографії, плакати, виставки…
+Plus anciens ¦ Сначала старые ¦ Спершу старі
+Priorité d’achat ¦ Приоритет покупки ¦ Пріоритет купівлі
+Précisions ¦ Уточнения ¦ Уточнення
+Ranger les fiches par sorte, avec un intertitre pour chacune ¦ Упорядочить карточки по видам, с подзаголовком для каждого ¦ Упорядкувати картки за видами, з підзаголовком для кожного
+Ranger par sorte ¦ Упорядочить по видам ¦ Упорядкувати за видами
+Revenir sur un son en cours de travail ¦ Вернуться к звуку, над которым идёт работа ¦ Повернутися до звуку, над яким триває робота
+Revue, collection, série ¦ Журнал, коллекция, серия ¦ Журнал, колекція, серія
+＋ Revue, collection, série ¦ ＋ Журнал, коллекция, серия ¦ ＋ Журнал, колекція, серія
+Rien ne manque sur 5 générations ¦ На 5 поколениях ничего не хватает ¦ На 5 поколіннях нічого не бракує
+Règles des journaux ¦ Правила газет ¦ Правила газет
+Région, puis pays ¦ Регион, затем страна ¦ Регіон, потім країна
+Pays (A → Z) ¦ Страна (А → Я) ¦ Країна (А → Я)
+Tous les pays, dans l’ordre que tu veux ¦ Все страны в нужном тебе порядке ¦ Усі країни в потрібному тобі порядку
+Un fichier .ics à ouvrir dans ton calendrier (Apple, Google, Outlook…) ¦ Файл .ics, чтобы открыть его в твоём календаре (Apple, Google, Outlook…) ¦ Файл .ics, щоб відкрити його у твоєму календарі (Apple, Google, Outlook…)
+Un son de la base ou de l’ordinateur, à travailler et à garder comme projet ¦ Звук из базы или с компьютера, чтобы обработать и сохранить как проект ¦ Звук із бази або з комп’ютера, щоб обробити й зберегти як проєкт
+Une fiche rassemble texte, images, personnes, cartes et listes sur un sujet. ¦ Заметка собирает текст, изображения, людей, карты и списки на одну тему. ¦ Нотатка збирає текст, зображення, людей, мапи й списки на одну тему.
+Voir qui pouvait voter en ¦ Посмотреть, кто мог голосовать в ¦ Подивитися, хто міг голосувати в
+pas de date ¦ без даты ¦ без дати
+Écart ¦ Разница ¦ Різниця
+↔ Écart ¦ ↔ Разница ¦ ↔ Різниця
+Écart hommes / femmes ¦ Разница между мужчинами и женщинами ¦ Різниця між чоловіками й жінками
+Écoles, études et apprentissages, diplômes, établissements. ¦ Школы, учёба и ученичество, дипломы, учебные заведения. ¦ Школи, навчання й учнівство, дипломи, навчальні заклади.
+Écris ton annonce et vois tout de suite combien elle coûtera d’après les règles du journal. ¦ Напиши объявление и сразу увидишь, сколько оно будет стоить по правилам газеты. ¦ Напиши оголошення й одразу побачиш, скільки воно коштуватиме за правилами газети.
+Écris ton annonce, vois tout de suite combien elle coûtera d’après les règles du journal, et suis ce qu’elle devient. ¦ Напиши объявление, сразу увидишь, сколько оно будет стоить по правилам газеты, и следи за тем, что с ним происходит. ¦ Напиши оголошення, одразу побачиш, скільки воно коштуватиме за правилами газети, і стеж за тим, що з ним відбувається.
+Écris-en une dans ✨ Trésors → Lettres aux descendants : « pour les 18 ans de Léa », « en 2050 ». ¦ Напиши письмо в ✨ Сокровища → Письма потомкам: «pour les 18 ans de Léa», «en 2050». ¦ Напиши лист у ✨ Скарби → Листи нащадкам: «pour les 18 ans de Léa», «en 2050».
+↗ Ouvrir dans Recherche ¦ ↗ Открыть в «Исследованиях» ¦ ↗ Відкрити в «Дослідженнях»
+⚙️ Ouvrir les Réglages ¦ ⚙️ Открыть Настройки ¦ ⚙️ Відкрити Налаштування
+⚙️ Ranger les outils ¦ ⚙️ Упорядочить инструменты ¦ ⚙️ Упорядкувати інструменти
+✅ Tâches de l’Atelier ¦ ✅ Задачи Мастерской ¦ ✅ Завдання Майстерні
+✉️ Courriers envoyés ¦ ✉️ Отправленные письма ¦ ✉️ Надіслані листи
+✉️ Ouvrir les lettres dans ✨ Trésors ¦ ✉️ Открыть письма в ✨ Сокровищах ¦ ✉️ Відкрити листи у ✨ Скарбах
+✝️ Décès, sépultures ¦ ✝️ Смерти, погребения ¦ ✝️ Смерті, поховання
+👶 Naissances, baptêmes ¦ 👶 Рождения, крещения ¦ 👶 Народження, хрещення
+❓ Ce qu’on peut récupérer (licences) ¦ ❓ Что можно взять (лицензии) ¦ ❓ Що можна взяти (ліцензії)
+❓ Comment noter un héritage ? ¦ ❓ Как записать наследство? ¦ ❓ Як записати спадщину?
+⤒ Importer des relevés ¦ ⤒ Импорт выписок ¦ ⤒ Імпорт виписок
+⤒ Importer les réponses ¦ ⤒ Импорт ответов ¦ ⤒ Імпорт відповідей
+⤓ Exporter les anniversaires (.ics) ¦ ⤓ Экспорт дней рождения (.ics) ¦ ⤓ Експорт днів народження (.ics)
+＋ Ajouter une image ¦ ＋ Добавить изображение ¦ ＋ Додати зображення
+＋ Ajouter une parcelle ¦ ＋ Добавить участок ¦ ＋ Додати ділянку
+＋ Annonce ou courrier ¦ ＋ Объявление или письмо ¦ ＋ Оголошення або лист
+＋ Nouveau dossier de preuve ¦ ＋ Новое досье доказательств ¦ ＋ Нове досьє доказів
+＋ Nouveau livret ¦ ＋ Новый буклет ¦ ＋ Новий буклет
+＋ Nouveau montage ¦ ＋ Новый монтаж ¦ ＋ Новий монтаж
+＋ Nouveau passage dans les médias ¦ ＋ Новое упоминание в СМИ ¦ ＋ Нова згадка в ЗМІ
+＋ Nouveau passeport ¦ ＋ Новый паспорт ¦ ＋ Новий паспорт
+＋ Nouveau projet son ¦ ＋ Новый звуковой проект ¦ ＋ Новий звуковий проєкт
+＋ Nouveau questionnaire ¦ ＋ Новая анкета ¦ ＋ Нова анкета
+＋ Nouveau recueil ¦ ＋ Новый сборник ¦ ＋ Новий збірник
+＋ Nouvelle carte ¦ ＋ Новая карта ¦ ＋ Нова мапа
+＋ Nouvelle carte postale ¦ ＋ Новая открытка ¦ ＋ Нова листівка
+＋ Nouvelle demande… ¦ ＋ Новый запрос… ¦ ＋ Новий запит…
+＋ Nouvelle maison ¦ ＋ Новый дом ¦ ＋ Новий будинок
+＋ Nouvelle transcription ¦ ＋ Новая расшифровка ¦ ＋ Нова розшифровка
+＋ Règles d’un journal ¦ ＋ Правила газеты ¦ ＋ Правила газети
+＋ Épisode ¦ ＋ Эпизод ¦ ＋ Епізод
+🌍 Le droit de vote dans le monde ¦ 🌍 Избирательное право в мире ¦ 🌍 Виборче право у світі
+📂 Projets son ¦ 📂 Звуковые проекты ¦ 📂 Звукові проєкти
+📚 Vers l’Atelier ¦ 📚 В Мастерскую ¦ 📚 До Майстерні
+📷 Lire une capture des règles ¦ 📷 Прочитать снимок правил ¦ 📷 Прочитати знімок правил
+🔍 Ouvrir l’assistant ¦ 🔍 Открыть помощника ¦ 🔍 Відкрити помічника
+🔍 Ouvrir l’assistant « Que manque-t-il ? » ¦ 🔍 Открыть помощника «Чего не хватает?» ¦ 🔍 Відкрити помічника «Чого бракує?»
+🔍 Qui est sur cette photo ? ¦ 🔍 Кто на этом фото? ¦ 🔍 Хто на цьому фото?
+🔍 Rappels d’enquête ¦ 🔍 Напоминания расследований ¦ 🔍 Нагадування розслідувань
+🔗 Partager une branche ¦ 🔗 Поделиться ветвью ¦ 🔗 Поділитися гілкою
+🕯️ Allumer une bougie ¦ 🕯️ Зажечь свечу ¦ 🕯️ Запалити свічку
+🖼️ Tous les médias ¦ 🖼️ Все медиафайлы ¦ 🖼️ Усі медіафайли
+🗺 Toutes mes cartes ¦ 🗺 Все мои карты ¦ 🗺 Усі мої мапи
+🛂 Ouvrir dans ✨ Trésors ¦ 🛂 Открыть в ✨ Сокровищах ¦ 🛂 Відкрити у ✨ Скарбах
+🛡 Les règles ¦ 🛡 Правила ¦ 🛡 Правила

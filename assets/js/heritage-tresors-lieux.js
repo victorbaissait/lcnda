@@ -10,6 +10,8 @@
 (() => {
     'use strict';
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
+    const gx = (p, m, f, v) => i18n(p?.gender === 'female' ? f : m, v); // 🌐 une phrase par sexe
     const F = ext.tresorFeatures = ext.tresorFeatures || [];
     const A = () => window.LCNDA_APP;
     const COLORS = ['#c0392b', '#2471a3', '#1e8449', '#b9770e', '#7d3c98', '#117a65', '#a04000', '#2e4053', '#d35400', '#1f618d'];
@@ -17,7 +19,7 @@
     const wx = (lng, z) => (lng + 180) / 360 * 256 * 2 ** z;
     const wy = (lat, z) => { const s = Math.sin(lat * Math.PI / 180); return (0.5 - Math.log((1 + s) / (1 - s)) / (4 * Math.PI)) * 256 * 2 ** z; };
     /** tous les fonds de carte de l'app (Réglages › Cartes et fonds de carte), au choix */
-    const bgOptions = sel => A().mapBackgroundSelectHtml ? A().mapBackgroundSelectHtml(sel) : `<option value="color">OpenStreetMap</option><option value="light">Clair</option>`;
+    const bgOptions = sel => A().mapBackgroundSelectHtml ? A().mapBackgroundSelectHtml(sel) : `<option value="color">OpenStreetMap</option><option value="light">${i18n('Clair')}</option>`;
     const tile = (bg, z, x, y) => A().mapTileUrl ? A().mapTileUrl(bg, z, x, y) : `https://tile.openstreetmap.org/${z}/${x}/${y}.png`;
     const km = (a, b) => { const R = 6371, r = Math.PI / 180, dl = (b.lat - a.lat) * r, dg = (b.lng - a.lng) * r, h = Math.sin(dl / 2) ** 2 + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dg / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); };
     const geo = (tr, id) => { const p = id && tr.places[id]; return p && p.lat != null && p.lng != null ? {lat: p.lat, lng: p.lng, name: p.name, id} : null; };
@@ -74,21 +76,21 @@
             ctx.fillStyle = sc.color(t); ctx.beginPath(); ctx.arc(hx, hy, w.moving ? 7 : 5.5, 0, 7); ctx.fill(); ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.stroke();
             if (w.moving) { ctx.fillStyle = '#111'; ctx.font = '600 14px system-ui'; ctx.fillText(t.p.first || T_name(t.p), hx + 9, hy + 4); }
         });
-        ctx.fillStyle = 'rgba(255,255,255,.88)'; ctx.fillRect(18, 18, 300, 92); ctx.fillStyle = '#1d2330'; ctx.font = '800 54px system-ui'; ctx.fillText(String(Math.floor(y)), 32, 76); ctx.font = '14px system-ui'; ctx.fillText(`${alive} personne${alive > 1 ? 's' : ''} en vie · ${title}`.slice(0, 44), 34, 99);
+        ctx.fillStyle = 'rgba(255,255,255,.88)'; ctx.fillRect(18, 18, 300, 92); ctx.fillStyle = '#1d2330'; ctx.font = '800 54px system-ui'; ctx.fillText(String(Math.floor(y)), 32, 76); ctx.font = '14px system-ui'; ctx.fillText(`${alive > 1 ? i18n('{n} personnes en vie', {n: String(alive)}) : i18n('{n} personne en vie', {n: String(alive)})} · ${title}`.slice(0, 44), 34, 99);
         ctx.font = '13px system-ui'; sc.names.slice(0, 8).forEach((n, k) => { ctx.fillStyle = 'rgba(255,255,255,.85)'; ctx.fillRect(W - 170, 18 + k * 22, 152, 20); ctx.fillStyle = COLORS[k % COLORS.length]; ctx.beginPath(); ctx.arc(W - 158, 28 + k * 22, 5, 0, 7); ctx.fill(); ctx.fillStyle = '#1d2330'; ctx.fillText(n, W - 146, 32 + k * 22); });
-        ctx.font = '11px system-ui'; ctx.fillStyle = 'rgba(0,0,0,.55)'; ctx.fillText('Fond de carte © OpenStreetMap, Esri', 20, H - 10);
+        ctx.font = '11px system-ui'; ctx.fillStyle = 'rgba(0,0,0,.55)'; ctx.fillText(i18n('Fond de carte © OpenStreetMap, Esri'), 20, H - 10);
     }
     const T_name = p => [p.first, p.last].filter(Boolean).join(' ');
     async function renderFilm(host, T) {
         const tr = await T.tree(), sc = filmScene(T, tr);
-        if (!sc) { host.innerHTML = T.empty('Il faut des lieux placés sur la carte (latitude et longitude) et datés pour faire le film'); return; }
-        host.innerHTML = `<div class="h-tr-row h-tr-noprint"><label>Durée du film<select data-fm-d><option value="20">20 s</option><option value="40" selected>40 s</option><option value="60">1 min</option><option value="120">2 min</option></select></label>
-            <label>Fond<select data-fm-bg>${bgOptions('light')}<option value="grid">Sans carte</option></select></label>
-            <button type="button" class="button secondary" data-fm-play>▶ Jouer</button><span class="h-tr-muted" data-fm-st>${sc.ts.length} parcours, de ${sc.y0 + 1} à ${sc.y1}</span></div>
+        if (!sc) { host.innerHTML = T.empty(i18n('Il faut des lieux placés sur la carte (latitude et longitude) et datés pour faire le film')); return; }
+        host.innerHTML = `<div class="h-tr-row h-tr-noprint"><label>${i18n('Durée du film')}<select data-fm-d><option value="20">20 s</option><option value="40" selected>40 s</option><option value="60">1 min</option><option value="120">2 min</option></select></label>
+            <label>${i18n('Fond')}<select data-fm-bg>${bgOptions('light')}<option value="grid">${i18n('Sans carte')}</option></select></label>
+            <button type="button" class="button secondary" data-fm-play>${i18n('▶ Jouer')}</button><span class="h-tr-muted" data-fm-st>${i18n('{n} parcours, de {y0} à {y1}', {n: String(sc.ts.length), y0: String(sc.y0 + 1), y1: String(sc.y1)})}</span></div>
             <canvas class="h-tr-canvas" width="${sc.W}" height="${sc.H}" data-fm-c></canvas><input type="range" data-fm-y min="${sc.y0}" max="${sc.y1}" step="0.1" value="${sc.y0}" style="width:100%">`;
-        const cv = host.querySelector('[data-fm-c]'), ctx = cv.getContext('2d'), range = host.querySelector('[data-fm-y]'), stEl = host.querySelector('[data-fm-st]'), title = `famille ${T.start(tr)?.last || ''}`.trim();
+        const cv = host.querySelector('[data-fm-c]'), ctx = cv.getContext('2d'), range = host.querySelector('[data-fm-y]'), stEl = host.querySelector('[data-fm-st]'), title = i18n('famille {name}', {name: T.start(tr)?.last || ''}).trim();
         let bgc = null, bgKey = '', raf = 0;
-        const bg = async () => { const k = host.querySelector('[data-fm-bg]').value; if (k !== bgKey) { bgKey = k; stEl.textContent = 'Le fond de carte se charge…'; bgc = k === 'grid' ? await filmBackground({...sc, z: 0, ox: 1e9, oy: 1e9}, k) : await filmBackground(sc, k); stEl.textContent = `${sc.ts.length} parcours, de ${sc.y0 + 1} à ${sc.y1}`; } return bgc; };
+        const bg = async () => { const k = host.querySelector('[data-fm-bg]').value; if (k !== bgKey) { bgKey = k; stEl.textContent = i18n('Le fond de carte se charge…'); bgc = k === 'grid' ? await filmBackground({...sc, z: 0, ox: 1e9, oy: 1e9}, k) : await filmBackground(sc, k); stEl.textContent = i18n('{n} parcours, de {y0} à {y1}', {n: String(sc.ts.length), y0: String(sc.y0 + 1), y1: String(sc.y1)}); } return bgc; };
         const frame = y => drawFrame(ctx, sc, bgc, y, title);
         const play = (secs, onEnd) => { cancelAnimationFrame(raf); const t0 = performance.now(), span = sc.y1 - sc.y0;
             const step = now => { const f = Math.min(1, (now - t0) / (secs * 1000)), y = sc.y0 + span * f; range.value = y; frame(y); if (f < 1 && (host.isConnected || onEnd)) raf = requestAnimationFrame(step); else onEnd?.(); }; raf = requestAnimationFrame(step); };
@@ -97,16 +99,16 @@
         host.querySelector('[data-fm-bg]').addEventListener('change', async () => { await bg(); frame(Number(range.value)); });
         host.querySelector('[data-fm-play]').addEventListener('click', async () => { await bg(); play(Number(host.querySelector('[data-fm-d]').value)); });
         /** le film en vidéo (WebM) : il se joue une fois pendant l'enregistrement */
-        const video = async () => { if (!window.MediaRecorder || !cv.captureStream) { T.toast('Ce navigateur ne sait pas enregistrer de vidéo.', 'error'); return null; }
+        const video = async () => { if (!window.MediaRecorder || !cv.captureStream) { T.toast(i18n('Ce navigateur ne sait pas enregistrer de vidéo.'), 'error'); return null; }
             await bg(); return record(Number(host.querySelector('[data-fm-d]').value)); };
-        T.actions(host, {exports: [{icon: '🎬', label: 'La vidéo (WebM)', help: 'Le film se joue une fois pendant l’enregistrement', name: 'film-des-migrations.webm', make: video},
-            {icon: '🖼', label: 'Cette image (PNG)', name: 'film-des-migrations.png', make: () => T.canvasPng(cv), media: false}],
-            media: {title: `Le film des migrations — ${title}`, kind: 'video', help: 'La vidéo, enregistrée pendant que le film se joue', make: async () => { const b = await video(); return b ? {blob: b, name: 'film-des-migrations.webm'} : null; }}});
+        T.actions(host, {exports: [{icon: '🎬', label: i18n('La vidéo (WebM)'), help: i18n('Le film se joue une fois pendant l’enregistrement'), name: 'film-des-migrations.webm', make: video},
+            {icon: '🖼', label: i18n('Cette image (PNG)'), name: 'film-des-migrations.png', make: () => T.canvasPng(cv), media: false}],
+            media: {title: i18n('Le film des migrations — {title}', {title}), kind: 'video', help: i18n('La vidéo, enregistrée pendant que le film se joue'), make: async () => { const b = await video(); return b ? {blob: b, name: 'film-des-migrations.webm'} : null; }}});
         /** enregistre le film (secondes) → une vidéo WebM */
         const record = secs => new Promise(res => {
             const mime = ['video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm'].find(m => MediaRecorder.isTypeSupported(m)) || '', chunks = [];
-            let rec; try { rec = new MediaRecorder(cv.captureStream(30), mime ? {mimeType: mime, videoBitsPerSecond: 4e6} : {}); } catch (err) { T.toast('Enregistrement impossible : ' + err.message, 'error'); return res(null); }
-            rec.ondataavailable = e => { if (e.data.size) chunks.push(e.data); }; rec.onstop = () => { stEl.textContent = 'Vidéo prête.'; res(new Blob(chunks, {type: 'video/webm'})); };
+            let rec; try { rec = new MediaRecorder(cv.captureStream(30), mime ? {mimeType: mime, videoBitsPerSecond: 4e6} : {}); } catch (err) { T.toast(i18n('Enregistrement impossible : {err}', {err: err.message}), 'error'); return res(null); }
+            rec.ondataavailable = e => { if (e.data.size) chunks.push(e.data); }; rec.onstop = () => { stEl.textContent = i18n('Vidéo prête.'); res(new Blob(chunks, {type: 'video/webm'})); };
             stEl.textContent = '🔴 Enregistrement…'; rec.start(500); play(secs, () => setTimeout(() => rec.stop(), 400));
         });
         ext.tresorFilm.record = record;
@@ -120,12 +122,12 @@
         const tr = await T.tree(), uses = new Map();
         tr.events.forEach(e => { if (geo(tr, e.place)) uses.set(e.place, (uses.get(e.place) || 0) + 1); });
         const pls = [...uses].sort((a, b) => b[1] - a[1]).map(([id, n]) => ({...geo(tr, id), n}));
-        if (!pls.length) { host.innerHTML = T.empty('Aucun lieu de l’arbre n’est placé sur la carte (latitude et longitude)'); return; }
-        host.innerHTML = `<div class="h-tr-row h-tr-noprint"><label>Le lieu<select data-cu-p>${pls.map(p => `<option value="${p.id}">${T.esc(p.name)} (${p.n})</option>`).join('')}</select></label>
-            <label>Hier<select data-cu-old>${OLD.map(([k, l]) => `<option value="${k}">${T.esc(l)}</option>`).join('')}</select></label><label>Aujourd’hui<select data-cu-now>${bgOptions('color')}</select></label><label>Zoom<input type="range" data-cu-z min="10" max="16" value="14"></label>
-            <span class="h-tr-muted">Fais glisser le rideau (ou les flèches du clavier).</span></div>
-            <div class="h-tr-curtain" data-cu tabindex="0" aria-label="Rideau entre la carte d’hier et celle d’aujourd’hui"><div class="h-tr-cu-layer" data-cu-now></div><div class="h-tr-cu-layer h-tr-cu-old" data-cu-then></div><div class="h-tr-cu-bar" data-cu-bar><span>◀ ▶</span></div><b class="h-tr-cu-lab l">Hier</b><b class="h-tr-cu-lab r">Aujourd’hui</b><i class="h-tr-cu-pin"></i></div>
-            <p class="h-tr-muted">Cartes : Géoplateforme IGN (Cassini, État-major), © OpenStreetMap, Esri. Dans l’onglet Carte, le mode « superposition » compare aussi deux fonds avec l’opacité.</p>`;
+        if (!pls.length) { host.innerHTML = T.empty(i18n('Aucun lieu de l’arbre n’est placé sur la carte (latitude et longitude)')); return; }
+        host.innerHTML = `<div class="h-tr-row h-tr-noprint"><label>${i18n('Le lieu')}<select data-cu-p>${pls.map(p => `<option value="${p.id}">${T.esc(p.name)} (${p.n})</option>`).join('')}</select></label>
+            <label>${i18n('Hier')}<select data-cu-old>${OLD.map(([k, l]) => `<option value="${k}">${T.esc(i18n(l))}</option>`).join('')}</select></label><label>${i18n('Aujourd’hui')}<select data-cu-now>${bgOptions('color')}</select></label><label>${i18n('Zoom')}<input type="range" data-cu-z min="10" max="16" value="14"></label>
+            <span class="h-tr-muted">${i18n('Fais glisser le rideau (ou les flèches du clavier).')}</span></div>
+            <div class="h-tr-curtain" data-cu tabindex="0" aria-label="${T.esc(i18n('Rideau entre la carte d’hier et celle d’aujourd’hui'))}"><div class="h-tr-cu-layer" data-cu-now></div><div class="h-tr-cu-layer h-tr-cu-old" data-cu-then></div><div class="h-tr-cu-bar" data-cu-bar><span>◀ ▶</span></div><b class="h-tr-cu-lab l">${i18n('Hier')}</b><b class="h-tr-cu-lab r">${i18n('Aujourd’hui')}</b><i class="h-tr-cu-pin"></i></div>
+            <p class="h-tr-muted">${i18n('Cartes : Géoplateforme IGN (Cassini, État-major), © OpenStreetMap, Esri. Dans l’onglet Carte, le mode « superposition » compare aussi deux fonds avec l’opacité.')}</p>`;
         const box = host.querySelector('[data-cu]'), now = host.querySelector('[data-cu-now]'), then = host.querySelector('[data-cu-then]'), bar = host.querySelector('[data-cu-bar]');
         let cut = 50;
         const setCut = v => { cut = Math.max(0, Math.min(100, v)); then.style.clipPath = `inset(0 ${100 - cut}% 0 0)`; bar.style.left = cut + '%'; };
@@ -145,48 +147,54 @@
     /** les étapes d'une promenade : les lieux (placés) de la vie de quelqu'un ou des naissances de ses ancêtres, avec ce qui s'y est passé */
     function walkStops(T, tr, pid, mode) {
         const p = tr.byId.get(pid); if (!p) return [];
-        const facts = [], f = q => (q?.gender === 'female' ? 'e' : ''), push = (y, d, pl, txt) => { const g = geo(tr, pl); if (g) facts.push({y: y || 0, d, g, txt}); };
+        // 🌐 chaque fait a deux phrases entières : la première de l'étape (« Ici… »), et la suivante (« Puis… », « C’est aussi ici que… »)
+        const facts = [], push = (y, d, pl, txt) => { const g = geo(tr, pl); if (g) facts.push({y: y || 0, d, g, txt}); };
+        const on2 = (d, y) => (d || y ? T.on(d, y) : (T.lang() === 'fr' ? 'en ' : '')); // (comme avant : « en » sans date)
+        const two = (q, keys, v) => [gx(q, keys[0], keys[1], v), gx(q, keys[2], keys[3], v)];
+        const BORN = ['Ici est né {name}, {when}.', 'Ici est née {name}, {when}.', 'C’est aussi ici que est né {name}, {when}.', 'C’est aussi ici que est née {name}, {when}.'];
         const lifeOf = q => {
-            push(q.by, q.bd, q.bplace, `Ici est né${f(q)} ${T.name(q)}, ${q.bd ? 'le ' : 'en '}${T.dateFr(q.bd, q.by)}.`);
-            (tr.evBy.get('p' + q.id) || []).filter(e => !['BIRT', 'DEAT'].includes(e.tag) && e.place).forEach(e => push(e.y, e.d, e.place, `Ici, ${e.d || e.y ? (e.d ? 'le ' : 'en ') + T.dateFr(e.d, e.y) : ''}, ${T.name(q)} : ${e.label.toLowerCase()}${e.what ? ` (${e.what})` : ''}.`));
-            (tr.fams.get(q.id) || []).forEach(fa => { const o = tr.byId.get(fa.a === q.id ? fa.b : fa.a); push(fa.my, fa.md, fa.mplace, `Ici, ${fa.my ? (fa.md ? 'le ' : 'en ') + T.dateFr(fa.md, fa.my) : ''}, ${T.name(q)} a épousé ${o ? T.name(o) : 'son conjoint'}.`); });
-            push(q.dy, q.dd, q.dplace, `Ici est mort${f(q)} ${T.name(q)}, ${q.dd ? 'le ' : 'en '}${T.dateFr(q.dd, q.dy)}${q.by && q.dy ? `, à ${T.ageAt(q, q.dd, q.dy)} ans` : ''}.`);
+            push(q.by, q.bd, q.bplace, two(q, BORN, {name: T.name(q), when: on2(q.bd, q.by)}));
+            (tr.evBy.get('p' + q.id) || []).filter(e => !['BIRT', 'DEAT'].includes(e.tag) && e.place).forEach(e => { const v = {when: e.d || e.y ? T.on(e.d, e.y) : '', name: T.name(q), label: e.label.toLowerCase(), what: e.what ? ` (${e.what})` : ''}; push(e.y, e.d, e.place, [i18n('Ici, {when}, {name} : {label}{what}.', v), i18n('Puis, {when}, {name} : {label}{what}.', v)]); });
+            (tr.fams.get(q.id) || []).forEach(fa => { const o = tr.byId.get(fa.a === q.id ? fa.b : fa.a), v = {when: fa.my ? T.on(fa.md, fa.my) : '', name: T.name(q), other: o ? T.name(o) : i18n('son conjoint')}; push(fa.my, fa.md, fa.mplace, [i18n('Ici, {when}, {name} a épousé {other}.', v), i18n('Puis, {when}, {name} a épousé {other}.', v)]); });
+            push(q.dy, q.dd, q.dplace, two(q, ['Ici est mort {name}, {when}{age}.', 'Ici est morte {name}, {when}{age}.', 'C’est aussi ici que est mort {name}, {when}{age}.', 'C’est aussi ici que est morte {name}, {when}{age}.'], {name: T.name(q), when: on2(q.dd, q.dy), age: q.by && q.dy ? i18n(', à {n} ans', {n: String(T.ageAt(q, q.dd, q.dy))}) : ''}));
         };
-        if (mode === 'anc') [p, ...T.ancestors(tr, pid, 6).map(a => tr.byId.get(a.id))].filter(Boolean).forEach(q => push(q.by, q.bd, q.bplace, `Ici est né${f(q)} ${T.name(q)}, ${q.bd ? 'le ' : 'en '}${T.dateFr(q.bd, q.by)}${q.occ ? ` ; ${q.gender === 'female' ? 'elle' : 'il'} sera ${q.occ}` : ''}.`));
+        if (mode === 'anc') [p, ...T.ancestors(tr, pid, 6).map(a => tr.byId.get(a.id))].filter(Boolean).forEach(q => push(q.by, q.bd, q.bplace, q.occ
+            ? two(q, ['Ici est né {name}, {when} ; il sera {occ}.', 'Ici est née {name}, {when} ; elle sera {occ}.', 'C’est aussi ici que est né {name}, {when} ; il sera {occ}.', 'C’est aussi ici que est née {name}, {when} ; elle sera {occ}.'], {name: T.name(q), when: on2(q.bd, q.by), occ: q.occ})
+            : two(q, BORN, {name: T.name(q), when: on2(q.bd, q.by)})));
         else lifeOf(p);
         facts.sort((a, b) => a.y - b.y || String(a.d).localeCompare(String(b.d)));
         const stops = []; facts.forEach(x => { const last = stops.at(-1); if (last && last.name === x.g.name) last.texts.push(x.txt); else stops.push({...x.g, texts: [x.txt], y: x.y}); });
         // les phrases « Ici, le … » d'une même étape : sans « Ici » répété
-        stops.forEach((s, k) => { s.text = s.texts.map((t, j) => (j ? t.replace(/^Ici, /, 'Puis, ').replace(/^Ici /, 'C’est aussi ici que ') : t)).join(' '); s.km = k ? km(stops[k - 1], s) : 0; });
+        stops.forEach((s, k) => { s.text = s.texts.map((t, j) => t[j ? 1 : 0]).join(' '); s.km = k ? km(stops[k - 1], s) : 0; });
         return stops;
     }
     async function renderWalk(host, T) {
         const tr = await T.tree(), st = T.start(tr);
-        host.innerHTML = `<form class="h-tr-panel h-tr-row h-tr-noprint" data-wk><div style="min-width:260px"><span class="pk-lab">La promenade de</span>${T.personField('who', tr.people.find(p => p.bplace && p.dplace && !p.living)?.id || st?.id)}</div>
-            <label>Le parcours<select name="mode"><option value="life">les lieux de sa vie</option><option value="anc">les villages de ses ancêtres</option></select></label>
-            <button type="button" class="button" data-wk-all>🔊 Tout le guide</button><button type="button" class="button secondary" data-wk-gps>📍 Me guider en marchant</button><button type="button" class="button secondary" data-wk-stop>⏹ Silence</button></form>
+        host.innerHTML = `<form class="h-tr-panel h-tr-row h-tr-noprint" data-wk><div style="min-width:260px"><span class="pk-lab">${i18n('La promenade de')}</span>${T.personField('who', tr.people.find(p => p.bplace && p.dplace && !p.living)?.id || st?.id)}</div>
+            <label>${i18n('Le parcours')}<select name="mode"><option value="life">${i18n('les lieux de sa vie')}</option><option value="anc">${i18n('les villages de ses ancêtres')}</option></select></label>
+            <button type="button" class="button" data-wk-all>${i18n('🔊 Tout le guide')}</button><button type="button" class="button secondary" data-wk-gps>${i18n('📍 Me guider en marchant')}</button><button type="button" class="button secondary" data-wk-stop>${i18n('⏹ Silence')}</button></form>
             <p class="h-tr-muted h-tr-noprint" data-wk-gps-st></p><ol class="h-tr-walk" data-wk-list></ol>`;
         const form = host.querySelector('[data-wk]'), list = host.querySelector('[data-wk-list]'), gpsSt = host.querySelector('[data-wk-gps-st]');
         let stops = [], watch = null, done = new Set();
         const draw = () => { stops = walkStops(T, tr, Number(form.elements.who.value), form.elements.mode.value); done = new Set();
             const total = stops.reduce((n, s) => n + s.km, 0);
-            list.innerHTML = stops.length ? stops.map((s, k) => `<li class="h-tr-panel h-tr-print" data-wk-i="${k}"><div class="h-tr-row" style="justify-content:space-between"><b>📍 ${T.esc(s.name)}</b><small class="h-tr-muted">${k ? `${s.km < 10 ? s.km.toFixed(1) : Math.round(s.km)} km depuis l’étape d’avant` : 'Départ'}</small></div><p>${T.esc(s.text)}</p>
-                <p class="h-tr-noprint"><button type="button" class="h-tr-link" data-wk-say="${k}">🔊 Écouter</button> · <a href="https://www.openstreetmap.org/directions?route=%3B${s.lat}%2C${s.lng}" target="_blank" rel="noopener">🧭 Itinéraire</a> · <a href="https://www.openstreetmap.org/?mlat=${s.lat}&mlon=${s.lng}#map=15/${s.lat}/${s.lng}" target="_blank" rel="noopener">Carte</a></p></li>`).join('') + `<p class="h-tr-muted">${stops.length} étape${stops.length > 1 ? 's' : ''} · ${Math.round(total)} km en tout (à vol d’oiseau)</p>` : T.empty('Aucun lieu placé sur la carte pour cette personne'); };
+            list.innerHTML = stops.length ? stops.map((s, k) => `<li class="h-tr-panel h-tr-print" data-wk-i="${k}"><div class="h-tr-row" style="justify-content:space-between"><b>📍 ${T.esc(s.name)}</b><small class="h-tr-muted">${k ? i18n('{km} km depuis l’étape d’avant', {km: String(s.km < 10 ? s.km.toFixed(1) : Math.round(s.km))}) : i18n('Départ')}</small></div><p>${T.esc(s.text)}</p>
+                <p class="h-tr-noprint"><button type="button" class="h-tr-link" data-wk-say="${k}">${i18n('🔊 Écouter')}</button> · <a href="https://www.openstreetmap.org/directions?route=%3B${s.lat}%2C${s.lng}" target="_blank" rel="noopener">${i18n('🧭 Itinéraire')}</a> · <a href="https://www.openstreetmap.org/?mlat=${s.lat}&mlon=${s.lng}#map=15/${s.lat}/${s.lng}" target="_blank" rel="noopener">${i18n('Carte')}</a></p></li>`).join('') + `<p class="h-tr-muted">${T.pl(stops.length, 'étape')} · ${i18n('{km} km en tout (à vol d’oiseau)', {km: String(Math.round(total))})}</p>` : T.empty(i18n('Aucun lieu placé sur la carte pour cette personne')); };
         const sayStop = async k => { const s = stops[k]; if (!s) return; list.querySelectorAll('.is-playing').forEach(x => x.classList.remove('is-playing')); list.querySelector(`[data-wk-i="${k}"]`)?.classList.add('is-playing'); await T.say(`${s.name}. ${s.text}`); list.querySelector(`[data-wk-i="${k}"]`)?.classList.remove('is-playing'); };
         form.addEventListener('change', draw);
-        T.actions(host, {print: {attrs: 'data-wk-print', title: 'Le guide de la promenade, étape par étape', run: () => T.printNode('La promenade guidée', list, '.h-tr-walk li{margin:0 0 5mm}')}});
+        T.actions(host, {print: {attrs: 'data-wk-print', title: i18n('Le guide de la promenade, étape par étape'), run: () => T.printNode(i18n('La promenade guidée'), list, '.h-tr-walk li{margin:0 0 5mm}')}});
         host.addEventListener('click', async e => {
             const s = e.target.closest('[data-wk-say]'); if (s) { T.hush(); sayStop(Number(s.dataset.wkSay)); return; }
             if (e.target.closest('[data-wk-stop]')) { T.hush(); if (watch != null) { navigator.geolocation.clearWatch(watch); watch = null; gpsSt.textContent = ''; } return; }
             if (e.target.closest('[data-wk-all]')) { T.hush(); const my = Symbol(); host._walk = my; for (let k = 0; k < stops.length && host._walk === my && host.isConnected; k++) await sayStop(k); return; }
             if (e.target.closest('[data-wk-gps]')) {
-                if (!navigator.geolocation) return T.toast('La position n’est pas disponible sur cet appareil.', 'error');
+                if (!navigator.geolocation) return T.toast(i18n('La position n’est pas disponible sur cet appareil.'), 'error');
                 if (watch != null) navigator.geolocation.clearWatch(watch);
-                gpsSt.textContent = '📍 Je cherche ta position… (l’histoire de chaque étape se lira toute seule à moins de 300 m)';
+                gpsSt.textContent = i18n('📍 Je cherche ta position… (l’histoire de chaque étape se lira toute seule à moins de 300 m)');
                 watch = navigator.geolocation.watchPosition(pos => { if (!host.isConnected) { navigator.geolocation.clearWatch(watch); watch = null; T.hush(); return; } // page quittée : on ne suit plus
                     const me = {lat: pos.coords.latitude, lng: pos.coords.longitude}; let best = -1, bd = 1e9; stops.forEach((s, k) => { const d = km(me, s); if (d < bd) { bd = d; best = k; } });
-                    gpsSt.textContent = best >= 0 ? `📍 Étape la plus proche : ${stops[best].name}, à ${bd < 1 ? Math.round(bd * 1000) + ' m' : bd.toFixed(1) + ' km'}` : '';
-                    if (best >= 0 && bd < 0.3 && !done.has(best)) { done.add(best); T.hush(); sayStop(best); } }, err => { gpsSt.textContent = 'Position refusée ou indisponible : ' + err.message; }, {enableHighAccuracy: true, maximumAge: 10000});
+                    gpsSt.textContent = best >= 0 ? i18n('📍 Étape la plus proche : {place}, à {dist}', {place: stops[best].name, dist: bd < 1 ? Math.round(bd * 1000) + ' m' : bd.toFixed(1) + ' km'}) : '';
+                    if (best >= 0 && bd < 0.3 && !done.has(best)) { done.add(best); T.hush(); sayStop(best); } }, err => { gpsSt.textContent = i18n('Position refusée ou indisponible : {err}', {err: err.message}); }, {enableHighAccuracy: true, maximumAge: 10000});
             }
         });
         draw();

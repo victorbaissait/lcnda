@@ -15,6 +15,11 @@
     const fold = text => String(text ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[’']/g, "'");
     const num = (n, d = 2) => Number(n).toLocaleString('fr-FR', {maximumFractionDigits: d});
     const plural = (n, one, many) => `${num(n, 0)} ${Math.abs(n) > 1 ? (many || one + 's') : one}`;
+    // 🌐 textes traduits (docs/I18N.md) ; les noms des fêtes, des heures canoniques, des mesures et des monnaies de compte (livres, sols, deniers) restent en français (mots des actes)
+    const I18 = () => (typeof window !== 'undefined' ? window.LCNDA_I18N : null);
+    const i18n = (s, v) => { const I = I18(); return I ? I.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m)) : s); };
+    const isFr = () => !I18() || I18().lang === 'fr';
+    const tp = (n, one, many) => { const I = I18(); return I && !isFr() ? I.plural(n, one, many) : plural(n, one, many); };
     const store = {get(k, d) { try { return localStorage.getItem('lcnda-calmore-' + k) ?? d; } catch (_) { return d; } }, set(k, v) { try { localStorage.setItem('lcnda-calmore-' + k, v); } catch (_) {} }};
 
     /* ═════════════ Dates : jours juliens, calendriers julien et grégorien ═════════════ */
@@ -30,6 +35,13 @@
     const pad = n => String(n).padStart(2, '0');
     const dmy = o => `${pad(o.d)}/${pad(o.m)}/${o.y}`;
     const longDate = o => `${o.d === 1 ? '1er' : o.d} ${MONTHS[o.m - 1]} ${o.y}`;
+    // à l'écran : la date dans la langue choisie (en français, comme avant)
+    const utc = (y, m, d) => { const x = new Date(Date.UTC(2000, m - 1, d)); x.setUTCFullYear(y); return x; };
+    const intl = (o, opts) => { try { return new Intl.DateTimeFormat(I18().locale(), {timeZone: 'UTC', ...opts}).format(utc(o.y, o.m || 1, o.d || 1)); } catch (_) { return ''; } };
+    const showDate = o => isFr() ? longDate(o) : intl(o, {day: 'numeric', month: 'long', year: 'numeric'}) || longDate(o);
+    const showDayMonth = o => isFr() ? longDate(o).replace(/ \d+$/, '') : intl(o, {day: 'numeric', month: 'long'}) || longDate(o);
+    const monthName = m => isFr() ? MONTHS[m - 1] : intl({y: 2001, m, d: 1}, {month: 'long'}) || MONTHS[m - 1];
+    const showWeekday = w => { const i = WEEKDAYS.indexOf(w); return isFr() || i < 0 ? w : intl(fromG(jdnG(2001, 1, 1) + i), {weekday: 'long'}) || w; }; // 1er janvier 2001 = lundi
     /** Passage au grégorien : France (9 → 20 décembre 1582), Rome (4 → 15 octobre 1582), ou toujours l'un des deux. */
     const SWITCH = {france: jdnG(1582, 12, 20), rome: jdnG(1582, 10, 15)};
     /** Calendrier en usage pour une date écrite (y, m, d) : 'julian' ou 'gregorian'. */
@@ -70,7 +82,7 @@
     }
     /** Début et fin (jours juliens grégoriens) d'une date peut-être incomplète. */
     const span = p => p.d ? [jdnG(p.y, p.m, p.d), jdnG(p.y, p.m, p.d)] : p.m ? [jdnG(p.y, p.m, 1), jdnG(p.y, p.m, monthDays(p.y, p.m))] : [jdnG(p.y, 1, 1), jdnG(p.y, 12, 31)];
-    const partialText = p => p.d ? dmy(p) : p.m ? `${MONTHS[p.m - 1]} ${p.y}` : String(p.y);
+    const partialText = p => p.d ? dmy(p) : p.m ? `${monthName(p.m)} ${p.y}` : String(p.y);
     /** Années, mois, jours entre deux dates complètes (a ≤ b). */
     function ymdDiff(a, b) {
         // nombre de mois entiers (le 31 janvier + 1 mois = le 28 ou 29 février), puis les jours qui restent
@@ -81,7 +93,7 @@
         const x = plusMonths(k);
         return {years: Math.floor(k / 12), months: k % 12, days: jb - jdnG(x.y, x.m, x.d)};
     }
-    const ymdText = r => [r.years ? plural(r.years, 'an') : '', r.months ? `${r.months} mois` : '', r.days || (!r.years && !r.months) ? plural(r.days, 'jour') : ''].filter(Boolean).join(', ');
+    const ymdText = r => [r.years ? tp(r.years, 'an') : '', r.months ? (isFr() ? `${r.months} mois` : tp(r.months, 'mois')) : '', r.days || (!r.years && !r.months) ? tp(r.days, 'jour') : ''].filter(Boolean).join(', ');
     /**
      * Écart entre deux dates, même incomplètes (« mars 1790 », « 1802 ») : {exact, years, months, days, totalDays, weeks}
      * ou, si une date est incomplète, {exact: false, min, max} (chacun avec years, months, days, totalDays).
@@ -321,15 +333,16 @@
         generationsBetween, generationsBack, ancestors, sunTimes, canonicalTime, canonicalFromText, clock, convertMeasure, REGIONS, COINS, coinValue, lsd};
 
     /* ═════════════ Cadres ═════════════ */
-    const panel = (id, title, help, body, note = '') => `<section class="maintenance-panel h-cm-panel" id="${id}"><h3>${title}</h3><p>${help}</p>${body}${note ? `<p class="muted h-cm-note">${note}</p>` : ''}</section>`;
+    const panel = (id, title, help, body, note = '') => `<section class="maintenance-panel h-cm-panel" id="${id}"><h3>${i18n(title)}</h3><p>${i18n(help)}</p>${body}${note ? `<p class="muted h-cm-note">${i18n(note)}</p>` : ''}</section>`;
+    const fr = x => `<span data-i18n-off>${esc(x)}</span>`; // un mot des actes, gardé en français
     const out = (id, html = '') => `<div class="unit-result h-cm-out" id="${id}" aria-live="polite">${html}</div>`;
     const approx = a => a ? '≈ ' : '';
 
     function measuresPanel() {
         const region = regionById(store.get('region', 'paris')).id;
         return panel('h-cm-measures', 'Mesures anciennes par région', 'Les mesures changeaient d’une province, parfois d’un village à l’autre. Choisis la région, la valeur et l’unité : l’app donne l’équivalent en mètres, ares ou litres, et dans les autres mesures du lieu.',
-            `<form class="form-grid" style="padding:0" id="h-cm-measure-form"><label class="span-2">Région / ville<select name="region">${REGIONS.map(r => `<option value="${r.id}"${r.id === region ? ' selected' : ''}>${esc(r.label)}</option>`).join('')}</select></label>
-            <label>Valeur<input name="value" type="number" step="any" min="0" value="1"></label><label>Unité<select name="unit">${measureOptions(region)}</select></label></form>${out('h-cm-measure-out')}`,
+            `<form class="form-grid" style="padding:0" id="h-cm-measure-form"><label class="span-2">${i18n('Région / ville')}<select name="region">${REGIONS.map(r => `<option value="${r.id}"${r.id === region ? ' selected' : ''}>${esc(i18n(r.label))}</option>`).join('')}</select></label>
+            <label>${i18n('Valeur')}<input name="value" type="number" step="any" min="0" value="1"></label><label>${i18n('Unité')}<select name="unit">${measureOptions(region)}</select></label></form>${out('h-cm-measure-out')}`,
             '≈ : valeur approchée ou variable selon la ville. Sources : loi du 19 frimaire an VIII (pied du roi, toise) et « Tables de comparaison entre les mesures anciennes et celles qui les remplacent » publiées par département (an X – 1812). Pour une commune précise, cherche la table de ton département aux archives départementales.');
     }
     function measureOptions(region) {
@@ -337,53 +350,55 @@
         return Object.entries(KINDS).map(([k, label]) => {
             const list = r.units.filter(u => u[2] === k);
             if (!list.length) return '';
-            return `<optgroup label="${esc(label)}">${list.map(u => `<option value="${u[0]}">${esc(u[1])}${u[4] ? ' ≈' : ''}</option>`).join('')}${METRIC[k].map(([id, name]) => `<option value="metric_${k}_${id}">${esc(name)}</option>`).join('')}</optgroup>`;
+            return `<optgroup label="${esc(i18n(label))}">${list.map(u => `<option value="${u[0]}" data-i18n-off>${esc(u[1])}${u[4] ? ' ≈' : ''}</option>`).join('')}${METRIC[k].map(([id, name]) => `<option value="metric_${k}_${id}">${esc(i18n(name))}</option>`).join('')}</optgroup>`;
         }).join('');
     }
     function measureHtml(r) {
-        if (!r) return 'Entre une valeur.';
+        if (!r) return i18n('Entre une valeur.');
         // assez de décimales pour garder 3 chiffres significatifs (1 ligne = 0,000 001 13 lieue, pas « 0 »)
         const digits = x => { const a = Math.abs(x); return !a ? 0 : a >= 100 ? 1 : a >= 1 ? 3 : Math.min(12, 2 - Math.floor(Math.log10(a)) + 1); };
-        return `<div class="h-cm-result"><strong>${num(r.value, 4)} × ${esc(r.unit.label)} = ${approx(r.approx)}${num(r.metric[0], digits(r.metric[0]))} ${r.metric[1]}</strong>${r.unit.note ? `<small>${esc(r.unit.note)}</small>` : ''}${r.others.length ? `<ul class="h-cm-list">${r.others.map(o => `<li>${esc(o.label)} : <b>${approx(o.approx)}${num(o.value, digits(o.value))}</b></li>`).join('')}</ul>` : ''}</div>`;
+        const uname = u => u.metric ? esc(i18n(u.label)) : fr(u.label);
+        return `<div class="h-cm-result"><strong>${num(r.value, 4)} × ${uname(r.unit)} = ${approx(r.approx)}${num(r.metric[0], digits(r.metric[0]))} ${r.metric[1]}</strong>${r.unit.note ? `<small>${esc(i18n(r.unit.note))}</small>` : ''}${r.others.length ? `<ul class="h-cm-list">${r.others.map(o => `<li>${fr(o.label)} : <b>${approx(o.approx)}${num(o.value, digits(o.value))}</b></li>`).join('')}</ul>` : ''}</div>`;
     }
 
     function agePanel() {
         return panel('h-cm-age', 'Âge ↔ date de naissance', 'Les actes donnent souvent l’âge plutôt que la date de naissance. « 32 ans au décès le 12/03/1790 » → né entre deux dates. Ou l’inverse : l’âge exact à une date.',
-            `<form class="form-grid" style="padding:0" id="h-cm-age-form"><label>Âge<input data-unit="ans" name="age" type="number" min="0" max="130" step="1" placeholder="32"></label>
-            <label>Précision<select name="margin"><option value="0">exact (ans révolus)</option><option value="2">« environ » (± 2 ans)</option><option value="5">arrondi (± 5 ans)</option><option value="10">très vague (± 10 ans)</option></select></label>
-            <label class="span-2">À la date de<input name="date" placeholder="12/03/1790, mars 1790 ou 1790" autocomplete="off"></label></form>${out('h-cm-age-out', 'Entre un âge et la date de l’acte.')}
-            <form class="form-grid h-cm-sub" style="padding:0" id="h-cm-ageat-form"><label>Date de naissance<input name="birth" placeholder="13/03/1757" autocomplete="off"></label><label>Âge le<input name="date" placeholder="12/03/1790" autocomplete="off"></label></form>${out('h-cm-ageat-out', 'Entre une date de naissance et une autre date.')}`,
+            `<form class="form-grid" style="padding:0" id="h-cm-age-form"><label>${i18n('Âge')}<input data-unit="${esc(i18n('ans'))}" name="age" type="number" min="0" max="130" step="1" placeholder="32"></label>
+            <label>${i18n('Précision')}<select name="margin"><option value="0">${i18n('exact (ans révolus)')}</option><option value="2">${i18n('« environ » (± 2 ans)')}</option><option value="5">${i18n('arrondi (± 5 ans)')}</option><option value="10">${i18n('très vague (± 10 ans)')}</option></select></label>
+            <label class="span-2">${i18n('À la date de')}<input name="date" placeholder="${esc(i18n('12/03/1790, mars 1790 ou 1790'))}" autocomplete="off"></label></form>${out('h-cm-age-out', i18n('Entre un âge et la date de l’acte.'))}
+            <form class="form-grid h-cm-sub" style="padding:0" id="h-cm-ageat-form"><label>${i18n('Date de naissance')}<input name="birth" placeholder="13/03/1757" autocomplete="off"></label><label>${i18n('Âge le')}<input name="date" placeholder="12/03/1790" autocomplete="off"></label></form>${out('h-cm-ageat-out', i18n('Entre une date de naissance et une autre date.'))}`,
             'Dates du calendrier grégorien. Les âges des actes anciens sont souvent approximatifs : « environ 40 ans » peut cacher 35 ou 45 ans.');
     }
     function ageHtml(f) {
         const age = f.age.value.trim(), date = f.date.value.trim();
-        if (!age || !date) return 'Entre un âge et la date de l’acte.';
+        if (!age || !date) return i18n('Entre un âge et la date de l’acte.');
         const r = birthRange(age, date, Number(f.margin.value));
-        if (!r) return 'Date non reconnue : écris par exemple 12/03/1790, 12 mars 1790, mars 1790 ou 1790.';
-        return `<div class="h-cm-result"><strong>Naissance entre le ${dmy(r.from)} et le ${dmy(r.to)}</strong><span>soit vers ${r.from.y === r.to.y ? r.to.y : `${r.from.y}–${r.to.y}`}${r.lo !== r.hi ? ` (entre ${plural(r.lo, 'an')} et ${plural(r.hi, 'an')} révolus)` : ''}</span></div>`;
+        if (!r) return i18n('Date non reconnue : écris par exemple 12/03/1790, 12 mars 1790, mars 1790 ou 1790.');
+        const when = r.from.y === r.to.y ? String(r.to.y) : `${r.from.y}–${r.to.y}`;
+        return `<div class="h-cm-result"><strong>${i18n('Naissance entre le {from} et le {to}', {from: dmy(r.from), to: dmy(r.to)})}</strong><span>${r.lo !== r.hi ? i18n('soit vers {when} (entre {lo} et {hi} révolus)', {when, lo: tp(r.lo, 'an'), hi: tp(r.hi, 'an')}) : i18n('soit vers {when}', {when})}</span></div>`;
     }
     function ageAtHtml(f) {
         const b = f.birth.value.trim(), d = f.date.value.trim();
-        if (!b || !d) return 'Entre une date de naissance et une autre date.';
+        if (!b || !d) return i18n('Entre une date de naissance et une autre date.');
         const r = dateDiff(b, d);
-        if (!r) return 'Date non reconnue : écris par exemple 13/03/1757.';
-        if (r.swapped) return 'La seconde date est avant la naissance.';
-        return r.exact ? `<div class="h-cm-result"><strong>${ymdText(r)}</strong><span>soit ${plural(r.totalDays, 'jour')} de vie</span></div>`
-            : `<div class="h-cm-result"><strong>Entre ${ymdText(r.min)} et ${ymdText(r.max)}</strong><small>Une des dates est incomplète.</small></div>`;
+        if (!r) return i18n('Date non reconnue : écris par exemple 13/03/1757.');
+        if (r.swapped) return i18n('La seconde date est avant la naissance.');
+        return r.exact ? `<div class="h-cm-result"><strong>${ymdText(r)}</strong><span>${i18n('soit {days} de vie', {days: tp(r.totalDays, 'jour')})}</span></div>`
+            : `<div class="h-cm-result"><strong>${i18n('Entre {min} et {max}', {min: ymdText(r.min), max: ymdText(r.max)})}</strong><small>${i18n('Une des dates est incomplète.')}</small></div>`;
     }
 
     function diffPanel() {
         return panel('h-cm-diff', 'Écart entre deux dates', 'Combien de temps entre deux actes ? Années, mois, jours, nombre total de jours et de semaines. Une date incomplète (« mars 1790 », « 1802 ») donne un écart minimum et maximum.',
-            `<form class="form-grid" style="padding:0" id="h-cm-diff-form"><label>Du<input name="a" placeholder="14/07/1789" autocomplete="off"></label><label>Au<input name="b" placeholder="9 novembre 1799" autocomplete="off"></label></form>${out('h-cm-diff-out', 'Entre deux dates.')}`);
+            `<form class="form-grid" style="padding:0" id="h-cm-diff-form"><label>${i18n('Du')}<input name="a" placeholder="14/07/1789" autocomplete="off"></label><label>${i18n('Au')}<input name="b" placeholder="${esc(i18n('9 novembre 1799'))}" autocomplete="off"></label></form>${out('h-cm-diff-out', i18n('Entre deux dates.'))}`);
     }
     function diffHtml(f) {
         const a = f.a.value.trim(), b = f.b.value.trim();
-        if (!a || !b) return 'Entre deux dates.';
+        if (!a || !b) return i18n('Entre deux dates.');
         const r = dateDiff(a, b);
-        if (!r) return 'Date non reconnue : écris par exemple 14/07/1789, 14 juillet 1789, juillet 1789 ou 1789.';
-        const order = r.swapped ? '<small>(la seconde date est la plus ancienne : écart compté à l’envers)</small>' : '';
-        if (r.exact) return `<div class="h-cm-result"><strong>${ymdText(r)}</strong><span>${plural(r.totalDays, 'jour')} · ${plural(r.weeks, 'semaine')}${r.weekDays ? ` et ${plural(r.weekDays, 'jour')}` : ''}</span>${order}</div>`;
-        return `<div class="h-cm-result"><strong>Entre ${ymdText(r.min)} et ${ymdText(r.max)}</strong><span>de ${num(r.min.totalDays, 0)} à ${plural(r.max.totalDays, 'jour')}</span><small>Du ${esc(partialText(r.from))} au ${esc(partialText(r.to))} : une date est incomplète.</small>${order}</div>`;
+        if (!r) return i18n('Date non reconnue : écris par exemple 14/07/1789, 14 juillet 1789, juillet 1789 ou 1789.');
+        const order = r.swapped ? `<small>${i18n('(la seconde date est la plus ancienne : écart compté à l’envers)')}</small>` : '';
+        if (r.exact) return `<div class="h-cm-result"><strong>${ymdText(r)}</strong><span>${tp(r.totalDays, 'jour')} · ${r.weekDays ? i18n('{weeks} et {days}', {weeks: tp(r.weeks, 'semaine'), days: tp(r.weekDays, 'jour')}) : tp(r.weeks, 'semaine')}</span>${order}</div>`;
+        return `<div class="h-cm-result"><strong>${i18n('Entre {min} et {max}', {min: ymdText(r.min), max: ymdText(r.max)})}</strong><span>${i18n('de {a} à {b}', {a: num(r.min.totalDays, 0), b: tp(r.max.totalDays, 'jour')})}</span><small>${i18n('Du {a} au {b} : une date est incomplète.', {a: esc(partialText(r.from)), b: esc(partialText(r.to))})}</small>${order}</div>`;
     }
 
     const CAL_MODES = [['france', 'France (julien jusqu’au 9 déc. 1582)'], ['rome', 'Rome (julien jusqu’au 4 oct. 1582)'], ['gregorian', 'Toujours grégorien'], ['julian', 'Toujours julien']];
@@ -398,55 +413,55 @@
     };
     function weekdayPanel() {
         return panel('h-cm-weekday', 'Jour de la semaine', 'Quel jour tombait une date ? Avant 1582, le calendrier julien s’applique : choisis l’usage.',
-            `<form class="form-grid" style="padding:0" id="h-cm-weekday-form"><label>Date<input name="date" placeholder="14/07/1789" autocomplete="off"></label>
-            <label>Calendrier<select name="mode">${CAL_MODES.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label>
-            <label class="checkbox-line span-2"><input type="checkbox" name="hints" checked> Indices pour la recherche (baptêmes, mariages…)</label></form>${out('h-cm-weekday-out', 'Entre une date complète.')}`);
+            `<form class="form-grid" style="padding:0" id="h-cm-weekday-form"><label>${i18n('Date')}<input name="date" placeholder="14/07/1789" autocomplete="off"></label>
+            <label>${i18n('Calendrier')}<select name="mode">${CAL_MODES.map(([k, l]) => `<option value="${k}">${esc(i18n(l))}</option>`).join('')}</select></label>
+            <label class="checkbox-line span-2"><input type="checkbox" name="hints" checked> ${i18n('Indices pour la recherche (baptêmes, mariages…)')}</label></form>${out('h-cm-weekday-out', i18n('Entre une date complète.'))}`);
     }
     function weekdayHtml(f) {
         const p = parseDate(f.date.value);
-        if (!f.date.value.trim()) return 'Entre une date complète.';
-        if (!p?.d) return 'Il faut une date complète : jour, mois et année (ex. 14/07/1789).';
-        if (f.mode.value === 'france' && p.y === 1582 && p.m === 12 && p.d > 9 && p.d < 20) return 'Ce jour n’a pas existé en France : le 9 décembre 1582 a été suivi du 20 décembre.';
-        if (f.mode.value === 'rome' && p.y === 1582 && p.m === 10 && p.d > 4 && p.d < 15) return 'Ce jour n’a pas existé à Rome : le 4 octobre 1582 a été suivi du 15 octobre.';
+        if (!f.date.value.trim()) return i18n('Entre une date complète.');
+        if (!p?.d) return i18n('Il faut une date complète : jour, mois et année (ex. 14/07/1789).');
+        if (f.mode.value === 'france' && p.y === 1582 && p.m === 12 && p.d > 9 && p.d < 20) return i18n('Ce jour n’a pas existé en France : le 9 décembre 1582 a été suivi du 20 décembre.');
+        if (f.mode.value === 'rome' && p.y === 1582 && p.m === 10 && p.d > 4 && p.d < 15) return i18n('Ce jour n’a pas existé à Rome : le 4 octobre 1582 a été suivi du 15 octobre.');
         const r = weekday(p.y, p.m, p.d, f.mode.value);
-        const other = r.calendar === 'julian' ? `soit le ${longDate(r.other)} dans le calendrier grégorien` : `soit le ${longDate(r.other)} dans le calendrier julien`;
-        return `<div class="h-cm-result"><strong>C’était un ${r.weekday}</strong><span>${longDate(p)} (${r.calendar === 'julian' ? 'julien' : 'grégorien'}), ${other}</span>${f.hints.checked ? `<small>${esc(WEEKDAY_HINTS[r.weekday])}</small>` : ''}</div>`;
+        const other = r.calendar === 'julian' ? i18n('soit le {date} dans le calendrier grégorien', {date: showDate(r.other)}) : i18n('soit le {date} dans le calendrier julien', {date: showDate(r.other)});
+        return `<div class="h-cm-result"><strong>${i18n('C’était un {day}', {day: showWeekday(r.weekday)})}</strong><span>${showDate(p)} (${r.calendar === 'julian' ? i18n('julien') : i18n('grégorien')}), ${other}</span>${f.hints.checked ? `<small>${esc(i18n(WEEKDAY_HINTS[r.weekday]))}</small>` : ''}</div>`;
     }
 
     function feastsPanel() {
         const now = new Date();
         return panel('h-cm-feasts', 'Saint du jour et fêtes mobiles', 'Les fêtes mobiles dépendent de Pâques. Le saint du jour aide à comprendre un prénom : on donnait souvent celui du saint de la naissance ou du baptême.',
-            `<form class="form-grid" style="padding:0" id="h-cm-feasts-form"><label>Année<input name="year" type="number" min="400" max="2400" value="1754"></label>
-            <label>Comput<select name="cal"><option value="auto">auto (julien avant 1583)</option><option value="gregorian">grégorien</option><option value="julian">julien</option></select></label></form>
+            `<form class="form-grid" style="padding:0" id="h-cm-feasts-form"><label>${i18n('Année')}<input name="year" type="number" min="400" max="2400" value="1754"></label>
+            <label>${i18n('Comput')}<select name="cal"><option value="auto">${i18n('auto (julien avant 1583)')}</option><option value="gregorian">${i18n('grégorien')}</option><option value="julian">${i18n('julien')}</option></select></label></form>
             <div id="h-cm-feasts-out" class="h-cm-table"></div>
-            <form class="form-grid h-cm-sub" style="padding:0" id="h-cm-saint-form"><label>Jour<input name="day" type="number" min="1" max="31" value="${now.getDate()}"></label><label>Mois<select name="month">${MONTHS.map((m, i) => `<option value="${i + 1}"${i === now.getMonth() ? ' selected' : ''}>${m}</option>`).join('')}</select></label></form>${out('h-cm-saint-out', '…')}`,
+            <form class="form-grid h-cm-sub" style="padding:0" id="h-cm-saint-form"><label>${i18n('Jour')}<input name="day" type="number" min="1" max="31" value="${now.getDate()}"></label><label>${i18n('Mois', {ctx: 'date'})}<select name="month">${MONTHS.map((m, i) => `<option value="${i + 1}"${i === now.getMonth() ? ' selected' : ''}>${esc(monthName(i + 1))}</option>`).join('')}</select></label></form>${out('h-cm-saint-out', '…')}`,
             'Saints : calendrier usuel des almanachs français (celui du widget « Prénom et saint du jour ») ; il a varié selon les époques et les diocèses.');
     }
     function feastsHtml(f) {
         const y = Number(f.year.value) || 0;
-        if (y < 400 || y > 2400) return '<p class="muted">Entre une année entre 400 et 2400.</p>';
+        if (y < 400 || y > 2400) return `<p class="muted">${i18n('Entre une année entre 400 et 2400.')}</p>`;
         const julian = f.cal.value === 'julian' || (f.cal.value === 'auto' && y < 1583);
-        return `<table class="data-table"><tbody>${movableFeasts(y, julian).map(x => `<tr${x.offset === 0 ? ' class="is-easter"' : ''}><td>${esc(x.name)}${x.note ? ` <small class="muted">${esc(x.note)}</small>` : ''}</td><td>${esc(x.weekday)} ${esc(longDate(x.date).replace(/ \d+$/, ''))}</td></tr>`).join('')}</tbody></table>${julian ? '<p class="muted">Dates dans le calendrier julien.</p>' : ''}`;
+        return `<table class="data-table"><tbody>${movableFeasts(y, julian).map(x => `<tr${x.offset === 0 ? ' class="is-easter"' : ''}><td>${fr(x.name)}${x.note ? ` <small class="muted">${esc(i18n(x.note))}</small>` : ''}</td><td>${esc(showWeekday(x.weekday))} ${esc(showDayMonth(x.date))}</td></tr>`).join('')}</tbody></table>${julian ? `<p class="muted">${i18n('Dates dans le calendrier julien.')}</p>` : ''}`;
     }
     let saintSeq = 0;
     async function drawSaint(f) {
         const day = Number(f.day.value), month = Number(f.month.value), target = document.getElementById('h-cm-saint-out');
         if (!target) return;
-        if (!day || day > monthDays(2000, month)) { target.textContent = 'Ce jour n’existe pas.'; return; }
+        if (!day || day > monthDays(2000, month)) { target.textContent = i18n('Ce jour n’existe pas.'); return; }
         const seq = ++saintSeq;
         try {
             const r = await A().api('saint_of_day', {month, day});
             if (seq !== saintSeq) return;
             const people = (r.people || []).slice(0, 6);
-            target.innerHTML = `<div class="h-cm-result"><strong>${esc(r.day_label)} : ${esc((r.saints || []).join(', ') || '—')}</strong>${people.length ? `<span>Dans ta base, nés ou baptisés ce jour : ${people.map(x => `<button type="button" class="table-link" data-h-person="${Number(x.person.id)}">${esc([x.person.first_name, x.person.last_name].filter(Boolean).join(' '))}</button>${x.named_after ? ' ✶' : ''}`).join(', ')}${r.people_total > people.length ? ` … (${r.people_total})` : ''}</span>${r.named_after ? '<small>✶ porte le prénom du saint du jour</small>' : ''}` : ''}</div>`;
-        } catch (_) { if (seq === saintSeq) target.textContent = 'Saint du jour indisponible.'; }
+            target.innerHTML = `<div class="h-cm-result"><strong>${esc(r.day_label)} : ${esc((r.saints || []).join(', ') || '—')}</strong>${people.length ? `<span>${i18n('Dans ta base, nés ou baptisés ce jour :')} ${people.map(x => `<button type="button" class="table-link" data-h-person="${Number(x.person.id)}">${esc([x.person.first_name, x.person.last_name].filter(Boolean).join(' '))}</button>${x.named_after ? ' ✶' : ''}`).join(', ')}${r.people_total > people.length ? ` … (${r.people_total})` : ''}</span>${r.named_after ? `<small>✶ ${i18n('porte le prénom du saint du jour')}</small>` : ''}` : ''}</div>`;
+        } catch (_) { if (seq === saintSeq) target.textContent = i18n('Saint du jour indisponible.'); }
     }
 
     function hoursPanel() {
         const month = Number(store.get('hours-month', '3'));
         return panel('h-cm-hours', 'Heures canoniques', 'Les actes datent parfois à « l’heure de vêpres » ou « à l’issue de la grand-messe ». Les heures de l’Église suivaient le soleil : le jour était coupé en 12 heures, plus longues en été qu’en hiver.',
-            `<form class="form-grid" style="padding:0" id="h-cm-hours-form"><label class="span-2">Mention de l’acte<input name="text" placeholder="à l’heure de vêpres" autocomplete="off"></label>
-            <label class="span-2">Mois<select name="month">${MONTHS.map((m, i) => `<option value="${i + 1}"${i + 1 === month ? ' selected' : ''}>${m}${i === 2 || i === 8 ? ' (équinoxe)' : i === 5 ? ' (jours les plus longs)' : i === 11 ? ' (jours les plus courts)' : ''}</option>`).join('')}</select></label></form>
+            `<form class="form-grid" style="padding:0" id="h-cm-hours-form"><label class="span-2">${i18n('Mention de l’acte')}<input name="text" placeholder="à l’heure de vêpres" autocomplete="off" data-i18n-off></label>
+            <label class="span-2">${i18n('Mois', {ctx: 'date'})}<select name="month">${MONTHS.map((m, i) => `<option value="${i + 1}"${i + 1 === month ? ' selected' : ''}>${esc(monthName(i + 1))}${i === 2 || i === 8 ? ' ' + i18n('(équinoxe)') : i === 5 ? ' ' + i18n('(jours les plus longs)') : i === 11 ? ' ' + i18n('(jours les plus courts)') : ''}</option>`).join('')}</select></label></form>
             ${out('h-cm-hours-out')}<div id="h-cm-hours-table" class="h-cm-table"></div>`,
             'Heure solaire (midi = soleil au plus haut), calculée pour le centre de la France ; l’heure légale n’existe qu’à partir de 1891. Les horaires réels variaient selon les paroisses et les couvents.');
     }
@@ -454,52 +469,52 @@
         const month = Number(f.month.value) || 3, text = f.text.value.trim();
         const table = `<table class="data-table"><tbody>${HOURS.map(([k, label, note]) => {
             const t = canonicalTime(k, month, 21), w = canonicalTime(k, 12, 21), s = canonicalTime(k, 6, 21);
-            const time = k === 'angelus' ? `${clock(t, 0.5)}, 12 h, ${clock(canonicalTime('vepres', month, 21), 0.5)}` : `vers ${clock(t, 0.5)}`;
-            return `<tr><td><strong>${esc(label)}</strong> <small class="muted">${esc(note)}</small></td><td>${time}${k === 'sexte' || k === 'angelus' ? '' : ` <small class="muted">(${clock(w, 0.5)} en hiver, ${clock(s, 0.5)} en été)</small>`}</td></tr>`;
+            const time = k === 'angelus' ? `${clock(t, 0.5)}, 12 h, ${clock(canonicalTime('vepres', month, 21), 0.5)}` : i18n('vers {time}', {time: clock(t, 0.5)});
+            return `<tr><td><strong data-i18n-off>${esc(label)}</strong> <small class="muted">${esc(i18n(note))}</small></td><td>${time}${k === 'sexte' || k === 'angelus' ? '' : ` <small class="muted">(${i18n('{winter} en hiver, {summer} en été', {winter: clock(w, 0.5), summer: clock(s, 0.5)})})</small>`}</td></tr>`;
         }).join('')}</tbody></table>`;
-        let result = 'Écris la mention (« à l’heure de vêpres », « après complies »…) ou lis le tableau.';
+        let result = i18n('Écris la mention (« à l’heure de vêpres », « après complies »…) ou lis le tableau.');
         if (text) {
             const r = canonicalFromText(text, month);
-            result = r ? `<div class="h-cm-result"><strong>${esc(r.label)} en ${MONTHS[r.month - 1]} : ${r.text}</strong><span>entre ${clock(canonicalTime(r.key, 12, 21), 0.5)} en décembre et ${clock(canonicalTime(r.key, 6, 21), 0.5)} en juin</span></div>`
-                : 'Heure non reconnue : matines, laudes, prime, tierce, sexte, none, vêpres, complies ou angélus.';
+            result = r ? `<div class="h-cm-result"><strong>${i18n('{hour} en {month} : {time}', {hour: fr(r.label), month: esc(monthName(r.month)), time: i18n('vers {time}', {time: clock(r.time, 0.5)})})}</strong><span>${i18n('entre {dec} en décembre et {jun} en juin', {dec: clock(canonicalTime(r.key, 12, 21), 0.5), jun: clock(canonicalTime(r.key, 6, 21), 0.5)})}</span></div>`
+                : i18n('Heure non reconnue : matines, laudes, prime, tierce, sexte, none, vêpres, complies ou angélus.');
         }
         return [result, table];
     }
 
     function coinsPanel() {
         return panel('h-cm-coins', 'Monnaies étrangères anciennes', 'Dans les contrats et inventaires, on trouve des pistoles, ducats, florins ou piastres. Leur valeur en livres tournois, monnaie de compte du royaume, selon l’époque.',
-            `<form class="form-grid" style="padding:0" id="h-cm-coins-form"><label>Nombre<input name="qty" type="number" min="0" step="any" value="1"></label>
-            <label>Époque<select name="period"><option value="17">XVIIe siècle (1640-1700)</option><option value="18" selected>XVIIIe siècle (1726-1789)</option></select></label>
-            <label class="span-2">Monnaie<select name="coin">${COINS.map(c => `<option value="${c[0]}">${esc(c[1])}</option>`).join('')}</select></label></form>${out('h-cm-coins-out')}
-            <details class="h-cm-details"><summary>Toutes les monnaies à cette époque</summary><div id="h-cm-coins-table" class="h-cm-table"></div></details>`,
+            `<form class="form-grid" style="padding:0" id="h-cm-coins-form"><label>${i18n('Nombre')}<input name="qty" type="number" min="0" step="any" value="1"></label>
+            <label>${i18n('Époque')}<select name="period"><option value="17">${i18n('XVIIe siècle (1640-1700)')}</option><option value="18" selected>${i18n('XVIIIe siècle (1726-1789)')}</option></select></label>
+            <label class="span-2">${i18n('Monnaie')}<select name="coin">${COINS.map(c => `<option value="${c[0]}">${esc(i18n(c[1]))}</option>`).join('')}</select></label></form>${out('h-cm-coins-out')}
+            <details class="h-cm-details"><summary>${i18n('Toutes les monnaies à cette époque')}</summary><div id="h-cm-coins-table" class="h-cm-table"></div></details>`,
             'Valeurs approchées (≈), d’après les ordonnances monétaires de Louis XIII à Louis XVI, le poids d’or ou d’argent fin des pièces et le cours du change à Paris (Savary, « Dictionnaire universel de commerce »). Les cours bougeaient souvent, surtout de 1689 à 1726 : c’est un ordre de grandeur.');
     }
     function coinsHtml(f) {
         const r = coinValue(f.coin.value, f.period.value, Number(f.qty.value) || 0);
-        const head = r ? `<div class="h-cm-result"><strong>≈ ${esc(r.text)} tournois</strong>${Number.isInteger(r.livres) ? '' : `<span>soit ≈ ${num(r.livres, 2)} livres</span>`}${r.note ? `<small>${esc(r.note)}</small>` : ''}</div>` : 'Cette monnaie n’avait pas cours en France à cette époque.';
-        const table = `<table class="data-table"><tbody>${COINS.map(c => { const v = coinValue(c[0], f.period.value); return `<tr><td>${esc(c[1])}</td><td>${v ? `≈ ${esc(v.text)}` : '—'}</td></tr>`; }).join('')}</tbody></table>`;
+        const head = r ? `<div class="h-cm-result"><strong>≈ <span data-i18n-off>${esc(r.text)} tournois</span></strong>${Number.isInteger(r.livres) ? '' : `<span>${i18n('soit ≈ {n} livres', {n: num(r.livres, 2)})}</span>`}${r.note ? `<small>${esc(i18n(r.note))}</small>` : ''}</div>` : i18n('Cette monnaie n’avait pas cours en France à cette époque.');
+        const table = `<table class="data-table"><tbody>${COINS.map(c => { const v = coinValue(c[0], f.period.value); return `<tr><td>${esc(i18n(c[1]))}</td><td>${v ? `≈ ${fr(v.text)}` : '—'}</td></tr>`; }).join('')}</tbody></table>`;
         return [head, table];
     }
 
     function generationsPanel() {
         return panel('h-cm-gen', 'Calculateur de générations', 'Combien de générations entre deux années ? En moyenne 25 à 33 ans par génération : environ 30 ans en lignée masculine, 27 ans en lignée féminine.',
-            `<form class="form-grid" style="padding:0" id="h-cm-gen-form"><label>Année (ta naissance)<input name="y1" type="number" placeholder="1980"></label><label>Année (l’ancêtre)<input name="y2" type="number" placeholder="1700"></label></form>${out('h-cm-gen-out', 'Entre deux années.')}
-            <form class="form-grid h-cm-sub" style="padding:0" id="h-cm-genback-form"><label>Générations en arrière<input name="n" type="number" min="1" max="40" value="8"></label><label>Depuis l’année<input name="from" type="number" value="1980"></label></form>${out('h-cm-genback-out')}`,
+            `<form class="form-grid" style="padding:0" id="h-cm-gen-form"><label>${i18n('Année (ta naissance)')}<input name="y1" type="number" placeholder="1980"></label><label>${i18n('Année (l’ancêtre)')}<input name="y2" type="number" placeholder="1700"></label></form>${out('h-cm-gen-out', i18n('Entre deux années.'))}
+            <form class="form-grid h-cm-sub" style="padding:0" id="h-cm-genback-form"><label>${i18n('Générations en arrière')}<input name="n" type="number" min="1" max="40" value="8"></label><label>${i18n('Depuis l’année')}<input name="from" type="number" value="1980"></label></form>${out('h-cm-genback-out')}`,
             'Le nombre d’ancêtres double à chaque génération en théorie ; en pratique il y en a moins, car des cousins se sont mariés entre eux (l’implexe).');
     }
     function genHtml(f) {
         const y1 = f.y1.value.trim(), y2 = f.y2.value.trim();
-        if (!y1 || !y2) return 'Entre deux années.';
+        if (!y1 || !y2) return i18n('Entre deux années.');
         const r = generationsBetween(y1, y2);
-        if (!r || !r.years) return 'Entre deux années différentes.';
-        return `<div class="h-cm-result"><strong>Environ ${num(r.min, 0)} à ${num(r.max, 0)} générations</strong><span>${plural(r.years, 'an')} : ≈ ${num(r.male, 1)} générations en lignée masculine (30 ans), ≈ ${num(r.female, 1)} en lignée féminine (27 ans)</span></div>`;
+        if (!r || !r.years) return i18n('Entre deux années différentes.');
+        return `<div class="h-cm-result"><strong>${i18n('Environ {min} à {max} générations', {min: num(r.min, 0), max: num(r.max, 0)})}</strong><span>${i18n('{years} : ≈ {male} générations en lignée masculine (30 ans), ≈ {female} en lignée féminine (27 ans)', {years: tp(r.years, 'an'), male: num(r.male, 1), female: num(r.female, 1)})}</span></div>`;
     }
     function genBackHtml(f) {
         const n = Number(f.n.value), from = Number(f.from.value);
-        if (!n || !from || n < 1 || n > 40) return 'Entre un nombre de générations (1 à 40) et une année.';
+        if (!n || !from || n < 1 || n > 40) return i18n('Entre un nombre de générations (1 à 40) et une année.');
         const r = generationsBack(n, from), a = ancestors(n);
-        const label = n === 1 ? 'parents' : n === 2 ? 'grands-parents' : n === 3 ? 'arrière-grands-parents' : `ancêtres de la génération ${n}`;
-        return `<div class="h-cm-result"><strong>${plural(n, 'génération')} en arrière → nés vers ${Math.round(r.from)}–${Math.round(r.to)}</strong><span>≈ ${Math.round(r.male)} en lignée masculine, ≈ ${Math.round(r.female)} en lignée féminine</span><span>${num(a.at, 0)} ${label} en théorie (Sosa ${num(a.sosaFrom, 0)} à ${num(a.sosaTo, 0)}) ; ${num(a.total, 0)} ancêtres en tout jusqu’à cette génération</span></div>`;
+        const label = n === 1 ? i18n('parents') : n === 2 ? i18n('grands-parents') : n === 3 ? i18n('arrière-grands-parents') : i18n('ancêtres de la génération {n}', {n: String(n)});
+        return `<div class="h-cm-result"><strong>${i18n('{gens} en arrière → nés vers {from}–{to}', {gens: tp(n, 'génération'), from: String(Math.round(r.from)), to: String(Math.round(r.to))})}</strong><span>${i18n('≈ {male} en lignée masculine, ≈ {female} en lignée féminine', {male: String(Math.round(r.male)), female: String(Math.round(r.female))})}</span><span>${i18n('{at} {label} en théorie (Sosa {from} à {to}) ; {total} ancêtres en tout jusqu’à cette génération', {at: num(a.at, 0), label, from: num(a.sosaFrom, 0), to: num(a.sosaTo, 0), total: num(a.total, 0)})}</span></div>`;
     }
 
     ext.calendarPanels.push(() => measuresPanel() + agePanel() + diffPanel() + weekdayPanel() + feastsPanel() + hoursPanel() + coinsPanel() + generationsPanel());

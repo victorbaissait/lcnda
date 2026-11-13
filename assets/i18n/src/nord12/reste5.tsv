@@ -1,0 +1,134 @@
+fr ¦ ru ¦ uk
+# ═════ zone « reste5 » : russe (ru), ukrainien (uk) ═════
+Les traits, les ombres et les coins des fiches des personnes et des animaux : blocs, boutons, champs. Le reste de l’app ne change pas ; les couleurs et la police restent celles de l’Apparence. ¦ Линии, тени и углы карточек людей и животных: блоки, кнопки, поля. Остальное приложение не меняется; цвета и шрифт остаются из Внешнего вида. ¦ Лінії, тіні та кути карток людей і тварин: блоки, кнопки, поля. Решта застосунку не змінюється; кольори та шрифт залишаються з Вигляду.
+L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. ¦ Отступы внутри блоков и между ними, высота строк списков, поля кнопок. ¦ Відступи всередині блоків і між ними, висота рядків списків, поля кнопок.
+Les petits dessins des boutons, des barres d’outils et des rubriques. ¦ Маленькие значки кнопок, панелей инструментов и рубрик. ¦ Маленькі значки кнопок, панелей інструментів і рубрик.
+Le haut de la fiche : portrait, nom, dates, pastilles et boutons. ¦ Верх карточки: портрет, имя, даты, значки и кнопки. ¦ Верх картки: портрет, ім’я, дати, значки та кнопки.
+Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…) ; le bouton principal reste toujours plein, à la couleur principale de l’Apparence. ¦ Второстепенные кнопки (Отмена, Изменить, ＋ Добавить…); главная кнопка всегда остаётся залитой основным цветом Внешнего вида. ¦ Другорядні кнопки (Скасувати, Змінити, ＋ Додати…); головна кнопка завжди залишається заповненою основним кольором Вигляду.
+Les fenêtres qui s’ouvrent, les menus, les messages en bas à gauche, les boutons au survol. L’aperçu tourne en boucle. ¦ Открывающиеся окна, меню, сообщения слева внизу, кнопки при наведении. Предпросмотр повторяется по кругу. ¦ Вікна, що відкриваються, меню, повідомлення ліворуч унизу, кнопки під час наведення. Попередній перегляд повторюється по колу.
+Les listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. ¦ Списки (Списки, Люди, Исследования…), колонка людей и таблицы. ¦ Списки (Списки, Люди, Дослідження…), колонка людей і таблиці.
+{label} (nombre) ¦ {label} (число) ¦ {label} (число)
+Pour les listes, les tableaux et le menu de choix. Plus haut = plus facile à viser ; plus bas = plus de lignes visibles. ¦ Для списков, таблиц и меню выбора. Выше — легче попасть; ниже — больше строк на экране. ¦ Для списків, таблиць і меню вибору. Вище — легше влучити; нижче — більше рядків на екрані.
+Le haut de la fiche. Les traits, les ombres et les coins de la fiche se règlent juste en dessous ¦ Верх карточки. Линии, тени и углы карточки настраиваются чуть ниже ¦ Верх картки. Лінії, тіні та кути картки налаштовуються трохи нижче
+Les traits, les ombres et les coins des fiches (personnes et animaux) seulement : le reste de l’app ne change pas. La colonne de gauche a les siens (Menus, colonne et listes → Colonne) ¦ Только линии, тени и углы карточек (людей и животных): остальное приложение не меняется. У левой колонки свои (Меню, колонка и списки → Колонка) ¦ Лише лінії, тіні та кути карток (людей і тварин): решта застосунку не змінюється. Ліва колонка має свої (Меню, колонка та списки → Колонка)
+L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. Une colonne de gauche réglée « Compacte » (onglet Colonne) garde sa propre taille : les deux ne s’additionnent pas ¦ Отступы внутри блоков и между ними, высота строк списков, поля кнопок. Левая колонка с настройкой «Компактная» (вкладка Колонка) сохраняет свой размер: эти настройки не складываются ¦ Відступи всередині блоків і між ними, висота рядків списків, поля кнопок. Ліва колонка з налаштуванням «Компактна» (вкладка Колонка) зберігає свій розмір: ці налаштування не додаються
+Les petits dessins des boutons, des barres d’outils et des rubriques. Les traits et les ombres suivent ¦ Маленькие значки кнопок, панелей инструментов и рубрик. Линии и тени подстраиваются ¦ Маленькі значки кнопок, панелей інструментів і рубрик. Лінії та тіні підлаштовуються
+Les lignes des listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. Les traits et les ombres suivent ¦ Строки списков (Списки, Люди, Исследования…), колонка людей и таблицы. Линии и тени подстраиваются ¦ Рядки списків (Списки, Люди, Дослідження…), колонка людей і таблиці. Лінії та тіні підлаштовуються
+Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…). Les traits et les ombres suivent ¦ Второстепенные кнопки (Отмена, Изменить, ＋ Добавить…). Линии и тени подстраиваются ¦ Другорядні кнопки (Скасувати, Змінити, ＋ Додати…). Лінії та тіні підлаштовуються
+Comment les fenêtres, les menus et les messages apparaissent. L’aperçu tourne en boucle ¦ Как появляются окна, меню и сообщения. Предпросмотр повторяется по кругу ¦ Як з’являються вікна, меню та повідомлення. Попередній перегляд повторюється по колу
+{group} : {choice} ¦ {group}: {choice} ¦ {group}: {choice}
+Rien ne bouge : chaque écran garde le dessin que tu connais. ¦ Ничего не меняется: каждый экран сохраняет привычный тебе вид. ¦ Нічого не змінюється: кожен екран зберігає звичний тобі вигляд.
+7 dessins différents ; tes couleurs homme / femme et ta forme d’avatar ne s’y appliquent pas. ¦ 7 разных видов; твои цвета мужчина / женщина и форма аватара к ним не применяются. ¦ 7 різних виглядів; твої кольори чоловік / жінка та форма аватара до них не застосовуються.
+Un seul dessin partout, à la couleur du genre : homme, femme, animal se voient d’un coup d’œil. ¦ Один вид везде, в цвете пола: мужчину, женщину, животное видно с первого взгляда. ¦ Один вигляд скрізь, у кольорі статі: чоловіка, жінку, тварину видно з першого погляду.
+Léger dans les listes serrées et le menu de choix (c’est déjà le modèle validé du menu). ¦ Лёгкий в плотных списках и в меню выбора (это уже утверждённый образец меню). ¦ Легкий у щільних списках і в меню вибору (це вже затверджений зразок меню).
+Le style « archive » de ta fiche : bord noir, photo en noir et blanc, comme une photo d’identité collée. ¦ «Архивный» стиль твоей карточки: чёрная рамка, чёрно-белое фото, как вклеенная фотография на документ. ¦ «Архівний» стиль твоєї картки: чорна рамка, чорно-біле фото, як вклеєна фотографія на документ.
+Nouveau nom de l’onglet {tab} ¦ Новое название вкладки {tab} ¦ Нова назва вкладки {tab}
+Émoji de l’onglet {tab} ¦ Эмодзи вкладки {tab} ¦ Емодзі вкладки {tab}
+La personne n°1 (le de cujus) ; son père a le n°2, sa mère le n°3, et ainsi de suite : le père d’un numéro N a toujours 2N, la mère 2N+1. ¦ Человек № 1 (исходное лицо); его отец — № 2, мать — № 3 и так далее: отец номера N всегда 2N, мать 2N+1. ¦ Людина № 1 (вихідна особа); її батько — № 2, мати — № 3 і так далі: батько номера N завжди 2N, мати 2N+1.
+Pour les descendants : la personne n°1, ses enfants 1.1, 1.2, 1.3…, les enfants de 1.2 sont 1.2.1, 1.2.2… Chaque point = une génération de plus. ¦ Для потомков: человек № 1, его дети 1.1, 1.2, 1.3…, дети 1.2 — это 1.2.1, 1.2.2… Каждая точка = ещё одно поколение. ¦ Для нащадків: людина № 1, її діти 1.1, 1.2, 1.3…, діти 1.2 — це 1.2.1, 1.2.2… Кожна крапка = ще одне покоління.
+Un thème règle les couleurs de toute l’app : la couleur principale, le fond de la page, des panneaux, des cartes et de leurs en-têtes, le texte, et les traits qui entourent (couleur et épaisseur). Crée le tien à partir d’un thème existant : il s’ajoute à la liste « Preset », dans « ✎ Mes thèmes ». ¦ Тема задаёт цвета всего приложения: основной цвет, фон страницы, панелей, карточек и их заголовков, текст и обводящие линии (цвет и толщина). Создай свою на основе существующей темы: она добавится в список «Набор настроек», в «✎ Мои темы». ¦ Тема задає кольори всього застосунку: основний колір, тло сторінки, панелей, карток і їхніх заголовків, текст і лінії обведення (колір і товщина). Створи свою на основі наявної теми: вона додасться до списку «Набір налаштувань», у «✎ Мої теми».
+La forme des petits carrés numérotés des blocs et des initiales des fiches. Ajoute tes formes (bibliothèque des tableaux, polygone dessiné, SVG importé), range la liste du menu « Forme des avatars », cache celles qui ne te servent pas. ¦ Форма маленьких пронумерованных квадратов блоков и инициалов на карточках. Добавь свои формы (библиотека таблиц, нарисованный многоугольник, импортированный SVG), упорядочь список меню «Форма аватаров», скрой ненужные. ¦ Форма маленьких пронумерованих квадратів блоків та ініціалів на картках. Додай свої форми (бібліотека таблиць, намальований багатокутник, імпортований SVG), упорядкуй список меню «Форма аватарів», приховай непотрібні.
+Le grand cadre en haut de chaque fiche : le nom, les badges (Sosa, À vérifier, Hors généalogie, Artiste) et la colonne de boutons carrés. Tu peux le masquer pour une fiche épurée (diaporama), ranger les boutons, les cacher, les mettre sur 2 colonnes. ¦ Большая рамка вверху каждой карточки: имя, значки (Sosa, Проверить, Вне генеалогии, Художник) и колонка квадратных кнопок. Её можно скрыть для простой карточки (слайд-шоу), упорядочить кнопки, скрыть их, поставить в 2 колонки. ¦ Велика рамка вгорі кожної картки: ім’я, значки (Sosa, Перевірити, Поза генеалогією, Митець) і колонка квадратних кнопок. Її можна приховати для простої картки (слайд-шоу), упорядкувати кнопки, приховати їх, поставити у 2 колонки.
+Les petits boutons carrés en haut à droite, à côté du nombre de personnes : écran en deux, nouvelle fenêtre, mode consultation, mode simple, calculette, Mes généalogies. Décoche pour cacher, glisse ⠿ pour changer l’ordre. ¦ Маленькие квадратные кнопки справа вверху, рядом с числом людей: экран на две части, новое окно, режим просмотра, простой режим, калькулятор, Мои генеалогии. Сними галочку, чтобы скрыть, перетащи ⠿, чтобы изменить порядок. ¦ Маленькі квадратні кнопки праворуч угорі, поруч із кількістю людей: екран на дві частини, нове вікно, режим перегляду, простий режим, калькулятор, Мої генеалогії. Зніми позначку, щоб приховати, перетягни ⠿, щоб змінити порядок.
+Les boutons de la barre du haut, à côté du nombre de personnes. Glisse ⠿ (ou Alt + ↑ / ↓) pour changer leur ordre ; décoche un bouton pour le cacher. Plus bas, « 👤 Nouvelle personne » et un raccourci vers chaque outil de modification (tableur, montage, retouche…) et chaque partie d’Enquêtes : coche ceux que tu veux en haut, et choisis ce que le clic ouvre (la liste des projets ou un nouveau projet). C’est gardé tout de suite. ¦ Кнопки верхней панели, рядом с числом людей. Перетащи ⠿ (или Alt + ↑ / ↓), чтобы изменить их порядок; сними галочку с кнопки, чтобы скрыть её. Ниже — «👤 Новый человек» и ярлык к каждому инструменту редактирования (таблица, монтаж, ретушь…) и к каждой части Расследований: отметь те, что хочешь видеть вверху, и выбери, что открывает щелчок (список проектов или новый проект). Сохраняется сразу. ¦ Кнопки верхньої панелі, поруч із кількістю людей. Перетягни ⠿ (або Alt + ↑ / ↓), щоб змінити їхній порядок; зніми позначку з кнопки, щоб приховати її. Нижче — «👤 Нова людина» і ярлик до кожного інструмента редагування (таблиця, монтаж, ретуш…) та до кожної частини Розслідувань: познач ті, що хочеш бачити вгорі, і вибери, що відкриває клацання (список проєктів або новий проєкт). Зберігається одразу.
+Les blocs d’une fiche se rangent en sections nommées (Identité, Famille…). Ici, où vont leurs titres et leurs options ; la forme (traits, coins, ombres) se règle plus bas, avec l’en-tête (« Style des fiches »). ¦ Блоки карточки распределяются по именованным разделам (Личность, Семья…). Здесь — где стоят их заголовки и параметры; форма (линии, углы, тени) настраивается ниже, вместе с заголовком («Стиль карточек»). ¦ Блоки картки розподіляються за іменованими розділами (Особа, Родина…). Тут — де стоять їхні заголовки й параметри; форма (лінії, кути, тіні) налаштовується нижче, разом із заголовком («Стиль карток»).
+Glisse les sections et les blocs pour changer leur ordre. Décoche une section ou un bloc pour le masquer. ¦ Перетаскивай разделы и блоки, чтобы изменить их порядок. Сними галочку с раздела или блока, чтобы скрыть его. ¦ Перетягуй розділи та блоки, щоб змінити їхній порядок. Зніми позначку з розділу чи блоку, щоб приховати його.
+La façon dont les listes à ranger de cette page sont dessinées. Ne change que cet écran de réglage (et la fenêtre « ⚙️ Ranger les sections » d’une fiche) : ni les fiches, ni les données. ¦ Как рисуются упорядочиваемые списки на этой странице. Меняет только этот экран настроек (и окно «⚙️ Упорядочить разделы» карточки): ни карточки, ни данные. ¦ Як малюються впорядковувані списки на цій сторінці. Змінює лише цей екран налаштувань (і вікно «⚙️ Упорядкувати розділи» картки): ні картки, ні дані.
+Les blocs se rangent en sections nommées (Identité, Famille…). Ici, la façon de dessiner leurs titres et leurs options. Chaque changement est gardé tout de suite. ¦ Блоки распределяются по именованным разделам (Личность, Семья…). Здесь — как рисуются их заголовки и параметры. Каждое изменение сохраняется сразу. ¦ Блоки розподіляються за іменованими розділами (Особа, Родина…). Тут — як малюються їхні заголовки й параметри. Кожна зміна зберігається одразу.
+Retenu d’une fiche à l’autre. ¦ Запоминается от одной карточки к другой. ¦ Запам’ятовується від однієї картки до іншої.
+Sans trait ni cadre : juste le nom, en grand, comme un chapitre. ¦ Без линии и рамки: только название, крупно, как глава. ¦ Без лінії та рамки: лише назва, великим шрифтом, як розділ книги.
+Un cadre autour de la section, le titre dans une étiquette sur le bord. ¦ Рамка вокруг раздела, заголовок в ярлыке на краю. ¦ Рамка навколо розділу, заголовок у ярлику на краю.
+Un petit titre en capitales posé sur un trait. Sobre, prend peu de place. ¦ Маленький заголовок заглавными буквами на линии. Скромно, занимает мало места. ¦ Маленький заголовок великими літерами на лінії. Скромно, займає мало місця.
+Une bande de la couleur principale (celle de l’Apparence), titre en blanc. ¦ Полоса основного цвета (из Внешнего вида), заголовок белым. ¦ Смуга основного кольору (з Вигляду), заголовок білим.
+« Nouveau » : sections en bandes, ⠿ et 👁. ¦ «Новый»: разделы полосами, ⠿ и 👁. ¦ «Новий»: розділи смугами, ⠿ і 👁.
+Ce que tu fais avec l’app : ses onglets et son premier écran. Aucune fiche n’est supprimée. ¦ Что ты делаешь в приложении: его вкладки и первый экран. Ни одна карточка не удаляется. ¦ Що ти робиш у застосунку: його вкладки та перший екран. Жодна картка не видаляється.
+Changer d’usage change <b>seulement les onglets et le premier écran</b>. Aucune fiche n’est supprimée : les personnes restent là, même quand l’onglet est caché. On peut en allumer plusieurs : leurs onglets s’additionnent. ¦ Смена назначения меняет <b>только вкладки и первый экран</b>. Ни одна карточка не удаляется: люди остаются, даже когда вкладка скрыта. Можно включить несколько: их вкладки складываются. ¦ Зміна призначення змінює <b>лише вкладки та перший екран</b>. Жодна картка не видаляється: люди залишаються, навіть коли вкладку приховано. Можна ввімкнути кілька: їхні вкладки додаються.
+Personnes, arbre, actes. ¦ Люди, древо, записи актов. ¦ Люди, дерево, актові записи.
+« 🌳 Ma généalogie » seule ¦ Только «🌳 Моя генеалогия» ¦ Лише «🌳 Моя генеалогія»
+Trésors de famille. ¦ Семейные сокровища. ¦ Родинні скарби.
+Catalogue raisonné. ¦ Каталог-резоне. ¦ Каталог-резоне.
+Maisons et lieux. ¦ Дома и места. ¦ Будинки та місця.
+L’entreprise, 👥 Membres. ¦ Предприятие, 👥 Участники. ¦ Підприємство, 👥 Учасники.
+Animaux, portées, pedigree. ¦ Животные, помёты, родословная. ¦ Тварини, приплоди, родовід.
+Suivi des animaux. ¦ Наблюдение за животными. ¦ Спостереження за тваринами.
+Documents, ✨ Trésors. ¦ Документы, ✨ Сокровища. ¦ Документи, ✨ Скарби.
+Les onglets se rangent, se renomment et se cachent un par un dans « Ordre et noms du menu principal ». ¦ Вкладки упорядочиваются, переименовываются и скрываются по одной в «Порядок и названия главного меню». ¦ Вкладки впорядковуються, перейменовуються та приховуються по одній у «Порядок і назви головного меню».
+Au féminin ¦ В женском роде ¦ У жіночому роді
+Au masculin ¦ В мужском роде ¦ У чоловічому роді
+Avec un point médian ¦ С точкой посередине ¦ З крапкою посередині
+Entre parenthèses ¦ В скобках ¦ У дужках
+Sexe « Autre / non binaire » ¦ Пол «Другой / небинарный» ¦ Стать «Інша / небінарна»
+Sexe « Non renseigné » (et les animaux dont on ne connaît pas le sexe) ¦ Пол «Не указан» (и животные, пол которых неизвестен) ¦ Стать «Не вказано» (і тварини, стать яких невідома)
+Sur les fiches d’hommes et de femmes, les mots s’accordent tout seuls : « né le » ou « née le », « décédé » ou « décédée ». Choisis ici comment les écrire pour les autres fiches. Chaque choix est gardé tout de suite. ¦ На карточках мужчин и женщин слова согласуются сами (по-французски: «né le» или «née le», «décédé» или «décédée»). Выбери здесь, как писать их для остальных карточек. Каждый выбор сохраняется сразу. ¦ На картках чоловіків і жінок слова узгоджуються самі (французькою: «né le» або «née le», «décédé» або «décédée»). Вибери тут, як писати їх для інших карток. Кожен вибір зберігається одразу.
+comme on dit « la personne » : « née », « décédée » ¦ как в «la personne» (женский род): «née», «décédée» ¦ як у «la personne» (жіночий рід): «née», «décédée»
+rien ne change : « né(e) », sauf « Vivante », « Décédée » sur la fiche ¦ ничего не меняется: «né(e)», кроме «Vivante», «Décédée» на карточке ¦ нічого не змінюється: «né(e)», окрім «Vivante», «Décédée» на картці
+une tournure neutre quand il y en a une (« Naissance le … », « Décès »), sinon « né(e) » ¦ нейтральная формулировка, когда она есть («Naissance le …», «Décès»), иначе «né(e)» ¦ нейтральне формулювання, коли воно є («Naissance le …», «Décès»), інакше «né(e)»
+« né », « décédé » ¦ «né», «décédé» (мужской род) ¦ «né», «décédé» (чоловічий рід)
+« né(e) », « décédé(e) », partout ¦ «né(e)», «décédé(e)», везде ¦ «né(e)», «décédé(e)», скрізь
+« né·e », « décédé·e » ¦ «né·e», «décédé·e» (точка посередине) ¦ «né·e», «décédé·e» (крапка посередині)
+autre / non binaire ¦ другой / небинарный ¦ інша / небінарна
+sexe non renseigné ¦ пол не указан ¦ стать не вказано
+Arbre en filigrane ¦ Древо водяным знаком ¦ Дерево водяним знаком
+Bleu pâle (comme avant) ¦ Бледно-голубой (как раньше) ¦ Блідо-блакитний (як раніше)
+Gris neutre ¦ Нейтральный серый ¦ Нейтральний сірий
+Les traits de mon thème (✎ Mes thèmes) ¦ Линии моей темы (✎ Мои темы) ¦ Лінії моєї теми (✎ Мої теми)
+Les traits de mon thème : choisis d’abord un thème à toi (✎ Mes thèmes) ¦ Линии моей темы: сначала выбери собственную тему (✎ Мои темы) ¦ Лінії моєї теми: спершу вибери власну тему (✎ Мої теми)
+Bleu pâle = comme avant · gris · la couleur principale de l’Apparence (elle suit si tu la changes) · sépia · la couleur des traits de ton thème (✎ Mes thèmes) · une couleur à toi. ¦ Бледно-голубой = как раньше · серый · основной цвет Внешнего вида (меняется вместе с ним) · сепия · цвет линий твоей темы (✎ Мои темы) · свой цвет. ¦ Блідо-блакитний = як раніше · сірий · основний колір Вигляду (змінюється разом із ним) · сепія · колір ліній твоєї теми (✎ Мої теми) · свій колір.
+Cahier ligné ¦ Тетрадь в линейку ¦ Зошит у лінійку
+Papier millimétré ¦ Миллиметровая бумага ¦ Міліметровий папір
+Papier vergé ¦ Верже ¦ Верже
+Ce qu’on voit derrière les blocs, sur toutes les pages. Le fond reste très pâle pour ne jamais gêner la lecture ; la couleur du papier vient du Preset (ou de ton thème). ¦ Что видно за блоками на всех страницах. Фон остаётся очень бледным, чтобы никогда не мешать чтению; цвет бумаги берётся из Набора настроек (или твоей темы). ¦ Що видно за блоками на всіх сторінках. Тло залишається дуже блідим, щоб ніколи не заважати читанню; колір паперу береться з Набору налаштувань (або твоєї теми).
+Choisir une photo ¦ Выбрать фото ¦ Вибрати фото
+Couleur du motif ¦ Цвет узора ¦ Колір візерунка
+Couleur principale (suit l’Apparence) ¦ Основной цвет (как во Внешнем виде) ¦ Основний колір (як у Вигляді)
+De « à peine visible » à « bien marqué ». Au départ : comme aujourd’hui. ¦ От «едва заметно» до «хорошо видно». В начале — как сейчас. ¦ Від «ледь помітно» до «добре видно». На початку — як зараз.
+Décoché : fond uni sur ces pages. La carte et les éditeurs plein écran gardent toujours le leur. ¦ Без галочки: однотонный фон на этих страницах. Карта и полноэкранные редакторы всегда сохраняют свой. ¦ Без позначки: однотонне тло на цих сторінках. Мапа та повноекранні редактори завжди зберігають своє.
+Pas encore de photo : fond uni en attendant. ¦ Фото пока нет: пока однотонный фон. ¦ Фото ще немає: поки однотонне тло.
+Pâlie par l’intensité et floutée, pour rester derrière sans gêner. Elle reste sur cet ordinateur (pas dans le défaut du site : là-bas, fond uni). ¦ Осветлено по интенсивности и размыто, чтобы оставаться позади и не мешать. Остаётся на этом компьютере (не в стандартах сайта: там однотонный фон). ¦ Освітлене за інтенсивністю та розмите, щоб залишатися позаду й не заважати. Залишається на цьому комп’ютері (не в типових налаштуваннях сайту: там однотонне тло).
+bords à peine teintés, vieille photo ¦ едва окрашенные края, старое фото ¦ ледь забарвлені краї, старе фото
+comme aujourd’hui ¦ как сейчас ¦ як зараз
+de petites branches, très pâles ¦ маленькие веточки, очень бледные ¦ маленькі гілочки, дуже бліді
+du papier vers la couleur ¦ от бумаги к цвету ¦ від паперу до кольору
+fin, trait plus fort tous les 5 ¦ тонкая, более жирная линия каждые 5 ¦ тонка, жирніша лінія кожні 5
+fines rayures des vieux papiers ¦ тонкие полоски старой бумаги ¦ тонкі смужки старого паперу
+hexagones de la maison de famille ¦ шестиугольники родового дома ¦ шестикутники родинного дому
+lignes et double marge, comme l’état civil ¦ линии и двойное поле, как в метрических книгах ¦ лінії та подвійне поле, як у метричних книгах
+lignes et marge rouge ¦ линии и красное поле ¦ лінії та червоне поле
+pâle et floutée derrière ¦ бледно и размыто позади ¦ блідо й розмито позаду
+rien derrière, le plus calme ¦ ничего позади, спокойнее всего ¦ нічого позаду, найспокійніше
+tissage léger, album de famille ¦ лёгкое плетение, семейный альбом ¦ легке плетіння, родинний альбом
+une grille de petits points ¦ сетка из мелких точек ¦ сітка з дрібних крапок
+va bien avec « Archive papier » ¦ хорошо сочетается с «Архивная бумага» ¦ добре поєднується з «Архівний папір»
+Une page de l’app ¦ Страница приложения ¦ Сторінка застосунку
+Ta photo ¦ Твоё фото ¦ Твоє фото
+les Réglages ¦ Настройки ¦ Налаштування
+Dans les listes où l’on coche ce qui s’affiche (menus, listes, Réordonner, Personnaliser…) : une ligne décochée reste telle quelle, ou se grise un peu. ¦ В списках, где отмечают, что показывать (меню, списки, Упорядочить, Настроить…): строка без галочки остаётся как есть или слегка сереет. ¦ У списках, де позначають, що показувати (меню, списки, Упорядкувати, Налаштувати…): рядок без позначки залишається як є або трохи сіріє.
+Une ligne affichée ¦ Показанная строка ¦ Показаний рядок
+Une ligne cachée ¦ Скрытая строка ¦ Прихований рядок
+Lignes cachées dans les listes à ranger ¦ Скрытые строки в упорядочиваемых списках ¦ Приховані рядки у впорядковуваних списках
+Supprimer en rouge ¦ «Удалить» красным ¦ «Видалити» червоним
+Hypothèses à comparer ¦ Гипотезы для сравнения ¦ Гіпотези для порівняння
+signature ou sceau ¦ подпись или печать ¦ підпис або печатка
+PLAN DU RECENSEMENT ¦ ПЛАН ПЕРЕПИСИ ¦ ПЛАН ПЕРЕПИСУ
+Fonds de carte du plan des adresses ¦ Подложки карты адресов ¦ Підкладки мапи адрес
+Plan, photo aérienne, carte hors ligne… ¦ План, аэрофотоснимок, офлайн-карта… ¦ План, аерофотознімок, офлайн-мапа…
+Cassini, État-major, cartes et photos de 1950… ¦ Кассини, карта Генштаба, карты и снимки 1950 года… ¦ Кассіні, мапа Генштабу, мапи та знімки 1950 року…
+Carte ancienne (par-dessus) ¦ Старая карта (сверху) ¦ Стара мапа (згори)
+Aujourd’hui (dessous) ¦ Сегодня (снизу) ¦ Сьогодні (знизу)
+Dépouillements (onglet « Plan ») et fiche d’un village : les fonds cochés viennent en premier dans les menus ; le premier coché est celui de départ. Tous les autres restent dans les menus, par catégorie. ¦ Выписки (вкладка «План») и карточка деревни: отмеченные подложки идут первыми в меню; первая отмеченная — начальная. Все остальные остаются в меню, по категориям. ¦ Виписки (вкладка «План») і картка села: позначені підкладки йдуть першими в меню; перша позначена — початкова. Усі інші залишаються в меню, за категоріями.
+naissance manquante ¦ нет рождения ¦ немає народження
+décès manquant ¦ нет смерти ¦ немає смерті
+parents manquants ¦ нет родителей ¦ немає батьків
+source manquante ¦ нет источника ¦ немає джерела
+aucun média ¦ нет медиафайлов ¦ немає медіафайлів
+1 livre en {y} ¦ 1 ливр в {y} году ¦ 1 лівр у {y} році
+1 franc en {y} ¦ 1 франк в {y} году ¦ 1 франк у {y} році
+1 euro en {y} ¦ 1 евро в {y} году ¦ 1 євро у {y} році
+≈ <b>{eur} €</b> d’aujourd’hui ¦ ≈ <b>{eur} €</b> на сегодня ¦ ≈ <b>{eur} €</b> на сьогодні
+≈ <b>{kg} kg</b> de pain ¦ ≈ <b>{kg} кг</b> хлеба ¦ ≈ <b>{kg} кг</b> хліба
+≈ {n} jour de travail d’un journalier ¦ ≈ {n} день работы подёнщика ¦ ≈ {n} день роботи поденника
+≈ {n} jours de travail d’un journalier ¦ ≈ {n} дней работы подёнщика ¦ ≈ {n} днів роботи поденника
+🛡 Solidité des liens à côté des parents ¦ 🛡 Надёжность связей рядом с родителями ¦ 🛡 Надійність зв’язків поруч із батьками
+Seulement Supposé et Réfuté ¦ Только Предполагаемые и Опровергнутые ¦ Лише Припущені та Спростовані
+Toujours ¦ Всегда ¦ Завжди
+Jamais ¦ Никогда ¦ Ніколи

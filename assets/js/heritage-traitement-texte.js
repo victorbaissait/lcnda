@@ -12,6 +12,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s);
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI;
     const T = () => window.LCNDA_TEXT;
@@ -202,15 +203,15 @@
     ];
     // ext.textDocMenuExtra : [{menu: 'Outils', cmd, label, key}] — des lignes ajoutées par d'autres fichiers (publipostage…), leur commande dans ext.textDocCommands
     const withExtra = (title, base) => { const more = (ext.textDocMenuExtra || []).filter(x => x && x.menu === title && x.cmd); return more.length ? [...base, '-', ...more.map(x => M(x.cmd, x.label, x.key || ''))] : base; };
-    const menusHtml = () => MENUS().map(([title, items]) => [title, withExtra(title, items)]).map(([title, items]) => `<details class="wp-menu" data-wp-menu="${esc(title)}"><summary>${esc(title)}</summary><div class="wp-menu-list" role="menu">${items.map(it => (it === '-' ? '<hr>' : `<button type="button" role="menuitem" data-wp-cmd="${esc(it.cmd)}"><span>${esc(it.label)}</span>${it.key ? `<kbd>${esc(kbd(it.key))}</kbd>` : ''}</button>`)).join('')}</div></details>`).join('');
-    const tb = (cmd, icon, title, key = '', lab = '') => `<button type="button" class="icon-button small" data-wp-cmd="${cmd}" title="${esc(title)}"${key ? ` data-shortcut="${key}"` : ''} aria-label="${esc(title)}">${icon}<span class="wp-tb-lab">${esc(lab || title.split(' ')[0])}</span></button>`;
-    const toolsHtml = () => toolsHtml0().replace(/<span class="wp-g" data-tb="([\w-]+)" data-tb-label="([^"]*)"/g, (m, k, l) => `${m} data-tbg="wp-g-${k}" data-tbg-label="Barre d’outils · ${l}"`); // chaque bouton d'un groupe se range aussi un par un (⚙️ Personnaliser)
-    const toolsHtml0 = () => `<div class="wp-tools" data-tbg="wp-tools" data-tbg-label="Barre d’outils">
-        <span class="wp-g" data-tb="style" data-tb-label="Style du paragraphe"><select data-wp-style aria-label="Style du paragraphe" title="Style du paragraphe"></select></span>
-        <span class="wp-g" data-tb="font" data-tb-label="Police et taille (E5)"><button type="button" class="button small secondary wp-fontbtn" data-wp-cmd="font" title="Police (E5)">Georgia</button><input type="number" data-wp-size data-unit="pt" min="4" max="144" step="0.5" value="12" aria-label="Taille" title="Taille du texte"></span>
-        <span class="wp-g" data-tb="fmt" data-tb-label="Gras, italique…">${tb('bold', '<b>G</b>', 'Gras', '⌘B')}${tb('italic', '<i>I</i>', 'Italique', '⌘I')}${tb('underline', '<u>S</u>', 'Souligné', '⌘U')}${tb('strike', '<s>ab</s>', 'Barré', '⇧⌘X')}${tb('sup', 'x²', 'Exposant', '⌘.')}${tb('sub', 'x₂', 'Indice', '⌘,')}${tb('smallcaps', 'Pᴄ', 'Petites capitales', '⇧⌘K')}</span>
-        <span class="wp-g" data-tb="colors" data-tb-label="Couleur et surlignage (C2)"><button type="button" class="icon-button small wp-colbtn" data-wp-cmd="color" title="Couleur du texte" aria-label="Couleur du texte"><b>A</b><i data-wp-sw="color"></i><span class="wp-tb-lab">Couleur</span></button><button type="button" class="icon-button small wp-colbtn" data-wp-cmd="highlight" title="Surlignage" aria-label="Surlignage">🖍<i data-wp-sw="hl" style="--c:#fff176"></i><span class="wp-tb-lab">Surligner</span></button>${tb('clearfmt', '⌫', 'Effacer la mise en forme', '⌘\\', 'Effacer')}</span>
-        <span class="wp-g" data-tb="para" data-tb-label="Paragraphe">${tb('al:left', '⟸', 'Aligner à gauche', '⇧⌘L', 'Gauche')}${tb('al:center', '≡', 'Centrer', '⇧⌘E', 'Centre')}${tb('al:right', '⟹', 'Aligner à droite', '⇧⌘R', 'Droite')}${tb('al:justify', '☰', 'Justifier', '⇧⌘J', 'Justifier')}<button type="button" class="icon-button small" data-wp-cmd="linemenu" title="Interligne et espacement" aria-label="Interligne">↕<span class="wp-tb-lab">Interligne</span></button>${tb('ul', '•≡', 'Liste à puces', '⇧⌘8', 'Puces')}${tb('ol', '1≡', 'Liste numérotée', '⇧⌘7', 'Numéros')}${tb('outdent', '⇤', 'Diminuer le retrait', '⌘[', 'Retrait −')}${tb('indent', '⇥', 'Augmenter le retrait', '⌘]', 'Retrait +')}</span>
+    const menusHtml = () => MENUS().map(([title, items]) => [title, withExtra(title, items)]).map(([title, items]) => `<details class="wp-menu" data-wp-menu="${esc(title)}"><summary>${esc(i18n(title, {ctx: 'menu'}))}</summary><div class="wp-menu-list" role="menu">${items.map(it => (it === '-' ? '<hr>' : `<button type="button" role="menuitem" data-wp-cmd="${esc(it.cmd)}"><span>${esc(/^# /.test(it.label) ? '# ' + i18n(it.label.slice(2)) : i18n(it.label))}</span>${it.key ? `<kbd>${esc(kbd(it.key))}</kbd>` : ''}</button>`)).join('')}</div></details>`).join('');
+    const tb = (cmd, icon, title, key = '', lab = '') => `<button type="button" class="icon-button small" data-wp-cmd="${cmd}" title="${esc(i18n(title))}"${key ? ` data-shortcut="${key}"` : ''} aria-label="${esc(i18n(title))}">${icon}<span class="wp-tb-lab">${esc(i18n(lab || title.split(' ')[0], {ctx: 'ruban'}))}</span></button>`;
+    const toolsHtml = () => toolsHtml0().replace(/<span class="wp-g" data-tb="([\w-]+)" data-tb-label="([^"]*)"/g, (m, k, l) => `${m.replace(`data-tb-label="${l}"`, `data-tb-label="${esc(i18n(l))}"`)} data-tbg="wp-g-${k}" data-tbg-label="${esc(i18n('Barre d’outils · {what}', {what: i18n(l)}))}"`); // chaque bouton d'un groupe se range aussi un par un (⚙️ Personnaliser)
+    const toolsHtml0 = () => `<div class="wp-tools" data-tbg="wp-tools" data-tbg-label="${esc(i18n('Barre d’outils'))}">
+        <span class="wp-g" data-tb="style" data-tb-label="Style du paragraphe"><select data-wp-style data-i18n-off aria-label="${esc(i18n('Style du paragraphe'))}" title="${esc(i18n('Style du paragraphe'))}"></select></span>
+        <span class="wp-g" data-tb="font" data-tb-label="Police et taille (E5)"><button type="button" class="button small secondary wp-fontbtn" data-wp-cmd="font" title="${esc(i18n('Police (E5)'))}" data-i18n-off>Georgia</button><input type="number" data-wp-size data-unit="pt" min="4" max="144" step="0.5" value="12" aria-label="${esc(i18n('Taille'))}" title="${esc(i18n('Taille du texte'))}"></span>
+        <span class="wp-g" data-tb="fmt" data-tb-label="Gras, italique…">${tb('bold', `<b>${esc(i18n('G', {ctx: 'icone-gras'}))}</b>`, 'Gras', '⌘B')}${tb('italic', `<i>${esc(i18n('I', {ctx: 'icone-italique'}))}</i>`, 'Italique', '⌘I')}${tb('underline', `<u>${esc(i18n('S', {ctx: 'icone-souligne'}))}</u>`, 'Souligné', '⌘U')}${tb('strike', '<s>ab</s>', 'Barré', '⇧⌘X')}${tb('sup', 'x²', 'Exposant', '⌘.')}${tb('sub', 'x₂', 'Indice', '⌘,')}${tb('smallcaps', i18n('Pᴄ', {ctx: 'icone-petites-capitales'}), 'Petites capitales', '⇧⌘K')}</span>
+        <span class="wp-g" data-tb="colors" data-tb-label="Couleur et surlignage (C2)"><button type="button" class="icon-button small wp-colbtn" data-wp-cmd="color" title="${esc(i18n('Couleur du texte'))}" aria-label="${esc(i18n('Couleur du texte'))}"><b>A</b><i data-wp-sw="color"></i><span class="wp-tb-lab">${esc(i18n('Couleur', {ctx: 'ruban'}))}</span></button><button type="button" class="icon-button small wp-colbtn" data-wp-cmd="highlight" title="${esc(i18n('Surlignage'))}" aria-label="${esc(i18n('Surlignage'))}">🖍<i data-wp-sw="hl" style="--c:#fff176"></i><span class="wp-tb-lab">${esc(i18n('Surligner', {ctx: 'ruban'}))}</span></button>${tb('clearfmt', '⌫', 'Effacer la mise en forme', '⌘\\', 'Effacer')}</span>
+        <span class="wp-g" data-tb="para" data-tb-label="Paragraphe">${tb('al:left', '⟸', 'Aligner à gauche', '⇧⌘L', 'Gauche')}${tb('al:center', '≡', 'Centrer', '⇧⌘E', 'Centre')}${tb('al:right', '⟹', 'Aligner à droite', '⇧⌘R', 'Droite')}${tb('al:justify', '☰', 'Justifier', '⇧⌘J', 'Justifier')}<button type="button" class="icon-button small" data-wp-cmd="linemenu" title="${esc(i18n('Interligne et espacement'))}" aria-label="${esc(i18n('Interligne'))}">↕<span class="wp-tb-lab">${esc(i18n('Interligne', {ctx: 'ruban'}))}</span></button>${tb('ul', '•≡', 'Liste à puces', '⇧⌘8', 'Puces')}${tb('ol', '1≡', 'Liste numérotée', '⇧⌘7', 'Numéros')}${tb('outdent', '⇤', 'Diminuer le retrait', '⌘[', 'Retrait −')}${tb('indent', '⇥', 'Augmenter le retrait', '⌘]', 'Retrait +')}</span>
         <span class="wp-g" data-tb="insert" data-tb-label="Insérer">${tb('image', '🖼', 'Image', '', 'Image')}${tb('table', '▦', 'Tableau', '', 'Tableau')}${tb('link', '🔗', 'Lien', '⌘K', 'Lien')}${tb('footnote', '¹', 'Note de bas de page', '⌥⌘F', 'Note')}${tb('person', '👤', 'Une personne de la base', '⇧⌘P', 'Personne')}${tb('place', '📍', 'Un lieu de la base', '', 'Lieu')}${tb('chars', 'Ω', 'Caractères spéciaux', '', 'Caractères')}</span>
         <span class="wp-g" data-tb="review" data-tb-label="Relecture">${tb('track', '✍', 'Suivre les modifications', '⌥⌘T', 'Suivi')}${tb('comment', '💬', 'Nouveau commentaire', '⌥⌘M', 'Commenter')}${tb('find', '🔍', 'Rechercher', '⌘F', 'Chercher')}</span>
     </div>`;
@@ -219,7 +220,7 @@
     const DEF_DOC = () => ({v: 1, page: {...T().PAGE0, m: {...T().PAGE0.m}, size: 'A4'}, sections: [{html: ''}], header: {html: '', first: false, firstHtml: ''}, footer: {html: '<p data-st="normal" style="text-align:center"><span class="wp-field" data-field="page" contenteditable="false">1</span></p>', first: true, firstHtml: ''}, styles: T().styleSet(pref('set', 'classique')), comments: [], lang: pref('lang', 'fr'), set: pref('set', 'classique'), track: false, meta: {author: pref('author', ''), subject: ''}});
     class Editor {
         constructor(o) {
-            Object.assign(this, {id: o.id || 0, name: o.name || 'Mon document', kind: o.kind === 'template' ? 'template' : 'doc', ctx: o, rev: o.rev || ''});
+            Object.assign(this, {id: o.id || 0, name: o.name || i18n('Mon document'), kind: o.kind === 'template' ? 'template' : 'doc', ctx: o, rev: o.rev || ''});
             const d = o.data && typeof o.data === 'object' ? o.data : DEF_DOC();
             this.doc = {...DEF_DOC(), ...d, page: {...T().PAGE0, ...(d.page || {}), m: {...T().PAGE0.m, ...(d.page?.m || {})}}, header: {html: '', first: false, firstHtml: '', ...(d.header || {})}, footer: {html: '', first: false, firstHtml: '', ...(d.footer || {})}, meta: {author: '', subject: '', ...(d.meta || {})}};
             this.doc.styles = (Array.isArray(this.doc.styles) && this.doc.styles.length ? this.doc.styles : T().styleSet(this.doc.set)).map(T().cleanStyle).filter(Boolean);
@@ -230,7 +231,7 @@
         }
         $(s) { return this.dlg?.querySelector(s); }
         $$(s) { return [...(this.dlg?.querySelectorAll(s) || [])]; }
-        get author() { return pref('author', '') || this.doc.meta?.author || 'Moi'; }
+        get author() { return pref('author', '') || this.doc.meta?.author || i18n('Moi'); }
     }
     ext.textDocKit = {Editor, cleanHtml, cleanCss, blocksOfEl, runsOf, paraOf, tableOf, prefs, setPrefs, pref, MENUS, LANGS, FONTS, SIZES, MM, PT, GAP, esc, clamp, blockOf, parseLen};
 
@@ -239,30 +240,30 @@
             const U = UI(), dlg = this.dlg = document.createElement('dialog');
             dlg.className = 'modal wp-dlg'; dlg.dataset.ownClose = '1'; dlg.dataset.noFoot = '1'; dlg.setAttribute('data-no-foot', '');
             const top = U.editorTopbar({icon: '📝', name: this.name, nameAttrs: 'data-wp-name', menus: [{html: `<nav class="wp-menus">${menusHtml()}</nav>`}], undo: true, status: this.id && !this.dirty ? 'saved' : '',
-                buttons: {customize: ext.tbButton ? {html: '⚙️ Personnaliser', attrs: 'data-tb-config="textdoc"'} : null, export: {attrs: 'data-wp-cmd="export"', title: 'Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, texte, HTML, impression'}, save: {attrs: 'data-wp-cmd="save"'}, full: ext.fullButton ? {attrs: 'data-full-toggle="textdoc"', title: 'Plein écran (⛶)'} : null, close: {attrs: 'data-wp-cmd="close"'}}});
+                buttons: {customize: ext.tbButton ? {html: i18n('⚙️ Personnaliser'), attrs: 'data-tb-config="textdoc"'} : null, export: {attrs: 'data-wp-cmd="export"', title: i18n('Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, texte, HTML, impression')}, save: {attrs: 'data-wp-cmd="save"'}, full: ext.fullButton ? {attrs: 'data-full-toggle="textdoc"', title: i18n('Plein écran (⛶)')} : null, close: {attrs: 'data-wp-cmd="close"'}}});
             dlg.innerHTML = `<div class="wp${pref('ribbon', false) ? ' is-ribbon' : ''}">${top}${toolsHtml()}
                 <div class="wp-find" data-wp-findbar hidden></div>
-                <div class="wp-main"><nav class="wp-rail" data-wp-rail aria-label="Outils">
-                    <button type="button" class="ed-tool" data-wp-cmd="nav" title="Panneau de navigation : titres, pages, résultats" aria-label="Navigation">🧭</button>
-                    <button type="button" class="ed-tool" data-wp-cmd="find" title="Rechercher et remplacer" data-shortcut="⌘F" aria-label="Rechercher">🔍</button>
-                    <button type="button" class="ed-tool" data-wp-cmd="panel:format" title="Mise en forme (panneau de droite)" aria-label="Mise en forme">🎨</button>
-                    <button type="button" class="ed-tool" data-wp-cmd="panel:comments" title="Commentaires" aria-label="Commentaires">💬</button>
-                    <button type="button" class="ed-tool" data-wp-cmd="panel:changes" title="Modifications suivies" aria-label="Modifications suivies">✍</button>
-                    <button type="button" class="ed-tool" data-wp-cmd="facts" title="Vérifier avec les fiches" aria-label="Vérifier avec les fiches">🔎</button>
-                    <button type="button" class="ed-tool" data-wp-cmd="read" title="Lire à voix haute" aria-label="Lire à voix haute">🔊</button>
-                    <button type="button" class="ed-tool" data-wp-cmd="marks" title="Marques de mise en forme ¶" data-shortcut="⌥⌘8" aria-label="Marques de mise en forme">¶</button></nav>
-                    <aside class="wp-side" data-wp-side hidden aria-label="Navigation"></aside>
+                <div class="wp-main"><nav class="wp-rail" data-wp-rail aria-label="${esc(i18n('Outils'))}">
+                    <button type="button" class="ed-tool" data-wp-cmd="nav" title="${esc(i18n('Panneau de navigation : titres, pages, résultats'))}" aria-label="${esc(i18n('Navigation'))}">🧭</button>
+                    <button type="button" class="ed-tool" data-wp-cmd="find" title="${esc(i18n('Rechercher et remplacer'))}" data-shortcut="⌘F" aria-label="${esc(i18n('Rechercher'))}">🔍</button>
+                    <button type="button" class="ed-tool" data-wp-cmd="panel:format" title="${esc(i18n('Mise en forme (panneau de droite)'))}" aria-label="${esc(i18n('Mise en forme'))}">🎨</button>
+                    <button type="button" class="ed-tool" data-wp-cmd="panel:comments" title="${esc(i18n('Commentaires'))}" aria-label="${esc(i18n('Commentaires'))}">💬</button>
+                    <button type="button" class="ed-tool" data-wp-cmd="panel:changes" title="${esc(i18n('Modifications suivies'))}" aria-label="${esc(i18n('Modifications suivies'))}">✍</button>
+                    <button type="button" class="ed-tool" data-wp-cmd="facts" title="${esc(i18n('Vérifier avec les fiches'))}" aria-label="${esc(i18n('Vérifier avec les fiches'))}">🔎</button>
+                    <button type="button" class="ed-tool" data-wp-cmd="read" title="${esc(i18n('Lire à voix haute'))}" aria-label="${esc(i18n('Lire à voix haute'))}">🔊</button>
+                    <button type="button" class="ed-tool" data-wp-cmd="marks" title="${esc(i18n('Marques de mise en forme ¶'))}" data-shortcut="⌥⌘8" aria-label="${esc(i18n('Marques de mise en forme'))}">¶</button></nav>
+                    <aside class="wp-side" data-wp-side hidden aria-label="${esc(i18n('Navigation'))}"></aside>
                     <div class="wp-scroll" data-wp-scroll data-ctx-off><div class="wp-sizer" data-wp-sizer><div class="wp-zoom" data-wp-zoom><div class="wp-doc" data-wp-doc></div></div></div></div>
-                    <aside class="wp-panel" data-wp-panel aria-label="Panneau de droite"${pref('panel', true) && innerWidth > 760 ? '' : ' hidden'}></aside></div></div>`;
+                    <aside class="wp-panel" data-wp-panel aria-label="${esc(i18n('Panneau de droite'))}"${pref('panel', true) && innerWidth > 760 ? '' : ' hidden'}></aside></div></div>`;
             document.body.appendChild(dlg);
             ext.fullInit?.(dlg, 'textdoc', true);
             dlg.showModal();
             this.scroll = this.$('[data-wp-scroll]'); this.docEl = this.$('[data-wp-doc]'); this.zoomEl = this.$('[data-wp-zoom]'); this.sizer = this.$('[data-wp-sizer]');
             U.editorRail?.(this.$('[data-wp-rail]'), {breaks: ['[data-wp-cmd="panel:format"]', '[data-wp-cmd="facts"]']});
-            this.status = U.editorStatus({where: '', help: 'Écris, choisis un style à gauche de la barre ; clic droit pour les actions.', zoom: {get: () => this.zoom, set: k => this.setZoom(k, 'manual'), fit: () => this.setZoom(0, 'fit'), min: 0.25, max: 4}, wheel: this.scroll});
+            this.status = U.editorStatus({where: '', help: i18n('Écris, choisis un style à gauche de la barre ; clic droit pour les actions.'), zoom: {get: () => this.zoom, set: k => this.setZoom(k, 'manual'), fit: () => this.setZoom(0, 'fit'), min: 0.25, max: 4}, wheel: this.scroll});
             this.$('.wp').appendChild(this.status);
             const saveBtn = this.$('.ui-topbar [data-wp-cmd="save"]');
-            U.saveMenu?.(saveBtn, () => [{icon: '⧉', label: 'Enregistrer une copie…', run: () => this.run('saveas')}, {icon: '📋', label: 'Enregistrer comme modèle…', run: () => this.run('savetpl')}, {icon: '🕘', label: 'Enregistrer comme nouvelle version', run: () => this.run('version')}, '-', {icon: '📁', label: 'Ranger une copie dans les médias', run: () => this.run('tomedia')}, {icon: '📐', label: 'Envoyer vers la mise en page…', run: () => this.run('tolayout')}]);
+            U.saveMenu?.(saveBtn, () => [{icon: '⧉', label: i18n('Enregistrer une copie…'), run: () => this.run('saveas')}, {icon: '📋', label: i18n('Enregistrer comme modèle…'), run: () => this.run('savetpl')}, {icon: '🕘', label: i18n('Enregistrer comme nouvelle version'), run: () => this.run('version')}, '-', {icon: '📁', label: i18n('Ranger une copie dans les médias'), run: () => this.run('tomedia')}, {icon: '📐', label: i18n('Envoyer vers la mise en page…'), run: () => this.run('tolayout')}]);
             document.execCommand('defaultParagraphSeparator', false, 'p');
             this.styleTag = document.createElement('style'); dlg.appendChild(this.styleTag);
             this.build();
@@ -287,7 +288,7 @@
         },
         addSection(s, after) {
             const el = document.createElement('section'); el.className = 'wp-sec';
-            el.innerHTML = '<div class="wp-sheets" aria-hidden="true"></div><div class="wp-body" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Texte du document" data-ui-off></div>';
+            el.innerHTML = '<div class="wp-sheets" aria-hidden="true" data-i18n-off></div><div class="wp-body" contenteditable="true" role="textbox" aria-multiline="true" aria-label="' + esc(i18n('Texte du document')) + '" data-ui-off></div>';
             const body = el.querySelector('.wp-body');
             body.innerHTML = cleanHtml(s.html || '').html || '<p data-st="normal"><br></p>';
             const sec = {el, body, sheets: el.querySelector('.wp-sheets'), page: s.page ? {...s.page, m: {...(s.page.m || this.doc.page.m)}} : null, pages: 1};
@@ -308,7 +309,7 @@
         fillStyleSelect() {
             const sel = this.$('[data-wp-style]'); if (!sel) return;
             const ps = this.doc.styles.filter(s => s.kind !== 'c'), cs = this.doc.styles.filter(s => s.kind === 'c');
-            sel.innerHTML = `<optgroup label="Paragraphe">${ps.map(s => `<option value="${esc(s.id)}">${esc(s.name)}</option>`).join('')}</optgroup>${cs.length ? `<optgroup label="Caractère">${cs.map(s => `<option value="c:${esc(s.id)}">${esc(s.name)}</option>`).join('')}</optgroup>` : ''}`;
+            sel.innerHTML = `<optgroup label="${esc(i18n('Paragraphe'))}">${ps.map(s => `<option value="${esc(s.id)}">${esc(T().styleLabel(s))}</option>`).join('')}</optgroup>${cs.length ? `<optgroup label="${esc(i18n('Caractère', {ctx: 'texte'}))}">${cs.map(s => `<option value="c:${esc(s.id)}">${esc(T().styleLabel(s))}</option>`).join('')}</optgroup>` : ''}`;
         },
         /** la forme attendue : paragraphes avec un style, listes rangées, éléments spéciaux non modifiables */
         normalize(root) {
@@ -441,7 +442,7 @@
             if (!notes.length) { box?.remove(); return; }
             if (!box) { box = document.createElement('div'); box.className = 'wp-endnotes'; box.setAttribute('contenteditable', 'false'); last.appendChild(box); }
             if (box.nextSibling) last.appendChild(box);
-            const html = `<p><b>Notes</b></p>${notes.map(s => `<p data-goto-fn="${esc(s.dataset.fn)}"><sup>${esc(s.textContent)}</sup> ${esc(s.dataset.note || '')}</p>`).join('')}`;
+            const html = `<p><b>${esc(i18n('Notes'))}</b></p>${notes.map(s => `<p data-goto-fn="${esc(s.dataset.fn)}"><sup>${esc(s.textContent)}</sup> ${esc(s.dataset.note || '')}</p>`).join('')}`;
             if (box.innerHTML !== html) box.innerHTML = html;
         },
         /** les feuilles : fond, en-tête, pied, notes de bas de page, filigrane, numéro */
@@ -458,9 +459,9 @@
                     const notes = (sec.notesOn?.[k] || []).map(s => `<p><sup>${esc(s.textContent || String(++fnNo))}</sup> ${esc(s.dataset.note || '')}</p>`).join('');
                     H.push(`<div class="wp-sheet" data-page="${n}" style="top:${k * pitch}px;width:${g.W}px;height:${g.H}px;background:${esc(color)}">
                         ${wm ? `<div class="wp-sheet-wm" style="opacity:${clamp(this.doc.page.wmo || 12, 2, 60) / 100}">${esc(wm)}</div>` : ''}
-                        <div class="wp-sheet-hd" data-wp-hf="header" title="Double-clic : modifier l’en-tête" style="left:${g.ml}px;right:${g.mr}px;top:${Math.max(8, g.mt / 2 - 10)}px">${field(hd, n)}</div>
+                        <div class="wp-sheet-hd" data-wp-hf="header" title="${esc(i18n('Double-clic : modifier l’en-tête'))}" style="left:${g.ml}px;right:${g.mr}px;top:${Math.max(8, g.mt / 2 - 10)}px">${field(hd, n)}</div>
                         ${notes ? `<div class="wp-sheet-notes" style="left:${g.ml}px;width:${g.W - g.ml - g.mr}px;bottom:${g.mb}px">${notes}</div>` : ''}
-                        <div class="wp-sheet-ft" data-wp-hf="footer" title="Double-clic : modifier le pied de page" style="left:${g.ml}px;right:${g.mr}px;bottom:${Math.max(8, g.mb / 2 - 10)}px">${field(ft, n)}</div>
+                        <div class="wp-sheet-ft" data-wp-hf="footer" title="${esc(i18n('Double-clic : modifier le pied de page'))}" style="left:${g.ml}px;right:${g.mr}px;bottom:${Math.max(8, g.mb / 2 - 10)}px">${field(ft, n)}</div>
                         <span class="wp-sheet-num">${n}</span></div>`);
                 }
                 sec.sheets.innerHTML = H.join('');
@@ -523,12 +524,12 @@
             s.secs.forEach((x, i) => { let sec = this.secs[i]; if (!sec) sec = this.addSection({html: ''}, this.secs[i - 1] || null); sec.page = x.page ? JSON.parse(x.page) : null; sec.body.innerHTML = x.blocks.join(''); this.normalize(sec.body); });
             this.applyStyles(); this.layout(); this.setSelPos(s.sel); this.syncTools(); this.paintPanel?.();
         },
-        undo() { if (this.typeT) this.commit(); if (this.hpos <= 0) return toast('Rien à annuler.'); const sel = this.selPos(); this.hpos--; this.restore(this.hist[this.hpos]); this.touch(); this.histBtns(); this.status?.flash('↶ Annulé'); void sel; },
-        redo() { if (this.hpos >= this.hist.length - 1) return toast('Rien à rétablir.'); this.hpos++; this.restore(this.hist[this.hpos]); this.touch(); this.histBtns(); this.status?.flash('↷ Rétabli'); },
+        undo() { if (this.typeT) this.commit(); if (this.hpos <= 0) return toast(i18n('Rien à annuler.')); const sel = this.selPos(); this.hpos--; this.restore(this.hist[this.hpos]); this.touch(); this.histBtns(); this.status?.flash(i18n('↶ Annulé')); void sel; },
+        redo() { if (this.hpos >= this.hist.length - 1) return toast(i18n('Rien à rétablir.')); this.hpos++; this.restore(this.hist[this.hpos]); this.touch(); this.histBtns(); this.status?.flash(i18n('↷ Rétabli')); },
         histBtns() { const u = this.$('.ui-topbar [data-ui-cmd="undo"]'), r = this.$('.ui-topbar [data-ui-cmd="redo"]'); if (u) u.disabled = this.hpos <= 0; if (r) r.disabled = this.hpos >= this.hist.length - 1; },
         touch() { this.dirty = true; this.lastEdit = Date.now(); UI()?.savedStatus?.(this.dlg, 'dirty'); },
         /** H7 : un message avec « ↶ Annuler » pour la dernière action */
-        undoable(msg) { const at = this.hpos; A().undoToast ? A().undoToast(msg, {undo: () => { if (this.hpos !== at) throw new Error('d’autres changements ont suivi : utilise ↶ (' + kbd('⌘Z') + ')'); this.undo(); }, redo: () => this.redo()}) : toast(msg); },
+        undoable(msg) { const at = this.hpos; A().undoToast ? A().undoToast(msg, {undo: () => { if (this.hpos !== at) throw new Error(i18n('d’autres changements ont suivi : utilise ↶ ({key})', {key: kbd('⌘Z')})); this.undo(); }, redo: () => this.redo()}) : toast(msg); },
         /** la sélection en nombres (section, caractère) pour la remettre après ↶ */
         selPos() {
             const s = getSelection(); if (!s.rangeCount) return null; const r = s.getRangeAt(0), sec = this.secOf(r.startContainer); if (!sec) return null;

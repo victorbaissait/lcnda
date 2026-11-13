@@ -17,6 +17,8 @@
     const A = () => root.LCNDA_APP, X = () => root.LCNDA_SHEET;
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const toast = (...a) => A()?.toast?.(...a);
+    const i18n = (s, v) => (root.LCNDA_I18N ? root.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js (dans Node : le français)
+    const plural = (n, w, p) => (A()?.plural ? A().plural(n, w, p) : `${n} ${n > 1 ? p || w + 's' : w}`);
 
     /* ═════════ ✨ Remplissage instantané (sans écran) ═════════
        Une ligne = les textes de ses autres colonnes ; un morceau = un mot d'une colonne (compté du début ou de la fin), ou toute la case,
@@ -75,32 +77,33 @@
         const r0 = g.r0, r1 = Math.max(g.r1, Math.min(u.r - 1, r0 + 20000)), ex = [], todo = [];
         for (let r = r0; r <= r1; r++) { const raw = sh.cells[S.addr(r, c)]?.v, src = rowVals(ed, r, c0, c1, c); if (!src.some(Boolean)) continue;
             if (raw != null && raw !== '' && !S.isFormula(raw)) ex.push({r, src, out: String(raw)}); else if (raw == null || raw === '') todo.push({r, src}); }
-        if (!ex.length) return toast('Écris le résultat voulu dans la première case de la colonne (par exemple « Jean D. »), puis relance ✨ Remplissage instantané.');
+        if (!ex.length) return toast(i18n('Écris le résultat voulu dans la première case de la colonne (par exemple « Jean D. »), puis relance ✨ Remplissage instantané.'));
         // la ligne de titres ne sert pas d'exemple si une autre ligne en donne un
         const useEx = ex.length > 1 && ex[0].r === g.r0 ? ex.slice(1) : ex, prog = learnFill(useEx.slice(0, 4));
-        if (!prog) return toast('Je ne trouve pas de règle qui marche pour tous les exemples : écris-en un de plus, ou un plus simple.', 'error');
+        if (!prog) return toast(i18n('Je ne trouve pas de règle qui marche pour tous les exemples : écris-en un de plus, ou un plus simple.'), 'error');
         const plan = todo.filter(t => t.r > useEx[0].r - 1 || true).map(t => ({r: t.r, v: applyFill(prog, t.src)})).filter(x => x.v);
-        if (!plan.length) return toast('Rien à remplir : la colonne est déjà pleine.');
+        if (!plan.length) return toast(i18n('Rien à remplir : la colonne est déjà pleine.'));
         ed.begin('Remplissage instantané'); plan.forEach(({r, v}) => { const k = S.addr(r, c), old = sh.cells[k]; ed.put(sh, k, {...(old || {}), v}); }); ed.commit(); ed.render();
-        const desc = prog.map(x => (x.lit != null ? `« ${x.lit} »` : `${x.tr === 'ini' ? 'initiale' : x.tr === 'up' ? 'MAJUSCULES' : x.tr === 'low' ? 'minuscules' : x.tr === 'cap' ? 'Capitale' : 'mot'} ${x.t === 'all' ? 'de' : `n°${x.t >= 0 ? x.t + 1 : `${-x.t} depuis la fin`} de`} ${S.colName(c0 + x.j)}`)).join(' + ');
-        toast(`✨ ${A()?.plural ? A().plural(plan.length, 'case remplie', 'cases remplies') : plan.length + ' cases'} (règle : ${desc}). ↶ pour annuler.`, 'success');
+        const desc = prog.map(x => { if (x.lit != null) return `« ${x.lit} »`; const tr = i18n(x.tr === 'ini' ? 'initiale' : x.tr === 'up' ? 'MAJUSCULES' : x.tr === 'low' ? 'minuscules' : x.tr === 'cap' ? 'Capitale' : 'mot'), col = S.colName(c0 + x.j);
+            return x.t === 'all' ? i18n('{what} de {col}', {what: tr, col}) : x.t >= 0 ? i18n('{what} n°{n} de {col}', {what: tr, n: String(x.t + 1), col}) : i18n('{what} n°{n} depuis la fin de {col}', {what: tr, n: String(-x.t), col}); }).join(' + ');
+        toast(i18n('✨ {n} (règle : {rule}). ↶ pour annuler.', {n: plural(plan.length, 'case remplie', 'cases remplies'), rule: desc}), 'success');
     }
 
     /* ── Σ Sous-totaux et ⊟ plan ── */
-    const FUNCS = [['SOMME', 'Somme'], ['NB', 'Nombre'], ['MOYENNE', 'Moyenne'], ['MIN', 'Plus petit'], ['MAX', 'Plus grand']];
+    const FUNCS = [['SOMME', 'Somme'], ['NB', 'Nombre'], ['MOYENNE', 'Moyenne'], ['MIN', 'Plus petit'], ['MAX', 'Plus grand']]; // libellés traduits à l’affichage
     function subtotalDialog(ed) {
-        const S = X(), g = ed.region ? ed.region() : ed.selClip(), m = S.matrix(ed.wb, ed.calc, ed.si, g); if (m.length < 3) return toast('Choisis un tableau avec une ligne de titres et des lignes de données.');
-        const head = m[0].map((v, j) => (v == null || v === '' ? `Colonne ${S.colName(g.c0 + j)}` : String(v))), rows = m.slice(1);
+        const S = X(), g = ed.region ? ed.region() : ed.selClip(), m = S.matrix(ed.wb, ed.calc, ed.si, g); if (m.length < 3) return toast(i18n('Choisis un tableau avec une ligne de titres et des lignes de données.'));
+        const head = m[0].map((v, j) => (v == null || v === '' ? i18n('Colonne {col}', {col: S.colName(g.c0 + j)}) : String(v))), rows = m.slice(1);
         const numCols = head.map((_, j) => rows.some(r => typeof r[j] === 'number'));
         const groupGuess = head.findIndex((_, j) => !numCols[j] && new Set(rows.map(r => String(r[j] ?? ''))).size < rows.length);
-        ext.openDialog({eyebrow: 'DONNÉES', title: 'Σ Sous-totaux', submitLabel: 'Créer les sous-totaux', wide: true,
-            body: `<p class="muted">D’après <b>${esc(S.rangeStr(g))}</b>. Une nouvelle feuille : les lignes rangées par groupe, un total sous chaque groupe (formules), puis le total général. « ⊟ Plan » (menu Données) replie le détail.</p>
-                <div class="form-grid"><label>À chaque changement de<select name="by">${head.map((h, j) => `<option value="${j}" ${j === Math.max(0, groupGuess) ? 'selected' : ''}>${esc(h)}</option>`).join('')}</select></label>
-                <label>Calcul<select name="fn">${FUNCS.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label></div>
-                <fieldset><legend>Sur les colonnes</legend>${head.map((h, j) => `<label class="ui-check"><input type="checkbox" name="col" value="${j}" ${numCols[j] ? 'checked' : ''}> ${esc(h)}</label>`).join('')}</fieldset>`,
+        ext.openDialog({eyebrow: i18n('DONNÉES'), title: i18n('Σ Sous-totaux'), submitLabel: i18n('Créer les sous-totaux'), wide: true,
+            body: `<p class="muted">${i18n('D’après <b>{range}</b>. Une nouvelle feuille : les lignes rangées par groupe, un total sous chaque groupe (formules), puis le total général. « ⊟ Plan » (menu Données) replie le détail.', {range: esc(S.rangeStr(g))})}</p>
+                <div class="form-grid"><label>${esc(i18n('À chaque changement de'))}<select name="by">${head.map((h, j) => `<option value="${j}" ${j === Math.max(0, groupGuess) ? 'selected' : ''}>${esc(h)}</option>`).join('')}</select></label>
+                <label>${esc(i18n('Calcul'))}<select name="fn">${FUNCS.map(([k, l]) => `<option value="${k}">${esc(i18n(l))}</option>`).join('')}</select></label></div>
+                <fieldset><legend>${esc(i18n('Sur les colonnes'))}</legend>${head.map((h, j) => `<label class="ui-check"><input type="checkbox" name="col" value="${j}" ${numCols[j] ? 'checked' : ''}> ${esc(h)}</label>`).join('')}</fieldset>`,
             onSubmit: f => {
                 const by = Number(f.elements.by.value), fn = f.elements.fn.value, cols = [...f.querySelectorAll('[name=col]:checked')].map(x => Number(x.value)).filter(j => j !== by);
-                if (!cols.length) { window.LCNDA_UI?.fail?.(f.querySelector('[name=col]'), 'Coche au moins une colonne à calculer.'); return false; }
+                if (!cols.length) { window.LCNDA_UI?.fail?.(f.querySelector('[name=col]'), i18n('Coche au moins une colonne à calculer.')); return false; }
                 const groups = new Map(); rows.forEach(r => { const k = String(r[by] ?? '').trim() || '(vide)'; if (!groups.has(k)) groups.set(k, []); groups.get(k).push(r); });
                 const keys = [...groups.keys()].sort((a, b) => (a === '(vide)') - (b === '(vide)') || a.localeCompare(b, 'fr', {numeric: true, sensitivity: 'base'}));
                 ed.begin('Sous-totaux'); const names = ed.wb.sheets.map(s => s.name), sh = S.newSheet(S.cleanSheetName(`Sous-totaux ${head[by]}`.slice(0, 28), names)); ed.wb.sheets.splice(ed.si + 1, 0, sh); ed.meta(sh);
@@ -112,35 +115,35 @@
                     head.forEach((_, j) => { if (j !== by && !cols.includes(j)) ed.put(sh, S.addr(r, j), {v: null, s: tot}); }); r++; });
                 ed.put(sh, S.addr(r, by), {v: 'Total général', s: grand}); cols.forEach((j, i) => ed.put(sh, S.addr(r, j), {v: totRanges[i].length <= 120 ? `=${fn}(${totRanges[i].join(';')})` : `=${fn}(${S.addr(1, j)}:${S.addr(r - 1, j)})`, s: grand}));
                 sh.subtotal = {detail: detail.map(x => x + 1)}; sh.freeze = {r: 1, c: 0};
-                ed.commit(); ed.showSheet(ed.si + 1); ed.render(); toast(`Σ ${keys.length} groupe${keys.length > 1 ? 's' : ''}. « ⊟ Plan » (menu Données) replie le détail.`, 'success');
+                ed.commit(); ed.showSheet(ed.si + 1); ed.render(); toast(i18n('Σ {n}. « ⊟ Plan » (menu Données) replie le détail.', {n: plural(keys.length, 'groupe')}), 'success');
             }});
     }
     function outlineToggle(ed) {
-        const sh = ed.S(), d = sh.subtotal?.detail; if (!Array.isArray(d) || !d.length) return toast('Cette feuille n’a pas de sous-totaux : Données → Σ Sous-totaux… d’abord.');
+        const sh = ed.S(), d = sh.subtotal?.detail; if (!Array.isArray(d) || !d.length) return toast(i18n('Cette feuille n’a pas de sous-totaux : Données → Σ Sous-totaux… d’abord.'));
         sh.rows = sh.rows || {}; const hide = !d.some(n => sh.rows[String(n)]?.hidden);
         ed.begin(hide ? 'Replier le détail' : 'Déplier le détail'); ed.meta(sh);
         d.forEach(n => { const k = String(n), x = {...(sh.rows[k] || {})}; if (hide) x.hidden = true; else delete x.hidden; if (Object.keys(x).length) sh.rows[k] = x; else delete sh.rows[k]; });
-        ed.commit(); ed.render(); toast(hide ? '⊟ Détail replié : seuls les totaux restent.' : '⊞ Détail déplié.');
+        ed.commit(); ed.render(); toast(hide ? i18n('⊟ Détail replié : seuls les totaux restent.') : i18n('⊞ Détail déplié.'));
     }
 
     /* ── 🎯 Valeur cible ── */
     function goalSeek(ed) {
         const S = X(), sh = ed.S(), here = S.addr(ed.sel.r0, ed.sel.c0), isF = S.isFormula(sh.cells[here]?.v);
-        ext.openDialog({eyebrow: 'DONNÉES', title: '🎯 Valeur cible', submitLabel: 'Chercher',
-            body: `<p class="muted">L’app essaie des valeurs dans « la case à changer » jusqu’à ce que la formule donne le résultat voulu. Ex. : à quel âge s’est-il marié pour que la différence d’âge soit 7 ans ?</p>
-                <div class="form-grid"><label>La formule de la case<input name="f" value="${esc(isF ? here : '')}" placeholder="C5"></label><label>Doit donner<input name="t" type="number" step="any" required></label>
-                <label>En changeant la case<input name="x" value="${esc(isF ? '' : here)}" placeholder="B2"></label></div>`,
+        ext.openDialog({eyebrow: i18n('DONNÉES'), title: i18n('🎯 Valeur cible'), submitLabel: i18n('Chercher'),
+            body: `<p class="muted">${esc(i18n('L’app essaie des valeurs dans « la case à changer » jusqu’à ce que la formule donne le résultat voulu. Ex. : à quel âge s’est-il marié pour que la différence d’âge soit 7 ans ?'))}</p>
+                <div class="form-grid"><label>${esc(i18n('La formule de la case'))}<input name="f" value="${esc(isF ? here : '')}" placeholder="C5"></label><label>${esc(i18n('Doit donner'))}<input name="t" type="number" step="any" required></label>
+                <label>${esc(i18n('En changeant la case'))}<input name="x" value="${esc(isF ? '' : here)}" placeholder="B2"></label></div>`,
             onSubmit: f => {
                 const pf = S.parseAddr(f.elements.f.value), px = S.parseAddr(f.elements.x.value), target = Number(String(f.elements.t.value).replace(',', '.'));
-                if (!pf || !px || !Number.isFinite(target)) { window.LCNDA_UI?.fail?.(!pf ? f.elements.f : !px ? f.elements.x : f.elements.t, !pf || !px ? 'Écris une adresse de case (ex. C5, B2).' : 'Écris le résultat voulu.'); return false; }
-                if (!S.isFormula(sh.cells[S.addr(...pf)]?.v)) { toast('La première case doit contenir une formule.', 'error'); return false; }
+                if (!pf || !px || !Number.isFinite(target)) { window.LCNDA_UI?.fail?.(!pf ? f.elements.f : !px ? f.elements.x : f.elements.t, !pf || !px ? i18n('Écris une adresse de case (ex. C5, B2).') : i18n('Écris le résultat voulu.')); return false; }
+                if (!S.isFormula(sh.cells[S.addr(...pf)]?.v)) { toast(i18n('La première case doit contenir une formule.'), 'error'); return false; }
                 const wb2 = JSON.parse(JSON.stringify(ed.wb)), kx = S.addr(...px), F = x => { wb2.sheets[ed.si].cells[kx] = {...(wb2.sheets[ed.si].cells[kx] || {}), v: x}; const v = new S.Calc(wb2).val(ed.si, pf[0], pf[1]); return typeof v === 'number' ? v - target : NaN; };
                 const x0 = Number(ed.calc.val(ed.si, px[0], px[1])) || 0; let a = x0, b = x0 + (Math.abs(x0) > 1 ? x0 * .1 : 1), fa = F(a), fb = F(b), best = null;
                 for (let i = 0; i < 80 && Number.isFinite(fa) && Number.isFinite(fb); i++) { if (Math.abs(fb) < 1e-9) { best = b; break; } const d = fb - fa; if (!d) { b += 1; fb = F(b); continue; } const c = b - fb * (b - a) / d; a = b; fa = fb; b = c; fb = F(b); }
                 if (best == null && Number.isFinite(fb) && Math.abs(fb) < 1e-6 * Math.max(1, Math.abs(target))) best = b;
-                if (best == null) { toast('Pas de valeur trouvée : la formule ne dépend peut-être pas de cette case, ou ne peut pas atteindre ce résultat.', 'error'); return false; }
+                if (best == null) { toast(i18n('Pas de valeur trouvée : la formule ne dépend peut-être pas de cette case, ou ne peut pas atteindre ce résultat.'), 'error'); return false; }
                 const val = Math.round(best * 1e9) / 1e9; ed.begin('Valeur cible'); ed.put(sh, kx, {...(sh.cells[kx] || {}), v: val}); ed.commit(); ed.render();
-                toast(`🎯 ${S.addr(...px)} = ${String(val).replace('.', ',')} : la formule donne ${String(target).replace('.', ',')}. ↶ pour annuler.`, 'success');
+                toast(i18n('🎯 {cell} = {value} : la formule donne {target}. ↶ pour annuler.', {cell: S.addr(...px), value: String(val).replace('.', ','), target: String(target).replace('.', ',')}), 'success');
             }});
     }
 
@@ -150,12 +153,12 @@
         // la plage proposée : les nombres à gauche de la case, sur la même ligne
         let c1 = s.c0 - 1; while (c1 >= 0 && typeof ed.calc.val(ed.si, s.r0, c1) !== 'number') c1--; let c0 = c1; while (c0 > 0 && typeof ed.calc.val(ed.si, s.r0, c0 - 1) === 'number') c0--;
         const guess = c1 >= 0 ? `${S.addr(s.r0, c0)}:${S.addr(s.r0, c1)}` : '';
-        ext.openDialog({eyebrow: 'INSERTION', title: '📈 Mini-graphique', submitLabel: 'Poser',
-            body: `<p class="muted">Un petit graphique dans la case, qui suit les chiffres. Plusieurs lignes choisies : un graphique par ligne (la plage descend avec elles).</p>
-                <div class="form-grid"><label>Les nombres (plage de la 1re ligne)<input name="rg" value="${esc(guess)}" placeholder="B2:F2"></label>
-                <label>Dessin<select name="k"><option value="courbe">〰 Courbe</option><option value="barres">▮ Barres</option><option value="gagné">± Gagné / perdu</option></select></label>
-                <label>Couleur<input type="color" name="col" value="#0066cc"></label></div>`,
-            onSubmit: f => { const g = S.parseRange(f.elements.rg.value); if (!g) { window.LCNDA_UI?.fail?.(f.elements.rg, 'Écris une plage, par exemple B2:F2.'); return false; }
+        ext.openDialog({eyebrow: i18n('INSERTION'), title: i18n('📈 Mini-graphique'), submitLabel: i18n('Poser'),
+            body: `<p class="muted">${esc(i18n('Un petit graphique dans la case, qui suit les chiffres. Plusieurs lignes choisies : un graphique par ligne (la plage descend avec elles).'))}</p>
+                <div class="form-grid"><label>${esc(i18n('Les nombres (plage de la 1re ligne)'))}<input name="rg" value="${esc(guess)}" placeholder="B2:F2"></label>
+                <label>${esc(i18n('Dessin'))}<select name="k"><option value="courbe">〰 ${esc(i18n('Courbe'))}</option><option value="barres">▮ ${esc(i18n('Barres'))}</option><option value="gagné">± ${esc(i18n('Gagné / perdu'))}</option></select></label>
+                <label>${esc(i18n('Couleur'))}<input type="color" name="col" value="#0066cc"></label></div>`,
+            onSubmit: f => { const g = S.parseRange(f.elements.rg.value); if (!g) { window.LCNDA_UI?.fail?.(f.elements.rg, i18n('Écris une plage, par exemple B2:F2.')); return false; }
                 ed.begin('Mini-graphique'); for (let r = s.r0; r <= Math.min(s.r1, s.r0 + 2000); r++) { const d = r - s.r0, k = S.addr(r, s.c0); ed.put(sh, k, {...(sh.cells[k] || {}), v: `=MINIGRAPHIQUE(${S.rangeStr({r0: g.r0 + d, c0: g.c0, r1: g.r1 + d, c1: g.c1})};"${f.elements.k.value}";"${f.elements.col.value}")`}); }
                 ed.commit(); ed.render(); }});
     }
@@ -163,20 +166,20 @@
     /* ── 🧮 Solveur ── */
     function solverDialog(ed) {
         const S = X(), sh = ed.S(), here = S.addr(ed.sel.r0, ed.sel.c0);
-        ext.openDialog({eyebrow: 'DONNÉES', title: '🧮 Solveur', submitLabel: 'Résoudre', wide: true,
-            body: `<p class="muted">Comme la valeur cible, mais en changeant plusieurs cases à la fois, avec des conditions. Ex. : répartir un héritage entre trois branches pour que chacune ait au moins 1 000 € et que l’écart soit le plus petit possible.</p>
-                <div class="form-grid"><label>La formule (case objectif)<input name="f" value="${esc(S.isFormula(sh.cells[here]?.v) ? here : '')}" placeholder="D5"></label>
-                <label>Doit être<select name="goal"><option value="max">la plus grande possible</option><option value="min">la plus petite possible</option><option value="val">égale à…</option></select></label>
-                <label>Valeur (si « égale à »)<input name="t" type="number" step="any"></label>
-                <label>En changeant les cases<input name="x" placeholder="B2:B4 ou B2;C3"></label></div>
-                <label>Conditions (une par ligne : <code>B2 >= 0</code>, <code>B3 <= 10</code>, <code>D5 = 100</code>, <code>B2 >= C2</code>)<textarea name="c" rows="4"></textarea></label>
-                <label class="checkbox-line"><input type="checkbox" name="int"> Nombres entiers seulement</label>`,
+        ext.openDialog({eyebrow: i18n('DONNÉES'), title: i18n('🧮 Solveur'), submitLabel: i18n('Résoudre'), wide: true,
+            body: `<p class="muted">${esc(i18n('Comme la valeur cible, mais en changeant plusieurs cases à la fois, avec des conditions. Ex. : répartir un héritage entre trois branches pour que chacune ait au moins 1 000 € et que l’écart soit le plus petit possible.'))}</p>
+                <div class="form-grid"><label>${esc(i18n('La formule (case objectif)'))}<input name="f" value="${esc(S.isFormula(sh.cells[here]?.v) ? here : '')}" placeholder="D5"></label>
+                <label>${esc(i18n('Doit être'))}<select name="goal"><option value="max">${esc(i18n('la plus grande possible'))}</option><option value="min">${esc(i18n('la plus petite possible'))}</option><option value="val">${esc(i18n('égale à…'))}</option></select></label>
+                <label>${esc(i18n('Valeur (si « égale à »)'))}<input name="t" type="number" step="any"></label>
+                <label>${esc(i18n('En changeant les cases'))}<input name="x" placeholder="${esc(i18n('B2:B4 ou B2;C3'))}"></label></div>
+                <label>${i18n('Conditions (une par ligne : {examples})', {examples: '<code>B2 >= 0</code>, <code>B3 <= 10</code>, <code>D5 = 100</code>, <code>B2 >= C2</code>'})}<textarea name="c" rows="4"></textarea></label>
+                <label class="checkbox-line"><input type="checkbox" name="int"> ${esc(i18n('Nombres entiers seulement'))}</label>`,
             onSubmit: f => {
-                const pf = S.parseAddr(f.elements.f.value); if (!pf || !S.isFormula(sh.cells[S.addr(...pf)]?.v)) { toast('La case objectif doit contenir une formule (ex. D5).', 'error'); return false; }
+                const pf = S.parseAddr(f.elements.f.value); if (!pf || !S.isFormula(sh.cells[S.addr(...pf)]?.v)) { toast(i18n('La case objectif doit contenir une formule (ex. D5).'), 'error'); return false; }
                 const vars = []; String(f.elements.x.value).split(/[;,\s]+/).filter(Boolean).forEach(t => { const g = S.parseRange(t) || (S.parseAddr(t) && {r0: S.parseAddr(t)[0], c0: S.parseAddr(t)[1], r1: S.parseAddr(t)[0], c1: S.parseAddr(t)[1]}); if (g) for (let r = g.r0; r <= g.r1; r++) for (let c = g.c0; c <= g.c1; c++) vars.push(S.addr(r, c)); });
-                if (!vars.length || vars.length > 30) { toast(vars.length ? 'Trente cases à changer au plus.' : 'Écris les cases à changer (ex. B2:B4).', 'error'); return false; }
-                const cons = parseCons(f.elements.c.value), bad = cons.find(c => c.bad); if (bad) { toast(`Condition illisible : « ${bad.bad} » (ex. B2 >= 0).`, 'error'); return false; }
-                const goal = f.elements.goal.value, target = Number(String(f.elements.t.value).replace(',', '.')); if (goal === 'val' && !Number.isFinite(target)) { window.LCNDA_UI?.fail?.(f.elements.t, 'Écris la valeur voulue.'); return false; }
+                if (!vars.length || vars.length > 30) { toast(vars.length ? i18n('Trente cases à changer au plus.') : i18n('Écris les cases à changer (ex. B2:B4).'), 'error'); return false; }
+                const cons = parseCons(f.elements.c.value), bad = cons.find(c => c.bad); if (bad) { toast(i18n('Condition illisible : « {text} » (ex. B2 >= 0).', {text: bad.bad}), 'error'); return false; }
+                const goal = f.elements.goal.value, target = Number(String(f.elements.t.value).replace(',', '.')); if (goal === 'val' && !Number.isFinite(target)) { window.LCNDA_UI?.fail?.(f.elements.t, i18n('Écris la valeur voulue.')); return false; }
                 const wb2 = JSON.parse(JSON.stringify(ed.wb)), cells = wb2.sheets[ed.si].cells, numAt = (calc, a) => { const p = S.parseAddr(a), v = calc.val(ed.si, p[0], p[1]); return typeof v === 'number' ? v : NaN; };
                 const side = (calc, b) => { const n = Number(String(b).replace(',', '.')); return Number.isFinite(n) ? n : S.parseAddr(b) ? numAt(calc, b.toUpperCase()) : NaN; };
                 let viol = 0;
@@ -185,31 +188,31 @@
                     const o = goal === 'max' ? -y : goal === 'min' ? y : (y - target) ** 2; return o + 1e6 * viol * viol + 1e3 * viol; };
                 const x0 = vars.map(a => { const p = S.parseAddr(a), v = ed.calc.val(ed.si, p[0], p[1]); return typeof v === 'number' ? v : 0; });
                 const r = hookeJeeves(phi, x0, {integer: f.elements.int.checked}); phi(r.x);
-                if (viol > 1e-6) { toast('Pas de solution qui respecte toutes les conditions (vérifie-les, ou change le départ).', 'error'); return false; }
+                if (viol > 1e-6) { toast(i18n('Pas de solution qui respecte toutes les conditions (vérifie-les, ou change le départ).'), 'error'); return false; }
                 ed.begin('Solveur'); vars.forEach((a, i) => ed.put(sh, a, {...(sh.cells[a] || {}), v: Math.round(r.x[i] * 1e9) / 1e9})); ed.commit(); ed.render();
-                const y = ed.calc.val(ed.si, pf[0], pf[1]); toast(`🧮 Trouvé : ${S.addr(...pf)} = ${String(typeof y === 'number' ? Math.round(y * 1e6) / 1e6 : y).replace('.', ',')} (${vars.length} case${vars.length > 1 ? 's' : ''} changée${vars.length > 1 ? 's' : ''}). ↶ pour annuler.`, 'success');
+                const y = ed.calc.val(ed.si, pf[0], pf[1]); toast(i18n('🧮 Trouvé : {cell} = {value} ({n}). ↶ pour annuler.', {cell: S.addr(...pf), value: String(typeof y === 'number' ? Math.round(y * 1e6) / 1e6 : y).replace('.', ','), n: plural(vars.length, 'case changée', 'cases changées')}), 'success');
             }});
     }
     /* ── 📋 Tableau de scénarios (« et si ») ── */
     function scenarioDialog(ed) {
         const S = X(), sh = ed.S();
-        ext.openDialog({eyebrow: 'DONNÉES', title: '📋 Tableau de scénarios', submitLabel: 'Calculer',
-            body: `<p class="muted">Et si cette case valait 20, 25, 30… ? Le tableau montre ce que donnent les formules pour chaque valeur. Il est posé à partir de la case choisie (${esc(S.addr(ed.sel.r0, ed.sel.c0))}) ; rien d’autre ne change.</p>
-                <div class="form-grid"><label>La case qui change<input name="x" placeholder="B2"></label><label>Ses valeurs (séparées par « ; », ou une plage)<input name="v" placeholder="20;25;30 ou A10:A15"></label>
-                <label>Les formules à suivre<input name="f" placeholder="C5;D5"></label></div>`,
+        ext.openDialog({eyebrow: i18n('DONNÉES'), title: i18n('📋 Tableau de scénarios'), submitLabel: i18n('Calculer'),
+            body: `<p class="muted">${esc(i18n('Et si cette case valait 20, 25, 30… ? Le tableau montre ce que donnent les formules pour chaque valeur. Il est posé à partir de la case choisie ({cell}) ; rien d’autre ne change.', {cell: S.addr(ed.sel.r0, ed.sel.c0)}))}</p>
+                <div class="form-grid"><label>${esc(i18n('La case qui change'))}<input name="x" placeholder="B2"></label><label>${esc(i18n('Ses valeurs (séparées par « ; », ou une plage)'))}<input name="v" placeholder="${esc(i18n('20;25;30 ou A10:A15'))}"></label>
+                <label>${esc(i18n('Les formules à suivre'))}<input name="f" placeholder="C5;D5"></label></div>`,
             onSubmit: f => {
-                const px = S.parseAddr(f.elements.x.value); if (!px) { window.LCNDA_UI?.fail?.(f.elements.x, 'Écris la case qui change (ex. B2).'); return false; }
+                const px = S.parseAddr(f.elements.x.value); if (!px) { window.LCNDA_UI?.fail?.(f.elements.x, i18n('Écris la case qui change (ex. B2).')); return false; }
                 let vals = []; const rg = S.parseRange(f.elements.v.value);
                 if (rg) { for (let r = rg.r0; r <= rg.r1; r++) for (let c = rg.c0; c <= rg.c1; c++) { const v = ed.calc.val(ed.si, r, c); if (v !== null && v !== '') vals.push(v); } }
                 else vals = String(f.elements.v.value).split(';').map(x => x.trim()).filter(Boolean).map(x => (Number.isFinite(Number(x.replace(',', '.'))) ? Number(x.replace(',', '.')) : x));
                 const fs = String(f.elements.f.value).split(/[;,\s]+/).filter(Boolean).map(t => S.parseAddr(t)).filter(Boolean);
-                if (!vals.length || !fs.length || vals.length > 500) { window.LCNDA_UI?.fail?.(!fs.length ? f.elements.f : f.elements.v, !fs.length ? 'Écris au moins une formule (ex. C5).' : 'Écris des valeurs (500 au plus).'); return false; }
+                if (!vals.length || !fs.length || vals.length > 500) { window.LCNDA_UI?.fail?.(!fs.length ? f.elements.f : f.elements.v, !fs.length ? i18n('Écris au moins une formule (ex. C5).') : i18n('Écris des valeurs (500 au plus).')); return false; }
                 const wb2 = JSON.parse(JSON.stringify(ed.wb)), kx = S.addr(...px), r0 = ed.sel.r0, c0 = ed.sel.c0;
                 ed.begin('Tableau de scénarios');
                 ed.put(sh, S.addr(r0, c0), {v: `${kx} =`, b: 1}); fs.forEach((p, j) => ed.put(sh, S.addr(r0, c0 + 1 + j), {v: S.addr(...p), b: 1}));
                 vals.forEach((v, i) => { wb2.sheets[ed.si].cells[kx] = {...(wb2.sheets[ed.si].cells[kx] || {}), v}; const calc = new S.Calc(wb2); ed.put(sh, S.addr(r0 + 1 + i, c0), {v});
                     fs.forEach((p, j) => { const y = calc.val(ed.si, p[0], p[1]); ed.put(sh, S.addr(r0 + 1 + i, c0 + 1 + j), {v: y && y.code ? y.code : y ?? ''}); }); });
-                ed.commit(); ed.render(); toast(`📋 ${vals.length} scénario${vals.length > 1 ? 's' : ''} calculé${vals.length > 1 ? 's' : ''} (valeurs fixes : refais-le si les données changent).`, 'success');
+                ed.commit(); ed.render(); toast(i18n('📋 {n} (valeurs fixes : refais-le si les données changent).', {n: plural(vals.length, 'scénario calculé', 'scénarios calculés')}), 'success');
             }});
     }
     /* ── ⏺ Actions enregistrées : refaire une suite de commandes (menus, boutons, formats) sur une autre sélection ── */
@@ -220,20 +223,20 @@
     function recordToggle(ed) {
         if (rec) { // fin de l'enregistrement
             const r = rec; rec = null; if (r.ed.run === r.wrap) r.ed.run = r.orig;
-            if (!r.cmds.length) return toast('Rien n’a été enregistré.');
-            A().askText({title: '⏺ Nommer l’action', message: `${r.cmds.length} commande${r.cmds.length > 1 ? 's' : ''} : ${r.cmds.slice(0, 8).join(', ')}${r.cmds.length > 8 ? '…' : ''}`, value: 'Mon action', okLabel: 'Garder'}).then(n => { if (!n?.trim()) return; const l = loadActs().filter(a => a.name !== n.trim()); l.unshift({name: n.trim().slice(0, 60), cmds: r.cmds}); saveActs(l); toast(`⏺ Action « ${n.trim()} » gardée : Données → ▶ Actions enregistrées.`, 'success'); });
+            if (!r.cmds.length) return toast(i18n('Rien n’a été enregistré.'));
+            A().askText({title: i18n('⏺ Nommer l’action'), message: `${plural(r.cmds.length, 'commande')} : ${r.cmds.slice(0, 8).join(', ')}${r.cmds.length > 8 ? '…' : ''}`, value: i18n('Mon action'), okLabel: i18n('Garder')}).then(n => { if (!n?.trim()) return; const l = loadActs().filter(a => a.name !== n.trim()); l.unshift({name: n.trim().slice(0, 60), cmds: r.cmds}); saveActs(l); toast(i18n('⏺ Action « {name} » gardée : Données → ▶ Actions enregistrées.', {name: n.trim()}), 'success'); });
             return;
         }
         const orig = ed.run, cmds = [], wrap = function (cmd, b) { if (typeof cmd === 'string' && !SKIP.test(cmd) && cmds.length < 200) cmds.push(cmd); return orig.call(this, cmd, b); };
-        ed.run = wrap; rec = {ed, orig, wrap, cmds}; toast('⏺ Enregistrement : fais tes manipulations (menus, boutons, formats), puis Données → ⏹ Arrêter l’enregistrement.');
+        ed.run = wrap; rec = {ed, orig, wrap, cmds}; toast(i18n('⏺ Enregistrement : fais tes manipulations (menus, boutons, formats), puis Données → ⏹ Arrêter l’enregistrement.'));
     }
     async function playActs(ed, cmds) { for (const c of cmds) { await ed.run(c); await new Promise(r => setTimeout(r, 30)); } ed.render?.(); }
     function actionsDialog(ed) {
-        const l = loadActs(); if (!l.length) return toast('Aucune action enregistrée : Données → ⏺ Enregistrer une action.');
-        ext.openDialog({eyebrow: 'DONNÉES', title: '▶ Actions enregistrées', submitLabel: 'Fermer',
-            body: `<p class="muted">Elles se refont sur la sélection du moment.</p><ul class="xl-acts">${l.map((a, i) => `<li><b>${esc(a.name)}</b> <small class="muted">${a.cmds.length} commande${a.cmds.length > 1 ? 's' : ''}</small> <button type="button" class="button small" data-act-run="${i}">▶ Refaire</button> <button type="button" class="button small secondary" data-act-del="${i}">🗑</button></li>`).join('')}</ul>`,
+        const l = loadActs(); if (!l.length) return toast(i18n('Aucune action enregistrée : Données → ⏺ Enregistrer une action.'));
+        ext.openDialog({eyebrow: i18n('DONNÉES'), title: i18n('▶ Actions enregistrées'), submitLabel: i18n('Fermer'),
+            body: `<p class="muted">${esc(i18n('Elles se refont sur la sélection du moment.'))}</p><ul class="xl-acts">${l.map((a, i) => `<li><b>${esc(a.name)}</b> <small class="muted">${esc(plural(a.cmds.length, 'commande'))}</small> <button type="button" class="button small" data-act-run="${i}">${esc(i18n('▶ Refaire'))}</button> <button type="button" class="button small secondary" data-act-del="${i}">🗑</button></li>`).join('')}</ul>`,
             onOpen: d => d.addEventListener('click', e => { const r = e.target.closest('[data-act-run]'), x = e.target.closest('[data-act-del]');
-                if (r) { d.close?.(); d.remove?.(); playActs(ed, l[Number(r.dataset.actRun)].cmds).then(() => toast(`▶ « ${l[Number(r.dataset.actRun)].name} » refaite.`, 'success')); }
+                if (r) { d.close?.(); d.remove?.(); playActs(ed, l[Number(r.dataset.actRun)].cmds).then(() => toast(i18n('▶ « {name} » refaite.', {name: l[Number(r.dataset.actRun)].name}), 'success')); }
                 if (x) { const k = Number(x.dataset.actDel); saveActs(loadActs().filter(a => a.name !== l[k].name)); x.closest('li').remove(); } }),
             onSubmit: () => {}});
     }

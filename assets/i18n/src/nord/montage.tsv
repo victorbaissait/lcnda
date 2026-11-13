@@ -1,0 +1,48 @@
+fr ¦ cs ¦ sv ¦ da
+# 🎬 Montage vidéo, réglages en plus (mêmes clés que ../montage.tsv)
+Boutons des pistes : petits ¦ Tlačítka stop: malá ¦ Spårknappar: små ¦ Sporknapper: små
+Boutons des pistes : grands ¦ Tlačítka stop: velká ¦ Spårknappar: stora ¦ Sporknapper: store
+Les boutons des pistes ont déjà cette taille. ¦ Tlačítka stop už tuto velikost mají. ¦ Spårknapparna har redan den här storleken. ¦ Sporknapperne har allerede denne størrelse.
+Petits ¦ Malá ¦ Små ¦ Små
+Moyens (départ) ¦ Střední (výchozí) ¦ Mellan (standard) ¦ Mellem (standard)
+Grands ¦ Velká ¦ Stora ¦ Store
+Ranger cette section : glisse la poignée, ou Alt + ↑ / ↓ ¦ Přesunout tuto sekci: přetáhni úchyt, nebo Alt + ↑ / ↓ ¦ Flytta det här avsnittet: dra i handtaget, eller Alt + ↑ / ↓ ¦ Flyt dette afsnit: træk i håndtaget, eller Alt + ↑ / ↓
+Sections du panneau de droite : ↺ Remettre comme au départ ¦ Sekce pravého panelu: ↺ Vrátit na začátek ¦ Avsnitt i högra panelen: ↺ Återställ som från början ¦ Afsnit i højre panel: ↺ Nulstil som fra start
+Sections du panneau de droite remises comme au départ ¦ Sekce pravého panelu vráceny na začátek ¦ Avsnitten i högra panelen återställda som från början ¦ Afsnittene i højre panel nulstillet som fra start
+Les sections du panneau de droite sont déjà comme au départ. ¦ Sekce pravého panelu už jsou jako na začátku. ¦ Avsnitten i högra panelen är redan som från början. ¦ Afsnittene i højre panel er allerede som fra start.
+Taille et place ¦ Velikost a umístění ¦ Storlek och placering ¦ Størrelse og placering
+Durée, taille et place ¦ Délka, velikost a umístění ¦ Längd, storlek och placering ¦ Varighed, størrelse og placering
+Couleurs de cette vidéo ¦ Barvy tohoto videa ¦ Färger i den här videon ¦ Farver i denne video
+Rotation et fondus ¦ Otočení a prolínačky ¦ Rotation och toningar ¦ Rotation og overgange
+Volume et effets ¦ Hlasitost a efekty ¦ Volym och effekter ¦ Lydstyrke og effekter
+Les couleurs et le vieux film de ce morceau reviennent comme au départ ¦ Barvy a efekt starého filmu tohoto úseku se vrátí na začátek ¦ Färgerna och gammal film-effekten för det här klippet återgår till som från början ¦ Farverne og gammel film-effekten for dette klip vender tilbage som fra start
+Les couleurs et le vieux film de tout le film reviennent comme au départ ¦ Barvy a efekt starého filmu celého filmu se vrátí na začátek ¦ Färgerna och gammal film-effekten för hela filmen återgår till som från början ¦ Farverne og gammel film-effekten for hele filmen vender tilbage som fra start
+Couleurs remises comme au départ ¦ Barvy vráceny na začátek ¦ Färgerna återställda som från början ¦ Farverne nulstillet som fra start
+Le son de tout le film revient comme au départ (volume, effets) ¦ Zvuk celého filmu se vrátí na začátek (hlasitost, efekty) ¦ Ljudet i hela filmen återgår till som från början (volym, effekter) ¦ Lyden i hele filmen vender tilbage som fra start (lydstyrke, effekter)
+Son du film remis comme au départ ¦ Zvuk filmu vrácen na začátek ¦ Filmens ljud återställt som från början ¦ Filmens lyd nulstillet som fra start
+Texte remis comme au départ ¦ Text vrácen na začátek ¦ Texten återställd som från början ¦ Teksten nulstillet som fra start
+Volume dans le temps ¦ Hlasitost v čase ¦ Volym över tid ¦ Lydstyrke over tid
+Poser des points sur le morceau ¦ Pokládat body na úsek ¦ Sätt punkter på klippet ¦ Sæt punkter på klippet
+Point à la tête de lecture ¦ Bod u přehrávací hlavy ¦ Punkt vid uppspelningshuvudet ¦ Punkt ved afspilningshovedet
+Effacer la courbe ¦ Smazat křivku ¦ Rensa kurvan ¦ Ryd kurven
+Courbe du volume effacée ¦ Křivka hlasitosti smazána ¦ Volymkurvan rensad ¦ Lydstyrkekurven ryddet
+Volume : {n} % ¦ Hlasitost: {n} % ¦ Volym: {n} % ¦ Lydstyrke: {n} %
+Points sur la courbe : {n}. La ligne du milieu = le volume réglé plus haut ; en haut, jusqu’à deux fois plus fort. ¦ Body na křivce: {n}. Prostřední čára = hlasitost nastavená výše; nahoře až dvakrát hlasitěji. ¦ Punkter på kurvan: {n}. Mittenlinjen = volymen som ställts in ovan; högst upp upp till dubbelt så starkt. ¦ Punkter på kurven: {n}. Midterlinjen = lydstyrken indstillet ovenfor; øverst op til dobbelt så kraftigt.
+Pas encore de courbe : le volume reste le même du début à la fin (avec ses fondus). ¦ Zatím žádná křivka: hlasitost zůstává stejná od začátku do konce (s prolínačkami). ¦ Ingen kurva än: volymen är densamma från början till slut (med sina toningar). ¦ Ingen kurve endnu: lydstyrken er den samme fra start til slut (med sine overgange).
+Sur le morceau choisi, dans la frise : un clic pose un point, on glisse un point pour le déplacer (en haut : plus fort, en bas : moins fort), un double-clic l’enlève. ¦ Na vybraném úseku na časové ose: kliknutí položí bod, přetažením bod posuneš (nahoře: hlasitěji, dole: tišeji), dvojklik ho odstraní. ¦ På det valda klippet i tidslinjen: ett klick sätter en punkt, dra en punkt för att flytta den (högre: starkare, lägre: svagare), ett dubbelklick tar bort den. ¦ På det valgte klip i tidslinjen: et klik sætter et punkt, træk et punkt for at flytte det (højere: kraftigere, lavere: svagere), et dobbeltklik fjerner det.
+✎ Clique sur le morceau, dans la frise, pour poser un point ; glisse un point pour le déplacer ; double-clic pour l’enlever. ¦ ✎ Klikni na úsek na časové ose a polož bod; přetažením bod posuneš; dvojklikem ho odstraníš. ¦ ✎ Klicka på klippet i tidslinjen för att sätta en punkt; dra en punkt för att flytta den; dubbelklicka för att ta bort den. ¦ ✎ Klik på klippet i tidslinjen for at sætte et punkt; træk et punkt for at flytte det; dobbeltklik for at fjerne det.
+Volume plus égal (les passages faibles remontent, les forts baissent) ¦ Vyrovnanější hlasitost (tiché pasáže zesílí, hlasité zeslábnou) ¦ Jämnare volym (svaga partier höjs, starka sänks) ¦ Mere jævn lydstyrke (svage passager hæves, kraftige sænkes)
+Lieu de la réverbération ¦ Prostor dozvuku ¦ Rum för efterklangen ¦ Rum for efterklangen
+Une grande salle ¦ Velký sál ¦ En stor sal ¦ En stor sal
+Une église ¦ Kostel ¦ En kyrka ¦ En kirke
+Une cave ¦ Sklep ¦ En källare ¦ En kælder
+Gauche ↔ droite ¦ Vlevo ↔ vpravo ¦ Vänster ↔ höger ¦ Venstre ↔ højre
+Police et couleur ¦ Písmo a barva ¦ Typsnitt och färg ¦ Skrifttype og farve
+italique ¦ kurzíva ¦ kursiv ¦ kursiv
+Contour et ombre ¦ Obrys a stín ¦ Kontur och skugga ¦ Kontur og skygge
+autour des lettres ¦ kolem písmen ¦ runt bokstäverna ¦ rundt om bogstaverne
+Force de l’ombre ¦ Síla stínu ¦ Skuggans styrka ¦ Skyggens styrke
+Allume « ombre » (Police et couleur) pour régler l’ombre. ¦ Zapni „stín“ (Písmo a barva) a nastav stín. ¦ Slå på ”skugga” (Typsnitt och färg) för att ställa in skuggan. ¦ Slå ”skygge” til (Skrifttype og farve) for at indstille skyggen.
+Bandeau derrière le texte ¦ Pruh za textem ¦ Band bakom texten ¦ Bånd bag teksten
+Opacité du bandeau ¦ Krytí pruhu ¦ Bandets opacitet ¦ Båndets uigennemsigtighed
+Allume « bandeau » (Police et couleur) : un fond de couleur derrière le texte, plus ou moins transparent, aux coins droits ou arrondis. ¦ Zapni „pruh“ (Písmo a barva): barevné pozadí za textem, více či méně průhledné, s rovnými nebo zaoblenými rohy. ¦ Slå på ”band” (Typsnitt och färg): en färgad bakgrund bakom texten, mer eller mindre genomskinlig, med raka eller rundade hörn. ¦ Slå ”bånd” til (Skrifttype og farve): en farvet baggrund bag teksten, mere eller mindre gennemsigtig, med lige eller afrundede hjørner.

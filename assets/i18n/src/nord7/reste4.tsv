@@ -1,0 +1,238 @@
+fr ¦ is
+# ═════ zone « reste4 » : islandais (is) ═════
+Mesures anciennes par région ¦ Gamlar mælieiningar eftir héruðum
+Les mesures changeaient d’une province, parfois d’un village à l’autre. Choisis la région, la valeur et l’unité : l’app donne l’équivalent en mètres, ares ou litres, et dans les autres mesures du lieu. ¦ Mælieiningarnar voru breytilegar milli héraða, stundum milli þorpa. Veldu héraðið, gildið og eininguna: appið gefur jafngildið í metrum, ekrum (are) eða lítrum, og í hinum mælieiningum staðarins.
+Région / ville ¦ Hérað / borg
+Entre une valeur. ¦ Sláðu inn gildi.
+Longueurs ¦ Lengdir
+Grains (matières sèches) ¦ Korn (þurrvara)
+Liquides (vin, cidre, huile) ¦ Vökvar (vín, eplavín, olía)
+kilomètre ¦ kílómetri
+mètre carré ¦ fermetri
+are ¦ are
+hectare ¦ hektari
+litre ¦ lítri
+hectolitre ¦ hektólítri
+Paris, Île-de-France (mesures du roi) ¦ París, Île-de-France (konungleg mál)
+Lyon, Lyonnais ¦ Lyon, Lyonnais
+Bretagne (Rennes) ¦ Bretagne (Rennes)
+Normandie (Rouen) ¦ Normandí (Rouen)
+Bourgogne (Dijon, Beaune) ¦ Búrgund (Dijon, Beaune)
+Provence (Marseille) ¦ Provence (Marseille)
+Lorraine (Nancy) ¦ Lorraine (Nancy)
+Alsace (Strasbourg) ¦ Alsace (Strasbourg)
+Flandre (Lille) ¦ Flæmingjaland (Lille)
+très variable ¦ mjög breytilegt
+très variable d’une ville à l’autre ¦ mjög breytilegt frá einni borg til annarrar
+très variable (de 1 500 à 3 000 m² selon le lieu) ¦ mjög breytilegt (frá 1 500 til 3 000 m² eftir stað)
+de 45 à 50 litres selon le lieu ¦ frá 45 til 50 lítrar eftir stað
+≈ : valeur approchée ou variable selon la ville. Sources : loi du 19 frimaire an VIII (pied du roi, toise) et « Tables de comparaison entre les mesures anciennes et celles qui les remplacent » publiées par département (an X – 1812). Pour une commune précise, cherche la table de ton département aux archives départementales. ¦ ≈: nálgað gildi, eða breytilegt eftir borgum. Heimildir: lög frá 19. frimaire árs VIII (pied du roi, toise) og „Tables de comparaison entre les mesures anciennes et celles qui les remplacent“, gefnar út fyrir hverja sýslu (département) (ár X – 1812). Fyrir tiltekið sveitarfélag: leitaðu að töflu sýslunnar þinnar í héraðsskjalasafninu.
+Âge ↔ date de naissance ¦ Aldur ↔ fæðingardagur
+Les actes donnent souvent l’âge plutôt que la date de naissance. « 32 ans au décès le 12/03/1790 » → né entre deux dates. Ou l’inverse : l’âge exact à une date. ¦ Skjölin gefa oft upp aldur frekar en fæðingardag. „32 ára við andlát 12/03/1790“ → fædd(ur) á milli tveggja dagsetninga. Eða öfugt: nákvæmur aldur á tiltekinni dagsetningu.
+exact (ans révolus) ¦ nákvæmur (fullnuð ár)
+« environ » (± 2 ans) ¦ „um það bil“ (± 2 ár)
+arrondi (± 5 ans) ¦ námundaður (± 5 ár)
+très vague (± 10 ans) ¦ mjög óljós (± 10 ár)
+À la date de ¦ Á dagsetningunni
+Entre un âge et la date de l’acte. ¦ Sláðu inn aldur og dagsetningu skjalsins.
+Âge le ¦ Aldur hinn
+Entre une date de naissance et une autre date. ¦ Sláðu inn fæðingardag og aðra dagsetningu.
+Date non reconnue : écris par exemple 12/03/1790, 12 mars 1790, mars 1790 ou 1790. ¦ Dagsetning ekki skilin: skrifaðu til dæmis 12/03/1790, 12 mars 1790, mars 1790 eða 1790.
+Naissance entre le {from} et le {to} ¦ Fæðing á milli {from} og {to}
+soit vers {when} (entre {lo} et {hi} révolus) ¦ þ.e. um {when} (á milli {lo} og {hi} fullnuð)
+soit vers {when} ¦ þ.e. um {when}
+Date non reconnue : écris par exemple 13/03/1757. ¦ Dagsetning ekki skilin: skrifaðu til dæmis 13/03/1757.
+La seconde date est avant la naissance. ¦ Seinni dagsetningin er á undan fæðingunni.
+soit {days} de vie ¦ þ.e. {days} ævi
+Entre {min} et {max} ¦ Á milli {min} og {max}
+Une des dates est incomplète. ¦ Önnur dagsetningin er ófullgerð.
+Écart entre deux dates ¦ Tími á milli tveggja dagsetninga
+Combien de temps entre deux actes ? Années, mois, jours, nombre total de jours et de semaines. Une date incomplète (« mars 1790 », « 1802 ») donne un écart minimum et maximum. ¦ Hve langt leið á milli tveggja skjala? Ár, mánuðir, dagar, heildarfjöldi daga og vikna. Ófullgerð dagsetning („mars 1790“, „1802“) gefur minnsta og mesta bil.
+9 novembre 1799 ¦ 9 novembre 1799
+Entre deux dates. ¦ Sláðu inn tvær dagsetningar.
+Date non reconnue : écris par exemple 14/07/1789, 14 juillet 1789, juillet 1789 ou 1789. ¦ Dagsetning ekki skilin: skrifaðu til dæmis 14/07/1789, 14 juillet 1789, juillet 1789 eða 1789.
+(la seconde date est la plus ancienne : écart compté à l’envers) ¦ (seinni dagsetningin er sú eldri: bilið er talið aftur á bak)
+{weeks} et {days} ¦ {weeks} og {days}
+Du {a} au {b} : une date est incomplète. ¦ Frá {a} til {b}: ein dagsetning er ófullgerð.
+=semaine ¦ vika|vikur
+Jour de la semaine ¦ Vikudagur
+Quel jour tombait une date ? Avant 1582, le calendrier julien s’applique : choisis l’usage. ¦ Á hvaða vikudegi var dagsetning? Fyrir 1582 gildir júlíanska tímatalið: veldu venjuna.
+France (julien jusqu’au 9 déc. 1582) ¦ Frakkland (júlíanskt til 9. des. 1582)
+Rome (julien jusqu’au 4 oct. 1582) ¦ Róm (júlíanskt til 4. okt. 1582)
+Toujours grégorien ¦ Alltaf gregoríanskt
+Toujours julien ¦ Alltaf júlíanskt
+Indices pour la recherche (baptêmes, mariages…) ¦ Vísbendingar fyrir rannsóknina (skírnir, hjónavígslur…)
+Entre une date complète. ¦ Sláðu inn heila dagsetningu.
+Il faut une date complète : jour, mois et année (ex. 14/07/1789). ¦ Það þarf heila dagsetningu: dag, mánuð og ár (t.d. 14/07/1789).
+Ce jour n’a pas existé en France : le 9 décembre 1582 a été suivi du 20 décembre. ¦ Þessi dagur var aldrei til í Frakklandi: á eftir 9. desember 1582 kom 20. desember.
+Ce jour n’a pas existé à Rome : le 4 octobre 1582 a été suivi du 15 octobre. ¦ Þessi dagur var aldrei til í Róm: á eftir 4. október 1582 kom 15. október.
+soit le {date} dans le calendrier grégorien ¦ þ.e. {date} í gregoríanska tímatalinu
+soit le {date} dans le calendrier julien ¦ þ.e. {date} í júlíanska tímatalinu
+C’était un {day} ¦ Það var {day}
+julien ¦ júlíanskt
+Jour du Seigneur : beaucoup de baptêmes (souvent le jour même ou le lendemain de la naissance) ; mariages rares. ¦ Dagur Drottins: margar skírnir (oft sama dag og fæðingin eða daginn eftir); fáar hjónavígslur.
+Jour courant des mariages à la campagne sous l’Ancien Régime. ¦ Algengur brúðkaupsdagur í sveitum á tímum Ancien Régime.
+Jour préféré des mariages dans bien des paroisses sous l’Ancien Régime. ¦ Vinsælasti brúðkaupsdagurinn í mörgum sóknum á tímum Ancien Régime.
+Jour maigre dans certains diocèses : mariages moins fréquents. ¦ Föstudagur í sumum biskupsdæmum: færri hjónavígslur.
+Jour ordinaire ; fêtes de l’Ascension et de la Fête-Dieu. ¦ Venjulegur dagur; uppstigningardagur og dýridagur.
+Jour maigre (souvenir de la Passion) : on évitait de s’y marier. ¦ Föstudagur (til minningar um píslarsöguna): fólk forðaðist að gifta sig þann dag.
+Jour maigre jusqu’au XVIIIe siècle dans beaucoup de diocèses ; au XIXe, jour fréquent des mariages civils. ¦ Föstudagur fram á 18. öld í mörgum biskupsdæmum; á 19. öld algengur dagur borgaralegra hjónavígslna.
+Saint du jour et fêtes mobiles ¦ Dýrlingur dagsins og hreyfanlegar hátíðir
+Les fêtes mobiles dépendent de Pâques. Le saint du jour aide à comprendre un prénom : on donnait souvent celui du saint de la naissance ou du baptême. ¦ Hreyfanlegu hátíðirnar ráðast af páskum. Dýrlingur dagsins hjálpar til við að skilja eiginnafn: barninu var oft gefið nafn dýrlings fæðingar- eða skírnardagsins.
+Comput ¦ Tímatalsreikningur
+auto (julien avant 1583) ¦ sjálfvirkt (júlíanskt fyrir 1583)
+date|Mois ¦ Mánuður
+Entre une année entre 400 et 2400. ¦ Sláðu inn ár á milli 400 og 2400.
+Dates dans le calendrier julien. ¦ Dagsetningar í júlíanska tímatalinu.
+Ce jour n’existe pas. ¦ Þessi dagur er ekki til.
+Dans ta base, nés ou baptisés ce jour : ¦ Í gagnagrunninum þínum, fædd eða skírð þennan dag:
+porte le prénom du saint du jour ¦ ber nafn dýrlings dagsins
+Saint du jour indisponible. ¦ Dýrlingur dagsins ekki tiltækur.
+Saints : calendrier usuel des almanachs français (celui du widget « Prénom et saint du jour ») ; il a varié selon les époques et les diocèses. ¦ Dýrlingar: venjulegt dagatal franskra almanaka (það sem græjan „Eiginnafn og dýrlingur dagsins“ notar); það var breytilegt eftir tímabilum og biskupsdæmum.
+dimanche, début du temps de la Septuagésime ¦ sunnudagur, upphaf níuviknaföstu (Septuagesima)
+dimanche ¦ sunnudagur
+dimanche gras ¦ föstuinngangssunnudagur
+veille des Cendres, fin du carnaval ¦ dagurinn fyrir öskudag, lok kjötkveðjuhátíðar
+début du Carême : plus de mariages jusqu’à Pâques ¦ upphaf föstunnar: engar hjónavígslur fram að páskum
+dimanche des Brandons ¦ bálsunnudagur (Brandons)
+jeudi ¦ fimmtudagur
+Pâques fleuries ¦ pálmasunnudagur
+baptêmes solennels ¦ hátíðlegar skírnir
+dimanche, fin du temps pascal des mariages interdits ¦ sunnudagur, lok páskatímans þegar hjónavígslur voru bannaðar
+lundi, processions dans les champs ¦ mánudagur, skrúðgöngur um akrana
+jeudi (fêtée le dimanche suivant après 1802) ¦ fimmtudagur (haldinn hátíðlegur næsta sunnudag eftir 1802)
+vendredi ¦ föstudagur
+Heures canoniques ¦ Tíðir kirkjunnar
+Les actes datent parfois à « l’heure de vêpres » ou « à l’issue de la grand-messe ». Les heures de l’Église suivaient le soleil : le jour était coupé en 12 heures, plus longues en été qu’en hiver. ¦ Skjöl eru stundum dagsett „à l’heure de vêpres“ (á aftansöngstíma) eða „à l’issue de la grand-messe“ (eftir hámessu). Tíðir kirkjunnar fylgdu sólinni: deginum var skipt í 12 stundir, lengri að sumri en vetri.
+(équinoxe) ¦ (jafndægur)
+(jours les plus longs) ¦ (lengstu dagar)
+(jours les plus courts) ¦ (stystu dagar)
+vers {time} ¦ um {time}
+{winter} en hiver, {summer} en été ¦ {winter} að vetri, {summer} að sumri
+Écris la mention (« à l’heure de vêpres », « après complies »…) ou lis le tableau. ¦ Skrifaðu tilvísunina á frönsku („à l’heure de vêpres“, „après complies“…) eða lestu töfluna.
+{hour} en {month} : {time} ¦ {hour} í {month}: {time}
+entre {dec} en décembre et {jun} en juin ¦ á milli {dec} í desember og {jun} í júní
+Heure non reconnue : matines, laudes, prime, tierce, sexte, none, vêpres, complies ou angélus. ¦ Tími ekki skilinn: matines, laudes, prime, tierce, sexte, none, vêpres, complies eða angélus.
+office de la nuit (dans les paroisses, souvent chanté la veille au soir ou au petit matin) ¦ næturtíðir (í sóknunum oft sungnar kvöldið áður eða snemma morguns)
+à l’aube, avant le lever du soleil ¦ í dögun, fyrir sólarupprás
+6e heure, midi ¦ 6. stund, hádegi
+à la tombée du jour (le dimanche, à la paroisse, souvent dès le début de l’après-midi) ¦ við sólsetur (á sunnudögum, í sókninni, oft strax snemma síðdegis)
+à la nuit, avant le coucher ¦ að kvöldi, fyrir háttatíma
+cloche du matin, de midi et du soir ¦ morgun-, hádegis- og kvöldklukkan
+Heure solaire (midi = soleil au plus haut), calculée pour le centre de la France ; l’heure légale n’existe qu’à partir de 1891. Les horaires réels variaient selon les paroisses et les couvents. ¦ Sóltími (hádegi = sól hæst á lofti), reiknaður fyrir mið-Frakkland; lögbundinn tími er aðeins til frá 1891. Raunverulegir tímar voru breytilegir eftir sóknum og klaustrum.
+Monnaies étrangères anciennes ¦ Gamlir erlendir gjaldmiðlar
+Dans les contrats et inventaires, on trouve des pistoles, ducats, florins ou piastres. Leur valeur en livres tournois, monnaie de compte du royaume, selon l’époque. ¦ Í samningum og dánarbúsuppskriftum koma fyrir pistólur, dúkatar, flórínur eða piastrar. Verðgildi þeirra í livres tournois, reiknimynt konungsríkisins, eftir tímabilum.
+Monnaie ¦ Mynt
+XVIIe siècle (1640-1700) ¦ 17. öld (1640-1700)
+XVIIIe siècle (1726-1789) ¦ 18. öld (1726-1789)
+Toutes les monnaies à cette époque ¦ Allar myntir á þessu tímabili
+soit ≈ {n} livres ¦ þ.e. ≈ {n} livres
+Cette monnaie n’avait pas cours en France à cette époque. ¦ Þessi mynt var ekki gjaldgeng í Frakklandi á þessum tíma.
+Louis d’or (France) ¦ Louis d’or (Frakkland)
+Écu d’or au soleil (France) ¦ Écu d’or au soleil (Frakkland)
+Écu blanc ou louis d’argent (France) ¦ Écu blanc eða silfurlouis (Frakkland)
+Pistole (Espagne, Italie) ¦ Pistóla (Spánn, Ítalía)
+Ducat d’or (Venise, Hollande, Empire) ¦ Gulldúkat (Feneyjar, Holland, Keisaradæmið)
+Florin de Hollande (gulden) ¦ Hollensk flórína (gyllini)
+Gulden ou florin du Rhin (Allemagne, Alsace, Suisse) ¦ Gyllini eða Rínarflórína (Þýskaland, Alsace, Sviss)
+Thaler, rixdale (Empire, Saxe, Prusse) ¦ Dalur, ríkisdalur (Keisaradæmið, Saxland, Prússland)
+Piastre ou réal de huit (Espagne) ¦ Piastri eða áttareal (Spánn)
+Livre sterling (Angleterre) ¦ Sterlingspund (England)
+Livre de Lorraine ¦ Lorraine-livre
+créé en 1640 à 10 livres ; 24 livres de 1726 à la Révolution ¦ tekinn upp 1640 á 10 livres; 24 livres frá 1726 til byltingarinnar
+plus frappé après 1640 ¦ ekki sleginn eftir 1640
+3 livres en 1641 ; gros écu de 6 livres (et petit écu de 3 livres) au XVIIIe ¦ 3 livres árið 1641; stór écu á 6 livres (og lítill écu á 3 livres) á 18. öld
+souvent une monnaie de compte valant 10 livres ¦ oft reiknimynt að verðgildi 10 livres
+« piastre gourde » des colonies ¦ „piastre gourde“ nýlendnanna
+monnaie de compte, d’après le cours du change ¦ reiknimynt, samkvæmt gengi
+15 sols 6 deniers tournois ¦ 15 sols 6 deniers tournois
+Valeurs approchées (≈), d’après les ordonnances monétaires de Louis XIII à Louis XVI, le poids d’or ou d’argent fin des pièces et le cours du change à Paris (Savary, « Dictionnaire universel de commerce »). Les cours bougeaient souvent, surtout de 1689 à 1726 : c’est un ordre de grandeur. ¦ Nálguð gildi (≈), samkvæmt myntreglugerðum frá Loðvík XIII til Loðvíks XVI, þyngd hreins gulls eða silfurs í myntunum og gengi í París (Savary, „Dictionnaire universel de commerce“). Gengið breyttist oft, einkum frá 1689 til 1726: þetta er stærðargráða.
+Calculateur de générations ¦ Kynslóðareiknir
+Combien de générations entre deux années ? En moyenne 25 à 33 ans par génération : environ 30 ans en lignée masculine, 27 ans en lignée féminine. ¦ Hve margar kynslóðir á milli tveggja ára? Að meðaltali 25 til 33 ár á kynslóð: um 30 ár í karllegg, 27 ár í kvenlegg.
+Année (ta naissance) ¦ Ár (fæðing þín)
+Année (l’ancêtre) ¦ Ár (forfaðirinn)
+Entre deux années. ¦ Sláðu inn tvö ár.
+Générations en arrière ¦ Kynslóðir aftur í tímann
+Depuis l’année ¦ Frá árinu
+Entre deux années différentes. ¦ Sláðu inn tvö ólík ár.
+Environ {min} à {max} générations ¦ Um {min} til {max} kynslóðir
+{years} : ≈ {male} générations en lignée masculine (30 ans), ≈ {female} en lignée féminine (27 ans) ¦ {years}: ≈ {male} kynslóðir í karllegg (30 ár), ≈ {female} í kvenlegg (27 ár)
+Entre un nombre de générations (1 à 40) et une année. ¦ Sláðu inn fjölda kynslóða (1 til 40) og ár.
+ancêtres de la génération {n} ¦ forfeður í kynslóð {n}
+{gens} en arrière → nés vers {from}–{to} ¦ {gens} aftur í tímann → fædd um {from}–{to}
+≈ {male} en lignée masculine, ≈ {female} en lignée féminine ¦ ≈ {male} í karllegg, ≈ {female} í kvenlegg
+{at} {label} en théorie (Sosa {from} à {to}) ; {total} ancêtres en tout jusqu’à cette génération ¦ {at} {label} í orði (Sosa {from} til {to}); {total} forfeður alls upp að þessari kynslóð
+Le nombre d’ancêtres double à chaque génération en théorie ; en pratique il y en a moins, car des cousins se sont mariés entre eux (l’implexe). ¦ Fjöldi forfeðra tvöfaldast í hverri kynslóð í orði; í reynd eru þeir færri, því frændsystkin giftust innbyrðis (forfeðrahrun).
+le jour de la Pentecôte 1754 ¦ le jour de la Pentecôte 1754
+/Documents/Scans généalogie ¦ /Skjöl/Ættfræðiskannanir
+Saint-Martin de Brive ¦ Saint-Martin de Brive
+Paroisse érigée en 1792 ; voir aussi la chapelle de… ¦ Sókn stofnuð 1792; sjá líka kapelluna í…
+Religion et noblesse ¦ Trú og aðall
+Travail et société ¦ Vinna og samfélag
+Voyages et lieux ¦ Ferðalög og staðir
+Temps et nature ¦ Tími og náttúra
+Formes et repères ¦ Form og kennileiti
+Artistique ¦ Listrænt
+Voyages ¦ Ferðalög
+Tous les emojis ¦ Öll tjákn
+Autres emojis ¦ Önnur tjákn
+Choisir un fond ¦ Velja bakgrunn
+Choisir un fond… ¦ Velja bakgrunn…
+Choisir un fond de carte ¦ Velja grunnkort
+Choisir une icône… ¦ Velja táknmynd…
+Aucune icône ¦ Engin táknmynd
+Aucun fond ¦ Enginn bakgrunnur
+choisir ¦ velja
+valider ¦ staðfesta
+fermer ¦ loka
+Chercher une icône ¦ Leita að táknmynd
+Chercher un fond ¦ Leita að bakgrunni
+Chercher un fond… (ex. Cassini, relief, 1850) ¦ Leita að bakgrunni… (t.d. Cassini, landslag, 1850)
+Chercher… (ex. coeur, bateau, chien) ¦ Leita… (á frönsku, t.d. coeur, bateau, chien)
+Chercher… (ex. église, mariage, étoile) ¦ Leita… (t.d. kirkja, hjónaband, stjarna)
+Utiliser « {x} » ¦ Nota „{x}“
+1 icône pour « {q} » ¦ 1 táknmynd fyrir „{q}“
+{n} icônes pour « {q} » ¦ {n} táknmyndir fyrir „{q}“
+1 fond pour « {q} » ¦ 1 bakgrunnur fyrir „{q}“
+{n} fonds pour « {q} » ¦ {n} bakgrunnar fyrir „{q}“
+Rien pour « {q} ». Vérifie l’orthographe, ou essaie un autre mot. ¦ Ekkert fyrir „{q}“. Athugaðu stafsetninguna eða prófaðu annað orð.
+Retirer l’icône ¦ Fjarlægja táknmyndina
+Retirer le fond ¦ Fjarlægja bakgrunninn
+Allemand et alsacien ¦ Þýska og elsassíska
+Néerlandais / flamand ¦ Hollenska / flæmska
+Croate / serbe en lettres latines ¦ Króatíska / serbneska með latnesku letri
+Slovène ¦ Slóvenska
+Gaélique irlandais ¦ Írsk gelíska
+Biélorusse ¦ Hvítrússneska
+Serbe en cyrillique ¦ Serbneska með kyrillísku letri
+Hébreu ¦ Hebreska
+Dates du calendrier grégorien. Les âges des actes anciens sont souvent approximatifs : « environ 40 ans » peut cacher 35 ou 45 ans. ¦ Dagsetningar í gregoríanska tímatalinu. Aldur í gömlum skjölum er oft áætlaður: „um 40 ára“ getur falið 35 eða 45 ár.
+Changer dans l’onglet Personnes ¦ Breyta í flipanum Einstaklingar
+Mode de chronologie parallèle ¦ Hamur samhliða tímalínu
+Les événements sans année restent sur les fiches. ¦ Atburðir án árs verða áfram á spjöldunum.
+Modifier la frise historique ¦ Breyta sögulegu tímalínunni
+Les grands événements livrés avec l’app, et les tiens (histoire locale) ¦ Stóru atburðirnir sem fylgja appinu, og þínir eigin (staðbundin saga)
+Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z ou en 📁 dossiers), la fiche à droite. ¦ Miðlarnir og skjalagögnin í gagnagrunninum þínum, eins og einstaklingarnir: listinn til vinstri (A → Ö eða í 📁 möppum), spjaldið til hægri.
+Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche (en ce moment : {n}) ¦ Möppur fjársjóðanna (endurnefna þær, búa til, eyða, velja hvað fer í þær), röðin, það sem birtist (núna: {n})
+Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche ¦ Möppur fjársjóðanna (endurnefna þær, búa til, eyða, velja hvað fer í þær), röðin, það sem birtist
+Me le rappeler (la veille, une semaine avant…) ¦ Minna mig á (daginn áður, viku áður…)
+choses à vérifier ¦ atriði til að athuga
+Pour montrer l’arbre à quelqu’un qui n’est pas à l’aise avec l’ordinateur : de très gros boutons, seulement l’arbre, les photos et les fiches, et rien qu’on puisse modifier par erreur. ¦ Til að sýna tréð einhverjum sem er ekki öruggur á tölvu: mjög stórir hnappar, aðeins tréð, myndirnar og spjöldin, og ekkert sem hægt er að breyta fyrir mistök.
+Aucune hypothèse : une question à trancher (« né à Naves ou à Tulle ? »), avec les preuves pour et contre. ¦ Engin tilgáta: spurning sem þarf að skera úr um („fædd(ur) í Naves eða í Tulle?“), með rökum með og á móti.
+Détaillée ¦ Ítarleg
+Ce qu’on inclut ¦ Það sem er tekið með
+Texte de l’app ¦ Texti appsins
+Regénérer ¦ Búa til aftur
+Une journée… ¦ Dagur í lífi…
+Réécrire le texte d’après la fiche et voir ce qui a changé ¦ Endurskrifa textann út frá spjaldinu og sjá hvað breyttist
+Un petit récit d’un jour de sa vie : âge, famille, village, métier, calendrier, météo, contexte ¦ Stutt frásögn af einum degi í lífi hans eða hennar: aldur, fjölskylda, þorp, starf, dagatal, veður, samhengi
+Ajouter un événement local ¦ Bæta við staðbundnum atburði
+Rien dans cette sorte pendant sa vie. ¦ Ekkert af þessu tagi á ævi hans eða hennar.
+Voir toute la liste et ses sources ¦ Sjá allan listann og heimildir hans
+Une fête, une inondation, un incendie au village… rattaché à une commune ¦ Hátíð, flóð, eldsvoði í þorpinu… tengt sveitarfélagi
+Sortes d’événements ¦ Tegundir atburða
+Un article, une interview à la radio, une émission de télé, un avis de naissance ou une nécrologie, une photo publiée… ¦ Grein, útvarpsviðtal, sjónvarpsþáttur, fæðingartilkynning eða minningargrein, birt mynd…
+Ajouter un passage ¦ Bæta við umfjöllun
+La revue de presse de cette personne ¦ Fjölmiðlaumfjöllun um þennan einstakling
+Modifier l’identifiant Wikidata ¦ Breyta Wikidata-auðkenninu
+Plus de détails ¦ Nánar

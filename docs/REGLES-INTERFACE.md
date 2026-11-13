@@ -133,6 +133,13 @@ Maquette : `docs/design/harmonisation-L.html` (versions « Proposé »).
 - **L5 Une seule aide grise sous les champs** : `.ui-hint` (12,5 px, gris #666 / #a5abb6 en sombre, interligne 1,45, 4 px sous le champ, 60 lettres au plus), sous le champ (sous le texte pour un interrupteur ou une case), une ou deux phrases, puis « En savoir plus (FAQ) → » ; le « ? » C8 reste pour le pourquoi ; une seule ligne à la fois : ⛔ K1 > ⚠️ / ✓ Compris > aide (`.is-ok`, `.is-error`). Plus de classe d’aide propre à un outil.
 - **L6 Chercher dans une page des Réglages** : toute page de plus de ~20 lignes ou 4 cadres a la case C1 sous l’en-tête K5, collée en haut ; « / », Échap, × ; filtre lignes, réglages, titres, aides et touches ; « 2 sur 22 » sur les rubriques, cadres avec un résultat ouverts, les autres repliés en une ligne grise ; lettres surlignées ; « N lignes · N cachées · Tout montrer » ; rien trouvé : ligne K10 avec « 🔍 Chercher dans tous les Réglages » ; vidée en quittant la page.
 
+## Premier lancement et base d'exemple (validé)
+
+Maquette : `docs/design/premier-lancement.html`. Code : `lib/premier.php`, `lib/exemple.php`, `assets/js/app-premier.js`, `assets/css/premier.css`. Test : `tests/test-premier-lancement.js`.
+- L'écran ne se montre qu'à une base vide : une base qui a des fiches (ou déjà commencée, réglage `genealogie-premier`) ne le voit jamais ; jamais en mode simple ni en mode consultation.
+- Un usage ne change que l'affichage (onglets montrés / cachés par les réglages du menu, onglets à soi, noms, premier écran) : aucune donnée supprimée, réversible dans Réglages → Apparence → « 🧭 Usage de l'app ». Un nouvel usage s'ajoute dans `USAGES` (app-premier.js) et `PREMIER_USAGES` (premier.php).
+- **Base d'exemple** : toujours une généalogie à part (« Mes généalogies »), jamais dans la vraie base ; **personne né après 1950, aucun vivant** (règle de l'utilisateur, vérifiée par `exemple_build` et le test) ; noms inventés, vraies communes ; images dessinées par `scripts/exemple-photos.php` (sépia, sans visage, rien de téléchargé).
+
 ## Habitudes
 
 - Après une modif d'un asset, monter son `?v=N` dans `index.php`.

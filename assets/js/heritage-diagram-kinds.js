@@ -8,6 +8,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s).replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? String(v[k]) : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
@@ -67,10 +68,10 @@
             toast('Types de diagrammes enregistrés (galerie des diagrammes et Éditeur de graphiques).');
         }
     }
-    const kindsHelp = '<p class="muted">Les mêmes types pour <b>Mes diagrammes</b> et pour l’<b>Éditeur de graphiques</b> : ↑ ↓ pour l’ordre, décoche pour cacher un type, choisis un groupe (ou « ＋ Nouveau groupe… ») pour les regrouper à ta façon ; ✎ renomme un groupe, ↑ ↓ de l’en-tête range les groupes.</p>';
+    const kindsHelp = () => '<p class="muted">' + i18n('Les mêmes types pour <b>Mes diagrammes</b> et pour l’<b>Éditeur de graphiques</b> : ↑ ↓ pour l’ordre, décoche pour cacher un type, choisis un groupe (ou « ＋ Nouveau groupe… ») pour les regrouper à ta façon ; ✎ renomme un groupe, ↑ ↓ de l’en-tête range les groupes.') + '</p>';
     ext.openDiagramKindsEditor = ({onSave} = {}) => {
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-dk-dlg';
-        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">DIAGRAMMES</span><h2>⚙️ Ranger les types</h2></div><button type="button" class="icon-button" data-x>×</button></div><div class="h-dk-body">${kindsHelp}${kindsEditorHtml()}<details class="h-dk-howto"><summary>⤒ Mon propre graphique à partir de données d’ailleurs</summary>${HOWTO}</details></div><div class="modal-actions"><button type="button" class="button secondary" data-dk-reset>↺ Remettre comme au départ</button><span class="spacer"></span><button type="button" class="button secondary" data-x>Fermer</button><button type="button" class="button" data-dk-save>Enregistrer</button></div>`;
+        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">DIAGRAMMES</span><h2>⚙️ Ranger les types</h2></div><button type="button" class="icon-button" data-x>×</button></div><div class="h-dk-body">${kindsHelp()}${kindsEditorHtml()}<details class="h-dk-howto"><summary>⤒ Mon propre graphique à partir de données d’ailleurs</summary>${HOWTO_HTML()}</details></div><div class="modal-actions"><button type="button" class="button secondary" data-dk-reset>↺ Remettre comme au départ</button><span class="spacer"></span><button type="button" class="button secondary" data-x>Fermer</button><button type="button" class="button" data-dk-save>Enregistrer</button></div>`;
         document.body.appendChild(dlg); // pas dans la galerie : son paint() remplace son contenu (« Tout remettre ») et ferait disparaître l'éditeur
         bindKindsEditor(dlg, () => { onSave?.(); });
         dlg.addEventListener('click', e => { if (e.target.closest('[data-x]') || e.target.closest('[data-dk-save]')) dlg.close(); });
@@ -82,20 +83,20 @@
         if (token !== A().state.workspaceToken) return;
         A().state.maintenanceTab = ''; await A().setModule('graphiques'); ext.openDiagramKindsEditor();
     };
-    const HOWTO = `<ol><li><b>Un tableau</b> (tableur, site, CSV) : copie-le, puis <b>Graphiques → Mes diagrammes → ＋ Nouveau</b> (ou « ⤒ Importer » là où l’on pose un diagramme : fiche, personne, enquête, Atelier) → « Coller un tableau ». Première colonne = les noms, colonnes suivantes = les chiffres ; une première ligne de titres devient le nom des séries.</li>
-        <li><b>Un fichier CSV</b> : « ⤒ Importer » → « Fichier » (séparateur virgule, point-virgule ou tabulation).</li>
-        <li><b>Une page Wikipédia</b> : « ⤒ Importer » → « Page Wikipédia », colle son adresse : ses tableaux et ses images de graphiques s’affichent, choisis-en un.</li>
-        <li><b>Une image de graphique</b> (camembert, barres, courbe, hémicycle) : « ⤒ Importer » → « Image » : l’app repère les couleurs et propose les chiffres (parts, hauteurs, sièges) ; corrige les noms et les valeurs dans le tableau avant de créer le diagramme.</li>
-        <li><b>Un graphique partagé</b> par quelqu’un (fichier <code>.lcnda-widget.json</code>) : « ⤒ Importer » → « Fichier » : il rejoint « Mes graphiques » et se dessine avec les données de ton arbre.</li>
-        <li>Ensuite, le diagramme se choisit parmi tous les types (parts, chiffres, frises, liens…), se règle, s’exporte (PNG, SVG, PDF) et se pose partout.</li></ol>`;
-    ext.diagramHowtoHtml = () => HOWTO;
+    const HOWTO_HTML = () => `<ol><li>${i18n('<b>Un tableau</b> (tableur, site, CSV) : copie-le, puis <b>Graphiques → Mes diagrammes → ＋ Nouveau</b> (ou « ⤒ Importer » là où l’on pose un diagramme : fiche, personne, enquête, Atelier) → « Coller un tableau ». Première colonne = les noms, colonnes suivantes = les chiffres ; une première ligne de titres devient le nom des séries.')}</li>
+        <li>${i18n('<b>Un fichier CSV</b> : « ⤒ Importer » → « Fichier » (séparateur virgule, point-virgule ou tabulation).')}</li>
+        <li>${i18n('<b>Une page Wikipédia</b> : « ⤒ Importer » → « Page Wikipédia », colle son adresse : ses tableaux et ses images de graphiques s’affichent, choisis-en un.')}</li>
+        <li>${i18n('<b>Une image de graphique</b> (camembert, barres, courbe, hémicycle) : « ⤒ Importer » → « Image » : l’app repère les couleurs et propose les chiffres (parts, hauteurs, sièges) ; corrige les noms et les valeurs dans le tableau avant de créer le diagramme.')}</li>
+        <li>${i18n('<b>Un graphique partagé</b> par quelqu’un (fichier <code>.lcnda-widget.json</code>) : « ⤒ Importer » → « Fichier » : il rejoint « Mes graphiques » et se dessine avec les données de ton arbre.')}</li>
+        <li>${i18n('Ensuite, le diagramme se choisit parmi tous les types (parts, chiffres, frises, liens…), se règle, s’exporte (PNG, SVG, PDF) et se pose partout.')}</li></ol>`;
+    ext.diagramHowtoHtml = () => HOWTO_HTML();
 
     /* ═════════ Les statistiques dessinées avec les types de diagrammes ═════════ */
-    const PAIR_KINDS = new Set(['columns', 'bars', 'stacked', 'stacked100', 'line', 'area', 'pie', 'donut', 'halfdonut', 'waffle', 'treemap', 'funnel', 'radar', 'pyramid', 'heatmap', 'parliament', 'wordcloud', 'pictogram', 'gauge', 'causesun']); // causesun : causes de décès en anneaux (heritage-diagram-cartes2.js)
+    const PAIR_KINDS = new Set(['columns', 'bars', 'stacked', 'stacked100', 'line', 'area', 'pie', 'donut', 'halfdonut', 'waffle', 'treemap', 'funnel', 'radar', 'pyramid', 'heatmap', 'parliament', 'wordcloud', 'pictogram', 'gauge', 'causesun', 'dplbarline', 'dpldiv', 'dplstep', 'dplhills']); // causesun : causes de décès en anneaux (heritage-diagram-cartes2.js) ; dpl… : barres + courbe, divergentes, escalier, collines (heritage-diagram-plus.js)
     const PEOPLE_TPL = new Set(['timeline:lives', 'chrono', 'sankey']);
     const fromPeople = t => (!t.o && !t.preset && typeof R()?.KINDS[t.kind]?.fromPeople === 'function'); // un type qui se remplit tout seul avec une liste de personnes (heritage-diagram-famille.js)
     const usable = t => (PAIR_KINDS.has(t.kind) && !t.preset) || PEOPLE_TPL.has(tplId(t)) || fromPeople(t);
-    ext.diagramStatStyles = () => { if (!DI()?.TEMPLATES || !R()) return []; return catalog(DI().TEMPLATES()).map(([g, items]) => [g, items.filter(usable).map(t => ['dg:' + tplId(t), `${t.icon} ${t.label}${PEOPLE_TPL.has(tplId(t)) || fromPeople(t) ? ' (avec des personnes)' : ''}`])]).filter(([, l]) => l.length); };
+    ext.diagramStatStyles = () => { if (!DI()?.TEMPLATES || !R()) return []; return catalog(DI().TEMPLATES()).map(([g, items]) => [g, items.filter(usable).map(t => ['dg:' + tplId(t), `${t.icon} ${t.label}${PEOPLE_TPL.has(tplId(t)) || fromPeople(t) ? ' ' + i18n('(avec des personnes)') : ''}`])]).filter(([, l]) => l.length); };
     const yearOf = v => { const m = String(v || '').match(/(\d{3,4})(?!.*\d{3,4})/); return m ? Number(m[1]) : null; };
     const firstYear = v => { const m = String(v || '').match(/\d{3,4}/); return m ? Number(m[0]) : null; };
     const placeShort = v => String(v || '').split(',')[0].trim();
@@ -184,7 +185,7 @@
             <section data-dgi="file"><p class="muted">Un diagramme LCNDA (.json), un graphique partagé (.lcnda-widget.json) ou un tableau CSV.</p><input type="file" name="file" accept=".json,.csv,.tsv,.txt,application/json,text/csv"></section>
             <section data-dgi="paste" hidden><p class="muted">Copie un tableau (tableur, site web…) et colle-le ici. Première colonne = les noms, colonnes suivantes = les chiffres.</p><textarea name="paste" rows="10" placeholder="Prénom;Nombre&#10;Marie;42&#10;Jean;37"></textarea></section>
             <section data-dgi="wiki" hidden><p class="muted">L’adresse d’une page Wikipédia (n’importe quelle langue) : ses tableaux et ses graphiques s’affichent, choisis-en un. Il faut Internet.</p><span class="h-fp-who"><input name="wiki" placeholder="https://fr.wikipedia.org/wiki/Démographie_de_la_France"><button type="button" class="button small" data-dgi-wiki>Lire la page</button></span><div data-dgi-wikires></div></section>
-            <section data-dgi="image" hidden><p class="muted">Un camembert, des barres ou colonnes, une courbe ou un hémicycle en image : l’app regarde ses couleurs et propose des chiffres, à corriger ensuite.</p><input type="file" name="img" accept="image/*"></section></div>${ext.diagramHowtoHtml ? `<details class="h-dgi-howto"><summary>Comment faire mon propre graphique avec des données d’ailleurs ?</summary>${HOWTO}</details>` : ''}`,
+            <section data-dgi="image" hidden><p class="muted">Un camembert, des barres ou colonnes, une courbe ou un hémicycle en image : l’app regarde ses couleurs et propose des chiffres, à corriger ensuite.</p><input type="file" name="img" accept="image/*"></section></div>${ext.diagramHowtoHtml ? `<details class="h-dgi-howto"><summary>Comment faire mon propre graphique avec des données d’ailleurs ?</summary>${HOWTO_HTML()}</details>` : ''}`,
             onOpen: dg => {
                 let tab = 'file'; dg._tab = () => tab;
                 dg.addEventListener('close', () => { if (!done) res(null); }, {once: true});
@@ -198,7 +199,7 @@
                         const text = await file.text(), name = file.name.replace(/\.[^.]+$/, '');
                         if (/\.json$/i.test(file.name)) { const j = JSON.parse(text);
                             if (j?.lcnda_diagram && R().KINDS[j.kind]) { done = true; setTimeout(async () => res(await editWith({...(j.spec || {}), kind: j.kind}, String(j.name || name), link)), 0); return; }
-                            if (j?.format === 'lcnda-widget') { const st = ext.importCustomStat(j); toast(`Graphique « ${st.name} » ajouté à Mes graphiques.`); const t = await pickKind('Avec quel dessin ?', x => PAIR_KINDS.has(x.kind) && !x.preset); if (!t) return; const pairs = await ext.diagramStatRows(st.key); const spec = {...DI().fillFrom(DI().presetSpec(t), pairs, st.name), live: {key: st.key, label: st.name}}; spec.o = {...spec.o, title: st.name}; done = true; setTimeout(async () => res(await editWith(spec, st.name, link)), 0); return; }
+                            if (j?.format === 'lcnda-widget') { const st = ext.importCustomStat(j); toast(i18n('Graphique « {name} » ajouté à Mes graphiques.', {name: st.name})); const t = await pickKind('Avec quel dessin ?', x => PAIR_KINDS.has(x.kind) && !x.preset); if (!t) return; const pairs = await ext.diagramStatRows(st.key); const spec = {...DI().fillFrom(DI().presetSpec(t), pairs, st.name), live: {key: st.key, label: st.name}}; spec.o = {...spec.o, title: st.name}; done = true; setTimeout(async () => res(await editWith(spec, st.name, link)), 0); return; }
                             throw new Error('Ce fichier JSON n’est ni un diagramme ni un graphique LCNDA.'); }
                         const spec = await specFromTable(text, name); if (!spec) return false; done = true; setTimeout(async () => res(await editWith(spec, name, link)), 0); return; }
                     if (tab === 'paste') { const text = f.querySelector('[name=paste]').value; if (!text.trim()) return window.LCNDA_UI.fail(f.querySelector('[name=paste]'), 'Colle un tableau.'); const spec = await specFromTable(text); if (!spec) return false; done = true; setTimeout(async () => res(await editWith(spec, spec.o?.title || 'Tableau collé', link)), 0); return; }
@@ -225,8 +226,8 @@
             const imgs = [...doc.querySelectorAll('img')].map(im => ({src: im.getAttribute('src') || '', w: Number(im.getAttribute('width')) || 0, alt: im.getAttribute('alt') || ''})).filter(x => x.w >= 120 && /upload\.wikimedia\.org/.test(x.src)).slice(0, 24)
                 .map(x => { let src = x.src.startsWith('//') ? 'https:' + x.src : x.src; src = src.replace(/\/(\d+)px-([^/]+)$/, (m0, w, f) => `/${Math.max(800, Number(w))}px-${f}`); return {kind: 'image', src, title: x.alt || pageTitle}; });
             dg._wiki = [...tables, ...imgs];
-            out.innerHTML = `<h4>${esc(pageTitle)}</h4>${tables.length ? `<p><b>Tableaux</b></p><ul class="h-dgi-list">${tables.map((t, i) => `<li><button type="button" class="link-button" data-dgi-pick="${i}">📋 ${esc(t.title)}</button> <small class="muted">${t.rows.length} lignes · ${esc(t.rows[0].slice(0, 4).join(' | '))}</small></li>`).join('')}</ul>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Aucun tableau.</span></p>'}
-                ${imgs.length ? `<p><b>Images</b> (graphiques à convertir en chiffres)</p><div class="h-dgi-imgs">${imgs.map((x, i) => `<button type="button" data-dgi-pick="${tables.length + i}" title="${esc(x.title)}"><img src="${esc(x.src)}" alt="" loading="lazy"></button>`).join('')}</div>` : ''}`;
+            out.innerHTML = `<h4>${esc(pageTitle)}</h4>${tables.length ? `<p><b>${i18n('Tableaux', {ctx: 'donnees'})}</b></p><ul class="h-dgi-list">${tables.map((t, i) => `<li><button type="button" class="link-button" data-dgi-pick="${i}">📋 ${esc(t.title)}</button> <small class="muted">${i18n('{n} lignes', {n: t.rows.length})} · ${esc(t.rows[0].slice(0, 4).join(' | '))}</small></li>`).join('')}</ul>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Aucun tableau.</span></p>'}
+                ${imgs.length ? `<p>${i18n('<b>Images</b> (graphiques à convertir en chiffres)')}</p><div class="h-dgi-imgs">${imgs.map((x, i) => `<button type="button" data-dgi-pick="${tables.length + i}" title="${esc(x.title)}"><img src="${esc(x.src)}" alt="" loading="lazy"></button>`).join('')}</div>` : ''}`;
             out.querySelectorAll('[data-dgi-pick]').forEach(b => b.addEventListener('click', () => onPick(dg._wiki[Number(b.dataset.dgiPick)])));
         } catch (e) { out.innerHTML = `<p class="error">${esc(e.message || 'Lecture impossible (connexion internet ?)')}</p>`; }
     }

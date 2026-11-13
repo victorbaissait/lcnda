@@ -1,0 +1,492 @@
+fr ¦ is
+14 juillet 2027 ¦ 14. júlí 2027
+↻ Remettre à jour ¦ ↻ Uppfæra
+Les widgets se posent sur le bureau de {os}, dans une petite fenêtre sans cadre : glisse-la par son titre, elle retient sa place. Lecture seule : rien ne s’y modifie. Clic droit sur un widget : toujours au-dessus, ouvrir LCNDA, fermer. ¦ Græjurnar birtast á skjáborði {os}, í litlum rammalausum glugga: dragðu hann á titlinum, hann man staðsetninguna. Aðeins til lestrar: engu er breytt þar. Hægrismelltu á græju: alltaf efst, opna LCNDA, loka.
+Tu utilises LCNDA dans un navigateur : les vrais widgets de bureau (petite fenêtre sans cadre, toujours au-dessus, au démarrage de l’ordinateur) demandent l’application de bureau LCNDA (PC, Mac, Linux). À la place, télécharge le widget : un fichier .html autonome, à ouvrir d’un double-clic et à garder dans un onglet ; sans personne vivante ni fiche confidentielle. ¦ Þú notar LCNDA í vafra: alvöru skjáborðsgræjur (lítill rammalaus gluggi, alltaf efst, við ræsingu tölvunnar) þurfa skjáborðsforrit LCNDA (PC, Mac, Linux). Sæktu í staðinn græjuna: sjálfstæða .html-skrá sem þú opnar með tvísmelli og heldur opinni í flipa; án lifandi einstaklinga og án trúnaðarspjalda.
+Widgets sur le bureau ¦ Græjur á skjáborðinu
+Widgets sur le bureau… ¦ Græjur á skjáborðinu…
+{icon} « {name} » est sur le bureau. ¦ {icon} „{name}“ er á skjáborðinu.
+Ce réglage n’a pas pu être changé sur cet ordinateur. ¦ Ekki tókst að breyta þessari stillingu á þessari tölvu.
+🪟 Mettre la calculette sur le bureau (une petite fenêtre à part) ¦ 🪟 Setja reiknivélina á skjáborðið (lítill sérgluggi)
+🪟 Mettre la calculette sur le bureau (un fichier .html autonome) ¦ 🪟 Setja reiknivélina á skjáborðið (sjálfstæð .html-skrá)
+Les anniversaires du jour et des 7 jours qui viennent, et ce qui s’est passé ce jour-là dans ta famille. ¦ Afmæli dagsins og næstu 7 daga, og það sem gerðist á þessum degi í fjölskyldunni þinni.
+Un de tes ancêtres, un nouveau chaque jour (↻ pour en voir un autre) : son portrait, ses dates, ses lieux. ¦ Einn af forfeðrum þínum, nýr á hverjum degi (↻ til að sjá annan): mynd, dagsetningar og staðir.
+La calculette de l’app (fractions, pourcentages, dates des actes, unités…) toujours à portée de main. ¦ Reiknivél appsins (brot, prósentur, dagsetningar skjala, einingar…) alltaf við höndina.
+Je fais l’histoire de notre famille. Sur ces photos, il y a des visages que je ne sais pas nommer : peut-être que toi, tu les reconnais ? ¦ Ég er að skrá sögu fjölskyldunnar okkar. Á þessum myndum eru andlit sem ég get ekki nefnt: kannski þekkir þú þau?
+En mode consultation, on ne prépare pas de demande. ¦ Í skoðunarham er ekki hægt að útbúa beiðni.
+Qui est sur cette photo ? ¦ Hver er á þessari mynd?
+QUI EST SUR CETTE PHOTO ? ¦ HVER ER Á ÞESSARI MYND?
+Nouvelle demande « Qui est sur cette photo ? » ¦ Ný beiðni „Hver er á þessari mynd?“
+Les photos et les visages ¦ Myndirnar og andlitin
+Clique sur un cadre pour le mettre (bleu) ou l’enlever (gris) de la demande. Pour un visage oublié, trace un cadre sur la photo avec la souris. ¦ Smelltu á ramma til að setja hann í beiðnina (blár) eða taka hann úr henni (grár). Fyrir andlit sem gleymdist skaltu draga ramma á myndina með músinni.
+Les noms à proposer ¦ Nöfn til að stinga upp á
+Le cousin les voit dans une liste ; il peut aussi écrire un autre nom. Aucune fiche confidentielle n’est jamais proposée. ¦ Frændinn sér þau í lista; hann getur líka skrifað annað nafn. Aldrei er stungið upp á trúnaðarspjaldi.
+Proposer aussi des personnes vivantes ¦ Stinga líka upp á lifandi einstaklingum
+⚠️ Les vivants cochés seront proposés au cousin : vérifie qu’ils sont d’accord. ¦ ⚠️ Stungið verður upp á merktum lifandi einstaklingum við frændann: athugaðu hvort þeir samþykki það.
+{n} personnes sans doute vivantes ne seront pas proposées (coche la case pour les garder). ¦ Ekki verður stungið upp á líklega lifandi einstaklingum: {n} (hakaðu í reitinn til að halda þeim).
+{n} personne sans doute vivante ne sera pas proposée (coche la case pour la garder). ¦ Ekki verður stungið upp á {n} líklega lifandi einstaklingi (hakaðu í reitinn til að halda honum).
+Déjà identifié : {name} ¦ Þegar borin kennsl á: {name}
+Visage sans nom ¦ Nafnlaust andlit
+Aucune photo pour l’instant. ¦ Engin mynd enn sem komið er.
+La reconnaissance des visages, sur cet ordinateur (rien n’est envoyé) ¦ Andlitsgreining, á þessari tölvu (ekkert er sent)
+Repérer les visages ¦ Finna andlitin
+Retirer cette photo de la demande ¦ Fjarlægja þessa mynd úr beiðninni
+12 photos au plus dans une demande. ¦ Í mesta lagi 12 myndir í beiðni.
+La reconnaissance des visages n’est pas disponible : trace les cadres à la main. ¦ Andlitsgreining er ekki í boði: dragðu rammana handvirkt.
+Je cherche les visages… ¦ Ég leita að andlitum…
+Aucun visage trouvé : trace les cadres à la main. ¦ Ekkert andlit fannst: dragðu rammana handvirkt.
+Visages non repérés : {err}. Trace les cadres à la main. ¦ Andlit fundust ekki: {err}. Dragðu rammana handvirkt.
+Choisis au moins un visage (clique sur un cadre, ou trace-le sur la photo). ¦ Veldu að minnsta kosti eitt andlit (smelltu á ramma eða dragðu hann á myndina).
+{n} vivants non proposés ¦ Lifandi ekki í boði: {n}
+{n} vivant non proposé ¦ {n} lifandi ekki í boði
+{n} fiches confidentielles non proposées ¦ Trúnaðarspjöld ekki í boði: {n}
+{n} fiche confidentielle non proposée ¦ {n} trúnaðarspjald ekki í boði
+Ta demande est prête ¦ Beiðnin þín er tilbúin
+{faces} sur {photos}, {names}. ¦ {faces} á {photos}, {names}.
+Préparer un courriel ¦ Útbúa tölvupóst
+Message à envoyer avec le fichier ¦ Skilaboð til að senda með skránni
+Rien n’est envoyé par l’app : c’est toi qui joins le fichier à ton courriel. Le fichier ne contient que les photos, les cadres des visages et les noms proposés. ¦ Appið sendir ekkert: þú hengir skrána sjálf(ur) við tölvupóstinn þinn. Skráin inniheldur aðeins myndirnar, ramma andlitanna og nöfnin sem stungið er upp á.
+Fichier téléchargé ({n} photos n’ont pas pu être jointes). ¦ Skrá sótt (ekki tókst að hengja við myndir: {n}).
+Fichier téléchargé ({n} photo n’a pas pu être jointe). ¦ Skrá sótt ({n} mynd var ekki hægt að hengja við).
+Fichier téléchargé : joins-le à un courriel. ¦ Skrá sótt: hengdu hana við tölvupóst.
+Ce que verra ton cousin ¦ Það sem frændi þinn sér
+Aperçu du fichier ¦ Forskoðun skrárinnar
+Accord ¦ Samhljóða
+Un autre cousin a donné la même réponse ¦ Annar frændi gaf sama svar
+Désaccord ¦ Ósamræmi
+Un autre cousin a répondu autre chose ¦ Annar frændi svaraði öðru
+selon {who} ¦ að sögn {who}
+ton cousin ¦ frændi þinn
+✓ Pareil pour {list} ¦ ✓ Sama fyrir {list}
+un cousin ¦ frændi
+Un cousin ¦ Frændi
+Aujourd’hui sur la photo : <b>{name}</b> ¦ Núna á myndinni: <b>{name}</b>
+Peut-être : ¦ Kannski:
+Que faire de cette réponse ? ¦ Hvað á að gera við þetta svar?
+Importer les réponses « Qui est sur cette photo ? » ¦ Flytja inn svörin við „Hver er á þessari mynd?“
+le fichier « reponses-visages.json » ¦ skrána „reponses-visages.json“
+Le fichier que ton cousin t’a renvoyé (il s’appelle « reponses-visages.json »). ¦ Skráin sem frændi þinn sendi þér til baka (hún heitir „reponses-visages.json“).
+ce fichier est trop gros pour un fichier de réponses (300 Ko au plus). ¦ þessi skrá er of stór fyrir svarskrá (í mesta lagi 300 KB).
+Ces réponses ont <b>déjà été importées</b> ¦ Þessi svör hafa <b>þegar verið flutt inn</b>
+<b>{answers}</b> de <b>{who}</b> à « {title} » ({date}), comparées aux {before} déjà reçues. Pour chaque visage : accepte, refuse ou garde pour plus tard ¦ <b>{answers}</b> frá <b>{who}</b> við „{title}“ ({date}), borin saman við þau {before} sem þegar hafa borist. Fyrir hvert andlit: samþykktu, hafnaðu eða geymdu til síðari tíma
+<b>{answers}</b> de <b>{who}</b> à « {title} » ({date}). Pour chaque visage : accepte, refuse ou garde pour plus tard ¦ <b>{answers}</b> frá <b>{who}</b> við „{title}“ ({date}). Fyrir hvert andlit: samþykktu, hafnaðu eða geymdu til síðari tíma
+Aucun nom écrit dans ce fichier ¦ Ekkert nafn skrifað í þessa skrá
+Des cousins ne sont pas d’accord sur certains visages (⚠️) : regarde bien avant d’accepter. ¦ Frændur eru ósammála um sum andlit (⚠️): skoðaðu vel áður en þú samþykkir.
+Choisis la fiche de cette personne (ou « Plus tard »). ¦ Veldu spjald þessa einstaklings (eða „Seinna“).
+{faces} (réponses de {who}) ¦ {faces} (svör frá {who})
+Réponses de {who} gardées avec la demande. ¦ Svör frá {who} geymd með beiðninni.
+cousins ¦ frændur
+Envoyé, en attente des réponses ¦ Sent, beðið eftir svörum
+Demande « {title} » supprimée ¦ Beiðninni „{title}“ eytt
+Demander qui c’est ¦ Spyrja hver þetta er
+Un petit fichier à envoyer à un cousin : il clique sur les visages et écrit qui c’est ¦ Lítil skrá til að senda frænda: hann smellir á andlitin og skrifar hver þetta er
+=visage trouvé ¦ andlit fannst|andlit fundust
+=nom proposé ¦ nafn í boði|nöfn í boði
+=visage identifié ¦ andlit borið kennsl á|andlit borin kennsl á
+Média n° {n} ¦ Miðill nr. {n}
+Identique ¦ Eins
+＝ Identique (même fichier) ¦ ＝ Eins (sama skrá)
+Zoomée ¦ Stækkuð
+Recadrée ¦ Skorin
+Très proche ¦ Mjög lík
+très proche ¦ mjög lík
+Ressemblante ¦ Svipuð
+Recadrée / zoomée ¦ Skorin / stækkuð
+même fichier ¦ sama skrá
+autre format ¦ annað snið
+redimensionnée ¦ stærð breytt
+retouchée ¦ lagfærð
+ré-enregistrée ¦ vistuð aftur
+zoomée ¦ stækkuð
+recadrée ¦ skorin
+en partie la même ¦ að hluta sú sama
+autre prise ¦ önnur taka
+autres couleurs ¦ aðrir litir
+Le calcul des empreintes s’est arrêté : {err} ¦ Útreikningur fingrafara stöðvaðist: {err}
+Empreintes des photos : <b>{done} / {total}</b> (calcul sur cet ordinateur, par petits paquets — tu peux fermer, ça reprendra). Les résultats se complètent tout seuls. ¦ Fingraför myndanna: <b>{done} / {total}</b> (reiknað á þessari tölvu, í litlum skömmtum — þú getur lokað, þetta heldur áfram). Niðurstöðurnar fyllast inn sjálfkrafa.
+« Comparer deux photos » marche avec deux photos de la base. ¦ „Bera saman tvær myndir“ virkar með tveimur myndum úr gagnagrunninum.
+L’outil « Comparer deux photos » n’est pas encore chargé : réessaie dans un instant. ¦ Tólið „Bera saman tvær myndir“ er ekki enn hlaðið: reyndu aftur eftir augnablik.
+Le moteur des images n’est pas encore chargé : réessaie dans un instant. ¦ Myndvélin er ekki enn hlaðin: reyndu aftur eftir augnablik.
+Chercher une image semblable ¦ Leita að svipaðri mynd
+CHERCHER UNE IMAGE SEMBLABLE ¦ LEITA AÐ SVIPAÐRI MYND
+Retrouve une photo de la base, même recadrée, zoomée, retouchée ou dans un autre format. Tout se calcule sur cet ordinateur. ¦ Finndu mynd úr gagnagrunninum, jafnvel skorna, stækkaða, lagfærða eða á öðru sniði. Allt er reiknað á þessari tölvu.
+Elle sert seulement à chercher : elle n’entre pas dans les médias. ¦ Hún er aðeins notuð til að leita: hún fer ekki í miðlana.
+Photo de la base ¦ Mynd úr gagnagrunninum
+Image de ton ordinateur ¦ Mynd úr tölvunni þinni
+Choisis une photo dans les médias, ou dépose une image de ton ordinateur : l’app cherche les photos qui lui ressemblent. ¦ Veldu mynd úr miðlunum eða slepptu mynd úr tölvunni þinni: appið leitar að myndum sem líkjast henni.
+＝ Identiques ¦ ＝ Eins
+≈ Très proches ¦ ≈ Mjög líkar
+⬚ Recadrées / zoomées ¦ ⬚ Skornar / stækkaðar
+～ Ressemblantes ¦ ～ Svipaðar
+Ressemblance ¦ Líkindi
+Chercher depuis celle-ci ¦ Leita út frá þessari
+Recherche des photos semblables… ¦ Leita að svipuðum myndum…
+{found} parmi {ready} (la recherche continue) ¦ {found} af {ready} (leitin heldur áfram)
+{found} parmi {ready} ¦ {found} af {ready}
+Aucune photo de cette sorte ¦ Engin mynd af þessu tagi
+Aucune photo semblable ¦ Engin svipuð mynd
+Les empreintes ne sont pas toutes prêtes : la recherche se complète toute seule. ¦ Ekki eru öll fingraför tilbúin: leitin fyllist inn sjálfkrafa.
+Parmi {list}. ¦ Meðal {list}.
+Clique sur « Voir » pour poser les deux images côte à côte. ¦ Smelltu á „Skoða“ til að setja myndirnar tvær hlið við hlið.
+Ton image ¦ Myndin þín
+Trouvée ¦ Fundin
+Cette photo est un morceau de ton image (environ {pct} % de sa surface), cadre en bleu. ¦ Þessi mynd er hluti af myndinni þinni (um {pct} % af fleti hennar), rammi í bláu.
+Ton image est un morceau de cette photo (environ {pct} % de sa surface), cadre en bleu. ¦ Myndin þín er hluti af þessari mynd (um {pct} % af fleti hennar), rammi í bláu.
+Exactement le même fichier. ¦ Nákvæmlega sama skráin.
+La même image ({how}). ¦ Sama myndin ({how}).
+Elles se ressemblent : même scène ou même document, peut-être une autre prise. ¦ Þær líkjast hvor annarri: sama sena eða sama skjal, kannski önnur taka.
+Cette image n’a pas pu être lue ({err}). ¦ Ekki tókst að lesa þessa mynd ({err}).
+Choisis une image (JPG, PNG, WebP…). ¦ Veldu mynd (JPG, PNG, WebP…).
+Image collée ¦ Límd mynd
+La photo de départ ¦ Upphafsmyndin
+Doublons d’images ¦ Tvítekningar mynda
+Les mêmes photos rangées plusieurs fois, même retouchées, recadrées, zoomées ou dans un autre format. Garde la meilleure : ses liens réunissent ceux des autres. ¦ Sömu myndirnar geymdar oftar en einu sinni, jafnvel lagfærðar, skornar, stækkaðar eða á öðru sniði. Haltu þeirri bestu: tengingar hennar safna saman tengingum hinna.
+Ce qu’on fait des autres photos ¦ Hvað verður um hinar myndirnar
+Les autres photos : ¦ Hinar myndirnar:
+À la corbeille ¦ Í ruslið
+En versions ¦ Sem útgáfur
+Corbeille : les autres photos sont retirées de la liste des médias (le fichier reste sur le disque) et reviennent avec « ↶ Remettre ». Versions : leur fichier devient une version de la photo gardée (visionneuse → versions). ¦ Rusl: hinar myndirnar eru fjarlægðar úr lista miðlanna (skráin verður eftir á diskinum) og koma aftur með „↶ Setja aftur“. Útgáfur: skrá þeirra verður útgáfa af myndinni sem haldið er (myndskoðari → útgáfur).
+Plus haut : l’app propose aussi des photos plus retouchées ou plus recadrées (plus de fausses alertes). Plus bas : seulement les doublons évidents. ¦ Hærra: appið stingur líka upp á meira lagfærðum eða meira skornum myndum (fleiri falskar viðvaranir). Lægra: aðeins augljósar tvítekningar.
+Pas des doublons ¦ Ekki tvítekningar
+Corbeille des doublons ¦ Rusl tvítekninga
+＝ Parfaits ¦ ＝ Fullkomnar
+🎨 Retouchés ¦ 🎨 Lagfærðar
+⬚ Recadrés / zoomés ¦ ⬚ Skornar / stækkaðar
+↔ Redimensionnés ¦ ↔ Stærð breytt
+🗂 Autre format ¦ 🗂 Annað snið
+Gardée ¦ Haldið
+La plus grande ¦ Sú stærsta
+Garder celle-ci à la place ¦ Halda þessari í staðinn
+Comparer avec la photo gardée ¦ Bera saman við myndina sem haldið er
+Pas un doublon des autres ¦ Ekki tvítekning hinna
+Ce n’est pas un doublon ¦ Þetta er ekki tvítekning
+Garder ★ et fusionner {others} ¦ Halda ★ og sameina {others}
+Tu as dit : ce n’est pas un doublon. ¦ Þú sagðir: þetta er ekki tvítekning.
+Signaler de nouveau ¦ Merkja aftur
+Aucune paire écartée. ¦ Engu pari vikið til hliðar.
+Gardées en versions de la photo gardée ¦ Haldið sem útgáfur af myndinni sem haldið er
+Le fichier est toujours sur le disque ¦ Skráin er enn á diskinum
+Fusionné ¦ Sameinað
+Remettre ¦ Setja aftur
+La corbeille des doublons est vide. ¦ Rusl tvítekninga er tómt.
+Comparaison des photos… {pct} % ¦ Ber saman myndir… {pct} %
+Comparaison des photos… ¦ Ber saman myndir…
+{groups} parmi {media} — comparaison en cours… ¦ {groups} af {media} — samanburður í gangi…
+{groups} parmi {media} ¦ {groups} af {media}
+Aucun groupe de cette sorte ¦ Enginn hópur af þessu tagi
+Aucun doublon trouvé ¦ Engin tvítekning fannst
+Les empreintes ne sont pas toutes prêtes : la liste se complète toute seule. ¦ Ekki eru öll fingraför tilbúin: listinn fyllist inn sjálfkrafa.
+Parmi {list}. Monte la sensibilité pour voir les photos plus différentes. ¦ Meðal {list}. Hækkaðu næmnina til að sjá ólíkari myndir.
+Groupe de {list} : ce ne sont pas des doublons ¦ Hópur {list}: þetta eru ekki tvítekningar
+« {title} » n’est pas un doublon des autres ¦ „{title}“ er ekki tvítekning hinna
+Paire signalée de nouveau ¦ Par merkt aftur
+Fusion annulée : les photos sont revenues avec leurs liens. ¦ Sameining afturkölluð: myndirnar eru komnar aftur með tengingum sínum.
+=photo trouvée ¦ mynd fannst|myndir fundust
+=photo prête ¦ mynd tilbúin|myndir tilbúnar
+=photo de la base ¦ mynd í gagnagrunninum|myndir í gagnagrunninum
+=groupe de doublons ¦ hópur tvítekninga|hópar tvítekninga
+=média comparé ¦ miðill borinn saman|miðlar bornir saman
+Comparer deux arbres ¦ Bera saman tvö tré
+Masquer comparaison ¦ Fela samanburð
+avec les animaux ¦ með dýrunum
+MON SITE WEB ¦ VEFSÍÐAN MÍN
+Page vide ¦ Auð síða
+Ma famille ¦ Fjölskyldan mín
+Mon village ¦ Þorpið mitt
+Calque 1 ¦ Lag 1
+Calque {n} ¦ Lag {n}
+Nom inscrit ¦ Skráð nafn
+Groupe patronymique ¦ Ættarnafnahópur
+Couleur de peau ¦ Húðlitur
+ex : Dupont ¦ t.d. Dupont
+« {name} » n’est ni une image, ni un son, ni une vidéo. ¦ „{name}“ er hvorki mynd, hljóð né myndskeið.
+Ici, il faut une image. ¦ Hér þarf mynd.
+Ici, il faut un son. ¦ Hér þarf hljóð.
+Ici, il faut une vidéo. ¦ Hér þarf myndskeið.
+Fichier importé ¦ Innflutt skrá
+assez grande pour imprimer en {f} ¦ nógu stór til að prenta í {f}
+petite : écran seulement ¦ lítil: aðeins fyrir skjá
+{n} choisies ¦ Valdar: {n}
+{n} choisie ¦ {n} valin
+{n} choisis ¦ Valdir: {n}
+{n} choisi ¦ {n} valinn
+MÉDIAS DE L’APP ¦ MIÐLAR APPSINS
+Seulement ses médias ¦ Aðeins miðlar viðkomandi
+Montrer seulement ses médias ¦ Sýna aðeins miðla viðkomandi
+Retirer le filtre de la personne ¦ Fjarlægja einstaklingssíuna
+Voir ses médias ¦ Skoða miðla viðkomandi
+Recherche impossible ¦ Leit mistókst
+La suite arrive en descendant… ¦ Meira birtist þegar þú flettir niður…
+Aucune image dans le presse-papiers. Copie une image, puis réessaie. ¦ Engin mynd á klippiborðinu. Afritaðu mynd og reyndu svo aftur.
+Appuie sur ⌘V (ou Ctrl+V) pour coller l’image ici. ¦ Ýttu á ⌘V (eða Ctrl+V) til að líma myndina hér.
+Les médias de quelle personne ? ¦ Miðlar hvaða einstaklings?
+📝 Pas encore transcrites ¦ 📝 Ekki enn uppskrifaðar
+✅ Déjà transcrites ¦ ✅ Þegar uppskrifaðar
+✍ Avec une signature repérée ¦ ✍ Með fundinni undirskrift
+images ¦ myndir
+sons ¦ hljóð
+documents ¦ skjöl
+médias ¦ miðlar
+=son ¦ hljóð|hljóð
+Choisir des images ¦ Velja myndir
+Choisir des sons ¦ Velja hljóð
+Choisir un son ¦ Velja hljóð
+Choisir des vidéos ¦ Velja myndskeið
+Choisir une vidéo ¦ Velja myndskeið
+Choisir des documents ¦ Velja skjöl
+Choisir un document ¦ Velja skjal
+Choisir des médias ¦ Velja miðla
+Choisir un média ¦ Velja miðil
+Utiliser cette image ¦ Nota þessa mynd
+Utiliser ces sons ¦ Nota þessi hljóð
+Utiliser ce son ¦ Nota þetta hljóð
+Utiliser ces vidéos ¦ Nota þessi myndskeið
+Utiliser cette vidéo ¦ Nota þetta myndskeið
+Utiliser ces documents ¦ Nota þessi skjöl
+Utiliser ce document ¦ Nota þetta skjal
+Utiliser ces médias ¦ Nota þessa miðla
+Utiliser ce média ¦ Nota þennan miðil
+Glisse une image ici, colle-la (⌘V) ou <button>importe-la depuis l’ordinateur</button> : elle entre dans les médias et se coche. ¦ Dragðu mynd hingað, límdu hana (⌘V) eða <button>fluttu hana inn úr tölvunni</button>: hún fer í miðlana og er hökuð við.
+Glisse un son ici, colle-le (⌘V) ou <button>importe-le depuis l’ordinateur</button> : il entre dans les médias et se coche. ¦ Dragðu hljóð hingað, límdu það (⌘V) eða <button>fluttu það inn úr tölvunni</button>: það fer í miðlana og er hakað við.
+Glisse une vidéo ici, colle-la (⌘V) ou <button>importe-la depuis l’ordinateur</button> : elle entre dans les médias et se coche. ¦ Dragðu myndskeið hingað, límdu það (⌘V) eða <button>fluttu það inn úr tölvunni</button>: það fer í miðlana og er hakað við.
+Glisse un média ici, colle-le (⌘V) ou <button>importe-le depuis l’ordinateur</button> : il entre dans les médias et se coche. ¦ Dragðu miðil hingað, límdu hann (⌘V) eða <button>fluttu hann inn úr tölvunni</button>: hann fer í miðlana og er hakað við hann.
+« {title} » est entrée dans tes médias. ¦ „{title}“ er komin í miðlana þína.
+« {title} » est entré dans tes médias. ¦ „{title}“ er kominn í miðlana þína.
+Aucune image pour « {q} ». ¦ Engin mynd fyrir „{q}“.
+Aucune image avec ces filtres. ¦ Engin mynd með þessum síum.
+Aucune image dans tes médias pour l’instant. ¦ Engin mynd í miðlunum þínum enn sem komið er.
+Aucun son pour « {q} ». ¦ Ekkert hljóð fyrir „{q}“.
+Aucun son avec ces filtres. ¦ Ekkert hljóð með þessum síum.
+Aucun son dans tes médias pour l’instant. ¦ Ekkert hljóð í miðlunum þínum enn sem komið er.
+Aucune vidéo pour « {q} ». ¦ Ekkert myndskeið fyrir „{q}“.
+Aucune vidéo avec ces filtres. ¦ Ekkert myndskeið með þessum síum.
+Aucune vidéo dans tes médias pour l’instant. ¦ Ekkert myndskeið í miðlunum þínum enn sem komið er.
+Aucun document pour « {q} ». ¦ Ekkert skjal fyrir „{q}“.
+Aucun document avec ces filtres. ¦ Ekkert skjal með þessum síum.
+Aucun document dans tes médias pour l’instant. ¦ Ekkert skjal í miðlunum þínum enn sem komið er.
+Aucun média pour « {q} ». ¦ Enginn miðill fyrir „{q}“.
+Aucun média avec ces filtres. ¦ Enginn miðill með þessum síum.
+Aucun média dans tes médias pour l’instant. ¦ Enginn miðill í miðlunum þínum enn sem komið er.
+Importe-la depuis l’ordinateur. ¦ Fluttu hana inn úr tölvunni.
+Importe-le depuis l’ordinateur. ¦ Fluttu það inn úr tölvunni.
+Vérifie l’orthographe, enlève un filtre, ou importe-la depuis l’ordinateur. ¦ Athugaðu stafsetninguna, fjarlægðu síu eða fluttu hana inn úr tölvunni.
+Vérifie l’orthographe, enlève un filtre, ou importe-le depuis l’ordinateur. ¦ Athugaðu stafsetninguna, fjarlægðu síu eða fluttu það inn úr tölvunni.
+Retire le filtre de la personne, ou importe-la depuis l’ordinateur. ¦ Fjarlægðu einstaklingssíuna eða fluttu hana inn úr tölvunni.
+Retire le filtre de la personne, ou importe-le depuis l’ordinateur. ¦ Fjarlægðu einstaklingssíuna eða fluttu það inn úr tölvunni.
+Vérifie l’orthographe, enlève un filtre. ¦ Athugaðu stafsetninguna, fjarlægðu síu.
+Retire le filtre de la personne. ¦ Fjarlægðu einstaklingssíuna.
+Clique sur une image pour la voir ici en grand. ¦ Smelltu á mynd til að sjá hana stóra hér.
+Clique sur une image pour la voir ici. ¦ Smelltu á mynd til að sjá hana hér.
+Clique sur un son pour le voir ici en grand. ¦ Smelltu á hljóð til að sjá það stórt hér.
+Clique sur un son pour le voir ici. ¦ Smelltu á hljóð til að sjá það hér.
+Clique sur une vidéo pour la voir ici en grand. ¦ Smelltu á myndskeið til að sjá það stórt hér.
+Clique sur une vidéo pour la voir ici. ¦ Smelltu á myndskeið til að sjá það hér.
+Clique sur un document pour le voir ici en grand. ¦ Smelltu á skjal til að sjá það stórt hér.
+Clique sur un document pour le voir ici. ¦ Smelltu á skjal til að sjá það hér.
+Clique sur un média pour le voir ici en grand. ¦ Smelltu á miðil til að sjá hann stóran hér.
+Clique sur un média pour le voir ici. ¦ Smelltu á miðil til að sjá hann hér.
+design ¦ hönnun
+menus ¦ valmyndir
+listes ¦ listar
+blocs des fiches ¦ hlutar spjalda
+tableau de bord ¦ stjórnborð
+fonds de carte ¦ kortagrunnar
+couleurs ¦ litir
+portraits ¦ andlitsmyndir
+colonne de gauche ¦ vinstri dálkur
+accord des mots ¦ samræmi orða
+designs au choix ¦ hönnun að eigin vali
+réglages de départ ¦ upphafsstillingar
+La base n’a pas pu enregistrer la mise en page : réessaie. ¦ Gagnagrunnurinn gat ekki vistað uppsetninguna: reyndu aftur.
+APPARENCE ¦ ÚTLIT
+Réglages enregistrés : l’Apparence ¦ Vistaðar stillingar: Útlit
+Garde <b>tous</b> les réglages de l’Apparence sous un nom : design, designs au choix, portraits, colonne de gauche, menus affichés ou masqués et leur ordre, listes, cartes, graphiques, blocs des fiches et du tableau de bord, couleurs, fonds de carte. Tu peux y revenir en un clic, ou envoyer le fichier à un autre utilisateur de LCNDA. ¦ Geymdu <b>allar</b> stillingar Útlits undir nafni: hönnun, hönnun að eigin vali, andlitsmyndir, vinstri dálkur, sýndar eða faldar valmyndir og röð þeirra, listar, kort, gröf, hlutar spjalda og stjórnborðs, litir, kortagrunnar. Þú getur farið aftur í þær með einum smelli eða sent skrána til annars notanda LCNDA.
+tous les réglages de l’Apparence ¦ allar stillingar Útlits
+reçue de ¦ móttekin frá
+reçu de ¦ móttekið frá
+Mise en page « {name} » supprimée ¦ Uppsetningunni „{name}“ eytt
+Tous les réglages de l’Apparence seront remplacés (pense à enregistrer la mise en page actuelle si tu veux la garder). L’écran va se recharger. ¦ Öllum stillingum Útlits verður skipt út (mundu að vista núverandi uppsetningu ef þú vilt halda henni). Skjárinn verður endurhlaðinn.
+Appliquer la mise en page « {name} » ? ¦ Nota uppsetninguna „{name}“?
+Mise en page « {name} » appliquée. ¦ Uppsetningin „{name}“ er komin í notkun.
+Fichier prêt : envoie-le à l’autre personne, elle l’importe dans Réglages → Apparence. ¦ Skráin er tilbúin: sendu hana hinum einstaklingnum, hann flytur hana inn í Stillingar → Útlit.
+Ce fichier n’est pas une mise en page LCNDA. ¦ Þessi skrá er ekki LCNDA-uppsetning.
+Mise en page « {name} » importée : clique sur « Appliquer » pour l’utiliser. ¦ Uppsetningin „{name}“ flutt inn: smelltu á „Nota“ til að taka hana í notkun.
+({n} réglages illisibles laissés de côté) ¦ (ólæsilegum stillingum sleppt: {n})
+(1 réglage illisible laissé de côté) ¦ (1 ólæsilegri stillingu sleppt)
+Trop de réglages enregistrés pour la place disponible : supprimes-en un. ¦ Of margar vistaðar stillingar fyrir plássið sem er til: eyddu einni.
+Tes graphiques n’ont pas pu être remis : {err} ¦ Ekki tókst að endurheimta gröfin þín: {err}
+La base n’a pas pu enregistrer ces réglages : réessaie. ¦ Gagnagrunnurinn gat ekki vistað þessar stillingar: reyndu aftur.
+TOUS LES RÉGLAGES ¦ ALLAR STILLINGAR
+Réglages enregistrés : toute l’app ¦ Vistaðar stillingar: allt appið
+Garde <b>l’intégralité</b> des réglages de l’app sous un nom : l’Apparence, mais aussi les listes et leurs colonnes, les graphiques et onglets à soi, les widgets, les tableaux, les animaux, les livrets, les raccourcis, la recherche sur internet… Tu peux y revenir en un clic, ou les passer à un autre ordinateur avec un fichier. Ne sont pas gardés : tes données, ce qui vise une fiche précise (de cujus, exceptions d’une fiche), le code pour quitter le mode simple et la personne qui regarde, et ce qui est propre à cet ordinateur. ¦ Geymdu <b>allar</b> stillingar appsins undir nafni: Útlit, en líka listana og dálka þeirra, eigin gröf og flipa, græjur, töflur, dýr, bæklinga, flýtilykla, leit á netinu… Þú getur farið aftur í þær með einum smelli eða flutt þær í aðra tölvu með skrá. Ekki geymt: gögnin þín, það sem varðar eitt tiltekið spjald (miðpersóna, undantekningar eins spjalds), kóðinn til að hætta í einföldum ham og sá sem horfir, og það sem á aðeins við þessa tölvu.
+Mes réglages ¦ Stillingarnar mínar
+Fichier prêt : il s’importe ici, sur un autre ordinateur. ¦ Skráin er tilbúin: hún er flutt inn hér, á annarri tölvu.
+tous les réglages de l’app ¦ allar stillingar appsins
+Tous les réglages de l’app seront remplacés (pense à enregistrer les réglages actuels si tu veux les garder). Tes données ne bougent pas. L’écran va se recharger. ¦ Öllum stillingum appsins verður skipt út (mundu að vista núverandi stillingar ef þú vilt halda þeim). Gögnin þín breytast ekki. Skjárinn verður endurhlaðinn.
+Appliquer l’ensemble « {name} » ? ¦ Nota safnið „{name}“?
+Fichier prêt : il s’importe dans Réglages → Apparence → « Mes ensembles de réglages ». ¦ Skráin er tilbúin: hún er flutt inn í Stillingar → Útlit → „Stillingasöfnin mín“.
+Ce fichier n’est pas un fichier de réglages LCNDA. ¦ Þessi skrá er ekki LCNDA-stillingaskrá.
+Réglages importés ¦ Innfluttar stillingar
+Ensemble « {name} » importé : clique sur « Appliquer » pour l’utiliser. ¦ Safnið „{name}“ flutt inn: smelltu á „Nota“ til að taka það í notkun.
+1≡ Liste numérotée ¦ 1≡ Númeraður listi
+A Couleur du texte ¦ A Textalitur
+S Souligné ¦ S Undirstrikað
+ab Barré ¦ ab Yfirstrikað
+Trier, filtrer, Σ ¦ Raða, sía, Σ
+Menu Édition ¦ Valmyndin Breyta
+Sélection directe (points et poignées) (A) ¦ Beint val (punktar og handföng) (A)
+Crayon (à main levée) (N) ¦ Blýantur (fríhendis) (N)
+Étoile (S) ¦ Stjarna (S)
+Spirale (glisser depuis le centre) (O) ¦ Gormur (dragðu frá miðjunni) (O)
+Pipette (prend la couleur d’un objet) (I) ¦ Litadropi (tekur lit hlutar) (I)
+Main (déplacer la vue) (H) ¦ Hönd (færa sýnina) (H)
+Loupe (⌥ : dézoomer) (Z) ¦ Stækkunargler (⌥: minnka) (Z)
+Remplissage et contour de la sélection ¦ Fylling og útlína valsins
+Contour blanc du texte ¦ Hvít útlína texta
+Polices de l’ordi ¦ Leturgerðir tölvunnar
+Clic sur la courbe : ajouter un point ¦ Smelltu á ferilinn: bæta við punkti
+glisser : le déplace ¦ draga: færir hann
+Temps (où on en est / durée) ¦ Tími (staða / lengd)
+✒︎ Plume (P) : clic = point, double-clic ou Entrée = fini ¦ ✒︎ Penni (P): smellur = punktur, tvísmellur eða Enter = lokið
+Comprendre l’ADN en généalogie ¦ Að skilja DNA í ættfræði
+L’essentiel, en clair. ¦ Það helsta, á mannamáli.
+Les types de tests ¦ Tegundir prófa
+<p><b>Autosomal</b> (atDNA) : les 22 paires de chromosomes non sexuels, reçues pour moitié de chaque parent. Il retrouve des cousins de tous les côtés jusqu’à 5 à 8 générations environ. C’est le test « généalogique » le plus courant.</p><p><b>ADN-Y</b> : transmis de père en fils presque sans changement. Il suit une seule lignée, celle du nom de famille dans beaucoup de cas, sur des centaines d’années. On l’étudie par ses marqueurs (Y-STR : 37, 67, 111 marqueurs…) et ses mutations (SNP) qui donnent l’<b>haplogroupe</b>.</p><p><b>ADN mitochondrial</b> (ADNmt) : transmis par la mère à tous ses enfants, seules les filles le transmettent. Très stable : utile pour des questions anciennes ou pour départager deux lignées maternelles.</p><p><b>ADN-X</b> : son mode de transmission particulier élimine des ancêtres (voir « Lignées Y, mt et X »).</p> ¦ <p><b>Litningaerfðaefni</b> (atDNA): 22 pör litninga sem ekki eru kynlitningar, helmingur frá hvoru foreldri. Það finnur frændfólk í öllum greinum um 5 til 8 kynslóðir aftur. Þetta er algengasta „ættfræðiprófið“.</p><p><b>Y-DNA</b>: berst frá föður til sonar nær óbreytt. Það fylgir einni línu, oft línu ættarnafnsins, í hundruð ára. Það er skoðað út frá merkjum sínum (Y-STR: 37, 67, 111 merki…) og stökkbreytingum (SNP) sem gefa <b>haplóhópinn</b>.</p><p><b>Hvatberaerfðaefni</b> (mtDNA): berst frá móður til allra barna hennar, aðeins dæturnar bera það áfram. Mjög stöðugt: gagnlegt fyrir gamlar spurningar eða til að greina á milli tveggja móðurlína.</p><p><b>X-DNA</b>: sérstakur erfðaháttur þess útilokar suma forfeður (sjá „Y-, mt- og X-línur“).</p>
+Centimorgans (cM) et segments ¦ Sentimorgan (cM) og bútar
+<p>Le <b>centimorgan</b> mesure une longueur d’ADN « génétique ». On partage environ 3 400 à 3 700 cM avec un parent, 850 en moyenne avec un cousin germain, 230 avec un cousin issu de germain… Le total et la <b>longueur du plus long segment</b> aident à deviner la relation (« 📐 Calculateur »). Les petits segments (moins de 7 à 8 cM) sont souvent du « bruit » ou très anciens.</p> ¦ <p><b>Sentimorgan</b> mælir „erfðafræðilega“ lengd DNA. Þú deilir um 3.400 til 3.700 cM með foreldri, 850 að meðaltali með systkinabarni, 230 með þremenningi… Heildin og <b>lengd lengsta bútsins</b> hjálpa til við að giska á skyldleikann („📐 Reiknivél“). Litlir bútar (undir 7 til 8 cM) eru oft „suð“ eða mjög gamlir.</p>
+Haplogroupes ¦ Haplóhópar
+<p>Un <b>haplogroupe</b> (R-M269, I-M253, H1, U5b…) regroupe tous ceux qui descendent d’un même lointain ancêtre en ligne Y ou mt, souvent il y a des milliers d’années. Deux personnes du même haplogroupe ne sont pas forcément proches : il faut des sous-clades fines ou une correspondance de marqueurs.</p> ¦ <p><b>Haplóhópur</b> (R-M269, I-M253, H1, U5b…) nær yfir alla sem eru komnir af sama fjarlæga forföður í Y- eða mt-línu, oft fyrir þúsundum ára. Tveir einstaklingar í sama haplóhópi eru ekki endilega náskyldir: það þarf fínar undirgreinar eða samsvörun merkja.</p>
+Triangulation ¦ Þríhyrning
+<p>Si A correspond avec toi, B correspond avec toi, <b>et</b> A et B correspondent entre eux <b>sur le même segment</b>, ce segment vient très probablement d’un ancêtre commun aux trois. C’est la meilleure preuve génétique d’une branche. Le « 🧩 navigateur de chromosomes » montre les chevauchements à vérifier.</p> ¦ <p>Ef A samsvarar þér, B samsvarar þér <b>og</b> A og B samsvara hvort öðru <b>á sama bútnum</b>, kemur sá bútur mjög líklega frá sameiginlegum forföður allra þriggja. Þetta er besta erfðafræðilega sönnunin fyrir grein. „🧩 Litningavafrinn“ sýnir skörunina sem þarf að athuga.</p>
+La méthode de Leeds ¦ Leeds-aðferðin
+<p>Mise au point par Dana Leeds : on prend les correspondances de 90 à 400 cM (cousins de 2e et 3e degré), et on colore ensemble celles qui se correspondent entre elles. On obtient souvent 4 groupes (tes 4 grands-parents) ou 8 (tes arrière-grands-parents). Il faut noter les « correspondances en commun » de chacun (« 🗂️ Groupes »).</p> ¦ <p>Þróuð af Dana Leeds: taktu samsvaranir frá 90 til 400 cM (þremenninga og fjórmenninga) og litaðu saman þær sem samsvara hver annarri. Oft fást 4 hópar (afar þínir og ömmur, 4 talsins) eða 8 (langafar og langömmur). Þú þarft að skrá „sameiginlegar samsvaranir“ hvers og eins („🗂️ Hópar“).</p>
+<p>Dans un village isolé, une île, une communauté fermée, on descend plusieurs fois des mêmes ancêtres (<b>implexe</b>). On partage alors plus d’ADN qu’attendu, en beaucoup de petits segments : les relations paraissent plus proches qu’elles ne sont. Méfie-toi des estimations, regarde le plus long segment.</p> ¦ <p>Í einangruðu þorpi, á eyju eða í lokuðu samfélagi ertu oft kominn af sömu forfeðrunum oftar en einu sinni (<b>forfeðrahrun</b>). Þá deilirðu meira DNA en búist var við, í mörgum litlum bútum: skyldleikinn virðist nánari en hann er. Varastu áætlanirnar, skoðaðu lengsta bútinn.</p>
+<ol><li>Regarde les cM et le plus long segment, la relation probable.</li><li>Regarde les correspondances en commun : de quel côté ? de quel groupe ?</li><li>Compare les noms et les lieux de son arbre avec les tiens.</li><li>Construis son arbre vers le passé jusqu’à trouver le couple commun (MRCA).</li><li>Vérifie que les cM collent avec la relation trouvée.</li><li>Note l’ancêtre commun, lie sa fiche, mets « Placé dans l’arbre ✓ ».</li></ol> ¦ <ol><li>Skoðaðu cM og lengsta bútinn, líklegan skyldleika.</li><li>Skoðaðu sameiginlegu samsvaranirnar: hvorum megin? í hvaða hópi?</li><li>Berðu saman nöfn og staði í tré viðkomandi við þín.</li><li>Byggðu tré viðkomandi aftur í tímann þar til þú finnur sameiginlega parið (MRCA).</li><li>Athugaðu hvort cM passa við skyldleikann sem fannst.</li><li>Skráðu sameiginlega forföðurinn, tengdu spjald hans, settu „Settur í tréð ✓“.</li></ol>
+<ul><li>Demande l’accord de la personne avant de tester, et explique ce qu’on peut découvrir.</li><li>Ne publie pas les noms et les cM de personnes vivantes sans leur accord.</li><li>Prépare-toi aux surprises (parent biologique inconnu, adoption, don de gamètes) et sois délicat avec les personnes concernées.</li><li>Dans les sociétés de test, choisis les options de partage, de recherche et d’usage par la justice qui te conviennent.</li><li>En France : voir « ⚖️ Loi et mises en garde ».</li></ul> ¦ <ul><li>Fáðu samþykki viðkomandi áður en prófað er og útskýrðu hvað getur komið í ljós.</li><li>Birtu ekki nöfn og cM lifandi einstaklinga án samþykkis þeirra.</li><li>Vertu viðbúin(n) óvæntu (óþekkt líffræðilegt foreldri, ættleiðing, kynfrumugjöf) og sýndu nærgætni gagnvart þeim sem eiga í hlut.</li><li>Hjá prófunarfyrirtækjum skaltu velja þá valkosti um deilingu, rannsóknir og notkun lögreglu sem henta þér.</li><li>Í Frakklandi: sjá „⚖️ Lög og varnaðarorð“.</li></ul>
+Petit glossaire ¦ Lítið orðasafn
+<dl class="h-dna-gloss"><dt>SNP</dt><dd>Une « lettre » de l’ADN qui varie d’une personne à l’autre ; les puces en lisent des centaines de milliers.</dd><dt>STR</dt><dd>Un motif répété (ADN-Y), compté pour comparer deux hommes.</dd><dt>MRCA</dt><dd>Most Recent Common Ancestor : l’ancêtre commun le plus récent.</dd><dt>ICW</dt><dd>In Common With : les correspondances que deux personnes partagent.</dd><dt>1C1R</dt><dd>Cousin germain une génération d’écart (« issu de germain »).</dd><dt>GRCh37</dt><dd>La « carte » du génome sur laquelle sont donnés les débuts et fins de segments.</dd><dt>Fichier brut</dt><dd>Le fichier de tes SNP que certaines sociétés laissent télécharger.</dd></dl> ¦ <dl class="h-dna-gloss"><dt>SNP</dt><dd>„Stafur“ í DNA sem er breytilegur milli einstaklinga; örflögur lesa hundruð þúsunda þeirra.</dd><dt>STR</dt><dd>Endurtekið mynstur (Y-DNA), talið til að bera saman tvo karla.</dd><dt>MRCA</dt><dd>Most Recent Common Ancestor: nánasti sameiginlegi forfaðirinn.</dd><dt>ICW</dt><dd>In Common With: samsvaranirnar sem tveir einstaklingar deila.</dd><dt>1C1R</dt><dd>Systkinabarn í einnar kynslóðar fjarlægð (barn systkinabarns foreldris).</dd><dt>GRCh37</dt><dd>„Kort“ erfðamengisins sem upphaf og endir bútanna miðast við.</dd><dt>Hrá skrá</dt><dd>Skráin með SNP-gildunum þínum sem sum fyrirtæki leyfa þér að sækja.</dd></dl>
+=club ¦ klúbbur|klúbbar
+Lire une table décennale ¦ Lesa tíu ára skrá
+DÉPOUILLEMENTS · TABLE DÉCENNALE ¦ SKRÁNINGAR · TÍU ÁRA SKRÁ
+L’image ¦ Myndin
+La lecture ¦ Lesturinn
+La relecture ¦ Yfirlesturinn
+Relire → ¦ Lesa yfir →
+Suivant : créer → ¦ Næst: búa til →
+Ce qui a été lu ou saisi n’est pas encore dans un dépouillement. ¦ Það sem var lesið eða slegið inn er ekki enn komið í skráningu.
+Fermer l’assistant ? ¦ Loka aðstoðinni?
+Fermer sans créer ¦ Loka án þess að búa til
+L’image n’a pas pu être ouverte. ¦ Ekki tókst að opna myndina.
+Choisis la photo de la table. ¦ Veldu myndina af skránni.
+Choisis la photo de la table ¦ Veldu myndina af skránni
+Je ne trouve pas d’année : écris par exemple « 1853-1862 ». ¦ Ég finn ekkert ártal: skrifaðu til dæmis „1853-1862“.
+⚠️ Je ne trouve pas d’année. ¦ ⚠️ Ég finn ekkert ártal.
+Donne au moins une colonne « Nom » ou « Prénoms ». ¦ Tilgreindu að minnsta kosti einn dálk „Eftirnafn“ eða „Fornöfn“.
+Aucune ligne avec un nom : saisis au moins un nom, ou reviens à la lecture. ¦ Engin lína með nafni: sláðu inn að minnsta kosti eitt nafn eða farðu aftur í lesturinn.
+Aucune ligne avec un nom. ¦ Engin lína með nafni.
+La photo de la table ¦ Myndin af skránni
+La photo de la table décennale ¦ Myndin af tíu ára skránni
+La table décennale ¦ Tíu ára skráin
+Une page (ou une double page) photographiée bien à plat ; une image de l’ordinateur entre dans les Médias. ¦ Síða (eða opna) ljósmynduð vel flöt; mynd úr tölvunni fer í Miðla.
+Période de la table ¦ Tímabil skrárinnar
+Sorte d’actes ¦ Tegund skjala
+L’écriture de la table ¦ Skrift skrárinnar
+Imprimée ou tapée ¦ Prentuð eða vélrituð
+Dans tes médias, ou depuis l’ordinateur (glisser, coller, importer). ¦ Í miðlunum þínum eða úr tölvunni (draga, líma, flytja inn).
+Choisir la photo ¦ Velja myndina
+Facultatif : sert à compléter les dates sans année et à repérer celles qui sortent de la table. ¦ Valfrjálst: notað til að fylla inn dagsetningar án ártals og finna þær sem falla utan skrárinnar.
+✓ Compris : de {a} à {b} ¦ ✓ Skilið: frá {a} til {b}
+Mes réglages (glissés) ¦ Stillingarnar mínar (dregnar)
+Couper la colonne la plus large en deux ¦ Skipta breiðasta dálkinum í tvennt
+Retirer la dernière colonne ¦ Fjarlægja síðasta dálkinn
+Garder ces colonnes pour une prochaine table (sur cet ordinateur) ¦ Halda þessum dálkum fyrir næstu skrá (á þessari tölvu)
+Garder ce gabarit ¦ Halda þessu sniðmáti
+Chercher les lignes d’écriture entre le trait du haut et celui du bas ¦ Leita að skriftarlínum milli efri og neðri línunnar
+Repérer les lignes ¦ Finna línurnar
+Nombre de lignes : la zone est coupée en parts égales ¦ Fjöldi lína: svæðinu er skipt í jafna hluta
+Glisse les <b class="h-td-k-col">traits bleus</b> pour séparer les colonnes et choisis ce que contient chacune ; les <b class="h-td-k-band">traits orange</b> bornent la zone à lire (sous les titres, au-dessus du bas de page). Puis « ↧ Repérer les lignes ». ¦ Dragðu <b class="h-td-k-col">bláu línurnar</b> til að aðskilja dálkana og veldu hvað hver þeirra inniheldur; <b class="h-td-k-band">appelsínugulu línurnar</b> afmarka svæðið sem á að lesa (undir fyrirsögnunum, fyrir ofan síðufótinn). Síðan „↧ Finna línurnar“.
+Séparation de colonne {n} ¦ Dálkaskil {n}
+Haut de la zone à lire ¦ Efri mörk lessvæðisins
+Bas de la zone à lire ¦ Neðri mörk lessvæðisins
+{lines} : vérifie qu’elles tombent bien sur l’écriture. ¦ {lines}: athugaðu hvort þær falla vel á skriftina.
+Aucune ligne repérée : ajuste les traits orange, ou indique le nombre de lignes. ¦ Engin lína fannst: lagaðu appelsínugulu línurnar eða tilgreindu fjölda lína.
+Son nom (il sera proposé pour tes prochaines tables, sur cet ordinateur) : ¦ Nafn þess (því verður stungið upp á fyrir næstu skrár þínar, á þessari tölvu):
+Gabarit « {name} » gardé. ¦ Sniðmátinu „{name}“ haldið.
+✍ Saisir les lignes à la main ¦ ✍ Slá línurnar inn handvirkt
+{lines} : passe à la relecture, ou relis l’image. ¦ {lines}: farðu í yfirlesturinn eða lestu myndina aftur.
+↻ Relire l’image ¦ ↻ Lesa myndina aftur
+Le lecteur d’écriture manuscrite (HTR) n’est pas installé sur cet ordinateur : la saisie se fait à la main, dans une grille rapide, la bande de chaque ligne sous les yeux. (Pour l’installer : Réglages → Reconnaissance d’écriture.) ¦ Handskriftarlesarinn (HTR) er ekki uppsettur á þessari tölvu: innsláttur fer fram handvirkt, í fljótlegri töflu, með ræmu hverrar línu fyrir augunum. (Til að setja hann upp: Stillingar → Skriftargreining.)
+{lines} à lire avec le lecteur d’écriture manuscrite (HTR) : chaque case est envoyée au lecteur installé sur cet ordinateur. C’est plus lent, et à relire attentivement. ¦ {lines} til að lesa með handskriftarlesaranum (HTR): hver reitur er sendur til lesarans sem er uppsettur á þessari tölvu. Það er hægara og þarf að lesa vandlega yfir.
+▶ Lire les lignes ¦ ▶ Lesa línurnar
+{lines} à lire, {cols}. La lecture se fait sur cet ordinateur (le moteur est téléchargé une fois, et vérifié). ¦ {lines} til að lesa, {cols}. Lesturinn fer fram á þessari tölvu (vélin er sótt einu sinni og yfirfarin).
+Chargement du moteur de lecture… ¦ Hleð lesvélinni…
+Lecture de la table… ¦ Les skrána…
+{lines} sur {n} : relis et corrige. ¦ {lines} af {n}: lestu yfir og leiðréttu.
+▶ Reprendre la lecture ¦ ▶ Halda lestrinum áfram
+Le lecteur d’écriture manuscrite n’a pas pu lire la table ({err}). ¦ Handskriftarlesarinn gat ekki lesið skrána ({err}).
+Le moteur de lecture n’a pas pu être chargé. ¦ Ekki tókst að hlaða lesvélinni.
+La saisie à la main reste possible : la bande de chaque ligne s’affiche au-dessus de la grille. ¦ Enn er hægt að slá inn handvirkt: ræma hverrar línu birtist fyrir ofan töfluna.
+hors de la période de la table ({years}) ¦ utan tímabils skrárinnar ({years})
+date à vérifier ¦ dagsetning sem þarf að athuga
+année à préciser ¦ ártal sem þarf að tilgreina
+La ligne sur l’image ¦ Línan á myndinni
+La ligne {n} sur l’image ¦ Lína {n} á myndinni
+Saisis chaque ligne en regardant la bande au-dessus. ¦ Sláðu inn hverja línu og horfðu á ræmuna fyrir ofan.
+Ce que l’app a lu : corrige ce qui est faux (les cases peu sûres sont en jaune). ¦ Það sem appið las: leiðréttu það sem er rangt (óvissir reitir eru gulir).
+Entrée ou ↓ : ligne suivante ; ↑ : ligne d’avant. Les dates sans année prennent l’année de la ligne d’avant (table de {a} à {b}). ¦ Enter eða ↓: næsta lína; ↑: fyrri lína. Dagsetningar án ártals fá ártal línunnar á undan (skrá frá {a} til {b}).
+Entrée ou ↓ : ligne suivante ; ↑ : ligne d’avant. Les dates sans année prennent l’année de la ligne d’avant. ¦ Enter eða ↓: næsta lína; ↑: fyrri lína. Dagsetningar án ártals fá ártal línunnar á undan.
+N° / notes ¦ Nr. / athugasemdir
+Nom, ligne {n} ¦ Eftirnafn, lína {n}
+Prénoms, ligne {n} ¦ Fornöfn, lína {n}
+Année, ligne {n} ¦ Ártal, lína {n}
+Date, ligne {n} ¦ Dagsetning, lína {n}
+Sorte d’acte, ligne {n} ¦ Tegund skjals, lína {n}
+Notes, ligne {n} ¦ Athugasemdir, lína {n}
+12 mars, 12/03/1855… ¦ 12 mars, 12/03/1855…
+Retirer cette ligne ¦ Fjarlægja þessa línu
+Retirer la ligne {n} ¦ Fjarlægja línu {n}
+Aucune ligne : « ＋ Ajouter une ligne ». ¦ Engar línur: „＋ Bæta við línu“.
+{lines} sur {n} ¦ {lines} af {n}
+Ligne {n} ¦ Lína {n}
+Voilà ce qui va entrer ¦ Þetta er það sem bætist við
+Un dépouillement <b>« {title} »</b> (modèle « Table décennale »), dans Listes → Dépouillements et Recherche → Dépouillement d’archive ; ¦ Skráning <b>„{title}“</b> (sniðmát „Tíu ára skrá“), í Listar → Skráningar og Rannsóknir → Skráning skjalasafns;
+<b>{lines}</b> relevées (nom, prénoms, date, sorte d’acte), chacune avec sa zone sur l’image ; ¦ <b>{lines}</b> skráðar (eftirnafn, fornöfn, dagsetning, tegund skjals), hver með sitt svæði á myndinni;
+<b>{lines}</b> relevée (nom, prénoms, date, sorte d’acte), chacune avec sa zone sur l’image ; ¦ <b>{lines}</b> skráð (eftirnafn, fornöfn, dagsetning, tegund skjals), með sitt svæði á myndinni;
+la photo de la table, reliée au dépouillement (page 1). ¦ myndin af skránni, tengd skráningunni (síða 1).
+{dates} à vérifier : elles sont gardées telles qu’écrites. ¦ {dates} sem þarf að athuga: þær eru geymdar eins og þær voru skrifaðar.
+Ensuite, l’app te propose les fiches qui correspondent : relier ou créer, ligne par ligne. ¦ Síðan stingur appið upp á spjöldum sem passa: tengja eða búa til, línu fyrir línu.
+Création du dépouillement… ¦ Bý til skráninguna…
+Création… ¦ Bý til…
+Le dépouillement n’a pas pu être créé. ¦ Ekki tókst að búa til skráninguna.
+Dépouillement créé : {lines} ¦ Skráning búin til: {lines}
+Dépouillement créé. ¦ Skráning búin til.
+＋ Fiche créée ¦ ＋ Spjald búið til
+🔗 Reliée ¦ 🔗 Tengt
+Relier la ligne à la fiche choisie ¦ Tengja línuna við valið spjald
+Créer la fiche {name} avec son événement ¦ Búa til spjald {name} með atburði þess
+Créer la fiche {name} ¦ Búa til spjald {name}
+fiche proposée ¦ spjald sem stungið er upp á
+Le dépouillement « {title} » est créé avec {lines}. ¦ Skráningin „{title}“ er búin til með {lines}.
+Ouvrir le dépouillement ¦ Opna skráninguna
+Relier les fiches proposées ¦ Tengja spjöldin sem stungið er upp á
+Pour chaque ligne : relie-la à une fiche de ta base (menu de choix), ou crée la fiche. Rien n’est obligatoire : la ligne reste dans le dépouillement. ¦ Fyrir hverja línu: tengdu hana við spjald í gagnagrunninum þínum (valmynd) eða búðu til spjaldið. Ekkert er skylda: línan verður áfram í skráningunni.
+La fiche n’a pas pu être créée. ¦ Ekki tókst að búa til spjaldið.
+{lines} à sa fiche ¦ {lines} við spjald sitt
+Choisis la fiche dans la liste (ou « ＋ Créer la fiche »). ¦ Veldu spjaldið í listanum (eða „＋ Búa til spjaldið“).
+Choisis la fiche dans la liste. ¦ Veldu spjaldið í listanum.
+Ligne reliée à {name} ¦ Lína tengd við {name}
+Fiche créée : {name} ¦ Spjald búið til: {name}
+Plusieurs sortes (colonne « sorte d’acte ») ¦ Nokkrar tegundir (dálkurinn „tegund skjals“)
+Nom · Prénoms · Date (la plus courante) ¦ Eftirnafn · Fornöfn · Dagsetning (algengast)
+Nom · Prénoms · Date · Sorte d’acte (table mixte) ¦ Eftirnafn · Fornöfn · Dagsetning · Tegund skjals (blönduð skrá)
+N° · Nom · Prénoms · Date ¦ Nr. · Eftirnafn · Fornöfn · Dagsetning
+Année · Nom · Prénoms · Date ¦ Ártal · Eftirnafn · Fornöfn · Dagsetning
+Nom · Prénoms · Date · Observations ¦ Eftirnafn · Fornöfn · Dagsetning · Athugasemdir
+=ligne déjà lue ¦ lína þegar lesin|línur þegar lesnar
+=ligne avec un nom ¦ lína með nafni|línur með nafni
+=ligne reliée ¦ lína tengd|línur tengdar
+=date reste ¦ dagsetning eftir|dagsetningar eftir
+Les photos à montrer ¦ Myndirnar sem á að sýna
+{faces} sur {photos}. ¦ {faces} á {photos}.
+=visage choisi ¦ andlit valið|andlit valin
+Ajouter une ligne ¦ Bæta við línu

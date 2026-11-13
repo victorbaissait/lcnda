@@ -1,0 +1,134 @@
+fr ¦ lb
+# ═════ zone « reste5 » : luxembourgeois (lb) ═════
+Les traits, les ombres et les coins des fiches des personnes et des animaux : blocs, boutons, champs. Le reste de l’app ne change pas ; les couleurs et la police restent celles de l’Apparence. ¦ D’Linnen, d’Schieden an d’Ecke vun de Fiche vu Persounen an Déieren: Blocken, Knäppercher, Felder. De Rescht vun der App ännert sech net; d’Faarwen an d’Schrëft bleiwen déi vum Ausgesinn.
+L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. ¦ Den Ofstand an an tëscht de Blocken, d’Héicht vun de Lëschtelinnen, de Rand vun de Knäppercher.
+Les petits dessins des boutons, des barres d’outils et des rubriques. ¦ Déi kleng Biller vun de Knäppercher, vun de Toolbaren a vun de Rubriken.
+Le haut de la fiche : portrait, nom, dates, pastilles et boutons. ¦ Den Uewendeel vun der Fiche: Portrait, Numm, Datumer, Badgen a Knäppercher.
+Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…) ; le bouton principal reste toujours plein, à la couleur principale de l’Apparence. ¦ Déi sekundär Knäppercher (Ofbriechen, Änneren, ＋ Derbäisetzen…); den Haaptknäppche bleift ëmmer voll, an der Haaptfaarf vum Ausgesinn.
+Les fenêtres qui s’ouvrent, les menus, les messages en bas à gauche, les boutons au survol. L’aperçu tourne en boucle. ¦ D’Fënsteren, déi opginn, d’Menüen, d’Messagen ënne lénks, d’Knäppercher, wann een driwwer fiert. D’Virschau leeft an enger Schleef.
+Les listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. ¦ D’Lëschten (Lëschten, Persounen, Recherche…), d’Kolonn vun de Persounen an d’Tabellen.
+{label} (nombre) ¦ {label} (Zuel)
+Pour les listes, les tableaux et le menu de choix. Plus haut = plus facile à viser ; plus bas = plus de lignes visibles. ¦ Fir d’Lëschten, d’Tabellen an de Menü fir ze wielen. Méi héich = méi einfach ze treffen; méi déif = méi Linne sichtbar.
+Le haut de la fiche. Les traits, les ombres et les coins de la fiche se règlent juste en dessous ¦ Den Uewendeel vun der Fiche. D’Linnen, d’Schieden an d’Ecke vun der Fiche stells du just drënner an
+Les traits, les ombres et les coins des fiches (personnes et animaux) seulement : le reste de l’app ne change pas. La colonne de gauche a les siens (Menus, colonne et listes → Colonne) ¦ Just d’Linnen, d’Schieden an d’Ecke vun de Fichen (Persounen an Déieren): de Rescht vun der App ännert sech net. Déi lénks Kolonn huet hir eegen (Menüen, Kolonn a Lëschten → Kolonn)
+L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. Une colonne de gauche réglée « Compacte » (onglet Colonne) garde sa propre taille : les deux ne s’additionnent pas ¦ Den Ofstand an an tëscht de Blocken, d’Héicht vun de Lëschtelinnen, de Rand vun de Knäppercher. Eng lénks Kolonn op „Kompakt“ (Reiter Kolonn) behält hir eege Gréisst: déi zwee ginn net zesummegerechent
+Les petits dessins des boutons, des barres d’outils et des rubriques. Les traits et les ombres suivent ¦ Déi kleng Biller vun de Knäppercher, vun de Toolbaren a vun de Rubriken. D’Linnen an d’Schiede passe sech un
+Les lignes des listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. Les traits et les ombres suivent ¦ D’Linne vun de Lëschten (Lëschten, Persounen, Recherche…), d’Kolonn vun de Persounen an d’Tabellen. D’Linnen an d’Schiede passe sech un
+Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…). Les traits et les ombres suivent ¦ Déi sekundär Knäppercher (Ofbriechen, Änneren, ＋ Derbäisetzen…). D’Linnen an d’Schiede passe sech un
+Comment les fenêtres, les menus et les messages apparaissent. L’aperçu tourne en boucle ¦ Wéi d’Fënsteren, d’Menüen an d’Messagen erschéngen. D’Virschau leeft an enger Schleef
+{group} : {choice} ¦ {group}: {choice}
+Rien ne bouge : chaque écran garde le dessin que tu connais. ¦ Näischt ännert sech: all Ecran behält d’Ausgesinn, dat s du kenns.
+7 dessins différents ; tes couleurs homme / femme et ta forme d’avatar ne s’y appliquent pas. ¦ 7 verschidden Zeechnungen; deng Faarwe fir Mann / Fra an deng Avatarform gëllen do net.
+Un seul dessin partout, à la couleur du genre : homme, femme, animal se voient d’un coup d’œil. ¦ Eng eenzeg Zeechnung iwwerall, an der Faarf vum Geschlecht: Mann, Fra, Déier gesäit een op ee Bléck.
+Léger dans les listes serrées et le menu de choix (c’est déjà le modèle validé du menu). ¦ Liicht an de gedrängte Lëschten an am Menü fir ze wielen (dat ass schonn dat validéiert Modell vum Menü).
+Le style « archive » de ta fiche : bord noir, photo en noir et blanc, comme une photo d’identité collée. ¦ Den „Archiv“-Stil vun denger Fiche: schwaarze Rand, Foto a Schwaarz-wäiss, wéi eng opgeplakte Passfoto.
+Nouveau nom de l’onglet {tab} ¦ Neien Numm fir de Reiter {tab}
+Émoji de l’onglet {tab} ¦ Emoji vum Reiter {tab}
+La personne n°1 (le de cujus) ; son père a le n°2, sa mère le n°3, et ainsi de suite : le père d’un numéro N a toujours 2N, la mère 2N+1. ¦ D’Persoun Nr. 1 (de De-cujus); hire Papp huet d’Nr. 2, hir Mamm d’Nr. 3, an esou weider: de Papp vun enger Nummer N huet ëmmer 2N, d’Mamm 2N+1.
+Pour les descendants : la personne n°1, ses enfants 1.1, 1.2, 1.3…, les enfants de 1.2 sont 1.2.1, 1.2.2… Chaque point = une génération de plus. ¦ Fir d’Nokommen: d’Persoun Nr. 1, hir Kanner 1.1, 1.2, 1.3…, d’Kanner vun 1.2 sinn 1.2.1, 1.2.2… All Punkt = eng Generatioun méi.
+Un thème règle les couleurs de toute l’app : la couleur principale, le fond de la page, des panneaux, des cartes et de leurs en-têtes, le texte, et les traits qui entourent (couleur et épaisseur). Crée le tien à partir d’un thème existant : il s’ajoute à la liste « Preset », dans « ✎ Mes thèmes ». ¦ En Thema stellt d’Faarwe vun der ganzer App an: d’Haaptfaarf, den Hannergrond vun der Säit, vun de Panneauen, vun de Kaarten an hire Käpp, den Text, an d’Linnen ronderëm (Faarf an Déckt). Maach däin eegent aus engem Thema, dat et schonn gëtt: et kënnt an d’Lëscht „Preset“, ënner „✎ Meng Themen“.
+La forme des petits carrés numérotés des blocs et des initiales des fiches. Ajoute tes formes (bibliothèque des tableaux, polygone dessiné, SVG importé), range la liste du menu « Forme des avatars », cache celles qui ne te servent pas. ¦ D’Form vun de klenge nummeréierte Quadrater vun de Blocken a vun den Initiale vun de Fichen. Setz deng eege Formen derbäi (Bibliothéik vun den Tableauen, gezeechente Polygon, importéierte SVG), zortéier d’Lëscht vum Menü „Form vun den Avataren“, verstopp déi, déi s du net brauchs.
+Le grand cadre en haut de chaque fiche : le nom, les badges (Sosa, À vérifier, Hors généalogie, Artiste) et la colonne de boutons carrés. Tu peux le masquer pour une fiche épurée (diaporama), ranger les boutons, les cacher, les mettre sur 2 colonnes. ¦ De grousse Kader uewen op all Fiche: den Numm, d’Badgen (Sosa, Ze iwwerpréiwen, Ausserhalb vun der Genealogie, Kënschtler) an d’Kolonn vu véiereckege Knäppercher. Du kanns en verstoppe fir eng einfach Fiche (Diashow), d’Knäppercher zortéieren, verstoppen oder op 2 Kolonne setzen.
+Les petits boutons carrés en haut à droite, à côté du nombre de personnes : écran en deux, nouvelle fenêtre, mode consultation, mode simple, calculette, Mes généalogies. Décoche pour cacher, glisse ⠿ pour changer l’ordre. ¦ Déi kleng véiereckeg Knäppercher uewe riets, nieft der Zuel vu Persounen: gedeelten Ecran, nei Fënster, Liesmodus, einfache Modus, Rechner, Meng Genealogien. Huel den Haken ewech fir ze verstoppen, zéi ⠿ fir d’Reiefolleg z’änneren.
+Les boutons de la barre du haut, à côté du nombre de personnes. Glisse ⠿ (ou Alt + ↑ / ↓) pour changer leur ordre ; décoche un bouton pour le cacher. Plus bas, « 👤 Nouvelle personne » et un raccourci vers chaque outil de modification (tableur, montage, retouche…) et chaque partie d’Enquêtes : coche ceux que tu veux en haut, et choisis ce que le clic ouvre (la liste des projets ou un nouveau projet). C’est gardé tout de suite. ¦ D’Knäppercher vun der Bar uewen, nieft der Zuel vu Persounen. Zéi ⠿ (oder Alt + ↑ / ↓), fir hir Reiefolleg z’änneren; huel den Haken ewech, fir e Knäppchen ze verstoppen. Méi ënnen, „👤 Nei Persoun“ an eng Ofkierzung op all Tool fir z’änneren (Tabelle, Montage, Retouche…) an op all Deel vun den Ënnersichungen: kräiz déi un, déi s du uewe wëlls, a wiel, wat de Klick opmécht (d’Lëscht vun de Projeten oder en neie Projet). Dat gëtt direkt gespäichert.
+Les blocs d’une fiche se rangent en sections nommées (Identité, Famille…). Ici, où vont leurs titres et leurs options ; la forme (traits, coins, ombres) se règle plus bas, avec l’en-tête (« Style des fiches »). ¦ D’Blocke vun enger Fiche ginn a benannte Sektiounen zortéiert (Identitéit, Famill…). Hei: wou hir Titelen an hir Optioune kommen; d’Form (Linnen, Ecken, Schieden) stells du méi ënnen an, mam Kapp („Stil vun de Fichen“).
+Glisse les sections et les blocs pour changer leur ordre. Décoche une section ou un bloc pour le masquer. ¦ Zéi d’Sektiounen an d’Blocken, fir hir Reiefolleg z’änneren. Huel den Haken vun enger Sektioun oder engem Block ewech, fir se ze verstoppen.
+La façon dont les listes à ranger de cette page sont dessinées. Ne change que cet écran de réglage (et la fenêtre « ⚙️ Ranger les sections » d’une fiche) : ni les fiches, ni les données. ¦ Wéi d’Lëschten, déi een op dëser Säit zortéiere kann, gezeechent ginn. Ännert just dësen Ecran vun den Astellungen (an d’Fënster „⚙️ D’Sektiounen zortéieren“ vun enger Fiche): weder d’Fichen nach d’Donnéeën.
+Les blocs se rangent en sections nommées (Identité, Famille…). Ici, la façon de dessiner leurs titres et leurs options. Chaque changement est gardé tout de suite. ¦ D’Blocke ginn a benannte Sektiounen zortéiert (Identitéit, Famill…). Hei: wéi hir Titelen an hir Optioune gezeechent ginn. All Ännerung gëtt direkt gespäichert.
+Retenu d’une fiche à l’autre. ¦ Bleift vun enger Fiche op déi aner.
+Sans trait ni cadre : juste le nom, en grand, comme un chapitre. ¦ Ouni Linn a Kader: just den Numm, grouss, wéi e Kapitel.
+Un cadre autour de la section, le titre dans une étiquette sur le bord. ¦ E Kader ronderëm d’Sektioun, den Titel an enger Etikett um Rand.
+Un petit titre en capitales posé sur un trait. Sobre, prend peu de place. ¦ E klengen Titel a Groussbuschtawen op enger Linn. Schlicht, brauch wéineg Plaz.
+Une bande de la couleur principale (celle de l’Apparence), titre en blanc. ¦ E Bändchen an der Haaptfaarf (där vum Ausgesinn), Titel a wäiss.
+« Nouveau » : sections en bandes, ⠿ et 👁. ¦ „Nei“: Sektiounen als Bänner, ⠿ an 👁.
+Ce que tu fais avec l’app : ses onglets et son premier écran. Aucune fiche n’est supprimée. ¦ Wat s du mat der App méchs: hir Reiteren an hiren éischten Ecran. Keng Fiche gëtt geläscht.
+Changer d’usage change <b>seulement les onglets et le premier écran</b>. Aucune fiche n’est supprimée : les personnes restent là, même quand l’onglet est caché. On peut en allumer plusieurs : leurs onglets s’additionnent. ¦ Wann s du d’Notzung wiessels, ännere sech <b>just d’Reiteren an den éischten Ecran</b>. Keng Fiche gëtt geläscht: d’Persoune bleiwen do, och wann de Reiter verstoppt ass. Ee kann der e puer umaachen: hir Reitere ginn zesummegezielt.
+Personnes, arbre, actes. ¦ Persounen, Stammbam, Akten.
+« 🌳 Ma généalogie » seule ¦ Just „🌳 Meng Genealogie“
+Trésors de famille. ¦ Familljeschätz.
+Catalogue raisonné. ¦ Wierkverzeechnes.
+Maisons et lieux. ¦ Haiser a Plazen.
+L’entreprise, 👥 Membres. ¦ D’Firma, 👥 Memberen.
+Animaux, portées, pedigree. ¦ Déieren, Wërf, Pedigree.
+Suivi des animaux. ¦ Déiere verfollegen.
+Documents, ✨ Trésors. ¦ Dokumenter, ✨ Schätz.
+Les onglets se rangent, se renomment et se cachent un par un dans « Ordre et noms du menu principal ». ¦ D’Reitere ginn een nom aneren zortéiert, ëmbenannt a verstoppt an „Reiefolleg an Nimm vum Haaptmenü“.
+Au féminin ¦ Weiblech
+Au masculin ¦ Männlech
+Avec un point médian ¦ Mat engem Mëttelpunkt
+Entre parenthèses ¦ Tëscht Klameren
+Sexe « Autre / non binaire » ¦ Geschlecht „Anert / net binär“
+Sexe « Non renseigné » (et les animaux dont on ne connaît pas le sexe) ¦ Geschlecht „Net uginn“ (an d’Déieren, vun deenen een d’Geschlecht net kennt)
+Sur les fiches d’hommes et de femmes, les mots s’accordent tout seuls : « né le » ou « née le », « décédé » ou « décédée ». Choisis ici comment les écrire pour les autres fiches. Chaque choix est gardé tout de suite. ¦ Op de Fiche vu Männer a Fraen passe sech d’Wierder vum selwen un (op Franséisch: „né le“ oder „née le“, „décédé“ oder „décédée“). Wiel hei, wéi se op deenen anere Fiche geschriwwe ginn. All Wiel gëtt direkt gespäichert.
+comme on dit « la personne » : « née », « décédée » ¦ wéi bei „la personne“ (weiblech): „née“, „décédée“
+rien ne change : « né(e) », sauf « Vivante », « Décédée » sur la fiche ¦ näischt ännert sech: „né(e)“, ausser „Vivante“, „Décédée“ op der Fiche
+une tournure neutre quand il y en a une (« Naissance le … », « Décès »), sinon « né(e) » ¦ eng neutral Formuléierung, wann et eng gëtt („Naissance le …“, „Décès“), soss „né(e)“
+« né », « décédé » ¦ „né“, „décédé“ (männlech)
+« né(e) », « décédé(e) », partout ¦ „né(e)“, „décédé(e)“, iwwerall
+« né·e », « décédé·e » ¦ „né·e“, „décédé·e“ (Mëttelpunkt)
+autre / non binaire ¦ anert / net binär
+sexe non renseigné ¦ Geschlecht net uginn
+Arbre en filigrane ¦ Stammbam als Waassermark
+Bleu pâle (comme avant) ¦ Hellblo (wéi virdrun)
+Gris neutre ¦ Neutralt Gro
+Les traits de mon thème (✎ Mes thèmes) ¦ D’Linne vu mengem Thema (✎ Meng Themen)
+Les traits de mon thème : choisis d’abord un thème à toi (✎ Mes thèmes) ¦ D’Linne vu mengem Thema: wiel als éischt en eegent Thema (✎ Meng Themen)
+Bleu pâle = comme avant · gris · la couleur principale de l’Apparence (elle suit si tu la changes) · sépia · la couleur des traits de ton thème (✎ Mes thèmes) · une couleur à toi. ¦ Hellblo = wéi virdrun · gro · d’Haaptfaarf vum Ausgesinn (si passt sech un, wann s du se änners) · Sepia · d’Faarf vun de Linne vun dengem Thema (✎ Meng Themen) · eng eege Faarf.
+Cahier ligné ¦ Lignéierte Cahier
+Papier millimétré ¦ Millimeterpabeier
+Papier vergé ¦ Geripptent Pabeier
+Ce qu’on voit derrière les blocs, sur toutes les pages. Le fond reste très pâle pour ne jamais gêner la lecture ; la couleur du papier vient du Preset (ou de ton thème). ¦ Wat een hannert de Blocke gesäit, op alle Säiten. Den Hannergrond bleift ganz blass, fir ni beim Liesen ze stéieren; d’Faarf vum Pabeier kënnt vum Preset (oder vun dengem Thema).
+Choisir une photo ¦ Eng Foto wielen
+Couleur du motif ¦ Faarf vum Muster
+Couleur principale (suit l’Apparence) ¦ Haaptfaarf (passt sech dem Ausgesinn un)
+De « à peine visible » à « bien marqué ». Au départ : comme aujourd’hui. ¦ Vu „kaum ze gesinn“ bis „gutt ze gesinn“. Am Ufank: wéi haut.
+Décoché : fond uni sur ces pages. La carte et les éditeurs plein écran gardent toujours le leur. ¦ Ouni Haken: eefaarwegen Hannergrond op dëse Säiten. D’Kaart an d’Editoren am Vollbild behalen ëmmer hiren eegenen.
+Pas encore de photo : fond uni en attendant. ¦ Nach keng Foto: bis dohin en eefaarwegen Hannergrond.
+Pâlie par l’intensité et floutée, pour rester derrière sans gêner. Elle reste sur cet ordinateur (pas dans le défaut du site : là-bas, fond uni). ¦ Duerch d’Intensitéit méi blass gemaach a verschwommen, fir hannendru ze bleiwen, ouni ze stéieren. Si bleift op dësem Computer (net am Standard vum Site: do en eefaarwegen Hannergrond).
+bords à peine teintés, vieille photo ¦ kaum gefierfte Rand, al Foto
+comme aujourd’hui ¦ wéi haut
+de petites branches, très pâles ¦ kleng Äscht, ganz blass
+du papier vers la couleur ¦ vum Pabeier bis bei d’Faarf
+fin, trait plus fort tous les 5 ¦ fein, all 5 eng méi déck Linn
+fines rayures des vieux papiers ¦ fein Sträife vun alem Pabeier
+hexagones de la maison de famille ¦ Sechsecker vum Familljenhaus
+lignes et double marge, comme l’état civil ¦ Linnen an duebele Rand, wéi am Etat civil
+lignes et marge rouge ¦ Linnen a roude Rand
+pâle et floutée derrière ¦ blass a verschwommen hannendrun
+rien derrière, le plus calme ¦ näischt hannendrun, am rouegsten
+tissage léger, album de famille ¦ liicht Gewief, Familljenalbum
+une grille de petits points ¦ e Gitter aus klenge Punkten
+va bien avec « Archive papier » ¦ passt gutt zu „Pabeierarchiv“
+Une page de l’app ¦ Eng Säit vun der App
+Ta photo ¦ Deng Foto
+les Réglages ¦ d’Astellungen
+Dans les listes où l’on coche ce qui s’affiche (menus, listes, Réordonner, Personnaliser…) : une ligne décochée reste telle quelle, ou se grise un peu. ¦ An de Lëschten, wou een ukräizt, wat gewise gëtt (Menüen, Lëschten, Nei zortéieren, Upassen…): eng Linn ouni Haken bleift, wéi se ass, oder gëtt e bësse gro.
+Une ligne affichée ¦ Eng gewise Linn
+Une ligne cachée ¦ Eng verstoppte Linn
+Lignes cachées dans les listes à ranger ¦ Verstoppte Linnen an de Lëschten, déi een zortéiere kann
+Supprimer en rouge ¦ Läschen a rout
+Hypothèses à comparer ¦ Hypothesen, fir ze vergläichen
+signature ou sceau ¦ Ënnerschrëft oder Siegel
+PLAN DU RECENSEMENT ¦ PLAN VUN DER VOLLEKSZIELUNG
+Fonds de carte du plan des adresses ¦ Kaartenhannergrënn vum Plang vun den Adressen
+Plan, photo aérienne, carte hors ligne… ¦ Stadplang, Loftbild, Offline-Kaart…
+Cassini, État-major, cartes et photos de 1950… ¦ Cassini, Generalstabskaart, Kaarten a Fotoe vun 1950…
+Carte ancienne (par-dessus) ¦ Al Kaart (driwwer)
+Aujourd’hui (dessous) ¦ Haut (drënner)
+Dépouillements (onglet « Plan ») et fiche d’un village : les fonds cochés viennent en premier dans les menus ; le premier coché est celui de départ. Tous les autres restent dans les menus, par catégorie. ¦ Auszich (Reiter „Plang“) a Fiche vun engem Duerf: déi ugekräizten Hannergrënn kommen an de Menüen als éischt; deen éischten ugekräizten ass dee vum Ufank. All déi aner bleiwen an de Menüen, no Kategorie.
+naissance manquante ¦ Gebuert feelt
+décès manquant ¦ Doud feelt
+parents manquants ¦ Elteren feelen
+source manquante ¦ Quell feelt
+aucun média ¦ keng Medien
+1 livre en {y} ¦ 1 Livre am Joer {y}
+1 franc en {y} ¦ 1 Frang am Joer {y}
+1 euro en {y} ¦ 1 Euro am Joer {y}
+≈ <b>{eur} €</b> d’aujourd’hui ¦ ≈ <b>{eur} €</b> vun haut
+≈ <b>{kg} kg</b> de pain ¦ ≈ <b>{kg} kg</b> Brout
+≈ {n} jour de travail d’un journalier ¦ ≈ {n} Aarbechtsdag vun engem Dagelöhner
+≈ {n} jours de travail d’un journalier ¦ ≈ {n} Aarbechtsdeeg vun engem Dagelöhner
+🛡 Solidité des liens à côté des parents ¦ 🛡 Zouverlässegkeet vun de Linken nieft den Elteren
+Seulement Supposé et Réfuté ¦ Just Vermutt a Widderluecht
+Toujours ¦ Ëmmer
+Jamais ¦ Ni

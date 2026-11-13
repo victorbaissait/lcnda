@@ -1,0 +1,1563 @@
+fr ¦ lb
+=élément retiré ¦ Element ewechgeholl|Elementer ewechgeholl
+=heure ¦ Stonn|Stonnen
+=généalogie ¦ Genealogie|Genealogien
+=changement ¦ Ännerung|Ännerungen
+=paquet ¦ Paquet|Paqueten
+=chose changée des deux côtés ¦ op béide Säite geännert Saach|op béide Säite geännert Saachen
+=changement reçu ¦ kritt Ännerung|kritt Ännerungen
+=changement envoyé ¦ geschéckt Ännerung|geschéckt Ännerungen
+=corrigée ¦ korrigéiert|korrigéiert
+=écartée ¦ op d’Säit geluecht|op d’Säit geluecht
+=document traité ¦ veraarbecht Dokument|veraarbecht Dokumenter
+=erreur ¦ Feeler|Feeler
+=nom corrigé ¦ korrigéierten Numm|korrigéiert Nimm
+=document sélectionné ¦ gewielt Dokument|gewielt Dokumenter
+=photo ¦ Foto|Fotoen
+=souvenir ¦ Erënnerung|Erënnerungen
+=bonne réponse ¦ richteg Äntwert|richteg Äntwerten
+=chiffre tapé ¦ getippt Ziffer|getippt Ziffren
+=an ¦ Joer|Joer
+=raccourci ¦ Ofkiirzung|Ofkiirzungen
+=forme ¦ Form|Formen
+=chemin gardé ¦ gehale Wee|gehale Weeër
+=famille vide ¦ eidel Famill|eidel Famillen
+=famille vide supprimée ¦ eidel Famill geläscht|eidel Famille geläscht
+=ligne exportée ¦ exportéiert Zeil|exportéiert Zeilen
+=autre élément ¦ anert Element|aner Elementer
+=fiche trouvée ¦ fonnt Fiche|fonnt Fichen
+=hypothèse ¦ Hypothees|Hypotheesen
+=média enregistré ¦ registréiert Medium|registréiert Medien
+=fichier présent ¦ virhuelene Fichier|virhuelen Fichieren
+=lien familial impossible ignoré ¦ onméigleche Familljelink iwwersprongen|onméiglech Familljelinken iwwersprongen
+=média introuvable ¦ net fonnt Medium|net fonnt Medien
+=mois ¦ Mount|Méint
+=minute ¦ Minutt|Minutten
+=seconde ¦ Sekonn|Sekonnen
+=ligne ¦ Zeil|Zeilen
+=cadre ¦ Kader|Kaderen
+=copie ¦ Kopie|Kopien
+Ressemblance {n} % ¦ Ähnlechkeet {n} %
+Score {n}/110 ¦ Score {n}/110
+Naissances : {a} / {b} ¦ Gebuerten: {a} / {b}
+Décès : {a} / {b} ¦ Doudesfäll: {a} / {b}
+Fusionner la fiche #{a} dans la fiche #{b} ? ¦ D’Fiche #{a} an d’Fiche #{b} fusionéieren?
+Lancer sur {n} ¦ Op {n} starten
+{n} avec succès. ¦ {n} mat Succès.
+{n} sera concernée. Confirmer pour {action} ? ¦ {n} ass betraff. Bestätegen fir {action}?
+{n} seront concernées. Confirmer pour {action} ? ¦ {n} sinn betraff. Bestätegen fir {action}?
+corriger le nom inscrit en conservant une variante ¦ den ageschriwwenen Numm korrigéieren an eng Variant behalen
+rattacher au groupe ¦ mat der Grupp verbannen
+{n} et ancien nom conservé. ¦ {n} an ale Numm behalen.
+{n} et anciens noms conservés. ¦ {n} an al Nimm behalen.
+{n} rattachée au groupe. ¦ {n} mat der Grupp verbonnen.
+{n} rattachées au groupe. ¦ {n} mat der Grupp verbonnen.
+Couleur de « {name} » ¦ Faarf vu „{name}“
+Pictogramme de « {name} » ¦ Piktogramm vu „{name}“
+Supprimer le type « {name} » ? ¦ Den Typ „{name}“ läschen?
+Import de « {name} » annulé : tout ce qu’il avait ajouté a été retiré. ¦ Import vu „{name}“ réckgängeg gemaach: alles, wat en derbäigesat hat, gouf ewechgeholl.
+Supprimer définitivement la base « {name} » ? ¦ D’Datebank „{name}“ definitiv läschen?
+Convertir {n} Deed en Décès ? ¦ {n} Deed an Doud ëmwandelen?
+Le texte sur « {name} » ¦ Den Text iwwer „{name}“
+Les photos de {name} ¦ D’Fotoe vu(n) {name}
+{x} de {who} (lien) ¦ {x} vu(n) {who}
+C’est toi ¦ Dat bass du
+c’est toi ¦ dat bass du
+C’est toi ! ¦ Dat bass du!
+C’est {rel}. ¦ Dat ass {rel}.
+Bonjour {name} ! ¦ Moien {name}!
+Bonjour ! ¦ Moien!
+Bonjour {name}. Touche un gros bouton : {list}. ¦ Moien {name}. Dréck op e grousse Knäppchen: {list}.
+Bonjour. Touche un gros bouton : {list}. ¦ Moien. Dréck op e grousse Knäppchen: {list}.
+Bonjour {name} ! L’app dira « ta mère », « ton petit-fils »… ¦ Moien {name}! D’App seet „deng Mamm“, „däin Enkel“…
+D’accord. L’app ne dira pas les liens de famille. ¦ Gutt. D’App seet d’Familljelinken net.
+⚠️ {what} (caché sur la tablette) ¦ ⚠️ {what} (op der Tablette verstoppt)
+{n} aujourd’hui ¦ {n} haut
+Ce n’est pas {name} ? ¦ Dat ass net {name}?
+Quitter le mode simple : garde le doigt appuyé {n} secondes, ou garde la touche Entrée enfoncée ¦ Den einfache Modus verloossen: hal de Fanger {n} Sekonnen drop, oder hal d’Enter-Tast gedréckt
+garde le doigt appuyé {n} s ¦ hal de Fanger {n} s drop
+Garde le doigt appuyé {n} secondes ¦ Hal de Fanger {n} Sekonnen drop
+Vers les parents ¦ Bei d’Elteren
+Vers les enfants ¦ Bei d’Kanner
+l’aîné ¦ deen Eelsten
+l’aînée ¦ déi Eelst
+Regarder les {n} ¦ Déi {n} kucken
+{a} sur {b} ¦ {a} vun {b}
+vers {y} (date) ¦ ëm {y}
+en {date} (année) ¦ am Joer {date}
+en {date} (mois) ¦ am {date}
+le {date} (jour) ¦ den {date}
+à {place} (lieu) ¦ zu {place}
+{name} fait partie de la famille. ¦ {name} gehéiert zur Famill.
+{name} est né {details}. ¦ {name} ass {details} gebuer.
+{name} est née {details}. ¦ {name} ass {details} gebuer.
+{name} a été baptisé {details}. ¦ {name} gouf {details} gedeeft.
+{name} a été baptisée {details}. ¦ {name} gouf {details} gedeeft.
+Il ¦ Hien
+Elle ¦ Si
+C’est la fille de {names}. ¦ Si ass d’Duechter vu(n) {names}.
+C’est le fils de {names}. ¦ Hien ass de Jong vu(n) {names}.
+C’est l’enfant de {names}. ¦ Dat ass d’Kand vu(n) {names}.
+Il était {job}. ¦ Hie war {job}.
+Elle était {job}. ¦ Si war {job}.
+Il a été {job}. ¦ Hien huet als {job} geschafft.
+Elle a été {job}. ¦ Si huet als {job} geschafft.
+Il est {job}. ¦ Hien ass {job}.
+Elle est {job}. ¦ Si ass {job}.
+Il s’est marié avec {name} {details}. ¦ Hien huet {details} mat {name} bestuet.
+Elle s’est mariée avec {name} {details}. ¦ Si huet {details} mat {name} bestuet.
+Il s’est marié avec {name}. ¦ Hien huet mat {name} bestuet.
+Elle s’est mariée avec {name}. ¦ Si huet mat {name} bestuet.
+Il a vécu avec {name}. ¦ Hien huet mat {name} zesumme gelieft.
+Elle a vécu avec {name}. ¦ Si huet mat {name} zesumme gelieft.
+Ils ont eu une fille, {name}. ¦ Si haten eng Duechter, {name}.
+Ils ont eu un fils, {name}. ¦ Si haten e Jong, {name}.
+Ils ont eu un enfant, {name}. ¦ Si haten e Kand, {name}.
+Ils ont eu {n} enfants : {names}. ¦ Si haten {n} Kanner: {names}.
+Aujourd’hui, il a {age}. ¦ Haut ass hien {age} al.
+Aujourd’hui, elle a {age}. ¦ Haut ass si {age} al.
+Il est décédé {details}, à {age}. ¦ Hien ass {details} gestuerwen, mat {age}.
+Elle est décédée {details}, à {age}. ¦ Si ass {details} gestuerwen, mat {age}.
+Il est décédé {details}. ¦ Hien ass {details} gestuerwen.
+Elle est décédée {details}. ¦ Si ass {details} gestuerwen.
+né en {y} ¦ gebuer {y}
+née en {y} ¦ gebuer {y}
+mort en {y} ¦ gestuerwen {y}
+morte en {y} ¦ gestuerwen {y}
+de {a} à {b} ¦ vun {a} bis {b}
+Toucher pour la mettre au milieu. ¦ Drécken, fir d’Persoun an d’Mëtt ze setzen.
+Toucher pour voir sa fiche. ¦ Drécken, fir d’Fiche ze gesinn.
+Les prénoms en « {x} » ¦ D’Virnimm mat „{x}“
+Personne ne s’appelle « {q} ». Vérifie l’orthographe. ¦ Keen heescht „{q}“. Kontrolléier d’Schreifweis.
+Pas d’anniversaire aujourd’hui. ¦ Haut kee Gebuertsdag.
+Pas d’anniversaire aujourd’hui. Voici ce qui arrive bientôt. ¦ Haut kee Gebuertsdag. Hei ass, wat geschwë kënnt.
+📷 Des photos prises en {month} ¦ 📷 Fotoen, déi am {month} gemaach goufen
+La famille de {name} ¦ D’Famill vu(n) {name}
+Aujourd’hui ! ¦ Haut!
+Demain ¦ Muer
+Dans {n} jours ¦ An {n} Deeg
+{n} depuis le début ¦ {n} zënter dem Ufank
+Ce n’est pas {name}. Essaie encore ! ¦ Dat ass net {name}. Probéier nach eng Kéier!
+Ce n’est pas ça. Essaie encore ! ¦ Dat ass et net. Probéier nach eng Kéier!
+C’est {part} ¦ Et ass {part}
+le matin ¦ de Moien
+l’après-midi ¦ de Mëtteg
+le soir ¦ den Owend
+{n} sur 4 ¦ {n} vu 4
+⚠️ {what} pour qu’il apparaisse ¦ ⚠️ {what}, fir datt et erschéngt
+Modifier « {name} » ¦ „{name}“ änneren
+Dupliquer « {name} » ¦ „{name}“ duplizéieren
+Retirer « {name} » ¦ „{name}“ ewechhuelen
+Monter « {name} » ¦ „{name}“ eropréckelen
+Descendre « {name} » ¦ „{name}“ erofréckelen
+Montrer « {name} » ¦ „{name}“ weisen
+Afficher « {name} » ¦ „{name}“ uweisen
+cadres ajoutés au plus. ¦ derbäigesat Kaderen am meeschten.
+Côté {branch} ¦ Säit {branch}
+Remettre « {name} » dans le mode simple ¦ „{name}“ zréck an den einfache Modus setzen
+Photo ¦ Foto
+{n} s par photo ¦ {n} s pro Foto
+cadre après {n} min ¦ Fotorumm no {n} Min.
+sans cadre photo ¦ ouni Fotorumm
+Chiffre {n} du code ¦ Ziffer {n} vum Code
+Ce que verra {name} sur une tablette. Le mode simple ne permet <b>ni de modifier, ni de supprimer</b> : ni menu caché, ni clic droit. ¦ Wat {name} op enger Tablette gesäit. Den einfache Modus erlaabt <b>weder z’änneren nach ze läschen</b>: kee verstoppte Menü, kee Rietsklick.
+Ce que verra la personne sur une tablette. Le mode simple ne permet <b>ni de modifier, ni de supprimer</b> : ni menu caché, ni clic droit. ¦ Wat d’Persoun op enger Tablette gesäit. Den einfache Modus erlaabt <b>weder z’änneren nach ze läschen</b>: kee verstoppte Menü, kee Rietsklick.
+Réglage « {name} » supprimé ¦ Astellung „{name}“ geläscht
+Réglage « {name} » importé : clique « Appliquer » pour t’en servir. ¦ Astellung „{name}“ importéiert: klick op „Uwenden“, fir se ze benotzen.
+Maison choisie : « {name} ». ¦ Haus gewielt: „{name}“.
+Maison ¦ Haus
+Adresse copiée : {url} ¦ Adress kopéiert: {url}
+ ou  ¦ oder
+Seulement avec {what}. ¦ Just mat {what}.
+{what} remis comme au départ ¦ {what} zréckgesat wéi am Ufank
+activé ¦ aktivéiert
+désactivé ¦ desaktivéiert
+Style des fiches : {name}. ¦ Stil vun de Fichen: {name}.
+Style des fiches : {name} (retouché). ¦ Stil vun de Fichen: {name} (ugepasst).
+ton {x} (lien) ¦ däi(n) {x}
+ta {x} (lien) ¦ deng {x}
+le {x} (lien) ¦ de(n) {x}
+la {x} (lien) ¦ d’{x}
+la femme de {who} {name} (lien) ¦ d’Fra vu(n) {who} {name}
+le mari de {who} {name} (lien) ¦ de Mann vu(n) {who} {name}
+le conjoint de {who} {name} (lien) ¦ de Partner vu(n) {who} {name}
+lien|mère ¦ Mamm
+lien|père ¦ Papp
+lien|parent ¦ Elterendeel
+lien|grand-mère ¦ Bomi
+lien|grand-père ¦ Bopi
+lien|arrière-grand-mère ¦ Urbomi
+lien|arrière-grand-père ¦ Urbopi
+lien|arrière-arrière-grand-mère ¦ Ururbomi
+lien|arrière-arrière-grand-père ¦ Ururbopi
+lien|fille ¦ Duechter
+lien|fils ¦ Jong
+lien|enfant ¦ Kand
+lien|petite-fille ¦ Enkelin
+lien|petit-fils ¦ Enkel
+lien|arrière-petite-fille ¦ Urenkelin
+lien|arrière-petit-fils ¦ Urenkel
+lien|arrière-arrière-petite-fille ¦ Ururenkelin
+lien|arrière-arrière-petit-fils ¦ Ururenkel
+lien|sœur ¦ Schwëster
+lien|frère ¦ Brudder
+lien|tante ¦ Tatta
+lien|oncle ¦ Monni
+lien|grand-tante ¦ Grousstatta
+lien|grand-oncle ¦ Groussmonni
+lien|arrière-grand-tante ¦ Urgrousstatta
+lien|arrière-grand-oncle ¦ Urgroussmonni
+lien|arrière-arrière-grand-tante ¦ Ururgrousstatta
+lien|arrière-arrière-grand-oncle ¦ Ururgroussmonni
+lien|nièce ¦ Niess
+lien|neveu ¦ Neveu
+lien|petite-nièce ¦ Groussniess
+lien|petit-neveu ¦ Grousneveu
+lien|arrière-petite-nièce ¦ Urgroussniess
+lien|arrière-petit-neveu ¦ Urgrousneveu
+lien|arrière-arrière-petite-nièce ¦ Ururgroussniess
+lien|arrière-arrière-petit-neveu ¦ Ururgrousneveu
+lien|cousin germain ¦ Koséng éischte Grad
+lien|cousine germaine ¦ Kusinn éischte Grad
+lien|cousin issu de germains ¦ Koséng zweete Grad
+lien|cousine issue de germains ¦ Kusinn zweete Grad
+lien|cousin éloigné ¦ wäitleefege Koséng
+lien|cousine éloignée ¦ wäitleefeg Kusinn
+lien|cousin ¦ Koséng
+lien|cousine ¦ Kusinn
+lien|femme ¦ Fra
+lien|mari ¦ Mann
+lien|conjoint ¦ Partner
+lien|belle-mère ¦ Schwéiermamm
+lien|beau-père ¦ Schwéierpapp
+lien|belle-fille ¦ Schwéierduechter
+lien|gendre ¦ Schwéierjong
+lien|beau-fils ¦ Stéifjong
+lien|belle-sœur ¦ Schwéierschwëster
+lien|beau-frère ¦ Schwoer
+⚙️ Gérer les formes ({n}) ¦ ⚙️ Formen verwalten ({n})
+Forme « {name} » supprimée ¦ Form „{name}“ geläscht
+Forme « {name} » importée : elle est dans le menu « Forme des avatars ». ¦ Form „{name}“ importéiert: si ass am Menü „Form vun den Avataren“.
+Aucune forme pour « {q} ». Essaie un autre mot (cœur, arbre, étoile, croix…). ¦ Keng Form fir „{q}“. Probéier en anert Wuert (Häerz, Bam, Stär, Kräiz…).
+{n} points au plus. ¦ Maximal {n} Punkten.
+{what} (scripts, textes, images, styles…) ¦ {what} (Scripten, Texter, Biller, Stiler…)
+Forme « {name} » enregistrée. ¦ Form „{name}“ gespäichert.
+Forme « {name} » créée : elle est dans le menu « Forme des avatars » (✎ Mes formes). ¦ Form „{name}“ erstallt: si ass am Menü „Form vun den Avataren“ (✎ Meng Formen).
+Ce qu’ouvre « {name} » ¦ Wat „{name}“ opmécht
+Ouvre la fenêtre « ＋ Nouvelle personne » (ou un nouvel animal sur la page des animaux). Caché au départ. ¦ Mécht d’Fënster „＋ Nei Persoun“ op (oder en neit Déier op der Säit vun den Déieren). Am Ufank verstoppt.
+Raccourci : Enquêtes, sur cet onglet. Caché au départ. ¦ Ofkiirzung: Ënnersichungen, op dësem Reiter. Am Ufank verstoppt.
+Raccourci : Listes → 🛠️ Outils de modification, sur cet outil. Caché au départ. ¦ Ofkiirzung: Lëschten → 🛠️ Ännerungsinstrumenter, op dësem Outil. Am Ufank verstoppt.
+Forme : « {name} » ¦ Form: „{name}“
+Portraits : « {name} » ¦ Portraiten: „{name}“
+Colonne de gauche : partir de « {name} » ¦ Lénks Kolonn: vu „{name}“ ausgoen
+Contrôlé {when} ¦ Kontrolléiert {when}
+Lieu corrigé : {name} ({what}) ¦ Plaz korrigéiert: {name} ({what})
+La bonne commune pour « {name} » ¦ Déi richteg Gemeng fir „{name}“
+Exception gardée : {what} ¦ Ausnam gehal: {what}
+Signalée de nouveau : {what} ¦ Nees gemellt: {what}
+Alerte {i} sur {n} ¦ Alarm {i} vun {n}
+{n} plus tard ¦ {n} méi spéit
+Date enregistrée : {date} ¦ Datum gespäichert: {date}
+✓ Alerte réglée ({date}) ¦ ✓ Alarm geregelt ({date})
+Bandeau sur la fiche : {what} ¦ Band op der Fiche: {what}
+{a} fiches sur {b} n’ont aucune alerte (les exceptions ne comptent pas) ¦ {a} Fiche vun {b} hu keen Alarm (d’Ausnamen zielen net)
+{n} ans ¦ {n} Joer
+{n} mois ¦ {n} Méint
+Supprimer les {n} familles vides ¦ Déi {n} eidel Famille läschen
+Supprimer les {n} familles vides ? ¦ Déi {n} eidel Famille läschen?
+Me le signaler à nouveau si une de ces dates change ¦ Mell mer et nees, wann ee vun dësen Datumen ännert
+Me le signaler à nouveau si une de ces coordonnées change ¦ Mell mer et nees, wann eng vun dëse Koordinaten ännert
+Déjà pris par {os} ou le menu de l’application : « {what} ». ¦ Schonn vu(n) {os} oder vum Menü vun der Applikatioun benotzt: „{what}“.
+Déjà pris par l’app (même quand un outil est ouvert) : « {what} ». Change-le d’abord dans Raccourcis clavier si tu veux cette touche. ¦ Schonn vun der App benotzt (och wann en Outil op ass): „{what}“. Änner se fir d’éischt an den Tastaturofkiirzungen, wann s du dës Tast wëlls.
+Dans cet outil, cette touche sert déjà à « {what} » : ton raccourci passera avant. ¦ An dësem Outil déngt dës Tast schonn fir „{what}“: deng Ofkiirzung geet vir.
+La touche de départ ({key}) ne fera plus cette action : elle est libre pour autre chose. ¦ D’Starttast ({key}) mécht dës Aktioun net méi: si ass fräi fir eppes anescht.
+Déjà donné à « {what} » : il lui sera retiré. ¦ Schonn u „{what}“ ginn: si gëtt do ewechgeholl.
+Sans {key}, il ne marchera qu’en dehors des cases de texte. ¦ Ouni {key} funktionéiert se just ausserhalb vun den Textfelder.
+NOUVEAU RACCOURCI ¦ NEI OFKIIRZUNG
+Nouveau raccourci : {key} ¦ Nei Ofkiirzung: {key}
+Donne une touche à n’importe quelle commande de l’outil (ses menus, ses outils, ses boutons). {os} et le menu de l’application passent avant : une touche qu’ils prennent est refusée. Ton raccourci passe avant la touche de l’outil. Sans {key}, il ne marche qu’en dehors des cases de texte. ¦ Gëff all Befeel vum Outil eng Tast (senge Menüen, Instrumenter, Knäppercher). {os} an de Menü vun der Applikatioun ginn vir: eng Tast, déi si benotzen, gëtt refuséiert. Deng Ofkiirzung geet virun der Tast vum Outil. Ouni {key} funktionéiert se just ausserhalb vun den Textfelder.
+{n} à toi ¦ {n} vun dir
+{a} et {n} autres personnes ¦ {a} an {n} aner Persounen
+Sinon, on lira : « {text} » ¦ Soss gëtt gelies: „{text}“
+Dicter dans ce champ ({key}) ¦ An dëst Feld diktéieren ({key})
+Dicter : parle, le texte s’écrit au curseur ({key}, Échap pour arrêter) ¦ Diktéieren: schwätz, den Text gëtt beim Cursor geschriwwen ({key}, Esc fir opzehalen)
+Voici un message : il reste {n} secondes environ. ¦ Hei ass e Message: et bleiwen ongeféier {n} Sekonnen.
+toutes les {n} ¦ all {n}
+chaque jour ¦ all Dag
+chaque semaine ¦ all Woch
+Dernière sauvegarde : <b>{when}</b> ¦ Leschte Backup: <b>{when}</b>
+Dernière sauvegarde : <b>jamais</b> ¦ Leschte Backup: <b>ni</b>
+rien n’avait changé ¦ näischt hat geännert
+dès maintenant ¦ ab elo
+Prochaine : {when} ({freq}). ¦ Nächsten: {when} ({freq}).
+Prochaine : {when} ({freq}, et à la fermeture). ¦ Nächsten: {when} ({freq}, an beim Zoumaachen).
+Dernier essai raté : {error} ¦ Leschte Versuch feelgeschloen: {error}
+Rien n’est bloqué : continue à travailler. ¦ Näischt ass blockéiert: schaff weider.
+Toutes mes généalogies ({n}) ¦ All meng Genealogien ({n})
+Remettre ta généalogie comme dans la copie choisie ({when}) ? Tout ce que tu as fait depuis sera remplacé. Ta base actuelle est d’abord gardée dans les sauvegardes (« avant restauration »), pour pouvoir y revenir. ¦ Deng Genealogie zrécksetzen wéi an der gewielter Kopie ({when})? Alles, wat s du zënterhier gemaach hues, gëtt ersat. Deng aktuell Datebank gëtt fir d’éischt an de Backups gehal („virun der Restauratioun“), fir datt s du zréckgoe kanns.
+Remettre ta généalogie comme dans la copie choisie ? Tout ce que tu as fait depuis sera remplacé. Ta base actuelle est d’abord gardée dans les sauvegardes (« avant restauration »), pour pouvoir y revenir. ¦ Deng Genealogie zrécksetzen wéi an der gewielter Kopie? Alles, wat s du zënterhier gemaach hues, gëtt ersat. Deng aktuell Datebank gëtt fir d’éischt an de Backups gehal („virun der Restauratioun“), fir datt s du zréckgoe kanns.
+✓ Généalogie remise comme dans la copie ({n}). L’ancienne est gardée : {file}. ¦ ✓ Genealogie zréckgesat wéi an der Kopie ({n}). Déi al gëtt gehal: {file}.
+✓ Sauvegarde faite et vérifiée ({n}) : {size}. ¦ ✓ Backup gemaach a kontrolléiert ({n}): {size}.
+✓ Sauvegarde faite et vérifiée : {size}. ¦ ✓ Backup gemaach a kontrolléiert: {size}.
+Supprimée sur cet ordinateur, modifiée sur « {name} ». ¦ Op dësem Computer geläscht, op „{name}“ geännert.
+Modifiée ici, supprimée sur « {name} ». ¦ Hei geännert, op „{name}“ geläscht.
+modifiée des deux côtés ¦ op béide Säite geännert
+Sur « {name} » ¦ Op „{name}“
+<b>{n}</b> à envoyer ¦ <b>{n}</b> ze schécken
+<b>{n}</b> à recevoir ¦ <b>{n}</b> ze kréien
+Rien à envoyer ¦ Näischt ze schécken
+Rien à recevoir ¦ Näischt ze kréien
+Dernière synchronisation : {when} ¦ Lescht Synchronisatioun: {when}
+jamais ¦ ni
+⚠️ {n} : choisis ¦ ⚠️ {n}: wiel
+rien de nouveau ¦ näischt Neies
+{n} de « {from} » ¦ {n} vu „{from}“
+Déjà à jour ¦ Schonn aktuell
+⚠️ {n} : à toi de choisir. ¦ ⚠️ {n}: du muss wielen.
+Cette généalogie est déjà ouverte sur l’ordinateur <b>« {name} »</b> (depuis {when}). ¦ Dës Genealogie ass schonn um Computer <b>„{name}“</b> op (zënter {when}).
+Cette généalogie est déjà ouverte sur l’ordinateur <b>« {name} »</b>. ¦ Dës Genealogie ass schonn um Computer <b>„{name}“</b> op.
+Ouvrir quand même ? Fais-le seulement si « {name} » est éteint ou si l’app y est fermée (sinon le fichier peut s’abîmer). ¦ Trotzdeem opmaachen? Maach et just, wann „{name}“ aus ass oder d’App do zou ass (soss kann de Fichier futtigoen).
+Télécharger LCNDA {v} ¦ LCNDA {v} eroflueden
+{a} sur {b}… ¦ {a} vun {b}…
+Plus de message pour la version {v} ¦ Kee Message méi fir d’Versioun {v}
+🔄 Une nouvelle version {v} est disponible. ¦ 🔄 Eng nei Versioun {v} ass disponibel.
+regardé {when} ¦ gekuckt {when}
+« 🔍 Rechercher une mise à jour » regarde tout de suite. ¦ „🔍 No engem Update sichen“ kuckt direkt.
+Pas encore regardé sur cet ordinateur. « 🔍 Rechercher une mise à jour » regarde tout de suite. ¦ Op dësem Computer nach net gekuckt. „🔍 No engem Update sichen“ kuckt direkt.
+Tu as la dernière version publiée ({v}){when}. ¦ Du hues déi lescht publizéiert Versioun ({v}){when}.
+Une nouvelle version {v} est disponible (tu as la {cur}). ¦ Eng nei Versioun {v} ass disponibel (du hues d’{cur}).
+Tu as choisi de ne plus être prévenu pour la {v}{when}. ¦ Du hues gewielt, fir d’{v} net méi gewarnt ze ginn{when}.
+Ce réglage vient d’un autre outil (« {name} ») : il ne va pas dans la visionneuse. ¦ Dës Astellung kënnt vun engem aneren Outil („{name}“): si geet net an de Betrachter.
+Réglage « {name} » mis. ¦ Astellung „{name}“ ugewannt.
+Range avec ↑ ↓, coche ce qui s’affiche dans la colonne, en groupes ou en une seule liste. ¦ Zortéier mat ↑ ↓, kräiz un, wat an der Kolonn ugewise gëtt, a Gruppen oder an enger eenzeger Lëscht.
+Range avec ↑ ↓, en groupes ou en une seule liste. ¦ Zortéier mat ↑ ↓, a Gruppen oder an enger eenzeger Lëscht.
+Réordonner les listes ¦ D’Lëschten nei zortéieren
+Réordonner les pages ¦ D’Säiten nei zortéieren
+Réordonner les {what} ¦ Nei zortéieren: {what}
+Range avec ↑ ↓, coche ce qui s’affiche, en groupes ou en une seule liste. Puis Enregistrer. ¦ Zortéier mat ↑ ↓, kräiz un, wat ugewise gëtt, a Gruppen oder an enger eenzeger Lëscht. Dann Späicheren.
+Range avec ↑ ↓, en groupes ou en une seule liste. Puis Enregistrer. ¦ Zortéier mat ↑ ↓, a Gruppen oder an enger eenzeger Lëscht. Dann Späicheren.
+Garde au moins une liste visible. ¦ Looss mindestens eng Lëscht siichtbar.
+Garde au moins une page visible. ¦ Looss mindestens eng Säit siichtbar.
+(CC BY 4.0) ; collectivités locales d’Australie : © ¦ (CC BY 4.0); Gemengen an Australien: ©
+(OGL v3) ; paroisses civiles d’Irlande : © ¦ (OGL v3); Zivilpare vun Irland: ©
+(William & Mary geoLab), d’après leurs sources (gouvernements, OCHA, Banque mondiale, GRID3…), licences ouvertes indiquées pays par pays dans le fichier de chaque pays (domaine public, CC BY, CC BY IGO, ODbL, CC BY-SA pour le Togo et Taïwan). ¦ (William & Mary geoLab), no hire Quellen (Regierungen, OCHA, Weltbank, GRID3…), oppe Lizenzen, Land fir Land am Fichier vun all Land uginn (ëffentlech Domän, CC BY, CC BY IGO, ODbL, CC BY-SA fir Togo an Taiwan).
+(auto = comme l’app) ¦ (auto = wéi d’App)
+(avec ou sans accents). Ex. : ¦ (mat oder ouni Akzenter). Z. B.:
+(domaine public) ; paroisses d’Angleterre et du pays de Galles : © ¦ (ëffentlech Domän); Pare vun England a Wales: ©
+(familles qu’on ouvre et referme) ¦ (Famillen, déi een op- an zoumécht)
+(hors des cases de texte) ¦ (ausserhalb vun den Textfelder)
+(jusqu’à 32 px). ¦ (bis zu 32 px).
+(style « Onglets en haut ») ¦ (Stil „Reiter uewen“)
+(un petit fichier, par e-mail par exemple). ¦ (e klenge Fichier, zum Beispill per E-Mail).
+), parle, et le texte s’écrit au curseur. Dis « virgule », « point », « point d’interrogation », « deux points », « à la ligne » ou « nouveau paragraphe » pour la ponctuation. ¦ ), schwätz, an den Text gëtt beim Cursor geschriwwen. So „virgule“, „point“, „point d’interrogation“, „deux points“, „à la ligne“ oder „nouveau paragraphe“ fir d’Punktuatioun (franséisch Befeeler).
+). Il se règle avec la forme de l’en-tête, plus bas sur cette page. ¦ ). Et gëtt mat der Form vum Kapp ageriicht, méi wäit ënnen op dëser Säit.
+, contient des données OS © Crown copyright (OGL v3) ; paroisses civiles d’Écosse : © ¦ , enthält OS-Donnéeën © Crown copyright (OGL v3); Zivilpare vu Schottland: ©
+, données sous licence ¦ , Donnéeën ënner Lizenz
+, même dans un tableau large avec beaucoup de colonnes. ¦ , och an enger breeder Tabell mat vill Kolonnen.
+. Aucune fiche n’est supprimée : les personnes restent là, même quand l’onglet est caché. On peut en allumer plusieurs : leurs onglets s’additionnent. ¦ . Keng Fiche gëtt geläscht: d’Persoune bleiwen do, och wann de Reiter verstoppt ass. Et kann ee méi der uschalten: hir Reiter ginn derbäigesat.
+. Double-clic sur un curseur : valeur de départ. ¦ . Duebelklick op e Schiiber: Startwäert.
+. Même licence pour les communes d’Amérique du Sud, du Moyen-Orient, d’Asie et d’une partie de l’Afrique. ¦ . Selwecht Lizenz fir d’Gemenge vu Südamerika, dem Mëttleren Osten, Asien an engem Deel vun Afrika.
+12/03/1790, mars 1790 ou 1790 ¦ 12/03/1790, mars 1790 oder 1790
+1re heure du jour, au lever du soleil ¦ 1. Stonn vum Dag, beim Sonnenopgank
+3e heure, milieu de la matinée (heure de la grand-messe) ¦ 3. Stonn, mëtt am Virmëtteg (Zäit vun der Héichmass)
+9e heure, milieu de l’après-midi ¦ 9. Stonn, mëtt am Nomëtteg
+256 ancêtres de la génération 8 en théorie (Sosa 256 à 511) ; 510 ancêtres en tout jusqu’à cette génération ¦ 256 Virfahren an der Generatioun 8 an der Theorie (Sosa 256 bis 511); 510 Virfahren am Ganze bis zu dëser Generatioun
+4 générations ¦ 4 Generatiounen
+5 générations ¦ 5 Generatiounen
+6 générations ¦ 6 Generatiounen
+6 secondes (de départ) ¦ 6 Sekonnen (Startwäert)
+4 tailles seulement : 22 px (dans une ligne), 34 px (listes, menu de choix), 48 px (arbre, vignettes), 88 px (fiche). ¦ Just 4 Gréissten: 22 px (an enger Zeil), 34 px (Lëschten, Auswielmenü), 48 px (Bam, Miniaturen), 88 px (Fiche).
+: boutons et barres d’outils au trait, rubriques et contenus en émoji (💍 conjoints, 🎂 anniversaires…). ¦ : Knäppercher an Toolbaren als Strëchzeechnung, Rubriken an Inhalter als Emoji (💍 Partner, 🎂 Gebuertsdeeg…).
+: chaque bouton est une vraie « touche » encadrée, avec son ombre. ¦ : all Knäppchen ass eng richteg agerummt „Tast“, mat hirem Schied.
+: coins presque droits, traits fins, un léger grain de papier derrière les pages. Pour le fond crème, choisis le Preset « Archive papier » dans Apparence. ¦ : bal riicht Ecken, fein Linnen, eng liicht Pabeierstruktur hannert de Säiten. Fir de Crème-Hannergrond, wiel de Preset „Pabeierarchiv“ am Ausgesinn.
+: comme un registre, on voit beaucoup de lignes. ¦ : wéi an engem Register gesäit ee vill Zeilen.
+: des émojis en couleur, faciles à reconnaître. ¦ : faarweg Emojien, liicht z’erkennen.
+: grand nom très lisible, outils toujours à droite. ¦ : grousse, ganz liesbaren Numm, Instrumenter ëmmer riets.
+: le style « néo-brutal » que tu connais, net et très lisible. ¦ : de „Neo-brutal“-Stil, deen s du kenns, kloer a ganz liesbar.
+: les autres restent visibles mais plus légers. ¦ : déi aner bleiwe siichtbar, awer méi liicht.
+: les lignes sont hautes, on ne se trompe pas de ligne. ¦ : d’Zeile sinn héich, een iert sech net an der Zeil.
+: l’équilibre actuel entre place et lisibilité. ¦ : dat aktuellt Gläichgewiicht tëscht Plaz a Liesbarkeet.
+: nom, prénoms, naissance, décès rangés dans des cases fixes. ¦ : Numm, Virnimm, Gebuert, Doud a fixe Felder.
+: parfait pour les longues listes et les petits écrans. ¦ : perfekt fir laang Lëschten a kleng Ecranen.
+: rien ne dépasse, seul le contenu compte. Idéal pour imprimer ou faire des captures. ¦ : näischt stécht eraus, just den Inhalt zielt. Ideal fir ze drécken oder fir Screenshots.
+: toutes les icônes ont le même trait et prennent la couleur du texte (aussi en mode sombre). ¦ : all Ikonen hunn déi selwecht Linn an huelen d’Faarf vum Text (och am donkele Modus).
+: traits dans les Listes, cartes encadrées dans la colonne Personnes. ¦ : Linnen an de Lëschten, agerummt Kaarten an der Kolonn Persounen.
+: traits fins et pâles, coins ronds, ombres floues comme sur un téléphone. ¦ : fein, blass Linnen, ronn Ecken, mëll Schied wéi op engem Handy.
+: une clé USB, ou un dossier iCloud Drive, Dropbox, OneDrive… L’app n’utilise aucun service en ligne et n’a pas besoin de serveur : chaque ordinateur garde sa base et dépose ses changements dans ce dossier ; l’autre les reprend. ¦ : en USB-Stick, oder en iCloud-Drive-, Dropbox-, OneDrive-Dossier… D’App benotzt keen Online-Service a brauch keen Server: all Computer behält seng Datebank a leet seng Ännerungen an dësen Dossier; deen aneren hëlt se.
+: une grande photo (la maison, la famille, le village) et le portrait rond par-dessus, comme un profil. ¦ : e grousst Foto (d’Haus, d’Famill, d’Duerf) an de ronne Portrait driwwer, wéi bei engem Profil.
+: « Annuler », « Modifier » deviennent des mots en couleur, soulignés au survol. ¦ : „Ofbriechen“, „Änneren“ ginn zu faarwege Wierder, beim Driwwerfueren ënnerstrach.
+: « Née le … à …, décédée le … », portrait ovale sépia, tampon Sosa. ¦ : „Née le … à …, décédée le …“, ovale Sepia-Portrait, Sosa-Stempel.
+; des Pays-Bas : © ¦ ; vun Holland: ©
+; du Québec : © ¦ ; vu Québec: ©
+; noms traduits en français. Les autres formes sont dessinées pour l’application. ¦ ; Nimm op Franséisch iwwersat. Déi aner Forme si fir d’Applikatioun gezeechent.
+Accents et esprits (s’ajoutent à la lettre avant le curseur) ¦ Akzenter a Spiritus (ginn op de Buschtaf virum Cursor gesat)
+Accents é è ê, et ç, œ, æ. ¦ Akzenter é è ê, an ç, œ, æ.
+Actes et documents ¦ Akten an Dokumenter
+Affichage des événements ¦ Uweise vun den Evenementer
+Afficher ce bouton ¦ Dëse Knäppchen uweisen
+Afficher cette catégorie ¦ Dës Kategorie uweisen
+Afficher dans la fiche ¦ An der Fiche uweisen
+Afficher dans le menu ¦ Am Menü uweisen
+Afficher la liste des raccourcis ¦ D’Lëscht vun den Ofkiirzungen uweisen
+Afficher le cadre (défaut) ¦ De Kader uweisen (Standard)
+Afficher seulement si renseigné ¦ Just uweisen, wann ausgefëllt
+Affiché : clique pour le cacher ¦ Ugewisen: klick, fir en ze verstoppen
+Agit sur les marges intérieures et l’écart entre les blocs. 100 % = comme avant. La « Taille typographique » de l’Apparence reste à part et s’ajoute ; une colonne de gauche réglée « Compacte » (onglet Colonne) garde sa propre taille : la Densité ne la touche pas. ¦ Wierkt op d’Banneränn an den Ofstand tëscht de Bléck. 100 % = wéi virdrun. D’„Schrëftgréisst“ vum Ausgesinn bleift separat a kënnt derbäi; eng lénks Kolonn op „Kompakt“ (Reiter Kolonn) behält hir eege Gréisst: d’Dicht beréiert se net.
+Agrandit et aère le texte. Les outils en plein écran gardent leur taille pour que leurs réglages restent à leur place. ¦ Mécht den Text méi grouss a méi locker. D’Instrumenter am Vollbild behalen hir Gréisst, fir datt hir Astellungen op hirer Plaz bleiwen.
+Aide : Ce que tu fais avec l’app : ses onglets et son premier écran. Aucune fiche n’est supprimée. ¦ Hëllef: Wat s du mat der App méchs: hir Reiter an hiren éischten Ecran. Keng Fiche gëtt geläscht.
+Aide : Choisis la sorte de daltonisme : l’app corrige ses couleurs pour que tu les distingues mieux. Les petites pastilles montrent comment ces couleurs sont vues. ¦ Hëllef: Wiel d’Zort vu Faarweblannheet: d’App korrigéiert hir Faarwen, fir datt s du se besser auserneen hale kanns. Déi kleng Punkte weisen, wéi dës Faarwe gesi ginn.
+Aide : La forme des petits carrés numérotés des blocs et des initiales des fiches. Ajoute tes formes (bibliothèque des tableaux, polygone dessiné, SVG importé), range la liste du menu « Forme des avatars », cache celles qui ne te servent pas. ¦ Hëllef: D’Form vun de klengen nummeréierte Véierecker vun de Bléck an den Initiale vun de Fichen. Setz deng eege Formen derbäi (Bibliothéik vun den Tabellen, gezeechente Polygon, importéierten SVG), zortéier d’Lëscht vum Menü „Form vun den Avataren“, verstopp déi, déi s du net brauchs.
+(CC BY 4.0) ; de Slovénie : © ¦ (CC BY 4.0); vu Slowenien: ©
+3 fiches trouvées ¦ 3 Fiche fonnt
+Aide des touches ¦ Hëllef zu den Tasten
+Anniversaires et souvenirs ¦ Gebuertsdeeg an Erënnerungen
+Année ¦ Joer
+Année de naissance lue par SocFace ¦ Gebuertsjoer, vu SocFace gelies
+Aperçu vivant ¦ Live-Virschau
+Appeler quelqu’un ¦ Een uruffen
+Arial, comme d’habitude. ¦ Arial, wéi gewinnt.
+Arrondi des coins ¦ Ronnung vun den Ecken
+Atkinson Hyperlegible : faite pour les personnes qui voient mal (lettres qu’on ne confond pas : I l 1, O 0). Toujours disponible. ¦ Atkinson Hyperlegible: gemaach fir Persounen, déi schlecht gesinn (Buschtawen, déi een net verwiesselt: I l 1, O 0). Ëmmer disponibel.
+Atkinson Hyperlegible, texte 30 px, très gros boutons ¦ Atkinson Hyperlegible, Text 30 px, ganz grouss Knäppercher
+Au démarrage, une fois par jour au plus. Seule une demande « quelle est la dernière version ? » part vers GitHub : aucune donnée de ta généalogie, aucun identifiant. Rien n’est installé tout seul. ¦ Beim Starten, maximal eemol am Dag. Just eng Ufro „wat ass déi lescht Versioun?“ geet op GitHub: keng Donnéeë vun denger Genealogie, keen Identifiant. Näischt gëtt vu selwer installéiert.
+Aucun fichier média manquant. ¦ Kee Mediefichier feelt.
+Aucune modification pour ce filtre. ¦ Keng Ännerung fir dëse Filter.
+Aucune ombre ¦ Kee Schied
+Aucune voix française trouvée ¦ Keng franséisch Stëmm fonnt
+Aujourd’hui, pas de portrait dans les cases de l’arbre. ¦ Haut kee Portrait an de Felder vum Bam.
+Aussi : ⇧ + Entrée dans la recherche rapide. ¦ Och: ⇧ + Enter an der séierer Sich.
+Aussi dans Réglages → Accessibilité → 🧓 Mode simple (« Montrer le bouton »). Caché au départ. ¦ Och an Astellungen → Accessibilitéit → 🧓 Einfache Modus („De Knäppchen uweisen“). Am Ufank verstoppt.
+Aussi dans les réglages de la calculette (« Bouton 🧮 dans la barre du haut »). ¦ Och an den Astellunge vum Rechner („Knäppchen 🧮 an der Bar uewen“).
+Avec les médias (photos, actes, sons…) ¦ Mat de Medien (Fotoen, Akten, Téin…)
+Avec les pastilles ¦ Mat de Plättercher
+Aérée ¦ Locker
+Bande d’actions rapides ¦ Band mat séieren Aktiounen
+Baptême loin de la naissance ¦ Daf wäit vun der Gebuert
+Baptême tardif (avant 1900) ¦ Spéiden Daf (virun 1900)
+Barre de côté ¦ Säitebar
+Bleu et jaune affaiblis. ¦ Blo a giel ofgeschwächt.
+Bouton bleu « ＋ Observation » au-dessus de la grille ¦ Bloe Knäppchen „＋ Observatioun“ iwwer dem Gitter
+Boutons carrés ¦ Véiereckeg Knäppercher
+Boutons des pistes : plus grands ¦ Knäppercher vun de Pisten: méi grouss
+Boutons des pistes : plus petits ¦ Knäppercher vun de Pisten: méi kleng
+Boutons des pistes : taille de départ ¦ Knäppercher vun de Pisten: Startgréisst
+Boutons encadrés ¦ Agerummt Knäppercher
+Cache les outils avancés ou rarement utilisés : ADN, comparaison, animaux, écran divisé, nouvelle fenêtre, réglages du tableau de bord, supprimer / verrouiller une fiche, historique, filtres avancés de la carte… ¦ Verstoppt déi fortgeschratt oder seele benotzt Instrumenter: DNA, Vergläich, Déieren, gedeelten Ecran, nei Fënster, Astellunge vum Dashboard, eng Fiche läschen / spären, Historique, fortgeschratt Filtere vun der Kaart…
+Caché ¦ Verstoppt
+Caché : le mode simple s’ouvre d’ici, ou par le widget du tableau de bord. ¦ Verstoppt: den einfache Modus mécht een hei op, oder iwwer de Widget vum Dashboard.
+Calendrier de cette date ¦ Kalenner vun dësem Datum
+Calendrier républicain ¦ Republikanesche Kalenner
+Calendrier source ¦ Quellkalenner
+Calendrier utilisé par défaut dans les champs de date ¦ Standardkalenner an den Datumsfelder
+Carré arrondi ¦ Ofgerente Véiereck
+Carré droit ¦ Riicht Véiereck
+Carré penché (défaut) ¦ Schréi Véiereck (Standard)
+Carrés numérotés ¦ Nummeréiert Véierecker
+Cartes avec repère ¦ Kaarte mat Markéierung
+Cartes espacées ¦ Kaarte mat Ofstand
+Cases de l’arbre ¦ Felder vum Bam
+Ce n’est pas une erreur ¦ Dat ass kee Feeler
+Ce que tu as réglé dans « ♿ Toute l’app » (daltonisme, contraste, taille du texte, mouvements, voix) s’applique aussi au mode simple. Pour un réglage différent, choisis « Propre au mode simple ». ¦ Wat s du an „♿ Ganz App“ agestallt hues (Faarweblannheet, Kontrast, Textgréisst, Beweegungen, Stëmm), gëllt och fir den einfache Modus. Fir eng aner Astellung, wiel „Just fir den einfache Modus“.
+Ce qui semble impossible ou très rare dans tes fiches : souvent une faute de frappe, un homonyme ou de mauvais parents. Rien n’est changé sans toi. ¦ Wat an denge Fichen onméiglech oder ganz seelen schéngt: dacks en Tippfeeler, en Homonym oder déi falsch Elteren. Näischt gëtt ouni dech geännert.
+Ce qu’on montre ¦ Wat gewise gëtt
+Celle de l’app ¦ Déi vun der App
+Celle du thème ¦ Déi vum Thema
+Cette personne était… (ses profils) ¦ Dës Persoun war… (hir Profiler)
+Ceux qui arrivent ¦ Déi, déi kommen
+Champs œuvre ¦ Felder vum Wierk
+Changer la couleur ¦ D’Faarf änneren
+Changer le pictogramme ¦ D’Piktogramm änneren
+Chaque choix se voit : clique, l’aperçu suit. Pour les outils Graphiques, Carte, Enquêtes, Recherche, Personnes, Listes, Réglages… ¦ All Wiel gesäit een: klick, d’Virschau follegt. Fir d’Instrumenter Grafiken, Kaart, Ënnersichungen, Recherche, Persounen, Lëschten, Astellungen…
+Chaque fiche est un objet ¦ All Fiche ass en Objet
+Chaque gros bouton garde sa couleur partout : on se repère sans lire. ¦ All grousse Knäppchen behält seng Faarf iwwerall: een orientéiert sech, ouni ze liesen.
+Chercher quelqu’un par son nom ¦ Een no sengem Numm sichen
+Chercher une commande… ¦ E Befeel sichen…
+Chercher… (nom, contrôle, lieu) ¦ Sichen… (Numm, Kontroll, Plaz)
+Choisir une voix propre au mode simple ¦ Eng Stëmm just fir den einfache Modus wielen
+Clair ou sombre ¦ Hell oder donkel
+Clavier et souris ¦ Tastatur a Maus
+Comme le prototype ¦ Wéi de Prototyp
+Comme le reste ¦ Wéi de Rescht
+Comme les blocs (réglage A1) ¦ Wéi d’Bléck (Astellung A1)
+Communes de Belgique : IGN-NGI (Institut géographique national belge), licence ouverte, via ¦ Gemenge vun der Belsch: IGN-NGI (Belscht Nationaalt Geographescht Institut), oppe Lizenz, iwwer
+Communes de Tchéquie : RÚIAN © ¦ Gemenge vun Tschechien: RÚIAN ©
+Communes d’Allemagne : VG250 © ¦ Gemenge vun Däitschland: VG250 ©
+Communes d’Autriche : © ¦ Gemenge vun Éisträich: ©
+Communes d’Espagne : © ¦ Gemenge vu Spuenien: ©
+Communes d’Italie : confini amministrativi © ¦ Gemenge vun Italien: confini amministrativi ©
+Compact et clair ¦ Kompakt a kloer
+Comparer les GEDCOM ¦ D’GEDCOM-Fichieren vergläichen
+Comtés des États-Unis : ¦ Counties vun den USA:
+Contour bien visible autour de l’élément choisi au clavier ¦ Gutt siichtbare Contour ronderëm d’Element, dat mat der Tastatur gewielt ass
+Contours des communes : IGN, Admin Express, via ¦ Grenze vun de Gemengen: IGN, Admin Express, iwwer
+Contraste élevé ¦ Héije Kontrast
+Contrôle ¦ Kontroll
+Convertir une date ¦ En Datum ëmrechnen
+Correspondance (lettres, cartes) ¦ Korrespondenz (Bréiwer, Kaarten)
+Couleur du bord ¦ Faarf vum Rand
+Couleur du genre, fond plein (lettres blanches) ¦ Faarf vum Geschlecht, voll Hannergrond (wäiss Buschtawen)
+Couleur du genre, fond pâle (lettres de couleur) ¦ Faarf vum Geschlecht, blassen Hannergrond (faarweg Buschtawen)
+Couleur principale pâle avec un trait ¦ Blass Haaptfaarf mat enger Linn
+Couleurs et daltonisme ¦ Faarwen a Faarweblannheet
+Couleurs seulement affaiblies (léger) ¦ Faarwen just ofgeschwächt (liicht)
+Créer / modifier une branche ¦ En Zweig erstellen / änneren
+Créer / modifier une étiquette ¦ Eng Etikett erstellen / änneren
+Créer le type ¦ Den Typ erstellen
+Créer un type ¦ En Typ erstellen
+Créer une copie de test ¦ Eng Testkopie erstellen
+Créer une forme ¦ Eng Form erstellen
+DENSITÉ ¦ DICHT
+Dans la barre au-dessus ¦ An der Bar uewendriwwer
+Dans un navigateur ¦ An engem Browser
+Demander aussi un code ¦ Och e Code froen
+Demander « Qui regarde ? » ¦ „Wien kuckt?“ froen
+Densité ¦ Dicht
+Des photos au hasard ¦ Zoufälleg Fotoen
+Des photos choisies ¦ Gewielt Fotoen
+Dessin au trait ¦ Strëchzeechnung
+Deutéranomalie ¦ Deuteranomalie
+Deutéranopie ¦ Deuteranopie
+Deux façons de faire selon l’endroit. ¦ Zwou Méiglechkeeten, jee no der Plaz.
+Diaporama et cadre photo ¦ Diashow a Fotorumm
+Dictée vocale ¦ Spriechdictée
+Dictée vocale dans les champs texte ¦ Spriechdictée an den Textfelder
+Données géographiques ¦ Geographesch Donnéeën
+Dossier des copies ¦ Dossier vun de Kopien
+Dossier partagé ¦ Gedeelten Dossier
+Double-clic : 320 px, la valeur de départ. ¦ Duebelklick: 320 px, de Startwäert.
+Douces et floues ¦ Mëll a verschwommen
+Duplique la base ouverte pour essayer un import ou une fusion sans modifier l’original. Les médias restent partagés : ne les supprime pas depuis la copie si tu veux préserver l’original. ¦ Dupliziert déi oppe Datebank, fir en Import oder eng Fusioun ze probéieren, ouni d’Original z’änneren. D’Medie bleiwe gedeelt: läsch se net vun der Kopie aus, wann s du d’Original wëlls behalen.
+Durée de chaque photo ¦ Dauer vun all Foto
+Durée de l’appui long ¦ Dauer vum laangen Drock
+Décrire les images ¦ D’Biller beschreiwen
+Défilement ¦ Scrollen
+Délai après la mort du père ¦ Delai nom Doud vum Papp
+Effacer le groupe (son contenu va dans le groupe d’à côté) ¦ D’Grupp läschen (hiren Inhalt geet an d’Grupp dernieft)
+En bas de la colonne ¦ Ënnen an der Kolonn
+En bas de la colonne des badges ¦ Ënnen an der Kolonn vun de Badgen
+En bas de l’en-tête ¦ Ënnen am Kapp
+En diaporama ¦ Als Diashow
+En français. Pas dans les cases de recherche, les dates, les nombres ni les mots de passe. ¦ Op Franséisch. Net an de Sichfelder, den Datumen, den Zuelen an de Passwierder.
+En grand, avec sa légende ¦ Grouss, mat senger Legend
+En très grand ¦ Ganz grouss
+En-tête actuel ¦ Aktuelle Kapp
+En-tête de la fiche ¦ Kapp vun der Fiche
+En-têtes ¦ Käpp
+Enlever l’élément choisi ¦ Dat gewielt Element ewechhuelen
+Enregistrer la branche ¦ Den Zweig späicheren
+Enregistrer le projet sous un autre nom… ¦ De Projet ënner engem aneren Numm späicheren…
+Ensembles prêts ¦ Fäerdeg Sets
+Entre une date complète pour convertir. ¦ Gëff e komplette Datum an, fir ëmzerechnen.
+Espace dans les blocs ¦ Plaz an de Bléck
+Espace entre les boutons ¦ Plaz tëscht de Knäppercher
+Espace entre les cadres ¦ Plaz tëscht de Kaderen
+Espace entre les lettres ¦ Ofstand tëscht de Buschtawen
+Espace entre les mots ¦ Ofstand tëscht de Wierder
+Essaie ici ¦ Probéier hei
+FICHES ANIMAUX ¦ DÉIEREFICHEN
+FICHES PERSONNES ET ANIMAUX ¦ FICHE VU PERSOUNEN AN DÉIEREN
+Fiche d’une personne ¦ Fiche vun enger Persoun
+Fiche · 88 px ¦ Fiche · 88 px
+Fiches personnes ¦ Persounefichen
+Fichiers médias ¦ Mediefichieren
+Fond crème, police de livre, doux pour les yeux ¦ Crème-Hannergrond, Buchschrëft, mëll fir d’Aen
+Fond pâle (comme avant) ¦ Blassen Hannergrond (wéi virdrun)
+Force de la correction ¦ Stäerkt vun der Korrektur
+Forme de l’en-tête ¦ Form vum Kapp
+Forme des boutons ¦ Form vun de Knäppercher
+Forme des listes ¦ Form vun de Lëschten
+Français ¦ Franséisch
+Fratrie étalée ¦ Wäit verdeelt Geschwëster
+GEDCOM de référence ¦ Referenz-GEDCOM
+Garder les dernières ¦ Déi lescht behalen
+Gouvernement du Québec ¦ Regierung vu Québec
+Gravité ¦ Schwéiergrad
+Grosse flèche de souris ¦ Grousse Mauszeiger
+Grégorien ¦ Gregorianesch
+Hauteur des boutons ¦ Héicht vun de Knäppercher
+Hauteur des cadres ¦ Héicht vun de Kaderen
+Hauteur des lignes ¦ Héicht vun den Zeilen
+Hauteur du bandeau ¦ Héicht vum Band
+ICÔNES ¦ IKONEN
+Ici : choisis le dossier. L’app y pose une copie de départ ( ¦ Hei: wiel den Dossier. D’App leet eng Startkopie dran (
+Icône + nom ¦ Ikon + Numm
+Icône au-dessus ¦ Ikon uewendriwwer
+Icônes ¦ Ikonen
+Ignorée dans une case de texte ; réglable dans Raccourcis clavier. ¦ An engem Textfeld ignoréiert; astellbar an den Tastaturofkiirzungen.
+Ils sont gardés avec ta généalogie : chaque tablette ou ordinateur part d’ici. ¦ Si gi mat denger Genealogie gehal: all Tablette oder Computer fänkt vun hei un.
+Intégrité SQLite : ¦ SQLite-Integritéit:
+Jamais testé ¦ Ni getest
+Je ne suis pas dans l’arbre ¦ Ech sinn net am Bam
+La forme ¦ D’Form
+La maison ¦ D’Haus
+La personne de départ ¦ D’Startpersoun
+La photo de chaque case : plus grande, on se reconnaît plus vite. ¦ D’Foto vun all Feld: méi grouss erkennt ee sech méi séier.
+Largeur de la colonne ¦ Breet vun der Kolonn
+Le bouton principal ressort ¦ Den Haaptknäppchen stécht eraus
+Le cadre du haut ¦ De Kader uewen
+Le carré de la fiche, partout ¦ D’Véiereck vun der Fiche, iwwerall
+Le dessin de la colonne ¦ D’Ausgesi vun der Kolonn
+Le gris peut se confondre avec une ligne choisie si l’écran est pâle. ¦ De Gro kann ee mat enger gewielter Zeil verwiesselen, wann den Ecran blass ass.
+Le meilleur des deux ¦ Dat Bescht vu béiden
+Le mode simple ¦ Den einfache Modus
+Le nom est moins grand ; un style plus « administratif ». ¦ Den Numm ass manner grouss; e méi „administrative“ Stil.
+Le plus discret ¦ Dat Diskreetst
+Le plus épuré ¦ Dat Schlichtst
+Le portrait ¦ De Portrait
+Le rond ou carré qui montre une personne : ses couleurs, sa photo, ses initiales. ¦ De Krees oder d’Véiereck, dat eng Persoun weist: seng Faarwen, säi Foto, seng Initialen.
+Le rouge est peu visible (paraît sombre, se confond avec le vert). ¦ Rout ass schlecht ze gesinn (gesäit donkel aus, gëtt mat Gréng verwiesselt).
+Le rouge prévient avant de cliquer : on ne supprime pas une fiche par erreur. ¦ Rout warnt virum Klicken: een läscht keng Fiche aus Versinn.
+Le site propose seulement des candidats. La fusion déplace les données vers la fiche gardée puis supprime l’autre fiche. ¦ De Site proposéiert just Kandidaten. D’Fusioun réckelt d’Donnéeën op déi gehale Fiche a läscht duerno déi aner Fiche.
+Le sépia est plus doux pour les yeux fatigués ; le sombre n’éblouit pas le soir. ¦ Sepia ass méi mëll fir midd Aen; donkel blennt den Owend net.
+Le texte des boutons principaux ¦ Den Text vun den Haaptknäppercher
+Lecteur d’écran ¦ Ecranlieser
+Les anniversaires ¦ D’Gebuertsdeeg
+Les blocs se détachent un peu moins du fond. ¦ D’Bléck hiewe sech e bësse manner vum Hannergrond of.
+Les couleurs de l’app, sans changement. ¦ D’Faarwe vun der App, ouni Ännerung.
+Les dates seules (comme avant) ¦ Just d’Datumen (wéi virdrun)
+Les deux ¦ Allebéid
+Les fiches marquées « confidentielles » ne sont jamais montrées. ¦ D’Fichen, déi als „vertraulech“ markéiert sinn, ginn ni gewisen.
+Les gros boutons ¦ Déi grouss Knäppercher
+Les modifications effectuées depuis ce site sont enregistrées ici. ¦ D’Ännerungen, déi vun dësem Site aus gemaach goufen, ginn hei gespäichert.
+Les personnes ¦ D’Persounen
+Les photos ¦ D’Fotoen
+Les réglages du prototype que tu as aimé ¦ D’Astellunge vum Prototyp, deen dir gefall huet
+Lettres d’origine ¦ Original Buschtawen
+Lien « 🧩 Cette personne était… » ¦ Link „🧩 Dës Persoun war…“
+Liens toujours soulignés ¦ Linken ëmmer ënnerstrach
+Lier au mode Artiste : masqué pour les personnes non artistes ¦ Mam Kënschtlermodus verbannen: verstoppt fir Persounen, déi keng Kënschtler sinn
+Lieux et souvenirs ¦ Plazen an Erënnerungen
+Lire les légendes des photos dans le diaporama ¦ D’Legende vun de Fotoen an der Diashow virliesen
+Lire l’histoire dès qu’on ouvre une fiche ¦ D’Geschicht virliesen, soubal eng Fiche opgemaach gëtt
+Liste aérée ¦ Lockere Lëscht
+Liste continue ¦ Duerchgoend Lëscht
+Liste · 34 px ¦ Lëscht · 34 px
+Listes et arbre ¦ Lëschten a Bam
+Longévité 🔴 ¦ Laangliewegkeet 🔴
+Longévité 🟠 ¦ Laangliewegkeet 🟠
+L’ambiance des archives ¦ D’Stëmmung vun den Archiven
+L’app dit alors les noms, sans « ta mère » ni « ton petit-fils ». ¦ D’App seet dann d’Nimm, ouni „deng Mamm“ oder „däin Enkel“.
+L’arbre ¦ De Bam
+L’heure et la date ¦ D’Auerzäit an den Datum
+L’ombre fait « touche qu’on enfonce ». Elle suit le style général (franche, douce ou aucune). ¦ De Schied mécht „Tast, déi een androckt“. E follegt dem allgemenge Stil (kloer, mëll oder keen).
+Masquer tout le cadre ¦ De ganze Kader verstoppen
+Mettre les espacements conseillés pour la dyslexie ¦ Déi fir Dyslexie recommandéiert Ofstänn asetzen
+Mode consultation (la famille regarde sans rien modifier) ¦ Liesmodus (d’Famill kuckt, ouni eppes z’änneren)
+Modifier ce cadre ¦ Dëse Kader änneren
+Moins de boutons, moins d’hésitation : garde seulement ce que la personne aime regarder. Un cadre ajouté peut ouvrir directement la fiche d’une personne, ses photos ou un petit mot. ¦ Manner Knäppercher, manner Zéckelen: behal just dat, wat d’Persoun gär kuckt. E derbäigesate Kader kann direkt d’Fiche vun enger Persoun, hir Fotoen oder e klengt Wuert opmaachen.
+Moins de choses visibles d’un coup ; plus de défilement. ¦ Manner Saachen op eemol siichtbar; méi Scrollen.
+Moins de lignes visibles ; plus de défilement. ¦ Manner siichtbar Zeilen; méi Scrollen.
+Moins de place pour les boutons ; plus décoratif que pratique. ¦ Manner Plaz fir d’Knäppercher; méi dekorativ wéi praktesch.
+Montre l’écran comme le voit une personne daltonienne, pour vérifier qu’un document reste lisible avant de l’envoyer ou de l’imprimer. Rien n’est modifié. ¦ Weist den Ecran, wéi eng faarweblann Persoun e gesäit, fir ze kontrolléieren, datt en Dokument liesbar bleift, ier een et schéckt oder dréckt. Näischt gëtt geännert.
+Montrer la photo de la fiche quand elle existe ¦ D’Foto vun der Fiche weisen, wann et eent gëtt
+Montrer les boutons « 🔊 Écouter » ¦ D’Knäppercher „🔊 Nolauschteren“ weisen
+Médias et transcriptions ¦ Medien an Transkriptiounen
+Ne range jamais le fichier de la base lui-même dans iCloud ou Dropbox pour l’ouvrir des deux côtés : l’app le refuse (verrou), car il pourrait s’abîmer. ¦ Leet ni de Fichier vun der Datebank selwer an iCloud oder Dropbox, fir en op béide Säiten opzemaachen: d’App refuséiert dat (Spär), well e kéint futtigoen.
+Net et régulier ¦ Kloer a gläichméisseg
+Norvégien ¦ Norwegesch
+Nouveau GEDCOM ¦ Neie GEDCOM
+Nouvelle étiquette ¦ Nei Etikett
+Numéros ¦ Nummeren
+Numéros qui se suivent (01, 02, 03…), les mêmes onglets partout (icône + nom), « Liste | Fiches » dans la barre au-dessus de la liste ¦ Nummeren, déi openeen nokommen (01, 02, 03…), déi selwecht Reiter iwwerall (Ikon + Numm), „Lëscht | Fichen“ an der Bar iwwer der Lëscht
+N’importe quel autre lieu peut être saisi librement. ¦ All aner Plaz kann ee fräi aginn.
+On suit la ligne sans se tromper ¦ Een follegt der Zeil, ouni sech ze iren
+Onglets du haut ¦ Reiter uewen
+Ordre des pages des Réglages ¦ Reiefolleg vun de Säite vun den Astellungen
+Ordre et visibilité des boutons ¦ Reiefolleg a Visibilitéit vun de Knäppercher
+Ordre et visibilité des éléments de l’en-tête ¦ Reiefolleg a Visibilitéit vun den Elementer vum Kapp
+Par défaut ¦ Standard
+Par ligne ¦ Pro Zeil
+Pareil que l’app ¦ Wéi d’App
+Parle au lieu de taper : un petit 🎤 apparaît dans le champ texte où tu écris. Clique dessus (ou ¦ Schwätz amplaz ze tippen: e klengen 🎤 erschéngt am Textfeld, an deem s du schreifs. Klick drop (oder
+Pas de numéros ¦ Keng Nummeren
+Pas vérifiée ¦ Net kontrolléiert
+Pastille sous le nom ¦ Plättchen ënnert dem Numm
+Persan (hégirien solaire) ¦ Persesch (Sonnen-Hidschra)
+Personne qui regarde ¦ Persoun, déi kuckt
+Personnes identifiées ¦ Identifizéiert Persounen
+Personnes vivantes ¦ Lieweg Persounen
+Petit écran ¦ Klengen Ecran
+Peut se confondre avec un lien ; demande un peu d’habitude. ¦ Kann ee mat engem Link verwiesselen; et brauch e bëssen Gewinnung.
+Photo de la personne ¦ Foto vun der Persoun
+Photo des cases de l’arbre ¦ Foto vun de Felder vum Bam
+Photos retirées ¦ Ewechgeholl Fotoen
+Pictogrammes des tableaux ¦ Piktogrammer vun den Tabellen
+Place de ＋ Nouvelle observation ¦ Plaz vu ＋ Nei Observatioun
+Plus calme pour les yeux ¦ Méi rouweg fir d’Aen
+Plus discret que « Comme avant » : les blocs se détachent un peu moins. ¦ Méi diskreet wéi „Wéi virdrun“: d’Bléck hiewe sech e bësse manner of.
+Plus d’actions (menu ⋯) ¦ Méi Aktiounen (Menü ⋯)
+Plus d’espace : on touche moins souvent le bouton d’à côté. ¦ Méi Plaz: een dréckt manner dacks op de Knäppchen dernieft.
+Plus grandes, elles se voient de loin ; plus petites, les barres d’outils prennent moins de place. ¦ Méi grouss gesäit een se vu wäitem; méi kleng huelen d’Toolbaren manner Plaz.
+Plus haut, la photo se voit mieux ; plus bas, la fiche commence plus tôt. Seulement pour le bandeau photo. ¦ Méi héich gesäit een d’Foto besser; méi déif fänkt d’Fiche méi fréi un. Just fir d’Fotoband.
+Police des cadres ¦ Schrëft vun de Kaderen
+Portée ¦ Reechwäit
+Pour la dyslexie : choisis celle qui te va ¦ Fir Dyslexie: wiel déi, déi dir passt
+Pour quitter ¦ Fir ze verloossen
+Pour tout le monde ¦ Fir jiddereen
+Pratique pour apprendre l’app : plus besoin de passer la souris pour savoir ce que fait chaque bouton. Prend un peu plus de place. ¦ Praktesch fir d’App ze léieren: et brauch een net méi mat der Maus driwwer ze fueren, fir ze wëssen, wat all Knäppchen mécht. Hëlt e bësse méi Plaz.
+Prend de la hauteur ; sans photo, le bandeau prend la couleur principale (Apparence). ¦ Hëlt Héicht; ouni Foto hëlt d’Band d’Haaptfaarf (Ausgesinn).
+Proposer dans le menu ¦ Am Menü proposéieren
+Prénom + nom (JM) ¦ Virnumm + Numm (JM)
+Prénom seulement ¦ Just de Virnumm
+Présentation (Keynote) ¦ Presentatioun (Keynote)
+Quand il y a beaucoup de boutons, on ne voit plus lequel est important. ¦ Wann et vill Knäppercher gëtt, gesäit een net méi, wéi ee wichteg ass.
+Quand personne ne touche, lancer le diaporama ¦ Wann keen drécken, d’Diashow starten
+Quand plusieurs personnes se servent de la même tablette. ¦ Wann e puer Persounen déi selwecht Tablette benotzen.
+Quelqu’un d’autre de la famille ¦ Een aneren aus der Famill
+Qui est-ce ? ¦ Wien ass dat?
+Qui regarde ¦ Wien kuckt
+Qui regarde ? ¦ Wien kuckt?
+Qui regarde l’arbre ? ¦ Wien kuckt de Bam?
+Qui se suivent ¦ Openeen nokommend
+Quitter le mode simple ¦ Den einfache Modus verloossen
+Rattaché à ¦ Verbonne mat
+Recherche et enquêtes ¦ Recherche an Ënnersichungen
+Reculer le morceau → ¦ D’Stéck no hannen réckelen →
+Remettre un réglage exporté (fichier .json) ¦ Eng exportéiert Astellung zrécksetzen (.json-Fichier)
+Ressemblance des doublons ¦ Ähnlechkeet vun den Doublonen
+Rien ne bouge ¦ Näischt beweegt sech
+Récit d’une vie (diaporama tout fait) ¦ Liewensgeschicht (fäerdeg Diashow)
+Réduire les mouvements ¦ Beweegungen reduzéieren
+Réglages de base ¦ Basisastellungen
+Réglages et export ¦ Astellungen an Export
+Républicain ¦ Republikanesch
+Sans couleur, il faut parfois une seconde de plus pour les reconnaître. ¦ Ouni Faarf brauch ee heiansdo eng Sekonn méi, fir se z’erkennen.
+Se lit comme un acte ¦ Liest sech wéi en Akt
+Ses photos, ceux qui y sont nés ¦ Seng Fotoen, déi, déi do gebuer sinn
+Signatures identifiées ¦ Identifizéiert Ënnerschrëften
+Son rapide ¦ Séieren Toun
+Sortie et démarrage ¦ Verloossen a Starten
+Sous la souris ¦ Ënnert der Maus
+Sous le nom ¦ Ënnert dem Numm
+Sous À vérifier, Hors généalogie, Artiste. ¦ Ënner Ze kontrolléieren, Ausserhalb vun der Genealogie, Kënschtler.
+Sous-titres toujours affichés ¦ Ënnertitelen ëmmer ugewisen
+Studio son ¦ Tounstudio
+Style des entrées ¦ Stil vun den Entréeën
+Style des fiches ¦ Stil vun de Fichen
+Style « acte ancien » ¦ Stil „ale Akt“
+Style « carte d’identité » ¦ Stil „Identitéitskaart“
+Suit l’accessibilité de l’app ¦ Follegt der Accessibilitéit vun der App
+Sur 1 colonne ¦ Op 1 Kolonn
+Sur 2 colonnes ¦ Op 2 Kolonnen
+Sur 2 lignes (défaut) ¦ Op 2 Zeilen (Standard)
+Sur cet appareil ¦ Op dësem Apparat
+Sur l’autre ordinateur : ouvre ¦ Um anere Computer: maach
+Sur un grand écran, l’œil peut sauter de ligne. ¦ Op engem grousse Ecran kann d’A eng Zeil iwwersprangen.
+Sur un petit portable, il faut souvent faire défiler. ¦ Op engem klenge Laptop muss ee dacks scrollen.
+Sur un téléphone, la barre du haut est repliée : ces boutons n’y sont pas montrés. ¦ Op engem Handy ass d’Bar uewen zesummegeklappt: dës Knäppercher ginn do net gewisen.
+Suédois ¦ Schwedesch
+Sépia doux ¦ Mëll Sepia
+Ta version ¦ Deng Versioun
+Taille des entrées ¦ Gréisst vun den Entréeën
+Taille des icônes ¦ Gréisst vun den Ikonen
+Taille des initiales ¦ Gréisst vun den Initialen
+Taille du texte ¦ Textgréisst
+Taille du titre des cadres ¦ Gréisst vum Titel vun de Kaderen
+Tchèque ¦ Tschechesch
+Tes réglages d’accessibilité valent aussi ici ¦ Deng Accessibilitéitsastellunge gëllen och hei
+Tester cette sauvegarde ¦ Dëse Backup testen
+Texte et traits ¦ Text a Linnen
+Thème et couleurs → Taille typographique ¦ Thema a Faarwen → Schrëftgréisst
+Ton prénom ¦ Däi Virnumm
+Touche O pour une nouvelle observation ¦ Tast O fir eng nei Observatioun
+Touche de l’outil ¦ Tast vum Outil
+Touche ta photo. L’app dira ensuite « ta mère », « ton petit-fils »… ¦ Dréck op däi Foto. D’App seet dann „deng Mamm“, „däin Enkel“…
+Touche un gros bouton pour commencer. ¦ Dréck op e grousse Knäppchen fir unzefänken.
+Touches déjà prévues dans cet outil ¦ Tasten, déi an dësem Outil schonn virgesi sinn
+Toujours proposée (la forme de départ) ¦ Ëmmer proposéiert (d’Startform)
+Tous, dans l’ordre d’origine ¦ All, an der ursprénglecher Reiefolleg
+Tout désélectionner ¦ Alles ofwielen
+Tout d’un coup d’œil ¦ Alles op ee Bléck
+Tout le monde ¦ Jiddereen
+Tout seul ¦ Automatesch
+Tout sélectionner ¦ Alles auswielen
+Toute l’app ¦ Ganz App
+Toutes les ¦ All
+Toutes les … heures ¦ All … Stonnen
+Traits entre les lignes ¦ Linnen tëscht den Zeilen
+Trois par ligne ¦ Dräi pro Zeil
+Très grande (56 px) ¦ Ganz grouss (56 px)
+Très lisible ¦ Ganz liesbar
+Très petite (30 px) ¦ Ganz kleng (30 px)
+Un album ¦ En Album
+Un appui long ne se fait pas par hasard : on ne sort pas par erreur. ¦ E laangen Drock geschitt net zoufälleg: een geet net aus Versinn eraus.
+Un bord noir va avec les blocs de l’app (tous ont un trait noir de 2 px) ; sans bord, c’est plus léger. Sur les plus petits portraits, le bord s’affine tout seul. ¦ E schwaarze Rand passt zu de Bléck vun der App (all hunn eng schwaarz Linn vun 2 px); ouni Rand ass et méi liicht. Bei de klengste Portraite gëtt de Rand vu selwer méi fein.
+Un bouton carré 🧩, dans la colonne des boutons ¦ E véiereckege Knäppchen 🧩, an der Kolonn vun de Knäppercher
+Un bouton qui ne répond pas, un écran bizarre, un message d’erreur ? Décris-le : un rapport technique (sans aucune donnée de ta généalogie) est préparé, tu le relis, puis tu l’envoies par GitHub ou par e-mail. ¦ E Knäppchen, deen net reagéiert, e komeschen Ecran, e Feelermessage? Beschreif et: en techneschen Rapport (ouni Donnéeë vun denger Genealogie) gëtt preparéiert, du lies en nach eng Kéier, an dann schécks du en iwwer GitHub oder per E-Mail.
+Un doigt qui tremble touche facilement un bouton de 72 px ou plus (64 px au moins). ¦ E Fanger, deen ziddert, trëfft liicht e Knäppchen vu 72 px oder méi (mindestens 64 px).
+Un film de famille ¦ E Familljefilm
+Un lieu de famille ¦ Eng Familljeplaz
+Un mot de la famille ¦ E Wuert vun der Famill
+Un petit jeu avec les portraits ¦ E klengt Spill mat de Portraiten
+Un petit portrait au début de chaque ligne ¦ E klenge Portrait am Ufank vun all Zeil
+Un peu grande (46 px) ¦ E bësse grouss (46 px)
+Un peu moins « cliquable » au premier regard. ¦ E bësse manner „klickbar“ op den éischte Bléck.
+Un peu petite (38 px) ¦ E bësse kleng (38 px)
+Un peu « bureau » : moins de caractère que les autres. ¦ E bësse „Büro“: manner Charakter wéi déi aner.
+Un son, une chanson ¦ En Toun, e Lidd
+Un trait épais ressemble aux traits noirs de l’app ; un trait fin fait plus élégant. Seulement pour les icônes au trait. ¦ Eng déck Linn gläicht de schwaarze Linne vun der App; eng fein Linn ass méi elegant. Just fir d’Strëchikonen.
+Une copie de ta généalogie, faite toute seule, vérifiée, rangée dans le dossier de ton choix. ¦ Eng Kopie vun denger Genealogie, automatesch gemaach, kontrolléiert, an deem Dossier ofgeluecht, deen s du wiels.
+Une copie quand tu quittes l’app (ou fermes l’onglet), seulement si quelque chose a changé. ¦ Eng Kopie, wann s du d’App verléiss (oder de Reiter zoumécht), just wann eppes geännert huet.
+Une grande colonne ¦ Eng grouss Kolonn
+Une grande partie des formes des tableaux (animaux, métiers, maison, transports, météo, santé…) vient de ¦ E groussen Deel vun de Forme vun den Tabellen (Déieren, Beruffer, Haus, Transport, Wieder, Gesondheet…) kënnt vun
+Une ombre sous les boutons ¦ E Schied ënnert de Knäppercher
+Une photo ¦ E Foto
+Une photo rend la fiche vivante. Sans elle, les initiales prennent sa place (le bandeau prend la couleur principale de l’Apparence). ¦ E Foto mécht d’Fiche lieweg. Ouni et huelen d’Initialen seng Plaz (d’Band hëlt d’Haaptfaarf vum Ausgesinn).
+Une phrase écoutée se comprend même quand on lit mal. ¦ E Saz, deen een héiert, versteet een och, wann ee schlecht liest.
+Une seule couleur pour tous (comme la fiche) ¦ Eng eenzeg Faarf fir all (wéi d’Fiche)
+Une seule lettre, celle du nom (M) ¦ Een eenzege Buschtaf, dee vum Numm (M)
+Utile quand un petit-enfant joue aussi avec la tablette. Ce n’est pas une vraie protection : il évite seulement de sortir par erreur. ¦ Nëtzlech, wann och en Enkelkand mat der Tablette spillt. Et ass kee richtege Schutz: et verhënnert just, datt een aus Versinn erausgeet.
+Utiliser la personne affichée ¦ Déi ugewise Persoun benotzen
+Verrouiller / déverrouiller ¦ Spären / entspären
+Vert affaibli (le plus courant de tous). ¦ Gréng ofgeschwächt (dat heefegst vun allen).
+Vitesse de la voix ¦ Geschwindegkeet vun der Stëmm
+Voir l’aperçu ¦ D’Virschau kucken
+Voix française de l’appareil ¦ Franséisch Stëmm vum Apparat
+Vu la dernière fois (fiches d’animaux) ¦ Fir d’lescht gesinn (Déierefichen)
+Zoom de départ ¦ Startzoom
+arrête la lecture. ¦ stoppt d’Virliesen.
+au-delà de ¦ iwwer
+carré photo, grand nom ¦ véiereckegt Foto, grousse Numm
+champs rangés, photo d’identité ¦ zortéiert Felder, Pass-Foto
+chaque ligne dans son cadre ¦ all Zeil an hirem Kader
+chaque liste garde le sien ¦ all Lëscht behält hiren
+chaque outil le sien ¦ all Outil säin
+coins arrondis, ombres légères ¦ ronn Ecken, liicht Schied
+dans LCNDA (écran de démarrage → Importer un fichier, ou une nouvelle généalogie vide), puis ici même, choisis le même dossier. ¦ an LCNDA op (Startecran → E Fichier importéieren, oder eng nei eidel Genealogie), wiel dann hei selwer deeselwechten Dossier.
+de départ ¦ Start-
+dossier partagé ¦ gedeelten Dossier
+du nom ¦ vum Numm
+décédé ¦ verstuerwen
+décédée ¦ verstuerwen
+ex. Dimensions, Technique, Lieu de conservation ¦ z. B. Dimensiounen, Technik, Opbewahrungsplaz
+icônes fines, une seule couleur ¦ fein Ikonen, eng eenzeg Faarf
+impossible au-delà de ¦ onméiglech iwwer
+juste au-dessus de la liste ¦ direkt iwwer der Lëscht
+la Densité ne s’y ajoute pas ¦ d’Dicht kënnt net derbäi
+la liste des projets ¦ d’Lëscht vun de Projeten
+le numéro dans un carré ¦ d’Nummer an engem Véiereck
+là où il était ¦ do, wou en war
+l’entrée choisie dépasse ¦ déi gewielten Entrée stécht eraus
+on passe par le bloc « 👁 Observations » ¦ et geet een iwwer de Block „👁 Observatiounen“
+papier, phrase d’état civil ¦ Pabeier, Saz wéi am Zivilstand
+par défaut ¦ Standard
+plus d’espace ¦ méi Plaz
+plus d’espace partout ¦ méi Plaz iwwerall
+règle tout d’un coup ; tu peux ensuite changer chaque ligne (« retouché » s’affiche). ¦ stellt alles op eemol an; duerno kanns du all Zeil änneren („ugepasst“ gëtt ugewisen).
+sans icône ¦ ouni Ikon
+se règle dans ¦ gëtt agestallt an
+serré, plus de lignes ¦ enk, méi Zeilen
+sous l’en-tête de la fiche, replié ¦ ënnert dem Kapp vun der Fiche, zesummegeklappt
+sur une ligne ¦ op enger Zeil
+taille du texte ¦ Textgréisst
+tout dans un cadre ¦ alles an engem Kader
+tout reste comme avant ¦ alles bleift wéi virdrun
+trait pour agir, émoji pour les rubriques ¦ Linn fir ze handelen, Emoji fir d’Rubriken
+traits fins, grain du papier ¦ fein Linnen, Pabeierstruktur
+traits épais, ombres franches ¦ déck Linnen, kloer Schied
+un seul cadre, lignes fines ¦ een eenzege Kader, fein Zeilen
+un trait fin, fond transparent ¦ eng fein Linn, transparenten Hannergrond
+« Calendrier de cette date » ¦ „Kalenner vun dësem Datum“
+« Liste | Fiches » ¦ „Lëscht | Fichen“
+« Retirer » cache la photo du mode simple seulement : elle reste dans tes médias. ¦ „Ewechhuelen“ verstoppt d’Foto just am einfache Modus: et bleift an denge Medien.
+« ＋ Nouvelle observation · vu il y a 2 j » ¦ „＋ Nei Observatioun · gesinn virun 2 D.“
+À chaque ouverture ¦ All Kéier beim Opmaachen
+À droite, les unes sous les autres (comme avant) ¦ Riets, ënnerteneen (wéi virdrun)
+À vérifier, branche maternelle, acte illisible… ¦ Ze kontrolléieren, mamm Zweig, onliesbaren Akt…
+À écouter ¦ Fir nozelauschteren
+Âge de la mère 🔴 ¦ Alter vun der Mamm 🔴
+Âge de la mère 🟠 ¦ Alter vun der Mamm 🟠
+Âge du père 🔴 ¦ Alter vum Papp 🔴
+Âge du père 🟠 ¦ Alter vum Papp 🟠
+Âge minimum au mariage ¦ Mindestalter beim Bestietnes
+Ère ¦ Ära
+Ère d’Espagne ¦ Spuenesch Ära
+Écart entre deux naissances ¦ Ofstand tëscht zwou Gebuerten
+Écouter ¦ Nolauschteren
+Édition ¦ Beaarbechten
+Émojis ¦ Emojien
+Énorme (62 px) ¦ Enorm (62 px)
+Épaisseur des traits ¦ Déckt vun de Linnen
+Épaisseur du trait ¦ Déckt vun der Linn
+Éteint : seulement la pastille « Vu hier ». ¦ Aus: just d’Plättchen „Gëschter gesinn“.
+Éthiopien ¦ Äthiopesch
+Étoile ¦ Stär
+à vérifier au-delà de ¦ ze kontrolléieren iwwer
+← Avancer le morceau ¦ ← D’Stéck no vir réckelen
+↗ Voir les versions publiées ¦ ↗ Déi publizéiert Versioune kucken
+↺ Remettre seulement les groupes ¦ ↺ Just d’Gruppen zrécksetzen
+↻ Relancer le contrôle ¦ ↻ D’Kontroll nach eng Kéier starten
+▶ Ouvrir le mode simple ¦ ▶ Den einfache Modus opmaachen
+♿ Voir les réglages de toute l’app ¦ ♿ D’Astellunge vun der ganzer App kucken
+⤓ Exporter ce réglage ¦ ⤓ Dës Astellung exportéieren
+＋ Créer une forme… ¦ ＋ Eng Form erstellen…
+＋ Nouvelle branche ¦ ＋ Neien Zweig
+＋ Nouvelle forme… ¦ ＋ Nei Form…
+＋ Nouvelle observation (fiches d’animaux) ¦ ＋ Nei Observatioun (Déierefichen)
+＋ Nouvelle étiquette ¦ ＋ Nei Etikett
+🌳 L’arbre ¦ 🌳 De Bam
+🎂 Âges ¦ 🎂 Alter
+🎤 Dictée vocale ¦ 🎤 Spriechdictée
+🎯 Élément choisi ¦ 🎯 Gewielt Element
+👁 Aperçu : le même réglage partout ¦ 👁 Virschau: déi selwecht Astellung iwwerall
+👁 Aperçu vivant ¦ 👁 Live-Virschau
+👁 Essayer ici ¦ 👁 Hei probéieren
+👁＋ Observation · 🩺＋ Santé · 📍 Trajet GPS · 🔖 Marque ¦ 👁＋ Observatioun · 🩺＋ Gesondheet · 📍 GPS-Streck · 🔖 Markéierung
+👤 Sur la fiche ¦ 👤 Op der Fiche
+👥 Les personnes ¦ 👥 D’Persounen
+📊 Moyennes de la famille ¦ 📊 Duerchschnëtter vun der Famill
+📜 Sépia ¦ 📜 Sepia
+📦 Quoi ¦ 📦 Wat
+📷 Les photos ¦ 📷 D’Fotoen
+🔗 Relier ce dossier ¦ 🔗 Dësen Dossier verbannen
+🔴 moins de ¦ 🔴 manner wéi
+🔴 naissance plus tard que ¦ 🔴 Gebuert méi spéit wéi
+🔷 Formes des avatars ¦ 🔷 Forme vun den Avataren
+🖨 Imprimer la liste ¦ 🖨 D’Lëscht drécken
+🗂 Les copies ¦ 🗂 D’Kopien
+🗑 Enlever l’élément choisi ¦ 🗑 Dat gewielt Element ewechhuelen
+🟠 au-delà de ¦ 🟠 iwwer
+🟡 au-delà de ¦ 🟡 iwwer
+🟡 plus de ¦ 🟡 méi wéi
+🟡 écart de plus de ¦ 🟡 Ofstand vu méi wéi
+🦮 Lecteur d’écran ¦ 🦮 Ecranlieser
+🪙 Convertisseur d’autrefois ¦ 🪙 Ëmrechner vu fréier
+C’est ton anniversaire ! ¦ Et ass däi Gebuertsdag!
+{name} a {n} ans aujourd’hui ! ¦ {name} gëtt haut {n} Joer!
+Il est né {details}. ¦ Hien ass {details} gebuer.
+Elle est née {details}. ¦ Si ass {details} gebuer.
+{a} et {b} se sont mariés il y a {n} ans ¦ {a} an {b} hu virun {n} Joer bestuet
+{name} aurait eu {n} ans aujourd’hui ¦ {name} wier haut {n} Joer al ginn
+On se souvient de {name} ¦ Mir erënneren eis un {name}
+Elle nous a quittés {details}, il y a {n} ans. ¦ Si huet eis {details} verlooss, virun {n} Joer.
+Il nous a quittés {details}, il y a {n} ans. ¦ Hien huet eis {details} verlooss, virun {n} Joer.
+ton anniversaire ¦ däi Gebuertsdag
+Elle aurait eu {n} ans ¦ Si wier {n} Joer al ginn
+Il aurait eu {n} ans ¦ Hie wier {n} Joer al ginn
+Tu auras {n} ans ¦ Du gëss {n} Joer
+Elle aura {n} ans ¦ Si gëtt {n} Joer
+Il aura {n} ans ¦ Hie gëtt {n} Joer
+Mariés ici ¦ Hei bestuet
+Né·es ici ¦ Hei gebuer
+Mort·es ici ¦ Hei gestuerwen
+Bravo ! C’est {name} ({rel}). ¦ Bravo! Dat ass {name} ({rel}).
+Bravo ! C’est {name}. ¦ Bravo! Dat ass {name}.
+toi ¦ du
+Avec toi ({n}) ¦ Mat dir ({n})
+Ses photos ({n}) ¦ Seng Fotoen ({n})
+Sur la photo : {names}. ¦ Op der Foto: {names}.
+=personne trouvée ¦ fonnt Persoun|fonnt Persounen
+Icône du gros bouton ¦ Ikon vum grousse Knäppchen
+Un cadre ¦ E Kader
+Écris le mot ¦ Schreif d’Wuert
+Choisis la maison ¦ Wiel d’Haus
+Choisis la personne ¦ Wiel d’Persoun
+Choisis la photo ¦ Wiel d’Foto
+Choisis les photos ¦ Wiel d’Fotoen
+Choisis le film ¦ Wiel de Film
+Choisis le son ¦ Wiel den Toun
+Choisis le lieu ¦ Wiel d’Plaz
+Écris le numéro ¦ Schreif d’Nummer
+Sa fiche ¦ Seng Fiche
+Un mot ¦ E Wuert
+Un film ¦ E Film
+Un lieu ¦ Eng Plaz
+Un instant… ¦ Ee Moment…
+Sans prénom ¦ Ouni Virnumm
+Un instant, on prépare l’arbre… ¦ Ee Moment, de Bam gëtt preparéiert…
+Un instant, on construit la maison… ¦ Ee Moment, d’Haus gëtt gebaut…
+La maison n’a pas pu être montrée. ¦ D’Haus konnt net gewise ginn.
+Monter d’un étage ¦ Ee Stack erop
+Descendre d’un étage ¦ Ee Stack erof
+Voir toute la maison ¦ D’ganzt Haus kucken
+Plus près ¦ Méi no
+Plus loin ¦ Méi wäit
+La visite ¦ De Rondgang
+Étage ¦ Stack
+Il se passe quelque chose aujourd’hui ! ¦ Haut geschitt eppes!
+Continue… encore un peu ¦ Maach weider… nach e bëssen
+On ne connaît pas encore ses parents ¦ Seng Elteren si nach net bekannt
+Voir sa fiche ¦ Seng Fiche kucken
+Pas d’enfants connus ¦ Keng bekannt Kanner
+Plus gros ¦ Méi grouss
+Plus de monde ¦ Méi Leit
+Photo d’avant ¦ Viregt Foto
+Cacher les noms ¦ D’Nimm verstoppen
+Qui est là ? ¦ Wien ass do?
+Arrêter le défilement ¦ D’Diashow stoppen
+Défilement tout seul ¦ Automatesch ofspillen
+Ses maris ¦ Hir Männer
+Son mari ¦ Hire Mann
+Ses femmes ¦ Seng Fraen
+Sa femme ¦ Seng Fra
+Son conjoint ¦ Säi Partner
+Sa sœur ¦ Seng Schwëster
+Son frère ¦ Säi Brudder
+Ses frères et sœurs ¦ Seng Bridder a Schwësteren
+Écouter son histoire ¦ Seng Geschicht nolauschteren
+Voir dans l’arbre ¦ Am Bam kucken
+Ses parents ¦ Seng Elteren
+Son parent ¦ Säin Elterendeel
+Ses enfants ¦ Seng Kanner
+Son enfant ¦ Säi Kand
+Par famille ¦ No Famill
+Par prénom ¦ No Virnumm
+La famille d’aujourd’hui ¦ D’Famill vun haut
+Touche la première lettre du prénom. ¦ Dréck op den éischte Buschtaf vum Virnumm.
+Touche la personne qui regarde. ¦ Dréck op d’Persoun, déi kuckt.
+Tape un prénom ou un nom ¦ Tipp e Virnumm oder en Numm
+Effacer une lettre ¦ E Buschtaf läschen
+J’écoute… ¦ Ech lauschteren…
+Je n’ai pas bien entendu. Réessaie, ou utilise le clavier. ¦ Ech hunn net gutt héieren. Probéier nach eng Kéier, oder benotz d’Tastatur.
+La dictée n’a pas marché. Utilise le clavier. ¦ D’Dictée huet net funktionéiert. Benotz d’Tastatur.
+Voir la photo ¦ D’Foto kucken
+🎈 Bientôt ¦ 🎈 Geschwënn
+Dis d’abord qui regarde : l’app montrera ta famille. ¦ So fir d’éischt, wien kuckt: d’App weist deng Famill.
+Tes conjoints ¦ Deng Partner
+Ta femme ¦ Deng Fra
+Ton mari ¦ Däi Mann
+Tes parents ¦ Deng Elteren
+Tes grands-parents ¦ Deng Grousselteren
+Tes enfants ¦ Deng Kanner
+Tes petits-enfants ¦ Deng Enkelkanner
+Tes arrière-petits-enfants ¦ Deng Urenkelkanner
+Personne n’est encore relié dans l’arbre. ¦ Nach keng Persoun ass am Bam verbonnen.
+Ton anniversaire ¦ Däi Gebuertsdag
+Les anniversaires qui arrivent ¦ D’Gebuertsdeeg, déi kommen
+Pas de date de naissance connue pour l’instant. ¦ Fir de Moment kee bekannte Gebuertsdatum.
+Voir les photos ¦ D’Fotoe kucken
+Il faut au moins trois portraits pour jouer. ¦ Et brauch mindestens dräi Portraite fir ze spillen.
+Un autre portrait ¦ En anere Portrait
+Écouter l’heure ¦ D’Auerzäit nolauschteren
+Écouter le numéro ¦ D’Nummer nolauschteren
+Tape le code pour quitter ¦ Tipp de Code fir erauszegoen
+Arrêter ¦ Stoppen
+Les gros boutons : avancer, reculer, tourner. On passe par les portes. ¦ Déi grouss Knäppercher: no vir, no hannen, dréinen. Et geet een duerch d’Dieren.
+On voit déjà le plus de monde possible. ¦ Du gesäis schonn esou vill Leit wéi méiglech.
+Pas de frère ou de sœur après. ¦ Kee Brudder a keng Schwëster duerno.
+Pas de frère ou de sœur avant. ¦ Kee Brudder a keng Schwëster virdrun.
+Mode simple quitté. Tu retrouves l’app normale. ¦ Einfache Modus verlooss. Du bass zréck an der normaler App.
+Première fois : vérifie ces réglages, puis « ▶ Ouvrir le mode simple ». ¦ Éischt Kéier: kontrolléier dës Astellungen, dann „▶ Den einfache Modus opmaachen“.
+▶ Démarrer le mode simple ¦ ▶ Den einfache Modus starten
+⚙️ Préparer ¦ ⚙️ Preparéieren
+Ta couleur ¦ Deng Faarf
+La personne ¦ D’Persoun
+⚠️ Pas encore de photo de cette personne : le cadre est caché ¦ ⚠️ Nach keen Foto vun dëser Persoun: de Kader ass verstoppt
+Écrite toute seule (nombre de photos, souvenirs du jour) ¦ Automatesch geschriwwen (Zuel vu Fotoen, Erënnerunge vum Dag)
+Le mot ¦ D’Wuert
+Icône du cadre ¦ Ikon vum Kader
+↺ Remettre ce cadre comme au départ ¦ ↺ Dëse Kader zrécksetzen wéi am Ufank
+Retirer ce cadre ¦ Dëse Kader ewechhuelen
+La photo ¦ D’Foto
+Le film ¦ De Film
+Le son ¦ Den Toun
+Le lieu ¦ D’Plaz
+Choisis un lieu… ¦ Wiel eng Plaz…
+Aucun lieu dans l’arbre pour l’instant (naissances, mariages, photos). ¦ Fir de Moment keng Plaz am Bam (Gebuerten, Bestietnesser, Fotoen).
+Le numéro ¦ D’Nummer
+Montre la famille de la personne qui regarde (ses parents, ses enfants, ses petits-enfants…). ¦ Weist d’Famill vun der Persoun, déi kuckt (hir Elteren, hir Kanner, hir Enkelkanner…).
+Les anniversaires des vivants, du plus proche au plus lointain. ¦ D’Gebuertsdeeg vun de Liewegen, vum nooste bis zum wäitsten.
+Un portrait, trois prénoms : il faut trouver le bon. Il faut au moins trois portraits. ¦ E Portrait, dräi Virnimm: de richtege muss fonnt ginn. Et brauch mindestens dräi Portraiten.
+Toutes les photos, dans le désordre. ¦ All d’Fotoen, duercherneen.
+Propre au mode simple ¦ Just fir den einfache Modus
+✕ Fermer l’essai ¦ ✕ De Versuch zoumaachen
+Daltonisme propre au mode simple ¦ Faarweblannheet just fir den einfache Modus
+Contraste fort dans le mode simple ¦ Staarke Kontrast am einfache Modus
+Moins d’animations dans le mode simple ¦ Manner Animatiounen am einfache Modus
+✓ Appliqué ¦ ✓ Ugewannt
+Personne de l’arbre ¦ Persoun aus dem Bam
+Le contraste fort est allumé : les couleurs choisies ici reviendront quand tu l’éteindras. ¦ De staarke Kontrast ass un: déi hei gewielt Faarwe komme zréck, wann s du en ausmécht.
+✓ très lisible ¦ ✓ ganz liesbar
+Jamais moins de 22 px. ¦ Ni manner wéi 22 px.
+Comme l’app ¦ Wéi d’App
+↺ Remettre la disposition comme au départ ¦ ↺ D’Disposition zrécksetzen wéi am Ufank
+ℹ️ Le « mode confidentialité » de l’app est allumé : les vivants sont montrés par leur prénom seulement. ¦ ℹ️ De „Privatmodus“ vun der App ass un: d’Lieweg ginn just mat hirem Virnumm gewisen.
+Les branches apparaîtront quand l’arbre sera lu. ¦ D’Zweeger erschéngen, soubal de Bam gelies ass.
+Remettre dans le mode simple ¦ Zréck an den einfache Modus setzen
+🔒 Un code est enregistré (il est gardé caché, même pour l’app). Tape 4 chiffres pour le changer. ¦ 🔒 E Code ass gespäichert (e bleift verstoppt, och fir d’App). Tipp 4 Ziffere fir en z’änneren.
+Coupé : cet appareil garde ses propres réglages du mode simple. ¦ Aus: dësen Apparat behält seng eegen Astellunge vum einfache Modus.
+⚠️ À corriger ¦ ⚠️ Ze korrigéieren
+⚠️ Pas assez lisible ¦ ⚠️ Net liesbar genuch
+Essai fermé : c’est ainsi qu’on quitte le mode simple. ¦ Versuch zougemaach: esou verléisst een den einfache Modus.
+La photo du gros bouton ¦ D’Foto vum grousse Knäppchen
+Les photos du gros bouton ¦ D’Fotoe vum grousse Knäppchen
+Le film du gros bouton ¦ De Film vum grousse Knäppchen
+Le son du gros bouton ¦ Den Toun vum grousse Knäppchen
+La police des gros boutons ¦ D’Schrëft vun de grousse Knäppercher
+La police du mode simple ¦ D’Schrëft vum einfache Modus
+Il faut garder au moins un gros bouton. ¦ Du muss mindestens ee grousse Knäppchen behalen.
+Code de sortie enregistré (gardé caché). ¦ Ausgangscode gespäichert (verstoppt gehal).
+Retour à l’écran d’avant ¦ Zréck op de viregen Ecran
+Âges ¦ Alter
+Lieux mal placés ¦ Falsch placéiert Plazen
+Baptême loin ¦ Daf wäit ewech
+Lieux contradictoires ¦ Widderspréchlech Plazen
+une mauvaise année de décès (1862 au lieu de 1882 ?), ou un homonyme pris pour le père. Regarde l’acte de décès du père. ¦ e falscht Doudesjoer (1862 amplaz 1882?), oder en Homonym, deen als Papp geholl gouf. Kuck den Doudesakt vum Papp.
+une erreur de date, ou la mère confondue avec une homonyme (une tante, une cousine). Regarde l’acte de naissance de l’enfant. ¦ en Datumsfeeler, oder d’Mamm mat enger Homonym verwiesselt (eng Tatta, eng Kusinn). Kuck de Gebuertsakt vum Kand.
+une génération confondue (la grand-mère prise pour la mère), ou une année mal lue. ¦ eng Generatioun verwiesselt (d’Bomi als Mamm geholl), oder e falsch gelieste Joer.
+une génération sautée, ou une année mal lue. ¦ eng iwwersprongen Generatioun, oder e falsch gelieste Joer.
+une mauvaise date de décès, ou le mariage d’un homonyme. ¦ e falschen Doudesdatum, oder d’Bestietnes vun engem Homonym.
+deux dates inversées, ou une année mal recopiée. ¦ zwee Datumen ëmgedréint, oder e falsch ofgeschriwwent Joer.
+un chiffre mal lu (31 au lieu de 21) ou un mois mal recopié. ¦ eng falsch geliesen Ziffer (31 amplaz 21) oder e falsch ofgeschriwwene Mount.
+la naissance d’un parent prise pour la sienne, ou un homonyme. ¦ d’Gebuert vun engem Elterendeel als seng eege geholl, oder en Homonym.
+des jumeaux mal datés, ou un enfant rattaché aux mauvais parents. ¦ Zwillinge mat falschem Datum, oder e Kand mat de falschen Elteren verbonnen.
+la même personne saisie deux fois : compare les deux fiches avant de les fusionner. ¦ déi selwecht Persoun zweemol agedroen: vergläich déi zwou Fichen, ier s du se fusionéiers.
+une commune homonyme d’un autre département, ou des coordonnées inversées. ¦ eng Gemeng mam selwechten Numm an engem anere Departement, oder ëmgedréint Koordinaten.
+deux homonymes confondus dans une seule fiche. ¦ zwee Homonymen an enger eenzeger Fiche verwiesselt.
+une commune homonyme d’un autre département. ¦ eng Gemeng mam selwechten Numm an engem anere Departement.
+les deux dates inversées. ¦ déi zwee Datumen ëmgedréint.
+un tiret tapé par erreur devant l’année. ¦ e Bindestréch aus Versinn virum Joer getippt.
+un homonyme pris pour le conjoint, ou une fiche rattachée une génération trop haut ou trop bas. ¦ en Homonym, deen als Partner geholl gouf, oder eng Fiche, déi eng Generatioun ze héich oder ze déif verbonnen ass.
+un chiffre mal lu par la machine (1/7, 3/8, 5/6), ou un âge déclaré au hasard par la famille : regarde l’image du recensement. ¦ eng Ziffer, déi d’Maschinn falsch gelies huet (1/7, 3/8, 5/6), oder en Alter, deen d’Famill op gutt Gléck uginn huet: kuck d’Bild vun der Vollekszielung.
+un nom de commune mal lu ou abrégé (« St » pour Saint) : regarde l’image du recensement. ¦ e falsch geliesenen oder ofgekierzte Gemengennumm („St“ fir Saint): kuck d’Bild vun der Vollekszielung.
+la case du genre mal lue, ou une autre personne du ménage : regarde l’image du recensement. ¦ d’Geschlechtsfeld falsch gelies, oder eng aner Persoun aus dem Stot: kuck d’Bild vun der Vollekszielung.
+un lien mal lu (fils / fille), un ménage mal découpé, ou une fiche pas encore reliée : regarde l’image du recensement. ¦ eng falsch gelies Relatioun (Jong / Duechter), e schlecht opgedeelte Stot, oder eng Fiche, déi nach net verbonnen ass: kuck d’Bild vun der Vollekszielung.
+J’ai vérifié dans l’acte : c’est bien ça ¦ Ech hunn am Akt nogekuckt: et stëmmt
+La date est approximative (« vers… ») ¦ Den Datum ass ongeféier („vers…“)
+Ce sont deux personnes différentes ¦ Dat sinn zwou verschidde Persounen
+Le lieu est juste ¦ D’Plaz stëmmt
+J’ai regardé l’image : ma fiche est juste, SocFace a mal lu ¦ Ech hunn d’Bild gekuckt: meng Fiche stëmmt, SocFace huet falsch gelies
+Ce n’est pas la même personne (homonyme) ¦ Dat ass net déi selwecht Persoun (Homonym)
+L’âge déclaré au recensement était approximatif ¦ Den Alter, deen an der Vollekszielung uginn ass, war ongeféier
+Personne sans nom ¦ Persoun ouni Numm
+Dates changées ¦ Datumen geännert
+Écartée ¦ Op d’Säit geluecht
+Plus d’alerte ¦ Keen Alarm méi
+Le contrôle ne trouve plus ce problème ¦ D’Kontroll fënnt dëse Problem net méi
+Pas une erreur ¦ Kee Feeler
+Toute la base ¦ Déi ganz Datebank
+Mes ancêtres (Sosa) ¦ Meng Virfahren (Sosa)
+Tous les lieux ¦ All Plazen
+Aucune alerte écartée ¦ Keen Alarm op d’Säit geluecht
+Rien avec ces filtres ¦ Näischt mat dëse Filteren
+Retire un filtre pour revoir les autres alertes. ¦ Huel e Filter ewech, fir déi aner Alarmer nees ze gesinn.
+Aucune incohérence trouvée dans tes fiches. Bravo ! ¦ Keng Inkohärenz an denge Fiche fonnt. Bravo!
+Ouvre l’événement dans la fiche pour corriger sa date. ¦ Maach d’Evenement an der Fiche op, fir säin Datum ze korrigéieren.
+PLACER SUR LA CARTE ¦ OP D’KAART SETZEN
+Choisis la commune : ses coordonnées seront reprises ¦ Wiel d’Gemeng: hir Koordinate ginn iwwerholl
+Ce lieu n’a pas de coordonnées : choisis une commune de la liste. ¦ Dës Plaz huet keng Koordinaten: wiel eng Gemeng aus der Lëscht.
+CONTRÔLE DE LA BASE ¦ KONTROLL VUN DER DATEBANK
+Ta raison ¦ Däi Grond
+Ne plus signaler ¦ Net méi mellen
+Écris ta raison, ou choisis-en une. ¦ Schreif däi Grond, oder wiel een.
+Détail ¦ Detail
+Fermer (Échap) ¦ Zoumaachen (Esc)
+La famille ¦ D’Famill
+Contrôle impossible pour l’instant. ¦ Kontroll fir de Moment net méiglech.
+des fiches sans alerte ¦ vun de Fichen ouni Alarm
+Tout voir dans « ✅ Contrôle de la base » → ¦ Alles an „✅ Kontroll vun der Datebank“ kucken →
+Moyennes de la famille ¦ Duerchschnëtter vun der Famill
+Âge au mariage des hommes ¦ Alter vun de Männer beim Bestietnes
+des femmes ¦ vun de Fraen
+Écart entre naissances ¦ Ofstand tëscht de Gebuerten
+Pas assez de dates ¦ Net genuch Datumen
+: ni conjoint, ni enfant, ni événement, ni note, ni média, ni source (souvent laissées par un ancien logiciel ou un import). Une copie de sécurité de la base est faite juste avant. ¦ : kee Partner, kee Kand, keen Evenement, keng Notiz, kee Medium, keng Quell (dacks vun enger aler Software oder engem Import hannerlooss). Eng Sécherheetskopie vun der Datebank gëtt direkt virdru gemaach.
+Elles ne contiennent aucune information. Une copie de sécurité de la base est faite juste avant. ¦ Si enthalen keng Informatioun. Eng Sécherheetskopie vun der Datebank gëtt direkt virdru gemaach.
+Familles vides ¦ Eidel Famillen
+Supprimer la famille vide ¦ Déi eidel Famill läschen
+Supprimer la famille vide ? ¦ Déi eidel Famill läschen?
+Supprimer les familles vides ¦ Déi eidel Famille läschen
+À la fermeture ¦ Beim Zoumaachen
+À la main ¦ Mat der Hand
+Avant une restauration ou une fusion ¦ Virun enger Restauratioun oder enger Fusioun
+Automatique ¦ Automatesch
+Avant une mise à jour ¦ Virun engem Update
+Jamais tout seul (seulement à la main) ¦ Ni automatesch (just mat der Hand)
+Chaque jour ¦ All Dag
+Chaque semaine ¦ All Woch
+Vérifiée ¦ Kontrolléiert
+Échec ¦ Feelgeschloen
+Dossier absent ¦ Dossier feelt
+La sauvegarde automatique est éteinte : choisis « Chaque jour » ci-dessous. ¦ Den automatesche Backup ass aus: wiel „All Dag“ hei ënnendrënner.
+Prochaine : à la fermeture de l’app (si quelque chose a changé). ¦ Nächsten: beim Zoumaache vun der App (wann eppes geännert huet).
+Aucune copie dans ce dossier pour l’instant. ¦ Fir de Moment keng Kopie an dësem Dossier.
+Abîmée ¦ Beschiedegt
+⚠️ Dossier introuvable pour l’instant (clé débranchée ?). ¦ ⚠️ Dossier fir de Moment net fonnt (USB-Stick erausgezunn?).
+Dossier trouvé ¦ Dossier fonnt
+Dossier synchronisé en ligne ¦ Dossier online synchroniséiert
+Chacune dans son sous-dossier, pour qu’elles ne s’effacent pas l’une l’autre. ¦ All eenzel an hirem Ënnerdossier, fir datt se sech net géigesäiteg läschen.
+Avec les médias ¦ Mat de Medien
+Toutes mes généalogies ¦ All meng Genealogien
+État indisponible. ¦ Status net disponibel.
+Dossier introuvable (clé débranchée ?). Rien n’est bloqué. ¦ Dossier net fonnt (USB-Stick erausgezunn?). Näischt ass blockéiert.
+Éteinte : rien ne se fait tout seul. ¦ Aus: näischt geschitt automatesch.
+⚙️ Régler ¦ ⚙️ Astellen
+Lieu (texte) ¦ Plaz (Text)
+Sorte d’événement ¦ Zort Evenement
+Posée sur ¦ Geluecht op
+l’autre ordinateur ¦ deen anere Computer
+À choisir ¦ Ze wielen
+Sur cet ordinateur ¦ Op dësem Computer
+Garder la mienne ¦ Meng behalen
+Prendre l’autre ¦ Déi aner huelen
+Garder les deux ¦ Allebéid behalen
+Dossier branché ¦ Dossier verbonnen
+💻 L’autre : ¦ 💻 Deen aneren:
+L’autre ordinateur n’est pas encore passé par ce dossier. ¦ Deen anere Computer war nach net an dësem Dossier.
+Dossier introuvable pour l’instant (clé débranchée ?). Rien n’est perdu : tes changements partiront la prochaine fois. ¦ Dossier fir de Moment net fonnt (USB-Stick erausgezunn?). Näischt ass verluer: deng Ännerunge ginn déi nächst Kéier fort.
+Paquets mis de côté ¦ Op d’Säit geluecht Paqueten
+Tu as annulé leur fusion : ils ne sont plus repris tout seuls. « Revoir » pour choisir changement par changement. ¦ Du hues hir Fusioun réckgängeg gemaach: si ginn net méi automatesch iwwerholl. „Nokucken“ fir Ännerung fir Ännerung ze wielen.
+Revoir ¦ Nokucken
+Dernières fusions ¦ Lescht Fusiounen
+Annulée ¦ Réckgängeg gemaach
+Écris le chemin du dossier partagé. ¦ Schreif de Wee vum gedeelten Dossier.
+✓ Dossier relié. Sur l’autre ordinateur, ouvre « depart.db » qui s’y trouve, puis choisis ce même dossier. ¦ ✓ Dossier verbonnen. Um anere Computer, maach „depart.db“ op, deen do dran ass, duerno wiel dee selwechten Dossier.
+Dossier partagé retiré de cet ordinateur ¦ Gedeelten Dossier vun dësem Computer ewechgeholl
+Ta version gardée ¦ Deng Versioun behalen
+Version de l’autre ordinateur prise ¦ Versioun vum anere Computer geholl
+Les deux notes gardées ¦ Allebéid Notize behalen
+Fusion annulée : ses paquets sont mis de côté ¦ Fusioun réckgängeg gemaach: hir Päck sinn op d’Säit geluecht
+🔒 Généalogie ouverte ailleurs ¦ 🔒 Genealogie soss anzwousch op
+Ouvrir quand même ¦ Trotzdem opmaachen
+⏹ Arrêter la lecture ¦ ⏹ D’Virliesen stoppen
+🔊 Lire la fiche ¦ 🔊 D’Fiche virliesen
+Type de daltonisme simulé ¦ Typ vu simuléierter Faarfblannheet
+Description de l’image ¦ Beschreiwung vum Bild
+Tout afficher ¦ Alles weisen
+Ta machine ne propose pas la dictée ici. Sur Mac, utilise la dictée du système : touche 🎤 ou deux fois Fn. Sur Windows : touche Windows + H. ¦ Däin Apparat bitt hei keen Diktat un. Um Mac, benotz den Diktat vum System: Tast 🎤 oder zweemol Fn. Ënner Windows: Windows-Tast + H.
+Je t’écoute… ¦ Ech lauschteren…
+Aucun micro trouvé : branche-en un ou vérifie les réglages du son. ¦ Kee Mikro fonnt: schléiss een un oder kontrolléier d’Tounastellungen.
+La dictée de ce navigateur a besoin d’Internet. Sur Mac, la dictée du système marche hors ligne : touche 🎤 ou deux fois Fn. ¦ Den Diktat vun dësem Browser brauch Internet. Um Mac geet den Diktat vum System offline: Tast 🎤 oder zweemol Fn.
+Choisis la sorte de daltonisme : l’app corrige ses couleurs pour que tu les distingues mieux. Les petites pastilles montrent comment ces couleurs sont vues. ¦ Wiel d’Aart vu Faarfblannheet: d’App korrigéiert hir Faarwen, fir datt s de se besser ënnerscheede kanns. Déi kleng Punkte weisen, wéi dës Faarwe gesi ginn.
+Moins de choses qui bougent : pas d’animations, pas de glissements, pas de défilement animé. ¦ Manner Saachen, déi sech beweegen: keng Animatiounen, kee Rutschen, kee animéiert Scrollen.
+Ton ordinateur demande déjà moins d’animations : c’est respecté. ¦ Däi Computer freet schonn no manner Animatiounen: dat gëtt respektéiert.
+Durée des messages ¦ Dauer vun de Messagen
+Les messages restent affichés ¦ D’Message bleiwe gewisen
+2 fois plus (12 s) ¦ 2 Mol méi laang (12 s)
+3 fois plus (18 s) ¦ 3 Mol méi laang (18 s)
+Voix française de l’ordinateur ¦ Franséisch Stëmm vum Computer
+Comment faire lire la description des images par un lecteur d’écran ? ¦ Wéi loossen ech d’Beschreiwung vun de Biller vun engem Ecranlieser virliesen?
+Pas disponible ici (voir au-dessus). ¦ Hei net disponibel (kuck uewendriwwer).
+Aperçu : la page prendra cette taille quand tu lâcheras le curseur. ¦ Virschau: d’Säit kritt dës Gréisst, wann s de de Schieber lassléiss.
+Espacements conseillés appliqués. ¦ Recommandéiert Ofstänn ugewannt.
+Enregistrement impossible : la place du navigateur est pleine ? ¦ Späicheren net méiglech: ass d’Plaz vum Browser voll?
+Cette forme n’est pas lisible. ¦ Dës Form ass net liesbar.
+Trop de formes enregistrées : supprime-en avant d’en ajouter. ¦ Ze vill gespäichert Formen: läsch der, ier s de der derbäisetz.
+Liste des formes enregistrée. ¦ Lëscht vun de Forme gespäichert.
+Liste des formes remise comme au départ ¦ Lëscht vun de Forme wéi am Ufank zréckgesat
+Écusson ¦ Wope-Schëld
+Ce fichier est trop gros (2 Mo au plus). ¦ Dëse Fichier ass ze grouss (maximal 2 MB).
+Ce n’est pas un dessin SVG lisible. ¦ Dat ass keng liesbar SVG-Zeechnung.
+Ce dessin est plat : il n’a pas de surface. ¦ Dës Zeechnung ass flaach: si huet keng Fläch.
+Ce dessin n’a pas pu être nettoyé. ¦ Dës Zeechnung konnt net gebotzt ginn.
+Nouvelle forme d’avatar ¦ Nei Avatar-Form
+APPARENCE · FORME DES AVATARS ¦ AUSGESINN · FORM VUN DEN AVATAREN
+Ex. Blason, Médaillon, Feuille… ¦ Z. B. Wopen, Medaillon, Blat…
+Chercher… (cœur, arbre, blason, étoile) ¦ Sichen… (Häerz, Bam, Wopen, Stär)
+Chercher une forme ¦ Eng Form sichen
+Formes de la bibliothèque ¦ Forme vun der Bibliothéik
+Cadre de dessin du polygone ¦ Zeechefeld vum Polygon
+📚 Bibliothèque ¦ 📚 Bibliothéik
+✏️ Dessiner un polygone ¦ ✏️ E Polygon zeechnen
+Modèles ¦ Modeller
+↶ Enlever le dernier point ¦ ↶ De leschte Punkt ewechhuelen
+ou colle le code SVG ici ¦ oder fëg de SVG-Code hei an
+Lire ce SVG ¦ Dësen SVG liesen
+Créer la forme ¦ D’Form erstellen
+Pose au moins 3 points. ¦ Setz op d’mannst 3 Punkten.
+Choisis ou colle un dessin SVG. ¦ Wiel eng SVG-Zeechnung oder fëg se an.
+Choisis une forme dans la bibliothèque. ¦ Wiel eng Form aus der Bibliothéik.
+SVG importé ¦ Importéierten SVG
+Il faut un fichier SVG (.svg). ¦ Et brauch e SVG-Fichier (.svg).
+📁 Glisse un fichier SVG ici, colle-le (⌘V) ou choisis-le ¦ 📁 Zéi e SVG-Fichier heihin, fëg en an (⌘V) oder wiel en
+Seuls ses chemins pleins sont gardés : pas de script, d’image ni de texte. ¦ Nëmmen hir voll Pied ginn behalen: keen Script, kee Bild a keen Text.
+Choisis d’abord un dessin SVG. ¦ Wiel fir d’éischt eng SVG-Zeechnung.
+Choisis d’abord une forme. ¦ Wiel fir d’éischt eng Form.
+Clique dans le cadre pour poser les points, dans l’ordre du tour. Glisse un point pour le déplacer ; double-clic sur un point pour l’enlever. ¦ Klick an de Kader fir d’Punkten ze setzen, an der Rei ronderëm. Zéi e Punkt fir en ze réckelen; Duebelklick op e Punkt fir en ewechzehuelen.
+Un dessin SVG (logo, pictogramme…) : seuls ses chemins pleins sont gardés. Les scripts, liens, images, textes et styles sont retirés. ¦ Eng SVG-Zeechnung (Logo, Piktogramm…): nëmmen hir voll Pied ginn behalen. Scripten, Linken, Biller, Texter a Stiler ginn ewechgeholl.
+Revenir en arrière (Ctrl+Z) ¦ Zréckgoen (Ctrl+Z)
+Revenir en avant (Ctrl+Maj+Z ou Ctrl+Y) ¦ No vir goen (Ctrl+Maj+Z oder Ctrl+Y)
+Comme dans les blocs (01) et sur les fiches (initiales). ¦ Wéi an de Blocks (01) an op de Fichen (Initialen).
+Clique sur « Appliquer » pour utiliser cette forme. ¦ Klick op „Uwenden“ fir dës Form ze benotzen.
+＋ Nouveau projet ¦ ＋ Neie Projet
+＋ Nouvelle battue ¦ ＋ Nei Sichaktioun
+＋ Nouveau tableau ¦ ＋ Neien Tableau
+Mes généalogies (changer, en créer une autre) ¦ Meng Genealogien (wiesselen, eng aner erstellen)
+L’ordre de l’app, tous les boutons montrés sauf 🧓 et les raccourcis vers les outils (cachés au départ) ¦ D’Rei vun der App, all d’Knäppercher gewisen ausser 🧓 an den Ofkierzunge fir d’Tools (am Ufank verstoppt)
+Le clic ouvre ¦ De Klick mécht op
+Enquêtes, sur cet onglet ¦ Ënnersichungen, op dësem Reiter
+: chaque écran garde le dessin que tu connais. ¦ : all Ecran behält d’Ausgesinn, dat s de kenns.
+Un seul dessin partout ¦ Een Ausgesinn iwwerall
+Le style « archive » ¦ De Stil „Archiv“
+Va avec les blocs de l’app (traits noirs, coins droits). Plus sobre, moins coloré. ¦ Passt zu de Blocks vun der App (schwaarz Linnen, riicht Ecken). Méi schlicht, manner faarweg.
+Où ? ¦ Wou?
+Nouvelle forme choisie ¦ Nei Form ausgewielt
+« Liste | Fiches » est dans la barre au-dessus des enquêtes. ¦ „Lëscht | Fichen“ ass an der Bar iwwer den Ënnersichungen.
+« Liste | Fiches » est en bas de la colonne. ¦ „Lëscht | Fichen“ ass ënnen an der Kolonn.
+Ici pas de liste : « Liste | Fiches » ne concerne que Recherche, Enquêtes et les autres listes. ¦ Hei gëtt et keng Lëscht: „Lëscht | Fichen“ betrëfft nëmmen d’Recherche, d’Ënnersichungen an déi aner Lëschten.
+à droite ¦ riets
+à gauche ¦ lénks
+Colonne à droite ¦ Kolonn riets
+Colonne à gauche ¦ Kolonn lénks
+Colonne de gauche remise comme au départ ¦ Lénks Kolonn wéi am Ufank zréckgesat
+Portraits remis comme au départ ¦ Portraite wéi am Ufank zréckgesat
+Designs remis comme au départ ¦ Designs wéi am Ufank zréckgesat
+Quel style pour les fiches ? ¦ Wéi ee Stil fir d’Fichen?
+Combien d’espace autour des choses ? ¦ Wéi vill Plaz ronderëm d’Saachen?
+Quelles icônes veux-tu ? ¦ Wéi eng Ikone wëlls du?
+Quel en-tête pour la fiche d’une personne ? ¦ Wéi eng Kopfzeil fir d’Fiche vun enger Persoun?
+Cases des arbres ¦ Felder vun de Stammbeem
+Quelles cases pour les arbres ? ¦ Wéi eng Felder fir d’Stammbeem?
+Les cases des personnes dans les arbres (Graphiques) : ascendants, descendants, sablier… ¦ D’Felder vun de Persounen an de Stammbeem (Grafiken): Virfahren, Nokommen, Sanduhr…
+Toutes pareilles : on ne voit pas d’un coup les hommes, les femmes ni les ancêtres directs. ¦ All d’selwecht: een gesäit net mat engem Bléck d’Männer, d’Fraen oder déi direkt Virfahren.
+Repérage immédiat ¦ Direkt erkennen
+Avec photo ¦ Mat Foto
+le portrait au-dessus du nom ¦ de Portrait iwwer dem Numm
+On reconnaît les visages ¦ Ee erkennt d’Gesiichter
+le nom seul ¦ nëmmen den Numm
+Les dates n’apparaissent qu’au survol (sauf si tu les remets). ¦ D’Datumer erschéngen nëmmen, wann een driwwer fiert (ausser du setz se nees dran).
+Largeur des cases ¦ Breet vun de Felder
+Couleurs du genre ¦ Faarwe vum Geschlecht
+Ce sont aussi les couleurs des portraits ronds (Apparence → 👤 Portraits : menu de choix, listes). Les changer ici les change partout. ¦ Dat sinn och d’Faarwe vun de ronne Portraiten (Ausgesinn → 👤 Portraiten: Auswielmenü, Lëschten). Wann s de se hei änners, änneren se iwwerall.
+Traits entre les cases ¦ Linnen tëscht de Felder
+Écrire les dates dans les cases ¦ D’Datumer an d’Felder schreiwen
+Les dates évitent de confondre deux Louise BORIE ; sans elles, l’arbre est plus léger (elles restent au survol). ¦ D’Datumer verhënneren, datt een zwou Louise BORIE verwiesselt; ouni si ass de Stammbam méi liicht (si bleiwen, wann een driwwer fiert).
+Petit badge Sosa sur la case ¦ Klenge Sosa-Badge um Feld
+Tu vois tout de suite le numéro de chaque ancêtre direct, utile pour parler d’un ancêtre (« le 6 »). ¦ Du gesäis direkt d’Nummer vun all direkte Virfahr, praktesch fir vun engem Virfahr ze schwätzen („den 6“).
+Quels boutons veux-tu ? ¦ Wéi eng Knäppercher wëlls du?
+Comment les choses apparaissent-elles ? ¦ Wéi erschéngen d’Saachen?
+Instantané ¦ Direkt
+L’apparition brusque peut surprendre : on ne voit pas d’où vient la fenêtre. ¦ Dat plëtzlecht Erschéngen ka iwwerraschen: een gesäit net, vu wou d’Fënster kënnt.
+doux et court (0,18 s) ¦ douce a kuerz (0,18 s)
+On suit ce qui se passe ¦ Ee verfollegt, wat geschitt
+Très léger temps d’attente (moins d’un quart de seconde). ¦ Ganz kuerz Waardezäit (manner wéi eng Véierelsekonn).
+Aucune animation ¦ Keng Animatioun
+rien ne bouge jamais ¦ näischt beweegt sech jee
+Le plus calme ¦ Dat Rouegst
+Les boutons s’enfoncent sous la souris ¦ D’Knäppercher ginn ënner der Maus agedréckt
+Montre que le bouton réagit avant même de cliquer. ¦ Weist, datt de Knäppchen reagéiert, nach ier s de klicks.
+Barre bleue du temps qui reste (messages H7) ¦ Blo Bar fir déi Zäit, déi bleift (H7-Messagen)
+Suivre le réglage « réduire les animations » de l’ordinateur ¦ Der Astellung „Animatioune reduzéieren“ vum Computer nogoen
+Comment séparer les lignes des listes ? ¦ Wéi d’Reie vun de Lëschten trennen?
+retouché ¦ nogebessert
+🎨 Designs au choix ¦ 🎨 Designs zur Auswiel
+La forme des éléments est rangée là où on s’en sert : ¦ D’Form vun den Elementer gëtt do agestallt, wou een se benotzt:
+🎨 le style des fiches ¦ 🎨 de Stil vun de Fichen
+Exporter ce réglage ¦ Dës Astellung exportéieren
+Nom de ce réglage : ¦ Numm vun dëser Astellung:
+Ce fichier n’est pas un réglage LCNDA (il n’est pas lisible). ¦ Dëse Fichier ass keng LCNDA-Astellung (en ass net liesbar).
+Ce fichier n’est pas un réglage LCNDA. ¦ Dëse Fichier ass keng LCNDA-Astellung.
+Ce réglage est vide. ¦ Dës Astellung ass eidel.
+MISE À JOUR ¦ AKTUALISÉIERUNG
+Téléchargement dans ton dossier « Téléchargements »… ¦ Eroflueden an däin Dossier „Downloads“…
+📁 Afficher dans le dossier ¦ 📁 Am Dossier weisen
+Impossible d’ouvrir le dossier. ¦ Den Dossier kann net opgemaach ginn.
+Impossible d’ouvrir le fichier. ¦ De Fichier kann net opgemaach ginn.
+Ouvre-le, puis glisse LCNDA dans « Applications » (à la place de l’ancienne). Ta généalogie ne bouge pas. ¦ Maach en op, duerno zéi LCNDA an „Applications“ (amplaz vun der aler Versioun). Deng Genealogie bleift wéi se ass.
+Ouvre-le et suis l’installation : elle remplace l’ancienne version. Ta généalogie ne bouge pas. Windows peut afficher « Windows a protégé votre ordinateur » : « Informations complémentaires » → « Exécuter quand même ». ¦ Maach en op a folleg der Installatioun: si ersetzt déi al Versioun. Deng Genealogie bleift wéi se ass. Windows weist vläicht „Windows a protégé votre ordinateur“: „Informations complémentaires“ → „Exécuter quand même“.
+Ouvre-le avec l’installateur de paquets (ou « sudo apt install ./ce-fichier.deb »). Ta généalogie ne bouge pas. ¦ Maach en mam Package-Installateur op (oder „sudo apt install ./ce-fichier.deb“). Deng Genealogie bleift wéi se ass.
+⤓ Télécharger ¦ ⤓ Eroflueden
+Voir les nouveautés ¦ D’Neiegkeete kucken
+↗ Voir les nouveautés ¦ ↗ D’Neiegkeete kucken
+Ne plus me prévenir pour cette version ¦ Mech fir dës Versioun net méi warnen
+Recherche de la dernière version… ¦ No der leschter Versioun gëtt gesicht…
+La recherche n’a pas abouti. ¦ D’Sich huet net geklappt.
+À jour ¦ Aktuell
+Pas d’installateur pour cet ordinateur dans cette version : regarde la page des nouveautés. ¦ Keen Installateur fir dëse Computer an dëser Versioun: kuck d’Säit vun den Neiegkeeten.
+↺ Me prévenir de nouveau pour cette version ¦ ↺ Mech fir dës Versioun nees warnen
+Le fichier va dans ton dossier « Téléchargements », son empreinte est vérifiée, puis tu l’ouvres pour installer. Ta généalogie ne bouge pas. ¦ De Fichier kënnt an däin Dossier „Downloads“, säi Fangerofdrock gëtt kontrolléiert, duerno méchs du en op fir z’installéieren. Deng Genealogie bleift wéi se ass.
+Ce que la carte montre ¦ Wat d’Kaart weist
+Naissances par décennie ¦ Gebuerten no Joerzéngt
+Prénoms les plus donnés ¦ Déi heefegst ginn Virnimm
+Âge au mariage ¦ Alter beim Bestietnes
+Liste | Fiches ¦ Lëscht | Fichen
+Minguo (Taïwan) ¦ Minguo (Taiwan)
+Tailte Éireann ¦ Tailte Éireann
+💾 Enregistrer le projet ¦ 💾 De Projet späicheren
+⤓ Exporter la vidéo (MP4 / WebM, plusieurs formats)… ¦ ⤓ De Video exportéieren (MP4 / WebM, méi Formater)…
+⤓ Exporter les sous-titres (.srt) ¦ ⤓ D’Ënnertitelen exportéieren (.srt)
+🔖 Copier les chapitres (pour YouTube) ¦ 🔖 D’Kapitele kopéieren (fir YouTube)
+✂️ Couper ici ¦ ✂️ Hei schneiden
+⟦ Commence ici ¦ ⟦ Fänkt hei un
+⟧ Finit ici ¦ ⟧ Hält hei op
+🔊 Séparer le son de l’image ¦ 🔊 Den Toun vum Bild trennen
+⌨️ Raccourcis du montage… ¦ ⌨️ Ofkierzunge vum Montage…
+🎥 Plusieurs caméras (calées par le son)… ¦ 🎥 Méi Kameraen (mam Toun synchroniséiert)…
+🗂 Un rush de la base… ¦ 🗂 E Rush aus der Datebank…
+＋ Son / musique ¦ ＋ Toun / Musek
+🎙 Enregistrer une voix off ¦ 🎙 Eng Off-Stëmm ophuelen
+💬 Sous-titre ici ¦ 💬 Ënnertitel hei
+🔖 Chapitre ici ¦ 🔖 Kapitel hei
+🪄 Modèle « La vie de… » ¦ 🪄 Modell „D’Liewe vum…“
+🪄 Modèle « Une famille » ¦ 🪄 Modell „Eng Famill“
+＋ Piste vidéo ¦ ＋ Videospur
+＋ Piste son ¦ ＋ Tounspur
+⏮ Au début ¦ ⏮ Un den Ufank
+◀ ◆ Image clé précédente ¦ ◀ ◆ Viregt Schlësselbild
+◆ ▶ Image clé suivante ¦ ◆ ▶ Nächst Schlësselbild
+🧲 Aimanter (marche / arrêt) ¦ 🧲 Aschnappen (un / aus)
+🎨 Couleurs du film ¦ 🎨 Faarwe vum Film
+🔊 Son du film ¦ 🔊 Toun vum Film
+🎞️ Le film (rotation, fondus) ¦ 🎞️ De Film (Rotatioun, Iwwerblendungen)
+Le dessin des personnes partout dans l’app : d’abord la forme, puis le portrait. Tant que tu ne touches à rien, ¦ Wéi d’Persounen iwwerall an der App gewise ginn: fir d’éischt d’Form, duerno de Portrait. Soulaang s de näischt ännerts,
+Une seule, qui vaut partout : la fiche, les listes, l’arbre, le menu de choix et les petits carrés numérotés des blocs. ¦ Eng eenzeg, déi iwwerall gëllt: d’Fiche, d’Lëschten, de Stammbam, den Auswielmenü an déi kleng nummeréiert Quadrater vun de Blocks.
+Les formes proposées dans « Forme des avatars » : coche celles à montrer, range-les en glissant ⠿ (ou ↑ ↓). Celles de l’app ne se suppriment pas : décoche-les pour les cacher. Les tiennes (✎) se modifient, se dupliquent, s’exportent. ¦ D’Formen, déi an „Form vun den Avataren“ proposéiert ginn: kräiz déi un, déi gewise solle ginn, zortéier se andeems de ⠿ zéis (oder ↑ ↓). Déi vun der App kann een net läschen: maach de Kräiz ewech, fir se ze verstoppen. Deng eege (✎) kann een änneren, duplizéieren, exportéieren.
+Créer une forme à partir de celle-ci ¦ Eng Form op Basis vun dëser erstellen
+Enregistrer l’ordre et les formes montrées ¦ D’Rei an déi gewise Forme späicheren
+La liste de départ : l’ordre de l’app et toutes les formes montrées (tes formes restent, à la fin) ¦ D’Lëscht vum Ufank: d’Rei vun der App an all d’Forme gewisen (deng Forme bleiwen, um Enn)
+Avec le portrait « Comme avant », la forme s’applique aux carrés numérotés et aux initiales des fiches. ¦ Mam Portrait „Wéi virdrun“ gëllt d’Form fir déi nummeréiert Quadrater an d’Initiale vun de Fichen.
+règle tout d’un coup (le rond unique et le carré de la fiche choisissent aussi la forme) ; tu peux ensuite changer chaque ligne (« retouché » s’affiche). ¦ stellt alles op eemol an (de Ronn eleng an de Quadrat vun der Fiche wielen och d’Form); duerno kanns de all Zeil änneren („nogebessert“ gëtt gewisen).
+Avec « Comme avant », chaque endroit garde son propre dessin (la forme ci-dessus s’applique quand même aux petits carrés numérotés et aux initiales des fiches). Pars du rond unique ou du carré de la fiche pour utiliser ces réglages. ¦ Mat „Wéi virdrun“ behält all Plaz säin eegent Ausgesinn (d’Form hei uewen gëllt trotzdem fir déi kleng nummeréiert Quadrater an d’Initiale vun de Fichen). Fänk mam Ronn eleng oder mam Quadrat vun der Fiche un, fir dës Astellungen ze benotzen.
+Un peu d’arrondi adoucit le carré sans le confondre avec un rond. Seulement pour la forme « Carré arrondi ». Double-clic sur le curseur : valeur de départ. ¦ E bësse Rondung mécht de Quadrat méi douce, ouni datt een e mat engem Ronn verwiesselt. Nëmme fir d’Form „Ofgeronnte Quadrat“. Duebelklick op de Schieber: Wäert vum Ufank.
+Plus grandes, elles se lisent mieux de loin et sur les petits ronds ; plus petites, le portrait paraît plus calme. Le chiffre est une part de la taille du portrait, donc ça reste juste aux 4 tailles. ¦ Méi grouss lies een se besser vu wäitem an op de klenge Ronnen; méi kleng gesäit de Portrait méi roueg aus. D’Zuel ass en Deel vun der Gréisst vum Portrait, also bleift et bei all 4 Gréissten richteg.
+Avec la couleur du genre, tu sais d’un coup d’œil si c’est un homme, une femme ou un animal, partout pareil. Une seule couleur, c’est plus sobre et plus « archive », comme le carré actuel de la fiche. ¦ Mat der Faarf vum Geschlecht gesäis de mat engem Bléck, ob et e Mann, eng Fra oder en Déier ass, iwwerall d’selwecht. Eng eenzeg Faarf ass méi schlicht a méi „Archiv“, wéi den aktuelle Quadrat vun der Fiche.
+Photos en noir et blanc ¦ Schwaarz-wäiss Fotoen
+Une photo, c’est plus parlant que deux lettres. Les initiales toujours, c’est plus régulier quand certaines photos sont floues ou mal cadrées. Le noir et blanc donne le même ton à toutes les photos, anciennes comme récentes (c’est ce que fait la fiche aujourd’hui). ¦ Eng Foto seet méi wéi zwee Buschtawen. Ëmmer Initiale gesinn méi regelméisseg aus, wann e puer Fotoen onschaarf oder schlecht ausgeschnidde sinn. Schwaarz-wäiss gëtt all de Fotoen dee selwechten Toun, al wéi nei (dat mécht d’Fiche haut).
+Deux lettres distinguent Joseph et Jean MARTIN. Une seule lettre est plus lisible sur les petits ronds de 22 px et met la famille en avant. ¦ Zwee Buschtawen ënnerscheeden de Joseph an de Jean MARTIN. Ee Buschtaw eleng ass besser liesbar op de klenge Ronne vun 22 px a stellt d’Famill an de Virdergrond.
+Mettre le numéro Sosa sur le portrait ¦ D’Sosa-Nummer op de Portrait setzen
+Tu repères tes ancêtres directs sans lire la ligne. Si tu trouves que ça charge trop, laisse-le éteint : le Sosa reste écrit à droite des listes. Il n’apparaît pas sur les portraits de 22 px, trop petits. ¦ Du fënns deng direkt Virfahren, ouni d’Zeil ze liesen. Wann et dir ze vill gëtt, loss et aus: d’Sosa bleift riets an de Lëschte geschriwwen. Op de Portraite vun 22 px, ze kleng, erschéngt et net.
+Aujourd’hui, pas d’initiales dans la liste des personnes : seulement la photo, quand la fiche en a une. ¦ Haut keng Initialen an der Lëscht vun de Persounen: nëmmen d’Foto, wann d’Fiche eng huet.
+Où elle est, et son dessin. Tant que tu ne touches à rien, ¦ Wou se ass, an hiert Ausgesinn. Soulaang s de näischt ännerts,
+La colonne, à gauche ou à droite de l’écran. ¦ D’Kolonn, lénks oder riets um Ecran.
+Lettres d’origine (A, H, S1…), les onglets de chaque outil, « Liste | Fiches » en bas de la colonne ¦ Original Buschtawen (A, H, S1…), d’Reiter vun all Tool, „Lëscht | Fichen“ ënnen an der Kolonn
+encadrés, à plat ¦ agerumt, flaach
+un trait bleu à gauche ¦ eng blo Linn lénks
+sans cadre, tout en douceur ¦ ouni Kader, ganz douce
+Des boutons, cadres et champs de la colonne. ¦ Vun de Knäppercher, Kaderen a Felder vun der Kolonn.
+Franches, décalées en bleu (comme avant) ¦ Kloer, verréckelt a blo (wéi virdrun)
+Réglages en plus ¦ Méi Astellungen
+Les groupes de départ ; l’ordre à l’intérieur est gardé ¦ D’Gruppe vum Ufank; d’Rei dobannen gëtt behalen
+Décoché : une seule liste. Chaque façon garde ses propres réglages : tu les retrouves en recochant ou en décochant. ¦ Ouni Kräiz: eng eenzeg Lëscht. All Manéier behält hir eegen Astellungen: du fënns se erëm, wann s de de Kräiz nees setz oder ewechhëls.
+Boutons en haut à droite ¦ Knäppercher uewe riets
+Ajouter aux raccourcis (étoile) ¦ Bei d’Ofkierzungen derbäisetzen (Stär)
+Les boutons secondaires de toute l’app (Annuler, Modifier, ＋ Ajouter…) ; le bouton principal reste plein, à la couleur principale. ¦ Déi sekundär Knäppercher vun der ganzer App (Ofbriechen, Änneren, ＋ Derbäisetzen…); den Haaptknäppchen bleift voll, an der Haaptfaarf.
+pour les boutons secondaires ¦ fir déi sekundär Knäppercher
+Ils partent du choix du dessus. Si tu en changes un, la carte choisie affiche « retouché ». ¦ Si ginn vun der Wiel hei uewen aus. Wann s de eng ännerts, weist déi ausgewielt Kaart „nogebessert“.
+La hauteur et la marge des boutons : les grands sont plus faciles à viser, surtout sur une tablette ; les petits laissent plus de place au contenu. La taille des lettres reste celle de l’Apparence. ¦ D’Héicht an de Rand vun de Knäppercher: déi grouss sinn einfacher ze treffen, virun allem op enger Tablet; déi kleng loossen dem Inhalt méi Plaz. D’Gréisst vun de Buschtawe bleift déi vum Ausgesinn.
+Des boutons bien ronds se distinguent des cadres et des champs ; comme les blocs, tout reste cohérent. ¦ Ganz ronn Knäppercher ënnerscheede sech vun de Kaderen an de Felder; wéi bei de Blocks bleift alles koherent.
+Le changement est gardé tout de suite (« ✓ Enregistré »), sans bouton. Un message en bas à gauche propose « ↶ Annuler ». ¦ D’Ännerung gëtt direkt behalen („✓ Gespäichert“), ouni Knäppchen. E Message ënne lénks proposéiert „↶ Réckgängeg“.
+Comment se séparent les lignes des listes, de la colonne des personnes et des tableaux. ¦ Wéi d’Reien an de Lëschten, an der Kolonn vun de Persounen an an den Tabelle getrennt ginn.
+Une ligne sur deux grisée ¦ All zweet Zeil gro
+qu’on attrape : facile à glisser, à viser sur une tablette. ¦ déi een upaakt: einfach ze zéien an op enger Tablet ze treffen.
+Trait de la couleur principale à gauche ¦ Linn an der Haaptfaarf lénks
+Le fond pâle se voit de loin ; le trait à gauche ne cache pas le gris des lignes alternées. ¦ De bleechen Hannergrond gesäit een vu wäitem; d’Linn lénks verstoppt net de Gro vun den ofwiesselnden Zeilen.
+Les visages et les couleurs du genre aident à retrouver une personne sans lire. ¦ D’Gesiichter an d’Faarwe vum Geschlecht hëllefen, eng Persoun ze fannen, ouni ze liesen.
+Les titres des colonnes restent en haut quand on fait défiler ¦ D’Titele vun de Kolonne bleiwen uewen, wann een scrollt
+Dans une longue liste, tu sais toujours quelle colonne est la naissance et laquelle est le décès. ¦ An enger laanger Lëscht weess de ëmmer, wéi eng Kolonn d’Gebuert ass a wéi eng den Doud.
+Émojis, traits, pictogrammes… les petits dessins des boutons, des barres d’outils et des rubriques. ¦ Emojien, Linnen, Piktogrammer… déi kleng Zeechnunge vun de Knäppercher, vun den Toolbaren an de Rubriken.
+Leur dessin change d’un ordinateur à l’autre (Mac, Windows) et certains sont un peu enfantins. ¦ Hiert Ausgesinn ännert vun engem Computer zum aneren (Mac, Windows) an e puer sinn e bëssen ze kannereg.
+Deux styles à l’écran en même temps. ¦ Zwee Stiler zur selwechter Zäit um Ecran.
+La corbeille 🗑 toujours en rouge ¦ D’Dreckskëscht 🗑 ëmmer a rout
+Noms à côté ¦ Nimm dernieft
+Écrire le nom à côté des boutons de la fiche ¦ Den Numm nieft d’Knäppercher vun der Fiche schreiwen
+Combien d’espace autour des choses : dans et entre les blocs, entre les lignes, autour des boutons. ¦ Wéi vill Plaz ronderëm d’Saachen: an an tëscht de Blocks, tëscht den Zeilen, ronderëm d’Knäppercher.
+Reposant et facile à cliquer ¦ Roueg an einfach ze klicken
+Plus d’informations à l’écran ¦ Méi Informatiounen um Ecran
+Les cibles sont plus petites : demande plus de précision à la souris. ¦ D’Ziler si méi kleng: et brauch méi Präzisioun mat der Maus.
+Passer en compact tout seul sur un petit écran ¦ Op engem klengen Ecran vum selwen op kompakt wiesselen
+Sur un téléphone ou une tablette, l’app se resserre d’elle-même, puis reprend ton réglage sur le grand écran. ¦ Op engem Telefon oder enger Tablet gëtt d’App vum selwe méi kompakt, duerno hëlt se nees deng Astellung um groussen Ecran.
+Beaucoup de blanc sous le nom ; la photo est petite et en gris. ¦ Vill Wäiss ënner dem Numm; d’Foto ass kleng a gro.
+une photo de famille en haut ¦ eng Familljefoto uewen
+Les dates et les lieux ¦ D’Datumer an d’Plazen
+Dates, lieux et métier ¦ Datumer, Plazen a Beruff
+Les lieux évitent d’ouvrir les blocs pour savoir d’où vient la personne ; le métier aide à distinguer les homonymes. ¦ D’Plaze spueren et, d’Blocks opzemaachen, fir ze wëssen, wou d’Persoun hierkënnt; de Beruff hëlleft, Homonymen auserneen ze halen.
+Sous le nom, sur une ligne ¦ Ënner dem Numm, op enger Zeil
+À droite, elles ne gênent pas le nom ; sous le nom, elles se lisent avec lui et l’en-tête est moins haut. ¦ Riets stéiere se den Numm net; ënner dem Numm liest een se mat him, an d’Kopfzeil ass manner héich.
+Beaucoup de traits épais et d’ombres décalées : ça peut paraître chargé sur un grand écran plein de blocs. ¦ Vill déck Linnen a verréckelt Schieter: dat ka gelueden ausgesinn op engem groussen Ecran voller Blocks.
+Des coins droits font « dossier d’archives » ; arrondis, l’app paraît plus douce et plus moderne. Le même arrondi va sur toute la fiche (blocs, boutons, champs). ¦ Riicht Ecke gesi wéi en „Archivdossier“ aus; ofgeronnt wierkt d’App méi douce a méi modern. Déi selwecht Rondung gëllt fir déi ganz Fiche (Blocks, Knäppercher, Felder).
+Des traits épais séparent nettement les blocs (utile si tu vois mal) ; des traits fins allègent les pages pleines de cadres. Leur couleur suit les couleurs de l’Apparence ; un thème à toi qui a ses propres traits (Apparence → ✎ Mes thèmes) garde les siens. ¦ Déck Linnen trennen d’Blocks däitlech (nëtzlech, wann s de schlecht gesäis); fein Linne maache Säite voller Kaderen méi liicht. Hir Faarf follegt de Faarwe vum Ausgesinn; en eegent Thema mat sengen eegene Linnen (Ausgesinn → ✎ Meng Themen) behält seng.
+L’ombre dit « ceci est un bloc qu’on peut toucher ». Franches, elles donnent du relief ; douces, elles sont presque invisibles ; sans ombre, c’est le plus sobre (et le plus net à l’impression). ¦ De Schiet seet „dat hei ass e Block, deen ee beréiere kann“. Kloer Schiete ginn Relief; douce si bal net ze gesinn; ouni Schiet ass et am schlichsten (an am schaarfsten um Drock).
+Pour voir, lire et utiliser l’app plus facilement (couleurs, texte, contraste, clavier, mouvement, voix, lecteur d’écran, sous-titres, dictée), et pour préparer le mode simple. Chaque réglage s’applique tout de suite et reste gardé avec ta généalogie. ¦ Fir d’App méi einfach ze gesinn, ze liesen an ze benotzen (Faarwen, Text, Kontrast, Clavier, Beweegung, Stëmm, Ecranlieser, Ënnertitelen, Diktat), a fir den Einfache Modus virzebereeden. All Astellung gëllt direkt a bleift mat denger Genealogie gespäichert.
+Environ 1 homme sur 12 voit mal certaines couleurs. Choisis ce qui te ressemble : l’app décale ses couleurs pour que les différences se voient (c’est une correction, réglable). ¦ Ongeféier 1 Mann vun 12 gesäit verschidde Faarwe schlecht. Wiel dat, wat bei dir passt: d’App verréckelt hir Faarwen, fir datt d’Ënnerscheeder ze gesi sinn (et ass eng Korrektur, astellbar).
+Le bleu et le jaune se confondent (rare). ¦ Blo a Giel ginn verwiesselt (rar).
+Pas de couleurs du tout : tout est en gris. ¦ Guer keng Faarwen: alles ass gro.
+Couleurs faciles à distinguer ¦ Faarwen, déi een einfach ënnerscheet
+Erreur / réussi, homme / femme et graphiques prennent des couleurs que tout le monde distingue (palette Okabe-Ito). ¦ Feeler / gelongen, Mann / Fra a Grafike kréie Faarwen, déi jidderee ka ënnerscheeden (Palette Okabe-Ito).
+Les couleurs que tu as choisies toi-même (dessins, plans et maison 3D, tableaux, mises en page, photos) ne sont pas remplacées : c’est la correction (le curseur au-dessus) qui les rend plus faciles à distinguer, partout, y compris dans les outils de modification en plein écran. ¦ D’Faarwen, déi s du selwer ausgewielt hues (Zeechnungen, Pläng an 3D-Haus, Tableauen, Säitegestaltungen, Fotoen), ginn net ersat: et ass d’Korrektur (de Schieber hei uewen), déi se méi einfach ënnerscheedbar mécht, iwwerall, och an den Ännerungstools am Vollbild.
+Ajouter des formes en plus des couleurs ¦ Formen zousätzlech zu de Faarwe setzen
+Symboles ✓ ⚠ ⛔ dans les messages, hachures sur les pastilles des légendes et les barres des graphiques, ronds et carrés pour femmes et hommes. ¦ Symboler ✓ ⚠ ⛔ an de Messagen, Schraffuren op de Punkte vun de Legenden an op de Balke vun de Grafiken, Ronnen a Quadrater fir Fraen a Männer.
+pour vérifier un faire-part, un livre ou un graphique ¦ fir eng Ukënnegung, e Buch oder eng Grafik ze kontrolléieren
+Montre tout l’écran comme le voit une personne daltonienne (une simulation, pas une correction). Va ensuite sur l’écran à vérifier : un bandeau en haut rappelle que c’est une simulation, avec « Arrêter ». ¦ Weist de ganzen Ecran, wéi eng faarfblann Persoun e gesäit (eng Simulatioun, keng Korrektur). Gëff duerno op den Ecran, deen s de kontrolléiere wëlls: e Bändchen uewen erënnert drun, datt et eng Simulatioun ass, mat „Stoppen“.
+L’interligne, les espaces et la police. La taille du texte de toute l’app se règle dans Thème et couleurs (Taille typographique). ¦ Den Zeilenofstand, d’Ofstänn an d’Schrëft. D’Gréisst vum Text vun der ganzer App gëtt an Thema a Faarwen (Schrëftgréisst) agestallt.
+Plus aéré, une police plus facile à lire. Recommandé pour la dyslexie : interligne 1,5, lettres + 12 %, mots + 16 %. ¦ Méi locker, eng Schrëft, déi méi einfach ze liesen ass. Recommandéiert bei Dyslexie: Zeilenofstand 1,5, Buschtawen + 12 %, Wierder + 16 %.
+Lettres alourdies en bas, pour qu’elles ne se retournent pas. Toujours disponible. ¦ Buschtawen ënnen méi schwéier, fir datt se sech net ëmdréinen. Ëmmer disponibel.
+« Atkinson Hyperlegible » et « OpenDyslexic » sont rangées dans l’app (polices libres, licence SIL OFL) : rien à installer, et elles marchent sans internet. ¦ „Atkinson Hyperlegible“ an „OpenDyslexic“ sinn an der App dran (fräi Schrëften, Lizenz SIL OFL): näischt z’installéieren, a si funktionéieren ouni Internet.
+Textes gris passés en noir (ou en blanc en mode sombre), bordures plus marquées, fonds unis sans quadrillage. Marche en clair et en sombre. ¦ Gro Texter ginn schwaarz (oder wäiss am däischteren Modus), méi däitlech Rimm, eenheetlech Hannergrënn ouni Gitter. Funktionéiert am hellen an am däischteren Modus.
+🧩 Une chose à la fois ¦ 🧩 Eng Saach no der anerer
+Une chose à la fois ¦ Eng Saach no der anerer
+Mode « une chose à la fois » ¦ Modus „eng Saach no der anerer“
+Une interface plus calme : moins de boutons, de chiffres et de décorations, les actions principales plus grandes, et un seul panneau à la fois (le tableau de bord sans sa colonne de réglages, les fiches sur une seule colonne, pas d’écran divisé). Rien n’est supprimé : le petit bandeau « 🧩 Une chose à la fois — Tout afficher », en bas à droite, remet tout d’un clic. ¦ Eng méi roueg Uewerfläch: manner Knäppercher, Zuelen an Dekoratiounen, déi wichtegst Aktioune méi grouss, an nëmmen ee Panneau gläichzäiteg (den Dashboard ouni seng Astellungskolonn, d’Fichen op enger eenzeger Kolonn, keen opgedeelten Ecran). Näischt gëtt geläscht: dat klengt Bändchen „🧩 Eng Saach no der anerer — Alles weisen“, ënne riets, bréngt alles mat engem Klick zréck.
+Moins de choses à l’écran pour se concentrer sur l’essentiel. Les outils cachés reviennent avec « Tout afficher », en bas à droite de l’écran. ¦ Manner Saachen um Ecran, fir sech op dat Wesentlecht ze konzentréieren. Déi verstoppt Tools komme mat „Alles weisen“ zréck, ënne riets um Ecran.
+Avec la touche Tab, un cadre épais bleu et jaune montre où tu es. Les boutons et les cases peuvent être plus grands (au moins 40 px), et la flèche de la souris plus grosse. ¦ Mat der Tab-Tast weist en décke blo-giele Kader, wou s de bass. D’Knäppercher an d’Felder kënne méi grouss sinn (op d’mannst 40 px), an de Mauszeiger méi déck.
+Boutons, menus, champs et cases à cocher plus grands, plus faciles à toucher ou à cliquer. ¦ Méi grouss Knäppercher, Menüen, Felder a Kräizfelder, méi einfach ze beréieren oder ze klicken.
+🔊 Lecture à voix haute ¦ 🔊 Virliesen
+Lecture à voix haute ¦ Virliesen
+Sélectionne un texte avec la souris : un bouton 🔊 apparaît à côté, clique dessus pour l’entendre. Sur une fiche, le bouton « 🔊 Lire la fiche » (en bas à gauche) lit le nom puis les blocs affichés. ¦ Markéier en Text mat der Maus: e Knäppchen 🔊 erschéngt dernieft, klick drop, fir en ze héieren. Op enger Fiche liest de Knäppchen „🔊 D’Fiche virliesen“ (ënne lénks) den Numm an duerno déi gewise Blocks.
+Lire à voix haute le texte que je sélectionne ¦ Den Text virliesen, deen ech markéieren
+Chaque photo ou document de tes médias est décrit à voix haute : la « Description de l’image » écrite dans la fenêtre du média, sinon son titre, sa date, son lieu et les personnes rattachées. Les petites images à côté d’un nom et les décorations sont passées sous silence. ¦ All Foto oder Dokument aus denge Medie gëtt laut beschriwwen: d’„Beschreiwung vum Bild“, déi an der Fënster vum Medium geschriwwen ass, soss säin Titel, säin Datum, seng Plaz an déi verbonne Persounen. Déi kleng Biller nieft engem Numm an d’Dekoratioune ginn iwwersprongen.
+Le lecteur d’écran lit un texte à la place de chaque image. Pour l’écrire toi-même : ouvre un média, champ « Description de l’image (lue à voix haute) ». ¦ Den Ecranlieser liest en Text amplaz vun all Bild. Fir en selwer ze schreiwen: maach e Medium op, Feld „Beschreiwung vum Bild (gëtt virgelies)“.
+🎬 Vidéos et montages ¦ 🎬 Videoen a Montagen
+Les vidéos qui ont des sous-titres les montrent d’office (en français s’il y en a). Dans le montage, la piste « Sous-titres » se voit à la lecture même si tu l’as cachée (l’œil) ; la vidéo exportée, elle, ne change pas. ¦ D’Videoen, déi Ënnertitelen hunn, weise se automatesch (op Franséisch, wann et der gëtt). Am Montage gesäit een d’Spur „Ënnertitelen“ beim Ofspillen, och wann s de se verstoppt hues (d’A); den exportéierte Video ännert sech net.
+Pour lire ce qui est dit sans devoir allumer les sous-titres à chaque fois. ¦ Fir ze liesen, wat gesot gëtt, ouni all Kéier d’Ënnertitelen unzeschalten.
+ou un nouveau clic sur 🎤 arrête. ¦ oder en neie Klick op 🎤 stoppt.
+Le navigateur écoute le micro seulement quand tu cliques sur 🎤. La première fois, il demande la permission d’utiliser le micro. ¦ De Browser lauschtert nëmmen dem Mikro no, wann s de op 🎤 klicks. Déi éischte Kéier freet en no der Erlaabnes, de Mikro ze benotzen.
+Plus de gris pâle : le texte est noir sur blanc (ou blanc sur noir en mode sombre). ¦ Kee bleechen Gro méi: den Text ass schwaarz op wäiss (oder wäiss op schwaarz am däischteren Modus).
+Utilise la voix de l’ordinateur ; rien n’est envoyé sur internet par l’app. ¦ Benotzt d’Stëmm vum Computer; d’App schéckt näischt op den Internet.
+Cache ce qui sert rarement pour garder l’essentiel, en plus grand. « Tout afficher » (en bas à droite) remet tout. ¦ Verstoppt dat, wat seele gebraucht gëtt, fir dat Wesentlecht ze behalen, méi grouss. „Alles weisen“ (ënne riets) bréngt alles zréck.
+Donne un texte à chaque image de tes médias. Le mieux : écrire toi-même ce qu’on voit, dans la fenêtre du média. ¦ Gëtt all Bild aus denge Medien en Text. Am beschten: schreif selwer, wat ee gesäit, an der Fënster vum Medium.
+Utilise la reconnaissance de la voix du navigateur (Chrome et Edge passent par internet ; Safari peut le faire sur l’ordinateur). Dans l’app de bureau, utilise la dictée du système : sur Mac, touche 🎤 ou deux fois Fn ; sur Windows, touche Windows + H. ¦ Benotzt d’Stëmmerkennung vum Browser (Chrome an Edge ginn iwwer den Internet; Safari kann et um Computer maachen). An der Desktop-App benotz den Diktat vum System: um Mac Tast 🎤 oder zweemol Fn; ënner Windows Windows-Tast + H.
+Ces réglages sont gardés avec ta généalogie (comme l’apparence) : ils suivent sa sauvegarde et la retrouvent sur un autre ordinateur. ¦ Dës Astellunge ginn mat denger Genealogie gespäichert (wéi d’Ausgesinn): si ginn mat hirem Backup mat a sinn op engem anere Computer erëm do.
+De très gros boutons pour regarder l’arbre, les photos et les fiches, sans rien pouvoir modifier ni supprimer par erreur — pour une personne âgée, un enfant, ou n’importe qui qui veut juste regarder. ¦ Ganz grouss Knäppercher, fir de Stammbam, d’Fotoen an d’Fichen ze kucken, ouni eppes aus Versinn kënnen z’änneren oder ze läschen — fir eng eeler Persoun, e Kand oder iergendeen, deen nëmme kucke wëll.
+Montrer le bouton « 🧓 Mode simple » en haut de l’app ¦ De Knäppchen „🧓 Einfache Modus“ uewen an der App weisen
+Taille du texte (Thème et couleurs) ¦ Gréisst vum Text (Thema a Faarwen)
+Un clic applique tout d’un coup : couleurs, police et tailles. Tu peux ensuite retoucher chaque réglage plus bas. ¦ E Klick setzt alles op eemol: Faarwen, Schrëft a Gréissten. Duerno kanns de all Astellung hei ënnendrënner nobesseren.
+Toute la famille, de case en case ¦ Déi ganz Famill, vu Feld zu Feld
+Fond sombre et texte clair, n’éblouit pas le soir ¦ Däischteren Hannergrond an hellen Text, blent net owes
+Noir sur blanc pur, traits épais, 21:1 ¦ Schwaarz op purem Wäiss, déck Linnen, 21:1
+Un cadre par ligne, large et facile à viser ¦ E Kader pro Zeil, breet an einfach ze treffen
+Plus de cadres d’un coup d’œil, sur un grand écran ¦ Méi Kaderen op ee Bléck, op engem groussen Ecran
+Chacun touche sa photo, et les liens s’écrivent pour lui. ¦ Jidderee beréiert seng Foto, an d’Bezéiunge gi fir hie geschriwwen.
+Fond, texte et boutons ¦ Hannergrond, Text a Knäppercher
+Une couleur de fond douce et un texte très foncé fatiguent moins. ¦ Eng douce Hannergrondfaarf an e ganz donkelen Text maache manner midd.
+Le texte sur le fond ¦ Den Text op dem Hannergrond
+On vise 7:1 au moins (le plus haut niveau des règles d’accessibilité). « Corriger » garde la teinte et change seulement sa clarté. ¦ Mir zilen op d’mannst 7:1 un (den héchsten Niveau vun de Reegele fir d’Accessibilitéit). „Korrigéieren“ behält de Faarftoun an ännert just seng Hellegkeet.
+À 24 px on lit sans lunettes à 50 cm ; à 30 px et plus, de loin. ¦ Bei 24 px liest een ouni Brëll op 50 cm; bei 30 px a méi vu wäitem.
+Atkinson Hyperlegible et Luciole sont dessinées pour les personnes qui voient mal : les lettres qui se ressemblent (I l 1, O 0, b d) ne se confondent pas. OpenDyslexic aide certaines personnes dyslexiques. Atkinson et OpenDyslexic sont rangées dans l’app ; Luciole est prise si elle est sur l’ordinateur, sinon une police proche (Atkinson Hyperlegible). ¦ Atkinson Hyperlegible a Luciole si fir Leit gemaach, déi schlecht gesinn: d’Buschtawen, déi sech gläichen (I l 1, O 0, b d), ginn net verwiesselt. OpenDyslexic hëlleft verschiddenen dyslektesche Leit. Atkinson an OpenDyslexic sinn an der App dran; Luciole gëtt geholl, wann se um Computer ass, soss eng ähnlech Schrëft (Atkinson Hyperlegible).
+Les capitales repèrent le nom de famille, comme dans l’app ; en minuscules, c’est plus doux à lire. ¦ D’Groussbuschtawe weisen de Familljennumm, wéi an der App; a klenge Buschtawen ass et méi douce ze liesen.
+Pareil que l’app : la voix et la vitesse de « ♿ Toute l’app ». ¦ Wéi an der App: d’Stëmm an d’Geschwindegkeet vu „♿ Déi ganz App“.
+Un peu plus lent que d’habitude (80 à 90 %) se suit mieux. ¦ E bësse méi lues wéi soss (80 bis 90 %) ass méi einfach ze verfollegen.
+＋ Ajouter un cadre ¦ ＋ E Kader derbäisetzen
+Sa fiche, en phrases ¦ Seng Fiche, a Sätz
+Son numéro en grand ¦ Seng Nummer, grouss
+Ses photos, en diaporama ¦ Seng Fotoen, als Diashow
+Une surprise à chaque fois ¦ All Kéier eng Iwwerraschung
+À regarder en grand ¦ Fir grouss ze kucken
+La regarder en 3D, étage par étage ¦ Se an 3D kucken, Stack fir Stack
+À lire et à écouter ¦ Fir ze liesen an ze lauschteren
+Un cadre par ligne se vise sans peine sur une tablette ; trois ou quatre par ligne montrent tout d’un coup sur un grand écran. Sur un téléphone, il n’y en a jamais plus de deux. ¦ E Kader pro Zeil trëfft een ouni Problem op enger Tablet; dräi oder véier pro Zeil weisen alles op eemol op engem groussen Ecran. Op engem Telefon sinn et ni méi wéi zwee.
+La personne qui regarde, sa famille proche et ses descendants restent toujours visibles. ¦ D’Persoun, déi kuckt, hir no Famill an hir Nokomme bleiwen ëmmer ze gesinn.
+🖼 Choisir les photos à retirer… ¦ 🖼 D’Fotoen auswielen, déi ewechkommen…
+Montrer aussi les actes et documents ¦ Och d’Akten an d’Dokumenter weisen
+Souvent difficiles à lire. ¦ Dacks schwéier ze liesen.
+Une écriture ancienne ou une page dense découragent ; les photos parlent à tout le monde. ¦ Eng al Handschrëft oder eng dicht Säit schrecken of; d’Fotoe schwätze jiddereen un.
+Le temps de regarder, et de dire « Oh, c’est ta tante ! ». ¦ D’Zäit, fir ze kucken an ze soen: „Oh, dat ass deng Tatta!“.
+Faire défiler tout seul en ouvrant le diaporama ¦ Beim Opmaache vun der Diashow vum selwe lafe loossen
+La tablette posée sur le buffet devient un cadre photo de famille. ¦ D’Tablet um Buffet gëtt zu engem Familljefotosrumm.
+Garder le doigt sur « 🔒 Quitter le mode simple » (sur l’accueil seulement). ¦ De Fanger op „🔒 Den Einfache Modus verloossen“ halen (nëmmen op der Startsäit).
+Code à 4 chiffres ¦ Code mat 4 Zifferen
+Tape 4 chiffres : le code est gardé caché, jamais en clair. ¦ Tipp 4 Zifferen: de Code bleift verstoppt, ni a Kloertext.
+Ouvrir l’app directement en mode simple ¦ D’App direkt am Einfache Modus opmaachen
+Sur la tablette de Mamie, l’app s’ouvre toute seule sur les gros boutons. Ajoute l’adresse à l’écran d’accueil de la tablette. ¦ Op der Tablet vun der Bomi mécht d’App sech vum selwen op de groussen Knäppercher op. Setz d’Adress op den Heemecran vun der Tablet.
+Ces réglages servent de base sur tous les appareils ¦ Dës Astellunge sinn d’Basis op allen Apparater
+Tu prépares une fois, et chaque tablette ou ordinateur de la famille démarre pareil. ¦ Du bereets eemol vir, an all Tablet oder Computer vun der Famill fänkt d’selwecht un.
+Pensé et designé par Victor Baissait. Codé par Codex (ChatGPT) et Claude, sous la supervision de Victor Baissait. ¦ Erduecht an designt vum Victor Baissait. Programméiert vu Codex (ChatGPT) a Claude, ënner der Opsiicht vum Victor Baissait.
+Cartes, chronologie et statistiques ¦ Kaarten, Chronologie a Statistiken
+Communes, lieux-dits et villes du monde : ¦ Gemengen, Uertschaften a Stied vun der Welt:
+Communes de Suisse et du Liechtenstein : swissBOUNDARIES3D © ¦ Gemenge vun der Schwäiz a vu Liechtenstein: swissBOUNDARIES3D ©
+Communes du Luxembourg : Administration du cadastre et de la topographie, ¦ Gemenge vu Lëtzebuerg: Administration du cadastre et de la topographie,
+Elle prend la couleur principale de l’Apparence (un rouge devient rouge pâle). La couleur pleine ne peut pas se rater ; la couleur pâle laisse lire les gris et les badges. ¦ Si hëlt d’Haaptfaarf vum Ausgesinn (e Rout gëtt bleechrout). Déi voll Faarf kann een net iwwersinn; déi bleech Faarf léisst d’Gro an d’Badgen ze gesinn.
+Le cadre du haut (nom, badges, boutons carrés) de toutes les fiches de personnes et d’animaux. Glisse les boutons pour changer leur ordre ; décoche un bouton pour le masquer. ¦ De Kader uewen (Numm, Badgen, quadratesch Knäppercher) vun alle Persounen- an Déierefichen. Zéi d’Knäppercher, fir hir Rei z’änneren; maach de Kräiz bei engem Knäppchen ewech, fir en ze verstoppen.
+Fiche épurée, pour un diaporama : ni nom, ni badges, ni boutons en haut. ¦ Opgeraumt Fiche, fir eng Diashow: keen Numm, keng Badgen, keng Knäppercher uewen.
+Les boutons côte à côte, en deux rangées. ¦ D’Knäppercher nieftenee, an zwou Reien.
+Il est caché au départ : coche « 🧩 » dans la liste des boutons pour le montrer (décoche-le pour le cacher à nouveau). Pas sur les fiches d’animaux. ¦ E ass am Ufank verstoppt: kräiz „🧩“ an der Lëscht vun de Knäppercher un, fir en ze weisen (maach de Kräiz ewech, fir en nees ze verstoppen). Net op den Déierefichen.
+Écrire sur cette personne (traitement de texte) ¦ Iwwer dës Persoun schreiwen (Textveraarbechtung)
+Gardé tout seul. Alt + ↑ / ↓ au clavier. « 👁＋ » n’apparaît que sur les fiches d’animaux. ¦ Vum selwe gespäichert. Alt + ↑ / ↓ um Clavier. „👁＋“ erschéngt nëmmen op den Déierefichen.
+Ce qui s’affiche sous le nom et à côté du statut. Glisse pour changer l’ordre ; décoche pour masquer. Gardé tout de suite. ¦ Wat ënner dem Numm an nieft dem Status gewise gëtt. Zéi fir d’Rei z’änneren; maach de Kräiz ewech fir ze verstoppen. Direkt gespäichert.
+La forme de l’en-tête et la place des pastilles (à droite ou sous le nom) : « Forme de l’en-tête », plus bas sur cette page. ¦ D’Form vun der Kopfzeil an d’Plaz vun de Badgen (riets oder ënner dem Numm): „Form vun der Kopfzeil“, méi wäit ënnen op dëser Säit.
+Montrer le lieu et la personne ¦ D’Plaz an d’Persoun weisen
+« Pas revu au bout de… » sert aussi au bloc « Animaux à retrouver » du Suivi : un seul seuil. ¦ „Net méi gesi no…“ gëllt och fir de Block „Déieren, déi ee muss erëmfannen“ vum Suivi: eng eenzeg Grenz.
+Place de « ＋ Nouvelle observation » ¦ Plaz vun „＋ Nei Observatioun“
+Le bouton pour noter qu’on a vu l’animal. Seulement sur les fiches d’animaux. ¦ De Knäppchen, fir ze notéieren, datt een d’Déier gesinn huet. Nëmmen op den Déierefichen.
+Carré 👁＋ en premier dans la grille des boutons ¦ Quadrat 👁＋ als éischt am Gitter vun de Knäppercher
+en bas à droite de la fiche ¦ ënne riets op der Fiche
+Le carré suit aussi « Ordre et visibilité des boutons » plus haut (ligne 01). ¦ De Quadrat follegt och „Rei a Visibilitéit vun de Knäppercher“ hei uewen (Zeil 01).

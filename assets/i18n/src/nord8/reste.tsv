@@ -1,0 +1,492 @@
+fr ¦ tr
+14 juillet 2027 ¦ 14 juillet 2027
+↻ Remettre à jour ¦ ↻ Güncelle
+Les widgets se posent sur le bureau de {os}, dans une petite fenêtre sans cadre : glisse-la par son titre, elle retient sa place. Lecture seule : rien ne s’y modifie. Clic droit sur un widget : toujours au-dessus, ouvrir LCNDA, fermer. ¦ Widget’lar {os} masaüstünde, çerçevesiz küçük bir pencerede durur: başlığından tutup sürükle, yerini hatırlar. Yalnızca okunur: içinde hiçbir şey değiştirilemez. Bir widget’a sağ tıkla: her zaman üstte, LCNDA’yı aç, kapat.
+Tu utilises LCNDA dans un navigateur : les vrais widgets de bureau (petite fenêtre sans cadre, toujours au-dessus, au démarrage de l’ordinateur) demandent l’application de bureau LCNDA (PC, Mac, Linux). À la place, télécharge le widget : un fichier .html autonome, à ouvrir d’un double-clic et à garder dans un onglet ; sans personne vivante ni fiche confidentielle. ¦ LCNDA’yı bir tarayıcıda kullanıyorsun: gerçek masaüstü widget’ları (çerçevesiz küçük pencere, her zaman üstte, bilgisayar açılınca) LCNDA masaüstü uygulamasını gerektirir (PC, Mac, Linux). Onun yerine widget’ı indir: çift tıklayarak açılan ve bir sekmede tutulan bağımsız bir .html dosyası; içinde yaşayan kişi ya da gizli kart yoktur.
+Widgets sur le bureau ¦ Masaüstü widget’ları
+Widgets sur le bureau… ¦ Masaüstü widget’ları…
+{icon} « {name} » est sur le bureau. ¦ {icon} “{name}” masaüstünde.
+Ce réglage n’a pas pu être changé sur cet ordinateur. ¦ Bu ayar bu bilgisayarda değiştirilemedi.
+🪟 Mettre la calculette sur le bureau (une petite fenêtre à part) ¦ 🪟 Hesap makinesini masaüstüne koy (ayrı küçük bir pencere)
+🪟 Mettre la calculette sur le bureau (un fichier .html autonome) ¦ 🪟 Hesap makinesini masaüstüne koy (bağımsız bir .html dosyası)
+Les anniversaires du jour et des 7 jours qui viennent, et ce qui s’est passé ce jour-là dans ta famille. ¦ Bugünün ve önümüzdeki 7 günün doğum günleri, ayrıca ailende bu gün neler olduğu.
+Un de tes ancêtres, un nouveau chaque jour (↻ pour en voir un autre) : son portrait, ses dates, ses lieux. ¦ Atalarından biri, her gün yeni biri (başka birini görmek için ↻): portresi, tarihleri, yerleri.
+La calculette de l’app (fractions, pourcentages, dates des actes, unités…) toujours à portée de main. ¦ Uygulamanın hesap makinesi (kesirler, yüzdeler, belge tarihleri, birimler…) her zaman elinin altında.
+Je fais l’histoire de notre famille. Sur ces photos, il y a des visages que je ne sais pas nommer : peut-être que toi, tu les reconnais ? ¦ Ailemizin tarihini araştırıyorum. Bu fotoğraflarda adını bilmediğim yüzler var: belki sen tanırsın?
+En mode consultation, on ne prépare pas de demande. ¦ Görüntüleme modunda istek hazırlanamaz.
+Qui est sur cette photo ? ¦ Bu fotoğrafta kim var?
+QUI EST SUR CETTE PHOTO ? ¦ BU FOTOĞRAFTA KİM VAR?
+Nouvelle demande « Qui est sur cette photo ? » ¦ Yeni “Bu fotoğrafta kim var?” isteği
+Les photos et les visages ¦ Fotoğraflar ve yüzler
+Clique sur un cadre pour le mettre (bleu) ou l’enlever (gris) de la demande. Pour un visage oublié, trace un cadre sur la photo avec la souris. ¦ Bir çerçeveyi isteğe eklemek (mavi) ya da çıkarmak (gri) için üzerine tıkla. Atlanmış bir yüz için fotoğrafın üzerinde fareyle bir çerçeve çiz.
+Les noms à proposer ¦ Önerilecek adlar
+Le cousin les voit dans une liste ; il peut aussi écrire un autre nom. Aucune fiche confidentielle n’est jamais proposée. ¦ Kuzenin bunları bir listede görür; başka bir ad da yazabilir. Gizli kartlar asla önerilmez.
+Proposer aussi des personnes vivantes ¦ Yaşayan kişileri de öner
+⚠️ Les vivants cochés seront proposés au cousin : vérifie qu’ils sont d’accord. ¦ ⚠️ İşaretlenen yaşayan kişiler kuzenine önerilecek: onların da kabul ettiğinden emin ol.
+{n} personnes sans doute vivantes ne seront pas proposées (coche la case pour les garder). ¦ Büyük olasılıkla yaşayan {n} kişi önerilmeyecek (onları tutmak için kutuyu işaretle).
+{n} personne sans doute vivante ne sera pas proposée (coche la case pour la garder). ¦ Büyük olasılıkla yaşayan {n} kişi önerilmeyecek (onu tutmak için kutuyu işaretle).
+Déjà identifié : {name} ¦ Zaten tanımlandı: {name}
+Visage sans nom ¦ Adsız yüz
+Aucune photo pour l’instant. ¦ Şimdilik fotoğraf yok.
+La reconnaissance des visages, sur cet ordinateur (rien n’est envoyé) ¦ Yüz tanıma, bu bilgisayarda (hiçbir şey gönderilmez)
+Repérer les visages ¦ Yüzleri bul
+Retirer cette photo de la demande ¦ Bu fotoğrafı istekten çıkar
+12 photos au plus dans une demande. ¦ Bir istekte en fazla 12 fotoğraf.
+La reconnaissance des visages n’est pas disponible : trace les cadres à la main. ¦ Yüz tanıma kullanılamıyor: çerçeveleri elle çiz.
+Je cherche les visages… ¦ Yüzleri arıyorum…
+Aucun visage trouvé : trace les cadres à la main. ¦ Hiç yüz bulunamadı: çerçeveleri elle çiz.
+Visages non repérés : {err}. Trace les cadres à la main. ¦ Yüzler bulunamadı: {err}. Çerçeveleri elle çiz.
+Choisis au moins un visage (clique sur un cadre, ou trace-le sur la photo). ¦ En az bir yüz seç (bir çerçeveye tıkla ya da fotoğrafın üzerine çiz).
+{n} vivants non proposés ¦ Yaşayan {n} kişi önerilmedi
+{n} vivant non proposé ¦ Yaşayan {n} kişi önerilmedi
+{n} fiches confidentielles non proposées ¦ {n} gizli kart önerilmedi
+{n} fiche confidentielle non proposée ¦ {n} gizli kart önerilmedi
+Ta demande est prête ¦ İsteğin hazır
+{faces} sur {photos}, {names}. ¦ {faces} / {photos}, {names}.
+Préparer un courriel ¦ E-posta hazırla
+Message à envoyer avec le fichier ¦ Dosyayla birlikte gönderilecek mesaj
+Rien n’est envoyé par l’app : c’est toi qui joins le fichier à ton courriel. Le fichier ne contient que les photos, les cadres des visages et les noms proposés. ¦ Uygulama hiçbir şey göndermez: dosyayı e-postana sen eklersin. Dosyada yalnızca fotoğraflar, yüz çerçeveleri ve önerilen adlar vardır.
+Fichier téléchargé ({n} photos n’ont pas pu être jointes). ¦ Dosya indirildi ({n} fotoğraf eklenemedi).
+Fichier téléchargé ({n} photo n’a pas pu être jointe). ¦ Dosya indirildi ({n} fotoğraf eklenemedi).
+Fichier téléchargé : joins-le à un courriel. ¦ Dosya indirildi: bir e-postaya ekle.
+Ce que verra ton cousin ¦ Kuzeninin göreceği
+Aperçu du fichier ¦ Dosya önizlemesi
+Accord ¦ Uyuşma
+Un autre cousin a donné la même réponse ¦ Başka bir kuzen aynı cevabı verdi
+Désaccord ¦ Uyuşmazlık
+Un autre cousin a répondu autre chose ¦ Başka bir kuzen farklı bir cevap verdi
+selon {who} ¦ kaynak: {who}
+ton cousin ¦ kuzenin
+✓ Pareil pour {list} ¦ ✓ Şunlar için de aynı: {list}
+un cousin ¦ bir kuzen
+Un cousin ¦ Bir kuzen
+Aujourd’hui sur la photo : <b>{name}</b> ¦ Şu an fotoğrafta: <b>{name}</b>
+Peut-être : ¦ Belki:
+Que faire de cette réponse ? ¦ Bu cevapla ne yapılsın?
+Importer les réponses « Qui est sur cette photo ? » ¦ “Bu fotoğrafta kim var?” cevaplarını içe aktar
+le fichier « reponses-visages.json » ¦ “reponses-visages.json” dosyası
+Le fichier que ton cousin t’a renvoyé (il s’appelle « reponses-visages.json »). ¦ Kuzeninin sana geri gönderdiği dosya (adı “reponses-visages.json”).
+ce fichier est trop gros pour un fichier de réponses (300 Ko au plus). ¦ bu dosya bir cevap dosyası için çok büyük (en fazla 300 KB).
+Ces réponses ont <b>déjà été importées</b> ¦ Bu cevaplar <b>zaten içe aktarıldı</b>
+<b>{answers}</b> de <b>{who}</b> à « {title} » ({date}), comparées aux {before} déjà reçues. Pour chaque visage : accepte, refuse ou garde pour plus tard ¦ <b>{answers}</b> — gönderen: <b>{who}</b>, istek: “{title}” ({date}); daha önce alınan {before} ile karşılaştırıldı. Her yüz için: kabul et, reddet ya da sonraya bırak
+<b>{answers}</b> de <b>{who}</b> à « {title} » ({date}). Pour chaque visage : accepte, refuse ou garde pour plus tard ¦ <b>{answers}</b> — gönderen: <b>{who}</b>, istek: “{title}” ({date}). Her yüz için: kabul et, reddet ya da sonraya bırak
+Aucun nom écrit dans ce fichier ¦ Bu dosyada yazılı ad yok
+Des cousins ne sont pas d’accord sur certains visages (⚠️) : regarde bien avant d’accepter. ¦ Bazı yüzlerde kuzenler aynı fikirde değil (⚠️): kabul etmeden önce iyice bak.
+Choisis la fiche de cette personne (ou « Plus tard »). ¦ Bu kişinin kartını seç (ya da “Sonra”).
+{faces} (réponses de {who}) ¦ {faces} (cevaplayan: {who})
+Réponses de {who} gardées avec la demande. ¦ Cevaplar istekle birlikte saklandı. Gönderen: {who}.
+cousins ¦ kuzenler
+Envoyé, en attente des réponses ¦ Gönderildi, cevaplar bekleniyor
+Demande « {title} » supprimée ¦ İstek silindi: “{title}”
+Demander qui c’est ¦ Kim olduğunu sor
+Un petit fichier à envoyer à un cousin : il clique sur les visages et écrit qui c’est ¦ Bir kuzene gönderilecek küçük bir dosya: yüzlere tıklar ve kim olduklarını yazar
+=visage trouvé ¦ yüz bulundu|yüz bulundu
+=nom proposé ¦ önerilen ad|önerilen ad
+=visage identifié ¦ yüz tanımlandı|yüz tanımlandı
+Média n° {n} ¦ Medya no. {n}
+Identique ¦ Aynı
+＝ Identique (même fichier) ¦ ＝ Aynı (aynı dosya)
+Zoomée ¦ Yakınlaştırılmış
+Recadrée ¦ Kırpılmış
+Très proche ¦ Çok yakın
+très proche ¦ çok yakın
+Ressemblante ¦ Benzer
+Recadrée / zoomée ¦ Kırpılmış / yakınlaştırılmış
+même fichier ¦ aynı dosya
+autre format ¦ başka biçim
+redimensionnée ¦ yeniden boyutlandırılmış
+retouchée ¦ rötuşlanmış
+ré-enregistrée ¦ yeniden kaydedilmiş
+zoomée ¦ yakınlaştırılmış
+recadrée ¦ kırpılmış
+en partie la même ¦ kısmen aynı
+autre prise ¦ başka bir çekim
+autres couleurs ¦ başka renkler
+Le calcul des empreintes s’est arrêté : {err} ¦ Parmak izi hesaplaması durdu: {err}
+Empreintes des photos : <b>{done} / {total}</b> (calcul sur cet ordinateur, par petits paquets — tu peux fermer, ça reprendra). Les résultats se complètent tout seuls. ¦ Fotoğraf parmak izleri: <b>{done} / {total}</b> (bu bilgisayarda, küçük paketler hâlinde hesaplanıyor — kapatabilirsin, kaldığı yerden sürer). Sonuçlar kendiliğinden tamamlanır.
+« Comparer deux photos » marche avec deux photos de la base. ¦ “İki fotoğrafı karşılaştır”, veritabanındaki iki fotoğrafla çalışır.
+L’outil « Comparer deux photos » n’est pas encore chargé : réessaie dans un instant. ¦ “İki fotoğrafı karşılaştır” aracı henüz yüklenmedi: birazdan yeniden dene.
+Le moteur des images n’est pas encore chargé : réessaie dans un instant. ¦ Görüntü motoru henüz yüklenmedi: birazdan yeniden dene.
+Chercher une image semblable ¦ Benzer bir görüntü ara
+CHERCHER UNE IMAGE SEMBLABLE ¦ BENZER BİR GÖRÜNTÜ ARA
+Retrouve une photo de la base, même recadrée, zoomée, retouchée ou dans un autre format. Tout se calcule sur cet ordinateur. ¦ Veritabanındaki bir fotoğrafı bul; kırpılmış, yakınlaştırılmış, rötuşlanmış ya da başka biçimde olsa bile. Her şey bu bilgisayarda hesaplanır.
+Elle sert seulement à chercher : elle n’entre pas dans les médias. ¦ Yalnızca aramak için kullanılır: medyaya girmez.
+Photo de la base ¦ Veritabanından fotoğraf
+Image de ton ordinateur ¦ Bilgisayarından görüntü
+Choisis une photo dans les médias, ou dépose une image de ton ordinateur : l’app cherche les photos qui lui ressemblent. ¦ Medyadan bir fotoğraf seç ya da bilgisayarından bir görüntü bırak: uygulama ona benzeyen fotoğrafları arar.
+＝ Identiques ¦ ＝ Aynı olanlar
+≈ Très proches ¦ ≈ Çok yakın olanlar
+⬚ Recadrées / zoomées ¦ ⬚ Kırpılmış / yakınlaştırılmış
+～ Ressemblantes ¦ ～ Benzer olanlar
+Ressemblance ¦ Benzerlik
+Chercher depuis celle-ci ¦ Bundan yola çıkarak ara
+Recherche des photos semblables… ¦ Benzer fotoğraflar aranıyor…
+{found} parmi {ready} (la recherche continue) ¦ {found} / {ready} (arama sürüyor)
+{found} parmi {ready} ¦ {found} / {ready}
+Aucune photo de cette sorte ¦ Bu türde fotoğraf yok
+Aucune photo semblable ¦ Benzer fotoğraf yok
+Les empreintes ne sont pas toutes prêtes : la recherche se complète toute seule. ¦ Parmak izlerinin hepsi hazır değil: arama kendiliğinden tamamlanır.
+Parmi {list}. ¦ Şunların arasında: {list}.
+Clique sur « Voir » pour poser les deux images côte à côte. ¦ İki görüntüyü yan yana koymak için “Gör” düğmesine tıkla.
+Ton image ¦ Senin görüntün
+Trouvée ¦ Bulunan
+Cette photo est un morceau de ton image (environ {pct} % de sa surface), cadre en bleu. ¦ Bu fotoğraf, görüntünün bir parçası (yüzeyinin yaklaşık %{pct} kadarı), mavi çerçeveli.
+Ton image est un morceau de cette photo (environ {pct} % de sa surface), cadre en bleu. ¦ Görüntün, bu fotoğrafın bir parçası (yüzeyinin yaklaşık %{pct} kadarı), mavi çerçeveli.
+Exactement le même fichier. ¦ Tamamen aynı dosya.
+La même image ({how}). ¦ Aynı görüntü ({how}).
+Elles se ressemblent : même scène ou même document, peut-être une autre prise. ¦ Birbirlerine benziyorlar: aynı sahne ya da aynı belge, belki başka bir çekim.
+Cette image n’a pas pu être lue ({err}). ¦ Bu görüntü okunamadı ({err}).
+Choisis une image (JPG, PNG, WebP…). ¦ Bir görüntü seç (JPG, PNG, WebP…).
+Image collée ¦ Yapıştırılan görüntü
+La photo de départ ¦ Başlangıç fotoğrafı
+Doublons d’images ¦ Yinelenen görüntüler
+Les mêmes photos rangées plusieurs fois, même retouchées, recadrées, zoomées ou dans un autre format. Garde la meilleure : ses liens réunissent ceux des autres. ¦ Birkaç kez kaydedilmiş aynı fotoğraflar; rötuşlanmış, kırpılmış, yakınlaştırılmış ya da başka biçimde olsalar bile. En iyisini tut: onun bağlantıları ötekilerinkileri bir araya toplar.
+Ce qu’on fait des autres photos ¦ Öteki fotoğraflara ne olacak
+Les autres photos : ¦ Öteki fotoğraflar:
+À la corbeille ¦ Çöp kutusuna
+En versions ¦ Sürüm olarak
+Corbeille : les autres photos sont retirées de la liste des médias (le fichier reste sur le disque) et reviennent avec « ↶ Remettre ». Versions : leur fichier devient une version de la photo gardée (visionneuse → versions). ¦ Çöp kutusu: öteki fotoğraflar medya listesinden çıkarılır (dosya diskte kalır) ve “↶ Geri koy” ile geri gelir. Sürümler: dosyaları, tutulan fotoğrafın bir sürümü olur (görüntüleyici → sürümler).
+Plus haut : l’app propose aussi des photos plus retouchées ou plus recadrées (plus de fausses alertes). Plus bas : seulement les doublons évidents. ¦ Daha yüksek: uygulama daha çok rötuşlanmış ya da kırpılmış fotoğrafları da önerir (daha çok yanlış alarm). Daha düşük: yalnızca bariz yinelenenler.
+Pas des doublons ¦ Yinelenen değil
+Corbeille des doublons ¦ Yinelenenler çöp kutusu
+＝ Parfaits ¦ ＝ Kusursuz
+🎨 Retouchés ¦ 🎨 Rötuşlanmış
+⬚ Recadrés / zoomés ¦ ⬚ Kırpılmış / yakınlaştırılmış
+↔ Redimensionnés ¦ ↔ Yeniden boyutlandırılmış
+🗂 Autre format ¦ 🗂 Başka biçim
+Gardée ¦ Tutuldu
+La plus grande ¦ En büyüğü
+Garder celle-ci à la place ¦ Onun yerine bunu tut
+Comparer avec la photo gardée ¦ Tutulan fotoğrafla karşılaştır
+Pas un doublon des autres ¦ Ötekilerin yinelenmişi değil
+Ce n’est pas un doublon ¦ Bu yinelenen değil
+Garder ★ et fusionner {others} ¦ ★ olanı tut ve birleştir: {others}
+Tu as dit : ce n’est pas un doublon. ¦ Şöyle dedin: bu yinelenen değil.
+Signaler de nouveau ¦ Yeniden bildir
+Aucune paire écartée. ¦ Bir kenara ayrılan çift yok.
+Gardées en versions de la photo gardée ¦ Tutulan fotoğrafın sürümleri olarak saklandı
+Le fichier est toujours sur le disque ¦ Dosya hâlâ diskte
+Fusionné ¦ Birleştirildi
+Remettre ¦ Geri koy
+La corbeille des doublons est vide. ¦ Yinelenenler çöp kutusu boş.
+Comparaison des photos… {pct} % ¦ Fotoğraflar karşılaştırılıyor… %{pct}
+Comparaison des photos… ¦ Fotoğraflar karşılaştırılıyor…
+{groups} parmi {media} — comparaison en cours… ¦ {groups} / {media} — karşılaştırma sürüyor…
+{groups} parmi {media} ¦ {groups} / {media}
+Aucun groupe de cette sorte ¦ Bu türde grup yok
+Aucun doublon trouvé ¦ Yinelenen bulunamadı
+Les empreintes ne sont pas toutes prêtes : la liste se complète toute seule. ¦ Parmak izlerinin hepsi hazır değil: liste kendiliğinden tamamlanır.
+Parmi {list}. Monte la sensibilité pour voir les photos plus différentes. ¦ Şunların arasında: {list}. Daha farklı fotoğrafları görmek için duyarlılığı artır.
+Groupe de {list} : ce ne sont pas des doublons ¦ Grup: {list}. Bunlar yinelenen değil
+« {title} » n’est pas un doublon des autres ¦ “{title}” ötekilerin yinelenmişi değil
+Paire signalée de nouveau ¦ Çift yeniden bildirildi
+Fusion annulée : les photos sont revenues avec leurs liens. ¦ Birleştirme geri alındı: fotoğraflar bağlantılarıyla geri geldi.
+=photo trouvée ¦ fotoğraf bulundu|fotoğraf bulundu
+=photo prête ¦ fotoğraf hazır|fotoğraf hazır
+=photo de la base ¦ veritabanındaki fotoğraf|veritabanındaki fotoğraf
+=groupe de doublons ¦ yinelenenler grubu|yinelenenler grubu
+=média comparé ¦ medya dosyası karşılaştırıldı|medya dosyası karşılaştırıldı
+Comparer deux arbres ¦ İki ağacı karşılaştır
+Masquer comparaison ¦ Karşılaştırmayı gizle
+avec les animaux ¦ hayvanlarla birlikte
+MON SITE WEB ¦ WEB SİTEM
+Page vide ¦ Boş sayfa
+Ma famille ¦ Ailem
+Mon village ¦ Köyüm
+Calque 1 ¦ Katman 1
+Calque {n} ¦ Katman {n}
+Nom inscrit ¦ Kaydedilen soyadı
+Groupe patronymique ¦ Soyadı grubu
+Couleur de peau ¦ Ten rengi
+ex : Dupont ¦ ör. Dupont
+« {name} » n’est ni une image, ni un son, ni une vidéo. ¦ “{name}” bir görüntü, ses ya da video değil.
+Ici, il faut une image. ¦ Burada bir görüntü gerekli.
+Ici, il faut un son. ¦ Burada bir ses gerekli.
+Ici, il faut une vidéo. ¦ Burada bir video gerekli.
+Fichier importé ¦ İçe aktarılan dosya
+assez grande pour imprimer en {f} ¦ şu boyutta yazdırmaya yetecek kadar büyük: {f}
+petite : écran seulement ¦ küçük: yalnızca ekran için
+{n} choisies ¦ {n} seçildi
+{n} choisie ¦ {n} seçildi
+{n} choisis ¦ {n} seçildi
+{n} choisi ¦ {n} seçildi
+MÉDIAS DE L’APP ¦ UYGULAMANIN MEDYASI
+Seulement ses médias ¦ Yalnızca onun medyası
+Montrer seulement ses médias ¦ Yalnızca onun medyasını göster
+Retirer le filtre de la personne ¦ Kişi filtresini kaldır
+Voir ses médias ¦ Medyasını gör
+Recherche impossible ¦ Arama yapılamadı
+La suite arrive en descendant… ¦ Aşağı kaydırdıkça devamı geliyor…
+Aucune image dans le presse-papiers. Copie une image, puis réessaie. ¦ Panoda görüntü yok. Bir görüntü kopyala, sonra yeniden dene.
+Appuie sur ⌘V (ou Ctrl+V) pour coller l’image ici. ¦ Görüntüyü buraya yapıştırmak için ⌘V (ya da Ctrl+V) tuşlarına bas.
+Les médias de quelle personne ? ¦ Hangi kişinin medyası?
+📝 Pas encore transcrites ¦ 📝 Henüz yazıya geçirilmemiş
+✅ Déjà transcrites ¦ ✅ Yazıya geçirilmiş
+✍ Avec une signature repérée ¦ ✍ İmzası bulunmuş
+images ¦ görüntüler
+sons ¦ sesler
+documents ¦ belgeler
+médias ¦ medya
+=son ¦ ses|ses
+Choisir des images ¦ Görüntüleri seç
+Choisir des sons ¦ Sesleri seç
+Choisir un son ¦ Bir ses seç
+Choisir des vidéos ¦ Videoları seç
+Choisir une vidéo ¦ Bir video seç
+Choisir des documents ¦ Belgeleri seç
+Choisir un document ¦ Bir belge seç
+Choisir des médias ¦ Medya seç
+Choisir un média ¦ Bir medya dosyası seç
+Utiliser cette image ¦ Bu görüntüyü kullan
+Utiliser ces sons ¦ Bu sesleri kullan
+Utiliser ce son ¦ Bu sesi kullan
+Utiliser ces vidéos ¦ Bu videoları kullan
+Utiliser cette vidéo ¦ Bu videoyu kullan
+Utiliser ces documents ¦ Bu belgeleri kullan
+Utiliser ce document ¦ Bu belgeyi kullan
+Utiliser ces médias ¦ Bu medyayı kullan
+Utiliser ce média ¦ Bu medya dosyasını kullan
+Glisse une image ici, colle-la (⌘V) ou <button>importe-la depuis l’ordinateur</button> : elle entre dans les médias et se coche. ¦ Bir görüntüyü buraya sürükle, yapıştır (⌘V) ya da <button>bilgisayardan içe aktar</button>: medyaya girer ve işaretlenir.
+Glisse un son ici, colle-le (⌘V) ou <button>importe-le depuis l’ordinateur</button> : il entre dans les médias et se coche. ¦ Bir sesi buraya sürükle, yapıştır (⌘V) ya da <button>bilgisayardan içe aktar</button>: medyaya girer ve işaretlenir.
+Glisse une vidéo ici, colle-la (⌘V) ou <button>importe-la depuis l’ordinateur</button> : elle entre dans les médias et se coche. ¦ Bir videoyu buraya sürükle, yapıştır (⌘V) ya da <button>bilgisayardan içe aktar</button>: medyaya girer ve işaretlenir.
+Glisse un média ici, colle-le (⌘V) ou <button>importe-le depuis l’ordinateur</button> : il entre dans les médias et se coche. ¦ Bir medya dosyasını buraya sürükle, yapıştır (⌘V) ya da <button>bilgisayardan içe aktar</button>: medyaya girer ve işaretlenir.
+« {title} » est entrée dans tes médias. ¦ “{title}” medyana eklendi.
+« {title} » est entré dans tes médias. ¦ “{title}” medyana eklendi.
+Aucune image pour « {q} ». ¦ “{q}” için görüntü yok.
+Aucune image avec ces filtres. ¦ Bu filtrelerle görüntü yok.
+Aucune image dans tes médias pour l’instant. ¦ Şimdilik medyanda görüntü yok.
+Aucun son pour « {q} ». ¦ “{q}” için ses yok.
+Aucun son avec ces filtres. ¦ Bu filtrelerle ses yok.
+Aucun son dans tes médias pour l’instant. ¦ Şimdilik medyanda ses yok.
+Aucune vidéo pour « {q} ». ¦ “{q}” için video yok.
+Aucune vidéo avec ces filtres. ¦ Bu filtrelerle video yok.
+Aucune vidéo dans tes médias pour l’instant. ¦ Şimdilik medyanda video yok.
+Aucun document pour « {q} ». ¦ “{q}” için belge yok.
+Aucun document avec ces filtres. ¦ Bu filtrelerle belge yok.
+Aucun document dans tes médias pour l’instant. ¦ Şimdilik medyanda belge yok.
+Aucun média pour « {q} ». ¦ “{q}” için medya yok.
+Aucun média avec ces filtres. ¦ Bu filtrelerle medya yok.
+Aucun média dans tes médias pour l’instant. ¦ Şimdilik medyanda hiçbir şey yok.
+Importe-la depuis l’ordinateur. ¦ Bilgisayardan içe aktar.
+Importe-le depuis l’ordinateur. ¦ Bilgisayardan içe aktar.
+Vérifie l’orthographe, enlève un filtre, ou importe-la depuis l’ordinateur. ¦ Yazımı kontrol et, bir filtreyi kaldır ya da bilgisayardan içe aktar.
+Vérifie l’orthographe, enlève un filtre, ou importe-le depuis l’ordinateur. ¦ Yazımı kontrol et, bir filtreyi kaldır ya da bilgisayardan içe aktar.
+Retire le filtre de la personne, ou importe-la depuis l’ordinateur. ¦ Kişi filtresini kaldır ya da bilgisayardan içe aktar.
+Retire le filtre de la personne, ou importe-le depuis l’ordinateur. ¦ Kişi filtresini kaldır ya da bilgisayardan içe aktar.
+Vérifie l’orthographe, enlève un filtre. ¦ Yazımı kontrol et, bir filtreyi kaldır.
+Retire le filtre de la personne. ¦ Kişi filtresini kaldır.
+Clique sur une image pour la voir ici en grand. ¦ Burada büyük görmek için bir görüntüye tıkla.
+Clique sur une image pour la voir ici. ¦ Burada görmek için bir görüntüye tıkla.
+Clique sur un son pour le voir ici en grand. ¦ Burada büyük görmek için bir sese tıkla.
+Clique sur un son pour le voir ici. ¦ Burada görmek için bir sese tıkla.
+Clique sur une vidéo pour la voir ici en grand. ¦ Burada büyük görmek için bir videoya tıkla.
+Clique sur une vidéo pour la voir ici. ¦ Burada görmek için bir videoya tıkla.
+Clique sur un document pour le voir ici en grand. ¦ Burada büyük görmek için bir belgeye tıkla.
+Clique sur un document pour le voir ici. ¦ Burada görmek için bir belgeye tıkla.
+Clique sur un média pour le voir ici en grand. ¦ Burada büyük görmek için bir medya dosyasına tıkla.
+Clique sur un média pour le voir ici. ¦ Burada görmek için bir medya dosyasına tıkla.
+design ¦ tasarım
+menus ¦ menüler
+listes ¦ listeler
+blocs des fiches ¦ kart blokları
+tableau de bord ¦ gösterge paneli
+fonds de carte ¦ harita altlıkları
+couleurs ¦ renkler
+portraits ¦ portreler
+colonne de gauche ¦ sol sütun
+accord des mots ¦ kelime uyumu
+designs au choix ¦ seçmeli tasarımlar
+réglages de départ ¦ başlangıç ayarları
+La base n’a pas pu enregistrer la mise en page : réessaie. ¦ Veritabanı düzeni kaydedemedi: yeniden dene.
+APPARENCE ¦ GÖRÜNÜM
+Réglages enregistrés : l’Apparence ¦ Kayıtlı ayarlar: Görünüm
+Garde <b>tous</b> les réglages de l’Apparence sous un nom : design, designs au choix, portraits, colonne de gauche, menus affichés ou masqués et leur ordre, listes, cartes, graphiques, blocs des fiches et du tableau de bord, couleurs, fonds de carte. Tu peux y revenir en un clic, ou envoyer le fichier à un autre utilisateur de LCNDA. ¦ Görünüm’ün <b>tüm</b> ayarlarını bir adla sakla: tasarım, seçmeli tasarımlar, portreler, sol sütun, gösterilen ya da gizlenen menüler ve sıraları, listeler, kartlar, grafikler, kart ve gösterge paneli blokları, renkler, harita altlıkları. Tek tıkla onlara geri dönebilir ya da dosyayı başka bir LCNDA kullanıcısına gönderebilirsin.
+tous les réglages de l’Apparence ¦ Görünüm’ün tüm ayarları
+reçue de ¦ gönderen:
+reçu de ¦ gönderen:
+Mise en page « {name} » supprimée ¦ Düzen silindi: “{name}”
+Tous les réglages de l’Apparence seront remplacés (pense à enregistrer la mise en page actuelle si tu veux la garder). L’écran va se recharger. ¦ Görünüm’ün tüm ayarları değiştirilecek (şu anki düzeni tutmak istiyorsan önce kaydet). Ekran yeniden yüklenecek.
+Appliquer la mise en page « {name} » ? ¦ Bu düzen uygulansın mı: “{name}”?
+Mise en page « {name} » appliquée. ¦ Düzen uygulandı: “{name}”.
+Fichier prêt : envoie-le à l’autre personne, elle l’importe dans Réglages → Apparence. ¦ Dosya hazır: öteki kişiye gönder, o da Ayarlar → Görünüm bölümünden içe aktarsın.
+Ce fichier n’est pas une mise en page LCNDA. ¦ Bu dosya bir LCNDA düzeni değil.
+Mise en page « {name} » importée : clique sur « Appliquer » pour l’utiliser. ¦ Düzen içe aktarıldı: “{name}”. Kullanmak için “Uygula” düğmesine tıkla.
+({n} réglages illisibles laissés de côté) ¦ ({n} okunamayan ayar dışarıda bırakıldı)
+(1 réglage illisible laissé de côté) ¦ (1 okunamayan ayar dışarıda bırakıldı)
+Trop de réglages enregistrés pour la place disponible : supprimes-en un. ¦ Kullanılabilir yer için çok fazla kayıtlı ayar var: birini sil.
+Tes graphiques n’ont pas pu être remis : {err} ¦ Grafiklerin geri yüklenemedi: {err}
+La base n’a pas pu enregistrer ces réglages : réessaie. ¦ Veritabanı bu ayarları kaydedemedi: yeniden dene.
+TOUS LES RÉGLAGES ¦ TÜM AYARLAR
+Réglages enregistrés : toute l’app ¦ Kayıtlı ayarlar: tüm uygulama
+Garde <b>l’intégralité</b> des réglages de l’app sous un nom : l’Apparence, mais aussi les listes et leurs colonnes, les graphiques et onglets à soi, les widgets, les tableaux, les animaux, les livrets, les raccourcis, la recherche sur internet… Tu peux y revenir en un clic, ou les passer à un autre ordinateur avec un fichier. Ne sont pas gardés : tes données, ce qui vise une fiche précise (de cujus, exceptions d’une fiche), le code pour quitter le mode simple et la personne qui regarde, et ce qui est propre à cet ordinateur. ¦ Uygulamanın ayarlarının <b>tamamını</b> bir adla sakla: Görünüm, ama aynı zamanda listeler ve sütunları, kendi grafiklerin ve sekmelerin, widget’lar, tablolar, hayvanlar, kitapçıklar, kısayollar, internette arama… Tek tıkla onlara geri dönebilir ya da bir dosyayla başka bir bilgisayara taşıyabilirsin. Saklanmayanlar: verilerin, belirli bir kartı hedefleyen şeyler (kök kişi, bir karta özel istisnalar), basit moddan çıkış kodu ve bakan kişi, bir de bu bilgisayara özgü olanlar.
+Mes réglages ¦ Ayarlarım
+Fichier prêt : il s’importe ici, sur un autre ordinateur. ¦ Dosya hazır: başka bir bilgisayarda, burada içe aktarılır.
+tous les réglages de l’app ¦ uygulamanın tüm ayarları
+Tous les réglages de l’app seront remplacés (pense à enregistrer les réglages actuels si tu veux les garder). Tes données ne bougent pas. L’écran va se recharger. ¦ Uygulamanın tüm ayarları değiştirilecek (şu anki ayarları tutmak istiyorsan önce kaydet). Verilerin değişmez. Ekran yeniden yüklenecek.
+Appliquer l’ensemble « {name} » ? ¦ Bu ayar takımı uygulansın mı: “{name}”?
+Fichier prêt : il s’importe dans Réglages → Apparence → « Mes ensembles de réglages ». ¦ Dosya hazır: Ayarlar → Görünüm → “Ayar takımlarım” bölümünden içe aktarılır.
+Ce fichier n’est pas un fichier de réglages LCNDA. ¦ Bu dosya bir LCNDA ayar dosyası değil.
+Réglages importés ¦ İçe aktarılan ayarlar
+Ensemble « {name} » importé : clique sur « Appliquer » pour l’utiliser. ¦ Ayar takımı içe aktarıldı: “{name}”. Kullanmak için “Uygula” düğmesine tıkla.
+1≡ Liste numérotée ¦ 1≡ Numaralı liste
+A Couleur du texte ¦ A Metin rengi
+S Souligné ¦ S Altı çizili
+ab Barré ¦ ab Üstü çizili
+Trier, filtrer, Σ ¦ Sırala, filtrele, Σ
+Menu Édition ¦ Düzen menüsü
+Sélection directe (points et poignées) (A) ¦ Doğrudan seçim (noktalar ve tutamaçlar) (A)
+Crayon (à main levée) (N) ¦ Kalem (serbest el) (N)
+Étoile (S) ¦ Yıldız (S)
+Spirale (glisser depuis le centre) (O) ¦ Sarmal (merkezden sürükle) (O)
+Pipette (prend la couleur d’un objet) (I) ¦ Damlalık (bir nesnenin rengini alır) (I)
+Main (déplacer la vue) (H) ¦ El (görünümü kaydır) (H)
+Loupe (⌥ : dézoomer) (Z) ¦ Büyüteç (⌥: uzaklaştır) (Z)
+Remplissage et contour de la sélection ¦ Seçimin dolgusu ve kontürü
+Contour blanc du texte ¦ Metnin beyaz kontürü
+Polices de l’ordi ¦ Bilgisayarın yazı tipleri
+Clic sur la courbe : ajouter un point ¦ Eğriye tıkla: nokta ekle
+glisser : le déplace ¦ sürükle: taşır
+Temps (où on en est / durée) ¦ Zaman (bulunulan yer / süre)
+✒︎ Plume (P) : clic = point, double-clic ou Entrée = fini ¦ ✒︎ Kalem (P): tıkla = nokta, çift tıkla ya da Enter = bitti
+Comprendre l’ADN en généalogie ¦ Soy araştırmasında DNA’yı anlamak
+L’essentiel, en clair. ¦ Özü, açık bir dille.
+Les types de tests ¦ Test türleri
+<p><b>Autosomal</b> (atDNA) : les 22 paires de chromosomes non sexuels, reçues pour moitié de chaque parent. Il retrouve des cousins de tous les côtés jusqu’à 5 à 8 générations environ. C’est le test « généalogique » le plus courant.</p><p><b>ADN-Y</b> : transmis de père en fils presque sans changement. Il suit une seule lignée, celle du nom de famille dans beaucoup de cas, sur des centaines d’années. On l’étudie par ses marqueurs (Y-STR : 37, 67, 111 marqueurs…) et ses mutations (SNP) qui donnent l’<b>haplogroupe</b>.</p><p><b>ADN mitochondrial</b> (ADNmt) : transmis par la mère à tous ses enfants, seules les filles le transmettent. Très stable : utile pour des questions anciennes ou pour départager deux lignées maternelles.</p><p><b>ADN-X</b> : son mode de transmission particulier élimine des ancêtres (voir « Lignées Y, mt et X »).</p> ¦ <p><b>Otozomal</b> (atDNA): cinsiyet dışı 22 kromozom çifti, yarısı her ebeveynden gelir. Yaklaşık 5 ila 8 kuşak geriye kadar her yandan kuzenleri bulur. En yaygın “soy” testidir.</p><p><b>Y-DNA</b>: babadan oğula neredeyse hiç değişmeden geçer. Yüzlerce yıl boyunca tek bir soy hattını izler; çoğu zaman soyadının hattını. İşaretleriyle (Y-STR: 37, 67, 111 işaret…) ve <b>haplogrubu</b> veren mutasyonlarıyla (SNP) incelenir.</p><p><b>Mitokondriyal DNA</b> (mtDNA): anneden bütün çocuklarına geçer, yalnızca kızlar onu aktarır. Çok kararlıdır: eski sorular için ya da iki anne hattını ayırt etmek için yararlıdır.</p><p><b>X-DNA</b>: kendine özgü aktarılma biçimi bazı ataları dışarıda bırakır (bkz. “Y, mt ve X hatları”).</p>
+Centimorgans (cM) et segments ¦ Santimorgan (cM) ve segmentler
+<p>Le <b>centimorgan</b> mesure une longueur d’ADN « génétique ». On partage environ 3 400 à 3 700 cM avec un parent, 850 en moyenne avec un cousin germain, 230 avec un cousin issu de germain… Le total et la <b>longueur du plus long segment</b> aident à deviner la relation (« 📐 Calculateur »). Les petits segments (moins de 7 à 8 cM) sont souvent du « bruit » ou très anciens.</p> ¦ <p><b>Santimorgan</b>, “genetik” bir DNA uzunluğunu ölçer. Bir ebeveynle yaklaşık 3.400 ila 3.700 cM, birinci dereceden bir kuzenle ortalama 850, ikinci dereceden bir kuzenle 230 cM paylaşılır… Toplam ve <b>en uzun segmentin uzunluğu</b>, akrabalığı tahmin etmeye yardım eder (“📐 Hesaplayıcı”). Küçük segmentler (7–8 cM’den az) çoğu zaman “gürültü”dür ya da çok eskidir.</p>
+Haplogroupes ¦ Haplogruplar
+<p>Un <b>haplogroupe</b> (R-M269, I-M253, H1, U5b…) regroupe tous ceux qui descendent d’un même lointain ancêtre en ligne Y ou mt, souvent il y a des milliers d’années. Deux personnes du même haplogroupe ne sont pas forcément proches : il faut des sous-clades fines ou une correspondance de marqueurs.</p> ¦ <p>Bir <b>haplogrup</b> (R-M269, I-M253, H1, U5b…), Y ya da mt hattında aynı uzak atadan gelen herkesi bir araya toplar; bu ata çoğu zaman binlerce yıl öncesine dayanır. Aynı haplogruptaki iki kişi mutlaka yakın akraba değildir: ince alt kollar ya da işaretlerde bir eşleşme gerekir.</p>
+Triangulation ¦ Üçgenleme
+<p>Si A correspond avec toi, B correspond avec toi, <b>et</b> A et B correspondent entre eux <b>sur le même segment</b>, ce segment vient très probablement d’un ancêtre commun aux trois. C’est la meilleure preuve génétique d’une branche. Le « 🧩 navigateur de chromosomes » montre les chevauchements à vérifier.</p> ¦ <p>A seninle eşleşiyorsa, B seninle eşleşiyorsa <b>ve</b> A ile B de <b>aynı segment üzerinde</b> birbiriyle eşleşiyorsa, bu segment büyük olasılıkla üçünün ortak atasından gelir. Bu, bir kolun en iyi genetik kanıtıdır. “🧩 Kromozom tarayıcısı”, kontrol edilecek çakışmaları gösterir.</p>
+La méthode de Leeds ¦ Leeds yöntemi
+<p>Mise au point par Dana Leeds : on prend les correspondances de 90 à 400 cM (cousins de 2e et 3e degré), et on colore ensemble celles qui se correspondent entre elles. On obtient souvent 4 groupes (tes 4 grands-parents) ou 8 (tes arrière-grands-parents). Il faut noter les « correspondances en commun » de chacun (« 🗂️ Groupes »).</p> ¦ <p>Dana Leeds’in geliştirdiği yöntem: 90 ila 400 cM arasındaki eşleşmeleri (2. ve 3. dereceden kuzenler) al ve birbiriyle eşleşenleri aynı renge boya. Çoğu zaman 4 grup (4 büyükannen ve büyükbaban) ya da 8 grup (büyük büyükannelerin ve büyük büyükbabaların) elde edilir. Her birinin “ortak eşleşmelerini” not etmen gerekir (“🗂️ Gruplar”).</p>
+<p>Dans un village isolé, une île, une communauté fermée, on descend plusieurs fois des mêmes ancêtres (<b>implexe</b>). On partage alors plus d’ADN qu’attendu, en beaucoup de petits segments : les relations paraissent plus proches qu’elles ne sont. Méfie-toi des estimations, regarde le plus long segment.</p> ¦ <p>Yalıtılmış bir köyde, bir adada, kapalı bir toplulukta aynı atalardan birkaç kez gelinir (<b>implex</b>, tekrarlanan atalar). O zaman beklenenden fazla DNA, çok sayıda küçük segment hâlinde paylaşılır: akrabalıklar olduğundan daha yakın görünür. Tahminlere temkinli yaklaş, en uzun segmente bak.</p>
+<ol><li>Regarde les cM et le plus long segment, la relation probable.</li><li>Regarde les correspondances en commun : de quel côté ? de quel groupe ?</li><li>Compare les noms et les lieux de son arbre avec les tiens.</li><li>Construis son arbre vers le passé jusqu’à trouver le couple commun (MRCA).</li><li>Vérifie que les cM collent avec la relation trouvée.</li><li>Note l’ancêtre commun, lie sa fiche, mets « Placé dans l’arbre ✓ ».</li></ol> ¦ <ol><li>cM’ye ve en uzun segmente, olası akrabalığa bak.</li><li>Ortak eşleşmelere bak: hangi taraf? hangi grup?</li><li>Onun ağacındaki adları ve yerleri seninkilerle karşılaştır.</li><li>Ortak çifti (MRCA) bulana kadar onun ağacını geçmişe doğru kur.</li><li>cM değerinin bulunan akrabalığa uyduğunu kontrol et.</li><li>Ortak atayı not et, kartını bağla, “Ağaca yerleştirildi ✓” işaretini koy.</li></ol>
+<ul><li>Demande l’accord de la personne avant de tester, et explique ce qu’on peut découvrir.</li><li>Ne publie pas les noms et les cM de personnes vivantes sans leur accord.</li><li>Prépare-toi aux surprises (parent biologique inconnu, adoption, don de gamètes) et sois délicat avec les personnes concernées.</li><li>Dans les sociétés de test, choisis les options de partage, de recherche et d’usage par la justice qui te conviennent.</li><li>En France : voir « ⚖️ Loi et mises en garde ».</li></ul> ¦ <ul><li>Test etmeden önce kişinin onayını al ve neler ortaya çıkabileceğini açıkla.</li><li>Yaşayan kişilerin adlarını ve cM değerlerini onların onayı olmadan yayımlama.</li><li>Sürprizlere hazırlıklı ol (bilinmeyen biyolojik ebeveyn, evlat edinme, üreme hücresi bağışı) ve ilgili kişilere karşı nazik davran.</li><li>Test şirketlerinde, sana uyan paylaşım, araştırma ve adli kullanım seçeneklerini seç.</li><li>Fransa’da: “⚖️ Yasa ve uyarılar” bölümüne bak.</li></ul>
+Petit glossaire ¦ Küçük sözlük
+<dl class="h-dna-gloss"><dt>SNP</dt><dd>Une « lettre » de l’ADN qui varie d’une personne à l’autre ; les puces en lisent des centaines de milliers.</dd><dt>STR</dt><dd>Un motif répété (ADN-Y), compté pour comparer deux hommes.</dd><dt>MRCA</dt><dd>Most Recent Common Ancestor : l’ancêtre commun le plus récent.</dd><dt>ICW</dt><dd>In Common With : les correspondances que deux personnes partagent.</dd><dt>1C1R</dt><dd>Cousin germain une génération d’écart (« issu de germain »).</dd><dt>GRCh37</dt><dd>La « carte » du génome sur laquelle sont donnés les débuts et fins de segments.</dd><dt>Fichier brut</dt><dd>Le fichier de tes SNP que certaines sociétés laissent télécharger.</dd></dl> ¦ <dl class="h-dna-gloss"><dt>SNP</dt><dd>DNA’nın kişiden kişiye değişen bir “harfi”; çipler bunlardan yüz binlercesini okur.</dd><dt>STR</dt><dd>İki erkeği karşılaştırmak için sayılan, tekrarlanan bir motif (Y-DNA).</dd><dt>MRCA</dt><dd>Most Recent Common Ancestor: en yakın ortak ata.</dd><dt>ICW</dt><dd>In Common With: iki kişinin paylaştığı eşleşmeler.</dd><dt>1C1R</dt><dd>Bir kuşak farkla birinci dereceden kuzen.</dd><dt>GRCh37</dt><dd>Segmentlerin başlangıç ve bitişlerinin verildiği genom “haritası”.</dd><dt>Ham dosya</dt><dd>Bazı şirketlerin indirmene izin verdiği SNP dosyan.</dd></dl>
+=club ¦ kulüp|kulüp
+Lire une table décennale ¦ On yıllık bir dizini oku
+DÉPOUILLEMENTS · TABLE DÉCENNALE ¦ DÖKÜMLER · ON YILLIK DİZİN
+L’image ¦ Görüntü
+La lecture ¦ Okuma
+La relecture ¦ Gözden geçirme
+Relire → ¦ Gözden geçir →
+Suivant : créer → ¦ Sonraki: oluştur →
+Ce qui a été lu ou saisi n’est pas encore dans un dépouillement. ¦ Okunan ya da girilen bilgiler henüz bir dökümde değil.
+Fermer l’assistant ? ¦ Yardımcı kapatılsın mı?
+Fermer sans créer ¦ Oluşturmadan kapat
+L’image n’a pas pu être ouverte. ¦ Görüntü açılamadı.
+Choisis la photo de la table. ¦ Dizinin fotoğrafını seç.
+Choisis la photo de la table ¦ Dizinin fotoğrafını seç
+Je ne trouve pas d’année : écris par exemple « 1853-1862 ». ¦ Bir yıl bulamıyorum: örneğin “1853-1862” yaz.
+⚠️ Je ne trouve pas d’année. ¦ ⚠️ Bir yıl bulamıyorum.
+Donne au moins une colonne « Nom » ou « Prénoms ». ¦ En az bir “Soyadı” ya da “Adlar” sütunu belirt.
+Aucune ligne avec un nom : saisis au moins un nom, ou reviens à la lecture. ¦ Adı olan satır yok: en az bir ad gir ya da okumaya geri dön.
+Aucune ligne avec un nom. ¦ Adı olan satır yok.
+La photo de la table ¦ Dizinin fotoğrafı
+La photo de la table décennale ¦ On yıllık dizinin fotoğrafı
+La table décennale ¦ On yıllık dizin
+Une page (ou une double page) photographiée bien à plat ; une image de l’ordinateur entre dans les Médias. ¦ İyice düz fotoğraflanmış bir sayfa (ya da çift sayfa); bilgisayardan alınan bir görüntü Medya’ya girer.
+Période de la table ¦ Dizinin dönemi
+Sorte d’actes ¦ Belge türü
+L’écriture de la table ¦ Dizinin yazısı
+Imprimée ou tapée ¦ Basılı ya da daktiloyla yazılmış
+Dans tes médias, ou depuis l’ordinateur (glisser, coller, importer). ¦ Medyanda ya da bilgisayardan (sürükle, yapıştır, içe aktar).
+Choisir la photo ¦ Fotoğrafı seç
+Facultatif : sert à compléter les dates sans année et à repérer celles qui sortent de la table. ¦ İsteğe bağlı: yılı olmayan tarihleri tamamlamaya ve dizinin dışına düşenleri bulmaya yarar.
+✓ Compris : de {a} à {b} ¦ ✓ Anlaşıldı: {a} – {b}
+Mes réglages (glissés) ¦ Ayarlarım (sürüklenen)
+Couper la colonne la plus large en deux ¦ En geniş sütunu ikiye böl
+Retirer la dernière colonne ¦ Son sütunu çıkar
+Garder ces colonnes pour une prochaine table (sur cet ordinateur) ¦ Bu sütunları sonraki bir dizin için sakla (bu bilgisayarda)
+Garder ce gabarit ¦ Bu şablonu sakla
+Chercher les lignes d’écriture entre le trait du haut et celui du bas ¦ Üst çizgi ile alt çizgi arasındaki yazı satırlarını ara
+Repérer les lignes ¦ Satırları bul
+Nombre de lignes : la zone est coupée en parts égales ¦ Satır sayısı: alan eşit parçalara bölünür
+Glisse les <b class="h-td-k-col">traits bleus</b> pour séparer les colonnes et choisis ce que contient chacune ; les <b class="h-td-k-band">traits orange</b> bornent la zone à lire (sous les titres, au-dessus du bas de page). Puis « ↧ Repérer les lignes ». ¦ Sütunları ayırmak için <b class="h-td-k-col">mavi çizgileri</b> sürükle ve her birinin ne içerdiğini seç; <b class="h-td-k-band">turuncu çizgiler</b> okunacak alanı sınırlar (başlıkların altında, sayfa altının üstünde). Sonra “↧ Satırları bul”.
+Séparation de colonne {n} ¦ Sütun ayırıcı {n}
+Haut de la zone à lire ¦ Okunacak alanın üstü
+Bas de la zone à lire ¦ Okunacak alanın altı
+{lines} : vérifie qu’elles tombent bien sur l’écriture. ¦ {lines}: yazının üzerine iyi denk geldiklerini kontrol et.
+Aucune ligne repérée : ajuste les traits orange, ou indique le nombre de lignes. ¦ Hiç satır bulunamadı: turuncu çizgileri ayarla ya da satır sayısını belirt.
+Son nom (il sera proposé pour tes prochaines tables, sur cet ordinateur) : ¦ Adı (bu bilgisayarda sonraki dizinlerin için önerilecek):
+Gabarit « {name} » gardé. ¦ Şablon saklandı: “{name}”.
+✍ Saisir les lignes à la main ¦ ✍ Satırları elle gir
+{lines} : passe à la relecture, ou relis l’image. ¦ {lines}: gözden geçirmeye geç ya da görüntüyü yeniden oku.
+↻ Relire l’image ¦ ↻ Görüntüyü yeniden oku
+Le lecteur d’écriture manuscrite (HTR) n’est pas installé sur cet ordinateur : la saisie se fait à la main, dans une grille rapide, la bande de chaque ligne sous les yeux. (Pour l’installer : Réglages → Reconnaissance d’écriture.) ¦ El yazısı okuyucu (HTR) bu bilgisayarda kurulu değil: giriş, her satırın şeridi gözünün önünde, hızlı bir tabloda elle yapılır. (Kurmak için: Ayarlar → El yazısı tanıma.)
+{lines} à lire avec le lecteur d’écriture manuscrite (HTR) : chaque case est envoyée au lecteur installé sur cet ordinateur. C’est plus lent, et à relire attentivement. ¦ El yazısı okuyucuyla (HTR) okunacak: {lines}. Her hücre bu bilgisayarda kurulu okuyucuya gönderilir. Daha yavaştır ve dikkatle gözden geçirilmelidir.
+▶ Lire les lignes ¦ ▶ Satırları oku
+{lines} à lire, {cols}. La lecture se fait sur cet ordinateur (le moteur est téléchargé une fois, et vérifié). ¦ Okunacak: {lines}, {cols}. Okuma bu bilgisayarda yapılır (motor bir kez indirilir ve kontrol edilir).
+Chargement du moteur de lecture… ¦ Okuma motoru yükleniyor…
+Lecture de la table… ¦ Dizin okunuyor…
+{lines} sur {n} : relis et corrige. ¦ {lines} / {n}: gözden geçir ve düzelt.
+▶ Reprendre la lecture ¦ ▶ Okumayı sürdür
+Le lecteur d’écriture manuscrite n’a pas pu lire la table ({err}). ¦ El yazısı okuyucu dizini okuyamadı ({err}).
+Le moteur de lecture n’a pas pu être chargé. ¦ Okuma motoru yüklenemedi.
+La saisie à la main reste possible : la bande de chaque ligne s’affiche au-dessus de la grille. ¦ Elle giriş hâlâ mümkün: her satırın şeridi tablonun üstünde gösterilir.
+hors de la période de la table ({years}) ¦ dizinin döneminin dışında ({years})
+date à vérifier ¦ kontrol edilecek tarih
+année à préciser ¦ yılı belirtilmeli
+La ligne sur l’image ¦ Görüntüdeki satır
+La ligne {n} sur l’image ¦ Görüntüdeki {n}. satır
+Saisis chaque ligne en regardant la bande au-dessus. ¦ Her satırı, üstündeki şeride bakarak gir.
+Ce que l’app a lu : corrige ce qui est faux (les cases peu sûres sont en jaune). ¦ Uygulamanın okudukları: yanlış olanı düzelt (emin olunmayan hücreler sarıdır).
+Entrée ou ↓ : ligne suivante ; ↑ : ligne d’avant. Les dates sans année prennent l’année de la ligne d’avant (table de {a} à {b}). ¦ Enter ya da ↓: sonraki satır; ↑: önceki satır. Yılı olmayan tarihler önceki satırın yılını alır (dizin: {a} – {b}).
+Entrée ou ↓ : ligne suivante ; ↑ : ligne d’avant. Les dates sans année prennent l’année de la ligne d’avant. ¦ Enter ya da ↓: sonraki satır; ↑: önceki satır. Yılı olmayan tarihler önceki satırın yılını alır.
+N° / notes ¦ No. / notlar
+Nom, ligne {n} ¦ Soyadı, satır {n}
+Prénoms, ligne {n} ¦ Adlar, satır {n}
+Année, ligne {n} ¦ Yıl, satır {n}
+Date, ligne {n} ¦ Tarih, satır {n}
+Sorte d’acte, ligne {n} ¦ Belge türü, satır {n}
+Notes, ligne {n} ¦ Notlar, satır {n}
+12 mars, 12/03/1855… ¦ 12 mars, 12/03/1855…
+Retirer cette ligne ¦ Bu satırı çıkar
+Retirer la ligne {n} ¦ Satırı çıkar: {n}
+Aucune ligne : « ＋ Ajouter une ligne ». ¦ Satır yok: “＋ Satır ekle”.
+{lines} sur {n} ¦ {lines} / {n}
+Ligne {n} ¦ Satır {n}
+Voilà ce qui va entrer ¦ İşte girecek olanlar
+Un dépouillement <b>« {title} »</b> (modèle « Table décennale »), dans Listes → Dépouillements et Recherche → Dépouillement d’archive ; ¦ Bir döküm: <b>“{title}”</b> (“On yıllık dizin” şablonu), Listeler → Dökümler ve Araştırma → Arşiv dökümü bölümlerinde;
+<b>{lines}</b> relevées (nom, prénoms, date, sorte d’acte), chacune avec sa zone sur l’image ; ¦ <b>{lines}</b> kaydedildi (soyadı, adlar, tarih, belge türü), her biri görüntüdeki alanıyla;
+<b>{lines}</b> relevée (nom, prénoms, date, sorte d’acte), chacune avec sa zone sur l’image ; ¦ <b>{lines}</b> kaydedildi (soyadı, adlar, tarih, belge türü), görüntüdeki alanıyla;
+la photo de la table, reliée au dépouillement (page 1). ¦ dizinin fotoğrafı, dökümle bağlantılı (sayfa 1).
+{dates} à vérifier : elles sont gardées telles qu’écrites. ¦ Kontrol edilecek: {dates}. Yazıldıkları gibi saklanırlar.
+Ensuite, l’app te propose les fiches qui correspondent : relier ou créer, ligne par ligne. ¦ Sonra uygulama eşleşen kartları önerir: satır satır bağla ya da oluştur.
+Création du dépouillement… ¦ Döküm oluşturuluyor…
+Création… ¦ Oluşturuluyor…
+Le dépouillement n’a pas pu être créé. ¦ Döküm oluşturulamadı.
+Dépouillement créé : {lines} ¦ Döküm oluşturuldu: {lines}
+Dépouillement créé. ¦ Döküm oluşturuldu.
+＋ Fiche créée ¦ ＋ Kart oluşturuldu
+🔗 Reliée ¦ 🔗 Bağlandı
+Relier la ligne à la fiche choisie ¦ Satırı seçilen karta bağla
+Créer la fiche {name} avec son événement ¦ Kartı olayıyla birlikte oluştur: {name}
+Créer la fiche {name} ¦ Kartı oluştur: {name}
+fiche proposée ¦ önerilen kart
+Le dépouillement « {title} » est créé avec {lines}. ¦ “{title}” dökümü oluşturuldu: {lines}.
+Ouvrir le dépouillement ¦ Dökümü aç
+Relier les fiches proposées ¦ Önerilen kartları bağla
+Pour chaque ligne : relie-la à une fiche de ta base (menu de choix), ou crée la fiche. Rien n’est obligatoire : la ligne reste dans le dépouillement. ¦ Her satır için: onu veritabanındaki bir karta bağla (seçim menüsü) ya da kartı oluştur. Hiçbiri zorunlu değil: satır dökümde kalır.
+La fiche n’a pas pu être créée. ¦ Kart oluşturulamadı.
+{lines} à sa fiche ¦ Kartına bağlanan: {lines}
+Choisis la fiche dans la liste (ou « ＋ Créer la fiche »). ¦ Kartı listeden seç (ya da “＋ Kartı oluştur”).
+Choisis la fiche dans la liste. ¦ Kartı listeden seç.
+Ligne reliée à {name} ¦ Satır bağlandı: {name}
+Fiche créée : {name} ¦ Kart oluşturuldu: {name}
+Plusieurs sortes (colonne « sorte d’acte ») ¦ Birkaç tür (“belge türü” sütunu)
+Nom · Prénoms · Date (la plus courante) ¦ Soyadı · Adlar · Tarih (en yaygın)
+Nom · Prénoms · Date · Sorte d’acte (table mixte) ¦ Soyadı · Adlar · Tarih · Belge türü (karışık dizin)
+N° · Nom · Prénoms · Date ¦ No. · Soyadı · Adlar · Tarih
+Année · Nom · Prénoms · Date ¦ Yıl · Soyadı · Adlar · Tarih
+Nom · Prénoms · Date · Observations ¦ Soyadı · Adlar · Tarih · Gözlemler
+=ligne déjà lue ¦ satır zaten okundu|satır zaten okundu
+=ligne avec un nom ¦ adı olan satır|adı olan satır
+=ligne reliée ¦ satır bağlandı|satır bağlandı
+=date reste ¦ tarih kaldı|tarih kaldı
+Les photos à montrer ¦ Gösterilecek fotoğraflar
+{faces} sur {photos}. ¦ {faces} / {photos}.
+=visage choisi ¦ yüz seçildi|yüz seçildi
+Ajouter une ligne ¦ Satır ekle

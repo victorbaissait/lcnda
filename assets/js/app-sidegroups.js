@@ -4,6 +4,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s); // 🌐 docs/I18N.md
     const A = () => window.LCNDA_APP;
     const esc = s => A().escapeHtml(String(s ?? ''));
     const readJ = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v ?? d; } catch (_) { return d; } };
@@ -83,14 +84,14 @@
                         <ol class="dashboard-reorder-list">${g.items.map((k, ii) => row(k, ++n, ii, g.items.length, `<select data-imove aria-label="Changer de groupe">${p.groups.map((x, xi) => `<option value="${xi}" ${xi === gi ? 'selected' : ''}>${esc(x.icon)} ${esc(x.label)}</option>`).join('')}</select>`)).join('') || '<li class="muted mt-empty">Groupe vide</li>'}</ol></section>`).join('')}`
                     : `<section class="mt-rgroup" data-flat><ol class="dashboard-reorder-list">${flat.map((k, i) => row(k, i + 1, i, flat.length)).join('')}</ol></section>`}
                     ${mine.length ? `<section class="mt-rgroup mt-rmine" data-mine><div class="mt-rghead"><span class="mt-ricon">⭐</span><b class="mt-rlabel">Mes listes</b><small class="muted">toujours en bas, à part : range-les entre elles</small></div><ol class="dashboard-reorder-list">${mine.map((m, i) => `<li class="dashboard-reorder-row" data-ii="${i}"><span class="order-number">${esc(m.icon)}</span><b style="flex:1">${esc(m.label)}</b><span class="order-actions">${arrows(i, mine.length)}</span></li>`).join('')}</ol></section>` : ''}`; };
-            dialog.innerHTML = inline ? `<p class="muted sg-inline-help">Range avec ↑ ↓${cfg.canHide ? ', coche ce qui s’affiche dans la colonne' : ''}, en groupes ou en une seule liste. <b>Enregistré tout seul.</b></p>
+            dialog.innerHTML = inline ? `<p class="muted sg-inline-help">${i18n(cfg.canHide ? 'Range avec ↑ ↓, coche ce qui s’affiche dans la colonne, en groupes ou en une seule liste.' : 'Range avec ↑ ↓, en groupes ou en une seule liste.')} <b>Enregistré tout seul.</b></p>
                 <div class="dash-reorder-tools" data-mt-tools></div><div class="mt-rbody" data-mt-body></div>`
-                : `<div class="modal-head"><div><span class="eyebrow">${esc(cfg.eyebrow)}</span><h2>Réordonner les ${esc(what)}</h2><p>Range avec ↑ ↓${cfg.canHide ? ', coche ce qui s’affiche' : ''}, en groupes ou en une seule liste. Puis Enregistrer.</p></div><button class="icon-button" type="button" data-close aria-label="Fermer">×</button></div>
+                : `<div class="modal-head"><div><span class="eyebrow">${esc(cfg.eyebrow)}</span><h2>${i18n(what === 'listes' ? 'Réordonner les listes' : what === 'pages' ? 'Réordonner les pages' : 'Réordonner les {what}', {what: esc(what)})}</h2><p>${i18n(cfg.canHide ? 'Range avec ↑ ↓, coche ce qui s’affiche, en groupes ou en une seule liste. Puis Enregistrer.' : 'Range avec ↑ ↓, en groupes ou en une seule liste. Puis Enregistrer.')}</p></div><button class="icon-button" type="button" data-close aria-label="Fermer">×</button></div>
                 <div class="dash-reorder-tools" data-mt-tools></div><div class="mt-rbody" data-mt-body></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-close>Annuler</button><button class="button" type="button" data-save>Enregistrer</button></div>`;
             if (!inline) document.body.append(dialog); draw();
             /** dans une page : chaque changement est gardé tout de suite (sans redessiner l'éditeur) */
             let quiet = 0;
-            const keep = () => { if (!inline) return; const all = cfg.allKeys(); if (cfg.canHide && all.every(k => hid.has(k))) { A().toast(`Garde au moins une ${what === 'listes' ? 'liste' : 'page'} visible.`, 'error'); return; }
+            const keep = () => { if (!inline) return; const all = cfg.allKeys(); if (cfg.canHide && all.every(k => hid.has(k))) { A().toast(what === 'listes' ? 'Garde au moins une liste visible.' : 'Garde au moins une page visible.', 'error'); return; }
                 save(p); cfg.setFlatOrder(flat); if (cfg.canHide) cfg.setHidden([...hid]); if (cfg.mineKey) writeJ(cfg.mineKey, mine.map(m => m.v)); clearTimeout(quiet); quiet = setTimeout(() => A().renderSidebar(), 60); };
             if (inline) { dialog.addEventListener('change', () => setTimeout(keep, 0)); dialog.addEventListener('click', e => { if (e.target.closest('button')) setTimeout(keep, 0); }); }
             const sync = () => dialog.querySelectorAll('[data-gi]').forEach(s => { const g = p.groups[Number(s.dataset.gi)]; g.icon = s.querySelector('[data-gicon]').value.trim() || '📁'; g.label = s.querySelector('[data-glabel]').value.trim() || 'Groupe'; });
@@ -111,7 +112,7 @@
                 if (b.hasAttribute('data-reset-groups')) { const order = p.groups.flatMap(g => g.items); p.groups = defaults().map(g => ({...g, items: g.items.filter(k => order.includes(k)).sort((a, c) => order.indexOf(a) - order.indexOf(c))})); const keep = new Set(p.groups.flatMap(g => g.items)); order.filter(k => !keep.has(k)).forEach(k => p.groups.at(-1).items.push(k)); draw(); return; } // l'ordre à l'intérieur est gardé
                 if (b.hasAttribute('data-reset-all')) { if (p.enabled) p = {...p, groups: defaults(), open: 'open', closedMode: 'always', openState: {}}; else flat = cfg.flatDefaults(); hid.clear(); mine = (cfg.mine?.() || []).map(m => ({v: m[0], label: m[2], icon: m[1]})); draw(); return; }
                 if (b.hasAttribute('data-save')) {
-                    const all = cfg.allKeys(); if (cfg.canHide && all.every(k => hid.has(k))) return A().toast(`Garde au moins une ${what === 'listes' ? 'liste' : 'page'} visible.`, 'error');
+                    const all = cfg.allKeys(); if (cfg.canHide && all.every(k => hid.has(k))) return A().toast(what === 'listes' ? 'Garde au moins une liste visible.' : 'Garde au moins une page visible.', 'error');
                     // les deux façons gardent leurs réglages : on enregistre l'une et l'autre
                     save(p); cfg.setFlatOrder(flat); if (cfg.canHide) cfg.setHidden([...hid]); if (cfg.mineKey) writeJ(cfg.mineKey, mine.map(m => m.v));
                     close(); A().renderSidebar(); refreshPanels(); A().toast(p.enabled ? 'Rangement en groupes enregistré.' : 'Rangement en une liste enregistré.'); } });

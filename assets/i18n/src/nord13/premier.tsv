@@ -1,0 +1,111 @@
+fr ¦ el ¦ bg
+# ═════ zone « premier » : grec (el), bulgare (bg) ═════
+INSTALLATION ¦ ΕΓΚΑΤΑΣΤΑΣΗ ¦ ИНСТАЛИРАНЕ
+La base généalogique doit être importée. ¦ Η γενεαλογική βάση πρέπει να εισαχθεί. ¦ Генеалогичната база трябва да бъде импортирана.
+Choisis comment démarrer : importer un fichier existant, ou créer une première personne pour partir d'une base vide. ¦ Διάλεξε πώς θα ξεκινήσεις: εισήγαγε ένα υπάρχον αρχείο ή δημιούργησε ένα πρώτο άτομο για να ξεκινήσεις από μια κενή βάση. ¦ Избери как да започнеш: импортирай съществуващ файл или създай първи човек, за да тръгнеш от празна база.
+GEDCOM (.ged, aussi d’Ancestry, MyHeritage, Geneanet), Gramps (.gramps ou paquet .gpkg avec les photos), Hérédis (.hmw ou .heredis), MacFamilyTree (.mftpkg), base LCNDA (.db) ou sauvegarde complète LCNDA (.zip, base + médias). Les fichiers JSON et CSV sont analysés mais pas encore importés. ¦ GEDCOM (.ged, επίσης από Ancestry, MyHeritage, Geneanet), Gramps (.gramps ή πακέτο .gpkg με τις φωτογραφίες), Hérédis (.hmw ή .heredis), MacFamilyTree (.mftpkg), βάση LCNDA (.db) ή πλήρες αντίγραφο ασφαλείας LCNDA (.zip, βάση + πολυμέσα). Τα αρχεία JSON και CSV αναλύονται αλλά δεν εισάγονται ακόμα. ¦ GEDCOM (.ged, също от Ancestry, MyHeritage, Geneanet), Gramps (.gramps или пакет .gpkg със снимките), Hérédis (.hmw или .heredis), MacFamilyTree (.mftpkg), база LCNDA (.db) или пълно резервно копие на LCNDA (.zip, база + медии). Файловете JSON и CSV се анализират, но още не се импортират.
+Fichier ¦ Αρχείο ¦ Файл
+Créer une première personne ¦ Δημιουργία ενός πρώτου ατόμου ¦ Създай първи човек
+Initialise une base vide avec une première fiche, à compléter ensuite. ¦ Δημιουργεί μια κενή βάση με μια πρώτη καρτέλα, για να τη συμπληρώσεις μετά. ¦ Създава празна база с първи картон, който да допълниш после.
+Prénom ¦ Όνομα ¦ Име
+Nom ¦ Επώνυμο ¦ Фамилия
+Créer et ouvrir la base ¦ Δημιουργία και άνοιγμα της βάσης ¦ Създай и отвори базата
+Je veux faire autre chose ▾ ¦ Θέλω να κάνω κάτι άλλο ▾ ¦ Искам да направя нещо друго ▾
+▴ Replier ¦ ▴ Σύμπτυξη ¦ ▴ Свий
+Qu’est-ce que tu veux faire avec l’app ? ¦ Τι θέλεις να κάνεις με την εφαρμογή; ¦ Какво искаш да правиш с приложението?
+Choisis ce qui te ressemble : l’app s’ouvre avec les bons onglets et le bon premier écran. Tu pourras tout changer après. ¦ Διάλεξε αυτό που σου ταιριάζει: η εφαρμογή ανοίγει με τις σωστές καρτέλες και τη σωστή πρώτη οθόνη. Μπορείς να τα αλλάξεις όλα μετά. ¦ Избери това, което ти подхожда: приложението се отваря с правилните раздели и правилния първи екран. После можеш да промениш всичко.
+Ta famille, tes ancêtres, leurs actes et leurs photos. ¦ Η οικογένειά σου, οι πρόγονοί σου, οι πράξεις τους και οι φωτογραφίες τους. ¦ Твоето семейство, предците ти, техните актове и снимки.
+Une lignée d’animaux ¦ Μια γενεαλογία ζώων ¦ Родословие на животни
+Un élevage, le pedigree de tes chiens, chats, chevaux… ¦ Μια εκτροφή, το γενεαλογικό των σκύλων, των γατών, των αλόγων σου… ¦ Развъждане, родословието на твоите кучета, котки, коне…
+Recenser des animaux ¦ Καταγραφή ζώων ¦ Преброяване на животни
+Suivre des animaux : baguage, puces, observations, trajets. ¦ Παρακολούθηση ζώων: δακτυλίωση, τσιπ, παρατηρήσεις, διαδρομές. ¦ Проследяване на животни: опръстеняване, чипове, наблюдения, маршрути.
+L’histoire d’une maison ou d’un village ¦ Η ιστορία ενός σπιτιού ή ενός χωριού ¦ Историята на къща или село
+Maison ou village ¦ Σπίτι ή χωριό ¦ Къща или село
+Qui a vécu où, de génération en génération, pièce par pièce. ¦ Ποιος έζησε πού, από γενιά σε γενιά, δωμάτιο προς δωμάτιο. ¦ Кой къде е живял, от поколение на поколение, стая по стая.
+Le catalogue d’un artiste ou d’une collection ¦ Ο κατάλογος ενός καλλιτέχνη ή μιας συλλογής ¦ Каталогът на художник или колекция
+Artiste ou collection ¦ Καλλιτέχνης ή συλλογή ¦ Художник или колекция
+Ses œuvres, ses expositions, son catalogue raisonné. ¦ Τα έργα του, οι εκθέσεις του, ο κατάλογος έργων του. ¦ Творбите му, изложбите му, каталогът резоне.
+Un fonds d’archives ou un musée familial ¦ Ένα αρχειακό σύνολο ή ένα οικογενειακό μουσείο ¦ Архивен фонд или семеен музей
+Archives ou musée ¦ Αρχεία ή μουσείο ¦ Архиви или музей
+Des photos, des lettres, des objets à classer et à décrire. ¦ Φωτογραφίες, γράμματα, αντικείμενα για ταξινόμηση και περιγραφή. ¦ Снимки, писма, предмети за подреждане и описване.
+L’étude d’un nom de famille ¦ Η μελέτη ενός επωνύμου ¦ Изследване на фамилно име
+Un nom de famille ¦ Ένα επώνυμο ¦ Фамилно име
+Tous les porteurs d’un nom, ses variantes, d’où ils viennent. ¦ Όλοι όσοι φέρουν ένα όνομα, οι παραλλαγές του, από πού προέρχονται. ¦ Всички носители на едно име, вариантите му, откъде идват.
+L’histoire d’une entreprise ou d’une association ¦ Η ιστορία μιας επιχείρησης ή ενός συλλόγου ¦ Историята на фирма или сдружение
+Entreprise ou association ¦ Επιχείρηση ή σύλλογος ¦ Фирма или сдружение
+Ses lieux, ses dirigeants, ses salariés ou ses membres. ¦ Οι τόποι της, οι διευθυντές της, οι υπάλληλοι ή τα μέλη της. ¦ Местата ѝ, ръководителите ѝ, служителите или членовете ѝ.
+Transmettre des souvenirs ¦ Μετάδοση αναμνήσεων ¦ Предаване на спомени
+Des lettres à ouvrir plus tard, des recettes, des chansons, des souvenirs à laisser. ¦ Γράμματα για άνοιγμα αργότερα, συνταγές, τραγούδια, αναμνήσεις για να αφήσεις. ¦ Писма за отваряне по-късно, рецепти, песни, спомени за оставяне.
+Ce qui change ¦ Τι αλλάζει ¦ Какво се променя
+Commencer avec une base vide ¦ Ξεκίνα με μια κενή βάση ¦ Започни с празна база
+🧪 Essayer avec une base d’exemple ¦ 🧪 Δοκίμασε με μια βάση παραδείγματος ¦ 🧪 Опитай с примерна база
+🧪 Base d’exemple ¦ 🧪 Βάση παραδείγματος ¦ 🧪 Примерна база
+Une famille imaginaire pour essayer l’app : ta généalogie n’est pas touchée. ¦ Μια φανταστική οικογένεια για να δοκιμάσεις την εφαρμογή: η γενεαλογία σου δεν αγγίζεται. ¦ Измислено семейство, за да пробваш приложението: твоята генеалогия не се докосва.
+Revenir à ma généalogie ¦ Επιστροφή στη γενεαλογία μου ¦ Обратно към моята генеалогия
+Repartir d’une base vide ¦ Ξεκίνα ξανά από κενή βάση ¦ Започни отново от празна база
+Ou bien : ¦ Ή αλλιώς: ¦ Или пък:
+🐾 Créer le premier animal ¦ 🐾 Δημιουργία του πρώτου ζώου ¦ 🐾 Създай първото животно
+Créer le premier animal ¦ Δημιουργία του πρώτου ζώου ¦ Създай първото животно
+Espèce ¦ Είδος ¦ Вид
+Création de la base… ¦ Δημιουργία της βάσης… ¦ Създаване на базата…
+Préparation de la base d’exemple… ¦ Προετοιμασία της βάσης παραδείγματος… ¦ Подготовка на примерната база…
+✓ Base créée ¦ ✓ Η βάση δημιουργήθηκε ¦ ✓ Базата е създадена
+ℹ️ Rien n’est figé : Réglages → Apparence → « 🧭 Usage de l’app ». ¦ ℹ️ Τίποτα δεν είναι οριστικό: Ρυθμίσεις → Εμφάνιση → «🧭 Χρήση της εφαρμογής». ¦ ℹ️ Нищо не е окончателно: Настройки → Облик → „🧭 Употреба на приложението“.
+🧭 Usage de l’app ¦ 🧭 Χρήση της εφαρμογής ¦ 🧭 Употреба на приложението
+🧭 Revoir le premier lancement ¦ 🧭 Δες ξανά την πρώτη εκκίνηση ¦ 🧭 Виж отново първото стартиране
+Premier écran à l’ouverture ¦ Πρώτη οθόνη στο άνοιγμα ¦ Първи екран при отваряне
+Le dernier écran ouvert (comme avant) ¦ Η τελευταία ανοιχτή οθόνη (όπως πριν) ¦ Последният отворен екран (както преди)
+Usage enregistré. ¦ Η χρήση αποθηκεύτηκε. ¦ Употребата е запазена.
+(la page va se recharger) ¦ (η σελίδα θα φορτωθεί ξανά) ¦ (страницата ще се презареди)
+Langue · Language ¦ Γλώσσα · Language ¦ Език · Language
+Une petite visite ? ¦ Μια μικρή περιήγηση; ¦ Малка обиколка?
+En {n} étapes, l’app te montre où créer une fiche, ajouter un parent, une photo, un événement, faire une sauvegarde et trouver l’aide. Ça prend deux minutes. ¦ Σε {n} βήματα, η εφαρμογή σού δείχνει πού δημιουργείς μια καρτέλα, προσθέτεις έναν γονέα, μια φωτογραφία, ένα γεγονός, κάνεις αντίγραφο ασφαλείας και βρίσκεις βοήθεια. Παίρνει δύο λεπτά. ¦ В {n} стъпки приложението ти показва къде да създадеш картон, да добавиш родител, снимка, събитие, да направиш резервно копие и да намериш помощ. Отнема две минути.
+▶ Commencer ¦ ▶ Ξεκίνα ¦ ▶ Започни
+Plus tard ¦ Αργότερα ¦ По-късно
+Ne plus proposer ¦ Να μην προτείνεται ξανά ¦ Не предлагай повече
+Passer la visite ¦ Παράλειψη της περιήγησης ¦ Пропусни обиколката
+← Précédent ¦ ← Προηγούμενο ¦ ← Назад
+Suivant → ¦ Επόμενο → ¦ Напред →
+✓ Terminer ¦ ✓ Τέλος ¦ ✓ Готово
+Étape {i} sur {n} ¦ Βήμα {i} από {n} ¦ Стъпка {i} от {n}
+Visite guidée, étape {i} sur {n} : {what} ¦ Ξενάγηση, βήμα {i} από {n}: {what} ¦ Обиколка с водач, стъпка {i} от {n}: {what}
+Tu peux cliquer le bouton entouré pour le faire pour de vrai, ou juste avancer. ¦ Μπορείς να πατήσεις το κυκλωμένο κουμπί για να το κάνεις στ’ αλήθεια ή απλώς να προχωρήσεις. ¦ Можеш да натиснеш оградения бутон, за да го направиш наистина, или просто да продължиш.
+Ajouter un parent ¦ Προσθήκη γονέα ¦ Добави родител
+Ajouter une photo ¦ Προσθήκη φωτογραφίας ¦ Добави снимка
+Un événement et son lieu ¦ Ένα γεγονός και ο τόπος του ¦ Събитие и мястото му
+Faire une sauvegarde ¦ Κάνε αντίγραφο ασφαλείας ¦ Направи резервно копие
+Les Réglages et l’aide ¦ Οι Ρυθμίσεις και η βοήθεια ¦ Настройките и помощта
+Chaque personne a sa fiche. Ce bouton en crée une : un prénom, un nom, et c’est parti. ¦ Κάθε άτομο έχει την καρτέλα του. Αυτό το κουμπί δημιουργεί μία: ένα όνομα, ένα επώνυμο, και ξεκινάμε. ¦ Всеки човек има свой картон. Този бутон създава нов: име, фамилия и тръгваме.
+Sur une fiche, le « ＋ » de « Parents » relie un père ou une mère : choisis une fiche qui existe, ou crée-la. C’est comme ça que l’arbre se construit. ¦ Σε μια καρτέλα, το «＋» των «Γονέων» συνδέει έναν πατέρα ή μια μητέρα: διάλεξε μια καρτέλα που υπάρχει ή δημιούργησέ την. Έτσι χτίζεται το δέντρο. ¦ В картона „＋“ при „Родители“ свързва баща или майка: избери съществуващ картон или го създай. Така се изгражда дървото.
+Ici, tu ajoutes des photos et des actes à la fiche : prends-les dans tes médias, ou glisse-les depuis l’ordinateur. ¦ Εδώ προσθέτεις φωτογραφίες και πράξεις στην καρτέλα: πάρ’ τες από τα πολυμέσα σου ή σύρε τες από τον υπολογιστή. ¦ Тук добавяш снимки и актове към картона: вземи ги от медиите си или ги плъзни от компютъра.
+Naissance, mariage, décès… Ajoute un événement avec sa date et son lieu : tape les premières lettres de la commune, l’app la trouve. ¦ Γέννηση, γάμος, θάνατος… Πρόσθεσε ένα γεγονός με την ημερομηνία και τον τόπο του: πληκτρολόγησε τα πρώτα γράμματα του δήμου, η εφαρμογή τον βρίσκει. ¦ Раждане, брак, смърт… Добави събитие с датата и мястото му: напиши първите букви на общината, приложението я намира.
+De temps en temps, fais une sauvegarde : ce fichier garde toute ta généalogie et tes photos. Range-le sur une clé USB ou un autre disque. ¦ Πού και πού, κάνε ένα αντίγραφο ασφαλείας: αυτό το αρχείο κρατά όλη τη γενεαλογία σου και τις φωτογραφίες σου. Φύλαξέ το σε ένα στικάκι USB ή σε άλλον δίσκο. ¦ От време на време прави резервно копие: този файл пази цялата ти генеалогия и снимките ти. Сложи го на USB флашка или друг диск.
+Tout se règle ici : apparence, import, sauvegardes… Dans les Réglages, la page « FAQ / tuto » répond à tes questions ; tu peux aussi y relancer cette visite. ¦ Όλα ρυθμίζονται εδώ: εμφάνιση, εισαγωγή, αντίγραφα ασφαλείας… Στις Ρυθμίσεις, η σελίδα «Συχνές ερωτήσεις / οδηγός» απαντά στις ερωτήσεις σου· μπορείς επίσης να ξαναρχίσεις εκεί αυτή την περιήγηση. ¦ Всичко се настройва тук: облик, импорт, резервни копия… В Настройки страницата „ЧЗВ / урок“ отговаря на въпросите ти; там можеш и да пуснеш отново тази обиколка.
+✓ Visite terminée. Pour la revoir : Réglages → FAQ / tuto → « ▶ Relancer la visite guidée ». ¦ ✓ Η περιήγηση τελείωσε. Για να τη δεις ξανά: Ρυθμίσεις → Συχνές ερωτήσεις / οδηγός → «▶ Ξεκίνα ξανά την ξενάγηση». ¦ ✓ Обиколката приключи. За да я видиш пак: Настройки → ЧЗВ / урок → „▶ Пусни отново обиколката с водач“.
+Visite guidée fermée. Tu la retrouves dans Réglages → FAQ / tuto. ¦ Η ξενάγηση έκλεισε. Τη βρίσκεις στις Ρυθμίσεις → Συχνές ερωτήσεις / οδηγός. ¦ Обиколката с водач е затворена. Ще я намериш в Настройки → ЧЗВ / урок.
+Une petite visite guidée de l’app est proposée. Commencer, plus tard, ou ne plus proposer. ¦ Προτείνεται μια μικρή ξενάγηση στην εφαρμογή. Ξεκίνα, αργότερα ή να μην προτείνεται ξανά. ¦ Предлага се малка обиколка с водач из приложението. Започни, по-късно или не предлагай повече.
+Rien à montrer sur cet écran pour l’instant. ¦ Τίποτα για να δείξει αυτή η οθόνη προς το παρόν. ¦ Засега няма какво да се покаже на този екран.
+Pas de visite guidée en mode consultation. ¦ Δεν υπάρχει ξενάγηση στη λειτουργία προβολής. ¦ Няма обиколка с водач в режим на разглеждане.
+La visite guidée n’est pas possible ici. ¦ Η ξενάγηση δεν είναι δυνατή εδώ. ¦ Обиколката с водач не е възможна тук.
+🐞 Signaler un problème ¦ 🐞 Ανάφερε ένα πρόβλημα ¦ 🐞 Съобщи за проблем
+AIDE ¦ ΒΟΗΘΕΙΑ ¦ ПОМОЩ
+Ce qui s’est passé ¦ Τι συνέβη ¦ Какво се случи
+Ce que j’attendais ¦ Τι περίμενα ¦ Какво очаквах
+Écris avec tes mots. Évite les noms de ta famille si tu ne veux pas qu’ils soient lus. ¦ Γράψε με τα δικά σου λόγια. Απόφυγε τα ονόματα της οικογένειάς σου αν δεν θέλεις να διαβαστούν. ¦ Пиши със свои думи. Избягвай имената от семейството си, ако не искаш да бъдат прочетени.
+Joindre le rapport technique ¦ Επισύναψε την τεχνική αναφορά ¦ Приложи техническия доклад
+Joindre le rapport technique ({x}) ¦ Επισύναψε την τεχνική αναφορά ({x}) ¦ Приложи техническия доклад ({x})
+aucune erreur captée ¦ κανένα καταγεγραμμένο σφάλμα ¦ няма уловени грешки
+Rapport technique ¦ Τεχνική αναφορά ¦ Технически доклад
+🗑 Vider le journal ¦ 🗑 Άδειασμα του ημερολογίου ¦ 🗑 Изпразни дневника
+Vider le journal des erreurs captées sur cet ordinateur ¦ Άδειασε το ημερολόγιο των σφαλμάτων που καταγράφηκαν σε αυτόν τον υπολογιστή ¦ Изпразни дневника с уловените грешки на този компютър
+✉️ Écrire un e-mail ¦ ✉️ Γράψε ένα e-mail ¦ ✉️ Напиши имейл
+Ouvrir une demande sur GitHub ¦ Άνοιξε ένα αίτημα στο GitHub ¦ Отвори заявка в GitHub
+Journal des erreurs vidé ¦ Το ημερολόγιο σφαλμάτων άδειασε ¦ Дневникът с грешки е изпразнен
+✓ Message copié : colle-le où tu veux (e-mail, forum, GitHub). ¦ ✓ Το μήνυμα αντιγράφηκε: επικόλλησέ το όπου θέλεις (e-mail, φόρουμ, GitHub). ¦ ✓ Съобщението е копирано: постави го където искаш (имейл, форум, GitHub).
+La copie n’a pas marché : sélectionne le texte et copie-le à la main. ¦ Η αντιγραφή δεν λειτούργησε: επίλεξε το κείμενο και αντίγραψέ το με το χέρι. ¦ Копирането не стана: маркирай текста и го копирай ръчно.
+Dis en quelques mots ce qui s’est passé. ¦ Πες με λίγα λόγια τι συνέβη. ¦ Кажи с няколко думи какво се случи.
+Ex. : j’ai cliqué sur « Enregistrer » dans la fiche, et la fenêtre est restée grise. ¦ Π.χ.: πάτησα «Αποθήκευση» στην καρτέλα και το παράθυρο έμεινε γκρι. ¦ Напр.: натиснах „Запази“ в картона и прозорецът остана сив.
+Ex. : que la fiche soit enregistrée et que la fenêtre se ferme. ¦ Π.χ.: να αποθηκευτεί η καρτέλα και να κλείσει το παράθυρο. ¦ Напр.: картонът да се запази и прозорецът да се затвори.
+Pour écrire un e-mail plutôt qu’ouvrir une demande sur GitHub : règle une adresse dans Réglages → « 🔄 Mises à jour ». ¦ Για να γράψεις e-mail αντί να ανοίξεις αίτημα στο GitHub: όρισε μια διεύθυνση στις Ρυθμίσεις → «🔄 Ενημερώσεις». ¦ За да пишеш имейл вместо да отваряш заявка в GitHub: задай адрес в Настройки → „🔄 Актуализации“.
+La base d’exemple est une famille imaginaire (5 générations, des photos d’époque dessinées) rangée à part dans « Mes généalogies » : ta généalogie n’est jamais touchée. ¦ Η βάση παραδείγματος είναι μια φανταστική οικογένεια (5 γενιές, ζωγραφισμένες φωτογραφίες εποχής) που φυλάσσεται χωριστά στις «Οι γενεαλογίες μου»: η γενεαλογία σου δεν αγγίζεται ποτέ. ¦ Примерната база е измислено семейство (5 поколения, рисувани старинни снимки), пазено отделно в „Моите генеалогии“: твоята генеалогия никога не се докосва.
+Aucun fichier choisi ¦ Κανένα επιλεγμένο αρχείο ¦ Няма избран файл

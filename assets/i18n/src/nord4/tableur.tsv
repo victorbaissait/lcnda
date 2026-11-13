@@ -1,0 +1,1013 @@
+fr ¦ fi ¦ hu
+TABLEUR · BASE ¦ TAULUKKOLASKENTA · TIETOKANTA ¦ TÁBLÁZATKEZELŐ · ADATBÁZIS
+⤒ Remplir depuis l’app ¦ ⤒ Täytä sovelluksesta ¦ ⤒ Kitöltés az alkalmazásból
+1 · Ce qu’on prend ¦ 1 · Mitä otetaan ¦ 1 · Mit veszünk át
+(comme l’export pour partager) ¦ (kuten jakamista varten tehtävä vienti) ¦ (mint a megosztáshoz készült exportálás)
+2 · Les colonnes ¦ 2 · Sarakkeet ¦ 2 · Az oszlopok
+(glisse ⠿ pour ranger) ¦ (järjestä vetämällä ⠿) ¦ (húzd a ⠿ jelet a sorrendhez)
+＋ Une colonne tirée des données ¦ ＋ Sarake tiedoista ¦ ＋ Oszlop az adatokból
+3 · Aperçu ¦ 3 · Esikatselu ¦ 3 · Előnézet
+🔗 Tenir à jour ¦ 🔗 Pidä ajan tasalla ¦ 🔗 Naprakészen tartás
+— les lignes changent quand la base change (à l’ouverture, ou avec ↻). Tes colonnes ajoutées à droite (formules, notes) restent sur la bonne ligne. ¦ — rivit muuttuvat, kun tietokanta muuttuu (avattaessa tai ↻-painikkeella). Oikealle lisäämäsi sarakkeet (kaavat, muistiinpanot) pysyvät oikealla rivillä. ¦ — a sorok változnak, amikor az adatbázis változik (megnyitáskor vagy a ↻ gombbal). A jobbra hozzáadott oszlopaid (képletek, jegyzetek) a helyes sorban maradnak.
+Où : ¦ Mihin: ¦ Hová:
+à la même place (remplace la plage liée) ¦ samaan paikkaan (korvaa yhdistetyn alueen) ¦ ugyanoda (lecseréli a kapcsolt tartományt)
+à partir de A1 dans une nouvelle feuille ¦ solusta A1 alkaen uudelle taulukolle ¦ A1-től kezdve egy új munkalapon
+à partir de {cell} dans cette feuille ¦ solusta {cell} alkaen tälle taulukolle ¦ {cell} cellától kezdve ezen a munkalapon
+⤒ Remplir ¦ ⤒ Täytä ¦ ⤒ Kitöltés
+Commune ¦ Kunta ¦ Település
+Pas encore de dépouillement : Listes → 📜 Dépouillements. ¦ Ei vielä indeksointeja: Luettelot → 📜 Indeksoinnit. ¦ Még nincs feldolgozás: Listák → 📜 Feldolgozások.
+Statistique ¦ Tilasto ¦ Statisztika
+Hommes et femmes à part ¦ Miehet ja naiset erikseen ¦ Férfiak és nők külön
+Pas encore de liste à toi : Listes → Mes listes. ¦ Sinulla ei ole vielä omaa luetteloa: Luettelot → Omat luettelot. ¦ Még nincs saját listád: Listák → Saját listák.
+Hommes ¦ Miehet ¦ Férfiak
+Femmes ¦ Naiset ¦ Nők
+Inconnu ¦ Tuntematon ¦ Ismeretlen
+Lignée ¦ Sukulinja ¦ Leszármazási ág
+Né(e) à ¦ Syntynyt paikassa ¦ Születési hely
+Nés à partir de ¦ Syntyneet alkaen ¦ Születettek ettől
+Nés jusqu’à ¦ Syntyneet asti ¦ Születettek eddig
+Nés avant ¦ Syntyneet ennen ¦ Születettek ez előtt
+Sorte ¦ Laji ¦ Fajta
+Chercher… (nom, prénom) ¦ Hae… (sukunimi, etunimi) ¦ Keresés… (vezetéknév, keresztnév)
+Chercher… (nom, sorte, lieu) ¦ Hae… (nimi, laji, paikka) ¦ Keresés… (név, fajta, hely)
+👤 personne ¦ 👤 henkilö ¦ 👤 személy
+📍 lieu ¦ 📍 paikka ¦ 📍 hely
+📅 date d’acte ¦ 📅 asiakirjan päivämäärä ¦ 📅 bejegyzés dátuma
+nombre ¦ luku ¦ szám
+Monter ¦ Siirrä ylös ¦ Feljebb
+Descendre ¦ Siirrä alas ¦ Lejjebb
+Retirer la colonne ¦ Poista sarake ¦ Oszlop eltávolítása
+Aucune colonne : ajoute-en une. ¦ Ei sarakkeita: lisää yksi. ¦ Nincs oszlop: adj hozzá egyet.
+Lecture de la base… ¦ Luetaan tietokantaa… ¦ Az adatbázis olvasása…
+Lecture… ¦ Luetaan… ¦ Olvasás…
+({shown} premières lignes sur {n}) ¦ ({shown} ensimmäistä riviä / {n}) ¦ (az első {shown} sor ennyiből: {n})
+Rien ne correspond : change les filtres. ¦ Mikään ei täsmää: muuta suodattimia. ¦ Nincs találat: módosítsd a szűrőket.
+{n} de côté (personnes vivantes ou fiches confidentielles). ¦ {n} jätetty pois (elävät henkilöt tai luottamukselliset kortit). ¦ {n} kihagyva (élő személyek vagy bizalmas adatlapok).
+Seules les {n} premières lignes sont prises : précise les filtres. ¦ Vain {n} ensimmäistä riviä otetaan: tarkenna suodattimia. ¦ Csak az első {n} sort vesszük át: szűkítsd a szűrőket.
+⤒ Remplir {n} ¦ ⤒ Täytä {n} ¦ ⤒ {n} kitöltése
+Toutes les colonnes sont déjà là. ¦ Kaikki sarakkeet ovat jo mukana. ¦ Már minden oszlop megvan.
+Une colonne tirée des données ¦ Sarake tiedoista ¦ Oszlop az adatokból
+Cette feuille n’est pas liée à la base : Données → « ⤒ Remplir depuis l’app… ». ¦ Tätä taulukkoa ei ole yhdistetty tietokantaan: Tiedot → ”⤒ Täytä sovelluksesta…”. ¦ Ez a munkalap nincs összekapcsolva az adatbázissal: Adatok → „⤒ Kitöltés az alkalmazásból…”.
+Impossible de relire la base : {error} ¦ Tietokantaa ei voitu lukea uudelleen: {error} ¦ Nem sikerült újraolvasni az adatbázist: {error}
+🔗 Déjà à jour : rien n’a changé dans la base. ¦ 🔗 Jo ajan tasalla: tietokannassa ei muuttunut mitään. ¦ 🔗 Már naprakész: semmi sem változott az adatbázisban.
+{n} de plus ¦ {n} enemmän ¦ {n} több
+{n} de moins ¦ {n} vähemmän ¦ {n} kevesebb
+valeurs mises à jour ¦ arvoa päivitetty ¦ érték frissítve
+🔗 « {name} » relue : {what} ({lost}) ¦ 🔗 ”{name}” luettu uudelleen: {what} ({lost}) ¦ 🔗 „{name}” újraolvasva: {what} ({lost})
+🔗 « {name} » relue : {what} ¦ 🔗 ”{name}” luettu uudelleen: {what} ¦ 🔗 „{name}” újraolvasva: {what}
+<b>Relevé de recensement</b> · les colonnes de l’année : ¦ <b>Henkikirjan otteet</b> · vuoden sarakkeet: ¦ <b>Népszámlálási kivonat</b> · az év oszlopai:
+Année du recensement ¦ Henkikirjan vuosi ¦ A népszámlálás éve
+📤 Envoyer vers la base… ¦ 📤 Lähetä tietokantaan… ¦ 📤 Küldés az adatbázisba…
+🔗 Tenue à jour : <b>{what}</b> · {n} · relue {when} ¦ 🔗 Pidetään ajan tasalla: <b>{what}</b> · {n} · luettu {when} ¦ 🔗 Naprakészen tartva: <b>{what}</b> · {n} · újraolvasva {when}
+la base ¦ tietokanta ¦ az adatbázis
+Relire depuis la base ¦ Lue uudelleen tietokannasta ¦ Újraolvasás az adatbázisból
+↻ Relire ¦ ↻ Lue uudelleen ¦ ↻ Újraolvasás
+Changer la source ou les colonnes… ¦ Vaihda lähde tai sarakkeet… ¦ Forrás vagy oszlopok módosítása…
+Envoyer vers la base… ¦ Lähetä tietokantaan… ¦ Küldés az adatbázisba…
+Ne plus tenir à jour (garder les valeurs) ¦ Lopeta ajan tasalla pitäminen (säilytä arvot) ¦ Naprakészen tartás leállítása (az értékek megmaradnak)
+« {name} » n’est plus tenue à jour ¦ ”{name}” ei ole enää ajan tasalla pidettävä ¦ „{name}” már nincs naprakészen tartva
+Relevé : colonnes de {year} ¦ Ote: vuoden {year} sarakkeet ¦ Kivonat: {year} oszlopai
+Mode consultation : rien ne peut être envoyé vers la base. ¦ Selaustila: tietokantaan ei voi lähettää mitään. ¦ Megtekintő mód: semmit sem lehet az adatbázisba küldeni.
+Choisis le tableau à envoyer (sa ligne de titres et ses lignes), puis recommence. ¦ Valitse lähetettävä taulukko (otsikkorivi ja rivit) ja yritä uudelleen. ¦ Jelöld ki a küldendő táblázatot (a fejlécsorát és a sorait), majd próbáld újra.
+📤 Envoyer vers la base — {name}, lignes {from} à {to} ¦ 📤 Lähetä tietokantaan — {name}, rivit {from}–{to} ¦ 📤 Küldés az adatbázisba — {name}, {from}–{to}. sor
+1. Les colonnes ¦ 1. Sarakkeet ¦ 1. Az oszlopok
+2. Voilà ce qui va entrer ¦ 2. Tämä tulee mukaan ¦ 2. Ez kerül be
+3. Envoyer ¦ 3. Lähetä ¦ 3. Küldés
+Voir ce qui va entrer ¦ Näytä, mitä tulee mukaan ¦ Mi kerül be?
+Ce que ça crée : ¦ Mitä luodaan: ¦ Ami létrejön:
+Colonne ¦ Sarake ¦ Oszlop
+Exemple ¦ Esimerkki ¦ Példa
+Va dans ¦ Menee kenttään ¦ Ide kerül
+(sans titre) ¦ (nimetön) ¦ (cím nélkül)
+Champ pour la colonne {col} ¦ Kenttä sarakkeelle {col} ¦ Mező a(z) {col} oszlophoz
+Colonnes : {list} ¦ Sarakkeet: {list} ¦ Oszlopok: {list}
+aucune pour l’instant ¦ ei vielä yhtään ¦ egyelőre egy sem
+Déjà dans la base ¦ Jo tietokannassa ¦ Már az adatbázisban
+Problème ¦ Ongelma ¦ Probléma
+Laissée de côté ¦ Jätetty pois ¦ Kihagyva
+📤 Créer {n} ¦ 📤 Luo {n} ¦ 📤 {n} létrehozása
+📤 Rien de nouveau ¦ 📤 Ei mitään uutta ¦ 📤 Nincs semmi új
+📤 Créer {n} et en relier {m} ¦ 📤 Luo {n} ja yhdistä {m} ¦ 📤 {n} létrehozása és {m} összekapcsolása
+📤 Relier {m} ¦ 📤 Yhdistä {m} ¦ 📤 {m} összekapcsolása
+📤 Envoyer ¦ 📤 Lähetä ¦ 📤 Küldés
+Choisis au moins une colonne à envoyer (le nom, par exemple). ¦ Valitse ainakin yksi lähetettävä sarake (esimerkiksi nimi). ¦ Válassz ki legalább egy küldendő oszlopot (például a nevet).
+Choisis au moins une colonne. ¦ Valitse ainakin yksi sarake. ¦ Válassz ki legalább egy oszlopot.
+Donne l’année du recensement. ¦ Anna henkikirjan vuosi. ¦ Add meg a népszámlálás évét.
+Il faut une colonne pour le nom (ou « Nom et prénom »). ¦ Nimelle tarvitaan sarake (tai ”Sukunimi ja etunimi”). ¦ Kell egy oszlop a névhez (vagy „Vezeték- és keresztnév”).
+Il faut une colonne pour le nom. ¦ Nimelle tarvitaan sarake. ¦ Kell egy oszlop a névhez.
+Choisis la colonne qui dit la sorte d’événement (Baptême, Décès…). ¦ Valitse sarake, joka kertoo tapahtuman lajin (Kaste, Kuolema…). ¦ Válaszd ki az oszlopot, amely az esemény fajtáját adja meg (Keresztelő, Halál…).
+Il manque la sorte d’événement. ¦ Tapahtuman laji puuttuu. ¦ Hiányzik az esemény fajtája.
+Ces lignes sont vides. ¦ Nämä rivit ovat tyhjiä. ¦ Ezek a sorok üresek.
+Je compare avec ta base… ¦ Vertaan tietokantaasi… ¦ Összevetés az adatbázisoddal…
+Comparaison… ¦ Verrataan… ¦ Összevetés…
+Choisir la fiche de la ligne {row} ¦ Valitse kortti riville {row} ¦ Válaszd ki a(z) {row}. sor adatlapját
+choisis ▾ ¦ valitse ▾ ¦ válassz ▾
+Relier à {name} ({meta}) ¦ Yhdistä: {name} ({meta}) ¦ Összekapcsolás: {name} ({meta})
+Laisser de côté ¦ Jätä pois ¦ Kihagyás
+Des lignes ressemblent à plusieurs fiches : choisis la bonne (sinon elles sont laissées de côté). ¦ Jotkin rivit muistuttavat useaa korttia: valitse oikea (muuten ne jätetään pois). ¦ Egyes sorok több adatlapra is hasonlítanak: válaszd ki a helyeset (különben kimaradnak).
+Ligne ¦ Rivi ¦ Sor
+Ce qui va se passer ¦ Mitä tapahtuu ¦ Mi fog történni
+Impossible d’envoyer : {error} ¦ Lähettäminen ei onnistunut: {error} ¦ Nem sikerült elküldeni: {error}
+contient « {text} » : compté comme {n} ¦ sisältää ”{text}”: laskettu arvoksi {n} ¦ tartalma „{text}”: {n} értékként számolva
+contient l’erreur « {text} » : laissée vide ¦ sisältää virheen ”{text}”: jätetty tyhjäksi ¦ hibát tartalmaz („{text}”): üresen hagyva
+« {text} » n’est pas un nombre : laissé vide ¦ ”{text}” ei ole luku: jätetty tyhjäksi ¦ „{text}” nem szám: üresen hagyva
+à trouver ¦ löydettävä ¦ megtalálandó
+L’éditeur de diagrammes n’est pas chargé. ¦ Diagrammieditoria ei ole ladattu. ¦ A diagramszerkesztő nincs betöltve.
+L’éditeur de graphiques n’est pas chargé. ¦ Kaavioeditoria ei ole ladattu. ¦ A grafikonszerkesztő nincs betöltve.
+Graphique « {name} » ajouté à Mes graphiques (Graphiques, tableau de bord…). ¦ Kaavio ”{name}” lisätty Omiin kaavioihin (Kaaviot, kojelauta…). ¦ „{name}” grafikon hozzáadva a Saját grafikonokhoz (Grafikonok, irányítópult…).
+Le navigateur refuse de copier ici : sélectionne la plage et fais {key}. ¦ Selain ei salli kopiointia tässä: valitse alue ja paina {key}. ¦ A böngésző itt nem engedi a másolást: jelöld ki a tartományt, és nyomd meg: {key}.
+Copié : dans un tableau (Enquêtes → 🧩 Tableaux), colle-le ({key}) : il devient un objet ▦ Tableur, formules comprises. ¦ Kopioitu: liitä se tauluun (Selvitykset → 🧩 Taulut) näppäimillä {key}: siitä tulee ▦ Taulukkolaskenta-objekti kaavoineen. ¦ Másolva: illeszd be egy táblára (Nyomozások → 🧩 Táblák) ezzel: {key} – ▦ Táblázatkezelő-objektum lesz belőle, a képletekkel együtt.
+Copié : dans la page d’un recueil, clique une case du tableau et colle ({key}). ¦ Kopioitu: napsauta kokoelman sivulla taulukon solua ja liitä ({key}). ¦ Másolva: egy gyűjtemény oldalán kattints a táblázat egyik cellájába, és illeszd be ({key}).
+La présentation n’est pas chargée. ¦ Esitystä ei ole ladattu. ¦ A bemutató nincs betöltve.
+… et {n} ¦ … ja {n} ¦ … és még {n}
+Colonnes attendues : {list} ¦ Odotetut sarakkeet: {list} ¦ Várt oszlopok: {list}
+(une ou plusieurs) ¦ (yksi tai useampi) ¦ (egy vagy több)
+(facultatif) ¦ (valinnainen) ¦ (nem kötelező)
+Les données de « {name} » ¦ ”{name}”: tiedot ¦ „{name}” adatai
+l’outil ¦ työkalu ¦ az eszköz
+{name} (données) ¦ {name} (tiedot) ¦ {name} (adatok)
+Renvoyer les données là d’où elles viennent ¦ Palauta tiedot sinne, mistä ne tulivat ¦ Adatok visszaküldése oda, ahonnan jöttek
+Formules, tri, coller depuis Excel… « Fichier → Enregistrer une copie… » garde aussi ce classeur dans le Tableur. ¦ Kaavat, lajittelu, liittäminen Excelistä… ”Tiedosto → Tallenna kopio…” säilyttää tämän työkirjan myös Taulukkolaskennassa. ¦ Képletek, rendezés, beillesztés Excelből… A „Fájl → Másolat mentése…” ezt a munkafüzetet a Táblázatkezelőben is megőrzi.
+Rien à ouvrir : la liste est vide. ¦ Ei avattavaa: luettelo on tyhjä. ¦ Nincs mit megnyitni: a lista üres.
+🧾 Tableur ¦ 🧾 Taulukkolaskenta ¦ 🧾 Táblázatkezelő
+ouvrir dans le tableur ¦ avaa taulukkolaskennassa ¦ megnyitás a táblázatkezelőben
+🧾 Ouvrir dans le tableur ¦ 🧾 Avaa taulukkolaskennassa ¦ 🧾 Megnyitás a táblázatkezelőben
+La feuille est vide : écris ou colle un tableau, puis choisis-le. ¦ Taulukko on tyhjä: kirjoita tai liitä taulukko ja valitse se. ¦ A munkalap üres: írj vagy illessz be egy táblázatot, majd jelöld ki.
+TABLEUR · PRÉPARER POUR… ¦ TAULUKKOLASKENTA · VALMISTELE KOHTEESEEN… ¦ TÁBLÁZATKEZELŐ · ELŐKÉSZÍTÉS EHHEZ…
+🎯 Préparer pour… ({range}) ¦ 🎯 Valmistele kohteeseen… ({range}) ¦ 🎯 Előkészítés ehhez… ({range})
+Le tableur sait ce que chaque endroit de l’app attend : choisis où vont ces données. Il vérifie les colonnes de la plage <b>{range}</b> et les range comme il faut. ¦ Taulukkolaskenta tietää, mitä kukin sovelluksen osa odottaa: valitse, minne nämä tiedot menevät. Se tarkistaa alueen <b>{range}</b> sarakkeet ja järjestää ne oikein. ¦ A táblázatkezelő tudja, mit várnak az alkalmazás egyes részei: válaszd ki, hová kerüljenek ezek az adatok. Ellenőrzi a(z) <b>{range}</b> tartomány oszlopait, és megfelelően elrendezi őket.
+Dessin ¦ Piirros ¦ Rajz
+▦ Un tableau ¦ ▦ Taulukko ¦ ▦ Táblázat
+Il faut une colonne de chiffres ¦ Tarvitaan numerosarake ¦ Kell egy számokat tartalmazó oszlop
+📊 Un graphique ¦ 📊 Kaavio ¦ 📊 Grafikon
+Dans la plage ¦ Alueella ¦ A tartományban
+, une ou plusieurs ¦ , yksi tai useampi ¦ , egy vagy több
+, facultatif ¦ , valinnainen ¦ , nem kötelező
+Voir la cellule ¦ Näytä solu ¦ Cella megtekintése
+… et {n} à vérifier. ¦ … ja {n} tarkistettavaa. ¦ … és még {n} ellenőrizendő.
+Il manque une colonne : ajoute-la dans la plage, ou choisis une autre plage. ¦ Sarake puuttuu: lisää se alueeseen tai valitse toinen alue. ¦ Hiányzik egy oszlop: add hozzá a tartományhoz, vagy válassz másik tartományt.
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) ¦ Säilytä yhteys: diagrammi seuraa taulukkoa (päivittyy, kun alue muuttuu) ¦ Kapcsolat megtartása: a diagram követi a táblázatot (frissül, ha a tartomány változik)
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) — le classeur sera enregistré dans le Tableur ¦ Säilytä yhteys: diagrammi seuraa taulukkoa (päivittyy, kun alue muuttuu) — työkirja tallennetaan Taulukkolaskentaan ¦ Kapcsolat megtartása: a diagram követi a táblázatot (frissül, ha a tartomány változik) — a munkafüzet a Táblázatkezelőbe lesz mentve
+← Autre endroit ¦ ← Toinen paikka ¦ ← Másik hely
+La première ligne donne les titres ¦ Ensimmäinen rivi sisältää otsikot ¦ Az első sor a fejléc
+Pas d’aperçu. ¦ Ei esikatselua. ¦ Nincs előnézet.
+🎤 Créer la présentation ¦ 🎤 Luo esitys ¦ 🎤 Bemutató létrehozása
+Corrige la cellule, puis rouvre « 🎯 Préparer pour… ». ¦ Korjaa solu ja avaa sitten uudelleen ”🎯 Valmistele kohteeseen…”. ¦ Javítsd ki a cellát, majd nyisd meg újra: „🎯 Előkészítés ehhez…”.
+Ces données reviennent dans leur outil : le diagramme est fait d’une copie (pas de lien). ¦ Nämä tiedot palaavat työkaluunsa: diagrammi tehdään kopiosta (ei yhteyttä). ¦ Ezek az adatok visszakerülnek az eszközükbe: a diagram egy másolatból készül (kapcsolat nélkül).
+Choisis une plage avec des nombres (par exemple : Décennie, Hommes, Femmes). ¦ Valitse alue, jossa on lukuja (esimerkiksi: Vuosikymmen, Miehet, Naiset). ¦ Jelölj ki egy számokat tartalmazó tartományt (például: Évtized, Férfiak, Nők).
+Tous les types de diagrammes… ¦ Kaikki diagrammityypit… ¦ Minden diagramtípus…
+Conseillés pour {range} ¦ Suositellut alueelle {range} ¦ Ajánlott ehhez: {range}
+🔗 Données : « {name} » ! {range} ¦ 🔗 Tiedot: ”{name}” ! {range} ¦ 🔗 Adatok: „{name}” ! {range}
+Classeur ¦ Työkirja ¦ Munkafüzet
+(feuille « {name} ») ¦ (taulukko ”{name}”) ¦ („{name}” munkalap)
+tenu à jour ¦ pidetään ajan tasalla ¦ naprakészen tartva
+Les figer ¦ Lukitse ne ¦ Rögzítés
+⚠️ Classeur introuvable (supprimé ?) : le dessin garde les derniers chiffres lus. ¦ ⚠️ Työkirjaa ei löydy (poistettu?): piirros säilyttää viimeksi luetut luvut. ¦ ⚠️ A munkafüzet nem található (törölve?): a rajz megtartja az utoljára beolvasott számokat.
+TABLEUR ¦ TAULUKKOLASKENTA ¦ TÁBLÁZATKEZELŐ
+Nom du classeur… ¦ Työkirjan nimi… ¦ Munkafüzet neve…
+Plage illisible : écris par exemple A1:C12. ¦ Aluetta ei voi lukea: kirjoita esimerkiksi A1:C12. ¦ Olvashatatlan tartomány: írd be például: A1:C12.
+Feuille ¦ Taulukko ¦ Munkalap
+Plage ¦ Alue ¦ Tartomány
+Copier une fois (les chiffres ne bougent plus) ¦ Kopioi kerran (luvut eivät enää muutu) ¦ Egyszeri másolás (a számok többé nem változnak)
+Garder le lien : le diagramme suit le classeur (tenu à jour) ¦ Säilytä yhteys: diagrammi seuraa työkirjaa (pidetään ajan tasalla) ¦ Kapcsolat megtartása: a diagram követi a munkafüzetet (naprakészen tartva)
+Lecture du classeur… ¦ Luetaan työkirjaa… ¦ A munkafüzet olvasása…
+Choisis un classeur. ¦ Valitse työkirja. ¦ Válassz munkafüzetet.
+Écris une plage, par exemple A1:C12. ¦ Kirjoita alue, esimerkiksi A1:C12. ¦ Írj be egy tartományt, például: A1:C12.
+Écris le résultat voulu dans la première case de la colonne (par exemple « Jean D. »), puis relance ✨ Remplissage instantané. ¦ Kirjoita haluamasi tulos sarakkeen ensimmäiseen soluun (esimerkiksi ”Jean D.”) ja käynnistä sitten ✨ Pikatäyttö uudelleen. ¦ Írd be a kívánt eredményt az oszlop első cellájába (például „Jean D.”), majd indítsd újra a ✨ Villámkitöltést.
+Je ne trouve pas de règle qui marche pour tous les exemples : écris-en un de plus, ou un plus simple. ¦ En löydä sääntöä, joka toimisi kaikille esimerkeille: kirjoita yksi lisää tai yksinkertaisempi. ¦ Nem találok olyan szabályt, amely minden példára működik: írj még egyet, vagy egy egyszerűbbet.
+Rien à remplir : la colonne est déjà pleine. ¦ Ei täytettävää: sarake on jo täynnä. ¦ Nincs mit kitölteni: az oszlop már tele van.
+{what} de {col} ¦ {what} sarakkeesta {col} ¦ {what} ebből: {col}
+{what} n°{n} de {col} ¦ {what} nro {n} sarakkeesta {col} ¦ {n}. {what} ebből: {col}
+{what} n°{n} depuis la fin de {col} ¦ {what} nro {n} lopusta laskien sarakkeesta {col} ¦ a végétől számított {n}. {what} ebből: {col}
+✨ {n} (règle : {rule}). ↶ pour annuler. ¦ ✨ {n} (sääntö: {rule}). ↶ kumoaa. ¦ ✨ {n} (szabály: {rule}). ↶ a visszavonáshoz.
+Choisis un tableau avec une ligne de titres et des lignes de données. ¦ Valitse taulukko, jossa on otsikkorivi ja tietorivejä. ¦ Jelölj ki egy táblázatot fejlécsorral és adatsorokkal.
+Colonne {col} ¦ Sarake {col} ¦ {col} oszlop
+DONNÉES ¦ TIEDOT ¦ ADATOK
+Σ Sous-totaux ¦ Σ Välisummat ¦ Σ Részösszegek
+Créer les sous-totaux ¦ Luo välisummat ¦ Részösszegek létrehozása
+D’après <b>{range}</b>. Une nouvelle feuille : les lignes rangées par groupe, un total sous chaque groupe (formules), puis le total général. « ⊟ Plan » (menu Données) replie le détail. ¦ Lähteenä <b>{range}</b>. Uusi taulukko: rivit ryhmiteltyinä, summa kunkin ryhmän alla (kaavat) ja lopuksi kokonaissumma. ”⊟ Jäsennys” (Tiedot-valikko) kutistaa yksityiskohdat. ¦ Forrás: <b>{range}</b>. Új munkalap: a sorok csoportokba rendezve, minden csoport alatt egy összeg (képletek), végül a végösszeg. A „⊟ Tagolás” (Adatok menü) összecsukja a részleteket.
+À chaque changement de ¦ Aina kun muuttuu ¦ Minden változásnál ebben:
+Calcul ¦ Laskutoimitus ¦ Számítás
+Sur les colonnes ¦ Sarakkeissa ¦ Ezekben az oszlopokban
+Coche au moins une colonne à calculer. ¦ Valitse ainakin yksi laskettava sarake. ¦ Jelölj be legalább egy számítandó oszlopot.
+Σ {n}. « ⊟ Plan » (menu Données) replie le détail. ¦ Σ {n}. ”⊟ Jäsennys” (Tiedot-valikko) kutistaa yksityiskohdat. ¦ Σ {n}. A „⊟ Tagolás” (Adatok menü) összecsukja a részleteket.
+Cette feuille n’a pas de sous-totaux : Données → Σ Sous-totaux… d’abord. ¦ Tässä taulukossa ei ole välisummia: ensin Tiedot → Σ Välisummat…. ¦ Ezen a munkalapon nincsenek részösszegek: előbb Adatok → Σ Részösszegek….
+⊟ Détail replié : seuls les totaux restent. ¦ ⊟ Yksityiskohdat kutistettu: vain summat jäävät. ¦ ⊟ Részletek összecsukva: csak az összegek maradnak.
+⊞ Détail déplié. ¦ ⊞ Yksityiskohdat laajennettu. ¦ ⊞ Részletek kibontva.
+🎯 Valeur cible ¦ 🎯 Tavoitteen haku ¦ 🎯 Célérték-keresés
+L’app essaie des valeurs dans « la case à changer » jusqu’à ce que la formule donne le résultat voulu. Ex. : à quel âge s’est-il marié pour que la différence d’âge soit 7 ans ? ¦ Sovellus kokeilee arvoja ”muutettavassa solussa”, kunnes kaava antaa haluamasi tuloksen. Esim.: minkä ikäisenä hän meni naimisiin, jotta ikäero olisi 7 vuotta? ¦ Az alkalmazás értékeket próbál ki a „módosítandó cellában”, amíg a képlet a kívánt eredményt nem adja. Pl.: hány évesen nősült, hogy a korkülönbség 7 év legyen?
+La formule de la case ¦ Solun kaava ¦ A cella képlete
+Doit donner ¦ Pitää antaa ¦ Eredménye legyen
+En changeant la case ¦ Muuttamalla solua ¦ A módosítandó cella
+Écris une adresse de case (ex. C5, B2). ¦ Kirjoita solun osoite (esim. C5, B2). ¦ Írj be egy cellacímet (pl. C5, B2).
+Écris le résultat voulu. ¦ Kirjoita haluamasi tulos. ¦ Írd be a kívánt eredményt.
+La première case doit contenir une formule. ¦ Ensimmäisessä solussa pitää olla kaava. ¦ Az első cellában képletnek kell lennie.
+Pas de valeur trouvée : la formule ne dépend peut-être pas de cette case, ou ne peut pas atteindre ce résultat. ¦ Arvoa ei löytynyt: kaava ei ehkä riipu tästä solusta tai ei voi saavuttaa tätä tulosta. ¦ Nem található érték: lehet, hogy a képlet nem függ ettől a cellától, vagy nem érheti el ezt az eredményt.
+🎯 {cell} = {value} : la formule donne {target}. ↶ pour annuler. ¦ 🎯 {cell} = {value}: kaava antaa {target}. ↶ kumoaa. ¦ 🎯 {cell} = {value}: a képlet eredménye {target}. ↶ a visszavonáshoz.
+INSERTION ¦ LISÄÄ ¦ BESZÚRÁS
+📈 Mini-graphique ¦ 📈 Minikaavio ¦ 📈 Minidiagram
+Poser ¦ Lisää ¦ Beszúrás
+Un petit graphique dans la case, qui suit les chiffres. Plusieurs lignes choisies : un graphique par ligne (la plage descend avec elles). ¦ Pieni kaavio solussa, joka seuraa lukuja. Useita rivejä valittuna: yksi kaavio riviä kohden (alue siirtyy niiden mukana alaspäin). ¦ Kis grafikon a cellában, amely követi a számokat. Több kijelölt sor esetén soronként egy grafikon (a tartomány velük együtt lefelé halad).
+Les nombres (plage de la 1re ligne) ¦ Luvut (1. rivin alue) ¦ A számok (az 1. sor tartománya)
+Gagné / perdu ¦ Voitto / tappio ¦ Nyereség / veszteség
+Couleur ¦ Väri ¦ Szín
+Écris une plage, par exemple B2:F2. ¦ Kirjoita alue, esimerkiksi B2:F2. ¦ Írj be egy tartományt, például: B2:F2.
+🧮 Solveur ¦ 🧮 Ratkaisin ¦ 🧮 Solver
+Résoudre ¦ Ratkaise ¦ Megoldás
+Comme la valeur cible, mais en changeant plusieurs cases à la fois, avec des conditions. Ex. : répartir un héritage entre trois branches pour que chacune ait au moins 1 000 € et que l’écart soit le plus petit possible. ¦ Kuten tavoitteen haku, mutta muuttaa useaa solua kerralla ehtojen kanssa. Esim.: jaa perintö kolmen haaran kesken niin, että kukin saa vähintään 1 000 € ja ero on mahdollisimman pieni. ¦ Mint a célérték-keresés, de egyszerre több cellát módosít, feltételekkel. Pl.: egy örökség elosztása három ág között úgy, hogy mindegyik legalább 1000 €-t kapjon, és a különbség a lehető legkisebb legyen.
+La formule (case objectif) ¦ Kaava (tavoitesolu) ¦ A képlet (célcella)
+Doit être ¦ Pitää olla ¦ Legyen
+la plus grande possible ¦ mahdollisimman suuri ¦ a lehető legnagyobb
+la plus petite possible ¦ mahdollisimman pieni ¦ a lehető legkisebb
+égale à… ¦ yhtä suuri kuin… ¦ egyenlő ezzel…
+Valeur (si « égale à ») ¦ Arvo (jos ”yhtä suuri kuin”) ¦ Érték (ha „egyenlő ezzel”)
+En changeant les cases ¦ Muuttamalla soluja ¦ A módosítandó cellák
+B2:B4 ou B2;C3 ¦ B2:B4 tai B2;C3 ¦ B2:B4 vagy B2;C3
+Conditions (une par ligne : {examples}) ¦ Ehdot (yksi riviä kohden: {examples}) ¦ Feltételek (soronként egy: {examples})
+Nombres entiers seulement ¦ Vain kokonaislukuja ¦ Csak egész számok
+La case objectif doit contenir une formule (ex. D5). ¦ Tavoitesolussa pitää olla kaava (esim. D5). ¦ A célcellában képletnek kell lennie (pl. D5).
+Trente cases à changer au plus. ¦ Enintään kolmekymmentä muutettavaa solua. ¦ Legfeljebb harminc módosítandó cella.
+Écris les cases à changer (ex. B2:B4). ¦ Kirjoita muutettavat solut (esim. B2:B4). ¦ Írd be a módosítandó cellákat (pl. B2:B4).
+Condition illisible : « {text} » (ex. B2 >= 0). ¦ Ehtoa ei voi lukea: ”{text}” (esim. B2 >= 0). ¦ Olvashatatlan feltétel: „{text}” (pl. B2 >= 0).
+Écris la valeur voulue. ¦ Kirjoita haluamasi arvo. ¦ Írd be a kívánt értéket.
+Pas de solution qui respecte toutes les conditions (vérifie-les, ou change le départ). ¦ Ei ratkaisua, joka täyttää kaikki ehdot (tarkista ne tai muuta lähtöarvoja). ¦ Nincs olyan megoldás, amely minden feltételnek megfelel (ellenőrizd őket, vagy változtasd meg a kiindulást).
+🧮 Trouvé : {cell} = {value} ({n}). ↶ pour annuler. ¦ 🧮 Löytyi: {cell} = {value} ({n}). ↶ kumoaa. ¦ 🧮 Megvan: {cell} = {value} ({n}). ↶ a visszavonáshoz.
+📋 Tableau de scénarios ¦ 📋 Skenaariotaulukko ¦ 📋 Forgatókönyv-táblázat
+Et si cette case valait 20, 25, 30… ? Le tableau montre ce que donnent les formules pour chaque valeur. Il est posé à partir de la case choisie ({cell}) ; rien d’autre ne change. ¦ Entä jos tämän solun arvo olisi 20, 25, 30…? Taulukko näyttää, mitä kaavat antavat kullakin arvolla. Se sijoitetaan valitusta solusta ({cell}) alkaen; mikään muu ei muutu. ¦ Mi lenne, ha ennek a cellának az értéke 20, 25, 30… lenne? A táblázat megmutatja, mit adnak a képletek az egyes értékekre. A kijelölt cellától ({cell}) kezdve kerül be; semmi más nem változik.
+La case qui change ¦ Muuttuva solu ¦ A változó cella
+Ses valeurs (séparées par « ; », ou une plage) ¦ Sen arvot (erotettuina merkillä ”;” tai alue) ¦ Az értékei („;” jellel elválasztva, vagy egy tartomány)
+20;25;30 ou A10:A15 ¦ 20;25;30 tai A10:A15 ¦ 20;25;30 vagy A10:A15
+Les formules à suivre ¦ Seurattavat kaavat ¦ A követendő képletek
+Écris la case qui change (ex. B2). ¦ Kirjoita muuttuva solu (esim. B2). ¦ Írd be a változó cellát (pl. B2).
+Écris au moins une formule (ex. C5). ¦ Kirjoita ainakin yksi kaava (esim. C5). ¦ Írj be legalább egy képletet (pl. C5).
+Écris des valeurs (500 au plus). ¦ Kirjoita arvoja (enintään 500). ¦ Írj be értékeket (legfeljebb 500-at).
+📋 {n} (valeurs fixes : refais-le si les données changent). ¦ 📋 {n} (kiinteät arvot: tee uudelleen, jos tiedot muuttuvat). ¦ 📋 {n} (rögzített értékek: készítsd el újra, ha az adatok változnak).
+Rien n’a été enregistré. ¦ Mitään ei tallennettu. ¦ Semmi sem lett rögzítve.
+⏺ Nommer l’action ¦ ⏺ Nimeä toiminto ¦ ⏺ Művelet elnevezése
+Mon action ¦ Oma toimintoni ¦ Saját műveletem
+Garder ¦ Säilytä ¦ Megtartás
+⏺ Action « {name} » gardée : Données → ▶ Actions enregistrées. ¦ ⏺ Toiminto ”{name}” säilytetty: Tiedot → ▶ Tallennetut toiminnot. ¦ ⏺ „{name}” művelet megtartva: Adatok → ▶ Rögzített műveletek.
+⏺ Enregistrement : fais tes manipulations (menus, boutons, formats), puis Données → ⏹ Arrêter l’enregistrement. ¦ ⏺ Tallennus: tee toimenpiteesi (valikot, painikkeet, muotoilut) ja sitten Tiedot → ⏹ Lopeta tallennus. ¦ ⏺ Rögzítés: végezd el a lépéseidet (menük, gombok, formázás), majd Adatok → ⏹ Rögzítés leállítása.
+Aucune action enregistrée : Données → ⏺ Enregistrer une action. ¦ Ei tallennettuja toimintoja: Tiedot → ⏺ Tallenna toiminto. ¦ Nincs rögzített művelet: Adatok → ⏺ Művelet rögzítése.
+▶ Actions enregistrées ¦ ▶ Tallennetut toiminnot ¦ ▶ Rögzített műveletek
+Elles se refont sur la sélection du moment. ¦ Ne toistetaan nykyiselle valinnalle. ¦ Az aktuális kijelölésen futnak le újra.
+▶ Refaire ¦ ▶ Toista ¦ ▶ Lejátszás
+▶ « {name} » refaite. ¦ ▶ ”{name}” toistettu. ¦ ▶ „{name}” lejátszva.
+Colonne {n} ¦ Sarake {n} ¦ {n}. oszlop
+{what} de « {col} » ¦ {what} sarakkeesta ”{col}” ¦ {what} ebből: „{col}”
+Lignes ¦ Rivit ¦ Sorok
+Total ¦ Yhteensä ¦ Összesen
+{title} · par « {rows} » et « {cols} » — d’après {src} ¦ {title} · ”{rows}” ja ”{cols}” mukaan — lähteenä {src} ¦ {title} · „{rows}” és „{cols}” szerint — forrás: {src}
+{title} · par « {rows} » — d’après {src} ¦ {title} · ”{rows}” mukaan — lähteenä {src} ¦ {title} · „{rows}” szerint — forrás: {src}
+Choisis une plage avec une ligne de titres et des lignes de données (par exemple : Nom, Commune, Année, Âge). ¦ Valitse alue, jossa on otsikkorivi ja tietorivejä (esimerkiksi: Nimi, Kunta, Vuosi, Ikä). ¦ Jelölj ki egy tartományt fejlécsorral és adatsorokkal (például: Név, Település, Év, Életkor).
+🔀 Tableau croisé dynamique ¦ 🔀 Pivot-taulukko ¦ 🔀 Kimutatás
+Créer le tableau croisé ¦ Luo pivot-taulukko ¦ Kimutatás létrehozása
+D’après <b>{range}</b> ({n}). Le résultat va dans une nouvelle feuille ; « ↻ Actualiser le tableau croisé » (menu Données) le refait si les données changent. ¦ Lähteenä <b>{range}</b> ({n}). Tulos menee uudelle taulukolle; ”↻ Päivitä pivot-taulukko” (Tiedot-valikko) tekee sen uudelleen, jos tiedot muuttuvat. ¦ Forrás: <b>{range}</b> ({n}). Az eredmény új munkalapra kerül; a „↻ Kimutatás frissítése” (Adatok menü) újra elkészíti, ha az adatok változnak.
+En lignes ¦ Riveinä ¦ Sorokban
+En colonnes (facultatif) ¦ Sarakkeina (valinnainen) ¦ Oszlopokban (nem kötelező)
+— rien — ¦ — ei mitään — ¦ — semmi —
+Sur la colonne ¦ Sarakkeessa ¦ Ebben az oszlopban
+— (compter les lignes) — ¦ — (laske rivit) — ¦ — (sorok számlálása) —
+Totaux ¦ Summat ¦ Összegek
+Aperçu : {rows} × {cols} ¦ Esikatselu: {rows} × {cols} ¦ Előnézet: {rows} × {cols}
+Tableau croisé créé : {rows} × {cols}. Données → « ↻ Actualiser le tableau croisé » pour le refaire. ¦ Pivot-taulukko luotu: {rows} × {cols}. Tiedot → ”↻ Päivitä pivot-taulukko” tekee sen uudelleen. ¦ Kimutatás létrehozva: {rows} × {cols}. Adatok → „↻ Kimutatás frissítése” az újrakészítéshez.
+Cette feuille n’est pas un tableau croisé : va sur sa feuille « TCD … ». ¦ Tämä taulukko ei ole pivot-taulukko: siirry sen taulukkoon ”TCD …”. ¦ Ez a munkalap nem kimutatás: lépj a hozzá tartozó „TCD …” munkalapra.
+La feuille des données n’existe plus. ¦ Tietotaulukkoa ei ole enää olemassa. ¦ Az adatok munkalapja már nem létezik.
+Tableau croisé actualisé ({rows} × {cols}). ¦ Pivot-taulukko päivitetty ({rows} × {cols}). ¦ Kimutatás frissítve ({rows} × {cols}).
+Graphique vivant ¦ Elävä kaavio ¦ Élő grafikon
+Type de graphique ¦ Kaaviotyyppi ¦ Grafikon típusa
+En faire un diagramme lié à la plage ¦ Tee siitä alueeseen yhdistetty diagrammi ¦ Tartományhoz kapcsolt diagram készítése belőle
+Choisis des cases avec des nombres (et leurs noms à gauche ou en haut) : le graphique se dessine ici. ¦ Valitse soluja, joissa on lukuja (ja niiden nimet vasemmalla tai ylhäällä): kaavio piirtyy tähän. ¦ Jelölj ki számokat tartalmazó cellákat (a nevükkel balra vagy fent): a grafikon itt rajzolódik ki.
+Plage {range} · suit la sélection ¦ Alue {range} · seuraa valintaa ¦ {range} tartomány · követi a kijelölést
+Le moteur du tableur n’est pas chargé. ¦ Taulukkolaskennan moottoria ei ole ladattu. ¦ A táblázatkezelő motorja nincs betöltve.
+Mon classeur ¦ Oma työkirjani ¦ Saját munkafüzetem
+Rien à rétablir. ¦ Ei mitään tehtävää uudelleen. ¦ Nincs mit újra végrehajtani.
+d’autres changements ont suivi : utilise ↶ ({key}) ¦ sen jälkeen on tehty muita muutoksia: käytä ↶ ({key}) ¦ azóta más változtatások is történtek: használd a ↶ gombot ({key})
+Barre d’outils · {group} ¦ Työkalurivi · {group} ¦ Eszköztár · {group}
+Barre d’outils ¦ Työkalurivi ¦ Eszköztár
+Police et gras ¦ Fontti ja lihavointi ¦ Betűtípus és félkövér
+Police (E5) ¦ Fontti (E5) ¦ Betűtípus (E5)
+Police ¦ Fontti ¦ Betűtípus
+Gras ¦ Lihavointi ¦ Félkövér
+Italique ¦ Kursivointi ¦ Dőlt
+Souligné ¦ Alleviivaus ¦ Aláhúzott
+Renvoi à la ligne ¦ Rivitä teksti ¦ Sortörés
+Fusionner / séparer ¦ Yhdistä / erota ¦ Egyesítés / szétválasztás
+Aligner à gauche ¦ Tasaa vasemmalle ¦ Balra igazítás
+Centrer ¦ Keskitä ¦ Középre igazítás
+Aligner à droite ¦ Tasaa oikealle ¦ Jobbra igazítás
+Couleurs (C2) ¦ Värit (C2) ¦ Színek (C2)
+Couleur du texte ¦ Tekstin väri ¦ Szöveg színe
+Format de cellule ¦ Solun muotoilu ¦ Cellaformátum
+Format de la cellule ¦ Solun muoto ¦ A cella formátuma
+Une décimale de moins ¦ Yksi desimaali vähemmän ¦ Eggyel kevesebb tizedesjegy
+Une décimale de plus ¦ Yksi desimaali enemmän ¦ Eggyel több tizedesjegy
+Bordures ¦ Reunat ¦ Szegélyek
+Bordures : tout ¦ Reunat: kaikki ¦ Szegélyek: mind
+Bordures : contour ¦ Reunat: ääriviiva ¦ Szegélyek: körvonal
+Bordure du bas ¦ Alareuna ¦ Alsó szegély
+Sans bordure ¦ Ei reunaa ¦ Nincs szegély
+Graphique ¦ Kaavio ¦ Grafikon
+Un diagramme avec les chiffres de la sélection : les types conseillés pour cette plage ¦ Diagrammi valinnan luvuista: tälle alueelle suositellut tyypit ¦ Diagram a kijelölés számaiból: az erre a tartományra ajánlott típusok
+Choisir une fonction ¦ Valitse funktio ¦ Függvény kiválasztása
+Fonction ¦ Funktio ¦ Függvény
+XLSX, ODS, CSV, TSV, JSON, PDF, impression ¦ XLSX, ODS, CSV, TSV, JSON, PDF, tulostus ¦ XLSX, ODS, CSV, TSV, JSON, PDF, nyomtatás
+✓ Enregistrer et revenir ¦ ✓ Tallenna ja palaa ¦ ✓ Mentés és vissza
+Plein écran (⛶) ¦ Koko näyttö (⛶) ¦ Teljes képernyő (⛶)
+Données d’un autre outil ¦ Toisen työkalun tiedot ¦ Egy másik eszköz adatai
+Adresse (tape D12 ou un nom pour y aller) ¦ Osoite (kirjoita D12 tai nimi siirtyäksesi) ¦ Cím (írd be: D12, vagy egy nevet az odaugráshoz)
+Tape une adresse (D12, B2:C9) ou un nom pour y aller ¦ Kirjoita osoite (D12, B2:C9) tai nimi siirtyäksesi sinne ¦ Írj be egy címet (D12, B2:C9) vagy egy nevet az odaugráshoz
+Contenu ou formule de la cellule ¦ Solun sisältö tai kaava ¦ A cella tartalma vagy képlete
+Feuille de calcul ¦ Laskentataulukko ¦ Munkalap
+Feuille de calcul : tape pour écrire dans la cellule choisie ¦ Laskentataulukko: kirjoita valittuun soluun ¦ Munkalap: gépelj a kijelölt cellába íráshoz
+Écrire dans la cellule ¦ Kirjoita soluun ¦ Írás a cellába
+Panneau de droite ¦ Oikea paneeli ¦ Jobb oldali panel
+Feuilles ¦ Taulukot ¦ Munkalapok
+Clique pour choisir ce qu’on y voit (somme, moyenne…) ¦ Napsauta valitaksesi, mitä tässä näytetään (summa, keskiarvo…) ¦ Kattints, és válaszd ki, mi látszódjon itt (összeg, átlag…)
+Enregistrer une copie dans le Tableur… ¦ Tallenna kopio Taulukkolaskentaan… ¦ Másolat mentése a Táblázatkezelőbe…
+Enregistrer une copie… ¦ Tallenna kopio… ¦ Másolat mentése…
+Enregistrer comme modèle… ¦ Tallenna mallipohjaksi… ¦ Mentés sablonként…
+Exporter (XLSX, ODS, CSV, PDF…)… ¦ Vie (XLSX, ODS, CSV, PDF…)… ¦ Exportálás (XLSX, ODS, CSV, PDF…)…
+Feuille « {name} » ¦ Taulukko ”{name}” ¦ „{name}” munkalap
+Pas encore relié à une fiche ¦ Ei vielä yhdistetty korttiin ¦ Még nincs adatlaphoz kapcsolva
+Tire pour recopier ou continuer une suite ¦ Vedä kopioidaksesi tai jatkaaksesi sarjaa ¦ Húzd a másoláshoz vagy egy sorozat folytatásához
+« {text} » n’est pas dans la liste : {list} ¦ ”{text}” ei ole luettelossa: {list} ¦ „{text}” nincs a listában: {list}
+Il faut un nombre d’au moins {min} et au plus {max}. ¦ Tarvitaan luku väliltä {min}–{max}. ¦ Legalább {min} és legfeljebb {max} értékű szám kell.
+Il faut un nombre d’au moins {min}. ¦ Tarvitaan vähintään {min} oleva luku. ¦ Legalább {min} értékű szám kell.
+Il faut un nombre et au plus {max}. ¦ Tarvitaan enintään {max} oleva luku. ¦ Legfeljebb {max} értékű szám kell.
+Il faut un nombre. ¦ Tarvitaan luku. ¦ Szám kell.
+Je ne comprends pas cette date ({why}). ¦ En ymmärrä tätä päivämäärää ({why}). ¦ Nem értem ezt a dátumot ({why}).
+exemples : 7 mai 1925, vers 1784, an II ¦ esimerkkejä: 7 mai 1925, vers 1784, an II ¦ példák: 7 mai 1925, vers 1784, an II
+Tab = compléter ¦ Tab = täydennä ¦ Tab = kiegészítés
+✓ Compris comme une date d’acte : <b>{date}</b> (approximative : les calculs montreront ≈) ¦ ✓ Ymmärretty asiakirjan päivämääräksi: <b>{date}</b> (likimääräinen: laskelmissa näkyy ≈) ¦ ✓ Bejegyzés dátumaként értelmezve: <b>{date}</b> (közelítő: a számításokban ≈ jelenik meg)
+✓ Compris comme une date d’acte : <b>{date}</b> ¦ ✓ Ymmärretty asiakirjan päivämääräksi: <b>{date}</b> ¦ ✓ Bejegyzés dátumaként értelmezve: <b>{date}</b>
+Texte ou nombre. Commence par <b>=</b> pour calculer. ¦ Tekstiä tai luku. Aloita merkillä <b>=</b> laskeaksesi. ¦ Szöveg vagy szám. Számoláshoz kezdd <b>=</b> jellel.
+ƒ Formule : clique ou glisse sur des cellules pour les mettre, ou tape le nom d’une fonction (en français ou en anglais). <kbd>F4</kbd> : $A$1. ¦ ƒ Kaava: napsauta tai vedä soluja lisätäksesi ne tai kirjoita funktion nimi (ranskaksi tai englanniksi). <kbd>F4</kbd>: $A$1. ¦ ƒ Képlet: kattints vagy húzz cellák fölött a beillesztésükhöz, vagy írd be egy függvény nevét (franciául vagy angolul). <kbd>F4</kbd>: $A$1.
+Corriger en {name} ¦ Korjaa muotoon {name} ¦ Javítás erre: {name}
+Résultat approché : une des dates est approximative (« vers », « avant », « an … » sans jour). ¦ Likimääräinen tulos: yksi päivämääristä on likimääräinen (”vers”, ”avant”, ”an …” ilman päivää). ¦ Közelítő eredmény: az egyik dátum közelítő („vers”, „avant”, „an …” nap nélkül).
+« {text} » : ni une adresse (D12, B2:C9), ni un nom du classeur. ¦ ”{text}”: ei osoite (D12, B2:C9) eikä työkirjan nimi. ¦ „{text}”: se nem cím (D12, B2:C9), se nem a munkafüzet egyik neve.
+Pas de feuille « {name} ». ¦ Ei taulukkoa ”{name}”. ¦ Nincs „{name}” nevű munkalap.
+Utilise {key} dans la grille (le navigateur ne laisse pas un bouton écrire dans le presse-papiers). ¦ Käytä ruudukossa {key} (selain ei anna painikkeen kirjoittaa leikepöydälle). ¦ Használd a(z) {key} billentyűt a rácsban (a böngésző nem engedi, hogy egy gomb a vágólapra írjon).
+En pixels (6 à 72) : ¦ Pikseleinä (6–72): ¦ Képpontban (6–72):
+Lignes masquées (Format → Tout remontrer) ¦ Rivejä piilotettu (Muotoilu → Näytä kaikki uudelleen) ¦ Rejtett sorok (Formátum → Minden megjelenítése)
+Colonnes masquées (Format → Tout remontrer) ¦ Sarakkeita piilotettu (Muotoilu → Näytä kaikki uudelleen) ¦ Rejtett oszlopok (Formátum → Minden megjelenítése)
+Trier A → Z (sur la colonne choisie) ¦ Lajittele A → Z (valitun sarakkeen mukaan) ¦ Rendezés A → Z (a kijelölt oszlop szerint)
+Trier Z → A ¦ Lajittele Z → A ¦ Rendezés Z → A
+Trier sur plusieurs colonnes… ¦ Lajittele useamman sarakkeen mukaan… ¦ Rendezés több oszlop szerint…
+Espaces en trop retirés. ¦ Ylimääräiset välilyönnit poistettu. ¦ Felesleges szóközök eltávolítva.
+Rien à retirer. ¦ Ei poistettavaa. ¦ Nincs mit eltávolítani.
+Police des cellules ¦ Solujen fontti ¦ Cellák betűtípusa
+Cette police a un nom que le tableur ne sait pas garder. ¦ Tämän fontin nimeä taulukkolaskenta ei osaa säilyttää. ¦ Ennek a betűtípusnak olyan neve van, amelyet a táblázatkezelő nem tud megőrizni.
+Une taille entre 6 et 72 px (« {value} » ne va pas). ¦ Koko väliltä 6–72 px (”{value}” ei käy). ¦ 6 és 72 px közötti méret („{value}” nem jó).
+Une taille entre 6 et 72 px. ¦ Koko väliltä 6–72 px. ¦ 6 és 72 px közötti méret.
+Choisis d’abord plusieurs cases à fusionner. ¦ Valitse ensin useita yhdistettäviä soluja. ¦ Előbb jelölj ki több egyesítendő cellát.
+Cases fusionnées : {n} ¦ Soluja yhdistetty: {n} ¦ Egyesített cellák: {n}
+Largeur de colonne ¦ Sarakkeen leveys ¦ Oszlopszélesség
+Hauteur de ligne ¦ Rivin korkeus ¦ Sormagasság
+En pixels (16 à 1200) : ¦ Pikseleinä (16–1200): ¦ Képpontban (16–1200):
+En pixels (12 à 600) : ¦ Pikseleinä (12–600): ¦ Képpontban (12–600):
+Un nom commence par une lettre, sans espace (ex. Total, Âges_1836). ¦ Nimi alkaa kirjaimella, ilman välilyöntejä (esim. Total, Âges_1836). ¦ A név betűvel kezdődik, szóköz nélkül (pl. Total, Âges_1836).
+Nom « {name} » = {ref} : tape =SOMME({name}) dans une formule. ¦ Nimi ”{name}” = {ref}: kirjoita kaavaan =SOMME({name}). ¦ „{name}” név = {ref}: írd be egy képletbe: =SOMME({name}).
+Nom pour la plage ¦ Alueen nimi ¦ A tartomány neve
+Un nom pour {ref} (pour écrire =SOMME(Total) au lieu de =SOMME(D2:D40)) : ¦ Nimi alueelle {ref} (jotta voit kirjoittaa =SOMME(Total) eikä =SOMME(D2:D40)): ¦ Név ehhez: {ref} (hogy =SOMME(D2:D40) helyett =SOMME(Total) legyen írható):
+💬 Note sur {cell} ¦ 💬 Huomautus solussa {cell} ¦ 💬 Megjegyzés ehhez: {cell}
+La note s’affiche au survol de la case (un petit coin orange). Vide = pas de note. ¦ Huomautus näkyy, kun vie hiiren solun päälle (pieni oranssi kulma). Tyhjä = ei huomautusta. ¦ A megjegyzés akkor látszik, ha az egeret a cella fölé viszed (kis narancssárga sarok). Üres = nincs megjegyzés.
+⌨️ Raccourcis du tableur ¦ ⌨️ Taulukkolaskennan pikanäppäimet ¦ ⌨️ A táblázatkezelő billentyűparancsai
+Raccourcis indisponibles. ¦ Pikanäppäimet eivät ole käytettävissä. ¦ A billentyűparancsok nem érhetők el.
+⚙️ Réglages du tableur ¦ ⚙️ Taulukkolaskennan asetukset ¦ ⚙️ A táblázatkezelő beállításai
+Après la touche Entrée, aller ¦ Enter-näppäimen jälkeen siirry ¦ Az Enter billentyű után ugrás
+vers le bas ¦ alas ¦ lefelé
+vers la droite (saisie de relevés en ligne) ¦ oikealle (otteiden syöttö rivi kerrallaan) ¦ jobbra (kivonatok soronkénti bevitele)
+Séparateur des fichiers CSV ¦ CSV-tiedostojen erotin ¦ CSV-fájlok elválasztója
+point-virgule « ; » (Excel en français) ¦ puolipiste ”;” (ranskankielinen Excel) ¦ pontosvessző „;” (francia Excel)
+virgule « , » ¦ pilkku ”,” ¦ vessző „,”
+tabulation ¦ sarkain ¦ tabulátor
+Largeur des colonnes d’une feuille neuve ¦ Uuden taulukon sarakkeiden leveys ¦ Új munkalap oszlopszélessége
+Dans la barre du bas, pour les cellules choisies ¦ Alapalkissa valituille soluille ¦ Az alsó sávban, a kijelölt cellákhoz
+Réglages du tableur ¦ Taulukkolaskennan asetukset ¦ A táblázatkezelő beállításai
+Trop de lignes ou de colonnes d’un coup. ¦ Liian monta riviä tai saraketta kerralla. ¦ Túl sok sor vagy oszlop egyszerre.
+Trié {dir} sur la colonne {col} (la 1re ligne, ce sont les titres). ¦ Lajiteltu {dir} sarakkeen {col} mukaan (1. rivi on otsikot). ¦ Rendezve {dir} a(z) {col} oszlop szerint (az 1. sor a fejléc).
+Trié {dir} sur la colonne {col}. ¦ Lajiteltu {dir} sarakkeen {col} mukaan. ¦ Rendezve {dir} a(z) {col} oszlop szerint.
+A → Z (croissant) ¦ A → Z (nouseva) ¦ A → Z (növekvő)
+Z → A (décroissant) ¦ Z → A (laskeva) ¦ Z → A (csökkenő)
+Plage {range} · les dates d’actes (« vers 1784 », « an II ») se rangent à leur date. ¦ Alue {range} · asiakirjojen päivämäärät (”vers 1784”, ”an II”) lajitellaan päivämääränsä mukaan. ¦ {range} tartomány · a bejegyzések dátumai („vers 1784”, „an II”) a dátumuk szerint rendeződnek.
+La première ligne, ce sont les titres ¦ Ensimmäinen rivi on otsikot ¦ Az első sor a fejléc
+Puis par ¦ Sitten ¦ Majd eszerint
+Choisis un tableau avec une ligne de titres et des lignes en dessous. ¦ Valitse taulukko, jossa on otsikkorivi ja sen alla rivejä. ¦ Jelölj ki egy táblázatot fejlécsorral és alatta sorokkal.
+(vide) ¦ (tyhjä) ¦ (üres)
+Chercher dans le tableau… (nom, métier) ¦ Hae taulukosta… (nimi, ammatti) ¦ Keresés a táblázatban… (név, foglalkozás)
+{n} sur {total} ¦ {n} / {total} ¦ {n} / {total}
+Supprimer les doublons ¦ Poista kaksoiskappaleet ¦ Ismétlődések törlése
+Plage {range} · la 1re ligne, ce sont les titres. La première ligne de chaque groupe reste. ¦ Alue {range} · 1. rivi on otsikot. Kunkin ryhmän ensimmäinen rivi jää. ¦ {range} tartomány · az 1. sor a fejléc. Minden csoport első sora megmarad.
+Plage {range}. La première ligne de chaque groupe reste. ¦ Alue {range}. Kunkin ryhmän ensimmäinen rivi jää. ¦ {range} tartomány. Minden csoport első sora megmarad.
+Compare les colonnes : ¦ Vertaa sarakkeita: ¦ Összevetendő oszlopok:
+{n} en double (lignes {rows}). ¦ {n} kaksoiskappaleena (rivit {rows}). ¦ {n} ismétlődik ({rows}. sorok).
+{n} en double (ligne {rows}). ¦ {n} kaksoiskappaleena (rivi {rows}). ¦ {n} ismétlődik ({rows}. sor).
+Aucune ligne en double. ¦ Ei kaksoiskappalerivejä. ¦ Nincs ismétlődő sor.
+Supprimer {n} ¦ Poista {n} ¦ {n} törlése
+Coche au moins une colonne. ¦ Valitse ainakin yksi sarake. ¦ Jelölj be legalább egy oszlopot.
+Choisis des cases de texte dans une colonne (ex. « MARTIN Jean, 34 ans, laboureur »). ¦ Valitse tekstisoluja yhdestä sarakkeesta (esim. ”MARTIN Jean, 34 ans, laboureur”). ¦ Jelölj ki szöveges cellákat egy oszlopban (pl. „MARTIN Jean, 34 ans, laboureur”).
+Convertir le texte en colonnes ¦ Muunna teksti sarakkeiksi ¦ Szöveg oszlopokká alakítása
+Convertir ¦ Muunna ¦ Átalakítás
+Couper à : ¦ Katkaise kohdasta: ¦ Felosztás itt:
+« 34 ans » devient 34 ¦ ”34 ans” muuttuu luvuksi 34 ¦ „34 ans” helyett 34
+Le nom en capitales devient une colonne à part (« MARTIN Jean » → MARTIN | Jean) ¦ Isoilla kirjaimilla kirjoitettu sukunimi erotetaan omaksi sarakkeekseen (”MARTIN Jean” → MARTIN | Jean) ¦ A nagybetűs vezetéknév külön oszlopba kerül („MARTIN Jean” → MARTIN | Jean)
+Les morceaux vont dans la colonne {col} et les suivantes (ce qui s’y trouve est remplacé ; ↶ pour revenir). ¦ Osat menevät sarakkeeseen {col} ja sitä seuraaviin (niissä oleva korvataan; ↶ palauttaa). ¦ A darabok a(z) {col} oszlopba és az utána következőkbe kerülnek (ami ott van, felülíródik; ↶ a visszalépéshez).
+Validation des données ¦ Tietojen kelpoisuus ¦ Adatérvényesítés
+Pour {range} : ce qu’on peut écrire dans ces cases. ¦ Alueelle {range}: mitä näihin soluihin saa kirjoittaa. ¦ {range}: mit lehet ezekbe a cellákba írni.
+Autoriser ¦ Salli ¦ Engedélyezve
+Une liste de choix (menu ▾) ¦ Valintaluettelo (valikko ▾) ¦ Választéklista (menü ▾)
+👤 Une personne de la base (menu de choix) ¦ 👤 Henkilö tietokannasta (valintavalikko) ¦ 👤 Személy az adatbázisból (választómenü)
+📍 Un lieu de la base (menu de choix) ¦ 📍 Paikka tietokannasta (valintavalikko) ¦ 📍 Hely az adatbázisból (választómenü)
+Un nombre entre… ¦ Luku väliltä… ¦ Szám ezek között…
+Une date d’acte (vers 1784, an II…) ¦ Asiakirjan päivämäärä (vers 1784, an II…) ¦ Bejegyzés dátuma (vers 1784, an II…)
+Les choix (un par ligne) ¦ Valinnat (yksi riviä kohden) ¦ A választható elemek (soronként egy)
+Entre ¦ Väliltä ¦ Között
+Garder aussi un texte libre (sans fiche, ou hors de la liste) ¦ Säilytä myös vapaa teksti (ilman korttia tai luettelon ulkopuolelta) ¦ Szabad szöveg is megmarad (adatlap nélkül vagy a listán kívül)
+Écris au moins un choix. ¦ Kirjoita ainakin yksi valinta. ¦ Írj be legalább egy választható elemet.
+FORMAT ¦ MUOTOILU ¦ FORMÁTUM
+Mise en forme conditionnelle ¦ Ehdollinen muotoilu ¦ Feltételes formázás
+Ajouter la règle ¦ Lisää sääntö ¦ Szabály hozzáadása
+Une couleur quand la valeur le demande : l’erreur ou la valeur étrange saute aux yeux. ¦ Väri, kun arvo sitä vaatii: virhe tai outo arvo pistää silmään. ¦ Szín, ha az érték megkívánja: a hiba vagy a furcsa érték szembeötlik.
+Prêtes à l’emploi : ¦ Valmiit: ¦ Használatra készek:
+« âge > 100 ans » ¦ ”ikä > 100 vuotta” ¦ „életkor > 100 év”
+« date impossible » ¦ ”mahdoton päivämäärä” ¦ „lehetetlen dátum”
+« doublons » ¦ ”kaksoiskappaleet” ¦ „ismétlődések”
+« barres » ¦ ”palkit” ¦ „sávok”
+Si la valeur ¦ Jos arvo ¦ Ha az érték
+alors ¦ niin ¦ akkor
+en gras ¦ lihavoituna ¦ félkövéren
+Une plage comme D2:D40. ¦ Alue, kuten D2:D40. ¦ Egy tartomány, például D2:D40.
+Écris un nombre. ¦ Kirjoita luku. ¦ Írj be egy számot.
+ÉDITION ¦ MUOKKAUS ¦ SZERKESZTÉS
+🔍 Rechercher et remplacer ¦ 🔍 Etsi ja korvaa ¦ 🔍 Keresés és csere
+Remplacer tout ¦ Korvaa kaikki ¦ Az összes cseréje
+Remplacer par ¦ Korvaa tällä ¦ Csere erre
+Dans toutes les feuilles ¦ Kaikissa taulukoissa ¦ Minden munkalapon
+Respecter les capitales ¦ Sama kirjainkoko ¦ Kis- és nagybetűk megkülönböztetése
+Chercher le suivant ¦ Etsi seuraava ¦ Következő keresése
+Trouvé en {cell} ¦ Löytyi solusta {cell} ¦ Megtalálva itt: {cell}
+Écris ce qu’il faut chercher. ¦ Kirjoita, mitä etsitään. ¦ Írd be, mit keresel.
+Aucune fonction ne correspond. ¦ Mikään funktio ei täsmää. ¦ Egyik függvény sem felel meg.
+ƒ Choisir une fonction ¦ ƒ Valitse funktio ¦ ƒ Függvény kiválasztása
+Chercher… (âge, somme, recherche) ¦ Hae… (ikä, summa, haku) ¦ Keresés… (életkor, összeg, keresés)
+Le menu de choix n’est pas chargé. ¦ Valintavalikkoa ei ole ladattu. ¦ A választómenü nincs betöltve.
+📍 Un lieu pour {cell} ¦ 📍 Paikka soluun {cell} ¦ 📍 Hely ehhez: {cell}
+👤 Une personne pour {cell} ¦ 👤 Henkilö soluun {cell} ¦ 👤 Személy ehhez: {cell}
+📍 Lieu de la base ¦ 📍 Paikka tietokannasta ¦ 📍 Hely az adatbázisból
+auto ¦ auto ¦ auto
+Décimales ¦ Desimaalit ¦ Tizedesjegyek
+✓ « {text} » est comprise (≈) ¦ ✓ ”{text}” ymmärretty (≈) ¦ ✓ „{text}” értelmezve (≈)
+✓ « {text} » est comprise ¦ ✓ ”{text}” ymmärretty ¦ ✓ „{text}” értelmezve
+Noir ¦ Musta ¦ Fekete
+Contour ¦ Ääriviiva ¦ Körvonal
+Retirer la règle ¦ Poista sääntö ¦ Szabály eltávolítása
+Aucune règle sur cette feuille. ¦ Tässä taulukossa ei ole sääntöjä. ¦ Ezen a munkalapon nincs szabály.
+＋ Ajouter une règle… ¦ ＋ Lisää sääntö… ¦ ＋ Szabály hozzáadása…
+Une liste : {list} ¦ Luettelo: {list} ¦ Lista: {list}
+👤 Une personne de la base ¦ 👤 Henkilö tietokannasta ¦ 👤 Személy az adatbázisból
+📍 Un lieu de la base ¦ 📍 Paikka tietokannasta ¦ 📍 Hely az adatbázisból
+Un nombre ¦ Luku ¦ Szám
+Une date d’acte ¦ Asiakirjan päivämäärä ¦ Bejegyzés dátuma
+Garder le texte ¦ Säilytä teksti ¦ Szöveg megtartása
+Pas de validation ici. ¦ Ei kelpoisuustarkistusta tässä. ¦ Itt nincs érvényesítés.
+Validation des données… ¦ Tietojen kelpoisuus… ¦ Adatérvényesítés…
+Enregistre d’abord le classeur (💾), puis ouvre la fiche. ¦ Tallenna ensin työkirja (💾) ja avaa sitten kortti. ¦ Előbb mentsd a munkafüzetet (💾), aztán nyisd meg az adatlapot.
+{name} : lieu n° {id} de ta base. ¦ {name}: tietokantasi paikka nro {id}. ¦ {name}: az adatbázisod {id}. számú helye.
+Règle « {range} » retirée ¦ Sääntö ”{range}” poistettu ¦ „{range}” szabály eltávolítva
+Police (E5) : {font} ¦ Fontti (E5): {font} ¦ Betűtípus (E5): {font}
+celle de départ ¦ oletusfontti ¦ az alapértelmezett
+Panneau de droite : montrer ¦ Oikea paneeli: näytä ¦ Jobb oldali panel: megjelenítés
+Panneau de droite : cacher ¦ Oikea paneeli: piilota ¦ Jobb oldali panel: elrejtés
+Double-clic : renommer · clic droit : plus d’actions ¦ Kaksoisnapsautus: nimeä uudelleen · hiiren oikea painike: lisää toimintoja ¦ Dupla kattintás: átnevezés · jobb kattintás: további műveletek
+Ajouter une feuille ¦ Lisää taulukko ¦ Munkalap hozzáadása
+Feuille {n} ¦ Taulukko {n} ¦ {n}. munkalap
+Renommer la feuille ¦ Nimeä taulukko uudelleen ¦ Munkalap átnevezése
+Un classeur garde au moins une feuille. ¦ Työkirjassa on aina vähintään yksi taulukko. ¦ Egy munkafüzetben legalább egy munkalapnak maradnia kell.
+Feuille « {name} » supprimée ¦ Taulukko ”{name}” poistettu ¦ „{name}” munkalap törölve
+Couleur de l’onglet… ¦ Välilehden väri… ¦ A lap színe…
+Déplacer à gauche ¦ Siirrä vasemmalle ¦ Mozgatás balra
+Déplacer à droite ¦ Siirrä oikealle ¦ Mozgatás jobbra
+Somme <b>{v}</b> ¦ Summa <b>{v}</b> ¦ Összeg <b>{v}</b>
+Moyenne <b>{v}</b> ¦ Keskiarvo <b>{v}</b> ¦ Átlag <b>{v}</b>
+Nb <b>{v}</b> ¦ Määrä <b>{v}</b> ¦ Darab <b>{v}</b>
+Min <b>{v}</b> ¦ Min <b>{v}</b> ¦ Min <b>{v}</b>
+Max <b>{v}</b> ¦ Max <b>{v}</b> ¦ Max <b>{v}</b>
+Dans la barre d’état ¦ Tilarivillä ¦ Az állapotsorban
+Utilise {key} : le navigateur ne laisse pas un menu écrire dans le presse-papiers. ¦ Käytä {key}: selain ei anna valikon kirjoittaa leikepöydälle. ¦ Használd ezt: {key} – a böngésző nem engedi, hogy egy menü a vágólapra írjon.
+Sélection trop grande pour le presse-papiers. ¦ Valinta on liian suuri leikepöydälle. ¦ A kijelölés túl nagy a vágólaphoz.
+Coupé : choisis où coller, puis {key}. ¦ Leikattu: valitse, mihin liität, ja paina {key}. ¦ Kivágva: válaszd ki, hová illeszted be, majd {key}.
+Utilise {key} dans la grille pour coller. ¦ Liitä käyttämällä ruudukossa {key}. ¦ A beillesztéshez használd a rácsban ezt: {key}.
+Trop de cellules à coller. ¦ Liian monta solua liitettäväksi. ¦ Túl sok beillesztendő cella.
+{n} (avec le gras et les couleurs). ¦ {n} (lihavoinnit ja värit mukaan lukien). ¦ {n} (a félkövérrel és a színekkel együtt).
+Série {n} ¦ Sarja {n} ¦ {n}. adatsor
+Colonnes groupées ¦ Ryhmitellyt pylväät ¦ Csoportosított oszlopok
+Barres horizontales ¦ Vaakapalkit ¦ Vízszintes sávok
+TSV (tabulations) ¦ TSV (sarkaimet) ¦ TSV (tabulátorok)
+⤒ Importer un tableau ¦ ⤒ Tuo taulukko ¦ ⤒ Táblázat importálása
+Séparateur deviné : {sep} · Encodage : {enc} ¦ Arvattu erotin: {sep} · Merkistö: {enc} ¦ Kitalált elválasztó: {sep} · Kódolás: {enc}
+point-virgule (;) ¦ puolipiste (;) ¦ pontosvessző (;)
+virgule (,) ¦ pilkku (,) ¦ vessző (,)
+✓ Accents corrects : « {list} ». ¦ ✓ Aksentit oikein: ”{list}”. ¦ ✓ Az ékezetek helyesek: „{list}”.
+<b>{rows}</b> dans {sheets} ¦ <b>{rows}</b> taulukoissa {sheets} ¦ <b>{rows}</b>, {sheets}
+CSV et TSV : la feuille ouverte. Les autres : tout le classeur. Une cellule qui commence par « = » est protégée dans un CSV (pas de formule glissée). ¦ CSV ja TSV: avoinna oleva taulukko. Muut: koko työkirja. Merkillä ”=” alkava solu suojataan CSV-tiedostossa (ei salaa lisättyjä kaavoja). ¦ CSV és TSV: a megnyitott munkalap. A többi: a teljes munkafüzet. Az „=” jellel kezdődő cella CSV-ben védve van (nem csempészhető be képlet).
+tout tableur ¦ mikä tahansa taulukkolaskentaohjelma ¦ bármely táblázatkezelő
+tabulations ¦ sarkaimet ¦ tabulátorok
+données ¦ tiedot ¦ adatok
+à lire ¦ luettavaksi ¦ olvasásra
+💾 Fichier de l’outil ¦ 💾 Työkalun tiedosto ¦ 💾 Az eszköz fájlja
+Exporté : {name} ¦ Viety: {name} ¦ Exportálva: {name}
+(feuille vide) ¦ (tyhjä taulukko) ¦ (üres munkalap)
+Toutes les feuilles ¦ Kaikki taulukot ¦ Minden munkalap
+Quadrillage ¦ Ruudukko ¦ Rácsvonalak
+Rangé dans Listes → Outils de modification → 🧾 Tableur. ¦ Tallennettu kohteeseen Luettelot → Muokkaustyökalut → 🧾 Taulukkolaskenta. ¦ Elhelyezve itt: Listák → Szerkesztőeszközök → 🧾 Táblázatkezelő.
+Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles). ¦ Mallipohja ”{name}” tallennettu (Aloita mallipohjasta → Omat mallipohjat). ¦ „{name}” sablon mentve (Kezdés sablonból → Saját sablonok).
+Copie « {name} » enregistrée. ¦ Kopio ”{name}” tallennettu. ¦ „{name}” másolat mentve.
+Ce classeur ¦ Tämä työkirja ¦ Ez a munkafüzet
+Impossible d’enregistrer : {error} ¦ Tallennus ei onnistunut: {error} ¦ Nem sikerült menteni: {error}
+Enregistrer comme modèle ¦ Tallenna mallipohjaksi ¦ Mentés sablonként
+Enregistrer une copie ¦ Tallenna kopio ¦ Másolat mentése
+Le nom du modèle (les données restent : vide-les avant si tu veux un modèle vierge) : ¦ Mallipohjan nimi (tiedot säilyvät: tyhjennä ne ensin, jos haluat tyhjän mallipohjan): ¦ A sablon neve (az adatok megmaradnak: ürítsd ki előtte, ha üres sablont szeretnél):
+Le nom de la copie : ¦ Kopion nimi: ¦ A másolat neve:
+{name} (copie) ¦ {name} (kopio) ¦ {name} (másolat)
+Les changements faits depuis le dernier enregistrement seront perdus. ¦ Viimeisen tallennuksen jälkeen tehdyt muutokset menetetään. ¦ Az utolsó mentés óta végzett változtatások elvesznek.
+📋 Partir d’un modèle ¦ 📋 Aloita mallipohjasta ¦ 📋 Kezdés sablonból
+Mes modèles ¦ Omat mallipohjat ¦ Saját sablonok
+Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Sinulla ei ole vielä omaa mallipohjaa: valitse työkirjassa Tiedosto → ”Tallenna mallipohjaksi…”. ¦ Még nincs saját sablonod: egy munkafüzetben Fájl → „Mentés sablonként…”.
+séparateur « {sep} » ¦ erotin ”{sep}” ¦ elválasztó: „{sep}”
+Classeur importé ¦ Tuotu työkirja ¦ Importált munkafüzet
+Classeur « {name} » créé ({rows}) ¦ Työkirja ”{name}” luotu ({rows}) ¦ „{name}” munkafüzet létrehozva ({rows})
+classeur ¦ työkirja ¦ munkafüzet
+＋ Nouveau classeur ¦ ＋ Uusi työkirja ¦ ＋ Új munkafüzet
+Relevé de recensement, registre paroissial, budget de la recherche, suivi des courriers… ¦ Henkikirjan otteet, kirkonkirja, tutkimuksen budjetti, kirjeenvaihdon seuranta… ¦ Népszámlálási kivonat, egyházi anyakönyv, a kutatás költségvetése, levelezés követése…
+Tu divises par zéro : {ref} est vide ou vaut 0. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Jaat nollalla: {ref} on tyhjä tai 0. Vinkki: =SI.ERREUR(…;"") jättää solun tyhjäksi. ¦ Nullával osztasz: {ref} üres vagy 0. Tipp: =SI.ERREUR(…;"") üresen hagyja a cellát.
+Tu divises par zéro : {why}. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Jaat nollalla: {why}. Vinkki: =SI.ERREUR(…;"") jättää solun tyhjäksi. ¦ Nullával osztasz: {why}. Tipp: =SI.ERREUR(…;"") üresen hagyja a cellát.
+Tu divises par zéro. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Jaat nollalla. Vinkki: =SI.ERREUR(…;"") jättää solun tyhjäksi. ¦ Nullával osztasz. Tipp: =SI.ERREUR(…;"") üresen hagyja a cellát.
+Je ne connais pas « {name} ». Voulais-tu dire {sugg} ? ¦ En tunne nimeä ”{name}”. Tarkoititko {sugg}? ¦ Nem ismerem ezt: „{name}”. Erre gondoltál: {sugg}?
+Je ne connais pas « {name} ». Tape les premières lettres : la liste des fonctions s’ouvre. ¦ En tunne nimeä ”{name}”. Kirjoita ensimmäiset kirjaimet: funktioluettelo avautuu. ¦ Nem ismerem ezt: „{name}”. Írd be az első betűket: megnyílik a függvények listája.
+Un nom inconnu dans la formule. ¦ Kaavassa on tuntematon nimi. ¦ Ismeretlen név a képletben.
+« {text} » n’est pas un nombre (cellule {cell}) : on ne peut pas faire de calcul avec. ¦ ”{text}” ei ole luku (solu {cell}): sillä ei voi laskea. ¦ „{text}” nem szám ({cell} cella): nem lehet vele számolni.
+« {text} » n’est pas un nombre : on ne peut pas faire de calcul avec. ¦ ”{text}” ei ole luku: sillä ei voi laskea. ¦ „{text}” nem szám: nem lehet vele számolni.
+Une valeur ne convient pas ¦ Arvo ei sovi ¦ Egy érték nem megfelelő
+{what} (cellule {cell}). ¦ {what} (solu {cell}). ¦ {what} ({cell} cella).
+La formule montre quelque chose qui n’existe pas : {what}. ¦ Kaava viittaa johonkin, jota ei ole olemassa: {what}. ¦ A képlet valami nem létezőre mutat: {what}.
+La formule montre une cellule qui a été supprimée. ¦ Kaava viittaa soluun, joka on poistettu. ¦ A képlet egy törölt cellára mutat.
+Valeur introuvable ¦ Arvoa ei löydy ¦ Az érték nem található
+La recherche ¦ Haku ¦ A keresés
+{fn} n’a pas trouvé « {what} » dans {where}. ¦ {fn} ei löytänyt kohdetta ”{what}” alueelta {where}. ¦ {fn} nem találta: „{what}” itt: {where}.
+{fn} n’a pas trouvé « {what} ». ¦ {fn} ei löytänyt kohdetta ”{what}”. ¦ {fn} nem találta: „{what}”.
+{path} : la formule tourne en rond. ¦ {path}: kaava kiertää kehää. ¦ {path}: a képlet körbe-körbe jár.
+La formule a besoin d’elle-même : elle tourne en rond. ¦ Kaava tarvitsee itseään: se kiertää kehää. ¦ A képletnek önmagára van szüksége: körbe-körbe jár.
+« {text} » : {why}. ¦ ”{text}”: {why}. ¦ „{text}”: {why}.
+cette date ¦ tätä päivämäärää ¦ ezt a dátumot
+Je ne comprends pas {what} (« {text} »). Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ En ymmärrä {what} (”{text}”). Esimerkkejä: 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Nem értem {what} („{text}”). Példák: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas {what}. Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ En ymmärrä {what}. Esimerkkejä: 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Nem értem {what}. Példák: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas la formule près de « {near} » : {why}. ¦ En ymmärrä kaavaa kohdan ”{near}” lähellä: {why}. ¦ Nem értem a képletet ennél: „{near}”: {why}.
+Je ne comprends pas la formule : {why}. ¦ En ymmärrä kaavaa: {why}. ¦ Nem értem a képletet: {why}.
+Je ne comprends pas la formule près de « {near} » : vérifie les parenthèses, les guillemets et les « ; ». ¦ En ymmärrä kaavaa kohdan ”{near}” lähellä: tarkista sulkeet, lainausmerkit ja ”;”-merkit. ¦ Nem értem a képletet ennél: „{near}”: ellenőrizd a zárójeleket, az idézőjeleket és a „;” jeleket.
+Je ne comprends pas la formule : vérifie les parenthèses, les guillemets et les « ; ». ¦ En ymmärrä kaavaa: tarkista sulkeet, lainausmerkit ja ”;”-merkit. ¦ Nem értem a képletet: ellenőrizd a zárójeleket, az idézőjeleket és a „;” jeleket.
+Nombre impossible ¦ Mahdoton luku ¦ Lehetetlen szám
+Le résultat a besoin de {size} vers le bas et la droite, mais {cell} n’est pas vide : vide-la pour voir tout le résultat. ¦ Tulos tarvitsee {size} alas ja oikealle, mutta {cell} ei ole tyhjä: tyhjennä se nähdäksesi koko tuloksen. ¦ Az eredménynek {size} kell lefelé és jobbra, de {cell} nem üres: ürítsd ki, hogy a teljes eredmény látszódjon.
+plusieurs cases ¦ useita soluja ¦ több cella
+une case ¦ yhden solun ¦ egy cella
+Trop gros pour être calculé : {why}. ¦ Liian suuri laskettavaksi: {why}. ¦ Túl nagy a kiszámításhoz: {why}.
+réduis la plage ¦ pienennä aluetta ¦ szűkítsd a tartományt
+Erreur dans la formule. ¦ Virhe kaavassa. ¦ Hiba a képletben.
+Astuce : =SI.ERREUR(A4/B4;"") ¦ Vinkki: =SI.ERREUR(A4/B4;"") ¦ Tipp: =SI.ERREUR(A4/B4;"")
+fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un document de bureau n’utilise pas ¦ tiedosto hylätty: se sisältää XML-määrittelyjä (DOCTYPE tai ENTITY), joita toimistoasiakirja ei käytä ¦ fájl elutasítva: olyan XML-deklarációkat tartalmaz (DOCTYPE vagy ENTITY), amelyeket irodai dokumentum nem használ
+fichier XML abîmé ¦ vioittunut XML-tiedosto ¦ sérült XML-fájl
+fichier refusé : trop d’éléments ¦ tiedosto hylätty: liikaa elementtejä ¦ fájl elutasítva: túl sok elem
+fichier refusé : XML trop imbriqué ¦ tiedosto hylätty: XML on liian syvälle sisäkkäinen ¦ fájl elutasítva: az XML túl mélyen egymásba ágyazott
+fichier trop gros (plus de {n} Mo) ¦ tiedosto liian suuri (yli {n} Mt) ¦ túl nagy fájl (több mint {n} MB)
+ce n’est pas un fichier zip valide ¦ tämä ei ole kelvollinen zip-tiedosto ¦ ez nem érvényes zip-fájl
+fichier refusé : trop d’éléments dans le zip ¦ tiedosto hylätty: zip-tiedostossa on liikaa kohteita ¦ fájl elutasítva: túl sok elem a zip-fájlban
+fichier chiffré : ouvre-le d’abord dans son tableur et enregistre-le sans mot de passe ¦ salattu tiedosto: avaa se ensin omassa taulukkolaskentaohjelmassaan ja tallenna ilman salasanaa ¦ titkosított fájl: előbb nyisd meg a saját táblázatkezelőjében, és mentsd jelszó nélkül
+fichier zip abîmé ¦ vioittunut zip-tiedosto ¦ sérült zip-fájl
+fichier refusé : trop gros une fois décompressé ¦ tiedosto hylätty: liian suuri purettuna ¦ fájl elutasítva: kicsomagolva túl nagy
+fichier refusé : il se décompresse en beaucoup trop gros (bombe zip) ¦ tiedosto hylätty: se purkautuu aivan liian suureksi (zip-pommi) ¦ fájl elutasítva: kicsomagolva túlságosan nagy lenne (zip-bomba)
+ce navigateur ne sait pas ouvrir les fichiers zip (mets-le à jour) ¦ tämä selain ei osaa avata zip-tiedostoja (päivitä se) ¦ ez a böngésző nem tud zip-fájlokat megnyitni (frissítsd)
+compression inconnue dans le fichier ¦ tiedostossa on tuntematon pakkaus ¦ ismeretlen tömörítés a fájlban
+ce n’est pas un fichier Excel (.xlsx) : xl/workbook.xml manque ¦ tämä ei ole Excel-tiedosto (.xlsx): xl/workbook.xml puuttuu ¦ ez nem Excel-fájl (.xlsx): hiányzik az xl/workbook.xml
+fichier refusé : trop de feuilles ¦ tiedosto hylätty: liikaa taulukoita ¦ fájl elutasítva: túl sok munkalap
+fichier refusé : trop de cellules ¦ tiedosto hylätty: liikaa soluja ¦ fájl elutasítva: túl sok cella
+ce n’est pas un fichier LibreOffice (.ods) : content.xml manque ¦ tämä ei ole LibreOffice-tiedosto (.ods): content.xml puuttuu ¦ ez nem LibreOffice-fájl (.ods): hiányzik a content.xml
+ce fichier n’est pas un JSON valide ¦ tämä tiedosto ei ole kelvollista JSONia ¦ ez a fájl nem érvényes JSON
+je ne trouve pas de tableau dans ce JSON (il faut une liste de lignes ou d’objets) ¦ en löydä tästä JSONista taulukkoa (tarvitaan luettelo riveistä tai objekteista) ¦ nem találok táblázatot ebben a JSON-ban (sorok vagy objektumok listája kell)
+les anciens fichiers Excel (.xls) ne sont pas lus : ouvre-le dans Excel ou LibreOffice et enregistre-le en .xlsx ¦ vanhoja Excel-tiedostoja (.xls) ei lueta: avaa se Excelissä tai LibreOfficessa ja tallenna .xlsx-muodossa ¦ a régi Excel-fájlokat (.xls) nem olvassuk: nyisd meg Excelben vagy LibreOffice-ban, és mentsd .xlsx formátumban
+ce fichier compressé n’est ni un .xlsx ni un .ods ¦ tämä pakattu tiedosto ei ole .xlsx eikä .ods ¦ ez a tömörített fájl se nem .xlsx, se nem .ods
+Nombre 0,00 ¦ Luku 0,00 ¦ Szám 0,00
+Nombre entier ¦ Kokonaisluku ¦ Egész szám
+Monnaie (€) ¦ Valuutta (€) ¦ Pénznem (€)
+Pourcentage ¦ Prosentti ¦ Százalék
+Date courte ¦ Lyhyt päivämäärä ¦ Rövid dátum
+Date d’acte ¦ Asiakirjan päivämäärä ¦ Bejegyzés dátuma
+Texte ¦ Teksti ¦ Szöveg
+Relevé de recensement ¦ Henkikirjan otteet ¦ Népszámlálási kivonat
+colonnes de l’année · foyers · « Né(e) vers » calculé ¦ vuoden sarakkeet · taloudet · ”Syntynyt noin” laskettu ¦ az év oszlopai · háztartások · „Született kb.” számolva
+Registre paroissial ¦ Kirkonkirja ¦ Egyházi anyakönyv
+baptêmes, mariages, sépultures ¦ kasteet, vihkimiset, hautaukset ¦ keresztelők, házasságkötések, temetések
+Budget de la recherche ¦ Tutkimuksen budjetti ¦ A kutatás költségvetése
+actes, déplacements, abonnements ¦ asiakirjat, matkat, tilaukset ¦ okiratok, utazások, előfizetések
+Suivi des courriers ¦ Kirjeenvaihdon seuranta ¦ Levelezés követése
+envoyé, relancé, réponse ¦ lähetetty, muistutettu, vastaus ¦ elküldve, emlékeztetve, válasz
+Arbre en tableau ¦ Sukupuu taulukkona ¦ Családfa táblázatként
+Sosa, génération, côté, âge ¦ Sosa-numero, sukupolvi, puoli, ikä ¦ Sosa-szám, nemzedék, oldal, életkor
+objets, prix, total en livres ¦ esineet, hinnat, yhteensä livreinä ¦ tárgyak, árak, összesen livres-ben
+Registre matricule ¦ Sotilasrekisteri ¦ Katonai törzskönyv
+classe, signalement, campagnes ¦ ikäluokka, tuntomerkit, sotaretket ¦ korosztály, személyleírás, hadjáratok
+📋 Partir d’un modèle… ¦ 📋 Aloita mallipohjasta… ¦ 📋 Kezdés sablonból…
+⤒ Importer un tableau… ¦ ⤒ Tuo taulukko… ¦ ⤒ Táblázat importálása…
+⤓ Exporter… ¦ ⤓ Vie… ¦ ⤓ Exportálás…
+🖨 Imprimer… ¦ 🖨 Tulosta… ¦ 🖨 Nyomtatás…
+⚙️ Réglages du tableur… ¦ ⚙️ Taulukkolaskennan asetukset… ¦ ⚙️ A táblázatkezelő beállításai…
+Insertion ¦ Lisää ¦ Beszúrás
+Coller les valeurs seulement ¦ Liitä vain arvot ¦ Csak az értékek beillesztése
+Effacer le contenu ¦ Tyhjennä sisältö ¦ Tartalom törlése
+Effacer tout (contenu et mise en forme) ¦ Tyhjennä kaikki (sisältö ja muotoilu) ¦ Minden törlése (tartalom és formázás)
+Recopier vers le bas ¦ Täytä alaspäin ¦ Kitöltés lefelé
+Recopier vers la droite ¦ Täytä oikealle ¦ Kitöltés jobbra
+🔍 Rechercher et remplacer… ¦ 🔍 Etsi ja korvaa… ¦ 🔍 Keresés és csere…
+Ligne au-dessus ¦ Rivi yläpuolelle ¦ Sor fölé
+Ligne en dessous ¦ Rivi alapuolelle ¦ Sor alá
+＋ Nouvelle feuille ¦ ＋ Uusi taulukko ¦ ＋ Új munkalap
+ƒ Fonction… ¦ ƒ Funktio… ¦ ƒ Függvény…
+Σ Somme automatique ¦ Σ Automaattinen summa ¦ Σ AutoSzum
+📅 Date du jour ¦ 📅 Tämän päivän päivämäärä ¦ 📅 Mai dátum
+Nom pour la plage… ¦ Alueen nimi… ¦ A tartomány neve…
+💬 Note sur la cellule… ¦ 💬 Huomautus soluun… ¦ 💬 Megjegyzés a cellához…
+📊 Graphique depuis la sélection ¦ 📊 Kaavio valinnasta ¦ 📊 Grafikon a kijelölésből
+Barré ¦ Yliviivaus ¦ Áthúzott
+Aa Police… ¦ Aa Fontti… ¦ Aa Betűtípus…
+Taille du texte… ¦ Tekstin koko… ¦ Szövegméret…
+↵ Renvoi à la ligne ¦ ↵ Rivitä teksti ¦ ↵ Sortörés
+⊞ Fusionner / séparer ¦ ⊞ Yhdistä / erota ¦ ⊞ Egyesítés / szétválasztás
+▦ Bordures : tout ¦ ▦ Reunat: kaikki ¦ ▦ Szegélyek: mind
+▭ Bordures : contour ¦ ▭ Reunat: ääriviiva ¦ ▭ Szegélyek: körvonal
+▁ Bordure du bas ¦ ▁ Alareuna ¦ ▁ Alsó szegély
+Largeur de colonne… ¦ Sarakkeen leveys… ¦ Oszlopszélesség…
+Hauteur de ligne… ¦ Rivin korkeus… ¦ Sormagasság…
+Ajuster la largeur au contenu ¦ Sovita leveys sisältöön ¦ Szélesség igazítása a tartalomhoz
+Masquer les lignes ¦ Piilota rivit ¦ Sorok elrejtése
+Masquer les colonnes ¦ Piilota sarakkeet ¦ Oszlopok elrejtése
+Tout remontrer ¦ Näytä kaikki uudelleen ¦ Minden megjelenítése
+Mise en forme conditionnelle… ¦ Ehdollinen muotoilu… ¦ Feltételes formázás…
+Une ligne sur deux ¦ Joka toinen rivi ¦ Sávos sorok
+Effacer la mise en forme ¦ Tyhjennä muotoilu ¦ Formázás törlése
+↕ Trier A → Z ¦ ↕ Lajittele A → Z ¦ ↕ Rendezés A → Z
+↕ Trier Z → A ¦ ↕ Lajittele Z → A ¦ ↕ Rendezés Z → A
+⚲ Filtrer ¦ ⚲ Suodata ¦ ⚲ Szűrés
+Supprimer les doublons… ¦ Poista kaksoiskappaleet… ¦ Ismétlődések törlése…
+Convertir le texte en colonnes… ¦ Muunna teksti sarakkeiksi… ¦ Szöveg oszlopokká alakítása…
+Retirer les espaces en trop ¦ Poista ylimääräiset välilyönnit ¦ Felesleges szóközök eltávolítása
+Figer la 1re ligne ¦ Lukitse 1. rivi ¦ Az 1. sor rögzítése
+Figer la 1re colonne ¦ Lukitse 1. sarake ¦ Az 1. oszlop rögzítése
+Figer jusqu’à la cellule choisie ¦ Lukitse valittuun soluun asti ¦ Rögzítés a kijelölt celláig
+Libérer les volets ¦ Vapauta ruudut ¦ Ablaktáblák feloldása
+Montrer les formules ¦ Näytä kaavat ¦ Képletek megjelenítése
+⤢ Ajuster à la fenêtre ¦ ⤢ Sovita ikkunaan ¦ ⤢ Igazítás az ablakhoz
+100 % (taille réelle) ¦ 100 % (todellinen koko) ¦ 100% (valódi méret)
+⌨️ Raccourcis du tableur… ¦ ⌨️ Taulukkolaskennan pikanäppäimet… ¦ ⌨️ A táblázatkezelő billentyűparancsai…
+Rechercher et remplacer ¦ Etsi ja korvaa ¦ Keresés és csere
+Filtrer (barre de recherche et filtres au-dessus) ¦ Suodata (hakupalkki ja suodattimet yläpuolella) ¦ Szűrés (keresősáv és szűrők fölötte)
+Trier la plage ¦ Lajittele alue ¦ Tartomány rendezése
+Somme, moyenne, nombre… ¦ Summa, keskiarvo, määrä… ¦ Összeg, átlag, darab…
+Une personne de la base dans la cellule ¦ Henkilö tietokannasta soluun ¦ Személy az adatbázisból a cellába
+Un lieu de la base dans la cellule ¦ Paikka tietokannasta soluun ¦ Hely az adatbázisból a cellába
+Note sur la cellule ¦ Huomautus soluun ¦ Megjegyzés a cellához
+Graphique avec les chiffres de la sélection ¦ Kaavio valinnan luvuista ¦ Grafikon a kijelölés számaiból
+Tape pour écrire · = pour calculer · double-clic pour modifier · clic droit pour les actions · glisse le petit carré pour recopier ¦ Kirjoita tekstiä · = laskee · kaksoisnapsautus muokkaa · hiiren oikea painike toimintoihin · vedä pientä neliötä kopioidaksesi ¦ Gépelj az íráshoz · = a számoláshoz · dupla kattintás a szerkesztéshez · jobb kattintás a műveletekhez · húzd a kis négyzetet a másoláshoz
+Entrée valide · Tab : case à droite · Échap annule · pendant une formule, clique ou glisse sur des cellules pour les y mettre ¦ Enter vahvistaa · Tab: solu oikealle · Esc peruu · kaavaa kirjoittaessa napsauta tai vedä soluja lisätäksesi ne ¦ Enter: jóváhagyás · Tab: jobbra lévő cella · Esc: mégse · képlet közben kattints vagy húzz cellák fölött a beillesztésükhöz
+Σ Somme ¦ Σ Summa ¦ Σ Összeg
+Nombre ¦ Määrä ¦ Darab
+Minimum ¦ Minimi ¦ Minimum
+Maximum ¦ Maksimi ¦ Maximum
+Somme ¦ Summa ¦ Összeg
+Panneau de droite ouvert ¦ Oikea paneeli auki ¦ Jobb oldali panel nyitva
+, virgule ¦ , pilkku ¦ , vessző
+; point-virgule ¦ ; puolipiste ¦ ; pontosvessző
+espace ¦ välilyönti ¦ szóköz
+Autre… ¦ Muu… ¦ Egyéb…
+plus grande que ¦ suurempi kuin ¦ nagyobb, mint
+plus petite que ¦ pienempi kuin ¦ kisebb, mint
+au moins ¦ vähintään ¦ legalább
+au plus ¦ enintään ¦ legfeljebb
+égale à ¦ yhtä suuri kuin ¦ egyenlő ezzel
+différente de ¦ eri kuin ¦ nem egyenlő ezzel
+entre ¦ välillä ¦ között
+contient le texte ¦ sisältää tekstin ¦ tartalmazza a szöveget
+est vide ¦ on tyhjä ¦ üres
+n’est pas vide ¦ ei ole tyhjä ¦ nem üres
+est en double ¦ on kaksoiskappale ¦ ismétlődik
+est une date impossible ¦ on mahdoton päivämäärä ¦ lehetetlen dátum
+barres dans la cellule ¦ palkit solussa ¦ sávok a cellában
+fond jaune ¦ keltainen tausta ¦ sárga háttér
+fond rouge ¦ punainen tausta ¦ piros háttér
+fond vert ¦ vihreä tausta ¦ zöld háttér
+fond bleu ¦ sininen tausta ¦ kék háttér
+fond orange ¦ oranssi tausta ¦ narancssárga háttér
+fond violet ¦ violetti tausta ¦ lila háttér
+règle|plus grande que ¦ suurempi kuin ¦ nagyobb, mint
+règle|plus petite que ¦ pienempi kuin ¦ kisebb, mint
+règle|au moins ¦ vähintään ¦ legalább
+règle|au plus ¦ enintään ¦ legfeljebb
+règle|égale à ¦ yhtä suuri kuin ¦ egyenlő
+règle|différente de ¦ eri kuin ¦ nem egyenlő
+règle|entre ¦ välillä ¦ között
+règle|contient ¦ sisältää ¦ tartalmazza
+règle|vide ¦ tyhjä ¦ üres
+règle|pas vide ¦ ei tyhjä ¦ nem üres
+règle|en double ¦ kaksoiskappale ¦ ismétlődő
+règle|date impossible ¦ mahdoton päivämäärä ¦ lehetetlen dátum
+règle|barres ¦ palkit ¦ sávok
+Cellule ¦ Solu ¦ Cella
+Nombre et date ¦ Luku ja päivämäärä ¦ Szám és dátum
+Couleur et bordures ¦ Väri ja reunat ¦ Szín és szegélyek
+Validation ¦ Kelpoisuus ¦ Érvényesítés
+Adresse ¦ Osoite ¦ Cím
+Valeur ¦ Arvo ¦ Érték
+Formule ¦ Kaava ¦ Képlet
+Autorise ¦ Sallii ¦ Engedélyezett
+Sinon ¦ Muuten ¦ Különben
+Insérer une ligne au-dessus ¦ Lisää rivi yläpuolelle ¦ Sor beszúrása fölé
+Insérer une ligne en dessous ¦ Lisää rivi alapuolelle ¦ Sor beszúrása alá
+Insérer une colonne à gauche ¦ Lisää sarake vasemmalle ¦ Oszlop beszúrása balra
+Insérer une colonne à droite ¦ Lisää sarake oikealle ¦ Oszlop beszúrása jobbra
+Trier A → Z ¦ Lajittele A → Z ¦ Rendezés A → Z
+Retirer le filtre ¦ Poista suodatin ¦ Szűrő eltávolítása
+Note… ¦ Huomautus… ¦ Megjegyzés…
+Ajuster la largeur ¦ Sovita leveys ¦ Szélesség igazítása
+Supprimer les lignes ¦ Poista rivit ¦ Sorok törlése
+Supprimer les colonnes ¦ Poista sarakkeet ¦ Oszlopok törlése
+Windows (vieil Excel) ¦ Windows (vanha Excel) ¦ Windows (régi Excel)
+👤 Des fiches ¦ 👤 Kortteja ¦ 👤 Adatlapok
+🏠 Un recensement (foyers) ¦ 🏠 Henkikirja (taloudet) ¦ 🏠 Népszámlálás (háztartások)
+📅 Des événements ¦ 📅 Tapahtumia ¦ 📅 Események
+— ne pas envoyer — ¦ — älä lähetä — ¦ — ne küldd —
+Nom et prénom ¦ Sukunimi ja etunimi ¦ Vezeték- és keresztnév
+Sexe ¦ Sukupuoli ¦ Nem
+Naissance (date ou année) ¦ Syntymä (päivämäärä tai vuosi) ¦ Születés (dátum vagy év)
+Décès (date) ¦ Kuolema (päivämäärä) ¦ Halál (dátum)
+N° de foyer (ménage) ¦ Talouden nro ¦ Háztartás sorszáma
+N° de maison ¦ Talon nro ¦ Házszám
+Rue, quartier ¦ Katu, kaupunginosa ¦ Utca, városrész
+Patron, employeur ¦ Isäntä, työnantaja ¦ Gazda, munkaadó
+Situation (marié, veuf…) ¦ Siviilisääty (naimisissa, leski…) ¦ Családi állapot (házas, özvegy…)
+Observations, notes ¦ Huomautukset, muistiinpanot ¦ Megjegyzések, jegyzetek
+Sorte d’événement (acte) ¦ Tapahtuman laji (asiakirja) ¦ Az esemény fajtája (bejegyzés)
+Date de l’événement ¦ Tapahtuman päivämäärä ¦ Az esemény dátuma
+Lieu de l’événement ¦ Tapahtuman paikka ¦ Az esemény helye
+colonnes de l’année (1836 → 1936) · foyers · 📤 vers la base ¦ vuoden sarakkeet (1836 → 1936) · taloudet · 📤 tietokantaan ¦ az év oszlopai (1836 → 1936) · háztartások · 📤 az adatbázisba
+⤒ Remplir depuis l’app… ¦ ⤒ Täytä sovelluksesta… ¦ ⤒ Kitöltés az alkalmazásból…
+↻ Relire depuis la base ¦ ↻ Lue uudelleen tietokannasta ¦ ↻ Újraolvasás az adatbázisból
+catégorie + séries ¦ luokka + sarjat ¦ kategória + adatsorok
+📊 Créer le diagramme ¦ 📊 Luo diagrammi ¦ 📊 Diagram létrehozása
+Un graphique ¦ Kaavio ¦ Grafikon
+📈 Créer le graphique ¦ 📈 Luo kaavio ¦ 📈 Grafikon létrehozása
+objet ▦ Tableur ¦ ▦ Taulukkolaskenta-objekti ¦ ▦ Táblázatkezelő-objektum
+📋 Copier pour un tableau ¦ 📋 Kopioi taululle ¦ 📋 Másolás táblához
+Un recueil ¦ Kokoelma ¦ Gyűjtemény
+tableur d’une page ¦ taulukko sivulla ¦ táblázat egy oldalon
+📋 Copier pour un recueil ¦ 📋 Kopioi kokoelmaan ¦ 📋 Másolás gyűjteményhez
+tableau ou graphique ¦ taulukko tai kaavio ¦ táblázat vagy grafikon
+Ce que le diagramme attend ¦ Mitä diagrammi odottaa ¦ Amit a diagram vár
+Ce que le graphique attend ¦ Mitä kaavio odottaa ¦ Amit a grafikon vár
+Ce que le tableau attend ¦ Mitä taulu odottaa ¦ Amit a tábla vár
+Ce que le recueil attend ¦ Mitä kokoelma odottaa ¦ Amit a gyűjtemény vár
+Pyramide des âges ¦ Ikäpyramidi ¦ Korfa
+Courbes ¦ Viivat ¦ Vonalak
+Radar ¦ Tutka ¦ Radar
+Barres groupées ¦ Ryhmitellyt palkit ¦ Csoportosított sávok
+Camembert (une seule série) ¦ Piirakka (vain yksi sarja) ¦ Kördiagram (csak egy adatsor)
+Rectangles proportionnels ¦ Puukartta ¦ Fatérkép
+🎯 Préparer pour… (diagramme, graphique, présentation…) ¦ 🎯 Valmistele kohteeseen… (diagrammi, kaavio, esitys…) ¦ 🎯 Előkészítés ehhez… (diagram, grafikon, bemutató…)
+initiale ¦ alkukirjain ¦ kezdőbetű
+MAJUSCULES ¦ ISOT KIRJAIMET ¦ NAGYBETŰK
+minuscules ¦ pienet kirjaimet ¦ kisbetűk
+Capitale ¦ Iso alkukirjain ¦ Nagy kezdőbetű
+Plus petit ¦ Pienin ¦ Legkisebb
+Plus grand ¦ Suurin ¦ Legnagyobb
+✨ Remplissage instantané ¦ ✨ Pikatäyttö ¦ ✨ Villámkitöltés
+Σ Sous-totaux… ¦ Σ Välisummat… ¦ Σ Részösszegek…
+⊟ Plan : replier / déplier le détail ¦ ⊟ Jäsennys: kutista / laajenna yksityiskohdat ¦ ⊟ Tagolás: részletek összecsukása / kibontása
+🎯 Valeur cible… ¦ 🎯 Tavoitteen haku… ¦ 🎯 Célérték-keresés…
+🧮 Solveur… ¦ 🧮 Ratkaisin… ¦ 🧮 Solver…
+📋 Tableau de scénarios (et si…)… ¦ 📋 Skenaariotaulukko (entä jos…)… ¦ 📋 Forgatókönyv-táblázat (mi lenne, ha…)…
+⏺ Enregistrer une action / ⏹ arrêter ¦ ⏺ Tallenna toiminto / ⏹ lopeta ¦ ⏺ Művelet rögzítése / ⏹ leállítás
+▶ Actions enregistrées… ¦ ▶ Tallennetut toiminnot… ¦ ▶ Rögzített műveletek…
+📈 Mini-graphique… ¦ 📈 Minikaavio… ¦ 📈 Minidiagram…
+Nombre de lignes ¦ Rivien määrä ¦ Sorok száma
+Nombre de valeurs différentes ¦ Eri arvojen määrä ¦ Különböző értékek száma
+En % de la ligne ¦ Prosentteina rivistä ¦ A sor %-ában
+En % de la colonne ¦ Prosentteina sarakkeesta ¦ Az oszlop %-ában
+En % du tout ¦ Prosentteina kokonaisuudesta ¦ Az egész %-ában
+🔀 Tableau croisé dynamique… ¦ 🔀 Pivot-taulukko… ¦ 🔀 Kimutatás…
+↻ Actualiser le tableau croisé ¦ ↻ Päivitä pivot-taulukko ¦ ↻ Kimutatás frissítése
+📊 Graphique vivant (suit la sélection) ¦ 📊 Elävä kaavio (seuraa valintaa) ¦ 📊 Élő grafikon (követi a kijelölést)
+📊 Graphique vivant ¦ 📊 Elävä kaavio ¦ 📊 Élő grafikon
+Vide ¦ Tyhjä ¦ Üres
+⛔ Formule en erreur ¦ ⛔ Virheellinen kaava ¦ ⛔ Hibás képlet
+ƒ Formule ¦ ƒ Kaava ¦ ƒ Képlet
+VRAI / FAUX ¦ TOSI / EPÄTOSI ¦ IGAZ / HAMIS
+⚠️ Date impossible ¦ ⚠️ Mahdoton päivämäärä ¦ ⚠️ Lehetetlen dátum
+📅 Date d’acte ¦ 📅 Asiakirjan päivämäärä ¦ 📅 Bejegyzés dátuma
+Conditions ¦ Ehdot ¦ Feltételek
+Logique ¦ Logiikka ¦ Logikai
+Conjoint ¦ Puoliso ¦ Házastárs
+Parents ¦ Vanhemmat ¦ Szülők
+N° de fiche ¦ Kortin nro ¦ Adatlap száma
+Date ¦ Päivämäärä ¦ Dátum
+Personne(s) ¦ Henkilö(t) ¦ Személy(ek)
+Description ¦ Kuvaus ¦ Leírás
+N° d’événement ¦ Tapahtuman nro ¦ Esemény száma
+Foyer ¦ Talous ¦ Háztartás
+Employeur ¦ Työnantaja ¦ Munkaadó
+Situation ¦ Siviilisääty ¦ Családi állapot
+Rue ¦ Katu ¦ Utca
+N° ¦ Nro ¦ Sz.
+Adresse entière ¦ Koko osoite ¦ Teljes cím
+Deuxième prénom ¦ Toinen etunimi ¦ Második keresztnév
+Titre ¦ Arvonimi ¦ Cím (rang)
+Suffixe ¦ Pääte ¦ Utótag
+FamilySearch ¦ FamilySearch ¦ FamilySearch
+Description physique ¦ Ulkonäön kuvaus ¦ Külső leírás
+Teint ¦ Ihonväri ¦ Arcszín
+Origine ¦ Alkuperä ¦ Származás
+Vivant ? ¦ Elossa? ¦ Él?
+Modifié le ¦ Muokattu ¦ Módosítva
+Cause ¦ Syy ¦ Ok
+Autorité ¦ Viranomainen ¦ Hatóság
+Confiance ¦ Luotettavuus ¦ Megbízhatóság
+Date convertie ¦ Muunnettu päivämäärä ¦ Átszámított dátum
+Autre date ¦ Muu päivämäärä ¦ Másik dátum
+Informations en plus ¦ Lisätietoja ¦ További információk
+Calendrier ¦ Kalenteri ¦ Naptár
+Relevés de dépouillement ¦ Indeksointien otteet ¦ Feldolgozási kivonatok
+Noms de famille ¦ Sukunimet ¦ Vezetéknevek
+Âges au décès ¦ Kuolinikä ¦ Életkor a halálkor
+Décès par siècle ¦ Kuolemat vuosisadoittain ¦ Halálesetek évszázadonként
+Communes de naissance ¦ Syntymäkunnat ¦ Születési települések
+Départements de naissance ¦ Syntymädepartementit ¦ Születési megyék (départements)
+Naissances par mois ¦ Syntymät kuukausittain ¦ Születések havonta
+Personnes par génération ¦ Henkilöt sukupolvittain ¦ Személyek nemzedékenként
+Additionne des nombres ou des plages. ¦ Laskee yhteen lukuja tai alueita. ¦ Számokat vagy tartományokat ad össze.
+La moyenne des nombres. ¦ Lukujen keskiarvo. ¦ A számok átlaga.
+Le plus petit nombre. ¦ Pienin luku. ¦ A legkisebb szám.
+Le plus grand nombre. ¦ Suurin luku. ¦ A legnagyobb szám.
+Compte les cellules qui contiennent un nombre. ¦ Laskee solut, joissa on luku. ¦ Megszámolja a számot tartalmazó cellákat.
+Compte les cellules qui ne sont pas vides. ¦ Laskee solut, jotka eivät ole tyhjiä. ¦ Megszámolja a nem üres cellákat.
+Compte les cellules vides. ¦ Laskee tyhjät solut. ¦ Megszámolja az üres cellákat.
+Multiplie des nombres. ¦ Kertoo lukuja. ¦ Számokat szoroz össze.
+Arrondit au plus proche. ¦ Pyöristää lähimpään. ¦ A legközelebbire kerekít.
+Arrondit vers zéro. ¦ Pyöristää nollaa kohti. ¦ Nulla felé kerekít.
+Arrondit en s’éloignant de zéro. ¦ Pyöristää nollasta poispäin. ¦ Nullától távolodva kerekít.
+La partie entière (arrondi vers le bas). ¦ Kokonaisosa (pyöristetty alaspäin). ¦ Az egészrész (lefelé kerekítve).
+Le nombre sans son signe. ¦ Luku ilman etumerkkiä. ¦ A szám előjel nélkül.
+Le reste d’une division. ¦ Jakolaskun jakojäännös. ¦ Az osztás maradéka.
+Un nombre élevé à une puissance. ¦ Luku korotettuna potenssiin. ¦ Egy szám hatványra emelve.
+La racine carrée. ¦ Neliöjuuri. ¦ A négyzetgyök.
+La valeur du milieu. ¦ Keskimmäinen arvo. ¦ A középső érték.
+L’écart type (sur un échantillon). ¦ Keskihajonta (otoksesta). ¦ A szórás (mintából).
+La place d’un nombre dans une liste (1 = le plus grand ; ordre 1 = le plus petit d’abord). ¦ Luvun sija luettelossa (1 = suurin; järjestys 1 = pienin ensin). ¦ Egy szám helyezése a listában (1 = a legnagyobb; 1-es sorrend = a legkisebb elöl).
+La k-ième plus grande valeur. ¦ K:nneksi suurin arvo. ¦ A k-adik legnagyobb érték.
+La k-ième plus petite valeur. ¦ K:nneksi pienin arvo. ¦ A k-adik legkisebb érték.
+Une valeur si le test est vrai, une autre sinon. ¦ Yksi arvo, jos ehto on tosi, muuten toinen. ¦ Egy érték, ha a feltétel igaz, különben egy másik.
+La valeur du premier test vrai. ¦ Ensimmäisen toden ehdon arvo. ¦ Az első igaz feltétel értéke.
+La valeur, ou autre chose s’il y a une erreur. ¦ Arvo tai jotain muuta, jos tulee virhe. ¦ Az érték, vagy valami más, ha hiba van.
+La valeur, ou autre chose si elle n’est pas trouvée (#N/A). ¦ Arvo tai jotain muuta, jos sitä ei löydy (#N/A). ¦ Az érték, vagy valami más, ha nem található (#N/A).
+VRAI si tous les tests sont vrais. ¦ VRAI (tosi), jos kaikki ehdot ovat tosia. ¦ VRAI (igaz), ha minden feltétel igaz.
+VRAI si au moins un test est vrai. ¦ VRAI (tosi), jos ainakin yksi ehto on tosi. ¦ VRAI (igaz), ha legalább egy feltétel igaz.
+La valeur VRAI (comme le mot VRAI). ¦ Arvo VRAI (tosi), kuten sana VRAI. ¦ A VRAI (igaz) érték, mint a VRAI szó.
+La valeur FAUX (comme le mot FAUX). ¦ Arvo FAUX (epätosi), kuten sana FAUX. ¦ A FAUX (hamis) érték, mint a FAUX szó.
+Inverse un test. ¦ Kääntää ehdon päinvastaiseksi. ¦ Megfordít egy feltételt.
+Compte les cellules qui remplissent une condition (">60", "laboureur", "lab*"). ¦ Laskee solut, jotka täyttävät ehdon (">60", "laboureur", "lab*"). ¦ Megszámolja a feltételnek megfelelő cellákat (">60", "laboureur", "lab*").
+Compte les lignes qui remplissent toutes les conditions. ¦ Laskee rivit, jotka täyttävät kaikki ehdot. ¦ Megszámolja a minden feltételnek megfelelő sorokat.
+Additionne les cellules qui remplissent une condition. ¦ Laskee yhteen solut, jotka täyttävät ehdon. ¦ Összeadja a feltételnek megfelelő cellákat.
+Additionne les lignes qui remplissent toutes les conditions. ¦ Laskee yhteen rivit, jotka täyttävät kaikki ehdot. ¦ Összeadja a minden feltételnek megfelelő sorokat.
+La moyenne des cellules qui remplissent une condition. ¦ Ehdon täyttävien solujen keskiarvo. ¦ A feltételnek megfelelő cellák átlaga.
+Cherche dans la 1re colonne d’un tableau et rend la valeur d’une autre colonne. ¦ Hakee taulukon 1. sarakkeesta ja palauttaa toisen sarakkeen arvon. ¦ Egy táblázat 1. oszlopában keres, és egy másik oszlop értékét adja vissza.
+Cherche dans la 1re ligne d’un tableau. ¦ Hakee taulukon 1. riviltä. ¦ Egy táblázat 1. sorában keres.
+Cherche une valeur et rend celle d’à côté. ¦ Hakee arvon ja palauttaa sen vieressä olevan. ¦ Megkeres egy értéket, és a mellette lévőt adja vissza.
+La valeur à une ligne et une colonne de la plage. ¦ Arvo alueen tietyllä rivillä ja sarakkeessa. ¦ Az érték a tartomány adott sorában és oszlopában.
+La position d’une valeur dans une plage (type 0 = exactement). ¦ Arvon sijainti alueella (tyyppi 0 = tarkalleen). ¦ Egy érték helye a tartományban (0-s típus = pontosan).
+La n-ième valeur de la liste. ¦ Luettelon n:s arvo. ¦ A lista n-edik értéke.
+Les valeurs sans doublons (déborde sur les cases du dessous). ¦ Arvot ilman kaksoiskappaleita (levittyy alla oleviin soluihin). ¦ Az értékek ismétlődés nélkül (az alatta lévő cellákba is kiterjed).
+La plage triée (ordre 1 = croissant, -1 = décroissant). ¦ Lajiteltu alue (järjestys 1 = nouseva, -1 = laskeva). ¦ A rendezett tartomány (1-es sorrend = növekvő, -1 = csökkenő).
+Les lignes de la plage qui remplissent la condition (ex. =FILTRE(A2:C9; C2:C9>30)). ¦ Alueen rivit, jotka täyttävät ehdon (esim. =FILTRE(A2:C9; C2:C9>30)). ¦ A tartomány feltételnek megfelelő sorai (pl. =FILTRE(A2:C9; C2:C9>30)).
+Met des textes bout à bout. ¦ Liittää tekstit peräkkäin. ¦ Szövegeket fűz egymás után.
+Met des textes bout à bout avec un séparateur. ¦ Liittää tekstit peräkkäin erottimen kanssa. ¦ Szövegeket fűz egymás után, elválasztóval.
+Les premiers caractères. ¦ Ensimmäiset merkit. ¦ Az első karakterek.
+Les derniers caractères. ¦ Viimeiset merkit. ¦ Az utolsó karakterek.
+Un morceau au milieu d’un texte. ¦ Pala tekstin keskeltä. ¦ Egy darab a szöveg közepéből.
+Le nombre de caractères. ¦ Merkkien määrä. ¦ A karakterek száma.
+En capitales. ¦ Isoin kirjaimin. ¦ Nagybetűvel.
+En minuscules. ¦ Pienin kirjaimin. ¦ Kisbetűvel.
+Une capitale au début de chaque mot. ¦ Iso alkukirjain jokaisen sanan alussa. ¦ Minden szó nagy kezdőbetűvel.
+Retire les espaces en trop. ¦ Poistaa ylimääräiset välilyönnit. ¦ Eltávolítja a felesleges szóközöket.
+Remplace un morceau de texte. ¦ Korvaa tekstin osan. ¦ Lecserél egy szövegrészt.
+La position d’un texte dans un autre (sans tenir compte des capitales). ¦ Tekstin sijainti toisessa tekstissä (kirjainkoosta riippumatta). ¦ Egy szöveg helye egy másikban (a kis- és nagybetűket nem nézi).
+Un nombre ou une date écrits avec un format ("0,00", "0 %", "jj/mm/aaaa"). ¦ Luku tai päivämäärä kirjoitettuna muodossa ("0,00", "0 %", "jj/mm/aaaa"). ¦ Formátummal írt szám vagy dátum ("0,00", "0 %", "jj/mm/aaaa").
+Le nombre écrit dans un texte. ¦ Tekstiin kirjoitettu luku. ¦ A szövegben írt szám.
+Fabrique une date. ¦ Muodostaa päivämäärän. ¦ Dátumot állít össze.
+L’année d’une date (date d’acte comprise). ¦ Päivämäärän vuosi (myös asiakirjojen päivämäärät ymmärretään). ¦ Egy dátum éve (a bejegyzések dátumait is érti).
+Le mois d’une date (1 à 12). ¦ Päivämäärän kuukausi (1–12). ¦ Egy dátum hónapja (1–12).
+Le jour du mois. ¦ Kuukauden päivä. ¦ A hónap napja.
+Le jour de la semaine (type 1 : 1 = dimanche ; type 2 : 1 = lundi … 7 = dimanche ; type 3 : 0 = lundi). ¦ Viikonpäivä (tyyppi 1: 1 = sunnuntai; tyyppi 2: 1 = maanantai … 7 = sunnuntai; tyyppi 3: 0 = maanantai). ¦ A hét napja (1-es típus: 1 = vasárnap; 2-es típus: 1 = hétfő … 7 = vasárnap; 3-as típus: 0 = hétfő).
+La date du jour. ¦ Tämän päivän päivämäärä. ¦ A mai dátum.
+La date et l’heure. ¦ Päivämäärä ja kellonaika. ¦ A dátum és az idő.
+L’écart entre deux dates, en années, mois ou jours (« AM » : mois en plus des années, « MJ » : jours en plus des mois, « AJ » : jours en plus des années ; « Y », « D », « YM », « MD », « YD » d’Excel compris). ¦ Kahden päivämäärän välinen ero vuosina, kuukausina tai päivinä (”AM”: kuukaudet vuosien lisäksi, ”MJ”: päivät kuukausien lisäksi, ”AJ”: päivät vuosien lisäksi; myös Excelin ”Y”, ”D”, ”YM”, ”MD”, ”YD” ymmärretään). ¦ Két dátum közötti különbség években, hónapokban vagy napokban („AM”: hónapok az éveken felül, „MJ”: napok a hónapokon felül, „AJ”: napok az éveken felül; az Excel „Y”, „D”, „YM”, „MD”, „YD” jelölését is érti).
+L’âge entre deux dates d’acte (« vers 1784 », « an II » compris) ; « ≈ » si une date est approximative. Unité : « ans », « mois » ou « jours ». ¦ Ikä kahden asiakirjan päivämäärän välillä (”vers 1784”, ”an II” ymmärretään); ”≈”, jos päivämäärä on likimääräinen. Yksikkö: ”ans”, ”mois” tai ”jours”. ¦ Életkor két bejegyzés dátuma között („vers 1784”, „an II” is érthető); „≈”, ha egy dátum közelítő. Mértékegység: „ans”, „mois” vagy „jours”.
+L’année trouvée dans un texte d’acte, même républicain (« baptisé le 3 frimaire an XII » → 1803). ¦ Asiakirjan tekstistä löytyvä vuosi, myös vallankumouskalenterin (”baptisé le 3 frimaire an XII” → 1803). ¦ A bejegyzés szövegében talált év, akár forradalmi naptár szerint is („baptisé le 3 frimaire an XII” → 1803).
+La date comprise, écrite proprement (comme « ✓ Compris : » des champs de date). ¦ Ymmärretty päivämäärä siististi kirjoitettuna (kuten päivämääräkenttien ”✓ Ymmärretty:”). ¦ Az értelmezett dátum szépen leírva (mint a dátummezők „✓ Értelmezve:” sora).
+« jour », « mois », « année », « vers », « avant », « après » ou « entre ». ¦ ”jour”, ”mois”, ”année”, ”vers”, ”avant”, ”après” tai ”entre”. ¦ „jour”, „mois”, „année”, „vers”, „avant”, „après” vagy „entre”.
+La date dans le calendrier républicain. ¦ Päivämäärä vallankumouskalenterissa. ¦ A dátum a forradalmi naptárban.
+La génération d’un numéro Sosa (1 = toi, 2 et 3 = tes parents…). ¦ Sosa-numeron sukupolvi (1 = sinä, 2 ja 3 = vanhempasi…). ¦ Egy Sosa-szám nemzedéke (1 = te, 2 és 3 = a szüleid…).
+Le numéro Sosa du père (2 × n). ¦ Isän Sosa-numero (2 × n). ¦ Az apa Sosa-száma (2 × n).
+Le numéro Sosa de la mère (2 × n + 1). ¦ Äidin Sosa-numero (2 × n + 1). ¦ Az anya Sosa-száma (2 × n + 1).
+« paternel » ou « maternel » (le côté du Sosa 1). ¦ ”paternel” tai ”maternel” (Sosa 1:n puoli). ¦ „paternel” vagy „maternel” (az 1-es Sosa oldala).
+Un petit graphique dans la case : "courbe", "barres" ou "gagné" (au-dessus ou au-dessous de zéro). ¦ Pieni kaavio solussa: "courbe" (viiva), "barres" (palkit) tai "gagné" (nollan ylä- tai alapuolella). ¦ Kis grafikon a cellában: "courbe" (vonal), "barres" (sávok) vagy "gagné" (nulla fölött vagy alatt).
+Donne un nom à une valeur pour l’utiliser dans le calcul. ¦ Antaa arvolle nimen, jotta sitä voi käyttää laskussa. ¦ Nevet ad egy értéknek, hogy a számításban használhasd.
+Une petite fonction à soi, à utiliser dans LET, MAP, PAR.LIGNE… ¦ Pieni oma funktio käytettäväksi LET-, MAP-, PAR.LIGNE-funktioissa… ¦ Kis saját függvény, a LET, MAP, PAR.LIGNE… függvényekben használható.
+Applique la LAMBDA à chaque case de la plage. ¦ Käyttää LAMBDAa alueen jokaiseen soluun. ¦ A LAMBDA-t a tartomány minden cellájára alkalmazza.
+Un résultat par ligne de la plage. ¦ Yksi tulos alueen riviä kohden. ¦ A tartomány minden sorára egy eredmény.
+Un résultat par colonne de la plage. ¦ Yksi tulos alueen saraketta kohden. ¦ A tartomány minden oszlopára egy eredmény.
+Cumule les cases une à une (un total qui avance). ¦ Kerryttää solut yksi kerrallaan (juokseva summa). ¦ A cellákat egyenként halmozza (futó összeg).
+Comme REDUCE, avec chaque étape du total. ¦ Kuten REDUCE, mutta summan jokainen vaihe näkyy. ¦ Mint a REDUCE, az összeg minden lépésével.
+=ligne laissée ¦ rivi jätetty pois|riviä jätetty pois ¦ sor kihagyva|sor kihagyva
+=ligne remplie depuis l’app (tenue à jour) ¦ rivi täytetty sovelluksesta (pidetään ajan tasalla)|riviä täytetty sovelluksesta (pidetään ajan tasalla) ¦ sor kitöltve az alkalmazásból (naprakészen tartva)|sor kitöltve az alkalmazásból (naprakészen tartva)
+=ligne remplie depuis l’app ¦ rivi täytetty sovelluksesta|riviä täytetty sovelluksesta ¦ sor kitöltve az alkalmazásból|sor kitöltve az alkalmazásból
+=ligne à toi sans fiche : retirée ¦ oma rivisi ilman korttia: poistettu|omaa riviäsi ilman korttia: poistettu ¦ saját sor adatlap nélkül: eltávolítva|saját sor adatlap nélkül: eltávolítva
+=nouvelle fiche ¦ uusi kortti|uutta korttia ¦ új adatlap|új adatlap
+=reliée ¦ yhdistetty|yhdistettyä ¦ összekapcsolva|összekapcsolva
+=laissée ¦ jätetty pois|jätetty pois ¦ kihagyva|kihagyva
+=autre ligne ¦ muu rivi|muuta riviä ¦ másik sor|másik sor
+=case ¦ solu|solua ¦ cella|cella
+=autre case ¦ muu solu|muuta solua ¦ másik cella|másik cella
+=case remplie ¦ solu täytetty|solua täytetty ¦ cella kitöltve|cella kitöltve
+=groupe ¦ ryhmä|ryhmää ¦ csoport|csoport
+=case changée ¦ solu muutettu|solua muutettu ¦ cella módosítva|cella módosítva
+=scénario calculé ¦ skenaario laskettu|skenaariota laskettu ¦ forgatókönyv kiszámítva|forgatókönyv kiszámítva
+=commande ¦ komento|komentoa ¦ parancs|parancs
+=fonction ¦ funktio|funktiota ¦ függvény|függvény
+=valeur en plus de la première retirée ¦ ensimmäisen lisäksi oleva arvo poistettu|ensimmäisen lisäksi olevaa arvoa poistettu ¦ az elsőn kívüli érték eltávolítva|az elsőn kívüli érték eltávolítva
+=ligne supprimée ¦ rivi poistettu|riviä poistettu ¦ sor törölve|sor törölve
+=colonne supprimée ¦ sarake poistettu|saraketta poistettu ¦ oszlop törölve|oszlop törölve
+=ligne en double supprimée ¦ kaksoiskappalerivi poistettu|kaksoiskappaleriviä poistettu ¦ ismétlődő sor törölve|ismétlődő sor törölve
+=ligne coupée en colonnes ¦ rivi jaettu sarakkeisiin|riviä jaettu sarakkeisiin ¦ sor oszlopokra bontva|sor oszlopokra bontva
+=case modifiée ¦ solu muutettu|solua muutettu ¦ cella módosítva|cella módosítva
+=cellule ¦ solu|solua ¦ cella|cella
+=cellule copiée ¦ solu kopioitu|solua kopioitu ¦ cella másolva|cella másolva
+=feuille importée ¦ taulukko tuotu|taulukkoa tuotu ¦ munkalap importálva|munkalap importálva
+{sheets} ({rows}) ¦ {sheets} ({rows}) ¦ {sheets} ({rows})
+la date ¦ päivämäärää ¦ a dátumot
+le début ¦ alkua ¦ a kezdetet
+la fin ¦ loppua ¦ a véget
+il manque un guillemet « " » à la fin d’un texte ¦ tekstin lopusta puuttuu lainausmerkki ”"” ¦ egy szöveg végéről hiányzik egy „"” idézőjel
+il manque une apostrophe à la fin du nom de feuille ¦ taulukon nimen lopusta puuttuu heittomerkki ¦ a munkalap nevének végéről hiányzik egy aposztróf
+après le nom de la feuille, il faut « ! » puis la cellule ¦ taulukon nimen jälkeen tarvitaan ”!” ja sitten solu ¦ a munkalap neve után „!” jel, majd a cella kell
+la formule s’arrête trop tôt ¦ kaava päättyy liian aikaisin ¦ a képlet túl korán véget ér
+il manque une parenthèse « ) » ¦ loppusulje ”)” puuttuu ¦ hiányzik egy „)” zárójel
+une parenthèse « ) » de trop ¦ yksi loppusulje ”)” liikaa ¦ eggyel több „)” zárójel
+un « ; » à une place inattendue ¦ ”;” odottamattomassa kohdassa ¦ egy „;” váratlan helyen
+un numéro Sosa est un nombre entier qui commence à 1 ¦ Sosa-numero on kokonaisluku, joka alkaa 1:stä ¦ a Sosa-szám 1-től kezdődő egész szám
+il n’y a aucun nombre dans la plage ¦ alueella ei ole yhtään lukua ¦ a tartományban nincs egyetlen szám sem
+le diviseur de MOD vaut 0 ¦ MOD-funktion jakaja on 0 ¦ a MOD osztója 0
+pas de racine carrée d’un nombre négatif ¦ negatiivisesta luvusta ei voi ottaa neliöjuurta ¦ negatív számnak nincs négyzetgyöke
+aucun nombre ¦ ei lukua ¦ nincs szám
+il faut au moins deux nombres ¦ tarvitaan vähintään kaksi lukua ¦ legalább két szám kell
+aucun test n’est vrai ¦ mikään ehto ei ole tosi ¦ egyik feltétel sem igaz
+les plages n’ont pas la même taille ¦ alueet eivät ole samankokoisia ¦ a tartományok nem egyforma méretűek
+aucune cellule ne remplit la condition ¦ mikään solu ei täytä ehtoa ¦ egyik cella sem felel meg a feltételnek
+le 2e morceau doit être une plage, par exemple A2:C40 ¦ 2. osan pitää olla alue, esimerkiksi A2:C40 ¦ a 2. résznek tartománynak kell lennie, például A2:C40
+le 2e morceau doit être une plage ¦ 2. osan pitää olla alue ¦ a 2. résznek tartománynak kell lennie
+la plage est vide ¦ alue on tyhjä ¦ a tartomány üres
+la condition doit avoir autant de lignes que la plage ¦ ehdossa pitää olla yhtä monta riviä kuin alueella ¦ a feltételnek ugyanannyi sora legyen, mint a tartománynak
+aucune ligne ne remplit la condition ¦ mikään rivi ei täytä ehtoa ¦ egyik sor sem felel meg a feltételnek
+le début compte à partir de 1 ¦ alku lasketaan 1:stä ¦ a kezdet 1-től számít
+cette date n’a pas de mois ¦ tällä päivämäärällä ei ole kuukautta ¦ ennek a dátumnak nincs hónapja
+cette date n’a pas de jour ¦ tällä päivämäärällä ei ole päivää ¦ ennek a dátumnak nincs napja
+il faut le jour ¦ päivä tarvitaan ¦ a nap kell
+le type de JOURSEM va de 1 à 3 (ou 11 à 17) ¦ JOURSEM-funktion tyyppi on 1–3 (tai 11–17) ¦ a JOURSEM típusa 1 és 3 között (vagy 11 és 17 között) van
+la fin est avant le début ¦ loppu on ennen alkua ¦ a vége a kezdete előtt van
+la seconde date est avant la première ¦ toinen päivämäärä on ennen ensimmäistä ¦ a második dátum az első előtt van
+il faut une date au jour près ¦ tarvitaan päivän tarkkuudella oleva päivämäärä ¦ napra pontos dátum kell
+le calendrier républicain va du 22 septembre 1792 à 1805 ¦ vallankumouskalenteri on käytössä 22. syyskuuta 1792 – 1805 ¦ a forradalmi naptár 1792. szeptember 22-től 1805-ig tart
+il faut des nombres dans la plage ¦ alueella pitää olla lukuja ¦ a tartományban számoknak kell lenniük
+il faut une LAMBDA(…) ¦ tarvitaan LAMBDA(…) ¦ LAMBDA(…) kell
+trop de LAMBDA imbriquées ¦ liian monta sisäkkäistä LAMBDAa ¦ túl sok egymásba ágyazott LAMBDA
+des paires « nom; valeur » puis le calcul ¦ pareja ”nimi; arvo” ja sitten lasku ¦ „név; érték” párok, majd a számítás
+un nom (lettres) avant chaque valeur ¦ nimi (kirjaimia) ennen jokaista arvoa ¦ egy név (betűk) minden érték előtt
+il faut au moins le calcul ¦ tarvitaan ainakin lasku ¦ legalább a számítás kell
+les paramètres sont des noms ¦ parametrit ovat nimiä ¦ a paraméterek nevek
+le calcul n’a pas de résultat ¦ laskulla ei ole tulosta ¦ a számításnak nincs eredménye
+le résultat est trop grand pour être calculé ¦ tulos on liian suuri laskettavaksi ¦ az eredmény túl nagy a kiszámításhoz
+une feuille supprimée ¦ poistettu taulukko ¦ egy törölt munkalap
+une plage entière ne tient pas dans une case : utilise SOMME(…), INDEX(…)… ¦ kokonainen alue ei mahdu yhteen soluun: käytä SOMME(…), INDEX(…)… ¦ egy teljes tartomány nem fér el egy cellában: használd a SOMME(…), INDEX(…)… függvényt
+puissance impossible ¦ mahdoton potenssi ¦ lehetetlen hatvány
+une LAMBDA seule ne donne pas de valeur : utilise-la dans LET, MAP… ¦ pelkkä LAMBDA ei anna arvoa: käytä sitä LET-, MAP-… funktiossa ¦ egy önálló LAMBDA nem ad értéket: használd LET, MAP… függvényben
+la formule est trop longue ¦ kaava on liian pitkä ¦ a képlet túl hosszú
+la formule est trop imbriquée ¦ kaava on liian syvälle sisäkkäinen ¦ a képlet túl mélyen egymásba ágyazott
+trop de morceaux dans une fonction ¦ funktiossa on liian monta osaa ¦ túl sok rész egy függvényben
+la formule demande trop de calculs ¦ kaava vaatii liian monta laskutoimitusta ¦ a képlet túl sok számítást igényel
+le résultat est trop grand ¦ tulos on liian suuri ¦ az eredmény túl nagy
+la plage est trop grande ¦ alue on liian suuri ¦ a tartomány túl nagy
+le fichier a trop de cellules ¦ tiedostossa on liikaa soluja ¦ a fájlban túl sok cella van

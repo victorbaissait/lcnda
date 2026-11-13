@@ -1,0 +1,422 @@
+fr ¦ lb
+# ═════ zone « composants » : luxembourgeois (lb) ═════
+Enregistrer ¦ Späicheren
+Annuler ¦ Ofbriechen
+Fermer ¦ Zoumaachen
+Supprimer ¦ Läschen
+Retirer ¦ Ewechhuelen
+Modifier ¦ Änneren
+Créer ¦ Erstellen
+Ajouter ¦ Derbäisetzen
+Relier ¦ Verbannen
+↺ Remettre comme au départ ¦ ↺ Zrécksetzen wéi am Ufank
+Remettre comme au départ ¦ Zrécksetzen wéi am Ufank
+↶ Annuler ¦ ↶ Réckgängeg
+↷ Rétablir ¦ ↷ Widderhuelen
+Rétablir ¦ Widderhuelen
+Continuer ¦ Weidermaachen
+Réessayer ¦ Nees probéieren
+Ouvrir ¦ Opmaachen
+↗ Ouvrir ¦ ↗ Opmaachen
+Renommer ¦ Ëmbenennen
+Dupliquer ¦ Duplizéieren
+Remplacer ¦ Ersetzen
+Choisir ¦ Wielen
+Choisir… ¦ Wielen…
+Changer ¦ Änneren
+Exporter ¦ Exportéieren
+Importer ¦ Importéieren
+Imprimer ¦ Drécken
+🖨 Imprimer ¦ 🖨 Drécken
+💾 Enregistrer ¦ 💾 Späicheren
+⤒ Importer ¦ ⤒ Importéieren
+⤓ Exporter ▾ ¦ ⤓ Exportéieren ▾
+📋 Copier ¦ 📋 Kopéieren
+✓ Enregistré ¦ ✓ Gespäichert
+Enregistré ¦ Gespäichert
+Enregistrement… ¦ Gëtt gespäichert…
+⚠️ Pas enregistré ¦ ⚠️ Net gespäichert
+• modifié ¦ • geännert
+Plein écran ¦ Vollbild
+Plus d’actions ¦ Méi Aktiounen
+Aide ¦ Hëllef
+Aide : ¦ Hëllef:
+En savoir plus (FAQ) → ¦ Méi gewuer ginn (FAQ) →
+Clique pour lire la suite ¦ Klick, fir weiderzeliesen
+Retour ¦ Zréck
+← Retour ¦ ← Zréck
+Oui ¦ Jo
+Non ¦ Neen
+Aucune ¦ Keng
+Aucun ¦ Keen
+Tous ¦ All
+Toutes ¦ All
+Tout ¦ Alles
+Tout voir ¦ Alles kucken
+Voir tout ¦ Alles kucken
+Toutes ({n}) ¦ All ({n})
+Tout ({n}) ¦ Alles ({n})
+Rien pour l’instant ¦ Fir de Moment näischt
+Rien ¦ Näischt
+Sans titre ¦ Ouni Titel
+Échap ¦ Esc
+Entrée ¦ Enter
+Début ¦ Pos1
+retour arrière ¦ Réckschrëtt
+⚠️ ATTENTION ¦ ⚠️ OPGEPASST
+CONFIRMER ¦ BESTÄTEGEN
+Es-tu sûr ? ¦ Bass du sécher?
+Confirmer ¦ Bestätegen
+Impossible d’annuler : {err} ¦ Réckgängeg maachen ass net méiglech: {err}
+Impossible de rétablir : {err} ¦ Widderhuelen ass net méiglech: {err}
+Déjà remis : rien à annuler de plus. ¦ Schonn zréckgesat: näischt méi réckgängeg ze maachen.
+↶ Annulé : {what} ¦ ↶ Réckgängeg gemaach: {what}
+↶ Annulé : « {what} » ¦ ↶ Réckgängeg gemaach: „{what}“
+Pas de connexion avec LCNDA : rien n’est perdu, réessaie. ¦ Keng Verbindung mat LCNDA: näischt ass verluer, probéier nach eng Kéier.
+Réponse illisible du serveur ¦ Onliesbar Äntwert vum Server
+Réponse illisible du serveur. ¦ Onliesbar Äntwert vum Server.
+Erreur du serveur. ¦ Feeler um Server.
+Réglage changé ¦ Astellung geännert
+Réglage changé : « {what} » ¦ Astellung geännert: „{what}“
+Réglages remis comme au départ ¦ Astellunge zréckgesat wéi am Ufank
+Chargement… ¦ Gëtt gelueden…
+Chargement de la base… ¦ D’Datebank gëtt gelueden…
+Ouverture de la généalogie… ¦ D’Genealogie gëtt opgemaach…
+Chercher ¦ Sichen
+Chercher… ¦ Sichen…
+Rechercher ¦ Sichen
+Vider la case (Échap) ¦ D’Feld eidel maachen (Esc)
+Vider la case ¦ D’Feld eidel maachen
+Touche « / » : aller dans la case de recherche ¦ Tast „/“: an d’Sichfeld goen
+Filtrer ¦ Filteren
+Filtrer ▾ ¦ Filteren ▾
+Tout effacer ¦ Alles läschen
+Retirer ce filtre ¦ Dëse Filter ewechhuelen
+Trier ¦ Zortéieren
+Trier : ¦ Zortéieren:
+Les plus récents ¦ Déi rezentst
+Les plus anciens ¦ Déi eelst
+Les plus récentes ¦ Déi rezentst
+Les plus anciennes ¦ Déi eelst
+Nom A → Z ¦ Numm A → Z
+Nom Z → A ¦ Numm Z → A
+Liste ¦ Lëscht
+Fiches ¦ Fichen
+En liste : une ligne par élément (vignette, nom, détails, date) ¦ Als Lëscht: eng Linn pro Element (Miniatur, Numm, Detailer, Datum)
+En fiches : une carte par élément, avec une grande vignette ¦ Als Fichen: eng Kaart pro Element, mat enger grousser Miniatur
+Affichage des {what} ¦ Affichage: {what}
+Voir le suivant ↓ ¦ Deen nächste kucken ↓
+Voir la suivante ↓ ¦ Déi nächst kucken ↓
+Voir les {n} suivants ↓ ¦ Déi nächst {n} kucken ↓
+Voir les {n} suivantes ↓ ¦ Déi nächst {n} kucken ↓
+{n} éléments ¦ {n} Elementer
+=élément ¦ Element|Elementer
+éléments ¦ Elementer
+=personne ¦ Persoun|Persounen
+=animal ¦ Déier|Déieren
+=fiche ¦ Fiche|Fichen
+=lieu ¦ Plaz|Plazen
+=commune ¦ Gemeng|Gemengen
+=ville ¦ Stad|Stied
+=chose ¦ Saach|Saachen
+=caractère ¦ Zeechen|Zeechen
+=page ¦ Säit|Säiten
+=document ¦ Dokument|Dokumenter
+=média ¦ Medium|Medien
+=source ¦ Quell|Quellen
+=événement ¦ Evenement|Evenementer
+=étiquette ¦ Etikett|Etiketten
+=enquête ¦ Ënnersichung|Ënnersichungen
+=modification ¦ Ännerung|Ännerungen
+=famille ¦ Famill|Familljen
+=génération ¦ Generatioun|Generatiounen
+=réglage ¦ Astellung|Astellungen
+=erreur captée ¦ opgefaangene Feeler|opgefaange Feeler
+=jour ¦ Dag|Deeg
+=type ¦ Typ|Typen
+=branche ¦ Zweig|Zweigen
+=doublon possible ¦ méiglechen Doublon|méiglech Doublonen
+=chose à vérifier ¦ Saach fir ze iwwerpréiwen|Saache fir ze iwwerpréiwen
+=album ¦ Album|Alben
+=chanson ¦ Lidd|Lidder
+=titre ¦ Titel|Titelen
+Nom, prénom… (2 lettres suffisent) ¦ Numm, Virnumm… (2 Buschtawe ginn duer)
+Ville, village, paroisse… ¦ Stad, Duerf, Par…
+＋ Ajouter une personne… ¦ ＋ Eng Persoun derbäisetzen…
+＋ Ajouter un lieu… ¦ ＋ Eng Plaz derbäisetzen…
+＋ Ajouter une source… ¦ ＋ Eng Quell derbäisetzen…
+＋ Ajouter un média… ¦ ＋ E Medium derbäisetzen…
+＋ Ajouter une enquête… ¦ ＋ Eng Ënnersichung derbäisetzen…
+＋ Ajouter une étiquette… ¦ ＋ Eng Etikett derbäisetzen…
+＋ Ajouter un événement… ¦ ＋ En Evenement derbäisetzen…
+＋ Ajouter un animal… ¦ ＋ En Déier derbäisetzen…
+＋ Ajouter… ¦ ＋ Derbäisetzen…
+↗ Fiche ¦ ↗ Fiche
+↗ Lieu ¦ ↗ Plaz
+Aucune fiche ¦ Keng Fiche
+Aucun lieu ¦ Keng Plaz
+Aucune source ¦ Keng Quell
+Aucun média ¦ Kee Medium
+Aucune enquête ¦ Keng Ënnersichung
+Aucune étiquette ¦ Keng Etikett
+Aucun événement ¦ Keen Evenement
+Aucun animal ¦ Keen Déier
+Créer la fiche ¦ D’Fiche erstellen
+Créer le lieu ¦ D’Plaz erstellen
+Créer une fiche ¦ Eng Fiche erstellen
+＋ Créer sa fiche ¦ ＋ Seng Fiche erstellen
+👤 Personnes ¦ 👤 Persounen
+📍 Lieux ¦ 📍 Plazen
+📚 Sources ¦ 📚 Quellen
+🖼 Médias ¦ 🖼 Medien
+🔍 Enquêtes ¦ 🔍 Ënnersichungen
+🏷 Étiquettes ¦ 🏷 Etiketten
+📅 Événements ¦ 📅 Evenementer
+🐾 Animaux ¦ 🐾 Déieren
+✎ Garder le texte « {q} » sans fiche ¦ ✎ Den Text „{q}“ ouni Fiche halen
+🗺 Choisir sur la carte ¦ 🗺 Op der Kaart wielen
+{what} de ta base ¦ {what} aus denger Datebank
+{what} de France ¦ {what} a Frankräich
+{what} du monde ¦ {what} op der ganzer Welt
+300 villes du monde et plus ¦ Iwwer 300 Stied op der ganzer Welt
+{what} trouvés ¦ {what} fonnt
+{none} pour « {q} ». Vérifie l’orthographe ¦ {none} fir „{q}“. Kontrolléier d’Schreifweis
+{none} pour l’instant ¦ {none} fir de Moment
+, ou : ¦ , oder:
+↹ Tab passe d’un filtre à l’autre ¦ ↹ Tab geet vun engem Filter op deen aneren
+↑ ↓ Entrée ¦ ↑ ↓ Enter
+… la liste défile ¦ … d’Lëscht scrollt
+⭐ Personne principale ¦ ⭐ Haaptpersoun
+Autres personnes principales ¦ Aner Haaptpersounen
+Personnes principales ¦ Haaptpersounen
+Personnes secondaires ¦ Niewepersounen
+au cœur de la recherche ¦ am Mëttelpunkt vun der Recherche
+témoins, voisins, parrains, pistes… ¦ Zeien, Noperen, Pättere, Spueren…
+Choisir la personne principale… ¦ D’Haaptpersoun wielen…
+＋ Ajouter une personne principale… ¦ ＋ Eng Haaptpersoun derbäisetzen…
+＋ Ajouter une personne secondaire… ¦ ＋ Eng Niewepersoun derbäisetzen…
+Changer le rôle ¦ D’Roll änneren
+Donner un rôle (facultatif) ¦ Eng Roll ginn (fakultativ)
+rôle ▾ ¦ Roll ▾
+Rôle libre ¦ Fräi Roll
+Retirer le rôle ¦ D’Roll ewechhuelen
+Passer en secondaire ¦ Zur Niewepersoun maachen
+Passer en principale ¦ Zur Haaptpersoun maachen
+Autre mot… (Entrée) ¦ Anert Wuert… (Enter)
+témoin ¦ Zeien
+déclarant ¦ Deklarant
+parrain ¦ Pätter
+marraine ¦ Gotta
+voisin ¦ Noper
+employeur ¦ Patron
+officier ¦ Beamten
+épouse ¦ Fra
+époux ¦ Mann
+sans fiche ¦ ouni Fiche
+Personne sans fiche : clic pour créer sa fiche ¦ Persoun ouni Fiche: klick, fir hir Fiche ze erstellen
+Ouvrir la fiche ¦ D’Fiche opmaachen
+Voir sur la carte ¦ Op der Kaart kucken
+Aucune personne choisie ¦ Keng Persoun gewielt
+Choisir des personnes ¦ Persoune wielen
+Choisir une personne ¦ Eng Persoun wielen
+Choisir des lieux ¦ Plaze wielen
+Choisir un lieu ¦ Eng Plaz wielen
+Carte : clique l’endroit du lieu ¦ Kaart: klick op d’Stell vun der Plaz
+Clique l’endroit du lieu sur la carte (glisse pour te déplacer, molette pour zoomer). ¦ Klick op d’Stell vun der Plaz op der Kaart (zéi, fir dech ze beweegen, Mausrad, fir ze zoomen).
+＋ Créer un lieu ici ¦ ＋ Hei eng Plaz erstellen
+Nom du lieu ¦ Numm vun der Plaz
+Lieux proches… ¦ Plazen an der Géigend…
+Aucun lieu connu près d’ici : crée-le ci-dessous. ¦ Keng bekannte Plaz hei an der Géigend: erstell se hei drënner.
+Donne un nom au lieu. ¦ Gëff der Plaz en Numm.
+Dézoomer ¦ Erauszoomen
+Lieu impossible à ajouter ¦ D’Plaz kann net derbäigesat ginn
+Crée d’abord la fiche dans Personnes, puis choisis-la ici. ¦ Erstell als éischt d’Fiche a Persounen, a wiel se duerno hei.
+Crée-la d’abord dans l’outil, puis choisis-la ici. ¦ Erstell se als éischt am Tool, a wiel se duerno hei.
+Personne ¦ Persoun
+Lieu ¦ Plaz
+À corriger. ¦ Ze korrigéieren.
+<b>{what} à corriger</b> avant d’enregistrer. ¦ <b>{what} ze korrigéieren</b>, ier s du späichers.
+Coche cette case pour continuer. ¦ Kräiz dës Këscht un, fir weiderzemaachen.
+Choisis une des possibilités. ¦ Wiel eng vun de Méiglechkeeten.
+Choisis un fichier. ¦ Wiel e Fichier.
+Choisis dans la liste. ¦ Wiel aus der Lëscht.
+Ce champ est à remplir. ¦ Dëst Feld muss ausgefëllt ginn.
+Écris un nombre (par exemple 12 ou 3,5). ¦ Schreif eng Zuel (zum Beispill 12 oder 3,5).
+Ce n’est pas compris : vérifie ce qui est écrit. ¦ Dat gëtt net verstanen: kontrolléier, wat do steet.
+Écris une adresse e-mail complète (nom@exemple.fr). ¦ Schreif eng komplett E-Mail-Adress (numm@beispill.lu).
+Écris une adresse web complète (https://…). ¦ Schreif eng komplett Webadress (https://…).
+Ce n’est pas au bon format. ¦ Dat ass net am richtege Format.
+Au moins {x}. ¦ Op d’mannst {x}.
+Au plus {x}. ¦ Héchstens {x}.
+Au moins {x} (là : {y}). ¦ Op d’mannst {x} (elo: {y}).
+Cette valeur n’est pas permise ici : prends un nombre rond. ¦ Dëse Wäert ass hei net erlaabt: huel eng ronn Zuel.
+Donne un nom à ces réglages. ¦ Gëff dësen Astellungen en Numm.
+Choisir une couleur ¦ Eng Faarf wielen
+Couleurs de l’app ¦ Faarwe vun der App
+Récentes ¦ Rezent
+Choisir une autre couleur ¦ Eng aner Faarf wielen
+Prendre une couleur n’importe où dans la fenêtre ¦ Eng Faarf iergendwou an der Fënster huelen
+Code de la couleur ¦ Code vun der Faarf
+Remettre la couleur d’avant ¦ Déi Faarf vu virdrun erëmsetzen
+Double-clic : revenir à la valeur de départ ¦ Duebelklick: zréck op de Wäert vum Ufank
+Choisir une police ¦ Eng Schrëft wielen
+Chercher une police… ¦ Eng Schrëft sichen…
+Les polices de l’ordinateur… ¦ D’Schrëften vum Computer…
+Aucune police pour « {q} ». ¦ Keng Schrëft fir „{q}“.
+Lecture des polices… ¦ D’Schrëfte ginn ageliest…
+🔓 Voir toutes les polices de l’ordinateur ¦ 🔓 All d’Schrëfte vum Computer kucken
+Le navigateur te demandera la permission. ¦ De Browser freet dech ëm Erlaabnes.
+CONSEILLÉE ¦ EMPFOLEN
+RÉCENTE ¦ REZENT
+DE L’APP ¦ VUN DER APP
+TAPÉE ¦ AGETIPPT
+Réglages enregistrés ¦ Gespäichert Astellungen
+Nom de ces réglages ¦ Numm vun dësen Astellungen
+Nom du réglage ¦ Numm vun der Astellung
+Aucun réglage enregistré pour l’instant. ¦ Fir de Moment keng gespäichert Astellungen.
+＋ Enregistrer les réglages actuels ¦ ＋ Déi aktuell Astellunge späicheren
+Un réglage « {name} » existe déjà. ¦ Eng Astellung „{name}“ gëtt et schonn.
+Le remplacer ? ¦ Ersetzen?
+Réglages gardés sous « {name} ». ¦ Astellungen ënner „{name}“ gespäichert.
+Remplacer par les réglages actuels ¦ Duerch déi aktuell Astellungen ersetzen
+Remplacer « {name} » par les réglages actuels ? ¦ „{name}“ duerch déi aktuell Astellungen ersetzen?
+Réglage mis à jour. ¦ Astellung aktualiséiert.
+Réglages « {name} » appliqués. ¦ Astellungen „{name}“ ugewannt.
+Exporter (fichier .json) ¦ Exportéieren (.json-Fichier)
+Remplacer, renommer, dupliquer, exporter, supprimer ¦ Ersetzen, ëmbenennen, duplizéieren, exportéieren, läschen
+Exporter (PDF, image, impression…) ¦ Exportéieren (PDF, Bild, Drock…)
+⤓ Exporter en {fmt} ¦ ⤓ Als {fmt} exportéieren
+Nom du fichier ¦ Numm vum Fichier
+Qualité ¦ Qualitéit
+Fond perdu et traits de coupe (imprimeur) ¦ Bleed a Schnëttmarken (Dréckerei)
+Ranger aussi une copie dans les médias ¦ Och eng Kopie an d’Medie leeën
+Aperçu ¦ Virschau
+Aperçu… ¦ Virschau…
+Pas d’aperçu ¦ Keng Virschau
+Format du papier ¦ Format vum Pabeier
+Ce qu’on imprime ¦ Wat gedréckt gëtt
+Pages à imprimer ¦ Säiten, fir ze drécken
+Celle affichée ¦ Déi, déi gewise gëtt
+Page précédente ¦ Säit virdrun
+Page suivante ¦ Nächst Säit
+Aperçu de l’impression ¦ Virschau vum Drock
+Exemplaires ¦ Exemplairen
+Portrait ¦ Héichformat
+Paysage ¦ Breetformat
+L’écran affiché ¦ De gewisenen Ecran
+Dans la fenêtre qui s’ouvre, choisis « Enregistrer au format PDF » comme imprimante. ¦ Wiel an der Fënster, déi opgeet, „Als PDF späicheren“ als Drécker.
+Dans la fenêtre d’impression, choisis « Enregistrer au format PDF ». ¦ Wiel an der Drockfënster „Als PDF späicheren“.
+IMPORTER · ÉTAPE 1 SUR 3 ¦ IMPORTÉIEREN · ETAPP 1 VUN 3
+IMPORTER · ÉTAPE {n} SUR 3 ¦ IMPORTÉIEREN · ETAPP {n} VUN 3
+📁 Glisse ici le fichier, colle-le (⌘V) ou choisis-le sur l’ordinateur ¦ 📁 Zéi de Fichier heihinner, péch en (⌘V) oder wiel en um Computer
+📁 Glisse ici les fichiers, colle-les (⌘V) ou choisis-les sur l’ordinateur ¦ 📁 Zéi d’Fichieren heihinner, péch se (⌘V) oder wiel se um Computer
+Lecture du fichier… ¦ De Fichier gëtt gelies…
+Ce fichier ne peut pas être importé : {err} ¦ Dëse Fichier kann net importéiert ginn: {err}
+Voilà ce qui va entrer : {sum}. ¦ Dat hei kënnt eran: {sum}.
+⤒ Importer {what} ¦ ⤒ Importéieren: {what}
+{what} importés. ¦ {what} importéiert.
+Import terminé. ¦ Import fäerdeg.
+Impossible d’importer : {err} ¦ Importéieren ass net méiglech: {err}
+Importer un fichier ¦ E Fichier importéieren
+⤒ Importer un fichier… ¦ ⤒ E Fichier importéieren…
+Ce type de fichier n’est pas accepté ici. ¦ Dës Zort Fichier gëtt hei net akzeptéiert.
+Il entre dans les médias de l’app et se place dans l’outil. ¦ En kënnt an d’Medie vun der App a gëtt an den Tool gesat.
+📁 Choisir un fichier ¦ 📁 E Fichier wielen
+Ce fichier .json est abîmé : il ne peut pas être lu. ¦ Dëse .json-Fichier ass futti: en ka net gelies ginn.
+Ajuster à la fenêtre ¦ Un d’Fënster upassen
+Zoom arrière ¦ Erauszoomen
+Zoom avant ¦ Eranzoomen
+Règles ¦ Lineale
+Règles : montrer ou cacher ¦ Lineale: weisen oder verstoppen
+Aimanter : les objets se collent aux autres et à la grille (Alt pour s’en passer en glissant) ¦ Aschnappen: d’Objete pechen un deenen aneren an um Gitter (Alt beim Zéien, fir ouni ze schaffen)
+Les autres façons d’enregistrer ¦ Aner Méiglechkeeten ze späicheren
+Ranger, montrer ou cacher les boutons ¦ D’Knäppercher zortéieren, weisen oder verstoppen
+Compris ¦ Verstanen
+Choisir sur un calendrier ¦ An engem Kalenner wielen
+Durée ¦ Dauer
+aujourd’hui ¦ haut
+aujourd’hui à {h} ¦ haut um {h}
+hier ¦ gëschter
+hier à {h} ¦ gëschter um {h}
+{day} à {h} ¦ {day} um {h}
+Modifié ¦ Geännert
+Créé ¦ Erstallt
+Ajouté ¦ Derbäigesat
+Aucune battue ¦ Keng Sichaktioun
+Aucune maison ¦ Keen Haus
+Aucune revue ¦ Keng Zäitschrëft
+Aucun employeur ¦ Kee Patron
+Aucun recensement ¦ Keng Vollekszielung
+🎨 Œuvres ¦ 🎨 Wierker
+Chercher un graphique… (ex. naissances, camembert) ¦ Eng Grafik sichen… (z. B. Gebuerten, Kuch)
+Aucun graphique ¦ Keng Grafik
+Créer le graphique ¦ D’Grafik erstellen
+Nouveau graphique ¦ Nei Grafik
+Aucun projet ¦ Kee Projet
+Aucun tableau ¦ Keen Tableau
+Aucune mise en page ¦ Keng Säitegestaltung
+📐 Mises en page ¦ 📐 Säitegestaltungen
+Aucun diagramme ¦ Keen Diagramm
+Aucune carte ¦ Keng Kaart
+Aucune transcription ¦ Keng Transkriptioun
+Aucune carte de photos ¦ Keng Kaart mat Fotoen
+Aucun classeur ¦ Keng Tabelle
+Aucun document ¦ Keen Dokument
+Aucune parcelle ¦ Keng Parzell
+Nom de l’objet, sorte… (2 lettres suffisent) ¦ Numm vum Objet, Zort… (2 Buschtawe ginn duer)
+Aucun objet de famille ¦ Keen Familljeobjet
+Nom du défunt, notaire, année… (2 lettres suffisent) ¦ Numm vum Verstuerwenen, Notaire, Joer… (2 Buschtawe ginn duer)
+Aucun inventaire après décès ¦ Keen Inventaire nom Doud
+⚖️ Inventaires après décès ¦ ⚖️ Inventairen nom Doud
+Nom, espèce, code de bague, puce… (2 lettres suffisent) ¦ Numm, Aart, Code vum Rank, Chip… (2 Buschtawe ginn duer)
+Nom du site… (2 lettres suffisent) ¦ Numm vum Site… (2 Buschtawe ginn duer)
+Aucun site ¦ Kee Site
+Nom du groupe, de la meute… (2 lettres suffisent) ¦ Numm vun der Grupp, vum Rudel… (2 Buschtawe ginn duer)
+Aucun groupe ¦ Keng Grupp
+👥 Groupes d’animaux ¦ 👥 Déieregruppen
+Maladie, cause de décès… (2 lettres suffisent) ¦ Krankheet, Doudesursaach… (2 Buschtawe ginn duer)
+＋ Choisir une maladie… ¦ ＋ Eng Krankheet wielen…
+Aucune maladie notée ¦ Keng Krankheet notéiert
+🩺 Santé ¦ 🩺 Gesondheet
+Chercher une de mes cartes… ¦ Eng vu menge Kaarte sichen…
+＋ Choisir une carte… ¦ ＋ Eng Kaart wielen…
+Nom de la branche… ¦ Numm vum Zweig…
+＋ Choisir une branche… ¦ ＋ En Zweig wielen…
+Aucune branche ¦ Keen Zweig
+Nom d’une de mes couches… ¦ Numm vun enger vu menge Schichten…
+＋ Choisir une couche… ¦ ＋ Eng Schicht wielen…
+Aucune couche dessinée ¦ Keng gezeechent Schicht
+Commune, cote, année… (2 lettres suffisent) ¦ Gemeng, Archivnummer, Joer… (2 Buschtawe ginn duer)
+🔗 Relier un dépouillement… ¦ 🔗 En Auszuch verbannen…
+Aucun dépouillement ¦ Keen Auszuch
+Nom, prénom d’un contact… (2 lettres suffisent) ¦ Numm, Virnumm vun engem Kontakt… (2 Buschtawe ginn duer)
+Aucun contact ¦ Kee Kontakt
+Chercher une de mes listes… ¦ Eng vu menge Lëschte sichen…
+Aucune liste ¦ Keng Lëscht
+Événement, personne, année… (2 lettres suffisent) ¦ Evenement, Persoun, Joer… (2 Buschtawe ginn duer)
+Aucun service d’archives ¦ Keen Archivsservice
+Créer le service ¦ De Service erstellen
+🏛 Services d’archives ¦ 🏛 Archivsservicer
+Source, page, nom de la personne citée… ¦ Quell, Säit, Numm vun der genannter Persoun…
+＋ Choisir une citation… ¦ ＋ E Zitat wielen…
+Aucune citation ¦ Keen Zitat
+— une seule ¦ — just eng
+＋ Ajouter une maison… ¦ ＋ En Haus derbäisetzen…
+＋ Ajouter une fiche… ¦ ＋ Eng Fiche derbäisetzen…
+＋ Ajouter un document… ¦ ＋ En Dokument derbäisetzen…
+＋ Ajouter une carte… ¦ ＋ Eng Kaart derbäisetzen…
+＋ Ajouter un groupe… ¦ ＋ Eng Grupp derbäisetzen…
+＋ Ajouter un contact… ¦ ＋ E Kontakt derbäisetzen…
+＋ Ajouter une liste… ¦ ＋ Eng Lëscht derbäisetzen…
+Ce réglage prend ce qui est à l’écran maintenant. ¦ Dës Astellung hëlt dat, wat elo um Ecran ass.
+L’ancienne version de ce réglage ne sera plus gardée. ¦ Déi al Versioun vun dëser Astellung gëtt net méi gehalen.
+Le nom devient modifiable sur la ligne. ¦ Den Numm kann een elo op der Linn änneren.
+Une copie, à modifier sans toucher à l’original. ¦ Eng Kopie, déi s du ännere kanns, ouni un d’Original ze kommen.
+Pour le garder, ou l’ouvrir sur un autre ordinateur. ¦ Fir en ze halen, oder en op engem anere Computer opzemaachen.
+On peut encore l’annuler juste après. ¦ Direkt duerno kann een et nach réckgängeg maachen.
+Un fichier lcnda-reglage-….json exporté ici ou sur un autre ordinateur ¦ E Fichier lcnda-reglage-….json, deen hei oder op engem anere Computer exportéiert gouf
+Ce navigateur ne donne pas la liste des polices : voici les polices courantes trouvées sur l’ordinateur. Pour une autre, tape son nom exact. ¦ Dëse Browser gëtt d’Lëscht vun de Schrëften net: hei sinn déi üblech Schrëften, déi um Computer fonnt goufen. Fir eng aner, tipp hiren exakten Numm.
+La liste des polices n’a pas pu être lue. Réessaie. ¦ D’Lëscht vun de Schrëften konnt net gelies ginn. Probéier nach eng Kéier.
+Un autre format de la liste, ou un format libre (gardé dans « Mes formats ») ¦ En anert Format aus der Lëscht, oder e fräit Format (an „Meng Formater“ gespäichert)
+Un exemplaire au moins. ¦ Op d’mannst en Exemplaire.
+{n} exemplaires au plus. ¦ Héchstens {n} Exemplairen.

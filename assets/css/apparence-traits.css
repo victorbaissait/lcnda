@@ -16,7 +16,6 @@
 :root.lc-frame .sidebar-reopen, :root .sidebar-reopen:is([data-lc-lines], [data-lc-lines] *) {border:var(--line);border-left:0}
 :root.lc-frame .install-screen, :root .install-screen:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
 :root.lc-frame .install-card, :root .install-card:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
-:root.lc-frame .loading-mark, :root .loading-mark:is([data-lc-lines], [data-lc-lines] *) {border:calc(3px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root.lc-frame .search-row input, :root .search-row input:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .sidebar-select, :root .sidebar-select:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
 :root.lc-frame .search-row input, :root .search-row input:is([data-lc-lines], [data-lc-lines] *) {border-right:0}
 :root.lc-frame .search-row button, :root .search-row button:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
@@ -847,13 +846,11 @@ html:root.lc-frame.lc-frame :is(.icon-action, .icon-button, .button.small, .stat
 :root.lc-frame .lck-preview-head, :root .lck-preview-head:is([data-lc-lines], [data-lc-lines] *) {border-bottom:var(--line)}
 :root.lc-frame .lck-foot, :root .lck-foot:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid var(--line-color)}
 :root.lc-frame .lck-f-hero, :root .lck-f-hero:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #080808}
-:root.lc-frame .lck-preview.is-dark :is(.lck-f-hero, .lck-f-row, .lck-f-pick, .lck-f-box, .lck-f-chip), :root .lck-preview.is-dark :is(.lck-f-hero, .lck-f-row, .lck-f-pick, .lck-f-box, .lck-f-chip):is([data-lc-lines], [data-lc-lines] *) {border-color:#555}
-:root.lc-frame .lck-f-row, :root .lck-f-row:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #080808}
-:root.lc-frame .lck-f-pick, :root .lck-f-pick:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #080808}
-:root.lc-frame .lck-ph, :root .lck-ph:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #e3e5ea}
-:root.lc-frame .lck-pi, :root .lck-pi:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #f0f1f4}
+:root.lc-frame .lck-preview.is-dark :is(.lck-f-hero, .lck-f-box), :root .lck-preview.is-dark :is(.lck-f-hero, .lck-f-box):is([data-lc-lines], [data-lc-lines] *) {border-color:#555}
+:root.lc-frame .lck-preview.is-dark :is(.person-list-item, .pk-list, .pk-chip), :root .lck-preview.is-dark :is(.person-list-item, .pk-list, .pk-chip):is([data-lc-lines], [data-lc-lines] *) {border-color:#555}
+:root.lc-frame .lck-preview.is-dark :is(.pk-head, .pk-item), :root .lck-preview.is-dark :is(.pk-head, .pk-item):is([data-lc-lines], [data-lc-lines] *) {border-color:#3a3a3a}
+:root.lc-frame .lck-preview.is-dark .pk-badge.sosa, :root .lck-preview.is-dark .pk-badge.sosa:is([data-lc-lines], [data-lc-lines] *) {border-color:#2f6fe0}
 :root.lc-frame .lck-f-box, :root .lck-f-box:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #080808}
-:root.lc-frame .lck-f-chip, :root .lck-f-chip:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #080808}
 :root.lc-frame .lck-old-fiche, :root .lck-old-fiche:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #080808}
 :root.lc-frame .lck-colprev, :root .lck-colprev:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #080808}
 :root.lc-frame .lck-c-side, :root .lck-c-side:is([data-lc-lines], [data-lc-lines] *) {border-right:2px solid #080808}
@@ -944,6 +941,35 @@ html:root.lc-frame.lc-frame :is(.icon-action, .icon-button, .button.small, .stat
 :root.lc-frame .lcf-sd i.on, :root .lcf-sd i.on:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue)}
 :root.lc-frame .lcf-c, :root .lcf-c:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--pl)}
 :root.lc-frame .lcf-grid > div + div, :root .lcf-grid > div + div:is([data-lc-lines], [data-lc-lines] *) {border-left:0;border-top:var(--line)}
+:root.lc-frame .lca-group, :root .lca-group:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .lca-choice, :root .lca-choice:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color)}
+:root.lc-frame .lca-choice:hover, :root .lca-choice:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue-bright, #055dff)}
+:root.lc-frame .lca-choice.is-active, :root .lca-choice.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue-bright, #055dff)}
+:root.lc-frame .lca-preview, :root .lca-preview:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color)}
+:root.lc-frame .k-print-zone, :root .k-print-zone:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #055dff}
+:root.lc-frame .k-print-tile, :root .k-print-tile:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #c9ccd3}
+:root.lc-frame .k-print-tile:has(input:checked), :root .k-print-tile:has(input:checked):is([data-lc-lines], [data-lc-lines] *) {border:2px solid #055dff}
+:root[data-theme="dark"].lc-frame .k-print-zone, :root[data-theme="dark"] .k-print-zone:is([data-lc-lines], [data-lc-lines] *) {border-color:#5599ff}
+:root[data-theme="dark"].lc-frame .k-print-tile, :root[data-theme="dark"] .k-print-tile:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .k-print-tile:has(input:checked), :root[data-theme="dark"] .k-print-tile:has(input:checked):is([data-lc-lines], [data-lc-lines] *) {border-color:#5599ff}
+:root.lc-frame .ui-ig, :root .ui-ig:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--ui-ink)}
+:root.lc-frame .ui-ig-x, :root .ui-ig-x:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .ui-ig-top, :root .ui-ig-top:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--ui-line)}
+:root.lc-frame .ui-ig-tile, :root .ui-ig-tile:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--ui-line)}
+:root.lc-frame .ui-ig-tile:hover, :root .ui-ig-tile:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--ui-blue)}
+:root.lc-frame .ui-ig-tile.is-active, :root .ui-ig-tile.is-active:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--ui-blue)}
+:root.lc-frame .ui-ig-img, :root .ui-ig-img:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1.5px solid var(--ui-line)}
+:root.lc-frame .ui-ig-ft, :root .ui-ig-ft:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid var(--ui-line)}
+:root.lc-frame .ui-ig-ft kbd, :root .ui-ig-ft kbd:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--ui-line)}
+:root.lc-frame .ui-icf-chip .go, :root .ui-icf-chip .go:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--ui-ink)}
+:root.lc-frame .ui-icf-chip .go:hover, :root .ui-icf-chip .go:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--ui-blue)}
+:root.lc-frame .ui-icf-chip .x, :root .ui-icf-chip .x:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .ui-l6, :root .ui-l6:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .ui-l6-rest, :root .ui-l6-rest:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--ui-ink)}
+:root.lc-frame .nav-ov-btn, :root .nav-ov-btn:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--blue)}
+:root.lc-frame .lc-i18n-banner, :root .lc-i18n-banner:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--blue,#0066cc)}
+:root.lc-frame .lc-i18n-banner-btn, :root .lc-i18n-banner-btn:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--blue,#0066cc)}
+:root.lc-frame .lc-i18n-banner-x, :root .lc-i18n-banner-x:is([data-lc-lines], [data-lc-lines] *) {border:0}
 :root[data-theme="dark"].lc-frame .person-list-item .life-dot.deceased, :root[data-theme="dark"] .person-list-item .life-dot.deceased:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .person-list-item.is-active .outside-genealogy-mark, :root[data-theme="dark"] .person-list-item.is-active .outside-genealogy-mark:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .data-row, :root[data-theme="dark"] .data-row:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #4c4c4c}
@@ -979,8 +1005,6 @@ html:root.lc-frame.lc-frame :is(.icon-action, .icon-button, .button.small, .stat
 :root[data-theme="dark"].lc-frame .goose-board.is-horses .goose-pawn, :root[data-theme="dark"] .goose-board.is-horses .goose-pawn:is([data-lc-lines], [data-lc-lines] *) {border:calc(3px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .sf-body, :root[data-theme="dark"] .sf-body:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid #324267}
 :root[data-theme="dark"].lc-frame .lc-av-sosa, :root[data-theme="dark"] .lc-av-sosa:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
-:root[data-theme="dark"].lc-frame .lck-ph, :root[data-theme="dark"] .lck-ph:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #474a52}
-:root[data-theme="dark"].lc-frame .lck-pi, :root[data-theme="dark"] .lck-pi:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #474a52}
 :root[data-theme="dark"].lc-frame .st-continue .lck-c-item, :root[data-theme="dark"] .st-continue .lck-c-item:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .st-aeree .lck-c-item, :root[data-theme="dark"] .st-aeree .lck-c-item:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #4c4c4c}
 :root[data-theme="dark"].lc-frame .st-continue .lck-c-sec, :root[data-theme="dark"] .st-continue .lck-c-sec:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .st-aeree .lck-c-sec, :root[data-theme="dark"] .st-aeree .lck-c-sec:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #4c4c4c}
 :root[data-theme="dark"].lc-frame .st-continue .lck-c-list > .lck-c-sec:not(:first-child), :root[data-theme="dark"] .st-continue .lck-c-list > .lck-c-sec:not(:first-child):is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid #4c4c4c}
@@ -1145,6 +1169,15 @@ html:root.lc-frame.lc-frame :is(.icon-action, .icon-button, .button.small, .stat
 :root.lc-frame .h-emoji-grid button:hover, :root .h-emoji-grid button:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:currentColor}
 :root.lc-frame .h-village-map, :root .h-village-map:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--muted)}
 :root.lc-frame .h-faq-item, :root .h-faq-item:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid rgba(128,128,128,.25)}
+:root.lc-frame .h-htr-progress, :root .h-htr-progress:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #c9dcf5}
+:root.lc-frame .h-htr-wiz li, :root .h-htr-wiz li:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #e1e3e8}
+:root.lc-frame .h-htr-wiz li.is-current, :root .h-htr-wiz li.is-current:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
+:root.lc-frame .h-htr-more > summary, :root .h-htr-more > summary:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d6d6db}
+:root.lc-frame .h-htr-model, :root .h-htr-model:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #e1e3e8}
+:root.lc-frame .h-htr-model.is-present, :root .h-htr-model.is-present:is([data-lc-lines], [data-lc-lines] *) {border-color:#b9dfc1}
+:root.lc-frame .h-htr-rev > li, :root .h-htr-rev > li:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #e6e7ea}
+:root.lc-frame .h-htr-line, :root .h-htr-line:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d6d6db}
+:root.lc-frame .h-htr-line:focus, :root .h-htr-line:focus:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
 :root.lc-frame .h-lr-row, :root .h-lr-row:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
 :root.lc-frame .h-lr-row input:not([type=checkbox]):not([type=radio]), :root .h-lr-row input:not([type=checkbox]):not([type=radio]):is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .h-lr-row select, :root .h-lr-row select:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #bbb}
 :root.lc-frame .h-layouts-list li, :root .h-layouts-list li:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #ddd}
@@ -2222,9 +2255,48 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .isim-group, :root .isim-group:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--ui-line)}
 :root.lc-frame .isim-mini, :root .isim-mini:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--ui-line)}
 :root.lc-frame .h-world-q:has(.ui-search), :root .h-world-q:has(.ui-search):is([data-lc-lines], [data-lc-lines] *) {border:0 !important}
+:root.lc-frame .ui-listbar-btn.h-lv-plus.is-active, :root .ui-listbar-btn.h-lv-plus.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue) !important}
+:root.lc-frame .h-phi-row, :root .h-phi-row:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid var(--line, #e3e6ea)}
+:root.lc-frame .h-phi-prev td, :root .h-phi-prev td:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line, #e3e6ea)}
+:root.lc-frame .ip-map th, :root .ip-map th:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ip-links th, :root .ip-links th:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ip-prev th, :root .ip-prev th:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line, #e3e6ea)}
+:root.lc-frame .ip-map td, :root .ip-map td:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ip-links td, :root .ip-links td:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ip-prev td, :root .ip-prev td:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line, #e3e6ea)}
+:root.lc-frame .ip-prev, :root .ip-prev:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #e3e6ea)}
+:root.lc-frame .ip-links-wrap, :root .ip-links-wrap:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #e3e6ea)}
+:root.lc-frame .cp-cmp-handle, :root .cp-cmp-handle:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .cp-cmp-handle i, :root .cp-cmp-handle i:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--blue, #0066cc)}
+:root.lc-frame .cp-cmp-bar, :root .cp-cmp-bar:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .cp-fr-menu, :root .cp-fr-menu:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .cp-pop, :root .cp-pop:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .cp-set-row, :root .cp-set-row:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .occ-controls, :root .occ-controls:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #e3e3e3}
+:root.lc-frame .occ-tree .tree-card.occ-card, :root .occ-tree .tree-card.occ-card:is([data-lc-lines], [data-lc-lines] *) {border-left:7px solid var(--occ-c, #b8b8b8)}
+:root.lc-frame .occ-job, :root .occ-job:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--occ-c, #999)}
+:root.lc-frame .occ-job.is-none, :root .occ-job.is-none:is([data-lc-lines], [data-lc-lines] *) {border-style:dashed;border-color:#aaa}
+:root.lc-frame .occ-job.is-more, :root .occ-job.is-more:is([data-lc-lines], [data-lc-lines] *) {border-color:#aaa}
+:root.lc-frame .occ-mark.is-change, :root .occ-mark.is-change:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #e0b100}
+:root.lc-frame .occ-leg .occ-line, :root .occ-leg .occ-line:is([data-lc-lines], [data-lc-lines] *) {border-top:4px solid #4d8a2f}
+:root.lc-frame .occ-leg .occ-line.is-unknown, :root .occ-leg .occ-line.is-unknown:is([data-lc-lines], [data-lc-lines] *) {border-top:calc(2px * var(--lc-frame-k)) dashed var(--lc-frame-color)}
+:root.lc-frame .lv-dlg .lv-bar, :root .lv-dlg .lv-bar:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line-color, #ddd)}
+:root.lc-frame .lv-step, :root .lv-step:is([data-lc-lines], [data-lc-lines] *) {border:1px solid transparent}
+:root.lc-frame .lv-step:hover, :root .lv-step:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--line-color, #ddd)}
+:root.lc-frame .lv-step.is-active, :root .lv-step.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue)}
+:root.lc-frame .lv-step.is-noplace .lv-num, :root .lv-step.is-noplace .lv-num:is([data-lc-lines], [data-lc-lines] *) {border:1.5px dashed #999}
+:root[data-theme="dark"].lc-frame .occ-mark.is-change, :root[data-theme="dark"] .occ-mark.is-change:is([data-lc-lines], [data-lc-lines] *) {border-color:#8a6a10}
+:root.lc-frame .sa-msg, :root .sa-msg:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #9cc0f0}
+:root.lc-frame .sa-msg.is-warn, :root .sa-msg.is-warn:is([data-lc-lines], [data-lc-lines] *) {border-color:#e2c25a}
+:root.lc-frame .sa-msg.is-error, :root .sa-msg.is-error:is([data-lc-lines], [data-lc-lines] *) {border-color:#e59a9a}
+:root.lc-frame .sa-msg.is-ok, :root .sa-msg.is-ok:is([data-lc-lines], [data-lc-lines] *) {border-color:#8fcf9f}
+:root.lc-frame .sd-conflict, :root .sd-conflict:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #e2c25a}
 :root[data-theme="dark"].lc-frame .h-pin, :root[data-theme="dark"] .h-pin:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-slippy-mark, :root[data-theme="dark"] .h-slippy-mark:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-question-homonyms, :root[data-theme="dark"] .h-question-homonyms:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #4c4c4c}
+:root[data-theme="dark"].lc-frame .h-htr-progress, :root[data-theme="dark"] .h-htr-progress:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #324967}
+:root[data-theme="dark"].lc-frame .h-htr-wiz li, :root[data-theme="dark"] .h-htr-wiz li:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #474a52}
+:root[data-theme="dark"].lc-frame .h-htr-more > summary, :root[data-theme="dark"] .h-htr-more > summary:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #4a4a4f}
+:root[data-theme="dark"].lc-frame .h-htr-model, :root[data-theme="dark"] .h-htr-model:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #474a52}
+:root[data-theme="dark"].lc-frame .h-htr-model.is-present, :root[data-theme="dark"] .h-htr-model.is-present:is([data-lc-lines], [data-lc-lines] *) {border-color:#3e5b44}
+:root[data-theme="dark"].lc-frame .h-htr-rev > li, :root[data-theme="dark"] .h-htr-rev > li:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #494b50}
+:root[data-theme="dark"].lc-frame .h-htr-line, :root[data-theme="dark"] .h-htr-line:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #4a4a4f}
 :root[data-theme="dark"].lc-frame .h-lr-row input:not([type=checkbox]):not([type=radio]), :root[data-theme="dark"] .h-lr-row input:not([type=checkbox]):not([type=radio]):is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-lr-row select, :root[data-theme="dark"] .h-lr-row select:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #4c4c4c}
 :root[data-theme="dark"].lc-frame .h-layouts-list li, :root[data-theme="dark"] .h-layouts-list li:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #4c4c4c}
 :root[data-theme="dark"].lc-frame .h-rt-stage, :root[data-theme="dark"] .h-rt-stage:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #4c4c4c}
@@ -2418,6 +2490,9 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root[data-theme="dark"].lc-frame .h-rt-bpre>button[data-tp-pre], :root[data-theme="dark"] .h-rt-bpre>button[data-tp-pre]:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #484b51}
 :root[data-theme="dark"].lc-frame .h-rt-bprev, :root[data-theme="dark"] .h-rt-bprev:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #494c50}
 :root[data-theme="dark"].lc-frame .h-cpo-pin-img, :root[data-theme="dark"] .h-cpo-pin-img:is([data-lc-lines], [data-lc-lines] *) {border:calc(3px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .occ-controls, :root[data-theme="dark"] .occ-controls:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #4c4c4c}
+:root[data-theme="dark"].lc-frame .sa-msg, :root[data-theme="dark"] .sa-msg:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #304869}
+:root[data-theme="dark"].lc-frame .sa-msg.is-error, :root[data-theme="dark"] .sa-msg.is-error:is([data-lc-lines], [data-lc-lines] *) {border-color:#633636}
 :root[data-theme="dark"].lc-frame .h-at-detail, :root[data-theme="dark"] .h-at-detail:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid #4c4c4c}
 /* heritage-diagram-genea.css */
 :root.lc-frame .gn-app fieldset, :root .gn-app fieldset:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #d9dde3)}
@@ -2453,6 +2528,14 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root[data-theme="dark"].lc-frame .h-dgo .h-dgo-sub, :root[data-theme="dark"] .h-dgo .h-dgo-sub:is([data-lc-lines], [data-lc-lines] *) {border-left-color:#2c4a7a}
 :root[data-theme="dark"].lc-frame .h-dgo .h-lr-row, :root[data-theme="dark"] .h-dgo .h-lr-row:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-dgg, :root[data-theme="dark"] .h-dgg:is([data-lc-lines], [data-lc-lines] *) {border-color:#2c4a7a}
+/* heritage-diagram-perso.css */
+:root.lc-frame .h-dgp-sec, :root .h-dgp-sec:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line,#d9dde3)}
+:root.lc-frame .h-dgp-card, :root .h-dgp-card:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line,#d9dde3)}
+:root.lc-frame .h-dgp-card:hover, :root .h-dgp-card:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue,#0066cc)}
+:root.lc-frame .h-dgp-card.is-active, :root .h-dgp-card.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue,#0066cc)}
+:root.lc-frame .h-dgp-sw i, :root .h-dgp-sw i:is([data-lc-lines], [data-lc-lines] *) {border:1px solid rgba(0,0,0,.12)}
+:root.lc-frame .h-dgp-note, :root .h-dgp-note:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line,#d9dde3)}
+:root.lc-frame .h-dgp-play, :root .h-dgp-play:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line,#d9dde3)}
 /* layout.css */
 :root.lc-frame .h-book-studio, :root .h-book-studio:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--ink,#111)}
 :root.lc-frame .ly-editor, :root .ly-editor:is([data-lc-lines], [data-lc-lines] *) {border:0}
@@ -2635,6 +2718,7 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .segmented.ui-viewtoggle > button + button, :root .segmented.ui-viewtoggle > button + button:is([data-lc-lines], [data-lc-lines] *) {border-left-width:0}
 :root.lc-frame .ui-card, :root .ui-card:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--ink, #080808)}
 :root.lc-frame .ui-card-thumb, :root .ui-card-thumb:is([data-lc-lines], [data-lc-lines] *) {border:0;border-bottom:2px solid var(--ink, #080808)}
+:root.lc-frame details.ui-more.ui-card-more, :root details.ui-more.ui-card-more:is([data-lc-lines], [data-lc-lines] *) {border:0 !important}
 :root.lc-frame .ui-card-thumb > .ar-cov, :root .ui-card-thumb > .ar-cov:is([data-lc-lines], [data-lc-lines] *) {border:0}
 :root.lc-frame .ui-rows, :root .ui-rows:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--ink, #080808)}
 :root.lc-frame .ui-row, :root .ui-row:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--ui-line)}
@@ -2819,6 +2903,20 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root[data-theme="dark"].lc-frame .ar-fr .ty, :root[data-theme="dark"] .ar-fr .ty:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #454554}
 :root[data-theme="dark"].lc-frame .ar-icons span, :root[data-theme="dark"] .ar-icons span:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .ar-choice, :root[data-theme="dark"] .ar-choice:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #454554}
+/* onglets.css */
+:root.lc-frame .ong-letters button, :root .ong-letters button:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .ong-row.is-active .ui-badge, :root .ong-row.is-active .ui-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ong-gtitle.is-active .ui-badge, :root .ong-gtitle.is-active .ui-badge:is([data-lc-lines], [data-lc-lines] *) {border-color:currentColor}
+:root.lc-frame .ong-car, :root .ong-car:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .ong-gtitle, :root .ong-gtitle:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
+:root.lc-frame .ong-gtitle:hover, :root .ong-gtitle:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue)}
+:root.lc-frame .ong-gtitle.is-active, :root .ong-gtitle.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue)}
+:root.lc-frame .ong-gbody, :root .ong-gbody:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid var(--blue-soft)}
+:root.lc-frame .ong-app, :root .ong-app:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .ong-apps, :root .ong-apps:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
+:root.lc-frame .ong-applist, :root .ong-applist:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid var(--blue-soft)}
+:root.lc-frame .ong-big, :root .ong-big:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
+:root.lc-frame .ong-person, :root .ong-person:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ong-app2, :root .ong-app2:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
+:root.lc-frame .ong-person:hover, :root .ong-person:hover:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ong-app2:hover, :root .ong-app2:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue)}
 /* scene.css */
 :root.lc-frame .sc-tone, :root .sc-tone:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid currentColor}
 :root.lc-frame .sc-quote, :root .sc-quote:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid #d7dbe2}
@@ -3042,6 +3140,61 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .pc-slot.pc-found, :root .pc-slot.pc-found:is([data-lc-lines], [data-lc-lines] *) {border-style:solid;border-color:color-mix(in srgb, var(--blue) 35%, transparent)}
 :root.lc-frame .pc-card, :root .pc-card:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #222}
 :root.lc-frame .jfp .goose-board-wrap, :root .jfp .goose-board-wrap:is([data-lc-lines], [data-lc-lines] *) {border-width:calc(3px * var(--lc-frame-k))}
+/* jeux-plateau.css */
+:root.lc-frame .jp-bar, :root .jp-bar:is([data-lc-lines], [data-lc-lines] *) {border:3px solid #000}
+:root.lc-frame .jp-pl, :root .jp-pl:is([data-lc-lines], [data-lc-lines] *) {border:2px solid transparent}
+:root.lc-frame .jp-pl.is-on, :root .jp-pl.is-on:is([data-lc-lines], [data-lc-lines] *) {border-color:#000}
+:root.lc-frame .jp-rec, :root .jp-rec:is([data-lc-lines], [data-lc-lines] *) {border-top:2px solid #000}
+:root.lc-frame .jpe-news, :root .jpe-news:is([data-lc-lines], [data-lc-lines] *) {border-left:4px solid #000}
+:root.lc-frame .jpe-board, :root .jpe-board:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .jpd-board, :root .jpd-board:is([data-lc-lines], [data-lc-lines] *) {border:3px solid #000}
+:root.lc-frame .jpe-sq, :root .jpe-sq:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .jpd-sq, :root .jpd-sq:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .jpe-clock, :root .jpe-clock:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #000}
+:root.lc-frame .jpe-moves, :root .jpe-moves:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #000}
+:root.lc-frame .jpe-promo, :root .jpe-promo:is([data-lc-lines], [data-lc-lines] *) {border:3px solid #1d4ed8}
+:root.lc-frame .jpm-other, :root .jpm-other:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #000}
+:root.lc-frame .jpm-chain, :root .jpm-chain:is([data-lc-lines], [data-lc-lines] *) {border:3px solid #000}
+:root.lc-frame .jpm-tile, :root .jpm-tile:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .jpm-end, :root .jpm-end:is([data-lc-lines], [data-lc-lines] *) {border:3px dashed #fff}
+:root.lc-frame .jpm-endv, :root .jpm-endv:is([data-lc-lines], [data-lc-lines] *) {border:2px solid rgba(255, 255, 255, .35)}
+:root.lc-frame .jpm-hand-wrap, :root .jpm-hand-wrap:is([data-lc-lines], [data-lc-lines] *) {border-top:3px solid #000}
+:root.lc-frame .jpm-h, :root .jpm-h:is([data-lc-lines], [data-lc-lines] *) {border:3px solid transparent}
+:root.lc-frame .jpm-h.is-ok, :root .jpm-h.is-ok:is([data-lc-lines], [data-lc-lines] *) {border-color:#198754}
+:root.lc-frame .jpm-h.is-sel, :root .jpm-h.is-sel:is([data-lc-lines], [data-lc-lines] *) {border-color:#1d4ed8}
+:root.lc-frame .jpm-end-box, :root .jpm-end-box:is([data-lc-lines], [data-lc-lines] *) {border:3px solid #000}
+:root.lc-frame .jpm-count th, :root .jpm-count th:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .jpm-count td, :root .jpm-count td:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .jpm-score td, :root .jpm-score td:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #ccc}
+:root.lc-frame .jpy-die, :root .jpy-die:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .jpy-die.is-empty, :root .jpy-die.is-empty:is([data-lc-lines], [data-lc-lines] *) {border:3px dashed #bbb}
+:root.lc-frame .jpy-hint, :root .jpy-hint:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #198754}
+:root.lc-frame .jpy-sheet th, :root .jpy-sheet th:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .jpy-sheet td, :root .jpy-sheet td:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #000}
+:root.lc-frame .jpy-cell, :root .jpy-cell:is([data-lc-lines], [data-lc-lines] *) {border:2px dashed #1d4ed8}
+:root.lc-frame .jpy-cell.is-zero, :root .jpy-cell.is-zero:is([data-lc-lines], [data-lc-lines] *) {border-color:#999}
+:root.lc-frame .jpy-cell.is-hint, :root .jpy-cell.is-hint:is([data-lc-lines], [data-lc-lines] *) {border-style:solid;border-color:#198754}
+:root.lc-frame .jpy-rules td, :root .jpy-rules td:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .jpy-rules th, :root .jpy-rules th:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #ddd}
+:root[data-theme="dark"].lc-frame .jp-bar, :root[data-theme="dark"] .jp-bar:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .jp-pl.is-on, :root[data-theme="dark"] .jp-pl.is-on:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .jp-rec, :root[data-theme="dark"] .jp-rec:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .jpe-moves, :root[data-theme="dark"] .jpe-moves:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .jpm-other, :root[data-theme="dark"] .jpm-other:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .jpm-end-box, :root[data-theme="dark"] .jpm-end-box:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .jpe-news, :root[data-theme="dark"] .jpe-news:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .jpy-sheet th, :root[data-theme="dark"] .jpy-sheet th:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .jpy-sheet td, :root[data-theme="dark"] .jpy-sheet td:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .jpy-cell, :root[data-theme="dark"] .jpy-cell:is([data-lc-lines], [data-lc-lines] *) {border-color:#6b8fe0}
+:root[data-theme="dark"].lc-frame .jpy-cell.is-zero, :root[data-theme="dark"] .jpy-cell.is-zero:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .jpy-cell.is-hint, :root[data-theme="dark"] .jpy-cell.is-hint:is([data-lc-lines], [data-lc-lines] *) {border-color:#3fae6a}
+:root[data-theme="dark"].lc-frame .jpy-hint, :root[data-theme="dark"] .jpy-hint:is([data-lc-lines], [data-lc-lines] *) {border-color:#3fae6a}
+:root[data-theme="dark"].lc-frame .jpe-clock, :root[data-theme="dark"] .jpe-clock:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .jpy-die.is-empty, :root[data-theme="dark"] .jpy-die.is-empty:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .jpm-end, :root[data-theme="dark"] .jpm-end:is([data-lc-lines], [data-lc-lines] *) {border:calc(3px * var(--lc-frame-k)) dashed var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .jpm-endv, :root[data-theme="dark"] .jpm-endv:is([data-lc-lines], [data-lc-lines] *) {border:2px solid rgba(255, 255, 255, .35)}
+:root[data-theme="dark"].lc-frame .jpm-count th, :root[data-theme="dark"] .jpm-count th:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .jpm-count td, :root[data-theme="dark"] .jpm-count td:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .jpm-score td, :root[data-theme="dark"] .jpm-score td:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #4c4c4c}
+:root[data-theme="dark"].lc-frame .jpy-rules td, :root[data-theme="dark"] .jpy-rules td:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .jpy-rules th, :root[data-theme="dark"] .jpy-rules th:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #4c4c4c}
+/* jeux-cartes.css */
+:root.lc-frame .cx-seat, :root .cx-seat:is([data-lc-lines], [data-lc-lines] *) {border:2px solid transparent}
+:root.lc-frame .cx-seat.is-turn, :root .cx-seat.is-turn:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue, #2563eb)}
+:root.lc-frame .cx-mini i, :root .cx-mini i:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #fff}
+:root.lc-frame .cx-stock, :root .cx-stock:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .cx-suit, :root .cx-suit:is([data-lc-lines], [data-lc-lines] *) {border:2px solid currentColor}
+:root.lc-frame .cx-q, :root .cx-q:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid currentColor}
+:root.lc-frame .cx-end, :root .cx-end:is([data-lc-lines], [data-lc-lines] *) {border-top:2px solid}
+:root.lc-frame .cx-pile, :root .cx-pile:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .cx-col, :root .cx-col:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .cx-found, :root .cx-found:is([data-lc-lines], [data-lc-lines] *) {border-top:2px dashed color-mix(in srgb, var(--ink, #111) 22%, transparent);border-bottom:2px dashed color-mix(in srgb, var(--ink, #111) 22%, transparent)}
 /* bunker.css */
 :root.lc-frame .bk-dlg, :root .bk-dlg:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
 :root.lc-frame .bk-hatch-ico, :root .bk-hatch-ico:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
@@ -3114,6 +3267,17 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .bk-ville.is-full .bk-mapcol, :root .bk-ville.is-full .bk-mapcol:is([data-lc-lines], [data-lc-lines] *) {border-right:var(--line)}
 :root.lc-frame .bk-ville.is-full .bk-mapwrap, :root .bk-ville.is-full .bk-mapwrap:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
 :root.lc-frame .bk-ville.is-full .bk-mapcol, :root .bk-ville.is-full .bk-mapcol:is([data-lc-lines], [data-lc-lines] *) {border-right:0;border-bottom:var(--line)}
+:root.lc-frame .bk-hist, :root .bk-hist:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
+:root.lc-frame .bk-badge, :root .bk-badge:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .bk-badge-ico, :root .bk-badge-ico:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .bk-morns li, :root .bk-morns li:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .bk-regionwrap, :root .bk-regionwrap:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .bk-convoy, :root .bk-convoy:is([data-lc-lines], [data-lc-lines] *) {border-top:1px dashed var(--line-color)}
+:root.lc-frame .bk-group, :root .bk-group:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .bk-group.is-hostile, :root .bk-group.is-hostile:is([data-lc-lines], [data-lc-lines] *) {border-color:#c0152a}
+:root.lc-frame .bk-plan.is-ask, :root .bk-plan.is-ask:is([data-lc-lines], [data-lc-lines] *) {border-color:#c9a400}
+:root.lc-frame .bk-siterow, :root .bk-siterow:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
+:root.lc-frame .bk-bubble, :root .bk-bubble:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #111}
 /* sections.css */
 :root.lc-frame .fsec-toggle, :root .fsec-toggle:is([data-lc-lines], [data-lc-lines] *) {border:0}
 :root.lc-frame .fsec-chev, :root .fsec-chev:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color)}
@@ -3251,6 +3415,38 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root[data-theme="dark"].lc-frame .wx-hidden li, :root[data-theme="dark"] .wx-hidden li:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .wx-data-row, :root[data-theme="dark"] .wx-data-row:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #474a52}
 :root[data-theme="dark"].lc-frame .wx-wid-ft, :root[data-theme="dark"] .wx-wid-ft:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid #474a52}
+/* place-photos.css */
+:root.lc-frame .pp-photo, :root .pp-photo:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d9dce3}
+:root.lc-frame .pp-today-row, :root .pp-today-row:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d9dce3}
+:root.lc-frame .pp-asklist li, :root .pp-asklist li:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #e3e5ea}
+:root.lc-frame .pp-guess, :root .pp-guess:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d9dce3}
+:root.lc-frame .pp-guess.is-retained, :root .pp-guess.is-retained:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue-bright, #1f6feb)}
+:root.lc-frame .pp-gform, :root .pp-gform:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--blue-bright, #1f6feb)}
+:root.lc-frame .pp-cert-opt span, :root .pp-cert-opt span:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #c9ccd3}
+:root.lc-frame .pp-cert-opt.is-green input:checked + span, :root .pp-cert-opt.is-green input:checked + span:is([data-lc-lines], [data-lc-lines] *) {border-color:#1a7f37}
+:root.lc-frame .pp-cert-opt.is-blue input:checked + span, :root .pp-cert-opt.is-blue input:checked + span:is([data-lc-lines], [data-lc-lines] *) {border-color:#1f6feb}
+:root.lc-frame .pp-cert-opt.is-grey input:checked + span, :root .pp-cert-opt.is-grey input:checked + span:is([data-lc-lines], [data-lc-lines] *) {border-color:#6e7781}
+:root.lc-frame .pp-cert-opt.is-yellow input:checked + span, :root .pp-cert-opt.is-yellow input:checked + span:is([data-lc-lines], [data-lc-lines] *) {border-color:#bf8700}
+:root.lc-frame .pp-map, :root .pp-map:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d9dce3}
+:root.lc-frame .pp-map-zoom button, :root .pp-map-zoom button:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #c9ccd3}
+:root.lc-frame .pp-ask-side img, :root .pp-ask-side img:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d9dce3}
+:root.lc-frame .pp-where, :root .pp-where:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d9dce3}
+:root.lc-frame .pp-tile, :root .pp-tile:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d9dce3}
+:root.lc-frame .pp-tile:hover, :root .pp-tile:hover:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .pp-tile:focus-visible, :root .pp-tile:focus-visible:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue-bright, #1f6feb)}
+:root.lc-frame .pp-help-thumb, :root .pp-help-thumb:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d9dce3}
+:root.lc-frame .pp-pin, :root .pp-pin:is([data-lc-lines], [data-lc-lines] *) {border:3px solid var(--c, #1f6feb)}
+:root[data-theme="dark"].lc-frame .pp-photo, :root[data-theme="dark"] .pp-photo:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #474a52}
+:root[data-theme="dark"].lc-frame .pp-today-row, :root[data-theme="dark"] .pp-today-row:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #474a52}
+:root[data-theme="dark"].lc-frame .pp-asklist li, :root[data-theme="dark"] .pp-asklist li:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #474a52}
+:root[data-theme="dark"].lc-frame .pp-guess, :root[data-theme="dark"] .pp-guess:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #474a52}
+:root[data-theme="dark"].lc-frame .pp-cert-opt span, :root[data-theme="dark"] .pp-cert-opt span:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .pp-map, :root[data-theme="dark"] .pp-map:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #474a52}
+:root[data-theme="dark"].lc-frame .pp-ask-side img, :root[data-theme="dark"] .pp-ask-side img:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #474a52}
+:root[data-theme="dark"].lc-frame .pp-where, :root[data-theme="dark"] .pp-where:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #474a52}
+/* journee.css */
+:root.lc-frame .jr-q, :root .jr-q:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #c9d3e0}
+:root.lc-frame .jr-q:hover, :root .jr-q:hover:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .jr-q:focus-visible, :root .jr-q:focus-visible:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue)}
+:root.lc-frame .jr-chip, :root .jr-chip:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid currentColor}
 /* suivi.css */
 :root.lc-frame .sv-map, :root .sv-map:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--sv-line)}
 :root.lc-frame .sv-map-pop, :root .sv-map-pop:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
@@ -3302,6 +3498,34 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .sv-mthumb, :root .sv-mthumb:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--sv-line)}
 :root.lc-frame .sv-mthumb:hover, :root .sv-mthumb:hover:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .sv-mthumb:focus-visible, :root .sv-mthumb:focus-visible:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue-bright)}
 :root[data-theme="dark"].lc-frame .sv-metal, :root[data-theme="dark"] .sv-metal:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+/* photo-courriers.css */
+:root.lc-frame .pa-ph, :root .pa-ph:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
+:root.lc-frame .pa-fbox, :root .pa-fbox:is([data-lc-lines], [data-lc-lines] *) {border:2px dashed #9aa0a6}
+:root.lc-frame .pa-fbox.is-on, :root .pa-fbox.is-on:is([data-lc-lines], [data-lc-lines] *) {border:3px solid var(--blue)}
+:root.lc-frame .pa-fbox.is-known:not(.is-on), :root .pa-fbox.is-known:not(.is-on):is([data-lc-lines], [data-lc-lines] *) {border-color:#2e8b57}
+:root.lc-frame .pa-fbox.is-drawing, :root .pa-fbox.is-drawing:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--blue)}
+:root.lc-frame .pa-ans, :root .pa-ans:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
+:root.lc-frame .pa-crop, :root .pa-crop:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
+:root.lc-frame .cl-read, :root .cl-read:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
+:root.lc-frame .cl-follow, :root .cl-follow:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
+/* sante.css */
+:root.lc-frame .h-sante-epi-list li, :root .h-sante-epi-list li:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line, #e5e7eb)}
+:root.lc-frame .h-sante-epi-list li:last-child, :root .h-sante-epi-list li:last-child:is([data-lc-lines], [data-lc-lines] *) {border-bottom:0}
+:root.lc-frame .h-sante-legend i, :root .h-sante-legend i:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--hs-line)}
+:root.lc-frame .h-sante-legend i.is-hit, :root .h-sante-legend i.is-hit:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--hs-hit)}
+:root.lc-frame .h-sante-legend i.is-empty, :root .h-sante-legend i.is-empty:is([data-lc-lines], [data-lc-lines] *) {border-style:dashed}
+:root.lc-frame .h-sante-side, :root .h-sante-side:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--hs-line)}
+:root.lc-frame .h-sante-pill, :root .h-sante-pill:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--hs-line)}
+:root.lc-frame .h-sante-pill:hover, :root .h-sante-pill:hover:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .h-sante-pill:focus-visible, :root .h-sante-pill:focus-visible:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue-bright, #055dff)}
+/* cousinade.css */
+:root.lc-frame .cous-dot.is-none, :root .cous-dot.is-none:is([data-lc-lines], [data-lc-lines] *) {border:1.5px dashed #8a8f98}
+:root.lc-frame .cous-letter, :root .cous-letter:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cous-line)}
+:root.lc-frame .cous-badges-prev, :root .cous-badges-prev:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cous-line)}
+:root.lc-frame .cous-pres, :root .cous-pres:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--cous-line)}
+:root.lc-frame .cous-pres.is-on, :root .cous-pres.is-on:is([data-lc-lines], [data-lc-lines] *) {border-color:#2e9d5b}
+:root.lc-frame .cous-tablecard, :root .cous-tablecard:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--cous-c, #8a8f98)}
+:root.lc-frame .cous-photo-open, :root .cous-photo-open:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .cous-tile, :root .cous-tile:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--cous-line)}
 /* indicateurs.css */
 :root.lc-frame .ui-badge, :root .ui-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .status-badge, :root .status-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .sosa-star, :root .sosa-star:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .daboville-tag, :root .daboville-tag:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .outside-genealogy-badge, :root .outside-genealogy-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .artist-badge, :root .artist-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .investigation-status, :root .investigation-status:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .entity-date-badge, :root .entity-date-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .h-badge, :root .h-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .h-new-badge, :root .h-new-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .tag-conf-badge, :root .tag-conf-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .grave-status-badge, :root .grave-status-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .grave-condition-badge, :root .grave-condition-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .branch-closed-badge, :root .branch-closed-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ar-badge, :root .ar-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .investigation-item-status-badge, :root .investigation-item-status-badge:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid;border-color:#8a8f99}
 :root.lc-frame .label-chip, :root .label-chip:is([data-lc-lines], [data-lc-lines] *) {border-width:calc(1.5px * var(--lc-frame-k))}
@@ -3438,6 +3662,9 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .xl-bottom, :root .xl-bottom:is([data-lc-lines], [data-lc-lines] *) {border-top:2px solid var(--xl-line)}
 :root.lc-frame .xl-tab, :root .xl-tab:is([data-lc-lines], [data-lc-lines] *) {border:0;border-right:1px solid var(--xl-grid);border-bottom:3px solid transparent}
 :root.lc-frame .xl-tab-add, :root .xl-tab-add:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .xl-where, :root .xl-where:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .xl > .ed-status, :root .xl > .ed-status:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid var(--xl-grid)}
+:root.lc-frame .xl-set-status, :root .xl-set-status:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--xl-grid, #e1e3e8)}
 :root.lc-frame .xl-prev, :root .xl-prev:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--xl-grid, #e1e3e8)}
 :root.lc-frame .xl-prev th, :root .xl-prev th:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .xl-prev td, :root .xl-prev td:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--xl-grid, #e1e3e8)}
 :root.lc-frame .xl-fnlist, :root .xl-fnlist:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--xl-grid, #e1e3e8)}
@@ -3456,12 +3683,80 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .xl-steps li, :root .xl-steps li:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line, #d7dbe2)}
 :root.lc-frame .xl-steps li.is-active, :root .xl-steps li.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:#055dff}
 :root.lc-frame .xl-steps li.is-done, :root .xl-steps li.is-done:is([data-lc-lines], [data-lc-lines] *) {border-color:#9fd3ae}
+:root.lc-frame .xl-pv-table th, :root .xl-pv-table th:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .xl-pv-table td, :root .xl-pv-table td:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #d9dce2)}
+:root.lc-frame .xl-live, :root .xl-live:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--ink, #111)}
 :root[data-theme="dark"].lc-frame .xl-mini td, :root[data-theme="dark"] .xl-mini td:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #484b51}
 :root[data-theme="dark"].lc-frame .xl-back, :root[data-theme="dark"] .xl-back:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1.5px solid #304669}
 :root[data-theme="dark"].lc-frame .xl-baselink, :root[data-theme="dark"] .xl-baselink:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1.5px solid #415845}
 :root[data-theme="dark"].lc-frame .xl-steps li.is-done, :root[data-theme="dark"] .xl-steps li.is-done:is([data-lc-lines], [data-lc-lines] *) {border-color:#3e5b46}
-:root.lc-frame .xl-pv-table th, :root .xl-pv-table th:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .xl-pv-table td, :root .xl-pv-table td:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #d9dce2)}
-:root.lc-frame .xl-live, :root .xl-live:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--ink, #111)}
+/* socface.css */
+:root.lc-frame .sf-hh, :root .sf-hh:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #d6d9df}
+:root.lc-frame .sf-ecart, :root .sf-ecart:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid #e1a500}
+:root.lc-frame .sf-ecart.is-orange, :root .sf-ecart.is-orange:is([data-lc-lines], [data-lc-lines] *) {border-left-color:#d9731a}
+:root.lc-frame .sf-verify-side, :root .sf-verify-side:is([data-lc-lines], [data-lc-lines] *) {border-left:1px solid #e3e5ea}
+:root.lc-frame .sf-rec, :root .sf-rec:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid #e1a500}
+:root.lc-frame .sf-item, :root .sf-item:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #d6d9df}
+:root.lc-frame .h-htr-lx, :root .h-htr-lx:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid #e1a500}
+:root.lc-frame .sf-verify-side, :root .sf-verify-side:is([data-lc-lines], [data-lc-lines] *) {border-left:0;border-top:1px solid #e3e5ea}
+:root[data-theme="dark"].lc-frame .sf-hh, :root[data-theme="dark"] .sf-hh:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .sf-verify-side, :root[data-theme="dark"] .sf-verify-side:is([data-lc-lines], [data-lc-lines] *) {border-left:1px solid #474a52}
+:root[data-theme="dark"].lc-frame .sf-item, :root[data-theme="dark"] .sf-item:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .sf-verify-side, :root[data-theme="dark"] .sf-verify-side:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid #474a52}
+/* archives-en-ligne.css */
+:root.lc-frame .ael-set-row, :root .ael-set-row:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #e6e8ec}
+:root.lc-frame .ael-set-row:last-child, :root .ael-set-row:last-child:is([data-lc-lines], [data-lc-lines] *) {border-bottom:0}
+:root.lc-frame .so-import .k-import-prev, :root .so-import .k-import-prev:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .so-classe, :root .so-classe:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid var(--accent, #2563eb)}
+:root.lc-frame .so-link, :root .so-link:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #d6d9df}
+:root.lc-frame .so-imp-img, :root .so-imp-img:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #d6d9df}
+:root.lc-frame .so-props, :root .so-props:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #d6d9df}
+:root.lc-frame .so-ecart, :root .so-ecart:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid #8fa3c7}
+:root.lc-frame .so-ecart.is-yellow, :root .so-ecart.is-yellow:is([data-lc-lines], [data-lc-lines] *) {border-left-color:#e1a500}
+:root.lc-frame .so-ecart.is-orange, :root .so-ecart.is-orange:is([data-lc-lines], [data-lc-lines] *) {border-left-color:#d9731a}
+:root.lc-frame .so-ecart.is-ok, :root .so-ecart.is-ok:is([data-lc-lines], [data-lc-lines] *) {border-left-color:#2f8f4e}
+:root.lc-frame .so2-respect, :root .so2-respect:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid #6b7280}
+:root.lc-frame .so3-rub, :root .so3-rub:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #d6d9df}
+:root.lc-frame .so4-pop-type, :root .so4-pop-type:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #d6d9df}
+:root.lc-frame .so5-test, :root .so5-test:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #d6d9df}
+:root[data-theme="dark"].lc-frame .ael-set-row, :root[data-theme="dark"] .ael-set-row:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #474b52}
+:root[data-theme="dark"].lc-frame .so-link, :root[data-theme="dark"] .so-link:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .so-imp-img, :root[data-theme="dark"] .so-imp-img:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .so-props, :root[data-theme="dark"] .so-props:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .so3-rub, :root[data-theme="dark"] .so3-rub:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .so4-pop-type, :root[data-theme="dark"] .so4-pop-type:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .so5-test, :root[data-theme="dark"] .so5-test:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+/* semaine.css */
+:root.lc-frame .msr-row, :root .msr-row:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line, #e3e6ea)}
+:root.lc-frame .msr-row:last-child, :root .msr-row:last-child:is([data-lc-lines], [data-lc-lines] *) {border-bottom:0}
+:root.lc-frame .msr-acts .msr-done:hover, :root .msr-acts .msr-done:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:#1e8e3e}
+:root.lc-frame .msr-seg label, :root .msr-seg label:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .msr-cfg-sorts, :root .msr-cfg-sorts:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #e3e6ea)}
+/* ou-chercher.css */
+:root.lc-frame .ouc-row, :root .ouc-row:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line, #e3e6ea)}
+:root.lc-frame .ouc-row:last-child, :root .ouc-row:last-child:is([data-lc-lines], [data-lc-lines] *) {border-bottom:0}
+:root.lc-frame .ouc-fact, :root .ouc-fact:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #e3e6ea)}
+:root.lc-frame .ouc-wall-grid > section, :root .ouc-wall-grid > section:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #e3e6ea)}
+:root.lc-frame .ouc-w-row, :root .ouc-w-row:is([data-lc-lines], [data-lc-lines] *) {border:0;border-bottom:1px solid var(--line, #e3e6ea)}
+/* preuve.css */
+:root.lc-frame .pv-person, :root .pv-person:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #dfe3e8)}
+:root.lc-frame .pv-col, :root .pv-col:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #dfe3e8)}
+:root.lc-frame .pv-col.is-for, :root .pv-col.is-for:is([data-lc-lines], [data-lc-lines] *) {border-top:3px solid var(--pv-proved)}
+:root.lc-frame .pv-col.is-against, :root .pv-col.is-against:is([data-lc-lines], [data-lc-lines] *) {border-top:3px solid var(--pv-refuted)}
+:root.lc-frame .pv-col.is-research, :root .pv-col.is-research:is([data-lc-lines], [data-lc-lines] *) {border-top:3px solid var(--pv-probable)}
+:root.lc-frame .pv-col.is-conflict, :root .pv-col.is-conflict:is([data-lc-lines], [data-lc-lines] *) {border-top:3px solid var(--pv-supposed)}
+:root.lc-frame .pv-item, :root .pv-item:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line, #eceff2)}
+:root.lc-frame .pv-item:last-child, :root .pv-item:last-child:is([data-lc-lines], [data-lc-lines] *) {border-bottom:0}
+:root.lc-frame .pv-fs, :root .pv-fs:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #dfe3e8)}
+:root.lc-frame .pv-choose-btn, :root .pv-choose-btn:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #dfe3e8)}
+:root.lc-frame .pv-choose-btn:hover, :root .pv-choose-btn:hover:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .pv-choose-btn:focus-visible, :root .pv-choose-btn:focus-visible:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue, #1f6fd1)}
+:root.lc-frame .pv-sol, :root .pv-sol:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .pv-w-row, :root .pv-w-row:is([data-lc-lines], [data-lc-lines] *) {border:0;border-bottom:1px solid var(--line, #eceff2)}
+:root.lc-frame .lc-sol-legend, :root .lc-sol-legend:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line, #e3e6ea)}
+:root.lc-frame .lc-sol-key i, :root .lc-sol-key i:is([data-lc-lines], [data-lc-lines] *) {border-top:calc(3px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .lc-sol-key.is-proved i, :root .lc-sol-key.is-proved i:is([data-lc-lines], [data-lc-lines] *) {border-top-width:calc(4px * var(--lc-frame-k))}
+:root.lc-frame .lc-sol-key.is-supposed i, :root .lc-sol-key.is-supposed i:is([data-lc-lines], [data-lc-lines] *) {border-top-style:dashed}
+:root.lc-frame .lc-sol-key.is-unsourced i, :root .lc-sol-key.is-unsourced i:is([data-lc-lines], [data-lc-lines] *) {border-top-style:dotted;border-top-width:calc(2px * var(--lc-frame-k))}
+:root.lc-frame .lc-sol-key.is-refuted i, :root .lc-sol-key.is-refuted i:is([data-lc-lines], [data-lc-lines] *) {border-top-style:dashed}
 /* calculette.css */
 :root.lc-frame .cm-win, :root .cm-win:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--cm-line)}
 :root.lc-frame .cm-head, :root .cm-head:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1.5px solid var(--cm-soft)}
@@ -3504,6 +3799,41 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .cm-canvas-wrap, :root .cm-canvas-wrap:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--cm-line)}
 :root.lc-frame .screen-tool.cm-entry.is-on, :root .screen-tool.cm-entry.is-on:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue-bright, #055dff)}
 :root.lc-frame .cm-win.is-phone, :root .cm-win.is-phone:is([data-lc-lines], [data-lc-lines] *) {border-width:calc(2px * var(--lc-frame-k)) 0 0}
+/* lecture-autrefois.css */
+:root.lc-frame .la-dict, :root .la-dict:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid var(--line-color, #d6d6d6)}
+:root.lc-frame .la-row, :root .la-row:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line-color, #d6d6d6)}
+:root.lc-frame .la-letter, :root .la-letter:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color, #d6d6d6)}
+:root.lc-frame .la-exo-card, :root .la-exo-card:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color, #d6d6d6)}
+:root.lc-frame .la-exo-card:hover, :root .la-exo-card:hover:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .la-exo-card:focus-visible, :root .la-exo-card:focus-visible:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue-bright, #055dff)}
+:root.lc-frame .la-old, :root .la-old:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #d9c9a3}
+:root.lc-frame .la-w.is-manque, :root .la-w.is-manque:is([data-lc-lines], [data-lc-lines] *) {border:1.5px dashed #d9a300}
+:root.lc-frame .af-field input.is-invalid, :root .af-field input.is-invalid:is([data-lc-lines], [data-lc-lines] *) {border-color:#c4122a}
+:root.lc-frame .af-big, :root .af-big:is([data-lc-lines], [data-lc-lines] *) {border-left:4px solid var(--blue-bright, #055dff)}
+:root.lc-frame .af-cards > div, :root .af-cards > div:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color, #d6d6d6)}
+:root.lc-frame .af-table td, :root .af-table td:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line-color, #d6d6d6)}
+:root.lc-frame .ui-date-help .ui-date-more, :root .ui-date-help .ui-date-more:is([data-lc-lines], [data-lc-lines] *) {border:1px solid currentColor}
+:root.lc-frame .la-intro, :root .la-intro:is([data-lc-lines], [data-lc-lines] *) {border-left:4px solid var(--blue-bright, #055dff)}
+:root.lc-frame .la-num, :root .la-num:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color, #d6d6d6)}
+:root.lc-frame .la-num-field input, :root .la-num-field input:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--ink, #080808)}
+:root[data-theme="dark"].lc-frame .la-old, :root[data-theme="dark"] .la-old:is([data-lc-lines], [data-lc-lines] *) {border-color:#5a4a2c}
+:root[data-theme="dark"].lc-frame .la-w.is-manque, :root[data-theme="dark"] .la-w.is-manque:is([data-lc-lines], [data-lc-lines] *) {border-color:#b08a1d}
+:root[data-theme="dark"].lc-frame .af-field input.is-invalid, :root[data-theme="dark"] .af-field input.is-invalid:is([data-lc-lines], [data-lc-lines] *) {border-color:#ff6b7e}
+:root.lc-frame .af-field input, :root .af-field input:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .af-field select, :root .af-field select:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--ink, #080808)}
+:root[data-theme="dark"].lc-frame .la-letter, :root[data-theme="dark"] .la-letter:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .la-exo-card, :root[data-theme="dark"] .la-exo-card:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .la-num, :root[data-theme="dark"] .la-num:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .la-num-field input, :root[data-theme="dark"] .la-num-field input:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .la-intro, :root[data-theme="dark"] .la-intro:is([data-lc-lines], [data-lc-lines] *) {border-left-color:#5b9bff}
+:root.lc-frame .la-filters .la-langs .la-langs-more, :root .la-filters .la-langs .la-langs-more:is([data-lc-lines], [data-lc-lines] *) {border-style:dashed}
+/* prenoms-france.css */
+:root.lc-frame .pf-tile, :root .pf-tile:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #e3e6ea)}
+:root.lc-frame .pf-block, :root .pf-block:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #e3e6ea)}
+/* visite.css */
+:root.lc-frame .vg-bubble, :root .vg-bubble:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--vg-ink)}
+:root.lc-frame .vg-arrow, :root .vg-arrow:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--vg-ink)}
+:root.lc-frame .vg-bubble[data-side="below"] .vg-arrow, :root .vg-bubble[data-side="below"] .vg-arrow:is([data-lc-lines], [data-lc-lines] *) {border-right:0;border-bottom:0}
+:root.lc-frame .vg-bubble[data-side="above"] .vg-arrow, :root .vg-bubble[data-side="above"] .vg-arrow:is([data-lc-lines], [data-lc-lines] *) {border-left:0;border-top:0}
+:root.lc-frame .vg-bubble[data-side="right"] .vg-arrow, :root .vg-bubble[data-side="right"] .vg-arrow:is([data-lc-lines], [data-lc-lines] *) {border-top:0;border-right:0}
+:root.lc-frame .vg-bubble[data-side="left"] .vg-arrow, :root .vg-bubble[data-side="left"] .vg-arrow:is([data-lc-lines], [data-lc-lines] *) {border-bottom:0;border-left:0}
+:root.lc-frame .vg-skip, :root .vg-skip:is([data-lc-lines], [data-lc-lines] *) {border:0}
 /* cadastre.css */
 :root.lc-frame .cad-map, :root .cad-map:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
 :root.lc-frame .cad-map-zoom button, :root .cad-map-zoom button:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
@@ -3519,6 +3849,44 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root[data-theme="dark"].lc-frame .cad-find, :root[data-theme="dark"] .cad-find:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .cad-daterow, :root[data-theme="dark"] .cad-daterow:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .cad-hit, :root[data-theme="dark"] .cad-hit:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .cad-pop, :root[data-theme="dark"] .cad-pop:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .cad-mthumb, :root[data-theme="dark"] .cad-mthumb:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .cad-secbtn, :root[data-theme="dark"] .cad-secbtn:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .cad-map-zoom button, :root[data-theme="dark"] .cad-map-zoom button:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .cad-map-tog, :root[data-theme="dark"] .cad-map-tog:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .cad-dl-row, :root[data-theme="dark"] .cad-dl-row:is([data-lc-lines], [data-lc-lines] *) {border-bottom-color:var(--lc-frame-color)}
+/* successions.css */
+:root.lc-frame .sc-mthumb, :root .sc-mthumb:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .sc-chip, :root .sc-chip:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .sc-chip.is-free, :root .sc-chip.is-free:is([data-lc-lines], [data-lc-lines] *) {border-style:dashed}
+:root.lc-frame .sc-step-card, :root .sc-step-card:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .sc-good, :root .sc-good:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .sc-goods-table tr, :root .sc-goods-table tr:is([data-lc-lines], [data-lc-lines] *) {border-bottom:var(--line)}
+:root.lc-frame .sc-goods-table td, :root .sc-goods-table td:is([data-lc-lines], [data-lc-lines] *) {border:0}
+/* cartes-outils.css */
+:root.lc-frame .cpo-ctl .button.is-active, :root .cpo-ctl .button.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue-bright)}
+:root.lc-frame .cpo-phrase, :root .cpo-phrase:is([data-lc-lines], [data-lc-lines] *) {border-left:4px solid var(--blue-bright)}
+:root.lc-frame .cpo-settings, :root .cpo-settings:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color)}
+:root.lc-frame .cpo-legs li, :root .cpo-legs li:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line-color)}
+:root.lc-frame .cpo-style, :root .cpo-style:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color)}
+:root.lc-frame .cpo-style.is-active, :root .cpo-style.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue-bright)}
+:root.lc-frame .cpo-style i, :root .cpo-style i:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid}
+:root.lc-frame .cpo-relief-view, :root .cpo-relief-view:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color)}
+:root.lc-frame .cpo-pin-label, :root .cpo-pin-label:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #333}
+:root.lc-frame .cpo-panel, :root .cpo-panel:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .cpo-layer, :root .cpo-layer:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid transparent}
+:root.lc-frame .cpo-layer.is-cur, :root .cpo-layer.is-cur:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue-bright)}
+:root.lc-frame .cpo-swatch, :root .cpo-swatch:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .cpo-layer-name, :root .cpo-layer-name:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .cpo-pop, :root .cpo-pop:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+/* cartes-perso.css */
+:root.lc-frame .mcp-thumb i, :root .mcp-thumb i:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--card-bg, #fff)}
+:root.lc-frame .mcp-new-kinds, :root .mcp-new-kinds:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line, #d0d4da)}
+:root.lc-frame .mcp-legend, :root .mcp-legend:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .mcp-panel, :root .mcp-panel:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .mcp-phead, :root .mcp-phead:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1.5px solid var(--line, #d0d4da)}
+:root.lc-frame .mcp-sec, :root .mcp-sec:is([data-lc-lines], [data-lc-lines] *) {border-top:1.5px solid var(--line, #d0d4da)}
+:root.lc-frame .mcp-layer, :root .mcp-layer:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line, #d0d4da)}
+:root.lc-frame .mcp-layer.is-open, :root .mcp-layer.is-open:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue-bright, #2563c9)}
+:root.lc-frame .mcp-lname, :root .mcp-lname:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .mcp-swatch, :root .mcp-swatch:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .mcp-lbody, :root .mcp-lbody:is([data-lc-lines], [data-lc-lines] *) {border-top:1.5px solid var(--line, #d0d4da)}
+:root.lc-frame .mcp-pop, :root .mcp-pop:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .mcp-pop-it img, :root .mcp-pop-it img:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #d0d4da)}
 /* traitement-texte.css */
 :root.lc-frame dialog.modal.wp-dlg.is-full, :root dialog.modal.wp-dlg.is-full:is([data-lc-lines], [data-lc-lines] *) {border:0}
 :root.lc-frame .wp-menus summary, :root .wp-menus summary:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid transparent}
@@ -3667,3 +4035,40 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .h-mt > .ed-status, :root .h-mt > .ed-status:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .h-avx-body > .ed-status, :root .h-avx-body > .ed-status:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--ui-line)}
 :root.lc-frame .ed-status .kn-status-in, :root .ed-status .kn-status-in:is([data-lc-lines], [data-lc-lines] *) {border:0}
 :root.lc-frame .h-mt > .h-mt-rail, :root .h-mt > .h-mt-rail:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .h-avx-body > .h-au-rail, :root .h-avx-body > .h-au-rail:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--ui-line) !important}
+/* versions.css */
+:root.lc-frame .ui-vers-list, :root .ui-vers-list:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .ui-vers-grp, :root .ui-vers-grp:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line-color)}
+:root.lc-frame .ui-vers-row, :root .ui-vers-row:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line-color)}
+:root.lc-frame .ui-vers-pane, :root .ui-vers-pane:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .ui-vers-ph, :root .ui-vers-ph:is([data-lc-lines], [data-lc-lines] *) {border-bottom:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .ui-vers-pa, :root .ui-vers-pa:is([data-lc-lines], [data-lc-lines] *) {border-top:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .ui-vers-frame, :root .ui-vers-frame:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
+:root.lc-frame .ui-vers-cmp, :root .ui-vers-cmp:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .ui-vers-two, :root .ui-vers-two:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .ui-vers-two > div + div, :root .ui-vers-two > div + div:is([data-lc-lines], [data-lc-lines] *) {border-left:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .ui-vers ins, :root .ui-vers ins:is([data-lc-lines], [data-lc-lines] *) {border-bottom:2px solid #1aa34a}
+:root.lc-frame .ui-vers-slide, :root .ui-vers-slide:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .ui-vers-cut, :root .ui-vers-cut:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid var(--blue-bright)}
+:root.lc-frame .ui-vers-cut i, :root .ui-vers-cut i:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #fff}
+:root.lc-frame .ui-vers-abbar .is-on, :root .ui-vers-abbar .is-on:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue-bright)}
+:root.lc-frame .ui-vers-two > div + div, :root .ui-vers-two > div + div:is([data-lc-lines], [data-lc-lines] *) {border-left:0;border-top:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .ui-vers ins, :root[data-theme="dark"] .ui-vers ins:is([data-lc-lines], [data-lc-lines] *) {border-bottom-color:#2fbf63}
+:root[data-theme="dark"].lc-frame .ui-vers-frame, :root[data-theme="dark"] .ui-vers-frame:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .ui-vers-cut i, :root[data-theme="dark"] .ui-vers-cut i:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+/* premier.css */
+:root.lc-frame .pl-other, :root .pl-other:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .pl-alt-what, :root .pl-alt-what:is([data-lc-lines], [data-lc-lines] *) {border-top:1px dashed var(--line-color)}
+:root.lc-frame .pl-fold, :root .pl-fold:is([data-lc-lines], [data-lc-lines] *) {border-top:var(--line)}
+:root.lc-frame .pl-uz, :root .pl-uz:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .pl-uz .pl-ui, :root .pl-uz .pl-ui:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #c9ccd3}
+:root.lc-frame .pl-uz small, :root .pl-uz small:is([data-lc-lines], [data-lc-lines] *) {border-top:1px dashed #d5d8de}
+:root.lc-frame .pl-uz.is-on, :root .pl-uz.is-on:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue)}
+:root.lc-frame .pl-uz.is-on .pl-ui, :root .pl-uz.is-on .pl-ui:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue)}
+:root.lc-frame .pl-uz .pl-rk, :root .pl-uz .pl-rk:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .pl-uz.is-on .pl-rk, :root .pl-uz.is-on .pl-rk:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue)}
+:root.lc-frame .pl-lnk, :root .pl-lnk:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .pl-start, :root .pl-start:is([data-lc-lines], [data-lc-lines] *) {border-top:1px dashed var(--line-color)}
+:root.lc-frame #example-banner, :root #example-banner:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1.5px solid #e1a500}
+:root.lc-frame .pl-urow, :root .pl-urow:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line-color)}
+:root[data-theme="dark"].lc-frame .pl-uz .pl-ui, :root[data-theme="dark"] .pl-uz .pl-ui:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .pl-uz small, :root[data-theme="dark"] .pl-uz small:is([data-lc-lines], [data-lc-lines] *) {border-top:1px dashed #484b51}

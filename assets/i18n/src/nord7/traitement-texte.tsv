@@ -1,0 +1,782 @@
+fr ¦ is
+menu|Affichage ¦ Skoða
+Insertion ¦ Setja inn
+Format ¦ Snið
+Tableau ¦ Tafla
+Champ (page, nombre de pages, titre, auteur)… ¦ Reitur (síða, fjöldi síðna, titill, höfundur)…
+N° de page ¦ Blaðsíðunr.
+(celle de Normal) ¦ (sú úr Normal)
+(titre vide) ¦ (auð fyrirsögn)
+* = des lettres, ? = une lettre, # = un chiffre ¦ * = stafir, ? = einn stafur, # = einn tölustafur
+.lcnda-texte (tout est gardé) ¦ .lcnda-texte (allt er geymt)
+1 (retirer les colonnes) ¦ 1 (fjarlægja dálkana)
+1. Liste numérotée ¦ 1. Númeraður listi
+1re ligne ¦ 1. lína
+1re ligne (négatif : en saillie) ¦ 1. lína (neikvætt: hangandi)
+60 onglets au plus. ¦ Í mesta lagi 60 flipar.
+A Couleur… ¦ A Litur…
+Accentuation ¦ Áhersla
+Adresse ¦ Heimilisfang
+Afficher : nom, dates, naissance… ¦ Sýna: nafn, dagsetningar, fæðingu…
+Ajoute au moins une personne. ¦ Bættu við að minnsta kosti einum einstaklingi.
+Ajoute d’abord des champs : Insertion → « 📨 Champ de fusion » (Prénom, Nom, Date de naissance…). ¦ Bættu fyrst við reitum: Setja inn → „📨 Samkeyrslureitur“ (Fornafn, Eftirnafn, Fæðingardagur…).
+Ajouter la citation ¦ Bæta tilvitnuninni við
+Ajouter les personnes d’une liste ¦ Bæta við einstaklingum af lista
+Ajouter une légende ¦ Bæta við myndatexta
+Album photo (21,6 × 28 cm) ¦ Myndaalbúm (21,6 × 28 cm)
+Alignement ¦ Jöfnun
+Aligner à droite ¦ Jafna til hægri
+Aligner à gauche ¦ Jafna til vinstri
+Aligné sur le texte (seul sur sa ligne) ¦ Í línu við texta (ein á sinni línu)
+Allemand ¦ Þýska
+Aller ¦ Fara
+Aller à la page ¦ Fara á síðu
+Anglais ¦ Enska
+Années (1850 – 1920) ¦ Ár (1850 – 1920)
+Aperçu avec {name} : ¦ Forskoðun með {name}:
+Apostrophe typographique ’ ¦ Prentfræðileg úrfellingarkomma ’
+Au moins une ligne. ¦ Að minnsta kosti ein lína.
+Aucun champ à mettre à jour. ¦ Enginn reitur til að uppfæra.
+Aucune modification suivie dans le document. ¦ Engar raktar breytingar í skjalinu.
+Aucune modification suivie. ¦ Engar raktar breytingar.
+Aucune modification suivie. « ✍ Suivre les modifications » garde la trace de chaque ajout et de chaque suppression. ¦ Engar raktar breytingar. „✍ Rekja breytingar“ heldur utan um hverja viðbót og hverja eyðingu.
+Augmenter le retrait ¦ Auka inndrátt
+Auteur ¦ Höfundur
+Autre ¦ Annað
+Avis de recherche (lettre aux cousins, remplie) ¦ Fyrirspurn (bréf til frændfólks, útfyllt)
+Barre d’outils ¦ Tækjastika
+Barre d’outils en ruban (avec les noms) ¦ Borðatækjastika (með heitum)
+Barre d’outils · {what} ¦ Tækjastika · {what}
+Barré ¦ Yfirstrikað
+Bas ¦ Neðst
+Biographie ajoutée (écrite par l’app d’après la fiche) : modifie-la librement. ¦ Æviágrip bætt við (skrifað af appinu út frá spjaldinu): breyttu því að vild.
+Bordure et trame ¦ Jaðar og skygging
+Bordure et trame… ¦ Jaðar og skygging…
+Bordures ¦ Jaðrar
+Bordures du tableau ¦ Jaðrar töflunnar
+Breton ¦ Bretónska
+COMPARER ¦ BERA SAMAN
+Cacher dans le texte ¦ Fela í textanum
+Caractères (espaces compris) ¦ Stafir (með bilum)
+Caractères (sans les espaces) ¦ Stafir (án bila)
+Caractères spéciaux ¦ Sértákn
+Carré (le texte autour) ¦ Ferningur (textinn í kring)
+Carré 15 × 15 cm ¦ Ferningur 15 × 15 cm
+Carré 21 × 21 cm ¦ Ferningur 21 × 21 cm
+Carré 30 × 30 cm ¦ Ferningur 30 × 30 cm
+Carte de visite ¦ Nafnspjald
+Cartes et livres ¦ Kort og bækur
+Carton DL (faire-part) ¦ DL-kort (tilkynning)
+Case séparée ¦ Hólfi skipt
+Cases fusionnées ¦ Hólf sameinuð
+Casse ¦ Há-/lágstafir
+Ce diagramme est vide. ¦ Þessi skýringarmynd er auð.
+Ce document n’a pas encore de champ de fusion (Insertion → « 📨 Champ de fusion »). Insérer d’abord une petite fiche d’identité à l’endroit du curseur ? ¦ Þetta skjal hefur engan samkeyrslureit enn (Setja inn → „📨 Samkeyrslureitur“). Setja fyrst inn lítið auðkennisspjald þar sem bendillinn er?
+Ce livre n’a pas de styles de paragraphe. ¦ Þessi bók hefur engin málsgreinastíla.
+Ce passage a changé : relance la relecture. ¦ Þessi kafli hefur breyst: keyrðu prófarkalesturinn aftur.
+Ce que montre l’image, en une phrase (ex. « Mariage de Jean et Marie devant l’église, 1923 ») ¦ Það sem myndin sýnir, í einni setningu (t.d. „Brúðkaup Jean og Marie fyrir framan kirkjuna, 1923“)
+Ce texte suit la fiche : il se met à jour à l’ouverture du document (Outils → Mettre à jour les champs). ¦ Þessi texti fylgir spjaldinu: hann uppfærist þegar skjalið er opnað (Verkfæri → Uppfæra reiti).
+Centrer ¦ Miðja
+Certaines images, trop lourdes, n’ont pas été reprises. ¦ Sumar myndir, of stórar, voru ekki teknar með.
+Cette case n’est pas fusionnée. ¦ Þetta hólf er ekki sameinað.
+Cette feuille est vide. ¦ Þetta blað er autt.
+Cette image n’a pas de fichier. ¦ Þessi mynd hefur enga skrá.
+Champ ¦ Reitur
+Changer l’image ¦ Skipta um mynd
+Changer l’image… ¦ Skipta um mynd…
+Chaque Mot ¦ Hvert Orð
+Chaque Mot Avec Une Majuscule ¦ Hvert Orð Með Stórum Staf
+Cherche un mot avec 🔍 : chaque endroit trouvé s’affiche ici. ¦ Leitaðu að orði með 🔍: hver staður sem finnst birtist hér.
+Chercher… (un mot, un nom) ¦ Leita… (orð, nafn)
+Choisir un classeur du Tableur ¦ Velja vinnubók úr Töflureikninum
+Choisir un média (lien) ¦ Velja miðil (tengil)
+Choisis d’abord du texte. ¦ Veldu fyrst texta.
+Choisis d’abord le texte à changer. ¦ Veldu fyrst textann sem á að breyta.
+Choisis le passage à commenter. ¦ Veldu kaflann sem á að gera athugasemd við.
+Choisis les paragraphes à mettre en colonnes. ¦ Veldu málsgreinarnar sem á að setja í dálka.
+Choisis un mot (double-clic) ou mets le curseur dedans, puis 🔁 Synonymes. ¦ Veldu orð (tvísmelltu) eða settu bendilinn í það, svo 🔁 Samheiti.
+Choisis un rectangle de cases (sans morceau d’une autre fusion). ¦ Veldu ferhyrning af hólfum (án hluta af annarri sameiningu).
+Classique ¦ Sígilt
+Classique (à la française) ¦ Sígilt (að frönskum hætti)
+Clic sur un mot : il remplace « {word} » (↶ pour revenir). ¦ Smelltu á orð: það kemur í stað „{word}“ (↶ til að fara til baka).
+Clique pour l’ajouter au texte (la fenêtre reste ouverte). ¦ Smelltu til að bæta því við textann (glugginn helst opinn).
+Coche deux versions (ou « Maintenant ») pour les comparer. ¦ Hakaðu við tvær útgáfur (eða „Núna“) til að bera þær saman.
+Coller depuis Word ou le web ¦ Líma úr Word eða af vefnum
+Coller sans la mise en forme ¦ Líma án sniðs
+Colonne ajoutée ¦ Dálki bætt við
+Colonne supprimée ¦ Dálki eytt
+Commande inconnue : {cmd} ¦ Óþekkt skipun: {cmd}
+Commencer sur une nouvelle page ¦ Byrja á nýrri síðu
+Commentaire supprimé ¦ Athugasemd eytt
+Commentaires ¦ Athugasemdir
+Commentaires (panneau) ¦ Athugasemdir (spjald)
+Commenter ¦ Gera athugasemd
+Compte rendu de visite ¦ Heimsóknarskýrsla
+Conjoint ¦ Maki
+Copie enregistrée : « {name} ». ¦ Afrit vistað: „{name}“.
+Copie impossible : {error} ¦ Ekki tókst að afrita: {error}
+Copie rangée dans les médias ({format}). ¦ Afrit geymt í miðlunum ({format}).
+Copie « {name} » enregistrée. ¦ Afritið „{name}“ vistað.
+Corriger ¦ Laga
+Couleur du texte ¦ Litur texta
+Couleur du texte… ¦ Litur texta…
+Couleur et surlignage (C2) ¦ Litur og yfirstrikun (C2)
+Couper ici ¦ Brjóta hér
+Créer le lien ¦ Búa til tengilinn
+Créer le style ¦ Búa til stílinn
+Créer le tableau ¦ Búa til töfluna
+Créer les copies ¦ Búa til afritin
+Cyrillique ¦ Kýrillískt
+Dans la sélection : mots ¦ Í valinu: orð
+Dans le texte, entre parenthèses ¦ Í textanum, innan sviga
+Date (mise à jour à chaque ouverture) ¦ Dagsetning (uppfærð í hvert sinn sem opnað er)
+Date du jour ¦ Dagsetning dagsins
+Date du mariage ¦ Brúðkaupsdagur
+Demande d’acte (remplie avec une fiche) ¦ Beiðni um skjal (útfyllt með spjaldi)
+Demande d’acte d’état civil ¦ Beiðni um skjal úr þjóðskrá
+Design ¦ Hönnun
+Diminuer le retrait ¦ Minnka inndrátt
+Document ¦ Skjal
+Document importé ¦ Skjal flutt inn
+Document modifié ailleurs ¦ Skjali breytt annars staðar
+Document « {name} » importé ({words}) ¦ Skjalið „{name}“ flutt inn ({words})
+Donne un nom au style. ¦ Gefðu stílnum heiti.
+Double (2) ¦ Tvöfalt (2)
+Double-clic : modifier le pied de page ¦ Tvísmelltu: breyta síðufæti
+Double-clic : modifier l’en-tête ¦ Tvísmelltu: breyta síðuhaus
+Double-clic : renommer · clic droit : plus ¦ Tvísmella: endurnefna · hægrismella: meira
+Droite ¦ Hægri
+Déplacer à droite ¦ Færa til hægri
+Déplacer à gauche ¦ Færa til vinstri
+D’après le paragraphe du curseur : change ce que tu veux, puis il sera proposé dans la liste des styles. ¦ Út frá málsgreininni við bendilinn: breyttu því sem þú vilt, svo verður hann í boði í stílalistanum.
+Effacer la mise en forme ¦ Hreinsa snið
+Elle sert à l’orthographe (mots soulignés en rouge, corrections au clic droit) et à la lecture à voix haute. ¦ Hún er notuð fyrir stafsetningu (orð undirstrikuð með rauðu, leiðréttingar með hægrismelli) og upplestur.
+En note de bas de page ¦ Sem neðanmálsgrein
+En note de fin ¦ Sem aftanmálsgrein
+En-tête (en haut de chaque page) ¦ Síðuhaus (efst á hverri síðu)
+En-tête de la première page ¦ Síðuhaus fyrstu síðu
+En-tête et pied de page ¦ Síðuhaus og síðufótur
+En-tête et pied de page… ¦ Síðuhaus og síðufótur…
+En-tête et pied… ¦ Haus og fótur…
+Enregistre d’abord le document (💾) : ses versions seront gardées avec lui. ¦ Vistaðu fyrst skjalið (💾): útgáfur þess verða geymdar með því.
+Enregistrer comme modèle ¦ Vista sem sniðmát
+Enregistrer comme modèle… ¦ Vista sem sniðmát…
+Enregistrer comme nouvelle version ¦ Vista sem nýja útgáfu
+Enregistrer tout seul ¦ Vista sjálfkrafa
+Enregistrer une copie ¦ Vista afrit
+Envoi des images indisponible. ¦ Upphleðsla mynda ekki tiltæk.
+Envoyer ¦ Senda
+Envoyer vers la mise en page… ¦ Senda í umbrot…
+Espace après ¦ Bil á eftir
+Espace après le paragraphe ¦ Bil á eftir málsgrein
+Espace avant ¦ Bil á undan
+Espace avant le paragraphe ¦ Bil á undan málsgrein
+Espace fine avant ; ! ? ¦ Mjótt bil á undan ; ! ? (frönsk regla)
+Espace insécable avant les deux-points ¦ Óslítanlegt bil á undan tvípunkti (frönsk regla)
+Espaces en trop ¦ Auka bil
+Espagnol ¦ Spænska
+Et {n} de plus (« Tout corriger » les prend aussi). ¦ Og {n} í viðbót („Laga allt“ tekur þau líka).
+Exporté : {name} ¦ Flutt út: {name}
+Exposant ¦ Háletur
+Expressions simples ¦ Einföld mynstur
+FORMAT ¦ SNIÐ
+Famille et vie ¦ Fjölskylda og líf
+Feuille trop grande pour un document (plus de 20 000 cases) : choisis une plage plus petite dans le Tableur. ¦ Blaðið er of stórt fyrir skjal (meira en 20 000 hólf): veldu minna svið í Töflureikninum.
+Fiche d’identité d’un ancêtre (remplie) ¦ Auðkennisspjald forföður (útfyllt)
+Fiche ouverte derrière le document (ferme-le ou réduis-le pour la voir). ¦ Spjaldið opnað fyrir aftan skjalið (lokaðu því eða minnkaðu til að sjá það).
+Filigrane ¦ Vatnsmerki
+Garder avec le paragraphe suivant ¦ Halda með næstu málsgrein
+Garder avec le suivant ¦ Halda með næstu
+Garder la mise en forme (nettoyée) ¦ Halda sniðinu (hreinsuðu)
+Garder ma version ¦ Halda minni útgáfu
+Gauche ¦ Vinstri
+Glisse la souris d’une case à l’autre pour en choisir plusieurs, puis « Fusionner ». ¦ Dragðu músina frá einu hólfi til annars til að velja mörg, svo „Sameina“.
+Gras ¦ Feitletrað
+Gras, italique… ¦ Feitletrað, skáletrað…
+Grec ¦ Gríska
+Groupe de caractères ¦ Stafaflokkur
+Guillemets français « » ¦ Franskar gæsalappir « »
+Haut ¦ Efst
+Hauteur ¦ Hæð
+Histoire d’une maison ou d’un village ¦ Saga húss eða þorps
+IMAGE ¦ MYND
+Image ¦ Mynd
+Image ajoutée (et rangée dans les médias). ¦ Mynd bætt við (og geymd í miðlunum).
+Image choisie : tire un coin pour la taille, clic droit pour l’habillage, ⌫ pour la supprimer. ¦ Mynd valin: dragðu horn til að breyta stærð, hægrismelltu fyrir textaflæði, ⌫ til að eyða henni.
+Image posée : clic pour la taille, clic droit pour l’habillage (carré, haut et bas) et la légende. ¦ Mynd sett inn: smelltu fyrir stærðina, hægrismelltu fyrir textaflæði (ferningur, fyrir ofan og neðan) og myndatexta.
+Image rangée dans les médias… ¦ Geymi myndina í miðlunum…
+Image sans description (lue à voix haute aux personnes qui ne voient pas) ¦ Mynd án lýsingar (lesin upphátt fyrir þá sem sjá ekki)
+Image supprimée ¦ Mynd eytt
+Impossible d’enregistrer : {error} ¦ Ekki tókst að vista: {error}
+Indice ¦ Lágletur
+Insérer la fiche d’identité ¦ Setja inn auðkennisspjaldið
+Interligne ¦ Línubil
+Interligne et espacement ¦ Línubil og bil milli málsgreina
+Interligne {n} ¦ Línubil {n}
+Italien ¦ Ítalska
+Italique ¦ Skáletrað
+Jeu de styles ¦ Stílasett
+Jeu de styles des nouveaux documents ¦ Stílasett nýrra skjala
+Jeu de styles « {name} » ¦ Stílasettið „{name}“
+Jeu de styles… ¦ Stílasett…
+Justifier ¦ Jafna báðum megin
+Justifié ¦ Jafnað báðum megin
+La bibliographie (Insertion → 📚) reprend toute seule les sources citées. ¦ Heimildaskráin (Setja inn → 📚) tekur sjálf með heimildirnar sem vitnað er í.
+La biographie de qui ? ¦ Æviágrip hvers?
+La demande d’acte pour qui ? ¦ Beiðni um skjal fyrir hvern?
+La fenêtre des images n’est pas chargée. ¦ Myndaglugginn er ekki hlaðinn.
+La fenêtre des versions n’est pas chargée. ¦ Útgáfuglugginn er ekki hlaðinn.
+La fiche de qui ? ¦ Spjald hvers?
+La lecture à voix haute n’existe pas dans ce navigateur. ¦ Upplestur er ekki til í þessum vafra.
+La naissance : date et lieu ¦ Fæðingin: dagsetning og staður
+La première ligne est répétée en haut de chaque page ¦ Fyrsta línan er endurtekin efst á hverri síðu
+La suite du document commence sur une nouvelle page, avec son propre format : par exemple un grand tableau ou un arbre en paysage, puis on revient en portrait. ¦ Framhald skjalsins byrjar á nýrri síðu, með sínu eigin sniði: til dæmis stór tafla eða tré í langsniði, og svo aftur í skammsnið.
+La touche Tab avance jusqu’au prochain arrêt. Dans un tableau, Tab passe à la case suivante ; dans une liste, elle décale d’un niveau. ¦ Tab-lykillinn færir að næsta stoppi. Í töflu fer Tab í næsta hólf; í lista færir hann um eitt stig.
+La vérification n’est pas chargée. ¦ Yfirferðin er ekki hlaðin.
+Langue ¦ Tungumál
+Langue des nouveaux documents ¦ Tungumál nýrra skjala
+Langue du document (orthographe, lecture à voix haute) ¦ Tungumál skjalsins (stafsetning, upplestur)
+Largeur ¦ Breidd
+Latin ¦ Latína
+Le décès : date et lieu ¦ Andlátið: dagsetning og staður
+Le livre dont reprendre les styles ¦ Bókin sem stílarnir eru teknir úr
+Le mot entier seulement ¦ Aðeins heilt orð
+Le mot tel qu’il apparaîtra dans l’index : ¦ Orðið eins og það birtist í atriðaskránni:
+Le moteur du tableur n’est pas chargé. ¦ Vél töflureiknisins er ekki hlaðin.
+Le nom (lien vers la fiche) ¦ Nafnið (tengill á spjaldið)
+Le nom de la copie : ¦ Heiti afritsins:
+Le nom du modèle (le texte reste : vide-le avant si tu veux un modèle vierge) : ¦ Heiti sniðmátsins (textinn helst: tæmdu hann fyrst ef þú vilt autt sniðmát):
+Le nom du nouvel onglet ¦ Heiti nýja flipans
+Le nom et les années (1850 – 1920) ¦ Nafnið og árin (1850 – 1920)
+Le nom, la naissance et le décès ¦ Nafnið, fæðing og andlát
+Le petit arbre de qui ? ¦ Litla tré hvers?
+Le récit de qui ? ¦ Frásögn hvers?
+Le texte devient des pages d’un livre (Mise en page) : les titres 1 deviennent des chapitres, les images des pages d’images avec leur légende, les notes une partie « Notes » à la fin. Ton document reste tel quel ici. ¦ Textinn verður að síðum í bók (Umbrot): fyrirsagnir 1 verða kaflar, myndir verða myndasíður með myndatexta, athugasemdir að hlutanum „Athugasemdir“ í lokin. Skjalið þitt helst óbreytt hér.
+Le texte seul ¦ Aðeins textinn
+Le tri ne marche pas avec des cases fusionnées : sépare-les d’abord. ¦ Röðun virkar ekki með sameinuðum hólfum: aðskildu þau fyrst.
+Lecture arrêtée. ¦ Upplestur stöðvaður.
+Legal US ¦ US Legal
+Les champs « » prennent les valeurs d’une fiche : Fichier → « 👤 Remplir avec une fiche… », ou une copie par personne avec Outils → « 📨 Publipostage… ». ¦ Reitirnir „“ taka gildi af spjaldi: Skrá → „👤 Fylla út með spjaldi…“, eða eitt afrit á hvern einstakling með Verkfæri → „📨 Samkeyrsla…“.
+Les changements faits depuis le dernier enregistrement seront perdus. ¦ Breytingar sem gerðar voru frá síðustu vistun tapast.
+Les dates et les lieux écrits à côté d’un nom de la base sont comparés à sa fiche (naissance, baptême, mariage, décès, inhumation, âges, numéros Sosa). Rien n’est changé tout seul. ¦ Dagsetningar og staðir sem skrifuð eru við hlið nafns úr gagnagrunninum eru borin saman við spjald þess (fæðing, skírn, hjónaband, andlát, greftrun, aldur, Sosa-númer). Engu er breytt sjálfkrafa.
+Les macros du fichier sont ignorées (elles ne sont jamais lancées). ¦ Fjölvar skrárinnar eru hunsaðir (þeir eru aldrei keyrðir).
+Les modifications ne sont plus suivies. ¦ Breytingar eru ekki lengur raktar.
+Les modifications sont suivies ¦ Breytingar eru raktar
+Les mots mal écrits sont soulignés en rouge (clic droit pour les corrections). ¦ Rangt skrifuð orð eru undirstrikuð með rauðu (hægrismelltu fyrir leiðréttingar).
+Les paragraphes choisis se partagent en colonnes équilibrées (comme dans un journal). ¦ Valdar málsgreinar skiptast í jafna dálka (eins og í dagblaði).
+Les personnes du publipostage ¦ Einstaklingar samkeyrslunnar
+Les raccourcis à soi ne sont pas chargés. ¦ Eigin flýtilyklar eru ekki hlaðnir.
+Les titres et le texte changent ensemble de police et de couleur ; tes propres styles restent. ¦ Fyrirsagnir og texti skipta saman um leturgerð og lit; þínir eigin stílar haldast.
+Lettre US ¦ US Letter
+Lettre aux archives ¦ Bréf til skjalasafns
+Lettre aux archives, demande d’acte, récit d’un ancêtre, compte rendu de visite, rapport de recherche… ¦ Bréf til skjalasafns, beiðni um skjal, frásögn af forföður, heimsóknarskýrsla, rannsóknarskýrsla…
+Lettre à la famille ¦ Bréf til fjölskyldunnar
+Lettres accentuées ¦ Stafir með kommum
+Lettres et abréviations anciennes ¦ Gamlir stafir og skammstafanir
+Lettrine ¦ Upphafsstafur
+LibreOffice, OpenOffice ¦ LibreOffice, OpenOffice
+Lien « {text} » : écris plutôt où il mène ¦ Tengill „{text}“: skrifaðu frekar hvert hann vísar
+Lieu du mariage ¦ Staður hjónavígslu
+Ligne ajoutée ¦ Línu bætt við
+Ligne au-dessus ¦ Lína fyrir ofan
+Ligne d’en-tête (répétée sur chaque page) ¦ Fyrirsagnalína (endurtekin á hverri síðu)
+Ligne en dessous ¦ Lína fyrir neðan
+Ligne supprimée ¦ Línu eytt
+Lire à voix haute ¦ Lesa upphátt
+Liste numérotée ¦ Númeraður listi
+Liste à puces ¦ Punktalisti
+Livre (15,6 × 23,4 cm) ¦ Bók (15,6 × 23,4 cm)
+Livre US (6 × 9 in) ¦ US bók (6 × 9 in)
+Livre ancien ¦ Gömul bók
+Louise Borie, née en 1850 ¦ Louise Borie, fædd 1850
+L’onglet « {name} » et son texte seront supprimés. ¦ Flipanum „{name}“ og texta hans verður eytt.
+MAJUSCULES ¦ HÁSTAFIR
+Majuscule en début de phrase ¦ Stór stafur í byrjun setningar
+Majuscules et minuscules comptent ¦ Gera greinarmun á há- og lágstöfum
+Marquer ¦ Merkja
+Marquer pour l’index ¦ Merkja fyrir atriðaskrá
+Marques de mise en forme ¦ Sniðmerki
+Marques de mise en forme ¶ ¦ Sniðmerki ¶
+Mathématiques ¦ Stærðfræði
+Mes modèles ¦ Sniðmátin mín
+Mettre à jour les champs (personnes, dates) ¦ Uppfæra reiti (einstaklinga, dagsetningar)
+Mise en forme ¦ Snið
+Mise en forme (panneau de droite) ¦ Snið (hægra spjald)
+Mise en évidence ¦ Sterk áhersla
+Moderne ¦ Nútímalegt
+Modification acceptée ¦ Breyting samþykkt
+Modification précédente ¦ Fyrri breyting
+Modification refusée ¦ Breytingu hafnað
+Modification suivante ¦ Næsta breyting
+Modifications suivies ¦ Raktar breytingar
+Modifier le lien… ¦ Breyta tenglinum…
+Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles). ¦ Sniðmátið „{name}“ vistað (Byrja á sniðmáti → Sniðmátin mín).
+Moi ¦ Ég
+Mon document ¦ Skjalið mitt
+Mon nom (pour le suivi des modifications et les commentaires) ¦ Nafnið mitt (fyrir raktar breytingar og athugasemdir)
+Monnaies et chiffres ¦ Gjaldmiðlar og tölur
+Montrer dans le texte ¦ Sýna í textanum
+Montrer les marques de mise en forme ¶ ¦ Sýna sniðmerki ¶
+Montrer les modifications ¦ Sýna breytingar
+Montrer les modifications… ¦ Sýna breytingar…
+Montrer ▾ ¦ Sýna ▾
+Mot ancien ¦ Gamalt orð
+Mot entier ¦ Heilt orð
+Mot répété ¦ Endurtekið orð
+Mots ¦ Orð
+NOTE DE BAS DE PAGE ¦ NEÐANMÁLSGREIN
+NOTE DE FIN ¦ AFTANMÁLSGREIN
+Naissance et décès ¦ Fæðing og andlát
+Nom de famille ¦ Eftirnafn
+Nombre de colonnes ¦ Fjöldi dálka
+Nombre de mots, de caractères, de paragraphes ¦ Fjöldi orða, stafa, málsgreina
+Nombre de pages ¦ Fjöldi síðna
+Non (avec 💾 ou ⌘S) ¦ Nei (með 💾 eða ⌘S)
+Normal ¦ Normal
+Normal, A4, marges de 2,5 cm ¦ Normal, A4, 2,5 cm spássíur
+Note de bas de page ¦ Neðanmálsgrein
+Note de fin (à la fin du document) ¦ Aftanmálsgrein (í lok skjalsins)
+Note {n} ¦ Athugasemd {n}
+Nouveau commentaire ¦ Ný athugasemd
+Nouvel onglet ¦ Nýr flipi
+Nouvelle section en paysage. ¦ Nýr hluti í langsniði.
+Nouvelle section en portrait. ¦ Nýr hluti í skammsniði.
+Numéro de la page (1 à {n}) : ¦ Blaðsíðunúmer (1 til {n}):
+Néerlandais ¦ Hollenska
+OUTILS ¦ VERKFÆRI
+Occitan ¦ Oksítanska
+Onglet renommé ¦ Flipi endurnefndur
+Onglet supprimé ¦ Flipa eytt
+Onglet {n} ¦ Flipi {n}
+Onglets du document ¦ Flipar skjalsins
+Onglets rangés ¦ Flipum raðað
+Orientation ¦ Snúningur
+Orientation de la suite ¦ Snúningur framhaldsins
+Ouvrir le lieu ¦ Opna staðinn
+Ouvrir le panneau de navigation ¦ Opna leiðsagnarspjaldið
+Page blanche ¦ Auð síða
+Page {n} ¦ Síða {n}
+Page {page} / {total} ¦ Síða {page} / {total}
+Panneau de droite ¦ Hægra spjaldið
+Panneau de navigation : titres, pages, résultats ¦ Leiðsagnarspjald: fyrirsagnir, síður, niðurstöður
+Paragraphe ¦ Málsgrein
+Paragraphes ¦ Málsgreinar
+Paragraphe… ¦ Málsgrein…
+Pas de personne dans cette liste. ¦ Enginn einstaklingur á þessum lista.
+Pas de synonyme connu pour « {word} ». Le dictionnaire intégré compte {n} groupes de mots, surtout ceux d’un récit de famille. ¦ Ekkert þekkt samheiti fyrir „{word}“. Innbyggða orðabókin (á frönsku) hefur {n} orðahópa, aðallega úr fjölskyldusögum.
+Pas d’espace avant la virgule ou le point ¦ Ekkert bil á undan kommu eða punkti
+Pas encore de commentaire : choisis un passage, puis « 💬 Nouveau commentaire ». ¦ Engar athugasemdir enn: veldu kafla, svo „💬 Ný athugasemd“.
+Pas encore de modèle à toi : dans un document, Fichier → « Enregistrer comme modèle… ». ¦ Ekkert eigið sniðmát enn: í skjali, Skrá → „Vista sem sniðmát…“.
+Pas encore de titre : choisis le style « Titre 1 » (ou Titre 2, 3…) pour un paragraphe, il apparaîtra ici. ¦ Engar fyrirsagnir enn: veldu stílinn „Fyrirsögn 1“ (eða Fyrirsögn 2, 3…) fyrir málsgrein, hún birtist þá hér.
+Personne pour l’instant. ¦ Enginn í bili.
+Petites capitales ¦ Litlir hástafir
+Pied de la première page ¦ Síðufótur fyrstu síðu
+Pied de page (en bas de chaque page) ¦ Síðufótur (neðst á hverri síðu)
+Place d’abord le curseur dans le texte. ¦ Settu fyrst bendilinn í textann.
+Place le curseur dans un paragraphe. ¦ Settu bendilinn í málsgrein.
+Place le curseur dans un tableau. ¦ Settu bendilinn í töflu.
+Place le curseur dans une modification (texte vert ou barré rouge). ¦ Settu bendilinn í breytingu (grænn texti eða rautt yfirstrikað).
+Place le curseur à l’endroit de la coupure. ¦ Settu bendilinn þar sem skilin eiga að vera.
+Plein écran (⛶) ¦ Allur skjárinn (⛶)
+Plus de ligne d’en-tête ¦ Engin fyrirsagnalína lengur
+Points de suspension en un seul signe ¦ Úrfellingarpunktar sem eitt tákn
+Police ¦ Leturgerð
+Police (E5) ¦ Leturgerð (E5)
+Police et taille (E5) ¦ Leturgerð og stærð (E5)
+Police… ¦ Leturgerð…
+Polonais ¦ Pólska
+Portugais ¦ Portúgalska
+Pour que le document se lise bien avec un lecteur d’écran, à voix haute ou en grand. ¦ Svo skjalið lesist vel með skjálesara, upphátt eða í stóru letri.
+Pour une fiche ou un lieu de la base : Insertion → 👤 Une personne, 📍 Un lieu. ¦ Fyrir spjald eða stað úr gagnagrunninum: Setja inn → 👤 Einstaklingur, 📍 Staður.
+Première page différente (pour une page de titre ou une lettre) ¦ Önnur fyrsta síða (fyrir titilsíðu eða bréf)
+Précédent (⇧ Entrée) ¦ Fyrri (⇧ Enter)
+Quelle feuille ? ¦ Hvaða blað?
+Ranger une copie dans les médias ¦ Geyma afrit í miðlunum
+Rangé dans Listes → 🛠️ Outils de modification → 📝 Traitement de texte. ¦ Geymt í Listar → 🛠️ Breytingatól → 📝 Ritvinnsla.
+Rapport de recherche ¦ Rannsóknarskýrsla
+Rechercher et remplacer ¦ Leita og skipta út
+Relecture ¦ Yfirlestur
+Remplacer par ¦ Skipta út fyrir
+Remplacer par… ¦ Skipta út fyrir…
+Remplir avec la fiche de qui ? ¦ Fylla út með spjaldi hvers?
+Renommer l’onglet ¦ Endurnefna flipann
+Renommer… ¦ Endurnefna…
+Retirer la légende ¦ Fjarlægja myndatextann
+Retirer le lien (garder le texte) ¦ Fjarlægja tengilinn (halda textanum)
+Retirer l’espace après ¦ Fjarlægja bil á eftir
+Retirer l’espace avant ¦ Fjarlægja bil á undan
+Retrait gauche ¦ Inndráttur vinstri
+Retrait à droite ¦ Inndráttur til hægri
+Retrait à gauche ¦ Inndráttur til vinstri
+Rien (le texte comme s’il était accepté) ¦ Ekkert (textinn eins og hann væri samþykktur)
+Rien de changé depuis : ce que tu tapes ou effaces apparaîtra ici. ¦ Ekkert breytt síðan: það sem þú skrifar eða eyðir birtist hér.
+Rien à remplacer. ¦ Ekkert að skipta út.
+Récents ¦ Nýlegt
+Récit d’un ancêtre ¦ Frásögn af forföður
+Récit — {name} ¦ Frásögn — {name}
+Répondre ¦ Svara
+Répondre… ¦ Svara…
+STYLES ¦ STÍLAR
+Saut de page : la suite commence en haut de la page suivante. ¦ Síðuskil: framhaldið byrjar efst á næstu síðu.
+Section {n} sur {total} (comme le document). ¦ Hluti {n} af {total} (eins og skjalið).
+Section {n} sur {total} (format à elle). ¦ Hluti {n} af {total} (eigið snið).
+Seulement un trait dessous ¦ Aðeins lína undir
+Signature ¦ Undirskrift
+Simple (1) ¦ Einfalt (1)
+Simple (une marge à côté des ajouts) ¦ Einfalt (spássía við hlið viðbóta)
+Souligné ¦ Undirstrikað
+Sous-titre ¦ Undirtitill
+Style ¦ Stíll
+Style de caractère (quelques mots) ¦ Stafastíll (nokkur orð)
+Style de paragraphe ¦ Málsgreinastíll
+Style du paragraphe ¦ Stíll málsgreinarinnar
+Style « {name} » ¦ Stíllinn „{name}“
+Style « {name} » créé. ¦ Stíllinn „{name}“ búinn til.
+Style « {name} » supprimé ¦ Stílnum „{name}“ eytt
+Styles ¦ Stílar
+Styles de paragraphe ¦ Málsgreinastílar
+Suivant ¦ Næsta
+Suivant (Entrée) ¦ Næsta (Enter)
+Suivre les modifications ¦ Rekja breytingar
+Sujet ¦ Efni
+Supprimer la colonne ¦ Eyða dálkinum
+Supprimer le tableau ¦ Eyða töflunni
+Supprimer l’image ¦ Eyða myndinni
+Supprimer l’onglet ? ¦ Eyða flipanum?
+Supprimer… ¦ Eyða…
+Surlignage ¦ Áherslulitur
+Surlignage… ¦ Áherslulitur…
+Symboles et flèches ¦ Tákn og örvar
+Séparer la cellule ¦ Skipta hólfinu
+T Titre ¦ T Titill
+TRAITEMENT DE TEXTE ¦ RITVINNSLA
+Retrait − ¦ Inndráttur −
+Tableau de « {name} » ¦ Tafla úr „{name}“
+Tableau sans ligne de titres (Tableau → « Ligne d’en-tête ») ¦ Tafla án fyrirsagnalínu (Tafla → „Fyrirsagnalína“)
+Tableau supprimé ¦ Töflu eytt
+Tableau trié de A à Z ¦ Töflu raðað A til Ö
+Tableau trié de Z à A ¦ Töflu raðað Ö til A
+Tableau « {name} » ajouté ({n}). ¦ Töflunni „{name}“ bætt við ({n}).
+Tabloïd US ¦ US Tabloid
+Tabulations… ¦ Dálkstopp…
+Taille de l’image ¦ Stærð myndar
+Taille… ¦ Stærð…
+Temps de lecture : environ {n} min. ¦ Lestrartími: um {n} mín.
+Texte affiché ¦ Birtur texti
+Texte de la note ¦ Texti athugasemdar
+Texte du commentaire ¦ Texti athugasemdarinnar
+Texte du document ¦ Texti skjalsins
+Texte très petit (moins de 8 points) ¦ Mjög smár texti (undir 8 punktum)
+Titre 1 ¦ Fyrirsögn 1
+Titre 2 ¦ Fyrirsögn 2
+Titre 3 ¦ Fyrirsögn 3
+Titre 4 ¦ Fyrirsögn 4
+Titre 5 ¦ Fyrirsögn 5
+Titre 6 ¦ Fyrirsögn 6
+Titre de niveau {n} juste après un niveau {last} : un niveau est sauté ¦ Fyrirsögn á stigi {n} beint á eftir stigi {last}: stigi er sleppt
+Titre en {head}, texte en {body} ¦ Fyrirsagnir í {head}, texti í {body}
+Titre vide ¦ Auð fyrirsögn
+Titres ¦ Fyrirsagnir
+Ton commentaire… ¦ Athugasemdin þín…
+Tous les paragraphes de ce style changent ensemble. ¦ Allar málsgreinar í þessum stíl breytast saman.
+Tout accepter ¦ Samþykkja allt
+Tout concorde avec les fiches. ¦ Allt passar við spjöldin.
+Tout corriger ¦ Laga allt
+Tout est déjà à jour. ¦ Allt er þegar uppfært.
+Tout montrer (ajouts et suppressions) ¦ Sýna allt (viðbætur og eyðingar)
+Tout refuser ¦ Hafna öllu
+Tout remplacer ¦ Skipta öllu út
+Tout retirer ¦ Fjarlægja allt
+Toute la largeur du texte : {n} px. La hauteur suit (pas de déformation). ¦ Öll breidd textans: {n} px. Hæðin fylgir (engin aflögun).
+Toutes les 10 minutes ¦ Á 10 mínútna fresti
+Toutes les 5 minutes ¦ Á 5 mínútna fresti
+Toutes les minutes ¦ Á hverri mínútu
+Trame (fond) ¦ Skygging (bakgrunnur)
+Trame de la cellule… ¦ Skygging hólfsins…
+Transcription (machine à écrire) ¦ Uppskrift (ritvél)
+Transcription d’acte mise au propre ¦ Hreinrituð uppskrift skjals
+Triple (3) ¦ Þrefalt (3)
+Tu cherches des renseignements sur qui ? ¦ Um hvern ertu að leita upplýsinga?
+Typographie française ¦ Frönsk leturfræði
+Un arrêt tous les ¦ Stopp á hverjum
+Un cadre autour du paragraphe ¦ Rammi utan um málsgreinina
+Un champ vide s’écrit ¦ Auður reitur er skrifaður
+Un compte rendu de cette visite dans le traitement de texte (cotes, résultats, la suite) ¦ Skýrsla um þessa heimsókn í ritvinnslunni (safnmörk, niðurstöður, framhaldið)
+Un document garde au moins un onglet. ¦ Skjal heldur að minnsta kosti einum flipa.
+Un lieu de la base ¦ Staður úr gagnagrunninum
+Un nom pour cette version (facultatif) : ¦ Heiti fyrir þessa útgáfu (valfrjálst):
+Un style porte déjà ce nom. ¦ Stíll ber þegar þetta heiti.
+Une adresse qui commence par https:// (ou mailto:). ¦ Vistfang sem byrjar á https:// (eða mailto:).
+Une autre fenêtre a enregistré ce document entre-temps. Garder ta version effacera la sienne. ¦ Annar gluggi vistaði þetta skjal á meðan. Ef þú heldur þinni útgáfu þurrkast hin út.
+Une copie de ce document par personne, chaque champ « » rempli avec sa fiche ; les copies se suivent dans un nouveau document (une nouvelle page pour chacune). Champs utilisés : {list}. ¦ Eitt afrit af þessu skjali á hvern einstakling, hver reitur „“ fylltur út með spjaldi hans; afritin koma hvert á eftir öðru í nýju skjali (ný síða fyrir hvert). Reitir í notkun: {list}.
+Une espace après la virgule ¦ Bil á eftir kommu
+Une image du web n’a pas été reprise : enregistre-la sur l’ordinateur, puis glisse-la ici. ¦ Mynd af vefnum var ekki tekin með: vistaðu hana í tölvunni, og dragðu hana svo hingað.
+Une image d’une sorte que le navigateur ne montre pas (EMF, WMF, TIFF…) a été laissée de côté. ¦ Mynd af tegund sem vafrinn sýnir ekki (EMF, WMF, TIFF…) var skilin eftir.
+Une image d’une sorte que le navigateur ne montre pas (SVG, EMF, WMF…) a été laissée de côté. ¦ Mynd af tegund sem vafrinn sýnir ekki (SVG, EMF, WMF…) var skilin eftir.
+Une largeur de 16 px au moins. ¦ Breidd að minnsta kosti 16 px.
+Une ligne d’en-tête (répétée sur chaque page) ¦ Fyrirsagnalína (endurtekin á hverri síðu)
+Une personne de la base ¦ Einstaklingur úr gagnagrunninum
+Utilise {key} dans le texte. ¦ Notaðu {key} í textanum.
+Utilise {key}. ¦ Notaðu {key}.
+Version du {date} ¦ Útgáfa frá {date}
+Version enregistrée (Fichier → 🕘 Versions…). ¦ Útgáfa vistuð (Skrá → 🕘 Útgáfur…).
+Vitesse de lecture à voix haute ¦ Hraði upplestrar
+Voir ¦ Sýna
+Vérification de l’orthographe arrêtée. ¦ Slökkt á stafsetningarvilluleit.
+Vérification impossible. ¦ Ekki tókst að yfirfara.
+Vérifier avec les fiches ¦ Bera saman við spjöldin
+Vérifier l’orthographe pendant la frappe ¦ Yfirfara stafsetningu meðan skrifað er
+Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, texte, HTML, impression ¦ Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, texti, HTML, prentun
+Word, Pages, Google Docs ¦ Word, Pages, Google Docs
+a ajouté ¦ bætti við
+a supprimé ¦ eyddi
+automatique ¦ sjálfvirkt
+aux archives : cotes vues, trouvailles, suite ¦ á skjalasafninu: safnmörk skoðuð, fundir, framhald
+ce fichier .{ext} est abîmé (ce n’est pas un zip) ¦ þessi .{ext}-skrá er skemmd (hún er ekki zip-skrá)
+ce fichier LibreOffice n’est pas un texte (c’est un classeur ou une présentation) ¦ þessi LibreOffice-skrá er ekki texti (hún er töflureiknir eða kynning)
+ce fichier zip n’est ni un document Word (.docx) ni un document LibreOffice (.odt) ¦ þessi zip-skrá er hvorki Word-skjal (.docx) né LibreOffice-skjal (.odt)
+ce n’est pas un document LibreOffice (.odt) ¦ þetta er ekki LibreOffice-skjal (.odt)
+ce n’est pas un document Word (.docx) : il manque son texte ¦ þetta er ekki Word-skjal (.docx): texta þess vantar
+ce n’est pas un fichier RTF ¦ þetta er ekki RTF-skrá
+ce n’est pas un fichier du traitement de texte ¦ þetta er ekki skrá úr ritvinnslunni
+ces réglages du traitement de texte ¦ þessar stillingar ritvinnslunnar
+demande de recherche à un service d’archives ¦ rannsóknarbeiðni til skjalasafns
+divorcé ¦ fráskilin(n)
+droite ¦ hægri
+décédé (croix) ¦ látin(n) (kross)
+d’autres changements ont suivi : utilise ↶ ({key}) ¦ aðrar breytingar komu á eftir: notaðu ↶ ({key})
+d’autres changements ont suivi : utilise ↶ dans le document ¦ aðrar breytingar komu á eftir: notaðu ↶ í skjalinu
+espace fine insécable (avant ; : ! ? ») ¦ mjótt óslítanlegt bil (á undan ; : ! ? »)
+espace insécable ¦ óslítanlegt bil
+et (note tironienne) ¦ og (tírónskt tákn)
+ex. BROUILLON, COPIE ¦ t.d. DRÖG, AFRIT
+fichier RTF trop imbriqué ¦ RTF-skrá of djúpt hreiðruð
+fichier du traitement de texte ¦ skrá úr ritvinnslunni
+fichier refusé : beaucoup trop de paragraphes ¦ skrá hafnað: allt of margar málsgreinar
+fichier refusé : trop compliqué ¦ skrá hafnað: of flókin
+fichier refusé : trop gros ¦ skrá hafnað: of stór
+fichier trop gros (plus de {n} Mo) ¦ skráin er of stór (yfir {n} MB)
+https://…, mailto:… ¦ https://…, mailto:…
+il / elle ¦ hann / hún
+inhumé ¦ jarðsett(ur)
+je cherche des renseignements sur cette personne ¦ ég leita upplýsinga um þennan einstakling
+la biographie F5 de la fiche, à compléter ¦ F5-æviágrip spjaldsins, til að fullgera
+le texte seul ¦ aðeins textinn
+le texte à l’écran ¦ textinn á skjánum
+les anciens fichiers Word (.doc) ne se lisent pas : ouvre-le dans Word ou LibreOffice et enregistre-le en .docx ¦ gamlar Word-skrár (.doc) eru ekki lesnar: opnaðu hana í Word eða LibreOffice og vistaðu hana sem .docx
+marié ¦ gift(ur)
+marié (autre signe) ¦ gift(ur) (annað tákn)
+minuscules ¦ lágstafir
+naissance, mariage ou décès : la personne, les dates et les lieux déjà écrits ¦ fæðing, hjónaband eða andlát: einstaklingurinn, dagsetningar og staðir sem þegar eru skráð
+nom, naissance, parents, métier, mariage, décès ¦ nafn, fæðing, foreldrar, starf, hjónaband, andlát
+numéro ¦ númer
+né / née ¦ fædd(ur)
+p barré (par) ¦ p með þverstriki (per)
+p à crosse (pro) ¦ p með krók (pro)
+page web ¦ vefsíða
+pour partager une découverte ¦ til að deila uppgötvun
+question, sources, analyse, conclusion ¦ spurning, heimildir, greining, niðurstaða
+ruban|Caractères ¦ Tákn
+ruban|Centre ¦ Miðja
+ruban|Couleur ¦ Litur
+ruban|Effacer ¦ Hreinsa
+ruban|Interligne ¦ Línubil
+ruban|Note ¦ Athugasemd
+ruban|Numéros ¦ Númer
+ruban|Petites ¦ Litlir hástafir
+ruban|Puces ¦ Punktar
+ruban|Retrait + ¦ Inndráttur +
+ruban|Retrait − ¦ Inndráttur −
+ruban|Suivi ¦ Rakning
+ruban|Surligner ¦ Lita
+récit en parties, images, notes ¦ frásögn í hlutum, myndir, athugasemdir
+texte avec les titres ¦ texti með fyrirsögnum
+texte de l’acte, notes, références ¦ texti skjalsins, athugasemdir, tilvísanir
+tous les traitements de texte ¦ öll ritvinnsluforrit
+un PDF ne se transforme pas en texte modifiable ici : ouvre la Transcription d’actes pour le recopier ¦ PDF verður ekki að breytanlegum texta hér: opnaðu Uppskrift skjala til að skrifa það upp
+un ancêtre ¦ forfaðir
+{added} ajouté, {removed} retiré. ¦ {added} bætt við, {removed} fjarlægt.
+{added} ajouté, {removed} retirés. ¦ {added} bætt við, {removed} fjarlægð.
+{added} ajoutés, {removed} retiré. ¦ {added} bætt við, {removed} fjarlægt.
+{added} ajoutés, {removed} retirés. ¦ {added} bætt við, {removed} fjarlægð.
+{name} (copie) ¦ {name} (afrit)
+{name} — publipostage ({n}) ¦ {name} — samkeyrsla ({n})
+{name} — que faut-il écrire ? ¦ {name} — hvað á að skrifa?
+{n} avec la fiche de {name} (↶ pour revenir). ¦ {n} með spjaldi {name} (↶ til að fara til baka).
+{n} du fichier (scripts, formulaires, cadres…) retiré : ils ne sont jamais lancés. ¦ {n} fjarlægt úr skránni (forskriftir, eyðublöð, rammar…): þau eru aldrei keyrð.
+{n} du fichier (scripts, formulaires, cadres…) retirés : ils ne sont jamais lancés. ¦ {n} fjarlægð úr skránni (forskriftir, eyðublöð, rammar…): þau eru aldrei keyrð.
+{n} du web non reprise. ¦ {n} af vefnum ekki tekin með.
+{n} du web non reprises. ¦ {n} af vefnum ekki teknar með.
+{n} envoyé vers la mise en page : vérifie, puis enregistre le livre. ¦ {n} sent í umbrot: athugaðu, og vistaðu svo bókina.
+{n} envoyés vers la mise en page : vérifie, puis enregistre le livre. ¦ {n} send í umbrot: athugaðu, og vistaðu svo bókina.
+{n} images du web n’ont pas été reprises : enregistre-la sur l’ordinateur, puis glisse-la ici. ¦ {n} myndir af vefnum voru ekki teknar með: vistaðu þær í tölvunni, og dragðu þær svo hingað.
+{n} mis à jour d’après les fiches. ¦ {n} uppfært út frá spjöldunum.
+{n} modifications acceptées ¦ {n} breytingar samþykktar
+{n} modifications refusées ¦ {n} breytingum hafnað
+{n} rangée dans les médias. ¦ {n} geymt í miðlunum.
+{n} rangées dans les médias. ¦ {n} geymd í miðlunum.
+{n} repris de « {name} » ¦ {n} tekið úr „{name}“
+{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies. ¦ {pages} · {words}. Word og LibreOffice halda stílunum, listunum, töflunum, myndunum, athugasemdunum, síðuhaus og síðufæti, athugasemdum og röktum breytingum.
+« ________ » (à remplir à la main) ¦ „________“ (til að fylla út í höndunum)
+« … » (pour le voir) ¦ „…“ (til að sjá hann)
+¶ Marques de mise en forme ¦ ¶ Sniðmerki
+¶ Paragraphe ¦ ¶ Málsgrein
+¶ Paragraphe (espacements, retraits, interligne)… ¦ ¶ Málsgrein (bil, inndrættir, línubil)…
+¹ Note de bas de page ¦ ¹ Neðanmálsgrein
+À quoi ça sert ? ¦ Til hvers er þetta?
+Écrire sur cette personne ¦ Skrifa um þennan einstakling
+Écris le texte du lien. ¦ Skrifaðu texta tengilsins.
+Écris, choisis un style à gauche de la barre ; clic droit pour les actions. ¦ Skrifaðu, veldu stíl vinstra megin á stikunni; hægrismelltu fyrir aðgerðir.
+à lire, à envoyer ¦ til lestrar, til sendingar
+à ouvrir dans un navigateur ¦ til að opna í vafra
+à une mairie : naissance, mariage, décès ¦ til sveitarfélags: fæðing, hjónaband, andlát
+Ω Caractères spéciaux ¦ Ω Sértákn
+Ω Caractères spéciaux… ¦ Ω Sértákn…
+― Ligne horizontale ¦ ― Lárétt lína
+• Liste à puces ¦ • Punktalisti
+ⁱ Note de fin ¦ ⁱ Aftanmálsgrein
+ℹ️ Propriétés du document… ¦ ℹ️ Eiginleikar skjalsins…
+↕ Trier A → Z (cette colonne) ¦ ↕ Raða A → Ö (þessi dálkur)
+↕ Trier Z → A (cette colonne) ¦ ↕ Raða Ö → A (þessi dálkur)
+↶ Annulé ¦ ↶ Afturkallað
+↷ Rétabli ¦ ↷ Endurgert
+↺ Rouvrir ¦ ↺ Opna aftur
+⇄ Comparer deux versions… ¦ ⇄ Bera saman tvær útgáfur…
+⇥ Tabulations ¦ ⇥ Dálkstopp
+⇥ Tabulations… ¦ ⇥ Dálkstopp…
+∑ Nombre de pages ¦ ∑ Fjöldi síðna
+⊞ Fusionner les cellules ¦ ⊞ Sameina hólf
+⌨️ Raccourcis du traitement de texte ¦ ⌨️ Flýtilyklar ritvinnslunnar
+⌨️ Raccourcis du traitement de texte… ¦ ⌨️ Flýtilyklar ritvinnslunnar…
+▢ Bordure et trame… ¦ ▢ Jaðar og skygging…
+▥ Colonnes ¦ ▥ Dálkar
+▥ Colonnes… ¦ ▥ Dálkar…
+▦ Insérer un tableau… ¦ ▦ Setja inn töflu…
+▦ Nouveau tableau ¦ ▦ Ný tafla
+▦ Tableau… ¦ ▦ Tafla…
+▭ Paysage ¦ ▭ Langsnið
+▯ Portrait ¦ ▯ Skammsnið
+♿ Accessibilité : {n} point ¦ ♿ Aðgengi: {n} atriði
+♿ Accessibilité : {n} points ¦ ♿ Aðgengi: {n} atriði
+♿ Rien à signaler : images décrites, titres en ordre, tableaux avec titres, liens clairs. ¦ ♿ Ekkert að athuga: myndum lýst, fyrirsagnir í röð, töflur með fyrirsögnum, skýrir tenglar.
+♿ Vérifier l’accessibilité… ¦ ♿ Athuga aðgengi…
+⚙️ Personnaliser ¦ ⚙️ Sérsníða
+⚙️ Réglages du traitement de texte ¦ ⚙️ Stillingar ritvinnslunnar
+⚙️ Réglages du traitement de texte… ¦ ⚙️ Stillingar ritvinnslunnar…
+✍ Les modifications sont suivies : chaque ajout et chaque suppression restent visibles. ¦ ✍ Breytingar eru raktar: hver viðbót og hver eyðing sést áfram.
+✍ Suivi ¦ ✍ Rakning
+✍ Suivre les modifications ¦ ✍ Rekja breytingar
+✍ modifications à relire ¦ ✍ breytingar til yfirlestrar
+✎ Auteur ¦ ✎ Höfundur
+✎ Le style « {name} » ¦ ✎ Stíllinn „{name}“
+✎ Modifier le style ¦ ✎ Breyta stílnum
+✏️ À mes mesures ¦ ✏️ Eigin stærð
+✓ Accepter ¦ ✓ Samþykkja
+✓ Accepter la modification ¦ ✓ Samþykkja breytinguna
+✓ En-tête et pied de page repris. ¦ ✓ Síðuhaus og síðufótur teknir með.
+✓ Repris : {list}. ¦ ✓ Tekið með: {list}.
+✓ Résolu ¦ ✓ Leyst
+✓ Tout accepter ¦ ✓ Samþykkja allt
+✓ Tout concorde avec les fiches. ¦ ✓ Allt passar við spjöldin.
+✗ Refuser ¦ ✗ Hafna
+✗ Refuser la modification ¦ ✗ Hafna breytingunni
+✗ Tout refuser ¦ ✗ Hafna öllu
+✳️ Markdown (.md) ¦ ✳️ Markdown (.md)
+❝ Citer une source ¦ ❝ Vitna í heimild
+❝ Source citée… ¦ ❝ Heimild sem vitnað er í…
+⤒ Importer (Word, LibreOffice…)… ¦ ⤒ Flytja inn (Word, LibreOffice…)…
+⤒ Importer le document ¦ ⤒ Flytja inn skjalið
+⤒ Importer un document ¦ ⤒ Flytja inn skjal
+⤓ Exporter… ¦ ⤓ Flytja út…
+⤓ Saut de page ¦ ⤓ Síðuskil
+＋ Ajouter des personnes… ¦ ＋ Bæta við einstaklingum…
+＋ Description… ¦ ＋ Lýsing…
+＋ Les personnes d’une de mes listes… ¦ ＋ Einstaklingarnir af einum af listunum mínum…
+＋ Nouveau commentaire ¦ ＋ Ný athugasemd
+＋ Nouveau document ¦ ＋ Nýtt skjal
+＋ Nouveau style ¦ ＋ Nýr stíll
+＋ Nouveau style d’après la sélection… ¦ ＋ Nýr stíll út frá valinu…
+🌐 Langue du document ¦ 🌐 Tungumál skjalsins
+🌐 Langue… ¦ 🌐 Tungumál…
+🌐 Page web (.html) ¦ 🌐 Vefsíða (.html)
+🌳 Un petit arbre… ¦ 🌳 Lítið tré…
+🎞 Un média (lien)… ¦ 🎞 Miðill (tengill)…
+🎨 Choisir… ¦ 🎨 Velja…
+🎨 Couleur de page… ¦ 🎨 Litur síðu…
+🎨 Forme ¦ 🎨 Útlit
+🎨 Styles… ¦ 🎨 Stílar…
+👤 Remplir avec une fiche ¦ 👤 Fylla út með spjaldi
+👤 Remplir avec une fiche… ¦ 👤 Fylla út með spjaldi…
+👤 Une personne de la base… ¦ 👤 Einstaklingur úr gagnagrunninum…
+💬 Montrer les commentaires ¦ 💬 Sýna athugasemdir
+💬 Nouveau commentaire ¦ 💬 Ný athugasemd
+💾 Fichier de l’outil ¦ 💾 Skrá tólsins
+📁 Ranger une copie dans les médias ¦ 📁 Geyma afrit í miðlunum
+📄 Format, marges et orientation… ¦ 📄 Stærð, spássíur og snúningur…
+📄 PDF ¦ 📄 PDF
+📄 Pages ¦ 📄 Síður
+📄 Saut de section ¦ 📄 Hlutaskil
+📄 Saut de section (autre orientation)… ¦ 📄 Hlutaskil (annar snúningur)…
+📅 Date ¦ 📅 Dagsetning
+📅 Date du jour ¦ 📅 Dagsetning dagsins
+📊 Un diagramme… ¦ 📊 Skýringarmynd…
+📋 Partir d’un modèle ¦ 📋 Byrja á sniðmáti
+📋 Partir d’un modèle… ¦ 📋 Byrja á sniðmáti…
+📍 Un lieu de la base… ¦ 📍 Staður úr gagnagrunninum…
+📐 Envoyer vers la mise en page ¦ 📐 Senda í umbrot
+📐 Envoyer vers la mise en page… ¦ 📐 Senda í umbrot…
+📐 Reprendre les styles d’un livre… ¦ 📐 Taka stílana úr bók…
+📐 Styles d’un livre… ¦ 📐 Stílar úr bók…
+📑 Sommaire ¦ 📑 Efnisyfirlit
+📖 La biographie d’une personne… ¦ 📖 Æviágrip einstaklings…
+📗 LibreOffice (.odt) ¦ 📗 LibreOffice (.odt)
+📘 Word (.docx) ¦ 📘 Word (.docx)
+📚 Bibliographie ¦ 📚 Heimildaskrá
+📜 Brouillon (sans les pages) ¦ 📜 Drög (án síðna)
+📝 Compte rendu ¦ 📝 Skýrsla
+📝 RTF ¦ 📝 RTF
+📝 Écrire sur cette personne : un document du traitement de texte, avec sa biographie déjà posée ¦ 📝 Skrifa um þennan einstakling: skjal í ritvinnslunni, með æviágripi hans þegar sett inn
+📨 Champ de fusion ¦ 📨 Samkeyrslureitur
+📨 Champ de fusion (prénom, dates…) ¦ 📨 Samkeyrslureitur (fornafn, dagsetningar…)
+📨 Publipostage ¦ 📨 Samkeyrsla
+📨 Publipostage… ¦ 📨 Samkeyrsla…
+🔁 Synonymes de « {word} » ¦ 🔁 Samheiti „{word}“
+🔁 Synonymes… ¦ 🔁 Samheiti…
+🔊 Lecture… (Échap ou Outils → ⏹ Arrêter la lecture) ¦ 🔊 Les… (Esc eða Verkfæri → ⏹ Stöðva upplestur)
+🔊 Lire à voix haute ¦ 🔊 Lesa upphátt
+🔍 Rechercher ¦ 🔍 Leita
+🔎 Corrigé dans {n} passage (↶ pour revenir). ¦ 🔎 Leiðrétt á {n} stað (↶ til að fara til baka).
+🔎 Corrigé dans {n} passages (↶ pour revenir). ¦ 🔎 Leiðrétt á {n} stöðum (↶ til að fara til baka).
+🔎 Relecture (typographie, répétitions)… ¦ 🔎 Yfirlestur (frönsk leturfræði, endurtekningar)…
+🔎 Rien à reprendre : typographie et répétitions sont bonnes. ¦ 🔎 Ekkert að laga: leturfræði og endurtekningar eru í lagi.
+🔎 Vérification avec les fiches… ¦ 🔎 Ber saman við spjöldin…
+🔎 Vérifier avec les fiches ¦ 🔎 Bera saman við spjöldin
+🔎 {n} à regarder. ¦ 🔎 {n} til að skoða.
+🔗 Lien… ¦ 🔗 Tengill…
+🔗 Modifier le lien ¦ 🔗 Breyta tenglinum
+🔗 Nouveau lien ¦ 🔗 Nýr tengill
+🔢 Nombre de mots ¦ 🔢 Fjöldi orða
+🔢 Nombre de mots… ¦ 🔢 Fjöldi orða…
+🔤 Index ¦ 🔤 Atriðaskrá
+🕘 Enregistrer comme nouvelle version ¦ 🕘 Vista sem nýja útgáfu
+🕘 Nouvelle version ¦ 🕘 Ný útgáfa
+🕘 Versions… ¦ 🕘 Útgáfur…
+🖍 Surlignage… ¦ 🖍 Áherslulitur…
+🖨 Imprimer… ¦ 🖨 Prenta…
+🖼 Image… ¦ 🖼 Mynd…
+🧭 Panneau de navigation ¦ 🧭 Leiðsagnarspjald
+🧾 Ouvrir ce tableau dans le Tableur ¦ 🧾 Opna þessa töflu í Töflureikninum
+🧾 Tableau venu du Tableur… ¦ 🧾 Tafla úr Töflureikninum…
+🧾 Texte (.txt) ¦ 🧾 Texti (.txt)
+=remplacement ¦ útskipting|útskiptingar
+=commentaire ¦ athugasemd|athugasemdir
+=modification suivie ¦ rakin breyting|raktar breytingar
+=tableau ¦ tafla|töflur
+=style ¦ stíll|stílar
+=paragraphe ¦ málsgrein|málsgreinar
+=champ rempli ¦ reitur fylltur út|reitir fylltir út
+texte|Caractère ¦ Stafur
+icone-gras|G ¦ F
+icone-italique|I ¦ S
+icone-souligne|S ¦ U
+icone-petites-capitales|Pᴄ ¦ Lʜ

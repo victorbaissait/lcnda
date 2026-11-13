@@ -1,0 +1,134 @@
+fr ¦ hr ¦ sl
+# ═════ zone « reste5 » : croate (hr) et slovène (sl) ═════
+Les traits, les ombres et les coins des fiches des personnes et des animaux : blocs, boutons, champs. Le reste de l’app ne change pas ; les couleurs et la police restent celles de l’Apparence. ¦ Crte, sjene i kutovi zapisa osoba i životinja: blokovi, gumbi, polja. Ostatak aplikacije se ne mijenja; boje i font ostaju oni iz Izgleda. ¦ Črte, sence in vogali zapisov oseb in živali: bloki, gumbi, polja. Preostanek aplikacije se ne spremeni; barve in pisava ostanejo tiste iz Videza.
+L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. ¦ Razmak unutar blokova i između njih, visina redaka popisa, unutarnji razmak gumba. ¦ Prostor v blokih in med njimi, višina vrstic seznama, notranji rob gumbov.
+Les petits dessins des boutons, des barres d’outils et des rubriques. ¦ Male sličice na gumbima, alatnim trakama i naslovima rubrika. ¦ Majhne sličice na gumbih, orodnih vrsticah in naslovih rubrik.
+Le haut de la fiche : portrait, nom, dates, pastilles et boutons. ¦ Vrh zapisa: portret, ime, datumi, značke i gumbi. ¦ Vrh zapisa: portret, ime, datumi, značke in gumbi.
+Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…) ; le bouton principal reste toujours plein, à la couleur principale de l’Apparence. ¦ Sporedni gumbi (Odustani, Uredi, ＋ Dodaj…); glavni gumb uvijek ostaje pun, u glavnoj boji Izgleda. ¦ Stranski gumbi (Prekliči, Uredi, ＋ Dodaj…); glavni gumb ostane vedno poln, v glavni barvi Videza.
+Les fenêtres qui s’ouvrent, les menus, les messages en bas à gauche, les boutons au survol. L’aperçu tourne en boucle. ¦ Prozori koji se otvaraju, izbornici, poruke dolje lijevo, gumbi pri prelasku mišem. Pregled se vrti u petlji. ¦ Okna, ki se odpirajo, meniji, sporočila spodaj levo, gumbi ob premiku miške. Predogled se vrti v zanki.
+Les listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. ¦ Popisi (Popisi, Osobe, Istraživanje…), stupac osoba i tablice. ¦ Seznami (Seznami, Osebe, Raziskovanje…), stolpec oseb in tabele.
+{label} (nombre) ¦ {label} (broj) ¦ {label} (število)
+Pour les listes, les tableaux et le menu de choix. Plus haut = plus facile à viser ; plus bas = plus de lignes visibles. ¦ Za popise, tablice i izbornik odabira. Više = lakše ciljati; niže = više vidljivih redaka. ¦ Za sezname, tabele in meni za izbiro. Višje = lažje ciljanje; nižje = več vidnih vrstic.
+Le haut de la fiche. Les traits, les ombres et les coins de la fiche se règlent juste en dessous ¦ Vrh zapisa. Crte, sjene i kutovi zapisa podešavaju se odmah ispod ¦ Vrh zapisa. Črte, sence in vogali zapisa se nastavijo tik spodaj
+Les traits, les ombres et les coins des fiches (personnes et animaux) seulement : le reste de l’app ne change pas. La colonne de gauche a les siens (Menus, colonne et listes → Colonne) ¦ Samo crte, sjene i kutovi zapisa (osobe i životinje): ostatak aplikacije se ne mijenja. Lijevi stupac ima svoje (Izbornici, stupac i popisi → Stupac) ¦ Samo črte, sence in vogali zapisov (osebe in živali): preostanek aplikacije se ne spremeni. Levi stolpec ima svoje (Meniji, stolpec in seznami → Stolpec)
+L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. Une colonne de gauche réglée « Compacte » (onglet Colonne) garde sa propre taille : les deux ne s’additionnent pas ¦ Razmak unutar blokova i između njih, visina redaka popisa, unutarnji razmak gumba. Lijevi stupac podešen na „Zbijeno” (kartica Stupac) zadržava svoju veličinu: to dvoje se ne zbraja ¦ Prostor v blokih in med njimi, višina vrstic seznama, notranji rob gumbov. Levi stolpec, nastavljen na »Strnjeno« (zavihek Stolpec), obdrži svojo velikost: obojega se ne sešteva
+Les petits dessins des boutons, des barres d’outils et des rubriques. Les traits et les ombres suivent ¦ Male sličice na gumbima, alatnim trakama i naslovima rubrika. Crte i sjene prate ¦ Majhne sličice na gumbih, orodnih vrsticah in naslovih rubrik. Črte in sence sledijo
+Les lignes des listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. Les traits et les ombres suivent ¦ Retci popisa (Popisi, Osobe, Istraživanje…), stupac osoba i tablice. Crte i sjene prate ¦ Vrstice seznamov (Seznami, Osebe, Raziskovanje…), stolpec oseb in tabele. Črte in sence sledijo
+Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…). Les traits et les ombres suivent ¦ Sporedni gumbi (Odustani, Uredi, ＋ Dodaj…). Crte i sjene prate ¦ Stranski gumbi (Prekliči, Uredi, ＋ Dodaj…). Črte in sence sledijo
+Comment les fenêtres, les menus et les messages apparaissent. L’aperçu tourne en boucle ¦ Kako se pojavljuju prozori, izbornici i poruke. Pregled se vrti u petlji ¦ Kako se prikažejo okna, meniji in sporočila. Predogled se vrti v zanki
+{group} : {choice} ¦ {group}: {choice} ¦ {group}: {choice}
+Rien ne bouge : chaque écran garde le dessin que tu connais. ¦ Ništa se ne mijenja: svaki zaslon zadržava izgled koji poznaješ. ¦ Nič se ne spremeni: vsak zaslon obdrži videz, ki ga poznaš.
+7 dessins différents ; tes couleurs homme / femme et ta forme d’avatar ne s’y appliquent pas. ¦ 7 različitih izgleda; tvoje boje za muškarce / žene i oblik avatara na njih se ne primjenjuju. ¦ 7 različnih videzov; tvoje barve za moške / ženske in oblika avatarja zanje ne veljajo.
+Un seul dessin partout, à la couleur du genre : homme, femme, animal se voient d’un coup d’œil. ¦ Jedan izgled svugdje, u boji spola: muškarac, žena, životinja razlikuju se na prvi pogled. ¦ En videz povsod, v barvi spola: moški, ženska, žival se ločijo na prvi pogled.
+Léger dans les listes serrées et le menu de choix (c’est déjà le modèle validé du menu). ¦ Lagano u gustim popisima i izborniku odabira (to je već odobreni model izbornika). ¦ Lahkotno v gostih seznamih in meniju za izbiro (to je že potrjeni model menija).
+Le style « archive » de ta fiche : bord noir, photo en noir et blanc, comme une photo d’identité collée. ¦ Stil „arhiv” tvog zapisa: crni rub, crno-bijela fotografija, kao zalijepljena fotografija za osobnu iskaznicu. ¦ Slog »arhiv« tvojega zapisa: črn rob, črno-bela fotografija, kot nalepljena fotografija za osebno izkaznico.
+Nouveau nom de l’onglet {tab} ¦ Novi naziv kartice {tab} ¦ Novo ime zavihka {tab}
+Émoji de l’onglet {tab} ¦ Emoji kartice {tab} ¦ Emoji zavihka {tab}
+La personne n°1 (le de cujus) ; son père a le n°2, sa mère le n°3, et ainsi de suite : le père d’un numéro N a toujours 2N, la mère 2N+1. ¦ Osoba br. 1 (polazna osoba); njezin otac ima br. 2, majka br. 3 i tako dalje: otac broja N uvijek ima 2N, majka 2N+1. ¦ Oseba št. 1 (izhodiščna oseba); njen oče ima št. 2, mati št. 3 in tako naprej: oče številke N ima vedno 2N, mati 2N+1.
+Pour les descendants : la personne n°1, ses enfants 1.1, 1.2, 1.3…, les enfants de 1.2 sont 1.2.1, 1.2.2… Chaque point = une génération de plus. ¦ Za potomke: osoba br. 1, njezina djeca 1.1, 1.2, 1.3…, djeca od 1.2 su 1.2.1, 1.2.2… Svaka točka = jedna generacija više. ¦ Za potomce: oseba št. 1, njeni otroci 1.1, 1.2, 1.3…, otroci od 1.2 so 1.2.1, 1.2.2… Vsaka pika = en rod več.
+Un thème règle les couleurs de toute l’app : la couleur principale, le fond de la page, des panneaux, des cartes et de leurs en-têtes, le texte, et les traits qui entourent (couleur et épaisseur). Crée le tien à partir d’un thème existant : il s’ajoute à la liste « Preset », dans « ✎ Mes thèmes ». ¦ Tema određuje boje cijele aplikacije: glavnu boju, pozadinu stranice, ploča, kartica i njihovih zaglavlja, tekst te obrube (boju i debljinu). Stvori svoju na temelju postojeće teme: dodaje se na popis „Predložak”, pod „✎ Moje teme”. ¦ Tema določa barve vse aplikacije: glavno barvo, ozadje strani, plošč, kartic in njihovih glav, besedilo ter obrobe (barvo in debelino). Ustvari svojo iz obstoječe teme: doda se na seznam »Prednastavitev«, pod »✎ Moje teme«.
+La forme des petits carrés numérotés des blocs et des initiales des fiches. Ajoute tes formes (bibliothèque des tableaux, polygone dessiné, SVG importé), range la liste du menu « Forme des avatars », cache celles qui ne te servent pas. ¦ Oblik malih numeriranih kvadrata blokova i inicijala u zapisima. Dodaj svoje oblike (knjižnica ploča, nacrtani mnogokut, uvezeni SVG), posloži popis izbornika „Oblik avatara”, sakrij one koje ne koristiš. ¦ Oblika majhnih oštevilčenih kvadratov blokov in začetnic v zapisih. Dodaj svoje oblike (knjižnica tabel, narisan mnogokotnik, uvožen SVG), uredi seznam menija »Oblika avatarjev«, skrij tiste, ki jih ne uporabljaš.
+Le grand cadre en haut de chaque fiche : le nom, les badges (Sosa, À vérifier, Hors généalogie, Artiste) et la colonne de boutons carrés. Tu peux le masquer pour une fiche épurée (diaporama), ranger les boutons, les cacher, les mettre sur 2 colonnes. ¦ Veliki okvir na vrhu svakog zapisa: ime, značke (Sosa, Za provjeru, Izvan rodoslovlja, Umjetnik) i stupac kvadratnih gumba. Možeš ga sakriti za čist zapis (dijaprojekcija), posložiti gumbe, sakriti ih, staviti ih u 2 stupca. ¦ Velik okvir na vrhu vsakega zapisa: ime, značke (Sosa, Za preverjanje, Zunaj rodoslovja, Umetnik) in stolpec kvadratnih gumbov. Lahko ga skriješ za čist zapis (diaprojekcija), urediš gumbe, jih skriješ, jih postaviš v 2 stolpca.
+Les petits boutons carrés en haut à droite, à côté du nombre de personnes : écran en deux, nouvelle fenêtre, mode consultation, mode simple, calculette, Mes généalogies. Décoche pour cacher, glisse ⠿ pour changer l’ordre. ¦ Mali kvadratni gumbi gore desno, pored broja osoba: podijeljeni zaslon, novi prozor, način pregledavanja, jednostavni način, kalkulator, Moja rodoslovlja. Odznači za skrivanje, povuci ⠿ za promjenu redoslijeda. ¦ Majhni kvadratni gumbi zgoraj desno, ob številu oseb: razdeljen zaslon, novo okno, način ogleda, preprosti način, kalkulator, Moja rodoslovja. Odznači za skrivanje, povleci ⠿ za spremembo vrstnega reda.
+Les boutons de la barre du haut, à côté du nombre de personnes. Glisse ⠿ (ou Alt + ↑ / ↓) pour changer leur ordre ; décoche un bouton pour le cacher. Plus bas, « 👤 Nouvelle personne » et un raccourci vers chaque outil de modification (tableur, montage, retouche…) et chaque partie d’Enquêtes : coche ceux que tu veux en haut, et choisis ce que le clic ouvre (la liste des projets ou un nouveau projet). C’est gardé tout de suite. ¦ Gumbi gornje trake, pored broja osoba. Povuci ⠿ (ili Alt + ↑ / ↓) za promjenu redoslijeda; odznači gumb da ga sakriješ. Niže su „👤 Nova osoba” i prečac do svakog alata za uređivanje (proračunska tablica, montaža, retuširanje…) i svakog dijela Istraga: označi one koje želiš gore i odaberi što klik otvara (popis projekata ili novi projekt). Sprema se odmah. ¦ Gumbi zgornje vrstice, ob številu oseb. Povleci ⠿ (ali Alt + ↑ / ↓) za spremembo vrstnega reda; odznači gumb, da ga skriješ. Nižje sta »👤 Nova oseba« in bližnjica do vsakega orodja za urejanje (preglednica, montaža, retuširanje…) in vsakega dela Preiskav: označi tiste, ki jih želiš zgoraj, in izberi, kaj odpre klik (seznam projektov ali nov projekt). Shrani se takoj.
+Les blocs d’une fiche se rangent en sections nommées (Identité, Famille…). Ici, où vont leurs titres et leurs options ; la forme (traits, coins, ombres) se règle plus bas, avec l’en-tête (« Style des fiches »). ¦ Blokovi zapisa slažu se u imenovane odjeljke (Identitet, Obitelj…). Ovdje je gdje idu njihovi naslovi i opcije; oblik (crte, kutovi, sjene) podešava se niže, sa zaglavljem („Stil zapisa”). ¦ Bloki zapisa se razvrstijo v poimenovane razdelke (Identiteta, Družina…). Tukaj določiš, kam gredo njihovi naslovi in možnosti; obliko (črte, vogali, sence) nastaviš nižje, skupaj z glavo (»Slog zapisov«).
+Glisse les sections et les blocs pour changer leur ordre. Décoche une section ou un bloc pour le masquer. ¦ Povuci odjeljke i blokove da promijeniš redoslijed. Odznači odjeljak ili blok da ga sakriješ. ¦ Povleci razdelke in bloke, da spremeniš vrstni red. Odznači razdelek ali blok, da ga skriješ.
+La façon dont les listes à ranger de cette page sont dessinées. Ne change que cet écran de réglage (et la fenêtre « ⚙️ Ranger les sections » d’une fiche) : ni les fiches, ni les données. ¦ Način na koji su nacrtani popisi za slaganje na ovoj stranici. Mijenja samo ovaj zaslon postavki (i prozor „⚙️ Posloži odjeljke” zapisa): ni zapise ni podatke. ¦ Način, kako so narisani seznami za urejanje na tej strani. Spremeni samo ta zaslon nastavitev (in okno »⚙️ Uredi razdelke« zapisa): ne zapisov ne podatkov.
+Les blocs se rangent en sections nommées (Identité, Famille…). Ici, la façon de dessiner leurs titres et leurs options. Chaque changement est gardé tout de suite. ¦ Blokovi se slažu u imenovane odjeljke (Identitet, Obitelj…). Ovdje je način prikaza njihovih naslova i opcija. Svaka se promjena odmah sprema. ¦ Bloki se razvrstijo v poimenovane razdelke (Identiteta, Družina…). Tukaj je način prikaza njihovih naslovov in možnosti. Vsaka sprememba se shrani takoj.
+Retenu d’une fiche à l’autre. ¦ Pamti se od zapisa do zapisa. ¦ Ohrani se od zapisa do zapisa.
+Sans trait ni cadre : juste le nom, en grand, comme un chapitre. ¦ Bez crte i okvira: samo naziv, veliko, kao poglavlje. ¦ Brez črte in okvirja: samo ime, veliko, kot poglavje.
+Un cadre autour de la section, le titre dans une étiquette sur le bord. ¦ Okvir oko odjeljka, naslov u oznaci na rubu. ¦ Okvir okoli razdelka, naslov v oznaki na robu.
+Un petit titre en capitales posé sur un trait. Sobre, prend peu de place. ¦ Mali naslov velikim slovima na crti. Jednostavno, zauzima malo mjesta. ¦ Majhen naslov z velikimi črkami na črti. Preprosto, zavzame malo prostora.
+Une bande de la couleur principale (celle de l’Apparence), titre en blanc. ¦ Traka u glavnoj boji (onoj iz Izgleda), naslov bijelom bojom. ¦ Pas v glavni barvi (tisti iz Videza), naslov v beli barvi.
+« Nouveau » : sections en bandes, ⠿ et 👁. ¦ „Novo”: odjeljci u trakama, ⠿ i 👁. ¦ »Novo«: razdelki v pasovih, ⠿ in 👁.
+Ce que tu fais avec l’app : ses onglets et son premier écran. Aucune fiche n’est supprimée. ¦ Ono što radiš s aplikacijom: njezine kartice i prvi zaslon. Nijedan zapis se ne briše. ¦ Kaj počneš z aplikacijo: njeni zavihki in prvi zaslon. Noben zapis se ne izbriše.
+Changer d’usage change <b>seulement les onglets et le premier écran</b>. Aucune fiche n’est supprimée : les personnes restent là, même quand l’onglet est caché. On peut en allumer plusieurs : leurs onglets s’additionnent. ¦ Promjena namjene mijenja <b>samo kartice i prvi zaslon</b>. Nijedan zapis se ne briše: osobe ostaju, čak i kad je kartica skrivena. Možeš uključiti više njih: njihove se kartice zbrajaju. ¦ Sprememba namena spremeni <b>samo zavihke in prvi zaslon</b>. Noben zapis se ne izbriše: osebe ostanejo, tudi ko je zavihek skrit. Vklopiš jih lahko več: njihovi zavihki se seštejejo.
+Personnes, arbre, actes. ¦ Osobe, stablo, matični zapisi. ¦ Osebe, drevo, matični vpisi.
+« 🌳 Ma généalogie » seule ¦ Samo „🌳 Moje rodoslovlje” ¦ Samo »🌳 Moje rodoslovje«
+Trésors de famille. ¦ Obiteljsko blago. ¦ Družinski zakladi.
+Catalogue raisonné. ¦ Kritički katalog djela. ¦ Kritični katalog del.
+Maisons et lieux. ¦ Kuće i mjesta. ¦ Hiše in kraji.
+L’entreprise, 👥 Membres. ¦ Poduzeće, 👥 Članovi. ¦ Podjetje, 👥 Člani.
+Animaux, portées, pedigree. ¦ Životinje, okoti, rodovnik. ¦ Živali, legla, rodovnik.
+Suivi des animaux. ¦ Praćenje životinja. ¦ Spremljanje živali.
+Documents, ✨ Trésors. ¦ Dokumenti, ✨ Blago. ¦ Dokumenti, ✨ Zakladi.
+Les onglets se rangent, se renomment et se cachent un par un dans « Ordre et noms du menu principal ». ¦ Kartice se slažu, preimenuju i skrivaju jedna po jedna u „Redoslijed i nazivi glavnog izbornika”. ¦ Zavihke urejaš, preimenuješ in skrivaš enega za drugim v »Vrstni red in imena glavnega menija«.
+Au féminin ¦ U ženskom rodu ¦ V ženskem spolu
+Au masculin ¦ U muškom rodu ¦ V moškem spolu
+Avec un point médian ¦ Sa srednjom točkom ¦ S sredinsko piko
+Entre parenthèses ¦ U zagradama ¦ V oklepajih
+Sexe « Autre / non binaire » ¦ Spol „Drugo / nebinarno” ¦ Spol »Drugo / nebinarno«
+Sexe « Non renseigné » (et les animaux dont on ne connaît pas le sexe) ¦ Spol „Nije navedeno” (i životinje nepoznatog spola) ¦ Spol »Ni navedeno« (in živali z neznanim spolom)
+Sur les fiches d’hommes et de femmes, les mots s’accordent tout seuls : « né le » ou « née le », « décédé » ou « décédée ». Choisis ici comment les écrire pour les autres fiches. Chaque choix est gardé tout de suite. ¦ Na zapisima muškaraca i žena riječi se same slažu (na francuskom: « né le » ili « née le », « décédé » ili « décédée »). Ovdje odaberi kako ih pisati za ostale zapise. Svaki se izbor odmah sprema. ¦ Na zapisih moških in žensk se besede ujemajo same (v francoščini: « né le » ali « née le », « décédé » ali « décédée »). Tukaj izberi, kako jih pisati za druge zapise. Vsaka izbira se shrani takoj.
+comme on dit « la personne » : « née », « décédée » ¦ kao uz « la personne » (ženski rod): « née », « décédée » ¦ kot pri « la personne » (ženski spol): « née », « décédée »
+rien ne change : « né(e) », sauf « Vivante », « Décédée » sur la fiche ¦ ništa se ne mijenja: « né(e) », osim « Vivante », « Décédée » na zapisu ¦ nič se ne spremeni: « né(e) », razen « Vivante », « Décédée » na zapisu
+une tournure neutre quand il y en a une (« Naissance le … », « Décès »), sinon « né(e) » ¦ neutralan izraz kad postoji (« Naissance le … », « Décès »), inače « né(e) » ¦ nevtralna besedna zveza, ko obstaja (« Naissance le … », « Décès »), sicer « né(e) »
+« né », « décédé » ¦ « né », « décédé » (muški rod) ¦ « né », « décédé » (moški spol)
+« né(e) », « décédé(e) », partout ¦ « né(e) », « décédé(e) », svugdje ¦ « né(e) », « décédé(e) », povsod
+« né·e », « décédé·e » ¦ « né·e », « décédé·e » (srednja točka) ¦ « né·e », « décédé·e » (sredinska pika)
+autre / non binaire ¦ drugo / nebinarno ¦ drugo / nebinarno
+sexe non renseigné ¦ spol nije naveden ¦ spol ni naveden
+Arbre en filigrane ¦ Stablo kao vodeni žig ¦ Drevo kot vodni žig
+Bleu pâle (comme avant) ¦ Blijedoplava (kao prije) ¦ Bledo modra (kot prej)
+Gris neutre ¦ Neutralno siva ¦ Nevtralno siva
+Les traits de mon thème (✎ Mes thèmes) ¦ Crte moje teme (✎ Moje teme) ¦ Črte moje teme (✎ Moje teme)
+Les traits de mon thème : choisis d’abord un thème à toi (✎ Mes thèmes) ¦ Crte moje teme: najprije odaberi svoju temu (✎ Moje teme) ¦ Črte moje teme: najprej izberi svojo temo (✎ Moje teme)
+Bleu pâle = comme avant · gris · la couleur principale de l’Apparence (elle suit si tu la changes) · sépia · la couleur des traits de ton thème (✎ Mes thèmes) · une couleur à toi. ¦ Blijedoplava = kao prije · siva · glavna boja Izgleda (prati je ako je promijeniš) · sepija · boja crta tvoje teme (✎ Moje teme) · tvoja boja. ¦ Bledo modra = kot prej · siva · glavna barva Videza (sledi ji, če jo spremeniš) · sepija · barva črt tvoje teme (✎ Moje teme) · tvoja barva.
+Cahier ligné ¦ Bilježnica s crtama ¦ Črtan zvezek
+Papier millimétré ¦ Milimetarski papir ¦ Milimetrski papir
+Papier vergé ¦ Rebrasti papir ¦ Rebrasti papir
+Ce qu’on voit derrière les blocs, sur toutes les pages. Le fond reste très pâle pour ne jamais gêner la lecture ; la couleur du papier vient du Preset (ou de ton thème). ¦ Ono što se vidi iza blokova, na svim stranicama. Pozadina ostaje vrlo blijeda da nikad ne ometa čitanje; boja papira dolazi iz Predloška (ili tvoje teme). ¦ Kar je vidno za bloki, na vseh straneh. Ozadje ostane zelo bledo, da nikoli ne moti branja; barva papirja izhaja iz Prednastavitve (ali tvoje teme).
+Choisir une photo ¦ Odaberi fotografiju ¦ Izberi fotografijo
+Couleur du motif ¦ Boja uzorka ¦ Barva vzorca
+Couleur principale (suit l’Apparence) ¦ Glavna boja (prati Izgled) ¦ Glavna barva (sledi Videzu)
+De « à peine visible » à « bien marqué ». Au départ : comme aujourd’hui. ¦ Od „jedva vidljivo” do „jasno izraženo”. Na početku: kao danas. ¦ Od »komaj vidno« do »izrazito«. Na začetku: kot danes.
+Décoché : fond uni sur ces pages. La carte et les éditeurs plein écran gardent toujours le leur. ¦ Odznačeno: jednobojna pozadina na tim stranicama. Karta i uređivači preko cijelog zaslona uvijek zadržavaju svoju. ¦ Odznačeno: enobarvno ozadje na teh straneh. Zemljevid in urejevalniki čez cel zaslon vedno obdržijo svojega.
+Pas encore de photo : fond uni en attendant. ¦ Još nema fotografije: dotad jednobojna pozadina. ¦ Fotografije še ni: do takrat enobarvno ozadje.
+Pâlie par l’intensité et floutée, pour rester derrière sans gêner. Elle reste sur cet ordinateur (pas dans le défaut du site : là-bas, fond uni). ¦ Izblijeđena prema intenzitetu i zamućena, da ostane u pozadini i ne smeta. Ostaje na ovom računalu (ne u zadanim postavkama stranice: tamo je jednobojna pozadina). ¦ Zbledela glede na intenzivnost in zamegljena, da ostane v ozadju in ne moti. Ostane na tem računalniku (ne v privzetih nastavitvah strani: tam je enobarvno ozadje).
+bords à peine teintés, vieille photo ¦ jedva obojeni rubovi, stara fotografija ¦ komaj obarvani robovi, stara fotografija
+comme aujourd’hui ¦ kao danas ¦ kot danes
+de petites branches, très pâles ¦ male grančice, vrlo blijede ¦ majhne vejice, zelo blede
+du papier vers la couleur ¦ od papira prema boji ¦ od papirja proti barvi
+fin, trait plus fort tous les 5 ¦ fino, jača crta svakih 5 ¦ fino, močnejša črta vsakih 5
+fines rayures des vieux papiers ¦ fine pruge starog papira ¦ fine proge starega papirja
+hexagones de la maison de famille ¦ šesterokuti obiteljske kuće ¦ šestkotniki družinske hiše
+lignes et double marge, comme l’état civil ¦ crte i dvostruka margina, kao u matičnim knjigama ¦ črte in dvojni rob, kot v matičnih knjigah
+lignes et marge rouge ¦ crte i crvena margina ¦ črte in rdeč rob
+pâle et floutée derrière ¦ blijeda i zamućena u pozadini ¦ bleda in zamegljena v ozadju
+rien derrière, le plus calme ¦ ništa u pozadini, najmirnije ¦ nič v ozadju, najbolj umirjeno
+tissage léger, album de famille ¦ lagano tkanje, obiteljski album ¦ rahla tkanina, družinski album
+une grille de petits points ¦ mreža sitnih točkica ¦ mreža drobnih pik
+va bien avec « Archive papier » ¦ dobro ide uz „Arhivski papir” ¦ se lepo ujema z »Arhivski papir«
+Une page de l’app ¦ Stranica aplikacije ¦ Stran aplikacije
+Ta photo ¦ Tvoja fotografija ¦ Tvoja fotografija
+les Réglages ¦ Postavke ¦ Nastavitve
+Dans les listes où l’on coche ce qui s’affiche (menus, listes, Réordonner, Personnaliser…) : une ligne décochée reste telle quelle, ou se grise un peu. ¦ U popisima gdje označavaš što se prikazuje (izbornici, popisi, Promijeni redoslijed, Prilagodi…): odznačeni redak ostaje kakav jest ili lagano posivi. ¦ Na seznamih, kjer označiš, kaj se prikaže (meniji, seznami, Prerazporedi, Prilagodi…): odznačena vrstica ostane, kot je, ali rahlo posivi.
+Une ligne affichée ¦ Prikazani redak ¦ Prikazana vrstica
+Une ligne cachée ¦ Skriveni redak ¦ Skrita vrstica
+Lignes cachées dans les listes à ranger ¦ Skriveni retci u popisima za slaganje ¦ Skrite vrstice na seznamih za urejanje
+Supprimer en rouge ¦ Izbriši crvenom bojom ¦ Izbriši v rdeči barvi
+Hypothèses à comparer ¦ Pretpostavke za usporedbu ¦ Domneve za primerjavo
+signature ou sceau ¦ potpis ili pečat ¦ podpis ali pečat
+PLAN DU RECENSEMENT ¦ PLAN POPISA STANOVNIŠTVA ¦ NAČRT POPISA PREBIVALSTVA
+Fonds de carte du plan des adresses ¦ Podloge karte plana adresa ¦ Podlage zemljevida načrta naslovov
+Plan, photo aérienne, carte hors ligne… ¦ Plan grada, zračna snimka, karta izvan mreže… ¦ Načrt mesta, letalski posnetek, zemljevid brez povezave…
+Cassini, État-major, cartes et photos de 1950… ¦ Cassini, État-major, karte i snimke iz 1950.… ¦ Cassini, État-major, zemljevidi in posnetki iz leta 1950…
+Carte ancienne (par-dessus) ¦ Stara karta (preko) ¦ Star zemljevid (zgoraj)
+Aujourd’hui (dessous) ¦ Danas (ispod) ¦ Danes (spodaj)
+Dépouillements (onglet « Plan ») et fiche d’un village : les fonds cochés viennent en premier dans les menus ; le premier coché est celui de départ. Tous les autres restent dans les menus, par catégorie. ¦ Indeksi zapisa (kartica „Plan”) i zapis sela: označene podloge dolaze prve u izbornicima; prva označena je početna. Sve ostale ostaju u izbornicima, po kategorijama. ¦ Indeksi vpisov (zavihek »Načrt«) in zapis vasi: označene podlage so prve v menijih; prva označena je začetna. Vse druge ostanejo v menijih, po kategorijah.
+naissance manquante ¦ nedostaje rođenje ¦ manjka rojstvo
+décès manquant ¦ nedostaje smrt ¦ manjka smrt
+parents manquants ¦ nedostaju roditelji ¦ manjkata starša
+source manquante ¦ nedostaje izvor ¦ manjka vir
+aucun média ¦ nema medija ¦ ni medijev
+1 livre en {y} ¦ 1 livre u {y}. ¦ 1 livre leta {y}
+1 franc en {y} ¦ 1 franak u {y}. ¦ 1 frank leta {y}
+1 euro en {y} ¦ 1 euro u {y}. ¦ 1 evro leta {y}
+≈ <b>{eur} €</b> d’aujourd’hui ¦ ≈ <b>{eur} €</b> današnjih ¦ ≈ <b>{eur} €</b> današnjih
+≈ <b>{kg} kg</b> de pain ¦ ≈ <b>{kg} kg</b> kruha ¦ ≈ <b>{kg} kg</b> kruha
+≈ {n} jour de travail d’un journalier ¦ ≈ {n} dan rada nadničara ¦ ≈ {n} dan dela dninarja
+≈ {n} jours de travail d’un journalier ¦ ≈ {n} dana rada nadničara ¦ ≈ {n} dni dela dninarja
+🛡 Solidité des liens à côté des parents ¦ 🛡 Pouzdanost veza pored roditelja ¦ 🛡 Zanesljivost povezav ob starših
+Seulement Supposé et Réfuté ¦ Samo Pretpostavljeno i Opovrgnuto ¦ Samo Domnevno in Ovrženo
+Toujours ¦ Uvijek ¦ Vedno
+Jamais ¦ Nikad ¦ Nikoli

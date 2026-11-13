@@ -1,0 +1,1005 @@
+fr ¦ fi ¦ hu
+(l’original reste gardé : on peut y revenir) ¦ (alkuperäinen säilyy: siihen voi palata) ¦ (az eredeti megmarad: vissza lehet térni hozzá)
+(voix, plus léger) ¦ (puhe, kevyempi) ¦ (beszéd, könnyebb)
+1 rush ajouté : glisse-le sur la frise. ¦ 1 raakaotos lisätty: vedä se aikajanalle. ¦ 1 nyersfelvétel hozzáadva: húzd az idővonalra.
+1 rush ajouté : glisse-le sur la frise. Il entre dans les Médias quand tu enregistres le projet. ¦ 1 raakaotos lisätty: vedä se aikajanalle. Se tulee Mediaan, kun tallennat projektin. ¦ 1 nyersfelvétel hozzáadva: húzd az idővonalra. A projekt mentésekor bekerül a Médiába.
+: l’original ne change pas du tout ¦ : alkuperäinen ei muutu lainkaan ¦ : az eredeti egyáltalán nem változik
+<b>Une copie à part</b> (un autre son, rattaché aux mêmes fiches) ¦ <b>Erillinen kopio</b> (toinen ääni, liitetty samoihin kortteihin) ¦ <b>Külön másolat</b> (egy másik hang, ugyanazokhoz az adatlapokhoz kapcsolva)
+<b>Une copie à part</b> (une autre vidéo, rattachée aux mêmes fiches) ¦ <b>Erillinen kopio</b> (toinen video, liitetty samoihin kortteihin) ¦ <b>Külön másolat</b> (egy másik videó, ugyanazokhoz az adatlapokhoz kapcsolva)
+Au repère orange ({time}) ¦ Oranssin merkin kohdalla ({time}) ¦ A narancs jelölőnél ({time})
+Boutons des pistes : {n} px ¦ Raitojen painikkeet: {n} px ¦ A sávok gombjai: {n} px
+Boutons des pistes : {n} px (taille de départ) ¦ Raitojen painikkeet: {n} px (alkuperäinen koko) ¦ A sávok gombjai: {n} px (kezdeti méret)
+Ce fichier est un réglage pour {a}, pas pour {b} : importe-le à sa place. ¦ Tämä tiedosto on asetus kohteelle {a}, ei kohteelle {b}: tuo se oikeaan paikkaan. ¦ Ez a fájl {a} beállítása, nem {b}: importáld a megfelelő helyre.
+Ce qu’il contient ({what}) remonte dans la racine. ¦ Sen sisältö ({what}) siirtyy juureen. ¦ A tartalma ({what}) a gyökérbe kerül.
+Ce qu’il contient ({what}) remonte dans « {dir} ». ¦ Sen sisältö ({what}) siirtyy kansioon ”{dir}”. ¦ A tartalma ({what}) a(z) „{dir}” mappába kerül.
+Chapitre {n} ¦ Luku {n} ¦ {n}. fejezet
+Clic sur la frise : se placer · clic sur un élément : le choisir · glisser : le déplacer · {play} : lire · {split} : couper ici · {del} : enlever ¦ Napsautus aikajanalla: siirry · napsautus kohteeseen: valitse se · vedä: siirrä · {play}: toista · {split}: leikkaa tästä · {del}: poista ¦ Kattintás az idővonalon: odaállás · kattintás egy elemre: kiválasztás · húzás: mozgatás · {play}: lejátszás · {split}: vágás itt · {del}: eltávolítás
+Enregistrement du son… {n} % ¦ Tallennetaan ääntä… {n} % ¦ Hang mentése… {n} %
+Ensemble « {name} » appliqué. ¦ Valmis asetusjoukko ”{name}” otettu käyttöön. ¦ A(z) „{name}” készlet alkalmazva.
+Ensemble « {name} » supprimé ¦ Valmis asetusjoukko ”{name}” poistettu ¦ A(z) „{name}” készlet törölve
+Envoi des rushes {k}/{n}… ¦ Lähetetään raakaotoksia {k}/{n}… ¦ Nyersfelvételek küldése {k}/{n}…
+Espace ¦ Välilyönti ¦ Szóköz
+Fichier {fmt} téléchargé ({n} Mo). Rien n’a changé dans la base. ¦ {fmt}-tiedosto ladattu ({n} Mt). Tietokannassa ei muuttunut mitään. ¦ {fmt} fájl letöltve ({n} MB). Az adatbázisban semmi sem változott.
+Il est utilisé {n} fois sur la frise : ces passages seront retirés aussi. Le fichier reste dans les Médias s’il y est. ¦ Sitä käytetään aikajanalla {n} kertaa: nämä kohdat poistetaan myös. Tiedosto jää Mediaan, jos se on siellä. ¦ {n} alkalommal szerepel az idővonalon: ezek a részek is eltávolításra kerülnek. A fájl a Médiában marad, ha ott van.
+Image clé {time} ¦ Avainkuva {time} ¦ Kulcskocka {time}
+Le fichier importé est maintenant dans les Médias. ¦ Tuotu tiedosto on nyt Mediassa. ¦ Az importált fájl most már a Médiában van.
+Le fichier reste dans les Médias s’il y est. ¦ Tiedosto jää Mediaan, jos se on siellä. ¦ A fájl a Médiában marad, ha ott van.
+Le montage est rejoué pour être enregistré : cela prend <b>{time}</b> (sa durée). Laisse la fenêtre ouverte. ¦ Leikkaus toistetaan tallennusta varten: se kestää <b>{time}</b> (sen keston). Pidä ikkuna auki. ¦ A vágás a mentéshez újra lejátszódik: ez <b>{time}</b> (a hossza). Hagyd nyitva az ablakot.
+Les boutons des pistes ont déjà leur taille de départ. ¦ Raitojen painikkeilla on jo alkuperäinen koko. ¦ A sávok gombjai már a kezdeti méretükön vannak.
+Les boutons des pistes sont déjà au plus grand. ¦ Raitojen painikkeet ovat jo suurimmillaan. ¦ A sávok gombjai már a legnagyobbak.
+Les boutons des pistes sont déjà au plus petit. ¦ Raitojen painikkeet ovat jo pienimmillään. ¦ A sávok gombjai már a legkisebbek.
+Les {n} fichiers importés sont maintenant dans les Médias. ¦ {n} tuotua tiedostoa on nyt Mediassa. ¦ A(z) {n} importált fájl most már a Médiában van.
+Mettre « {name} » dans… ¦ Laita ”{name}” kohteeseen… ¦ „{name}” áthelyezése ide…
+Montage fabriqué : {what}. Retouche ce que tu veux, puis ⤓ Exporter. ¦ Leikkaus tehty: {what}. Muokkaa mitä haluat ja sitten ⤓ Vie. ¦ Vágás elkészült: {what}. Igazíts rajta, amit akarsz, majd ⤓ Exportálás.
+Nom du dossier (dans « {name} ») : ¦ Kansion nimi (kansiossa ”{name}”): ¦ A mappa neve (a(z) „{name}” mappában):
+Nom du dossier : ¦ Kansion nimi: ¦ A mappa neve:
+Nouveau chapitre ¦ Uusi luku ¦ Új fejezet
+Nouvelle version, <b>sans la montrer</b> pour l’instant ¦ Uusi versio, <b>näyttämättä sitä</b> toistaiseksi ¦ Új verzió, egyelőre <b>megjelenítés nélkül</b>
+Nouvelle version, montrée partout ¦ Uusi versio, näytetään kaikkialla ¦ Új verzió, mindenhol megjelenítve
+Ouvre une fois {what} : ses boutons apparaîtront ici. ¦ Avaa kerran {what}: sen painikkeet tulevat näkyviin tähän. ¦ Nyisd meg egyszer: {what}; a gombjai itt jelennek meg.
+Où mettre « {name} » ? ¦ Minne ”{name}” laitetaan? ¦ Hová kerüljön a(z) „{name}”?
+Piste « {name} » ajoutée. ¦ Raita ”{name}” lisätty. ¦ A(z) „{name}” sáv hozzáadva.
+Piste « {name} » supprimée ¦ Raita ”{name}” poistettu ¦ A(z) „{name}” sáv törölve
+Piste « {name} » supprimée (avec {what}) ¦ Raita ”{name}” poistettu ({what} mukaan lukien) ¦ A(z) „{name}” sáv törölve ({what} is)
+Piste « {name} » vidée ¦ Raita ”{name}” tyhjennetty ¦ A(z) „{name}” sáv kiürítve
+Ranger « {name} » dans… ¦ Järjestä ”{name}” kohteeseen… ¦ „{name}” elhelyezése ide…
+Remplacer les réglages actuels par l’ensemble « {name} » ? ¦ Korvataanko nykyiset asetukset valmiilla asetusjoukolla ”{name}”? ¦ Lecseréled a jelenlegi beállításokat a(z) „{name}” készletre?
+Rush supprimé, avec ses {n} passages sur la frise. ¦ Raakaotos poistettu yhdessä sen {n} aikajanakohdan kanssa. ¦ Nyersfelvétel törölve, az idővonalon lévő {n} részével együtt.
+Rush supprimé, avec son passage sur la frise. ¦ Raakaotos poistettu yhdessä sen aikajanakohdan kanssa. ¦ Nyersfelvétel törölve, az idővonalon lévő részével együtt.
+Rush supprimé. ¦ Raakaotos poistettu. ¦ Nyersfelvétel törölve.
+Réglage « {name} » importé : « Appliquer » pour l’utiliser. ¦ Asetus ”{name}” tuotu: ”Käytä” ottaa sen käyttöön. ¦ A(z) „{name}” beállítás importálva: az „Alkalmazás” gombbal használhatod.
+Supprimer le dossier « {name} » ? ¦ Poistetaanko kansio ”{name}”? ¦ Törlöd a(z) „{name}” mappát?
+Supprimer le rush ¦ Poista raakaotos ¦ Nyersfelvétel törlése
+Supprimer « {name} » du projet ? ¦ Poistetaanko ”{name}” projektista? ¦ Törlöd a(z) „{name}” elemet a projektből?
+Titre de la vidéo ¦ Videon otsikko ¦ A videó címe
+Titre du chapitre qui commence à {time} : ¦ Kohdasta {time} alkavan luvun otsikko: ¦ A(z) {time}-kor kezdődő fejezet címe:
+Titre du son ¦ Äänen otsikko ¦ A hang címe
+Un réglage s’appelle déjà « {name} ». Quel nom pour celui-ci ? ¦ Asetuksen nimi ”{name}” on jo käytössä. Minkä nimen annat tälle? ¦ Már van „{name}” nevű beállítás. Milyen nevet adsz ennek?
+ce rush ¦ tämä raakaotos ¦ ez a nyersfelvétel
+comme l’original (mono) ¦ kuten alkuperäinen (mono) ¦ mint az eredeti (monó)
+comme l’original (stéréo) ¦ kuten alkuperäinen (stereo) ¦ mint az eredeti (sztereó)
+comme l’original ({n} kHz) ¦ kuten alkuperäinen ({n} kHz) ¦ mint az eredeti ({n} kHz)
+la copie est rattachée aux mêmes fiches ¦ kopio liitetään samoihin kortteihin ¦ a másolat ugyanazokhoz az adatlapokhoz kapcsolódik
+la disposition du montage ¦ leikkauksen asettelu ¦ a vágás elrendezése
+le plus léger pour la voix · environ {n} Mo · QuickTime ne le lit pas ¦ kevyin puheelle · noin {n} Mt · QuickTime ei toista sitä ¦ a legkönnyebb beszédhez · kb. {n} MB · a QuickTime nem játssza le
+le plus léger · ~{n} Mo ¦ kevyin · ~{n} Mt ¦ a legkönnyebb · ~{n} MB
+les boutons de « {name} » ¦ kohteen ”{name}” painikkeet ¦ a(z) „{name}” gombjai
+lu absolument partout (téléphones, voitures, Mac, Windows) · environ {n} Mo en 128 kbit/s ¦ toimii aivan kaikkialla (puhelimet, autot, Mac, Windows) · noin {n} Mt 128 kbit/s:llä ¦ mindenhol lejátszható (telefonok, autók, Mac, Windows) · kb. {n} MB 128 kbit/s-mal
+lu partout · ~{n} Mo ¦ toimii kaikkialla · ~{n} Mt ¦ mindenhol lejátszható · ~{n} MB
+l’original est toujours gardé · montrée : {name} ¦ alkuperäinen säilyy aina · näytetään: {name} ¦ az eredeti mindig megmarad · megjelenítve: {name}
+l’outil « {name} » ¦ työkalu ”{name}” ¦ a(z) „{name}” eszköz
+nouvelle version, copie (réglages) ¦ uusi versio, kopio (asetukset) ¦ új verzió, másolat (beállítások)
+rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité, images par seconde et volume (📢 {n} LUFS) : Réglages → Montage ¦ toistetaan reaaliajassa tallennusta varten (pidä ikkuna auki) · koko, laatu, kuvaa sekunnissa ja äänenvoimakkuus (📢 {n} LUFS): Asetukset → Leikkaus ¦ valós időben újrajátszva a mentéshez (hagyd nyitva az ablakot) · méret, minőség, képkocka/másodperc és hangerő (📢 {n} LUFS): Beállítások → Vágás
+rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité, images par seconde et volume standard : Réglages → Montage ¦ toistetaan reaaliajassa tallennusta varten (pidä ikkuna auki) · koko, laatu, kuvaa sekunnissa ja vakioäänenvoimakkuus: Asetukset → Leikkaus ¦ valós időben újrajátszva a mentéshez (hagyd nyitva az ablakot) · méret, minőség, képkocka/másodperc és szabványos hangerő: Beállítások → Vágás
+sans perte et environ deux fois plus léger que le WAV · environ {n} Mo · lu par les navigateurs, VLC, Windows ; pas par QuickTime ¦ häviötön ja noin puolet kevyempi kuin WAV · noin {n} Mt · toimii selaimissa, VLC:ssä ja Windowsissa; ei QuickTimessa ¦ veszteségmentes és kb. fele akkora, mint a WAV · kb. {n} MB · a böngészők, a VLC és a Windows lejátssza; a QuickTime nem
+sans perte · ~{n} Mo ¦ häviötön · ~{n} Mt ¦ veszteségmentes · ~{n} MB
+sans perte, lu partout (Mac, Windows, Audacity) · environ {n} Mo ¦ häviötön, toimii kaikkialla (Mac, Windows, Audacity) · noin {n} Mt ¦ veszteségmentes, mindenhol lejátszható (Mac, Windows, Audacity) · kb. {n} MB
+sans perte, léger · ~{n} Mo ¦ häviötön, kevyt · ~{n} Mt ¦ veszteségmentes, könnyű · ~{n} MB
+sans perte, pour GarageBand, Logic, QuickTime · environ {n} Mo · à télécharger seulement (l’app ne le lit pas) ¦ häviötön, GarageBandiin, Logiciin, QuickTimeen · noin {n} Mt · vain ladattavaksi (sovellus ei toista sitä) ¦ veszteségmentes, GarageBandhez, Logichoz, QuickTime-hoz · kb. {n} MB · csak letöltéshez (az app nem játssza le)
+stéréo ¦ stereo ¦ sztereó
+sur chaque temps ¦ joka iskulla ¦ minden ütemre
+tourné de {n}° ¦ käännetty {n}° ¦ {n}°-kal elforgatva
+tous les {n} temps ¦ joka {n}. iskulla ¦ minden {n}. ütemre
+{file} : ni vidéo, ni photo, ni son. ¦ {file}: ei video, valokuva eikä ääni. ¦ {file}: se nem videó, se nem fénykép, se nem hang.
+{n} images/s ¦ {n} kuvaa/s ¦ {n} kép/s
+{n} rushes ajoutés : glisse-les sur la frise. ¦ {n} raakaotosta lisätty: vedä ne aikajanalle. ¦ {n} nyersfelvétel hozzáadva: húzd őket az idővonalra.
+{n} rushes ajoutés : glisse-les sur la frise. Ils entrent dans les Médias quand tu enregistres le projet. ¦ {n} raakaotosta lisätty: vedä ne aikajanalle. Ne tulevat Mediaan, kun tallennat projektin. ¦ {n} nyersfelvétel hozzáadva: húzd őket az idővonalra. A projekt mentésekor bekerülnek a Médiába.
+{n} temps repérés · environ {bpm} battements par minute. ¦ {n} iskua tunnistettu · noin {bpm} lyöntiä minuutissa. ¦ {n} ütem felismerve · kb. {bpm} ütés percenként.
+{n} temps repérés. ¦ {n} iskua tunnistettu. ¦ {n} ütem felismerve.
+{what} : choisis-en un puis « Appliquer ». ¦ {what}: valitse yksi ja sitten ”Käytä”. ¦ {what}: válassz egyet, majd „Alkalmazás”.
+{what} sur la piste « Sous-titres ». ¦ {what} raidalla ”Tekstitys”. ¦ {what} a „Feliratok” sávon.
+« {name} » est revenu du Studio son, nettoyé. ¦ ”{name}” palasi Äänistudiosta puhdistettuna. ¦ A(z) „{name}” megtisztítva visszajött a Hangstúdióból.
+« {name} » rangé dans la racine. ¦ ”{name}” siirretty juureen. ¦ A(z) „{name}” a gyökérbe került.
+« {name} » rangé dans « {dir} ». ¦ ”{name}” siirretty kansioon ”{dir}”. ¦ A(z) „{name}” a(z) „{dir}” mappába került.
+À la fin ¦ Loppuun ¦ A végére
+◇ image clé à {time} ¦ ◇ avainkuva kohdassa {time} ¦ ◇ kulcskocka itt: {time}
+🎥 {what} à la piste 1 (décalages : {offs}). ¦ 🎥 {what} raidalle 1 (siirrot: {offs}). ¦ 🎥 {what} az 1. sávra (eltolások: {offs}).
+💾 Dans les médias… ¦ 💾 Mediaan… ¦ 💾 A médiába…
+📢 Mesure du volume… {n} % ¦ 📢 Mitataan äänenvoimakkuutta… {n} % ¦ 📢 Hangerő mérése… {n} %
+📢 Volume mesuré : {a} LUFS → {b} LUFS (crêtes tenues par le limiteur). ¦ 📢 Mitattu äänenvoimakkuus: {a} LUFS → {b} LUFS (huiput rajoittimen hallinnassa). ¦ 📢 Mért hangerő: {a} LUFS → {b} LUFS (a csúcsokat a limiter fogja meg).
+📢 Volume mesuré : {a} LUFS → {b} LUFS. ¦ 📢 Mitattu äänenvoimakkuus: {a} LUFS → {b} LUFS. ¦ 📢 Mért hangerő: {a} LUFS → {b} LUFS.
+🔒 Piste « {name} » verrouillée : ses éléments ne bougent plus. ¦ 🔒 Raita ”{name}” lukittu: sen kohteet eivät enää liiku. ¦ 🔒 A(z) „{name}” sáv zárolva: az elemei már nem mozdulnak.
+🔓 Piste « {name} » déverrouillée. ¦ 🔓 Raidan ”{name}” lukitus avattu. ¦ 🔓 A(z) „{name}” sáv zárolása feloldva.
+🕘 Versions ({n})… ¦ 🕘 Versiot ({n})… ¦ 🕘 Verziók ({n})…
+🥁 {n} temps repérés (environ {bpm} par minute). ¦ 🥁 {n} iskua tunnistettu (noin {bpm} minuutissa). ¦ 🥁 {n} ütem felismerve (kb. {bpm} percenként).
+🥁 {n} temps repérés. ¦ 🥁 {n} iskua tunnistettu. ¦ 🥁 {n} ütem felismerve.
+=rush ¦ raakaotos|raakaotosta ¦ nyersfelvétel|nyersfelvétel
+=plan ajouté ¦ otos lisätty|otosta lisätty ¦ snitt hozzáadva|snitt hozzáadva
+=sous-titre importé ¦ tekstitys tuotu|tekstitystä tuotu ¦ felirat importálva|felirat importálva
+=ensemble importé ¦ valmis asetusjoukko tuotu|valmista asetusjoukkoa tuotu ¦ készlet importálva|készlet importálva
+=réglage du Studio reste appliqué ¦ Studion asetus on yhä käytössä|Studion asetusta on yhä käytössä ¦ stúdióbeállítás továbbra is érvényben|stúdióbeállítás továbbra is érvényben
+=morceau ¦ kappale|kappaletta ¦ szám|szám
+(rien ne change dans la base) ¦ (tietokannassa ei muutu mitään) ¦ (az adatbázisban semmi sem változik)
+(un autre son, rattaché aux mêmes fiches) ¦ (toinen ääni, liitetty samoihin kortteihin) ¦ (egy másik hang, ugyanazokhoz az adatlapokhoz kapcsolva)
+(une autre vidéo, rattachée aux mêmes fiches) ¦ (toinen video, liitetty samoihin kortteihin) ¦ (egy másik videó, ugyanazokhoz az adatlapokhoz kapcsolva)
+300 dossiers au plus. ¦ Enintään 300 kansiota. ¦ Legfeljebb 300 mappa.
+bandes floues plutôt que noires ¦ sumeat reunat mustien sijaan ¦ elmosott sávok a fekete helyett
+Activer / couper ¦ Ota käyttöön / mykistä ¦ Bekapcsolás / némítás
+Adaptation spatiale ¦ Tilasovitus ¦ Térbeli igazítás
+Adapter (toute l’image, bandes noires) ¦ Sovita (koko kuva, mustat reunat) ¦ Illesztés (teljes kép, fekete sávok)
+Aide sous la frise ¦ Ohje aikajanan alla ¦ Súgó az idővonal alatt
+Aigus ¦ Diskantti ¦ Magas hangok
+Aimant arrêté. ¦ Magneettikohdistus pois. ¦ Mágneses igazítás kikapcsolva.
+Aimanter : en glissant, un élément se colle à la tête de lecture, au début ou à la fin des autres, aux chapitres et aux temps de la musique (garder Alt / Option appuyé : sans aimant) ¦ Magneettikohdistus: vedettäessä kohde tarttuu toistopäähän, muiden alkuun tai loppuun, lukuihin ja musiikin iskuihin (pidä Alt / Option pohjassa: ilman magneettia) ¦ Mágneses igazítás: húzáskor az elem a lejátszófejhez, a többiek elejéhez vagy végéhez, a fejezetekhez és a zene ütemeihez tapad (Alt / Option lenyomva: mágnes nélkül)
+Aimanter : un élément glissé se colle à la tête de lecture, aux autres éléments, aux chapitres et aux temps de la musique (Alt / Option : sans aimant) ¦ Magneettikohdistus: vedetty kohde tarttuu toistopäähän, muihin kohteisiin, lukuihin ja musiikin iskuihin (Alt / Option: ilman magneettia) ¦ Mágneses igazítás: a húzott elem a lejátszófejhez, a többi elemhez, a fejezetekhez és a zene ütemeihez tapad (Alt / Option: mágnes nélkül)
+Ajouter une image clé ici (la valeur pourra changer au fil du temps) ¦ Lisää avainkuva tähän (arvo voi muuttua ajan myötä) ¦ Kulcskocka hozzáadása ide (az érték idővel változhat)
+Aller à l'image clé précédente de l'élément choisi ¦ Siirry valitun kohteen edelliseen avainkuvaan ¦ Ugrás a kiválasztott elem előző kulcskockájára
+Aller à l'image clé suivante de l'élément choisi ¦ Siirry valitun kohteen seuraavaan avainkuvaan ¦ Ugrás a kiválasztott elem következő kulcskockájára
+Le nom du projet (pour le retrouver dans 📂 Projets…) ¦ Projektin nimi (löytääksesi sen kohdasta 📂 Projektit…) ¦ A projekt neve (hogy megtaláld a 📂 Projektek… között)
+Le son du morceau passe sur une piste son, à part ¦ Kappaleen ääni siirtyy erilliselle ääniraidalle ¦ A szám hangja külön hangsávra kerül
+Le son fini : nouvelle version (l’original est gardé), copie, nouveau son ou fichier téléchargé ¦ Valmis ääni: uusi versio (alkuperäinen säilyy), kopio, uusi ääni tai ladattu tiedosto ¦ A kész hang: új verzió (az eredeti megmarad), másolat, új hang vagy letöltött fájl
+Ancien film ¦ Vanha filmi ¦ Régi film
+Ancrage X ¦ Ankkuri X ¦ Horgony X
+Ancrage Y ¦ Ankkuri Y ¦ Horgony Y
+Au début ¦ Alkuun ¦ Az elejére
+Aucun projet son pour l’instant ¦ Ei vielä ääniprojekteja ¦ Még nincs hangprojekt
+Aucun sous-titre reconnu (fichier .srt ou .vtt). ¦ Tekstitystä ei tunnistettu (.srt- tai .vtt-tiedosto). ¦ Nem található felirat (.srt vagy .vtt fájl).
+Aucune (taille d’origine) ¦ Ei mitään (alkuperäinen koko) ¦ Nincs (eredeti méret)
+Aussi ⌘ + et ⌘ −, ⌘ 0 pour revenir ¦ Myös ⌘ + ja ⌘ −, ⌘ 0 palaa ¦ ⌘ + és ⌘ − is, ⌘ 0 a visszatéréshez
+Avancer le morceau dans la piste 1 ¦ Siirrä kappaletta aikaisemmaksi raidalla 1 ¦ A szám előrébb hozása az 1. sávon
+← Avancer ¦ ← Aikaisemmaksi ¦ ← Előrébb
+Reculer → ¦ Myöhemmäksi → ¦ Hátrébb →
+Bord adouci ¦ Pehmennetty reuna ¦ Lágyított szél
+Boutons remis comme au départ. ¦ Painikkeet palautettu alkuperäisiksi. ¦ Gombok visszaállítva alapra.
+Cacher cette piste (ni vue ni entendue) ¦ Piilota tämä raita (ei näy eikä kuulu) ¦ A sáv elrejtése (se nem látszik, se nem hallatszik)
+Montrée ¦ Näytetään ¦ Látható
+Cachée ¦ Piilotettu ¦ Rejtett
+Ce fichier n’est pas une disposition du montage. ¦ Tämä tiedosto ei ole leikkauksen asettelu. ¦ Ez a fájl nem vágási elrendezés.
+Ce réglage est vide ou abîmé. ¦ Tämä asetus on tyhjä tai vioittunut. ¦ Ez a beállítás üres vagy sérült.
+Cette piste est déjà vide. ¦ Tämä raita on jo tyhjä. ¦ Ez a sáv már üres.
+Chapitres copiés. ¦ Luvut kopioitu. ¦ Fejezetek másolva.
+Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse un élément pour le déplacer dans le temps, ou sur une autre piste du même genre (vidéos et photos vont sur toutes les pistes vidéo, texte ↔ texte, son ↔ son). Espace = lire / pause · ⌫ ou Suppr = enlever · B = couper ici · ◇ = image clé · 🧲 un élément glissé se colle aux autres (Alt / Option : sans aimant) · 🔒 une piste verrouillée ne bouge plus. ¦ Napsauta aikajanaa siirtyäksesi, kohdetta valitaksesi; vedä kohdetta siirtääksesi sitä ajassa tai samanlaiselle raidalle (videot ja kuvat kaikille videoraidoille, teksti ↔ teksti, ääni ↔ ääni). Välilyönti = toista / tauko · ⌫ tai Del = poista · B = leikkaa tästä · ◇ = avainkuva · 🧲 vedetty kohde tarttuu muihin (Alt / Option: ilman magneettia) · 🔒 lukittu raita ei enää liiku. ¦ Kattints az idővonalra az odaálláshoz, egy elemre a kiválasztásához; húzz egy elemet az időben való mozgatásához, vagy egy azonos fajta sávra (videók és fotók bármely videósávra, szöveg ↔ szöveg, hang ↔ hang). Szóköz = lejátszás / szünet · ⌫ vagy Del = eltávolítás · B = vágás itt · ◇ = kulcskocka · 🧲 a húzott elem a többihez tapad (Alt / Option: mágnes nélkül) · 🔒 a zárolt sáv már nem mozdul.
+Comme la 1re vidéo ¦ Kuten 1. video ¦ Mint az 1. videó
+Comme la vidéo ¦ Kuten video ¦ Mint a videó
+Composition ¦ Sommittelu ¦ Kompozíció
+Copie ce texte : ¦ Kopioi tämä teksti: ¦ Másold ki ezt a szöveget:
+Couleur du fondu ¦ Häivytyksen väri ¦ Az áttűnés színe
+Couleurs vives ¦ Kirkkaat värit ¦ Élénk színek
+Coupe franche ¦ Suora leikkaus ¦ Éles vágás
+Coupe le morceau choisi à la tête de lecture ¦ Leikkaa valittu pala toistopään kohdalta ¦ A kiválasztott darab elvágása a lejátszófejnél
+Commence ici ¦ Alkaa tästä ¦ Itt kezdődik
+Finit ici ¦ Päättyy tähän ¦ Itt végződik
+Le morceau choisi commence à la tête de lecture ¦ Valittu pala alkaa toistopään kohdalta ¦ A kiválasztott darab a lejátszófejnél kezdődik
+Le morceau choisi finit à la tête de lecture ¦ Valittu pala päättyy toistopään kohdalle ¦ A kiválasztott darab a lejátszófejnél végződik
+Dans « Modifier le son », « 💾 Enregistrer le projet ». ¦ Kohdassa ”Muokkaa ääntä” valitse ”💾 Tallenna projekti”. ¦ A „Hang szerkesztése” részben: „💾 Projekt mentése”.
+Monter ce bloc ¦ Siirrä tätä lohkoa ylös ¦ Blokk feljebb
+Descendre ce bloc ¦ Siirrä tätä lohkoa alas ¦ Blokk lejjebb
+Monter la piste ¦ Siirrä raitaa ylös ¦ Sáv feljebb
+Descendre la piste ¦ Siirrä raitaa alas ¦ Sáv lejjebb
+Distorsion ¦ Särö ¦ Torzítás
+Doux ¦ Pehmeä ¦ Lágy
+Durée du film : ¦ Elokuvan kesto: ¦ A film hossza:
+Durée illisible ¦ Kestoa ei voi lukea ¦ Olvashatatlan időtartam
+Durée par photo ¦ Kesto kuvaa kohden ¦ Időtartam fotónként
+Durée à l’écran ¦ Kesto ruudulla ¦ Időtartam a képernyőn
+Défiler ¦ Vieritä ¦ Görgetés
+Détacher le son ¦ Irrota ääni ¦ Hang leválasztása
+🔊 Détacher le son ¦ 🔊 Irrota ääni ¦ 🔊 Hang leválasztása
+Montrer cette piste ¦ Näytä tämä raita ¦ A sáv megjelenítése
+Déverrouiller la piste ¦ Avaa raidan lukitus ¦ Sáv zárolásának feloldása
+Verrouiller la piste (ses éléments ne bougent plus, ne se coupent plus, ne s’enlèvent plus) ¦ Lukitse raita (sen kohteet eivät enää liiku, leikkaudu eikä poistu) ¦ Sáv zárolása (az elemei már nem mozdulnak, nem vághatók, nem távolíthatók el)
+ENREGISTRER LE SON ¦ TALLENNA ÄÄNI ¦ HANG MENTÉSE
+EXPORTER LA VIDÉO ¦ VIE VIDEO ¦ VIDEÓ EXPORTÁLÁSA
+Effacer les temps ¦ Poista iskut ¦ Ütemek törlése
+Repérer les temps ¦ Tunnista iskut ¦ Ütemek felismerése
+Repérer de nouveau ¦ Tunnista uudelleen ¦ Újbóli felismerés
+Effet Ken Burns ¦ Ken Burns -efekti ¦ Ken Burns-effektus
+Effet vieux film : grain, rayures, poussières, image qui scintille, coins assombris ¦ Vanhan filmin efekti: rae, naarmut, pöly, välkkyvä kuva, tummennetut kulmat ¦ Régi film effektus: szemcse, karcok, por, villódzó kép, sötétített sarkok
+En couple ¦ Pariskuntana ¦ Párban
+Les parents ¦ Vanhemmat ¦ A szülők
+Les enfants ¦ Lapset ¦ A gyerekek
+En incrustation, à la tête de lecture ¦ Upotuksena, toistopään kohdalle ¦ Beillesztésként, a lejátszófejnél
+Enlever cette image clé ¦ Poista tämä avainkuva ¦ Kulcskocka eltávolítása
+Enlever l'élément choisi ¦ Poista valittu kohde ¦ A kiválasztott elem eltávolítása
+🗑 Enlever ¦ 🗑 Poista ¦ 🗑 Eltávolítás
+Enlever la stabilisation ¦ Poista vakautus ¦ Stabilizálás eltávolítása
+Enlever le reflet vert sur le sujet (cheveux, bords) ¦ Poista vihreä heijastus kohteesta (hiukset, reunat) ¦ A zöld visszaverődés eltávolítása a témáról (haj, szélek)
+Enregistre ta voix au micro pendant que le film défile (casque conseillé) ¦ Nauhoita äänesi mikrofonilla elokuvan pyöriessä (kuulokkeet suositeltavat) ¦ Vedd fel a hangodat mikrofonnal, miközben a film fut (fejhallgató ajánlott)
+Enregistrer le projet de montage, pour le rouvrir et continuer plus tard (⌘S) ¦ Tallenna leikkausprojekti avataksesi sen myöhemmin ja jatkaaksesi (⌘S) ¦ A vágási projekt mentése, hogy később újra megnyisd és folytasd (⌘S)
+Enregistrer le projet son, pour y revenir plus tard (⌘S) ¦ Tallenna ääniprojekti palataksesi siihen myöhemmin (⌘S) ¦ A hangprojekt mentése, hogy később visszatérj hozzá (⌘S)
+Entre deux images clés ¦ Kahden avainkuvan välissä ¦ Két kulcskocka között
+en douceur ¦ pehmeästi ¦ lágyan
+régulier ¦ tasaisesti ¦ egyenletesen
+Exporter un fichier (et, si tu veux, une copie dans les médias) ¦ Vie tiedosto (ja halutessasi kopio mediaan) ¦ Fájl exportálása (és ha akarod, egy másolat a médiába)
+Fabrique le fichier vidéo (MP4 ou WebM, plusieurs formats d’image) et le range dans les médias : nouvelle version, copie ou nouvelle vidéo ¦ Tekee videotiedoston (MP4 tai WebM, useita kuvasuhteita) ja tallentaa sen mediaan: uusi versio, kopio tai uusi video ¦ Elkészíti a videófájlt (MP4 vagy WebM, több képformátum), és a médiába teszi: új verzió, másolat vagy új videó
+Fermer sans enregistrer les modifications ? ¦ Suljetaanko tallentamatta muutoksia? ¦ Bezárod a módosítások mentése nélkül?
+Fondu au blanc ¦ Häivytys valkoiseen ¦ Áttűnés fehérbe
+Fondu au noir ¦ Häivytys mustaan ¦ Áttűnés feketébe
+Fondu d’entrée ¦ Sisäänhäivytys ¦ Beúsztatás
+Fondu de sortie ¦ Ulos häivytys ¦ Kiúsztatás
+↗ Fondu d’entrée ¦ ↗ Sisäänhäivytys ¦ ↗ Beúsztatás
+↘ Fondu de sortie ¦ ↘ Ulos häivytys ¦ ↘ Kiúsztatás
+Fondu en couleur (au choix) ¦ Häivytys väriin (valittava) ¦ Áttűnés színbe (választható)
+Fondu enchaîné ¦ Ristihäivytys ¦ Kereszt-áttűnés
+Fondu flou ¦ Sumea häivytys ¦ Elmosódó áttűnés
+Genre (vidéo, photo, son) ¦ Laji (video, valokuva, ääni) ¦ Fajta (videó, fotó, hang)
+Glisse depuis la droite ¦ Liukuu oikealta ¦ Becsúszik jobbról
+Glisse depuis la gauche ¦ Liukuu vasemmalta ¦ Becsúszik balról
+Glisse sur l’onde pour sélectionner · clic = se placer · Espace = écouter · molette = défiler, Ctrl + molette = zoom ¦ Vedä aaltomuodon päällä valitaksesi · napsautus = siirry · Välilyönti = kuuntele · rulla = vieritä, Ctrl + rulla = zoomaa ¦ Húzz a hullámformán a kijelöléshez · kattintás = odaállás · Szóköz = meghallgatás · görgő = görgetés, Ctrl + görgő = nagyítás
+Glisse-le sur une piste de la frise ¦ Vedä se aikajanan raidalle ¦ Húzd az idővonal egyik sávjára
+Glissement vers la droite ¦ Liuku oikealle ¦ Csúszás jobbra
+Glissement vers la gauche (la suivante pousse) ¦ Liuku vasemmalle (seuraava työntää) ¦ Csúszás balra (a következő tolja)
+Glissement vers le bas ¦ Liuku alas ¦ Csúszás lefelé
+Glissement vers le haut ¦ Liuku ylös ¦ Csúszás felfelé
+Glisser pour élargir ou rétrécir le panneau (double-clic : largeur de départ) ¦ Vedä leventääksesi tai kaventaaksesi paneelia (kaksoisnapsautus: alkuperäinen leveys) ¦ Húzd a panel szélesítéséhez vagy szűkítéséhez (dupla kattintás: kezdeti szélesség)
+Graves ¦ Basso ¦ Mély hangok
+Tons moyens ¦ Keskiäänet ¦ Középhangok
+Hauteur des pistes ¦ Raitojen korkeus ¦ A sávok magassága
+Taille des boutons des pistes ¦ Raitojen painikkeiden koko ¦ A sávgombok mérete
+Image et son ¦ Kuva ja ääni ¦ Kép és hang
+Images par seconde ¦ Kuvaa sekunnissa ¦ Képkocka másodpercenként
+Importe tes vidéos et photos dans l’onglet 🎞️ Rush, puis glisse-les sur la frise (ou « ＋ Vidéo / photo à la suite »). ¦ Tuo videosi ja valokuvasi välilehdelle 🎞️ Raakaotokset ja vedä ne sitten aikajanalle (tai ”＋ Video / valokuva perään”). ¦ Importáld a videóidat és fotóidat a 🎞️ Nyersfelvételek lapra, majd húzd őket az idővonalra (vagy „＋ Videó / fotó utána”).
+Inclinaison horizontale ¦ Vaakakallistus ¦ Vízszintes döntés
+Inclinaison verticale ¦ Pystykallistus ¦ Függőleges döntés
+Indique un nombre, par exemple 6 ou -3. ¦ Anna luku, esimerkiksi 6 tai -3. ¦ Adj meg egy számot, például 6 vagy -3.
+＋ Incrustation ¦ ＋ Upotus ¦ ＋ Beillesztés
+＋ Incruster ¦ ＋ Upota ¦ ＋ Beillesztés
+Une vidéo ou une photo dans un coin de l'image, à la tête de lecture ¦ Video tai valokuva kuvan kulmaan, toistopään kohdalle ¦ Videó vagy fotó a kép egyik sarkában, a lejátszófejnél
+Une vidéo ou une photo, à la suite dans la piste Vidéo 1 ¦ Video tai valokuva perään raidalle Video 1 ¦ Videó vagy fotó utána a Videó 1 sávon
+＋ Vidéo / photo à la suite ¦ ＋ Video / valokuva perään ¦ ＋ Videó / fotó utána
+Vidéo / photo à la suite ¦ Video / valokuva perään ¦ Videó / fotó utána
+Lecture ¦ Toisto ¦ Lejátszás
+Les modifications du montage seront perdues. ¦ Leikkauksen muutokset menetetään. ¦ A vágás módosításai elvesznek.
+Les modifications du son seront perdues. ¦ Äänen muutokset menetetään. ¦ A hang módosításai elvesznek.
+Les photos arrivent… ¦ Valokuvat tulevat… ¦ Érkeznek a fotók…
+Les réglages s’appliquent à la sélection ; sans sélection, à tout le son. ¦ Asetukset koskevat valintaa; ilman valintaa koko ääntä. ¦ A beállítások a kijelölésre vonatkoznak; kijelölés nélkül a teljes hangra.
+Les vidéos, photos et sons du projet ¦ Projektin videot, valokuvat ja äänet ¦ A projekt videói, fotói és hangjai
+Lettres qui se resserrent ¦ Toisiaan lähestyvät kirjaimet ¦ Összehúzódó betűk
+Lettres qui s’écartent ¦ Toisistaan loittonevat kirjaimet ¦ Széttávolodó betűk
+Lissage du mouvement ¦ Liikkeen tasoitus ¦ Mozgás simítása
+MODIFIER LE SON ¦ MUOKKAA ÄÄNTÄ ¦ HANG SZERKESZTÉSE
+MODÈLE DE MONTAGE ¦ LEIKKAUKSEN MALLI ¦ VÁGÁSI SABLON
+MONTAGE VIDÉO ¦ VIDEON LEIKKAUS ¦ VIDEÓVÁGÁS
+🎬 MONTAGE VIDÉO ¦ 🎬 VIDEON LEIKKAUS ¦ 🎬 VIDEÓVÁGÁS
+🎬 MONTAGE ¦ 🎬 LEIKKAUS ¦ 🎬 VÁGÁS
+Mets la vidéo du fond vert au-dessus (incrustation, tout l’écran), et le décor (photo d’archive, autre vidéo) dessous, sur la piste 1. ¦ Laita vihreän taustan video päälle (upotus, koko näyttö) ja tausta (arkistokuva, toinen video) alle raidalle 1. ¦ Tedd a zöld hátteres videót felülre (beillesztés, teljes képernyő), a hátteret (archív fotó, másik videó) alá, az 1. sávra.
+Mettre ce dossier dans un autre ¦ Siirrä tämä kansio toiseen ¦ A mappa áthelyezése egy másikba
+Mode de fusion ¦ Sekoitustila ¦ Keverési mód
+Mon son ¦ Oma ääneni ¦ Saját hangom
+Mot par mot ¦ Sana sanalta ¦ Szóról szóra
+Musique pendant la voix ¦ Musiikki puheen aikana ¦ Zene beszéd közben
+Nom du fichier téléchargé ¦ Ladatun tiedoston nimi ¦ A letöltött fájl neve
+Non, nettoyer la sélection ¦ Ei, puhdista valinta ¦ Nem, tisztítsd a kijelölést
+Oui, c’est du bruit seul ¦ Kyllä, se on pelkkää kohinaa ¦ Igen, ez csak zaj
+Nouveau dossier dans le dossier ouvert ¦ Uusi kansio avoimeen kansioon ¦ Új mappa a megnyitott mappában
+Nouveau montage ¦ Uusi leikkaus ¦ Új vágás
+Nouveau son enregistré, rattaché aux mêmes fiches. ¦ Uusi ääni tallennettu, liitetty samoihin kortteihin. ¦ Új hang mentve, ugyanazokhoz az adatlapokhoz kapcsolva.
+Nouveau ⚡ Son rapide ¦ Uusi ⚡ Nopea ääni ¦ Új ⚡ Gyors hang
+Nouvelle version montrée partout. L’original est gardé. ¦ Uusi versio näytetään kaikkialla. Alkuperäinen säilyy. ¦ Az új verzió mindenhol megjelenik. Az eredeti megmarad.
+Nouvelle vidéo enregistrée, rattachée aux mêmes fiches. ¦ Uusi video tallennettu, liitetty samoihin kortteihin. ¦ Új videó mentve, ugyanazokhoz az adatlapokhoz kapcsolva.
+Version enregistrée (l’ancienne reste montrée). ¦ Versio tallennettu (vanha näytetään edelleen). ¦ Verzió mentve (a régi marad megjelenítve).
+Ordre d’arrivée ¦ Saapumisjärjestys ¦ Érkezési sorrend
+Trier les rushes ¦ Lajittele raakaotokset ¦ Nyersfelvételek rendezése
+Outils du montage ¦ Leikkauksen työkalut ¦ Vágóeszközök
+Outils du son ¦ Äänen työkalut ¦ Hangeszközök
+Ouverture du son… ¦ Avataan ääntä… ¦ Hang megnyitása…
+Ouvrir ce dossier ¦ Avaa tämä kansio ¦ A mappa megnyitása
+Renommer ce dossier ¦ Nimeä tämä kansio uudelleen ¦ A mappa átnevezése
+Renommer ce rush ¦ Nimeä tämä raakaotos uudelleen ¦ A nyersfelvétel átnevezése
+Ranger ce rush dans un dossier ¦ Siirrä tämä raakaotos kansioon ¦ A nyersfelvétel mappába helyezése
+Ouvrir un autre projet sans enregistrer ce son ? ¦ Avataanko toinen projekti tallentamatta tätä ääntä? ¦ Megnyitsz egy másik projektet a hang mentése nélkül?
+Ouvrir un autre projet sans enregistrer celui-ci ? ¦ Avataanko toinen projekti tallentamatta tätä? ¦ Megnyitsz egy másik projektet ennek mentése nélkül?
+Panneau des réglages ¦ Asetuspaneeli ¦ Beállítások panel
+Part vers la droite ¦ Lähtee oikealle ¦ Kimegy jobbra
+Part vers la gauche ¦ Lähtee vasemmalle ¦ Kimegy balra
+Pas d’image clé après. ¦ Ei avainkuvaa jäljessä. ¦ Nincs utána kulcskocka.
+Pas d’image clé avant. ¦ Ei avainkuvaa edellä. ¦ Nincs előtte kulcskocka.
+Passer dans l’autre colonne ¦ Siirry toiseen sarakkeeseen ¦ Átlépés a másik oszlopba
+Pistes ¦ Raidat ¦ Sávok
+Plus chaud ¦ Lämpimämpi ¦ Melegebb
+Plus froid ¦ Kylmempi ¦ Hidegebb
+Projets de montage ¦ Leikkausprojektit ¦ Vágási projektek
+Projets son ¦ Ääniprojektit ¦ Hangprojektek
+Préparation du fichier… ¦ Valmistellaan tiedostoa… ¦ Fájl előkészítése…
+Qualité MP3 ¦ MP3-laatu ¦ MP3-minőség
+Que fait chaque outil ? ¦ Mitä kukin työkalu tekee? ¦ Mire való az egyes eszköz?
+Raccourcir les blancs ¦ Lyhennä hiljaisia kohtia ¦ Csendek rövidítése
+⏩ Raccourcir les longs blancs ¦ ⏩ Lyhennä pitkiä hiljaisia kohtia ¦ ⏩ Hosszú csendek rövidítése
+Rebondit puis disparaît ¦ Pomppaa ja katoaa ¦ Pattan, majd eltűnik
+Reculer le morceau dans la piste 1 ¦ Siirrä kappaletta myöhemmäksi raidalla 1 ¦ A szám hátrébb tolása az 1. sávon
+Rejoue ce texte depuis son début ¦ Toista tämä teksti alusta ¦ A szöveg újrajátszása az elejétől
+Remplir (recadre pour remplir) ¦ Täytä (rajaa täyttääkseen) ¦ Kitöltés (vágás a kitöltéshez)
+Rendre transparente la couleur du fond (fond vert ou bleu) : ce qui est dessous se voit ¦ Tee taustan väri (vihreä tai sininen tausta) läpinäkyväksi: alla oleva näkyy ¦ A háttér színének (zöld vagy kék háttér) átlátszóvá tétele: látszik, ami alatta van
+Roues de couleur ¦ Värikiekot ¦ Színkerekek
+Rouvrir un montage enregistré ¦ Avaa tallennettu leikkaus uudelleen ¦ Mentett vágás újbóli megnyitása
+Rouvrir un son en cours de travail ¦ Avaa keskeneräinen ääni uudelleen ¦ Folyamatban lévő hang újbóli megnyitása
+Son 1 ¦ Ääni 1 ¦ Hang 1
+Son 2 ¦ Ääni 2 ¦ Hang 2
+🎵 Son 1 ¦ 🎵 Ääni 1 ¦ 🎵 Hang 1
+Vidéo 1 ¦ Video 1 ¦ Videó 1
+Vidéo 2 ¦ Video 2 ¦ Videó 2
+Textes 1 ¦ Tekstit 1 ¦ Szövegek 1
+🔤 Textes 1 ¦ 🔤 Tekstit 1 ¦ 🔤 Szövegek 1
+Son ajouté (il est sélectionné). ¦ Ääni lisätty (se on valittuna). ¦ Hang hozzáadva (ki van jelölve).
+Son illisible ¦ Ääntä ei voi lukea ¦ Olvashatatlan hang
+Vidéo illisible ¦ Videota ei voi lukea ¦ Olvashatatlan videó
+vidéo illisible ¦ videota ei voi lukea ¦ olvashatatlan videó
+son introuvable ¦ ääntä ei löydy ¦ a hang nem található
+Sort du flou ¦ Tulee esiin sumeasta ¦ Előtűnik az elmosódásból
+Stabilisation annulée. ¦ Vakautus peruttu. ¦ Stabilizálás visszavonva.
+Superposition claire (écran) ¦ Vaalea päällekkäisyys (rasterointi) ¦ Világos átfedés (képernyő)
+Supprimer cette piste ¦ Poista tämä raita ¦ A sáv törlése
+Vider cette piste (elle reste, c’est la piste de base du film) ¦ Tyhjennä tämä raita (se jää, se on elokuvan perusraita) ¦ A sáv kiürítése (megmarad, ez a film alapsávja)
+Supprimer le projet (les vidéos et photos restent dans les Médias) ¦ Poista projekti (videot ja valokuvat jäävät Mediaan) ¦ A projekt törlése (a videók és fotók a Médiában maradnak)
+Sur la frise ¦ Aikajanalla ¦ Az idővonalon
+Surgit avec un rebond ¦ Ponnahtaa esiin ¦ Pattanva előugrik
+Tombe et rebondit ¦ Putoaa ja pomppaa ¦ Leesik és pattan
+S’ajoute aux réglages de chaque morceau (onglet 🎯 Élément → « 🔊 Son de ce morceau »). ¦ Lisätään kunkin palan asetuksiin (välilehti 🎯 Kohde → ”🔊 Tämän palan ääni”). ¦ Hozzáadódik minden darab beállításaihoz (🎯 Elem lap → „🔊 E darab hangja”).
+S’ajoutent aux couleurs de chaque morceau (onglet Élément). ¦ Lisätään kunkin palan väreihin (välilehti Kohde). ¦ Hozzáadódik minden darab színeihez (Elem lap).
+S’efface lettre par lettre ¦ Katoaa kirjain kirjaimelta ¦ Betűnként tűnik el
+S’efface mot par mot ¦ Katoaa sana sanalta ¦ Szavanként tűnik el
+Température (froid ↔ chaud) ¦ Värilämpötila (kylmä ↔ lämmin) ¦ Színhőmérséklet (hideg ↔ meleg)
+Titre / texte ¦ Otsikko / teksti ¦ Cím / szöveg
+＋ Titre / texte ¦ ＋ Otsikko / teksti ¦ ＋ Cím / szöveg
+Son / musique ¦ Ääni / musiikki ¦ Hang / zene
+Tout reste modifiable ensuite. ¦ Kaikkea voi muokata myöhemmin. ¦ Utána minden szerkeszthető marad.
+Transformer ¦ Muunna ¦ Átalakítás
+Transition avant ¦ Siirtymä ennen ¦ Átmenet előtte
+Type ¦ Tyyppi ¦ Típus
+Un chapitre commence à la tête de lecture ¦ Luku alkaa toistopään kohdalta ¦ Fejezet kezdődik a lejátszófejnél
+Chapitre ici ¦ Luku tähän ¦ Fejezet itt
+Un chapitre par grande étape ¦ Yksi luku kutakin suurta vaihetta kohden ¦ Minden nagy szakaszhoz egy fejezet
+Un sous-titre de 3 s à la tête de lecture, sur la piste « Sous-titres » ¦ 3 sekunnin tekstitys toistopään kohdalle raidalle ”Tekstitys” ¦ 3 mp-es felirat a lejátszófejnél, a „Feliratok” sávon
+Sous-titre ici ¦ Tekstitys tähän ¦ Felirat itt
+Une petite vidéo dans un coin, réglable ¦ Pieni video kulmassa, säädettävä ¦ Egy kis videó az egyik sarokban, állítható
+Une piste texte reçoit des titres (« ＋ Titre / texte »). ¦ Tekstiraidalle tulee otsikoita (”＋ Otsikko / teksti”). ¦ A szövegsáv címeket kap („＋ Cím / szöveg”).
+Vidéos, photos ou sons de l’ordinateur (plusieurs à la fois), rangés dans le dossier ouvert ¦ Videoita, valokuvia tai ääniä tietokoneelta (useita kerralla), avoimeen kansioon järjestettyinä ¦ Videók, fotók vagy hangok a számítógépről (egyszerre több is), a megnyitott mappába rendezve
+Voix off ¦ Selostus ¦ Narráció
+🎙 Voix off ¦ 🎙 Selostus ¦ 🎙 Narráció
+⏹ Arrêter la voix off ¦ ⏹ Lopeta selostus ¦ ⏹ Narráció leállítása
+Volet de droite à gauche ¦ Pyyhkäisy oikealta vasemmalle ¦ Törlés jobbról balra
+Volet de gauche à droite ¦ Pyyhkäisy vasemmalta oikealle ¦ Törlés balról jobbra
+Volet en cercle (iris) ¦ Pyöreä pyyhkäisy (iiris) ¦ Kör alakú törlés (írisz)
+Volume général ¦ Kokonaisäänenvoimakkuus ¦ Fő hangerő
+WebM — léger ¦ WebM — kevyt ¦ WebM — könnyű
+Zoom ¦ Zoomaus ¦ Nagyítás
+Zoom arrière sur la frise ¦ Loitonna aikajanaa ¦ Idővonal kicsinyítése
+Zoom avant sur la frise ¦ Lähennä aikajanaa ¦ Idővonal nagyítása
+Zoom avant à travers ¦ Zoomaus läpi ¦ Ránagyítás átfelé
+Zoom de la frise ¦ Aikajanan zoomaus ¦ Idővonal nagyítása
+Zoomer sur la sélection ¦ Zoomaa valintaan ¦ Nagyítás a kijelölésre
+bandes floues au lieu des bandes noires (la même image, floutée, derrière) ¦ sumeat reunat mustien sijaan (sama kuva sumennettuna taustalla) ¦ elmosott sávok a fekete helyett (ugyanaz a kép elmosva, mögötte)
+centré ¦ keskitetty ¦ középre igazítva
+ces boutons ¦ nämä painikkeet ¦ ezek a gombok
+cette disposition ¦ tämä asettelu ¦ ez az elrendezés
+commence par un fondu depuis le noir ¦ alkaa häivytyksellä mustasta ¦ feketéből való áttűnéssel kezdődik
+finit par un fondu au noir ¦ päättyy häivytykseen mustaan ¦ feketébe való áttűnéssel végződik
+effet Ken Burns sur toutes les photos (zoom et glissement lents, variés) ¦ Ken Burns -efekti kaikkiin valokuviin (hidas, vaihteleva zoomaus ja liuku) ¦ Ken Burns-effektus minden fotón (lassú, változatos nagyítás és csúszás)
+la musique baisse toute seule pendant une voix ¦ musiikki hiljenee itsestään puheen aikana ¦ a zene magától lehalkul beszéd közben
+… et aussi pendant le son des vidéos de la piste 1 ¦ … ja myös raidan 1 videoiden äänen aikana ¦ … és az 1. sáv videóinak hangja alatt is
+le montage est vide ¦ leikkaus on tyhjä ¦ a vágás üres
+l’image tremble un peu, comme dans un vieux projecteur ¦ kuva värisee hieman kuin vanhassa projektorissa ¦ a kép kicsit remeg, mint egy régi vetítőben
+sépia (couleurs passées, brunes) ¦ seepia (haalistuneet, ruskeat värit) ¦ szépia (fakó, barnás színek)
+pas de sélection ¦ ei valintaa ¦ nincs kijelölés
+plusieurs formats, nouvelle version ¦ useita muotoja, uusi versio ¦ több formátum, új verzió
+sans les blancs, voix plus nette… ¦ ilman hiljaisia kohtia, selkeämpi puhe… ¦ csendek nélkül, tisztább beszéd…
+« 🔖 Chapitre ici » pose un chapitre à la tête de lecture. ¦ ”🔖 Luku tähän” asettaa luvun toistopään kohdalle. ¦ A „🔖 Fejezet itt” fejezetet tesz a lejátszófejhez.
+· tire le point vers une couleur, double-clic pour revenir ¦ · vedä pistettä kohti väriä, kaksoisnapsautus palauttaa ¦ · húzd a pontot egy szín felé, dupla kattintás a visszaállításhoz
+À la suite dans Vidéo 1 ¦ Perään raidalle Video 1 ¦ Utána a Videó 1 sávon
+＋ À la suite ¦ ＋ Perään ¦ ＋ Utána
+＋ Son seul ¦ ＋ Pelkkä ääni ¦ ＋ Csak hang
+Échelle (tout) ¦ Mittakaava (kaikki) ¦ Méretarány (mind)
+Échelle X ¦ Mittakaava X ¦ Méretarány X
+Échelle Y ¦ Mittakaava Y ¦ Méretarány Y
+Écouter, comparer, montrer partout, renommer, supprimer ¦ Kuuntele, vertaa, näytä kaikkialla, nimeä uudelleen, poista ¦ Meghallgatás, összehasonlítás, megjelenítés mindenhol, átnevezés, törlés
+↻ Refaire l’analyse ¦ ↻ Analysoi uudelleen ¦ ↻ Újraelemzés
+⌨️ Raccourcis du montage ¦ ⌨️ Leikkauksen pikanäppäimet ¦ ⌨️ A vágás billentyűparancsai
+▣ Dans un coin ¦ ▣ Kulmassa ¦ ▣ Egy sarokban
+⛶ Tout l’écran ¦ ⛶ Koko näyttö ¦ ⛶ Teljes képernyő
+▶ Lire ¦ ▶ Toista ¦ ▶ Lejátszás
+▶ Lire / pause ¦ ▶ Toista / tauko ¦ ▶ Lejátszás / szünet
+✂️ Modifier un son ouvre ¦ ✂️ Äänen muokkaus avaa ¦ ✂️ A hangszerkesztés megnyitja
+⬅️ Glisse vers la gauche ¦ ⬅️ Liukuu vasemmalle ¦ ⬅️ Becsúszik balra
+➡️ Glisse vers la droite ¦ ➡️ Liukuu oikealle ¦ ➡️ Becsúszik jobbra
+⬆️ Monte ¦ ⬆️ Nousee ¦ ⬆️ Felfelé megy
+⬇️ Descend ¦ ⬇️ Laskee ¦ ⬇️ Lefelé megy
+⤒ Importer des rushes (vidéos, photos, sons)… ¦ ⤒ Tuo raakaotoksia (videot, valokuvat, äänet)… ¦ ⤒ Nyersfelvételek importálása (videók, fotók, hangok)…
+⤒ Importer des sous-titres (.srt, .vtt)… ¦ ⤒ Tuo tekstityksiä (.srt, .vtt)… ¦ ⤒ Feliratok importálása (.srt, .vtt)…
+⬚ Garder seulement la sélection ¦ ⬚ Säilytä vain valinta ¦ ⬚ Csak a kijelölés megtartása
+〰️ Enlever le bourdonnement ¦ 〰️ Poista hurina ¦ 〰️ Búgás eltávolítása
+＋ Ajouter un son… ¦ ＋ Lisää ääni… ¦ ＋ Hang hozzáadása…
+＋ Piste texte ¦ ＋ Tekstiraita ¦ ＋ Szövegsáv
+🎙 Musique et voix ¦ 🎙 Musiikki ja puhe ¦ 🎙 Zene és beszéd
+🎛️ Réglages de l’image ¦ 🎛️ Kuvan asetukset ¦ 🎛️ Képbeállítások
+🎞️ Film ¦ 🎞️ Elokuva ¦ 🎞️ Film
+🎞️ Rush ¦ 🎞️ Raakaotos ¦ 🎞️ Nyersfelvétel
+🎞️ Rushes ¦ 🎞️ Raakaotokset ¦ 🎞️ Nyersfelvételek
+🎯 Élément ¦ 🎯 Kohde ¦ 🎯 Elem
+🎞️ Vieux film (ce morceau) ¦ 🎞️ Vanha filmi (tämä pala) ¦ 🎞️ Régi film (ez a darab)
+🎞️ Vieux film (tout le film) ¦ 🎞️ Vanha filmi (koko elokuva) ¦ 🎞️ Régi film (az egész film)
+🎧 Mono ¦ 🎧 Mono ¦ 🎧 Monó
+🎧 Mono (le même son des deux côtés) ¦ 🎧 Mono (sama ääni molemmilla puolilla) ¦ 🎧 Monó (ugyanaz a hang mindkét oldalon)
+🎧 SON ¦ 🎧 ÄÄNI ¦ 🎧 HANG
+🎨 Couleurs de ce morceau ¦ 🎨 Tämän palan värit ¦ 🎨 E darab színei
+🎨 Couleurs de tout le film ¦ 🎨 Koko elokuvan värit ¦ 🎨 Az egész film színei
+🎬 Disposition du montage ¦ 🎬 Leikkauksen asettelu ¦ 🎬 A vágás elrendezése
+🎯 Vectorscope et histogramme ¦ 🎯 Vektoriskooppi ja histogrammi ¦ 🎯 Vektorszkóp és hisztogram
+🎲 Automatique (varié) ¦ 🎲 Automaattinen (vaihteleva) ¦ 🎲 Automatikus (változatos)
+💾 Garder dans les médias… ¦ 💾 Säilytä mediassa… ¦ 💾 Megtartás a médiában…
+📁＋ Dossier ¦ 📁＋ Kansio ¦ 📁＋ Mappa
+📏 Normaliser ¦ 📏 Normalisoi ¦ 📏 Normalizálás
+📐 Format de l’image ¦ 📐 Kuvasuhde ¦ 📐 Képformátum
+📢 Volume standard (LUFS)… ¦ 📢 Vakioäänenvoimakkuus (LUFS)… ¦ 📢 Szabványos hangerő (LUFS)…
+📱 Téléphone 9:16 (vertical) ¦ 📱 Puhelin 9:16 (pysty) ¦ 📱 Telefon 9:16 (álló)
+📺 Ancien écran 4:3 ¦ 📺 Vanha näyttö 4:3 ¦ 📺 Régi képernyő 4:3
+🖥️ Écran 16:9 ¦ 🖥️ Näyttö 16:9 ¦ 🖥️ Képernyő 16:9
+🖼️ Portrait 4:5 (réseaux) ¦ 🖼️ Muotokuva 4:5 (some) ¦ 🖼️ Álló 4:5 (közösségi oldalak)
+🖼️ Vidéos incrustées ¦ 🖼️ Upotetut videot ¦ 🖼️ Beillesztett videók
+🔇 Sans le son ¦ 🔇 Ilman ääntä ¦ 🔇 Hang nélkül
+🔇 Sans son ¦ 🔇 Ei ääntä ¦ 🔇 Hang nélkül
+🔇 Silence ¦ 🔇 Hiljaisuus ¦ 🔇 Csend
+🔊 Volume… ¦ 🔊 Äänenvoimakkuus… ¦ 🔊 Hangerő…
+🔖 Chapitres ¦ 🔖 Luvut ¦ 🔖 Fejezetek
+🖼️ Photos ¦ 🖼️ Valokuvat ¦ 🖼️ Fotók
+🗂 De la base ¦ 🗂 Tietokannasta ¦ 🗂 Az adatbázisból
+🗣️ Voix plus nette ¦ 🗣️ Selkeämpi puhe ¦ 🗣️ Tisztább beszéd
+🟩 Fond vert (incrustation) ¦ 🟩 Vihreä tausta (upotus) ¦ 🟩 Zöld háttér (beillesztés)
+🧲 Aimanter ¦ 🧲 Magneettikohdistus ¦ 🧲 Mágneses igazítás
+Aimanter ¦ Magneettikohdistus ¦ Mágneses igazítás
+🧹 Moins de souffle et de grondement ¦ 🧹 Vähemmän kohinaa ja jyrinää ¦ 🧹 Kevesebb zúgás és dübörgés
+🧹 Réduire le souffle ¦ 🧹 Vähennä kohinaa ¦ 🧹 Zúgás csökkentése
+🪄 « La vie de… » ¦ 🪄 ”Elämä: …” ¦ 🪄 „… élete”
+🪄 « Une famille » ¦ 🪄 ”Perhe” ¦ 🪄 „Egy család”
+{what}, et rangés dans les médias. ¦ {what}, ja tallennettu mediaan. ¦ {what}, és a médiába téve.
+=fichier téléchargé ¦ ladattu tiedosto|ladattua tiedostoa ¦ letöltött fájl|letöltött fájl
+Fichier téléchargé, et une copie est rangée dans les médias. ¦ Tiedosto ladattu, ja kopio on tallennettu mediaan. ¦ Fájl letöltve, és egy másolat a médiába került.
+{dur} · {ch} · {khz} kHz · sonie {lufs} LUFS · crête {pk} dB ¦ {dur} · {ch} · {khz} kHz · äänekkyys {lufs} LUFS · huippu {pk} dB ¦ {dur} · {ch} · {khz} kHz · hangosság {lufs} LUFS · csúcs {pk} dB
+{dur} · {ch} · {khz} kHz · crête {pk} dB · sonie <span data-as-lufs>…</span> ¦ {dur} · {ch} · {khz} kHz · huippu {pk} dB · äänekkyys <span data-as-lufs>…</span> ¦ {dur} · {ch} · {khz} kHz · csúcs {pk} dB · hangosság <span data-as-lufs>…</span>
+Chaque zone dans un fichier ({n}) ¦ Kukin alue omaan tiedostoonsa ({n}) ¦ Minden zóna külön fájlba ({n})
+Chaque piste dans un fichier ({n}) ¦ Kukin raita omaan tiedostoonsa ({n}) ¦ Minden sáv külön fájlba ({n})
+Comme l’original (stéréo) ¦ Kuten alkuperäinen (stereo) ¦ Mint az eredeti (sztereó)
+Comme l’original (mono) ¦ Kuten alkuperäinen (mono) ¦ Mint az eredeti (monó)
+Comme l’original ({n} kHz) ¦ Kuten alkuperäinen ({n} kHz) ¦ Mint az eredeti ({n} kHz)
+Relier « {name} » à une personne… ¦ Yhdistä ”{name}” henkilöön… ¦ „{name}” összekapcsolása egy személlyel…
+Relier « {name} » à une personne ¦ Yhdistä ”{name}” henkilöön ¦ „{name}” összekapcsolása egy személlyel
+Relier « {name} » à un événement ¦ Yhdistä ”{name}” tapahtumaan ¦ „{name}” összekapcsolása egy eseménnyel
+Relier « {name} » à {what} ¦ Yhdistä ”{name}”: {what} ¦ „{name}” összekapcsolása: {what}
+Relier « {name} » ¦ Yhdistä ”{name}” ¦ „{name}” összekapcsolása
+Insérer « {name} » ¦ Lisää ”{name}” väliin ¦ „{name}” beszúrása
+Enregistrement au micro ({time}) ¦ Mikrofoninauhoitus ({time}) ¦ Mikrofonos felvétel ({time})
+🎛️ Rack d’effets ¦ 🎛️ Efektiräkki ¦ 🎛️ Effektlánc
+Rack d’effets ¦ Efektiräkki ¦ Effektlánc
+=effet ¦ efekti|efektiä ¦ effektus|effektus
+Rallumer ¦ Kytke takaisin ¦ Visszakapcsolás
+Éteindre ¦ Kytke pois ¦ Kikapcsolás
+Rallumer l’effet ¦ Kytke efekti takaisin ¦ Effektus visszakapcsolása
+Éteindre l’effet ¦ Kytke efekti pois ¦ Effektus kikapcsolása
+Rallumer {what} ¦ Kytke takaisin: {what} ¦ Visszakapcsolás: {what}
+Éteindre {what} ¦ Kytke pois: {what} ¦ Kikapcsolás: {what}
+Retirer {what} ¦ Irrota: {what} ¦ Eltávolítás: {what}
+Effet « {name} » retiré ¦ Efekti ”{name}” irrotettu ¦ A(z) „{name}” effektus eltávolítva
+Réglages « {name} » ¦ Asetukset: ”{name}” ¦ „{name}” beállításai
+Égaliseur : {what} ¦ Taajuuskorjain: {what} ¦ Hangszínszabályzó: {what}
+à plat ¦ tasainen ¦ lineáris
+Empreinte : {a} → {b} ({n} s de bruit choisi). ¦ Sormenjälki: {a} → {b} ({n} s valittua kohinaa). ¦ Zajminta: {a} → {b} ({n} mp kiválasztott zaj).
+Empreinte : {a} → {b} ({n} s de bruit seul, trouvé tout seul). ¦ Sormenjälki: {a} → {b} ({n} s pelkkää kohinaa, löydetty automaattisesti). ¦ Zajminta: {a} → {b} ({n} mp tiszta zaj, magától megtalálva).
+Réverbération : {what} ¦ Kaiku: {what} ¦ Zengetés: {what}
+{n} Hz (trouvé) ¦ {n} Hz (löydetty) ¦ {n} Hz (megtalálva)
+Trouver tout seul ¦ Etsi automaattisesti ¦ Automatikus keresés
+Forme du fondu d’entrée ¦ Sisäänhäivytyksen muoto ¦ A beúsztatás alakja
+Forme du fondu de sortie ¦ Ulos häivytyksen muoto ¦ A kiúsztatás alakja
+Forme du fondu ¦ Häivytyksen muoto ¦ Az áttűnés alakja
+{what} au pinceau. ¦ {what} siveltimellä. ¦ {what} ecsettel.
+=zone réparée ¦ korjattu alue|korjattua aluetta ¦ javított zóna|javított zóna
+=réparation au pinceau ¦ korjaus siveltimellä|korjausta siveltimellä ¦ ecsetes javítás|ecsetes javítás
+Seulement sur {a} → {b} ¦ Vain välillä {a} → {b} ¦ Csak ezen: {a} → {b}
+Renommer « {name} » ¦ Nimeä ”{name}” uudelleen ¦ „{name}” átnevezése
+Écouter « {name} » ¦ Kuuntele ”{name}” ¦ „{name}” meghallgatása
+Fichier introuvable ¦ Tiedostoa ei löydy ¦ A fájl nem található
+Prise micro du {date} ¦ Mikrofoniotos {date} ¦ Mikrofonos felvétel: {date}
+Glisse = sélectionner · <kbd>Espace</kbd> écouter · <kbd>⌘</kbd> et molette : zoom · <kbd>M</kbd> marqueur · <kbd>A</kbd> maintenu : l’avant ¦ Vedä = valitse · <kbd>Välilyönti</kbd> kuuntele · <kbd>⌘</kbd> ja rulla: zoomaus · <kbd>M</kbd> merkki · <kbd>A</kbd> pohjassa: ennen ¦ Húzás = kijelölés · <kbd>Szóköz</kbd> meghallgatás · <kbd>⌘</kbd> és görgő: nagyítás · <kbd>M</kbd> jelölő · <kbd>A</kbd> lenyomva: az előtte állapot
+Glisse sur l’onde pour sélectionner ; clic = se placer ; ⇧ ← → agrandit la sélection. ¦ Vedä aaltomuodon päällä valitaksesi; napsautus = siirry; ⇧ ← → suurentaa valintaa. ¦ Húzz a hullámformán a kijelöléshez; kattintás = odaállás; ⇧ ← → bővíti a kijelölést.
+Peins sur la tache du spectre (toux, sonnerie), puis « 🩹 Réparer ». Taille : le curseur. ¦ Maalaa spektrin tahran päälle (yskä, soittoääni) ja sitten ”🩹 Korjaa”. Koko: liukusäädin. ¦ Fesd be a foltot a spektrumon (köhögés, csengés), majd „🩹 Javítás”. Méret: a csúszka.
+Entoure la tache sur le spectre, puis « 🩹 Réparer ». ¦ Ympäröi tahra spektrissä ja sitten ”🩹 Korjaa”. ¦ Keretezd be a foltot a spektrumon, majd „🩹 Javítás”.
+Clic sur l’onde : un marqueur 🚩 à cet endroit. ¦ Napsautus aaltomuotoon: merkki 🚩 tähän kohtaan. ¦ Kattintás a hullámformára: egy 🚩 jelölő ezen a helyen.
+Multipiste : clic sur un morceau pour le couper en deux. Sur l’onde : supprime la sélection. ¦ Moniraita: napsauta palaa leikataksesi sen kahtia. Aaltomuodossa: poistaa valinnan. ¦ Többsávos: kattints egy darabra, hogy kettévágd. A hullámformán: törli a kijelölést.
+Garde <kbd>A</kbd> appuyée pour entendre l’avant, au même endroit. ¦ Pidä <kbd>A</kbd> pohjassa kuullaksesi alkuperäisen samasta kohdasta. ¦ Tartsd lenyomva az <kbd>A</kbd> billentyűt, hogy ugyanott az előtte állapotot halld.
+{name} — {what} (prêt) ¦ {name} — {what} (valmis) ¦ {name} — {what} (kész)
+{time} au début ¦ {time} alussa ¦ {time} az elején
+{time} à la fin ¦ {time} lopussa ¦ {time} a végén
+Les zones hachurées seront coupées ({what}). ¦ Viivoitetut alueet leikataan pois ({what}). ¦ A vonalkázott részek ki lesznek vágva ({what}).
+Glisse les poignées noires pour changer. ¦ Vedä mustia kahvoja muuttaaksesi. ¦ Húzd a fekete fogantyúkat a módosításhoz.
+le « mmm » du courant (trouvé tout seul : {n} Hz) ¦ sähköverkon ”mmm” (löydetty automaattisesti: {n} Hz) ¦ a hálózati „mmm” (magától megtalálva: {n} Hz)
+le « mmm » du courant (aucun trouvé : 50 Hz par défaut) ¦ sähköverkon ”mmm” (ei löytynyt: oletus 50 Hz) ¦ a hálózati „mmm” (nem található: alapértelmezés 50 Hz)
+le « mmm » du courant ¦ sähköverkon ”mmm” ¦ a hálózati „mmm”
+le « chhh » de la cassette ¦ kasetin ”shhh” ¦ a kazetta „sss” hangja
+plus de {n} s → 0,5 s ¦ yli {n} s → 0,5 s ¦ {n} mp felett → 0,5 mp
+{name} (nettoyé) ¦ {name} (puhdistettu) ¦ {name} (megtisztítva)
+Couper la fin ({time}) ¦ Leikkaa loppu ({time}) ¦ A vége levágása ({time})
+Couper le début ({time}) ¦ Leikkaa alku ({time}) ¦ Az eleje levágása ({time})
+Nettoyer « {name} » à la place ? ¦ Puhdistetaanko ”{name}” sen sijaan? ¦ Inkább a(z) „{name}” tisztítása?
+Ouvrir ce son ¦ Avaa tämä ääni ¦ A hang megnyitása
+Un ronflement du courant a été trouvé ({n} Hz) : il est enlevé, avec les clics. Écoute la différence. ¦ Sähköverkon hurina löytyi ({n} Hz): se poistetaan napsahdusten kanssa. Kuuntele ero. ¦ Hálózati búgás található ({n} Hz): eltávolításra kerül a kattogásokkal együtt. Hallgasd meg a különbséget.
+son|piste ¦ raita ¦ sáv
+baisse|de ¦ määrällä ¦ ennyivel:
+retour en ¦ palaa ¦ vissza ekkor:
+Piste de la voix ¦ Puheraita ¦ Beszédsáv
+Piste qui baisse ¦ Hiljenevä raita ¦ Lehalkuló sáv
+Baisse en dB ¦ Vaimennus dB ¦ Csökkentés (dB)
+{name} : armée pour le micro ¦ {name}: valmiina mikrofonille ¦ {name}: felvételre élesítve
+{name} : désarmée ¦ {name}: ei valmiina ¦ {name}: élesítés megszüntetve
+Renommer la piste « {name} » ¦ Nimeä raita ”{name}” uudelleen ¦ A(z) „{name}” sáv átnevezése
+{name} : courbe du panoramique ¦ {name}: panorointikäyrä ¦ {name}: panorámagörbe
+{name} : courbe du volume ¦ {name}: äänenvoimakkuuskäyrä ¦ {name}: hangerőgörbe
+Couper « {name} » à {time} ¦ Leikkaa ”{name}” kohdasta {time} ¦ „{name}” elvágása itt: {time}
+Déplacer « {name} » ¦ Siirrä ”{name}” ¦ „{name}” mozgatása
+le morceau ¦ pala ¦ a darab
+{name} : point ajouté à {time} ¦ {name}: piste lisätty kohtaan {time} ¦ {name}: pont hozzáadva itt: {time}
+{name} : point retiré ¦ {name}: piste poistettu ¦ {name}: pont eltávolítva
+Ajouter « {name} » sur {track} ¦ Lisää ”{name}” raidalle {track} ¦ „{name}” hozzáadása ide: {track}
+Morceau « {name} » retiré ¦ Pala ”{name}” poistettu ¦ A(z) „{name}” darab eltávolítva
+son ¦ ääni ¦ hang
+(mélange) ¦ (miksaus) ¦ (keverés)
+Le son ouvert ici ¦ Tässä avattu ääni ¦ Az itt megnyitott hang
+Le son tel qu’il est (garde la touche A appuyée) ¦ Ääni sellaisenaan (pidä A pohjassa) ¦ A hang, ahogy van (tartsd lenyomva az A-t)
+Appliquer le rack pour de bon ¦ Käytä räkkiä pysyvästi ¦ Az effektlánc végleges alkalmazása
+Arme d’abord une piste avec ● (dans ses boutons M S ●). ¦ Valmistele ensin raita ●:llä (sen painikkeissa M S ●). ¦ Előbb élesíts egy sávot a ● gombbal (az M S ● gombjai között).
+Atténuer de ¦ Vaimenna määrällä ¦ Csökkentés ennyivel:
+Aucun effet ¦ Ei efektiä ¦ Nincs effektus
+Aucun effet : « ＋ Ajouter un effet », ou le menu Effets. ¦ Ei efektejä: ”＋ Lisää efekti” tai Efektit-valikko. ¦ Nincs effektus: „＋ Effektus hozzáadása”, vagy az Effektusok menü.
+Aucun marqueur ni zone : sélectionne un passage, puis « ＋ Nouvelle zone » (ou M). ¦ Ei merkkejä eikä alueita: valitse kohta ja sitten ”＋ Uusi alue” (tai M). ¦ Nincs jelölő vagy zóna: jelölj ki egy részt, majd „＋ Új zóna” (vagy M).
+Avant ou après ¦ Ennen tai jälkeen ¦ Előtte vagy utána
+Baisser la musique sous la voix ¦ Hiljennä musiikki puheen alla ¦ A zene lehalkítása a beszéd alatt
+Ne plus baisser la musique ¦ Älä enää hiljennä musiikkia ¦ A zene lehalkításának megszüntetése
+Bientôt : un moteur de reconnaissance qui tourne dans l’ordinateur (rien n’est envoyé sur Internet) ¦ Tulossa: tietokoneella toimiva puheentunnistusmoottori (mitään ei lähetetä internetiin) ¦ Hamarosan: a számítógépen futó felismerőmotor (semmi sem kerül fel az internetre)
+Boucle ¦ Silmukka ¦ Ismétlés
+Calcul des effets… ¦ Lasketaan efektejä… ¦ Effektusok számítása…
+Ce fichier n’est pas un réglage du son. ¦ Tämä tiedosto ei ole ääniasetus. ¦ Ez a fájl nem hangbeállítás.
+Ce navigateur ne donne pas accès au micro. ¦ Tämä selain ei anna käyttää mikrofonia. ¦ Ez a böngésző nem ad hozzáférést a mikrofonhoz.
+Ce qui est dit ¦ Mitä sanotaan ¦ Ami elhangzik
+Choisis d’abord une zone. ¦ Valitse ensin alue. ¦ Előbb válassz egy zónát.
+Choisis une zone (à gauche ou au-dessus de l’onde), ou crée-en une : « ＋ Nouvelle zone ». ¦ Valitse alue (vasemmalta tai aaltomuodon yläpuolelta) tai luo uusi: ”＋ Uusi alue”. ¦ Válassz egy zónát (balra vagy a hullámforma fölött), vagy hozz létre egyet: „＋ Új zóna”.
+Clics et craquements ¦ Napsahdukset ja rätinä ¦ Kattogás és recsegés
+Clique une étape pour y revenir ; les étapes grisées reviennent avec ↷. ¦ Napsauta vaihetta palataksesi siihen; harmaat vaiheet palaavat ↷:lla. ¦ Kattints egy lépésre, hogy visszatérj hozzá; a szürke lépések a ↷ gombbal jönnek vissza.
+Cliquer une heure fait écouter ce passage. Export en .txt, .srt, .vtt : ⤓ Exporter → 📝 Texte et repères. Le texte est cherchable dans la base. ¦ Ajan napsauttaminen toistaa kyseisen kohdan. Vienti .txt-, .srt-, .vtt-muotoon: ⤓ Vie → 📝 Teksti ja merkit. Teksti on haettavissa tietokannassa. ¦ Egy időpontra kattintva meghallgathatod azt a részt. Exportálás .txt, .srt, .vtt formátumba: ⤓ Exportálás → 📝 Szöveg és jelölők. A szöveg kereshető az adatbázisban.
+Copie nettoyée ajoutée aux mêmes fiches. ¦ Puhdistettu kopio lisätty samoihin kortteihin. ¦ Megtisztított másolat hozzáadva ugyanazokhoz az adatlapokhoz.
+Copie séparée ajoutée aux mêmes fiches. ¦ Erillinen kopio lisätty samoihin kortteihin. ¦ Külön másolat hozzáadva ugyanazokhoz az adatlapokhoz.
+Couper le début et la fin ¦ Leikkaa alku ja loppu ¦ Az eleje és a vége levágása
+Couper un morceau en deux (multipiste) ; sur l’onde : supprimer la sélection ¦ Leikkaa pala kahtia (moniraita); aaltomuodossa: poista valinta ¦ Egy darab kettévágása (többsávos); a hullámformán: a kijelölés törlése
+Crête ¦ Huippu ¦ Csúcs
+Effacer le dessin ¦ Pyyhi piirros ¦ Rajz törlése
+× Effacer le dessin ¦ × Pyyhi piirros ¦ × Rajz törlése
+Empreinte du bruit ¦ Kohinan sormenjälki ¦ Zajminta
+En S ¦ S-muotoinen ¦ S alakú
+Rapide ¦ Nopea ¦ Gyors
+Lente ¦ Hidas ¦ Lassú
+🏠 Pièce ¦ 🏠 Huone ¦ 🏠 Szoba
+⛪ Église ¦ ⛪ Kirkko ¦ ⛪ Templom
+🎭 Salle ¦ 🎭 Sali ¦ 🎭 Terem
+🧱 Cave ¦ 🧱 Kellari ¦ 🧱 Pince
+Enlever le bourdonnement ¦ Poista hurina ¦ Búgás eltávolítása
+Enregistrer au micro ¦ Nauhoita mikrofonilla ¦ Felvétel mikrofonnal
+● Enregistrer au micro ¦ ● Nauhoita mikrofonilla ¦ ● Felvétel mikrofonnal
+🎙️ Enregistrer au micro ¦ 🎙️ Nauhoita mikrofonilla ¦ 🎙️ Felvétel mikrofonnal
+Enregistrer au micro (au repère orange ; en multipiste : sur la piste armée ●) ¦ Nauhoita mikrofonilla (oranssin merkin kohdalle; moniraidassa: valmiiksi asetetulle raidalle ●) ¦ Felvétel mikrofonnal (a narancs jelölőnél; többsávosban: az élesített ● sávra)
+Enregistrer dans les médias ¦ Tallenna mediaan ¦ Mentés a médiába
+Enregistrer et afficher cette version (l’original est gardé) ¦ Tallenna ja näytä tämä versio (alkuperäinen säilyy) ¦ A verzió mentése és megjelenítése (az eredeti megmarad)
+Enregistrer le projet son (rack, zones, pistes), pour y revenir ¦ Tallenna ääniprojekti (räkki, alueet, raidat) palataksesi siihen ¦ A hangprojekt mentése (effektlánc, zónák, sávok), hogy visszatérhess hozzá
+Enregistrer le projet sous… ¦ Tallenna projekti nimellä… ¦ Projekt mentése másként…
+Exporter : MP3, M4A, WAV, FLAC, Ogg, AIFF, texte et repères ¦ Vie: MP3, M4A, WAV, FLAC, Ogg, AIFF, teksti ja merkit ¦ Exportálás: MP3, M4A, WAV, FLAC, Ogg, AIFF, szöveg és jelölők
+Exporter ce passage… ¦ Vie tämä kohta… ¦ A rész exportálása…
+Exporter un fichier (MP3, WAV, FLAC…), et si tu veux une copie dans les médias ¦ Vie tiedosto (MP3, WAV, FLAC…) ja halutessasi kopio mediaan ¦ Fájl exportálása (MP3, WAV, FLAC…), és ha akarod, egy másolat a médiába
+Fichiers ¦ Tiedostot ¦ Fájlok
+Fort ¦ Voimakas ¦ Erős
+Moyen ¦ Keskitaso ¦ Közepes
+Garde ¦ Pito ¦ Tartás
+Garder seulement la sélection ¦ Säilytä vain valinta ¦ Csak a kijelölés megtartása
+Gardée dans les versions, le son affiché ne change pas ¦ Säilytetään versioissa, näytettävä ääni ei muutu ¦ A verziók között megmarad, a megjelenített hang nem változik
+Insérer un son… ¦ Lisää ääni väliin… ¦ Hang beszúrása…
+La fenêtre d’export n’est pas prête. ¦ Vientiikkuna ei ole valmis. ¦ Az exportálási ablak nem áll készen.
+L’export n’est pas encore prêt. ¦ Vienti ei ole vielä valmis. ¦ Az exportálás még nem áll készen.
+La sélection ¦ Valinta ¦ A kijelölés
+Lasso de réparation ¦ Korjauslasso ¦ Javító lasszó
+Lasso de réparation (sur le spectre) ¦ Korjauslasso (spektrissä) ¦ Javító lasszó (a spektrumon)
+➰ Lasso de réparation ¦ ➰ Korjauslasso ¦ ➰ Javító lasszó
+Pinceau de réparation ¦ Korjaussivellin ¦ Javító ecset
+Pinceau de réparation (sur le spectre) ¦ Korjaussivellin (spektrissä) ¦ Javító ecset (a spektrumon)
+🖌 Pinceau de réparation ¦ 🖌 Korjaussivellin ¦ 🖌 Javító ecset
+Les boutons ¦ Painikkeet ¦ A gombok
+Les réglages du son seront perdus. ¦ Äänen asetukset menetetään. ¦ A hang beállításai elvesznek.
+Lire la sélection en boucle ¦ Toista valinta silmukkana ¦ A kijelölés ismételt lejátszása
+🔁 Lire en boucle ¦ 🔁 Toista silmukkana ¦ 🔁 Ismétlés
+🐢 Lire à 75 % ¦ 🐢 Toista 75 %:n nopeudella ¦ 🐢 Lejátszás 75%-on
+Marqueur ici ¦ Merkki tähän ¦ Jelölő ide
+🚩 Marqueur ici ¦ 🚩 Merkki tähän ¦ 🚩 Jelölő ide
+Marqueurs et zones ¦ Merkit ja alueet ¦ Jelölők és zónák
+Zones et marqueurs ¦ Alueet ja merkit ¦ Zónák és jelölők
+Mono ¦ Mono ¦ Monó
+Stéréo ¦ Stereo ¦ Sztereó
+Nettoyer ¦ Puhdista ¦ Tisztítás
+Nettoyer le souffle ¦ Puhdista kohina ¦ Zúgás tisztítása
+Nom du projet son ¦ Ääniprojektin nimi ¦ A hangprojekt neve
+Nom du son ¦ Äänen nimi ¦ A hang neve
+Nouvelle piste ¦ Uusi raita ¦ Új sáv
+Nouvelle version affichée partout. L’original est gardé. ¦ Uusi versio näytetään kaikkialla. Alkuperäinen säilyy. ¦ Az új verzió mindenhol megjelenik. Az eredeti megmarad.
+Version enregistrée (l’ancienne reste affichée). ¦ Versio tallennettu (vanha näytetään edelleen). ¦ Verzió mentve (a régi marad megjelenítve).
+Nouvelle zone ¦ Uusi alue ¦ Új zóna
+Ouverture ¦ Avautuminen ¦ Megnyitás
+Ouvrir un autre projet sans enregistrer ? ¦ Avataanko toinen projekti tallentamatta? ¦ Megnyitsz egy másik projektet mentés nélkül?
+Pause quand j’écris ¦ Tauko, kun kirjoitan ¦ Szünet, amikor gépelek
+Peins sur une tache (toux, sonnerie, porte), puis « 🩹 Réparer ». ¦ Maalaa tahran päälle (yskä, soittoääni, ovi) ja sitten ”🩹 Korjaa”. ¦ Fesd be a foltot (köhögés, csengés, ajtó), majd „🩹 Javítás”.
+Poser des marqueurs (clic sur l’onde) ¦ Aseta merkkejä (napsautus aaltomuotoon) ¦ Jelölők elhelyezése (kattintás a hullámformára)
+🚩 Poser des marqueurs ¦ 🚩 Aseta merkkejä ¦ 🚩 Jelölők elhelyezése
+Raccourcir ¦ Lyhennä ¦ Rövidítés
+Rendre agréable ¦ Tee miellyttäväksi ¦ Kellemessé tétel
+Revenir au ⚡ Son rapide : ce qu’il sait montrer revient en boutons, le reste reste appliqué ¦ Palaa ⚡ Nopeaan ääneen: se, minkä se osaa näyttää, palaa painikkeiksi, loput pysyvät käytössä ¦ Vissza a ⚡ Gyors hanghoz: amit meg tud mutatni, gombként visszajön, a többi alkalmazva marad
+Réglages du Son rapide ¦ Nopean äänen asetukset ¦ A Gyors hang beállításai
+Réglages repris ¦ Asetukset otettu mukaan ¦ Beállítások átvéve
+Seulement sur la sélection ¦ Vain valintaan ¦ Csak a kijelölésre
+Silence ¦ Hiljaisuus ¦ Csend
+Souffle, clics, bourdonnement, voix, volume et coupe du début et de la fin, d’un coup ¦ Kohina, napsahdukset, hurina, puhe, äänenvoimakkuus sekä alun ja lopun leikkaus kerralla ¦ Zúgás, kattogás, búgás, beszéd, hangerő és az eleje és vége levágása egyszerre
+✨ Tout nettoyer en une fois ¦ ✨ Puhdista kaikki kerralla ¦ ✨ Minden tisztítása egyszerre
+Spectre ¦ Spektri ¦ Spektrum
+Spectre : montrer / cacher ¦ Spektri: näytä / piilota ¦ Spektrum: megjelenítés / elrejtés
+Sélection : glisser sur l’onde ¦ Valinta: vedä aaltomuodon päällä ¦ Kijelölés: húzás a hullámformán
+Tout le son : glisse le cadre pour te déplacer ¦ Koko ääni: vedä kehystä siirtyäksesi ¦ A teljes hang: húzd a keretet a mozgáshoz
+Un autre son, rattaché aux mêmes fiches ¦ Toinen ääni, liitetty samoihin kortteihin ¦ Egy másik hang, ugyanazokhoz az adatlapokhoz kapcsolva
+Un ensemble prêt ne se supprime pas. ¦ Valmista asetusjoukkoa ei voi poistaa. ¦ Egy kész készlet nem törölhető.
+VU-mètres ¦ VU-mittarit ¦ VU-mérők
+Volume du morceau ¦ Palan äänenvoimakkuus ¦ A darab hangereje
+Volume du morceau… ¦ Palan äänenvoimakkuus… ¦ A darab hangereje…
+Zoom sur la sélection ¦ Zoomaa valintaan ¦ Nagyítás a kijelölésre
+Zoom vertical + ¦ Pystyzoomaus + ¦ Függőleges nagyítás +
+Zoom vertical − ¦ Pystyzoomaus − ¦ Függőleges nagyítás −
+ces réglages du son ¦ nämä ääniasetukset ¦ ezek a hangbeállítások
+disque, bande abîmée ¦ levy, vaurioitunut nauha ¦ lemez, sérült szalag
+les voix lointaines remontent, les cris baissent ¦ kaukaiset äänet voimistuvat, huudot hiljenevät ¦ a távoli hangok felerősödnek, a kiáltások halkulnak
+on comprend mieux les mots ¦ sanoista saa paremmin selvää ¦ jobban érthetők a szavak
+nouvelle version, copie ¦ uusi versio, kopio ¦ új verzió, másolat
+trouvé tout seul, poignées sur l’onde ¦ löydetty automaattisesti, kahvat aaltomuodossa ¦ magától megtalálva, fogantyúk a hullámformán
+souffle, voix claire, volume égal ¦ kohina, selkeä puhe, tasainen äänenvoimakkuus ¦ zúgás, tiszta beszéd, egyenletes hangerő
+souffle fort, voix, coupe des blancs ¦ voimakas kohina, puhe, hiljaisten kohtien leikkaus ¦ erős zúgás, beszéd, csendek kivágása
+de-hum, égaliseur, limiteur ¦ hurinanpoisto, taajuuskorjain, rajoitin ¦ búgásszűrés, hangszínszabályzó, limiter
+📼 Cassette des années 70 ¦ 📼 1970-luvun kasetti ¦ 📼 70-es évekbeli kazetta
+🎙 Dictaphone ¦ 🎙 Sanelin ¦ 🎙 Diktafon
+💒 Vidéo de mariage 1987 ¦ 💒 Hääkasetti 1987 ¦ 💒 Esküvői videó 1987
+Écoute, puis « ⏱ Insérer l’heure » (⌘T) et tape ce qui est dit. ¦ Kuuntele, sitten ”⏱ Lisää aika” (⌘T) ja kirjoita, mitä sanotaan. ¦ Hallgasd meg, majd „⏱ Időpont beszúrása” (⌘T), és gépeld be, ami elhangzik.
+⏱ Insérer l’heure ¦ ⏱ Lisää aika ¦ ⏱ Időpont beszúrása
+Écouter ce passage ¦ Kuuntele tämä kohta ¦ A rész meghallgatása
+Écouter seulement le passage peint ¦ Kuuntele vain maalattu kohta ¦ Csak a befestett rész meghallgatása
+Écouter, comparer A / B, montrer partout, renommer, supprimer ¦ Kuuntele, vertaa A / B, näytä kaikkialla, nimeä uudelleen, poista ¦ Meghallgatás, A / B összehasonlítás, megjelenítés mindenhol, átnevezés, törlés
+ℹ️ Infos du son ¦ ℹ️ Äänen tiedot ¦ ℹ️ A hang adatai
+▶ Écouter / pause ¦ ▶ Kuuntele / tauko ¦ ▶ Meghallgatás / szünet
+▶ Écouter 10 s du résultat ¦ ▶ Kuuntele 10 s tuloksesta ¦ ▶ Az eredmény 10 mp-ének meghallgatása
+✂️ Couper (dans le presse-papiers) ¦ ✂️ Leikkaa (leikepöydälle) ¦ ✂️ Kivágás (a vágólapra)
+✂️ Couper un morceau (multipiste) ¦ ✂️ Leikkaa pala (moniraita) ¦ ✂️ Darab elvágása (többsávos)
+〰️ Forme d’onde ¦ 〰️ Aaltomuoto ¦ 〰️ Hullámforma
+＋ Ajouter un effet ▾ ¦ ＋ Lisää efekti ▾ ¦ ＋ Effektus hozzáadása ▾
+🎛️ Multipiste ¦ 🎛️ Moniraita ¦ 🎛️ Többsávos
+🎬 Ouvrir dans le montage ¦ 🎬 Avaa leikkauksessa ¦ 🎬 Megnyitás a vágásban
+👂 Écoute d’abord ¦ 👂 Kuuntele ensin ¦ 👂 Előbb hallgasd meg
+👂 Écouter la zone ¦ 👂 Kuuntele alue ¦ 👂 A zóna meghallgatása
+📝 Transcription ¦ 📝 Litterointi ¦ 📝 Átírás
+🔗 Relier ce passage ¦ 🔗 Yhdistä tämä kohta ¦ 🔗 A rész összekapcsolása
+🗣️ La voix ¦ 🗣️ Puhe ¦ 🗣️ A beszéd
+🤖 Transcrire tout seul (bientôt) ¦ 🤖 Litteroi automaattisesti (tulossa) ¦ 🤖 Automatikus átírás (hamarosan)
+½ ton ¦ ½ sävelaskelta ¦ ½ hang
+Volume ¦ Äänenvoimakkuus ¦ Hangerő
+Normaliser ¦ Normalisoi ¦ Normalizálás
+Volume égal ¦ Tasainen äänenvoimakkuus ¦ Egyenletes hangerő
+Sonie visée ¦ Tavoiteäänekkyys ¦ Célhangosság
+Niveleur ¦ Tasoittaja ¦ Kiegyenlítő
+Fondus ¦ Häivytykset ¦ Áttűnések
+Égaliseur graphique ¦ Graafinen taajuuskorjain ¦ Grafikus hangszínszabályzó
+Égaliseur paramétrique ¦ Parametrinen taajuuskorjain ¦ Parametrikus hangszínszabályzó
+Égaliseurs ¦ Taajuuskorjaimet ¦ Hangszínszabályzók
+Filtre passe-haut / passe-bas ¦ Ylipäästö- / alipäästösuodin ¦ Felüláteresztő / aluláteresztő szűrő
+Passe-haut ¦ Ylipäästö ¦ Felüláteresztő
+Passe-bas ¦ Alipäästö ¦ Aluláteresztő
+Compresseur ¦ Kompressori ¦ Kompresszor
+Dynamique ¦ Dynamiikka ¦ Dinamika
+Rapport ¦ Suhde ¦ Arány
+Attaque ¦ Attack ¦ Felfutás
+Relâche ¦ Release ¦ Lecsengés
+Gain de sortie ¦ Lähtövahvistus ¦ Kimeneti erősítés
+Limiteur ¦ Rajoitin ¦ Limiter
+Placé en dernier dans le rack : plus jamais de son qui « crache ». ¦ Viimeisenä räkissä: ääni ei enää koskaan ”särise”. ¦ Az effektlánc végén: soha többé nem „recseg” a hang.
+Plafond ¦ Katto ¦ Plafon
+Réduction de bruit ¦ Kohinanvaimennus ¦ Zajcsökkentés
+Réduction ¦ Vaimennus ¦ Csökkentés
+N’écouter que le bruit enlevé ¦ Kuuntele vain poistettua kohinaa ¦ Csak az eltávolított zaj meghallgatása
+De-clicker ¦ Napsahdusten poisto ¦ Kattogásszűrő
+Clics ¦ Napsahdukset ¦ Kattogások
+De-hum ¦ Hurinanpoisto ¦ Búgásszűrő
+Harmoniques ¦ Harmoniset ¦ Felharmonikusok
+De-esser ¦ Suhuäänteiden vaimennus ¦ Sziszegésszűrő
+Sifflantes ¦ Suhuäänteet ¦ Sziszegő hangok
+Baisser jusqu’à ¦ Vaimenna tasolle ¦ Csökkentés eddig:
+Réparations au pinceau ¦ Sivellinkorjaukset ¦ Ecsetes javítások
+Voix plus claire ¦ Selkeämpi puhe ¦ Tisztább beszéd
+Égaliseur (moins de grondement, plus de présence) et compresseur. ¦ Taajuuskorjain (vähemmän jyrinää, enemmän läsnäoloa) ja kompressori. ¦ Hangszínszabályzó (kevesebb dübörgés, több jelenlét) és kompresszor.
+Réverbération ¦ Kaiku ¦ Zengetés
+Ambiance ¦ Tunnelma ¦ Hangulat
+Vitesse et hauteur ¦ Nopeus ja sävelkorkeus ¦ Sebesség és hangmagasság
+Temps ¦ Aika ¦ Idő
+Pour une cassette lue trop vite (voix « de canard ») : 96 % la remet à sa vraie vitesse. ¦ Liian nopeasti toistetulle kasetille (”Aku Ankka” -ääni): 96 % palauttaa oikean nopeuden. ¦ Túl gyorsan lejátszott kazettához („kacsahang”): a 96% visszaállítja a valódi sebességet.
+Vitesse ¦ Nopeus ¦ Sebesség
+Garder la hauteur de la voix ¦ Säilytä äänen korkeus ¦ A hangmagasság megtartása
+Blancs de plus de ¦ Yli näin pitkät hiljaiset kohdat ¦ Ennél hosszabb csendek
+Ramenés à ¦ Lyhennetään pituuteen ¦ Lerövidítve erre
+Fin ¦ Loppu ¦ Vége
+Diapositive {k} / {n} ¦ Dia {k} / {n} ¦ {k}. / {n} dia
+Aucune diapositive ¦ Ei dioja ¦ Nincs dia
+Aucune diapositive. ¦ Ei dioja. ¦ Nincs dia.
+Aucune diapositive pour l’instant ¦ Ei vielä dioja ¦ Még nincs dia
+{what} aux Médias (le son devient la musique). ¦ {what} Mediaan (äänestä tulee musiikki). ¦ {what} a Médiába (a hang lesz a zene).
+{what} aux Médias. ¦ {what} Mediaan. ¦ {what} a Médiába.
+=diapositive est prête ¦ dia on valmis|diaa on valmiina ¦ dia kész|dia kész
+{what}. Elles peuvent remplacer celles du diaporama ou venir à la suite. ¦ {what}. Ne voivat korvata diaesityksen diat tai tulla niiden perään. ¦ {what}. Lecserélhetik a diavetítés diáit, vagy utánuk kerülhetnek.
+Remplacer le diaporama par le récit ? ¦ Korvataanko diaesitys kertomuksella? ¦ Lecseréled a diavetítést az elbeszélésre?
+Ajouter à la suite ¦ Lisää perään ¦ Hozzáadás a végéhez
+Police du style ({name}) ¦ Tyylin fontti ({name}) ¦ A stílus betűtípusa ({name})
+Avancer de {time} (réglable dans Réglages › Apparence) ¦ Siirry eteenpäin {time} (säädettävissä kohdassa Asetukset › Ulkoasu) ¦ Előreugrás {time}-t (állítható: Beállítások › Megjelenés)
+Suivi sur {n} positions. ¦ Seurattu {n} sijainnissa. ¦ Követve {n} pozícióban.
+(importé) ¦ (tuotu) ¦ (importált)
+Durée souhaitée ¦ Toivottu kesto ¦ Kívánt időtartam
+Mettre les sources dans les notes ¦ Laita lähteet muistiinpanoihin ¦ A források a jegyzetekbe
+⇥ durée = voix ¦ ⇥ kesto = puhe ¦ ⇥ időtartam = beszéd
+Ajoute des photos, un titre, une carte, ou laisse « ✨ Récit d’une vie » tout préparer. Tu peux aussi glisser des photos ici. ¦ Lisää valokuvia, otsikko, kartta, tai anna ”✨ Elämäntarina” valmistella kaikki. Voit myös vetää valokuvia tähän. ¦ Adj hozzá fotókat, címet, térképet, vagy hagyd, hogy az „✨ Egy élet története” mindent előkészítsen. Fotókat ide is húzhatsz.
+Ce fichier n’est pas un diaporama exporté par LCNDA (⤓ Exporter → 💾 Fichier). ¦ Tämä tiedosto ei ole LCNDA:n viemä diaesitys (⤓ Vie → 💾 Tiedosto). ¦ Ez a fájl nem az LCNDA által exportált diavetítés (⤓ Exportálás → 💾 Fájl).
+Ce que raconte cette diapositive… ¦ Mitä tämä dia kertoo… ¦ Mit mesél ez a dia…
+Changer la photo ¦ Vaihda valokuva ¦ Fotó cseréje
+🖼️ Changer la photo ¦ 🖼️ Vaihda valokuva ¦ 🖼️ Fotó cseréje
+Choisis d’abord une personne. ¦ Valitse ensin henkilö. ¦ Előbb válassz egy személyt.
+Couleur du trajet ¦ Reitin väri ¦ Az útvonal színe
+Glisse des photos ou un son. ¦ Vedä valokuvia tai ääni tähän. ¦ Húzz ide fotókat vagy egy hangot.
+Glisser vers la droite ¦ Liu'uta oikealle ¦ Csúsztatás jobbra
+Glisser vers la gauche ¦ Liu'uta vasemmalle ¦ Csúsztatás balra
+Zoom arrière lent ¦ Hidas loitonnus ¦ Lassú kicsinyítés
+La fenêtre des médias n’est pas encore prête. ¦ Mediaikkuna ei ole vielä valmis. ¦ A média ablaka még nem áll készen.
+Les dernières modifications du diaporama seront perdues. ¦ Diaesityksen viimeisimmät muutokset menetetään. ¦ A diavetítés legutóbbi módosításai elvesznek.
+Les photos du récit ¦ Kertomuksen valokuvat ¦ Az elbeszélés fotói
+Légendes ¦ Kuvatekstit ¦ Képaláírások
+Personnes sous chaque photo ¦ Henkilöt kunkin kuvan alla ¦ Személyek minden fotó alatt
+Place du texte ¦ Tekstin paikka ¦ A szöveg helye
+Police des textes ¦ Tekstien fontti ¦ A szövegek betűtípusa
+Prendre ce son ¦ Ota tämä ääni ¦ Ennek a hangnak a választása
+RÉCIT D’UNE VIE ¦ ELÄMÄNTARINA ¦ EGY ÉLET TÖRTÉNETE
+Récit d’une vie ¦ Elämäntarina ¦ Egy élet története
+✨ Récit d’une vie ¦ ✨ Elämäntarina ¦ ✨ Egy élet története
+✨ Récit d’une vie : un diaporama tout fait à partir de la fiche d’une personne ¦ ✨ Elämäntarina: valmis diaesitys henkilön kortin pohjalta ¦ ✨ Egy élet története: kész diavetítés egy személy adatlapjából
+Un diaporama tout fait à partir de la fiche d’une personne ¦ Valmis diaesitys henkilön kortin pohjalta ¦ Kész diavetítés egy személy adatlapjából
+Selon les textes ¦ Tekstien mukaan ¦ A szövegek szerint
+Une musique ¦ Musiikki ¦ Egy zene
+Une photo par page ¦ Yksi valokuva sivulla ¦ Oldalanként egy fotó
+Une photo ronde au-dessus du titre ¦ Pyöreä valokuva otsikon yläpuolella ¦ Kerek fotó a cím fölött
+Une photo ronde au-dessus du titre… ¦ Pyöreä valokuva otsikon yläpuolella… ¦ Kerek fotó a cím fölött…
+Une présentation ou un diaporama ? ¦ Esitys vai diaesitys? ¦ Bemutató vagy diavetítés?
+Une voix, un son ¦ Puhe, ääni ¦ Egy hang, egy beszéd
+Vidéo téléchargée. ¦ Video ladattu. ¦ Videó letöltve.
+cette diapositive ¦ tämä dia ¦ ez a dia
+retirer la voix ¦ poista puhe ¦ a hang eltávolítása
+✨ Préparation du récit… ¦ ✨ Valmistellaan kertomusta… ¦ ✨ Az elbeszélés előkészítése…
+🎙 Enregistrer ma voix ¦ 🎙 Nauhoita ääneni ¦ 🎙 Saját hangom felvétele
+🎤 En faire une présentation… ¦ 🎤 Tee siitä esitys… ¦ 🎤 Bemutató készítése belőle…
+🖼 Choisir les photos… ¦ 🖼 Valitse valokuvat… ¦ 🖼 Fotók kiválasztása…
+Format de l’image (16:9 pour un écran, 9:16 pour un téléphone) ¦ Kuvasuhde (16:9 näytölle, 9:16 puhelimelle) ¦ Képformátum (16:9 képernyőhöz, 9:16 telefonhoz)
+Exporter : vidéo, images, PDF, impression, fichier ¦ Vie: video, kuvat, PDF, tulostus, tiedosto ¦ Exportálás: videó, képek, PDF, nyomtatás, fájl
+Ajouter un titre ¦ Lisää otsikko ¦ Cím hozzáadása
+Ajouter une carte (trajet) ¦ Lisää kartta (reitti) ¦ Térkép hozzáadása (útvonal)
+Ajouter une carte ¦ Lisää kartta ¦ Térkép hozzáadása
+＋ Carte (trajet) ¦ ＋ Kartta (reitti) ¦ ＋ Térkép (útvonal)
+Regarder en plein écran (Échap pour revenir) ¦ Katso koko näytöllä (Esc palaa) ¦ Megtekintés teljes képernyőn (Esc a visszatéréshez)
+Avancer dans le diaporama ¦ Siirry eteenpäin diaesityksessä ¦ Előre a diavetítésben
+Choisis une diapositive (à gauche) pour régler sa durée, sa transition, son texte, sa voix. ¦ Valitse dia (vasemmalla) säätääksesi sen keston, siirtymän, tekstin ja puheen. ¦ Válassz egy diát (balra) az időtartama, az átmenete, a szövege és a hangja beállításához.
+🎞️ Tout le diaporama ¦ 🎞️ Koko diaesitys ¦ 🎞️ A teljes diavetítés
+La police de tous les titres et légendes. Sans choix, c’est celle du style (Classique, Album ancien…). ¦ Kaikkien otsikoiden ja kuvatekstien fontti. Ilman valintaa käytetään tyylin fonttia (Klassinen, Vanha albumi…). ¦ Az összes cím és képaláírás betűtípusa. Ha nem választasz, a stílusé (Klasszikus, Régi album…).
+Une musique de fond, prise dans les sons des médias ¦ Taustamusiikki median äänistä ¦ Háttérzene a média hangjai közül
+Une présentation façon Keynote faite de ces diapositives (textes, formes, animations, mode présentateur…) ; le diaporama reste tel quel ¦ Keynote-tyylinen esitys näistä dioista (tekstit, muodot, animaatiot, esittäjätila…); diaesitys pysyy ennallaan ¦ Keynote-szerű bemutató ezekből a diákból (szövegek, alakzatok, animációk, előadói mód…); a diavetítés változatlan marad
+Clic sur une diapositive : la régler à droite · glisse-les pour les ranger · Espace : lire ¦ Napsautus diaan: säädä sitä oikealla · vedä niitä järjestääksesi · Välilyönti: toista ¦ Kattintás egy diára: beállítás jobbra · húzd őket a rendezéshez · Szóköz: lejátszás
+Album ancien ¦ Vanha albumi ¦ Régi album
+Clair ¦ Vaalea ¦ Világos
+Lire / pause ¦ Toista / tauko ¦ Lejátszás / szünet
+Lire ¦ Toista ¦ Lejátszás
+Regarder ¦ Katso ¦ Megtekintés
+📺 Regarder ¦ 📺 Katso ¦ 📺 Megtekintés
+Musique de fond ¦ Taustamusiikki ¦ Háttérzene
+🎵 Musique ¦ 🎵 Musiikki ¦ 🎵 Zene
+🎵 Musique de fond (facultatif) ¦ 🎵 Taustamusiikki (valinnainen) ¦ 🎵 Háttérzene (nem kötelező)
+=diapositive ¦ dia|diaa ¦ dia|dia
+Choisis une personne : un diaporama se prépare tout seul avec sa fiche (naissance, baptême, mariage, enfants, métiers, recensements, déménagements, décès, sépulture), ses photos, ses lieux sur une carte. Une information absente ne donne pas de diapositive ; tout reste modifiable ensuite. ¦ Valitse henkilö: diaesitys valmistuu itsestään hänen korttinsa (syntymä, kaste, avioliitto, lapset, ammatit, henkikirjat, muutot, kuolema, hautaus), valokuviensa ja paikkojensa kartalla pohjalta. Puuttuvasta tiedosta ei tehdä diaa; kaikkea voi muokata myöhemmin. ¦ Válassz egy személyt: magától elkészül egy diavetítés az adatlapjából (születés, keresztelő, házasság, gyermekek, foglalkozások, népszámlálások, költözések, halál, temetés), a fotóiból és a helyeiből egy térképen. Hiányzó adatból nem lesz dia; utána minden szerkeszthető marad.
+Le récit prend à peu près cette durée : chaque diapositive grandit ou rétrécit un peu. « Selon les textes » laisse le temps de lire. ¦ Kertomus kestää suunnilleen näin kauan: kukin dia pitenee tai lyhenee hieman. ”Tekstien mukaan” jättää aikaa lukea. ¦ Az elbeszélés nagyjából ennyi ideig tart: minden dia kicsit nő vagy csökken. A „Szövegek szerint” időt hagy az olvasásra.
+Aucune photo : le récit sera fait de titres et de cartes. ¦ Ei valokuvia: kertomus tehdään otsikoista ja kartoista. ¦ Nincs fotó: az elbeszélés címekből és térképekből áll majd.
+Inclure les frères et sœurs ¦ Ota mukaan sisarukset ¦ A testvérek bevonása
+Les sources de chaque événement (titre, page) sont écrites dans les notes de sa diapositive : on les voit en modifiant, pas pendant la lecture. ¦ Kunkin tapahtuman lähteet (otsikko, sivu) kirjoitetaan sen dian muistiinpanoihin: ne näkyvät muokatessa, eivät toiston aikana. ¦ Minden esemény forrásai (cím, oldal) a diájának jegyzeteibe kerülnek: szerkesztéskor láthatók, lejátszás közben nem.
+Ajouter les événements historiques de l’époque ¦ Lisää aikakauden historialliset tapahtumat ¦ A kor történelmi eseményeinek hozzáadása
+Les épidémies, guerres et grands hivers que l’app connaît (Listes → Épidémies, guerres, hivers) et qui ont eu lieu pendant sa vie. ¦ Epidemiat, sodat ja ankarat talvet, jotka sovellus tuntee (Luettelot → Epidemiat, sodat, talvet) ja jotka sattuivat hänen elinaikanaan. ¦ Az app által ismert járványok, háborúk és kemény telek (Listák → Járványok, háborúk, telek), amelyek az élete során történtek.
+Le texte du bloc « 📖 Biographie » de la fiche (ta version si tu l’as modifiée), en version courte, sur une diapositive. ¦ Kortin lohkon ”📖 Elämäkerta” teksti (oma versiosi, jos olet muokannut sitä) lyhyenä versiona yhdellä dialla. ¦ Az adatlap „📖 Életrajz” blokkjának szövege (a saját változatod, ha módosítottad), rövid változatban, egy dián.
+Créer le récit ¦ Luo kertomus ¦ Az elbeszélés létrehozása
+DIAPORAMA ¦ DIAESITYS ¦ DIAVETÍTÉS
+Environ 1 minute ¦ Noin 1 minuutti ¦ Kb. 1 perc
+Environ 2 minutes ¦ Noin 2 minuuttia ¦ Kb. 2 perc
+Environ 3 minutes ¦ Noin 3 minuuttia ¦ Kb. 3 perc
+Environ 5 minutes ¦ Noin 5 minuuttia ¦ Kb. 5 perc
+Environ 8 minutes ¦ Noin 8 minuuttia ¦ Kb. 8 perc
+Environ 10 minutes ¦ Noin 10 minuuttia ¦ Kb. 10 perc
+Choisir un son… ¦ Valitse ääni… ¦ Hang kiválasztása…
+Ajouter sa biographie (📖) ¦ Lisää hänen elämäkertansa (📖) ¦ Az életrajza hozzáadása (📖)
+🎯 Suivre ce qui bouge ¦ 🎯 Seuraa liikkuvaa ¦ 🎯 A mozgó követése
+✕ Ne plus suivre ¦ ✕ Lopeta seuraaminen ¦ ✕ Követés leállítása
+🎥 Plusieurs caméras ¦ 🎥 Useita kameroita ¦ 🎥 Több kamera
+Synchroniser et monter ¦ Synkronoi ja leikkaa ¦ Szinkronizálás és vágás
+quand quelqu’un parle plus près d’une autre caméra ¦ kun joku puhuu lähempänä toista kameraa ¦ amikor valaki egy másik kamerához közelebb beszél
+Lecture des sons… ¦ Luetaan ääniä… ¦ Hangok beolvasása…
+dédié à {who} ¦ omistettu: {who} ¦ ajánlva: {who}
+Pas encore de {what} pour ce soir ¦ Ei vielä: {what} tälle illalle ¦ Ehhez az estéhez még nincs: {what}
+Note les titres dans l’ordre, avec les rappels, les reprises, les invités… ou copie la setlist d’un autre soir. ¦ Kirjaa kappaleet järjestyksessä encoreineen, coverineen, vierailijoineen… tai kopioi toisen illan setlist. ¦ Írd be a számokat sorrendben, a ráadásokkal, feldolgozásokkal, vendégekkel… vagy másold át egy másik este setlistjét.
+La sorte de ce soir ¦ Tämän illan laji ¦ Az esti esemény fajtája
+En faire : {what} (la setlist s’adapte) ¦ Tee siitä: {what} (setlist mukautuu) ¦ Legyen belőle: {what} (a setlist igazodik)
+{n} prévues ¦ {n} suunniteltu ¦ {n} tervezett
+d’après {what} ¦ lähteen {what} mukaan ¦ {what} alapján
+{what} à la setlist. ¦ {what} setlistiin. ¦ {what} a setlisthez.
+{what} depuis « {name} ». ¦ {what} illasta ”{name}”. ¦ {what} innen: „{name}”.
+=ligne ajoutée ¦ rivi lisätty|riviä lisätty ¦ sor hozzáadva|sor hozzáadva
+=ligne copiée ¦ rivi kopioitu|riviä kopioitu ¦ sor másolva|sor másolva
+Setlist de « {name} » copiée ({what}) ¦ Illan ”{name}” setlist kopioitu ({what}) ¦ A(z) „{name}” setlistje átmásolva ({what})
+Ce soir devient : {what} ¦ Tästä illasta tulee: {what} ¦ Ez az este most: {what}
+{n} enregistrements « en public » ajoutés aux morceaux ¦ {n} livetallennetta lisätty kappaleisiin ¦ {n} „élő” felvétel hozzáadva a számokhoz
+1 enregistrement « en public » ajouté au morceau ¦ 1 livetallenne lisätty kappaleeseen ¦ 1 „élő” felvétel hozzáadva a számhoz
+{n} enregistrements « en public » déjà tirés de ce soir. ¦ {n} livetallennetta on jo otettu tästä illasta. ¦ Erről az estéről már {n} „élő” felvétel készült.
+1 enregistrement « en public » déjà tiré de ce soir. ¦ 1 livetallenne on jo otettu tästä illasta. ¦ Erről az estéről már 1 „élő” felvétel készült.
+→ En faire des enregistrements « en public » des morceaux ({n}) ¦ → Tee niistä kappaleiden livetallenteita ({n}) ¦ → „Élő” felvételek készítése a számokból ({n})
+→ En faire un enregistrement « en public » du morceau ({n}) ¦ → Tee siitä kappaleen livetallenne ({n}) ¦ → „Élő” felvétel készítése a számból ({n})
+« {name} » ajouté au catalogue ({what}). ¦ ”{name}” lisätty luetteloon ({what}). ¦ „{name}” hozzáadva a katalógushoz ({what}).
+Aucun lieu de ta base pour ces soirs ({what} sans lieu choisi dans la base). ¦ Näille illoille ei ole paikkaa tietokannassasi ({what} ilman tietokannasta valittua paikkaa). ¦ Ezekhez az estékhez nincs hely az adatbázisodban ({what} az adatbázisból választott hely nélkül).
+Aucun lieu de ta base pour ces soirs. ¦ Näille illoille ei ole paikkaa tietokannassasi. ¦ Ezekhez az estékhez nincs hely az adatbázisodban.
+{what} sans coordonnées ¦ {what} ilman koordinaatteja ¦ {what} koordináták nélkül
+{what} sans lieu de ta base ¦ {what} ilman tietokantasi paikkaa ¦ {what} az adatbázisod helye nélkül
+=soir ¦ ilta|iltaa ¦ este|este
+🔝 {what} les plus joués ¦ 🔝 Eniten soitetut: {what} ¦ 🔝 A legtöbbet játszott: {what}
+{what} par soir ¦ {what} illassa ¦ {what} estéként
+{n} en moyenne ¦ keskimäärin {n} ¦ átlagosan {n}
+{what} mais jamais sur scène, et {other} : ¦ {what} mutta ei koskaan lavalla, ja {other}: ¦ {what}, de soha nem színpadon, és {other}:
+{what} mais jamais sur scène : ¦ {what} mutta ei koskaan lavalla: ¦ {what}, de soha nem színpadon:
+{what} jamais dans une setlist : ¦ {what} ei koskaan setlistissä: ¦ {what} soha nem setlistben:
+=morceau enregistré ¦ äänitetty kappale|äänitettyä kappaletta ¦ felvett szám|felvett szám
+=autre fiche ¦ muu kortti|muuta korttia ¦ más adatlap|más adatlap
+… et {n} de plus ¦ … ja {n} lisää ¦ … és még {n}
+✓ Profil « {name} » coché : ses sections sont sur sa page. ¦ ✓ Profiili ”{name}” valittu: sen osiot ovat hänen sivullaan. ¦ ✓ A(z) „{name}” profil bejelölve: a részei a lapján vannak.
+Aucun épisode n° {a} à {b} dans cette saison. ¦ Tällä kaudella ei ole jaksoja nro {a}–{b}. ¦ Ebben az évadban nincs {a}–{b}. számú epizód.
+Aucun épisode n° {a} dans cette saison. ¦ Tällä kaudella ei ole jaksoa nro {a}. ¦ Ebben az évadban nincs {a}. számú epizód.
+＋ Nouveau concert ou représentation ¦ ＋ Uusi konsertti tai esitys ¦ ＋ Új koncert vagy előadás
+Chercher… (ville, salle, morceau joué, tournée, personne) ¦ Hae… (kaupunki, sali, soitettu kappale, kiertue, henkilö) ¦ Keresés… (város, terem, játszott szám, turné, személy)
+Aucun concert ni spectacle pour l’instant ¦ Ei vielä konsertteja eikä esityksiä ¦ Még nincs koncert vagy előadás
+Un soir = une fiche : la date, le lieu, la setlist (titres, rappels, reprises, invités), qui était sur scène et dans la salle. ¦ Yksi ilta = yksi kortti: päivämäärä, paikka, setlist (kappaleet, encoret, coverit, vierailijat), kuka oli lavalla ja salissa. ¦ Egy este = egy adatlap: a dátum, a hely, a setlist (számok, ráadások, feldolgozások, vendégek), ki volt a színpadon és a teremben.
+Concert ou représentation ¦ Konsertti tai esitys ¦ Koncert vagy előadás
+Concerts et représentations ¦ Konsertit ja esitykset ¦ Koncertek és előadások
+=concert ou représentation ¦ konsertti tai esitys|konserttia tai esitystä ¦ koncert vagy előadás|koncert vagy előadás
+Spectacle d’humour ¦ Komiikkaesitys ¦ Humorest
+Scènes jouées ¦ Esitetyt kohtaukset ¦ Előadott jelenetek
+Concert d’orchestre ¦ Orkesterikonsertti ¦ Zenekari koncert
+Début d’une partie ¦ Osan alku ¦ Egy rész kezdete
+Bande, intro enregistrée ¦ Nauha, nauhoitettu intro ¦ Szalag, felvett intró
+Dernière fois ¦ Viimeinen kerta ¦ Utolsó alkalom
+Reprise, invités, dédicace, 1re fois, durée… ¦ Cover, vierailijat, omistus, 1. kerta, kesto… ¦ Feldolgozás, vendégek, ajánlás, 1. alkalom, időtartam…
+＋ Un rappel ¦ ＋ Encore ¦ ＋ Ráadás
+📋 Coller une liste ¦ 📋 Liitä luettelo ¦ 📋 Lista beillesztése
+📋 Copier la setlist d’un autre soir ¦ 📋 Kopioi toisen illan setlist ¦ 📋 Egy másik este setlistjének másolása
+Copier la setlist d’un autre soir ¦ Kopioi toisen illan setlist ¦ Egy másik este setlistjének másolása
+inachevé ¦ keskeneräinen ¦ befejezetlen
+Nouvelle partie ¦ Uusi osa ¦ Új rész
+critique positive ¦ myönteinen arvostelu ¦ pozitív kritika
+critique négative ¦ kielteinen arvostelu ¦ negatív kritika
+neutre ¦ neutraali ¦ semleges
+Église, chapelle ¦ Kirkko, kappeli ¦ Templom, kápolna
+Bal, salle des fêtes ¦ Tanssit, juhlasali ¦ Bál, kultúrház
+Café, cabaret ¦ Kahvila, kabaree ¦ Kávézó, kabaré
+Soirée privée ¦ Yksityistilaisuus ¦ Magánrendezvény
+Festival, fête ¦ Festivaali, juhla ¦ Fesztivál, ünnep
+création du rôle ¦ roolin ensiesitys ¦ a szerep ősbemutatója
+Création du rôle ¦ Roolin ensiesitys ¦ A szerep ősbemutatója
+chef d’orchestre ¦ kapellimestari ¦ karmester
+Un ou une soliste ¦ Solisti ¦ Egy szólista
+Une personne dans la salle ¦ Henkilö salissa ¦ Egy személy a teremben
+🎭 Ce soir-là, au théâtre ¦ 🎭 Sinä iltana teatterissa ¦ 🎭 Aznap este a színházban
+Rôles du soir ¦ Illan roolit ¦ Az este szerepei
+Titulaire ou remplaçant ¦ Vakituinen tai sijainen ¦ Állandó vagy beugró
+La soirée ¦ Ilta ¦ Az est
+Joué ¦ Soitettu ¦ Játszva
+La tournée ¦ Kiertue ¦ A turné
+Dates prévues ¦ Suunnitellut päivämäärät ¦ Tervezett dátumok
+Les dates ¦ Päivämäärät ¦ A dátumok
+📅 Les dates ¦ 📅 Päivämäärät ¦ 📅 A dátumok
+＋ Ajouter une date ¦ ＋ Lisää päivämäärä ¦ ＋ Dátum hozzáadása
+＋ Ajouter une représentation ¦ ＋ Lisää esitys ¦ ＋ Előadás hozzáadása
+Chanson parlée, poème dit ¦ Puhelaulu, lausuttu runo ¦ Prózai dal, elmondott vers
+Sketch, numéro, scène ¦ Sketsi, numero, kohtaus ¦ Szkeccs, szám, jelenet
+Sketches, numéros, scènes ¦ Sketsit, numerot, kohtaukset ¦ Szkeccsek, számok, jelenetek
+Écrit, créé ¦ Kirjoitettu, luotu ¦ Írta, alkotta
+Tiré de ¦ Perustuu teokseen ¦ Forrása
+Son ou vidéo ¦ Ääni tai video ¦ Hang vagy videó
+Carte indisponible. ¦ Kartta ei ole käytettävissä. ¦ A térkép nem érhető el.
+Avec une setlist ¦ Setlistin kanssa ¦ Setlisttel
+Avec une captation ¦ Tallenteen kanssa ¦ Felvétellel
+Avec une 1re fois ¦ Ensimmäisen kerran kanssa ¦ Első alkalommal
+Avec un remplacement ¦ Sijaisen kanssa ¦ Beugróval
+Avec ce titre joué ¦ Tämä kappale soitettu ¦ Ezzel a játszott számmal
+Joué ce soir-là ¦ Soitettu sinä iltana ¦ Aznap este játszva
+Carte des lieux… ¦ Paikkojen kartta… ¦ A helyek térképe…
+🗺 Carte des lieux ¦ 🗺 Paikkojen kartta ¦ 🗺 A helyek térképe
+hors tournée ¦ kiertueen ulkopuolella ¦ turnén kívül
+Dernière ¦ Viimeinen ¦ Utolsó
+Moins ↑ ¦ Vähemmän ↑ ¦ Kevesebb ↑
+Soirs par année ¦ Iltoja vuodessa ¦ Esték évente
+📅 Soirs par année ¦ 📅 Iltoja vuodessa ¦ 📅 Esték évente
+Durée moyenne ¦ Keskimääräinen kesto ¦ Átlagos időtartam
+Ville la plus visitée ¦ Useimmin vierailtu kaupunki ¦ A leggyakrabban felkeresett város
+🚌 Setlist type d’une tournée ¦ 🚌 Kiertueen tyypillinen setlist ¦ 🚌 Egy turné jellemző setlistje
+Choisis une tournée. ¦ Valitse kiertue. ¦ Válassz egy turnét.
+Choisis deux soirs différents. ¦ Valitse kaksi eri iltaa. ¦ Válassz két különböző estét.
+Cinéma ¦ Elokuvat ¦ Film
+Au générique ¦ Lopputeksteissä ¦ A stáblistán
+Pas au générique ¦ Ei lopputeksteissä ¦ Nincs a stáblistán
+Tournage, période ¦ Kuvaukset, ajanjakso ¦ Forgatás, időszak
+🎭 Au théâtre ¦ 🎭 Teatterissa ¦ 🎭 Színházban
+Théâtres, salles ¦ Teatterit, salit ¦ Színházak, termek
+Un théâtre ¦ Teatteri ¦ Egy színház
+Théâtre, salle ¦ Teatteri, sali ¦ Színház, terem
+Un remplacement ¦ Sijaisuus ¦ Egy beugrás
+📺 Télévision, radio ¦ 📺 Televisio, radio ¦ 📺 Televízió, rádió
+Voix française de ¦ Ranskankielinen ääni näyttelijälle ¦ Francia hangja:
+Un ou une partenaire ¦ Vastanäyttelijä ¦ Egy partner
+Prix et nominations ¦ Palkinnot ja ehdokkuudet ¦ Díjak és jelölések
+Œuvre A → Z ¦ Teos A → Ö ¦ Mű A → Z
+Fiches « Rôle » ¦ ”Rooli”-kortit ¦ „Szerep” adatlapok
+Films du catalogue ¦ Luettelon elokuvat ¦ A katalógus filmjei
+Cités dans d’autres catalogues ¦ Mainittu muissa luetteloissa ¦ Más katalógusokban említve
+Crédit ¦ Krediitti ¦ Stáblista-bejegyzés
+RÔLE ¦ ROOLI ¦ SZEREP
+＋ En faire une fiche rôle détaillée ¦ ＋ Tee siitä yksityiskohtainen roolikortti ¦ ＋ Részletes szerep-adatlap készítése belőle
+D’où vient la ligne ¦ Mistä rivi tulee ¦ Honnan jön a sor
+Chercher un rôle, un film, un partenaire… ¦ Hae roolia, elokuvaa, vastanäyttelijää… ¦ Szerep, film, partner keresése…
+Profil d’acteur ¦ Näyttelijäprofiili ¦ Színészprofil
+Débuts ¦ Ensiaskeleet ¦ Kezdetek
+Une école, un cours ¦ Koulu, kurssi ¦ Egy iskola, egy tanfolyam
+École, conservatoire, cours ¦ Koulu, konservatorio, kurssi ¦ Iskola, konzervatórium, tanfolyam
+Prix, diplôme ¦ Palkinto, tutkinto ¦ Díj, oklevél
+Un agent ¦ Agentti ¦ Egy ügynök
+Une troupe ¦ Teatteriryhmä ¦ Egy társulat
+Troupe, théâtre ¦ Teatteriryhmä, teatteri ¦ Társulat, színház
+Un casting ¦ Koe-esiintyminen ¦ Egy szereplőválogatás
+Rôle visé ¦ Haettu rooli ¦ Megcélzott szerep
+pas obtenu ¦ ei saatu ¦ nem kapta meg
+Compétences, physique, voix ¦ Taidot, ulkonäkö, ääni ¦ Képességek, külső, hang
+Tout voir, trier ¦ Näytä kaikki, lajittele ¦ Mind megtekintése, rendezés
+Aucune série, aucun téléfilm. ¦ Ei sarjoja eikä televisioelokuvia. ¦ Nincs sorozat, nincs tévéfilm.
+Théâtrographie ¦ Teatteriroolit ¦ Színházi szerepek
+Aucun rôle au théâtre. ¦ Ei teatterirooleja. ¦ Nincs színházi szerep.
+Aucune voix. ¦ Ei ääninäyttelyä. ¦ Nincs szinkronszerep.
+Publicité et mannequinat ¦ Mainokset ja mallityö ¦ Reklám és modellkedés
+Aucune publicité. ¦ Ei mainoksia. ¦ Nincs reklám.
+Aucun clip. ¦ Ei musiikkivideoita. ¦ Nincs videoklip.
+=casting noté ¦ kirjattu koe-esiintyminen|kirjattua koe-esiintymistä ¦ feljegyzett szereplőválogatás|feljegyzett szereplőválogatás
+Aucun casting noté. ¦ Ei kirjattuja koe-esiintymisiä. ¦ Nincs feljegyzett szereplőválogatás.
+Les statistiques viennent des rôles notés. ¦ Tilastot tulevat kirjatuista rooleista. ¦ A statisztikák a feljegyzett szerepekből származnak.
+Rôles par décennie ¦ Roolit vuosikymmenittäin ¦ Szerepek évtizedenként
+Réalisateurs ¦ Ohjaajat ¦ Rendezők
+Aucun soir noté. ¦ Ei kirjattuja iltoja. ¦ Nincs feljegyzett este.
+Feuilleton télévisé ¦ Televisiosarja ¦ Tévésorozat
+Websérie ¦ Verkkosarja ¦ Websorozat
+Séries et émissions ¦ Sarjat ja ohjelmat ¦ Sorozatok és műsorok
+La série ¦ Sarja ¦ A sorozat
+Saisons et épisodes ¦ Kaudet ja jaksot ¦ Évadok és epizódok
+Durée d’un épisode ¦ Jakson kesto ¦ Egy epizód hossza
+Qui y a fait quoi ¦ Kuka teki mitä ¦ Ki mit csinált benne
+Épisodes prévus ¦ Suunnitellut jaksot ¦ Tervezett epizódok
+L’épisode ¦ Jakso ¦ Az epizód
+N° dans la saison ¦ Nro kaudella ¦ Sorszám az évadban
+N° dans la série ¦ Nro sarjassa ¦ Sorszám a sorozatban
+Un ou une scénariste ¦ Käsikirjoittaja ¦ Egy forgatókönyvíró
+Un invité ¦ Vieras ¦ Egy vendég
+Rôle ou métier ¦ Rooli tai ammatti ¦ Szerep vagy foglalkozás
+toute la série ¦ koko sarja ¦ az egész sorozat
+Chaîne, station, éditeur ¦ Kanava, asema, julkaisija ¦ Csatorna, állomás, kiadó
+Un créateur, une créatrice ¦ Luoja ¦ Egy alkotó
+Comment cette image se mélange avec celle de dessous : « Produit » assombrit, « Superposition claire » éclaircit, « Normal » la pose simplement dessus. ¦ Miten tämä kuva sekoittuu alla olevaan: ”Kertova” tummentaa, ”Vaalea päällekkäisyys” vaalentaa, ”Normaali” asettaa sen yksinkertaisesti päälle. ¦ Hogyan keveredik ez a kép az alatta lévővel: a „Szorzás” sötétít, a „Világos átfedés” világosít, a „Normál” egyszerűen ráteszi.
+Un lent mouvement de caméra sur la photo : elle s’approche, s’éloigne ou glisse doucement pendant qu’elle est à l’écran. ¦ Hidas kameraliike valokuvan päällä: se lähestyy, loittonee tai liukuu hitaasti, kun se on ruudulla. ¦ Lassú kameramozgás a fotón: közelít, távolodik vagy lassan csúszik, amíg a képernyőn van.
+Une image clé fixe un réglage (taille, place, rotation…) à un moment du film ; entre deux images clés, l’image passe de l’une à l’autre, en douceur ou à vitesse régulière. ¦ Avainkuva kiinnittää asetuksen (koko, paikka, kierto…) elokuvan hetkeen; kahden avainkuvan välillä kuva siirtyy toisesta toiseen pehmeästi tai tasaisella nopeudella. ¦ A kulcskocka rögzít egy beállítást (méret, hely, elforgatás…) a film egy pillanatában; két kulcskocka között a kép lágyan vagy egyenletes sebességgel megy át egyikből a másikba.
+« Réduire le souffle » : choisis d’abord un passage où l’on n’entend que le bruit, il sert d’exemple. « Voix plus nette » rend la parole plus claire. « Normaliser » monte le volume au plus fort sans saturer. ¦ ”Vähennä kohinaa”: valitse ensin kohta, jossa kuuluu vain kohinaa; se toimii esimerkkinä. ”Selkeämpi puhe” tekee puheesta selvempää. ”Normalisoi” nostaa äänenvoimakkuuden suurimmaksi ilman säröä. ¦ „Zúgás csökkentése”: előbb válassz egy részt, ahol csak a zaj hallatszik, ez szolgál mintául. A „Tisztább beszéd” érthetőbbé teszi a beszédet. A „Normalizálás” a legnagyobbra emeli a hangerőt torzítás nélkül.
+Doux : on nettoie peu, la voix reste naturelle. Fort : on enlève plus de bruit, au risque d’un son un peu « métallique ». Écoute avec 👂 Avant / ✨ Après. ¦ Pehmeä: puhdistetaan vähän, puhe pysyy luonnollisena. Voimakas: kohinaa poistetaan enemmän, jolloin ääni voi kuulostaa hieman ”metalliselta”. Kuuntele 👂 Ennen / ✨ Jälkeen. ¦ Lágy: kevés tisztítás, a hang természetes marad. Erős: több zajt távolít el, de a hang kissé „fémes” lehet. Hallgasd meg: 👂 Előtte / ✨ Utána.
+Supprimer ce rush du projet (et ses {n} passages sur la frise) ¦ Poista tämä raakaotos projektista (ja sen {n} aikajanakohtaa) ¦ A nyersfelvétel törlése a projektből (és az idővonalon lévő {n} része)
+Supprimer ce rush du projet (et son passage sur la frise) ¦ Poista tämä raakaotos projektista (ja sen aikajanakohta) ¦ A nyersfelvétel törlése a projektből (és az idővonalon lévő része)
+Supprimer ce rush du projet ¦ Poista tämä raakaotos projektista ¦ A nyersfelvétel törlése a projektből
+{time} à l’écran ¦ {time} ruudulla ¦ {time} a képernyőn
+🖼️ Photo de la piste 1 ¦ 🖼️ Raidan 1 valokuva ¦ 🖼️ Az 1. sáv fotója
+🎬 Morceau de la piste 1 ¦ 🎬 Raidan 1 pala ¦ 🎬 Az 1. sáv darabja

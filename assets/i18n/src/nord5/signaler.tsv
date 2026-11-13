@@ -1,0 +1,11 @@
+fr ¦ hr ¦ sl
+# ═════ zone « signaler » : croate (hr) et slovène (sl) ═════
+Signaler un bug ¦ Prijavi grešku ¦ Prijavi hrošča
+Signaler un bug : décris ce qui ne marche pas, un rapport technique sans ta généalogie est préparé ¦ Prijavi grešku: opiši što ne radi, priprema se tehničko izvješće bez tvog rodoslovlja ¦ Prijavi hrošča: opiši, kaj ne deluje, pripravi se tehnično poročilo brez tvojega rodoslovja
+Ouvre « 🐞 Signaler un problème » : un rapport technique, sans ta généalogie, est préparé. ¦ Otvara „🐞 Prijavi problem”: priprema se tehničko izvješće bez tvog rodoslovlja. ¦ Odpre »🐞 Prijavi težavo«: pripravi se tehnično poročilo brez tvojega rodoslovja.
+Quelque chose n’a pas marché. Tu veux le signaler ? ¦ Nešto nije uspjelo. Želiš li to prijaviti? ¦ Nekaj ni uspelo. Želiš to prijaviti?
+Signaler ¦ Prijavi ¦ Prijavi
+Sur l’écran « {where} », un message d’erreur est apparu : {err} ¦ Na zaslonu „{where}” pojavila se poruka o pogrešci: {err} ¦ Na zaslonu »{where}« se je pojavilo sporočilo o napaki: {err}
+Ce que je faisais juste avant : ¦ Što sam radio/radila neposredno prije: ¦ Kaj sem počel/počela tik pred tem:
+Proposer de signaler quand quelque chose ne marche pas ¦ Ponudi prijavu kad nešto ne radi ¦ Ponudi prijavo, ko nekaj ne deluje
+Quand l’app rencontre une erreur, un petit bandeau « 🐞 Quelque chose n’a pas marché » apparaît en bas à droite, avec « Signaler ». Rien n’est envoyé sans toi. ¦ Kad aplikacija naiđe na pogrešku, dolje desno pojavi se mala traka „🐞 Nešto nije uspjelo” s gumbom „Prijavi”. Ništa se ne šalje bez tebe. ¦ Ko aplikacija naleti na napako, spodaj desno se prikaže majhen pas »🐞 Nekaj ni uspelo« z gumbom »Prijavi«. Brez tebe se ne pošlje nič.

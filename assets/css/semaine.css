@@ -1,0 +1,56 @@
+/* 🗓 Ma semaine de recherche (assets/js/heritage-semaine.js) : widget, ⛶ en grand, 🧩 une chose à la fois, réglage K2.
+ * Couleurs : variables de l'app seulement (--ink, --muted, --line, --card-bg, --blue-soft, --blue-bright) : le mode sombre suit tout seul. */
+.msr { display: grid; gap: 10px; min-width: 0; }
+.msr-counts { display: flex; flex-wrap: wrap; gap: 6px; }
+.msr-sec { min-width: 0; }
+.msr-sec-h { margin: 2px 0 4px; font-size: 12px; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.msr-sec-h small { font-weight: 600; color: var(--muted); }
+.msr-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.msr-row { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 6px 4px; border-bottom: 1px solid var(--line, #e3e6ea); min-width: 0; }
+.msr-row[hidden] { display: none; }
+.msr-row:last-child { border-bottom: 0; }
+.msr-row.is-late { box-shadow: inset 3px 0 0 #d93025; padding-left: 8px; }
+.msr-row.is-today { box-shadow: inset 3px 0 0 var(--blue-bright, #055dff); padding-left: 8px; }
+.msr-ico { font-size: 16px; text-align: center; }
+.msr-main { min-width: 0; }
+.msr-title { font-weight: 600; color: var(--ink); overflow-wrap: anywhere; line-height: 1.3; }
+.msr-sub { font-size: 12.5px; color: var(--muted); line-height: 1.4; overflow-wrap: anywhere; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; }
+.msr-row.is-done .msr-title { font-weight: 500; }
+.msr-row.is-done .msr-ico { color: #1e8e3e; font-weight: 700; }
+.msr-acts { display: flex; gap: 4px; align-items: center; flex-wrap: nowrap; }
+.msr-acts .msr-done:hover { color: #1e8e3e; border-color: #1e8e3e; }
+.msr-ext { white-space: nowrap; }
+.msr-more { margin-top: 4px; }
+.msr-snoozed { margin: 0; font-size: 12.5px; color: var(--muted); }
+/* 🧩 une chose à la fois */
+.msr-focus { display: grid; gap: 10px; padding: 6px 2px; }
+.msr-focus-k { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; color: var(--muted); font-size: 14px; }
+.msr-focus-t { margin: 0; font-size: 20px; font-weight: 700; line-height: 1.3; color: var(--ink); overflow-wrap: anywhere; }
+.msr-focus-d { margin: 0; color: var(--muted); }
+.msr-focus-acts { display: flex; flex-wrap: wrap; gap: 8px; }
+.msr-focus-acts .button { min-height: 44px; font-size: 16px; }
+.msr-focus-next { margin: 0; color: var(--muted); }
+/* ⛶ en grand */
+.msr-big .msr-big-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 0 20px 8px; }
+.msr-big .msr-filters { display: flex; flex-wrap: wrap; gap: 6px; }
+.msr-big-body { padding: 4px 20px 12px; overflow: auto; min-height: 200px; }
+/* réglage K2 */
+.msr-cfg { display: grid; gap: 10px; margin-top: 6px; }
+.msr-cfg-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.msr-cfg-lab { min-width: 70px; font-weight: 600; }
+.msr-seg { display: inline-flex; flex-wrap: wrap; }
+.msr-seg label { cursor: pointer; display: inline-flex; align-items: center; min-height: 34px; padding: 0 12px; margin: -1px 0 0 -1px; border: var(--line); background: var(--white); font-size: 12px; font-weight: 700; position: relative; }
+.msr-seg label.is-active { z-index: 1; color: white; background: var(--blue); }
+.msr-seg label:focus-within { outline: 2px solid var(--blue-bright, #055dff); outline-offset: 1px; }
+.msr-seg input { position: absolute; opacity: 0; pointer-events: none; }
+.msr-cfg-sorts { border: 1px solid var(--line, #e3e6ea); padding: 6px 10px; display: grid; gap: 2px; min-width: 0; }
+.msr-cfg-sorts > div { display: grid; gap: 2px; }
+.msr-cfg-sort { display: flex; align-items: center; gap: 4px; }
+.msr-cfg-sort .checkbox-line { flex: 1; min-width: 0; }
+.msr-cfg-foot { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; }
+.dashboard-widget[data-widget-type="daily_research"] .dashboard-widget-back > .page-actions.compact { display: none; }
+@media (max-width: 600px) {
+    .msr-row { grid-template-columns: 20px minmax(0, 1fr); }
+    .msr-acts { grid-column: 2; justify-content: flex-start; flex-wrap: wrap; }
+    .msr-big .msr-big-bar, .msr-big-body { padding-left: 12px; padding-right: 12px; }
+}

@@ -1,0 +1,1565 @@
+fr ¦ vi ¦ id
+Espace de travail « {name} » appliqué. ¦ Đã áp dụng không gian làm việc “{name}”. ¦ Ruang kerja “{name}” diterapkan.
+Réglages « {name} » importés : « Appliquer » pour les utiliser. ¦ Đã nhập cài đặt “{name}”: bấm “Áp dụng” để dùng. ¦ Pengaturan “{name}” diimpor: pilih “Terapkan” untuk memakainya.
+{layer} (avant / après) ¦ {layer} (trước / sau) ¦ {layer} (sebelum / sesudah)
+Avant / après — {name} ¦ Trước / sau — {name} ¦ Sebelum / sesudah — {name}
+Modèle des visages : {what} ¦ Mô hình khuôn mặt: {what} ¦ Model wajah: {what}
+Portrait de {name} (photo d’identité) ¦ Chân dung của {name} (ảnh thẻ) ¦ Potret {name} (pasfoto)
+Portrait (photo d’identité) ¦ Chân dung (ảnh thẻ) ¦ Potret (pasfoto)
+Fiche {num} ¦ Hồ sơ {num} ¦ Profil {num}
+⚠️ visage non trouvé sur « {name} » : cadrage au centre, à vérifier (ou identifie le visage dans la visionneuse) ¦ ⚠️ không tìm thấy khuôn mặt trên “{name}”: đặt khung ở giữa, cần kiểm tra (hoặc nhận diện khuôn mặt trong trình xem) ¦ ⚠️ wajah tidak ditemukan di “{name}”: bingkai di tengah, perlu dicek (atau tandai wajahnya di penampil)
+={n} portraits prêts : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ {n} chân dung đã sẵn sàng: bỏ chọn những ảnh không ổn, rồi bấm “Dùng làm chân dung”. ¦ {n} potret siap: hapus centang yang tidak pas, lalu “Gunakan sebagai potret”.
+={n} portrait prêt : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ {n} chân dung đã sẵn sàng: bỏ chọn những ảnh không ổn, rồi bấm “Dùng làm chân dung”. ¦ {n} potret siap: hapus centang yang tidak pas, lalu “Gunakan sebagai potret”.
+Aucun visage trouvé tout seul. ¦ Không tự tìm thấy khuôn mặt nào. ¦ Tidak ada wajah yang ditemukan otomatis.
+={n} autres sont cadrés au centre : coche-les seulement s’ils vont. ¦ {n} ảnh khác được đặt khung ở giữa: chỉ chọn nếu thấy ổn. ¦ {n} lainnya dibingkai di tengah: centang hanya jika pas.
+={n} autre est cadré au centre : coche-le seulement s’il va. ¦ {n} ảnh khác được đặt khung ở giữa: chỉ chọn nếu thấy ổn. ¦ {n} lainnya dibingkai di tengah: centang hanya jika pas.
+Calque {num} ¦ Lớp {num} ¦ Lapisan {num}
+Groupe {num} ¦ Nhóm {num} ¦ Grup {num}
+calque|Réglages ¦ Điều chỉnh ¦ Penyesuaian
+Masque d’écrêtage : ne touche que « {name} » juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Mặt nạ cắt: chỉ tác động lên “{name}” ngay bên dưới (⌥ Alt + bấm giữa hai lớp trong Photoshop) ¦ Masker kliping: hanya memengaruhi “{name}” tepat di bawahnya (⌥ Alt + klik di antara dua lapisan di Photoshop)
+Masque d’écrêtage : ne touche que l’élément juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Mặt nạ cắt: chỉ tác động lên phần tử ngay bên dưới (⌥ Alt + bấm giữa hai lớp trong Photoshop) ¦ Masker kliping: hanya memengaruhi elemen tepat di bawahnya (⌥ Alt + klik di antara dua lapisan di Photoshop)
+seulement sur « {name} » ¦ chỉ trên “{name}” ¦ hanya pada “{name}”
+seulement sur ce qui est juste dessous ¦ chỉ trên phần ngay bên dưới ¦ hanya pada yang tepat di bawahnya
+touche tout ce qui est dessous dans « {name} » ¦ tác động lên mọi thứ bên dưới trong “{name}” ¦ memengaruhi semua yang di bawahnya dalam “{name}”
+réglages, {n} corrections ¦ điều chỉnh, {n} chỉnh sửa ¦ penyesuaian, {n} koreksi
+réglages, {n} correction ¦ điều chỉnh, {n} chỉnh sửa ¦ penyesuaian, {n} koreksi
+« {name} » mis dans un groupe ¦ Đã đưa “{name}” vào một nhóm ¦ “{name}” dimasukkan ke grup
+{layer} montré ¦ Đã hiện {layer} ¦ {layer} ditampilkan
+{layer} masqué ¦ Đã ẩn {layer} ¦ {layer} disembunyikan
+Masque qui cache la sélection ajouté à {name} ¦ Đã thêm mặt nạ che vùng chọn vào {name} ¦ Masker yang menyembunyikan seleksi ditambahkan ke {name}
+Masque qui cache tout ajouté à {name} ¦ Đã thêm mặt nạ che toàn bộ vào {name} ¦ Masker yang menyembunyikan semuanya ditambahkan ke {name}
+Masque ajouté à {name} ¦ Đã thêm mặt nạ vào {name} ¦ Masker ditambahkan ke {name}
+Masque de {name} désactivé ¦ Đã tắt mặt nạ của {name} ¦ Masker {name} dinonaktifkan
+Masque de {name} réactivé ¦ Đã bật lại mặt nạ của {name} ¦ Masker {name} diaktifkan lagi
+Masque de {name} inversé ¦ Đã đảo ngược mặt nạ của {name} ¦ Masker {name} dibalik
+Masque de {name} retiré ¦ Đã gỡ mặt nạ của {name} ¦ Masker {name} dilepas
+« {name} » à sa taille d’origine ¦ “{name}” về kích thước gốc ¦ “{name}” ke ukuran aslinya
+✨ Filtre sur « {name} » ¦ ✨ Bộ lọc trên “{name}” ¦ ✨ Filter pada “{name}”
+« {name} » pixellisé ¦ Đã raster hoá “{name}” ¦ “{name}” dirasterisasi
+« {name} » pixellisé : figé à sa taille actuelle (l’agrandir le rendra flou) ¦ Đã raster hoá “{name}”: cố định ở kích thước hiện tại (phóng to sẽ bị mờ) ¦ “{name}” dirasterisasi: terkunci pada ukurannya sekarang (memperbesarnya akan membuatnya buram)
+Groupe « {name} » supprimé (son contenu reste) ¦ Đã xoá nhóm “{name}” (nội dung vẫn giữ nguyên) ¦ Grup “{name}” dihapus (isinya tetap ada)
+{layer} supprimé ¦ Đã xoá {layer} ¦ {layer} dihapus
+« {name} » retiré des calques ¦ Đã gỡ “{name}” khỏi các lớp ¦ “{name}” dilepas dari lapisan
+Calque « {name} » supprimé avec ce qui est dessus ¦ Đã xoá lớp “{name}” cùng những gì trên đó ¦ Lapisan “{name}” dihapus beserta isinya
+{layer} dupliquée ¦ Đã nhân bản {layer} ¦ {layer} diduplikat
+{layer} dupliqué ¦ Đã nhân bản {layer} ¦ {layer} diduplikat
+{layer} vidé ¦ Đã làm trống {layer} ¦ {layer} dikosongkan
+{layer} déplacé ¦ Đã di chuyển {layer} ¦ {layer} dipindahkan
+Opacité de {name} : {n} % ¦ Độ mờ đục của {name}: {n} % ¦ Opasitas {name}: {n} %
+Fond de {name} : {n} % ¦ Độ phủ của {name}: {n} % ¦ Isian {name}: {n} %
+Renommé « {name} » ¦ Đã đổi tên thành “{name}” ¦ Diganti nama menjadi “{name}”
+Fusion de {name} : {what} ¦ Chế độ hoà trộn của {name}: {what} ¦ Mode campuran {name}: {what}
+« {name} » rangé dans « {group} » ¦ Đã xếp “{name}” vào “{group}” ¦ “{name}” dipindahkan ke “{group}”
+« {name} » sorti du groupe ¦ Đã đưa “{name}” ra khỏi nhóm ¦ “{name}” dikeluarkan dari grup
+« {name} » rangé tout en bas ¦ Đã xếp “{name}” xuống dưới cùng ¦ “{name}” dipindahkan ke paling bawah
+« {name} » rangé au-dessus de « {other} » ¦ Đã xếp “{name}” lên trên “{other}” ¦ “{name}” dipindahkan ke atas “{other}”
+« {name} » rangé sous « {other} » ¦ Đã xếp “{name}” xuống dưới “{other}” ¦ “{name}” dipindahkan ke bawah “{other}”
+🎚 Calque de réglage {name} ¦ 🎚 Lớp điều chỉnh {name} ¦ 🎚 Lapisan penyesuaian {name}
+🖼 Réglages de <b>la photo</b> ¦ 🖼 Điều chỉnh của <b>ảnh</b> ¦ 🖼 Penyesuaian <b>foto</b>
+Sur le masque, le pinceau ⬜ montre (fait revenir ce qui était caché) — X pour changer ¦ Trên mặt nạ, cọ ⬜ làm hiện ra (đưa lại phần đã bị che) — X để đổi ¦ Pada masker, kuas ⬜ menampilkan (mengembalikan yang tersembunyi) — X untuk mengganti
+Sur le masque, le pinceau ⬛ cache — X pour changer ¦ Trên mặt nạ, cọ ⬛ che đi — X để đổi ¦ Pada masker, kuas ⬛ menyembunyikan — X untuk mengganti
+Texte choisi : « {text} » ¦ Văn bản đã chọn: “{text}” ¦ Teks terpilih: “{text}”
+Glyphe {what} ajouté ¦ Đã thêm ký tự {what} ¦ Glif {what} ditambahkan
+« {what} » copié : colle-le dans un texte (⌘V). ¦ Đã sao chép “{what}”: hãy dán vào một văn bản (⌘V). ¦ “{what}” disalin: tempelkan ke dalam teks (⌘V).
+calque « {name} » (seulement l’élément dessous) ¦ lớp “{name}” (chỉ phần tử bên dưới) ¦ lapisan “{name}” (hanya elemen di bawahnya)
+calque « {name} » ¦ lớp “{name}” ¦ lapisan “{name}”
+Gamme : {a}° / {b}° — {c}° \ {d}° (glisse les repères) ¦ Dải: {a}° / {b}° — {c}° \ {d}° (kéo các mốc) ¦ Rentang: {a}° / {b}° — {c}° \ {d}° (seret penandanya)
+Propriétés de « {name} » ¦ Thuộc tính của “{name}” ¦ Properti “{name}”
+🎨 Teinte/Saturation sur « {name} » ¦ 🎨 Sắc độ/Độ bão hoà trên “{name}” ¦ 🎨 Rona/Saturasi pada “{name}”
+Motif « {what} » : calque « {name} » ¦ Hoa văn “{what}”: lớp “{name}” ¦ Pola “{what}”: lapisan “{name}”
+Motif de « {name} » ¦ Hoa văn của “{name}” ¦ Pola “{name}”
+Motif « {what} » sur « {name} » ¦ Hoa văn “{what}” trên “{name}” ¦ Pola “{what}” pada “{name}”
+Motif « {what} » retiré de la bibliothèque (les calques qui l’utilisent le gardent) ¦ Đã gỡ hoa văn “{what}” khỏi thư viện (các lớp đang dùng vẫn giữ nó) ¦ Pola “{what}” dilepas dari pustaka (lapisan yang memakainya tetap menyimpannya)
+le calque « {name} » ¦ lớp “{name}” ¦ lapisan “{name}”
+🖌 {name} : peins sur un calque. ¦ 🖌 {name}: hãy tô trên một lớp. ¦ 🖌 {name}: lukis di sebuah lapisan.
+Dégradé : {what} ¦ Dải chuyển màu: {what} ¦ Gradasi: {what}
+Dégradé {num} ¦ Dải chuyển màu {num} ¦ Gradasi {num}
+Calque « {name} » ¦ Lớp “{name}” ¦ Lapisan “{name}”
+« {name} » · son masque (noir = caché, blanc = montré) : tout se voit tout de suite ¦ “{name}” · mặt nạ của nó (đen = ẩn, trắng = hiện): bạn thấy ngay mọi thay đổi ¦ “{name}” · maskernya (hitam = tersembunyi, putih = tampil): semuanya langsung terlihat
+« {name} » : tout se voit tout de suite ¦ “{name}”: bạn thấy ngay mọi thay đổi ¦ “{name}”: semuanya langsung terlihat
+le prochain dégradé que tu traceras ¦ dải chuyển màu tiếp theo bạn sẽ vẽ ¦ gradasi berikutnya yang akan kamu buat
+Préréglage « {name} » gardé : il reste dans cette liste. ¦ Đã giữ thiết lập sẵn “{name}”: nó vẫn ở trong danh sách này. ¦ Preset “{name}” disimpan: tetap ada di daftar ini.
+Dégradé modifié sur « {name} » ¦ Đã sửa dải chuyển màu trên “{name}” ¦ Gradasi diubah pada “{name}”
+Texte « {text} » ¦ Văn bản “{text}” ¦ Teks “{text}”
+Objet dynamique « {name} » : image remplacée ¦ Đối tượng thông minh “{name}”: đã thay ảnh ¦ Objek cerdas “{name}”: gambar diganti
+Image placée : « {name} » ¦ Đã đặt ảnh: “{name}” ¦ Gambar ditempatkan: “{name}”
+Image placée, mais pas rangée dans les médias : {err} ¦ Đã đặt ảnh, nhưng chưa lưu vào tư liệu: {err} ¦ Gambar ditempatkan, tetapi belum disimpan di media: {err}
+Élément supprimé de « {name} » ¦ Đã xoá phần tử khỏi “{name}” ¦ Elemen dihapus dari “{name}”
+Image tournée sur « {name} » ¦ Đã xoay ảnh trên “{name}” ¦ Gambar diputar pada “{name}”
+Image agrandie / réduite sur « {name} » ¦ Đã phóng to / thu nhỏ ảnh trên “{name}” ¦ Gambar diperbesar / diperkecil pada “{name}”
+Dégradé ajusté (masque) sur « {name} » ¦ Đã chỉnh dải chuyển màu (mặt nạ) trên “{name}” ¦ Gradasi (masker) disesuaikan pada “{name}”
+Dégradé ajusté sur « {name} » ¦ Đã chỉnh dải chuyển màu trên “{name}” ¦ Gradasi disesuaikan pada “{name}”
+Élément déplacé sur « {name} » ¦ Đã di chuyển phần tử trên “{name}” ¦ Elemen dipindahkan pada “{name}”
+Masque en dégradé sur « {name} » ¦ Mặt nạ chuyển màu trên “{name}” ¦ Masker gradasi pada “{name}”
+Dégradé {what} : « {name} » ¦ Dải chuyển màu {what}: “{name}” ¦ Gradasi {what}: “{name}”
+{what} sur « {name} » ¦ {what} trên “{name}” ¦ {what} pada “{name}”
+Masque : caché au pinceau ¦ Mặt nạ: đã che bằng cọ ¦ Masker: disembunyikan dengan kuas
+Masque : montré au pinceau ¦ Mặt nạ: đã hiện bằng cọ ¦ Masker: ditampilkan dengan kuas
+Pli réparé ({n} touches) (calque ✨ Retouches) ¦ Đã sửa nếp gấp ({n} nét) (lớp ✨ Chỉnh sửa) ¦ Lipatan diperbaiki ({n} sapuan) (lapisan ✨ Retus)
+Pli réparé (calque ✨ Retouches) ¦ Đã sửa nếp gấp (lớp ✨ Chỉnh sửa) ¦ Lipatan diperbaiki (lapisan ✨ Retus)
+Recadrage enlevé ¦ Đã bỏ cắt khung ¦ Pangkasan dihapus
+Recadrage et redressement ({a}°) ¦ Cắt khung và làm thẳng ({a}°) ¦ Pangkas dan luruskan ({a}°)
+Recadrage ¦ Cắt khung ¦ Pangkas
+Filtre « {what} » (refait) ¦ Bộ lọc “{what}” (làm lại) ¦ Filter “{what}” (diulang)
+« {what} » refait sur un nouveau calque. ¦ Đã làm lại “{what}” trên một lớp mới. ¦ “{what}” diulang di lapisan baru.
+limité à la sélection ¦ giới hạn trong vùng chọn ¦ terbatas pada seleksi
+Filtre « {what} » ¦ Bộ lọc “{what}” ¦ Filter “{what}”
+Filtre « {what} » ajouté au calque ¦ Đã thêm bộ lọc “{what}” vào lớp ¦ Filter “{what}” ditambahkan ke lapisan
+Filtre « {what} » réglé ¦ Đã chỉnh bộ lọc “{what}” ¦ Filter “{what}” diatur
+Action « {name} » ¦ Thao tác “{name}” ¦ Aksi “{name}”
+Action du {date} ¦ Thao tác ngày {date} ¦ Aksi tanggal {date}
+Action « {name} » enregistrée. ¦ Đã lưu thao tác “{name}”. ¦ Aksi “{name}” tersimpan.
+Action « {name} » importée : « Sur cette photo » ou « Sur plusieurs photos… ». ¦ Đã nhập thao tác “{name}”: chọn “Trên ảnh này” hoặc “Trên nhiều ảnh…”. ¦ Aksi “{name}” diimpor: pilih “Pada foto ini” atau “Pada beberapa foto…”.
+Action « {name} » supprimée ¦ Đã xoá thao tác “{name}” ¦ Aksi “{name}” dihapus
+« {name} » sur plusieurs photos ¦ “{name}” trên nhiều ảnh ¦ “{name}” pada beberapa foto
+Terminé : {n} photos sur {total}, nouvelle version affichée. ¦ Xong: {n} ảnh trên {total}, đang hiện phiên bản mới. ¦ Selesai: {n} foto dari {total}, versi baru ditampilkan.
+Terminé : {n} photo sur {total}, nouvelle version affichée. ¦ Xong: {n} ảnh trên {total}, đang hiện phiên bản mới. ¦ Selesai: {n} foto dari {total}, versi baru ditampilkan.
+Terminé : {n} photos sur {total}. ¦ Xong: {n} ảnh trên {total}. ¦ Selesai: {n} foto dari {total}.
+Terminé : {n} photo sur {total}. ¦ Xong: {n} ảnh trên {total}. ¦ Selesai: {n} foto dari {total}.
+{layer} (retouchée) ¦ {layer} (đã chỉnh sửa) ¦ {layer} (diretus)
+« {name} » · comme le style de calque de Photoshop ¦ “{name}” · giống kiểu lớp của Photoshop ¦ “{name}” · seperti gaya lapisan di Photoshop
+Effets de {layer} enlevés ¦ Đã bỏ hiệu ứng của {layer} ¦ Efek {layer} dihapus
+Effets de {layer} ¦ Hiệu ứng của {layer} ¦ Efek {layer}
+Les lignes fines, claires ou sombres, sont repérées en rouge (dans la sélection). Vérifie, puis « Réparer ces lignes ». ¦ Các đường mảnh, sáng hoặc tối, được đánh dấu màu đỏ (trong vùng chọn). Hãy kiểm tra, rồi bấm “Sửa các đường này”. ¦ Garis tipis, terang atau gelap, ditandai merah (dalam seleksi). Periksa, lalu “Perbaiki garis-garis ini”.
+Les lignes fines, claires ou sombres, sont repérées en rouge. Vérifie, puis « Réparer ces lignes ». ¦ Các đường mảnh, sáng hoặc tối, được đánh dấu màu đỏ. Hãy kiểm tra, rồi bấm “Sửa các đường này”. ¦ Garis tipis, terang atau gelap, ditandai merah. Periksa, lalu “Perbaiki garis-garis ini”.
+{what} (en rouge sur la photo). ¦ {what} (màu đỏ trên ảnh). ¦ {what} (merah pada foto).
+Plis réparés ({what}) ¦ Đã sửa nếp gấp ({what}) ¦ Lipatan diperbaiki ({what})
+{what} : compare avec 👁 ou ◧ ; ↶ pour revenir. ¦ {what}: so sánh bằng 👁 hoặc ◧; ↶ để quay lại. ¦ {what}: bandingkan dengan 👁 atau ◧; ↶ untuk kembali.
+={n} lignes repérées puis comblées ¦ {n} đường được tìm thấy rồi lấp lại ¦ {n} garis ditemukan lalu ditutup
+={n} ligne repérée puis comblée ¦ {n} đường được tìm thấy rồi lấp lại ¦ {n} garis ditemukan lalu ditutup
+=pli|{n} lignes ¦ {n} đường ¦ {n} garis
+=pli|{n} ligne ¦ {n} đường ¦ {n} garis
+=retouche|{n} étapes ¦ {n} bước ¦ {n} langkah
+=retouche|{n} étape ¦ {n} bước ¦ {n} langkah
+=ligne repérée ¦ đường được tìm thấy ¦ garis ditemukan
+=ligne réparée ¦ đường đã sửa ¦ garis diperbaiki
+=calque de réglage ¦ lớp điều chỉnh ¦ lapisan penyesuaian
+=portrait mis à jour ¦ chân dung đã cập nhật ¦ potret diperbarui
+✨ Restauration en une fois ({what}) ¦ ✨ Phục hồi một lần ({what}) ¦ ✨ Pemulihan sekaligus ({what})
+Restauration faite ({what}) : chaque étape est un calque « ✨ » (Calques) que tu peux cacher ou doser ; ↶ défait tout. ¦ Đã phục hồi xong ({what}): mỗi bước là một lớp “✨” (Lớp) mà bạn có thể ẩn hoặc giảm bớt; ↶ hoàn tác tất cả. ¦ Pemulihan selesai ({what}): setiap langkah adalah lapisan “✨” (Lapisan) yang bisa kamu sembunyikan atau kurangi; ↶ mengurungkan semuanya.
+Portrait de la fiche « {name} » mis à jour (la photo recadrée est dans ses médias). ¦ Đã cập nhật chân dung của hồ sơ “{name}” (ảnh đã cắt nằm trong tư liệu của hồ sơ). ¦ Potret profil “{name}” diperbarui (foto yang dipangkas ada di medianya).
+Portrait de la fiche mis à jour (la photo recadrée est dans ses médias). ¦ Đã cập nhật chân dung của hồ sơ (ảnh đã cắt nằm trong tư liệu của hồ sơ). ¦ Potret profil diperbarui (foto yang dipangkas ada di medianya).
+{w} × {h} px (recadrée) ¦ {w} × {h} px (đã cắt) ¦ {w} × {h} px (dipangkas)
+Horizon redressé ({a}°) ¦ Đã làm thẳng đường chân trời ({a}°) ¦ Cakrawala diluruskan ({a}°)
+Redressée de {a}° : ajuste le cadre puis « ✓ Valider ». ¦ Đã làm thẳng {a}°: chỉnh khung rồi bấm “✓ Xác nhận”. ¦ Diluruskan {a}°: sesuaikan bingkai, lalu “✓ Konfirmasi”.
+Photo redressée de {a}° (et recadrée pour ne pas voir les coins). ⌗ Recadrer pour ajuster. ¦ Ảnh đã được làm thẳng {a}° (và cắt để không thấy các góc). ⌗ Cắt khung để chỉnh. ¦ Foto diluruskan {a}° (dan dipangkas agar sudutnya tidak terlihat). ⌗ Pangkas untuk menyesuaikan.
+Redressée automatiquement ({a}°) ¦ Đã tự làm thẳng ({a}°) ¦ Diluruskan otomatis ({a}°)
+Reflets retirés sur un calque à part (seulement dans la sélection : fais d’abord une sélection de la vitre pour limiter) : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Đã xoá phản chiếu trên một lớp riêng (chỉ trong vùng chọn: hãy chọn tấm kính trước để giới hạn): chỉnh độ mạnh và kích thước, độ mờ đục để giảm bớt, 🎭 để giới hạn, 👁 để ẩn. Ảnh gốc không bị đụng đến. ¦ Pantulan dihapus di lapisan terpisah (hanya dalam seleksi: seleksi dulu kacanya untuk membatasi): atur kekuatan dan ukuran, opasitas untuk mengurangi, 🎭 untuk membatasi, 👁 untuk menyembunyikan. Fotonya tidak diubah.
+Reflets retirés sur un calque à part : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Đã xoá phản chiếu trên một lớp riêng: chỉnh độ mạnh và kích thước, độ mờ đục để giảm bớt, 🎭 để giới hạn, 👁 để ẩn. Ảnh gốc không bị đụng đến. ¦ Pantulan dihapus di lapisan terpisah: atur kekuatan dan ukuran, opasitas untuk mengurangi, 🎭 untuk membatasi, 👁 untuk menyembunyikan. Fotonya tidak diubah.
+Colorisation dans un calque de réglage (limitée à la sélection) : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Tô màu trong một lớp điều chỉnh (giới hạn trong vùng chọn): chọn màu và độ mạnh; 🎭 để giới hạn, 👁 để ẩn. Ảnh gốc không bị đụng đến. ¦ Pewarnaan di lapisan penyesuaian (terbatas pada seleksi): pilih warna dan kekuatannya; 🎭 untuk membatasi, 👁 untuk menyembunyikan. Fotonya tidak diubah.
+Colorisation dans un calque de réglage : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Tô màu trong một lớp điều chỉnh: chọn màu và độ mạnh; 🎭 để giới hạn, 👁 để ẩn. Ảnh gốc không bị đụng đến. ¦ Pewarnaan di lapisan penyesuaian: pilih warna dan kekuatannya; 🎭 untuk membatasi, 👁 untuk menyembunyikan. Fotonya tidak diubah.
+={n} taches enlevées, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ Đã xoá {n} vết bẩn, trên lớp “{layer}” (ảnh gốc không bị đụng đến): hãy ẩn hoặc giảm lớp để so sánh; ↶ nếu quá tay. ¦ {n} noda dihapus, di lapisan “{layer}” (fotonya tidak diubah): sembunyikan atau kurangi untuk membandingkan; ↶ jika berlebihan.
+={n} tache enlevée, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ Đã xoá {n} vết bẩn, trên lớp “{layer}” (ảnh gốc không bị đụng đến): hãy ẩn hoặc giảm lớp để so sánh; ↶ nếu quá tay. ¦ {n} noda dihapus, di lapisan “{layer}” (fotonya tidak diubah): sembunyikan atau kurangi untuk membandingkan; ↶ jika berlebihan.
+✨ Taches enlevées ¦ ✨ Đã xoá vết bẩn ¦ ✨ Noda dihapus
+Taches enlevées automatiquement ({n}) ¦ Đã tự xoá vết bẩn ({n}) ¦ Noda dihapus otomatis ({n})
+Sélection remplie ({what}) ¦ Đã tô đầy vùng chọn ({what}) ¦ Seleksi diisi ({what})
+Sélection effacée sur « {name} » ¦ Đã xoá vùng chọn trên “{name}” ¦ Seleksi dihapus pada “{name}”
+Masque d’après la sélection ({name}) ¦ Mặt nạ từ vùng chọn ({name}) ¦ Masker dari seleksi ({name})
+Préréglage « {name} » retiré ¦ Đã gỡ thiết lập sẵn “{name}” ¦ Preset “{name}” dilepas
+Préréglage « {name} » ¦ Thiết lập sẵn “{name}” ¦ Preset “{name}”
+Projet « {name} » (📂 Fichier → Ouvrir un projet pour le retrouver) ¦ Dự án “{name}” (📂 Tệp → Mở dự án để tìm lại) ¦ Proyek “{name}” (📂 Berkas → Buka proyek untuk menemukannya lagi)
+Versions de la photo ({n}) ¦ Các phiên bản của ảnh ({n}) ¦ Versi foto ({n})
+{w} × {h} cm à {dpi} ppp ¦ {w} × {h} cm ở {dpi} dpi ¦ {w} × {h} cm pada {dpi} dpi
+≈ {size} Mo en mémoire ¦ ≈ {size} MB trong bộ nhớ ¦ ≈ {size} MB di memori
+Taille de l’image : {w} × {h} px ¦ Kích thước ảnh: {w} × {h} px ¦ Ukuran gambar: {w} × {h} px
+Zone de travail : {w} × {h} px ¦ Vùng làm việc: {w} × {h} px ¦ Kanvas: {w} × {h} px
+Zone de travail de départ ¦ Vùng làm việc ban đầu ¦ Kanvas awal
+Cette image est très grande ({n} millions de points) : l’enregistrement peut être long, voire échouer. ¦ Ảnh này rất lớn ({n} triệu điểm ảnh): việc lưu có thể lâu, thậm chí thất bại. ¦ Gambar ini sangat besar ({n} juta piksel): menyimpannya bisa lama, bahkan gagal.
+Enregistrer quand même ? ¦ Vẫn lưu chứ? ¦ Tetap simpan?
+Projet « {name} » rouvert ¦ Đã mở lại dự án “{name}” ¦ Proyek “{name}” dibuka kembali
+Projet en partie illisible : {err} ¦ Dự án có phần không đọc được: {err} ¦ Sebagian proyek tidak terbaca: {err}
+photo de départ introuvable ¦ không tìm thấy ảnh ban đầu ¦ foto awal tidak ditemukan
+Supprimer le projet « {name} » ? ¦ Xoá dự án “{name}”? ¦ Hapus proyek “{name}”?
+Quitter le plein écran ¦ Thoát toàn màn hình ¦ Keluar dari layar penuh
+Plus de place pour enregistrer : supprime un espace de travail. ¦ Hết chỗ để lưu: hãy xoá một không gian làm việc. ¦ Tidak ada ruang lagi untuk menyimpan: hapus satu ruang kerja.
+Ranger, montrer ou cacher les boutons et les options ¦ Sắp xếp, hiện hoặc ẩn các nút và tuỳ chọn ¦ Atur, tampilkan, atau sembunyikan tombol dan opsi
+⚙️ Boutons et options ¦ ⚙️ Nút và tuỳ chọn ¦ ⚙️ Tombol dan opsi
+Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). Gardé pour la prochaine fois. Comme les espaces de travail de Photoshop : enregistre une disposition sous un nom (« Restauration », « Montage rapide »…) et passe de l’une à l’autre. ¦ Đánh dấu những gì cần hiện, sắp xếp bằng ↑ ↓ (hoặc kéo ⠿). Được giữ cho lần sau. Giống không gian làm việc của Photoshop: lưu một bố cục dưới một tên (“Phục hồi”, “Chỉnh nhanh”…) và chuyển qua lại giữa chúng. ¦ Centang yang ingin ditampilkan, atur dengan ↑ ↓ (atau seret ⠿). Disimpan untuk lain kali. Seperti ruang kerja Photoshop: simpan tata letak dengan sebuah nama (“Pemulihan”, “Edit cepat”…) dan beralih dari satu ke yang lain.
+les boutons montrés, cachés et rangés ¦ các nút đã hiện, ẩn và sắp xếp ¦ tombol yang ditampilkan, disembunyikan, dan diatur
+Boutons remis comme au départ (rouvre la fenêtre pour retrouver l’ordre de départ). ¦ Các nút đã được đặt lại như ban đầu (mở lại cửa sổ để thấy thứ tự ban đầu). ¦ Tombol dikembalikan seperti semula (buka lagi jendelanya untuk melihat urutan awal).
+Boutons rangés. ¦ Đã sắp xếp các nút. ¦ Tombol sudah diatur.
+Hautes lumières ¦ Vùng sáng ¦ Sorotan
+Vibrance (couleurs ternes d’abord) ¦ Độ rực (màu nhạt trước) ¦ Vibrance (warna kusam dulu)
+Teinte (tourner les couleurs) ¦ Sắc độ (xoay màu) ¦ Rona (putar warna)
+Noir d’entrée ¦ Đen đầu vào ¦ Hitam masukan
+Blanc d’entrée ¦ Trắng đầu vào ¦ Putih masukan
+Tons moyens (gamma ×100) ¦ Tông trung (gamma ×100) ¦ Nada tengah (gamma ×100)
+Noir de sortie ¦ Đen đầu ra ¦ Hitam keluaran
+Blanc de sortie ¦ Trắng đầu ra ¦ Putih keluaran
+Naturelle : ciel, verdure, peau, habits (conseillé) ¦ Tự nhiên: bầu trời, cây cỏ, da, quần áo (nên dùng) ¦ Alami: langit, tanaman, kulit, pakaian (disarankan)
+Sépia chaud ¦ Nâu đỏ ấm ¦ Sepia hangat
+Autochrome (couleurs d’autrefois) ¦ Autochrome (màu thời xưa) ¦ Autochrome (warna zaman dulu)
+Portrait (peau rosée) ¦ Chân dung (da hồng hào) ¦ Potret (kulit kemerahan)
+Paysage : ciel en haut, terre en bas ¦ Phong cảnh: trời ở trên, đất ở dưới ¦ Pemandangan: langit di atas, tanah di bawah
+Saturation augmentée ¦ Tăng độ bão hoà ¦ Saturasi dinaikkan
+Saturation plus forte ¦ Độ bão hoà mạnh hơn ¦ Saturasi lebih kuat
+Rouges plus saturés ¦ Màu đỏ đậm hơn ¦ Merah lebih jenuh
+Jaune intensifié ¦ Màu vàng đậm hơn ¦ Kuning lebih kuat
+Ciel plus bleu ¦ Trời xanh hơn ¦ Langit lebih biru
+Peau plus douce ¦ Da mịn hơn ¦ Kulit lebih halus
+Désaturer ¦ Giảm bão hoà ¦ Desaturasi
+Verts d’automne ¦ Màu xanh mùa thu ¦ Hijau musim gugur
+Reflets en moins (vitre, verre, vernis) ¦ Giảm phản chiếu (cửa kính, thuỷ tinh, lớp vecni) ¦ Kurangi pantulan (kaca, pernis)
+Taille des reflets (0 = moyenne) ¦ Kích thước phản chiếu (0 = trung bình) ¦ Ukuran pantulan (0 = sedang)
+Poussière et rayures (automatique) ¦ Bụi và vết xước (tự động) ¦ Debu dan goresan (otomatis)
+Réduire le bruit ¦ Giảm nhiễu ¦ Kurangi derau
+Netteté ¦ Độ nét ¦ Ketajaman
+Clarté (contraste local) ¦ Độ trong (tương phản cục bộ) ¦ Kejelasan (kontras lokal)
+Flou de surface (garde les contours) ¦ Làm mờ bề mặt (giữ đường viền) ¦ Blur permukaan (menjaga tepi)
+Décentrement (maquette, tilt-shift) ¦ Tilt-shift (mô hình thu nhỏ) ¦ Tilt-shift (miniatur)
+Largeur de la bande ¦ Độ rộng của dải ¦ Lebar pita
+Flou de l’objectif (bokeh) ¦ Làm mờ ống kính (bokeh) ¦ Blur lensa (bokeh)
+Ajouter du bruit ¦ Thêm nhiễu ¦ Tambah derau
+Poussière et rayures ¦ Bụi và vết xước ¦ Debu dan goresan
+Passe-haut (pour accentuer en Incrustation) ¦ Thông cao (để làm nét ở chế độ Chồng phủ) ¦ High pass (untuk menajamkan dengan Overlay)
+Esthétiques ¦ Cách điệu ¦ Stilisasi
+Garder les couleurs (0 / 1) ¦ Giữ màu (0 / 1) ¦ Pertahankan warna (0 / 1)
+Tracé des contours ¦ Vẽ đường viền ¦ Telusuri kontur
+Contours lumineux (néon) ¦ Viền phát sáng (neon) ¦ Tepi bercahaya (neon)
+Postérisation ¦ Giảm số màu ¦ Posterisasi
+Seuil (noir et blanc pur) ¦ Ngưỡng (đen trắng thuần) ¦ Ambang (hitam putih murni)
+Vers la droite (1) / gauche (0) ¦ Sang phải (1) / trái (0) ¦ Ke kanan (1) / kiri (0)
+Peinture à l’huile ¦ Tranh sơn dầu ¦ Lukisan cat minyak
+Taille de la touche ¦ Kích thước nét cọ ¦ Ukuran sapuan kuas
+Taille des taches ¦ Kích thước vết ¦ Ukuran bercak
+Dessin au crayon ¦ Vẽ bút chì ¦ Gambar pensil
+En couleur (0 / 1) ¦ Có màu (0 / 1) ¦ Berwarna (0 / 1)
+Taille des carreaux ¦ Kích thước ô ¦ Ukuran ubin
+Demi-teinte (points d’imprimerie) ¦ Bán sắc (chấm in) ¦ Halftone (titik cetak)
+Taille des cristaux ¦ Kích thước tinh thể ¦ Ukuran kristal
+Éclairage (projecteur) ¦ Chiếu sáng (đèn rọi) ¦ Pencahayaan (lampu sorot)
+Lumière X ¦ Ánh sáng X ¦ Cahaya X
+Lumière Y ¦ Ánh sáng Y ¦ Cahaya Y
+Lumière ambiante ¦ Ánh sáng môi trường ¦ Cahaya sekitar
+Halo de lumière (flare) ¦ Lóa ống kính (flare) ¦ Suar lensa (flare)
+À partir de (luminosité) ¦ Bắt đầu từ (độ sáng) ¦ Mulai dari (kecerahan)
+Déformation ¦ Biến dạng ¦ Distorsi
+Pincement / sphérisation ¦ Bóp / cầu hoá ¦ Cubit / bulatkan
+Force (− sphère, + pincement) ¦ Độ mạnh (− cầu, + bóp) ¦ Kekuatan (− bulat, + cubit)
+Longueur d’onde ¦ Bước sóng ¦ Panjang gelombang
+Ondulation (ronds dans l’eau) ¦ Gợn sóng (vòng tròn trên mặt nước) ¦ Riak (lingkaran di air)
+Écart des ronds ¦ Khoảng cách các vòng ¦ Jarak lingkaran
+Coordonnées polaires ¦ Toạ độ cực ¦ Koordinat polar
+Rectangle → polaire (0) / l’inverse (1) ¦ Chữ nhật → cực (0) / ngược lại (1) ¦ Persegi → polar (0) / sebaliknya (1)
+Minimum (assombrit, épaissit le sombre) ¦ Tối thiểu (làm tối, làm dày vùng tối) ¦ Minimum (menggelapkan, menebalkan yang gelap)
+Maximum (éclaircit, épaissit le clair) ¦ Tối đa (làm sáng, làm dày vùng sáng) ¦ Maksimum (menerangkan, menebalkan yang terang)
+Décalage (avec retour de l’autre côté) ¦ Dịch chuyển (quay vòng sang phía bên kia) ¦ Geser (kembali dari sisi lain)
+Enlever les reflets (vitre) ¦ Xoá phản chiếu (cửa kính) ¦ Hapus pantulan (kaca)
+Reflets en moins ¦ Giảm phản chiếu ¦ Kurangi pantulan
+Vieille photo ravivée ¦ Ảnh cũ được làm sống lại ¦ Foto lama dihidupkan kembali
+Négatif → positif ¦ Âm bản → dương bản ¦ Negatif → positif
+🖌 Forme du panneau Formes ¦ 🖌 Hình từ bảng Hình dạng ¦ 🖌 Bentuk dari panel Bentuk
+Avec empattement ¦ Có chân ¦ Serif
+Sans empattement ¦ Không chân ¦ Sans serif
+Manuscrite ¦ Viết tay ¦ Tulisan tangan
+Extra-fin ¦ Rất mảnh ¦ Sangat tipis
+Ultra-léger ¦ Siêu nhẹ ¦ Ekstra ringan
+Léger ¦ Nhẹ ¦ Ringan
+Médium ¦ Trung bình ¦ Sedang
+Demi-gras ¦ Nửa đậm ¦ Semi tebal
+Extra-gras ¦ Rất đậm ¦ Ekstra tebal
+Aligné à gauche ¦ Căn trái ¦ Rata kiri
+Aligné à droite ¦ Căn phải ¦ Rata kanan
+Justifié, dernière ligne à gauche ¦ Căn đều, dòng cuối căn trái ¦ Rata kiri-kanan, baris terakhir rata kiri
+Justifié, dernière ligne centrée ¦ Căn đều, dòng cuối căn giữa ¦ Rata kiri-kanan, baris terakhir di tengah
+Justifié, dernière ligne à droite ¦ Căn đều, dòng cuối căn phải ¦ Rata kiri-kanan, baris terakhir rata kanan
+Tout justifié ¦ Căn đều hoàn toàn ¦ Rata kiri-kanan penuh
+Ligatures et formes ¦ Chữ ghép và biến thể ¦ Ligatur dan bentuk
+Unicode : Latin étendu A ¦ Unicode: Latinh mở rộng A ¦ Unicode: Latin Diperluas-A
+Unicode : Latin étendu B ¦ Unicode: Latinh mở rộng B ¦ Unicode: Latin Diperluas-B
+Unicode : hébreu ¦ Unicode: tiếng Hebrew ¦ Unicode: Ibrani
+Unicode : exposants et indices ¦ Unicode: chỉ số trên và chỉ số dưới ¦ Unicode: superskrip dan subskrip
+Unicode : flèches ¦ Unicode: mũi tên ¦ Unicode: panah
+Unicode : mathématiques ¦ Unicode: toán học ¦ Unicode: matematika
+Unicode : formes géométriques ¦ Unicode: hình học ¦ Unicode: bentuk geometris
+Unicode : latin étendu D (abréviations anciennes) ¦ Unicode: Latinh mở rộng D (chữ viết tắt cổ) ¦ Unicode: Latin Diperluas-D (singkatan kuno)
+espace fine ¦ khoảng trắng hẹp ¦ spasi tipis
+tiret conditionnel (césure) ¦ gạch nối tuỳ chọn (ngắt từ) ¦ tanda hubung lunak (pemenggalan)
+mort au combat ¦ tử trận ¦ gugur dalam pertempuran
+et (abréviation ancienne) ¦ và (chữ viết tắt cổ) ¦ dan (singkatan kuno)
+s long ¦ s dài ¦ s panjang
+Linéaire ¦ Tuyến tính ¦ Linear
+Radial ¦ Toả tròn ¦ Radial
+Angle (conique) ¦ Góc (hình nón) ¦ Sudut (kerucut)
+Réfléchi ¦ Phản chiếu ¦ Terpantul
+Losange ¦ Hình thoi ¦ Belah ketupat
+Premier plan → arrière-plan ¦ Tiền cảnh → hậu cảnh ¦ Latar depan → latar belakang
+Hachures croisées ¦ Gạch chéo đan ¦ Arsiran silang
+Écailles ¦ Vảy ¦ Sisik
+Brin d’herbe ¦ Ngọn cỏ ¦ Helai rumput
+Éclaboussure ¦ Vết bắn ¦ Cipratan
+Ma forme (d’après une sélection) ¦ Hình của tôi (từ một vùng chọn) ¦ Bentukku (dari seleksi)
+Aérographe ¦ Cọ phun ¦ Airbrush
+Carré net ¦ Vuông sắc nét ¦ Persegi tegas
+Étoiles semées ¦ Sao rải rác ¦ Bintang bertebaran
+Éclaboussures ¦ Vết bắn tung toé ¦ Cipratan-cipratan
+Superposition (Écran) ¦ Chồng sáng (Screen) ¦ Layar (Screen)
+⌗ Cadrer et redresser ¦ ⌗ Cắt khung và làm thẳng ¦ ⌗ Bingkai dan luruskan
+Une photo scannée de travers, avec ses bords blancs ou abîmés : on la redresse, puis on garde ce qui compte. ¦ Một ảnh scan bị lệch, có viền trắng hoặc bị hỏng: ta làm thẳng lại, rồi giữ phần quan trọng. ¦ Foto yang dipindai miring, dengan tepi putih atau rusak: luruskan, lalu simpan bagian yang penting.
+📐 Redresser tout seul ¦ 📐 Tự làm thẳng ¦ 📐 Luruskan otomatis
+⌗ Recadrer ¦ ⌗ Cắt khung ¦ ⌗ Pangkas
+⧈ Photo prise de biais ¦ ⧈ Ảnh chụp xiên ¦ ⧈ Foto diambil miring
+🎨 Couleurs passées, photo jaunie ¦ 🎨 Màu phai, ảnh ố vàng ¦ 🎨 Warna pudar, foto menguning
+Le temps jaunit, pâlit ou rosit les photos. « Enlever le jaunissement » remet chaque couleur à sa place ; « Raviver » redonne du contraste. ¦ Thời gian làm ảnh ố vàng, phai nhạt hoặc ửng hồng. “Xoá ố vàng” đưa mỗi màu về đúng chỗ; “Làm tươi lại” trả lại độ tương phản. ¦ Waktu membuat foto menguning, pucat, atau merah muda. “Hilangkan warna kuning” mengembalikan setiap warna ke tempatnya; “Segarkan” mengembalikan kontras.
+🟨 Enlever le jaunissement ¦ 🟨 Xoá ố vàng ¦ 🟨 Hilangkan warna kuning
+✨ Raviver une vieille photo ¦ ✨ Làm tươi lại ảnh cũ ¦ ✨ Segarkan foto lama
+Réglage automatique ¦ Tự động điều chỉnh ¦ Penyesuaian otomatis
+🧹 Poussières et petites taches ¦ 🧹 Bụi và vết bẩn nhỏ ¦ 🧹 Debu dan noda kecil
+Les points blancs ou noirs, les piqûres : l’app les cherche et les enlève une par une (avec le correcteur). Pour ne traiter qu’une partie, sélectionne-la d’abord. Ce qui reste : le correcteur 🩹 à la main. ¦ Những chấm trắng hoặc đen, vết ố: ứng dụng tìm và xoá từng cái một (bằng công cụ sửa vết). Để chỉ xử lý một phần, hãy chọn phần đó trước. Phần còn lại: dùng công cụ sửa vết 🩹 bằng tay. ¦ Titik putih atau hitam, bintik-bintik: aplikasi mencarinya dan menghapusnya satu per satu (dengan alat perbaikan). Untuk mengolah sebagian saja, seleksi dulu bagian itu. Sisanya: alat perbaikan 🩹 secara manual.
+Sensibilité ¦ Độ nhạy ¦ Kepekaan
+Taille maximale d’une tache ¦ Kích thước tối đa của vết ¦ Ukuran maksimum noda
+🔍 Repérer et enlever les taches ¦ 🔍 Tìm và xoá vết bẩn ¦ 🔍 Temukan dan hapus noda
+🩹 Correcteur à la main ¦ 🩹 Sửa vết bằng tay ¦ 🩹 Perbaikan manual
+Filtre poussière et rayures ¦ Bộ lọc bụi và vết xước ¦ Filter debu dan goresan
+🩹 Déchirures, plis, rayures ¦ 🩹 Vết rách, nếp gấp, vết xước ¦ 🩹 Sobekan, lipatan, goresan
+« Repérer les plis » trouve les lignes fines claires ou sombres et propose de les combler. À la main : le pinceau 🪡 Réparer — peins sur le pli, il est refait d’après ce qui l’entoure. Pour un morceau manquant (coin arraché), le tampon recopie une partie voisine. ¦ “Tìm nếp gấp” tìm các đường mảnh sáng hoặc tối và đề xuất lấp chúng lại. Bằng tay: cọ 🪡 Sửa — tô lên nếp gấp, nó được làm lại theo vùng xung quanh. Với một mảnh bị mất (góc bị rách), con dấu sao chép một phần bên cạnh. ¦ “Temukan lipatan” mencari garis tipis terang atau gelap dan menawarkan untuk menutupnya. Secara manual: kuas 🪡 Perbaiki — lukis di atas lipatan, bagian itu dibuat ulang dari sekitarnya. Untuk bagian yang hilang (sudut sobek), stempel klon menyalin bagian di dekatnya.
+🔍 Repérer les plis et rayures ¦ 🔍 Tìm nếp gấp và vết xước ¦ 🔍 Temukan lipatan dan goresan
+🪡 Réparer au pinceau ¦ 🪡 Sửa bằng cọ ¦ 🪡 Perbaiki dengan kuas
+➰ Entourer une zone… ¦ ➰ Khoanh một vùng… ¦ ➰ Lingkari sebuah area…
+🌫️ Grain et bruit ¦ 🌫️ Hạt và nhiễu ¦ 🌫️ Butiran dan derau
+Une photo granuleuse ou un tirage abîmé : on adoucit sans perdre les contours. ¦ Ảnh bị sạn hạt hoặc bản in bị hỏng: làm mịn mà không mất đường viền. ¦ Foto berbutir atau cetakan rusak: haluskan tanpa kehilangan tepinya.
+🙂 Netteté des visages ¦ 🙂 Khuôn mặt rõ nét ¦ 🙂 Wajah lebih tajam
+Entoure un visage avec l’ellipse ◯, puis « Visage plus net » : il est débruité et accentué, seulement là (calque à part, que tu peux doser). ¦ Khoanh một khuôn mặt bằng hình elip ◯, rồi bấm “Mặt rõ nét hơn”: chỉ vùng đó được khử nhiễu và làm nét (trên lớp riêng, bạn có thể giảm bớt). ¦ Lingkari wajah dengan elips ◯, lalu “Wajah lebih tajam”: derau dikurangi dan ditajamkan, hanya di sana (lapisan terpisah yang bisa kamu kurangi).
+◯ Entourer le visage ¦ ◯ Khoanh khuôn mặt ¦ ◯ Lingkari wajah
+✨ Visage plus net ¦ ✨ Mặt rõ nét hơn ¦ ✨ Wajah lebih tajam
+Visage plus net ¦ Mặt rõ nét hơn ¦ Wajah lebih tajam
+🎯 Sélectionner le sujet ¦ 🎯 Chọn chủ thể ¦ 🎯 Seleksi subjek
+🌈 Coloriser une photo en noir et blanc ¦ 🌈 Tô màu cho ảnh đen trắng ¦ 🌈 Warnai foto hitam putih
+Tout seul (un dégradé de couleurs d’époque), ou à la main : choisis une couleur ci-dessous et peins doucement, la lumière de la photo est gardée. ¦ Tự động (dải màu của thời đó), hoặc bằng tay: chọn một màu bên dưới và tô nhẹ nhàng, ánh sáng của ảnh được giữ nguyên. ¦ Otomatis (gradasi warna zaman itu), atau manual: pilih warna di bawah dan lukis perlahan; cahaya fotonya tetap terjaga.
+🎨 Coloriser tout seul ¦ 🎨 Tự động tô màu ¦ 🎨 Warnai otomatis
+🖌 Coloriser au pinceau ¦ 🖌 Tô màu bằng cọ ¦ 🖌 Warnai dengan kuas
+✅ Comparer et enregistrer ¦ ✅ So sánh và lưu ¦ ✅ Bandingkan dan simpan
+Garde appuyé « 👁 Avant / après » (sous la photo) pour comparer, ou « ◧ Rideau » pour glisser de l’un à l’autre. La photo restaurée devient une nouvelle version : l’original reste. ¦ Giữ “👁 Trước / sau” (dưới ảnh) để so sánh, hoặc “◧ Rèm” để trượt từ ảnh này sang ảnh kia. Ảnh đã phục hồi trở thành một phiên bản mới: bản gốc vẫn còn. ¦ Tahan “👁 Sebelum / sesudah” (di bawah foto) untuk membandingkan, atau “◧ Tirai” untuk menggeser dari satu ke yang lain. Foto yang dipulihkan menjadi versi baru: aslinya tetap ada.
+💾 Enregistrer et afficher ¦ 💾 Lưu và hiển thị ¦ 💾 Simpan dan tampilkan
+Garder le travail pour plus tard ¦ Giữ công việc để làm tiếp sau ¦ Simpan pekerjaan untuk nanti
+Impossible d’ouvrir cette image. ¦ Không mở được ảnh này. ¦ Gambar ini tidak bisa dibuka.
+Chaque étape est facultative et se défait (↶). Rien n’abîme l’original : la photo restaurée devient une nouvelle version. ¦ Mỗi bước đều không bắt buộc và có thể hoàn tác (↶). Không gì làm hỏng bản gốc: ảnh đã phục hồi trở thành một phiên bản mới. ¦ Setiap langkah bersifat opsional dan bisa diurungkan (↶). Tidak ada yang merusak aslinya: foto yang dipulihkan menjadi versi baru.
+Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup : tu vois chaque étape et tu choisis ¦ Khử nhiễu, bụi, nếp gấp, tương phản, độ nét và tô màu trong một lần: bạn xem từng bước và tự chọn ¦ Pengurangan derau, debu, lipatan, kontras, ketajaman, dan pewarnaan sekaligus: kamu melihat setiap langkah dan memilih
+✨ Restaurer en une fois ¦ ✨ Phục hồi một lần ¦ ✨ Pulihkan sekaligus
+ou étape par étape : ¦ hoặc từng bước: ¦ atau langkah demi langkah:
+Réparer ¦ Sửa ¦ Perbaiki
+🪡 Réparer ¦ 🪡 Sửa ¦ 🪡 Perbaiki
+Déplacer la vue ¦ Di chuyển khung nhìn ¦ Geser tampilan
+Réparer un pli ou une déchirure (R) : peins dessus, c’est refait d’après les alentours ¦ Sửa nếp gấp hoặc vết rách (R): tô lên, nó được làm lại theo vùng xung quanh ¦ Perbaiki lipatan atau sobekan (R): lukis di atasnya, dibuat ulang dari sekitarnya
+Gomme (E) : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu) ¦ Tẩy (E): xoá lớp đã chọn; trên ảnh, nó che đi bằng mặt nạ (không mất gì) ¦ Penghapus (E): menghapus lapisan terpilih; pada foto, menyembunyikannya dengan masker (tidak ada yang hilang)
+Dégradé (G) : glisse pour le tracer ; sur un masque, il fond le calque ¦ Dải chuyển màu (G): kéo để vẽ; trên mặt nạ, nó làm mờ dần lớp ¦ Gradasi (G): seret untuk membuatnya; pada masker, gradasi memudarkan lapisan
+Déplacer un élément d’un calque (V) ¦ Di chuyển một phần tử của lớp (V) ¦ Pindahkan elemen lapisan (V)
+Déplacer un élément d’un calque ¦ Di chuyển một phần tử của lớp ¦ Pindahkan elemen lapisan
+Sélection rectangle (M) ¦ Chọn hình chữ nhật (M) ¦ Seleksi persegi (M)
+Sélection rectangle ¦ Chọn hình chữ nhật ¦ Seleksi persegi
+Sélection ellipse (⇧M) ¦ Chọn hình elip (⇧M) ¦ Seleksi elips (⇧M)
+Sélection ellipse ¦ Chọn hình elip ¦ Seleksi elips
+Lasso : entourer à main levée (L) ¦ Lasso: khoanh vùng bằng tay (L) ¦ Laso: lingkari dengan tangan bebas (L)
+Lasso : entourer à main levée ¦ Lasso: khoanh vùng bằng tay ¦ Laso: lingkari dengan tangan bebas
+Plume : sélection point par point (P) — double-clic ou Entrée pour fermer ¦ Bút: chọn từng điểm (P) — bấm đúp hoặc Enter để đóng ¦ Pena: seleksi titik demi titik (P) — klik ganda atau Enter untuk menutup
+Plume : sélection point par point — double-clic ou Entrée pour fermer ¦ Bút: chọn từng điểm — bấm đúp hoặc Enter để đóng ¦ Pena: seleksi titik demi titik — klik ganda atau Enter untuk menutup
+Sélection automatique (baguette magique) (W) ¦ Chọn tự động (đũa thần) (W) ¦ Seleksi otomatis (tongkat ajaib) (W)
+Sélection automatique (baguette magique) ¦ Chọn tự động (đũa thần) ¦ Seleksi otomatis (tongkat ajaib)
+Recadrer et redresser (C) ¦ Cắt khung và làm thẳng (C) ¦ Pangkas dan luruskan (C)
+Recadrer et redresser ¦ Cắt khung và làm thẳng ¦ Pangkas dan luruskan
+Correcteur de taches (J) ¦ Sửa vết bẩn (J) ¦ Perbaikan noda (J)
+Correcteur de taches ¦ Sửa vết bẩn ¦ Perbaikan noda
+🩹 Correcteur de taches ¦ 🩹 Sửa vết bẩn ¦ 🩹 Perbaikan noda
+Réparer un pli ou une déchirure : peins dessus, c’est refait d’après les alentours ¦ Sửa nếp gấp hoặc vết rách: tô lên, nó được làm lại theo vùng xung quanh ¦ Perbaiki lipatan atau sobekan: lukis di atasnya, dibuat ulang dari sekitarnya
+Tampon : un endroit, ou une zone sélectionnée (S) ¦ Con dấu: một điểm, hoặc một vùng đã chọn (S) ¦ Stempel klon: satu titik, atau area terseleksi (S)
+Tampon : un endroit, ou une zone sélectionnée ¦ Con dấu: một điểm, hoặc một vùng đã chọn ¦ Stempel klon: satu titik, atau area terseleksi
+Pinceau (B) ¦ Cọ (B) ¦ Kuas (B)
+Gomme : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu) ¦ Tẩy: xoá lớp đã chọn; trên ảnh, nó che đi bằng mặt nạ (không mất gì) ¦ Penghapus: menghapus lapisan terpilih; pada foto, menyembunyikannya dengan masker (tidak ada yang hilang)
+Formes : rectangle, ellipse, ligne, flèche (U) ¦ Hình: chữ nhật, elip, đường thẳng, mũi tên (U) ¦ Bentuk: persegi, elips, garis, panah (U)
+Formes : rectangle, ellipse, ligne, flèche ¦ Hình: chữ nhật, elip, đường thẳng, mũi tên ¦ Bentuk: persegi, elips, garis, panah
+Dégradé : glisse pour le tracer ; sur un masque, il fond le calque ¦ Dải chuyển màu: kéo để vẽ; trên mặt nạ, nó làm mờ dần lớp ¦ Gradasi: seret untuk membuatnya; pada masker, gradasi memudarkan lapisan
+Texte (T) ¦ Văn bản (T) ¦ Teks (T)
+Main, ou barre d’espace (H) ¦ Bàn tay, hoặc phím cách (H) ¦ Tangan, atau tombol spasi (H)
+Main, ou barre d’espace ¦ Bàn tay, hoặc phím cách ¦ Tangan, atau tombol spasi
+Zoom (Z) — ⌥ pour reculer ¦ Thu phóng (Z) — ⌥ để thu nhỏ ¦ Zoom (Z) — ⌥ untuk memperkecil
+Zoom — ⌥ pour reculer ¦ Thu phóng — ⌥ để thu nhỏ ¦ Zoom — ⌥ untuk memperkecil
+💾 Enregistrer le projet (pour continuer plus tard) ¦ 💾 Lưu dự án (để làm tiếp sau) ¦ 💾 Simpan proyek (untuk dilanjutkan nanti)
+📂 Ouvrir un projet… ¦ 📂 Mở một dự án… ¦ 📂 Buka proyek…
+Enregistrer et afficher cette version ¦ Lưu và hiển thị phiên bản này ¦ Simpan dan tampilkan versi ini
+Enregistrer sans l’afficher ¦ Lưu mà không hiển thị ¦ Simpan tanpa menampilkannya
+Copie séparée ¦ Bản sao riêng ¦ Salinan terpisah
+ℹ️ Informations… ¦ ℹ️ Thông tin… ¦ ℹ️ Informasi…
+⤓ Exporter l’image (PNG, JPG, imprimer)… ¦ ⤓ Xuất ảnh (PNG, JPG, in)… ¦ ⤓ Ekspor gambar (PNG, JPG, cetak)…
+⤓ Exporter l’avant / après… ¦ ⤓ Xuất ảnh trước / sau… ¦ ⤓ Ekspor sebelum / sesudah…
+🗂 Exporter en PSD (avec les calques)… ¦ 🗂 Xuất ra PSD (kèm các lớp)… ¦ 🗂 Ekspor sebagai PSD (dengan lapisan)…
+🗂 Importer les calques d’un PSD… ¦ 🗂 Nhập các lớp từ một tệp PSD… ¦ 🗂 Impor lapisan dari PSD…
+⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos… ¦ ⚡ Thao tác: điều chỉnh đã lưu, để làm lại trên nhiều ảnh… ¦ ⚡ Aksi: penyesuaian tersimpan, untuk diulang pada beberapa foto…
+⚡ Passer à la retouche rapide ¦ ⚡ Chuyển sang chỉnh sửa nhanh ¦ ⚡ Beralih ke retus cepat
+🕘 Historique ¦ 🕘 Lịch sử ¦ 🕘 Riwayat
+🎚 Réglages, niveaux et courbe ¦ 🎚 Điều chỉnh, mức và đường cong ¦ 🎚 Penyesuaian, level, dan kurva
+🎨 Teinte/Saturation… ¦ 🎨 Sắc độ/Độ bão hoà… ¦ 🎨 Rona/Saturasi…
+⌗ Recadrer et redresser ¦ ⌗ Cắt khung và làm thẳng ¦ ⌗ Pangkas dan luruskan
+📐 Redresser automatiquement ¦ 📐 Tự động làm thẳng ¦ 📐 Luruskan otomatis
+Annuler le recadrage ¦ Hủy cắt khung ¦ Batalkan pangkasan
+⧈ Redresser la perspective (photo prise de biais)… ¦ ⧈ Sửa phối cảnh (ảnh chụp xiên)… ¦ ⧈ Perbaiki perspektif (foto diambil miring)…
+Enlever la perspective ¦ Bỏ phối cảnh ¦ Hapus perspektif
+📏 Taille de l’image… ¦ 📏 Kích thước ảnh… ¦ 📏 Ukuran gambar…
+⬚ Taille de la zone de travail… ¦ ⬚ Kích thước vùng làm việc… ¦ ⬚ Ukuran kanvas…
+🔄 Rotation de l’image ¦ 🔄 Xoay ảnh ¦ 🔄 Rotasi gambar
+↻ 90° horaire ¦ ↻ 90° theo chiều kim đồng hồ ¦ ↻ 90° searah jarum jam
+↺ 90° antihoraire ¦ ↺ 90° ngược chiều kim đồng hồ ¦ ↺ 90° berlawanan arah jarum jam
+Angle… ¦ Góc… ¦ Sudut…
+📐 Redresser l’horizon (tracer une ligne)… ¦ 📐 Làm thẳng đường chân trời (vẽ một đường)… ¦ 📐 Luruskan cakrawala (buat sebuah garis)…
+⇆ Symétrie horizontale de l’image ¦ ⇆ Lật ảnh theo chiều ngang ¦ ⇆ Balik gambar secara horizontal
+⇅ Symétrie verticale de l’image ¦ ⇅ Lật ảnh theo chiều dọc ¦ ⇅ Balik gambar secara vertikal
+✨ Restaurer en une fois… ¦ ✨ Phục hồi một lần… ¦ ✨ Pulihkan sekaligus…
+🧭 Restaurer une vieille photo (pas à pas) ¦ 🧭 Phục hồi ảnh cũ (từng bước) ¦ 🧭 Pulihkan foto lama (langkah demi langkah)
+🔍 Repérer les plis et rayures… ¦ 🔍 Tìm nếp gấp và vết xước… ¦ 🔍 Temukan lipatan dan goresan…
+🪡 Réparer au pinceau (plis, déchirures) ¦ 🪡 Sửa bằng cọ (nếp gấp, vết rách) ¦ 🪡 Perbaiki dengan kuas (lipatan, sobekan)
+🧹 Poussière et rayures (Filtres) ¦ 🧹 Bụi và vết xước (Bộ lọc) ¦ 🧹 Debu dan goresan (Filter)
+🪟 Enlever les reflets (vitre) : calque à part ¦ 🪟 Xoá phản chiếu (cửa kính): lớp riêng ¦ 🪟 Hapus pantulan (kaca): lapisan terpisah
+🎨 Coloriser : calque de réglage (dégradé) ¦ 🎨 Tô màu: lớp điều chỉnh (dải chuyển màu) ¦ 🎨 Warnai: lapisan penyesuaian (gradasi)
+🖌 Coloriser au pinceau : calque « Couleur » ¦ 🖌 Tô màu bằng cọ: lớp “Màu” ¦ 🖌 Warnai dengan kuas: lapisan “Warna”
+🪪 Recadrer en photo d’identité… ¦ 🪪 Cắt thành ảnh thẻ… ¦ 🪪 Pangkas sebagai pasfoto…
+🪪 Portraits de plusieurs fiches… ¦ 🪪 Chân dung cho nhiều hồ sơ… ¦ 🪪 Potret untuk beberapa profil…
+💧 Fluidité (déformer au pinceau)… ¦ 💧 Hoá lỏng (biến dạng bằng cọ)… ¦ 💧 Liquify (ubah bentuk dengan kuas)…
+🪄 Gomme magique (fond uni → transparent)… ¦ 🪄 Tẩy thần kỳ (nền đơn sắc → trong suốt)… ¦ 🪄 Penghapus ajaib (latar polos → transparan)…
+✨ Affiner le bord du masque (cheveux, contours)… ¦ ✨ Tinh chỉnh viền mặt nạ (tóc, đường viền)… ¦ ✨ Haluskan tepi masker (rambut, kontur)…
+☁️ Remplacer le ciel… ¦ ☁️ Thay bầu trời… ¦ ☁️ Ganti langit…
+✂️ Détourer une personne (fond transparent, flou, uni)… ¦ ✂️ Tách nền một người (nền trong suốt, mờ, đơn sắc)… ¦ ✂️ Pisahkan seseorang (latar transparan, buram, atau polos)…
+🔍 Agrandir ×2 / ×4… ¦ 🔍 Phóng to ×2 / ×4… ¦ 🔍 Perbesar ×2 / ×4…
+🧩 Panorama : assembler avec d’autres photos… ¦ 🧩 Toàn cảnh: ghép với các ảnh khác… ¦ 🧩 Panorama: gabungkan dengan foto lain…
+Calque ¦ Lớp ¦ Lapisan
+＋ Nouveau calque ¦ ＋ Lớp mới ¦ ＋ Lapisan baru
+📁 Nouveau groupe ¦ 📁 Nhóm mới ¦ 📁 Grup baru
+Grouper le calque choisi ¦ Nhóm lớp đã chọn ¦ Kelompokkan lapisan terpilih
+🎚 Nouveau calque de réglage ¦ 🎚 Lớp điều chỉnh mới ¦ 🎚 Lapisan penyesuaian baru
+🎨 Nouveau réglage Teinte/Saturation ¦ 🎨 Điều chỉnh Sắc độ/Độ bão hoà mới ¦ 🎨 Penyesuaian Rona/Saturasi baru
+Nouveau réglage Teinte/Saturation ¦ Điều chỉnh Sắc độ/Độ bão hoà mới ¦ Penyesuaian Rona/Saturasi baru
+🖼️ Placer une image… ¦ 🖼️ Đặt một ảnh… ¦ 🖼️ Tempatkan gambar…
+▦ Nouveau calque de dégradé… ¦ ▦ Lớp dải chuyển màu mới… ¦ ▦ Lapisan gradasi baru…
+▩ Nouveau calque de motif… ¦ ▩ Lớp hoa văn mới… ¦ ▩ Lapisan pola baru…
+▩ Créer un motif… ¦ ▩ Tạo hoa văn… ¦ ▩ Buat pola…
+▩ Créer un motif ¦ ▩ Tạo hoa văn ¦ ▩ Buat pola
+＋ Créer un motif… ¦ ＋ Tạo hoa văn… ¦ ＋ Buat pola…
+Copier la sélection sur un calque ¦ Sao chép vùng chọn sang một lớp ¦ Salin seleksi ke lapisan
+🎭 Ajouter un masque au calque choisi ¦ 🎭 Thêm mặt nạ cho lớp đã chọn ¦ 🎭 Tambah masker ke lapisan terpilih
+🎭 Masque qui cache tout (⌥ + clic sur 🎭) ¦ 🎭 Mặt nạ che toàn bộ (⌥ + bấm vào 🎭) ¦ 🎭 Masker yang menyembunyikan semuanya (⌥ + klik 🎭)
+Masque d’après la sélection ¦ Mặt nạ từ vùng chọn ¦ Masker dari seleksi
+Masque qui cache la sélection ¦ Mặt nạ che vùng chọn ¦ Masker yang menyembunyikan seleksi
+Inverser le masque ¦ Đảo ngược mặt nạ ¦ Balik masker
+Retirer le masque ¦ Gỡ mặt nạ ¦ Lepas masker
+inverser le masque ¦ đảo ngược mặt nạ ¦ balik masker
+retirer le masque ¦ gỡ mặt nạ ¦ lepas masker
+🗂 Calques ¦ 🗂 Lớp ¦ 🗂 Lapisan
+🎯 Sélectionner le sujet (automatique) ¦ 🎯 Chọn chủ thể (tự động) ¦ 🎯 Seleksi subjek (otomatis)
+✂️ Détourer une personne… ¦ ✂️ Tách nền một người… ¦ ✂️ Pisahkan seseorang…
+Désélectionner ¦ Bỏ chọn ¦ Batalkan seleksi
+Inverser ¦ Đảo ngược ¦ Balik
+Contour progressif… ¦ Làm mềm viền… ¦ Feather…
+Contour progressif ¦ Làm mềm viền ¦ Feather
+Agrandir… ¦ Mở rộng… ¦ Perluas…
+Réduire… ¦ Thu hẹp… ¦ Perkecil…
+Remplir avec la couleur ¦ Tô đầy bằng màu ¦ Isi dengan warna
+Effacer (transparent) ¦ Xoá (trong suốt) ¦ Hapus (transparan)
+Recadrer sur la sélection ¦ Cắt khung theo vùng chọn ¦ Pangkas sesuai seleksi
+Filtre ¦ Bộ lọc ¦ Filter
+↻ Refaire le dernier filtre ¦ ↻ Làm lại bộ lọc vừa dùng ¦ ↻ Ulangi filter terakhir
+✨ Filtres rapides et filtres du calque (panneau) ¦ ✨ Bộ lọc nhanh và bộ lọc của lớp (bảng) ¦ ✨ Filter cepat dan filter lapisan (panel)
+Enlever les filtres rapides ¦ Bỏ các bộ lọc nhanh ¦ Hapus filter cepat
+Replier / ouvrir le panneau de droite ¦ Gập / mở bảng bên phải ¦ Ciutkan / buka panel kanan
+◧ Avant / après en rideau ¦ ◧ Trước / sau dạng rèm ¦ ◧ Sebelum / sesudah dengan tirai
+Toute l’image ¦ Toàn bộ ảnh ¦ Seluruh gambar
+Nom du projet de retouche ¦ Tên dự án chỉnh sửa ¦ Nama proyek retus
+Le nom du projet de retouche (tape pour le changer) ¦ Tên dự án chỉnh sửa (gõ để đổi) ¦ Nama proyek retus (ketik untuk mengubahnya)
+Passer à la retouche rapide (celle de la version 0.5.0) : réglages, courbe, taches, tampon — moins de boutons ¦ Chuyển sang chỉnh sửa nhanh (bản của phiên bản 0.5.0): điều chỉnh, đường cong, vết bẩn, con dấu — ít nút hơn ¦ Beralih ke retus cepat (yang dari versi 0.5.0): penyesuaian, kurva, noda, stempel klon — lebih sedikit tombol
+⚡ Rapide ¦ ⚡ Nhanh ¦ ⚡ Cepat
+Exporter : l’image retouchée (PNG, JPG, imprimer) ou l’avant / après ¦ Xuất: ảnh đã chỉnh sửa (PNG, JPG, in) hoặc ảnh trước / sau ¦ Ekspor: gambar hasil retus (PNG, JPG, cetak) atau sebelum / sesudah
+Enregistrer le projet : tout le travail (calques, masques, réglages…) pour le rouvrir et continuer ¦ Lưu dự án: toàn bộ công việc (lớp, mặt nạ, điều chỉnh…) để mở lại và làm tiếp ¦ Simpan proyek: semua pekerjaan (lapisan, masker, penyesuaian…) untuk dibuka lagi dan dilanjutkan
+🖼 L’image retouchée (PNG, JPG, imprimer)… ¦ 🖼 Ảnh đã chỉnh sửa (PNG, JPG, in)… ¦ 🖼 Gambar hasil retus (PNG, JPG, cetak)…
+◧ Avant / après (côte à côte ou rideau)… ¦ ◧ Trước / sau (cạnh nhau hoặc dạng rèm)… ¦ ◧ Sebelum / sesudah (berdampingan atau tirai)…
+Dureté ¦ Độ cứng ¦ Kekerasan
+Sorte de pinceau ¦ Loại cọ ¦ Jenis kuas
+Couleurs rapides ¦ Màu nhanh ¦ Warna cepat
+contour ¦ viền ¦ garis tepi
+Contour du texte ¦ Viền chữ ¦ Garis tepi teks
+Couleur du contour ¦ Màu viền ¦ Warna garis tepi
+Épaisseur du contour ¦ Độ dày viền ¦ Ketebalan garis tepi
+épaisseur ¦ độ dày ¦ ketebalan
+ombre ¦ bóng ¦ bayangan
+Ombre du texte ¦ Bóng chữ ¦ Bayangan teks
+Couleur de l’ombre ¦ Màu bóng ¦ Warna bayangan
+Tampon : endroit à recopier, aligné ¦ Con dấu: điểm cần sao chép, căn theo ¦ Stempel klon: titik yang disalin, sejajar
+🎯 Choisir l’endroit à recopier ¦ 🎯 Chọn điểm cần sao chép ¦ 🎯 Pilih titik yang disalin
+Coché : l’endroit recopié suit le pinceau d’un trait à l’autre. Décoché : chaque trait repart du même endroit. ¦ Khi chọn: điểm sao chép đi theo cọ từ nét này sang nét khác. Khi bỏ chọn: mỗi nét bắt đầu lại từ cùng một điểm. ¦ Dicentang: titik yang disalin mengikuti kuas dari satu sapuan ke sapuan berikutnya. Tidak dicentang: setiap sapuan mulai lagi dari titik yang sama.
+aligné ¦ căn theo ¦ sejajar
+Réparer : grain, repérer les plis ¦ Sửa: hạt, tìm nếp gấp ¦ Perbaiki: butiran, temukan lipatan
+Coché : un peu du grain de la photo autour est remis dans la zone réparée, pour qu’elle ne paraisse pas trop lisse. ¦ Khi chọn: một chút hạt của ảnh xung quanh được đưa lại vào vùng đã sửa, để nó không quá mịn. ¦ Dicentang: sedikit butiran foto di sekitarnya dikembalikan ke area yang diperbaiki, agar tidak tampak terlalu halus.
+garder le grain ¦ giữ hạt ¦ pertahankan butiran
+Trouver tout seul les lignes fines (plis, rayures) et proposer de les combler ¦ Tự tìm các đường mảnh (nếp gấp, vết xước) và đề xuất lấp chúng ¦ Temukan garis tipis (lipatan, goresan) otomatis dan tawarkan untuk menutupnya
+🔍 Repérer les plis ¦ 🔍 Tìm nếp gấp ¦ 🔍 Temukan lipatan
+Texte gras ¦ Chữ đậm ¦ Teks tebal
+Texte italique ¦ Chữ nghiêng ¦ Teks miring
+Forme (rectangle, ellipse, flèche…) ¦ Hình (chữ nhật, elip, mũi tên…) ¦ Bentuk (persegi, elips, panah…)
+Rectangle arrondi ¦ Chữ nhật bo góc ¦ Persegi bersudut bulat
+Forme remplie ¦ Hình tô đầy ¦ Bentuk terisi
+remplie ¦ tô đầy ¦ terisi
+Couleur de fond des formes ¦ Màu nền của hình ¦ Warna isian bentuk
+Baguette : tolérance ¦ Đũa thần: dung sai ¦ Tongkat: toleransi
+Jusqu’où une couleur peut s’écarter de celle cliquée pour être prise : petit = la même teinte seulement, grand = des teintes voisines aussi. ¦ Một màu có thể khác màu đã bấm đến mức nào mà vẫn được chọn: nhỏ = chỉ cùng sắc độ, lớn = cả các sắc độ gần đó. ¦ Seberapa jauh warna boleh berbeda dari yang diklik dan tetap terpilih: kecil = hanya rona yang sama, besar = rona di dekatnya juga.
+Tolérance ¦ Dung sai ¦ Toleransi
+Baguette : contiguë ¦ Đũa thần: liền kề ¦ Tongkat: bersebelahan
+contiguë ¦ liền kề ¦ bersebelahan
+Sélectionner le sujet ¦ Chọn chủ thể ¦ Seleksi subjek
+Le fond est reconnu sur les bords de la photo ; la tolérance règle jusqu’où il va ¦ Nền được nhận ra từ các mép ảnh; dung sai quyết định nó lan đến đâu ¦ Latar dikenali dari tepi foto; toleransi menentukan seberapa jauh jangkauannya
+🎯 Sujet ¦ 🎯 Chủ thể ¦ 🎯 Subjek
+Actions de la sélection ¦ Thao tác với vùng chọn ¦ Aksi seleksi
+⇧ ajouter · ⌥ enlever ¦ ⇧ thêm · ⌥ bớt ¦ ⇧ tambah · ⌥ kurangi
+→ Calque ¦ → Lớp ¦ → Lapisan
+Remplir ¦ Tô đầy ¦ Isi
+Effacer ¦ Xoá ¦ Hapus
+Masque ¦ Mặt nạ ¦ Masker
+Recadrer ¦ Cắt khung ¦ Pangkas
+Recadrage : proportions, redresser ¦ Cắt khung: tỉ lệ, làm thẳng ¦ Pangkas: proporsi, luruskan
+Proportions ¦ Tỉ lệ ¦ Proporsi
+Libres ¦ Tự do ¦ Bebas
+Celles de la photo ¦ Theo ảnh ¦ Sesuai foto
+Carré 1:1 ¦ Vuông 1:1 ¦ Persegi 1:1
+A4 portrait ¦ A4 dọc ¦ A4 potret
+Redresser ¦ Làm thẳng ¦ Luruskan
+Trouve l’angle des grandes lignes (horizon, murs, cadres) ¦ Tìm góc của các đường chính (chân trời, tường, khung) ¦ Mencari sudut garis-garis utama (cakrawala, dinding, bingkai)
+📐 Auto ¦ 📐 Tự động ¦ 📐 Otomatis
+✓ Valider ¦ ✓ Xác nhận ¦ ✓ Konfirmasi
+Perspective ¦ Phối cảnh ¦ Perspektif
+Place les 4 coins sur les coins de ce qui doit devenir rectangulaire (la photo, le document, la façade). ¦ Đặt 4 góc vào các góc của thứ cần trở thành hình chữ nhật (ảnh, giấy tờ, mặt tiền). ¦ Letakkan 4 sudut di sudut-sudut benda yang harus menjadi persegi (foto, dokumen, fasad).
+Coins aux bords ¦ Góc ở mép ¦ Sudut di tepi
+Dégradé : couleurs, forme, options ¦ Dải chuyển màu: màu, hình dạng, tuỳ chọn ¦ Gradasi: warna, bentuk, opsi
+Modifier le dégradé : couleurs, transparence, préréglages ¦ Sửa dải chuyển màu: màu, độ trong suốt, thiết lập sẵn ¦ Ubah gradasi: warna, transparansi, preset
+Forme du dégradé ¦ Hình dạng dải chuyển màu ¦ Bentuk gradasi
+Inverser le dégradé ¦ Đảo ngược dải chuyển màu ¦ Balik gradasi
+inverser ¦ đảo ngược ¦ balik
+Tramage ¦ Trộn hạt ¦ Dither
+tramage ¦ trộn hạt ¦ dither
+Un très léger grain qui évite les « marches » visibles dans les dégradés doux. ¦ Một lớp hạt rất nhẹ giúp tránh các “bậc” thấy rõ trong dải chuyển màu mềm. ¦ Butiran sangat halus yang mencegah “anak tangga” terlihat pada gradasi lembut.
+Masque : cacher / montrer ¦ Mặt nạ: ẩn / hiện ¦ Masker: sembunyikan / tampilkan
+⬛ cacher ¦ ⬛ ẩn ¦ ⬛ sembunyikan
+⬜ montrer ¦ ⬜ hiện ¦ ⬜ tampilkan
+Aide de l’outil ¦ Trợ giúp công cụ ¦ Bantuan alat
+Couleurs (premier plan et arrière-plan) ¦ Màu (tiền cảnh và hậu cảnh) ¦ Warna (latar depan dan latar belakang)
+Noir et blanc (D) ¦ Đen và trắng (D) ¦ Hitam dan putih (D)
+Couleurs par défaut : noir et blanc ¦ Màu mặc định: đen và trắng ¦ Warna bawaan: hitam dan putih
+Intervertir les deux couleurs (X) ¦ Hoán đổi hai màu (X) ¦ Tukar kedua warna (X)
+Intervertir les couleurs ¦ Hoán đổi màu ¦ Tukar warna
+Couleur d’arrière-plan (fond des formes) : clic pour la changer ¦ Màu hậu cảnh (nền của hình): bấm để đổi ¦ Warna latar belakang (isian bentuk): klik untuk mengubahnya
+Couleur de premier plan (pinceau, texte, formes) : clic pour la changer ¦ Màu tiền cảnh (cọ, văn bản, hình): bấm để đổi ¦ Warna latar depan (kuas, teks, bentuk): klik untuk mengubahnya
+Replier le panneau (plus de place pour la photo) — Tab ¦ Gập bảng (thêm chỗ cho ảnh) — Tab ¦ Ciutkan panel (lebih banyak ruang untuk foto) — Tab
+Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ) ¦ Kéo để mở rộng hoặc thu hẹp bảng (bấm đúp: kích thước ban đầu) ¦ Seret untuk melebarkan atau menyempitkan panel (klik ganda: ukuran awal)
+Onglets du panneau de droite ¦ Các thẻ của bảng bên phải ¦ Tab panel kanan
+Propriétés : Teinte/Saturation, masque, position et taille du calque choisi ¦ Thuộc tính: Sắc độ/Độ bão hoà, mặt nạ, vị trí và kích thước của lớp đã chọn ¦ Properti: Rona/Saturasi, masker, posisi dan ukuran lapisan terpilih
+ⓘ Propriétés ¦ ⓘ Thuộc tính ¦ ⓘ Properti
+Caractère : police, variante (graisse), taille, interligne, approche… ¦ Ký tự: phông chữ, kiểu (độ đậm), kích thước, khoảng cách dòng, khoảng cách chữ… ¦ Karakter: fon, gaya (ketebalan), ukuran, spasi baris, spasi huruf…
+🔤 Caractère ¦ 🔤 Ký tự ¦ 🔤 Karakter
+Motifs : remplir d’un motif, créer les siens ¦ Hoa văn: tô bằng hoa văn, tự tạo hoa văn ¦ Pola: isi dengan pola, buat polamu sendiri
+▩ Motifs ¦ ▩ Hoa văn ¦ ▩ Pola
+Motifs ¦ Hoa văn ¦ Pola
+Formes de pinceau : préréglages, pas, angle, dispersion, forme d’après une sélection ¦ Đầu cọ: thiết lập sẵn, khoảng cách, góc, độ phân tán, hình từ một vùng chọn ¦ Ujung kuas: preset, jarak, sudut, sebaran, bentuk dari seleksi
+🖌 Formes ¦ 🖌 Hình dạng ¦ 🖌 Bentuk
+Restaurer une vieille photo, pas à pas ¦ Phục hồi ảnh cũ, từng bước ¦ Pulihkan foto lama, langkah demi langkah
+🧭 Restaurer ¦ 🧭 Phục hồi ¦ 🧭 Pulihkan
+Comme la saturation, mais les couleurs déjà vives bougent peu : les teintes ternes (peau, ciel pâle) se ravivent d’abord. ¦ Giống độ bão hoà, nhưng màu đã rực thì ít thay đổi: các sắc độ nhạt (da, trời nhạt) được làm tươi trước. ¦ Seperti saturasi, tetapi warna yang sudah cerah sedikit berubah: rona kusam (kulit, langit pucat) dicerahkan lebih dulu.
+Éclaircit ou assombrit les tons moyens sans toucher au noir ni au blanc : au-dessus de 100, plus clair ; en dessous, plus sombre. ¦ Làm sáng hoặc tối tông trung mà không đụng đến đen và trắng: trên 100 là sáng hơn; dưới 100 là tối hơn. ¦ Mencerahkan atau menggelapkan nada tengah tanpa mengubah hitam dan putih: di atas 100, lebih terang; di bawahnya, lebih gelap.
+Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou ⌫), ou le glisser hors du cadre. ¦ Bấm vào đường cong: thêm một điểm · kéo: di chuyển điểm · để bỏ: chọn điểm rồi bấm “Bỏ điểm” (hoặc ⌫), hoặc kéo nó ra khỏi khung. ¦ Klik kurva: tambah titik · seret: pindahkan · untuk menghapus: pilih titiknya lalu “Hapus titik” (atau ⌫), atau seret keluar dari bingkai.
+Enlever le point ¦ Bỏ điểm ¦ Hapus titik
+🎨 Colorisation douce (photo en noir et blanc) ¦ 🎨 Tô màu nhẹ nhàng (ảnh đen trắng) ¦ 🎨 Pewarnaan lembut (foto hitam putih)
+Mieux dans un calque de réglage (Image → Coloriser) : on le dose, on le masque, on l’enlève. Pour colorier à la main : Image → Coloriser au pinceau. ¦ Tốt hơn là dùng lớp điều chỉnh (Ảnh → Tô màu): có thể giảm bớt, che mặt nạ, gỡ bỏ. Để tô bằng tay: Ảnh → Tô màu bằng cọ. ¦ Lebih baik di lapisan penyesuaian (Gambar → Warnai): bisa dikurangi, diberi masker, dihapus. Untuk mewarnai manual: Gambar → Warnai dengan kuas.
+Filtres rapides, après les réglages : sur la photo, ou dans un calque de réglage (sur tout ce qui est dessous, ou seulement le calque juste dessous). Les mêmes sur l’image enregistrée en pleine taille. ¦ Bộ lọc nhanh, sau các điều chỉnh: trên ảnh, hoặc trong lớp điều chỉnh (trên mọi thứ bên dưới, hoặc chỉ lớp ngay bên dưới). Áp dụng y như vậy trên ảnh được lưu ở kích thước đầy đủ. ¦ Filter cepat, sesudah penyesuaian: pada foto, atau di lapisan penyesuaian (pada semua yang di bawahnya, atau hanya lapisan tepat di bawahnya). Sama pada gambar yang disimpan dalam ukuran penuh.
+Renforce le contraste des détails moyens (rides, plis d’un tissu, écriture) sans changer le contraste général. ¦ Tăng tương phản cho các chi tiết vừa (nếp nhăn, nếp vải, chữ viết) mà không đổi độ tương phản chung. ¦ Memperkuat kontras detail sedang (kerutan, lipatan kain, tulisan tangan) tanpa mengubah kontras keseluruhan.
+Enlever les filtres ¦ Bỏ các bộ lọc ¦ Hapus filter
+Variante : la graisse (Light, Regular, Bold, Black…) et l’italique ¦ Kiểu: độ đậm (Light, Regular, Bold, Black…) và chữ nghiêng ¦ Gaya: ketebalan (Light, Regular, Bold, Black…) dan miring
+Taille (en points de l’image) ¦ Kích thước (theo điểm ảnh) ¦ Ukuran (dalam piksel gambar)
+Interligne (vide = automatique, 120 % de la taille) ¦ Khoảng cách dòng (để trống = tự động, 120 % kích thước) ¦ Spasi baris (kosong = otomatis, 120 % ukuran)
+Crénage : les paires de lettres rapprochées selon la police (Métrique) ou pas du tout (0) ¦ Khoảng cách cặp chữ: các cặp chữ được kéo gần theo phông chữ (Metric) hoặc không (0) ¦ Kerning: pasangan huruf didekatkan sesuai fon (Metrik) atau tidak sama sekali (0)
+Approche : l’espace entre toutes les lettres, en millièmes de la taille ¦ Khoảng cách chữ: khoảng trống giữa mọi chữ, tính bằng phần nghìn của kích thước ¦ Tracking: jarak antar semua huruf, dalam per seribu ukuran
+Échelle verticale ¦ Tỉ lệ dọc ¦ Skala vertikal
+Échelle horizontale ¦ Tỉ lệ ngang ¦ Skala horizontal
+Décalage vertical (au-dessus de la ligne de base si positif) ¦ Dịch đường cơ sở (lên trên đường cơ sở nếu là số dương) ¦ Geser garis dasar (di atas garis dasar jika positif)
+Lissage des bords des lettres ¦ Làm mịn viền chữ ¦ Penghalusan tepi huruf
+Lissage ¦ Làm mịn ¦ Penghalusan
+Lissé ¦ Mịn ¦ Halus
+Aucun (bords nets, pixels) ¦ Không (viền sắc, điểm ảnh) ¦ Tidak ada (tepi tajam, piksel)
+Alignement du paragraphe ¦ Căn lề đoạn văn ¦ Perataan paragraf
+Pour les prochains textes. Choisis un texte avec ➤ pour le changer. ¦ Cho các văn bản tiếp theo. Chọn một văn bản bằng ➤ để đổi. ¦ Untuk teks berikutnya. Pilih teks dengan ➤ untuk mengubahnya.
+Pour les prochains textes. Clique sur un texte (outil Texte ou ➤) pour le changer. ¦ Cho các văn bản tiếp theo. Bấm vào một văn bản (công cụ Văn bản hoặc ➤) để đổi. ¦ Untuk teks berikutnya. Klik teks (alat Teks atau ➤) untuk mengubahnya.
+✍️ Texte en cours d’écriture : chaque réglage s’y applique tout de suite. ¦ ✍️ Văn bản đang viết: mọi điều chỉnh áp dụng ngay. ¦ ✍️ Teks yang sedang ditulis: setiap pengaturan langsung berlaku.
+Métrique ¦ Metric ¦ Metrik
+Les variantes viennent des polices de l’ordinateur (Mac, Windows, Linux) quand l’app peut les lire ; sinon les graisses habituelles. ¦ Các kiểu lấy từ phông chữ của máy tính (Mac, Windows, Linux) khi ứng dụng đọc được; nếu không thì dùng các độ đậm thông thường. ¦ Gaya diambil dari fon komputer (Mac, Windows, Linux) jika aplikasi bisa membacanya; jika tidak, ketebalan yang biasa.
+Retrait de la première ligne (négatif : en saillie) ¦ Thụt lề dòng đầu (số âm: thụt treo) ¦ Inden baris pertama (negatif: menggantung)
+Largeur du bloc de texte : les lignes se coupent toutes seules (vide = texte simple, une ligne par paragraphe) ¦ Độ rộng khối văn bản: các dòng tự xuống dòng (để trống = văn bản thường, mỗi đoạn một dòng) ¦ Lebar blok teks: baris terpotong sendiri (kosong = teks biasa, satu baris per paragraf)
+Espace avant chaque paragraphe ¦ Khoảng cách trước mỗi đoạn ¦ Spasi sebelum setiap paragraf
+Espace après chaque paragraphe ¦ Khoảng cách sau mỗi đoạn ¦ Spasi sesudah setiap paragraf
+Couper les mots longs en fin de ligne, avec un tiret (règles simples du français ; un tiret conditionnel ⌥- dans un mot est pris en premier) ¦ Ngắt các từ dài ở cuối dòng, có gạch nối (quy tắc đơn giản của tiếng Pháp; gạch nối tuỳ chọn ⌥- trong một từ được ưu tiên) ¦ Penggal kata panjang di akhir baris, dengan tanda hubung (aturan sederhana bahasa Prancis; tanda hubung lunak ⌥- dalam kata dipakai lebih dulu)
+Ω Glyphes ¦ Ω Ký tự đặc biệt ¦ Ω Glif
+Police (famille) ¦ Phông chữ (họ) ¦ Fon (keluarga)
+(Auto) ¦ (Tự động) ¦ (Otomatis)
+⟸ gauche ¦ ⟸ trái ¦ ⟸ kiri
+≡ centre ¦ ≡ giữa ¦ ≡ tengah
+droite ⟹ ¦ phải ⟹ ¦ kanan ⟹
+Symboles ¦ Ký hiệu ¦ Simbol
+Code (U+00E9) ou caractère ¦ Mã (U+00E9) hoặc ký tự ¦ Kode (U+00E9) atau karakter
+Chercher un glyphe ¦ Tìm ký tự đặc biệt ¦ Cari glif
+Pour un bloc de texte, glisse un cadre avec l’outil Texte T au lieu de cliquer, ou donne sa largeur ici. La justification ne vaut que pour un bloc. ¦ Để tạo một khối văn bản, hãy kéo một khung bằng công cụ Văn bản T thay vì bấm, hoặc nhập độ rộng ở đây. Căn đều chỉ áp dụng cho một khối. ¦ Untuk blok teks, seret bingkai dengan alat Teks T alih-alih mengklik, atau isi lebarnya di sini. Rata kiri-kanan hanya berlaku untuk blok.
+Clic : ajouté au texte en cours d’écriture (ou à la fin du texte choisi). Sans texte : copié. ¦ Bấm: thêm vào văn bản đang viết (hoặc vào cuối văn bản đã chọn). Không có văn bản: sao chép. ¦ Klik: ditambahkan ke teks yang sedang ditulis (atau ke akhir teks terpilih). Tanpa teks: disalin.
+Choisis d’abord un texte (outil T). ¦ Hãy chọn một văn bản trước (công cụ T). ¦ Pilih teks dulu (alat T).
+Un autre média, rattaché aux mêmes fiches ¦ Một tư liệu khác, liên kết với cùng các hồ sơ ¦ Media lain, terhubung ke profil yang sama
+Gardée dans les versions, la photo affichée ne change pas ¦ Được giữ trong các phiên bản, ảnh đang hiển thị không đổi ¦ Disimpan di versi; foto yang ditampilkan tidak berubah
+avec les annotations (calques visibles) ¦ kèm các chú thích (các lớp đang hiện) ¦ dengan anotasi (lapisan yang terlihat)
+Avec les annotations (calques visibles) ¦ Kèm các chú thích (các lớp đang hiện) ¦ Dengan anotasi (lapisan yang terlihat)
+L’original n’est jamais modifié : chaque retouche est une version de la photo, et tu choisis celle qui s’affiche partout. ¦ Bản gốc không bao giờ bị sửa: mỗi lần chỉnh sửa là một phiên bản của ảnh, và bạn chọn bản được hiển thị ở mọi nơi. ¦ Aslinya tidak pernah diubah: setiap retus adalah versi foto, dan kamu memilih versi yang ditampilkan di mana-mana.
+🖼 Enregistrer l’image dans les Médias ¦ 🖼 Lưu ảnh vào Tư liệu ¦ 🖼 Simpan gambar di Media
+L’image (calques compris) remplace celle du média ; le projet, lui, garde tous les calques pour continuer ¦ Ảnh (kể cả các lớp) thay thế ảnh của tư liệu; còn dự án thì giữ mọi lớp để làm tiếp ¦ Gambar (termasuk lapisan) menggantikan gambar media; proyeknya tetap menyimpan semua lapisan untuk dilanjutkan
+Enregistrer le projet (calques, masques, réglages) ¦ Lưu dự án (lớp, mặt nạ, điều chỉnh) ¦ Simpan proyek (lapisan, masker, penyesuaian)
+la retouche est fermée ¦ đã đóng chỉnh sửa ¦ retus ditutup
+Clique sur une étape pour revenir à ce moment-là ; les étapes suivantes restent (en gris) tant que tu ne fais rien d’autre. ¦ Bấm vào một bước để quay lại lúc đó; các bước sau vẫn còn (màu xám) chừng nào bạn chưa làm gì khác. ¦ Klik sebuah langkah untuk kembali ke saat itu; langkah-langkah berikutnya tetap ada (abu-abu) selama kamu tidak melakukan hal lain.
+Tu peins le masque (pinceau : ⬛ cacher / ⬜ montrer). Clic : revenir au calque ¦ Bạn đang tô mặt nạ (cọ: ⬛ ẩn / ⬜ hiện). Bấm: quay lại lớp ¦ Kamu sedang melukis masker (kuas: ⬛ sembunyikan / ⬜ tampilkan). Klik: kembali ke lapisan
+Masque : clic pour le peindre au pinceau ¦ Mặt nạ: bấm để tô bằng cọ ¦ Masker: klik untuk melukisnya dengan kuas
+⇧ Maj + clic : désactiver / réactiver le masque ¦ ⇧ Shift + bấm: tắt / bật lại mặt nạ ¦ ⇧ Shift + klik: nonaktifkan / aktifkan lagi masker
+⌥ Alt + clic : voir le masque seul ¦ ⌥ Alt + bấm: chỉ xem mặt nạ ¦ ⌥ Alt + klik: lihat maskernya saja
+touche \ : le masque en rouge par-dessus ¦ phím \: mặt nạ màu đỏ phủ lên trên ¦ tombol \: masker merah di atasnya
+Ajouter un masque (cacher une partie sans l’effacer) — ⌥ / Alt + clic : un masque qui cache tout (ou cache la sélection) ¦ Thêm mặt nạ (ẩn một phần mà không xoá) — ⌥ / Alt + bấm: mặt nạ che toàn bộ (hoặc che vùng chọn) ¦ Tambah masker (sembunyikan sebagian tanpa menghapusnya) — ⌥ / Alt + klik: masker yang menyembunyikan semuanya (atau menyembunyikan seleksi)
+masque ¦ mặt nạ ¦ masker
+Ranger dans un groupe ¦ Xếp vào một nhóm ¦ Masukkan ke grup
+(hors groupe) ¦ (ngoài nhóm) ¦ (tanpa grup)
+Glisser pour ranger : au-dessus, en dessous, ou dans un groupe (lâcher au milieu d’un groupe) ¦ Kéo để sắp xếp: lên trên, xuống dưới, hoặc vào một nhóm (thả vào giữa một nhóm) ¦ Seret untuk mengatur: di atas, di bawah, atau ke dalam grup (lepaskan di tengah grup)
+Calque de réglage ¦ Lớp điều chỉnh ¦ Lapisan penyesuaian
+La photo (réglages, taches, tampon) ¦ Ảnh (điều chỉnh, vết bẩn, con dấu) ¦ Foto (penyesuaian, noda, stempel klon)
+Supprimer le groupe (ce qu’il contient reste) ¦ Xoá nhóm (nội dung bên trong vẫn còn) ¦ Hapus grup (isinya tetap ada)
+Retirer la photo des calques (⌘Z pour la remettre) ¦ Gỡ ảnh khỏi các lớp (⌘Z để đặt lại) ¦ Lepas foto dari lapisan (⌘Z untuk mengembalikannya)
+Mode de fusion : comment le calque se mélange à ce qui est dessous ¦ Chế độ hoà trộn: cách lớp hoà với những gì bên dưới ¦ Mode campuran: cara lapisan berbaur dengan yang di bawahnya
+Fond : dose seulement le contenu du calque, pas ses effets (ombre, lueur, contour). À 0 %, il ne reste que les effets. ¦ Độ phủ: chỉ giảm nội dung của lớp, không giảm hiệu ứng (bóng, toả sáng, viền). Ở 0 %, chỉ còn lại hiệu ứng. ¦ Isian: hanya mengurangi isi lapisan, bukan efeknya (bayangan, cahaya, garis tepi). Pada 0 %, hanya efeknya yang tersisa.
+Effets du calque : ombre portée, lueur externe, contour, incrustation de couleur ¦ Hiệu ứng của lớp: bóng đổ, toả sáng ngoài, viền, phủ màu ¦ Efek lapisan: bayangan jatuh, cahaya luar, garis tepi, hamparan warna
+Objet dynamique : agrandir, réduire, tourner sans perte (l’image d’origine est gardée) ¦ Đối tượng thông minh: phóng to, thu nhỏ, xoay mà không giảm chất lượng (ảnh gốc được giữ) ¦ Objek cerdas: perbesar, perkecil, putar tanpa kehilangan kualitas (gambar asli tetap disimpan)
+🧩 Objet dynamique ¦ 🧩 Đối tượng thông minh ¦ 🧩 Objek cerdas
+Une autre image à la même place, même taille, même rotation ¦ Một ảnh khác ở cùng chỗ, cùng kích thước, cùng góc xoay ¦ Gambar lain di tempat yang sama, ukuran sama, rotasi sama
+Remplacer… ¦ Thay… ¦ Ganti…
+Remettre l’image à sa taille d’origine (et droite) ¦ Đưa ảnh về kích thước gốc (và thẳng) ¦ Kembalikan gambar ke ukuran aslinya (dan lurus)
+Un calque de filtres juste au-dessus, qui ne touche que cette image : on peut le régler, le doser, le cacher ¦ Một lớp bộ lọc ngay bên trên, chỉ tác động lên ảnh này: có thể chỉnh, giảm bớt, ẩn ¦ Lapisan filter tepat di atasnya, hanya memengaruhi gambar ini: bisa diatur, dikurangi, disembunyikan
+✨ Filtre dynamique ¦ ✨ Bộ lọc thông minh ¦ ✨ Filter cerdas
+Figer l’image en pixels, à la taille où elle est (plus d’agrandissement sans perte) ¦ Cố định ảnh thành điểm ảnh, ở kích thước hiện tại (không còn phóng to mà không giảm chất lượng) ¦ Kunci gambar menjadi piksel pada ukurannya sekarang (tidak bisa lagi diperbesar tanpa kehilangan kualitas)
+Pixelliser ¦ Raster hoá ¦ Rasterisasi
+Couleurs, transparence, forme, préréglages ¦ Màu, độ trong suốt, hình dạng, thiết lập sẵn ¦ Warna, transparansi, bentuk, preset
+▦ Modifier le dégradé… ¦ ▦ Sửa dải chuyển màu… ¦ ▦ Ubah gradasi…
+Motif, échelle, angle, décalage ¦ Hoa văn, tỉ lệ, góc, dịch chuyển ¦ Pola, skala, sudut, geser
+▩ Modifier le motif… ¦ ▩ Sửa hoa văn… ¦ ▩ Ubah pola…
+Comme un masque d’écrêtage de Photoshop ¦ Giống mặt nạ cắt của Photoshop ¦ Seperti masker kliping di Photoshop
+régler… ¦ chỉnh… ¦ atur…
+ne touche que l’élément juste dessous ¦ chỉ tác động lên phần tử ngay bên dưới ¦ hanya memengaruhi elemen tepat di bawahnya
+touche tout ce qui est dessous ¦ tác động lên mọi thứ bên dưới ¦ memengaruhi semua yang di bawahnya
+(seulement l’élément dessous) ¦ (chỉ phần tử bên dưới) ¦ (hanya elemen di bawahnya)
+(tout ce qui est dessous) ¦ (mọi thứ bên dưới) ¦ (semua yang di bawahnya)
+régler la photo ¦ chỉnh ảnh ¦ atur foto
+＋ dans un calque de réglage ¦ ＋ trong một lớp điều chỉnh ¦ ＋ di lapisan penyesuaian
+Réglages et filtres dans un calque à part, qu’on peut masquer, doser ou limiter à un calque ¦ Điều chỉnh và bộ lọc trong một lớp riêng, có thể che mặt nạ, giảm bớt hoặc giới hạn cho một lớp ¦ Penyesuaian dan filter di lapisan terpisah yang bisa diberi masker, dikurangi, atau dibatasi ke satu lapisan
+✨ Filtres : ¦ ✨ Bộ lọc: ¦ ✨ Filter:
+Changer les réglages de ce filtre ¦ Đổi cài đặt của bộ lọc này ¦ Ubah pengaturan filter ini
+vider ¦ làm trống ¦ kosongkan
+groupe vide : glisse un calque ici (⠿), ou range-le avec 📁 ¦ nhóm trống: kéo một lớp vào đây (⠿), hoặc xếp vào bằng 📁 ¦ grup kosong: seret lapisan ke sini (⠿), atau masukkan dengan 📁
+Le pinceau, les formes et le texte vont sur le calque choisi (en bleu). 📁 un groupe peut contenir des calques et d’autres groupes ; 🎚 un calque de réglage applique réglages et filtres à ce qui est dessous (ou seulement à l’élément juste dessous). 🎭 un masque cache sans effacer. ¦ Cọ, hình và văn bản nằm trên lớp đã chọn (màu xanh). 📁 một nhóm có thể chứa các lớp và các nhóm khác; 🎚 một lớp điều chỉnh áp dụng điều chỉnh và bộ lọc cho những gì bên dưới (hoặc chỉ phần tử ngay bên dưới). 🎭 một mặt nạ che mà không xoá. ¦ Kuas, bentuk, dan teks masuk ke lapisan terpilih (biru). 📁 grup bisa berisi lapisan dan grup lain; 🎚 lapisan penyesuaian menerapkan penyesuaian dan filter pada yang di bawahnya (atau hanya pada elemen tepat di bawahnya). 🎭 masker menyembunyikan tanpa menghapus.
+＋ Calque ¦ ＋ Lớp ¦ ＋ Lapisan
+＋ Groupe ¦ ＋ Nhóm ¦ ＋ Grup
+＋ Réglage ¦ ＋ Điều chỉnh ¦ ＋ Penyesuaian
+🖼️ Image ¦ 🖼️ Ảnh ¦ 🖼️ Gambar
+Une image de la base ou de l’ordinateur, sur un nouveau calque, en objet dynamique (agrandir, réduire, tourner sans perte) ¦ Một ảnh từ cơ sở dữ liệu hoặc từ máy tính, trên một lớp mới, dạng đối tượng thông minh (phóng to, thu nhỏ, xoay mà không giảm chất lượng) ¦ Gambar dari basis data atau komputer, di lapisan baru, sebagai objek cerdas (perbesar, perkecil, putar tanpa kehilangan kualitas)
+Un groupe vide au-dessus du calque choisi ¦ Một nhóm trống phía trên lớp đã chọn ¦ Grup kosong di atas lapisan terpilih
+Réglages et filtres dans un calque ¦ Điều chỉnh và bộ lọc trong một lớp ¦ Penyesuaian dan filter di sebuah lapisan
+La photo a été retirée des calques : la remettre tout en bas ¦ Ảnh đã bị gỡ khỏi các lớp: đặt lại xuống dưới cùng ¦ Foto telah dilepas dari lapisan: kembalikan ke paling bawah
+↺ Remettre la photo ¦ ↺ Đặt lại ảnh ¦ ↺ Kembalikan foto
+Met le calque choisi dans un nouveau groupe (⌘G) ¦ Đưa lớp đã chọn vào một nhóm mới (⌘G) ¦ Memasukkan lapisan terpilih ke grup baru (⌘G)
+Grouper ¦ Nhóm lại ¦ Kelompokkan
+Sélection → calque ¦ Vùng chọn → lớp ¦ Seleksi → lapisan
+Aucun calque. ¦ Không có lớp nào. ¦ Tidak ada lapisan.
+Choisis d’abord un calque. ¦ Hãy chọn một lớp trước. ¦ Pilih lapisan dulu.
+Nouveau calque ¦ Lớp mới ¦ Lapisan baru
+Nouveau calque de réglage ¦ Lớp điều chỉnh mới ¦ Lapisan penyesuaian baru
+Photo remise dans les calques ¦ Đã đặt ảnh lại vào các lớp ¦ Foto dikembalikan ke lapisan
+Masque ajouté : la sélection est cachée. ¦ Đã thêm mặt nạ: vùng chọn bị ẩn. ¦ Masker ditambahkan: seleksi disembunyikan.
+Masque ajouté : tout est caché ; peins en ⬜ pour montrer. ¦ Đã thêm mặt nạ: mọi thứ bị ẩn; tô bằng ⬜ để hiện. ¦ Masker ditambahkan: semuanya disembunyikan; lukis dengan ⬜ untuk menampilkan.
+Masque ajouté : peins en ⬛ pour cacher, en ⬜ pour montrer. ¦ Đã thêm mặt nạ: tô bằng ⬛ để ẩn, bằng ⬜ để hiện. ¦ Masker ditambahkan: lukis dengan ⬛ untuk menyembunyikan, dengan ⬜ untuk menampilkan.
+Masque seul : blanc = montré, noir = caché (⌥ + clic pour revenir) ¦ Chỉ mặt nạ: trắng = hiện, đen = ẩn (⌥ + bấm để quay lại) ¦ Masker saja: putih = tampil, hitam = tersembunyi (⌥ + klik untuk kembali)
+Ce calque est verrouillé. ¦ Lớp này đang bị khoá. ¦ Lapisan ini terkunci.
+Filtre dynamique : choisis un filtre (« ＋ Ajouter un filtre… ») ; il ne touche que cette image, et reste réglable. ¦ Bộ lọc thông minh: chọn một bộ lọc (“＋ Thêm bộ lọc…”); nó chỉ tác động lên ảnh này và vẫn chỉnh được. ¦ Filter cerdas: pilih filter (“＋ Tambah filter…”); hanya memengaruhi gambar ini dan tetap bisa diatur.
+verrouillé ¦ đã khoá ¦ terkunci
+déverrouillé ¦ đã mở khoá ¦ tidak terkunci
+seulement sur l’élément dessous ¦ chỉ trên phần tử bên dưới ¦ hanya pada elemen di bawahnya
+sur tout ce qui est dessous ¦ trên mọi thứ bên dưới ¦ pada semua yang di bawahnya
+Ouvrir le panneau (Réglages, Calques…) — Tab ¦ Mở bảng (Điều chỉnh, Lớp…) — Tab ¦ Buka panel (Penyesuaian, Lapisan…) — Tab
+Glisse pour te déplacer dans l’image zoomée (la barre d’espace fait pareil avec n’importe quel outil). ¦ Kéo để di chuyển trong ảnh đã phóng to (phím cách cũng làm được với mọi công cụ). ¦ Seret untuk bergerak di gambar yang diperbesar (tombol spasi juga bisa dengan alat apa pun).
+Clique sur un trait, une forme, un texte ou une zone copiée d’un calque, puis glisse-le. ⌫ le supprime, double-clic sur un texte pour le réécrire. ¦ Bấm vào một nét, một hình, một văn bản hoặc một vùng đã sao chép của lớp, rồi kéo. ⌫ để xoá, bấm đúp vào văn bản để viết lại. ¦ Klik sapuan, bentuk, teks, atau area salinan dari lapisan, lalu seret. ⌫ menghapusnya; klik ganda teks untuk menulis ulang.
+Glisse pour sélectionner un rectangle (⇧ en plus : ajouter, ⌥ : enlever). Les réglages de la barre agissent ensuite sur la sélection. ¦ Kéo để chọn một hình chữ nhật (thêm ⇧: thêm vào, ⌥: bớt đi). Các cài đặt trên thanh sau đó tác động lên vùng chọn. ¦ Seret untuk menyeleksi persegi (dengan ⇧: tambah, ⌥: kurangi). Pengaturan di bilah lalu berlaku pada seleksi.
+Glisse pour sélectionner un ovale (⇧ : ajouter, ⌥ : enlever). ¦ Kéo để chọn một hình bầu dục (⇧: thêm, ⌥: bớt). ¦ Seret untuk menyeleksi oval (⇧: tambah, ⌥: kurangi).
+Entoure à main levée la zone à sélectionner (⇧ : ajouter, ⌥ : enlever). ¦ Khoanh bằng tay vùng cần chọn (⇧: thêm, ⌥: bớt). ¦ Lingkari dengan tangan bebas area yang diseleksi (⇧: tambah, ⌥: kurangi).
+Plume : clique point par point autour de la zone ; double-clic, Entrée ou clic sur le premier point pour fermer. Échap : abandonner. ¦ Bút: bấm từng điểm quanh vùng cần chọn; bấm đúp, Enter hoặc bấm vào điểm đầu tiên để đóng. Esc: bỏ qua. ¦ Pena: klik titik demi titik di sekeliling area; klik ganda, Enter, atau klik titik pertama untuk menutup. Esc: batal.
+Clique sur une couleur : tous les points voisins de teinte proche sont sélectionnés (Tolérance). ⇧ : ajouter, ⌥ : enlever. ¦ Bấm vào một màu: mọi điểm lân cận có sắc độ gần giống đều được chọn (Dung sai). ⇧: thêm, ⌥: bớt. ¦ Klik sebuah warna: semua titik di dekatnya dengan rona serupa terseleksi (Toleransi). ⇧: tambah, ⌥: kurangi.
+Glisse les poignées du cadre (ou trace un nouveau cadre), choisis des proportions, redresse avec le curseur, puis « ✓ Valider ». ¦ Kéo các tay nắm của khung (hoặc vẽ khung mới), chọn tỉ lệ, làm thẳng bằng thanh trượt, rồi bấm “✓ Xác nhận”. ¦ Seret pegangan bingkai (atau buat bingkai baru), pilih proporsi, luruskan dengan penggeser, lalu “✓ Konfirmasi”.
+Clic : zoomer ici · ⌥ + clic : reculer · ou glisse pour zoomer sur une zone. ¦ Bấm: phóng to ở đây · ⌥ + bấm: thu nhỏ · hoặc kéo để phóng to một vùng. ¦ Klik: perbesar di sini · ⌥ + klik: perkecil · atau seret untuk memperbesar suatu area.
+Glisse les 4 coins sur les coins de la photo, du document ou de la façade prise de biais, puis « ✓ Valider » : elle est remise à plat. À faire de préférence avant les corrections de taches. ¦ Kéo 4 góc vào các góc của ảnh, giấy tờ hoặc mặt tiền chụp xiên, rồi bấm “✓ Xác nhận”: nó được làm phẳng lại. Nên làm trước khi sửa vết bẩn. ¦ Seret 4 sudut ke sudut-sudut foto, dokumen, atau fasad yang diambil miring, lalu “✓ Konfirmasi”: bidangnya diratakan. Sebaiknya dilakukan sebelum memperbaiki noda.
+Glisse pour tracer la forme sur le calque choisi (⇧ : carré, cercle ou angle droit). ¦ Kéo để vẽ hình trên lớp đã chọn (⇧: hình vuông, hình tròn hoặc góc vuông). ¦ Seret untuk membuat bentuk di lapisan terpilih (⇧: persegi, lingkaran, atau sudut siku).
+Glisse du début à la fin du dégradé (⇧ : tous les 45°) : il va sur un calque « Dégradé » (dans la sélection s’il y en a une ; sur le masque choisi, il fond le calque). Tire ensuite ses ronds pour l’ajuster ; clic sur la barre colorée pour changer ses couleurs. ¦ Kéo từ đầu đến cuối dải chuyển màu (⇧: mỗi 45°): nó nằm trên lớp “Dải chuyển màu” (trong vùng chọn nếu có; trên mặt nạ đã chọn, nó làm mờ dần lớp). Sau đó kéo các vòng tròn để chỉnh; bấm vào thanh màu để đổi màu. ¦ Seret dari awal sampai akhir gradasi (⇧: setiap 45°): gradasi masuk ke lapisan “Gradasi” (di dalam seleksi jika ada; pada masker terpilih, gradasi memudarkan lapisan). Lalu tarik lingkarannya untuk menyesuaikan; klik bilah berwarna untuk mengubah warnanya.
+Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long. Zoome (⌘ + molette) pour être précis. ¦ Bấm vào một vết bẩn, hạt bụi hoặc vết xước: nó được thay bằng vùng xung quanh. Với vết xước, hãy kéo dọc theo nó. Phóng to (⌘ + con lăn) để chính xác hơn. ¦ Klik noda, debu, atau goresan: diganti dengan sekitarnya. Untuk goresan, seret di sepanjangnya. Perbesar (⌘ + roda) agar tepat.
+« Choisir l’endroit à recopier » (ou ⌥ + clic), puis peins sur la zone à couvrir. « Aligné » : la source suit ton pinceau d’un trait à l’autre. Avec une sélection : glisse pour poser une copie de la zone ailleurs. ¦ “Chọn điểm cần sao chép” (hoặc ⌥ + bấm), rồi tô lên vùng cần che. “Căn theo”: nguồn đi theo cọ của bạn từ nét này sang nét khác. Với vùng chọn: kéo để đặt bản sao của vùng ở chỗ khác. ¦ “Pilih titik yang disalin” (atau ⌥ + klik), lalu lukis di area yang ingin ditutup. “Sejajar”: sumber mengikuti kuasmu dari satu sapuan ke sapuan berikutnya. Dengan seleksi: seret untuk menaruh salinan area di tempat lain.
+Peins sur le calque choisi (Calques) : annoter, entourer, flécher à la main. La gomme efface ce qui a été peint, jamais la photo. ¦ Tô trên lớp đã chọn (Lớp): chú thích, khoanh tròn, vẽ mũi tên bằng tay. Tẩy xoá những gì đã tô, không bao giờ xoá ảnh. ¦ Lukis di lapisan terpilih (Lapisan): beri anotasi, lingkari, buat panah dengan tangan. Penghapus menghapus yang dilukis, tidak pernah fotonya.
+Tu peins le MASQUE du calque : ⬛ cacher, ⬜ montrer. Rien n’est effacé. Clique sur la vignette du masque (Calques) pour revenir au calque. ¦ Bạn đang tô MẶT NẠ của lớp: ⬛ ẩn, ⬜ hiện. Không gì bị xoá. Bấm vào hình nhỏ của mặt nạ (Lớp) để quay lại lớp. ¦ Kamu sedang melukis MASKER lapisan: ⬛ sembunyikan, ⬜ tampilkan. Tidak ada yang dihapus. Klik gambar kecil masker (Lapisan) untuk kembali ke lapisan.
+Clique dans l’image à l’endroit du texte, écris, puis Entrée (⇧ + Entrée pour aller à la ligne). ¦ Bấm vào ảnh ở chỗ đặt văn bản, gõ chữ, rồi Enter (⇧ + Enter để xuống dòng). ¦ Klik di gambar pada tempat teks, ketik, lalu Enter (⇧ + Enter untuk baris baru).
+Peins sur le pli, la rayure ou la déchirure (en rouge pendant le geste) : au lâcher, la zone est refaite d’après ce qui l’entoure. Zoome pour être précis ; « 🔍 Repérer les plis » les trouve tout seul. ¦ Tô lên nếp gấp, vết xước hoặc vết rách (màu đỏ trong lúc tô): khi thả ra, vùng đó được làm lại theo vùng xung quanh. Phóng to để chính xác hơn; “🔍 Tìm nếp gấp” tự tìm chúng. ¦ Lukis di atas lipatan, goresan, atau sobekan (merah saat melukis): saat dilepas, area itu dibuat ulang dari sekitarnya. Perbesar agar tepat; “🔍 Temukan lipatan” mencarinya otomatis.
+Glisse les deux ronds sur les yeux si besoin : le cadre suit (yeux à l’horizontale, toujours à la même hauteur). Règle la marge dans le panneau, puis « ✓ Recadrer » ou « 👤 Utiliser comme portrait ». ¦ Kéo hai vòng tròn vào mắt nếu cần: khung đi theo (mắt nằm ngang, luôn ở cùng độ cao). Chỉnh lề trong bảng, rồi bấm “✓ Cắt khung” hoặc “👤 Dùng làm chân dung”. ¦ Seret kedua lingkaran ke mata jika perlu: bingkai mengikuti (mata sejajar, selalu pada ketinggian yang sama). Atur margin di panel, lalu “✓ Pangkas” atau “👤 Gunakan sebagai potret”.
+Calque « Annotations » créé ¦ Đã tạo lớp “Chú thích” ¦ Lapisan “Anotasi” dibuat
+Annotations ¦ Chú thích ¦ Anotasi
+Masque ajouté à la photo (gomme) ¦ Đã thêm mặt nạ vào ảnh (tẩy) ¦ Masker ditambahkan ke foto (penghapus)
+Gomme sur la photo : elle est cachée par un masque, rien n’est effacé. Pour la faire revenir : touche X (⬜ montrer), puis repasse dessus. ¦ Tẩy trên ảnh: nó được che bằng mặt nạ, không gì bị xoá. Để hiện lại: phím X (⬜ hiện), rồi tô lại lên đó. ¦ Penghapus pada foto: foto disembunyikan dengan masker, tidak ada yang dihapus. Untuk memunculkannya lagi: tombol X (⬜ tampilkan), lalu sapukan lagi di atasnya.
+⬜ Montrer : le pinceau (ou la gomme) fait revenir ce qui était caché. X pour revenir à ⬛ cacher. ¦ ⬜ Hiện: cọ (hoặc tẩy) đưa lại những gì đã bị ẩn. X để quay về ⬛ ẩn. ¦ ⬜ Tampilkan: kuas (atau penghapus) memunculkan lagi yang tersembunyi. X untuk kembali ke ⬛ sembunyikan.
+⬛ Cacher : le pinceau (ou la gomme) cache. X pour ⬜ montrer. ¦ ⬛ Ẩn: cọ (hoặc tẩy) che đi. X để chuyển sang ⬜ hiện. ¦ ⬛ Sembunyikan: kuas (atau penghapus) menyembunyikan. X untuk ⬜ tampilkan.
+Style du texte ¦ Kiểu chữ ¦ Gaya teks
+Caractère du texte ¦ Ký tự của văn bản ¦ Karakter teks
+🔎 Lire les variantes de l’ordinateur… ¦ 🔎 Đọc các kiểu chữ của máy tính… ¦ 🔎 Baca gaya fon komputer…
+Réglage ciblé : appuie sur une couleur de la photo et glisse à droite (plus saturé) ou à gauche (moins) ; avec ⌘ / Ctrl, c’est la teinte qui change ¦ Điều chỉnh theo vùng: nhấn vào một màu trên ảnh rồi kéo sang phải (bão hoà hơn) hoặc sang trái (ít hơn); với ⌘ / Ctrl, sắc độ sẽ thay đổi ¦ Penyesuaian terarah: tekan sebuah warna di foto lalu seret ke kanan (lebih jenuh) atau ke kiri (kurang); dengan ⌘ / Ctrl, ronanya yang berubah
+Réglage ciblé ¦ Điều chỉnh theo vùng ¦ Penyesuaian terarah
+Pipettes de la gamme ¦ Ống hút màu của dải ¦ Pipet rentang
+Pipette : la gamme se centre sur la couleur cliquée dans la photo ¦ Ống hút màu: dải được đặt vào giữa màu đã bấm trên ảnh ¦ Pipet: rentang dipusatkan pada warna yang diklik di foto
+Ajouter à la gamme la couleur cliquée ¦ Thêm màu đã bấm vào dải ¦ Tambahkan warna yang diklik ke rentang
+Retirer de la gamme la couleur cliquée ¦ Bỏ màu đã bấm khỏi dải ¦ Keluarkan warna yang diklik dari rentang
+Bord intérieur : plein effet jusqu’ici ¦ Mép trong: hiệu ứng đầy đủ đến đây ¦ Tepi dalam: efek penuh sampai di sini
+Bord extérieur : l’effet s’éteint ici ¦ Mép ngoài: hiệu ứng tắt dần ở đây ¦ Tepi luar: efek memudar di sini
+Haut : les couleurs avant ; bas : après. ¦ Trên: màu trước; dưới: màu sau. ¦ Atas: warna sebelum; bawah: sesudah.
+🎚 Autres réglages… ¦ 🎚 Điều chỉnh khác… ¦ 🎚 Penyesuaian lain…
+🖌 Peindre le masque ¦ 🖌 Tô mặt nạ ¦ 🖌 Lukis masker
+Réactiver ¦ Bật lại ¦ Aktifkan lagi
+Désactiver ¦ Tắt ¦ Nonaktifkan
+▦ Calque de dégradé ¦ ▦ Lớp dải chuyển màu ¦ ▦ Lapisan gradasi
+garder les proportions ¦ giữ tỉ lệ ¦ pertahankan proporsi
+Un calque de réglage juste au-dessus, qui ne touche que ce calque ¦ Một lớp điều chỉnh ngay bên trên, chỉ tác động lên lớp này ¦ Lapisan penyesuaian tepat di atasnya, hanya memengaruhi lapisan ini
+🎨 Teinte/Saturation sur ce calque ¦ 🎨 Sắc độ/Độ bão hoà trên lớp này ¦ 🎨 Rona/Saturasi pada lapisan ini
+Choisis la photo ou un calque de réglage 🎚 (Calques) pour Teinte/Saturation. ¦ Hãy chọn ảnh hoặc một lớp điều chỉnh 🎚 (Lớp) cho Sắc độ/Độ bão hoà. ¦ Pilih foto atau lapisan penyesuaian 🎚 (Lapisan) untuk Rona/Saturasi.
+👆 Appuie sur une couleur de la photo et glisse à gauche ou à droite (⌘ / Ctrl : la teinte). ¦ 👆 Nhấn vào một màu trên ảnh rồi kéo sang trái hoặc phải (⌘ / Ctrl: sắc độ). ¦ 👆 Tekan sebuah warna di foto lalu seret ke kiri atau kanan (⌘ / Ctrl: rona).
+💧 Clique sur une couleur de la photo. ¦ 💧 Bấm vào một màu trên ảnh. ¦ 💧 Klik sebuah warna di foto.
+C’est un gris : il n’a pas de teinte. ¦ Đây là màu xám: nó không có sắc độ. ¦ Ini abu-abu: tidak punya rona.
+Gamme choisie à la pipette ¦ Dải được chọn bằng ống hút màu ¦ Rentang dipilih dengan pipet
+Gamme élargie ¦ Đã mở rộng dải ¦ Rentang diperlebar
+Gamme réduite ¦ Đã thu hẹp dải ¦ Rentang dipersempit
+Coloriser : oui ¦ Tô màu: có ¦ Warnai: ya
+Coloriser : non ¦ Tô màu: không ¦ Warnai: tidak
+Coloriser ¦ Tô màu ¦ Warnai
+Propriétés du masque ¦ Thuộc tính của mặt nạ ¦ Properti masker
+Teinte/Saturation remise à zéro ¦ Đã đặt lại Sắc độ/Độ bão hoà ¦ Rona/Saturasi diatur ulang
+Masque inversé ¦ Đã đảo ngược mặt nạ ¦ Masker dibalik
+Masque désactivé ¦ Đã tắt mặt nạ ¦ Masker dinonaktifkan
+Masque réactivé ¦ Đã bật lại mặt nạ ¦ Masker diaktifkan lagi
+Masque retiré ¦ Đã gỡ mặt nạ ¦ Masker dilepas
+Masque ajouté ¦ Đã thêm mặt nạ ¦ Masker ditambahkan
+Ce calque a déjà un masque. ¦ Lớp này đã có mặt nạ. ¦ Lapisan ini sudah punya masker.
+Teinte/Saturation sur un calque ¦ Sắc độ/Độ bão hoà trên một lớp ¦ Rona/Saturasi pada lapisan
+Teinte/Saturation ¦ Sắc độ/Độ bão hoà ¦ Rona/Saturasi
+Ancien style ¦ Kiểu cũ ¦ Gaya lama
+Global ¦ Tổng thể ¦ Utama
+Rouges ¦ Đỏ ¦ Merah
+Jaunes ¦ Vàng ¦ Kuning
+Verts ¦ Xanh lá ¦ Hijau
+Cyans ¦ Xanh lơ ¦ Sian
+Bleus ¦ Xanh dương ¦ Biru
+Magentas ¦ Tím hồng ¦ Magenta
+Cyanotype ¦ Cyanotype ¦ Sianotipe
+Supprimer ce motif ¦ Xoá hoa văn này ¦ Hapus pola ini
+Calque de motif <b>« {name} »</b> : tout se règle ici, tout de suite. ¦ Lớp hoa văn <b>“{name}”</b>: mọi thứ chỉnh ở đây, có hiệu lực ngay. ¦ Lapisan pola <b>“{name}”</b>: semuanya diatur di sini, langsung berlaku.
+Choisis un motif, puis « Remplir » : il va sur son propre calque (dans la sélection s’il y en a une). Les motifs de l’app prennent tes deux couleurs. ¦ Chọn một hoa văn, rồi bấm “Tô đầy”: nó nằm trên một lớp riêng (trong vùng chọn nếu có). Các hoa văn của ứng dụng dùng hai màu của bạn. ¦ Pilih pola, lalu “Isi”: pola masuk ke lapisannya sendiri (di dalam seleksi jika ada). Pola aplikasi memakai kedua warnamu.
+fond transparent (motifs de l’app) ¦ nền trong suốt (hoa văn của ứng dụng) ¦ latar transparan (pola aplikasi)
+Décalage horizontal ¦ Dịch ngang ¦ Geser horizontal
+Décalage vertical ¦ Dịch dọc ¦ Geser vertikal
+▩ Remplir : nouveau calque de motif ¦ ▩ Tô đầy: lớp hoa văn mới ¦ ▩ Isi: lapisan pola baru
+Il rejoint la bibliothèque des motifs (gardée sur cet ordinateur). ¦ Nó được thêm vào thư viện hoa văn (lưu trên máy tính này). ¦ Pola masuk ke pustaka pola (disimpan di komputer ini).
+l’image visible ¦ ảnh đang thấy ¦ gambar yang terlihat
+Taille du carreau ¦ Kích thước ô ¦ Ukuran ubin
+raccord sans couture (les bords se fondent) ¦ nối liền không đường nối (các mép hoà vào nhau) ¦ tanpa sambungan (tepinya membaur)
+Garder et remplir ¦ Giữ và tô đầy ¦ Simpan dan isi
+Plus de place pour garder ce motif : supprime des motifs, ou fais-le plus petit. ¦ Hết chỗ để giữ hoa văn này: hãy xoá bớt hoa văn, hoặc làm nó nhỏ hơn. ¦ Tidak ada ruang lagi untuk menyimpan pola ini: hapus beberapa pola, atau buat lebih kecil.
+Motif gardé dans la bibliothèque ▩. ¦ Đã giữ hoa văn trong thư viện ▩. ¦ Pola disimpan di pustaka ▩.
+Mon motif ¦ Hoa văn của tôi ¦ Polaku
+Clic sur une forme : le pinceau 🖌 la prend. La taille se règle en haut (ou [ et ]). ¦ Bấm vào một hình: cọ 🖌 sẽ dùng hình đó. Chỉnh kích thước ở phía trên (hoặc [ và ]). ¦ Klik sebuah bentuk: kuas 🖌 memakainya. Atur ukurannya di atas (atau [ dan ]).
+Forme de la pointe ¦ Hình dạng đầu cọ ¦ Bentuk ujung
+Pas (écart entre les empreintes) ¦ Khoảng cách (giữa các dấu cọ) ¦ Jarak (antar cap kuas)
+Petit : un trait continu. Grand : des empreintes séparées (étoiles, feuilles). ¦ Nhỏ: một nét liền. Lớn: các dấu cọ tách rời (sao, lá). ¦ Kecil: sapuan bersambung. Besar: cap terpisah (bintang, daun).
+À 100 % la forme est entière ; plus bas, elle est aplatie (plume, pinceau plat). ¦ Ở 100 % hình nguyên vẹn; thấp hơn thì bị dẹt (ngòi bút, cọ dẹt). ¦ Pada 100 % bentuknya utuh; lebih rendah, bentuknya pipih (pena bulu, kuas pipih).
+l’angle suit le trait ¦ góc đi theo nét ¦ sudut mengikuti sapuan
+Dynamique et dispersion ¦ Biến động và phân tán ¦ Dinamika dan sebaran
+Variation de taille ¦ Biến đổi kích thước ¦ Variasi ukuran
+Variation d’angle ¦ Biến đổi góc ¦ Variasi sudut
+Dispersion ¦ Phân tán ¦ Sebaran
+Nombre par empreinte ¦ Số lượng mỗi dấu cọ ¦ Jumlah per cap
+Transfert et couleur ¦ Truyền màu và màu sắc ¦ Transfer dan warna
+Flux (chaque empreinte) ¦ Lưu lượng (mỗi dấu cọ) ¦ Aliran (setiap cap)
+Variation d’opacité ¦ Biến đổi độ mờ đục ¦ Variasi opasitas
+Variation de couleur ¦ Biến đổi màu ¦ Variasi warna
+Fais d’abord une sélection autour du dessin ¦ Hãy tạo một vùng chọn quanh hình vẽ trước ¦ Buat seleksi di sekitar gambar dulu
+Fais d’abord une sélection autour du dessin. ¦ Hãy tạo một vùng chọn quanh hình vẽ trước. ¦ Buat seleksi di sekitar gambar dulu.
+＋ Forme d’après la sélection ¦ ＋ Hình từ vùng chọn ¦ ＋ Bentuk dari seleksi
+Garder comme préréglage ¦ Giữ làm thiết lập sẵn ¦ Simpan sebagai preset
+＋ Garder comme préréglage ¦ ＋ Giữ làm thiết lập sẵn ¦ ＋ Simpan sebagai preset
+Garder cette forme de pinceau ¦ Giữ đầu cọ này ¦ Simpan ujung kuas ini
+Nom du préréglage : ¦ Tên thiết lập sẵn: ¦ Nama preset:
+Plus de place pour garder ce pinceau. ¦ Hết chỗ để giữ cọ này. ¦ Tidak ada ruang lagi untuk menyimpan kuas ini.
+🖌 Ta forme est prête : peins avec ; « Garder comme préréglage » pour la retrouver. ¦ 🖌 Hình của bạn đã sẵn sàng: hãy tô với nó; “Giữ làm thiết lập sẵn” để tìm lại. ¦ 🖌 Bentukmu siap: lukislah dengannya; “Simpan sebagai preset” untuk menemukannya lagi.
+Rond net ¦ Tròn sắc nét ¦ Bulat tegas
+Rond doux ¦ Tròn mềm ¦ Bulat lembut
+Surligneur ¦ Bút đánh dấu ¦ Stabilo
+Crayon fin ¦ Bút chì mảnh ¦ Pensil halus
+Craie (grain) ¦ Phấn (có hạt) ¦ Kapur (berbutir)
+Craie ¦ Phấn ¦ Kapur
+Fusain ¦ Than vẽ ¦ Arang
+Dégradé inversé ¦ Đã đảo ngược dải chuyển màu ¦ Gradasi dibalik
+Dégradé : tramage ¦ Dải chuyển màu: trộn hạt ¦ Gradasi: dither
+Dégradé : sans tramage ¦ Dải chuyển màu: không trộn hạt ¦ Gradasi: tanpa dither
+▦ Dégradé ¦ ▦ Dải chuyển màu ¦ ▦ Gradasi
+Clic : ajouter un arrêt de couleur à cet endroit ¦ Bấm: thêm một điểm dừng màu ở chỗ này ¦ Klik: tambah titik warna di sini
+Clic sur la barre : un arrêt de plus · glisse un arrêt pour le déplacer, vers le bas pour l’enlever ¦ Bấm vào thanh: thêm một điểm dừng · kéo một điểm dừng để di chuyển, kéo xuống dưới để bỏ ¦ Klik bilah: tambah satu titik · seret titik untuk memindahkannya, ke bawah untuk menghapusnya
+Mélange ¦ Pha trộn ¦ Pencampuran
+Classique (RVB) ¦ Cổ điển (RGB) ¦ Klasik (RGB)
+Perceptuel (plus doux) ¦ Theo cảm nhận (mềm hơn) ¦ Perseptual (lebih lembut)
+Par les teintes ¦ Qua các sắc độ ¦ Melalui rona
+Au-delà des bouts ¦ Ngoài hai đầu ¦ Di luar ujung
+Couleur des bouts ¦ Màu của hai đầu ¦ Warna ujung
+Répéter ¦ Lặp lại ¦ Ulangi
+Répéter en miroir ¦ Lặp lại đối xứng ¦ Ulangi bercermin
+Le début devient la fin ¦ Đầu thành cuối ¦ Awal menjadi akhir
+⇄ Retourner les arrêts ¦ ⇄ Đảo các điểm dừng ¦ ⇄ Balik titik-titik
+Espacer également ¦ Giãn đều ¦ Beri jarak merata
+Couleur de l’arrêt ¦ Màu của điểm dừng ¦ Warna titik
+Arrêt choisi ¦ Điểm dừng đã chọn ¦ Titik terpilih
+Milieu vers le suivant ¦ Điểm giữa đến điểm kế tiếp ¦ Titik tengah ke berikutnya
+Où se trouve le mélange à moitié entre cet arrêt et le suivant (le petit losange de Photoshop). ¦ Vị trí pha trộn nửa chừng giữa điểm dừng này và điểm kế tiếp (hình thoi nhỏ của Photoshop). ¦ Letak campuran setengah jalan antara titik ini dan berikutnya (belah ketupat kecil di Photoshop).
+✕ Enlever cet arrêt ¦ ✕ Bỏ điểm dừng này ¦ ✕ Hapus titik ini
+Supprimer ce préréglage ¦ Xoá thiết lập sẵn này ¦ Hapus preset ini
+Garder ce dégradé ¦ Giữ dải chuyển màu này ¦ Simpan gradasi ini
+Mon dégradé ¦ Dải chuyển màu của tôi ¦ Gradasiku
+Premier plan → transparent ¦ Tiền cảnh → trong suốt ¦ Latar depan → transparan
+Noir → blanc ¦ Đen → trắng ¦ Hitam → putih
+Blanc → transparent ¦ Trắng → trong suốt ¦ Putih → transparan
+Vignette (bords sombres) ¦ Làm tối viền (viền tối) ¦ Vinyet (tepi gelap)
+Arc-en-ciel ¦ Cầu vồng ¦ Pelangi
+Cuivre ¦ Đồng ¦ Tembaga
+Chrome ¦ Crôm ¦ Krom
+Or ¦ Vàng kim ¦ Emas
+Vieux papier ¦ Giấy cũ ¦ Kertas tua
+Nuit ¦ Đêm ¦ Malam
+Printemps ¦ Mùa xuân ¦ Musim semi
+Mer ¦ Biển ¦ Laut
+Coucher de soleil ¦ Hoàng hôn ¦ Matahari terbenam
+▭ Linéaire ¦ ▭ Tuyến tính ¦ ▭ Linear
+◉ Radial ¦ ◉ Toả tròn ¦ ◉ Radial
+◔ Angle (conique) ¦ ◔ Góc (hình nón) ¦ ◔ Sudut (kerucut)
+⇋ Réfléchi ¦ ⇋ Phản chiếu ¦ ⇋ Terpantul
+◇ Losange ¦ ◇ Hình thoi ¦ ◇ Belah ketupat
+Damier ¦ Bàn cờ ¦ Papan catur
+Pois ¦ Chấm bi ¦ Bintik
+Rayures ¦ Sọc ¦ Garis-garis
+Hachures ¦ Gạch chéo ¦ Arsiran
+Briques ¦ Gạch ¦ Batu bata
+Chevrons ¦ Hình chữ V ¦ Chevron
+Losanges ¦ Hình thoi ¦ Belah ketupat
+Vagues ¦ Sóng ¦ Gelombang
+Toile ¦ Vải bố ¦ Kanvas
+Croix ¦ Dấu chữ thập ¦ Silang
+Fleurs de lys ¦ Hoa huệ (fleur-de-lis) ¦ Fleur-de-lis
+Clique maintenant à l’endroit à recopier. ¦ Bây giờ hãy bấm vào điểm cần sao chép. ¦ Sekarang klik titik yang disalin.
+Ce calque est verrouillé : déverrouille-le dans Calques. ¦ Lớp này đang bị khoá: hãy mở khoá trong Lớp. ¦ Lapisan ini terkunci: buka kuncinya di Lapisan.
+Texte effacé ¦ Đã xoá văn bản ¦ Teks dihapus
+Sélection vide ¦ Vùng chọn trống ¦ Seleksi kosong
+Sélection ajoutée ¦ Đã thêm vùng chọn ¦ Seleksi ditambahkan
+Sélection retirée ¦ Đã bớt vùng chọn ¦ Seleksi dikurangi
+Image remplacée : même place, même taille, même rotation. ¦ Đã thay ảnh: cùng chỗ, cùng kích thước, cùng góc xoay. ¦ Gambar diganti: tempat sama, ukuran sama, rotasi sama.
+Image placée : ➤ glisse-la, tire un coin pour la taille (⇧ : libre), la poignée ronde pour la tourner. ¦ Đã đặt ảnh: ➤ kéo nó, kéo một góc để đổi kích thước (⇧: tự do), tay nắm tròn để xoay. ¦ Gambar ditempatkan: ➤ seret, tarik sudutnya untuk ukuran (⇧: bebas), pegangan bulat untuk memutarnya.
+Ce fichier n’est pas une image. ¦ Tệp này không phải là ảnh. ¦ Berkas ini bukan gambar.
+Remplacer l’image de l’objet dynamique ¦ Thay ảnh của đối tượng thông minh ¦ Ganti gambar objek cerdas
+Remplacer par cette image ¦ Thay bằng ảnh này ¦ Ganti dengan gambar ini
+La nouvelle image prend la place, la taille et la rotation de l’ancienne. ¦ Ảnh mới thế chỗ, kích thước và góc xoay của ảnh cũ. ¦ Gambar baru mengambil tempat, ukuran, dan rotasi gambar lama.
+Elle arrive sur un nouveau calque, en objet dynamique 🧩 (agrandir, réduire, tourner sans perte). Tu peux aussi glisser un fichier sur la photo, ou coller une image copiée (⌘V). ¦ Nó xuất hiện trên một lớp mới, dạng đối tượng thông minh 🧩 (phóng to, thu nhỏ, xoay mà không giảm chất lượng). Bạn cũng có thể kéo thả một tệp lên ảnh, hoặc dán một ảnh đã sao chép (⌘V). ¦ Gambar muncul di lapisan baru, sebagai objek cerdas 🧩 (perbesar, perkecil, putar tanpa kehilangan kualitas). Kamu juga bisa menjatuhkan berkas ke foto, atau menempelkan gambar yang disalin (⌘V).
+Sélection automatique ¦ Chọn tự động ¦ Seleksi otomatis
+Ce calque est verrouillé : choisis-en un autre dans Calques. ¦ Lớp này đang bị khoá: hãy chọn lớp khác trong Lớp. ¦ Lapisan ini terkunci: pilih lapisan lain di Lapisan.
+Endroit à recopier choisi : peins maintenant sur la zone à couvrir. ¦ Đã chọn điểm cần sao chép: bây giờ hãy tô lên vùng cần che. ¦ Titik yang disalin sudah dipilih: sekarang lukis di area yang ingin ditutup.
+Choisis d’abord l’endroit à recopier (bouton 🎯 ou ⌥ + clic). ¦ Hãy chọn điểm cần sao chép trước (nút 🎯 hoặc ⌥ + bấm). ¦ Pilih titik yang disalin dulu (tombol 🎯 atau ⌥ + klik).
+La photo n’est plus dans les calques : « ↺ Remettre la photo » (onglet Calques). ¦ Ảnh không còn trong các lớp: “↺ Đặt lại ảnh” (thẻ Lớp). ¦ Foto tidak lagi ada di lapisan: “↺ Kembalikan foto” (tab Lapisan).
+La photo est verrouillée (🔒 dans Calques). ¦ Ảnh đang bị khoá (🔒 trong Lớp). ¦ Foto terkunci (🔒 di Lapisan).
+Tampon : zone recopiée (calque ✨ Retouches) ¦ Con dấu: đã sao chép vùng (lớp ✨ Chỉnh sửa) ¦ Stempel klon: area disalin (lapisan ✨ Retus)
+Fais d’abord une sélection (outils ⬚ ◯ ➰ ✒︎ 🪄). ¦ Hãy tạo một vùng chọn trước (công cụ ⬚ ◯ ➰ ✒︎ 🪄). ¦ Buat seleksi dulu (alat ⬚ ◯ ➰ ✒︎ 🪄).
+Aucun filtre utilisé pour l’instant (menu Filtre). ¦ Chưa dùng bộ lọc nào (menu Bộ lọc). ¦ Belum ada filter yang dipakai (menu Filter).
+Opacité du calque (dosage) ¦ Độ mờ đục của lớp (liều lượng) ¦ Opasitas lapisan (takaran)
+Valeurs de départ ¦ Giá trị ban đầu ¦ Nilai awal
+Rien n’est détruit : le filtre est sur son propre calque. Plus tard : Calques → le calque → onglet ✨ Filtres → « régler… ». ¦ Không gì bị phá huỷ: bộ lọc nằm trên lớp riêng của nó. Sau này: Lớp → lớp đó → thẻ ✨ Bộ lọc → “chỉnh…”. ¦ Tidak ada yang rusak: filternya ada di lapisannya sendiri. Nanti: Lapisan → lapisan itu → tab ✨ Filter → “atur…”.
+Filtre enlevé du calque ¦ Đã bỏ bộ lọc khỏi lớp ¦ Filter dihapus dari lapisan
+Ordre des filtres ¦ Thứ tự bộ lọc ¦ Urutan filter
+Filtres enlevés ¦ Đã bỏ các bộ lọc ¦ Filter dihapus
+Plus de place pour les actions : supprimes-en une. ¦ Hết chỗ cho thao tác: hãy xoá bớt một cái. ¦ Tidak ada ruang lagi untuk aksi: hapus salah satu.
+⚡ Actions ¦ ⚡ Thao tác ¦ ⚡ Aksi
+Nom de l’action (ex. « Photos de l’album 1930 ») ¦ Tên thao tác (vd. “Ảnh trong album 1930”) ¦ Nama aksi (mis. “Foto dari album 1930”)
+Une action garde les réglages de la photo (exposition, niveaux, courbe, teinte, filtres, poussière, colorisation…) et ses calques de réglage sans masque. On la remet sur une autre photo, ou sur plusieurs d’un coup : chacune reçoit une <b>nouvelle version</b>, l’original est gardé. ¦ Một thao tác giữ các điều chỉnh của ảnh (phơi sáng, mức, đường cong, sắc độ, bộ lọc, bụi, tô màu…) và các lớp điều chỉnh không có mặt nạ. Bạn áp dụng lại nó cho ảnh khác, hoặc cho nhiều ảnh cùng lúc: mỗi ảnh nhận một <b>phiên bản mới</b>, bản gốc được giữ. ¦ Aksi menyimpan penyesuaian foto (eksposur, level, kurva, rona, filter, debu, pewarnaan…) dan lapisan penyesuaiannya yang tanpa masker. Kamu menerapkannya ke foto lain, atau ke beberapa foto sekaligus: masing-masing mendapat <b>versi baru</b>, aslinya tetap disimpan.
+Enregistrer cette action dans un fichier, pour la garder ou la donner ¦ Lưu thao tác này vào một tệp, để giữ hoặc tặng người khác ¦ Simpan aksi ini ke berkas, untuk disimpan atau diberikan ke orang lain
+Sur cette photo ¦ Trên ảnh này ¦ Pada foto ini
+Sur plusieurs photos… ¦ Trên nhiều ảnh… ¦ Pada beberapa foto…
+Aucune action enregistrée pour l’instant ¦ Chưa có thao tác nào được lưu ¦ Belum ada aksi tersimpan
+« ＋ Enregistrer les réglages actuels » les garde pour les rejouer sur d’autres photos. ¦ “＋ Lưu các điều chỉnh hiện tại” giữ chúng lại để áp dụng lại trên các ảnh khác. ¦ “＋ Simpan penyesuaian saat ini” menyimpannya untuk diulang pada foto lain.
+Les photos à retoucher ¦ Các ảnh cần chỉnh sửa ¦ Foto yang akan diretus
+Prendre ces photos ¦ Lấy các ảnh này ¦ Ambil foto-foto ini
+＋ Choisir des photos… ¦ ＋ Chọn ảnh… ¦ ＋ Pilih foto…
+afficher la nouvelle version ¦ hiển thị phiên bản mới ¦ tampilkan versi baru
+Aucune photo choisie. ¦ Chưa chọn ảnh nào. ¦ Belum ada foto dipilih.
+refusé ¦ bị từ chối ¦ ditolak
+fx Effets du calque ¦ fx Hiệu ứng của lớp ¦ fx Efek lapisan
+Fond (le contenu seulement, pas les effets) ¦ Độ phủ (chỉ nội dung, không gồm hiệu ứng) ¦ Isian (hanya isi, bukan efek)
+Lueur externe ¦ Toả sáng ngoài ¦ Cahaya luar
+Incrustation de couleur ¦ Phủ màu ¦ Hamparan warna
+à l’extérieur ¦ bên ngoài ¦ di luar
+au milieu ¦ ở giữa ¦ di tengah
+à l’intérieur ¦ bên trong ¦ di dalam
+Tout enlever ¦ Bỏ tất cả ¦ Hapus semua
+🔍 Plis et rayures ¦ 🔍 Nếp gấp và vết xước ¦ 🔍 Lipatan dan goresan
+Recherche des plis… ¦ Đang tìm nếp gấp… ¦ Mencari lipatan…
+garder le grain autour ¦ giữ hạt xung quanh ¦ pertahankan butiran di sekitarnya
+🪡 Plutôt à la main ¦ 🪡 Làm bằng tay thì hơn ¦ 🪡 Lebih baik manual
+✓ Réparer ces lignes ¦ ✓ Sửa các đường này ¦ ✓ Perbaiki garis-garis ini
+Aucun pli trouvé : monte la sensibilité, ou répare à la main avec le pinceau 🪡. ¦ Không tìm thấy nếp gấp: hãy tăng độ nhạy, hoặc sửa bằng tay với cọ 🪡. ¦ Tidak ada lipatan ditemukan: naikkan kepekaan, atau perbaiki manual dengan kuas 🪡.
+Réparation… ¦ Đang sửa… ¦ Memperbaiki…
+✨ Plis et rayures comblés ¦ ✨ Đã lấp nếp gấp và vết xước ¦ ✨ Lipatan dan goresan ditutup
+🌫️ Débruitage ¦ 🌫️ Khử nhiễu ¦ 🌫️ Pengurangan derau
+adoucit le grain sans perdre les contours ¦ làm mịn hạt mà không mất đường viền ¦ menghaluskan butiran tanpa kehilangan tepi
+🧹 Poussières et rayures ¦ 🧹 Bụi và vết xước ¦ 🧹 Debu dan goresan
+les petits points blancs ou noirs ¦ các chấm nhỏ màu trắng hoặc đen ¦ titik-titik kecil putih atau hitam
+🩹 Plis et fines déchirures ¦ 🩹 Nếp gấp và vết rách nhỏ ¦ 🩹 Lipatan dan sobekan halus
+lignes fines repérées puis comblées ¦ các đường mảnh được tìm thấy rồi lấp lại ¦ garis tipis ditemukan lalu ditutup
+🎚 Contraste et niveaux automatiques ¦ 🎚 Tương phản và mức tự động ¦ 🎚 Kontras dan level otomatis
+noirs bien noirs, blancs bien blancs ¦ đen thật đen, trắng thật trắng ¦ hitam benar-benar hitam, putih benar-benar putih
+🔎 Netteté douce ¦ 🔎 Làm nét nhẹ ¦ 🔎 Penajaman lembut
+un peu plus de piqué ¦ sắc nét hơn một chút ¦ sedikit lebih tajam
+🌈 Colorisation ¦ 🌈 Tô màu ¦ 🌈 Pewarnaan
+couleurs d’époque (photo en noir et blanc) ¦ màu của thời đó (ảnh đen trắng) ¦ warna zaman itu (foto hitam putih)
+la photo a déjà des couleurs : coche si tu veux quand même ¦ ảnh đã có màu: hãy đánh dấu nếu bạn vẫn muốn ¦ foto sudah berwarna: centang jika tetap ingin
+Coche les étapes à garder ; chacune devient un calque « ✨ » que tu peux ensuite cacher ou doser. ↶ défait tout d’un coup. ¦ Đánh dấu các bước muốn giữ; mỗi bước thành một lớp “✨” mà sau này bạn có thể ẩn hoặc giảm bớt. ↶ hoàn tác tất cả cùng lúc. ¦ Centang langkah yang ingin disimpan; masing-masing menjadi lapisan “✨” yang nanti bisa kamu sembunyikan atau kurangi. ↶ mengurungkan semuanya sekaligus.
+Garder : {what} ¦ Giữ: {what} ¦ Simpan: {what}
+détail au centre ¦ chi tiết ở giữa ¦ detail di tengah
+Aperçus… ¦ Xem trước… ¦ Pratinjau…
+aucun pli trouvé à cette intensité ¦ không tìm thấy nếp gấp ở cường độ này ¦ tidak ada lipatan pada intensitas ini
+Coche au moins une étape. ¦ Hãy đánh dấu ít nhất một bước. ¦ Centang setidaknya satu langkah.
+✨ Plis et fines déchirures ¦ ✨ Nếp gấp và vết rách nhỏ ¦ ✨ Lipatan dan sobekan halus
+✨ Poussières et rayures ¦ ✨ Bụi và vết xước ¦ ✨ Debu dan goresan
+✨ Débruitage ¦ ✨ Khử nhiễu ¦ ✨ Pengurangan derau
+✨ Contraste et niveaux ¦ ✨ Tương phản và mức ¦ ✨ Kontras dan level
+✨ Netteté douce ¦ ✨ Làm nét nhẹ ¦ ✨ Penajaman lembut
+✨ Colorisation ¦ ✨ Tô màu ¦ ✨ Pewarnaan
+Colorisation ¦ Tô màu ¦ Pewarnaan
+Couleurs (pinceau) ¦ Màu (cọ) ¦ Warna (kuas)
+✨ Retouches (taches, plis, tampon) ¦ ✨ Chỉnh sửa (vết bẩn, nếp gấp, con dấu) ¦ ✨ Retus (noda, lipatan, stempel klon)
+🪪 Photo d’identité ¦ 🪪 Ảnh thẻ ¦ 🪪 Pasfoto
+Les yeux à l’horizontale, toujours à la même hauteur : tous les portraits faits ainsi ont le même format. ¦ Mắt nằm ngang, luôn ở cùng độ cao: mọi chân dung làm theo cách này đều cùng khổ. ¦ Mata sejajar, selalu pada ketinggian yang sama: semua potret yang dibuat begini punya format yang sama.
+✓ Yeux trouvés sur le visage. ¦ ✓ Đã tìm thấy mắt trên khuôn mặt. ¦ ✓ Mata ditemukan di wajah.
+✓ D’après l’identification de la photo : ajuste les ronds sur les yeux. ¦ ✓ Theo nhận diện của ảnh: hãy chỉnh các vòng tròn vào mắt. ¦ ✓ Dari identifikasi foto: sesuaikan lingkaran di mata.
+⚠️ Visage non trouvé : glisse les deux ronds sur les yeux. ¦ ⚠️ Không tìm thấy khuôn mặt: hãy kéo hai vòng tròn vào mắt. ¦ ⚠️ Wajah tidak ditemukan: seret kedua lingkaran ke mata.
+Plusieurs fiches… ¦ Nhiều hồ sơ… ¦ Beberapa profil…
+✓ Recadrer ¦ ✓ Cắt khung ¦ ✓ Pangkas
+👤 Utiliser comme portrait… ¦ 👤 Dùng làm chân dung… ¦ 👤 Gunakan sebagai potret…
+Recadré en photo d’identité ¦ Đã cắt thành ảnh thẻ ¦ Dipangkas sebagai pasfoto
+3:4 (portrait classique) ¦ 3:4 (chân dung cổ điển) ¦ 3:4 (potret klasik)
+35 × 45 mm (photo d’identité) ¦ 35 × 45 mm (ảnh thẻ) ¦ 35 × 45 mm (pasfoto)
+Marge autour du visage ¦ Lề quanh khuôn mặt ¦ Margin di sekitar wajah
+Hauteur des yeux ¦ Độ cao của mắt ¦ Tinggi mata
+modèle absent ¦ thiếu mô hình ¦ model tidak ada
+Recherche du visage… ¦ Đang tìm khuôn mặt… ¦ Mencari wajah…
+Photo non enregistrée. ¦ Ảnh chưa được lưu. ¦ Foto belum disimpan.
+Utiliser comme portrait de quelle fiche ? ¦ Dùng làm chân dung cho hồ sơ nào? ¦ Gunakan sebagai potret profil yang mana?
+PHOTO D’IDENTITÉ ¦ ẢNH THẺ ¦ PASFOTO
+La photo recadrée est ajoutée aux médias de la fiche, puis devient son portrait (l’ancien portrait reste dans ses médias). ¦ Ảnh đã cắt được thêm vào tư liệu của hồ sơ, rồi trở thành chân dung của hồ sơ (chân dung cũ vẫn ở trong tư liệu). ¦ Foto yang dipangkas ditambahkan ke media profil, lalu menjadi potretnya (potret lama tetap ada di medianya).
+Choisis une personne dans la liste. ¦ Hãy chọn một người trong danh sách. ¦ Pilih seseorang dari daftar.
+RETOUCHE · PHOTO D’IDENTITÉ ¦ CHỈNH SỬA · ẢNH THẺ ¦ RETUS · PASFOTO
+🪪 Portraits de plusieurs fiches ¦ 🪪 Chân dung cho nhiều hồ sơ ¦ 🪪 Potret untuk beberapa profil
+Choisis les fiches : pour chacune, l’app prend son portrait (ou sa première photo), trouve le visage et le cadre au même format que les autres (yeux à la même hauteur). Tu vérifies, puis « Utiliser comme portraits » : chaque photo recadrée entre dans les médias de sa fiche et devient son portrait (l’ancien reste). ¦ Hãy chọn các hồ sơ: với mỗi hồ sơ, ứng dụng lấy chân dung (hoặc ảnh đầu tiên), tìm khuôn mặt và cắt khung cùng khổ với các hồ sơ khác (mắt ở cùng độ cao). Bạn kiểm tra, rồi bấm “Dùng làm chân dung”: mỗi ảnh đã cắt được đưa vào tư liệu của hồ sơ và trở thành chân dung (chân dung cũ vẫn còn). ¦ Pilih profilnya: untuk masing-masing, aplikasi mengambil potretnya (atau foto pertamanya), menemukan wajah, dan membingkainya dengan format yang sama seperti yang lain (mata pada ketinggian yang sama). Kamu memeriksa, lalu “Gunakan sebagai potret”: setiap foto yang dipangkas masuk ke media profilnya dan menjadi potretnya (yang lama tetap ada).
+🔍 Préparer les portraits ¦ 🔍 Chuẩn bị chân dung ¦ 🔍 Siapkan potret
+Aucune fiche choisie pour l’instant ¦ Chưa chọn hồ sơ nào ¦ Belum ada profil dipilih
+Choisis une ou plusieurs personnes ci-dessus, puis « 🔍 Préparer les portraits ». ¦ Hãy chọn một hoặc nhiều người ở trên, rồi bấm “🔍 Chuẩn bị chân dung”. ¦ Pilih satu orang atau lebih di atas, lalu “🔍 Siapkan potret”.
+Choisis d’abord une ou plusieurs fiches. ¦ Hãy chọn một hoặc nhiều hồ sơ trước. ¦ Pilih satu profil atau lebih dulu.
+aucune photo dans la fiche ¦ hồ sơ không có ảnh nào ¦ tidak ada foto di profil
+yeux trouvés ¦ đã tìm thấy mắt ¦ mata ditemukan
+d’après l’identification ¦ theo nhận diện ¦ dari identifikasi
+✓ portrait mis à jour ¦ ✓ đã cập nhật chân dung ¦ ✓ potret diperbarui
+Utiliser comme portraits ¦ Dùng làm chân dung ¦ Gunakan sebagai potret
+La rotation n’est pas encore prête : réessaie dans un instant. ¦ Chức năng xoay chưa sẵn sàng: hãy thử lại sau giây lát. ¦ Rotasi belum siap: coba lagi sebentar lagi.
+Rotation de l’image ¦ Xoay ảnh ¦ Rotasi gambar
+Rotation de l’image : 90° horaire ¦ Xoay ảnh: 90° theo chiều kim đồng hồ ¦ Rotasi gambar: 90° searah jarum jam
+Rotation de l’image : 90° antihoraire ¦ Xoay ảnh: 90° ngược chiều kim đồng hồ ¦ Rotasi gambar: 90° berlawanan arah jarum jam
+Rotation de l’image : 180° ¦ Xoay ảnh: 180° ¦ Rotasi gambar: 180°
+Rotation de l’image : {a}° horaire ¦ Xoay ảnh: {a}° theo chiều kim đồng hồ ¦ Rotasi gambar: {a}° searah jarum jam
+Rotation de l’image : {a}° antihoraire ¦ Xoay ảnh: {a}° ngược chiều kim đồng hồ ¦ Rotasi gambar: {a}° berlawanan arah jarum jam
+Symétrie horizontale de l’image ¦ Lật ảnh theo chiều ngang ¦ Balik gambar secara horizontal
+Symétrie verticale de l’image ¦ Lật ảnh theo chiều dọc ¦ Balik gambar secara vertikal
+Perspective figée ¦ Đã cố định phối cảnh ¦ Perspektif dikunci
+Le recadrage d’avant a été retiré (il ne tenait plus droit) : refais-le si besoin, ou ↶ Annuler. ¦ Lần cắt khung trước đã bị bỏ (nó không còn thẳng): hãy làm lại nếu cần, hoặc ↶ Hoàn tác. ¦ Pangkasan sebelumnya dihapus (sudah tidak lurus): ulangi jika perlu, atau ↶ Urungkan.
+📐 Redresser l’horizon ¦ 📐 Làm thẳng đường chân trời ¦ 📐 Luruskan cakrawala
+L’angle mesuré sur ta ligne : la photo tourne de cet angle pour la remettre droite. ¦ Góc đo được trên đường bạn vẽ: ảnh xoay theo góc này để thẳng lại. ¦ Sudut yang diukur pada garismu: foto diputar sebesar sudut ini agar lurus.
+Coins ajoutés autour ¦ Các góc được thêm xung quanh ¦ Sudut yang ditambahkan di sekeliling
+Transparents (PNG) ¦ Trong suốt (PNG) ¦ Transparan (PNG)
+✂️ Recadrer pour enlever les coins vides ¦ ✂️ Cắt khung để bỏ các góc trống ¦ ✂️ Pangkas untuk menghapus sudut kosong
+Tous les calques, masques, textes et la sélection tournent avec la photo. ↶ Annuler (⌘Z) revient comme avant. ¦ Mọi lớp, mặt nạ, văn bản và vùng chọn đều xoay theo ảnh. ↶ Hoàn tác (⌘Z) đưa về như trước. ¦ Semua lapisan, masker, teks, dan seleksi ikut berputar dengan foto. ↶ Urungkan (⌘Z) mengembalikan seperti semula.
+Donne un angle entre 0,01 et 359,99°. ¦ Hãy nhập một góc từ 0,01 đến 359,99°. ¦ Isi sudut antara 0,01 dan 359,99°.
+Trace une ligne le long de l’horizon (ou d’un mur bien droit) : la photo tournera pour la remettre droite. Échap pour arrêter. ¦ Vẽ một đường dọc theo chân trời (hoặc một bức tường thẳng): ảnh sẽ xoay để thẳng lại. Esc để dừng. ¦ Buat garis di sepanjang cakrawala (atau dinding yang lurus): foto akan berputar agar lurus. Esc untuk berhenti.
+Cette ligne est déjà droite : rien à tourner. ¦ Đường này đã thẳng: không cần xoay. ¦ Garis ini sudah lurus: tidak ada yang perlu diputar.
+Photo prise avec le téléphone tourné : elle est enregistrée couchée. ¦ Ảnh chụp khi điện thoại bị xoay: nó được lưu nằm nghiêng. ¦ Foto diambil dengan ponsel diputar: tersimpan dalam posisi miring.
+↻ Remettre droite ¦ ↻ Xoay thẳng lại ¦ ↻ Tegakkan
+Photo remise droite (orientation du téléphone) ¦ Đã xoay thẳng ảnh (hướng điện thoại) ¦ Foto ditegakkan (orientasi ponsel)
+Les retouches en cours seront perdues (💾 Enregistrer le projet les garde pour plus tard). ¦ Các chỉnh sửa đang làm sẽ bị mất (💾 Lưu dự án giữ chúng lại để làm tiếp sau). ¦ Retus yang sedang dikerjakan akan hilang (💾 Simpan proyek menyimpannya untuk nanti).
+Passer à la retouche simple ? ¦ Chuyển sang chỉnh sửa đơn giản? ¦ Beralih ke retus sederhana?
+Passer sans enregistrer ¦ Chuyển mà không lưu ¦ Beralih tanpa menyimpan
+Le PSD n’est pas encore prêt : réessaie dans un instant. ¦ PSD chưa sẵn sàng: hãy thử lại sau giây lát. ¦ PSD belum siap: coba lagi sebentar lagi.
+L’assemblage de photos n’est pas encore prêt. ¦ Chức năng ghép ảnh chưa sẵn sàng. ¦ Penggabungan foto belum siap.
+Cet outil n’est pas encore prêt : réessaie dans un instant. ¦ Công cụ này chưa sẵn sàng: hãy thử lại sau giây lát. ¦ Alat ini belum siap: coba lagi sebentar lagi.
+Recherche du sujet… ¦ Đang tìm chủ thể… ¦ Mencari subjek…
+Sujet introuvable : le fond touche tout le bord. Essaie avec moins de tolérance (🪄), ou le lasso. ¦ Không tìm thấy chủ thể: nền chạm khắp mép ảnh. Hãy thử với dung sai thấp hơn (🪄), hoặc dùng lasso. ¦ Subjek tidak ditemukan: latar menyentuh seluruh tepi. Coba dengan toleransi lebih kecil (🪄), atau laso.
+Sujet sélectionné : ⇧ + baguette ou lasso pour ajouter, ⌥ pour enlever ; « Masque » pour l’appliquer. Tolérance (🪄) : jusqu’où va le fond. ¦ Đã chọn chủ thể: ⇧ + đũa thần hoặc lasso để thêm, ⌥ để bớt; “Mặt nạ” để áp dụng. Dung sai (🪄): nền lan đến đâu. ¦ Subjek terseleksi: ⇧ + tongkat atau laso untuk menambah, ⌥ untuk mengurangi; “Masker” untuk menerapkannya. Toleransi (🪄): seberapa jauh latarnya.
+Sujet sélectionné ¦ Đã chọn chủ thể ¦ Subjek terseleksi
+La photo semble déjà droite. ¦ Ảnh có vẻ đã thẳng. ¦ Foto tampaknya sudah lurus.
+Des corrections (taches, tampon) sont déjà faites : elles vont bouger avec la remise à plat. ¦ Đã có một số chỉnh sửa (vết bẩn, con dấu): chúng sẽ dịch chuyển theo khi làm phẳng. ¦ Beberapa koreksi (noda, stempel klon) sudah dilakukan: koreksi itu akan ikut bergeser saat diratakan.
+Redresser la perspective ? ¦ Sửa phối cảnh? ¦ Perbaiki perspektif?
+Perspective redressée ¦ Đã sửa phối cảnh ¦ Perspektif diperbaiki
+Perspective enlevée ¦ Đã bỏ phối cảnh ¦ Perspektif dihapus
+Peins les couleurs (pinceau doux) : le calque est en fusion « Couleur », la lumière de la photo est gardée. 🧽 pour corriger, opacité du calque pour doser. ¦ Tô màu (cọ mềm): lớp ở chế độ hoà trộn “Màu”, ánh sáng của ảnh được giữ. 🧽 để sửa, độ mờ đục của lớp để giảm bớt. ¦ Lukis warnanya (kuas lembut): lapisan dalam mode campuran “Warna”, cahaya foto tetap terjaga. 🧽 untuk mengoreksi, opasitas lapisan untuk mengurangi.
+Recherche des taches… ¦ Đang tìm vết bẩn… ¦ Mencari noda…
+Aucune tache trouvée : augmente la sensibilité ou la taille. ¦ Không tìm thấy vết bẩn: hãy tăng độ nhạy hoặc kích thước. ¦ Tidak ada noda ditemukan: naikkan kepekaan atau ukurannya.
+✨ Jaunissement enlevé ¦ ✨ Đã xoá ố vàng ¦ ✨ Warna kuning dihilangkan
+Jaunissement enlevé sur le calque de réglage « ✨ Jaunissement enlevé » : la photo n’est pas touchée. ¦ Đã xoá ố vàng trên lớp điều chỉnh “✨ Đã xoá ố vàng”: ảnh gốc không bị đụng đến. ¦ Warna kuning dihilangkan di lapisan penyesuaian “✨ Warna kuning dihilangkan”: fotonya tidak diubah.
+Jaunissement enlevé (calque de réglage) ¦ Đã xoá ố vàng (lớp điều chỉnh) ¦ Warna kuning dihilangkan (lapisan penyesuaian)
+Entoure d’abord le visage avec l’ellipse ◯ (glisse sur la photo), puis reclique « Visage plus net ». ¦ Hãy khoanh khuôn mặt bằng hình elip ◯ trước (kéo trên ảnh), rồi bấm lại “Mặt rõ nét hơn”. ¦ Lingkari dulu wajahnya dengan elips ◯ (seret di foto), lalu klik lagi “Wajah lebih tajam”.
+Visage débruité et accentué sur un calque à part : son opacité dose l’effet. ¦ Khuôn mặt đã được khử nhiễu và làm nét trên một lớp riêng: độ mờ đục của lớp quyết định mức hiệu ứng. ¦ Wajah dikurangi deraunya dan ditajamkan di lapisan terpisah: opasitasnya mengatur efeknya.
+Correcteur prêt : glisse le long de la rayure ou du pli (zoome pour être précis). ¦ Công cụ sửa vết đã sẵn sàng: kéo dọc theo vết xước hoặc nếp gấp (phóng to để chính xác hơn). ¦ Alat perbaikan siap: seret di sepanjang goresan atau lipatan (perbesar agar tepat).
+✨ Vieille photo ravivée ¦ ✨ Ảnh cũ được làm sống lại ¦ ✨ Foto lama dihidupkan kembali
+✨ Réglage automatique ¦ ✨ Tự động điều chỉnh ¦ ✨ Penyesuaian otomatis
+Fais d’abord une sélection. ¦ Hãy tạo một vùng chọn trước. ¦ Buat seleksi dulu.
+Masque qui cache tout ¦ Mặt nạ che toàn bộ ¦ Masker yang menyembunyikan semuanya
+Ce calque n’a pas de masque (Calque → Ajouter un masque). ¦ Lớp này không có mặt nạ (Lớp → Thêm mặt nạ). ¦ Lapisan ini tidak punya masker (Lapisan → Tambah masker).
+Ce calque n’a pas de masque. ¦ Lớp này không có mặt nạ. ¦ Lapisan ini tidak punya masker.
+Sélection inversée ¦ Đã đảo ngược vùng chọn ¦ Seleksi dibalik
+Agrandir la sélection ¦ Mở rộng vùng chọn ¦ Perluas seleksi
+Réduire la sélection ¦ Thu hẹp vùng chọn ¦ Perkecil seleksi
+De combien de points (de l’aperçu) ? ¦ Bao nhiêu điểm ảnh (của bản xem trước)? ¦ Berapa piksel (dari pratinjau)?
+Sélection agrandie ¦ Đã mở rộng vùng chọn ¦ Seleksi diperluas
+Sélection réduite ¦ Đã thu hẹp vùng chọn ¦ Seleksi diperkecil
+Contour progressif de la sélection ¦ Làm mềm viền vùng chọn ¦ Feather seleksi
+Copie de la sélection ¦ Bản sao của vùng chọn ¦ Salinan seleksi
+Sélection copiée sur un calque ¦ Đã sao chép vùng chọn sang một lớp ¦ Seleksi disalin ke lapisan
+Remplissage ¦ Tô đầy ¦ Isian
+Zone effacée de la photo : elle sera transparente (image enregistrée en PNG). ¦ Đã xoá vùng trên ảnh: nó sẽ trong suốt (ảnh được lưu ở dạng PNG). ¦ Area dihapus dari foto: area itu akan transparan (gambar disimpan sebagai PNG).
+Sélection effacée ¦ Đã xoá vùng chọn ¦ Seleksi dihapus
+Recadré sur la sélection ¦ Đã cắt khung theo vùng chọn ¦ Dipangkas sesuai seleksi
+Filtres de ce calque ¦ Bộ lọc của lớp này ¦ Filter lapisan ini
+Plus tôt ¦ Trước đó ¦ Sebelumnya
+un filtre… ¦ một bộ lọc… ¦ sebuah filter…
+＋ Ajouter ¦ ＋ Thêm ¦ ＋ Tambah
+✨ Menu <b>Filtre</b> : chaque filtre se pose sur son propre calque (rien n’est détruit) : on le règle, on le dose avec l’opacité du calque, on le limite avec un masque 🎭, on le cache 👁. ¦ ✨ Menu <b>Bộ lọc</b>: mỗi bộ lọc nằm trên một lớp riêng (không gì bị phá huỷ): bạn chỉnh nó, giảm bớt bằng độ mờ đục của lớp, giới hạn bằng mặt nạ 🎭, ẩn nó 👁. ¦ ✨ Menu <b>Filter</b>: setiap filter ada di lapisannya sendiri (tidak ada yang rusak): kamu mengaturnya, menguranginya dengan opasitas lapisan, membatasinya dengan masker 🎭, menyembunyikannya 👁.
+Réglages remis à zéro ¦ Đã đặt lại các điều chỉnh ¦ Penyesuaian diatur ulang
+Point de courbe enlevé ¦ Đã bỏ điểm trên đường cong ¦ Titik kurva dihapus
+Supprimer ce point ¦ Xoá điểm này ¦ Hapus titik ini
+Point de la courbe ¦ Điểm trên đường cong ¦ Titik kurva
+Masque en rouge : ce qui est caché (touche \ pour revenir) ¦ Mặt nạ màu đỏ: phần bị ẩn (phím \ để quay lại) ¦ Masker merah: bagian yang tersembunyi (tombol \ untuk kembali)
+Pas encore enregistré comme projet : 💾 Enregistrer garde tout le travail pour continuer plus tard ¦ Chưa lưu thành dự án: 💾 Lưu giữ toàn bộ công việc để làm tiếp sau ¦ Belum disimpan sebagai proyek: 💾 Simpan menyimpan semua pekerjaan untuk dilanjutkan nanti
+Enregistrer le projet sous un autre nom ¦ Lưu dự án dưới tên khác ¦ Simpan proyek dengan nama lain
+Nom du nouveau projet (pour le retrouver dans « 📂 Projets… ») : ¦ Tên dự án mới (để tìm lại trong “📂 Dự án…”): ¦ Nama proyek baru (untuk menemukannya di “📂 Proyek…”):
+Les retouches en cours seront perdues. ¦ Các chỉnh sửa đang làm sẽ bị mất. ¦ Retus yang sedang dikerjakan akan hilang.
+Ouvrir un autre projet sans enregistrer ce travail ? ¦ Mở dự án khác mà không lưu công việc này? ¦ Buka proyek lain tanpa menyimpan pekerjaan ini?
+Ouvrir sans enregistrer ¦ Mở mà không lưu ¦ Buka tanpa menyimpan
+affichée ¦ đang hiển thị ¦ ditampilkan
+en cours de retouche ¦ đang chỉnh sửa ¦ sedang diretus
+Voir, comparer, revenir, renommer, supprimer (L3) ¦ Xem, so sánh, quay lại, đổi tên, xoá (L3) ¦ Lihat, bandingkan, kembali, ganti nama, hapus (L3)
+Voir, comparer, revenir, renommer, supprimer ¦ Xem, so sánh, quay lại, đổi tên, xoá ¦ Lihat, bandingkan, kembali, ganti nama, hapus
+l’original est toujours gardé ¦ bản gốc luôn được giữ ¦ aslinya selalu disimpan
+Original ¦ Bản gốc ¦ Asli
+Quitter cette retouche sans l’enregistrer ? ¦ Rời phiên chỉnh sửa này mà không lưu? ¦ Tinggalkan retus ini tanpa menyimpannya?
+Pas de versions pour cette image. ¦ Ảnh này không có phiên bản nào. ¦ Tidak ada versi untuk gambar ini.
+Bicubique, plus lisse (pour agrandir) ¦ Bicubic, mịn hơn (để phóng to) ¦ Bikubik, lebih halus (untuk memperbesar)
+Bicubique, plus net (pour réduire) ¦ Bicubic, nét hơn (để thu nhỏ) ¦ Bikubik, lebih tajam (untuk memperkecil)
+Bilinéaire ¦ Bilinear ¦ Bilinear
+Au plus proche (contours nets, pixels) ¦ Lân cận gần nhất (viền sắc, điểm ảnh) ¦ Tetangga terdekat (tepi tajam, piksel)
+La taille de l’image enregistrée ou exportée (Image → Taille de l’image, Taille de la zone de travail) ¦ Kích thước của ảnh được lưu hoặc xuất (Ảnh → Kích thước ảnh, Kích thước vùng làm việc) ¦ Ukuran gambar yang disimpan atau diekspor (Gambar → Ukuran gambar, Ukuran kanvas)
+📏 Taille de l’image ¦ 📏 Kích thước ảnh ¦ 📏 Ukuran gambar
+pixels ¦ điểm ảnh ¦ piksel
+pour cent ¦ phần trăm ¦ persen
+Ajuster à un format ¦ Khớp với một khổ ¦ Sesuaikan dengan format
+— garder ces mesures — ¦ — giữ các số đo này — ¦ — pertahankan ukuran ini —
+🔗 Conserver les proportions ¦ 🔗 Giữ tỉ lệ ¦ 🔗 Pertahankan proporsi
+Résolution ¦ Độ phân giải ¦ Resolusi
+Rééchantillonner ¦ Lấy mẫu lại ¦ Sampel ulang
+Méthode ¦ Phương pháp ¦ Metode
+À l’impression ¦ Khi in ¦ Saat dicetak
+↺ Remettre la taille d’origine ¦ ↺ Đặt lại kích thước gốc ¦ ↺ Kembalikan ukuran asli
+La photo reste en pleine qualité pendant la retouche : la taille choisie s’applique quand tu enregistres ou exportes l’image. ↶ Annuler (⌘Z) revient à la taille d’avant. ¦ Ảnh vẫn ở chất lượng đầy đủ trong khi chỉnh sửa: kích thước đã chọn được áp dụng khi bạn lưu hoặc xuất ảnh. ↶ Hoàn tác (⌘Z) quay về kích thước trước. ¦ Foto tetap berkualitas penuh selama diretus: ukuran yang dipilih berlaku saat kamu menyimpan atau mengekspor gambar. ↶ Urungkan (⌘Z) kembali ke ukuran sebelumnya.
+✓ Assez grande pour imprimer en A5 à 300 ppp. ¦ ✓ Đủ lớn để in khổ A5 ở 300 dpi. ¦ ✓ Cukup besar untuk dicetak A5 pada 300 dpi.
+⚠️ Trop petite pour imprimer en A5 à 300 ppp (il faut 1748 × 2480 px). ¦ ⚠️ Quá nhỏ để in khổ A5 ở 300 dpi (cần 1748 × 2480 px). ¦ ⚠️ Terlalu kecil untuk dicetak A5 pada 300 dpi (perlu 1748 × 2480 px).
+Choisis une taille entre 1 et 30 000 pixels de côté (260 millions de pixels au plus). ¦ Hãy chọn kích thước từ 1 đến 30 000 điểm ảnh mỗi cạnh (tối đa 260 triệu điểm ảnh). ¦ Pilih ukuran antara 1 dan 30.000 piksel per sisi (paling banyak 260 juta piksel).
+⬚ Taille de la zone de travail ¦ ⬚ Kích thước vùng làm việc ¦ ⬚ Ukuran kanvas
+Nouvelle taille ¦ Kích thước mới ¦ Ukuran baru
+Ancrage ¦ Điểm neo ¦ Jangkar
+Où reste l’image ¦ Nơi ảnh được giữ lại ¦ Letak gambar tetap
+Relative (ajouter à la taille actuelle) ¦ Tương đối (cộng thêm vào kích thước hiện tại) ¦ Relatif (tambahkan ke ukuran sekarang)
+Au centre ¦ Ở giữa ¦ Di tengah
+L’image reste à cet endroit ; la toile s’agrandit (ou se coupe) autour. ¦ Ảnh giữ nguyên ở chỗ này; vùng làm việc mở rộng (hoặc bị cắt) xung quanh. ¦ Gambar tetap di titik ini; kanvas membesar (atau terpotong) di sekelilingnya.
+Fond de la zone ajoutée ¦ Nền của vùng được thêm ¦ Latar area yang ditambahkan
+Transparent (PNG) ¦ Trong suốt (PNG) ¦ Transparan (PNG)
+↺ Remettre la zone de départ ¦ ↺ Đặt lại vùng làm việc ban đầu ¦ ↺ Kembalikan kanvas awal
+↶ Annuler (⌘Z) revient à la zone d’avant. ¦ ↶ Hoàn tác (⌘Z) quay về vùng làm việc trước. ¦ ↶ Urungkan (⌘Z) kembali ke kanvas sebelumnya.
+Choisis une taille entre 1 et 30 000 pixels de côté. ¦ Hãy chọn kích thước từ 1 đến 30 000 điểm ảnh mỗi cạnh. ¦ Pilih ukuran antara 1 dan 30.000 piksel per sisi.
+Informations de l’image ¦ Thông tin ảnh ¦ Informasi gambar
+Ces informations sont écrites dans l’image enregistrée ou exportée (XMP, lisible par Photoshop, Lightroom, l’Explorateur…). ¦ Những thông tin này được ghi vào ảnh khi lưu hoặc xuất (XMP, đọc được bằng Photoshop, Lightroom, Explorer…). ¦ Informasi ini ditulis ke dalam gambar yang disimpan atau diekspor (XMP, bisa dibaca Photoshop, Lightroom, Explorer…).
+Droits (copyright) ¦ Bản quyền (copyright) ¦ Hak cipta (copyright)
+Personnes reliées ¦ Người được liên kết ¦ Orang yang terhubung
+Image trop grande pour être enregistrée par le navigateur. ¦ Ảnh quá lớn để trình duyệt lưu được. ¦ Gambar terlalu besar untuk disimpan oleh peramban.
+Image trop grande pour le navigateur. ¦ Ảnh quá lớn đối với trình duyệt. ¦ Gambar terlalu besar untuk peramban.
+Copie retouchée ajoutée aux mêmes fiches. ¦ Đã thêm bản sao đã chỉnh sửa vào cùng các hồ sơ. ¦ Salinan hasil retus ditambahkan ke profil yang sama.
+Image enregistrée dans les Médias. ¦ Đã lưu ảnh vào Tư liệu. ¦ Gambar disimpan di Media.
+Nouvelle version affichée. L’original est gardé dans les versions. ¦ Đang hiện phiên bản mới. Bản gốc được giữ trong các phiên bản. ¦ Versi baru ditampilkan. Aslinya disimpan di versi.
+Version enregistrée (non affichée). ¦ Đã lưu phiên bản (không hiển thị). ¦ Versi disimpan (tidak ditampilkan).
+Ouverture de la photo ¦ Đang mở ảnh ¦ Membuka foto
+La photo de départ n’a plus la même taille : vérifie les calques. ¦ Ảnh ban đầu không còn cùng kích thước: hãy kiểm tra các lớp. ¦ Foto awal ukurannya sudah berbeda: periksa lapisannya.
+Supprimer le projet (les photos et leurs versions restent) ¦ Xoá dự án (ảnh và các phiên bản vẫn còn) ¦ Hapus proyek (foto dan versinya tetap ada)
+Aucun projet de retouche pour l’instant ¦ Chưa có dự án chỉnh sửa nào ¦ Belum ada proyek retus
+Dans la Retouche, « 💾 Enregistrer le projet ». ¦ Trong Chỉnh sửa ảnh, bấm “💾 Lưu dự án”. ¦ Di Retus, “💾 Simpan proyek”.
+Renommer le projet ¦ Đổi tên dự án ¦ Ganti nama proyek
+La photo et ses versions restent. ¦ Ảnh và các phiên bản vẫn còn. ¦ Foto dan versinya tetap ada.
+Écran 16:9 — 1920 × 1080 ¦ Màn hình 16:9 — 1920 × 1080 ¦ Layar 16:9 — 1920 × 1080
+Carré — 1080 × 1080 ¦ Vuông — 1080 × 1080 ¦ Persegi — 1080 × 1080
+Carte postale — 1500 × 2100 ¦ Bưu thiếp — 1500 × 2100 ¦ Kartu pos — 1500 × 2100
+A4 portrait (150 dpi) — 1240 × 1754 ¦ A4 dọc (150 dpi) — 1240 × 1754 ¦ A4 potret (150 dpi) — 1240 × 1754
+A4 paysage (150 dpi) — 1754 × 1240 ¦ A4 ngang (150 dpi) — 1754 × 1240 ¦ A4 lanskap (150 dpi) — 1754 × 1240
+A4 portrait (300 dpi) — 2480 × 3508 ¦ A4 dọc (300 dpi) — 2480 × 3508 ¦ A4 potret (300 dpi) — 2480 × 3508
+Autre taille… ¦ Kích thước khác… ¦ Ukuran lain…
+⬜ Partir d’un canevas vide ¦ ⬜ Bắt đầu từ một khung trống ¦ ⬜ Mulai dari kanvas kosong
+⬜ Canevas vide ¦ ⬜ Khung trống ¦ ⬜ Kanvas kosong
+Créer et ouvrir ¦ Tạo và mở ¦ Buat dan buka
+Une couleur… ¦ Một màu… ¦ Sebuah warna…
+Le canevas est ajouté aux Médias ; on y met ensuite des calques, des groupes, du texte, des formes, des photos (Sélection → calque)… ¦ Khung được thêm vào Tư liệu; sau đó bạn đặt lên đó các lớp, nhóm, văn bản, hình, ảnh (Vùng chọn → lớp)… ¦ Kanvas ditambahkan ke Media; lalu kamu menaruh lapisan, grup, teks, bentuk, foto di atasnya (Seleksi → lapisan)…
+Taille entre 16 et 8 000 pixels de côté. ¦ Kích thước từ 16 đến 8 000 điểm ảnh mỗi cạnh. ¦ Ukuran antara 16 dan 8.000 piksel per sisi.
+Canevas trop grand pour le navigateur. ¦ Khung quá lớn đối với trình duyệt. ¦ Kanvas terlalu besar untuk peramban.
+Création impossible. ¦ Không tạo được. ¦ Tidak bisa dibuat.
+Canevas ¦ Khung vẽ ¦ Kanvas
+Restaurer cette photo ¦ Phục hồi ảnh này ¦ Pulihkan foto ini
+Retoucher cette photo ¦ Chỉnh sửa ảnh này ¦ Retus foto ini
+Une photo importée est ajoutée aux Médias (sans être rattachée à une fiche) ; ses retouches sont gardées comme versions. ¦ Ảnh được nhập sẽ thêm vào Tư liệu (không liên kết với hồ sơ nào); các chỉnh sửa của nó được giữ dưới dạng phiên bản. ¦ Foto yang diimpor ditambahkan ke Media (tanpa terhubung ke profil); hasil retusnya disimpan sebagai versi.
+Rouvrir un travail de retouche enregistré ¦ Mở lại một công việc chỉnh sửa đã lưu ¦ Buka lagi pekerjaan retus yang tersimpan
+📂 Projets… ¦ 📂 Dự án… ¦ 📂 Proyek…
+Une image vide, pour dessiner, écrire ou assembler des calques ¦ Một ảnh trống, để vẽ, viết hoặc ghép các lớp ¦ Gambar kosong, untuk menggambar, menulis, atau menggabungkan lapisan
+Trop grande : {w} × {h} points. L’agrandissement est limité à {max} points de côté (et {mp} millions de points). ¦ Quá lớn: {w} × {h} điểm ảnh. Việc phóng to bị giới hạn ở {max} điểm ảnh mỗi cạnh (và {mp} triệu điểm ảnh). ¦ Terlalu besar: {w} × {h} piksel. Pembesaran dibatasi {max} piksel per sisi (dan {mp} juta piksel).
+Ta sélection est prise comme ciel ¦ Vùng chọn của bạn được dùng làm bầu trời ¦ Seleksimu dipakai sebagai langit
+Ciel trouvé : {cov} de la photo ¦ Đã tìm thấy bầu trời: {cov} của ảnh ¦ Langit ditemukan: {cov} dari foto
+calques « Ciel » et « Harmonisation » ¦ các lớp “Bầu trời” và “Hài hoà” ¦ lapisan “Langit” dan “Penyelarasan”
+Ciel remplacé ({what}) ¦ Đã thay bầu trời ({what}) ¦ Langit diganti ({what})
+Personne détourée (dans ton rectangle) : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Đã tách người (trong hình chữ nhật của bạn): hãy chọn nền; “Sửa đường viền” để chỉnh bằng cọ. ¦ Orang dipisahkan (di dalam persegimu): pilih latarnya; “Rapikan kontur” untuk mengoreksi dengan kuas.
+Personne détourée : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Đã tách người: hãy chọn nền; “Sửa đường viền” để chỉnh bằng cọ. ¦ Orang dipisahkan: pilih latarnya; “Rapikan kontur” untuk mengoreksi dengan kuas.
+{w} × {h} points aujourd’hui ¦ hiện tại {w} × {h} điểm ảnh ¦ sekarang {w} × {h} piksel
+Cette image est déjà grande : l’agrandissement est limité à {max} points de côté. ¦ Ảnh này đã lớn: việc phóng to bị giới hạn ở {max} điểm ảnh mỗi cạnh. ¦ Gambar ini sudah besar: pembesaran dibatasi {max} piksel per sisi.
+×4 donnerait plus de {max} points de côté : seulement ×2. ¦ ×4 sẽ vượt quá {max} điểm ảnh mỗi cạnh: chỉ ×2. ¦ ×4 akan melebihi {max} piksel per sisi: hanya ×2.
+Image agrandie téléchargée ({w} × {h}). ¦ Đã tải xuống ảnh phóng to ({w} × {h}). ¦ Gambar yang diperbesar diunduh ({w} × {h}).
+Image agrandie ×{k} ({w} × {h}) rangée dans les médias. ¦ Đã lưu ảnh phóng to ×{k} ({w} × {h}) vào tư liệu. ¦ Gambar diperbesar ×{k} ({w} × {h}) disimpan di media.
+Nouvelle version agrandie ×{k} ({w} × {h}) affichée ; l’original reste dans les versions. ¦ Đang hiện phiên bản mới phóng to ×{k} ({w} × {h}); bản gốc vẫn ở trong các phiên bản. ¦ Versi baru diperbesar ×{k} ({w} × {h}) ditampilkan; aslinya tetap di versi.
+☀️ Bleu dégagé ¦ ☀️ Trời xanh trong ¦ ☀️ Biru cerah
+⛅ Beaux nuages ¦ ⛅ Mây đẹp ¦ ⛅ Awan indah
+🌅 Coucher de soleil ¦ 🌅 Hoàng hôn ¦ 🌅 Matahari terbenam
+⛈️ Ciel orageux ¦ ⛈️ Trời giông bão ¦ ⛈️ Langit badai
+🌫️ Ciel blanc d’hiver ¦ 🌫️ Trời trắng mùa đông ¦ 🌫️ Langit putih musim dingin
+Agrandissement arrêté. ¦ Đã dừng phóng to. ¦ Pembesaran dihentikan.
+Fil de calcul en panne. ¦ Luồng tính toán bị lỗi. ¦ Proses perhitungan gagal.
+Recherche du ciel… ¦ Đang tìm bầu trời… ¦ Mencari langit…
+Je ne trouve pas de ciel : il doit toucher le haut de la photo et être assez uni. Sélectionne-le toi-même (🪄 baguette, ➰ lasso), puis recommence : ta sélection sera prise comme ciel. ¦ Tôi không tìm thấy bầu trời: nó phải chạm mép trên của ảnh và khá đều màu. Hãy tự chọn nó (🪄 đũa thần, ➰ lasso), rồi làm lại: vùng chọn của bạn sẽ được dùng làm bầu trời. ¦ Langit tidak ditemukan: langit harus menyentuh bagian atas foto dan cukup rata. Seleksi sendiri (🪄 tongkat, ➰ laso), lalu ulangi: seleksimu akan dipakai sebagai langit.
+Harmonisation du premier plan ¦ Hài hoà tiền cảnh ¦ Penyelarasan latar depan
+Ciel ¦ Bầu trời ¦ Langit
+☁️ Remplacer le ciel ¦ ☁️ Thay bầu trời ¦ ☁️ Ganti langit
+Une photo de ciel : de la base, ou de l’ordinateur ¦ Một ảnh bầu trời: từ cơ sở dữ liệu, hoặc từ máy tính ¦ Foto langit: dari basis data, atau dari komputer
+Une image… ¦ Một ảnh… ¦ Sebuah gambar…
+Taille du nouveau ciel ¦ Kích thước bầu trời mới ¦ Ukuran langit baru
+Position verticale ¦ Vị trí dọc ¦ Posisi vertikal
+Position horizontale ¦ Vị trí ngang ¦ Posisi horizontal
+Avec une taille au-dessus de 100 % : quelle partie du ciel se voit (0 = le haut). ¦ Với kích thước trên 100 %: phần nào của bầu trời được thấy (0 = phần trên cùng). ¦ Dengan ukuran di atas 100 %: bagian langit mana yang terlihat (0 = bagian atas).
+Fondu à l’horizon ¦ Hoà ở đường chân trời ¦ Baurkan di cakrawala
+Adoucit la limite entre le ciel et la terre (arbres, toits) : plus haut, plus fondu. ¦ Làm mềm ranh giới giữa trời và đất (cây, mái nhà): càng cao càng hoà. ¦ Melembutkan batas antara langit dan daratan (pohon, atap): makin tinggi, makin membaur.
+Harmoniser le premier plan ¦ Hài hoà tiền cảnh ¦ Selaraskan latar depan
+Le paysage prend un peu la couleur et la lumière du nouveau ciel, pour que tout aille ensemble. ¦ Phong cảnh nhận một chút màu và ánh sáng của bầu trời mới, để mọi thứ hợp nhau. ¦ Pemandangan mengambil sedikit warna dan cahaya langit baru, agar semuanya serasi.
+Opacité du ciel ¦ Độ mờ đục của bầu trời ¦ Opasitas langit
+Peindre le masque du calque « Ciel » : ⬛ cacher (là où le ciel ne doit pas passer), ⬜ montrer ¦ Tô mặt nạ của lớp “Bầu trời”: ⬛ ẩn (chỗ bầu trời không được hiện), ⬜ hiện ¦ Lukis masker lapisan “Langit”: ⬛ sembunyikan (di tempat langit tidak boleh terlihat), ⬜ tampilkan
+🖌 Corriger le masque ¦ 🖌 Sửa mặt nạ ¦ 🖌 Koreksi masker
+Rien n’est détruit : le ciel est un calque avec un masque. Si un bout de ciel manque ou déborde : « Corriger le masque », ou sélectionne le ciel toi-même (🪄, ➰) et relance. ¦ Không gì bị phá huỷ: bầu trời là một lớp có mặt nạ. Nếu thiếu một mảnh trời hoặc bị tràn: “Sửa mặt nạ”, hoặc tự chọn bầu trời (🪄, ➰) rồi làm lại. ¦ Tidak ada yang rusak: langit adalah lapisan dengan masker. Jika ada bagian langit yang kurang atau meluber: “Koreksi masker”, atau seleksi sendiri langitnya (🪄, ➰) lalu ulangi.
+Une photo de ciel ¦ Một ảnh bầu trời ¦ Foto langit
+Prendre ce ciel ¦ Dùng bầu trời này ¦ Pakai langit ini
+Une photo de la base, ou une image de l’ordinateur (elle entre dans les médias). ¦ Một ảnh từ cơ sở dữ liệu, hoặc một ảnh từ máy tính (nó sẽ vào tư liệu). ¦ Foto dari basis data, atau gambar dari komputer (masuk ke media).
+Tu peins le masque du ciel : ⬛ cacher là où le ciel déborde (feuillage, toits), ⬜ montrer là où il manque. Puis « ✓ OK ». ¦ Bạn đang tô mặt nạ bầu trời: ⬛ ẩn chỗ bầu trời bị tràn (lá cây, mái nhà), ⬜ hiện chỗ còn thiếu. Rồi bấm “✓ OK”. ¦ Kamu sedang melukis masker langit: ⬛ sembunyikan di tempat langit meluber (dedaunan, atap), ⬜ tampilkan di tempat yang kurang. Lalu “✓ OK”.
+Ciel remplacé : calques « Ciel » et « Harmonisation du premier plan » (opacité, masque, 👁 pour comparer). ¦ Đã thay bầu trời: các lớp “Bầu trời” và “Hài hoà tiền cảnh” (độ mờ đục, mặt nạ, 👁 để so sánh). ¦ Langit diganti: lapisan “Langit” dan “Penyelarasan latar depan” (opasitas, masker, 👁 untuk membandingkan).
+✂️ Détourer une personne ¦ ✂️ Tách nền một người ¦ ✂️ Pisahkan seseorang
+Sans intelligence artificielle : tout se calcule ici ¦ Không dùng trí tuệ nhân tạo: mọi thứ được tính ngay tại đây ¦ Tanpa kecerdasan buatan: semuanya dihitung di sini
+1. Trace un rectangle autour de la personne (⬚), pas trop serré — ou laisse tout : la photo entière sert de cadre. ¦ 1. Vẽ một hình chữ nhật quanh người đó (⬚), đừng quá sát — hoặc để nguyên: cả ảnh được dùng làm khung. ¦ 1. Buat persegi di sekeliling orang itu (⬚), jangan terlalu rapat — atau biarkan saja: seluruh foto dipakai sebagai bingkai.
+2. « Détourer » : l’app apprend les couleurs de la personne (dans le rectangle) et du fond (autour), puis suit les contours. ¦ 2. “Tách nền”: ứng dụng học màu của người (trong hình chữ nhật) và của nền (xung quanh), rồi đi theo đường viền. ¦ 2. “Pisahkan”: aplikasi mempelajari warna orang itu (di dalam persegi) dan latarnya (di sekeliling), lalu mengikuti konturnya.
+⬚ Tracer un rectangle ¦ ⬚ Vẽ hình chữ nhật ¦ ⬚ Buat persegi
+✂️ Détourer ¦ ✂️ Tách nền ¦ ✂️ Pisahkan
+Fond transparent (image en PNG) ¦ Nền trong suốt (ảnh PNG) ¦ Latar transparan (gambar PNG)
+Fond flou ¦ Nền mờ ¦ Latar buram
+Fond uni ¦ Nền đơn sắc ¦ Latar polos
+Garder la personne sur un calque à part ¦ Giữ người đó trên một lớp riêng ¦ Simpan orang itu di lapisan terpisah
+Flou du fond ¦ Độ mờ của nền ¦ Keburaman latar
+Peindre le masque : ⬛ cacher, ⬜ montrer ¦ Tô mặt nạ: ⬛ ẩn, ⬜ hiện ¦ Lukis masker: ⬛ sembunyikan, ⬜ tampilkan
+🖌 Retoucher le contour ¦ 🖌 Sửa đường viền ¦ 🖌 Rapikan kontur
+Marche bien quand la personne se détache de son fond (couleurs différentes, fond assez simple). Cheveux fins, fond chargé ou vêtements de la couleur du fond : il faudra retoucher au pinceau (« Retoucher le contour »). ¦ Hoạt động tốt khi người đó nổi bật trên nền (màu khác nhau, nền khá đơn giản). Tóc mảnh, nền rối hoặc quần áo cùng màu với nền: bạn sẽ cần sửa lại bằng cọ (“Sửa đường viền”). ¦ Bekerja baik bila orang itu menonjol dari latarnya (warna berbeda, latar cukup sederhana). Rambut halus, latar ramai, atau pakaian berwarna sama dengan latar: kamu perlu merapikannya dengan kuas (“Rapikan kontur”).
+Personne détourée ¦ Đã tách người ¦ Orang dipisahkan
+Trace un rectangle autour de la personne (en laissant un peu de fond tout autour), puis « ✂️ Détourer ». ¦ Vẽ một hình chữ nhật quanh người đó (chừa một chút nền xung quanh), rồi bấm “✂️ Tách nền”. ¦ Buat persegi di sekeliling orang itu (sisakan sedikit latar di sekelilingnya), lalu “✂️ Pisahkan”.
+Détourage… ¦ Đang tách nền… ¦ Memisahkan…
+Personne introuvable : trace le rectangle plus près d’elle, puis recommence. ¦ Không tìm thấy người: hãy vẽ hình chữ nhật sát hơn, rồi làm lại. ¦ Orang tidak ditemukan: buat persegi lebih dekat dengannya, lalu ulangi.
+✂️ Détourer à nouveau ¦ ✂️ Tách nền lại ¦ ✂️ Pisahkan lagi
+Tu peins le masque de la personne : ⬛ cacher (du fond resté), ⬜ montrer (un bout de la personne oublié). ¦ Bạn đang tô mặt nạ của người: ⬛ ẩn (phần nền còn sót), ⬜ hiện (một phần của người bị bỏ sót). ¦ Kamu sedang mewarnai masker orang: ⬛ sembunyikan (sisa latar), ⬜ tampilkan (bagian orang yang terlewat).
+Tu peins le masque du fond : ⬛ cacher (là c’est la personne), ⬜ montrer (là c’est du fond). ¦ Bạn đang tô mặt nạ của nền: ⬛ ẩn (chỗ đó là người), ⬜ hiện (chỗ đó là nền). ¦ Kamu sedang mewarnai masker latar: ⬛ sembunyikan (di situ orangnya), ⬜ tampilkan (di situ latarnya).
+Détourage : fond transparent ¦ Tách nền: nền trong suốt ¦ Potong objek: latar transparan
+Détourage : fond flou ¦ Tách nền: nền mờ ¦ Potong objek: latar buram
+Détourage : fond uni ¦ Tách nền: nền một màu ¦ Potong objek: latar polos
+Détourage : personne sur un calque ¦ Tách nền: người trên một lớp ¦ Potong objek: orang di satu lapisan
+Fond rendu transparent (masque de la photo) : l’image sera enregistrée en PNG. ¦ Nền đã được làm trong suốt (mặt nạ của ảnh): ảnh sẽ được lưu dạng PNG. ¦ Latar dibuat transparan (masker foto): gambar akan disimpan sebagai PNG.
+Détourage fait : tout est sur des calques, avec des masques à retoucher au besoin. ¦ Đã tách nền xong: mọi thứ nằm trên các lớp, có mặt nạ để chỉnh sửa khi cần. ¦ Potong objek selesai: semuanya ada di lapisan, dengan masker yang bisa dirapikan bila perlu.
+Trace un rectangle autour de la personne (⬚), ou « ✂️ Détourer » directement pour toute la photo. ¦ Hãy vẽ một hình chữ nhật quanh người (⬚), hoặc bấm “✂️ Tách nền” ngay cho cả ảnh. ¦ Gambar persegi panjang di sekitar orang (⬚), atau langsung “✂️ Potong objek” untuk seluruh foto.
+Préparation de l’image en pleine taille… ¦ Đang chuẩn bị ảnh kích thước đầy đủ… ¦ Menyiapkan gambar ukuran penuh…
+🔍 Agrandir l’image ¦ 🔍 Phóng to ảnh ¦ 🔍 Perbesar gambar
+Netteté des contours ¦ Độ sắc nét đường viền ¦ Ketajaman tepi
+Renforce les contours sans faire de halo ; les aplats (ciel, peau) restent doux. ¦ Làm rõ đường viền mà không tạo quầng sáng; các vùng phẳng (bầu trời, da) vẫn mịn. ¦ Mempertegas tepi tanpa membuat lingkaran cahaya; bidang rata (langit, kulit) tetap lembut.
+Clique pour choisir l’endroit de l’aperçu ¦ Bấm để chọn chỗ xem trước ¦ Klik untuk memilih bagian pratinjau
+Lissage du grain ¦ Làm mịn hạt ¦ Penghalusan bintik
+Avant (agrandi simplement) ¦ Trước (chỉ phóng to) ¦ Sebelum (hanya diperbesar)
+Après, à 100 % ¦ Sau, ở 100 % ¦ Sesudah, pada 100 %
+Une nouvelle version de la photo, affichée partout (l’original reste) ¦ Một phiên bản mới của ảnh, hiển thị ở mọi nơi (bản gốc vẫn còn) ¦ Versi baru foto, ditampilkan di mana-mana (aslinya tetap ada)
+Agrandir → nouvelle version ¦ Phóng to → phiên bản mới ¦ Perbesar → versi baru
+→ copie séparée ¦ → bản sao riêng ¦ → salinan terpisah
+Agrandir → dans les médias ¦ Phóng to → vào tư liệu ¦ Perbesar → ke media
+Agrandir ne retrouve pas les détails qui n’ont jamais été photographiés : l’image est plus grande et plus nette, pas plus précise. ¦ Phóng to không lấy lại được những chi tiết chưa từng được chụp: ảnh lớn hơn và nét hơn, chứ không chính xác hơn. ¦ Memperbesar tidak mengembalikan detail yang tidak pernah terfoto: gambar jadi lebih besar dan lebih tajam, bukan lebih akurat.
+Cette image est déjà trop grande pour être agrandie. ¦ Ảnh này đã quá lớn để phóng to thêm. ¦ Gambar ini sudah terlalu besar untuk diperbesar.
+Filtre : {what} ¦ Bộ lọc: {what} ¦ Filter: {what}
+🎨 Teinte/Saturation {num} ¦ 🎨 Sắc độ/Độ bão hoà {num} ¦ 🎨 Rona/Saturasi {num}
+Motif {num} ¦ Hoạ tiết {num} ¦ Pola {num}
+Bruit ¦ Nhiễu ¦ Derau
+Artistiques ¦ Nghệ thuật ¦ Artistik
+Pixellisation ¦ Điểm ảnh hoá ¦ Pikselisasi
+Rendu ¦ Kết xuất ¦ Render
+Autres ¦ Khác ¦ Lainnya
+Flou gaussien ¦ Làm mờ Gauss ¦ Buram Gaussian
+Flou de mouvement ¦ Làm mờ chuyển động ¦ Buram gerak
+Flou radial (zoom) ¦ Làm mờ toả tròn (thu phóng) ¦ Buram radial (zoom)
+Flou rotatif ¦ Làm mờ xoay ¦ Buram putar
+Accentuation (masque flou) ¦ Tăng nét (mặt nạ mờ) ¦ Penajaman (masker buram)
+Estampage (relief) ¦ Chạm nổi (nổi khối) ¦ Emboss (timbul)
+Solarisation ¦ Phơi sáng ngược ¦ Solarisasi
+Diffusion ¦ Khuếch tán ¦ Difusi
+Vent ¦ Gió ¦ Angin
+Aquarelle ¦ Màu nước ¦ Cat air
+Vieux film ¦ Phim cũ ¦ Film lama
+Cristallisation ¦ Kết tinh ¦ Kristalisasi
+Pointillisme ¦ Chấm điểm ¦ Pointilis
+Nuages (texture) ¦ Mây (kết cấu) ¦ Awan (tekstur)
+Lueur diffuse ¦ Ánh sáng khuếch tán ¦ Cahaya difus
+Tourbillon ¦ Xoáy ¦ Pusaran
+Onde ¦ Sóng ¦ Gelombang
+Rayon ¦ Bán kính ¦ Jari-jari
+Centre X ¦ Tâm X ¦ Pusat X
+Centre Y ¦ Tâm Y ¦ Pusat Y
+Seuil ¦ Ngưỡng ¦ Ambang
+Bande nette, hauteur ¦ Dải nét, chiều cao ¦ Pita tajam, tinggi
+Points lumineux ¦ Điểm sáng ¦ Titik terang
+Monochrome (0 / 1) ¦ Đơn sắc (0 / 1) ¦ Monokrom (0 / 1)
+Gain ¦ Mức tăng ¦ Penguatan
+Niveaux ¦ Mức ¦ Level
+Longueur ¦ Độ dài ¦ Panjang
+Contours ¦ Đường viền ¦ Tepi
+Trait ¦ Nét vẽ ¦ Goresan
+Traits noirs ¦ Nét đen ¦ Garis hitam
+Usure ¦ Độ cũ mòn ¦ Keausan
+Position X ¦ Vị trí X ¦ Posisi X
+Position Y ¦ Vị trí Y ¦ Posisi Y
+Amplitude ¦ Biên độ ¦ Amplitudo
+Horizontale (0) / verticale (1) ¦ Ngang (0) / dọc (1) ¦ Horizontal (0) / vertikal (1)
+Horizontal ¦ Ngang ¦ Horizontal
+Contraste ¦ Độ tương phản ¦ Kontras
+Ombres ¦ Vùng tối ¦ Bayangan
+Chaleur ¦ Độ ấm ¦ Kehangatan
+Rouge ¦ Đỏ ¦ Merah
+Vert ¦ Xanh lá ¦ Hijau
+Bleu ¦ Xanh dương ¦ Biru
+RVB ¦ RGB ¦ RGB
+Assombrir ¦ Làm tối ¦ Gelapkan
+Grain ¦ Hạt ¦ Bintik
+Vignette ¦ Tối viền ¦ Vinyet
+Force ¦ Cường độ ¦ Kekuatan
+Couleurs ¦ Màu sắc ¦ Warna
+Auto ¦ Tự động ¦ Otomatis
+Document lisible ¦ Giấy tờ dễ đọc ¦ Dokumen mudah dibaca
+Niveaux : point noir, tons moyens, point blanc ¦ Mức: điểm đen, tông trung, điểm trắng ¦ Level: titik hitam, nada tengah, titik putih
+Niveaux automatiques ¦ Mức tự động ¦ Level otomatis
+Monter la courbe éclaircit, la creuser assombrit, un « S » donne du contraste. Rouge, vert, bleu : corriger une dominante de couleur. ¦ Nâng đường cong thì sáng hơn, hạ xuống thì tối hơn, hình chữ “S” tăng độ tương phản. Đỏ, xanh lá, xanh dương: sửa ám màu. ¦ Menaikkan kurva membuat lebih terang, menurunkannya membuat lebih gelap, bentuk “S” menambah kontras. Merah, hijau, biru: perbaiki warna yang dominan.
+✨ Menu ¦ ✨ Menu ¦ ✨ Menu
+Déplacer : glisse la poignée, ou Alt + ↑ / ↓ ¦ Di chuyển: kéo tay nắm, hoặc Alt + ↑ / ↓ ¦ Pindahkan: seret pegangannya, atau Alt + ↑ / ↓
+Auto : les points les plus sombres deviennent noirs et les plus clairs blancs ; cliquer une 2ᵉ fois revient à l’état d’avant. ¦ Tự động: những điểm tối nhất thành đen và sáng nhất thành trắng; bấm lần thứ 2 thì trở lại như trước. ¦ Otomatis: titik paling gelap jadi hitam dan paling terang jadi putih; klik ke-2 kalinya mengembalikan seperti sebelumnya.
+Éclaircit seulement les parties sombres (ou les assombrit vers la gauche), sans toucher aux claires. ¦ Chỉ làm sáng các phần tối (hoặc làm tối chúng khi kéo sang trái), không đụng đến phần sáng. ¦ Hanya mencerahkan bagian gelap (atau menggelapkannya ke kiri), tanpa menyentuh bagian terang.
+Cliquer à nouveau pour revenir à l’état d’avant ¦ Bấm lại để trở về như trước ¦ Klik lagi untuk kembali seperti sebelumnya
+Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou la touche ⌫), ou le glisser hors du cadre. ¦ Bấm vào đường cong: thêm một điểm · kéo: di chuyển điểm · để bỏ điểm: chọn nó rồi bấm “Bỏ điểm” (hoặc phím ⌫), hoặc kéo nó ra ngoài khung. ¦ Klik kurva: tambah titik · seret: pindahkan · untuk menghapusnya: pilih lalu “Hapus titik” (atau tombol ⌫), atau seret keluar bingkai.
+fx ¦ fx ¦ fx
+Normal italique ¦ Thường nghiêng ¦ Normal miring
+Extra-fin italique ¦ Siêu mảnh nghiêng ¦ Sangat tipis miring
+Ultra-léger italique ¦ Cực nhẹ nghiêng ¦ Ekstra ringan miring
+Léger italique ¦ Nhẹ nghiêng ¦ Ringan miring
+Médium italique ¦ Vừa nghiêng ¦ Sedang miring
+Demi-gras italique ¦ Nửa đậm nghiêng ¦ Setengah tebal miring
+Gras italique ¦ Đậm nghiêng ¦ Tebal miring
+Extra-gras italique ¦ Siêu đậm nghiêng ¦ Ekstra tebal miring
+Noir italique ¦ Đen nghiêng ¦ Hitam miring
+Unicode : Latin-1 ¦ Unicode: Latin-1 ¦ Unicode: Latin-1
+Unicode : grec ¦ Unicode: Hy Lạp ¦ Unicode: Yunani
+Unicode : cyrillique ¦ Unicode: Kirin ¦ Unicode: Sirilik
+Unicode : ponctuation ¦ Unicode: dấu câu ¦ Unicode: tanda baca
+Unicode : monnaies ¦ Unicode: tiền tệ ¦ Unicode: mata uang
+Unicode : symboles de lettres ¦ Unicode: ký hiệu dạng chữ ¦ Unicode: simbol mirip huruf
+Unicode : nombres ¦ Unicode: số ¦ Unicode: angka
+Unicode : traits de tableau ¦ Unicode: nét kẻ bảng ¦ Unicode: garis kotak
+Unicode : symboles divers ¦ Unicode: ký hiệu khác ¦ Unicode: simbol lain-lain
+Unicode : casseau (dingbats) ¦ Unicode: ký hiệu trang trí (dingbats) ¦ Unicode: ornamen (dingbats)
+Unicode : ligatures ¦ Unicode: chữ ghép ¦ Unicode: ligatur
+Grain de papier ¦ Vân giấy ¦ Tekstur kertas
+Rond ¦ Tròn ¦ Bulat
+Plume calligraphique ¦ Bút thư pháp ¦ Pena kaligrafi
+Crayon ¦ Bút chì ¦ Pensil
+Pinceau sec ¦ Cọ khô ¦ Kuas kering
+Herbe ¦ Cỏ ¦ Rumput
+Peau claire ¦ Da sáng ¦ Kulit terang
+Peau hâlée ¦ Da rám nắng ¦ Kulit cokelat terbakar
+Peau mate ¦ Da ngăm ¦ Kulit sawo matang
+Joues, lèvres ¦ Má, môi ¦ Pipi, bibir
+Cheveux bruns ¦ Tóc nâu ¦ Rambut cokelat
+Cheveux blonds ¦ Tóc vàng ¦ Rambut pirang
+Cheveux gris ¦ Tóc bạc ¦ Rambut abu-abu
+Feuillage ¦ Tán lá ¦ Dedaunan
+Uniforme, costume bleu ¦ Đồng phục, bộ com-lê xanh ¦ Seragam, setelan biru
+Robe bordeaux ¦ Váy đỏ rượu vang ¦ Gaun merah marun
+Habit noir ¦ Áo đen ¦ Pakaian hitam
+Mur, pierre ¦ Tường, đá ¦ Dinding, batu
+Brique, tuile ¦ Gạch, ngói ¦ Bata, genteng
+Bois ¦ Gỗ ¦ Kayu
+🩹 Correcteur ¦ 🩹 Bút sửa vết ¦ 🩹 Alat perbaikan
+🧬 Tampon (morceau manquant) ¦ 🧬 Con dấu nhân bản (phần bị thiếu) ¦ 🧬 Stempel klon (bagian yang hilang)
+Zoom : ajuster, 50 %, 100 %, 200 % ¦ Thu phóng: vừa khung, 50 %, 100 %, 200 % ¦ Zoom: pas, 50 %, 100 %, 200 %
+photo|Restaurer ¦ Phục hồi ¦ Pulihkan
+menu|Sélection ¦ Vùng chọn ¦ Seleksi
+retouche|Courbe ¦ Đường cong ¦ Kurva
+motif|D’après ¦ Theo ¦ Berdasarkan
+pinceau|Feuille ¦ Lá ¦ Daun
+pinceau|Étoile ¦ Ngôi sao ¦ Bintang
+pinceau|Carré ¦ Hình vuông ¦ Persegi
+Glisse pour comparer ¦ Kéo để so sánh ¦ Seret untuk membandingkan
+Rideau avant / après ¦ Rèm trước / sau ¦ Tirai sebelum / sesudah
+Image importée ¦ Ảnh đã nhập ¦ Gambar yang diimpor
+La fenêtre d’export n’est pas encore prête. ¦ Cửa sổ xuất chưa sẵn sàng. ¦ Jendela ekspor belum siap.
+Image téléchargée ; une copie est rangée dans les médias. ¦ Đã tải ảnh xuống; một bản sao được cất trong tư liệu. ¦ Gambar diunduh; salinannya disimpan di media.
+Aperçu de l’avant / après ¦ Xem trước ảnh trước / sau ¦ Pratinjau sebelum / sesudah
+Rideau vertical (avant à gauche) ¦ Rèm dọc (trước ở bên trái) ¦ Tirai vertikal (sebelum di kiri)
+Rideau horizontal (avant en haut) ¦ Rèm ngang (trước ở trên) ¦ Tirai horizontal (sebelum di atas)
+L’une sous l’autre ¦ Ảnh này dưới ảnh kia ¦ Satu di bawah yang lain
+Position du rideau ¦ Vị trí của rèm ¦ Posisi tirai
+ex. Mariage de Jean et Marie, 1925 ¦ vd. Đám cưới của Jean và Marie, 1925 ¦ mis. Pernikahan Jean dan Marie, 1925
+Écrire « Avant » et « Après » ¦ Ghi “Trước” và “Sau” ¦ Tulis “Sebelum” dan “Sesudah”
+Avant / après téléchargé ; une copie est rangée dans les médias. ¦ Đã tải xuống ảnh trước / sau; một bản sao được cất trong tư liệu. ¦ Sebelum / sesudah diunduh; salinannya disimpan di media.
+Garder appuyé pour voir l’original ¦ Nhấn giữ để xem bản gốc ¦ Tahan untuk melihat aslinya
+👁 Avant / après ¦ 👁 Trước / sau ¦ 👁 Sebelum / sesudah
+◧ Rideau ¦ ◧ Rèm ¦ ◧ Tirai
+Comparer avec un rideau qu’on glisse sur la photo ¦ So sánh bằng một tấm rèm kéo trên ảnh ¦ Bandingkan dengan tirai yang digeser di atas foto
+Rideau vertical ou horizontal ¦ Rèm dọc hoặc ngang ¦ Tirai vertikal atau horizontal
+Exporter l’avant / après en image (côte à côte ou rideau, avec légende) ¦ Xuất ảnh trước / sau thành hình (cạnh nhau hoặc rèm, có chú thích) ¦ Ekspor sebelum / sesudah sebagai gambar (berdampingan atau tirai, dengan keterangan)
+Rideau horizontal ¦ Rèm ngang ¦ Tirai horizontal
+Rideau vertical ¦ Rèm dọc ¦ Tirai vertikal
+De combien le cadre dépasse autour du visage : petit = visage serré, grand = épaules et un peu de fond. ¦ Khung rộng ra bao nhiêu quanh khuôn mặt: nhỏ = sát mặt, lớn = thấy vai và một chút nền. ¦ Seberapa jauh bingkai melebar di sekitar wajah: kecil = wajah rapat, besar = bahu dan sedikit latar.
+La hauteur des yeux dans le cadre, depuis le haut : la même pour tous les portraits, ils s’alignent quand on les met côte à côte. ¦ Độ cao của mắt trong khung, tính từ trên xuống: giống nhau cho mọi chân dung, để chúng thẳng hàng khi đặt cạnh nhau. ¦ Tinggi mata di dalam bingkai, dari atas: sama untuk semua potret, sehingga sejajar saat ditaruh berdampingan.
+Faible : le bord du pinceau est doux et se fond ; forte : le bord est net. ¦ Yếu: mép cọ mềm và hoà dần; mạnh: mép cọ sắc nét. ¦ Lemah: tepi kuas lembut dan membaur; kuat: tepinya tajam.
+Filtres ¦ Bộ lọc ¦ Filter
+✨ Filtres ¦ ✨ Bộ lọc ¦ ✨ Filter
+Classique : comme avant. Perceptuel : un passage plus égal à l’œil, sans zone grise ni trop sombre au milieu. Par les teintes : en passant par les couleurs de l’arc-en-ciel. ¦ Cổ điển: như trước. Theo cảm nhận: chuyển màu đều hơn với mắt, không có vùng xám hay quá tối ở giữa. Qua các sắc màu: đi qua các màu của cầu vồng. ¦ Klasik: seperti sebelumnya. Perseptual: peralihan yang tampak lebih rata di mata, tanpa area abu-abu atau terlalu gelap di tengah. Melalui rona: melewati warna-warna pelangi.
+Plus haut : des lignes plus pâles ou plus courtes sont aussi prises. Trop haut, des détails de la photo (cheveux, écriture) peuvent l’être : regarde le rouge. ¦ Cao hơn: cả những đường nhạt hơn hoặc ngắn hơn cũng được bắt. Quá cao thì chi tiết của ảnh (tóc, chữ viết) cũng có thể bị bắt: hãy xem phần màu đỏ. ¦ Lebih tinggi: garis yang lebih pucat atau lebih pendek ikut tertangkap. Terlalu tinggi, detail foto (rambut, tulisan) bisa ikut tertangkap: perhatikan warna merahnya.
+La force de toutes les étapes d’un coup : bas = une restauration discrète, haut = plus marquée (mais attention au « trop lisse »). ¦ Cường độ của mọi bước cùng lúc: thấp = phục hồi nhẹ nhàng, cao = rõ rệt hơn (nhưng coi chừng “quá mịn”). ¦ Kekuatan semua langkah sekaligus: rendah = pemulihan halus, tinggi = lebih kuat (tapi hati-hati “terlalu mulus”).
+Sens ¦ Chiều ¦ Arah
+De combien ¦ Bao nhiêu ¦ Seberapa banyak
+↻ Horaire ¦ ↻ Theo chiều kim đồng hồ ¦ ↻ Searah jarum jam
+↺ Antihoraire ¦ ↺ Ngược chiều kim đồng hồ ¦ ↺ Berlawanan arah jarum jam
+↻ Faire pivoter ¦ ↻ Xoay ¦ ↻ Putar
+Garde le plus grand rectangle droit dans la photo tournée : plus de coins vides. C’est un recadrage : « Annuler le recadrage » le retire. ¦ Giữ hình chữ nhật thẳng lớn nhất trong ảnh đã xoay: không còn góc trống. Đây là một lần cắt khung: “Hủy cắt khung” sẽ bỏ nó. ¦ Menyisakan persegi panjang tegak terbesar di foto yang diputar: tidak ada lagi sudut kosong. Ini sebuah pemangkasan: “Batalkan pemangkasan” akan menghapusnya.
+Enlever ¦ Bỏ ¦ Hapus
+Coché : le nombre de pixels change (l’image est recalculée). Décoché : seuls la résolution et la taille à l’impression changent, les pixels restent les mêmes. ¦ Khi đánh dấu: số điểm ảnh thay đổi (ảnh được tính lại). Khi bỏ dấu: chỉ độ phân giải và kích thước khi in thay đổi, điểm ảnh vẫn giữ nguyên. ¦ Dicentang: jumlah piksel berubah (gambar dihitung ulang). Tidak dicentang: hanya resolusi dan ukuran cetak yang berubah, pikselnya tetap sama.
+Coché : tu écris ce qu’on ajoute (ou enlève, avec un nombre négatif) autour de l’image. ¦ Khi đánh dấu: bạn nhập phần thêm vào (hoặc bớt đi, với số âm) quanh ảnh. ¦ Dicentang: kamu mengetik berapa yang ditambahkan (atau dikurangi, dengan angka negatif) di sekeliling gambar.
+Avant d’agrandir, adoucit le grain et le bruit (les contours restent) : utile pour une photo scannée granuleuse. ¦ Trước khi phóng to, làm dịu hạt và nhiễu (đường viền được giữ): hữu ích cho ảnh quét bị sần. ¦ Sebelum memperbesar, melembutkan bintik dan derau (tepi tetap): berguna untuk foto pindaian yang berbintik.
+Pour un négatif photographié ou scanné : les clairs et les sombres s’échangent. ¦ Dành cho phim âm bản được chụp hoặc quét: vùng sáng và vùng tối đổi chỗ cho nhau. ¦ Untuk negatif film yang difoto atau dipindai: bagian terang dan gelap bertukar.
+Nom de la photo retouchée ¦ Tên của ảnh đã chỉnh sửa ¦ Nama foto yang sudah diretus
+Le nom de la copie et des fichiers exportés ¦ Tên của bản sao và của các tệp được xuất ¦ Nama salinan dan berkas yang diekspor
+La retouche complète : calques, sélections, masques, texte, formes, filtres, projets ¦ Chỉnh sửa đầy đủ: lớp, vùng chọn, mặt nạ, chữ, hình, bộ lọc, dự án ¦ Retus lengkap: lapisan, seleksi, masker, teks, bentuk, filter, proyek
+Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup (dans la retouche complète) ¦ Khử nhiễu, bụi, nếp gấp, độ tương phản, độ nét và tô màu cùng một lúc (trong chỉnh sửa đầy đủ) ¦ Penghilang derau, debu, lipatan, kontras, ketajaman, dan pewarnaan sekaligus (dalam retus lengkap)
+🎛️ Retouche complète ¦ 🎛️ Chỉnh sửa đầy đủ ¦ 🎛️ Retus lengkap
+Retouche complète ¦ Chỉnh sửa đầy đủ ¦ Retus lengkap
+Exporter : la photo retouchée (PNG, JPG, imprimer) ou l’avant / après ¦ Xuất: ảnh đã chỉnh sửa (PNG, JPG, in) hoặc ảnh trước / sau ¦ Ekspor: foto yang diretus (PNG, JPG, cetak) atau sebelum / sesudah
+Enregistrer et afficher cette version de la photo (l’original est gardé) ¦ Lưu và hiển thị phiên bản này của ảnh (bản gốc được giữ lại) ¦ Simpan dan tampilkan versi foto ini (aslinya tetap disimpan)
+🖼 La photo retouchée (PNG, JPG, imprimer)… ¦ 🖼 Ảnh đã chỉnh sửa (PNG, JPG, in)… ¦ 🖼 Foto yang diretus (PNG, JPG, cetak)…
+Barre des outils ¦ Thanh công cụ ¦ Bilah alat
+Réglages : couleur, lumière, courbe ¦ Điều chỉnh: màu, ánh sáng, đường cong ¦ Penyesuaian: warna, cahaya, kurva
+Correcteur de taches : clique sur une tache, une poussière, une rayure ¦ Sửa vết: bấm vào một vết bẩn, hạt bụi, vết xước ¦ Perbaikan noda: klik noda, debu, atau goresan
+Tampon de duplication : {key} + clic sur l’endroit à recopier, puis peins sur la zone à couvrir ¦ Con dấu nhân bản: {key} + bấm vào chỗ cần sao chép, rồi tô lên vùng cần che ¦ Stempel klon: {key} + klik bagian yang akan disalin, lalu warnai area yang akan ditutup
+{key} + clic pour choisir l’endroit à recopier, puis peins sur la zone à couvrir. ¦ {key} + bấm để chọn chỗ cần sao chép, rồi tô lên vùng cần che. ¦ {key} + klik untuk memilih bagian yang akan disalin, lalu warnai area yang akan ditutup.
+Faire pivoter de 90° vers la gauche (antihoraire) ¦ Xoay 90° sang trái (ngược chiều kim đồng hồ) ¦ Putar 90° ke kiri (berlawanan arah jarum jam)
+Pivoter à gauche ¦ Xoay trái ¦ Putar ke kiri
+Faire pivoter de 90° vers la droite (horaire) ¦ Xoay 90° sang phải (theo chiều kim đồng hồ) ¦ Putar 90° ke kanan (searah jarum jam)
+Pivoter à droite ¦ Xoay phải ¦ Putar ke kanan
+Retouche complète : calques, sélections, masques, texte, filtres ¦ Chỉnh sửa đầy đủ: lớp, vùng chọn, mặt nạ, chữ, bộ lọc ¦ Retus lengkap: lapisan, seleksi, masker, teks, filter
+Les corrections en cours seront perdues. ¦ Các chỉnh sửa đang làm sẽ bị mất. ¦ Koreksi yang sedang berjalan akan hilang.
+Passer à la retouche complète ? ¦ Chuyển sang chỉnh sửa đầy đủ? ¦ Beralih ke retus lengkap?
+Passer à la retouche complète ¦ Chuyển sang chỉnh sửa đầy đủ ¦ Beralih ke retus lengkap
+Règle la couleur et la lumière à droite · garde « 👁 Avant / après » appuyé pour comparer ¦ Chỉnh màu và ánh sáng ở bên phải · nhấn giữ “👁 Trước / sau” để so sánh ¦ Atur warna dan cahaya di kanan · tahan “👁 Sebelum / sesudah” untuk membandingkan
+Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long. ¦ Bấm vào một vết bẩn, hạt bụi hoặc vết xước: nó được thay bằng những gì xung quanh. Với vết xước, hãy kéo dọc theo nó. ¦ Klik noda, debu, atau goresan: bagian itu diganti dengan sekitarnya. Untuk goresan, seret di sepanjangnya.
+Choisis d’abord l’endroit à recopier : Alt + clic (⌥ + clic sur Mac). ¦ Trước hết hãy chọn chỗ cần sao chép: Alt + bấm (⌥ + bấm trên Mac). ¦ Pilih dulu bagian yang akan disalin: Alt + klik (⌥ + klik di Mac).
+Versions de la photo ¦ Các phiên bản của ảnh ¦ Versi foto
+Enregistrer sans l’afficher (gardée dans les versions) ¦ Lưu mà không hiển thị (giữ trong các phiên bản) ¦ Simpan tanpa ditampilkan (disimpan di versi)
+Copie séparée (un autre média, relié aux mêmes fiches) ¦ Bản sao riêng (một tư liệu khác, liên kết với cùng các hồ sơ) ¦ Salinan terpisah (media lain, terhubung ke profil yang sama)
+Exporter la photo retouchée (PNG, JPG, imprimer)… ¦ Xuất ảnh đã chỉnh sửa (PNG, JPG, in)… ¦ Ekspor foto yang diretus (PNG, JPG, cetak)…
+Exporter l’avant / après… ¦ Xuất ảnh trước / sau… ¦ Ekspor sebelum / sesudah…
+Restaurer en une fois… ¦ Phục hồi một lần… ¦ Pulihkan sekaligus…
+Pivoter de 90° à droite (horaire) ¦ Xoay 90° sang phải (theo chiều kim đồng hồ) ¦ Putar 90° ke kanan (searah jarum jam)
+Pivoter de 90° à gauche (antihoraire) ¦ Xoay 90° sang trái (ngược chiều kim đồng hồ) ¦ Putar 90° ke kiri (berlawanan arah jarum jam)
+Avant / après en rideau ¦ Trước / sau dạng rèm ¦ Sebelum / sesudah dengan tirai
+La photo est ajoutée aux médias (sans fiche). Les réglages en cours sur cette photo-ci sont abandonnés. ¦ Ảnh được thêm vào tư liệu (không có hồ sơ). Các điều chỉnh đang làm trên ảnh này sẽ bị bỏ. ¦ Foto ditambahkan ke media (tanpa profil). Penyesuaian yang sedang berjalan pada foto ini dibatalkan.
+Retoucher « {name} » à la place ? ¦ Chỉnh sửa “{name}” thay vào đó? ¦ Retus “{name}” sebagai gantinya?
+💧 Fluidité ¦ 💧 Biến dạng lỏng ¦ 💧 Liquify
+Fluidité ¦ Biến dạng lỏng ¦ Liquify
+Peins sur la photo pour la déformer, comme une pâte souple ¦ Tô lên ảnh để làm biến dạng nó, như một khối bột mềm ¦ Warnai di atas foto untuk mengubah bentuknya, seperti adonan lembut
+L’image suit la main ¦ Ảnh đi theo tay bạn ¦ Gambar mengikuti tanganmu
+Agrandit sous le pinceau (garder appuyé) ¦ Phóng to dưới cọ (nhấn giữ) ¦ Membesarkan di bawah kuas (tahan)
+Rétrécit sous le pinceau (garder appuyé) ¦ Thu nhỏ dưới cọ (nhấn giữ) ¦ Mengecilkan di bawah kuas (tahan)
+Fait tourner dans le sens des aiguilles d’une montre ¦ Xoay theo chiều kim đồng hồ ¦ Memutar searah jarum jam
+Fait tourner dans l’autre sens ¦ Xoay theo chiều ngược lại ¦ Memutar ke arah sebaliknya
+Ramène peu à peu l’image d’origine ¦ Dần dần đưa ảnh gốc trở lại ¦ Perlahan mengembalikan gambar asli
+➡ Pousser ¦ ➡ Đẩy ¦ ➡ Dorong
+⊕ Gonfler ¦ ⊕ Phồng ¦ ⊕ Gembungkan
+⊖ Dégonfler ¦ ⊖ Xẹp ¦ ⊖ Kempiskan
+Dégonfler ¦ Xẹp ¦ Kempiskan
+Gonfler ¦ Phồng ¦ Gembungkan
+Pousser ¦ Đẩy ¦ Dorong
+↻ Tourbillon ¦ ↻ Xoáy ¦ ↻ Pusaran
+↺ Tourbillon inverse ¦ ↺ Xoáy ngược ¦ ↺ Pusaran terbalik
+Tourbillon inverse ¦ Xoáy ngược ¦ Pusaran terbalik
+↩ Reconstruire ¦ ↩ Dựng lại ¦ ↩ Rekonstruksi
+Reconstruire ¦ Dựng lại ¦ Rekonstruksi
+Image trop grande pour la Fluidité. ¦ Ảnh quá lớn cho Biến dạng lỏng. ¦ Gambar terlalu besar untuk Liquify.
+↶ Annuler le coup ¦ ↶ Hoàn tác nét vừa rồi ¦ ↶ Urungkan goresan
+✓ Appliquer (calque « Fluidité ») ¦ ✓ Áp dụng (lớp “Biến dạng lỏng”) ¦ ✓ Terapkan (lapisan “Liquify”)
+Rien n’a été déformé. ¦ Chưa có gì bị biến dạng. ¦ Belum ada yang diubah bentuknya.
+💧 Fluidité appliquée sur le calque « Fluidité » (la photo reste dessous : 👁 pour comparer). ¦ 💧 Đã áp dụng Biến dạng lỏng trên lớp “Biến dạng lỏng” (ảnh vẫn ở bên dưới: 👁 để so sánh). ¦ 💧 Liquify diterapkan pada lapisan “Liquify” (foto tetap di bawahnya: 👁 untuk membandingkan).
+🪄 Gomme magique ¦ 🪄 Tẩy thông minh ¦ 🪄 Penghapus ajaib
+Clique sur le fond à rendre transparent (plusieurs clics s’ajoutent) ¦ Bấm vào phần nền cần làm trong suốt (nhiều lần bấm sẽ cộng dồn) ¦ Klik latar yang akan dibuat transparan (beberapa klik saling menambah)
+Zone voisine seulement (sinon : cette couleur partout) ¦ Chỉ vùng liền kề (nếu không: màu này ở mọi nơi) ¦ Hanya area di sekitarnya (jika tidak: warna ini di mana-mana)
+↶ Annuler le clic ¦ ↶ Hoàn tác lần bấm ¦ ↶ Urungkan klik
+✓ Appliquer (masque de la photo) ¦ ✓ Áp dụng (mặt nạ của ảnh) ¦ ✓ Terapkan (masker foto)
+La photo a déjà un masque : la gomme magique le remplace. ¦ Ảnh đã có mặt nạ: tẩy thông minh sẽ thay thế nó. ¦ Foto sudah punya masker: penghapus ajaib akan menggantinya.
+Remplacer le masque de la photo ? ¦ Thay mặt nạ của ảnh? ¦ Ganti masker foto?
+🪄 Fond rendu transparent (masque de la photo, à retoucher au pinceau) : l’image s’enregistre en PNG. ¦ 🪄 Nền đã được làm trong suốt (mặt nạ của ảnh, có thể sửa bằng cọ): ảnh được lưu dạng PNG. ¦ 🪄 Latar dibuat transparan (masker foto, bisa dirapikan dengan kuas): gambar disimpan sebagai PNG.
+Masque de « {name} » ¦ Mặt nạ của “{name}” ¦ Masker “{name}”
+Il n’y a pas encore de masque : détoure (✂️), gomme le fond (🪄) ou ajoute un masque à un calque, puis affine son bord. ¦ Chưa có mặt nạ: hãy tách nền (✂️), tẩy nền (🪄) hoặc thêm mặt nạ cho một lớp, rồi tinh chỉnh mép của nó. ¦ Belum ada masker: potong objek (✂️), hapus latar (🪄), atau tambahkan masker ke lapisan, lalu perhalus tepinya.
+✨ Affiner le bord ¦ ✨ Tinh chỉnh mép ¦ ✨ Perhalus tepi
+Décaler le bord ¦ Dịch mép ¦ Geser tepi
+Voir le masque seul (blanc : gardé) ¦ Chỉ xem mặt nạ (trắng: được giữ) ¦ Lihat masker saja (putih: dipertahankan)
+Bord du masque affiné ¦ Đã tinh chỉnh mép mặt nạ ¦ Tepi masker diperhalus
+✨ Bord affiné (↶ pour revenir ; le pinceau corrige le reste). ¦ ✨ Đã tinh chỉnh mép (↶ để quay lại; cọ sẽ sửa phần còn lại). ¦ ✨ Tepi diperhalus (↶ untuk kembali; kuas memperbaiki sisanya).
+Lissage du bord ¦ Làm mịn mép ¦ Penghalusan tepi
+Contraste du bord ¦ Độ tương phản của mép ¦ Kontras tepi
+Image trop grande ({w} × {h} points) : réduis la taille des photos. ¦ Ảnh quá lớn ({w} × {h} điểm ảnh): hãy giảm kích thước ảnh. ¦ Gambar terlalu besar ({w} × {h} piksel): perkecil ukuran fotonya.
+Recherche… ({i}/{total}) ¦ Đang tìm… ({i}/{total}) ¦ Mencari… ({i}/{total})
+« {name} » : décalage {dx} × {dy} points, rotation {rot}°, ressemblance {pct} %. ¦ “{name}”: lệch {dx} × {dy} điểm ảnh, xoay {rot}°, giống nhau {pct} %. ¦ “{name}”: geser {dx} × {dy} piksel, rotasi {rot}°, kemiripan {pct} %.
+Pas de partie commune sûre pour {names} : place-la à la main (glisser, flèches ; « Mode différence » pour vérifier). ¦ Không có phần chung chắc chắn cho {names}: hãy đặt bằng tay (kéo, phím mũi tên; “Chế độ khác biệt” để kiểm tra). ¦ Tidak ada bagian yang sama secara pasti untuk {names}: letakkan secara manual (seret, panah; “Mode perbedaan” untuk memeriksa).
+Photos alignées : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement. ¦ Các ảnh đã được căn chỉnh: hãy kiểm tra (kéo, phím mũi tên để chỉnh). “Hoà các mối nối” làm mềm chỗ nối khi lưu. ¦ Foto sudah disejajarkan: periksa (seret, panah untuk menyesuaikan). “Leburkan sambungan” memperhalus sambungan saat menyimpan.
+Photo alignée : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement. ¦ Ảnh đã được căn chỉnh: hãy kiểm tra (kéo, phím mũi tên để chỉnh). “Hoà các mối nối” làm mềm chỗ nối khi lưu. ¦ Foto sudah disejajarkan: periksa (seret, panah untuk menyesuaikan). “Leburkan sambungan” memperhalus sambungan saat menyimpan.
+Image assemblée enregistrée, rattachée aux mêmes fiches que « {name} ». Les photos d’origine restent. ¦ Đã lưu ảnh ghép, liên kết với cùng các hồ sơ như “{name}”. Các ảnh gốc vẫn còn. ¦ Gambar gabungan disimpan, terhubung ke profil yang sama dengan “{name}”. Foto aslinya tetap ada.
+Titre de l’image assemblée ¦ Tiêu đề của ảnh ghép ¦ Judul gambar gabungan
+Le titre de l’image assemblée (et le nom des fichiers exportés) ¦ Tiêu đề của ảnh ghép (và tên các tệp được xuất) ¦ Judul gambar gabungan (dan nama berkas yang diekspor)
+L’image assemblée : PNG, JPG ou imprimer ¦ Ảnh ghép: PNG, JPG hoặc in ¦ Gambar gabungan: PNG, JPG, atau cetak
+Enregistrer l’image assemblée dans les médias, rattachée aux mêmes fiches que la première photo de la base ¦ Lưu ảnh ghép vào tư liệu, liên kết với cùng các hồ sơ như ảnh đầu tiên lấy từ cơ sở dữ liệu ¦ Simpan gambar gabungan ke media, terhubung ke profil yang sama dengan foto pertama dari basis data
+Clique une photo pour la choisir, glisse pour la déplacer · Maj + molette : taille · Alt + molette : rotation · molette : zoom · flèches : 1 px (Maj : 10 px) · glisse ici une photo de l’ordinateur pour l’ajouter ¦ Bấm vào một ảnh để chọn, kéo để di chuyển · Shift + con lăn: kích thước · Alt + con lăn: xoay · con lăn: thu phóng · phím mũi tên: 1 px (Shift: 10 px) · kéo một ảnh từ máy tính vào đây để thêm ¦ Klik foto untuk memilihnya, seret untuk memindahkan · Shift + roda: ukuran · Alt + roda: rotasi · roda: zoom · panah: 1 px (Shift: 10 px) · seret foto dari komputer ke sini untuk menambahkannya
+Fond blanc (sinon transparent en PNG) ¦ Nền trắng (nếu không thì trong suốt khi là PNG) ¦ Latar putih (jika tidak, transparan di PNG)
+Coché : le fond autour des photos est blanc. Décoché, il reste transparent (seulement en PNG ; le JPG met toujours du blanc). ¦ Khi đánh dấu: nền quanh các ảnh là màu trắng. Khi bỏ dấu, nền vẫn trong suốt (chỉ với PNG; JPG luôn dùng màu trắng). ¦ Dicentang: latar di sekitar foto berwarna putih. Tidak dicentang, latar tetap transparan (hanya PNG; JPG selalu putih).
+Ce qui se superpose bien devient noir : idéal pour aligner deux photos du même endroit ¦ Phần chồng khít lên nhau sẽ thành màu đen: lý tưởng để căn chỉnh hai ảnh chụp cùng một chỗ ¦ Bagian yang bertumpuk dengan pas menjadi hitam: ideal untuk menyejajarkan dua foto dari tempat yang sama
+Les parties identiques des deux photos deviennent noires : quand l’écriture disparaît presque, elles sont parfaitement alignées. ¦ Những phần giống hệt nhau của hai ảnh sẽ thành màu đen: khi chữ viết gần như biến mất, hai ảnh đã khớp hoàn hảo. ¦ Bagian yang identik dari kedua foto menjadi hitam: ketika tulisan hampir hilang, keduanya sudah sejajar sempurna.
+Mode différence ¦ Chế độ khác biệt ¦ Mode perbedaan
+Boutons des photos ¦ Nút của các ảnh ¦ Tombol foto
+Panorama, page photographiée en deux fois : chaque photo est posée sur la précédente là où elles se recouvrent (décalage, petite rotation) ¦ Ảnh toàn cảnh, trang được chụp làm hai lần: mỗi ảnh được đặt lên ảnh trước ở chỗ chúng chồng lên nhau (lệch, xoay nhẹ) ¦ Panorama, halaman yang difoto dua kali: setiap foto ditaruh di atas foto sebelumnya di bagian yang bertumpuk (geser, sedikit rotasi)
+🪄 Aligner tout seul ¦ 🪄 Tự căn chỉnh ¦ 🪄 Sejajarkan otomatis
+Image enregistrée ¦ Ảnh đã lưu ¦ Gambar tersimpan
+JPEG (léger) ¦ JPEG (nhẹ) ¦ JPEG (ringan)
+PNG (sans perte) ¦ PNG (không mất chất lượng) ¦ PNG (tanpa kehilangan kualitas)
+Fondre les raccords ¦ Hoà các mối nối ¦ Leburkan sambungan
+Là où deux photos se recouvrent, le bord de celle du dessus s’efface en douceur : pas de marche visible au raccord. ¦ Ở chỗ hai ảnh chồng lên nhau, mép của ảnh bên trên mờ dần nhẹ nhàng: không thấy bậc ở chỗ nối. ¦ Di tempat dua foto bertumpuk, tepi foto yang di atas memudar perlahan: tidak ada undakan yang terlihat di sambungan.
+Largeur du fondu ¦ Độ rộng vùng hoà ¦ Lebar peleburan
+Rogner aux parties couvertes (sans coins vides) ¦ Cắt theo phần được phủ kín (không có góc trống) ¦ Pangkas ke bagian yang tertutup (tanpa sudut kosong)
+Garde le plus grand rectangle entièrement couvert par les photos : plus de coins blancs autour d’un panorama. ¦ Giữ hình chữ nhật lớn nhất được các ảnh phủ kín hoàn toàn: không còn góc trắng quanh ảnh toàn cảnh. ¦ Menyisakan persegi panjang terbesar yang tertutup penuh oleh foto: tidak ada lagi sudut putih di sekitar panorama.
+L’assemblage non enregistré sera perdu. ¦ Ảnh ghép chưa lưu sẽ bị mất. ¦ Gabungan yang belum disimpan akan hilang.
+Fermer sans enregistrer l’assemblage ? ¦ Đóng mà không lưu ảnh ghép? ¦ Tutup tanpa menyimpan gabungan?
+Mettre devant ¦ Đưa lên trước ¦ Bawa ke depan
+Mettre derrière ¦ Đưa ra sau ¦ Kirim ke belakang
+Aucune photo à assembler pour l’instant ¦ Chưa có ảnh nào để ghép ¦ Belum ada foto untuk digabungkan
+« ＋ Photos », ou glisse une photo de l’ordinateur sur le plan de travail. ¦ “＋ Ảnh”, hoặc kéo một ảnh từ máy tính vào vùng làm việc. ¦ “＋ Foto”, atau seret foto dari komputer ke area kerja.
+＋ Photos ¦ ＋ Ảnh ¦ ＋ Foto
+Clique une photo pour la régler. ¦ Bấm vào một ảnh để chỉnh nó. ¦ Klik foto untuk mengaturnya.
+La taille de la photo par rapport à ses vrais points : pour mettre deux photos à la même échelle. ¦ Kích thước của ảnh so với số điểm ảnh thật của nó: để đưa hai ảnh về cùng tỉ lệ. ¦ Ukuran foto dibandingkan dengan piksel aslinya: untuk membuat dua foto berskala sama.
+À moitié transparente, la photo du dessus laisse voir celle du dessous : on aligne les écritures. ¦ Khi bán trong suốt, ảnh bên trên cho thấy ảnh bên dưới: bạn căn cho chữ viết khớp nhau. ¦ Setengah transparan, foto di atas memperlihatkan foto di bawahnya: kamu menyejajarkan tulisannya.
+À moitié transparente ¦ Bán trong suốt ¦ Setengah transparan
+Pour mettre deux photos à la même échelle : rends celle du dessus à moitié transparente (ou coche « Mode différence »), puis ajuste sa taille et sa rotation jusqu’à ce que les écritures se superposent. ¦ Để đưa hai ảnh về cùng tỉ lệ: làm ảnh bên trên bán trong suốt (hoặc đánh dấu “Chế độ khác biệt”), rồi chỉnh kích thước và góc xoay cho đến khi chữ viết chồng khít lên nhau. ¦ Untuk membuat dua foto berskala sama: buat foto di atas setengah transparan (atau centang “Mode perbedaan”), lalu sesuaikan ukuran dan rotasinya sampai tulisannya bertumpuk.
+Opaque ¦ Không trong suốt ¦ Buram
+Aucune photo visible. ¦ Không có ảnh nào hiển thị. ¦ Tidak ada foto yang terlihat.
+Ajoute au moins deux photos qui se recouvrent (« ＋ Photos »). ¦ Hãy thêm ít nhất hai ảnh chồng lên nhau (“＋ Ảnh”). ¦ Tambahkan setidaknya dua foto yang bertumpuk (“＋ Foto”).
+Le navigateur n’a pas pu créer l’image. ¦ Trình duyệt không tạo được ảnh. ¦ Peramban tidak bisa membuat gambar.
+Pour enregistrer dans la base, l’une des photos doit venir de la base (sinon : ⤓ Télécharger). ¦ Để lưu vào cơ sở dữ liệu, một trong các ảnh phải lấy từ cơ sở dữ liệu (nếu không: ⤓ Tải xuống). ¦ Untuk menyimpan ke basis data, salah satu foto harus berasal dari basis data (jika tidak: ⤓ Unduh).
+Création de l’image… ¦ Đang tạo ảnh… ¦ Membuat gambar…
+ASSEMBLER ¦ GHÉP ẢNH ¦ GABUNGKAN
+ce n’est pas un fichier PSD ¦ đây không phải là tệp PSD ¦ ini bukan berkas PSD
+les très grands PSD (PSB) ne sont pas lus ¦ không đọc được các tệp PSD rất lớn (PSB) ¦ PSD yang sangat besar (PSB) tidak dibaca
+version de PSD inconnue ¦ phiên bản PSD không rõ ¦ versi PSD tidak dikenal
+profondeur {n} bits non lue (seulement 8 bits) ¦ không đọc được độ sâu {n} bit (chỉ 8 bit) ¦ kedalaman {n} bit tidak dibaca (hanya 8 bit)
+seuls les PSD en RVB ou en niveaux de gris sont lus ¦ chỉ đọc được PSD ở dạng RGB hoặc thang xám ¦ hanya PSD RGB atau skala abu-abu yang dibaca
+image trop grande ¦ ảnh quá lớn ¦ gambar terlalu besar
+compression ZIP non lue ¦ không đọc được nén ZIP ¦ kompresi ZIP tidak dibaca
+=🗂 PSD prêt : {n} calques, {w} × {h} px (les calques de réglage sont dans l’image aplatie). ¦ 🗂 PSD đã sẵn sàng: {n} lớp, {w} × {h} px (các lớp điều chỉnh nằm trong ảnh đã gộp phẳng). ¦ 🗂 PSD siap: {n} lapisan, {w} × {h} px (lapisan penyesuaian ada di gambar yang diratakan).
+=🗂 PSD prêt : {n} calque, {w} × {h} px (les calques de réglage sont dans l’image aplatie). ¦ 🗂 PSD đã sẵn sàng: {n} lớp, {w} × {h} px (các lớp điều chỉnh nằm trong ảnh đã gộp phẳng). ¦ 🗂 PSD siap: {n} lapisan, {w} × {h} px (lapisan penyesuaian ada di gambar yang diratakan).
+PSD illisible : {err}. ¦ Không đọc được PSD: {err}. ¦ PSD tidak terbaca: {err}.
+Calque PSD ¦ Lớp PSD ¦ Lapisan PSD
+PSD importé : {file} ¦ Đã nhập PSD: {file} ¦ PSD diimpor: {file}
+=🗂 {n} calques importés de « {file} » (proportions différentes : ajusté à la photo). ¦ 🗂 Đã nhập {n} lớp từ “{file}” (tỉ lệ khác nhau: đã chỉnh cho vừa ảnh). ¦ 🗂 {n} lapisan diimpor dari “{file}” (proporsi berbeda: disesuaikan dengan foto).
+=🗂 {n} calques importés de « {file} ». ¦ 🗂 Đã nhập {n} lớp từ “{file}”. ¦ 🗂 {n} lapisan diimpor dari “{file}”.
+=🗂 {n} calque importé de « {file} » (proportions différentes : ajusté à la photo). ¦ 🗂 Đã nhập {n} lớp từ “{file}” (tỉ lệ khác nhau: đã chỉnh cho vừa ảnh). ¦ 🗂 {n} lapisan diimpor dari “{file}” (proporsi berbeda: disesuaikan dengan foto).
+=🗂 {n} calque importé de « {file} ». ¦ 🗂 Đã nhập {n} lớp từ “{file}”. ¦ 🗂 {n} lapisan diimpor dari “{file}”.
+Cocher pour comparer ¦ Đánh dấu để so sánh ¦ Centang untuk membandingkan
+Coche deux versions pour les comparer. ¦ Hãy đánh dấu hai phiên bản để so sánh. ¦ Centang dua versi untuk membandingkannya.
+Plus ancien ¦ Cũ hơn ¦ Lebih lama
+léger ¦ nhẹ ¦ ringan
+Taille des vignettes ¦ Kích thước hình thu nhỏ ¦ Ukuran gambar mini
+Utiliser ces images ¦ Dùng các ảnh này ¦ Gunakan gambar-gambar ini
+Chercher : titre, cote, personne, lieu, année ¦ Tìm: tiêu đề, ký hiệu lưu trữ, người, địa điểm, năm ¦ Cari: judul, nomor arsip, orang, tempat, tahun
+Titre, cote, personne, lieu, année… ¦ Tiêu đề, ký hiệu lưu trữ, người, địa điểm, năm… ¦ Judul, nomor arsip, orang, tempat, tahun…
+↑ ↓ ← → · Espace : cocher · Entrée : valider ¦ ↑ ↓ ← → · Phím cách: đánh dấu · Enter: xác nhận ¦ ↑ ↓ ← → · Spasi: centang · Enter: konfirmasi
+↑ ↓ ← → · Entrée : valider ¦ ↑ ↓ ← → · Enter: xác nhận ¦ ↑ ↓ ← → · Enter: konfirmasi
+Retouche ¦ Chỉnh sửa ảnh ¦ Retus
+RETOUCHE ¦ CHỈNH SỬA ẢNH ¦ RETUS
+photo|Légende ¦ Chú thích ¦ Keterangan
+Propriétés ¦ Thuộc tính ¦ Properti
+Préréglage ¦ Thiết lập sẵn ¦ Preset
+Aucun. ¦ Không có. ¦ Tidak ada.
+trop petite pour imprimer en A5 ¦ quá nhỏ để in khổ A5 ¦ terlalu kecil untuk dicetak A5
+assez grande pour imprimer en A5 ¦ đủ lớn để in khổ A5 ¦ cukup besar untuk dicetak A5
+Écran 16:9 (1920 × 1080) ¦ Màn hình 16:9 (1920 × 1080) ¦ Layar 16:9 (1920 × 1080)
+Écran 4:3 (1600 × 1200) ¦ Màn hình 4:3 (1600 × 1200) ¦ Layar 4:3 (1600 × 1200)
+Carré 1:1 (1080 × 1080) ¦ Vuông 1:1 (1080 × 1080) ¦ Persegi 1:1 (1080 × 1080)
+Vertical 9:16 (1080 × 1920) ¦ Dọc 9:16 (1080 × 1920) ¦ Vertikal 9:16 (1080 × 1920)
+photo|Exposition ¦ Phơi sáng ¦ Eksposur
+photo|Luminosité ¦ Độ sáng ¦ Kecerahan
+Colorisation : {what} ¦ Tô màu: {what} ¦ Pewarnaan: {what}
+{what} oui ¦ {what} bật ¦ {what} aktif
+{what} non ¦ {what} tắt ¦ {what} nonaktif
+Courbe {what} ¦ Đường cong {what} ¦ Kurva {what}
+{layer} verrouillé ¦ {layer} đã khoá ¦ {layer} dikunci
+{layer} déverrouillé ¦ {layer} đã mở khoá ¦ {layer} dibuka kuncinya
+« {name} » seulement sur l’élément dessous ¦ “{name}” chỉ áp dụng cho mục ngay bên dưới ¦ “{name}” hanya pada elemen di bawahnya
+« {name} » sur tout ce qui est dessous ¦ “{name}” áp dụng cho mọi thứ bên dưới ¦ “{name}” pada semua yang ada di bawahnya
+Teinte/Saturation : {what} ¦ Sắc độ/Độ bão hoà: {what} ¦ Rona/Saturasi: {what}
+{dpi} ppp ¦ {dpi} dpi ¦ {dpi} dpi
+Envoi ({w} × {h} points, {size} Mo)… ¦ Đang gửi ({w} × {h} điểm ảnh, {size} MB)… ¦ Mengunggah ({w} × {h} piksel, {size} MB)…
+Barre du haut (groupes) ¦ Thanh trên cùng (nhóm) ¦ Bilah atas (grup)
+Les outils ¦ Các công cụ ¦ Alat-alat
+Options des outils (pinceau, texte…) ¦ Tuỳ chọn công cụ (cọ, chữ…) ¦ Opsi alat (kuas, teks…)
+Colonne d’outils ¦ Cột công cụ ¦ Kolom alat
+Panneau Réglages ¦ Bảng Điều chỉnh ¦ Panel Penyesuaian
+Préréglages ¦ Thiết lập sẵn ¦ Preset
+Import des réglages indisponible. ¦ Không thể nhập cài đặt. ¦ Impor pengaturan tidak tersedia.

@@ -6,6 +6,7 @@
 !/data/reference/
 /data/reference/*
 !/data/reference/geo-fr.sqlite.gz
+!/data/reference/frontieres/
 !/data/reference/geo-be.sqlite.gz
 !/data/reference/geo-ch.sqlite.gz
 !/data/reference/geo-li.sqlite.gz
@@ -117,3 +118,9 @@ Thumbs.db
 
 # Limites officielles espagnoles (CNIG), téléchargées par Victor : source de scripts/build-reference-europe.php
 /lineas_limite/
+
+# 🧪 photos dessinées de la base d’exemple (scripts/exemple-photos.php) : livrées avec l’app
+!assets/exemple/*.jpg
+
+# fichiers d’essai des tests (GEDCOM, zip, photos inventés) : toujours enregistrés
+!/tests/fixtures/**

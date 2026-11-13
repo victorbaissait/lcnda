@@ -8,6 +8,7 @@
  */
 (function (root) {
     'use strict';
+    const i18n = (s, v) => { const I = typeof window !== 'undefined' && window.LCNDA_I18N; return I ? I.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s); }; // 🌐 traduction (docs/I18N.md)
     const ext = root.LCNDA_EXT = root.LCNDA_EXT || {};
     const BLEND_IN = {norm: 'source-over', 'mul ': 'multiply', scrn: 'screen', over: 'overlay', dark: 'darken', lite: 'lighten', 'div ': 'color-dodge', idiv: 'color-burn',
         hLit: 'hard-light', sLit: 'soft-light', diff: 'difference', smud: 'exclusion', 'hue ': 'hue', 'sat ': 'saturation', colr: 'color', 'lum ': 'luminosity'};
@@ -28,12 +29,12 @@
         const u = buf instanceof Uint8Array ? buf : new Uint8Array(buf), dv = new DataView(u.buffer, u.byteOffset, u.byteLength); let p = 0;
         const u8 = () => u[p++], u16 = () => { const v = dv.getUint16(p); p += 2; return v; }, i16 = () => { const v = dv.getInt16(p); p += 2; return v; }, u32 = () => { const v = dv.getUint32(p); p += 4; return v; }, i32 = () => { const v = dv.getInt32(p); p += 4; return v; };
         const str = n => { let s = ''; for (let i = 0; i < n; i++) s += String.fromCharCode(u[p + i]); p += n; return s; };
-        if (u.length < 26 || str(4) !== '8BPS') throw new Error('ce n’est pas un fichier PSD');
-        const ver = u16(); if (ver !== 1) throw new Error(ver === 2 ? 'les très grands PSD (PSB) ne sont pas lus' : 'version de PSD inconnue');
+        if (u.length < 26 || str(4) !== '8BPS') throw new Error(i18n('ce n’est pas un fichier PSD'));
+        const ver = u16(); if (ver !== 1) throw new Error(ver === 2 ? i18n('les très grands PSD (PSB) ne sont pas lus') : i18n('version de PSD inconnue'));
         p += 6; const nch = u16(), H = u32(), W = u32(), depth = u16(), mode = u16();
-        if (depth !== 8) throw new Error(`profondeur ${depth} bits non lue (seulement 8 bits)`);
-        if (mode !== 3 && mode !== 1) throw new Error('seuls les PSD en RVB ou en niveaux de gris sont lus');
-        if (W * H > 60e6 || !W || !H) throw new Error('image trop grande');
+        if (depth !== 8) throw new Error(i18n('profondeur {n} bits non lue (seulement 8 bits)', {n: depth}));
+        if (mode !== 3 && mode !== 1) throw new Error(i18n('seuls les PSD en RVB ou en niveaux de gris sont lus'));
+        if (W * H > 60e6 || !W || !H) throw new Error(i18n('image trop grande'));
         const skip = () => { const n = u32(); p += n; }; // (« p += u32() » lirait p avant que u32 ne l'avance)
         skip(); // couleurs indexées : rien
         skip(); // ressources de l'image
@@ -82,7 +83,7 @@
         const comp = u16(), n2 = W * H, rgba = new Uint8ClampedArray(n2 * 4).fill(255), planes = [];
         if (comp === 1) { let q = p + nch * H * 2; for (let c = 0; c < nch; c++) { const pl = new Uint8Array(n2); for (let y = 0; y < H; y++) q = unpack(u, q, W, pl, y * W); planes.push(pl); } }
         else if (comp === 0) for (let c = 0; c < nch; c++) planes.push(u.subarray(p + c * n2, p + (c + 1) * n2));
-        else throw new Error('compression ZIP non lue');
+        else throw new Error(i18n('compression ZIP non lue'));
         const map = mode === 1 ? [0, 0, 0, nch > 1 ? 1 : -1] : [0, 1, 2, nch > 3 ? 3 : -1];
         for (let i = 0; i < n2; i++) for (let c = 0; c < 4; c++) { const s = map[c]; if (s >= 0 && planes[s]) rgba[i * 4 + c] = planes[s][i]; }
         return {w: W, h: H, composite: rgba, layers};
@@ -138,22 +139,22 @@
             const bytes = write({w: W, h: H, composite: rgbaOf(flat), layers: list});
             const name = `${String(c.title() || 'photo').replace(/[\\/:*?"<>|]+/g, ' ').trim().slice(0, 80) || 'photo'}.psd`;
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([bytes], {type: 'image/vnd.adobe.photoshop'})); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 60000);
-            A().toast(`🗂 PSD prêt : ${list.length} calque${list.length > 1 ? 's' : ''}, ${W} × ${H} px (les calques de réglage sont dans l’image aplatie).`, 'success');
+            A().toast(list.length > 1 ? i18n('🗂 PSD prêt : {n} calques, {w} × {h} px (les calques de réglage sont dans l’image aplatie).', {n: list.length, w: String(W), h: String(H)}) : i18n('🗂 PSD prêt : {n} calque, {w} × {h} px (les calques de réglage sont dans l’image aplatie).', {n: list.length, w: String(W), h: String(H)}), 'success');
         },
         /** ⤒ les calques d'un PSD posés sur la photo, à sa taille (le PSD est étiré s'il n'a pas les mêmes proportions) */
         async import(c) {
             const f = await new Promise(res => { const i = document.createElement('input'); i.type = 'file'; i.accept = '.psd,image/vnd.adobe.photoshop'; i.hidden = true; i.onchange = () => { res(i.files?.[0] || null); i.remove(); }; document.body.appendChild(i); i.click(); }); if (!f) return; // la fenêtre d'import commune de l'app (dépôt, ou choisir le fichier)
-            if (f.size > 400e6) return A().toast('Fichier trop gros.', 'error');
-            let d; try { d = read(await f.arrayBuffer()); } catch (err) { return A().toast(`PSD illisible : ${err.message}.`, 'error'); }
+            if (f.size > 400e6) return A().toast(i18n('Fichier trop gros.'), 'error');
+            let d; try { d = read(await f.arrayBuffer()); } catch (err) { return A().toast(i18n('PSD illisible : {err}.', {err: err.message}), 'error'); }
             const list = d.layers.length ? d.layers : [{name: f.name.replace(/\.psd$/i, ''), top: 0, left: 0, w: d.w, h: d.h, rgba: d.composite, opacity: 1, visible: true, blend: 'source-over'}];
             c.setActive('');
             for (const l of list) {
                 if (!l.w || !l.h) continue;
-                const node = c.newLayer(l.name || 'Calque PSD'); node.ops = [{type: 'image', mask: c.addMask(canvasOf(l.rgba, l.w, l.h)), x: l.left / d.w, y: l.top / d.h, w: l.w / d.w, h: l.h / d.h, rot: 0, opacity: 1}];
+                const node = c.newLayer(l.name || 'Calque PSD'); if (l.name) node.name = l.name; /* le nom tapé dans le PSD ne se traduit pas */ node.ops = [{type: 'image', mask: c.addMask(canvasOf(l.rgba, l.w, l.h)), x: l.left / d.w, y: l.top / d.h, w: l.w / d.w, h: l.h / d.h, rot: 0, opacity: 1}];
                 node.opacity = l.opacity; node.visible = l.visible; if (l.blend !== 'source-over') node.blend = l.blend; c.renderLayer(node);
             }
-            c.refresh(); c.commit(`PSD importé : ${f.name}`); c.showTab?.('layers');
-            A().toast(`🗂 ${list.length} calque${list.length > 1 ? 's' : ''} importé${list.length > 1 ? 's' : ''} de « ${f.name} »${d.w / d.h !== c.pw / c.ph ? ' (proportions différentes : ajusté à la photo)' : ''}.`, 'success');
+            c.refresh(); c.commit(i18n('PSD importé : {file}', {file: f.name})); c.showTab?.('layers');
+            { const diff = d.w / d.h !== c.pw / c.ph, v = {n: list.length, file: f.name}; A().toast(list.length > 1 ? (diff ? i18n('🗂 {n} calques importés de « {file} » (proportions différentes : ajusté à la photo).', v) : i18n('🗂 {n} calques importés de « {file} ».', v)) : (diff ? i18n('🗂 {n} calque importé de « {file} » (proportions différentes : ajusté à la photo).', v) : i18n('🗂 {n} calque importé de « {file} ».', v)), 'success'); }
         },
     };
 })(typeof window !== 'undefined' ? window : globalThis);

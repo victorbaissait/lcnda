@@ -1,0 +1,422 @@
+fr ¦ sk ¦ nb
+# ═════ zone « composants » : slovaque (sk) et norvégien bokmål (nb) — docs/I18N.md, « Ajouter une langue » ═════
+Enregistrer ¦ Uložiť ¦ Lagre
+Annuler ¦ Zrušiť ¦ Avbryt
+Fermer ¦ Zavrieť ¦ Lukk
+Supprimer ¦ Vymazať ¦ Slett
+Retirer ¦ Odobrať ¦ Fjern
+Modifier ¦ Upraviť ¦ Rediger
+Créer ¦ Vytvoriť ¦ Opprett
+Ajouter ¦ Pridať ¦ Legg til
+Relier ¦ Prepojiť ¦ Koble
+↺ Remettre comme au départ ¦ ↺ Obnoviť východiskový stav ¦ ↺ Tilbakestill som fra start
+Remettre comme au départ ¦ Obnoviť východiskový stav ¦ Tilbakestill som fra start
+↶ Annuler ¦ ↶ Späť ¦ ↶ Angre
+↷ Rétablir ¦ ↷ Znova ¦ ↷ Gjør om
+Rétablir ¦ Znova ¦ Gjør om
+Continuer ¦ Pokračovať ¦ Fortsett
+Réessayer ¦ Skúsiť znova ¦ Prøv igjen
+Ouvrir ¦ Otvoriť ¦ Åpne
+↗ Ouvrir ¦ ↗ Otvoriť ¦ ↗ Åpne
+Renommer ¦ Premenovať ¦ Gi nytt navn
+Dupliquer ¦ Duplikovať ¦ Dupliser
+Remplacer ¦ Nahradiť ¦ Erstatt
+Choisir ¦ Vybrať ¦ Velg
+Choisir… ¦ Vybrať… ¦ Velg…
+Changer ¦ Zmeniť ¦ Endre
+Exporter ¦ Exportovať ¦ Eksporter
+Importer ¦ Importovať ¦ Importer
+Imprimer ¦ Tlačiť ¦ Skriv ut
+🖨 Imprimer ¦ 🖨 Tlačiť ¦ 🖨 Skriv ut
+💾 Enregistrer ¦ 💾 Uložiť ¦ 💾 Lagre
+⤒ Importer ¦ ⤒ Importovať ¦ ⤒ Importer
+⤓ Exporter ▾ ¦ ⤓ Exportovať ▾ ¦ ⤓ Eksporter ▾
+📋 Copier ¦ 📋 Kopírovať ¦ 📋 Kopier
+✓ Enregistré ¦ ✓ Uložené ¦ ✓ Lagret
+Enregistré ¦ Uložené ¦ Lagret
+Enregistrement… ¦ Ukladá sa… ¦ Lagrer…
+⚠️ Pas enregistré ¦ ⚠️ Neuložené ¦ ⚠️ Ikke lagret
+• modifié ¦ • zmenené ¦ • endret
+Plein écran ¦ Celá obrazovka ¦ Fullskjerm
+Plus d’actions ¦ Ďalšie akcie ¦ Flere handlinger
+Aide ¦ Pomocník ¦ Hjelp
+Aide : ¦ Pomocník: ¦ Hjelp:
+En savoir plus (FAQ) → ¦ Viac informácií (FAQ) → ¦ Les mer (FAQ) →
+Clique pour lire la suite ¦ Klikni a čítaj ďalej ¦ Klikk for å lese mer
+Retour ¦ Späť ¦ Tilbake
+← Retour ¦ ← Späť ¦ ← Tilbake
+Oui ¦ Áno ¦ Ja
+Non ¦ Nie ¦ Nei
+Aucune ¦ Žiadna ¦ Ingen
+Aucun ¦ Žiadny ¦ Ingen
+Tous ¦ Všetky ¦ Alle
+Toutes ¦ Všetky ¦ Alle
+Tout ¦ Všetko ¦ Alt
+Tout voir ¦ Zobraziť všetko ¦ Vis alt
+Voir tout ¦ Zobraziť všetko ¦ Vis alt
+Toutes ({n}) ¦ Všetky ({n}) ¦ Alle ({n})
+Tout ({n}) ¦ Všetko ({n}) ¦ Alt ({n})
+Rien pour l’instant ¦ Zatiaľ nič ¦ Ingenting ennå
+Rien ¦ Nič ¦ Ingenting
+Sans titre ¦ Bez názvu ¦ Uten tittel
+Échap ¦ Esc ¦ Esc
+Entrée ¦ Enter ¦ Enter
+Début ¦ Home ¦ Home
+retour arrière ¦ backspace ¦ backspace
+⚠️ ATTENTION ¦ ⚠️ POZOR ¦ ⚠️ ADVARSEL
+CONFIRMER ¦ POTVRDIŤ ¦ BEKREFT
+Es-tu sûr ? ¦ Naozaj? ¦ Er du sikker?
+Confirmer ¦ Potvrdiť ¦ Bekreft
+Impossible d’annuler : {err} ¦ Nedá sa vrátiť späť: {err} ¦ Kunne ikke angre: {err}
+Impossible de rétablir : {err} ¦ Nedá sa urobiť znova: {err} ¦ Kunne ikke gjøre om: {err}
+Déjà remis : rien à annuler de plus. ¦ Už vrátené: nie je čo ďalšie vracať. ¦ Allerede tilbakestilt: ingenting mer å angre.
+↶ Annulé : {what} ¦ ↶ Vrátené: {what} ¦ ↶ Angret: {what}
+↶ Annulé : « {what} » ¦ ↶ Vrátené: „{what}“ ¦ ↶ Angret: «{what}»
+Pas de connexion avec LCNDA : rien n’est perdu, réessaie. ¦ Žiadne spojenie s LCNDA: nič sa nestratilo, skús to znova. ¦ Ingen forbindelse med LCNDA: ingenting er tapt, prøv igjen.
+Réponse illisible du serveur ¦ Nečitateľná odpoveď servera ¦ Uleselig svar fra serveren
+Réponse illisible du serveur. ¦ Nečitateľná odpoveď servera. ¦ Uleselig svar fra serveren.
+Erreur du serveur. ¦ Chyba servera. ¦ Serverfeil.
+Réglage changé ¦ Nastavenie zmenené ¦ Innstillingen er endret
+Réglage changé : « {what} » ¦ Nastavenie zmenené: „{what}“ ¦ Innstillingen er endret: «{what}»
+Réglages remis comme au départ ¦ Nastavenia obnovené na východiskové ¦ Innstillingene er tilbakestilt
+Chargement… ¦ Načítava sa… ¦ Laster inn…
+Chargement de la base… ¦ Načítava sa databáza… ¦ Laster inn databasen…
+Ouverture de la généalogie… ¦ Otvára sa rodokmeň… ¦ Åpner slektstreet…
+Chercher ¦ Hľadať ¦ Søk
+Chercher… ¦ Hľadať… ¦ Søk…
+Rechercher ¦ Vyhľadať ¦ Søk
+Vider la case (Échap) ¦ Vymazať pole (Esc) ¦ Tøm feltet (Esc)
+Vider la case ¦ Vymazať pole ¦ Tøm feltet
+Touche « / » : aller dans la case de recherche ¦ Kláves „/“: prejsť do vyhľadávacieho poľa ¦ Tasten «/»: gå til søkefeltet
+Filtrer ¦ Filtrovať ¦ Filtrer
+Filtrer ▾ ¦ Filtrovať ▾ ¦ Filtrer ▾
+Tout effacer ¦ Vymazať všetko ¦ Fjern alt
+Retirer ce filtre ¦ Odobrať tento filter ¦ Fjern dette filteret
+Trier ¦ Zoradiť ¦ Sorter
+Trier : ¦ Zoradiť: ¦ Sorter:
+Les plus récents ¦ Najnovšie ¦ Nyeste først
+Les plus anciens ¦ Najstaršie ¦ Eldste først
+Les plus récentes ¦ Najnovšie ¦ Nyeste først
+Les plus anciennes ¦ Najstaršie ¦ Eldste først
+Nom A → Z ¦ Názov A → Z ¦ Navn A → Å
+Nom Z → A ¦ Názov Z → A ¦ Navn Å → A
+Liste ¦ Zoznam ¦ Liste
+Fiches ¦ Karty ¦ Kort
+En liste : une ligne par élément (vignette, nom, détails, date) ¦ Ako zoznam: jeden riadok na položku (náhľad, názov, podrobnosti, dátum) ¦ Som liste: én linje per element (miniatyr, navn, detaljer, dato)
+En fiches : une carte par élément, avec une grande vignette ¦ Ako karty: jedna karta na položku, s veľkým náhľadom ¦ Som kort: ett kort per element, med en stor miniatyr
+Affichage des {what} ¦ Zobrazenie: {what} ¦ Visning av {what}
+Voir le suivant ↓ ¦ Zobraziť ďalší ↓ ¦ Vis den neste ↓
+Voir la suivante ↓ ¦ Zobraziť ďalšiu ↓ ¦ Vis den neste ↓
+Voir les {n} suivants ↓ ¦ Zobraziť ďalších {n} ↓ ¦ Vis de neste {n} ↓
+Voir les {n} suivantes ↓ ¦ Zobraziť ďalších {n} ↓ ¦ Vis de neste {n} ↓
+{n} éléments ¦ Položky: {n} ¦ {n} elementer
+=élément ¦ položka|položky|položiek ¦ element|elementer
+éléments ¦ položky ¦ elementer
+=personne ¦ osoba|osoby|osôb ¦ person|personer
+=animal ¦ zviera|zvieratá|zvierat ¦ dyr|dyr
+=fiche ¦ karta|karty|kariet ¦ oppføring|oppføringer
+=lieu ¦ miesto|miesta|miest ¦ sted|steder
+=commune ¦ obec|obce|obcí ¦ kommune|kommuner
+=ville ¦ mesto|mestá|miest ¦ by|byer
+=chose ¦ vec|veci|vecí ¦ ting|ting
+=caractère ¦ znak|znaky|znakov ¦ tegn|tegn
+=page ¦ stránka|stránky|stránok ¦ side|sider
+=document ¦ dokument|dokumenty|dokumentov ¦ dokument|dokumenter
+=média ¦ médium|médiá|médií ¦ mediefil|mediefiler
+=source ¦ prameň|pramene|prameňov ¦ kilde|kilder
+=événement ¦ udalosť|udalosti|udalostí ¦ hendelse|hendelser
+=étiquette ¦ štítok|štítky|štítkov ¦ etikett|etiketter
+=enquête ¦ pátranie|pátrania|pátraní ¦ undersøkelse|undersøkelser
+=modification ¦ zmena|zmeny|zmien ¦ endring|endringer
+=famille ¦ rodina|rodiny|rodín ¦ familie|familier
+=génération ¦ generácia|generácie|generácií ¦ generasjon|generasjoner
+=réglage ¦ nastavenie|nastavenia|nastavení ¦ innstilling|innstillinger
+=erreur captée ¦ zachytená chyba|zachytené chyby|zachytených chýb ¦ fanget feil|fangede feil
+=jour ¦ deň|dni|dní ¦ dag|dager
+=type ¦ typ|typy|typov ¦ type|typer
+=branche ¦ vetva|vetvy|vetiev ¦ gren|grener
+=doublon possible ¦ možná duplicita|možné duplicity|možných duplicít ¦ mulig duplikat|mulige duplikater
+=chose à vérifier ¦ vec na overenie|veci na overenie|vecí na overenie ¦ ting å kontrollere|ting å kontrollere
+=album ¦ album|albumy|albumov ¦ album|album
+=chanson ¦ pieseň|piesne|piesní ¦ sang|sanger
+=titre ¦ názov|názvy|názvov ¦ tittel|titler
+Nom, prénom… (2 lettres suffisent) ¦ Priezvisko, meno… (stačia 2 písmená) ¦ Etternavn, fornavn… (2 bokstaver er nok)
+Ville, village, paroisse… ¦ Mesto, dedina, farnosť… ¦ By, bygd, sogn…
+＋ Ajouter une personne… ¦ ＋ Pridať osobu… ¦ ＋ Legg til en person…
+＋ Ajouter un lieu… ¦ ＋ Pridať miesto… ¦ ＋ Legg til et sted…
+＋ Ajouter une source… ¦ ＋ Pridať prameň… ¦ ＋ Legg til en kilde…
+＋ Ajouter un média… ¦ ＋ Pridať médium… ¦ ＋ Legg til en mediefil…
+＋ Ajouter une enquête… ¦ ＋ Pridať pátranie… ¦ ＋ Legg til en undersøkelse…
+＋ Ajouter une étiquette… ¦ ＋ Pridať štítok… ¦ ＋ Legg til en etikett…
+＋ Ajouter un événement… ¦ ＋ Pridať udalosť… ¦ ＋ Legg til en hendelse…
+＋ Ajouter un animal… ¦ ＋ Pridať zviera… ¦ ＋ Legg til et dyr…
+＋ Ajouter… ¦ ＋ Pridať… ¦ ＋ Legg til…
+↗ Fiche ¦ ↗ Karta ¦ ↗ Oppføring
+↗ Lieu ¦ ↗ Miesto ¦ ↗ Sted
+Aucune fiche ¦ Žiadna karta ¦ Ingen oppføring
+Aucun lieu ¦ Žiadne miesto ¦ Ingen steder
+Aucune source ¦ Žiadny prameň ¦ Ingen kilde
+Aucun média ¦ Žiadne médiá ¦ Ingen medier
+Aucune enquête ¦ Žiadne pátranie ¦ Ingen undersøkelse
+Aucune étiquette ¦ Žiadny štítok ¦ Ingen etikett
+Aucun événement ¦ Žiadna udalosť ¦ Ingen hendelse
+Aucun animal ¦ Žiadne zviera ¦ Ingen dyr
+Créer la fiche ¦ Vytvoriť kartu ¦ Opprett oppføringen
+Créer le lieu ¦ Vytvoriť miesto ¦ Opprett stedet
+Créer une fiche ¦ Vytvoriť kartu ¦ Opprett en oppføring
+＋ Créer sa fiche ¦ ＋ Vytvoriť kartu osoby ¦ ＋ Opprett personens oppføring
+👤 Personnes ¦ 👤 Osoby ¦ 👤 Personer
+📍 Lieux ¦ 📍 Miesta ¦ 📍 Steder
+📚 Sources ¦ 📚 Pramene ¦ 📚 Kilder
+🖼 Médias ¦ 🖼 Médiá ¦ 🖼 Medier
+🔍 Enquêtes ¦ 🔍 Pátrania ¦ 🔍 Undersøkelser
+🏷 Étiquettes ¦ 🏷 Štítky ¦ 🏷 Etiketter
+📅 Événements ¦ 📅 Udalosti ¦ 📅 Hendelser
+🐾 Animaux ¦ 🐾 Zvieratá ¦ 🐾 Dyr
+✎ Garder le texte « {q} » sans fiche ¦ ✎ Ponechať text „{q}“ bez karty ¦ ✎ Behold teksten «{q}» uten oppføring
+🗺 Choisir sur la carte ¦ 🗺 Vybrať na mape ¦ 🗺 Velg på kartet
+{what} de ta base ¦ {what} z tvojej databázy ¦ {what} i databasen din
+{what} de France ¦ {what} vo Francúzsku ¦ {what} i Frankrike
+{what} du monde ¦ {what} vo svete ¦ {what} i verden
+300 villes du monde et plus ¦ viac ako 300 miest sveta ¦ over 300 byer i verden
+{what} trouvés ¦ Nájdené: {what} ¦ {what} funnet
+{none} pour « {q} ». Vérifie l’orthographe ¦ {none} pre „{q}“. Skontroluj pravopis ¦ {none} for «{q}». Sjekk stavemåten
+{none} pour l’instant ¦ {none} zatiaľ ¦ {none} ennå
+, ou : ¦ , alebo: ¦ , eller:
+↹ Tab passe d’un filtre à l’autre ¦ ↹ Tab prepína medzi filtrami ¦ ↹ Tab bytter mellom filtrene
+↑ ↓ Entrée ¦ ↑ ↓ Enter ¦ ↑ ↓ Enter
+… la liste défile ¦ … zoznam sa posúva ¦ … listen ruller
+⭐ Personne principale ¦ ⭐ Hlavná osoba ¦ ⭐ Hovedperson
+Autres personnes principales ¦ Ďalšie hlavné osoby ¦ Andre hovedpersoner
+Personnes principales ¦ Hlavné osoby ¦ Hovedpersoner
+Personnes secondaires ¦ Vedľajšie osoby ¦ Bipersoner
+au cœur de la recherche ¦ v centre výskumu ¦ i sentrum av forskningen
+témoins, voisins, parrains, pistes… ¦ svedkovia, susedia, krstní rodičia, stopy… ¦ vitner, naboer, faddere, spor…
+Choisir la personne principale… ¦ Vybrať hlavnú osobu… ¦ Velg hovedpersonen…
+＋ Ajouter une personne principale… ¦ ＋ Pridať hlavnú osobu… ¦ ＋ Legg til en hovedperson…
+＋ Ajouter une personne secondaire… ¦ ＋ Pridať vedľajšiu osobu… ¦ ＋ Legg til en biperson…
+Changer le rôle ¦ Zmeniť rolu ¦ Endre rolle
+Donner un rôle (facultatif) ¦ Priradiť rolu (nepovinné) ¦ Gi en rolle (valgfritt)
+rôle ▾ ¦ rola ▾ ¦ rolle ▾
+Rôle libre ¦ Voľná rola ¦ Fri rolle
+Retirer le rôle ¦ Odobrať rolu ¦ Fjern rollen
+Passer en secondaire ¦ Presunúť medzi vedľajšie ¦ Flytt til bipersoner
+Passer en principale ¦ Presunúť medzi hlavné ¦ Flytt til hovedpersoner
+Autre mot… (Entrée) ¦ Iné slovo… (Enter) ¦ Annet ord… (Enter)
+témoin ¦ svedok ¦ vitne
+déclarant ¦ oznamovateľ ¦ anmelder
+parrain ¦ krstný otec ¦ gudfar
+marraine ¦ krstná matka ¦ gudmor
+voisin ¦ sused ¦ nabo
+employeur ¦ zamestnávateľ ¦ arbeidsgiver
+officier ¦ matrikár ¦ registerfører
+épouse ¦ manželka ¦ hustru
+époux ¦ manžel ¦ ektemann
+sans fiche ¦ bez karty ¦ uten oppføring
+Personne sans fiche : clic pour créer sa fiche ¦ Osoba bez karty: kliknutím jej kartu vytvoríš ¦ Person uten oppføring: klikk for å opprette oppføringen
+Ouvrir la fiche ¦ Otvoriť kartu ¦ Åpne oppføringen
+Voir sur la carte ¦ Zobraziť na mape ¦ Vis på kartet
+Aucune personne choisie ¦ Nie je vybraná žiadna osoba ¦ Ingen person valgt
+Choisir des personnes ¦ Vybrať osoby ¦ Velg personer
+Choisir une personne ¦ Vybrať osobu ¦ Velg en person
+Choisir des lieux ¦ Vybrať miesta ¦ Velg steder
+Choisir un lieu ¦ Vybrať miesto ¦ Velg et sted
+Carte : clique l’endroit du lieu ¦ Mapa: klikni na miesto ¦ Kart: klikk der stedet ligger
+Clique l’endroit du lieu sur la carte (glisse pour te déplacer, molette pour zoomer). ¦ Klikni na miesto na mape (ťahaním sa posunieš, kolieskom priblížiš). ¦ Klikk der stedet ligger på kartet (dra for å flytte deg, musehjulet for å zoome).
+＋ Créer un lieu ici ¦ ＋ Vytvoriť tu miesto ¦ ＋ Opprett et sted her
+Nom du lieu ¦ Názov miesta ¦ Stedets navn
+Lieux proches… ¦ Blízke miesta… ¦ Steder i nærheten…
+Aucun lieu connu près d’ici : crée-le ci-dessous. ¦ Neďaleko nie je žiadne známe miesto: vytvor ho nižšie. ¦ Ingen kjente steder i nærheten: opprett det nedenfor.
+Donne un nom au lieu. ¦ Pomenuj miesto. ¦ Gi stedet et navn.
+Dézoomer ¦ Oddialiť ¦ Zoom ut
+Lieu impossible à ajouter ¦ Miesto sa nedá pridať ¦ Stedet kan ikke legges til
+Crée d’abord la fiche dans Personnes, puis choisis-la ici. ¦ Najprv vytvor kartu v Osobách a potom ju vyber tu. ¦ Opprett først oppføringen under Personer, og velg den så her.
+Crée-la d’abord dans l’outil, puis choisis-la ici. ¦ Najprv ju vytvor v nástroji a potom ju vyber tu. ¦ Opprett den først i verktøyet, og velg den så her.
+Personne ¦ Osoba ¦ Person
+Lieu ¦ Miesto ¦ Sted
+À corriger. ¦ Na opravu. ¦ Må rettes.
+<b>{what} à corriger</b> avant d’enregistrer. ¦ <b>Na opravu: {what}</b> pred uložením. ¦ <b>{what} å rette</b> før du lagrer.
+Coche cette case pour continuer. ¦ Zaškrtni toto políčko a pokračuj. ¦ Kryss av i denne boksen for å fortsette.
+Choisis une des possibilités. ¦ Vyber jednu z možností. ¦ Velg en av mulighetene.
+Choisis un fichier. ¦ Vyber súbor. ¦ Velg en fil.
+Choisis dans la liste. ¦ Vyber zo zoznamu. ¦ Velg fra listen.
+Ce champ est à remplir. ¦ Toto pole treba vyplniť. ¦ Dette feltet må fylles ut.
+Écris un nombre (par exemple 12 ou 3,5). ¦ Napíš číslo (napríklad 12 alebo 3,5). ¦ Skriv et tall (for eksempel 12 eller 3,5).
+Ce n’est pas compris : vérifie ce qui est écrit. ¦ Nerozumiem: skontroluj, čo je napísané. ¦ Det ble ikke forstått: sjekk det som står.
+Écris une adresse e-mail complète (nom@exemple.fr). ¦ Napíš úplnú e-mailovú adresu (meno@priklad.sk). ¦ Skriv en fullstendig e-postadresse (navn@eksempel.no).
+Écris une adresse web complète (https://…). ¦ Napíš úplnú webovú adresu (https://…). ¦ Skriv en fullstendig nettadresse (https://…).
+Ce n’est pas au bon format. ¦ Nie je to v správnom formáte. ¦ Det har ikke riktig format.
+Au moins {x}. ¦ Aspoň {x}. ¦ Minst {x}.
+Au plus {x}. ¦ Najviac {x}. ¦ Høyst {x}.
+Au moins {x} (là : {y}). ¦ Aspoň {x} (teraz: {y}). ¦ Minst {x} (nå: {y}).
+Cette valeur n’est pas permise ici : prends un nombre rond. ¦ Táto hodnota tu nie je povolená: použi celé číslo. ¦ Den verdien er ikke tillatt her: bruk et helt tall.
+Donne un nom à ces réglages. ¦ Pomenuj tieto nastavenia. ¦ Gi disse innstillingene et navn.
+Choisir une couleur ¦ Vybrať farbu ¦ Velg en farge
+Couleurs de l’app ¦ Farby aplikácie ¦ Appens farger
+Récentes ¦ Nedávne ¦ Nylige
+Choisir une autre couleur ¦ Vybrať inú farbu ¦ Velg en annen farge
+Prendre une couleur n’importe où dans la fenêtre ¦ Nabrať farbu kdekoľvek v okne ¦ Ta en farge hvor som helst i vinduet
+Code de la couleur ¦ Kód farby ¦ Fargekode
+Remettre la couleur d’avant ¦ Vrátiť predchádzajúcu farbu ¦ Gjenopprett den forrige fargen
+Double-clic : revenir à la valeur de départ ¦ Dvojklik: návrat k východiskovej hodnote ¦ Dobbeltklikk: tilbake til startverdien
+Choisir une police ¦ Vybrať písmo ¦ Velg en skrifttype
+Chercher une police… ¦ Hľadať písmo… ¦ Søk etter en skrifttype…
+Les polices de l’ordinateur… ¦ Písma počítača… ¦ Datamaskinens skrifttyper…
+Aucune police pour « {q} ». ¦ Žiadne písmo pre „{q}“. ¦ Ingen skrifttype for «{q}».
+Lecture des polices… ¦ Načítavajú sa písma… ¦ Leser skrifttyper…
+🔓 Voir toutes les polices de l’ordinateur ¦ 🔓 Zobraziť všetky písma počítača ¦ 🔓 Vis alle datamaskinens skrifttyper
+Le navigateur te demandera la permission. ¦ Prehliadač ťa požiada o povolenie. ¦ Nettleseren vil be deg om tillatelse.
+CONSEILLÉE ¦ ODPORÚČANÉ ¦ ANBEFALT
+RÉCENTE ¦ NEDÁVNE ¦ NYLIG
+DE L’APP ¦ Z APLIKÁCIE ¦ I APPEN
+TAPÉE ¦ NAPÍSANÉ ¦ SKREVET
+Réglages enregistrés ¦ Uložené nastavenia ¦ Lagrede innstillinger
+Nom de ces réglages ¦ Názov týchto nastavení ¦ Navn på disse innstillingene
+Nom du réglage ¦ Názov nastavenia ¦ Innstillingens navn
+Aucun réglage enregistré pour l’instant. ¦ Zatiaľ žiadne uložené nastavenie. ¦ Ingen lagrede innstillinger ennå.
+＋ Enregistrer les réglages actuels ¦ ＋ Uložiť aktuálne nastavenia ¦ ＋ Lagre de gjeldende innstillingene
+Un réglage « {name} » existe déjà. ¦ Nastavenie „{name}“ už existuje. ¦ En innstilling «{name}» finnes allerede.
+Le remplacer ? ¦ Nahradiť ho? ¦ Erstatte den?
+Réglages gardés sous « {name} ». ¦ Nastavenia uložené ako „{name}“. ¦ Innstillingene er lagret som «{name}».
+Remplacer par les réglages actuels ¦ Nahradiť aktuálnymi nastaveniami ¦ Erstatt med de gjeldende innstillingene
+Remplacer « {name} » par les réglages actuels ? ¦ Nahradiť „{name}“ aktuálnymi nastaveniami? ¦ Erstatte «{name}» med de gjeldende innstillingene?
+Réglage mis à jour. ¦ Nastavenie aktualizované. ¦ Innstillingen er oppdatert.
+Réglages « {name} » appliqués. ¦ Nastavenia „{name}“ použité. ¦ Innstillingene «{name}» er tatt i bruk.
+Exporter (fichier .json) ¦ Exportovať (súbor .json) ¦ Eksporter (.json-fil)
+Remplacer, renommer, dupliquer, exporter, supprimer ¦ Nahradiť, premenovať, duplikovať, exportovať, vymazať ¦ Erstatt, gi nytt navn, dupliser, eksporter, slett
+Exporter (PDF, image, impression…) ¦ Exportovať (PDF, obrázok, tlač…) ¦ Eksporter (PDF, bilde, utskrift…)
+⤓ Exporter en {fmt} ¦ ⤓ Exportovať do {fmt} ¦ ⤓ Eksporter som {fmt}
+Nom du fichier ¦ Názov súboru ¦ Filnavn
+Qualité ¦ Kvalita ¦ Kvalitet
+Fond perdu et traits de coupe (imprimeur) ¦ Spadávka a orezové značky (tlačiareň) ¦ Utfallende og skjæremerker (trykkeri)
+Ranger aussi une copie dans les médias ¦ Uložiť aj kópiu do médií ¦ Lagre også en kopi i mediene
+Aperçu ¦ Náhľad ¦ Forhåndsvisning
+Aperçu… ¦ Náhľad… ¦ Forhåndsvisning…
+Pas d’aperçu ¦ Bez náhľadu ¦ Ingen forhåndsvisning
+Format du papier ¦ Formát papiera ¦ Papirformat
+Ce qu’on imprime ¦ Čo sa tlačí ¦ Hva som skrives ut
+Pages à imprimer ¦ Stránky na tlač ¦ Sider som skal skrives ut
+Celle affichée ¦ Zobrazená ¦ Den som vises
+Page précédente ¦ Predchádzajúca stránka ¦ Forrige side
+Page suivante ¦ Ďalšia stránka ¦ Neste side
+Aperçu de l’impression ¦ Náhľad tlače ¦ Forhåndsvisning av utskrift
+Exemplaires ¦ Kópie ¦ Eksemplarer
+Portrait ¦ Na výšku ¦ Stående
+Paysage ¦ Na šírku ¦ Liggende
+L’écran affiché ¦ Zobrazená obrazovka ¦ Skjermen som vises
+Dans la fenêtre qui s’ouvre, choisis « Enregistrer au format PDF » comme imprimante. ¦ V okne, ktoré sa otvorí, vyber ako tlačiareň „Uložiť ako PDF“. ¦ I vinduet som åpnes, velger du «Lagre som PDF» som skriver.
+Dans la fenêtre d’impression, choisis « Enregistrer au format PDF ». ¦ V okne tlače vyber „Uložiť ako PDF“. ¦ I utskriftsvinduet velger du «Lagre som PDF».
+IMPORTER · ÉTAPE 1 SUR 3 ¦ IMPORT · KROK 1 Z 3 ¦ IMPORTER · TRINN 1 AV 3
+IMPORTER · ÉTAPE {n} SUR 3 ¦ IMPORT · KROK {n} Z 3 ¦ IMPORTER · TRINN {n} AV 3
+📁 Glisse ici le fichier, colle-le (⌘V) ou choisis-le sur l’ordinateur ¦ 📁 Pretiahni sem súbor, vlož ho (⌘V) alebo ho vyber v počítači ¦ 📁 Dra filen hit, lim den inn (⌘V) eller velg den på datamaskinen
+📁 Glisse ici les fichiers, colle-les (⌘V) ou choisis-les sur l’ordinateur ¦ 📁 Pretiahni sem súbory, vlož ich (⌘V) alebo ich vyber v počítači ¦ 📁 Dra filene hit, lim dem inn (⌘V) eller velg dem på datamaskinen
+Lecture du fichier… ¦ Číta sa súbor… ¦ Leser filen…
+Ce fichier ne peut pas être importé : {err} ¦ Tento súbor sa nedá importovať: {err} ¦ Denne filen kan ikke importeres: {err}
+Voilà ce qui va entrer : {sum}. ¦ Toto sa naimportuje: {sum}. ¦ Dette blir importert: {sum}.
+⤒ Importer {what} ¦ ⤒ Importovať {what} ¦ ⤒ Importer {what}
+{what} importés. ¦ Importované: {what}. ¦ {what} importert.
+Import terminé. ¦ Import dokončený. ¦ Importen er ferdig.
+Impossible d’importer : {err} ¦ Nedá sa importovať: {err} ¦ Kunne ikke importere: {err}
+Importer un fichier ¦ Importovať súbor ¦ Importer en fil
+⤒ Importer un fichier… ¦ ⤒ Importovať súbor… ¦ ⤒ Importer en fil…
+Ce type de fichier n’est pas accepté ici. ¦ Tento typ súboru sa tu neprijíma. ¦ Denne filtypen godtas ikke her.
+Il entre dans les médias de l’app et se place dans l’outil. ¦ Uloží sa do médií aplikácie a vloží sa do nástroja. ¦ Den legges i appens medier og plasseres i verktøyet.
+📁 Choisir un fichier ¦ 📁 Vybrať súbor ¦ 📁 Velg en fil
+Ce fichier .json est abîmé : il ne peut pas être lu. ¦ Tento súbor .json je poškodený: nedá sa prečítať. ¦ Denne .json-filen er skadet: den kan ikke leses.
+Ajuster à la fenêtre ¦ Prispôsobiť oknu ¦ Tilpass til vinduet
+Zoom arrière ¦ Oddialiť ¦ Zoom ut
+Zoom avant ¦ Priblížiť ¦ Zoom inn
+Règles ¦ Pravítka ¦ Linjaler
+Règles : montrer ou cacher ¦ Pravítka: zobraziť alebo skryť ¦ Linjaler: vis eller skjul
+Aimanter : les objets se collent aux autres et à la grille (Alt pour s’en passer en glissant) ¦ Prichytávať: objekty sa prichytia k ostatným a k mriežke (Alt pri ťahaní to vypne) ¦ Fest: objektene fester seg til andre og til rutenettet (Alt for å unngå det mens du drar)
+Les autres façons d’enregistrer ¦ Ďalšie spôsoby uloženia ¦ Andre måter å lagre på
+Ranger, montrer ou cacher les boutons ¦ Usporiadať, zobraziť alebo skryť tlačidlá ¦ Ordne, vis eller skjul knappene
+Compris ¦ Rozumiem ¦ Forstått
+Choisir sur un calendrier ¦ Vybrať v kalendári ¦ Velg i en kalender
+Durée ¦ Trvanie ¦ Varighet
+aujourd’hui ¦ dnes ¦ i dag
+aujourd’hui à {h} ¦ dnes o {h} ¦ i dag kl. {h}
+hier ¦ včera ¦ i går
+hier à {h} ¦ včera o {h} ¦ i går kl. {h}
+{day} à {h} ¦ {day} o {h} ¦ {day} kl. {h}
+Modifié ¦ Zmenené ¦ Endret
+Créé ¦ Vytvorené ¦ Opprettet
+Ajouté ¦ Pridané ¦ Lagt til
+Aucune battue ¦ Žiadne hromadné pátranie ¦ Ingen leteaksjon
+Aucune maison ¦ Žiadny dom ¦ Ingen hus
+Aucune revue ¦ Žiadny časopis ¦ Ingen tidsskrift
+Aucun employeur ¦ Žiadny zamestnávateľ ¦ Ingen arbeidsgiver
+Aucun recensement ¦ Žiadne sčítanie ¦ Ingen folketelling
+🎨 Œuvres ¦ 🎨 Diela ¦ 🎨 Verk
+Chercher un graphique… (ex. naissances, camembert) ¦ Hľadať graf… (napr. narodenia, koláč) ¦ Søk etter et diagram… (f.eks. fødsler, kakediagram)
+Aucun graphique ¦ Žiadny graf ¦ Ingen diagrammer
+Créer le graphique ¦ Vytvoriť graf ¦ Opprett diagrammet
+Nouveau graphique ¦ Nový graf ¦ Nytt diagram
+Aucun projet ¦ Žiadny projekt ¦ Ingen prosjekter
+Aucun tableau ¦ Žiadna tabuľa ¦ Ingen tavler
+Aucune mise en page ¦ Žiadna sadzba ¦ Ingen layout
+📐 Mises en page ¦ 📐 Sadzby ¦ 📐 Layouter
+Aucun diagramme ¦ Žiadny diagram ¦ Ingen skjemaer
+Aucune carte ¦ Žiadna mapa ¦ Ingen kart
+Aucune transcription ¦ Žiadny prepis ¦ Ingen transkripsjon
+Aucune carte de photos ¦ Žiadna mapa fotiek ¦ Ingen bildekart
+Aucun classeur ¦ Žiadny zošit ¦ Ingen arbeidsbok
+Aucun document ¦ Žiadny dokument ¦ Ingen dokumenter
+Aucune parcelle ¦ Žiadna parcela ¦ Ingen teig
+Nom de l’objet, sorte… (2 lettres suffisent) ¦ Názov predmetu, druh… (stačia 2 písmená) ¦ Gjenstandens navn, slag… (2 bokstaver er nok)
+Aucun objet de famille ¦ Žiadny rodinný predmet ¦ Ingen familiegjenstand
+Nom du défunt, notaire, année… (2 lettres suffisent) ¦ Meno zosnulého, notár, rok… (stačia 2 písmená) ¦ Avdødes navn, notarius, år… (2 bokstaver er nok)
+Aucun inventaire après décès ¦ Žiadny pozostalostný inventár ¦ Ingen skifter
+⚖️ Inventaires après décès ¦ ⚖️ Pozostalostné inventáre ¦ ⚖️ Skifter
+Nom, espèce, code de bague, puce… (2 lettres suffisent) ¦ Meno, druh, kód krúžku, čip… (stačia 2 písmená) ¦ Navn, art, ringkode, chip… (2 bokstaver er nok)
+Nom du site… (2 lettres suffisent) ¦ Názov lokality… (stačia 2 písmená) ¦ Lokalitetens navn… (2 bokstaver er nok)
+Aucun site ¦ Žiadna lokalita ¦ Ingen lokaliteter
+Nom du groupe, de la meute… (2 lettres suffisent) ¦ Názov skupiny, svorky… (stačia 2 písmená) ¦ Gruppens, flokkens navn… (2 bokstaver er nok)
+Aucun groupe ¦ Žiadna skupina ¦ Ingen grupper
+👥 Groupes d’animaux ¦ 👥 Skupiny zvierat ¦ 👥 Dyregrupper
+Maladie, cause de décès… (2 lettres suffisent) ¦ Choroba, príčina úmrtia… (stačia 2 písmená) ¦ Sykdom, dødsårsak… (2 bokstaver er nok)
+＋ Choisir une maladie… ¦ ＋ Vybrať chorobu… ¦ ＋ Velg en sykdom…
+Aucune maladie notée ¦ Žiadna zaznamenaná choroba ¦ Ingen sykdom notert
+🩺 Santé ¦ 🩺 Zdravie ¦ 🩺 Helse
+Chercher une de mes cartes… ¦ Hľadať jednu z mojich máp… ¦ Søk etter et av kartene mine…
+＋ Choisir une carte… ¦ ＋ Vybrať mapu… ¦ ＋ Velg et kart…
+Nom de la branche… ¦ Názov vetvy… ¦ Grenens navn…
+＋ Choisir une branche… ¦ ＋ Vybrať vetvu… ¦ ＋ Velg en gren…
+Aucune branche ¦ Žiadna vetva ¦ Ingen grener
+Nom d’une de mes couches… ¦ Názov jednej z mojich vrstiev… ¦ Navnet på et av lagene mine…
+＋ Choisir une couche… ¦ ＋ Vybrať vrstvu… ¦ ＋ Velg et lag…
+Aucune couche dessinée ¦ Žiadna nakreslená vrstva ¦ Ingen tegnede lag
+Commune, cote, année… (2 lettres suffisent) ¦ Obec, signatúra, rok… (stačia 2 písmená) ¦ Sted, signatur, år… (2 bokstaver er nok)
+🔗 Relier un dépouillement… ¦ 🔗 Prepojiť výpis… ¦ 🔗 Koble en registrering…
+Aucun dépouillement ¦ Žiadny výpis ¦ Ingen registreringer
+Nom, prénom d’un contact… (2 lettres suffisent) ¦ Priezvisko, meno kontaktu… (stačia 2 písmená) ¦ Etternavn, fornavn på en kontakt… (2 bokstaver er nok)
+Aucun contact ¦ Žiadny kontakt ¦ Ingen kontakter
+Chercher une de mes listes… ¦ Hľadať jeden z mojich zoznamov… ¦ Søk etter en av listene mine…
+Aucune liste ¦ Žiadny zoznam ¦ Ingen lister
+Événement, personne, année… (2 lettres suffisent) ¦ Udalosť, osoba, rok… (stačia 2 písmená) ¦ Hendelse, person, år… (2 bokstaver er nok)
+Aucun service d’archives ¦ Žiadny archív ¦ Ingen arkiver
+Créer le service ¦ Vytvoriť archív ¦ Opprett arkivet
+🏛 Services d’archives ¦ 🏛 Archívy ¦ 🏛 Arkiver
+Source, page, nom de la personne citée… ¦ Prameň, stránka, meno citovanej osoby… ¦ Kilde, side, navn på personen som siteres…
+＋ Choisir une citation… ¦ ＋ Vybrať citáciu… ¦ ＋ Velg en kildehenvisning…
+Aucune citation ¦ Žiadna citácia ¦ Ingen kildehenvisninger
+— une seule ¦ — len jedna ¦ — bare én
+＋ Ajouter une maison… ¦ ＋ Pridať dom… ¦ ＋ Legg til et hus…
+＋ Ajouter une fiche… ¦ ＋ Pridať kartu… ¦ ＋ Legg til en oppføring…
+＋ Ajouter un document… ¦ ＋ Pridať dokument… ¦ ＋ Legg til et dokument…
+＋ Ajouter une carte… ¦ ＋ Pridať mapu… ¦ ＋ Legg til et kart…
+＋ Ajouter un groupe… ¦ ＋ Pridať skupinu… ¦ ＋ Legg til en gruppe…
+＋ Ajouter un contact… ¦ ＋ Pridať kontakt… ¦ ＋ Legg til en kontakt…
+＋ Ajouter une liste… ¦ ＋ Pridať zoznam… ¦ ＋ Legg til en liste…
+Ce réglage prend ce qui est à l’écran maintenant. ¦ Toto nastavenie prevezme to, čo je teraz na obrazovke. ¦ Denne innstillingen tar det som er på skjermen nå.
+L’ancienne version de ce réglage ne sera plus gardée. ¦ Stará verzia tohto nastavenia sa už neuchová. ¦ Den gamle versjonen av innstillingen blir ikke lenger tatt vare på.
+Le nom devient modifiable sur la ligne. ¦ Názov sa bude dať upraviť priamo na riadku. ¦ Navnet kan redigeres direkte på linjen.
+Une copie, à modifier sans toucher à l’original. ¦ Kópia, ktorú môžeš upraviť bez toho, aby si zmenil(a) originál. ¦ En kopi du kan endre uten å røre originalen.
+Pour le garder, ou l’ouvrir sur un autre ordinateur. ¦ Na uchovanie alebo otvorenie na inom počítači. ¦ For å ta vare på den eller åpne den på en annen datamaskin.
+On peut encore l’annuler juste après. ¦ Hneď potom sa to ešte dá vrátiť späť. ¦ Det kan fortsatt angres rett etterpå.
+Un fichier lcnda-reglage-….json exporté ici ou sur un autre ordinateur ¦ Súbor lcnda-reglage-….json exportovaný tu alebo na inom počítači ¦ En fil lcnda-reglage-….json som er eksportert her eller på en annen datamaskin
+Ce navigateur ne donne pas la liste des polices : voici les polices courantes trouvées sur l’ordinateur. Pour une autre, tape son nom exact. ¦ Tento prehliadač nedáva zoznam písiem: tu sú bežné písma nájdené v počítači. Pre iné napíš jeho presný názov. ¦ Denne nettleseren gir ikke listen over skrifttyper: her er vanlige skrifttyper funnet på datamaskinen. For en annen skriver du det nøyaktige navnet.
+La liste des polices n’a pas pu être lue. Réessaie. ¦ Zoznam písiem sa nepodarilo načítať. Skús to znova. ¦ Listen over skrifttyper kunne ikke leses. Prøv igjen.
+Un autre format de la liste, ou un format libre (gardé dans « Mes formats ») ¦ Iný formát zo zoznamu alebo voľný formát (uložený v „Mojich formátoch“) ¦ Et annet format fra listen eller et fritt format (lagret i «Mine formater»)
+Un exemplaire au moins. ¦ Aspoň jedna kópia. ¦ Minst ett eksemplar.
+{n} exemplaires au plus. ¦ Najviac {n} kópií. ¦ Høyst {n} eksemplarer.

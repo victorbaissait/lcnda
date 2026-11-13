@@ -21,8 +21,10 @@
     const api = (...a) => A().api(...a);
     const post = (action, body) => api(action, {}, {method: 'POST', body});
     const toast = (...a) => A().toast(...a);
-    const fmt = n => Number(n || 0).toLocaleString('fr-FR');
-    const plural = (n, one, many) => `${fmt(n)} ${n > 1 ? many : one}`;
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? v[k] : m))); // 🌐 docs/I18N.md
+    const fr = () => !window.LCNDA_I18N || window.LCNDA_I18N.lang === 'fr';
+    const fmt = n => (fr() ? Number(n || 0).toLocaleString('fr-FR') : window.LCNDA_I18N.fmtNumber(Number(n || 0)));
+    const plural = (n, one, many) => (fr() ? `${fmt(n)} ${n > 1 ? many : one}` : window.LCNDA_I18N.plural(n, one, many));
     const mediaUrl = f => `media/${encodeURIComponent(f)}`;
     const store = {get(k, d) { try { const v = JSON.parse(localStorage.getItem(k)); return v ?? d; } catch (_) { return d; } }, set(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} }};
     const TEST = () => (window.LCNDA_FACES_TEST && typeof window.LCNDA_FACES_TEST === 'object' ? window.LCNDA_FACES_TEST : null);
@@ -47,7 +49,7 @@
         const url = CDN + path; let cache = null;
         try { cache = await caches.open('lcnda-face-model'); const hit = await cache.match(url); if (hit) return hit; } catch (_) {}
         const r = await fetch(url, {integrity: sri, credentials: 'omit'}).catch(() => null);
-        if (!r || !r.ok) throw new Error(`${NET_FAIL} de reconnaissance (connexion internet requise la première fois, ou fichier modifié refusé).`);
+        if (!r || !r.ok) throw Object.assign(new Error(i18n('Impossible de charger le modèle de reconnaissance (connexion internet requise la première fois, ou fichier modifié refusé).')), {net: true});
         try { await cache?.put(url, r.clone()); } catch (_) {}
         return r;
     }
@@ -56,14 +58,14 @@
     function loadModel(onStep = () => {}) {
         if (ready) return ready;
         ready = (async () => {
-            onStep('Bibliothèque…');
-            if (!window.faceapi) { const code = await (await getFile(FILES.lib)).text(); await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = URL.createObjectURL(new Blob([code], {type: 'application/javascript'})); s.onload = ok; s.onerror = () => ko(new Error('Bibliothèque illisible.')); document.head.appendChild(s); }); }
-            const F = window.faceapi; if (!F) throw new Error('Bibliothèque de reconnaissance indisponible.');
+            onStep(i18n('Bibliothèque…'));
+            if (!window.faceapi) { const code = await (await getFile(FILES.lib)).text(); await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = URL.createObjectURL(new Blob([code], {type: 'application/javascript'})); s.onload = ok; s.onerror = () => ko(new Error(i18n('Bibliothèque illisible.'))); document.head.appendChild(s); }); }
+            const F = window.faceapi; if (!F) throw new Error(i18n('Bibliothèque de reconnaissance indisponible.'));
             try { await F.tf.setBackend('webgl'); await F.tf.ready(); } catch (_) { await F.tf.setBackend('cpu'); await F.tf.ready(); }
             const net = async (n, files, label) => { onStep(label); const man = await (await getFile(files[0])).json(), bin = await (await getFile(files[1])).arrayBuffer(); n.loadFromWeightMap(F.tf.io.decodeWeights(bin, man.flatMap(g => g.weights))); };
-            await net(F.nets.ssdMobilenetv1, FILES.ssd, 'Repérage des visages…');
-            await net(F.nets.faceLandmark68Net, FILES.landmarks, 'Points du visage…');
-            await net(F.nets.faceRecognitionNet, FILES.rec, 'Empreintes des visages…');
+            await net(F.nets.ssdMobilenetv1, FILES.ssd, i18n('Repérage des visages…'));
+            await net(F.nets.faceLandmark68Net, FILES.landmarks, i18n('Points du visage…'));
+            await net(F.nets.faceRecognitionNet, FILES.rec, i18n('Empreintes des visages…'));
             return F;
         })().catch(e => { ready = null; throw e; });
         return ready;
@@ -97,15 +99,15 @@
         const test = TEST(), mode = test?.engine === 'mock' ? 'mock' : 'faceapi';
         let bootKo = null, initTimer = 0;
         // arrêter : le fil est coupé net, même pendant le chargement du modèle (le chargement en cours échoue tout de suite, sans secours)
-        const kill = () => { try { worker?.terminate(); } catch (_) {} worker = null; booting = null; clearTimeout(initTimer); const k = bootKo; bootKo = null; if (k) k(Object.assign(new Error('Analyse arrêtée.'), {stopped: true})); };
+        const kill = () => { try { worker?.terminate(); } catch (_) {} worker = null; booting = null; clearTimeout(initTimer); const k = bootKo; bootKo = null; if (k) k(Object.assign(new Error(i18n('Analyse arrêtée.')), {stopped: true})); };
         function finish(v) { const p = pending; pending = null; if (p) { clearTimeout(p.timer); p.resolve(v); } }
         function boot() {
             if (booting) return booting;
             booting = new Promise((ok, ko) => {
                 bootKo = ko;
-                let w; try { w = new Worker(WORKER_URL); } catch (e) { ko(new Error('Fil de calcul impossible : ' + e.message)); return; }
+                let w; try { w = new Worker(WORKER_URL); } catch (e) { ko(new Error(i18n('Fil de calcul impossible : {err}', {err: e.message}))); return; }
                 worker = w;
-                initTimer = setTimeout(() => { ko(new Error('Le modèle met trop de temps à se charger.')); }, 180000);
+                initTimer = setTimeout(() => { ko(new Error(i18n('Le modèle met trop de temps à se charger.'))); }, 180000);
                 w.onmessage = e => {
                     const m = e.data || {};
                     if (m.type === 'step') onStep(m.text);
@@ -116,7 +118,7 @@
                         finish(m.type === 'result' ? {faces: m.faces || [], ms: m.ms} : {skipped: m.message || 'erreur'});
                     }
                 };
-                w.onerror = e => { e.preventDefault?.(); clearTimeout(initTimer); if (pending) { kill(); finish({skipped: 'le calcul a planté'}); } else ko(new Error(e.message || 'Fil de calcul en erreur.')); };
+                w.onerror = e => { e.preventDefault?.(); clearTimeout(initTimer); if (pending) { kill(); finish({skipped: i18n('le calcul a planté')}); } else ko(new Error(e.message || i18n('Fil de calcul en erreur.'))); };
                 w.postMessage({type: 'init', engine: mode, cdn: CDN, files: FILES, mock: test || {}});
             }).catch(e => { if (!e?.stopped) kill(); throw e; });
             return booting;
@@ -128,7 +130,7 @@
             catch (e) {
                 if (mode === 'mock' || e?.stopped) throw e;
                 fallbackReason = e.message;
-                if (!String(e.message).startsWith(NET_FAIL)) { onStep('Calcul sur la page (plus lent)…'); try { await loadModel(onStep); kind = 'page'; return; } catch (e2) { fallbackReason = e2.message; } }
+                if (!e?.net && !String(e.message).startsWith(NET_FAIL)) { onStep(i18n('Calcul sur la page (plus lent)…')); try { await loadModel(onStep); kind = 'page'; return; } catch (e2) { fallbackReason = e2.message; } }
                 if ('FaceDetector' in window) { kind = 'simple'; return; }
                 throw new Error(fallbackReason);
             }
@@ -138,10 +140,10 @@
                 const id = ++seq; pending = {id, resolve, timer: null};
                 (async () => {
                     try {
-                        if ((kind === 'worker' || kind === 'mock') && !worker) { onStep('Redémarrage du calcul…'); await boot(); onReady(); } // relancé après une photo trop longue
+                        if ((kind === 'worker' || kind === 'mock') && !worker) { onStep(i18n('Redémarrage du calcul…')); await boot(); onReady(); } // relancé après une photo trop longue
                         if (pending?.id !== id) return;
                         const limit = TIMEOUT(avg()); // le délai ne compte que le calcul de la photo, pas le chargement du modèle
-                        pending.timer = setTimeout(() => { if (pending?.id === id) { if (kind === 'worker' || kind === 'mock') kill(); finish({skipped: `trop longue à analyser (plus de ${Math.round(limit / 1000)} s)`}); } }, limit);
+                        pending.timer = setTimeout(() => { if (pending?.id === id) { if (kind === 'worker' || kind === 'mock') kill(); finish({skipped: i18n('trop longue à analyser (plus de {n} s)', {n: Math.round(limit / 1000)})}); } }, limit);
                         if (kind === 'worker' || kind === 'mock') { worker.postMessage({type: 'scan', id, url: new URL(mediaUrl(m.filename), location.href).href, maxSide: MAX_SIDE}); return; }
                         const t0 = performance.now(); await yieldNow();
                         let faces;
@@ -212,11 +214,11 @@
         const simple = new Map(); // détection simple (sans empreinte) : media_id → cadres, gardés le temps de la fenêtre
         const listRows = (() => { const st = A().state || {}; const rows = Array.isArray(opts.listRows) ? opts.listRows : st.listType === 'media' ? (st.currentListRows || []) : []; return rows.filter(r => r && r.filename && (A().normalizedMediaType ? A().normalizedMediaType(r) === 'image' : /\.(jpe?g|png|webp)$/i.test(r.filename))); })();
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-faces';
-        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">MÉDIAS · VISAGES</span><h2>👤 Visages <span class="fc-help" data-help="Étape 1 : l’app repère les visages sur les photos choisies. Étape 2 : elle propose un nom d’après les visages déjà identifiés. Tout se calcule sur cet ordinateur." data-help-faq="Comment marche l’outil 👤 Visages ?"></span></h2></div><button type="button" class="icon-button" data-fc-close aria-label="Fermer">×</button></div>
+        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">MÉDIAS · VISAGES</span><h2>👤 Visages <span class="fc-help" data-help="${esc(i18n('Étape 1 : l’app repère les visages sur les photos choisies. Étape 2 : elle propose un nom d’après les visages déjà identifiés. Tout se calcule sur cet ordinateur.'))}" data-help-faq="Comment marche l’outil 👤 Visages ?"></span></h2></div><button type="button" class="icon-button" data-fc-close aria-label="Fermer">×</button></div>
             <div class="h-faces-body">
                 <div class="fc-top"><nav class="ui-tabs" data-fc-steps role="tablist"></nav><span class="fc-stat" data-fc-stat></span></div>
                 <div data-fc-run class="fc-run" hidden></div>
-                <div data-fc-pane class="h-faces-pane">${window.LCNDA_UI?.spinner ? window.LCNDA_UI.spinner('Chargement des photos…') : '<p class="muted">Chargement…</p>'}</div></div>
+                <div data-fc-pane class="h-faces-pane">${window.LCNDA_UI?.spinner ? window.LCNDA_UI.spinner(i18n('Chargement des photos…')) : '<p class="muted">Chargement…</p>'}</div></div>
             <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-fc-foot-close>Fermer</button></div>`;
         document.body.appendChild(dlg); dlg.showModal();
         const $ = s => dlg.querySelector(s);
@@ -243,16 +245,16 @@
         const todo = list => list.filter(m => !onlyNew || (!m.scanned && !m.skipped));
         const lightest = () => { const c = ['marked', 'list', 'recent'].map(k => [k, todo(pick(k)).length]).filter(([, n]) => n > 0).sort((a, b) => a[1] - b[1]); return c[0]?.[0] || 'recent'; };
         const speed = () => Number(store.get(SPEED_KEY, 0)) || 0;
-        const estimate = n => { const s = speed(); return s ? `≈ ${dur(n * s / 1000)} sur cet ordinateur` : 'environ 1 à 3 s par photo, selon l’ordinateur'; };
+        const estimate = n => { const s = speed(); return s ? i18n('≈ {time} sur cet ordinateur', {time: dur(n * s / 1000)}) : i18n('environ 1 à 3 s par photo, selon l’ordinateur'); };
 
         function stat() {
             const done = idx.media.filter(m => m.scanned).length, sk = idx.media.filter(m => m.skipped).length;
-            $('[data-fc-stat]').innerHTML = `${plural(idx.media.length, 'photo', 'photos')} · ${plural(done, 'analysée', 'analysées')}${sk ? ` · ${plural(sk, 'sautée', 'sautées')}` : ''} · ${plural(idx.prints.length, 'visage', 'visages')} · <b>${fmt(R.known.length)}</b> ${R.known.length > 1 ? 'identifiés' : 'identifié'}`;
+            $('[data-fc-stat]').innerHTML = `${plural(idx.media.length, 'photo', 'photos')} · ${plural(done, 'analysée', 'analysées')}${sk ? ` · ${plural(sk, 'sautée', 'sautées')}` : ''} · ${plural(idx.prints.length, 'visage', 'visages')} · ${i18n(R.known.length > 1 ? '<b>{n}</b> identifiés' : '<b>{n}</b> identifié', {n: fmt(R.known.length)})}`;
         }
         function draw() {
             if (!idx || closed) return;
             const waiting = R.props.length + R.unknown.length;
-            $('[data-fc-steps]').innerHTML = [['find', '① Trouver les visages'], ['who', `② Qui est-ce ?${waiting ? ` (${fmt(R.props.length + R.groups.length)})` : ''}`]]
+            $('[data-fc-steps]').innerHTML = [['find', i18n('① Trouver les visages')], ['who', `${i18n('② Qui est-ce ?')}${waiting ? ` (${fmt(R.props.length + R.groups.length)})` : ''}`]]
                 .map(([k, l]) => `<button type="button" role="tab" aria-selected="${k === step}" class="${k === step ? 'is-active' : ''}" data-fc-step="${k}">${esc(l)}</button>`).join('');
             stat();
             if (step === 'find') drawFind(); else drawWho();
@@ -271,8 +273,8 @@
                 if (k === src && k === 'label') extra = `<div class="fc-src-opt" data-fc-opt="label">${window.LCNDA_PICKER.pickerField({name: 'fc_label', kind: 'label', allowCreate: false, value: srcOpt.label ? {id: srcOpt.label, title: srcOpt.labelName, kind: 'label'} : null})}</div>`;
                 if (k === src && k === 'album') extra = `<div class="fc-src-opt"><select data-fc-album><option value="">Choisis…</option>${albums.map(a => `<option ${a === srcOpt.album ? 'selected' : ''}>${esc(a)}</option>`).join('')}</select></div>`;
                 if (k === src && k === 'period') extra = `<div class="fc-src-opt" data-fc-period></div>`;
-                if (k === src && k === 'recent') extra = `<div class="fc-src-opt"><label class="fc-inline">Les <input type="number" min="1" max="5000" step="10" value="${esc(srcOpt.recent)}" data-fc-recent> plus récentes</label></div>`;
-                return `<label class="fc-src ${k === src ? 'is-active' : ''}"><input type="radio" name="fc_src" value="${k}" ${k === src ? 'checked' : ''} ${busy ? 'disabled' : ''}><span class="fc-src-ico" aria-hidden="true">${ico}</span><span class="fc-src-main"><b>${esc(label)}</b>${hint ? `<small>${esc(hint)}</small>` : ''}${extra}</span>${n !== null ? `<span class="fc-badge ${n ? '' : 'is-zero'}">${n ? plural(n, 'à analyser', 'à analyser') : 'rien de nouveau'}</span>` : ''}</label>`;
+                if (k === src && k === 'recent') extra = `<div class="fc-src-opt"><label class="fc-inline">${i18n('Les {n} plus récentes', {n: `<input type="number" min="1" max="5000" step="10" value="${esc(srcOpt.recent)}" data-fc-recent>`})}</label></div>`;
+                return `<label class="fc-src ${k === src ? 'is-active' : ''}"><input type="radio" name="fc_src" value="${k}" ${k === src ? 'checked' : ''} ${busy ? 'disabled' : ''}><span class="fc-src-ico" aria-hidden="true">${ico}</span><span class="fc-src-main"><b>${esc(i18n(label))}</b>${hint ? `<small>${esc(i18n(hint))}</small>` : ''}${extra}</span>${n !== null ? `<span class="fc-badge ${n ? '' : 'is-zero'}">${n ? i18n('{n} à analyser', {n: fmt(n)}) : i18n('rien de nouveau')}</span>` : ''}</label>`;
             }).join('');
             const chosen = todo(pick(src)), skipped = idx.media.filter(m => m.skipped);
             const openBy = new Map(), knownBy = new Map();
@@ -280,34 +282,34 @@
             const withFaces = [...new Set([...openBy.keys(), ...simple.keys()])].map(id => M.get(id)).filter(Boolean)
                 .map(m => ({m, open: simple.has(m.id) ? simple.get(m.id).length : openBy.get(m.id) || 0, known: knownBy.get(m.id) || 0}))
                 .sort((a, b) => b.open - a.open || b.m.id - a.m.id);
-            pane.innerHTML = `${job && !busy ? `<div class="ui-notice ui-notice-info fc-resume" role="status"><span class="ui-notice-ico" aria-hidden="true">ℹ️</span><span><b>Analyse en pause</b> : ${plural(job.ids.length, 'photo restante', 'photos restantes')} sur ${fmt(job.total)} (${esc(job.label)}). <button type="button" class="button small" data-fc-resume>▶ Reprendre</button> <button type="button" class="button small secondary" data-fc-forget>Abandonner</button></span></div>` : ''}
+            pane.innerHTML = `${job && !busy ? `<div class="ui-notice ui-notice-info fc-resume" role="status"><span class="ui-notice-ico" aria-hidden="true">ℹ️</span><span>${i18n('<b>Analyse en pause</b> : {n} sur {total} ({what}).', {n: plural(job.ids.length, 'photo restante', 'photos restantes'), total: fmt(job.total), what: esc(job.label)})} <button type="button" class="button small" data-fc-resume>▶ Reprendre</button> <button type="button" class="button small secondary" data-fc-forget>${i18n('Abandonner', {ctx: 'analyse'})}</button></span></div>` : ''}
                 <h3 class="fc-h">Quelles photos analyser ?</h3>
                 <div class="fc-srcs" role="radiogroup">${rows}</div>
                 <label class="checkbox-line fc-check"><input type="checkbox" data-fc-onlynew ${onlyNew ? 'checked' : ''} ${busy ? 'disabled' : ''}> Sauter les photos déjà analysées</label>
-                <div class="fc-go"><button type="button" class="button" data-fc-go ${busy || !chosen.length ? 'disabled' : ''}>🔍 ${chosen.length ? `Analyser ${plural(chosen.length, 'photo', 'photos')}` : 'Rien à analyser ici'}</button><small class="muted">${chosen.length ? esc(estimate(chosen.length)) : ''}</small>
-                ${skipped.length && !busy ? `<button type="button" class="button small secondary" data-fc-retry title="${esc(skipped.slice(0, 8).map(m => `${m.title || m.filename} : ${m.skipped}`).join('\n'))}">↻ Réessayer ${plural(skipped.length, 'photo sautée', 'photos sautées')}</button>` : ''}</div>
+                <div class="fc-go"><button type="button" class="button" data-fc-go ${busy || !chosen.length ? 'disabled' : ''}>🔍 ${chosen.length ? i18n('Analyser {n}', {n: plural(chosen.length, 'photo', 'photos')}) : i18n('Rien à analyser ici')}</button><small class="muted">${chosen.length ? esc(estimate(chosen.length)) : ''}</small>
+                ${skipped.length && !busy ? `<button type="button" class="button small secondary" data-fc-retry title="${esc(skipped.slice(0, 8).map(m => `${m.title || m.filename} : ${m.skipped}`).join('\n'))}">${i18n('↻ Réessayer {n}', {n: plural(skipped.length, 'photo sautée', 'photos sautées')})}</button>` : ''}</div>
                 <h3 class="fc-h">Photos avec des visages à nommer${withFaces.length ? ` (${fmt(withFaces.length)})` : ''}</h3>
-                ${withFaces.length ? `<div class="fc-photos">${withFaces.slice(0, shown).map(({m, open: n, known}) => `<article class="fc-photo"><button type="button" class="fc-photo-thumb" data-fc-openmedia="${m.id}" aria-label="Ouvrir ${esc(m.title || m.filename)}"><img src="${esc(mediaUrl(m.thumbnail || m.filename))}" alt="" loading="lazy"></button><div class="fc-photo-main"><b>${esc(m.title || m.filename)}</b><small>${plural(n, 'visage à nommer', 'visages à nommer')}${known ? ` · ${fmt(known)} ${known > 1 ? 'identifiés' : 'identifié'}` : ''}${simple.has(m.id) ? ' · détection simple' : ''}</small></div><button type="button" class="button small" data-fc-openmedia="${m.id}">Ouvrir et identifier</button></article>`).join('')}</div>${withFaces.length > shown ? `<button type="button" class="ui-more" data-fc-more>Voir les ${fmt(Math.min(24, withFaces.length - shown))} suivantes ↓</button>` : ''}`
+                ${withFaces.length ? `<div class="fc-photos">${withFaces.slice(0, shown).map(({m, open: n, known}) => `<article class="fc-photo"><button type="button" class="fc-photo-thumb" data-fc-openmedia="${m.id}" aria-label="${esc(i18n('Ouvrir {name}', {name: m.title || m.filename}))}"><img src="${esc(mediaUrl(m.thumbnail || m.filename))}" alt="" loading="lazy"></button><div class="fc-photo-main"><b>${esc(m.title || m.filename)}</b><small>${plural(n, 'visage à nommer', 'visages à nommer')}${known ? ` · ${i18n(known > 1 ? '{n} identifiés' : '{n} identifié', {n: fmt(known)})}` : ''}${simple.has(m.id) ? ' · ' + i18n('détection simple') : ''}</small></div><button type="button" class="button small" data-fc-openmedia="${m.id}">Ouvrir et identifier</button></article>`).join('')}</div>${withFaces.length > shown ? `<button type="button" class="ui-more" data-fc-more>${i18n('Voir les {n} suivantes ↓', {n: fmt(Math.min(24, withFaces.length - shown))})}</button>` : ''}`
                     : `<p class="muted">${idx.prints.length ? 'Tous les visages trouvés ont un nom ou ont été ignorés. 👍' : 'Lance une analyse : les photos où l’app trouve des visages apparaîtront ici.'}</p>`}`;
-            if (src === 'period') { const box = pane.querySelector('[data-fc-period]'); const f = window.LCNDA_UI?.dateField ? window.LCNDA_UI.dateField({name: 'fc_period', value: srcOpt.period, placeholder: 'entre 1900 et 1950, vers 1925, 1960…', calendar: false}) : Object.assign(document.createElement('input'), {value: srcOpt.period}); box.appendChild(f); const inp = f.input || f; inp.addEventListener('input', () => { srcOpt.period = inp.value; refreshCount(); }); }
+            if (src === 'period') { const box = pane.querySelector('[data-fc-period]'); const f = window.LCNDA_UI?.dateField ? window.LCNDA_UI.dateField({name: 'fc_period', value: srcOpt.period, placeholder: i18n('entre 1900 et 1950, vers 1925, 1960…'), calendar: false}) : Object.assign(document.createElement('input'), {value: srcOpt.period}); box.appendChild(f); const inp = f.input || f; inp.addEventListener('input', () => { srcOpt.period = inp.value; refreshCount(); }); }
             pane.querySelector('[data-fc-opt]')?.addEventListener('picker-change', e => { const it = e.detail?.item; if (src === 'person') { srcOpt.person = it && !it.free ? Number(it.id) : 0; srcOpt.personName = it?.title || ''; } else { srcOpt.label = it ? Number(it.id) : 0; srcOpt.labelName = it?.title || ''; } drawFind(); });
         }
-        function refreshCount() { const n = todo(pick(src)).length, b = $('[data-fc-go]'); if (!b) return; b.disabled = busy || !n; b.textContent = `🔍 ${n ? `Analyser ${plural(n, 'photo', 'photos')}` : 'Rien à analyser ici'}`; b.nextElementSibling.textContent = n ? estimate(n) : ''; }
+        function refreshCount() { const n = todo(pick(src)).length, b = $('[data-fc-go]'); if (!b) return; b.disabled = busy || !n; b.textContent = `🔍 ${n ? i18n('Analyser {n}', {n: plural(n, 'photo', 'photos')}) : i18n('Rien à analyser ici')}`; b.nextElementSibling.textContent = n ? estimate(n) : ''; }
 
         /* ─── ② Qui est-ce ? ─── */
         function drawWho() {
             const M = media(), pane = $('[data-fc-pane]');
             const tabs = [['props', '💡 Propositions', R.props.length], ['groups', '👥 Inconnus regroupés', R.groups.filter(g => g.length > 1).length], ['alone', '❔ Autres inconnus', R.groups.filter(g => g.length === 1).length], ['known', '✓ Identifiés', R.byPerson.size]];
-            let html = `<div class="ui-filters fc-filters">${tabs.map(([k, l, n]) => `<button type="button" class="${k === tab ? 'is-active' : ''}" data-fc-tab="${k}">${esc(l)} (${fmt(n)})</button>`).join('')}</div>`;
+            let html = `<div class="ui-filters fc-filters">${tabs.map(([k, l, n]) => `<button type="button" class="${k === tab ? 'is-active' : ''}" data-fc-tab="${k}">${esc(i18n(l))} (${fmt(n)})</button>`).join('')}</div>`;
             if (!idx.prints.length) html += `<p class="h-faces-hint">Aucun visage trouvé pour l’instant. Commence par l’étape ① : choisis quelques photos et lance l’analyse. <button type="button" class="button small" data-fc-step="find">① Trouver les visages</button></p>`;
-            else if (!R.byPerson.size && tab === 'props') html += `<p class="h-faces-hint">Pour avoir des propositions : ouvre quelques photos et identifie les visages à la main (bouton « Identifier » de la visionneuse, ou « Ouvrir et identifier » à l’étape ①), au moins une fois par personne. ${R.groups.length ? 'En attendant, nomme les inconnus regroupés (👥).' : ''}</p>`;
-            else if (tab === 'props') html += R.props.length ? `<p><button type="button" class="button small" data-fc-acceptall ${R.props.some(p => p.sure) ? '' : 'disabled'}>✓ Accepter les ${fmt(R.props.filter(p => p.sure).length)} très probables</button></p><div class="h-faces-grid">${R.props.map((p, i) => `<article class="h-face-card ${p.sure ? 'is-sure' : ''}" data-fc-i="${i}">
+            else if (!R.byPerson.size && tab === 'props') html += `<p class="h-faces-hint">${i18n('Pour avoir des propositions : ouvre quelques photos et identifie les visages à la main (bouton « Identifier » de la visionneuse, ou « Ouvrir et identifier » à l’étape ①), au moins une fois par personne.')} ${R.groups.length ? i18n('En attendant, nomme les inconnus regroupés (👥).') : ''}</p>`;
+            else if (tab === 'props') html += R.props.length ? `<p><button type="button" class="button small" data-fc-acceptall ${R.props.some(p => p.sure) ? '' : 'disabled'}>${i18n('✓ Accepter les {n} très probables', {n: fmt(R.props.filter(p => p.sure).length)})}</button></p><div class="h-faces-grid">${R.props.map((p, i) => `<article class="h-face-card ${p.sure ? 'is-sure' : ''}" data-fc-i="${i}">
                     <div class="h-face-pair">${crop(p.face, M)}<span class="h-face-arrow">→</span>${crop(R.byPerson.get(p.person.id).faces[0], M, 56)}</div>
-                    <p><b>${esc(p.person.name)}</b><br><small class="muted">${p.sure ? 'très probable' : 'probable'} · ressemblance ${Math.round((1 - p.d) * 100)} %${p.other ? ` · ou ${esc(p.other.name)} ?` : ''}</small></p>
+                    <p><b>${esc(p.person.name)}</b><br><small class="muted">${i18n(p.sure ? 'très probable' : 'probable', {ctx: 'visage'})} · ${i18n('ressemblance {pct} %', {pct: Math.round((1 - p.d) * 100)})}${p.other ? ` · ${i18n('ou {name} ?', {name: esc(p.other.name)})}` : ''}</small></p>
                     <div class="h-face-act"><button type="button" class="button small" data-fc-yes>✓ Oui</button><button type="button" class="button small secondary" data-fc-other>Quelqu’un d’autre…</button><button type="button" class="button small secondary" data-fc-ign title="Pas un visage, ou personne à ne pas nommer">Ignorer</button></div></article>`).join('')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🖼️</span><span class="empty-line-text">Aucune proposition pour l’instant : analyse plus de photos, ou identifie plus de visages à la main.</span></p>';
             if (idx.prints.length && (tab === 'groups' || tab === 'alone')) { const gs = R.groups.map((g, i) => [g, i]).filter(([g]) => tab === 'groups' ? g.length > 1 : g.length === 1);
                 html += gs.length ? `<div class="${tab === 'alone' ? 'h-faces-grid is-small' : 'h-faces-groups'}">${gs.slice(0, 120).map(([g, i]) => `<article class="h-face-group" data-fc-g="${i}"><div class="h-face-row">${g.slice(0, 12).map(f => crop(f, M, 64)).join('')}${g.length > 12 ? `<span class="muted">+${g.length - 12}</span>` : ''}</div>
-                    <p>${g.length > 1 ? `<b>${g.length} visages</b> qui se ressemblent, sur ${new Set(g.map(f => f.media_id)).size} photos. ` : ''}Qui est-ce ?</p><div class="h-face-act"><button type="button" class="button small" data-fc-name>Nommer…</button><button type="button" class="button small secondary" data-fc-openmedia="${g[0].media_id}">Voir la photo</button><button type="button" class="button small secondary" data-fc-gign>Ignorer</button></div></article>`).join('')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Rien ici.</span></p>'; }
+                    <p>${g.length > 1 ? i18n('<b>{n} visages</b> qui se ressemblent, sur {p} photos.', {n: g.length, p: new Set(g.map(f => f.media_id)).size}) + ' ' : ''}${i18n('Qui est-ce ?')}</p><div class="h-face-act"><button type="button" class="button small" data-fc-name>Nommer…</button><button type="button" class="button small secondary" data-fc-openmedia="${g[0].media_id}">Voir la photo</button><button type="button" class="button small secondary" data-fc-gign>Ignorer</button>${ext.photoAsk ? '<button type="button" class="button small secondary" data-fc-ask title="' + esc(i18n('Un petit fichier à envoyer à un cousin : il clique sur les visages et écrit qui c’est')) + '">📤 ' + i18n('Demander à la famille') + '</button>' : ''}</div></article>`).join('')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Rien ici.</span></p>'; }
             if (idx.prints.length && tab === 'known') html += R.byPerson.size ? `<div class="h-faces-groups">${[...R.byPerson.values()].sort((a, b) => b.faces.length - a.faces.length).map(P => `<article class="h-face-group"><p><button type="button" class="table-link" data-h-person="${P.id}">${esc(P.name)}</button> <small class="muted">${plural(P.faces.length, 'visage', 'visages')}</small></p><div class="h-face-row">${P.faces.slice(0, 14).map(f => crop(f, M, 56)).join('')}</div></article>`).join('')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">👤</span><span class="empty-line-text">Personne n’est encore identifié.</span></p>';
             pane.innerHTML = html;
         }
@@ -320,10 +322,10 @@
             const t = run.times.slice(-12), avg = t.length ? t.reduce((s, x) => s + x, 0) / t.length : 0, left = run.ids.length;
             const pct = run.total ? (run.done / run.total * 100) : 0;
             box.innerHTML = `<div class="h-faces-progress" role="progressbar" aria-valuemin="0" aria-valuemax="${run.total}" aria-valuenow="${run.done}"><span style="width:${pct.toFixed(1)}%"></span><small>${fmt(run.done)} / ${fmt(run.total)}</small></div>
-                <div class="fc-run-line"><span class="fc-run-txt" data-fc-runtxt>${run.status ? `<span class="ui-spin" aria-hidden="true"></span>${esc(run.status)}` : paused ? `⏸ En pause${run.current ? ' (la photo en cours se termine)' : ''}` : `<span class="ui-spin" aria-hidden="true"></span>${esc(run.current ? run.current.title || run.current.filename : '')}`}</span>
-                <span class="fc-run-speed">${avg ? `${(avg / 1000).toLocaleString('fr-FR', {maximumFractionDigits: 1})} s par photo · reste ≈ ${dur(left * avg / 1000)}` : 'vitesse : on mesure…'} · ${plural(run.found, 'visage trouvé', 'visages trouvés')}${run.skipped.length ? ` · <span class="fc-warn" title="${esc(run.skipped.slice(-8).map(s => `${s.title} : ${s.reason}`).join('\n'))}">${plural(run.skipped.length, 'sautée', 'sautées')}</span>` : ''}</span>
+                <div class="fc-run-line"><span class="fc-run-txt" data-fc-runtxt>${run.status ? `<span class="ui-spin" aria-hidden="true"></span>${esc(run.status)}` : paused ? (run.current ? i18n('⏸ En pause (la photo en cours se termine)') : i18n('⏸ En pause')) : `<span class="ui-spin" aria-hidden="true"></span>${esc(run.current ? run.current.title || run.current.filename : '')}`}</span>
+                <span class="fc-run-speed">${avg ? i18n('{s} s par photo · reste ≈ {left}', {s: fr() ? (avg / 1000).toLocaleString('fr-FR', {maximumFractionDigits: 1}) : window.LCNDA_I18N.fmtNumber(avg / 1000, {maximumFractionDigits: 1}), left: dur(left * avg / 1000)}) : i18n('vitesse : on mesure…')} · ${plural(run.found, 'visage trouvé', 'visages trouvés')}${run.skipped.length ? ` · <span class="fc-warn" title="${esc(run.skipped.slice(-8).map(s => `${s.title} : ${s.reason}`).join('\n'))}">${plural(run.skipped.length, 'sautée', 'sautées')}</span>` : ''}</span>
                 <span class="fc-run-btns"><button type="button" class="button small secondary" data-fc-pause>${paused ? '▶ Reprendre' : '⏸ Pause'}</button><button type="button" class="button small secondary" data-fc-stop>■ Arrêter</button></span></div>
-                ${engine?.kind === 'page' ? `<p class="muted fc-note">Calcul sur la page (le fil à part n’a pas pu démarrer) : un peu plus lent.</p>` : engine?.kind === 'simple' ? `<div class="ui-notice ui-notice-warn"><span class="ui-notice-ico">⚠️</span><span>Modèle de reconnaissance indisponible (${esc(engine.reason)}). Détection simple du navigateur : les visages sont repérés, mais sans proposition de nom.</span></div>` : ''}`;
+                ${engine?.kind === 'page' ? `<p class="muted fc-note">Calcul sur la page (le fil à part n’a pas pu démarrer) : un peu plus lent.</p>` : engine?.kind === 'simple' ? `<div class="ui-notice ui-notice-warn"><span class="ui-notice-ico">⚠️</span><span>${i18n('Modèle de reconnaissance indisponible ({why}). Détection simple du navigateur : les visages sont repérés, mais sans proposition de nom.', {why: esc(engine.reason)})}</span></div>` : ''}`;
         }
         function saveJob() { if (!run || !run.ids.length) { store.set(JOB_KEY, null); return; } const first = media().get(run.ids[0]); store.set(JOB_KEY, {ids: run.ids, total: run.total, done: run.done, label: run.label, check: first ? [first.id, first.filename] : null, at: Date.now()}); }
         function loadJob() {
@@ -336,9 +338,9 @@
         async function start(list, label) {
             if (busy || !list.length) return;
             busy = true; paused = false;
-            run = {ids: list.map(m => m.id), total: list.length + (label.resumedDone || 0), done: label.resumedDone || 0, found: 0, skipped: [], times: [], label: label.text, current: null, status: 'Chargement du modèle…'};
+            run = {ids: list.map(m => m.id), total: list.length + (label.resumedDone || 0), done: label.resumedDone || 0, found: 0, skipped: [], times: [], label: label.text, current: null, status: i18n('Chargement du modèle…')};
             saveJob(); draw();
-            engine = createEngine({onStep: s => { if (run) { run.status = /^Redémarrage/.test(s) ? s : `Chargement du modèle : ${s}`; const el = $('[data-fc-runtxt]'); if (el) el.innerHTML = `<span class="ui-spin" aria-hidden="true"></span>${esc(run.status)}`; } },
+            engine = createEngine({onStep: s => { if (run) { run.status = s === i18n('Redémarrage du calcul…') ? s : i18n('Chargement du modèle : {step}', {step: s}); const el = $('[data-fc-runtxt]'); if (el) el.innerHTML = `<span class="ui-spin" aria-hidden="true"></span>${esc(run.status)}`; } },
                 onReady: () => { if (run) { run.status = ''; drawRunText(); } }});
             let stopped = false;
             try {
@@ -364,7 +366,7 @@
                 if (run.times.length >= 3) store.set(SPEED_KEY, Math.round(run.times.slice(-20).reduce((s, x) => s + x, 0) / Math.min(20, run.times.length)));
                 if (!run.ids.length) store.set(JOB_KEY, null);
                 const sk = run.skipped.length ? ` · ${plural(run.skipped.length, 'photo sautée', 'photos sautées')}` : '';
-                if (!closed) toast(`${stopped || run.stop ? '■ Analyse arrêtée' : '✓ Analyse finie'} : ${plural(run.found, 'visage trouvé', 'visages trouvés')}${sk}.${run.ids.length ? ` Il reste ${plural(run.ids.length, 'photo', 'photos')} : « ▶ Reprendre » quand tu veux.` : ''}`);
+                if (!closed) toast(`${i18n(stopped || run.stop ? '■ Analyse arrêtée : {n}{more}.' : '✓ Analyse finie : {n}{more}.', {n: plural(run.found, 'visage trouvé', 'visages trouvés'), more: sk})}${run.ids.length ? ' ' + i18n('Il reste {n} : « ▶ Reprendre » quand tu veux.', {n: plural(run.ids.length, 'photo', 'photos')}) : ''}`);
             } catch (err) {
                 if (!closed && !err?.stopped) toast(err.message, 'error');
                 saveJob();
@@ -378,17 +380,17 @@
             if (!run) return;
             run.stop = true; paused = false; engine?.stop(); resumeWait?.();
             saveJob();
-            const box = $('[data-fc-run]'); if (box) box.innerHTML = `<p class="fc-run-line"><span>■ Analyse arrêtée. ${run.ids.length ? `${plural(run.ids.length, 'photo restante', 'photos restantes')} : tu pourras reprendre.` : ''}</span></p>`;
+            const box = $('[data-fc-run]'); if (box) box.innerHTML = `<p class="fc-run-line"><span>${i18n('■ Analyse arrêtée.')} ${run.ids.length ? i18n('{n} : tu pourras reprendre.', {n: plural(run.ids.length, 'photo restante', 'photos restantes')}) : ''}</span></p>`;
         }
 
         const pickPerson = title => new Promise(res => { let done = false, chosen = '';
             ext.openDialog({eyebrow: 'VISAGES', title, submitLabel: 'Choisir', body: `<div><span class="pk-lab">Personne</span>${window.LCNDA_PICKER.pickerField({name: 'fp_person', kind: 'person'})}</div><label>Certitude<select name="conf"><option value="probable">Probable</option><option value="certain">Certaine</option><option value="possible">Possible</option></select></label>`,
                 onOpen: d => { d.addEventListener('close', () => { if (!done) res(null); }, {once: true}); d.addEventListener('picker-change', e => { chosen = e.detail.item?.title || ''; }); setTimeout(() => d.querySelector('.pk-input')?.focus(), 30); },
-                onSubmit: f => { const id = Number(f.elements.fp_person?.value) || 0; if (!id) return window.LCNDA_UI.fail(f.elements.fp_person, 'Choisis une personne dans la liste.'); done = true; res({id, name: chosen, conf: f.querySelector('[name=conf]').value}); }}); });
+                onSubmit: f => { const id = Number(f.elements.fp_person?.value) || 0; if (!id) return window.LCNDA_UI.fail(f.elements.fp_person, i18n('Choisis une personne dans la liste.')); done = true; res({id, name: chosen, conf: f.querySelector('[name=conf]').value}); }}); });
         // chaque visage nommé devient une identification ; « ↶ Annuler » retire celles qu'on vient de créer
         const identify = async (faces, person, conf = 'probable') => { const made = []; for (const f of faces) { const r = await post('face_identify', {id: f.id, person_id: person.id, confidence: conf}); if (r?.tag_id && !r.result && !f.tag_id) made.push(r.tag_id); } return made; };
         const undoable = (msg, made) => { const u = A().undoToast; if (u && made.length) u(msg, {undo: async () => { for (const id of made) await post('delete_media_tag', {tag_id: id}); await reload(); }}); else toast(msg); };
-        const ignore = async faces => { for (const f of faces) await post('face_ignore', {id: f.id}); await reload(); const u = A().undoToast; if (u) u(faces.length > 1 ? `${plural(faces.length, 'visage ignoré', 'visages ignorés')}` : 'Visage ignoré', {undo: async () => { for (const f of faces) await post('face_ignore', {id: f.id, undo: 1}); await reload(); }, redo: async () => { for (const f of faces) await post('face_ignore', {id: f.id}); await reload(); }}); };
+        const ignore = async faces => { for (const f of faces) await post('face_ignore', {id: f.id}); await reload(); const u = A().undoToast; if (u) u(faces.length > 1 ? `${plural(faces.length, 'visage ignoré', 'visages ignorés')}` : i18n('Visage ignoré'), {undo: async () => { for (const f of faces) await post('face_ignore', {id: f.id, undo: 1}); await reload(); }, redo: async () => { for (const f of faces) await post('face_ignore', {id: f.id}); await reload(); }}); };
         async function openMedia(id) {
             const m = media().get(id); if (!m || !A().openLightbox) return;
             const boxes = simple.get(id) || idx.prints.filter(p => p.media_id === id && !p.person_id && p.status !== 'ignored').map(p => ({x: p.x, y: p.y, w: p.w, h: p.h}));
@@ -411,18 +413,19 @@
             const t = T('[data-fc-tab]'); if (t) { tab = t.dataset.fcTab; draw(); return; }
             if (T('[data-fc-more]')) { shown += 24; drawFind(); return; }
             const om = T('[data-fc-openmedia]'); if (om) { openMedia(Number(om.dataset.fcOpenmedia)); return; }
-            if (T('[data-fc-go]')) { const list = todo(pick(src)), lab = SOURCES.find(s => s[0] === src)?.[2] || ''; start(list, {text: src === 'person' && srcOpt.personName ? `photos de ${srcOpt.personName}` : lab.toLowerCase()}); return; }
-            if (T('[data-fc-retry]')) { start(idx.media.filter(m => m.skipped), {text: 'photos sautées'}); return; }
+            if (T('[data-fc-go]')) { const list = todo(pick(src)), lab = SOURCES.find(s => s[0] === src)?.[2] || ''; start(list, {text: src === 'person' && srcOpt.personName ? i18n('photos de {name}', {name: srcOpt.personName}) : i18n(lab).toLowerCase()}); return; }
+            if (T('[data-fc-retry]')) { start(idx.media.filter(m => m.skipped), {text: i18n('photos sautées')}); return; }
             if (T('[data-fc-resume]')) { const j = loadJob(), M = media(); if (j) start(j.ids.map(id => M.get(id)), {text: j.label, resumedDone: Math.max(0, j.total - j.ids.length)}); return; }
             if (T('[data-fc-forget]')) { store.set(JOB_KEY, null); drawFind(); return; }
             const card = T('[data-fc-i]'), p = card ? R.props[Number(card.dataset.fcI)] : null;
             try {
-                if (T('[data-fc-yes]') && p) { const made = await identify([p.face], p.person, p.sure ? 'probable' : 'possible'); await reload(); undoable(`Identifié : ${p.person.name}`, made); }
-                else if (T('[data-fc-other]') && p) { const who = await pickPerson('Qui est-ce ?'); if (who) { const made = await identify([p.face], who, who.conf); await reload(); undoable(`Identifié : ${who.name}`, made); } }
+                if (T('[data-fc-yes]') && p) { const made = await identify([p.face], p.person, p.sure ? 'probable' : 'possible'); await reload(); undoable(i18n('Identifié : {name}', {name: p.person.name}), made); }
+                else if (T('[data-fc-other]') && p) { const who = await pickPerson(i18n('Qui est-ce ?')); if (who) { const made = await identify([p.face], who, who.conf); await reload(); undoable(i18n('Identifié : {name}', {name: who.name}), made); } }
                 else if (T('[data-fc-ign]') && p) await ignore([p.face]);
-                else if (T('[data-fc-acceptall]')) { const sure = R.props.filter(x => x.sure); const made = []; for (const x of sure) made.push(...await identify([x.face], x.person, 'probable')); await reload(); undoable(`${plural(sure.length, 'visage identifié', 'visages identifiés')} (certitude « probable »)`, made); }
-                else if (T('[data-fc-name]')) { const g = R.groups[Number(T('[data-fc-g]').dataset.fcG)]; const who = await pickPerson(g.length > 1 ? `Qui est-ce ? (${g.length} visages)` : 'Qui est-ce ?'); if (who) { const made = await identify(g, who, who.conf); await reload(); undoable(`${plural(g.length, 'visage', 'visages')} : ${who.name}`, made); } }
+                else if (T('[data-fc-acceptall]')) { const sure = R.props.filter(x => x.sure); const made = []; for (const x of sure) made.push(...await identify([x.face], x.person, 'probable')); await reload(); undoable(i18n('{n} (certitude « probable »)', {n: plural(sure.length, 'visage identifié', 'visages identifiés')}), made); }
+                else if (T('[data-fc-name]')) { const g = R.groups[Number(T('[data-fc-g]').dataset.fcG)]; const who = await pickPerson(g.length > 1 ? i18n('Qui est-ce ? ({n} visages)', {n: g.length}) : i18n('Qui est-ce ?')); if (who) { const made = await identify(g, who, who.conf); await reload(); undoable(`${plural(g.length, 'visage', 'visages')} : ${who.name}`, made); } }
                 else if (T('[data-fc-gign]')) await ignore(R.groups[Number(T('[data-fc-g]').dataset.fcG)]);
+                else if (T('[data-fc-ask]')) { const g = R.groups[Number(T('[data-fc-g]').dataset.fcG)] || []; ext.photoAsk?.open({media_ids: [...new Set(g.map(f => f.media_id))].slice(0, 12), prints: g.map(f => f.id)}); } // 🔍 heritage-photo-ask.js
             } catch (err) { toast(err.message, 'error'); }
         });
         reload().catch(e => { $('[data-fc-pane]').innerHTML = `<div class="ui-notice ui-notice-error" role="alert"><span class="ui-notice-ico">⛔</span><span>${esc(e.message)}</span></div>`; });

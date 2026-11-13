@@ -12,6 +12,8 @@
     if (typeof window !== 'undefined') window.LCNDA_BATCH = B;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
     'use strict';
+    const i18n = (s, v) => { const I = (typeof window !== 'undefined' ? window : globalThis).LCNDA_I18N; if (v) v = Object.fromEntries(Object.entries(v).map(([k, x]) => [k, typeof x === 'number' ? String(x) : x])); return I ? I.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m)) : s); }; // 🌐 textes traduits (docs/I18N.md) ; nombres gardés tels quels
+    const PL = (n, one, many) => { const I = (typeof window !== 'undefined' ? window : globalThis).LCNDA_I18N, v = Number(n); return I && I.plural ? I.plural(v, one, many) : `${v.toLocaleString('fr-FR')} ${Math.abs(v) < 2 ? one : (many || one + 's')}`; };
     const clamp = (v, a, b, d) => { const n = Number(v); return Number.isFinite(n) ? Math.min(b, Math.max(a, n)) : d; };
     const str = (v, max = 120) => String(v == null ? '' : v).replace(/[\u0000-\u001f\u007f]/g, '').slice(0, max);
     const oneOf = (v, list, d) => (list.includes(v) ? v : d);
@@ -24,7 +26,7 @@
         xlsx: 'sheet', ods: 'sheet', csv: 'sheet', tsv: 'sheet',
         pdf: 'pdf', mp3: 'audio', wav: 'audio', ogg: 'audio', flac: 'audio', m4a: 'audio', aiff: 'audio', aif: 'audio',
         mp4: 'video', mov: 'video', webm: 'video'};
-    const KIND_LABEL = {image: 'image', doc: 'document', sheet: 'classeur', pdf: 'PDF', audio: 'son', video: 'vidéo', other: 'fichier'};
+    const KIND_LABEL = {image: 'image', doc: 'document', sheet: 'classeur', pdf: 'PDF', audio: 'son', video: i18n('vidéo'), other: 'fichier'};
     const KIND_ICON = {image: '🖼', doc: '📝', sheet: '🧾', pdf: '📄', audio: '🎧', video: '🎬', other: '📁'};
     const extOf = name => { const m = /\.([a-z0-9]{1,8})$/i.exec(String(name || '')); return m ? m[1].toLowerCase() : ''; };
     const baseOf = name => String(name || '').replace(/\.[a-z0-9]{1,8}$/i, '');
@@ -37,10 +39,10 @@
     };
     /** les formats qu'on sait écrire pour chaque sorte (AVIF et Opus : seulement si le navigateur sait) */
     const FORMATS = {
-        image: [['keep', 'Garder le format'], ['jpg', 'JPG'], ['png', 'PNG'], ['webp', 'WebP'], ['avif', 'AVIF']],
-        doc: [['keep', 'Garder le format'], ['docx', 'Word (.docx)'], ['odt', 'LibreOffice (.odt)'], ['rtf', 'RTF'], ['md', 'Markdown (.md)'], ['html', 'Page web (.html)'], ['txt', 'Texte (.txt)']],
-        sheet: [['keep', 'Garder le format'], ['xlsx', 'Excel (.xlsx)'], ['ods', 'LibreOffice (.ods)'], ['csv', 'CSV']],
-        audio: [['keep', 'Garder le format'], ['mp3', 'MP3'], ['wav', 'WAV'], ['flac', 'FLAC']],
+        image: [['keep', i18n('Garder le format')], ['jpg', 'JPG'], ['png', 'PNG'], ['webp', 'WebP'], ['avif', 'AVIF']],
+        doc: [['keep', i18n('Garder le format')], ['docx', 'Word (.docx)'], ['odt', 'LibreOffice (.odt)'], ['rtf', 'RTF'], ['md', 'Markdown (.md)'], ['html', 'Page web (.html)'], ['txt', 'Texte (.txt)']],
+        sheet: [['keep', i18n('Garder le format')], ['xlsx', 'Excel (.xlsx)'], ['ods', 'LibreOffice (.ods)'], ['csv', 'CSV']],
+        audio: [['keep', i18n('Garder le format')], ['mp3', 'MP3'], ['wav', 'WAV'], ['flac', 'FLAC']],
     };
     const MIME = {jpg: 'image/jpeg', png: 'image/png', webp: 'image/webp', avif: 'image/avif', gif: 'image/gif', bmp: 'image/bmp', pdf: 'application/pdf',
         docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', odt: 'application/vnd.oasis.opendocument.text', rtf: 'application/rtf',
@@ -52,22 +54,22 @@
     /* ═════ Les actions (une carte chacune) ═════ */
     const IMG = ['image'];
     const ACTIONS = {
-        rename: {icon: '✎', label: 'Renommer', kinds: ['image', 'doc', 'sheet', 'pdf', 'audio', 'video'], help: 'Un nom fixe, une séquence 001, 002…, la date, le titre, la personne ou le lieu.',
+        rename: {icon: '✎', label: i18n('Renommer'), kinds: ['image', 'doc', 'sheet', 'pdf', 'audio', 'video'], help: i18n('Un nom fixe, une séquence 001, 002…, la date, le titre, la personne ou le lieu.'),
             def: {pattern: '{nom}', text: '', start: 1, step: 1, digits: 3, find: '', repl: '', cas: 'keep', noAccents: false, spaces: 'keep', title: true}},
-        resize: {icon: '↔', label: 'Redimensionner', kinds: IMG, help: 'Plus grand côté, largeur, hauteur, cadre ou pourcentage.', def: {by: 'long', long: 1600, w: 1600, h: 1200, pct: 50, keep: true, noUp: true}},
-        crop: {icon: '✂️', label: 'Rogner, pivoter, miroir', kinds: IMG, help: 'Couper les bords, recadrer au format voulu (centré), tourner d’un quart de tour, retourner.', def: {margin: 0, ratio: '', rotate: 0, flipH: false, flipV: false}},
-        gray: {icon: '◐', label: 'Noir et blanc', kinds: IMG, help: 'Gris ou sépia.', def: {mode: 'gray'}},
-        watermark: {icon: '💧', label: 'Filigrane', kinds: IMG, help: 'Un texte posé dans un coin, au milieu ou répété.', def: {text: '© Ma famille', pos: 'br', size: 4, opacity: 60, color: '#ffffff'}},
-        format: {icon: '🔁', label: 'Changer de format', kinds: ['image', 'doc', 'sheet', 'audio'], help: 'Images, documents, classeurs et sons : chacun vers un format de sa sorte.', def: {image: 'jpg', doc: 'docx', sheet: 'xlsx', audio: 'mp3'}},
-        quality: {icon: '🗜', label: 'Qualité et poids', kinds: IMG, help: 'Qualité JPG / WebP / AVIF et un poids à ne pas dépasser.', def: {q: 85, maxKb: 0}},
-        strip: {icon: '🧹', label: 'Effacer les métadonnées', kinds: IMG, help: 'Appareil, date de prise, position GPS… : effacés (sans perte pour un JPG ou un PNG).', def: {}},
-        tags: {icon: '🏷', label: 'Étiquettes et personne', kinds: ['image', 'doc', 'sheet', 'pdf', 'audio', 'video'], base: true, help: 'Ajouter des étiquettes, relier à une personne (dans la base seulement).', def: {labels: [], person: 0, personName: ''}},
-        pdf: {icon: '📄', label: 'Assembler en un PDF', kinds: IMG, help: 'Toutes les images dans un seul PDF, une page par image.', def: {name: 'Scans', page: 'a4', margin: 10, keep: false}},
+        resize: {icon: '↔', label: 'Redimensionner', kinds: IMG, help: i18n('Plus grand côté, largeur, hauteur, cadre ou pourcentage.'), def: {by: 'long', long: 1600, w: 1600, h: 1200, pct: 50, keep: true, noUp: true}},
+        crop: {icon: '✂️', label: 'Rogner, pivoter, miroir', kinds: IMG, help: i18n('Couper les bords, recadrer au format voulu (centré), tourner d’un quart de tour, retourner.'), def: {margin: 0, ratio: '', rotate: 0, flipH: false, flipV: false}},
+        gray: {icon: '◐', label: i18n('Noir et blanc'), kinds: IMG, help: i18n('Gris ou sépia.'), def: {mode: 'gray'}},
+        watermark: {icon: '💧', label: 'Filigrane', kinds: IMG, help: i18n('Un texte posé dans un coin, au milieu ou répété.'), def: {text: '© Ma famille', pos: 'br', size: 4, opacity: 60, color: '#ffffff'}},
+        format: {icon: '🔁', label: i18n('Changer de format'), kinds: ['image', 'doc', 'sheet', 'audio'], help: i18n('Images, documents, classeurs et sons : chacun vers un format de sa sorte.'), def: {image: 'jpg', doc: 'docx', sheet: 'xlsx', audio: 'mp3'}},
+        quality: {icon: '🗜', label: i18n('Qualité et poids'), kinds: IMG, help: i18n('Qualité JPG / WebP / AVIF et un poids à ne pas dépasser.'), def: {q: 85, maxKb: 0}},
+        strip: {icon: '🧹', label: i18n('Effacer les métadonnées'), kinds: IMG, help: i18n('Appareil, date de prise, position GPS… : effacés (sans perte pour un JPG ou un PNG).'), def: {}},
+        tags: {icon: '🏷', label: i18n('Étiquettes et personne'), kinds: ['image', 'doc', 'sheet', 'pdf', 'audio', 'video'], base: true, help: i18n('Ajouter des étiquettes, relier à une personne (dans la base seulement).'), def: {labels: [], person: 0, personName: ''}},
+        pdf: {icon: '📄', label: i18n('Assembler en un PDF'), kinds: IMG, help: i18n('Toutes les images dans un seul PDF, une page par image.'), def: {name: 'Scans', page: 'a4', margin: 10, keep: false}},
     };
     const ORDER = ['rename', 'resize', 'crop', 'gray', 'watermark', 'format', 'quality', 'strip', 'tags', 'pdf'];
-    const RATIOS = [['', 'Ne pas recadrer'], ['1:1', 'Carré 1:1'], ['4:3', '4:3'], ['3:2', '3:2'], ['16:9', '16:9'], ['3:4', '3:4 (portrait)'], ['2:3', '2:3 (portrait)'], ['9:16', '9:16 (portrait)']];
-    const POSITIONS = [['br', 'En bas à droite'], ['bl', 'En bas à gauche'], ['tr', 'En haut à droite'], ['tl', 'En haut à gauche'], ['c', 'Au milieu'], ['tile', 'Répété en biais']];
-    const TOKENS = [['{texte}', 'Texte'], ['{n}', '001'], ['{nom}', 'Nom d’origine'], ['{titre}', 'Titre'], ['{date}', 'Date du jour'], ['{annee}', 'Année'], ['{personne}', 'Personne'], ['{lieu}', 'Lieu']];
+    const RATIOS = [['', i18n('Ne pas recadrer')], ['1:1', i18n('Carré 1:1')], ['4:3', '4:3'], ['3:2', '3:2'], ['16:9', '16:9'], ['3:4', '3:4 (portrait)'], ['2:3', '2:3 (portrait)'], ['9:16', '9:16 (portrait)']];
+    const POSITIONS = [['br', i18n('En bas à droite')], ['bl', i18n('En bas à gauche')], ['tr', i18n('En haut à droite')], ['tl', i18n('En haut à gauche')], ['c', i18n('Au milieu')], ['tile', i18n('Répété en biais')]];
+    const TOKENS = [['{texte}', 'Texte'], ['{n}', '001'], ['{nom}', i18n('Nom d’origine')], ['{titre}', 'Titre'], ['{date}', i18n('Date du jour')], ['{annee}', i18n('Année')], ['{personne}', i18n('Personne')], ['{lieu}', i18n('Lieu')]];
 
     function cleanParams(type, p = {}) {
         const d = ACTIONS[type].def; p = p && typeof p === 'object' ? p : {};
@@ -99,13 +101,13 @@
     }
     /** les ensembles prêts (💾 Réglages enregistrés) */
     const BUILTIN = [
-        {name: '🌐 Photos pour le web', summary: '1 600 px au plus, JPG 82 %, sans GPS', recipe: {out: 'zip', cards: [{type: 'resize', p: {by: 'long', long: 1600, noUp: true}}, {type: 'format', p: {image: 'jpg'}}, {type: 'quality', p: {q: 82}}, {type: 'strip'}]}},
-        {name: '🔢 Renommer en séquence', summary: 'photo-001, photo-002…', recipe: {out: 'version', cards: [{type: 'rename', p: {pattern: '{texte}-{n}', text: 'photo', start: 1, step: 1, digits: 3, title: true}}]}},
-        {name: '📄 Scans en PDF', summary: 'les images dans un seul PDF A4', recipe: {out: 'zip', cards: [{type: 'pdf', p: {name: 'Scans', page: 'a4', margin: 10}}]}},
-        {name: '⬛ Vignettes carrées', summary: 'carré 1:1, 400 px, JPG', recipe: {out: 'zip', cards: [{type: 'crop', p: {ratio: '1:1'}}, {type: 'resize', p: {by: 'long', long: 400}}, {type: 'format', p: {image: 'jpg'}}, {type: 'quality', p: {q: 80}}]}},
-        {name: '🛰 Partager sans la position GPS', summary: 'métadonnées effacées', recipe: {out: 'zip', cards: [{type: 'strip'}]}},
-        {name: '📝 Documents en Word', summary: 'tous en .docx', recipe: {out: 'zip', cards: [{type: 'format', p: {doc: 'docx'}}]}},
-        {name: '🧾 Classeurs en CSV', summary: 'la 1re feuille en CSV', recipe: {out: 'zip', cards: [{type: 'format', p: {sheet: 'csv'}}]}},
+        {name: `🌐 ${i18n('Photos pour le web')}`, summary: i18n('1 600 px au plus, JPG 82 %, sans GPS'), recipe: {out: 'zip', cards: [{type: 'resize', p: {by: 'long', long: 1600, noUp: true}}, {type: 'format', p: {image: 'jpg'}}, {type: 'quality', p: {q: 82}}, {type: 'strip'}]}},
+        {name: `🔢 ${i18n('Renommer en séquence')}`, summary: 'photo-001, photo-002…', recipe: {out: 'version', cards: [{type: 'rename', p: {pattern: '{texte}-{n}', text: 'photo', start: 1, step: 1, digits: 3, title: true}}]}},
+        {name: `📄 ${i18n('Scans en PDF')}`, summary: i18n('les images dans un seul PDF A4'), recipe: {out: 'zip', cards: [{type: 'pdf', p: {name: 'Scans', page: 'a4', margin: 10}}]}},
+        {name: `⬛ ${i18n('Vignettes carrées')}`, summary: i18n('carré 1:1, 400 px, JPG'), recipe: {out: 'zip', cards: [{type: 'crop', p: {ratio: '1:1'}}, {type: 'resize', p: {by: 'long', long: 400}}, {type: 'format', p: {image: 'jpg'}}, {type: 'quality', p: {q: 80}}]}},
+        {name: `🛰 ${i18n('Partager sans la position GPS')}`, summary: i18n('métadonnées effacées'), recipe: {out: 'zip', cards: [{type: 'strip'}]}},
+        {name: `📝 ${i18n('Documents en Word')}`, summary: i18n('tous en .docx'), recipe: {out: 'zip', cards: [{type: 'format', p: {doc: 'docx'}}]}},
+        {name: `🧾 ${i18n('Classeurs en CSV')}`, summary: i18n('la 1re feuille en CSV'), recipe: {out: 'zip', cards: [{type: 'format', p: {sheet: 'csv'}}]}},
     ].map(b => ({...b, recipe: cleanRecipe(b.recipe)}));
 
     /* ═════ Renommer ═════ */
@@ -185,7 +187,7 @@
             const kind = it.kind || kindOf(it.name, it.mime), ext0 = normExt(extOf(it.name)), notes = [], ops = [];
             const applies = c => ACTIONS[c.type].kinds.includes(kind);
             const notFor = [...new Set(chain.filter(c => c.on && !applies(c) && c.type !== 'pdf').map(c => ACTIONS[c.type].label))];
-            if (notFor.length && !['pdf', 'other', 'video'].includes(kind)) notes.push(`${notFor.join(', ')} : pas pour un ${KIND_LABEL[kind]}`);
+            if (notFor.length && !['pdf', 'other', 'video'].includes(kind)) notes.push(i18n('{x} : pas pour un {x2}', {x: notFor.join(', '), x2: KIND_LABEL[kind]}));
             let ext = ext0, w = it.w || 0, h = it.h || 0, encode = false;
             if (kind === 'image') {
                 let px = 0; // les retouches qui changent vraiment quelque chose (un « ne pas agrandir » sur une petite image ne compte pas)
@@ -194,32 +196,32 @@
                     if (c.type === 'crop') { did = !!(c.p.rotate || c.p.flipH || c.p.flipV || c.p.margin || c.p.ratio); if (w && h) { const b = cropBox(w, h, c.p); did = !!(c.p.rotate || c.p.flipH || c.p.flipV) || b.w !== w || b.h !== h; w = b.outW; h = b.outH; } }
                     if (c.type === 'resize' && w && h) { const s = fitSize(w, h, c.p); did = s.w !== w || s.h !== h; w = s.w; h = s.h; }
                     if (c.type === 'watermark') did = !!String(c.p.text || '').trim();
-                    if (did) { ops.push(c.type); px++; } else notes.push(`${ACTIONS[c.type].label} : rien à changer`);
+                    if (did) { ops.push(c.type); px++; } else notes.push(i18n('{x} : rien à changer', {x: ACTIONS[c.type].label}));
                 }
                 if (fmtC && fmtC.p.image !== 'keep') { ext = fmtC.p.image; ops.push('format'); }
-                if (ext === 'avif' && opts.avif === false) { ext = 'webp'; notes.push('Ton navigateur ne sait pas écrire l’AVIF : WebP à la place'); }
+                if (ext === 'avif' && opts.avif === false) { ext = 'webp'; notes.push(i18n('Ton navigateur ne sait pas écrire l’AVIF : WebP à la place')); }
                 const writable = ['jpg', 'png', 'webp', 'avif'];
                 if (q) ops.push('quality');
                 if (st) ops.push('strip');
                 encode = px > 0 || ext !== ext0 || !!q || (!!st && (!['jpg', 'png'].includes(ext0) || (it.exif?.orientation || 1) !== 1));
-                if (encode && !writable.includes(ext)) { notes.push(`${fmtLabel(ext)} ne s’écrit pas ici : PNG à la place`); ext = 'png'; }
-                if (st && ext0 === 'gif' && !encode) notes.push('Un GIF n’a pas de position GPS à effacer');
-                if (q && q.p.maxKb && ext === 'png') notes.push('PNG : le poids baisse en réduisant la taille de l’image');
+                if (encode && !writable.includes(ext)) { notes.push(i18n('{x} ne s’écrit pas ici : PNG à la place', {x: fmtLabel(ext)})); ext = 'png'; }
+                if (st && ext0 === 'gif' && !encode) notes.push(i18n('Un GIF n’a pas de position GPS à effacer'));
+                if (q && q.p.maxKb && ext === 'png') notes.push(i18n('PNG : le poids baisse en réduisant la taille de l’image'));
             } else if (kind === 'doc' || kind === 'sheet' || kind === 'audio') {
                 if (fmtC && fmtC.p[kind] !== 'keep' && fmtC.p[kind] !== ext0) { ext = fmtC.p[kind]; ops.push('format'); encode = true; }
-                if (kind === 'sheet' && ext === 'csv' && encode) notes.push('CSV : seulement la 1re feuille, sans mise en forme');
-                if (kind === 'doc' && ['txt', 'md'].includes(ext) && encode) notes.push(`${fmtLabel(ext)} : le texte seul, sans images ni mise en forme`);
+                if (kind === 'sheet' && ext === 'csv' && encode) notes.push(i18n('CSV : seulement la 1re feuille, sans mise en forme'));
+                if (kind === 'doc' && ['txt', 'md'].includes(ext) && encode) notes.push(i18n('{x} : le texte seul, sans images ni mise en forme', {x: fmtLabel(ext)}));
             } else if (kind === 'pdf') {
-                if (chain.some(c => c.on && !['rename', 'tags', 'pdf'].includes(c.type))) notes.push('PDF : en lecture seule (seulement renommé, étiqueté ou relié)');
-            } else if (chain.some(c => c.on && !['rename', 'tags'].includes(c.type))) notes.push(`${kind === 'video' ? 'Vidéo' : 'Fichier'} : seulement renommé, étiqueté ou relié`);
+                if (chain.some(c => c.on && !['rename', 'tags', 'pdf'].includes(c.type))) notes.push(i18n('PDF : en lecture seule (seulement renommé, étiqueté ou relié)'));
+            } else if (chain.some(c => c.on && !['rename', 'tags'].includes(c.type))) notes.push(i18n('{x} : seulement renommé, étiqueté ou relié', {x: kind === 'video' ? i18n('Vidéo') : 'Fichier'}));
             const baseName = rn ? renameBase(it, i, rn.p, opts.now) : baseOf(it.name);
             if (rn) ops.unshift('rename');
             let mode = out === 'zip' ? 'zip' : out === 'copy' ? (it.base ? 'copy' : 'new') : (it.base ? (encode ? 'version' : 'meta') : 'new');
             if (it.base && out === 'version' && encode && kind === 'image' && ext !== ext0 && !['jpg', 'png', 'webp', 'avif', 'gif'].includes(ext)) mode = 'copy';
-            if (mode !== 'zip' && !STORABLE.includes(ext)) { notes.push(`.${ext} ne se range pas dans les médias : ⤓ ZIP seulement`); mode = 'skip'; }
+            if (mode !== 'zip' && !STORABLE.includes(ext)) { notes.push(i18n('.{ext} ne se range pas dans les médias : ⤓ ZIP seulement', {ext})); mode = 'skip'; }
             if (tg && mode !== 'zip' && (tg.p.labels.length || tg.p.person)) ops.push('tags');
-            if (tg && mode === 'zip' && (tg.p.labels.length || tg.p.person)) notes.push('Étiquettes et personne : seulement dans la base (pas dans un ZIP)');
-            if (!it.base && out === 'version' && mode === 'new') notes.push('Venu de l’ordinateur : rangé comme nouveau média');
+            if (tg && mode === 'zip' && (tg.p.labels.length || tg.p.person)) notes.push(i18n('Étiquettes et personne : seulement dans la base (pas dans un ZIP)'));
+            if (!it.base && out === 'version' && mode === 'new') notes.push(i18n('Venu de l’ordinateur : rangé comme nouveau média'));
             const inPdf = !!pdfC && kind === 'image';
             if (inPdf) ops.push('pdf');
             const titleChange = mode !== 'zip' && rn && rn.p.title && (it.base ? baseName !== (it.title || baseOf(it.name)) : true);
@@ -232,8 +234,8 @@
         if (out === 'zip') { const u = uniqueNames(rows.filter(r => r.mode === 'zip').map(r => r.after.name)); rows.filter(r => r.mode === 'zip').forEach((r, k) => { r.after.name = u[k]; }); }
         const pages = rows.filter(r => r.ops.includes('pdf')).length;
         const pdf = pdfC && pages ? {name: `${safeName(pdfC.p.name, 'Scans')}.pdf`, pages, page: pdfC.p.page, margin: pdfC.p.margin, keep: pdfC.p.keep} : null;
-        if (pdfC && !pages) warnings.push('« Assembler en un PDF » : aucune image dans le lot');
-        if (on(chain, 'format').length > 1 || on(chain, 'rename').length > 1) warnings.push('Une action en double : seule la dernière carte compte pour « Renommer » et « Changer de format »');
+        if (pdfC && !pages) warnings.push(i18n('« Assembler en un PDF » : aucune image dans le lot'));
+        if (on(chain, 'format').length > 1 || on(chain, 'rename').length > 1) warnings.push(i18n('Une action en double : seule la dernière carte compte pour « Renommer » et « Changer de format »'));
         return {rows, pdf, warnings, out};
     }
 
@@ -303,15 +305,15 @@
         const p = c.p || {};
         switch (c.type) {
             case 'rename': return (p.pattern || '').replace(/\{texte\}/g, p.text || 'texte').replace(/\{n\}/g, pad(p.start ?? 1, p.digits ?? 3)).replace(/\{(\w+)\}/g, '‹$1›').slice(0, 60);
-            case 'resize': return p.by === 'pct' ? `${String(p.pct).replace('.', ',')} %` : p.by === 'long' ? `plus grand côté ${p.long} px` : p.by === 'width' ? `largeur ${p.w} px` : p.by === 'height' ? `hauteur ${p.h} px` : `${p.w} × ${p.h} px`;
-            case 'crop': return [p.margin ? `bords ${p.margin} %` : '', p.ratio ? `format ${p.ratio}` : '', p.rotate ? `${p.rotate}°` : '', p.flipH ? 'miroir' : '', p.flipV ? 'tête en bas' : ''].filter(Boolean).join(' · ') || 'rien à faire';
-            case 'gray': return p.mode === 'sepia' ? 'sépia' : 'gris';
+            case 'resize': return p.by === 'pct' ? `${String(p.pct).replace('.', ',')} %` : p.by === 'long' ? i18n('plus grand côté {long} px', {long: p.long}) : p.by === 'width' ? `largeur ${p.w} px` : p.by === 'height' ? `hauteur ${p.h} px` : `${p.w} × ${p.h} px`;
+            case 'crop': return [p.margin ? `bords ${p.margin} %` : '', p.ratio ? `format ${p.ratio}` : '', p.rotate ? `${p.rotate}°` : '', p.flipH ? 'miroir' : '', p.flipV ? i18n('tête en bas') : ''].filter(Boolean).join(' · ') || i18n('rien à faire');
+            case 'gray': return p.mode === 'sepia' ? i18n('sépia') : 'gris';
             case 'watermark': return `« ${p.text || ''} »`;
-            case 'format': return Object.entries(p).filter(([, v]) => v !== 'keep').map(([k, v]) => `${KIND_LABEL[k]} → ${v.toUpperCase()}`).join(' · ') || 'rien ne change';
-            case 'quality': return `${p.q} %${p.maxKb ? ` · ${p.maxKb.toLocaleString('fr-FR')} Ko au plus` : ''}`;
+            case 'format': return Object.entries(p).filter(([, v]) => v !== 'keep').map(([k, v]) => `${KIND_LABEL[k]} → ${v.toUpperCase()}`).join(' · ') || i18n('rien ne change');
+            case 'quality': return `${p.q} %${p.maxKb ? ` · ${p.maxKb.toLocaleString('fr-FR')} ${i18n('Ko au plus')}` : ''}`;
             case 'strip': return 'Exif, GPS, XMP';
-            case 'tags': return [p.labels?.length ? `${p.labels.length} étiquette${p.labels.length > 1 ? 's' : ''}` : '', p.personName || (p.person ? 'une personne' : '')].filter(Boolean).join(' · ') || 'rien de choisi';
-            case 'pdf': return `« ${p.name} » · ${p.page === 'a4' ? 'pages A4' : 'à la taille des images'}`;
+            case 'tags': return [p.labels?.length ? PL(p.labels.length, 'étiquette') : '', p.personName || (p.person ? i18n('une personne') : '')].filter(Boolean).join(' · ') || i18n('rien de choisi');
+            case 'pdf': return `« ${p.name} » · ${p.page === 'a4' ? 'pages A4' : i18n('à la taille des images')}`;
         }
         return '';
     }

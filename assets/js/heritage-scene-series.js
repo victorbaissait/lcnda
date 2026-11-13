@@ -11,6 +11,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s)); // 🌐 traduction (docs/I18N.md)
     const ART = window.LCNDA_ART, SC = ART?.scene; if (!ART?.define || !SC) return;
     const A = () => window.LCNDA_APP, P = () => window.LCNDA_PICKER || window.LCNDA_APP;
     const U = ART.util, esc = U.esc, fold = SC.fold;
@@ -235,7 +236,7 @@
             const season = SC.seasonsOf(store, it.id).find(s => s.id === st.season);
             if (d.scRange !== undefined) { readPanel(root, st); const a = Number(String(st.ra).replace(/\D/g, '')), z = Number(String(st.rb).replace(/\D/g, '')) || a; if (!a || !season) return window.LCNDA_UI.fail(root.querySelector('[data-sp-a]'), 'Écris les numéros : du… au…');
                 const [lo, hi] = [Math.min(a, z), Math.max(a, z)], l = SC.episodesOf(store, season.id).filter(e => { const n = Number(e.data?.no); return n >= lo && n <= hi; });
-                if (!l.length) { A().toast(`Aucun épisode n° ${lo}${hi > lo ? ` à ${hi}` : ''} dans cette saison.`, 'error'); return; } l.forEach(e => st.draft.eps.add(e.id)); redraw(root); return; }
+                if (!l.length) { A().toast(hi > lo ? i18n('Aucun épisode n° {a} à {b} dans cette saison.', {a: String(lo), b: String(hi)}) : i18n('Aucun épisode n° {a} dans cette saison.', {a: String(lo)}), 'error'); return; } l.forEach(e => st.draft.eps.add(e.id)); redraw(root); return; }
             if (d.scAll) { readPanel(root, st); if (d.scAll === 'none') st.draft.eps.clear(); else (d.scAll === 'season' ? (season ? SC.episodesOf(store, season.id) : []) : SC.seriesEpisodes(store, it.id).map(x2 => x2.e)).forEach(e2 => st.draft.eps.add(e2.id)); redraw(root); return; }
             if (d.scPcancel !== undefined) { st.draft = null; st.ra = st.rb = ''; redraw(root); return; }
             if (d.scPsave !== undefined || d.scPdel !== undefined) { readPanel(root, st); const D = st.draft, rows = partsOf(it).filter(r => !(pkey(r.who) === pkey(D.who) && (r.mode || 'role') === D.mode));

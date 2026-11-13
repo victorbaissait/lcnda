@@ -1,0 +1,422 @@
+fr ¦ tr
+# ═════ zone « composants » : turc (tr) ═════
+Enregistrer ¦ Kaydet
+Annuler ¦ İptal
+Fermer ¦ Kapat
+Supprimer ¦ Sil
+Retirer ¦ Çıkar
+Modifier ¦ Düzenle
+Créer ¦ Oluştur
+Ajouter ¦ Ekle
+Relier ¦ Bağla
+↺ Remettre comme au départ ¦ ↺ Başlangıçtaki gibi yap
+Remettre comme au départ ¦ Başlangıçtaki gibi yap
+↶ Annuler ¦ ↶ Geri al
+↷ Rétablir ¦ ↷ Yinele
+Rétablir ¦ Yinele
+Continuer ¦ Devam et
+Réessayer ¦ Yeniden dene
+Ouvrir ¦ Aç
+↗ Ouvrir ¦ ↗ Aç
+Renommer ¦ Yeniden adlandır
+Dupliquer ¦ Çoğalt
+Remplacer ¦ Değiştir
+Choisir ¦ Seç
+Choisir… ¦ Seç…
+Changer ¦ Değiştir
+Exporter ¦ Dışa aktar
+Importer ¦ İçe aktar
+Imprimer ¦ Yazdır
+🖨 Imprimer ¦ 🖨 Yazdır
+💾 Enregistrer ¦ 💾 Kaydet
+⤒ Importer ¦ ⤒ İçe aktar
+⤓ Exporter ▾ ¦ ⤓ Dışa aktar ▾
+📋 Copier ¦ 📋 Kopyala
+✓ Enregistré ¦ ✓ Kaydedildi
+Enregistré ¦ Kaydedildi
+Enregistrement… ¦ Kaydediliyor…
+⚠️ Pas enregistré ¦ ⚠️ Kaydedilmedi
+• modifié ¦ • değiştirildi
+Plein écran ¦ Tam ekran
+Plus d’actions ¦ Daha fazla işlem
+Aide ¦ Yardım
+Aide : ¦ Yardım:
+En savoir plus (FAQ) → ¦ Daha fazla bilgi (SSS) →
+Clique pour lire la suite ¦ Devamını okumak için tıkla
+Retour ¦ Geri
+← Retour ¦ ← Geri
+Oui ¦ Evet
+Non ¦ Hayır
+Aucune ¦ Hiçbiri
+Aucun ¦ Hiçbiri
+Tous ¦ Hepsi
+Toutes ¦ Hepsi
+Tout ¦ Tümü
+Tout voir ¦ Hepsini gör
+Voir tout ¦ Hepsini gör
+Toutes ({n}) ¦ Hepsi ({n})
+Tout ({n}) ¦ Tümü ({n})
+Rien pour l’instant ¦ Şimdilik bir şey yok
+Rien ¦ Hiçbir şey
+Sans titre ¦ Başlıksız
+Échap ¦ Esc
+Entrée ¦ Enter
+Début ¦ Home
+retour arrière ¦ geri sil
+⚠️ ATTENTION ¦ ⚠️ DİKKAT
+CONFIRMER ¦ ONAYLA
+Es-tu sûr ? ¦ Emin misin?
+Confirmer ¦ Onayla
+Impossible d’annuler : {err} ¦ Geri alınamadı: {err}
+Impossible de rétablir : {err} ¦ Yinelenemedi: {err}
+Déjà remis : rien à annuler de plus. ¦ Zaten geri alındı: geri alınacak başka bir şey yok.
+↶ Annulé : {what} ¦ ↶ Geri alındı: {what}
+↶ Annulé : « {what} » ¦ ↶ Geri alındı: “{what}”
+Pas de connexion avec LCNDA : rien n’est perdu, réessaie. ¦ LCNDA ile bağlantı yok: hiçbir şey kaybolmadı, yeniden dene.
+Réponse illisible du serveur ¦ Sunucudan okunamayan yanıt
+Réponse illisible du serveur. ¦ Sunucudan okunamayan yanıt.
+Erreur du serveur. ¦ Sunucu hatası.
+Réglage changé ¦ Ayar değişti
+Réglage changé : « {what} » ¦ Ayar değişti: “{what}”
+Réglages remis comme au départ ¦ Ayarlar başlangıçtaki gibi yapıldı
+Chargement… ¦ Yükleniyor…
+Chargement de la base… ¦ Veritabanı yükleniyor…
+Ouverture de la généalogie… ¦ Soy ağacı açılıyor…
+Chercher ¦ Ara
+Chercher… ¦ Ara…
+Rechercher ¦ Ara
+Vider la case (Échap) ¦ Kutuyu boşalt (Esc)
+Vider la case ¦ Kutuyu boşalt
+Touche « / » : aller dans la case de recherche ¦ “/” tuşu: arama kutusuna git
+Filtrer ¦ Filtrele
+Filtrer ▾ ¦ Filtrele ▾
+Tout effacer ¦ Hepsini temizle
+Retirer ce filtre ¦ Bu filtreyi kaldır
+Trier ¦ Sırala
+Trier : ¦ Sırala:
+Les plus récents ¦ En yeniler önce
+Les plus anciens ¦ En eskiler önce
+Les plus récentes ¦ En yeniler önce
+Les plus anciennes ¦ En eskiler önce
+Nom A → Z ¦ Ad A → Z
+Nom Z → A ¦ Ad Z → A
+Liste ¦ Liste
+Fiches ¦ Kartlar
+En liste : une ligne par élément (vignette, nom, détails, date) ¦ Liste olarak: her öğe için bir satır (küçük resim, ad, ayrıntılar, tarih)
+En fiches : une carte par élément, avec une grande vignette ¦ Kartlar olarak: her öğe için büyük resimli bir kart
+Affichage des {what} ¦ Gösterim: {what}
+Voir le suivant ↓ ¦ Sonrakini gör ↓
+Voir la suivante ↓ ¦ Sonrakini gör ↓
+Voir les {n} suivants ↓ ¦ Sonraki {n} tanesini gör ↓
+Voir les {n} suivantes ↓ ¦ Sonraki {n} tanesini gör ↓
+{n} éléments ¦ {n} öğe
+=élément ¦ öğe|öğe
+éléments ¦ öğeler
+=personne ¦ kişi|kişi
+=animal ¦ hayvan|hayvan
+=fiche ¦ kart|kart
+=lieu ¦ yer|yer
+=commune ¦ yerleşim yeri|yerleşim yeri
+=ville ¦ şehir|şehir
+=chose ¦ şey|şey
+=caractère ¦ karakter|karakter
+=page ¦ sayfa|sayfa
+=document ¦ belge|belge
+=média ¦ medya dosyası|medya dosyası
+=source ¦ kaynak|kaynak
+=événement ¦ olay|olay
+=étiquette ¦ etiket|etiket
+=enquête ¦ inceleme|inceleme
+=modification ¦ değişiklik|değişiklik
+=famille ¦ aile|aile
+=génération ¦ kuşak|kuşak
+=réglage ¦ ayar|ayar
+=erreur captée ¦ yakalanan hata|yakalanan hata
+=jour ¦ gün|gün
+=type ¦ tür|tür
+=branche ¦ kol|kol
+=doublon possible ¦ olası çift kayıt|olası çift kayıt
+=chose à vérifier ¦ kontrol edilecek şey|kontrol edilecek şey
+=album ¦ albüm|albüm
+=chanson ¦ şarkı|şarkı
+=titre ¦ başlık|başlık
+Nom, prénom… (2 lettres suffisent) ¦ Soyadı, ad… (2 harf yeter)
+Ville, village, paroisse… ¦ Şehir, köy, kilise bölgesi…
+＋ Ajouter une personne… ¦ ＋ Bir kişi ekle…
+＋ Ajouter un lieu… ¦ ＋ Bir yer ekle…
+＋ Ajouter une source… ¦ ＋ Bir kaynak ekle…
+＋ Ajouter un média… ¦ ＋ Bir medya dosyası ekle…
+＋ Ajouter une enquête… ¦ ＋ Bir inceleme ekle…
+＋ Ajouter une étiquette… ¦ ＋ Bir etiket ekle…
+＋ Ajouter un événement… ¦ ＋ Bir olay ekle…
+＋ Ajouter un animal… ¦ ＋ Bir hayvan ekle…
+＋ Ajouter… ¦ ＋ Ekle…
+↗ Fiche ¦ ↗ Kart
+↗ Lieu ¦ ↗ Yer
+Aucune fiche ¦ Kart yok
+Aucun lieu ¦ Yer yok
+Aucune source ¦ Kaynak yok
+Aucun média ¦ Medya yok
+Aucune enquête ¦ İnceleme yok
+Aucune étiquette ¦ Etiket yok
+Aucun événement ¦ Olay yok
+Aucun animal ¦ Hayvan yok
+Créer la fiche ¦ Kartı oluştur
+Créer le lieu ¦ Yeri oluştur
+Créer une fiche ¦ Bir kart oluştur
+＋ Créer sa fiche ¦ ＋ Kartını oluştur
+👤 Personnes ¦ 👤 Kişiler
+📍 Lieux ¦ 📍 Yerler
+📚 Sources ¦ 📚 Kaynaklar
+🖼 Médias ¦ 🖼 Medya
+🔍 Enquêtes ¦ 🔍 İncelemeler
+🏷 Étiquettes ¦ 🏷 Etiketler
+📅 Événements ¦ 📅 Olaylar
+🐾 Animaux ¦ 🐾 Hayvanlar
+✎ Garder le texte « {q} » sans fiche ¦ ✎ “{q}” metnini kartsız tut
+🗺 Choisir sur la carte ¦ 🗺 Haritada seç
+{what} de ta base ¦ Veritabanındaki {what}
+{what} de France ¦ Fransa’daki {what}
+{what} du monde ¦ Dünyadaki {what}
+300 villes du monde et plus ¦ Dünyadan 300’den fazla şehir
+{what} trouvés ¦ {what} bulundu
+{none} pour « {q} ». Vérifie l’orthographe ¦ “{q}” için: {none}. Yazımı kontrol et
+{none} pour l’instant ¦ Şimdilik: {none}
+, ou : ¦ , ya da:
+↹ Tab passe d’un filtre à l’autre ¦ ↹ Tab bir filtreden ötekine geçer
+↑ ↓ Entrée ¦ ↑ ↓ Enter
+… la liste défile ¦ … liste kayar
+⭐ Personne principale ¦ ⭐ Ana kişi
+Autres personnes principales ¦ Diğer ana kişiler
+Personnes principales ¦ Ana kişiler
+Personnes secondaires ¦ İkincil kişiler
+au cœur de la recherche ¦ araştırmanın merkezinde
+témoins, voisins, parrains, pistes… ¦ tanıklar, komşular, vaftiz ebeveynleri, ipuçları…
+Choisir la personne principale… ¦ Ana kişiyi seç…
+＋ Ajouter une personne principale… ¦ ＋ Bir ana kişi ekle…
+＋ Ajouter une personne secondaire… ¦ ＋ Bir ikincil kişi ekle…
+Changer le rôle ¦ Rolü değiştir
+Donner un rôle (facultatif) ¦ Bir rol ver (isteğe bağlı)
+rôle ▾ ¦ rol ▾
+Rôle libre ¦ Serbest rol
+Retirer le rôle ¦ Rolü kaldır
+Passer en secondaire ¦ İkincile geçir
+Passer en principale ¦ Ana kişiye geçir
+Autre mot… (Entrée) ¦ Başka kelime… (Enter)
+témoin ¦ tanık
+déclarant ¦ bildiren
+parrain ¦ vaftiz babası
+marraine ¦ vaftiz annesi
+voisin ¦ komşu
+employeur ¦ işveren
+officier ¦ memur
+épouse ¦ eş (kadın)
+époux ¦ eş (erkek)
+sans fiche ¦ kartsız
+Personne sans fiche : clic pour créer sa fiche ¦ Kartı olmayan kişi: kartını oluşturmak için tıkla
+Ouvrir la fiche ¦ Kartı aç
+Voir sur la carte ¦ Haritada gör
+Aucune personne choisie ¦ Seçilen kişi yok
+Choisir des personnes ¦ Kişileri seç
+Choisir une personne ¦ Bir kişi seç
+Choisir des lieux ¦ Yerleri seç
+Choisir un lieu ¦ Bir yer seç
+Carte : clique l’endroit du lieu ¦ Harita: yerin bulunduğu noktaya tıkla
+Clique l’endroit du lieu sur la carte (glisse pour te déplacer, molette pour zoomer). ¦ Haritada yerin bulunduğu noktaya tıkla (gezinmek için sürükle, yakınlaştırmak için tekerlek).
+＋ Créer un lieu ici ¦ ＋ Burada bir yer oluştur
+Nom du lieu ¦ Yerin adı
+Lieux proches… ¦ Yakındaki yerler…
+Aucun lieu connu près d’ici : crée-le ci-dessous. ¦ Buralarda bilinen bir yer yok: aşağıda oluştur.
+Donne un nom au lieu. ¦ Yere bir ad ver.
+Dézoomer ¦ Uzaklaştır
+Lieu impossible à ajouter ¦ Yer eklenemiyor
+Crée d’abord la fiche dans Personnes, puis choisis-la ici. ¦ Önce kartı Kişiler’de oluştur, sonra burada seç.
+Crée-la d’abord dans l’outil, puis choisis-la ici. ¦ Önce araçta oluştur, sonra burada seç.
+Personne ¦ Kişi
+Lieu ¦ Yer
+À corriger. ¦ Düzeltilecek.
+<b>{what} à corriger</b> avant d’enregistrer. ¦ Kaydetmeden önce <b>düzeltilecek {what}</b> var.
+Coche cette case pour continuer. ¦ Devam etmek için bu kutuyu işaretle.
+Choisis une des possibilités. ¦ Seçeneklerden birini seç.
+Choisis un fichier. ¦ Bir dosya seç.
+Choisis dans la liste. ¦ Listeden seç.
+Ce champ est à remplir. ¦ Bu alan doldurulmalı.
+Écris un nombre (par exemple 12 ou 3,5). ¦ Bir sayı yaz (örneğin 12 ya da 3,5).
+Ce n’est pas compris : vérifie ce qui est écrit. ¦ Anlaşılmadı: yazılanı kontrol et.
+Écris une adresse e-mail complète (nom@exemple.fr). ¦ Tam bir e-posta adresi yaz (ad@ornek.com).
+Écris une adresse web complète (https://…). ¦ Tam bir web adresi yaz (https://…).
+Ce n’est pas au bon format. ¦ Bu doğru biçimde değil.
+Au moins {x}. ¦ En az {x}.
+Au plus {x}. ¦ En çok {x}.
+Au moins {x} (là : {y}). ¦ En az {x} (şu an: {y}).
+Cette valeur n’est pas permise ici : prends un nombre rond. ¦ Bu değere burada izin verilmiyor: yuvarlak bir sayı kullan.
+Donne un nom à ces réglages. ¦ Bu ayarlara bir ad ver.
+Choisir une couleur ¦ Bir renk seç
+Couleurs de l’app ¦ Uygulamanın renkleri
+Récentes ¦ Son kullanılanlar
+Choisir une autre couleur ¦ Başka bir renk seç
+Prendre une couleur n’importe où dans la fenêtre ¦ Pencerenin herhangi bir yerinden renk al
+Code de la couleur ¦ Rengin kodu
+Remettre la couleur d’avant ¦ Önceki rengi geri getir
+Double-clic : revenir à la valeur de départ ¦ Çift tıklama: başlangıç değerine dön
+Choisir une police ¦ Bir yazı tipi seç
+Chercher une police… ¦ Bir yazı tipi ara…
+Les polices de l’ordinateur… ¦ Bilgisayarın yazı tipleri…
+Aucune police pour « {q} ». ¦ “{q}” için yazı tipi yok.
+Lecture des polices… ¦ Yazı tipleri okunuyor…
+🔓 Voir toutes les polices de l’ordinateur ¦ 🔓 Bilgisayarın tüm yazı tiplerini gör
+Le navigateur te demandera la permission. ¦ Tarayıcı senden izin isteyecek.
+CONSEILLÉE ¦ ÖNERİLEN
+RÉCENTE ¦ SON
+DE L’APP ¦ UYGULAMADAN
+TAPÉE ¦ YAZILAN
+Réglages enregistrés ¦ Kaydedilmiş ayarlar
+Nom de ces réglages ¦ Bu ayarların adı
+Nom du réglage ¦ Ayarın adı
+Aucun réglage enregistré pour l’instant. ¦ Henüz kaydedilmiş ayar yok.
+＋ Enregistrer les réglages actuels ¦ ＋ Şu anki ayarları kaydet
+Un réglage « {name} » existe déjà. ¦ “{name}” adlı bir ayar zaten var.
+Le remplacer ? ¦ Üzerine yazılsın mı?
+Réglages gardés sous « {name} ». ¦ Ayarlar “{name}” adıyla saklandı.
+Remplacer par les réglages actuels ¦ Şu anki ayarlarla değiştir
+Remplacer « {name} » par les réglages actuels ? ¦ “{name}” şu anki ayarlarla değiştirilsin mi?
+Réglage mis à jour. ¦ Ayar güncellendi.
+Réglages « {name} » appliqués. ¦ “{name}” ayarları uygulandı.
+Exporter (fichier .json) ¦ Dışa aktar (.json dosyası)
+Remplacer, renommer, dupliquer, exporter, supprimer ¦ Değiştir, yeniden adlandır, çoğalt, dışa aktar, sil
+Exporter (PDF, image, impression…) ¦ Dışa aktar (PDF, görüntü, baskı…)
+⤓ Exporter en {fmt} ¦ ⤓ {fmt} olarak dışa aktar
+Nom du fichier ¦ Dosyanın adı
+Qualité ¦ Kalite
+Fond perdu et traits de coupe (imprimeur) ¦ Taşma payı ve kesim işaretleri (matbaa)
+Ranger aussi une copie dans les médias ¦ Medyaya da bir kopya koy
+Aperçu ¦ Önizleme
+Aperçu… ¦ Önizleme…
+Pas d’aperçu ¦ Önizleme yok
+Format du papier ¦ Kâğıt boyutu
+Ce qu’on imprime ¦ Yazdırılacaklar
+Pages à imprimer ¦ Yazdırılacak sayfalar
+Celle affichée ¦ Gösterilen sayfa
+Page précédente ¦ Önceki sayfa
+Page suivante ¦ Sonraki sayfa
+Aperçu de l’impression ¦ Baskı önizlemesi
+Exemplaires ¦ Kopya sayısı
+Portrait ¦ Dikey
+Paysage ¦ Yatay
+L’écran affiché ¦ Gösterilen ekran
+Dans la fenêtre qui s’ouvre, choisis « Enregistrer au format PDF » comme imprimante. ¦ Açılan pencerede yazıcı olarak “PDF olarak kaydet”i seç.
+Dans la fenêtre d’impression, choisis « Enregistrer au format PDF ». ¦ Yazdırma penceresinde “PDF olarak kaydet”i seç.
+IMPORTER · ÉTAPE 1 SUR 3 ¦ İÇE AKTAR · ADIM 1 / 3
+IMPORTER · ÉTAPE {n} SUR 3 ¦ İÇE AKTAR · ADIM {n} / 3
+📁 Glisse ici le fichier, colle-le (⌘V) ou choisis-le sur l’ordinateur ¦ 📁 Dosyayı buraya bırak, yapıştır (⌘V) ya da bilgisayarda seç
+📁 Glisse ici les fichiers, colle-les (⌘V) ou choisis-les sur l’ordinateur ¦ 📁 Dosyaları buraya bırak, yapıştır (⌘V) ya da bilgisayarda seç
+Lecture du fichier… ¦ Dosya okunuyor…
+Ce fichier ne peut pas être importé : {err} ¦ Bu dosya içe aktarılamıyor: {err}
+Voilà ce qui va entrer : {sum}. ¦ İçeri girecek olanlar: {sum}.
+⤒ Importer {what} ¦ ⤒ İçe aktar: {what}
+{what} importés. ¦ {what} içe aktarıldı.
+Import terminé. ¦ İçe aktarma bitti.
+Impossible d’importer : {err} ¦ İçe aktarılamadı: {err}
+Importer un fichier ¦ Bir dosya içe aktar
+⤒ Importer un fichier… ¦ ⤒ Bir dosya içe aktar…
+Ce type de fichier n’est pas accepté ici. ¦ Bu dosya türü burada kabul edilmiyor.
+Il entre dans les médias de l’app et se place dans l’outil. ¦ Uygulamanın medyasına girer ve araca yerleşir.
+📁 Choisir un fichier ¦ 📁 Bir dosya seç
+Ce fichier .json est abîmé : il ne peut pas être lu. ¦ Bu .json dosyası bozuk: okunamıyor.
+Ajuster à la fenêtre ¦ Pencereye sığdır
+Zoom arrière ¦ Uzaklaştır
+Zoom avant ¦ Yakınlaştır
+Règles ¦ Cetveller
+Règles : montrer ou cacher ¦ Cetveller: göster ya da gizle
+Aimanter : les objets se collent aux autres et à la grille (Alt pour s’en passer en glissant) ¦ Mıknatısla: nesneler birbirine ve ızgaraya yapışır (sürüklerken bundan kaçınmak için Alt)
+Les autres façons d’enregistrer ¦ Kaydetmenin diğer yolları
+Ranger, montrer ou cacher les boutons ¦ Düğmeleri düzenle, göster ya da gizle
+Compris ¦ Anladım
+Choisir sur un calendrier ¦ Takvimde seç
+Durée ¦ Süre
+aujourd’hui ¦ bugün
+aujourd’hui à {h} ¦ bugün saat {h}
+hier ¦ dün
+hier à {h} ¦ dün saat {h}
+{day} à {h} ¦ {day}, saat {h}
+Modifié ¦ Değiştirildi
+Créé ¦ Oluşturuldu
+Ajouté ¦ Eklendi
+Aucune battue ¦ Tarama yok
+Aucune maison ¦ Ev yok
+Aucune revue ¦ Dergi yok
+Aucun employeur ¦ İşveren yok
+Aucun recensement ¦ Nüfus sayımı yok
+🎨 Œuvres ¦ 🎨 Eserler
+Chercher un graphique… (ex. naissances, camembert) ¦ Bir grafik ara… (örn. doğumlar, pasta)
+Aucun graphique ¦ Grafik yok
+Créer le graphique ¦ Grafiği oluştur
+Nouveau graphique ¦ Yeni grafik
+Aucun projet ¦ Proje yok
+Aucun tableau ¦ Pano yok
+Aucune mise en page ¦ Sayfa düzeni yok
+📐 Mises en page ¦ 📐 Sayfa düzenleri
+Aucun diagramme ¦ Diyagram yok
+Aucune carte ¦ Harita yok
+Aucune transcription ¦ Transkripsiyon yok
+Aucune carte de photos ¦ Fotoğraf haritası yok
+Aucun classeur ¦ Çalışma kitabı yok
+Aucun document ¦ Belge yok
+Aucune parcelle ¦ Parsel yok
+Nom de l’objet, sorte… (2 lettres suffisent) ¦ Nesnenin adı, türü… (2 harf yeter)
+Aucun objet de famille ¦ Aile yadigârı yok
+Nom du défunt, notaire, année… (2 lettres suffisent) ¦ Ölenin adı, noter, yıl… (2 harf yeter)
+Aucun inventaire après décès ¦ Ölüm sonrası envanter yok
+⚖️ Inventaires après décès ¦ ⚖️ Ölüm sonrası envanterler
+Nom, espèce, code de bague, puce… (2 lettres suffisent) ¦ Ad, tür, halka kodu, çip… (2 harf yeter)
+Nom du site… (2 lettres suffisent) ¦ Alanın adı… (2 harf yeter)
+Aucun site ¦ Alan yok
+Nom du groupe, de la meute… (2 lettres suffisent) ¦ Grubun, sürünün adı… (2 harf yeter)
+Aucun groupe ¦ Grup yok
+👥 Groupes d’animaux ¦ 👥 Hayvan grupları
+Maladie, cause de décès… (2 lettres suffisent) ¦ Hastalık, ölüm nedeni… (2 harf yeter)
+＋ Choisir une maladie… ¦ ＋ Bir hastalık seç…
+Aucune maladie notée ¦ Kayıtlı hastalık yok
+🩺 Santé ¦ 🩺 Sağlık
+Chercher une de mes cartes… ¦ Haritalarımdan birini ara…
+＋ Choisir une carte… ¦ ＋ Bir harita seç…
+Nom de la branche… ¦ Kolun adı…
+＋ Choisir une branche… ¦ ＋ Bir kol seç…
+Aucune branche ¦ Kol yok
+Nom d’une de mes couches… ¦ Katmanlarımdan birinin adı…
+＋ Choisir une couche… ¦ ＋ Bir katman seç…
+Aucune couche dessinée ¦ Çizilmiş katman yok
+Commune, cote, année… (2 lettres suffisent) ¦ Yerleşim yeri, arşiv numarası, yıl… (2 harf yeter)
+🔗 Relier un dépouillement… ¦ 🔗 Bir döküm bağla…
+Aucun dépouillement ¦ Döküm yok
+Nom, prénom d’un contact… (2 lettres suffisent) ¦ Bir irtibatın soyadı, adı… (2 harf yeter)
+Aucun contact ¦ İrtibat yok
+Chercher une de mes listes… ¦ Listelerimden birini ara…
+Aucune liste ¦ Liste yok
+Événement, personne, année… (2 lettres suffisent) ¦ Olay, kişi, yıl… (2 harf yeter)
+Aucun service d’archives ¦ Arşiv kurumu yok
+Créer le service ¦ Kurumu oluştur
+🏛 Services d’archives ¦ 🏛 Arşiv kurumları
+Source, page, nom de la personne citée… ¦ Kaynak, sayfa, anılan kişinin adı…
+＋ Choisir une citation… ¦ ＋ Bir alıntı seç…
+Aucune citation ¦ Alıntı yok
+— une seule ¦ — yalnızca bir tane
+＋ Ajouter une maison… ¦ ＋ Bir ev ekle…
+＋ Ajouter une fiche… ¦ ＋ Bir kart ekle…
+＋ Ajouter un document… ¦ ＋ Bir belge ekle…
+＋ Ajouter une carte… ¦ ＋ Bir harita ekle…
+＋ Ajouter un groupe… ¦ ＋ Bir grup ekle…
+＋ Ajouter un contact… ¦ ＋ Bir irtibat ekle…
+＋ Ajouter une liste… ¦ ＋ Bir liste ekle…
+Ce réglage prend ce qui est à l’écran maintenant. ¦ Bu ayar şu anda ekranda olanı alır.
+L’ancienne version de ce réglage ne sera plus gardée. ¦ Bu ayarın eski sürümü artık saklanmayacak.
+Le nom devient modifiable sur la ligne. ¦ Ad, satırda düzenlenebilir hâle gelir.
+Une copie, à modifier sans toucher à l’original. ¦ Aslına dokunmadan değiştirilecek bir kopya.
+Pour le garder, ou l’ouvrir sur un autre ordinateur. ¦ Saklamak ya da başka bir bilgisayarda açmak için.
+On peut encore l’annuler juste après. ¦ Hemen ardından hâlâ geri alınabilir.
+Un fichier lcnda-reglage-….json exporté ici ou sur un autre ordinateur ¦ Burada ya da başka bir bilgisayarda dışa aktarılmış bir lcnda-reglage-….json dosyası
+Ce navigateur ne donne pas la liste des polices : voici les polices courantes trouvées sur l’ordinateur. Pour une autre, tape son nom exact. ¦ Bu tarayıcı yazı tiplerinin listesini vermiyor: işte bilgisayarda bulunan yaygın yazı tipleri. Başka biri için tam adını yaz.
+La liste des polices n’a pas pu être lue. Réessaie. ¦ Yazı tiplerinin listesi okunamadı. Yeniden dene.
+Un autre format de la liste, ou un format libre (gardé dans « Mes formats ») ¦ Listeden başka bir boyut ya da serbest bir boyut (“Boyutlarım” içinde saklanır)
+Un exemplaire au moins. ¦ En az bir kopya.
+{n} exemplaires au plus. ¦ En çok {n} kopya.

@@ -1,0 +1,4 @@
+Match Name,Living DNA ID,Predicted Relationship,Relationship Range,Shared cM,Number of Shared Segments,Largest Segment (cM),Has Family Tree,Messages
+Jeanne Inventée,LD-0001,Second Cousin,1st cousin once removed - 3rd cousin,201.3,10,47.2,Yes,0
+Marcel Fictif,LD-0002,Fourth Cousin,3rd cousin - 6th cousin,32.8,2,19.0,No,1
+"Dupont, Anne",LD-0003,Third Cousin,2nd cousin once removed - 4th cousin,88.4,5,30.1,Yes,0

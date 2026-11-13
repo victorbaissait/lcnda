@@ -1,0 +1,1013 @@
+fr ¦ sq ¦ mt
+TABLEUR · BASE ¦ FLETË LLOGARITËSE · BAZË ¦ FOLJA ELETTRONIKA · DATABASE
+⤒ Remplir depuis l’app ¦ ⤒ Mbush nga aplikacioni ¦ ⤒ Imla mill-app
+1 · Ce qu’on prend ¦ 1 · Çfarë merret ¦ 1 · X’jittieħed
+(comme l’export pour partager) ¦ (si eksportimi për ta ndarë) ¦ (bħall-esportazzjoni biex taqsam)
+2 · Les colonnes ¦ 2 · Kolonat ¦ 2 · Il-kolonni
+(glisse ⠿ pour ranger) ¦ (tërhiq ⠿ për t’i renditur) ¦ (kaxkar ⠿ biex tirranġa)
+＋ Une colonne tirée des données ¦ ＋ Një kolonë nga të dhënat ¦ ＋ Kolonna mid-data
+3 · Aperçu ¦ 3 · Parapamje ¦ 3 · Preview
+🔗 Tenir à jour ¦ 🔗 Mbaje të përditësuar ¦ 🔗 Żommu aġġornat
+— les lignes changent quand la base change (à l’ouverture, ou avec ↻). Tes colonnes ajoutées à droite (formules, notes) restent sur la bonne ligne. ¦ — rreshtat ndryshojnë kur ndryshon baza (kur hapet, ose me ↻). Kolonat e tua të shtuara djathtas (formula, shënime) mbeten në rreshtin e duhur. ¦ — ir-ringieli jinbidlu meta tinbidel id-database (meta tiftaħ, jew b’↻). Il-kolonni li żidt fuq il-lemin (formuli, noti) jibqgħu fir-ringiela t-tajba.
+Où : ¦ Ku: ¦ Fejn:
+à la même place (remplace la plage liée) ¦ në të njëjtin vend (zëvendëson zonën e lidhur) ¦ fl-istess post (jieħu post il-firxa marbuta)
+à partir de A1 dans une nouvelle feuille ¦ duke filluar nga A1 në një fletë të re ¦ minn A1 f’folja ġdida
+à partir de {cell} dans cette feuille ¦ duke filluar nga {cell} në këtë fletë ¦ minn {cell} f’din il-folja
+⤒ Remplir ¦ ⤒ Mbush ¦ ⤒ Imla
+Commune ¦ Komuna ¦ Komun
+Pas encore de dépouillement : Listes → 📜 Dépouillements. ¦ Ende asnjë zbërthim: Listat → 📜 Zbërthimet. ¦ Għad m’hemm l-ebda indiċi tar-reġistri: Listi → 📜 Indiċi tar-reġistri.
+Statistique ¦ Statistikë ¦ Statistika
+Hommes et femmes à part ¦ Burrat dhe gratë veç e veç ¦ Irġiel u nisa separati
+Pas encore de liste à toi : Listes → Mes listes. ¦ Ende asnjë listë jotja: Listat → Listat e mia. ¦ Għad m’għandek l-ebda lista tiegħek: Listi → Il-listi tiegħi.
+Hommes ¦ Burra ¦ Irġiel
+Femmes ¦ Gra ¦ Nisa
+Inconnu ¦ I panjohur ¦ Mhux magħruf
+Lignée ¦ Prejardhja ¦ Nisel
+Né(e) à ¦ Lindur në ¦ Imwieled/imwielda f’
+Nés à partir de ¦ Lindur duke filluar nga ¦ Imwielda minn
+Nés jusqu’à ¦ Lindur deri në ¦ Imwielda sa
+Nés avant ¦ Lindur para ¦ Imwielda qabel
+Sorte ¦ Lloji ¦ Tip
+Chercher… (nom, prénom) ¦ Kërko… (mbiemër, emër) ¦ Fittex… (kunjom, isem)
+Chercher… (nom, sorte, lieu) ¦ Kërko… (emër, lloj, vend) ¦ Fittex… (isem, tip, post)
+👤 personne ¦ 👤 person ¦ 👤 persuna
+📍 lieu ¦ 📍 vend ¦ 📍 post
+📅 date d’acte ¦ 📅 data e aktit ¦ 📅 data tal-att
+nombre ¦ numër ¦ numru
+Monter ¦ Lëviz lart ¦ Itla’ ’l fuq
+Descendre ¦ Lëviz poshtë ¦ Inżel ’l isfel
+Retirer la colonne ¦ Hiq kolonën ¦ Neħħi l-kolonna
+Aucune colonne : ajoute-en une. ¦ Asnjë kolonë: shto një. ¦ L-ebda kolonna: żid waħda.
+Lecture de la base… ¦ Po lexohet baza… ¦ Qed tinqara d-database…
+Lecture… ¦ Po lexohet… ¦ Qed jinqara…
+({shown} premières lignes sur {n}) ¦ ({shown} rreshtat e parë nga {n}) ¦ (l-ewwel {shown} ringieli minn {n})
+Rien ne correspond : change les filtres. ¦ Asgjë nuk përputhet: ndrysho filtrat. ¦ Xejn ma jaqbel: biddel il-filtri.
+{n} de côté (personnes vivantes ou fiches confidentielles). ¦ {n} lënë mënjanë (persona të gjallë ose kartela konfidenciale). ¦ {n} imwarrba (persuni ħajjin jew skedi kunfidenzjali).
+Seules les {n} premières lignes sont prises : précise les filtres. ¦ Merren vetëm {n} rreshtat e parë: ngushto filtrat. ¦ Jittieħdu biss l-ewwel {n} ringieli: speċifika l-filtri.
+⤒ Remplir {n} ¦ ⤒ Mbush {n} ¦ ⤒ Imla {n}
+Toutes les colonnes sont déjà là. ¦ Të gjitha kolonat janë tashmë këtu. ¦ Il-kolonni kollha diġà qegħdin hawn.
+Une colonne tirée des données ¦ Një kolonë nga të dhënat ¦ Kolonna mid-data
+Cette feuille n’est pas liée à la base : Données → « ⤒ Remplir depuis l’app… ». ¦ Kjo fletë nuk është e lidhur me bazën: Të dhënat → «⤒ Mbush nga aplikacioni…». ¦ Din il-folja mhix marbuta mad-database: Data → “⤒ Imla mill-app…”.
+Impossible de relire la base : {error} ¦ Baza nuk mund të rilexohet: {error} ¦ Ma setgħetx terġa’ tinqara d-database: {error}
+🔗 Déjà à jour : rien n’a changé dans la base. ¦ 🔗 Tashmë e përditësuar: asgjë nuk ka ndryshuar në bazë. ¦ 🔗 Diġà aġġornata: xejn ma nbidel fid-database.
+{n} de plus ¦ {n} më shumë ¦ {n} aktar
+{n} de moins ¦ {n} më pak ¦ {n} inqas
+valeurs mises à jour ¦ vlera të përditësuara ¦ valuri aġġornati
+🔗 « {name} » relue : {what} ({lost}) ¦ 🔗 «{name}» u rilexua: {what} ({lost}) ¦ 🔗 “{name}” reġgħet inqrat: {what} ({lost})
+🔗 « {name} » relue : {what} ¦ 🔗 «{name}» u rilexua: {what} ¦ 🔗 “{name}” reġgħet inqrat: {what}
+<b>Relevé de recensement</b> · les colonnes de l’année : ¦ <b>Zbërthim regjistrimi i popullsisë</b> · kolonat e vitit: ¦ <b>Traskrizzjoni taċ-ċensiment</b> · il-kolonni tas-sena:
+Année du recensement ¦ Viti i regjistrimit të popullsisë ¦ Sena taċ-ċensiment
+📤 Envoyer vers la base… ¦ 📤 Dërgo në bazë… ¦ 📤 Ibgħat lid-database…
+🔗 Tenue à jour : <b>{what}</b> · {n} · relue {when} ¦ 🔗 Mbahet e përditësuar: <b>{what}</b> · {n} · rilexuar {when} ¦ 🔗 Miżmuma aġġornata: <b>{what}</b> · {n} · reġgħet inqrat {when}
+la base ¦ baza ¦ id-database
+Relire depuis la base ¦ Rilexo nga baza ¦ Erġa’ aqra mid-database
+↻ Relire ¦ ↻ Rilexo ¦ ↻ Erġa’ aqra
+Changer la source ou les colonnes… ¦ Ndrysho burimin ose kolonat… ¦ Biddel is-sors jew il-kolonni…
+Envoyer vers la base… ¦ Dërgo në bazë… ¦ Ibgħat lid-database…
+Ne plus tenir à jour (garder les valeurs) ¦ Mos e mbaj më të përditësuar (mbaj vlerat) ¦ Tibqax iżżommha aġġornata (żomm il-valuri)
+« {name} » n’est plus tenue à jour ¦ «{name}» nuk mbahet më e përditësuar ¦ “{name}” m’għadhiex miżmuma aġġornata
+Relevé : colonnes de {year} ¦ Zbërthim: kolonat e {year} ¦ Traskrizzjoni: kolonni tal-{year}
+Mode consultation : rien ne peut être envoyé vers la base. ¦ Mënyra e leximit: asgjë nuk mund të dërgohet në bazë. ¦ Modalità ta’ qari: xejn ma jista’ jintbagħat lid-database.
+Choisis le tableau à envoyer (sa ligne de titres et ses lignes), puis recommence. ¦ Zgjidh tabelën që do dërgosh (rreshtin e titujve dhe rreshtat e saj), pastaj provo përsëri. ¦ Agħżel it-tabella li se tibgħat (ir-ringiela tat-titli u r-ringieli tagħha), imbagħad erġa’ pprova.
+📤 Envoyer vers la base — {name}, lignes {from} à {to} ¦ 📤 Dërgo në bazë — {name}, rreshtat {from} deri {to} ¦ 📤 Ibgħat lid-database — {name}, ringieli {from} sa {to}
+1. Les colonnes ¦ 1. Kolonat ¦ 1. Il-kolonni
+2. Voilà ce qui va entrer ¦ 2. Ja çfarë do të hyjë ¦ 2. Hawn x’se jidħol
+3. Envoyer ¦ 3. Dërgo ¦ 3. Ibgħat
+Voir ce qui va entrer ¦ Shiko çfarë do të hyjë ¦ Ara x’se jidħol
+Ce que ça crée : ¦ Çfarë krijon: ¦ X’joħloq:
+Colonne ¦ Kolona ¦ Kolonna
+Exemple ¦ Shembull ¦ Eżempju
+Va dans ¦ Shkon te ¦ Imur f’
+(sans titre) ¦ (pa titull) ¦ (mingħajr titlu)
+Champ pour la colonne {col} ¦ Fusha për kolonën {col} ¦ Qasam għall-kolonna {col}
+Colonnes : {list} ¦ Kolonat: {list} ¦ Kolonni: {list}
+aucune pour l’instant ¦ asnjë për tani ¦ xejn għalissa
+Déjà dans la base ¦ Tashmë në bazë ¦ Diġà fid-database
+Problème ¦ Problem ¦ Problema
+Laissée de côté ¦ Lënë mënjanë ¦ Imwarrba
+📤 Créer {n} ¦ 📤 Krijo {n} ¦ 📤 Oħloq {n}
+📤 Rien de nouveau ¦ 📤 Asgjë e re ¦ 📤 Xejn ġdid
+📤 Créer {n} et en relier {m} ¦ 📤 Krijo {n} dhe lidh {m} ¦ 📤 Oħloq {n} u għaqqad {m}
+📤 Relier {m} ¦ 📤 Lidh {m} ¦ 📤 Għaqqad {m}
+📤 Envoyer ¦ 📤 Dërgo ¦ 📤 Ibgħat
+Choisis au moins une colonne à envoyer (le nom, par exemple). ¦ Zgjidh të paktën një kolonë për të dërguar (emrin, për shembull). ¦ Agħżel mill-inqas kolonna waħda biex tibgħat (l-isem, pereżempju).
+Choisis au moins une colonne. ¦ Zgjidh të paktën një kolonë. ¦ Agħżel mill-inqas kolonna waħda.
+Donne l’année du recensement. ¦ Shkruaj vitin e regjistrimit të popullsisë. ¦ Ikteb is-sena taċ-ċensiment.
+Il faut une colonne pour le nom (ou « Nom et prénom »). ¦ Duhet një kolonë për emrin (ose «Emër dhe mbiemër»). ¦ Hemm bżonn kolonna għall-isem (jew “Isem u kunjom”).
+Il faut une colonne pour le nom. ¦ Duhet një kolonë për emrin. ¦ Hemm bżonn kolonna għall-isem.
+Choisis la colonne qui dit la sorte d’événement (Baptême, Décès…). ¦ Zgjidh kolonën që tregon llojin e ngjarjes (Pagëzim, Vdekje…). ¦ Agħżel il-kolonna li tgħid it-tip ta’ avveniment (Magħmudija, Mewt…).
+Il manque la sorte d’événement. ¦ Mungon lloji i ngjarjes. ¦ Nieqes it-tip ta’ avveniment.
+Ces lignes sont vides. ¦ Këta rreshta janë bosh. ¦ Dawn ir-ringieli huma vojta.
+Je compare avec ta base… ¦ Po krahasoj me bazën tënde… ¦ Qed inqabbel mad-database tiegħek…
+Comparaison… ¦ Krahasim… ¦ Tqabbil…
+Choisir la fiche de la ligne {row} ¦ Zgjidh kartelën e rreshtit {row} ¦ Agħżel l-iskeda tar-ringiela {row}
+choisis ▾ ¦ zgjidh ▾ ¦ agħżel ▾
+Relier à {name} ({meta}) ¦ Lidh me {name} ({meta}) ¦ Għaqqad ma’ {name} ({meta})
+Laisser de côté ¦ Lëre mënjanë ¦ Warrab
+Des lignes ressemblent à plusieurs fiches : choisis la bonne (sinon elles sont laissées de côté). ¦ Disa rreshta ngjajnë me disa kartela: zgjidh të duhurën (përndryshe lihen mënjanë). ¦ Xi ringieli jixbhu lil diversi skedi: agħżel it-tajba (inkella jiġu mwarrba).
+Ligne ¦ Rreshti ¦ Ringiela
+Ce qui va se passer ¦ Çfarë do të ndodhë ¦ X’se jiġri
+Impossible d’envoyer : {error} ¦ Dërgimi nuk u bë: {error} ¦ Ma setax jintbagħat: {error}
+contient « {text} » : compté comme {n} ¦ përmban «{text}»: numërohet si {n} ¦ fiha “{text}”: magħduda bħala {n}
+contient l’erreur « {text} » : laissée vide ¦ përmban gabimin «{text}»: lihet bosh ¦ fiha l-iżball “{text}”: titħalla vojta
+« {text} » n’est pas un nombre : laissé vide ¦ «{text}» nuk është numër: lihet bosh ¦ “{text}” mhux numru: titħalla vojta
+à trouver ¦ për t’u gjetur ¦ irid jinstab
+L’éditeur de diagrammes n’est pas chargé. ¦ Redaktori i diagrameve nuk është ngarkuar. ¦ L-editur tad-dijagrammi mhux mgħobbi.
+L’éditeur de graphiques n’est pas chargé. ¦ Redaktori i grafikëve nuk është ngarkuar. ¦ L-editur tal-grafiċi mhux mgħobbi.
+Graphique « {name} » ajouté à Mes graphiques (Graphiques, tableau de bord…). ¦ Grafiku «{name}» u shtua te Grafikët e mi (Grafikët, paneli…). ¦ Il-grafika “{name}” żdiedet mal-Grafiċi tiegħi (Grafiċi, pannell…).
+Le navigateur refuse de copier ici : sélectionne la plage et fais {key}. ¦ Shfletuesi nuk lejon kopjimin këtu: përzgjidh zonën dhe shtyp {key}. ¦ Il-browser ma jħallix tikkopja hawn: agħżel il-firxa u agħfas {key}.
+Copié : dans un tableau (Enquêtes → 🧩 Tableaux), colle-le ({key}) : il devient un objet ▦ Tableur, formules comprises. ¦ U kopjua: në një tabelë (Hetimet → 🧩 Tabelat), ngjite ({key}): bëhet objekt ▦ Fletë llogaritëse, bashkë me formulat. ¦ Ikkupjat: f’tabella (Investigazzjonijiet → 🧩 Tabelli), waħħlu ({key}): isir oġġett ▦ Folja elettronika, inklużi l-formuli.
+Copié : dans la page d’un recueil, clique une case du tableau et colle ({key}). ¦ U kopjua: në faqen e një përmbledhjeje, kliko një qelizë të tabelës dhe ngjit ({key}). ¦ Ikkupjat: f’paġna ta’ ġabra, ikklikkja ċellula tat-tabella u waħħal ({key}).
+La présentation n’est pas chargée. ¦ Prezantimi nuk është ngarkuar. ¦ Il-preżentazzjoni mhix mgħobbija.
+… et {n} ¦ … dhe {n} ¦ … u {n}
+Colonnes attendues : {list} ¦ Kolonat e pritura: {list} ¦ Kolonni mistennija: {list}
+(une ou plusieurs) ¦ (një ose më shumë) ¦ (waħda jew aktar)
+(facultatif) ¦ (opsionale) ¦ (mhux obbligatorju)
+Les données de « {name} » ¦ Të dhënat e «{name}» ¦ Id-data ta’ “{name}”
+l’outil ¦ mjeti ¦ l-għodda
+{name} (données) ¦ {name} (të dhëna) ¦ {name} (data)
+Renvoyer les données là d’où elles viennent ¦ Ktheji të dhënat atje nga erdhën ¦ Ibgħat id-data lura minn fejn ġiet
+Formules, tri, coller depuis Excel… « Fichier → Enregistrer une copie… » garde aussi ce classeur dans le Tableur. ¦ Formula, renditje, ngjitje nga Excel… «Skedari → Ruaj një kopje…» e mban gjithashtu këtë libër pune në Fletën llogaritëse. ¦ Formuli, sortjar, twaħħil minn Excel… “Fajl → Issejvja kopja…” iżżomm ukoll dan il-workbook fil-Folja elettronika.
+Rien à ouvrir : la liste est vide. ¦ Asgjë për të hapur: lista është bosh. ¦ Xejn x’tiftaħ: il-lista hija vojta.
+🧾 Tableur ¦ 🧾 Fletë llogaritëse ¦ 🧾 Folja elettronika
+ouvrir dans le tableur ¦ hape në fletën llogaritëse ¦ iftaħ fil-folja elettronika
+🧾 Ouvrir dans le tableur ¦ 🧾 Hape në fletën llogaritëse ¦ 🧾 Iftaħ fil-folja elettronika
+La feuille est vide : écris ou colle un tableau, puis choisis-le. ¦ Fleta është bosh: shkruaj ose ngjit një tabelë, pastaj përzgjidhe. ¦ Il-folja hija vojta: ikteb jew waħħal tabella, imbagħad agħżilha.
+TABLEUR · PRÉPARER POUR… ¦ FLETË LLOGARITËSE · PËRGATIT PËR… ¦ FOLJA ELETTRONIKA · IPPREPARA GĦAL…
+🎯 Préparer pour… ({range}) ¦ 🎯 Përgatit për… ({range}) ¦ 🎯 Ipprepara għal… ({range})
+Le tableur sait ce que chaque endroit de l’app attend : choisis où vont ces données. Il vérifie les colonnes de la plage <b>{range}</b> et les range comme il faut. ¦ Fleta llogaritëse e di çfarë pret çdo pjesë e aplikacionit: zgjidh ku shkojnë këto të dhëna. Ajo kontrollon kolonat e zonës <b>{range}</b> dhe i rendit siç duhet. ¦ Il-folja elettronika taf x’tistenna kull parti tal-app: agħżel fejn tmur din id-data. Hija tiċċekkja l-kolonni tal-firxa <b>{range}</b> u tirranġahom kif suppost.
+Dessin ¦ Vizatim ¦ Disinn
+▦ Un tableau ¦ ▦ Një tabelë ¦ ▦ Tabella
+Il faut une colonne de chiffres ¦ Duhet një kolonë me shifra ¦ Hemm bżonn kolonna ta’ numri
+📊 Un graphique ¦ 📊 Një grafik ¦ 📊 Grafika
+Dans la plage ¦ Në zonë ¦ Fil-firxa
+, une ou plusieurs ¦ , një ose më shumë ¦ , waħda jew aktar
+, facultatif ¦ , opsionale ¦ , mhux obbligatorja
+Voir la cellule ¦ Shiko qelizën ¦ Ara ċ-ċellula
+… et {n} à vérifier. ¦ … dhe {n} për t’u kontrolluar. ¦ … u {n} x’tiċċekkja.
+Il manque une colonne : ajoute-la dans la plage, ou choisis une autre plage. ¦ Mungon një kolonë: shtoje në zonë, ose zgjidh një zonë tjetër. ¦ Nieqsa kolonna: żidha fil-firxa, jew agħżel firxa oħra.
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) ¦ Mbaj lidhjen: diagrami ndjek fletën llogaritëse (përditësohet kur ndryshon zona) ¦ Żomm ir-rabta: id-dijagramma ssegwi l-folja elettronika (tiġi aġġornata meta tinbidel il-firxa)
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) — le classeur sera enregistré dans le Tableur ¦ Mbaj lidhjen: diagrami ndjek fletën llogaritëse (përditësohet kur ndryshon zona) — libri i punës do të ruhet në Fletën llogaritëse ¦ Żomm ir-rabta: id-dijagramma ssegwi l-folja elettronika (tiġi aġġornata meta tinbidel il-firxa) — il-workbook se jiġi ssejvjat fil-Folja elettronika
+← Autre endroit ¦ ← Vend tjetër ¦ ← Post ieħor
+La première ligne donne les titres ¦ Rreshti i parë jep titujt ¦ L-ewwel ringiela tagħti t-titli
+Pas d’aperçu. ¦ Pa parapamje. ¦ L-ebda preview.
+🎤 Créer la présentation ¦ 🎤 Krijo prezantimin ¦ 🎤 Oħloq il-preżentazzjoni
+Corrige la cellule, puis rouvre « 🎯 Préparer pour… ». ¦ Ndreqe qelizën, pastaj rihap «🎯 Përgatit për…». ¦ Irranġa ċ-ċellula, imbagħad erġa’ iftaħ “🎯 Ipprepara għal…”.
+Ces données reviennent dans leur outil : le diagramme est fait d’une copie (pas de lien). ¦ Këto të dhëna kthehen në mjetin e tyre: diagrami bëhet nga një kopje (pa lidhje). ¦ Din id-data terġa’ lura għall-għodda tagħha: id-dijagramma ssir minn kopja (mingħajr rabta).
+Choisis une plage avec des nombres (par exemple : Décennie, Hommes, Femmes). ¦ Zgjidh një zonë me numra (për shembull: Dekada, Burra, Gra). ¦ Agħżel firxa b’numri (pereżempju: Għaxar snin, Irġiel, Nisa).
+Tous les types de diagrammes… ¦ Të gjitha llojet e diagrameve… ¦ It-tipi kollha ta’ dijagrammi…
+Conseillés pour {range} ¦ Të këshilluara për {range} ¦ Irrakkomandati għal {range}
+🔗 Données : « {name} » ! {range} ¦ 🔗 Të dhënat: «{name}» ! {range} ¦ 🔗 Data: “{name}” ! {range}
+Classeur ¦ Libër pune ¦ Workbook
+(feuille « {name} ») ¦ (fleta «{name}») ¦ (folja “{name}”)
+tenu à jour ¦ mbahet i përditësuar ¦ miżmum aġġornat
+Les figer ¦ Ngrii ato ¦ Iffriżahom
+⚠️ Classeur introuvable (supprimé ?) : le dessin garde les derniers chiffres lus. ¦ ⚠️ Libri i punës nuk gjendet (i fshirë?): vizatimi mban shifrat e fundit të lexuara. ¦ ⚠️ Il-workbook ma nstabx (imħassar?): id-disinn iżomm l-aħħar numri li nqraw.
+TABLEUR ¦ FLETË LLOGARITËSE ¦ FOLJA ELETTRONIKA
+Nom du classeur… ¦ Emri i librit të punës… ¦ Isem il-workbook…
+Plage illisible : écris par exemple A1:C12. ¦ Zonë e palexueshme: shkruaj për shembull A1:C12. ¦ Firxa ma tinqarax: ikteb pereżempju A1:C12.
+Feuille ¦ Fleta ¦ Folja
+Plage ¦ Zona ¦ Firxa
+Copier une fois (les chiffres ne bougent plus) ¦ Kopjo një herë (shifrat nuk lëvizin më) ¦ Ikkopja darba (in-numri ma jinbidlux aktar)
+Garder le lien : le diagramme suit le classeur (tenu à jour) ¦ Mbaj lidhjen: diagrami ndjek librin e punës (mbahet i përditësuar) ¦ Żomm ir-rabta: id-dijagramma ssegwi l-workbook (miżmuma aġġornata)
+Lecture du classeur… ¦ Po lexohet libri i punës… ¦ Qed jinqara l-workbook…
+Choisis un classeur. ¦ Zgjidh një libër pune. ¦ Agħżel workbook.
+Écris une plage, par exemple A1:C12. ¦ Shkruaj një zonë, për shembull A1:C12. ¦ Ikteb firxa, pereżempju A1:C12.
+Écris le résultat voulu dans la première case de la colonne (par exemple « Jean D. »), puis relance ✨ Remplissage instantané. ¦ Shkruaj rezultatin që do në qelizën e parë të kolonës (për shembull «Jean D.»), pastaj nis përsëri ✨ Mbushjen e menjëhershme. ¦ Ikteb ir-riżultat li trid fl-ewwel ċellula tal-kolonna (pereżempju “Jean D.”), imbagħad erġa’ ħaddem ✨ Mili istantanju.
+Je ne trouve pas de règle qui marche pour tous les exemples : écris-en un de plus, ou un plus simple. ¦ Nuk gjej një rregull që vlen për të gjithë shembujt: shkruaj edhe një, ose një më të thjeshtë. ¦ Ma nsibx regola li taħdem għall-eżempji kollha: ikteb wieħed ieħor, jew wieħed aktar sempliċi.
+Rien à remplir : la colonne est déjà pleine. ¦ Asgjë për të mbushur: kolona është tashmë plot. ¦ Xejn x’timla: il-kolonna diġà mimlija.
+{what} de {col} ¦ {what} e {col} ¦ {what} ta’ {col}
+{what} n°{n} de {col} ¦ {what} nr. {n} e {col} ¦ {what} nru {n} ta’ {col}
+{what} n°{n} depuis la fin de {col} ¦ {what} nr. {n} nga fundi i {col} ¦ {what} nru {n} mill-aħħar ta’ {col}
+✨ {n} (règle : {rule}). ↶ pour annuler. ¦ ✨ {n} (rregulli: {rule}). ↶ për ta zhbërë. ¦ ✨ {n} (regola: {rule}). ↶ biex tħassar.
+Choisis un tableau avec une ligne de titres et des lignes de données. ¦ Zgjidh një tabelë me një rresht titujsh dhe rreshta të dhënash. ¦ Agħżel tabella b’ringiela tat-titli u ringieli tad-data.
+Colonne {col} ¦ Kolona {col} ¦ Kolonna {col}
+DONNÉES ¦ TË DHËNAT ¦ DATA
+Σ Sous-totaux ¦ Σ Nëntotale ¦ Σ Subtotali
+Créer les sous-totaux ¦ Krijo nëntotalet ¦ Oħloq is-subtotali
+D’après <b>{range}</b>. Une nouvelle feuille : les lignes rangées par groupe, un total sous chaque groupe (formules), puis le total général. « ⊟ Plan » (menu Données) replie le détail. ¦ Sipas <b>{range}</b>. Një fletë e re: rreshtat të renditur sipas grupit, një total nën çdo grup (formula), pastaj totali i përgjithshëm. «⊟ Plani» (menyja Të dhënat) palos detajet. ¦ Minn <b>{range}</b>. Folja ġdida: ir-ringieli miġbura fi gruppi, total taħt kull grupp (formuli), imbagħad it-total ġenerali. “⊟ Pjan” (menu Data) jagħlaq id-dettall.
+À chaque changement de ¦ Në çdo ndryshim të ¦ F’kull bidla ta’
+Calcul ¦ Llogaritja ¦ Kalkolu
+Sur les colonnes ¦ Në kolonat ¦ Fuq il-kolonni
+Coche au moins une colonne à calculer. ¦ Shëno të paktën një kolonë për të llogaritur. ¦ Immarka mill-inqas kolonna waħda biex tikkalkula.
+Σ {n}. « ⊟ Plan » (menu Données) replie le détail. ¦ Σ {n}. «⊟ Plani» (menyja Të dhënat) palos detajet. ¦ Σ {n}. “⊟ Pjan” (menu Data) jagħlaq id-dettall.
+Cette feuille n’a pas de sous-totaux : Données → Σ Sous-totaux… d’abord. ¦ Kjo fletë nuk ka nëntotale: Të dhënat → Σ Nëntotale… më parë. ¦ Din il-folja m’għandhiex subtotali: Data → Σ Subtotali… l-ewwel.
+⊟ Détail replié : seuls les totaux restent. ¦ ⊟ Detajet të palosura: mbeten vetëm totalet. ¦ ⊟ Dettall magħluq: jibqgħu biss it-totali.
+⊞ Détail déplié. ¦ ⊞ Detajet të hapura. ¦ ⊞ Dettall miftuħ.
+🎯 Valeur cible ¦ 🎯 Vlera e synuar ¦ 🎯 Valur fil-mira
+L’app essaie des valeurs dans « la case à changer » jusqu’à ce que la formule donne le résultat voulu. Ex. : à quel âge s’est-il marié pour que la différence d’âge soit 7 ans ? ¦ Aplikacioni provon vlera në «qelizën që ndryshon» derisa formula të japë rezultatin që do. P.sh.: në ç’moshë u martua që diferenca e moshës të jetë 7 vjet? ¦ L-app tipprova valuri fiċ-“ċellula li tinbidel” sakemm il-formula tagħti r-riżultat li trid. Eż.: f’liema età żżewweġ biex id-differenza fl-età tkun 7 snin?
+La formule de la case ¦ Formula e qelizës ¦ Il-formula taċ-ċellula
+Doit donner ¦ Duhet të japë ¦ Trid tagħti
+En changeant la case ¦ Duke ndryshuar qelizën ¦ Billi tbiddel iċ-ċellula
+Écris une adresse de case (ex. C5, B2). ¦ Shkruaj një adresë qelize (p.sh. C5, B2). ¦ Ikteb indirizz ta’ ċellula (eż. C5, B2).
+Écris le résultat voulu. ¦ Shkruaj rezultatin që do. ¦ Ikteb ir-riżultat li trid.
+La première case doit contenir une formule. ¦ Qeliza e parë duhet të përmbajë një formulë. ¦ L-ewwel ċellula trid ikun fiha formula.
+Pas de valeur trouvée : la formule ne dépend peut-être pas de cette case, ou ne peut pas atteindre ce résultat. ¦ Nuk u gjet asnjë vlerë: ndoshta formula nuk varet nga kjo qelizë, ose nuk mund ta arrijë këtë rezultat. ¦ Ma nstab l-ebda valur: forsi l-formula ma tiddependix minn din iċ-ċellula, jew ma tistax tasal għal dan ir-riżultat.
+🎯 {cell} = {value} : la formule donne {target}. ↶ pour annuler. ¦ 🎯 {cell} = {value}: formula jep {target}. ↶ për ta zhbërë. ¦ 🎯 {cell} = {value}: il-formula tagħti {target}. ↶ biex tħassar.
+INSERTION ¦ FUTJE ¦ DAĦĦAL
+📈 Mini-graphique ¦ 📈 Mini-grafik ¦ 📈 Mini-grafika
+Poser ¦ Vendos ¦ Poġġi
+Un petit graphique dans la case, qui suit les chiffres. Plusieurs lignes choisies : un graphique par ligne (la plage descend avec elles). ¦ Një grafik i vogël në qelizë, që ndjek shifrat. Disa rreshta të zgjedhur: një grafik për rresht (zona zbret bashkë me to). ¦ Grafika żgħira fiċ-ċellula, li ssegwi n-numri. Diversi ringieli magħżula: grafika għal kull ringiela (il-firxa tinżel magħhom).
+Les nombres (plage de la 1re ligne) ¦ Numrat (zona e rreshtit të 1-rë) ¦ In-numri (firxa tal-1 ringiela)
+Gagné / perdu ¦ Fituar / humbur ¦ Rebħa / telfa
+Couleur ¦ Ngjyra ¦ Kulur
+Écris une plage, par exemple B2:F2. ¦ Shkruaj një zonë, për shembull B2:F2. ¦ Ikteb firxa, pereżempju B2:F2.
+🧮 Solveur ¦ 🧮 Zgjidhësi ¦ 🧮 Solver
+Résoudre ¦ Zgjidh ¦ Solvi
+Comme la valeur cible, mais en changeant plusieurs cases à la fois, avec des conditions. Ex. : répartir un héritage entre trois branches pour que chacune ait au moins 1 000 € et que l’écart soit le plus petit possible. ¦ Si vlera e synuar, por duke ndryshuar disa qeliza njëherësh, me kushte. P.sh.: ndaj një trashëgimi mes tre degëve që secila të ketë të paktën 1 000 € dhe diferenca të jetë sa më e vogël. ¦ Bħall-valur fil-mira, iżda billi tbiddel diversi ċelluli f’daqqa, b’kundizzjonijiet. Eż.: aqsam wirt bejn tliet friegħi biex kull waħda jkollha mill-inqas 1 000 € u d-differenza tkun l-iżgħar possibbli.
+La formule (case objectif) ¦ Formula (qeliza objektiv) ¦ Il-formula (ċellula fil-mira)
+Doit être ¦ Duhet të jetë ¦ Trid tkun
+la plus grande possible ¦ sa më e madhe ¦ l-akbar possibbli
+la plus petite possible ¦ sa më e vogël ¦ l-iżgħar possibbli
+égale à… ¦ e barabartë me… ¦ ugwali għal…
+Valeur (si « égale à ») ¦ Vlera (nëse «e barabartë me») ¦ Valur (jekk “ugwali għal”)
+En changeant les cases ¦ Duke ndryshuar qelizat ¦ Billi tbiddel iċ-ċelluli
+B2:B4 ou B2;C3 ¦ B2:B4 ose B2;C3 ¦ B2:B4 jew B2;C3
+Conditions (une par ligne : {examples}) ¦ Kushtet (një për rresht: {examples}) ¦ Kundizzjonijiet (waħda għal kull linja: {examples})
+Nombres entiers seulement ¦ Vetëm numra të plotë ¦ Numri sħaħ biss
+La case objectif doit contenir une formule (ex. D5). ¦ Qeliza objektiv duhet të përmbajë një formulë (p.sh. D5). ¦ Iċ-ċellula fil-mira trid ikun fiha formula (eż. D5).
+Trente cases à changer au plus. ¦ Të shumtën tridhjetë qeliza për të ndryshuar. ¦ Mhux aktar minn tletin ċellula x’tbiddel.
+Écris les cases à changer (ex. B2:B4). ¦ Shkruaj qelizat për të ndryshuar (p.sh. B2:B4). ¦ Ikteb iċ-ċelluli li se tbiddel (eż. B2:B4).
+Condition illisible : « {text} » (ex. B2 >= 0). ¦ Kusht i palexueshëm: «{text}» (p.sh. B2 >= 0). ¦ Kundizzjoni ma tinqarax: “{text}” (eż. B2 >= 0).
+Écris la valeur voulue. ¦ Shkruaj vlerën që do. ¦ Ikteb il-valur li trid.
+Pas de solution qui respecte toutes les conditions (vérifie-les, ou change le départ). ¦ Asnjë zgjidhje nuk i plotëson të gjitha kushtet (kontrolloji, ose ndrysho pikënisjen). ¦ L-ebda soluzzjoni ma tissodisfa l-kundizzjonijiet kollha (iċċekkjahom, jew biddel il-punt tat-tluq).
+🧮 Trouvé : {cell} = {value} ({n}). ↶ pour annuler. ¦ 🧮 U gjet: {cell} = {value} ({n}). ↶ për ta zhbërë. ¦ 🧮 Instab: {cell} = {value} ({n}). ↶ biex tħassar.
+📋 Tableau de scénarios ¦ 📋 Tabelë skenarësh ¦ 📋 Tabella tax-xenarji
+Et si cette case valait 20, 25, 30… ? Le tableau montre ce que donnent les formules pour chaque valeur. Il est posé à partir de la case choisie ({cell}) ; rien d’autre ne change. ¦ Po sikur kjo qelizë të ishte 20, 25, 30…? Tabela tregon çfarë japin formulat për secilën vlerë. Vendoset duke filluar nga qeliza e zgjedhur ({cell}); asgjë tjetër nuk ndryshon. ¦ U kieku din iċ-ċellula kienet 20, 25, 30…? It-tabella turi x’jagħtu l-formuli għal kull valur. Titqiegħed mill-ċellula magħżula ({cell}); xejn ieħor ma jinbidel.
+La case qui change ¦ Qeliza që ndryshon ¦ Iċ-ċellula li tinbidel
+Ses valeurs (séparées par « ; », ou une plage) ¦ Vlerat e saj (të ndara me «;», ose një zonë) ¦ Il-valuri tagħha (separati b’“;”, jew firxa)
+20;25;30 ou A10:A15 ¦ 20;25;30 ose A10:A15 ¦ 20;25;30 jew A10:A15
+Les formules à suivre ¦ Formulat për t’u ndjekur ¦ Il-formuli x’issegwi
+Écris la case qui change (ex. B2). ¦ Shkruaj qelizën që ndryshon (p.sh. B2). ¦ Ikteb iċ-ċellula li tinbidel (eż. B2).
+Écris au moins une formule (ex. C5). ¦ Shkruaj të paktën një formulë (p.sh. C5). ¦ Ikteb mill-inqas formula waħda (eż. C5).
+Écris des valeurs (500 au plus). ¦ Shkruaj disa vlera (të shumtën 500). ¦ Ikteb xi valuri (mhux aktar minn 500).
+📋 {n} (valeurs fixes : refais-le si les données changent). ¦ 📋 {n} (vlera fikse: bëje përsëri nëse të dhënat ndryshojnë). ¦ 📋 {n} (valuri fissi: erġa’ agħmlu jekk tinbidel id-data).
+Rien n’a été enregistré. ¦ Asgjë nuk u regjistrua. ¦ Xejn ma ġie rreġistrat.
+⏺ Nommer l’action ¦ ⏺ Emërto veprimin ¦ ⏺ Semmi l-azzjoni
+Mon action ¦ Veprimi im ¦ L-azzjoni tiegħi
+Garder ¦ Mbaj ¦ Żomm
+⏺ Action « {name} » gardée : Données → ▶ Actions enregistrées. ¦ ⏺ Veprimi «{name}» u mbajt: Të dhënat → ▶ Veprimet e regjistruara. ¦ ⏺ L-azzjoni “{name}” inżammet: Data → ▶ Azzjonijiet irreġistrati.
+⏺ Enregistrement : fais tes manipulations (menus, boutons, formats), puis Données → ⏹ Arrêter l’enregistrement. ¦ ⏺ Regjistrim: bëj veprimet e tua (menytë, butonat, formatet), pastaj Të dhënat → ⏹ Ndalo regjistrimin. ¦ ⏺ Reġistrazzjoni: agħmel il-passi tiegħek (menus, buttuni, formati), imbagħad Data → ⏹ Waqqaf ir-reġistrazzjoni.
+Aucune action enregistrée : Données → ⏺ Enregistrer une action. ¦ Asnjë veprim i regjistruar: Të dhënat → ⏺ Regjistro një veprim. ¦ L-ebda azzjoni rreġistrata: Data → ⏺ Irreġistra azzjoni.
+▶ Actions enregistrées ¦ ▶ Veprimet e regjistruara ¦ ▶ Azzjonijiet irreġistrati
+Elles se refont sur la sélection du moment. ¦ Përsëriten mbi përzgjedhjen e çastit. ¦ Jerġgħu jsiru fuq l-għażla tal-mument.
+▶ Refaire ¦ ▶ Përsërite ¦ ▶ Erġa’ agħmel
+▶ « {name} » refaite. ¦ ▶ «{name}» u përsërit. ¦ ▶ “{name}” reġgħet saret.
+Colonne {n} ¦ Kolona {n} ¦ Kolonna {n}
+{what} de « {col} » ¦ {what} e «{col}» ¦ {what} ta’ “{col}”
+Lignes ¦ Rreshtat ¦ Ringieli
+Total ¦ Totali ¦ Total
+{title} · par « {rows} » et « {cols} » — d’après {src} ¦ {title} · sipas «{rows}» dhe «{cols}» — nga {src} ¦ {title} · skont “{rows}” u “{cols}” — minn {src}
+{title} · par « {rows} » — d’après {src} ¦ {title} · sipas «{rows}» — nga {src} ¦ {title} · skont “{rows}” — minn {src}
+Choisis une plage avec une ligne de titres et des lignes de données (par exemple : Nom, Commune, Année, Âge). ¦ Zgjidh një zonë me një rresht titujsh dhe rreshta të dhënash (për shembull: Emri, Komuna, Viti, Mosha). ¦ Agħżel firxa b’ringiela tat-titli u ringieli tad-data (pereżempju: Isem, Komun, Sena, Età).
+🔀 Tableau croisé dynamique ¦ 🔀 Tabelë e kryqëzuar dinamike ¦ 🔀 Tabella pivot
+Créer le tableau croisé ¦ Krijo tabelën e kryqëzuar ¦ Oħloq it-tabella pivot
+D’après <b>{range}</b> ({n}). Le résultat va dans une nouvelle feuille ; « ↻ Actualiser le tableau croisé » (menu Données) le refait si les données changent. ¦ Sipas <b>{range}</b> ({n}). Rezultati shkon në një fletë të re; «↻ Rifresko tabelën e kryqëzuar» (menyja Të dhënat) e bën përsëri nëse të dhënat ndryshojnë. ¦ Minn <b>{range}</b> ({n}). Ir-riżultat imur f’folja ġdida; “↻ Aġġorna t-tabella pivot” (menu Data) terġa’ tagħmilha jekk tinbidel id-data.
+En lignes ¦ Në rreshta ¦ Bħala ringieli
+En colonnes (facultatif) ¦ Në kolona (opsionale) ¦ Bħala kolonni (mhux obbligatorju)
+— rien — ¦ — asgjë — ¦ — xejn —
+Sur la colonne ¦ Në kolonën ¦ Fuq il-kolonna
+— (compter les lignes) — ¦ — (numëro rreshtat) — ¦ — (għodd ir-ringieli) —
+Totaux ¦ Totalet ¦ Totali
+Aperçu : {rows} × {cols} ¦ Parapamje: {rows} × {cols} ¦ Preview: {rows} × {cols}
+Tableau croisé créé : {rows} × {cols}. Données → « ↻ Actualiser le tableau croisé » pour le refaire. ¦ Tabela e kryqëzuar u krijua: {rows} × {cols}. Të dhënat → «↻ Rifresko tabelën e kryqëzuar» për ta bërë përsëri. ¦ Tabella pivot maħluqa: {rows} × {cols}. Data → “↻ Aġġorna t-tabella pivot” biex terġa’ tagħmilha.
+Cette feuille n’est pas un tableau croisé : va sur sa feuille « TCD … ». ¦ Kjo fletë nuk është tabelë e kryqëzuar: shko te fleta e saj «TCD …». ¦ Din il-folja mhix tabella pivot: mur fil-folja tagħha “TCD …”.
+La feuille des données n’existe plus. ¦ Fleta e të dhënave nuk ekziston më. ¦ Il-folja tad-data m’għadhiex teżisti.
+Tableau croisé actualisé ({rows} × {cols}). ¦ Tabela e kryqëzuar u rifreskua ({rows} × {cols}). ¦ Tabella pivot aġġornata ({rows} × {cols}).
+Graphique vivant ¦ Grafik i gjallë ¦ Grafika ħajja
+Type de graphique ¦ Lloji i grafikut ¦ Tip ta’ grafika
+En faire un diagramme lié à la plage ¦ Bëje diagram të lidhur me zonën ¦ Agħmilha dijagramma marbuta mal-firxa
+Choisis des cases avec des nombres (et leurs noms à gauche ou en haut) : le graphique se dessine ici. ¦ Zgjidh qeliza me numra (dhe emrat e tyre majtas ose lart): grafiku vizatohet këtu. ¦ Agħżel ċelluli b’numri (u l-ismijiet tagħhom fuq ix-xellug jew fuq): il-grafika tinġibed hawn.
+Plage {range} · suit la sélection ¦ Zona {range} · ndjek përzgjedhjen ¦ Firxa {range} · issegwi l-għażla
+Le moteur du tableur n’est pas chargé. ¦ Motori i fletës llogaritëse nuk është ngarkuar. ¦ Il-magna tal-folja elettronika mhix mgħobbija.
+Mon classeur ¦ Libri im i punës ¦ Il-workbook tiegħi
+Rien à rétablir. ¦ Asgjë për të ribërë. ¦ Xejn x’terġa’ tagħmel.
+d’autres changements ont suivi : utilise ↶ ({key}) ¦ pas tij erdhën ndryshime të tjera: përdor ↶ ({key}) ¦ warajh saru tibdiliet oħra: uża ↶ ({key})
+Barre d’outils · {group} ¦ Shiriti i mjeteve · {group} ¦ Toolbar · {group}
+Barre d’outils ¦ Shiriti i mjeteve ¦ Toolbar
+Police et gras ¦ Shkronja dhe theksim ¦ Font u grassett
+Police (E5) ¦ Shkronja (E5) ¦ Font (E5)
+Police ¦ Shkronja ¦ Font
+Gras ¦ I theksuar ¦ Grassett
+Italique ¦ I pjerrët ¦ Korsiv
+Souligné ¦ I nënvizuar ¦ Sottolinjat
+Renvoi à la ligne ¦ Kalim në rresht të ri ¦ Kisser tal-linja
+Fusionner / séparer ¦ Bashko / ndaj ¦ Għaqqad / ifred
+Aligner à gauche ¦ Rreshto majtas ¦ Allinja lejn ix-xellug
+Centrer ¦ Në qendër ¦ Ċentra
+Aligner à droite ¦ Rreshto djathtas ¦ Allinja lejn il-lemin
+Couleurs (C2) ¦ Ngjyrat (C2) ¦ Kuluri (C2)
+Couleur du texte ¦ Ngjyra e tekstit ¦ Kulur tat-test
+Format de cellule ¦ Formati i qelizës ¦ Format taċ-ċellula
+Format de la cellule ¦ Formati i qelizës ¦ Il-format taċ-ċellula
+Une décimale de moins ¦ Një dhjetore më pak ¦ Deċimali waħda inqas
+Une décimale de plus ¦ Një dhjetore më shumë ¦ Deċimali waħda aktar
+Bordures ¦ Kufijtë ¦ Bordi
+Bordures : tout ¦ Kufijtë: të gjithë ¦ Bordi: kollha
+Bordures : contour ¦ Kufijtë: konturi ¦ Bordi: kontorn
+Bordure du bas ¦ Kufiri i poshtëm ¦ Bordura t’isfel
+Sans bordure ¦ Pa kufi ¦ Mingħajr bordura
+Graphique ¦ Grafik ¦ Grafika
+Un diagramme avec les chiffres de la sélection : les types conseillés pour cette plage ¦ Një diagram me shifrat e përzgjedhjes: llojet e këshilluara për këtë zonë ¦ Dijagramma bin-numri tal-għażla: it-tipi rrakkomandati għal din il-firxa
+Choisir une fonction ¦ Zgjidh një funksion ¦ Agħżel funzjoni
+Fonction ¦ Funksioni ¦ Funzjoni
+XLSX, ODS, CSV, TSV, JSON, PDF, impression ¦ XLSX, ODS, CSV, TSV, JSON, PDF, printim ¦ XLSX, ODS, CSV, TSV, JSON, PDF, ipprintjar
+✓ Enregistrer et revenir ¦ ✓ Ruaj dhe kthehu ¦ ✓ Issejvja u erġa’ lura
+Plein écran (⛶) ¦ Ekran i plotë (⛶) ¦ Skrin sħiħ (⛶)
+Données d’un autre outil ¦ Të dhëna nga një mjet tjetër ¦ Data minn għodda oħra
+Adresse (tape D12 ou un nom pour y aller) ¦ Adresa (shkruaj D12 ose një emër për të shkuar atje) ¦ Indirizz (ikteb D12 jew isem biex tmur hemm)
+Tape une adresse (D12, B2:C9) ou un nom pour y aller ¦ Shkruaj një adresë (D12, B2:C9) ose një emër për të shkuar atje ¦ Ikteb indirizz (D12, B2:C9) jew isem biex tmur hemm
+Contenu ou formule de la cellule ¦ Përmbajtja ose formula e qelizës ¦ Kontenut jew formula taċ-ċellula
+Feuille de calcul ¦ Fletë llogaritjeje ¦ Folja tal-kalkolu
+Feuille de calcul : tape pour écrire dans la cellule choisie ¦ Fletë llogaritjeje: shkruaj për të shkruar në qelizën e zgjedhur ¦ Folja tal-kalkolu: ittajpja biex tikteb fiċ-ċellula magħżula
+Écrire dans la cellule ¦ Shkruaj në qelizë ¦ Ikteb fiċ-ċellula
+Panneau de droite ¦ Paneli i djathtë ¦ Pannell tal-lemin
+Feuilles ¦ Fletët ¦ Folji
+Clique pour choisir ce qu’on y voit (somme, moyenne…) ¦ Kliko për të zgjedhur çfarë shihet këtu (shuma, mesatarja…) ¦ Ikklikkja biex tagħżel x’jidher hawn (somma, medja…)
+Enregistrer une copie dans le Tableur… ¦ Ruaj një kopje në Fletën llogaritëse… ¦ Issejvja kopja fil-Folja elettronika…
+Enregistrer une copie… ¦ Ruaj një kopje… ¦ Issejvja kopja…
+Enregistrer comme modèle… ¦ Ruaj si model… ¦ Issejvja bħala mudell…
+Exporter (XLSX, ODS, CSV, PDF…)… ¦ Eksporto (XLSX, ODS, CSV, PDF…)… ¦ Esporta (XLSX, ODS, CSV, PDF…)…
+Feuille « {name} » ¦ Fleta «{name}» ¦ Folja “{name}”
+Pas encore relié à une fiche ¦ Ende e palidhur me një kartelë ¦ Għadu mhux marbut ma’ skeda
+Tire pour recopier ou continuer une suite ¦ Tërhiq për të kopjuar ose për të vazhduar një varg ¦ Kaxkar biex tikkopja jew tkompli serje
+« {text} » n’est pas dans la liste : {list} ¦ «{text}» nuk është në listë: {list} ¦ “{text}” mhux fil-lista: {list}
+Il faut un nombre d’au moins {min} et au plus {max}. ¦ Duhet një numër të paktën {min} dhe të shumtën {max}. ¦ Hemm bżonn numru ta’ mill-inqas {min} u mhux aktar minn {max}.
+Il faut un nombre d’au moins {min}. ¦ Duhet një numër të paktën {min}. ¦ Hemm bżonn numru ta’ mill-inqas {min}.
+Il faut un nombre et au plus {max}. ¦ Duhet një numër të shumtën {max}. ¦ Hemm bżonn numru ta’ mhux aktar minn {max}.
+Il faut un nombre. ¦ Duhet një numër. ¦ Hemm bżonn numru.
+Je ne comprends pas cette date ({why}). ¦ Nuk e kuptoj këtë datë ({why}). ¦ Ma nifhimx din id-data ({why}).
+exemples : 7 mai 1925, vers 1784, an II ¦ shembuj: 7 mai 1925, vers 1784, an II ¦ eżempji: 7 mai 1925, vers 1784, an II
+Tab = compléter ¦ Tab = plotëso ¦ Tab = ikkompleta
+✓ Compris comme une date d’acte : <b>{date}</b> (approximative : les calculs montreront ≈) ¦ ✓ Kuptova si datë akti: <b>{date}</b> (e përafërt: llogaritjet do të tregojnë ≈) ¦ ✓ Fhimt bħala data ta’ att: <b>{date}</b> (approssimattiva: il-kalkoli se juru ≈)
+✓ Compris comme une date d’acte : <b>{date}</b> ¦ ✓ Kuptova si datë akti: <b>{date}</b> ¦ ✓ Fhimt bħala data ta’ att: <b>{date}</b>
+Texte ou nombre. Commence par <b>=</b> pour calculer. ¦ Tekst ose numër. Fillo me <b>=</b> për të llogaritur. ¦ Test jew numru. Ibda b’<b>=</b> biex tikkalkula.
+ƒ Formule : clique ou glisse sur des cellules pour les mettre, ou tape le nom d’une fonction (en français ou en anglais). <kbd>F4</kbd> : $A$1. ¦ ƒ Formula: kliko ose tërhiq mbi qeliza për t’i futur, ose shkruaj emrin e një funksioni (në frëngjisht ose anglisht). <kbd>F4</kbd>: $A$1. ¦ ƒ Formula: ikklikkja jew kaxkar fuq ċelluli biex iddaħħalhom, jew ikteb l-isem ta’ funzjoni (bil-Franċiż jew bl-Ingliż). <kbd>F4</kbd>: $A$1.
+Corriger en {name} ¦ Korrigjo në {name} ¦ Ikkoreġi għal {name}
+Résultat approché : une des dates est approximative (« vers », « avant », « an … » sans jour). ¦ Rezultat i përafërt: një nga datat është e përafërt («vers», «avant», «an …» pa ditë). ¦ Riżultat approssimattiv: waħda mid-dati hija approssimattiva (“vers”, “avant”, “an …” mingħajr jum).
+« {text} » : ni une adresse (D12, B2:C9), ni un nom du classeur. ¦ «{text}»: as adresë (D12, B2:C9), as emër i librit të punës. ¦ “{text}”: la indirizz (D12, B2:C9), u lanqas isem fil-workbook.
+Pas de feuille « {name} ». ¦ Nuk ka fletë «{name}». ¦ M’hemmx folja “{name}”.
+Utilise {key} dans la grille (le navigateur ne laisse pas un bouton écrire dans le presse-papiers). ¦ Përdor {key} në rrjetë (shfletuesi nuk lejon që një buton të shkruajë në kujtesën e fragmenteve). ¦ Uża {key} fil-grilja (il-browser ma jħallix buttuna tikteb fil-clipboard).
+En pixels (6 à 72) : ¦ Në piksel (6 deri 72): ¦ F’pixels (6 sa 72):
+Lignes masquées (Format → Tout remontrer) ¦ Rreshta të fshehur (Formati → Shfaqi të gjitha përsëri) ¦ Ringieli moħbija (Format → Erġa’ uri kollox)
+Colonnes masquées (Format → Tout remontrer) ¦ Kolona të fshehura (Formati → Shfaqi të gjitha përsëri) ¦ Kolonni moħbija (Format → Erġa’ uri kollox)
+Trier A → Z (sur la colonne choisie) ¦ Rendit A → Z (sipas kolonës së zgjedhur) ¦ Issortja A → Z (fuq il-kolonna magħżula)
+Trier Z → A ¦ Rendit Z → A ¦ Issortja Z → A
+Trier sur plusieurs colonnes… ¦ Rendit sipas disa kolonave… ¦ Issortja fuq diversi kolonni…
+Espaces en trop retirés. ¦ Hapësirat e tepërta u hoqën. ¦ L-ispazji żejda tneħħew.
+Rien à retirer. ¦ Asgjë për të hequr. ¦ Xejn x’tneħħi.
+Police des cellules ¦ Shkronja e qelizave ¦ Font taċ-ċelluli
+Cette police a un nom que le tableur ne sait pas garder. ¦ Kjo shkronjë ka një emër që fleta llogaritëse nuk di ta ruajë. ¦ Dan il-font għandu isem li l-folja elettronika ma tafx iżżomm.
+Une taille entre 6 et 72 px (« {value} » ne va pas). ¦ Një madhësi midis 6 dhe 72 px («{value}» nuk shkon). ¦ Daqs bejn 6 u 72 px (“{value}” ma jgħoddx).
+Une taille entre 6 et 72 px. ¦ Një madhësi midis 6 dhe 72 px. ¦ Daqs bejn 6 u 72 px.
+Choisis d’abord plusieurs cases à fusionner. ¦ Zgjidh fillimisht disa qeliza për t’i bashkuar. ¦ L-ewwel agħżel diversi ċelluli biex tgħaqqad.
+Cases fusionnées : {n} ¦ Qeliza të bashkuara: {n} ¦ Ċelluli magħquda: {n}
+Largeur de colonne ¦ Gjerësia e kolonës ¦ Wisa’ tal-kolonna
+Hauteur de ligne ¦ Lartësia e rreshtit ¦ Għoli tar-ringiela
+En pixels (16 à 1200) : ¦ Në piksel (16 deri 1200): ¦ F’pixels (16 sa 1200):
+En pixels (12 à 600) : ¦ Në piksel (12 deri 600): ¦ F’pixels (12 sa 600):
+Un nom commence par une lettre, sans espace (ex. Total, Âges_1836). ¦ Një emër fillon me shkronjë, pa hapësira (p.sh. Total, Âges_1836). ¦ Isem jibda b’ittra, mingħajr spazji (eż. Total, Âges_1836).
+Nom « {name} » = {ref} : tape =SOMME({name}) dans une formule. ¦ Emri «{name}» = {ref}: shkruaj =SOMME({name}) në një formulë. ¦ Isem “{name}” = {ref}: ikteb =SOMME({name}) f’formula.
+Nom pour la plage ¦ Emër për zonën ¦ Isem għall-firxa
+Un nom pour {ref} (pour écrire =SOMME(Total) au lieu de =SOMME(D2:D40)) : ¦ Një emër për {ref} (për të shkruar =SOMME(Total) në vend të =SOMME(D2:D40)): ¦ Isem għal {ref} (biex tikteb =SOMME(Total) minflok =SOMME(D2:D40)):
+💬 Note sur {cell} ¦ 💬 Shënim për {cell} ¦ 💬 Nota fuq {cell}
+La note s’affiche au survol de la case (un petit coin orange). Vide = pas de note. ¦ Shënimi shfaqet kur kalon miun mbi qelizë (një cep i vogël portokalli). Bosh = pa shënim. ¦ In-nota tidher meta tgħaddi l-maws fuq iċ-ċellula (kantuniera żgħira oranġjo). Vojta = l-ebda nota.
+⌨️ Raccourcis du tableur ¦ ⌨️ Shkurtoret e fletës llogaritëse ¦ ⌨️ Shortcuts tal-folja elettronika
+Raccourcis indisponibles. ¦ Shkurtoret nuk janë të disponueshme. ¦ Shortcuts mhux disponibbli.
+⚙️ Réglages du tableur ¦ ⚙️ Cilësimet e fletës llogaritëse ¦ ⚙️ Issettjar tal-folja elettronika
+Après la touche Entrée, aller ¦ Pas tastit Enter, shko ¦ Wara t-tasta Enter, mur
+vers le bas ¦ poshtë ¦ ’l isfel
+vers la droite (saisie de relevés en ligne) ¦ djathtas (hedhje zbërthimesh rresht pas rreshti) ¦ lejn il-lemin (daħla ta’ traskrizzjonijiet ringiela ringiela)
+Séparateur des fichiers CSV ¦ Ndarësi i skedarëve CSV ¦ Separatur tal-fajls CSV
+point-virgule « ; » (Excel en français) ¦ pikëpresje «;» (Excel në frëngjisht) ¦ semikolon “;” (Excel bil-Franċiż)
+virgule « , » ¦ presje «,» ¦ virgola “,”
+tabulation ¦ tabulim ¦ tab
+Largeur des colonnes d’une feuille neuve ¦ Gjerësia e kolonave të një flete të re ¦ Wisa’ tal-kolonni ta’ folja ġdida
+Dans la barre du bas, pour les cellules choisies ¦ Në shiritin e poshtëm, për qelizat e zgjedhura ¦ Fil-bar t’isfel, għaċ-ċelluli magħżula
+Réglages du tableur ¦ Cilësimet e fletës llogaritëse ¦ Issettjar tal-folja elettronika
+Trop de lignes ou de colonnes d’un coup. ¦ Tepër rreshta ose kolona njëherësh. ¦ Wisq ringieli jew kolonni f’daqqa.
+Trié {dir} sur la colonne {col} (la 1re ligne, ce sont les titres). ¦ U rendit {dir} sipas kolonës {col} (rreshti i 1-rë janë titujt). ¦ Issortjat {dir} fuq il-kolonna {col} (l-1 ringiela huma t-titli).
+Trié {dir} sur la colonne {col}. ¦ U rendit {dir} sipas kolonës {col}. ¦ Issortjat {dir} fuq il-kolonna {col}.
+A → Z (croissant) ¦ A → Z (në rritje) ¦ A → Z (axxendenti)
+Z → A (décroissant) ¦ Z → A (në zbritje) ¦ Z → A (dixxendenti)
+Plage {range} · les dates d’actes (« vers 1784 », « an II ») se rangent à leur date. ¦ Zona {range} · datat e akteve («vers 1784», «an II») renditen sipas datës së tyre. ¦ Firxa {range} · id-dati tal-atti (“vers 1784”, “an II”) jiġu ssortjati skont id-data tagħhom.
+La première ligne, ce sont les titres ¦ Rreshti i parë janë titujt ¦ L-ewwel ringiela huma t-titli
+Puis par ¦ Pastaj sipas ¦ Imbagħad skont
+Choisis un tableau avec une ligne de titres et des lignes en dessous. ¦ Zgjidh një tabelë me një rresht titujsh dhe rreshta poshtë tij. ¦ Agħżel tabella b’ringiela tat-titli u ringieli taħtha.
+(vide) ¦ (bosh) ¦ (vojt)
+Chercher dans le tableau… (nom, métier) ¦ Kërko në tabelë… (emër, profesion) ¦ Fittex fit-tabella… (isem, xogħol)
+{n} sur {total} ¦ {n} nga {total} ¦ {n} minn {total}
+Supprimer les doublons ¦ Fshi dublikatat ¦ Ħassar id-duplikati
+Plage {range} · la 1re ligne, ce sont les titres. La première ligne de chaque groupe reste. ¦ Zona {range} · rreshti i 1-rë janë titujt. Mbetet rreshti i parë i çdo grupi. ¦ Firxa {range} · l-1 ringiela huma t-titli. L-ewwel ringiela ta’ kull grupp tibqa’.
+Plage {range}. La première ligne de chaque groupe reste. ¦ Zona {range}. Mbetet rreshti i parë i çdo grupi. ¦ Firxa {range}. L-ewwel ringiela ta’ kull grupp tibqa’.
+Compare les colonnes : ¦ Krahaso kolonat: ¦ Qabbel il-kolonni:
+{n} en double (lignes {rows}). ¦ {n} të dyfishta (rreshtat {rows}). ¦ {n} duplikati (ringieli {rows}).
+{n} en double (ligne {rows}). ¦ {n} të dyfishta (rreshti {rows}). ¦ {n} duplikati (ringiela {rows}).
+Aucune ligne en double. ¦ Asnjë rresht i dyfishtë. ¦ L-ebda ringiela duplikata.
+Supprimer {n} ¦ Fshi {n} ¦ Ħassar {n}
+Coche au moins une colonne. ¦ Shëno të paktën një kolonë. ¦ Immarka mill-inqas kolonna waħda.
+Choisis des cases de texte dans une colonne (ex. « MARTIN Jean, 34 ans, laboureur »). ¦ Zgjidh qeliza teksti në një kolonë (p.sh. «MARTIN Jean, 34 ans, laboureur»). ¦ Agħżel ċelluli ta’ test f’kolonna (eż. “MARTIN Jean, 34 ans, laboureur”).
+Convertir le texte en colonnes ¦ Ktheje tekstin në kolona ¦ Ikkonverti t-test f’kolonni
+Convertir ¦ Ktheje ¦ Ikkonverti
+Couper à : ¦ Ndaje te: ¦ Aqsam fuq:
+« 34 ans » devient 34 ¦ «34 ans» bëhet 34 ¦ “34 ans” isir 34
+Le nom en capitales devient une colonne à part (« MARTIN Jean » → MARTIN | Jean) ¦ Mbiemri me shkronja të mëdha bëhet kolonë më vete («MARTIN Jean» → MARTIN | Jean) ¦ Il-kunjom b’ittri kapitali jsir kolonna separata (“MARTIN Jean” → MARTIN | Jean)
+Les morceaux vont dans la colonne {col} et les suivantes (ce qui s’y trouve est remplacé ; ↶ pour revenir). ¦ Copat shkojnë në kolonën {col} dhe ato pasuese (çfarë ka atje zëvendësohet; ↶ për t’u kthyer). ¦ Il-biċċiet imorru fil-kolonna {col} u dawk ta’ warajha (dak li hemm jiġi sostitwit; ↶ biex terġa’ lura).
+Validation des données ¦ Vërtetimi i të dhënave ¦ Validazzjoni tad-data
+Pour {range} : ce qu’on peut écrire dans ces cases. ¦ Për {range}: çfarë mund të shkruhet në këto qeliza. ¦ Għal {range}: x’jista’ jinkiteb f’dawn iċ-ċelluli.
+Autoriser ¦ Lejo ¦ Ħalli
+Une liste de choix (menu ▾) ¦ Një listë zgjedhjesh (menyja ▾) ¦ Lista ta’ għażliet (menu ▾)
+👤 Une personne de la base (menu de choix) ¦ 👤 Një person nga baza (menyja e zgjedhjes) ¦ 👤 Persuna mid-database (menu tal-għażla)
+📍 Un lieu de la base (menu de choix) ¦ 📍 Një vend nga baza (menyja e zgjedhjes) ¦ 📍 Post mid-database (menu tal-għażla)
+Un nombre entre… ¦ Një numër midis… ¦ Numru bejn…
+Une date d’acte (vers 1784, an II…) ¦ Një datë akti (vers 1784, an II…) ¦ Data ta’ att (vers 1784, an II…)
+Les choix (un par ligne) ¦ Zgjedhjet (një për rresht) ¦ L-għażliet (waħda għal kull linja)
+Entre ¦ Midis ¦ Bejn
+Garder aussi un texte libre (sans fiche, ou hors de la liste) ¦ Lejo edhe tekst të lirë (pa kartelë, ose jashtë listës) ¦ Żomm ukoll test liberu (mingħajr skeda, jew barra mil-lista)
+Écris au moins un choix. ¦ Shkruaj të paktën një zgjedhje. ¦ Ikteb mill-inqas għażla waħda.
+FORMAT ¦ FORMATI ¦ FORMAT
+Mise en forme conditionnelle ¦ Formatim me kusht ¦ Formattjar kundizzjonali
+Ajouter la règle ¦ Shto rregullin ¦ Żid ir-regola
+Une couleur quand la valeur le demande : l’erreur ou la valeur étrange saute aux yeux. ¦ Një ngjyrë kur vlera e kërkon: gabimi ose vlera e çuditshme bie në sy. ¦ Kulur meta l-valur jitlobha: l-iżball jew il-valur stramb jaqbeż għall-għajn.
+Prêtes à l’emploi : ¦ Gati për përdorim: ¦ Lesti għall-użu:
+« âge > 100 ans » ¦ «mosha > 100 vjet» ¦ “età > 100 sena”
+« date impossible » ¦ «datë e pamundur» ¦ “data impossibbli”
+« doublons » ¦ «dublikata» ¦ “duplikati”
+« barres » ¦ «shtylla» ¦ “vireg”
+Si la valeur ¦ Nëse vlera ¦ Jekk il-valur
+alors ¦ atëherë ¦ allura
+en gras ¦ me të theksuara ¦ bil-grassett
+Une plage comme D2:D40. ¦ Një zonë si D2:D40. ¦ Firxa bħal D2:D40.
+Écris un nombre. ¦ Shkruaj një numër. ¦ Ikteb numru.
+ÉDITION ¦ REDAKTIMI ¦ EDITJAR
+🔍 Rechercher et remplacer ¦ 🔍 Kërko dhe zëvendëso ¦ 🔍 Fittex u ibdel
+Remplacer tout ¦ Zëvendëso të gjitha ¦ Ibdel kollox
+Remplacer par ¦ Zëvendëso me ¦ Ibdel b’
+Dans toutes les feuilles ¦ Në të gjitha fletët ¦ Fil-folji kollha
+Respecter les capitales ¦ Respekto shkronjat e mëdha ¦ Irrispetta l-ittri kapitali
+Chercher le suivant ¦ Kërko tjetrin ¦ Fittex li jmiss
+Trouvé en {cell} ¦ U gjet në {cell} ¦ Instab f’{cell}
+Écris ce qu’il faut chercher. ¦ Shkruaj çfarë duhet kërkuar. ¦ Ikteb x’għandek tfittex.
+Aucune fonction ne correspond. ¦ Asnjë funksion nuk përputhet. ¦ L-ebda funzjoni ma taqbel.
+ƒ Choisir une fonction ¦ ƒ Zgjidh një funksion ¦ ƒ Agħżel funzjoni
+Chercher… (âge, somme, recherche) ¦ Kërko… (mosha, shuma, kërkim) ¦ Fittex… (età, somma, tfittxija)
+Le menu de choix n’est pas chargé. ¦ Menyja e zgjedhjes nuk është ngarkuar. ¦ Il-menu tal-għażla mhux mgħobbi.
+📍 Un lieu pour {cell} ¦ 📍 Një vend për {cell} ¦ 📍 Post għal {cell}
+👤 Une personne pour {cell} ¦ 👤 Një person për {cell} ¦ 👤 Persuna għal {cell}
+📍 Lieu de la base ¦ 📍 Vend nga baza ¦ 📍 Post mid-database
+auto ¦ auto ¦ awto
+Décimales ¦ Dhjetore ¦ Deċimali
+✓ « {text} » est comprise (≈) ¦ ✓ «{text}» u kuptua (≈) ¦ ✓ “{text}” mifhuma (≈)
+✓ « {text} » est comprise ¦ ✓ «{text}» u kuptua ¦ ✓ “{text}” mifhuma
+Noir ¦ E zezë ¦ Iswed
+Contour ¦ Kontur ¦ Kontorn
+Retirer la règle ¦ Hiq rregullin ¦ Neħħi r-regola
+Aucune règle sur cette feuille. ¦ Asnjë rregull në këtë fletë. ¦ L-ebda regola f’din il-folja.
+＋ Ajouter une règle… ¦ ＋ Shto një rregull… ¦ ＋ Żid regola…
+Une liste : {list} ¦ Një listë: {list} ¦ Lista: {list}
+👤 Une personne de la base ¦ 👤 Një person nga baza ¦ 👤 Persuna mid-database
+📍 Un lieu de la base ¦ 📍 Një vend nga baza ¦ 📍 Post mid-database
+Un nombre ¦ Një numër ¦ Numru
+Une date d’acte ¦ Një datë akti ¦ Data ta’ att
+Garder le texte ¦ Mbaj tekstin ¦ Żomm it-test
+Pas de validation ici. ¦ Pa vërtetim këtu. ¦ L-ebda validazzjoni hawn.
+Validation des données… ¦ Vërtetimi i të dhënave… ¦ Validazzjoni tad-data…
+Enregistre d’abord le classeur (💾), puis ouvre la fiche. ¦ Ruaj fillimisht librin e punës (💾), pastaj hap kartelën. ¦ L-ewwel issejvja l-workbook (💾), imbagħad iftaħ l-iskeda.
+{name} : lieu n° {id} de ta base. ¦ {name}: vendi nr. {id} i bazës tënde. ¦ {name}: post nru {id} fid-database tiegħek.
+Règle « {range} » retirée ¦ Rregulli «{range}» u hoq ¦ Ir-regola “{range}” tneħħiet
+Police (E5) : {font} ¦ Shkronja (E5): {font} ¦ Font (E5): {font}
+celle de départ ¦ ajo e fillimit ¦ dak tal-bidu
+Panneau de droite : montrer ¦ Paneli i djathtë: shfaq ¦ Pannell tal-lemin: uri
+Panneau de droite : cacher ¦ Paneli i djathtë: fshih ¦ Pannell tal-lemin: aħbi
+Double-clic : renommer · clic droit : plus d’actions ¦ Klik i dyfishtë: riemërto · klik i djathtë: më shumë veprime ¦ Klikk doppju: ibdel l-isem · klikk tal-lemin: aktar azzjonijiet
+Ajouter une feuille ¦ Shto një fletë ¦ Żid folja
+Feuille {n} ¦ Fleta {n} ¦ Folja {n}
+Renommer la feuille ¦ Riemërto fletën ¦ Ibdel l-isem tal-folja
+Un classeur garde au moins une feuille. ¦ Një libër pune mban të paktën një fletë. ¦ Workbook iżomm mill-inqas folja waħda.
+Feuille « {name} » supprimée ¦ Fleta «{name}» u fshi ¦ Il-folja “{name}” tħassret
+Couleur de l’onglet… ¦ Ngjyra e skedës… ¦ Kulur tat-tab…
+Déplacer à gauche ¦ Zhvendos majtas ¦ Ċaqlaq lejn ix-xellug
+Déplacer à droite ¦ Zhvendos djathtas ¦ Ċaqlaq lejn il-lemin
+Somme <b>{v}</b> ¦ Shuma <b>{v}</b> ¦ Somma <b>{v}</b>
+Moyenne <b>{v}</b> ¦ Mesatarja <b>{v}</b> ¦ Medja <b>{v}</b>
+Nb <b>{v}</b> ¦ Numri <b>{v}</b> ¦ Għadd <b>{v}</b>
+Min <b>{v}</b> ¦ Min <b>{v}</b> ¦ Min <b>{v}</b>
+Max <b>{v}</b> ¦ Maks <b>{v}</b> ¦ Mass <b>{v}</b>
+Dans la barre d’état ¦ Në shiritin e gjendjes ¦ Fil-bar tal-istatus
+Utilise {key} : le navigateur ne laisse pas un menu écrire dans le presse-papiers. ¦ Përdor {key}: shfletuesi nuk lejon që një meny të shkruajë në kujtesën e fragmenteve. ¦ Uża {key}: il-browser ma jħallix menu tikteb fil-clipboard.
+Sélection trop grande pour le presse-papiers. ¦ Përzgjedhje tepër e madhe për kujtesën e fragmenteve. ¦ Għażla kbira wisq għall-clipboard.
+Coupé : choisis où coller, puis {key}. ¦ U pre: zgjidh ku ta ngjitësh, pastaj {key}. ¦ Maqtugħ: agħżel fejn twaħħal, imbagħad {key}.
+Utilise {key} dans la grille pour coller. ¦ Përdor {key} në rrjetë për të ngjitur. ¦ Uża {key} fil-grilja biex twaħħal.
+Trop de cellules à coller. ¦ Tepër qeliza për t’u ngjitur. ¦ Wisq ċelluli biex twaħħal.
+{n} (avec le gras et les couleurs). ¦ {n} (me theksimin dhe ngjyrat). ¦ {n} (bil-grassett u l-kuluri).
+Série {n} ¦ Seria {n} ¦ Serje {n}
+Colonnes groupées ¦ Kolona të grupuara ¦ Kolonni miġbura
+Barres horizontales ¦ Shtylla horizontale ¦ Vireg orizzontali
+TSV (tabulations) ¦ TSV (tabulime) ¦ TSV (tabs)
+⤒ Importer un tableau ¦ ⤒ Importo një tabelë ¦ ⤒ Importa tabella
+Séparateur deviné : {sep} · Encodage : {enc} ¦ Ndarësi i hamendësuar: {sep} · Kodimi: {enc} ¦ Separatur maħsub: {sep} · Kodifikazzjoni: {enc}
+point-virgule (;) ¦ pikëpresje (;) ¦ semikolon (;)
+virgule (,) ¦ presje (,) ¦ virgola (,)
+✓ Accents corrects : « {list} ». ¦ ✓ Theksat në rregull: «{list}». ¦ ✓ Aċċenti korretti: “{list}”.
+<b>{rows}</b> dans {sheets} ¦ <b>{rows}</b> në {sheets} ¦ <b>{rows}</b> f’{sheets}
+CSV et TSV : la feuille ouverte. Les autres : tout le classeur. Une cellule qui commence par « = » est protégée dans un CSV (pas de formule glissée). ¦ CSV dhe TSV: fleta e hapur. Të tjerat: i gjithë libri i punës. Një qelizë që fillon me «=» mbrohet në CSV (asnjë formulë e futur fshehurazi). ¦ CSV u TSV: il-folja miftuħa. L-oħrajn: il-workbook kollu. Ċellula li tibda b’“=” hija protetta f’CSV (l-ebda formula moħbija).
+tout tableur ¦ çdo fletë llogaritëse ¦ kull folja elettronika
+tabulations ¦ tabulime ¦ tabs
+données ¦ të dhëna ¦ data
+à lire ¦ për t’u lexuar ¦ biex jinqara
+💾 Fichier de l’outil ¦ 💾 Skedari i mjetit ¦ 💾 Fajl tal-għodda
+Exporté : {name} ¦ U eksportua: {name} ¦ Esportat: {name}
+(feuille vide) ¦ (fletë bosh) ¦ (folja vojta)
+Toutes les feuilles ¦ Të gjitha fletët ¦ Il-folji kollha
+Quadrillage ¦ Rrjeta ¦ Grilja
+Rangé dans Listes → Outils de modification → 🧾 Tableur. ¦ Ruajtur te Listat → Mjetet e ndryshimit → 🧾 Fletë llogaritëse. ¦ Maħżun f’Listi → Għodod tal-editjar → 🧾 Folja elettronika.
+Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles). ¦ Modeli «{name}» u ruajt (Nis nga një model → Modelet e mia). ¦ Il-mudell “{name}” ġie ssejvjat (Ibda minn mudell → Il-mudelli tiegħi).
+Copie « {name} » enregistrée. ¦ Kopja «{name}» u ruajt. ¦ Il-kopja “{name}” ġiet issejvjata.
+Ce classeur ¦ Ky libër pune ¦ Dan il-workbook
+Impossible d’enregistrer : {error} ¦ Ruajtja nuk u bë: {error} ¦ Ma setax jiġi ssejvjat: {error}
+Enregistrer comme modèle ¦ Ruaj si model ¦ Issejvja bħala mudell
+Enregistrer une copie ¦ Ruaj një kopje ¦ Issejvja kopja
+Le nom du modèle (les données restent : vide-les avant si tu veux un modèle vierge) : ¦ Emri i modelit (të dhënat mbeten: fshiji më parë nëse do një model bosh): ¦ L-isem tal-mudell (id-data tibqa’: battalha qabel jekk trid mudell vojt):
+Le nom de la copie : ¦ Emri i kopjes: ¦ L-isem tal-kopja:
+{name} (copie) ¦ {name} (kopje) ¦ {name} (kopja)
+Les changements faits depuis le dernier enregistrement seront perdus. ¦ Ndryshimet e bëra që nga ruajtja e fundit do të humbasin. ¦ It-tibdiliet li saru mill-aħħar issejvjar se jintilfu.
+📋 Partir d’un modèle ¦ 📋 Nis nga një model ¦ 📋 Ibda minn mudell
+Mes modèles ¦ Modelet e mia ¦ Il-mudelli tiegħi
+Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Ende asnjë model yti: në një libër pune, Skedari → «Ruaj si model…». ¦ Għad m’għandek l-ebda mudell tiegħek: f’workbook, Fajl → “Issejvja bħala mudell…”.
+séparateur « {sep} » ¦ ndarësi «{sep}» ¦ separatur “{sep}”
+Classeur importé ¦ Libër pune i importuar ¦ Workbook importat
+Classeur « {name} » créé ({rows}) ¦ Libri i punës «{name}» u krijua ({rows}) ¦ Il-workbook “{name}” inħoloq ({rows})
+classeur ¦ libër pune ¦ workbook
+＋ Nouveau classeur ¦ ＋ Libër pune i ri ¦ ＋ Workbook ġdid
+Relevé de recensement, registre paroissial, budget de la recherche, suivi des courriers… ¦ Zbërthim regjistrimi i popullsisë, regjistër famullie, buxheti i kërkimit, ndjekja e letrave… ¦ Traskrizzjoni taċ-ċensiment, reġistru parrokkjali, baġit tar-riċerka, segwitu tal-ittri…
+Tu divises par zéro : {ref} est vide ou vaut 0. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Po pjesëton me zero: {ref} është bosh ose është 0. Këshillë: =SI.ERREUR(…;"") e lë qelizën bosh. ¦ Qed taqsam b’żero: {ref} hija vojta jew tiswa 0. Parir: =SI.ERREUR(…;"") tħalli ċ-ċellula vojta.
+Tu divises par zéro : {why}. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Po pjesëton me zero: {why}. Këshillë: =SI.ERREUR(…;"") e lë qelizën bosh. ¦ Qed taqsam b’żero: {why}. Parir: =SI.ERREUR(…;"") tħalli ċ-ċellula vojta.
+Tu divises par zéro. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Po pjesëton me zero. Këshillë: =SI.ERREUR(…;"") e lë qelizën bosh. ¦ Qed taqsam b’żero. Parir: =SI.ERREUR(…;"") tħalli ċ-ċellula vojta.
+Je ne connais pas « {name} ». Voulais-tu dire {sugg} ? ¦ Nuk e njoh «{name}». Mos doje të thoje {sugg}? ¦ Ma nafx “{name}”. Ridt tgħid {sugg}?
+Je ne connais pas « {name} ». Tape les premières lettres : la liste des fonctions s’ouvre. ¦ Nuk e njoh «{name}». Shkruaj shkronjat e para: hapet lista e funksioneve. ¦ Ma nafx “{name}”. Ikteb l-ewwel ittri: tinfetaħ il-lista tal-funzjonijiet.
+Un nom inconnu dans la formule. ¦ Një emër i panjohur në formulë. ¦ Isem mhux magħruf fil-formula.
+« {text} » n’est pas un nombre (cellule {cell}) : on ne peut pas faire de calcul avec. ¦ «{text}» nuk është numër (qeliza {cell}): nuk mund të llogaritet me të. ¦ “{text}” mhux numru (ċellula {cell}): ma tistax tagħmel kalkolu bih.
+« {text} » n’est pas un nombre : on ne peut pas faire de calcul avec. ¦ «{text}» nuk është numër: nuk mund të llogaritet me të. ¦ “{text}” mhux numru: ma tistax tagħmel kalkolu bih.
+Une valeur ne convient pas ¦ Një vlerë nuk përshtatet ¦ Valur mhux adattat
+{what} (cellule {cell}). ¦ {what} (qeliza {cell}). ¦ {what} (ċellula {cell}).
+La formule montre quelque chose qui n’existe pas : {what}. ¦ Formula tregon diçka që nuk ekziston: {what}. ¦ Il-formula tipponta lejn xi ħaġa li ma teżistix: {what}.
+La formule montre une cellule qui a été supprimée. ¦ Formula tregon një qelizë që është fshirë. ¦ Il-formula tipponta lejn ċellula li tħassret.
+Valeur introuvable ¦ Vlera nuk u gjet ¦ Valur ma nstabx
+La recherche ¦ Kërkimi ¦ It-tfittxija
+{fn} n’a pas trouvé « {what} » dans {where}. ¦ {fn} nuk e gjeti «{what}» në {where}. ¦ {fn} ma sabx “{what}” f’{where}.
+{fn} n’a pas trouvé « {what} ». ¦ {fn} nuk e gjeti «{what}». ¦ {fn} ma sabx “{what}”.
+{path} : la formule tourne en rond. ¦ {path}: formula sillet në rreth. ¦ {path}: il-formula ddur fiċ-ċirku.
+La formule a besoin d’elle-même : elle tourne en rond. ¦ Formula ka nevojë për veten: sillet në rreth. ¦ Il-formula għandha bżonn lilha nfisha: iddur fiċ-ċirku.
+« {text} » : {why}. ¦ «{text}»: {why}. ¦ “{text}”: {why}.
+cette date ¦ këtë datë ¦ din id-data
+Je ne comprends pas {what} (« {text} »). Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Nuk e kuptoj {what} («{text}»). Shembuj: 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Ma nifhimx {what} (“{text}”). Eżempji: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas {what}. Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Nuk e kuptoj {what}. Shembuj: 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Ma nifhimx {what}. Eżempji: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas la formule près de « {near} » : {why}. ¦ Nuk e kuptoj formulën pranë «{near}»: {why}. ¦ Ma nifhimx il-formula qrib “{near}”: {why}.
+Je ne comprends pas la formule : {why}. ¦ Nuk e kuptoj formulën: {why}. ¦ Ma nifhimx il-formula: {why}.
+Je ne comprends pas la formule près de « {near} » : vérifie les parenthèses, les guillemets et les « ; ». ¦ Nuk e kuptoj formulën pranë «{near}»: kontrollo kllapat, thonjëzat dhe «;». ¦ Ma nifhimx il-formula qrib “{near}”: iċċekkja l-parentesi, il-virgoletti u l-“;”.
+Je ne comprends pas la formule : vérifie les parenthèses, les guillemets et les « ; ». ¦ Nuk e kuptoj formulën: kontrollo kllapat, thonjëzat dhe «;». ¦ Ma nifhimx il-formula: iċċekkja l-parentesi, il-virgoletti u l-“;”.
+Nombre impossible ¦ Numër i pamundur ¦ Numru impossibbli
+Le résultat a besoin de {size} vers le bas et la droite, mais {cell} n’est pas vide : vide-la pour voir tout le résultat. ¦ Rezultati ka nevojë për {size} poshtë dhe djathtas, por {cell} nuk është bosh: zbraze për të parë gjithë rezultatin. ¦ Ir-riżultat għandu bżonn {size} ’l isfel u lejn il-lemin, iżda {cell} mhix vojta: battalha biex tara r-riżultat kollu.
+plusieurs cases ¦ disa qeliza ¦ diversi ċelluli
+une case ¦ një qelizë ¦ ċellula waħda
+Trop gros pour être calculé : {why}. ¦ Tepër i madh për t’u llogaritur: {why}. ¦ Kbir wisq biex jiġi kkalkulat: {why}.
+réduis la plage ¦ zvogëlo zonën ¦ ċekken il-firxa
+Erreur dans la formule. ¦ Gabim në formulë. ¦ Żball fil-formula.
+Astuce : =SI.ERREUR(A4/B4;"") ¦ Këshillë: =SI.ERREUR(A4/B4;"") ¦ Parir: =SI.ERREUR(A4/B4;"")
+fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un document de bureau n’utilise pas ¦ skedar i refuzuar: përmban deklarata XML (DOCTYPE ose ENTITY) që një dokument zyre nuk i përdor ¦ fajl miċħud: fih dikjarazzjonijiet XML (DOCTYPE jew ENTITY) li dokument tal-uffiċċju ma jużax
+fichier XML abîmé ¦ skedar XML i dëmtuar ¦ fajl XML bil-ħsara
+fichier refusé : trop d’éléments ¦ skedar i refuzuar: tepër elemente ¦ fajl miċħud: wisq elementi
+fichier refusé : XML trop imbriqué ¦ skedar i refuzuar: XML tepër i ndërfutur ¦ fajl miċħud: XML imdaħħal wisq fil-fond
+fichier trop gros (plus de {n} Mo) ¦ skedar tepër i madh (mbi {n} MB) ¦ fajl kbir wisq (aktar minn {n} MB)
+ce n’est pas un fichier zip valide ¦ ky nuk është skedar zip i vlefshëm ¦ dan mhuwiex fajl zip validu
+fichier refusé : trop d’éléments dans le zip ¦ skedar i refuzuar: tepër elemente në zip ¦ fajl miċħud: wisq elementi fiż-zip
+fichier chiffré : ouvre-le d’abord dans son tableur et enregistre-le sans mot de passe ¦ skedar i koduar: hape fillimisht në fletën e vet llogaritëse dhe ruaje pa fjalëkalim ¦ fajl kriptat: l-ewwel iftħu fil-folja elettronika tiegħu u ssejvjah mingħajr password
+fichier zip abîmé ¦ skedar zip i dëmtuar ¦ fajl zip bil-ħsara
+fichier refusé : trop gros une fois décompressé ¦ skedar i refuzuar: tepër i madh pasi çngjeshet ¦ fajl miċħud: kbir wisq ladarba jiġi dekompressat
+fichier refusé : il se décompresse en beaucoup trop gros (bombe zip) ¦ skedar i refuzuar: çngjeshet në diçka tepër të madhe (bombë zip) ¦ fajl miċħud: jiddekompressa f’xi ħaġa kbira wisq (bomba zip)
+ce navigateur ne sait pas ouvrir les fichiers zip (mets-le à jour) ¦ ky shfletues nuk di të hapë skedarë zip (përditësoje) ¦ dan il-browser ma jafx jiftaħ fajls zip (aġġornah)
+compression inconnue dans le fichier ¦ ngjeshje e panjohur në skedar ¦ kompressjoni mhux magħrufa fil-fajl
+ce n’est pas un fichier Excel (.xlsx) : xl/workbook.xml manque ¦ ky nuk është skedar Excel (.xlsx): mungon xl/workbook.xml ¦ dan mhuwiex fajl Excel (.xlsx): nieqes xl/workbook.xml
+fichier refusé : trop de feuilles ¦ skedar i refuzuar: tepër fletë ¦ fajl miċħud: wisq folji
+fichier refusé : trop de cellules ¦ skedar i refuzuar: tepër qeliza ¦ fajl miċħud: wisq ċelluli
+ce n’est pas un fichier LibreOffice (.ods) : content.xml manque ¦ ky nuk është skedar LibreOffice (.ods): mungon content.xml ¦ dan mhuwiex fajl LibreOffice (.ods): nieqes content.xml
+ce fichier n’est pas un JSON valide ¦ ky skedar nuk është JSON i vlefshëm ¦ dan il-fajl mhuwiex JSON validu
+je ne trouve pas de tableau dans ce JSON (il faut une liste de lignes ou d’objets) ¦ nuk gjej tabelë në këtë JSON (duhet një listë rreshtash ose objektesh) ¦ ma nsibx tabella f’dan il-JSON (hemm bżonn lista ta’ ringieli jew oġġetti)
+les anciens fichiers Excel (.xls) ne sont pas lus : ouvre-le dans Excel ou LibreOffice et enregistre-le en .xlsx ¦ skedarët e vjetër Excel (.xls) nuk lexohen: hape në Excel ose LibreOffice dhe ruaje si .xlsx ¦ il-fajls qodma ta’ Excel (.xls) ma jinqrawx: iftħu f’Excel jew LibreOffice u ssejvjah bħala .xlsx
+ce fichier compressé n’est ni un .xlsx ni un .ods ¦ ky skedar i ngjeshur nuk është as .xlsx as .ods ¦ dan il-fajl kompressat la huwa .xlsx u lanqas .ods
+Nombre 0,00 ¦ Numër 0,00 ¦ Numru 0.00
+Nombre entier ¦ Numër i plotë ¦ Numru sħiħ
+Monnaie (€) ¦ Monedhë (€) ¦ Munita (€)
+Pourcentage ¦ Përqindje ¦ Perċentwal
+Date courte ¦ Datë e shkurtër ¦ Data qasira
+Date d’acte ¦ Datë akti ¦ Data ta’ att
+Texte ¦ Tekst ¦ Test
+Relevé de recensement ¦ Zbërthim regjistrimi i popullsisë ¦ Traskrizzjoni taċ-ċensiment
+colonnes de l’année · foyers · « Né(e) vers » calculé ¦ kolonat e vitit · familjet · «Lindur rreth» i llogaritur ¦ kolonni tas-sena · familji · “Imwieled madwar” ikkalkulat
+Registre paroissial ¦ Regjistër famullie ¦ Reġistru parrokkjali
+baptêmes, mariages, sépultures ¦ pagëzime, martesa, varrime ¦ magħmudijiet, żwiġijiet, dfin
+Budget de la recherche ¦ Buxheti i kërkimit ¦ Baġit tar-riċerka
+actes, déplacements, abonnements ¦ akte, udhëtime, abonime ¦ atti, vjaġġi, abbonamenti
+Suivi des courriers ¦ Ndjekja e letrave ¦ Segwitu tal-ittri
+envoyé, relancé, réponse ¦ dërguar, rikujtuar, përgjigje ¦ mibgħuta, imfakkra, tweġiba
+Arbre en tableau ¦ Pemë në tabelë ¦ Siġra f’tabella
+Sosa, génération, côté, âge ¦ Sosa, brezi, ana, mosha ¦ Sosa, ġenerazzjoni, naħa, età
+objets, prix, total en livres ¦ sende, çmime, total në livres ¦ oġġetti, prezzijiet, total f’livres
+Registre matricule ¦ Regjistër ushtarak ¦ Reġistru militari
+classe, signalement, campagnes ¦ klasa, përshkrimi, fushatat ¦ klassi, deskrizzjoni, kampanji
+📋 Partir d’un modèle… ¦ 📋 Nis nga një model… ¦ 📋 Ibda minn mudell…
+⤒ Importer un tableau… ¦ ⤒ Importo një tabelë… ¦ ⤒ Importa tabella…
+⤓ Exporter… ¦ ⤓ Eksporto… ¦ ⤓ Esporta…
+🖨 Imprimer… ¦ 🖨 Printo… ¦ 🖨 Ipprintja…
+⚙️ Réglages du tableur… ¦ ⚙️ Cilësimet e fletës llogaritëse… ¦ ⚙️ Issettjar tal-folja elettronika…
+Insertion ¦ Futje ¦ Daħħal
+Coller les valeurs seulement ¦ Ngjit vetëm vlerat ¦ Waħħal il-valuri biss
+Effacer le contenu ¦ Fshi përmbajtjen ¦ Ħassar il-kontenut
+Effacer tout (contenu et mise en forme) ¦ Fshi gjithçka (përmbajtjen dhe formatimin) ¦ Ħassar kollox (kontenut u formattjar)
+Recopier vers le bas ¦ Kopjo poshtë ¦ Ikkopja ’l isfel
+Recopier vers la droite ¦ Kopjo djathtas ¦ Ikkopja lejn il-lemin
+🔍 Rechercher et remplacer… ¦ 🔍 Kërko dhe zëvendëso… ¦ 🔍 Fittex u ibdel…
+Ligne au-dessus ¦ Rresht sipër ¦ Ringiela fuq
+Ligne en dessous ¦ Rresht poshtë ¦ Ringiela taħt
+＋ Nouvelle feuille ¦ ＋ Fletë e re ¦ ＋ Folja ġdida
+ƒ Fonction… ¦ ƒ Funksion… ¦ ƒ Funzjoni…
+Σ Somme automatique ¦ Σ Shuma automatike ¦ Σ Somma awtomatika
+📅 Date du jour ¦ 📅 Data e sotme ¦ 📅 Data tal-lum
+Nom pour la plage… ¦ Emër për zonën… ¦ Isem għall-firxa…
+💬 Note sur la cellule… ¦ 💬 Shënim për qelizën… ¦ 💬 Nota fuq iċ-ċellula…
+📊 Graphique depuis la sélection ¦ 📊 Grafik nga përzgjedhja ¦ 📊 Grafika mill-għażla
+Barré ¦ I vijëzuar ¦ Ingassat
+Aa Police… ¦ Aa Shkronja… ¦ Aa Font…
+Taille du texte… ¦ Madhësia e tekstit… ¦ Daqs tat-test…
+↵ Renvoi à la ligne ¦ ↵ Kalim në rresht të ri ¦ ↵ Kisser tal-linja
+⊞ Fusionner / séparer ¦ ⊞ Bashko / ndaj ¦ ⊞ Għaqqad / ifred
+▦ Bordures : tout ¦ ▦ Kufijtë: të gjithë ¦ ▦ Bordi: kollha
+▭ Bordures : contour ¦ ▭ Kufijtë: konturi ¦ ▭ Bordi: kontorn
+▁ Bordure du bas ¦ ▁ Kufiri i poshtëm ¦ ▁ Bordura t’isfel
+Largeur de colonne… ¦ Gjerësia e kolonës… ¦ Wisa’ tal-kolonna…
+Hauteur de ligne… ¦ Lartësia e rreshtit… ¦ Għoli tar-ringiela…
+Ajuster la largeur au contenu ¦ Përshtat gjerësinë sipas përmbajtjes ¦ Aġġusta l-wisa’ skont il-kontenut
+Masquer les lignes ¦ Fshih rreshtat ¦ Aħbi r-ringieli
+Masquer les colonnes ¦ Fshih kolonat ¦ Aħbi l-kolonni
+Tout remontrer ¦ Shfaqi të gjitha përsëri ¦ Erġa’ uri kollox
+Mise en forme conditionnelle… ¦ Formatim me kusht… ¦ Formattjar kundizzjonali…
+Une ligne sur deux ¦ Një rresht po, një jo ¦ Ringiela iva, ringiela le
+Effacer la mise en forme ¦ Fshi formatimin ¦ Ħassar il-formattjar
+↕ Trier A → Z ¦ ↕ Rendit A → Z ¦ ↕ Issortja A → Z
+↕ Trier Z → A ¦ ↕ Rendit Z → A ¦ ↕ Issortja Z → A
+⚲ Filtrer ¦ ⚲ Filtro ¦ ⚲ Iffiltra
+Supprimer les doublons… ¦ Fshi dublikatat… ¦ Ħassar id-duplikati…
+Convertir le texte en colonnes… ¦ Ktheje tekstin në kolona… ¦ Ikkonverti t-test f’kolonni…
+Retirer les espaces en trop ¦ Hiq hapësirat e tepërta ¦ Neħħi l-ispazji żejda
+Figer la 1re ligne ¦ Ngrij rreshtin e 1-rë ¦ Iffriża l-1 ringiela
+Figer la 1re colonne ¦ Ngrij kolonën e 1-rë ¦ Iffriża l-1 kolonna
+Figer jusqu’à la cellule choisie ¦ Ngrij deri te qeliza e zgjedhur ¦ Iffriża sa ċ-ċellula magħżula
+Libérer les volets ¦ Liro panelet ¦ Neħħi l-iffriżar
+Montrer les formules ¦ Shfaq formulat ¦ Uri l-formuli
+⤢ Ajuster à la fenêtre ¦ ⤢ Përshtat me dritaren ¦ ⤢ Aġġusta għat-tieqa
+100 % (taille réelle) ¦ 100 % (madhësia reale) ¦ 100% (daqs reali)
+⌨️ Raccourcis du tableur… ¦ ⌨️ Shkurtoret e fletës llogaritëse… ¦ ⌨️ Shortcuts tal-folja elettronika…
+Rechercher et remplacer ¦ Kërko dhe zëvendëso ¦ Fittex u ibdel
+Filtrer (barre de recherche et filtres au-dessus) ¦ Filtro (shiriti i kërkimit dhe filtrat sipër) ¦ Iffiltra (bar tat-tfittxija u filtri fuq)
+Trier la plage ¦ Rendit zonën ¦ Issortja l-firxa
+Somme, moyenne, nombre… ¦ Shuma, mesatarja, numri… ¦ Somma, medja, għadd…
+Une personne de la base dans la cellule ¦ Një person nga baza në qelizë ¦ Persuna mid-database fiċ-ċellula
+Un lieu de la base dans la cellule ¦ Një vend nga baza në qelizë ¦ Post mid-database fiċ-ċellula
+Note sur la cellule ¦ Shënim për qelizën ¦ Nota fuq iċ-ċellula
+Graphique avec les chiffres de la sélection ¦ Grafik me shifrat e përzgjedhjes ¦ Grafika bin-numri tal-għażla
+Tape pour écrire · = pour calculer · double-clic pour modifier · clic droit pour les actions · glisse le petit carré pour recopier ¦ Shkruaj për të shkruar · = për të llogaritur · klik i dyfishtë për të ndryshuar · klik i djathtë për veprimet · tërhiq katrorin e vogël për të kopjuar ¦ Ittajpja biex tikteb · = biex tikkalkula · klikk doppju biex teditja · klikk tal-lemin għall-azzjonijiet · kaxkar il-kwadru ż-żgħir biex tikkopja
+Entrée valide · Tab : case à droite · Échap annule · pendant une formule, clique ou glisse sur des cellules pour les y mettre ¦ Enter konfirmon · Tab: qeliza djathtas · Esc anulon · gjatë një formule, kliko ose tërhiq mbi qeliza për t’i futur ¦ Enter jikkonferma · Tab: ċellula fuq il-lemin · Esc jikkanċella · waqt formula, ikklikkja jew kaxkar fuq ċelluli biex iddaħħalhom
+Σ Somme ¦ Σ Shuma ¦ Σ Somma
+Nombre ¦ Numri ¦ Għadd
+Minimum ¦ Minimumi ¦ Minimu
+Maximum ¦ Maksimumi ¦ Massimu
+Somme ¦ Shuma ¦ Somma
+Panneau de droite ouvert ¦ Paneli i djathtë i hapur ¦ Pannell tal-lemin miftuħ
+, virgule ¦ , presje ¦ , virgola
+; point-virgule ¦ ; pikëpresje ¦ ; semikolon
+espace ¦ hapësirë ¦ spazju
+Autre… ¦ Tjetër… ¦ Ieħor…
+plus grande que ¦ më e madhe se ¦ akbar minn
+plus petite que ¦ më e vogël se ¦ iżgħar minn
+au moins ¦ të paktën ¦ mill-inqas
+au plus ¦ të shumtën ¦ mhux aktar minn
+égale à ¦ e barabartë me ¦ ugwali għal
+différente de ¦ e ndryshme nga ¦ differenti minn
+entre ¦ midis ¦ bejn
+contient le texte ¦ përmban tekstin ¦ fih it-test
+est vide ¦ është bosh ¦ huwa vojt
+n’est pas vide ¦ nuk është bosh ¦ mhuwiex vojt
+est en double ¦ është e dyfishtë ¦ huwa duplikat
+est une date impossible ¦ është datë e pamundur ¦ hija data impossibbli
+barres dans la cellule ¦ shtylla në qelizë ¦ vireg fiċ-ċellula
+fond jaune ¦ sfond i verdhë ¦ sfond isfar
+fond rouge ¦ sfond i kuq ¦ sfond aħmar
+fond vert ¦ sfond jeshil ¦ sfond aħdar
+fond bleu ¦ sfond blu ¦ sfond blu
+fond orange ¦ sfond portokalli ¦ sfond oranġjo
+fond violet ¦ sfond vjollcë ¦ sfond vjola
+règle|plus grande que ¦ më e madhe se ¦ akbar minn
+règle|plus petite que ¦ më e vogël se ¦ iżgħar minn
+règle|au moins ¦ të paktën ¦ mill-inqas
+règle|au plus ¦ të shumtën ¦ mhux aktar minn
+règle|égale à ¦ e barabartë me ¦ ugwali għal
+règle|différente de ¦ e ndryshme nga ¦ differenti minn
+règle|entre ¦ midis ¦ bejn
+règle|contient ¦ përmban ¦ fih
+règle|vide ¦ bosh ¦ vojt
+règle|pas vide ¦ jo bosh ¦ mhux vojt
+règle|en double ¦ e dyfishtë ¦ duplikat
+règle|date impossible ¦ datë e pamundur ¦ data impossibbli
+règle|barres ¦ shtylla ¦ vireg
+Cellule ¦ Qeliza ¦ Ċellula
+Nombre et date ¦ Numri dhe data ¦ Numru u data
+Couleur et bordures ¦ Ngjyra dhe kufijtë ¦ Kulur u bordi
+Validation ¦ Vërtetimi ¦ Validazzjoni
+Adresse ¦ Adresa ¦ Indirizz
+Valeur ¦ Vlera ¦ Valur
+Formule ¦ Formula ¦ Formula
+Autorise ¦ Lejon ¦ Tippermetti
+Sinon ¦ Përndryshe ¦ Inkella
+Insérer une ligne au-dessus ¦ Fut një rresht sipër ¦ Daħħal ringiela fuq
+Insérer une ligne en dessous ¦ Fut një rresht poshtë ¦ Daħħal ringiela taħt
+Insérer une colonne à gauche ¦ Fut një kolonë majtas ¦ Daħħal kolonna fuq ix-xellug
+Insérer une colonne à droite ¦ Fut një kolonë djathtas ¦ Daħħal kolonna fuq il-lemin
+Trier A → Z ¦ Rendit A → Z ¦ Issortja A → Z
+Retirer le filtre ¦ Hiq filtrin ¦ Neħħi l-filtru
+Note… ¦ Shënim… ¦ Nota…
+Ajuster la largeur ¦ Përshtat gjerësinë ¦ Aġġusta l-wisa’
+Supprimer les lignes ¦ Fshi rreshtat ¦ Ħassar ir-ringieli
+Supprimer les colonnes ¦ Fshi kolonat ¦ Ħassar il-kolonni
+Windows (vieil Excel) ¦ Windows (Excel i vjetër) ¦ Windows (Excel antik)
+👤 Des fiches ¦ 👤 Kartela ¦ 👤 Skedi
+🏠 Un recensement (foyers) ¦ 🏠 Një regjistrim i popullsisë (familjet) ¦ 🏠 Ċensiment (familji)
+📅 Des événements ¦ 📅 Ngjarje ¦ 📅 Avvenimenti
+— ne pas envoyer — ¦ — mos e dërgo — ¦ — tibgħatx —
+Nom et prénom ¦ Mbiemër dhe emër ¦ Kunjom u isem
+Sexe ¦ Gjinia ¦ Sess
+Naissance (date ou année) ¦ Lindja (data ose viti) ¦ Twelid (data jew sena)
+Décès (date) ¦ Vdekja (data) ¦ Mewt (data)
+N° de foyer (ménage) ¦ Nr. i familjes (ekonomia familjare) ¦ Nru tad-dar (familja)
+N° de maison ¦ Nr. i shtëpisë ¦ Nru tad-dar
+Rue, quartier ¦ Rruga, lagjja ¦ Triq, kwartier
+Patron, employeur ¦ Padroni, punëdhënësi ¦ Prinċipal, impjegatur
+Situation (marié, veuf…) ¦ Gjendja (i martuar, i ve…) ¦ Stat (miżżewweġ, armel…)
+Observations, notes ¦ Vërejtje, shënime ¦ Osservazzjonijiet, noti
+Sorte d’événement (acte) ¦ Lloji i ngjarjes (akti) ¦ Tip ta’ avveniment (att)
+Date de l’événement ¦ Data e ngjarjes ¦ Data tal-avveniment
+Lieu de l’événement ¦ Vendi i ngjarjes ¦ Post tal-avveniment
+colonnes de l’année (1836 → 1936) · foyers · 📤 vers la base ¦ kolonat e vitit (1836 → 1936) · familjet · 📤 drejt bazës ¦ kolonni tas-sena (1836 → 1936) · familji · 📤 lejn id-database
+⤒ Remplir depuis l’app… ¦ ⤒ Mbush nga aplikacioni… ¦ ⤒ Imla mill-app…
+↻ Relire depuis la base ¦ ↻ Rilexo nga baza ¦ ↻ Erġa’ aqra mid-database
+catégorie + séries ¦ kategori + seri ¦ kategorija + serji
+📊 Créer le diagramme ¦ 📊 Krijo diagramin ¦ 📊 Oħloq id-dijagramma
+Un graphique ¦ Një grafik ¦ Grafika
+📈 Créer le graphique ¦ 📈 Krijo grafikun ¦ 📈 Oħloq il-grafika
+objet ▦ Tableur ¦ objekt ▦ Fletë llogaritëse ¦ oġġett ▦ Folja elettronika
+📋 Copier pour un tableau ¦ 📋 Kopjo për një tabelë ¦ 📋 Ikkopja għal tabella
+Un recueil ¦ Një përmbledhje ¦ Ġabra
+tableur d’une page ¦ fletë llogaritëse në një faqe ¦ folja elettronika fuq paġna
+📋 Copier pour un recueil ¦ 📋 Kopjo për një përmbledhje ¦ 📋 Ikkopja għal ġabra
+tableau ou graphique ¦ tabelë ose grafik ¦ tabella jew grafika
+Ce que le diagramme attend ¦ Çfarë pret diagrami ¦ X’tistenna d-dijagramma
+Ce que le graphique attend ¦ Çfarë pret grafiku ¦ X’tistenna l-grafika
+Ce que le tableau attend ¦ Çfarë pret tabela ¦ X’tistenna t-tabella
+Ce que le recueil attend ¦ Çfarë pret përmbledhja ¦ X’tistenna l-ġabra
+Pyramide des âges ¦ Piramida e moshave ¦ Piramida tal-etajiet
+Courbes ¦ Vija ¦ Linji
+Radar ¦ Radar ¦ Radar
+Barres groupées ¦ Shtylla të grupuara ¦ Vireg miġbura
+Camembert (une seule série) ¦ Byrek (vetëm një seri) ¦ Torta (serje waħda biss)
+Rectangles proportionnels ¦ Drejtkëndësha proporcionalë ¦ Rettangoli proporzjonali
+🎯 Préparer pour… (diagramme, graphique, présentation…) ¦ 🎯 Përgatit për… (diagram, grafik, prezantim…) ¦ 🎯 Ipprepara għal… (dijagramma, grafika, preżentazzjoni…)
+initiale ¦ inicial ¦ inizjali
+MAJUSCULES ¦ SHKRONJA TË MËDHA ¦ ITTRI KAPITALI
+minuscules ¦ shkronja të vogla ¦ ittri żgħar
+Capitale ¦ Me të madhe në fillim ¦ B’ittra kbira fil-bidu
+Plus petit ¦ Më i vogli ¦ L-iżgħar
+Plus grand ¦ Më i madhi ¦ L-akbar
+✨ Remplissage instantané ¦ ✨ Mbushje e menjëhershme ¦ ✨ Mili istantanju
+Σ Sous-totaux… ¦ Σ Nëntotale… ¦ Σ Subtotali…
+⊟ Plan : replier / déplier le détail ¦ ⊟ Plani: palos / hap detajet ¦ ⊟ Pjan: agħlaq / iftaħ id-dettall
+🎯 Valeur cible… ¦ 🎯 Vlera e synuar… ¦ 🎯 Valur fil-mira…
+🧮 Solveur… ¦ 🧮 Zgjidhësi… ¦ 🧮 Solver…
+📋 Tableau de scénarios (et si…)… ¦ 📋 Tabelë skenarësh (po sikur…)… ¦ 📋 Tabella tax-xenarji (u kieku…)…
+⏺ Enregistrer une action / ⏹ arrêter ¦ ⏺ Regjistro një veprim / ⏹ ndalo ¦ ⏺ Irreġistra azzjoni / ⏹ waqqaf
+▶ Actions enregistrées… ¦ ▶ Veprimet e regjistruara… ¦ ▶ Azzjonijiet irreġistrati…
+📈 Mini-graphique… ¦ 📈 Mini-grafik… ¦ 📈 Mini-grafika…
+Nombre de lignes ¦ Numri i rreshtave ¦ Numru ta’ ringieli
+Nombre de valeurs différentes ¦ Numri i vlerave të ndryshme ¦ Numru ta’ valuri differenti
+En % de la ligne ¦ Në % të rreshtit ¦ Bħala % tar-ringiela
+En % de la colonne ¦ Në % të kolonës ¦ Bħala % tal-kolonna
+En % du tout ¦ Në % të totalit ¦ Bħala % tat-total
+🔀 Tableau croisé dynamique… ¦ 🔀 Tabelë e kryqëzuar dinamike… ¦ 🔀 Tabella pivot…
+↻ Actualiser le tableau croisé ¦ ↻ Rifresko tabelën e kryqëzuar ¦ ↻ Aġġorna t-tabella pivot
+📊 Graphique vivant (suit la sélection) ¦ 📊 Grafik i gjallë (ndjek përzgjedhjen) ¦ 📊 Grafika ħajja (issegwi l-għażla)
+📊 Graphique vivant ¦ 📊 Grafik i gjallë ¦ 📊 Grafika ħajja
+Vide ¦ Bosh ¦ Vojt
+⛔ Formule en erreur ¦ ⛔ Formulë me gabim ¦ ⛔ Formula bi żball
+ƒ Formule ¦ ƒ Formulë ¦ ƒ Formula
+VRAI / FAUX ¦ E VËRTETË / E RREMË ¦ VERU / FALZ
+⚠️ Date impossible ¦ ⚠️ Datë e pamundur ¦ ⚠️ Data impossibbli
+📅 Date d’acte ¦ 📅 Datë akti ¦ 📅 Data ta’ att
+Conditions ¦ Kushtet ¦ Kundizzjonijiet
+Logique ¦ Logjika ¦ Loġika
+Conjoint ¦ Bashkëshorti ¦ Konjuġi
+Parents ¦ Prindërit ¦ Ġenituri
+N° de fiche ¦ Nr. i kartelës ¦ Nru tal-iskeda
+Date ¦ Data ¦ Data
+Personne(s) ¦ Person(a) ¦ Persuna/i
+Description ¦ Përshkrimi ¦ Deskrizzjoni
+N° d’événement ¦ Nr. i ngjarjes ¦ Nru tal-avveniment
+Foyer ¦ Familja ¦ Familja
+Employeur ¦ Punëdhënësi ¦ Impjegatur
+Situation ¦ Gjendja ¦ Stat
+Rue ¦ Rruga ¦ Triq
+N° ¦ Nr. ¦ Nru
+Adresse entière ¦ Adresa e plotë ¦ Indirizz sħiħ
+Deuxième prénom ¦ Emri i dytë ¦ It-tieni isem
+Titre ¦ Titulli ¦ Titlu
+Suffixe ¦ Prapashtesa ¦ Suffiss
+FamilySearch ¦ FamilySearch ¦ FamilySearch
+Description physique ¦ Përshkrimi fizik ¦ Deskrizzjoni fiżika
+Teint ¦ Çehrja ¦ Kulur tal-ġilda
+Origine ¦ Origjina ¦ Oriġini
+Vivant ? ¦ Gjallë? ¦ Ħaj?
+Modifié le ¦ Ndryshuar më ¦ Editjat fi
+Cause ¦ Shkaku ¦ Kawża
+Autorité ¦ Autoriteti ¦ Awtorità
+Confiance ¦ Besueshmëria ¦ Fiduċja
+Date convertie ¦ Data e konvertuar ¦ Data kkonvertita
+Autre date ¦ Datë tjetër ¦ Data oħra
+Informations en plus ¦ Informacion shtesë ¦ Informazzjoni żejda
+Calendrier ¦ Kalendari ¦ Kalendarju
+Relevés de dépouillement ¦ Zbërthime regjistrash ¦ Traskrizzjonijiet tal-indiċi tar-reġistri
+Noms de famille ¦ Mbiemrat ¦ Kunjomijiet
+Âges au décès ¦ Moshat në vdekje ¦ Etajiet fil-mewt
+Décès par siècle ¦ Vdekjet sipas shekullit ¦ Mwiet skont is-seklu
+Communes de naissance ¦ Komunat e lindjes ¦ Komuni tat-twelid
+Départements de naissance ¦ Departamentet e lindjes ¦ Dipartimenti tat-twelid
+Naissances par mois ¦ Lindjet sipas muajit ¦ Twelidijiet skont ix-xahar
+Personnes par génération ¦ Personat sipas brezit ¦ Persuni skont il-ġenerazzjoni
+Additionne des nombres ou des plages. ¦ Mbledh numra ose zona. ¦ Jgħodd flimkien numri jew firxiet.
+La moyenne des nombres. ¦ Mesatarja e numrave. ¦ Il-medja tan-numri.
+Le plus petit nombre. ¦ Numri më i vogël. ¦ L-iżgħar numru.
+Le plus grand nombre. ¦ Numri më i madh. ¦ L-akbar numru.
+Compte les cellules qui contiennent un nombre. ¦ Numëron qelizat që përmbajnë një numër. ¦ Jgħodd iċ-ċelluli li fihom numru.
+Compte les cellules qui ne sont pas vides. ¦ Numëron qelizat që nuk janë bosh. ¦ Jgħodd iċ-ċelluli li mhumiex vojta.
+Compte les cellules vides. ¦ Numëron qelizat bosh. ¦ Jgħodd iċ-ċelluli vojta.
+Multiplie des nombres. ¦ Shumëzon numra. ¦ Jimmultiplika numri.
+Arrondit au plus proche. ¦ Rrumbullakon te më i afërti. ¦ Jagħmel round għall-eqreb.
+Arrondit vers zéro. ¦ Rrumbullakon drejt zeros. ¦ Jagħmel round lejn iż-żero.
+Arrondit en s’éloignant de zéro. ¦ Rrumbullakon duke u larguar nga zero. ¦ Jagħmel round ’il bogħod miż-żero.
+La partie entière (arrondi vers le bas). ¦ Pjesa e plotë (rrumbullakim poshtë). ¦ Il-parti sħiħa (round ’l isfel).
+Le nombre sans son signe. ¦ Numri pa shenjën e tij. ¦ In-numru mingħajr is-sinjal tiegħu.
+Le reste d’une division. ¦ Mbetja e një pjesëtimi. ¦ Il-fdal ta’ diviżjoni.
+Un nombre élevé à une puissance. ¦ Një numër i ngritur në fuqi. ¦ Numru mgħolli għal qawwa.
+La racine carrée. ¦ Rrënja katrore. ¦ L-għerq kwadru.
+La valeur du milieu. ¦ Vlera e mesit. ¦ Il-valur tan-nofs.
+L’écart type (sur un échantillon). ¦ Devijimi standard (i një kampioni). ¦ Id-devjazzjoni standard (ta’ kampjun).
+La place d’un nombre dans une liste (1 = le plus grand ; ordre 1 = le plus petit d’abord). ¦ Vendi i një numri në një listë (1 = më i madhi; rendi 1 = më i vogli i pari). ¦ Il-post ta’ numru f’lista (1 = l-akbar; ordni 1 = l-iżgħar l-ewwel).
+La k-ième plus grande valeur. ¦ Vlera e k-të më e madhe. ¦ Il-valur k-esimu l-akbar.
+La k-ième plus petite valeur. ¦ Vlera e k-të më e vogël. ¦ Il-valur k-esimu l-iżgħar.
+Une valeur si le test est vrai, une autre sinon. ¦ Një vlerë nëse testi është i vërtetë, një tjetër përndryshe. ¦ Valur jekk it-test huwa veru, ieħor inkella.
+La valeur du premier test vrai. ¦ Vlera e testit të parë të vërtetë. ¦ Il-valur tal-ewwel test veru.
+La valeur, ou autre chose s’il y a une erreur. ¦ Vlera, ose diçka tjetër nëse ka gabim. ¦ Il-valur, jew xi ħaġa oħra jekk hemm żball.
+La valeur, ou autre chose si elle n’est pas trouvée (#N/A). ¦ Vlera, ose diçka tjetër nëse nuk gjendet (#N/A). ¦ Il-valur, jew xi ħaġa oħra jekk ma jinstabx (#N/A).
+VRAI si tous les tests sont vrais. ¦ VRAI nëse të gjitha testet janë të vërteta. ¦ VRAI jekk it-testijiet kollha huma veri.
+VRAI si au moins un test est vrai. ¦ VRAI nëse të paktën një test është i vërtetë. ¦ VRAI jekk mill-inqas test wieħed huwa veru.
+La valeur VRAI (comme le mot VRAI). ¦ Vlera VRAI (si fjala VRAI). ¦ Il-valur VRAI (bħall-kelma VRAI).
+La valeur FAUX (comme le mot FAUX). ¦ Vlera FAUX (si fjala FAUX). ¦ Il-valur FAUX (bħall-kelma FAUX).
+Inverse un test. ¦ Përmbys një test. ¦ Jaqleb test.
+Compte les cellules qui remplissent une condition (">60", "laboureur", "lab*"). ¦ Numëron qelizat që plotësojnë një kusht (">60", "laboureur", "lab*"). ¦ Jgħodd iċ-ċelluli li jissodisfaw kundizzjoni (">60", "laboureur", "lab*").
+Compte les lignes qui remplissent toutes les conditions. ¦ Numëron rreshtat që plotësojnë të gjitha kushtet. ¦ Jgħodd ir-ringieli li jissodisfaw il-kundizzjonijiet kollha.
+Additionne les cellules qui remplissent une condition. ¦ Mbledh qelizat që plotësojnë një kusht. ¦ Jgħodd flimkien iċ-ċelluli li jissodisfaw kundizzjoni.
+Additionne les lignes qui remplissent toutes les conditions. ¦ Mbledh rreshtat që plotësojnë të gjitha kushtet. ¦ Jgħodd flimkien ir-ringieli li jissodisfaw il-kundizzjonijiet kollha.
+La moyenne des cellules qui remplissent une condition. ¦ Mesatarja e qelizave që plotësojnë një kusht. ¦ Il-medja taċ-ċelluli li jissodisfaw kundizzjoni.
+Cherche dans la 1re colonne d’un tableau et rend la valeur d’une autre colonne. ¦ Kërkon në kolonën e 1-rë të një tabele dhe kthen vlerën e një kolone tjetër. ¦ Ifittex fl-1 kolonna ta’ tabella u jagħti l-valur ta’ kolonna oħra.
+Cherche dans la 1re ligne d’un tableau. ¦ Kërkon në rreshtin e 1-rë të një tabele. ¦ Ifittex fl-1 ringiela ta’ tabella.
+Cherche une valeur et rend celle d’à côté. ¦ Kërkon një vlerë dhe kthen atë ngjitur. ¦ Ifittex valur u jagħti dak ta’ ħdejh.
+La valeur à une ligne et une colonne de la plage. ¦ Vlera në një rresht dhe një kolonë të zonës. ¦ Il-valur f’ringiela u kolonna tal-firxa.
+La position d’une valeur dans une plage (type 0 = exactement). ¦ Pozicioni i një vlere në një zonë (lloji 0 = saktësisht). ¦ Il-pożizzjoni ta’ valur f’firxa (tip 0 = eżattament).
+La n-ième valeur de la liste. ¦ Vlera e n-të e listës. ¦ Il-valur n-esimu tal-lista.
+Les valeurs sans doublons (déborde sur les cases du dessous). ¦ Vlerat pa dublikata (derdhen në qelizat poshtë). ¦ Il-valuri mingħajr duplikati (jinfirxu fiċ-ċelluli t’isfel).
+La plage triée (ordre 1 = croissant, -1 = décroissant). ¦ Zona e renditur (rendi 1 = në rritje, -1 = në zbritje). ¦ Il-firxa ssortjata (ordni 1 = axxendenti, -1 = dixxendenti).
+Les lignes de la plage qui remplissent la condition (ex. =FILTRE(A2:C9; C2:C9>30)). ¦ Rreshtat e zonës që plotësojnë kushtin (p.sh. =FILTRE(A2:C9; C2:C9>30)). ¦ Ir-ringieli tal-firxa li jissodisfaw il-kundizzjoni (eż. =FILTRE(A2:C9; C2:C9>30)).
+Met des textes bout à bout. ¦ Bashkon tekste njëri pas tjetrit. ¦ Jgħaqqad testi wieħed wara l-ieħor.
+Met des textes bout à bout avec un séparateur. ¦ Bashkon tekste njëri pas tjetrit me një ndarës. ¦ Jgħaqqad testi wieħed wara l-ieħor b’separatur.
+Les premiers caractères. ¦ Karakteret e para. ¦ L-ewwel karattri.
+Les derniers caractères. ¦ Karakteret e fundit. ¦ L-aħħar karattri.
+Un morceau au milieu d’un texte. ¦ Një copë nga mesi i një teksti. ¦ Biċċa min-nofs ta’ test.
+Le nombre de caractères. ¦ Numri i karaktereve. ¦ In-numru ta’ karattri.
+En capitales. ¦ Me shkronja të mëdha. ¦ B’ittri kapitali.
+En minuscules. ¦ Me shkronja të vogla. ¦ B’ittri żgħar.
+Une capitale au début de chaque mot. ¦ Shkronjë e madhe në fillim të çdo fjale. ¦ Ittra kbira fil-bidu ta’ kull kelma.
+Retire les espaces en trop. ¦ Heq hapësirat e tepërta. ¦ Ineħħi l-ispazji żejda.
+Remplace un morceau de texte. ¦ Zëvendëson një copë teksti. ¦ Jissostitwixxi biċċa test.
+La position d’un texte dans un autre (sans tenir compte des capitales). ¦ Pozicioni i një teksti brenda një tjetri (pa marrë parasysh shkronjat e mëdha). ¦ Il-pożizzjoni ta’ test ġo ieħor (mingħajr ma jqis l-ittri kapitali).
+Un nombre ou une date écrits avec un format ("0,00", "0 %", "jj/mm/aaaa"). ¦ Një numër ose një datë e shkruar me një format ("0,00", "0 %", "jj/mm/aaaa"). ¦ Numru jew data miktuba b’format ("0,00", "0 %", "jj/mm/aaaa").
+Le nombre écrit dans un texte. ¦ Numri i shkruar në një tekst. ¦ In-numru miktub f’test.
+Fabrique une date. ¦ Krijon një datë. ¦ Jibni data.
+L’année d’une date (date d’acte comprise). ¦ Viti i një date (përfshirë datat e akteve). ¦ Is-sena ta’ data (inklużi d-dati tal-atti).
+Le mois d’une date (1 à 12). ¦ Muaji i një date (1 deri 12). ¦ Ix-xahar ta’ data (1 sa 12).
+Le jour du mois. ¦ Dita e muajit. ¦ Il-jum tax-xahar.
+Le jour de la semaine (type 1 : 1 = dimanche ; type 2 : 1 = lundi … 7 = dimanche ; type 3 : 0 = lundi). ¦ Dita e javës (lloji 1: 1 = e diel; lloji 2: 1 = e hënë … 7 = e diel; lloji 3: 0 = e hënë). ¦ Il-jum tal-ġimgħa (tip 1: 1 = il-Ħadd; tip 2: 1 = it-Tnejn … 7 = il-Ħadd; tip 3: 0 = it-Tnejn).
+La date du jour. ¦ Data e sotme. ¦ Id-data tal-lum.
+La date et l’heure. ¦ Data dhe ora. ¦ Id-data u l-ħin.
+L’écart entre deux dates, en années, mois ou jours (« AM » : mois en plus des années, « MJ » : jours en plus des mois, « AJ » : jours en plus des années ; « Y », « D », « YM », « MD », « YD » d’Excel compris). ¦ Diferenca midis dy datave, në vite, muaj ose ditë («AM»: muajt përtej viteve, «MJ»: ditët përtej muajve, «AJ»: ditët përtej viteve; kuptohen edhe «Y», «D», «YM», «MD», «YD» të Excel-it). ¦ Id-differenza bejn żewġ dati, fi snin, xhur jew jiem (“AM”: xhur lil hinn mis-snin, “MJ”: jiem lil hinn mix-xhur, “AJ”: jiem lil hinn mis-snin; jinftehmu wkoll “Y”, “D”, “YM”, “MD”, “YD” ta’ Excel).
+L’âge entre deux dates d’acte (« vers 1784 », « an II » compris) ; « ≈ » si une date est approximative. Unité : « ans », « mois » ou « jours ». ¦ Mosha midis dy datave aktesh (kuptohen «vers 1784», «an II»); «≈» nëse një datë është e përafërt. Njësia: «ans», «mois» ose «jours». ¦ L-età bejn żewġ dati ta’ atti (jinftehmu “vers 1784”, “an II”); “≈” jekk data hija approssimattiva. Unità: “ans”, “mois” jew “jours”.
+L’année trouvée dans un texte d’acte, même républicain (« baptisé le 3 frimaire an XII » → 1803). ¦ Viti i gjetur në tekstin e një akti, edhe republikan («baptisé le 3 frimaire an XII» → 1803). ¦ Is-sena misjuba f’test ta’ att, anke repubblikan (“baptisé le 3 frimaire an XII” → 1803).
+La date comprise, écrite proprement (comme « ✓ Compris : » des champs de date). ¦ Data e kuptuar, e shkruar pastër (si «✓ Kuptova:» e fushave të datës). ¦ Id-data mifhuma, miktuba sew (bħal “✓ Fhimt:” tal-oqsma tad-data).
+« jour », « mois », « année », « vers », « avant », « après » ou « entre ». ¦ «jour», «mois», «année», «vers», «avant», «après» ose «entre». ¦ “jour”, “mois”, “année”, “vers”, “avant”, “après” jew “entre”.
+La date dans le calendrier républicain. ¦ Data në kalendarin republikan. ¦ Id-data fil-kalendarju repubblikan.
+La génération d’un numéro Sosa (1 = toi, 2 et 3 = tes parents…). ¦ Brezi i një numri Sosa (1 = ti, 2 dhe 3 = prindërit e tu…). ¦ Il-ġenerazzjoni ta’ numru Sosa (1 = int, 2 u 3 = il-ġenituri tiegħek…).
+Le numéro Sosa du père (2 × n). ¦ Numri Sosa i babait (2 × n). ¦ In-numru Sosa tal-missier (2 × n).
+Le numéro Sosa de la mère (2 × n + 1). ¦ Numri Sosa i nënës (2 × n + 1). ¦ In-numru Sosa tal-omm (2 × n + 1).
+« paternel » ou « maternel » (le côté du Sosa 1). ¦ «paternel» ose «maternel» (ana e Sosa 1). ¦ “paternel” jew “maternel” (in-naħa tas-Sosa 1).
+Un petit graphique dans la case : "courbe", "barres" ou "gagné" (au-dessus ou au-dessous de zéro). ¦ Një grafik i vogël në qelizë: "courbe" (vijë), "barres" (shtylla) ose "gagné" (mbi ose nën zero). ¦ Grafika żgħira fiċ-ċellula: "courbe" (linja), "barres" (vireg) jew "gagné" (fuq jew taħt iż-żero).
+Donne un nom à une valeur pour l’utiliser dans le calcul. ¦ I jep një emër një vlere për ta përdorur në llogaritje. ¦ Jagħti isem lil valur biex tużah fil-kalkolu.
+Une petite fonction à soi, à utiliser dans LET, MAP, PAR.LIGNE… ¦ Një funksion i vogël yti, për ta përdorur në LET, MAP, PAR.LIGNE… ¦ Funzjoni żgħira tiegħek, biex tużaha f’LET, MAP, PAR.LIGNE…
+Applique la LAMBDA à chaque case de la plage. ¦ Zbaton LAMBDA-n në çdo qelizë të zonës. ¦ Japplika l-LAMBDA għal kull ċellula tal-firxa.
+Un résultat par ligne de la plage. ¦ Një rezultat për çdo rresht të zonës. ¦ Riżultat wieħed għal kull ringiela tal-firxa.
+Un résultat par colonne de la plage. ¦ Një rezultat për çdo kolonë të zonës. ¦ Riżultat wieħed għal kull kolonna tal-firxa.
+Cumule les cases une à une (un total qui avance). ¦ Grumbullon qelizat një nga një (një total që ecën). ¦ Jakkumula ċ-ċelluli waħda waħda (total li jimxi ’l quddiem).
+Comme REDUCE, avec chaque étape du total. ¦ Si REDUCE, me çdo hap të totalit. ¦ Bħal REDUCE, b’kull pass tat-total.
+=ligne laissée ¦ rresht i lënë mënjanë|rreshta të lënë mënjanë ¦ ringiela mwarrba|ringieli mwarrba|ringieli mwarrba|ringiela mwarrba|ringiela mwarrba
+=ligne remplie depuis l’app (tenue à jour) ¦ rresht i mbushur nga aplikacioni (mbahet i përditësuar)|rreshta të mbushur nga aplikacioni (mbahen të përditësuar) ¦ ringiela mimlija mill-app (miżmuma aġġornata)|ringieli mimlija mill-app (miżmuma aġġornati)|ringieli mimlija mill-app (miżmuma aġġornati)|ringiela mimlija mill-app (miżmuma aġġornata)|ringiela mimlija mill-app (miżmuma aġġornata)
+=ligne remplie depuis l’app ¦ rresht i mbushur nga aplikacioni|rreshta të mbushur nga aplikacioni ¦ ringiela mimlija mill-app|ringieli mimlija mill-app|ringieli mimlija mill-app|ringiela mimlija mill-app|ringiela mimlija mill-app
+=ligne à toi sans fiche : retirée ¦ rresht yti pa kartelë: u hoq|rreshta të tu pa kartelë: u hoqën ¦ ringiela tiegħek mingħajr skeda: tneħħiet|ringieli tiegħek mingħajr skeda: tneħħew|ringieli tiegħek mingħajr skeda: tneħħew|ringiela tiegħek mingħajr skeda: tneħħiet|ringiela tiegħek mingħajr skeda: tneħħiet
+=nouvelle fiche ¦ kartelë e re|kartela të reja ¦ skeda ġdida|skedi ġodda|skedi ġodda|skeda ġdida|skeda ġdida
+=reliée ¦ e lidhur|të lidhura ¦ marbuta|marbuta|marbuta|marbuta|marbuta
+=laissée ¦ e lënë mënjanë|të lëna mënjanë ¦ imwarrba|imwarrba|imwarrba|imwarrba|imwarrba
+=autre ligne ¦ rresht tjetër|rreshta të tjerë ¦ ringiela oħra|ringieli oħra|ringieli oħra|ringiela oħra|ringiela oħra
+=case ¦ qelizë|qeliza ¦ ċellula|ċelluli|ċelluli|ċellula|ċellula
+=autre case ¦ qelizë tjetër|qeliza të tjera ¦ ċellula oħra|ċelluli oħra|ċelluli oħra|ċellula oħra|ċellula oħra
+=case remplie ¦ qelizë e mbushur|qeliza të mbushura ¦ ċellula mimlija|ċelluli mimlija|ċelluli mimlija|ċellula mimlija|ċellula mimlija
+=groupe ¦ grup|grupe ¦ grupp|gruppi|gruppi|grupp|grupp
+=case changée ¦ qelizë e ndryshuar|qeliza të ndryshuara ¦ ċellula mibdula|ċelluli mibdula|ċelluli mibdula|ċellula mibdula|ċellula mibdula
+=scénario calculé ¦ skenar i llogaritur|skenarë të llogaritur ¦ xenarju kkalkulat|xenarji kkalkulati|xenarji kkalkulati|xenarju kkalkulat|xenarju kkalkulat
+=commande ¦ komandë|komanda ¦ kmand|kmandi|kmandi|kmand|kmand
+=fonction ¦ funksion|funksione ¦ funzjoni|funzjonijiet|funzjonijiet|funzjoni|funzjoni
+=valeur en plus de la première retirée ¦ vlerë përveç së parës u hoq|vlera përveç së parës u hoqën ¦ valur minbarra l-ewwel tneħħa|valuri minbarra l-ewwel tneħħew|valuri minbarra l-ewwel tneħħew|valur minbarra l-ewwel tneħħa|valur minbarra l-ewwel tneħħa
+=ligne supprimée ¦ rresht u fshi|rreshta u fshinë ¦ ringiela mħassra|ringieli mħassra|ringieli mħassra|ringiela mħassra|ringiela mħassra
+=colonne supprimée ¦ kolonë u fshi|kolona u fshinë ¦ kolonna mħassra|kolonni mħassra|kolonni mħassra|kolonna mħassra|kolonna mħassra
+=ligne en double supprimée ¦ rresht i dyfishtë u fshi|rreshta të dyfishtë u fshinë ¦ ringiela duplikata mħassra|ringieli duplikati mħassra|ringieli duplikati mħassra|ringiela duplikata mħassra|ringiela duplikata mħassra
+=ligne coupée en colonnes ¦ rresht u nda në kolona|rreshta u ndanë në kolona ¦ ringiela maqsuma f’kolonni|ringieli maqsuma f’kolonni|ringieli maqsuma f’kolonni|ringiela maqsuma f’kolonni|ringiela maqsuma f’kolonni
+=case modifiée ¦ qelizë e ndryshuar|qeliza të ndryshuara ¦ ċellula editjata|ċelluli editjati|ċelluli editjati|ċellula editjata|ċellula editjata
+=cellule ¦ qelizë|qeliza ¦ ċellula|ċelluli|ċelluli|ċellula|ċellula
+=cellule copiée ¦ qelizë e kopjuar|qeliza të kopjuara ¦ ċellula kkupjata|ċelluli kkupjati|ċelluli kkupjati|ċellula kkupjata|ċellula kkupjata
+=feuille importée ¦ fletë e importuar|fletë të importuara ¦ folja importata|folji importati|folji importati|folja importata|folja importata
+{sheets} ({rows}) ¦ {sheets} ({rows}) ¦ {sheets} ({rows})
+la date ¦ data ¦ id-data
+le début ¦ fillimi ¦ il-bidu
+la fin ¦ fundi ¦ it-tmiem
+il manque un guillemet « " » à la fin d’un texte ¦ mungon një thonjëz «"» në fund të një teksti ¦ nieqsa virgoletta “"” fl-aħħar ta’ test
+il manque une apostrophe à la fin du nom de feuille ¦ mungon një apostrof në fund të emrit të fletës ¦ nieqes appostrofu fl-aħħar tal-isem tal-folja
+après le nom de la feuille, il faut « ! » puis la cellule ¦ pas emrit të fletës duhet «!» dhe pastaj qeliza ¦ wara l-isem tal-folja, hemm bżonn “!” u mbagħad iċ-ċellula
+la formule s’arrête trop tôt ¦ formula ndalon shumë herët ¦ il-formula tieqaf kmieni wisq
+il manque une parenthèse « ) » ¦ mungon një kllapë «)» ¦ nieqsa parentesi “)”
+une parenthèse « ) » de trop ¦ një kllapë «)» e tepërt ¦ parentesi “)” żejda
+un « ; » à une place inattendue ¦ një «;» në një vend të papritur ¦ “;” f’post mhux mistenni
+un numéro Sosa est un nombre entier qui commence à 1 ¦ një numër Sosa është numër i plotë që fillon nga 1 ¦ numru Sosa huwa numru sħiħ li jibda minn 1
+il n’y a aucun nombre dans la plage ¦ nuk ka asnjë numër në zonë ¦ m’hemm l-ebda numru fil-firxa
+le diviseur de MOD vaut 0 ¦ pjesëtuesi i MOD është 0 ¦ id-diviżur ta’ MOD huwa 0
+pas de racine carrée d’un nombre négatif ¦ nuk ka rrënjë katrore të një numri negativ ¦ m’hemmx għerq kwadru ta’ numru negattiv
+aucun nombre ¦ asnjë numër ¦ l-ebda numru
+il faut au moins deux nombres ¦ duhen të paktën dy numra ¦ hemm bżonn mill-inqas żewġ numri
+aucun test n’est vrai ¦ asnjë test nuk është i vërtetë ¦ l-ebda test mhu veru
+les plages n’ont pas la même taille ¦ zonat nuk kanë të njëjtën madhësi ¦ il-firxiet m’għandhomx l-istess daqs
+aucune cellule ne remplit la condition ¦ asnjë qelizë nuk e plotëson kushtin ¦ l-ebda ċellula ma tissodisfa l-kundizzjoni
+le 2e morceau doit être une plage, par exemple A2:C40 ¦ pjesa e 2-të duhet të jetë një zonë, për shembull A2:C40 ¦ it-2 parti trid tkun firxa, pereżempju A2:C40
+le 2e morceau doit être une plage ¦ pjesa e 2-të duhet të jetë një zonë ¦ it-2 parti trid tkun firxa
+la plage est vide ¦ zona është bosh ¦ il-firxa hija vojta
+la condition doit avoir autant de lignes que la plage ¦ kushti duhet të ketë po aq rreshta sa zona ¦ il-kundizzjoni trid ikollha daqs ringieli daqs il-firxa
+aucune ligne ne remplit la condition ¦ asnjë rresht nuk e plotëson kushtin ¦ l-ebda ringiela ma tissodisfa l-kundizzjoni
+le début compte à partir de 1 ¦ fillimi numërohet nga 1 ¦ il-bidu jingħadd minn 1
+cette date n’a pas de mois ¦ kjo datë nuk ka muaj ¦ din id-data m’għandhiex xahar
+cette date n’a pas de jour ¦ kjo datë nuk ka ditë ¦ din id-data m’għandhiex jum
+il faut le jour ¦ duhet dita ¦ hemm bżonn il-jum
+le type de JOURSEM va de 1 à 3 (ou 11 à 17) ¦ lloji i JOURSEM shkon nga 1 deri 3 (ose 11 deri 17) ¦ it-tip ta’ JOURSEM imur minn 1 sa 3 (jew 11 sa 17)
+la fin est avant le début ¦ fundi është para fillimit ¦ it-tmiem huwa qabel il-bidu
+la seconde date est avant la première ¦ data e dytë është para të parës ¦ it-tieni data hija qabel l-ewwel waħda
+il faut une date au jour près ¦ duhet një datë e saktë deri në ditë ¦ hemm bżonn data eżatta sal-jum
+le calendrier républicain va du 22 septembre 1792 à 1805 ¦ kalendari republikan shkon nga 22 shtatori 1792 deri në 1805 ¦ il-kalendarju repubblikan imur mit-22 ta’ Settembru 1792 sal-1805
+il faut des nombres dans la plage ¦ duhen numra në zonë ¦ hemm bżonn numri fil-firxa
+il faut une LAMBDA(…) ¦ duhet një LAMBDA(…) ¦ hemm bżonn LAMBDA(…)
+trop de LAMBDA imbriquées ¦ tepër LAMBDA të ndërfutura ¦ wisq LAMBDA mdaħħla f’xulxin
+des paires « nom; valeur » puis le calcul ¦ çifte «emër; vlerë» dhe pastaj llogaritja ¦ pari “isem; valur” u mbagħad il-kalkolu
+un nom (lettres) avant chaque valeur ¦ një emër (shkronja) para çdo vlere ¦ isem (ittri) qabel kull valur
+il faut au moins le calcul ¦ duhet të paktën llogaritja ¦ hemm bżonn mill-inqas il-kalkolu
+les paramètres sont des noms ¦ parametrat janë emra ¦ il-parametri huma ismijiet
+le calcul n’a pas de résultat ¦ llogaritja nuk ka rezultat ¦ il-kalkolu m’għandux riżultat
+le résultat est trop grand pour être calculé ¦ rezultati është tepër i madh për t’u llogaritur ¦ ir-riżultat huwa kbir wisq biex jiġi kkalkulat
+une feuille supprimée ¦ një fletë e fshirë ¦ folja mħassra
+une plage entière ne tient pas dans une case : utilise SOMME(…), INDEX(…)… ¦ një zonë e tërë nuk futet në një qelizë: përdor SOMME(…), INDEX(…)… ¦ firxa sħiħa ma toqgħodx f’ċellula waħda: uża SOMME(…), INDEX(…)…
+puissance impossible ¦ fuqi e pamundur ¦ qawwa impossibbli
+une LAMBDA seule ne donne pas de valeur : utilise-la dans LET, MAP… ¦ një LAMBDA e vetme nuk jep vlerë: përdore në LET, MAP… ¦ LAMBDA waħedha ma tagħtix valur: użaha f’LET, MAP…
+la formule est trop longue ¦ formula është tepër e gjatë ¦ il-formula hija twila wisq
+la formule est trop imbriquée ¦ formula është tepër e ndërfutur ¦ il-formula hija mdaħħla wisq f’xulxin
+trop de morceaux dans une fonction ¦ tepër pjesë në një funksion ¦ wisq partijiet f’funzjoni
+la formule demande trop de calculs ¦ formula kërkon tepër llogaritje ¦ il-formula titlob wisq kalkoli
+le résultat est trop grand ¦ rezultati është tepër i madh ¦ ir-riżultat huwa kbir wisq
+la plage est trop grande ¦ zona është tepër e madhe ¦ il-firxa hija kbira wisq
+le fichier a trop de cellules ¦ skedari ka tepër qeliza ¦ il-fajl għandu wisq ċelluli

@@ -1,0 +1,422 @@
+fr ¦ is
+# ═════ zone « composants » : islandais (is) ═════
+Enregistrer ¦ Vista
+Annuler ¦ Hætta við
+Fermer ¦ Loka
+Supprimer ¦ Eyða
+Retirer ¦ Fjarlægja
+Modifier ¦ Breyta
+Créer ¦ Búa til
+Ajouter ¦ Bæta við
+Relier ¦ Tengja
+↺ Remettre comme au départ ¦ ↺ Upphafsstilla
+Remettre comme au départ ¦ Upphafsstilla
+↶ Annuler ¦ ↶ Afturkalla
+↷ Rétablir ¦ ↷ Endurgera
+Rétablir ¦ Endurgera
+Continuer ¦ Halda áfram
+Réessayer ¦ Reyna aftur
+Ouvrir ¦ Opna
+↗ Ouvrir ¦ ↗ Opna
+Renommer ¦ Endurnefna
+Dupliquer ¦ Tvöfalda
+Remplacer ¦ Skipta út
+Choisir ¦ Velja
+Choisir… ¦ Velja…
+Changer ¦ Breyta
+Exporter ¦ Flytja út
+Importer ¦ Flytja inn
+Imprimer ¦ Prenta
+🖨 Imprimer ¦ 🖨 Prenta
+💾 Enregistrer ¦ 💾 Vista
+⤒ Importer ¦ ⤒ Flytja inn
+⤓ Exporter ▾ ¦ ⤓ Flytja út ▾
+📋 Copier ¦ 📋 Afrita
+✓ Enregistré ¦ ✓ Vistað
+Enregistré ¦ Vistað
+Enregistrement… ¦ Vista…
+⚠️ Pas enregistré ¦ ⚠️ Ekki vistað
+• modifié ¦ • breytt
+Plein écran ¦ Allur skjárinn
+Plus d’actions ¦ Fleiri aðgerðir
+Aide ¦ Hjálp
+Aide : ¦ Hjálp:
+En savoir plus (FAQ) → ¦ Nánar (FAQ) →
+Clique pour lire la suite ¦ Smelltu til að lesa áfram
+Retour ¦ Til baka
+← Retour ¦ ← Til baka
+Oui ¦ Já
+Non ¦ Nei
+Aucune ¦ Ekkert
+Aucun ¦ Ekkert
+Tous ¦ Allir
+Toutes ¦ Allar
+Tout ¦ Allt
+Tout voir ¦ Sjá allt
+Voir tout ¦ Sjá allt
+Toutes ({n}) ¦ Allar ({n})
+Tout ({n}) ¦ Allt ({n})
+Rien pour l’instant ¦ Ekkert enn
+Rien ¦ Ekkert
+Sans titre ¦ Án titils
+Échap ¦ Esc
+Entrée ¦ Enter
+Début ¦ Home
+retour arrière ¦ backspace
+⚠️ ATTENTION ¦ ⚠️ ATHUGIÐ
+CONFIRMER ¦ STAÐFESTA
+Es-tu sûr ? ¦ Ertu viss?
+Confirmer ¦ Staðfesta
+Impossible d’annuler : {err} ¦ Ekki tókst að afturkalla: {err}
+Impossible de rétablir : {err} ¦ Ekki tókst að endurgera: {err}
+Déjà remis : rien à annuler de plus. ¦ Þegar endurheimt: ekkert meira að afturkalla.
+↶ Annulé : {what} ¦ ↶ Afturkallað: {what}
+↶ Annulé : « {what} » ¦ ↶ Afturkallað: „{what}“
+Pas de connexion avec LCNDA : rien n’est perdu, réessaie. ¦ Engin tenging við LCNDA: ekkert hefur glatast, reyndu aftur.
+Réponse illisible du serveur ¦ Ólæsilegt svar frá þjóninum
+Réponse illisible du serveur. ¦ Ólæsilegt svar frá þjóninum.
+Erreur du serveur. ¦ Villa á þjóninum.
+Réglage changé ¦ Stillingu breytt
+Réglage changé : « {what} » ¦ Stillingu breytt: „{what}“
+Réglages remis comme au départ ¦ Stillingar upphafsstilltar
+Chargement… ¦ Hleður…
+Chargement de la base… ¦ Hleður gagnagrunninum…
+Ouverture de la généalogie… ¦ Opnar ættfræðina…
+Chercher ¦ Leita
+Chercher… ¦ Leita…
+Rechercher ¦ Leita
+Vider la case (Échap) ¦ Tæma reitinn (Esc)
+Vider la case ¦ Tæma reitinn
+Touche « / » : aller dans la case de recherche ¦ Lykillinn „/“: fara í leitarreitinn
+Filtrer ¦ Sía
+Filtrer ▾ ¦ Sía ▾
+Tout effacer ¦ Hreinsa allt
+Retirer ce filtre ¦ Fjarlægja þessa síu
+Trier ¦ Raða
+Trier : ¦ Raða:
+Les plus récents ¦ Nýjustu fyrst
+Les plus anciens ¦ Elstu fyrst
+Les plus récentes ¦ Nýjustu fyrst
+Les plus anciennes ¦ Elstu fyrst
+Nom A → Z ¦ Nafn A → Ö
+Nom Z → A ¦ Nafn Ö → A
+Liste ¦ Listi
+Fiches ¦ Spjöld
+En liste : une ligne par élément (vignette, nom, détails, date) ¦ Sem listi: ein lína fyrir hvert atriði (smámynd, nafn, nánar, dagsetning)
+En fiches : une carte par élément, avec une grande vignette ¦ Sem spjöld: eitt spjald fyrir hvert atriði, með stórri smámynd
+Affichage des {what} ¦ Birting: {what}
+Voir le suivant ↓ ¦ Sjá næsta ↓
+Voir la suivante ↓ ¦ Sjá næstu ↓
+Voir les {n} suivants ↓ ¦ Sjá næstu {n} ↓
+Voir les {n} suivantes ↓ ¦ Sjá næstu {n} ↓
+{n} éléments ¦ Atriði: {n}
+=élément ¦ atriði|atriði
+éléments ¦ atriði
+=personne ¦ einstaklingur|einstaklingar
+=animal ¦ dýr|dýr
+=fiche ¦ spjald|spjöld
+=lieu ¦ staður|staðir
+=commune ¦ sveitarfélag|sveitarfélög
+=ville ¦ borg|borgir
+=chose ¦ atriði|atriði
+=caractère ¦ stafur|stafir
+=page ¦ síða|síður
+=document ¦ skjal|skjöl
+=média ¦ miðill|miðlar
+=source ¦ heimild|heimildir
+=événement ¦ atburður|atburðir
+=étiquette ¦ merki|merki
+=enquête ¦ athugun|athuganir
+=modification ¦ breyting|breytingar
+=famille ¦ fjölskylda|fjölskyldur
+=génération ¦ kynslóð|kynslóðir
+=réglage ¦ stilling|stillingar
+=erreur captée ¦ gripin villa|gripnar villur
+=jour ¦ dagur|dagar
+=type ¦ tegund|tegundir
+=branche ¦ grein|greinar
+=doublon possible ¦ möguleg tvítekning|mögulegar tvítekningar
+=chose à vérifier ¦ atriði til að athuga|atriði til að athuga
+=album ¦ plata|plötur
+=chanson ¦ lag|lög
+=titre ¦ titill|titlar
+Nom, prénom… (2 lettres suffisent) ¦ Nafn, eiginnafn… (2 stafir duga)
+Ville, village, paroisse… ¦ Borg, þorp, sókn…
+＋ Ajouter une personne… ¦ ＋ Bæta við einstaklingi…
+＋ Ajouter un lieu… ¦ ＋ Bæta við stað…
+＋ Ajouter une source… ¦ ＋ Bæta við heimild…
+＋ Ajouter un média… ¦ ＋ Bæta við miðli…
+＋ Ajouter une enquête… ¦ ＋ Bæta við athugun…
+＋ Ajouter une étiquette… ¦ ＋ Bæta við merki…
+＋ Ajouter un événement… ¦ ＋ Bæta við atburði…
+＋ Ajouter un animal… ¦ ＋ Bæta við dýri…
+＋ Ajouter… ¦ ＋ Bæta við…
+↗ Fiche ¦ ↗ Spjald
+↗ Lieu ¦ ↗ Staður
+Aucune fiche ¦ Ekkert spjald
+Aucun lieu ¦ Enginn staður
+Aucune source ¦ Engin heimild
+Aucun média ¦ Enginn miðill
+Aucune enquête ¦ Engin athugun
+Aucune étiquette ¦ Ekkert merki
+Aucun événement ¦ Enginn atburður
+Aucun animal ¦ Ekkert dýr
+Créer la fiche ¦ Búa til spjaldið
+Créer le lieu ¦ Búa til staðinn
+Créer une fiche ¦ Búa til spjald
+＋ Créer sa fiche ¦ ＋ Búa til spjald fyrir hann eða hana
+👤 Personnes ¦ 👤 Einstaklingar
+📍 Lieux ¦ 📍 Staðir
+📚 Sources ¦ 📚 Heimildir
+🖼 Médias ¦ 🖼 Miðlar
+🔍 Enquêtes ¦ 🔍 Athuganir
+🏷 Étiquettes ¦ 🏷 Merki
+📅 Événements ¦ 📅 Atburðir
+🐾 Animaux ¦ 🐾 Dýr
+✎ Garder le texte « {q} » sans fiche ¦ ✎ Halda textanum „{q}“ án spjalds
+🗺 Choisir sur la carte ¦ 🗺 Velja á kortinu
+{what} de ta base ¦ {what} í gagnagrunninum þínum
+{what} de France ¦ {what} í Frakklandi
+{what} du monde ¦ {what} í heiminum
+300 villes du monde et plus ¦ yfir 300 borgir í heiminum
+{what} trouvés ¦ {what} fundust
+{none} pour « {q} ». Vérifie l’orthographe ¦ {none} fyrir „{q}“. Athugaðu stafsetninguna
+{none} pour l’instant ¦ {none} enn
+, ou : ¦ , eða:
+↹ Tab passe d’un filtre à l’autre ¦ ↹ Tab fer á milli sía
+↑ ↓ Entrée ¦ ↑ ↓ Enter
+… la liste défile ¦ … listinn flettist
+⭐ Personne principale ¦ ⭐ Aðaleinstaklingur
+Autres personnes principales ¦ Aðrir aðaleinstaklingar
+Personnes principales ¦ Aðaleinstaklingar
+Personnes secondaires ¦ Aukaeinstaklingar
+au cœur de la recherche ¦ í kjarna rannsóknarinnar
+témoins, voisins, parrains, pistes… ¦ vottar, nágrannar, guðforeldrar, vísbendingar…
+Choisir la personne principale… ¦ Velja aðaleinstaklinginn…
+＋ Ajouter une personne principale… ¦ ＋ Bæta við aðaleinstaklingi…
+＋ Ajouter une personne secondaire… ¦ ＋ Bæta við aukaeinstaklingi…
+Changer le rôle ¦ Breyta hlutverki
+Donner un rôle (facultatif) ¦ Gefa hlutverk (valfrjálst)
+rôle ▾ ¦ hlutverk ▾
+Rôle libre ¦ Frjálst hlutverk
+Retirer le rôle ¦ Fjarlægja hlutverkið
+Passer en secondaire ¦ Færa í aukaeinstaklinga
+Passer en principale ¦ Færa í aðaleinstaklinga
+Autre mot… (Entrée) ¦ Annað orð… (Enter)
+témoin ¦ vottur
+déclarant ¦ tilkynnandi
+parrain ¦ guðfaðir
+marraine ¦ guðmóðir
+voisin ¦ nágranni
+employeur ¦ vinnuveitandi
+officier ¦ embættismaður
+épouse ¦ eiginkona
+époux ¦ eiginmaður
+sans fiche ¦ án spjalds
+Personne sans fiche : clic pour créer sa fiche ¦ Einstaklingur án spjalds: smelltu til að búa til spjald
+Ouvrir la fiche ¦ Opna spjaldið
+Voir sur la carte ¦ Sjá á kortinu
+Aucune personne choisie ¦ Enginn einstaklingur valinn
+Choisir des personnes ¦ Velja einstaklinga
+Choisir une personne ¦ Velja einstakling
+Choisir des lieux ¦ Velja staði
+Choisir un lieu ¦ Velja stað
+Carte : clique l’endroit du lieu ¦ Kort: smelltu þar sem staðurinn er
+Clique l’endroit du lieu sur la carte (glisse pour te déplacer, molette pour zoomer). ¦ Smelltu þar sem staðurinn er á kortinu (dragðu til að færa þig, skrunhjól til að þysja).
+＋ Créer un lieu ici ¦ ＋ Búa til stað hér
+Nom du lieu ¦ Heiti staðarins
+Lieux proches… ¦ Staðir í grenndinni…
+Aucun lieu connu près d’ici : crée-le ci-dessous. ¦ Enginn þekktur staður hér nálægt: búðu hann til hér fyrir neðan.
+Donne un nom au lieu. ¦ Gefðu staðnum nafn.
+Dézoomer ¦ Þysja út
+Lieu impossible à ajouter ¦ Ekki hægt að bæta staðnum við
+Crée d’abord la fiche dans Personnes, puis choisis-la ici. ¦ Búðu fyrst til spjaldið í Einstaklingar og veldu það svo hér.
+Crée-la d’abord dans l’outil, puis choisis-la ici. ¦ Búðu það fyrst til í verkfærinu og veldu það svo hér.
+Personne ¦ Einstaklingur
+Lieu ¦ Staður
+À corriger. ¦ Þarf að laga.
+<b>{what} à corriger</b> avant d’enregistrer. ¦ <b>{what} til að laga</b> áður en þú vistar.
+Coche cette case pour continuer. ¦ Hakaðu í þennan reit til að halda áfram.
+Choisis une des possibilités. ¦ Veldu einn af möguleikunum.
+Choisis un fichier. ¦ Veldu skrá.
+Choisis dans la liste. ¦ Veldu úr listanum.
+Ce champ est à remplir. ¦ Það þarf að fylla út þennan reit.
+Écris un nombre (par exemple 12 ou 3,5). ¦ Skrifaðu tölu (til dæmis 12 eða 3,5).
+Ce n’est pas compris : vérifie ce qui est écrit. ¦ Þetta skilst ekki: athugaðu það sem er skrifað.
+Écris une adresse e-mail complète (nom@exemple.fr). ¦ Skrifaðu heilt netfang (nafn@daemi.is).
+Écris une adresse web complète (https://…). ¦ Skrifaðu heila vefslóð (https://…).
+Ce n’est pas au bon format. ¦ Þetta er ekki á réttu sniði.
+Au moins {x}. ¦ Að minnsta kosti {x}.
+Au plus {x}. ¦ Í mesta lagi {x}.
+Au moins {x} (là : {y}). ¦ Að minnsta kosti {x} (núna: {y}).
+Cette valeur n’est pas permise ici : prends un nombre rond. ¦ Þetta gildi er ekki leyft hér: notaðu heila tölu.
+Donne un nom à ces réglages. ¦ Gefðu þessum stillingum nafn.
+Choisir une couleur ¦ Velja lit
+Couleurs de l’app ¦ Litir appsins
+Récentes ¦ Nýlegir
+Choisir une autre couleur ¦ Velja annan lit
+Prendre une couleur n’importe où dans la fenêtre ¦ Taka lit hvar sem er í glugganum
+Code de la couleur ¦ Litakóði
+Remettre la couleur d’avant ¦ Setja fyrri lit aftur
+Double-clic : revenir à la valeur de départ ¦ Tvísmella: aftur í upphafsgildið
+Choisir une police ¦ Velja letur
+Chercher une police… ¦ Leita að letri…
+Les polices de l’ordinateur… ¦ Letur tölvunnar…
+Aucune police pour « {q} ». ¦ Ekkert letur fyrir „{q}“.
+Lecture des polices… ¦ Les letrin…
+🔓 Voir toutes les polices de l’ordinateur ¦ 🔓 Sjá öll letur tölvunnar
+Le navigateur te demandera la permission. ¦ Vafrinn biður þig um leyfi.
+CONSEILLÉE ¦ MÆLT MEÐ
+RÉCENTE ¦ NÝLEGT
+DE L’APP ¦ ÚR APPINU
+TAPÉE ¦ SLEGIÐ INN
+Réglages enregistrés ¦ Vistaðar stillingar
+Nom de ces réglages ¦ Heiti þessara stillinga
+Nom du réglage ¦ Heiti stillingarinnar
+Aucun réglage enregistré pour l’instant. ¦ Engar vistaðar stillingar enn.
+＋ Enregistrer les réglages actuels ¦ ＋ Vista núverandi stillingar
+Un réglage « {name} » existe déjà. ¦ Stilling sem heitir „{name}“ er þegar til.
+Le remplacer ? ¦ Skipta henni út?
+Réglages gardés sous « {name} ». ¦ Stillingar geymdar undir heitinu „{name}“.
+Remplacer par les réglages actuels ¦ Skipta út fyrir núverandi stillingar
+Remplacer « {name} » par les réglages actuels ? ¦ Skipta „{name}“ út fyrir núverandi stillingar?
+Réglage mis à jour. ¦ Stilling uppfærð.
+Réglages « {name} » appliqués. ¦ Stillingarnar „{name}“ teknar í notkun.
+Exporter (fichier .json) ¦ Flytja út (.json-skrá)
+Remplacer, renommer, dupliquer, exporter, supprimer ¦ Skipta út, endurnefna, tvöfalda, flytja út, eyða
+Exporter (PDF, image, impression…) ¦ Flytja út (PDF, mynd, prentun…)
+⤓ Exporter en {fmt} ¦ ⤓ Flytja út sem {fmt}
+Nom du fichier ¦ Heiti skrárinnar
+Qualité ¦ Gæði
+Fond perdu et traits de coupe (imprimeur) ¦ Blæðing og skurðarmerki (prentsmiðja)
+Ranger aussi une copie dans les médias ¦ Geyma líka afrit í miðlunum
+Aperçu ¦ Forskoðun
+Aperçu… ¦ Forskoðun…
+Pas d’aperçu ¦ Engin forskoðun
+Format du papier ¦ Pappírsstærð
+Ce qu’on imprime ¦ Það sem er prentað
+Pages à imprimer ¦ Síður til að prenta
+Celle affichée ¦ Sú sem birtist
+Page précédente ¦ Fyrri síða
+Page suivante ¦ Næsta síða
+Aperçu de l’impression ¦ Prentforskoðun
+Exemplaires ¦ Eintök
+Portrait ¦ Lóðrétt
+Paysage ¦ Lárétt
+L’écran affiché ¦ Skjárinn sem birtist
+Dans la fenêtre qui s’ouvre, choisis « Enregistrer au format PDF » comme imprimante. ¦ Í glugganum sem opnast skaltu velja „Vista sem PDF“ sem prentara.
+Dans la fenêtre d’impression, choisis « Enregistrer au format PDF ». ¦ Í prentglugganum skaltu velja „Vista sem PDF“.
+IMPORTER · ÉTAPE 1 SUR 3 ¦ FLYTJA INN · SKREF 1 AF 3
+IMPORTER · ÉTAPE {n} SUR 3 ¦ FLYTJA INN · SKREF {n} AF 3
+📁 Glisse ici le fichier, colle-le (⌘V) ou choisis-le sur l’ordinateur ¦ 📁 Dragðu skrána hingað, límdu hana (⌘V) eða veldu hana í tölvunni
+📁 Glisse ici les fichiers, colle-les (⌘V) ou choisis-les sur l’ordinateur ¦ 📁 Dragðu skrárnar hingað, límdu þær (⌘V) eða veldu þær í tölvunni
+Lecture du fichier… ¦ Les skrána…
+Ce fichier ne peut pas être importé : {err} ¦ Ekki er hægt að flytja þessa skrá inn: {err}
+Voilà ce qui va entrer : {sum}. ¦ Þetta verður flutt inn: {sum}.
+⤒ Importer {what} ¦ ⤒ Flytja inn {what}
+{what} importés. ¦ {what} flutt inn.
+Import terminé. ¦ Innflutningi lokið.
+Impossible d’importer : {err} ¦ Ekki tókst að flytja inn: {err}
+Importer un fichier ¦ Flytja inn skrá
+⤒ Importer un fichier… ¦ ⤒ Flytja inn skrá…
+Ce type de fichier n’est pas accepté ici. ¦ Þessi skráartegund er ekki tekin gild hér.
+Il entre dans les médias de l’app et se place dans l’outil. ¦ Hún fer í miðla appsins og er sett í verkfærið.
+📁 Choisir un fichier ¦ 📁 Velja skrá
+Ce fichier .json est abîmé : il ne peut pas être lu. ¦ Þessi .json-skrá er skemmd: það er ekki hægt að lesa hana.
+Ajuster à la fenêtre ¦ Laga að glugganum
+Zoom arrière ¦ Þysja út
+Zoom avant ¦ Þysja inn
+Règles ¦ Reglustikur
+Règles : montrer ou cacher ¦ Reglustikur: sýna eða fela
+Aimanter : les objets se collent aux autres et à la grille (Alt pour s’en passer en glissant) ¦ Grípa: hlutir festast hver við annan og við netið (Alt til að sleppa því á meðan þú dregur)
+Les autres façons d’enregistrer ¦ Aðrar leiðir til að vista
+Ranger, montrer ou cacher les boutons ¦ Raða, sýna eða fela hnappana
+Compris ¦ Skilið
+Choisir sur un calendrier ¦ Velja á dagatali
+Durée ¦ Tímalengd
+aujourd’hui ¦ í dag
+aujourd’hui à {h} ¦ í dag kl. {h}
+hier ¦ í gær
+hier à {h} ¦ í gær kl. {h}
+{day} à {h} ¦ {day} kl. {h}
+Modifié ¦ Breytt
+Créé ¦ Búið til
+Ajouté ¦ Bætt við
+Aucune battue ¦ Engin leit
+Aucune maison ¦ Ekkert hús
+Aucune revue ¦ Ekkert tímarit
+Aucun employeur ¦ Enginn vinnuveitandi
+Aucun recensement ¦ Ekkert manntal
+🎨 Œuvres ¦ 🎨 Verk
+Chercher un graphique… (ex. naissances, camembert) ¦ Leita að grafi… (t.d. fæðingar, kökurit)
+Aucun graphique ¦ Ekkert graf
+Créer le graphique ¦ Búa til grafið
+Nouveau graphique ¦ Nýtt graf
+Aucun projet ¦ Ekkert verkefni
+Aucun tableau ¦ Engin tafla
+Aucune mise en page ¦ Ekkert umbrot
+📐 Mises en page ¦ 📐 Umbrot
+Aucun diagramme ¦ Engin skýringarmynd
+Aucune carte ¦ Ekkert kort
+Aucune transcription ¦ Engin uppskrift
+Aucune carte de photos ¦ Ekkert myndakort
+Aucun classeur ¦ Engin vinnubók
+Aucun document ¦ Ekkert skjal
+Aucune parcelle ¦ Engin landspilda
+Nom de l’objet, sorte… (2 lettres suffisent) ¦ Heiti hlutarins, tegund… (2 stafir duga)
+Aucun objet de famille ¦ Enginn fjölskyldugripur
+Nom du défunt, notaire, année… (2 lettres suffisent) ¦ Nafn hins látna, lögbókandi, ár… (2 stafir duga)
+Aucun inventaire après décès ¦ Engin dánarbúsuppskrift
+⚖️ Inventaires après décès ¦ ⚖️ Dánarbúsuppskriftir
+Nom, espèce, code de bague, puce… (2 lettres suffisent) ¦ Nafn, tegund, hringanúmer, örmerki… (2 stafir duga)
+Nom du site… (2 lettres suffisent) ¦ Heiti svæðisins… (2 stafir duga)
+Aucun site ¦ Ekkert svæði
+Nom du groupe, de la meute… (2 lettres suffisent) ¦ Heiti hópsins, hjarðarinnar… (2 stafir duga)
+Aucun groupe ¦ Enginn hópur
+👥 Groupes d’animaux ¦ 👥 Dýrahópar
+Maladie, cause de décès… (2 lettres suffisent) ¦ Sjúkdómur, dánarorsök… (2 stafir duga)
+＋ Choisir une maladie… ¦ ＋ Velja sjúkdóm…
+Aucune maladie notée ¦ Enginn sjúkdómur skráður
+🩺 Santé ¦ 🩺 Heilsa
+Chercher une de mes cartes… ¦ Leita í kortunum mínum…
+＋ Choisir une carte… ¦ ＋ Velja kort…
+Nom de la branche… ¦ Heiti greinarinnar…
+＋ Choisir une branche… ¦ ＋ Velja grein…
+Aucune branche ¦ Engin grein
+Nom d’une de mes couches… ¦ Heiti á einu af lögunum mínum…
+＋ Choisir une couche… ¦ ＋ Velja lag…
+Aucune couche dessinée ¦ Ekkert teiknað lag
+Commune, cote, année… (2 lettres suffisent) ¦ Sveitarfélag, safnmark, ár… (2 stafir duga)
+🔗 Relier un dépouillement… ¦ 🔗 Tengja skráningu…
+Aucun dépouillement ¦ Engin skráning
+Nom, prénom d’un contact… (2 lettres suffisent) ¦ Nafn, eiginnafn tengiliðar… (2 stafir duga)
+Aucun contact ¦ Enginn tengiliður
+Chercher une de mes listes… ¦ Leita í listunum mínum…
+Aucune liste ¦ Enginn listi
+Événement, personne, année… (2 lettres suffisent) ¦ Atburður, einstaklingur, ár… (2 stafir duga)
+Aucun service d’archives ¦ Ekkert skjalasafn
+Créer le service ¦ Búa til skjalasafnið
+🏛 Services d’archives ¦ 🏛 Skjalasöfn
+Source, page, nom de la personne citée… ¦ Heimild, síða, nafn þess sem vitnað er í…
+＋ Choisir une citation… ¦ ＋ Velja tilvitnun…
+Aucune citation ¦ Engin tilvitnun
+— une seule ¦ — aðeins eitt
+＋ Ajouter une maison… ¦ ＋ Bæta við húsi…
+＋ Ajouter une fiche… ¦ ＋ Bæta við spjaldi…
+＋ Ajouter un document… ¦ ＋ Bæta við skjali…
+＋ Ajouter une carte… ¦ ＋ Bæta við korti…
+＋ Ajouter un groupe… ¦ ＋ Bæta við hópi…
+＋ Ajouter un contact… ¦ ＋ Bæta við tengilið…
+＋ Ajouter une liste… ¦ ＋ Bæta við lista…
+Ce réglage prend ce qui est à l’écran maintenant. ¦ Þessi stilling tekur það sem er á skjánum núna.
+L’ancienne version de ce réglage ne sera plus gardée. ¦ Gamla útgáfa þessarar stillingar verður ekki lengur geymd.
+Le nom devient modifiable sur la ligne. ¦ Það má breyta nafninu beint á línunni.
+Une copie, à modifier sans toucher à l’original. ¦ Afrit, sem má breyta án þess að snerta upprunalega.
+Pour le garder, ou l’ouvrir sur un autre ordinateur. ¦ Til að geyma það, eða opna það á annarri tölvu.
+On peut encore l’annuler juste après. ¦ Það má enn afturkalla það strax á eftir.
+Un fichier lcnda-reglage-….json exporté ici ou sur un autre ordinateur ¦ Skrá lcnda-reglage-….json sem var flutt út hér eða á annarri tölvu
+Ce navigateur ne donne pas la liste des polices : voici les polices courantes trouvées sur l’ordinateur. Pour une autre, tape son nom exact. ¦ Þessi vafri gefur ekki upp lista yfir letur: hér eru algeng letur sem fundust á tölvunni. Fyrir annað letur skaltu slá inn nákvæmt heiti þess.
+La liste des polices n’a pas pu être lue. Réessaie. ¦ Ekki tókst að lesa lista yfir letur. Reyndu aftur.
+Un autre format de la liste, ou un format libre (gardé dans « Mes formats ») ¦ Önnur stærð af listanum, eða frjáls stærð (geymd í „Stærðirnar mínar“)
+Un exemplaire au moins. ¦ Að minnsta kosti eitt eintak.
+{n} exemplaires au plus. ¦ Í mesta lagi {n} eintök.

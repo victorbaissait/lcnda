@@ -7,6 +7,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => { const I = (typeof window !== 'undefined' ? window : globalThis).LCNDA_I18N; if (v) v = Object.fromEntries(Object.entries(v).map(([k, x]) => [k, typeof x === 'number' ? String(x) : x])); return I ? I.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m)) : s); }; // 🌐 textes traduits (docs/I18N.md) ; nombres gardés tels quels
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     for (const key of ['personBlocks', 'dashboard', 'lists', 'graphStats']) ext[key] = ext[key] || {};
@@ -33,7 +34,7 @@
         S().maintenanceTab = b.dataset.hOpenMaint;
         A().setModule('maintenance');
     });
-    const personLink = (id, name, extra = '') => id ? `<button type="button" class="table-link" data-h-person="${Number(id)}">${esc(name || 'Personne')}</button>${extra ? ` <small>${esc(extra)}</small>` : ''}` : esc(name || '');
+    const personLink = (id, name, extra = '') => id ? `<button type="button" class="table-link" data-h-person="${Number(id)}">${esc(name || i18n('Personne'))}</button>${extra ? ` <small>${esc(extra)}</small>` : ''}` : esc(name || '');
     // K5 : l’en-tête unique (app-pages.js) ; le sur-titre est l’endroit où l’on est, calculé d’après le menu
     const header = (eyebrow, title, intro, actions = '') => window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|RÉGLAGES|ADN|RECHERCHE|STATISTIQUES)$/.test(eyebrow), actions: actions ? [actions] : []});
     const fold = text => String(text || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[’']/g, "'");
@@ -48,36 +49,36 @@
         if (kiosk.on && !banner) {
             banner = document.createElement('div');
             banner.id = 'kiosk-banner';
-            banner.innerHTML = '<span>🔒 <strong>Mode consultation</strong> : parcours la généalogie librement, rien ne peut être modifié ni supprimé.</span><button type="button" class="button small" data-kiosk-exit>Quitter la consultation</button>';
+            banner.innerHTML = `<span>🔒 ${i18n('<strong>Mode consultation</strong> : parcours la généalogie librement, rien ne peut être modifié ni supprimé.')}</span><button type="button" class="button small" data-kiosk-exit>${i18n('Quitter la consultation')}</button>`;
             document.body.prepend(banner);
         } else if (!kiosk.on && banner) banner.remove();
         const t = document.getElementById('kiosk-toggle');
-        if (t) { t.classList.toggle('is-active', !!kiosk.on); t.title = kiosk.on ? 'Quitter le mode consultation (mot de passe)' : 'Mode consultation : la famille peut tout parcourir sans rien modifier'; }
+        if (t) { t.classList.toggle('is-active', !!kiosk.on); t.title = kiosk.on ? i18n('Quitter le mode consultation (mot de passe)') : i18n('Mode consultation : la famille peut tout parcourir sans rien modifier'); }
     }
     function passwordDialog(title, text, confirmTwice, onOk) {
         const dialog = document.createElement('dialog');
         dialog.className = 'modal h-modal';
         dialog.innerHTML = `<form method="dialog" class="h-dialog-form"><div class="modal-head"><div><span class="eyebrow">CONSULTATION</span><h2>${esc(title)}</h2></div><button class="icon-button" type="button" data-close>×</button></div>
-            <div class="h-dialog-body"><p>${text}</p><label class="h-block-label">Mot de passe<input type="password" name="p1" autocomplete="new-password" required></label>${confirmTwice ? '<label class="h-block-label">Encore une fois<input type="password" name="p2" autocomplete="new-password" required></label>' : ''}</div>
-            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-close>Annuler</button><button type="submit" class="button">Valider</button></div></form>`;
+            <div class="h-dialog-body"><p>${text}</p><label class="h-block-label">${i18n('Mot de passe')}<input type="password" name="p1" autocomplete="new-password" required></label>${confirmTwice ? `<label class="h-block-label">${i18n('Encore une fois')}<input type="password" name="p2" autocomplete="new-password" required></label>` : ''}</div>
+            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-close>${i18n('Annuler')}</button><button type="submit" class="button">Valider</button></div></form>`;
         document.body.appendChild(dialog);
         dialog.addEventListener('close', () => dialog.remove());
         dialog.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => dialog.close()));
         dialog.querySelector('form').addEventListener('submit', async event => {
             event.preventDefault();
             const f = event.currentTarget;
-            if (confirmTwice && f.p1.value !== f.p2.value) { toast('Les deux mots de passe sont différents.', 'error'); return; }
+            if (confirmTwice && f.p1.value !== f.p2.value) { toast(i18n('Les deux mots de passe sont différents.'), 'error'); return; }
             try { await onOk(f.p1.value); dialog.close(); } catch (error) { toast(error.message, 'error'); f.p1.select(); }
         });
         dialog.showModal();
         dialog.querySelector('input').focus();
     }
     async function exitKiosk() {
-        passwordDialog('Quitter la consultation', 'Donne le mot de passe choisi en entrant dans ce mode.', false, async password => {
+        passwordDialog(i18n('Quitter la consultation'), i18n('Donne le mot de passe choisi en entrant dans ce mode.'), false, async password => {
             const r = await fetch('api.php?action=kiosk_exit', {method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRF-Token': S().csrf}, body: JSON.stringify({password, csrf: S().csrf})});
             const data = await r.json().catch(() => ({}));
-            if (!r.ok || data.error) throw new Error(data.error || 'Mot de passe incorrect.');
-            toast('Mode consultation terminé.');
+            if (!r.ok || data.error) throw new Error(data.error || i18n('Mot de passe incorrect.'));
+            toast(i18n('Mode consultation terminé.'));
             location.reload();
         });
     }
@@ -85,9 +86,9 @@
         if (event.target.closest?.('[data-kiosk-exit]')) { exitKiosk(); return; }
         if (!event.target.closest?.('#kiosk-toggle')) return;
         if (kiosk.on) { exitKiosk(); return; }
-        passwordDialog('Passer en mode consultation', 'La famille pourra parcourir ta généalogie sur cet ordinateur sans rien pouvoir modifier ni supprimer. <b>Choisis un mot de passe</b> : il sera demandé pour sortir de ce mode. (Oublié ? Supprime le fichier <code>consultation.json</code> du dossier des données.)', true, async password => {
+        passwordDialog(i18n('Passer en mode consultation'), i18n('La famille pourra parcourir ta généalogie sur cet ordinateur sans rien pouvoir modifier ni supprimer. <b>Choisis un mot de passe</b> : il sera demandé pour sortir de ce mode. (Oublié ? Supprime le fichier <code>consultation.json</code> du dossier des données.)'), true, async password => {
             await api('kiosk_enter', {}, {method: 'POST', body: {password}});
-            toast('Mode consultation activé.');
+            toast(i18n('Mode consultation activé.'));
             location.reload();
         });
     });
@@ -135,6 +136,8 @@
     ];
     const MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
     const WEEKDAYS = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
+    // 🌐 le jour à l'écran dans la langue choisie (le 1er janvier 2001 était un lundi) ; le reste de la mention (nom de la fête) reste comme dans l'acte
+    const showWeekday = w => { const I = typeof window !== 'undefined' ? window.LCNDA_I18N : null, i = WEEKDAYS.indexOf(w); if (!I || I.lang === 'fr' || i < 0) return w; try { return new Intl.DateTimeFormat(I.locale(), {weekday: 'long', timeZone: 'UTC'}).format(new Date(Date.UTC(2001, 0, 1 + i))); } catch (_) { return w; } };
     const dateText = ([y, m, d]) => `${d === 1 ? '1er' : d} ${MONTHS[m - 1]} ${y}`;
     /**
      * « le jour de la Pentecôte 1754 », « lundi de Pâques 1690 », « le lendemain de la Saint-Martin 1702 » → date exacte.
@@ -181,13 +184,13 @@
     }
     ext.feastDate = feastDate;
     function feastResultHtml(r, original) {
-        if (!r) return '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Aucune fête reconnue (il faut le nom de la fête et l’année, ex. « le jour de la Pentecôte 1754 »).</span></p>';
-        return `<p class="h-feast-result"><strong>${esc(r.weekday)} ${esc(r.date)}</strong> — ${esc(r.label)}${r.julian ? ` <small>(calendrier julien, en usage en France avant décembre 1582 ; soit le ${esc(r.gregorian)} dans le calendrier grégorien)</small>` : ''}<br><small class="muted">Pâques ${esc(r.date.slice(-4))} : ${esc(r.easter)}.${original ? ` Écrit : « ${esc(original)} ».` : ''}</small></p>`;
+        if (!r) return `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">${i18n('Aucune fête reconnue (il faut le nom de la fête et l’année, ex. « le jour de la Pentecôte 1754 »).')}</span></p>`;
+        return `<p class="h-feast-result"><strong>${esc(showWeekday(r.weekday))} ${esc(r.date)}</strong> — <span data-i18n-off>${esc(r.label)}</span>${r.julian ? ` <small>${i18n('(calendrier julien, en usage en France avant décembre 1582 ; soit le {gregorian} dans le calendrier grégorien)', {gregorian: esc(r.gregorian)})}</small>` : ''}<br><small class="muted">${i18n('Pâques {x} : {easter}.', {x: esc(r.date.slice(-4)), easter: esc(r.easter)})}${original ? ` ${i18n('Écrit : « {original} ».', {original: esc(original)})}` : ''}</small></p>`;
     }
-    ext.calendarPanels.push(() => `<section class="maintenance-panel" id="h-feast-panel"><h3>Fêtes religieuses → date exacte</h3>
-        <p>Les curés écrivaient souvent « le jour de la Pentecôte 1754 », « le lendemain de la Saint-Martin », « le lundi après la Saint-Martin 1650 » ou « trois jours avant Pâques 1702 ». Écris la mention : l’app calcule la vraie date (Pâques selon le comput julien avant 1583, grégorien ensuite).</p>
-        <form class="form-grid" style="padding:0" id="h-feast-form"><label class="span-2">Mention de l’acte<input name="text" placeholder="le jour de la Pentecôte 1754" autocomplete="off"></label></form><div id="h-feast-out"></div>
-        <p class="muted">Toutes les fêtes mobiles d’une année (Septuagésime, Cendres, Pâques, Pentecôte, Fête-Dieu…) : cadre « Saint du jour et fêtes mobiles ».</p></section>`);
+    ext.calendarPanels.push(() => `<section class="maintenance-panel" id="h-feast-panel"><h3>${i18n('Fêtes religieuses → date exacte')}</h3>
+        <p>${i18n('Les curés écrivaient souvent « le jour de la Pentecôte 1754 », « le lendemain de la Saint-Martin », « le lundi après la Saint-Martin 1650 » ou « trois jours avant Pâques 1702 ». Écris la mention : l’app calcule la vraie date (Pâques selon le comput julien avant 1583, grégorien ensuite).')}</p>
+        <form class="form-grid" style="padding:0" id="h-feast-form"><label class="span-2">${i18n('Mention de l’acte')}<input name="text" placeholder="${esc(i18n('le jour de la Pentecôte 1754'))}" autocomplete="off"></label></form><div id="h-feast-out"></div>
+        <p class="muted">${i18n('Toutes les fêtes mobiles d’une année (Septuagésime, Cendres, Pâques, Pentecôte, Fête-Dieu…) : cadre « Saint du jour et fêtes mobiles ».')}</p></section>`);
     ext.afterCalendar.push(() => {
         const form = document.getElementById('h-feast-form');
         if (!form) return;
@@ -203,7 +206,7 @@
         const r = /p[aâ]que|pentec|ascension|rameaux|cendres|tous?saint|no[eë]l|saint|sainte|st[e]? |trinit|f[eê]te|chandeleur|assomption|[ée]piphanie|rois|quasimodo|vigile|lendemain|veille/i.test(input.value) ? feastDate(input.value) : null;
         if (!r) { hint?.remove(); return; }
         if (!hint) { hint = document.createElement('div'); hint.className = 'h-feast-hint'; input.insertAdjacentElement('afterend', hint); }
-        hint.innerHTML = `📅 ${esc(r.label)} = <strong>${esc(r.weekday)} ${esc(r.date)}</strong>${r.julian ? ' <small>(julien)</small>' : ''} <button type="button" class="button small secondary" data-h-feast-use="${esc(r.date)}">Utiliser cette date</button>`;
+        hint.innerHTML = `📅 <span data-i18n-off>${esc(r.label)}</span> = <strong>${esc(showWeekday(r.weekday))} ${esc(r.date)}</strong>${r.julian ? ` <small>(${i18n('julien')})</small>` : ''} <button type="button" class="button small secondary" data-h-feast-use="${esc(r.date)}">${i18n('Utiliser cette date')}</button>`;
         hint.dataset.original = input.value;
     });
     document.addEventListener('click', event => {
@@ -214,8 +217,8 @@
         input.value = b.dataset.hFeastUse;
         input.dispatchEvent(new Event('change', {bubbles: true}));
         const note = form.querySelector('[name=description]') || form.querySelector('[name=title]');
-        if (note && !note.value.trim()) note.value = `Date écrite dans l’acte : « ${original} »`;
-        hint.innerHTML = `<small class="muted">Date calculée d’après « ${esc(original)} »${note ? ' (mention gardée dans la description)' : ''}.</small>`;
+        if (note && !note.value.trim()) note.value = i18n('Date écrite dans l’acte : « {original} »', {original});
+        hint.innerHTML = `<small class="muted">${i18n('Date calculée d’après « {original} »{x}.', {original: esc(original), x: note ? ` ${i18n('(mention gardée dans la description)')}` : ''})}</small>`;
     });
 
     /* ═══════════════════════ 📥 DOSSIER « SCANS » SURVEILLÉ ═══════════════════════ */
@@ -227,7 +230,7 @@
         try {
             const r = await api('scan_inbox_run', {}, {method: 'POST', body: {}});
             if (r.imported?.length) {
-                toast(`📥 ${plural(r.imported.length, 'fichier arrivé', 'fichiers arrivés')} par le dossier Scans : à identifier dans les médias.`);
+                toast(`📥 ${i18n('{x} par le dossier Scans : à identifier dans les médias.', {x: plural(r.imported.length, 'fichier arrivé', 'fichiers arrivés')})}`);
                 if (S().module === 'maintenance' && S().maintenanceTab === 'scan_inbox') rerender();
             }
             (r.skipped || []).slice(0, 3).forEach(s => toast(`${s.name} : ${s.reason}`, 'error'));
@@ -245,24 +248,24 @@
         const s = await api('scan_inbox_status');
         if (!isCurrent(token)) return;
         scanState = s;
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('RÉGLAGES', 'Dossier « Scans » surveillé', 'Choisis un dossier sur ton ordinateur. Chaque fichier qui y arrive (depuis le scanner, le téléphone ou AirDrop) entre tout seul dans l’app, dans les médias à identifier. Plus besoin d’importer tes photos d’archives une par une.')}
-            <form class="maintenance-panel" id="h-scan-form"><div class="form-grid"><label class="span-2">Dossier surveillé<input name="dir" value="${esc(s.dir)}" placeholder="~/Documents/Scans généalogie" list="h-scan-suggest"><datalist id="h-scan-suggest"><option value="~/Documents/Scans généalogie"><option value="~/Desktop/Scans"><option value="~/Downloads"><option value="~/Library/Mobile Documents/com~apple~CloudDocs/Scans"></datalist></label>
-                <label class="checkbox-line"><input type="checkbox" name="enabled" ${s.enabled ? 'checked' : ''}> Surveiller ce dossier (toutes les 20 secondes, tant que l’app est ouverte)</label>
-                <label class="checkbox-line"><input type="checkbox" name="move_imported" ${s.move_imported ? 'checked' : ''}> Ranger les fichiers importés dans le sous-dossier « Importés dans LCNDA »</label></div>
-                <p class="muted">Formats : JPEG, PNG, WebP, GIF, PDF${s.can_convert ? ', et HEIC (iPhone) ou TIFF, convertis en JPEG' : ' (les photos HEIC de l’iPhone et les TIFF ne sont pas convertibles sur cet ordinateur : règle l’iPhone sur « Le plus compatible »)'}. Conseil : un dossier réservé aux scans (AirDrop dépose dans « Téléchargements », où il y a de tout). Un même fichier n’est jamais importé deux fois.</p>
-                <div class="page-actions"><button class="button" type="submit">Enregistrer</button>${s.dir ? '<button class="button secondary" type="button" data-h-scan-now>Vérifier maintenant</button>' : ''}<span class="muted">${s.dir ? (s.reachable ? `${s.pending ? `${plural(s.pending, 'fichier en attente', 'fichiers en attente')}` : 'Rien en attente'} · ${plural(s.total, 'fichier importé', 'fichiers importés')} en tout` : '⚠ dossier introuvable (disque débranché ?)') : ''}</span></div></form>
-            <h3>Derniers arrivés</h3>${s.recent?.length ? `<div class="collection-media-edit">${s.recent.map(r => `<span class="collection-media-item" title="${esc(r.filename)} — ${esc(window.LCNDA_UI?.whenFull?.(r.imported_at) || r.imported_at)}">${r.media_file ? A().mediaThumbHtml({media_type: r.media_type, filename: r.media_file, title: r.title}) : esc(r.filename)}</span>`).join('')}</div><p><button type="button" class="button small secondary" data-h-scan-identify>Voir les médias à identifier</button></p>` : empty('Rien d’arrivé pour l’instant', {icon: '📥'})}</section>`;
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${header(i18n('RÉGLAGES'), i18n('Dossier « Scans » surveillé'), i18n('Choisis un dossier sur ton ordinateur. Chaque fichier qui y arrive (depuis le scanner, le téléphone ou AirDrop) entre tout seul dans l’app, dans les médias à identifier. Plus besoin d’importer tes photos d’archives une par une.'))}
+            <form class="maintenance-panel" id="h-scan-form"><div class="form-grid"><label class="span-2">${i18n('Dossier surveillé')}<input name="dir" value="${esc(s.dir)}" placeholder="~${esc(i18n('/Documents/Scans généalogie'))}" list="h-scan-suggest"><datalist id="h-scan-suggest"><option value="~/Documents/Scans généalogie"><option value="~/Desktop/Scans"><option value="~/Downloads"><option value="~/Library/Mobile Documents/com~apple~CloudDocs/Scans"></datalist></label>
+                <label class="checkbox-line"><input type="checkbox" name="enabled" ${s.enabled ? 'checked' : ''}> ${i18n('Surveiller ce dossier (toutes les 20 secondes, tant que l’app est ouverte)')}</label>
+                <label class="checkbox-line"><input type="checkbox" name="move_imported" ${s.move_imported ? 'checked' : ''}> ${i18n('Ranger les fichiers importés dans le sous-dossier « Importés dans LCNDA »')}</label></div>
+                <p class="muted">${i18n('Formats : JPEG, PNG, WebP, GIF, PDF{x}. Conseil : un dossier réservé aux scans (AirDrop dépose dans « Téléchargements », où il y a de tout). Un même fichier n’est jamais importé deux fois.', {x: s.can_convert ? i18n(', et HEIC (iPhone) ou TIFF, convertis en JPEG') : ` ${i18n('(les photos HEIC de l’iPhone et les TIFF ne sont pas convertibles sur cet ordinateur : règle l’iPhone sur « Le plus compatible »)')}`})}</p>
+                <div class="page-actions"><button class="button" type="submit">${i18n('Enregistrer')}</button>${s.dir ? `<button class="button secondary" type="button" data-h-scan-now>${i18n('Vérifier maintenant')}</button>` : ''}<span class="muted">${s.dir ? (s.reachable ? `${i18n('{x} · {x2} en tout', {x: s.pending ? `${plural(s.pending, 'fichier en attente', 'fichiers en attente')}` : i18n('Rien en attente'), x2: plural(s.total, 'fichier importé', 'fichiers importés')})}` : `⚠ ${i18n('dossier introuvable (disque débranché ?)')}`) : ''}</span></div></form>
+            <h3>${i18n('Derniers arrivés')}</h3>${s.recent?.length ? `<div class="collection-media-edit">${s.recent.map(r => `<span class="collection-media-item" title="${esc(r.filename)} — ${esc(window.LCNDA_UI?.whenFull?.(r.imported_at) || r.imported_at)}">${r.media_file ? A().mediaThumbHtml({media_type: r.media_type, filename: r.media_file, title: r.title}) : esc(r.filename)}</span>`).join('')}</div><p><button type="button" class="button small secondary" data-h-scan-identify>${i18n('Voir les médias à identifier')}</button></p>` : empty(i18n('Rien d’arrivé pour l’instant'), {icon: '📥'})}</section>`;
         const form = A().$('#h-scan-form');
         form.addEventListener('submit', async event => {
             event.preventDefault();
-            try { await api('save_scan_inbox_settings', {}, {method: 'POST', body: {dir: form.dir.value, enabled: form.enabled.checked, move_imported: form.move_imported.checked}}); toast(form.enabled.checked ? 'Dossier surveillé.' : 'Réglages enregistrés.'); await loadScanState(); rerender(); }
+            try { await api('save_scan_inbox_settings', {}, {method: 'POST', body: {dir: form.dir.value, enabled: form.enabled.checked, move_imported: form.move_imported.checked}}); toast(form.enabled.checked ? i18n('Dossier surveillé.') : i18n('Réglages enregistrés.')); await loadScanState(); rerender(); }
             catch (error) { toast(error.message, 'error'); }
         });
         A().$('[data-h-scan-now]')?.addEventListener('click', async () => { const before = scanState?.enabled; scanState = {...scanState, enabled: true}; await scanTick(); scanState.enabled = before; rerender(); });
         A().$('[data-h-scan-identify]')?.addEventListener('click', () => { S().listType = 'media'; A().setModule('listes'); });
     };
-    ext.dashboard.scan_inbox_widget = {load: () => api('scan_inbox_status'), render: (index, widget, span, s) => card(index, 'Dossier Scans', s?.total || '', !s?.dir ? `${empty('Aucun dossier surveillé pour l’instant', {icon: '📂'})}<div class="page-actions"><button type="button" class="button small secondary" data-h-open-maint="scan_inbox">Choisir un dossier</button></div>`
-        : `<p>${s.enabled ? '📥 Surveillé' : '⏸ Pas surveillé'} : <code>${esc(s.dir)}</code>${s.pending ? ` · ${plural(s.pending, 'fichier en attente', 'fichiers en attente')}` : ''}</p>${s.recent?.length ? `<div class="collection-media-edit">${s.recent.slice(0, 6).map(r => `<span class="collection-media-item">${r.media_file ? A().mediaThumbHtml({media_type: r.media_type, filename: r.media_file, title: r.title}) : esc(r.filename)}</span>`).join('')}</div>` : ''}<div class="page-actions"><button type="button" class="button small secondary" data-h-open-maint="scan_inbox">Réglages</button></div>`, span)};
+    ext.dashboard.scan_inbox_widget = {load: () => api('scan_inbox_status'), render: (index, widget, span, s) => card(index, 'Dossier Scans', s?.total || '', !s?.dir ? `${empty(i18n('Aucun dossier surveillé pour l’instant'), {icon: '📂'})}<div class="page-actions"><button type="button" class="button small secondary" data-h-open-maint="scan_inbox">${i18n('Choisir un dossier')}</button></div>`
+        : `<p>${s.enabled ? `📥 ${i18n('Surveillé')}` : `⏸ ${i18n('Pas surveillé')}`} : <code>${esc(s.dir)}</code>${s.pending ? ` · ${plural(s.pending, 'fichier en attente', 'fichiers en attente')}` : ''}</p>${s.recent?.length ? `<div class="collection-media-edit">${s.recent.slice(0, 6).map(r => `<span class="collection-media-item">${r.media_file ? A().mediaThumbHtml({media_type: r.media_type, filename: r.media_file, title: r.title}) : esc(r.filename)}</span>`).join('')}</div>` : ''}<div class="page-actions"><button type="button" class="button small secondary" data-h-open-maint="scan_inbox">${i18n('Réglages')}</button></div>`, span)};
 
     /* ═══════════════════════ ⛪ PAROISSES D'ANCIEN RÉGIME ═══════════════════════ */
 
@@ -271,7 +274,7 @@
     setTimeout(loadParishMap, 3000);
     ext.parishHint = insee => {
         const list = parishMap?.by_insee?.[insee];
-        return list?.length ? `<div class="h-parish-hint">${list.map(p => `⛪ Avant ${esc(p.until)}, chercher dans les registres de la paroisse de <strong>${esc(p.parish)}</strong>`).join('<br>')}</div>` : '';
+        return list?.length ? `<div class="h-parish-hint">${list.map(p => `⛪ ${i18n('Avant {until}, chercher dans les registres de la paroisse de', {until: esc(p.until)})} <strong>${esc(p.parish)}</strong>`).join('<br>')}</div>` : '';
     };
     /** Lieu d'un rattachement : le menu de choix unique (docs/PICKER.md). Le formulaire envoie toujours
      *  le numéro du lieu (name) et, à côté, son texte (data-h-pp) : un nom sans fiche reste gardé tel quel. */
@@ -291,26 +294,26 @@
         const rows = data.parishes || [], UI = window.LCNDA_UI, KEY = 'listes:parishes';
         const e = edit ? (edit.id ? rows.find(r => Number(r.id) === Number(edit.id)) : {id: 0, until_year: 1790}) : null;
         // K5 : « ＋ Rattachement » monte dans l’en-tête ; H10 : la barre commune au-dessus du tableau (cachée quand il n’y a rien)
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${UI.pageHeader({title: 'Paroisses d’Ancien Régime', help: 'Beaucoup de hameaux et de villages dépendaient de la paroisse d’à côté : les baptêmes, mariages et sépultures d’avant la Révolution sont alors dans les registres d’une autre commune. Note ces rattachements au fil de tes trouvailles : l’app l’indique sur les événements des fiches, dans les battues et dans les registres en ligne.', primary: '<button type="button" class="button" data-h-parish-new>＋ Rattachement</button>'})}
-            ${e ? `<form class="maintenance-panel collection-form" id="h-parish-form"><h3>${e.id ? 'Modifier le rattachement' : 'Nouveau rattachement'}</h3><div class="form-grid">
-                <div><span class="pk-lab">Lieu (hameau, village, commune actuelle)</span>${placePicker('place_id', e.place_id, e.place_name || e.place_text)}</div>
-                <div><span class="pk-lab">Dépendait de la paroisse de</span>${placePicker('parish_place_id', e.parish_place_id, e.parish_place_name || '')}</div>
-                <label>Nom de la paroisse (tel que dans les registres)<input name="parish_name" value="${esc(e.parish_name || '')}" placeholder="Saint-Martin de Brive"></label>
-                <label>Jusqu’en<input type="number" name="until_year" value="${esc(e.until_year || 1790)}" min="1000" max="1900"></label><label>Depuis (si connu)<input type="number" name="from_year" value="${esc(e.from_year || '')}" placeholder="—"></label>
-                <label class="span-2">Note, source<input name="note" value="${esc(e.note || '')}" placeholder="Paroisse érigée en 1792 ; voir aussi la chapelle de…"></label></div>
-                ${LP('parish', e.labels)}<div class="page-actions action-zone"><button class="button" type="submit">Enregistrer</button><button class="button secondary" type="button" data-h-parish-cancel>Annuler</button>${e.id ? '<button class="button secondary danger" type="button" data-h-parish-delete>Supprimer</button>' : ''}</div></form>` : ''}
-            ${rows.length ? '<div data-h-parish-bar></div>' : ''}<div data-h-parish-list>${rows.length || e ? '' : A().emptyState({icon: '⛪', text: 'Aucun rattachement pour l’instant', hint: 'Note de quelle paroisse dépendait chaque hameau ou village avant la Révolution.', action: {label: '＋ Rattachement', attrs: 'data-h-parish-new'}})}</div></section>`;
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${UI.pageHeader({title: i18n('Paroisses d’Ancien Régime'), help: i18n('Beaucoup de hameaux et de villages dépendaient de la paroisse d’à côté : les baptêmes, mariages et sépultures d’avant la Révolution sont alors dans les registres d’une autre commune. Note ces rattachements au fil de tes trouvailles : l’app l’indique sur les événements des fiches, dans les battues et dans les registres en ligne.'), primary: '<button type="button" class="button" data-h-parish-new>＋ Rattachement</button>'})}
+            ${e ? `<form class="maintenance-panel collection-form" id="h-parish-form"><h3>${e.id ? i18n('Modifier le rattachement') : i18n('Nouveau rattachement')}</h3><div class="form-grid">
+                <div><span class="pk-lab">${i18n('Lieu (hameau, village, commune actuelle)')}</span>${placePicker('place_id', e.place_id, e.place_name || e.place_text)}</div>
+                <div><span class="pk-lab">${i18n('Dépendait de la paroisse de')}</span>${placePicker('parish_place_id', e.parish_place_id, e.parish_place_name || '')}</div>
+                <label>${i18n('Nom de la paroisse (tel que dans les registres)')}<input name="parish_name" value="${esc(e.parish_name || '')}" placeholder="${esc(i18n('Saint-Martin de Brive'))}"></label>
+                <label>${i18n('Jusqu’en')}<input type="number" name="until_year" value="${esc(e.until_year || 1790)}" min="1000" max="1900"></label><label>Depuis (si connu)<input type="number" name="from_year" value="${esc(e.from_year || '')}" placeholder="—"></label>
+                <label class="span-2">${i18n('Note, source')}<input name="note" value="${esc(e.note || '')}" placeholder="${esc(i18n('Paroisse érigée en 1792 ; voir aussi la chapelle de…'))}"></label></div>
+                ${LP('parish', e.labels)}<div class="page-actions action-zone"><button class="button" type="submit">${i18n('Enregistrer')}</button><button class="button secondary" type="button" data-h-parish-cancel>${i18n('Annuler')}</button>${e.id ? `<button class="button secondary danger" type="button" data-h-parish-delete>${i18n('Supprimer')}</button>` : ''}</div></form>` : ''}
+            ${rows.length ? '<div data-h-parish-bar></div>' : ''}<div data-h-parish-list>${rows.length || e ? '' : A().emptyState({icon: '⛪', text: i18n('Aucun rattachement pour l’instant'), hint: i18n('Note de quelle paroisse dépendait chaque hameau ou village avant la Révolution.'), action: {label: '＋ Rattachement', attrs: 'data-h-parish-new'}})}</div></section>`;
         const ws = A().$('#workspace');
         if (rows.length) {
             const fold = t => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
             const counties = [...rows.reduce((m, r) => { if (r.place_county) m.set(r.place_county, (m.get(r.place_county) || 0) + 1); return m; }, new Map())].sort((x, y) => x[0].localeCompare(y[0], 'fr'));
             const withEv = rows.filter(r => Number(r.old_event_count)).length;
-            const bar = UI.listBar({key: KEY, search: {placeholder: 'Chercher… (lieu, paroisse, note)', value: UI.listBarState?.(KEY) ? '' : (S().hParishQ || '')},
+            const bar = UI.listBar({key: KEY, search: {placeholder: i18n('Chercher… (lieu, paroisse, note)'), value: UI.listBarState?.(KEY) ? '' : (S().hParishQ || '')},
                 filters: [{id: 'parish', label: 'Paroisse', type: 'place', chipPrefix: 'Paroisse :'},
-                    ...(counties.length > 1 ? [{id: 'county', label: 'Département', type: 'check', options: counties.map(([k, n]) => [k, k, k, n])}] : []),
-                    {id: 'label', label: 'Étiquette', kind: 'label', allowFree: false, chipPrefix: 'Étiquette :'},
-                    {id: 'events', label: 'Événements', type: 'check', text: `Avec des événements concernés (${withEv})`, chipLabel: 'Avec des événements concernés'}],
-                sort: {options: [['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A'], ['events', 'Le plus d’événements'], ['until', 'Jusqu’en (année)']], value: 'az'},
+                    ...(counties.length > 1 ? [{id: 'county', label: i18n('Département'), type: 'check', options: counties.map(([k, n]) => [k, k, k, n])}] : []),
+                    {id: 'label', label: i18n('Étiquette'), kind: 'label', allowFree: false, chipPrefix: i18n('Étiquette :')},
+                    {id: 'events', label: i18n('Événements'), type: 'check', text: i18n('Avec des événements concernés ({withEv})', {withEv}), chipLabel: i18n('Avec des événements concernés')}],
+                sort: {options: [['recent', i18n('Les plus récents')], ['old', i18n('Les plus anciens')], ['az', 'A → Z'], ['za', 'Z → A'], ['events', i18n('Le plus d’événements')], ['until', i18n('Jusqu’en (année)')]], value: 'az'},
                 onChange: () => paint()});
             ws.querySelector('[data-h-parish-bar]').replaceWith(bar);
             const box = ws.querySelector('[data-h-parish-list]'), name = r => r.place_name || r.place_text || '';
@@ -324,8 +327,8 @@
                     && (!lab || (r.labels || []).some(l => (lab.id ? Number(l.id) === Number(lab.id) : fold(l.name) === fold(String(lab).replace(/^txt:/, ''))))));
                 list = st.sort === 'events' ? list.sort((x, y) => Number(y.old_event_count) - Number(x.old_event_count) || az(x, y)) : st.sort === 'until' ? list.sort((x, y) => Number(x.until_year) - Number(y.until_year) || az(x, y)) : UI.sortItems(list, st.sort, {name, date: r => r.updated_at || r.created_at || ''});
                 bar.setCount(list.length === rows.length ? plural(rows.length, 'rattachement', 'rattachements') : `${plural(list.length, 'rattachement', 'rattachements')} sur ${rows.length}`);
-                box.innerHTML = list.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Lieu</th><th>Avant</th><th>Paroisse</th><th>Événements concernés</th><th>Note</th><th></th></tr></thead><tbody>${list.map(r => `<tr><td><strong>${esc(name(r))}</strong>${LC(r.labels)}${r.place_county ? `<br><small>${esc(r.place_county)}</small>` : ''}</td><td>${r.from_year ? `${esc(r.from_year)}–` : ''}${esc(r.until_year)}</td><td>⛪ ${esc(r.parish_name)}</td><td>${r.old_event_count ? plural(Number(r.old_event_count), 'événement', 'événements') : '—'}</td><td><small>${esc(r.note)}</small></td><td><span class="inline-actions h-tools">${A().actionButton('edit', 'Modifier ce rattachement', `data-h-parish-edit="${r.id}"`)}${A().actionButton('delete', 'Supprimer ce rattachement', `data-h-parish-del="${r.id}"`)}</span></td></tr>`).join('')}</tbody></table></div>`
-                    : A().emptyState({icon: '🔍', text: 'Aucun rattachement ne correspond', hint: 'Vérifie l’orthographe, ou retire un filtre.'});
+                box.innerHTML = list.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>${i18n('Lieu')}</th><th>Avant</th><th>Paroisse</th><th>${i18n('Événements concernés')}</th><th>Note</th><th></th></tr></thead><tbody>${list.map(r => `<tr><td><strong>${esc(name(r))}</strong>${LC(r.labels)}${r.place_county ? `<br><small>${esc(r.place_county)}</small>` : ''}</td><td>${r.from_year ? `${esc(r.from_year)}–` : ''}${esc(r.until_year)}</td><td>⛪ ${esc(r.parish_name)}</td><td>${r.old_event_count ? plural(Number(r.old_event_count), i18n('événement'), i18n('événements')) : '—'}</td><td><small>${esc(r.note)}</small></td><td><span class="inline-actions h-tools">${A().actionButton('edit', i18n('Modifier ce rattachement'), `data-h-parish-edit="${r.id}"`)}${A().actionButton('delete', i18n('Supprimer ce rattachement'), `data-h-parish-del="${r.id}"`)}</span></td></tr>`).join('')}</tbody></table></div>`
+                    : A().emptyState({icon: '🔍', text: i18n('Aucun rattachement ne correspond'), hint: i18n('Vérifie l’orthographe, ou retire un filtre.')});
             };
             paint();
         }
@@ -333,19 +336,19 @@
         ws.querySelector('[data-h-parish-list]').addEventListener('click', async ev => {
             const del = ev.target.closest('[data-h-parish-del]'), ed = ev.target.closest('[data-h-parish-edit]');
             if (ed) return ext.lists.parishes(++S().workspaceToken, {id: Number(ed.dataset.hParishEdit)});
-            if (del) { if (!await A().confirmBox('Supprimer ce rattachement ?', {title: 'Supprimer le rattachement', okLabel: 'Supprimer le rattachement'})) return; await api('delete_parish', {}, {method: 'POST', body: {id: del.dataset.hParishDel}}); await loadParishMap(); rerender(); }
+            if (del) { if (!await A().confirmBox(i18n('Supprimer ce rattachement ?'), {title: i18n('Supprimer le rattachement'), okLabel: i18n('Supprimer le rattachement')})) return; await api('delete_parish', {}, {method: 'POST', body: {id: del.dataset.hParishDel}}); await loadParishMap(); rerender(); }
         });
         const form = ws.querySelector('#h-parish-form');
         if (!form) return;
         form.querySelectorAll('.h-place-pk .pk > input[type=hidden]').forEach(h => h.removeAttribute('name')); // seuls place_id / parish_place_id partent, comme avant
         form.querySelector('[data-h-parish-cancel]').addEventListener('click', () => rerender());
-        form.querySelector('[data-h-parish-delete]')?.addEventListener('click', async () => { if (!await A().confirmBox('Supprimer ce rattachement ?', {title: 'Supprimer le rattachement', okLabel: 'Supprimer le rattachement'})) return; await api('delete_parish', {}, {method: 'POST', body: {id: e.id}}); await loadParishMap(); rerender(); });
+        form.querySelector('[data-h-parish-delete]')?.addEventListener('click', async () => { if (!await A().confirmBox(i18n('Supprimer ce rattachement ?'), {title: i18n('Supprimer le rattachement'), okLabel: i18n('Supprimer le rattachement')})) return; await api('delete_parish', {}, {method: 'POST', body: {id: e.id}}); await loadParishMap(); rerender(); });
         form.addEventListener('submit', async ev => {
             ev.preventDefault();
             const v = A().formObject(form);
             try {
                 await api('save_parish', {}, {method: 'POST', body: {...v, id: e.id, place_text: form.querySelector('[data-h-pp=place_id]').value, parish_name: v.parish_name || (Number(v.parish_place_id) ? '' : form.querySelector('[data-h-pp=parish_place_id]').value)}});
-                toast('Rattachement enregistré.'); await loadParishMap(); rerender();
+                toast(i18n('Rattachement enregistré.')); await loadParishMap(); rerender();
             } catch (error) { toast(error.message, 'error'); }
         });
     };
@@ -365,16 +368,16 @@
         const [data, whole] = tab === 'index' ? [await api('cited_names', {}), null] : await Promise.all([api('transcriptions_list', {q}), q ? api('transcriptions_list', {}) : null]);
         if (!isCurrent(token)) return;
         // C5 : les deux onglets de page restent au-dessus ; H10 : une barre par onglet, chacune retenue
-        const tabs = `<div class="segmented h-cite-tabs" role="tablist">${[['index', 'Index des noms'], ['transcriptions', 'Marquer dans les transcriptions']].map(([k, l]) => `<button type="button" role="tab" class="${tab === k ? 'is-active' : ''}" aria-selected="${tab === k}" data-h-cite-tab="${k}">${esc(l)}</button>`).join('')}</div>`;
+        const tabs = `<div class="segmented h-cite-tabs" role="tablist">${[['index', i18n('Index des noms')], ['transcriptions', i18n('Marquer dans les transcriptions')]].map(([k, l]) => `<button type="button" role="tab" class="${tab === k ? 'is-active' : ''}" aria-selected="${tab === k}" data-h-cite-tab="${k}">${esc(l)}</button>`).join('')}</div>`;
         const all = tab === 'index' ? (data.groups || []) : (data.media || []), total = tab === 'index' ? all.length : (whole ? (whole.media || []).length : all.length);
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', 'Le cercle autour des ancêtres', 'Les témoins, voisins, curés, parrains qui n’ont pas de fiche. Par exemple : « Pierre Martin, tisserand, apparaît dans 7 actes entre 1781 et 1803 ». Ce cercle (famille, amis, voisins) débloque souvent une recherche.')}
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', i18n('Le cercle autour des ancêtres'), i18n('Les témoins, voisins, curés, parrains qui n’ont pas de fiche. Par exemple : « Pierre Martin, tisserand, apparaît dans 7 actes entre 1781 et 1803 ». Ce cercle (famille, amis, voisins) débloque souvent une recherche.'))}
             ${tabs}${total ? '<div data-h-cite-bar></div>' : ''}<div data-h-cite-list></div></section>`;
         const ws = A().$('#workspace'), box = ws.querySelector('[data-h-cite-list]');
         A().bindTableLinks();
         ws.querySelectorAll('[data-h-cite-tab]').forEach(b => b.addEventListener('click', () => { st.hCiteTab = b.dataset.hCiteTab; rerender(); }));
         if (!total) {
-            box.innerHTML = tab === 'index' ? A().emptyState({text: 'Aucun nom indexé pour l’instant', icon: '🏷️', hint: 'Ouvre « Marquer dans les transcriptions » : sélectionne un nom dans le texte d’un acte, ou accepte les noms repérés par l’app.', action: {label: 'Marquer dans les transcriptions', attrs: 'data-empty-click="[data-h-cite-tab=transcriptions]"'}})
-                : A().emptyState({text: 'Aucune transcription pour l’instant', icon: '📜', hint: 'Transcris d’abord un acte : visionneuse des médias → transcription.'});
+            box.innerHTML = tab === 'index' ? A().emptyState({text: i18n('Aucun nom indexé pour l’instant'), icon: '🏷️', hint: i18n('Ouvre « Marquer dans les transcriptions » : sélectionne un nom dans le texte d’un acte, ou accepte les noms repérés par l’app.'), action: {label: i18n('Marquer dans les transcriptions'), attrs: 'data-empty-click="[data-h-cite-tab=transcriptions]"'}})
+                : A().emptyState({text: i18n('Aucune transcription pour l’instant'), icon: '📜', hint: i18n('Transcris d’abord un acte : visionneuse des médias → transcription.')});
             return;
         }
         const fold = t => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
@@ -384,18 +387,18 @@
             const roleN = new Map(); all.forEach(g => g.roles.forEach(r => roleN.set(r, (roleN.get(r) || 0) + 1)));
             const roles = [...roleN].sort((x, y) => y[1] - x[1] || x[0].localeCompare(y[0], 'fr')).map(([r, n]) => [r, r, r, n]);
             const withP = all.filter(g => g.person_id).length;
-            bar = UI.listBar({key: KEY, search: {placeholder: 'Chercher… (nom, métier, lieu)', value: oldQ},
-                filters: [...(roles.length ? [{id: 'role', label: 'Rôle', type: 'check', options: roles}] : []), {id: 'place', label: 'Lieu', type: 'place', chipPrefix: 'Lieu :'},
-                    {id: 'from', group: 'Période', label: 'De', type: 'date', placeholder: '« 1780 »', chipPrefix: 'Depuis'}, {id: 'to', group: 'Période', label: 'À', type: 'date', placeholder: '« 1810 »', chipPrefix: 'Jusqu’à'},
-                    {id: 'person', label: 'Fiche', type: 'radio', dflt: '', options: [['', 'Toutes'], ['yes', 'Avec une fiche', 'Avec une fiche', withP], ['no', 'Sans fiche', 'Sans fiche', all.length - withP]]}],
-                sort: {options: [['most', 'Le plus de mentions'], ['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A']], value: 'most'},
+            bar = UI.listBar({key: KEY, search: {placeholder: i18n('Chercher… (nom, métier, lieu)'), value: oldQ},
+                filters: [...(roles.length ? [{id: 'role', label: i18n('Rôle'), type: 'check', options: roles}] : []), {id: 'place', label: i18n('Lieu'), type: 'place', chipPrefix: i18n('Lieu :')},
+                    {id: 'from', group: i18n('Période'), label: 'De', type: 'date', placeholder: '« 1780 »', chipPrefix: 'Depuis'}, {id: 'to', group: i18n('Période'), label: 'À', type: 'date', placeholder: '« 1810 »', chipPrefix: i18n('Jusqu’à')},
+                    {id: 'person', label: i18n('Fiche'), type: 'radio', dflt: '', options: [['', i18n('Toutes')], ['yes', i18n('Avec une fiche'), i18n('Avec une fiche'), withP], ['no', i18n('Sans fiche'), i18n('Sans fiche'), all.length - withP]]}],
+                sort: {options: [['most', i18n('Le plus de mentions')], ['recent', i18n('Les plus récents')], ['old', i18n('Les plus anciens')], ['az', 'A → Z'], ['za', 'Z → A']], value: 'most'},
                 onChange: () => paint()});
         } else {
             const marked = (whole?.media || all).filter(m => Number(m.marked)).length, n = (whole?.media || all).length;
-            bar = UI.listBar({key: KEY, search: {placeholder: 'Chercher… (titre, texte, cote)', value: oldQ},
-                filters: [{id: 'marked', label: 'Noms marqués', type: 'radio', dflt: '', options: [['', 'Toutes'], ['none', 'Aucun nom marqué', 'Aucun nom marqué', n - marked], ['some', 'Au moins un nom marqué', 'Au moins un nom marqué', marked]]}],
+            bar = UI.listBar({key: KEY, search: {placeholder: i18n('Chercher… (titre, texte, cote)'), value: oldQ},
+                filters: [{id: 'marked', label: i18n('Noms marqués'), type: 'radio', dflt: '', options: [['', i18n('Toutes')], ['none', i18n('Aucun nom marqué'), i18n('Aucun nom marqué'), n - marked], ['some', i18n('Au moins un nom marqué'), i18n('Au moins un nom marqué'), marked]]}],
                 view: {dflt: 'list', what: 'transcriptions'},
-                sort: {options: [['recent', 'Les plus récentes'], ['old', 'Les plus anciennes'], ['az', 'A → Z'], ['za', 'Z → A']], value: 'recent'},
+                sort: {options: [['recent', i18n('Les plus récentes')], ['old', i18n('Les plus anciennes')], ['az', 'A → Z'], ['za', 'Z → A']], value: 'recent'},
                 onChange: (b, {what}) => { if (what === 'q' || (what === 'clear' && q)) { if (b.q.trim() !== q) rerender(); return; } paint(); }});
         }
         ws.querySelector('[data-h-cite-bar]').replaceWith(bar);
@@ -409,19 +412,19 @@
                     && (!pl || g.places.some(p => fold(p).includes(plTxt))) && (!y1 || (g.to || 0) >= y1) && (!y2 || (g.from && g.from <= y2)) && (!f.person || (f.person === 'yes' ? !!g.person_id : !g.person_id)));
                 list = s.sort === 'most' ? list.sort((x, y) => y.acts - x.acts || x.key.localeCompare(y.key)) : UI.sortItems(list, s.sort, {name: g => g.name, date: latest});
                 noun = ['nom', 'noms'];
-                box.innerHTML = list.length ? `<div class="h-cite-groups">${list.map(g => `<article class="h-record"><header><div><strong>${esc(g.name)}</strong>${g.occupations.length ? `, ${esc(g.occupations.join(', '))}` : ''} — apparaît dans <strong>${plural(g.acts, 'acte', 'actes')}</strong>${g.from ? ` ${g.from === g.to ? `en ${g.from}` : `entre ${g.from} et ${g.to}`}` : ''}
-                ${g.roles.length ? `<div class="muted">${esc(g.roles.join(', '))}${g.places.length ? ' · ' + esc(g.places.join(', ')) : ''}</div>` : ''}${g.person_id ? `<div>Fiche : ${personLink(g.person_id, g.person_name)}</div>` : ''}</div></header>
-                <details><summary>Les ${g.items.length} mentions</summary><ul class="h-cite-items">${g.items.map(i => `<li>${LC(i.labels)}${esc(i.date_text || i.year || '')} ${i.role ? `<em>${esc(i.role)}</em>` : ''} ${i.media_id ? `<button type="button" class="link-button" data-h-cite-open="${i.media_id}">${esc(i.media_title || 'transcription')}</button>` : ''}${i.snippet ? `<br><small class="h-transcription">… ${esc(i.snippet)} …</small>` : ''} <button type="button" class="link-button" data-h-cite-del="${i.id}">retirer</button></li>`).join('')}</ul></details></article>`).join('')}</div>` : '';
+                box.innerHTML = list.length ? `<div class="h-cite-groups">${list.map(g => `<article class="h-record"><header><div><strong>${esc(g.name)}</strong>${i18n('{x} — apparaît dans', {x: g.occupations.length ? `, ${esc(g.occupations.join(', '))}` : ''})} <strong>${plural(g.acts, 'acte', 'actes')}</strong>${g.from ? ` ${g.from === g.to ? `en ${g.from}` : i18n('entre {from} et {to}', {from: g.from, to: g.to})}` : ''}
+                ${g.roles.length ? `<div class="muted">${esc(g.roles.join(', '))}${g.places.length ? ' · ' + esc(g.places.join(', ')) : ''}</div>` : ''}${g.person_id ? `<div>${i18n('Fiche : {x}', {x: personLink(g.person_id, g.person_name)})}</div>` : ''}</div></header>
+                <details><summary>${i18n('Les {n} mentions', {n: g.items.length})}</summary><ul class="h-cite-items">${g.items.map(i => `<li>${LC(i.labels)}${esc(i.date_text || i.year || '')} ${i.role ? `<em>${esc(i.role)}</em>` : ''} ${i.media_id ? `<button type="button" class="link-button" data-h-cite-open="${i.media_id}">${esc(i.media_title || 'transcription')}</button>` : ''}${i.snippet ? `<br><small class="h-transcription">… ${esc(i.snippet)} …</small>` : ''} <button type="button" class="link-button" data-h-cite-del="${i.id}">retirer</button></li>`).join('')}</ul></details></article>`).join('')}</div>` : '';
             } else {
                 list = all.filter(m => !f.marked || (f.marked === 'some' ? Number(m.marked) > 0 : !Number(m.marked)));
                 list = UI.sortItems(list, s.sort, {name: m => m.title, date: m => String(m.id).padStart(10, '0')});
                 noun = ['transcription', 'transcriptions'];
                 box.innerHTML = !list.length ? '' : s.view === 'cards' ? UI.cardsHtml(list.map(m => ({thumb: m.media_type === 'image' && m.filename ? `<img src="media/${encodeURIComponent(m.filename)}" alt="" loading="lazy">` : '<span class="ui-card-ico">📜</span>', name: m.title || 'Sans titre', open: `data-h-cite-open="${m.id}"`,
-                        lines: [[m.document_reference, m.date_text].filter(Boolean).join(' · '), `${m.excerpt}…`], badges: [Number(m.marked) ? {text: plural(Number(m.marked), 'nom marqué', 'noms marqués'), kind: 'blue'} : {text: 'aucun nom', kind: 'grey'}]})))
-                    : `<table class="data-table"><thead><tr><th>Document</th><th>Début de la transcription</th><th>Noms marqués</th><th></th></tr></thead><tbody>${list.map(m => `<tr><td><strong>${esc(m.title || 'Sans titre')}</strong>${m.document_reference ? `<br><small>${esc(m.document_reference)}</small>` : ''}${m.date_text ? `<br><small>${esc(m.date_text)}</small>` : ''}</td><td><small>${esc(m.excerpt)}…</small></td><td>${Number(m.marked) || '—'}</td><td><button type="button" class="button small" data-h-cite-open="${m.id}">Ouvrir</button></td></tr>`).join('')}</tbody></table>`;
+                        lines: [[m.document_reference, m.date_text].filter(Boolean).join(' · '), `${m.excerpt}…`], badges: [Number(m.marked) ? {text: plural(Number(m.marked), i18n('nom marqué'), i18n('noms marqués')), kind: 'blue'} : {text: i18n('aucun nom'), kind: 'grey'}]})))
+                    : `<table class="data-table"><thead><tr><th>Document</th><th>${i18n('Début de la transcription')}</th><th>${i18n('Noms marqués')}</th><th></th></tr></thead><tbody>${list.map(m => `<tr><td><strong>${esc(m.title || 'Sans titre')}</strong>${m.document_reference ? `<br><small>${esc(m.document_reference)}</small>` : ''}${m.date_text ? `<br><small>${esc(m.date_text)}</small>` : ''}</td><td><small>${esc(m.excerpt)}…</small></td><td>${Number(m.marked) || '—'}</td><td><button type="button" class="button small" data-h-cite-open="${m.id}">${i18n('Ouvrir')}</button></td></tr>`).join('')}</tbody></table>`;
             }
             bar.setCount(list.length === total ? plural(total, ...noun) : `${plural(list.length, ...noun)} sur ${total}`);
-            if (!list.length) box.innerHTML = A().emptyState({icon: '🔍', text: tab === 'index' ? 'Aucun nom ne correspond' : 'Aucune transcription ne correspond', hint: 'Vérifie l’orthographe, ou retire un filtre.'});
+            if (!list.length) box.innerHTML = A().emptyState({icon: '🔍', text: tab === 'index' ? i18n('Aucun nom ne correspond') : i18n('Aucune transcription ne correspond'), hint: i18n('Vérifie l’orthographe, ou retire un filtre.')});
             A().bindTableLinks();
         };
         paint();
@@ -440,12 +443,12 @@
         // Texte avec les noms déjà marqués surlignés
         let html = esc(m.transcription);
         [...new Set(m.marks.map(k => k.name))].sort((a, b) => b.length - a.length).forEach(name => { const n = esc(name); if (n) html = html.split(n).join(`<mark>${n}</mark>`); });
-        A().$('#workspace').innerHTML = `<section class="page collection-page h-cite-page">${header('NOMS CITÉS', m.title || 'Transcription', esc([m.document_reference, m.date_text].filter(Boolean).join(' · ')), '<button type="button" class="button secondary" data-h-cite-back>← Retour</button>')}
-            <div class="h-cite-layout"><div><div class="maintenance-panel"><p class="muted">Sélectionne un nom dans le texte avec la souris : un bouton « Ajouter » apparaît.</p><div class="h-cite-text" id="h-cite-text">${html.replace(/\n/g, '<br>')}</div></div>
+        A().$('#workspace').innerHTML = `<section class="page collection-page h-cite-page">${header(i18n('NOMS CITÉS'), m.title || 'Transcription', esc([m.document_reference, m.date_text].filter(Boolean).join(' · ')), '<button type="button" class="button secondary" data-h-cite-back>← Retour</button>')}
+            <div class="h-cite-layout"><div><div class="maintenance-panel"><p class="muted">${i18n('Sélectionne un nom dans le texte avec la souris : un bouton « Ajouter » apparaît.')}</p><div class="h-cite-text" id="h-cite-text">${html.replace(/\n/g, '<br>')}</div></div>
                 ${m.media_type === 'image' ? `<p><img src="media/${encodeURIComponent(m.filename)}" alt="" class="h-cite-image"></p>` : ''}</div>
-            <aside><div class="maintenance-panel"><h4>Noms marqués (${m.marks.length})</h4><ul class="h-cite-marks">${m.marks.map(k => `<li><strong>${esc(k.name)}</strong>${k.role ? ` — ${esc(k.role)}` : ''}${k.occupation ? `, ${esc(k.occupation)}` : ''}${k.person_id ? ` · ${personLink(k.person_id, k.person_name)}` : ''} <button type="button" class="link-button" data-h-cite-del="${k.id}">retirer</button></li>`).join('') || '<li class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Aucun.</span></li>'}</ul></div>
-                ${m.suggestions.length ? `<div class="maintenance-panel"><h4>Noms repérés par l’app</h4><p class="muted">À vérifier : la détection automatique n’est pas parfaite.</p><ul class="h-cite-marks">${m.suggestions.map((sg, i) => `<li><strong>${esc(sg.name)}</strong>${sg.role ? ` — ${esc(sg.role)}` : ''}${sg.occupation ? `, ${esc(sg.occupation)}` : ''} <button type="button" class="button small secondary" data-h-cite-sugg="${i}">Ajouter…</button></li>`).join('')}</ul></div>` : ''}</aside></div>
-            <button type="button" class="button small h-cite-float" id="h-cite-float" hidden>＋ Ajouter ce nom</button></section>`;
+            <aside><div class="maintenance-panel"><h4>${i18n('Noms marqués ({n})', {n: m.marks.length})}</h4><ul class="h-cite-marks">${m.marks.map(k => `<li><strong>${esc(k.name)}</strong>${k.role ? ` — ${esc(k.role)}` : ''}${k.occupation ? `, ${esc(k.occupation)}` : ''}${k.person_id ? ` · ${personLink(k.person_id, k.person_name)}` : ''} <button type="button" class="link-button" data-h-cite-del="${k.id}">retirer</button></li>`).join('') || '<li class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Aucun.</span></li>'}</ul></div>
+                ${m.suggestions.length ? `<div class="maintenance-panel"><h4>${i18n('Noms repérés par l’app')}</h4><p class="muted">${i18n('À vérifier : la détection automatique n’est pas parfaite.')}</p><ul class="h-cite-marks">${m.suggestions.map((sg, i) => `<li><strong>${esc(sg.name)}</strong>${sg.role ? ` — ${esc(sg.role)}` : ''}${sg.occupation ? `, ${esc(sg.occupation)}` : ''} <button type="button" class="button small secondary" data-h-cite-sugg="${i}">${i18n('Ajouter…')}</button></li>`).join('')}</ul></div>` : ''}</aside></div>
+            <button type="button" class="button small h-cite-float" id="h-cite-float" hidden>＋ ${i18n('Ajouter ce nom')}</button></section>`;
         const ws = A().$('#workspace');
         A().bindTableLinks();
         const back = () => ext.lists.cited_names(++S().workspaceToken, {index: true});
@@ -454,19 +457,19 @@
         const openForm = (preset) => {
             const dialog = document.createElement('dialog');
             dialog.className = 'modal h-modal';
-            dialog.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">NOM CITÉ</span><h2>Ajouter au cercle</h2></div><button class="icon-button" type="button" data-close>×</button></div>
+            dialog.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">${i18n('NOM CITÉ')}</span><h2>${i18n('Ajouter au cercle')}</h2></div><button class="icon-button" type="button" data-close>×</button></div>
                 <div class="h-dialog-body"><div class="form-grid"><label class="span-2">Nom<input name="name" required value="${esc(preset.name)}"></label>
-                <label>Rôle dans l’acte<input name="role" value="${esc(preset.role || '')}" list="h-cite-roles"><datalist id="h-cite-roles">${roles.map(r => `<option>${esc(r)}</option>`).join('')}</datalist></label><label>Métier<input name="occupation" value="${esc(preset.occupation || '')}"></label>
-                <label>Année<input type="number" name="year" value="${esc(year)}"></label><label>Lieu<input name="place_text" placeholder="Demeurant à…"></label>
-                <div class="span-2"><span class="pk-lab">C’est quelqu’un de la base ? <small>(facultatif)</small></span>${window.LCNDA_PICKER.pickerField({name: 'person_id', kind: 'person'})}</div></div>${LP('cited_name', [])}${preset.snippet ? `<p class="h-transcription">… ${esc(preset.snippet)} …</p>` : ''}</div>
-                <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-close>Annuler</button><button type="submit" class="button">Ajouter</button></div></form>`;
+                <label>${i18n('Rôle dans l’acte')}<input name="role" value="${esc(preset.role || '')}" list="h-cite-roles"><datalist id="h-cite-roles">${roles.map(r => `<option>${esc(r)}</option>`).join('')}</datalist></label><label>${i18n('Métier')}<input name="occupation" value="${esc(preset.occupation || '')}"></label>
+                <label>${i18n('Année')}<input type="number" name="year" value="${esc(year)}"></label><label>${i18n('Lieu')}<input name="place_text" placeholder="${esc(i18n('Demeurant à…'))}"></label>
+                <div class="span-2"><span class="pk-lab">${i18n('C’est quelqu’un de la base ?')} <small>(facultatif)</small></span>${window.LCNDA_PICKER.pickerField({name: 'person_id', kind: 'person'})}</div></div>${LP('cited_name', [])}${preset.snippet ? `<p class="h-transcription">… ${esc(preset.snippet)} …</p>` : ''}</div>
+                <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-close>${i18n('Annuler')}</button><button type="submit" class="button">${i18n('Ajouter')}</button></div></form>`;
             document.body.appendChild(dialog);
             dialog.addEventListener('close', () => dialog.remove());
             dialog.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => dialog.close()));
             dialog.querySelector('form').addEventListener('submit', async ev => {
                 ev.preventDefault();
                 const v = A().formObject(ev.currentTarget);
-                try { await api('save_cited_name', {}, {method: 'POST', body: {...v, media_id: mediaId, event_id: m.events?.[0]?.id || 0, date_text: m.date_text || m.events?.[0]?.date_text || '', snippet: preset.snippet || ''}}); dialog.close(); toast('Nom ajouté au cercle.'); renderTranscriptionMarking(++S().workspaceToken, mediaId); }
+                try { await api('save_cited_name', {}, {method: 'POST', body: {...v, media_id: mediaId, event_id: m.events?.[0]?.id || 0, date_text: m.date_text || m.events?.[0]?.date_text || '', snippet: preset.snippet || ''}}); dialog.close(); toast(i18n('Nom ajouté au cercle.')); renderTranscriptionMarking(++S().workspaceToken, mediaId); }
                 catch (error) { toast(error.message, 'error'); }
             });
             dialog.showModal();
@@ -489,7 +492,7 @@
     }
     ext.dashboard.cited_names_widget = {load: () => api('cited_names'), render: (index, widget, span, data) => {
         const groups = (data?.groups || []).filter(g => !g.person_id).slice(0, 8);
-        return card(index, 'Le cercle des ancêtres', groups.length || '', groups.length ? `<ul class="h-widget-list">${groups.map(g => `<li><strong>${esc(g.name)}</strong>${g.occupations.length ? `, ${esc(g.occupations[0])}` : ''} — ${plural(g.acts, 'acte', 'actes')}${g.from ? ` (${g.from === g.to ? g.from : `${g.from}–${g.to}`})` : ''}</li>`).join('')}</ul>` : empty('Aucun nom indexé dans les transcriptions.'), span);
+        return card(index, i18n('Le cercle des ancêtres'), groups.length || '', groups.length ? `<ul class="h-widget-list">${groups.map(g => `<li><strong>${esc(g.name)}</strong>${g.occupations.length ? `, ${esc(g.occupations[0])}` : ''} — ${plural(g.acts, 'acte', 'actes')}${g.from ? ` (${g.from === g.to ? g.from : `${g.from}–${g.to}`})` : ''}</li>`).join('')}</ul>` : empty(i18n('Aucun nom indexé dans les transcriptions.')), span);
     }};
 
     /* ═══════════════════════ 🔎 VOYAGES IMPOSSIBLES ═══════════════════════ */
@@ -499,29 +502,30 @@
     /* ═══════════════════════ 🤝 TRAVAIL À DEUX ═══════════════════════ */
 
     const opLabel = {create: 'Ajout', update: 'Modification', delete: 'Suppression'};
-    const stateLabel = {new: 'nouveau', ok: 'à appliquer', conflict: '⚠ tu as aussi modifié', same: 'déjà identique', missing: 'absent chez toi'};
+    const stateLabel = {new: 'nouveau', ok: i18n('à appliquer'), conflict: `⚠ ${i18n('tu as aussi modifié')}`, same: i18n('déjà identique'), missing: i18n('absent chez toi')};
     ext.maintenance.sync = async (token, preview = null) => {
         const s = await api('sync_status');
         if (!isCurrent(token)) return;
-        const intro = 'Toi et un cousin, chacun sur son ordinateur, sur la même généalogie. L’app échange des « paquets de modifications » : tu reçois les siens, tu acceptes ou refuses chaque changement. On ne partage jamais la base elle-même par iCloud ou Dropbox (risque de fichier abîmé).';
+        const intro = i18n('Toi et un cousin, chacun sur son ordinateur, sur la même généalogie. L’app échange des « paquets de modifications » : tu reçois les siens, tu acceptes ou refuses chaque changement. On ne partage jamais la base elle-même par iCloud ou Dropbox (risque de fichier abîmé).');
         let body;
         if (!s.active) {
-            body = `<div class="maintenance-panel"><h3>Comment ça marche</h3><ol class="h-steps"><li><b>Commencer</b> ici : chaque fiche reçoit un identifiant commun.</li><li>Donner <b>une copie de ta base</b> à ton cousin (bouton ci-dessous) : il l’ouvre dans son LCNDA (Réglages → Import → ouvrir une base .db).</li><li>Ensuite, chacun travaille de son côté et envoie de temps en temps <b>un paquet de ses modifications</b> (un petit fichier, par e-mail par exemple).</li><li>À la réception, tu <b>acceptes ou refuses</b> chaque changement. Une copie de sécurité est faite avant.</li></ol>
-                <form id="h-sync-start" class="page-actions"><input name="author" placeholder="Ton prénom (ex. Victor)" required><button class="button" type="submit">Commencer le travail à deux</button></form>
-                <p class="muted">Ce qui est échangé : fiches, unions, liens parents-enfants, événements, lieux, notes. Les médias (photos, scans) ne sont pas échangés.</p></div>`;
+            body = `<div class="maintenance-panel"><h3>${i18n('Comment ça marche')}</h3><ol class="h-steps"><li>${i18n('<b>Commencer</b> ici : chaque fiche reçoit un identifiant commun.')}</li><li>${i18n('Donner <b>une copie de ta base</b> à ton cousin (bouton ci-dessous) : il l’ouvre dans son LCNDA (Réglages → Import → ouvrir une base .db).')}</li><li>${i18n('Ensuite, chacun travaille de son côté et envoie de temps en temps <b>un paquet de ses modifications</b> (un petit fichier, par e-mail par exemple).')}</li><li>${i18n('À la réception, tu <b>acceptes ou refuses</b> chaque changement. Une copie de sécurité est faite avant.')}</li></ol>
+                <form id="h-sync-start" class="page-actions"><input name="author" placeholder="${esc(i18n('Ton prénom (ex. Victor)'))}" required><button class="button" type="submit">${i18n('Commencer le travail à deux')}</button></form>
+                <p class="muted">${i18n('Ce qui est échangé : fiches, unions, liens parents-enfants, événements, lieux, notes, sources et citations, fiches des médias et leurs liens. Les fichiers des photos et des scans voyagent seulement avec 🔄 Deux ordinateurs (dossier partagé).')}</p></div>`;
         } else {
-            body = `<div class="h-sync-grid"><section class="maintenance-panel"><h3>Envoyer mes modifications</h3><p>${s.pending ? `<strong>${plural(s.pending, 'modification', 'modifications')}</strong> depuis le dernier paquet.` : 'Aucune modification depuis le dernier paquet.'}${s.last_export_at ? ` <small class="muted">Dernier envoi : ${esc(new Date(s.last_export_at).toLocaleString('fr-FR'))}</small>` : ''}</p>
-                <div class="page-actions"><button type="button" class="button" data-h-sync-export ${s.pending ? '' : 'disabled'}>Préparer le paquet</button><a class="button secondary" href="api.php?action=export_sqlite" download>Copie de la base pour un cousin</a></div>
-                <p class="muted">Le paquet est un fichier « .lcnda-changes.json » à envoyer à ton cousin. Une fois préparé, ces modifications ne seront plus remises dans le paquet suivant : garde-le jusqu’à ce qu’il l’ait reçu.</p>
-                <form id="h-sync-author" class="page-actions"><label class="h-inline">Je signe mes paquets <input name="author" value="${esc(s.author)}"></label><button class="button small secondary" type="submit">Changer</button></form></section>
-                <section class="maintenance-panel"><h3>Recevoir un paquet</h3><form id="h-sync-receive" class="page-actions"><input type="file" name="file" accept=".json,application/json" required><button class="button" type="submit">Lire le paquet</button></form></section></div>
+            body = `<div class="h-sync-grid"><section class="maintenance-panel"><h3>Envoyer mes modifications</h3><p>${s.pending ? `<strong>${plural(s.pending, 'modification', 'modifications')}</strong> ${i18n('depuis le dernier paquet.')}` : i18n('Aucune modification depuis le dernier paquet.')}${s.last_export_at ? ` <small class="muted">Dernier envoi : ${esc(new Date(s.last_export_at).toLocaleString('fr-FR'))}</small>` : ''}</p>
+                <div class="page-actions"><button type="button" class="button" data-h-sync-export ${s.pending ? '' : 'disabled'}>${i18n('Préparer le paquet')}</button><a class="button secondary" href="api.php?action=export_sqlite" download>${i18n('Copie de la base pour un cousin')}</a></div>
+                <p class="muted">${i18n('Le paquet est un fichier « .lcnda-changes.json » à envoyer à ton cousin. Une fois préparé, ces modifications ne seront plus remises dans le paquet suivant : garde-le jusqu’à ce qu’il l’ait reçu.')}</p>
+                <form id="h-sync-author" class="page-actions"><label class="h-inline">${i18n('Je signe mes paquets')} <input name="author" value="${esc(s.author)}"></label><button class="button small secondary" type="submit">Changer</button></form></section>
+                <section class="maintenance-panel"><h3>${i18n('Recevoir un paquet')}</h3><form id="h-sync-receive" class="page-actions"><input type="file" name="file" accept=".json,application/json" required><button class="button" type="submit">${i18n('Lire le paquet')}</button></form></section></div>
                 ${preview ? syncPreviewHtml(preview) : ''}
-                ${s.log?.length ? `<h3>Paquets échangés</h3><table class="data-table"><thead><tr><th>Date</th><th>Sens</th><th>De</th><th>Contenu</th></tr></thead><tbody>${s.log.map(l => `<tr><td>${window.LCNDA_UI?.when?.(l.created_at) || esc(l.created_at)}</td><td>${l.direction === 'sent' ? '📤 envoyé' : '📥 reçu'}</td><td>${esc(l.author)}</td><td>${esc(l.summary)}${l.direction === 'received' ? ` <small>(${l.accepted_count}/${l.change_count} acceptés)</small>` : ''}</td></tr>`).join('')}</tbody></table>` : ''}`;
+                ${s.log?.length ? `<h3>${i18n('Paquets échangés')}</h3><table class="data-table"><thead><tr><th>Date</th><th>Sens</th><th>De</th><th>Contenu</th></tr></thead><tbody>${s.log.map(l => `<tr><td>${window.LCNDA_UI?.when?.(l.created_at) || esc(l.created_at)}</td><td>${l.direction === 'sent' ? `📤 ${i18n('envoyé')}` : `📥 ${i18n('reçu')}`}</td><td>${esc(l.author)}</td><td>${esc(l.summary)}${l.direction === 'received' ? ` <small>${i18n('({accepted_count}/{change_count} acceptés)', {accepted_count: l.accepted_count, change_count: l.change_count})}</small>` : ''}</td></tr>`).join('')}</tbody></table>` : ''}`;
         }
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('RÉGLAGES', 'Travail à deux', intro)}${body}</section>`;
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${header(i18n('RÉGLAGES'), i18n('Travail à deux'), intro)}<section class="maintenance-panel sd-panel" data-sd-panel></section>${body}</section>`;
         const ws = A().$('#workspace');
-        ws.querySelector('#h-sync-start')?.addEventListener('submit', async ev => { ev.preventDefault(); try { await api('sync_start', {}, {method: 'POST', body: {author: ev.currentTarget.author.value}}); toast('Travail à deux commencé. Donne maintenant une copie de ta base à ton cousin.'); rerender(); } catch (error) { toast(error.message, 'error'); } });
-        ws.querySelector('#h-sync-author')?.addEventListener('submit', async ev => { ev.preventDefault(); await api('sync_set_author', {}, {method: 'POST', body: {author: ev.currentTarget.author.value}}); toast('Enregistré.'); });
+        ext.syncFolderPanel?.(ws.querySelector('[data-sd-panel]')); // 🔄 Deux ordinateurs (heritage-sauvegarde.js)
+        ws.querySelector('#h-sync-start')?.addEventListener('submit', async ev => { ev.preventDefault(); try { await api('sync_start', {}, {method: 'POST', body: {author: ev.currentTarget.author.value}}); toast(i18n('Travail à deux commencé. Donne maintenant une copie de ta base à ton cousin.')); rerender(); } catch (error) { toast(error.message, 'error'); } });
+        ws.querySelector('#h-sync-author')?.addEventListener('submit', async ev => { ev.preventDefault(); await api('sync_set_author', {}, {method: 'POST', body: {author: ev.currentTarget.author.value}}); toast(i18n('Enregistré.')); });
         ws.querySelector('[data-h-sync-export]')?.addEventListener('click', () => { location.assign('api.php?action=sync_export'); setTimeout(() => rerender(), 2500); });
         ws.querySelector('#h-sync-receive')?.addEventListener('submit', async ev => {
             ev.preventDefault();
@@ -539,11 +543,11 @@
             apply.addEventListener('submit', async ev => {
                 ev.preventDefault();
                 const accepted = [...apply.querySelectorAll('[name=accept]:checked')].map(c => Number(c.value));
-                if (!accepted.length) return toast('Aucun changement coché.', 'error');
-                if (!await A().confirmBox(`Appliquer ${plural(accepted.length, 'changement', 'changements')} ? Une copie de sécurité de ta base est faite avant.`, {title: 'Appliquer les changements', okLabel: 'Appliquer'})) return;
+                if (!accepted.length) return toast(i18n('Aucun changement coché.'), 'error');
+                if (!await A().confirmBox(i18n('Appliquer {x} ? Une copie de sécurité de ta base est faite avant.', {x: plural(accepted.length, 'changement', 'changements')}), {title: i18n('Appliquer les changements'), okLabel: 'Appliquer'})) return;
                 try {
                     const r = await api('sync_apply', {}, {method: 'POST', body: {token: preview.token, accepted}});
-                    toast(`${plural(r.applied, 'changement appliqué', 'changements appliqués')}${r.locked_skipped ? ` ; ${plural(r.locked_skipped, 'changement ignoré', 'changements ignorés')} (fiche verrouillée)` : ''}.`);
+                    toast(`${plural(r.applied, 'changement appliqué', 'changements appliqués')}${r.locked_skipped ? ` ${i18n('; {x} (fiche verrouillée)', {x: plural(r.locked_skipped, 'changement ignoré', 'changements ignorés')})}` : ''}.`);
                     (r.errors || []).slice(0, 5).forEach(e => toast(e, 'error'));
                     ext.maintenance.sync(++S().workspaceToken);
                 } catch (error) { toast(error.message, 'error'); }
@@ -553,11 +557,11 @@
     function syncPreviewHtml(p) {
         const items = p.items || [];
         const shown = items.filter(i => i.state !== 'same');
-        return `<form class="maintenance-panel" id="h-sync-apply"><h3>Paquet de ${esc(p.author || '?')} <small class="muted">(${p.created_at ? window.LCNDA_UI?.when?.(p.created_at) || esc(p.created_at) : ''})</small></h3>
-            ${p.already_received ? '<p class="h-offsite-sentence is-warn">⚠ Ce paquet a déjà été reçu une fois.</p>' : ''}
-            <p>${plural(items.length, 'changement', 'changements')}${items.length - shown.length ? `, dont ${items.length - shown.length} déjà identiques chez toi (ignorés)` : ''}. Coche ce que tu acceptes. Les conflits (tu as aussi modifié la même chose) sont décochés : regarde-les.</p>
-            <label class="checkbox-line"><input type="checkbox" data-h-sync-all checked> Tout cocher / décocher</label>
-            <table class="data-table h-sync-table"><thead><tr><th></th><th>Changement</th><th>Détail</th></tr></thead><tbody>${shown.map(i => `<tr class="is-${esc(i.state)}"><td><input type="checkbox" name="accept" value="${Number(i.index)}" ${i.state === 'conflict' || i.state === 'missing' ? '' : 'checked'}></td><td><strong>${esc(opLabel[i.op])}</strong> — ${esc(i.label)}<br><small class="muted">${esc(stateLabel[i.state] || i.state)}</small></td><td>${i.fields?.length ? `<ul class="h-sync-fields">${i.fields.map(f => `<li><code>${esc(f.field)}</code> : <s>${esc(f.mine ?? '—')}</s> → <strong>${esc(f.theirs ?? '—')}</strong></li>`).join('')}</ul>` : ''}</td></tr>`).join('') || '<tr><td colspan="3">Rien de nouveau.</td></tr>'}</tbody></table>
-            <div class="page-actions action-zone"><button class="button" type="submit">Appliquer les changements cochés</button></div></form>`;
+        return `<form class="maintenance-panel" id="h-sync-apply"><h3>${i18n('Paquet de {x}', {x: esc(p.author || '?')})} <small class="muted">(${p.created_at ? window.LCNDA_UI?.when?.(p.created_at) || esc(p.created_at) : ''})</small></h3>
+            ${p.already_received ? `<p class="h-offsite-sentence is-warn">⚠ ${i18n('Ce paquet a déjà été reçu une fois.')}</p>` : ''}
+            <p>${plural(items.length, 'changement', 'changements')}${items.length - shown.length ? i18n(', dont {x} déjà identiques chez toi (ignorés)', {x: items.length - shown.length}) : ''}. Coche ce que tu acceptes. Les conflits (tu as aussi modifié la même chose) sont décochés : regarde-les.</p>
+            <label class="checkbox-line"><input type="checkbox" data-h-sync-all checked> ${i18n('Tout cocher / décocher')}</label>
+            <table class="data-table h-sync-table"><thead><tr><th></th><th>Changement</th><th>${i18n('Détail')}</th></tr></thead><tbody>${shown.map(i => `<tr class="is-${esc(i.state)}"><td><input type="checkbox" name="accept" value="${Number(i.index)}" ${i.state === 'conflict' || i.state === 'missing' ? '' : 'checked'}></td><td><strong>${esc(opLabel[i.op])}</strong> — ${esc(i.label)}<br><small class="muted">${esc(stateLabel[i.state] || i.state)}</small></td><td>${i.fields?.length ? `<ul class="h-sync-fields">${i.fields.map(f => `<li><code>${esc(f.field)}</code> : <s>${esc(f.mine ?? '—')}</s> → <strong>${esc(f.theirs ?? '—')}</strong></li>`).join('')}</ul>` : ''}</td></tr>`).join('') || `<tr><td colspan="3">${i18n('Rien de nouveau.')}</td></tr>`}</tbody></table>
+            <div class="page-actions action-zone"><button class="button" type="submit">${i18n('Appliquer les changements cochés')}</button></div></form>`;
     }
 })();

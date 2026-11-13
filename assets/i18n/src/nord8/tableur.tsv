@@ -1,0 +1,1013 @@
+fr ¦ tr
+TABLEUR · BASE ¦ TABLO · VERİTABANI
+⤒ Remplir depuis l’app ¦ ⤒ Uygulamadan doldur
+1 · Ce qu’on prend ¦ 1 · Ne alınacak
+(comme l’export pour partager) ¦ (paylaşmak için dışa aktarma gibi)
+2 · Les colonnes ¦ 2 · Sütunlar
+(glisse ⠿ pour ranger) ¦ (sıralamak için ⠿ sürükle)
+＋ Une colonne tirée des données ¦ ＋ Verilerden alınan bir sütun
+3 · Aperçu ¦ 3 · Önizleme
+🔗 Tenir à jour ¦ 🔗 Güncel tut
+— les lignes changent quand la base change (à l’ouverture, ou avec ↻). Tes colonnes ajoutées à droite (formules, notes) restent sur la bonne ligne. ¦ — veritabanı değişince satırlar da değişir (açılışta ya da ↻ ile). Sağa eklediğin sütunlar (formüller, notlar) doğru satırda kalır.
+Où : ¦ Nereye:
+à la même place (remplace la plage liée) ¦ aynı yere (bağlı aralığın yerine geçer)
+à partir de A1 dans une nouvelle feuille ¦ yeni bir sayfada A1’den başlayarak
+à partir de {cell} dans cette feuille ¦ bu sayfada şu hücreden başlayarak: {cell}
+⤒ Remplir ¦ ⤒ Doldur
+Commune ¦ Yerleşim yeri
+Pas encore de dépouillement : Listes → 📜 Dépouillements. ¦ Henüz döküm yok: Listeler → 📜 Dökümler.
+Statistique ¦ İstatistik
+Hommes et femmes à part ¦ Erkekler ve kadınlar ayrı
+Pas encore de liste à toi : Listes → Mes listes. ¦ Henüz sana ait bir liste yok: Listeler → Listelerim.
+Hommes ¦ Erkekler
+Femmes ¦ Kadınlar
+Inconnu ¦ Bilinmiyor
+Lignée ¦ Soy hattı
+Né(e) à ¦ Doğum yeri
+Nés à partir de ¦ Şu tarihten itibaren doğanlar
+Nés jusqu’à ¦ Şu tarihe kadar doğanlar
+Nés avant ¦ Şu tarihten önce doğanlar
+Sorte ¦ Tür
+Chercher… (nom, prénom) ¦ Ara… (soyadı, ad)
+Chercher… (nom, sorte, lieu) ¦ Ara… (ad, tür, yer)
+👤 personne ¦ 👤 kişi
+📍 lieu ¦ 📍 yer
+📅 date d’acte ¦ 📅 belge tarihi
+nombre ¦ sayı
+Monter ¦ Yukarı taşı
+Descendre ¦ Aşağı taşı
+Retirer la colonne ¦ Sütunu çıkar
+Aucune colonne : ajoute-en une. ¦ Hiç sütun yok: bir tane ekle.
+Lecture de la base… ¦ Veritabanı okunuyor…
+Lecture… ¦ Okunuyor…
+({shown} premières lignes sur {n}) ¦ (ilk {shown} satır, toplam {n})
+Rien ne correspond : change les filtres. ¦ Hiçbir şey eşleşmiyor: filtreleri değiştir.
+{n} de côté (personnes vivantes ou fiches confidentielles). ¦ {n} kenarda bırakıldı (yaşayan kişiler ya da gizli kartlar).
+Seules les {n} premières lignes sont prises : précise les filtres. ¦ Yalnızca ilk {n} satır alınır: filtreleri daralt.
+⤒ Remplir {n} ¦ ⤒ Doldur: {n}
+Toutes les colonnes sont déjà là. ¦ Tüm sütunlar zaten burada.
+Une colonne tirée des données ¦ Verilerden alınan bir sütun
+Cette feuille n’est pas liée à la base : Données → « ⤒ Remplir depuis l’app… ». ¦ Bu sayfa veritabanına bağlı değil: Veri → “⤒ Uygulamadan doldur…”.
+Impossible de relire la base : {error} ¦ Veritabanı yeniden okunamadı: {error}
+🔗 Déjà à jour : rien n’a changé dans la base. ¦ 🔗 Zaten güncel: veritabanında hiçbir şey değişmedi.
+{n} de plus ¦ {n} fazla
+{n} de moins ¦ {n} eksik
+valeurs mises à jour ¦ değer güncellendi
+🔗 « {name} » relue : {what} ({lost}) ¦ 🔗 “{name}” yeniden okundu: {what} ({lost})
+🔗 « {name} » relue : {what} ¦ 🔗 “{name}” yeniden okundu: {what}
+<b>Relevé de recensement</b> · les colonnes de l’année : ¦ <b>Nüfus sayımı dökümü</b> · yılın sütunları:
+Année du recensement ¦ Nüfus sayımı yılı
+📤 Envoyer vers la base… ¦ 📤 Veritabanına gönder…
+🔗 Tenue à jour : <b>{what}</b> · {n} · relue {when} ¦ 🔗 Güncel tutuluyor: <b>{what}</b> · {n} · yeniden okundu: {when}
+la base ¦ veritabanı
+Relire depuis la base ¦ Veritabanından yeniden oku
+↻ Relire ¦ ↻ Yeniden oku
+Changer la source ou les colonnes… ¦ Kaynağı ya da sütunları değiştir…
+Envoyer vers la base… ¦ Veritabanına gönder…
+Ne plus tenir à jour (garder les valeurs) ¦ Artık güncel tutma (değerleri koru)
+« {name} » n’est plus tenue à jour ¦ “{name}” artık güncel tutulmuyor
+Relevé : colonnes de {year} ¦ Döküm: sütunlar ({year})
+Mode consultation : rien ne peut être envoyé vers la base. ¦ Görüntüleme modu: veritabanına hiçbir şey gönderilemez.
+Choisis le tableau à envoyer (sa ligne de titres et ses lignes), puis recommence. ¦ Gönderilecek tabloyu seç (başlık satırı ve satırları), sonra yeniden dene.
+📤 Envoyer vers la base — {name}, lignes {from} à {to} ¦ 📤 Veritabanına gönder — {name}, satır {from}–{to}
+1. Les colonnes ¦ 1. Sütunlar
+2. Voilà ce qui va entrer ¦ 2. İşte girecek olanlar
+3. Envoyer ¦ 3. Gönder
+Voir ce qui va entrer ¦ Neyin gireceğini gör
+Ce que ça crée : ¦ Oluşturacakları:
+Colonne ¦ Sütun
+Exemple ¦ Örnek
+Va dans ¦ Gideceği yer
+(sans titre) ¦ (başlıksız)
+Champ pour la colonne {col} ¦ Sütun için alan: {col}
+Colonnes : {list} ¦ Sütunlar: {list}
+aucune pour l’instant ¦ şimdilik yok
+Déjà dans la base ¦ Zaten veritabanında
+Problème ¦ Sorun
+Laissée de côté ¦ Kenarda bırakıldı
+📤 Créer {n} ¦ 📤 Oluştur: {n}
+📤 Rien de nouveau ¦ 📤 Yeni bir şey yok
+📤 Créer {n} et en relier {m} ¦ 📤 {n} oluştur ve {m} bağla
+📤 Relier {m} ¦ 📤 Bağla: {m}
+📤 Envoyer ¦ 📤 Gönder
+Choisis au moins une colonne à envoyer (le nom, par exemple). ¦ Gönderilecek en az bir sütun seç (örneğin ad).
+Choisis au moins une colonne. ¦ En az bir sütun seç.
+Donne l’année du recensement. ¦ Nüfus sayımının yılını yaz.
+Il faut une colonne pour le nom (ou « Nom et prénom »). ¦ Ad için bir sütun gerekli (ya da “Soyadı ve ad”).
+Il faut une colonne pour le nom. ¦ Ad için bir sütun gerekli.
+Choisis la colonne qui dit la sorte d’événement (Baptême, Décès…). ¦ Olayın türünü veren sütunu seç (Baptême, Décès…).
+Il manque la sorte d’événement. ¦ Olayın türü eksik.
+Ces lignes sont vides. ¦ Bu satırlar boş.
+Je compare avec ta base… ¦ Veritabanınla karşılaştırıyorum…
+Comparaison… ¦ Karşılaştırılıyor…
+Choisir la fiche de la ligne {row} ¦ Satır için kartı seç: {row}
+choisis ▾ ¦ seç ▾
+Relier à {name} ({meta}) ¦ Bağla: {name} ({meta})
+Laisser de côté ¦ Kenarda bırak
+Des lignes ressemblent à plusieurs fiches : choisis la bonne (sinon elles sont laissées de côté). ¦ Bazı satırlar birden çok karta benziyor: doğru olanı seç (yoksa kenarda bırakılırlar).
+Ligne ¦ Satır
+Ce qui va se passer ¦ Ne olacak
+Impossible d’envoyer : {error} ¦ Gönderilemedi: {error}
+contient « {text} » : compté comme {n} ¦ “{text}” içeriyor: {n} olarak sayıldı
+contient l’erreur « {text} » : laissée vide ¦ “{text}” hatasını içeriyor: boş bırakıldı
+« {text} » n’est pas un nombre : laissé vide ¦ “{text}” bir sayı değil: boş bırakıldı
+à trouver ¦ bulunacak
+L’éditeur de diagrammes n’est pas chargé. ¦ Diyagram düzenleyicisi yüklenmedi.
+L’éditeur de graphiques n’est pas chargé. ¦ Grafik düzenleyicisi yüklenmedi.
+Graphique « {name} » ajouté à Mes graphiques (Graphiques, tableau de bord…). ¦ “{name}” grafiği Grafiklerim’e eklendi (Grafikler, gösterge paneli…).
+Le navigateur refuse de copier ici : sélectionne la plage et fais {key}. ¦ Tarayıcı burada kopyalamaya izin vermiyor: aralığı seç ve şu tuşa bas: {key}.
+Copié : dans un tableau (Enquêtes → 🧩 Tableaux), colle-le ({key}) : il devient un objet ▦ Tableur, formules comprises. ¦ Kopyalandı: bir panoda (İncelemeler → 🧩 Panolar) yapıştır ({key}): formülleriyle birlikte bir ▦ Tablo nesnesi olur.
+Copié : dans la page d’un recueil, clique une case du tableau et colle ({key}). ¦ Kopyalandı: bir derlemenin sayfasında tablonun bir hücresine tıkla ve yapıştır ({key}).
+La présentation n’est pas chargée. ¦ Sunum yüklenmedi.
+… et {n} ¦ … ve {n}
+Colonnes attendues : {list} ¦ Beklenen sütunlar: {list}
+(une ou plusieurs) ¦ (bir ya da birkaç)
+(facultatif) ¦ (isteğe bağlı)
+Les données de « {name} » ¦ Veriler: “{name}”
+l’outil ¦ araç
+{name} (données) ¦ {name} (veriler)
+Renvoyer les données là d’où elles viennent ¦ Verileri geldikleri yere geri gönder
+Formules, tri, coller depuis Excel… « Fichier → Enregistrer une copie… » garde aussi ce classeur dans le Tableur. ¦ Formüller, sıralama, Excel’den yapıştırma… “Dosya → Bir kopyasını kaydet…” bu çalışma kitabını Tablo’da da saklar.
+Rien à ouvrir : la liste est vide. ¦ Açılacak bir şey yok: liste boş.
+🧾 Tableur ¦ 🧾 Tablo
+ouvrir dans le tableur ¦ tabloda aç
+🧾 Ouvrir dans le tableur ¦ 🧾 Tabloda aç
+La feuille est vide : écris ou colle un tableau, puis choisis-le. ¦ Sayfa boş: bir tablo yaz ya da yapıştır, sonra onu seç.
+TABLEUR · PRÉPARER POUR… ¦ TABLO · ŞUNUN İÇİN HAZIRLA…
+🎯 Préparer pour… ({range}) ¦ 🎯 Şunun için hazırla… ({range})
+Le tableur sait ce que chaque endroit de l’app attend : choisis où vont ces données. Il vérifie les colonnes de la plage <b>{range}</b> et les range comme il faut. ¦ Tablo, uygulamanın her bölümünün ne beklediğini bilir: bu verilerin nereye gideceğini seç. <b>{range}</b> aralığının sütunlarını kontrol eder ve gerektiği gibi düzenler.
+Dessin ¦ Çizim
+▦ Un tableau ¦ ▦ Bir tablo
+Il faut une colonne de chiffres ¦ Rakamlardan oluşan bir sütun gerekli
+📊 Un graphique ¦ 📊 Bir grafik
+Dans la plage ¦ Aralıkta
+, une ou plusieurs ¦ , bir ya da birkaç
+, facultatif ¦ , isteğe bağlı
+Voir la cellule ¦ Hücreyi gör
+… et {n} à vérifier. ¦ … ve kontrol edilecek {n}.
+Il manque une colonne : ajoute-la dans la plage, ou choisis une autre plage. ¦ Bir sütun eksik: onu aralığa ekle ya da başka bir aralık seç.
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) ¦ Bağlantıyı koru: diyagram tabloyu izler (aralık değişince güncellenir)
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) — le classeur sera enregistré dans le Tableur ¦ Bağlantıyı koru: diyagram tabloyu izler (aralık değişince güncellenir) — çalışma kitabı Tablo’ya kaydedilecek
+← Autre endroit ¦ ← Başka bir yer
+La première ligne donne les titres ¦ İlk satır başlıkları verir
+Pas d’aperçu. ¦ Önizleme yok.
+🎤 Créer la présentation ¦ 🎤 Sunumu oluştur
+Corrige la cellule, puis rouvre « 🎯 Préparer pour… ». ¦ Hücreyi düzelt, sonra “🎯 Şunun için hazırla…” penceresini yeniden aç.
+Ces données reviennent dans leur outil : le diagramme est fait d’une copie (pas de lien). ¦ Bu veriler kendi araçlarına geri döner: diyagram bir kopyadan yapılır (bağlantı yok).
+Choisis une plage avec des nombres (par exemple : Décennie, Hommes, Femmes). ¦ Sayılar içeren bir aralık seç (örneğin: On yıl, Erkekler, Kadınlar).
+Tous les types de diagrammes… ¦ Tüm diyagram türleri…
+Conseillés pour {range} ¦ Önerilenler: {range}
+🔗 Données : « {name} » ! {range} ¦ 🔗 Veriler: “{name}” ! {range}
+Classeur ¦ Çalışma kitabı
+(feuille « {name} ») ¦ (sayfa: “{name}”)
+tenu à jour ¦ güncel tutuluyor
+Les figer ¦ Sabitle
+⚠️ Classeur introuvable (supprimé ?) : le dessin garde les derniers chiffres lus. ¦ ⚠️ Çalışma kitabı bulunamadı (silindi mi?): çizim okunan son rakamları korur.
+TABLEUR ¦ TABLO
+Nom du classeur… ¦ Çalışma kitabının adı…
+Plage illisible : écris par exemple A1:C12. ¦ Aralık okunamıyor: örneğin A1:C12 yaz.
+Feuille ¦ Sayfa
+Plage ¦ Aralık
+Copier une fois (les chiffres ne bougent plus) ¦ Bir kez kopyala (rakamlar artık değişmez)
+Garder le lien : le diagramme suit le classeur (tenu à jour) ¦ Bağlantıyı koru: diyagram çalışma kitabını izler (güncel tutulur)
+Lecture du classeur… ¦ Çalışma kitabı okunuyor…
+Choisis un classeur. ¦ Bir çalışma kitabı seç.
+Écris une plage, par exemple A1:C12. ¦ Bir aralık yaz, örneğin A1:C12.
+Écris le résultat voulu dans la première case de la colonne (par exemple « Jean D. »), puis relance ✨ Remplissage instantané. ¦ İstediğin sonucu sütunun ilk hücresine yaz (örneğin “Jean D.”), sonra ✨ Anında doldurma’yı yeniden çalıştır.
+Je ne trouve pas de règle qui marche pour tous les exemples : écris-en un de plus, ou un plus simple. ¦ Tüm örneklere uyan bir kural bulamıyorum: bir örnek daha ya da daha basit bir örnek yaz.
+Rien à remplir : la colonne est déjà pleine. ¦ Doldurulacak bir şey yok: sütun zaten dolu.
+{what} de {col} ¦ {what} — {col}
+{what} n°{n} de {col} ¦ {what} no. {n} — {col}
+{what} n°{n} depuis la fin de {col} ¦ {what} sondan no. {n} — {col}
+✨ {n} (règle : {rule}). ↶ pour annuler. ¦ ✨ {n} (kural: {rule}). Geri almak için ↶.
+Choisis un tableau avec une ligne de titres et des lignes de données. ¦ Başlık satırı ve veri satırları olan bir tablo seç.
+Colonne {col} ¦ Sütun {col}
+DONNÉES ¦ VERİ
+Σ Sous-totaux ¦ Σ Ara toplamlar
+Créer les sous-totaux ¦ Ara toplamları oluştur
+D’après <b>{range}</b>. Une nouvelle feuille : les lignes rangées par groupe, un total sous chaque groupe (formules), puis le total général. « ⊟ Plan » (menu Données) replie le détail. ¦ Kaynak: <b>{range}</b>. Yeni bir sayfa: gruplara ayrılmış satırlar, her grubun altında bir toplam (formüller), sonra genel toplam. “⊟ Anahat” (Veri menüsü) ayrıntıyı katlar.
+À chaque changement de ¦ Şu değiştiğinde
+Calcul ¦ Hesap
+Sur les colonnes ¦ Şu sütunlarda
+Coche au moins une colonne à calculer. ¦ Hesaplanacak en az bir sütunu işaretle.
+Σ {n}. « ⊟ Plan » (menu Données) replie le détail. ¦ Σ {n}. “⊟ Anahat” (Veri menüsü) ayrıntıyı katlar.
+Cette feuille n’a pas de sous-totaux : Données → Σ Sous-totaux… d’abord. ¦ Bu sayfada ara toplam yok: önce Veri → Σ Ara toplamlar….
+⊟ Détail replié : seuls les totaux restent. ¦ ⊟ Ayrıntı katlandı: yalnızca toplamlar kaldı.
+⊞ Détail déplié. ¦ ⊞ Ayrıntı açıldı.
+🎯 Valeur cible ¦ 🎯 Hedef değer
+L’app essaie des valeurs dans « la case à changer » jusqu’à ce que la formule donne le résultat voulu. Ex. : à quel âge s’est-il marié pour que la différence d’âge soit 7 ans ? ¦ Uygulama, formül istediğin sonucu verene kadar “değişecek hücre”de değerler dener. Örn.: yaş farkının 7 yıl olması için kaç yaşında evlendi?
+La formule de la case ¦ Hücrenin formülü
+Doit donner ¦ Vermesi gereken
+En changeant la case ¦ Değiştirilecek hücre
+Écris une adresse de case (ex. C5, B2). ¦ Bir hücre adresi yaz (örn. C5, B2).
+Écris le résultat voulu. ¦ İstediğin sonucu yaz.
+La première case doit contenir une formule. ¦ İlk hücre bir formül içermeli.
+Pas de valeur trouvée : la formule ne dépend peut-être pas de cette case, ou ne peut pas atteindre ce résultat. ¦ Değer bulunamadı: formül belki bu hücreye bağlı değil ya da bu sonuca ulaşamıyor.
+🎯 {cell} = {value} : la formule donne {target}. ↶ pour annuler. ¦ 🎯 {cell} = {value}: formül {target} veriyor. Geri almak için ↶.
+INSERTION ¦ EKLE
+📈 Mini-graphique ¦ 📈 Mini grafik
+Poser ¦ Yerleştir
+Un petit graphique dans la case, qui suit les chiffres. Plusieurs lignes choisies : un graphique par ligne (la plage descend avec elles). ¦ Hücrenin içinde rakamları izleyen küçük bir grafik. Birkaç satır seçiliyse: her satıra bir grafik (aralık onlarla birlikte aşağı iner).
+Les nombres (plage de la 1re ligne) ¦ Sayılar (1. satırın aralığı)
+Gagné / perdu ¦ Kazanç / kayıp
+Couleur ¦ Renk
+Écris une plage, par exemple B2:F2. ¦ Bir aralık yaz, örneğin B2:F2.
+🧮 Solveur ¦ 🧮 Çözücü
+Résoudre ¦ Çöz
+Comme la valeur cible, mais en changeant plusieurs cases à la fois, avec des conditions. Ex. : répartir un héritage entre trois branches pour que chacune ait au moins 1 000 € et que l’écart soit le plus petit possible. ¦ Hedef değer gibi, ama koşullarla birlikte aynı anda birkaç hücreyi değiştirerek. Örn.: bir mirası üç kol arasında, her birine en az 1 000 € düşecek ve fark olabildiğince küçük olacak şekilde paylaştır.
+La formule (case objectif) ¦ Formül (hedef hücre)
+Doit être ¦ Olması gereken
+la plus grande possible ¦ olabildiğince büyük
+la plus petite possible ¦ olabildiğince küçük
+égale à… ¦ şuna eşit…
+Valeur (si « égale à ») ¦ Değer (“şuna eşit” ise)
+En changeant les cases ¦ Değiştirilecek hücreler
+B2:B4 ou B2;C3 ¦ B2:B4 ya da B2;C3
+Conditions (une par ligne : {examples}) ¦ Koşullar (her satıra bir tane: {examples})
+Nombres entiers seulement ¦ Yalnızca tam sayılar
+La case objectif doit contenir une formule (ex. D5). ¦ Hedef hücre bir formül içermeli (örn. D5).
+Trente cases à changer au plus. ¦ En fazla otuz hücre değiştirilebilir.
+Écris les cases à changer (ex. B2:B4). ¦ Değiştirilecek hücreleri yaz (örn. B2:B4).
+Condition illisible : « {text} » (ex. B2 >= 0). ¦ Koşul okunamıyor: “{text}” (örn. B2 >= 0).
+Écris la valeur voulue. ¦ İstediğin değeri yaz.
+Pas de solution qui respecte toutes les conditions (vérifie-les, ou change le départ). ¦ Tüm koşullara uyan bir çözüm yok (koşulları kontrol et ya da başlangıcı değiştir).
+🧮 Trouvé : {cell} = {value} ({n}). ↶ pour annuler. ¦ 🧮 Bulundu: {cell} = {value} ({n}). Geri almak için ↶.
+📋 Tableau de scénarios ¦ 📋 Senaryo tablosu
+Et si cette case valait 20, 25, 30… ? Le tableau montre ce que donnent les formules pour chaque valeur. Il est posé à partir de la case choisie ({cell}) ; rien d’autre ne change. ¦ Bu hücre 20, 25, 30… olsaydı? Tablo, formüllerin her değer için ne verdiğini gösterir. Seçili hücreden ({cell}) başlayarak yerleştirilir; başka hiçbir şey değişmez.
+La case qui change ¦ Değişen hücre
+Ses valeurs (séparées par « ; », ou une plage) ¦ Değerleri (“;” ile ayrılmış ya da bir aralık)
+20;25;30 ou A10:A15 ¦ 20;25;30 ya da A10:A15
+Les formules à suivre ¦ İzlenecek formüller
+Écris la case qui change (ex. B2). ¦ Değişen hücreyi yaz (örn. B2).
+Écris au moins une formule (ex. C5). ¦ En az bir formül yaz (örn. C5).
+Écris des valeurs (500 au plus). ¦ Değerler yaz (en fazla 500).
+📋 {n} (valeurs fixes : refais-le si les données changent). ¦ 📋 {n} (sabit değerler: veriler değişirse yeniden yap).
+Rien n’a été enregistré. ¦ Hiçbir şey kaydedilmedi.
+⏺ Nommer l’action ¦ ⏺ Eylemi adlandır
+Mon action ¦ Eylemim
+Garder ¦ Sakla
+⏺ Action « {name} » gardée : Données → ▶ Actions enregistrées. ¦ ⏺ “{name}” eylemi saklandı: Veri → ▶ Kaydedilen eylemler.
+⏺ Enregistrement : fais tes manipulations (menus, boutons, formats), puis Données → ⏹ Arrêter l’enregistrement. ¦ ⏺ Kayıt: işlemlerini yap (menüler, düğmeler, biçimler), sonra Veri → ⏹ Kaydı durdur.
+Aucune action enregistrée : Données → ⏺ Enregistrer une action. ¦ Kaydedilmiş eylem yok: Veri → ⏺ Bir eylem kaydet.
+▶ Actions enregistrées ¦ ▶ Kaydedilen eylemler
+Elles se refont sur la sélection du moment. ¦ O anki seçim üzerinde yeniden yapılırlar.
+▶ Refaire ¦ ▶ Yeniden yap
+▶ « {name} » refaite. ¦ ▶ “{name}” yeniden yapıldı.
+Colonne {n} ¦ Sütun {n}
+{what} de « {col} » ¦ {what} — “{col}”
+Lignes ¦ Satırlar
+Total ¦ Toplam
+{title} · par « {rows} » et « {cols} » — d’après {src} ¦ {title} · satırlar: “{rows}”, sütunlar: “{cols}” — kaynak: {src}
+{title} · par « {rows} » — d’après {src} ¦ {title} · satırlar: “{rows}” — kaynak: {src}
+Choisis une plage avec une ligne de titres et des lignes de données (par exemple : Nom, Commune, Année, Âge). ¦ Başlık satırı ve veri satırları olan bir aralık seç (örneğin: Ad, Yerleşim yeri, Yıl, Yaş).
+🔀 Tableau croisé dynamique ¦ 🔀 Özet tablo
+Créer le tableau croisé ¦ Özet tabloyu oluştur
+D’après <b>{range}</b> ({n}). Le résultat va dans une nouvelle feuille ; « ↻ Actualiser le tableau croisé » (menu Données) le refait si les données changent. ¦ Kaynak: <b>{range}</b> ({n}). Sonuç yeni bir sayfaya gider; “↻ Özet tabloyu yenile” (Veri menüsü) veriler değişirse onu yeniden yapar.
+En lignes ¦ Satırlarda
+En colonnes (facultatif) ¦ Sütunlarda (isteğe bağlı)
+— rien — ¦ — hiçbiri —
+Sur la colonne ¦ Sütun
+— (compter les lignes) — ¦ — (satırları say) —
+Totaux ¦ Toplamlar
+Aperçu : {rows} × {cols} ¦ Önizleme: {rows} × {cols}
+Tableau croisé créé : {rows} × {cols}. Données → « ↻ Actualiser le tableau croisé » pour le refaire. ¦ Özet tablo oluşturuldu: {rows} × {cols}. Yeniden yapmak için Veri → “↻ Özet tabloyu yenile”.
+Cette feuille n’est pas un tableau croisé : va sur sa feuille « TCD … ». ¦ Bu sayfa bir özet tablo değil: onun “TCD …” sayfasına git.
+La feuille des données n’existe plus. ¦ Veri sayfası artık yok.
+Tableau croisé actualisé ({rows} × {cols}). ¦ Özet tablo yenilendi ({rows} × {cols}).
+Graphique vivant ¦ Canlı grafik
+Type de graphique ¦ Grafik türü
+En faire un diagramme lié à la plage ¦ Aralığa bağlı bir diyagram yap
+Choisis des cases avec des nombres (et leurs noms à gauche ou en haut) : le graphique se dessine ici. ¦ Sayı içeren hücreleri seç (ve adlarını solda ya da üstte): grafik burada çizilir.
+Plage {range} · suit la sélection ¦ Aralık {range} · seçimi izler
+Le moteur du tableur n’est pas chargé. ¦ Tablo motoru yüklenmedi.
+Mon classeur ¦ Çalışma kitabım
+Rien à rétablir. ¦ Yinelenecek bir şey yok.
+d’autres changements ont suivi : utilise ↶ ({key}) ¦ ardından başka değişiklikler yapıldı: ↶ kullan ({key})
+Barre d’outils · {group} ¦ Araç çubuğu · {group}
+Barre d’outils ¦ Araç çubuğu
+Police et gras ¦ Yazı tipi ve kalın
+Police (E5) ¦ Yazı tipi (E5)
+Police ¦ Yazı tipi
+Gras ¦ Kalın
+Italique ¦ İtalik
+Souligné ¦ Altı çizili
+Renvoi à la ligne ¦ Metni kaydır
+Fusionner / séparer ¦ Birleştir / ayır
+Aligner à gauche ¦ Sola hizala
+Centrer ¦ Ortala
+Aligner à droite ¦ Sağa hizala
+Couleurs (C2) ¦ Renkler (C2)
+Couleur du texte ¦ Metin rengi
+Format de cellule ¦ Hücre biçimi
+Format de la cellule ¦ Hücrenin biçimi
+Une décimale de moins ¦ Bir ondalık eksik
+Une décimale de plus ¦ Bir ondalık fazla
+Bordures ¦ Kenarlıklar
+Bordures : tout ¦ Kenarlıklar: tümü
+Bordures : contour ¦ Kenarlıklar: dış çerçeve
+Bordure du bas ¦ Alt kenarlık
+Sans bordure ¦ Kenarlık yok
+Graphique ¦ Grafik
+Un diagramme avec les chiffres de la sélection : les types conseillés pour cette plage ¦ Seçimdeki rakamlarla bir diyagram: bu aralık için önerilen türler
+Choisir une fonction ¦ Bir işlev seç
+Fonction ¦ İşlev
+XLSX, ODS, CSV, TSV, JSON, PDF, impression ¦ XLSX, ODS, CSV, TSV, JSON, PDF, yazdırma
+✓ Enregistrer et revenir ¦ ✓ Kaydet ve geri dön
+Plein écran (⛶) ¦ Tam ekran (⛶)
+Données d’un autre outil ¦ Başka bir araçtan gelen veriler
+Adresse (tape D12 ou un nom pour y aller) ¦ Adres (oraya gitmek için D12 ya da bir ad yaz)
+Tape une adresse (D12, B2:C9) ou un nom pour y aller ¦ Oraya gitmek için bir adres (D12, B2:C9) ya da bir ad yaz
+Contenu ou formule de la cellule ¦ Hücrenin içeriği ya da formülü
+Feuille de calcul ¦ Çalışma sayfası
+Feuille de calcul : tape pour écrire dans la cellule choisie ¦ Çalışma sayfası: seçili hücreye yazmak için yaz
+Écrire dans la cellule ¦ Hücreye yaz
+Panneau de droite ¦ Sağ panel
+Feuilles ¦ Sayfalar
+Clique pour choisir ce qu’on y voit (somme, moyenne…) ¦ Burada ne görüneceğini seçmek için tıkla (toplam, ortalama…)
+Enregistrer une copie dans le Tableur… ¦ Bir kopyasını Tablo’ya kaydet…
+Enregistrer une copie… ¦ Bir kopyasını kaydet…
+Enregistrer comme modèle… ¦ Şablon olarak kaydet…
+Exporter (XLSX, ODS, CSV, PDF…)… ¦ Dışa aktar (XLSX, ODS, CSV, PDF…)…
+Feuille « {name} » ¦ Sayfa: “{name}”
+Pas encore relié à une fiche ¦ Henüz bir karta bağlı değil
+Tire pour recopier ou continuer une suite ¦ Kopyalamak ya da bir diziyi sürdürmek için sürükle
+« {text} » n’est pas dans la liste : {list} ¦ “{text}” listede yok: {list}
+Il faut un nombre d’au moins {min} et au plus {max}. ¦ En az {min} ve en fazla {max} olan bir sayı gerekli.
+Il faut un nombre d’au moins {min}. ¦ En az {min} olan bir sayı gerekli.
+Il faut un nombre et au plus {max}. ¦ En fazla {max} olan bir sayı gerekli.
+Il faut un nombre. ¦ Bir sayı gerekli.
+Je ne comprends pas cette date ({why}). ¦ Bu tarihi anlamıyorum ({why}).
+exemples : 7 mai 1925, vers 1784, an II ¦ örnekler: 7 mai 1925, vers 1784, an II
+Tab = compléter ¦ Tab = tamamla
+✓ Compris comme une date d’acte : <b>{date}</b> (approximative : les calculs montreront ≈) ¦ ✓ Belge tarihi olarak anlaşıldı: <b>{date}</b> (yaklaşık: hesaplar ≈ gösterecek)
+✓ Compris comme une date d’acte : <b>{date}</b> ¦ ✓ Belge tarihi olarak anlaşıldı: <b>{date}</b>
+Texte ou nombre. Commence par <b>=</b> pour calculer. ¦ Metin ya da sayı. Hesaplamak için <b>=</b> ile başla.
+ƒ Formule : clique ou glisse sur des cellules pour les mettre, ou tape le nom d’une fonction (en français ou en anglais). <kbd>F4</kbd> : $A$1. ¦ ƒ Formül: hücreleri eklemek için onlara tıkla ya da üzerlerinde sürükle, veya bir işlevin adını yaz (Fransızca ya da İngilizce). <kbd>F4</kbd>: $A$1.
+Corriger en {name} ¦ Şöyle düzelt: {name}
+Résultat approché : une des dates est approximative (« vers », « avant », « an … » sans jour). ¦ Yaklaşık sonuç: tarihlerden biri yaklaşık (“vers”, “avant”, günü olmayan “an …”).
+« {text} » : ni une adresse (D12, B2:C9), ni un nom du classeur. ¦ “{text}”: ne bir adres (D12, B2:C9) ne de çalışma kitabındaki bir ad.
+Pas de feuille « {name} ». ¦ “{name}” adlı sayfa yok.
+Utilise {key} dans la grille (le navigateur ne laisse pas un bouton écrire dans le presse-papiers). ¦ Izgarada {key} kullan (tarayıcı bir düğmenin panoya yazmasına izin vermiyor).
+En pixels (6 à 72) : ¦ Piksel olarak (6 ile 72 arası):
+Lignes masquées (Format → Tout remontrer) ¦ Gizli satırlar (Biçim → Tümünü yeniden göster)
+Colonnes masquées (Format → Tout remontrer) ¦ Gizli sütunlar (Biçim → Tümünü yeniden göster)
+Trier A → Z (sur la colonne choisie) ¦ A → Z sırala (seçili sütuna göre)
+Trier Z → A ¦ Z → A sırala
+Trier sur plusieurs colonnes… ¦ Birkaç sütuna göre sırala…
+Espaces en trop retirés. ¦ Fazla boşluklar kaldırıldı.
+Rien à retirer. ¦ Kaldırılacak bir şey yok.
+Police des cellules ¦ Hücrelerin yazı tipi
+Cette police a un nom que le tableur ne sait pas garder. ¦ Bu yazı tipinin adı tabloda saklanamıyor.
+Une taille entre 6 et 72 px (« {value} » ne va pas). ¦ 6 ile 72 px arasında bir boyut (“{value}” olmaz).
+Une taille entre 6 et 72 px. ¦ 6 ile 72 px arasında bir boyut.
+Choisis d’abord plusieurs cases à fusionner. ¦ Önce birleştirilecek birkaç hücre seç.
+Cases fusionnées : {n} ¦ Birleştirilen hücreler: {n}
+Largeur de colonne ¦ Sütun genişliği
+Hauteur de ligne ¦ Satır yüksekliği
+En pixels (16 à 1200) : ¦ Piksel olarak (16 ile 1200 arası):
+En pixels (12 à 600) : ¦ Piksel olarak (12 ile 600 arası):
+Un nom commence par une lettre, sans espace (ex. Total, Âges_1836). ¦ Bir ad harfle başlar, boşluk içermez (örn. Toplam, Yaslar_1836).
+Nom « {name} » = {ref} : tape =SOMME({name}) dans une formule. ¦ Ad “{name}” = {ref}: bir formülde =SOMME({name}) yaz.
+Nom pour la plage ¦ Aralık için ad
+Un nom pour {ref} (pour écrire =SOMME(Total) au lieu de =SOMME(D2:D40)) : ¦ Şunun için bir ad: {ref} (=SOMME(D2:D40) yerine =SOMME(Total) yazmak için):
+💬 Note sur {cell} ¦ 💬 Not: {cell}
+La note s’affiche au survol de la case (un petit coin orange). Vide = pas de note. ¦ Not, hücrenin üzerine gelince görünür (küçük turuncu bir köşe). Boş = not yok.
+⌨️ Raccourcis du tableur ¦ ⌨️ Tablo kısayolları
+Raccourcis indisponibles. ¦ Kısayollar kullanılamıyor.
+⚙️ Réglages du tableur ¦ ⚙️ Tablo ayarları
+Après la touche Entrée, aller ¦ Enter tuşundan sonra şuraya git
+vers le bas ¦ aşağı
+vers la droite (saisie de relevés en ligne) ¦ sağa (dökümleri satır satır girmek için)
+Séparateur des fichiers CSV ¦ CSV dosyalarının ayırıcısı
+point-virgule « ; » (Excel en français) ¦ noktalı virgül “;” (Fransızca Excel)
+virgule « , » ¦ virgül “,”
+tabulation ¦ sekme karakteri
+Largeur des colonnes d’une feuille neuve ¦ Yeni bir sayfanın sütun genişliği
+Dans la barre du bas, pour les cellules choisies ¦ Alt çubukta, seçili hücreler için
+Réglages du tableur ¦ Tablo ayarları
+Trop de lignes ou de colonnes d’un coup. ¦ Aynı anda çok fazla satır ya da sütun.
+Trié {dir} sur la colonne {col} (la 1re ligne, ce sont les titres). ¦ {dir} sıralandı, sütun: {col} (1. satır başlıklardır).
+Trié {dir} sur la colonne {col}. ¦ {dir} sıralandı, sütun: {col}.
+A → Z (croissant) ¦ A → Z (artan)
+Z → A (décroissant) ¦ Z → A (azalan)
+Plage {range} · les dates d’actes (« vers 1784 », « an II ») se rangent à leur date. ¦ Aralık {range} · belge tarihleri (“vers 1784”, “an II”) kendi tarihlerine göre sıralanır.
+La première ligne, ce sont les titres ¦ İlk satır başlıklardır
+Puis par ¦ Sonra şuna göre
+Choisis un tableau avec une ligne de titres et des lignes en dessous. ¦ Başlık satırı ve altında satırlar olan bir tablo seç.
+(vide) ¦ (boş)
+Chercher dans le tableau… (nom, métier) ¦ Tabloda ara… (ad, meslek)
+{n} sur {total} ¦ {n} / {total}
+Supprimer les doublons ¦ Yinelenenleri sil
+Plage {range} · la 1re ligne, ce sont les titres. La première ligne de chaque groupe reste. ¦ Aralık {range} · 1. satır başlıklardır. Her grubun ilk satırı kalır.
+Plage {range}. La première ligne de chaque groupe reste. ¦ Aralık {range}. Her grubun ilk satırı kalır.
+Compare les colonnes : ¦ Sütunları karşılaştır:
+{n} en double (lignes {rows}). ¦ {n} yinelenen (satırlar: {rows}).
+{n} en double (ligne {rows}). ¦ {n} yinelenen (satır: {rows}).
+Aucune ligne en double. ¦ Yinelenen satır yok.
+Supprimer {n} ¦ Sil: {n}
+Coche au moins une colonne. ¦ En az bir sütunu işaretle.
+Choisis des cases de texte dans une colonne (ex. « MARTIN Jean, 34 ans, laboureur »). ¦ Bir sütunda metin hücreleri seç (örn. “MARTIN Jean, 34 ans, laboureur”).
+Convertir le texte en colonnes ¦ Metni sütunlara dönüştür
+Convertir ¦ Dönüştür
+Couper à : ¦ Şuradan böl:
+« 34 ans » devient 34 ¦ “34 ans” 34 olur
+Le nom en capitales devient une colonne à part (« MARTIN Jean » → MARTIN | Jean) ¦ Büyük harfli soyadı ayrı bir sütun olur (“MARTIN Jean” → MARTIN | Jean)
+Les morceaux vont dans la colonne {col} et les suivantes (ce qui s’y trouve est remplacé ; ↶ pour revenir). ¦ Parçalar {col} sütununa ve sonrakilere gider (oradakiler değiştirilir; geri dönmek için ↶).
+Validation des données ¦ Veri doğrulama
+Pour {range} : ce qu’on peut écrire dans ces cases. ¦ Aralık: {range} — bu hücrelere ne yazılabileceği.
+Autoriser ¦ İzin ver
+Une liste de choix (menu ▾) ¦ Bir seçim listesi (menü ▾)
+👤 Une personne de la base (menu de choix) ¦ 👤 Veritabanından bir kişi (seçim menüsü)
+📍 Un lieu de la base (menu de choix) ¦ 📍 Veritabanından bir yer (seçim menüsü)
+Un nombre entre… ¦ Şu aralıkta bir sayı…
+Une date d’acte (vers 1784, an II…) ¦ Bir belge tarihi (vers 1784, an II…)
+Les choix (un par ligne) ¦ Seçenekler (her satıra bir tane)
+Entre ¦ Arasında
+Garder aussi un texte libre (sans fiche, ou hors de la liste) ¦ Serbest metni de koru (kartsız ya da liste dışında)
+Écris au moins un choix. ¦ En az bir seçenek yaz.
+FORMAT ¦ BİÇİM
+Mise en forme conditionnelle ¦ Koşullu biçimlendirme
+Ajouter la règle ¦ Kuralı ekle
+Une couleur quand la valeur le demande : l’erreur ou la valeur étrange saute aux yeux. ¦ Değer gerektirdiğinde bir renk: hata ya da tuhaf değer hemen göze çarpar.
+Prêtes à l’emploi : ¦ Kullanıma hazır:
+« âge > 100 ans » ¦ “yaş > 100”
+« date impossible » ¦ “imkânsız tarih”
+« doublons » ¦ “yinelenenler”
+« barres » ¦ “çubuklar”
+Si la valeur ¦ Değer
+alors ¦ ise
+en gras ¦ kalın
+Une plage comme D2:D40. ¦ D2:D40 gibi bir aralık.
+Écris un nombre. ¦ Bir sayı yaz.
+ÉDITION ¦ DÜZEN
+🔍 Rechercher et remplacer ¦ 🔍 Bul ve değiştir
+Remplacer tout ¦ Tümünü değiştir
+Remplacer par ¦ Şununla değiştir
+Dans toutes les feuilles ¦ Tüm sayfalarda
+Respecter les capitales ¦ Büyük/küçük harfe uy
+Chercher le suivant ¦ Sonrakini bul
+Trouvé en {cell} ¦ Bulundu: {cell}
+Écris ce qu’il faut chercher. ¦ Aranacak şeyi yaz.
+Aucune fonction ne correspond. ¦ Hiçbir işlev eşleşmiyor.
+ƒ Choisir une fonction ¦ ƒ Bir işlev seç
+Chercher… (âge, somme, recherche) ¦ Ara… (yaş, toplam, arama)
+Le menu de choix n’est pas chargé. ¦ Seçim menüsü yüklenmedi.
+📍 Un lieu pour {cell} ¦ 📍 Bir yer — hücre: {cell}
+👤 Une personne pour {cell} ¦ 👤 Bir kişi — hücre: {cell}
+📍 Lieu de la base ¦ 📍 Veritabanından yer
+auto ¦ otomatik
+Décimales ¦ Ondalıklar
+✓ « {text} » est comprise (≈) ¦ ✓ “{text}” anlaşıldı (≈)
+✓ « {text} » est comprise ¦ ✓ “{text}” anlaşıldı
+Noir ¦ Siyah
+Contour ¦ Dış çizgi
+Retirer la règle ¦ Kuralı çıkar
+Aucune règle sur cette feuille. ¦ Bu sayfada kural yok.
+＋ Ajouter une règle… ¦ ＋ Bir kural ekle…
+Une liste : {list} ¦ Bir liste: {list}
+👤 Une personne de la base ¦ 👤 Veritabanından bir kişi
+📍 Un lieu de la base ¦ 📍 Veritabanından bir yer
+Un nombre ¦ Bir sayı
+Une date d’acte ¦ Bir belge tarihi
+Garder le texte ¦ Metni koru
+Pas de validation ici. ¦ Burada doğrulama yok.
+Validation des données… ¦ Veri doğrulama…
+Enregistre d’abord le classeur (💾), puis ouvre la fiche. ¦ Önce çalışma kitabını kaydet (💾), sonra kartı aç.
+{name} : lieu n° {id} de ta base. ¦ {name}: veritabanındaki yer no. {id}.
+Règle « {range} » retirée ¦ “{range}” kuralı çıkarıldı
+Police (E5) : {font} ¦ Yazı tipi (E5): {font}
+celle de départ ¦ başlangıçtaki
+Panneau de droite : montrer ¦ Sağ panel: göster
+Panneau de droite : cacher ¦ Sağ panel: gizle
+Double-clic : renommer · clic droit : plus d’actions ¦ Çift tıklama: yeniden adlandır · sağ tıklama: diğer eylemler
+Ajouter une feuille ¦ Sayfa ekle
+Feuille {n} ¦ Sayfa {n}
+Renommer la feuille ¦ Sayfayı yeniden adlandır
+Un classeur garde au moins une feuille. ¦ Bir çalışma kitabında en az bir sayfa kalır.
+Feuille « {name} » supprimée ¦ “{name}” sayfası silindi
+Couleur de l’onglet… ¦ Sekme rengi…
+Déplacer à gauche ¦ Sola taşı
+Déplacer à droite ¦ Sağa taşı
+Somme <b>{v}</b> ¦ Toplam <b>{v}</b>
+Moyenne <b>{v}</b> ¦ Ortalama <b>{v}</b>
+Nb <b>{v}</b> ¦ Sayı <b>{v}</b>
+Min <b>{v}</b> ¦ En küçük <b>{v}</b>
+Max <b>{v}</b> ¦ En büyük <b>{v}</b>
+Dans la barre d’état ¦ Durum çubuğunda
+Utilise {key} : le navigateur ne laisse pas un menu écrire dans le presse-papiers. ¦ {key} kullan: tarayıcı bir menünün panoya yazmasına izin vermiyor.
+Sélection trop grande pour le presse-papiers. ¦ Seçim pano için çok büyük.
+Coupé : choisis où coller, puis {key}. ¦ Kesildi: nereye yapıştıracağını seç, sonra {key}.
+Utilise {key} dans la grille pour coller. ¦ Yapıştırmak için ızgarada {key} kullan.
+Trop de cellules à coller. ¦ Yapıştırılacak çok fazla hücre var.
+{n} (avec le gras et les couleurs). ¦ {n} (kalın ve renklerle birlikte).
+Série {n} ¦ Seri {n}
+Colonnes groupées ¦ Gruplanmış sütunlar
+Barres horizontales ¦ Yatay çubuklar
+TSV (tabulations) ¦ TSV (sekmeler)
+⤒ Importer un tableau ¦ ⤒ Bir tablo içe aktar
+Séparateur deviné : {sep} · Encodage : {enc} ¦ Tahmin edilen ayırıcı: {sep} · Kodlama: {enc}
+point-virgule (;) ¦ noktalı virgül (;)
+virgule (,) ¦ virgül (,)
+✓ Accents corrects : « {list} ». ¦ ✓ Aksanlar doğru: “{list}”.
+<b>{rows}</b> dans {sheets} ¦ <b>{rows}</b> · {sheets}
+CSV et TSV : la feuille ouverte. Les autres : tout le classeur. Une cellule qui commence par « = » est protégée dans un CSV (pas de formule glissée). ¦ CSV ve TSV: açık sayfa. Diğerleri: tüm çalışma kitabı. “=” ile başlayan bir hücre CSV’de korunur (gizlice eklenmiş formül olmaz).
+tout tableur ¦ her tablo programı
+tabulations ¦ sekmeler
+données ¦ veriler
+à lire ¦ okunacak
+💾 Fichier de l’outil ¦ 💾 Aracın dosyası
+Exporté : {name} ¦ Dışa aktarıldı: {name}
+(feuille vide) ¦ (boş sayfa)
+Toutes les feuilles ¦ Tüm sayfalar
+Quadrillage ¦ Kılavuz çizgileri
+Rangé dans Listes → Outils de modification → 🧾 Tableur. ¦ Şuraya kaydedildi: Listeler → Düzenleme araçları → 🧾 Tablo.
+Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles). ¦ “{name}” şablonu kaydedildi (Bir şablondan başla → Şablonlarım).
+Copie « {name} » enregistrée. ¦ “{name}” kopyası kaydedildi.
+Ce classeur ¦ Bu çalışma kitabı
+Impossible d’enregistrer : {error} ¦ Kaydedilemedi: {error}
+Enregistrer comme modèle ¦ Şablon olarak kaydet
+Enregistrer une copie ¦ Bir kopyasını kaydet
+Le nom du modèle (les données restent : vide-les avant si tu veux un modèle vierge) : ¦ Şablonun adı (veriler kalır: boş bir şablon istiyorsan önce onları temizle):
+Le nom de la copie : ¦ Kopyanın adı:
+{name} (copie) ¦ {name} (kopya)
+Les changements faits depuis le dernier enregistrement seront perdus. ¦ Son kayıttan bu yana yapılan değişiklikler kaybolacak.
+📋 Partir d’un modèle ¦ 📋 Bir şablondan başla
+Mes modèles ¦ Şablonlarım
+Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Henüz sana ait bir şablon yok: bir çalışma kitabında Dosya → “Şablon olarak kaydet…”.
+séparateur « {sep} » ¦ ayırıcı “{sep}”
+Classeur importé ¦ İçe aktarılan çalışma kitabı
+Classeur « {name} » créé ({rows}) ¦ “{name}” çalışma kitabı oluşturuldu ({rows})
+classeur ¦ çalışma kitabı
+＋ Nouveau classeur ¦ ＋ Yeni çalışma kitabı
+Relevé de recensement, registre paroissial, budget de la recherche, suivi des courriers… ¦ Nüfus sayımı dökümü, kilise kayıt defteri, araştırma bütçesi, yazışma takibi…
+Tu divises par zéro : {ref} est vide ou vaut 0. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Sıfıra bölüyorsun: {ref} boş ya da 0. İpucu: =SI.ERREUR(…;"") hücreyi boş bırakır.
+Tu divises par zéro : {why}. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Sıfıra bölüyorsun: {why}. İpucu: =SI.ERREUR(…;"") hücreyi boş bırakır.
+Tu divises par zéro. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Sıfıra bölüyorsun. İpucu: =SI.ERREUR(…;"") hücreyi boş bırakır.
+Je ne connais pas « {name} ». Voulais-tu dire {sugg} ? ¦ “{name}” adını tanımıyorum. Şunu mu demek istedin: {sugg}?
+Je ne connais pas « {name} ». Tape les premières lettres : la liste des fonctions s’ouvre. ¦ “{name}” adını tanımıyorum. İlk harflerini yaz: işlev listesi açılır.
+Un nom inconnu dans la formule. ¦ Formülde bilinmeyen bir ad.
+« {text} » n’est pas un nombre (cellule {cell}) : on ne peut pas faire de calcul avec. ¦ “{text}” bir sayı değil (hücre {cell}): onunla hesap yapılamaz.
+« {text} » n’est pas un nombre : on ne peut pas faire de calcul avec. ¦ “{text}” bir sayı değil: onunla hesap yapılamaz.
+Une valeur ne convient pas ¦ Bir değer uygun değil
+{what} (cellule {cell}). ¦ {what} (hücre {cell}).
+La formule montre quelque chose qui n’existe pas : {what}. ¦ Formül var olmayan bir şeyi gösteriyor: {what}.
+La formule montre une cellule qui a été supprimée. ¦ Formül silinmiş bir hücreyi gösteriyor.
+Valeur introuvable ¦ Değer bulunamadı
+La recherche ¦ Arama
+{fn} n’a pas trouvé « {what} » dans {where}. ¦ {fn} “{what}” değerini bulamadı. Yer: {where}.
+{fn} n’a pas trouvé « {what} ». ¦ {fn} “{what}” değerini bulamadı.
+{path} : la formule tourne en rond. ¦ {path}: formül kendi etrafında dönüyor.
+La formule a besoin d’elle-même : elle tourne en rond. ¦ Formül kendine ihtiyaç duyuyor: kendi etrafında dönüyor.
+« {text} » : {why}. ¦ “{text}”: {why}.
+cette date ¦ bu tarih
+Je ne comprends pas {what} (« {text} »). Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Anlamıyorum: {what} (“{text}”). Örnekler: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas {what}. Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Anlamıyorum: {what}. Örnekler: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas la formule près de « {near} » : {why}. ¦ Formülü “{near}” yakınında anlamıyorum: {why}.
+Je ne comprends pas la formule : {why}. ¦ Formülü anlamıyorum: {why}.
+Je ne comprends pas la formule près de « {near} » : vérifie les parenthèses, les guillemets et les « ; ». ¦ Formülü “{near}” yakınında anlamıyorum: parantezleri, tırnakları ve “;” işaretlerini kontrol et.
+Je ne comprends pas la formule : vérifie les parenthèses, les guillemets et les « ; ». ¦ Formülü anlamıyorum: parantezleri, tırnakları ve “;” işaretlerini kontrol et.
+Nombre impossible ¦ İmkânsız sayı
+Le résultat a besoin de {size} vers le bas et la droite, mais {cell} n’est pas vide : vide-la pour voir tout le résultat. ¦ Sonuç aşağıya ve sağa doğru şunu gerektiriyor: {size}; ama {cell} boş değil: sonucun tamamını görmek için onu boşalt.
+plusieurs cases ¦ birkaç hücre
+une case ¦ bir hücre
+Trop gros pour être calculé : {why}. ¦ Hesaplanamayacak kadar büyük: {why}.
+réduis la plage ¦ aralığı küçült
+Erreur dans la formule. ¦ Formülde hata.
+Astuce : =SI.ERREUR(A4/B4;"") ¦ İpucu: =SI.ERREUR(A4/B4;"")
+fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un document de bureau n’utilise pas ¦ dosya reddedildi: bir ofis belgesinin kullanmadığı XML bildirimleri (DOCTYPE ya da ENTITY) içeriyor
+fichier XML abîmé ¦ bozuk XML dosyası
+fichier refusé : trop d’éléments ¦ dosya reddedildi: çok fazla öğe
+fichier refusé : XML trop imbriqué ¦ dosya reddedildi: XML çok fazla iç içe
+fichier trop gros (plus de {n} Mo) ¦ dosya çok büyük ({n} MB’den fazla)
+ce n’est pas un fichier zip valide ¦ bu geçerli bir zip dosyası değil
+fichier refusé : trop d’éléments dans le zip ¦ dosya reddedildi: zip içinde çok fazla öğe
+fichier chiffré : ouvre-le d’abord dans son tableur et enregistre-le sans mot de passe ¦ şifreli dosya: önce kendi tablo programında aç ve parolasız kaydet
+fichier zip abîmé ¦ bozuk zip dosyası
+fichier refusé : trop gros une fois décompressé ¦ dosya reddedildi: açıldığında çok büyük
+fichier refusé : il se décompresse en beaucoup trop gros (bombe zip) ¦ dosya reddedildi: açıldığında çok fazla büyüyor (zip bombası)
+ce navigateur ne sait pas ouvrir les fichiers zip (mets-le à jour) ¦ bu tarayıcı zip dosyalarını açamıyor (onu güncelle)
+compression inconnue dans le fichier ¦ dosyada bilinmeyen sıkıştırma
+ce n’est pas un fichier Excel (.xlsx) : xl/workbook.xml manque ¦ bu bir Excel dosyası (.xlsx) değil: xl/workbook.xml eksik
+fichier refusé : trop de feuilles ¦ dosya reddedildi: çok fazla sayfa
+fichier refusé : trop de cellules ¦ dosya reddedildi: çok fazla hücre
+ce n’est pas un fichier LibreOffice (.ods) : content.xml manque ¦ bu bir LibreOffice dosyası (.ods) değil: content.xml eksik
+ce fichier n’est pas un JSON valide ¦ bu dosya geçerli bir JSON değil
+je ne trouve pas de tableau dans ce JSON (il faut une liste de lignes ou d’objets) ¦ bu JSON içinde tablo bulamıyorum (satırlardan ya da nesnelerden oluşan bir liste gerekli)
+les anciens fichiers Excel (.xls) ne sont pas lus : ouvre-le dans Excel ou LibreOffice et enregistre-le en .xlsx ¦ eski Excel dosyaları (.xls) okunmuyor: onu Excel’de ya da LibreOffice’te aç ve .xlsx olarak kaydet
+ce fichier compressé n’est ni un .xlsx ni un .ods ¦ bu sıkıştırılmış dosya ne .xlsx ne de .ods
+Nombre 0,00 ¦ Sayı 0,00
+Nombre entier ¦ Tam sayı
+Monnaie (€) ¦ Para birimi (€)
+Pourcentage ¦ Yüzde
+Date courte ¦ Kısa tarih
+Date d’acte ¦ Belge tarihi
+Texte ¦ Metin
+Relevé de recensement ¦ Nüfus sayımı dökümü
+colonnes de l’année · foyers · « Né(e) vers » calculé ¦ yılın sütunları · haneler · “Tahmini doğum” hesaplanır
+Registre paroissial ¦ Kilise kayıt defteri
+baptêmes, mariages, sépultures ¦ vaftizler, evlilikler, defnler
+Budget de la recherche ¦ Araştırma bütçesi
+actes, déplacements, abonnements ¦ belgeler, yolculuklar, abonelikler
+Suivi des courriers ¦ Yazışma takibi
+envoyé, relancé, réponse ¦ gönderildi, hatırlatıldı, yanıt
+Arbre en tableau ¦ Tablo hâlinde ağaç
+Sosa, génération, côté, âge ¦ Sosa, kuşak, taraf, yaş
+objets, prix, total en livres ¦ eşyalar, fiyatlar, livres cinsinden toplam
+Registre matricule ¦ Askerlik kayıt defteri
+classe, signalement, campagnes ¦ sınıf, eşkâl, seferler
+📋 Partir d’un modèle… ¦ 📋 Bir şablondan başla…
+⤒ Importer un tableau… ¦ ⤒ Bir tablo içe aktar…
+⤓ Exporter… ¦ ⤓ Dışa aktar…
+🖨 Imprimer… ¦ 🖨 Yazdır…
+⚙️ Réglages du tableur… ¦ ⚙️ Tablo ayarları…
+Insertion ¦ Ekle
+Coller les valeurs seulement ¦ Yalnızca değerleri yapıştır
+Effacer le contenu ¦ İçeriği temizle
+Effacer tout (contenu et mise en forme) ¦ Tümünü temizle (içerik ve biçim)
+Recopier vers le bas ¦ Aşağı doğru doldur
+Recopier vers la droite ¦ Sağa doğru doldur
+🔍 Rechercher et remplacer… ¦ 🔍 Bul ve değiştir…
+Ligne au-dessus ¦ Üstte satır
+Ligne en dessous ¦ Altta satır
+＋ Nouvelle feuille ¦ ＋ Yeni sayfa
+ƒ Fonction… ¦ ƒ İşlev…
+Σ Somme automatique ¦ Σ Otomatik toplam
+📅 Date du jour ¦ 📅 Bugünün tarihi
+Nom pour la plage… ¦ Aralık için ad…
+💬 Note sur la cellule… ¦ 💬 Hücreye not…
+📊 Graphique depuis la sélection ¦ 📊 Seçimden grafik
+Barré ¦ Üstü çizili
+Aa Police… ¦ Aa Yazı tipi…
+Taille du texte… ¦ Metin boyutu…
+↵ Renvoi à la ligne ¦ ↵ Metni kaydır
+⊞ Fusionner / séparer ¦ ⊞ Birleştir / ayır
+▦ Bordures : tout ¦ ▦ Kenarlıklar: tümü
+▭ Bordures : contour ¦ ▭ Kenarlıklar: dış çerçeve
+▁ Bordure du bas ¦ ▁ Alt kenarlık
+Largeur de colonne… ¦ Sütun genişliği…
+Hauteur de ligne… ¦ Satır yüksekliği…
+Ajuster la largeur au contenu ¦ Genişliği içeriğe uydur
+Masquer les lignes ¦ Satırları gizle
+Masquer les colonnes ¦ Sütunları gizle
+Tout remontrer ¦ Tümünü yeniden göster
+Mise en forme conditionnelle… ¦ Koşullu biçimlendirme…
+Une ligne sur deux ¦ Satır aralı renk
+Effacer la mise en forme ¦ Biçimi temizle
+↕ Trier A → Z ¦ ↕ A → Z sırala
+↕ Trier Z → A ¦ ↕ Z → A sırala
+⚲ Filtrer ¦ ⚲ Filtrele
+Supprimer les doublons… ¦ Yinelenenleri sil…
+Convertir le texte en colonnes… ¦ Metni sütunlara dönüştür…
+Retirer les espaces en trop ¦ Fazla boşlukları kaldır
+Figer la 1re ligne ¦ 1. satırı sabitle
+Figer la 1re colonne ¦ 1. sütunu sabitle
+Figer jusqu’à la cellule choisie ¦ Seçili hücreye kadar sabitle
+Libérer les volets ¦ Bölmeleri serbest bırak
+Montrer les formules ¦ Formülleri göster
+⤢ Ajuster à la fenêtre ¦ ⤢ Pencereye sığdır
+100 % (taille réelle) ¦ %100 (gerçek boyut)
+⌨️ Raccourcis du tableur… ¦ ⌨️ Tablo kısayolları…
+Rechercher et remplacer ¦ Bul ve değiştir
+Filtrer (barre de recherche et filtres au-dessus) ¦ Filtrele (üstte arama çubuğu ve filtreler)
+Trier la plage ¦ Aralığı sırala
+Somme, moyenne, nombre… ¦ Toplam, ortalama, sayı…
+Une personne de la base dans la cellule ¦ Hücreye veritabanından bir kişi
+Un lieu de la base dans la cellule ¦ Hücreye veritabanından bir yer
+Note sur la cellule ¦ Hücreye not
+Graphique avec les chiffres de la sélection ¦ Seçimdeki rakamlarla grafik
+Tape pour écrire · = pour calculer · double-clic pour modifier · clic droit pour les actions · glisse le petit carré pour recopier ¦ Yazmak için yaz · hesaplamak için = · düzenlemek için çift tıkla · eylemler için sağ tıkla · kopyalamak için küçük kareyi sürükle
+Entrée valide · Tab : case à droite · Échap annule · pendant une formule, clique ou glisse sur des cellules pour les y mettre ¦ Enter onaylar · Tab: sağdaki hücre · Esc iptal eder · formül yazarken hücreleri eklemek için onlara tıkla ya da üzerlerinde sürükle
+Σ Somme ¦ Σ Toplam
+Nombre ¦ Sayı
+Minimum ¦ En küçük
+Maximum ¦ En büyük
+Somme ¦ Toplam
+Panneau de droite ouvert ¦ Sağ panel açık
+, virgule ¦ , virgül
+; point-virgule ¦ ; noktalı virgül
+espace ¦ boşluk
+Autre… ¦ Diğer…
+plus grande que ¦ şundan büyük
+plus petite que ¦ şundan küçük
+au moins ¦ en az
+au plus ¦ en fazla
+égale à ¦ şuna eşit
+différente de ¦ şundan farklı
+entre ¦ arasında
+contient le texte ¦ şu metni içeriyor
+est vide ¦ boş
+n’est pas vide ¦ boş değil
+est en double ¦ yinelenmiş
+est une date impossible ¦ imkânsız bir tarih
+barres dans la cellule ¦ hücrede çubuklar
+fond jaune ¦ sarı arka plan
+fond rouge ¦ kırmızı arka plan
+fond vert ¦ yeşil arka plan
+fond bleu ¦ mavi arka plan
+fond orange ¦ turuncu arka plan
+fond violet ¦ mor arka plan
+règle|plus grande que ¦ şundan büyük
+règle|plus petite que ¦ şundan küçük
+règle|au moins ¦ en az
+règle|au plus ¦ en fazla
+règle|égale à ¦ şuna eşit
+règle|différente de ¦ şundan farklı
+règle|entre ¦ arasında
+règle|contient ¦ içeriyor
+règle|vide ¦ boş
+règle|pas vide ¦ boş değil
+règle|en double ¦ yinelenen
+règle|date impossible ¦ imkânsız tarih
+règle|barres ¦ çubuklar
+Cellule ¦ Hücre
+Nombre et date ¦ Sayı ve tarih
+Couleur et bordures ¦ Renk ve kenarlıklar
+Validation ¦ Doğrulama
+Adresse ¦ Adres
+Valeur ¦ Değer
+Formule ¦ Formül
+Autorise ¦ İzin verir
+Sinon ¦ Aksi hâlde
+Insérer une ligne au-dessus ¦ Üste satır ekle
+Insérer une ligne en dessous ¦ Alta satır ekle
+Insérer une colonne à gauche ¦ Sola sütun ekle
+Insérer une colonne à droite ¦ Sağa sütun ekle
+Trier A → Z ¦ A → Z sırala
+Retirer le filtre ¦ Filtreyi kaldır
+Note… ¦ Not…
+Ajuster la largeur ¦ Genişliği uydur
+Supprimer les lignes ¦ Satırları sil
+Supprimer les colonnes ¦ Sütunları sil
+Windows (vieil Excel) ¦ Windows (eski Excel)
+👤 Des fiches ¦ 👤 Kartlar
+🏠 Un recensement (foyers) ¦ 🏠 Bir nüfus sayımı (haneler)
+📅 Des événements ¦ 📅 Olaylar
+— ne pas envoyer — ¦ — gönderme —
+Nom et prénom ¦ Soyadı ve ad
+Sexe ¦ Cinsiyet
+Naissance (date ou année) ¦ Doğum (tarih ya da yıl)
+Décès (date) ¦ Ölüm (tarih)
+N° de foyer (ménage) ¦ Hane no.
+N° de maison ¦ Ev no.
+Rue, quartier ¦ Sokak, mahalle
+Patron, employeur ¦ Usta, işveren
+Situation (marié, veuf…) ¦ Medeni durum (evli, dul…)
+Observations, notes ¦ Gözlemler, notlar
+Sorte d’événement (acte) ¦ Olay türü (belge)
+Date de l’événement ¦ Olayın tarihi
+Lieu de l’événement ¦ Olayın yeri
+colonnes de l’année (1836 → 1936) · foyers · 📤 vers la base ¦ yılın sütunları (1836 → 1936) · haneler · 📤 veritabanına
+⤒ Remplir depuis l’app… ¦ ⤒ Uygulamadan doldur…
+↻ Relire depuis la base ¦ ↻ Veritabanından yeniden oku
+catégorie + séries ¦ kategori + seriler
+📊 Créer le diagramme ¦ 📊 Diyagramı oluştur
+Un graphique ¦ Bir grafik
+📈 Créer le graphique ¦ 📈 Grafiği oluştur
+objet ▦ Tableur ¦ ▦ Tablo nesnesi
+📋 Copier pour un tableau ¦ 📋 Bir pano için kopyala
+Un recueil ¦ Bir derleme
+tableur d’une page ¦ bir sayfadaki tablo
+📋 Copier pour un recueil ¦ 📋 Bir derleme için kopyala
+tableau ou graphique ¦ tablo ya da grafik
+Ce que le diagramme attend ¦ Diyagramın beklediği
+Ce que le graphique attend ¦ Grafiğin beklediği
+Ce que le tableau attend ¦ Panonun beklediği
+Ce que le recueil attend ¦ Derlemenin beklediği
+Pyramide des âges ¦ Yaş piramidi
+Courbes ¦ Eğriler
+Radar ¦ Radar
+Barres groupées ¦ Gruplanmış çubuklar
+Camembert (une seule série) ¦ Pasta (tek seri)
+Rectangles proportionnels ¦ Ağaç haritası
+🎯 Préparer pour… (diagramme, graphique, présentation…) ¦ 🎯 Şunun için hazırla… (diyagram, grafik, sunum…)
+initiale ¦ baş harf
+MAJUSCULES ¦ BÜYÜK HARF
+minuscules ¦ küçük harf
+Capitale ¦ Baş harfi büyük
+Plus petit ¦ En küçük
+Plus grand ¦ En büyük
+✨ Remplissage instantané ¦ ✨ Anında doldurma
+Σ Sous-totaux… ¦ Σ Ara toplamlar…
+⊟ Plan : replier / déplier le détail ¦ ⊟ Anahat: ayrıntıyı katla / aç
+🎯 Valeur cible… ¦ 🎯 Hedef değer…
+🧮 Solveur… ¦ 🧮 Çözücü…
+📋 Tableau de scénarios (et si…)… ¦ 📋 Senaryo tablosu (ya şöyle olsaydı…)…
+⏺ Enregistrer une action / ⏹ arrêter ¦ ⏺ Bir eylem kaydet / ⏹ durdur
+▶ Actions enregistrées… ¦ ▶ Kaydedilen eylemler…
+📈 Mini-graphique… ¦ 📈 Mini grafik…
+Nombre de lignes ¦ Satır sayısı
+Nombre de valeurs différentes ¦ Farklı değer sayısı
+En % de la ligne ¦ Satırın %’si olarak
+En % de la colonne ¦ Sütunun %’si olarak
+En % du tout ¦ Toplamın %’si olarak
+🔀 Tableau croisé dynamique… ¦ 🔀 Özet tablo…
+↻ Actualiser le tableau croisé ¦ ↻ Özet tabloyu yenile
+📊 Graphique vivant (suit la sélection) ¦ 📊 Canlı grafik (seçimi izler)
+📊 Graphique vivant ¦ 📊 Canlı grafik
+Vide ¦ Boş
+⛔ Formule en erreur ¦ ⛔ Hatalı formül
+ƒ Formule ¦ ƒ Formül
+VRAI / FAUX ¦ DOĞRU / YANLIŞ
+⚠️ Date impossible ¦ ⚠️ İmkânsız tarih
+📅 Date d’acte ¦ 📅 Belge tarihi
+Conditions ¦ Koşullar
+Logique ¦ Mantık
+Conjoint ¦ Eş
+Parents ¦ Ebeveynler
+N° de fiche ¦ Kart no.
+Date ¦ Tarih
+Personne(s) ¦ Kişi(ler)
+Description ¦ Açıklama
+N° d’événement ¦ Olay no.
+Foyer ¦ Hane
+Employeur ¦ İşveren
+Situation ¦ Durum
+Rue ¦ Sokak
+N° ¦ No.
+Adresse entière ¦ Tam adres
+Deuxième prénom ¦ İkinci ad
+Titre ¦ Unvan
+Suffixe ¦ Sonek
+FamilySearch ¦ FamilySearch
+Description physique ¦ Fiziksel tanım
+Teint ¦ Ten rengi
+Origine ¦ Köken
+Vivant ? ¦ Yaşıyor mu?
+Modifié le ¦ Değiştirilme tarihi
+Cause ¦ Neden
+Autorité ¦ Yetkili
+Confiance ¦ Güven
+Date convertie ¦ Dönüştürülmüş tarih
+Autre date ¦ Diğer tarih
+Informations en plus ¦ Ek bilgiler
+Calendrier ¦ Takvim
+Relevés de dépouillement ¦ Döküm kayıtları
+Noms de famille ¦ Soyadları
+Âges au décès ¦ Ölüm yaşları
+Décès par siècle ¦ Yüzyıllara göre ölümler
+Communes de naissance ¦ Doğum yerleşim yerleri
+Départements de naissance ¦ Doğum illeri (départements)
+Naissances par mois ¦ Aylara göre doğumlar
+Personnes par génération ¦ Kuşaklara göre kişiler
+Additionne des nombres ou des plages. ¦ Sayıları ya da aralıkları toplar.
+La moyenne des nombres. ¦ Sayıların ortalaması.
+Le plus petit nombre. ¦ En küçük sayı.
+Le plus grand nombre. ¦ En büyük sayı.
+Compte les cellules qui contiennent un nombre. ¦ Sayı içeren hücreleri sayar.
+Compte les cellules qui ne sont pas vides. ¦ Boş olmayan hücreleri sayar.
+Compte les cellules vides. ¦ Boş hücreleri sayar.
+Multiplie des nombres. ¦ Sayıları çarpar.
+Arrondit au plus proche. ¦ En yakına yuvarlar.
+Arrondit vers zéro. ¦ Sıfıra doğru yuvarlar.
+Arrondit en s’éloignant de zéro. ¦ Sıfırdan uzağa yuvarlar.
+La partie entière (arrondi vers le bas). ¦ Tam sayı kısmı (aşağı yuvarlanmış).
+Le nombre sans son signe. ¦ İşaretsiz sayı.
+Le reste d’une division. ¦ Bir bölmenin kalanı.
+Un nombre élevé à une puissance. ¦ Bir kuvvete yükseltilmiş sayı.
+La racine carrée. ¦ Karekök.
+La valeur du milieu. ¦ Ortadaki değer.
+L’écart type (sur un échantillon). ¦ Standart sapma (bir örneklem üzerinde).
+La place d’un nombre dans une liste (1 = le plus grand ; ordre 1 = le plus petit d’abord). ¦ Bir sayının listedeki sırası (1 = en büyük; sıra 1 = önce en küçük).
+La k-ième plus grande valeur. ¦ k’ıncı en büyük değer.
+La k-ième plus petite valeur. ¦ k’ıncı en küçük değer.
+Une valeur si le test est vrai, une autre sinon. ¦ Test doğruysa bir değer, değilse başka bir değer.
+La valeur du premier test vrai. ¦ İlk doğru testin değeri.
+La valeur, ou autre chose s’il y a une erreur. ¦ Değer ya da bir hata varsa başka bir şey.
+La valeur, ou autre chose si elle n’est pas trouvée (#N/A). ¦ Değer ya da bulunamazsa (#N/A) başka bir şey.
+VRAI si tous les tests sont vrais. ¦ Tüm testler doğruysa VRAI (doğru).
+VRAI si au moins un test est vrai. ¦ En az bir test doğruysa VRAI (doğru).
+La valeur VRAI (comme le mot VRAI). ¦ VRAI (doğru) değeri (VRAI sözcüğü gibi).
+La valeur FAUX (comme le mot FAUX). ¦ FAUX (yanlış) değeri (FAUX sözcüğü gibi).
+Inverse un test. ¦ Bir testi tersine çevirir.
+Compte les cellules qui remplissent une condition (">60", "laboureur", "lab*"). ¦ Bir koşulu sağlayan hücreleri sayar (">60", "laboureur", "lab*").
+Compte les lignes qui remplissent toutes les conditions. ¦ Tüm koşulları sağlayan satırları sayar.
+Additionne les cellules qui remplissent une condition. ¦ Bir koşulu sağlayan hücreleri toplar.
+Additionne les lignes qui remplissent toutes les conditions. ¦ Tüm koşulları sağlayan satırları toplar.
+La moyenne des cellules qui remplissent une condition. ¦ Bir koşulu sağlayan hücrelerin ortalaması.
+Cherche dans la 1re colonne d’un tableau et rend la valeur d’une autre colonne. ¦ Bir tablonun 1. sütununda arar ve başka bir sütunun değerini verir.
+Cherche dans la 1re ligne d’un tableau. ¦ Bir tablonun 1. satırında arar.
+Cherche une valeur et rend celle d’à côté. ¦ Bir değeri arar ve yanındakini verir.
+La valeur à une ligne et une colonne de la plage. ¦ Aralığın bir satırındaki ve sütunundaki değer.
+La position d’une valeur dans une plage (type 0 = exactement). ¦ Bir değerin aralıktaki konumu (tür 0 = tam olarak).
+La n-ième valeur de la liste. ¦ Listenin n’inci değeri.
+Les valeurs sans doublons (déborde sur les cases du dessous). ¦ Yinelenmeyen değerler (alttaki hücrelere taşar).
+La plage triée (ordre 1 = croissant, -1 = décroissant). ¦ Sıralanmış aralık (sıra 1 = artan, -1 = azalan).
+Les lignes de la plage qui remplissent la condition (ex. =FILTRE(A2:C9; C2:C9>30)). ¦ Aralığın koşulu sağlayan satırları (örn. =FILTRE(A2:C9; C2:C9>30)).
+Met des textes bout à bout. ¦ Metinleri uç uca ekler.
+Met des textes bout à bout avec un séparateur. ¦ Metinleri bir ayırıcıyla uç uca ekler.
+Les premiers caractères. ¦ İlk karakterler.
+Les derniers caractères. ¦ Son karakterler.
+Un morceau au milieu d’un texte. ¦ Bir metnin ortasından bir parça.
+Le nombre de caractères. ¦ Karakter sayısı.
+En capitales. ¦ Büyük harflerle.
+En minuscules. ¦ Küçük harflerle.
+Une capitale au début de chaque mot. ¦ Her sözcüğün başında büyük harf.
+Retire les espaces en trop. ¦ Fazla boşlukları kaldırır.
+Remplace un morceau de texte. ¦ Bir metin parçasını değiştirir.
+La position d’un texte dans un autre (sans tenir compte des capitales). ¦ Bir metnin başka bir metindeki konumu (büyük/küçük harf fark etmez).
+Un nombre ou une date écrits avec un format ("0,00", "0 %", "jj/mm/aaaa"). ¦ Bir biçimle yazılmış bir sayı ya da tarih ("0,00", "0 %", "jj/mm/aaaa").
+Le nombre écrit dans un texte. ¦ Bir metinde yazılı sayı.
+Fabrique une date. ¦ Bir tarih oluşturur.
+L’année d’une date (date d’acte comprise). ¦ Bir tarihin yılı (belge tarihleri de anlaşılır).
+Le mois d’une date (1 à 12). ¦ Bir tarihin ayı (1 ile 12 arası).
+Le jour du mois. ¦ Ayın günü.
+Le jour de la semaine (type 1 : 1 = dimanche ; type 2 : 1 = lundi … 7 = dimanche ; type 3 : 0 = lundi). ¦ Haftanın günü (tür 1: 1 = pazar; tür 2: 1 = pazartesi … 7 = pazar; tür 3: 0 = pazartesi).
+La date du jour. ¦ Bugünün tarihi.
+La date et l’heure. ¦ Tarih ve saat.
+L’écart entre deux dates, en années, mois ou jours (« AM » : mois en plus des années, « MJ » : jours en plus des mois, « AJ » : jours en plus des années ; « Y », « D », « YM », « MD », « YD » d’Excel compris). ¦ İki tarih arasındaki fark, yıl, ay ya da gün olarak (“AM”: yıllara ek aylar, “MJ”: aylara ek günler, “AJ”: yıllara ek günler; Excel’in “Y”, “D”, “YM”, “MD”, “YD” kodları da anlaşılır).
+L’âge entre deux dates d’acte (« vers 1784 », « an II » compris) ; « ≈ » si une date est approximative. Unité : « ans », « mois » ou « jours ». ¦ İki belge tarihi arasındaki yaş (“vers 1784”, “an II” anlaşılır); bir tarih yaklaşıksa “≈”. Birim: “ans”, “mois” ya da “jours”.
+L’année trouvée dans un texte d’acte, même républicain (« baptisé le 3 frimaire an XII » → 1803). ¦ Bir belge metninde bulunan yıl, Cumhuriyet takviminde bile (“baptisé le 3 frimaire an XII” → 1803).
+La date comprise, écrite proprement (comme « ✓ Compris : » des champs de date). ¦ Anlaşılan tarih, düzgünce yazılmış (tarih alanlarındaki “✓ Anlaşıldı:” gibi).
+« jour », « mois », « année », « vers », « avant », « après » ou « entre ». ¦ “jour”, “mois”, “année”, “vers”, “avant”, “après” ya da “entre”.
+La date dans le calendrier républicain. ¦ Cumhuriyet takvimindeki tarih.
+La génération d’un numéro Sosa (1 = toi, 2 et 3 = tes parents…). ¦ Bir Sosa numarasının kuşağı (1 = sen, 2 ve 3 = ebeveynlerin…).
+Le numéro Sosa du père (2 × n). ¦ Babanın Sosa numarası (2 × n).
+Le numéro Sosa de la mère (2 × n + 1). ¦ Annenin Sosa numarası (2 × n + 1).
+« paternel » ou « maternel » (le côté du Sosa 1). ¦ “paternel” ya da “maternel” (Sosa 1’in tarafı).
+Un petit graphique dans la case : "courbe", "barres" ou "gagné" (au-dessus ou au-dessous de zéro). ¦ Hücrede küçük bir grafik: "courbe" (eğri), "barres" (çubuklar) ya da "gagné" (sıfırın üstünde ya da altında).
+Donne un nom à une valeur pour l’utiliser dans le calcul. ¦ Hesapta kullanmak için bir değere ad verir.
+Une petite fonction à soi, à utiliser dans LET, MAP, PAR.LIGNE… ¦ LET, MAP, PAR.LIGNE… içinde kullanılacak, sana ait küçük bir işlev.
+Applique la LAMBDA à chaque case de la plage. ¦ LAMBDA’yı aralığın her hücresine uygular.
+Un résultat par ligne de la plage. ¦ Aralığın her satırı için bir sonuç.
+Un résultat par colonne de la plage. ¦ Aralığın her sütunu için bir sonuç.
+Cumule les cases une à une (un total qui avance). ¦ Hücreleri tek tek biriktirir (ilerleyen bir toplam).
+Comme REDUCE, avec chaque étape du total. ¦ REDUCE gibi, toplamın her adımıyla birlikte.
+=ligne laissée ¦ satır kenarda bırakıldı|satır kenarda bırakıldı
+=ligne remplie depuis l’app (tenue à jour) ¦ satır uygulamadan dolduruldu (güncel tutuluyor)|satır uygulamadan dolduruldu (güncel tutuluyor)
+=ligne remplie depuis l’app ¦ satır uygulamadan dolduruldu|satır uygulamadan dolduruldu
+=ligne à toi sans fiche : retirée ¦ kartı olmayan kendi satırın: çıkarıldı|kartı olmayan kendi satırın: çıkarıldı
+=nouvelle fiche ¦ yeni kart|yeni kart
+=reliée ¦ bağlandı|bağlandı
+=laissée ¦ kenarda bırakıldı|kenarda bırakıldı
+=autre ligne ¦ başka satır|başka satır
+=case ¦ hücre|hücre
+=autre case ¦ başka hücre|başka hücre
+=case remplie ¦ hücre dolduruldu|hücre dolduruldu
+=groupe ¦ grup|grup
+=case changée ¦ hücre değişti|hücre değişti
+=scénario calculé ¦ senaryo hesaplandı|senaryo hesaplandı
+=commande ¦ komut|komut
+=fonction ¦ işlev|işlev
+=valeur en plus de la première retirée ¦ ilkinden başka değer çıkarıldı|ilkinden başka değer çıkarıldı
+=ligne supprimée ¦ satır silindi|satır silindi
+=colonne supprimée ¦ sütun silindi|sütun silindi
+=ligne en double supprimée ¦ yinelenen satır silindi|yinelenen satır silindi
+=ligne coupée en colonnes ¦ satır sütunlara bölündü|satır sütunlara bölündü
+=case modifiée ¦ hücre değiştirildi|hücre değiştirildi
+=cellule ¦ hücre|hücre
+=cellule copiée ¦ hücre kopyalandı|hücre kopyalandı
+=feuille importée ¦ sayfa içe aktarıldı|sayfa içe aktarıldı
+{sheets} ({rows}) ¦ {sheets} ({rows})
+la date ¦ tarih
+le début ¦ başlangıç
+la fin ¦ bitiş
+il manque un guillemet « " » à la fin d’un texte ¦ bir metnin sonunda “"” tırnak işareti eksik
+il manque une apostrophe à la fin du nom de feuille ¦ sayfa adının sonunda bir kesme işareti eksik
+après le nom de la feuille, il faut « ! » puis la cellule ¦ sayfa adından sonra “!” ve ardından hücre gerekli
+la formule s’arrête trop tôt ¦ formül çok erken bitiyor
+il manque une parenthèse « ) » ¦ bir “)” parantezi eksik
+une parenthèse « ) » de trop ¦ bir “)” parantezi fazla
+un « ; » à une place inattendue ¦ beklenmedik bir yerde “;”
+un numéro Sosa est un nombre entier qui commence à 1 ¦ Sosa numarası 1’den başlayan bir tam sayıdır
+il n’y a aucun nombre dans la plage ¦ aralıkta hiç sayı yok
+le diviseur de MOD vaut 0 ¦ MOD bölenin değeri 0
+pas de racine carrée d’un nombre négatif ¦ negatif bir sayının karekökü olmaz
+aucun nombre ¦ hiç sayı yok
+il faut au moins deux nombres ¦ en az iki sayı gerekli
+aucun test n’est vrai ¦ hiçbir test doğru değil
+les plages n’ont pas la même taille ¦ aralıkların boyutu aynı değil
+aucune cellule ne remplit la condition ¦ hiçbir hücre koşulu sağlamıyor
+le 2e morceau doit être une plage, par exemple A2:C40 ¦ 2. parça bir aralık olmalı, örneğin A2:C40
+le 2e morceau doit être une plage ¦ 2. parça bir aralık olmalı
+la plage est vide ¦ aralık boş
+la condition doit avoir autant de lignes que la plage ¦ koşulun aralık kadar satırı olmalı
+aucune ligne ne remplit la condition ¦ hiçbir satır koşulu sağlamıyor
+le début compte à partir de 1 ¦ başlangıç 1’den sayılır
+cette date n’a pas de mois ¦ bu tarihin ayı yok
+cette date n’a pas de jour ¦ bu tarihin günü yok
+il faut le jour ¦ gün gerekli
+le type de JOURSEM va de 1 à 3 (ou 11 à 17) ¦ JOURSEM türü 1 ile 3 (ya da 11 ile 17) arasındadır
+la fin est avant le début ¦ bitiş başlangıçtan önce
+la seconde date est avant la première ¦ ikinci tarih birinciden önce
+il faut une date au jour près ¦ günü tam belli bir tarih gerekli
+le calendrier républicain va du 22 septembre 1792 à 1805 ¦ Cumhuriyet takvimi 22 septembre 1792 ile 1805 arasını kapsar
+il faut des nombres dans la plage ¦ aralıkta sayılar olmalı
+il faut une LAMBDA(…) ¦ bir LAMBDA(…) gerekli
+trop de LAMBDA imbriquées ¦ çok fazla iç içe LAMBDA
+des paires « nom; valeur » puis le calcul ¦ “ad; değer” çiftleri, ardından hesap
+un nom (lettres) avant chaque valeur ¦ her değerden önce bir ad (harfler)
+il faut au moins le calcul ¦ en azından hesap gerekli
+les paramètres sont des noms ¦ parametreler addır
+le calcul n’a pas de résultat ¦ hesabın sonucu yok
+le résultat est trop grand pour être calculé ¦ sonuç hesaplanamayacak kadar büyük
+une feuille supprimée ¦ silinmiş bir sayfa
+une plage entière ne tient pas dans une case : utilise SOMME(…), INDEX(…)… ¦ bütün bir aralık tek bir hücreye sığmaz: SOMME(…), INDEX(…)… kullan
+puissance impossible ¦ imkânsız kuvvet
+une LAMBDA seule ne donne pas de valeur : utilise-la dans LET, MAP… ¦ tek başına bir LAMBDA değer vermez: onu LET, MAP… içinde kullan
+la formule est trop longue ¦ formül çok uzun
+la formule est trop imbriquée ¦ formül çok fazla iç içe
+trop de morceaux dans une fonction ¦ bir işlevde çok fazla parça
+la formule demande trop de calculs ¦ formül çok fazla hesap gerektiriyor
+le résultat est trop grand ¦ sonuç çok büyük
+la plage est trop grande ¦ aralık çok büyük
+le fichier a trop de cellules ¦ dosyada çok fazla hücre var

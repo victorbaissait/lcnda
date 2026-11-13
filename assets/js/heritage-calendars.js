@@ -9,6 +9,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     ext.lists = ext.lists || {};
@@ -102,7 +103,7 @@
                 const items = !LBK ? all : all.filter(it => (!words.length || words.every(w => fold(listbar.text(it)).includes(w))) && lbDefs.every(f => { const v = fval(f); return lbEmpty(v) || f.test(it, v); }));
                 const kindOn = LBK ? (fval(lbDefs.find(f => f.id === 'kind') || {}) || []) : [];
                 const [cy, cm, cd] = c.cursor, ix = makeIndex(items, p, cy);
-                const chip = (it, full = false) => `<button type="button" class="h-cal-ev ${it.done ? 'is-done' : ''} ${it.approx ? 'is-approx' : ''} ${it.cont ? 'is-cont' : ''}" data-cal-uid="${esc(it.uid)}" style="--c:${colorOf(key, p, it.group)}" title="${esc(it.title + (it.sub ? ' — ' + it.sub : '') + (it.approx ? ' (date approximative)' : ''))}"><i></i><span>${esc(p.anniv && it.y ? `${it.title} (${cy - it.y} ans)` : it.title)}</span>${full && it.sub ? `<small>${esc(it.sub)}</small>` : ''}</button>`;
+                const chip = (it, full = false) => `<button type="button" class="h-cal-ev ${it.done ? 'is-done' : ''} ${it.approx ? 'is-approx' : ''} ${it.cont ? 'is-cont' : ''}" data-cal-uid="${esc(it.uid)}" style="--c:${colorOf(key, p, it.group)}" title="${esc(it.title + (it.sub ? ' — ' + it.sub : '') + (it.approx ? ' (date approximative)' : ''))}"><i></i><span>${esc(p.anniv && it.y ? i18n("{t} ({n} ans)", {t: it.title, n: cy - it.y}) : it.title)}</span>${full && it.sub ? `<small>${esc(it.sub)}</small>` : ''}</button>`;
                 const head = (y, m, d) => `${p.alt.map(t => { const s = altShort(y, m, d, t); return s ? `<small class="h-cal-alt" title="${esc(calName(t))} : ${esc(altText(y, m, d, t))}">${esc(s)}</small>` : ''; }).join('')}`;
                 const today = iso(...todayArr());
                 const dayCell = (y, m, d, outside = false) => { const list = ix.day.get(iso(y, m, d)) || [], wd = dow(y, m, d);
@@ -147,7 +148,7 @@
                         const cells = [...Array(10).keys()].map(j => { const y = d0 + j, n = ix.count(y); tot += n; return `<td><button type="button" class="h-cal-hcell ${n ? 'has' : ''}" ${heat(n)} data-cal-go="year:${y}:1:1" title="${y}">${n ? `<small>${y}</small>${n}` : `<small>${y}</small>`}</button></td>`; }).join('');
                         return `<tr><th><button type="button" class="link-button" data-cal-go="decade:${d0}:1:1">${d0}s</button></th>${cells}<td class="h-cal-tot">${tot || ''}</td></tr>`; }).join('')}</tbody></table>`;
                 } else {
-                    label = `Liste · ${p.listScope === 'month' ? `${MONTHS[cm - 1]} ${cy}` : cy}`;
+                    label = `${i18n('Liste')} · ${p.listScope === 'month' ? `${i18n(MONTHS[cm - 1])} ${cy}` : cy}`;
                     const inScope = it => p.anniv ? (p.listScope !== 'month' || it.m === cm) : it.y === cy && (p.listScope !== 'month' || it.m === cm);
                     const list = items.filter(inScope).filter(it => !p.anniv || it.d).sort((a, b) => p.anniv ? (a.m - b.m || a.d - b.d) : (a.y - b.y || (a.m || 0) - (b.m || 0) || (a.d || 0) - (b.d || 0)));
                     body = `<div class="h-cal-listhead"><span class="segmented"><button type="button" class="${p.listScope !== 'month' ? 'is-active' : ''}" data-cal-scope="year">L’année</button><button type="button" class="${p.listScope === 'month' ? 'is-active' : ''}" data-cal-scope="month">Le mois</button></span></div>
@@ -245,47 +246,8 @@
     /** la personne choisie dans Filtrer › Personne (une fiche) : le serveur lit ses événements et ceux de ses couples. Un nom tapé filtre ici. */
     const geneaPerson = () => { const v = window.LCNDA_UI?.listBarState?.('listes:genea_calendar')?.f?.person; return v && typeof v === 'object' && Number(v.id) ? Number(v.id) : 0; };
     /* ─── ⤓ Exporter les anniversaires dans un fichier .ics (calendrier du téléphone, de l'ordinateur) ─── */
-    function icsExportDialog() {
-        const PK = window.LCNDA_PICKER;
-        ext.openDialog({eyebrow: 'CALENDRIER', title: '⤓ Exporter les anniversaires (.ics)', submitLabel: '⤓ Télécharger le fichier',
-            body: `<p class="muted">Un fichier à ouvrir dans ton calendrier (Apple, Google, Outlook…) : chaque anniversaire revient tous les ans. Le réimporter plus tard met à jour sans créer de doublon.</p>
-                <fieldset class="h-rc-modes"><legend>Les personnes</legend>
-                    <label class="checkbox-line"><input type="radio" name="who" value="sosa" checked> Mes ancêtres directs (numérotés Sosa)</label>
-                    <label class="checkbox-line"><input type="radio" name="who" value="all"> Toute la base</label>
-                    <label class="checkbox-line"><input type="radio" name="who" value="branch"> Une branche : une personne et tous ses descendants</label>
-                    <div data-ics-branch hidden>${PK.pickerField({name: 'ics_root', kind: 'person', allowCreate: false})}</div></fieldset>
-                <label class="checkbox-line"><input type="checkbox" name="living"> Seulement les personnes en vie (sans décès noté)</label>
-                <fieldset class="h-rc-modes"><legend>Les anniversaires</legend>
-                    <label class="checkbox-line"><input type="checkbox" name="g_birth" checked> 👶 Naissances, baptêmes</label>
-                    <label class="checkbox-line"><input type="checkbox" name="g_union" checked> 💍 Mariages</label>
-                    <label class="checkbox-line"><input type="checkbox" name="g_death"> ✝️ Décès</label></fieldset>
-                <label class="checkbox-line"><input type="checkbox" name="alarm" checked> Me le rappeler la veille</label>
-                <p class="muted" data-ics-note></p>`,
-            onOpen: dl => {
-                const sync = () => { dl.querySelector('[data-ics-branch]').hidden = dl.querySelector('[name=who]:checked').value !== 'branch'; };
-                dl.querySelectorAll('[name=who]').forEach(r => r.addEventListener('change', sync));
-            },
-            onSubmit: async form => {
-                const who = form.querySelector('[name=who]:checked').value, groups = ['birth', 'union', 'death'].filter(g => form.elements['g_' + g].checked);
-                if (!groups.length) return window.LCNDA_UI.fail(form.elements.g_birth, 'Coche au moins une sorte d’anniversaire.');
-                let ids = null;
-                if (who === 'sosa') { ids = new Set(Object.keys(A().sosaMap?.() || {}).map(Number)); if (!ids.size) { toast('Aucune personne numérotée Sosa : choisis le n°1 dans Réglages → Apparence.', 'error'); return false; } }
-                if (who === 'branch') { const root = Number(PK.pickerValue?.(form.querySelector('[data-ics-branch] .pk')) || form.querySelector('[name=ics_root]')?.value || 0); if (!root) return window.LCNDA_UI.fail(form.querySelector('[data-ics-branch] .pk'), 'Choisis la personne en haut de la branche.');
-                    const m = await A().api('daboville_map', {root_id: root}); ids = new Set([root, ...Object.keys(m.map || {}).map(Number)]); }
-                const data = await A().api('genea_calendar');
-                const dead = new Set(data.events.filter(e => e.group === 'death').flatMap(e => e.who.map(w => Number(w.id))));
-                const keep = e => groups.includes(e.group) && e.who.some(w => (!ids || ids.has(Number(w.id))) && (!form.elements.living.checked || !dead.has(Number(w.id))));
-                const chosen = data.events.filter(keep), ok = chosen.filter(e => e.d && e.m && !e.approx), skipped = chosen.length - ok.length;
-                if (!ok.length) { toast(chosen.length ? `Aucune date assez précise : ${A().plural(skipped, 'date n’a', 'dates n’ont')} que l’année ou une date approchée (vers, avant…), qu’un calendrier ne sait pas placer.` : 'Personne ne correspond à ce choix.', 'error'); return false; }
-                const LABEL = {birth: 'Anniversaire de naissance', union: 'Anniversaire de mariage', death: 'Anniversaire du décès'};
-                const entries = ok.map(e => { const names = e.who.map(w => w.name).join(' et '), g = e.who[0]?.gender === 'female';
-                    return {uid: `lcnda-anniv-${e.id}@lcnda.local`, date: {y: e.y, m: e.m, d: e.d}, yearly: true, alarm: form.elements.alarm.checked,
-                        summary: `${LABEL[e.group]} de ${names} (${e.group === 'birth' ? `${g ? 'née' : 'né'} en ${e.y}` : `${e.type.toLowerCase()} en ${e.y}`})`,
-                        description: `${e.type} : ${e.text}${e.place ? ` à ${e.place}` : ''}\nExporté depuis LCNDA (généalogie).`}; });
-                A().ics.download(`anniversaires-${who === 'sosa' ? 'ancetres' : who === 'all' ? 'famille' : 'branche'}.ics`, A().ics.build(entries, {name: 'Anniversaires de la famille'}));
-                toast(`${A().plural(entries.length, 'anniversaire exporté', 'anniversaires exportés')}${skipped ? ` · ${A().plural(skipped, 'date laissée de côté', 'dates laissées de côté')} (année seule ou date approchée : un calendrier a besoin du jour précis)` : ''}.`);
-            }});
-    }
+    /* même fenêtre que Réglages → Export → « 📅 Agenda des anniversaires » : le fichier est fait par le serveur (lib/echanges.php, RFC 5545), avec les fêtes du prénom */
+    function icsExportDialog() { ext.openIcsExport?.(); }
     ext.lists.genea_calendar = calendarScreen({
         key: 'genea', eyebrow: 'LISTES · CALENDRIERS', title: '📜 Calendrier de la famille',
         intro: 'Naissances, mariages, décès et tous les événements des fiches, au jour près quand la date le dit. Sous chaque jour, sa date dans les autres calendriers (julien, républicain…) : à choisir dans ⚙️ Réglages.',
@@ -314,7 +276,7 @@
             const e = it.raw, alts = e.d ? A().converterCalendarOptions.filter(([t]) => t !== 'gregorian').map(([t, n]) => [n, altText(e.y, e.m, e.d, t)]).filter(x => x[1]) : [];
             ext.openDialog({eyebrow: e.type.toUpperCase(), title: it.title, wide: true, submitLabel: 'Fermer',
                 body: `<p><b>Date dans la fiche :</b> ${esc(e.text || String(e.y))}${e.calendar && e.calendar !== 'gregorian' ? ` <small class="muted">(${esc(calName(e.calendar))})</small>` : ''}${e.approx ? ' <small class="muted">— approximative</small>' : ''}</p>
-                    ${e.d ? `<p><b>Grégorien :</b> ${longDate(e.y, e.m, e.d)}${p.anniv ? ` · il y a ${new Date().getFullYear() - e.y} ans` : ''}</p>` : `<p class="muted">Date connue ${e.m ? 'au mois' : 'à l’année'} près.</p>`}
+                    ${e.d ? `<p><b>Grégorien :</b> ${longDate(e.y, e.m, e.d)}${p.anniv ? ` · ${i18n('il y a {n} ans', {n: new Date().getFullYear() - e.y})}` : ''}</p>` : `<p class="muted">${e.m ? i18n('Date connue au mois près.') : i18n('Date connue à l’année près.')}</p>`}
                     ${e.place ? `<p><b>Lieu :</b> ${esc(e.place)}</p>` : ''}
                     <p>${e.who.map(w => `<button type="button" class="button small secondary" data-open-person="${w.id}">👤 ${esc(w.name)}</button>`).join(' ')}</p>
                     ${alts.length ? `<h4>Ce jour dans les autres calendriers</h4><dl class="h-cal-corr-dl">${alts.map(([n, t]) => `<dt>${esc(n)}</dt><dd>${esc(t)}</dd>`).join('')}</dl>` : ''}`,
@@ -333,7 +295,7 @@
     ];
     function newDialog(date, projects, after) {
         ext.openDialog({eyebrow: 'MON AGENDA', title: 'Nouveau', wide: true, submitLabel: 'Créer',
-            body: `<label>C’est…<select name="kind">${KINDS.map(([k, l, list]) => `<option value="${k}">${l} — rangé dans « ${esc(list)} »</option>`).join('')}</select></label>
+            body: `<label>C’est…<select name="kind">${KINDS.map(([k, l, list]) => `<option value="${k}">${i18n('{l} — rangé dans « {nm} »', {l: i18n(l), nm: esc(i18n(list))})}</option>`).join('')}</select></label>
                 <div class="form-grid"><label class="span-2" data-k="all">Titre<input name="title" placeholder="Salon de généalogie de Bourges"></label>
                 <label data-k="courrier">Destinataire<input name="destinataire" placeholder="Mairie de Saint-Amand-Montrond"></label>
                 <label data-k="archive_visit">Centre d’archives<input name="archive_center" placeholder="Archives départementales du Cher"></label>
@@ -364,7 +326,7 @@
                 if (k === 'atelier_task' && !body.project_id) { toast('Crée d’abord un projet dans l’Atelier.', 'error'); return false; }
                 const r = await A().api(def[3], {}, {method: 'POST', body});
                 if (r?.error) throw new Error(r.error);
-                toast(`Créé et rangé dans « ${def[2]} ».`);
+                toast(i18n('Créé et rangé dans « {nm} ».', {nm: def[2]}));
                 after();
             },
         });
@@ -404,7 +366,13 @@
             srcs: [...ed.querySelectorAll('[data-agw-src]:checked')].map(x => x.value)}),
     };
     ext.dashboard.agenda_widget = {
-        load: async () => { const [a, g] = await Promise.all([A().api('my_agenda'), A().api('genea_calendar').catch(() => ({events: []}))]); return {agenda: a, genea: g}; },
+        // les anniversaires : seulement les jours montrés (le plus grand réglage des widgets « Mon agenda » de la page), pas tous les événements de la base
+        load: async (widgets = []) => {
+            const cfgs = (widgets.length ? widgets : [{}]).map(wcfg).filter(c => c.anniv);
+            const days = cfgs.length ? Math.min(366, Math.max(...cfgs.map(c => Number(c.days) || 7))) : 0;
+            const [a, g] = await Promise.all([A().api('my_agenda'), days ? A().api('genea_calendar', {anniv_days: days}).catch(() => ({events: []})) : Promise.resolve({events: []})]);
+            return {agenda: a, genea: g};
+        },
         render: (index, widget, span, data) => {
             const c = wcfg(widget), limit = Number(widget.limit) || 10, [ty, tm, td] = todayArr(), today = iso(ty, tm, td), endDay = iso(...addDays(ty, tm, td, Math.max(0, c.days - 1)));
             const rows = [];
@@ -420,7 +388,7 @@
             const li = r => r.kind === 'anniv'
                 ? `<li style="--c:${colorOf('genea', pg, r.e.group)}"><span class="h-agw-when">${dayLabel(r.when)}</span><button type="button" class="link-button" data-agw-person="${r.e.who[0]?.id || 0}">🎂 ${esc(r.e.type)} — ${esc(r.e.who.map(w => w.name).join(' et '))}</button> <small class="muted">il y a ${r.years} ans (${r.e.y})</small></li>`
                 : `<li class="${r.kind === 'late' ? 'is-late' : ''}" style="--c:${colorOf('agenda', p, r.it.src)}"><span class="h-agw-when">${r.kind === 'late' ? '⏰ en retard' : dayLabel(r.when)}</span><button type="button" class="link-button" data-agw-item="${esc(r.it.src + ':' + r.it.id)}">${esc(r.it.title)}</button>${r.it.sub ? ` <small class="muted">${esc(r.it.sub)}</small>` : ''}${r.it.end ? ` <small class="muted">→ ${esc(r.it.end.split('-').reverse().slice(0, 2).join('/'))}</small>` : ''}</li>`;
-            const html = rows.length ? `<ul class="h-agw">${rows.slice(0, limit).map(li).join('')}</ul>${rows.length > limit ? `<p class="muted">… et ${rows.length - limit} ${rows.length - limit > 1 ? 'autres' : 'autre'}.</p>` : ''}` : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Rien de prévu ${c.days === 1 ? 'aujourd’hui' : `sur les ${c.days} prochains jours`}.</span></p>`;
+            const html = rows.length ? `<ul class="h-agw">${rows.slice(0, limit).map(li).join('')}</ul>${rows.length > limit ? `<p class="muted">${i18n('… et {x}.', {x: A().plural(rows.length - limit, 'autre')})}</p>` : ''}` : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Rien de prévu ${c.days === 1 ? 'aujourd’hui' : i18n('sur les {nm} prochains jours', {nm: c.days})}.</span></p>`;
             setTimeout(() => document.querySelectorAll('[data-agw-item]:not([data-b]), [data-agw-person]:not([data-b])').forEach(b => { b.dataset.b = '1'; b.addEventListener('click', () => {
                 if (b.dataset.agwPerson) { S().currentPersonId = Number(b.dataset.agwPerson); return A().setModule('personnes'); }
                 const [src, id] = b.dataset.agwItem.split(':'), it = (data.agenda.items || []).find(x => x.src === src && String(x.id) === id);

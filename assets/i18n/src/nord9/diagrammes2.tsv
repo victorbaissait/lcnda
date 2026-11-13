@@ -1,0 +1,1692 @@
+fr ¦ lb
+donnees|Tableaux ¦ Tabellen
+Types de diagrammes enregistrés (galerie des diagrammes et Éditeur de graphiques). ¦ Gespäichert Diagrammtypen (Galerie vun den Diagrammer a Grafikeditor).
+Les mêmes types pour <b>Mes diagrammes</b> et pour l’<b>Éditeur de graphiques</b> : ↑ ↓ pour l’ordre, décoche pour cacher un type, choisis un groupe (ou « ＋ Nouveau groupe… ») pour les regrouper à ta façon ; ✎ renomme un groupe, ↑ ↓ de l’en-tête range les groupes. ¦ Déi selwecht Type fir <b>Meng Diagrammer</b> a fir de <b>Grafikeditor</b>: ↑ ↓ fir d’Reiefolleg, maach den Haken ewech fir en Typ ze verstoppen, wiel e Grupp (oder „＋ Neie Grupp…“), fir se no dengem Goût ze gruppéieren; ✎ benennt e Grupp ëm, ↑ ↓ an der Iwwerschrëft zortéiert d’Gruppen.
+⤒ Mon propre graphique à partir de données d’ailleurs ¦ ⤒ Meng eege Grafik aus Donnéeën vun anerwäerts
+<b>Un tableau</b> (tableur, site, CSV) : copie-le, puis <b>Graphiques → Mes diagrammes → ＋ Nouveau</b> (ou « ⤒ Importer » là où l’on pose un diagramme : fiche, personne, enquête, Atelier) → « Coller un tableau ». Première colonne = les noms, colonnes suivantes = les chiffres ; une première ligne de titres devient le nom des séries. ¦ <b>Eng Tabell</b> (Tabelle, Websäit, CSV): kopéier se, dann <b>Grafiken → Meng Diagrammer → ＋ Nei</b> (oder „⤒ Importéieren“ do, wou een en Diagramm hisetzt: Fiche, Persoun, Ënnersichung, Atelier) → „Eng Tabell apechen“. Éischt Kolonn = d’Nimm, déi nächst Kolonnen = d’Zuelen; eng éischt Zeil mat Titelen gëtt den Numm vun de Serien.
+<b>Un fichier CSV</b> : « ⤒ Importer » → « Fichier » (séparateur virgule, point-virgule ou tabulation). ¦ <b>E CSV-Fichier</b>: „⤒ Importéieren“ → „Fichier“ (Trennzeechen Komma, Strëchpunkt oder Tabulatioun).
+<b>Une page Wikipédia</b> : « ⤒ Importer » → « Page Wikipédia », colle son adresse : ses tableaux et ses images de graphiques s’affichent, choisis-en un. ¦ <b>Eng Wikipedia-Säit</b>: „⤒ Importéieren“ → „Wikipedia-Säit“, pech hir Adress an: hir Tabellen an hir Grafikbiller ginn ugewisen, wiel eng dovun aus.
+<b>Une image de graphique</b> (camembert, barres, courbe, hémicycle) : « ⤒ Importer » → « Image » : l’app repère les couleurs et propose les chiffres (parts, hauteurs, sièges) ; corrige les noms et les valeurs dans le tableau avant de créer le diagramme. ¦ <b>E Bild vun enger Grafik</b> (Kuch, Balken, Kurv, Hallefkrees): „⤒ Importéieren“ → „Bild“: d’App erkennt d’Faarwen a proposéiert d’Zuelen (Deeler, Héichten, Sëtzer); verbesser d’Nimm an d’Wäerter an der Tabell, ier s du den Diagramm erstells.
+<b>Un graphique partagé</b> par quelqu’un (fichier <code>.lcnda-widget.json</code>) : « ⤒ Importer » → « Fichier » : il rejoint « Mes graphiques » et se dessine avec les données de ton arbre. ¦ <b>Eng gedeelt Grafik</b> vun engem aneren (Fichier <code>.lcnda-widget.json</code>): „⤒ Importéieren“ → „Fichier“: si kënnt bei „Meng Grafiken“ a gëtt mat den Donnéeë vun dengem Bam gezeechent.
+Ensuite, le diagramme se choisit parmi tous les types (parts, chiffres, frises, liens…), se règle, s’exporte (PNG, SVG, PDF) et se pose partout. ¦ Duerno gëtt den Diagramm ënner allen Typen ausgewielt (Deeler, Zuelen, Zäitleeschten, Verbindungen…), agestallt, exportéiert (PNG, SVG, PDF) an iwwerall higesat.
+(avec des personnes) ¦ (mat Persounen)
+Ce dessin a besoin d’une liste de personnes (source « Personnes »). ¦ Dës Zeechnung brauch eng Lëscht vu Persounen (Quell „Persounen“).
+Aucune personne avec un lieu de naissance et un lieu de décès. ¦ Keng Persoun mat enger Gebuertsplaz an enger Doudesplaz.
+Créer le diagramme ¦ Den Diagramm erstellen
+Un de tes graphiques (Réglages → Éditeur de graphiques), un exemple, ou une statistique de l’app (naissances par décennie, prénoms…), dessiné avec le type de ton choix. ¦ Eng vun denge Grafiken (Astellungen → Grafikeditor), e Beispill oder eng Statistik vun der App (Gebuerten pro Joerzéngt, Virnimm…), gezeechent mam Typ vun denger Wiel.
+Chiffres tenus à jour (relus dans l’arbre à chaque affichage) ¦ Zuelen aktuell gehal (bei all Uweisung am Bam nei gelies)
+＋ Créer un nouveau graphique (Éditeur de graphiques)… ¦ ＋ Eng nei Grafik erstellen (Grafikeditor)…
+🌐 Page Wikipédia ¦ 🌐 Wikipedia-Säit
+Copie un tableau (tableur, site web…) et colle-le ici. Première colonne = les noms, colonnes suivantes = les chiffres. ¦ Kopéier eng Tabell (Tabelle, Websäit…) a pech se hei an. Éischt Kolonn = d’Nimm, déi nächst Kolonnen = d’Zuelen.
+L’adresse d’une page Wikipédia (n’importe quelle langue) : ses tableaux et ses graphiques s’affichent, choisis-en un. Il faut Internet. ¦ D’Adress vun enger Wikipedia-Säit (egal wéi eng Sprooch): hir Tabellen an hir Grafiken ginn ugewisen, wiel eng dovun aus. Du brauchs Internet.
+Un camembert, des barres ou colonnes, une courbe ou un hémicycle en image : l’app regarde ses couleurs et propose des chiffres, à corriger ensuite. ¦ E Kuch, Balken oder Kolonnen, eng Kurv oder en Hallefkrees als Bild: d’App kuckt seng Faarwen a proposéiert Zuelen, déi s du duerno verbessers.
+Graphique « {name} » ajouté à Mes graphiques. ¦ Grafik „{name}“ bei Meng Grafiken derbäigesat.
+Lecture de la page… ¦ D’Säit gëtt gelies…
+{n} lignes ¦ {n} Zeilen
+<b>Images</b> (graphiques à convertir en chiffres) ¦ <b>Biller</b> (Grafiken, déi an Zuelen ëmgewandelt ginn)
+Image illisible (ou refusée par le site). ¦ Bild net liesbar (oder vun der Websäit refuséiert).
+Pas de couleur franche trouvée (graphique en noir et blanc ?) : remplis le tableau à la main. ¦ Keng kloer Faarf fonnt (Grafik a Schwaarz-Wäiss?): fëll d’Tabell mat der Hand aus.
+Parts en % de la surface colorée. Les textes ne sont pas lus : donne un nom à chaque part. ¦ Deeler a % vun der faarweger Fläch. D’Texter ginn net gelies: gëff all Deel en Numm.
+Sièges comptés (une tache = un siège ; deux sièges collés comptent pour deux). Nomme les groupes. ¦ Gezielte Sëtzer (ee Flak = ee Sëtz; zwee Sëtzer, déi openee pechen, zielen als zwee). Gëff de Gruppen en Numm.
+Hauteur de la courbe (0 à 100 % de l’image) en 12 points : règle l’échelle avec « Valeur du haut ». ¦ Héicht vun der Kurv (0 bis 100 % vum Bild) an 12 Punkten: stell d’Skala mat „Ieweschte Wäert“ an.
+Longueur de chaque barre, la plus longue = 100 : indique sa vraie valeur dans « Valeur du haut », et nomme les barres. ¦ Längt vun all Balken, de längsten = 100: gëff säi richtege Wäert bei „Ieweschte Wäert“ un, a gëff de Balken en Numm.
+C’est un… ¦ Et ass e(n)…
+Sorte de média ¦ Zort vu Medium
+en vie ou décédés ¦ lieweg oder gestuerwen
+avec ou sans source ¦ mat oder ouni Quell
+par sorte de média ¦ no Zort vu Medium
+l’âge au décès ¦ den Alter beim Doud
+l’âge au mariage ¦ den Alter beim Bestietnes
+le nombre d’enfants ¦ d’Zuel vun de Kanner
+l’âge au premier enfant ¦ den Alter beim éischte Kand
+Une de mes listes ¦ Eng vu menge Lëschten
+de A à Z ¦ vun A bis Z
+de Z à A ¦ vun Z bis A
+dans l’ordre ¦ an der Reiefolleg
+Part en % ¦ Deel an %
+Une personne qui a plusieurs de ces événements dans le même groupe ne compte qu’une fois. ¦ Eng Persoun, déi e puer vun dësen Evenementer am selwechte Grupp huet, zielt nëmmen eemol.
+Pour ne garder que certaines personnes : un métier, un nombre d’enfants, un lieu de naissance, une période, un âge au décès, une étiquette, une génération Sosa… Ajoute autant de critères que tu veux : « tous » les veut tous (ET), « au moins un » se contente d’un seul (OU). ¦ Fir nëmme bestëmmte Persounen ze behalen: e Beruff, eng Zuel vu Kanner, eng Gebuertsplaz, eng Period, en Alter beim Doud, eng Etikett, eng Sosa-Generatioun… Setz esou vill Critèren derbäi, wéi s du wëlls: „all“ wëll se all (AN), „op d’mannst een“ ass mat engem eenzegen zefridden (ODER).
+Les personnes prises en compte : toute ta base, tes ancêtres ou tes descendants, une branche, une étiquette, une de tes listes, une recherche, ou des personnes que tu choisis. ¦ Déi Persounen, déi gezielt ginn: deng ganz Datebank, deng Virfahren oder deng Nokommen, en Zweig, eng Etikett, eng vun denge Lëschten, eng Sich oder Persounen, déi s du auswiels.
+La personne d’où l’on part pour ses ancêtres, ses descendants ou ses branches (elle est comptée avec ses ancêtres et ses descendants). ¦ D’Persoun, vun där een ausgeet fir hir Virfahren, hir Nokommen oder hir Zweiger (si gëtt mat hire Virfahren an hiren Nokomme gezielt).
+Jusqu’à combien de générations on remonte (ou on descend). 0 = toutes. ¦ Bis wéi vill Generatiounen een zréckgeet (oder erofgeet). 0 = all.
+Seulement les personnes d’une de tes listes (Réglages → Mes listes). ¦ Nëmmen d’Persoune vun enger vun denge Lëschten (Astellungen → Meng Lëschten).
+Seulement les personnes dont le nom ou le prénom contient ces lettres. ¦ Nëmmen d’Persounen, deenen hiren Numm oder Virnumm dës Buschtawen enthält.
+Seulement ce qui s’est passé entre ces deux dates, écrites comme dans un acte (1789, vers 1850, mai 1900…). Une seule date suffit. ¦ Nëmmen dat, wat tëscht dësen zwee Datumer geschitt ass, geschriwwe wéi an engem Akt (1789, vers 1850, mai 1900…). Een eenzegen Datum geet duer.
+Seulement les personnes nées entre ces deux dates, écrites comme dans un acte (1789, vers 1850, mai 1900…). Une seule date suffit. ¦ Nëmmen d’Persounen, déi tëscht dësen zwee Datumer gebuer sinn, geschriwwe wéi an engem Akt (1789, vers 1850, mai 1900…). Een eenzegen Datum geet duer.
+Pour les colonnes empilées, la pyramide, la carte de chaleur… : chaque groupe est coupé en séries (hommes et femmes, ou siècles). ¦ Fir gestapelt Kolonnen, d’Pyramid, d’Hëtztkaart…: all Grupp gëtt a Serien opgedeelt (Männer a Fraen, oder Joerhonnerten).
+L’ordre des valeurs. « Automatique » : du plus grand au plus petit, ou dans l’ordre du temps pour les dates et les âges. ¦ D’Reiefolleg vun de Wäerter. „Automatesch“: vum gréissten zum klengsten, oder an der Zäitreiefolleg fir Datumer an Alter.
+Combien de valeurs garder, les premières après le tri. 0 = toutes. ¦ Wéi vill Wäerter behale ginn, déi éischt nom Zortéieren. 0 = all.
+Les valeurs au-delà des N premières sont additionnées dans une dernière barre « Autres ». ¦ D’Wäerter no den éischten N ginn an engem leschte Balken „Anerer“ zesummegezielt.
+Montrer aussi ce qui n’est pas renseigné (sans lieu, sans date, sans métier…) sous le nom « Inconnu ». ¦ Och weisen, wat net ausgefëllt ass (ouni Plaz, ouni Datum, ouni Beruff…), ënner dem Numm „Onbekannt“.
+Un nombre, une part en %, ou la moyenne (la médiane) d’une valeur : âge au décès, âge au mariage, nombre d’enfants. ¦ Eng Zuel, en Deel an % oder den Duerchschnëtt (de Median) vun engem Wäert: Alter beim Doud, Alter beim Bestietnes, Zuel vu Kanner.
+Le diagramme se recalcule à chaque affichage : il suit les changements de ta base. ¦ Den Diagramm gëtt bei all Uweisung nei gerechent: e follegt d’Ännerunge vun denger Datebank.
+✏️ Sur mesure (critères, ce qu’on compte, regroupé par…) ¦ ✏️ No Mooss (Critèren, wat gezielt gëtt, gruppéiert no…)
+Âge au décès, hommes et femmes ¦ Alter beim Doud, Männer a Fraen
+Causes de décès, par siècle ¦ Doudesursaachen, pro Joerhonnert
+Mariages par mois ¦ Bestietnesser pro Mount
+Âge au mariage, hommes et femmes ¦ Alter beim Bestietnes, Männer a Fraen
+Âge moyen au mariage, par siècle de naissance ¦ Duerchschnëttlechen Alter beim Bestietnes, no Gebuertsjoerhonnert
+Âge au premier enfant, pères et mères ¦ Alter beim éischte Kand, Pappen a Mammen
+Âge moyen au premier enfant, par siècle de naissance ¦ Duerchschnëttlechen Alter beim éischte Kand, no Gebuertsjoerhonnert
+Lieux de naissance (communes) ¦ Gebuertsplazen (Gemengen)
+Métiers des femmes et des hommes ¦ Beruffer vu Fraen a Männer
+Décès par mois ¦ Doudesfäll pro Mount
+Mes ancêtres, côté père et côté mère ¦ Meng Virfahren, op der Säit vum Papp an op der Säit vun der Mamm
+Médias par nom de famille ¦ Medien no Familljennumm
+nées en {a} ¦ gebuer {a}
+periode|en {a} ¦ {a}
+nées entre {a} et {b} ¦ gebuer tëscht {a} an {b}
+periode|entre {a} et {b} ¦ tëscht {a} an {b}
+nées depuis {a} ¦ gebuer zënter {a}
+periode|depuis {a} ¦ zënter {a}
+nées jusqu’en {b} ¦ gebuer bis {b}
+periode|jusqu’en {b} ¦ bis {b}
+au moins un de ces critères (OU) ¦ op d’mannst ee vun dëse Critèren (ODER)
+critere|qui ont ¦ déi hunn
+critere|{a} ans ¦ {a} Joer
+critere|de {a} à {b} ans ¦ vu {a} bis {b} Joer
+critere|de {a} à {b} ¦ vu {a} bis {b}
+critere|au moins {a} ans ¦ op d’mannst {a} Joer
+critere|au moins {a} ¦ op d’mannst {a}
+critere|au plus {b} ans ¦ héchstens {b} Joer
+critere|au plus {b} ¦ héchstens {b}
+nés en {a} ¦ gebuer {a}
+nés entre {a} et {b} ¦ gebuer tëscht {a} an {b}
+nés depuis {a} ¦ gebuer zënter {a}
+nés jusqu’en {b} ¦ gebuer bis {b}
+morts en {a} ¦ gestuerwen {a}
+morts entre {a} et {b} ¦ gestuerwen tëscht {a} an {b}
+morts depuis {a} ¦ gestuerwen zënter {a}
+morts jusqu’en {b} ¦ gestuerwen bis {b}
+liste|ou ¦ oder
+métier « {v} » ¦ Beruff „{v}“
+nom « {v} » ¦ Numm „{v}“
+prénom « {v} » ¦ Virnumm „{v}“
+nés à « {v} » ¦ gebuer zu „{v}“
+morts ou inhumés à « {v} » ¦ gestuerwen oder begruewen zu „{v}“
+avec un événement à « {v} » ¦ mat engem Evenement zu „{v}“
+avec un événement dans « {v} » ¦ mat engem Evenement an „{v}“
+à moins de {km} km de « {v} » ¦ manner wéi {km} km vu „{v}“
+critere|femmes ¦ Fraen
+critere|hommes ¦ Männer
+sexe inconnu ¦ Geschlecht onbekannt
+critere|en vie ¦ lieweg
+critere|décédés ¦ gestuerwen
+statut à vérifier ¦ Status ze kontrolléieren
+ayant vécu {r} ¦ déi {r} gelieft hunn
+âgés {r} à : {types} ¦ {r} al bei: {types}
+âgés {r} ¦ {r} al
+mes ancêtres (Sosa) ¦ meng Virfahren (Sosa)
+génération Sosa {r} ¦ Sosa-Generatioun {r}
+critere|sans source ¦ ouni Quell
+avec une photo ou un document ¦ mat enger Foto oder engem Dokument
+critere|parents inconnus ¦ Elteren onbekannt
+dans mes favoris ¦ a menge Favoritten
+cause de décès « {v} » ¦ Doudesursaach „{v}“
+ayant eu : {types} ¦ déi gehat hunn: {types}
+étiquette « {v} » ¦ Etikett „{v}“
+critere|sauf {x} ¦ ausser {x}
+Groupe de personnes ¦ Grupp vu Persounen
+gén. ¦ Gen.
+periode|à ¦ bis
+🔄 Tenir à jour (relire les chiffres à chaque affichage) ¦ 🔄 Aktuell halen (d’Zuelen bei all Uweisung nei liesen)
+({n} générations) ¦ ({n} Generatiounen)
+({n} génération) ¦ ({n} Generatioun)
+les ancêtres de {name} ¦ d’Virfahre vum/vun {name}
+critere|mes ancêtres ¦ meng Virfahren
+les descendants de {name} ¦ d’Nokomme vum/vun {name}
+critere|mes descendants ¦ meng Nokommen
+la branche paternelle de {name} ¦ den Zweig vum Papp vum/vun {name}
+ma branche paternelle ¦ mäin Zweig vum Papp
+la branche maternelle de {name} ¦ den Zweig vun der Mamm vum/vun {name}
+ma branche maternelle ¦ mäin Zweig vun der Mamm
+l’étiquette « {name} » ¦ d’Etikett „{name}“
+critere|une étiquette ¦ eng Etikett
+la liste « {name} » ¦ d’Lëscht „{name}“
+critere|une de mes listes ¦ eng vu menge Lëschten
+les noms qui contiennent « {q} » ¦ d’Nimm, déi „{q}“ enthalen
+critere|une recherche ¦ eng Sich
+{n} personnes choisies ¦ {n} Persounen ausgewielt
+{n} personne choisie ¦ {n} Persoun ausgewielt
+toute ma base ¦ meng ganz Datebank
+Un graphique de l’app ¦ Eng Grafik vun der App
+Médiane de {value} ({what}) ¦ Median vu(n) {value} ({what})
+chaque personne une fois ¦ all Persoun eemol
+personnes {p} ¦ Persounen {p}
+une série par sexe ¦ eng Serie pro Geschlecht
+une série par siècle ¦ eng Serie pro Joerhonnert
+{n} premiers et « Autres » ¦ {n} éischt an „Anerer“
+{n} premier et « Autres » ¦ {n} éischten an „Anerer“
+toutes les valeurs ¦ all d’Wäerter
+« Inconnu » montré ¦ „Onbekannt“ gewisen
+unite|en % ¦ an %
+Moyenne de {value} ({what}) ¦ Duerchschnëtt vu(n) {value} ({what})
+{n} premiers ¦ {n} éischt
+{n} premier ¦ {n} éischten
+ayant {t} enfant ¦ déi {t} Kand hunn
+ayant {t} enfants ¦ déi {t} Kanner hunn
+ayant {t} union ¦ déi {t} Verbindung hunn
+ayant {t} unions ¦ déi {t} Verbindungen hunn
+ayant {t} source ¦ déi {t} Quell hunn
+ayant {t} sources ¦ déi {t} Quellen hunn
+Gris-bleu calme, traits fins, quadrillage léger. ¦ Rouegt Gro-Blo, fein Linnen, liichte Gitter.
+Papier ancien, encre brune, police à empattements. ¦ Aalt Pabeier, brong Tënt, Schrëft mat Serifen.
+Couleurs franches, traits épais, coins arrondis. ¦ Kräfteg Faarwen, déck Linnen, ofgerënnt Ecken.
+Noir et blanc imprimable ¦ Schwaarz-Wäiss zum Drécken
+Gris du noir au clair, quadrillage marqué : lisible imprimé sans couleur. ¦ Gro vu schwaarz bis hell, däitleche Gitter: gutt ze liesen, och ouni Faarf gedréckt.
+Couleurs qu’on distingue même en voyant mal certaines couleurs (Okabe-Ito). ¦ Faarwen, déi een och auserneenhält, wann ee verschidde Faarwe schlecht gesäit (Okabe-Ito).
+{n} petits diagrammes, même échelle (de {lo} à {hi}) ¦ {n} kleng Diagrammer, selwecht Skala (vu {lo} bis {hi})
+Repère de date ¦ Datumsmarkéierung
+Revenir au dessin complet ¦ Zréck op déi ganz Zeechnung
+Enregistrer la lecture en vidéo ¦ D’Ofspillen als Video späicheren
+Réglages → Accessibilité → Mouvement ¦ Astellungen → Accessibilitéit → Beweegung
+Mouvements réduits : une étape à la fois, sans glisser ¦ Reduzéiert Beweegungen: ee Schrëtt no deem aneren, ouni Gleiden
+Lire les années ¦ D’Joren ofspillen
+Mettre en pause ¦ Paus maachen
+rien à filmer ¦ näischt ze filmen
+✓ Vidéo exportée ({format}). ¦ ✓ Video exportéiert ({format}).
+Vidéo impossible : {err} ¦ Video net méiglech: {err}
+Les couleurs et réglages du type, comme avant ¦ D’Faarwen an d’Astellunge vum Typ, wéi virdrun
+Selon le type ¦ Jee no Typ
+Marqué ¦ Däitlech
+Tous mes diagrammes prennent ce style (même ceux qui avaient le leur) ¦ All meng Diagrammer kréien dëse Stil (och déi, déi en eegene haten)
+Les nouveaux diagrammes, et ceux sans style à eux, le prennent ¦ Déi nei Diagrammer, an déi ouni eegene Stil, kréien en
+Appliquer à tous les diagrammes ¦ Op all Diagrammer uwenden
+⭐ Style par défaut ¦ ⭐ Standardstil
+à (facultatif) ¦ bis (fakultativ)
+Retirer l’annotation ¦ D’Annotatioun ewechhuelen
+Aucune annotation : ajoute une flèche, un texte, une zone ou un repère de date. ¦ Keng Annotatioun: setz e Feil, en Text, eng Zon oder eng Datumsmarkéierung derbäi.
+Toutes les séries ¦ All d’Serien
+Nom de la ligne ¦ Numm vun der Linn
+Échelle logarithmique (très grands écarts) ¦ Logarithmesch Skala (ganz grouss Ënnerscheeder)
+Deuxième axe (à droite) ¦ Zweet Achs (riets)
+{name} (en courbe) ¦ {name} (als Kurv)
+Les séries du tableau ¦ D’Serien vun der Tabell
+Le sexe ¦ D’Geschlecht
+Le siècle ¦ D’Joerhonnert
+La branche (côté père / côté mère) ¦ Den Zweig (Säit vum Papp / Säit vun der Mamm)
+Le lieu (département) ¦ D’Plaz (Departement)
+Le lieu (pays) ¦ D’Plaz (Land)
+La génération ¦ D’Generatioun
+Un seul diagramme ¦ Een eenzegen Diagramm
+Répéter le diagramme par ¦ Den Diagramm widderhuelen no
+Pour répéter par sexe, siècle, branche, lieu ou génération : prends tes chiffres avec « 🧮 Compter dans ma base » (onglet « Depuis l’app ») et coche « Tenir à jour ». ¦ Fir no Geschlecht, Joerhonnert, Zweig, Plaz oder Generatioun ze widderhuelen: huel deng Zuele mat „🧮 A menger Datebank zielen“ (Reiter „Aus der App“) a maach den Haken bei „Aktuell halen“.
+Les données vont de {a} à {b} : le curseur ▶ sous l’aperçu les fait apparaître année après année. ¦ D’Donnéeë ginn vu(n) {a} bis {b}: de Schieber ▶ ënner der Virschau weist se Joer fir Joer.
+Montrer aussi le curseur ▶ là où le diagramme est posé (Graphiques, fiches, tableau de bord) ¦ De Schieber ▶ och do weisen, wou den Diagramm higesat ass (Grafiken, Fichen, Dashboard)
+Recommencer au début (boucle) ¦ Vu vir ufänken (Schleif)
+Un pas de ¦ E Schrëtt vun
+unite|ans ¦ Joer
+« Réduire les animations » est demandé : la lecture avance d’une étape par seconde, sans glisser. ¦ „Animatioune reduzéieren“ ass ugefrot: d’Ofspillen geet ee Schrëtt pro Sekonn weider, ouni Gleiden.
+Palette, police, fond, traits, coins, taille du texte, quadrillage : choisis un style prêt, retouche-le, garde-le sous un nom. ¦ Palette, Schrëft, Hannergrond, Linnen, Ecken, Textgréisst, Gitter: wiel e fäerdege Stil, pass en un, späicher en ënner engem Numm.
+Pose-les ici, puis glisse-les sur l’aperçu (et leurs poignées pour les agrandir). Elles partent avec le diagramme à l’export et à l’impression. ¦ Setz se hei hin, zéi se dann op d’Virschau (an hir Grëff, fir se méi grouss ze maachen). Si ginn beim Exportéieren an beim Drécke mam Diagramm mat.
+📏 Lignes de repère et axes ¦ 📏 Referenzlinnen an Achsen
+Moyenne et médiane se calculent seules ; l’objectif et la valeur sont à toi. ¦ Duerchschnëtt a Median gi vum selwe gerechent; d’Zil an de Wäert bestëmms du.
+Un petit diagramme par groupe, côte à côte, avec la même échelle pour comparer d’un coup d’œil. ¦ E klengen Diagramm pro Grupp, niewentenee, mat der selwechter Skala, fir mat engem Bléck ze vergläichen.
+▶ Lecture dans le temps ¦ ▶ Ofspillen duerch d’Zäit
+Aucun chiffre pour ce découpage. ¦ Keng Zuele fir dës Opdeelung.
+{n} petits diagrammes, même échelle. ¦ {n} kleng Diagrammer, selwecht Skala.
+Baptêmes et sépultures ¦ Dafen a Begriefnesser
+Police du diagramme ¦ Schrëft vum Diagramm
+⭐ « {name} » : style par défaut des nouveaux diagrammes et de ceux sans style à eux. ¦ ⭐ „{name}“: Standardstil vun den neien Diagrammer an vun deenen ouni eegene Stil.
+Plus de style par défaut ¦ Kee Standardstil méi
+60 annotations au plus. ¦ Héchstens 60 Annotatiounen.
+Guerre de 14 ¦ Éischte Weltkrich
+Mon repère ¦ Meng Markéierung
+Mon texte ¦ Mäin Text
+Ligne de repère retirée ¦ Referenzlinn ewechgeholl
+Annotation retirée ¦ Annotatioun ewechgeholl
+(retouché) ¦ (iwwerschafft)
+Style « {name} » appliqué à {n} diagrammes ¦ Stil „{name}“ op {n} Diagrammer ugewannt
+Style « {name} » appliqué à {n} diagramme ¦ Stil „{name}“ op {n} Diagramm ugewannt
+Mes styles enregistrés ¦ Meng gespäichert Stiler
+ce style (palette, police, fond, traits, coins, taille du texte, quadrillage) ¦ dëse Stil (Palette, Schrëft, Hannergrond, Linnen, Ecken, Textgréisst, Gitter)
+Style « {name} » appliqué à ce diagramme. ¦ Stil „{name}“ op dësen Diagramm ugewannt.
+Style « {name} » importé. ¦ Stil „{name}“ importéiert.
+Annotation : glisser pour la déplacer, Suppr pour la retirer ¦ Annotatioun: zéien, fir se ze verréckelen, Entf, fir se ewechzehuelen
+Texte de l’annotation ¦ Text vun der Annotatioun
+Hauteur du dessin (0 = automatique) ¦ Héicht vun der Zeechnung (0 = automatesch)
+Ajoute la personne du milieu (génération 0), puis ses ascendants (−1, −2…) et ses descendants (1, 2…). ¦ Setz d’Persoun an der Mëtt derbäi (Generatioun 0), dann hir Virfahren (−1, −2…) an hir Nokommen (1, 2…).
+Gén. +{g} ¦ Gen. +{g}
+Le sablier de {name} ¦ D’Sanduhr vum/vun {name}
+Ajoute des tâches : nom, début, fin (dates ou années), avancement en %. ¦ Setz Aufgaben derbäi: Numm, Ufank, Enn (Datumer oder Joren), Fortschrëtt an %.
+Diagramme de Gantt : {n} tâches. ¦ Gantt-Diagramm: {n} Aufgaben.
+Diagramme de Gantt : {n} tâche. ¦ Gantt-Diagramm: {n} Aufgab.
+Ma recherche sur les {name} ¦ Meng Recherche iwwer d’{name}
+Relevés de Naves (1700-1792) ¦ Relevés de Naves (1700-1792)
+État civil de Tulle ¦ État civil de Tulle
+Notaires (contrats de mariage) ¦ Notären (Bestietneskontrakter)
+Recensements 1836-1936 ¦ Vollekszielungen 1836-1936
+Registres matricules ¦ Matrikelregëster
+Visite à Arnac-la-Poste ¦ Besuch zu Arnac-la-Poste
+Terrain ¦ Terrain
+Mon idée ¦ Meng Iddi
+Ajoute des branches (et, à côté, leurs idées). ¦ Setz Zweiger derbäi (an, dernieft, hir Iddien).
+Carte mentale « {name} » : {n} branches. ¦ Mindmap „{name}“: {n} Zweiger.
+Carte mentale « {name} » : {n} branche. ¦ Mindmap „{name}“: {n} Zweig.
+Mes pistes de recherche ¦ Meng Spuere fir d’Recherche
+Famille {name} ¦ Famill {name}
+Registres de Naves ¦ Regëster vun Naves
+Notaires de Tulle ¦ Notären vun Tulle
+Laboureurs ¦ Bauersleit
+Tisserands ¦ Wiewer
+Qui était Jeanne Roux ? ¦ Wien war d’Jeanne Roux?
+Pourquoi le départ en 1902 ? ¦ Firwat den Depart am Joer 1902?
+Photos ¦ Fotoen
+Mariage 1919 ¦ Bestietnes 1919
+Maison de Naves ¦ Haus zu Naves
+Cousins ¦ Koseng
+Branche de Paris ¦ Zweig vu Paräis
+ADN : 3 correspondances ¦ DNA: 3 Iwwereneestëmmungen
+Ajoute des noms et leurs chiffres. ¦ Setz Nimm an hir Zuelen derbäi.
+Barres en cercle : {n} lignes, la plus longue « {name} » ({v}). ¦ Balken am Krees: {n} Zeilen, déi längst „{name}“ ({v}).
+Les prénoms les plus donnés ¦ Déi heefegst Virnimm
+fois ¦ Mol
+Ajoute des noms (patronymes, métiers, lieux…) et leurs chiffres. ¦ Setz Nimm (Familljennimm, Beruffer, Plazen…) an hir Zuelen derbäi.
+Bulles groupées : {n} bulles ({k} trop petites pour la place). ¦ Gruppéiert Bubbelen: {n} Bubbelen ({k} ze kleng fir d’Plaz).
+Bulles groupées : {n} bulles. ¦ Gruppéiert Bubbelen: {n} Bubbelen.
+Les noms de famille de l’arbre ¦ D’Familljennimm vum Bam
+Ajoute des objectifs : un nom, où tu en es, et le but (ex. 12 sur 16 ancêtres trouvés). ¦ Setz Ziler derbäi: en Numm, wou s du drun bass, an d’Zil (z. B. 12 vu 16 Virfahre fonnt).
+{name} : {v} sur {goal} ¦ {name}: {v} vu(n) {goal}
+Anneaux d’avancement : {n} objectifs. ¦ Fortschrëttsréng: {n} Ziler.
+Anneaux d’avancement : {n} objectifs, de {a} à {b} %. ¦ Fortschrëttsréng: {n} Ziler, vu(n) {a} bis {b} %.
+Grands-parents trouvés ¦ Grousselteren fonnt
+Actes de naissance sourcés ¦ Gebuertsakte mat Quell
+Photos identifiées ¦ Identifizéiert Fotoen
+Quadrisaïeuls ¦ Ur-ur-ur-Grousselteren
+Génération 6 ¦ Generatioun 6
+Génération 7 ¦ Generatioun 7
+Génération +4 ¦ Generatioun +4
+Génération +{g} ¦ Generatioun +{g}
+Les noms de famille ¦ D’Familljennimm
+Les communes de naissance ¦ D’Gebuertsgemengen
+Les siècles de naissance ¦ D’Gebuertsjoerhonnerten
+{n}e siècle ¦ {n}. Joerhonnert
+Prendre dans mon arbre ¦ Aus mengem Bam huelen
+Rien trouvé dans l’arbre pour ce choix. ¦ Näischt am Bam fonnt fir dës Wiel.
+{n} lignes prises dans l’arbre. ¦ {n} Zeilen aus dem Bam geholl.
+⏳ Le sablier de quelqu’un de mon arbre ¦ ⏳ D’Sanduhr vun engem aus mengem Bam
+Ses ancêtres au-dessus, ses descendants au-dessous, avec leurs dates. ¦ Seng Virfahren uewen, seng Nokommen ënnen, mat hiren Datumer.
+Générations au-dessus ¦ Generatiounen driwwer
+Générations au-dessous ¦ Generatiounen drënner
+📅 Les vies côte à côte ¦ 📅 D’Liewen niewentenee
+Une barre par personne, de sa naissance à son décès (ou à aujourd’hui). ¦ E Balken pro Persoun, vun hirer Gebuert bis zu hirem Doud (oder bis haut).
+Ses ancêtres directs ¦ Seng direkt Virfahren
+Sa famille proche (parents, frères et sœurs, enfants) ¦ Seng no Famill (Elteren, Bridder a Schwësteren, Kanner)
+Ses descendants ¦ Seng Nokommen
+Les vies autour de {name} ¦ D’Liewe ronderëm {name}
+🧠 Une personne et ses branches ¦ 🧠 Eng Persoun an hir Zweiger
+Au centre la personne ; autour, ses enfants (et leurs enfants), ou les métiers et les communes de ses ancêtres. ¦ An der Mëtt d’Persoun; ronderëm hir Kanner (an hir Kanner), oder d’Beruffer an d’Gemenge vun hire Virfahren.
+Les branches ¦ D’Zweiger
+Ses enfants, et leurs enfants ¦ Seng Kanner, an hir Kanner
+Les métiers de ses ancêtres ¦ D’Beruffer vu senge Virfahren
+Les communes de naissance de ses ancêtres ¦ D’Gebuertsgemenge vu senge Virfahren
+La descendance de {name} ¦ D’Nokomme vum/vun {name}
+D’où viennent les ancêtres de {name} ¦ Wou d’Virfahre vum/vun {name} hierkommen
+🎯 Un classement de mon arbre ¦ 🎯 E Klassement vu mengem Bam
+Les plus fréquents dans toute la base, en barres autour d’un cercle. ¦ Déi heefegst an der ganzer Datebank, als Balken ronderëm e Krees.
+fiches ¦ Fichen
+🫧 Les bulles de mon arbre ¦ 🫧 D’Bubbele vu mengem Bam
+Une bulle par nom, métier ou commune : plus il y a de fiches, plus elle est grosse. ¦ Eng Bubbel pro Numm, Beruff oder Gemeng: wat méi Fichen, wat méi grouss.
+Les bulles ¦ D’Bubbelen
+⭕ Où j’en suis dans mon arbre ¦ ⭕ Wou ech mat mengem Bam drun sinn
+Un anneau par objectif : plein, c’est fini. ¦ E Rank pro Zil: voll, dann ass et fäerdeg.
+Les objectifs ¦ D’Ziler
+Les ancêtres trouvés, génération par génération ¦ D’Virfahren, déi fonnt goufen, Generatioun fir Generatioun
+Les fiches complètes (dates, lieux, métier) ¦ D’komplett Fichen (Datumer, Plazen, Beruff)
+Date de décès (personnes décédées) ¦ Doudesdatum (gestuerwe Persounen)
+Mes fiches complètes ¦ Meng komplett Fichen
+Les ancêtres de {name} : où j’en suis ¦ D’Virfahre vum/vun {name}: wou ech drun sinn
+Les personnes (génération : 0 = la personne, −1 = parents, 1 = enfants…) ¦ D’Persounen (Generatioun: 0 = d’Persoun, −1 = Elteren, 1 = Kanner…)
+Couleur des ascendants ¦ Faarf vun de Virfahren
+Couleur de la personne ¦ Faarf vun der Persoun
+Couleur des descendants ¦ Faarf vun den Nokommen
+Hauteur d’une case ¦ Héicht vun enger Këscht
+Écart entre générations ¦ Ofstand tëscht de Generatiounen
+Traits vers la personne ¦ Linnen op d’Persoun zou
+Nom des générations à gauche ¦ Numm vun de Generatiounen lénks
+Les tâches ¦ D’Aufgaben
+Début (date ou année) ¦ Ufank (Datum oder Joer)
+Une par tâche ¦ Eng pro Aufgab
+Couleur (une seule) ¦ Faarf (eng eenzeg)
+Montrer l’avancement ¦ De Fortschrëtt weisen
+Écrire le % ¦ D’% uweisen
+Trait « aujourd’hui » ¦ Linn „haut“
+Couleur du trait « aujourd’hui » ¦ Faarf vun der Linn „haut“
+Les branches et leurs idées (une ligne par idée) ¦ D’Zweiger an hir Iddien (eng Zeil pro Iddi)
+Le mot du centre ¦ D’Wuert an der Mëtt
+Couleur du centre ¦ Faarf vun der Mëtt
+Branches en courbes ¦ Gebuede Zweiger
+Épaisseur des branches ¦ Déckt vun den Zweiger
+Une par ligne ¦ Eng pro Zeil
+Chiffre d’un tour complet (vide = le plus grand) ¦ Zuel fir eng ganz Ronn (eidel = déi gréisst)
+Une par bulle ¦ Eng pro Bubbel
+Écart entre les bulles ¦ Ofstand tëscht de Bubbelen
+Le but ¦ D’Zil
+Anneaux l’un dans l’autre ¦ Réng een an deem aneren
+Un anneau par objectif, côte à côte ¦ E Rank pro Zil, niewentenee
+Par ligne (côte à côte) ¦ Pro Zeil (niewentenee)
+1er siècle ¦ 1. Joerhonnert
+nombre|{n}e siècle ¦ {n}. Joerhonnert
+⚠ Lieux sans position : {list} ¦ ⚠ Plazen ouni Positioun: {list}
+mentions par département ¦ Mentiounen pro Departement
+Choisis un nom dans « Depuis l’app » (ou tape des lieux et des dates). ¦ Wiel en Numm an „Aus der App“ (oder tipp Plazen an Datumer an).
+Aucune mention au {when}. ¦ Keng Mentioun am {when}.
+Aucune mention pour ce nom. ¦ Keng Mentioun fir dësen Numm.
+Carte du nom {name} : {n} au {when} dans {d}. ¦ Kaart vum Numm {name}: {n} am {when} an {d}.
+Carte du nom {name} : {n} au {when}. ¦ Kaart vum Numm {name}: {n} am {when}.
+Carte du nom {name} : {n} dans {d}. ¦ Kaart vum Numm {name}: {n} an {d}.
+Carte du nom {name} : {n}. ¦ Kaart vum Numm {name}: {n}.
+jusqu’en {y} ¦ bis {y}
+années {y} ¦ Joren {y}
+peu → beaucoup ¦ wéineg → vill
+peu ¦ wéineg
+beaucoup ¦ vill
+Prends les événements de ton arbre (« Depuis l’app »). ¦ Huel d’Evenementer vun dengem Bam („Aus der App“).
+Carte de chaleur : {n} ({when}). ¦ Hëtztkaart: {n} ({when}).
+Carte de chaleur : {n}. ¦ Hëtztkaart: {n}.
+Relie des correspondances ADN à leur fiche (onglet ADN), puis « Depuis l’app ». ¦ Verbann DNA-Iwwereneestëmmunge mat hirer Fiche (Reiter DNA), dann „Aus der App“.
+=lieu d’ancêtre commun ¦ Plaz vun engem gemeinsame Virfahr|Plaze vu gemeinsame Virfahren
+=mention ¦ Mentioun|Mentiounen
+=recherche vue ¦ gemaachte Recherche|gemaachte Recherchen
+=à faire ou à revoir ¦ ze maachen oder nach eng Kéier ze kucken|ze maachen oder nach eng Kéier ze kucken
+Carte des cousins ADN : {n}. ¦ Kaart vun den DNA-Koseng: {n}.
+En partie, à revoir ¦ Deelweis, nach eng Kéier ze kucken
+Prévu, pas fait ¦ Geplangt, net gemaach
+Toutes les sortes d’actes ¦ All Zorte vun Akten
+Naissances et baptêmes ¦ Gebuerten an Dafen
+Décès et sépultures ¦ Doudesfäll a Begriefnesser
+Tout vu ¦ Alles gekuckt
+Trous à couvrir ¦ Lächer ze fëllen
+Clic : le détail ¦ Klick: d’Detailer
+Rien pour ce choix (sorte d’acte, période). ¦ Näischt fir dës Wiel (Zort vun Akt, Period).
+Prends tes dépouillements, battues et trous (« Depuis l’app »). ¦ Huel deng Auszich, Sichaktiounen a Lächer („Aus der App“).
+Carte de tes recherches : {n} — {g} tout vu, {o} en partie, {r} avec des trous. ¦ Kaart vun denge Recherchen: {n} — {g} alles gekuckt, {o} deelweis, {r} mat Lächer.
+✓ Ce qui a été vu ¦ ✓ Wat gekuckt gouf
+⚠️ Ce qui manque ou reste à revoir ¦ ⚠️ Wat feelt oder nach eng Kéier ze kucken ass
+Rien de vu ici pour l’instant. ¦ Hei nach näischt gekuckt.
+Rien ne manque ici. ¦ Hei feelt näischt.
+CARTE DE TES RECHERCHES ¦ KAART VUN DENGE RECHERCHEN
+Données prises dans l’app. ¦ Donnéeën aus der App geholl.
+Quels événements ¦ Wéi eng Evenementer
+Naissances, mariages, décès, résidences ¦ Gebuerten, Bestietnesser, Doudesfäll, Wunnsëtzer
+🔤 Un nom de ta généalogie ¦ 🔤 En Numm aus denger Genealogie
+Choisis un nom dans la liste (les plus fréquents d’abord) ou une personne : son nom est pris. Jamais un vivant ni une fiche confidentielle. ¦ Wiel en Numm aus der Lëscht (déi heefegst als éischt) oder eng Persoun: hiren Numm gëtt geholl. Ni e Liewegen an ni eng vertraulech Fiche.
+ou une personne ¦ oder eng Persoun
+Avec les variantes du même groupe de noms ¦ Mat de Variante vum selwechte Grupp vun Nimm
+Aucun nom ¦ Keen Numm
+Choisis un nom. ¦ Wiel en Numm.
+Le nom {name}, siècle par siècle ¦ Den Numm {name}, Joerhonnert fir Joerhonnert
+Avec {list} ¦ Mat {list}
+Aucun événement avec un lieu pour ce nom. ¦ Keen Evenement mat enger Plaz fir dësen Numm.
+{n} du nom {name}. ¦ {n} vum Numm {name}.
+🔥 Les événements de ton arbre ¦ 🔥 D’Evenementer vun dengem Bam
+Chaque événement daté qui a un lieu compte. Le curseur ▶ passe les décennies une à une. ¦ All datéiert Evenement mat enger Plaz zielt. De Schieber ▶ geet d’Joerzéngten eent no dem aneren duer.
+Aucun événement daté avec un lieu. ¦ Keen datéiert Evenement mat enger Plaz.
+🧬 Tes correspondances ADN ¦ 🧬 Deng DNA-Iwwereneestëmmungen
+Les correspondances reliées à une fiche de l’arbre (onglet ADN) : l’ancêtre commun calculé et ses lieux. Les noms des correspondances (souvent vivantes) ne sont mis que si tu le demandes. ¦ D’Iwwereneestëmmungen, déi mat enger Fiche vum Bam verbonne sinn (Reiter DNA): de gerechente gemeinsame Virfahr a seng Plazen. D’Nimm vun den Iwwereneestëmmungen (dacks lieweg Leit) ginn nëmmen drugesat, wann s du et wëlls.
+Écrire le nom des correspondances (pas pour un export partagé) ¦ Den Numm vun den Iwwereneestëmmunge schreiwen (net fir en Export, deen ee deelt)
+Aucun test ADN ¦ Keen DNA-Test
+Aucun ancêtre commun avec un lieu : relie des correspondances à leur fiche dans l’onglet ADN. ¦ Kee gemeinsame Virfahr mat enger Plaz: verbann Iwwereneestëmmunge mat hirer Fiche am Reiter DNA.
+🔎 Tes recherches ¦ 🔎 Deng Recherchen
+Les dépouillements (registres consultés), les communes des battues et les actes qui manquent à tes ancêtres (« Que manque-t-il ? »). ¦ D’Auszich (gekuckt Regëster), d’Gemenge vun de Sichaktiounen an d’Akten, déi bei denge Virfahre feelen („Wat feelt?“).
+Aucune recherche ni aucun trou avec une commune placée. ¦ Keng Recherche a keng Lück mat enger plazéierter Gemeng.
+Correspondance n° 1 ¦ Iwwereneestëmmung Nr. 1
+Correspondance n° 2 ¦ Iwwereneestëmmung Nr. 2
+Correspondance n° 3 ¦ Iwwereneestëmmung Nr. 3
+Correspondance n° 4 ¦ Iwwereneestëmmung Nr. 4
+Correspondance n° 5 ¦ Iwwereneestëmmung Nr. 5
+Registres paroissiaux ¦ Parregëster
+Registre abîmé ¦ Beschiedegt Regëster
+Prévu ¦ Geplangt
+Cadrer tout seul sur les points ¦ Automatesch op d’Punkten ausriichten
+Comme le type ¦ Wéi den Typ
+Couleur de « peu » ¦ Faarf vu „wéineg“
+Couleur de « beaucoup » ¦ Faarf vu „vill“
+Les mentions du nom (une par ligne) ¦ D’Mentioune vum Numm (eng pro Zeil)
+Lieu (« Auch », « Auch 43.65, 0.59 ») ¦ Plaz („Auch“, „Auch 43.65, 0.59“)
+N° du département ¦ Nr. vum Departement
+Nom montré (vide = toutes les lignes) ¦ Gewisenen Numm (eidel = all d’Zeilen)
+🔤 Ce nom sur Géopatronyme (1891-1990) ↗ ¦ 🔤 Dësen Numm op Géopatronyme (1891-1990) ↗
+Choisis un nom : un lien ouvrira sa répartition en France de 1891 à 1990 (Géopatronyme). ¦ Wiel en Numm: e Link mécht seng Verdeelung a Frankräich vun 1891 bis 1990 op (Géopatronyme).
+Départements colorés ¦ Faarweg Departementer
+Des ronds par lieu ¦ Krees pro Plaz
+Siècle montré (une année ; vide = tous) ¦ Gewisent Joerhonnert (e Joer; eidel = all)
+Écrire le nombre sur les départements ¦ D’Zuel op d’Departementer schreiwen
+Carte des patronymes : {n} mentions. ¦ Kaart vun de Familljennimm: {n} Mentiounen.
+Les événements (un par ligne) ¦ D’Evenementer (eent pro Zeil)
+Décennie montrée (une année ; vide = toutes) ¦ Gewisen Joerzéngt (e Joer; eidel = all)
+La décennie seule ¦ Just d’Joerzéngt
+Tout jusqu’à cette décennie ¦ Alles bis zu dësem Joerzéngt
+La même pour toutes les décennies ¦ Déi selwecht fir all Joerzéngten
+Propre à chaque décennie ¦ Eegen fir all Joerzéngt
+Finesse (cases sur la largeur) ¦ Feinheet (Felder iwwer d’Breet)
+Étalement ¦ Ausdeenung
+Où vivait la famille, décennie par décennie ¦ Wou d’Famill gewunnt huet, Joerzéngt fir Joerzéngt
+Carte de chaleur : {n} événements. ¦ Hëtztkaart: {n} Evenementer.
+Les lieux des ancêtres communs ¦ D’Plaze vun de gemeinsame Virfahren
+Selon le groupe ¦ Jee no Grupp
+Selon les cM partagés ¦ Jee no de gedeelte cM
+Là où plusieurs correspondances ¦ Do, wou et e puer Iwwereneestëmmunge gëtt
+Mes cousins ADN : où vivaient nos ancêtres communs ¦ Meng DNA-Koseng: wou eis gemeinsam Virfahre gelieft hunn
+Carte des cousins ADN : {n} lieux. ¦ Kaart vun den DNA-Koseng: {n} Plazen.
+Les recherches, commune par commune ¦ D’Recherchen, Gemeng fir Gemeng
+Noms des communes ¦ Nimm vun de Gemengen
+Les trous et les plus remplies ¦ D’Lächer an déi vollst
+Mes recherches dans le Gers ¦ Meng Recherchen am Gers
+Carte de tes recherches : {n} lignes. ¦ Kaart vun denge Recherchen: {n} Zeilen.
+{g} générations ¦ {g} Generatiounen
+Ma branche paternelle (côté père) ¦ Mäin Zweig vum Papp (Säit vum Papp)
+Ma branche maternelle (côté mère) ¦ Mäin Zweig vun der Mamm (Säit vun der Mamm)
+Avant la Révolution (jusqu’en 1789) ¦ Virun der Revolutioun (bis 1789)
+Au XVIIIe siècle ¦ Am 18. Joerhonnert
+Au XIXe siècle ¦ Am 19. Joerhonnert
+Naissances par lieu ¦ Gebuerten no Plaz
+Naissances de mes ancêtres ¦ Gebuerte vu menge Virfahren
+Décès par lieu ¦ Doudesfäll no Plaz
+Mariages par lieu ¦ Bestietnesser no Plaz
+Naissances, mariages et décès ¦ Gebuerten, Bestietnesser an Doudesfäll
+Personnes différentes par lieu ¦ Verschidde Persounen no Plaz
+Familles (patronymes différents) par lieu ¦ Famillen (verschidde Familljennimm) no Plaz
+Âge moyen au décès par lieu ¦ Duerchschnëttlechen Alter beim Doud no Plaz
+Actes trouvés (événements avec une source) ¦ Fonnt Akten (Evenementer mat enger Quell)
+Naissances au XIXe siècle ¦ Gebuerten am 19. Joerhonnert
+Naissances avant la Révolution ¦ Gebuerte virun der Revolutioun
+Tout au XIXe siècle ¦ Alles am 19. Joerhonnert
+Tout, avant la Révolution ¦ Alles, virun der Revolutioun
+Les anniversaires de mes ancêtres ¦ D’Gebuertsdeeg vu menge Virfahren
+Mariages de mes ancêtres ¦ Bestietnesser vu menge Virfahren
+Ses parents et ses enfants ¦ Seng Elteren a seng Kanner
+Grands-parents et petits-enfants ¦ Grousselteren an Enkelkanner
+Le plus loin possible ¦ Esou wäit wéi méiglech
+Les vies de ses ancêtres (3 générations) ¦ D’Liewe vu senge Virfahren (3 Generatiounen)
+Sa famille proche ¦ Seng no Famill
+Les vies de ses descendants ¦ D’Liewe vu senge Nokommen
+Ses enfants et petits-enfants ¦ Seng Kanner an Enkelkanner
+Les communes de ses ancêtres ¦ D’Gemenge vu senge Virfahren
+Les ancêtres trouvés par génération ¦ D’Virfahren, déi fonnt goufen, no Generatioun
+Les fiches complètes ¦ D’komplett Fichen
+Taux de recherche de mes ancêtres (5 générations) ¦ Recherchequote vu menge Virfahren (5 Generatiounen)
+Régions de naissance (6 générations) ¦ Gebuertsregiounen (6 Generatiounen)
+Départements de naissance (6 générations) ¦ Gebuertsdepartementer (6 Generatiounen)
+Pays de naissance (8 générations) ¦ Gebuertslänner (8 Generatiounen)
+Communes de naissance (5 générations) ¦ Gebuertsgemengen (5 Generatiounen)
+Métiers de mes ancêtres (5 générations) ¦ Beruffer vu menge Virfahren (5 Generatiounen)
+Siècles de naissance (8 générations) ¦ Gebuertsjoerhonnerten (8 Generatiounen)
+Noms de famille (6 générations) ¦ Familljennimm (6 Generatiounen)
+Hommes et femmes (4 générations) ¦ Männer a Fraen (4 Generatiounen)
+Le plus loin possible (10 générations) ¦ Esou wäit wéi méiglech (10 Generatiounen)
+Toute la descendance connue (8 générations) ¦ All bekannt Nokommen (8 Generatiounen)
+Toute la descendance connue (10 générations) ¦ All bekannt Nokommen (10 Generatiounen)
+Ses liens directs (témoins, parrains, marraines) ¦ Seng direkt Verbindungen (Zeien, Pättere, Gottaen)
+Ses liens et les liens de ses liens ¦ Seng Verbindungen an d’Verbindunge vu senge Verbindungen
+Tous les liens de ma base ¦ All d’Verbindunge vu menger Datebank
+Implexe : un même ancêtre par plusieurs chemins ¦ Implex: dee selwechte Virfahr iwwer e puer Weeër
+Témoins, parrains et marraines ¦ Zeien, Pättere a Gottaen
+Mes ancêtres et les fiches avec une source ¦ Meng Virfahren an d’Fiche mat enger Quell
+Avec un portrait, avec une source ¦ Mat engem Portrait, mat enger Quell
+Mes ancêtres, avec portrait, avec source ¦ Meng Virfahren, mat Portrait, mat Quell
+Vivants, avec un portrait, avec une source ¦ Lieweg, mat engem Portrait, mat enger Quell
+Mes ancêtres, hommes, avec source ¦ Meng Virfahren, Männer, mat Quell
+Les vies de toute ma base ¦ D’Liewe vu menger ganzer Datebank
+Décès seulement ¦ Nëmmen Doudesfäll
+Lieu de naissance → lieu de décès ¦ Gebuertsplaz → Doudesplaz
+Lieu de naissance → lieu du mariage ¦ Gebuertsplaz → Plaz vum Bestietnes
+D’une génération à l’autre ¦ Vun enger Generatioun op déi aner
+Mes ancêtres : naissance → décès ¦ Meng Virfahren: Gebuert → Doud
+Mes ancêtres : d’une génération à l’autre ¦ Meng Virfahren: vun enger Generatioun op déi aner
+Au XIXe siècle : naissance → décès ¦ Am 19. Joerhonnert: Gebuert → Doud
+Sa vie : les étapes avec un lieu ¦ Säi Liewen: d’Etappe mat enger Plaz
+Sa vie : toutes les étapes (même sans lieu) ¦ Säi Liewen: all d’Etappen (och ouni Plaz)
+Avant la Révolution ¦ Virun der Revolutioun
+Mes parents et grands-parents (3 générations) ¦ Meng Elteren a Grousselteren (3 Generatiounen)
+Le XVIIIe siècle, année par année ¦ D’18. Joerhonnert, Joer fir Joer
+Le XIXe siècle, année par année ¦ D’19. Joerhonnert, Joer fir Joer
+Mes ancêtres, par 5 ans ¦ Meng Virfahren, a 5-Joers-Schrëtt
+Qui vit aujourd’hui ¦ Wien haut lieft
+Qui vivait en {y} ¦ Wien am Joer {y} gelieft huet
+Ses frères et sœurs (1 génération) ¦ Seng Bridder a Schwësteren (1 Generatioun)
+Ses cousins germains (2 générations) ¦ Seng éischt Koseng (2 Generatiounen)
+Ses cousins issus de germains (3 générations) ¦ Seng zweet Koseng (3 Generatiounen)
+Les cousins germains (2 générations) ¦ D’éischt Koseng (2 Generatiounen)
+Les cousins issus de germains (3 générations) ¦ D’zweet Koseng (3 Generatiounen)
+Jusqu’à 4 générations, tous les liens ¦ Bis 4 Generatiounen, all d’Verbindungen
+Jusqu’à 6 générations, tous les liens ¦ Bis 6 Generatiounen, all d’Verbindungen
+Moi, mes parents et mes grands-parents ¦ Ech, meng Elteren a meng Grousselteren
+Moi et mes parents ¦ Ech a meng Elteren
+Mes parents, moi et mes enfants ¦ Meng Elteren, ech a meng Kanner
+Le plus loin possible (14 générations) ¦ Esou wäit wéi méiglech (14 Generatiounen)
+Ce que je sais (6 générations) ¦ Wat ech weess (6 Generatiounen)
+Taux de recherche (8 générations) ¦ Recherchequote (8 Generatiounen)
+Métiers (5 générations) ¦ Beruffer (5 Generatiounen)
+Hommes et femmes (5 générations) ¦ Männer a Fraen (5 Generatiounen)
+Les villages des deux époux (10 lieux) ¦ D’Dierfer vun deenen zwee Bestuete (10 Plazen)
+Les villages des deux époux (20 lieux) ¦ D’Dierfer vun deenen zwee Bestuete (20 Plazen)
+Le village de chacun → le lieu du mariage (10 lieux) ¦ D’Duerf vun all engem → d’Plaz vum Bestietnes (10 Plazen)
+Les 6 villages principaux ¦ Déi 6 wichtegst Dierfer
+Âge au décès, par siècle ¦ Alter beim Doud, pro Joerhonnert
+Mes ancêtres : âge au décès, par siècle ¦ Meng Virfahren: Alter beim Doud, pro Joerhonnert
+Ses grands-parents et ses petits-enfants ¦ Seng Grousselteren a seng Enkelkanner
+Quatre générations d’ancêtres ¦ Véier Generatioune Virfahren
+Six générations d’ancêtres ¦ Sechs Generatioune Virfahren
+Ses descendants sur 4 générations ¦ Seng Nokommen iwwer 4 Generatiounen
+Trois générations de chaque côté ¦ Dräi Generatiounen op all Säit
+Une courbe par siècle de naissance ¦ Eng Kurv pro Gebuertsjoerhonnert
+Branche paternelle et maternelle ¦ Zweig vum Papp a vun der Mamm
+Mes ancêtres, génération par génération ¦ Meng Virfahren, Generatioun fir Generatioun
+Une seule courbe pour toute ma base ¦ Eng eenzeg Kurv fir meng ganz Datebank
+Nés au XIXe siècle, femmes et hommes ¦ Gebuer am 19. Joerhonnert, Fraen a Männer
+Père → fils, sur 3 générations ¦ Papp → Jong, iwwer 3 Generatiounen
+Père → fils, sur 5 générations ¦ Papp → Jong, iwwer 5 Generatiounen
+Parents → enfants, sur 3 générations ¦ Elteren → Kanner, iwwer 3 Generatiounen
+Mes ancêtres : père → fils ¦ Meng Virfahren: Papp → Jong
+Les 5 mères qui ont eu le plus d’enfants ¦ Déi 5 Mammen, déi am meeschte Kanner haten
+Les 10 mères qui ont eu le plus d’enfants ¦ Déi 10 Mammen, déi am meeschte Kanner haten
+Les mères parmi mes ancêtres ¦ D’Mammen ënner menge Virfahren
+Mes ancêtres sur 2 générations ¦ Meng Virfahren iwwer 2 Generatiounen
+Mes ancêtres sur 3 générations ¦ Meng Virfahren iwwer 3 Generatiounen
+Mes ancêtres sur 4 générations ¦ Meng Virfahren iwwer 4 Generatiounen
+Mes ancêtres sur 5 générations ¦ Meng Virfahren iwwer 5 Generatiounen
+Mes ancêtres sur 3 générations (parents, grands-parents) ¦ Meng Virfahren iwwer 3 Generatiounen (Elteren, Grousselteren)
+Mes ancêtres, par siècle ¦ Meng Virfahren, pro Joerhonnert
+Au XIXe siècle, par décennie ¦ Am 19. Joerhonnert, pro Joerzéngt
+Les 20 couples qui ont eu le plus d’enfants ¦ Déi 20 Koppelen, déi am meeschte Kanner haten
+Les 40 couples ¦ Déi 40 Koppelen
+Adulte à 21 ans (majorité d’autrefois) ¦ Erwuessen mat 21 Joer (Volljäregkeet vu fréier)
+Par siècle, moins de 8 mois ¦ Pro Joerhonnert, manner wéi 8 Méint
+Par demi-siècle, moins de 8 mois ¦ Pro hallwem Joerhonnert, manner wéi 8 Méint
+Par décennie, moins de 8 mois ¦ Pro Joerzéngt, manner wéi 8 Méint
+Très tôt : moins de 7 mois, par siècle ¦ Ganz fréi: manner wéi 7 Méint, pro Joerhonnert
+Depuis son lieu de naissance (8 générations) ¦ Vu senger Gebuertsplaz aus (8 Generatiounen)
+Depuis son lieu de naissance (5 générations) ¦ Vu senger Gebuertsplaz aus (5 Generatiounen)
+Depuis le berceau des plus anciens (10 générations) ¦ Vun der Wéi vun deenen Eelsten aus (10 Generatiounen)
+Les 8 communes les plus suivies ¦ Déi 8 Gemengen, déi am meeschte gefollegt ginn
+Tous les segments ¦ All d’Segmenter
+Segments d’au moins 7 cM (les plus sûrs) ¦ Segmenter vun op d’mannst 7 cM (déi sécherst)
+Segments d’au moins 10 cM ¦ Segmenter vun op d’mannst 10 cM
+Gros segments (20 cM et plus) ¦ Grouss Segmenter (20 cM a méi)
+Toutes les correspondances (150 au plus) ¦ All d’Iwwereneestëmmungen (héchstens 150)
+Au moins 20 cM (150 au plus) ¦ Op d’mannst 20 cM (héchstens 150)
+Cousins proches (90 cM et plus) ¦ No Koseng (90 cM a méi)
+Au moins 50 cM, toutes ¦ Op d’mannst 50 cM, all
+Graphique : un point de départ tout prêt ¦ Grafik: e fäerdege Startpunkt
+✏️ Sur mesure (les réglages ci-dessous) ¦ ✏️ No Mooss (d’Astellungen hei drënner)
+Ce point de départ n’a pas pu être réglé. ¦ Dëse Startpunkt konnt net agestallt ginn.
+Réglé. Clique sur « {label} » pour voir le dessin. ¦ Agestallt. Klick op „{label}“, fir d’Zeechnung ze gesinn.
+Pas d’ascendance : choisis une personne de départ (Personnes → sa fiche → « Personne de départ »). ¦ Keng Virfahren: wiel eng Startpersoun (Persounen → hir Fiche → „Startpersoun“).
+Pas d’enfant connu pour la personne de départ. ¦ Kee bekannt Kand fir d’Startpersoun.
+Pas de fratrie connue. ¦ Keng bekannt Geschwëster.
+La fratrie de la personne de départ ¦ D’Geschwëster vun der Startpersoun
+Les enfants de la personne de départ ¦ D’Kanner vun der Startpersoun
+Les vies de mes ancêtres ({n} générations) ¦ D’Liewe vu menge Virfahren ({n} Generatiounen)
+Pas de descendance connue. ¦ Keng bekannt Nokommen.
+Homme ¦ Mann
+Femme ¦ Fra
+Aucune date de naissance pour ces personnes. ¦ Keen Gebuertsdatum fir dës Persounen.
+La vie de la personne de départ, étape par étape ¦ D’Liewe vun der Startpersoun, Etapp fir Etapp
+Naissances et décès de mes ancêtres (3 générations) ¦ Gebuerten an Doudesfäll vu menge Virfahren (3 Generatiounen)
+Naissances et décès de mes ancêtres (4 générations) ¦ Gebuerten an Doudesfäll vu menge Virfahren (4 Generatiounen)
+Naissances, mariages et décès de sa fratrie ¦ Gebuerten, Bestietnesser an Doudesfäll vu senge Geschwëster
+La naissance de ses enfants ¦ D’Gebuert vu senge Kanner
+{what} avec {who} à {place} ¦ {what} mat {who} zu {place}
+{what} avec {who} ¦ {what} mat {who}
+{what} à {place} ¦ {what} zu {place}
+Mes ancêtres : naissances et décès ¦ Meng Virfahren: Gebuerten an Doudesfäll
+Aucune date pour ce choix. ¦ Keen Datum fir dës Wiel.
+Année de naissance et âge au décès (une personne = un point) ¦ Gebuertsjoer an Alter beim Doud (eng Persoun = e Punkt)
+Âge de l’époux et âge de l’épouse au mariage ¦ Alter vum Mann an Alter vun der Fra beim Bestietnes
+Âge de l’époux ¦ Alter vum Mann
+Âge de l’épouse ¦ Alter vun der Fra
+Âge des époux au mariage ¦ Alter vun de Bestuete beim Bestietnes
+Âge au décès selon l’année de naissance ¦ Alter beim Doud no Gebuertsjoer
+Âge au mariage et âge au décès ¦ Alter beim Bestietnes an Alter beim Doud
+Pas assez de dates dans l’arbre pour ce choix. ¦ Net genuch Datumer am Bam fir dës Wiel.
+bleu : hommes · rouge : femmes ¦ blo: Männer · rout: Fraen
+Département de naissance → département de décès ¦ Gebuertsdepartement → Doudesdepartement
+Département de naissance → département du mariage ¦ Gebuertsdepartement → Departement vum Bestietnes
+Département du parent → département de l’enfant ¦ Departement vum Elterendeel → Departement vum Kand
+Pays de naissance → pays de décès ¦ Gebuertsland → Doudesland
+Commune de naissance → commune de décès ¦ Gebuertsgemeng → Doudesgemeng
+Fils ¦ Jong
+Fille ¦ Duechter
+Père : {x} ¦ Papp: {x}
+Parent : ¦ Elterendeel:
+Enfant : ¦ Kand:
+Pas assez de lieux connus des deux côtés. ¦ Net genuch bekannte Plazen op deenen zwou Säiten.
+Sa descendance sur 2 générations ¦ Seng Nokommen iwwer 2 Generatiounen
+Sa descendance sur 3 générations ¦ Seng Nokommen iwwer 3 Generatiounen
+Rien à dessiner pour ce choix. ¦ Näischt ze zeechne fir dës Wiel.
+Mes ancêtres ({n} générations) ¦ Meng Virfahren ({n} Generatiounen)
+Mes ancêtres en chiffres (trouvés, sourcés, taux de recherche) ¦ Meng Virfahren an Zuelen (fonnt, mat Quell, Recherchequote)
+La qualité de ma base (sources, noms, lieux) ¦ D’Qualitéit vu menger Datebank (Quellen, Nimm, Plazen)
+Ancêtres trouvés (10 générations) ¦ Fonnt Virfahren (10 Generatiounen)
+Trouvés sur 8 générations ¦ Fonnt iwwer 8 Generatiounen
+Ancêtres avec une source ¦ Virfahre mat enger Quell
+Taux de recherche moyen ¦ Duerchschnëttlech Recherchequote
+Génération la plus lointaine ¦ Déi wäitst Generatioun
+Mes ancêtres en chiffres ¦ Meng Virfahren an Zuelen
+à partir de {name} ¦ vu(n) {name} aus
+Les chiffres ne sont pas encore prêts. ¦ D’Zuele sinn nach net prett.
+Fiches avec une source ¦ Fiche mat enger Quell
+Personnes décédées ¦ Gestuerwe Persounen
+Noms de famille différents ¦ Verschidde Familljennimm
+La qualité de ma base ¦ D’Qualitéit vu menger Datebank
+Ancêtres avec une source, génération par génération ¦ Virfahre mat enger Quell, Generatioun fir Generatioun
+Taux de recherche moyen, génération par génération ¦ Duerchschnëttlech Recherchequote, Generatioun fir Generatioun
+Ancêtres dont on connaît la date de naissance, par génération ¦ Virfahren, vun deenen een de Gebuertsdatum kennt, pro Generatioun
+Génér. {g} ¦ Gen. {g}
+Pas d’ancêtre trouvé. ¦ Kee Virfahr fonnt.
+Taux de recherche, génération par génération ¦ Recherchequote, Generatioun fir Generatioun
+Date de naissance connue ¦ Gebuertsdatum bekannt
+à partir de {name} (parmi les ancêtres trouvés) ¦ vu(n) {name} aus (ënner de fonnte Virfahren)
+Objectif à changer dans le tableau ¦ Zil, dat een an der Tabell ännere kann
+Ajoute des noms (lignes) et au moins deux périodes (colonnes). ¦ Setz Nimm (Zeilen) an op d’mannst zwou Perioden (Kolonnen) derbäi.
+Aucun rang à montrer : vérifie les chiffres. ¦ Keng Plaz ze weisen: kontrolléier d’Zuelen.
+Ajoute au moins deux périodes (lignes) et des catégories (colonnes). ¦ Setz op d’mannst zwou Perioden (Zeilen) a Kategorien (Kolonnen) derbäi.
+Ajoute des valeurs (une par ligne) : l’app les range dans les tranches. ¦ Setz Wäerter derbäi (ee pro Zeil): d’App sortéiert se an d’Tranchen.
+médiane ¦ Median
+Ajoute des valeurs avec leur groupe (siècle, sexe…) : médiane et quartiles sont calculés. ¦ Setz Wäerter mat hirem Grupp derbäi (Joerhonnert, Geschlecht…): Median a Quartile ginn ausgerechent.
+{name} — {n} valeurs : médiane {md}{u}, quartiles {q1} et {q3}, de {min} à {max}{u}, moyenne {mean} ¦ {name} — {n} Wäerter: Median {md}{u}, Quartile {q1} an {q3}, vu(n) {min} bis {max}{u}, Duerchschnëtt {mean}
+{name} — {n} valeur : médiane {md}{u}, quartiles {q1} et {q3}, de {min} à {max}{u}, moyenne {mean} ¦ {name} — {n} Wäert: Median {md}{u}, Quartile {q1} an {q3}, vu(n) {min} bis {max}{u}, Duerchschnëtt {mean}
+moyenne {v}{u} ¦ Duerchschnëtt {v}{u}
+{v}{u} (valeur à part) ¦ {v}{u} (Ausreisser)
+Ajoute des lignes avec deux valeurs (ex. âge du mari, âge de la femme). ¦ Setz Zeile mat zwee Wäerter derbäi (z. B. Alter vum Mann, Alter vun der Fra).
+écart ¦ Ënnerscheed
+Ajoute des lignes avec une valeur « avant » et une valeur « après ». ¦ Setz Zeile mat engem Wäert „virdrun“ an engem Wäert „duerno“ derbäi.
+Ajoute des étapes : un départ, des hausses (+) et des baisses (−), des sous-totaux. ¦ Setz Etappen derbäi: e Start, Hausse (+) a Baisse (−), Zwëschesummen.
+Ajoute des lignes : un nom et un nombre. ¦ Setz Zeilen derbäi: en Numm an eng Zuel.
+Ajoute des valeurs : une ligne = une personne (nom, valeur, groupe). ¦ Setz Wäerter derbäi: eng Zeil = eng Persoun (Numm, Wäert, Grupp).
+médiane {v}{u} ¦ Median {v}{u}
+5 000 premiers points sur {n} ¦ Éischt 5 000 Punkte vu(n) {n}
+Ajoute des périodes (lignes) et une colonne par petite courbe. ¦ Setz Perioden (Zeilen) an eng Kolonn pro kleng Kurv derbäi.
+Ajoute une carte : un nom, un chiffre (et la valeur d’avant, une mini-courbe, des seuils…). ¦ Setz eng Kaart derbäi: en Numm, eng Zuel (an de Wäert vu virdrun, eng Sparkline, Schwellen…).
+Ajoute une ligne : un nom, une valeur, un objectif (et des zones). ¦ Setz eng Zeil derbäi: en Numm, e Wäert, en Zil (an Zonen).
+tout le monde ¦ jiddereen
+les femmes ¦ d’Fraen
+les hommes ¦ d’Männer
+Âge au décès (tout le monde) ¦ Alter beim Doud (jiddereen)
+Âge au décès (les femmes) ¦ Alter beim Doud (d’Fraen)
+Âge au décès (les hommes) ¦ Alter beim Doud (d’Männer)
+D’après {n} personnes de l’arbre ¦ No {n} Persounen aus dem Bam
+Les métiers de la famille ¦ D’Beruffer vun der Famill
+Naissances par commune ¦ Gebuerten no Gemeng
+Naissances par nom de famille ¦ Gebuerten no Familljennumm
+par tranches de {n} ans ¦ a Tranche vu(n) {n} Joer
+Prénoms les plus donnés par décennie ({who}) ¦ Déi heefegst Virnimm pro Joerzéngt ({who})
+Pas assez de naissances datées. ¦ Net genuch datéiert Gebuerten.
+Les 10 prénoms les plus donnés par décennie ¦ Déi 10 heefegst Virnimm pro Joerzéngt
+D’après les naissances de l’arbre ¦ No de Gebuerten aus dem Bam
+Métiers (par 25 ans) ¦ Beruffer (pro 25 Joer)
+Métiers (par 50 ans) ¦ Beruffer (pro 50 Joer)
+Naissances par nom de famille (par décennie) ¦ Gebuerten no Familljennumm (pro Joerzéngt)
+Naissances par commune (par 25 ans) ¦ Gebuerten no Gemeng (pro 25 Joer)
+Naissances par commune (par décennie) ¦ Gebuerten no Gemeng (pro Joerzéngt)
+Âges des époux au mariage (25 couples les plus récents) ¦ Alter vun de Bestuete beim Bestietnes (déi 25 rezentst Koppelen)
+Âges des époux au mariage (50 couples) ¦ Alter vun de Bestuete beim Bestietnes (50 Koppelen)
+Aucun couple marié avec les deux dates de naissance. ¦ Keen bestuete Koppel mat deenen zwee Gebuertsdatumer.
+Lui ¦ Hien
+D’après les mariages de l’arbre ¦ No de Bestietnesser aus dem Bam
+Naissances par commune : un siècle et le suivant ¦ Gebuerten no Gemeng: e Joerhonnert an dat nächst
+Il faut des naissances sur au moins deux siècles. ¦ Et brauch Gebuerten iwwer op d’mannst zwee Joerhonnerten.
+Naissances par commune, d’un siècle à l’autre ¦ Gebuerten no Gemeng, vun engem Joerhonnert op dat anert
+Naissances et décès dans l’arbre (par 50 ans) ¦ Gebuerten an Doudesfäll am Bam (pro 50 Joer)
+Naissances et décès dans l’arbre (par 25 ans) ¦ Gebuerten an Doudesfäll am Bam (pro 25 Joer)
+Naissances et décès dans l’arbre (par siècle) ¦ Gebuerten an Doudesfäll am Bam (pro Joerhonnert)
+Les vivants de l’arbre, période par période ¦ Déi Lieweg aus dem Bam, Period fir Period
+naissances (+) et décès (−) ; décès inconnu d’une naissance ancienne : compté 60 ans après ¦ Gebuerten (+) an Doudesfäll (−); onbekannten Doud bei enger aler Gebuert: 60 Joer duerno gezielt
+Les compteurs de ma base (personnes, familles, médias…) ¦ D’Zieler vu menger Datebank (Persounen, Famillen, Medien…)
+il y a un mois ¦ virun engem Mount
+Ancêtres trouvés (8 générations) ¦ Fonnt Virfahren (8 Generatiounen)
+Ma base en chiffres ¦ Meng Datebank an Zuelen
+mini-courbes : les 12 derniers mois ¦ Sparklines: déi lescht 12 Méint
+Ancêtres trouvés par génération (SOSA) ¦ Fonnt Virfahren no Generatioun (SOSA)
+Pas d’ascendance SOSA : choisis une personne de départ. ¦ Keng SOSA-Virfahren: wiel eng Startpersoun.
+Génér. ¦ Gen.
+Ancêtres trouvés, génération par génération ¦ Fonnt Virfahren, Generatioun fir Generatioun
+Objectif : 75 % (à changer dans le tableau) ¦ Zil: 75 % (an der Tabell z’änneren)
+Unité (ex. : ans, personnes) ¦ Eenheet (z. B.: Joer, Persounen)
+Les prénoms les plus donnés, décennie par décennie ¦ Déi heefegst Virnimm, Joerzéngt fir Joerzéngt
+rang de 1 (le plus donné) à 8 ; dans le tableau : le nombre de naissances ¦ Plaz vun 1 (deen heefegsten) bis 8; an der Tabell: d’Zuel vu Gebuerten
+Laboureur ¦ Bauer
+Tisserand ¦ Wiewer
+Instituteur ¦ Schoulmeeschter
+Employé ¦ Employé
+Journalier ¦ Daglinnert
+Domestique ¦ Déngschtbot
+Les métiers de la famille sur 200 ans ¦ D’Beruffer vun der Famill iwwer 200 Joer
+nombre de personnes, par tranches de 25 ans ¦ Zuel vu Persounen, a Tranche vu 25 Joer
+par tranches de 5 ans ¦ a Tranche vu 5 Joer
+Jean et Marie (1789) ¦ Jean et Marie (1789)
+Pierre et Anne (1812) ¦ Pierre et Anne (1812)
+Louis et Rose (1838) ¦ Louis et Rose (1838)
+Joseph et Jeanne (1861) ¦ Joseph et Jeanne (1861)
+François et Louise (1889) ¦ François et Louise (1889)
+Henri et Germaine (1919) ¦ Henri et Germaine (1919)
+André et Simone (1946) ¦ André et Simone (1946)
+XVIIIe siècle ¦ 18. Joerhonnert
+XIXe siècle ¦ 19. Joerhonnert
+Les vivants de la famille ¦ Déi Lieweg aus der Famill
+naissances (+), décès et départs (−) ¦ Gebuerten (+), Doudesfäll an Departen (−)
+En 1800 ¦ Am Joer 1800
+Naissances 1800-1849 ¦ Gebuerten 1800-1849
+Décès 1800-1849 ¦ Doudesfäll 1800-1849
+En 1850 ¦ Am Joer 1850
+Naissances 1850-1899 ¦ Gebuerten 1850-1899
+Départs (Amérique) ¦ Departen (Amerika)
+Décès 1850-1899 ¦ Doudesfäll 1850-1899
+En 1900 ¦ Am Joer 1900
+Févr. ¦ Feb.
+Mars ¦ Mäerz
+Avril ¦ Abrëll
+Mai ¦ Mee
+Juin ¦ Juni
+Août ¦ August
+Déc. ¦ Dez.
+Âge au décès : une personne, un point ¦ Alter beim Doud: eng Persoun, e Punkt
+Naissances par branche ¦ Gebuerten no Zweig
+tous les 20 ans, même échelle ¦ all 20 Joer, selwecht Skala
+Ma généalogie en chiffres ¦ Meng Genealogie an Zuelen
+l’an dernier ¦ d’lescht Joer
+Actes numérisés ¦ Digitaliséiert Akten
+Fiches sans source ¦ Fiche ouni Quell
+Photos légendées ¦ Fotoe mat Beschrëftung
+pareil ¦ d’selwecht
+Objectif : 75 % ¦ Zil: 75 %
+Génér. 2 (parents) ¦ Gen. 2 (Elteren)
+Génér. 3 ¦ Gen. 3
+Génér. 4 ¦ Gen. 4
+Génér. 5 ¦ Gen. 5
+Génér. 6 ¦ Gen. 6
+Génér. 7 ¦ Gen. 7
+Génér. 8 ¦ Gen. 8
+Génér. 9 ¦ Gen. 9
+Par la 1re valeur ¦ No dem 1. Wäert
+Par la 2e valeur ¦ No dem 2. Wäert
+Les noms (lignes) et les périodes (colonnes) ¦ D’Nimm (Zeilen) an d’Perioden (Kolonnen)
+Nom / prénom ¦ Numm / Virnumm
+Les chiffres du tableau sont ¦ D’Zuelen an der Tabell sinn
+Des nombres : l’app calcule le rang ¦ Zuelen: d’App rechent d’Plaz aus
+Déjà des rangs (1 = premier) ¦ Schonn Plazen (1 = éischt)
+Hauteur d’un rang ¦ Héicht vun enger Plaz
+Les périodes (lignes) et les catégories (colonnes) ¦ D’Perioden (Zeilen) an d’Kategorien (Kolonnen)
+Courants (centrés, le moins de mouvement) ¦ Stréimungen (zentréiert, mat der mannster Beweegung)
+Centrés sur l’axe ¦ Op der Achs zentréiert
+Empilés sur le sol ¦ Um Buedem gestapelt
+En parts (100 %) ¦ An Deeler (100 %)
+Noms dans les courants ¦ Nimm an de Stréimungen
+Les valeurs (une par ligne : l’app les range en tranches) ¦ D’Wäerter (ee pro Zeil: d’App sortéiert se an Tranchen)
+Largeur des tranches (0 = automatique) ¦ Breet vun den Tranchen (0 = automatesch)
+Début de la première tranche (vide = automatique) ¦ Ufank vun der éischter Tranche (eidel = automatesch)
+Couleur des colonnes ¦ Faarf vun de Kolonnen
+Montrer la moyenne ¦ Den Duerchschnëtt weisen
+Les valeurs et leur groupe (médiane, quartiles et extrêmes sont calculés) ¦ D’Wäerter an hire Grupp (Median, Quartile an Extremer ginn ausgerechent)
+Boîtes debout ¦ Stoend Boxen
+Boîtes couchées ¦ Leiend Boxen
+Jusqu’à 1,5 × l’écart des quartiles (valeurs à part en ronds) ¦ Bis 1,5 × den Ënnerscheed vun de Quartilen (Ausreisser als Krees)
+Du minimum au maximum ¦ Vum Minimum bis zum Maximum
+Montrer la moyenne (◆) ¦ Den Duerchschnëtt weisen (◆)
+Les lignes et leurs deux valeurs ¦ D’Zeilen an hir zwee Wäerter
+Écrire l’écart ¦ Den Ënnerscheed schreiwen
+Les lignes : la valeur avant, la valeur après ¦ D’Zeilen: de Wäert virdrun, de Wäert duerno
+Une couleur par ligne ¦ Eng Faarf pro Zeil
+Couleur des hausses ¦ Faarf vun den Haussen
+Couleur des baisses ¦ Faarf vun de Baissen
+Les étapes (dans l’ordre) ¦ D’Etappen (an der Reiefolleg)
+Valeur (+ ou −) ¦ Wäert (+ oder −)
+Hausse ou baisse ¦ Hausse oder Baisse
+Sous-total (calculé) ¦ Zwëschesumm (ausgerechent)
+Total (calculé) ¦ Total (ausgerechent)
+Traits entre les marches ¦ Linnen tëscht de Stufen
+Couleur des totaux ¦ Faarf vun den Totalen
+Les points (une ligne = une personne) ¦ D’Punkten (eng Zeil = eng Persoun)
+Les périodes (lignes) et une colonne par petite courbe ¦ D’Perioden (Zeilen) an eng Kolonn pro kleng Kurv
+Courbes par ligne (0 = automatique) ¦ Kurve pro Zeil (0 = automatesch)
+Hauteur d’une courbe ¦ Héicht vun enger Kurv
+Remplir sous la courbe ¦ Ënner der Kurv ausfëllen
+Écrire la dernière valeur ¦ De leschte Wäert schreiwen
+Valeur d’avant (flèche, écart) ¦ Wäert vu virdrun (Feil, Ënnerscheed)
+Texte « avant » (ex. : l’an dernier) ¦ Text „virdrun“ (z. B.: d’lescht Joer)
+Mini-courbe (chiffres séparés par des espaces) ¦ Sparkline (Zuelen duerch Espacen getrennt)
+C’est plus haut ¦ Et ass méi héich
+C’est plus bas ¦ Et ass méi déif
+Couleur (sinon selon les seuils) ¦ Faarf (soss no de Schwellen)
+Cartes par ligne (0 = automatique) ¦ Kaarte pro Zeil (0 = automatesch)
+En valeur et en % ¦ Als Wäert an an %
+En valeur ¦ Als Wäert
+En % ¦ An %
+Chiffres après la virgule (au plus) ¦ Zifferen no dem Komma (héchstens)
+Couleur « bien » ¦ Faarf „gutt“
+Couleur « moyen » ¦ Faarf „mëttel“
+Couleur « à surveiller » ¦ Faarf „am A behalen“
+Les barres ¦ D’Balken
+Unité (ex. : %) ¦ Eenheet (z. B.: %)
+Graduations sous la dernière barre ¦ Skalestréch ënner dem leschte Balken
+Couleur de la valeur ¦ Faarf vum Wäert
+Couleur de l’objectif ¦ Faarf vum Zil
+Couleur des zones ¦ Faarf vun den Zonen
+Ajoute des périodes : le nombre d’enfants nés, ceux morts avant 1 an et avant 5 ans. ¦ Setz Perioden derbäi: d’Zuel vu gebuerene Kanner, déi, déi virun 1 Joer, an déi, déi virun 5 Joer gestuerwe sinn.
+En tout : {a} % des enfants morts avant 1 an, {b} % avant 5 ans ({n}). ¦ Am Ganzen: {a} % vun de Kanner virun 1 Joer gestuerwen, {b} % virun 5 Joer ({n}).
+Mortalité des enfants ¦ Kannerstierflechkeet
+Ajoute des couples : enfants nés, arrivés à l’âge adulte, morts jeunes. ¦ Setz Koppelen derbäi: gebuere Kanner, déi erwuesse gi sinn, jonk gestuerwen.
+{name} : {n} sans date de décès ¦ {name}: {n} ouni Doudesdatum
+Sur {n}, {p} % sont arrivés à l’âge adulte. ¦ Vu(n) {n} sinn {p} % erwuesse ginn.
+Arrivés à l’âge adulte ¦ Erwuesse ginn
+Ajoute des lignes : une période, « Naissances » ou « Décès », et les 12 mois. ¦ Setz Zeilen derbäi: eng Period, „Gebuerten“ oder „Doudesfäll“, an déi 12 Méint.
+{n} naissances ({p} % de l’année) ¦ {n} Gebuerten ({p} % vum Joer)
+{n} naissances ¦ {n} Gebuerten
+{n} décès ({p} % de l’année) ¦ {n} Doudesfäll ({p} % vum Joer)
+Saisons des naissances et des décès (plus foncé = plus d’actes) ¦ Joreszäite vu Gebuerten an Doudesfäll (méi donkel = méi Akten)
+moins de 6 mois ¦ manner wéi 6 Méint
+6 mois à 1 an ¦ 6 Méint bis 1 Joer
+1 à 2 ans ¦ 1 bis 2 Joer
+2 à 5 ans ¦ 2 bis 5 Joer
+5 à 10 ans ¦ 5 bis 10 Joer
+10 ans et plus ¦ 10 Joer a méi
+Ajoute des remariages : le nom, le sexe et le délai en mois depuis la mort du premier conjoint. ¦ Setz Erëmbestietnesser derbäi: den Numm, d’Geschlecht an d’Zäit a Méint zënter dem Doud vum éischte Partner.
+Hommes remariés {when} après : {n} ¦ Männer, déi sech {when} duerno erëmbestuet hunn: {n}
+Femmes remariées {when} après : {n} ¦ Fraen, déi sech {when} duerno erëmbestuet hunn: {n}
+Délai médian avant de se remarier : {a} pour les hommes, {b} pour les femmes. ¦ Median Zäit bis zum Erëmbestietnes: {a} bei de Männer, {b} bei de Fraen.
+Veuvage et remariage ¦ Wittfraschaft an Erëmbestietnes
+Ajoute des couples : l’année du mariage et sa durée en années. ¦ Setz Koppelen derbäi: d’Joer vum Bestietnes a seng Dauer a Joer.
+Durée médiane : {a} ans ({n} terminés par un décès). ¦ Median Dauer: {a} Joer ({n} duerch en Doud ofgeschloss).
+Durée médiane : {a} ans ({n} terminé par un décès). ¦ Median Dauer: {a} Joer ({n} duerch en Doud ofgeschloss).
+Durée des mariages ¦ Dauer vun de Bestietnesser
+Ajoute des naissances : l’année, l’âge du père, l’âge de la mère. ¦ Setz Gebuerten derbäi: d’Joer, den Alter vum Papp, den Alter vun der Mamm.
+le père ¦ de Papp
+la mère ¦ d’Mamm
+Âge du père (médiane {n} ans) ¦ Alter vum Papp (Median {n} Joer)
+Âge de la mère (médiane {n} ans) ¦ Alter vun der Mamm (Median {n} Joer)
+Âge des parents à chaque naissance ¦ Alter vun den Elteren bei all Gebuert
+Ajoute des périodes : le nombre de couples, les premiers enfants nés avant le mariage et ceux nés moins de 8 mois après. ¦ Setz Perioden derbäi: d’Zuel vu Koppelen, déi éischt Kanner, déi virum Bestietnes gebuer sinn, an déi, déi manner wéi 8 Méint duerno gebuer sinn.
+{name} : {a} premiers enfants nés avant le mariage, sur {n} ¦ {name}: {a} éischt Kanner virum Bestietnes gebuer, vu(n) {n}
+{name} : {a} premier enfant né avant le mariage, sur {n} ¦ {name}: {a} éischt Kand virum Bestietnes gebuer, vu(n) {n}
+{name} : {a} nés moins de 8 mois après, sur {n} ¦ {name}: {a} manner wéi 8 Méint duerno gebuer, vu(n) {n}
+{name} : {a} né moins de 8 mois après, sur {n} ¦ {name}: {a} manner wéi 8 Méint duerno gebuer, vu(n) {n}
+Né avant le mariage ¦ Virum Bestietnes gebuer
+Né moins de 8 mois après ¦ Manner wéi 8 Méint duerno gebuer
+{p} % des premiers enfants ont été conçus avant le mariage ({n}). ¦ {p} % vun den éischte Kanner goufe virum Bestietnes gezeugt ({n}).
+Conceptions avant mariage ¦ Zeugunge virum Bestietnes
+moins d’1 an ¦ manner wéi 1 Joer
+1 à 3 ans ¦ 1 bis 3 Joer
+3 à 5 ans ¦ 3 bis 5 Joer
+10 à 15 ans ¦ 10 bis 15 Joer
+15 ans et plus ¦ 15 Joer a méi
+Ajoute des couples : l’écart d’âge en années (positif = le mari est plus âgé). ¦ Setz Koppelen derbäi: den Altersënnerscheed a Joer (positiv = de Mann ass méi al).
+Le mari est plus âgé ¦ De Mann ass méi al
+La femme est plus âgée ¦ D’Fra ass méi al
+Mari plus âgé de {gap} : {n} ¦ Mann méi al ëm {gap}: {n}
+Femme plus âgée de {gap} : {n} ¦ Fra méi al ëm {gap}: {n}
+Écart médian : {a} ans ; la femme est plus âgée dans {p} % des couples. ¦ Median Ënnerscheed: {a} Joer; d’Fra ass bei {p} % vun de Koppele méi al.
+Écart médian : {a} an ; la femme est plus âgée dans {p} % des couples. ¦ Median Ënnerscheed: {a} Joer; d’Fra ass bei {p} % vun de Koppele méi al.
+Écart d’âge entre époux ¦ Altersënnerscheed tëscht de Bestuete
+Ajoute des générations : la distance moyenne (km) au lieu de référence. ¦ Setz Generatiounen derbäi: d’duerchschnëttlech Distanz (km) bis zur Referenzplaz.
+Génération {g} : {km} km en médiane ({n}, le plus loin à {max} km) ¦ Generatioun {g}: {km} km am Median ({n}, de wäitsten op {max} km)
+Génération {g} : {km} km en moyenne ({n}, le plus loin à {max} km) ¦ Generatioun {g}: {km} km am Duerchschnëtt ({n}, de wäitsten op {max} km)
+=lieu connu ¦ bekannt Plaz|bekannt Plazen
+Distance au {ref}. ¦ Distanz bis {ref}.
+Loin du berceau ¦ Wäit vun der Wéi
+Note qui a signé : dans « Modifier un événement », « ✍️ A signé » pour les époux et chaque témoin. ¦ Notéier, wien ënnerschriwwen huet: an „En Evenement änneren“, „✍️ Huet ënnerschriwwen“ fir déi Bestuet an all Zeien.
+Hommes (époux…) ¦ Männer (Bestuetener…)
+Femmes (épouses…) ¦ Fraen (Bestuetener…)
+{a} ont signé sur {b} ¦ {a} vu(n) {b} hunn ënnerschriwwen
+Part de ceux qui savaient signer ¦ Undeel vun deenen, déi ënnerschreiwe konnten
+Ajoute des générations : pour chaque acte, combien sont sourcés, sans source, manquants. ¦ Setz Generatiounen derbäi: fir all Akt, wéi vill mat Quell, ouni Quell, feelend.
+Génération 12 ¦ Generatioun 12
+sourcé ¦ mat Quell
+sans source ¦ ouni Quell
+manquant ¦ feelt
+{n} sourcés ¦ {n} mat Quell
+{n} sourcé ¦ {n} mat Quell
+{n} sans source ¦ {n} ouni Quell
+{n} manquants ¦ {n} feelen
+{n} manquant ¦ {n} feelt
+{p} % des actes attendus sont prouvés par une source. ¦ {p} % vun den erwaarten Akte si mat enger Quell beluegt.
+Ce que tu as prouvé ¦ Wat s du beluegt hues
+Dépouillé ¦ Ausgezunn
+Vu, rien trouvé ¦ Gekuckt, näischt fonnt
+Acte trouvé (source) ¦ Akt fonnt (Quell)
+Ajoute des lignes : la commune, les années vues (de… à…) et la sorte (dépouillé, vu sans rien, à faire, acte). ¦ Setz Zeilen derbäi: d’Gemeng, déi gekuckte Joren (vu… bis…) an d’Zort (ausgezunn, gekuckt ouni Resultat, ze maachen, Akt).
+{place} : de {a} à {b} — en rouge pâle, les années pas encore vues ¦ {place}: vu(n) {a} bis {b} — a blassrout, d’Joren, déi nach net gekuckt goufen
+Pas encore vu ¦ Nach net gekuckt
+Registres consultés ¦ Gekuckt Regëster
+Couple {n} ¦ Koppel {n}
+Enfant {n} ¦ Kand {n}
+Quart de siècle ¦ Véierel Joerhonnert
+Demi-siècle ¦ Hallef Joerhonnert
+👶 Les enfants de ma base ¦ 👶 D’Kanner vu menger Datebank
+Chaque enfant né (ou baptisé) avec une date : mort avant 1 an, avant 5 ans, ou plus tard. Ceux dont on ne connaît pas le décès sont laissés de côté. ¦ All Kand, dat mat engem Datum gebuer (oder gedeeft) ass: virun 1 Joer gestuerwen, virun 5 Joer oder méi spéit. Déi, vun deenen een den Doud net kennt, ginn ewechgelooss.
+Aucun enfant avec une naissance et un décès connus. ¦ Kee Kand mat bekannter Gebuert a bekanntem Doud.
+{n} périodes prises dans ta base ({k} personnes sans date de décès laissées de côté). ¦ {n} Perioden aus denger Datebank geholl ({k} Persounen ouni Doudesdatum ewechgelooss).
+👨‍👩‍👧 Les couples de ma base ¦ 👨‍👩‍👧 D’Koppele vu menger Datebank
+Pour chaque couple : ses enfants, ceux arrivés à l’âge adulte et ceux morts jeunes. ¦ Fir all Koppel: seng Kanner, déi, déi erwuesse gi sinn, an déi, déi jonk gestuerwe sinn.
+Adulte à partir de ¦ Erwuessen ab
+Aucun couple avec des enfants. ¦ Keen Koppel mat Kanner.
+Les fratries qui ont survécu ¦ D’Geschwëster, déi iwwerlieft hunn
+{n} couples pris dans ta base (sur {k}). ¦ {n} Koppelen aus denger Datebank geholl (vu(n) {k}).
+🗓 Les naissances et les décès de ma base ¦ 🗓 D’Gebuerten an d’Doudesfäll vu menger Datebank
+Datés au mois près : combien chaque mois, période par période. ¦ Op de Mount genee datéiert: wéi vill all Mount, Period fir Period.
+Aucune naissance ni aucun décès datés au mois près. ¦ Keng Gebuert a keen Doudesfall op de Mount genee datéiert.
+💔 Les remariages de ma base ¦ 💔 D’Erëmbestietnesser vu menger Datebank
+Les personnes mariées deux fois ou plus : le temps entre la mort du conjoint et le mariage suivant (les deux dates connues). ¦ D’Persounen, déi zweemol oder méi bestuet waren: d’Zäit tëscht dem Doud vum Partner an dem nächste Bestietnes (déi zwee Datumer bekannt).
+Aucun remariage avec la date du décès du conjoint et celle du nouveau mariage. ¦ Keen Erëmbestietnes mam Doudesdatum vum Partner an deem vum neie Bestietnes.
+{n} remariages pris dans ta base. ¦ {n} Erëmbestietnesser aus denger Datebank geholl.
+⏳ Les mariages de ma base ¦ ⏳ D’Bestietnesser vu menger Datebank
+De la date du mariage à la mort du premier des deux époux. ¦ Vum Datum vum Bestietnes bis zum Doud vum éischte vun deenen zwee Bestuete.
+Aucun mariage daté dont un des époux a une date de décès. ¦ Keen datéiert Bestietnes, bei deem ee vun de Bestuete en Doudesdatum huet.
+{n} mariages pris dans ta base ({k} encore en cours ou sans date de décès). ¦ {n} Bestietnesser aus denger Datebank geholl ({k} nach amgaang oder ouni Doudesdatum).
+{n} mariages pris dans ta base. ¦ {n} Bestietnesser aus denger Datebank geholl.
+👴 Les naissances de ma base ¦ 👴 D’Gebuerte vu menger Datebank
+Pour chaque enfant : l’âge de son père et de sa mère le jour de sa naissance. ¦ Fir all Kand: den Alter vu sengem Papp a vu senger Mamm um Dag vu senger Gebuert.
+Aucun enfant dont un parent a une date de naissance. ¦ Kee Kand, bei deem en Elterendeel e Gebuertsdatum huet.
+{n} naissances prises dans ta base. ¦ {n} Gebuerten aus denger Datebank geholl.
+🤰 Les premiers enfants de ma base ¦ 🤰 Déi éischt Kanner vu menger Datebank
+Pour chaque mariage daté au mois près : le premier enfant est-il né avant, ou moins de 8 mois après ? ¦ Fir all Bestietnes, dat op de Mount genee datéiert ass: ass dat éischt Kand virdru gebuer, oder manner wéi 8 Méint duerno?
+« Tôt » : moins de ¦ „Fréi“: manner wéi
+Aucun mariage daté au mois près avec un enfant daté. ¦ Keen op de Mount genee datéiert Bestietnes mat engem datéierte Kand.
+💑 Les couples de ma base ¦ 💑 D’Koppele vu menger Datebank
+L’écart entre les dates de naissance du mari et de la femme. ¦ Den Ënnerscheed tëscht de Gebuertsdatume vum Mann a vun der Fra.
+Aucun couple dont les deux époux ont une date de naissance. ¦ Keen Koppel, bei deem déi zwee Bestuete e Gebuertsdatum hunn.
+🧭 L’ascendance d’une personne ¦ 🧭 D’Virfahre vun enger Persoun
+Génération par génération : à quelle distance du lieu de référence sont nés ses ancêtres (les lieux ont besoin de leurs coordonnées). ¦ Generatioun fir Generatioun: wéi wäit vun der Referenzplaz hir Virfahre gebuer sinn (d’Plaze brauchen hir Koordinaten).
+Distance mesurée depuis ¦ Distanz gemooss vun
+Le lieu de naissance de la personne ¦ D’Gebuertsplaz vun der Persoun
+Le centre des lieux de la génération la plus ancienne ¦ D’Mëtt vun de Plaze vun der eelster Generatioun
+Un lieu que je choisis ¦ Eng Plaz, déi ech auswielen
+Le lieu (si « un lieu que je choisis ») ¦ D’Plaz (bei „eng Plaz, déi ech auswielen“)
+Choisis le lieu dans le menu. ¦ Wiel d’Plaz am Menü.
+Le lieu de référence n’a pas de coordonnées. ¦ D’Referenzplaz huet keng Koordinaten.
+Aucun ancêtre né dans un lieu situé. ¦ Kee Virfahr op enger plazéierter Plaz gebuer.
+Loin du berceau — {name} ¦ Wäit vun der Wéi — {name}
+✍️ Les signatures notées dans ma base ¦ ✍️ D’Ënnerschrëften, déi a menger Datebank notéiert sinn
+Ceux qui ont signé l’acte, ou « ne sait pas signer » : à noter dans « Modifier un événement » (✍️ pour les époux, et pour chaque témoin). ¦ Déi, déi den Akt ënnerschriwwen hunn, oder „ne sait pas signer“: z’notéieren an „En Evenement änneren“ (✍️ fir déi Bestuet, a fir all Zeien).
+Aucune signature notée pour l’instant : dans un événement, choisis « ✍️ A signé : oui / non » pour les époux et les témoins. ¦ Nach keng Ënnerschrëft notéiert: wiel an engem Evenement „✍️ Huet ënnerschriwwen: jo / nee“ fir déi Bestuet an d’Zeien.
+✅ L’ascendance d’une personne ¦ ✅ D’Virfahre vun enger Persoun
+Pour chaque génération d’ancêtres : les naissances, mariages et décès prouvés par une source, présents sans source, ou pas encore trouvés. ¦ Fir all Generatioun vu Virfahren: d’Gebuerten, Bestietnesser an Doudesfäll, déi mat enger Quell beluegt sinn, déi ouni Quell do sinn, oder déi nach net fonnt goufen.
+Ce que j’ai prouvé — {name} ¦ Wat ech beluegt hunn — {name}
+📚 Mes dépouillements et mes actes ¦ 📚 Meng Auszich a meng Akten
+Pour chaque commune : les années des registres dépouillés (suivi des dépouillements) et des actes trouvés avec une source. ¦ Fir all Gemeng: d’Joren vun den ausgezunne Regëster (Suivi vun den Auszich) an d’Akten, déi mat enger Quell fonnt goufen.
+Aucun dépouillement avec des années, ni d’acte sourcé avec un lieu. ¦ Keen Auszuch mat Joren, an och keen Akt mat Quell an enger Plaz.
+{n} communes prises dans ta base. ¦ {n} Gemengen aus denger Datebank geholl.
+Les périodes ¦ D’Perioden
+Période (ex. 1780) ¦ Period (z. B. 1780)
+Enfants nés ¦ Gebuere Kanner
+Le nombre ¦ D’Zuel
+Aussi « avant 5 ans » ¦ Och „virun 5 Joer“
+Couleur « avant 1 an » ¦ Faarf „virun 1 Joer“
+Couleur « avant 5 ans » ¦ Faarf „virun 5 Joer“
+Arrivés adultes ¦ Erwuesse ginn
+Le plus de morts jeunes d’abord ¦ Déi mat de meeschte jonk Gestuerwenen als éischt
+Couples au plus ¦ Héchstens esou vill Koppelen
+Couleur « adultes » ¦ Faarf „Erwuessener“
+Couleur « morts jeunes » ¦ Faarf „jonk gestuerwen“
+Couleur « on ne sait pas » ¦ Faarf „onbekannt“
+Les fratries de la famille ¦ D’Geschwëster vun der Famill
+Les lignes (une période et une sorte, puis les 12 mois) ¦ D’Zeilen (eng Period an eng Zort, dann déi 12 Méint)
+Les naissances ¦ D’Gebuerten
+Les décès ¦ D’Doudesfäll
+Comparer les mois (part de l’année, en %) ¦ D’Méint vergläichen (Deel vum Joer, an %)
+Hauteur des cases ¦ Héicht vun de Felder
+Saisons des naissances et des décès ¦ Joreszäite vu Gebuerten an Doudesfäll
+Les remariages ¦ D’Erëmbestietnesser
+Année du veuvage ¦ Joer vum Wittstand
+Combien de temps avant de se remarier ¦ Wéi laang bis zum Erëmbestietnes
+Les mariages ¦ D’Bestietnesser
+Âge du père ¦ Alter vum Papp
+Âge de la mère ¦ Alter vun der Mamm
+Le père et la mère ¦ De Papp an d’Mamm
+Moyenne par quart de siècle (ligne) ¦ Duerchschnëtt pro Véierel Joerhonnert (Linn)
+Couleur du père ¦ Faarf vum Papp
+Couleur de la mère ¦ Faarf vun der Mamm
+Couleur « avant » ¦ Faarf „virdrun“
+Couleur « moins de 8 mois » ¦ Faarf „manner wéi 8 Méint“
+Conceptions avant le mariage ¦ Zeugunge virum Bestietnes
+Écart (ans, + = le mari est plus âgé) ¦ Ënnerscheed (Joer, + = de Mann ass méi al)
+Couleur « mari plus âgé » ¦ Faarf „Mann méi al“
+Couleur « femme plus âgée » ¦ Faarf „Fra méi al“
+Lieux connus ¦ Bekannt Plazen
+Distance médiane ¦ Median Distanz
+Le plus loin ¦ De wäitsten
+Trait : le plus loin ¦ Linn: de wäitsten
+Phrase sous le dessin ¦ Saz ënner der Zeechnung
+lieu de naissance de la personne ¦ Gebuertsplaz vun der Persoun
+Hommes : ont signé ¦ Männer: hunn ënnerschriwwen
+Hommes : n’ont pas signé ¦ Männer: hunn net ënnerschriwwen
+Femmes : ont signé ¦ Fraen: hunn ënnerschriwwen
+Femmes : n’ont pas signé ¦ Fraen: hunn net ënnerschriwwen
+Témoins : ont signé ¦ Zeien: hunn ënnerschriwwen
+Témoins : n’ont pas signé ¦ Zeien: hunn net ënnerschriwwen
+Couleur des témoins ¦ Faarf vun den Zeien
+Savoir signer ¦ Ënnerschreiwe kënnen
+Ancêtres possibles ¦ Méiglech Virfahren
+{what} : sourcée ¦ {what}: mat Quell
+{what} : sans source ¦ {what}: ouni Quell
+{what} : manquante ¦ {what}: feelt
+Couleur « sourcé » ¦ Faarf „mat Quell“
+Couleur « sans source » ¦ Faarf „ouni Quell“
+Couleur « manquant » ¦ Faarf „feelt“
+Ce que j’ai prouvé ¦ Wat ech beluegt hunn
+Les registres ¦ D’Regëster
+Montrer les trous (rouge pâle) ¦ D’Lächer weisen (blassrout)
+Communes au plus ¦ Héchstens esou vill Gemengen
+Couleur « {what} » ¦ Faarf „{what}“
+{name} : {n} adultes ¦ {name}: {n} Erwuessener
+{name} : {n} adulte ¦ {name}: {n} Erwuessenen
+{name} : {n} morts jeunes ¦ {name}: {n} jonk gestuerwen
+{name} : {n} mort jeune ¦ {name}: {n} jonk gestuerwen
+Éventail d’ascendance de {g} générations : {n} sur {max} places. ¦ Fächer vun de Virfahren iwwer {g} Generatiounen: {n} vu(n) {max} Plazen.
+🪭 Mes ancêtres (numéros Sosa) ¦ 🪭 Meng Virfahren (Sosa-Nummeren)
+Chaque case reçoit un ancêtre et se colore selon ce que tu choisis. Les cases vides sont les ancêtres pas encore trouvés. ¦ All Feld kritt e Virfahr a gëtt faarweg, jee no deem, wat s du auswiels. Déi eidel Felder sinn d’Virfahren, déi nach net fonnt goufen.
+Personne au centre ¦ Persoun an der Mëtt
+Taux de recherche (dates, lieux, mariage, source) ¦ Recherchequote (Datumer, Plazen, Bestietnes, Quell)
+Département de naissance ¦ Gebuertsdepartement
+Prendre mes ancêtres ¦ Meng Virfahren huelen
+{n} ancêtres pris dans l’app. ¦ {n} Virfahren aus der App geholl.
+Ajoute des lignes : un nom, le nom au-dessus (vide pour le centre) et un chiffre. ¦ Setz Zeilen derbäi: en Numm, den Numm driwwer (eidel fir d’Mëtt) an eng Zuel.
+Soleil de {n} parts sur {d} anneaux, total {t}. ¦ Sonn mat {n} Deeler op {d} Réng, Total {t}.
+🌞 Une descendance ¦ 🌞 Eng Nokommenschaft
+Chaque enfant devient une part de son parent ; la taille d’une part = le nombre de descendants (la personne comprise). ¦ All Kand gëtt en Deel vu sengem Elterendeel; d’Gréisst vun engem Deel = d’Zuel vun den Nokommen (d’Persoun mat dran).
+Ancêtre au centre ¦ Virfahr an der Mëtt
+Aucun descendant trouvé pour cette personne. ¦ Keng Nokomme fonnt fir dës Persoun.
+{n} personnes prises dans l’app (les 3 000 premières). ¦ {n} Persounen aus der App geholl (déi éischt 3 000).
+{n} personnes prises dans l’app. ¦ {n} Persounen aus der App geholl.
+Ajoute des liens : une personne, une autre, et la sorte de lien (témoin, parrain, voisin…). ¦ Setz Verbindungen derbäi: eng Persoun, eng aner, an d’Zort vu Verbindung (Zeien, Pätter, Noper…).
+Réseau de {n} personnes et {k} liens. ¦ Netz vu(n) {n} Persounen a(n) {k} Verbindungen.
+Arcs : {n} personnes et {k} liens. ¦ Béi: {n} Persounen a(n) {k} Verbindungen.
+Aucun témoin, parrain ou marraine noté dans les actes de ces personnes. ¦ Keen Zeien, Pätter oder Gotta an den Akte vun dëse Persounen notéiert.
+Pas d’implexe : aucun ancêtre n’apparaît deux fois. ¦ Keen Implex: kee Virfahr kënnt zweemol vir.
+Aucun mariage entre deux familles. ¦ Keen Bestietnes tëscht zwou Famillen.
+Implexe : {n} à plusieurs places ¦ Implex: {n} op e puer Plazen
+Mariages entre familles ¦ Bestietnesser tëscht Famillen
+{n} liens pris dans l’app. ¦ {n} Verbindungen aus der App geholl.
+{n} lien pris dans l’app. ¦ {n} Verbindung aus der App geholl.
+🕸 Témoins, parrains, marraines ¦ 🕸 Zeien, Pättere, Gottaen
+Les personnes notées dans les actes (témoins, parrains, déclarants…) et celles pour qui elles l’ont été. Couleur = nom de famille. ¦ D’Persounen, déi an den Akten notéiert sinn (Zeien, Pättere, Deklaranten…), an déi, fir déi si et waren. Faarf = Familljennumm.
+Jusqu’où ¦ Bis wouhin
+Ses liens directs ¦ Seng direkt Verbindungen
+Et les liens de ses liens ¦ An d’Verbindunge vu senge Verbindungen
+Toute ma base (les 2 500 premiers liens) ¦ Meng ganz Datebank (déi éischt 2 500 Verbindungen)
+Prendre ces liens ¦ Dës Verbindungen huelen
+Ajoute des liens : une personne, une autre, et la sorte de lien (mariage, implexe…). ¦ Setz Verbindungen derbäi: eng Persoun, eng aner, an d’Zort vu Verbindung (Bestietnes, Implex…).
+🌈 Des liens de l’app ¦ 🌈 Verbindungen aus der App
+Implexe : un même ancêtre à plusieurs numéros Sosa ¦ Implex: dee selwechte Virfahr mat e puer Sosa-Nummeren
+Témoins, parrains, marraines ¦ Zeien, Pättere, Gottaen
+Personne de départ (implexe, témoins) ¦ Startpersoun (Implex, Zeien)
+Il faut 2, 3 ou 4 ensembles. ¦ Et brauch 2, 3 oder 4 Ensemblen.
+⭕ Des ensembles de l’app ¦ ⭕ Ensemblen aus der App
+Choisis 2 à 4 ensembles : chaque zone reçoit le nombre de personnes qui sont dans ces ensembles-là, et pas dans les autres. ¦ Wiel 2 bis 4 Ensemblen: all Zon kritt d’Zuel vun de Persounen, déi an dësen Ensemblen sinn, an net an deenen aneren.
+Personne de départ (pour « Mes ancêtres ») ¦ Startpersoun (fir „Meng Virfahren“)
+Rien d’autre pour l’instant. ¦ Fir de Moment näischt anescht.
+Choisis 2 à 4 ensembles (là : {n}). ¦ Wiel 2 bis 4 Ensemblen (elo: {n}).
+{n} personnes comptées. ¦ {n} Persounen gezielt.
+{n} personne comptée. ¦ {n} Persoun gezielt.
+Février ¦ Februar
+Décembre ¦ Dezember
+Aucune date avec le jour et le mois (ex. : 7 mai 1925, 08/12/1960). ¦ Keen Datum mam Dag an dem Mount (z. B.: 7 mai 1925, 08/12/1960).
+Ajoute des dates (7 mai 1925, 08/12/1960, 12 thermidor an II…) et, si tu veux, un nombre. ¦ Setz Datumer derbäi (7 mai 1925, 08/12/1960, 12 thermidor an II…) an, wann s du wëlls, eng Zuel.
+{d} {month} {y} : {v} ¦ {d} {month} {y}: {v}
+{d} {month} : {v} ¦ {d} {month}: {v}
+jour|1er ¦ 1.
+{n} dates sans jour précis (non montrées) ¦ {n} Datumer ouni genauen Dag (net gewisen)
+{n} date sans jour précis (non montrée) ¦ {n} Datum ouni genauen Dag (net gewisen)
+Calendrier : {n} événements montrés, au plus {m} le même jour. ¦ Kalenner: {n} Evenementer gewisen, héchstens {m} um selwechten Dag.
+Calendrier : {n} événement montré, au plus {m} le même jour. ¦ Kalenner: {n} Evenement gewisen, héchstens {m} um selwechten Dag.
+Personne (pour ses ancêtres) ¦ Persoun (fir hir Virfahren)
+🗓 Des événements de l’app, jour par jour ¦ 🗓 Evenementer aus der App, Dag fir Dag
+Seules les dates avec le jour comptent. « Toutes années ensemble » montre la saison (366 cases) ; « Une ligne par année » montre les années choisies. ¦ Nëmmen d’Datume mam Dag zielen. „All Joren zesummen“ weist d’Joreszäit (366 Felder); „Eng Zeil pro Joer“ weist déi ausgewielt Joren.
+Prendre ces dates ¦ Dës Datumer huelen
+Coche au moins une sorte d’événement. ¦ Maach den Haken bei op d’mannst enger Zort vun Evenement.
+Aucune date complète (jour, mois, année) pour ces événements. ¦ Keen komplette Datum (Dag, Mount, Joer) fir dës Evenementer.
+{what} jour par jour ¦ {what} Dag fir Dag
+{n} dates complètes prises ({k} sans jour précis laissées de côté). ¦ {n} komplett Datumer geholl ({k} ouni genauen Dag ewechgelooss).
+Ajoute des chiffres pour chaque mois (janvier à décembre). ¦ Setz Zuele fir all Mount derbäi (Januar bis Dezember).
+Rose des mois : {list}. ¦ Mount-Rous: {list}.
+{name} {n} (le plus en {month}) ¦ {name} {n} (am meeschten am {month})
+🌸 Des événements de l’app, mois par mois ¦ 🌸 Evenementer aus der App, Mount fir Mount
+Une série par sorte d’événement ; seules les dates avec le mois comptent. ¦ Eng Serie pro Zort vun Evenement; nëmmen d’Datume mam Mount zielen.
+Compter par mois ¦ Pro Mount zielen
+Aucune date avec le mois pour ces événements. ¦ Keen Datum mam Mount fir dës Evenementer.
+Chiffres pris dans l’app. ¦ Zuelen aus der App geholl.
+Ajoute des événements : une date (ou un début et une fin) et un nom. ¦ Setz Evenementer derbäi: en Datum (oder en Ufank an en Enn) an en Numm.
+Spirale du temps de {a} à {b}, {per} ans par tour : {n}. ¦ Zäitspiral vu(n) {a} bis {b}, {per} Joer pro Ronn: {n}.
+Mariage à Rennes ¦ Bestietnes zu Rennes
+Départ pour Nantes ¦ Depart op Nantes
+Achat de la ferme ¦ Kaf vum Bauerenhaff
+Arrivée à Paris ¦ Arrivée zu Paräis
+🌀 Des vies et des événements de l’app ¦ 🌀 Liewen an Evenementer aus der App
+Les vies (de la naissance au décès) ¦ D’Liewen (vun der Gebuert bis zum Doud)
+Des événements (points) ¦ Evenementer (Punkten)
+Aucune personne avec une date de naissance ou de décès. ¦ Keng Persoun mat engem Gebuerts- oder Doudesdatum.
+Vies de la famille ¦ Liewe vun der Famill
+Les événements de la famille ¦ D’Evenementer vun der Famill
+{n} lignes prises dans l’app. ¦ {n} Zeilen aus der App geholl.
+{n} ligne prise dans l’app. ¦ {n} Zeil aus der App geholl.
+Les plus reliés (30) ¦ Déi am meeschte verbonnen (30)
+Par groupe (colonne « Groupe ») ¦ No Grupp (Kolonn „Grupp“)
+Groupes trouvés tout seuls ¦ Automatesch fonnt Gruppen
+Une seule (les liens en couleur) ¦ Eng eenzeg (d’Verbindungen a Faarf)
+Couleur du tableau ¦ Faarf vun der Tabell
+Les liens (une ligne par lien) ¦ D’Verbindungen (eng Zeil pro Verbindung)
+Sorte de lien (témoin, parrain…) ¦ Zort vu Verbindung (Zeien, Pätter…)
+Les personnes (facultatif : groupe et couleur) ¦ D’Persounen (fakultativ: Grupp a Faarf)
+Couleur des sortes de liens (facultatif) ¦ Faarf vun den Zorte vu Verbindungen (fakultativ)
+Détail (dates, lieu…) ¦ Detail (Datumer, Plaz…)
+Le nom ¦ Den Numm
+Le nom et la valeur ¦ Den Numm an de Wäert
+Le nom et le détail ¦ Den Numm an den Detail
+La valeur ¦ De Wäert
+Dégradé : minimum (vide = auto) ¦ Verlaf: Minimum (eidel = automatesch)
+Dégradé : maximum (vide = auto) ¦ Verlaf: Maximum (eidel = automatesch)
+Unité (%, ans…) ¦ Eenheet (%, Joer…)
+Taille du centre ¦ Gréisst vun der Mëtt
+Numéro des générations ¦ Nummer vun de Generatiounen
+Origines de mes ancêtres ¦ Hierkonft vu menge Virfahren
+Les parts (parent → enfant → chiffre) ¦ D’Deeler (Elterendeel → Kand → Zuel)
+Au-dessus (vide = au centre) ¦ Driwwer (eidel = an der Mëtt)
+Taille des parts ¦ Gréisst vun den Deeler
+Le chiffre (ou la somme des parts) ¦ D’Zuel (oder d’Zomm vun den Deeler)
+Le nombre de descendants ¦ D’Zuel vun den Nokommen
+Le nombre de bouts de branche ¦ D’Zuel vun den Zweigenden
+Anneaux au plus ¦ Héchstens esou vill Réng
+Une par branche (plus clair vers l’extérieur) ¦ Eng pro Zweig (méi hell no bausse)
+Une par anneau ¦ Eng pro Rank
+Le nom et le chiffre ¦ Den Numm an d’Zuel
+Ordre des parts ¦ Reiefolleg vun den Deeler
+De la plus grande à la plus petite ¦ Vum gréissten zum klengsten
+Texte au centre ¦ Text an der Mëtt
+Rapprocher les points de même couleur ¦ D’Punkte vun der selwechter Faarf méi no beieneebréngen
+Liens colorés selon leur sorte ¦ Verbindungen a Faarf no hirer Zort
+Selon le nombre de liens ¦ No der Zuel vu Verbindungen
+Tous pareils ¦ All d’selwecht
+Écartement ¦ Ofstand
+Témoins et parrains au village ¦ Zeien a Pättere am Duerf
+Les personnes, dans l’ordre de la ligne (facultatif) ¦ D’Persounen, an der Reiefolleg vun der Zeil (fakultativ)
+Ordre sur la ligne ¦ Reiefolleg op der Linn
+Comme dans les tableaux ¦ Wéi an den Tabellen
+Les plus reliés d’abord ¦ Déi am meeschte verbonnen als éischt
+Par numéro (Sosa 2, 3, 10…) ¦ No Nummer (Sosa 2, 3, 10…)
+Au-dessus et en dessous selon la sorte ¦ Uewen an ënnen no der Zort
+Hauteur des arcs ¦ Héicht vun de Béi
+Arcs colorés selon leur sorte ¦ Béi no hirer Zort gefierft
+Sous la ligne ¦ Ënner der Linn
+Mariages entre familles du village ¦ Bestietnesser tëscht Famillen aus dem Duerf
+Les ensembles (2 à 4) : A, B, C, D ¦ D'Gruppen (2 bis 4): A, B, C, D
+Ce qu’on écrit dans chaque zone (AB = dans A et B, pas dans les autres) ¦ Wat an all Zon geschriwwe gëtt (AB = an A an B, net an deenen aneren)
+Nombre ou texte ¦ Zuel oder Text
+Ajouter le pourcentage ¦ De Prozentsaz derbäisetzen
+Total de chaque ensemble à côté de son nom ¦ Total vun all Grupp nieft sengem Numm
+Transparence des formes ¦ Transparenz vun de Formen
+Mes sources ¦ Meng Quellen
+Les dates (une ligne par événement, ou une date et un nombre) ¦ D'Datumer (eng Zeil pro Evenement, oder en Datum an eng Zuel)
+Toutes années ensemble (12 mois × 31 jours) ¦ All d'Joren zesummen (12 Méint × 31 Deeg)
+Une ligne par année (semaines) ¦ Eng Zeil pro Joer (Wochen)
+Années (ex. 1890-1895, 1900 ; vide = auto) ¦ Joren (z. B. 1890-1895, 1900; eidel = automatesch)
+Doux (racine carrée) ¦ Mëll (Quadratwuerzel)
+Écrire les nombres dans les cases ¦ D'Zuelen an d'Felder schreiwen
+Dire combien de dates n’ont pas de jour ¦ Soen, wéi vill Datumer keen Dag hunn
+Jours de naissance de mes ancêtres ¦ Gebuertsdeeg vu menge Virfahren
+Superposées (transparentes) ¦ Iwwerenee geluecht (transparent)
+Longueur des rayons ¦ Längt vun de Strolen
+Surface juste (racine carrée) ¦ Richteg Fläch (Quadratwuerzel)
+Écrire les nombres (une seule série) ¦ D'Zuelen schreiwen (eng eenzeg Serie)
+Mois en abrégé ¦ Méint ofgekierzt
+Naissances, mariages et décès par mois ¦ Gebuerten, Bestietnesser an Doudesfäll pro Mount
+Les événements (une date = un point ; un début et une fin = un trait) ¦ D'Evenementer (een Datum = e Punkt; en Ufank an en Enn = e Strich)
+Date ou début ¦ Datum oder Ufank
+Un tour de spirale ¦ Eng Ronn vun der Spiral
+Un siècle ¦ E Joerhonnert
+Une décennie ¦ E Joerzéngt
+Autant d’années que… ¦ Esou vill Joer wéi…
+Années par tour ¦ Joren pro Ronn
+Tous (sans chevauchement) ¦ All (ouni Iwwerlappung)
+Trois siècles de la famille Martin ¦ Dräi Joerhonnerte vun der Famill Martin
+Remettre comme au départ (ou double-clic sur le fond) ¦ Zrécksetzen wéi am Ufank (oder Duebelklick op den Hannergrond)
+Arrêter / relancer le mouvement ¦ D'Beweegung stoppen / nees starten
+Arrêter ou relancer le mouvement ¦ D'Beweegung stoppen oder nees starten
+Zoomer avec la molette (sinon : Ctrl + molette) ¦ Mam Rad zoomen (soss: Ctrl + Rad)
+Zoom à la molette ¦ Zoom mam Rad
+Glisse un point pour le placer · double-clic pour le libérer ¦ Zéi e Punkt, fir en ze placéieren · Duebelklick, fir en lasszeloossen
+⚠ Lieux sans position : {list} — tape « Nom 48.11, -1.68 » ou « Depuis l’app » → Retrouver les lieux ¦ ⚠ Plazen ouni Positioun: {list} — tipp „Numm 48.11, -1.68“ oder „Aus der App“ → Plazen erëmfannen
+né(e) en {y} ¦ gebuer {y}
+{a} → {b} : même premier prénom ¦ {a} → {b}: selwechte éischte Virnumm
+{a} → {b} : un autre de ses prénoms ¦ {a} → {b}: ee vu sengen anere Virnimm
+{a} → {b} : prénom différent ¦ {a} → {b}: anere Virnumm
+Ajoute des événements : un lieu, une date, une sorte (ou « Depuis l’app »). ¦ Setz Evenementer derbäi: eng Plaz, en Datum, eng Zort (oder „Aus der App“).
+Carte en points : {n} événements dans {k}. ¦ Punktekaart: {n} Evenementer a(n) {k}.
+{unit} par alvéole ¦ {unit} pro Wab
+Ajoute des événements : un lieu et une date (ou « Depuis l’app »). ¦ Setz Evenementer derbäi: eng Plaz an en Datum (oder „Aus der App“).
+=alvéole ¦ Wab|Waben
+=filleul ¦ Pätterkand|Pätterkanner
+=cause ¦ Ursaach|Ursaachen
+=grande famille ¦ Haaptgrupp|Haaptgruppen
+=descendant ¦ Nokomm|Nokommen
+=lieu retrouvé ¦ erëmfonnt Plaz|erëmfonnt Plazen
+=lieu sans position ¦ Plaz ouni Positioun|Plazen ouni Positioun
+=étape placée ¦ placéiert Etapp|placéiert Etappen
+Carte en hexagones : {n} événements dans {k} ; la plus remplie en compte {max}. ¦ Wabekaart: {n} Evenementer a(n) {k}; déi vollst huet der {max}.
+{name} : de {lo} (clair) à {hi} (foncé) ¦ {name}: vu {lo} (hell) bis {hi} (donkel)
+⚠ Pas trouvé sur ce fond : {list} ¦ ⚠ Net fonnt op dëser Grondkaart: {list}
+Carte déformée : {n} grossies selon leur chiffre (carrés). ¦ Verzerrt Kaart: {n} no hirer Zuel vergréissert (Quadrater).
+Carte déformée : {n} grossies selon leur chiffre (ronds). ¦ Verzerrt Kaart: {n} no hirer Zuel vergréissert (Krees).
+Étape {k} sur {n} : {what} ¦ Etapp {k} vun {n}: {what}
+{n} de {a} à {b} — {k} sur la carte ¦ {n} vu(n) {a} bis {b} — {k} op der Kaart
+{n} — {k} sur la carte ¦ {n} — {k} op der Kaart
+Ajoute les étapes d’une vie : une date, ce qui s’est passé, un lieu. ¦ Setz d'Etappe vun engem Liewen derbäi: en Datum, wat geschitt ass, eng Plaz.
+Carte qui raconte : aucune étape. ¦ Erzielend Kaart: keng Etapp.
+Carte qui raconte : {n}, étape {k} : {what}. ¦ Erzielend Kaart: {n}, Etapp {k}: {what}.
+Carte qui raconte : {n}. ¦ Erzielend Kaart: {n}.
+Diagrammes Généalogie indisponibles. ¦ Genealogie-Diagrammer net disponibel.
+Ajoute des lignes : un nom, le nom du parent (vide pour l’ancêtre) et un chiffre si tu veux. ¦ Setz Zeilen derbäi: en Numm, den Numm vum Elterendeel (eidel fir de Virfahr) an eng Zuel, wann s de wëlls.
+{n} · {p} % de la descendance ¦ {n} · {p} % vun den Nokommen
+Descendance en rectangles : {n} sur {g}. ¦ Nokommen a Rechtecker: {n} iwwer {g}.
+Ajoute des lignes : le parrain ou la marraine, le filleul, et leurs années de naissance. ¦ Setz Zeilen derbäi: de Pätter oder d'Gotta, d'Pätterkand an hir Gebuertsjoren.
+Aucun filleul ne porte le prénom de son parrain ou de sa marraine ({n}). ¦ Keen Pätterkand dréit de Virnumm vu sengem Pätter oder senger Gotta ({n}).
+{n} filleuls sur {t} ({p} %) portent le prénom de leur parrain ou marraine ¦ {n} Pätterkanner vun {t} ({p} %) droen de Virnumm vun hirem Pätter oder hirer Gotta
+{n} filleul sur {t} ({p} %) portent le prénom de leur parrain ou marraine ¦ {n} Pätterkand vun {t} ({p} %) dréit de Virnumm vu sengem Pätter oder senger Gotta
+Pointillés : un autre de ses prénoms ¦ Punktéiert: ee vu sengen anere Virnimm
+Prénoms transmis : {n} filleuls sur {t} portent le prénom de leur parrain ou marraine ; le plus transmis : {name}. ¦ Iwwerdroe Virnimm: {n} Pätterkanner vun {t} droen de Virnumm vun hirem Pätter oder hirer Gotta; am meeschten iwwerdroen: {name}.
+Naissance et petite enfance ¦ Gebuert a fréi Kandheet
+Reins, sang et autres maladies ¦ Nieren, Blutt an aner Krankheeten
+Ajoute des causes de décès et leur nombre (ou « Depuis l’app »). ¦ Setz Doudesursaachen an hir Zuel derbäi (oder „Aus der App“).
+{name} : {v} ({a} % des décès, {b} % de « {fam} ») ¦ {name}: {v} ({a} % vun den Doudesfäll, {b} % vu(n) „{fam}“)
+Causes de décès : {n} décès en {k} ; la plus fréquente : {name}. ¦ Doudesursaachen: {n} Doudesfäll a(n) {k}; déi heefegst: {name}.
+Naissances, mariages et décès de la famille ¦ Gebuerten, Bestietnesser an Doudesfäll vun der Famill
+un point par événement ¦ e Punkt pro Evenement
+Village {n} (près de {place}) ¦ Duerf {n} (bei {place})
+nombre d’événements par alvéole ¦ Zuel vun Evenementer pro Wab
+chaque département grossi selon le nombre d’ancêtres ¦ all Département no der Zuel vu Virfahre vergréissert
+ancêtres ¦ Virfahren
+Descendance de {name} ¦ Nokomme vun {name}
+Prénoms transmis par les parrains et marraines ¦ Virnimm, déi vu Pätter a Gotta weiderginn goufen
+causes relevées dans les actes de décès ¦ Ursaachen, déi an den Doudesakten notéiert sinn
+{n} : vérifie-les sur la carte. ¦ {n}: kontrolléier se op der Kaart.
+Aucun lieu retrouvé : tape leurs coordonnées dans le tableau (« Nom 48.11, -1.68 »). ¦ Keng Plaz erëmfonnt: tipp hir Koordinaten an d'Tabell („Numm 48.11, -1.68“).
+📍 Les événements de ton arbre ¦ 📍 D'Evenementer vun dengem Bam
+Chaque événement qui a un lieu devient un point (un mariage compte pour chacun des deux époux). Les lieux sans coordonnées sont retrouvés dans les communes de France par leur nom et leur département. Le tableau est remplacé. ¦ All Evenement mat enger Plaz gëtt e Punkt (e Bestietnes zielt fir jiddereen vun den zwee Bestuedten). Plazen ouni Koordinate ginn ënnert de franséische Gemengen no hirem Numm an hirem Département gesicht. D'Tabell gëtt ersat.
+Aucun événement avec un lieu pour ce choix. ¦ Keen Evenement mat enger Plaz fir dës Auswiel.
+{what} de mes ancêtres ¦ {what} vu menge Virfahren
+{what} de la famille ¦ {what} vun der Famill
+{n} pris dans l’arbre (les 12 000 premiers). ¦ {n} aus dem Bam geholl (déi éischt 12 000).
+{n} pris dans l’arbre. ¦ {n} aus dem Bam geholl.
+{n} : « 🔎 Retrouver les lieux sans position ». ¦ {n}: „🔎 Plazen ouni Positioun erëmfannen“.
+Ses événements (naissance, baptême, mariages, résidences, métiers, décès…) deviennent les étapes, dans l’ordre des dates. Le tableau est remplacé. ¦ Seng Evenementer (Gebuert, Daf, Bestietnesser, Wunnsëtzer, Beruffer, Doud…) ginn d'Etappen, an der Reiefolleg vun den Datumer. D'Tabell gëtt ersat.
+Garder aussi les étapes sans lieu (sur la frise seulement) ¦ Och d'Etappen ouni Plaz halen (nëmmen op der Zäitläscht)
+Aucun événement avec un lieu pour cette personne. ¦ Keen Evenement mat enger Plaz fir dës Persoun.
+{n} prises dans la vie de {name}. ¦ {n} aus dem Liewe vun {name} geholl.
+{n} prise dans la vie de {name}. ¦ {n} aus dem Liewe vun {name} geholl.
+Chaque enfant devient une case sous son parent ; sa largeur = le nombre de ses descendants (la personne comprise). Un clic sur une case ouvre la fiche. ¦ All Kand gëtt e Feld ënner sengem Elterendeel; seng Breet = d'Zuel vu senge Nokommen (d'Persoun abegraff). E Klick op e Feld mécht d'Fiche op.
+Ancêtre en haut ¦ Virfahr uewen
+{n} personne prise dans l’app. ¦ {n} Persoun aus der App geholl.
+🎀 Parrains, marraines et filleuls ¦ 🎀 Pätter, Gottaen a Pätterkanner
+Les témoins des naissances et des baptêmes dont le rôle dit « parrain » ou « marraine ». Le lien de parenté (grand-père, oncle, sœur…) est trouvé dans l’arbre. ¦ D'Zeie vu Gebuerten an Deefen, bei deenen d'Roll „parrain“ oder „marraine“ seet. D'Verwandtschaft (Grousspapp, Monni, Schwëster…) gëtt am Bam fonnt.
+Seulement autour de mes ancêtres (lignée Sosa) ¦ Nëmmen ronderëm meng Virfahren (Sosa-Linn)
+Prendre les parrains et marraines ¦ D'Pätter an d'Gottaen huelen
+Aucun parrain ni marraine dans les témoins des naissances et baptêmes (rôle « parrain » ou « marraine »). ¦ Keen Pätter a keng Gotta ënnert den Zeie vu Gebuerten an Deefen (Roll „parrain“ oder „marraine“).
+{n} pris dans l’app (les 3 000 premiers). ¦ {n} aus der App geholl (déi éischt 3 000).
+{n} pris dans l’app. ¦ {n} aus der App geholl.
+🎗 Les causes de décès de ton arbre ¦ 🎗 D'Doudesursaache vun dengem Bam
+La cause écrite sur le décès (ou la sépulture) de chaque personne. Les grandes familles (maladies infectieuses, cœur, accidents, guerre…) sont devinées d’après les mots ; corrige-les dans la colonne « Grande famille ». ¦ D'Ursaach, déi beim Doud (oder beim Begriefnes) vun all Persoun geschriwwen ass. D'Haaptgruppen (ustiechend Krankheeten, Häerz, Accidenter, Krich…) ginn no de Wierder erroden; verbesser se an der Kolonn „Haaptgrupp“.
+Prendre les causes de décès ¦ D'Doudesursaachen huelen
+Aucune cause de décès relevée : elle s’écrit dans le champ « Cause » d’un décès. ¦ Keng Doudesursaach notéiert: si gëtt am Feld „Ursaach“ vun engem Doud agedroen.
+Causes de décès dans la famille ¦ Doudesursaachen an der Famill
+{n} avec une cause, en {k} différentes. ¦ {n} mat enger Ursaach, a(n) {k} verschiddenen.
+{n} avec une cause, en {k} différente. ¦ {n} mat enger Ursaach, a(n) {k} verschiddener.
+Pas de fiche derrière ce point : les lignes ont été tapées à la main (« Depuis l’app » les relie aux fiches). ¦ Keng Fiche hannert dësem Punkt: d'Zeile goufe vun Hand getippt („Aus der App“ verbënnt se mat de Fichen).
+Étapes de la vie ¦ Etappe vum Liewen
+Étape précédente ¦ Vireg Etapp
+Vitesse de la lecture ¦ Geschwindegkeet vum Ofspillen
+Seulement à partir de l’année ¦ Nëmmen ab dem Joer
+Lieu (« Rennes », « Rennes 48.11, -1.68 », « 35 »…) ¦ Plaz („Rennes“, „Rennes 48.11, -1.68“, „35“…)
+Selon le siècle ¦ No Joerhonnert
+Mot pour un point (ex. : naissance) ¦ Wuert fir e Punkt (z. B.: Gebuert)
+Carte en points : {n} événements. ¦ Punktekaart: {n} Evenementer.
+Taille des alvéoles (% de la largeur) ¦ Gréisst vun de Waben (% vun der Breet)
+Échelle douce (très grands écarts) ¦ Mëll Skala (ganz grouss Ënnerscheeder)
+Écrire le nombre dans les alvéoles ¦ D'Zuel an d'Wabe schreiwen
+Carte en hexagones : {n} événements. ¦ Wabekaart: {n} Evenementer.
+Les zones et leurs chiffres ¦ D'Zonen an hir Zuelen
+Zone (nom ou code : 35, Gers, FR, Vaud…) ¦ Zon (Numm oder Code: 35, Gers, FR, Vaud…)
+Taille des formes (% de la carte) ¦ Gréisst vun de Formen (% vun der Kaart)
+Écart entre les formes ¦ Ofstand tëscht de Formen
+Selon le chiffre (dégradé) ¦ No der Zuel (Verlaf)
+La vraie carte en fond (pâle) ¦ Déi richteg Kaart am Hannergrond (blass)
+Couleur de la carte en fond ¦ Faarf vun der Kaart am Hannergrond
+Un trait vers la vraie place quand une forme a bougé ¦ E Strich op déi richteg Plaz, wann eng Form geréckelt ass
+Carte déformée : {n} zones. ¦ Verzerrt Kaart: {n} Zonen.
+Lieu (« Rennes », « Rennes 48.11, -1.68 ») ¦ Plaz („Rennes“, „Rennes 48.11, -1.68“)
+Étape montrée (-1 = toute la vie) ¦ Gewisen Etapp (-1 = dat ganzt Liewen)
+Suit l’étape en cours (zoom) ¦ Follegt der aktueller Etapp (Zoom)
+Zoom sur l’étape (degrés autour) ¦ Zoom op d'Etapp (Grad ronderëm)
+Montrer les étapes à venir (pointillés) ¦ Déi nächst Etappe weisen (punktéiert)
+Carte qui raconte : {n} étapes. ¦ Erzielend Kaart: {n} Etappen.
+De haut en bas (générations en lignes) ¦ Vun uewen no ënnen (Generatiounen an Zeilen)
+De gauche à droite (générations en colonnes) ¦ Vu lénks no riets (Generatiounen a Kolonnen)
+Une par branche (plus clair en descendant) ¦ Eng pro Zweig (méi hell no ënnen)
+Selon le sexe ¦ No Geschlecht
+Le nom et l’année ¦ Den Numm an d'Joer
+Le nom et le nombre ¦ Den Numm an d'Zuel
+Les parrains, marraines et filleuls ¦ D'Pätter, Gottaen a Pätterkanner
+Parrain ou marraine (Prénom NOM) ¦ Pätter oder Gotta (Virnumm NUMM)
+Filleul ou filleule (Prénom NOM) ¦ Pätterkand (Virnumm NUMM)
+Lien (grand-père, oncle…) ¦ Verwandtschaft (Grousspapp, Monni…)
+Année de naissance (parrain) ¦ Gebuertsjoer (Pätter)
+Année de naissance (filleul) ¦ Gebuertsjoer (Pätterkand)
+Prénoms au plus (lignes) ¦ Virnimm héchstens (Zeilen)
+Les causes de décès ¦ D'Doudesursaachen
+Grande famille (vide = devinée) ¦ Haaptgrupp (eidel = erroden)
+Deviner les grandes familles d’après les mots ¦ D'Haaptgruppen no de Wierder erroden
+Épaisseur des grandes familles ¦ Déckt vun den Haaptgruppen
+Les noms et les nombres ¦ D'Nimm an d'Zuelen
+Les noms et les pourcentages ¦ D'Nimm an d'Prozentsätz
+Ranger les causes de la plus fréquente à la plus rare ¦ D'Ursaache vun der heefegster bis zur rarster zortéieren
+migration|{n} flux ¦ {n} Stréim
+le département ¦ den Département
+la province ¦ d'Provënz
+le canton ¦ de Kanton
+un département ¦ en Département
+des départements ¦ vun den Départementen
+une province ¦ eng Provënz
+des provinces ¦ vun de Provënzen
+un canton ¦ e Kanton
+des cantons ¦ vun de Kantonen
+Province ¦ Provënz
+Canton ¦ Kanton
+Zoomer sur {what} ¦ Op {what} zoomen
+{what} (nom ou numéro : {ex}) ¦ {what} (Numm oder Nummer: {ex})
+Limites {what} par-dessus les communes ¦ Grenze {what} iwwer de Gemengen
+{what} entière ¦ {what} ganz
+Îles Britanniques ¦ Britesch Inselen
+Péninsule Ibérique ¦ Iberesch Hallefinsel
+Allemagne et Benelux ¦ Däitschland a Benelux
+Méditerranée ¦ Mëttelmier
+Afrique du Nord ¦ Nordafrika
+Afrique de l’Ouest ¦ Westafrika
+Proche et Moyen-Orient ¦ Noen a Mëttleren Osten
+Océan Indien ¦ Indeschen Ozean
+Asie du Sud-Est ¦ Südostasien
+Atlantique Nord (vers l’Amérique) ¦ Nordatlantik (Richtung Amerika)
+Québec et Acadie ¦ Québec an Akadien
+Antilles et Caraïbes ¦ Antillen a Karibik
+Amérique centrale ¦ Zentralamerika
+Centre et Massif central ¦ Centre a Massif central
+Sud-Est et Alpes ¦ Südosten an Alpen
+Paris et petite couronne ¦ Paräis an déi éischt Banlieue
+Fond de carte illisible. ¦ Grondkaart net liesbar.
+Ce navigateur ne sait pas ouvrir ce fond de carte. ¦ Dëse Browser kann dës Grondkaart net opmaachen.
+Fond de carte inconnu. ¦ Onbekannt Grondkaart.
+Fond de carte introuvable. ¦ Grondkaart net fonnt.
+Fond de carte indisponible. ¦ Grondkaart net disponibel.
+(homonymes : précise {what}) ¦ (selwecht Nimm: gëff {what} un)
+(plusieurs villes de ce nom : choisis-en une) ¦ (verschidde Stied mat dësem Numm: wiel eng aus)
+{name} : pas de chiffre ¦ {name}: keng Zuel
+moins de {a} ¦ manner wéi {a}
+{a} et plus ¦ {a} a méi
+de {a} à moins de {b} ¦ vu(n) {a} bis manner wéi {b}
+pas de chiffre ¦ keng Zuel
+Ajoute des zones et leurs chiffres (onglet Données ou « Depuis l’app »). ¦ Setz Zonen an hir Zuelen derbäi (Reiter Donnéeën oder „Aus der App“).
+⚠ Lieux sans position : {list} — « Depuis l’app » → Lieux ¦ ⚠ Plazen ouni Positioun: {list} — „Aus der App“ → Plazen
+⚠ Lieux sans position : {list} — tape « Nom 48.11, -1.68 » ou « Depuis l’app » ¦ ⚠ Plazen ouni Positioun: {list} — tipp „Numm 48.11, -1.68“ oder „Aus der App“
+Ajoute des lieux (ou des zones) et leurs chiffres. ¦ Setz Plazen (oder Zonen) an hir Zuelen derbäi.
+Carte à symboles proportionnels : {n} ronds, le plus gros vaut {max}. ¦ Kaart mat proportionale Symboler: {n} Krees, dee gréisste wäert {max}.
+Niveau de détail ¦ Detailniveau
+Partie de la carte (cadrage) ¦ Deel vun der Kaart (Ausschnëtt)
+Lambert azimutale équivalente (Europe, pays) ¦ Lambert azimutal flächentreu (Europa, Länner)
+Outre-mer en encarts ¦ Iwwersee an Abléck
+Encart zoomé sur l’Île-de-France ¦ Zoomten Abléck op d'Île-de-France
+Toute l’Île-de-France ¦ Déi ganz Île-de-France
+Pays voisins en gris ¦ Nopeschlänner a gro
+Mer en couleur ¦ Mier a Faarf
+Couleur de la mer ¦ Faarf vum Mier
+Hauteur du dessin (px, vide = selon la carte) ¦ Héicht vun der Zeechnung (px, eidel = no der Kaart)
+Autant de zones dans chaque classe (quantiles) ¦ Gläich vill Zonen an all Klass (Quantillen)
+Classes de même largeur ¦ Klasse mat gläicher Breet
+Épaisseur des limites ¦ Déckt vun de Grenzen
+Épaisseur des limites des communes ¦ Déckt vun de Gemenggrenzen
+Bulle aussi sur les zones sans chiffre ¦ Bubbel och op Zonen ouni Zuel
+Bulle aussi sur les communes sans chiffre (plus lent) ¦ Bubbel och op Gemengen ouni Zuel (méi lues)
+Signaler les lignes pas trouvées sur la carte ¦ D'Zeilen, déi net op der Kaart fonnt goufen, mellen
+Épaisseur du plus gros flux ¦ Déckt vum gréisste Stroum
+Épaisseur du plus petit flux ¦ Déckt vum klengste Stroum
+Pointes de flèche ¦ Feilspëtzen
+Selon le lieu de départ ¦ No der Plaz vum Depart
+Selon le lieu d’arrivée ¦ No der Plaz vun der Arrivée
+Ronds sur les lieux ¦ Krees op de Plazen
+Regrouper par zone (un rond au centre de chaque zone du fond) ¦ No Zon gruppéieren (e Krees an der Mëtt vun all Zon vum Hannergrond)
+Rayon du plus gros rond (px, vide = auto) ¦ Radius vum gréisste Krees (px, eidel = automatesch)
+Chiffre à côté du nom ¦ Zuel nieft dem Numm
+un rond par commune ¦ e Krees pro Gemeng
+naissances ¦ Gebuerten
+naissances par département ¦ Gebuerten pro Département
+Les migrations de la famille ¦ D'Migratioune vun der Famill
+du lieu de naissance au lieu de décès ¦ vun der Gebuertsplaz bis bei d'Doudesplaz
+personnes ¦ Persounen
+Âge moyen au décès (en années) ¦ Duerchschnëttlecht Alter beim Doud (a Joren)
+Actes trouvés (événements avec une source ou un document) ¦ Fonnt Akten (Evenementer mat enger Quell oder engem Dokument)
+D’une génération à l’autre (naissance du parent → de l’enfant) ¦ Vun enger Generatioun zur nächster (Gebuert vum Elterendeel → vum Kand)
+Cadrage de la carte ¦ Ausschnëtt vun der Kaart
+Tracer un cadre sur la carte (ou Maj + glisser) ¦ E Rumm op d'Kaart zeechnen (oder Shift + zéien)
+Revenir au cadrage de départ ¦ Zréck op den Ausschnëtt vum Ufank
+Molette : zoomer · glisser : déplacer · Maj + glisser : tracer un cadre ¦ Rad: zoomen · zéien: réckelen · Shift + zéien: e Rumm zeechnen
+(famille) ¦ (Famill)
+pas encore utilisée ¦ nach net benotzt
+Les migrations de ton arbre ¦ D'Migratioune vun dengem Bam
+Les lieux de ton arbre ¦ D'Plaze vun dengem Bam
+Chaque lieu de ta base devient un rond, plus gros quand plus de personnes y sont nées (mariées, décédées). Les lieux avec des coordonnées sont placés exactement ; les autres sont cherchés par leur nom sur la carte. Le tableau est remplacé. ¦ All Plaz aus denger Datebank gëtt e Krees, dee méi grouss ass, wa méi Persounen do gebuer (bestuet, gestuerwen) sinn. Plaze mat Koordinate ginn exakt placéiert; déi aner ginn no hirem Numm op der Kaart gesicht. D'Tabell gëtt ersat.
+Chaque personne relie deux lieux de ta base (ceux qui ont des coordonnées, ou une zone de la carte reconnue). Le tableau est remplacé. ¦ All Persoun verbënnt zwou Plazen aus denger Datebank (déi mat Koordinaten, oder eng erkannt Zon vun der Kaart). D'Tabell gëtt ersat.
+Chaque lieu de ta base est rattaché à sa zone (d’après ses coordonnées, sinon son département, sa région ou son pays ; pour les communes : son code INSEE, puis son nom et son département), puis les zones sont comptées. Le tableau est remplacé. ¦ All Plaz aus denger Datebank gëtt hirer Zon zougeuerdent (no hire Koordinaten, soss no hirem Département, hirer Regioun oder hirem Land; fir d'Gemengen: hire INSEE-Code, dann hiren Numm an hiren Département), dann ginn d'Zonen gezielt. D'Tabell gëtt ersat.
+🔄 Tenir à jour (relire l’arbre à chaque affichage) ¦ 🔄 Aktuell halen (de Bam bei all Uweisen nei liesen)
+＋ Ajouter un flux ¦ ＋ E Stroum derbäisetzen
+＋ Ajouter ce flux ¦ ＋ Dëse Stroum derbäisetzen
+Un lieu sans position (⚠) : choisis-le dans ta base ou dans les communes et villes du monde, ou tape ses coordonnées dans le tableau (« Rennes 48.11, -1.68 »). ¦ Eng Plaz ouni Positioun (⚠): wiel se an denger Datebank oder an de Gemengen a Stied vun der Welt, oder tipp hir Koordinaten an d'Tabell („Rennes 48.11, -1.68“).
+⏳ Lecture de l’arbre… ¦ ⏳ De Bam gëtt gelies…
+(mes ancêtres) ¦ (meng Virfahren)
+{n} : cherchés par leur nom sur la carte. ¦ {n}: no hirem Numm op der Kaart gesicht.
+{n} : cherché par leur nom sur la carte. ¦ {n}: no sengem Numm op der Kaart gesicht.
+=lieu sans coordonnées ¦ Plaz ouni Koordinaten|Plazen ouni Koordinaten
+=lieu rattaché ¦ zougeuerdent Plaz|zougeuerdent Plazen
+Aucun lieu dans ton arbre pour ce choix. ¦ Keng Plaz an dengem Bam fir dës Auswiel.
+Aucun déplacement trouvé (il faut deux lieux différents pour une même personne). ¦ Keng Beweegung fonnt (et brauch zwou verschidde Plaze fir déi selwecht Persoun).
+{n} : voir « Les lieux du tableau ». ¦ {n}: kuck „D'Plaze vun der Tabell“.
+{n} à {z} (âge moyen sur {p} ; la carte montre des années, pas un nombre). ¦ {n} bis {z} (Duerchschnëttsalter iwwer {p}; d'Kaart weist Joren, keng Zuel).
+{n} à {z}. ¦ {n} bis {z}.
+{n} hors de cette carte ou sans position ({list}). ¦ {n} ausserhalb vun dëser Kaart oder ouni Positioun ({list}).
+Aucun lieu de ton arbre ne tombe sur cette carte : change de carte ou de niveau dans Réglages. ¦ Keng Plaz aus dengem Bam läit op dëser Kaart: wiessel d'Kaart oder den Niveau an den Astellungen.
+Où est « {name} » ? ¦ Wou ass „{name}“?
+Le tableau n’a pas encore de lieux. ¦ D'Tabell huet nach keng Plazen.
+Ce lieu n’a pas de coordonnées : choisis-en un autre, ou tape ses coordonnées dans le tableau. ¦ Dës Plaz huet keng Koordinaten: wiel eng aner, oder tipp hir Koordinaten an d'Tabell.
+Choisis le lieu de départ et le lieu d’arrivée. ¦ Wiel d'Plaz vum Depart an d'Plaz vun der Arrivée.
+Flux ajouté. ¦ Stroum derbäigesat.
+niveau|ville ¦ Stad
+niveau|département ¦ Département
+niveau|province ¦ Provënz
+niveau|canton ¦ Kanton
+niveau|région ¦ Regioun
+niveau|grande région ¦ Groussregioun
+niveau|pays ¦ Land
+niveau|continent ¦ Kontinent
+niveau|zone ¦ Zon
+sa commune ¦ seng Gemeng
+leur commune ¦ hir Gemeng
+une ville ¦ eng Stad
+son département ¦ säin Département
+leur département ¦ hiren Département
+sa province ¦ seng Provënz
+leur province ¦ hir Provënz
+son canton ¦ säi Kanton
+leur canton ¦ hire Kanton
+région ¦ Regioun
+sa région ¦ seng Regioun
+leur région ¦ hir Regioun
+une région ¦ eng Regioun
+grande région ¦ Groussregioun
+sa grande région ¦ seng Groussregioun
+leur grande région ¦ hir Groussregioun
+une grande région ¦ eng Groussregioun
+son pays ¦ säi Land
+leur pays ¦ hiert Land
+un pays ¦ e Land
+son continent ¦ säi Kontinent
+leur continent ¦ hire Kontinent
+un continent ¦ e Kontinent
+sa zone ¦ seng Zon
+leur zone ¦ hir Zon
+une zone ¦ eng Zon
+aussi « {name} » ¦ och „{name}“
+autre niveau : « {name} » ¦ aneren Niveau: „{name}“
+ancienne commune ¦ fréier Gemeng
+Plusieurs villes s’appellent {name} ({n}) : choisis-en une dans la liste. ¦ Verschidde Stied heeschen {name} ({n}): wiel eng aus der Lëscht.
+Plusieurs villes s’appellent {name} : choisis-en une dans la liste. ¦ Verschidde Stied heeschen {name}: wiel eng aus der Lëscht.
+{name} est {a}, mais la carte montre le niveau « {level} » : choisis {b} dans la liste, ou change le niveau de détail (Réglages). ¦ {name} ass {a}, mee d'Kaart weist den Niveau „{level}“: wiel {b} aus der Lëscht, oder wiessel den Detailniveau (Astellungen).
+Pas trouvé sur cette carte : vérifie l’orthographe, ou choisis dans la liste. ¦ Net op dëser Kaart fonnt: kontrolléier d'Schreifweis, oder wiel aus der Lëscht.
+{n} villes comptent dans {where} sur cette carte (niveau « {level} »). ¦ {n} Stied zielen a(n) {where} op dëser Kaart (Niveau „{level}“).
+1 ville compte dans {where} sur cette carte (niveau « {level} »). ¦ 1 Stad zielt a(n) {where} op dëser Kaart (Niveau „{level}“).
+Rien de ce nom sur cette carte. ¦ Näischt mat dësem Numm op dëser Kaart.
+chargement des communes… ¦ d'Gemenge ginn gelueden…
+↑ ↓ pour choisir · Entrée pour valider · Échap pour fermer ¦ ↑ ↓ fir ze wielen · Enter fir ze bestätegen · Esc fir zouzemaachen
+Une ville compte dans {where} sur cette carte. ¦ Eng Stad zielt a(n) {where} op dëser Kaart.
+Niveau « Communes » : chaque ville a sa couleur. ¦ Niveau „Gemengen“: all Stad huet hir Faarf.
+Zone (nom ou code : 35, FRH03, BE, Vaud…) ¦ Zon (Numm oder Code: 35, FRH03, BE, Vaud…)
+Carte colorée : {n} zones ({map}, {level}). ¦ Gefierfte Kaart: {n} Zonen ({map}, {level}).
+Carte des migrations : {n} flux. ¦ Migratiounskaart: {n} Stréim.
+Les lieux (ou zones) et leurs chiffres ¦ D'Plazen (oder Zonen) an hir Zuelen
+Lieu ou zone (« Rennes », « Rennes 48.11, -1.68 », « 35 »…) ¦ Plaz oder Zon („Rennes“, „Rennes 48.11, -1.68“, „35“…)
+Carte à symboles proportionnels : {n} lieux. ¦ Kaart mat proportionale Symboler: {n} Plazen.
+Rien à dessiner pour l’instant. ¦ Fir de Moment näischt ze zeechnen.
+Graphique introuvable : supprimé, ou fait dans un autre navigateur. ¦ Grafik net fonnt: geläscht, oder an engem anere Browser gemaach.
+L’ouvrir en grand dans Graphiques ¦ A grouss an de Grafiken opmaachen
+Ajuster à la page ¦ Un d'Säit upassen
+par l’impression : « Enregistrer en PDF » ¦ iwwer den Drock: „Als PDF späicheren“
+ouvrir les chiffres dans le tableur ¦ d'Zuelen an der Tabelle opmaachen
+du diagramme, à réimporter ¦ vum Diagramm, fir nees z'importéieren
+à coller ailleurs (⌘V) ¦ fir soss anzwousch anzefügen (⌘V)
+Revenir à la couleur automatique ¦ Zréck op déi automatesch Faarf
+🧾 Tout voir dans le tableur ¦ 🧾 Alles an der Tabelle gesinn
+{a} lignes sur {b} (toutes comptent dans le dessin) ¦ {a} Zeile vun {b} (all zielen an der Zeechnung)
+Couleur de la série ¦ Faarf vun der Serie
+Supprimer cette série ¦ Dës Serie läschen
+Copier des cellules dans Excel, LibreOffice, Numbers… et les coller ici ¦ Zelle an Excel, LibreOffice, Numbers… kopéieren an se hei afügen
+⤒ Importer un CSV ¦ ⤒ E CSV importéieren
+Un classeur déjà fait dans le Tableur : une feuille, une plage, copiée une fois ou liée ¦ Eng Mapp, déi schonn an der Tabelle gemaach ass: e Blat, e Beräich, eemol kopéiert oder verbonnen
+Relevés paroissiaux ¦ Parregëster-Auszich
+Visite aux AD ¦ Besuch an den Archives départementales
+Déplacement ¦ Rees
+Rédaction ¦ Schreiwen
+Planning de recherche ¦ Rechercheplang
+Style, annotations, lignes de repère, petits multiples, lecture dans le temps ¦ Stil, Notizen, Referenzlinnen, kleng Villfachen, Oflaf an der Zäit
+Les figer (les modifier à la main) ¦ Se fixéieren (se vun Hand änneren)
+Le tableur en grand, préparé avec les colonnes de ce diagramme : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir » ¦ D'Tabelle a grouss, mat de Kolonne vun dësem Diagramm virbereet: Formelen, Zortéieren, aus Excel afügen… dann „✓ Späicheren an zréck“
+dans le tableur (formules, tri, Excel…) ¦ an der Tabelle (Formelen, Zortéieren, Excel…)
+🔄 Chiffres tenus à jour depuis « {src} » : ils sont relus à chaque affichage. ¦ 🔄 Zuelen aktuell gehale vu(n) „{src}“: si ginn bei all Uweisen nei gelies.
+l’app ¦ d'App
+Pas de réglage particulier. ¦ Keng speziell Astellung.
+🌳 Des données de mon arbre ¦ 🌳 Donnéeën aus mengem Bam
+Remplace le tableau par des chiffres calculés dans ta base (tu peux ensuite les retoucher à la main). ¦ Ersetzt d'Tabell duerch Zuelen, déi an denger Datebank berechent ginn (du kanns se duerno vun Hand nobesseren).
+📊 Des chiffres de l’app ¦ 📊 Zuelen aus der App
+Remplace le tableau par des chiffres calculés dans ta base : « 🧮 Compter dans ma base » (ce qu’on compte, le groupe de personnes, la période, le regroupement… tout se règle ci-dessous), un exemple, une statistique de l’app ou un de « Mes graphiques » (faits dans Réglages → Éditeur de graphiques). ¦ Ersetzt d'Tabell duerch Zuelen, déi an denger Datebank berechent ginn: „🧮 A menger Datebank zielen“ (wat gezielt gëtt, d'Grupp vu Persounen, d'Period, d'Gruppéierung… alles gëtt hei ënnen agestallt), e Beispill, eng Statistik vun der App oder eng vu „Meng Grafiken“ (gemaach an Astellungen → Grafikeditor).
+👥 Des personnes de la base ¦ 👥 Persounen aus der Datebank
+Chaque personne devient une ligne, de sa naissance à son décès (rôle : Homme ou Femme, à changer à volonté). ¦ All Persoun gëtt eng Zeil, vun hirer Gebuert bis zu hirem Doud (Roll: Mann oder Fra, no Wonsch z'änneren).
+Leurs naissances, mariages et décès deviennent des dates de la frise. ¦ Hir Gebuerten, Bestietnesser an Doudesfäll ginn Datumer op der Zäitläscht.
+Ce type de diagramme se remplit à la main, en collant un tableau ou avec un CSV (onglet Données). ¦ Dësen Diagrammtyp gëtt vun Hand ausgefëllt, andeems s de eng Tabell afügs oder mat engem CSV (Reiter Donnéeën).
+Données prises dans ton arbre. ¦ Donnéeën aus dengem Bam geholl.
+Ces chiffres sont déjà comptés : tu peux les trier, garder les premiers, montrer « Inconnu » ou les passer en %. Pour choisir ce qu’on compte, le groupe de personnes ou la période, prends « 🧮 Compter dans ma base » ¦ Dës Zuele si schonn gezielt: du kanns se zortéieren, déi éischt halen, „Onbekannt“ weisen oder se an % weisen. Fir ze wielen, wat gezielt gëtt, d'Grupp vu Persounen oder d'Period, huel „🧮 A menger Datebank zielen“
+{name} — pas pour ce diagramme ¦ {name} — net fir dësen Diagramm
+Aucun chiffre pour ces réglages : essaie un autre groupe, une autre période ou montre « Inconnu ». ¦ Keng Zuele fir dës Astellungen: probéier eng aner Grupp, eng aner Period oder weis „Onbekannt“.
+{n} valeurs prises dans ta base ({k} comptés). ¦ {n} Wäerter aus denger Datebank geholl ({k} gezielt).
+{n} valeur prise dans ta base ({k} comptés). ¦ {n} Wäert aus denger Datebank geholl ({k} gezielt).
+{n} valeur prise dans ta base. ¦ {n} Wäert aus denger Datebank geholl.
+{n} valeurs prises dans l’app. ¦ {n} Wäerter aus der App geholl.
+{n} valeur prise dans l’app. ¦ {n} Wäert aus der App geholl.
+{name} : pas de date de naissance dans sa fiche. ¦ {name}: keen Gebuertsdatum a senger Fiche.
+{name} ajouté. ¦ {name} derbäigesat.
+{name} ajoutée. ¦ {name} derbäigesat.
+{name} ajouté(e). ¦ {name} derbäigesat.
+Le diagramme apparaît alors sur la fiche de la personne, dans l’enquête ou dans le projet de l’Atelier. Pour le poser ailleurs : un widget (Réglages → Éditeur de widgets), un bloc de fiche, la mise en page. ¦ Den Diagramm erschéngt dann op der Fiche vun der Persoun, an der Ënnersichung oder am Projet vum Atelier. Fir en anzwousch anescht ze placéieren: e Widget (Astellungen → Widgeteditor), e Block vun enger Notizfiche, d'Säitegestaltung.
+ou une partie d’enquête, un projet de l’Atelier… ¦ oder en Deel vun enger Ënnersichung, e Projet vum Atelier…
+Supprimer la série « {name} » et ses chiffres ? ¦ D'Serie „{name}“ an hir Zuelen läschen?
+Supprimer la série ¦ D'Serie läschen
+Vider le tableau ¦ D'Tabell eidel maachen
+une feuille, une plage : copiée une fois ou liée (tenue à jour) ¦ e Blat, e Beräich: eemol kopéiert oder verbonnen (aktuell gehalen)
+Sélectionne des cellules dans Excel, LibreOffice, Numbers ou Google Sheets, copie-les (⌘C) et colle-les ici. Si la première ligne contient des titres, ils deviennent les noms des séries. Le tableau actuel est remplacé. ¦ Wiel Zellen an Excel, LibreOffice, Numbers oder Google Sheets aus, kopéier se (⌘C) a füg se hei an. Wann déi éischt Zeil Titelen huet, ginn dat d'Nimm vun de Serien. Déi aktuell Tabell gëtt ersat.
+Données liées au classeur : elles suivent le Tableur. ¦ Donnéeë mat der Mapp verbonnen: si follegen der Tabelle.
+{n} lignes copiées du classeur. ¦ {n} Zeilen aus der Mapp kopéiert.
+Ce type ne lit pas le même tableau : l’exemple remplace tes données. Continuer ? ¦ Dësen Typ liest net déi selwecht Tabell: d'Beispill ersetzt deng Donnéeën. Weidermaachen?
+D’un graphique (à moi ou de l’app, tenu à jour) ¦ Vun enger Grafik (vu mir oder vun der App, aktuell gehalen)
+Un de mes graphiques (Éditeur de graphiques, tenu à jour) ¦ Eng vu menge Grafiken (Grafikeditor, aktuell gehalen)
+Hémicycle d’une assemblée, fer à cheval, frise des membres d’un groupe de musique façon Wikipédia, frise de vies, camembert, flux de migrations, organigramme, nuage de noms… avec tes propres chiffres ou ceux de l’app. Ils se posent ensuite partout : tableau de bord, fiches, fiche d’une personne, enquêtes, Atelier, mise en page. ¦ Hallefkrees vun enger Versammlung, Houfeisen, Zäitläscht vun de Membere vun enger Musekgrupp wéi op Wikipedia, Zäitläscht vu Liewen, Kuchendiagramm, Migratiounsstréim, Organigramm, Nimmwollek… mat denge eegenen Zuelen oder deene vun der App. Duerno kanns de se iwwerall placéieren: Dashboard, Notizfichen, Fiche vun enger Persoun, Ënnersichungen, Atelier, Säitegestaltung.
+MES DIAGRAMMES ¦ MENG DIAGRAMMER
+📈 Ce diagramme montre ton graphique « {name} » (Éditeur de graphiques) : son dessin et ses chiffres le suivent, partout où il est posé. ¦ 📈 Dësen Diagramm weist deng Grafik „{name}“ (Grafikeditor): hir Zeechnung an hir Zuele follegen him, iwwerall wou en placéiert ass.
+🔗 Données : {src} · tenu à jour. ¦ 🔗 Donnéeën: {src} · aktuell gehalen.
+🔄 Chiffres tenus à jour depuis « {src} ». ¦ 🔄 Zuelen aktuell gehale vu(n) „{src}“.
+✎ Modifier le graphique ¦ ✎ D'Grafik änneren
+Une copie figée, à retoucher comme un diagramme ¦ Eng fix Kopie, fir se wéi en Diagramm nozebesseren
+Une copie à modifier ¦ Eng Kopie fir z'änneren
+Le poser sur le tableau de bord, comme un widget ¦ En op den Dashboard setzen, wéi e Widget
+Pour le poser ailleurs : <b>Réglages → Éditeur de widgets</b> (partie « Diagramme ») pour le tableau de bord ou un onglet, un bloc « 📊 Diagramme » dans une <b>Fiche</b>, « Relier » (onglet de l’éditeur) pour la fiche d’une personne, une enquête ou un projet de l’Atelier, et « Insérer → Diagramme » dans la <b>mise en page</b>. Tous tes graphiques et diagrammes : <b>Listes → Graphiques et diagrammes</b>. ¦ Fir en anzwousch anescht ze placéieren: <b>Astellungen → Widgeteditor</b> (Deel „Diagramm“) fir den Dashboard oder e Reiter, e Block „📊 Diagramm“ an enger <b>Notizfiche</b>, „Verbannen“ (Reiter vum Editor) fir d'Fiche vun enger Persoun, eng Ënnersichung oder e Projet vum Atelier, an „Asetzen → Diagramm“ an der <b>Säitegestaltung</b>. All deng Grafiken an Diagrammer: <b>Lëschten → Grafiken an Diagrammer</b>.
+Rien à copier : le graphique est introuvable. ¦ Näischt ze kopéieren: d'Grafik ass net ze fannen.
+Supprimer le diagramme « {name} » ? Il disparaît aussi des widgets, fiches et enquêtes où il est posé. ¦ Den Diagramm „{name}“ läschen? E verschwënnt och aus de Widgeten, Notizfichen an Ënnersichungen, wou en placéiert ass.
+Supprimer le diagramme ¦ Den Diagramm läschen
+Passe par les Réglages → Éditeur de widgets. ¦ Gëff iwwer d'Astellungen → Widgeteditor.
+Ajouter un diagramme ¦ En Diagramm derbäisetzen
+Ajoute des groupes et leur nombre de sièges. ¦ Setz Gruppen an hir Zuel u Sëtzer derbäi.
+{n} sièges ¦ {n} Sëtzer
+Tribune · {n} sièges ¦ Tribün · {n} Sëtzer
+Majorité absolue : {n} sièges ¦ Absolut Majoritéit: {n} Sëtzer
+Ajoute des lignes : un nom, des rôles, une date de début et de fin. ¦ Setz Zeilen derbäi: en Numm, Rollen, en Ufanks- an en Enndatum.
+Ajoute des dates et ce qui s’est passé. ¦ Setz Datumer derbäi a wat geschitt ass.
+Ajoute des lignes de chiffres. ¦ Setz Zeile mat Zuelen derbäi.
+Ajoute des tranches (âges…) et deux séries (hommes, femmes…). ¦ Setz Tranchen (Alter…) an zwou Serien (Männer, Fraen…) derbäi.
+Ajoute des lignes et des colonnes de chiffres. ¦ Setz Zeilen a Kolonne mat Zuelen derbäi.
+Ajoute des points : X, Y (et une taille pour des bulles). ¦ Setz Punkten derbäi: X, Y (an eng Gréisst fir Bubbelen).
+Ajoute des cases : un nom et, pour chacune, sa case « au-dessus ». ¦ Setz Felder derbäi: en Numm an, fir all Feld, säi Feld „driwwer“.
+Ajoute des mots (noms, prénoms, lieux…) et leur poids. ¦ Setz Wierder (Nimm, Virnimm, Plazen…) an hiert Gewiicht derbäi.
+Texte au centre (sinon le total) ¦ Text an der Mëtt (soss den Total)
+Total au centre ¦ Total an der Mëtt
+Les groupes (de gauche à droite) ¦ D'Gruppen (vu lénks no riets)
+Côté (Westminster) ¦ Säit (Westminster)
+Salle (rangées face à la tribune) ¦ Sall (Reien vis-à-vis vun der Tribün)
+Angle de l’arc ¦ Wénkel vum Bou
+Nombre de rangées (0 = automatique) ¦ Zuel vu Reien (0 = automatesch)
+Texte au centre (sinon le nombre de sièges) ¦ Text an der Mëtt (soss d'Zuel vu Sëtzer)
+Petit texte sous le nombre ¦ Klengen Text ënner der Zuel
+En texte et ligne au milieu ¦ Als Text a Linn an der Mëtt
+Écologistes ¦ Gréng
+Libéraux ¦ Liberal
+Les rôles et leur couleur ¦ D'Rollen an hir Faarf
+Début de la frise (vide = auto) ¦ Ufank vun der Zäitläscht (eidel = automatesch)
+Fin de la frise (vide = auto) ¦ Enn vun der Zäitläscht (eidel = automatesch)
+Écrire le nom des traits verticaux ¦ Den Numm vun de vertikale Sträicher schreiwen
+Les Cousins — membres ¦ Les Cousins — Memberen
+Guitare solo, Chœurs ¦ Leadgittar, Chouer
+Deuxième ¦ Zweet
+Tous en dessous ¦ All ënnendrënner
+Décès de Jean ¦ Doud vum Jean
+La famille Martin ¦ D'Famill Martin
+Sur les parts ¦ Op den Deeler
+Avec une date de naissance ¦ Mat engem Gebuertsdatum
+Où en sont mes recherches ¦ Wou meng Recherchen dru sinn
+Maximum de l’échelle (vide = auto) ¦ Maximum vun der Skala (eidel = automatesch)
+Première ligne en bas ¦ Éischt Zeil ënnen
+Naissances par mois et par siècle ¦ Gebuerten pro Mount a pro Joerhonnert
+Nom de l’axe X ¦ Numm vun der X-Achs
+Nom de l’axe Y ¦ Numm vun der Y-Achs
+Taille de la plus grosse bulle ¦ Gréisst vun der gréisster Bubbel
+Âge au mariage et nombre d’enfants ¦ Alter beim Bestietnes an Zuel vu Kanner
+Au-dessus (nom de la case) ¦ Driwwer (Numm vum Feld)
+Présidente ¦ Presidentin
+Trésorier ¦ Keessewaart
+Secrétaire ¦ Sekretär
+3 bénévoles ¦ 3 Benevollen
+Fêtes ¦ Fester
+5 bénévoles ¦ 5 Benevollen
+Association des Amis du village ¦ Veräin vun de Frënn vum Duerf
+Diagramme de Venn (2 ou 3 ensembles) ¦ Venn-Diagramm (2 oder 3 Gruppen)
+Mes objectifs ¦ Meng Ziler
+Jean et Marie ¦ Jean a Marie
+Pierre et Anne ¦ Pierre an Anne
+Louis et Rose ¦ Louis a Rose
+Enfants par couple ¦ Kanner pro Koppel
+Source / note en bas ¦ Quell / Notiz ënnen
+Largeur de l’image ¦ Breet vum Bild
+Notaires ¦ Notairen
+↺ Police de l’app ¦ ↺ Schrëft vun der App
+{name} : {a} sur {n} enfants morts avant 1 an ({p} %) ¦ {name}: {a} vun {n} Kanner virun 1 Joer gestuerwen ({p} %)
+{name} : {a} sur {n} morts avant 5 ans ({p} %) ¦ {name}: {a} vun {n} virun 5 Joer gestuerwen ({p} %)
+parrains : {a} sur {b} · marraines : {c} sur {d} ¦ Pätter: {a} vun {b} · Gottaen: {c} vun {d}

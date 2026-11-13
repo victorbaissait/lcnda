@@ -1,0 +1,1005 @@
+fr ¦ vi ¦ id
+(l’original reste gardé : on peut y revenir) ¦ (bản gốc vẫn được giữ: bạn có thể quay lại) ¦ (yang asli tetap disimpan: kamu bisa kembali ke sana)
+(voix, plus léger) ¦ (giọng nói, nhẹ hơn) ¦ (suara, lebih ringan)
+1 rush ajouté : glisse-le sur la frise. ¦ Đã thêm 1 đoạn quay: hãy kéo nó lên dòng thời gian. ¦ 1 klip ditambahkan: seret ke lini masa.
+1 rush ajouté : glisse-le sur la frise. Il entre dans les Médias quand tu enregistres le projet. ¦ Đã thêm 1 đoạn quay: hãy kéo nó lên dòng thời gian. Nó sẽ vào Tư liệu khi bạn lưu dự án. ¦ 1 klip ditambahkan: seret ke lini masa. Klip masuk ke Media saat kamu menyimpan proyek.
+: l’original ne change pas du tout ¦ : bản gốc hoàn toàn không thay đổi ¦ : yang asli sama sekali tidak berubah
+<b>Une copie à part</b> (un autre son, rattaché aux mêmes fiches) ¦ <b>Một bản sao riêng</b> (một âm thanh khác, liên kết với cùng các hồ sơ) ¦ <b>Salinan terpisah</b> (suara lain, terhubung ke profil yang sama)
+<b>Une copie à part</b> (une autre vidéo, rattachée aux mêmes fiches) ¦ <b>Một bản sao riêng</b> (một video khác, liên kết với cùng các hồ sơ) ¦ <b>Salinan terpisah</b> (video lain, terhubung ke profil yang sama)
+Au repère orange ({time}) ¦ Tại mốc màu cam ({time}) ¦ Di penanda oranye ({time})
+Boutons des pistes : {n} px ¦ Nút của các rãnh: {n} px ¦ Tombol trek: {n} px
+Boutons des pistes : {n} px (taille de départ) ¦ Nút của các rãnh: {n} px (kích thước ban đầu) ¦ Tombol trek: {n} px (ukuran semula)
+Ce fichier est un réglage pour {a}, pas pour {b} : importe-le à sa place. ¦ Tệp này là cài đặt cho {a}, không phải cho {b}: hãy nhập nó ở đúng chỗ. ¦ Berkas ini pengaturan untuk {a}, bukan untuk {b}: impor di tempat yang tepat.
+Ce qu’il contient ({what}) remonte dans la racine. ¦ Nội dung bên trong ({what}) được đưa lên thư mục gốc. ¦ Isinya ({what}) naik ke folder utama.
+Ce qu’il contient ({what}) remonte dans « {dir} ». ¦ Nội dung bên trong ({what}) được đưa lên “{dir}”. ¦ Isinya ({what}) naik ke “{dir}”.
+Chapitre {n} ¦ Chương {n} ¦ Bab {n}
+Clic sur la frise : se placer · clic sur un élément : le choisir · glisser : le déplacer · {play} : lire · {split} : couper ici · {del} : enlever ¦ Nhấp vào dòng thời gian: đặt vị trí · nhấp vào một mục: chọn nó · kéo: di chuyển nó · {play}: phát · {split}: cắt tại đây · {del}: bỏ đi ¦ Klik lini masa: pindah ke sana · klik item: pilih · seret: pindahkan · {play}: putar · {split}: potong di sini · {del}: buang
+Enregistrement du son… {n} % ¦ Đang lưu âm thanh… {n} % ¦ Menyimpan suara… {n} %
+Ensemble « {name} » appliqué. ¦ Đã áp dụng bộ “{name}”. ¦ Set “{name}” diterapkan.
+Ensemble « {name} » supprimé ¦ Đã xoá bộ “{name}” ¦ Set “{name}” dihapus
+Envoi des rushes {k}/{n}… ¦ Đang gửi các đoạn quay {k}/{n}… ¦ Mengunggah klip {k}/{n}…
+Espace ¦ Phím cách ¦ Spasi
+Fichier {fmt} téléchargé ({n} Mo). Rien n’a changé dans la base. ¦ Đã tải xuống tệp {fmt} ({n} MB). Không có gì thay đổi trong cơ sở dữ liệu. ¦ Berkas {fmt} diunduh ({n} MB). Tidak ada yang berubah di basis data.
+Il est utilisé {n} fois sur la frise : ces passages seront retirés aussi. Le fichier reste dans les Médias s’il y est. ¦ Nó được dùng {n} lần trên dòng thời gian: các đoạn này cũng sẽ bị gỡ ra. Tệp vẫn ở trong Tư liệu nếu đã có ở đó. ¦ Ini dipakai {n} kali di lini masa: bagian-bagian itu juga akan dilepas. Berkasnya tetap di Media jika memang ada di sana.
+Image clé {time} ¦ Khung hình chính {time} ¦ Keyframe {time}
+Le fichier importé est maintenant dans les Médias. ¦ Tệp đã nhập giờ đã ở trong Tư liệu. ¦ Berkas yang diimpor sekarang ada di Media.
+Le fichier reste dans les Médias s’il y est. ¦ Tệp vẫn ở trong Tư liệu nếu đã có ở đó. ¦ Berkasnya tetap di Media jika memang ada di sana.
+Le montage est rejoué pour être enregistré : cela prend <b>{time}</b> (sa durée). Laisse la fenêtre ouverte. ¦ Bản dựng được phát lại để lưu: mất <b>{time}</b> (bằng thời lượng của nó). Hãy để cửa sổ mở. ¦ Montase diputar ulang untuk disimpan: butuh <b>{time}</b> (sesuai durasinya). Biarkan jendela tetap terbuka.
+Les boutons des pistes ont déjà leur taille de départ. ¦ Nút của các rãnh đã ở kích thước ban đầu. ¦ Tombol trek sudah berukuran semula.
+Les boutons des pistes sont déjà au plus grand. ¦ Nút của các rãnh đã lớn nhất rồi. ¦ Tombol trek sudah paling besar.
+Les boutons des pistes sont déjà au plus petit. ¦ Nút của các rãnh đã nhỏ nhất rồi. ¦ Tombol trek sudah paling kecil.
+Les {n} fichiers importés sont maintenant dans les Médias. ¦ {n} tệp đã nhập giờ đã ở trong Tư liệu. ¦ {n} berkas yang diimpor sekarang ada di Media.
+Mettre « {name} » dans… ¦ Đặt “{name}” vào… ¦ Taruh “{name}” di…
+Montage fabriqué : {what}. Retouche ce que tu veux, puis ⤓ Exporter. ¦ Đã tạo bản dựng: {what}. Hãy chỉnh những gì bạn muốn, rồi ⤓ Xuất. ¦ Montase dibuat: {what}. Rapikan sesukamu, lalu ⤓ Ekspor.
+Nom du dossier (dans « {name} ») : ¦ Tên thư mục (trong “{name}”): ¦ Nama folder (di “{name}”):
+Nom du dossier : ¦ Tên thư mục: ¦ Nama folder:
+Nouveau chapitre ¦ Chương mới ¦ Bab baru
+Nouvelle version, <b>sans la montrer</b> pour l’instant ¦ Phiên bản mới, <b>chưa hiển thị</b> lúc này ¦ Versi baru, <b>belum ditampilkan</b> untuk saat ini
+Nouvelle version, montrée partout ¦ Phiên bản mới, hiển thị ở mọi nơi ¦ Versi baru, ditampilkan di mana-mana
+Ouvre une fois {what} : ses boutons apparaîtront ici. ¦ Hãy mở {what} một lần: các nút của nó sẽ hiện ở đây. ¦ Buka {what} sekali: tombol-tombolnya akan muncul di sini.
+Où mettre « {name} » ? ¦ Đặt “{name}” vào đâu? ¦ Taruh “{name}” di mana?
+Piste « {name} » ajoutée. ¦ Đã thêm rãnh “{name}”. ¦ Trek “{name}” ditambahkan.
+Piste « {name} » supprimée ¦ Đã xoá rãnh “{name}” ¦ Trek “{name}” dihapus
+Piste « {name} » supprimée (avec {what}) ¦ Đã xoá rãnh “{name}” (cùng với {what}) ¦ Trek “{name}” dihapus (beserta {what})
+Piste « {name} » vidée ¦ Đã làm trống rãnh “{name}” ¦ Trek “{name}” dikosongkan
+Ranger « {name} » dans… ¦ Xếp “{name}” vào… ¦ Simpan “{name}” di…
+Remplacer les réglages actuels par l’ensemble « {name} » ? ¦ Thay các cài đặt hiện tại bằng bộ “{name}”? ¦ Ganti pengaturan saat ini dengan set “{name}”?
+Rush supprimé, avec ses {n} passages sur la frise. ¦ Đã xoá đoạn quay, cùng với {n} đoạn của nó trên dòng thời gian. ¦ Klip dihapus, beserta {n} bagiannya di lini masa.
+Rush supprimé, avec son passage sur la frise. ¦ Đã xoá đoạn quay, cùng với đoạn của nó trên dòng thời gian. ¦ Klip dihapus, beserta bagiannya di lini masa.
+Rush supprimé. ¦ Đã xoá đoạn quay. ¦ Klip dihapus.
+Réglage « {name} » importé : « Appliquer » pour l’utiliser. ¦ Đã nhập cài đặt “{name}”: bấm “Áp dụng” để dùng. ¦ Pengaturan “{name}” diimpor: klik “Terapkan” untuk memakainya.
+Supprimer le dossier « {name} » ? ¦ Xoá thư mục “{name}”? ¦ Hapus folder “{name}”?
+Supprimer le rush ¦ Xoá đoạn quay ¦ Hapus klip
+Supprimer « {name} » du projet ? ¦ Xoá “{name}” khỏi dự án? ¦ Hapus “{name}” dari proyek?
+Titre de la vidéo ¦ Tiêu đề video ¦ Judul video
+Titre du chapitre qui commence à {time} : ¦ Tiêu đề của chương bắt đầu lúc {time}: ¦ Judul bab yang dimulai pada {time}:
+Titre du son ¦ Tiêu đề âm thanh ¦ Judul suara
+Un réglage s’appelle déjà « {name} ». Quel nom pour celui-ci ? ¦ Đã có một cài đặt tên là “{name}”. Đặt tên gì cho cài đặt này? ¦ Sudah ada pengaturan bernama “{name}”. Beri nama apa untuk yang ini?
+ce rush ¦ đoạn quay này ¦ klip ini
+comme l’original (mono) ¦ như bản gốc (mono) ¦ seperti aslinya (mono)
+comme l’original (stéréo) ¦ như bản gốc (stereo) ¦ seperti aslinya (stereo)
+comme l’original ({n} kHz) ¦ như bản gốc ({n} kHz) ¦ seperti aslinya ({n} kHz)
+la copie est rattachée aux mêmes fiches ¦ bản sao được liên kết với cùng các hồ sơ ¦ salinannya terhubung ke profil yang sama
+la disposition du montage ¦ bố cục của bản dựng ¦ tata letak montase
+le plus léger pour la voix · environ {n} Mo · QuickTime ne le lit pas ¦ nhẹ nhất cho giọng nói · khoảng {n} MB · QuickTime không đọc được ¦ paling ringan untuk suara · sekitar {n} MB · QuickTime tidak bisa memutarnya
+le plus léger · ~{n} Mo ¦ nhẹ nhất · ~{n} MB ¦ paling ringan · ~{n} MB
+les boutons de « {name} » ¦ các nút của “{name}” ¦ tombol-tombol “{name}”
+lu absolument partout (téléphones, voitures, Mac, Windows) · environ {n} Mo en 128 kbit/s ¦ phát được ở mọi nơi (điện thoại, ô tô, Mac, Windows) · khoảng {n} MB ở 128 kbit/s ¦ bisa diputar di mana saja (ponsel, mobil, Mac, Windows) · sekitar {n} MB pada 128 kbit/s
+lu partout · ~{n} Mo ¦ phát được ở mọi nơi · ~{n} MB ¦ bisa diputar di mana saja · ~{n} MB
+l’original est toujours gardé · montrée : {name} ¦ bản gốc luôn được giữ · đang hiển thị: {name} ¦ yang asli selalu disimpan · ditampilkan: {name}
+l’outil « {name} » ¦ công cụ “{name}” ¦ alat “{name}”
+nouvelle version, copie (réglages) ¦ phiên bản mới, bản sao (cài đặt) ¦ versi baru, salinan (pengaturan)
+rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité, images par seconde et volume (📢 {n} LUFS) : Réglages → Montage ¦ phát lại theo thời gian thực để lưu (hãy để cửa sổ mở) · kích thước, chất lượng, số khung hình mỗi giây và âm lượng (📢 {n} LUFS): Cài đặt → Dựng phim ¦ diputar ulang secara langsung untuk disimpan (biarkan jendela terbuka) · ukuran, kualitas, frame per detik, dan volume (📢 {n} LUFS): Pengaturan → Montase
+rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité, images par seconde et volume standard : Réglages → Montage ¦ phát lại theo thời gian thực để lưu (hãy để cửa sổ mở) · kích thước, chất lượng, số khung hình mỗi giây và âm lượng chuẩn: Cài đặt → Dựng phim ¦ diputar ulang secara langsung untuk disimpan (biarkan jendela terbuka) · ukuran, kualitas, frame per detik, dan volume standar: Pengaturan → Montase
+sans perte et environ deux fois plus léger que le WAV · environ {n} Mo · lu par les navigateurs, VLC, Windows ; pas par QuickTime ¦ không mất chất lượng và nhẹ khoảng gấp đôi WAV · khoảng {n} MB · trình duyệt, VLC, Windows đọc được; QuickTime thì không ¦ tanpa kehilangan kualitas dan kira-kira dua kali lebih ringan dari WAV · sekitar {n} MB · bisa diputar di peramban, VLC, Windows; tidak di QuickTime
+sans perte · ~{n} Mo ¦ không mất chất lượng · ~{n} MB ¦ tanpa kehilangan kualitas · ~{n} MB
+sans perte, lu partout (Mac, Windows, Audacity) · environ {n} Mo ¦ không mất chất lượng, phát được ở mọi nơi (Mac, Windows, Audacity) · khoảng {n} MB ¦ tanpa kehilangan kualitas, bisa diputar di mana saja (Mac, Windows, Audacity) · sekitar {n} MB
+sans perte, léger · ~{n} Mo ¦ không mất chất lượng, nhẹ · ~{n} MB ¦ tanpa kehilangan kualitas, ringan · ~{n} MB
+sans perte, pour GarageBand, Logic, QuickTime · environ {n} Mo · à télécharger seulement (l’app ne le lit pas) ¦ không mất chất lượng, cho GarageBand, Logic, QuickTime · khoảng {n} MB · chỉ để tải xuống (ứng dụng không đọc được) ¦ tanpa kehilangan kualitas, untuk GarageBand, Logic, QuickTime · sekitar {n} MB · hanya untuk diunduh (aplikasi tidak bisa memutarnya)
+stéréo ¦ stereo ¦ stereo
+sur chaque temps ¦ trên mỗi phách ¦ di setiap ketukan
+tourné de {n}° ¦ xoay {n}° ¦ diputar {n}°
+tous les {n} temps ¦ mỗi {n} phách ¦ setiap {n} ketukan
+{file} : ni vidéo, ni photo, ni son. ¦ {file}: không phải video, ảnh hay âm thanh. ¦ {file}: bukan video, foto, atau suara.
+{n} images/s ¦ {n} khung hình/giây ¦ {n} frame/detik
+{n} rushes ajoutés : glisse-les sur la frise. ¦ Đã thêm {n} đoạn quay: hãy kéo chúng lên dòng thời gian. ¦ {n} klip ditambahkan: seret ke lini masa.
+{n} rushes ajoutés : glisse-les sur la frise. Ils entrent dans les Médias quand tu enregistres le projet. ¦ Đã thêm {n} đoạn quay: hãy kéo chúng lên dòng thời gian. Chúng sẽ vào Tư liệu khi bạn lưu dự án. ¦ {n} klip ditambahkan: seret ke lini masa. Klip masuk ke Media saat kamu menyimpan proyek.
+{n} temps repérés · environ {bpm} battements par minute. ¦ Đã tìm thấy {n} phách · khoảng {bpm} nhịp mỗi phút. ¦ {n} ketukan terdeteksi · sekitar {bpm} ketukan per menit.
+{n} temps repérés. ¦ Đã tìm thấy {n} phách. ¦ {n} ketukan terdeteksi.
+{what} : choisis-en un puis « Appliquer ». ¦ {what}: hãy chọn một cái rồi bấm “Áp dụng”. ¦ {what}: pilih salah satu lalu “Terapkan”.
+{what} sur la piste « Sous-titres ». ¦ {what} trên rãnh “Phụ đề”. ¦ {what} di trek “Subtitle”.
+« {name} » est revenu du Studio son, nettoyé. ¦ “{name}” đã quay về từ Phòng thu âm thanh, đã được làm sạch. ¦ “{name}” kembali dari Studio suara, sudah dibersihkan.
+« {name} » rangé dans la racine. ¦ Đã xếp “{name}” vào thư mục gốc. ¦ “{name}” disimpan di folder utama.
+« {name} » rangé dans « {dir} ». ¦ Đã xếp “{name}” vào “{dir}”. ¦ “{name}” disimpan di “{dir}”.
+À la fin ¦ Ở cuối ¦ Di akhir
+◇ image clé à {time} ¦ ◇ khung hình chính tại {time} ¦ ◇ keyframe pada {time}
+🎥 {what} à la piste 1 (décalages : {offs}). ¦ 🎥 {what} vào rãnh 1 (độ lệch: {offs}). ¦ 🎥 {what} ke trek 1 (selisih: {offs}).
+💾 Dans les médias… ¦ 💾 Vào tư liệu… ¦ 💾 Ke media…
+📢 Mesure du volume… {n} % ¦ 📢 Đang đo âm lượng… {n} % ¦ 📢 Mengukur volume… {n} %
+📢 Volume mesuré : {a} LUFS → {b} LUFS (crêtes tenues par le limiteur). ¦ 📢 Âm lượng đã đo: {a} LUFS → {b} LUFS (đỉnh được bộ giới hạn giữ lại). ¦ 📢 Volume terukur: {a} LUFS → {b} LUFS (puncak ditahan oleh limiter).
+📢 Volume mesuré : {a} LUFS → {b} LUFS. ¦ 📢 Âm lượng đã đo: {a} LUFS → {b} LUFS. ¦ 📢 Volume terukur: {a} LUFS → {b} LUFS.
+🔒 Piste « {name} » verrouillée : ses éléments ne bougent plus. ¦ 🔒 Đã khoá rãnh “{name}”: các mục trong đó không di chuyển nữa. ¦ 🔒 Trek “{name}” dikunci: item-itemnya tidak bergerak lagi.
+🔓 Piste « {name} » déverrouillée. ¦ 🔓 Đã mở khoá rãnh “{name}”. ¦ 🔓 Kunci trek “{name}” dibuka.
+🕘 Versions ({n})… ¦ 🕘 Phiên bản ({n})… ¦ 🕘 Versi ({n})…
+🥁 {n} temps repérés (environ {bpm} par minute). ¦ 🥁 Đã tìm thấy {n} phách (khoảng {bpm} mỗi phút). ¦ 🥁 {n} ketukan terdeteksi (sekitar {bpm} per menit).
+🥁 {n} temps repérés. ¦ 🥁 Đã tìm thấy {n} phách. ¦ 🥁 {n} ketukan terdeteksi.
+=rush ¦ đoạn quay ¦ klip
+=plan ajouté ¦ cảnh đã thêm ¦ adegan ditambahkan
+=sous-titre importé ¦ phụ đề đã nhập ¦ subtitle diimpor
+=ensemble importé ¦ bộ đã nhập ¦ set diimpor
+=réglage du Studio reste appliqué ¦ cài đặt của Phòng thu vẫn được áp dụng ¦ pengaturan Studio tetap diterapkan
+=morceau ¦ đoạn ¦ potongan
+(rien ne change dans la base) ¦ (không có gì thay đổi trong cơ sở dữ liệu) ¦ (tidak ada yang berubah di basis data)
+(un autre son, rattaché aux mêmes fiches) ¦ (một âm thanh khác, liên kết với cùng các hồ sơ) ¦ (suara lain, terhubung ke profil yang sama)
+(une autre vidéo, rattachée aux mêmes fiches) ¦ (một video khác, liên kết với cùng các hồ sơ) ¦ (video lain, terhubung ke profil yang sama)
+300 dossiers au plus. ¦ Tối đa 300 thư mục. ¦ Paling banyak 300 folder.
+bandes floues plutôt que noires ¦ dải mờ thay vì dải đen ¦ pita buram, bukan hitam
+Activer / couper ¦ Bật / tắt tiếng ¦ Aktifkan / bisukan
+Adaptation spatiale ¦ Thích ứng không gian ¦ Adaptasi spasial
+Adapter (toute l’image, bandes noires) ¦ Vừa khung (toàn bộ ảnh, dải đen) ¦ Sesuaikan (seluruh gambar, pita hitam)
+Aide sous la frise ¦ Trợ giúp dưới dòng thời gian ¦ Bantuan di bawah lini masa
+Aigus ¦ Âm cao ¦ Treble
+Aimant arrêté. ¦ Đã tắt bắt dính. ¦ Tempelkan dimatikan.
+Aimanter : en glissant, un élément se colle à la tête de lecture, au début ou à la fin des autres, aux chapitres et aux temps de la musique (garder Alt / Option appuyé : sans aimant) ¦ Bắt dính: khi kéo, một mục sẽ dính vào đầu phát, vào đầu hoặc cuối các mục khác, vào các chương và các phách của nhạc (giữ Alt / Option: không bắt dính) ¦ Tempelkan: saat diseret, item menempel ke kepala putar, ke awal atau akhir item lain, ke bab, dan ke ketukan musik (tahan Alt / Option: tanpa menempel)
+Aimanter : un élément glissé se colle à la tête de lecture, aux autres éléments, aux chapitres et aux temps de la musique (Alt / Option : sans aimant) ¦ Bắt dính: mục được kéo sẽ dính vào đầu phát, vào các mục khác, vào các chương và các phách của nhạc (Alt / Option: không bắt dính) ¦ Tempelkan: item yang diseret menempel ke kepala putar, ke item lain, ke bab, dan ke ketukan musik (Alt / Option: tanpa menempel)
+Ajouter une image clé ici (la valeur pourra changer au fil du temps) ¦ Thêm khung hình chính ở đây (giá trị có thể thay đổi theo thời gian) ¦ Tambah keyframe di sini (nilainya bisa berubah seiring waktu)
+Aller à l'image clé précédente de l'élément choisi ¦ Đến khung hình chính trước đó của mục đang chọn ¦ Ke keyframe sebelumnya dari item yang dipilih
+Aller à l'image clé suivante de l'élément choisi ¦ Đến khung hình chính tiếp theo của mục đang chọn ¦ Ke keyframe berikutnya dari item yang dipilih
+Le nom du projet (pour le retrouver dans 📂 Projets…) ¦ Tên dự án (để tìm lại trong 📂 Dự án…) ¦ Nama proyek (untuk menemukannya lagi di 📂 Proyek…)
+Le son du morceau passe sur une piste son, à part ¦ Âm thanh của đoạn được đưa sang một rãnh âm thanh riêng ¦ Suara potongan dipindah ke trek suara tersendiri
+Le son fini : nouvelle version (l’original est gardé), copie, nouveau son ou fichier téléchargé ¦ Âm thanh hoàn chỉnh: phiên bản mới (bản gốc được giữ), bản sao, âm thanh mới hoặc tệp tải xuống ¦ Suara jadi: versi baru (yang asli disimpan), salinan, suara baru, atau berkas unduhan
+Ancien film ¦ Phim cũ ¦ Film lawas
+Ancrage X ¦ Điểm neo X ¦ Jangkar X
+Ancrage Y ¦ Điểm neo Y ¦ Jangkar Y
+Au début ¦ Ở đầu ¦ Di awal
+Aucun projet son pour l’instant ¦ Chưa có dự án âm thanh nào ¦ Belum ada proyek suara
+Aucun sous-titre reconnu (fichier .srt ou .vtt). ¦ Không nhận ra phụ đề nào (tệp .srt hoặc .vtt). ¦ Tidak ada subtitle yang dikenali (berkas .srt atau .vtt).
+Aucune (taille d’origine) ¦ Không (kích thước gốc) ¦ Tidak ada (ukuran asli)
+Aussi ⌘ + et ⌘ −, ⌘ 0 pour revenir ¦ Cũng có ⌘ + và ⌘ −, ⌘ 0 để quay lại ¦ Juga ⌘ + dan ⌘ −, ⌘ 0 untuk kembali
+Avancer le morceau dans la piste 1 ¦ Đưa đoạn lên sớm hơn trong rãnh 1 ¦ Majukan potongan di trek 1
+← Avancer ¦ ← Sớm hơn ¦ ← Majukan
+Reculer → ¦ Muộn hơn → ¦ Mundurkan →
+Bord adouci ¦ Viền mềm ¦ Tepi halus
+Boutons remis comme au départ. ¦ Các nút đã được đặt lại như ban đầu. ¦ Tombol dikembalikan seperti semula.
+Cacher cette piste (ni vue ni entendue) ¦ Ẩn rãnh này (không thấy, không nghe) ¦ Sembunyikan trek ini (tidak terlihat, tidak terdengar)
+Montrée ¦ Đang hiện ¦ Ditampilkan
+Cachée ¦ Đang ẩn ¦ Disembunyikan
+Ce fichier n’est pas une disposition du montage. ¦ Tệp này không phải là bố cục của bản dựng. ¦ Berkas ini bukan tata letak montase.
+Ce réglage est vide ou abîmé. ¦ Cài đặt này trống hoặc bị hỏng. ¦ Pengaturan ini kosong atau rusak.
+Cette piste est déjà vide. ¦ Rãnh này đã trống. ¦ Trek ini sudah kosong.
+Chapitres copiés. ¦ Đã sao chép các chương. ¦ Bab disalin.
+Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse un élément pour le déplacer dans le temps, ou sur une autre piste du même genre (vidéos et photos vont sur toutes les pistes vidéo, texte ↔ texte, son ↔ son). Espace = lire / pause · ⌫ ou Suppr = enlever · B = couper ici · ◇ = image clé · 🧲 un élément glissé se colle aux autres (Alt / Option : sans aimant) · 🔒 une piste verrouillée ne bouge plus. ¦ Nhấp vào dòng thời gian để đặt vị trí, vào một mục để chọn nó; kéo một mục để di chuyển theo thời gian, hoặc sang một rãnh khác cùng loại (video và ảnh đi được mọi rãnh video, chữ ↔ chữ, âm thanh ↔ âm thanh). Phím cách = phát / tạm dừng · ⌫ hoặc Delete = bỏ đi · B = cắt tại đây · ◇ = khung hình chính · 🧲 mục được kéo sẽ dính vào các mục khác (Alt / Option: không bắt dính) · 🔒 rãnh đã khoá không di chuyển nữa. ¦ Klik lini masa untuk berpindah, klik item untuk memilihnya; seret item untuk menggesernya dalam waktu, atau ke trek lain yang sejenis (video dan foto ke semua trek video, teks ↔ teks, suara ↔ suara). Spasi = putar / jeda · ⌫ atau Delete = buang · B = potong di sini · ◇ = keyframe · 🧲 item yang diseret menempel ke item lain (Alt / Option: tanpa menempel) · 🔒 trek yang dikunci tidak bergerak lagi.
+Comme la 1re vidéo ¦ Như video đầu tiên ¦ Seperti video pertama
+Comme la vidéo ¦ Như video ¦ Seperti videonya
+Composition ¦ Bố cục ¦ Komposisi
+Copie ce texte : ¦ Hãy sao chép đoạn chữ này: ¦ Salin teks ini:
+Couleur du fondu ¦ Màu chuyển cảnh mờ ¦ Warna fade
+Couleurs vives ¦ Màu rực rỡ ¦ Warna cerah
+Coupe franche ¦ Cắt thẳng ¦ Potong langsung
+Coupe le morceau choisi à la tête de lecture ¦ Cắt đoạn đang chọn tại đầu phát ¦ Potong potongan yang dipilih di kepala putar
+Commence ici ¦ Bắt đầu ở đây ¦ Mulai di sini
+Finit ici ¦ Kết thúc ở đây ¦ Selesai di sini
+Le morceau choisi commence à la tête de lecture ¦ Đoạn đang chọn bắt đầu tại đầu phát ¦ Potongan yang dipilih mulai di kepala putar
+Le morceau choisi finit à la tête de lecture ¦ Đoạn đang chọn kết thúc tại đầu phát ¦ Potongan yang dipilih selesai di kepala putar
+Dans « Modifier le son », « 💾 Enregistrer le projet ». ¦ Trong “Sửa âm thanh”, “💾 Lưu dự án”. ¦ Di “Ubah suara”, “💾 Simpan proyek”.
+Monter ce bloc ¦ Đưa khối này lên ¦ Naikkan blok ini
+Descendre ce bloc ¦ Đưa khối này xuống ¦ Turunkan blok ini
+Monter la piste ¦ Đưa rãnh lên ¦ Naikkan trek
+Descendre la piste ¦ Đưa rãnh xuống ¦ Turunkan trek
+Distorsion ¦ Méo tiếng ¦ Distorsi
+Doux ¦ Nhẹ nhàng ¦ Lembut
+Durée du film : ¦ Thời lượng phim: ¦ Durasi film:
+Durée illisible ¦ Không đọc được thời lượng ¦ Durasi tidak terbaca
+Durée par photo ¦ Thời lượng mỗi ảnh ¦ Durasi per foto
+Durée à l’écran ¦ Thời lượng trên màn hình ¦ Durasi di layar
+Défiler ¦ Cuộn ¦ Gulir
+Détacher le son ¦ Tách âm thanh ¦ Pisahkan suara
+🔊 Détacher le son ¦ 🔊 Tách âm thanh ¦ 🔊 Pisahkan suara
+Montrer cette piste ¦ Hiện rãnh này ¦ Tampilkan trek ini
+Déverrouiller la piste ¦ Mở khoá rãnh ¦ Buka kunci trek
+Verrouiller la piste (ses éléments ne bougent plus, ne se coupent plus, ne s’enlèvent plus) ¦ Khoá rãnh (các mục trong đó không di chuyển, không bị cắt, không bị bỏ đi nữa) ¦ Kunci trek (item-itemnya tidak bergerak, tidak terpotong, dan tidak terbuang lagi)
+ENREGISTRER LE SON ¦ LƯU ÂM THANH ¦ SIMPAN SUARA
+EXPORTER LA VIDÉO ¦ XUẤT VIDEO ¦ EKSPOR VIDEO
+Effacer les temps ¦ Xoá các phách ¦ Hapus ketukan
+Repérer les temps ¦ Tìm các phách ¦ Deteksi ketukan
+Repérer de nouveau ¦ Tìm lại ¦ Deteksi ulang
+Effet Ken Burns ¦ Hiệu ứng Ken Burns ¦ Efek Ken Burns
+Effet vieux film : grain, rayures, poussières, image qui scintille, coins assombris ¦ Hiệu ứng phim cũ: hạt, vết xước, bụi, hình nhấp nháy, góc tối ¦ Efek film lawas: bintik, goresan, debu, gambar berkedip, sudut gelap
+En couple ¦ Thành đôi ¦ Sebagai pasangan
+Les parents ¦ Cha mẹ ¦ Orang tua
+Les enfants ¦ Con cái ¦ Anak-anak
+En incrustation, à la tête de lecture ¦ Lồng hình, tại đầu phát ¦ Sebagai sisipan, di kepala putar
+Enlever cette image clé ¦ Bỏ khung hình chính này ¦ Buang keyframe ini
+Enlever l'élément choisi ¦ Bỏ mục đang chọn ¦ Buang item yang dipilih
+🗑 Enlever ¦ 🗑 Bỏ đi ¦ 🗑 Buang
+Enlever la stabilisation ¦ Bỏ chống rung ¦ Buang stabilisasi
+Enlever le reflet vert sur le sujet (cheveux, bords) ¦ Bỏ ánh xanh lá trên chủ thể (tóc, viền) ¦ Buang pantulan hijau pada subjek (rambut, tepi)
+Enregistre ta voix au micro pendant que le film défile (casque conseillé) ¦ Thu giọng của bạn qua micro trong khi phim chạy (nên dùng tai nghe) ¦ Rekam suaramu lewat mikrofon saat film berjalan (sebaiknya pakai headphone)
+Enregistrer le projet de montage, pour le rouvrir et continuer plus tard (⌘S) ¦ Lưu dự án dựng phim để mở lại và làm tiếp sau (⌘S) ¦ Simpan proyek montase untuk dibuka lagi dan dilanjutkan nanti (⌘S)
+Enregistrer le projet son, pour y revenir plus tard (⌘S) ¦ Lưu dự án âm thanh để quay lại sau (⌘S) ¦ Simpan proyek suara untuk dilanjutkan nanti (⌘S)
+Entre deux images clés ¦ Giữa hai khung hình chính ¦ Di antara dua keyframe
+en douceur ¦ nhẹ nhàng ¦ halus
+régulier ¦ đều đặn ¦ rata
+Exporter un fichier (et, si tu veux, une copie dans les médias) ¦ Xuất một tệp (và nếu muốn, một bản sao vào tư liệu) ¦ Ekspor berkas (dan, jika mau, salinan ke media)
+Fabrique le fichier vidéo (MP4 ou WebM, plusieurs formats d’image) et le range dans les médias : nouvelle version, copie ou nouvelle vidéo ¦ Tạo tệp video (MP4 hoặc WebM, nhiều khổ hình) và xếp vào tư liệu: phiên bản mới, bản sao hoặc video mới ¦ Membuat berkas video (MP4 atau WebM, beberapa format gambar) dan menyimpannya di media: versi baru, salinan, atau video baru
+Fermer sans enregistrer les modifications ? ¦ Đóng mà không lưu các thay đổi? ¦ Tutup tanpa menyimpan perubahan?
+Fondu au blanc ¦ Mờ dần sang trắng ¦ Fade ke putih
+Fondu au noir ¦ Mờ dần sang đen ¦ Fade ke hitam
+Fondu d’entrée ¦ Hiện dần ¦ Fade masuk
+Fondu de sortie ¦ Mờ dần ¦ Fade keluar
+↗ Fondu d’entrée ¦ ↗ Hiện dần ¦ ↗ Fade masuk
+↘ Fondu de sortie ¦ ↘ Mờ dần ¦ ↘ Fade keluar
+Fondu en couleur (au choix) ¦ Mờ dần sang màu (tuỳ chọn) ¦ Fade ke warna (pilih sendiri)
+Fondu enchaîné ¦ Hoà cảnh ¦ Crossfade
+Fondu flou ¦ Chuyển cảnh nhoè ¦ Fade buram
+Genre (vidéo, photo, son) ¦ Loại (video, ảnh, âm thanh) ¦ Jenis (video, foto, suara)
+Glisse depuis la droite ¦ Trượt vào từ bên phải ¦ Meluncur dari kanan
+Glisse depuis la gauche ¦ Trượt vào từ bên trái ¦ Meluncur dari kiri
+Glisse sur l’onde pour sélectionner · clic = se placer · Espace = écouter · molette = défiler, Ctrl + molette = zoom ¦ Kéo trên sóng âm để chọn · nhấp = đặt vị trí · Phím cách = nghe · con lăn = cuộn, Ctrl + con lăn = thu phóng ¦ Seret di gelombang untuk memilih · klik = pindah ke sana · Spasi = dengarkan · roda gulir = gulir, Ctrl + roda gulir = zoom
+Glisse-le sur une piste de la frise ¦ Kéo nó vào một rãnh của dòng thời gian ¦ Seret ke salah satu trek di lini masa
+Glissement vers la droite ¦ Trượt sang phải ¦ Geser ke kanan
+Glissement vers la gauche (la suivante pousse) ¦ Trượt sang trái (cảnh sau đẩy cảnh trước) ¦ Geser ke kiri (yang berikutnya mendorong)
+Glissement vers le bas ¦ Trượt xuống ¦ Geser ke bawah
+Glissement vers le haut ¦ Trượt lên ¦ Geser ke atas
+Glisser pour élargir ou rétrécir le panneau (double-clic : largeur de départ) ¦ Kéo để nới rộng hoặc thu hẹp bảng (nhấp đúp: độ rộng ban đầu) ¦ Seret untuk melebarkan atau menyempitkan panel (klik dua kali: lebar semula)
+Graves ¦ Âm trầm ¦ Bass
+Tons moyens ¦ Âm trung ¦ Nada tengah
+Hauteur des pistes ¦ Chiều cao các rãnh ¦ Tinggi trek
+Taille des boutons des pistes ¦ Kích thước nút của các rãnh ¦ Ukuran tombol trek
+Image et son ¦ Hình và tiếng ¦ Gambar dan suara
+Images par seconde ¦ Khung hình mỗi giây ¦ Frame per detik
+Importe tes vidéos et photos dans l’onglet 🎞️ Rush, puis glisse-les sur la frise (ou « ＋ Vidéo / photo à la suite »). ¦ Hãy nhập video và ảnh của bạn vào thẻ 🎞️ Đoạn quay, rồi kéo chúng lên dòng thời gian (hoặc “＋ Video / ảnh nối tiếp”). ¦ Impor video dan fotomu di tab 🎞️ Klip, lalu seret ke lini masa (atau “＋ Video / foto berikutnya”).
+Inclinaison horizontale ¦ Nghiêng ngang ¦ Kemiringan horizontal
+Inclinaison verticale ¦ Nghiêng dọc ¦ Kemiringan vertikal
+Indique un nombre, par exemple 6 ou -3. ¦ Hãy nhập một số, ví dụ 6 hoặc -3. ¦ Masukkan angka, misalnya 6 atau -3.
+＋ Incrustation ¦ ＋ Lồng hình ¦ ＋ Sisipan
+＋ Incruster ¦ ＋ Lồng vào ¦ ＋ Sisipkan
+Une vidéo ou une photo dans un coin de l'image, à la tête de lecture ¦ Một video hoặc ảnh ở góc hình, tại đầu phát ¦ Video atau foto di sudut gambar, di kepala putar
+Une vidéo ou une photo, à la suite dans la piste Vidéo 1 ¦ Một video hoặc ảnh, nối tiếp trên rãnh Video 1 ¦ Video atau foto, menyambung di trek Video 1
+＋ Vidéo / photo à la suite ¦ ＋ Video / ảnh nối tiếp ¦ ＋ Video / foto berikutnya
+Vidéo / photo à la suite ¦ Video / ảnh nối tiếp ¦ Video / foto berikutnya
+Lecture ¦ Phát ¦ Putar
+Les modifications du montage seront perdues. ¦ Các thay đổi của bản dựng sẽ bị mất. ¦ Perubahan pada montase akan hilang.
+Les modifications du son seront perdues. ¦ Các thay đổi của âm thanh sẽ bị mất. ¦ Perubahan pada suara akan hilang.
+Les photos arrivent… ¦ Ảnh đang đến… ¦ Foto sedang dimuat…
+Les réglages s’appliquent à la sélection ; sans sélection, à tout le son. ¦ Cài đặt áp dụng cho phần đã chọn; nếu không chọn gì, cho toàn bộ âm thanh. ¦ Pengaturan berlaku untuk pilihan; tanpa pilihan, untuk seluruh suara.
+Les vidéos, photos et sons du projet ¦ Video, ảnh và âm thanh của dự án ¦ Video, foto, dan suara proyek
+Lettres qui se resserrent ¦ Chữ khép lại ¦ Huruf merapat
+Lettres qui s’écartent ¦ Chữ giãn ra ¦ Huruf merenggang
+Lissage du mouvement ¦ Làm mượt chuyển động ¦ Penghalusan gerak
+MODIFIER LE SON ¦ SỬA ÂM THANH ¦ UBAH SUARA
+MODÈLE DE MONTAGE ¦ MẪU DỰNG PHIM ¦ TEMPLAT MONTASE
+MONTAGE VIDÉO ¦ DỰNG VIDEO ¦ MONTASE VIDEO
+🎬 MONTAGE VIDÉO ¦ 🎬 DỰNG VIDEO ¦ 🎬 MONTASE VIDEO
+🎬 MONTAGE ¦ 🎬 DỰNG PHIM ¦ 🎬 MONTASE
+Mets la vidéo du fond vert au-dessus (incrustation, tout l’écran), et le décor (photo d’archive, autre vidéo) dessous, sur la piste 1. ¦ Đặt video phông xanh ở trên (lồng hình, toàn màn hình), và phông nền (ảnh lưu trữ, video khác) ở dưới, trên rãnh 1. ¦ Taruh video layar hijau di atas (sisipan, layar penuh), dan latarnya (foto arsip, video lain) di bawah, di trek 1.
+Mettre ce dossier dans un autre ¦ Đặt thư mục này vào một thư mục khác ¦ Taruh folder ini di folder lain
+Mode de fusion ¦ Chế độ hoà trộn ¦ Mode campuran
+Mon son ¦ Âm thanh của tôi ¦ Suaraku
+Mot par mot ¦ Từng chữ một ¦ Kata demi kata
+Musique pendant la voix ¦ Nhạc khi có giọng nói ¦ Musik saat ada suara
+Nom du fichier téléchargé ¦ Tên tệp tải xuống ¦ Nama berkas unduhan
+Non, nettoyer la sélection ¦ Không, làm sạch phần đã chọn ¦ Tidak, bersihkan pilihan
+Oui, c’est du bruit seul ¦ Có, chỉ là tiếng ồn ¦ Ya, ini hanya derau
+Nouveau dossier dans le dossier ouvert ¦ Thư mục mới trong thư mục đang mở ¦ Folder baru di folder yang terbuka
+Nouveau montage ¦ Bản dựng mới ¦ Montase baru
+Nouveau son enregistré, rattaché aux mêmes fiches. ¦ Đã lưu âm thanh mới, liên kết với cùng các hồ sơ. ¦ Suara baru disimpan, terhubung ke profil yang sama.
+Nouveau ⚡ Son rapide ¦ ⚡ Âm thanh nhanh mới ¦ ⚡ Suara cepat baru
+Nouvelle version montrée partout. L’original est gardé. ¦ Phiên bản mới hiển thị ở mọi nơi. Bản gốc được giữ. ¦ Versi baru ditampilkan di mana-mana. Yang asli disimpan.
+Nouvelle vidéo enregistrée, rattachée aux mêmes fiches. ¦ Đã lưu video mới, liên kết với cùng các hồ sơ. ¦ Video baru disimpan, terhubung ke profil yang sama.
+Version enregistrée (l’ancienne reste montrée). ¦ Đã lưu phiên bản (bản cũ vẫn được hiển thị). ¦ Versi disimpan (yang lama tetap ditampilkan).
+Ordre d’arrivée ¦ Thứ tự thêm vào ¦ Urutan masuk
+Trier les rushes ¦ Sắp xếp các đoạn quay ¦ Urutkan klip
+Outils du montage ¦ Công cụ dựng phim ¦ Alat montase
+Outils du son ¦ Công cụ âm thanh ¦ Alat suara
+Ouverture du son… ¦ Đang mở âm thanh… ¦ Membuka suara…
+Ouvrir ce dossier ¦ Mở thư mục này ¦ Buka folder ini
+Renommer ce dossier ¦ Đổi tên thư mục này ¦ Ganti nama folder ini
+Renommer ce rush ¦ Đổi tên đoạn quay này ¦ Ganti nama klip ini
+Ranger ce rush dans un dossier ¦ Xếp đoạn quay này vào một thư mục ¦ Simpan klip ini di folder
+Ouvrir un autre projet sans enregistrer ce son ? ¦ Mở dự án khác mà không lưu âm thanh này? ¦ Buka proyek lain tanpa menyimpan suara ini?
+Ouvrir un autre projet sans enregistrer celui-ci ? ¦ Mở dự án khác mà không lưu dự án này? ¦ Buka proyek lain tanpa menyimpan yang ini?
+Panneau des réglages ¦ Bảng cài đặt ¦ Panel pengaturan
+Part vers la droite ¦ Đi ra bên phải ¦ Keluar ke kanan
+Part vers la gauche ¦ Đi ra bên trái ¦ Keluar ke kiri
+Pas d’image clé après. ¦ Không có khung hình chính phía sau. ¦ Tidak ada keyframe sesudahnya.
+Pas d’image clé avant. ¦ Không có khung hình chính phía trước. ¦ Tidak ada keyframe sebelumnya.
+Passer dans l’autre colonne ¦ Chuyển sang cột bên kia ¦ Pindah ke kolom lain
+Pistes ¦ Rãnh ¦ Trek
+Plus chaud ¦ Ấm hơn ¦ Lebih hangat
+Plus froid ¦ Lạnh hơn ¦ Lebih dingin
+Projets de montage ¦ Dự án dựng phim ¦ Proyek montase
+Projets son ¦ Dự án âm thanh ¦ Proyek suara
+Préparation du fichier… ¦ Đang chuẩn bị tệp… ¦ Menyiapkan berkas…
+Qualité MP3 ¦ Chất lượng MP3 ¦ Kualitas MP3
+Que fait chaque outil ? ¦ Mỗi công cụ làm gì? ¦ Apa fungsi tiap alat?
+Raccourcir les blancs ¦ Rút ngắn khoảng lặng ¦ Pendekkan jeda hening
+⏩ Raccourcir les longs blancs ¦ ⏩ Rút ngắn các khoảng lặng dài ¦ ⏩ Pendekkan jeda hening yang panjang
+Rebondit puis disparaît ¦ Nảy lên rồi biến mất ¦ Memantul lalu menghilang
+Reculer le morceau dans la piste 1 ¦ Lùi đoạn lại trong rãnh 1 ¦ Mundurkan potongan di trek 1
+Rejoue ce texte depuis son début ¦ Phát lại đoạn chữ này từ đầu ¦ Putar ulang teks ini dari awal
+Remplir (recadre pour remplir) ¦ Lấp đầy (cắt khung để lấp đầy) ¦ Isi (dipangkas agar memenuhi)
+Rendre transparente la couleur du fond (fond vert ou bleu) : ce qui est dessous se voit ¦ Làm trong suốt màu nền (phông xanh lá hoặc xanh dương): thấy được phần bên dưới ¦ Jadikan warna latar transparan (layar hijau atau biru): yang di bawahnya jadi terlihat
+Roues de couleur ¦ Bánh xe màu ¦ Roda warna
+Rouvrir un montage enregistré ¦ Mở lại một bản dựng đã lưu ¦ Buka lagi montase yang disimpan
+Rouvrir un son en cours de travail ¦ Mở lại một âm thanh đang làm dở ¦ Buka lagi suara yang sedang dikerjakan
+Son 1 ¦ Âm thanh 1 ¦ Suara 1
+Son 2 ¦ Âm thanh 2 ¦ Suara 2
+🎵 Son 1 ¦ 🎵 Âm thanh 1 ¦ 🎵 Suara 1
+Vidéo 1 ¦ Video 1 ¦ Video 1
+Vidéo 2 ¦ Video 2 ¦ Video 2
+Textes 1 ¦ Chữ 1 ¦ Teks 1
+🔤 Textes 1 ¦ 🔤 Chữ 1 ¦ 🔤 Teks 1
+Son ajouté (il est sélectionné). ¦ Đã thêm âm thanh (đang được chọn). ¦ Suara ditambahkan (sedang dipilih).
+Son illisible ¦ Không đọc được âm thanh ¦ Suara tidak terbaca
+Vidéo illisible ¦ Không đọc được video ¦ Video tidak terbaca
+vidéo illisible ¦ không đọc được video ¦ video tidak terbaca
+son introuvable ¦ không tìm thấy âm thanh ¦ suara tidak ditemukan
+Sort du flou ¦ Hiện ra từ mờ ¦ Muncul dari buram
+Stabilisation annulée. ¦ Đã huỷ chống rung. ¦ Stabilisasi dibatalkan.
+Superposition claire (écran) ¦ Chồng lớp sáng (screen) ¦ Tumpukan terang (screen)
+Supprimer cette piste ¦ Xoá rãnh này ¦ Hapus trek ini
+Vider cette piste (elle reste, c’est la piste de base du film) ¦ Làm trống rãnh này (rãnh vẫn còn, đây là rãnh chính của phim) ¦ Kosongkan trek ini (treknya tetap ada, ini trek dasar film)
+Supprimer le projet (les vidéos et photos restent dans les Médias) ¦ Xoá dự án (video và ảnh vẫn ở trong Tư liệu) ¦ Hapus proyek (video dan foto tetap ada di Media)
+Sur la frise ¦ Trên dòng thời gian ¦ Di lini masa
+Surgit avec un rebond ¦ Bật ra và nảy lên ¦ Muncul dengan pantulan
+Tombe et rebondit ¦ Rơi xuống và nảy lên ¦ Jatuh lalu memantul
+S’ajoute aux réglages de chaque morceau (onglet 🎯 Élément → « 🔊 Son de ce morceau »). ¦ Cộng thêm vào cài đặt của từng đoạn (thẻ 🎯 Mục → “🔊 Âm thanh của đoạn này”). ¦ Ditambahkan ke pengaturan tiap potongan (tab 🎯 Item → “🔊 Suara potongan ini”).
+S’ajoutent aux couleurs de chaque morceau (onglet Élément). ¦ Cộng thêm vào màu của từng đoạn (thẻ Mục). ¦ Ditambahkan ke warna tiap potongan (tab Item).
+S’efface lettre par lettre ¦ Biến mất từng chữ cái ¦ Menghilang huruf demi huruf
+S’efface mot par mot ¦ Biến mất từng chữ một ¦ Menghilang kata demi kata
+Température (froid ↔ chaud) ¦ Nhiệt độ màu (lạnh ↔ ấm) ¦ Suhu warna (dingin ↔ hangat)
+Titre / texte ¦ Tiêu đề / chữ ¦ Judul / teks
+＋ Titre / texte ¦ ＋ Tiêu đề / chữ ¦ ＋ Judul / teks
+Son / musique ¦ Âm thanh / nhạc ¦ Suara / musik
+Tout reste modifiable ensuite. ¦ Mọi thứ vẫn sửa được sau đó. ¦ Semuanya tetap bisa diubah nanti.
+Transformer ¦ Biến đổi ¦ Transformasi
+Transition avant ¦ Chuyển cảnh phía trước ¦ Transisi sebelumnya
+Type ¦ Kiểu ¦ Jenis
+Un chapitre commence à la tête de lecture ¦ Một chương bắt đầu tại đầu phát ¦ Bab dimulai di kepala putar
+Chapitre ici ¦ Chương ở đây ¦ Bab di sini
+Un chapitre par grande étape ¦ Một chương cho mỗi giai đoạn lớn ¦ Satu bab per tahap besar
+Un sous-titre de 3 s à la tête de lecture, sur la piste « Sous-titres » ¦ Một phụ đề 3 giây tại đầu phát, trên rãnh “Phụ đề” ¦ Subtitle 3 detik di kepala putar, di trek “Subtitle”
+Sous-titre ici ¦ Phụ đề ở đây ¦ Subtitle di sini
+Une petite vidéo dans un coin, réglable ¦ Một video nhỏ ở góc, điều chỉnh được ¦ Video kecil di sudut, bisa diatur
+Une piste texte reçoit des titres (« ＋ Titre / texte »). ¦ Rãnh chữ dùng cho tiêu đề (“＋ Tiêu đề / chữ”). ¦ Trek teks menampung judul (“＋ Judul / teks”).
+Vidéos, photos ou sons de l’ordinateur (plusieurs à la fois), rangés dans le dossier ouvert ¦ Video, ảnh hoặc âm thanh từ máy tính (nhiều cái cùng lúc), xếp vào thư mục đang mở ¦ Video, foto, atau suara dari komputer (beberapa sekaligus), disimpan di folder yang terbuka
+Voix off ¦ Lời dẫn ¦ Sulih suara
+🎙 Voix off ¦ 🎙 Lời dẫn ¦ 🎙 Sulih suara
+⏹ Arrêter la voix off ¦ ⏹ Dừng lời dẫn ¦ ⏹ Hentikan sulih suara
+Volet de droite à gauche ¦ Lật từ phải sang trái ¦ Sapuan dari kanan ke kiri
+Volet de gauche à droite ¦ Lật từ trái sang phải ¦ Sapuan dari kiri ke kanan
+Volet en cercle (iris) ¦ Lật hình tròn (iris) ¦ Sapuan lingkaran (iris)
+Volume général ¦ Âm lượng chung ¦ Volume keseluruhan
+WebM — léger ¦ WebM — nhẹ ¦ WebM — ringan
+Zoom ¦ Thu phóng ¦ Zoom
+Zoom arrière sur la frise ¦ Thu nhỏ dòng thời gian ¦ Perkecil lini masa
+Zoom avant sur la frise ¦ Phóng to dòng thời gian ¦ Perbesar lini masa
+Zoom avant à travers ¦ Phóng to xuyên qua ¦ Zoom menembus
+Zoom de la frise ¦ Thu phóng dòng thời gian ¦ Zoom lini masa
+Zoomer sur la sélection ¦ Phóng to phần đã chọn ¦ Perbesar pilihan
+bandes floues au lieu des bandes noires (la même image, floutée, derrière) ¦ dải mờ thay vì dải đen (cùng hình ảnh, làm mờ, ở phía sau) ¦ pita buram, bukan pita hitam (gambar yang sama, dibuat buram, di belakang)
+centré ¦ giữa ¦ di tengah
+ces boutons ¦ các nút này ¦ tombol-tombol ini
+cette disposition ¦ bố cục này ¦ tata letak ini
+commence par un fondu depuis le noir ¦ bắt đầu bằng hiệu ứng hiện dần từ màu đen ¦ dimulai dengan fade dari hitam
+finit par un fondu au noir ¦ kết thúc bằng hiệu ứng mờ dần sang đen ¦ diakhiri dengan fade ke hitam
+effet Ken Burns sur toutes les photos (zoom et glissement lents, variés) ¦ hiệu ứng Ken Burns trên mọi ảnh (thu phóng và trượt chậm, đa dạng) ¦ efek Ken Burns di semua foto (zoom dan geser pelan, bervariasi)
+la musique baisse toute seule pendant une voix ¦ nhạc tự nhỏ lại khi có giọng nói ¦ musik mengecil sendiri saat ada suara orang
+… et aussi pendant le son des vidéos de la piste 1 ¦ … và cả khi có âm thanh của video trên rãnh 1 ¦ … dan juga saat ada suara video di trek 1
+le montage est vide ¦ bản dựng đang trống ¦ montase masih kosong
+l’image tremble un peu, comme dans un vieux projecteur ¦ hình hơi rung, như trong máy chiếu cũ ¦ gambar sedikit bergetar, seperti di proyektor lama
+sépia (couleurs passées, brunes) ¦ nâu đỏ (màu phai, ngả nâu) ¦ sepia (warna pudar, kecokelatan)
+pas de sélection ¦ chưa chọn gì ¦ tidak ada pilihan
+plusieurs formats, nouvelle version ¦ nhiều định dạng, phiên bản mới ¦ beberapa format, versi baru
+sans les blancs, voix plus nette… ¦ bỏ khoảng lặng, giọng rõ hơn… ¦ tanpa jeda hening, suara lebih jernih…
+« 🔖 Chapitre ici » pose un chapitre à la tête de lecture. ¦ “🔖 Chương ở đây” đặt một chương tại đầu phát. ¦ “🔖 Bab di sini” menaruh bab di kepala putar.
+· tire le point vers une couleur, double-clic pour revenir ¦ · kéo điểm về phía một màu, nhấp đúp để trở lại ¦ · tarik titik ke arah suatu warna, klik dua kali untuk kembali
+À la suite dans Vidéo 1 ¦ Nối tiếp trên Video 1 ¦ Menyambung di Video 1
+＋ À la suite ¦ ＋ Nối tiếp ¦ ＋ Menyambung
+＋ Son seul ¦ ＋ Chỉ âm thanh ¦ ＋ Suara saja
+Échelle (tout) ¦ Tỉ lệ (tất cả) ¦ Skala (semua)
+Échelle X ¦ Tỉ lệ X ¦ Skala X
+Échelle Y ¦ Tỉ lệ Y ¦ Skala Y
+Écouter, comparer, montrer partout, renommer, supprimer ¦ Nghe, so sánh, hiển thị ở mọi nơi, đổi tên, xoá ¦ Dengarkan, bandingkan, tampilkan di mana-mana, ganti nama, hapus
+↻ Refaire l’analyse ¦ ↻ Phân tích lại ¦ ↻ Analisis ulang
+⌨️ Raccourcis du montage ¦ ⌨️ Phím tắt dựng phim ¦ ⌨️ Pintasan montase
+▣ Dans un coin ¦ ▣ Ở một góc ¦ ▣ Di sudut
+⛶ Tout l’écran ¦ ⛶ Toàn màn hình ¦ ⛶ Layar penuh
+▶ Lire ¦ ▶ Phát ¦ ▶ Putar
+▶ Lire / pause ¦ ▶ Phát / tạm dừng ¦ ▶ Putar / jeda
+✂️ Modifier un son ouvre ¦ ✂️ Sửa một âm thanh sẽ mở ¦ ✂️ Ubah suara membuka
+⬅️ Glisse vers la gauche ¦ ⬅️ Trượt sang trái ¦ ⬅️ Meluncur ke kiri
+➡️ Glisse vers la droite ¦ ➡️ Trượt sang phải ¦ ➡️ Meluncur ke kanan
+⬆️ Monte ¦ ⬆️ Đi lên ¦ ⬆️ Naik
+⬇️ Descend ¦ ⬇️ Đi xuống ¦ ⬇️ Turun
+⤒ Importer des rushes (vidéos, photos, sons)… ¦ ⤒ Nhập đoạn quay (video, ảnh, âm thanh)… ¦ ⤒ Impor klip (video, foto, suara)…
+⤒ Importer des sous-titres (.srt, .vtt)… ¦ ⤒ Nhập phụ đề (.srt, .vtt)… ¦ ⤒ Impor subtitle (.srt, .vtt)…
+⬚ Garder seulement la sélection ¦ ⬚ Chỉ giữ phần đã chọn ¦ ⬚ Simpan pilihan saja
+〰️ Enlever le bourdonnement ¦ 〰️ Bỏ tiếng ù ¦ 〰️ Buang dengung
+＋ Ajouter un son… ¦ ＋ Thêm âm thanh… ¦ ＋ Tambah suara…
+＋ Piste texte ¦ ＋ Rãnh chữ ¦ ＋ Trek teks
+🎙 Musique et voix ¦ 🎙 Nhạc và giọng nói ¦ 🎙 Musik dan suara
+🎛️ Réglages de l’image ¦ 🎛️ Cài đặt hình ảnh ¦ 🎛️ Pengaturan gambar
+🎞️ Film ¦ 🎞️ Phim ¦ 🎞️ Film
+🎞️ Rush ¦ 🎞️ Đoạn quay ¦ 🎞️ Klip
+🎞️ Rushes ¦ 🎞️ Đoạn quay ¦ 🎞️ Klip
+🎯 Élément ¦ 🎯 Mục ¦ 🎯 Item
+🎞️ Vieux film (ce morceau) ¦ 🎞️ Phim cũ (đoạn này) ¦ 🎞️ Film lawas (potongan ini)
+🎞️ Vieux film (tout le film) ¦ 🎞️ Phim cũ (cả phim) ¦ 🎞️ Film lawas (seluruh film)
+🎧 Mono ¦ 🎧 Mono ¦ 🎧 Mono
+🎧 Mono (le même son des deux côtés) ¦ 🎧 Mono (cùng một âm thanh ở cả hai bên) ¦ 🎧 Mono (suara yang sama di kedua sisi)
+🎧 SON ¦ 🎧 ÂM THANH ¦ 🎧 SUARA
+🎨 Couleurs de ce morceau ¦ 🎨 Màu của đoạn này ¦ 🎨 Warna potongan ini
+🎨 Couleurs de tout le film ¦ 🎨 Màu của cả phim ¦ 🎨 Warna seluruh film
+🎬 Disposition du montage ¦ 🎬 Bố cục dựng phim ¦ 🎬 Tata letak montase
+🎯 Vectorscope et histogramme ¦ 🎯 Vectorscope và biểu đồ tần suất ¦ 🎯 Vectorscope dan histogram
+🎲 Automatique (varié) ¦ 🎲 Tự động (đa dạng) ¦ 🎲 Otomatis (bervariasi)
+💾 Garder dans les médias… ¦ 💾 Giữ trong tư liệu… ¦ 💾 Simpan di media…
+📁＋ Dossier ¦ 📁＋ Thư mục ¦ 📁＋ Folder
+📏 Normaliser ¦ 📏 Chuẩn hoá ¦ 📏 Normalisasi
+📐 Format de l’image ¦ 📐 Khổ hình ¦ 📐 Format gambar
+📢 Volume standard (LUFS)… ¦ 📢 Âm lượng chuẩn (LUFS)… ¦ 📢 Volume standar (LUFS)…
+📱 Téléphone 9:16 (vertical) ¦ 📱 Điện thoại 9:16 (dọc) ¦ 📱 Ponsel 9:16 (tegak)
+📺 Ancien écran 4:3 ¦ 📺 Màn hình cũ 4:3 ¦ 📺 Layar lama 4:3
+🖥️ Écran 16:9 ¦ 🖥️ Màn hình 16:9 ¦ 🖥️ Layar 16:9
+🖼️ Portrait 4:5 (réseaux) ¦ 🖼️ Chân dung 4:5 (mạng xã hội) ¦ 🖼️ Potret 4:5 (media sosial)
+🖼️ Vidéos incrustées ¦ 🖼️ Video lồng hình ¦ 🖼️ Video sisipan
+🔇 Sans le son ¦ 🔇 Không có tiếng ¦ 🔇 Tanpa suara
+🔇 Sans son ¦ 🔇 Không tiếng ¦ 🔇 Tanpa suara
+🔇 Silence ¦ 🔇 Im lặng ¦ 🔇 Hening
+🔊 Volume… ¦ 🔊 Âm lượng… ¦ 🔊 Volume…
+🔖 Chapitres ¦ 🔖 Chương ¦ 🔖 Bab
+🖼️ Photos ¦ 🖼️ Ảnh ¦ 🖼️ Foto
+🗂 De la base ¦ 🗂 Từ cơ sở dữ liệu ¦ 🗂 Dari basis data
+🗣️ Voix plus nette ¦ 🗣️ Giọng rõ hơn ¦ 🗣️ Suara lebih jernih
+🟩 Fond vert (incrustation) ¦ 🟩 Phông xanh (lồng hình) ¦ 🟩 Layar hijau (sisipan)
+🧲 Aimanter ¦ 🧲 Bắt dính ¦ 🧲 Tempelkan
+Aimanter ¦ Bắt dính ¦ Tempelkan
+🧹 Moins de souffle et de grondement ¦ 🧹 Bớt tiếng xì và tiếng rền ¦ 🧹 Kurangi desis dan gemuruh
+🧹 Réduire le souffle ¦ 🧹 Giảm tiếng xì ¦ 🧹 Kurangi desis
+🪄 « La vie de… » ¦ 🪄 “Cuộc đời của…” ¦ 🪄 “Kisah hidup…”
+🪄 « Une famille » ¦ 🪄 “Một gia đình” ¦ 🪄 “Sebuah keluarga”
+{what}, et rangés dans les médias. ¦ {what}, và đã xếp vào tư liệu. ¦ {what}, dan disimpan di media.
+=fichier téléchargé ¦ tệp đã tải xuống ¦ berkas diunduh
+Fichier téléchargé, et une copie est rangée dans les médias. ¦ Đã tải xuống tệp, và một bản sao đã được xếp vào tư liệu. ¦ Berkas diunduh, dan salinannya disimpan di media.
+{dur} · {ch} · {khz} kHz · sonie {lufs} LUFS · crête {pk} dB ¦ {dur} · {ch} · {khz} kHz · độ to {lufs} LUFS · đỉnh {pk} dB ¦ {dur} · {ch} · {khz} kHz · kenyaringan {lufs} LUFS · puncak {pk} dB
+{dur} · {ch} · {khz} kHz · crête {pk} dB · sonie <span data-as-lufs>…</span> ¦ {dur} · {ch} · {khz} kHz · đỉnh {pk} dB · độ to <span data-as-lufs>…</span> ¦ {dur} · {ch} · {khz} kHz · puncak {pk} dB · kenyaringan <span data-as-lufs>…</span>
+Chaque zone dans un fichier ({n}) ¦ Mỗi vùng một tệp ({n}) ¦ Tiap zona dalam satu berkas ({n})
+Chaque piste dans un fichier ({n}) ¦ Mỗi rãnh một tệp ({n}) ¦ Tiap trek dalam satu berkas ({n})
+Comme l’original (stéréo) ¦ Như bản gốc (stereo) ¦ Seperti aslinya (stereo)
+Comme l’original (mono) ¦ Như bản gốc (mono) ¦ Seperti aslinya (mono)
+Comme l’original ({n} kHz) ¦ Như bản gốc ({n} kHz) ¦ Seperti aslinya ({n} kHz)
+Relier « {name} » à une personne… ¦ Liên kết “{name}” với một người… ¦ Hubungkan “{name}” ke seseorang…
+Relier « {name} » à une personne ¦ Liên kết “{name}” với một người ¦ Hubungkan “{name}” ke seseorang
+Relier « {name} » à un événement ¦ Liên kết “{name}” với một sự kiện ¦ Hubungkan “{name}” ke sebuah peristiwa
+Relier « {name} » à {what} ¦ Liên kết “{name}” với {what} ¦ Hubungkan “{name}” ke {what}
+Relier « {name} » ¦ Liên kết “{name}” ¦ Hubungkan “{name}”
+Insérer « {name} » ¦ Chèn “{name}” ¦ Sisipkan “{name}”
+Enregistrement au micro ({time}) ¦ Thu âm qua micro ({time}) ¦ Rekaman mikrofon ({time})
+🎛️ Rack d’effets ¦ 🎛️ Giá hiệu ứng ¦ 🎛️ Rak efek
+Rack d’effets ¦ Giá hiệu ứng ¦ Rak efek
+=effet ¦ hiệu ứng ¦ efek
+Rallumer ¦ Bật lại ¦ Nyalakan lagi
+Éteindre ¦ Tắt ¦ Matikan
+Rallumer l’effet ¦ Bật lại hiệu ứng ¦ Nyalakan lagi efek
+Éteindre l’effet ¦ Tắt hiệu ứng ¦ Matikan efek
+Rallumer {what} ¦ Bật lại {what} ¦ Nyalakan lagi {what}
+Éteindre {what} ¦ Tắt {what} ¦ Matikan {what}
+Retirer {what} ¦ Gỡ {what} ra ¦ Lepas {what}
+Effet « {name} » retiré ¦ Đã gỡ hiệu ứng “{name}” ¦ Efek “{name}” dilepas
+Réglages « {name} » ¦ Cài đặt “{name}” ¦ Pengaturan “{name}”
+Égaliseur : {what} ¦ Bộ cân bằng: {what} ¦ Ekualiser: {what}
+à plat ¦ phẳng ¦ datar
+Empreinte : {a} → {b} ({n} s de bruit choisi). ¦ Mẫu tiếng ồn: {a} → {b} ({n} giây tiếng ồn đã chọn). ¦ Sidik derau: {a} → {b} ({n} detik derau yang dipilih).
+Empreinte : {a} → {b} ({n} s de bruit seul, trouvé tout seul). ¦ Mẫu tiếng ồn: {a} → {b} ({n} giây chỉ có tiếng ồn, tự tìm thấy). ¦ Sidik derau: {a} → {b} ({n} detik derau saja, ditemukan otomatis).
+Réverbération : {what} ¦ Tiếng vang: {what} ¦ Gema: {what}
+{n} Hz (trouvé) ¦ {n} Hz (đã tìm thấy) ¦ {n} Hz (ditemukan)
+Trouver tout seul ¦ Tự tìm ¦ Cari otomatis
+Forme du fondu d’entrée ¦ Dạng hiện dần ¦ Bentuk fade masuk
+Forme du fondu de sortie ¦ Dạng mờ dần ¦ Bentuk fade keluar
+Forme du fondu ¦ Dạng chuyển mờ ¦ Bentuk fade
+{what} au pinceau. ¦ {what} bằng cọ. ¦ {what} dengan kuas.
+=zone réparée ¦ vùng đã sửa ¦ zona diperbaiki
+=réparation au pinceau ¦ lần sửa bằng cọ ¦ perbaikan dengan kuas
+Seulement sur {a} → {b} ¦ Chỉ trên {a} → {b} ¦ Hanya pada {a} → {b}
+Renommer « {name} » ¦ Đổi tên “{name}” ¦ Ganti nama “{name}”
+Écouter « {name} » ¦ Nghe “{name}” ¦ Dengarkan “{name}”
+Fichier introuvable ¦ Không tìm thấy tệp ¦ Berkas tidak ditemukan
+Prise micro du {date} ¦ Thu micro ngày {date} ¦ Rekaman mikrofon tanggal {date}
+Glisse = sélectionner · <kbd>Espace</kbd> écouter · <kbd>⌘</kbd> et molette : zoom · <kbd>M</kbd> marqueur · <kbd>A</kbd> maintenu : l’avant ¦ Kéo = chọn · <kbd>Phím cách</kbd> nghe · <kbd>⌘</kbd> và con lăn: thu phóng · <kbd>M</kbd> đánh dấu · giữ <kbd>A</kbd>: bản trước ¦ Seret = pilih · <kbd>Spasi</kbd> dengarkan · <kbd>⌘</kbd> dan roda gulir: zoom · <kbd>M</kbd> penanda · tahan <kbd>A</kbd>: versi sebelum
+Glisse sur l’onde pour sélectionner ; clic = se placer ; ⇧ ← → agrandit la sélection. ¦ Kéo trên sóng âm để chọn; nhấp = đặt vị trí; ⇧ ← → mở rộng phần đã chọn. ¦ Seret di gelombang untuk memilih; klik = pindah ke sana; ⇧ ← → memperluas pilihan.
+Peins sur la tache du spectre (toux, sonnerie), puis « 🩹 Réparer ». Taille : le curseur. ¦ Tô lên vết trên phổ âm (tiếng ho, tiếng chuông), rồi bấm “🩹 Sửa”. Kích thước: thanh trượt. ¦ Kuas noda di spektrum (batuk, dering), lalu “🩹 Perbaiki”. Ukuran: penggeser.
+Entoure la tache sur le spectre, puis « 🩹 Réparer ». ¦ Khoanh vùng vết trên phổ âm, rồi bấm “🩹 Sửa”. ¦ Lingkari noda di spektrum, lalu “🩹 Perbaiki”.
+Clic sur l’onde : un marqueur 🚩 à cet endroit. ¦ Nhấp vào sóng âm: một dấu 🚩 tại chỗ đó. ¦ Klik gelombang: penanda 🚩 di tempat itu.
+Multipiste : clic sur un morceau pour le couper en deux. Sur l’onde : supprime la sélection. ¦ Đa rãnh: nhấp vào một đoạn để cắt làm đôi. Trên sóng âm: xoá phần đã chọn. ¦ Multitrek: klik potongan untuk membelahnya dua. Di gelombang: hapus pilihan.
+Garde <kbd>A</kbd> appuyée pour entendre l’avant, au même endroit. ¦ Giữ phím <kbd>A</kbd> để nghe bản trước, ở cùng chỗ. ¦ Tahan <kbd>A</kbd> untuk mendengar versi sebelum, di tempat yang sama.
+{name} — {what} (prêt) ¦ {name} — {what} (sẵn sàng) ¦ {name} — {what} (siap)
+{time} au début ¦ {time} ở đầu ¦ {time} di awal
+{time} à la fin ¦ {time} ở cuối ¦ {time} di akhir
+Les zones hachurées seront coupées ({what}). ¦ Các vùng gạch chéo sẽ bị cắt ({what}). ¦ Zona yang diarsir akan dipotong ({what}).
+Glisse les poignées noires pour changer. ¦ Kéo các tay cầm màu đen để thay đổi. ¦ Seret pegangan hitam untuk mengubah.
+le « mmm » du courant (trouvé tout seul : {n} Hz) ¦ tiếng “ù” của dòng điện (tự tìm thấy: {n} Hz) ¦ dengung “mmm” listrik (ditemukan otomatis: {n} Hz)
+le « mmm » du courant (aucun trouvé : 50 Hz par défaut) ¦ tiếng “ù” của dòng điện (không tìm thấy: mặc định 50 Hz) ¦ dengung “mmm” listrik (tidak ditemukan: bawaan 50 Hz)
+le « mmm » du courant ¦ tiếng “ù” của dòng điện ¦ dengung “mmm” listrik
+le « chhh » de la cassette ¦ tiếng “xì” của băng cát-xét ¦ desis “sss” kaset
+plus de {n} s → 0,5 s ¦ hơn {n} giây → 0,5 giây ¦ lebih dari {n} detik → 0,5 detik
+{name} (nettoyé) ¦ {name} (đã làm sạch) ¦ {name} (dibersihkan)
+Couper la fin ({time}) ¦ Cắt phần cuối ({time}) ¦ Potong bagian akhir ({time})
+Couper le début ({time}) ¦ Cắt phần đầu ({time}) ¦ Potong bagian awal ({time})
+Nettoyer « {name} » à la place ? ¦ Thay vào đó, làm sạch “{name}”? ¦ Bersihkan “{name}” saja?
+Ouvrir ce son ¦ Mở âm thanh này ¦ Buka suara ini
+Un ronflement du courant a été trouvé ({n} Hz) : il est enlevé, avec les clics. Écoute la différence. ¦ Đã tìm thấy tiếng ù của dòng điện ({n} Hz): nó đã được bỏ đi, cùng với các tiếng lách cách. Hãy nghe sự khác biệt. ¦ Dengung listrik ditemukan ({n} Hz): sudah dibuang, beserta bunyi kliknya. Dengarkan bedanya.
+son|piste ¦ rãnh ¦ trek
+baisse|de ¦ bớt ¦ sebesar
+retour en ¦ trở lại trong ¦ kembali dalam
+Piste de la voix ¦ Rãnh giọng nói ¦ Trek suara orang
+Piste qui baisse ¦ Rãnh được giảm ¦ Trek yang dikecilkan
+Baisse en dB ¦ Mức giảm (dB) ¦ Pengurangan dalam dB
+{name} : armée pour le micro ¦ {name}: đã sẵn sàng thu micro ¦ {name}: siap untuk mikrofon
+{name} : désarmée ¦ {name}: đã thôi sẵn sàng thu ¦ {name}: tidak lagi siap rekam
+Renommer la piste « {name} » ¦ Đổi tên rãnh “{name}” ¦ Ganti nama trek “{name}”
+{name} : courbe du panoramique ¦ {name}: đường cong cân bằng trái phải ¦ {name}: kurva panning
+{name} : courbe du volume ¦ {name}: đường cong âm lượng ¦ {name}: kurva volume
+Couper « {name} » à {time} ¦ Cắt “{name}” tại {time} ¦ Potong “{name}” pada {time}
+Déplacer « {name} » ¦ Di chuyển “{name}” ¦ Pindahkan “{name}”
+le morceau ¦ đoạn ¦ potongan
+{name} : point ajouté à {time} ¦ {name}: đã thêm điểm tại {time} ¦ {name}: titik ditambahkan pada {time}
+{name} : point retiré ¦ {name}: đã gỡ điểm ¦ {name}: titik dilepas
+Ajouter « {name} » sur {track} ¦ Thêm “{name}” vào {track} ¦ Tambah “{name}” di {track}
+Morceau « {name} » retiré ¦ Đã gỡ đoạn “{name}” ¦ Potongan “{name}” dilepas
+son ¦ âm thanh ¦ suara
+(mélange) ¦ (bản trộn) ¦ (campuran)
+Le son ouvert ici ¦ Âm thanh đang mở ở đây ¦ Suara yang dibuka di sini
+Le son tel qu’il est (garde la touche A appuyée) ¦ Âm thanh như hiện tại (giữ phím A) ¦ Suara apa adanya (tahan tombol A)
+Appliquer le rack pour de bon ¦ Áp dụng giá hiệu ứng vĩnh viễn ¦ Terapkan rak secara permanen
+Arme d’abord une piste avec ● (dans ses boutons M S ●). ¦ Trước hết hãy chuẩn bị thu một rãnh bằng ● (trong các nút M S ● của nó). ¦ Siapkan dulu satu trek dengan ● (di tombol M S ●-nya).
+Atténuer de ¦ Giảm bớt ¦ Kurangi sebesar
+Aucun effet ¦ Không có hiệu ứng ¦ Tidak ada efek
+Aucun effet : « ＋ Ajouter un effet », ou le menu Effets. ¦ Không có hiệu ứng: “＋ Thêm hiệu ứng”, hoặc menu Hiệu ứng. ¦ Tidak ada efek: “＋ Tambah efek”, atau menu Efek.
+Aucun marqueur ni zone : sélectionne un passage, puis « ＋ Nouvelle zone » (ou M). ¦ Không có dấu hay vùng nào: hãy chọn một đoạn, rồi “＋ Vùng mới” (hoặc M). ¦ Belum ada penanda atau zona: pilih satu bagian, lalu “＋ Zona baru” (atau M).
+Avant ou après ¦ Trước hoặc sau ¦ Sebelum atau sesudah
+Baisser la musique sous la voix ¦ Giảm nhạc khi có giọng nói ¦ Kecilkan musik saat ada suara orang
+Ne plus baisser la musique ¦ Không giảm nhạc nữa ¦ Jangan kecilkan musik lagi
+Bientôt : un moteur de reconnaissance qui tourne dans l’ordinateur (rien n’est envoyé sur Internet) ¦ Sắp có: một bộ nhận dạng giọng nói chạy ngay trên máy tính (không gửi gì lên Internet) ¦ Segera hadir: mesin pengenal yang berjalan di komputer (tidak ada yang dikirim ke Internet)
+Boucle ¦ Lặp lại ¦ Ulang
+Calcul des effets… ¦ Đang tính hiệu ứng… ¦ Menghitung efek…
+Ce fichier n’est pas un réglage du son. ¦ Tệp này không phải là cài đặt âm thanh. ¦ Berkas ini bukan pengaturan suara.
+Ce navigateur ne donne pas accès au micro. ¦ Trình duyệt này không cho dùng micro. ¦ Peramban ini tidak memberi akses ke mikrofon.
+Ce qui est dit ¦ Lời được nói ¦ Yang diucapkan
+Choisis d’abord une zone. ¦ Hãy chọn một vùng trước. ¦ Pilih zona dulu.
+Choisis une zone (à gauche ou au-dessus de l’onde), ou crée-en une : « ＋ Nouvelle zone ». ¦ Hãy chọn một vùng (bên trái hoặc phía trên sóng âm), hoặc tạo một vùng: “＋ Vùng mới”. ¦ Pilih zona (di kiri atau di atas gelombang), atau buat satu: “＋ Zona baru”.
+Clics et craquements ¦ Tiếng lách cách và tiếng rè ¦ Klik dan kresek
+Clique une étape pour y revenir ; les étapes grisées reviennent avec ↷. ¦ Nhấp vào một bước để quay lại; các bước màu xám sẽ trở lại bằng ↷. ¦ Klik satu langkah untuk kembali ke sana; langkah yang abu-abu kembali dengan ↷.
+Cliquer une heure fait écouter ce passage. Export en .txt, .srt, .vtt : ⤓ Exporter → 📝 Texte et repères. Le texte est cherchable dans la base. ¦ Nhấp vào một mốc giờ để nghe đoạn đó. Xuất ra .txt, .srt, .vtt: ⤓ Xuất → 📝 Văn bản và mốc. Có thể tìm văn bản trong cơ sở dữ liệu. ¦ Klik sebuah waktu untuk mendengar bagian itu. Ekspor ke .txt, .srt, .vtt: ⤓ Ekspor → 📝 Teks dan penanda. Teksnya bisa dicari di basis data.
+Copie nettoyée ajoutée aux mêmes fiches. ¦ Đã thêm bản sao đã làm sạch vào cùng các hồ sơ. ¦ Salinan yang dibersihkan ditambahkan ke profil yang sama.
+Copie séparée ajoutée aux mêmes fiches. ¦ Đã thêm bản sao riêng vào cùng các hồ sơ. ¦ Salinan terpisah ditambahkan ke profil yang sama.
+Couper le début et la fin ¦ Cắt phần đầu và phần cuối ¦ Potong bagian awal dan akhir
+Couper un morceau en deux (multipiste) ; sur l’onde : supprimer la sélection ¦ Cắt một đoạn làm đôi (đa rãnh); trên sóng âm: xoá phần đã chọn ¦ Belah potongan jadi dua (multitrek); di gelombang: hapus pilihan
+Crête ¦ Đỉnh ¦ Puncak
+Effacer le dessin ¦ Xoá nét vẽ ¦ Hapus coretan
+× Effacer le dessin ¦ × Xoá nét vẽ ¦ × Hapus coretan
+Empreinte du bruit ¦ Mẫu tiếng ồn ¦ Sidik derau
+En S ¦ Hình chữ S ¦ Bentuk S
+Rapide ¦ Nhanh ¦ Cepat
+Lente ¦ Chậm ¦ Lambat
+🏠 Pièce ¦ 🏠 Căn phòng ¦ 🏠 Ruangan
+⛪ Église ¦ ⛪ Nhà thờ ¦ ⛪ Gereja
+🎭 Salle ¦ 🎭 Hội trường ¦ 🎭 Aula
+🧱 Cave ¦ 🧱 Hầm ¦ 🧱 Ruang bawah tanah
+Enlever le bourdonnement ¦ Bỏ tiếng ù ¦ Buang dengung
+Enregistrer au micro ¦ Thu qua micro ¦ Rekam lewat mikrofon
+● Enregistrer au micro ¦ ● Thu qua micro ¦ ● Rekam lewat mikrofon
+🎙️ Enregistrer au micro ¦ 🎙️ Thu qua micro ¦ 🎙️ Rekam lewat mikrofon
+Enregistrer au micro (au repère orange ; en multipiste : sur la piste armée ●) ¦ Thu qua micro (tại mốc màu cam; ở chế độ đa rãnh: trên rãnh đã sẵn sàng ●) ¦ Rekam lewat mikrofon (di penanda oranye; di multitrek: di trek yang siap ●)
+Enregistrer dans les médias ¦ Lưu vào tư liệu ¦ Simpan ke media
+Enregistrer et afficher cette version (l’original est gardé) ¦ Lưu và hiển thị phiên bản này (bản gốc được giữ) ¦ Simpan dan tampilkan versi ini (yang asli disimpan)
+Enregistrer le projet son (rack, zones, pistes), pour y revenir ¦ Lưu dự án âm thanh (giá hiệu ứng, vùng, rãnh) để quay lại sau ¦ Simpan proyek suara (rak, zona, trek) untuk dilanjutkan nanti
+Enregistrer le projet sous… ¦ Lưu dự án thành… ¦ Simpan proyek sebagai…
+Exporter : MP3, M4A, WAV, FLAC, Ogg, AIFF, texte et repères ¦ Xuất: MP3, M4A, WAV, FLAC, Ogg, AIFF, văn bản và mốc ¦ Ekspor: MP3, M4A, WAV, FLAC, Ogg, AIFF, teks dan penanda
+Exporter ce passage… ¦ Xuất đoạn này… ¦ Ekspor bagian ini…
+Exporter un fichier (MP3, WAV, FLAC…), et si tu veux une copie dans les médias ¦ Xuất một tệp (MP3, WAV, FLAC…), và nếu muốn, một bản sao vào tư liệu ¦ Ekspor berkas (MP3, WAV, FLAC…), dan jika mau, salinan ke media
+Fichiers ¦ Tệp ¦ Berkas
+Fort ¦ Mạnh ¦ Kuat
+Moyen ¦ Vừa ¦ Sedang
+Garde ¦ Giữ ¦ Tahan
+Garder seulement la sélection ¦ Chỉ giữ phần đã chọn ¦ Simpan pilihan saja
+Gardée dans les versions, le son affiché ne change pas ¦ Được giữ trong các phiên bản, âm thanh đang hiển thị không đổi ¦ Disimpan di versi, suara yang ditampilkan tidak berubah
+Insérer un son… ¦ Chèn một âm thanh… ¦ Sisipkan suara…
+La fenêtre d’export n’est pas prête. ¦ Cửa sổ xuất chưa sẵn sàng. ¦ Jendela ekspor belum siap.
+L’export n’est pas encore prêt. ¦ Việc xuất chưa sẵn sàng. ¦ Ekspor belum siap.
+La sélection ¦ Phần đã chọn ¦ Pilihan
+Lasso de réparation ¦ Dây khoanh để sửa ¦ Laso perbaikan
+Lasso de réparation (sur le spectre) ¦ Dây khoanh để sửa (trên phổ âm) ¦ Laso perbaikan (di spektrum)
+➰ Lasso de réparation ¦ ➰ Dây khoanh để sửa ¦ ➰ Laso perbaikan
+Pinceau de réparation ¦ Cọ sửa ¦ Kuas perbaikan
+Pinceau de réparation (sur le spectre) ¦ Cọ sửa (trên phổ âm) ¦ Kuas perbaikan (di spektrum)
+🖌 Pinceau de réparation ¦ 🖌 Cọ sửa ¦ 🖌 Kuas perbaikan
+Les boutons ¦ Các nút ¦ Tombol
+Les réglages du son seront perdus. ¦ Các cài đặt âm thanh sẽ bị mất. ¦ Pengaturan suara akan hilang.
+Lire la sélection en boucle ¦ Phát lặp phần đã chọn ¦ Putar pilihan berulang
+🔁 Lire en boucle ¦ 🔁 Phát lặp ¦ 🔁 Putar berulang
+🐢 Lire à 75 % ¦ 🐢 Phát ở 75 % ¦ 🐢 Putar pada 75 %
+Marqueur ici ¦ Dấu ở đây ¦ Penanda di sini
+🚩 Marqueur ici ¦ 🚩 Dấu ở đây ¦ 🚩 Penanda di sini
+Marqueurs et zones ¦ Dấu và vùng ¦ Penanda dan zona
+Zones et marqueurs ¦ Vùng và dấu ¦ Zona dan penanda
+Mono ¦ Mono ¦ Mono
+Stéréo ¦ Stereo ¦ Stereo
+Nettoyer ¦ Làm sạch ¦ Bersihkan
+Nettoyer le souffle ¦ Làm sạch tiếng xì ¦ Bersihkan desis
+Nom du projet son ¦ Tên dự án âm thanh ¦ Nama proyek suara
+Nom du son ¦ Tên âm thanh ¦ Nama suara
+Nouvelle piste ¦ Rãnh mới ¦ Trek baru
+Nouvelle version affichée partout. L’original est gardé. ¦ Phiên bản mới hiển thị ở mọi nơi. Bản gốc được giữ. ¦ Versi baru ditampilkan di mana-mana. Yang asli disimpan.
+Version enregistrée (l’ancienne reste affichée). ¦ Đã lưu phiên bản (bản cũ vẫn được hiển thị). ¦ Versi disimpan (yang lama tetap ditampilkan).
+Nouvelle zone ¦ Vùng mới ¦ Zona baru
+Ouverture ¦ Mở ra ¦ Pembukaan
+Ouvrir un autre projet sans enregistrer ? ¦ Mở dự án khác mà không lưu? ¦ Buka proyek lain tanpa menyimpan?
+Pause quand j’écris ¦ Tạm dừng khi tôi gõ ¦ Jeda saat saya mengetik
+Peins sur une tache (toux, sonnerie, porte), puis « 🩹 Réparer ». ¦ Tô lên một vết (tiếng ho, tiếng chuông, tiếng cửa), rồi bấm “🩹 Sửa”. ¦ Kuas sebuah noda (batuk, dering, pintu), lalu “🩹 Perbaiki”.
+Poser des marqueurs (clic sur l’onde) ¦ Đặt dấu (nhấp vào sóng âm) ¦ Pasang penanda (klik gelombang)
+🚩 Poser des marqueurs ¦ 🚩 Đặt dấu ¦ 🚩 Pasang penanda
+Raccourcir ¦ Rút ngắn ¦ Pendekkan
+Rendre agréable ¦ Làm cho dễ nghe ¦ Buat enak didengar
+Revenir au ⚡ Son rapide : ce qu’il sait montrer revient en boutons, le reste reste appliqué ¦ Quay về ⚡ Âm thanh nhanh: những gì nó hiển thị được sẽ trở lại thành nút, phần còn lại vẫn được áp dụng ¦ Kembali ke ⚡ Suara cepat: yang bisa ditampilkannya kembali jadi tombol, sisanya tetap diterapkan
+Réglages du Son rapide ¦ Cài đặt Âm thanh nhanh ¦ Pengaturan Suara cepat
+Réglages repris ¦ Đã lấy lại cài đặt ¦ Pengaturan diambil alih
+Seulement sur la sélection ¦ Chỉ trên phần đã chọn ¦ Hanya pada pilihan
+Silence ¦ Im lặng ¦ Hening
+Souffle, clics, bourdonnement, voix, volume et coupe du début et de la fin, d’un coup ¦ Tiếng xì, tiếng lách cách, tiếng ù, giọng nói, âm lượng và cắt đầu cuối, cùng một lúc ¦ Desis, klik, dengung, suara orang, volume, dan potong awal dan akhir, sekaligus
+✨ Tout nettoyer en une fois ¦ ✨ Làm sạch tất cả một lần ¦ ✨ Bersihkan semuanya sekaligus
+Spectre ¦ Phổ âm ¦ Spektrum
+Spectre : montrer / cacher ¦ Phổ âm: hiện / ẩn ¦ Spektrum: tampilkan / sembunyikan
+Sélection : glisser sur l’onde ¦ Chọn: kéo trên sóng âm ¦ Pilihan: seret di gelombang
+Tout le son : glisse le cadre pour te déplacer ¦ Toàn bộ âm thanh: kéo khung để di chuyển ¦ Seluruh suara: seret bingkai untuk berpindah
+Un autre son, rattaché aux mêmes fiches ¦ Một âm thanh khác, liên kết với cùng các hồ sơ ¦ Suara lain, terhubung ke profil yang sama
+Un ensemble prêt ne se supprime pas. ¦ Không thể xoá một bộ có sẵn. ¦ Set siap pakai tidak bisa dihapus.
+VU-mètres ¦ Đồng hồ VU ¦ VU meter
+Volume du morceau ¦ Âm lượng của đoạn ¦ Volume potongan
+Volume du morceau… ¦ Âm lượng của đoạn… ¦ Volume potongan…
+Zoom sur la sélection ¦ Phóng to phần đã chọn ¦ Perbesar pilihan
+Zoom vertical + ¦ Phóng to theo chiều dọc + ¦ Zoom vertikal +
+Zoom vertical − ¦ Thu nhỏ theo chiều dọc − ¦ Zoom vertikal −
+ces réglages du son ¦ các cài đặt âm thanh này ¦ pengaturan suara ini
+disque, bande abîmée ¦ đĩa, băng bị hỏng ¦ piringan, pita rusak
+les voix lointaines remontent, les cris baissent ¦ giọng ở xa được nâng lên, tiếng la hét được hạ xuống ¦ suara yang jauh naik, teriakan turun
+on comprend mieux les mots ¦ nghe rõ lời hơn ¦ kata-kata lebih mudah dipahami
+nouvelle version, copie ¦ phiên bản mới, bản sao ¦ versi baru, salinan
+trouvé tout seul, poignées sur l’onde ¦ tự tìm thấy, có tay cầm trên sóng âm ¦ ditemukan otomatis, pegangan di gelombang
+souffle, voix claire, volume égal ¦ tiếng xì, giọng rõ, âm lượng đều ¦ desis, suara jernih, volume rata
+souffle fort, voix, coupe des blancs ¦ tiếng xì mạnh, giọng nói, cắt khoảng lặng ¦ desis kuat, suara orang, potong jeda hening
+de-hum, égaliseur, limiteur ¦ khử ù, bộ cân bằng, bộ giới hạn ¦ hilangkan dengung, ekualiser, limiter
+📼 Cassette des années 70 ¦ 📼 Băng cát-xét thập niên 70 ¦ 📼 Kaset tahun 70-an
+🎙 Dictaphone ¦ 🎙 Máy ghi âm ¦ 🎙 Perekam suara
+💒 Vidéo de mariage 1987 ¦ 💒 Video đám cưới 1987 ¦ 💒 Video pernikahan 1987
+Écoute, puis « ⏱ Insérer l’heure » (⌘T) et tape ce qui est dit. ¦ Hãy nghe, rồi “⏱ Chèn giờ” (⌘T) và gõ lại những gì được nói. ¦ Dengarkan, lalu “⏱ Sisipkan waktu” (⌘T) dan ketik yang diucapkan.
+⏱ Insérer l’heure ¦ ⏱ Chèn giờ ¦ ⏱ Sisipkan waktu
+Écouter ce passage ¦ Nghe đoạn này ¦ Dengarkan bagian ini
+Écouter seulement le passage peint ¦ Chỉ nghe phần đã tô ¦ Dengarkan hanya bagian yang dikuas
+Écouter, comparer A / B, montrer partout, renommer, supprimer ¦ Nghe, so sánh A / B, hiển thị ở mọi nơi, đổi tên, xoá ¦ Dengarkan, bandingkan A / B, tampilkan di mana-mana, ganti nama, hapus
+ℹ️ Infos du son ¦ ℹ️ Thông tin âm thanh ¦ ℹ️ Info suara
+▶ Écouter / pause ¦ ▶ Nghe / tạm dừng ¦ ▶ Dengarkan / jeda
+▶ Écouter 10 s du résultat ¦ ▶ Nghe 10 giây kết quả ¦ ▶ Dengarkan 10 detik hasilnya
+✂️ Couper (dans le presse-papiers) ¦ ✂️ Cắt (vào bộ nhớ tạm) ¦ ✂️ Potong (ke papan klip)
+✂️ Couper un morceau (multipiste) ¦ ✂️ Cắt một đoạn (đa rãnh) ¦ ✂️ Belah potongan (multitrek)
+〰️ Forme d’onde ¦ 〰️ Dạng sóng ¦ 〰️ Bentuk gelombang
+＋ Ajouter un effet ▾ ¦ ＋ Thêm hiệu ứng ▾ ¦ ＋ Tambah efek ▾
+🎛️ Multipiste ¦ 🎛️ Đa rãnh ¦ 🎛️ Multitrek
+🎬 Ouvrir dans le montage ¦ 🎬 Mở trong dựng phim ¦ 🎬 Buka di montase
+👂 Écoute d’abord ¦ 👂 Nghe trước đã ¦ 👂 Dengarkan dulu
+👂 Écouter la zone ¦ 👂 Nghe vùng này ¦ 👂 Dengarkan zona
+📝 Transcription ¦ 📝 Bản chép lời ¦ 📝 Transkripsi
+🔗 Relier ce passage ¦ 🔗 Liên kết đoạn này ¦ 🔗 Hubungkan bagian ini
+🗣️ La voix ¦ 🗣️ Giọng nói ¦ 🗣️ Suara orang
+🤖 Transcrire tout seul (bientôt) ¦ 🤖 Tự chép lời (sắp có) ¦ 🤖 Transkripsi otomatis (segera hadir)
+½ ton ¦ ½ cung ¦ ½ nada
+Volume ¦ Âm lượng ¦ Volume
+Normaliser ¦ Chuẩn hoá ¦ Normalisasi
+Volume égal ¦ Âm lượng đều ¦ Volume rata
+Sonie visée ¦ Độ to mong muốn ¦ Kenyaringan sasaran
+Niveleur ¦ Bộ san bằng ¦ Leveler
+Fondus ¦ Chuyển mờ ¦ Fade
+Égaliseur graphique ¦ Bộ cân bằng đồ hoạ ¦ Ekualiser grafis
+Égaliseur paramétrique ¦ Bộ cân bằng tham số ¦ Ekualiser parametrik
+Égaliseurs ¦ Bộ cân bằng ¦ Ekualiser
+Filtre passe-haut / passe-bas ¦ Bộ lọc thông cao / thông thấp ¦ Filter high-pass / low-pass
+Passe-haut ¦ Thông cao ¦ High-pass
+Passe-bas ¦ Thông thấp ¦ Low-pass
+Compresseur ¦ Bộ nén ¦ Kompresor
+Dynamique ¦ Động lực ¦ Dinamika
+Rapport ¦ Tỉ số ¦ Rasio
+Attaque ¦ Thời gian bắt ¦ Attack
+Relâche ¦ Thời gian nhả ¦ Release
+Gain de sortie ¦ Độ lợi đầu ra ¦ Gain keluaran
+Limiteur ¦ Bộ giới hạn ¦ Limiter
+Placé en dernier dans le rack : plus jamais de son qui « crache ». ¦ Đặt cuối cùng trong giá hiệu ứng: không bao giờ còn tiếng bị “rè vỡ”. ¦ Ditaruh paling akhir di rak: tidak ada lagi suara yang “pecah”.
+Plafond ¦ Mức trần ¦ Plafon
+Réduction de bruit ¦ Giảm tiếng ồn ¦ Pengurangan derau
+Réduction ¦ Mức giảm ¦ Pengurangan
+N’écouter que le bruit enlevé ¦ Chỉ nghe tiếng ồn đã bỏ ¦ Dengarkan hanya derau yang dibuang
+De-clicker ¦ Khử tiếng lách cách ¦ De-clicker
+Clics ¦ Tiếng lách cách ¦ Klik
+De-hum ¦ Khử tiếng ù ¦ De-hum
+Harmoniques ¦ Hài âm ¦ Harmonik
+De-esser ¦ Khử âm xuýt ¦ De-esser
+Sifflantes ¦ Âm xuýt ¦ Desis huruf S
+Baisser jusqu’à ¦ Giảm xuống đến ¦ Kecilkan hingga
+Réparations au pinceau ¦ Sửa bằng cọ ¦ Perbaikan dengan kuas
+Voix plus claire ¦ Giọng rõ hơn ¦ Suara lebih jernih
+Égaliseur (moins de grondement, plus de présence) et compresseur. ¦ Bộ cân bằng (bớt tiếng rền, rõ tiếng hơn) và bộ nén. ¦ Ekualiser (kurangi gemuruh, tambah kehadiran) dan kompresor.
+Réverbération ¦ Tiếng vang ¦ Gema
+Ambiance ¦ Không khí ¦ Suasana
+Vitesse et hauteur ¦ Tốc độ và cao độ ¦ Kecepatan dan nada
+Temps ¦ Thời gian ¦ Waktu
+Pour une cassette lue trop vite (voix « de canard ») : 96 % la remet à sa vraie vitesse. ¦ Cho băng cát-xét phát quá nhanh (giọng “vịt”): 96 % đưa về đúng tốc độ thật. ¦ Untuk kaset yang diputar terlalu cepat (suara “bebek”): 96 % mengembalikannya ke kecepatan sebenarnya.
+Vitesse ¦ Tốc độ ¦ Kecepatan
+Garder la hauteur de la voix ¦ Giữ cao độ của giọng ¦ Pertahankan nada suara
+Blancs de plus de ¦ Khoảng lặng dài hơn ¦ Jeda hening lebih dari
+Ramenés à ¦ Rút về còn ¦ Dipendekkan menjadi
+Fin ¦ Kết thúc ¦ Akhir
+Diapositive {k} / {n} ¦ Trang chiếu {k} / {n} ¦ Slide {k} / {n}
+Aucune diapositive ¦ Không có trang chiếu ¦ Tidak ada slide
+Aucune diapositive. ¦ Không có trang chiếu. ¦ Tidak ada slide.
+Aucune diapositive pour l’instant ¦ Chưa có trang chiếu nào ¦ Belum ada slide
+{what} aux Médias (le son devient la musique). ¦ {what} vào Tư liệu (âm thanh trở thành nhạc nền). ¦ {what} ke Media (suaranya jadi musik).
+{what} aux Médias. ¦ {what} vào Tư liệu. ¦ {what} ke Media.
+=diapositive est prête ¦ trang chiếu đã sẵn sàng ¦ slide siap
+{what}. Elles peuvent remplacer celles du diaporama ou venir à la suite. ¦ {what}. Chúng có thể thay thế các trang của trình chiếu hoặc được thêm vào sau. ¦ {what}. Slide ini bisa menggantikan slide di tayangan atau ditambahkan sesudahnya.
+Remplacer le diaporama par le récit ? ¦ Thay trình chiếu bằng câu chuyện? ¦ Ganti tayangan slide dengan kisah?
+Ajouter à la suite ¦ Thêm vào sau ¦ Tambahkan sesudahnya
+Police du style ({name}) ¦ Phông chữ của kiểu ({name}) ¦ Font gaya ({name})
+Avancer de {time} (réglable dans Réglages › Apparence) ¦ Tiến {time} (chỉnh trong Cài đặt › Giao diện) ¦ Maju {time} (atur di Pengaturan › Tampilan)
+Suivi sur {n} positions. ¦ Đã theo dõi trên {n} vị trí. ¦ Dilacak pada {n} posisi.
+(importé) ¦ (đã nhập) ¦ (diimpor)
+Durée souhaitée ¦ Thời lượng mong muốn ¦ Durasi yang diinginkan
+Mettre les sources dans les notes ¦ Đưa nguồn vào ghi chú ¦ Taruh sumber di catatan
+⇥ durée = voix ¦ ⇥ thời lượng = giọng nói ¦ ⇥ durasi = suara
+Ajoute des photos, un titre, une carte, ou laisse « ✨ Récit d’une vie » tout préparer. Tu peux aussi glisser des photos ici. ¦ Hãy thêm ảnh, tiêu đề, bản đồ, hoặc để “✨ Chuyện một đời người” chuẩn bị tất cả. Bạn cũng có thể kéo ảnh vào đây. ¦ Tambahkan foto, judul, peta, atau biarkan “✨ Kisah sebuah hidup” menyiapkan semuanya. Kamu juga bisa menyeret foto ke sini.
+Ce fichier n’est pas un diaporama exporté par LCNDA (⤓ Exporter → 💾 Fichier). ¦ Tệp này không phải là trình chiếu được LCNDA xuất ra (⤓ Xuất → 💾 Tệp). ¦ Berkas ini bukan tayangan slide yang diekspor oleh LCNDA (⤓ Ekspor → 💾 Berkas).
+Ce que raconte cette diapositive… ¦ Điều trang chiếu này kể lại… ¦ Yang diceritakan slide ini…
+Changer la photo ¦ Đổi ảnh ¦ Ganti foto
+🖼️ Changer la photo ¦ 🖼️ Đổi ảnh ¦ 🖼️ Ganti foto
+Choisis d’abord une personne. ¦ Hãy chọn một người trước. ¦ Pilih seseorang dulu.
+Couleur du trajet ¦ Màu của hành trình ¦ Warna rute
+Glisse des photos ou un son. ¦ Hãy kéo ảnh hoặc âm thanh vào. ¦ Seret foto atau suara ke sini.
+Glisser vers la droite ¦ Trượt sang phải ¦ Geser ke kanan
+Glisser vers la gauche ¦ Trượt sang trái ¦ Geser ke kiri
+Zoom arrière lent ¦ Thu nhỏ chậm ¦ Zoom keluar pelan
+La fenêtre des médias n’est pas encore prête. ¦ Cửa sổ tư liệu chưa sẵn sàng. ¦ Jendela media belum siap.
+Les dernières modifications du diaporama seront perdues. ¦ Những thay đổi cuối cùng của trình chiếu sẽ bị mất. ¦ Perubahan terakhir pada tayangan slide akan hilang.
+Les photos du récit ¦ Ảnh của câu chuyện ¦ Foto-foto kisah
+Légendes ¦ Chú thích ¦ Keterangan
+Personnes sous chaque photo ¦ Tên người dưới mỗi ảnh ¦ Orang di bawah tiap foto
+Place du texte ¦ Vị trí chữ ¦ Posisi teks
+Police des textes ¦ Phông chữ của văn bản ¦ Font teks
+Prendre ce son ¦ Lấy âm thanh này ¦ Pakai suara ini
+RÉCIT D’UNE VIE ¦ CHUYỆN MỘT ĐỜI NGƯỜI ¦ KISAH SEBUAH HIDUP
+Récit d’une vie ¦ Chuyện một đời người ¦ Kisah sebuah hidup
+✨ Récit d’une vie ¦ ✨ Chuyện một đời người ¦ ✨ Kisah sebuah hidup
+✨ Récit d’une vie : un diaporama tout fait à partir de la fiche d’une personne ¦ ✨ Chuyện một đời người: một trình chiếu làm sẵn từ hồ sơ của một người ¦ ✨ Kisah sebuah hidup: tayangan slide siap jadi dari profil seseorang
+Un diaporama tout fait à partir de la fiche d’une personne ¦ Một trình chiếu làm sẵn từ hồ sơ của một người ¦ Tayangan slide siap jadi dari profil seseorang
+Selon les textes ¦ Theo độ dài văn bản ¦ Sesuai teks
+Une musique ¦ Một bản nhạc ¦ Musik
+Une photo par page ¦ Mỗi trang một ảnh ¦ Satu foto per halaman
+Une photo ronde au-dessus du titre ¦ Một ảnh tròn phía trên tiêu đề ¦ Foto bundar di atas judul
+Une photo ronde au-dessus du titre… ¦ Một ảnh tròn phía trên tiêu đề… ¦ Foto bundar di atas judul…
+Une présentation ou un diaporama ? ¦ Bài trình bày hay trình chiếu? ¦ Presentasi atau tayangan slide?
+Une voix, un son ¦ Giọng nói, âm thanh ¦ Suara orang, suara
+Vidéo téléchargée. ¦ Đã tải xuống video. ¦ Video diunduh.
+cette diapositive ¦ trang chiếu này ¦ slide ini
+retirer la voix ¦ bỏ giọng nói ¦ hapus suara
+✨ Préparation du récit… ¦ ✨ Đang chuẩn bị câu chuyện… ¦ ✨ Menyiapkan kisah…
+🎙 Enregistrer ma voix ¦ 🎙 Thu giọng của tôi ¦ 🎙 Rekam suaraku
+🎤 En faire une présentation… ¦ 🎤 Biến thành bài trình bày… ¦ 🎤 Jadikan presentasi…
+🖼 Choisir les photos… ¦ 🖼 Chọn ảnh… ¦ 🖼 Pilih foto…
+Format de l’image (16:9 pour un écran, 9:16 pour un téléphone) ¦ Khổ hình (16:9 cho màn hình, 9:16 cho điện thoại) ¦ Format gambar (16:9 untuk layar, 9:16 untuk ponsel)
+Exporter : vidéo, images, PDF, impression, fichier ¦ Xuất: video, hình ảnh, PDF, in, tệp ¦ Ekspor: video, gambar, PDF, cetak, berkas
+Ajouter un titre ¦ Thêm tiêu đề ¦ Tambah judul
+Ajouter une carte (trajet) ¦ Thêm bản đồ (hành trình) ¦ Tambah peta (rute)
+Ajouter une carte ¦ Thêm bản đồ ¦ Tambah peta
+＋ Carte (trajet) ¦ ＋ Bản đồ (hành trình) ¦ ＋ Peta (rute)
+Regarder en plein écran (Échap pour revenir) ¦ Xem toàn màn hình (Esc để quay lại) ¦ Tonton layar penuh (Esc untuk kembali)
+Avancer dans le diaporama ¦ Đi tiếp trong trình chiếu ¦ Maju di tayangan slide
+Choisis une diapositive (à gauche) pour régler sa durée, sa transition, son texte, sa voix. ¦ Hãy chọn một trang chiếu (bên trái) để chỉnh thời lượng, chuyển cảnh, chữ, giọng nói của nó. ¦ Pilih slide (di kiri) untuk mengatur durasi, transisi, teks, dan suaranya.
+🎞️ Tout le diaporama ¦ 🎞️ Toàn bộ trình chiếu ¦ 🎞️ Seluruh tayangan slide
+La police de tous les titres et légendes. Sans choix, c’est celle du style (Classique, Album ancien…). ¦ Phông chữ của mọi tiêu đề và chú thích. Nếu không chọn, sẽ dùng phông của kiểu (Cổ điển, Album xưa…). ¦ Font semua judul dan keterangan. Tanpa pilihan, dipakai font gayanya (Klasik, Album lama…).
+Une musique de fond, prise dans les sons des médias ¦ Một bản nhạc nền, lấy từ các âm thanh trong tư liệu ¦ Musik latar, diambil dari suara di media
+Une présentation façon Keynote faite de ces diapositives (textes, formes, animations, mode présentateur…) ; le diaporama reste tel quel ¦ Một bài trình bày kiểu Keynote làm từ các trang chiếu này (chữ, hình, hiệu ứng động, chế độ người trình bày…); trình chiếu vẫn giữ nguyên ¦ Presentasi ala Keynote dari slide-slide ini (teks, bentuk, animasi, mode penyaji…); tayangan slide tetap seperti adanya
+Clic sur une diapositive : la régler à droite · glisse-les pour les ranger · Espace : lire ¦ Nhấp vào một trang chiếu: chỉnh ở bên phải · kéo để sắp xếp · Phím cách: phát ¦ Klik slide: atur di kanan · seret untuk menyusun · Spasi: putar
+Album ancien ¦ Album xưa ¦ Album lama
+Clair ¦ Sáng ¦ Terang
+Lire / pause ¦ Phát / tạm dừng ¦ Putar / jeda
+Lire ¦ Phát ¦ Putar
+Regarder ¦ Xem ¦ Tonton
+📺 Regarder ¦ 📺 Xem ¦ 📺 Tonton
+Musique de fond ¦ Nhạc nền ¦ Musik latar
+🎵 Musique ¦ 🎵 Nhạc ¦ 🎵 Musik
+🎵 Musique de fond (facultatif) ¦ 🎵 Nhạc nền (không bắt buộc) ¦ 🎵 Musik latar (opsional)
+=diapositive ¦ trang chiếu ¦ slide
+Choisis une personne : un diaporama se prépare tout seul avec sa fiche (naissance, baptême, mariage, enfants, métiers, recensements, déménagements, décès, sépulture), ses photos, ses lieux sur une carte. Une information absente ne donne pas de diapositive ; tout reste modifiable ensuite. ¦ Hãy chọn một người: một trình chiếu sẽ tự được chuẩn bị từ hồ sơ của họ (sinh, rửa tội, kết hôn, con cái, nghề nghiệp, điều tra dân số, chuyển nhà, mất, mai táng), ảnh của họ, các địa điểm trên bản đồ. Thông tin nào không có thì không có trang chiếu; mọi thứ vẫn sửa được sau đó. ¦ Pilih seseorang: tayangan slide disiapkan otomatis dari profilnya (kelahiran, baptis, pernikahan, anak, pekerjaan, sensus, kepindahan, kematian, pemakaman), fotonya, dan tempat-tempatnya di peta. Informasi yang tidak ada tidak menjadi slide; semuanya tetap bisa diubah nanti.
+Le récit prend à peu près cette durée : chaque diapositive grandit ou rétrécit un peu. « Selon les textes » laisse le temps de lire. ¦ Câu chuyện dài khoảng chừng này: mỗi trang chiếu dài ra hoặc ngắn lại một chút. “Theo độ dài văn bản” để đủ thời gian đọc. ¦ Kisahnya kira-kira sepanjang ini: tiap slide sedikit diperpanjang atau diperpendek. “Sesuai teks” memberi waktu untuk membaca.
+Aucune photo : le récit sera fait de titres et de cartes. ¦ Không có ảnh: câu chuyện sẽ gồm tiêu đề và bản đồ. ¦ Tidak ada foto: kisahnya akan berisi judul dan peta.
+Inclure les frères et sœurs ¦ Gồm cả anh chị em ¦ Sertakan saudara kandung
+Les sources de chaque événement (titre, page) sont écrites dans les notes de sa diapositive : on les voit en modifiant, pas pendant la lecture. ¦ Nguồn của mỗi sự kiện (tiêu đề, trang) được ghi trong ghi chú của trang chiếu: thấy được khi sửa, không thấy khi phát. ¦ Sumber tiap peristiwa (judul, halaman) ditulis di catatan slidenya: terlihat saat mengubah, tidak saat diputar.
+Ajouter les événements historiques de l’époque ¦ Thêm các sự kiện lịch sử của thời đó ¦ Tambahkan peristiwa sejarah pada masanya
+Les épidémies, guerres et grands hivers que l’app connaît (Listes → Épidémies, guerres, hivers) et qui ont eu lieu pendant sa vie. ¦ Các dịch bệnh, chiến tranh và mùa đông khắc nghiệt mà ứng dụng biết (Danh sách → Dịch bệnh, chiến tranh, mùa đông) và đã xảy ra trong đời người đó. ¦ Wabah, perang, dan musim dingin hebat yang diketahui aplikasi (Daftar → Wabah, perang, musim dingin) dan terjadi semasa hidupnya.
+Le texte du bloc « 📖 Biographie » de la fiche (ta version si tu l’as modifiée), en version courte, sur une diapositive. ¦ Văn bản của khối “📖 Tiểu sử” trong hồ sơ (bản của bạn nếu bạn đã sửa), dạng ngắn, trên một trang chiếu. ¦ Teks blok “📖 Biografi” di profil (versimu jika sudah kamu ubah), versi singkat, di satu slide.
+Créer le récit ¦ Tạo câu chuyện ¦ Buat kisah
+DIAPORAMA ¦ TRÌNH CHIẾU ¦ TAYANGAN SLIDE
+Environ 1 minute ¦ Khoảng 1 phút ¦ Sekitar 1 menit
+Environ 2 minutes ¦ Khoảng 2 phút ¦ Sekitar 2 menit
+Environ 3 minutes ¦ Khoảng 3 phút ¦ Sekitar 3 menit
+Environ 5 minutes ¦ Khoảng 5 phút ¦ Sekitar 5 menit
+Environ 8 minutes ¦ Khoảng 8 phút ¦ Sekitar 8 menit
+Environ 10 minutes ¦ Khoảng 10 phút ¦ Sekitar 10 menit
+Choisir un son… ¦ Chọn một âm thanh… ¦ Pilih suara…
+Ajouter sa biographie (📖) ¦ Thêm tiểu sử của người này (📖) ¦ Tambahkan biografinya (📖)
+🎯 Suivre ce qui bouge ¦ 🎯 Theo dõi vật chuyển động ¦ 🎯 Ikuti yang bergerak
+✕ Ne plus suivre ¦ ✕ Thôi theo dõi ¦ ✕ Berhenti mengikuti
+🎥 Plusieurs caméras ¦ 🎥 Nhiều máy quay ¦ 🎥 Beberapa kamera
+Synchroniser et monter ¦ Đồng bộ và dựng ¦ Sinkronkan dan susun
+quand quelqu’un parle plus près d’une autre caméra ¦ khi có người nói gần một máy quay khác hơn ¦ saat seseorang berbicara lebih dekat ke kamera lain
+Lecture des sons… ¦ Đang đọc âm thanh… ¦ Membaca suara…
+dédié à {who} ¦ dành tặng {who} ¦ dipersembahkan untuk {who}
+Pas encore de {what} pour ce soir ¦ Chưa có {what} cho tối nay ¦ Belum ada {what} untuk malam ini
+Note les titres dans l’ordre, avec les rappels, les reprises, les invités… ou copie la setlist d’un autre soir. ¦ Hãy ghi các bài theo thứ tự, cùng phần biểu diễn lại, bài cover, khách mời… hoặc sao chép setlist của một tối khác. ¦ Catat judul lagu secara berurutan, dengan encore, lagu cover, bintang tamu… atau salin setlist malam lain.
+La sorte de ce soir ¦ Loại buổi tối nay ¦ Jenis acara malam ini
+En faire : {what} (la setlist s’adapte) ¦ Biến thành: {what} (setlist tự điều chỉnh theo) ¦ Jadikan: {what} (setlist menyesuaikan)
+{n} prévues ¦ {n} dự kiến ¦ {n} direncanakan
+d’après {what} ¦ dựa theo {what} ¦ berdasarkan {what}
+{what} à la setlist. ¦ {what} vào setlist. ¦ {what} ke setlist.
+{what} depuis « {name} ». ¦ {what} từ “{name}”. ¦ {what} dari “{name}”.
+=ligne ajoutée ¦ dòng đã thêm ¦ baris ditambahkan
+=ligne copiée ¦ dòng đã sao chép ¦ baris disalin
+Setlist de « {name} » copiée ({what}) ¦ Đã sao chép setlist của “{name}” ({what}) ¦ Setlist “{name}” disalin ({what})
+Ce soir devient : {what} ¦ Tối nay trở thành: {what} ¦ Malam ini menjadi: {what}
+{n} enregistrements « en public » ajoutés aux morceaux ¦ Đã thêm {n} bản thu “trực tiếp” vào các bài ¦ {n} rekaman “live” ditambahkan ke lagu-lagunya
+1 enregistrement « en public » ajouté au morceau ¦ Đã thêm 1 bản thu “trực tiếp” vào bài ¦ 1 rekaman “live” ditambahkan ke lagunya
+{n} enregistrements « en public » déjà tirés de ce soir. ¦ Đã có {n} bản thu “trực tiếp” lấy từ tối nay. ¦ Sudah ada {n} rekaman “live” dari malam ini.
+1 enregistrement « en public » déjà tiré de ce soir. ¦ Đã có 1 bản thu “trực tiếp” lấy từ tối nay. ¦ Sudah ada 1 rekaman “live” dari malam ini.
+→ En faire des enregistrements « en public » des morceaux ({n}) ¦ → Tạo các bản thu “trực tiếp” cho các bài ({n}) ¦ → Jadikan rekaman “live” dari lagu-lagunya ({n})
+→ En faire un enregistrement « en public » du morceau ({n}) ¦ → Tạo một bản thu “trực tiếp” cho bài ({n}) ¦ → Jadikan rekaman “live” dari lagunya ({n})
+« {name} » ajouté au catalogue ({what}). ¦ Đã thêm “{name}” vào danh mục ({what}). ¦ “{name}” ditambahkan ke katalog ({what}).
+Aucun lieu de ta base pour ces soirs ({what} sans lieu choisi dans la base). ¦ Không có địa điểm nào trong dữ liệu của bạn cho các tối này ({what} chưa chọn địa điểm trong cơ sở dữ liệu). ¦ Tidak ada tempat dari basis datamu untuk malam-malam ini ({what} tanpa tempat yang dipilih di basis data).
+Aucun lieu de ta base pour ces soirs. ¦ Không có địa điểm nào trong dữ liệu của bạn cho các tối này. ¦ Tidak ada tempat dari basis datamu untuk malam-malam ini.
+{what} sans coordonnées ¦ {what} không có toạ độ ¦ {what} tanpa koordinat
+{what} sans lieu de ta base ¦ {what} không có địa điểm trong dữ liệu của bạn ¦ {what} tanpa tempat dari basis datamu
+=soir ¦ tối ¦ malam
+🔝 {what} les plus joués ¦ 🔝 {what} được chơi nhiều nhất ¦ 🔝 {what} yang paling sering dimainkan
+{what} par soir ¦ {what} mỗi tối ¦ {what} per malam
+{n} en moyenne ¦ trung bình {n} ¦ rata-rata {n}
+{what} mais jamais sur scène, et {other} : ¦ {what} nhưng chưa bao giờ trên sân khấu, và {other}: ¦ {what} tetapi tidak pernah di panggung, dan {other}:
+{what} mais jamais sur scène : ¦ {what} nhưng chưa bao giờ trên sân khấu: ¦ {what} tetapi tidak pernah di panggung:
+{what} jamais dans une setlist : ¦ {what} chưa bao giờ có trong setlist: ¦ {what} tidak pernah ada di setlist:
+=morceau enregistré ¦ bài đã thu âm ¦ lagu yang direkam
+=autre fiche ¦ hồ sơ khác ¦ profil lain
+… et {n} de plus ¦ … và {n} nữa ¦ … dan {n} lagi
+✓ Profil « {name} » coché : ses sections sont sur sa page. ¦ ✓ Đã đánh dấu hồ sơ nghề “{name}”: các mục của nó có trên trang của người đó. ¦ ✓ Profil “{name}” dicentang: bagian-bagiannya ada di halamannya.
+Aucun épisode n° {a} à {b} dans cette saison. ¦ Không có tập số {a} đến {b} trong mùa này. ¦ Tidak ada episode no. {a} sampai {b} di musim ini.
+Aucun épisode n° {a} dans cette saison. ¦ Không có tập số {a} trong mùa này. ¦ Tidak ada episode no. {a} di musim ini.
+＋ Nouveau concert ou représentation ¦ ＋ Buổi hoà nhạc hoặc buổi diễn mới ¦ ＋ Konser atau pertunjukan baru
+Chercher… (ville, salle, morceau joué, tournée, personne) ¦ Tìm… (thành phố, hội trường, bài đã chơi, chuyến lưu diễn, người) ¦ Cari… (kota, gedung, lagu yang dimainkan, tur, orang)
+Aucun concert ni spectacle pour l’instant ¦ Chưa có buổi hoà nhạc hay buổi diễn nào ¦ Belum ada konser atau pertunjukan
+Un soir = une fiche : la date, le lieu, la setlist (titres, rappels, reprises, invités), qui était sur scène et dans la salle. ¦ Một tối = một hồ sơ: ngày, địa điểm, setlist (các bài, phần biểu diễn lại, bài cover, khách mời), ai trên sân khấu và ai trong khán phòng. ¦ Satu malam = satu profil: tanggal, tempat, setlist (judul, encore, lagu cover, bintang tamu), siapa yang di panggung dan siapa yang di penonton.
+Concert ou représentation ¦ Buổi hoà nhạc hoặc buổi diễn ¦ Konser atau pertunjukan
+Concerts et représentations ¦ Các buổi hoà nhạc và buổi diễn ¦ Konser dan pertunjukan
+=concert ou représentation ¦ buổi hoà nhạc hoặc buổi diễn ¦ konser atau pertunjukan
+Spectacle d’humour ¦ Diễn hài ¦ Pertunjukan komedi
+Scènes jouées ¦ Các cảnh đã diễn ¦ Adegan yang dimainkan
+Concert d’orchestre ¦ Hoà nhạc dàn nhạc ¦ Konser orkestra
+Début d’une partie ¦ Bắt đầu một phần ¦ Awal sebuah bagian
+Bande, intro enregistrée ¦ Băng, đoạn mở đầu thu sẵn ¦ Rekaman, intro yang direkam
+Dernière fois ¦ Lần cuối ¦ Terakhir kali
+Reprise, invités, dédicace, 1re fois, durée… ¦ Bài cover, khách mời, lời đề tặng, lần đầu, thời lượng… ¦ Cover, bintang tamu, persembahan, pertama kali, durasi…
+＋ Un rappel ¦ ＋ Một phần biểu diễn lại ¦ ＋ Encore
+📋 Coller une liste ¦ 📋 Dán một danh sách ¦ 📋 Tempel daftar
+📋 Copier la setlist d’un autre soir ¦ 📋 Sao chép setlist của một tối khác ¦ 📋 Salin setlist malam lain
+Copier la setlist d’un autre soir ¦ Sao chép setlist của một tối khác ¦ Salin setlist malam lain
+inachevé ¦ chưa hoàn thành ¦ belum selesai
+Nouvelle partie ¦ Phần mới ¦ Bagian baru
+critique positive ¦ phê bình tích cực ¦ ulasan positif
+critique négative ¦ phê bình tiêu cực ¦ ulasan negatif
+neutre ¦ trung lập ¦ netral
+Église, chapelle ¦ Nhà thờ, nhà nguyện ¦ Gereja, kapel
+Bal, salle des fêtes ¦ Dạ vũ, hội trường lễ hội ¦ Pesta dansa, balai pertemuan
+Café, cabaret ¦ Quán cà phê, quán ca nhạc ¦ Kafe, kabaret
+Soirée privée ¦ Buổi tối riêng tư ¦ Acara pribadi
+Festival, fête ¦ Lễ hội, hội hè ¦ Festival, pesta
+création du rôle ¦ người đầu tiên đóng vai ¦ pemeran pertama peran ini
+Création du rôle ¦ Người đầu tiên đóng vai ¦ Pemeran pertama peran ini
+chef d’orchestre ¦ nhạc trưởng ¦ dirigen
+Un ou une soliste ¦ Một nghệ sĩ độc tấu ¦ Seorang solois
+Une personne dans la salle ¦ Một người trong khán phòng ¦ Seseorang di antara penonton
+🎭 Ce soir-là, au théâtre ¦ 🎭 Tối hôm đó, ở nhà hát ¦ 🎭 Malam itu, di teater
+Rôles du soir ¦ Vai diễn của tối ¦ Peran malam ini
+Titulaire ou remplaçant ¦ Diễn chính hoặc diễn thay ¦ Pemeran tetap atau pengganti
+La soirée ¦ Buổi tối ¦ Malam pertunjukan
+Joué ¦ Đã chơi ¦ Dimainkan
+La tournée ¦ Chuyến lưu diễn ¦ Tur
+Dates prévues ¦ Các ngày dự kiến ¦ Tanggal yang direncanakan
+Les dates ¦ Các ngày ¦ Tanggal-tanggal
+📅 Les dates ¦ 📅 Các ngày ¦ 📅 Tanggal-tanggal
+＋ Ajouter une date ¦ ＋ Thêm một ngày ¦ ＋ Tambah tanggal
+＋ Ajouter une représentation ¦ ＋ Thêm một buổi diễn ¦ ＋ Tambah pertunjukan
+Chanson parlée, poème dit ¦ Bài hát nói, bài thơ đọc ¦ Lagu yang diucapkan, puisi yang dibacakan
+Sketch, numéro, scène ¦ Tiểu phẩm, tiết mục, cảnh ¦ Sketsa, nomor, adegan
+Sketches, numéros, scènes ¦ Tiểu phẩm, tiết mục, cảnh ¦ Sketsa, nomor, adegan
+Écrit, créé ¦ Viết, sáng tác ¦ Ditulis, dicipta
+Tiré de ¦ Lấy từ ¦ Diambil dari
+Son ou vidéo ¦ Âm thanh hoặc video ¦ Suara atau video
+Carte indisponible. ¦ Bản đồ không có sẵn. ¦ Peta tidak tersedia.
+Avec une setlist ¦ Có setlist ¦ Dengan setlist
+Avec une captation ¦ Có bản ghi hình ¦ Dengan rekaman
+Avec une 1re fois ¦ Có lần đầu tiên ¦ Dengan pertama kali
+Avec un remplacement ¦ Có người diễn thay ¦ Dengan pengganti
+Avec ce titre joué ¦ Có chơi bài này ¦ Dengan judul ini dimainkan
+Joué ce soir-là ¦ Đã chơi tối hôm đó ¦ Dimainkan malam itu
+Carte des lieux… ¦ Bản đồ các địa điểm… ¦ Peta tempat…
+🗺 Carte des lieux ¦ 🗺 Bản đồ các địa điểm ¦ 🗺 Peta tempat
+hors tournée ¦ ngoài chuyến lưu diễn ¦ di luar tur
+Dernière ¦ Lần cuối ¦ Terakhir
+Moins ↑ ¦ Ít hơn ↑ ¦ Lebih sedikit ↑
+Soirs par année ¦ Số tối mỗi năm ¦ Malam per tahun
+📅 Soirs par année ¦ 📅 Số tối mỗi năm ¦ 📅 Malam per tahun
+Durée moyenne ¦ Thời lượng trung bình ¦ Durasi rata-rata
+Ville la plus visitée ¦ Thành phố đến nhiều nhất ¦ Kota yang paling sering dikunjungi
+🚌 Setlist type d’une tournée ¦ 🚌 Setlist điển hình của một chuyến lưu diễn ¦ 🚌 Setlist khas sebuah tur
+Choisis une tournée. ¦ Hãy chọn một chuyến lưu diễn. ¦ Pilih sebuah tur.
+Choisis deux soirs différents. ¦ Hãy chọn hai tối khác nhau. ¦ Pilih dua malam yang berbeda.
+Cinéma ¦ Điện ảnh ¦ Film
+Au générique ¦ Có tên trong danh đề ¦ Tercantum di kredit
+Pas au générique ¦ Không có tên trong danh đề ¦ Tidak tercantum di kredit
+Tournage, période ¦ Quay phim, giai đoạn ¦ Syuting, periode
+🎭 Au théâtre ¦ 🎭 Ở nhà hát ¦ 🎭 Di teater
+Théâtres, salles ¦ Nhà hát, hội trường ¦ Teater, gedung
+Un théâtre ¦ Một nhà hát ¦ Sebuah teater
+Théâtre, salle ¦ Nhà hát, hội trường ¦ Teater, gedung
+Un remplacement ¦ Một lần diễn thay ¦ Penggantian
+📺 Télévision, radio ¦ 📺 Truyền hình, phát thanh ¦ 📺 Televisi, radio
+Voix française de ¦ Lồng tiếng Pháp cho ¦ Pengisi suara bahasa Prancis untuk
+Un ou une partenaire ¦ Một bạn diễn ¦ Seorang lawan main
+Prix et nominations ¦ Giải thưởng và đề cử ¦ Penghargaan dan nominasi
+Œuvre A → Z ¦ Tác phẩm A → Z ¦ Karya A → Z
+Fiches « Rôle » ¦ Hồ sơ “Vai diễn” ¦ Profil “Peran”
+Films du catalogue ¦ Phim trong danh mục ¦ Film di katalog
+Cités dans d’autres catalogues ¦ Được nhắc trong các danh mục khác ¦ Disebut di katalog lain
+Crédit ¦ Ghi danh ¦ Kredit
+RÔLE ¦ VAI DIỄN ¦ PERAN
+＋ En faire une fiche rôle détaillée ¦ ＋ Tạo hồ sơ vai diễn chi tiết ¦ ＋ Jadikan profil peran yang rinci
+D’où vient la ligne ¦ Dòng này từ đâu ra ¦ Asal baris ini
+Chercher un rôle, un film, un partenaire… ¦ Tìm một vai, một phim, một bạn diễn… ¦ Cari peran, film, lawan main…
+Profil d’acteur ¦ Hồ sơ nghề diễn viên ¦ Profil aktor
+Débuts ¦ Bước đầu ¦ Debut
+Une école, un cours ¦ Một trường, một khoá học ¦ Sekolah, kursus
+École, conservatoire, cours ¦ Trường, nhạc viện, khoá học ¦ Sekolah, konservatori, kursus
+Prix, diplôme ¦ Giải thưởng, bằng cấp ¦ Penghargaan, ijazah
+Un agent ¦ Một người đại diện ¦ Seorang agen
+Une troupe ¦ Một đoàn kịch ¦ Sebuah rombongan
+Troupe, théâtre ¦ Đoàn kịch, nhà hát ¦ Rombongan, teater
+Un casting ¦ Một buổi thử vai ¦ Sebuah audisi
+Rôle visé ¦ Vai nhắm tới ¦ Peran yang dituju
+pas obtenu ¦ không được chọn ¦ tidak didapat
+Compétences, physique, voix ¦ Kỹ năng, ngoại hình, giọng ¦ Keahlian, fisik, suara
+Tout voir, trier ¦ Xem tất cả, sắp xếp ¦ Lihat semua, urutkan
+Aucune série, aucun téléfilm. ¦ Không có phim bộ hay phim truyền hình nào. ¦ Tidak ada serial atau film televisi.
+Théâtrographie ¦ Các vai sân khấu ¦ Daftar peran teater
+Aucun rôle au théâtre. ¦ Không có vai sân khấu nào. ¦ Tidak ada peran di teater.
+Aucune voix. ¦ Không có vai lồng tiếng nào. ¦ Tidak ada peran suara.
+Publicité et mannequinat ¦ Quảng cáo và người mẫu ¦ Iklan dan peragaan busana
+Aucune publicité. ¦ Không có quảng cáo nào. ¦ Tidak ada iklan.
+Aucun clip. ¦ Không có video ca nhạc nào. ¦ Tidak ada video klip.
+=casting noté ¦ buổi thử vai đã ghi ¦ audisi yang dicatat
+Aucun casting noté. ¦ Chưa ghi buổi thử vai nào. ¦ Belum ada audisi yang dicatat.
+Les statistiques viennent des rôles notés. ¦ Số liệu thống kê lấy từ các vai đã ghi. ¦ Statistik berasal dari peran yang dicatat.
+Rôles par décennie ¦ Vai diễn theo thập niên ¦ Peran per dekade
+Réalisateurs ¦ Đạo diễn ¦ Sutradara
+Aucun soir noté. ¦ Chưa ghi tối nào. ¦ Belum ada malam yang dicatat.
+Feuilleton télévisé ¦ Phim truyền hình nhiều tập ¦ Sinetron
+Websérie ¦ Phim trên mạng ¦ Serial web
+Séries et émissions ¦ Phim bộ và chương trình ¦ Serial dan acara
+La série ¦ Bộ phim ¦ Serialnya
+Saisons et épisodes ¦ Mùa và tập ¦ Musim dan episode
+Durée d’un épisode ¦ Thời lượng một tập ¦ Durasi satu episode
+Qui y a fait quoi ¦ Ai đã làm gì ¦ Siapa melakukan apa
+Épisodes prévus ¦ Các tập dự kiến ¦ Episode yang direncanakan
+L’épisode ¦ Tập phim ¦ Episodenya
+N° dans la saison ¦ Số trong mùa ¦ No. di musim
+N° dans la série ¦ Số trong bộ phim ¦ No. di serial
+Un ou une scénariste ¦ Một biên kịch ¦ Seorang penulis skenario
+Un invité ¦ Một khách mời ¦ Seorang tamu
+Rôle ou métier ¦ Vai hoặc nghề ¦ Peran atau profesi
+toute la série ¦ cả bộ phim ¦ seluruh serial
+Chaîne, station, éditeur ¦ Kênh, đài, nhà phát hành ¦ Saluran, stasiun, penerbit
+Un créateur, une créatrice ¦ Một người sáng tạo ¦ Seorang kreator
+Comment cette image se mélange avec celle de dessous : « Produit » assombrit, « Superposition claire » éclaircit, « Normal » la pose simplement dessus. ¦ Cách hình này hoà trộn với hình bên dưới: “Nhân” làm tối đi, “Chồng lớp sáng” làm sáng lên, “Bình thường” chỉ đặt lên trên. ¦ Cara gambar ini bercampur dengan gambar di bawahnya: “Multiply” menggelapkan, “Tumpukan terang” mencerahkan, “Normal” hanya menaruhnya di atas.
+Un lent mouvement de caméra sur la photo : elle s’approche, s’éloigne ou glisse doucement pendant qu’elle est à l’écran. ¦ Một chuyển động máy quay chậm trên ảnh: ảnh tiến lại gần, lùi ra xa hoặc trượt nhẹ khi đang trên màn hình. ¦ Gerakan kamera pelan pada foto: foto mendekat, menjauh, atau bergeser perlahan selama tampil di layar.
+Une image clé fixe un réglage (taille, place, rotation…) à un moment du film ; entre deux images clés, l’image passe de l’une à l’autre, en douceur ou à vitesse régulière. ¦ Một khung hình chính cố định một cài đặt (kích thước, vị trí, góc xoay…) tại một thời điểm của phim; giữa hai khung hình chính, hình chuyển từ cái này sang cái kia, nhẹ nhàng hoặc với tốc độ đều. ¦ Keyframe menetapkan suatu pengaturan (ukuran, posisi, rotasi…) pada satu saat di film; di antara dua keyframe, gambar berpindah dari satu ke yang lain, secara halus atau dengan kecepatan rata.
+« Réduire le souffle » : choisis d’abord un passage où l’on n’entend que le bruit, il sert d’exemple. « Voix plus nette » rend la parole plus claire. « Normaliser » monte le volume au plus fort sans saturer. ¦ “Giảm tiếng xì”: trước hết hãy chọn một đoạn chỉ có tiếng ồn, nó dùng làm mẫu. “Giọng rõ hơn” làm lời nói rõ ràng hơn. “Chuẩn hoá” nâng âm lượng lên mức to nhất mà không bị vỡ tiếng. ¦ “Kurangi desis”: pilih dulu bagian yang hanya berisi derau, sebagai contoh. “Suara lebih jernih” membuat ucapan lebih jelas. “Normalisasi” menaikkan volume sekeras mungkin tanpa pecah.
+Doux : on nettoie peu, la voix reste naturelle. Fort : on enlève plus de bruit, au risque d’un son un peu « métallique ». Écoute avec 👂 Avant / ✨ Après. ¦ Nhẹ nhàng: làm sạch ít, giọng vẫn tự nhiên. Mạnh: bỏ nhiều tiếng ồn hơn, có thể khiến âm thanh hơi “kim loại”. Hãy nghe bằng 👂 Trước / ✨ Sau. ¦ Lembut: sedikit dibersihkan, suara tetap alami. Kuat: lebih banyak derau dibuang, dengan risiko suara agak “metalik”. Dengarkan dengan 👂 Sebelum / ✨ Sesudah.
+Supprimer ce rush du projet (et ses {n} passages sur la frise) ¦ Xoá đoạn quay này khỏi dự án (cùng {n} đoạn của nó trên dòng thời gian) ¦ Hapus klip ini dari proyek (beserta {n} bagiannya di lini masa)
+Supprimer ce rush du projet (et son passage sur la frise) ¦ Xoá đoạn quay này khỏi dự án (cùng đoạn của nó trên dòng thời gian) ¦ Hapus klip ini dari proyek (beserta bagiannya di lini masa)
+Supprimer ce rush du projet ¦ Xoá đoạn quay này khỏi dự án ¦ Hapus klip ini dari proyek
+{time} à l’écran ¦ {time} trên màn hình ¦ {time} di layar
+🖼️ Photo de la piste 1 ¦ 🖼️ Ảnh của rãnh 1 ¦ 🖼️ Foto di trek 1
+🎬 Morceau de la piste 1 ¦ 🎬 Đoạn của rãnh 1 ¦ 🎬 Potongan di trek 1

@@ -12,6 +12,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s)); // 🌐 traduction (docs/I18N.md)
     const ART = window.LCNDA_ART, SC = ART?.scene; if (!ART?.define || !SC) return;
     const A = () => window.LCNDA_APP, UI = () => window.LCNDA_UI || {};
     const accord = (who, word, o) => (window.LCNDA_ACCORD?.accord || ((_, w) => String(w)))(who, word, o); // ✍️ accordé avec la fiche (app-accord.js)
@@ -233,7 +234,7 @@
     /* ═════════ Les sections de sa page (ordonnables : ⚙️ Organiser la page) ═════════ */
     const PS = ART.pageSections, editBtn = '<button type="button" class="icon-button small" data-sc-editactor title="Modifier le profil">…</button>';
     const ents = C => (C._scPageEntries && C._scPageEntries.items === C.store.items && C._scPageEntries.cited === C.store.cited ? C._scPageEntries.l : (C._scPageEntries = {items: C.store.items, cited: C.store.cited, l: SC.actorEntries(C.store)}).l);
-    const short = (C, list, max = 8) => list.length ? `<div class="sc-mini">${SC.sortEntries(list, 'old').slice(0, max).map(e => `<div class="sc-mline"><span class="ar-g">${esc(e.yearText || e.year || '')}</span> ${e.work ? U.refChip(e.work, ART.defs[e.work.kind]?.icon || DOM(e.domain)[1]) : ''} <span>${esc(SC.cut([e.character, typeText(e)].filter(Boolean).join(' · '), 200))}</span></div>`).join('')}${list.length > max ? `<button type="button" class="ar-linkbtn u" data-ar-tab="role">… et ${list.length - max} de plus</button>` : ''}</div>` : '';
+    const short = (C, list, max = 8) => list.length ? `<div class="sc-mini">${SC.sortEntries(list, 'old').slice(0, max).map(e => `<div class="sc-mline"><span class="ar-g">${esc(e.yearText || e.year || '')}</span> ${e.work ? U.refChip(e.work, ART.defs[e.work.kind]?.icon || DOM(e.domain)[1]) : ''} <span>${esc(SC.cut([e.character, typeText(e)].filter(Boolean).join(' · '), 200))}</span></div>`).join('')}${list.length > max ? `<button type="button" class="ar-linkbtn u" data-ar-tab="role">${i18n('… et {n} de plus', {n: list.length - max})}</button>` : ''}</div>` : '';
     const domSec = (key, icon, label, doms, w = '½', emptyT = 'Rien pour l’instant.') => { PS[key] = {icon, label, w, profile: 'actor', render: C => { const l = ents(C).filter(e => doms.includes(e.domain));
         return {count: l.length || '', body: short(C, l) || `<p class="muted">${esc(emptyT)}</p>`, actions: `<button type="button" class="button small secondary" data-sc-roletab="${doms[0]}">Tout voir</button>`}; }}; };
     let actorTab = 'all';
@@ -315,7 +316,7 @@
         if (d.scEditactor !== undefined) { const p = prof(C); if (p) C.open(p.id, {edit: true}); else C.newItem('profile_actor', {title: C.store.name}); return; }
         if (d.scMkrole) { const en = (C._scEntries || SC.actorEntries(C.store)).find(x => x.key === d.scMkrole); if (en) C.newItem('role', presetOf(en, C.store)); return; }
         if (d.scSetactor !== undefined) { b.disabled = true;
-            try { await ART.write('set_profile', {person_id: C.pid, profile: 'actor', on: 1, label: ART.profiles.actor.label, icon: ART.profiles.actor.icon}); await C.reload(); C.paint(true); A().toast(`✓ Profil « ${SC.actorWord(C.store)} » coché : ses sections sont sur sa page.`, 'success'); }
+            try { await ART.write('set_profile', {person_id: C.pid, profile: 'actor', on: 1, label: ART.profiles.actor.label, icon: ART.profiles.actor.icon}); await C.reload(); C.paint(true); A().toast(i18n('✓ Profil « {name} » coché : ses sections sont sur sa page.', {name: i18n(SC.actorWord(C.store))}), 'success'); }
             catch (er) { b.disabled = false; A().toast(er.message, 'error'); } }
     });
     if (typeof document !== 'undefined' && document.readyState !== 'complete' && typeof window.addEventListener === 'function') { document.addEventListener('DOMContentLoaded', lateKinds); window.addEventListener('load', lateKinds); } else setTimeout(lateKinds, 0);

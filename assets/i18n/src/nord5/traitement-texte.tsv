@@ -1,0 +1,782 @@
+fr ¦ hr ¦ sl
+menu|Affichage ¦ Prikaz ¦ Pogled
+Insertion ¦ Umetanje ¦ Vstavljanje
+Format ¦ Oblikovanje ¦ Oblika
+Tableau ¦ Tablica ¦ Tabela
+Champ (page, nombre de pages, titre, auteur)… ¦ Polje (stranica, broj stranica, naslov, autor)… ¦ Polje (stran, število strani, naslov, avtor)…
+N° de page ¦ Br. stranice ¦ Št. strani
+(celle de Normal) ¦ (kao u stilu Normalno) ¦ (kot v slogu Navadno)
+(titre vide) ¦ (prazan naslov) ¦ (prazen naslov)
+* = des lettres, ? = une lettre, # = un chiffre ¦ * = nekoliko slova, ? = jedno slovo, # = jedna znamenka ¦ * = več črk, ? = ena črka, # = ena števka
+.lcnda-texte (tout est gardé) ¦ .lcnda-texte (sve se zadržava) ¦ .lcnda-texte (vse se ohrani)
+1 (retirer les colonnes) ¦ 1 (ukloni stupce) ¦ 1 (odstrani stolpce)
+1. Liste numérotée ¦ 1. Numerirani popis ¦ 1. Oštevilčen seznam
+1re ligne ¦ 1. redak ¦ 1. vrstica
+1re ligne (négatif : en saillie) ¦ 1. redak (negativno: viseća uvlaka) ¦ 1. vrstica (negativno: viseči zamik)
+60 onglets au plus. ¦ Najviše 60 kartica. ¦ Največ 60 zavihkov.
+A Couleur… ¦ A Boja… ¦ A Barva…
+Accentuation ¦ Isticanje ¦ Poudarek
+Adresse ¦ Adresa ¦ Naslov
+Afficher : nom, dates, naissance… ¦ Prikaži: ime, datumi, rođenje… ¦ Prikaži: ime, datumi, rojstvo…
+Ajoute au moins une personne. ¦ Dodaj barem jednu osobu. ¦ Dodaj vsaj eno osebo.
+Ajoute d’abord des champs : Insertion → « 📨 Champ de fusion » (Prénom, Nom, Date de naissance…). ¦ Najprije dodaj polja: Umetanje → „📨 Polje spajanja” (Ime, Prezime, Datum rođenja…). ¦ Najprej dodaj polja: Vstavljanje → »📨 Polje spajanja« (Ime, Priimek, Datum rojstva…).
+Ajouter la citation ¦ Dodaj citat ¦ Dodaj citat
+Ajouter les personnes d’une liste ¦ Dodaj osobe s popisa ¦ Dodaj osebe s seznama
+Ajouter une légende ¦ Dodaj opis slike ¦ Dodaj napis
+Album photo (21,6 × 28 cm) ¦ Foto album (21,6 × 28 cm) ¦ Foto album (21,6 × 28 cm)
+Alignement ¦ Poravnanje ¦ Poravnava
+Aligner à droite ¦ Poravnaj desno ¦ Poravnaj desno
+Aligner à gauche ¦ Poravnaj lijevo ¦ Poravnaj levo
+Aligné sur le texte (seul sur sa ligne) ¦ U retku s tekstom (sama u svom retku) ¦ V vrstici z besedilom (sama v svoji vrstici)
+Allemand ¦ Njemački ¦ Nemščina
+Aller ¦ Idi ¦ Pojdi
+Aller à la page ¦ Idi na stranicu ¦ Pojdi na stran
+Anglais ¦ Engleski ¦ Angleščina
+Années (1850 – 1920) ¦ Godine (1850. – 1920.) ¦ Leta (1850 – 1920)
+Aperçu avec {name} : ¦ Pregled s {name}: ¦ Predogled z {name}:
+Apostrophe typographique ’ ¦ Tipografski apostrof ’ ¦ Tipografski opuščaj ’
+Au moins une ligne. ¦ Barem jedan redak. ¦ Vsaj ena vrstica.
+Aucun champ à mettre à jour. ¦ Nema polja za ažuriranje. ¦ Ni polj za posodobitev.
+Aucune modification suivie dans le document. ¦ U dokumentu nema praćenih promjena. ¦ V dokumentu ni sledenih sprememb.
+Aucune modification suivie. ¦ Nema praćenih promjena. ¦ Ni sledenih sprememb.
+Aucune modification suivie. « ✍ Suivre les modifications » garde la trace de chaque ajout et de chaque suppression. ¦ Nema praćenih promjena. „✍ Prati promjene” bilježi svako dodavanje i svako brisanje. ¦ Ni sledenih sprememb. »✍ Sledi spremembam« beleži vsak dodatek in vsak izbris.
+Augmenter le retrait ¦ Povećaj uvlaku ¦ Povečaj zamik
+Auteur ¦ Autor ¦ Avtor
+Autre ¦ Drugo ¦ Drugo
+Avis de recherche (lettre aux cousins, remplie) ¦ Poziv za pomoć u istraživanju (pismo rođacima, ispunjeno) ¦ Prošnja za pomoč pri iskanju (pismo sorodnikom, izpolnjeno)
+Barre d’outils ¦ Alatna traka ¦ Orodna vrstica
+Barre d’outils en ruban (avec les noms) ¦ Alatna traka u obliku vrpce (s nazivima) ¦ Orodna vrstica v obliki traku (z imeni)
+Barre d’outils · {what} ¦ Alatna traka · {what} ¦ Orodna vrstica · {what}
+Barré ¦ Precrtano ¦ Prečrtano
+Bas ¦ Dolje ¦ Spodaj
+Biographie ajoutée (écrite par l’app d’après la fiche) : modifie-la librement. ¦ Životopis je dodan (napisala ga je aplikacija prema zapisu): slobodno ga uredi. ¦ Življenjepis je dodan (napisala ga je aplikacija po zapisu): po želji ga uredi.
+Bordure et trame ¦ Obrub i sjenčanje ¦ Obroba in senčenje
+Bordure et trame… ¦ Obrub i sjenčanje… ¦ Obroba in senčenje…
+Bordures ¦ Obrubi ¦ Obrobe
+Bordures du tableau ¦ Obrubi tablice ¦ Obrobe tabele
+Breton ¦ Bretonski ¦ Bretonščina
+COMPARER ¦ USPOREDI ¦ PRIMERJAJ
+Cacher dans le texte ¦ Sakrij u tekstu ¦ Skrij v besedilu
+Caractères (espaces compris) ¦ Znakovi (s razmacima) ¦ Znaki (s presledki)
+Caractères (sans les espaces) ¦ Znakovi (bez razmaka) ¦ Znaki (brez presledkov)
+Caractères spéciaux ¦ Posebni znakovi ¦ Posebni znaki
+Carré (le texte autour) ¦ Kvadrat (tekst okolo) ¦ Kvadrat (besedilo okoli)
+Carré 15 × 15 cm ¦ Kvadrat 15 × 15 cm ¦ Kvadrat 15 × 15 cm
+Carré 21 × 21 cm ¦ Kvadrat 21 × 21 cm ¦ Kvadrat 21 × 21 cm
+Carré 30 × 30 cm ¦ Kvadrat 30 × 30 cm ¦ Kvadrat 30 × 30 cm
+Carte de visite ¦ Posjetnica ¦ Vizitka
+Cartes et livres ¦ Kartice i knjige ¦ Voščilnice in knjige
+Carton DL (faire-part) ¦ Karton DL (obavijest) ¦ Karton DL (obvestilo)
+Case séparée ¦ Odvojeno polje ¦ Ločena celica
+Cases fusionnées ¦ Spojena polja ¦ Spojene celice
+Casse ¦ Velika i mala slova ¦ Velike in male črke
+Ce diagramme est vide. ¦ Ovaj dijagram je prazan. ¦ Ta diagram je prazen.
+Ce document n’a pas encore de champ de fusion (Insertion → « 📨 Champ de fusion »). Insérer d’abord une petite fiche d’identité à l’endroit du curseur ? ¦ Ovaj dokument još nema polje spajanja (Umetanje → „📨 Polje spajanja”). Najprije umetnuti mali osobni zapis na mjesto kursora? ¦ Ta dokument še nima polja spajanja (Vstavljanje → »📨 Polje spajanja«). Najprej vstaviti majhen osebni zapis na mesto kazalke?
+Ce livre n’a pas de styles de paragraphe. ¦ Ova knjiga nema stilova odlomka. ¦ Ta knjiga nima slogov odstavka.
+Ce passage a changé : relance la relecture. ¦ Ovaj se odlomak promijenio: ponovno pokreni provjeru. ¦ Ta odlomek se je spremenil: znova zaženi pregled.
+Ce que montre l’image, en une phrase (ex. « Mariage de Jean et Marie devant l’église, 1923 ») ¦ Što slika prikazuje, u jednoj rečenici (npr. „Mariage de Jean et Marie devant l’église, 1923”) ¦ Kaj prikazuje slika, v enem stavku (npr. »Mariage de Jean et Marie devant l’église, 1923«)
+Ce texte suit la fiche : il se met à jour à l’ouverture du document (Outils → Mettre à jour les champs). ¦ Ovaj tekst prati zapis: ažurira se pri otvaranju dokumenta (Alati → Ažuriraj polja). ¦ To besedilo sledi zapisu: posodobi se ob odprtju dokumenta (Orodja → Posodobi polja).
+Centrer ¦ Centriraj ¦ Na sredino
+Certaines images, trop lourdes, n’ont pas été reprises. ¦ Neke slike, prevelike, nisu preuzete. ¦ Nekatere slike so bile prevelike in niso bile prevzete.
+Cette case n’est pas fusionnée. ¦ Ovo polje nije spojeno. ¦ Ta celica ni spojena.
+Cette feuille est vide. ¦ Ovaj list je prazan. ¦ Ta list je prazen.
+Cette image n’a pas de fichier. ¦ Ova slika nema datoteku. ¦ Ta slika nima datoteke.
+Champ ¦ Polje ¦ Polje
+Changer l’image ¦ Promijeni sliku ¦ Zamenjaj sliko
+Changer l’image… ¦ Promijeni sliku… ¦ Zamenjaj sliko…
+Chaque Mot ¦ Svaka Riječ ¦ Vsaka Beseda
+Chaque Mot Avec Une Majuscule ¦ Svaka Riječ Velikim Početnim Slovom ¦ Vsaka Beseda Z Veliko Začetnico
+Cherche un mot avec 🔍 : chaque endroit trouvé s’affiche ici. ¦ Traži riječ pomoću 🔍: svako pronađeno mjesto prikazuje se ovdje. ¦ Poišči besedo s 🔍: vsako najdeno mesto se prikaže tukaj.
+Chercher… (un mot, un nom) ¦ Traži… (riječ, ime) ¦ Išči … (besedo, ime)
+Choisir un classeur du Tableur ¦ Odaberi radnu knjigu iz proračunske tablice ¦ Izberi delovni zvezek iz preglednice
+Choisir un média (lien) ¦ Odaberi medij (poveznica) ¦ Izberi medij (povezava)
+Choisis d’abord du texte. ¦ Najprije odaberi tekst. ¦ Najprej izberi besedilo.
+Choisis d’abord le texte à changer. ¦ Najprije odaberi tekst koji želiš promijeniti. ¦ Najprej izberi besedilo, ki ga želiš spremeniti.
+Choisis le passage à commenter. ¦ Odaberi odlomak koji želiš komentirati. ¦ Izberi odlomek, ki ga želiš komentirati.
+Choisis les paragraphes à mettre en colonnes. ¦ Odaberi odlomke koje želiš staviti u stupce. ¦ Izberi odstavke, ki jih želiš postaviti v stolpce.
+Choisis un mot (double-clic) ou mets le curseur dedans, puis 🔁 Synonymes. ¦ Odaberi riječ (dvostruki klik) ili stavi kursor u nju, zatim 🔁 Sinonimi. ¦ Izberi besedo (dvoklik) ali postavi kazalko vanjo, nato 🔁 Sopomenke.
+Choisis un rectangle de cases (sans morceau d’une autre fusion). ¦ Odaberi pravokutnik polja (bez dijela nekog drugog spajanja). ¦ Izberi pravokotnik celic (brez dela drugega spajanja).
+Classique ¦ Klasično ¦ Klasično
+Classique (à la française) ¦ Klasično (na francuski način) ¦ Klasično (po francosko)
+Clic sur un mot : il remplace « {word} » (↶ pour revenir). ¦ Klikni riječ: ona zamjenjuje „{word}” (↶ za povratak). ¦ Klikni besedo: zamenja »{word}« (↶ za vrnitev).
+Clique pour l’ajouter au texte (la fenêtre reste ouverte). ¦ Klikni da je dodaš u tekst (prozor ostaje otvoren). ¦ Klikni, da jo dodaš v besedilo (okno ostane odprto).
+Coche deux versions (ou « Maintenant ») pour les comparer. ¦ Označi dvije verzije (ili „Sada”) da ih usporediš. ¦ Označi dve različici (ali »Zdaj«), da ju primerjaš.
+Coller depuis Word ou le web ¦ Zalijepi iz Worda ili s weba ¦ Prilepi iz Worda ali s spleta
+Coller sans la mise en forme ¦ Zalijepi bez oblikovanja ¦ Prilepi brez oblikovanja
+Colonne ajoutée ¦ Stupac dodan ¦ Stolpec dodan
+Colonne supprimée ¦ Stupac izbrisan ¦ Stolpec izbrisan
+Commande inconnue : {cmd} ¦ Nepoznata naredba: {cmd} ¦ Neznan ukaz: {cmd}
+Commencer sur une nouvelle page ¦ Počni na novoj stranici ¦ Začni na novi strani
+Commentaire supprimé ¦ Komentar izbrisan ¦ Komentar izbrisan
+Commentaires ¦ Komentari ¦ Komentarji
+Commentaires (panneau) ¦ Komentari (ploča) ¦ Komentarji (podokno)
+Commenter ¦ Komentiraj ¦ Komentiraj
+Compte rendu de visite ¦ Izvještaj o posjetu ¦ Poročilo o obisku
+Conjoint ¦ Bračni drug ¦ Zakonec
+Copie enregistrée : « {name} ». ¦ Kopija spremljena: „{name}”. ¦ Kopija shranjena: »{name}«.
+Copie impossible : {error} ¦ Kopiranje nije moguće: {error} ¦ Kopiranje ni mogoče: {error}
+Copie rangée dans les médias ({format}). ¦ Kopija spremljena u medije ({format}). ¦ Kopija shranjena med medije ({format}).
+Copie « {name} » enregistrée. ¦ Kopija „{name}” spremljena. ¦ Kopija »{name}« shranjena.
+Corriger ¦ Ispravi ¦ Popravi
+Couleur du texte ¦ Boja teksta ¦ Barva besedila
+Couleur du texte… ¦ Boja teksta… ¦ Barva besedila…
+Couleur et surlignage (C2) ¦ Boja i isticanje (C2) ¦ Barva in označevanje (C2)
+Couper ici ¦ Izreži ovdje ¦ Razreži tukaj
+Créer le lien ¦ Stvori poveznicu ¦ Ustvari povezavo
+Créer le style ¦ Stvori stil ¦ Ustvari slog
+Créer le tableau ¦ Stvori tablicu ¦ Ustvari tabelo
+Créer les copies ¦ Stvori kopije ¦ Ustvari kopije
+Cyrillique ¦ Ćirilica ¦ Cirilica
+Dans la sélection : mots ¦ U odabiru: riječi ¦ V izboru: besede
+Dans le texte, entre parenthèses ¦ U tekstu, u zagradama ¦ V besedilu, v oklepaju
+Date (mise à jour à chaque ouverture) ¦ Datum (ažurira se pri svakom otvaranju) ¦ Datum (posodobi se ob vsakem odprtju)
+Date du jour ¦ Današnji datum ¦ Današnji datum
+Date du mariage ¦ Datum vjenčanja ¦ Datum poroke
+Demande d’acte (remplie avec une fiche) ¦ Zahtjev za matičnim zapisom (ispunjen prema zapisu) ¦ Zahteva za matični vpis (izpolnjena po zapisu)
+Demande d’acte d’état civil ¦ Zahtjev za izvatkom iz matičnih knjiga ¦ Zahteva za izpisek iz matičnih knjig
+Design ¦ Dizajn ¦ Oblikovanje
+Diminuer le retrait ¦ Smanji uvlaku ¦ Zmanjšaj zamik
+Document ¦ Dokument ¦ Dokument
+Document importé ¦ Uvezeni dokument ¦ Uvožen dokument
+Document modifié ailleurs ¦ Dokument je promijenjen negdje drugdje ¦ Dokument je bil spremenjen drugje
+Document « {name} » importé ({words}) ¦ Dokument „{name}” uvezen ({words}) ¦ Dokument »{name}« uvožen ({words})
+Donne un nom au style. ¦ Daj ime stilu. ¦ Poimenuj slog.
+Double (2) ¦ Dvostruko (2) ¦ Dvojno (2)
+Double-clic : modifier le pied de page ¦ Dvostruki klik: uredi podnožje ¦ Dvoklik: uredi nogo
+Double-clic : modifier l’en-tête ¦ Dvostruki klik: uredi zaglavlje ¦ Dvoklik: uredi glavo
+Double-clic : renommer · clic droit : plus ¦ Dvostruki klik: preimenuj · desni klik: više ¦ Dvoklik: preimenuj · desni klik: več
+Droite ¦ Desno ¦ Desno
+Déplacer à droite ¦ Pomakni udesno ¦ Premakni v desno
+Déplacer à gauche ¦ Pomakni ulijevo ¦ Premakni v levo
+D’après le paragraphe du curseur : change ce que tu veux, puis il sera proposé dans la liste des styles. ¦ Prema odlomku na kojem je kursor: promijeni što želiš, zatim će biti ponuđen u popisu stilova. ¦ Po odstavku, kjer je kazalka: spremeni, kar želiš, nato bo ponujen na seznamu slogov.
+Effacer la mise en forme ¦ Očisti oblikovanje ¦ Počisti oblikovanje
+Elle sert à l’orthographe (mots soulignés en rouge, corrections au clic droit) et à la lecture à voix haute. ¦ Služi za pravopis (riječi podcrtane crveno, ispravci desnim klikom) i za čitanje naglas. ¦ Uporablja se za črkovanje (besede, podčrtane z rdečo, popravki z desnim klikom) in za branje na glas.
+En note de bas de page ¦ Kao fusnota ¦ Kot sprotna opomba
+En note de fin ¦ Kao završna bilješka ¦ Kot končna opomba
+En-tête (en haut de chaque page) ¦ Zaglavlje (na vrhu svake stranice) ¦ Glava (na vrhu vsake strani)
+En-tête de la première page ¦ Zaglavlje prve stranice ¦ Glava prve strani
+En-tête et pied de page ¦ Zaglavlje i podnožje ¦ Glava in noga
+En-tête et pied de page… ¦ Zaglavlje i podnožje… ¦ Glava in noga…
+En-tête et pied… ¦ Zaglavlje i podnožje… ¦ Glava in noga…
+Enregistre d’abord le document (💾) : ses versions seront gardées avec lui. ¦ Najprije spremi dokument (💾): njegove verzije čuvat će se s njim. ¦ Najprej shrani dokument (💾): njegove različice bodo shranjene z njim.
+Enregistrer comme modèle ¦ Spremi kao predložak ¦ Shrani kot predlogo
+Enregistrer comme modèle… ¦ Spremi kao predložak… ¦ Shrani kot predlogo…
+Enregistrer comme nouvelle version ¦ Spremi kao novu verziju ¦ Shrani kot novo različico
+Enregistrer tout seul ¦ Spremaj automatski ¦ Samodejno shranjuj
+Enregistrer une copie ¦ Spremi kopiju ¦ Shrani kopijo
+Envoi des images indisponible. ¦ Slanje slika nije dostupno. ¦ Pošiljanje slik ni na voljo.
+Envoyer ¦ Pošalji ¦ Pošlji
+Envoyer vers la mise en page… ¦ Pošalji u prijelom… ¦ Pošlji v postavitev…
+Espace après ¦ Razmak poslije ¦ Razmik za
+Espace après le paragraphe ¦ Razmak nakon odlomka ¦ Razmik za odstavkom
+Espace avant ¦ Razmak prije ¦ Razmik pred
+Espace avant le paragraphe ¦ Razmak prije odlomka ¦ Razmik pred odstavkom
+Espace fine avant ; ! ? ¦ Uski razmak prije ; ! ? ¦ Ozek presledek pred ; ! ?
+Espace insécable avant les deux-points ¦ Neprelomivi razmak prije dvotočke ¦ Nedeljivi presledek pred dvopičjem
+Espaces en trop ¦ Suvišni razmaci ¦ Odvečni presledki
+Espagnol ¦ Španjolski ¦ Španščina
+Et {n} de plus (« Tout corriger » les prend aussi). ¦ I još {n} („Ispravi sve” obuhvaća i njih). ¦ In še {n} (»Popravi vse« zajame tudi te).
+Exporté : {name} ¦ Izvezeno: {name} ¦ Izvoženo: {name}
+Exposant ¦ Eksponent ¦ Nadpisano
+Expressions simples ¦ Jednostavni izrazi ¦ Preprosti izrazi
+FORMAT ¦ OBLIKOVANJE ¦ OBLIKA
+Famille et vie ¦ Obitelj i život ¦ Družina in življenje
+Feuille trop grande pour un document (plus de 20 000 cases) : choisis une plage plus petite dans le Tableur. ¦ List je prevelik za dokument (više od 20 000 polja): odaberi manji raspon u proračunskoj tablici. ¦ List je prevelik za dokument (več kot 20 000 celic): v preglednici izberi manjši obseg.
+Fiche d’identité d’un ancêtre (remplie) ¦ Osobni zapis pretka (ispunjen) ¦ Osebni zapis prednika (izpolnjen)
+Fiche ouverte derrière le document (ferme-le ou réduis-le pour la voir). ¦ Zapis je otvoren iza dokumenta (zatvori ga ili smanji da ga vidiš). ¦ Zapis je odprt za dokumentom (zapri ga ali pomanjšaj, da ga vidiš).
+Filigrane ¦ Vodeni žig ¦ Vodni žig
+Garder avec le paragraphe suivant ¦ Drži sa sljedećim odlomkom ¦ Obdrži z naslednjim odstavkom
+Garder avec le suivant ¦ Drži sa sljedećim ¦ Obdrži z naslednjim
+Garder la mise en forme (nettoyée) ¦ Zadrži oblikovanje (očišćeno) ¦ Ohrani oblikovanje (očiščeno)
+Garder ma version ¦ Zadrži moju verziju ¦ Obdrži mojo različico
+Gauche ¦ Lijevo ¦ Levo
+Glisse la souris d’une case à l’autre pour en choisir plusieurs, puis « Fusionner ». ¦ Povuci mišem od polja do polja da ih odabereš više, zatim „Spoji”. ¦ Povleci z miško od celice do celice, da jih izbereš več, nato »Spoji«.
+Gras ¦ Podebljano ¦ Krepko
+Gras, italique… ¦ Podebljano, kurziv… ¦ Krepko, ležeče…
+Grec ¦ Grčki ¦ Grščina
+Groupe de caractères ¦ Skupina znakova ¦ Skupina znakov
+Guillemets français « » ¦ Francuski navodnici « » ¦ Francoski narekovaji « »
+Haut ¦ Gore ¦ Zgoraj
+Hauteur ¦ Visina ¦ Višina
+Histoire d’une maison ou d’un village ¦ Povijest kuće ili sela ¦ Zgodovina hiše ali vasi
+IMAGE ¦ SLIKA ¦ SLIKA
+Image ¦ Slika ¦ Slika
+Image ajoutée (et rangée dans les médias). ¦ Slika je dodana (i spremljena u medije). ¦ Slika je dodana (in shranjena med medije).
+Image choisie : tire un coin pour la taille, clic droit pour l’habillage, ⌫ pour la supprimer. ¦ Slika je odabrana: povuci kut za veličinu, desni klik za prelamanje teksta, ⌫ za brisanje. ¦ Slika je izbrana: povleci kot za velikost, desni klik za prelivanje besedila, ⌫ za izbris.
+Image posée : clic pour la taille, clic droit pour l’habillage (carré, haut et bas) et la légende. ¦ Slika je postavljena: klik za veličinu, desni klik za prelamanje teksta (kvadrat, gore i dolje) i opis slike. ¦ Slika je postavljena: klik za velikost, desni klik za prelivanje besedila (kvadrat, zgoraj in spodaj) in napis.
+Image rangée dans les médias… ¦ Slika se sprema u medije… ¦ Slika se shranjuje med medije…
+Image sans description (lue à voix haute aux personnes qui ne voient pas) ¦ Slika bez opisa (čita se naglas osobama koje ne vide) ¦ Slika brez opisa (prebere se na glas osebam, ki ne vidijo)
+Image supprimée ¦ Slika izbrisana ¦ Slika izbrisana
+Impossible d’enregistrer : {error} ¦ Spremanje nije moguće: {error} ¦ Shranjevanje ni mogoče: {error}
+Indice ¦ Indeks ¦ Podpisano
+Insérer la fiche d’identité ¦ Umetni osobni zapis ¦ Vstavi osebni zapis
+Interligne ¦ Prored ¦ Razmik med vrsticami
+Interligne et espacement ¦ Prored i razmaci ¦ Razmik med vrsticami in odstavki
+Interligne {n} ¦ Prored {n} ¦ Razmik med vrsticami {n}
+Italien ¦ Talijanski ¦ Italijanščina
+Italique ¦ Kurziv ¦ Ležeče
+Jeu de styles ¦ Skup stilova ¦ Nabor slogov
+Jeu de styles des nouveaux documents ¦ Skup stilova novih dokumenata ¦ Nabor slogov novih dokumentov
+Jeu de styles « {name} » ¦ Skup stilova „{name}” ¦ Nabor slogov »{name}«
+Jeu de styles… ¦ Skup stilova… ¦ Nabor slogov…
+Justifier ¦ Poravnaj obostrano ¦ Poravnaj obojestransko
+Justifié ¦ Obostrano poravnato ¦ Obojestransko poravnano
+La bibliographie (Insertion → 📚) reprend toute seule les sources citées. ¦ Bibliografija (Umetanje → 📚) sama preuzima citirane izvore. ¦ Bibliografija (Vstavljanje → 📚) sama prevzame navedene vire.
+La biographie de qui ? ¦ Čiji životopis? ¦ Čigav življenjepis?
+La demande d’acte pour qui ? ¦ Za koga je zahtjev za matičnim zapisom? ¦ Za koga je zahteva za matični vpis?
+La fenêtre des images n’est pas chargée. ¦ Prozor sa slikama nije učitan. ¦ Okno s slikami ni naloženo.
+La fenêtre des versions n’est pas chargée. ¦ Prozor s verzijama nije učitan. ¦ Okno z različicami ni naloženo.
+La fiche de qui ? ¦ Čiji zapis? ¦ Čigav zapis?
+La lecture à voix haute n’existe pas dans ce navigateur. ¦ Čitanje naglas ne postoji u ovom pregledniku. ¦ Branje na glas v tem brskalniku ne obstaja.
+La naissance : date et lieu ¦ Rođenje: datum i mjesto ¦ Rojstvo: datum in kraj
+La première ligne est répétée en haut de chaque page ¦ Prvi redak ponavlja se na vrhu svake stranice ¦ Prva vrstica se ponovi na vrhu vsake strani
+La suite du document commence sur une nouvelle page, avec son propre format : par exemple un grand tableau ou un arbre en paysage, puis on revient en portrait. ¦ Nastavak dokumenta počinje na novoj stranici, s vlastitim formatom: npr. velika tablica ili stablo položeno, zatim se vraća na uspravno. ¦ Nadaljevanje dokumenta se začne na novi strani z lastnim formatom: npr. velika tabela ali drevo ležeče, nato se vrne na pokončno.
+La touche Tab avance jusqu’au prochain arrêt. Dans un tableau, Tab passe à la case suivante ; dans une liste, elle décale d’un niveau. ¦ Tipka Tab ide do sljedećeg tabulatora. U tablici Tab prelazi na sljedeće polje; u popisu pomiče za jednu razinu. ¦ Tipka Tab skoči do naslednjega tabulatorja. V tabeli Tab skoči v naslednjo celico; na seznamu zamakne za eno raven.
+La vérification n’est pas chargée. ¦ Provjera nije učitana. ¦ Preverjanje ni naloženo.
+Langue ¦ Jezik ¦ Jezik
+Langue des nouveaux documents ¦ Jezik novih dokumenata ¦ Jezik novih dokumentov
+Langue du document (orthographe, lecture à voix haute) ¦ Jezik dokumenta (pravopis, čitanje naglas) ¦ Jezik dokumenta (črkovanje, branje na glas)
+Largeur ¦ Širina ¦ Širina
+Latin ¦ Latinski ¦ Latinščina
+Le décès : date et lieu ¦ Smrt: datum i mjesto ¦ Smrt: datum in kraj
+Le livre dont reprendre les styles ¦ Knjiga iz koje preuzimaš stilove ¦ Knjiga, iz katere prevzameš sloge
+Le mot entier seulement ¦ Samo cijela riječ ¦ Samo cela beseda
+Le mot tel qu’il apparaîtra dans l’index : ¦ Riječ kako će se pojaviti u kazalu: ¦ Beseda, kot bo prikazana v stvarnem kazalu:
+Le moteur du tableur n’est pas chargé. ¦ Pogon proračunske tablice nije učitan. ¦ Pogon preglednice ni naložen.
+Le nom (lien vers la fiche) ¦ Ime (poveznica na zapis) ¦ Ime (povezava na zapis)
+Le nom de la copie : ¦ Naziv kopije: ¦ Ime kopije:
+Le nom du modèle (le texte reste : vide-le avant si tu veux un modèle vierge) : ¦ Naziv predloška (tekst ostaje: prije toga ga isprazni ako želiš prazan predložak): ¦ Ime predloge (besedilo ostane: prej ga izprazni, če želiš prazno predlogo):
+Le nom du nouvel onglet ¦ Naziv nove kartice ¦ Ime novega zavihka
+Le nom et les années (1850 – 1920) ¦ Ime i godine (1850. – 1920.) ¦ Ime in leta (1850 – 1920)
+Le nom, la naissance et le décès ¦ Ime, rođenje i smrt ¦ Ime, rojstvo in smrt
+Le petit arbre de qui ? ¦ Čije malo stablo? ¦ Čigavo malo drevo?
+Le récit de qui ? ¦ Čija priča? ¦ Čigava zgodba?
+Le texte devient des pages d’un livre (Mise en page) : les titres 1 deviennent des chapitres, les images des pages d’images avec leur légende, les notes une partie « Notes » à la fin. Ton document reste tel quel ici. ¦ Tekst postaje stranice knjige (Prijelom): naslovi 1 postaju poglavlja, slike stranice sa slikama i njihovim opisom, bilješke dio „Bilješke” na kraju. Tvoj dokument ovdje ostaje nepromijenjen. ¦ Besedilo postane strani knjige (Postavitev): naslovi 1 postanejo poglavja, slike strani s slikami in njihovimi napisi, opombe del »Opombe« na koncu. Tvoj dokument tukaj ostane nespremenjen.
+Le texte seul ¦ Samo tekst ¦ Samo besedilo
+Le tri ne marche pas avec des cases fusionnées : sépare-les d’abord. ¦ Sortiranje ne radi sa spojenim poljima: najprije ih razdvoji. ¦ Razvrščanje ne deluje s spojenimi celicami: najprej jih razdruži.
+Lecture arrêtée. ¦ Čitanje zaustavljeno. ¦ Branje ustavljeno.
+Legal US ¦ Legal US ¦ Legal US
+Les champs « » prennent les valeurs d’une fiche : Fichier → « 👤 Remplir avec une fiche… », ou une copie par personne avec Outils → « 📨 Publipostage… ». ¦ Polja „” preuzimaju vrijednosti iz zapisa: Datoteka → „👤 Ispuni prema zapisu…”, ili jedna kopija po osobi s Alati → „📨 Skupno slanje…”. ¦ Polja »« prevzamejo vrednosti iz zapisa: Datoteka → »👤 Izpolni po zapisu …«, ali ena kopija na osebo z Orodja → »📨 Spajanje dokumentov …«.
+Les changements faits depuis le dernier enregistrement seront perdus. ¦ Promjene napravljene od posljednjeg spremanja bit će izgubljene. ¦ Spremembe od zadnjega shranjevanja bodo izgubljene.
+Les dates et les lieux écrits à côté d’un nom de la base sont comparés à sa fiche (naissance, baptême, mariage, décès, inhumation, âges, numéros Sosa). Rien n’est changé tout seul. ¦ Datumi i mjesta napisani pokraj imena iz baze uspoređuju se s njegovim zapisom (rođenje, krštenje, vjenčanje, smrt, pokop, dob, Sosa brojevi). Ništa se ne mijenja samo. ¦ Datumi in kraji, zapisani poleg imena iz baze, se primerjajo z njegovim zapisom (rojstvo, krst, poroka, smrt, pokop, starost, Sosa številke). Nič se ne spremeni samo.
+Les macros du fichier sont ignorées (elles ne sont jamais lancées). ¦ Makronaredbe iz datoteke se zanemaruju (nikad se ne pokreću). ¦ Makri iz datoteke se prezrejo (nikoli se ne zaženejo).
+Les modifications ne sont plus suivies. ¦ Promjene se više ne prate. ¦ Spremembe se ne sledijo več.
+Les modifications sont suivies ¦ Promjene se prate ¦ Spremembe se sledijo
+Les mots mal écrits sont soulignés en rouge (clic droit pour les corrections). ¦ Pogrešno napisane riječi podcrtane su crveno (desni klik za ispravke). ¦ Napačno napisane besede so podčrtane z rdečo (desni klik za popravke).
+Les paragraphes choisis se partagent en colonnes équilibrées (comme dans un journal). ¦ Odabrani odlomci dijele se u uravnotežene stupce (kao u novinama). ¦ Izbrani odstavki se razdelijo v uravnotežene stolpce (kot v časopisu).
+Les personnes du publipostage ¦ Osobe za skupno slanje ¦ Osebe za spajanje dokumentov
+Les raccourcis à soi ne sont pas chargés. ¦ Tvoji prečaci nisu učitani. ¦ Tvoje bližnjice niso naložene.
+Les titres et le texte changent ensemble de police et de couleur ; tes propres styles restent. ¦ Naslovi i tekst zajedno mijenjaju font i boju; tvoji vlastiti stilovi ostaju. ¦ Naslovi in besedilo skupaj spremenijo pisavo in barvo; tvoji lastni slogi ostanejo.
+Lettre US ¦ Letter US ¦ Letter US
+Lettre aux archives ¦ Pismo arhivu ¦ Pismo arhivu
+Lettre aux archives, demande d’acte, récit d’un ancêtre, compte rendu de visite, rapport de recherche… ¦ Pismo arhivu, zahtjev za matičnim zapisom, priča o pretku, izvještaj o posjetu, izvještaj o istraživanju… ¦ Pismo arhivu, zahteva za matični vpis, zgodba o predniku, poročilo o obisku, poročilo o raziskovanju…
+Lettre à la famille ¦ Pismo obitelji ¦ Pismo družini
+Lettres accentuées ¦ Slova s naglascima ¦ Črke s strešicami in naglasi
+Lettres et abréviations anciennes ¦ Stara slova i kratice ¦ Stare črke in okrajšave
+Lettrine ¦ Inicijal ¦ Inicialka
+LibreOffice, OpenOffice ¦ LibreOffice, OpenOffice ¦ LibreOffice, OpenOffice
+Lien « {text} » : écris plutôt où il mène ¦ Poveznica „{text}”: radije napiši kamo vodi ¦ Povezava »{text}«: raje napiši, kam vodi
+Lieu du mariage ¦ Mjesto vjenčanja ¦ Kraj poroke
+Ligne ajoutée ¦ Redak dodan ¦ Vrstica dodana
+Ligne au-dessus ¦ Redak iznad ¦ Vrstica nad
+Ligne d’en-tête (répétée sur chaque page) ¦ Redak zaglavlja (ponavlja se na svakoj stranici) ¦ Naslovna vrstica (ponovi se na vsaki strani)
+Ligne en dessous ¦ Redak ispod ¦ Vrstica pod
+Ligne supprimée ¦ Redak izbrisan ¦ Vrstica izbrisana
+Lire à voix haute ¦ Čitaj naglas ¦ Beri na glas
+Liste numérotée ¦ Numerirani popis ¦ Oštevilčen seznam
+Liste à puces ¦ Popis s grafičkim oznakama ¦ Seznam z oznakami
+Livre (15,6 × 23,4 cm) ¦ Knjiga (15,6 × 23,4 cm) ¦ Knjiga (15,6 × 23,4 cm)
+Livre US (6 × 9 in) ¦ Knjiga US (6 × 9 in) ¦ Knjiga US (6 × 9 in)
+Livre ancien ¦ Stara knjiga ¦ Stara knjiga
+Louise Borie, née en 1850 ¦ Louise Borie, rođena 1850. ¦ Louise Borie, rojena leta 1850
+L’onglet « {name} » et son texte seront supprimés. ¦ Kartica „{name}” i njezin tekst bit će izbrisani. ¦ Zavihek »{name}« in njegovo besedilo bosta izbrisana.
+MAJUSCULES ¦ VELIKA SLOVA ¦ VELIKE ČRKE
+Majuscule en début de phrase ¦ Veliko slovo na početku rečenice ¦ Velika začetnica na začetku stavka
+Majuscules et minuscules comptent ¦ Razlikuj velika i mala slova ¦ Razlikuj velike in male črke
+Marquer ¦ Označi ¦ Označi
+Marquer pour l’index ¦ Označi za kazalo ¦ Označi za stvarno kazalo
+Marques de mise en forme ¦ Oznake oblikovanja ¦ Oznake oblikovanja
+Marques de mise en forme ¶ ¦ Oznake oblikovanja ¶ ¦ Oznake oblikovanja ¶
+Mathématiques ¦ Matematika ¦ Matematika
+Mes modèles ¦ Moji predlošci ¦ Moje predloge
+Mettre à jour les champs (personnes, dates) ¦ Ažuriraj polja (osobe, datumi) ¦ Posodobi polja (osebe, datumi)
+Mise en forme ¦ Oblikovanje ¦ Oblikovanje
+Mise en forme (panneau de droite) ¦ Oblikovanje (desna ploča) ¦ Oblikovanje (desno podokno)
+Mise en évidence ¦ Isticanje ¦ Poudarjanje
+Moderne ¦ Moderno ¦ Moderno
+Modification acceptée ¦ Promjena prihvaćena ¦ Sprememba sprejeta
+Modification précédente ¦ Prethodna promjena ¦ Prejšnja sprememba
+Modification refusée ¦ Promjena odbijena ¦ Sprememba zavrnjena
+Modification suivante ¦ Sljedeća promjena ¦ Naslednja sprememba
+Modifications suivies ¦ Praćene promjene ¦ Sledene spremembe
+Modifier le lien… ¦ Uredi poveznicu… ¦ Uredi povezavo…
+Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles). ¦ Predložak „{name}” spremljen (Kreni od predloška → Moji predlošci). ¦ Predloga »{name}« shranjena (Začni s predlogo → Moje predloge).
+Moi ¦ Ja ¦ Jaz
+Mon document ¦ Moj dokument ¦ Moj dokument
+Mon nom (pour le suivi des modifications et les commentaires) ¦ Moje ime (za praćenje promjena i komentare) ¦ Moje ime (za sledenje spremembam in komentarje)
+Monnaies et chiffres ¦ Valute i brojke ¦ Valute in številke
+Montrer dans le texte ¦ Prikaži u tekstu ¦ Prikaži v besedilu
+Montrer les marques de mise en forme ¶ ¦ Prikaži oznake oblikovanja ¶ ¦ Prikaži oznake oblikovanja ¶
+Montrer les modifications ¦ Prikaži promjene ¦ Prikaži spremembe
+Montrer les modifications… ¦ Prikaži promjene… ¦ Prikaži spremembe…
+Montrer ▾ ¦ Prikaži ▾ ¦ Prikaži ▾
+Mot ancien ¦ Stara riječ ¦ Stara beseda
+Mot entier ¦ Cijela riječ ¦ Cela beseda
+Mot répété ¦ Ponovljena riječ ¦ Ponovljena beseda
+Mots ¦ Riječi ¦ Besede
+NOTE DE BAS DE PAGE ¦ FUSNOTA ¦ SPROTNA OPOMBA
+NOTE DE FIN ¦ ZAVRŠNA BILJEŠKA ¦ KONČNA OPOMBA
+Naissance et décès ¦ Rođenje i smrt ¦ Rojstvo in smrt
+Nom de famille ¦ Prezime ¦ Priimek
+Nombre de colonnes ¦ Broj stupaca ¦ Število stolpcev
+Nombre de mots, de caractères, de paragraphes ¦ Broj riječi, znakova, odlomaka ¦ Število besed, znakov, odstavkov
+Nombre de pages ¦ Broj stranica ¦ Število strani
+Non (avec 💾 ou ⌘S) ¦ Ne (s 💾 ili ⌘S) ¦ Ne (s 💾 ali ⌘S)
+Normal ¦ Normalno ¦ Navadno
+Normal, A4, marges de 2,5 cm ¦ Normalno, A4, margine 2,5 cm ¦ Navadno, A4, robovi 2,5 cm
+Note de bas de page ¦ Fusnota ¦ Sprotna opomba
+Note de fin (à la fin du document) ¦ Završna bilješka (na kraju dokumenta) ¦ Končna opomba (na koncu dokumenta)
+Note {n} ¦ Bilješka {n} ¦ Opomba {n}
+Nouveau commentaire ¦ Novi komentar ¦ Nov komentar
+Nouvel onglet ¦ Nova kartica ¦ Nov zavihek
+Nouvelle section en paysage. ¦ Novi odjeljak položeno. ¦ Nov odsek ležeče.
+Nouvelle section en portrait. ¦ Novi odjeljak uspravno. ¦ Nov odsek pokončno.
+Numéro de la page (1 à {n}) : ¦ Broj stranice (1 do {n}): ¦ Številka strani (1 do {n}):
+Néerlandais ¦ Nizozemski ¦ Nizozemščina
+OUTILS ¦ ALATI ¦ ORODJA
+Occitan ¦ Okcitanski ¦ Okcitanščina
+Onglet renommé ¦ Kartica preimenovana ¦ Zavihek preimenovan
+Onglet supprimé ¦ Kartica izbrisana ¦ Zavihek izbrisan
+Onglet {n} ¦ Kartica {n} ¦ Zavihek {n}
+Onglets du document ¦ Kartice dokumenta ¦ Zavihki dokumenta
+Onglets rangés ¦ Kartice poredane ¦ Zavihki razvrščeni
+Orientation ¦ Usmjerenje ¦ Usmerjenost
+Orientation de la suite ¦ Usmjerenje nastavka ¦ Usmerjenost nadaljevanja
+Ouvrir le lieu ¦ Otvori mjesto ¦ Odpri kraj
+Ouvrir le panneau de navigation ¦ Otvori navigacijsku ploču ¦ Odpri podokno za krmarjenje
+Page blanche ¦ Prazna stranica ¦ Prazna stran
+Page {n} ¦ Stranica {n} ¦ Stran {n}
+Page {page} / {total} ¦ Stranica {page} / {total} ¦ Stran {page} / {total}
+Panneau de droite ¦ Desna ploča ¦ Desno podokno
+Panneau de navigation : titres, pages, résultats ¦ Navigacijska ploča: naslovi, stranice, rezultati ¦ Podokno za krmarjenje: naslovi, strani, rezultati
+Paragraphe ¦ Odlomak ¦ Odstavek
+Paragraphes ¦ Odlomci ¦ Odstavki
+Paragraphe… ¦ Odlomak… ¦ Odstavek…
+Pas de personne dans cette liste. ¦ Na ovom popisu nema osoba. ¦ Na tem seznamu ni oseb.
+Pas de synonyme connu pour « {word} ». Le dictionnaire intégré compte {n} groupes de mots, surtout ceux d’un récit de famille. ¦ Nema poznatog sinonima za „{word}”. Ugrađeni rječnik ima {n} skupina riječi, uglavnom onih iz obiteljske priče. ¦ Za »{word}« ni znane sopomenke. Vgrajeni slovar ima toliko skupin besed: {n}, predvsem iz družinskih zgodb.
+Pas d’espace avant la virgule ou le point ¦ Bez razmaka prije zareza ili točke ¦ Brez presledka pred vejico ali piko
+Pas encore de commentaire : choisis un passage, puis « 💬 Nouveau commentaire ». ¦ Još nema komentara: odaberi odlomak, zatim „💬 Novi komentar”. ¦ Še ni komentarjev: izberi odlomek, nato »💬 Nov komentar«.
+Pas encore de modèle à toi : dans un document, Fichier → « Enregistrer comme modèle… ». ¦ Još nemaš vlastitih predložaka: u dokumentu Datoteka → „Spremi kao predložak…”. ¦ Še nimaš lastnih predlog: v dokumentu Datoteka → »Shrani kot predlogo …«.
+Pas encore de titre : choisis le style « Titre 1 » (ou Titre 2, 3…) pour un paragraphe, il apparaîtra ici. ¦ Još nema naslova: odaberi stil „Naslov 1” (ili Naslov 2, 3…) za odlomak i pojavit će se ovdje. ¦ Še ni naslovov: za odstavek izberi slog »Naslov 1« (ali Naslov 2, 3 …) in prikazal se bo tukaj.
+Personne pour l’instant. ¦ Za sada nikoga. ¦ Zaenkrat nikogar.
+Petites capitales ¦ Mala velika slova ¦ Pomanjšane velike črke
+Pied de la première page ¦ Podnožje prve stranice ¦ Noga prve strani
+Pied de page (en bas de chaque page) ¦ Podnožje (na dnu svake stranice) ¦ Noga (na dnu vsake strani)
+Place d’abord le curseur dans le texte. ¦ Najprije stavi kursor u tekst. ¦ Najprej postavi kazalko v besedilo.
+Place le curseur dans un paragraphe. ¦ Stavi kursor u odlomak. ¦ Postavi kazalko v odstavek.
+Place le curseur dans un tableau. ¦ Stavi kursor u tablicu. ¦ Postavi kazalko v tabelo.
+Place le curseur dans une modification (texte vert ou barré rouge). ¦ Stavi kursor u promjenu (zeleni ili crveno precrtani tekst). ¦ Postavi kazalko v spremembo (zeleno ali rdeče prečrtano besedilo).
+Place le curseur à l’endroit de la coupure. ¦ Stavi kursor na mjesto prijeloma. ¦ Postavi kazalko na mesto preloma.
+Plein écran (⛶) ¦ Cijeli zaslon (⛶) ¦ Celozaslonski način (⛶)
+Plus de ligne d’en-tête ¦ Bez retka zaglavlja ¦ Brez naslovne vrstice
+Points de suspension en un seul signe ¦ Tri točke kao jedan znak ¦ Tropičje kot en znak
+Police ¦ Font ¦ Pisava
+Police (E5) ¦ Font (E5) ¦ Pisava (E5)
+Police et taille (E5) ¦ Font i veličina (E5) ¦ Pisava in velikost (E5)
+Police… ¦ Font… ¦ Pisava…
+Polonais ¦ Poljski ¦ Poljščina
+Portugais ¦ Portugalski ¦ Portugalščina
+Pour que le document se lise bien avec un lecteur d’écran, à voix haute ou en grand. ¦ Da se dokument dobro čita čitačem zaslona, naglas ili uvećano. ¦ Da se dokument dobro bere z bralnikom zaslona, na glas ali povečano.
+Pour une fiche ou un lieu de la base : Insertion → 👤 Une personne, 📍 Un lieu. ¦ Za zapis ili mjesto iz baze: Umetanje → 👤 Osoba, 📍 Mjesto. ¦ Za zapis ali kraj iz baze: Vstavljanje → 👤 Oseba, 📍 Kraj.
+Première page différente (pour une page de titre ou une lettre) ¦ Drukčija prva stranica (za naslovnu stranicu ili pismo) ¦ Drugačna prva stran (za naslovno stran ali pismo)
+Précédent (⇧ Entrée) ¦ Prethodno (⇧ Enter) ¦ Prejšnje (⇧ Enter)
+Quelle feuille ? ¦ Koji list? ¦ Kateri list?
+Ranger une copie dans les médias ¦ Spremi kopiju u medije ¦ Shrani kopijo med medije
+Rangé dans Listes → 🛠️ Outils de modification → 📝 Traitement de texte. ¦ Nalazi se u Popisi → 🛠️ Alati za uređivanje → 📝 Obrada teksta. ¦ Najdeš ga v Seznami → 🛠️ Orodja za urejanje → 📝 Urejanje besedil.
+Rapport de recherche ¦ Izvještaj o istraživanju ¦ Poročilo o raziskovanju
+Rechercher et remplacer ¦ Traži i zamijeni ¦ Najdi in zamenjaj
+Relecture ¦ Provjera ¦ Pregled
+Remplacer par ¦ Zamijeni s ¦ Zamenjaj z
+Remplacer par… ¦ Zamijeni s… ¦ Zamenjaj z …
+Remplir avec la fiche de qui ? ¦ Ispuni prema čijem zapisu? ¦ Izpolni po čigavem zapisu?
+Renommer l’onglet ¦ Preimenuj karticu ¦ Preimenuj zavihek
+Renommer… ¦ Preimenuj… ¦ Preimenuj…
+Retirer la légende ¦ Ukloni opis slike ¦ Odstrani napis
+Retirer le lien (garder le texte) ¦ Ukloni poveznicu (zadrži tekst) ¦ Odstrani povezavo (obdrži besedilo)
+Retirer l’espace après ¦ Ukloni razmak poslije ¦ Odstrani razmik za
+Retirer l’espace avant ¦ Ukloni razmak prije ¦ Odstrani razmik pred
+Retrait gauche ¦ Lijeva uvlaka ¦ Levi zamik
+Retrait à droite ¦ Uvlaka zdesna ¦ Zamik z desne
+Retrait à gauche ¦ Uvlaka slijeva ¦ Zamik z leve
+Rien (le texte comme s’il était accepté) ¦ Ništa (tekst kao da je prihvaćen) ¦ Nič (besedilo, kot da je sprejeto)
+Rien de changé depuis : ce que tu tapes ou effaces apparaîtra ici. ¦ Od tada ništa nije promijenjeno: ono što utipkaš ili izbrišeš pojavit će se ovdje. ¦ Od takrat ni sprememb: kar natipkaš ali izbrišeš, se bo prikazalo tukaj.
+Rien à remplacer. ¦ Nema ničega za zamjenu. ¦ Ničesar ni za zamenjavo.
+Récents ¦ Nedavno ¦ Nedavno
+Récit d’un ancêtre ¦ Priča o pretku ¦ Zgodba o predniku
+Récit — {name} ¦ Priča — {name} ¦ Zgodba — {name}
+Répondre ¦ Odgovori ¦ Odgovori
+Répondre… ¦ Odgovori… ¦ Odgovori…
+STYLES ¦ STILOVI ¦ SLOGI
+Saut de page : la suite commence en haut de la page suivante. ¦ Prijelom stranice: nastavak počinje na vrhu sljedeće stranice. ¦ Prelom strani: nadaljevanje se začne na vrhu naslednje strani.
+Section {n} sur {total} (comme le document). ¦ Odjeljak {n} od {total} (kao dokument). ¦ Odsek {n} od {total} (kot dokument).
+Section {n} sur {total} (format à elle). ¦ Odjeljak {n} od {total} (vlastiti format). ¦ Odsek {n} od {total} (lasten format).
+Seulement un trait dessous ¦ Samo crta ispod ¦ Samo črta spodaj
+Signature ¦ Potpis ¦ Podpis
+Simple (1) ¦ Jednostruko (1) ¦ Enojno (1)
+Simple (une marge à côté des ajouts) ¦ Jednostavno (margina pokraj dodanog) ¦ Preprosto (rob ob dodanem besedilu)
+Souligné ¦ Podcrtano ¦ Podčrtano
+Sous-titre ¦ Podnaslov ¦ Podnaslov
+Style ¦ Stil ¦ Slog
+Style de caractère (quelques mots) ¦ Stil znakova (nekoliko riječi) ¦ Slog znakov (nekaj besed)
+Style de paragraphe ¦ Stil odlomka ¦ Slog odstavka
+Style du paragraphe ¦ Stil odlomka ¦ Slog odstavka
+Style « {name} » ¦ Stil „{name}” ¦ Slog »{name}«
+Style « {name} » créé. ¦ Stil „{name}” stvoren. ¦ Slog »{name}« ustvarjen.
+Style « {name} » supprimé ¦ Stil „{name}” izbrisan ¦ Slog »{name}« izbrisan
+Styles ¦ Stilovi ¦ Slogi
+Styles de paragraphe ¦ Stilovi odlomka ¦ Slogi odstavka
+Suivant ¦ Sljedeće ¦ Naslednje
+Suivant (Entrée) ¦ Sljedeće (Enter) ¦ Naslednje (Enter)
+Suivre les modifications ¦ Prati promjene ¦ Sledi spremembam
+Sujet ¦ Tema ¦ Zadeva
+Supprimer la colonne ¦ Izbriši stupac ¦ Izbriši stolpec
+Supprimer le tableau ¦ Izbriši tablicu ¦ Izbriši tabelo
+Supprimer l’image ¦ Izbriši sliku ¦ Izbriši sliko
+Supprimer l’onglet ? ¦ Izbrisati karticu? ¦ Izbrišem zavihek?
+Supprimer… ¦ Izbriši… ¦ Izbriši…
+Surlignage ¦ Isticanje bojom ¦ Označevanje
+Surlignage… ¦ Isticanje bojom… ¦ Označevanje…
+Symboles et flèches ¦ Simboli i strelice ¦ Simboli in puščice
+Séparer la cellule ¦ Razdvoji polje ¦ Razdruži celico
+T Titre ¦ T Naslov ¦ T Naslov
+TRAITEMENT DE TEXTE ¦ OBRADA TEKSTA ¦ UREJANJE BESEDIL
+Retrait − ¦ Uvlaka − ¦ Zamik −
+Tableau de « {name} » ¦ Tablica iz „{name}” ¦ Tabela iz »{name}«
+Tableau sans ligne de titres (Tableau → « Ligne d’en-tête ») ¦ Tablica bez retka naslova (Tablica → „Redak zaglavlja”) ¦ Tabela brez naslovne vrstice (Tabela → »Naslovna vrstica«)
+Tableau supprimé ¦ Tablica izbrisana ¦ Tabela izbrisana
+Tableau trié de A à Z ¦ Tablica poredana od A do Ž ¦ Tabela razvrščena od A do Ž
+Tableau trié de Z à A ¦ Tablica poredana od Ž do A ¦ Tabela razvrščena od Ž do A
+Tableau « {name} » ajouté ({n}). ¦ Tablica „{name}” dodana ({n}). ¦ Tabela »{name}« dodana ({n}).
+Tabloïd US ¦ Tabloid US ¦ Tabloid US
+Tabulations… ¦ Tabulatori… ¦ Tabulatorji…
+Taille de l’image ¦ Veličina slike ¦ Velikost slike
+Taille… ¦ Veličina… ¦ Velikost…
+Temps de lecture : environ {n} min. ¦ Vrijeme čitanja: oko {n} min. ¦ Čas branja: približno {n} min.
+Texte affiché ¦ Prikazani tekst ¦ Prikazano besedilo
+Texte de la note ¦ Tekst bilješke ¦ Besedilo opombe
+Texte du commentaire ¦ Tekst komentara ¦ Besedilo komentarja
+Texte du document ¦ Tekst dokumenta ¦ Besedilo dokumenta
+Texte très petit (moins de 8 points) ¦ Vrlo sitan tekst (manje od 8 točaka) ¦ Zelo drobno besedilo (manj kot 8 točk)
+Titre 1 ¦ Naslov 1 ¦ Naslov 1
+Titre 2 ¦ Naslov 2 ¦ Naslov 2
+Titre 3 ¦ Naslov 3 ¦ Naslov 3
+Titre 4 ¦ Naslov 4 ¦ Naslov 4
+Titre 5 ¦ Naslov 5 ¦ Naslov 5
+Titre 6 ¦ Naslov 6 ¦ Naslov 6
+Titre de niveau {n} juste après un niveau {last} : un niveau est sauté ¦ Naslov razine {n} odmah nakon razine {last}: jedna je razina preskočena ¦ Naslov ravni {n} takoj za ravnjo {last}: ena raven je preskočena
+Titre en {head}, texte en {body} ¦ Naslov u fontu {head}, tekst u fontu {body} ¦ Naslov v pisavi {head}, besedilo v pisavi {body}
+Titre vide ¦ Prazan naslov ¦ Prazen naslov
+Titres ¦ Naslovi ¦ Naslovi
+Ton commentaire… ¦ Tvoj komentar… ¦ Tvoj komentar…
+Tous les paragraphes de ce style changent ensemble. ¦ Svi odlomci ovog stila mijenjaju se zajedno. ¦ Vsi odstavki tega sloga se spremenijo skupaj.
+Tout accepter ¦ Prihvati sve ¦ Sprejmi vse
+Tout concorde avec les fiches. ¦ Sve se slaže sa zapisima. ¦ Vse se ujema z zapisi.
+Tout corriger ¦ Ispravi sve ¦ Popravi vse
+Tout est déjà à jour. ¦ Sve je već ažurirano. ¦ Vse je že posodobljeno.
+Tout montrer (ajouts et suppressions) ¦ Prikaži sve (dodano i izbrisano) ¦ Prikaži vse (dodano in izbrisano)
+Tout refuser ¦ Odbij sve ¦ Zavrni vse
+Tout remplacer ¦ Zamijeni sve ¦ Zamenjaj vse
+Tout retirer ¦ Ukloni sve ¦ Odstrani vse
+Toute la largeur du texte : {n} px. La hauteur suit (pas de déformation). ¦ Cijela širina teksta: {n} px. Visina se prilagođava (bez izobličenja). ¦ Celotna širina besedila: {n} px. Višina se prilagodi (brez popačenja).
+Toutes les 10 minutes ¦ Svakih 10 minuta ¦ Vsakih 10 minut
+Toutes les 5 minutes ¦ Svakih 5 minuta ¦ Vsakih 5 minut
+Toutes les minutes ¦ Svake minute ¦ Vsako minuto
+Trame (fond) ¦ Sjenčanje (pozadina) ¦ Senčenje (ozadje)
+Trame de la cellule… ¦ Sjenčanje polja… ¦ Senčenje celice…
+Transcription (machine à écrire) ¦ Prijepis (pisaći stroj) ¦ Prepis (pisalni stroj)
+Transcription d’acte mise au propre ¦ Uredni prijepis matičnog zapisa ¦ Čist prepis matičnega vpisa
+Triple (3) ¦ Trostruko (3) ¦ Trojno (3)
+Tu cherches des renseignements sur qui ? ¦ O kome tražiš podatke? ¦ O kom iščeš podatke?
+Typographie française ¦ Francuska tipografija ¦ Francoska tipografija
+Un arrêt tous les ¦ Tabulator svakih ¦ Tabulator vsakih
+Un cadre autour du paragraphe ¦ Okvir oko odlomka ¦ Okvir okoli odstavka
+Un champ vide s’écrit ¦ Prazno polje piše se kao ¦ Prazno polje se zapiše kot
+Un compte rendu de cette visite dans le traitement de texte (cotes, résultats, la suite) ¦ Izvještaj o ovom posjetu u obradi teksta (signature, rezultati, nastavak) ¦ Poročilo o tem obisku v urejanju besedil (signature, rezultati, nadaljevanje)
+Un document garde au moins un onglet. ¦ Dokument zadržava barem jednu karticu. ¦ Dokument ohrani vsaj en zavihek.
+Un lieu de la base ¦ Mjesto iz baze ¦ Kraj iz baze
+Un nom pour cette version (facultatif) : ¦ Naziv ove verzije (nije obavezno): ¦ Ime te različice (neobvezno):
+Un style porte déjà ce nom. ¦ Stil s tim imenom već postoji. ¦ Slog s tem imenom že obstaja.
+Une adresse qui commence par https:// (ou mailto:). ¦ Adresa koja počinje s https:// (ili mailto:). ¦ Naslov, ki se začne s https:// (ali mailto:).
+Une autre fenêtre a enregistré ce document entre-temps. Garder ta version effacera la sienne. ¦ Drugi je prozor u međuvremenu spremio ovaj dokument. Ako zadržiš svoju verziju, njegova će se izbrisati. ¦ Drugo okno je medtem shranilo ta dokument. Če obdržiš svojo različico, bo njegova izbrisana.
+Une copie de ce document par personne, chaque champ « » rempli avec sa fiche ; les copies se suivent dans un nouveau document (une nouvelle page pour chacune). Champs utilisés : {list}. ¦ Jedna kopija ovog dokumenta po osobi, svako polje „” ispunjeno prema njezinu zapisu; kopije slijede jedna za drugom u novom dokumentu (svaka na novoj stranici). Korištena polja: {list}. ¦ Ena kopija tega dokumenta na osebo, vsako polje »« izpolnjeno po njenem zapisu; kopije si sledijo v novem dokumentu (vsaka na novi strani). Uporabljena polja: {list}.
+Une espace après la virgule ¦ Razmak nakon zareza ¦ Presledek za vejico
+Une image du web n’a pas été reprise : enregistre-la sur l’ordinateur, puis glisse-la ici. ¦ Slika s weba nije preuzeta: spremi je na računalo, zatim je povuci ovamo. ¦ Slika s spleta ni bila prevzeta: shrani jo v računalnik, nato jo povleci sem.
+Une image d’une sorte que le navigateur ne montre pas (EMF, WMF, TIFF…) a été laissée de côté. ¦ Slika vrste koju preglednik ne prikazuje (EMF, WMF, TIFF…) izostavljena je. ¦ Slika vrste, ki je brskalnik ne prikaže (EMF, WMF, TIFF …), je bila izpuščena.
+Une image d’une sorte que le navigateur ne montre pas (SVG, EMF, WMF…) a été laissée de côté. ¦ Slika vrste koju preglednik ne prikazuje (SVG, EMF, WMF…) izostavljena je. ¦ Slika vrste, ki je brskalnik ne prikaže (SVG, EMF, WMF …), je bila izpuščena.
+Une largeur de 16 px au moins. ¦ Širina od najmanje 16 px. ¦ Širina vsaj 16 px.
+Une ligne d’en-tête (répétée sur chaque page) ¦ Redak zaglavlja (ponavlja se na svakoj stranici) ¦ Naslovna vrstica (ponovi se na vsaki strani)
+Une personne de la base ¦ Osoba iz baze ¦ Oseba iz baze
+Utilise {key} dans le texte. ¦ Koristi {key} u tekstu. ¦ Uporabi {key} v besedilu.
+Utilise {key}. ¦ Koristi {key}. ¦ Uporabi {key}.
+Version du {date} ¦ Verzija od {date} ¦ Različica z dne {date}
+Version enregistrée (Fichier → 🕘 Versions…). ¦ Verzija spremljena (Datoteka → 🕘 Verzije…). ¦ Različica shranjena (Datoteka → 🕘 Različice …).
+Vitesse de lecture à voix haute ¦ Brzina čitanja naglas ¦ Hitrost branja na glas
+Voir ¦ Prikaz ¦ Pogled
+Vérification de l’orthographe arrêtée. ¦ Provjera pravopisa zaustavljena. ¦ Preverjanje črkovanja ustavljeno.
+Vérification impossible. ¦ Provjera nije moguća. ¦ Preverjanje ni mogoče.
+Vérifier avec les fiches ¦ Provjeri sa zapisima ¦ Preveri z zapisi
+Vérifier l’orthographe pendant la frappe ¦ Provjeravaj pravopis tijekom tipkanja ¦ Preverjaj črkovanje med tipkanjem
+Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, texte, HTML, impression ¦ Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, tekst, HTML, ispis ¦ Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, besedilo, HTML, tiskanje
+Word, Pages, Google Docs ¦ Word, Pages, Google Docs ¦ Word, Pages, Google Docs
+a ajouté ¦ dodao/dodala je ¦ je dodal/dodala
+a supprimé ¦ izbrisao/izbrisala je ¦ je izbrisal/izbrisala
+automatique ¦ automatski ¦ samodejno
+aux archives : cotes vues, trouvailles, suite ¦ u arhivu: pregledane signature, nalazi, nastavak ¦ v arhivu: pregledane signature, najdbe, nadaljevanje
+ce fichier .{ext} est abîmé (ce n’est pas un zip) ¦ ova datoteka .{ext} je oštećena (nije zip) ¦ ta datoteka .{ext} je poškodovana (ni zip)
+ce fichier LibreOffice n’est pas un texte (c’est un classeur ou une présentation) ¦ ova datoteka LibreOfficea nije tekst (to je proračunska tablica ili prezentacija) ¦ ta datoteka LibreOffice ni besedilo (je preglednica ali predstavitev)
+ce fichier zip n’est ni un document Word (.docx) ni un document LibreOffice (.odt) ¦ ova zip datoteka nije ni Wordov dokument (.docx) ni dokument LibreOfficea (.odt) ¦ ta datoteka zip ni ne dokument Word (.docx) ne dokument LibreOffice (.odt)
+ce n’est pas un document LibreOffice (.odt) ¦ ovo nije dokument LibreOfficea (.odt) ¦ to ni dokument LibreOffice (.odt)
+ce n’est pas un document Word (.docx) : il manque son texte ¦ ovo nije Wordov dokument (.docx): nedostaje mu tekst ¦ to ni dokument Word (.docx): manjka mu besedilo
+ce n’est pas un fichier RTF ¦ ovo nije RTF datoteka ¦ to ni datoteka RTF
+ce n’est pas un fichier du traitement de texte ¦ ovo nije datoteka obrade teksta ¦ to ni datoteka urejevalnika besedil
+ces réglages du traitement de texte ¦ ove postavke obrade teksta ¦ te nastavitve urejevalnika besedil
+demande de recherche à un service d’archives ¦ zahtjev za istraživanjem arhivskoj službi ¦ prošnja za raziskavo arhivski službi
+divorcé ¦ razveden ¦ razvezan
+droite ¦ desno ¦ desno
+décédé (croix) ¦ umro (križ) ¦ umrl (križ)
+d’autres changements ont suivi : utilise ↶ ({key}) ¦ uslijedile su druge promjene: koristi ↶ ({key}) ¦ sledile so druge spremembe: uporabi ↶ ({key})
+d’autres changements ont suivi : utilise ↶ dans le document ¦ uslijedile su druge promjene: koristi ↶ u dokumentu ¦ sledile so druge spremembe: uporabi ↶ v dokumentu
+espace fine insécable (avant ; : ! ? ») ¦ uski neprelomivi razmak (prije ; : ! ? ») ¦ ozek nedeljivi presledek (pred ; : ! ? »)
+espace insécable ¦ neprelomivi razmak ¦ nedeljivi presledek
+et (note tironienne) ¦ i (tironska nota) ¦ in (tironska nota)
+ex. BROUILLON, COPIE ¦ npr. NACRT, KOPIJA ¦ npr. OSNUTEK, KOPIJA
+fichier RTF trop imbriqué ¦ RTF datoteka ima previše razina ugniježđivanja ¦ datoteka RTF je preveč gnezdena
+fichier du traitement de texte ¦ datoteka obrade teksta ¦ datoteka urejevalnika besedil
+fichier refusé : beaucoup trop de paragraphes ¦ datoteka odbijena: previše odlomaka ¦ datoteka zavrnjena: veliko preveč odstavkov
+fichier refusé : trop compliqué ¦ datoteka odbijena: previše složena ¦ datoteka zavrnjena: preveč zapletena
+fichier refusé : trop gros ¦ datoteka odbijena: prevelika ¦ datoteka zavrnjena: prevelika
+fichier trop gros (plus de {n} Mo) ¦ datoteka je prevelika (više od {n} MB) ¦ datoteka je prevelika (več kot {n} MB)
+https://…, mailto:… ¦ https://…, mailto:… ¦ https://…, mailto:…
+il / elle ¦ on / ona ¦ on / ona
+inhumé ¦ pokopan ¦ pokopan
+je cherche des renseignements sur cette personne ¦ tražim podatke o ovoj osobi ¦ iščem podatke o tej osebi
+la biographie F5 de la fiche, à compléter ¦ životopis F5 iz zapisa, za dopunu ¦ življenjepis F5 iz zapisa, za dopolnitev
+le texte seul ¦ samo tekst ¦ samo besedilo
+le texte à l’écran ¦ tekst na zaslonu ¦ besedilo na zaslonu
+les anciens fichiers Word (.doc) ne se lisent pas : ouvre-le dans Word ou LibreOffice et enregistre-le en .docx ¦ stare Wordove datoteke (.doc) ne mogu se čitati: otvori je u Wordu ili LibreOfficeu i spremi kao .docx ¦ starih datotek Word (.doc) ni mogoče brati: odpri jo v Wordu ali LibreOfficeu in jo shrani kot .docx
+marié ¦ oženjen / udana ¦ poročen
+marié (autre signe) ¦ oženjen / udana (drugi znak) ¦ poročen (drug znak)
+minuscules ¦ mala slova ¦ male črke
+naissance, mariage ou décès : la personne, les dates et les lieux déjà écrits ¦ rođenje, vjenčanje ili smrt: osoba, datumi i mjesta već upisani ¦ rojstvo, poroka ali smrt: oseba, datumi in kraji že vpisani
+nom, naissance, parents, métier, mariage, décès ¦ ime, rođenje, roditelji, zanimanje, vjenčanje, smrt ¦ ime, rojstvo, starši, poklic, poroka, smrt
+numéro ¦ broj ¦ številka
+né / née ¦ rođen / rođena ¦ rojen / rojena
+p barré (par) ¦ prekriženo p (per) ¦ prečrtani p (per)
+p à crosse (pro) ¦ p s petljom (pro) ¦ p z zanko (pro)
+page web ¦ web stranica ¦ spletna stran
+pour partager une découverte ¦ za dijeljenje otkrića ¦ za deljenje odkritja
+question, sources, analyse, conclusion ¦ pitanje, izvori, analiza, zaključak ¦ vprašanje, viri, analiza, sklep
+ruban|Caractères ¦ Znakovi ¦ Znaki
+ruban|Centre ¦ Sredina ¦ Sredina
+ruban|Couleur ¦ Boja ¦ Barva
+ruban|Effacer ¦ Očisti ¦ Počisti
+ruban|Interligne ¦ Prored ¦ Razmik
+ruban|Note ¦ Bilješka ¦ Opomba
+ruban|Numéros ¦ Brojevi ¦ Številke
+ruban|Petites ¦ Mala ¦ Male
+ruban|Puces ¦ Grafičke oznake ¦ Oznake
+ruban|Retrait + ¦ Uvlaka + ¦ Zamik +
+ruban|Retrait − ¦ Uvlaka − ¦ Zamik −
+ruban|Suivi ¦ Praćenje ¦ Sledenje
+ruban|Surligner ¦ Istakni ¦ Označi
+récit en parties, images, notes ¦ priča u dijelovima, slike, bilješke ¦ zgodba v delih, slike, opombe
+texte avec les titres ¦ tekst s naslovima ¦ besedilo z naslovi
+texte de l’acte, notes, références ¦ tekst matičnog zapisa, bilješke, reference ¦ besedilo matičnega vpisa, opombe, sklici
+tous les traitements de texte ¦ svi programi za obradu teksta ¦ vsi urejevalniki besedil
+un PDF ne se transforme pas en texte modifiable ici : ouvre la Transcription d’actes pour le recopier ¦ PDF se ovdje ne pretvara u tekst koji se može uređivati: otvori Prijepis matičnih zapisa da ga prepišeš ¦ PDF-ja tukaj ni mogoče pretvoriti v urejljivo besedilo: odpri Prepis matičnih vpisov, da ga prepišeš
+un ancêtre ¦ predak ¦ prednik
+{added} ajouté, {removed} retiré. ¦ Dodano: {added}, uklonjeno: {removed}. ¦ Dodano: {added}, odstranjeno: {removed}.
+{added} ajouté, {removed} retirés. ¦ Dodano: {added}, uklonjeno: {removed}. ¦ Dodano: {added}, odstranjeno: {removed}.
+{added} ajoutés, {removed} retiré. ¦ Dodano: {added}, uklonjeno: {removed}. ¦ Dodano: {added}, odstranjeno: {removed}.
+{added} ajoutés, {removed} retirés. ¦ Dodano: {added}, uklonjeno: {removed}. ¦ Dodano: {added}, odstranjeno: {removed}.
+{name} (copie) ¦ {name} (kopija) ¦ {name} (kopija)
+{name} — publipostage ({n}) ¦ {name} — skupno slanje ({n}) ¦ {name} — spajanje dokumentov ({n})
+{name} — que faut-il écrire ? ¦ {name} — što treba napisati? ¦ {name} — kaj je treba napisati?
+{n} avec la fiche de {name} (↶ pour revenir). ¦ {n} prema zapisu osobe {name} (↶ za povratak). ¦ {n} po zapisu osebe {name} (↶ za vrnitev).
+{n} du fichier (scripts, formulaires, cadres…) retiré : ils ne sont jamais lancés. ¦ Uklonjeno iz datoteke: {n} (skripte, obrasci, okviri…): nikad se ne pokreću. ¦ Odstranjeno iz datoteke: {n} (skripti, obrazci, okvirji …): nikoli se ne zaženejo.
+{n} du fichier (scripts, formulaires, cadres…) retirés : ils ne sont jamais lancés. ¦ Uklonjeno iz datoteke: {n} (skripte, obrasci, okviri…): nikad se ne pokreću. ¦ Odstranjeno iz datoteke: {n} (skripti, obrazci, okvirji …): nikoli se ne zaženejo.
+{n} du web non reprise. ¦ Nije preuzeto s weba: {n}. ¦ S spleta ni prevzeto: {n}.
+{n} du web non reprises. ¦ Nije preuzeto s weba: {n}. ¦ S spleta ni prevzeto: {n}.
+{n} envoyé vers la mise en page : vérifie, puis enregistre le livre. ¦ Poslano u prijelom: {n}. Provjeri, zatim spremi knjigu. ¦ Poslano v postavitev: {n}. Preveri, nato shrani knjigo.
+{n} envoyés vers la mise en page : vérifie, puis enregistre le livre. ¦ Poslano u prijelom: {n}. Provjeri, zatim spremi knjigu. ¦ Poslano v postavitev: {n}. Preveri, nato shrani knjigo.
+{n} images du web n’ont pas été reprises : enregistre-la sur l’ordinateur, puis glisse-la ici. ¦ Slike s weba nisu preuzete ({n}): spremi ih na računalo, zatim ih povuci ovamo. ¦ Slike s spleta niso bile prevzete ({n}): shrani jih v računalnik, nato jih povleci sem.
+{n} mis à jour d’après les fiches. ¦ Ažurirano prema zapisima: {n}. ¦ Posodobljeno po zapisih: {n}.
+{n} modifications acceptées ¦ Prihvaćene promjene: {n} ¦ Sprejete spremembe: {n}
+{n} modifications refusées ¦ Odbijene promjene: {n} ¦ Zavrnjene spremembe: {n}
+{n} rangée dans les médias. ¦ Spremljeno u medije: {n}. ¦ Shranjeno med medije: {n}.
+{n} rangées dans les médias. ¦ Spremljeno u medije: {n}. ¦ Shranjeno med medije: {n}.
+{n} repris de « {name} » ¦ Preuzeto iz „{name}”: {n} ¦ Prevzeto iz »{name}«: {n}
+{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies. ¦ {pages} · {words}. Word i LibreOffice zadržavaju stilove, popise, tablice, slike, bilješke, zaglavlje i podnožje, komentare i praćene promjene. ¦ {pages} · {words}. Word in LibreOffice ohranita sloge, sezname, tabele, slike, opombe, glavo in nogo, komentarje in sledene spremembe.
+« ________ » (à remplir à la main) ¦ „________” (za ručno ispunjavanje) ¦ »________« (za ročno izpolnjevanje)
+« … » (pour le voir) ¦ „…” (da se vidi) ¦ »…« (da se vidi)
+¶ Marques de mise en forme ¦ ¶ Oznake oblikovanja ¦ ¶ Oznake oblikovanja
+¶ Paragraphe ¦ ¶ Odlomak ¦ ¶ Odstavek
+¶ Paragraphe (espacements, retraits, interligne)… ¦ ¶ Odlomak (razmaci, uvlake, prored)… ¦ ¶ Odstavek (razmiki, zamiki, razmik med vrsticami)…
+¹ Note de bas de page ¦ ¹ Fusnota ¦ ¹ Sprotna opomba
+À quoi ça sert ? ¦ Čemu to služi? ¦ Čemu je to namenjeno?
+Écrire sur cette personne ¦ Piši o ovoj osobi ¦ Piši o tej osebi
+Écris le texte du lien. ¦ Napiši tekst poveznice. ¦ Napiši besedilo povezave.
+Écris, choisis un style à gauche de la barre ; clic droit pour les actions. ¦ Piši, odaberi stil lijevo na traci; desni klik za radnje. ¦ Piši, izberi slog levo v vrstici; desni klik za dejanja.
+à lire, à envoyer ¦ za čitanje, za slanje ¦ za branje, za pošiljanje
+à ouvrir dans un navigateur ¦ za otvaranje u pregledniku ¦ za odpiranje v brskalniku
+à une mairie : naissance, mariage, décès ¦ općini: rođenje, vjenčanje, smrt ¦ občini: rojstvo, poroka, smrt
+Ω Caractères spéciaux ¦ Ω Posebni znakovi ¦ Ω Posebni znaki
+Ω Caractères spéciaux… ¦ Ω Posebni znakovi… ¦ Ω Posebni znaki…
+― Ligne horizontale ¦ ― Vodoravna crta ¦ ― Vodoravna črta
+• Liste à puces ¦ • Popis s grafičkim oznakama ¦ • Seznam z oznakami
+ⁱ Note de fin ¦ ⁱ Završna bilješka ¦ ⁱ Končna opomba
+ℹ️ Propriétés du document… ¦ ℹ️ Svojstva dokumenta… ¦ ℹ️ Lastnosti dokumenta…
+↕ Trier A → Z (cette colonne) ¦ ↕ Poredaj A → Ž (ovaj stupac) ¦ ↕ Razvrsti A → Ž (ta stolpec)
+↕ Trier Z → A (cette colonne) ¦ ↕ Poredaj Ž → A (ovaj stupac) ¦ ↕ Razvrsti Ž → A (ta stolpec)
+↶ Annulé ¦ ↶ Poništeno ¦ ↶ Razveljavljeno
+↷ Rétabli ¦ ↷ Ponovljeno ¦ ↷ Uveljavljeno
+↺ Rouvrir ¦ ↺ Ponovno otvori ¦ ↺ Znova odpri
+⇄ Comparer deux versions… ¦ ⇄ Usporedi dvije verzije… ¦ ⇄ Primerjaj dve različici…
+⇥ Tabulations ¦ ⇥ Tabulatori ¦ ⇥ Tabulatorji
+⇥ Tabulations… ¦ ⇥ Tabulatori… ¦ ⇥ Tabulatorji…
+∑ Nombre de pages ¦ ∑ Broj stranica ¦ ∑ Število strani
+⊞ Fusionner les cellules ¦ ⊞ Spoji polja ¦ ⊞ Spoji celice
+⌨️ Raccourcis du traitement de texte ¦ ⌨️ Prečaci obrade teksta ¦ ⌨️ Bližnjice urejevalnika besedil
+⌨️ Raccourcis du traitement de texte… ¦ ⌨️ Prečaci obrade teksta… ¦ ⌨️ Bližnjice urejevalnika besedil…
+▢ Bordure et trame… ¦ ▢ Obrub i sjenčanje… ¦ ▢ Obroba in senčenje…
+▥ Colonnes ¦ ▥ Stupci ¦ ▥ Stolpci
+▥ Colonnes… ¦ ▥ Stupci… ¦ ▥ Stolpci…
+▦ Insérer un tableau… ¦ ▦ Umetni tablicu… ¦ ▦ Vstavi tabelo…
+▦ Nouveau tableau ¦ ▦ Nova tablica ¦ ▦ Nova tabela
+▦ Tableau… ¦ ▦ Tablica… ¦ ▦ Tabela…
+▭ Paysage ¦ ▭ Položeno ¦ ▭ Ležeče
+▯ Portrait ¦ ▯ Uspravno ¦ ▯ Pokončno
+♿ Accessibilité : {n} point ¦ ♿ Pristupačnost: {n} stavka ¦ ♿ Dostopnost: {n} točka
+♿ Accessibilité : {n} points ¦ ♿ Pristupačnost — stavki: {n} ¦ ♿ Dostopnost — točke: {n}
+♿ Rien à signaler : images décrites, titres en ordre, tableaux avec titres, liens clairs. ¦ ♿ Ništa za prijaviti: slike opisane, naslovi po redu, tablice s naslovima, jasne poveznice. ¦ ♿ Ni pripomb: slike opisane, naslovi po vrsti, tabele z naslovi, jasne povezave.
+♿ Vérifier l’accessibilité… ¦ ♿ Provjeri pristupačnost… ¦ ♿ Preveri dostopnost…
+⚙️ Personnaliser ¦ ⚙️ Prilagodi ¦ ⚙️ Prilagodi
+⚙️ Réglages du traitement de texte ¦ ⚙️ Postavke obrade teksta ¦ ⚙️ Nastavitve urejevalnika besedil
+⚙️ Réglages du traitement de texte… ¦ ⚙️ Postavke obrade teksta… ¦ ⚙️ Nastavitve urejevalnika besedil…
+✍ Les modifications sont suivies : chaque ajout et chaque suppression restent visibles. ¦ ✍ Promjene se prate: svako dodavanje i svako brisanje ostaju vidljivi. ¦ ✍ Spremembe se sledijo: vsak dodatek in vsak izbris ostaneta vidna.
+✍ Suivi ¦ ✍ Praćenje ¦ ✍ Sledenje
+✍ Suivre les modifications ¦ ✍ Prati promjene ¦ ✍ Sledi spremembam
+✍ modifications à relire ¦ ✍ promjene za pregled ¦ ✍ spremembe za pregled
+✎ Auteur ¦ ✎ Autor ¦ ✎ Avtor
+✎ Le style « {name} » ¦ ✎ Stil „{name}” ¦ ✎ Slog »{name}«
+✎ Modifier le style ¦ ✎ Uredi stil ¦ ✎ Uredi slog
+✏️ À mes mesures ¦ ✏️ Po mojoj mjeri ¦ ✏️ Po moji meri
+✓ Accepter ¦ ✓ Prihvati ¦ ✓ Sprejmi
+✓ Accepter la modification ¦ ✓ Prihvati promjenu ¦ ✓ Sprejmi spremembo
+✓ En-tête et pied de page repris. ¦ ✓ Zaglavlje i podnožje preuzeti. ¦ ✓ Glava in noga prevzeti.
+✓ Repris : {list}. ¦ ✓ Preuzeto: {list}. ¦ ✓ Prevzeto: {list}.
+✓ Résolu ¦ ✓ Riješeno ¦ ✓ Razrešeno
+✓ Tout accepter ¦ ✓ Prihvati sve ¦ ✓ Sprejmi vse
+✓ Tout concorde avec les fiches. ¦ ✓ Sve se slaže sa zapisima. ¦ ✓ Vse se ujema z zapisi.
+✗ Refuser ¦ ✗ Odbij ¦ ✗ Zavrni
+✗ Refuser la modification ¦ ✗ Odbij promjenu ¦ ✗ Zavrni spremembo
+✗ Tout refuser ¦ ✗ Odbij sve ¦ ✗ Zavrni vse
+✳️ Markdown (.md) ¦ ✳️ Markdown (.md) ¦ ✳️ Markdown (.md)
+❝ Citer une source ¦ ❝ Citiraj izvor ¦ ❝ Navedi vir
+❝ Source citée… ¦ ❝ Citirani izvor… ¦ ❝ Navedeni vir…
+⤒ Importer (Word, LibreOffice…)… ¦ ⤒ Uvezi (Word, LibreOffice…)… ¦ ⤒ Uvozi (Word, LibreOffice …)…
+⤒ Importer le document ¦ ⤒ Uvezi dokument ¦ ⤒ Uvozi dokument
+⤒ Importer un document ¦ ⤒ Uvezi dokument ¦ ⤒ Uvozi dokument
+⤓ Exporter… ¦ ⤓ Izvezi… ¦ ⤓ Izvozi…
+⤓ Saut de page ¦ ⤓ Prijelom stranice ¦ ⤓ Prelom strani
+＋ Ajouter des personnes… ¦ ＋ Dodaj osobe… ¦ ＋ Dodaj osebe…
+＋ Description… ¦ ＋ Opis… ¦ ＋ Opis…
+＋ Les personnes d’une de mes listes… ¦ ＋ Osobe s jednog od mojih popisa… ¦ ＋ Osebe z enega od mojih seznamov…
+＋ Nouveau commentaire ¦ ＋ Novi komentar ¦ ＋ Nov komentar
+＋ Nouveau document ¦ ＋ Novi dokument ¦ ＋ Nov dokument
+＋ Nouveau style ¦ ＋ Novi stil ¦ ＋ Nov slog
+＋ Nouveau style d’après la sélection… ¦ ＋ Novi stil prema odabiru… ¦ ＋ Nov slog po izboru…
+🌐 Langue du document ¦ 🌐 Jezik dokumenta ¦ 🌐 Jezik dokumenta
+🌐 Langue… ¦ 🌐 Jezik… ¦ 🌐 Jezik…
+🌐 Page web (.html) ¦ 🌐 Web stranica (.html) ¦ 🌐 Spletna stran (.html)
+🌳 Un petit arbre… ¦ 🌳 Malo stablo… ¦ 🌳 Majhno drevo…
+🎞 Un média (lien)… ¦ 🎞 Medij (poveznica)… ¦ 🎞 Medij (povezava)…
+🎨 Choisir… ¦ 🎨 Odaberi… ¦ 🎨 Izberi…
+🎨 Couleur de page… ¦ 🎨 Boja stranice… ¦ 🎨 Barva strani…
+🎨 Forme ¦ 🎨 Oblik ¦ 🎨 Oblika
+🎨 Styles… ¦ 🎨 Stilovi… ¦ 🎨 Slogi…
+👤 Remplir avec une fiche ¦ 👤 Ispuni prema zapisu ¦ 👤 Izpolni po zapisu
+👤 Remplir avec une fiche… ¦ 👤 Ispuni prema zapisu… ¦ 👤 Izpolni po zapisu…
+👤 Une personne de la base… ¦ 👤 Osoba iz baze… ¦ 👤 Oseba iz baze…
+💬 Montrer les commentaires ¦ 💬 Prikaži komentare ¦ 💬 Prikaži komentarje
+💬 Nouveau commentaire ¦ 💬 Novi komentar ¦ 💬 Nov komentar
+💾 Fichier de l’outil ¦ 💾 Datoteka alata ¦ 💾 Datoteka orodja
+📁 Ranger une copie dans les médias ¦ 📁 Spremi kopiju u medije ¦ 📁 Shrani kopijo med medije
+📄 Format, marges et orientation… ¦ 📄 Format, margine i usmjerenje… ¦ 📄 Format, robovi in usmerjenost…
+📄 PDF ¦ 📄 PDF ¦ 📄 PDF
+📄 Pages ¦ 📄 Stranice ¦ 📄 Strani
+📄 Saut de section ¦ 📄 Prijelom odjeljka ¦ 📄 Prelom odseka
+📄 Saut de section (autre orientation)… ¦ 📄 Prijelom odjeljka (drugo usmjerenje)… ¦ 📄 Prelom odseka (druga usmerjenost)…
+📅 Date ¦ 📅 Datum ¦ 📅 Datum
+📅 Date du jour ¦ 📅 Današnji datum ¦ 📅 Današnji datum
+📊 Un diagramme… ¦ 📊 Dijagram… ¦ 📊 Diagram…
+📋 Partir d’un modèle ¦ 📋 Kreni od predloška ¦ 📋 Začni s predlogo
+📋 Partir d’un modèle… ¦ 📋 Kreni od predloška… ¦ 📋 Začni s predlogo…
+📍 Un lieu de la base… ¦ 📍 Mjesto iz baze… ¦ 📍 Kraj iz baze…
+📐 Envoyer vers la mise en page ¦ 📐 Pošalji u prijelom ¦ 📐 Pošlji v postavitev
+📐 Envoyer vers la mise en page… ¦ 📐 Pošalji u prijelom… ¦ 📐 Pošlji v postavitev…
+📐 Reprendre les styles d’un livre… ¦ 📐 Preuzmi stilove iz knjige… ¦ 📐 Prevzemi sloge iz knjige…
+📐 Styles d’un livre… ¦ 📐 Stilovi knjige… ¦ 📐 Slogi knjige…
+📑 Sommaire ¦ 📑 Sadržaj ¦ 📑 Kazalo vsebine
+📖 La biographie d’une personne… ¦ 📖 Životopis osobe… ¦ 📖 Življenjepis osebe…
+📗 LibreOffice (.odt) ¦ 📗 LibreOffice (.odt) ¦ 📗 LibreOffice (.odt)
+📘 Word (.docx) ¦ 📘 Word (.docx) ¦ 📘 Word (.docx)
+📚 Bibliographie ¦ 📚 Bibliografija ¦ 📚 Bibliografija
+📜 Brouillon (sans les pages) ¦ 📜 Skica (bez stranica) ¦ 📜 Osnutek (brez strani)
+📝 Compte rendu ¦ 📝 Izvještaj ¦ 📝 Poročilo
+📝 RTF ¦ 📝 RTF ¦ 📝 RTF
+📝 Écrire sur cette personne : un document du traitement de texte, avec sa biographie déjà posée ¦ 📝 Piši o ovoj osobi: dokument obrade teksta s već postavljenim životopisom ¦ 📝 Piši o tej osebi: dokument urejevalnika besedil z že vstavljenim življenjepisom
+📨 Champ de fusion ¦ 📨 Polje spajanja ¦ 📨 Polje spajanja
+📨 Champ de fusion (prénom, dates…) ¦ 📨 Polje spajanja (ime, datumi…) ¦ 📨 Polje spajanja (ime, datumi …)
+📨 Publipostage ¦ 📨 Skupno slanje ¦ 📨 Spajanje dokumentov
+📨 Publipostage… ¦ 📨 Skupno slanje… ¦ 📨 Spajanje dokumentov…
+🔁 Synonymes de « {word} » ¦ 🔁 Sinonimi za „{word}” ¦ 🔁 Sopomenke za »{word}«
+🔁 Synonymes… ¦ 🔁 Sinonimi… ¦ 🔁 Sopomenke…
+🔊 Lecture… (Échap ou Outils → ⏹ Arrêter la lecture) ¦ 🔊 Čitanje… (Esc ili Alati → ⏹ Zaustavi čitanje) ¦ 🔊 Branje … (Esc ali Orodja → ⏹ Ustavi branje)
+🔊 Lire à voix haute ¦ 🔊 Čitaj naglas ¦ 🔊 Beri na glas
+🔍 Rechercher ¦ 🔍 Traži ¦ 🔍 Išči
+🔎 Corrigé dans {n} passage (↶ pour revenir). ¦ 🔎 Ispravljeno u {n} odlomku (↶ za povratak). ¦ 🔎 Popravljeno v {n} odlomku (↶ za vrnitev).
+🔎 Corrigé dans {n} passages (↶ pour revenir). ¦ 🔎 Ispravljeno u odlomcima: {n} (↶ za povratak). ¦ 🔎 Popravljeno v odlomkih: {n} (↶ za vrnitev).
+🔎 Relecture (typographie, répétitions)… ¦ 🔎 Provjera (tipografija, ponavljanja)… ¦ 🔎 Pregled (tipografija, ponavljanja)…
+🔎 Rien à reprendre : typographie et répétitions sont bonnes. ¦ 🔎 Ništa za ispraviti: tipografija i ponavljanja su u redu. ¦ 🔎 Ničesar ni treba popraviti: tipografija in ponavljanja so v redu.
+🔎 Vérification avec les fiches… ¦ 🔎 Provjera sa zapisima… ¦ 🔎 Preverjanje z zapisi…
+🔎 Vérifier avec les fiches ¦ 🔎 Provjeri sa zapisima ¦ 🔎 Preveri z zapisi
+🔎 {n} à regarder. ¦ 🔎 Za pogledati: {n}. ¦ 🔎 Za ogled: {n}.
+🔗 Lien… ¦ 🔗 Poveznica… ¦ 🔗 Povezava…
+🔗 Modifier le lien ¦ 🔗 Uredi poveznicu ¦ 🔗 Uredi povezavo
+🔗 Nouveau lien ¦ 🔗 Nova poveznica ¦ 🔗 Nova povezava
+🔢 Nombre de mots ¦ 🔢 Broj riječi ¦ 🔢 Število besed
+🔢 Nombre de mots… ¦ 🔢 Broj riječi… ¦ 🔢 Število besed…
+🔤 Index ¦ 🔤 Kazalo pojmova ¦ 🔤 Stvarno kazalo
+🕘 Enregistrer comme nouvelle version ¦ 🕘 Spremi kao novu verziju ¦ 🕘 Shrani kot novo različico
+🕘 Nouvelle version ¦ 🕘 Nova verzija ¦ 🕘 Nova različica
+🕘 Versions… ¦ 🕘 Verzije… ¦ 🕘 Različice…
+🖍 Surlignage… ¦ 🖍 Isticanje bojom… ¦ 🖍 Označevanje…
+🖨 Imprimer… ¦ 🖨 Ispiši… ¦ 🖨 Natisni…
+🖼 Image… ¦ 🖼 Slika… ¦ 🖼 Slika…
+🧭 Panneau de navigation ¦ 🧭 Navigacijska ploča ¦ 🧭 Podokno za krmarjenje
+🧾 Ouvrir ce tableau dans le Tableur ¦ 🧾 Otvori ovu tablicu u proračunskoj tablici ¦ 🧾 Odpri to tabelo v preglednici
+🧾 Tableau venu du Tableur… ¦ 🧾 Tablica iz proračunske tablice… ¦ 🧾 Tabela iz preglednice…
+🧾 Texte (.txt) ¦ 🧾 Tekst (.txt) ¦ 🧾 Besedilo (.txt)
+=remplacement ¦ zamjena|zamjene|zamjena ¦ zamenjava|zamenjavi|zamenjave|zamenjav
+=commentaire ¦ komentar|komentara|komentara ¦ komentar|komentarja|komentarji|komentarjev
+=modification suivie ¦ praćena promjena|praćene promjene|praćenih promjena ¦ sledena sprememba|sledeni spremembi|sledene spremembe|sledenih sprememb
+=tableau ¦ tablica|tablice|tablica ¦ tabela|tabeli|tabele|tabel
+=style ¦ stil|stila|stilova ¦ slog|sloga|slogi|slogov
+=paragraphe ¦ odlomak|odlomka|odlomaka ¦ odstavek|odstavka|odstavki|odstavkov
+=champ rempli ¦ ispunjeno polje|ispunjena polja|ispunjenih polja ¦ izpolnjeno polje|izpolnjeni polji|izpolnjena polja|izpolnjenih polj
+texte|Caractère ¦ Znak ¦ Znak
+icone-gras|G ¦ B ¦ K
+icone-italique|I ¦ I ¦ L
+icone-souligne|S ¦ U ¦ P
+icone-petites-capitales|Pᴄ ¦ Aᴀ ¦ Aᴀ

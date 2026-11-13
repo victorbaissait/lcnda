@@ -1,0 +1,1543 @@
+fr ¦ vi ¦ id
+son {x} (lien) ¦ {x} của người ấy ¦ {x}-nya
+sa {x} (lien) ¦ {x} của người ấy ¦ {x}-nya
+père ¦ cha ¦ ayah
+mère ¦ mẹ ¦ ibu
+grand-père ¦ ông ¦ kakek
+grand-mère ¦ bà ¦ nenek
+arrière-grand-père ¦ cụ ông ¦ kakek buyut
+arrière-grand-mère ¦ cụ bà ¦ nenek buyut
+arrière-arrière-grand-père ¦ kỵ ông ¦ kakek canggah
+arrière-arrière-grand-mère ¦ kỵ bà ¦ nenek canggah
+arrière-arrière-arrière-grand-père ¦ ông tổ đời thứ năm ¦ kakek wareng
+arrière-arrière-arrière-grand-mère ¦ bà tổ đời thứ năm ¦ nenek wareng
+ancêtre à la {n}e génération ¦ tổ tiên đời thứ {n} ¦ leluhur generasi ke-{n}
+{kin} de {name} ¦ {kin} của {name} ¦ {kin} dari {name}
+Il est né {when}{where}. ¦ Ông sinh ra {when}{where}. ¦ Ia lahir {when}{where}.
+Elle est née {when}{where}. ¦ Bà sinh ra {when}{where}. ¦ Ia lahir {when}{where}.
+Il était {occ}. ¦ Ông làm {occ}. ¦ Ia seorang {occ}.
+Elle était {occ}. ¦ Bà làm {occ}. ¦ Ia seorang {occ}.
+Il a épousé {name}{when}{where}. ¦ Ông kết hôn với {name}{when}{where}. ¦ Ia menikah dengan {name}{when}{where}.
+Elle a épousé {name}{when}{where}. ¦ Bà kết hôn với {name}{when}{where}. ¦ Ia menikah dengan {name}{when}{where}.
+Il a eu un enfant : {list}. ¦ Ông có một người con: {list}. ¦ Ia punya seorang anak: {list}.
+Elle a eu un enfant : {list}. ¦ Bà có một người con: {list}. ¦ Ia punya seorang anak: {list}.
+Il a eu {n} enfants : {list}. ¦ Ông có {n} người con: {list}. ¦ Ia punya {n} anak: {list}.
+Elle a eu {n} enfants : {list}. ¦ Bà có {n} người con: {list}. ¦ Ia punya {n} anak: {list}.
+Il est mort {when}{age}{where}. ¦ Ông mất {when}{age}{where}. ¦ Ia meninggal {when}{age}{where}.
+Elle est morte {when}{age}{where}. ¦ Bà mất {when}{age}{where}. ¦ Ia meninggal {when}{age}{where}.
+, à {n} ans ¦ , thọ {n} tuổi ¦ , pada usia {n} tahun
+, à {n} an ¦ , lúc {n} tuổi ¦ , pada usia {n} tahun
+avec {name} ¦ cùng {name} ¦ dengan {name}
+se mariait{with}{where}{date} ¦ kết hôn{with}{where}{date} ¦ menikah{with}{where}{date}
+se mariait civilement{with}{where}{date} ¦ kết hôn theo luật dân sự{with}{where}{date} ¦ menikah secara sipil{with}{where}{date}
+se mariait religieusement{with}{where}{date} ¦ kết hôn theo nghi lễ tôn giáo{with}{where}{date} ¦ menikah secara agama{with}{where}{date}
+mourait{with}{where}{date} ¦ qua đời{with}{where}{date} ¦ meninggal{with}{where}{date}
+était inhumé{with}{where}{date} ¦ được an táng{with}{where}{date} ¦ dimakamkan{with}{where}{date}
+était inhumée{with}{where}{date} ¦ được an táng{with}{where}{date} ¦ dimakamkan{with}{where}{date}
+habitait{with}{where}{date} ¦ sống{with}{where}{date} ¦ tinggal{with}{where}{date}
+travaillait comme{what}{with}{where}{date} ¦ làm nghề{what}{with}{where}{date} ¦ bekerja sebagai{what}{with}{where}{date}
+partait{with}{where}{date} ¦ ra đi{with}{where}{date} ¦ berangkat{with}{where}{date}
+arrivait{with}{where}{date} ¦ đến nơi{with}{where}{date} ¦ tiba{with}{where}{date}
+était recensé{with}{where}{date} ¦ được ghi tên trong điều tra dân số{with}{where}{date} ¦ tercatat dalam sensus{with}{where}{date}
+était recensée{with}{where}{date} ¦ được ghi tên trong điều tra dân số{with}{where}{date} ¦ tercatat dalam sensus{with}{where}{date}
+était sous les drapeaux{with}{where}{date} ¦ đang tại ngũ{with}{where}{date} ¦ sedang wajib militer{with}{where}{date}
+obtenait un diplôme{with}{where}{date} ¦ nhận bằng tốt nghiệp{with}{where}{date} ¦ memperoleh ijazah{with}{where}{date}
+devenait français{with}{where}{date} ¦ nhập quốc tịch Pháp{with}{where}{date} ¦ menjadi warga Prancis{with}{where}{date}
+devenait française{with}{where}{date} ¦ nhập quốc tịch Pháp{with}{where}{date} ¦ menjadi warga Prancis{with}{where}{date}
+était baptisé{with}{where}{date} ¦ được rửa tội{with}{where}{date} ¦ dibaptis{with}{where}{date}
+était baptisée{with}{where}{date} ¦ được rửa tội{with}{where}{date} ¦ dibaptis{with}{where}{date}
+faisait sa confirmation{with}{where}{date} ¦ chịu phép thêm sức{with}{where}{date} ¦ menerima sakramen penguatan{with}{where}{date}
+était à l’école{with}{where}{date} ¦ đi học{with}{where}{date} ¦ bersekolah{with}{where}{date}
+vivait un événement ({label}){where}{date} ¦ trải qua một sự kiện ({label}){where}{date} ¦ mengalami sebuah peristiwa ({label}){where}{date}
+devenait père de {name}{where}{date} ¦ trở thành cha của {name}{where}{date} ¦ menjadi ayah dari {name}{where}{date}
+devenait mère de {name}{where}{date} ¦ trở thành mẹ của {name}{where}{date} ¦ menjadi ibu dari {name}{where}{date}
+n’était plus là : il était mort à {n} ans ¦ không còn nữa: ông đã mất lúc {n} tuổi ¦ sudah tiada: ia meninggal pada usia {n} tahun
+n’était plus là : elle était morte à {n} ans ¦ không còn nữa: bà đã mất lúc {n} tuổi ¦ sudah tiada: ia meninggal pada usia {n} tahun
+vivait sans doute du côté de {place} en {y}{occ} ¦ có lẽ sống ở vùng {place} vào năm {y}{occ} ¦ mungkin tinggal di sekitar {place} pada tahun {y}{occ}
+vivait sa vie en {y}{occ} ¦ đang sống cuộc đời mình vào năm {y}{occ} ¦ menjalani hidupnya pada tahun {y}{occ}
+À {n} ans… ¦ Lúc {n} tuổi… ¦ Pada usia {n} tahun…
+À {n} ans, il {facts}. ¦ Lúc {n} tuổi, ông {facts}. ¦ Pada usia {n} tahun, ia {facts}.
+À {n} ans, elle {facts}. ¦ Lúc {n} tuổi, bà {facts}. ¦ Pada usia {n} tahun, ia {facts}.
+{who} de {name} dont on connaît la naissance. ¦ {who} của {name} có ngày sinh đã biết. ¦ {who} dari {name} yang kelahirannya diketahui.
+{who} de {name} dont on connaît la naissance ({k} sans date de naissance ne sont pas comptés). ¦ {who} của {name} có ngày sinh đã biết ({k} người không có ngày sinh không được tính). ¦ {who} dari {name} yang kelahirannya diketahui ({k} tanpa tanggal lahir tidak dihitung).
+{who}{y}, comme {kin} {from}{fy} ¦ {who}{y}, giống như {kin} {from}{fy} ¦ {who}{y}, seperti {kin} {from}{fy}
+C’est un homme. ¦ Đây là một người đàn ông. ¦ Ini seorang laki-laki.
+C’est une femme. ¦ Đây là một người phụ nữ. ¦ Ini seorang perempuan.
+C’est un homme, né au XVIIIe siècle ou avant. ¦ Đây là một người đàn ông, sinh vào thế kỷ XVIII hoặc trước đó. ¦ Ini seorang laki-laki, lahir pada abad ke-18 atau sebelumnya.
+C’est un homme, né au XIXe siècle. ¦ Đây là một người đàn ông, sinh vào thế kỷ XIX. ¦ Ini seorang laki-laki, lahir pada abad ke-19.
+C’est un homme, né au XXe siècle. ¦ Đây là một người đàn ông, sinh vào thế kỷ XX. ¦ Ini seorang laki-laki, lahir pada abad ke-20.
+C’est une femme, née au XVIIIe siècle ou avant. ¦ Đây là một người phụ nữ, sinh vào thế kỷ XVIII hoặc trước đó. ¦ Ini seorang perempuan, lahir pada abad ke-18 atau sebelumnya.
+C’est une femme, née au XIXe siècle. ¦ Đây là một người phụ nữ, sinh vào thế kỷ XIX. ¦ Ini seorang perempuan, lahir pada abad ke-19.
+C’est une femme, née au XXe siècle. ¦ Đây là một người phụ nữ, sinh vào thế kỷ XX. ¦ Ini seorang perempuan, lahir pada abad ke-20.
+Il est né à {place}. ¦ Ông sinh ra ở {place}. ¦ Ia lahir di {place}.
+Elle est née à {place}. ¦ Bà sinh ra ở {place}. ¦ Ia lahir di {place}.
+Son métier : {occ}. ¦ Nghề nghiệp: {occ}. ¦ Pekerjaannya: {occ}.
+Il a vécu {n} ans. ¦ Ông sống được {n} năm. ¦ Ia hidup {n} tahun.
+Elle a vécu {n} ans. ¦ Bà sống được {n} năm. ¦ Ia hidup {n} tahun.
+Il a eu {n} enfant. ¦ Ông có {n} người con. ¦ Ia punya {n} anak.
+Elle a eu {n} enfant. ¦ Bà có {n} người con. ¦ Ia punya {n} anak.
+Il a eu {n} enfants. ¦ Ông có {n} người con. ¦ Ia punya {n} anak.
+Elle a eu {n} enfants. ¦ Bà có {n} người con. ¦ Ia punya {n} anak.
+On ne lui connaît pas d’enfant. ¦ Không biết người này có con hay không. ¦ Tidak diketahui ia punya anak.
+Né dans les années {y}. ¦ Sinh vào những năm {y}. ¦ Lahir pada tahun {y}-an.
+Née dans les années {y}. ¦ Sinh vào những năm {y}. ¦ Lahir pada tahun {y}-an.
+Sa femme s’appelait {name}. ¦ Vợ ông tên là {name}. ¦ Istrinya bernama {name}.
+Son mari s’appelait {name}. ¦ Chồng bà tên là {name}. ¦ Suaminya bernama {name}.
+Un de ses enfants s’appelait {name}. ¦ Một người con tên là {name}. ¦ Salah satu anaknya bernama {name}.
+Son nom commence par {l}… et compte {n} lettres. ¦ Tên bắt đầu bằng {l}… và có {n} chữ cái. ¦ Namanya diawali {l}… dan terdiri dari {n} huruf.
+Ta naissance ¦ Khi bạn chào đời ¦ Kelahiranmu
+Tu es {name}. ¦ Bạn là {name}. ¦ Kamu adalah {name}.
+Tu nais {when}{where}{parents}. ¦ Bạn chào đời {when}{where}{parents}. ¦ Kamu lahir {when}{where}{parents}.
+fils de {names} ¦ con trai của {names} ¦ putra dari {names}
+fille de {names} ¦ con gái của {names} ¦ putri dari {names}
+{a} et de {b} ¦ {a} và {b} ¦ {a} dan {b}
+Ton père est {occ}. ¦ Cha bạn làm {occ}. ¦ Ayahmu seorang {occ}.
+Le métier ¦ Nghề nghiệp ¦ Pekerjaan
+Tu as quinze ans, c’est l’année {y}. Il faut gagner ta vie. Que vas-tu faire ? ¦ Bạn mười lăm tuổi, đó là năm {y}. Bạn phải tự kiếm sống. Bạn sẽ làm gì? ¦ Kamu berusia lima belas tahun, saat itu tahun {y}. Kamu harus mencari nafkah. Apa yang akan kamu lakukan?
+Tu as quinze ans. Il faut gagner ta vie. Que vas-tu faire ? ¦ Bạn mười lăm tuổi. Bạn phải tự kiếm sống. Bạn sẽ làm gì? ¦ Kamu berusia lima belas tahun. Kamu harus mencari nafkah. Apa yang akan kamu lakukan?
+Devenir {occ} ¦ Trở thành {occ} ¦ Menjadi {occ}
+Dans la vraie vie, {name} est devenu {occ}. ¦ Ngoài đời thật, {name} đã trở thành {occ}. ¦ Dalam kehidupan nyata, {name} menjadi {occ}.
+Dans la vraie vie, {name} est devenue {occ}. ¦ Ngoài đời thật, {name} đã trở thành {occ}. ¦ Dalam kehidupan nyata, {name} menjadi {occ}.
+L’amour ¦ Tình yêu ¦ Cinta
+Tu as {n} ans. ¦ Bạn {n} tuổi. ¦ Kamu berusia {n} tahun.
+À {place}, deux personnes ont attiré ton regard… ¦ Ở {place}, có hai người đã lọt vào mắt bạn… ¦ Di {place}, dua orang menarik perhatianmu…
+deux personnes ont attiré ton regard… ¦ có hai người đã lọt vào mắt bạn… ¦ dua orang menarik perhatianmu…
+Épouser {name} ¦ Kết hôn với {name} ¦ Menikah dengan {name}
+Rester libre encore un peu ¦ Còn tự do thêm chút nữa ¦ Tetap bebas sedikit lebih lama
+Dans la vraie vie, {first} a épousé {name}{when}{where}. ¦ Ngoài đời thật, {first} đã kết hôn với {name}{when}{where}. ¦ Dalam kehidupan nyata, {first} menikah dengan {name}{when}{where}.
+Partir ? ¦ Ra đi? ¦ Pergi?
+La vie est dure{where}. On parle de partir… ¦ Cuộc sống thật khó khăn{where}. Người ta nói đến chuyện ra đi… ¦ Hidup itu berat{where}. Orang-orang bicara soal pergi…
+Partir pour {place} ¦ Ra đi đến {place} ¦ Pergi ke {place}
+Rester au pays ¦ Ở lại quê nhà ¦ Tetap di kampung halaman
+Dans la vraie vie, {name} a fini sa route à {place}. ¦ Ngoài đời thật, {name} đã kết thúc hành trình ở {place}. ¦ Dalam kehidupan nyata, {name} mengakhiri perjalanannya di {place}.
+On parle de partir pour la ville… ¦ Người ta nói đến chuyện lên thành phố… ¦ Orang-orang bicara soal pergi ke kota…
+Partir ¦ Ra đi ¦ Pergi
+Rester à {place} ¦ Ở lại {place} ¦ Tetap di {place}
+Dans la vraie vie, {name} est resté à {place}. ¦ Ngoài đời thật, {name} đã ở lại {place}. ¦ Dalam kehidupan nyata, {name} tetap di {place}.
+Dans la vraie vie, {name} est restée à {place}. ¦ Ngoài đời thật, {name} đã ở lại {place}. ¦ Dalam kehidupan nyata, {name} tetap di {place}.
+Les enfants ¦ Con cái ¦ Anak-anak
+Un enfant arrive : {list}. Tu les regardes grandir. ¦ Một đứa con ra đời: {list}. Bạn nhìn con lớn lên. ¦ Seorang anak lahir: {list}. Kamu melihatnya tumbuh besar.
+{n} enfants arrivent : {list}. Tu les regardes grandir. ¦ {n} đứa con ra đời: {list}. Bạn nhìn các con lớn lên. ¦ {n} anak lahir: {list}. Kamu melihat mereka tumbuh besar.
+La fin du voyage ¦ Cuối cuộc hành trình ¦ Akhir perjalanan
+Tu t’éteins {when}{where}{age}. ¦ Bạn qua đời {when}{where}{age}. ¦ Kamu berpulang {when}{where}{age}.
+Ton histoire continue… ¦ Câu chuyện của bạn vẫn tiếp tục… ¦ Kisahmu berlanjut…
+{n} personnes nées un {date} : {list}. ¦ {n} người sinh vào một ngày {date}: {list}. ¦ {n} orang lahir pada suatu {date}: {list}.
+{name} est mort le jour de son anniversaire, à {n} ans ({date}). ¦ {name} mất đúng vào ngày sinh nhật, lúc {n} tuổi ({date}). ¦ {name} meninggal pada hari ulang tahunnya, pada usia {n} tahun ({date}).
+{name} est morte le jour de son anniversaire, à {n} ans ({date}). ¦ {name} mất đúng vào ngày sinh nhật, lúc {n} tuổi ({date}). ¦ {name} meninggal pada hari ulang tahunnya, pada usia {n} tahun ({date}).
+{name} est né un {date}, jour anniversaire de la mort de {kin} {who} ({y}). ¦ {name} sinh vào một ngày {date}, đúng ngày giỗ của {kin} {who} ({y}). ¦ {name} lahir pada suatu {date}, tepat pada peringatan wafatnya {kin} {who} ({y}).
+{name} est née un {date}, jour anniversaire de la mort de {kin} {who} ({y}). ¦ {name} sinh vào một ngày {date}, đúng ngày giỗ của {kin} {who} ({y}). ¦ {name} lahir pada suatu {date}, tepat pada peringatan wafatnya {kin} {who} ({y}).
+son ancêtre ¦ tổ tiên của người ấy ¦ leluhurnya
+{n} mariages le même jour de l’année : {list}. ¦ {n} đám cưới cùng một ngày trong năm: {list}. ¦ {n} pernikahan pada hari yang sama dalam setahun: {list}.
+{a} et {b} sont nés à {n} ans pile d’écart, jour pour jour ({y1} et {y2}). ¦ {a} và {b} sinh cách nhau đúng {n} năm, không sai một ngày ({y1} và {y2}). ¦ {a} dan {b} lahir tepat berselisih {n} tahun, hari demi hari ({y1} dan {y2}).
+{name} est né le jour de Noël {y}. ¦ {name} sinh vào ngày Giáng sinh năm {y}. ¦ {name} lahir pada hari Natal {y}.
+{name} est née le jour de Noël {y}. ¦ {name} sinh vào ngày Giáng sinh năm {y}. ¦ {name} lahir pada hari Natal {y}.
+{name} est né le jour de l’An {y}. ¦ {name} sinh vào ngày đầu năm mới {y}. ¦ {name} lahir pada hari Tahun Baru {y}.
+{name} est née le jour de l’An {y}. ¦ {name} sinh vào ngày đầu năm mới {y}. ¦ {name} lahir pada hari Tahun Baru {y}.
+{name} est né un vendredi 13 ({date}). ¦ {name} sinh vào một ngày thứ Sáu 13 ({date}). ¦ {name} lahir pada hari Jumat tanggal 13 ({date}).
+{name} est née un vendredi 13 ({date}). ¦ {name} sinh vào một ngày thứ Sáu 13 ({date}). ¦ {name} lahir pada hari Jumat tanggal 13 ({date}).
+{name} s’est marié à {n} ans, au même âge que son père {father}. ¦ {name} kết hôn lúc {n} tuổi, cùng tuổi với cha mình là {father}. ¦ {name} menikah pada usia {n} tahun, sama dengan ayahnya, {father}.
+{name} s’est mariée à {n} ans, au même âge que son père {father}. ¦ {name} kết hôn lúc {n} tuổi, cùng tuổi với cha mình là {father}. ¦ {name} menikah pada usia {n} tahun, sama dengan ayahnya, {father}.
+En quelle année est né {name} ? ¦ {name} sinh năm nào? ¦ {name} lahir tahun berapa?
+En quelle année est née {name} ? ¦ {name} sinh năm nào? ¦ {name} lahir tahun berapa?
+Où est né {name} ? ¦ {name} sinh ra ở đâu? ¦ Di mana {name} lahir?
+Où est née {name} ? ¦ {name} sinh ra ở đâu? ¦ Di mana {name} lahir?
+Quel était le métier de {name} ? ¦ {name} làm nghề gì? ¦ Apa pekerjaan {name}?
+{name} était {occ}. ¦ {name} làm {occ}. ¦ {name} seorang {occ}.
+Qui a épousé {name} ? ¦ Ai đã kết hôn với {name}? ¦ Siapa yang menikah dengan {name}?
+{a} et {b} se sont mariés{when}{where}. ¦ {a} và {b} đã kết hôn{when}{where}. ¦ {a} dan {b} menikah{when}{where}.
+Qui est le père de {name} ? ¦ Cha của {name} là ai? ¦ Siapa ayah {name}?
+Qui est la mère de {name} ? ¦ Mẹ của {name} là ai? ¦ Siapa ibu {name}?
+{name} est le fils de {parent}. ¦ {name} là con trai của {parent}. ¦ {name} adalah putra dari {parent}.
+{name} est la fille de {parent}. ¦ {name} là con gái của {parent}. ¦ {name} adalah putri dari {parent}.
+Combien d’enfants a eus {name} ? ¦ {name} có bao nhiêu người con? ¦ Berapa anak yang dimiliki {name}?
+À quel âge est mort {name} ? ¦ {name} mất năm bao nhiêu tuổi? ¦ Pada usia berapa {name} meninggal?
+À quel âge est morte {name} ? ¦ {name} mất năm bao nhiêu tuổi? ¦ Pada usia berapa {name} meninggal?
+Qui est né le premier ? ¦ Ai sinh ra trước? ¦ Siapa yang lahir lebih dulu?
+Ici est né {name}, {when}. ¦ Nơi đây {name} đã chào đời, {when}. ¦ Di sinilah {name} lahir, {when}.
+Ici est née {name}, {when}. ¦ Nơi đây {name} đã chào đời, {when}. ¦ Di sinilah {name} lahir, {when}.
+C’est aussi ici que est né {name}, {when}. ¦ Cũng chính nơi đây {name} đã chào đời, {when}. ¦ Di sini pula {name} lahir, {when}.
+C’est aussi ici que est née {name}, {when}. ¦ Cũng chính nơi đây {name} đã chào đời, {when}. ¦ Di sini pula {name} lahir, {when}.
+Ici est né {name}, {when} ; il sera {occ}. ¦ Nơi đây {name} đã chào đời, {when}; sau này ông sẽ làm {occ}. ¦ Di sinilah {name} lahir, {when}; kelak ia menjadi {occ}.
+Ici est née {name}, {when} ; elle sera {occ}. ¦ Nơi đây {name} đã chào đời, {when}; sau này bà sẽ làm {occ}. ¦ Di sinilah {name} lahir, {when}; kelak ia menjadi {occ}.
+C’est aussi ici que est né {name}, {when} ; il sera {occ}. ¦ Cũng chính nơi đây {name} đã chào đời, {when}; sau này ông sẽ làm {occ}. ¦ Di sini pula {name} lahir, {when}; kelak ia menjadi {occ}.
+C’est aussi ici que est née {name}, {when} ; elle sera {occ}. ¦ Cũng chính nơi đây {name} đã chào đời, {when}; sau này bà sẽ làm {occ}. ¦ Di sini pula {name} lahir, {when}; kelak ia menjadi {occ}.
+Ici, {when}, {name} : {label}{what}. ¦ Nơi đây, {when}, {name}: {label}{what}. ¦ Di sini, {when}, {name}: {label}{what}.
+Puis, {when}, {name} : {label}{what}. ¦ Rồi, {when}, {name}: {label}{what}. ¦ Lalu, {when}, {name}: {label}{what}.
+Ici, {when}, {name} a épousé {other}. ¦ Nơi đây, {when}, {name} đã kết hôn với {other}. ¦ Di sini, {when}, {name} menikah dengan {other}.
+Puis, {when}, {name} a épousé {other}. ¦ Rồi, {when}, {name} đã kết hôn với {other}. ¦ Lalu, {when}, {name} menikah dengan {other}.
+Ici est mort {name}, {when}{age}. ¦ Nơi đây {name} đã qua đời, {when}{age}. ¦ Di sinilah {name} meninggal, {when}{age}.
+Ici est morte {name}, {when}{age}. ¦ Nơi đây {name} đã qua đời, {when}{age}. ¦ Di sinilah {name} meninggal, {when}{age}.
+C’est aussi ici que est mort {name}, {when}{age}. ¦ Cũng chính nơi đây {name} đã qua đời, {when}{age}. ¦ Di sini pula {name} meninggal, {when}{age}.
+C’est aussi ici que est morte {name}, {when}{age}. ¦ Cũng chính nơi đây {name} đã qua đời, {when}{age}. ¦ Di sini pula {name} meninggal, {when}{age}.
+son conjoint ¦ vợ hoặc chồng của người ấy ¦ pasangannya
+Naissance ({date}) ¦ Sinh ({date}) ¦ Kelahiran ({date})
+Mariage avec {name} ({date}) ¦ Kết hôn với {name} ({date}) ¦ Pernikahan dengan {name} ({date})
+Mariage avec {name} ¦ Kết hôn với {name} ¦ Pernikahan dengan {name}
+Mariage ({date}) ¦ Kết hôn ({date}) ¦ Pernikahan ({date})
+Décès ({date}) ¦ Mất ({date}) ¦ Kematian ({date})
+ont la joie de vous annoncer la naissance de leur fils ¦ vui mừng báo tin con trai của họ chào đời ¦ dengan gembira mengumumkan kelahiran putra mereka
+ont la joie de vous annoncer la naissance de leur fille ¦ vui mừng báo tin con gái của họ chào đời ¦ dengan gembira mengumumkan kelahiran putri mereka
+a la joie de vous annoncer la naissance de son fils ¦ vui mừng báo tin con trai chào đời ¦ dengan gembira mengumumkan kelahiran putranya
+a la joie de vous annoncer la naissance de sa fille ¦ vui mừng báo tin con gái chào đời ¦ dengan gembira mengumumkan kelahiran putrinya
+a la joie de vous annoncer la naissance de ¦ vui mừng báo tin chào đời của ¦ dengan gembira mengumumkan kelahiran
+On nous prie d’annoncer le décès de ¦ Chúng tôi xin thông báo tin buồn về sự ra đi của ¦ Dengan duka kami mengabarkan wafatnya
+survenu {when}{age} ¦ vào {when}{age} ¦ pada {when}{age}
+survenue {when}{age} ¦ vào {when}{age} ¦ pada {when}{age}
+, dans sa {n}e année ¦ , ở tuổi {n} ¦ , pada tahun ke-{n} usianya
+De la part de ¦ Thay mặt ¦ Atas nama
+Monsieur {name}, son époux ¦ Ông {name}, chồng ¦ Bapak {name}, suaminya
+Madame {name}, son épouse ¦ Bà {name}, vợ ¦ Ibu {name}, istrinya
+{names}, ses enfants ¦ {names}, các con ¦ {names}, anak-anaknya
+{names}, son fils ¦ {names}, con trai ¦ {names}, putranya
+{names}, sa fille ¦ {names}, con gái ¦ {names}, putrinya
+ont l’honneur de vous faire part du mariage de leurs enfants ¦ trân trọng báo tin lễ thành hôn của các con ¦ dengan hormat mengabarkan pernikahan anak-anak mereka
+ont la joie de vous faire part de leur mariage ¦ vui mừng báo tin lễ thành hôn của mình ¦ dengan gembira mengabarkan pernikahan mereka
+célébré {when} ¦ được cử hành {when} ¦ yang dilangsungkan {when}
+{names} se sont dit oui ! ¦ {names} đã nói lời đồng ý! ¦ {names} sudah saling berkata ya!
+Bienvenue à {name} ! ¦ Chào mừng {name}! ¦ Selamat datang, {name}!
+Adieu à {name} ¦ Vĩnh biệt {name} ¦ Selamat jalan, {name}
+Une année tranquille ¦ Một năm bình yên ¦ Tahun yang tenang
+C’est {when} que {a} a épousé {b}. ¦ Chính vào {when}, {a} đã kết hôn với {b}. ¦ Pada {when}, {a} menikah dengan {b}.
+{name} est le fils de {parents} ¦ {name} là con trai của {parents} ¦ {name} adalah putra dari {parents}
+{name} est la fille de {parents} ¦ {name} là con gái của {parents} ¦ {name} adalah putri dari {parents}
+Tous nos vœux de bonheur aux jeunes époux. ¦ Chúc đôi vợ chồng mới cưới trăm năm hạnh phúc. ¦ Selamat berbahagia untuk kedua mempelai.
+Les heureux parents, {names}, reçoivent les félicitations de toute la famille. ¦ Cha mẹ hạnh phúc, {names}, nhận lời chúc mừng của cả gia đình. ¦ Orang tua yang berbahagia, {names}, menerima ucapan selamat dari seluruh keluarga.
+Rien de notable à signaler cette année dans la famille, ce qui est aussi une bonne nouvelle. ¦ Năm nay gia đình không có gì đáng kể, đó cũng là một tin vui. ¦ Tahun ini tak ada yang istimewa dalam keluarga, dan itu juga kabar baik.
+{name} fête ses {n} ans. ¦ {name} mừng sinh nhật {n} tuổi. ¦ {name} merayakan ulang tahun ke-{n}.
+{names} : {n} ans de mariage ! ¦ {names}: {n} năm ngày cưới! ¦ {names}: {n} tahun pernikahan!
+Né il y a {n} ans, jour pour jour. ¦ Sinh ra cách đây {n} năm, đúng ngày này. ¦ Lahir {n} tahun lalu, tepat pada hari ini.
+Née il y a {n} ans, jour pour jour. ¦ Sinh ra cách đây {n} năm, đúng ngày này. ¦ Lahir {n} tahun lalu, tepat pada hari ini.
+Disparu il y a {n} ans, jour pour jour. ¦ Qua đời cách đây {n} năm, đúng ngày này. ¦ Berpulang {n} tahun lalu, tepat pada hari ini.
+Disparue il y a {n} ans, jour pour jour. ¦ Qua đời cách đây {n} năm, đúng ngày này. ¦ Berpulang {n} tahun lalu, tepat pada hari ini.
+Fils de {names}. ¦ Con trai của {names}. ¦ Putra dari {names}.
+Fille de {names}. ¦ Con gái của {names}. ¦ Putri dari {names}.
+{name}, son frère, est né {when} : moins de neuf mois d’écart (des jumeaux auraient la même date). ¦ {name}, anh em trai, sinh {when}: cách nhau chưa đến chín tháng (anh em sinh đôi sẽ có cùng ngày sinh). ¦ {name}, saudara laki-lakinya, lahir {when}: selisih kurang dari sembilan bulan (anak kembar akan punya tanggal yang sama).
+{name}, sa sœur, est née {when} : moins de neuf mois d’écart (des jumeaux auraient la même date). ¦ {name}, chị em gái, sinh {when}: cách nhau chưa đến chín tháng (chị em sinh đôi sẽ có cùng ngày sinh). ¦ {name}, saudara perempuannya, lahir {when}: selisih kurang dari sembilan bulan (anak kembar akan punya tanggal yang sama).
+{name} est mort {when}, avant ce mariage. ¦ {name} đã mất {when}, trước cuộc hôn nhân này. ¦ {name} meninggal {when}, sebelum pernikahan ini.
+{name} est morte {when}, avant ce mariage. ¦ {name} đã mất {when}, trước cuộc hôn nhân này. ¦ {name} meninggal {when}, sebelum pernikahan ini.
+La même année, {label} à {place}, à {km} km : possible, mais à vérifier. ¦ Cùng năm đó, {label} ở {place}, cách {km} km: có thể, nhưng cần kiểm tra. ¦ Pada tahun yang sama, {label} di {place}, berjarak {km} km: mungkin, tetapi perlu diperiksa.
+Un métier à {n} ans : c’est jeune. ¦ Làm nghề lúc {n} tuổi: còn trẻ quá. ¦ Bekerja pada usia {n} tahun: masih muda sekali.
+🔎 À regarder aussi ¦ 🔎 Cũng nên xem ¦ 🔎 Perlu dilihat juga
+{name} naît {when} {where}. ¦ {name} chào đời {when} {where}. ¦ {name} lahir {when} {where}.
+Ses parents : {list}. ¦ Cha mẹ: {list}. ¦ Orang tuanya: {list}.
+Parent connu : {list}. ¦ Cha hoặc mẹ đã biết: {list}. ¦ Orang tua yang diketahui: {list}.
+Ses frères et sœurs ¦ Anh chị em ¦ Saudara-saudaranya
+Son frère ou sa sœur ¦ Anh chị em ¦ Saudaranya
+{name} reçoit le baptême {when} {where}. ¦ {name} được rửa tội {when} {where}. ¦ {name} dibaptis {when} {where}.
+Présents : {list}. ¦ Có mặt: {list}. ¦ Hadir: {list}.
+Le mariage religieux est célébré {when} {where}. ¦ Lễ cưới tôn giáo được cử hành {when} {where}. ¦ Pernikahan agama dilangsungkan {when} {where}.
+Le mariage civil est célébré {when} {where}. ¦ Lễ cưới dân sự được cử hành {when} {where}. ¦ Pernikahan sipil dilangsungkan {when} {where}.
+{name} se marie avec {who} {when} {where}. ¦ {name} kết hôn với {who} {when} {where}. ¦ {name} menikah dengan {who} {when} {where}.
+{name} se marie {when} {where}. ¦ {name} kết hôn {when} {where}. ¦ {name} menikah {when} {where}.
+{name} meurt {when} {where}{age}. ¦ {name} qua đời {when} {where}{age}. ¦ {name} meninggal {when} {where}{age}.
+Cause notée : {cause}. ¦ Nguyên nhân được ghi: {cause}. ¦ Penyebab yang dicatat: {cause}.
+{name} repose {where} ¦ {name} yên nghỉ {where} ¦ {name} beristirahat {where}
+{name} est inhumé ¦ {name} được an táng ¦ {name} dimakamkan
+{name} est inhumée ¦ {name} được an táng ¦ {name} dimakamkan
+{name} est inhumé(e) ¦ {name} được an táng ¦ {name} dimakamkan
+(inhumation {when}) ¦ (an táng {when}) ¦ (dimakamkan {when})
+{kind} {when} {where}. ¦ {kind} {when} {where}. ¦ {kind} {when} {where}.
+{name} exerce le métier de {job}{where}. ¦ {name} làm nghề {job}{where}. ¦ {name} bekerja sebagai {job}{where}.
+{name} s’installe {where}{addr}. ¦ {name} đến định cư {where}{addr}. ¦ {name} menetap {where}{addr}.
+{name} habite {where}{addr}. ¦ {name} sống {where}{addr}. ¦ {name} tinggal {where}{addr}.
+Au recensement de {y}, {name} vit {where}{desc}. ¦ Trong cuộc điều tra dân số năm {y}, {name} sống {where}{desc}. ¦ Pada sensus tahun {y}, {name} tinggal {where}{desc}.
+Au recensement {when}, {name} vit {where}{desc}. ¦ Trong cuộc điều tra dân số {when}, {name} sống {where}{desc}. ¦ Pada sensus {when}, {name} tinggal {where}{desc}.
+à l’adresse « {ad} » ¦ tại địa chỉ “{ad}” ¦ di alamat “{ad}”
+Métier noté : {job}. ¦ Nghề nghiệp được ghi: {job}. ¦ Pekerjaan yang dicatat: {job}.
+Le foyer compte {who}. ¦ Hộ gia đình gồm {who}. ¦ Rumah tangga itu terdiri dari {who}.
+{label} {when} {where}. ¦ {label} {when} {where}. ¦ {label} {when} {where}.
+Recensement de {y} ¦ Điều tra dân số năm {y} ¦ Sensus tahun {y}
+Déménagement ¦ Chuyển nhà ¦ Pindah rumah
+Domicile ¦ Nơi ở ¦ Tempat tinggal
+Sépulture ¦ Mộ phần ¦ Makam
+Crémation ¦ Hoả táng ¦ Kremasi
+Obsèques ¦ Tang lễ ¦ Pemakaman
+Ses enfants ¦ Các con ¦ Anak-anaknya
+Son enfant ¦ Người con ¦ Anaknya
+{n} enfants connus : {list}. ¦ {n} người con đã biết: {list}. ¦ {n} anak yang diketahui: {list}.
+Un enfant connu : {list}. ¦ Một người con đã biết: {list}. ¦ Satu anak yang diketahui: {list}.
+Pendant sa vie ¦ Trong cuộc đời ¦ Sepanjang hidupnya
+Sa vie en quelques mots ¦ Cuộc đời qua vài dòng ¦ Hidupnya dalam beberapa kata
+Ta version de la biographie (📖 sur la fiche). ¦ Phiên bản tiểu sử của bạn (📖 trên hồ sơ). ¦ Versi biografimu (📖 di profil).
+Biographie écrite par l’app d’après la fiche. ¦ Tiểu sử do ứng dụng viết dựa trên hồ sơ. ¦ Biografi yang ditulis aplikasi berdasarkan profil.
+Les lieux de sa vie ¦ Những nơi trong cuộc đời ¦ Tempat-tempat dalam hidupnya
+Sa descendance ¦ Con cháu ¦ Keturunannya
+{list} dans la généalogie. ¦ {list} trong gia phả. ¦ {list} di silsilah.
+Récit d’une vie — {name} ¦ Chuyện một đời người — {name} ¦ Kisah sebuah hidup — {name}
+=petit-enfant ¦ cháu ¦ cucu
+=arrière-petit-enfant ¦ chắt ¦ cicit
+=autre descendant ¦ hậu duệ khác ¦ keturunan lain
+=signature ¦ chữ ký ¦ tanda tangan
+=visage ¦ khuôn mặt ¦ wajah
+=trésor caché ¦ báu vật ẩn giấu ¦ harta tersembunyi
+Garder la mémoire ¦ Giữ gìn ký ức ¦ Menjaga kenangan
+← Tous les trésors ¦ ← Tất cả báu vật ¦ ← Semua harta
+Trésors · {fam} ¦ Báu vật · {fam} ¦ Harta · {fam}
+Un texte, un son ou une vidéo qui ne s’ouvre qu’à une date : « pour les 18 ans de Léa », « en 2050 ». ¦ Một văn bản, âm thanh hay video chỉ mở vào một ngày định trước: “cho sinh nhật 18 tuổi của Léa”, “vào năm 2050”. ¦ Teks, suara, atau video yang hanya terbuka pada suatu tanggal: “untuk ulang tahun ke-18 Léa”, “pada 2050”.
+{n} scellée ¦ {n} đã niêm phong ¦ {n} tersegel
+{n} ouverte ¦ {n} đã mở ¦ {n} terbuka
+📬 Ouvertes ¦ 📬 Đã mở ¦ 📬 Sudah dibuka
+Aucune lettre ouverte pour l’instant ¦ Hiện chưa có lá thư nào được mở ¦ Belum ada surat yang dibuka
+Une lettre scellée s’ouvre toute seule le jour venu. ¦ Một lá thư niêm phong sẽ tự mở khi đến ngày. ¦ Surat tersegel terbuka sendiri pada harinya.
+Souvenirs des sens ¦ Ký ức của các giác quan ¦ Kenangan indra
+L’odeur de la cire, le bruit du moulin, le goût des confitures : ce qu’aucun acte ne garde. ¦ Mùi sáp ong, tiếng cối xay, vị mứt: những điều không giấy tờ nào lưu giữ. ¦ Bau lilin lebah, bunyi penggilingan, rasa selai: hal yang tak disimpan akta mana pun.
+Le sens ¦ Giác quan ¦ Indra
+👃 Une odeur ¦ 👃 Một mùi hương ¦ 👃 Sebuah bau
+👂 Un son ¦ 👂 Một âm thanh ¦ 👂 Sebuah suara
+👅 Un goût ¦ 👅 Một vị ¦ 👅 Sebuah rasa
+✋ Au toucher ¦ ✋ Khi chạm vào ¦ ✋ Sentuhan
+👁 Une image ¦ 👁 Một hình ảnh ¦ 👁 Sebuah gambar
+Les souvenirs qui ne tiennent dans aucun acte : une odeur, un bruit, un goût. Joins-y un son enregistré ou une photo si tu en as. ¦ Những ký ức không nằm trong giấy tờ nào: một mùi hương, một tiếng động, một vị. Hãy kèm theo âm thanh đã ghi hoặc ảnh nếu bạn có. ¦ Kenangan yang tak muat di akta mana pun: sebuah bau, bunyi, atau rasa. Lampirkan rekaman suara atau foto jika kamu punya.
+Noter un souvenir ¦ Ghi lại một ký ức ¦ Catat sebuah kenangan
+📋 Voir dans Listes › Mémoire familiale ¦ 📋 Xem trong Danh sách › Ký ức gia đình ¦ 📋 Lihat di Daftar › Kenangan keluarga
+Rangé avec les expressions, surnoms, traditions et témoignages ¦ Được xếp cùng với các thành ngữ, biệt danh, truyền thống và lời kể ¦ Disimpan bersama ungkapan, julukan, tradisi, dan kesaksian
+Aucun souvenir noté pour l’instant : l’odeur de la cire dans l’escalier, le bruit du moulin, le goût des confitures de Mémé… ¦ Chưa có ký ức nào được ghi: mùi sáp ong ở cầu thang, tiếng cối xay, vị mứt của bà… ¦ Belum ada kenangan dicatat: bau lilin di tangga, bunyi penggilingan, rasa selai Nenek…
+Le livre de recettes ¦ Sổ công thức nấu ăn ¦ Buku resep
+Les recettes de la famille, avec qui les faisait et leur histoire, puis un vrai livre à imprimer. ¦ Các công thức của gia đình, ai từng nấu và câu chuyện của chúng, rồi thành một cuốn sách thật để in. ¦ Resep keluarga, siapa yang membuatnya dan kisahnya, lalu menjadi buku sungguhan untuk dicetak.
+Rubrique ¦ Mục ¦ Rubrik
+Entrées et soupes ¦ Món khai vị và súp ¦ Hidangan pembuka dan sup
+Plats ¦ Món chính ¦ Hidangan utama
+Desserts et gâteaux ¦ Món tráng miệng và bánh ngọt ¦ Pencuci mulut dan kue
+Confitures et conserves ¦ Mứt và đồ đóng hộp ¦ Selai dan awetan
+Boissons ¦ Đồ uống ¦ Minuman
+Ajouter une recette ¦ Thêm một công thức ¦ Tambah resep
+Imprimer le livre ¦ In sách ¦ Cetak buku
+{label} : couverture, sommaire, une page chacun ¦ {label}: bìa, mục lục, mỗi món một trang ¦ {label}: sampul, daftar isi, satu halaman per resep
+Aucune recette pour l’instant : le far de Mamie, la soupe aux choux du dimanche… ¦ Chưa có công thức nào: bánh far của bà, súp bắp cải ngày Chủ nhật… ¦ Belum ada resep: kue far Nenek, sup kubis hari Minggu…
+Rien à mettre dans le livre pour l’instant : commence par « ＋ {what} ». ¦ Chưa có gì để đưa vào sách: hãy bắt đầu bằng “＋ {what}”. ¦ Belum ada yang bisa dimasukkan ke buku: mulai dengan “＋ {what}”.
+Les chansons de la famille ¦ Những bài hát của gia đình ¦ Lagu-lagu keluarga
+Berceuses, chansons de banquet, de conscrits : paroles, air, qui la chantait, l’enregistrement, et un carnet à imprimer. ¦ Hát ru, bài hát tiệc tùng, bài hát của tân binh: lời, giai điệu, ai từng hát, bản ghi âm, và một cuốn sổ để in. ¦ Lagu nina bobo, lagu pesta, lagu wajib militer: lirik, nada, siapa yang menyanyikannya, rekamannya, dan buku kecil untuk dicetak.
+Berceuses ¦ Hát ru ¦ Lagu nina bobo
+Chansons de fête et de repas ¦ Bài hát lễ hội và bữa ăn ¦ Lagu pesta dan jamuan
+Chansons de travail ¦ Bài hát lao động ¦ Lagu kerja
+Conscrits et soldats ¦ Tân binh và người lính ¦ Wajib militer dan tentara
+Noël ¦ Giáng sinh ¦ Natal
+En patois ¦ Bằng tiếng địa phương ¦ Dalam bahasa daerah
+Les paroles, l’air, qui la chantait — et, si tu peux, l’enregistrement (un son choisi dans les médias). ¦ Lời, giai điệu, ai từng hát — và, nếu có thể, bản ghi âm (một âm thanh chọn trong tư liệu). ¦ Lirik, nada, siapa yang menyanyikannya — dan, jika bisa, rekamannya (suara yang dipilih dari media).
+Ajouter une chanson ¦ Thêm một bài hát ¦ Tambah lagu
+Imprimer le carnet ¦ In sổ ¦ Cetak buku kecil
+Aucune chanson pour l’instant : la berceuse de Mémé, la chanson des fins de banquet… ¦ Chưa có bài hát nào: bài hát ru của bà, bài hát cuối tiệc… ¦ Belum ada lagu: lagu nina bobo Nenek, lagu penutup pesta…
+L’entretien guidé ¦ Phỏng vấn có hướng dẫn ¦ Wawancara terpandu
+Les bonnes questions à poser à un grand-parent, lues à voix haute ; l’enregistrement est rangé sur sa fiche, avec un repère par question. ¦ Những câu hỏi hay để hỏi ông bà, được đọc to; bản ghi âm được lưu vào hồ sơ của họ, với một dấu mốc cho mỗi câu hỏi. ¦ Pertanyaan yang tepat untuk kakek-nenek, dibacakan dengan suara keras; rekamannya disimpan di profilnya, dengan penanda untuk setiap pertanyaan.
+Les questions s’affichent en grand (et peuvent être lues à voix haute) ; l’entretien s’enregistre au micro, chaque question est marquée dans l’enregistrement, puis le son est rangé dans les médias de la fiche. ¦ Các câu hỏi hiện chữ to (và có thể đọc to); cuộc phỏng vấn được ghi qua micro, mỗi câu hỏi được đánh dấu trong bản ghi, rồi âm thanh được lưu vào tư liệu của hồ sơ. ¦ Pertanyaan ditampilkan besar (dan bisa dibacakan); wawancara direkam lewat mikrofon, setiap pertanyaan ditandai dalam rekaman, lalu suaranya disimpan di media profil.
+La personne interrogée ¦ Người được phỏng vấn ¦ Orang yang diwawancarai
+Lire les questions à voix haute ¦ Đọc to các câu hỏi ¦ Bacakan pertanyaan
+Les thèmes ¦ Các chủ đề ¦ Tema
+🧒 L’enfance ¦ 🧒 Tuổi thơ ¦ 🧒 Masa kecil
+✏️ L’école ¦ ✏️ Trường học ¦ ✏️ Sekolah
+👪 La famille ¦ 👪 Gia đình ¦ 👪 Keluarga
+🔨 Le travail ¦ 🔨 Công việc ¦ 🔨 Pekerjaan
+💞 L’amour ¦ 💞 Tình yêu ¦ 💞 Cinta
+🪖 La guerre ¦ 🪖 Chiến tranh ¦ 🪖 Perang
+🏡 La maison ¦ 🏡 Ngôi nhà ¦ 🏡 Rumah
+🎉 Les fêtes ¦ 🎉 Lễ hội ¦ 🎉 Perayaan
+💬 Pour plus tard ¦ 💬 Để lại cho mai sau ¦ 💬 Untuk masa depan
+Les entretiens enregistrés ¦ Các cuộc phỏng vấn đã ghi ¦ Wawancara yang direkam
+🎙️ Commencer l’entretien ¦ 🎙️ Bắt đầu phỏng vấn ¦ 🎙️ Mulai wawancara
+Les questions sur papier, avec la place pour noter les réponses ¦ Các câu hỏi trên giấy, có chỗ để ghi câu trả lời ¦ Pertanyaan di atas kertas, dengan ruang untuk mencatat jawaban
+Aucun entretien pour l’instant ¦ Chưa có cuộc phỏng vấn nào ¦ Belum ada wawancara
+Choisis la personne et les thèmes, puis « 🎙️ Commencer l’entretien ». ¦ Hãy chọn người và chủ đề, rồi bấm “🎙️ Bắt đầu phỏng vấn”. ¦ Pilih orang dan temanya, lalu “🎙️ Mulai wawancara”.
+La veillée en un clic ¦ Buổi tối kể chuyện chỉ với một cú bấm ¦ Malam bercerita dengan satu klik
+En plein écran, les portraits d’une branche défilent, chaque vie est racontée à voix haute, avec une musique douce. ¦ Toàn màn hình, chân dung của một nhánh lần lượt hiện lên, mỗi cuộc đời được kể thành tiếng, cùng nhạc nhẹ. ¦ Layar penuh, potret satu cabang bergulir, setiap hidup diceritakan dengan suara, diiringi musik lembut.
+Autour de ¦ Xoay quanh ¦ Di sekitar
+Secondes par vie ¦ Số giây cho mỗi cuộc đời ¦ Detik per kehidupan
+Raconter à voix haute ¦ Kể thành tiếng ¦ Ceritakan dengan suara
+Musique douce ¦ Nhạc nhẹ ¦ Musik lembut
+En plein écran : les portraits défilent, chaque vie est racontée. Espace = pause, flèches = avant / après, Échap = fin. ¦ Toàn màn hình: chân dung lần lượt hiện lên, mỗi cuộc đời được kể. Phím cách = tạm dừng, mũi tên = trước / sau, Esc = kết thúc. ¦ Layar penuh: potret bergulir, setiap hidup diceritakan. Spasi = jeda, panah = sebelum / sesudah, Esc = selesai.
+La veillée de la famille {name} ¦ Buổi tối kể chuyện của gia đình {name} ¦ Malam bercerita keluarga {name}
+Ce soir, on raconte {n} vies de la famille de {name}. ¦ Tối nay, chúng ta kể {n} cuộc đời trong gia đình {name}. ¦ Malam ini, kita menceritakan {n} kehidupan keluarga {name}.
+Bonne nuit ¦ Chúc ngủ ngon ¦ Selamat tidur
+Et maintenant, à vous de raconter ce dont vous vous souvenez. ¦ Và bây giờ, đến lượt mọi người kể lại những gì mình còn nhớ. ¦ Dan sekarang, giliran kalian menceritakan apa yang kalian ingat.
+{n} vies à raconter : {list} ¦ {n} cuộc đời để kể: {list} ¦ {n} kehidupan untuk diceritakan: {list}
+🕯️ Lancer la veillée ¦ 🕯️ Bắt đầu buổi tối kể chuyện ¦ 🕯️ Mulai malam bercerita
+Découvrir ¦ Khám phá ¦ Jelajahi
+À ton âge… ¦ Ở tuổi của bạn… ¦ Seusiamu…
+Ce que faisait chaque ancêtre au même âge que toi : il se mariait, partait, devenait parent… ¦ Mỗi tổ tiên đã làm gì khi bằng tuổi bạn: kết hôn, ra đi, làm cha mẹ… ¦ Apa yang dilakukan tiap leluhur saat seusiamu: menikah, pergi, menjadi orang tua…
+L’âge ¦ Tuổi ¦ Usia
+Mon âge ¦ Tuổi của tôi ¦ Usiaku
+Aperçu, A4 ou A5, ⤓ PDF ¦ Xem trước, A4 hoặc A5, ⤓ PDF ¦ Pratinjau, A4 atau A5, ⤓ PDF
+Les prénoms qui sautent une génération ¦ Những tên gọi cách một thế hệ ¦ Nama yang melompati satu generasi
+Henri comme son grand-père, Rose comme son arrière-grand-mère : les prénoms transmis par-dessus les parents. ¦ Henri giống ông nội, Rose giống cụ bà: những tên gọi được truyền qua đầu cha mẹ. ¦ Henri seperti kakeknya, Rose seperti nenek buyutnya: nama yang diwariskan melewati orang tua.
+Un prénom qui « saute » une génération : l’enfant le reçoit d’un grand-parent (ou d’un arrière-grand-parent), alors que ni son père ni sa mère ne le portaient. La popularité de chaque prénom en France (INSEE) est dans <b>Patrimoine → Prénoms</b>. ¦ Một tên gọi “nhảy” một thế hệ: đứa trẻ nhận tên từ ông bà (hoặc cụ), trong khi cả cha lẫn mẹ đều không mang tên đó. Độ phổ biến của mỗi tên ở Pháp (INSEE) có trong <b>Di sản → Tên gọi</b>. ¦ Nama yang “melompati” satu generasi: anak menerimanya dari kakek-nenek (atau buyut), padahal ayah maupun ibunya tidak memakainya. Popularitas tiap nama di Prancis (INSEE) ada di <b>Warisan → Nama depan</b>.
+{n} prénom transmis par-dessus une génération ¦ {n} tên gọi được truyền cách một thế hệ ¦ {n} nama depan diwariskan melewati satu generasi
+{n} fois ¦ {n} lần ¦ {n} kali
+Les prénoms qui reviennent ¦ Những tên gọi lặp lại ¦ Nama yang berulang
+Le pouvoir d’achat d’autrefois ¦ Sức mua ngày xưa ¦ Daya beli zaman dulu
+Une dot de 1 200 francs en 1880 : combien d’euros d’aujourd’hui, de kilos de pain, de journées de travail ? ¦ Của hồi môn 1 200 franc năm 1880: bằng bao nhiêu euro ngày nay, bao nhiêu ký bánh mì, bao nhiêu ngày công? ¦ Mas kawin 1.200 franc pada 1880: berapa euro sekarang, berapa kilo roti, berapa hari kerja?
+La somme ¦ Số tiền ¦ Jumlah
+livres (ou francs de l’époque) ¦ livre (hoặc franc thời đó) ¦ livre (atau franc pada masa itu)
+sous (1/20 de livre ou de franc) ¦ sou (1/20 livre hoặc franc) ¦ sou (1/20 livre atau franc)
+deniers (1/240 de livre) ¦ denier (1/240 livre) ¦ denier (1/240 livre)
+anciens francs (après 1960) ¦ franc cũ (sau 1960) ¦ franc lama (setelah 1960)
+centimes ¦ xu (centime) ¦ sen (centime)
+euros ¦ euro ¦ euro
+Repères : à partir de 1901, l’indice des prix de l’INSEE ; avant, un ordre de grandeur d’après le prix des denrées. Le pain : prix moyen du kilo de pain ordinaire. Les journées : le salaire d’un journalier. Un écu = 3 livres. ¦ Mốc tham chiếu: từ năm 1901, chỉ số giá của INSEE; trước đó, ước lượng theo giá lương thực. Bánh mì: giá trung bình của một ký bánh mì thường. Ngày công: tiền công của một người làm thuê theo ngày. Một écu = 3 livre. ¦ Acuan: sejak 1901, indeks harga INSEE; sebelumnya, perkiraan kasar dari harga bahan makanan. Roti: harga rata-rata sekilo roti biasa. Hari kerja: upah seorang buruh harian. Satu écu = 3 livre.
+🪙 Le calcul pas à pas dans le Convertisseur d’autrefois ↗ ¦ 🪙 Cách tính từng bước trong Bộ chuyển đổi ngày xưa ↗ ¦ 🪙 Perhitungan langkah demi langkah di Pengonversi zaman dulu ↗
+Les sommes de ton arbre ¦ Các khoản tiền trong cây gia phả của bạn ¦ Jumlah uang di pohon silsilahmu
+{sum} en {y} ¦ {sum} năm {y} ¦ {sum} pada {y}
+≈ {eur} d’aujourd’hui ¦ ≈ {eur} ngày nay ¦ ≈ {eur} sekarang
+{kg} kg de pain ¦ {kg} kg bánh mì ¦ {kg} kg roti
+{d} journées de travail ¦ {d} ngày công ¦ {d} hari kerja
+En euros d’aujourd’hui ¦ Theo euro ngày nay ¦ Dalam euro sekarang
+En pain ¦ Theo bánh mì ¦ Dalam roti
+soit {n} baguettes d’aujourd’hui ¦ tức là {n} ổ bánh mì baguette ngày nay ¦ yaitu {n} baguette masa kini
+En journées de travail ¦ Theo ngày công ¦ Dalam hari kerja
+d’un journalier en {y} ¦ của một người làm thuê theo ngày năm {y} ¦ seorang buruh harian pada {y}
+≈ {eur} au SMIC d’aujourd’hui ¦ ≈ {eur} theo lương tối thiểu (SMIC) ngày nay ¦ ≈ {eur} menurut upah minimum (SMIC) sekarang
+francs ¦ franc ¦ franc
+{n} {unit} de {y}. ¦ {n} {unit} của năm {y}. ¦ {n} {unit} tahun {y}.
+Les deux chiffres ne disent pas la même chose : le pain coûtait proportionnellement bien plus cher autrefois, le travail beaucoup moins. ¦ Hai con số không nói cùng một điều: bánh mì ngày xưa đắt hơn nhiều so với thu nhập, còn công lao động thì rẻ hơn nhiều. ¦ Kedua angka itu tidak menyatakan hal yang sama: roti dulu jauh lebih mahal secara proporsional, tenaga kerja jauh lebih murah.
+Les vieux mots des actes ¦ Những từ cổ trong giấy tờ ¦ Kata-kata lama dalam akta
+Laboureur, ondoyé, brumaire, douaire… Colle un acte : les mots anciens sont surlignés et expliqués. ¦ Laboureur, ondoyé, brumaire, douaire… Hãy dán một giấy tờ: các từ cổ sẽ được tô sáng và giải thích. ¦ Laboureur, ondoyé, brumaire, douaire… Tempelkan sebuah akta: kata-kata lama disorot dan dijelaskan.
+Colle ici le texte d’un acte ¦ Dán văn bản của một giấy tờ vào đây ¦ Tempelkan teks akta di sini
+Dans ton arbre ¦ Trong cây gia phả của bạn ¦ Di pohon silsilahmu
+Chercher un mot ¦ Tìm một từ ¦ Cari kata
+{n} mots ¦ {n} từ ¦ {n} kata
+📜 Le latin, les abréviations et les anciennes lettres ↗ ¦ 📜 Tiếng Latinh, chữ viết tắt và chữ viết cổ ↗ ¦ 📜 Bahasa Latin, singkatan, dan huruf lama ↗
+Ces mots et leurs explications sont ceux des actes français : ils restent en français. ¦ Những từ này và lời giải thích là của giấy tờ Pháp: chúng được giữ nguyên bằng tiếng Pháp. ¦ Kata-kata ini dan penjelasannya berasal dari akta Prancis: tetap dalam bahasa Prancis.
+Jouer en famille ¦ Chơi cùng gia đình ¦ Bermain bersama keluarga
+Jeu des 7 familles ¦ Trò chơi 7 gia đình ¦ Permainan 7 keluarga
+Les cartes faites depuis ton arbre : la photo de chacun au choix et recadrée, six styles de cartes, les couleurs, le dos ; à imprimer et découper. ¦ Những lá bài làm từ cây gia phả của bạn: ảnh của mỗi người tuỳ chọn và cắt khung, sáu kiểu lá bài, màu sắc, mặt sau; để in và cắt. ¦ Kartu yang dibuat dari pohon silsilahmu: foto tiap orang bisa dipilih dan dipangkas, enam gaya kartu, warna, punggung kartu; untuk dicetak dan digunting.
+Les familles ¦ Các gia đình ¦ Keluarga
+par nom de famille ¦ theo họ ¦ menurut nama keluarga
+par branche (arrière-grands-parents) ¦ theo nhánh (cụ ông cụ bà) ¦ menurut cabang (kakek-nenek buyut)
+Le style ¦ Kiểu ¦ Gaya
+🃏 Classique ¦ 🃏 Cổ điển ¦ 🃏 Klasik
+📜 Ancien (papier jauni) ¦ 📜 Cổ xưa (giấy ngả vàng) ¦ 📜 Kuno (kertas menguning)
+◻️ Moderne (grande photo) ¦ ◻️ Hiện đại (ảnh lớn) ¦ ◻️ Modern (foto besar)
+🧸 Pour les petits ¦ 🧸 Cho các bé ¦ 🧸 Untuk anak-anak
+🎩 Années folles ¦ 🎩 Những năm hai mươi sôi động ¦ 🎩 Tahun 1920-an
+🪵 Bois gravé ¦ 🪵 Khắc gỗ ¦ 🪵 Ukiran kayu
+Couleurs d’origine ¦ Màu gốc ¦ Warna asli
+Le dos ¦ Mặt sau ¦ Punggung kartu
+Un dos à motif (à imprimer au verso) ¦ Mặt sau có hoa văn (in ở mặt sau) ¦ Punggung bermotif (dicetak di sisi belakang)
+Sans dos ¦ Không có mặt sau ¦ Tanpa punggung
+Le lieu de naissance ¦ Nơi sinh ¦ Tempat lahir
+La liste de la famille ¦ Danh sách gia đình ¦ Daftar keluarga
+Les photos choisies, les couleurs et le style de départ ¦ Các ảnh đã chọn, màu sắc và kiểu ban đầu ¦ Foto pilihan, warna, dan gaya awal
+📷 sur une carte : choisir et recadrer sa photo. ¦ 📷 trên một lá bài: chọn và cắt khung ảnh. ¦ 📷 di kartu: pilih dan pangkas fotonya.
+{n} familles de 6 cartes ({total} cartes). ¦ {n} gia đình 6 lá ({total} lá). ¦ {n} keluarga berisi 6 kartu ({total} kartu).
+Choisir et recadrer la photo de {name} ¦ Chọn và cắt khung ảnh của {name} ¦ Pilih dan pangkas foto {name}
+Le grand-père ¦ Ông ¦ Kakek
+Le fils ¦ Con trai ¦ Putra
+Jeu des familles ¦ Trò chơi gia đình ¦ Permainan keluarga
+La grand-mère ¦ Bà ¦ Nenek
+La fille ¦ Con gái ¦ Putri
+Les planches de cartes (et leurs dos), avec la règle du jeu ¦ Các tờ lá bài (và mặt sau), kèm luật chơi ¦ Lembar kartu (dan punggungnya), dengan aturan permainan
+Arbre à colorier ¦ Cây để tô màu ¦ Pohon untuk diwarnai
+Les vrais ancêtres d’un enfant en traits noirs : un arbre, un jardin de fleurs, un village, des blasons, des montgolfières, une ruche, un éventail ou une rosace. ¦ Tổ tiên thật của một đứa trẻ bằng nét đen: một cái cây, một vườn hoa, một ngôi làng, huy hiệu, khinh khí cầu, tổ ong, cây quạt hoặc hoa hồng trang trí. ¦ Leluhur asli seorang anak dalam garis hitam: pohon, taman bunga, desa, lambang, balon udara, sarang lebah, kipas, atau roset.
+L’enfant (ou la personne) au pied de l’arbre ¦ Đứa trẻ (hoặc người) ở gốc cây ¦ Anak (atau orang) di kaki pohon
+5 (petites cases) ¦ 5 (ô nhỏ) ¦ 5 (kotak kecil)
+Le dessin ¦ Hình vẽ ¦ Gambar
+🌳 Le grand arbre ¦ 🌳 Cây lớn ¦ 🌳 Pohon besar
+🌷 Le jardin de fleurs ¦ 🌷 Vườn hoa ¦ 🌷 Taman bunga
+🏡 Le village (une maison chacun) ¦ 🏡 Ngôi làng (mỗi người một ngôi nhà) ¦ 🏡 Desa (satu rumah per orang)
+🛡️ Les blasons ¦ 🛡️ Huy hiệu ¦ 🛡️ Lambang
+🎈 Les montgolfières ¦ 🎈 Khinh khí cầu ¦ 🎈 Balon udara
+🐝 La ruche (alvéoles) ¦ 🐝 Tổ ong (ô lục giác) ¦ 🐝 Sarang lebah (sel)
+🪭 L’éventail ¦ 🪭 Cây quạt ¦ 🪭 Kipas
+🏵️ La rosace ¦ 🏵️ Hoa hồng trang trí ¦ 🏵️ Roset
+Le prénom seul (petits) ¦ Chỉ tên (cho bé) ¦ Hanya nama depan (anak kecil)
+Prénom et nom ¦ Tên và họ ¦ Nama depan dan nama keluarga
+Prénom, nom et année ¦ Tên, họ và năm ¦ Nama depan, nama keluarga, dan tahun
+L’écriture ¦ Chữ viết ¦ Tulisan
+D’écolier ¦ Chữ học trò ¦ Tulisan anak sekolah
+Bâton (lettres rondes) ¦ Chữ in (nét tròn) ¦ Huruf cetak (bulat)
+Le trait ¦ Nét vẽ ¦ Garis
+Fin (grands) ¦ Mảnh (cho trẻ lớn) ¦ Tipis (anak besar)
+Épais (petits, gros feutres) ¦ Dày (cho bé, bút dạ to) ¦ Tebal (anak kecil, spidol besar)
+Sans ¦ Không có ¦ Tanpa
+Double trait ¦ Nét đôi ¦ Garis ganda
+Guirlande de feuilles ¦ Vòng lá ¦ Untaian daun
+Le titre ¦ Tiêu đề ¦ Judul
+L’arbre de … ¦ Cây gia phả của … ¦ Pohon …
+Dessiner ¦ Vẽ ¦ Gambar
+Enregistrer un fichier sur l’ordinateur, ou ranger une copie dans les médias ¦ Lưu một tệp trên máy tính, hoặc cất một bản sao vào tư liệu ¦ Simpan berkas di komputer, atau simpan salinan di media
+L’arbre de {name} ¦ Cây gia phả của {name} ¦ Pohon {name}
+Le quiz du repas ¦ Câu đố trong bữa ăn ¦ Kuis saat makan
+Sur la télé, en équipes : des questions tirées de l’arbre (qui a épousé qui, où, quel métier), compte à rebours et scores. ¦ Trên tivi, theo đội: các câu hỏi lấy từ cây gia phả (ai cưới ai, ở đâu, làm nghề gì), đếm ngược và tính điểm. ¦ Di TV, berkelompok: pertanyaan dari pohon silsilah (siapa menikah dengan siapa, di mana, pekerjaan apa), hitung mundur, dan skor.
+Les équipes (séparées par des virgules) ¦ Các đội (cách nhau bằng dấu phẩy) ¦ Tim (dipisahkan koma)
+Les {name}, Les cousins ¦ Nhà {name}, Các anh chị em họ ¦ Keluarga {name}, Para sepupu
+Secondes pour répondre ¦ Số giây để trả lời ¦ Detik untuk menjawab
+Branche l’ordinateur sur la télé : la question et les quatre réponses s’affichent en grand ; à la fin du compte à rebours (ou avec <b>Entrée</b>), la bonne réponse apparaît, puis on donne le point à l’équipe qui a trouvé (touches <b>1</b> à <b>9</b>). Répondre depuis les téléphones demanderait que l’application soit joignable depuis tout le réseau de la maison : ce n’est pas possible pour l’instant, on joue devant l’écran. ¦ Hãy nối máy tính với tivi: câu hỏi và bốn câu trả lời hiện chữ to; khi hết giờ đếm ngược (hoặc nhấn <b>Enter</b>), câu trả lời đúng hiện ra, rồi cộng điểm cho đội đã trả lời đúng (phím <b>1</b> đến <b>9</b>). Để trả lời bằng điện thoại, ứng dụng phải truy cập được từ cả mạng trong nhà: hiện chưa làm được, nên mọi người chơi trước màn hình. ¦ Sambungkan komputer ke TV: pertanyaan dan empat jawaban tampil besar; di akhir hitung mundur (atau dengan <b>Enter</b>), jawaban benar muncul, lalu beri poin ke tim yang menebak benar (tombol <b>1</b> sampai <b>9</b>). Menjawab dari ponsel memerlukan aplikasi yang bisa dijangkau dari seluruh jaringan rumah: belum bisa untuk saat ini, jadi bermainlah di depan layar.
+📺 Lancer le quiz ¦ 📺 Bắt đầu câu đố ¦ 📺 Mulai kuis
+Un avant-goût ¦ Nếm thử trước ¦ Cicipan awal
+Créer et fabriquer ¦ Tạo và làm ¦ Buat dan rakit
+Le faire-part d’un événement ¦ Thiệp báo tin một sự kiện ¦ Kartu pengumuman sebuah peristiwa
+Une naissance, un mariage ou un décès de l’arbre : le faire-part se compose tout seul, dans le style de l’époque. ¦ Một ca sinh, đám cưới hay đám tang trong cây gia phả: thiệp báo tin tự soạn, theo phong cách của thời đó. ¦ Kelahiran, pernikahan, atau kematian dari pohon silsilah: kartu pengumuman tersusun sendiri, dengan gaya zamannya.
+L’événement ¦ Sự kiện ¦ Peristiwa
+Classique (1900) ¦ Cổ điển (1900) ¦ Klasik (1900)
+Art déco (1925) ¦ Art déco (1925) ¦ Art deco (1925)
+Fleuri ¦ Hoa lá ¦ Berbunga
+Deuil (liseré noir) ¦ Tang (viền đen) ¦ Duka (bingkai hitam)
+Romantique (dentelle, 1880) ¦ Lãng mạn (ren, 1880) ¦ Romantis (renda, 1880)
+Art nouveau (1900) ¦ Art nouveau (1900) ¦ Art nouveau (1900)
+Champêtre (papier kraft) ¦ Đồng quê (giấy kraft) ¦ Pedesaan (kertas kraft)
+Bleu et or ¦ Xanh và vàng kim ¦ Biru dan emas
+Layette (naissance) ¦ Đồ sơ sinh (chào đời) ¦ Bayi (kelahiran)
+Épuré ¦ Tối giản ¦ Bersahaja
+🎨 Plus d’options ¦ 🎨 Thêm tuỳ chọn ¦ 🎨 Opsi lainnya
+Le format ¦ Khổ ¦ Format
+Carte A6 (portrait) ¦ Thiệp A6 (dọc) ¦ Kartu A6 (potret)
+Marque-page ¦ Thẻ đánh dấu sách ¦ Pembatas buku
+Celle du style ¦ Theo kiểu ¦ Sesuai gaya
+Écriture à la plume ¦ Chữ viết bút lông ngỗng ¦ Tulisan pena bulu
+Élégante (Didot) ¦ Thanh lịch (Didot) ¦ Elegan (Didot)
+Bâton ¦ Chữ in ¦ Huruf cetak
+Les ornements ¦ Hoạ tiết trang trí ¦ Ornamen
+Ceux du style ¦ Theo kiểu ¦ Sesuai gaya
+Mes couleurs ¦ Màu của tôi ¦ Warnaku
+La photo de la personne ¦ Ảnh của người đó ¦ Foto orang itu
+Sa forme ¦ Hình dạng ¦ Bentuknya
+Couleurs de la photo ¦ Màu của ảnh ¦ Warna foto
+D’origine ¦ Nguyên bản ¦ Asli
+Le texte (une ligne par ligne ; * devant une ligne = en grand) ¦ Văn bản (mỗi dòng một dòng; * trước một dòng = chữ to) ¦ Teks (satu baris per baris; * di depan baris = besar)
+Le mur des signatures ¦ Bức tường chữ ký ¦ Dinding tanda tangan
+Toutes les signatures repérées sur les actes, découpées et rangées par époque : l’écriture de chaque génération. ¦ Mọi chữ ký tìm thấy trên giấy tờ, được cắt ra và xếp theo thời kỳ: nét chữ của mỗi thế hệ. ¦ Semua tanda tangan yang ditemukan di akta, dipotong dan disusun menurut zaman: tulisan tangan tiap generasi.
+La Belle Époque ¦ Thời kỳ Belle Époque ¦ Belle Époque
+L’affiche (image PNG) ¦ Áp phích (ảnh PNG) ¦ Poster (gambar PNG)
+Lieux et voyages ¦ Địa điểm và hành trình ¦ Tempat dan perjalanan
+Le film des migrations ¦ Phim về các cuộc di cư ¦ Film migrasi
+Année après année, chacun se déplace sur la carte, de sa naissance à sa mort ; le film s’enregistre en vidéo. ¦ Năm này qua năm khác, mỗi người di chuyển trên bản đồ, từ lúc sinh đến lúc mất; phim được ghi thành video. ¦ Tahun demi tahun, setiap orang bergerak di peta, dari lahir sampai meninggal; filmnya direkam sebagai video.
+Durée du film ¦ Độ dài phim ¦ Durasi film
+Sans carte ¦ Không có bản đồ ¦ Tanpa peta
+▶ Jouer ¦ ▶ Phát ¦ ▶ Putar
+{n} parcours, de {y0} à {y1} ¦ {n} hành trình, từ {y0} đến {y1} ¦ {n} perjalanan, dari {y0} sampai {y1}
+famille {name} ¦ gia đình {name} ¦ keluarga {name}
+Le fond de carte se charge… ¦ Đang tải nền bản đồ… ¦ Latar peta sedang dimuat…
+{n} personne en vie ¦ {n} người còn sống ¦ {n} orang yang hidup
+Fond de carte © OpenStreetMap, Esri ¦ Nền bản đồ © OpenStreetMap, Esri ¦ Latar peta © OpenStreetMap, Esri
+La vidéo (WebM) ¦ Video (WebM) ¦ Video (WebM)
+Le film se joue une fois pendant l’enregistrement ¦ Phim được phát một lần trong khi ghi ¦ Film diputar sekali selama perekaman
+Cette image (PNG) ¦ Hình ảnh này (PNG) ¦ Gambar ini (PNG)
+Le film des migrations — {title} ¦ Phim về các cuộc di cư — {title} ¦ Film migrasi — {title}
+La vidéo, enregistrée pendant que le film se joue ¦ Video, được ghi trong khi phim đang phát ¦ Video, direkam selama film diputar
+Le village des ancêtres sur la carte de Cassini et sur la carte d’aujourd’hui, avec un rideau à faire glisser. ¦ Làng của tổ tiên trên bản đồ Cassini và trên bản đồ ngày nay, với một tấm rèm để kéo. ¦ Desa leluhur di peta Cassini dan di peta masa kini, dengan tirai yang bisa digeser.
+Hier ¦ Ngày xưa ¦ Dulu
+Carte de Cassini (XVIIIe s.) ¦ Bản đồ Cassini (thế kỷ XVIII) ¦ Peta Cassini (abad ke-18)
+Cassini, exemplaire du roi ¦ Cassini, bản của nhà vua ¦ Cassini, salinan raja
+Carte d’État-major (1820-1866) ¦ Bản đồ Bộ tham mưu (1820-1866) ¦ Peta Staf Umum (1820-1866)
+OpenHistoricalMap ¦ OpenHistoricalMap ¦ OpenHistoricalMap
+Fais glisser le rideau (ou les flèches du clavier). ¦ Hãy kéo tấm rèm (hoặc dùng phím mũi tên). ¦ Geser tirainya (atau gunakan tombol panah).
+Rideau entre la carte d’hier et celle d’aujourd’hui ¦ Tấm rèm giữa bản đồ ngày xưa và bản đồ ngày nay ¦ Tirai antara peta dulu dan peta sekarang
+Cartes : Géoplateforme IGN (Cassini, État-major), © OpenStreetMap, Esri. Dans l’onglet Carte, le mode « superposition » compare aussi deux fonds avec l’opacité. ¦ Bản đồ: Géoplateforme IGN (Cassini, État-major), © OpenStreetMap, Esri. Trong thẻ Bản đồ, chế độ “chồng lớp” cũng so sánh hai nền bản đồ bằng độ trong suốt. ¦ Peta: Géoplateforme IGN (Cassini, État-major), © OpenStreetMap, Esri. Di tab Peta, mode “tumpuk” juga membandingkan dua latar dengan opasitas.
+La promenade guidée ¦ Chuyến dạo có hướng dẫn ¦ Jalan-jalan terpandu
+Les lieux d’une vie dans l’ordre, l’histoire de chaque étape lue à voix haute — même toute seule, en arrivant sur place. ¦ Những nơi trong một cuộc đời theo thứ tự, câu chuyện mỗi chặng được đọc to — ngay cả khi tự đi một mình, khi đến nơi. ¦ Tempat-tempat sebuah hidup secara berurutan, kisah tiap tahap dibacakan — bahkan sendirian, saat tiba di lokasi.
+La promenade de ¦ Chuyến dạo của ¦ Jalan-jalan
+Le parcours ¦ Lộ trình ¦ Rute
+les lieux de sa vie ¦ những nơi trong cuộc đời ¦ tempat-tempat dalam hidupnya
+les villages de ses ancêtres ¦ những ngôi làng của tổ tiên ¦ desa-desa leluhurnya
+🔊 Tout le guide ¦ 🔊 Toàn bộ hướng dẫn ¦ 🔊 Seluruh panduan
+📍 Me guider en marchant ¦ 📍 Dẫn đường khi tôi đi bộ ¦ 📍 Pandu aku saat berjalan
+⏹ Silence ¦ ⏹ Im lặng ¦ ⏹ Diam
+Le guide de la promenade, étape par étape ¦ Hướng dẫn chuyến dạo, từng chặng một ¦ Panduan jalan-jalan, tahap demi tahap
+🔊 Écouter ¦ 🔊 Nghe ¦ 🔊 Dengarkan
+🧭 Itinéraire ¦ 🧭 Lộ trình ¦ 🧭 Rute
+{km} km en tout (à vol d’oiseau) ¦ Tổng cộng {km} km (theo đường chim bay) ¦ Total {km} km (garis lurus)
+Outils malins ¦ Công cụ thông minh ¦ Alat cerdas
+Dater une vieille photo ¦ Xác định niên đại một tấm ảnh cũ ¦ Menentukan tahun foto lama
+Le support, le carton, les vêtements, les coiffures : une fourchette d’années, et qui de l’arbre ça peut être. ¦ Chất liệu, tấm bìa, quần áo, kiểu tóc: một khoảng năm, và người trong cây gia phả có thể là ai. ¦ Media, karton, pakaian, tatanan rambut: rentang tahun, dan siapa di pohon silsilah yang mungkin.
+Coche ce que tu vois sur la photo (une ou plusieurs réponses par question, ou rien si tu ne sais pas). Les repères sont volontairement larges. ¦ Hãy đánh dấu những gì bạn thấy trên ảnh (một hoặc nhiều câu trả lời cho mỗi câu hỏi, hoặc bỏ trống nếu không biết). Các mốc được cố ý để rộng. ¦ Centang apa yang kamu lihat di foto (satu atau beberapa jawaban per pertanyaan, atau kosongkan jika tidak tahu). Acuannya sengaja dibuat lebar.
+Le support ¦ Chất liệu ¦ Media
+Plaque de métal argentée, comme un miroir, dans un écrin ¦ Tấm kim loại tráng bạc, như gương, trong hộp ¦ Pelat logam berlapis perak, seperti cermin, dalam kotak
+Image sur verre, dans un écrin (ambrotype) ¦ Ảnh trên kính, trong hộp (ambrotype) ¦ Gambar di kaca, dalam kotak (ambrotipe)
+Image sur une fine plaque de fer, sombre (ferrotype) ¦ Ảnh trên tấm sắt mỏng, màu tối (ferrotype) ¦ Gambar di pelat besi tipis, gelap (ferotipe)
+Petite carte (6 × 10 cm) collée sur un carton : carte de visite ¦ Thẻ nhỏ (6 × 10 cm) dán trên bìa cứng: carte de visite ¦ Kartu kecil (6 × 10 cm) ditempel di karton: carte de visite
+Grande carte (11 × 16 cm) sur carton : carte cabinet ¦ Thẻ lớn (11 × 16 cm) trên bìa cứng: carte cabinet ¦ Kartu besar (11 × 16 cm) di karton: kartu kabinet
+Carte postale photo (dos imprimé « carte postale ») ¦ Bưu thiếp ảnh (mặt sau in “carte postale”) ¦ Kartu pos foto (punggung bertuliskan “carte postale”)
+Tirage papier aux bords dentelés ¦ Ảnh giấy có mép răng cưa ¦ Cetakan kertas bertepi bergerigi
+Petit tirage papier noir et blanc sans carton, bords blancs droits ¦ Ảnh giấy đen trắng nhỏ không có bìa, mép trắng thẳng ¦ Cetakan kertas hitam putih kecil tanpa karton, tepi putih lurus
+Photo couleur aux couleurs passées (orange, magenta) ¦ Ảnh màu bị phai (cam, hồng tím) ¦ Foto berwarna yang pudar (oranye, magenta)
+Tirage carré à bord blanc large (type Polaroid / Instamatic) ¦ Ảnh vuông viền trắng rộng (kiểu Polaroid / Instamatic) ¦ Cetakan persegi bertepi putih lebar (jenis Polaroid / Instamatic)
+Le carton (carte de visite ou cabinet) ¦ Tấm bìa (carte de visite hoặc carte cabinet) ¦ Karton (carte de visite atau kabinet)
+Coins carrés, carton fin et clair ¦ Góc vuông, bìa mỏng và sáng màu ¦ Sudut persegi, karton tipis dan terang
+Carton épais et coloré (crème, noir, bordeaux), tranche dorée ¦ Bìa dày và có màu (kem, đen, đỏ rượu), mép mạ vàng ¦ Karton tebal dan berwarna (krem, hitam, merah marun), tepi berlapis emas
+Nom du photographe en grandes lettres décorées au dos, médailles ¦ Tên nhiếp ảnh gia bằng chữ lớn trang trí ở mặt sau, có huy chương ¦ Nama fotografer dengan huruf besar berhias di belakang, medali
+Bord biseauté doré ¦ Mép vát mạ vàng ¦ Tepi miring berlapis emas
+Les vêtements des femmes ¦ Trang phục phụ nữ ¦ Pakaian perempuan
+Jupe très large en cloche (crinoline), épaules tombantes ¦ Váy chuông rất rộng (crinoline), vai trễ ¦ Rok lonceng sangat lebar (krinolin), bahu turun
+Jupe plate devant et gonflée derrière (tournure) ¦ Váy phẳng phía trước và phồng phía sau (tournure) ¦ Rok rata di depan dan menggembung di belakang (bustle)
+Manches très bouffantes en haut (gigot) ¦ Tay áo phồng to ở phía trên (gigot) ¦ Lengan sangat menggembung di atas (gigot)
+Silhouette en S, col montant, grand chapeau ¦ Dáng chữ S, cổ cao, mũ lớn ¦ Siluet S, kerah tinggi, topi besar
+Robe droite, taille basse, jupe au genou ¦ Váy suôn, eo thấp, váy dài đến gối ¦ Gaun lurus, pinggang rendah, rok selutut
+Épaules carrées, jupe sous le genou ¦ Vai vuông, váy dưới gối ¦ Bahu persegi, rok di bawah lutut
+Jupe ample et taille fine (New Look) ¦ Váy xoè và eo thon (New Look) ¦ Rok lebar dan pinggang ramping (New Look)
+Coiffe régionale ou bonnet de paysanne ¦ Mũ truyền thống vùng miền hoặc mũ nông dân ¦ Tutup kepala daerah atau topi petani
+Les coiffures ¦ Kiểu tóc ¦ Tatanan rambut
+Raie au milieu, cheveux plaqués sur les oreilles ¦ Rẽ ngôi giữa, tóc ép sát tai ¦ Belah tengah, rambut menempel menutupi telinga
+Frange frisée sur le front ¦ Tóc mái xoăn trên trán ¦ Poni keriting di dahi
+Chignon haut et volumineux ¦ Búi tóc cao và bồng ¦ Sanggul tinggi dan bervolume
+Cheveux courts « à la garçonne » ¦ Tóc ngắn kiểu “garçonne” ¦ Rambut pendek ala “garçonne”
+Mise en plis ondulée ¦ Tóc uốn gợn sóng ¦ Rambut ditata bergelombang
+Les hommes ¦ Đàn ông ¦ Laki-laki
+Haut-de-forme ¦ Mũ chóp cao ¦ Topi tinggi
+Canotier (chapeau de paille plat) ¦ Mũ cói (mũ rơm dẹt) ¦ Topi canotier (topi jerami pipih)
+Moustache fournie, sans barbe ¦ Ria mép rậm, không để râu ¦ Kumis tebal, tanpa janggut
+Barbe entière fournie ¦ Râu quai nón rậm ¦ Janggut penuh dan lebat
+Col cassé et nœud papillon ¦ Cổ áo bẻ và nơ bướm ¦ Kerah patah dan dasi kupu-kupu
+Uniforme bleu horizon ¦ Quân phục xanh chân trời ¦ Seragam biru horizon
+Costume trois-pièces large, chapeau mou ¦ Bộ com-lê ba mảnh rộng, mũ phớt ¦ Setelan tiga potong longgar, topi fedora
+Pantalon pattes d’éléphant, cheveux longs ¦ Quần ống loe, tóc dài ¦ Celana cutbrai, rambut panjang
+Le décor ¦ Phông cảnh ¦ Latar
+Fond peint, colonne, balustrade, rideau drapé ¦ Phông vẽ, cột, lan can, rèm rủ ¦ Latar lukisan, pilar, langkan, tirai berlipat
+Fond uni, simple chaise ¦ Phông trơn, một chiếc ghế đơn giản ¦ Latar polos, kursi sederhana
+Dehors, photo prise sur le vif (pas en atelier) ¦ Ngoài trời, ảnh chụp tự nhiên (không phải trong studio) ¦ Di luar, foto spontan (bukan di studio)
+Et toi, que sais-tu ? ¦ Còn bạn, bạn biết gì? ¦ Dan kamu, apa yang kamu tahu?
+Photographe ou date notée : de ¦ Nhiếp ảnh gia hoặc ngày được ghi: từ ¦ Fotografer atau tanggal tercatat: dari
+Âge apparent de la personne ¦ Tuổi trông thấy của người trong ảnh ¦ Perkiraan usia orang itu
+C’est ¦ Đó là ¦ Ini
+un homme, un garçon ¦ một người đàn ông, một cậu bé ¦ seorang laki-laki, anak laki-laki
+une femme, une fille ¦ một người phụ nữ, một cô bé ¦ seorang perempuan, anak perempuan
+Lieu (nom du photographe, ville) ¦ Địa điểm (tên nhiếp ảnh gia, thành phố) ¦ Tempat (nama fotografer, kota)
+Coche au moins un indice ¦ Hãy đánh dấu ít nhất một manh mối ¦ Centang setidaknya satu petunjuk
+Les rappels de recherche ¦ Lời nhắc nghiên cứu ¦ Pengingat riset
+« Tu n’as pas touché à la branche FAURE depuis 8 mois » : les branches endormies, ce qui y manque, un rappel en un clic. ¦ “Bạn đã không đụng đến nhánh FAURE từ 8 tháng nay”: các nhánh đang ngủ, những gì còn thiếu, một lời nhắc chỉ với một cú bấm. ¦ “Kamu belum menyentuh cabang FAURE selama 8 bulan”: cabang yang tertidur, apa yang kurang di sana, pengingat dengan satu klik.
+Les branches de ¦ Các nhánh của ¦ Cabang dari
+Endormie depuis au moins ¦ Ngủ yên ít nhất ¦ Tertidur setidaknya
+peu importe ¦ bao lâu cũng được ¦ berapa pun
+La date est celle de la dernière modification d’une fiche de la branche. Un rappel se crée en un clic : il rejoint les rappels de l’application (Listes → Rappels) et le widget « À venir ». ¦ Ngày là ngày sửa đổi gần nhất của một hồ sơ trong nhánh. Lời nhắc được tạo chỉ với một cú bấm: nó vào danh sách lời nhắc của ứng dụng (Danh sách → Lời nhắc) và tiện ích “Sắp tới”. ¦ Tanggalnya adalah perubahan terakhir sebuah profil di cabang itu. Pengingat dibuat dengan satu klik: masuk ke pengingat aplikasi (Daftar → Pengingat) dan widget “Mendatang”.
+Branche {name} ({first}) ¦ Nhánh {name} ({first}) ¦ Cabang {name} ({first})
+Reprendre la branche {name} ({first}) ¦ Tiếp tục với nhánh {name} ({first}) ¦ Lanjutkan cabang {name} ({first})
+Aucune branche endormie depuis aussi longtemps ¦ Không có nhánh nào ngủ yên lâu đến vậy ¦ Tak ada cabang yang tertidur selama itu
+Les actes manquants ¦ Những giấy tờ còn thiếu ¦ Akta yang belum ada
+Ce qui manque à la lignée, rangé par archives où chercher (l’assistant de l’onglet Recherche). ¦ Những gì dòng họ còn thiếu, xếp theo nơi lưu trữ cần tìm (trợ lý của thẻ Nghiên cứu). ¦ Apa yang kurang di garis keturunan, disusun menurut arsip tempat mencarinya (asisten di tab Riset).
+Je regarde ce qui manque… ¦ Đang xem những gì còn thiếu… ¦ Aku sedang melihat apa yang kurang…
+L’assistant <b>« Que manque-t-il ? »</b> (onglet Recherche) liste les actes qui manquent à la lignée, rangés par service d’archives, avec la commune, les années et les séries à consulter (état civil, tables décennales, registres paroissiaux, notaires, recensements, registres matricules), et un lien vers FranceArchives. ¦ Trợ lý <b>“Còn thiếu gì?”</b> (thẻ Nghiên cứu) liệt kê các giấy tờ dòng họ còn thiếu, xếp theo cơ quan lưu trữ, kèm xã, năm và các loạt tài liệu cần tra (hộ tịch, bảng mười năm, sổ giáo xứ, công chứng, điều tra dân số, sổ quân bạ), và một liên kết đến FranceArchives. ¦ Asisten <b>“Apa yang kurang?”</b> (tab Riset) mendaftar akta yang kurang di garis keturunan, disusun menurut lembaga arsip, dengan kota, tahun, dan seri yang perlu dilihat (catatan sipil, tabel sepuluh tahunan, register paroki, notaris, sensus, register militer), serta tautan ke FranceArchives.
+{n} recherches à faire sur 6 générations ¦ {n} việc cần tìm trên 6 thế hệ ¦ {n} pencarian yang perlu dilakukan dalam 6 generasi
+L’assistant « Que manque-t-il ? » de l’onglet Recherche ¦ Trợ lý “Còn thiếu gì?” của thẻ Nghiên cứu ¦ Asisten “Apa yang kurang?” di tab Riset
+Le thème d’époque ¦ Chủ đề theo thời kỳ ¦ Tema zaman
+Chaque fiche aux couleurs de son temps : parchemin, sépia, Belle Époque, art déco, Trente Glorieuses. ¦ Mỗi hồ sơ mang màu sắc thời đại của mình: giấy da, nâu đỏ sepia, Belle Époque, art déco, Ba mươi năm vàng son. ¦ Setiap profil dengan warna zamannya: perkamen, sepia, Belle Époque, art deco, Tiga Puluh Tahun Gemilang.
+Habiller chaque fiche aux couleurs de son époque ¦ Khoác cho mỗi hồ sơ màu sắc thời đại của nó ¦ Dandani setiap profil dengan warna zamannya
+La fiche d’un ancêtre prend l’allure du temps où il a vécu (ses 25 ans) : parchemin pour l’Ancien Régime, sépia au XIXe, art déco pour les années folles… Le reste de l’application ne change pas. Ce réglage est gardé sur cet ordinateur. ¦ Hồ sơ của một tổ tiên mang dáng vẻ của thời họ sống (năm họ 25 tuổi): giấy da cho thời Chế độ cũ, sepia cho thế kỷ XIX, art déco cho những năm hai mươi sôi động… Phần còn lại của ứng dụng không thay đổi. Cài đặt này được giữ trên máy tính này. ¦ Profil seorang leluhur mengikuti gaya zaman ia hidup (saat berusia 25 tahun): perkamen untuk Ancien Régime, sepia untuk abad ke-19, art deco untuk tahun 1920-an… Bagian lain aplikasi tidak berubah. Pengaturan ini disimpan di komputer ini.
+📜 Ancien Régime ¦ 📜 Chế độ cũ ¦ 📜 Ancien Régime
+avant ¦ trước ¦ sebelum
+🎖️ Révolution et Empire ¦ 🎖️ Cách mạng và Đế chế ¦ 🎖️ Revolusi dan Kekaisaran
+🎩 Le XIXe siècle ¦ 🎩 Thế kỷ XIX ¦ 🎩 Abad ke-19
+🌿 La Belle Époque ¦ 🌿 Thời kỳ Belle Époque ¦ 🌿 Belle Époque
+🍸 Les années folles et la guerre ¦ 🍸 Những năm hai mươi sôi động và chiến tranh ¦ 🍸 Tahun 1920-an dan perang
+🚗 Les Trente Glorieuses ¦ 🚗 Ba mươi năm vàng son ¦ 🚗 Tiga Puluh Tahun Gemilang
+📻 Les années 70 et après ¦ 📻 Những năm 70 trở đi ¦ 📻 Tahun 70-an dan sesudahnya
+Les étoiles, la Lune et les planètes au-dessus du village, la nuit de la naissance : une image à garder ou à offrir. ¦ Các vì sao, Mặt Trăng và các hành tinh trên bầu trời ngôi làng, vào đêm chào đời: một hình ảnh để giữ hoặc để tặng. ¦ Bintang, Bulan, dan planet di atas desa, pada malam kelahiran: gambar untuk disimpan atau dihadiahkan.
+La naissance de ¦ Ngày chào đời của ¦ Kelahiran
+Vers quelle heure (heure solaire du lieu) ¦ Khoảng mấy giờ (giờ mặt trời tại nơi đó) ¦ Sekitar jam berapa (waktu matahari setempat)
+Nuit bleue ¦ Đêm xanh ¦ Malam biru
+Affiche (fond crème) ¦ Áp phích (nền kem) ¦ Poster (latar krem)
+Noir et or ¦ Đen và vàng kim ¦ Hitam dan emas
+Encre sur papier (à imprimer) ¦ Mực trên giấy (để in) ¦ Tinta di kertas (untuk dicetak)
+Aube (rose et bleu) ¦ Bình minh (hồng và xanh) ¦ Fajar (merah muda dan biru)
+Vert forêt ¦ Xanh rừng ¦ Hijau hutan
+Ronde ¦ Tròn ¦ Bulat
+Carrée ¦ Vuông ¦ Persegi
+Fenêtre en arc ¦ Cửa sổ vòm ¦ Jendela lengkung
+Affiche ¦ Áp phích ¦ Poster
+A4 (portrait) ¦ A4 (dọc) ¦ A4 (potret)
+Élégante ¦ Thanh lịch ¦ Elegan
+À la plume ¦ Bút lông ngỗng ¦ Pena bulu
+Les constellations ¦ Các chòm sao ¦ Rasi bintang
+La Voie lactée (évocation) ¦ Dải Ngân Hà (gợi tả) ¦ Bima Sakti (gambaran)
+Les repères (hauteur, directions) ¦ Các mốc (độ cao, hướng) ¦ Penanda (ketinggian, arah)
+✏️ Les textes ¦ ✏️ Các văn bản ¦ ✏️ Teks
+(le nom) ¦ (tên) ¦ (nama)
+(le lieu et la date) ¦ (địa điểm và ngày) ¦ (tempat dan tanggal)
+Dernière ligne ¦ Dòng cuối ¦ Baris terakhir
+(la lune, les planètes) ¦ (mặt trăng, các hành tinh) ¦ (bulan, planet)
+Aussi rangée sur sa fiche ¦ Cũng được lưu vào hồ sơ của người đó ¦ Juga disimpan di profilnya
+{place} — {when}, vers {h} ¦ {place} — {when}, khoảng {h} ¦ {place} — {when}, sekitar {h}
+pleine lune ¦ trăng tròn ¦ bulan purnama
+Jupiter ¦ Sao Mộc ¦ Jupiter
+{list} brillait ¦ {list} đang tỏa sáng ¦ {list} bersinar
+Grande Ourse ¦ Đại Hùng ¦ Biduk Besar
+Orion ¦ Lạp Hộ ¦ Orion
+Cassiopée ¦ Tiên Hậu ¦ Kasiopeia
+Lion ¦ Sư Tử ¦ Leo
+Gémeaux ¦ Song Tử ¦ Gemini
+Bouvier ¦ Mục Phu ¦ Bootes
+Taureau ¦ Kim Ngưu ¦ Taurus
+Petite Ourse ¦ Tiểu Hùng ¦ Biduk Kecil
+Cocher ¦ Ngự Phu ¦ Auriga
+Grand Chien ¦ Đại Khuyển ¦ Anjing Besar
+Vierge ¦ Xử Nữ ¦ Virgo
+boussole|N ¦ B ¦ U
+boussole|E ¦ Đ ¦ T
+boussole|S ¦ N ¦ S
+boussole|O ¦ T ¦ B
+{n} % éclairée ¦ được chiếu sáng {n} % ¦ {n} % tersinari
+coucher du soleil vers {h} ¦ mặt trời lặn khoảng {h} ¦ matahari terbenam sekitar {h}
+lever vers {h} ¦ mọc khoảng {h} ¦ terbit sekitar {h}
+{n} étoiles brillantes au-dessus de l’horizon ¦ {n} ngôi sao sáng trên đường chân trời ¦ {n} bintang terang di atas cakrawala
+Allumer une bougie ¦ Thắp một ngọn nến ¦ Nyalakan lilin
+Une bougie pour un ancêtre, avec un mot : elle brûle sept jours. Les anniversaires de naissance et de décès à venir. ¦ Một ngọn nến cho một tổ tiên, kèm một lời nhắn: nến cháy bảy ngày. Các ngày kỷ niệm sinh và giỗ sắp tới. ¦ Sebatang lilin untuk seorang leluhur, dengan sepatah kata: lilin menyala tujuh hari. Peringatan kelahiran dan kematian yang akan datang.
+{n} bougie allumée ¦ {n} ngọn nến đang cháy ¦ {n} lilin menyala
+{n} au registre ¦ {n} trong sổ ¦ {n} di buku catatan
+Aucune bougie allumée en ce moment ¦ Hiện không có ngọn nến nào đang cháy ¦ Saat ini tak ada lilin yang menyala
+📅 Dans les trente jours ¦ 📅 Trong ba mươi ngày tới ¦ 📅 Dalam tiga puluh hari
+{n} ans de sa naissance ({date}) ¦ {n} năm ngày sinh ({date}) ¦ {n} tahun sejak kelahirannya ({date})
+dans {n} jours ¦ trong {n} ngày nữa ¦ dalam {n} hari
+{n} ans de son décès ({date}) ¦ {n} năm ngày mất ({date}) ¦ {n} tahun sejak kematiannya ({date})
+L’ambiance sonore d’époque ¦ Âm thanh của thời xưa ¦ Suasana suara zaman dulu
+Le feu et l’horloge de la veillée, les cloches du dimanche, la forge, la gare, le moulin : les bruits du temps des ancêtres. ¦ Bếp lửa và đồng hồ trong buổi tối quây quần, chuông ngày Chủ nhật, lò rèn, nhà ga, cối xay: những âm thanh thời tổ tiên. ¦ Api dan jam dinding malam bercerita, lonceng hari Minggu, pandai besi, stasiun, penggilingan: suara-suara zaman leluhur.
+🔥 La veillée au coin du feu (vers 1880) ¦ 🔥 Buổi tối bên bếp lửa (khoảng 1880) ¦ 🔥 Malam di dekat perapian (sekitar 1880)
+🔔 Le village un dimanche matin ¦ 🔔 Ngôi làng một sáng Chủ nhật ¦ 🔔 Desa pada Minggu pagi
+⚒️ L’atelier du forgeron ¦ ⚒️ Xưởng của thợ rèn ¦ ⚒️ Bengkel pandai besi
+🚂 La gare (vers 1900) ¦ 🚂 Nhà ga (khoảng 1900) ¦ 🚂 Stasiun (sekitar 1900)
+💧 Le moulin au bord de l’eau ¦ 💧 Cối xay bên bờ nước ¦ 💧 Penggilingan di tepi air
+🌧️ La nuit d’orage ¦ 🌧️ Đêm giông bão ¦ 🌧️ Malam badai
+🌊 Le port ¦ 🌊 Bến cảng ¦ 🌊 Pelabuhan
+🐓 La ferme au petit matin ¦ 🐓 Trang trại lúc sớm mai ¦ 🐓 Pertanian di pagi buta
+🌙 Une nuit d’été à la campagne ¦ 🌙 Một đêm hè ở nông thôn ¦ 🌙 Malam musim panas di pedesaan
+🧺 Le lavoir ¦ 🧺 Chỗ giặt chung ¦ 🧺 Tempat cuci umum
+🧺 Le jour de marché ¦ 🧺 Ngày họp chợ ¦ 🧺 Hari pasar
+🍷 Le café du village ¦ 🍷 Quán cà phê trong làng ¦ 🍷 Kedai desa
+🪗 Le bal musette ¦ 🪗 Buổi khiêu vũ musette ¦ 🪗 Pesta dansa musette
+⛪ La messe à l’église ¦ ⛪ Thánh lễ ở nhà thờ ¦ ⛪ Misa di gereja
+🪡 L’atelier de couture ¦ 🪡 Xưởng may ¦ 🪡 Bengkel jahit
+🧵 La filature et le tissage ¦ 🧵 Xưởng kéo sợi và dệt vải ¦ 🧵 Pemintalan dan penenunan
+🧶 La veillée des fileuses ¦ 🧶 Buổi tối của các cô gái kéo sợi ¦ 🧶 Malam para pemintal
+🪚 L’atelier du menuisier ¦ 🪚 Xưởng của thợ mộc ¦ 🪚 Bengkel tukang kayu
+🏫 La classe (vers 1900) ¦ 🏫 Lớp học (khoảng 1900) ¦ 🏫 Ruang kelas (sekitar 1900)
+✒️ L’étude du notaire ¦ ✒️ Văn phòng công chứng ¦ ✒️ Kantor notaris
+🌾 Les moissons ¦ 🌾 Mùa gặt ¦ 🌾 Musim panen
+🐝 Le rucher ¦ 🐝 Trại ong ¦ 🐝 Peternakan lebah
+🐴 La route en diligence ¦ 🐴 Đường đi bằng xe ngựa trạm ¦ 🐴 Perjalanan dengan kereta pos
+Ou celle du métier de ¦ Hoặc âm thanh của nghề ¦ Atau suasana pekerjaan
+▶ Écouter ¦ ▶ Nghe ¦ ▶ Dengarkan
+🔈 Volume ¦ 🔈 Âm lượng ¦ 🔈 Volume
+⏲️ S’arrêter après ¦ ⏲️ Dừng sau ¦ ⏲️ Berhenti setelah
+Un mélange au hasard de 3 à 5 couches ¦ Một bản trộn ngẫu nhiên từ 3 đến 5 lớp ¦ Campuran acak 3 sampai 5 lapisan
+🎲 Au hasard ¦ 🎲 Ngẫu nhiên ¦ 🎲 Acak
+Tout à zéro ¦ Tắt hết ¦ Semua ke nol
+Durée du fichier son ¦ Độ dài tệp âm thanh ¦ Durasi berkas suara
+⭐ Mes ambiances ¦ ⭐ Không khí của tôi ¦ ⭐ Suasanaku
+💾 Garder ce mélange ¦ 💾 Giữ bản trộn này ¦ 💾 Simpan campuran ini
+Tout est fabriqué par l’ordinateur, à partir de bruit et de sons purs : une évocation, pas un enregistrement. Règle chaque couche à ton goût ({n} couches). ¦ Mọi thứ đều do máy tính tạo ra, từ tiếng ồn và âm thuần: một sự gợi tả, không phải bản ghi âm. Hãy chỉnh từng lớp theo ý bạn ({n} lớp). ¦ Semuanya dibuat oleh komputer, dari derau dan nada murni: sebuah gambaran, bukan rekaman. Atur setiap lapisan sesukamu ({n} lapisan).
+Chercher une couche (cloches, eau, atelier…) ¦ Tìm một lớp (chuông, nước, xưởng…) ¦ Cari lapisan (lonceng, air, bengkel…)
+Chercher une couche ¦ Tìm một lớp ¦ Cari lapisan
+🌬️ Le vent ¦ 🌬️ Gió ¦ 🌬️ Angin
+🌧️ La pluie ¦ 🌧️ Mưa ¦ 🌧️ Hujan
+🔥 Le feu de cheminée ¦ 🔥 Lửa lò sưởi ¦ 🔥 Api perapian
+🕰️ L’horloge comtoise ¦ 🕰️ Đồng hồ quả lắc ¦ 🕰️ Jam lonceng
+🔔 Les cloches du village ¦ 🔔 Chuông làng ¦ 🔔 Lonceng desa
+⚒️ L’enclume du forgeron ¦ ⚒️ Đe của thợ rèn ¦ ⚒️ Landasan pandai besi
+🐦 Les oiseaux ¦ 🐦 Chim chóc ¦ 🐦 Burung
+💧 La rivière et le moulin ¦ 💧 Dòng sông và cối xay ¦ 💧 Sungai dan penggilingan
+🚂 Le train à vapeur ¦ 🚂 Tàu hơi nước ¦ 🚂 Kereta uap
+🌊 La mer ¦ 🌊 Biển ¦ 🌊 Laut
+🦗 Les grillons ¦ 🦗 Dế kêu ¦ 🦗 Jangkrik
+🐸 Les grenouilles de la mare ¦ 🐸 Ếch ngoài ao ¦ 🐸 Katak di kolam
+🦉 La chouette ¦ 🦉 Cú mèo ¦ 🦉 Burung hantu
+🐓 Le coq ¦ 🐓 Gà trống ¦ 🐓 Ayam jago
+🐄 Les sonnailles des vaches ¦ 🐄 Chuông bò ¦ 🐄 Kalung lonceng sapi
+🐴 Les sabots du cheval ¦ 🐴 Vó ngựa ¦ 🐴 Derap kuda
+🛞 La charrette sur les pavés ¦ 🛞 Xe bò trên đường lát đá ¦ 🛞 Gerobak di jalan berbatu
+🐝 Les abeilles du rucher ¦ 🐝 Ong trong trại ¦ 🐝 Lebah di peternakan
+🌾 Le vent dans les blés ¦ 🌾 Gió thổi qua đồng lúa mì ¦ 🌾 Angin di ladang gandum
+⛈️ Le tonnerre au loin ¦ ⛈️ Sấm rền xa xa ¦ ⛈️ Guntur di kejauhan
+⛲ La fontaine du lavoir ¦ ⛲ Vòi nước ở chỗ giặt chung ¦ ⛲ Pancuran tempat cuci umum
+🧺 Les battoirs des lavandières ¦ 🧺 Tiếng chày đập áo của các bà giặt ¦ 🧺 Pemukul cucian para tukang cuci
+🧶 Le rouet qui file ¦ 🧶 Guồng kéo sợi ¦ 🧶 Roda pintal yang berputar
+🧵 Le métier à tisser ¦ 🧵 Khung cửi ¦ 🧵 Alat tenun
+🪡 La machine à coudre ¦ 🪡 Máy may ¦ 🪡 Mesin jahit
+🪚 La scie du menuisier ¦ 🪚 Cưa của thợ mộc ¦ 🪚 Gergaji tukang kayu
+✒️ La plume sur le papier ¦ ✒️ Ngòi bút trên giấy ¦ ✒️ Pena di atas kertas
+🗣️ Le murmure de la foule ¦ 🗣️ Tiếng rì rầm của đám đông ¦ 🗣️ Gumam kerumunan
+🍷 Les verres du café ¦ 🍷 Tiếng ly cốc trong quán ¦ 🍷 Denting gelas di kedai
+⛪ L’orgue de l’église ¦ ⛪ Đàn organ nhà thờ ¦ ⛪ Orgel gereja
+🪗 L’accordéon du bal musette ¦ 🪗 Phong cầm của buổi khiêu vũ musette ¦ 🪗 Akordeon pesta dansa musette
+🏫 La craie au tableau ¦ 🏫 Phấn trên bảng ¦ 🏫 Kapur di papan tulis
+🪵 Le bois qui craque ¦ 🪵 Củi nổ lách tách ¦ 🪵 Kayu berderak
+👣 Des pas sur le gravier ¦ 👣 Tiếng bước chân trên sỏi ¦ 👣 Langkah di atas kerikil
+🕊️ Les mouettes ¦ 🕊️ Hải âu ¦ 🕊️ Burung camar
+🎶 Le bourdon de la vielle ¦ 🎶 Tiếng bè trầm của đàn vielle ¦ 🎶 Dengung vielle
+© Crédits et droits des sons ¦ © Ghi công và bản quyền âm thanh ¦ © Kredit dan hak cipta suara
+Aucun enregistrement n’est utilisé : <b>chaque son est calculé par ton navigateur</b> au moment où tu l’écoutes (Web Audio), à partir de bruit et de sons purs. Il n’y a donc aucun auteur à créditer en dehors de LCNDA, et rien n’est téléchargé. ¦ Không dùng bản ghi âm nào: <b>mỗi âm thanh được trình duyệt của bạn tính toán</b> ngay khi bạn nghe (Web Audio), từ tiếng ồn và âm thuần. Vì vậy không có tác giả nào cần ghi công ngoài LCNDA, và không có gì được tải xuống. ¦ Tidak ada rekaman yang dipakai: <b>setiap suara dihitung oleh perambanmu</b> saat kamu mendengarkannya (Web Audio), dari derau dan nada murni. Jadi tak ada pencipta yang perlu dikreditkan selain LCNDA, dan tak ada yang diunduh.
+<b>Libres de droits</b> : tu peux les écouter, les enregistrer, les mettre dans un montage ou une présentation, même les partager, sans rien demander (comme le domaine public, CC0). ¦ <b>Không có bản quyền</b>: bạn có thể nghe, ghi lại, đưa vào một bản dựng hoặc bài trình chiếu, thậm chí chia sẻ, mà không cần xin phép (như phạm vi công cộng, CC0). ¦ <b>Bebas hak cipta</b>: kamu boleh mendengarkan, merekam, memasukkannya ke montase atau presentasi, bahkan membagikannya, tanpa meminta izin (seperti domain publik, CC0).
+bruit blanc filtré, qui ondule lentement ¦ tiếng ồn trắng đã lọc, dập dờn chậm rãi ¦ derau putih tersaring, bergelombang pelan
+bruit aigu et milliers de petites gouttes au hasard ¦ tiếng ồn cao và hàng nghìn giọt nhỏ ngẫu nhiên ¦ derau tinggi dan ribuan tetes kecil acak
+bruit grave et crépitements au hasard ¦ tiếng ồn trầm và tiếng lách tách ngẫu nhiên ¦ derau rendah dan gemeretak acak
+deux « tic » de sons purs, un carillon toutes les 40 secondes ¦ hai tiếng “tích” bằng âm thuần, một hồi chuông mỗi 40 giây ¦ dua “tik” nada murni, satu dentang setiap 40 detik
+sons purs aux harmoniques des cloches de bronze ¦ âm thuần theo hoạ âm của chuông đồng ¦ nada murni dengan harmonik lonceng perunggu
+coups métalliques : trois sons purs qui s’éteignent ¦ tiếng gõ kim loại: ba âm thuần tắt dần ¦ pukulan logam: tiga nada murni yang memudar
+petits sifflets de sons purs qui montent ¦ những tiếng huýt nhỏ bằng âm thuần đi lên ¦ siulan kecil nada murni yang naik
+bruit filtré et le battement grave de la roue ¦ tiếng ồn đã lọc và nhịp đập trầm của bánh xe ¦ derau tersaring dan detak rendah roda
+souffles de vapeur rythmés et un sifflet à deux notes ¦ những luồng hơi nước nhịp nhàng và tiếng còi hai nốt ¦ embusan uap berirama dan peluit dua nada
+bruit grave qui monte et descend comme les vagues ¦ tiếng ồn trầm lên xuống như sóng ¦ derau rendah yang naik turun seperti ombak
+trilles de sons purs très aigus ¦ những tiếng láy bằng âm thuần rất cao ¦ getaran nada murni yang sangat tinggi
+sons en dents de scie qui montent ¦ âm răng cưa đi lên ¦ nada gigi gergaji yang naik
+trois sons purs graves qui glissent ¦ ba âm thuần trầm trượt dần ¦ tiga nada murni rendah yang meluncur
+trois sons qui montent puis retombent ¦ ba âm đi lên rồi hạ xuống ¦ tiga nada yang naik lalu turun
+sons métalliques aux harmoniques de cloche ¦ âm kim loại theo hoạ âm của chuông ¦ nada logam dengan harmonik lonceng
+petits chocs de bruit au rythme du pas ¦ những cú va nhỏ của tiếng ồn theo nhịp bước ¦ hentakan kecil derau mengikuti irama langkah
+grondement grave qui tremble et cailloux de bruit ¦ tiếng ầm trầm rung rung và tiếng sỏi bằng tiếng ồn ¦ gemuruh rendah yang bergetar dan kerikil derau
+trois notes graves qui vibrent ¦ ba nốt trầm rung ¦ tiga nada rendah yang bergetar
+bruit très aigu qui ondule ¦ tiếng ồn rất cao dập dờn ¦ derau sangat tinggi yang bergelombang
+grondements de bruit très grave ¦ tiếng ầm ì rất trầm ¦ gemuruh derau sangat rendah
+bruit d’eau et gouttes de sons purs ¦ tiếng nước và những giọt âm thuần ¦ derau air dan tetesan nada murni
+deux chocs sourds ¦ hai tiếng va trầm đục ¦ dua hentakan teredam
+ronronnement et petit clic de la roue ¦ tiếng rì rì và tiếng tách nhỏ của bánh xe ¦ dengung dan klik kecil roda
+le claquement de la navette et le coup du battant ¦ tiếng lách cách của con thoi và tiếng đập của khung dệt ¦ ketukan teropong dan pukulan sisir tenun
+cliquetis rapides par séries ¦ tiếng lách cách nhanh theo từng loạt ¦ gemeletuk cepat beruntun
+bruit filtré qui va et vient ¦ tiếng ồn đã lọc đi tới đi lui ¦ derau tersaring yang maju mundur
+grattements de bruit aigu ¦ tiếng cào của tiếng ồn cao ¦ garukan derau tinggi
+quatre bandes de bruit qui imitent les voix ¦ bốn dải tiếng ồn bắt chước giọng nói ¦ empat pita derau yang meniru suara orang
+tintements de sons purs ¦ tiếng leng keng bằng âm thuần ¦ dentingan nada murni
+accords tenus de sons doux ¦ hợp âm ngân dài bằng âm êm ¦ akord panjang nada lembut
+une petite valse de sons en dents de scie, basse et accords ¦ một điệu valse nhỏ bằng âm răng cưa, bè trầm và hợp âm ¦ wals kecil dengan nada gigi gergaji, bas, dan akord
+traits de bruit et le petit coup du point ¦ những nét tiếng ồn và cú chấm nhỏ ¦ goresan derau dan ketukan kecil titik
+craquements de bruit ¦ tiếng răng rắc của tiếng ồn ¦ derakan derau
+pas de bruit filtré ¦ bước chân bằng tiếng ồn đã lọc ¦ langkah derau tersaring
+cris en dents de scie qui descendent ¦ tiếng kêu răng cưa đi xuống ¦ jeritan gigi gergaji yang turun
+trois notes graves tenues, qui vibrent un peu ¦ ba nốt trầm ngân dài, hơi rung ¦ tiga nada rendah panjang, sedikit bergetar
+Fichier son (WebM) ¦ Tệp âm thanh (WebM) ¦ Berkas suara (WebM)
+Ce qu’on entend, pendant la durée choisie ¦ Những gì nghe được, trong khoảng thời gian đã chọn ¦ Yang terdengar, selama durasi yang dipilih
+L’arbre qui pousse ¦ Cái cây lớn dần ¦ Pohon yang tumbuh
+Les descendants d’un ancêtre apparaissent année après année, les branches poussent, les feuilles roussissent. ¦ Con cháu của một tổ tiên xuất hiện qua từng năm, cành lá vươn dài, lá chuyển màu hung. ¦ Keturunan seorang leluhur muncul tahun demi tahun, cabang tumbuh, daun memerah.
+▶ Faire pousser ¦ ▶ Cho cây lớn ¦ ▶ Tumbuhkan
+lente ¦ chậm ¦ lambat
+normale ¦ bình thường ¦ normal
+rapide ¦ nhanh ¦ cepat
+La musique de l’arbre ¦ Âm nhạc của cây gia phả ¦ Musik pohon silsilah
+L’arbre joué comme une partition : une note par naissance, un accord par mariage ; à écouter ou à télécharger. ¦ Cây gia phả được chơi như một bản nhạc: mỗi ca sinh một nốt, mỗi đám cưới một hợp âm; để nghe hoặc tải xuống. ¦ Pohon dimainkan seperti partitur: satu nada per kelahiran, satu akord per pernikahan; untuk didengar atau diunduh.
+tout l’arbre ¦ cả cây gia phả ¦ seluruh pohon
+Tempo ¦ Nhịp độ ¦ Tempo
+lent ¦ chậm ¦ lambat
+normal ¦ bình thường ¦ normal
+vif ¦ nhanh ¦ cepat
+Chaque naissance est une note : plus aiguë pour les générations proches, plus longue pour une longue vie, au timbre plus doux pour les femmes ; chaque mariage, un accord ; chaque décès, une note grave. ¦ Mỗi ca sinh là một nốt: cao hơn cho các thế hệ gần, dài hơn cho cuộc đời dài, âm sắc êm hơn cho phụ nữ; mỗi đám cưới là một hợp âm; mỗi lần mất là một nốt trầm. ¦ Setiap kelahiran adalah satu nada: lebih tinggi untuk generasi dekat, lebih panjang untuk hidup yang panjang, warna nada lebih lembut untuk perempuan; setiap pernikahan sebuah akord; setiap kematian sebuah nada rendah.
+Fichier son (WAV) ¦ Tệp âm thanh (WAV) ¦ Berkas suara (WAV)
+{b} naissances, {m} mariages, {d} décès — {s} secondes ¦ {b} ca sinh, {m} đám cưới, {d} người mất — {s} giây ¦ {b} kelahiran, {m} pernikahan, {d} kematian — {s} detik
+La chasse au trésor ¦ Truy tìm kho báu ¦ Perburuan harta karun
+Des énigmes sur les ancêtres cachées dans la maison : seule la bonne réponse mène à la cachette suivante. ¦ Những câu đố về tổ tiên giấu khắp nhà: chỉ câu trả lời đúng mới dẫn đến chỗ giấu tiếp theo. ¦ Teka-teki tentang leluhur yang disembunyikan di rumah: hanya jawaban benar yang menuju tempat persembunyian berikutnya.
+🗝️ Préparer la chasse ¦ 🗝️ Chuẩn bị cuộc truy tìm ¦ 🗝️ Siapkan perburuan
+Le nom de la chasse ¦ Tên cuộc truy tìm ¦ Nama perburuan
+La chasse au trésor de la famille {name} ¦ Cuộc truy tìm kho báu của gia đình {name} ¦ Perburuan harta karun keluarga {name}
+Les cachettes, dans l’ordre (une par ligne ; la dernière est celle du trésor) ¦ Các chỗ giấu, theo thứ tự (mỗi dòng một chỗ; chỗ cuối là nơi giấu kho báu) ¦ Tempat persembunyian, berurutan (satu per baris; yang terakhir tempat hartanya)
+sous le paillasson ¦ dưới tấm thảm chùi chân ¦ di bawah keset
+dans la boîte aux lettres ¦ trong hộp thư ¦ di kotak surat
+derrière l’horloge ¦ sau đồng hồ ¦ di balik jam dinding
+au fond du placard de l’entrée ¦ trong cùng tủ ở lối vào ¦ di dasar lemari di pintu masuk
+Le trésor (ce qu’on trouve à la fin) ¦ Kho báu (thứ tìm được ở cuối) ¦ Hartanya (yang ditemukan di akhir)
+le gâteau d’anniversaire de Mamie ¦ bánh sinh nhật của bà ¦ kue ulang tahun Nenek
+Chaque énigme porte sur un ancêtre ; chaque réponse renvoie à une cachette : il faut la bonne réponse pour trouver la suite. ¦ Mỗi câu đố nói về một tổ tiên; mỗi câu trả lời dẫn đến một chỗ giấu: phải có câu trả lời đúng mới tìm được phần tiếp theo. ¦ Setiap teka-teki tentang seorang leluhur; setiap jawaban menunjuk ke tempat persembunyian: perlu jawaban benar untuk menemukan lanjutannya.
+L’ancêtre mystère ¦ Tổ tiên bí ẩn ¦ Leluhur misterius
+Un ancêtre caché, des indices un par un : le même pour toute la famille chaque jour. Qui le trouve le plus vite ? ¦ Một tổ tiên được giấu, các manh mối hiện lần lượt: cả gia đình cùng một người mỗi ngày. Ai tìm ra nhanh nhất? ¦ Seorang leluhur tersembunyi, petunjuk satu per satu: sama untuk seluruh keluarga setiap hari. Siapa yang menemukannya paling cepat?
+🕵️ L’ancêtre mystère du {date} ¦ 🕵️ Tổ tiên bí ẩn ngày {date} ¦ 🕵️ Leluhur misterius tanggal {date}
+Proposer ¦ Đoán ¦ Tebak
+Un indice de plus ({n}) ¦ Thêm một manh mối ({n}) ¦ Satu petunjuk lagi ({n})
+Je donne ma langue au chat ¦ Tôi chịu thua ¦ Aku menyerah
+Trouvé maintenant : {n} points. ¦ Tìm ra bây giờ: {n} điểm. ¦ Ditemukan sekarang: {n} poin.
+Le livre dont tu es le héros ¦ Cuốn sách mà bạn là nhân vật chính ¦ Buku di mana kamu jadi tokohnya
+Vis la vie d’un ancêtre et fais ses choix — métier, mariage, départ — puis découvre ce qu’il a vraiment choisi. ¦ Sống cuộc đời của một tổ tiên và đưa ra lựa chọn của họ — nghề nghiệp, hôn nhân, ra đi — rồi khám phá họ đã thực sự chọn gì. ¦ Jalani hidup seorang leluhur dan buat pilihannya — pekerjaan, pernikahan, kepergian — lalu temukan apa yang benar-benar ia pilih.
+Tu seras ¦ Bạn sẽ là ¦ Kamu akan menjadi
+📖 Commencer l’histoire ¦ 📖 Bắt đầu câu chuyện ¦ 📖 Mulai cerita
+Les coïncidences ¦ Những sự trùng hợp ¦ Kebetulan
+Nés le même jour, mort le jour de son anniversaire, mariés à cent ans d’écart jour pour jour : les hasards de l’arbre. ¦ Sinh cùng ngày, mất đúng ngày sinh nhật, cưới cách nhau đúng trăm năm: những tình cờ của cây gia phả. ¦ Lahir di hari yang sama, meninggal di hari ulang tahunnya, menikah tepat berselang seratus tahun: kebetulan-kebetulan di pohon silsilah.
+Plus l’arbre a de dates précises (jour et mois), plus il y en a. ¦ Cây gia phả càng có nhiều ngày chính xác (ngày và tháng), càng có nhiều trùng hợp. ¦ Semakin banyak tanggal pasti (hari dan bulan) di pohon, semakin banyak kebetulannya.
+« Et si… » ¦ “Nếu như…” ¦ “Seandainya…”
+Et si ces deux-là ne s’étaient pas rencontrés ? Toutes les vies qui n’auraient jamais existé — peut-être la tienne. ¦ Nếu như hai người này đã không gặp nhau? Tất cả những cuộc đời sẽ không bao giờ tồn tại — có thể cả bạn. ¦ Seandainya kedua orang ini tak pernah bertemu? Semua kehidupan yang tak akan pernah ada — mungkin termasuk kamu.
+Et si… ¦ Nếu như… ¦ Seandainya…
+ces deux-là ne s’étaient jamais rencontrés ¦ hai người này chưa từng gặp nhau ¦ kedua orang ini tak pernah bertemu
+cette personne n’avait pas vécu ¦ người này đã không sống ¦ orang ini tak pernah hidup
+🦋 {n} vies n’auraient jamais existé ¦ 🦋 {n} cuộc đời sẽ không bao giờ tồn tại ¦ 🦋 {n} kehidupan tak akan pernah ada
+{pct} % de l’arbre, dont {who} en vie aujourd’hui. ¦ {pct} % cây gia phả, trong đó {who} còn sống hôm nay. ¦ {pct} % pohon, termasuk {who} yang hidup saat ini.
+Et {name} non plus. ¦ Và cả {name} cũng vậy. ¦ Dan {name} juga tidak.
+La broderie au point de croix ¦ Thêu chữ thập ¦ Sulam silang
+Un marquoir à l’ancienne : le nom de la famille, un couple, une date, un arbre ; la grille et les fils. ¦ Một bức thêu mẫu kiểu xưa: tên gia đình, một cặp đôi, một ngày, một cái cây; lưới và chỉ. ¦ Sulaman sampel gaya lama: nama keluarga, sepasang suami-istri, tanggal, pohon; pola dan benangnya.
+FAMILLE {name} ¦ GIA ĐÌNH {name} ¦ KELUARGA {name}
+La date ¦ Ngày ¦ Tanggal
+Le lieu (facultatif) ¦ Địa điểm (tuỳ chọn) ¦ Tempat (opsional)
+La couleur du titre ¦ Màu của tiêu đề ¦ Warna judul
+Brun ¦ Nâu ¦ Cokelat
+Bleu ciel ¦ Xanh da trời ¦ Biru langit
+La couleur du couple ¦ Màu của cặp đôi ¦ Warna pasangan
+Le titre en grandes lettres (double) ¦ Tiêu đề chữ lớn (gấp đôi) ¦ Judul huruf besar (ganda)
+Le motif ¦ Hoạ tiết ¦ Motif
+❤️ Le cœur ¦ ❤️ Trái tim ¦ ❤️ Hati
+👑 Le cœur couronné ¦ 👑 Trái tim đội vương miện ¦ 👑 Hati bermahkota
+🌷 Les tulipes ¦ 🌷 Hoa tulip ¦ 🌷 Tulip
+⛪ L’église ¦ ⛪ Nhà thờ ¦ ⛪ Gereja
+🕊️ Les colombes ¦ 🕊️ Chim bồ câu ¦ 🕊️ Merpati
+— Aucun motif ¦ — Không có hoạ tiết ¦ — Tanpa motif
+Ses couleurs ¦ Màu của nó ¦ Warnanya
+celle du motif ¦ màu của hoạ tiết ¦ warna motif
+Deux petits cœurs de chaque côté ¦ Hai trái tim nhỏ ở mỗi bên ¦ Dua hati kecil di setiap sisi
+La bordure ¦ Đường viền ¦ Bingkai
+· Les points (à l’ancienne) ¦ · Các mũi chấm (kiểu xưa) ¦ · Titik-titik (gaya lama)
+♥ La frise de cœurs ¦ ♥ Dải trái tim ¦ ♥ Hiasan hati
+⌇ La frise en zigzag ¦ ⌇ Dải zíc zắc ¦ ⌇ Hiasan zig-zag
+▭ Le double trait ¦ ▭ Nét đôi ¦ ▭ Garis ganda
+— Sans bordure ¦ — Không viền ¦ — Tanpa bingkai
+La toile ¦ Vải ¦ Kain
+Aïda 11 ¦ Aïda 11 ¦ Aida 11
+Aïda 14 ¦ Aïda 14 ¦ Aida 14
+Aïda 16 ¦ Aïda 16 ¦ Aida 16
+Aïda 18 ¦ Aïda 18 ¦ Aida 18
+Lin 28 fils (un point sur 2 fils) ¦ Vải lanh 28 sợi (một mũi trên 2 sợi) ¦ Linen 28 benang (satu tusuk per 2 benang)
+Sa couleur (aperçu) ¦ Màu vải (xem trước) ¦ Warnanya (pratinjau)
+Écru ¦ Màu mộc ¦ Krem mentah
+Lin ¦ Màu lanh ¦ Linen
+Bleu nuit ¦ Xanh đêm ¦ Biru malam
+l’aperçu brodé ¦ bản xem trước đã thêu ¦ pratinjau sulaman
+la grille à symboles ¦ lưới có ký hiệu ¦ pola bersimbol
+La grille (dessin SVG) ¦ Lưới (hình vẽ SVG) ¦ Pola (gambar SVG)
+L’aperçu brodé (image PNG) ¦ Bản xem trước đã thêu (ảnh PNG) ¦ Pratinjau sulaman (gambar PNG)
+La grille à symboles et la liste des fils ¦ Lưới có ký hiệu và danh sách chỉ ¦ Pola bersimbol dan daftar benang
+{w} × {h} points · sur {cloth} : {cw} × {ch} cm (prévoir 5 cm de marge tout autour) ¦ {w} × {h} mũi · trên {cloth}: {cw} × {ch} cm (chừa 5 cm lề xung quanh) ¦ {w} × {h} tusuk · di {cloth}: {cw} × {ch} cm (sisakan margin 5 cm di sekelilingnya)
+{n} points ¦ {n} mũi ¦ {n} tusuk
+La gravure au laser ¦ Khắc laser ¦ Ukiran laser
+L’éventail des ancêtres en fichier SVG aux vraies dimensions, prêt pour une graveuse laser (gravure et découpe). ¦ Hình quạt tổ tiên dạng tệp SVG đúng kích thước thật, sẵn sàng cho máy khắc laser (khắc và cắt). ¦ Kipas leluhur dalam berkas SVG berukuran asli, siap untuk mesin ukir laser (ukir dan potong).
+Les ancêtres de ¦ Tổ tiên của ¦ Leluhur
+Le fichier est aux vraies dimensions, en millimètres : <b>noir = gravure</b> (traits et noms), <b>rouge = découpe</b> (le contour, trait fin). Convient à LightBurn, Glowforge, xTool, Inkscape. Vérifie toujours la taille à l’import. ¦ Tệp có kích thước thật, tính bằng milimét: <b>đen = khắc</b> (nét và tên), <b>đỏ = cắt</b> (đường viền, nét mảnh). Phù hợp với LightBurn, Glowforge, xTool, Inkscape. Luôn kiểm tra kích thước khi nhập. ¦ Berkas berukuran asli, dalam milimeter: <b>hitam = ukir</b> (garis dan nama), <b>merah = potong</b> (kontur, garis tipis). Cocok untuk LightBurn, Glowforge, xTool, Inkscape. Selalu periksa ukurannya saat impor.
+Dessin SVG pour la graveuse ¦ Hình vẽ SVG cho máy khắc ¦ Gambar SVG untuk mesin ukir
+Aux vraies dimensions : noir = gravure, rouge = découpe ¦ Đúng kích thước thật: đen = khắc, đỏ = cắt ¦ Berukuran asli: hitam = ukir, merah = potong
+La mosaïque de portraits ¦ Tranh ghép chân dung ¦ Mozaik potret
+Tous les visages de l’arbre en une image, ou un portrait refait avec les visages de toute la famille. ¦ Mọi gương mặt trong cây gia phả trên một hình ảnh, hoặc một chân dung được ghép lại từ gương mặt của cả gia đình. ¦ Semua wajah di pohon dalam satu gambar, atau satu potret yang disusun ulang dari wajah seluruh keluarga.
+Je rassemble les visages… ¦ Đang tập hợp các gương mặt… ¦ Aku sedang mengumpulkan wajah-wajah…
+La mosaïque ¦ Tranh ghép ¦ Mozaik
+tous les visages, en grille ¦ mọi gương mặt, dạng lưới ¦ semua wajah, dalam kisi
+un portrait refait avec tous les autres ¦ một chân dung ghép lại từ tất cả những người khác ¦ satu potret yang disusun ulang dari semua yang lain
+Le portrait à refaire ¦ Chân dung cần ghép lại ¦ Potret yang akan disusun ulang
+Finesse ¦ Độ mịn ¦ Kehalusan
+Le visage de la lignée ¦ Gương mặt của dòng họ ¦ Wajah garis keturunan
+De père en père ou de mère en mère : les visages côte à côte, en fondu, et le visage moyen des générations. ¦ Từ cha sang cha hoặc từ mẹ sang mẹ: các gương mặt cạnh nhau, chuyển dần, và gương mặt trung bình của các thế hệ. ¦ Dari ayah ke ayah atau dari ibu ke ibu: wajah-wajah berdampingan, berbaur, dan wajah rata-rata para generasi.
+La lignée ¦ Dòng họ ¦ Garis keturunan
+de père en père ¦ từ cha sang cha ¦ dari ayah ke ayah
+de mère en mère ¦ từ mẹ sang mẹ ¦ dari ibu ke ibu
+▶ Le fondu ¦ ▶ Chuyển dần ¦ ▶ Pembauran
+Les visages (image PNG) ¦ Các gương mặt (ảnh PNG) ¦ Wajah-wajah (gambar PNG)
+Le visage moyen de {n} générations ¦ Gương mặt trung bình của {n} thế hệ ¦ Wajah rata-rata {n} generasi
+Le fondu ¦ Chuyển dần ¦ Pembauran
+La gazette de l’année ¦ Tờ báo của năm ¦ Warta tahunan
+La une d’un journal pour une année de la famille : mariages, naissances, nouvelles des nôtres, le prix du pain. ¦ Trang nhất của một tờ báo cho một năm của gia đình: đám cưới, ca sinh, tin tức người nhà, giá bánh mì. ¦ Halaman depan koran untuk satu tahun keluarga: pernikahan, kelahiran, kabar keluarga kita, harga roti.
+Les années les plus riches : ¦ Những năm có nhiều chuyện nhất: ¦ Tahun-tahun terkaya:
+🎨 Le style du journal ¦ 🎨 Phong cách tờ báo ¦ 🎨 Gaya koran
+📜 Ancien (1900) ¦ 📜 Cổ xưa (1900) ¦ 📜 Kuno (1900)
+🎨 Supplément illustré (en couleurs) ¦ 🎨 Phụ trương có tranh minh hoạ (in màu) ¦ 🎨 Suplemen bergambar (berwarna)
+🗞️ Le quotidien (papier journal) ¦ 🗞️ Nhật báo (giấy báo) ¦ 🗞️ Harian (kertas koran)
+🎩 Années 30 ¦ 🎩 Những năm 30 ¦ 🎩 Tahun 30-an
+◻️ Moderne ¦ ◻️ Hiện đại ¦ ◻️ Modern
+💖 Magazine ¦ 💖 Tạp chí ¦ 💖 Majalah
+📣 À sensation (gros titres) ¦ 📣 Giật gân (tít lớn) ¦ 📣 Sensasional (judul besar)
+🧸 Le journal des enfants ¦ 🧸 Báo thiếu nhi ¦ 🧸 Koran anak-anak
+Le nom du journal ¦ Tên tờ báo ¦ Nama koran
+Le bandeau ¦ Dải tiêu đề ¦ Kepala koran
+Édition unique ¦ Số đặc biệt duy nhất ¦ Edisi tunggal
+Le papier ¦ Giấy ¦ Kertas
+Celui du style ¦ Theo kiểu ¦ Sesuai gaya
+Crème ¦ Màu kem ¦ Krem
+Jauni ¦ Ngả vàng ¦ Menguning
+Papier journal ¦ Giấy báo ¦ Kertas koran
+Ma couleur ¦ Màu của tôi ¦ Warnaku
+Les colonnes ¦ Số cột ¦ Kolom
+L’article de une ¦ Bài trang nhất ¦ Artikel utama
+Les nouvelles ¦ Tin tức ¦ Kabar
+Le coin pratique ¦ Góc thiết thực ¦ Pojok praktis
+5 centimes ¦ 5 xu ¦ 5 sen
+Prix : {price} ¦ Giá: {price} ¦ Harga: {price}
+{n} membres de la famille en vie ¦ {n} thành viên gia đình còn sống ¦ {n} anggota keluarga yang hidup
+Carnet ¦ Sổ tin ¦ Catatan keluarga
+Nouvelles des nôtres ¦ Tin tức người nhà ¦ Kabar keluarga kita
+Anniversaires ¦ Sinh nhật ¦ Ulang tahun
+{n} centimes ¦ {n} xu ¦ {n} sen
+Le kilo de pain : environ {price}. ¦ Một ký bánh mì: khoảng {price}. ¦ Sekilo roti: sekitar {price}.
+Qui fait quoi ¦ Ai làm gì ¦ Siapa melakukan apa
+Composée à partir de l’arbre de famille · {y} ¦ Được soạn từ cây gia phả · {y} ¦ Disusun dari pohon keluarga · {y}
+Le fond d’écran du jour ¦ Hình nền trong ngày ¦ Wallpaper hari ini
+Chaque jour un ancêtre en image, aux dimensions de ton écran : couleurs, motif, photo, textes, calendrier… tout se règle. ¦ Mỗi ngày một tổ tiên trên hình ảnh, đúng kích thước màn hình của bạn: màu sắc, hoạ tiết, ảnh, chữ, lịch… mọi thứ đều chỉnh được. ¦ Setiap hari seorang leluhur dalam gambar, seukuran layarmu: warna, motif, foto, teks, kalender… semuanya bisa diatur.
+L’ANCÊTRE DU JOUR ¦ TỔ TIÊN HÔM NAY ¦ LELUHUR HARI INI
+Ordinateur ¦ Máy tính ¦ Komputer
+Grand écran (2K) ¦ Màn hình lớn (2K) ¦ Layar besar (2K)
+Écran 4K ¦ Màn hình 4K ¦ Layar 4K
+Écran très large ¦ Màn hình siêu rộng ¦ Layar sangat lebar
+Mac Retina ¦ Mac Retina ¦ Mac Retina
+Tablette ¦ Máy tính bảng ¦ Tablet
+Tablette debout ¦ Máy tính bảng dựng đứng ¦ Tablet berdiri
+Téléphone Android ¦ Điện thoại Android ¦ Ponsel Android
+L’ancêtre (celui du jour par défaut) ¦ Tổ tiên (mặc định là người của hôm nay) ¦ Leluhur (bawaan: yang hari ini)
+🎨 Couleurs et fond ¦ 🎨 Màu sắc và nền ¦ 🎨 Warna dan latar
+Les couleurs ¦ Màu sắc ¦ Warna
+Selon l’époque de l’ancêtre ¦ Theo thời kỳ của tổ tiên ¦ Sesuai zaman leluhur
+Crème et encre ¦ Kem và mực ¦ Krem dan tinta
+Vert sauge ¦ Xanh lá xô thơm ¦ Hijau sage
+Océan ¦ Đại dương ¦ Samudra
+Poudre ¦ Phấn hồng ¦ Bedak
+Le dégradé ¦ Chuyển màu ¦ Gradasi
+En biais ¦ Chéo ¦ Miring
+De haut en bas ¦ Từ trên xuống dưới ¦ Dari atas ke bawah
+De gauche à droite ¦ Từ trái sang phải ¦ Dari kiri ke kanan
+En rond ¦ Hình tròn ¦ Melingkar
+Aucun (uni) ¦ Không có (màu trơn) ¦ Tidak ada (polos)
+Rayures fines ¦ Sọc mảnh ¦ Garis-garis tipis
+Un arbre en filigrane ¦ Một cái cây in chìm ¦ Pohon sebagai tanda air
+La photo floutée en fond ¦ Ảnh làm mờ ở nền ¦ Foto buram sebagai latar
+🖼️ La photo ¦ 🖼️ Ảnh ¦ 🖼️ Foto
+En arc ¦ Hình vòm ¦ Lengkung
+La place ¦ Vị trí ¦ Posisi
+En haut, centrée ¦ Ở trên, giữa ¦ Di atas, di tengah
+La taille ¦ Kích thước ¦ Ukuran
+L’alignement ¦ Căn chỉnh ¦ Perataan
+L’étiquette ¦ Nhãn ¦ Label
+Sa vie en deux phrases ¦ Cuộc đời trong hai câu ¦ Hidupnya dalam dua kalimat
+Une phrase à moi ¦ Một câu của tôi ¦ Kalimatku sendiri
+Une devise, un souvenir… ¦ Một châm ngôn, một kỷ niệm… ¦ Semboyan, kenangan…
+🧩 En plus ¦ 🧩 Thêm nữa ¦ 🧩 Tambahan
+Le calendrier du mois ¦ Lịch của tháng ¦ Kalender bulan ini
+Laisser la place pour ¦ Chừa chỗ cho ¦ Sisakan ruang untuk
+les icônes du bureau (à gauche) ¦ các biểu tượng màn hình nền (bên trái) ¦ ikon desktop (di kiri)
+l’heure du téléphone (en haut) ¦ giờ của điện thoại (ở trên) ¦ jam ponsel (di atas)
+Chaque jour un autre ancêtre — en priorité celui dont c’est l’anniversaire de naissance ou de décès. Tes réglages sont gardés sur cet ordinateur. ¦ Mỗi ngày một tổ tiên khác — ưu tiên người có ngày kỷ niệm sinh hoặc mất. Cài đặt của bạn được giữ trên máy tính này. ¦ Setiap hari leluhur yang lain — diutamakan yang hari itu peringatan kelahiran atau kematiannya. Pengaturanmu disimpan di komputer ini.
+Le fond d’écran (image PNG) ¦ Hình nền (ảnh PNG) ¦ Wallpaper (gambar PNG)
+Fond d’écran du jour ¦ Hình nền trong ngày ¦ Wallpaper hari ini
+Les passeports ¦ Hộ chiếu ¦ Paspor
+Le passeport intérieur ou pour l’étranger d’un ancêtre voyageur, son signalement, son portrait-robot, et l’import des relevés publiés (Saint-Brieuc…). ¦ Hộ chiếu nội địa hoặc ra nước ngoài của một tổ tiên hay đi xa, đặc điểm nhận dạng, chân dung phác hoạ, và nhập các bản trích lục đã công bố (Saint-Brieuc…). ¦ Paspor dalam negeri atau ke luar negeri seorang leluhur pengelana, ciri-cirinya, sketsa wajahnya, dan impor indeks yang telah diterbitkan (Saint-Brieuc…).
+＋ Ajouter un passeport ¦ ＋ Thêm một hộ chiếu ¦ ＋ Tambah paspor
+⤒ Importer un relevé (XML, CSV)… ¦ ⤒ Nhập một bản trích lục (XML, CSV)… ¦ ⤒ Impor indeks (XML, CSV)…
+Un relevé publié (par exemple sur data.gouv.fr) ¦ Một bản trích lục đã công bố (ví dụ trên data.gouv.fr) ¦ Indeks yang telah diterbitkan (misalnya di data.gouv.fr)
+{n} passeport rattaché ¦ {n} hộ chiếu đã liên kết ¦ {n} paspor terhubung
+« ＋ Ajouter un passeport », ou importe un relevé publié. ¦ “＋ Thêm một hộ chiếu”, hoặc nhập một bản trích lục đã công bố. ¦ “＋ Tambah paspor”, atau impor indeks yang telah diterbitkan.
+Grand-parent raconte ¦ Ông bà kể chuyện ¦ Kakek-nenek bercerita
+Un récit dicté ou collé : les naissances, mariages, métiers et domiciles repérés, comparés à l’arbre, à ajouter en un clic. ¦ Một câu chuyện được đọc cho ghi hoặc dán vào: các ca sinh, đám cưới, nghề nghiệp và nơi ở được nhận ra, so sánh với cây gia phả, thêm vào chỉ với một cú bấm. ¦ Cerita yang didiktekan atau ditempel: kelahiran, pernikahan, pekerjaan, dan tempat tinggal yang ditemukan, dibandingkan dengan pohon, ditambahkan dengan satu klik.
+Qui raconte ¦ Ai kể ¦ Siapa yang bercerita
+🎤 Dicter ¦ 🎤 Đọc cho ghi ¦ 🎤 Dikte
+🔍 Repérer les faits ¦ 🔍 Nhận ra các sự kiện ¦ 🔍 Temukan fakta
+Le repérage des faits lit les récits écrits en français. ¦ Việc nhận ra sự kiện đọc các câu chuyện viết bằng tiếng Pháp. ¦ Pencarian fakta membaca cerita yang ditulis dalam bahasa Prancis.
+Le récit (dicté, collé, ou recopié d’un enregistrement) ¦ Câu chuyện (đọc cho ghi, dán vào, hoặc chép lại từ bản ghi âm) ¦ Cerita (didiktekan, ditempel, atau disalin dari rekaman)
+💾 Enregistrer le récit ¦ 💾 Lưu câu chuyện ¦ 💾 Simpan cerita
+Rangé dans le bloc ✨ Trésors de la fiche ¦ Được xếp trong khối ✨ Báu vật của hồ sơ ¦ Disimpan di blok ✨ Harta di profil
+Partager une branche (pour un temps) ¦ Chia sẻ một nhánh (trong một thời gian) ¦ Bagikan satu cabang (untuk sementara)
+Un fichier à envoyer à un cousin : la branche sans les vivants, protégée par un mot de passe, qui expire à la date choisie. ¦ Một tệp để gửi cho người anh em họ: nhánh không có người còn sống, được bảo vệ bằng mật khẩu, hết hạn vào ngày đã chọn. ¦ Berkas untuk dikirim ke sepupu: cabang tanpa orang yang masih hidup, dilindungi kata sandi, kedaluwarsa pada tanggal yang dipilih.
+La branche de ¦ Nhánh của ¦ Cabang dari
+Valable jusqu’au ¦ Có hiệu lực đến ¦ Berlaku sampai
+Mot de passe (le fichier est chiffré, illisible sans lui) ¦ Mật khẩu (tệp được mã hoá, không đọc được nếu không có nó) ¦ Kata sandi (berkas dienkripsi, tak terbaca tanpanya)
+à donner à part, par téléphone par exemple ¦ để đưa riêng, ví dụ qua điện thoại ¦ berikan terpisah, misalnya lewat telepon
+Montrer ou cacher le mot de passe ¦ Hiện hoặc ẩn mật khẩu ¦ Tampilkan atau sembunyikan kata sandi
+Quatre mots et un nombre, faciles à dicter ¦ Bốn từ và một con số, dễ đọc cho người khác ghi ¦ Empat kata dan satu angka, mudah didiktekan
+🎲 En proposer un ¦ 🎲 Gợi ý một mật khẩu ¦ 🎲 Usulkan satu
+Copier le mot de passe ¦ Sao chép mật khẩu ¦ Salin kata sandi
+Sans mot de passe (déconseillé : quiconque reçoit le fichier peut le lire, et la date limite ne protège plus rien) ¦ Không có mật khẩu (không khuyến khích: bất kỳ ai nhận được tệp đều đọc được, và hạn chót không còn bảo vệ được gì) ¦ Tanpa kata sandi (tidak disarankan: siapa pun yang menerima berkas bisa membacanya, dan batas tanggal tak lagi melindungi apa pun)
+Un seul fichier HTML, qui s’ouvre dans n’importe quel navigateur, sans l’application : à envoyer par courriel ou à déposer sur un nuage. Retirées, avec les phrases qui les nomment : les personnes vivantes ou probablement vivantes (même règle que l’export GEDCOM « Pour partager »), les fiches confidentielles. Les numéros de fiche ne sortent pas. ¦ Một tệp HTML duy nhất, mở được trong bất kỳ trình duyệt nào, không cần ứng dụng: để gửi qua email hoặc đặt lên đám mây. Đã loại bỏ, cùng với những câu nhắc đến họ: những người còn sống hoặc có lẽ còn sống (cùng quy tắc như khi xuất GEDCOM “Để chia sẻ”), các hồ sơ bí mật. Số hồ sơ không được đưa ra ngoài. ¦ Satu berkas HTML, yang terbuka di peramban apa pun, tanpa aplikasi: untuk dikirim lewat email atau ditaruh di cloud. Dihapus, beserta kalimat yang menyebut mereka: orang yang masih hidup atau kemungkinan masih hidup (aturan yang sama dengan ekspor GEDCOM “Untuk dibagikan”), profil rahasia. Nomor profil tidak ikut keluar.
+🔐 Ce que protège ce fichier, et ce qu’il ne protège pas ¦ 🔐 Tệp này bảo vệ được gì, và không bảo vệ được gì ¦ 🔐 Apa yang dilindungi berkas ini, dan apa yang tidak
+Chiffrement AES-256-GCM, clé tirée du mot de passe (PBKDF2, {n} tours) : sans le mot de passe, le contenu (noms compris, titre compris) est illisible. ¦ Mã hoá AES-256-GCM, khoá tạo từ mật khẩu (PBKDF2, {n} vòng): không có mật khẩu, nội dung (kể cả tên, kể cả tiêu đề) không đọc được. ¦ Enkripsi AES-256-GCM, kunci diturunkan dari kata sandi (PBKDF2, {n} putaran): tanpa kata sandi, isinya (termasuk nama, termasuk judul) tak terbaca.
+Le fichier ne se connecte à rien (aucune adresse internet n’est appelée, ce que le navigateur fait respecter). ¦ Tệp không kết nối với bất cứ đâu (không gọi địa chỉ internet nào, điều này do trình duyệt đảm bảo). ¦ Berkas tidak terhubung ke mana pun (tak ada alamat internet yang dipanggil, dan peramban memastikannya).
+La date limite est vérifiée à l’ouverture, mais quelqu’un qui a le mot de passe et recule l’horloge de son ordinateur peut la contourner, ou recopier ce qu’il voit : un partage ne se reprend pas. Ne partage que ce que tu acceptes de voir circuler. ¦ Hạn chót được kiểm tra khi mở, nhưng ai có mật khẩu và chỉnh lùi đồng hồ máy tính có thể vượt qua, hoặc chép lại những gì họ thấy: đã chia sẻ thì không lấy lại được. Chỉ chia sẻ những gì bạn chấp nhận để lan truyền. ¦ Batas tanggal diperiksa saat dibuka, tetapi orang yang punya kata sandi dan memundurkan jam komputernya bisa mengakalinya, atau menyalin apa yang ia lihat: yang sudah dibagikan tak bisa ditarik kembali. Bagikan hanya yang kamu rela tersebar.
+Envoie le mot de passe par un autre chemin que le fichier (téléphone, SMS) : les deux ensemble dans le même courriel ne protègent rien. ¦ Hãy gửi mật khẩu theo đường khác với tệp (điện thoại, SMS): gửi cả hai trong cùng một email thì chẳng bảo vệ được gì. ¦ Kirim kata sandi lewat jalur lain dari berkasnya (telepon, SMS): keduanya dalam satu email tidak melindungi apa pun.
+{n} personnes partagées ¦ {n} người được chia sẻ ¦ {n} orang dibagikan
+{n} retirées (vivantes ou récentes) ¦ {n} người bị loại (còn sống hoặc gần đây) ¦ {n} dihapus (masih hidup atau baru)
+🔗 Fabriquer le fichier à partager ¦ 🔗 Tạo tệp để chia sẻ ¦ 🔗 Buat berkas untuk dibagikan
+Le passeport des lieux ¦ Hộ chiếu các địa điểm ¦ Paspor tempat
+Un tampon par village de l’arbre : quand tu y vas, il se colore. Combien en as-tu visité ? ¦ Mỗi ngôi làng trong cây gia phả một con dấu: khi bạn đến đó, dấu sẽ có màu. Bạn đã đến bao nhiêu nơi? ¦ Satu cap untuk setiap desa di pohon silsilah: saat kamu ke sana, cap itu berwarna. Berapa banyak yang sudah kamu kunjungi?
+Le carnet des tampons, à imprimer ¦ Sổ đóng dấu, để in ¦ Buku cap, untuk dicetak
+{n} / {total} lieux visités ¦ Đã đến {n} / {total} nơi ¦ {n} / {total} tempat dikunjungi
+Chaque lieu de l’arbre a son tampon. Quand tu y vas — le village, l’église, la mairie, le cimetière —, clique dessus : « J’y suis allé ». ¦ Mỗi nơi trong cây gia phả có con dấu riêng. Khi bạn đến đó — ngôi làng, nhà thờ, toà thị chính, nghĩa trang —, hãy bấm vào: “Tôi đã đến đây”. ¦ Setiap tempat di pohon punya capnya. Saat kamu ke sana — desa, gereja, balai kota, pemakaman —, klik capnya: “Aku sudah ke sana”.
+{n} pers. ¦ {n} người ¦ {n} org.
+Le tour du monde des ancêtres ¦ Vòng quanh thế giới của tổ tiên ¦ Keliling dunia para leluhur
+Les kilomètres parcourus de lieu en lieu, le plus long voyage, le plus loin du berceau, siècle après siècle. ¦ Số kilômét đã đi từ nơi này đến nơi khác, chuyến đi dài nhất, xa quê nhất, qua từng thế kỷ. ¦ Kilometer yang ditempuh dari tempat ke tempat, perjalanan terpanjang, terjauh dari tanah asal, abad demi abad.
+Tous ensemble ¦ Tất cả cộng lại ¦ Semua bersama
+{n} % du chemin vers la Lune ¦ {n} % quãng đường lên Mặt Trăng ¦ {n} % perjalanan ke Bulan
+Le plus long voyage ¦ Chuyến đi dài nhất ¦ Perjalanan terpanjang
+Le plus loin du berceau ({place}) ¦ Xa quê nhất ({place}) ¦ Terjauh dari tanah asal ({place})
+Les grands voyageurs ¦ Những người đi xa nhất ¦ Para pengelana besar
+Entre le berceau des parents et celui des enfants ¦ Giữa quê của cha mẹ và quê của con cái ¦ Antara tempat lahir orang tua dan tempat lahir anak
+La distance moyenne, siècle par siècle, entre le lieu de naissance d’un parent et celui de son enfant : la famille qui s’éloigne de son village. ¦ Khoảng cách trung bình, theo từng thế kỷ, giữa nơi sinh của cha mẹ và nơi sinh của con: gia đình rời xa ngôi làng của mình. ¦ Jarak rata-rata, abad demi abad, antara tempat lahir orang tua dan tempat lahir anaknya: keluarga yang menjauh dari desanya.
+Les maisons dans le temps ¦ Những ngôi nhà qua thời gian ¦ Rumah-rumah sepanjang waktu
+Un village, une maison : qui y a vécu, de quand à quand, génération après génération. ¦ Một ngôi làng, một ngôi nhà: ai đã sống ở đó, từ khi nào đến khi nào, thế hệ này qua thế hệ khác. ¦ Satu desa, satu rumah: siapa yang tinggal di sana, dari kapan sampai kapan, generasi demi generasi.
+{n} personnes sur {y} ans ¦ {n} người trong {y} năm ¦ {n} orang selama {y} tahun
+{place} : {y} ans de présence de la famille, sur {n} générations d’ancêtres ¦ {place}: gia đình hiện diện {y} năm, qua {n} thế hệ tổ tiên ¦ {place}: {y} tahun kehadiran keluarga, selama {n} generasi leluhur
+1 sou ¦ 1 xu ¦ 1 sou
+{n} membre de la famille en vie ¦ {n} thành viên gia đình còn sống ¦ {n} anggota keluarga yang hidup
+Pas d’autres nouvelles. ¦ Không có tin gì khác. ¦ Tak ada kabar lain.
+Rien cette année. ¦ Năm nay không có gì. ¦ Tak ada apa-apa tahun ini.
+1 franc ¦ 1 franc ¦ 1 franc
+5 francs ¦ 5 franc ¦ 5 franc
+Ce soir, on raconte {n} vie de la famille de {name}. ¦ Tối nay, chúng ta kể {n} cuộc đời trong gia đình {name}. ¦ Malam ini, kita menceritakan {n} kehidupan keluarga {name}.
+⏳ Ce partage a expiré. ¦ ⏳ Bản chia sẻ này đã hết hạn. ¦ ⏳ Berbagi ini sudah kedaluwarsa.
+Parents : ¦ Cha mẹ: ¦ Orang tua:
+Enfants : ¦ Con cái: ¦ Anak-anak:
+Chercher un nom… ¦ Tìm một tên… ¦ Cari nama…
+🔒 Ce partage est protégé. ¦ 🔒 Bản chia sẻ này được bảo vệ. ¦ 🔒 Berbagi ini dilindungi.
+Partage valable jusqu’au {date}. Les personnes vivantes ne sont pas incluses. ¦ Chia sẻ có hiệu lực đến {date}. Người còn sống không được đưa vào. ¦ Berbagi berlaku sampai {date}. Orang yang masih hidup tidak disertakan.
+l’arbre dit {what} ¦ cây gia phả ghi {what} ¦ pohon menyebut {what}
+concorde avec l’arbre ({what}) ¦ khớp với cây gia phả ({what}) ¦ cocok dengan pohon ({what})
+nouvelle lune ¦ trăng non ¦ bulan baru
+(sous l’horizon) ¦ (dưới đường chân trời) ¦ (di bawah cakrawala)
+astre|Mars ¦ Sao Hoả ¦ Mars
+{list} brillaient ¦ {list} đang tỏa sáng ¦ {list} bersinar
+dernier croissant ¦ trăng lưỡi liềm cuối tháng ¦ sabit akhir
+lune gibbeuse décroissante ¦ trăng khuyết dần ¦ bulan cembung susut
+Saturne ¦ Sao Thổ ¦ Saturnus
+dernier quartier ¦ trăng hạ huyền ¦ kuartir akhir
+{km} km depuis l’étape d’avant ¦ {km} km từ chặng trước ¦ {km} km dari tahap sebelumnya
+🕯️ Garder la mémoire ¦ 🕯️ Giữ gìn ký ức ¦ 🕯️ Menjaga kenangan
+🔭 Découvrir ¦ 🔭 Khám phá ¦ 🔭 Jelajahi
+Trésor ¦ Báu vật ¦ Harta
+Récits ¦ Câu chuyện ¦ Kisah
+Chasses au trésor ¦ Truy tìm kho báu ¦ Perburuan harta karun
+TRÉSORS ¦ BÁU VẬT ¦ HARTA
+trésors ¦ báu vật ¦ harta
+Garde au moins un trésor affiché. ¦ Hãy để hiển thị ít nhất một báu vật. ¦ Biarkan setidaknya satu harta ditampilkan.
+Dossier vide ¦ Thư mục trống ¦ Folder kosong
+Les trésors n’ont pas pu être lus. ¦ Không đọc được các báu vật. ¦ Harta tidak bisa dibaca.
+Broderie — {title} ¦ Thêu — {title} ¦ Sulaman — {title}
+Aucun visage connu dans cette lignée ¦ Không có gương mặt nào được biết trong dòng họ này ¦ Tak ada wajah yang dikenal di garis keturunan ini
+La Gazette {y} ¦ Báo La Gazette {y} ¦ La Gazette {y}
+Fond d’écran ¦ Hình nền ¦ Wallpaper
+Pégase ¦ Phi Mã ¦ Pegasus
+Andromède ¦ Tiên Nữ ¦ Andromeda
+Persée ¦ Anh Tiên ¦ Perseus
+sous l’horizon ¦ dưới đường chân trời ¦ di bawah cakrawala
+date exacte inconnue ¦ không rõ ngày chính xác ¦ tanggal pasti tidak diketahui
+Les deux guerres ¦ Hai cuộc chiến tranh ¦ Kedua perang
+(aucun événement daté) ¦ (không có sự kiện nào có ngày) ¦ (tak ada peristiwa bertanggal)
+Faire-part — {name} ¦ Thiệp báo tin — {name} ¦ Kartu pengumuman — {name}
+Faire-part ¦ Thiệp báo tin ¦ Kartu pengumuman
+L’arbre est vide ¦ Cây gia phả đang trống ¦ Pohonnya kosong
+{n} prénoms transmis par-dessus une génération ¦ {n} tên gọi được truyền cách một thế hệ ¦ {n} nama depan diwariskan melewati satu generasi
+{n} mots expliqués ¦ {n} từ được giải thích ¦ {n} kata dijelaskan
+{n} mot expliqué ¦ {n} từ được giải thích ¦ {n} kata dijelaskan
+Aucun vieux mot reconnu. ¦ Không nhận ra từ cổ nào. ¦ Tak ada kata lama yang dikenali.
+sous l’évier ¦ dưới bồn rửa ¦ di bawah wastafel
+Les chasses préparées ¦ Các cuộc truy tìm đã chuẩn bị ¦ Perburuan yang sudah disiapkan
+{n} cachettes ¦ {n} chỗ giấu ¦ {n} tempat persembunyian
+Donne au moins deux cachettes. ¦ Hãy đưa ra ít nhất hai chỗ giấu. ¦ Beri setidaknya dua tempat persembunyian.
+Chasse au trésor ¦ Truy tìm kho báu ¦ Perburuan harta karun
+La chasse sera effacée. ¦ Cuộc truy tìm sẽ bị xoá. ¦ Perburuan ini akan dihapus.
+Carte {n} ¦ Thẻ {n} ¦ Kartu {n}
+(à donner au départ) ¦ (để đưa lúc bắt đầu) ¦ (diberikan di awal)
+{answer} → cherchez {where} ¦ {answer} → hãy tìm {where} ¦ {answer} → carilah {where}
+Il faut quelques ancêtres avec une date, un lieu ou un métier ¦ Cần có vài tổ tiên có ngày, địa điểm hoặc nghề nghiệp ¦ Perlu beberapa leluhur dengan tanggal, tempat, atau pekerjaan
+🕵️ Un ancêtre mystère au hasard ¦ 🕵️ Một tổ tiên bí ẩn ngẫu nhiên ¦ 🕵️ Leluhur misterius acak
+{n} parties ¦ {n} ván ¦ {n} permainan
+{n} partie ¦ {n} ván ¦ {n} permainan
+🎉 Bravo ! ¦ 🎉 Giỏi lắm! ¦ 🎉 Hebat!
+😶 C’était… ¦ 😶 Đó là… ¦ 😶 Ternyata…
+🎲 Un autre, au hasard ¦ 🎲 Người khác, ngẫu nhiên ¦ 🎲 Yang lain, acak
+{n} essais ratés ¦ {n} lần đoán sai ¦ {n} tebakan salah
+Choisis quelqu’un. ¦ Hãy chọn một người. ¦ Pilih seseorang.
+Une autre vie aurait été possible… mais c’est celle-là qui a mené jusqu’à toi. ¦ Một cuộc đời khác lẽ ra đã có thể… nhưng chính cuộc đời này đã dẫn đến bạn. ¦ Kehidupan lain mungkin saja terjadi… tetapi kehidupan inilah yang membawa sampai kepadamu.
+📖 Recommencer ¦ 📖 Bắt đầu lại ¦ 📖 Mulai lagi
+Tourner la page → ¦ Lật trang → ¦ Balik halaman →
+Aucune coïncidence trouvée ¦ Không tìm thấy sự trùng hợp nào ¦ Tak ada kebetulan yang ditemukan
+🦋 {n} vie n’aurait jamais existé ¦ 🦋 {n} cuộc đời sẽ không bao giờ tồn tại ¦ 🦋 {n} kehidupan tak akan pernah ada
+la fenêtre d’impression n’est pas prête. ¦ cửa sổ in chưa sẵn sàng. ¦ jendela cetak belum siap.
+🃏 7 FAMILLES ¦ 🃏 7 GIA ĐÌNH ¦ 🃏 7 KELUARGA
+(visage repéré) ¦ (đã nhận ra gương mặt) ¦ (wajah terdeteksi)
+Ajoute-en depuis sa fiche (Médias), puis reviens ici. ¦ Hãy thêm từ hồ sơ của người đó (Tư liệu), rồi quay lại đây. ¦ Tambahkan dari profilnya (Media), lalu kembali ke sini.
+Jeu remis comme au départ. ¦ Đã đặt lại bộ bài như ban đầu. ¦ Permainan dikembalikan seperti semula.
+Donne au moins une équipe. ¦ Hãy đưa ra ít nhất một đội. ¦ Beri setidaknya satu tim.
+Égalité ! ¦ Hoà! ¦ Seri!
+{n} point ¦ {n} điểm ¦ {n} poin
+Question {n} / {total} ¦ Câu hỏi {n} / {total} ¦ Pertanyaan {n} / {total}
+Question suivante ▶ ¦ Câu hỏi tiếp theo ▶ ¦ Pertanyaan berikutnya ▶
+Vidéo prête. ¦ Video đã sẵn sàng. ¦ Video siap.
+Donne-lui un titre. ¦ Hãy đặt tiêu đề cho nó. ¦ Beri judul.
+SOUVENIR DES SENS ¦ KÝ ỨC GIÁC QUAN ¦ KENANGAN INDRA
+Chaque samedi, elle cirait les marches… ¦ Mỗi thứ Bảy, bà lại đánh sáp các bậc thang… ¦ Setiap Sabtu, ia memoles anak tangga dengan lilin…
+La préparation ¦ Cách làm ¦ Cara membuat
+CHANSONS DE LA FAMILLE ¦ NHỮNG BÀI HÁT CỦA GIA ĐÌNH ¦ LAGU-LAGU KELUARGA
+Les paroles ¦ Lời bài hát ¦ Lirik
+Quand on la chantait ¦ Khi nào thì hát ¦ Kapan dinyanyikan
+Raconte-moi une journée ordinaire quand tu avais dix ans. ¦ Hãy kể cho tôi nghe một ngày bình thường khi bạn mười tuổi. ¦ Ceritakan padaku satu hari biasa saat kamu berusia sepuluh tahun.
+Qu’est-ce qu’on apprenait par cœur ? ¦ Ngày ấy người ta học thuộc lòng những gì? ¦ Apa saja yang dihafalkan dulu?
+Y avait-il des histoires qu’on se racontait toujours dans la famille ? ¦ Có những câu chuyện nào cả nhà hay kể đi kể lại không? ¦ Adakah cerita yang selalu diceritakan dalam keluarga?
+Quel outil ou quel geste te reste dans les mains ? ¦ Dụng cụ hay thao tác nào bạn vẫn còn nhớ trong tay? ¦ Alat atau gerakan apa yang masih melekat di tanganmu?
+Comment as-tu rencontré ton mari, ta femme, ton amour ? ¦ Bạn đã gặp chồng, vợ, người yêu của mình như thế nào? ¦ Bagaimana kamu bertemu suamimu, istrimu, kekasihmu?
+Où avez-vous habité au début ? ¦ Lúc đầu hai người đã sống ở đâu? ¦ Di mana kalian tinggal pada awalnya?
+Où étais-tu pendant la guerre ? ¦ Bạn ở đâu trong thời chiến tranh? ¦ Di mana kamu saat perang?
+Y a-t-il un jour que tu n’as jamais oublié ? ¦ Có ngày nào mà bạn không bao giờ quên không? ¦ Adakah hari yang tak pernah kamu lupakan?
+Comment se chauffait-on, comment s’éclairait-on ? ¦ Ngày ấy người ta sưởi ấm và thắp sáng thế nào? ¦ Bagaimana dulu orang menghangatkan dan menerangi rumah?
+Comment fêtait-on Noël ? ¦ Ngày ấy người ta đón Giáng sinh thế nào? ¦ Bagaimana dulu Natal dirayakan?
+S’ouvre ¦ Mở vào ¦ Terbuka
+L’anniversaire de ¦ Sinh nhật của ¦ Ulang tahun
+À ses ¦ Khi tròn ¦ Saat berusia
+La lettre ¦ Lá thư ¦ Suratnya
+Écris ici… ¦ Viết vào đây… ¦ Tulis di sini…
+LETTRE AUX DESCENDANTS ¦ THƯ GỬI CON CHÁU ¦ SURAT UNTUK KETURUNAN
+✉️ La lettre ¦ ✉️ Lá thư ¦ ✉️ Surat
+✉️ Nouvelle lettre ¦ ✉️ Thư mới ¦ ✉️ Surat baru
+🔒 Sceller la lettre ¦ 🔒 Niêm phong lá thư ¦ 🔒 Segel surat
+Choisis une personne dont on connaît la naissance. ¦ Hãy chọn một người đã biết ngày sinh. ¦ Pilih seseorang yang kelahirannya diketahui.
+Écris quelque chose ou joins un son, une vidéo ou une photo. ¦ Hãy viết gì đó hoặc kèm một âm thanh, video hay ảnh. ¦ Tulis sesuatu atau lampirkan suara, video, atau foto.
+{n} scellées ¦ {n} đã niêm phong ¦ {n} tersegel
+{n} ouvertes ¦ {n} đã mở ¦ {n} terbuka
+De {from} ¦ Từ {from} ¦ Dari {from}
+écrite ¦ đã viết ¦ ditulis
+Sommaire ¦ Mục lục ¦ Daftar isi
+ça rappelle {who} ¦ gợi nhớ đến {who} ¦ mengingatkan pada {who}
+{n} recettes transmises ¦ {n} công thức được truyền lại ¦ {n} resep diwariskan
+{n} recette transmise ¦ {n} công thức được truyền lại ¦ {n} resep diwariskan
+Chantée par {who} ¦ Do {who} hát ¦ Dinyanyikan oleh {who}
+Sans enregistrement ¦ Không có bản ghi âm ¦ Tanpa rekaman
+(le son reste dans les médias) ¦ (âm thanh vẫn ở trong tư liệu) ¦ (suaranya tetap di media)
+Entretien avec {name} ¦ Phỏng vấn {name} ¦ Wawancara dengan {name}
+Choisis au moins un thème. ¦ Hãy chọn ít nhất một chủ đề. ¦ Pilih setidaknya satu tema.
+Question suivante → ¦ Câu hỏi tiếp theo → ¦ Pertanyaan berikutnya →
+Passer ¦ Bỏ qua ¦ Lewati
+🔊 Relire ¦ 🔊 Đọc lại ¦ 🔊 Bacakan lagi
+J’enregistre l’entretien… ¦ Đang ghi âm cuộc phỏng vấn… ¦ Aku sedang merekam wawancara…
+Entretien gardé (sans son). ¦ Đã giữ cuộc phỏng vấn (không có âm thanh). ¦ Wawancara disimpan (tanpa suara).
+{n} bougies allumées ¦ {n} ngọn nến đang cháy ¦ {n} lilin menyala
+mélange ¦ bản trộn ¦ campuran
+UNE BOUGIE ¦ MỘT NGỌN NẾN ¦ SEBATANG LILIN
+encore {n} j ¦ còn {n} ngày ¦ {n} hr lagi
+demain ¦ ngày mai ¦ besok
+allumée ¦ đã thắp ¦ dinyalakan
+par {name} ¦ bởi {name} ¦ oleh {name}
+Bougie supprimée ¦ Đã xoá ngọn nến ¦ Lilin dihapus
+Bougie supprimée. ¦ Đã xoá ngọn nến. ¦ Lilin dihapus.
+Ambiance arrêtée (minuterie). ¦ Đã dừng âm thanh (hẹn giờ). ¦ Suasana dihentikan (pengatur waktu).
+Monte au moins une couche. ¦ Hãy tăng ít nhất một lớp. ¦ Naikkan setidaknya satu lapisan.
+Garder ce mélange ¦ Giữ bản trộn này ¦ Simpan campuran ini
+Mélange gardé. ¦ Đã giữ bản trộn. ¦ Campuran disimpan.
+« {name} » supprimé. ¦ Đã xoá “{name}”. ¦ “{name}” dihapus.
+Ce navigateur ne sait pas enregistrer. ¦ Trình duyệt này không ghi âm được. ¦ Peramban ini tidak bisa merekam.
+Ambiance — {name} ¦ Âm thanh — {name} ¦ Suasana — {name}
+à ¦ đến ¦ sampai
+Tous les indices s’accordent (vers {y}). ¦ Mọi manh mối đều khớp nhau (khoảng năm {y}). ¦ Semua petunjuk cocok (sekitar {y}).
+Qui cela peut être ¦ Có thể là ai ¦ Siapa kira-kira
+Avait {n} ans vers {y} ¦ Khoảng {n} tuổi vào năm {y} ¦ Berusia {n} tahun sekitar {y}
+Reprendre la branche {name} ¦ Tiếp tục với nhánh {name} ¦ Lanjutkan cabang {name}
+RAPPEL DE RECHERCHE ¦ LỜI NHẮC NGHIÊN CỨU ¦ PENGINGAT RISET
+Pas touchée depuis {d} ¦ Không đụng đến từ {d} ¦ Tak disentuh sejak {d}
+modifiée ¦ đã sửa ¦ diubah
+Jamais modifiée ¦ Chưa từng sửa ¦ Tak pernah diubah
+rien d’évident ne manque ¦ không thiếu gì rõ ràng ¦ tidak ada yang jelas-jelas kurang
+Thème d’époque arrêté. ¦ Đã tắt giao diện theo thời kỳ. ¦ Tema zaman dimatikan.
+châtains ¦ màu hạt dẻ ¦ cokelat kastanye
+coloré ¦ hồng hào ¦ kemerahan
+cicatrice au front ¦ sẹo trên trán ¦ bekas luka di dahi
+{n} passeports rattachés ¦ {n} hộ chiếu đã liên kết ¦ {n} paspor terhubung
+{n} affichés ¦ {n} đang hiển thị ¦ {n} ditampilkan
+{n} affiché ¦ {n} đang hiển thị ¦ {n} ditampilkan
+Dans l’arbre ¦ Trong cây ¦ Di pohon
+Délivré ¦ Cấp ngày ¦ Diterbitkan
+son grand-père ¦ ông của người đó ¦ kakeknya
+sa grand-mère ¦ bà của người đó ¦ neneknya
+un frère ou une sœur ¦ một anh chị em ¦ seorang saudara laki-laki atau perempuan
+{n} faits repérés ¦ {n} thông tin tìm thấy ¦ {n} fakta ditemukan
+{n} fait repéré ¦ {n} thông tin tìm thấy ¦ {n} fakta ditemukan
+{n} personne partagée ¦ {n} người được chia sẻ ¦ {n} orang dibagikan
+PASSEPORT ¦ HỘ CHIẾU ¦ PASPOR
+🛂 Nouveau passeport ¦ 🛂 Hộ chiếu mới ¦ 🛂 Paspor baru
+Passeport enregistré. ¦ Đã lưu hộ chiếu. ¦ Paspor tersimpan.
+je ne trouve pas d’enregistrements répétés dans ce XML ¦ tôi không tìm thấy bản ghi lặp lại nào trong XML này ¦ aku tidak menemukan catatan berulang dalam XML ini
+{n} passeports ¦ {n} hộ chiếu ¦ {n} paspor
+aucune ¦ không có ¦ tidak ada
+un nom, une commune, un métier… ¦ một cái tên, một xã, một nghề… ¦ sebuah nama, sebuah kota, sebuah pekerjaan…
+Ce relevé est trop gros (20 Mo au plus). ¦ Bảng trích lục này quá lớn (tối đa 20 MB). ¦ Indeks catatan ini terlalu besar (maksimal 20 MB).
+{n} passeports lus. ¦ Đã đọc {n} hộ chiếu. ¦ {n} paspor terbaca.
+Passeport intérieur ¦ Hộ chiếu nội địa ¦ Paspor dalam negeri
+＋ Passeport ¦ ＋ Hộ chiếu ¦ ＋ Paspor
+Les passeports n’ont pas pu être lus. ¦ Không đọc được các hộ chiếu. ¦ Paspor-paspor tidak dapat dibaca.
+Modifier ce passeport ¦ Sửa hộ chiếu này ¦ Ubah paspor ini
+Aucun passeport ne correspond ¦ Không có hộ chiếu nào phù hợp ¦ Tidak ada paspor yang cocok
+Passeports ¦ Hộ chiếu ¦ Paspor
+Voyageur ¦ Người đi đường ¦ Pelancong
+Délivré à ¦ Cấp tại ¦ Diterbitkan di
+📍 Délivré à ¦ 📍 Cấp tại ¦ 📍 Diterbitkan di
+sorte d’événement introuvable ¦ không tìm thấy loại sự kiện ¦ jenis peristiwa tidak ditemukan
+Aucun fait repéré ¦ Không tìm thấy thông tin nào ¦ Tidak ada fakta ditemukan
+⏹ Arrêter la dictée ¦ ⏹ Dừng đọc chính tả ¦ ⏹ Hentikan dikte
+Solide. ¦ Mạnh. ¦ Kuat.
+Oui, quand même ¦ Có, vẫn làm ¦ Ya, tetap saja
+La branche {name} — partagée par la famille ¦ Nhánh {name} — do gia đình chia sẻ ¦ Cabang {name} — dibagikan oleh keluarga
+PASSEPORT DES LIEUX ¦ HỘ CHIẾU CÁC ĐỊA ĐIỂM ¦ PASPOR TEMPAT
+Où es-tu né, et dans quelle maison as-tu grandi ? ¦ Bạn sinh ra ở đâu, và lớn lên trong ngôi nhà nào? ¦ Di mana kamu lahir, dan di rumah mana kamu dibesarkan?
+Où es-tu née, et dans quelle maison as-tu grandi ? ¦ Bạn sinh ra ở đâu, và lớn lên trong ngôi nhà nào? ¦ Di mana kamu lahir, dan di rumah mana kamu dibesarkan?
+À quoi jouais-tu, et avec qui ? ¦ Hồi nhỏ bạn chơi gì, và chơi với ai? ¦ Dulu kamu bermain apa, dan dengan siapa?
+Quelle odeur ou quel bruit te ramène tout de suite à ton enfance ? ¦ Mùi hương hay âm thanh nào đưa bạn trở về ngay tuổi thơ? ¦ Bau atau suara apa yang langsung membawamu kembali ke masa kecil?
+Qui était la personne la plus importante pour toi, petit ? ¦ Hồi nhỏ, ai là người quan trọng nhất với bạn? ¦ Waktu kecil, siapa orang yang paling penting bagimu?
+Qui était la personne la plus importante pour toi, petite ? ¦ Hồi nhỏ, ai là người quan trọng nhất với bạn? ¦ Waktu kecil, siapa orang yang paling penting bagimu?
+Comment allais-tu à l’école ? ¦ Bạn đi học bằng cách nào? ¦ Bagaimana kamu pergi ke sekolah?
+Te souviens-tu de ton maître ou de ta maîtresse ? ¦ Bạn có nhớ thầy giáo hay cô giáo của mình không? ¦ Apakah kamu ingat guru laki-laki atau guru perempuanmu?
+Jusqu’à quel âge es-tu allé à l’école, et pourquoi ? ¦ Bạn đi học đến năm bao nhiêu tuổi, và tại sao? ¦ Sampai umur berapa kamu bersekolah, dan mengapa?
+Jusqu’à quel âge es-tu allée à l’école, et pourquoi ? ¦ Bạn đi học đến năm bao nhiêu tuổi, và tại sao? ¦ Sampai umur berapa kamu bersekolah, dan mengapa?
+Que sais-tu de tes grands-parents ? ¦ Bạn biết gì về ông bà của mình? ¦ Apa yang kamu ketahui tentang kakek-nenekmu?
+Quels étaient les métiers de tes parents ? ¦ Cha mẹ bạn làm nghề gì? ¦ Apa pekerjaan orang tuamu?
+Y a-t-il un secret ou une brouille dont on parlait à voix basse ? ¦ Có bí mật hay mối bất hoà nào mà mọi người chỉ nói thầm không? ¦ Adakah rahasia atau perselisihan yang dibicarakan orang dengan berbisik?
+Quels prénoms revenaient dans la famille, et pourquoi ? ¦ Những tên nào hay được đặt lại trong gia đình, và tại sao? ¦ Nama depan apa yang terus muncul dalam keluarga, dan mengapa?
+Quel a été ton premier travail, et combien gagnais-tu ? ¦ Công việc đầu tiên của bạn là gì, và bạn kiếm được bao nhiêu? ¦ Apa pekerjaan pertamamu, dan berapa penghasilanmu?
+Raconte une journée de travail. ¦ Hãy kể về một ngày làm việc. ¦ Ceritakan satu hari kerja.
+De quoi es-tu le plus fier dans ton métier ? ¦ Bạn tự hào nhất về điều gì trong nghề của mình? ¦ Apa yang paling kamu banggakan dalam pekerjaanmu?
+Comment s’est passé le mariage ? ¦ Đám cưới đã diễn ra thế nào? ¦ Bagaimana jalannya pernikahan?
+Qu’est-ce qui manquait le plus ? ¦ Điều gì thiếu thốn nhất? ¦ Apa yang paling kurang?
+Qui est parti, et qui est revenu ? ¦ Ai đã ra đi, và ai đã trở về? ¦ Siapa yang pergi, dan siapa yang kembali?
+Décris-moi la maison : les pièces, la cuisine, le jardin. ¦ Hãy tả cho tôi ngôi nhà: các phòng, bếp, khu vườn. ¦ Gambarkan rumahnya padaku: kamar-kamarnya, dapurnya, kebunnya.
+Qu’est-ce qu’on mangeait le dimanche ? ¦ Ngày chủ nhật mọi người ăn gì? ¦ Apa yang dimakan pada hari Minggu?
+Quelles étaient les fêtes du village ? ¦ Làng có những lễ hội nào? ¦ Apa saja pesta di desa?
+Quelle chanson chantait-on à la fin des repas ? ¦ Cuối bữa ăn mọi người hát bài gì? ¦ Lagu apa yang dinyanyikan di akhir makan?
+Qu’est-ce que tu aimerais que tes arrière-petits-enfants sachent de toi ? ¦ Bạn muốn chắt của mình biết điều gì về bạn? ¦ Apa yang ingin kamu sampaikan tentang dirimu kepada cicit-cicitmu?
+Quel conseil donnerais-tu à quelqu’un de vingt ans ? ¦ Bạn sẽ khuyên gì một người hai mươi tuổi? ¦ Nasihat apa yang akan kamu berikan kepada orang berumur dua puluh tahun?
+Qu’est-ce qui a le plus changé dans ta vie ? ¦ Điều gì đã thay đổi nhiều nhất trong đời bạn? ¦ Apa yang paling berubah dalam hidupmu?
+{n} livre ¦ {n} livre ¦ {n} livre
+{n} livres ¦ {n} livre ¦ {n} livre
+{n} franc ¦ {n} franc ¦ {n} franc
+{n} francs ¦ {n} franc ¦ {n} franc
+{n} euro ¦ {n} euro ¦ {n} euro
+unité|en ¦ bằng ¦ dalam
+année|à ¦ đến ¦ sampai
+date|Le ¦ Ngày ¦ Pada
+force|faible ¦ yếu ¦ lemah
+force|correct ¦ tạm được ¦ cukup
+force|solide ¦ mạnh ¦ kuat
+aucune|personne ¦ không ai ¦ tidak ada orang
+signalement|1 m 65 ¦ 1 m 65 ¦ 1 m 65
+signalement|châtains ¦ màu hạt dẻ ¦ cokelat kastanye
+signalement|gris ¦ xám ¦ abu-abu
+signalement|aquilin ¦ khoằm ¦ bengkok seperti paruh elang
+signalement|rond ¦ tròn ¦ bulat
+signalement|ovale ¦ trái xoan ¦ oval
+signalement|coloré ¦ hồng hào ¦ kemerahan
+signalement|brune ¦ ngăm đen ¦ sawo matang
+signalement|cicatrice au front ¦ sẹo trên trán ¦ bekas luka di dahi
+soit {n} baguette d’aujourd’hui ¦ tức là {n} ổ bánh mì baguette ngày nay ¦ yaitu {n} roti baguette masa kini
+De la Révolution au Second Empire, il fallait un passeport pour aller d’un département à l’autre ; il portait le <b>signalement</b> du voyageur, une description qui remplace souvent la photo qu’on n’a pas. Les relevés publiés (par exemple les passeports intérieurs de Saint-Brieuc, 1830-1839, sur data.gouv.fr) s’importent ici : télécharge le fichier, puis « Importer un relevé ». ¦ Từ thời Cách mạng đến Đế chế thứ hai, phải có hộ chiếu mới được đi từ tỉnh này sang tỉnh khác; hộ chiếu ghi <b>đặc điểm nhận dạng</b> của người đi đường, một mô tả thường thay cho tấm ảnh mà ta không có. Các bảng trích lục đã công bố (ví dụ hộ chiếu nội địa của Saint-Brieuc, 1830-1839, trên data.gouv.fr) có thể nhập vào đây: hãy tải tệp về, rồi chọn “Nhập một bảng trích lục”. ¦ Dari masa Revolusi hingga Kekaisaran Kedua, orang perlu paspor untuk bepergian dari satu département ke département lain; paspor itu memuat <b>ciri-ciri</b> pelancong, deskripsi yang sering menggantikan foto yang tidak kita punya. Indeks catatan yang sudah diterbitkan (misalnya paspor dalam negeri Saint-Brieuc, 1830-1839, di data.gouv.fr) bisa diimpor di sini: unduh berkasnya, lalu “Impor indeks catatan”.
+🎲 Jouer en famille ¦ 🎲 Chơi cùng gia đình ¦ 🎲 Bermain bersama keluarga
+🎨 Créer et fabriquer ¦ 🎨 Sáng tạo và làm ra ¦ 🎨 Mencipta dan membuat
+🗺️ Lieux et voyages ¦ 🗺️ Địa điểm và chuyến đi ¦ 🗺️ Tempat dan perjalanan
+🧰 Outils malins ¦ 🧰 Công cụ khéo léo ¦ 🧰 Alat-alat cerdas
+L’atelier de mise en page n’est pas disponible ici. ¦ Xưởng dàn trang không có ở đây. ¦ Bengkel tata letak tidak tersedia di sini.
+Une copie est rangée dans les médias (et sur la fiche) : « {title} ». ¦ Một bản sao đã được cất vào tư liệu (và trên hồ sơ): “{title}”. ¦ Salinannya disimpan di media (dan di profil): “{title}”.
+Une copie est rangée dans les médias : « {title} ». ¦ Một bản sao đã được cất vào tư liệu: “{title}”. ¦ Salinannya disimpan di media: “{title}”.
+Ouvrir dans la mise en page ¦ Mở trong dàn trang ¦ Buka di tata letak
+Pour tout retravailler (textes, cadres, pages) ¦ Để làm lại mọi thứ (chữ, khung, trang) ¦ Untuk mengolah ulang semuanya (teks, bingkai, halaman)
+⤓ Exporter ¦ ⤓ Xuất ¦ ⤓ Ekspor
+🖨 Imprimer ▾ ¦ 🖨 In ▾ ¦ 🖨 Cetak ▾
+Les trésors et leurs dossiers ¦ Các báu vật và thư mục của chúng ¦ Harta dan foldernya
+Réordonner les trésors ¦ Sắp xếp lại các báu vật ¦ Urutkan ulang harta
+Ordre et trésors affichés enregistrés. ¦ Đã lưu thứ tự và các báu vật được hiển thị. ¦ Urutan dan harta yang ditampilkan tersimpan.
+Pour s’émerveiller, jouer, créer et garder la mémoire, à partir de ton arbre. ¦ Để ngạc nhiên, vui chơi, sáng tạo và giữ gìn ký ức, từ cây của bạn. ¦ Untuk terpukau, bermain, berkreasi, dan menjaga kenangan, dari pohonmu.
+⚙️ Réglages pour y ranger des trésors (ou l’effacer). ¦ ⚙️ Cài đặt để xếp báu vật vào đó (hoặc xoá nó). ¦ ⚙️ Pengaturan untuk menaruh harta di dalamnya (atau menghapusnya).
+＋ Souvenir ¦ ＋ Kỷ niệm ¦ ＋ Kenangan
+＋ Lettre ¦ ＋ Thư ¦ ＋ Surat
+Aucun trésor pour l’instant ¦ Chưa có báu vật nào ¦ Belum ada harta
+Un souvenir (une odeur, un bruit), une recette, une chanson, une lettre pour plus tard, un entretien enregistré… tout se garde dans l’onglet ✨ Trésors. ¦ Một kỷ niệm (một mùi hương, một âm thanh), một công thức nấu ăn, một bài hát, một lá thư cho sau này, một cuộc phỏng vấn được ghi âm… tất cả đều được giữ trong thẻ ✨ Báu vật. ¦ Sebuah kenangan (bau, suara), resep, lagu, surat untuk nanti, wawancara yang direkam… semuanya disimpan di tab ✨ Harta.
+Grille de broderie ¦ Mẫu thêu ¦ Pola sulaman
+Un carré = un point de croix ; les traits épais tous les 10 points. ¦ Một ô = một mũi thêu chữ thập; các đường đậm cứ mỗi 10 mũi. ¦ Satu kotak = satu tusuk silang; garis tebal setiap 10 tusuk.
+Aucun portrait dans l’arbre ¦ Không có chân dung nào trong cây ¦ Tidak ada potret di pohon
+Ajoute une photo de portrait sur les fiches, ou encadre les visages dans la visionneuse. ¦ Hãy thêm ảnh chân dung vào các hồ sơ, hoặc khoanh khuôn mặt trong trình xem. ¦ Tambahkan foto potret ke profil, atau bingkai wajah di penampil.
+{list}. Ajoute des portraits ou encadre les visages sur les photos. ¦ {list}. Hãy thêm chân dung hoặc khoanh khuôn mặt trên các ảnh. ¦ {list}. Tambahkan potret atau bingkai wajah di foto.
+Le visage moyen de {n} génération ¦ Khuôn mặt trung bình của {n} thế hệ ¦ Wajah rata-rata dari {n} generasi
+{n} sous ¦ {n} sou ¦ {n} sou
+Il faut des ancêtres avec une date de naissance ¦ Cần có tổ tiên với ngày sinh ¦ Perlu leluhur dengan tanggal lahir
+premier croissant ¦ trăng lưỡi liềm đầu tháng ¦ bulan sabit awal
+premier quartier ¦ trăng thượng huyền ¦ kuartal pertama
+lune gibbeuse croissante ¦ trăng khuyết đầu tháng ¦ bulan cembung awal
+{place} (pas placé sur la carte : ciel de Paris) ¦ {place} (chưa đặt trên bản đồ: bầu trời Paris) ¦ {place} (tidak ada di peta: langit Paris)
+il faisait jour : voici les étoiles cachées par le soleil ¦ lúc đó là ban ngày: đây là những ngôi sao bị mặt trời che khuất ¦ saat itu siang hari: inilah bintang-bintang yang tersembunyi oleh matahari
+Il faut au moins l’année de naissance. ¦ Cần ít nhất năm sinh. ¦ Perlu setidaknya tahun lahir.
+⚠️ Date exacte inconnue : ciel du 1er juillet. ¦ ⚠️ Không rõ ngày chính xác: bầu trời ngày 1 tháng 7. ¦ ⚠️ Tanggal pasti tidak diketahui: langit tanggal 1 Juli.
+⚠️ Lieu non placé sur la carte. ¦ ⚠️ Địa điểm chưa được đặt trên bản đồ. ¦ ⚠️ Tempat belum ada di peta.
+Il faut au moins l’année de naissance pour voir le ciel. ¦ Cần ít nhất năm sinh để xem bầu trời. ¦ Perlu setidaknya tahun lahir untuk melihat langit.
+Pas de portrait sur cette fiche. ¦ Hồ sơ này không có chân dung. ¦ Tidak ada potret di profil ini.
+Avant 1700 ¦ Trước 1700 ¦ Sebelum 1700
+Le XVIIIe siècle ¦ Thế kỷ XVIII ¦ Abad ke-18
+Révolution et Empire ¦ Cách mạng và Đế chế ¦ Revolusi dan Kekaisaran
+Le XIXe siècle ¦ Thế kỷ XIX ¦ Abad ke-19
+Depuis 1946 ¦ Từ 1946 ¦ Sejak 1946
+Aucune signature repérée pour l’instant ¦ Chưa tìm thấy chữ ký nào ¦ Belum ada tanda tangan ditemukan
+Ouvre un acte dans la visionneuse des médias, puis « ＋ Identifier une signature » : encadre la signature et dis de qui elle est. Elle viendra se poser ici, rangée par époque. ¦ Hãy mở một giấy tờ trong trình xem tư liệu, rồi chọn “＋ Nhận diện một chữ ký”: khoanh chữ ký lại và cho biết đó là của ai. Chữ ký sẽ hiện ở đây, xếp theo thời kỳ. ¦ Buka sebuah akta di penampil media, lalu “＋ Kenali tanda tangan”: bingkai tanda tangannya dan sebutkan milik siapa. Tanda tangan itu akan muncul di sini, diurutkan menurut zaman.
+Pas d’ancêtres connus pour cette personne ¦ Không có tổ tiên nào được biết của người này ¦ Tidak ada leluhur yang diketahui untuk orang ini
+Aucun prénom ne saute de génération dans l’arbre pour l’instant ¦ Chưa có tên nào nhảy qua một thế hệ trong cây ¦ Belum ada nama depan yang melompati satu generasi di pohon
+laboureur, brumaire, dot… ¦ laboureur, brumaire, dot… ¦ laboureur, brumaire, dot…
+(passe la souris dessus) : ¦ (rê chuột lên trên): ¦ (arahkan tetikus ke atasnya):
+L’arbre ne donne que {n} énigmes : enlève des cachettes. ¦ Cây chỉ cho được {n} câu đố: hãy bớt chỗ giấu. ¦ Pohon hanya menghasilkan {n} teka-teki: kurangi tempat persembunyian.
+L’arbre ne donne que {n} énigme : enlève des cachettes. ¦ Cây chỉ cho được {n} câu đố: hãy bớt chỗ giấu. ¦ Pohon hanya menghasilkan {n} teka-teki: kurangi tempat persembunyian.
+Chasse prête : imprime les cartes. ¦ Cuộc săn đã sẵn sàng: hãy in các thẻ. ¦ Perburuan siap: cetak kartu-kartunya.
+Supprimer ? ¦ Xoá? ¦ Hapus?
+sous le lit ¦ dưới gầm giường ¦ di bawah tempat tidur
+dans le four ¦ trong lò nướng ¦ di dalam oven
+derrière le canapé ¦ sau ghế sofa ¦ di belakang sofa
+dans la baignoire ¦ trong bồn tắm ¦ di dalam bak mandi
+dans le panier à linge ¦ trong giỏ quần áo ¦ di dalam keranjang cucian
+derrière la porte du garage ¦ sau cửa ga-ra ¦ di belakang pintu garasi
+dans la boîte à chaussures ¦ trong hộp giày ¦ di dalam kotak sepatu
+sous le coussin ¦ dưới gối tựa ¦ di bawah bantal kursi
+dans le pot de fleurs ¦ trong chậu hoa ¦ di dalam pot bunga
+au fond du frigo ¦ trong cùng tủ lạnh ¦ di bagian belakang kulkas
+sous la table de la cuisine ¦ dưới bàn bếp ¦ di bawah meja dapur
+sous le tapis ¦ dưới tấm thảm ¦ di bawah karpet
+(à cacher : {where}) ¦ (để giấu: {where}) ¦ (untuk disembunyikan: {where})
+C’est la dernière : le trésor vous attend ! ¦ Đây là thẻ cuối cùng: kho báu đang chờ các bạn! ¦ Ini yang terakhir: harta karun menunggu kalian!
+<b>Pour l’organisateur.</b> Donnez la carte 1 aux joueurs. Cachez chaque carte suivante à l’endroit indiqué en haut de la carte. Le trésor ({treasure}) va à : {where}. ¦ <b>Dành cho người tổ chức.</b> Hãy đưa thẻ 1 cho người chơi. Giấu mỗi thẻ tiếp theo ở chỗ ghi phía trên thẻ. Kho báu ({treasure}) để ở: {where}. ¦ <b>Untuk penyelenggara.</b> Berikan kartu 1 kepada para pemain. Sembunyikan setiap kartu berikutnya di tempat yang tertulis di bagian atas kartu. Harta karun ({treasure}) diletakkan: {where}.
+à vous de choisir ¦ tuỳ các bạn chọn ¦ terserah kalian
+{n} essai raté ¦ {n} lần đoán sai ¦ {n} tebakan salah
+Non, ce n’est pas ça… un indice de plus. ¦ Không, không phải vậy… thêm một gợi ý nữa. ¦ Bukan, bukan itu… satu petunjuk lagi.
+Il faut un ancêtre avec une date de naissance et un métier ou un mariage ¦ Cần một tổ tiên có ngày sinh và một nghề hoặc một cuộc kết hôn ¦ Perlu leluhur dengan tanggal lahir dan pekerjaan atau pernikahan
+Tu as fait {n} choix sur {total} comme {name}. ¦ Bạn đã chọn giống {name} {n} lần trên {total}. ¦ Kamu membuat {n} dari {total} pilihan seperti {name}.
+Une vie vécue à l’identique : tu connais bien ton ancêtre ! ¦ Một cuộc đời giống hệt: bạn hiểu rõ tổ tiên của mình! ¦ Hidup yang persis sama: kamu mengenal leluhurmu dengan baik!
+Avec tes choix, l’histoire de la famille aurait été tout autre. ¦ Với những lựa chọn của bạn, câu chuyện gia đình đã khác hẳn. ¦ Dengan pilihan-pilihanmu, kisah keluarga akan sangat berbeda.
+✨ Le même choix que ton ancêtre ! ¦ ✨ Cùng lựa chọn với tổ tiên của bạn! ¦ ✨ Pilihan yang sama dengan leluhurmu!
+🌀 Une autre vie commence… mais revenons à la vraie. ¦ 🌀 Một cuộc đời khác bắt đầu… nhưng hãy quay về cuộc đời thật. ¦ 🌀 Kehidupan lain dimulai… tapi mari kembali ke yang sebenarnya.
+Il faut des dates précises (jour et mois). ¦ Cần có ngày chính xác (ngày và tháng). ¦ Perlu tanggal yang tepat (hari dan bulan).
+{pct} % de l’arbre. ¦ {pct} % của cây. ¦ {pct} % dari pohon.
+Personne ne descend de ce choix dans l’arbre ¦ Không ai trong cây là con cháu của lựa chọn này ¦ Tidak ada orang di pohon yang merupakan keturunan dari pilihan ini
+Portrait de la fiche ¦ Chân dung của hồ sơ ¦ Potret profil
+Aucune photo jointe à cette fiche, ni de visage encadré sur une photo ¦ Không có ảnh nào gắn với hồ sơ này, cũng không có khuôn mặt nào được khoanh trên ảnh ¦ Tidak ada foto yang terlampir di profil ini, dan tidak ada wajah yang dibingkai di foto
+🔍 Zoom ¦ 🔍 Thu phóng ¦ 🔍 Zoom
+Glisse la photo dans le cadre pour la placer ; la molette (ou + et −) zoome. ¦ Kéo ảnh trong khung để đặt vị trí; con lăn chuột (hoặc + và −) để thu phóng. ¦ Seret foto di dalam bingkai untuk menempatkannya; roda tetikus (atau + dan −) untuk zoom.
+Les photos marquées d’un visage se recadrent toutes seules sur lui. ¦ Các ảnh có đánh dấu khuôn mặt sẽ tự cắt khung quanh khuôn mặt đó. ¦ Foto yang wajahnya ditandai akan otomatis dipotong pada wajah itu.
+Pas encore assez de familles ¦ Chưa đủ gia đình ¦ Belum cukup keluarga
+Il faut au moins deux familles d’au moins six personnes (décédées) : complète l’arbre, ou essaie « par branche ». ¦ Cần ít nhất hai gia đình, mỗi gia đình ít nhất sáu người (đã mất): hãy bổ sung cây, hoặc thử “theo nhánh”. ¦ Perlu setidaknya dua keluarga dengan masing-masing setidaknya enam orang (yang sudah meninggal): lengkapi pohonnya, atau coba “per cabang”.
+{n} famille de 6 cartes ({total} cartes). ¦ {n} gia đình, mỗi gia đình 6 thẻ ({total} thẻ). ¦ {n} keluarga berisi 6 kartu ({total} kartu).
+🃏 Le jeu des {n} familles ¦ 🃏 Trò chơi {n} gia đình ¦ 🃏 Permainan {n} keluarga
+Distribuez 6 cartes à chacun, le reste fait la pioche. À ton tour, demande à un joueur une carte d’une famille dont tu as déjà une carte (« Dans la famille {fam}, je voudrais {role} »). S’il l’a, il te la donne et tu rejoues ; sinon, « Pioche ! ». Une famille complète se pose devant soi. Celui qui a le plus de familles a gagné. ¦ Chia cho mỗi người 6 thẻ, số còn lại làm chồng bài rút. Đến lượt bạn, hãy xin một người chơi một thẻ thuộc gia đình mà bạn đã có một thẻ (“Trong gia đình {fam}, tôi muốn {role}”). Nếu người đó có, họ đưa cho bạn và bạn được chơi tiếp; nếu không, “Rút bài!”. Gia đình nào đủ thẻ thì đặt trước mặt mình. Ai có nhiều gia đình nhất sẽ thắng. ¦ Bagikan 6 kartu kepada setiap pemain, sisanya menjadi tumpukan ambil. Pada giliranmu, minta kepada seorang pemain satu kartu dari keluarga yang salah satu kartunya sudah kamu pegang (“Dalam keluarga {fam}, aku minta {role}”). Kalau dia punya, dia memberikannya kepadamu dan kamu main lagi; kalau tidak, “Ambil kartu!”. Keluarga yang lengkap diletakkan di depanmu. Siapa yang punya keluarga paling banyak menang.
+Les familles : {list}. ¦ Các gia đình: {list}. ¦ Keluarga-keluarga: {list}.
+Impression recto verso (bord long) : chaque page de dos suit sa page de cartes, déjà retournée pour tomber pile derrière. ¦ In hai mặt (lật theo cạnh dài): mỗi trang mặt sau đi ngay sau trang thẻ của nó, đã được xoay sẵn để khớp đúng phía sau. ¦ Cetak bolak-balik (sisi panjang): setiap halaman belakang mengikuti halaman kartunya, sudah dibalik agar pas tepat di belakangnya.
+Ajoute des personnes pour dessiner leur arbre. ¦ Hãy thêm người để vẽ cây của họ. ¦ Tambahkan orang untuk menggambar pohon mereka.
+L’arbre est trop petit pour faire des questions. ¦ Cây quá nhỏ để đặt câu hỏi. ¦ Pohonnya terlalu kecil untuk membuat pertanyaan.
+Voir la réponse (Entrée) ¦ Xem câu trả lời (Enter) ¦ Lihat jawaban (Enter)
+✕ Fin ¦ ✕ Kết thúc ¦ ✕ Selesai
+Il faut des lieux placés sur la carte (latitude et longitude) et datés pour faire le film ¦ Cần có các địa điểm đã đặt trên bản đồ (vĩ độ và kinh độ) và có ngày để làm phim ¦ Perlu tempat-tempat di peta (lintang dan bujur) yang bertanggal untuk membuat film
+🔴 Enregistrement… ¦ 🔴 Đang ghi… ¦ 🔴 Merekam…
+Aucun lieu de l’arbre n’est placé sur la carte (latitude et longitude) ¦ Không có địa điểm nào của cây được đặt trên bản đồ (vĩ độ và kinh độ) ¦ Tidak ada tempat di pohon yang ada di peta (lintang dan bujur)
+Aucun lieu placé sur la carte pour cette personne ¦ Không có địa điểm nào trên bản đồ cho người này ¦ Tidak ada tempat di peta untuk orang ini
+La position n’est pas disponible sur cet appareil. ¦ Không lấy được vị trí trên thiết bị này. ¦ Lokasi tidak tersedia di perangkat ini.
+📍 Je cherche ta position… (l’histoire de chaque étape se lira toute seule à moins de 300 m) ¦ 📍 Đang tìm vị trí của bạn… (câu chuyện của mỗi điểm dừng sẽ tự được đọc khi cách dưới 300 m) ¦ 📍 Mencari lokasimu… (kisah setiap perhentian akan dibacakan otomatis dalam jarak kurang dari 300 m)
+dans {n} jour ¦ trong {n} ngày nữa ¦ dalam {n} hari
+dans {n} mois ¦ trong {n} tháng nữa ¦ dalam {n} bulan
+dans {n} ans ¦ trong {n} năm nữa ¦ dalam {n} tahun
+De la part de (une fiche, ou un nom) ¦ Từ (một hồ sơ, hoặc một cái tên) ¦ Dari (sebuah profil, atau sebuah nama)
+Pour (ex. « Léa », « mes petits-enfants », « celui qui reprendra la maison ») ¦ Gửi (vd. “Léa”, “các cháu của tôi”, “người sẽ tiếp quản ngôi nhà”) ¦ Untuk (mis. “Léa”, “cucu-cucuku”, “siapa pun yang akan meneruskan rumah ini”)
+à une date ¦ vào một ngày ¦ pada suatu tanggal
+à un anniversaire ¦ vào một ngày sinh nhật ¦ pada hari ulang tahun
+Un son, une vidéo ou une photo (facultatif) ¦ Một âm thanh, một video hoặc một ảnh (không bắt buộc) ¦ Suara, video, atau foto (opsional)
+Choisis le jour où la lettre s’ouvrira. ¦ Hãy chọn ngày lá thư sẽ được mở. ¦ Pilih hari surat ini akan dibuka.
+La date doit être dans le futur (sinon ce n’est plus une surprise). ¦ Ngày phải ở trong tương lai (nếu không thì đâu còn bất ngờ). ¦ Tanggalnya harus di masa depan (kalau tidak, bukan kejutan lagi).
+Pour ses {n} ans ¦ Nhân dịp {n} tuổi ¦ Untuk ulang tahun ke-{n}
+à ses {n} ans ¦ lúc {n} tuổi ¦ pada umur {n}
+Lettre enregistrée. ¦ Đã lưu lá thư. ¦ Surat tersimpan.
+🔒 Lettre scellée : elle s’ouvrira le {date}. ¦ 🔒 Thư đã niêm phong: thư sẽ mở vào {date}. ¦ 🔒 Surat disegel: akan terbuka pada {date}.
+🔒 En attente ¦ 🔒 Đang chờ ¦ 🔒 Menunggu
+La lettre sera effacée pour de bon. ¦ Lá thư sẽ bị xoá vĩnh viễn. ¦ Surat ini akan dihapus selamanya.
+Supprimer la lettre ? ¦ Xoá lá thư? ¦ Hapus surat ini?
+Cet élément sera effacé pour de bon. ¦ Mục này sẽ bị xoá vĩnh viễn. ¦ Item ini akan dihapus selamanya.
+Rien à mettre dans le livre pour l’instant. ¦ Chưa có gì để đưa vào sách. ¦ Belum ada yang bisa dimasukkan ke buku.
+de la famille ¦ của gia đình ¦ dari keluarga
+Le souvenir en quelques mots ¦ Kỷ niệm trong vài chữ ¦ Kenangan dalam beberapa kata
+L’odeur de la cire dans l’escalier ¦ Mùi sáp ong trên cầu thang ¦ Bau lilin di tangga
+Ça rappelle (une fiche, ou un nom) ¦ Gợi nhớ đến (một hồ sơ, hoặc một cái tên) ¦ Mengingatkan pada (sebuah profil, atau sebuah nama)
+la maison de Naves ¦ ngôi nhà ở Naves ¦ rumah di Naves
+vers 1950, l’été ¦ khoảng 1950, mùa hè ¦ sekitar 1950, musim panas
+Un son, une photo (facultatif) ¦ Một âm thanh, một ảnh (không bắt buộc) ¦ Suara, foto (opsional)
+LIVRE DE RECETTES ¦ SÁCH CÔNG THỨC NẤU ĂN ¦ BUKU RESEP
+Le nom de la recette ¦ Tên món ăn ¦ Nama resep
+Le clafoutis de Rose ¦ Bánh clafoutis của Rose ¦ Clafoutis buatan Rose
+La recette de (une fiche, ou un nom) ¦ Công thức của (một hồ sơ, hoặc một cái tên) ¦ Resep dari (sebuah profil, atau sebuah nama)
+Pour combien ¦ Cho bao nhiêu người ¦ Untuk berapa orang
+pour 6 ¦ cho 6 người ¦ untuk 6 orang
+Les ingrédients (un par ligne) ¦ Nguyên liệu (mỗi dòng một thứ) ¦ Bahan-bahan (satu per baris)
+500 g de cerises noires ¦ 500 g anh đào đen ¦ 500 g ceri hitam
+3 œufs ¦ 3 quả trứng ¦ 3 butir telur
+Son histoire (d’où elle vient, quand on la faisait) ¦ Câu chuyện của món (từ đâu tới, nấu vào dịp nào) ¦ Kisahnya (dari mana asalnya, kapan biasa dibuat)
+Une photo du plat ou de la fiche écrite à la main ¦ Ảnh món ăn hoặc tờ công thức viết tay ¦ Foto hidangan atau resep tulisan tangan
+sur l’air de « {tune} » ¦ theo điệu “{tune}” ¦ dengan nada “{tune}”
+Le titre (ou le premier vers) ¦ Tựa đề (hoặc câu đầu tiên) ¦ Judul (atau baris pertama)
+Chantée par (une fiche, ou un nom) ¦ Do (một hồ sơ, hoặc một cái tên) hát ¦ Dinyanyikan oleh (sebuah profil, atau sebuah nama)
+Sur l’air de ¦ Theo điệu ¦ Dengan nada
+L’enregistrement (son ou vidéo) ¦ Bản ghi (âm thanh hoặc video) ¦ Rekaman (suara atau video)
+Le carnet de chansons ¦ Sổ bài hát ¦ Buku lagu
+{n} chansons de la famille ¦ {n} bài hát của gia đình ¦ {n} lagu keluarga
+{n} chanson de la famille ¦ {n} bài hát của gia đình ¦ {n} lagu keluarga
+Supprimer la fiche de l’entretien ¦ Xoá phiếu phỏng vấn ¦ Hapus lembar wawancara
+La fiche de l’entretien (les questions et les repères) sera effacée ; le son reste dans les médias. ¦ Phiếu phỏng vấn (các câu hỏi và mốc đánh dấu) sẽ bị xoá; âm thanh vẫn ở trong tư liệu. ¦ Lembar wawancara (pertanyaan dan penanda) akan dihapus; suaranya tetap di media.
+Le micro n’est pas disponible : l’entretien continue sans enregistrement (note les réponses). ¦ Micro không dùng được: cuộc phỏng vấn tiếp tục mà không ghi âm (hãy ghi lại câu trả lời). ¦ Mikrofon tidak tersedia: wawancara berlanjut tanpa rekaman (catat jawabannya).
+Notes rapides (facultatif) ¦ Ghi chú nhanh (không bắt buộc) ¦ Catatan singkat (opsional)
+← Précédente ¦ ← Câu trước ¦ ← Sebelumnya
+Dernière question : terminer ¦ Câu hỏi cuối: kết thúc ¦ Pertanyaan terakhir: selesai
+▶ Reprendre ¦ ▶ Tiếp tục ¦ ▶ Lanjutkan
+⏸ Pause ¦ ⏸ Tạm dừng ¦ ⏸ Jeda
+⏹ Terminer ¦ ⏹ Kết thúc ¦ ⏹ Selesai
+Entretien enregistré : le son est dans les médias de la fiche. ¦ Đã lưu cuộc phỏng vấn: âm thanh nằm trong tư liệu của hồ sơ. ¦ Wawancara tersimpan: suaranya ada di media profil.
+Personne à raconter de ce côté-là. ¦ Không có ai để kể ở phía đó. ¦ Tidak ada orang untuk diceritakan di sisi itu.
+Un mot (facultatif) ¦ Một lời nhắn (không bắt buộc) ¦ Sebuah pesan (opsional)
+Choisis pour qui. ¦ Hãy chọn dành cho ai. ¦ Pilih untuk siapa.
+🕯️ Une bougie brûle pour {name} pendant {n} jours. ¦ 🕯️ Một ngọn nến cháy cho {name} trong {n} ngày. ¦ 🕯️ Sebatang lilin menyala untuk {name} selama {n} hari.
+📖 Le registre ¦ 📖 Sổ ghi ¦ 📖 Buku catatan
+Son nom : ¦ Tên của nó: ¦ Namanya:
+Le nom de ce mélange ¦ Tên của bản phối này ¦ Nama campuran ini
+Choisis d’abord un de tes mélanges. ¦ Hãy chọn trước một trong các bản phối của bạn. ¦ Pilih dulu salah satu campuranmu.
+Enregistrement de {d} : le fichier arrive à la fin (⤓ Exporter → fichier son, de nouveau, pour finir plus tôt). ¦ Đang ghi {d}: tệp sẽ có khi kết thúc (⤓ Xuất → tệp âm thanh, một lần nữa, để kết thúc sớm hơn). ¦ Merekam {d}: berkasnya muncul di akhir (⤓ Ekspor → berkas suara, sekali lagi, untuk selesai lebih cepat).
+Ce navigateur ne sait pas fabriquer de fichier son. ¦ Trình duyệt này không tạo được tệp âm thanh. ¦ Peramban ini tidak bisa membuat berkas suara.
+Je fabrique le fichier son… ¦ Đang tạo tệp âm thanh… ¦ Membuat berkas suara…
+Les indices ne s’accordent pas tous : {n} sur {total} tombent dans cette période. Revois celui qui détonne. ¦ Các manh mối không khớp hết: {n} trên {total} rơi vào thời kỳ này. Hãy xem lại manh mối lạc điệu. ¦ Tidak semua petunjuk cocok: {n} dari {total} jatuh di periode ini. Periksa lagi yang tidak sesuai.
+Personne dans l’arbre n’avait cet âge pendant cette période. ¦ Không ai trong cây ở độ tuổi đó trong thời kỳ này. ¦ Tidak ada orang di pohon yang berumur segitu pada periode ini.
+Indique l’âge apparent pour voir qui ça peut être. ¦ Hãy nhập tuổi trông thấy để xem đó có thể là ai. ¦ Masukkan perkiraan umur untuk melihat siapa kira-kira orangnya.
+⏰ Me le rappeler ¦ ⏰ Nhắc tôi ¦ ⏰ Ingatkan aku
+Le rappel ¦ Lời nhắc ¦ Pengingat
+Écris le rappel. ¦ Hãy viết lời nhắc. ¦ Tulis pengingatnya.
+Choisis la date du rappel. ¦ Hãy chọn ngày nhắc. ¦ Pilih tanggal pengingat.
+⏰ Rappel créé pour le {date} (Listes → Rappels). ¦ ⏰ Đã tạo lời nhắc cho {date} (Danh sách → Lời nhắc). ¦ ⏰ Pengingat dibuat untuk {date} (Daftar → Pengingat).
+Archives à trouver ¦ Kho lưu trữ cần tìm ¦ Arsip yang perlu dicari
+{n} recherche à faire sur 6 générations ¦ {n} việc tìm kiếm cần làm trên 6 thế hệ ¦ {n} pencarian yang perlu dilakukan dalam 6 generasi
+Rien ne manque sur 6 générations, ou l’assistant n’a pas pu être lu ¦ Không thiếu gì trên 6 thế hệ, hoặc không đọc được trợ lý ¦ Tidak ada yang kurang dalam 6 generasi, atau asisten tidak dapat dibaca
+Les fiches prennent maintenant les couleurs de leur époque. ¦ Các hồ sơ giờ mang màu sắc của thời kỳ mình. ¦ Profil-profil sekarang memakai warna zamannya.
+Signes particuliers ¦ Đặc điểm riêng ¦ Ciri khusus
+pour voyager d’un département à l’autre ¦ để đi từ tỉnh này sang tỉnh khác ¦ untuk bepergian dari satu département ke département lain
+pour aller à l’étranger ¦ để ra nước ngoài ¦ untuk pergi ke luar negeri
+Date de délivrance ¦ Ngày cấp ¦ Tanggal terbit
+Motif du voyage ¦ Lý do chuyến đi ¦ Alasan perjalanan
+Le signalement ¦ Đặc điểm nhận dạng ¦ Ciri-ciri
+🛂 Le passeport ¦ 🛂 Hộ chiếu ¦ 🛂 Paspor
+Le voyageur ¦ Người đi đường ¦ Pelancong
+Choisis le voyageur. ¦ Hãy chọn người đi đường. ¦ Pilih pelancongnya.
+{what} de {name} ({date}) ¦ {what} của {name} ({date}) ¦ {what} dari {name} ({date})
+ce XML contient des déclarations (DOCTYPE ou ENTITY) : il est refusé par prudence ¦ XML này chứa khai báo (DOCTYPE hoặc ENTITY): bị từ chối để an toàn ¦ XML ini berisi deklarasi (DOCTYPE atau ENTITY): ditolak demi keamanan
+le fichier XML est abîmé ¦ tệp XML bị hỏng ¦ berkas XML rusak
+Fermer le relevé ¦ Đóng bảng trích lục ¦ Tutup indeks catatan
+Le passeport sera effacé. ¦ Hộ chiếu sẽ bị xoá. ¦ Paspor akan dihapus.
+Rattaché à {name}. ¦ Đã liên kết với {name}. ¦ Terhubung ke {name}.
+{n} correspondances possibles avec l’arbre (en tête) ¦ {n} kết quả có thể khớp với cây (ở trên cùng) ¦ {n} kemungkinan kecocokan dengan pohon (di atas)
+{n} correspondance possible avec l’arbre (en tête) ¦ {n} kết quả có thể khớp với cây (ở trên cùng) ¦ {n} kemungkinan kecocokan dengan pohon (di atas)
+Aucun passeport pour l’instant. ¦ Chưa có hộ chiếu nào. ¦ Belum ada paspor.
+Avant 1860, pour voyager en France, il fallait un passeport intérieur avec son signalement : s’il en existe un, ajoute-le ici. ¦ Trước 1860, muốn đi lại trong nước Pháp phải có hộ chiếu nội địa ghi đặc điểm nhận dạng: nếu có, hãy thêm vào đây. ¦ Sebelum 1860, untuk bepergian di Prancis diperlukan paspor dalam negeri berisi ciri-ciri: kalau ada, tambahkan di sini.
+＋ Nouveau passeport intérieur ¦ ＋ Hộ chiếu nội địa mới ¦ ＋ Paspor dalam negeri baru
+Les passeports de la famille : le passeport intérieur (pour voyager d’un département à l’autre, jusque vers 1860) et le passeport pour l’étranger. Ils se saisissent sur la fiche (bloc 🛂 Passeports) ou dans ✨ Trésors. ¦ Hộ chiếu của gia đình: hộ chiếu nội địa (để đi từ tỉnh này sang tỉnh khác, cho đến khoảng 1860) và hộ chiếu ra nước ngoài. Nhập trên hồ sơ (khối 🛂 Hộ chiếu) hoặc trong ✨ Báu vật. ¦ Paspor keluarga: paspor dalam negeri (untuk bepergian dari satu département ke département lain, hingga sekitar 1860) dan paspor luar negeri. Diisi di profil (blok 🛂 Paspor) atau di ✨ Harta.
+Chercher… (voyageur, destination, motif, profession) ¦ Tìm… (người đi đường, nơi đến, lý do, nghề nghiệp) ¦ Cari… (pelancong, tujuan, alasan, pekerjaan)
+Passeport pour l’étranger ¦ Hộ chiếu ra nước ngoài ¦ Paspor luar negeri
+Pour l’étranger ¦ Ra nước ngoài ¦ Ke luar negeri
+pas encore dans l’arbre ¦ chưa có trong cây ¦ belum ada di pohon
+mariage pas encore daté dans l’arbre ¦ cuộc kết hôn chưa có ngày trong cây ¦ pernikahan belum bertanggal di pohon
+concorde ({what}) ¦ khớp ({what}) ¦ cocok ({what})
+pas de métier dans l’arbre ¦ không có nghề trong cây ¦ tidak ada pekerjaan di pohon
+ce lieu est déjà dans l’arbre ¦ địa điểm này đã có trong cây ¦ tempat ini sudah ada di pohon
+ce lieu n’est pas encore sur la fiche ¦ địa điểm này chưa có trên hồ sơ ¦ tempat ini belum ada di profil
+👶 Naissance ¦ 👶 Sinh ¦ 👶 Kelahiran
+🕯️ Décès ¦ 🕯️ Mất ¦ 🕯️ Kematian
+💍 Mariage ¦ 💍 Kết hôn ¦ 💍 Pernikahan
+🔨 Métier ¦ 🔨 Nghề nghiệp ¦ 🔨 Pekerjaan
+🏠 Domicile ¦ 🏠 Nơi ở ¦ 🏠 Tempat tinggal
+un mariage s’ajoute depuis la fiche du couple ¦ cuộc kết hôn được thêm từ hồ sơ của cặp vợ chồng ¦ pernikahan ditambahkan dari profil pasangan
+D’après le récit de {name} : « {text} » ¦ Theo lời kể của {name}: “{text}” ¦ Menurut cerita {name}: “{text}”
+＋ Ajouter à la fiche ¦ ＋ Thêm vào hồ sơ ¦ ＋ Tambah ke profil
+Rien n’est changé sans ton accord : « Ajouter à la fiche » crée un événement avec la phrase du récit comme source. ¦ Không có gì bị thay đổi nếu bạn không đồng ý: “Thêm vào hồ sơ” tạo một sự kiện với câu trong lời kể làm nguồn. ¦ Tidak ada yang diubah tanpa persetujuanmu: “Tambah ke profil” membuat peristiwa dengan kalimat dari cerita sebagai sumbernya.
+Essaie des phrases comme « Mon père était boulanger », « Ma mère est née en 1932 à Tulle ». ¦ Hãy thử các câu (tiếng Pháp) như “Mon père était boulanger”, “Ma mère est née en 1932 à Tulle”. ¦ Coba kalimat (bahasa Prancis) seperti “Mon père était boulanger”, “Ma mère est née en 1932 à Tulle”.
+Ajouté à la fiche. ¦ Đã thêm vào hồ sơ. ¦ Ditambahkan ke profil.
+Le récit est vide : dicte-le, colle-le ou recopie-le. ¦ Lời kể đang trống: hãy đọc chính tả, dán vào hoặc chép lại. ¦ Ceritanya kosong: diktekan, tempelkan, atau salin ulang.
+Le récit de {name} ({date}) ¦ Lời kể của {name} ({date}) ¦ Cerita {name} ({date})
+Récit enregistré (bloc ✨ Trésors de la fiche). ¦ Đã lưu lời kể (khối ✨ Báu vật của hồ sơ). ¦ Cerita tersimpan (blok ✨ Harta di profil).
+Trop court : quelqu’un d’obstiné pourrait le deviner en essayant beaucoup de mots de passe sur le fichier. ¦ Quá ngắn: một người kiên trì có thể đoán ra bằng cách thử rất nhiều mật khẩu trên tệp. ¦ Terlalu pendek: orang yang gigih bisa menebaknya dengan mencoba banyak kata sandi pada berkas ini.
+Correct pour un partage de quelques semaines. ¦ Tạm được cho một lần chia sẻ trong vài tuần. ¦ Cukup untuk berbagi selama beberapa minggu.
+Une branche de famille partagée ¦ Một nhánh gia đình được chia sẻ ¦ Cabang keluarga yang dibagikan
+{n} retirée (vivantes ou récentes) ¦ {n} đã bỏ ra (còn sống hoặc gần đây) ¦ {n} dikeluarkan (masih hidup atau baru-baru ini)
+Mot de passe copié. ¦ Đã sao chép mật khẩu. ¦ Kata sandi disalin.
+Personne à partager dans cette branche. ¦ Không có ai để chia sẻ trong nhánh này. ¦ Tidak ada orang untuk dibagikan di cabang ini.
+Choisis un mot de passe (ou « 🎲 En proposer un »), ou coche « Sans mot de passe ». ¦ Hãy chọn một mật khẩu (hoặc “🎲 Đề xuất một mật khẩu”), hoặc đánh dấu “Không mật khẩu”. ¦ Pilih kata sandi (atau “🎲 Usulkan satu”), atau centang “Tanpa kata sandi”.
+Ce mot de passe est court : quelqu’un d’obstiné pourrait le trouver en essayant beaucoup de mots de passe. Fabriquer le fichier quand même ? ¦ Mật khẩu này ngắn: một người kiên trì có thể tìm ra bằng cách thử rất nhiều mật khẩu. Vẫn tạo tệp chứ? ¦ Kata sandi ini pendek: orang yang gigih bisa menemukannya dengan mencoba banyak kata sandi. Tetap buat berkasnya?
+Mot de passe faible ¦ Mật khẩu yếu ¦ Kata sandi lemah
+Choisis jusqu’à quand le partage est valable. ¦ Hãy chọn thời hạn chia sẻ có hiệu lực. ¦ Pilih sampai kapan berbagi ini berlaku.
+Une branche de la famille — partagée par la famille ¦ Một nhánh của gia đình — do gia đình chia sẻ ¦ Satu cabang keluarga — dibagikan oleh keluarga
+Fichier prêt : envoie-le, et donne le mot de passe à part. ¦ Tệp đã sẵn sàng: hãy gửi đi, và đưa mật khẩu riêng. ¦ Berkas siap: kirimkan, dan berikan kata sandinya secara terpisah.
+Aucun lieu dans l’arbre ¦ Không có địa điểm nào trong cây ¦ Tidak ada tempat di pohon
+✅ J’y suis allé ¦ ✅ Tôi đã đến đó ¦ ✅ Aku sudah ke sana
+Retirer le tampon ¦ Gỡ con dấu ra ¦ Lepas cap
+Il faut des lieux placés sur la carte et datés pour compter les kilomètres ¦ Cần có các địa điểm đã đặt trên bản đồ và có ngày để tính số ki-lô-mét ¦ Perlu tempat-tempat di peta yang bertanggal untuk menghitung kilometer
+Il faut au moins un lieu où deux personnes de l’arbre ont vécu ¦ Cần ít nhất một địa điểm nơi hai người trong cây đã sống ¦ Perlu setidaknya satu tempat di mana dua orang di pohon pernah tinggal
+{place} : {y} ans de présence de la famille, sur {n} génération d’ancêtres ¦ {place}: gia đình có mặt {y} năm, qua {n} thế hệ tổ tiên ¦ {place}: {y} tahun kehadiran keluarga, selama {n} generasi leluhur
+{place} : {y} ans de présence de la famille ¦ {place}: gia đình có mặt {y} năm ¦ {place}: {y} tahun kehadiran keluarga
+portrait ✓ ¦ chân dung ✓ ¦ potret ✓
+✨ Récit d’une vie : un diaporama tout fait à partir de cette fiche ¦ ✨ Chuyện một cuộc đời: trình chiếu làm sẵn từ hồ sơ này ¦ ✨ Kisah hidup: tayangan slide siap pakai dari profil ini
+Récit d’une vie en diaporama ¦ Chuyện một cuộc đời dạng trình chiếu ¦ Kisah hidup dalam tayangan slide
+Pour tes 18 ans ¦ Nhân dịp bạn 18 tuổi ¦ Untuk ulang tahunmu yang ke-18
+Quand ¦ Khi nào ¦ Kapan
+Raconte ¦ Hãy kể ¦ Ceritakan
+Passeport ¦ Hộ chiếu ¦ Paspor
+Barbe ¦ Râu ¦ Jenggot

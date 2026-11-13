@@ -1,0 +1,1565 @@
+fr ¦ ro
+Espace de travail « {name} » appliqué. ¦ Spațiul de lucru „{name}” a fost aplicat.
+Réglages « {name} » importés : « Appliquer » pour les utiliser. ¦ Setările „{name}” au fost importate: „Aplică” pentru a le folosi.
+{layer} (avant / après) ¦ {layer} (înainte / după)
+Avant / après — {name} ¦ Înainte / după — {name}
+Modèle des visages : {what} ¦ Modelul fețelor: {what}
+Portrait de {name} (photo d’identité) ¦ Portretul lui {name} (fotografie de identitate)
+Portrait (photo d’identité) ¦ Portret (fotografie de identitate)
+Fiche {num} ¦ Fișa {num}
+⚠️ visage non trouvé sur « {name} » : cadrage au centre, à vérifier (ou identifie le visage dans la visionneuse) ¦ ⚠️ fața nu a fost găsită pe „{name}”: încadrare la centru, de verificat (sau identifică fața în vizualizator)
+={n} portraits prêts : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ {n} portret gata: debifează-le pe cele care nu se potrivesc, apoi „Folosește ca portrete”.|{n} portrete gata: debifează-le pe cele care nu se potrivesc, apoi „Folosește ca portrete”.|{n} de portrete gata: debifează-le pe cele care nu se potrivesc, apoi „Folosește ca portrete”.
+={n} portrait prêt : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ {n} portret gata: debifează-le pe cele care nu se potrivesc, apoi „Folosește ca portrete”.|{n} portrete gata: debifează-le pe cele care nu se potrivesc, apoi „Folosește ca portrete”.|{n} de portrete gata: debifează-le pe cele care nu se potrivesc, apoi „Folosește ca portrete”.
+Aucun visage trouvé tout seul. ¦ Nicio față găsită automat.
+={n} autres sont cadrés au centre : coche-les seulement s’ils vont. ¦ {n} altul este încadrat la centru: bifează-l doar dacă se potrivește.|{n} altele sunt încadrate la centru: bifează-le doar dacă se potrivesc.|{n} de altele sunt încadrate la centru: bifează-le doar dacă se potrivesc.
+={n} autre est cadré au centre : coche-le seulement s’il va. ¦ {n} altul este încadrat la centru: bifează-l doar dacă se potrivește.|{n} altele sunt încadrate la centru: bifează-le doar dacă se potrivesc.|{n} de altele sunt încadrate la centru: bifează-le doar dacă se potrivesc.
+Calque {num} ¦ Stratul {num}
+Groupe {num} ¦ Grupul {num}
+calque|Réglages ¦ Ajustări
+Masque d’écrêtage : ne touche que « {name} » juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Mască de decupare: atinge doar „{name}” chiar dedesubt (⌥ Alt + clic între două straturi în Photoshop)
+Masque d’écrêtage : ne touche que l’élément juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Mască de decupare: atinge doar elementul chiar dedesubt (⌥ Alt + clic între două straturi în Photoshop)
+seulement sur « {name} » ¦ doar pe „{name}”
+seulement sur ce qui est juste dessous ¦ doar pe ce este chiar dedesubt
+touche tout ce qui est dessous dans « {name} » ¦ atinge tot ce este dedesubt în „{name}”
+réglages, {n} corrections ¦ ajustări, {n} corecții
+réglages, {n} correction ¦ ajustări, {n} corecție
+« {name} » mis dans un groupe ¦ „{name}” a fost pus într-un grup
+{layer} montré ¦ {layer} afișat
+{layer} masqué ¦ {layer} ascuns
+Masque qui cache la sélection ajouté à {name} ¦ Mască ce ascunde selecția adăugată la {name}
+Masque qui cache tout ajouté à {name} ¦ Mască ce ascunde tot adăugată la {name}
+Masque ajouté à {name} ¦ Mască adăugată la {name}
+Masque de {name} désactivé ¦ Masca lui {name} dezactivată
+Masque de {name} réactivé ¦ Masca lui {name} reactivată
+Masque de {name} inversé ¦ Masca lui {name} inversată
+Masque de {name} retiré ¦ Masca lui {name} scoasă
+« {name} » à sa taille d’origine ¦ „{name}” la mărimea originală
+✨ Filtre sur « {name} » ¦ ✨ Filtru pe „{name}”
+« {name} » pixellisé ¦ „{name}” rasterizat
+« {name} » pixellisé : figé à sa taille actuelle (l’agrandir le rendra flou) ¦ „{name}” rasterizat: fixat la mărimea actuală (mărirea îl va face neclar)
+Groupe « {name} » supprimé (son contenu reste) ¦ Grupul „{name}” a fost șters (conținutul lui rămâne)
+{layer} supprimé ¦ {layer} șters
+« {name} » retiré des calques ¦ „{name}” scos din straturi
+Calque « {name} » supprimé avec ce qui est dessus ¦ Stratul „{name}” a fost șters împreună cu ce este pe el
+{layer} dupliquée ¦ {layer} duplicată
+{layer} dupliqué ¦ {layer} duplicat
+{layer} vidé ¦ {layer} golit
+{layer} déplacé ¦ {layer} mutat
+Opacité de {name} : {n} % ¦ Opacitatea lui {name}: {n} %
+Fond de {name} : {n} % ¦ Umplerea lui {name}: {n} %
+Renommé « {name} » ¦ Redenumit „{name}”
+Fusion de {name} : {what} ¦ Modul de îmbinare al lui {name}: {what}
+« {name} » rangé dans « {group} » ¦ „{name}” pus în „{group}”
+« {name} » sorti du groupe ¦ „{name}” scos din grup
+« {name} » rangé tout en bas ¦ „{name}” pus cel mai jos
+« {name} » rangé au-dessus de « {other} » ¦ „{name}” pus deasupra lui „{other}”
+« {name} » rangé sous « {other} » ¦ „{name}” pus sub „{other}”
+🎚 Calque de réglage {name} ¦ 🎚 Strat de ajustare {name}
+🖼 Réglages de <b>la photo</b> ¦ 🖼 Ajustările <b>fotografiei</b>
+Sur le masque, le pinceau ⬜ montre (fait revenir ce qui était caché) — X pour changer ¦ Pe mască, pensula ⬜ arată (readuce ce era ascuns) — X pentru a schimba
+Sur le masque, le pinceau ⬛ cache — X pour changer ¦ Pe mască, pensula ⬛ ascunde — X pentru a schimba
+Texte choisi : « {text} » ¦ Text ales: „{text}”
+Glyphe {what} ajouté ¦ Glifa {what} a fost adăugată
+« {what} » copié : colle-le dans un texte (⌘V). ¦ „{what}” copiat: lipește-l într-un text (⌘V).
+calque « {name} » (seulement l’élément dessous) ¦ stratul „{name}” (doar elementul de dedesubt)
+calque « {name} » ¦ stratul „{name}”
+Gamme : {a}° / {b}° — {c}° \ {d}° (glisse les repères) ¦ Gamă: {a}° / {b}° — {c}° \ {d}° (trage reperele)
+Propriétés de « {name} » ¦ Proprietățile lui „{name}”
+🎨 Teinte/Saturation sur « {name} » ¦ 🎨 Nuanță/Saturație pe „{name}”
+Motif « {what} » : calque « {name} » ¦ Model „{what}”: stratul „{name}”
+Motif de « {name} » ¦ Modelul lui „{name}”
+Motif « {what} » sur « {name} » ¦ Model „{what}” pe „{name}”
+Motif « {what} » retiré de la bibliothèque (les calques qui l’utilisent le gardent) ¦ Modelul „{what}” a fost scos din bibliotecă (straturile care îl folosesc îl păstrează)
+le calque « {name} » ¦ stratul „{name}”
+🖌 {name} : peins sur un calque. ¦ 🖌 {name}: pictează pe un strat.
+Dégradé : {what} ¦ Degrade: {what}
+Dégradé {num} ¦ Degrade {num}
+Calque « {name} » ¦ Stratul „{name}”
+« {name} » · son masque (noir = caché, blanc = montré) : tout se voit tout de suite ¦ „{name}” · masca lui (negru = ascuns, alb = arătat): totul se vede imediat
+« {name} » : tout se voit tout de suite ¦ „{name}”: totul se vede imediat
+le prochain dégradé que tu traceras ¦ următorul degrade pe care îl vei trasa
+Préréglage « {name} » gardé : il reste dans cette liste. ¦ Presetarea „{name}” a fost păstrată: rămâne în această listă.
+Dégradé modifié sur « {name} » ¦ Degrade modificat pe „{name}”
+Texte « {text} » ¦ Text „{text}”
+Objet dynamique « {name} » : image remplacée ¦ Obiect inteligent „{name}”: imagine înlocuită
+Image placée : « {name} » ¦ Imagine plasată: „{name}”
+Image placée, mais pas rangée dans les médias : {err} ¦ Imagine plasată, dar nepusă în fișierele media: {err}
+Élément supprimé de « {name} » ¦ Element șters din „{name}”
+Image tournée sur « {name} » ¦ Imagine rotită pe „{name}”
+Image agrandie / réduite sur « {name} » ¦ Imagine mărită / micșorată pe „{name}”
+Dégradé ajusté (masque) sur « {name} » ¦ Degrade ajustat (mască) pe „{name}”
+Dégradé ajusté sur « {name} » ¦ Degrade ajustat pe „{name}”
+Élément déplacé sur « {name} » ¦ Element mutat pe „{name}”
+Masque en dégradé sur « {name} » ¦ Mască în degrade pe „{name}”
+Dégradé {what} : « {name} » ¦ Degrade {what}: „{name}”
+{what} sur « {name} » ¦ {what} pe „{name}”
+Masque : caché au pinceau ¦ Mască: ascuns cu pensula
+Masque : montré au pinceau ¦ Mască: arătat cu pensula
+Pli réparé ({n} touches) (calque ✨ Retouches) ¦ Pliu reparat ({n} atingeri) (strat ✨ Retușări)
+Pli réparé (calque ✨ Retouches) ¦ Pliu reparat (strat ✨ Retușări)
+Recadrage enlevé ¦ Decupare eliminată
+Recadrage et redressement ({a}°) ¦ Decupare și îndreptare ({a}°)
+Recadrage ¦ Decupare
+Filtre « {what} » (refait) ¦ Filtrul „{what}” (refăcut)
+« {what} » refait sur un nouveau calque. ¦ „{what}” refăcut pe un strat nou.
+limité à la sélection ¦ limitat la selecție
+Filtre « {what} » ¦ Filtrul „{what}”
+Filtre « {what} » ajouté au calque ¦ Filtrul „{what}” a fost adăugat la strat
+Filtre « {what} » réglé ¦ Filtrul „{what}” a fost reglat
+Action « {name} » ¦ Acțiunea „{name}”
+Action du {date} ¦ Acțiunea din {date}
+Action « {name} » enregistrée. ¦ Acțiunea „{name}” a fost salvată.
+Action « {name} » importée : « Sur cette photo » ou « Sur plusieurs photos… ». ¦ Acțiunea „{name}” a fost importată: „Pe această fotografie” sau „Pe mai multe fotografii…”.
+Action « {name} » supprimée ¦ Acțiunea „{name}” a fost ștearsă
+« {name} » sur plusieurs photos ¦ „{name}” pe mai multe fotografii
+Terminé : {n} photos sur {total}, nouvelle version affichée. ¦ Gata: {n} fotografii din {total}, noua versiune este afișată.
+Terminé : {n} photo sur {total}, nouvelle version affichée. ¦ Gata: {n} fotografie din {total}, noua versiune este afișată.
+Terminé : {n} photos sur {total}. ¦ Gata: {n} fotografii din {total}.
+Terminé : {n} photo sur {total}. ¦ Gata: {n} fotografie din {total}.
+{layer} (retouchée) ¦ {layer} (retușată)
+« {name} » · comme le style de calque de Photoshop ¦ „{name}” · ca stilul de strat din Photoshop
+Effets de {layer} enlevés ¦ Efectele lui {layer} au fost eliminate
+Effets de {layer} ¦ Efectele lui {layer}
+Les lignes fines, claires ou sombres, sont repérées en rouge (dans la sélection). Vérifie, puis « Réparer ces lignes ». ¦ Liniile fine, deschise sau închise, sunt marcate cu roșu (în selecție). Verifică, apoi „Repară aceste linii”.
+Les lignes fines, claires ou sombres, sont repérées en rouge. Vérifie, puis « Réparer ces lignes ». ¦ Liniile fine, deschise sau închise, sunt marcate cu roșu. Verifică, apoi „Repară aceste linii”.
+{what} (en rouge sur la photo). ¦ {what} (cu roșu pe fotografie).
+Plis réparés ({what}) ¦ Pliuri reparate ({what})
+{what} : compare avec 👁 ou ◧ ; ↶ pour revenir. ¦ {what}: compară cu 👁 sau ◧; ↶ pentru a reveni.
+={n} lignes repérées puis comblées ¦ {n} linie găsită apoi umplută|{n} linii găsite apoi umplute|{n} de linii găsite apoi umplute
+={n} ligne repérée puis comblée ¦ {n} linie găsită apoi umplută|{n} linii găsite apoi umplute|{n} de linii găsite apoi umplute
+=pli|{n} lignes ¦ {n} linie|{n} linii|{n} de linii
+=pli|{n} ligne ¦ {n} linie|{n} linii|{n} de linii
+=retouche|{n} étapes ¦ {n} etapă|{n} etape|{n} de etape
+=retouche|{n} étape ¦ {n} etapă|{n} etape|{n} de etape
+=ligne repérée ¦ linie găsită|linii găsite|de linii găsite
+=ligne réparée ¦ linie reparată|linii reparate|de linii reparate
+=calque de réglage ¦ strat de ajustare|straturi de ajustare|de straturi de ajustare
+=portrait mis à jour ¦ portret actualizat|portrete actualizate|de portrete actualizate
+✨ Restauration en une fois ({what}) ¦ ✨ Restaurare dintr-o dată ({what})
+Restauration faite ({what}) : chaque étape est un calque « ✨ » (Calques) que tu peux cacher ou doser ; ↶ défait tout. ¦ Restaurare făcută ({what}): fiecare etapă este un strat „✨” (Straturi) pe care îl poți ascunde sau doza; ↶ anulează tot.
+Portrait de la fiche « {name} » mis à jour (la photo recadrée est dans ses médias). ¦ Portretul fișei „{name}” a fost actualizat (fotografia decupată este în fișierele ei media).
+Portrait de la fiche mis à jour (la photo recadrée est dans ses médias). ¦ Portretul fișei a fost actualizat (fotografia decupată este în fișierele ei media).
+{w} × {h} px (recadrée) ¦ {w} × {h} px (decupată)
+Horizon redressé ({a}°) ¦ Orizont îndreptat ({a}°)
+Redressée de {a}° : ajuste le cadre puis « ✓ Valider ». ¦ Îndreptată cu {a}°: ajustează cadrul, apoi „✓ Validează”.
+Photo redressée de {a}° (et recadrée pour ne pas voir les coins). ⌗ Recadrer pour ajuster. ¦ Fotografie îndreptată cu {a}° (și decupată ca să nu se vadă colțurile). ⌗ Decupează pentru a ajusta.
+Redressée automatiquement ({a}°) ¦ Îndreptată automat ({a}°)
+Reflets retirés sur un calque à part (seulement dans la sélection : fais d’abord une sélection de la vitre pour limiter) : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Reflexii eliminate pe un strat separat (doar în selecție: selectează mai întâi geamul pentru a limita): reglează forța și mărimea, opacitatea dozează, 🎭 limitează, 👁 ascunde. Fotografia nu este atinsă.
+Reflets retirés sur un calque à part : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Reflexii eliminate pe un strat separat: reglează forța și mărimea, opacitatea dozează, 🎭 limitează, 👁 ascunde. Fotografia nu este atinsă.
+Colorisation dans un calque de réglage (limitée à la sélection) : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Colorizare într-un strat de ajustare (limitată la selecție): alege culorile și forța; 🎭 pentru a o limita, 👁 pentru a o ascunde. Fotografia nu este atinsă.
+Colorisation dans un calque de réglage : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Colorizare într-un strat de ajustare: alege culorile și forța; 🎭 pentru a o limita, 👁 pentru a o ascunde. Fotografia nu este atinsă.
+={n} taches enlevées, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ {n} pată eliminată, pe stratul „{layer}” (fotografia nu este atinsă): ascunde-l sau coboară-l pentru a compara; ↶ dacă e prea mult.|{n} pete eliminate, pe stratul „{layer}” (fotografia nu este atinsă): ascunde-l sau coboară-l pentru a compara; ↶ dacă e prea mult.|{n} de pete eliminate, pe stratul „{layer}” (fotografia nu este atinsă): ascunde-l sau coboară-l pentru a compara; ↶ dacă e prea mult.
+={n} tache enlevée, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ {n} pată eliminată, pe stratul „{layer}” (fotografia nu este atinsă): ascunde-l sau coboară-l pentru a compara; ↶ dacă e prea mult.|{n} pete eliminate, pe stratul „{layer}” (fotografia nu este atinsă): ascunde-l sau coboară-l pentru a compara; ↶ dacă e prea mult.|{n} de pete eliminate, pe stratul „{layer}” (fotografia nu este atinsă): ascunde-l sau coboară-l pentru a compara; ↶ dacă e prea mult.
+✨ Taches enlevées ¦ ✨ Pete eliminate
+Taches enlevées automatiquement ({n}) ¦ Pete eliminate automat ({n})
+Sélection remplie ({what}) ¦ Selecție umplută ({what})
+Sélection effacée sur « {name} » ¦ Selecție ștearsă pe „{name}”
+Masque d’après la sélection ({name}) ¦ Mască după selecție ({name})
+Préréglage « {name} » retiré ¦ Presetarea „{name}” a fost scoasă
+Préréglage « {name} » ¦ Presetarea „{name}”
+Projet « {name} » (📂 Fichier → Ouvrir un projet pour le retrouver) ¦ Proiectul „{name}” (📂 Fișier → Deschide un proiect pentru a-l regăsi)
+Versions de la photo ({n}) ¦ Versiunile fotografiei ({n})
+{w} × {h} cm à {dpi} ppp ¦ {w} × {h} cm la {dpi} ppp
+≈ {size} Mo en mémoire ¦ ≈ {size} Mo în memorie
+Taille de l’image : {w} × {h} px ¦ Mărimea imaginii: {w} × {h} px
+Zone de travail : {w} × {h} px ¦ Zona de lucru: {w} × {h} px
+Zone de travail de départ ¦ Zona de lucru inițială
+Cette image est très grande ({n} millions de points) : l’enregistrement peut être long, voire échouer. ¦ Imaginea aceasta este foarte mare ({n} milioane de puncte): salvarea poate dura mult, ba chiar poate eșua.
+Enregistrer quand même ? ¦ Salvezi totuși?
+Projet « {name} » rouvert ¦ Proiectul „{name}” a fost redeschis
+Projet en partie illisible : {err} ¦ Proiect parțial ilizibil: {err}
+photo de départ introuvable ¦ fotografia de pornire nu a fost găsită
+Supprimer le projet « {name} » ? ¦ Ștergi proiectul „{name}”?
+Quitter le plein écran ¦ Ieși din ecranul complet
+Plus de place pour enregistrer : supprime un espace de travail. ¦ Nu mai e loc pentru salvare: șterge un spațiu de lucru.
+Ranger, montrer ou cacher les boutons et les options ¦ Aranjează, arată sau ascunde butoanele și opțiunile
+⚙️ Boutons et options ¦ ⚙️ Butoane și opțiuni
+Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). Gardé pour la prochaine fois. Comme les espaces de travail de Photoshop : enregistre une disposition sous un nom (« Restauration », « Montage rapide »…) et passe de l’une à l’autre. ¦ Bifează ce se arată, aranjează cu ↑ ↓ (sau trăgând ⠿). Se păstrează pentru data viitoare. Ca spațiile de lucru din Photoshop: salvează un aranjament sub un nume („Restaurare”, „Montaj rapid”…) și treci de la unul la altul.
+les boutons montrés, cachés et rangés ¦ butoanele arătate, ascunse și aranjate
+Boutons remis comme au départ (rouvre la fenêtre pour retrouver l’ordre de départ). ¦ Butoanele au fost readuse la starea inițială (redeschide fereastra pentru a regăsi ordinea inițială).
+Boutons rangés. ¦ Butoane aranjate.
+Hautes lumières ¦ Lumini
+Vibrance (couleurs ternes d’abord) ¦ Vivacitate (culorile șterse mai întâi)
+Teinte (tourner les couleurs) ¦ Nuanță (rotește culorile)
+Noir d’entrée ¦ Negru de intrare
+Blanc d’entrée ¦ Alb de intrare
+Tons moyens (gamma ×100) ¦ Tonuri medii (gama ×100)
+Noir de sortie ¦ Negru de ieșire
+Blanc de sortie ¦ Alb de ieșire
+Naturelle : ciel, verdure, peau, habits (conseillé) ¦ Naturală: cer, verdeață, piele, haine (recomandat)
+Sépia chaud ¦ Sepia caldă
+Autochrome (couleurs d’autrefois) ¦ Autocrom (culori de altădată)
+Portrait (peau rosée) ¦ Portret (piele rozalie)
+Paysage : ciel en haut, terre en bas ¦ Peisaj: cer sus, pământ jos
+Saturation augmentée ¦ Saturație mărită
+Saturation plus forte ¦ Saturație mai puternică
+Rouges plus saturés ¦ Roșuri mai saturate
+Jaune intensifié ¦ Galben intensificat
+Ciel plus bleu ¦ Cer mai albastru
+Peau plus douce ¦ Piele mai fină
+Désaturer ¦ Desaturează
+Verts d’automne ¦ Verzi de toamnă
+Reflets en moins (vitre, verre, vernis) ¦ Mai puține reflexii (geam, sticlă, lac)
+Taille des reflets (0 = moyenne) ¦ Mărimea reflexiilor (0 = medie)
+Poussière et rayures (automatique) ¦ Praf și zgârieturi (automat)
+Réduire le bruit ¦ Reduce zgomotul
+Netteté ¦ Claritate
+Clarté (contraste local) ¦ Claritate (contrast local)
+Flou de surface (garde les contours) ¦ Estompare de suprafață (păstrează contururile)
+Décentrement (maquette, tilt-shift) ¦ Descentrare (machetă, tilt-shift)
+Largeur de la bande ¦ Lățimea benzii
+Flou de l’objectif (bokeh) ¦ Estomparea obiectivului (bokeh)
+Ajouter du bruit ¦ Adaugă zgomot
+Poussière et rayures ¦ Praf și zgârieturi
+Passe-haut (pour accentuer en Incrustation) ¦ Trece-sus (pentru accentuare în Suprapunere)
+Esthétiques ¦ Estetice
+Garder les couleurs (0 / 1) ¦ Păstrează culorile (0 / 1)
+Tracé des contours ¦ Trasarea contururilor
+Contours lumineux (néon) ¦ Contururi luminoase (neon)
+Postérisation ¦ Posterizare
+Seuil (noir et blanc pur) ¦ Prag (alb-negru pur)
+Vers la droite (1) / gauche (0) ¦ Spre dreapta (1) / stânga (0)
+Peinture à l’huile ¦ Pictură în ulei
+Taille de la touche ¦ Mărimea tușei
+Taille des taches ¦ Mărimea petelor
+Dessin au crayon ¦ Desen în creion
+En couleur (0 / 1) ¦ Color (0 / 1)
+Taille des carreaux ¦ Mărimea pătratelor
+Demi-teinte (points d’imprimerie) ¦ Semiton (puncte de tipar)
+Taille des cristaux ¦ Mărimea cristalelor
+Éclairage (projecteur) ¦ Iluminare (proiector)
+Lumière X ¦ Lumină X
+Lumière Y ¦ Lumină Y
+Lumière ambiante ¦ Lumină ambientală
+Halo de lumière (flare) ¦ Halou de lumină (flare)
+À partir de (luminosité) ¦ Începând de la (luminozitate)
+Déformation ¦ Deformare
+Pincement / sphérisation ¦ Ciupire / sferizare
+Force (− sphère, + pincement) ¦ Forță (− sferă, + ciupire)
+Longueur d’onde ¦ Lungime de undă
+Ondulation (ronds dans l’eau) ¦ Undulare (cercuri în apă)
+Écart des ronds ¦ Distanța dintre cercuri
+Coordonnées polaires ¦ Coordonate polare
+Rectangle → polaire (0) / l’inverse (1) ¦ Dreptunghiular → polar (0) / invers (1)
+Minimum (assombrit, épaissit le sombre) ¦ Minimum (întunecă, îngroașă zonele închise)
+Maximum (éclaircit, épaissit le clair) ¦ Maximum (luminează, îngroașă zonele deschise)
+Décalage (avec retour de l’autre côté) ¦ Decalaj (cu revenire pe partea cealaltă)
+Enlever les reflets (vitre) ¦ Elimină reflexiile (geam)
+Reflets en moins ¦ Mai puține reflexii
+Vieille photo ravivée ¦ Fotografie veche înviorată
+Négatif → positif ¦ Negativ → pozitiv
+🖌 Forme du panneau Formes ¦ 🖌 Formă din panoul Forme
+Avec empattement ¦ Cu serife
+Sans empattement ¦ Fără serife
+Manuscrite ¦ De mână
+Extra-fin ¦ Extra-subțire
+Ultra-léger ¦ Ultra-ușor
+Léger ¦ Ușor
+Médium ¦ Mediu
+Demi-gras ¦ Semi-aldin
+Extra-gras ¦ Extra-aldin
+Aligné à gauche ¦ Aliniat la stânga
+Aligné à droite ¦ Aliniat la dreapta
+Justifié, dernière ligne à gauche ¦ Justificat, ultimul rând la stânga
+Justifié, dernière ligne centrée ¦ Justificat, ultimul rând centrat
+Justifié, dernière ligne à droite ¦ Justificat, ultimul rând la dreapta
+Tout justifié ¦ Totul justificat
+Ligatures et formes ¦ Ligaturi și forme
+Unicode : Latin étendu A ¦ Unicode: Latin extins A
+Unicode : Latin étendu B ¦ Unicode: Latin extins B
+Unicode : hébreu ¦ Unicode: ebraică
+Unicode : exposants et indices ¦ Unicode: exponenți și indici
+Unicode : flèches ¦ Unicode: săgeți
+Unicode : mathématiques ¦ Unicode: matematică
+Unicode : formes géométriques ¦ Unicode: forme geometrice
+Unicode : latin étendu D (abréviations anciennes) ¦ Unicode: latin extins D (abrevieri vechi)
+espace fine ¦ spațiu fin
+tiret conditionnel (césure) ¦ cratimă condițională (despărțire în silabe)
+mort au combat ¦ mort în luptă
+et (abréviation ancienne) ¦ et (abreviere veche)
+s long ¦ s lung
+Linéaire ¦ Liniar
+Radial ¦ Radial
+Angle (conique) ¦ Unghi (conic)
+Réfléchi ¦ Reflectat
+Losange ¦ Romb
+Premier plan → arrière-plan ¦ Prim-plan → fundal
+Hachures croisées ¦ Hașuri încrucișate
+Écailles ¦ Solzi
+Brin d’herbe ¦ Fir de iarbă
+Éclaboussure ¦ Stropitură
+Ma forme (d’après une sélection) ¦ Forma mea (după o selecție)
+Aérographe ¦ Aerograf
+Carré net ¦ Pătrat clar
+Étoiles semées ¦ Stele presărate
+Éclaboussures ¦ Stropituri
+Superposition (Écran) ¦ Suprapunere (Ecran)
+⌗ Cadrer et redresser ¦ ⌗ Încadrează și îndreaptă
+Une photo scannée de travers, avec ses bords blancs ou abîmés : on la redresse, puis on garde ce qui compte. ¦ O fotografie scanată strâmb, cu marginile albe sau deteriorate: o îndreptăm, apoi păstrăm ce contează.
+📐 Redresser tout seul ¦ 📐 Îndreaptă automat
+⌗ Recadrer ¦ ⌗ Decupează
+⧈ Photo prise de biais ¦ ⧈ Fotografie făcută oblic
+🎨 Couleurs passées, photo jaunie ¦ 🎨 Culori decolorate, fotografie îngălbenită
+Le temps jaunit, pâlit ou rosit les photos. « Enlever le jaunissement » remet chaque couleur à sa place ; « Raviver » redonne du contraste. ¦ Timpul îngălbenește, decolorează sau înroșește fotografiile. „Elimină îngălbenirea” pune fiecare culoare la locul ei; „Înviorează” redă contrastul.
+🟨 Enlever le jaunissement ¦ 🟨 Elimină îngălbenirea
+✨ Raviver une vieille photo ¦ ✨ Înviorează o fotografie veche
+Réglage automatique ¦ Reglaj automat
+🧹 Poussières et petites taches ¦ 🧹 Praf și pete mici
+Les points blancs ou noirs, les piqûres : l’app les cherche et les enlève une par une (avec le correcteur). Pour ne traiter qu’une partie, sélectionne-la d’abord. Ce qui reste : le correcteur 🩹 à la main. ¦ Punctele albe sau negre, pistruii hârtiei: aplicația le caută și le elimină unul câte unul (cu corectorul). Pentru a trata doar o parte, selecteaz-o mai întâi. Ce rămâne: corectorul 🩹 de mână.
+Sensibilité ¦ Sensibilitate
+Taille maximale d’une tache ¦ Mărimea maximă a unei pete
+🔍 Repérer et enlever les taches ¦ 🔍 Găsește și elimină petele
+🩹 Correcteur à la main ¦ 🩹 Corector de mână
+Filtre poussière et rayures ¦ Filtru praf și zgârieturi
+🩹 Déchirures, plis, rayures ¦ 🩹 Rupturi, pliuri, zgârieturi
+« Repérer les plis » trouve les lignes fines claires ou sombres et propose de les combler. À la main : le pinceau 🪡 Réparer — peins sur le pli, il est refait d’après ce qui l’entoure. Pour un morceau manquant (coin arraché), le tampon recopie une partie voisine. ¦ „Găsește pliurile” caută liniile fine deschise sau închise și propune să le umple. De mână: pensula 🪡 Repară — pictează peste pliu, este refăcut după ce îl înconjoară. Pentru o bucată lipsă (colț rupt), ștampila copiază o parte vecină.
+🔍 Repérer les plis et rayures ¦ 🔍 Găsește pliurile și zgârieturile
+🪡 Réparer au pinceau ¦ 🪡 Repară cu pensula
+➰ Entourer une zone… ¦ ➰ Încercuiește o zonă…
+🌫️ Grain et bruit ¦ 🌫️ Granulație și zgomot
+Une photo granuleuse ou un tirage abîmé : on adoucit sans perdre les contours. ¦ O fotografie granulată sau o copie deteriorată: o netezim fără să pierdem contururile.
+🙂 Netteté des visages ¦ 🙂 Claritatea fețelor
+Entoure un visage avec l’ellipse ◯, puis « Visage plus net » : il est débruité et accentué, seulement là (calque à part, que tu peux doser). ¦ Încercuiește o față cu elipsa ◯, apoi „Față mai clară”: zgomotul este redus și detaliile accentuate, doar acolo (strat separat, pe care îl poți doza).
+◯ Entourer le visage ¦ ◯ Încercuiește fața
+✨ Visage plus net ¦ ✨ Față mai clară
+Visage plus net ¦ Față mai clară
+🎯 Sélectionner le sujet ¦ 🎯 Selectează subiectul
+🌈 Coloriser une photo en noir et blanc ¦ 🌈 Colorizează o fotografie alb-negru
+Tout seul (un dégradé de couleurs d’époque), ou à la main : choisis une couleur ci-dessous et peins doucement, la lumière de la photo est gardée. ¦ Automat (un degrade de culori de epocă) sau de mână: alege o culoare mai jos și pictează ușor, lumina fotografiei se păstrează.
+🎨 Coloriser tout seul ¦ 🎨 Colorizează automat
+🖌 Coloriser au pinceau ¦ 🖌 Colorizează cu pensula
+✅ Comparer et enregistrer ¦ ✅ Compară și salvează
+Garde appuyé « 👁 Avant / après » (sous la photo) pour comparer, ou « ◧ Rideau » pour glisser de l’un à l’autre. La photo restaurée devient une nouvelle version : l’original reste. ¦ Ține apăsat „👁 Înainte / după” (sub fotografie) pentru a compara, sau „◧ Cortină” pentru a glisa de la una la alta. Fotografia restaurată devine o versiune nouă: originalul rămâne.
+💾 Enregistrer et afficher ¦ 💾 Salvează și afișează
+Garder le travail pour plus tard ¦ Păstrează lucrul pentru mai târziu
+Impossible d’ouvrir cette image. ¦ Imaginea aceasta nu poate fi deschisă.
+Chaque étape est facultative et se défait (↶). Rien n’abîme l’original : la photo restaurée devient une nouvelle version. ¦ Fiecare etapă este opțională și se poate anula (↶). Nimic nu strică originalul: fotografia restaurată devine o versiune nouă.
+Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup : tu vois chaque étape et tu choisis ¦ Reducerea zgomotului, praf, pliuri, contrast, claritate și colorizare dintr-o dată: vezi fiecare etapă și alegi
+✨ Restaurer en une fois ¦ ✨ Restaurează dintr-o dată
+ou étape par étape : ¦ sau etapă cu etapă:
+Réparer ¦ Repară
+🪡 Réparer ¦ 🪡 Repară
+Déplacer la vue ¦ Mută vederea
+Réparer un pli ou une déchirure (R) : peins dessus, c’est refait d’après les alentours ¦ Repară un pliu sau o ruptură (R): pictează peste, este refăcut după împrejurimi
+Gomme (E) : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu) ¦ Radieră (E): șterge stratul ales; pe fotografie, o ascunde cu o mască (nu se pierde nimic)
+Dégradé (G) : glisse pour le tracer ; sur un masque, il fond le calque ¦ Degrade (G): trage pentru a-l trasa; pe o mască, estompează stratul
+Déplacer un élément d’un calque (V) ¦ Mută un element al unui strat (V)
+Déplacer un élément d’un calque ¦ Mută un element al unui strat
+Sélection rectangle (M) ¦ Selecție dreptunghiulară (M)
+Sélection rectangle ¦ Selecție dreptunghiulară
+Sélection ellipse (⇧M) ¦ Selecție eliptică (⇧M)
+Sélection ellipse ¦ Selecție eliptică
+Lasso : entourer à main levée (L) ¦ Lasou: încercuiește cu mâna liberă (L)
+Lasso : entourer à main levée ¦ Lasou: încercuiește cu mâna liberă
+Plume : sélection point par point (P) — double-clic ou Entrée pour fermer ¦ Peniță: selecție punct cu punct (P) — dublu clic sau Enter pentru a închide
+Plume : sélection point par point — double-clic ou Entrée pour fermer ¦ Peniță: selecție punct cu punct — dublu clic sau Enter pentru a închide
+Sélection automatique (baguette magique) (W) ¦ Selecție automată (bagheta magică) (W)
+Sélection automatique (baguette magique) ¦ Selecție automată (bagheta magică)
+Recadrer et redresser (C) ¦ Decupează și îndreaptă (C)
+Recadrer et redresser ¦ Decupează și îndreaptă
+Correcteur de taches (J) ¦ Corector de pete (J)
+Correcteur de taches ¦ Corector de pete
+🩹 Correcteur de taches ¦ 🩹 Corector de pete
+Réparer un pli ou une déchirure : peins dessus, c’est refait d’après les alentours ¦ Repară un pliu sau o ruptură: pictează peste, este refăcut după împrejurimi
+Tampon : un endroit, ou une zone sélectionnée (S) ¦ Ștampilă: un loc sau o zonă selectată (S)
+Tampon : un endroit, ou une zone sélectionnée ¦ Ștampilă: un loc sau o zonă selectată
+Pinceau (B) ¦ Pensulă (B)
+Gomme : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu) ¦ Radieră: șterge stratul ales; pe fotografie, o ascunde cu o mască (nu se pierde nimic)
+Formes : rectangle, ellipse, ligne, flèche (U) ¦ Forme: dreptunghi, elipsă, linie, săgeată (U)
+Formes : rectangle, ellipse, ligne, flèche ¦ Forme: dreptunghi, elipsă, linie, săgeată
+Dégradé : glisse pour le tracer ; sur un masque, il fond le calque ¦ Degrade: trage pentru a-l trasa; pe o mască, estompează stratul
+Texte (T) ¦ Text (T)
+Main, ou barre d’espace (H) ¦ Mână sau bara de spațiu (H)
+Main, ou barre d’espace ¦ Mână sau bara de spațiu
+Zoom (Z) — ⌥ pour reculer ¦ Zoom (Z) — ⌥ pentru a micșora
+Zoom — ⌥ pour reculer ¦ Zoom — ⌥ pentru a micșora
+💾 Enregistrer le projet (pour continuer plus tard) ¦ 💾 Salvează proiectul (pentru a continua mai târziu)
+📂 Ouvrir un projet… ¦ 📂 Deschide un proiect…
+Enregistrer et afficher cette version ¦ Salvează și afișează această versiune
+Enregistrer sans l’afficher ¦ Salvează fără a o afișa
+Copie séparée ¦ Copie separată
+ℹ️ Informations… ¦ ℹ️ Informații…
+⤓ Exporter l’image (PNG, JPG, imprimer)… ¦ ⤓ Exportă imaginea (PNG, JPG, tipărire)…
+⤓ Exporter l’avant / après… ¦ ⤓ Exportă înainte / după…
+🗂 Exporter en PSD (avec les calques)… ¦ 🗂 Exportă în PSD (cu straturile)…
+🗂 Importer les calques d’un PSD… ¦ 🗂 Importă straturile unui PSD…
+⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos… ¦ ⚡ Acțiuni: setări salvate, de refăcut pe mai multe fotografii…
+⚡ Passer à la retouche rapide ¦ ⚡ Treci la retușarea rapidă
+🕘 Historique ¦ 🕘 Istoric
+🎚 Réglages, niveaux et courbe ¦ 🎚 Ajustări, niveluri și curbă
+🎨 Teinte/Saturation… ¦ 🎨 Nuanță/Saturație…
+⌗ Recadrer et redresser ¦ ⌗ Decupează și îndreaptă
+📐 Redresser automatiquement ¦ 📐 Îndreaptă automat
+Annuler le recadrage ¦ Anulează decuparea
+⧈ Redresser la perspective (photo prise de biais)… ¦ ⧈ Îndreaptă perspectiva (fotografie făcută oblic)…
+Enlever la perspective ¦ Elimină perspectiva
+📏 Taille de l’image… ¦ 📏 Mărimea imaginii…
+⬚ Taille de la zone de travail… ¦ ⬚ Mărimea zonei de lucru…
+🔄 Rotation de l’image ¦ 🔄 Rotirea imaginii
+↻ 90° horaire ¦ ↻ 90° în sensul acelor de ceasornic
+↺ 90° antihoraire ¦ ↺ 90° în sens invers acelor de ceasornic
+Angle… ¦ Unghi…
+📐 Redresser l’horizon (tracer une ligne)… ¦ 📐 Îndreaptă orizontul (trasează o linie)…
+⇆ Symétrie horizontale de l’image ¦ ⇆ Simetrie orizontală a imaginii
+⇅ Symétrie verticale de l’image ¦ ⇅ Simetrie verticală a imaginii
+✨ Restaurer en une fois… ¦ ✨ Restaurează dintr-o dată…
+🧭 Restaurer une vieille photo (pas à pas) ¦ 🧭 Restaurează o fotografie veche (pas cu pas)
+🔍 Repérer les plis et rayures… ¦ 🔍 Găsește pliurile și zgârieturile…
+🪡 Réparer au pinceau (plis, déchirures) ¦ 🪡 Repară cu pensula (pliuri, rupturi)
+🧹 Poussière et rayures (Filtres) ¦ 🧹 Praf și zgârieturi (Filtre)
+🪟 Enlever les reflets (vitre) : calque à part ¦ 🪟 Elimină reflexiile (geam): strat separat
+🎨 Coloriser : calque de réglage (dégradé) ¦ 🎨 Colorizează: strat de ajustare (degrade)
+🖌 Coloriser au pinceau : calque « Couleur » ¦ 🖌 Colorizează cu pensula: strat „Culoare”
+🪪 Recadrer en photo d’identité… ¦ 🪪 Decupează ca fotografie de identitate…
+🪪 Portraits de plusieurs fiches… ¦ 🪪 Portretele mai multor fișe…
+💧 Fluidité (déformer au pinceau)… ¦ 💧 Fluidizare (deformare cu pensula)…
+🪄 Gomme magique (fond uni → transparent)… ¦ 🪄 Radieră magică (fundal uniform → transparent)…
+✨ Affiner le bord du masque (cheveux, contours)… ¦ ✨ Rafinează marginea măștii (păr, contururi)…
+☁️ Remplacer le ciel… ¦ ☁️ Înlocuiește cerul…
+✂️ Détourer une personne (fond transparent, flou, uni)… ¦ ✂️ Decupează o persoană (fundal transparent, estompat, uniform)…
+🔍 Agrandir ×2 / ×4… ¦ 🔍 Mărește ×2 / ×4…
+🧩 Panorama : assembler avec d’autres photos… ¦ 🧩 Panoramă: asamblează cu alte fotografii…
+Calque ¦ Strat
+＋ Nouveau calque ¦ ＋ Strat nou
+📁 Nouveau groupe ¦ 📁 Grup nou
+Grouper le calque choisi ¦ Grupează stratul ales
+🎚 Nouveau calque de réglage ¦ 🎚 Strat de ajustare nou
+🎨 Nouveau réglage Teinte/Saturation ¦ 🎨 Ajustare Nuanță/Saturație nouă
+Nouveau réglage Teinte/Saturation ¦ Ajustare Nuanță/Saturație nouă
+🖼️ Placer une image… ¦ 🖼️ Plasează o imagine…
+▦ Nouveau calque de dégradé… ¦ ▦ Strat de degrade nou…
+▩ Nouveau calque de motif… ¦ ▩ Strat de model nou…
+▩ Créer un motif… ¦ ▩ Creează un model…
+▩ Créer un motif ¦ ▩ Creează un model
+＋ Créer un motif… ¦ ＋ Creează un model…
+Copier la sélection sur un calque ¦ Copiază selecția pe un strat
+🎭 Ajouter un masque au calque choisi ¦ 🎭 Adaugă o mască la stratul ales
+🎭 Masque qui cache tout (⌥ + clic sur 🎭) ¦ 🎭 Mască ce ascunde tot (⌥ + clic pe 🎭)
+Masque d’après la sélection ¦ Mască după selecție
+Masque qui cache la sélection ¦ Mască ce ascunde selecția
+Inverser le masque ¦ Inversează masca
+Retirer le masque ¦ Scoate masca
+inverser le masque ¦ inversează masca
+retirer le masque ¦ scoate masca
+🗂 Calques ¦ 🗂 Straturi
+🎯 Sélectionner le sujet (automatique) ¦ 🎯 Selectează subiectul (automat)
+✂️ Détourer une personne… ¦ ✂️ Decupează o persoană…
+Désélectionner ¦ Deselectează
+Inverser ¦ Inversează
+Contour progressif… ¦ Contur progresiv…
+Contour progressif ¦ Contur progresiv
+Agrandir… ¦ Extinde…
+Réduire… ¦ Restrânge…
+Remplir avec la couleur ¦ Umple cu culoarea
+Effacer (transparent) ¦ Șterge (transparent)
+Recadrer sur la sélection ¦ Decupează pe selecție
+Filtre ¦ Filtru
+↻ Refaire le dernier filtre ¦ ↻ Refă ultimul filtru
+✨ Filtres rapides et filtres du calque (panneau) ¦ ✨ Filtre rapide și filtrele stratului (panou)
+Enlever les filtres rapides ¦ Elimină filtrele rapide
+Replier / ouvrir le panneau de droite ¦ Strânge / deschide panoul din dreapta
+◧ Avant / après en rideau ¦ ◧ Înainte / după în cortină
+Toute l’image ¦ Toată imaginea
+Nom du projet de retouche ¦ Numele proiectului de retușare
+Le nom du projet de retouche (tape pour le changer) ¦ Numele proiectului de retușare (tastează pentru a-l schimba)
+Passer à la retouche rapide (celle de la version 0.5.0) : réglages, courbe, taches, tampon — moins de boutons ¦ Treci la retușarea rapidă (cea din versiunea 0.5.0): ajustări, curbă, pete, ștampilă — mai puține butoane
+⚡ Rapide ¦ ⚡ Rapid
+Exporter : l’image retouchée (PNG, JPG, imprimer) ou l’avant / après ¦ Exportă: imaginea retușată (PNG, JPG, tipărire) sau înainte / după
+Enregistrer le projet : tout le travail (calques, masques, réglages…) pour le rouvrir et continuer ¦ Salvează proiectul: toată munca (straturi, măști, ajustări…) pentru a-l redeschide și a continua
+🖼 L’image retouchée (PNG, JPG, imprimer)… ¦ 🖼 Imaginea retușată (PNG, JPG, tipărire)…
+◧ Avant / après (côte à côte ou rideau)… ¦ ◧ Înainte / după (alăturate sau cortină)…
+Dureté ¦ Duritate
+Sorte de pinceau ¦ Fel de pensulă
+Couleurs rapides ¦ Culori rapide
+contour ¦ contur
+Contour du texte ¦ Conturul textului
+Couleur du contour ¦ Culoarea conturului
+Épaisseur du contour ¦ Grosimea conturului
+épaisseur ¦ grosime
+ombre ¦ umbră
+Ombre du texte ¦ Umbra textului
+Couleur de l’ombre ¦ Culoarea umbrei
+Tampon : endroit à recopier, aligné ¦ Ștampilă: locul de copiat, aliniat
+🎯 Choisir l’endroit à recopier ¦ 🎯 Alege locul de copiat
+Coché : l’endroit recopié suit le pinceau d’un trait à l’autre. Décoché : chaque trait repart du même endroit. ¦ Bifat: locul copiat urmează pensula de la o trăsătură la alta. Debifat: fiecare trăsătură pornește din același loc.
+aligné ¦ aliniat
+Réparer : grain, repérer les plis ¦ Repară: granulație, găsește pliurile
+Coché : un peu du grain de la photo autour est remis dans la zone réparée, pour qu’elle ne paraisse pas trop lisse. ¦ Bifat: puțin din granulația fotografiei din jur este readusă în zona reparată, ca să nu pară prea netedă.
+garder le grain ¦ păstrează granulația
+Trouver tout seul les lignes fines (plis, rayures) et proposer de les combler ¦ Găsește automat liniile fine (pliuri, zgârieturi) și propune să le umple
+🔍 Repérer les plis ¦ 🔍 Găsește pliurile
+Texte gras ¦ Text aldin
+Texte italique ¦ Text cursiv
+Forme (rectangle, ellipse, flèche…) ¦ Formă (dreptunghi, elipsă, săgeată…)
+Rectangle arrondi ¦ Dreptunghi rotunjit
+Forme remplie ¦ Formă plină
+remplie ¦ plină
+Couleur de fond des formes ¦ Culoarea de umplere a formelor
+Baguette : tolérance ¦ Baghetă: toleranță
+Jusqu’où une couleur peut s’écarter de celle cliquée pour être prise : petit = la même teinte seulement, grand = des teintes voisines aussi. ¦ Cât de mult se poate abate o culoare de cea pe care ai făcut clic pentru a fi luată: mic = doar aceeași nuanță, mare = și nuanțele vecine.
+Tolérance ¦ Toleranță
+Baguette : contiguë ¦ Baghetă: contiguă
+contiguë ¦ contiguă
+Sélectionner le sujet ¦ Selectează subiectul
+Le fond est reconnu sur les bords de la photo ; la tolérance règle jusqu’où il va ¦ Fundalul este recunoscut pe marginile fotografiei; toleranța reglează cât de departe merge
+🎯 Sujet ¦ 🎯 Subiect
+Actions de la sélection ¦ Acțiunile selecției
+⇧ ajouter · ⌥ enlever ¦ ⇧ adaugă · ⌥ scoate
+→ Calque ¦ → Strat
+Remplir ¦ Umple
+Effacer ¦ Șterge
+Masque ¦ Mască
+Recadrer ¦ Decupează
+Recadrage : proportions, redresser ¦ Decupare: proporții, îndreptare
+Proportions ¦ Proporții
+Libres ¦ Libere
+Celles de la photo ¦ Cele ale fotografiei
+Carré 1:1 ¦ Pătrat 1:1
+A4 portrait ¦ A4 portret
+Redresser ¦ Îndreaptă
+Trouve l’angle des grandes lignes (horizon, murs, cadres) ¦ Găsește unghiul liniilor mari (orizont, ziduri, rame)
+📐 Auto ¦ 📐 Auto
+✓ Valider ¦ ✓ Validează
+Perspective ¦ Perspectivă
+Place les 4 coins sur les coins de ce qui doit devenir rectangulaire (la photo, le document, la façade). ¦ Pune cele 4 colțuri pe colțurile a ceea ce trebuie să devină dreptunghiular (fotografia, documentul, fațada).
+Coins aux bords ¦ Colțuri la margini
+Dégradé : couleurs, forme, options ¦ Degrade: culori, formă, opțiuni
+Modifier le dégradé : couleurs, transparence, préréglages ¦ Modifică degradeul: culori, transparență, presetări
+Forme du dégradé ¦ Forma degradeului
+Inverser le dégradé ¦ Inversează degradeul
+inverser ¦ inversează
+Tramage ¦ Dithering
+tramage ¦ dithering
+Un très léger grain qui évite les « marches » visibles dans les dégradés doux. ¦ O granulație foarte ușoară care evită „treptele” vizibile în degradeurile fine.
+Masque : cacher / montrer ¦ Mască: ascunde / arată
+⬛ cacher ¦ ⬛ ascunde
+⬜ montrer ¦ ⬜ arată
+Aide de l’outil ¦ Ajutorul instrumentului
+Couleurs (premier plan et arrière-plan) ¦ Culori (prim-plan și fundal)
+Noir et blanc (D) ¦ Alb-negru (D)
+Couleurs par défaut : noir et blanc ¦ Culori implicite: negru și alb
+Intervertir les deux couleurs (X) ¦ Inversează cele două culori (X)
+Intervertir les couleurs ¦ Inversează culorile
+Couleur d’arrière-plan (fond des formes) : clic pour la changer ¦ Culoarea de fundal (umplerea formelor): clic pentru a o schimba
+Couleur de premier plan (pinceau, texte, formes) : clic pour la changer ¦ Culoarea de prim-plan (pensulă, text, forme): clic pentru a o schimba
+Replier le panneau (plus de place pour la photo) — Tab ¦ Strânge panoul (mai mult loc pentru fotografie) — Tab
+Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ) ¦ Trage pentru a lărgi sau a îngusta panoul (dublu clic: mărimea inițială)
+Onglets du panneau de droite ¦ Filele panoului din dreapta
+Propriétés : Teinte/Saturation, masque, position et taille du calque choisi ¦ Proprietăți: Nuanță/Saturație, mască, poziția și mărimea stratului ales
+ⓘ Propriétés ¦ ⓘ Proprietăți
+Caractère : police, variante (graisse), taille, interligne, approche… ¦ Caracter: font, variantă (grosime), mărime, interlinie, spațiere…
+🔤 Caractère ¦ 🔤 Caracter
+Motifs : remplir d’un motif, créer les siens ¦ Modele: umple cu un model, creează-le pe ale tale
+▩ Motifs ¦ ▩ Modele
+Motifs ¦ Modele
+Formes de pinceau : préréglages, pas, angle, dispersion, forme d’après une sélection ¦ Forme de pensulă: presetări, pas, unghi, dispersie, formă după o selecție
+🖌 Formes ¦ 🖌 Forme
+Restaurer une vieille photo, pas à pas ¦ Restaurează o fotografie veche, pas cu pas
+🧭 Restaurer ¦ 🧭 Restaurează
+Comme la saturation, mais les couleurs déjà vives bougent peu : les teintes ternes (peau, ciel pâle) se ravivent d’abord. ¦ Ca saturația, dar culorile deja vii se schimbă puțin: nuanțele șterse (piele, cer pal) se înviorează mai întâi.
+Éclaircit ou assombrit les tons moyens sans toucher au noir ni au blanc : au-dessus de 100, plus clair ; en dessous, plus sombre. ¦ Luminează sau întunecă tonurile medii fără să atingă negrul și albul: peste 100, mai deschis; sub, mai închis.
+Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou ⌫), ou le glisser hors du cadre. ¦ Clic pe curbă: adaugi un punct · trage: îl muți · pentru a-l elimina: alege-l, apoi „Elimină punctul” (sau ⌫), ori trage-l în afara cadrului.
+Enlever le point ¦ Elimină punctul
+🎨 Colorisation douce (photo en noir et blanc) ¦ 🎨 Colorizare blândă (fotografie alb-negru)
+Mieux dans un calque de réglage (Image → Coloriser) : on le dose, on le masque, on l’enlève. Pour colorier à la main : Image → Coloriser au pinceau. ¦ Mai bine într-un strat de ajustare (Imagine → Colorizează): îl dozezi, îl mascezi, îl elimini. Pentru a colora de mână: Imagine → Colorizează cu pensula.
+Filtres rapides, après les réglages : sur la photo, ou dans un calque de réglage (sur tout ce qui est dessous, ou seulement le calque juste dessous). Les mêmes sur l’image enregistrée en pleine taille. ¦ Filtre rapide, după ajustări: pe fotografie sau într-un strat de ajustare (pe tot ce este dedesubt sau doar pe stratul chiar dedesubt). Aceleași pe imaginea salvată la mărime completă.
+Renforce le contraste des détails moyens (rides, plis d’un tissu, écriture) sans changer le contraste général. ¦ Întărește contrastul detaliilor medii (riduri, pliurile unei țesături, scris) fără să schimbe contrastul general.
+Enlever les filtres ¦ Elimină filtrele
+Variante : la graisse (Light, Regular, Bold, Black…) et l’italique ¦ Variantă: grosimea (Light, Regular, Bold, Black…) și cursivul
+Taille (en points de l’image) ¦ Mărime (în puncte ale imaginii)
+Interligne (vide = automatique, 120 % de la taille) ¦ Interlinie (gol = automat, 120 % din mărime)
+Crénage : les paires de lettres rapprochées selon la police (Métrique) ou pas du tout (0) ¦ Kerning: perechile de litere apropiate după font (Metric) sau deloc (0)
+Approche : l’espace entre toutes les lettres, en millièmes de la taille ¦ Spațiere: spațiul dintre toate literele, în miimi din mărime
+Échelle verticale ¦ Scară verticală
+Échelle horizontale ¦ Scară orizontală
+Décalage vertical (au-dessus de la ligne de base si positif) ¦ Decalaj vertical (deasupra liniei de bază dacă e pozitiv)
+Lissage des bords des lettres ¦ Netezirea marginilor literelor
+Lissage ¦ Netezire
+Lissé ¦ Netezit
+Aucun (bords nets, pixels) ¦ Fără (margini clare, pixeli)
+Alignement du paragraphe ¦ Alinierea paragrafului
+Pour les prochains textes. Choisis un texte avec ➤ pour le changer. ¦ Pentru textele următoare. Alege un text cu ➤ pentru a-l schimba.
+Pour les prochains textes. Clique sur un texte (outil Texte ou ➤) pour le changer. ¦ Pentru textele următoare. Fă clic pe un text (instrumentul Text sau ➤) pentru a-l schimba.
+✍️ Texte en cours d’écriture : chaque réglage s’y applique tout de suite. ¦ ✍️ Text în curs de scriere: fiecare setare se aplică imediat.
+Métrique ¦ Metric
+Les variantes viennent des polices de l’ordinateur (Mac, Windows, Linux) quand l’app peut les lire ; sinon les graisses habituelles. ¦ Variantele vin din fonturile calculatorului (Mac, Windows, Linux) când aplicația le poate citi; altfel, grosimile obișnuite.
+Retrait de la première ligne (négatif : en saillie) ¦ Retragerea primului rând (negativ: în afară)
+Largeur du bloc de texte : les lignes se coupent toutes seules (vide = texte simple, une ligne par paragraphe) ¦ Lățimea blocului de text: rândurile se despart singure (gol = text simplu, câte un rând pe paragraf)
+Espace avant chaque paragraphe ¦ Spațiu înaintea fiecărui paragraf
+Espace après chaque paragraphe ¦ Spațiu după fiecare paragraf
+Couper les mots longs en fin de ligne, avec un tiret (règles simples du français ; un tiret conditionnel ⌥- dans un mot est pris en premier) ¦ Desparte cuvintele lungi la sfârșit de rând, cu o cratimă (reguli simple ale francezei; o cratimă condițională ⌥- dintr-un cuvânt are prioritate)
+Ω Glyphes ¦ Ω Glife
+Police (famille) ¦ Font (familie)
+(Auto) ¦ (Auto)
+⟸ gauche ¦ ⟸ stânga
+≡ centre ¦ ≡ centru
+droite ⟹ ¦ dreapta ⟹
+Symboles ¦ Simboluri
+Code (U+00E9) ou caractère ¦ Cod (U+00E9) sau caracter
+Chercher un glyphe ¦ Caută o glifă
+Pour un bloc de texte, glisse un cadre avec l’outil Texte T au lieu de cliquer, ou donne sa largeur ici. La justification ne vaut que pour un bloc. ¦ Pentru un bloc de text, trage un cadru cu instrumentul Text T în loc să faci clic, sau dă-i lățimea aici. Justificarea se aplică doar unui bloc.
+Clic : ajouté au texte en cours d’écriture (ou à la fin du texte choisi). Sans texte : copié. ¦ Clic: adăugat la textul în curs de scriere (sau la sfârșitul textului ales). Fără text: copiat.
+Choisis d’abord un texte (outil T). ¦ Alege mai întâi un text (instrumentul T).
+Un autre média, rattaché aux mêmes fiches ¦ Alt fișier media, legat de aceleași fișe
+Gardée dans les versions, la photo affichée ne change pas ¦ Păstrată în versiuni, fotografia afișată nu se schimbă
+avec les annotations (calques visibles) ¦ cu adnotările (straturile vizibile)
+Avec les annotations (calques visibles) ¦ Cu adnotările (straturile vizibile)
+L’original n’est jamais modifié : chaque retouche est une version de la photo, et tu choisis celle qui s’affiche partout. ¦ Originalul nu este niciodată modificat: fiecare retușare este o versiune a fotografiei, iar tu alegi pe cea care se afișează peste tot.
+🖼 Enregistrer l’image dans les Médias ¦ 🖼 Salvează imaginea în fișierele media
+L’image (calques compris) remplace celle du média ; le projet, lui, garde tous les calques pour continuer ¦ Imaginea (cu straturile) o înlocuiește pe cea a fișierului media; proiectul păstrează toate straturile pentru a continua
+Enregistrer le projet (calques, masques, réglages) ¦ Salvează proiectul (straturi, măști, ajustări)
+la retouche est fermée ¦ retușarea este închisă
+Clique sur une étape pour revenir à ce moment-là ; les étapes suivantes restent (en gris) tant que tu ne fais rien d’autre. ¦ Fă clic pe o etapă pentru a reveni la acel moment; etapele următoare rămân (cu gri) cât timp nu faci altceva.
+Tu peins le masque (pinceau : ⬛ cacher / ⬜ montrer). Clic : revenir au calque ¦ Pictezi masca (pensulă: ⬛ ascunde / ⬜ arată). Clic: revii la strat
+Masque : clic pour le peindre au pinceau ¦ Mască: clic pentru a o picta cu pensula
+⇧ Maj + clic : désactiver / réactiver le masque ¦ ⇧ Shift + clic: dezactivează / reactivează masca
+⌥ Alt + clic : voir le masque seul ¦ ⌥ Alt + clic: vezi doar masca
+touche \ : le masque en rouge par-dessus ¦ tasta \: masca cu roșu deasupra
+Ajouter un masque (cacher une partie sans l’effacer) — ⌥ / Alt + clic : un masque qui cache tout (ou cache la sélection) ¦ Adaugă o mască (ascunde o parte fără s-o ștergi) — ⌥ / Alt + clic: o mască ce ascunde tot (sau ascunde selecția)
+masque ¦ mască
+Ranger dans un groupe ¦ Pune într-un grup
+(hors groupe) ¦ (în afara grupului)
+Glisser pour ranger : au-dessus, en dessous, ou dans un groupe (lâcher au milieu d’un groupe) ¦ Trage pentru a aranja: deasupra, dedesubt sau într-un grup (eliberează în mijlocul unui grup)
+Calque de réglage ¦ Strat de ajustare
+La photo (réglages, taches, tampon) ¦ Fotografia (ajustări, pete, ștampilă)
+Supprimer le groupe (ce qu’il contient reste) ¦ Șterge grupul (ce conține rămâne)
+Retirer la photo des calques (⌘Z pour la remettre) ¦ Scoate fotografia din straturi (⌘Z pentru a o pune înapoi)
+Mode de fusion : comment le calque se mélange à ce qui est dessous ¦ Mod de îmbinare: cum se amestecă stratul cu ce este dedesubt
+Fond : dose seulement le contenu du calque, pas ses effets (ombre, lueur, contour). À 0 %, il ne reste que les effets. ¦ Umplere: dozează doar conținutul stratului, nu și efectele lui (umbră, strălucire, contur). La 0 % rămân doar efectele.
+Effets du calque : ombre portée, lueur externe, contour, incrustation de couleur ¦ Efectele stratului: umbră proiectată, strălucire exterioară, contur, suprapunere de culoare
+Objet dynamique : agrandir, réduire, tourner sans perte (l’image d’origine est gardée) ¦ Obiect inteligent: mărește, micșorează, rotește fără pierdere (imaginea originală se păstrează)
+🧩 Objet dynamique ¦ 🧩 Obiect inteligent
+Une autre image à la même place, même taille, même rotation ¦ Altă imagine în același loc, aceeași mărime, aceeași rotire
+Remplacer… ¦ Înlocuiește…
+Remettre l’image à sa taille d’origine (et droite) ¦ Readu imaginea la mărimea originală (și dreaptă)
+Un calque de filtres juste au-dessus, qui ne touche que cette image : on peut le régler, le doser, le cacher ¦ Un strat de filtre chiar deasupra, care atinge doar această imagine: îl poți regla, doza, ascunde
+✨ Filtre dynamique ¦ ✨ Filtru inteligent
+Figer l’image en pixels, à la taille où elle est (plus d’agrandissement sans perte) ¦ Fixează imaginea în pixeli, la mărimea la care este (fără mărire fără pierdere)
+Pixelliser ¦ Rasterizează
+Couleurs, transparence, forme, préréglages ¦ Culori, transparență, formă, presetări
+▦ Modifier le dégradé… ¦ ▦ Modifică degradeul…
+Motif, échelle, angle, décalage ¦ Model, scară, unghi, decalaj
+▩ Modifier le motif… ¦ ▩ Modifică modelul…
+Comme un masque d’écrêtage de Photoshop ¦ Ca o mască de decupare din Photoshop
+régler… ¦ reglează…
+ne touche que l’élément juste dessous ¦ atinge doar elementul chiar dedesubt
+touche tout ce qui est dessous ¦ atinge tot ce este dedesubt
+(seulement l’élément dessous) ¦ (doar elementul de dedesubt)
+(tout ce qui est dessous) ¦ (tot ce este dedesubt)
+régler la photo ¦ reglează fotografia
+＋ dans un calque de réglage ¦ ＋ într-un strat de ajustare
+Réglages et filtres dans un calque à part, qu’on peut masquer, doser ou limiter à un calque ¦ Ajustări și filtre într-un strat separat, pe care îl poți masca, doza sau limita la un strat
+✨ Filtres : ¦ ✨ Filtre:
+Changer les réglages de ce filtre ¦ Schimbă setările acestui filtru
+vider ¦ golește
+groupe vide : glisse un calque ici (⠿), ou range-le avec 📁 ¦ grup gol: trage un strat aici (⠿) sau pune-l cu 📁
+Le pinceau, les formes et le texte vont sur le calque choisi (en bleu). 📁 un groupe peut contenir des calques et d’autres groupes ; 🎚 un calque de réglage applique réglages et filtres à ce qui est dessous (ou seulement à l’élément juste dessous). 🎭 un masque cache sans effacer. ¦ Pensula, formele și textul merg pe stratul ales (cu albastru). 📁 un grup poate conține straturi și alte grupuri; 🎚 un strat de ajustare aplică ajustări și filtre la ce este dedesubt (sau doar la elementul chiar dedesubt). 🎭 o mască ascunde fără să șteargă.
+＋ Calque ¦ ＋ Strat
+＋ Groupe ¦ ＋ Grup
+＋ Réglage ¦ ＋ Ajustare
+🖼️ Image ¦ 🖼️ Imagine
+Une image de la base ou de l’ordinateur, sur un nouveau calque, en objet dynamique (agrandir, réduire, tourner sans perte) ¦ O imagine din bază sau de pe calculator, pe un strat nou, ca obiect inteligent (mărește, micșorează, rotește fără pierdere)
+Un groupe vide au-dessus du calque choisi ¦ Un grup gol deasupra stratului ales
+Réglages et filtres dans un calque ¦ Ajustări și filtre într-un strat
+La photo a été retirée des calques : la remettre tout en bas ¦ Fotografia a fost scoasă din straturi: pune-o înapoi cel mai jos
+↺ Remettre la photo ¦ ↺ Pune fotografia înapoi
+Met le calque choisi dans un nouveau groupe (⌘G) ¦ Pune stratul ales într-un grup nou (⌘G)
+Grouper ¦ Grupează
+Sélection → calque ¦ Selecție → strat
+Aucun calque. ¦ Niciun strat.
+Choisis d’abord un calque. ¦ Alege mai întâi un strat.
+Nouveau calque ¦ Strat nou
+Nouveau calque de réglage ¦ Strat de ajustare nou
+Photo remise dans les calques ¦ Fotografia a fost pusă înapoi în straturi
+Masque ajouté : la sélection est cachée. ¦ Mască adăugată: selecția este ascunsă.
+Masque ajouté : tout est caché ; peins en ⬜ pour montrer. ¦ Mască adăugată: totul este ascuns; pictează cu ⬜ pentru a arăta.
+Masque ajouté : peins en ⬛ pour cacher, en ⬜ pour montrer. ¦ Mască adăugată: pictează cu ⬛ pentru a ascunde, cu ⬜ pentru a arăta.
+Masque seul : blanc = montré, noir = caché (⌥ + clic pour revenir) ¦ Doar masca: alb = arătat, negru = ascuns (⌥ + clic pentru a reveni)
+Ce calque est verrouillé. ¦ Stratul acesta este blocat.
+Filtre dynamique : choisis un filtre (« ＋ Ajouter un filtre… ») ; il ne touche que cette image, et reste réglable. ¦ Filtru inteligent: alege un filtru („＋ Adaugă un filtru…”); atinge doar această imagine și rămâne reglabil.
+verrouillé ¦ blocat
+déverrouillé ¦ deblocat
+seulement sur l’élément dessous ¦ doar pe elementul de dedesubt
+sur tout ce qui est dessous ¦ pe tot ce este dedesubt
+Ouvrir le panneau (Réglages, Calques…) — Tab ¦ Deschide panoul (Ajustări, Straturi…) — Tab
+Glisse pour te déplacer dans l’image zoomée (la barre d’espace fait pareil avec n’importe quel outil). ¦ Trage pentru a te deplasa în imaginea mărită (bara de spațiu face la fel cu orice instrument).
+Clique sur un trait, une forme, un texte ou une zone copiée d’un calque, puis glisse-le. ⌫ le supprime, double-clic sur un texte pour le réécrire. ¦ Fă clic pe o trăsătură, o formă, un text sau o zonă copiată dintr-un strat, apoi trage-l. ⌫ îl șterge, dublu clic pe un text pentru a-l rescrie.
+Glisse pour sélectionner un rectangle (⇧ en plus : ajouter, ⌥ : enlever). Les réglages de la barre agissent ensuite sur la sélection. ¦ Trage pentru a selecta un dreptunghi (⇧ în plus: adaugă, ⌥: scoate). Setările din bară acționează apoi asupra selecției.
+Glisse pour sélectionner un ovale (⇧ : ajouter, ⌥ : enlever). ¦ Trage pentru a selecta un oval (⇧: adaugă, ⌥: scoate).
+Entoure à main levée la zone à sélectionner (⇧ : ajouter, ⌥ : enlever). ¦ Încercuiește cu mâna liberă zona de selectat (⇧: adaugă, ⌥: scoate).
+Plume : clique point par point autour de la zone ; double-clic, Entrée ou clic sur le premier point pour fermer. Échap : abandonner. ¦ Peniță: fă clic punct cu punct în jurul zonei; dublu clic, Enter sau clic pe primul punct pentru a închide. Esc: renunță.
+Clique sur une couleur : tous les points voisins de teinte proche sont sélectionnés (Tolérance). ⇧ : ajouter, ⌥ : enlever. ¦ Fă clic pe o culoare: toate punctele vecine de nuanță apropiată sunt selectate (Toleranță). ⇧: adaugă, ⌥: scoate.
+Glisse les poignées du cadre (ou trace un nouveau cadre), choisis des proportions, redresse avec le curseur, puis « ✓ Valider ». ¦ Trage mânerele cadrului (sau trasează un cadru nou), alege proporții, îndreaptă cu cursorul, apoi „✓ Validează”.
+Clic : zoomer ici · ⌥ + clic : reculer · ou glisse pour zoomer sur une zone. ¦ Clic: mărește aici · ⌥ + clic: micșorează · sau trage pentru a mări o zonă.
+Glisse les 4 coins sur les coins de la photo, du document ou de la façade prise de biais, puis « ✓ Valider » : elle est remise à plat. À faire de préférence avant les corrections de taches. ¦ Trage cele 4 colțuri pe colțurile fotografiei, documentului sau fațadei fotografiate oblic, apoi „✓ Validează”: este readusă în plan. De preferat înainte de corectarea petelor.
+Glisse pour tracer la forme sur le calque choisi (⇧ : carré, cercle ou angle droit). ¦ Trage pentru a trasa forma pe stratul ales (⇧: pătrat, cerc sau unghi drept).
+Glisse du début à la fin du dégradé (⇧ : tous les 45°) : il va sur un calque « Dégradé » (dans la sélection s’il y en a une ; sur le masque choisi, il fond le calque). Tire ensuite ses ronds pour l’ajuster ; clic sur la barre colorée pour changer ses couleurs. ¦ Trage de la începutul la sfârșitul degradeului (⇧: din 45 în 45°): merge pe un strat „Degrade” (în selecție, dacă există; pe masca aleasă, estompează stratul). Trage apoi de cercurile lui pentru a-l ajusta; clic pe bara colorată pentru a-i schimba culorile.
+Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long. Zoome (⌘ + molette) pour être précis. ¦ Fă clic pe o pată, un fir de praf sau o zgârietură: este înlocuită cu ce o înconjoară. Pentru o zgârietură, trage de-a lungul ei. Mărește (⌘ + rotița) pentru a fi precis.
+« Choisir l’endroit à recopier » (ou ⌥ + clic), puis peins sur la zone à couvrir. « Aligné » : la source suit ton pinceau d’un trait à l’autre. Avec une sélection : glisse pour poser une copie de la zone ailleurs. ¦ „Alege locul de copiat” (sau ⌥ + clic), apoi pictează pe zona de acoperit. „Aliniat”: sursa urmează pensula de la o trăsătură la alta. Cu o selecție: trage pentru a pune o copie a zonei în altă parte.
+Peins sur le calque choisi (Calques) : annoter, entourer, flécher à la main. La gomme efface ce qui a été peint, jamais la photo. ¦ Pictează pe stratul ales (Straturi): adnotează, încercuiește, pune săgeți de mână. Radiera șterge ce a fost pictat, niciodată fotografia.
+Tu peins le MASQUE du calque : ⬛ cacher, ⬜ montrer. Rien n’est effacé. Clique sur la vignette du masque (Calques) pour revenir au calque. ¦ Pictezi MASCA stratului: ⬛ ascunde, ⬜ arată. Nimic nu este șters. Fă clic pe miniatura măștii (Straturi) pentru a reveni la strat.
+Clique dans l’image à l’endroit du texte, écris, puis Entrée (⇧ + Entrée pour aller à la ligne). ¦ Fă clic în imagine în locul textului, scrie, apoi Enter (⇧ + Enter pentru rând nou).
+Peins sur le pli, la rayure ou la déchirure (en rouge pendant le geste) : au lâcher, la zone est refaite d’après ce qui l’entoure. Zoome pour être précis ; « 🔍 Repérer les plis » les trouve tout seul. ¦ Pictează pe pliu, zgârietură sau ruptură (cu roșu în timpul gestului): când eliberezi, zona este refăcută după ce o înconjoară. Mărește pentru a fi precis; „🔍 Găsește pliurile” le găsește singur.
+Glisse les deux ronds sur les yeux si besoin : le cadre suit (yeux à l’horizontale, toujours à la même hauteur). Règle la marge dans le panneau, puis « ✓ Recadrer » ou « 👤 Utiliser comme portrait ». ¦ Trage cele două cercuri pe ochi dacă e nevoie: cadrul urmează (ochii pe orizontală, mereu la aceeași înălțime). Reglează marginea în panou, apoi „✓ Decupează” sau „👤 Folosește ca portret”.
+Calque « Annotations » créé ¦ Stratul „Adnotări” a fost creat
+Annotations ¦ Adnotări
+Masque ajouté à la photo (gomme) ¦ Mască adăugată la fotografie (radieră)
+Gomme sur la photo : elle est cachée par un masque, rien n’est effacé. Pour la faire revenir : touche X (⬜ montrer), puis repasse dessus. ¦ Radieră pe fotografie: este ascunsă de o mască, nimic nu este șters. Pentru a o readuce: tasta X (⬜ arată), apoi treci din nou peste ea.
+⬜ Montrer : le pinceau (ou la gomme) fait revenir ce qui était caché. X pour revenir à ⬛ cacher. ¦ ⬜ Arată: pensula (sau radiera) readuce ce era ascuns. X pentru a reveni la ⬛ ascunde.
+⬛ Cacher : le pinceau (ou la gomme) cache. X pour ⬜ montrer. ¦ ⬛ Ascunde: pensula (sau radiera) ascunde. X pentru ⬜ arată.
+Style du texte ¦ Stilul textului
+Caractère du texte ¦ Caracterul textului
+🔎 Lire les variantes de l’ordinateur… ¦ 🔎 Citește variantele calculatorului…
+Réglage ciblé : appuie sur une couleur de la photo et glisse à droite (plus saturé) ou à gauche (moins) ; avec ⌘ / Ctrl, c’est la teinte qui change ¦ Reglaj țintit: apasă pe o culoare din fotografie și trage la dreapta (mai saturat) sau la stânga (mai puțin); cu ⌘ / Ctrl se schimbă nuanța
+Réglage ciblé ¦ Reglaj țintit
+Pipettes de la gamme ¦ Pipetele gamei
+Pipette : la gamme se centre sur la couleur cliquée dans la photo ¦ Pipetă: gama se centrează pe culoarea pe care ai făcut clic în fotografie
+Ajouter à la gamme la couleur cliquée ¦ Adaugă la gamă culoarea pe care ai făcut clic
+Retirer de la gamme la couleur cliquée ¦ Scoate din gamă culoarea pe care ai făcut clic
+Bord intérieur : plein effet jusqu’ici ¦ Marginea interioară: efect complet până aici
+Bord extérieur : l’effet s’éteint ici ¦ Marginea exterioară: efectul se stinge aici
+Haut : les couleurs avant ; bas : après. ¦ Sus: culorile dinainte; jos: după.
+🎚 Autres réglages… ¦ 🎚 Alte ajustări…
+🖌 Peindre le masque ¦ 🖌 Pictează masca
+Réactiver ¦ Reactivează
+Désactiver ¦ Dezactivează
+▦ Calque de dégradé ¦ ▦ Strat de degrade
+garder les proportions ¦ păstrează proporțiile
+Un calque de réglage juste au-dessus, qui ne touche que ce calque ¦ Un strat de ajustare chiar deasupra, care atinge doar acest strat
+🎨 Teinte/Saturation sur ce calque ¦ 🎨 Nuanță/Saturație pe acest strat
+Choisis la photo ou un calque de réglage 🎚 (Calques) pour Teinte/Saturation. ¦ Alege fotografia sau un strat de ajustare 🎚 (Straturi) pentru Nuanță/Saturație.
+👆 Appuie sur une couleur de la photo et glisse à gauche ou à droite (⌘ / Ctrl : la teinte). ¦ 👆 Apasă pe o culoare din fotografie și trage la stânga sau la dreapta (⌘ / Ctrl: nuanța).
+💧 Clique sur une couleur de la photo. ¦ 💧 Fă clic pe o culoare din fotografie.
+C’est un gris : il n’a pas de teinte. ¦ Este un gri: nu are nuanță.
+Gamme choisie à la pipette ¦ Gamă aleasă cu pipeta
+Gamme élargie ¦ Gamă lărgită
+Gamme réduite ¦ Gamă restrânsă
+Coloriser : oui ¦ Colorizare: da
+Coloriser : non ¦ Colorizare: nu
+Coloriser ¦ Colorizează
+Propriétés du masque ¦ Proprietățile măștii
+Teinte/Saturation remise à zéro ¦ Nuanță/Saturație readusă la zero
+Masque inversé ¦ Mască inversată
+Masque désactivé ¦ Mască dezactivată
+Masque réactivé ¦ Mască reactivată
+Masque retiré ¦ Mască scoasă
+Masque ajouté ¦ Mască adăugată
+Ce calque a déjà un masque. ¦ Stratul acesta are deja o mască.
+Teinte/Saturation sur un calque ¦ Nuanță/Saturație pe un strat
+Teinte/Saturation ¦ Nuanță/Saturație
+Ancien style ¦ Stil vechi
+Global ¦ Global
+Rouges ¦ Roșuri
+Jaunes ¦ Galbeni
+Verts ¦ Verzi
+Cyans ¦ Cyan
+Bleus ¦ Albaștri
+Magentas ¦ Magenta
+Cyanotype ¦ Cianotipie
+Supprimer ce motif ¦ Șterge acest model
+Calque de motif <b>« {name} »</b> : tout se règle ici, tout de suite. ¦ Strat de model <b>„{name}”</b>: totul se reglează aici, imediat.
+Choisis un motif, puis « Remplir » : il va sur son propre calque (dans la sélection s’il y en a une). Les motifs de l’app prennent tes deux couleurs. ¦ Alege un model, apoi „Umple”: merge pe propriul strat (în selecție, dacă există). Modelele aplicației iau cele două culori ale tale.
+fond transparent (motifs de l’app) ¦ fundal transparent (modelele aplicației)
+Décalage horizontal ¦ Decalaj orizontal
+Décalage vertical ¦ Decalaj vertical
+▩ Remplir : nouveau calque de motif ¦ ▩ Umple: strat de model nou
+Il rejoint la bibliothèque des motifs (gardée sur cet ordinateur). ¦ Intră în biblioteca de modele (păstrată pe acest calculator).
+l’image visible ¦ imaginea vizibilă
+Taille du carreau ¦ Mărimea pătratului
+raccord sans couture (les bords se fondent) ¦ îmbinare fără cusătură (marginile se topesc)
+Garder et remplir ¦ Păstrează și umple
+Plus de place pour garder ce motif : supprime des motifs, ou fais-le plus petit. ¦ Nu mai e loc pentru a păstra acest model: șterge modele sau fă-l mai mic.
+Motif gardé dans la bibliothèque ▩. ¦ Model păstrat în biblioteca ▩.
+Mon motif ¦ Modelul meu
+Clic sur une forme : le pinceau 🖌 la prend. La taille se règle en haut (ou [ et ]). ¦ Clic pe o formă: pensula 🖌 o preia. Mărimea se reglează sus (sau [ și ]).
+Forme de la pointe ¦ Forma vârfului
+Pas (écart entre les empreintes) ¦ Pas (distanța dintre amprente)
+Petit : un trait continu. Grand : des empreintes séparées (étoiles, feuilles). ¦ Mic: o trăsătură continuă. Mare: amprente separate (stele, frunze).
+À 100 % la forme est entière ; plus bas, elle est aplatie (plume, pinceau plat). ¦ La 100 % forma este întreagă; mai jos, este turtită (peniță, pensulă lată).
+l’angle suit le trait ¦ unghiul urmează trăsătura
+Dynamique et dispersion ¦ Dinamică și dispersie
+Variation de taille ¦ Variația mărimii
+Variation d’angle ¦ Variația unghiului
+Dispersion ¦ Dispersie
+Nombre par empreinte ¦ Număr pe amprentă
+Transfert et couleur ¦ Transfer și culoare
+Flux (chaque empreinte) ¦ Flux (fiecare amprentă)
+Variation d’opacité ¦ Variația opacității
+Variation de couleur ¦ Variația culorii
+Fais d’abord une sélection autour du dessin ¦ Fă mai întâi o selecție în jurul desenului
+Fais d’abord une sélection autour du dessin. ¦ Fă mai întâi o selecție în jurul desenului.
+＋ Forme d’après la sélection ¦ ＋ Formă după selecție
+Garder comme préréglage ¦ Păstrează ca presetare
+＋ Garder comme préréglage ¦ ＋ Păstrează ca presetare
+Garder cette forme de pinceau ¦ Păstrează această formă de pensulă
+Nom du préréglage : ¦ Numele presetării:
+Plus de place pour garder ce pinceau. ¦ Nu mai e loc pentru a păstra această pensulă.
+🖌 Ta forme est prête : peins avec ; « Garder comme préréglage » pour la retrouver. ¦ 🖌 Forma ta este gata: pictează cu ea; „Păstrează ca presetare” pentru a o regăsi.
+Rond net ¦ Rotund clar
+Rond doux ¦ Rotund moale
+Surligneur ¦ Marker
+Crayon fin ¦ Creion fin
+Craie (grain) ¦ Cretă (granulație)
+Craie ¦ Cretă
+Fusain ¦ Cărbune
+Dégradé inversé ¦ Degrade inversat
+Dégradé : tramage ¦ Degrade: cu dithering
+Dégradé : sans tramage ¦ Degrade: fără dithering
+▦ Dégradé ¦ ▦ Degrade
+Clic : ajouter un arrêt de couleur à cet endroit ¦ Clic: adaugă un punct de culoare în acest loc
+Clic sur la barre : un arrêt de plus · glisse un arrêt pour le déplacer, vers le bas pour l’enlever ¦ Clic pe bară: încă un punct · trage un punct pentru a-l muta, în jos pentru a-l elimina
+Mélange ¦ Amestec
+Classique (RVB) ¦ Clasic (RGB)
+Perceptuel (plus doux) ¦ Perceptual (mai blând)
+Par les teintes ¦ Prin nuanțe
+Au-delà des bouts ¦ Dincolo de capete
+Couleur des bouts ¦ Culoarea capetelor
+Répéter ¦ Repetă
+Répéter en miroir ¦ Repetă în oglindă
+Le début devient la fin ¦ Începutul devine sfârșitul
+⇄ Retourner les arrêts ¦ ⇄ Inversează punctele
+Espacer également ¦ Spațiază egal
+Couleur de l’arrêt ¦ Culoarea punctului
+Arrêt choisi ¦ Punctul ales
+Milieu vers le suivant ¦ Mijlocul spre următorul
+Où se trouve le mélange à moitié entre cet arrêt et le suivant (le petit losange de Photoshop). ¦ Unde se află amestecul la jumătate între acest punct și următorul (micul romb din Photoshop).
+✕ Enlever cet arrêt ¦ ✕ Elimină acest punct
+Supprimer ce préréglage ¦ Șterge această presetare
+Garder ce dégradé ¦ Păstrează acest degrade
+Mon dégradé ¦ Degradeul meu
+Premier plan → transparent ¦ Prim-plan → transparent
+Noir → blanc ¦ Negru → alb
+Blanc → transparent ¦ Alb → transparent
+Vignette (bords sombres) ¦ Vignetă (margini întunecate)
+Arc-en-ciel ¦ Curcubeu
+Cuivre ¦ Cupru
+Chrome ¦ Crom
+Or ¦ Aur
+Vieux papier ¦ Hârtie veche
+Nuit ¦ Noapte
+Printemps ¦ Primăvară
+Mer ¦ Mare
+Coucher de soleil ¦ Apus de soare
+▭ Linéaire ¦ ▭ Liniar
+◉ Radial ¦ ◉ Radial
+◔ Angle (conique) ¦ ◔ Unghi (conic)
+⇋ Réfléchi ¦ ⇋ Reflectat
+◇ Losange ¦ ◇ Romb
+Damier ¦ Tablă de șah
+Pois ¦ Buline
+Rayures ¦ Dungi
+Hachures ¦ Hașuri
+Briques ¦ Cărămizi
+Chevrons ¦ Chevroane
+Losanges ¦ Romburi
+Vagues ¦ Valuri
+Toile ¦ Pânză
+Croix ¦ Cruci
+Fleurs de lys ¦ Flori de crin
+Clique maintenant à l’endroit à recopier. ¦ Fă clic acum în locul de copiat.
+Ce calque est verrouillé : déverrouille-le dans Calques. ¦ Stratul acesta este blocat: deblochează-l în Straturi.
+Texte effacé ¦ Text șters
+Sélection vide ¦ Selecție goală
+Sélection ajoutée ¦ Selecție adăugată
+Sélection retirée ¦ Selecție scoasă
+Image remplacée : même place, même taille, même rotation. ¦ Imagine înlocuită: același loc, aceeași mărime, aceeași rotire.
+Image placée : ➤ glisse-la, tire un coin pour la taille (⇧ : libre), la poignée ronde pour la tourner. ¦ Imagine plasată: ➤ trage-o, trage de un colț pentru mărime (⇧: liber), de mânerul rotund pentru a o roti.
+Ce fichier n’est pas une image. ¦ Fișierul acesta nu este o imagine.
+Remplacer l’image de l’objet dynamique ¦ Înlocuiește imaginea obiectului inteligent
+Remplacer par cette image ¦ Înlocuiește cu această imagine
+La nouvelle image prend la place, la taille et la rotation de l’ancienne. ¦ Noua imagine ia locul, mărimea și rotirea celei vechi.
+Elle arrive sur un nouveau calque, en objet dynamique 🧩 (agrandir, réduire, tourner sans perte). Tu peux aussi glisser un fichier sur la photo, ou coller une image copiée (⌘V). ¦ Ajunge pe un strat nou, ca obiect inteligent 🧩 (mărește, micșorează, rotește fără pierdere). Poți și să tragi un fișier pe fotografie sau să lipești o imagine copiată (⌘V).
+Sélection automatique ¦ Selecție automată
+Ce calque est verrouillé : choisis-en un autre dans Calques. ¦ Stratul acesta este blocat: alege altul în Straturi.
+Endroit à recopier choisi : peins maintenant sur la zone à couvrir. ¦ Locul de copiat a fost ales: pictează acum pe zona de acoperit.
+Choisis d’abord l’endroit à recopier (bouton 🎯 ou ⌥ + clic). ¦ Alege mai întâi locul de copiat (butonul 🎯 sau ⌥ + clic).
+La photo n’est plus dans les calques : « ↺ Remettre la photo » (onglet Calques). ¦ Fotografia nu mai este în straturi: „↺ Pune fotografia înapoi” (fila Straturi).
+La photo est verrouillée (🔒 dans Calques). ¦ Fotografia este blocată (🔒 în Straturi).
+Tampon : zone recopiée (calque ✨ Retouches) ¦ Ștampilă: zonă copiată (strat ✨ Retușări)
+Fais d’abord une sélection (outils ⬚ ◯ ➰ ✒︎ 🪄). ¦ Fă mai întâi o selecție (instrumentele ⬚ ◯ ➰ ✒︎ 🪄).
+Aucun filtre utilisé pour l’instant (menu Filtre). ¦ Deocamdată niciun filtru folosit (meniul Filtru).
+Opacité du calque (dosage) ¦ Opacitatea stratului (dozare)
+Valeurs de départ ¦ Valori inițiale
+Rien n’est détruit : le filtre est sur son propre calque. Plus tard : Calques → le calque → onglet ✨ Filtres → « régler… ». ¦ Nimic nu este distrus: filtrul este pe propriul strat. Mai târziu: Straturi → stratul → fila ✨ Filtre → „reglează…”.
+Filtre enlevé du calque ¦ Filtru eliminat de pe strat
+Ordre des filtres ¦ Ordinea filtrelor
+Filtres enlevés ¦ Filtre eliminate
+Plus de place pour les actions : supprimes-en une. ¦ Nu mai e loc pentru acțiuni: șterge una.
+⚡ Actions ¦ ⚡ Acțiuni
+Nom de l’action (ex. « Photos de l’album 1930 ») ¦ Numele acțiunii (ex. „Fotografiile din albumul 1930”)
+Une action garde les réglages de la photo (exposition, niveaux, courbe, teinte, filtres, poussière, colorisation…) et ses calques de réglage sans masque. On la remet sur une autre photo, ou sur plusieurs d’un coup : chacune reçoit une <b>nouvelle version</b>, l’original est gardé. ¦ O acțiune păstrează setările fotografiei (expunere, niveluri, curbă, nuanță, filtre, praf, colorizare…) și straturile ei de ajustare fără mască. O aplici pe altă fotografie sau pe mai multe deodată: fiecare primește o <b>versiune nouă</b>, originalul se păstrează.
+Enregistrer cette action dans un fichier, pour la garder ou la donner ¦ Salvează această acțiune într-un fișier, pentru a o păstra sau a o da altcuiva
+Sur cette photo ¦ Pe această fotografie
+Sur plusieurs photos… ¦ Pe mai multe fotografii…
+Aucune action enregistrée pour l’instant ¦ Deocamdată nicio acțiune salvată
+« ＋ Enregistrer les réglages actuels » les garde pour les rejouer sur d’autres photos. ¦ „＋ Salvează setările actuale” le păstrează pentru a le aplica din nou pe alte fotografii.
+Les photos à retoucher ¦ Fotografiile de retușat
+Prendre ces photos ¦ Ia aceste fotografii
+＋ Choisir des photos… ¦ ＋ Alege fotografii…
+afficher la nouvelle version ¦ afișează noua versiune
+Aucune photo choisie. ¦ Nicio fotografie aleasă.
+refusé ¦ refuzat
+fx Effets du calque ¦ fx Efectele stratului
+Fond (le contenu seulement, pas les effets) ¦ Umplere (doar conținutul, nu și efectele)
+Lueur externe ¦ Strălucire exterioară
+Incrustation de couleur ¦ Suprapunere de culoare
+à l’extérieur ¦ în exterior
+au milieu ¦ la mijloc
+à l’intérieur ¦ în interior
+Tout enlever ¦ Elimină tot
+🔍 Plis et rayures ¦ 🔍 Pliuri și zgârieturi
+Recherche des plis… ¦ Se caută pliurile…
+garder le grain autour ¦ păstrează granulația din jur
+🪡 Plutôt à la main ¦ 🪡 Mai degrabă de mână
+✓ Réparer ces lignes ¦ ✓ Repară aceste linii
+Aucun pli trouvé : monte la sensibilité, ou répare à la main avec le pinceau 🪡. ¦ Niciun pliu găsit: mărește sensibilitatea sau repară de mână cu pensula 🪡.
+Réparation… ¦ Se repară…
+✨ Plis et rayures comblés ¦ ✨ Pliuri și zgârieturi umplute
+🌫️ Débruitage ¦ 🌫️ Reducerea zgomotului
+adoucit le grain sans perdre les contours ¦ netezește granulația fără să piardă contururile
+🧹 Poussières et rayures ¦ 🧹 Praf și zgârieturi
+les petits points blancs ou noirs ¦ micile puncte albe sau negre
+🩹 Plis et fines déchirures ¦ 🩹 Pliuri și rupturi fine
+lignes fines repérées puis comblées ¦ linii fine găsite apoi umplute
+🎚 Contraste et niveaux automatiques ¦ 🎚 Contrast și niveluri automate
+noirs bien noirs, blancs bien blancs ¦ negrii bine negri, albii bine albi
+🔎 Netteté douce ¦ 🔎 Claritate blândă
+un peu plus de piqué ¦ puțin mai multă claritate
+🌈 Colorisation ¦ 🌈 Colorizare
+couleurs d’époque (photo en noir et blanc) ¦ culori de epocă (fotografie alb-negru)
+la photo a déjà des couleurs : coche si tu veux quand même ¦ fotografia are deja culori: bifează dacă vrei totuși
+Coche les étapes à garder ; chacune devient un calque « ✨ » que tu peux ensuite cacher ou doser. ↶ défait tout d’un coup. ¦ Bifează etapele de păstrat; fiecare devine un strat „✨” pe care îl poți apoi ascunde sau doza. ↶ anulează tot dintr-o dată.
+Garder : {what} ¦ Păstrează: {what}
+détail au centre ¦ detaliu în centru
+Aperçus… ¦ Previzualizări…
+aucun pli trouvé à cette intensité ¦ niciun pliu găsit la această intensitate
+Coche au moins une étape. ¦ Bifează cel puțin o etapă.
+✨ Plis et fines déchirures ¦ ✨ Pliuri și rupturi fine
+✨ Poussières et rayures ¦ ✨ Praf și zgârieturi
+✨ Débruitage ¦ ✨ Reducerea zgomotului
+✨ Contraste et niveaux ¦ ✨ Contrast și niveluri
+✨ Netteté douce ¦ ✨ Claritate blândă
+✨ Colorisation ¦ ✨ Colorizare
+Colorisation ¦ Colorizare
+Couleurs (pinceau) ¦ Culori (pensulă)
+✨ Retouches (taches, plis, tampon) ¦ ✨ Retușări (pete, pliuri, ștampilă)
+🪪 Photo d’identité ¦ 🪪 Fotografie de identitate
+Les yeux à l’horizontale, toujours à la même hauteur : tous les portraits faits ainsi ont le même format. ¦ Ochii pe orizontală, mereu la aceeași înălțime: toate portretele făcute astfel au același format.
+✓ Yeux trouvés sur le visage. ¦ ✓ Ochi găsiți pe față.
+✓ D’après l’identification de la photo : ajuste les ronds sur les yeux. ¦ ✓ După identificarea din fotografie: ajustează cercurile pe ochi.
+⚠️ Visage non trouvé : glisse les deux ronds sur les yeux. ¦ ⚠️ Fața nu a fost găsită: trage cele două cercuri pe ochi.
+Plusieurs fiches… ¦ Mai multe fișe…
+✓ Recadrer ¦ ✓ Decupează
+👤 Utiliser comme portrait… ¦ 👤 Folosește ca portret…
+Recadré en photo d’identité ¦ Decupat ca fotografie de identitate
+3:4 (portrait classique) ¦ 3:4 (portret clasic)
+35 × 45 mm (photo d’identité) ¦ 35 × 45 mm (fotografie de identitate)
+Marge autour du visage ¦ Margine în jurul feței
+Hauteur des yeux ¦ Înălțimea ochilor
+modèle absent ¦ model lipsă
+Recherche du visage… ¦ Se caută fața…
+Photo non enregistrée. ¦ Fotografie nesalvată.
+Utiliser comme portrait de quelle fiche ? ¦ Folosești ca portret pentru ce fișă?
+PHOTO D’IDENTITÉ ¦ FOTOGRAFIE DE IDENTITATE
+La photo recadrée est ajoutée aux médias de la fiche, puis devient son portrait (l’ancien portrait reste dans ses médias). ¦ Fotografia decupată este adăugată la fișierele media ale fișei, apoi devine portretul ei (portretul vechi rămâne în fișierele ei media).
+Choisis une personne dans la liste. ¦ Alege o persoană din listă.
+RETOUCHE · PHOTO D’IDENTITÉ ¦ RETUȘARE · FOTOGRAFIE DE IDENTITATE
+🪪 Portraits de plusieurs fiches ¦ 🪪 Portretele mai multor fișe
+Choisis les fiches : pour chacune, l’app prend son portrait (ou sa première photo), trouve le visage et le cadre au même format que les autres (yeux à la même hauteur). Tu vérifies, puis « Utiliser comme portraits » : chaque photo recadrée entre dans les médias de sa fiche et devient son portrait (l’ancien reste). ¦ Alege fișele: pentru fiecare, aplicația ia portretul (sau prima fotografie), găsește fața și o încadrează la același format ca celelalte (ochii la aceeași înălțime). Verifici, apoi „Folosește ca portrete”: fiecare fotografie decupată intră în fișierele media ale fișei sale și devine portretul ei (cel vechi rămâne).
+🔍 Préparer les portraits ¦ 🔍 Pregătește portretele
+Aucune fiche choisie pour l’instant ¦ Deocamdată nicio fișă aleasă
+Choisis une ou plusieurs personnes ci-dessus, puis « 🔍 Préparer les portraits ». ¦ Alege una sau mai multe persoane mai sus, apoi „🔍 Pregătește portretele”.
+Choisis d’abord une ou plusieurs fiches. ¦ Alege mai întâi una sau mai multe fișe.
+aucune photo dans la fiche ¦ nicio fotografie în fișă
+yeux trouvés ¦ ochi găsiți
+d’après l’identification ¦ după identificare
+✓ portrait mis à jour ¦ ✓ portret actualizat
+Utiliser comme portraits ¦ Folosește ca portrete
+La rotation n’est pas encore prête : réessaie dans un instant. ¦ Rotirea nu este încă gata: încearcă din nou într-o clipă.
+Rotation de l’image ¦ Rotirea imaginii
+Rotation de l’image : 90° horaire ¦ Rotirea imaginii: 90° în sensul acelor de ceasornic
+Rotation de l’image : 90° antihoraire ¦ Rotirea imaginii: 90° în sens invers acelor de ceasornic
+Rotation de l’image : 180° ¦ Rotirea imaginii: 180°
+Rotation de l’image : {a}° horaire ¦ Rotirea imaginii: {a}° în sensul acelor de ceasornic
+Rotation de l’image : {a}° antihoraire ¦ Rotirea imaginii: {a}° în sens invers acelor de ceasornic
+Symétrie horizontale de l’image ¦ Simetrie orizontală a imaginii
+Symétrie verticale de l’image ¦ Simetrie verticală a imaginii
+Perspective figée ¦ Perspectivă fixată
+Le recadrage d’avant a été retiré (il ne tenait plus droit) : refais-le si besoin, ou ↶ Annuler. ¦ Decuparea de dinainte a fost eliminată (nu mai era dreaptă): refă-o dacă e nevoie, sau ↶ Anulează.
+📐 Redresser l’horizon ¦ 📐 Îndreaptă orizontul
+L’angle mesuré sur ta ligne : la photo tourne de cet angle pour la remettre droite. ¦ Unghiul măsurat pe linia ta: fotografia se rotește cu acest unghi pentru a fi readusă dreaptă.
+Coins ajoutés autour ¦ Colțuri adăugate în jur
+Transparents (PNG) ¦ Transparente (PNG)
+✂️ Recadrer pour enlever les coins vides ¦ ✂️ Decupează pentru a elimina colțurile goale
+Tous les calques, masques, textes et la sélection tournent avec la photo. ↶ Annuler (⌘Z) revient comme avant. ¦ Toate straturile, măștile, textele și selecția se rotesc odată cu fotografia. ↶ Anulează (⌘Z) revine ca înainte.
+Donne un angle entre 0,01 et 359,99°. ¦ Dă un unghi între 0,01 și 359,99°.
+Trace une ligne le long de l’horizon (ou d’un mur bien droit) : la photo tournera pour la remettre droite. Échap pour arrêter. ¦ Trasează o linie de-a lungul orizontului (sau a unui zid bine drept): fotografia se va roti pentru a fi readusă dreaptă. Esc pentru a opri.
+Cette ligne est déjà droite : rien à tourner. ¦ Linia aceasta este deja dreaptă: nimic de rotit.
+Photo prise avec le téléphone tourné : elle est enregistrée couchée. ¦ Fotografie făcută cu telefonul rotit: este salvată culcată.
+↻ Remettre droite ¦ ↻ Readu dreaptă
+Photo remise droite (orientation du téléphone) ¦ Fotografie readusă dreaptă (orientarea telefonului)
+Les retouches en cours seront perdues (💾 Enregistrer le projet les garde pour plus tard). ¦ Retușările în curs se vor pierde (💾 Salvează proiectul le păstrează pentru mai târziu).
+Passer à la retouche simple ? ¦ Treci la retușarea simplă?
+Passer sans enregistrer ¦ Treci fără să salvezi
+Le PSD n’est pas encore prêt : réessaie dans un instant. ¦ PSD-ul nu este încă gata: încearcă din nou într-o clipă.
+L’assemblage de photos n’est pas encore prêt. ¦ Asamblarea fotografiilor nu este încă gata.
+Cet outil n’est pas encore prêt : réessaie dans un instant. ¦ Instrumentul acesta nu este încă gata: încearcă din nou într-o clipă.
+Recherche du sujet… ¦ Se caută subiectul…
+Sujet introuvable : le fond touche tout le bord. Essaie avec moins de tolérance (🪄), ou le lasso. ¦ Subiectul nu a fost găsit: fundalul atinge toată marginea. Încearcă cu o toleranță mai mică (🪄) sau cu lasoul.
+Sujet sélectionné : ⇧ + baguette ou lasso pour ajouter, ⌥ pour enlever ; « Masque » pour l’appliquer. Tolérance (🪄) : jusqu’où va le fond. ¦ Subiect selectat: ⇧ + baghetă sau lasou pentru a adăuga, ⌥ pentru a scoate; „Mască” pentru a o aplica. Toleranță (🪄): cât de departe merge fundalul.
+Sujet sélectionné ¦ Subiect selectat
+La photo semble déjà droite. ¦ Fotografia pare deja dreaptă.
+Des corrections (taches, tampon) sont déjà faites : elles vont bouger avec la remise à plat. ¦ Unele corecții (pete, ștampilă) sunt deja făcute: se vor mișca odată cu readucerea în plan.
+Redresser la perspective ? ¦ Îndrepți perspectiva?
+Perspective redressée ¦ Perspectivă îndreptată
+Perspective enlevée ¦ Perspectivă eliminată
+Peins les couleurs (pinceau doux) : le calque est en fusion « Couleur », la lumière de la photo est gardée. 🧽 pour corriger, opacité du calque pour doser. ¦ Pictează culorile (pensulă moale): stratul este în modul de îmbinare „Culoare”, lumina fotografiei se păstrează. 🧽 pentru a corecta, opacitatea stratului pentru a doza.
+Recherche des taches… ¦ Se caută petele…
+Aucune tache trouvée : augmente la sensibilité ou la taille. ¦ Nicio pată găsită: mărește sensibilitatea sau mărimea.
+✨ Jaunissement enlevé ¦ ✨ Îngălbenire eliminată
+Jaunissement enlevé sur le calque de réglage « ✨ Jaunissement enlevé » : la photo n’est pas touchée. ¦ Îngălbenirea a fost eliminată pe stratul de ajustare „✨ Îngălbenire eliminată”: fotografia nu este atinsă.
+Jaunissement enlevé (calque de réglage) ¦ Îngălbenire eliminată (strat de ajustare)
+Entoure d’abord le visage avec l’ellipse ◯ (glisse sur la photo), puis reclique « Visage plus net ». ¦ Încercuiește mai întâi fața cu elipsa ◯ (trage pe fotografie), apoi fă din nou clic pe „Față mai clară”.
+Visage débruité et accentué sur un calque à part : son opacité dose l’effet. ¦ Față cu zgomot redus și accentuată pe un strat separat: opacitatea lui dozează efectul.
+Correcteur prêt : glisse le long de la rayure ou du pli (zoome pour être précis). ¦ Corector gata: trage de-a lungul zgârieturii sau al pliului (mărește pentru a fi precis).
+✨ Vieille photo ravivée ¦ ✨ Fotografie veche înviorată
+✨ Réglage automatique ¦ ✨ Reglaj automat
+Fais d’abord une sélection. ¦ Fă mai întâi o selecție.
+Masque qui cache tout ¦ Mască ce ascunde tot
+Ce calque n’a pas de masque (Calque → Ajouter un masque). ¦ Stratul acesta nu are mască (Strat → Adaugă o mască).
+Ce calque n’a pas de masque. ¦ Stratul acesta nu are mască.
+Sélection inversée ¦ Selecție inversată
+Agrandir la sélection ¦ Extinde selecția
+Réduire la sélection ¦ Restrânge selecția
+De combien de points (de l’aperçu) ? ¦ Cu câte puncte (ale previzualizării)?
+Sélection agrandie ¦ Selecție extinsă
+Sélection réduite ¦ Selecție restrânsă
+Contour progressif de la sélection ¦ Contur progresiv al selecției
+Copie de la sélection ¦ Copia selecției
+Sélection copiée sur un calque ¦ Selecție copiată pe un strat
+Remplissage ¦ Umplere
+Zone effacée de la photo : elle sera transparente (image enregistrée en PNG). ¦ Zonă ștearsă din fotografie: va fi transparentă (imagine salvată în PNG).
+Sélection effacée ¦ Selecție ștearsă
+Recadré sur la sélection ¦ Decupat pe selecție
+Filtres de ce calque ¦ Filtrele acestui strat
+Plus tôt ¦ Mai devreme
+un filtre… ¦ un filtru…
+＋ Ajouter ¦ ＋ Adaugă
+✨ Menu <b>Filtre</b> : chaque filtre se pose sur son propre calque (rien n’est détruit) : on le règle, on le dose avec l’opacité du calque, on le limite avec un masque 🎭, on le cache 👁. ¦ ✨ Meniul <b>Filtru</b>: fiecare filtru se pune pe propriul strat (nimic nu este distrus): îl reglezi, îl dozezi cu opacitatea stratului, îl limitezi cu o mască 🎭, îl ascunzi 👁.
+Réglages remis à zéro ¦ Ajustări readuse la zero
+Point de courbe enlevé ¦ Punct al curbei eliminat
+Supprimer ce point ¦ Șterge acest punct
+Point de la courbe ¦ Punct al curbei
+Masque en rouge : ce qui est caché (touche \ pour revenir) ¦ Mască cu roșu: ce este ascuns (tasta \ pentru a reveni)
+Pas encore enregistré comme projet : 💾 Enregistrer garde tout le travail pour continuer plus tard ¦ Încă nesalvat ca proiect: 💾 Salvează păstrează toată munca pentru a continua mai târziu
+Enregistrer le projet sous un autre nom ¦ Salvează proiectul cu alt nume
+Nom du nouveau projet (pour le retrouver dans « 📂 Projets… ») : ¦ Numele noului proiect (pentru a-l regăsi în „📂 Proiecte…”):
+Les retouches en cours seront perdues. ¦ Retușările în curs se vor pierde.
+Ouvrir un autre projet sans enregistrer ce travail ? ¦ Deschizi alt proiect fără să salvezi această muncă?
+Ouvrir sans enregistrer ¦ Deschide fără să salvezi
+affichée ¦ afișată
+en cours de retouche ¦ în curs de retușare
+Voir, comparer, revenir, renommer, supprimer (L3) ¦ Vezi, compară, revino, redenumește, șterge (L3)
+Voir, comparer, revenir, renommer, supprimer ¦ Vezi, compară, revino, redenumește, șterge
+l’original est toujours gardé ¦ originalul se păstrează mereu
+Original ¦ Original
+Quitter cette retouche sans l’enregistrer ? ¦ Ieși din această retușare fără s-o salvezi?
+Pas de versions pour cette image. ¦ Nicio versiune pentru această imagine.
+Bicubique, plus lisse (pour agrandir) ¦ Bicubic, mai neted (pentru mărire)
+Bicubique, plus net (pour réduire) ¦ Bicubic, mai clar (pentru micșorare)
+Bilinéaire ¦ Biliniar
+Au plus proche (contours nets, pixels) ¦ Cel mai apropiat (contururi clare, pixeli)
+La taille de l’image enregistrée ou exportée (Image → Taille de l’image, Taille de la zone de travail) ¦ Mărimea imaginii salvate sau exportate (Imagine → Mărimea imaginii, Mărimea zonei de lucru)
+📏 Taille de l’image ¦ 📏 Mărimea imaginii
+pixels ¦ pixeli
+pour cent ¦ procente
+Ajuster à un format ¦ Potrivește la un format
+— garder ces mesures — ¦ — păstrează aceste dimensiuni —
+🔗 Conserver les proportions ¦ 🔗 Păstrează proporțiile
+Résolution ¦ Rezoluție
+Rééchantillonner ¦ Reeșantionează
+Méthode ¦ Metodă
+À l’impression ¦ La tipărire
+↺ Remettre la taille d’origine ¦ ↺ Readu mărimea originală
+La photo reste en pleine qualité pendant la retouche : la taille choisie s’applique quand tu enregistres ou exportes l’image. ↶ Annuler (⌘Z) revient à la taille d’avant. ¦ Fotografia rămâne la calitate maximă în timpul retușării: mărimea aleasă se aplică atunci când salvezi sau exporți imaginea. ↶ Anulează (⌘Z) revine la mărimea de dinainte.
+✓ Assez grande pour imprimer en A5 à 300 ppp. ¦ ✓ Suficient de mare pentru a fi tipărită în A5 la 300 ppp.
+⚠️ Trop petite pour imprimer en A5 à 300 ppp (il faut 1748 × 2480 px). ¦ ⚠️ Prea mică pentru a fi tipărită în A5 la 300 ppp (trebuie 1748 × 2480 px).
+Choisis une taille entre 1 et 30 000 pixels de côté (260 millions de pixels au plus). ¦ Alege o mărime între 1 și 30 000 de pixeli pe latură (cel mult 260 de milioane de pixeli).
+⬚ Taille de la zone de travail ¦ ⬚ Mărimea zonei de lucru
+Nouvelle taille ¦ Mărime nouă
+Ancrage ¦ Ancorare
+Où reste l’image ¦ Unde rămâne imaginea
+Relative (ajouter à la taille actuelle) ¦ Relativă (adaugă la mărimea actuală)
+Au centre ¦ În centru
+L’image reste à cet endroit ; la toile s’agrandit (ou se coupe) autour. ¦ Imaginea rămâne în acest loc; pânza se mărește (sau se taie) în jur.
+Fond de la zone ajoutée ¦ Fundalul zonei adăugate
+Transparent (PNG) ¦ Transparent (PNG)
+↺ Remettre la zone de départ ¦ ↺ Readu zona inițială
+↶ Annuler (⌘Z) revient à la zone d’avant. ¦ ↶ Anulează (⌘Z) revine la zona de dinainte.
+Choisis une taille entre 1 et 30 000 pixels de côté. ¦ Alege o mărime între 1 și 30 000 de pixeli pe latură.
+Informations de l’image ¦ Informațiile imaginii
+Ces informations sont écrites dans l’image enregistrée ou exportée (XMP, lisible par Photoshop, Lightroom, l’Explorateur…). ¦ Aceste informații sunt scrise în imaginea salvată sau exportată (XMP, care poate fi citit de Photoshop, Lightroom, Explorer…).
+Droits (copyright) ¦ Drepturi (copyright)
+Personnes reliées ¦ Persoane legate
+Image trop grande pour être enregistrée par le navigateur. ¦ Imagine prea mare pentru a fi salvată de browser.
+Image trop grande pour le navigateur. ¦ Imagine prea mare pentru browser.
+Copie retouchée ajoutée aux mêmes fiches. ¦ Copie retușată adăugată la aceleași fișe.
+Image enregistrée dans les Médias. ¦ Imagine salvată în fișierele media.
+Nouvelle version affichée. L’original est gardé dans les versions. ¦ Versiunea nouă este afișată. Originalul se păstrează în versiuni.
+Version enregistrée (non affichée). ¦ Versiune salvată (neafișată).
+Ouverture de la photo ¦ Se deschide fotografia
+La photo de départ n’a plus la même taille : vérifie les calques. ¦ Fotografia de pornire nu mai are aceeași mărime: verifică straturile.
+Supprimer le projet (les photos et leurs versions restent) ¦ Șterge proiectul (fotografiile și versiunile lor rămân)
+Aucun projet de retouche pour l’instant ¦ Deocamdată niciun proiect de retușare
+Dans la Retouche, « 💾 Enregistrer le projet ». ¦ În Retușare, „💾 Salvează proiectul”.
+Renommer le projet ¦ Redenumește proiectul
+La photo et ses versions restent. ¦ Fotografia și versiunile ei rămân.
+Écran 16:9 — 1920 × 1080 ¦ Ecran 16:9 — 1920 × 1080
+Carré — 1080 × 1080 ¦ Pătrat — 1080 × 1080
+Carte postale — 1500 × 2100 ¦ Carte poștală — 1500 × 2100
+A4 portrait (150 dpi) — 1240 × 1754 ¦ A4 portret (150 dpi) — 1240 × 1754
+A4 paysage (150 dpi) — 1754 × 1240 ¦ A4 peisaj (150 dpi) — 1754 × 1240
+A4 portrait (300 dpi) — 2480 × 3508 ¦ A4 portret (300 dpi) — 2480 × 3508
+Autre taille… ¦ Altă mărime…
+⬜ Partir d’un canevas vide ¦ ⬜ Pornește de la o pânză goală
+⬜ Canevas vide ¦ ⬜ Pânză goală
+Créer et ouvrir ¦ Creează și deschide
+Une couleur… ¦ O culoare…
+Le canevas est ajouté aux Médias ; on y met ensuite des calques, des groupes, du texte, des formes, des photos (Sélection → calque)… ¦ Pânza este adăugată în fișierele media; pui apoi pe ea straturi, grupuri, text, forme, fotografii (Selecție → strat)…
+Taille entre 16 et 8 000 pixels de côté. ¦ Mărime între 16 și 8 000 de pixeli pe latură.
+Canevas trop grand pour le navigateur. ¦ Pânză prea mare pentru browser.
+Création impossible. ¦ Crearea nu este posibilă.
+Canevas ¦ Pânză
+Restaurer cette photo ¦ Restaurează această fotografie
+Retoucher cette photo ¦ Retușează această fotografie
+Une photo importée est ajoutée aux Médias (sans être rattachée à une fiche) ; ses retouches sont gardées comme versions. ¦ O fotografie importată este adăugată în fișierele media (fără a fi legată de o fișă); retușările ei se păstrează ca versiuni.
+Rouvrir un travail de retouche enregistré ¦ Redeschide o lucrare de retușare salvată
+📂 Projets… ¦ 📂 Proiecte…
+Une image vide, pour dessiner, écrire ou assembler des calques ¦ O imagine goală, pentru a desena, a scrie sau a asambla straturi
+Trop grande : {w} × {h} points. L’agrandissement est limité à {max} points de côté (et {mp} millions de points). ¦ Prea mare: {w} × {h} puncte. Mărirea este limitată la {max} puncte pe latură (și {mp} milioane de puncte).
+Ta sélection est prise comme ciel ¦ Selecția ta este luată drept cer
+Ciel trouvé : {cov} de la photo ¦ Cer găsit: {cov} din fotografie
+calques « Ciel » et « Harmonisation » ¦ straturile „Cer” și „Armonizare”
+Ciel remplacé ({what}) ¦ Cer înlocuit ({what})
+Personne détourée (dans ton rectangle) : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Persoană decupată (în dreptunghiul tău): alege fundalul; „Retușează conturul” pentru a corecta cu pensula.
+Personne détourée : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Persoană decupată: alege fundalul; „Retușează conturul” pentru a corecta cu pensula.
+{w} × {h} points aujourd’hui ¦ {w} × {h} puncte acum
+Cette image est déjà grande : l’agrandissement est limité à {max} points de côté. ¦ Imaginea aceasta este deja mare: mărirea este limitată la {max} puncte pe latură.
+×4 donnerait plus de {max} points de côté : seulement ×2. ¦ ×4 ar da peste {max} puncte pe latură: doar ×2.
+Image agrandie téléchargée ({w} × {h}). ¦ Imagine mărită descărcată ({w} × {h}).
+Image agrandie ×{k} ({w} × {h}) rangée dans les médias. ¦ Imagine mărită ×{k} ({w} × {h}) pusă în fișierele media.
+Nouvelle version agrandie ×{k} ({w} × {h}) affichée ; l’original reste dans les versions. ¦ Versiune nouă mărită ×{k} ({w} × {h}) afișată; originalul rămâne în versiuni.
+☀️ Bleu dégagé ¦ ☀️ Albastru senin
+⛅ Beaux nuages ¦ ⛅ Nori frumoși
+🌅 Coucher de soleil ¦ 🌅 Apus de soare
+⛈️ Ciel orageux ¦ ⛈️ Cer furtunos
+🌫️ Ciel blanc d’hiver ¦ 🌫️ Cer alb de iarnă
+Agrandissement arrêté. ¦ Mărire oprită.
+Fil de calcul en panne. ¦ Firul de calcul s-a oprit.
+Recherche du ciel… ¦ Se caută cerul…
+Je ne trouve pas de ciel : il doit toucher le haut de la photo et être assez uni. Sélectionne-le toi-même (🪄 baguette, ➰ lasso), puis recommence : ta sélection sera prise comme ciel. ¦ Nu găsesc cerul: trebuie să atingă partea de sus a fotografiei și să fie destul de uniform. Selectează-l tu (🪄 baghetă, ➰ lasou), apoi reîncepe: selecția ta va fi luată drept cer.
+Harmonisation du premier plan ¦ Armonizarea prim-planului
+Ciel ¦ Cer
+☁️ Remplacer le ciel ¦ ☁️ Înlocuiește cerul
+Une photo de ciel : de la base, ou de l’ordinateur ¦ O fotografie cu cer: din bază sau de pe calculator
+Une image… ¦ O imagine…
+Taille du nouveau ciel ¦ Mărimea noului cer
+Position verticale ¦ Poziție verticală
+Position horizontale ¦ Poziție orizontală
+Avec une taille au-dessus de 100 % : quelle partie du ciel se voit (0 = le haut). ¦ Cu o mărime de peste 100 %: ce parte a cerului se vede (0 = partea de sus).
+Fondu à l’horizon ¦ Estompare la orizont
+Adoucit la limite entre le ciel et la terre (arbres, toits) : plus haut, plus fondu. ¦ Netezește limita dintre cer și pământ (copaci, acoperișuri): mai sus, mai estompat.
+Harmoniser le premier plan ¦ Armonizează prim-planul
+Le paysage prend un peu la couleur et la lumière du nouveau ciel, pour que tout aille ensemble. ¦ Peisajul preia puțin din culoarea și lumina noului cer, ca totul să se potrivească.
+Opacité du ciel ¦ Opacitatea cerului
+Peindre le masque du calque « Ciel » : ⬛ cacher (là où le ciel ne doit pas passer), ⬜ montrer ¦ Pictează masca stratului „Cer”: ⬛ ascunde (acolo unde cerul nu trebuie să treacă), ⬜ arată
+🖌 Corriger le masque ¦ 🖌 Corectează masca
+Rien n’est détruit : le ciel est un calque avec un masque. Si un bout de ciel manque ou déborde : « Corriger le masque », ou sélectionne le ciel toi-même (🪄, ➰) et relance. ¦ Nimic nu este distrus: cerul este un strat cu o mască. Dacă lipsește o bucată de cer sau dă pe dinafară: „Corectează masca” sau selectează cerul tu (🪄, ➰) și repornește.
+Une photo de ciel ¦ O fotografie cu cer
+Prendre ce ciel ¦ Ia acest cer
+Une photo de la base, ou une image de l’ordinateur (elle entre dans les médias). ¦ O fotografie din bază sau o imagine de pe calculator (intră în fișierele media).
+Tu peins le masque du ciel : ⬛ cacher là où le ciel déborde (feuillage, toits), ⬜ montrer là où il manque. Puis « ✓ OK ». ¦ Pictezi masca cerului: ⬛ ascunde acolo unde cerul dă pe dinafară (frunziș, acoperișuri), ⬜ arată acolo unde lipsește. Apoi „✓ OK”.
+Ciel remplacé : calques « Ciel » et « Harmonisation du premier plan » (opacité, masque, 👁 pour comparer). ¦ Cer înlocuit: straturile „Cer” și „Armonizarea prim-planului” (opacitate, mască, 👁 pentru a compara).
+✂️ Détourer une personne ¦ ✂️ Decupează o persoană
+Sans intelligence artificielle : tout se calcule ici ¦ Fără inteligență artificială: totul se calculează aici
+1. Trace un rectangle autour de la personne (⬚), pas trop serré — ou laisse tout : la photo entière sert de cadre. ¦ 1. Trasează un dreptunghi în jurul persoanei (⬚), nu prea strâns — sau lasă totul: toată fotografia servește drept cadru.
+2. « Détourer » : l’app apprend les couleurs de la personne (dans le rectangle) et du fond (autour), puis suit les contours. ¦ 2. „Decupează”: aplicația învață culorile persoanei (în dreptunghi) și ale fundalului (în jur), apoi urmărește contururile.
+⬚ Tracer un rectangle ¦ ⬚ Trasează un dreptunghi
+✂️ Détourer ¦ ✂️ Decupează
+Fond transparent (image en PNG) ¦ Fundal transparent (imagine PNG)
+Fond flou ¦ Fundal estompat
+Fond uni ¦ Fundal uniform
+Garder la personne sur un calque à part ¦ Păstrează persoana pe un strat separat
+Flou du fond ¦ Estomparea fundalului
+Peindre le masque : ⬛ cacher, ⬜ montrer ¦ Pictează masca: ⬛ ascunde, ⬜ arată
+🖌 Retoucher le contour ¦ 🖌 Retușează conturul
+Marche bien quand la personne se détache de son fond (couleurs différentes, fond assez simple). Cheveux fins, fond chargé ou vêtements de la couleur du fond : il faudra retoucher au pinceau (« Retoucher le contour »). ¦ Merge bine când persoana se desprinde de fundal (culori diferite, fundal destul de simplu). Păr fin, fundal încărcat sau haine de culoarea fundalului: va trebui retușat cu pensula („Retușează conturul”).
+Personne détourée ¦ Persoană decupată
+Trace un rectangle autour de la personne (en laissant un peu de fond tout autour), puis « ✂️ Détourer ». ¦ Trasează un dreptunghi în jurul persoanei (lăsând puțin fundal de jur împrejur), apoi „✂️ Decupează”.
+Détourage… ¦ Se decupează…
+Personne introuvable : trace le rectangle plus près d’elle, puis recommence. ¦ Persoana nu a fost găsită: trasează dreptunghiul mai aproape de ea, apoi reîncepe.
+✂️ Détourer à nouveau ¦ ✂️ Decupează din nou
+Tu peins le masque de la personne : ⬛ cacher (du fond resté), ⬜ montrer (un bout de la personne oublié). ¦ Pictezi masca persoanei: ⬛ ascunde (fundal rămas), ⬜ arată (o bucată din persoană uitată).
+Tu peins le masque du fond : ⬛ cacher (là c’est la personne), ⬜ montrer (là c’est du fond). ¦ Pictezi masca fundalului: ⬛ ascunde (acolo e persoana), ⬜ arată (acolo e fundal).
+Détourage : fond transparent ¦ Decupare: fundal transparent
+Détourage : fond flou ¦ Decupare: fundal estompat
+Détourage : fond uni ¦ Decupare: fundal uniform
+Détourage : personne sur un calque ¦ Decupare: persoana pe un strat
+Fond rendu transparent (masque de la photo) : l’image sera enregistrée en PNG. ¦ Fundal făcut transparent (masca fotografiei): imaginea va fi salvată în PNG.
+Détourage fait : tout est sur des calques, avec des masques à retoucher au besoin. ¦ Decupare făcută: totul este pe straturi, cu măști de retușat la nevoie.
+Trace un rectangle autour de la personne (⬚), ou « ✂️ Détourer » directement pour toute la photo. ¦ Trasează un dreptunghi în jurul persoanei (⬚) sau „✂️ Decupează” direct pentru toată fotografia.
+Préparation de l’image en pleine taille… ¦ Se pregătește imaginea la mărime completă…
+🔍 Agrandir l’image ¦ 🔍 Mărește imaginea
+Netteté des contours ¦ Claritatea contururilor
+Renforce les contours sans faire de halo ; les aplats (ciel, peau) restent doux. ¦ Întărește contururile fără halou; zonele uniforme (cer, piele) rămân netede.
+Clique pour choisir l’endroit de l’aperçu ¦ Fă clic pentru a alege locul previzualizării
+Lissage du grain ¦ Netezirea granulației
+Avant (agrandi simplement) ¦ Înainte (mărit simplu)
+Après, à 100 % ¦ După, la 100 %
+Une nouvelle version de la photo, affichée partout (l’original reste) ¦ O versiune nouă a fotografiei, afișată peste tot (originalul rămâne)
+Agrandir → nouvelle version ¦ Mărește → versiune nouă
+→ copie séparée ¦ → copie separată
+Agrandir → dans les médias ¦ Mărește → în fișierele media
+Agrandir ne retrouve pas les détails qui n’ont jamais été photographiés : l’image est plus grande et plus nette, pas plus précise. ¦ Mărirea nu regăsește detaliile care n-au fost niciodată fotografiate: imaginea este mai mare și mai clară, nu mai precisă.
+Cette image est déjà trop grande pour être agrandie. ¦ Imaginea aceasta este deja prea mare pentru a fi mărită.
+Filtre : {what} ¦ Filtru: {what}
+🎨 Teinte/Saturation {num} ¦ 🎨 Nuanță/Saturație {num}
+Motif {num} ¦ Model {num}
+Bruit ¦ Zgomot
+Artistiques ¦ Artistice
+Pixellisation ¦ Pixelare
+Rendu ¦ Randare
+Autres ¦ Altele
+Flou gaussien ¦ Estompare gaussiană
+Flou de mouvement ¦ Estompare de mișcare
+Flou radial (zoom) ¦ Estompare radială (zoom)
+Flou rotatif ¦ Estompare rotativă
+Accentuation (masque flou) ¦ Accentuare (mască de estompare)
+Estampage (relief) ¦ Embosare (relief)
+Solarisation ¦ Solarizare
+Diffusion ¦ Difuzie
+Vent ¦ Vânt
+Aquarelle ¦ Acuarelă
+Vieux film ¦ Film vechi
+Cristallisation ¦ Cristalizare
+Pointillisme ¦ Pointilism
+Nuages (texture) ¦ Nori (textură)
+Lueur diffuse ¦ Strălucire difuză
+Tourbillon ¦ Vârtej
+Onde ¦ Undă
+Rayon ¦ Rază
+Centre X ¦ Centru X
+Centre Y ¦ Centru Y
+Seuil ¦ Prag
+Bande nette, hauteur ¦ Bandă clară, înălțime
+Points lumineux ¦ Puncte luminoase
+Monochrome (0 / 1) ¦ Monocrom (0 / 1)
+Gain ¦ Câștig
+Niveaux ¦ Niveluri
+Longueur ¦ Lungime
+Contours ¦ Contururi
+Trait ¦ Trăsătură
+Traits noirs ¦ Trăsături negre
+Usure ¦ Uzură
+Position X ¦ Poziție X
+Position Y ¦ Poziție Y
+Amplitude ¦ Amplitudine
+Horizontale (0) / verticale (1) ¦ Orizontală (0) / verticală (1)
+Horizontal ¦ Orizontal
+Contraste ¦ Contrast
+Ombres ¦ Umbre
+Chaleur ¦ Căldură
+Rouge ¦ Roșu
+Vert ¦ Verde
+Bleu ¦ Albastru
+RVB ¦ RGB
+Assombrir ¦ Întunecă
+Grain ¦ Granulație
+Vignette ¦ Vignetă
+Force ¦ Forță
+Couleurs ¦ Culori
+Auto ¦ Auto
+Document lisible ¦ Document lizibil
+Niveaux : point noir, tons moyens, point blanc ¦ Niveluri: punct negru, tonuri medii, punct alb
+Niveaux automatiques ¦ Niveluri automate
+Monter la courbe éclaircit, la creuser assombrit, un « S » donne du contraste. Rouge, vert, bleu : corriger une dominante de couleur. ¦ Ridicarea curbei luminează, adâncirea ei întunecă, un „S” dă contrast. Roșu, verde, albastru: corectează o dominantă de culoare.
+✨ Menu ¦ ✨ Meniu
+Déplacer : glisse la poignée, ou Alt + ↑ / ↓ ¦ Mută: trage mânerul sau Alt + ↑ / ↓
+Auto : les points les plus sombres deviennent noirs et les plus clairs blancs ; cliquer une 2ᵉ fois revient à l’état d’avant. ¦ Auto: cele mai întunecate puncte devin negre, iar cele mai deschise albe; un al doilea clic revine la starea de dinainte.
+Éclaircit seulement les parties sombres (ou les assombrit vers la gauche), sans toucher aux claires. ¦ Luminează doar părțile întunecate (sau le întunecă spre stânga), fără să atingă părțile deschise.
+Cliquer à nouveau pour revenir à l’état d’avant ¦ Fă clic din nou pentru a reveni la starea de dinainte
+Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou la touche ⌫), ou le glisser hors du cadre. ¦ Clic pe curbă: adaugi un punct · trage: îl muți · pentru a-l elimina: alege-l, apoi „Elimină punctul” (sau tasta ⌫), ori trage-l în afara cadrului.
+fx ¦ fx
+Normal italique ¦ Normal cursiv
+Extra-fin italique ¦ Extra-subțire cursiv
+Ultra-léger italique ¦ Ultra-ușor cursiv
+Léger italique ¦ Ușor cursiv
+Médium italique ¦ Mediu cursiv
+Demi-gras italique ¦ Semi-aldin cursiv
+Gras italique ¦ Aldin cursiv
+Extra-gras italique ¦ Extra-aldin cursiv
+Noir italique ¦ Negru cursiv
+Unicode : Latin-1 ¦ Unicode: Latin-1
+Unicode : grec ¦ Unicode: greacă
+Unicode : cyrillique ¦ Unicode: chirilică
+Unicode : ponctuation ¦ Unicode: punctuație
+Unicode : monnaies ¦ Unicode: monede
+Unicode : symboles de lettres ¦ Unicode: simboluri literale
+Unicode : nombres ¦ Unicode: numere
+Unicode : traits de tableau ¦ Unicode: linii de tabel
+Unicode : symboles divers ¦ Unicode: simboluri diverse
+Unicode : casseau (dingbats) ¦ Unicode: dingbats
+Unicode : ligatures ¦ Unicode: ligaturi
+Grain de papier ¦ Granulația hârtiei
+Rond ¦ Rotund
+Plume calligraphique ¦ Peniță caligrafică
+Crayon ¦ Creion
+Pinceau sec ¦ Pensulă uscată
+Herbe ¦ Iarbă
+Peau claire ¦ Piele deschisă
+Peau hâlée ¦ Piele bronzată
+Peau mate ¦ Piele mată
+Joues, lèvres ¦ Obraji, buze
+Cheveux bruns ¦ Păr castaniu
+Cheveux blonds ¦ Păr blond
+Cheveux gris ¦ Păr cărunt
+Feuillage ¦ Frunziș
+Uniforme, costume bleu ¦ Uniformă, costum albastru
+Robe bordeaux ¦ Rochie bordo
+Habit noir ¦ Haină neagră
+Mur, pierre ¦ Zid, piatră
+Brique, tuile ¦ Cărămidă, țiglă
+Bois ¦ Lemn
+🩹 Correcteur ¦ 🩹 Corector
+🧬 Tampon (morceau manquant) ¦ 🧬 Ștampilă (bucată lipsă)
+Zoom : ajuster, 50 %, 100 %, 200 % ¦ Zoom: potrivire, 50 %, 100 %, 200 %
+photo|Restaurer ¦ Restaurează
+menu|Sélection ¦ Selecție
+retouche|Courbe ¦ Curbă
+motif|D’après ¦ După
+pinceau|Feuille ¦ Frunză
+pinceau|Étoile ¦ Stea
+pinceau|Carré ¦ Pătrat
+Glisse pour comparer ¦ Trage pentru a compara
+Rideau avant / après ¦ Cortină înainte / după
+Image importée ¦ Imagine importată
+La fenêtre d’export n’est pas encore prête. ¦ Fereastra de export nu este încă gata.
+Image téléchargée ; une copie est rangée dans les médias. ¦ Imagine descărcată; o copie este pusă în fișierele media.
+Aperçu de l’avant / après ¦ Previzualizarea înainte / după
+Rideau vertical (avant à gauche) ¦ Cortină verticală (înainte la stânga)
+Rideau horizontal (avant en haut) ¦ Cortină orizontală (înainte sus)
+L’une sous l’autre ¦ Una sub alta
+Position du rideau ¦ Poziția cortinei
+ex. Mariage de Jean et Marie, 1925 ¦ ex. Mariage de Jean et Marie, 1925
+Écrire « Avant » et « Après » ¦ Scrie „Înainte” și „După”
+Avant / après téléchargé ; une copie est rangée dans les médias. ¦ Înainte / după descărcat; o copie este pusă în fișierele media.
+Garder appuyé pour voir l’original ¦ Ține apăsat pentru a vedea originalul
+👁 Avant / après ¦ 👁 Înainte / după
+◧ Rideau ¦ ◧ Cortină
+Comparer avec un rideau qu’on glisse sur la photo ¦ Compară cu o cortină pe care o tragi pe fotografie
+Rideau vertical ou horizontal ¦ Cortină verticală sau orizontală
+Exporter l’avant / après en image (côte à côte ou rideau, avec légende) ¦ Exportă înainte / după ca imagine (alăturate sau cortină, cu legendă)
+Rideau horizontal ¦ Cortină orizontală
+Rideau vertical ¦ Cortină verticală
+De combien le cadre dépasse autour du visage : petit = visage serré, grand = épaules et un peu de fond. ¦ Cât depășește cadrul în jurul feței: mic = față strânsă, mare = umeri și puțin fundal.
+La hauteur des yeux dans le cadre, depuis le haut : la même pour tous les portraits, ils s’alignent quand on les met côte à côte. ¦ Înălțimea ochilor în cadru, de sus: aceeași pentru toate portretele, ca să se alinieze când le pui alăturat.
+Faible : le bord du pinceau est doux et se fond ; forte : le bord est net. ¦ Slabă: marginea pensulei este moale și se topește; puternică: marginea este clară.
+Filtres ¦ Filtre
+✨ Filtres ¦ ✨ Filtre
+Classique : comme avant. Perceptuel : un passage plus égal à l’œil, sans zone grise ni trop sombre au milieu. Par les teintes : en passant par les couleurs de l’arc-en-ciel. ¦ Clasic: ca înainte. Perceptual: o trecere mai uniformă pentru ochi, fără zonă gri sau prea întunecată la mijloc. Prin nuanțe: trecând prin culorile curcubeului.
+Plus haut : des lignes plus pâles ou plus courtes sont aussi prises. Trop haut, des détails de la photo (cheveux, écriture) peuvent l’être : regarde le rouge. ¦ Mai sus: sunt luate și linii mai palide sau mai scurte. Prea sus, pot fi luate și detalii ale fotografiei (păr, scris): uită-te la roșu.
+La force de toutes les étapes d’un coup : bas = une restauration discrète, haut = plus marquée (mais attention au « trop lisse »). ¦ Forța tuturor etapelor dintr-o dată: jos = o restaurare discretă, sus = mai pronunțată (dar atenție la „prea neted”).
+Sens ¦ Sens
+De combien ¦ Cu cât
+↻ Horaire ¦ ↻ Orar
+↺ Antihoraire ¦ ↺ Antiorar
+↻ Faire pivoter ¦ ↻ Rotește
+Garde le plus grand rectangle droit dans la photo tournée : plus de coins vides. C’est un recadrage : « Annuler le recadrage » le retire. ¦ Păstrează cel mai mare dreptunghi drept din fotografia rotită: fără colțuri goale. Este o decupare: „Anulează decuparea” o elimină.
+Enlever ¦ Elimină
+Coché : le nombre de pixels change (l’image est recalculée). Décoché : seuls la résolution et la taille à l’impression changent, les pixels restent les mêmes. ¦ Bifat: numărul de pixeli se schimbă (imaginea este recalculată). Debifat: se schimbă doar rezoluția și mărimea la tipărire, pixelii rămân aceiași.
+Coché : tu écris ce qu’on ajoute (ou enlève, avec un nombre négatif) autour de l’image. ¦ Bifat: scrii ce se adaugă (sau se scoate, cu un număr negativ) în jurul imaginii.
+Avant d’agrandir, adoucit le grain et le bruit (les contours restent) : utile pour une photo scannée granuleuse. ¦ Înainte de mărire, netezește granulația și zgomotul (contururile rămân): util pentru o fotografie scanată granulată.
+Pour un négatif photographié ou scanné : les clairs et les sombres s’échangent. ¦ Pentru un negativ fotografiat sau scanat: zonele deschise și cele închise se inversează.
+Nom de la photo retouchée ¦ Numele fotografiei retușate
+Le nom de la copie et des fichiers exportés ¦ Numele copiei și al fișierelor exportate
+La retouche complète : calques, sélections, masques, texte, formes, filtres, projets ¦ Retușarea completă: straturi, selecții, măști, text, forme, filtre, proiecte
+Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup (dans la retouche complète) ¦ Reducerea zgomotului, praf, pliuri, contrast, claritate și colorizare dintr-o dată (în retușarea completă)
+🎛️ Retouche complète ¦ 🎛️ Retușare completă
+Retouche complète ¦ Retușare completă
+Exporter : la photo retouchée (PNG, JPG, imprimer) ou l’avant / après ¦ Exportă: fotografia retușată (PNG, JPG, tipărire) sau înainte / după
+Enregistrer et afficher cette version de la photo (l’original est gardé) ¦ Salvează și afișează această versiune a fotografiei (originalul se păstrează)
+🖼 La photo retouchée (PNG, JPG, imprimer)… ¦ 🖼 Fotografia retușată (PNG, JPG, tipărire)…
+Barre des outils ¦ Bara de instrumente
+Réglages : couleur, lumière, courbe ¦ Ajustări: culoare, lumină, curbă
+Correcteur de taches : clique sur une tache, une poussière, une rayure ¦ Corector de pete: fă clic pe o pată, un fir de praf, o zgârietură
+Tampon de duplication : {key} + clic sur l’endroit à recopier, puis peins sur la zone à couvrir ¦ Ștampilă de clonare: {key} + clic pe locul de copiat, apoi pictează pe zona de acoperit
+{key} + clic pour choisir l’endroit à recopier, puis peins sur la zone à couvrir. ¦ {key} + clic pentru a alege locul de copiat, apoi pictează pe zona de acoperit.
+Faire pivoter de 90° vers la gauche (antihoraire) ¦ Rotește cu 90° spre stânga (antiorar)
+Pivoter à gauche ¦ Rotește la stânga
+Faire pivoter de 90° vers la droite (horaire) ¦ Rotește cu 90° spre dreapta (orar)
+Pivoter à droite ¦ Rotește la dreapta
+Retouche complète : calques, sélections, masques, texte, filtres ¦ Retușare completă: straturi, selecții, măști, text, filtre
+Les corrections en cours seront perdues. ¦ Corecțiile în curs se vor pierde.
+Passer à la retouche complète ? ¦ Treci la retușarea completă?
+Passer à la retouche complète ¦ Treci la retușarea completă
+Règle la couleur et la lumière à droite · garde « 👁 Avant / après » appuyé pour comparer ¦ Reglează culoarea și lumina în dreapta · ține apăsat „👁 Înainte / după” pentru a compara
+Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long. ¦ Fă clic pe o pată, un fir de praf sau o zgârietură: este înlocuită cu ce o înconjoară. Pentru o zgârietură, trage de-a lungul ei.
+Choisis d’abord l’endroit à recopier : Alt + clic (⌥ + clic sur Mac). ¦ Alege mai întâi locul de copiat: Alt + clic (⌥ + clic pe Mac).
+Versions de la photo ¦ Versiunile fotografiei
+Enregistrer sans l’afficher (gardée dans les versions) ¦ Salvează fără a o afișa (păstrată în versiuni)
+Copie séparée (un autre média, relié aux mêmes fiches) ¦ Copie separată (alt fișier media, legat de aceleași fișe)
+Exporter la photo retouchée (PNG, JPG, imprimer)… ¦ Exportă fotografia retușată (PNG, JPG, tipărire)…
+Exporter l’avant / après… ¦ Exportă înainte / după…
+Restaurer en une fois… ¦ Restaurează dintr-o dată…
+Pivoter de 90° à droite (horaire) ¦ Rotește cu 90° la dreapta (orar)
+Pivoter de 90° à gauche (antihoraire) ¦ Rotește cu 90° la stânga (antiorar)
+Avant / après en rideau ¦ Înainte / după în cortină
+La photo est ajoutée aux médias (sans fiche). Les réglages en cours sur cette photo-ci sont abandonnés. ¦ Fotografia este adăugată în fișierele media (fără fișă). Setările în curs pe fotografia aceasta sunt abandonate.
+Retoucher « {name} » à la place ? ¦ Retușezi „{name}” în locul ei?
+💧 Fluidité ¦ 💧 Fluidizare
+Fluidité ¦ Fluidizare
+Peins sur la photo pour la déformer, comme une pâte souple ¦ Pictează pe fotografie pentru a o deforma, ca pe un aluat moale
+L’image suit la main ¦ Imaginea urmează mâna
+Agrandit sous le pinceau (garder appuyé) ¦ Mărește sub pensulă (ține apăsat)
+Rétrécit sous le pinceau (garder appuyé) ¦ Micșorează sub pensulă (ține apăsat)
+Fait tourner dans le sens des aiguilles d’une montre ¦ Rotește în sensul acelor de ceasornic
+Fait tourner dans l’autre sens ¦ Rotește în celălalt sens
+Ramène peu à peu l’image d’origine ¦ Readuce treptat imaginea originală
+➡ Pousser ¦ ➡ Împinge
+⊕ Gonfler ¦ ⊕ Umflă
+⊖ Dégonfler ¦ ⊖ Dezumflă
+Dégonfler ¦ Dezumflă
+Gonfler ¦ Umflă
+Pousser ¦ Împinge
+↻ Tourbillon ¦ ↻ Vârtej
+↺ Tourbillon inverse ¦ ↺ Vârtej invers
+Tourbillon inverse ¦ Vârtej invers
+↩ Reconstruire ¦ ↩ Reconstruiește
+Reconstruire ¦ Reconstruiește
+Image trop grande pour la Fluidité. ¦ Imagine prea mare pentru Fluidizare.
+↶ Annuler le coup ¦ ↶ Anulează mișcarea
+✓ Appliquer (calque « Fluidité ») ¦ ✓ Aplică (strat „Fluidizare”)
+Rien n’a été déformé. ¦ Nu a fost deformat nimic.
+💧 Fluidité appliquée sur le calque « Fluidité » (la photo reste dessous : 👁 pour comparer). ¦ 💧 Fluidizare aplicată pe stratul „Fluidizare” (fotografia rămâne dedesubt: 👁 pentru a compara).
+🪄 Gomme magique ¦ 🪄 Radieră magică
+Clique sur le fond à rendre transparent (plusieurs clics s’ajoutent) ¦ Fă clic pe fundalul de făcut transparent (mai multe clicuri se adună)
+Zone voisine seulement (sinon : cette couleur partout) ¦ Doar zona vecină (altfel: această culoare peste tot)
+↶ Annuler le clic ¦ ↶ Anulează clicul
+✓ Appliquer (masque de la photo) ¦ ✓ Aplică (masca fotografiei)
+La photo a déjà un masque : la gomme magique le remplace. ¦ Fotografia are deja o mască: radiera magică o înlocuiește.
+Remplacer le masque de la photo ? ¦ Înlocuiești masca fotografiei?
+🪄 Fond rendu transparent (masque de la photo, à retoucher au pinceau) : l’image s’enregistre en PNG. ¦ 🪄 Fundal făcut transparent (masca fotografiei, de retușat cu pensula): imaginea se salvează în PNG.
+Masque de « {name} » ¦ Masca lui „{name}”
+Il n’y a pas encore de masque : détoure (✂️), gomme le fond (🪄) ou ajoute un masque à un calque, puis affine son bord. ¦ Încă nu există o mască: decupează (✂️), șterge fundalul (🪄) sau adaugă o mască la un strat, apoi rafinează-i marginea.
+✨ Affiner le bord ¦ ✨ Rafinează marginea
+Décaler le bord ¦ Decalează marginea
+Voir le masque seul (blanc : gardé) ¦ Vezi doar masca (alb: păstrat)
+Bord du masque affiné ¦ Marginea măștii rafinată
+✨ Bord affiné (↶ pour revenir ; le pinceau corrige le reste). ¦ ✨ Margine rafinată (↶ pentru a reveni; pensula corectează restul).
+Lissage du bord ¦ Netezirea marginii
+Contraste du bord ¦ Contrastul marginii
+Image trop grande ({w} × {h} points) : réduis la taille des photos. ¦ Imagine prea mare ({w} × {h} puncte): micșorează mărimea fotografiilor.
+Recherche… ({i}/{total}) ¦ Se caută… ({i}/{total})
+« {name} » : décalage {dx} × {dy} points, rotation {rot}°, ressemblance {pct} %. ¦ „{name}”: decalaj {dx} × {dy} puncte, rotire {rot}°, asemănare {pct} %.
+Pas de partie commune sûre pour {names} : place-la à la main (glisser, flèches ; « Mode différence » pour vérifier). ¦ Nicio parte comună sigură pentru {names}: plaseaz-o de mână (trage, săgeți; „Mod diferență” pentru a verifica).
+Photos alignées : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement. ¦ Fotografii aliniate: verifică (trage, săgeți pentru a ajusta). „Topește îmbinările” netezește joncțiunea la salvare.
+Photo alignée : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement. ¦ Fotografie aliniată: verifică (trage, săgeți pentru a ajusta). „Topește îmbinările” netezește joncțiunea la salvare.
+Image assemblée enregistrée, rattachée aux mêmes fiches que « {name} ». Les photos d’origine restent. ¦ Imaginea asamblată a fost salvată, legată de aceleași fișe ca „{name}”. Fotografiile originale rămân.
+Titre de l’image assemblée ¦ Titlul imaginii asamblate
+Le titre de l’image assemblée (et le nom des fichiers exportés) ¦ Titlul imaginii asamblate (și numele fișierelor exportate)
+L’image assemblée : PNG, JPG ou imprimer ¦ Imaginea asamblată: PNG, JPG sau tipărire
+Enregistrer l’image assemblée dans les médias, rattachée aux mêmes fiches que la première photo de la base ¦ Salvează imaginea asamblată în fișierele media, legată de aceleași fișe ca prima fotografie din bază
+Clique une photo pour la choisir, glisse pour la déplacer · Maj + molette : taille · Alt + molette : rotation · molette : zoom · flèches : 1 px (Maj : 10 px) · glisse ici une photo de l’ordinateur pour l’ajouter ¦ Fă clic pe o fotografie pentru a o alege, trage pentru a o muta · Shift + rotița: mărime · Alt + rotița: rotire · rotița: zoom · săgeți: 1 px (Shift: 10 px) · trage aici o fotografie de pe calculator pentru a o adăuga
+Fond blanc (sinon transparent en PNG) ¦ Fundal alb (altfel transparent în PNG)
+Coché : le fond autour des photos est blanc. Décoché, il reste transparent (seulement en PNG ; le JPG met toujours du blanc). ¦ Bifat: fundalul din jurul fotografiilor este alb. Debifat, rămâne transparent (doar în PNG; JPG pune mereu alb).
+Ce qui se superpose bien devient noir : idéal pour aligner deux photos du même endroit ¦ Ce se suprapune bine devine negru: ideal pentru a alinia două fotografii ale aceluiași loc
+Les parties identiques des deux photos deviennent noires : quand l’écriture disparaît presque, elles sont parfaitement alignées. ¦ Părțile identice ale celor două fotografii devin negre: când scrisul aproape dispare, sunt perfect aliniate.
+Mode différence ¦ Mod diferență
+Boutons des photos ¦ Butoanele fotografiilor
+Panorama, page photographiée en deux fois : chaque photo est posée sur la précédente là où elles se recouvrent (décalage, petite rotation) ¦ Panoramă, pagină fotografiată în două părți: fiecare fotografie este pusă peste cea anterioară acolo unde se suprapun (decalaj, mică rotire)
+🪄 Aligner tout seul ¦ 🪄 Aliniază automat
+Image enregistrée ¦ Imagine salvată
+JPEG (léger) ¦ JPEG (ușor)
+PNG (sans perte) ¦ PNG (fără pierdere)
+Fondre les raccords ¦ Topește îmbinările
+Là où deux photos se recouvrent, le bord de celle du dessus s’efface en douceur : pas de marche visible au raccord. ¦ Acolo unde două fotografii se suprapun, marginea celei de deasupra se estompează ușor: nicio treaptă vizibilă la îmbinare.
+Largeur du fondu ¦ Lățimea estompării
+Rogner aux parties couvertes (sans coins vides) ¦ Taie la părțile acoperite (fără colțuri goale)
+Garde le plus grand rectangle entièrement couvert par les photos : plus de coins blancs autour d’un panorama. ¦ Păstrează cel mai mare dreptunghi acoperit în întregime de fotografii: fără colțuri albe în jurul unei panorame.
+L’assemblage non enregistré sera perdu. ¦ Asamblarea nesalvată se va pierde.
+Fermer sans enregistrer l’assemblage ? ¦ Închizi fără să salvezi asamblarea?
+Mettre devant ¦ Pune în față
+Mettre derrière ¦ Pune în spate
+Aucune photo à assembler pour l’instant ¦ Deocamdată nicio fotografie de asamblat
+« ＋ Photos », ou glisse une photo de l’ordinateur sur le plan de travail. ¦ „＋ Fotografii” sau trage o fotografie de pe calculator pe planul de lucru.
+＋ Photos ¦ ＋ Fotografii
+Clique une photo pour la régler. ¦ Fă clic pe o fotografie pentru a o regla.
+La taille de la photo par rapport à ses vrais points : pour mettre deux photos à la même échelle. ¦ Mărimea fotografiei față de punctele ei reale: pentru a pune două fotografii la aceeași scară.
+À moitié transparente, la photo du dessus laisse voir celle du dessous : on aligne les écritures. ¦ Pe jumătate transparentă, fotografia de deasupra o lasă să se vadă pe cea de dedesubt: aliniezi scrisurile.
+À moitié transparente ¦ Pe jumătate transparentă
+Pour mettre deux photos à la même échelle : rends celle du dessus à moitié transparente (ou coche « Mode différence »), puis ajuste sa taille et sa rotation jusqu’à ce que les écritures se superposent. ¦ Pentru a pune două fotografii la aceeași scară: fă-o pe cea de deasupra pe jumătate transparentă (sau bifează „Mod diferență”), apoi ajustează-i mărimea și rotirea până când scrisurile se suprapun.
+Opaque ¦ Opacă
+Aucune photo visible. ¦ Nicio fotografie vizibilă.
+Ajoute au moins deux photos qui se recouvrent (« ＋ Photos »). ¦ Adaugă cel puțin două fotografii care se suprapun („＋ Fotografii”).
+Le navigateur n’a pas pu créer l’image. ¦ Browserul nu a putut crea imaginea.
+Pour enregistrer dans la base, l’une des photos doit venir de la base (sinon : ⤓ Télécharger). ¦ Pentru a salva în bază, una dintre fotografii trebuie să vină din bază (altfel: ⤓ Descarcă).
+Création de l’image… ¦ Se creează imaginea…
+ASSEMBLER ¦ ASAMBLEAZĂ
+ce n’est pas un fichier PSD ¦ nu este un fișier PSD
+les très grands PSD (PSB) ne sont pas lus ¦ PSD-urile foarte mari (PSB) nu sunt citite
+version de PSD inconnue ¦ versiune de PSD necunoscută
+profondeur {n} bits non lue (seulement 8 bits) ¦ adâncimea de {n} biți nu este citită (doar 8 biți)
+seuls les PSD en RVB ou en niveaux de gris sont lus ¦ sunt citite doar PSD-urile în RGB sau în tonuri de gri
+image trop grande ¦ imagine prea mare
+compression ZIP non lue ¦ compresia ZIP nu este citită
+=🗂 PSD prêt : {n} calques, {w} × {h} px (les calques de réglage sont dans l’image aplatie). ¦ 🗂 PSD gata: {n} strat, {w} × {h} px (straturile de ajustare sunt în imaginea aplatizată).|🗂 PSD gata: {n} straturi, {w} × {h} px (straturile de ajustare sunt în imaginea aplatizată).|🗂 PSD gata: {n} de straturi, {w} × {h} px (straturile de ajustare sunt în imaginea aplatizată).
+=🗂 PSD prêt : {n} calque, {w} × {h} px (les calques de réglage sont dans l’image aplatie). ¦ 🗂 PSD gata: {n} strat, {w} × {h} px (straturile de ajustare sunt în imaginea aplatizată).|🗂 PSD gata: {n} straturi, {w} × {h} px (straturile de ajustare sunt în imaginea aplatizată).|🗂 PSD gata: {n} de straturi, {w} × {h} px (straturile de ajustare sunt în imaginea aplatizată).
+PSD illisible : {err}. ¦ PSD ilizibil: {err}.
+Calque PSD ¦ Strat PSD
+PSD importé : {file} ¦ PSD importat: {file}
+=🗂 {n} calques importés de « {file} » (proportions différentes : ajusté à la photo). ¦ 🗂 {n} strat importat din „{file}” (proporții diferite: ajustat la fotografie).|🗂 {n} straturi importate din „{file}” (proporții diferite: ajustate la fotografie).|🗂 {n} de straturi importate din „{file}” (proporții diferite: ajustate la fotografie).
+=🗂 {n} calques importés de « {file} ». ¦ 🗂 {n} strat importat din „{file}”.|🗂 {n} straturi importate din „{file}”.|🗂 {n} de straturi importate din „{file}”.
+=🗂 {n} calque importé de « {file} » (proportions différentes : ajusté à la photo). ¦ 🗂 {n} strat importat din „{file}” (proporții diferite: ajustat la fotografie).|🗂 {n} straturi importate din „{file}” (proporții diferite: ajustate la fotografie).|🗂 {n} de straturi importate din „{file}” (proporții diferite: ajustate la fotografie).
+=🗂 {n} calque importé de « {file} ». ¦ 🗂 {n} strat importat din „{file}”.|🗂 {n} straturi importate din „{file}”.|🗂 {n} de straturi importate din „{file}”.
+Cocher pour comparer ¦ Bifează pentru a compara
+Coche deux versions pour les comparer. ¦ Bifează două versiuni pentru a le compara.
+Plus ancien ¦ Mai vechi
+léger ¦ ușor
+Taille des vignettes ¦ Mărimea miniaturilor
+Utiliser ces images ¦ Folosește aceste imagini
+Chercher : titre, cote, personne, lieu, année ¦ Caută: titlu, cotă, persoană, loc, an
+Titre, cote, personne, lieu, année… ¦ Titlu, cotă, persoană, loc, an…
+↑ ↓ ← → · Espace : cocher · Entrée : valider ¦ ↑ ↓ ← → · Spațiu: bifează · Enter: validează
+↑ ↓ ← → · Entrée : valider ¦ ↑ ↓ ← → · Enter: validează
+Retouche ¦ Retușare
+RETOUCHE ¦ RETUȘARE
+photo|Légende ¦ Legendă
+Propriétés ¦ Proprietăți
+Préréglage ¦ Presetare
+Aucun. ¦ Niciunul.
+trop petite pour imprimer en A5 ¦ prea mică pentru a fi tipărită în A5
+assez grande pour imprimer en A5 ¦ suficient de mare pentru a fi tipărită în A5
+Écran 16:9 (1920 × 1080) ¦ Ecran 16:9 (1920 × 1080)
+Écran 4:3 (1600 × 1200) ¦ Ecran 4:3 (1600 × 1200)
+Carré 1:1 (1080 × 1080) ¦ Pătrat 1:1 (1080 × 1080)
+Vertical 9:16 (1080 × 1920) ¦ Vertical 9:16 (1080 × 1920)
+photo|Exposition ¦ Expunere
+photo|Luminosité ¦ Luminozitate
+Colorisation : {what} ¦ Colorizare: {what}
+{what} oui ¦ {what} activat
+{what} non ¦ {what} dezactivat
+Courbe {what} ¦ Curba {what}
+{layer} verrouillé ¦ {layer} blocat
+{layer} déverrouillé ¦ {layer} deblocat
+« {name} » seulement sur l’élément dessous ¦ „{name}” doar pe elementul de dedesubt
+« {name} » sur tout ce qui est dessous ¦ „{name}” pe tot ce este dedesubt
+Teinte/Saturation : {what} ¦ Nuanță/Saturație: {what}
+{dpi} ppp ¦ {dpi} ppp
+Envoi ({w} × {h} points, {size} Mo)… ¦ Se trimite ({w} × {h} puncte, {size} Mo)…
+Barre du haut (groupes) ¦ Bara de sus (grupuri)
+Les outils ¦ Instrumentele
+Options des outils (pinceau, texte…) ¦ Opțiunile instrumentelor (pensulă, text…)
+Colonne d’outils ¦ Coloana de instrumente
+Panneau Réglages ¦ Panoul Ajustări
+Préréglages ¦ Presetări
+Import des réglages indisponible. ¦ Importul setărilor nu este disponibil.

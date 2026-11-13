@@ -1,0 +1,429 @@
+fr ¦ fi ¦ hu
+=invité ¦ vieras|vierasta ¦ vendég|vendég
+=descendant vivant ¦ elävä jälkeläinen|elävää jälkeläistä ¦ élő leszármazott|élő leszármazott
+=conjoint ¦ puoliso|puolisoa ¦ házastárs|házastárs
+=fiche confidentielle ¦ luottamuksellinen kortti|luottamuksellista korttia ¦ bizalmas adatlap|bizalmas adatlap
+=invité trouvé ¦ vieras löytyi|vierasta löytyi ¦ vendég található|vendég található
+=nouvel invité ¦ uusi vieras|uutta vierasta ¦ új vendég|új vendég
+=invitée ¦ kutsuttu|kutsuttua ¦ meghívott|meghívott
+=invité déjà là ¦ vieras on jo mukana|vierasta on jo mukana ¦ vendég már szerepel|vendég már szerepel
+=colonne ¦ sarake|saraketta ¦ oszlop|oszlop
+=invité ajouté ¦ vieras lisätty|vierasta lisätty ¦ vendég hozzáadva|vendég hozzáadva
+=invité complété ¦ vieras täydennetty|vierasta täydennetty ¦ vendég kiegészítve|vendég kiegészítve
+=foyer ¦ talous|taloutta ¦ háztartás|háztartás
+=avec adresse ¦ osoitteellinen|osoitteellista ¦ címmel|címmel
+=avec courriel ¦ sähköpostiosoitteellinen|sähköpostiosoitteellista ¦ e-mail-címmel|e-mail-címmel
+=badge ¦ nimikyltti|nimikylttiä ¦ kitűző|kitűző
+=présent ¦ paikalla|paikalla ¦ jelen|jelen
+=personne attendue ¦ odotettu henkilö|odotettua henkilöä ¦ várt személy|várt személy
+=table ¦ pöytä|pöytää ¦ asztal|asztal
+=personne placée ¦ paikalle sijoitettu henkilö|paikalle sijoitettua henkilöä ¦ leültetett személy|leültetett személy
+=photo ajoutée ¦ kuva lisätty|kuvaa lisätty ¦ fotó hozzáadva|fotó hozzáadva
+=personne présente ¦ paikalla oleva henkilö|paikalla olevaa henkilöä ¦ jelen lévő személy|jelen lévő személy
+Sans réponse ¦ Ei vastausta ¦ Nincs válasz
+👥 Invités ¦ 👥 Vieraat ¦ 👥 Vendégek
+✉️ Invitations ¦ ✉️ Kutsut ¦ ✉️ Meghívók
+🏷 Badges ¦ 🏷 Nimikyltit ¦ 🏷 Kitűzők
+🌳 Grand arbre ¦ 🌳 Suuri sukupuu ¦ 🌳 Nagy családfa
+📅 Jour J ¦ 📅 Suuri päivä ¦ 📅 A nagy nap
+Réunir les descendants d’un ancêtre : invités, invitations, badges, grand arbre, jour J. ¦ Kokoa esivanhemman jälkeläiset yhteen: vieraat, kutsut, nimikyltit, suuri sukupuu, suuri päivä. ¦ Gyűjtsd össze egy ős leszármazottait: vendégek, meghívók, kitűzők, nagy családfa, a nagy nap.
+＋ Nouvelle cousinade ¦ ＋ Uusi sukukokous ¦ ＋ Új családi találkozó
+Nouvelle cousinade ¦ Uusi sukukokous ¦ Új családi találkozó
+Lecture des cousinades… ¦ Luetaan sukukokouksia… ¦ Családi találkozók betöltése…
+Aucune cousinade pour l’instant ¦ Ei vielä yhtään sukukokousta ¦ Még nincs családi találkozó
+Choisis un ancêtre (ou un couple) : l’app trouve ses descendants vivants, branche par branche, et prépare la liste des invités. ¦ Valitse esivanhempi (tai pariskunta): sovellus löytää hänen elävät jälkeläisensä haara haaralta ja laatii vierasluettelon. ¦ Válassz egy őst (vagy egy párt): az app haránként megkeresi az élő leszármazottait, és elkészíti a vendéglistát.
+Chercher… (ex. Martin, 2026, Tulle) ¦ Hae… (esim. Martin, 2026, Tulle) ¦ Keresés… (pl. Martin, 2026, Tulle)
+{n} oui ¦ {n} kyllä ¦ {n} igen
+{n} sans réponse ¦ {n} ilman vastausta ¦ {n} válasz nélkül
+Aucune cousinade ne correspond. ¦ Mikään sukukokous ei vastaa hakua. ¦ Egy családi találkozó sem felel meg.
+Renommer la cousinade ¦ Nimeä sukukokous uudelleen ¦ Családi találkozó átnevezése
+Cousinade renommée. ¦ Sukukokous nimetty uudelleen. ¦ Családi találkozó átnevezve.
+Cousinade supprimée : « {name} » ¦ Sukukokous poistettu: ”{name}” ¦ Családi találkozó törölve: „{name}”
+Modifier la cousinade ¦ Muokkaa sukukokousta ¦ Családi találkozó szerkesztése
+L’ancêtre dont on réunit les descendants ¦ Esivanhempi, jonka jälkeläiset kootaan yhteen ¦ Az ős, akinek a leszármazottait összegyűjtjük
+Avec son conjoint (le couple) — facultatif ¦ Puolisonsa kanssa (pariskunta) — valinnainen ¦ A házastársával (a pár) — nem kötelező
+Seulement les enfants du couple. Vide : tous les enfants de l’ancêtre. ¦ Vain pariskunnan lapset. Tyhjä: kaikki esivanhemman lapset. ¦ Csak a pár gyermekei. Üresen: az ős összes gyermeke.
+Nom de la cousinade ¦ Sukukokouksen nimi ¦ A családi találkozó neve
+Personne de référence pour les liens de parenté ¦ Viitehenkilö sukulaisuussuhteille ¦ Viszonyítási személy a rokoni kapcsolatokhoz
+Chaque invité aura son lien avec elle (« cousin issu de germains de … »). Toi, le plus souvent. ¦ Jokaiselle vieraalle näytetään sukulaisuus tähän henkilöön (”… pikkuserkku”). Useimmiten sinä. ¦ Minden vendégnél látszik majd a rokonsága vele („… másodunokatestvére”). Legtöbbször te.
+Inviter aussi les conjoints des descendants ¦ Kutsu myös jälkeläisten puolisot ¦ A leszármazottak házastársait is hívd meg
+🔒 Les fiches confidentielles ne sont jamais montrées. Les adresses des vivants restent dans ce projet. ¦ 🔒 Luottamuksellisia kortteja ei koskaan näytetä. Elävien osoitteet pysyvät tässä projektissa. ¦ 🔒 A bizalmas adatlapok soha nem jelennek meg. Az élők címei ebben a projektben maradnak.
+Choisis l’ancêtre : l’app cherche ses descendants vivants. ¦ Valitse esivanhempi: sovellus etsii hänen elävät jälkeläisensä. ¦ Válaszd ki az őst: az app megkeresi az élő leszármazottait.
+Recherche des descendants vivants… ¦ Etsitään eläviä jälkeläisiä… ¦ Élő leszármazottak keresése…
+{who} dans {branches}, et {spouses}. ¦ {who}: {branches}, ja {spouses}. ¦ {who} – {branches}, valamint {spouses}.
+{who} dans {branches}. ¦ {who}: {branches}. ¦ {who} – {branches}.
+{n} sans décès noté, née il y a moins de 100 ans : marquée « vivant ? ». ¦ {n} ilman merkittyä kuolemaa, syntynyt alle 100 vuotta sitten: merkitty ”elossa?”. ¦ {n} feljegyzett halál nélkül, kevesebb mint 100 éve született: „élő?” jelölést kapott.
+{n} laissées de côté. ¦ {n} jätetty pois. ¦ {n} kihagyva.
+{n} laissée de côté. ¦ {n} jätetty pois. ¦ {n} kihagyva.
+Choisis l’ancêtre dont on réunit les descendants. ¦ Valitse esivanhempi, jonka jälkeläiset kootaan yhteen. ¦ Válaszd ki az őst, akinek a leszármazottait összegyűjtjük.
+Cousinade créée : {n}. ¦ Sukukokous luotu: {n}. ¦ Családi találkozó létrehozva: {n}.
+Cousinade enregistrée : {n}. ¦ Sukukokous tallennettu: {n}. ¦ Családi találkozó mentve: {n}.
+Cousinade enregistrée. ¦ Sukukokous tallennettu. ¦ Családi találkozó mentve.
+Lecture de la cousinade… ¦ Luetaan sukukokousta… ¦ Családi találkozó betöltése…
+← Toutes les cousinades ¦ ← Kaikki sukukokoukset ¦ ← Összes családi találkozó
+↻ Chercher les nouveaux descendants ¦ ↻ Etsi uusia jälkeläisiä ¦ ↻ Új leszármazottak keresése
+Chercher les nouveaux descendants ¦ Etsi uusia jälkeläisiä ¦ Új leszármazottak keresése
+↗ Fiche de l’ancêtre ¦ ↗ Esivanhemman kortti ¦ ↗ Az ős adatlapja
+{n} n’apparaissent plus : sa fiche est devenue confidentielle (ou a été supprimée). ¦ {n} ei enää näy: kortti on muuttunut luottamukselliseksi (tai poistettu). ¦ {n} már nem látszik: az adatlap bizalmas lett (vagy törölték).
+{n} n’apparaît plus : sa fiche est devenue confidentielle (ou a été supprimée). ¦ {n} ei enää näy: kortti on muuttunut luottamukselliseksi (tai poistettu). ¦ {n} már nem látszik: az adatlap bizalmas lett (vagy törölték).
+la personne de référence ¦ viitehenkilö ¦ a viszonyítási személy
+Liens de parenté avec ¦ Sukulaisuus henkilöön ¦ Rokoni kapcsolat ezzel:
+＋ Ajouter un invité ¦ ＋ Lisää vieras ¦ ＋ Vendég hozzáadása
+⤒ Importer une liste… ¦ ⤒ Tuo luettelo… ¦ ⤒ Lista importálása…
+Aucun invité pour l’instant ¦ Ei vielä vieraita ¦ Még nincs vendég
+Aucun descendant vivant trouvé. Ajoute les invités à la main, importe une liste, ou complète l’arbre puis « ↻ Chercher les nouveaux descendants ». ¦ Elävää jälkeläistä ei löytynyt. Lisää vieraat käsin, tuo luettelo tai täydennä sukupuuta ja valitse sitten ”↻ Etsi uusia jälkeläisiä”. ¦ Nem található élő leszármazott. Add hozzá kézzel a vendégeket, importálj egy listát, vagy egészítsd ki a családfát, majd: „↻ Új leszármazottak keresése”.
+Chercher… (ex. Martin, Brive, végétarien) ¦ Hae… (esim. Martin, Brive, kasvissyöjä) ¦ Keresés… (pl. Martin, Brive, vegetáriánus)
+Invités (cochés) ¦ Kutsutut (valitut) ¦ Meghívottak (bejelölve)
+Pas invités ¦ Ei kutsutut ¦ Nem meghívottak
+Seulement « vivant ? » ¦ Vain ”elossa?” ¦ Csak „élő?”
+Par branche et par foyer ¦ Haaroittain ja talouksittain ¦ Ágak és háztartások szerint
+Par génération ¦ Sukupolvittain ¦ Nemzedékek szerint
+Par réponse ¦ Vastauksen mukaan ¦ Válasz szerint
+{n} · {inv} en tout ¦ {n} · {inv} yhteensä ¦ {n} · összesen {inv}
+Aucun invité ne correspond. ¦ Mikään vieras ei vastaa hakua. ¦ Egy vendég sem felel meg.
+Pas invité ¦ Ei kutsuttu ¦ Nincs meghívva
+Invité (coché) ¦ Kutsuttu (valittu) ¦ Meghívva (bejelölve)
+Régime ¦ Ruokavalio ¦ Étrend
+Rien de noté sur son décès, née il y a moins de 100 ans : vérifie avant d’inviter ¦ Kuolemasta ei ole merkintää, syntynyt alle 100 vuotta sitten: tarkista ennen kutsumista ¦ A haláláról nincs feljegyzés, kevesebb mint 100 éve született: ellenőrizd, mielőtt meghívod
+Sans fiche ¦ Ei korttia ¦ Adatlap nélkül
+Pas d’adresse ¦ Ei osoitetta ¦ Nincs cím
+Nombre de personnes ¦ Henkilöiden määrä ¦ Személyek száma
+{name} est invitée. ¦ {name} on kutsuttu. ¦ {name} meghívva.
+{name} est invité. ¦ {name} on kutsuttu. ¦ {name} meghívva.
+{name} n’est plus invitée. ¦ {name} ei ole enää kutsuttu. ¦ {name} már nincs meghívva.
+{name} n’est plus invité. ¦ {name} ei ole enää kutsuttu. ¦ {name} már nincs meghívva.
+Réponse de {name} : {answer}. ¦ Vastaus – {name}: {answer}. ¦ {name} válasza: {answer}.
+Inviter les {n} affichées ¦ Kutsu näytetyt {n} ¦ A megjelenített {n} meghívása
+{n} invitées. ¦ {n} kutsuttu. ¦ {n} meghívva.
+{n} invitée. ¦ {n} kutsuttu. ¦ {n} meghívva.
+Ne plus inviter les personnes affichées ¦ Älä enää kutsu näytettyjä henkilöitä ¦ A megjelenített személyek meghívásának visszavonása
+{n} retirées des invitations. ¦ {n} poistettu kutsuista. ¦ {n} eltávolítva a meghívottak közül.
+{n} retirée des invitations. ¦ {n} poistettu kutsuista. ¦ {n} eltávolítva a meghívottak közül.
+Tableau des invités (CSV)… ¦ Vierastaulukko (CSV)… ¦ Vendégtáblázat (CSV)…
+Imprimer la liste des invités… ¦ Tulosta vierasluettelo… ¦ Vendéglista nyomtatása…
+Écrire un courriel ¦ Kirjoita sähköposti ¦ E-mail írása
+Retirer de la liste ¦ Irrota luettelosta ¦ Eltávolítás a listáról
+🗑 Retirer de la liste ¦ 🗑 Irrota luettelosta ¦ 🗑 Eltávolítás a listáról
+{name} retirée de la liste. ¦ {name} poistettu luettelosta. ¦ {name} eltávolítva a listáról.
+{name} retiré de la liste. ¦ {name} poistettu luettelosta. ¦ {name} eltávolítva a listáról.
+Aucun nouveau descendant vivant : la liste est à jour. ¦ Ei uusia eläviä jälkeläisiä: luettelo on ajan tasalla. ¦ Nincs új élő leszármazott: a lista naprakész.
+{n} ajoutés. ¦ {n} lisätty. ¦ {n} hozzáadva.
+{n} ajouté. ¦ {n} lisätty. ¦ {n} hozzáadva.
+Son propre foyer ¦ Oma talous ¦ Saját háztartás
+Garder son foyer ¦ Säilytä talous ¦ Háztartás megtartása
+🎉 COUSINADE · INVITÉ ¦ 🎉 SUKUKOKOUS · VIERAS ¦ 🎉 CSALÁDI TALÁLKOZÓ · VENDÉG
+🎉 COUSINADE ¦ 🎉 SUKUKOKOUS ¦ 🎉 CSALÁDI TALÁLKOZÓ
+Nouvel invité ¦ Uusi vieras ¦ Új vendég
+Une fiche de ta généalogie (facultatif) ¦ Kortti sukututkimuksestasi (valinnainen) ¦ Egy adatlap a családfádból (nem kötelező)
+Sinon, écris le prénom et le nom ci-dessous. ¦ Muuten kirjoita etunimi ja sukunimi alle. ¦ Különben írd be lent a keresztnevet és a vezetéknevet.
+Foyer (une invitation par foyer) ¦ Talous (yksi kutsu taloutta kohden) ¦ Háztartás (háztartásonként egy meghívó)
+12 rue des Écoles ¦ 12 rue des Écoles ¦ 12 rue des Écoles
+Régime, allergies ¦ Ruokavalio, allergiat ¦ Étrend, allergiák
+végétarien, sans gluten… ¦ kasvissyöjä, gluteeniton… ¦ vegetáriánus, gluténmentes…
+Mettre aussi l’adresse, le courriel et le téléphone dans le répertoire des vivants (sa fiche) ¦ Lisää osoite, sähköposti ja puhelin myös elävien hakemistoon (hänen korttinsa) ¦ A cím, az e-mail és a telefonszám kerüljön az élők címjegyzékébe is (az adatlapjára)
+Décoché : seulement dans cette cousinade. ¦ Ei valittu: vain tässä sukukokouksessa. ¦ Bejelölés nélkül: csak ebben a családi találkozóban.
+Écris au moins un prénom ou un nom (ou choisis une fiche). ¦ Kirjoita ainakin etunimi tai sukunimi (tai valitse kortti). ¦ Írj be legalább egy keresztnevet vagy vezetéknevet (vagy válassz adatlapot).
+Ce courriel n’a pas la bonne forme (exemple : prenom.nom@exemple.fr). ¦ Sähköpostiosoite ei ole oikeassa muodossa (esimerkki: etunimi.sukunimi@esimerkki.fi). ¦ Ez az e-mail-cím nem megfelelő formájú (példa: vezeteknev.keresztnev@pelda.hu).
+Invité ajouté. ¦ Vieras lisätty. ¦ Vendég hozzáadva.
+Enregistré, et aussi dans le répertoire des vivants. ¦ Tallennettu, myös elävien hakemistoon. ¦ Mentve, az élők címjegyzékébe is.
+Le lecteur de tableaux n’est pas chargé. ¦ Taulukoiden lukijaa ei ole ladattu. ¦ A táblázatolvasó nincs betöltve.
+Importer une liste d’invités ¦ Tuo vierasluettelo ¦ Vendéglista importálása
+Un tableau avec une ligne de titres : Prénom, Nom, Courriel, Téléphone, Adresse, Code postal, Ville, Réponse (oui / non / peut-être), Nombre, Régime, Note. ¦ Taulukko, jossa on otsikkorivi: Etunimi, Sukunimi, Sähköposti, Puhelin, Osoite, Postinumero, Kaupunki, Vastaus (kyllä / ei / ehkä), Määrä, Ruokavalio, Huomautus. ¦ Táblázat fejléccel: Keresztnév, Vezetéknév, E-mail, Telefon, Cím, Irányítószám, Település, Válasz (igen / nem / talán), Létszám, Étrend, Megjegyzés.
+Je ne trouve ni prénom ni nom : la première ligne doit donner les titres des colonnes (Prénom, Nom, Courriel…). ¦ En löydä etunimeä enkä sukunimeä: ensimmäisellä rivillä on oltava sarakkeiden otsikot (Etunimi, Sukunimi, Sähköposti…). ¦ Nem találok sem keresztnevet, sem vezetéknevet: az első sorban kell lenniük az oszlopcímeknek (Keresztnév, Vezetéknév, E-mail…).
+{n} (coordonnées et réponse complétées) ¦ {n} (yhteystiedot ja vastaus täydennetty) ¦ {n} (elérhetőség és válasz kiegészítve)
+{n} non reconnues : laissées de côté. ¦ {n} tunnistamatonta: jätetty pois. ¦ {n} nem ismerhető fel: kihagyva.
+{n} non reconnue : laissée de côté. ¦ {n} tunnistamaton: jätetty pois. ¦ {n} nem ismerhető fel: kihagyva.
+⤓ Exporter le tableau des invités ¦ ⤓ Vie vierastaulukko ¦ ⤓ Vendégtáblázat exportálása
+Un fichier CSV (tableur) avec les invités, leur branche, leur lien de parenté et leur réponse. ¦ CSV-tiedosto (taulukkolaskenta), jossa vieraat, heidän haaransa, sukulaisuutensa ja vastauksensa. ¦ CSV-fájl (táblázat) a vendégekkel, az águkkal, a rokoni kapcsolatukkal és a válaszukkal.
+Avec les adresses, courriels et téléphones ¦ Osoitteiden, sähköpostien ja puhelinnumeroiden kanssa ¦ Címekkel, e-mailekkel és telefonszámokkal
+🔒 Ce sont des données de personnes vivantes : ne partage ce fichier qu’avec ceux qui organisent. ¦ 🔒 Nämä ovat elävien henkilöiden tietoja: jaa tiedosto vain järjestäjien kanssa. ¦ 🔒 Ezek élő személyek adatai: csak a szervezőkkel oszd meg ezt a fájlt.
+Seulement les invités cochés ¦ Vain valitut vieraat ¦ Csak a bejelölt vendégek
+Lien avec l’ancêtre ¦ Sukulaisuus esivanhempaan ¦ Rokoni kapcsolat az őssel
+Lien avec la référence ¦ Sukulaisuus viitehenkilöön ¦ Rokoni kapcsolat a viszonyítási személlyel
+Tableau exporté, avec les coordonnées. ¦ Taulukko viety yhteystietojen kanssa. ¦ Táblázat exportálva, elérhetőségekkel.
+Tableau exporté, sans les coordonnées. ¦ Taulukko viety ilman yhteystietoja. ¦ Táblázat exportálva, elérhetőségek nélkül.
+Invités — {name} ¦ Vieraat — {name} ¦ Vendégek — {name}
+Liste des invités ¦ Vierasluettelo ¦ Vendéglista
+Les invités cochés ¦ Valitut vieraat ¦ A bejelölt vendégek
+Ceux qui viennent ¦ Tulijat ¦ Akik jönnek
+Avec les coordonnées ¦ Yhteystietojen kanssa ¦ Elérhetőségekkel
+Le texte de l’invitation ¦ Kutsun teksti ¦ A meghívó szövege
+Une invitation par foyer. Ces mots se remplacent tout seuls : ¦ Yksi kutsu taloutta kohden. Nämä sanat korvautuvat automaattisesti: ¦ Háztartásonként egy meghívó. Ezek a szavak maguktól cserélődnek:
+Répondre avant le ¦ Vastaa viimeistään ¦ Válasz eddig:
+Contact pour répondre ¦ Yhteyshenkilö vastauksille ¦ Kapcsolattartó a válaszokhoz
+Objet du courriel ¦ Sähköpostin aihe ¦ Az e-mail tárgya
+🖨 Imprimer les invitations… ¦ 🖨 Tulosta kutsut… ¦ 🖨 Meghívók nyomtatása…
+📝 Dans le traitement de texte ¦ 📝 Tekstinkäsittelyssä ¦ 📝 A szövegszerkesztőben
+📁 Copie dans les médias ¦ 📁 Kopio mediaan ¦ 📁 Másolat a médiába
+{n} à inviter ¦ {n} kutsuttavana ¦ {n} meghívandó
+✉️ Un courriel à tous (en copie cachée) ¦ ✉️ Yksi sähköposti kaikille (piilokopiona) ¦ ✉️ Egy e-mail mindenkinek (titkos másolatként)
+Ta messagerie s’ouvre avec le texte prêt : rien n’est envoyé par l’app. ¦ Sähköpostiohjelmasi avautuu valmiin tekstin kanssa: sovellus ei lähetä mitään. ¦ A levelezőprogramod megnyílik a kész szöveggel: az app semmit sem küld el.
+✉️ Courriel prêt ¦ ✉️ Sähköposti valmis ¦ ✉️ Az e-mail kész
+Aucun invité coché : coche des invités dans l’onglet « 👥 Invités ». ¦ Yhtään vierasta ei ole valittu: valitse vieraita välilehdellä ”👥 Vieraat”. ¦ Nincs bejelölt vendég: jelölj be vendégeket a „👥 Vendégek” lapon.
+Aucun foyer à inviter : coche des invités d’abord. ¦ Ei kutsuttavia talouksia: valitse ensin vieraita. ¦ Nincs meghívandó háztartás: előbb jelölj be vendégeket.
+L’adresse du foyer en haut à droite (enveloppe à fenêtre) ¦ Talouden osoite oikeassa yläkulmassa (ikkunakirjekuori) ¦ A háztartás címe jobb felül (ablakos boríték)
+Le traitement de texte n’est pas chargé. ¦ Tekstinkäsittelyä ei ole ladattu. ¦ A szövegszerkesztő nincs betöltve.
+Les faire-part ne sont pas chargés. ¦ Ilmoituksia ei ole ladattu. ¦ A gyászjelentések és értesítők nincsenek betöltve.
+Tous les descendants de {name} ¦ Kaikki henkilön {name} jälkeläiset ¦ {name} összes leszármazottja
+Réponse avant le {date} ¦ Vastaus viimeistään {date} ¦ Válasz eddig: {date}
+Envoi vers les médias indisponible. ¦ Lähettäminen mediaan ei ole käytettävissä. ¦ A médiába küldés nem érhető el.
+Une copie de l’invitation est rangée dans les médias. ¦ Kutsun kopio on tallennettu mediaan. ¦ A meghívó egy másolata a médiába került.
+Copie non rangée dans les médias : {err} ¦ Kopiota ei tallennettu mediaan: {err} ¦ A másolat nem került a médiába: {err}
+Le lien écrit sous le nom ¦ Nimen alle kirjoitettu sukulaisuus ¦ A név alá írt rokoni kapcsolat
+Avec l’ancêtre ¦ Esivanhempaan ¦ Az őssel
+Avec la référence ¦ Viitehenkilöön ¦ A viszonyítási személlyel
+Pour qui ¦ Kenelle ¦ Kinek
+Invités cochés ¦ Valitut vieraat ¦ Bejelölt vendégek
+Qui viennent ¦ Tulijat ¦ Akik jönnek
+Présents ¦ Paikalla ¦ Jelen vannak
+Par page A4 ¦ A4-sivua kohden ¦ A4-es oldalanként
+Petite photo (si la fiche en a une) ¦ Pieni kuva (jos kortissa on sellainen) ¦ Kis fotó (ha az adatlapon van)
+QR code (nom, branche et lien, lu par un téléphone) ¦ QR-koodi (nimi, haara ja sukulaisuus, luettavissa puhelimella) ¦ QR-kód (név, ág és rokoni kapcsolat, telefonnal olvasható)
+Chaque branche a sa couleur (onglet « 📊 Chiffres » pour la changer). ¦ Jokaisella haaralla on oma värinsä (vaihda se välilehdellä ”📊 Luvut”). ¦ Minden ágnak saját színe van (a „📊 Számok” lapon módosíthatod).
+Personne à qui faire un badge. ¦ Ei ketään, jolle tehdä nimikylttiä. ¦ Senkinek sem kell kitűzőt készíteni.
+L’arbre décoratif n’est pas chargé. ¦ Koristeellista sukupuuta ei ole ladattu. ¦ A díszes családfa nincs betöltve.
+Toute la descendance de {name}, en grand, une couleur par branche, à afficher le jour de la cousinade. Le dessin s’ouvre ensuite pour tout retoucher, puis « ⤓ Exporter » (PDF pour l’imprimeur, avec fond perdu et traits de coupe, PNG, SVG…). ¦ Henkilön {name} koko jälkipolvi suurena, yksi väri haaraa kohden, esille sukukokouksen päiväksi. Kuva avautuu sitten viimeisteltäväksi, ja sen jälkeen ”⤓ Vie” (PDF painoon leikkuuvaroilla ja leikkuumerkeillä, PNG, SVG…). ¦ {name} teljes leszármazotti köre nagy méretben, áganként egy színnel, hogy kitehesd a családi találkozó napján. A rajz ezután megnyílik, hogy mindent finomíthass, majd „⤓ Exportálás” (PDF a nyomdának kifutóval és vágójelekkel, PNG, SVG…).
+l’ancêtre ¦ esivanhempi ¦ az ős
+Les conjoints sous chaque nom ¦ Puolisot kunkin nimen alla ¦ Házastársak minden név alatt
+Une place pour coller les photos du jour (à côté des vivants) ¦ Tila päivän kuvien liimaamiselle (elävien viereen) ¦ Hely a nap fotóinak beragasztásához (az élők mellett)
+🌳 Fabriquer le grand arbre ¦ 🌳 Tee suuri sukupuu ¦ 🌳 A nagy családfa elkészítése
+Fabrication du grand arbre… ¦ Tehdään suurta sukupuuta… ¦ A nagy családfa készül…
+Aucune descendance pour cet ancêtre. ¦ Tällä esivanhemmalla ei ole jälkeläisiä. ¦ Ennek az ősnek nincsenek leszármazottai.
+Cet ancêtre est confidentiel. ¦ Tämä esivanhempi on luottamuksellinen. ¦ Ez az ős bizalmas.
+Photos du jour ¦ Päivän kuvat ¦ A nap fotói
+✅ Présence ¦ ✅ Läsnäolo ¦ ✅ Jelenlét
+{here} sur {n} ¦ {here}/{n} ¦ {here} / {n}
+🖨 Imprimer la liste de présence… ¦ 🖨 Tulosta läsnäololista… ¦ 🖨 Jelenléti ív nyomtatása…
+Personne n’a encore dit oui : les réponses se notent dans « 👥 Invités ». ¦ Kukaan ei ole vielä vastannut kyllä: vastaukset merkitään kohtaan ”👥 Vieraat”. ¦ Még senki sem mondott igent: a válaszokat a „👥 Vendégek” részben jegyezheted fel.
+{name} est là. ¦ {name} on paikalla. ¦ {name} itt van.
+{name} n’est plus notée présente. ¦ {name} ei ole enää merkitty paikalla olevaksi. ¦ {name} már nincs jelenlévőként jelölve.
+{name} n’est plus noté présent. ¦ {name} ei ole enää merkitty paikalla olevaksi. ¦ {name} már nincs jelenlévőként jelölve.
+Présence — {name} ¦ Läsnäolo — {name} ¦ Jelenlét — {name}
+{name} — présence ¦ {name} — läsnäolo ¦ {name} — jelenlét
+Liste de présence ¦ Läsnäololista ¦ Jelenléti ív
+Places par table ¦ Paikkoja pöytää kohden ¦ Hely asztalonként
+Compter aussi les « peut-être » ¦ Laske myös ”ehkä”-vastaukset ¦ A „talán” válaszokat is számold
+Les petites branches partagent une table ¦ Pienet haarat jakavat pöydän ¦ A kis ágak közös asztalt kapnak
+✨ Faire le plan par branche ¦ ✨ Tee istumajärjestys haaroittain ¦ ✨ Ültetési rend ágak szerint
+🖨 Imprimer le plan… ¦ 🖨 Tulosta istumajärjestys… ¦ 🖨 Ültetési rend nyomtatása…
+Un foyer n’est jamais séparé. Change la table d’une personne avec sa case ; ↶ Annuler défait le plan. ¦ Taloutta ei koskaan erotella. Vaihda henkilön pöytä hänen ruudustaan; ↶ Kumoa peruu istumajärjestyksen. ¦ Egy háztartást sosem választunk szét. Egy személy asztalát a mezőjében módosíthatod; a ↶ Visszavonás visszacsinálja az ültetési rendet.
+Pas encore de plan de table : note les réponses, puis « ✨ Faire le plan par branche ». ¦ Istumajärjestystä ei vielä ole: merkitse vastaukset ja valitse sitten ”✨ Tee istumajärjestys haaroittain”. ¦ Még nincs ültetési rend: jegyezd fel a válaszokat, majd: „✨ Ültetési rend ágak szerint”.
+{name} va à la table {no}. ¦ {name} istuu pöydässä {no}. ¦ {name} a(z) {no}. asztalhoz kerül.
+Personne ne vient encore : note les réponses « Oui » d’abord. ¦ Kukaan ei vielä tule: merkitse ensin ”Kyllä”-vastaukset. ¦ Még senki sem jön: előbb jegyezd fel az „Igen” válaszokat.
+＋ Ajouter des photos… ¦ ＋ Lisää kuvia… ¦ ＋ Fotók hozzáadása…
+Retirer de l’album ¦ Irrota albumista ¦ Eltávolítás az albumból
+L’album est vide ¦ Albumi on tyhjä ¦ Az album üres
+Les photos du jour : importe-les depuis l’ordinateur ou choisis-les dans les médias. ¦ Päivän kuvat: tuo ne tietokoneelta tai valitse ne mediasta. ¦ A nap fotói: importáld őket a számítógépről, vagy válaszd ki őket a médiából.
+＋ Ajouter des photos ¦ ＋ Lisää kuvia ¦ ＋ Fotók hozzáadása
+Les photos de la cousinade ¦ Sukukokouksen kuvat ¦ A családi találkozó fotói
+Ajouter à l’album ¦ Lisää albumiin ¦ Hozzáadás az albumhoz
+{n} à l’album. ¦ {n} albumiin. ¦ {n} az albumba.
+Photo retirée de l’album (elle reste dans les médias). ¦ Kuva irrotettu albumista (se jää mediaan). ¦ A fotó eltávolítva az albumból (a médiában megmarad).
+invités ¦ vieraat ¦ vendég
+oui ¦ kyllä ¦ igen
+peut-être ¦ ehkä ¦ talán
+non ¦ ei ¦ nem
+sans réponse ¦ ilman vastausta ¦ válasz nélkül
+personnes attendues ¦ odotettua henkilöä ¦ várt személy
+Par branche ¦ Haaroittain ¦ Ágak szerint
+Invités ¦ Vieraat ¦ Vendégek
+Réponses ¦ Vastaukset ¦ Válaszok
+Couleur de la branche {name} ¦ Haaran {name} väri ¦ A(z) {name} ág színe
+{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse ¦ {yes} kyllä, {maybe} ehkä, {no} ei, {wait} ilman vastausta ¦ {yes} igen, {maybe} talán, {no} nem, {wait} válasz nélkül
+Régimes et allergies (de ceux qui viennent) ¦ Ruokavaliot ja allergiat (tulijoiden) ¦ Étrendek és allergiák (azoké, akik jönnek)
+Le jour J : {n}. ¦ Suurena päivänä: {n}. ¦ A nagy napon: {n}.
+Couleur de la branche enregistrée. ¦ Haaran väri tallennettu. ¦ Az ág színe mentve.
+Organiser une cousinade… ¦ Järjestä sukukokous… ¦ Családi találkozó szervezése…
+Descendants de {name} · {n} ¦ Henkilön {name} jälkeläiset · {n} ¦ {name} leszármazottai · {n}
+=passage dans les médias ¦ mediaesiintyminen|mediaesiintymistä ¦ médiaszereplés|médiaszereplés
+passages dans les médias ¦ mediaesiintymiset ¦ médiaszereplések
+1980 et après ¦ 1980 ja myöhemmin ¦ 1980 és később
+avant 1900 ¦ ennen vuotta 1900 ¦ 1900 előtt
+Ajoute un fichier MP3, M4A, WAV, AIFF ou OGG sur une fiche, une battue, une enquête… (ou glisse-le ici) et il apparaîtra ici. ¦ Lisää MP3-, M4A-, WAV-, AIFF- tai OGG-tiedosto korttiin, laajaan hakuun, selvitykseen… (tai vedä se tähän), niin se näkyy täällä. ¦ Adj hozzá egy MP3-, M4A-, WAV-, AIFF- vagy OGG-fájlt egy adatlaphoz, átfésüléshez, nyomozáshoz… (vagy húzd ide), és itt fog megjelenni.
+Ajoute un fichier MP4, MOV ou WEBM sur une fiche, une battue, une enquête… (ou glisse-le ici) et elle apparaîtra ici. ¦ Lisää MP4-, MOV- tai WEBM-tiedosto korttiin, laajaan hakuun, selvitykseen… (tai vedä se tähän), niin se näkyy täällä. ¦ Adj hozzá egy MP4-, MOV- vagy WEBM-fájlt egy adatlaphoz, átfésüléshez, nyomozáshoz… (vagy húzd ide), és itt fog megjelenni.
+Ajoute une carte : l’image de la vue, celle du dos, puis le lieu montré pour la retrouver sur la Carte. ¦ Lisää postikortti: näkymän kuva, takapuolen kuva ja sitten kuvattu paikka, jotta löydät sen Kartalta. ¦ Adj hozzá egy képeslapot: a kép, a hátoldal, majd az ábrázolt hely, hogy megtaláld a Térképen.
+Ajoute-les sur la fiche d’une personne (bloc 🛂 Passeports) ou dans ✨ Trésors → Les passeports, où l’on peut aussi importer un relevé. ¦ Lisää ne henkilön korttiin (lohko 🛂 Passit) tai kohtaan ✨ Aarteet → Passit, jossa voit myös tuoda luettelon. ¦ Add hozzá őket egy személy adatlapján (🛂 Útlevelek blokk) vagy itt: ✨ Kincsek → Útlevelek, ahol egy kivonatot is importálhatsz.
+Allume-en une dans ✨ Trésors → Allumer une bougie. ¦ Sytytä sellainen kohdassa ✨ Aarteet → Sytytä kynttilä. ¦ Gyújts egyet itt: ✨ Kincsek → Gyertyagyújtás.
+Amérique du Nord ¦ Pohjois-Amerikka ¦ Észak-Amerika
+Assembler et retoucher des sons ¦ Kokoa ja viimeistele ääniä ¦ Hangok összeállítása és finomítása
+Aucun acte pour l’instant ¦ Ei vielä asiakirjoja ¦ Még nincs anyakönyvi bejegyzés
+Aucun dossier de preuve ¦ Ei todistekansiota ¦ Nincs bizonyítékmappa
+Aucun lieu dans l’arbre pour l’instant ¦ Sukupuussa ei vielä ole paikkoja ¦ Még nincs hely a családfában
+Aucun livret pour l’instant ¦ Ei vielä vihkosia ¦ Még nincs füzet
+Aucun nom indexé pour l’instant ¦ Ei vielä indeksoituja nimiä ¦ Még nincs indexelt név
+Aucun partage pour l’instant ¦ Ei vielä jakoja ¦ Még nincs megosztás
+Aucun passage dans les médias pour l’instant ¦ Ei vielä mediaesiintymisiä ¦ Még nincs médiaszereplés
+Aucun passeport pour l’instant ¦ Ei vielä passeja ¦ Még nincs útlevél
+Aucun projet de montage pour l’instant ¦ Ei vielä editointiprojekteja ¦ Még nincs vágási projekt
+Aucun questionnaire pour l’instant ¦ Ei vielä kyselyitä ¦ Még nincs kérdőív
+Aucun rattachement pour l’instant ¦ Ei vielä seurakuntaliitoksia ¦ Még nincs plébániai hovatartozás
+Aucun recueil pour l’instant ¦ Ei vielä kokoelmia ¦ Még nincs gyűjtemény
+Aucun son pour l’instant ¦ Ei vielä ääniä ¦ Még nincs hang
+Aucune annonce pour l’instant ¦ Ei vielä ilmoituksia ¦ Még nincs hirdetés
+Aucune bougie au registre ¦ Rekisterissä ei ole kynttilöitä ¦ Nincs gyertya a nyilvántartásban
+Aucune carte d’électeur pour l’instant ¦ Ei vielä äänestyskortteja ¦ Még nincs választói igazolvány
+Aucune carte postale pour l’instant ¦ Ei vielä postikortteja ¦ Még nincs képeslap
+Aucune création ni carrière pour l’instant ¦ Ei vielä teoksia eikä uria ¦ Még nincs alkotás vagy pályafutás
+Aucune demande : ouvre une photo et clique « 📤 Demander qui c’est ». ¦ Ei pyyntöjä: avaa kuva ja napsauta ”📤 Kysy, kuka tämä on”. ¦ Nincs kérés: nyiss meg egy fotót, és kattints erre: „📤 Kérdezd meg, ki ez”.
+Aucune demande pour l’instant ¦ Ei vielä pyyntöjä ¦ Még nincs kérés
+Aucune gazette pour l’instant ¦ Ei vielä lehtiä ¦ Még nincs újság
+Aucune image de lieu pour l’instant ¦ Ei vielä paikkojen kuvia ¦ Még nincs kép helyekről
+Aucune langue notée pour l’instant ¦ Ei vielä merkittyjä kieliä ¦ Még nincs feljegyzett nyelv
+Aucune lettre pour l’instant ¦ Ei vielä kirjeitä ¦ Még nincs levél
+Aucune maison pour l’instant : « ＋ Nouvelle maison ». ¦ Ei vielä taloja: ”＋ Uusi talo”. ¦ Még nincs ház: „＋ Új ház”.
+Aucune personne n’a encore de profil ¦ Kenelläkään ei vielä ole profiilia ¦ Még senkinek sincs profilja
+Aucune règle pour l’instant ¦ Ei vielä sääntöjä ¦ Még nincs szabály
+Aucune récompense pour l’instant ¦ Ei vielä palkintoja ¦ Még nincs díj
+Aucune transcription d’acte pour l’instant ¦ Ei vielä asiakirjojen litterointeja ¦ Még nincs anyakönyvi átirat
+Aucune vidéo pour l’instant ¦ Ei vielä videoita ¦ Még nincs videó
+Auteur, réalisation ¦ Tekijä, ohjaus ¦ Szerző, rendezés
+Bravo ! L’assistant peut chercher plus loin (jusqu’à 12 générations). ¦ Hienoa! Avustaja voi etsiä pidemmälle (enintään 12 sukupolvea). ¦ Szép munka! A segéd tovább is kereshet (legfeljebb 12 nemzedékig).
+Carte du droit de vote ¦ Äänioikeuden kartta ¦ A választójog térképe
+Cette liste est cachée ¦ Tämä luettelo on piilotettu ¦ Ez a lista rejtett
+Ce que tu notes ici reprend les actes : ce n’est pas un conseil juridique. ¦ Tänne merkitsemäsi seuraa asiakirjoja: se ei ole oikeudellinen neuvo. ¦ Amit itt feljegyzel, az okiratokat követi: nem jogi tanácsadás.
+Ce sont des informations privées : montre-les d’abord dans les Réglages. ¦ Nämä ovat yksityisiä tietoja: näytä ne ensin Asetuksissa. ¦ Ezek magánadatok: előbb a Beállításokban jelenítsd meg őket.
+Chercher un nom, une commune… ¦ Hae nimeä, kuntaa… ¦ Név, település keresése…
+Chercher un projet… (nom, photo, détails) ¦ Hae projektia… (nimi, kuva, tiedot) ¦ Projekt keresése… (név, fotó, részletek)
+Chercher un questionnaire… (ex. Anne, guerre, Marie) ¦ Hae kyselyä… (esim. Anne, sota, Marie) ¦ Kérdőív keresése… (pl. Anne, háború, Marie)
+Chercher une carte… (ex. Bretagne, 1978, Lucie) ¦ Hae karttaa… (esim. Bretagne, 1978, Lucie) ¦ Térkép keresése… (pl. Bretagne, 1978, Lucie)
+Chercher une maison… (nom, lieu, époque, personne, recensement) ¦ Hae taloa… (nimi, paikka, aikakausi, henkilö, henkikirja) ¦ Ház keresése… (név, hely, korszak, személy, népszámlálás)
+Chercher une personne… (ex. Martin, maire, sportif) ¦ Hae henkilöä… (esim. Martin, pormestari, urheilija) ¦ Személy keresése… (pl. Martin, polgármester, sportoló)
+Chercher… (commune, cote, année, service d’archives) ¦ Hae… (kunta, arkistotunnus, vuosi, arkisto) ¦ Keresés… (település, jelzet, év, levéltár)
+Chercher… (commune, section, numéro, lieu-dit, propriétaire) ¦ Hae… (kunta, lohko, numero, paikannimi, omistaja) ¦ Keresés… (település, szakasz, szám, dűlő, tulajdonos)
+Chercher… (personne, bien, notaire, lieu, cote) ¦ Hae… (henkilö, omaisuus, notaari, paikka, arkistotunnus) ¦ Keresés… (személy, vagyon, közjegyző, hely, jelzet)
+Chercher… (titre, auteur, lieu, nom cité, ce qu’on voit, notes) ¦ Hae… (nimeke, tekijä, paikka, mainittu nimi, mitä näkyy, muistiinpanot) ¦ Keresés… (cím, szerző, hely, említett név, ami látható, jegyzetek)
+Chercher… (titre, lieu) ¦ Hae… (nimeke, paikka) ¦ Keresés… (cím, hely)
+Chercher… (titre, personne, lieu, année) ¦ Hae… (nimeke, henkilö, paikka, vuosi) ¦ Keresés… (cím, személy, hely, év)
+Chercher… (titre, texte, personne, lieu, cote) ¦ Hae… (nimeke, teksti, henkilö, paikka, arkistotunnus) ¦ Keresés… (cím, szöveg, személy, hely, jelzet)
+Choisir la personne, puis la sorte de fiche ¦ Valitse henkilö ja sitten kortin laji ¦ Válaszd ki a személyt, majd az adatlap fajtáját
+Choisir les colonnes (« ⚙️ Champs affichés », onglet « La liste ») ¦ Valitse sarakkeet (”⚙️ Näytettävät kentät”, välilehti ”Luettelo”) ¦ Oszlopok kiválasztása („⚙️ Megjelenített mezők”, „A lista” lap)
+Choisir une personne, puis cocher ce qu’elle était (artiste, sportif, élu…) ¦ Valitse henkilö ja rastita sitten, mikä hän oli (taiteilija, urheilija, luottamushenkilö…) ¦ Válassz egy személyt, majd jelöld be, mi volt (művész, sportoló, választott tisztségviselő…)
+Choisis la personne de départ (Sosa 1) et ajoute ses parents. ¦ Valitse lähtöhenkilö (Sosa 1) ja lisää hänen vanhempansa. ¦ Válaszd ki a kiinduló személyt (Sosa 1), és add hozzá a szüleit.
+Choisis la personne, puis la sorte de fiche : elle se range sur sa page et apparaît ici. ¦ Valitse henkilö ja sitten kortin laji: se sijoittuu hänen sivulleen ja näkyy täällä. ¦ Válaszd ki a személyt, majd az adatlap fajtáját: a személy oldalára kerül, és itt is megjelenik.
+Choisis l’image d’un acte (baptême, mariage, sépulture…) et transcris-le à côté. ¦ Valitse asiakirjan kuva (kaste, vihkiminen, hautaus…) ja litteroi se viereen. ¦ Válaszd ki egy anyakönyvi bejegyzés képét (keresztelő, házasságkötés, temetés…), és írd át mellette.
+Clique sur un pays pour voir ses dates (et les cantons suisses, les provinces canadiennes…). ¦ Napsauta maata nähdäksesi sen päivämäärät (sekä Sveitsin kantonit, Kanadan provinssit…). ¦ Kattints egy országra a dátumai megtekintéséhez (és a svájci kantonokéhoz, a kanadai tartományokéhoz…).
+Clubs et équipes, résultats, records, saisons. ¦ Seurat ja joukkueet, tulokset, ennätykset, kaudet. ¦ Klubok és csapatok, eredmények, rekordok, idények.
+Commence par « ＋ Numéro », « ＋ Livre » ou « ＋ Documentaire », en haut de la page. ¦ Aloita sivun yläreunasta: ”＋ Numero”, ”＋ Kirja” tai ”＋ Dokumentti”. ¦ Kezdd az oldal tetején: „＋ Lapszám”, „＋ Könyv” vagy „＋ Dokumentumfilm”.
+Commence-en un : il apparaîtra ici, avec les autres, pour le rouvrir plus tard. ¦ Aloita yksi: se näkyy täällä muiden kanssa, jotta voit avata sen myöhemmin uudelleen. ¦ Kezdj el egyet: itt jelenik meg a többivel, hogy később újra megnyithasd.
+Commune, section, numéro ¦ Kunta, lohko, numero ¦ Település, szakasz, szám
+Crée d’abord ton type (« ＋ Créer mon propre type… » dans « ＋ Nouvelle œuvre »), puis ses fiches. ¦ Luo ensin oma tyyppisi (”＋ Luo oma tyyppi…” kohdassa ”＋ Uusi teos”), sitten sen kortit. ¦ Előbb hozd létre a saját típusodat („＋ Saját típus létrehozása…” itt: „＋ Új mű”), aztán az adatlapjait.
+Crée le recueil (registre, liste, cahier…), puis ajoute tes photos : chaque photo devient une page. ¦ Luo kokoelma (rekisteri, luettelo, vihko…) ja lisää sitten kuvasi: jokaisesta kuvasta tulee sivu. ¦ Hozd létre a gyűjteményt (anyakönyv, lista, füzet…), majd add hozzá a fotóidat: minden fotóból egy oldal lesz.
+Crée une carte, puis ajoute des photos de l’app ou importe-les : celles qui ont des coordonnées GPS se placent toutes seules. ¦ Luo kartta ja lisää sitten kuvia sovelluksesta tai tuo ne: kuvat, joissa on GPS-koordinaatit, asettuvat paikoilleen itsestään. ¦ Hozz létre egy térképet, majd adj hozzá fotókat az appból, vagy importáld őket: a GPS-koordinátás fotók maguktól a helyükre kerülnek.
+Créer ce jour-là ¦ Luo sille päivälle ¦ Létrehozás arra a napra
+Date (récent d’abord) ¦ Päivämäärä (uusin ensin) ¦ Dátum (legújabb elöl)
+Date de l’acte ¦ Asiakirjan päivämäärä ¦ A bejegyzés dátuma
+Date pour les femmes ¦ Päivämäärä naisille ¦ Dátum a nőknek
+Date pour les hommes ¦ Päivämäärä miehille ¦ Dátum a férfiaknak
+Décennie ¦ Vuosikymmen ¦ Évtized
+Siècle ¦ Vuosisata ¦ Évszázad
+Précédent ¦ Edellinen ¦ Előző
+Elles s’ajoutent sur la fiche d’une personne (bloc Cartes d’électeur). ¦ Ne lisätään henkilön korttiin (lohko Äänestyskortit). ¦ Egy személy adatlapján adhatók hozzá (Választói igazolványok blokk).
+Ensuite par ¦ Sitten ¦ Majd eszerint:
+Grouper par catégorie ¦ Ryhmittele luokittain ¦ Csoportosítás kategória szerint
+Héritages et successions ¦ Perinnöt ja kuolinpesät ¦ Örökségek és hagyatékok
+Il faut des dates dans l’arbre : une naissance, un mariage, un décès… ¦ Sukupuussa on oltava päivämääriä: syntymä, avioliitto, kuolema… ¦ A családfában dátumok kellenek: egy születés, egy házasság, egy halál…
+Index des noms ¦ Nimihakemisto ¦ Névmutató
+Inventions et leurs brevets, découvertes (espèce, comète, site…), publications scientifiques. ¦ Keksinnöt ja niiden patentit, löydöt (laji, komeetta, löytöpaikka…), tieteelliset julkaisut. ¦ Találmányok és szabadalmaik, felfedezések (faj, üstökös, lelőhely…), tudományos publikációk.
+La liste « Palmarès » ¦ Luettelo ”Palkinnot” ¦ A „Díjak” lista
+La liste « Revue de presse » ¦ Luettelo ”Lehdistökatsaus” ¦ A „Sajtószemle” lista
+Palmarès ¦ Palkinnot ¦ Díjak
+🏆 Palmarès ¦ 🏆 Palkinnot ¦ 🏆 Díjak
+Langue des actes et des documents ¦ Asiakirjojen ja dokumenttien kieli ¦ Az okiratok és dokumentumok nyelve
+Le cercle autour des ancêtres ¦ Ympyrä esivanhempien ympärillä ¦ A kör az ősök körül
+Le plus de fiches ¦ Eniten kortteja ¦ A legtöbb adatlap
+Le plus de photos ¦ Eniten kuvia ¦ A legtöbb fotó
+Le plus de profils ¦ Eniten profiileja ¦ A legtöbb profil
+Les autres listes ¦ Muut luettelot ¦ A többi lista
+Les lieux viennent des naissances, mariages et décès de l’arbre. ¦ Paikat tulevat sukupuun syntymistä, avioliitoista ja kuolemista. ¦ A helyek a családfa születéseiből, házasságaiból és haláleseteiből származnak.
+Les plus grandes ¦ Suurimmat ensin ¦ A legnagyobbak elöl
+Lettres aux descendants ¦ Kirjeet jälkeläisille ¦ Levelek a leszármazottaknak
+L’ordre des outils, et ceux qu’on montre ¦ Työkalujen järjestys ja näytettävät työkalut ¦ Az eszközök sorrendje, és hogy melyek látszanak
+Marquer dans les transcriptions ¦ Merkitse litterointeihin ¦ Jelölés az átiratokban
+Mes annonces et courriers ¦ Ilmoitukseni ja kirjeeni ¦ Hirdetéseim és leveleim
+Mettre ce qui est affiché dans un projet de l’Atelier ¦ Siirrä näytetyt Työpajan projektiin ¦ A megjelenítettek áthelyezése egy Műhely-projektbe
+Modifiés récemment ¦ Äskettäin muokatut ¦ Nemrég módosítottak
+Monter des vidéos : morceaux, titres, fondus, incrustations, musiques ¦ Editoi videoita: pätkät, otsikot, häivytykset, upotukset, musiikki ¦ Videók vágása: klipek, feliratok, áttűnések, rávetítések, zene
+Morceaux, albums et disques, enregistrements, concerts, tournées, œuvres de musique savante. ¦ Kappaleet, albumit ja levyt, äänitteet, konsertit, kiertueet, taidemusiikin teokset. ¦ Dalok, albumok és lemezek, felvételek, koncertek, turnék, komolyzenei művek.
+Note de quelle paroisse dépendait chaque hameau ou village avant la Révolution. ¦ Merkitse, mihin seurakuntaan kukin kylä tai kyläpahanen kuului ennen Ranskan vallankumousta. ¦ Jegyezd fel, melyik plébániához tartozott az egyes tanyák vagy falvak a francia forradalom előtt.
+Numéro, tome, épisode ¦ Numero, nide, jakso ¦ Szám, kötet, epizód
+Ou « 📷 Lire une capture des règles » pour les remplir toutes seules. ¦ Tai ”📷 Lue kuvakaappaus säännöistä”, niin ne täyttyvät itsestään. ¦ Vagy „📷 Szabályok beolvasása képernyőképről”, és maguktól kitöltődnek.
+Où j’en suis ¦ Missä olen menossa ¦ Hol tartok
+Par commune ¦ Kunnittain ¦ Település szerint
+Par date de l’œuvre ¦ Teoksen päivämäärän mukaan ¦ A mű dátuma szerint
+Par date, récentes d’abord ¦ Päivämäärän mukaan, uusimmat ensin ¦ Dátum szerint, legújabbak elöl
+Par personne ¦ Henkilöittäin ¦ Személy szerint
+Par période ¦ Kausittain ¦ Időszak szerint
+Partage une branche dans ✨ Trésors → Partager une branche (pour un temps). ¦ Jaa haara kohdassa ✨ Aarteet → Jaa haara (määräajaksi). ¦ Ossz meg egy ágat itt: ✨ Kincsek → Ág megosztása (egy időre).
+Pas encore de lignée ¦ Ei vielä sukulinjaa ¦ Még nincs ági vonal
+Passeport des lieux ¦ Paikkojen passi ¦ Helyek útlevele
+Peintures, dessins, gravures, sculptures et fontes, photographies, affiches, expositions… ¦ Maalaukset, piirustukset, kaiverrukset, veistokset ja valokset, valokuvat, julisteet, näyttelyt… ¦ Festmények, rajzok, metszetek, szobrok és öntvények, fényképek, plakátok, kiállítások…
+Plus anciens ¦ Vanhimmat ¦ Legrégebbiek
+Priorité d’achat ¦ Ostoprioriteetti ¦ Vásárlási prioritás
+Précisions ¦ Tarkennukset ¦ Részletek
+Ranger les fiches par sorte, avec un intertitre pour chacune ¦ Järjestä kortit lajeittain, kullekin väliotsikko ¦ Adatlapok rendezése fajta szerint, mindegyikhez alcímmel
+Ranger par sorte ¦ Järjestä lajeittain ¦ Rendezés fajta szerint
+Revenir sur un son en cours de travail ¦ Palaa työn alla olevaan ääneen ¦ Visszatérés egy folyamatban lévő hanghoz
+Revue, collection, série ¦ Aikakauslehti, kokoelma, sarja ¦ Folyóirat, gyűjtemény, sorozat
+＋ Revue, collection, série ¦ ＋ Aikakauslehti, kokoelma, sarja ¦ ＋ Folyóirat, gyűjtemény, sorozat
+Rien ne manque sur 5 générations ¦ Mitään ei puutu 5 sukupolven ajalta ¦ 5 nemzedéken át semmi sem hiányzik
+Règles des journaux ¦ Sanomalehtien säännöt ¦ Az újságok szabályai
+Région, puis pays ¦ Alue, sitten maa ¦ Régió, majd ország
+Pays (A → Z) ¦ Maa (A → Ö) ¦ Ország (A → Z)
+Tous les pays, dans l’ordre que tu veux ¦ Kaikki maat haluamassasi järjestyksessä ¦ Minden ország a kívánt sorrendben
+Un fichier .ics à ouvrir dans ton calendrier (Apple, Google, Outlook…) ¦ .ics-tiedosto avattavaksi kalenterissasi (Apple, Google, Outlook…) ¦ .ics-fájl, amelyet a naptáradban nyithatsz meg (Apple, Google, Outlook…)
+Un son de la base ou de l’ordinateur, à travailler et à garder comme projet ¦ Ääni tietokannasta tai tietokoneelta, työstettäväksi ja tallennettavaksi projektina ¦ Hang az adatbázisból vagy a számítógépről, megmunkálásra és projektként megőrzésre
+Une fiche rassemble texte, images, personnes, cartes et listes sur un sujet. ¦ Kortti kokoaa tekstiä, kuvia, henkilöitä, karttoja ja luetteloita yhdestä aiheesta. ¦ Egy adatlap szöveget, képeket, személyeket, térképeket és listákat gyűjt össze egy témáról.
+Voir qui pouvait voter en ¦ Katso, kuka sai äänestää vuonna ¦ Nézd meg, ki szavazhatott ebben az évben:
+pas de date ¦ ei päivämäärää ¦ nincs dátum
+Écart ¦ Ero ¦ Eltérés
+↔ Écart ¦ ↔ Ero ¦ ↔ Eltérés
+Écart hommes / femmes ¦ Miesten ja naisten ero ¦ Eltérés férfiak és nők között
+Écoles, études et apprentissages, diplômes, établissements. ¦ Koulut, opinnot ja oppisopimukset, tutkinnot, oppilaitokset. ¦ Iskolák, tanulmányok és inasévek, oklevelek, intézmények.
+Écris ton annonce et vois tout de suite combien elle coûtera d’après les règles du journal. ¦ Kirjoita ilmoituksesi ja näe heti, paljonko se maksaa lehden sääntöjen mukaan. ¦ Írd meg a hirdetésed, és azonnal lásd, mennyibe kerül az újság szabályai szerint.
+Écris ton annonce, vois tout de suite combien elle coûtera d’après les règles du journal, et suis ce qu’elle devient. ¦ Kirjoita ilmoituksesi, näe heti, paljonko se maksaa lehden sääntöjen mukaan, ja seuraa, mitä sille tapahtuu. ¦ Írd meg a hirdetésed, lásd azonnal, mennyibe kerül az újság szabályai szerint, és kövesd, mi lesz vele.
+Écris-en une dans ✨ Trésors → Lettres aux descendants : « pour les 18 ans de Léa », « en 2050 ». ¦ Kirjoita sellainen kohdassa ✨ Aarteet → Kirjeet jälkeläisille: ”Léan 18-vuotispäiväksi”, ”vuonna 2050”. ¦ Írj egyet itt: ✨ Kincsek → Levelek a leszármazottaknak: „Léa 18. születésnapjára”, „2050-ben”.
+↗ Ouvrir dans Recherche ¦ ↗ Avaa Tutkimuksessa ¦ ↗ Megnyitás a Kutatásban
+⚙️ Ouvrir les Réglages ¦ ⚙️ Avaa Asetukset ¦ ⚙️ Beállítások megnyitása
+⚙️ Ranger les outils ¦ ⚙️ Järjestä työkalut ¦ ⚙️ Eszközök elrendezése
+✅ Tâches de l’Atelier ¦ ✅ Työpajan tehtävät ¦ ✅ A Műhely feladatai
+✉️ Courriers envoyés ¦ ✉️ Lähetetyt kirjeet ¦ ✉️ Elküldött levelek
+✉️ Ouvrir les lettres dans ✨ Trésors ¦ ✉️ Avaa kirjeet kohdassa ✨ Aarteet ¦ ✉️ Levelek megnyitása a ✨ Kincsekben
+✝️ Décès, sépultures ¦ ✝️ Kuolemat, hautaukset ¦ ✝️ Halálesetek, temetések
+👶 Naissances, baptêmes ¦ 👶 Syntymät, kasteet ¦ 👶 Születések, keresztelők
+❓ Ce qu’on peut récupérer (licences) ¦ ❓ Mitä saa noutaa (lisenssit) ¦ ❓ Mi tölthető le (licencek)
+❓ Comment noter un héritage ? ¦ ❓ Miten merkitsen perinnön? ¦ ❓ Hogyan jegyezzek fel egy örökséget?
+⤒ Importer des relevés ¦ ⤒ Tuo indeksointeja ¦ ⤒ Kivonatok importálása
+⤒ Importer les réponses ¦ ⤒ Tuo vastaukset ¦ ⤒ Válaszok importálása
+⤓ Exporter les anniversaires (.ics) ¦ ⤓ Vie vuosipäivät (.ics) ¦ ⤓ Évfordulók exportálása (.ics)
+＋ Ajouter une image ¦ ＋ Lisää kuva ¦ ＋ Kép hozzáadása
+＋ Ajouter une parcelle ¦ ＋ Lisää palsta ¦ ＋ Parcella hozzáadása
+＋ Annonce ou courrier ¦ ＋ Ilmoitus tai kirje ¦ ＋ Hirdetés vagy levél
+＋ Nouveau dossier de preuve ¦ ＋ Uusi todistekansio ¦ ＋ Új bizonyítékmappa
+＋ Nouveau livret ¦ ＋ Uusi vihkonen ¦ ＋ Új füzet
+＋ Nouveau montage ¦ ＋ Uusi editointi ¦ ＋ Új vágás
+＋ Nouveau passage dans les médias ¦ ＋ Uusi mediaesiintyminen ¦ ＋ Új médiaszereplés
+＋ Nouveau passeport ¦ ＋ Uusi passi ¦ ＋ Új útlevél
+＋ Nouveau projet son ¦ ＋ Uusi ääniprojekti ¦ ＋ Új hangprojekt
+＋ Nouveau questionnaire ¦ ＋ Uusi kysely ¦ ＋ Új kérdőív
+＋ Nouveau recueil ¦ ＋ Uusi kokoelma ¦ ＋ Új gyűjtemény
+＋ Nouvelle carte ¦ ＋ Uusi kartta ¦ ＋ Új térkép
+＋ Nouvelle carte postale ¦ ＋ Uusi postikortti ¦ ＋ Új képeslap
+＋ Nouvelle demande… ¦ ＋ Uusi pyyntö… ¦ ＋ Új kérés…
+＋ Nouvelle maison ¦ ＋ Uusi talo ¦ ＋ Új ház
+＋ Nouvelle transcription ¦ ＋ Uusi litterointi ¦ ＋ Új átirat
+＋ Règles d’un journal ¦ ＋ Sanomalehden säännöt ¦ ＋ Egy újság szabályai
+＋ Épisode ¦ ＋ Jakso ¦ ＋ Epizód
+🌍 Le droit de vote dans le monde ¦ 🌍 Äänioikeus maailmalla ¦ 🌍 A választójog a világban
+📂 Projets son ¦ 📂 Ääniprojektit ¦ 📂 Hangprojektek
+📚 Vers l’Atelier ¦ 📚 Työpajaan ¦ 📚 A Műhelybe
+📷 Lire une capture des règles ¦ 📷 Lue kuvakaappaus säännöistä ¦ 📷 Szabályok beolvasása képernyőképről
+🔍 Ouvrir l’assistant ¦ 🔍 Avaa avustaja ¦ 🔍 A segéd megnyitása
+🔍 Ouvrir l’assistant « Que manque-t-il ? » ¦ 🔍 Avaa avustaja ”Mitä puuttuu?” ¦ 🔍 A „Mi hiányzik?” segéd megnyitása
+🔍 Qui est sur cette photo ? ¦ 🔍 Kuka tässä kuvassa on? ¦ 🔍 Ki van ezen a fotón?
+🔍 Rappels d’enquête ¦ 🔍 Selvitysten muistutukset ¦ 🔍 Nyomozási emlékeztetők
+🔗 Partager une branche ¦ 🔗 Jaa haara ¦ 🔗 Ág megosztása
+🕯️ Allumer une bougie ¦ 🕯️ Sytytä kynttilä ¦ 🕯️ Gyertyagyújtás
+🖼️ Tous les médias ¦ 🖼️ Kaikki media ¦ 🖼️ Minden média
+🗺 Toutes mes cartes ¦ 🗺 Kaikki karttani ¦ 🗺 Összes térképem
+🛂 Ouvrir dans ✨ Trésors ¦ 🛂 Avaa kohdassa ✨ Aarteet ¦ 🛂 Megnyitás a ✨ Kincsekben
+🛡 Les règles ¦ 🛡 Säännöt ¦ 🛡 A szabályok

@@ -53,7 +53,10 @@ function genealogies_registry(): array
     if (is_array($raw)) {
         foreach ((array) ($raw['list'] ?? []) as $g) {
             if (is_array($g) && genealogy_id_ok((string) ($g['id'] ?? ''))) {
-                $out['list'][] = ['id' => (string) $g['id'], 'name' => mb_substr(trim((string) ($g['name'] ?? '')), 0, 80) ?: (string) $g['id'], 'created_at' => (string) ($g['created_at'] ?? '')];
+                $entry = ['id' => (string) $g['id'], 'name' => mb_substr(trim((string) ($g['name'] ?? '')), 0, 80) ?: (string) $g['id'], 'created_at' => (string) ($g['created_at'] ?? '')];
+                // 🧪 base d'exemple du premier lancement (lib/premier.php) : la généalogie d'où l'on vient, pour y revenir
+                if (!empty($g['example'])) { $entry['example'] = true; $from = (string) ($g['from'] ?? ''); $entry['from'] = $from === '' || genealogy_id_ok($from) ? $from : ''; }
+                $out['list'][] = $entry;
             }
         }
         $name = mb_substr(trim((string) ($raw['main_name'] ?? '')), 0, 80);

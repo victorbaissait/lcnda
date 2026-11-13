@@ -21,6 +21,7 @@ require_once __DIR__ . '/host_guard.php'; // noms d'hôte locaux seulement (auss
 if (!lcnda_host_guard()) exit;
 require_once __DIR__ . '/paths.php';   // APP_ROOT, DATA_DIR, MEDIA_DIR
 require_once __DIR__ . '/text.php';    // ascii_fold()
+require_once __DIR__ . '/i18n.php';    // 🌐 i18n_t() : messages d'erreur dans la langue de la page
 require_once __DIR__ . '/migrations.php'; // migrate_database(), SCHEMA_VERSION
 require_once __DIR__ . '/reference.php';
 require_once __DIR__ . '/registers.php';
@@ -37,6 +38,7 @@ require_once __DIR__ . '/workbooks.php'; // 🧾 Tableur : les classeurs (Outils
 require_once __DIR__ . '/textdocs.php'; // 📝 Traitement de texte : les documents et leurs versions (Outils de modification)
 require_once __DIR__ . '/website.php'; // 🌐 Mon site web : les sites, leurs versions, les blocs de la généalogie, l'export (Outils de modification)
 require_once __DIR__ . '/cadastre.php'; // 🗺 Cadastre : les parcelles et leurs liens (Listes → Lieux et maisons)
+require_once __DIR__ . '/successions.php'; // 🏠 Héritages et successions : actes, héritiers, biens, chaîne des propriétaires
 require_once __DIR__ . '/transcriptions.php'; // 📜 Transcription d'actes
 require_once __DIR__ . '/slideshows.php'; // 🎞️ Diaporamas et récits
 require_once __DIR__ . '/houses.php'; // 🏠 Maisons de famille
@@ -51,7 +53,18 @@ require_once __DIR__ . '/audio_studio.php'; // 🎚️ Studio son : zones, passa
 require_once __DIR__ . '/family_book.php'; // livre de famille (parties, formats) // fiches d'employeurs
 require_once __DIR__ . '/suggestions.php'; // suggestions de recherche (trous de la lignée Sosa)
 require_once __DIR__ . '/research_gaps.php'; // « Que manque-t-il ? » : les actes à chercher, où et dans quelle série
+require_once __DIR__ . '/socface.php'; // 🧾 Recensements SocFace (FranceArchives) : import des CSV, vérification, écarts
+require_once __DIR__ . '/sources_ouvertes.php'; // 🗂 Archives en ligne : Mémoire des hommes, Léonore, matricules, presse (ouvre le navigateur, importe ce qu'on a téléchargé)
+require_once __DIR__ . '/sources_ouvertes_3.php'; // 🌍 Archives en ligne (3e lot) : CICR, Sycomore, brevets, thèses, Polytechnique, Antenati, Open Archives, FreeBMD, Find a Grave, Justes… (même modèle, aucune requête vers les sites)
+require_once __DIR__ . '/sources_ouvertes_5.php'; // 🌍 Archives en ligne (5e lot) : FamilySearch, WikiTree, Fichier Origine, Castle Garden, Sainte-Hélène, ANMT, mémoriaux, Maitron, CCFr, Calames, Pamyat Naroda, Memorial
+require_once __DIR__ . '/sources_ouvertes_4.php'; // 🗂 Archives en ligne (4e lot) : MémorialGenWeb, cimetières, Cassini (population), Géopatronyme, Huguenots, rôles d'équipage, Matricula, Europe du Nord, presse étrangère
+require_once __DIR__ . '/sources_ouvertes_2.php'; // 🗂 Archives en ligne (suite) : AN, ANOM, SHD, déportation et fusillés, JO, annuaires, patrimoine, étranger
+require_once __DIR__ . '/sources_ouvertes_6.php'; // 📚 Archives en ligne (6e lot) : bibliothèques régionales, IdRef, data.bnf, Wikisource, gens de mer, notaires, HisKi, Old Bailey, sites payants (aucune requête vers les sites)
+require_once __DIR__ . '/sources_ouvertes_7.php'; // 🌍 Archives en ligne (7e lot) : Archives Portal Europe, Justes, enfants assistés, MonumentsMorts, cercles, cadastres anciens (aucune requête vers les sites)
 require_once __DIR__ . '/research_journal.php'; // 🗓 Journal des recherches : tout ce qui a été cherché, « Déjà dans ton suivi », visites faites
+require_once __DIR__ . '/semaine.php'; // 🗓 Ma semaine de recherche : rappels, courriers, visites, pistes, « Que manque-t-il ? », à vérifier, entraide, fait cette semaine
+require_once __DIR__ . '/ou_chercher.php'; // 🌍 Où chercher ? (sites à consulter pour une personne) et 🧩 Murs de brique (ancêtres où l'on bloque)
+require_once __DIR__ . '/preuve.php'; // ⚖️ Dossiers de preuve (pour / contre, conclusion, certitude) et 🛡 solidité des liens parent-enfant (Branches fragiles)
 require_once __DIR__ . '/archive_services.php'; // 🏛 Services d'archives (F14) : fiches, séries, ce qui a été consulté chez eux
 require_once __DIR__ . '/citation_styles.php'; // ❝ Citation des sources toute prête (F4) : classique, Evidence Explained, Chicago, forum
 require_once __DIR__ . '/hypothesis_compare.php'; // ⚖️ Hypothèses à comparer (F2) : réponses, preuves pour / contre, conclusion
@@ -70,6 +83,8 @@ require_once __DIR__ . '/heritage_links.php'; // question en français, langues,
 require_once __DIR__ . '/heritage_more.php';
 require_once __DIR__ . '/biographie.php';     // 📖 biographie écrite par l'app (fiche, livres, Fiches, présentations)
 require_once __DIR__ . '/monde_autour.php';   // 🌍 le monde autour : grands événements et histoire locale
+require_once __DIR__ . '/sante.php';          // 🩺 santé de la famille (privée : cachée au départ, jamais exportée)
+require_once __DIR__ . '/cousinade.php';      // 🎉 organiser une cousinade (descendants vivants, invités, badges, plan de table)
 require_once __DIR__ . '/metiers_anciens.php'; // 🛠️ fiche d'un métier ancien (dictionnaire livré)
 require_once __DIR__ . '/village.php';
 require_once __DIR__ . '/voters.php';         // cartes d'électeur, dates de vote, droit de vote dans le monde
@@ -1286,12 +1301,23 @@ function ensure_schema(PDO $pdo): void
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_label_links_label ON label_links(label_id)');
 }
 
+/** Un travail lourd sur une très grosse base (contrôle, export) : au moins $mb Mo de mémoire pour PHP (« 1G », « 1024M »… ; -1 = sans limite). */
+function memory_at_least(int $mb): void
+{
+    $cur = trim((string) ini_get('memory_limit'));
+    if ($cur === '-1' || $cur === '') { return; }
+    $bytes = (int) $cur * match (strtoupper(substr($cur, -1))) { 'G' => 1 << 30, 'M' => 1 << 20, 'K' => 1 << 10, default => 1 };
+    if ($bytes < $mb * 1048576) { @ini_set('memory_limit', $mb . 'M'); }
+}
+
 function json_response(mixed $data, int $status = 200): never
 {
     http_response_code($status);
     header('Content-Type: application/json; charset=utf-8');
     header('Cache-Control: no-store, private');
     header('X-Content-Type-Options: nosniff');
+    // 🌐 un message d'erreur connu part dans la langue de la page (lib/i18n.php) ; en français rien ne change
+    if (is_array($data) && isset($data['error']) && is_string($data['error']) && function_exists('i18n_t') && i18n_lang() !== 'fr') { $data['error'] = i18n_t($data['error']); }
     echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
     exit;
 }

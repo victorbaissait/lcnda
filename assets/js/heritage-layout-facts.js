@@ -9,6 +9,9 @@
     'use strict';
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s); // 🌐 docs/I18N.md (le texte lu reste en français : seuls les messages se traduisent)
+    const notFr = () => !!window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr';
+    const month = m => i18n(m, {ctx: 'mois'});
     const norm = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[’‘]/g, "'");
     const MONTHS = ['janvier', 'fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
     const GED_M = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
@@ -62,7 +65,7 @@
     }
     const placeIn = s => { const m = s.match(/^[^.;]{0,40}?(?:^|[\s,(])(?:à|a|au|aux|en)\s+((?:la |le |les |l['’])?\p{Lu}[\p{L}'’-]+(?:[\s-](?:sur|sous|en|le|la|les|de|du|des|d['’]|l['’]|\p{Lu}[\p{L}'’-]+))*)/u); return m ? m[1].replace(/[\s-]+(?:sur|sous|en|le|la|les|de|du|des)$/, '') : ''; };
     const samePlace = (a, b) => { const x = norm(a).replace(/[^a-z0-9]+/g, ' ').trim(), y = norm(b).split(',')[0].replace(/[^a-z0-9]+/g, ' ').trim(); return !x || !y || x.includes(y) || y.includes(x); };
-    const fmt = ev => [ev[1] || (ev[2] ? String(ev[2]) : ''), ev[3] ? `à ${ev[3]}` : ''].filter(Boolean).join(' ');
+    const fmt = ev => [ev[1] || (ev[2] ? String(ev[2]) : ''), ev[3] ? (notFr() ? i18n('à {place} (lieu)', {place: ev[3]}) : `à ${ev[3]}`) : ''].filter(Boolean).join(' ');
 
 
     /* ── les autres vérifications : dates et âges impossibles, noms mal écrits, lieux inconnus, numéros Sosa ── */
@@ -74,13 +77,13 @@
         const out = [], said = m => raw.substr(m.index, m[0].length).trim();
         for (const m of low.matchAll(/\b(1er|\d{1,2})\s+(janvier|fevrier|mars|avril|mai|juin|juillet|aout|septembre|octobre|novembre|decembre)(?:\s+(\d{3,4}))?\b/g)) {
             const d = m[1] === '1er' ? 1 : +m[1], mo = MONTHS.indexOf(m[2]) + 1, y = m[3] ? +m[3] : 0, max = mo === 2 ? (y && !leap(y) ? 28 : 29) : DIM[mo - 1];
-            if (d < 1 || d > max) out.push({at: m.index, said: said(m), why: d === 29 && mo === 2 ? `${y} n’est pas une année bissextile (février n’a que 28 jours)` : d < 1 ? 'il n’y a pas de jour 0' : `${MONTHS_FR[mo - 1]} n’a que ${max} jours`});
+            if (d < 1 || d > max) out.push({at: m.index, said: said(m), why: d === 29 && mo === 2 ? i18n('{y} n’est pas une année bissextile (février n’a que 28 jours)', {y: String(y)}) : d < 1 ? i18n('il n’y a pas de jour 0') : i18n('{month} n’a que {n} jours', {month: month(MONTHS_FR[mo - 1]), n: max})});
         }
         for (const m of low.matchAll(/\b(\d{1,2})[/.](\d{1,2})[/.](\d{4})\b/g)) {
             const d = +m[1], mo = +m[2], y = +m[3];
-            if (mo < 1 || mo > 12) { out.push({at: m.index, said: said(m), why: 'il n’y a que 12 mois'}); continue; }
+            if (mo < 1 || mo > 12) { out.push({at: m.index, said: said(m), why: i18n('il n’y a que 12 mois')}); continue; }
             const max = mo === 2 ? (leap(y) ? 29 : 28) : DIM[mo - 1];
-            if (d < 1 || d > max) out.push({at: m.index, said: said(m), why: `${MONTHS_FR[mo - 1]} ${y} n’a que ${max} jours`});
+            if (d < 1 || d > max) out.push({at: m.index, said: said(m), why: i18n('{month} {y} n’a que {n} jours', {month: month(MONTHS_FR[mo - 1]), y: String(y), n: max})});
         }
         return out;
     }
@@ -123,7 +126,7 @@
             const raw = String(b.text || ''); if (!raw.trim()) continue;
             const low = norm(raw);
             // 0. les dates qui n'existent pas (30 février…)
-            badDates(low, raw).forEach(x => { const key = `${b.id}|bd|${x.at}`; if (seen.has(key)) return; seen.add(key); out.push({lvl: 'err', page: b.page, id: b.id, text: `📅 Date impossible : « ${x.said} » — ${x.why}.`}); });
+            badDates(low, raw).forEach(x => { const key = `${b.id}|bd|${x.at}`; if (seen.has(key)) return; seen.add(key); out.push({lvl: 'err', page: b.page, id: b.id, text: i18n('📅 Date impossible : « {said} » — {why}.', {said: x.said, why: x.why})}); });
             // 0 bis. les noms mal écrits : « Prénom NOM » qui ressemble à une fiche sans y être (« Jean MARTAIN » → « MARTIN ? »)
             for (const m of raw.matchAll(/(?<![\p{L}'’-])(\p{Lu}[\p{Ll}'’]+(?:-\p{Lu}[\p{Ll}'’]+)?)\s+(\p{Lu}{2}[\p{Lu}'’-]*(?:\s\p{Lu}{2}[\p{Lu}'’-]*)?)(?![\p{L}'’-])/gu)) {
                 const f = norm(m[1]).split('-')[0], l = norm(m[2]).trim(); if (l.length < 3) continue;
@@ -131,7 +134,7 @@
                 if (e) { if (e.firsts.has(f) || allFirsts.has(f) || f.length < 3) continue; const g = [...e.firsts.keys()].filter(x => near(f, x)).sort((x, y) => lev(f, x) - lev(f, y))[0]; if (g) fix = `${e.firsts.get(g)} ${e.raw}`; }
                 else if (l.length >= 4 && allFirsts.has(f)) { const c = [...lasts.keys()].filter(x => Math.abs(x.length - l.length) <= 2 && near(l, x)).sort((x, y) => (lasts.get(y).firsts.has(f) - lasts.get(x).firsts.has(f)) || lev(l, x) - lev(l, y))[0]; if (c) fix = `${m[1]} ${lasts.get(c).raw}`; }
                 if (!fix) continue; const key = `${b.id}|nm|${norm(m[0])}`; if (seen.has(key)) continue; seen.add(key);
-                out.push({lvl: 'warn', page: b.page, id: b.id, text: `✍️ « ${m[0].replace(/\s+/g, ' ')} » : aucune fiche à ce nom. Tu voulais écrire « ${fix} » ?`});
+                out.push({lvl: 'warn', page: b.page, id: b.id, text: i18n('✍️ « {said} » : aucune fiche à ce nom. Tu voulais écrire « {fix} » ?', {said: m[0].replace(/\s+/g, ' '), fix})});
             }
             // 1. les personnes nommées (deux ou trois mots de suite qui forment un nom connu)
             const words = [...low.matchAll(/[a-z0-9'-]+/g)].map(m => ({w: m[0], at: m.index, end: m.index + m[0].length}));
@@ -156,7 +159,7 @@
             for (const m of low.matchAll(/\bsosa\s*(?:n[°o]\s*)?(\d{1,7}(?:\s*(?:,|et|&)\s*\d{1,7})*)/g)) { const subj = subjectAt(m.index, true); if (subj) sosaClaims.push({b, subj, nums: (m[1].match(/\d+/g) || []).map(Number), said: raw.substr(m.index, m[0].length).trim()}); }
             if (!mentions.length && !ctx) {
                 // sans personne nommée : seulement les âges qui ne peuvent pas exister
-                for (const m of low.matchAll(/\b(?:a|au)\s+(?:l'age\s+de\s+)?(\d{1,3})\s+ans\b|\bagee?s?\s+de\s+(\d{1,3})\s+ans\b/g)) { const n = +(m[1] || m[2]); if (n > 120) out.push({lvl: 'err', page: b.page, id: b.id, text: `🎂 Âge impossible : « ${raw.substr(m.index, m[0].length).trim()} » (personne n’a vécu plus de 122 ans).`}); }
+                for (const m of low.matchAll(/\b(?:a|au)\s+(?:l'age\s+de\s+)?(\d{1,3})\s+ans\b|\bagee?s?\s+de\s+(\d{1,3})\s+ans\b/g)) { const n = +(m[1] || m[2]); if (n > 120) out.push({lvl: 'err', page: b.page, id: b.id, text: i18n('🎂 Âge impossible : « {said} » (personne n’a vécu plus de 122 ans).', {said: raw.substr(m.index, m[0].length).trim()})}); }
                 continue;
             }
             // 1 bis. les âges écrits (« mort à 45 ans », « marié à 9 ans ») : possibles ? d'accord avec la fiche ?
@@ -167,16 +170,16 @@
                 const tag = near0 ? (near0.tag === 'BURI' ? 'DEAT' : near0.tag) : '';
                 const said = near0 ? raw.slice(Math.min(near0.m.index, m.index), Math.max(near0.m.index + near0.m[0].length, m.index + m[0].length)).replace(/\s+/g, ' ').trim().slice(0, 100) : said0;
                 const key = `${b.id}|age|${m.index}`; if (seen.has(key)) continue; seen.add(key);
-                if (n > 120) { out.push({lvl: 'err', page: b.page, id: b.id, text: `🎂 Âge impossible : « ${said} » (personne n’a vécu plus de 122 ans).`}); continue; }
-                if (tag === 'MARR' && n < 12) { out.push({lvl: 'err', page: b.page, id: b.id, text: `🎂 Âge impossible pour un mariage : « ${said} ».`}); continue; }
+                if (n > 120) { out.push({lvl: 'err', page: b.page, id: b.id, text: i18n('🎂 Âge impossible : « {said} » (personne n’a vécu plus de 122 ans).', {said})}); continue; }
+                if (tag === 'MARR' && n < 12) { out.push({lvl: 'err', page: b.page, id: b.id, text: i18n('🎂 Âge impossible pour un mariage : « {said} ».', {said})}); continue; }
                 if (!tag) continue;
                 const subj = subjectAt(near0.m.index, true) || subjectAt(m.index, true); if (!subj) continue;
                 const res = subj.ps.map(p => { const bev = p.ev.find(e => e[0] === 'BIRT') || p.ev.find(e => e[0] === 'BAPM'); const evs = tag === 'DEAT' ? [p.ev.find(e => e[0] === 'DEAT') || p.ev.find(e => e[0] === 'BURI')].filter(Boolean) : p.ev.filter(e => e[0] === 'MARR');
                     if (!bev || !evs.length) return {p, kind: 'none'}; const rs = evs.map(e => ({e, r: ageRange(bev, e)})).filter(x => x.r); if (!rs.length) return {p, kind: 'none'};
                     const ok = rs.find(x => n >= x.r[0] && n <= x.r[1]); return ok ? {p, kind: 'ok'} : {p, kind: 'bad', bev, e: rs[0].e, r: rs[0].r}; });
                 if (res.some(r => r.kind === 'ok') || !res.some(r => r.kind === 'bad')) continue;
-                const bad = res.find(r => r.kind === 'bad'), unsure = subj.ps.length > 1, age = bad.r[0] === bad.r[1] ? `${bad.r[0]} ans` : `${bad.r[0]} ou ${bad.r[1]} ans`;
-                out.push({lvl: unsure ? 'warn' : 'err', page: b.page, id: b.id, person: bad.p.id, text: `🎂 ${subj.name.replace(/\s+/g, ' ')} : le texte dit « ${said} », d’après la fiche (° ${yearOf(bad.bev)}, ${tag === 'DEAT' ? '†' : 'mariage'} ${yearOf(bad.e)}) ${bad.p.g === 'female' ? 'elle' : 'il'} avait ${age}${unsure ? ` (${subj.ps.length} fiches portent ce nom)` : ''}.`});
+                const bad = res.find(r => r.kind === 'bad'), unsure = subj.ps.length > 1, age = bad.r[0] === bad.r[1] ? i18n('{n} ans', {n: bad.r[0]}) : i18n('{a} ou {b} ans', {a: bad.r[0], b: bad.r[1]});
+                out.push({lvl: unsure ? 'warn' : 'err', page: b.page, id: b.id, person: bad.p.id, text: i18n(bad.p.g === 'female' ? '🎂 {name} : le texte dit « {said} », d’après la fiche (° {b}, {ev} {e}) elle avait {age}{multi}.' : '🎂 {name} : le texte dit « {said} », d’après la fiche (° {b}, {ev} {e}) il avait {age}{multi}.', {name: subj.name.replace(/\s+/g, ' '), said, b: String(yearOf(bad.bev)), ev: tag === 'DEAT' ? '†' : i18n('mariage'), e: String(yearOf(bad.e)), age, multi: unsure ? ` ${i18n('({n} fiches portent ce nom)', {n: subj.ps.length})}` : ''})});
             }
             // 2. chaque mot de fait, avec sa date et son lieu juste après
             // dans l'ordre du texte : un fait qui colle à une seule des fiches homonymes la désigne pour la suite
@@ -196,7 +199,7 @@
                     const evs = subj.ps.map(p => p.ev.filter(e => e[0] === tag && e[3]));
                     if (evs.some(x => !x.length) || evs.some(x => x.some(e => samePlace(place, e[3])))) continue; // une fiche sans ce lieu, ou un lieu qui va : rien à dire
                     const key = `${b.id}|${tag}|${subj.at}|pl`; if (seen.has(key)) continue; seen.add(key);
-                    out.push({lvl: 'warn', page: b.page, id: b.id, person: subj.ps[0].id, text: `🔎 ${subj.name.replace(/\s+/g, ' ')} : le texte place ${the(tag)} à « ${place} », la fiche dit ${fmt(evs[0][0])}${subj.ps.length > 1 ? ` (${subj.ps.length} fiches portent ce nom)` : ''}.`});
+                    out.push({lvl: 'warn', page: b.page, id: b.id, person: subj.ps[0].id, text: i18n('🔎 {name} : le texte place {event} à « {place} », la fiche dit {fiche}{multi}.', {name: subj.name.replace(/\s+/g, ' '), event: i18n(the(tag)), place, fiche: fmt(evs[0][0]), multi: subj.ps.length > 1 ? ` ${i18n('({n} fiches portent ce nom)', {n: subj.ps.length})}` : ''})});
                     continue;
                 }
                 const rawAfter = raw.slice(m.index + m[0].length, Math.min(pe0, m.index + m[0].length + 90)), dash = (rawAfter.match(/^\s*[—–]\s*(\p{Lu}[^,(\n—]*)/u) || [])[1]?.trim();
@@ -211,18 +214,18 @@
                 const unsure = subj.ps.length > 1 && res.some(r => r.kind === 'none');
                 const name = subj.name.replace(/\s+/g, ' '), said = (lead ? raw.slice(ps0, pe0) : raw.slice(m.index, m.index + m[0].length + dt.at + dt.len)).replace(/\s+/g, ' ').trim().slice(0, 120);
                 const key = `${b.id}|${tag}|${subj.at}|${dt.y}`; if (seen.has(key)) continue; seen.add(key);
-                const multi = subj.ps.length > 1 ? ` (${subj.ps.length} fiches portent ce nom)` : '';
+                const multi = subj.ps.length > 1 ? ` ${i18n('({n} fiches portent ce nom)', {n: subj.ps.length})}` : '';
                 const pl = res.find(r => r.kind === 'place'), dd = res.filter(r => r.kind === 'date').sort((x, y) => Math.abs(x.d.y - dt.y) - Math.abs(y.d.y - dt.y))[0];
-                if (dd) out.push({lvl: dd.d.approx || unsure ? 'warn' : 'err', page: b.page, id: b.id, person: dd.p.id, text: `🔎 ${name} : le texte dit « ${said} », la fiche dit ${WHAT[tag]} ${fmt(dd.ev)}${multi}.`});
-                else if (pl) out.push({lvl: 'warn', page: b.page, id: b.id, person: pl.p.id, text: `🔎 ${name} : le texte place ${the(tag)} à « ${place} », la fiche dit ${fmt(pl.ev)}${multi}.`});
-                else out.push({lvl: 'info', page: b.page, id: b.id, person: res[0].p.id, text: `🔎 ${name} : le texte parle d’${an(tag)} (« ${said} ») que la fiche n’a pas encore${multi} — à ajouter ?`});
+                if (dd) out.push({lvl: dd.d.approx || unsure ? 'warn' : 'err', page: b.page, id: b.id, person: dd.p.id, text: i18n('🔎 {name} : le texte dit « {said} », la fiche dit {what} {fiche}{multi}.', {name, said, what: i18n(WHAT[tag]), fiche: fmt(dd.ev), multi})});
+                else if (pl) out.push({lvl: 'warn', page: b.page, id: b.id, person: pl.p.id, text: i18n('🔎 {name} : le texte place {event} à « {place} », la fiche dit {fiche}{multi}.', {name, event: i18n(the(tag)), place, fiche: fmt(pl.ev), multi})});
+                else out.push({lvl: 'info', page: b.page, id: b.id, person: res[0].p.id, text: i18n('🔎 {name} : le texte parle d’{event} (« {said} ») que la fiche n’a pas encore{multi} — à ajouter ?', {name, event: i18n(an(tag)), said, multi})});
             }
         }
         // 3. les lieux : connus de la base ? sinon, le plus proche (une seule question au serveur pour tous les nouveaux noms)
         const askNew = [...new Set(placeAsk.map(x => x.place))].filter(n => !placeCache.has(n)).slice(0, 60);
         if (askNew.length) { try { const r = await A().api('layout_check_data', {places: askNew.join('|')}); askNew.forEach(n => placeCache.set(n, r.places?.[n] || {known: true})); } catch (_) { askNew.forEach(n => placeCache.delete(n)); } }
         placeAsk.forEach(({b, place}) => { const r = placeCache.get(place); if (!r || r.known) return; const key = `${b.id}|pl|${norm(place)}`; if (seen.has(key)) return; seen.add(key);
-            out.push(r.near ? {lvl: 'warn', page: b.page, id: b.id, text: `📍 « ${place} » n’est pas un lieu de ta base : tu voulais dire « ${r.near.label || r.near.name} » ?`} : {lvl: 'info', page: b.page, id: b.id, text: `📍 « ${place} » n’est pas encore dans les lieux de ta base.`}); });
+            out.push(r.near ? {lvl: 'warn', page: b.page, id: b.id, text: i18n('📍 « {place} » n’est pas un lieu de ta base : tu voulais dire « {near} » ?', {place, near: r.near.label || r.near.name})} : {lvl: 'info', page: b.page, id: b.id, text: i18n('📍 « {place} » n’est pas encore dans les lieux de ta base.', {place})}); });
         // 4. les numéros Sosa : d'après la personne « Sosa 1 » du texte, sinon la personne de départ de l'app
         if (sosaClaims.length) {
             // la numérotation du texte : celle de la personne de départ de l'app, ou d'une personne que le texte dit « Sosa 1 » (la meilleure des deux)
@@ -233,9 +236,9 @@
             if (sm) sosaClaims.forEach(c => {
                 const got = c.subj.ps.map(p => ({p, nums: sosaOf(sm, p.id)})); if (got.some(g => g.nums.some(n => c.nums.includes(n)))) return;
                 const key = `${c.b.id}|sosa|${c.said}|${c.subj.at}`; if (seen.has(key)) return; seen.add(key);
-                const g = got.find(x => x.nums.length) || got[0], name = c.subj.name.replace(/\s+/g, ' '), multi = c.subj.ps.length > 1 ? ` (${c.subj.ps.length} fiches portent ce nom)` : '';
-                out.push(g.nums.length ? {lvl: multi ? 'warn' : 'err', page: c.b.page, id: c.b.id, person: g.p.id, text: `🔢 ${name} : le texte dit « ${c.said} », la fiche a le Sosa ${g.nums.join(' et ')}${sm.name ? ` (ancêtres de ${sm.name})` : ''}${multi}.`}
-                    : {lvl: 'warn', page: c.b.page, id: c.b.id, person: g.p.id, text: `🔢 ${name} : le texte dit « ${c.said} », mais la fiche n’a pas de numéro Sosa${sm.name ? ` (ce n’est pas un ancêtre direct de ${sm.name})` : ''}${multi}.`});
+                const g = got.find(x => x.nums.length) || got[0], name = c.subj.name.replace(/\s+/g, ' '), multi = c.subj.ps.length > 1 ? ` ${i18n('({n} fiches portent ce nom)', {n: c.subj.ps.length})}` : '';
+                out.push(g.nums.length ? {lvl: multi ? 'warn' : 'err', page: c.b.page, id: c.b.id, person: g.p.id, text: i18n('🔢 {name} : le texte dit « {said} », la fiche a le Sosa {nums}{who}{multi}.', {name, said: c.said, nums: g.nums.join(` ${i18n('et')} `), who: sm.name ? ` ${i18n('(ancêtres de {name})', {name: sm.name})}` : '', multi})}
+                    : {lvl: 'warn', page: c.b.page, id: c.b.id, person: g.p.id, text: i18n('🔢 {name} : le texte dit « {said} », mais la fiche n’a pas de numéro Sosa{who}{multi}.', {name, said: c.said, who: sm.name ? ` ${i18n('(ce n’est pas un ancêtre direct de {name})', {name: sm.name})}` : '', multi})});
             });
         }
         return out;

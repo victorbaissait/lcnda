@@ -1,0 +1,429 @@
+fr ¦ is
+=invité ¦ gestur|gestir
+=descendant vivant ¦ afkomandi á lífi|afkomendur á lífi
+=conjoint ¦ maki|makar
+=fiche confidentielle ¦ trúnaðarspjald|trúnaðarspjöld
+=invité trouvé ¦ gestur fannst|gestir fundust
+=nouvel invité ¦ nýr gestur|nýir gestir
+=invitée ¦ boðin|boðnar
+=invité déjà là ¦ gestur þegar á listanum|gestir þegar á listanum
+=colonne ¦ dálkur|dálkar
+=invité ajouté ¦ gesti bætt við|gestum bætt við
+=invité complété ¦ gestur uppfærður|gestir uppfærðir
+=foyer ¦ heimili|heimili
+=avec adresse ¦ með heimilisfang|með heimilisfang
+=avec courriel ¦ með netfang|með netfang
+=badge ¦ nafnspjald|nafnspjöld
+=présent ¦ viðstaddur|viðstaddir
+=personne attendue ¦ einstaklingur væntanlegur|einstaklingar væntanlegir
+=table ¦ borð|borð
+=personne placée ¦ einstaklingur í sæti|einstaklingar í sæti
+=photo ajoutée ¦ mynd bætt við|myndum bætt við
+=personne présente ¦ einstaklingur viðstaddur|einstaklingar viðstaddir
+Sans réponse ¦ Ekkert svar
+👥 Invités ¦ 👥 Gestir
+✉️ Invitations ¦ ✉️ Boðskort
+🏷 Badges ¦ 🏷 Nafnspjöld
+🌳 Grand arbre ¦ 🌳 Stóra ættartréð
+📅 Jour J ¦ 📅 Stóri dagurinn
+Réunir les descendants d’un ancêtre : invités, invitations, badges, grand arbre, jour J. ¦ Safna saman afkomendum forföður: gestir, boðskort, nafnspjöld, stóra ættartréð, stóri dagurinn.
+＋ Nouvelle cousinade ¦ ＋ Nýtt ættarmót
+Nouvelle cousinade ¦ Nýtt ættarmót
+Lecture des cousinades… ¦ Hleð ættarmótum…
+Aucune cousinade pour l’instant ¦ Ekkert ættarmót enn
+Choisis un ancêtre (ou un couple) : l’app trouve ses descendants vivants, branche par branche, et prépare la liste des invités. ¦ Veldu forföður (eða hjón): appið finnur afkomendur á lífi, grein fyrir grein, og undirbýr gestalistann.
+Chercher… (ex. Martin, 2026, Tulle) ¦ Leita… (t.d. Martin, 2026, Tulle)
+{n} oui ¦ {n} já
+{n} sans réponse ¦ {n} án svars
+Aucune cousinade ne correspond. ¦ Ekkert ættarmót passar.
+Renommer la cousinade ¦ Endurnefna ættarmótið
+Cousinade renommée. ¦ Ættarmót endurnefnt.
+Cousinade supprimée : « {name} » ¦ Ættarmóti eytt: „{name}“
+Modifier la cousinade ¦ Breyta ættarmótinu
+L’ancêtre dont on réunit les descendants ¦ Forfaðirinn sem afkomendum er safnað saman fyrir
+Avec son conjoint (le couple) — facultatif ¦ Með maka sínum (hjónin) — valfrjálst
+Seulement les enfants du couple. Vide : tous les enfants de l’ancêtre. ¦ Aðeins börn hjónanna. Autt: öll börn forföðurins.
+Nom de la cousinade ¦ Nafn ættarmótsins
+Personne de référence pour les liens de parenté ¦ Viðmiðunareinstaklingur fyrir skyldleika
+Chaque invité aura son lien avec elle (« cousin issu de germains de … »). Toi, le plus souvent. ¦ Hver gestur fær skyldleika sinn við hann („þremenningur við …“). Oftast þú.
+Inviter aussi les conjoints des descendants ¦ Bjóða líka mökum afkomendanna
+🔒 Les fiches confidentielles ne sont jamais montrées. Les adresses des vivants restent dans ce projet. ¦ 🔒 Trúnaðarspjöld eru aldrei sýnd. Heimilisföng lifandi fólks eru áfram í þessu verkefni.
+Choisis l’ancêtre : l’app cherche ses descendants vivants. ¦ Veldu forföðurinn: appið leitar að afkomendum á lífi.
+Recherche des descendants vivants… ¦ Leita að afkomendum á lífi…
+{who} dans {branches}, et {spouses}. ¦ {who} í {branches}, og {spouses}.
+{who} dans {branches}. ¦ {who} í {branches}.
+{n} sans décès noté, née il y a moins de 100 ans : marquée « vivant ? ». ¦ {n} án skráðs andláts, fæddir fyrir minna en 100 árum: merktir „á lífi?“.
+{n} laissées de côté. ¦ {n} skildir út undan.
+{n} laissée de côté. ¦ {n} skilinn út undan.
+Choisis l’ancêtre dont on réunit les descendants. ¦ Veldu forföðurinn sem afkomendum er safnað saman fyrir.
+Cousinade créée : {n}. ¦ Ættarmót búið til: {n}.
+Cousinade enregistrée : {n}. ¦ Ættarmót vistað: {n}.
+Cousinade enregistrée. ¦ Ættarmót vistað.
+Lecture de la cousinade… ¦ Hleð ættarmótinu…
+← Toutes les cousinades ¦ ← Öll ættarmót
+↻ Chercher les nouveaux descendants ¦ ↻ Leita að nýjum afkomendum
+Chercher les nouveaux descendants ¦ Leita að nýjum afkomendum
+↗ Fiche de l’ancêtre ¦ ↗ Spjald forföðurins
+{n} n’apparaissent plus : sa fiche est devenue confidentielle (ou a été supprimée). ¦ {n} birtast ekki lengur: spjaldið varð trúnaðarspjald (eða því var eytt).
+{n} n’apparaît plus : sa fiche est devenue confidentielle (ou a été supprimée). ¦ {n} birtist ekki lengur: spjaldið varð trúnaðarspjald (eða því var eytt).
+la personne de référence ¦ viðmiðunareinstaklingurinn
+Liens de parenté avec ¦ Skyldleiki við
+＋ Ajouter un invité ¦ ＋ Bæta við gesti
+⤒ Importer une liste… ¦ ⤒ Flytja inn lista…
+Aucun invité pour l’instant ¦ Enginn gestur enn
+Aucun descendant vivant trouvé. Ajoute les invités à la main, importe une liste, ou complète l’arbre puis « ↻ Chercher les nouveaux descendants ». ¦ Enginn afkomandi á lífi fannst. Bættu við gestum handvirkt, fluttu inn lista, eða fylltu út ættartréð og síðan „↻ Leita að nýjum afkomendum“.
+Chercher… (ex. Martin, Brive, végétarien) ¦ Leita… (t.d. Martin, Brive, grænmetisæta)
+Invités (cochés) ¦ Boðnir (hakað við)
+Pas invités ¦ Ekki boðnir
+Seulement « vivant ? » ¦ Aðeins „á lífi?“
+Par branche et par foyer ¦ Eftir grein og heimili
+Par génération ¦ Eftir kynslóð
+Par réponse ¦ Eftir svari
+{n} · {inv} en tout ¦ {n} · {inv} alls
+Aucun invité ne correspond. ¦ Enginn gestur passar.
+Pas invité ¦ Ekki boðið
+Invité (coché) ¦ Boðið (hakað við)
+Régime ¦ Mataræði
+Rien de noté sur son décès, née il y a moins de 100 ans : vérifie avant d’inviter ¦ Ekkert skráð um andlát, fædd(ur) fyrir minna en 100 árum: athugaðu áður en þú býður
+Sans fiche ¦ Ekkert spjald
+Pas d’adresse ¦ Ekkert heimilisfang
+Nombre de personnes ¦ Fjöldi einstaklinga
+{name} est invitée. ¦ {name} er boðin.
+{name} est invité. ¦ {name} er boðinn.
+{name} n’est plus invitée. ¦ {name} er ekki lengur boðin.
+{name} n’est plus invité. ¦ {name} er ekki lengur boðinn.
+Réponse de {name} : {answer}. ¦ Svar {name}: {answer}.
+Inviter les {n} affichées ¦ Bjóða þeim sem sýndir eru ({n})
+{n} invitées. ¦ {n} boðnir.
+{n} invitée. ¦ {n} boðinn.
+Ne plus inviter les personnes affichées ¦ Hætta að bjóða þeim sem sýndir eru
+{n} retirées des invitations. ¦ {n} fjarlægðir úr boðskortunum.
+{n} retirée des invitations. ¦ {n} fjarlægður úr boðskortunum.
+Tableau des invités (CSV)… ¦ Gestatafla (CSV)…
+Imprimer la liste des invités… ¦ Prenta gestalistann…
+Écrire un courriel ¦ Skrifa tölvupóst
+Retirer de la liste ¦ Fjarlægja af listanum
+🗑 Retirer de la liste ¦ 🗑 Fjarlægja af listanum
+{name} retirée de la liste. ¦ {name} fjarlægð af listanum.
+{name} retiré de la liste. ¦ {name} fjarlægður af listanum.
+Aucun nouveau descendant vivant : la liste est à jour. ¦ Enginn nýr afkomandi á lífi: listinn er uppfærður.
+{n} ajoutés. ¦ {n} bætt við.
+{n} ajouté. ¦ {n} bætt við.
+Son propre foyer ¦ Eigið heimili
+Garder son foyer ¦ Halda heimilinu
+🎉 COUSINADE · INVITÉ ¦ 🎉 ÆTTARMÓT · GESTUR
+🎉 COUSINADE ¦ 🎉 ÆTTARMÓT
+Nouvel invité ¦ Nýr gestur
+Une fiche de ta généalogie (facultatif) ¦ Spjald úr ættfræðinni þinni (valfrjálst)
+Sinon, écris le prénom et le nom ci-dessous. ¦ Annars skaltu skrifa fornafn og eftirnafn hér fyrir neðan.
+Foyer (une invitation par foyer) ¦ Heimili (eitt boðskort á heimili)
+12 rue des Écoles ¦ 12 rue des Écoles
+Régime, allergies ¦ Mataræði, ofnæmi
+végétarien, sans gluten… ¦ grænmetisæta, glútenlaust…
+Mettre aussi l’adresse, le courriel et le téléphone dans le répertoire des vivants (sa fiche) ¦ Setja líka heimilisfang, netfang og síma í skrá yfir lifandi fólk (á spjaldið)
+Décoché : seulement dans cette cousinade. ¦ Ekki hakað: aðeins í þessu ættarmóti.
+Écris au moins un prénom ou un nom (ou choisis une fiche). ¦ Skrifaðu að minnsta kosti fornafn eða eftirnafn (eða veldu spjald).
+Ce courriel n’a pas la bonne forme (exemple : prenom.nom@exemple.fr). ¦ Þetta netfang er ekki á réttu formi (dæmi: fornafn.eftirnafn@daemi.is).
+Invité ajouté. ¦ Gesti bætt við.
+Enregistré, et aussi dans le répertoire des vivants. ¦ Vistað, og líka í skrá yfir lifandi fólk.
+Le lecteur de tableaux n’est pas chargé. ¦ Töflulesarinn er ekki hlaðinn.
+Importer une liste d’invités ¦ Flytja inn gestalista
+Un tableau avec une ligne de titres : Prénom, Nom, Courriel, Téléphone, Adresse, Code postal, Ville, Réponse (oui / non / peut-être), Nombre, Régime, Note. ¦ Tafla með fyrirsagnalínu: Fornafn, Eftirnafn, Netfang, Sími, Heimilisfang, Póstnúmer, Bær, Svar (já / nei / kannski), Fjöldi, Mataræði, Athugasemd.
+Je ne trouve ni prénom ni nom : la première ligne doit donner les titres des colonnes (Prénom, Nom, Courriel…). ¦ Ég finn hvorki fornafn né eftirnafn: fyrsta línan verður að gefa heiti dálkanna (Fornafn, Eftirnafn, Netfang…).
+{n} (coordonnées et réponse complétées) ¦ {n} (samskiptaupplýsingar og svar uppfærð)
+{n} non reconnues : laissées de côté. ¦ {n} ekki þekktar: skildar út undan.
+{n} non reconnue : laissée de côté. ¦ {n} ekki þekkt: skilin út undan.
+⤓ Exporter le tableau des invités ¦ ⤓ Flytja út gestatöfluna
+Un fichier CSV (tableur) avec les invités, leur branche, leur lien de parenté et leur réponse. ¦ CSV-skrá (töflureiknir) með gestunum, grein þeirra, skyldleika og svari.
+Avec les adresses, courriels et téléphones ¦ Með heimilisföngum, netföngum og símum
+🔒 Ce sont des données de personnes vivantes : ne partage ce fichier qu’avec ceux qui organisent. ¦ 🔒 Þetta eru gögn um lifandi fólk: deildu þessari skrá aðeins með þeim sem skipuleggja.
+Seulement les invités cochés ¦ Aðeins gestir sem hakað er við
+Lien avec l’ancêtre ¦ Skyldleiki við forföðurinn
+Lien avec la référence ¦ Skyldleiki við viðmiðunareinstaklinginn
+Tableau exporté, avec les coordonnées. ¦ Tafla flutt út, með samskiptaupplýsingum.
+Tableau exporté, sans les coordonnées. ¦ Tafla flutt út, án samskiptaupplýsinga.
+Invités — {name} ¦ Gestir — {name}
+Liste des invités ¦ Gestalisti
+Les invités cochés ¦ Gestir sem hakað er við
+Ceux qui viennent ¦ Þeir sem koma
+Avec les coordonnées ¦ Með samskiptaupplýsingum
+Le texte de l’invitation ¦ Texti boðskortsins
+Une invitation par foyer. Ces mots se remplacent tout seuls : ¦ Eitt boðskort á heimili. Þessum orðum er skipt út sjálfkrafa:
+Répondre avant le ¦ Svara fyrir
+Contact pour répondre ¦ Tengiliður fyrir svör
+Objet du courriel ¦ Efni tölvupósts
+🖨 Imprimer les invitations… ¦ 🖨 Prenta boðskortin…
+📝 Dans le traitement de texte ¦ 📝 Í ritvinnslunni
+📁 Copie dans les médias ¦ 📁 Afrit í miðlum
+{n} à inviter ¦ {n} til að bjóða
+✉️ Un courriel à tous (en copie cachée) ¦ ✉️ Einn tölvupóstur til allra (í falinni afritun)
+Ta messagerie s’ouvre avec le texte prêt : rien n’est envoyé par l’app. ¦ Póstforritið þitt opnast með textanum tilbúnum: appið sendir ekkert.
+✉️ Courriel prêt ¦ ✉️ Tölvupóstur tilbúinn
+Aucun invité coché : coche des invités dans l’onglet « 👥 Invités ». ¦ Enginn gestur hakaður: hakaðu við gesti í flipanum „👥 Gestir“.
+Aucun foyer à inviter : coche des invités d’abord. ¦ Ekkert heimili til að bjóða: hakaðu fyrst við gesti.
+L’adresse du foyer en haut à droite (enveloppe à fenêtre) ¦ Heimilisfang heimilisins efst til hægri (gluggaumslag)
+Le traitement de texte n’est pas chargé. ¦ Ritvinnslan er ekki hlaðin.
+Les faire-part ne sont pas chargés. ¦ Tilkynningakortin eru ekki hlaðin.
+Tous les descendants de {name} ¦ Allir afkomendur {name}
+Réponse avant le {date} ¦ Svar fyrir {date}
+Envoi vers les médias indisponible. ¦ Ekki hægt að senda í miðla.
+Une copie de l’invitation est rangée dans les médias. ¦ Afrit af boðskortinu er geymt í miðlum.
+Copie non rangée dans les médias : {err} ¦ Afrit ekki geymt í miðlum: {err}
+Le lien écrit sous le nom ¦ Skyldleikinn sem er skrifaður undir nafninu
+Avec l’ancêtre ¦ Við forföðurinn
+Avec la référence ¦ Við viðmiðunareinstaklinginn
+Pour qui ¦ Fyrir hvern
+Invités cochés ¦ Gestir sem hakað er við
+Qui viennent ¦ Sem koma
+Présents ¦ Viðstaddir
+Par page A4 ¦ Á hverja A4-síðu
+Petite photo (si la fiche en a une) ¦ Lítil mynd (ef spjaldið hefur mynd)
+QR code (nom, branche et lien, lu par un téléphone) ¦ QR-kóði (nafn, grein og skyldleiki, lesinn með síma)
+Chaque branche a sa couleur (onglet « 📊 Chiffres » pour la changer). ¦ Hver grein hefur sinn lit (flipinn „📊 Tölur“ til að breyta honum).
+Personne à qui faire un badge. ¦ Enginn til að gera nafnspjald fyrir.
+L’arbre décoratif n’est pas chargé. ¦ Skrautættartréð er ekki hlaðið.
+Toute la descendance de {name}, en grand, une couleur par branche, à afficher le jour de la cousinade. Le dessin s’ouvre ensuite pour tout retoucher, puis « ⤓ Exporter » (PDF pour l’imprimeur, avec fond perdu et traits de coupe, PNG, SVG…). ¦ Allir afkomendur {name}, í stóru broti, einn litur á hverja grein, til að hengja upp á ættarmótsdaginn. Teikningin opnast svo til að laga allt, síðan „⤓ Flytja út“ (PDF fyrir prentsmiðjuna, með blæðingu og skurðarmerkjum, PNG, SVG…).
+l’ancêtre ¦ forfaðirinn
+Les conjoints sous chaque nom ¦ Makar undir hverju nafni
+Une place pour coller les photos du jour (à côté des vivants) ¦ Pláss til að líma myndir dagsins (við hlið lifandi fólks)
+🌳 Fabriquer le grand arbre ¦ 🌳 Búa til stóra ættartréð
+Fabrication du grand arbre… ¦ Bý til stóra ættartréð…
+Aucune descendance pour cet ancêtre. ¦ Engir afkomendur fyrir þennan forföður.
+Cet ancêtre est confidentiel. ¦ Þessi forfaðir er trúnaðarmál.
+Photos du jour ¦ Myndir dagsins
+✅ Présence ¦ ✅ Mæting
+{here} sur {n} ¦ {here} af {n}
+🖨 Imprimer la liste de présence… ¦ 🖨 Prenta mætingarlistann…
+Personne n’a encore dit oui : les réponses se notent dans « 👥 Invités ». ¦ Enginn hefur enn sagt já: svör eru skráð í „👥 Gestir“.
+{name} est là. ¦ {name} er mætt(ur).
+{name} n’est plus notée présente. ¦ {name} er ekki lengur skráð viðstödd.
+{name} n’est plus noté présent. ¦ {name} er ekki lengur skráður viðstaddur.
+Présence — {name} ¦ Mæting — {name}
+{name} — présence ¦ {name} — mæting
+Liste de présence ¦ Mætingarlisti
+Places par table ¦ Sæti við hvert borð
+Compter aussi les « peut-être » ¦ Telja líka „kannski“
+Les petites branches partagent une table ¦ Litlar greinar deila borði
+✨ Faire le plan par branche ¦ ✨ Gera sætaskipan eftir greinum
+🖨 Imprimer le plan… ¦ 🖨 Prenta sætaskipanina…
+Un foyer n’est jamais séparé. Change la table d’une personne avec sa case ; ↶ Annuler défait le plan. ¦ Heimili er aldrei skipt upp. Breyttu borði einstaklings með reitnum hans; ↶ Afturkalla afturkallar sætaskipanina.
+Pas encore de plan de table : note les réponses, puis « ✨ Faire le plan par branche ». ¦ Engin sætaskipan enn: skráðu svörin, síðan „✨ Gera sætaskipan eftir greinum“.
+{name} va à la table {no}. ¦ {name} fer að borði {no}.
+Personne ne vient encore : note les réponses « Oui » d’abord. ¦ Enginn kemur enn: skráðu fyrst „Já“-svörin.
+＋ Ajouter des photos… ¦ ＋ Bæta við myndum…
+Retirer de l’album ¦ Fjarlægja úr albúminu
+L’album est vide ¦ Albúmið er tómt
+Les photos du jour : importe-les depuis l’ordinateur ou choisis-les dans les médias. ¦ Myndir dagsins: fluttu þær inn úr tölvunni eða veldu þær úr miðlum.
+＋ Ajouter des photos ¦ ＋ Bæta við myndum
+Les photos de la cousinade ¦ Myndirnar frá ættarmótinu
+Ajouter à l’album ¦ Bæta við albúmið
+{n} à l’album. ¦ {n} í albúmið.
+Photo retirée de l’album (elle reste dans les médias). ¦ Mynd fjarlægð úr albúminu (hún er áfram í miðlum).
+invités ¦ gestir
+oui ¦ já
+peut-être ¦ kannski
+non ¦ nei
+sans réponse ¦ án svars
+personnes attendues ¦ væntanlegir einstaklingar
+Par branche ¦ Eftir grein
+Invités ¦ Gestir
+Réponses ¦ Svör
+Couleur de la branche {name} ¦ Litur greinarinnar {name}
+{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse ¦ {yes} já, {maybe} kannski, {no} nei, {wait} án svars
+Régimes et allergies (de ceux qui viennent) ¦ Mataræði og ofnæmi (þeirra sem koma)
+Le jour J : {n}. ¦ Stóri dagurinn: {n}.
+Couleur de la branche enregistrée. ¦ Litur greinarinnar vistaður.
+Organiser une cousinade… ¦ Skipuleggja ættarmót…
+Descendants de {name} · {n} ¦ Afkomendur {name} · {n}
+=passage dans les médias ¦ framkoma í fjölmiðlum|framkomur í fjölmiðlum
+passages dans les médias ¦ framkomur í fjölmiðlum
+1980 et après ¦ 1980 og síðar
+avant 1900 ¦ fyrir 1900
+Ajoute un fichier MP3, M4A, WAV, AIFF ou OGG sur une fiche, une battue, une enquête… (ou glisse-le ici) et il apparaîtra ici. ¦ Bættu MP3-, M4A-, WAV-, AIFF- eða OGG-skrá við spjald, leit, athugun… (eða dragðu hana hingað) og hún birtist hér.
+Ajoute un fichier MP4, MOV ou WEBM sur une fiche, une battue, une enquête… (ou glisse-le ici) et elle apparaîtra ici. ¦ Bættu MP4-, MOV- eða WEBM-skrá við spjald, leit, athugun… (eða dragðu hana hingað) og það birtist hér.
+Ajoute une carte : l’image de la vue, celle du dos, puis le lieu montré pour la retrouver sur la Carte. ¦ Bættu við korti: myndinni af útsýninu, bakhliðinni, síðan staðnum sem sýndur er til að finna hann á Kortinu.
+Ajoute-les sur la fiche d’une personne (bloc 🛂 Passeports) ou dans ✨ Trésors → Les passeports, où l’on peut aussi importer un relevé. ¦ Bættu þeim við á spjaldi einstaklings (reiturinn 🛂 Vegabréf) eða í ✨ Fjársjóðir → Vegabréfin, þar sem einnig er hægt að flytja inn útdrátt.
+Allume-en une dans ✨ Trésors → Allumer une bougie. ¦ Kveiktu á einu í ✨ Fjársjóðir → Kveikja á kerti.
+Amérique du Nord ¦ Norður-Ameríka
+Assembler et retoucher des sons ¦ Setja saman og lagfæra hljóð
+Aucun acte pour l’instant ¦ Ekkert skjal enn
+Aucun dossier de preuve ¦ Engin sönnunarmappa
+Aucun lieu dans l’arbre pour l’instant ¦ Enginn staður í ættartrénu enn
+Aucun livret pour l’instant ¦ Enginn bæklingur enn
+Aucun nom indexé pour l’instant ¦ Ekkert skráð nafn enn
+Aucun partage pour l’instant ¦ Engin deiling enn
+Aucun passage dans les médias pour l’instant ¦ Engin framkoma í fjölmiðlum enn
+Aucun passeport pour l’instant ¦ Ekkert vegabréf enn
+Aucun projet de montage pour l’instant ¦ Ekkert klippiverkefni enn
+Aucun questionnaire pour l’instant ¦ Enginn spurningalisti enn
+Aucun rattachement pour l’instant ¦ Engin sóknartenging enn
+Aucun recueil pour l’instant ¦ Ekkert safn enn
+Aucun son pour l’instant ¦ Ekkert hljóð enn
+Aucune annonce pour l’instant ¦ Engin auglýsing enn
+Aucune bougie au registre ¦ Ekkert kerti í skránni
+Aucune carte d’électeur pour l’instant ¦ Ekkert kjósendakort enn
+Aucune carte postale pour l’instant ¦ Ekkert póstkort enn
+Aucune création ni carrière pour l’instant ¦ Ekkert verk né ferill enn
+Aucune demande : ouvre une photo et clique « 📤 Demander qui c’est ». ¦ Engin beiðni: opnaðu mynd og smelltu á „📤 Spyrja hver þetta er“.
+Aucune demande pour l’instant ¦ Engin beiðni enn
+Aucune gazette pour l’instant ¦ Ekkert fréttablað enn
+Aucune image de lieu pour l’instant ¦ Engin staðarmynd enn
+Aucune langue notée pour l’instant ¦ Ekkert tungumál skráð enn
+Aucune lettre pour l’instant ¦ Ekkert bréf enn
+Aucune maison pour l’instant : « ＋ Nouvelle maison ». ¦ Ekkert hús enn: „＋ Nýtt hús“.
+Aucune personne n’a encore de profil ¦ Enginn einstaklingur hefur enn prófíl
+Aucune règle pour l’instant ¦ Engar reglur enn
+Aucune récompense pour l’instant ¦ Engin viðurkenning enn
+Aucune transcription d’acte pour l’instant ¦ Engin uppskrift skjals enn
+Aucune vidéo pour l’instant ¦ Ekkert myndband enn
+Auteur, réalisation ¦ Höfundur, leikstjórn
+Bravo ! L’assistant peut chercher plus loin (jusqu’à 12 générations). ¦ Vel gert! Hjálparinn getur leitað lengra (allt að 12 kynslóðir).
+Carte du droit de vote ¦ Kort yfir kosningarétt
+Cette liste est cachée ¦ Þessi listi er falinn
+Ce que tu notes ici reprend les actes : ce n’est pas un conseil juridique. ¦ Það sem þú skráir hér fylgir skjölunum: þetta er ekki lögfræðiráðgjöf.
+Ce sont des informations privées : montre-les d’abord dans les Réglages. ¦ Þetta eru persónulegar upplýsingar: sýndu þær fyrst í Stillingum.
+Chercher un nom, une commune… ¦ Leita að nafni, sveitarfélagi…
+Chercher un projet… (nom, photo, détails) ¦ Leita að verkefni… (nafn, mynd, nánar)
+Chercher un questionnaire… (ex. Anne, guerre, Marie) ¦ Leita að spurningalista… (t.d. Anne, stríð, Marie)
+Chercher une carte… (ex. Bretagne, 1978, Lucie) ¦ Leita að korti… (t.d. Bretagne, 1978, Lucie)
+Chercher une maison… (nom, lieu, époque, personne, recensement) ¦ Leita að húsi… (nafn, staður, tímabil, einstaklingur, manntal)
+Chercher une personne… (ex. Martin, maire, sportif) ¦ Leita að einstaklingi… (t.d. Martin, bæjarstjóri, íþróttamaður)
+Chercher… (commune, cote, année, service d’archives) ¦ Leita… (sveitarfélag, safnmark, ár, skjalasafn)
+Chercher… (commune, section, numéro, lieu-dit, propriétaire) ¦ Leita… (sveitarfélag, hluti, númer, örnefni, eigandi)
+Chercher… (personne, bien, notaire, lieu, cote) ¦ Leita… (einstaklingur, eign, lögbókandi, staður, safnmark)
+Chercher… (titre, auteur, lieu, nom cité, ce qu’on voit, notes) ¦ Leita… (titill, höfundur, staður, nafn sem nefnt er, það sem sést, athugasemdir)
+Chercher… (titre, lieu) ¦ Leita… (titill, staður)
+Chercher… (titre, personne, lieu, année) ¦ Leita… (titill, einstaklingur, staður, ár)
+Chercher… (titre, texte, personne, lieu, cote) ¦ Leita… (titill, texti, einstaklingur, staður, safnmark)
+Choisir la personne, puis la sorte de fiche ¦ Veldu einstaklinginn, síðan tegund færslu
+Choisir les colonnes (« ⚙️ Champs affichés », onglet « La liste ») ¦ Velja dálkana („⚙️ Reitir sem eru sýndir“, flipinn „Listinn“)
+Choisir une personne, puis cocher ce qu’elle était (artiste, sportif, élu…) ¦ Veldu einstakling og hakaðu síðan við hvað hann var (listamaður, íþróttamaður, kjörinn fulltrúi…)
+Choisis la personne de départ (Sosa 1) et ajoute ses parents. ¦ Veldu upphafseinstaklinginn (Sosa 1) og bættu við foreldrum hans.
+Choisis la personne, puis la sorte de fiche : elle se range sur sa page et apparaît ici. ¦ Veldu einstaklinginn, síðan tegund færslu: hún fer á síðu hans og birtist hér.
+Choisis l’image d’un acte (baptême, mariage, sépulture…) et transcris-le à côté. ¦ Veldu mynd af skjali (skírn, hjónavígsla, greftrun…) og skrifaðu það upp við hliðina.
+Clique sur un pays pour voir ses dates (et les cantons suisses, les provinces canadiennes…). ¦ Smelltu á land til að sjá dagsetningar þess (og svissnesku kantónurnar, kanadísku fylkin…).
+Clubs et équipes, résultats, records, saisons. ¦ Félög og lið, úrslit, met, tímabil.
+Commence par « ＋ Numéro », « ＋ Livre » ou « ＋ Documentaire », en haut de la page. ¦ Byrjaðu á „＋ Tölublað“, „＋ Bók“ eða „＋ Heimildarmynd“, efst á síðunni.
+Commence-en un : il apparaîtra ici, avec les autres, pour le rouvrir plus tard. ¦ Byrjaðu á einu: það birtist hér með hinum, svo þú getir opnað það aftur seinna.
+Commune, section, numéro ¦ Sveitarfélag, hluti, númer
+Crée d’abord ton type (« ＋ Créer mon propre type… » dans « ＋ Nouvelle œuvre »), puis ses fiches. ¦ Búðu fyrst til tegundina þína („＋ Búa til mína eigin tegund…“ í „＋ Nýtt verk“), síðan færslur hennar.
+Crée le recueil (registre, liste, cahier…), puis ajoute tes photos : chaque photo devient une page. ¦ Búðu til safnið (kirkjubók, lista, stílabók…) og bættu svo við myndunum þínum: hver mynd verður að síðu.
+Crée une carte, puis ajoute des photos de l’app ou importe-les : celles qui ont des coordonnées GPS se placent toutes seules. ¦ Búðu til kort og bættu svo við myndum úr appinu eða fluttu þær inn: þær sem hafa GPS-hnit raða sér sjálfar.
+Créer ce jour-là ¦ Búa til á þessum degi
+Date (récent d’abord) ¦ Dagsetning (nýjast fyrst)
+Date de l’acte ¦ Dagsetning skjals
+Date pour les femmes ¦ Dagsetning fyrir konur
+Date pour les hommes ¦ Dagsetning fyrir karla
+Décennie ¦ Áratugur
+Siècle ¦ Öld
+Précédent ¦ Fyrri
+Elles s’ajoutent sur la fiche d’une personne (bloc Cartes d’électeur). ¦ Þeim er bætt við á spjaldi einstaklings (reiturinn Kjósendakort).
+Ensuite par ¦ Síðan eftir
+Grouper par catégorie ¦ Flokka eftir efnisflokki
+Héritages et successions ¦ Arfur og dánarbú
+Il faut des dates dans l’arbre : une naissance, un mariage, un décès… ¦ Það þarf dagsetningar í ættartréð: fæðingu, hjónaband, andlát…
+Index des noms ¦ Nafnaskrá
+Inventions et leurs brevets, découvertes (espèce, comète, site…), publications scientifiques. ¦ Uppfinningar og einkaleyfi þeirra, uppgötvanir (tegund, halastjarna, staður…), vísindagreinar.
+La liste « Palmarès » ¦ Listinn „Afrekaskrá“
+La liste « Revue de presse » ¦ Listinn „Fjölmiðlaumfjöllun“
+Palmarès ¦ Afrekaskrá
+🏆 Palmarès ¦ 🏆 Afrekaskrá
+Langue des actes et des documents ¦ Tungumál skjala og gagna
+Le cercle autour des ancêtres ¦ Hringurinn í kringum forfeðurna
+Le plus de fiches ¦ Flestar færslur
+Le plus de photos ¦ Flestar myndir
+Le plus de profils ¦ Flestir prófílar
+Les autres listes ¦ Hinir listarnir
+Les lieux viennent des naissances, mariages et décès de l’arbre. ¦ Staðirnir koma úr fæðingum, hjónaböndum og andlátum ættartrésins.
+Les plus grandes ¦ Stærst fyrst
+Lettres aux descendants ¦ Bréf til afkomenda
+L’ordre des outils, et ceux qu’on montre ¦ Röð verkfæranna, og hver eru sýnd
+Marquer dans les transcriptions ¦ Merkja í uppskriftunum
+Mes annonces et courriers ¦ Auglýsingarnar mínar og bréf
+Mettre ce qui est affiché dans un projet de l’Atelier ¦ Setja það sem er sýnt í verkefni í Smiðjunni
+Modifiés récemment ¦ Nýlega breytt
+Monter des vidéos : morceaux, titres, fondus, incrustations, musiques ¦ Klippa myndbönd: bútar, titlar, fölun, yfirlögn, tónlist
+Morceaux, albums et disques, enregistrements, concerts, tournées, œuvres de musique savante. ¦ Lög, plötur og diskar, upptökur, tónleikar, tónleikaferðir, klassísk tónverk.
+Note de quelle paroisse dépendait chaque hameau ou village avant la Révolution. ¦ Skráðu undir hvaða sókn hvert smáþorp eða þorp heyrði fyrir frönsku byltinguna.
+Numéro, tome, épisode ¦ Tölublað, bindi, þáttur
+Ou « 📷 Lire une capture des règles » pour les remplir toutes seules. ¦ Eða „📷 Lesa skjámynd af reglunum“ til að fylla þær út sjálfkrafa.
+Où j’en suis ¦ Hvar ég er stödd/staddur
+Par commune ¦ Eftir sveitarfélagi
+Par date de l’œuvre ¦ Eftir dagsetningu verksins
+Par date, récentes d’abord ¦ Eftir dagsetningu, nýjast fyrst
+Par personne ¦ Eftir einstaklingi
+Par période ¦ Eftir tímabili
+Partage une branche dans ✨ Trésors → Partager une branche (pour un temps). ¦ Deildu grein í ✨ Fjársjóðir → Deila grein (í takmarkaðan tíma).
+Pas encore de lignée ¦ Enginn ættleggur enn
+Passeport des lieux ¦ Staðavegabréf
+Peintures, dessins, gravures, sculptures et fontes, photographies, affiches, expositions… ¦ Málverk, teikningar, koparstungur, höggmyndir og afsteypur, ljósmyndir, veggspjöld, sýningar…
+Plus anciens ¦ Elst
+Priorité d’achat ¦ Forgangur kaupa
+Précisions ¦ Nánar
+Ranger les fiches par sorte, avec un intertitre pour chacune ¦ Raða færslunum eftir tegund, með millifyrirsögn fyrir hverja
+Ranger par sorte ¦ Raða eftir tegund
+Revenir sur un son en cours de travail ¦ Fara aftur í hljóð sem þú ert að vinna með
+Revue, collection, série ¦ Tímarit, ritröð, sería
+＋ Revue, collection, série ¦ ＋ Tímarit, ritröð, sería
+Rien ne manque sur 5 générations ¦ Ekkert vantar í 5 kynslóðum
+Règles des journaux ¦ Reglur blaðanna
+Région, puis pays ¦ Svæði, síðan land
+Pays (A → Z) ¦ Land (A → Ö)
+Tous les pays, dans l’ordre que tu veux ¦ Öll lönd, í þeirri röð sem þú vilt
+Un fichier .ics à ouvrir dans ton calendrier (Apple, Google, Outlook…) ¦ .ics-skrá til að opna í dagatalinu þínu (Apple, Google, Outlook…)
+Un son de la base ou de l’ordinateur, à travailler et à garder comme projet ¦ Hljóð úr gagnagrunninum eða tölvunni, til að vinna með og geyma sem verkefni
+Une fiche rassemble texte, images, personnes, cartes et listes sur un sujet. ¦ Minnisblað safnar saman texta, myndum, einstaklingum, kortum og listum um efni.
+Voir qui pouvait voter en ¦ Sjá hverjir máttu kjósa í
+pas de date ¦ engin dagsetning
+Écart ¦ Munur
+↔ Écart ¦ ↔ Munur
+Écart hommes / femmes ¦ Munur karla / kvenna
+Écoles, études et apprentissages, diplômes, établissements. ¦ Skólar, nám og iðnnám, prófskírteini, stofnanir.
+Écris ton annonce et vois tout de suite combien elle coûtera d’après les règles du journal. ¦ Skrifaðu auglýsinguna þína og sjáðu strax hvað hún kostar samkvæmt reglum blaðsins.
+Écris ton annonce, vois tout de suite combien elle coûtera d’après les règles du journal, et suis ce qu’elle devient. ¦ Skrifaðu auglýsinguna þína, sjáðu strax hvað hún kostar samkvæmt reglum blaðsins og fylgstu með hvað verður um hana.
+Écris-en une dans ✨ Trésors → Lettres aux descendants : « pour les 18 ans de Léa », « en 2050 ». ¦ Skrifaðu eitt í ✨ Fjársjóðir → Bréf til afkomenda: „þegar Léa verður 18 ára“, „árið 2050“.
+↗ Ouvrir dans Recherche ¦ ↗ Opna í Rannsóknum
+⚙️ Ouvrir les Réglages ¦ ⚙️ Opna Stillingar
+⚙️ Ranger les outils ¦ ⚙️ Raða verkfærunum
+✅ Tâches de l’Atelier ¦ ✅ Verkefni Smiðjunnar
+✉️ Courriers envoyés ¦ ✉️ Send bréf
+✉️ Ouvrir les lettres dans ✨ Trésors ¦ ✉️ Opna bréfin í ✨ Fjársjóðum
+✝️ Décès, sépultures ¦ ✝️ Andlát, greftranir
+👶 Naissances, baptêmes ¦ 👶 Fæðingar, skírnir
+❓ Ce qu’on peut récupérer (licences) ¦ ❓ Hvað má endurnýta (leyfi)
+❓ Comment noter un héritage ? ¦ ❓ Hvernig skrái ég arf?
+⤒ Importer des relevés ¦ ⤒ Flytja inn skráningar
+⤒ Importer les réponses ¦ ⤒ Flytja inn svörin
+⤓ Exporter les anniversaires (.ics) ¦ ⤓ Flytja út afmælin (.ics)
+＋ Ajouter une image ¦ ＋ Bæta við mynd
+＋ Ajouter une parcelle ¦ ＋ Bæta við landskika
+＋ Annonce ou courrier ¦ ＋ Auglýsing eða bréf
+＋ Nouveau dossier de preuve ¦ ＋ Ný sönnunarmappa
+＋ Nouveau livret ¦ ＋ Nýr bæklingur
+＋ Nouveau montage ¦ ＋ Ný klipping
+＋ Nouveau passage dans les médias ¦ ＋ Ný framkoma í fjölmiðlum
+＋ Nouveau passeport ¦ ＋ Nýtt vegabréf
+＋ Nouveau projet son ¦ ＋ Nýtt hljóðverkefni
+＋ Nouveau questionnaire ¦ ＋ Nýr spurningalisti
+＋ Nouveau recueil ¦ ＋ Nýtt safn
+＋ Nouvelle carte ¦ ＋ Nýtt kort
+＋ Nouvelle carte postale ¦ ＋ Nýtt póstkort
+＋ Nouvelle demande… ¦ ＋ Ný beiðni…
+＋ Nouvelle maison ¦ ＋ Nýtt hús
+＋ Nouvelle transcription ¦ ＋ Ný uppskrift
+＋ Règles d’un journal ¦ ＋ Reglur blaðs
+＋ Épisode ¦ ＋ Þáttur
+🌍 Le droit de vote dans le monde ¦ 🌍 Kosningaréttur í heiminum
+📂 Projets son ¦ 📂 Hljóðverkefni
+📚 Vers l’Atelier ¦ 📚 Í Smiðjuna
+📷 Lire une capture des règles ¦ 📷 Lesa skjámynd af reglunum
+🔍 Ouvrir l’assistant ¦ 🔍 Opna hjálparann
+🔍 Ouvrir l’assistant « Que manque-t-il ? » ¦ 🔍 Opna hjálparann „Hvað vantar?“
+🔍 Qui est sur cette photo ? ¦ 🔍 Hver er á þessari mynd?
+🔍 Rappels d’enquête ¦ 🔍 Áminningar athugana
+🔗 Partager une branche ¦ 🔗 Deila grein
+🕯️ Allumer une bougie ¦ 🕯️ Kveikja á kerti
+🖼️ Tous les médias ¦ 🖼️ Allir miðlar
+🗺 Toutes mes cartes ¦ 🗺 Öll kortin mín
+🛂 Ouvrir dans ✨ Trésors ¦ 🛂 Opna í ✨ Fjársjóðum
+🛡 Les règles ¦ 🛡 Reglurnar

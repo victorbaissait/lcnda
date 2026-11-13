@@ -1,0 +1,57 @@
+0 HEAD
+1 SOUR GENEATIQUE
+2 VERS 2024
+2 NAME Généatique
+2 CORP CDIP
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 CHAR ANSI
+1 PLAC
+2 FORM Lieudit, Commune, Code INSEE, Département, Région, Pays
+0 @I1@ INDI
+1 NAME Étienne/BÉRAUD/
+2 GIVN Étienne
+2 SURN BÉRAUD
+1 SEX M
+1 BIRT
+2 DATE 3 FEB 1789
+2 PLAC La Croix, Égletons, 19073, Corrèze, Limousin, France
+1 OCCU Maréchal-ferrant
+1 FAMS @F1@
+1 _UST NON_RENSEIGNE
+0 @I2@ INDI
+1 NAME Françoise/MAZIÈRE/
+2 GIVN Françoise
+2 SURN MAZIÈRE
+1 SEX F
+1 BIRT
+2 DATE ABT 1792
+2 PLAC , Égletons, 19073, Corrèze, Limousin, France
+1 FAMS @F1@
+0 @I3@ INDI
+1 NAME Pierre/BÉRAUD/
+2 GIVN Pierre
+2 SURN BÉRAUD
+1 SEX M
+1 BAPM
+2 DATE 12 MAR 1815
+2 PLAC , Égletons, 19073, Corrèze, Limousin, France
+2 ASSO @I4@
+3 RELA Parrain
+1 FAMC @F1@
+0 @I4@ INDI
+1 NAME Jean/MAZIÈRE/
+2 GIVN Jean
+2 SURN MAZIÈRE
+1 SEX M
+0 @F1@ FAM
+1 HUSB @I1@
+1 WIFE @I2@
+1 CHIL @I3@
+1 MARR
+2 DATE 20 NOV 1813
+2 PLAC , Égletons, 19073, Corrèze, Limousin, France
+2 ASSO @I4@
+3 RELA Témoin
+0 TRLR
