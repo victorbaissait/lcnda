@@ -211,8 +211,8 @@
                     <h3>macOS</h3>
                     <p class="presentation-os-req">macOS 13 Ventura or later</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.9.2-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 548 MB</small></span><span aria-hidden="true">↓</span></a>
-                        <a class="button secondary" href="download/LCNDA-0.9.2-mac-x64.dmg"><span>Mac Intel<small>2017 models and later · 554 MB</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.9.2-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 590 MB</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button secondary" href="download/LCNDA-0.9.2-mac-x64.dmg"><span>Mac Intel<small>2017 models and later · 596 MB</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Which Mac do you have? Apple menu → About This Mac → “Chip” (Apple Silicon) or “Processor” (Intel). Open the .dmg file and drag LCNDA into Applications.</p>
                 </article>
@@ -221,7 +221,7 @@
                     <h3>Windows</h3>
                     <p class="presentation-os-req">Windows 10 / 11 (64-bit) — Intel or AMD PCs, and Windows 11 on ARM processors</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.9.2-windows-x64.exe"><span>Windows 10 / 11<small>64-bit · 564 MB</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.9.2-windows-x64.exe"><span>Windows 10 / 11<small>64-bit · 596 MB</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Run the file and follow the installer. The required Microsoft Visual C++ component is installed automatically if it is missing.</p>
                 </article>
@@ -232,13 +232,13 @@
                     <div class="presentation-os-groups">
                         <div class="presentation-os-group">
                             <strong>Intel or AMD PC</strong>
-                            <a class="button" href="download/LCNDA-0.9.2-linux-x86_64.AppImage"><span>AppImage<small>All distributions · 543 MB</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.9.2-linux-amd64.deb"><span>.deb package<small>Ubuntu, Debian, Mint · 517 MB</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.9.2-linux-x86_64.AppImage"><span>AppImage<small>All distributions · 586 MB</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.9.2-linux-amd64.deb"><span>.deb package<small>Ubuntu, Debian, Mint · 546 MB</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                         <div class="presentation-os-group">
                             <strong>ARM processor (Raspberry Pi…)</strong>
-                            <a class="button" href="download/LCNDA-0.9.2-linux-arm64.AppImage"><span>ARM AppImage<small>All distributions · 545 MB</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.9.2-linux-arm64.deb"><span>ARM .deb package<small>Raspberry Pi OS, Ubuntu, Debian · 513 MB</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.9.2-linux-arm64.AppImage"><span>ARM AppImage<small>All distributions · 588 MB</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.9.2-linux-arm64.deb"><span>ARM .deb package<small>Raspberry Pi OS, Ubuntu, Debian · 542 MB</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                     </div>
                     <p class="presentation-os-help">Use the .deb on Ubuntu or Debian (<code>sudo apt install ./LCNDA-0.9.2-linux-amd64.deb</code>), otherwise the AppImage: make it executable (right-click → Properties → Allow executing as program), then double-click it.</p>
