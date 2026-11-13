@@ -6,6 +6,9 @@
     <meta name="description" content="Le Carnet numérique des ancêtres : une application locale pour organiser, documenter et transmettre une généalogie.">
     <meta name="color-scheme" content="light">
     <title>LCNDA — Le Carnet numérique des ancêtres</title>
+    <link rel="alternate" hreflang="fr" href="carnet-numerique-des-ancetres.php">
+    <link rel="alternate" hreflang="en" href="carnet-numerique-des-ancetres-en.php">
+    <link rel="alternate" hreflang="x-default" href="carnet-numerique-des-ancetres.php">
     <style>
         :root { --presentation-ink:#080808; --presentation-blue:#0066cc; --presentation-paper:#fbfbfb; --presentation-muted:#515151; }
         * { box-sizing:border-box; }
@@ -162,11 +165,22 @@
         @media (max-width:900px) { .presentation-hero { grid-template-columns:1fr; min-height:0; } .presentation-hero-board { max-width:590px; } .presentation-feature-grid { grid-template-columns:repeat(2,1fr); } }
         @media (max-width:640px) { .presentation-downloads, .presentation-os-linux .presentation-os-groups { grid-template-columns:1fr; } .presentation-os-linux { grid-column:auto; } .presentation-callout { grid-template-columns:1fr; gap:7px; } }
         @media (max-width:580px) { .presentation-lead { font-size:17px; } .presentation-hero-board { min-height:340px; } .presentation-note { width:68%; padding:13px; } .presentation-note strong { font-size:15px; } .note-white { top:132px; } .note-black { left:35px; } .presentation-feature-grid { grid-template-columns:1fr; } .presentation-feature { min-height:0; } .presentation-footer { flex-direction:column; } }
+        /* ─── Choix de la langue (FR · EN) et bandeau « aussi en anglais » ─── */
+        .presentation-hero { position:relative; }
+        .presentation-lang { position:absolute; top:clamp(12px,2vw,24px); right:clamp(24px,7vw,108px); z-index:3; font-size:12px; font-weight:900; letter-spacing:.14em; color:var(--presentation-muted); }
+        .presentation-lang a { color:var(--presentation-blue); text-decoration:underline; text-underline-offset:3px; }
+        .presentation-lang strong { color:var(--presentation-ink); }
+        .presentation-lang-banner { display:flex; align-items:center; justify-content:center; gap:14px; padding:10px clamp(24px,4vw,64px); border-bottom:2px solid var(--presentation-ink); background:#dbeaff; font-size:14px; font-weight:700; }
+        .presentation-lang-banner[hidden] { display:none; }
+        .presentation-lang-banner a { color:var(--presentation-blue); text-decoration:underline; text-underline-offset:3px; }
+        .presentation-lang-banner button { flex:none; display:grid; place-items:center; width:28px; height:28px; padding:0; border:2px solid var(--presentation-ink); background:#fff; color:var(--presentation-ink); font:900 16px/1 Arial,Helvetica,sans-serif; cursor:pointer; }
     </style>
 </head>
 <body class="presentation-body">
+    <div class="presentation-lang-banner" id="lang-banner" lang="en" hidden><a href="carnet-numerique-des-ancetres-en.php" hreflang="en">This page is also available in English →</a><button type="button" id="lang-banner-close" aria-label="Close">×</button></div>
     <main id="haut">
         <section class="presentation-hero">
+            <nav class="presentation-lang" aria-label="Langue"><strong aria-current="page">FR</strong> · <a href="carnet-numerique-des-ancetres-en.php" hreflang="en" lang="en" title="English version">EN</a></nav>
             <div class="presentation-hero-copy">
                 <span class="eyebrow">VERSION BÊTA · 0.9.2</span>
                 <p class="presentation-acronym" aria-hidden="true">LCNDA</p>
@@ -1208,6 +1222,23 @@
         track.addEventListener('scroll', () => window.requestAnimationFrame(refresh), { passive: true });
         window.addEventListener('resize', refresh);
         refresh();
+    })();
+    </script>
+    <script>
+    // Bandeau « This page is also available in English » : seulement si le navigateur n'est pas en français et que le visiteur ne l'a pas fermé.
+    (() => {
+        const banner = document.getElementById('lang-banner');
+        if (!banner) return;
+        const KEY = 'lcnda-presentation-lang-banner';
+        let closed = false;
+        try { closed = localStorage.getItem(KEY) === 'closed'; } catch (_) {}
+        const lang = String(navigator.language || (navigator.languages && navigator.languages[0]) || '').toLowerCase();
+        if (closed || !lang || lang.startsWith('fr')) return;
+        banner.hidden = false;
+        document.getElementById('lang-banner-close').addEventListener('click', () => {
+            banner.hidden = true;
+            try { localStorage.setItem(KEY, 'closed'); } catch (_) {}
+        });
     })();
     </script>
 </body>

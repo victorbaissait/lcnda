@@ -121,7 +121,7 @@ function checkFrontieres(dir, problems) {
   const allowed = new Set(['mvt.csv', 'com.csv', 'LICENCE.txt', 'SHA256SUMS']);
   for (const name of fs.readdirSync(dir)) if (!allowed.has(name)) problems.push('fichier inattendu dans data/reference/frontieres/ : ' + path.join(dir, name));
   let sums = {};
-  try { for (const line of fs.readFileSync(path.join(dir, 'SHA256SUMS'), 'utf8').split('\n')) { const m = line.match(/^([0-9a-f]{64})\s+(\S+)$/); if (m) sums[m[2]] = m[1]; } }
+  try { for (const line of fs.readFileSync(path.join(dir, 'SHA256SUMS'), 'utf8').split(/\r?\n/)) { const m = line.trim().match(/^([0-9a-f]{64})\s+\*?(\S+)$/); if (m) sums[m[2]] = m[1]; } }
   catch { problems.push('SHA256SUMS absent : ' + dir); return; }
   for (const csv of ['mvt.csv', 'com.csv']) {
     const full = path.join(dir, csv);
