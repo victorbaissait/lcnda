@@ -1,0 +1,416 @@
+fr ¦ ru ¦ uk
+Référence ou personne manquante. ¦ Не указана ссылка или человек. ¦ Не вказано посилання або людину.
+Cet événement n’est pas lié à cette personne. ¦ Это событие не связано с этим человеком. ¦ Ця подія не пов’язана з цією людиною.
+Choisis au moins deux médias pour créer un document groupé. ¦ Выбери хотя бы два медиафайла, чтобы создать сгруппированный документ. ¦ Вибери щонайменше два медіафайли, щоб створити згрупований документ.
+Un des médias choisis n’est pas lié à cet élément. ¦ Один из выбранных медиафайлов не связан с этим элементом. ¦ Один із вибраних медіафайлів не пов’язаний із цим елементом.
+Document groupé manquant. ¦ Не указан сгруппированный документ. ¦ Не вказано згрупований документ.
+Document groupé introuvable. ¦ Сгруппированный документ не найден. ¦ Згрупований документ не знайдено.
+Ordre des médias manquant. ¦ Не указан порядок медиафайлов. ¦ Не вказано порядок медіафайлів.
+Nom de branche obligatoire. ¦ Название ветви обязательно. ¦ Назва гілки обов’язкова.
+Nom de vue obligatoire ¦ Название представления обязательно ¦ Назва подання обов’язкова
+Le terme est requis ¦ Термин обязателен ¦ Термін обов’язковий
+Sépulture introuvable ¦ Захоронение не найдено ¦ Поховання не знайдено
+Cette personne est déjà rattachée à une sépulture ¦ Этот человек уже связан с захоронением ¦ Ця людина вже пов’язана з похованням
+Sépulture manquante ¦ Не указано захоронение ¦ Не вказано поховання
+Cette personne est déjà rattachée à une autre sépulture ¦ Этот человек уже связан с другим захоронением ¦ Ця людина вже пов’язана з іншим похованням
+Cette personne est déjà associée à cette sépulture ¦ Этот человек уже связан с этим захоронением ¦ Ця людина вже пов’язана з цим похованням
+Référence manquante ¦ Не указана ссылка ¦ Не вказано посилання
+Cette personne n’est pas rattachée à cette sépulture ¦ Этот человек не связан с этим захоронением ¦ Ця людина не пов’язана з цим похованням
+Impossible de retirer la dernière personne : supprime la sépulture si besoin ¦ Нельзя убрать последнего человека: при необходимости удали захоронение ¦ Не можна прибрати останню людину: якщо треба, видали поховання
+Ce média n’est pas accessible depuis cette fiche ¦ Этот медиафайл недоступен из этой карточки ¦ Цей медіафайл недоступний із цієї картки
+Ce rattachement existe déjà ¦ Эта связь уже существует ¦ Цей зв’язок уже існує
+Données manquantes ¦ Нет данных ¦ Немає даних
+Impossible de retirer le dernier rattachement — supprime le média si tu veux le retirer complètement ¦ Нельзя убрать последнюю связь — удали медиафайл, если хочешь убрать его полностью ¦ Не можна прибрати останній зв’язок — видали медіафайл, якщо хочеш прибрати його повністю
+Méthode refusée ¦ Метод отклонён ¦ Метод відхилено
+Personne, annotation de battue ou dépouillement manquant ¦ Не указан человек, пометка облавы или выписка ¦ Не вказано людину, примітку облави або виписку
+Aucun fichier reçu ¦ Файл не получен ¦ Файл не отримано
+Une carte postale recto/verso doit contenir exactement deux images : recto puis verso. ¦ Открытка с лицевой и оборотной стороной должна содержать ровно два изображения: сначала лицевая сторона, затем оборот. ¦ Листівка з лицьовим і зворотним боком має містити рівно два зображення: спершу лицьовий бік, потім зворот.
+Dossier d’enquête introuvable. ¦ Дело расследования не найдено. ¦ Справу розслідування не знайдено.
+Annotation de battue introuvable. ¦ Пометка облавы не найдена. ¦ Примітку облави не знайдено.
+Choisis le type de l’événement à créer. ¦ Выбери тип события, которое нужно создать. ¦ Вибери тип події, яку треба створити.
+Ce recensement n’est pas rattaché à cette personne. ¦ Эта перепись не связана с этим человеком. ¦ Цей перепис не пов’язаний із цією людиною.
+Aucun fichier reçu : choisis-le à nouveau. ¦ Файл не получен: выбери его ещё раз. ¦ Файл не отримано: вибери його ще раз.
+Une carte postale recto/verso doit contenir uniquement deux images. ¦ Открытка с лицевой и оборотной стороной должна содержать только два изображения. ¦ Листівка з лицьовим і зворотним боком має містити лише два зображення.
+Ce fichier semble déjà avoir été importé (« {file} » le {date}, {n} ligne(s)). Confirme si tu veux l'importer quand même. ¦ Похоже, этот файл уже импортирован («{file}», {date}, строк: {n}). Подтверди, если всё равно хочешь его импортировать. ¦ Схоже, цей файл уже імпортовано («{file}», {date}, рядків: {n}). Підтверди, якщо все одно хочеш його імпортувати.
+Fiche verrouillée ({name}). Déverrouille-la avant de modifier ce couple. ¦ Карточка заблокирована ({name}). Разблокируй её, прежде чем изменять эту пару. ¦ Картку заблоковано ({name}). Розблокуй її, перш ніж змінювати цю пару.
+Fusion impossible : {a} et {b} forment un couple. Deux conjoints ne sont pas la même personne. ¦ Объединение невозможно: {a} и {b} — супружеская пара. Двое супругов — не один и тот же человек. ¦ Об’єднання неможливе: {a} і {b} — подружня пара. Двоє подружжя — не одна й та сама людина.
+Fusion impossible : {a} est un ancêtre de {b}. Un ancêtre et son descendant ne sont pas la même personne. ¦ Объединение невозможно: {a} — предок {b}. Предок и его потомок — не один и тот же человек. ¦ Об’єднання неможливе: {a} — предок {b}. Предок і його нащадок — не одна й та сама людина.
+Cette parcelle est déjà dans ta liste (fiche n° {n}) : ouvre-la plutôt que d’en créer une deuxième. ¦ Этот участок уже есть в твоём списке (карточка № {n}): открой её, а не создавай вторую. ¦ Ця ділянка вже є у твоєму списку (картка № {n}): відкрий її, а не створюй другу.
+Tu as déjà {n} cartes de photos : supprimes-en une pour en créer une autre. ¦ У тебя уже есть карты фотографий ({n}): удали одну, чтобы создать другую. ¦ У тебе вже є мапи фотографій ({n}): видали одну, щоб створити іншу.
+Les {n} puzzles en cours sont gardés : termine ou supprime-en un pour en commencer un autre. ¦ Начатые пазлы сохраняются ({n}): закончи или удали один, чтобы начать другой. ¦ Розпочаті пазли зберігаються ({n}): заверши або видали один, щоб почати інший.
+Les {n} graphiques et widgets sont gardés : supprime-en un pour en créer un autre. ¦ Графики и виджеты сохраняются ({n}): удали один, чтобы создать другой. ¦ Графіки й віджети зберігаються ({n}): видали один, щоб створити інший.
+Le champ « {label} » est obligatoire. ¦ Поле «{label}» обязательно. ¦ Поле «{label}» обов’язкове.
+Le champ « {label} » est à remplir. ¦ Поле «{label}» нужно заполнить. ¦ Поле «{label}» треба заповнити.
+« {name} » est une femelle : elle ne peut pas être le père. ¦ «{name}» — самка: она не может быть отцом. ¦ «{name}» — самка: вона не може бути батьком.
+« {name} » est un mâle : il ne peut pas être la mère. ¦ «{name}» — самец: он не может быть матерью. ¦ «{name}» — самець: він не може бути матір’ю.
+Dossier introuvable : {dir} (clé ou disque débranché ?). La sauvegarde se fera dès qu’il sera de retour. ¦ Папка не найдена: {dir} (флешка или диск отключены?). Резервная копия будет сделана, как только она вернётся. ¦ Теку не знайдено: {dir} (флешку чи диск від’єднано?). Резервну копію буде зроблено, щойно вона повернеться.
+Dossier introuvable : {dir} (clé débranchée ?). ¦ Папка не найдена: {dir} (флешка отключена?). ¦ Теку не знайдено: {dir} (флешку від’єднано?).
+Dossier partagé introuvable : {dir} (clé débranchée ?). Rien n’est perdu : tes changements partiront la prochaine fois. ¦ Общая папка не найдена: {dir} (флешка отключена?). Ничего не потеряно: твои изменения отправятся в следующий раз. ¦ Спільну теку не знайдено: {dir} (флешку від’єднано?). Нічого не втрачено: твої зміни надішлються наступного разу.
+Cette généalogie est déjà ouverte sur l’ordinateur « {name} ». Ferme-la là-bas d’abord : deux ordinateurs qui écrivent dans le même fichier peuvent l’abîmer. ¦ Эта генеалогия уже открыта на компьютере «{name}». Сначала закрой её там: два компьютера, пишущие в один файл, могут его повредить. ¦ Цю генеалогію вже відкрито на комп’ютері «{name}». Спершу закрий її там: два комп’ютери, що пишуть в один файл, можуть його пошкодити.
+Ce type de fichier ne se range pas dans les médias (.{ext}). ¦ Файлы этого типа нельзя хранить в медиафайлах (.{ext}). ¦ Файли цього типу не можна зберігати в медіафайлах (.{ext}).
+Ce type de fichier ne se range pas dans les médias (sans extension). ¦ Файлы этого типа нельзя хранить в медиафайлах (без расширения). ¦ Файли цього типу не можна зберігати в медіафайлах (без розширення).
+Le contenu du fichier ne correspond pas à son extension (.{ext}). ¦ Содержимое файла не соответствует его расширению (.{ext}). ¦ Вміст файлу не відповідає його розширенню (.{ext}).
+Pas assez de place sur le disque pour ouvrir cette sauvegarde (il faut environ {n} Mo libres). ¦ Недостаточно места на диске, чтобы открыть эту резервную копию (нужно около {n} МБ свободного места). ¦ Недостатньо місця на диску, щоб відкрити цю резервну копію (потрібно близько {n} МБ вільного місця).
+Pas assez d’espace disque pour préparer la sauvegarde complète (il faut environ {n} Mo libres). ¦ Недостаточно места на диске, чтобы подготовить полную резервную копию (нужно около {n} МБ свободного места). ¦ Недостатньо місця на диску, щоб підготувати повну резервну копію (потрібно близько {n} МБ вільного місця).
+Ce dossier a déjà {n} lignes : ouvre-en un autre. ¦ В этой папке уже есть строки ({n}): открой другую. ¦ У цій теці вже є рядки ({n}): відкрий іншу.
+Choisis la fiche de la personne pour le visage {n} (ou « Plus tard »). ¦ Выбери карточку человека для лица {n} (или «Позже»). ¦ Вибери картку людини для обличчя {n} (або «Пізніше»).
+Choisis la personne concernée pour le témoignage « {q} ». ¦ Выбери человека, к которому относится свидетельство «{q}». ¦ Вибери людину, якої стосується свідчення «{q}».
+La page {n} existe déjà. ¦ Страница {n} уже существует. ¦ Сторінка {n} уже існує.
+Cette date est avant sa naissance ({date}) ¦ Эта дата раньше его рождения ({date}) ¦ Ця дата раніше за народження ({date})
+Cette date est après son décès ({date}) ¦ Эта дата позже его смерти ({date}) ¦ Ця дата пізніше за смерть ({date})
+La date de naissance exacte de {name} n’est pas connue. ¦ Точная дата рождения {name} неизвестна. ¦ Точна дата народження {name} невідома.
+Commune inconnue. ¦ Неизвестная коммуна. ¦ Невідома комуна.
+Adresse inconnue. ¦ Неизвестный адрес. ¦ Невідома адреса.
+Position impossible. ¦ Невозможное положение. ¦ Неможливе розташування.
+Service d’archives introuvable. ¦ Архивная служба не найдена. ¦ Архівну службу не знайдено.
+Adresse e-mail invalide. ¦ Неверный адрес эл. почты. ¦ Неправильна адреса ел. пошти.
+Cette fiche n’existe plus. ¦ Этой карточки больше нет. ¦ Цієї картки більше немає.
+Fiche introuvable. ¦ Карточка не найдена. ¦ Картку не знайдено.
+Fiche introuvable ¦ Карточка не найдена ¦ Картку не знайдено
+Profil inconnu. ¦ Неизвестный профиль. ¦ Невідомий профіль.
+Sorte inconnue. ¦ Неизвестный вид. ¦ Невідомий вид.
+Sorte introuvable. ¦ Вид не найден. ¦ Вид не знайдено.
+Demande Discogs inconnue. ¦ Неизвестный запрос Discogs. ¦ Невідомий запит Discogs.
+Demande MusicBrainz inconnue. ¦ Неизвестный запрос MusicBrainz. ¦ Невідомий запит MusicBrainz.
+Demande Open Library inconnue. ¦ Неизвестный запрос Open Library. ¦ Невідомий запит Open Library.
+Demande Wikidata inconnue. ¦ Неизвестный запрос Wikidata. ¦ Невідомий запит Wikidata.
+Demande TMDb inconnue. ¦ Неизвестный запрос TMDb. ¦ Невідомий запит TMDb.
+Demande iTunes inconnue. ¦ Неизвестный запрос iTunes. ¦ Невідомий запит iTunes.
+Source d’import inconnue. ¦ Неизвестный источник импорта. ¦ Невідоме джерело імпорту.
+Impossible d’enregistrer l’image. ¦ Не удалось сохранить изображение. ¦ Не вдалося зберегти зображення.
+Image illisible. ¦ Изображение не читается. ¦ Зображення не читається.
+Image trop lourde (15 Mo au plus). ¦ Изображение слишком тяжёлое (не более 15 МБ). ¦ Зображення завелике (не більше 15 МБ).
+Projet introuvable. ¦ Проект не найден. ¦ Проєкт не знайдено.
+Dossier introuvable. ¦ Папка не найдена. ¦ Теку не знайдено.
+Dossier introuvable ¦ Папка не найдена ¦ Теку не знайдено
+Fichier trop gros. ¦ Файл слишком большой. ¦ Файл завеликий.
+Fichier Zotero RDF illisible. ¦ Файл Zotero RDF не читается. ¦ Файл Zotero RDF не читається.
+Fichier JSON illisible. ¦ Файл JSON не читается. ¦ Файл JSON не читається.
+Fichier EndNote XML illisible. ¦ Файл EndNote XML не читается. ¦ Файл EndNote XML не читається.
+Son introuvable. ¦ Звук не найден. ¦ Звук не знайдено.
+Zones illisibles. ¦ Зоны не читаются. ¦ Зони не читаються.
+Transcription illisible. ¦ Расшифровка не читается. ¦ Розшифровка не читається.
+Transcription trop longue (5 000 lignes au plus). ¦ Расшифровка слишком длинная (не более 5 000 строк). ¦ Розшифровка задовга (не більше 5 000 рядків).
+Cette base ne contient aucune personne. ¦ В этой базе нет ни одного человека. ¦ У цій базі немає жодної людини.
+Impossible d’ouvrir l’archive. ¦ Не удалось открыть архив. ¦ Не вдалося відкрити архів.
+Aucune base (.db) dans cette archive. ¦ В этом архиве нет базы (.db). ¦ У цьому архіві немає бази (.db).
+Fichier introuvable ou illisible. ¦ Файл не найден или не читается. ¦ Файл не знайдено або він не читається.
+Fiche trop volumineuse. ¦ Карточка слишком большая. ¦ Картка завелика.
+Tableau introuvable. ¦ Таблица не найдена. ¦ Таблицю не знайдено.
+Tableau trop lourd : retire quelques dessins. ¦ Таблица слишком тяжёлая: убери несколько рисунков. ¦ Таблиця завелика: прибери кілька малюнків.
+Tableau parent introuvable. ¦ Родительская таблица не найдена. ¦ Батьківську таблицю не знайдено.
+Parcelle introuvable. ¦ Участок не найден. ¦ Ділянку не знайдено.
+Lieu introuvable. ¦ Место не найдено. ¦ Місце не знайдено.
+Couche illisible. ¦ Слой не читается. ¦ Шар не читається.
+Couche trop lourde (8 Mo au plus). ¦ Слой слишком тяжёлый (не более 8 МБ). ¦ Шар завеликий (не більше 8 МБ).
+Couche introuvable. ¦ Слой не найден. ¦ Шар не знайдено.
+Carte illisible. ¦ Карта не читается. ¦ Мапа не читається.
+Fichier d’essai introuvable. ¦ Пробный файл не найден. ¦ Пробний файл не знайдено.
+Copie impossible. ¦ Копирование невозможно. ¦ Копіювання неможливе.
+Fichier illisible. ¦ Файл не читается. ¦ Файл не читається.
+Citation introuvable. ¦ Цитата не найдена. ¦ Цитату не знайдено.
+Citation introuvable ¦ Цитата не найдена ¦ Цитату не знайдено
+Objet introuvable ¦ Предмет не найден ¦ Предмет не знайдено
+Objet introuvable. ¦ Предмет не найден. ¦ Предмет не знайдено.
+Souvenir introuvable ¦ Воспоминание не найдено ¦ Спогад не знайдено
+Type inconnu ¦ Неизвестный тип ¦ Невідомий тип
+Adresse invalide ¦ Неверный адрес ¦ Неправильна адреса
+Salon introuvable ¦ Зал не найден ¦ Зал не знайдено
+Alerte inconnue. ¦ Неизвестное оповещение. ¦ Невідоме сповіщення.
+Texte illisible. ¦ Текст не читается. ¦ Текст не читається.
+Date d’envoi incorrecte. ¦ Неверная дата отправки. ¦ Неправильна дата надсилання.
+Courrier introuvable. ¦ Письмо не найдено. ¦ Лист не знайдено.
+Cousinade introuvable. ¦ Встреча родни не найдена. ¦ Зустріч родини не знайдено.
+Champ inconnu. ¦ Неизвестное поле. ¦ Невідоме поле.
+Champ inconnu ¦ Неизвестное поле ¦ Невідоме поле
+Valeur hors limites. ¦ Значение вне допустимых пределов. ¦ Значення поза допустимими межами.
+Liste inconnue. ¦ Неизвестный список. ¦ Невідомий список.
+Widget inconnu. ¦ Неизвестный виджет. ¦ Невідомий віджет.
+Ensemble inconnu. ¦ Неизвестный набор. ¦ Невідомий набір.
+Choisis au moins 2 ensembles. ¦ Выбери хотя бы 2 набора. ¦ Вибери щонайменше 2 набори.
+Choisis au moins deux personnes. ¦ Выбери хотя бы двух человек. ¦ Вибери щонайменше двох людей.
+Choisis deux personnes. ¦ Выбери двух человек. ¦ Вибери двох людей.
+Diagramme introuvable. ¦ Диаграмма не найдена. ¦ Діаграму не знайдено.
+Foyer inconnu. ¦ Неизвестное домохозяйство. ¦ Невідоме домогосподарство.
+Test introuvable. ¦ Тест не найден. ¦ Тест не знайдено.
+Correspondance introuvable. ¦ Переписка не найдена. ¦ Листування не знайдено.
+Groupe introuvable. ¦ Группа не найдена. ¦ Групу не знайдено.
+Format d’export inconnu. ¦ Неизвестный формат экспорта. ¦ Невідомий формат експорту.
+Export impossible : l’extension PHP ZipArchive manque sur cet ordinateur. ¦ Экспорт невозможен: на этом компьютере нет расширения PHP ZipArchive. ¦ Експорт неможливий: на цьому комп’ютері немає розширення PHP ZipArchive.
+Fichier temporaire impossible. ¦ Не удалось создать временный файл. ¦ Не вдалося створити тимчасовий файл.
+Employeur sans nom. ¦ Работодатель без названия. ¦ Роботодавець без назви.
+Photo introuvable. ¦ Фотография не найдена. ¦ Фотографію не знайдено.
+Visage introuvable. ¦ Лицо не найдено. ¦ Обличчя не знайдено.
+ePub impossible : l’extension PHP ZipArchive manque. ¦ ePub невозможен: нет расширения PHP ZipArchive. ¦ ePub неможливий: немає розширення PHP ZipArchive.
+Document impossible : l’extension PHP ZipArchive manque. ¦ Документ невозможен: нет расширения PHP ZipArchive. ¦ Документ неможливий: немає розширення PHP ZipArchive.
+Livret introuvable. ¦ Буклет не найден. ¦ Буклет не знайдено.
+Graphique inconnu (identifiant invalide). ¦ Неизвестный график (неверный идентификатор). ¦ Невідомий графік (неправильний ідентифікатор).
+Graphique illisible. ¦ График не читается. ¦ Графік не читається.
+Graphique illisible (champ inconnu). ¦ График не читается (неизвестное поле). ¦ Графік не читається (невідоме поле).
+Graphique illisible (parties). ¦ График не читается (части). ¦ Графік не читається (частини).
+Graphique introuvable. ¦ График не найден. ¦ Графік не знайдено.
+Lien impossible ¦ Связь невозможна ¦ Зв’язок неможливий
+Voyage introuvable ¦ Поездка не найдена ¦ Подорож не знайдено
+Placement introuvable ¦ Размещение не найдено ¦ Розміщення не знайдено
+Armoiries introuvables ¦ Герб не найден ¦ Герб не знайдено
+Circuit introuvable ¦ Маршрут не найден ¦ Маршрут не знайдено
+Ligne introuvable ¦ Строка не найдена ¦ Рядок не знайдено
+Ligne introuvable. ¦ Строка не найдена. ¦ Рядок не знайдено.
+Circuit manquant ¦ Не указан маршрут ¦ Не вказано маршрут
+Aucun fichier CSV dans ce ZIP. ¦ В этом ZIP нет файла CSV. ¦ У цьому ZIP немає файлу CSV.
+Aucune ligne utilisable dans ce fichier. ¦ В этом файле нет пригодных строк. ¦ У цьому файлі немає придатних рядків.
+Acte ou document manquant ¦ Не указана запись акта или документ ¦ Не вказано актовий запис або документ
+Chiffrement impossible. ¦ Шифрование невозможно. ¦ Шифрування неможливе.
+Copie introuvable ¦ Копия не найдена ¦ Копію не знайдено
+Copie introuvable. ¦ Копия не найдена. ¦ Копію не знайдено.
+Harmonisation introuvable. ¦ Унификация не найдена. ¦ Уніфікацію не знайдено.
+Bloc introuvable ¦ Блок не найден ¦ Блок не знайдено
+Nom manquant. ¦ Не указано имя. ¦ Не вказано ім’я.
+Enregistrement impossible. ¦ Сохранение невозможно. ¦ Збереження неможливе.
+Source inconnue. ¦ Неизвестный источник. ¦ Невідоме джерело.
+Pack inconnu. ¦ Неизвестный пакет. ¦ Невідомий пакет.
+Pack trop gros (150 Mo au plus). ¦ Пакет слишком большой (не более 150 МБ). ¦ Пакет завеликий (не більше 150 МБ).
+GLB illisible. ¦ GLB не читается. ¦ GLB не читається.
+OBJ illisible. ¦ OBJ не читается. ¦ OBJ не читається.
+Maison introuvable. ¦ Дом не найден. ¦ Будинок не знайдено.
+Recensement introuvable. ¦ Перепись не найдена. ¦ Перепис не знайдено.
+Recensement introuvable ¦ Перепись не найдена ¦ Перепис не знайдено
+Fichier 3D trop gros (30 Mo au plus). ¦ 3D-файл слишком большой (не более 30 МБ). ¦ 3D-файл завеликий (не більше 30 МБ).
+Programme d’installation introuvable (scripts/htr_install.php). ¦ Программа установки не найдена (scripts/htr_install.php). ¦ Програму встановлення не знайдено (scripts/htr_install.php).
+Demande d’installation inconnue. ¦ Неизвестный запрос на установку. ¦ Невідомий запит на встановлення.
+Lecture inconnue. ¦ Неизвестное прочтение. ¦ Невідоме прочитання.
+Lecture inconnue (ou trop ancienne). ¦ Неизвестное прочтение (или слишком старое). ¦ Невідоме прочитання (або надто старе).
+Preuve introuvable. ¦ Доказательство не найдено. ¦ Доказ не знайдено.
+Preuve introuvable ¦ Доказательство не найдено ¦ Доказ не знайдено
+Empreinte d’image incorrecte. ¦ Неверный отпечаток изображения. ¦ Неправильний відбиток зображення.
+Empreinte d’image incorrecte (couleurs). ¦ Неверный отпечаток изображения (цвета). ¦ Неправильний відбиток зображення (кольори).
+Empreinte d’image incorrecte (points). ¦ Неверный отпечаток изображения (точки). ¦ Неправильний відбиток зображення (точки).
+Fusion impossible ici. ¦ Объединение здесь невозможно. ¦ Об’єднання тут неможливе.
+Fusion inconnue. ¦ Неизвестное объединение. ¦ Невідоме об’єднання.
+Fusion introuvable. ¦ Объединение не найдено. ¦ Об’єднання не знайдено.
+Fusion impossible ¦ Объединение невозможно ¦ Об’єднання неможливе
+Annulation impossible ici. ¦ Отмена здесь невозможна. ¦ Відміна тут неможлива.
+Fichier RootsMagic introuvable. ¦ Файл RootsMagic не найден. ¦ Файл RootsMagic не знайдено.
+Aucune personne dans ce fichier GEDCOM-X. ¦ В этом файле GEDCOM-X нет ни одного человека. ¦ У цьому файлі GEDCOM-X немає жодної людини.
+Annulation impossible : import inconnu. ¦ Отмена невозможна: неизвестный импорт. ¦ Відміна неможлива: невідомий імпорт.
+Fichier trop gros (20 Mo au plus). ¦ Файл слишком большой (не более 20 МБ). ¦ Файл завеликий (не більше 20 МБ).
+Aucun point dans ce GeoJSON. ¦ В этом GeoJSON нет ни одной точки. ¦ У цьому GeoJSON немає жодної точки.
+Document introuvable. ¦ Документ не найден. ¦ Документ не знайдено.
+Document illisible. ¦ Документ не читается. ¦ Документ не читається.
+Cette action s’envoie en POST. ¦ Это действие отправляется методом POST. ¦ Ця дія надсилається методом POST.
+Lot inconnu. ¦ Неизвестная партия. ¦ Невідома партія.
+Fichier vide. ¦ Пустой файл. ¦ Порожній файл.
+Fichier vide ¦ Пустой файл ¦ Порожній файл
+Sortie inconnue. ¦ Неизвестный выход. ¦ Невідомий вихід.
+Analyse introuvable. ¦ Анализ не найден. ¦ Аналіз не знайдено.
+Altitude impossible : entre −450 et 8 900 m. ¦ Недопустимая высота: от −450 до 8 900 м. ¦ Неприпустима висота: від −450 до 8 900 м.
+Envoi inconnu. ¦ Неизвестная отправка. ¦ Невідоме надсилання.
+Projet illisible. ¦ Проект не читается. ¦ Проєкт не читається.
+Rush illisible. ¦ Исходный фрагмент не читается. ¦ Вихідний фрагмент не читається.
+Projet trop lourd (4 Mo au plus). ¦ Проект слишком тяжёлый (не более 4 МБ). ¦ Проєкт завеликий (не більше 4 МБ).
+Salle introuvable. ¦ Зал не найден. ¦ Зал не знайдено.
+Fichier trop lourd. ¦ Файл слишком тяжёлый. ¦ Файл завеликий.
+Salle ou œuvre introuvable. ¦ Зал или произведение не найдены. ¦ Зал або твір не знайдено.
+Import impossible : l’extension PHP zip manque. ¦ Импорт невозможен: нет расширения PHP zip. ¦ Імпорт неможливий: немає розширення PHP zip.
+Liste introuvable. ¦ Список не найден. ¦ Список не знайдено.
+Ligne invalide. ¦ Неверная строка. ¦ Неправильний рядок.
+Cette liste n’existe plus. ¦ Этого списка больше нет. ¦ Цього списку більше немає.
+Personne manquante. ¦ Не указан человек. ¦ Не вказано людину.
+Personne manquante ¦ Не указан человек ¦ Не вказано людину
+Adresse Internet invalide ¦ Неверный интернет-адрес ¦ Неправильна інтернет-адреса
+Adresse Internet invalide. ¦ Неверный интернет-адрес. ¦ Неправильна інтернет-адреса.
+Statut inconnu. ¦ Неизвестный статус. ¦ Невідомий статус.
+Revue introuvable. ¦ Журнал не найден. ¦ Журнал не знайдено.
+Article introuvable. ¦ Статья не найдена. ¦ Статтю не знайдено.
+Quoi supprimer ? ¦ Что удалить? ¦ Що видалити?
+Annonce introuvable. ¦ Объявление не найдено. ¦ Оголошення не знайдено.
+Animal introuvable. ¦ Животное не найдено. ¦ Тварину не знайдено.
+Demande introuvable. ¦ Запрос не найден. ¦ Запит не знайдено.
+Visage incorrect. ¦ Неверное лицо. ¦ Неправильне обличчя.
+Choix incorrect. ¦ Неверный выбор. ¦ Неправильний вибір.
+Comparaison introuvable. ¦ Сравнение не найдено. ¦ Порівняння не знайдено.
+Image introuvable. ¦ Изображение не найдено. ¦ Зображення не знайдено.
+Latitude entre -90 et 90, longitude entre -180 et 180. ¦ Широта от -90 до 90, долгота от -180 до 180. ¦ Широта від -90 до 90, довгота від -180 до 180.
+Cette demande d’entraide n’existe plus. ¦ Этого запроса о помощи больше нет. ¦ Цього запиту про допомогу більше немає.
+Cette annonce n’existe plus. ¦ Этого объявления больше нет. ¦ Цього оголошення більше немає.
+Carte postale introuvable. ¦ Открытка не найдена. ¦ Листівку не знайдено.
+Choix inconnu. ¦ Неизвестный выбор. ¦ Невідомий вибір.
+Niveau inconnu. ¦ Неизвестный уровень. ¦ Невідомий рівень.
+Seuls tes propres profils se modifient ici. ¦ Здесь можно изменять только твои собственные профили. ¦ Тут можна змінювати лише твої власні профілі.
+Seuls tes propres profils se suppriment. ¦ Удалять можно только твои собственные профили. ¦ Видаляти можна лише твої власні профілі.
+Profil introuvable. ¦ Профиль не найден. ¦ Профіль не знайдено.
+Questionnaire introuvable. ¦ Анкета не найдена. ¦ Анкету не знайдено.
+Question incorrecte. ¦ Неверный вопрос. ¦ Неправильне запитання.
+Choix incorrects. ¦ Неверные варианты выбора. ¦ Неправильні варіанти вибору.
+Question introuvable. ¦ Вопрос не найден. ¦ Запитання не знайдено.
+Recueil introuvable. ¦ Сборник не найден. ¦ Збірник не знайдено.
+Aucune photo. ¦ Нет фотографий. ¦ Немає фотографій.
+Page introuvable. ¦ Страница не найдена. ¦ Сторінку не знайдено.
+Rattachement inconnu. ¦ Неизвестная связь. ¦ Невідомий зв’язок.
+Bloc inconnu. ¦ Неизвестный блок. ¦ Невідомий блок.
+Village introuvable. ¦ Деревня не найдена. ¦ Село не знайдено.
+Pays non disponible. ¦ Страна недоступна. ¦ Країна недоступна.
+Branche introuvable ¦ Ветвь не найдена ¦ Гілку не знайдено
+Branche introuvable. ¦ Ветвь не найдена. ¦ Гілку не знайдено.
+Import indisponible. ¦ Импорт недоступен. ¦ Імпорт недоступний.
+Aucun DOI reconnu : il commence par « 10. » (ex. 10.1038/251123a0), ou colle l’adresse https://doi.org/… ¦ DOI не распознан: он начинается с «10.» (напр. 10.1038/251123a0), или вставь адрес https://doi.org/… ¦ DOI не розпізнано: він починається з «10.» (напр. 10.1038/251123a0), або встав адресу https://doi.org/…
+Source inconnue (DOI, ORCID ou HAL). ¦ Неизвестный источник (DOI, ORCID или HAL). ¦ Невідоме джерело (DOI, ORCID або HAL).
+Ligne inconnue. ¦ Неизвестная строка. ¦ Невідомий рядок.
+Report inconnu. ¦ Неизвестный перенос. ¦ Невідоме перенесення.
+Rappel introuvable. ¦ Напоминание не найдено. ¦ Нагадування не знайдено.
+Piste introuvable. ¦ Зацепка не найдена. ¦ Зачіпку не знайдено.
+Statistique inconnue. ¦ Неизвестная статистика. ¦ Невідома статистика.
+Ligne illisible. ¦ Строка не читается. ¦ Рядок не читається.
+Diaporama introuvable. ¦ Слайд-шоу не найдено. ¦ Слайд-шоу не знайдено.
+Diaporama trop lourd. ¦ Слайд-шоу слишком тяжёлое. ¦ Слайд-шоу завелике.
+Foyer SocFace introuvable. ¦ Домохозяйство SocFace не найдено. ¦ Домогосподарство SocFace не знайдено.
+Ligne SocFace introuvable. ¦ Строка SocFace не найдена. ¦ Рядок SocFace не знайдено.
+Sorte d’import inconnue. ¦ Неизвестный вид импорта. ¦ Невідомий вид імпорту.
+Import inconnu. ¦ Неизвестный импорт. ¦ Невідомий імпорт.
+Ce lieu n’existe plus. ¦ Этого места больше нет. ¦ Цього місця більше немає.
+L’original garde son nom. ¦ Оригинал сохраняет своё название. ¦ Оригінал зберігає свою назву.
+Bien inconnu. ¦ Неизвестное имущество. ¦ Невідоме майно.
+Acte introuvable. ¦ Запись акта не найдена. ¦ Актовий запис не знайдено.
+Site introuvable. ¦ Сайт не найден. ¦ Сайт не знайдено.
+Marque introuvable. ¦ Метка не найдена. ¦ Позначку не знайдено.
+Observation introuvable. ¦ Наблюдение не найдено. ¦ Спостереження не знайдено.
+Comptage introuvable. ¦ Подсчёт не найден. ¦ Підрахунок не знайдено.
+Appartenance introuvable. ¦ Принадлежность не найдена. ¦ Належність не знайдено.
+Import introuvable. ¦ Импорт не найден. ¦ Імпорт не знайдено.
+Import introuvable ¦ Импорт не найден ¦ Імпорт не знайдено
+Fichier trop gros : trop d’observations. ¦ Файл слишком большой: слишком много наблюдений. ¦ Файл завеликий: забагато спостережень.
+Conflit illisible. ¦ Конфликт не читается. ¦ Конфлікт не читається.
+Document illisible : il manque son texte. ¦ Документ не читается: в нём нет текста. ¦ Документ не читається: у ньому немає тексту.
+Partie illisible. ¦ Часть не читается. ¦ Частина не читається.
+Document trop lourd : partage ses onglets en plusieurs documents. ¦ Документ слишком тяжёлый: раздели его вкладки на несколько документов. ¦ Документ завеликий: розділи його вкладки на кілька документів.
+Version trop lourde. ¦ Версия слишком тяжёлая. ¦ Версія завелика.
+Transcription introuvable. ¦ Расшифровка не найдена. ¦ Розшифровку не знайдено.
+Dessin introuvable. ¦ Рисунок не найден. ¦ Малюнок не знайдено.
+Commune introuvable. ¦ Коммуна не найдена. ¦ Комуну не знайдено.
+Site illisible : il manque ses pages. ¦ Сайт не читается: в нём нет страниц. ¦ Сайт не читається: у ньому немає сторінок.
+Page illisible. ¦ Страница не читается. ¦ Сторінка не читається.
+Service inconnu. ¦ Неизвестный сервис. ¦ Невідомий сервіс.
+Adresse non permise. ¦ Адрес не разрешён. ¦ Адреса не дозволена.
+Publication impossible : l’extension PHP curl manque. ¦ Публикация невозможна: нет расширения PHP curl. ¦ Публікація неможлива: немає розширення PHP curl.
+Donne l’identifiant FTP. ¦ Укажи логин FTP. ¦ Вкажи логін FTP.
+Colle d’abord ton jeton Netlify. ¦ Сначала вставь свой токен Netlify. ¦ Спершу встав свій токен Netlify.
+Colle d’abord ton jeton GitHub. ¦ Сначала вставь свой токен GitHub. ¦ Спершу встав свій токен GitHub.
+Identifiant Wikidata incorrect. ¦ Неверный идентификатор Wikidata. ¦ Неправильний ідентифікатор Wikidata.
+Classeur illisible : il manque ses feuilles. ¦ Рабочая книга не читается: в ней нет листов. ¦ Робоча книга не читається: у ній немає аркушів.
+Feuille illisible. ¦ Лист не читается. ¦ Аркуш не читається.
+Classeur introuvable. ¦ Рабочая книга не найдена. ¦ Робочу книгу не знайдено.
+Import manquant ¦ Не указан импорт ¦ Не вказано імпорт
+Archive ZIP illisible ¦ Архив ZIP не читается ¦ Архів ZIP не читається
+Modification introuvable. ¦ Изменение не найдено. ¦ Зміну не знайдено.
+Sauvegarde introuvable. ¦ Резервная копия не найдена. ¦ Резервну копію не знайдено.
+Lecture impossible ¦ Чтение невозможно ¦ Читання неможливе
+JSON invalide ou non-objet ¦ Неверный JSON или это не объект ¦ Неправильний JSON або це не об’єкт
+Impossible d'ouvrir l'archive (format inattendu) ¦ Не удалось открыть архив (неожиданный формат) ¦ Не вдалося відкрити архів (несподіваний формат)
+Impossible d'ouvrir l'archive GedZip (format inattendu) ¦ Не удалось открыть архив GedZip (неожиданный формат) ¦ Не вдалося відкрити архів GedZip (несподіваний формат)
+Fichier GEDCOM (.ged) introuvable dans l'archive. ¦ В архиве не найден файл GEDCOM (.ged). ¦ В архіві не знайдено файл GEDCOM (.ged).
+Type introuvable ¦ Тип не найден ¦ Тип не знайдено
+Identifiant manquant ¦ Не указан идентификатор ¦ Не вказано ідентифікатор
+Battue introuvable ¦ Облава не найдена ¦ Облаву не знайдено
+Battue introuvable. ¦ Облава не найдена. ¦ Облаву не знайдено.
+Lacune introuvable. ¦ Пробел не найден. ¦ Прогалину не знайдено.
+Lien direct vers l’archive invalide. ¦ Неверная прямая ссылка на архив. ¦ Неправильне пряме посилання на архів.
+Mention familiale invalide ¦ Неверная семейная отметка ¦ Неправильна родинна позначка
+Titre obligatoire ¦ Название обязательно ¦ Назва обов’язкова
+Recensement manquant ¦ Не указана перепись ¦ Не вказано перепис
+Membre manquant ¦ Не указан участник ¦ Не вказано учасника
+Membre introuvable ¦ Участник не найден ¦ Учасника не знайдено
+Dossier militaire invalide ¦ Неверное военное дело ¦ Неправильна військова справа
+Recensement ou personne manquante ¦ Не указана перепись или человек ¦ Не вказано перепис або людину
+Journal introuvable ¦ Журнал не найден ¦ Журнал не знайдено
+Confirmation requise ¦ Требуется подтверждение ¦ Потрібне підтвердження
+Piste manquante. ¦ Не указана зацепка. ¦ Не вказано зачіпку.
+Rappel manquant. ¦ Не указано напоминание. ¦ Не вказано нагадування.
+Courrier manquant. ¦ Не указано письмо. ¦ Не вказано лист.
+Contact introuvable. ¦ Контакт не найден. ¦ Контакт не знайдено.
+Contact manquant. ¦ Не указан контакт. ¦ Не вказано контакт.
+Battue manquante. ¦ Не указана облава. ¦ Не вказано облаву.
+Battue, commune et nom obligatoires. ¦ Облава, коммуна и фамилия обязательны. ¦ Облава, комуна й прізвище обов’язкові.
+Battue et commune obligatoires. ¦ Облава и коммуна обязательны. ¦ Облава й комуна обов’язкові.
+Annotation manquante. ¦ Не указана пометка. ¦ Не вказано примітку.
+Annotation introuvable. ¦ Пометка не найдена. ¦ Примітку не знайдено.
+Dossier parent invalide ¦ Неверная родительская папка ¦ Неправильна батьківська тека
+Dossier manquant ¦ Не указана папка ¦ Не вказано теку
+Sexe invalide : choisis Homme, Femme, Non binaire ou Inconnu. ¦ Неверный пол: выбери Мужчина, Женщина, Небинарный или Неизвестно. ¦ Неправильна стать: вибери Чоловік, Жінка, Небінарна особа або Невідомо.
+Variante manquante ¦ Не указан вариант ¦ Не вказано варіант
+Variante introuvable ¦ Вариант не найден ¦ Варіант не знайдено
+Famille introuvable ¦ Семья не найдена ¦ Родину не знайдено
+Fiche en ligne introuvable ¦ Онлайн-карточка не найдена ¦ Онлайн-картку не знайдено
+Fiche en ligne manquante ¦ Не указана онлайн-карточка ¦ Не вказано онлайн-картку
+Personne ou contenu manquant ¦ Не указан человек или содержимое ¦ Не вказано людину або вміст
+Note ou contenu manquant ¦ Не указана заметка или содержимое ¦ Не вказано нотатку або вміст
+Note introuvable ¦ Заметка не найдена ¦ Нотатку не знайдено
+Note manquante ¦ Не указана заметка ¦ Не вказано нотатку
+Personne et titre obligatoires ¦ Человек и название обязательны ¦ Людина й назва обов’язкові
+Source et titre obligatoires ¦ Источник и название обязательны ¦ Джерело й назва обов’язкові
+Source introuvable ¦ Источник не найден ¦ Джерело не знайдено
+Source manquante ¦ Не указан источник ¦ Не вказано джерело
+Rotation impossible. ¦ Поворот невозможен. ¦ Поворот неможливий.
+Script HTR local introuvable. ¦ Локальный скрипт HTR не найден. ¦ Локальний скрипт HTR не знайдено.
+Fiche individuelle invalide. ¦ Неверная индивидуальная карточка. ¦ Неправильна індивідуальна картка.
+Alerte manquante ¦ Не указано оповещение ¦ Не вказано сповіщення
+Patronyme et groupe obligatoires ¦ Фамилия и группа обязательны ¦ Прізвище й група обов’язкові
+Personne racine introuvable. ¦ Корневой человек не найден. ¦ Кореневу людину не знайдено.
+Vue introuvable ¦ Представление не найдено ¦ Подання не знайдено
+Cible manquante ¦ Не указана цель ¦ Не вказано ціль
+Identification manquante ¦ Не указано опознание ¦ Не вказано впізнання
+Identification introuvable ¦ Опознание не найдено ¦ Впізнання не знайдено
+Objet ou souvenir manquant ¦ Не указан предмет или воспоминание ¦ Не вказано предмет або спогад
+À faire le {date} ¦ Сделать {date} ¦ Зробити {date}
+Avant le {date} ¦ До {date} ¦ До {date}
+Après le {date} ¦ После {date} ¦ Після {date}
+Rappel libre ¦ Свободное напоминание ¦ Вільне нагадування
+Enquête « {title} » ¦ Расследование «{title}» ¦ Розслідування «{title}»
+Pas encore envoyé ¦ Ещё не отправлено ¦ Ще не надіслано
+Envoyé aujourd’hui ¦ Отправлено сегодня ¦ Надіслано сьогодні
+Réponse attendue depuis {n} jours ¦ Дней в ожидании ответа: {n} ¦ Днів в очікуванні відповіді: {n}
+Réponse attendue depuis {n} jour ¦ Дней в ожидании ответа: {n} ¦ Днів в очікуванні відповіді: {n}
+relance prévue le {date} : à relancer ¦ повторный запрос запланирован на {date}: пора напомнить ¦ повторний запит заплановано на {date}: час нагадати
+relance le {date} ¦ повторный запрос {date} ¦ повторний запит {date}
+Visite ¦ Посещение ¦ Відвідування
+Prévue le {date} : note-la comme faite ¦ Запланировано на {date}: отметь как сделанное ¦ Заплановано на {date}: познач як зроблене
+Le {date} ¦ {date} ¦ {date}
+{n} cotes à consulter ¦ Шифров для просмотра: {n} ¦ Шифрів для перегляду: {n}
+{n} cote à consulter ¦ Шифров для просмотра: {n} ¦ Шифрів для перегляду: {n}
+Piste ¦ Зацепка ¦ Зачіпка
+À explorer ¦ Исследовать ¦ Дослідити
+Hypothèse : {title} ¦ Гипотеза: {title} ¦ Гіпотеза: {title}
+Hypothèse : sans titre ¦ Гипотеза: без названия ¦ Гіпотеза: без назви
+confiance faible ¦ низкая уверенность ¦ низька впевненість
+confiance moyenne ¦ средняя уверенность ¦ середня впевненість
+confiance forte ¦ высокая уверенность ¦ висока впевненість
+Vu ¦ Просмотрено ¦ Переглянуто
+Recensement de {y} à {place} : chercher sur SocFace ¦ Перепись {y} года в {place}: искать в SocFace ¦ Перепис {y} року в {place}: шукати в SocFace
+Recensement de {y} : chercher sur SocFace ¦ Перепись {y} года: искать в SocFace ¦ Перепис {y} року: шукати в SocFace
+Cherché sur SocFace ¦ Поиск в SocFace выполнен ¦ Пошук у SocFace виконано
+{act} : {name}, chercher à {place} ¦ {act}: {name}, искать в {place} ¦ {act}: {name}, шукати в {place}
+{act} : {name} ¦ {act}: {name} ¦ {act}: {name}
+acte|Parents ¦ Родители ¦ Батьки
+acte|Contrat de mariage ¦ Брачный договор ¦ Шлюбний договір
+acte|Succession ¦ Наследство ¦ Спадщина
+acte|Registre matricule ¦ Послужной список ¦ Послужний список
+Foyer de {name} ¦ Домохозяйство {name} ¦ Домогосподарство {name}
+{n} personnes ¦ Людей: {n} ¦ Людей: {n}
+{n} personne ¦ Людей: {n} ¦ Людей: {n}
+Demande d’entraide ¦ Запрос о помощи ¦ Запит про допомогу
+Une réponse t’attend ¦ Тебя ждёт ответ ¦ На тебе чекає відповідь
+Brouillon à publier ¦ Черновик для публикации ¦ Чернетка для публікації
+Publiée il y a {n} jours ¦ Опубликовано, дней назад: {n} ¦ Опубліковано, днів тому: {n}
+Publiée il y a {n} jour ¦ Опубликовано, дней назад: {n} ¦ Опубліковано, днів тому: {n}
+Rappel fait ¦ Напоминание выполнено ¦ Нагадування виконано
+Demande résolue ¦ Запрос решён ¦ Запит вирішено
+Piste explorée ¦ Зацепка проверена ¦ Зачіпку перевірено
+Hypothèse revue ¦ Гипотеза пересмотрена ¦ Гіпотезу переглянуто
+Recherche faite ¦ Поиск выполнен ¦ Пошук виконано
+Alerte revue ¦ Оповещение просмотрено ¦ Сповіщення переглянуто
+Piste du mur faite ¦ Зацепка по тупику проработана ¦ Зачіпку щодо глухого кута опрацьовано
+Lien vérifié ¦ Связь проверена ¦ Зв’язок перевірено
+🛡 Lien à consolider ¦ 🛡 Связь нужно укрепить ¦ 🛡 Зв’язок треба зміцнити
+Lien à consolider : {child}, le fils de {parent} ¦ Связь нужно укрепить: {child}, сын {parent} ¦ Зв’язок треба зміцнити: {child}, син {parent}
+Lien à consolider : {child}, la fille de {parent} ¦ Связь нужно укрепить: {child}, дочь {parent} ¦ Зв’язок треба зміцнити: {child}, дочка {parent}
+Lien à consolider : {child}, l’enfant de {parent} ¦ Связь нужно укрепить: {child}, ребёнок {parent} ¦ Зв’язок треба зміцнити: {child}, дитина {parent}
+cherche l’acte de naissance ou de baptême qui le nomme ¦ найди запись о рождении или крещении, где он упомянут ¦ знайди запис про народження або хрещення, де його згадано

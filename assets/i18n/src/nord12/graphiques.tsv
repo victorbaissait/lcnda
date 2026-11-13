@@ -1,0 +1,1800 @@
+fr ¦ ru ¦ uk
+Règle un diagramme puis enregistre-le comme vue pour le retrouver ici. ¦ Настрой диаграмму, затем сохрани её как вид, чтобы найти здесь. ¦ Налаштуй діаграму, потім збережи її як вигляд, щоб знайти тут.
+Vue enregistrée supprimée ¦ Сохранённый вид удалён ¦ Збережений вигляд видалено
+Première personne ¦ Первый человек ¦ Перша людина
+Deuxième personne ¦ Второй человек ¦ Друга людина
+Afficher le lien ¦ Показать связь ¦ Показати зв’язок
+Année non renseignée ¦ Год не указан ¦ Рік не вказано
+Adresse non renseignée ¦ Адрес не указан ¦ Адресу не вказано
+Membre du foyer ¦ Член домохозяйства ¦ Член домогосподарства
+Aucun membre relevé. ¦ Ни одного члена не записано. ¦ Жодного члена не записано.
+Aucune maisonnée recensée pour cette personne. ¦ Для этого человека не найдено ни одного домохозяйства в переписях. ¦ Для цієї людини не знайдено жодного домогосподарства в переписах.
+Ajoute des recensements depuis sa fiche. ¦ Добавь переписи с его карточки. ¦ Додай переписи з картки цієї людини.
+Aucun déplacement entre deux lieux géocodés n’est encore disponible pour cette branche. ¦ Для этой ветви пока нет ни одного переезда между двумя геокодированными местами. ¦ Для цієї гілки ще немає жодного переїзду між двома геокодованими місцями.
+Pas encore assez de liens renseignés pour dessiner ce graphe. ¦ Пока недостаточно указанных связей, чтобы нарисовать этот граф. ¦ Поки що недостатньо вказаних зв’язків, щоб намалювати цей граф.
+Réseau social ¦ Социальная сеть ¦ Соціальна мережа
+Métiers transmis ¦ Унаследованные профессии ¦ Успадковані професії
+Migrations de la branche ¦ Миграции ветви ¦ Міграції гілки
+Réseau ¦ Сеть ¦ Мережа
+=nœud ¦ узел|узла|узлов ¦ вузол|вузли|вузлів
+{nodes} · {links}. Survole un lien pour voir sa nature et clique sur une personne pour ouvrir sa fiche. ¦ {nodes} · {links}. Наведи на связь, чтобы увидеть её характер, и нажми на человека, чтобы открыть его карточку. ¦ {nodes} · {links}. Наведи на зв’язок, щоб побачити його характер, і натисни на людину, щоб відкрити її картку.
+Tous les actes ¦ Все записи актов ¦ Усі актові записи
+Actes rattachés ¦ Прикреплённые записи актов ¦ Прикріплені актові записи
+Actes liés ¦ Связанные записи актов ¦ Пов’язані актові записи
+Sépultures ¦ Захоронения ¦ Поховання
+Aucun acte pour ces filtres. ¦ Нет записей актов для этих фильтров. ¦ Немає актових записів для цих фільтрів.
+Sans précision ¦ Без уточнения ¦ Без уточнення
+Aucun recensement pour ces filtres. ¦ Нет переписей для этих фильтров. ¦ Немає переписів для цих фільтрів.
+Aucun dépouillement enregistré pour ces filtres. ¦ Нет сохранённых выписок для этих фильтров. ¦ Немає збережених виписок для цих фільтрів.
+GRAPHIQUES · LIEUX ¦ ГРАФИКИ · МЕСТА ¦ ГРАФІКИ · МІСЦЯ
+SYNTHÈSE LOCALE ¦ МЕСТНАЯ СВОДКА ¦ МІСЦЕВЕ ЗВЕДЕННЯ
+Regroupe les sources et recherches déjà rattachées à un même lieu. ¦ Собирает источники и исследования, уже связанные с одним местом. ¦ Збирає джерела й дослідження, вже пов’язані з одним місцем.
+Choisis une commune pour afficher les actes, dépouillements, battues et sépultures liés à ce lieu. ¦ Выбери коммуну, чтобы показать записи актов, выписки, облавы и захоронения, связанные с этим местом. ¦ Вибери комуну, щоб показати актові записи, виписки, облави й поховання, пов’язані з цим місцем.
+génération {list} ¦ поколение {list} ¦ покоління {list}
+générations {list} ¦ поколения {list} ¦ покоління {list}
+est {list} ¦ — {list} ¦ — {list}
+(… {n} places en tout) ¦ (… всего мест: {n}) ¦ (… усього місць: {n})
+Ancêtres répétés de {name} ¦ Повторяющиеся предки: {name} ¦ Повторювані предки: {name}
+Voir aussi leurs ancêtres répétés ({n}) ¦ Показать и их повторяющихся предков ({n}) ¦ Показати і їхніх повторюваних предків ({n})
+Quand deux ancêtres sont cousins, leurs propres ancêtres apparaissent plusieurs fois dans l’arbre : c’est l’implexe. Seules les filiations biologiques comptent. Le taux = 1 − personnes différentes ÷ places connues. ¦ Когда два предка — двоюродные родственники, их собственные предки появляются в древе несколько раз: это импликс. Учитываются только биологические связи. Доля = 1 − разные люди ÷ известные места. ¦ Коли двоє предків — родичі, їхні власні предки з’являються в дереві кілька разів: це імплекс. Враховуються лише біологічні зв’язки. Частка = 1 − різні люди ÷ відомі місця.
+Places théoriques ¦ Теоретические места ¦ Теоретичні місця
+Places connues ¦ Известные места ¦ Відомі місця
+places connues ¦ известные места ¦ відомі місця
+Personnes différentes ¦ Разные люди ¦ Різні люди
+Implexe ¦ Импликс ¦ Імплекс
+IMPLEXE ¦ ИМПЛИКС ¦ ІМПЛЕКС
+Implexe cumulé ¦ Накопленный импликс ¦ Накопичений імплекс
+implexe global ¦ общий импликс ¦ загальний імплекс
+ancêtres différents ¦ разные предки ¦ різні предки
+ancêtres répétés ¦ повторяющиеся предки ¦ повторювані предки
+Calcul arrêté : arbre trop grand. ¦ Расчёт остановлен: древо слишком большое. ¦ Обчислення зупинено: дерево завелике.
+Les couples communs les plus proches ¦ Ближайшие общие пары ¦ Найближчі спільні пари
+C’est ici que les branches se rejoignent ; leurs ancêtres sont répétés à leur suite. ¦ Именно здесь ветви сходятся; их предки повторяются за ними. ¦ Саме тут гілки сходяться; їхні предки повторюються слідом за ними.
+Aucun ancêtre répété : chaque ancêtre connu n’apparaît qu’une fois. ¦ Нет повторяющихся предков: каждый известный предок встречается только один раз. ¦ Немає повторюваних предків: кожен відомий предок трапляється лише один раз.
+LIENS DE PARENTÉ ¦ РОДСТВЕННЫЕ СВЯЗИ ¦ РОДИННІ ЗВ’ЯЗКИ
+Choisis deux personnes ¦ Выбери двух людей ¦ Вибери двох людей
+Recherche les deux individus dans la colonne de gauche pour afficher le chemin familial le plus court. ¦ Найди этих двух людей в левой колонке, чтобы показать самый короткий родственный путь. ¦ Знайди цих двох людей у лівій колонці, щоб показати найкоротший родинний шлях.
+lié à ¦ связан с ¦ пов’язаний з
+{links} entre les deux personnes. ¦ {links} между этими двумя людьми. ¦ {links} між цими двома людьми.
+Aucun chemin familial trouvé entre ces deux personnes. ¦ Между этими двумя людьми не найдено родственного пути. ¦ Між цими двома людьми не знайдено родинного шляху.
+Aucune relation disponible. ¦ Нет доступных связей. ¦ Немає доступних зв’язків.
+Ajoute des parents, conjoints ou enfants sur la fiche. ¦ Добавь родителей, супругов или детей на карточке. ¦ Додай батьків, подружжя або дітей на картці.
+Molette : zoomer · Maj + molette ou glisser : déplacer ¦ Колёсико: масштаб · Shift + колёсико или перетаскивание: перемещение ¦ Коліщатко: масштаб · Shift + коліщатко або перетягування: переміщення
+Choisir dans Personnes ¦ Выбрать в «Люди» ¦ Вибрати в «Люди»
+Aucune ascendance disponible. ¦ Нет доступных предков. ¦ Немає доступних предків.
+Ajoute des parents sur la fiche pour voir l’arbre. ¦ Добавь родителей на карточке, чтобы увидеть древо. ¦ Додай батьків на картці, щоб побачити дерево.
+♂ Masculin ¦ ♂ Мужской ¦ ♂ Чоловіча
+♀ Féminin ¦ ♀ Женский ¦ ♀ Жіноча
+□ Masculin ¦ □ Мужской ¦ □ Чоловіча
+○ Féminin ¦ ○ Женский ¦ ○ Жіноча
+◇ Sexe non renseigné ¦ ◇ Пол не указан ¦ ◇ Стать не вказано
+Les traits relient les générations connues. ¦ Линии соединяют известные поколения. ¦ Лінії з’єднують відомі покоління.
+Distribution des noms ¦ Распределение фамилий ¦ Розподіл прізвищ
+DISTRIBUTION ¦ РАСПРЕДЕЛЕНИЕ ¦ РОЗПОДІЛ
+=naissance regroupée ¦ сгруппированное рождение|сгруппированных рождения|сгруппированных рождений ¦ згруповане народження|згруповані народження|згрупованих народжень
+{births} par année et patronyme. ¦ {births} по годам и фамилиям. ¦ {births} за роками та прізвищами.
+Vivant·e ¦ Жив(а) ¦ Живий(а)
+Décédé·e ¦ Умер(ла) ¦ Помер(ла)
+D’autres générations existent ¦ Есть и другие поколения ¦ Є й інші покоління
+Côte à côte ¦ Рядом ¦ Поруч
+Dessus / dessous ¦ Сверху / снизу ¦ Зверху / знизу
+Aucune vue enregistrée pour l’instant ¦ Пока нет сохранённых видов ¦ Поки що немає збережених виглядів
+Montrer les animaux de chacun à côté de leur maître (trait pointillé) ¦ Показывать животных каждого рядом с хозяином (пунктирная линия) ¦ Показувати тварин кожного поруч із господарем (пунктирна лінія)
+Couleur et épaisseur des traits selon la solidité de chaque lien parent-enfant ¦ Цвет и толщина линий по надёжности каждой связи родитель — ребёнок ¦ Колір і товщина ліній за надійністю кожного зв’язку батьки — дитина
+🛡 Vue solidité ¦ 🛡 Вид надёжности ¦ 🛡 Вигляд надійності
+Tableau des chiffres ¦ Таблица чисел ¦ Таблиця чисел
+Graphique d’une statistique de l’app ¦ График статистики приложения ¦ Графік статистики застосунку
+Ce graphique n’existe plus. ¦ Этого графика больше нет. ¦ Цього графіка більше немає.
+Un de mes graphiques ¦ Один из моих графиков ¦ Один із моїх графіків
+📈 Un de mes graphiques ¦ 📈 Один из моих графиков ¦ 📈 Один із моїх графіків
+Un graphique de l’Éditeur de graphiques, tenu à jour ¦ График из редактора графиков, всегда актуальный ¦ Графік із редактора графіків, завжди актуальний
+Données de l’app ¦ Данные приложения ¦ Дані застосунку
+🔄 Données de l’app ¦ 🔄 Данные приложения ¦ 🔄 Дані застосунку
+✍️ Mes chiffres ¦ ✍️ Мои числа ¦ ✍️ Мої числа
+Mon diagramme ¦ Моя диаграмма ¦ Моя діаграма
+Posé : {where} ¦ Размещено: {where} ¦ Розміщено: {where}
+LISTES · GRAPHIQUES ¦ СПИСКИ · ГРАФИКИ ¦ СПИСКИ · ГРАФІКИ
+📈 Graphiques et diagrammes ¦ 📈 Графики и диаграммы ¦ 📈 Графіки та діаграми
+Tous tes graphiques (faits dans <b>Réglages → Éditeur de graphiques</b>, avec tes propres chiffres ou ceux de l’app) et tes diagrammes (hémicycle, frise d’un groupe, camembert…). Chacun se pose partout : un widget du tableau de bord, une Fiche, une enquête, l’Atelier, la page d’une personne, la mise en page — bouton « ＋ Diagramme », puis « 📈 Un de mes graphiques ». ¦ Все твои графики (сделанные в <b>Настройки → Редактор графиков</b>, с твоими числами или данными приложения) и твои диаграммы (полукруг собрания, лента группы, круговая диаграмма…). Каждый можно разместить где угодно: виджет панели управления, заметка, расследование, мастерская, страница человека, вёрстка — кнопка «＋ Диаграмма», затем «📈 Один из моих графиков». ¦ Усі твої графіки (зроблені в <b>Налаштування → Редактор графіків</b>, з твоїми числами або даними застосунку) і твої діаграми (півколо зібрання, стрічка групи, кругова діаграма…). Кожен можна розмістити будь-де: віджет панелі керування, нотатка, розслідування, майстерня, сторінка людини, верстка — кнопка «＋ Діаграма», потім «📈 Один із моїх графіків».
+＋ Nouveau diagramme ¦ ＋ Новая диаграмма ¦ ＋ Нова діаграма
+Aucun graphique ni diagramme pour l’instant ¦ Пока нет ни графиков, ни диаграмм ¦ Поки що немає ні графіків, ні діаграм
+Un graphique compte ce que tu veux (tes propres chiffres, des personnes, des événements, une statistique de l’app) ; un diagramme dessine une assemblée, une frise, un organigramme… ¦ График считает то, что ты хочешь (твои числа, людей, события, статистику приложения); диаграмма рисует собрание, ленту, организационную схему… ¦ Графік рахує те, що ти хочеш (твої числа, людей, події, статистику застосунку); діаграма малює зібрання, стрічку, організаційну схему…
+Rien ne correspond : retire un filtre ou change la recherche. ¦ Ничего не найдено: убери фильтр или измени поиск. ¦ Нічого не знайдено: прибери фільтр або зміни пошук.
+Chercher un graphique, un diagramme… (ex. naissances, Rennes) ¦ Искать график, диаграмму… (напр. рождения, Rennes) ¦ Шукати графік, діаграму… (напр. народження, Rennes)
+Seulement ceux posés quelque part ¦ Только размещённые где-то ¦ Лише розміщені десь
+Posés quelque part ¦ Размещены где-то ¦ Розміщені десь
+Posé nulle part pour l’instant ¦ Пока нигде не размещено ¦ Поки що ніде не розміщено
+Courbe ¦ Линия ¦ Лінія
+Aire ¦ Область ¦ Область
+Anneau ¦ Кольцо ¦ Кільце
+Camembert ¦ Круговая ¦ Кругова
+Barres ¦ Столбцы ¦ Стовпці
+Revenir à la personne ¦ Вернуться к человеку ¦ Повернутися до людини
+Prénom contient ¦ Имя содержит ¦ Ім’я містить
+Statut (vivant, décédé) ¦ Статус (жив, умер) ¦ Статус (живий, помер)
+Métier contient ¦ Профессия содержит ¦ Професія містить
+Dans mes favoris ¦ В моём избранном ¦ У моєму обраному
+Naissance entre (années) ¦ Рождение между (годы) ¦ Народження між (роки)
+Naissance entre deux dates précises ¦ Рождение между двумя точными датами ¦ Народження між двома точними датами
+Naissance en (mois) ¦ Рождение в (месяц) ¦ Народження в (місяць)
+Décès entre (années) ¦ Смерть между (годы) ¦ Смерть між (роки)
+Âge à un événement entre ¦ Возраст на момент события между ¦ Вік на момент події між
+A vécu entre … ans ¦ Прожил(а) от … до … лет ¦ Прожив(ла) від … до … років
+Lieu de naissance (contient) ¦ Место рождения (содержит) ¦ Місце народження (містить)
+Lieu de décès ou d’inhumation (contient) ¦ Место смерти или погребения (содержит) ¦ Місце смерті або поховання (містить)
+A un événement à (lieu contient) ¦ Есть событие в (место содержит) ¦ Є подія в (місце містить)
+A un événement dans le département, la région ou le pays ¦ Есть событие в департаменте, регионе или стране ¦ Є подія в департаменті, регіоні або країні
+A un événement à moins de … km de ¦ Есть событие менее чем в … км от ¦ Є подія менш ніж за … км від
+A eu un événement (mariage, divorce, voyage…) ¦ Было событие (брак, развод, поездка…) ¦ Була подія (шлюб, розлучення, подорож…)
+Nombre d’événements d’un type entre ¦ Число событий одного типа между ¦ Кількість подій одного типу між
+Nombre d’unions (mariages) entre ¦ Число союзов (браков) между ¦ Кількість союзів (шлюбів) між
+Nombre d’enfants entre ¦ Число детей между ¦ Кількість дітей між
+Conjoint : nom ou prénom contient ¦ Супруг(а): фамилия или имя содержит ¦ Чоловік / дружина: прізвище або ім’я містить
+Parent : nom ou prénom contient ¦ Родитель: фамилия или имя содержит ¦ Батько чи мати: прізвище або ім’я містить
+Cause de décès contient ¦ Причина смерти содержит ¦ Причина смерті містить
+Seulement mes ancêtres (Sosa) ¦ Только мои предки (Sosa) ¦ Лише мої предки (Sosa)
+Par rapport à la personne de la fiche (ses ancêtres, sa famille…) ¦ Относительно человека с карточки (его предки, семья…) ¦ Щодо людини з картки (її предки, родина…)
+Génération Sosa entre ¦ Поколение Sosa между ¦ Покоління Sosa між
+Sans source ¦ Без источника ¦ Без джерела
+Nombre de sources entre ¦ Число источников между ¦ Кількість джерел між
+A une photo ou un document ¦ Есть фото или документ ¦ Має фото або документ
+Les filtres ci-dessus (années, limite, sexe et critères) peuvent devenir ceux de départ de ¦ Фильтры выше (годы, предел, пол и критерии) могут стать начальными для ¦ Фільтри вище (роки, межа, стать і критерії) можуть стати початковими для
+les distributions. ¦ распределений. ¦ розподілів.
+Usage des noms de famille dans la base. ¦ Использование фамилий в базе. ¦ Використання прізвищ у базі.
+Années de naissance (par décennie) ¦ Годы рождения (по десятилетиям) ¦ Роки народження (за десятиліттями)
+Années de décès (par décennie) ¦ Годы смерти (по десятилетиям) ¦ Роки смерті (за десятиліттями)
+Mes ancêtres par siècle ¦ Мои предки по векам ¦ Мої предки за століттями
+Métiers les plus fréquents ¦ Самые частые профессии ¦ Найчастіші професії
+Femmes et hommes ¦ Женщины и мужчины ¦ Жінки та чоловіки
+Ancêtres à sourcer ¦ Предки без источников ¦ Предки без джерел
+Toutes les personnes récentes ont au moins une source. ¦ У всех недавних людей есть хотя бы один источник. ¦ Усі нещодавні люди мають щонайменше одне джерело.
+Tous les événements récents ont un média. ¦ У всех недавних событий есть медиафайл. ¦ Усі нещодавні події мають медіафайл.
+Aucun média. ¦ Нет медиафайлов. ¦ Немає медіафайлів.
+Aucun média isolé. ¦ Нет медиафайлов без связей. ¦ Немає медіафайлів без зв’язків.
+Toutes les images récentes ont au moins une zone identifiée. ¦ На всех недавних изображениях есть хотя бы одна отмеченная зона. ¦ На всіх нещодавніх зображеннях є щонайменше одна позначена зона.
+Aucune fiche récente avec parent manquant. ¦ Нет недавних карточек без родителя. ¦ Немає нещодавніх карток без одного з батьків.
+Aucun baptême récent sans parrain/marraine. ¦ Нет недавних крещений без крёстного/крёстной. ¦ Немає нещодавніх хрещень без хрещеного батька / хрещеної матері.
+✎ Modifier l’onglet ¦ ✎ Изменить вкладку ¦ ✎ Змінити вкладку
+Aucun widget affiché ¦ Нет показанных виджетов ¦ Немає показаних віджетів
+Onglet vide ¦ Пустая вкладка ¦ Порожня вкладка
+Ajoute des widgets, tes listes ou tes graphiques depuis la colonne de gauche. ¦ Добавь виджеты, свои списки или графики из левой колонки. ¦ Додай віджети, свої списки або графіки з лівої колонки.
+Ajoute-en depuis la colonne de gauche, ou crée le tien. ¦ Добавь их из левой колонки или создай свой. ¦ Додай їх із лівої колонки або створи свій.
+Widget « {name} » retiré du tableau de bord. ¦ Виджет «{name}» убран с панели управления. ¦ Віджет «{name}» прибрано з панелі керування.
+Widget retiré du tableau de bord. ¦ Виджет убран с панели управления. ¦ Віджет прибрано з панелі керування.
+Widget supprimé du tableau de bord. ¦ Виджет удалён с панели управления. ¦ Віджет видалено з панелі керування.
+Widget modifié. ¦ Виджет изменён. ¦ Віджет змінено.
+Revenir au widget ¦ Вернуться к виджету ¦ Повернутися до віджета
+Enquêtes ouvertes ¦ Открытые расследования ¦ Відкриті розслідування
+Battues ouvertes ¦ Открытые облавы ¦ Відкриті облави
+Rappels proches ¦ Ближайшие напоминания ¦ Найближчі нагадування
+Incohérences ¦ Несоответствия ¦ Невідповідності
+Seulement les SOSA ¦ Только SOSA ¦ Лише SOSA
+Types d’évènements ¦ Типы событий ¦ Типи подій
+Ex : trouver la date de naissance de Jean Dupont ¦ Напр.: найти дату рождения Jean Dupont ¦ Напр.: знайти дату народження Jean Dupont
+Personne liée (facultatif) ¦ Связанный человек (необязательно) ¦ Пов’язана людина (необов’язково)
+Réglages du widget ¦ Настройки виджета ¦ Налаштування віджета
+Statistique affichée ¦ Показываемая статистика ¦ Показана статистика
+Dernière fiche consultée ¦ Последняя просмотренная карточка ¦ Остання переглянута картка
+Les descendants ¦ Потомки ¦ Нащадки
+Les ascendants ¦ Предки ¦ Предки
+Sites affichés ¦ Показываемые сайты ¦ Показані сайти
+Prendre cette image ¦ Взять это изображение ¦ Взяти це зображення
+Provenance affichée ¦ Показываемое происхождение ¦ Показане походження
+Ex : Jean Dupont · Enquête ¦ Напр.: Jean Dupont · Расследование ¦ Напр.: Jean Dupont · Розслідування
+Personne affichée ¦ Показываемый человек ¦ Показана людина
+Aléatoire ¦ Случайно ¦ Випадково
+Personne précise ¦ Конкретный человек ¦ Конкретна людина
+📁 ou glisse une image ici, ou colle-la (⌘V). ¦ 📁 или перетащи изображение сюда, или вставь его (⌘V). ¦ 📁 або перетягни зображення сюди, або встав його (⌘V).
+Pages du suivi ¦ Страницы наблюдения ¦ Сторінки спостереження
+Pages du tableau de bord ¦ Страницы панели управления ¦ Сторінки панелі керування
+Chaque page a ses widgets ; les boutons des pages sont en haut du Suivi des animaux. La page cochée s’affiche à l’ouverture. ¦ У каждой страницы свои виджеты; кнопки страниц — вверху «Наблюдения за животными». Отмеченная страница показывается при открытии. ¦ Кожна сторінка має свої віджети; кнопки сторінок — угорі «Спостереження за тваринами». Позначена сторінка показується під час відкриття.
+Chaque page a ses widgets ; les boutons des pages sont en haut du tableau de bord. La page cochée s’affiche à l’ouverture. ¦ У каждой страницы свои виджеты; кнопки страниц — вверху панели управления. Отмеченная страница показывается при открытии. ¦ Кожна сторінка має свої віджети; кнопки сторінок — угорі панелі керування. Позначена сторінка показується під час відкриття.
+Ranger ses widgets ¦ Упорядочить виджеты ¦ Упорядкувати віджети
+✎ en cours ¦ ✎ в работе ¦ ✎ у роботі
+Titre de l’ensemble ¦ Название группы ¦ Назва групи
+Un niveau plus haut ¦ На уровень выше ¦ На рівень вище
+Sous-ensemble (un niveau plus bas) ¦ Подгруппа (на уровень ниже) ¦ Підгрупа (на рівень нижче)
+SUIVI DES ANIMAUX ¦ НАБЛЮДЕНИЕ ЗА ЖИВОТНЫМИ ¦ СПОСТЕРЕЖЕННЯ ЗА ТВАРИНАМИ
+MON ONGLET ¦ МОЯ ВКЛАДКА ¦ МОЯ ВКЛАДКА
+Son widget sera supprimé avec elle. ¦ Её виджет будет удалён вместе с ней. ¦ Її віджет буде видалено разом із нею.
+Ses {widgets} seront supprimés avec elle. ¦ Её {widgets} будут удалены вместе с ней. ¦ Її {widgets} буде видалено разом із нею.
+=widget ¦ виджет|виджета|виджетов ¦ віджет|віджети|віджетів
+Supprimer la page « {name} » ? ¦ Удалить страницу «{name}»? ¦ Видалити сторінку «{name}»?
+Page ¦ Страница ¦ Сторінка
+Pages du suivi enregistrées. ¦ Страницы наблюдения сохранены. ¦ Сторінки спостереження збережено.
+Tableau de bord enregistré. ¦ Панель управления сохранена. ¦ Панель керування збережено.
+=fiche créée ¦ созданная карточка|созданные карточки|созданных карточек ¦ створена картка|створені картки|створених карток
+=événement ajouté ¦ добавленное событие|добавленных события|добавленных событий ¦ додана подія|додані події|доданих подій
+=source ajoutée ¦ добавленный источник|добавленных источника|добавленных источников ¦ додане джерело|додані джерела|доданих джерел
+=recensement ajouté ¦ добавленная перепись|добавленные переписи|добавленных переписей ¦ доданий перепис|додані переписи|доданих переписів
+=nouvel ancêtre Sosa ¦ новый предок Sosa|новых предка Sosa|новых предков Sosa ¦ новий предок Sosa|нові предки Sosa|нових предків Sosa
+=battue terminée ¦ завершённая облава|завершённые облавы|завершённых облав ¦ завершена облава|завершені облави|завершених облав
+=enquête terminée ¦ завершённое расследование|завершённых расследования|завершённых расследований ¦ завершене розслідування|завершені розслідування|завершених розслідувань
+=évènement ¦ событие|события|событий ¦ подія|події|подій
+=doublon ¦ дубликат|дубликата|дубликатов ¦ дублікат|дублікати|дублікатів
+pas encore de modification ce mois-ci ¦ в этом месяце изменений пока нет ¦ цього місяця змін поки що немає
+rien pour l’instant ¦ пока ничего ¦ поки що нічого
+En {month} : ¦ В {month}: ¦ У {month}:
+En {year} : ¦ В {year}: ¦ У {year}:
+{days} de recherche. ¦ {days} исследований. ¦ {days} досліджень.
+{days} de recherche, {changes}. ¦ {days} исследований, {changes}. ¦ {days} досліджень, {changes}.
+↑ plus actif que le mois dernier ¦ ↑ активнее, чем в прошлом месяце ¦ ↑ активніше, ніж минулого місяця
+Modifications par mois sur un an ¦ Изменения по месяцам за год ¦ Зміни за місяцями протягом року
+D’après le journal des modifications : le travail fait à la main (les imports de fichiers ne comptent pas comme fiches créées). ¦ По журналу изменений: работа, сделанная вручную (импорт файлов не считается созданными карточками). ¦ За журналом змін: робота, зроблена вручну (імпорт файлів не вважається створеними картками).
+Bilan indisponible. ¦ Итоги недоступны. ¦ Підсумки недоступні.
+dernière fiche consultée ¦ последняя просмотренная карточка ¦ остання переглянута картка
+Aucun anniversaire aujourd’hui. ¦ Сегодня нет дней рождения. ¦ Сьогодні немає днів народження.
+Aucune personne verrouillée récemment. ¦ Недавно никто не был заблокирован. ¦ Нещодавно нікого не було заблоковано.
+Aucune personne disponible pour ce widget. ¦ Нет доступных людей для этого виджета. ¦ Немає доступних людей для цього віджета.
+Aucun événement renseigné. ¦ Нет указанных событий. ¦ Немає вказаних подій.
+Aucune note. ¦ Нет заметок. ¦ Немає нотаток.
+Aucun recensement. ¦ Нет переписей. ¦ Немає переписів.
+Aucune source ou citation. ¦ Нет источников или цитат. ¦ Немає джерел або цитат.
+Bloc surtout utile pour une fiche féminine. ¦ Блок особенно полезен для карточки женщины. ¦ Блок найкорисніший для картки жінки.
+Aucune enquête ou battue liée. ¦ Нет связанных расследований или облав. ¦ Немає пов’язаних розслідувань або облав.
+Aucun détail ¦ Без подробностей ¦ Без подробиць
+Décision ¦ Решение ¦ Рішення
+Bureau ¦ Офис ¦ Офіс
+Œuvre ¦ Произведение ¦ Твір
+Ouvrir fiche ¦ Открыть карточку ¦ Відкрити картку
+Tous les événements récents ont une source. ¦ У всех недавних событий есть источник. ¦ Усі нещодавні події мають джерело.
+Aucun lieu prioritaire à compléter. ¦ Нет приоритетных мест для дополнения. ¦ Немає пріоритетних місць для доповнення.
+Coordonnées ou pays à compléter ¦ Координаты или страну нужно дополнить ¦ Координати або країну треба доповнити
+Aucun couple prioritaire sans mariage. ¦ Нет приоритетных пар без брака. ¦ Немає пріоритетних пар без шлюбу.
+Personne 1 ¦ Человек 1 ¦ Людина 1
+Personne 2 ¦ Человек 2 ¦ Людина 2
+Aucune incohérence de dates détectée. ¦ Несоответствий в датах не найдено. ¦ Невідповідностей у датах не знайдено.
+Incohérences et conflits ¦ Несоответствия и конфликты ¦ Невідповідності та конфлікти
+Vérifier ¦ Проверить ¦ Перевірити
+Aucun SOSA manquant proche. ¦ Нет ближайших недостающих SOSA. ¦ Немає найближчих відсутніх SOSA.
+Aucune battue prioritaire. ¦ Нет приоритетных облав. ¦ Немає пріоритетних облав.
+Commune de départ inconnue ¦ Коммуна отправления неизвестна ¦ Комуна відправлення невідома
+Aucune action prioritaire pour le moment. ¦ Пока нет приоритетных действий. ¦ Поки що немає пріоритетних дій.
+À traiter ¦ К выполнению ¦ До виконання
+Liste de travail quotidienne ¦ Ежедневный список задач ¦ Щоденний список завдань
+Aucune archive disponible. ¦ Нет доступных архивов. ¦ Немає доступних архівів.
+Aucune racine SOSA définie. ¦ Корень SOSA не задан. ¦ Корінь SOSA не задано.
+Aucun doublon probable repéré. ¦ Вероятных дубликатов не найдено. ¦ Ймовірних дублікатів не знайдено.
+Aucun point géographique exploitable. ¦ Нет пригодных географических точек. ¦ Немає придатних географічних точок.
+Aperçu cartographique ¦ Предпросмотр карты ¦ Попередній перегляд мапи
+Aucune personne avec lieux datés. ¦ Нет людей с датированными местами. ¦ Немає людей із датованими місцями.
+Aucune personne disponible. ¦ Нет доступных людей. ¦ Немає доступних людей.
+Aucun événement daté. ¦ Нет датированных событий. ¦ Немає датованих подій.
+Éléments datés ou localisés ¦ Датированные или привязанные к месту элементы ¦ Датовані або прив’язані до місця елементи
+Documents et images ¦ Документы и изображения ¦ Документи та зображення
+Sources enregistrées ¦ Сохранённые источники ¦ Збережені джерела
+En cours ou en pause ¦ В работе или на паузе ¦ У роботі або на паузі
+Recherches commune par commune ¦ Поиски по коммунам ¦ Пошуки за комунами
+À vérifier dans maintenance ¦ Проверить в настройках ¦ Перевірити в налаштуваннях
+100 fiches ¦ 100 карточек ¦ 100 карток
+Au moins 100 personnes enregistrées ¦ Сохранено не менее 100 человек ¦ Збережено щонайменше 100 людей
+100 médias ¦ 100 медиафайлов ¦ 100 медіафайлів
+Au moins 100 documents conservés ¦ Хранится не менее 100 документов ¦ Зберігається щонайменше 100 документів
+Au moins la moitié des fiches sourcées ¦ Не менее половины карточек с источниками ¦ Щонайменше половина карток із джерелами
+Illustrée ¦ С иллюстрациями ¦ З ілюстраціями
+Au moins la moitié des fiches avec un média ¦ Не менее половины карточек с медиафайлом ¦ Щонайменше половина карток із медіафайлом
+5 générations SOSA ¦ 5 поколений SOSA ¦ 5 поколінь SOSA
+Cinq générations complètes ¦ Пять полных поколений ¦ П’ять повних поколінь
+Au moins une battue créée ¦ Создана хотя бы одна облава ¦ Створено щонайменше одну облаву
+Aucune suppression récente. ¦ Недавних удалений нет. ¦ Нещодавніх видалень немає.
+Aucune modification récente. ¦ Недавних изменений нет. ¦ Нещодавніх змін немає.
+Aucun événement exploitable pour ce quiz avec les filtres choisis. ¦ С выбранными фильтрами нет подходящих событий для этой викторины. ¦ З вибраними фільтрами немає придатних подій для цієї вікторини.
+Pas assez de dates distinctes pour générer des propositions. ¦ Недостаточно разных дат, чтобы составить варианты ответа. ¦ Недостатньо різних дат, щоб скласти варіанти відповіді.
+Quelle est la date de <strong>{what}</strong> de <strong>{name}</strong> ? ¦ Какая дата <strong>{what}</strong> у <strong>{name}</strong>? ¦ Яка дата <strong>{what}</strong> у <strong>{name}</strong>?
+Aucune image disponible. ¦ Нет доступных изображений. ¦ Немає доступних зображень.
+Choisis une image dans les réglages du widget. ¦ Выбери изображение в настройках виджета. ¦ Вибери зображення в налаштуваннях віджета.
+Choisis deux personnes dans les réglages du widget. ¦ Выбери двух людей в настройках виджета. ¦ Вибери двох людей у налаштуваннях віджета.
+Personne liée ¦ Связанный человек ¦ Пов’язана людина
+Ouvre Comparaison pour analyser le lien. ¦ Открой «Сравнение», чтобы разобрать связь. ¦ Відкрий «Порівняння», щоб розібрати зв’язок.
+Aucune personne favorite. ¦ Нет избранных людей. ¦ Немає обраних людей.
+Rappels à traiter ¦ Напоминания к выполнению ¦ Нагадування до виконання
+Alertes cohérence ¦ Предупреждения о согласованности ¦ Попередження про узгодженість
+Naissance renseignée ¦ Рождение указано ¦ Народження вказано
+Décès renseigné ¦ Смерть указана ¦ Смерть вказано
+Au moins un média ¦ Хотя бы один медиафайл ¦ Щонайменше один медіафайл
+Au moins une source ¦ Хотя бы один источник ¦ Щонайменше одне джерело
+Aucun lieu renseigné. ¦ Место не указано. ¦ Місце не вказано.
+Ajoute un objectif dans les réglages du widget. ¦ Добавь цель в настройках виджета. ¦ Додай мету в налаштуваннях віджета.
+Ajouter {what} ¦ Добавить: {what} ¦ Додати: {what}
+Aucun rappel à venir. ¦ Нет предстоящих напоминаний. ¦ Немає майбутніх нагадувань.
+Aucune fiche consultée sur ce navigateur. ¦ В этом браузере не просмотрено ни одной карточки. ¦ У цьому браузері не переглянуто жодної картки.
+Aucun média à transcrire. ¦ Нет медиафайлов для расшифровки. ¦ Немає медіафайлів для розшифрування.
+Aucune signature identifiée à comparer. ¦ Нет опознанных подписей для сравнения. ¦ Немає розпізнаних підписів для порівняння.
+Aucune commune de battue à reprendre. ¦ Нет коммун облавы, к которым надо вернуться. ¦ Немає комун облави, до яких треба повернутися.
+Aucune source ou piste à vérifier. ¦ Нет источников или зацепок для проверки. ¦ Немає джерел або зачіпок для перевірки.
+Rien à relire pour le moment. ¦ Пока нечего перечитывать. ¦ Поки що нічого перечитувати.
+Aucun départ enregistré : coche « Départs / émigration » sur une fiche. ¦ Нет сохранённых отъездов: отметь «Отъезды / эмиграция» на карточке. ¦ Немає збережених від’їздів: познач «Від’їзди / еміграція» на картці.
+Aucun enfant placé enregistré. ¦ Нет сохранённых детей, отданных на воспитание. ¦ Немає збережених дітей, відданих на виховання.
+Aucune armoirie. ¦ Нет гербов. ¦ Немає гербів.
+Ajouter des armoiries ¦ Добавить гербы ¦ Додати герби
+Aucun poilu : coche « Poilu 14-18 » sur une fiche. ¦ Нет солдат 14-18: отметь «Poilu 14-18» на карточке. ¦ Немає солдатів 14-18: познач «Poilu 14-18» на картці.
+Aucune recherche enregistrée (Recherche → Recherche multicritère). ¦ Нет сохранённых поисков (Исследования → Поиск по нескольким критериям). ¦ Немає збережених пошуків (Дослідження → Пошук за кількома критеріями).
+Aucun circuit à faire. ¦ Нет маршрутов к выполнению. ¦ Немає маршрутів до виконання.
+Préparer un circuit ¦ Подготовить маршрут ¦ Підготувати маршрут
+⚠ Aucun dossier hors de cet ordinateur n’est réglé : si le Mac est volé ou tombe en panne, tout part avec lui. ¦ ⚠ Не настроено ни одной папки вне этого компьютера: если Mac украдут или он сломается, всё пропадёт вместе с ним. ¦ ⚠ Не налаштовано жодної теки поза цим комп’ютером: якщо Mac вкрадуть або він зламається, усе зникне разом із ним.
+Régler ¦ Настроить ¦ Налаштувати
+Aucun dossier surveillé pour l’instant ¦ Пока нет отслеживаемых папок ¦ Поки що немає відстежуваних тек
+Choisir un dossier ¦ Выбрать папку ¦ Вибрати теку
+Aucun nom indexé dans les transcriptions. ¦ В расшифровках нет проиндексированных имён. ¦ У розшифруваннях немає проіндексованих імен.
+Rien de prévu sur les 7 prochains jours. ¦ На ближайшие 7 дней ничего не запланировано. ¦ На найближчі 7 днів нічого не заплановано.
+Aucune date récurrente repérée dans les 7 prochains jours. ¦ На ближайшие 7 дней нет повторяющихся дат. ¦ На найближчі 7 днів немає повторюваних дат.
+Texte vide : écris-le avec le crayon ✎. ¦ Текст пуст: напиши его с помощью карандаша ✎. ¦ Текст порожній: напиши його за допомогою олівця ✎.
+↗ Ouvrir mon agenda ¦ ↗ Открыть мой ежедневник ¦ ↗ Відкрити мій щоденник
+Ce mois-ci ¦ В этом месяце ¦ Цього місяця
+Voir le mois ¦ Показать месяц ¦ Показати місяць
+Qui ¦ Кто ¦ Хто
+Entrée : calculer · ↑ : reprendre le dernier ¦ Enter: вычислить · ↑: взять последнее ¦ Enter: обчислити · ↑: взяти останнє
+⛶ Ouvrir la calculette ¦ ⛶ Открыть калькулятор ¦ ⛶ Відкрити калькулятор
+Fond de carte indisponible (pas d’Internet ?) : les photos restent à leur place. ¦ Подложка карты недоступна (нет интернета?): фотографии остаются на своих местах. ¦ Підкладка мапи недоступна (немає інтернету?): фотографії лишаються на своїх місцях.
+Pas précédent ¦ Предыдущий шаг ¦ Попередній крок
+Pas suivant ¦ Следующий шаг ¦ Наступний крок
+Aucune date pour l’instant. ¦ Пока нет дат. ¦ Поки що немає дат.
+Frise : glisse pour choisir une période, molette pour zoomer, double-clic pour tout voir ¦ Лента: перетащи, чтобы выбрать период, колёсико для масштаба, двойной щелчок, чтобы увидеть всё ¦ Стрічка: перетягни, щоб вибрати період, коліщатко для масштабу, подвійний клік, щоб побачити все
+Choisis une carte dans les réglages du widget (✎). ¦ Выбери карту в настройках виджета (✎). ¦ Вибери мапу в налаштуваннях віджета (✎).
+Des barres ou un camembert : par métier, par lieu, par décennie, par siècle… ¦ Столбцы или круговая диаграмма: по профессиям, местам, десятилетиям, векам… ¦ Стовпці або кругова діаграма: за професіями, місцями, десятиліттями, століттями…
+Écran de l’app ¦ Экран приложения ¦ Екран застосунку
+Une liste, un diagramme, une statistique, la fiche d’une personne, la carte… tel quel. ¦ Список, диаграмма, статистика, карточка человека, карта… как есть. ¦ Список, діаграма, статистика, картка людини, мапа… як є.
+Un pense-bête, une citation, une consigne, avec des émojis. ¦ Памятка, цитата, указание — с эмодзи. ¦ Нагадування, цитата, вказівка — з емодзі.
+Raccourcis ¦ Ярлыки ¦ Ярлики
+Des boutons vers les écrans, les listes ou des sites que tu utilises souvent. ¦ Кнопки к экранам, спискам или сайтам, которыми ты часто пользуешься. ¦ Кнопки до екранів, списків або сайтів, якими ти часто користуєшся.
+Parcours jour par jour ¦ Путь день за днём ¦ Шлях день за днем
+Widget de l’app habillé ¦ Оформленный виджет приложения ¦ Оформлений віджет застосунку
+Widget de l’app ¦ Виджет приложения ¦ Віджет застосунку
+toute la largeur ¦ вся ширина ¦ уся ширина
+Mosaïque (carrés proportionnels) ¦ Мозаика (пропорциональные квадраты) ¦ Мозаїка (пропорційні квадрати)
+Aire (courbe remplie) ¦ Область (закрашенная кривая) ¦ Область (зафарбована крива)
+cliquer pour voir qui ¦ нажми, чтобы увидеть, кто ¦ натисни, щоб побачити, хто
+Tout voir ({n}) ¦ Показать всё ({n}) ¦ Показати все ({n})
+{n} autres valeurs ¦ Других значений: {n} ¦ Інших значень: {n}
+Aucune ligne. ¦ Нет строк. ¦ Немає рядків.
+Personne ne correspond. ¦ Никто не подходит. ¦ Ніхто не підходить.
+=personne différente ¦ отдельный человек|отдельных человека|отдельных человек ¦ окрема людина|окремі людини|окремих людей
+{people} pour {n} comptés (les 3 000 premières lignes seulement). ¦ {people} на {n} учтённых (только первые 3 000 строк). ¦ {people} на {n} врахованих (лише перші 3 000 рядків).
+{people} pour {n} comptés : une même personne peut compter plusieurs fois (deux événements, deux étiquettes…). ¦ {people} на {n} учтённых: один и тот же человек может учитываться несколько раз (два события, две метки…). ¦ {people} на {n} врахованих: та сама людина може враховуватися кілька разів (дві події, дві мітки…).
+Chercher un nom, un métier… ¦ Искать имя, профессию… ¦ Шукати ім’я, професію…
+Par nom, A → Z ¦ По имени, А → Я ¦ За ім’ям, А → Я
+Par nom, Z → A ¦ По имени, Я → А ¦ За ім’ям, Я → А
+Par naissance, les plus anciennes ¦ По рождению, сначала самые ранние ¦ За народженням, спочатку найдавніші
+Par naissance, les plus récentes ¦ По рождению, сначала самые поздние ¦ За народженням, спочатку найпізніші
+Aucun raccourci. ¦ Нет ярлыков. ¦ Немає ярликів.
+Frise verticale ¦ Вертикальная лента ¦ Вертикальна стрічка
+Frise horizontale (défile) ¦ Горизонтальная лента (прокручивается) ¦ Горизонтальна стрічка (прокручується)
+Cartes en grille ¦ Карточки сеткой ¦ Картки сіткою
+Liste compacte ¦ Компактный список ¦ Компактний список
+jusqu’au… (facultatif) ¦ до… (необязательно) ¦ до… (необов’язково)
+Titre de l’étape ¦ Название этапа ¦ Назва етапу
+Couleur de l’étape ¦ Цвет этапа ¦ Колір етапу
+Ce qui s’est passé ce jour-là ¦ Что произошло в этот день ¦ Що сталося цього дня
+Aucun événement daté pour cette personne. ¦ Нет датированных событий для этого человека. ¦ Немає датованих подій для цієї людини.
+Étape ¦ Этап ¦ Етап
+Ancêtres trouvés (Sosa) ¦ Найденные предки (Sosa) ¦ Знайдені предки (Sosa)
+Ancêtres sans source ¦ Предки без источников ¦ Предки без джерел
+décès avant 1800 ¦ смерти до 1800 года ¦ смерті до 1800 року
+Pense-bête ¦ Памятка ¦ Нагадування
+Crée tes propres graphiques, sans rien programmer : avec ¦ Создавай свои графики без программирования: с помощью ¦ Створюй свої графіки без програмування: за допомогою
+tes propres chiffres ¦ твоих собственных чисел ¦ твоїх власних чисел
+＋ Nouveau widget ¦ ＋ Новый виджет ¦ ＋ Новий віджет
+Importer un widget reçu ¦ Импортировать полученный виджет ¦ Імпортувати отриманий віджет
+Un fichier « .lcnda-widget.json » envoyé par un proche : seul le modèle du widget est partagé, jamais les données. ¦ Файл «.lcnda-widget.json», присланный близким: передаётся только шаблон виджета, никогда не данные. ¦ Файл «.lcnda-widget.json», надісланий близькою людиною: передається лише шаблон віджета, ніколи не дані.
+sur le tableau de bord ¦ на панели управления ¦ на панелі керування
+↗ Ouvrir dans Graphiques ¦ ↗ Открыть в «Графиках» ¦ ↗ Відкрити в «Графіках»
+＋ Ajouter au tableau de bord ¦ ＋ Добавить на панель управления ¦ ＋ Додати на панель керування
+Widget supprimé. ¦ Виджет удалён. ¦ Віджет видалено.
+Mon widget ¦ Мой виджет ¦ Мій віджет
+Supprimer le widget ¦ Удалить виджет ¦ Видалити віджет
+Supprimer le widget « {name} » ? Il disparaît aussi du tableau de bord. ¦ Удалить виджет «{name}»? Он исчезнет и с панели управления. ¦ Видалити віджет «{name}»? Він зникне і з панелі керування.
+Supprimer le widget « {name} » ? Il disparaît aussi du tableau de bord et de tous les endroits où ce graphique est posé (fiches, enquêtes, mise en page…). ¦ Удалить виджет «{name}»? Он исчезнет и с панели управления, и из всех мест, где размещён этот график (карточки, расследования, вёрстка…). ¦ Видалити віджет «{name}»? Він зникне і з панелі керування, і з усіх місць, де розміщено цей графік (картки, розслідування, верстка…).
+« {name} » importé : il est dans Graphiques → « Mes graphiques ». ¦ «{name}» импортирован: он в «Графики → Мои графики». ¦ «{name}» імпортовано: він у «Графіки → Мої графіки».
+Widget « {name} » importé : ajoute-le au tableau de bord. ¦ Виджет «{name}» импортирован: добавь его на панель управления. ¦ Віджет «{name}» імпортовано: додай його на панель керування.
+📌 Le poser aussi sur… ¦ 📌 Разместить также на… ¦ 📌 Розмістити також на…
+(à l’enregistrement) ¦ (при сохранении) ¦ (під час збереження)
+Posé nulle part pour l’instant. ¦ Пока нигде не размещено. ¦ Поки що ніде не розміщено.
+La page d’une personne, une enquête… ¦ Страница человека, расследование… ¦ Сторінка людини, розслідування…
+Graphique posé : {name}. ¦ График размещён: {name}. ¦ Графік розміщено: {name}.
+Graphique retiré de cet endroit ¦ График убран из этого места ¦ Графік прибрано з цього місця
+L’ouvrir dans Graphiques ¦ Открыть его в «Графиках» ¦ Відкрити його в «Графіках»
+… et {n} autres (Listes → Graphiques et diagrammes) ¦ … и ещё {n} (Списки → Графики и диаграммы) ¦ … і ще {n} (Списки → Графіки та діаграми)
+Widget ajouté au tableau de bord. ¦ Виджет добавлен на панель управления. ¦ Віджет додано на панель керування.
+NOUVEAU WIDGET ¦ НОВЫЙ ВИДЖЕТ ¦ НОВИЙ ВІДЖЕТ
+NOUVEAU GRAPHIQUE ¦ НОВЫЙ ГРАФИК ¦ НОВИЙ ГРАФІК
+Par quoi commencer ? ¦ С чего начать? ¦ З чого почати?
+Partir de rien ¦ Начать с нуля ¦ Почати з нуля
+Partir d’un élément de l’app ¦ Начать с элемента приложения ¦ Почати з елемента застосунку
+N’importe quel écran devient un widget : une liste (fiche d’un village, recensements, rappels…), un diagramme, une statistique, une de tes listes, la fiche d’une personne, la carte, un outil des Réglages. ¦ Любой экран становится виджетом: список (карточка деревни, переписи, напоминания…), диаграмма, статистика, один из твоих списков, карточка человека, карта, инструмент из настроек. ¦ Будь-який екран стає віджетом: список (картка села, переписи, нагадування…), діаграма, статистика, один із твоїх списків, картка людини, мапа, інструмент із налаштувань.
+Créer ce widget ¦ Создать этот виджет ¦ Створити цей віджет
+Partir d’un widget de l’app ¦ Начать с виджета приложения ¦ Почати з віджета застосунку
+Partir d’un de mes widgets ¦ Начать с одного из моих виджетов ¦ Почати з одного з моїх віджетів
+Avec mes propres chiffres ¦ С моими собственными числами ¦ З моїми власними числами
+Un tableau à remplir (des noms et des chiffres, en une ou plusieurs séries), collé d’un tableur ou importé d’un fichier CSV. ¦ Таблица для заполнения (названия и числа, в одном или нескольких рядах), вставленная из электронной таблицы или импортированная из файла CSV. ¦ Таблиця для заповнення (назви й числа, в одній або кількох серіях), вставлена з електронної таблиці або імпортована з файлу CSV.
+Mes propres chiffres ¦ Мои собственные числа ¦ Мої власні числа
+Un diagramme ¦ Диаграмма ¦ Діаграма
+Hémicycle d’une assemblée, frise des membres d’un groupe, organigramme, flux, nuage de mots… (Mes diagrammes). ¦ Полукруг собрания, лента членов группы, организационная схема, потоки, облако слов… (Мои диаграммы). ¦ Півколо зібрання, стрічка членів групи, організаційна схема, потоки, хмара слів… (Мої діаграми).
+Partir de rien, avec les données de l’app ¦ Начать с нуля, с данными приложения ¦ Почати з нуля, з даними застосунку
+Un ou plusieurs nombres : combien de personnes, d’événements, de lieux… répondent à tes critères. ¦ Одно или несколько чисел: сколько людей, событий, мест… отвечают твоим критериям. ¦ Одне або кілька чисел: скільки людей, подій, місць… відповідають твоїм критеріям.
+Les premières lignes d’une liste, avec les colonnes et l’ordre que tu veux. ¦ Первые строки списка, с нужными тебе столбцами и порядком. ¦ Перші рядки списку, з потрібними тобі стовпцями та порядком.
+Partir d’une statistique de l’app ¦ Начать со статистики приложения ¦ Почати зі статистики застосунку
+Les mêmes chiffres que dans Graphiques → Statistiques, avec ton dessin (barres, camembert, courbe, mosaïque…), tes couleurs, et autant de critères que tu veux : métier, lieu et rayon en km, dates précises, mariage, nombre d’enfants, durée de vie, divorce, voyage… ¦ Те же числа, что в «Графики → Статистика», с твоим рисунком (столбцы, круговая, линия, мозаика…), твоими цветами и сколькими угодно критериями: профессия, место и радиус в км, точные даты, брак, число детей, продолжительность жизни, развод, поездка… ¦ Ті самі числа, що в «Графіки → Статистика», з твоїм малюнком (стовпці, кругова, лінія, мозаїка…), твоїми кольорами й скількома завгодно критеріями: професія, місце й радіус у км, точні дати, шлюб, кількість дітей, тривалість життя, розлучення, подорож…
+D’une statistique de l’app ¦ Из статистики приложения ¦ Зі статистики застосунку
+Partir d’un de mes widgets ou de mes graphiques ¦ Начать с одного из моих виджетов или графиков ¦ Почати з одного з моїх віджетів або графіків
+── ou des données de l’app ── ¦ ── или с данными приложения ── ¦ ── або з даними застосунку ──
+Listes de l’app ¦ Списки приложения ¦ Списки застосунку
+Aucun critère : toute la base. ¦ Без критериев: вся база. ¦ Без критеріїв: уся база.
+Toutes les lignes de cette liste de l’app. ¦ Все строки этого списка приложения. ¦ Усі рядки цього списку застосунку.
+(ce que montre cette partie, affichée dessous) ¦ (что показывает эта часть, отображается ниже) ¦ (що показує ця частина, показано нижче)
+Ex. : Les baptêmes de la paroisse, du plus ancien au plus récent ¦ Напр.: крещения прихода, от самого раннего к самому позднему ¦ Напр.: хрещення парафії, від найдавнішого до найпізнішого
+✨ Proposer une légende d’après les critères ¦ ✨ Предложить подпись по критериям ¦ ✨ Запропонувати підпис за критеріями
+Tableau vide : « ＋ Ligne » ou « 📋 Coller un tableau ». ¦ Таблица пуста: «＋ Строка» или «📋 Вставить таблицу». ¦ Таблиця порожня: «＋ Рядок» або «📋 Вставити таблицю».
+＋ Série (colonne de chiffres) ¦ ＋ Ряд (столбец чисел) ¦ ＋ Серія (стовпець чисел)
+Recopier les chiffres d’un graphique (à toi, un exemple, ou une statistique de l’app) pour les retoucher ¦ Скопировать числа из графика (твоего, примера или статистики приложения), чтобы их подправить ¦ Скопіювати числа з графіка (твого, прикладу або статистики застосунку), щоб їх підправити
+📋 Coller un tableau ¦ 📋 Вставить таблицу ¦ 📋 Вставити таблицю
+📊 Partir d’un graphique ¦ 📊 Начать с графика ¦ 📊 Почати з графіка
+🧾 Modifier les données ¦ 🧾 Изменить данные ¦ 🧾 Змінити дані
+Fichier trop gros (5 Mo au plus). ¦ Файл слишком большой (не более 5 МБ). ¦ Файл завеликий (не більше 5 МБ).
+Ligne retirée ¦ Строка убрана ¦ Рядок прибрано
+Tableau vidé ¦ Таблица очищена ¦ Таблицю очищено
+Remplacer le tableau ¦ Заменить таблицу ¦ Замінити таблицю
+La première ligne ¦ Первая строка ¦ Перший рядок
+à deviner ¦ определить автоматически ¦ визначити автоматично
+donne les titres (noms des séries) ¦ задаёт заголовки (названия рядов) ¦ задає заголовки (назви серій)
+est une ligne de chiffres ¦ — это строка чисел ¦ — це рядок чисел
+Aucun graphique disponible. ¦ Нет доступных графиков. ¦ Немає доступних графіків.
+Recopier ces chiffres ¦ Скопировать эти числа ¦ Скопіювати ці числа
+Aucun chiffre pour ce graphique. ¦ Для этого графика нет чисел. ¦ Для цього графіка немає чисел.
+=valeur recopiée ¦ скопированное значение|скопированных значения|скопированных значений ¦ скопійоване значення|скопійовані значення|скопійованих значень
+=série ¦ ряд|ряда|рядов ¦ серія|серії|серій
+Série {num} ¦ Ряд {num} ¦ Серія {num}
+Nom de la série {num} ¦ Название ряда {num} ¦ Назва серії {num}
+Tableau importé ({rows}) ¦ Таблица импортирована ({rows}) ¦ Таблицю імпортовано ({rows})
+Série « {name} » retirée ¦ Ряд «{name}» убран ¦ Серію «{name}» прибрано
+Chiffres repris du tableur ({rows}) ¦ Числа взяты из электронной таблицы ({rows}) ¦ Числа взято з електронної таблиці ({rows})
+Tableau collé ({rows}) ¦ Таблица вставлена ({rows}) ¦ Таблицю вставлено ({rows})
+Retirer cette série ¦ Убрать этот ряд ¦ Прибрати цю серію
+(type masqué) ¦ (тип скрыт) ¦ (тип приховано)
+Dessins simples ¦ Простые рисунки ¦ Прості малюнки
+Sépia (photos anciennes) ¦ Сепия (старые фото) ¦ Сепія (старі фото)
+Une couleur en dégradé ¦ Один цвет с градиентом ¦ Один колір із градієнтом
+Couleur du dégradé ¦ Цвет градиента ¦ Колір градієнта
+Les valeurs apparaissent ici après le calcul de l’aperçu. ¦ Значения появятся здесь после расчёта предпросмотра. ¦ Значення з’являться тут після обчислення попереднього перегляду.
+Valeurs les plus fréquentes ¦ Самые частые значения ¦ Найчастіші значення
+Écrans indisponibles. ¦ Экраны недоступны. ¦ Екрани недоступні.
+(date précise ou année, facultatif) ¦ (точная дата или год, необязательно) ¦ (точна дата або рік, необов’язково)
+Nés à partir du ¦ Родившиеся начиная с ¦ Народжені починаючи з
+12 mars 1750 ou 1700 ¦ 12 mars 1750 или 1700 ¦ 12 mars 1750 або 1700
+jusqu’au ¦ по ¦ по
+31/12/1850 ou 1900 ¦ 31/12/1850 или 1900 ¦ 31/12/1850 або 1900
+Cette statistique garde ses seuls filtres (années, sexe, lignée). ¦ У этой статистики остаются только её собственные фильтры (годы, пол, линия). ¦ Ця статистика зберігає лише власні фільтри (роки, стать, лінія).
+ne pas montrer les valeurs vides ¦ не показывать пустые значения ¦ не показувати порожні значення
+Libellé ¦ Подпись ¦ Підпис
+retirer ce chiffre ¦ убрать это число ¦ прибрати це число
+ordre de la liste ¦ порядок списка ¦ порядок списку
+croissant ¦ по возрастанию ¦ за зростанням
+décroissant ¦ по убыванию ¦ за спаданням
+Compter par ¦ Считать по ¦ Рахувати за
+Regrouper ¦ Группировать ¦ Групувати
+par valeur ¦ по значению ¦ за значенням
+par année ¦ по годам ¦ за роками
+par décennie ¦ по десятилетиям ¦ за десятиліттями
+par tranche (de … ans, ou de … pour un nombre) ¦ по интервалам (по … лет или по … для числа) ¦ за інтервалами (по … років або по … для числа)
+par siècle ¦ по векам ¦ за століттями
+par mois de l’année ¦ по месяцам года ¦ за місяцями року
+Tranche de ¦ Интервал ¦ Інтервал
+Seulement du ¦ Только с ¦ Лише з
+12 mars 1750 ou 1750 ¦ 12 mars 1750 или 1750 ¦ 12 mars 1750 або 1750
+au ¦ по ¦ по
+31/12/1800 ou 1800 ¦ 31/12/1800 или 1800 ¦ 31/12/1800 або 1800
+ne pas compter les cases vides ¦ не учитывать пустые ячейки ¦ не враховувати порожні клітинки
+Les étapes viennent ¦ Этапы берутся ¦ Етапи беруться
+écrites à la main ¦ вписанные вручную ¦ вписані вручну
+des événements d’une personne ¦ из событий человека ¦ з подій людини
+Présentation ¦ Оформление ¦ Оформлення
+par date ¦ по дате ¦ за датою
+dans l’ordre écrit ¦ в записанном порядке ¦ у записаному порядку
+Hauteur de la carte ¦ Высота карты ¦ Висота мапи
+Carte du parcours ¦ Карта маршрута ¦ Мапа маршруту
+« Jour 1, Jour 2… » ¦ «День 1, День 2…» ¦ «День 1, День 2…»
+Textes des étapes ¦ Тексты этапов ¦ Тексти етапів
+Seulement les événements avec un lieu ¦ Только события с местом ¦ Лише події з місцем
+✎ Modifier ce diagramme ¦ ✎ Изменить эту диаграмму ¦ ✎ Змінити цю діаграму
+Le widget montre toujours la dernière version du diagramme (Graphiques → Mes diagrammes). ¦ Виджет всегда показывает последнюю версию диаграммы (Графики → Мои диаграммы). ¦ Віджет завжди показує останню версію діаграми (Графіки → Мої діаграми).
+Un pense-bête, une citation… Les émojis marchent 🌳 ¦ Памятка, цитата… Эмодзи работают 🌳 ¦ Нагадування, цитата… Емодзі працюють 🌳
+Un site internet… ¦ Сайт… ¦ Сайт…
+Texte du bouton ¦ Текст кнопки ¦ Текст кнопки
+Sous-titre de cette partie ¦ Подзаголовок этой части ¦ Підзаголовок цієї частини
+Ex. : À faire, Mes chiffres, Liens utiles ¦ Напр.: Сделать, Мои числа, Полезные ссылки ¦ Напр.: Зробити, Мої числа, Корисні посилання
+ÉDITEUR DE GRAPHIQUES ¦ РЕДАКТОР ГРАФИКОВ ¦ РЕДАКТОР ГРАФІКІВ
+ÉDITEUR DE WIDGETS ¦ РЕДАКТОР ВИДЖЕТОВ ¦ РЕДАКТОР ВІДЖЕТІВ
+Nouveau widget ¦ Новый виджет ¦ Новий віджет
+Règle ton widget à gauche ; l’aperçu se met à jour à droite. ¦ Настрой виджет слева; предпросмотр обновляется справа. ¦ Налаштуй віджет ліворуч; попередній перегляд оновлюється праворуч.
+1. Le widget ¦ 1. Виджет ¦ 1. Віджет
+Mes ancêtres bretons ¦ Мои бретонские предки ¦ Мої бретонські предки
+Texte en haut du widget ¦ Текст вверху виджета ¦ Текст угорі віджета
+Une phrase pour expliquer ce widget ¦ Фраза, объясняющая этот виджет ¦ Речення, що пояснює цей віджет
+Où l’afficher ¦ Где показывать ¦ Де показувати
+Enregistrer et ouvrir dans Graphiques ¦ Сохранить и открыть в «Графиках» ¦ Зберегти й відкрити в «Графіках»
+Enregistrer et ajouter au tableau de bord ¦ Сохранить и добавить на панель управления ¦ Зберегти й додати на панель керування
+la courbe ¦ линия ¦ лінія
+Aucune valeur. ¦ Нет значений. ¦ Немає значень.
+remettre les couleurs de la palette ¦ вернуть цвета палитры ¦ повернути кольори палітри
+Donne un titre au widget. ¦ Дай виджету название. ¦ Дай віджету назву.
+Widget enregistré : ajoute-le depuis la colonne de gauche du tableau de bord. ¦ Виджет сохранён: добавь его из левой колонки панели управления. ¦ Віджет збережено: додай його з лівої колонки панелі керування.
+Graphique enregistré : il est dans Graphiques → Statistiques, rubrique « Mes graphiques ». ¦ График сохранён: он в «Графики → Статистика», раздел «Мои графики». ¦ Графік збережено: він у «Графіки → Статистика», розділ «Мої графіки».
+ce n’est pas un widget LCNDA. ¦ это не виджет LCNDA. ¦ це не віджет LCNDA.
+Liste absente de ta base ({name}) : remplacée par « Personnes ». ¦ Списка нет в твоей базе ({name}): заменён на «Люди». ¦ Списку немає в твоїй базі ({name}): замінено на «Люди».
+Widget importé ¦ Виджет импортирован ¦ Віджет імпортовано
+Ce widget n’existe plus. ¦ Этого виджета больше нет. ¦ Цього віджета більше немає.
+Statistiques de l’app ¦ Статистика приложения ¦ Статистика застосунку
+Source introuvable (graphique supprimé ?). ¦ Источник не найден (график удалён?). ¦ Джерело не знайдено (графік видалено?).
+MES GRAPHIQUES ¦ МОИ ГРАФИКИ ¦ МОЇ ГРАФІКИ
+Graphique introuvable ¦ График не найден ¦ Графік не знайдено
+Il a peut-être été supprimé. ¦ Возможно, он был удалён. ¦ Можливо, його було видалено.
+Image PNG ou JPG, PDF, impression, tableau CSV ¦ Изображение PNG или JPG, PDF, печать, таблица CSV ¦ Зображення PNG або JPG, PDF, друк, таблиця CSV
+léger, pour un courriel ¦ лёгкий, для письма ¦ легкий, для листа
+les chiffres, pour un tableur ¦ числа, для электронной таблицы ¦ числа, для електронної таблиці
+Fenêtre d’impression bloquée. ¦ Окно печати заблокировано. ¦ Вікно друку заблоковано.
+Une photo de tes médias, une nouvelle chaque jour. ¦ Фото из твоих медиафайлов, каждый день новое. ¦ Фото з твоїх медіафайлів, щодня нове.
+Compte à rebours ¦ Обратный отсчёт ¦ Зворотний відлік
+Les jours qui restent avant une date : la cousinade, un anniversaire, un voyage aux archives… ¦ Дни, оставшиеся до даты: встреча родни, день рождения, поездка в архив… ¦ Дні, що лишилися до дати: зустріч родини, день народження, поїздка до архіву…
+Le widget n’a pas pu être fabriqué. ¦ Не удалось создать виджет. ¦ Не вдалося створити віджет.
+Widget prêt : {file}. Ouvre-le d’un double-clic et garde l’onglet ouvert (ou épingle-le) : il change tout seul chaque jour. ¦ Виджет готов: {file}. Открой его двойным щелчком и держи вкладку открытой (или закрепи её): он сам меняется каждый день. ¦ Віджет готовий: {file}. Відкрий його подвійним кліком і тримай вкладку відкритою (або закріпи її): він сам змінюється щодня.
+La cousinade ¦ Встреча родни ¦ Зустріч родини
+ton ordinateur ¦ твой компьютер ¦ твій комп’ютер
+Toujours au-dessus ¦ Всегда поверх ¦ Завжди згори
+× Retirer du bureau ¦ × Убрать с рабочего стола ¦ × Прибрати з робочого столу
+⤓ Télécharger le widget (.html) ¦ ⤓ Скачать виджет (.html) ¦ ⤓ Завантажити віджет (.html)
+Démarrer avec l’ordinateur (les widgets s’ouvrent seuls, sans la grande fenêtre) ¦ Запускать вместе с компьютером (виджеты открываются сами, без большого окна) ¦ Запускати разом із комп’ютером (віджети відкриваються самі, без великого вікна)
+⛔ Je ne comprends pas cette date : écris par exemple « 14 juillet 2027 » ou « 14/07/2027 ». ¦ ⛔ Не понимаю эту дату: напиши, например, «14 juillet 2027» или «14/07/2027». ¦ ⛔ Не розумію цю дату: напиши, наприклад, «14 juillet 2027» або «14/07/2027».
+⛔ Donne la date du compte à rebours. ¦ ⛔ Укажи дату обратного отсчёта. ¦ ⛔ Вкажи дату зворотного відліку.
+Donne la date. ¦ Укажи дату. ¦ Вкажи дату.
+Le widget n’a pas pu s’ouvrir. ¦ Не удалось открыть виджет. ¦ Не вдалося відкрити віджет.
+Retiré du bureau. ¦ Убрано с рабочего стола. ¦ Прибрано з робочого столу.
+« {name} » retiré du bureau ¦ «{name}» убран с рабочего стола ¦ «{name}» прибрано з робочого столу
+Les widgets démarreront avec l’ordinateur. ¦ Виджеты будут запускаться вместе с компьютером. ¦ Віджети запускатимуться разом із комп’ютером.
+Les widgets ne démarreront plus avec l’ordinateur. ¦ Виджеты больше не будут запускаться вместе с компьютером. ¦ Віджети більше не запускатимуться разом із комп’ютером.
+🪟 Mettre sur le bureau (« {name} », une petite fenêtre à part) ¦ 🪟 Поместить на рабочий стол («{name}», отдельное маленькое окно) ¦ 🪟 Розмістити на робочому столі («{name}», окреме маленьке вікно)
+🪟 Mettre sur le bureau (« {name} » : un fichier .html autonome dans un navigateur) ¦ 🪟 Поместить на рабочий стол («{name}»: самостоятельный файл .html в браузере) ¦ 🪟 Розмістити на робочому столі («{name}»: самостійний файл .html у браузері)
+Retirer {name} ¦ Убрать: {name} ¦ Прибрати: {name}
+Aucune personne ¦ Нет людей ¦ Немає людей
+Flèches ¦ Стрелки ¦ Стрілки
+▶ Carte de la vie animée ¦ ▶ Анимированная карта жизни ¦ ▶ Анімована мапа життя
+Ajoute une personne. ¦ Добавь человека. ¦ Додай людину.
+Aucun lieu daté. ¦ Нет датированных мест. ¦ Немає датованих місць.
+Comparer avec ¦ Сравнить с ¦ Порівняти з
+Opacité ¦ Непрозрачность ¦ Непрозорість
+Année de ¦ Год от ¦ Рік від
+Âge de ¦ Возраст от ¦ Вік від
+Famille / groupe ¦ Семья / группа ¦ Родина / група
+Fond ¦ Подложка ¦ Підкладка
+Recentrer ¦ Центрировать заново ¦ Відцентрувати знову
+carte|sépulture ¦ захоронения ¦ поховання
+carte|évt ¦ события ¦ події
+contributeurs OpenStreetMap ¦ участники OpenStreetMap ¦ учасники OpenStreetMap
+· connexion requise pour les tuiles ¦ · для плиток нужно подключение ¦ · для плиток потрібне з’єднання
+connexion requise pour les tuiles ¦ для плиток нужно подключение ¦ для плиток потрібне з’єднання
+Aucun événement dans cette zone ¦ В этой зоне нет событий ¦ У цій зоні немає подій
+⤢ Voir tout ¦ ⤢ Показать всё ¦ ⤢ Показати все
+Lieu non précisé ¦ Место не уточнено ¦ Місце не уточнено
+Voir la tombe ¦ Посмотреть могилу ¦ Переглянути могилу
+Événement non rattaché ¦ Непривязанное событие ¦ Неприв’язана подія
+🚢 voyage ¦ 🚢 поездка ¦ 🚢 подорож
+👶 placement ¦ 👶 передача на воспитание ¦ 👶 передача на виховання
+🎖 armée ¦ 🎖 армия ¦ 🎖 армія
+💞 conjoint ¦ 💞 супруг(а) ¦ 💞 чоловік / дружина
+👶 enfant ¦ 👶 ребёнок ¦ 👶 дитина
+🏫 école ¦ 🏫 школа ¦ 🏫 школа
+École ¦ Школа ¦ Школа
+Les étapes ¦ Этапы ¦ Етапи
+📍 Lieux sans position ¦ 📍 Места без координат ¦ 📍 Місця без координат
+🗓 Sans lieu ¦ 🗓 Без места ¦ 🗓 Без місця
+CARTE · LA VIE D’UNE PERSONNE ¦ КАРТА · ЖИЗНЬ ЧЕЛОВЕКА ¦ МАПА · ЖИТТЯ ЛЮДИНИ
+Carte de sa vie ¦ Карта жизни ¦ Мапа життя
+👪 Avec la famille (le couple, les enfants) ¦ 👪 С семьёй (пара, дети) ¦ 👪 З родиною (пара, діти)
+Les étapes l’une après l’autre, en vidéo (MP4 ou WebM) ¦ Этапы один за другим, в виде видео (MP4 или WebM) ¦ Етапи один за одним, у вигляді відео (MP4 або WebM)
+Ce navigateur ne sait pas enregistrer de vidéo ¦ Этот браузер не умеет записывать видео ¦ Цей браузер не вміє записувати відео
+🎬 Exporter en vidéo ¦ 🎬 Экспорт в видео ¦ 🎬 Експорт у відео
+Chargement de la carte… ¦ Загрузка карты… ¦ Завантаження мапи…
+La carte de sa vie se remplit avec ses événements, ses résidences, ses recensements, ses voyages… ¦ Карта жизни заполняется событиями, местами жительства, переписями, поездками… ¦ Мапа життя заповнюється подіями, місцями проживання, переписами, подорожами…
+🗺 La vie de {name} ¦ 🗺 Жизнь: {name} ¦ 🗺 Життя: {name}
+La vie de {name} ¦ Жизнь: {name} ¦ Життя: {name}
+Aucun lieu dans cette vie ¦ В этой жизни нет мест ¦ У цьому житті немає місць
+Ajoute un lieu à ses événements (naissance, mariage, résidence…) pour voir sa vie sur la carte. ¦ Добавь место к событиям (рождение, брак, место жительства…), чтобы увидеть жизнь на карте. ¦ Додай місце до подій (народження, шлюб, місце проживання…), щоб побачити життя на мапі.
+Le moteur vidéo n’est pas chargé. ¦ Видеодвижок не загружен. ¦ Відеорушій не завантажено.
+Durée d’une étape ¦ Длительность этапа ¦ Тривалість етапу
+aucune étape avec un lieu. ¦ нет ни одного этапа с местом. ¦ немає жодного етапу з місцем.
+🎬 Vidéo {file} ¦ 🎬 Видео {file} ¦ 🎬 Відео {file}
+les étapes animées ¦ анимированные этапы ¦ анімовані етапи
+⤓ Exporter la vidéo en {file} ¦ ⤓ Экспортировать видео в {file} ¦ ⤓ Експортувати відео в {file}
+Vidéo exportée, mais pas rangée dans les médias : {err} ¦ Видео экспортировано, но не сохранено в медиафайлах: {err} ¦ Відео експортовано, але не збережено в медіафайлах: {err}
+✓ Vidéo exportée ({file}). ¦ ✓ Видео экспортировано ({file}). ¦ ✓ Відео експортовано ({file}).
+Montrer la même vie, étape par étape, avec la lecture ▶ et la vidéo ¦ Показать ту же жизнь шаг за шагом, с воспроизведением ▶ и видео ¦ Показати те саме життя крок за кроком, з відтворенням ▶ і відео
+Comparer deux époques ¦ Сравнить две эпохи ¦ Порівняти дві епохи
+Fermer la comparaison ¦ Закрыть сравнение ¦ Закрити порівняння
+Glisse le trait (← →) ¦ Перетащи линию (← →) ¦ Перетягни лінію (← →)
+Transparence ¦ Прозрачность ¦ Прозорість
+Deux fonds sur la même zone : un trait à glisser, côte à côte ou en transparence ¦ Две подложки на одной зоне: линия для перетаскивания, рядом или с прозрачностью ¦ Дві підкладки на одній зоні: лінія для перетягування, поруч або з прозорістю
+Fond des départements introuvable. ¦ Подложка департаментов не найдена. ¦ Підкладку департаментів не знайдено.
+supprimée (partagée entre ses voisines) ¦ упразднена (разделена между соседними) ¦ скасована (розподілена між сусідніми)
+fusionnée ¦ объединена ¦ об’єднана
+fusionnée (fusion-association) ¦ объединена (с сохранением статуса ассоциированной) ¦ об’єднана (зі збереженням статусу асоційованої)
+disparue ¦ исчезла ¦ зникла
+renommée ¦ переименована ¦ перейменована
+renommée « {name} » le {date} ¦ переименована в «{name}» {date} ¦ перейменована на «{name}» {date}
+{what} le {date} ¦ {what} {date} ¦ {what} {date}
+dans {name} ¦ в {name} ¦ у {name}
+(devenue commune {name}) ¦ (стала коммуной {name}) ¦ (стала комуною {name})
+Aujourd’hui : <b>{name}</b> ¦ Сегодня: <b>{name}</b> ¦ Сьогодні: <b>{name}</b>
+Rétablie le {date}. ¦ Восстановлена {date}. ¦ Відновлена {date}.
+Position approximative : le centre de la commune d’aujourd’hui. ¦ Примерное положение: центр сегодняшней коммуны. ¦ Приблизне положення: центр сьогоднішньої комуни.
+Source : INSEE, Code officiel géographique (depuis 1943). ¦ Источник: INSEE, Code officiel géographique (с 1943 года). ¦ Джерело: INSEE, Code officiel géographique (з 1943 року).
+{name}, commune renommée ¦ {name}, переименованная коммуна ¦ {name}, перейменована комуна
+{name}, commune disparue ¦ {name}, исчезнувшая коммуна ¦ {name}, зникла комуна
+{name} — renommée en {year} ¦ {name} — переименована в {year} году ¦ {name} — перейменована в {year} році
+{name} — disparue en {year} ¦ {name} — исчезла в {year} году ¦ {name} — зникла в {year} році
+🏛 Frontières ▾ ¦ 🏛 Границы ▾ ¦ 🏛 Кордони ▾
+Provinces, départements de 1790, communes disparues ¦ Провинции, департаменты 1790 года, исчезнувшие коммуны ¦ Провінції, департаменти 1790 року, зниклі комуни
+Tracé approximatif, d’après les départements d’aujourd’hui ¦ Примерные границы, по сегодняшним департаментам ¦ Приблизні межі, за сьогоднішніми департаментами
+Frontières anciennes ¦ Старые границы ¦ Старі кордони
+Provinces d’Ancien Régime (≈ 1789) ¦ Провинции Старого порядка (≈ 1789) ¦ Провінції Старого порядку (≈ 1789)
+Approximatif : d’après les départements d’aujourd’hui. ¦ Примерно: по сегодняшним департаментам. ¦ Приблизно: за сьогоднішніми департаментами.
+Départements de 1790 ¦ Департаменты 1790 года ¦ Департаменти 1790 року
+Les 83 départements, noms d’alors ; approximatif. ¦ 83 департамента, тогдашние названия; примерно. ¦ 83 департаменти, тодішні назви; приблизно.
+Communes disparues ou fusionnées ¦ Исчезнувшие или объединённые коммуны ¦ Зниклі або об’єднані комуни
+🏚 Communes disparues ou fusionnées ¦ 🏚 Исчезнувшие или объединённые коммуны ¦ 🏚 Зниклі або об’єднані комуни
+Depuis 1943 (INSEE). Zoome sur une région. ¦ С 1943 года (INSEE). Приблизь регион. ¦ З 1943 року (INSEE). Наблизь регіон.
+Avec les communes renommées ¦ С переименованными коммунами ¦ З перейменованими комунами
+Les communes disparues se téléchargent une fois : ¦ Исчезнувшие коммуны загружаются один раз: ¦ Зниклі комуни завантажуються один раз:
+Réglages → Frontières anciennes ↗ ¦ Настройки → Старые границы ↗ ¦ Налаштування → Старі кордони ↗
+Pas encore téléchargé ¦ Ещё не загружено ¦ Ще не завантажено
+Téléchargé ¦ Загружено ¦ Завантажено
+Installé ¦ Установлено ¦ Встановлено
+Pas installé ¦ Не установлено ¦ Не встановлено
+=commune disparue ¦ исчезнувшая коммуна|исчезнувшие коммуны|исчезнувших коммун ¦ зникла комуна|зниклі комуни|зниклих комун
+=commune renommée ¦ переименованная коммуна|переименованные коммуны|переименованных коммун ¦ перейменована комуна|перейменовані комуни|перейменованих комун
+=placée sur la carte ¦ размещённая на карте|размещённые на карте|размещённых на карте ¦ розміщена на мапі|розміщені на мапі|розміщених на мапі
+L’historique officiel des communes de l’INSEE (depuis 1943) : chaque commune disparue avec sa date et sa commune d’aujourd’hui. Livré avec l’app (5,5 Mo, Licence Ouverte 2.0 de l’INSEE) : installé tout seul, sans Internet. Les anciens noms aident aussi le menu de choix des lieux (« anc. « … » »). ¦ Официальная история коммун INSEE (с 1943 года): каждая исчезнувшая коммуна с датой и сегодняшней коммуной. Поставляется с приложением (5,5 МБ, Licence Ouverte 2.0 INSEE): устанавливается само, без интернета. Старые названия помогают и в меню выбора мест («anc. «…»»). ¦ Офіційна історія комун INSEE (з 1943 року): кожна зникла комуна з датою та сьогоднішньою комуною. Постачається із застосунком (5,5 МБ, Licence Ouverte 2.0 INSEE): встановлюється саме, без інтернету. Старі назви допомагають і в меню вибору місць («anc. «…»»).
+⤓ Télécharger de nouveau (mise à jour) ¦ ⤓ Загрузить заново (обновление) ¦ ⤓ Завантажити знову (оновлення)
+🗑 Retirer ¦ 🗑 Убрать ¦ 🗑 Прибрати
+⤓ Installer les frontières anciennes ¦ ⤓ Установить старые границы ¦ ⤓ Встановити старі кордони
+(taille…) ¦ (размер…) ¦ (розмір…)
+dossier des données ¦ папка данных ¦ тека даних
+Rangé dans le {name}, commun à toutes tes généalogies. ¦ Хранится в: {name}, общая для всех твоих генеалогий. ¦ Зберігається в: {name}, спільна для всіх твоїх генеалогій.
+Téléchargement et vérification… ¦ Загрузка и проверка… ¦ Завантаження й перевірка…
+Frontières anciennes retirées ¦ Старые границы убраны ¦ Старі кордони прибрано
+pas d’Internet ¦ нет интернета ¦ немає інтернету
+Adresse de téléchargement injoignable pour l’instant ({err}). ¦ Адрес загрузки сейчас недоступен ({err}). ¦ Адреса завантаження зараз недоступна ({err}).
+✓ Frontières anciennes installées : {n}. ¦ ✓ Старые границы установлены: {n}. ¦ ✓ Старі кордони встановлено: {n}.
+Départ, voyage ¦ Отъезд, поездка ¦ Від’їзд, подорож
+Tous les autres ¦ Все остальные ¦ Усі інші
+Couvert ¦ Пасмурно ¦ Хмарно
+Pluie toute la journée ¦ Дождь весь день ¦ Дощ увесь день
+Pluie faible ¦ Слабый дождь ¦ Слабкий дощ
+Matin de brouillard glacé ¦ Утро с ледяным туманом ¦ Ранок із крижаним туманом
+Brouillard le matin ¦ Туман утром ¦ Туман зранку
+Il faisait très froid ¦ Было очень холодно ¦ Було дуже холодно
+Grand soleil et chaleur ¦ Яркое солнце и жара ¦ Яскраве сонце й спека
+Gris et frais ¦ Серо и прохладно ¦ Сіро й прохолодно
+Nuages et éclaircies ¦ Облака и прояснения ¦ Хмари та прояснення
+Froid mais ensoleillé ¦ Холодно, но солнечно ¦ Холодно, але сонячно
+Beau temps ¦ Хорошая погода ¦ Гарна погода
+Neige ¦ Снег ¦ Сніг
+Orage ¦ Гроза ¦ Гроза
+Mesuré ¦ Измерено ¦ Виміряно
+Station à moins de 15 km (et moins de 150 m d’écart d’altitude) ¦ Станция ближе 15 км (и разница высот меньше 150 м) ¦ Станція ближче 15 км (і різниця висот менше 150 м)
+Station à {n} km ¦ Станция в {n} км ¦ Станція за {n} км
+Station entre 15 et 40 km : indicatif (la pluie change vite d’un village à l’autre) ¦ Станция в 15–40 км: ориентировочно (дождь быстро меняется от деревни к деревне) ¦ Станція за 15–40 км: орієнтовно (дощ швидко змінюється від села до села)
+Estimé (carreau ≈ 30 km) ¦ Оценка (квадрат ≈ 30 км) ¦ Оцінка (квадрат ≈ 30 км)
+Réanalyse ERA5 : aucune station à moins de 40 km ¦ Реанализ ERA5: нет станций ближе 40 км ¦ Реаналіз ERA5: немає станцій ближче 40 км
+Reconstitution grossière (≈ 100 km) ¦ Грубая реконструкция (≈ 100 км) ¦ Груба реконструкція (≈ 100 км)
+Réanalyse 20CR (1836–1939) : une idée du temps, pas une mesure ¦ Реанализ 20CR (1836–1939): представление о погоде, а не измерение ¦ Реаналіз 20CR (1836–1939): уявлення про погоду, а не вимірювання
+Les données météo ne sont pas installées. ¦ Данные о погоде не установлены. ¦ Дані про погоду не встановлено.
+Le lieu n’a pas de coordonnées : place-le sur la carte pour avoir sa météo. ¦ У места нет координат: размести его на карте, чтобы получить погоду. ¦ Місце не має координат: розмісти його на мапі, щоб отримати погоду.
+La date n’est pas connue au jour près. ¦ Дата неизвестна с точностью до дня. ¦ Дата невідома з точністю до дня.
+Pas de météo pour ce lieu : les données installées couvrent la France, la Belgique, la Suisse et le Luxembourg (le pack Europe ajoute le reste). ¦ Для этого места нет погоды: установленные данные охватывают Францию, Бельгию, Швейцарию и Люксембург (пакет «Европа» добавляет остальное). ¦ Для цього місця немає погоди: встановлені дані охоплюють Францію, Бельгію, Швейцарію та Люксембург (пакет «Європа» додає решту).
+Pas de relevé connu près d’ici avant {year} (première station : {name}). ¦ Рядом нет известных наблюдений до {year} года (первая станция: {name}). ¦ Поблизу немає відомих спостережень до {year} року (перша станція: {name}).
+Pas de relevé connu près d’ici avant {year}. ¦ Рядом нет известных наблюдений до {year} года. ¦ Поблизу немає відомих спостережень до {year} року.
+Cliquer pour le détail ¦ Нажми, чтобы увидеть подробности ¦ Натисни, щоб побачити подробиці
+À propos des données ¦ О данных ¦ Про дані
+🙈 Météo masquée pour cet événement ¦ 🙈 Погода скрыта для этого события ¦ 🙈 Погоду приховано для цієї події
+🙈 Météo masquée pour cette personne ¦ 🙈 Погода скрыта для этого человека ¦ 🙈 Погоду приховано для цієї людини
+{what} (la retrouver : Réglages → 🌦 Météo d’autrefois) ¦ {what} (где найти: Настройки → 🌦 Погода прошлого) ¦ {what} (де знайти: Налаштування → 🌦 Погода минулого)
+Ton lieu ¦ Твоё место ¦ Твоє місце
+(carte du relief) ¦ (карта рельефа) ¦ (мапа рельєфу)
+Fiabilité ¦ Надёжность ¦ Надійність
+3 jours avant · 3 jours après ¦ 3 дня до · 3 дня после ¦ 3 дні до · 3 дні після
+Tout le détail… ¦ Все подробности… ¦ Усі подробиці…
+⛰ Altitude du lieu ¦ ⛰ Высота места ¦ ⛰ Висота місця
+Lecture des données météo… ¦ Чтение данных о погоде… ¦ Читання даних про погоду…
+Météo ¦ Погода ¦ Погода
+🌦 MÉTÉO D’AUTREFOIS ¦ 🌦 ПОГОДА ПРОШЛОГО ¦ 🌦 ПОГОДА МИНУЛОГО
+Le lieu, la station et le carreau ¦ Место, станция и квадрат ¦ Місце, станція та квадрат
+↺ Altitude remise à celle de la carte ¦ ↺ Высота возвращена к значению с карты ¦ ↺ Висоту повернуто до значення з мапи
+⛰ Altitude enregistrée : {n} ¦ ⛰ Высота сохранена: {n} ¦ ⛰ Висоту збережено: {n}
+⛰ LIEU ¦ ⛰ МЕСТО ¦ ⛰ МІСЦЕ
+Altitude de {name} ¦ Высота: {name} ¦ Висота: {name}
+ce lieu ¦ это место ¦ це місце
+Ce qu’elle donne ¦ Что они дают ¦ Що вони дають
+Licence et mention ¦ Лицензия и упоминание ¦ Ліцензія та згадка
+Une météo ancienne reste une estimation : elle aide à imaginer la journée, elle ne remplace pas ce que dit l’acte ou un journal de l’époque. ¦ Старая погода — это всегда оценка: она помогает представить день, но не заменяет того, что сказано в записи акта или в газете того времени. ¦ Стара погода — це завжди оцінка: вона допомагає уявити день, але не замінює того, що сказано в актовому записі чи в газеті того часу.
+Rien n’est envoyé sur Internet : toutes ces données sont dans l’app ou dans les packs importés. Les règles de fiabilité : station à moins de 15 km et moins de 150 m d’écart d’altitude → « Mesuré » ; de 15 à 40 km → « Station à … km » ; sinon la réanalyse ERA5 (1940 →) → « Estimé » ; de 1836 à 1939 la reconstitution 20CR → « Reconstitution grossière ». ¦ Ничего не отправляется в интернет: все эти данные находятся в приложении или в импортированных пакетах. Правила надёжности: станция ближе 15 км и разница высот меньше 150 м → «Измерено»; от 15 до 40 км → «Станция в … км»; иначе реанализ ERA5 (с 1940) → «Оценка»; с 1836 по 1939 реконструкция 20CR → «Грубая реконструкция». ¦ Нічого не надсилається в інтернет: усі ці дані є в застосунку або в імпортованих пакетах. Правила надійності: станція ближче 15 км і різниця висот менше 150 м → «Виміряно»; від 15 до 40 км → «Станція за … км»; інакше реаналіз ERA5 (з 1940) → «Оцінка»; з 1836 по 1939 реконструкція 20CR → «Груба реконструкція».
+Comment les obtenir ¦ Как их получить ¦ Як їх отримати
+Comment l’obtenir ¦ Как его получить ¦ Як його отримати
+(avant 1940, la météo montre la journée) ¦ (до 1940 года погода показывается за весь день) ¦ (до 1940 року погода показується за весь день)
+Socle inclus ¦ Базовый набор включён ¦ Базовий набір включено
+Pack complet ¦ Полный пакет ¦ Повний пакет
+Pack Europe ¦ Пакет «Европа» ¦ Пакет «Європа»
+Pack ¦ Пакет ¦ Пакет
+1836 à 2025 · France, Belgique, Suisse, Luxembourg · ≈ 300 stations chaque jour, 4 heures par jour depuis 1940 · ≈ 550 Mo ¦ С 1836 по 2025 · Франция, Бельгия, Швейцария, Люксембург · ≈ 300 станций каждый день, 4 часа в день с 1940 года · ≈ 550 МБ ¦ З 1836 по 2025 · Франція, Бельгія, Швейцарія, Люксембург · ≈ 300 станцій щодня, 4 години на день з 1940 року · ≈ 550 МБ
+Toutes les stations (≈ 14 700), heure par heure depuis 1950 · ≈ 3 Go ¦ Все станции (≈ 14 700), по часам с 1950 года · ≈ 3 ГБ ¦ Усі станції (≈ 14 700), щогодини з 1950 року · ≈ 3 ГБ
+🗑 Supprimer le pack ¦ 🗑 Удалить пакет ¦ 🗑 Видалити пакет
+⤒ Importer le fichier… ¦ ⤒ Импортировать файл… ¦ ⤒ Імпортувати файл…
+🗑 {name} supprimé ¦ 🗑 {name} удалён ¦ 🗑 {name} видалено
+Le temps qu’il faisait le jour de chaque événement, sans Internet. ¦ Погода в день каждого события, без интернета. ¦ Погода в день кожної події, без інтернету.
+Météo sur les fiches ¦ Погода на карточках ¦ Погода на картках
+Au survol ¦ При наведении ¦ При наведенні
+Au clic sur la pastille ¦ При нажатии на значок ¦ При натисканні на значок
+Fenêtre ¦ Окно ¦ Вікно
+Sous l’événement ¦ Под событием ¦ Під подією
+Températures ¦ Температуры ¦ Температури
+Pluie ¦ Дождь ¦ Дощ
+pouces ¦ дюймы ¦ дюйми
+La phrase simple ¦ Простая фраза ¦ Просте речення
+« Il faisait froid : −4 °C au matin… » ¦ «Было холодно: −4 °C утром…» ¦ «Було холодно: −4 °C зранку…»
+Comparer à la normale ¦ Сравнить с нормой ¦ Порівняти з нормою
+Ligne des sources sous le détail ¦ Строка источников под подробностями ¦ Рядок джерел під подробицями
+Obligatoire pour certaines licences : elle reste dans le détail et à l’export. ¦ Обязательно для некоторых лицензий: она остаётся в подробностях и при экспорте. ¦ Обов’язково для деяких ліцензій: він лишається в подробицях і під час експорту.
+Bloc « 🌦 Météo de sa vie » sur les fiches ¦ Блок «🌦 Погода его жизни» на карточках ¦ Блок «🌦 Погода життя» на картках
+Phrases curieuses (« Né le jour le plus froid… ») ¦ Любопытные фразы («Родился в самый холодный день…») ¦ Цікаві речення («Народився в найхолодніший день…»)
+Dans « Ce jour-là » et le tableau de bord ¦ В «Этот день» и на панели управления ¦ У «Цей день» і на панелі керування
+Montrer aussi les reconstitutions grossières (avant 1940) ¦ Показывать и грубые реконструкции (до 1940 года) ¦ Показувати й грубі реконструкції (до 1940 року)
+Pour quels événements ¦ Для каких событий ¦ Для яких подій
+Tous les types d’événements de ta base (avec leur nombre). Décoche ceux qui n’ont pas besoin de la météo. ¦ Все типы событий твоей базы (с их количеством). Сними отметку с тех, которым погода не нужна. ¦ Усі типи подій твоєї бази (з їхньою кількістю). Зніми позначку з тих, яким погода не потрібна.
+Météo masquée ¦ Скрытая погода ¦ Прихована погода
+Remontrer la météo ¦ Снова показать погоду ¦ Знову показати погоду
+Rien n’est masqué. ¦ Ничего не скрыто. ¦ Нічого не приховано.
+Sur une fiche : clic droit sur la pastille météo (ou ⋯ du détail) → « Masquer la météo ». ¦ На карточке: правый щелчок по значку погоды (или ⋯ в подробностях) → «Скрыть погоду». ¦ На картці: правий клік на значку погоди (або ⋯ у подробицях) → «Приховати погоду».
+Les données dans l’app ¦ Данные в приложении ¦ Дані в застосунку
+Le téléchargement se fait une fois, depuis n’importe quel ordinateur. Ensuite on importe le fichier ici et l’app n’a plus besoin d’Internet. ¦ Загрузка делается один раз, с любого компьютера. Затем импортируй файл сюда, и приложению больше не нужен интернет. ¦ Завантаження робиться один раз, з будь-якого комп’ютера. Потім імпортуй файл сюди, і застосунку більше не потрібен інтернет.
+le socle ¦ базовый набор ¦ базовий набір
+le pack complet ¦ полный пакет ¦ повний пакет
+le pack Europe ¦ пакет «Европа» ¦ пакет «Європа»
+le pack ¦ пакет ¦ пакет
+Obtenir {name} ¦ Получить: {name} ¦ Отримати: {name}
+Importer un pack météo ¦ Импортировать пакет погоды ¦ Імпортувати пакет погоди
+aucun fichier ¦ нет файла ¦ немає файлу
+l’en-tête du pack est abîmé. ¦ заголовок пакета повреждён. ¦ заголовок пакета пошкоджено.
+le fichier est incomplet (téléchargement interrompu ?). ¦ файл неполный (загрузка прервана?). ¦ файл неповний (завантаження перервано?).
+heure par heure ¦ по часам ¦ щогодини
+sur le disque ¦ на диске ¦ на диску
+Le socle reste : le pack s’ajoute par-dessus. ¦ Базовый набор остаётся: пакет добавляется поверх. ¦ Базовий набір лишається: пакет додається поверх.
+Vérifié ¦ Проверено ¦ Перевірено
+Envoi du fichier… ¦ Отправка файла… ¦ Надсилання файлу…
+Envoi du fichier… {n} % ¦ Отправка файла… {n} % ¦ Надсилання файлу… {n} %
+réponse illisible ¦ нечитаемый ответ ¦ нечитабельна відповідь
+Vérification du pack… ¦ Проверка пакета… ¦ Перевірка пакета…
+La météo est masquée ici (Réglages → 🌦 Météo d’autrefois). ¦ Погода здесь скрыта (Настройки → 🌦 Погода прошлого). ¦ Погоду тут приховано (Налаштування → 🌦 Погода минулого).
+Aucun anniversaire rond avec une météo connue aujourd’hui. ¦ Сегодня нет круглых годовщин с известной погодой. ¦ Сьогодні немає круглих річниць із відомою погодою.
+Bague métal lue ¦ Металлическое кольцо прочитано ¦ Металеве кільце прочитано
+Photo-identifié ¦ Опознан по фото ¦ Розпізнано за фото
+(pas tout lu) ¦ (прочитано не всё) ¦ (прочитано не все)
+Éloigner ¦ Отдалить ¦ Віддалити
+Le temps ¦ Время ¦ Час
+1 heure par seconde ¦ 1 час в секунду ¦ 1 година за секунду
+1 jour par seconde ¦ 1 день в секунду ¦ 1 день за секунду
+1 semaine par seconde ¦ 1 неделя в секунду ¦ 1 тиждень за секунду
+1 mois par seconde ¦ 1 месяц в секунду ¦ 1 місяць за секунду
+↗ Ouvrir l’observation ¦ ↗ Открыть наблюдение ¦ ↗ Відкрити спостереження
+cette année ¦ в этом году ¦ цього року
+période choisie ¦ выбранный период ¦ вибраний період
+La journée (ou la nuit) d’un animal qui porte une balise ou un collier GPS. ¦ День (или ночь) животного с GPS-маячком или GPS-ошейником. ¦ День (або ніч) тварини з GPS-маячком або GPS-нашийником.
+Animaux vus par mois, distance parcourue, zone fréquentée, jamais revus. ¦ Животные, увиденные по месяцам, пройденное расстояние, посещаемая зона, больше не встреченные. ¦ Тварини, побачені за місяцями, пройдена відстань, відвідувана зона, більше не помічені.
+Une case pour retrouver un animal par ses couleurs, un code gravé, une bague métal, une puce, un tatouage ou une boucle. ¦ Поле, чтобы найти животное по цветам, выгравированному коду, металлическому кольцу, чипу, татуировке или бирке. ¦ Поле, щоб знайти тварину за кольорами, вигравіюваним кодом, металевим кільцем, чипом, татуюванням або биркою.
+Déposer un fichier GPX, KML ou CSV d’une balise ou d’un collier. ¦ Загрузить файл GPX, KML или CSV с маячка или ошейника. ¦ Завантажити файл GPX, KML або CSV з маячка чи нашийника.
+Le suivi n’a pas pu se charger. ¦ Не удалось загрузить наблюдение. ¦ Не вдалося завантажити спостереження.
+dernière position GPS ¦ последнее положение GPS ¦ останнє положення GPS
+Aucune observation pour l’instant. ¦ Пока нет наблюдений. ¦ Поки що немає спостережень.
+Tous ont été revus récemment. ¦ Все были недавно замечены снова. ¦ Усіх нещодавно помічено знову.
+Tous ont été revus. ¦ Все были замечены снова. ¦ Усіх помічено знову.
+pas encore vu ¦ ещё не замечен ¦ ще не помічено
+Aucun animal suivi pour l’instant. ¦ Пока нет отслеживаемых животных. ¦ Поки що немає відстежуваних тварин.
+Ouvre la fiche d’un animal (Listes → Animaux) et ajoute-lui une marque ou une observation. ¦ Открой карточку животного (Списки → Животные) и добавь ему метку или наблюдение. ¦ Відкрий картку тварини (Списки → Тварини) і додай їй мітку або спостереження.
+Le plus suivi ¦ Чаще всего отслеживаемый ¦ Найчастіше відстежуваний
+Code, couleurs ou numéro ¦ Код, цвета или номер ¦ Код, кольори або номер
+Chercher… (« 7K », « vert rouge », n° de puce) ¦ Искать… («7K», «зелёный красный», № чипа) ¦ Шукати… («7K», «зелений червоний», № чипа)
+Couleurs (« vert rouge »), code gravé, bague métal, puce, tatouage, boucle. « ? » = pas lu, [K|X] = j’hésite. ¦ Цвета («зелёный красный»), выгравированный код, металлическое кольцо, чип, татуировка, бирка. «?» = не прочитано, [K|X] = сомневаюсь. ¦ Кольори («зелений червоний»), вигравіюваний код, металеве кільце, чип, татуювання, бирка. «?» = не прочитано, [K|X] = вагаюся.
+Aucun trajet GPS pour l’instant. ¦ Пока нет GPS-маршрутов. ¦ Поки що немає GPS-маршрутів.
+＋ Nouveau site ¦ ＋ Новый участок ¦ ＋ Нова ділянка
+＋ Nouveau site de suivi ¦ ＋ Новый участок наблюдения ¦ ＋ Нова ділянка спостереження
+Nouveau site de suivi ¦ Новый участок наблюдения ¦ Нова ділянка спостереження
+Aucun site de suivi pour l’instant. ¦ Пока нет участков наблюдения. ¦ Поки що немає ділянок спостереження.
+Aucun comptage. ¦ Нет подсчётов. ¦ Немає підрахунків.
+↗ Le site ¦ ↗ Участок ¦ ↗ Ділянка
+La météo… ¦ Погода… ¦ Погода…
+Dernier événement ¦ Последнее событие ¦ Остання подія
+Aucun groupe pour l’instant. ¦ Пока нет групп. ¦ Поки що немає груп.
+🪺 Nids occupés ¦ 🪺 Занятые гнёзда ¦ 🪺 Зайняті гнізда
+🐣 Poussins bagués ¦ 🐣 Окольцованные птенцы ¦ 🐣 Окільцьовані пташенята
+Courbe des comptages ¦ Кривая подсчётов ¦ Крива підрахунків
+Cette année ¦ В этом году ¦ Цього року
+Montrer les trajets GPS ¦ Показывать GPS-маршруты ¦ Показувати GPS-маршрути
+Pas revus depuis ¦ Не замечены с ¦ Не помічені з
+Le même seuil que « 👁 Vu la dernière fois » des fiches d’animaux. ¦ Тот же порог, что и у «👁 Последний раз замечен» в карточках животных. ¦ Той самий поріг, що й у «👁 Востаннє помічено» в картках тварин.
+Seulement ceux qui ne vont pas bien ¦ Только те, у кого не всё хорошо ¦ Лише ті, у кого не все гаразд
+Réglages du bloc remis comme au départ. ¦ Настройки блока возвращены как было. ¦ Налаштування блока повернуто як було.
+un site ¦ участок ¦ ділянка
+⤒ Recevoir un suivi partagé… ¦ ⤒ Получить общее наблюдение… ¦ ⤒ Отримати спільне спостереження…
+Toutes les espèces ¦ Все виды ¦ Усі види
+Corneilles, Hérissons, Chats du quartier… ¦ Вороны, Ежи, Кошки квартала… ¦ Ворони, Їжаки, Коти кварталу…
+Corneille noire, Hérisson d’Europe… ¦ Чёрная ворона, Обыкновенный ёж… ¦ Чорна ворона, Їжак звичайний…
+Renommer la page ¦ Переименовать страницу ¦ Перейменувати сторінку
+Un émoji : 🐦 🦔 🐈 🐬 🐺… ¦ Эмодзи: 🐦 🦔 🐈 🐬 🐺… ¦ Емодзі: 🐦 🦔 🐈 🐬 🐺…
+Icône changée. ¦ Значок изменён. ¦ Значок змінено.
+Espèce et site par défaut… ¦ Вид и участок по умолчанию… ¦ Вид і ділянка за замовчуванням…
+Dupliquer la page ¦ Дублировать страницу ¦ Дублювати сторінку
+Bloc dupliqué. ¦ Блок продублирован. ¦ Блок продубльовано.
+Copier vers une autre page… ¦ Скопировать на другую страницу… ¦ Скопіювати на іншу сторінку…
+Copier vers la page… ¦ Скопировать на страницу… ¦ Скопіювати на сторінку…
+Pages rangées. ¦ Страницы упорядочены. ¦ Сторінки впорядковано.
+📁 Glisse ici un trajet (GPX, KML, CSV), colle-le (⌘V) ou choisis-le ¦ 📁 Перетащи сюда маршрут (GPX, KML, CSV), вставь его (⌘V) или выбери ¦ 📁 Перетягни сюди маршрут (GPX, KML, CSV), встав його (⌘V) або вибери
+Balises de la faune sauvage (Movebank…) ou colliers (Tractive, Weenect, Invoxia, Kippy…). ¦ Маячки для диких животных (Movebank…) или ошейники (Tractive, Weenect, Invoxia, Kippy…). ¦ Маячки для диких тварин (Movebank…) або нашийники (Tractive, Weenect, Invoxia, Kippy…).
+Aucune observation datée et placée. ¦ Нет датированных наблюдений с местом. ¦ Немає датованих спостережень із місцем.
+Aucun événement de santé pour l’instant. ¦ Пока нет событий, связанных со здоровьем. ¦ Поки що немає подій, пов’язаних зі здоров’ям.
+Aucun passage sur cette période. ¦ За этот период проходов нет. ¦ За цей період проходів немає.
+Ce mois ¦ Этот месяц ¦ Цей місяць
+Météo trouvée ¦ Погода найдена ¦ Погоду знайдено
+=animal trouvé ¦ найденное животное|найденных животных|найденных животных ¦ знайдена тварина|знайдені тварини|знайдених тварин
+SUIVI DES ANIMAUX · EN GRAND ¦ НАБЛЮДЕНИЕ ЗА ЖИВОТНЫМИ · КРУПНО ¦ СПОСТЕРЕЖЕННЯ ЗА ТВАРИНАМИ · ВЕЛИКИМ ПЛАНОМ
+SUIVI DES ANIMAUX · CHIFFRES ¦ НАБЛЮДЕНИЕ ЗА ЖИВОТНЫМИ · ЧИСЛА ¦ СПОСТЕРЕЖЕННЯ ЗА ТВАРИНАМИ · ЧИСЛА
+Par animal ¦ По животным ¦ За тваринами
+Par année ¦ По годам ¦ За роками
+relié dans l’ordre ¦ соединено по порядку ¦ з’єднано за порядком
+Les chiffres… ¦ Числа… ¦ Числа…
+Tous les animaux ¦ Все животные ¦ Усі тварини
+Par site · observations ¦ По участкам · наблюдения ¦ За ділянками · спостереження
+Aucune observation. ¦ Нет наблюдений. ¦ Немає спостережень.
+Zone fréquentée ¦ Посещаемая зона ¦ Відвідувана зона
+enveloppe des points vus ¦ контур увиденных точек ¦ контур побачених точок
+Il faut au moins 3 points pour une zone. ¦ Для зоны нужно не менее 3 точек. ¦ Для зони потрібно щонайменше 3 точки.
+Délai ¦ Срок ¦ Строк
+Ce qu’il faisait ¦ Что оно делало ¦ Що вона робила
+Vu par ¦ Кто видел ¦ Хто бачив
+Avec qui ¦ С кем ¦ З ким
+Chaque caractère du code ¦ Каждый символ кода ¦ Кожен символ коду
+Pas lu : clique pour dire « j’hésite entre… » ¦ Не прочитано: нажми, чтобы сказать «сомневаюсь между…» ¦ Не прочитано: натисни, щоб сказати «вагаюся між…»
+J’hésite : clique pour dire que c’est sûr ¦ Сомневаюсь: нажми, чтобы сказать, что это точно ¦ Вагаюся: натисни, щоб сказати, що це точно
+Sûr : clique pour dire « pas lu » ¦ Точно: нажми, чтобы сказать «не прочитано» ¦ Точно: натисни, щоб сказати «не прочитано»
+un clic : sûr → pas lu → j’hésite entre… ¦ один щелчок: точно → не прочитано → сомневаюсь между… ¦ один клік: точно → не прочитано → вагаюся між…
+Modifier l’observation ¦ Изменить наблюдение ¦ Змінити спостереження
+Nouvelle observation ¦ Новое наблюдение ¦ Нове спостереження
+Retrouver l’animal · selon l’espèce : ¦ Найти животное · по виду: ¦ Знайти тварину · за видом:
+Photos, sons ou vidéos ¦ Фото, звуки или видео ¦ Фото, звуки або відео
+Dis quand tu l’as vu. ¦ Скажи, когда ты его видел(а). ¦ Скажи, коли ти її бачив(ла).
+Dis où tu l’as vu (un lieu, un site, ou 📍 Ma position). ¦ Скажи, где ты его видел(а) (место, участок или 📍 Моё местоположение). ¦ Скажи, де ти її бачив(ла) (місце, ділянка або 📍 Моє місцезнаходження).
+Observation enregistrée. ¦ Наблюдение сохранено. ¦ Спостереження збережено.
+Observation créée. ¦ Наблюдение создано. ¦ Спостереження створено.
+🌊 En mer ¦ 🌊 В море ¦ 🌊 У морі
+Taille du groupe ¦ Размер группы ¦ Розмір групи
+📷 Piège photo ¦ 📷 Фотоловушка ¦ 📷 Фотопастка
+Vu par un piège photo ¦ Замечен фотоловушкой ¦ Помічено фотопасткою
+Piège n° ¦ Ловушка № ¦ Пастка №
+mise toute seule d’après ce que tu as cliqué ¦ заполняется само по тому, на что ты нажал(а) ¦ заповнюється саме за тим, на що ти натиснув(ла)
+＋ Créer la fiche d’un nouvel animal ¦ ＋ Создать карточку нового животного ¦ ＋ Створити картку нової тварини
+✎ Garder sans fiche ¦ ✎ Оставить без карточки ¦ ✎ Залишити без картки
+Deux animaux correspondent autant : la lecture sera marquée « Doute ». ¦ Два животных подходят одинаково: прочтение будет помечено «Сомнение». ¦ Дві тварини підходять однаково: прочитання буде позначено «Сумнів».
+Couleurs des bagues ¦ Цвета колец ¦ Кольори кілець
+Bague vue mais couleur pas sûre ¦ Кольцо видно, но цвет не точно ¦ Кільце видно, але колір не точно
+Une autre couleur (pipette, code #…) ¦ Другой цвет (пипетка, код #…) ¦ Інший колір (піпетка, код #…)
+Pas regardé ¦ Не смотрел(а) ¦ Не дивився(лася)
+J’hésite entre… ¦ Сомневаюсь между… ¦ Вагаюся між…
+L’observation sera gardée sans fiche, avec la lecture. ¦ Наблюдение будет сохранено без карточки, вместе с прочтением. ¦ Спостереження буде збережено без картки, разом із прочитанням.
+Son nom (ou un code : « 7K », « Sans nom 2C9 ») ¦ Его имя (или код: «7K», «Без имени 2C9») ¦ Її ім’я (або код: «7K», «Без імені 2C9»)
+En quelques mots (« se baigne », « chasse un goéland »…) ¦ В нескольких словах («купается», «гоняет чайку»…) ¦ Кількома словами («купається», «ганяє чайку»…)
+Cet appareil ne donne pas sa position. ¦ Это устройство не сообщает своё местоположение. ¦ Цей пристрій не повідомляє свого місцезнаходження.
+La fenêtre d’import n’est pas chargée. ¦ Окно импорта не загружено. ¦ Вікно імпорту не завантажено.
+Un trajet GPS ¦ GPS-маршрут ¦ GPS-маршрут
+Fichier trop gros (40 Mo au plus). ¦ Файл слишком большой (не более 40 МБ). ¦ Файл завеликий (не більше 40 МБ).
+Fichier trop gros (200 Mo au plus). ¦ Файл слишком большой (не более 200 МБ). ¦ Файл завеликий (не більше 200 МБ).
+{rows} sans date ou sans position seront sautées. ¦ {rows} без даты или положения будут пропущены. ¦ {rows} без дати або положення буде пропущено.
+{rows} sans date ou sans position sera sautée. ¦ {rows} без даты или положения будет пропущена. ¦ {rows} без дати або положення буде пропущено.
+=point importé ¦ импортированная точка|импортированные точки|импортированных точек ¦ імпортована точка|імпортовані точки|імпортованих точок
+{points} pour {name} ¦ {points} для {name} ¦ {points} для {name}
+({n} déjà là, sautés) ¦ ({n} уже есть, пропущены) ¦ ({n} вже є, пропущено)
+({n} déjà là, sauté) ¦ ({n} уже есть, пропущен) ¦ ({n} вже є, пропущено)
+{points} en tout ¦ Всего: {points} ¦ Усього: {points}
+{name} a déjà {points} : ils restent, ce fichier s’y ajoute (un instant déjà là n’est pas repris deux fois). ¦ У {name} уже есть {points}: они остаются, этот файл добавляется к ним (уже имеющийся момент не берётся дважды). ¦ {name} вже має {points}: вони лишаються, цей файл додається до них (наявний момент не береться двічі).
+l’animal ¦ животное ¦ тварина
+Ne va pas bien ¦ Нездоров ¦ Нездорова
+Chercher… (nom, code « 7K », bague EA…, lieu, observateur) ¦ Искать… (имя, код «7K», кольцо EA…, место, наблюдатель) ¦ Шукати… (ім’я, код «7K», кільце EA…, місце, спостерігач)
+Chercher… (nom, code « 7K », puce…) ¦ Искать… (имя, код «7K», чип…) ¦ Шукати… (ім’я, код «7K», чип…)
+Vus récemment ¦ Недавно замеченные ¦ Нещодавно помічені
+＋ Nouveau comptage ¦ ＋ Новый подсчёт ¦ ＋ Новий підрахунок
+Nouveau comptage ¦ Новый подсчёт ¦ Новий підрахунок
+＋ Nouvelle observation ici ¦ ＋ Новое наблюдение здесь ¦ ＋ Нове спостереження тут
+🗑 Supprimer le site ¦ 🗑 Удалить участок ¦ 🗑 Видалити ділянку
+Aucun comptage pour l’instant. ¦ Пока нет подсчётов. ¦ Поки що немає підрахунків.
+? Non identifiés ¦ ? Неопознанные ¦ ? Нерозпізнані
+Personne encore. ¦ Пока никого. ¦ Поки що нікого.
+contour du site ¦ контур участка ¦ контур ділянки
+Site enregistré. ¦ Участок сохранён. ¦ Ділянку збережено.
+Site créé. ¦ Участок создан. ¦ Ділянку створено.
+île, colonie nord… ¦ остров, северная колония… ¦ острів, північна колонія…
+Ce qu’on compte ¦ Что считаем ¦ Що рахуємо
+Donne la date du comptage. ¦ Укажи дату подсчёта. ¦ Вкажи дату підрахунку.
+Comptage enregistré. ¦ Подсчёт сохранён. ¦ Підрахунок збережено.
+Comptage supprimé. ¦ Подсчёт удалён. ¦ Підрахунок видалено.
+＋ Ajouter un membre ¦ ＋ Добавить члена ¦ ＋ Додати члена
+Aucun membre pour l’instant. ¦ Пока нет членов. ¦ Поки що немає членів.
+Membres passés ¦ Бывшие члены ¦ Колишні члени
+Personne n’est parti. ¦ Никто не ушёл. ¦ Ніхто не пішов.
+Frise du groupe ¦ Лента группы ¦ Стрічка групи
+🗑 Supprimer le groupe ¦ 🗑 Удалить группу ¦ 🗑 Видалити групу
+Loup gris, chimpanzé, orque… ¦ Серый волк, шимпанзе, косатка… ¦ Сірий вовк, шимпанзе, косатка…
+Territoire ¦ Территория ¦ Територія
+Donne un nom au groupe. ¦ Дай группе название. ¦ Дай групі назву.
+Groupe enregistré. ¦ Группа сохранена. ¦ Групу збережено.
+Groupe créé. ¦ Группа создана. ¦ Групу створено.
+Groupe supprimé (son histoire aussi). ¦ Группа удалена (и её история тоже). ¦ Групу видалено (і її історію теж).
+✓ Onglet « 🐾 Suivi des animaux » affiché ¦ ✓ Вкладка «🐾 Наблюдение за животными» показана ¦ ✓ Вкладку «🐾 Спостереження за тваринами» показано
+Tu suis des animaux sauvages ou un chat avec un collier GPS ? ¦ Ты наблюдаешь за дикими животными или за кошкой с GPS-ошейником? ¦ Ти спостерігаєш за дикими тваринами чи за котом із GPS-нашийником?
+L’onglet « 🐾 Suivi des animaux » est caché. Pour l’afficher : Réglages → Apparence → Onglets du haut. ¦ Вкладка «🐾 Наблюдение за животными» скрыта. Чтобы её показать: Настройки → Внешний вид → Вкладки сверху. ¦ Вкладку «🐾 Спостереження за тваринами» приховано. Щоб її показати: Налаштування → Вигляд → Вкладки згори.
+↗ Afficher l’onglet ¦ ↗ Показать вкладку ¦ ↗ Показати вкладку
+Observation dupliquée. ¦ Наблюдение продублировано. ¦ Спостереження продубльовано.
+Observation supprimée. ¦ Наблюдение удалено. ¦ Спостереження видалено.
+Voir les {n} autres médias ¦ Показать остальные медиафайлы ({n}) ¦ Показати решту медіафайлів ({n})
+{n} sans bague ¦ Без кольца: {n} ¦ Без кільця: {n}
+Animal sans fiche ¦ Животное без карточки ¦ Тварина без картки
+pas revus depuis {days} ¦ не замечены уже {days} ¦ не помічені вже {days}
+Suivi des animaux · Page « {name} » ¦ Наблюдение за животными · Страница «{name}» ¦ Спостереження за тваринами · Сторінка «{name}»
+Cette page montre seulement : <b>{what}</b>. Tous ses blocs s’y règlent d’office (un bloc peut garder son propre choix). ¦ Эта страница показывает только: <b>{what}</b>. Все её блоки настраиваются на это автоматически (блок может сохранить свой выбор). ¦ Ця сторінка показує лише: <b>{what}</b>. Усі її блоки налаштовуються на це автоматично (блок може зберегти власний вибір).
+Cette page montre seulement : <b>{what}</b> · tous les sites. Tous ses blocs s’y règlent d’office (un bloc peut garder son propre choix). ¦ Эта страница показывает только: <b>{what}</b> · все участки. Все её блоки настраиваются на это автоматически (блок может сохранить свой выбор). ¦ Ця сторінка показує лише: <b>{what}</b> · усі ділянки. Усі її блоки налаштовуються на це автоматично (блок може зберегти власний вибір).
+Nouvelle page ¦ Новая страница ¦ Нова сторінка
+Espèce et site de la page « {name} » ¦ Вид и участок страницы «{name}» ¦ Вид і ділянка сторінки «{name}»
+Page « {name} » créée. ¦ Страница «{name}» создана. ¦ Сторінку «{name}» створено.
+Page « {name} » supprimée (ses blocs, pas les animaux). ¦ Страница «{name}» удалена (её блоки, но не животные). ¦ Сторінку «{name}» видалено (її блоки, але не тварин).
+Bloc copié vers « {name} ». ¦ Блок скопирован на «{name}». ¦ Блок скопійовано на «{name}».
+Aucun animal pour « {q} ». ¦ Нет животных для «{q}». ¦ Немає тварин для «{q}».
+première observation ¦ первое наблюдение ¦ перше спостереження
+dernière : {date} ¦ последнее: {date} ¦ останнє: {date}
+parcourus par {name} ({from} → {to}) ¦ пройдено: {name} ({from} → {to}) ¦ пройдено: {name} ({from} → {to})
+pas de trajet GPS ¦ нет GPS-маршрута ¦ немає GPS-маршруту
+Fiche de « {name} » créée. ¦ Карточка «{name}» создана. ¦ Картку «{name}» створено.
+vu sur {sites} ¦ замечен на: {sites} ¦ помічено на: {sites}
+Pas revu depuis {when} ¦ Не замечен с {when} ¦ Не помічено з {when}
+Jamais vu ¦ Никогда не замечен ¦ Ніколи не помічено
+Suivi en cours ¦ Наблюдение идёт ¦ Спостереження триває
+Ce qu’on partage ¦ Что передаём ¦ Що передаємо
+Des animaux choisis ¦ Выбранные животные ¦ Вибрані тварини
+Tous les animaux d’une espèce ¦ Все животные одного вида ¦ Усі тварини одного виду
+Les animaux d’un site ¦ Животные одного участка ¦ Тварини однієї ділянки
+Les points GPS ¦ GPS-точки ¦ GPS-точки
+Choisis au moins un animal. ¦ Выбери хотя бы одно животное. ¦ Вибери щонайменше одну тварину.
+Choisis l’espèce. ¦ Выбери вид. ¦ Вибери вид.
+📤 Fichier prêt : {animals}. ¦ 📤 Файл готов: {animals}. ¦ 📤 Файл готовий: {animals}.
+📤 Fichier prêt : {animals} (sans les noms des observateurs). ¦ 📤 Файл готов: {animals} (без имён наблюдателей). ¦ 📤 Файл готовий: {animals} (без імен спостерігачів).
+Ce fichier n’est pas un suivi partagé (suivi.json manque). ¦ Этот файл — не общее наблюдение (нет suivi.json). ¦ Цей файл — не спільне спостереження (бракує suivi.json).
+Fichier abîmé : il ne se lit pas. ¦ Файл повреждён: он не читается. ¦ Файл пошкоджено: він не читається.
+Ce fichier n’est pas un suivi d’animaux partagé (format inconnu). ¦ Этот файл — не общее наблюдение за животными (неизвестный формат). ¦ Цей файл — не спільне спостереження за тваринами (невідомий формат).
+Un suivi partagé ¦ Общее наблюдение ¦ Спільне спостереження
+=nouvel animal ¦ новое животное|новых животных|новых животных ¦ нова тварина|нові тварини|нових тварин
+=animal déjà là ¦ уже известное животное|уже известных животных|уже известных животных ¦ уже відома тварина|уже відомі тварини|уже відомих тварин
+=ligne nouvelle ¦ новая строка|новые строки|новых строк ¦ новий рядок|нові рядки|нових рядків
+=ligne déjà là, écartée ¦ уже имеющаяся строка, отброшена|уже имеющиеся строки, отброшены|уже имеющихся строк, отброшены ¦ наявний рядок, відкинуто|наявні рядки, відкинуто|наявних рядків, відкинуто
+=conflit ¦ конфликт|конфликта|конфликтов ¦ конфлікт|конфлікти|конфліктів
+<b>{new}</b>, {known} (à compléter), <b>{rows}</b> (observations, marques, santé, groupes) ¦ <b>{new}</b>, {known} (дополнить), <b>{rows}</b> (наблюдения, метки, здоровье, группы) ¦ <b>{new}</b>, {known} (доповнити), <b>{rows}</b> (спостереження, мітки, здоров’я, групи)
+{n} points GPS ¦ GPS-точек: {n} ¦ GPS-точок: {n}
+{rows} (doublons exacts). ¦ {rows} (точные дубликаты). ¦ {rows} (точні дублікати).
+{conflicts} : tu choisiras pour chacun, à l’étape suivante. ¦ {conflicts}: ты выберешь для каждого на следующем шаге. ¦ {conflicts}: ти вибереш для кожного на наступному кроці.
+{name} chez toi (reconnu par {how}) ¦ {name} у тебя (опознан по: {how}) ¦ {name} у тебе (розпізнано за: {how})
+reçu · chez toi : {name} (reconnu par {how}) ¦ получено · у тебя: {name} (опознан по: {how}) ¦ отримано · у тебе: {name} (розпізнано за: {how})
+Comparer et fusionner… ¦ Сравнить и объединить… ¦ Порівняти й об’єднати…
+⤒ Importer {animals} ¦ ⤒ Импортировать: {animals} ¦ ⤒ Імпортувати: {animals}
+Suivi reçu : {what} ¦ Наблюдение получено: {what} ¦ Спостереження отримано: {what}
+conflit restant ¦ оставшийся конфликт ¦ залишений конфлікт
+conflits restants ¦ оставшиеся конфликты ¦ залишені конфлікти
+nouveaux ¦ новые ¦ нові
+lignes nouvelles ¦ новые строки ¦ нові рядки
+doublons écartés ¦ отброшенные дубликаты ¦ відкинуті дублікати
+média reçu non importé ¦ полученный медиафайл не импортирован ¦ отриманий медіафайл не імпортовано
+Fusionner avec ma fiche ¦ Объединить с моей карточкой ¦ Об’єднати з моєю карткою
+En faire une nouvelle fiche ¦ Сделать из него новую карточку ¦ Зробити з неї нову картку
+Ne pas le prendre ¦ Не брать ¦ Не брати
+Le mien : ¦ Мой: ¦ Мій:
+Le sien : ¦ Его: ¦ Його:
+Observation modifiée ¦ Наблюдение изменено ¦ Спостереження змінено
+Marque modifiée ¦ Метка изменена ¦ Мітку змінено
+Événement de santé modifié ¦ Событие здоровья изменено ¦ Подію здоров’я змінено
+Rôle dans le groupe ¦ Роль в группе ¦ Роль у групі
+Choisis d’abord pour chaque conflit ¦ Сначала выбери для каждого конфликта ¦ Спочатку вибери для кожного конфлікту
+Fusionner ¦ Объединить ¦ Об’єднати
+vert foncé ¦ тёмно-зелёный ¦ темно-зелений
+bleu foncé ¦ тёмно-синий ¦ темно-синій
+métal ¦ металл ¦ метал
+👥 En groupe ¦ 👥 В группе ¦ 👥 У групі
+💤 Au dortoir ¦ 💤 На ночёвке ¦ 💤 На ночівлі
+🕊 En vol ¦ 🕊 В полёте ¦ 🕊 У польоті
+💞 En couple ¦ 💞 В паре ¦ 💞 У парі
+🏠 Rentré ¦ 🏠 Вернулся ¦ 🏠 Повернувся
+🐄 En troupeau ¦ 🐄 В стаде ¦ 🐄 У стаді
+😴 Au repos ¦ 😴 Отдыхает ¦ 😴 Відпочиває
+🌊 En surface ¦ 🌊 На поверхности ¦ 🌊 На поверхні
+⛵ À la proue ¦ ⛵ У носа судна ¦ ⛵ Біля носа судна
+🧭 Marque son territoire ¦ 🧭 Метит территорию ¦ 🧭 Мітить територію
+🍼 Avec des jeunes ¦ 🍼 С детёнышами ¦ 🍼 З малятами
+🪵 Utilise un outil ¦ 🪵 Использует орудие ¦ 🪵 Використовує знаряддя
+🔖 Bague changée ¦ 🔖 Кольцо заменено ¦ 🔖 Кільце замінено
+🪤 Piège ¦ 🪤 Ловушка ¦ 🪤 Пастка
+🚧 Clôture ¦ 🚧 Ограда ¦ 🚧 Огорожа
+🌬 Éolienne ¦ 🌬 Ветряк ¦ 🌬 Вітряк
+🏖 Échouage ¦ 🏖 Выброс на берег ¦ 🏖 Викидання на берег
+⚔️ Conflit avec un autre ¦ ⚔️ Конфликт с другим ¦ ⚔️ Конфлікт з іншим
+Bonne santé ¦ Здоров ¦ Здоровий
+Blessé ¦ Ранен ¦ Поранений
+En soins ¦ На лечении ¦ На лікуванні
+Relâché ¦ Выпущен ¦ Випущений
+Mammifère sauvage ¦ Дикое млекопитающее ¦ Дикий ссавець
+Vache, mouton, chèvre ¦ Корова, овца, коза ¦ Корова, вівця, коза
+Format inconnu : GPX, KML, GeoJSON ou CSV. ¦ Неизвестный формат: GPX, KML, GeoJSON или CSV. ¦ Невідомий формат: GPX, KML, GeoJSON або CSV.
+Le tableau est vide. ¦ Таблица пуста. ¦ Таблиця порожня.
+Fichier refusé : il contient une déclaration DOCTYPE ou ENTITY. ¦ Файл отклонён: он содержит объявление DOCTYPE или ENTITY. ¦ Файл відхилено: він містить оголошення DOCTYPE або ENTITY.
+3 février 2026 ¦ 3 février 2026 ¦ 3 février 2026
+⚖️ Mise en garde : en France, les tests ADN « récréatifs » ne sont pas légaux ¦ ⚖️ Предупреждение: во Франции «развлекательные» ДНК-тесты незаконны ¦ ⚖️ Застереження: у Франції «розважальні» ДНК-тести незаконні
+En France, l’examen des caractéristiques génétiques d’une personne n’est permis <b>qu’à des fins médicales ou de recherche scientifique</b>, avec son <b>consentement écrit</b> (Code civil, article 16-10). L’identification par empreintes génétiques est réservée à la justice et à quelques cas prévus par la loi (article 16-11). <b>Demander</b> un tel examen hors de ces cas — par exemple commander un test généalogique sur internet — est puni d’une <b>amende de 3 750 €</b> (Code pénal, article 226-28-1), même si le laboratoire est à l’étranger. ¦ Во Франции исследование генетических характеристик человека разрешено <b>только в медицинских целях или для научных исследований</b>, с его <b>письменного согласия</b> (Гражданский кодекс, статья 16-10). Идентификация по генетическим отпечаткам предназначена для правосудия и нескольких случаев, предусмотренных законом (статья 16-11). <b>Запрос</b> такого исследования вне этих случаев — например, заказ генеалогического теста в интернете — наказывается <b>штрафом 3 750 €</b> (Уголовный кодекс, статья 226-28-1), даже если лаборатория находится за границей. ¦ У Франції дослідження генетичних характеристик людини дозволено <b>лише в медичних цілях або для наукових досліджень</b>, з її <b>письмової згоди</b> (Цивільний кодекс, стаття 16-10). Ідентифікація за генетичними відбитками призначена для правосуддя та кількох випадків, передбачених законом (стаття 16-11). <b>Замовлення</b> такого дослідження поза цими випадками — наприклад, генеалогічного тесту в інтернеті — карається <b>штрафом 3 750 €</b> (Кримінальний кодекс, стаття 226-28-1), навіть якщо лабораторія розташована за кордоном.
+<b>Vérifie toujours le texte en vigueur</b> sur Légifrance : la loi peut changer (les débats sur la généalogie génétique sont réguliers). Cet onglet ne donne pas de conseil juridique. ¦ <b>Всегда проверяй действующий текст</b> на Légifrance: закон может измениться (споры о генетической генеалогии ведутся регулярно). Эта вкладка не даёт юридических советов. ¦ <b>Завжди перевіряй чинний текст</b> на Légifrance: закон може змінитися (дискусії про генетичну генеалогію точаться регулярно). Ця вкладка не дає юридичних порад.
+<b>Ce que fait LCNDA</b> : rien n’est analysé ni envoyé. L’onglet sert à <b>ranger des informations</b> (par exemple des résultats obtenus légalement à l’étranger, par un parent résidant hors de France, dans un cadre médical ou de recherche, ou des renseignements donnés par d’autres personnes) et à <b>comprendre</b> ce que signifient des cM, des segments, un haplogroupe. ¦ <b>Что делает LCNDA</b>: ничего не анализируется и не отправляется. Вкладка служит для того, чтобы <b>хранить сведения</b> (например, результаты, законно полученные за границей, родственником, живущим вне Франции, в медицинских или научных целях, или сведения, предоставленные другими людьми), и чтобы <b>понимать</b>, что означают cM, сегменты, гаплогруппа. ¦ <b>Що робить LCNDA</b>: нічого не аналізується й не надсилається. Вкладка слугує для того, щоб <b>зберігати відомості</b> (наприклад, результати, законно отримані за кордоном, родичем, який живе поза Францією, у медичних чи наукових цілях, або відомості, надані іншими людьми), і щоб <b>розуміти</b>, що означають cM, сегменти, гаплогрупа.
+<b>Données sensibles</b> : l’ADN révèle des choses sur toi <i>et sur ta famille</i> (parents, frères et sœurs, enfants, cousins), qui n’ont pas consenti. Il peut révéler un secret de famille : naissance hors mariage, adoption, don de gamètes, parent inconnu. Prends le temps d’y penser avant de partager. ¦ <b>Чувствительные данные</b>: ДНК раскрывает сведения о тебе <i>и о твоей семье</i> (родители, братья и сёстры, дети, двоюродные), которые не давали согласия. Она может раскрыть семейную тайну: рождение вне брака, усыновление, донорство гамет, неизвестного родителя. Подумай, прежде чем делиться. ¦ <b>Чутливі дані</b>: ДНК розкриває відомості про тебе <i>і про твою родину</i> (батьки, брати й сестри, діти, двоюрідні), які не давали згоди. Вона може розкрити родинну таємницю: народження поза шлюбом, усиновлення, донорство гамет, невідомого батька чи матір. Подумай, перш ніж ділитися.
+<b>Les sociétés de test</b> gardent les données selon leurs conditions (vente de société, fuites de données, demandes de la justice dans certains pays). Lis leurs conditions, choisis ce que tu partages, supprime ce que tu ne veux plus voir conservé. ¦ <b>Компании, делающие тесты</b>, хранят данные на своих условиях (продажа компании, утечки данных, запросы правосудия в некоторых странах). Прочитай их условия, выбирай, чем делиться, удаляй то, что больше не хочешь там хранить. ¦ <b>Компанії, що роблять тести</b>, зберігають дані на своїх умовах (продаж компанії, витоки даних, запити правосуддя в деяких країнах). Прочитай їхні умови, вибирай, чим ділитися, видаляй те, що більше не хочеш там зберігати.
+<b>Personnes vivantes</b> : les noms, cM et contacts de correspondances sont des données personnelles. Garde-les pour ta recherche, ne les publie pas sans accord. ¦ <b>Живые люди</b>: имена, cM и контакты совпадений — это персональные данные. Храни их для своего исследования, не публикуй без согласия. ¦ <b>Живі люди</b>: імена, cM і контакти збігів — це персональні дані. Зберігай їх для свого дослідження, не публікуй без згоди.
+Textes officiels ¦ Официальные тексты ¦ Офіційні тексти
+Lire la mise en garde complète et les textes officiels → ¦ Прочитать полное предупреждение и официальные тексты → ¦ Прочитати повне застереження та офіційні тексти →
+Commencer ¦ Начать ¦ Почати
+Lis la <button type="button" class="link-button" data-dna-go="law">mise en garde sur la loi française</button>. ¦ Прочитай <button type="button" class="link-button" data-dna-go="law">предупреждение о французском законе</button>. ¦ Прочитай <button type="button" class="link-button" data-dna-go="law">застереження щодо французького закону</button>.
+« 🧬 Mes tests » : ajoute le test d’une personne (société, type, haplogroupes, origines). ¦ «🧬 Мои тесты»: добавь тест человека (компания, тип, гаплогруппы, происхождение). ¦ «🧬 Мої тести»: додай тест людини (компанія, тип, гаплогрупи, походження).
+« 👥 Correspondances » : importe le fichier CSV de la société, ou ajoute-les à la main. ¦ «👥 Совпадения»: импортируй CSV-файл компании или добавь их вручную. ¦ «👥 Збіги»: імпортуй CSV-файл компанії або додай їх вручну.
+Le calculateur de cM, la méthode de Leeds et le navigateur de chromosomes t’aident à placer chacun dans l’arbre. ¦ Калькулятор cM, метод Лидса и браузер хромосом помогут тебе разместить каждого в древе. ¦ Калькулятор cM, метод Лідса та браузер хромосом допоможуть тобі розмістити кожного в дереві.
+Tes tests, tes correspondances et où tu en es. Tout se règle dans « ⚙️ Réglages » (rubriques montrées, ordre, colonnes, couleurs). ¦ Твои тесты, твои совпадения и на каком ты этапе. Всё настраивается в «⚙️ Настройки» (показываемые разделы, порядок, столбцы, цвета). ¦ Твої тести, твої збіги та на якому ти етапі. Усе налаштовується в «⚙️ Налаштування» (показані розділи, порядок, стовпці, кольори).
+🧬 Synthèse ¦ 🧬 Сводка ¦ 🧬 Зведення
+Loi et mises en garde ¦ Закон и предупреждения ¦ Закон і застереження
+⚖️ Loi et mises en garde ¦ ⚖️ Закон и предупреждения ¦ ⚖️ Закон і застереження
+À lire avant d’utiliser cet onglet. ¦ Прочитай, прежде чем пользоваться этой вкладкой. ¦ Прочитай, перш ніж користуватися цією вкладкою.
+Mes tests ¦ Мои тесты ¦ Мої тести
+Correspondances ¦ Совпадения ¦ Збіги
+Groupes (méthode de Leeds) ¦ Группы (метод Лидса) ¦ Групи (метод Лідса)
+🗂️ Groupes (méthode de Leeds) ¦ 🗂️ Группы (метод Лидса) ¦ 🗂️ Групи (метод Лідса)
+Groupes automatiques ¦ Автоматические группы ¦ Автоматичні групи
+Placer un cousin ¦ Разместить родственника ¦ Розмістити родича
+📍 Placer un cousin ¦ 📍 Разместить родственника ¦ 📍 Розмістити родича
+Chromosomes et segments ¦ Хромосомы и сегменты ¦ Хромосоми та сегменти
+🧩 Chromosomes et segments ¦ 🧩 Хромосомы и сегменты ¦ 🧩 Хромосоми та сегменти
+Calculateur de cM ¦ Калькулятор cM ¦ Калькулятор cM
+📐 Calculateur de cM ¦ 📐 Калькулятор cM ¦ 📐 Калькулятор cM
+Lignées Y, mt et X ¦ Линии Y, mt и X ¦ Лінії Y, mt і X
+🌳 Lignées Y, mt et X ¦ 🌳 Линии Y, mt и X ¦ 🌳 Лінії Y, mt і X
+Origines estimées ¦ Оценка происхождения ¦ Оцінка походження
+🌍 Origines estimées ¦ 🌍 Оценка происхождения ¦ 🌍 Оцінка походження
+Comprendre l’ADN ¦ Понять ДНК ¦ Зрозуміти ДНК
+📚 Comprendre l’ADN ¦ 📚 Понять ДНК ¦ 📚 Зрозуміти ДНК
+cM partagés ¦ Общие cM ¦ Спільні cM
+% partagé ¦ % общего ¦ % спільного
+Plus long segment ¦ Самый длинный сегмент ¦ Найдовший сегмент
+Relation (société) ¦ Родство (по компании) ¦ Спорідненість (за компанією)
+Relation probable ¦ Вероятное родство ¦ Ймовірна спорідненість
+Fiche liée ¦ Связанная карточка ¦ Пов’язана картка
+Ancêtre commun ¦ Общий предок ¦ Спільний предок
+Noms en commun ¦ Общие фамилии ¦ Спільні прізвища
+Des deux côtés ¦ С обеих сторон ¦ З обох боків
+Contacté ¦ Связались ¦ Зв’язалися
+A répondu ¦ Ответил(а) ¦ Відповів(ла)
+Arbre échangé ¦ Обменялись древами ¦ Обмінялися деревами
+Placé dans l’arbre ✓ ¦ Размещён в древе ✓ ¦ Розміщено в дереві ✓
+À ignorer ¦ Игнорировать ¦ Ігнорувати
+Placées dans l’arbre ¦ Размещённые в древе ¦ Розміщені в дереві
+Tests ¦ Тесты ¦ Тести
+Correspondances par nombre de cM ¦ Совпадения по количеству cM ¦ Збіги за кількістю cM
+Par côté ¦ По стороне ¦ За боком
+Les plus proches ¦ Самые близкие ¦ Найближчі
+Autosomal (atDNA) : tous les ancêtres récents ¦ Аутосомная (atDNA): все недавние предки ¦ Аутосомна (atDNA): усі недавні предки
+ADN-Y : lignée paternelle directe ¦ Y-ДНК: прямая отцовская линия ¦ Y-ДНК: пряма батьківська лінія
+ADN mitochondrial : lignée maternelle directe ¦ Митохондриальная ДНК: прямая материнская линия ¦ Мітохондріальна ДНК: пряма материнська лінія
+Nebula / séquençage complet ¦ Nebula / полное секвенирование ¦ Nebula / повне секвенування
+Labo médical ¦ Медицинская лаборатория ¦ Медична лабораторія
+Parent / enfant ¦ Родитель / ребёнок ¦ Батько чи мати / дитина
+Frère ou sœur ¦ Брат или сестра ¦ Брат або сестра
+Demi-frère ou demi-sœur ¦ Единокровный или единоутробный брат или сестра ¦ Зведений брат або зведена сестра
+Grand-parent / petit-enfant ¦ Дедушка, бабушка / внук, внучка ¦ Дідусь, бабуся / онук, онука
+Oncle, tante / neveu, nièce ¦ Дядя, тётя / племянник, племянница ¦ Дядько, тітка / племінник, племінниця
+Arrière-grand-parent ¦ Прадедушка, прабабушка ¦ Прадідусь, прабабуся
+Grand-oncle, grand-tante ¦ Двоюродный дедушка, двоюродная бабушка ¦ Двоюрідний дідусь, двоюрідна бабуся
+Cousin germain (1C) ¦ Двоюродный брат или сестра (1C) ¦ Двоюрідний брат або сестра (1C)
+Cousin germain, une génération d’écart (1C1R) ¦ Двоюродный брат или сестра, разница в одно поколение (1C1R) ¦ Двоюрідний брат або сестра, різниця в одне покоління (1C1R)
+Cousin germain, deux générations d’écart (1C2R) ¦ Двоюродный брат или сестра, разница в два поколения (1C2R) ¦ Двоюрідний брат або сестра, різниця у два покоління (1C2R)
+Demi-cousin germain ¦ Сводный двоюродный брат или сестра ¦ Зведений двоюрідний брат або сестра
+Demi-cousin germain, une génération d’écart ¦ Сводный двоюродный брат или сестра, разница в одно поколение ¦ Зведений двоюрідний брат або сестра, різниця в одне покоління
+Cousin issu de germain (2C) ¦ Троюродный брат или сестра (2C) ¦ Троюрідний брат або сестра (2C)
+Cousin issu de germain, une génération d’écart (2C1R) ¦ Троюродный брат или сестра, разница в одно поколение (2C1R) ¦ Троюрідний брат або сестра, різниця в одне покоління (2C1R)
+Cousin issu de germain, deux générations d’écart (2C2R) ¦ Троюродный брат или сестра, разница в два поколения (2C2R) ¦ Троюрідний брат або сестра, різниця у два покоління (2C2R)
+Demi-cousin issu de germain ¦ Сводный троюродный брат или сестра ¦ Зведений троюрідний брат або сестра
+Cousin au 3e degré (3C, issu d’issu de germain) ¦ Четвероюродный брат или сестра (3C) ¦ Чотириюрідний брат або сестра (3C)
+Demi-cousin au 3e degré ¦ Сводный четвероюродный брат или сестра ¦ Зведений чотириюрідний брат або сестра
+Cousin au 4e degré (4C) ¦ Пятиюродный брат или сестра (4C) ¦ П’ятиюрідний брат або сестра (4C)
+Cousin au 5e degré (5C) ¦ Шестиюродный брат или сестра (5C) ¦ Шестиюрідний брат або сестра (5C)
+Cousin au 6e degré ou plus ¦ Семиюродный брат или сестра и дальше ¦ Семиюрідний брат або сестра й далі
+Noté. ¦ Отмечено. ¦ Позначено.
+Nouveau test ¦ Новый тест ¦ Новий тест
+Personne testée ¦ Протестированный человек ¦ Протестована людина
+Nom du test ¦ Название теста ¦ Назва тесту
+(si la personne n’est pas dans l’arbre) ¦ (если человека нет в древе) ¦ (якщо людини немає в дереві)
+Test supprimé. ¦ Тест удалён. ¦ Тест видалено.
+Test enregistré. ¦ Тест сохранён. ¦ Тест збережено.
+les voir ¦ посмотреть их ¦ переглянути їх
+Tous les tests ¦ Все тесты ¦ Усі тести
+Tous les côtés ¦ Все стороны ¦ Усі боки
+Tout suivi ¦ Любой статус ¦ Будь-який статус
+Tous les groupes ¦ Все группы ¦ Усі групи
+Sans groupe ¦ Без группы ¦ Без групи
+Côté… ¦ Сторона… ¦ Бік…
+Étoiles ¦ Звёзды ¦ Зірки
+Afficher la suite ¦ Показать дальше ¦ Показати далі
+Ajoute d’abord un test (« 🧬 Mes tests »). ¦ Сначала добавь тест («🧬 Мои тесты»). ¦ Спочатку додай тест («🧬 Мої тести»).
+Ajoute d’abord un test. ¦ Сначала добавь тест. ¦ Спочатку додай тест.
+Nouvelle correspondance ¦ Новое совпадение ¦ Новий збіг
+Fiche dans l’arbre ¦ Карточка в древе ¦ Картка в дереві
+Si tu sais qui c’est… ¦ Если знаешь, кто это… ¦ Якщо знаєш, хто це…
+Tape les cM partagés : la relation probable s’affiche ici. ¦ Введи общие cM: вероятное родство появится здесь. ¦ Введи спільні cM: ймовірна спорідненість з’явиться тут.
+Supprimée. ¦ Удалено. ¦ Видалено.
+Correspondance enregistrée. ¦ Совпадение сохранено. ¦ Збіг збережено.
+Importer des segments ADN ¦ Импортировать сегменты ДНК ¦ Імпортувати сегменти ДНК
+Importer des correspondances ADN ¦ Импортировать совпадения ДНК ¦ Імпортувати збіги ДНК
+Fichier vide ou illisible. ¦ Файл пуст или нечитаем. ¦ Файл порожній або нечитабельний.
+Colonnes reconnues (à vérifier) ¦ Распознанные столбцы (проверь) ¦ Розпізнані стовпці (перевір)
+— ne pas prendre — ¦ — не брать — ¦ — не брати —
+=correspondance ajoutée ¦ добавленное совпадение|добавленных совпадения|добавленных совпадений ¦ доданий збіг|додані збіги|доданих збігів
+=segment importé ¦ импортированный сегмент|импортированных сегмента|импортированных сегментов ¦ імпортований сегмент|імпортовані сегменти|імпортованих сегментів
+=groupe créé ¦ созданная группа|созданные группы|созданных групп ¦ створена група|створені групи|створених груп
+=cochée ¦ отмеченное|отмеченных|отмеченных ¦ позначений|позначені|позначених
+=ancêtre possible ¦ возможный предок|возможных предка|возможных предков ¦ можливий предок|можливі предки|можливих предків
+Un groupe range ensemble les correspondances d’une même branche. ¦ Группа объединяет совпадения одной ветви. ¦ Група об’єднує збіги однієї гілки.
+arrière-grands-parents ¦ прадедушки и прабабушки ¦ прадідусі та прабабусі
+🎯 Ancêtres communs ¦ 🎯 Общие предки ¦ 🎯 Спільні предки
+🤔 Ancêtres probables ¦ 🤔 Вероятные предки ¦ 🤔 Ймовірні предки
+Ancêtre commun encore inconnu ¦ Общий предок пока неизвестен ¦ Спільний предок поки що невідомий
+📍 Placer un cousin dans l’arbre ¦ 📍 Разместить родственника в древе ¦ 📍 Розмістити родича в дереві
+Hors des valeurs connues. ¦ Вне известных значений. ¦ Поза відомими значеннями.
+Probabilité ¦ Вероятность ¦ Ймовірність
+Couple d’ancêtres ¦ Пара предков ¦ Пара предків
+(un seul des deux : demi-cousin) ¦ (только один из двух: сводный родственник) ¦ (лише один із двох: зведений родич)
+Choisis une correspondance ou entre des cM. ¦ Выбери совпадение или введи cM. ¦ Вибери збіг або введи cM.
+Aucun test ¦ Нет тестов ¦ Немає тестів
+Couleur par correspondance ¦ Цвет по совпадению ¦ Колір за збігом
+Par groupe ¦ По группе ¦ За групою
+Aucun segment. ¦ Нет сегментов. ¦ Немає сегментів.
+Nouveau segment ¦ Новый сегмент ¦ Новий сегмент
+Ancêtre supposé ¦ Предполагаемый предок ¦ Імовірний предок
+♂ ADN-Y — lignée paternelle directe ¦ ♂ Y-ДНК — прямая отцовская линия ¦ ♂ Y-ДНК — пряма батьківська лінія
+♀ ADN mitochondrial — lignée maternelle directe ¦ ♀ Митохондриальная ДНК — прямая материнская линия ¦ ♀ Мітохондріальна ДНК — пряма материнська лінія
+✕ ADN-X — ancêtres possibles ¦ ✕ X-ДНК — возможные предки ¦ ✕ X-ДНК — можливі предки
+Endogamie et implexe ¦ Эндогамия и импликс ¦ Ендогамія та імплекс
+Placer une correspondance ¦ Разместить совпадение ¦ Розмістити збіг
+Confidentialité et éthique ¦ Конфиденциальность и этика ¦ Конфіденційність та етика
+Colonnes du tableau des correspondances ¦ Столбцы таблицы совпадений ¦ Стовпці таблиці збігів
+Chiffres et couleurs ¦ Числа и цвета ¦ Числа та кольори
+⤓ Exporter tout l’ADN (JSON) ¦ ⤓ Экспортировать всю ДНК (JSON) ¦ ⤓ Експортувати всю ДНК (JSON)
+Ouvrir l’onglet ADN → ¦ Открыть вкладку ДНК → ¦ Відкрити вкладку ДНК →
+Nouveau diagramme ¦ Новая диаграмма ¦ Нова діаграма
+Choisis un dessin : il arrive avec un exemple que tu remplaces par tes chiffres (à la main, collés d’un tableur, d’un CSV, ou pris dans l’app). ¦ Выбери рисунок: он появится с примером, который ты заменишь своими числами (вручную, вставленными из электронной таблицы, из CSV или взятыми из приложения). ¦ Вибери малюнок: він з’явиться з прикладом, який ти заміниш своїми числами (вручну, вставленими з електронної таблиці, з CSV або взятими із застосунку).
+Ordre, types montrés ou cachés, groupes à toi ¦ Порядок, показанные или скрытые типы, свои группы ¦ Порядок, показані або приховані типи, власні групи
+⚙️ Ranger les types ¦ ⚙️ Упорядочить типы ¦ ⚙️ Упорядкувати типи
+Assemblées ¦ Собрания ¦ Зібрання
+Parlement, assemblée, conseil ¦ Парламент, собрание, совет ¦ Парламент, зібрання, рада
+Arc élargi (Assemblée en éventail) ¦ Расширенная дуга (собрание веером) ¦ Розширена дуга (зібрання віялом)
+Fer à cheval ¦ Подкова ¦ Підкова
+Westminster (bancs face à face) ¦ Вестминстер (скамьи друг напротив друга) ¦ Вестмінстер (лави одна навпроти одної)
+Salle face à la tribune (conseil municipal…) ¦ Зал лицом к трибуне (муниципальный совет…) ¦ Зала обличчям до трибуни (муніципальна рада…)
+Frise des membres (groupe de musique, association…) ¦ Лента членов (музыкальная группа, ассоциация…) ¦ Стрічка членів (музичний гурт, асоціація…)
+Frise de vies (des personnes de la base) ¦ Лента жизней (людей из базы) ¦ Стрічка життів (людей із бази)
+Planning (tâches d’une enquête, Gantt) ¦ План (задачи расследования, Гант) ¦ План (завдання розслідування, Ґант)
+Frise chronologique (dates clés) ¦ Хронологическая лента (ключевые даты) ¦ Хронологічна стрічка (ключові дати)
+Calendrier coloré (jour par jour) ¦ Цветной календарь (день за днём) ¦ Кольоровий календар (день за днем)
+Rose des mois (12 parts) ¦ Роза месяцев (12 долей) ¦ Роза місяців (12 часток)
+Spirale du temps (une spire par siècle) ¦ Спираль времени (один виток на век) ¦ Спіраль часу (один виток на століття)
+Arbre en frise (vies par génération) ¦ Древо-лента (жизни по поколениям) ¦ Дерево-стрічка (життя за поколіннями)
+Naissances, décès et crises ¦ Рождения, смерти и кризисы ¦ Народження, смерті та кризи
+Âges comparés d’une fratrie ¦ Сравнение возрастов братьев и сестёр ¦ Порівняння віку братів і сестер
+Pyramide « qui vivait en … » ¦ Пирамида «кто жил в …» ¦ Піраміда «хто жив у …»
+Les vies de plusieurs générations superposées : qui a connu son arrière-petit-enfant, et combien d’années. ¦ Жизни нескольких поколений друг над другом: кто застал своего правнука и сколько лет. ¦ Життя кількох поколінь одне над одним: хто застав свого правнука і скільки років.
+Qui a connu qui (vies de plusieurs générations) ¦ Кто кого знал (жизни нескольких поколений) ¦ Хто кого знав (життя кількох поколінь)
+Les mariages et les conceptions (naissance − 9 mois) mois par mois, avec le Carême et l’Avent repérés. ¦ Браки и зачатия (рождение − 9 месяцев) по месяцам, с отмеченными Великим постом и Адвентом. ¦ Шлюби й зачаття (народження − 9 місяців) за місяцями, з позначеними Великим постом і Адвентом.
+Mois des mariages et des conceptions (Carême, Avent) ¦ Месяцы браков и зачатий (Великий пост, Адвент) ¦ Місяці шлюбів і зачать (Великий піст, Адвент)
+Une ligne par mère : ses enfants à l’âge qu’elle avait, l’écart entre deux naissances et les enfants morts jeunes. ¦ Одна строка на мать: её дети по её возрасту, промежуток между двумя рождениями и дети, умершие в детстве. ¦ Один рядок на матір: її діти за її віком, проміжок між двома народженнями та діти, що померли малими.
+Espacement des naissances (les enfants de chaque mère) ¦ Интервалы между рождениями (дети каждой матери) ¦ Інтервали між народженнями (діти кожної матері)
+Une bande par personne, colorée selon la commune (ou le département, le pays) où elle vivait à chaque époque. ¦ Одна полоса на человека, окрашенная по коммуне (или департаменту, стране), где он жил в каждый период. ¦ Одна смуга на людину, забарвлена за комуною (або департаментом, країною), де вона жила в кожен період.
+Frise des lieux de vie (une bande par personne) ¦ Лента мест жизни (одна полоса на человека) ¦ Стрічка місць життя (одна смуга на людину)
+Une ligne par tâche, de sa date de début à sa date de fin, avec ce qui est déjà fait. ¦ Одна строка на задачу, от даты начала до даты окончания, с тем, что уже сделано. ¦ Один рядок на завдання, від дати початку до дати завершення, з тим, що вже зроблено.
+Diagramme de Gantt (tâches, chantiers de recherche) ¦ Диаграмма Ганта (задачи, исследовательские проекты) ¦ Діаграма Ганта (завдання, дослідницькі проєкти)
+Les anniversaires, mariages, décès et fêtes des prénoms autour d’un cercle de douze mois. ¦ Дни рождения, браки, смерти и именины по кругу из двенадцати месяцев. ¦ Дні народження, шлюби, смерті та іменини по колу з дванадцяти місяців.
+Roue de l’année (anniversaires et fêtes de la famille) ¦ Колесо года (дни рождения и праздники семьи) ¦ Колесо року (дні народження та свята родини)
+Colonnes empilées ¦ Столбцы с накоплением ¦ Стовпці з накопиченням
+Colonnes empilées à 100 % ¦ Столбцы с накоплением до 100 % ¦ Стовпці з накопиченням до 100 %
+Pyramide (des âges…) ¦ Пирамида (возрастов…) ¦ Піраміда (віку…)
+Carte de chaleur (tableau coloré) ¦ Тепловая карта (цветная таблица) ¦ Теплова карта (кольорова таблиця)
+Classement qui évolue (prénoms par décennie…) ¦ Меняющийся рейтинг (имена по десятилетиям…) ¦ Змінний рейтинг (імена за десятиліттями…)
+Courants empilés (métiers sur 200 ans…) ¦ Потоки с накоплением (профессии за 200 лет…) ¦ Потоки з накопиченням (професії за 200 років…)
+Histogramme (valeurs rangées en tranches) ¦ Гистограмма (значения по интервалам) ¦ Гістограма (значення за інтервалами)
+Boîte à moustaches (médiane, quartiles) ¦ Ящик с усами (медиана, квартили) ¦ Діаграма розмаху (медіана, квартилі)
+Haltères (deux valeurs par ligne) ¦ Гантели (два значения на строку) ¦ Гантелі (два значення на рядок)
+Pente avant / après ¦ Наклон до / после ¦ Нахил до / після
+Cascade (un total qui monte et descend) ¦ Каскад (итог, который растёт и падает) ¦ Каскад (підсумок, що зростає й спадає)
+Sucettes couchées ¦ Горизонтальные леденцы ¦ Горизонтальні льодяники
+Essaim de points (une personne = un point) ¦ Рой точек (один человек = одна точка) ¦ Рій точок (одна людина = одна точка)
+Petites courbes en grille ¦ Маленькие кривые в сетке ¦ Маленькі криві в сітці
+Violon (répartition par catégorie) ¦ Скрипка (распределение по категориям) ¦ Скрипка (розподіл за категоріями)
+Pour chaque âge, la part des personnes encore en vie : une courbe par siècle, par sexe ou par branche. ¦ Для каждого возраста доля людей, ещё живых: одна кривая на век, на пол или на ветвь. ¦ Для кожного віку частка людей, які ще живі: одна крива на століття, на стать або на гілку.
+Courbe de survie (part encore en vie à chaque âge) ¦ Кривая выживаемости (доля ещё живых в каждом возрасте) ¦ Крива виживання (частка ще живих у кожному віці)
+Vagues (une répartition par siècle…) ¦ Волны (распределение по векам…) ¦ Хвилі (розподіл за століттями…)
+Échelle de points (Cleveland) ¦ Точечная шкала (Кливленд) ¦ Точкова шкала (Клівленд)
+Tableau de mobilité (métier du père × métier de l’enfant) ¦ Таблица мобильности (профессия отца × профессия ребёнка) ¦ Таблиця мобільності (професія батька × професія дитини)
+Barres en cercle (classement qui s’enroule) ¦ Круговые столбцы (рейтинг, закрученный по кругу) ¦ Кругові стовпці (рейтинг, закручений по колу)
+Des barres sur l’axe de gauche et une courbe sur un deuxième axe à droite, pour comparer deux sortes de chiffres. ¦ Столбцы по левой оси и кривая по второй оси справа, чтобы сравнить два вида чисел. ¦ Стовпці на лівій осі та крива на другій осі праворуч, щоб порівняти два види чисел.
+Barres + courbe (deuxième axe à droite) ¦ Столбцы + кривая (вторая ось справа) ¦ Стовпці + крива (друга вісь праворуч)
+Deux chiffres face à face de chaque côté d’un trait (décès et naissances, femmes et hommes), ou un chiffre au-dessus et en dessous d’un centre. ¦ Два числа друг напротив друга по обе стороны от линии (смерти и рождения, женщины и мужчины) или одно число выше и ниже центра. ¦ Два числа одне навпроти одного по обидва боки від лінії (смерті й народження, жінки й чоловіки) або одне число вище й нижче центру.
+Barres divergentes (gauche / droite d’un centre) ¦ Расходящиеся столбцы (слева / справа от центра) ¦ Розбіжні стовпці (ліворуч / праворуч від центру)
+Une colline par série (un nom de famille, un prénom, une commune…), l’une derrière l’autre, au fil du temps. ¦ Один холм на ряд (фамилия, имя, коммуна…), один за другим, с течением времени. ¦ Один пагорб на ряд (прізвище, ім’я, комуна…), один за одним, з плином часу.
+Collines empilées (une courbe par série, décalées) ¦ Холмы с наложением (одна кривая на ряд, со сдвигом) ¦ Пагорби з накладанням (одна крива на ряд, зі зсувом)
+Chaque personne est une ligne qui passe par plusieurs axes (âge au mariage, enfants, âge au décès…) : les profils se voient d’un coup d’œil. ¦ Каждый человек — линия, проходящая через несколько осей (возраст при браке, дети, возраст смерти…): профили видны с одного взгляда. ¦ Кожна людина — лінія, що проходить через кілька осей (вік при шлюбі, діти, вік смерті…): профілі видно з першого погляду.
+Coordonnées parallèles (plusieurs chiffres par personne) ¦ Параллельные координаты (несколько чисел на человека) ¦ Паралельні координати (кілька чисел на людину)
+Une courbe qui avance par marches : le chiffre reste le même jusqu’au prochain changement (vivants de la famille, ancêtres trouvés…). ¦ Кривая, идущая ступеньками: число остаётся тем же до следующего изменения (живые в семье, найденные предки…). ¦ Крива, що йде сходинками: число лишається тим самим до наступної зміни (живі в родині, знайдені предки…).
+Courbe en escalier (ex. combien de vivants, année par année) ¦ Ступенчатая кривая (напр. сколько живых, год за годом) ¦ Східчаста крива (напр. скільки живих, рік за роком)
+Mosaïque (100 carrés) ¦ Мозаика (100 квадратов) ¦ Мозаїка (100 квадратів)
+Carte proportionnelle (rectangles) ¦ Пропорциональная карта (прямоугольники) ¦ Пропорційна карта (прямокутники)
+Pictogrammes (symboles répétés) ¦ Пиктограммы (повторяющиеся символы) ¦ Піктограми (повторювані символи)
+Mosaïque à largeur variable (Marimekko) ¦ Мозаика переменной ширины (Marimekko) ¦ Мозаїка змінної ширини (Marimekko)
+Bulles groupées (noms, métiers, lieux) ¦ Сгруппированные пузыри (фамилии, профессии, места) ¦ Згруповані бульбашки (прізвища, професії, місця)
+Flux (Sankey) : migrations, métiers… ¦ Потоки (Sankey): миграции, профессии… ¦ Потоки (Sankey): міграції, професії…
+Diagramme d’accord (mariages entre villages) ¦ Хордовая диаграмма (браки между деревнями) ¦ Хордова діаграма (шлюби між селами)
+Une idée au centre, des branches autour, et les idées de chaque branche. ¦ Идея в центре, ветви вокруг и идеи каждой ветви. ¦ Ідея в центрі, гілки навколо та ідеї кожної гілки.
+Carte mentale (une idée, ses branches) ¦ Ментальная карта (идея и её ветви) ¦ Ментальна карта (ідея та її гілки)
+Éventail d’ascendance (mes chiffres) ¦ Веер предков (мои числа) ¦ Віяло предків (мої числа)
+Soleil des lignées (anneaux) ¦ Солнце родов (кольца) ¦ Сонце родів (кільця)
+Réseau de relations (témoins, parrains…) ¦ Сеть связей (свидетели, крёстные…) ¦ Мережа зв’язків (свідки, хрещені…)
+Diagramme de Venn (2 à 4 ensembles) ¦ Диаграмма Венна (от 2 до 4 множеств) ¦ Діаграма Венна (від 2 до 4 множин)
+Arbre en accordéon (cousins) ¦ Древо-гармошка (кузены) ¦ Дерево-гармошка (кузени)
+Graphe des cousinages ¦ Граф родства кузенов ¦ Граф кузенського споріднення
+Matrice de parenté (qui est quoi pour qui) ¦ Матрица родства (кто кем кому приходится) ¦ Матриця споріднення (хто ким кому доводиться)
+Arbre des patronymes (transmission du nom) ¦ Древо фамилий (передача фамилии) ¦ Дерево прізвищ (передавання прізвища)
+Quadrillage des ancêtres (une case par Sosa) ¦ Сетка предков (одна клетка на Sosa) ¦ Сітка предків (одна клітинка на Sosa)
+Les métiers d’une génération à l’autre : chaque bande suit des lignées, du trisaïeul au fils. ¦ Профессии из поколения в поколение: каждая полоса следует за родом, от прапрадеда до сына. ¦ Професії з покоління в покоління: кожна смуга йде за родом, від прапрадіда до сина.
+Métiers de père en fils (flux sur plusieurs générations) ¦ Профессии от отца к сыну (потоки через несколько поколений) ¦ Професії від батька до сина (потоки через кілька поколінь)
+Chaque couple est un point : sa distance au centre est celle qui séparait les lieux de naissance des deux époux. ¦ Каждая пара — точка: её расстояние от центра — это расстояние между местами рождения супругов. ¦ Кожна пара — точка: її відстань від центру — це відстань між місцями народження подружжя.
+Rayon des mariages (distance entre les villages des époux) ¦ Радиус браков (расстояние между деревнями супругов) ¦ Радіус шлюбів (відстань між селами подружжя)
+Par génération : les ancêtres qu’on devrait avoir (2, 4, 8…), les places trouvées et les personnes différentes. ¦ По поколениям: предки, которые должны быть (2, 4, 8…), найденные места и разные люди. ¦ За поколіннями: предки, які мали б бути (2, 4, 8…), знайдені місця та різні люди.
+Implexe (ancêtres théoriques et réels) ¦ Импликс (теоретические и реальные предки) ¦ Імплекс (теоретичні та реальні предки)
+Descendance en rectangles (icicle) ¦ Потомство в прямоугольниках (icicle) ¦ Нащадки в прямокутниках (icicle)
+Prénoms transmis (parrain, marraine → filleul) ¦ Передаваемые имена (крёстный, крёстная → крестник) ¦ Передавані імена (хрещений батько, хрещена мати → хрещеник)
+Causes de décès en anneaux (familles puis détail) ¦ Причины смерти в кольцах (группы, затем подробности) ¦ Причини смерті в кільцях (групи, потім подробиці)
+Une personne au milieu ; ses parents, grands-parents… au-dessus ; ses enfants, petits-enfants… au-dessous. ¦ Человек в центре; его родители, бабушки и дедушки… сверху; его дети, внуки… снизу. ¦ Людина в центрі; її батьки, бабусі й дідусі… згори; її діти, онуки… знизу.
+Sablier (ascendants et descendants d’une personne) ¦ Песочные часы (предки и потомки человека) ¦ Пісочний годинник (предки й нащадки людини)
+Le plus court chemin entre deux personnes, étape par étape, et la phrase qui dit le lien (« cousin issu de germains », « beau-frère »…). ¦ Кратчайший путь между двумя людьми, шаг за шагом, и фраза, называющая связь («троюродный брат», «шурин»…). ¦ Найкоротший шлях між двома людьми, крок за кроком, і фраза, що називає зв’язок («троюрідний брат», «шурин»…).
+Chemin de parenté entre deux personnes ¦ Путь родства между двумя людьми ¦ Шлях споріднення між двома людьми
+La part des ancêtres connus à chaque génération (1, 2, 4, 8… possibles), en barres ou en éventail. ¦ Доля известных предков в каждом поколении (1, 2, 4, 8… возможных), столбцами или веером. ¦ Частка відомих предків у кожному поколінні (1, 2, 4, 8… можливих), стовпцями або віялом.
+Complétude de l’arbre (ancêtres connus par génération) ¦ Полнота древа (известные предки по поколениям) ¦ Повнота дерева (відомі предки за поколіннями)
+La liste des ancêtres par numéro Sosa, génération par génération, prête à imprimer. ¦ Список предков по номеру Sosa, поколение за поколением, готовый к печати. ¦ Список предків за номером Sosa, покоління за поколінням, готовий до друку.
+Tableau d’ascendance (ahnentafel, une ligne par Sosa) ¦ Таблица предков (ahnentafel, одна строка на Sosa) ¦ Таблиця предків (ahnentafel, один рядок на Sosa)
+Cartes de chiffres (KPI) ¦ Карточки с числами (KPI) ¦ Картки з числами (KPI)
+Barre d’objectif (valeur, objectif, zones) ¦ Полоса цели (значение, цель, зоны) ¦ Смуга мети (значення, мета, зони)
+Un anneau par objectif : plein quand c’est fini (ancêtres trouvés, actes sourcés, photos identifiées…). ¦ Одно кольцо на цель: заполнено, когда всё готово (найденные предки, записи с источниками, опознанные фото…). ¦ Одне кільце на мету: заповнене, коли все готово (знайдені предки, записи з джерелами, упізнані фото…).
+Anneaux d’avancement (objectifs de recherche) ¦ Кольца прогресса (цели исследования) ¦ Кільця поступу (цілі дослідження)
+Carte colorée par zones (départements, régions, pays…) ¦ Карта, окрашенная по зонам (департаменты, регионы, страны…) ¦ Мапа, забарвлена за зонами (департаменти, регіони, країни…)
+Carte des migrations (flèches d’un lieu à un autre) ¦ Карта миграций (стрелки от одного места к другому) ¦ Мапа міграцій (стрілки від одного місця до іншого)
+Carte à symboles proportionnels (ronds par lieu) ¦ Карта с пропорциональными символами (кружки по местам) ¦ Мапа з пропорційними символами (кружечки за місцями)
+Carte en points (un point par événement) ¦ Точечная карта (одна точка на событие) ¦ Точкова мапа (одна точка на подію)
+Carte en hexagones (densité en alvéoles) ¦ Карта в шестиугольниках (плотность в сотах) ¦ Мапа в шестикутниках (щільність у стільниках)
+Carte déformée (zones grossies selon leur chiffre) ¦ Искажённая карта (зоны увеличены по своему числу) ¦ Викривлена мапа (зони збільшені за своїм числом)
+Carte qui raconte (une vie étape par étape) ¦ Карта-рассказ (жизнь шаг за шагом) ¦ Мапа-розповідь (життя крок за кроком)
+Carte des patronymes (siècle par siècle) ¦ Карта фамилий (век за веком) ¦ Мапа прізвищ (століття за століттям)
+Carte de chaleur dans le temps (décennie par décennie) ¦ Тепловая карта во времени (десятилетие за десятилетием) ¦ Теплова мапа в часі (десятиліття за десятиліттям)
+Carte des cousins ADN (lieux des ancêtres communs) ¦ Карта ДНК-кузенов (места общих предков) ¦ Мапа ДНК-кузенів (місця спільних предків)
+Carte de tes recherches (vu, en partie, trous) ¦ Карта твоих исследований (просмотрено, частично, пробелы) ¦ Мапа твоїх досліджень (переглянуто, частково, прогалини)
+Le point moyen des lieux de naissance de chaque génération, et le chemin qu’il a fait jusqu’à toi. ¦ Средняя точка мест рождения каждого поколения и путь, который она прошла до тебя. ¦ Середня точка місць народження кожного покоління і шлях, який вона пройшла до тебе.
+Centre de gravité de la famille par génération ¦ Центр тяжести семьи по поколениям ¦ Центр ваги родини за поколіннями
+Les lieux de naissance des ancêtres, une couleur par génération : on voit la famille venir de plus loin. ¦ Места рождения предков, один цвет на поколение: видно, как семья приходит издалека. ¦ Місця народження предків, один колір на покоління: видно, як родина приходить здалека.
+Carte des générations (une couleur par génération) ¦ Карта поколений (один цвет на поколение) ¦ Мапа поколінь (один колір на покоління)
+Vie et mort ¦ Жизнь и смерть ¦ Життя і смерть
+La part des enfants morts avant 1 an et avant 5 ans, période par période. ¦ Доля детей, умерших до 1 года и до 5 лет, период за периодом. ¦ Частка дітей, що померли до 1 року та до 5 років, період за періодом.
+Mortalité des enfants (avant 1 an, avant 5 ans) ¦ Детская смертность (до 1 года, до 5 лет) ¦ Дитяча смертність (до 1 року, до 5 років)
+Pour chaque couple, ses enfants : arrivés à l’âge adulte, morts jeunes, ou dont on ne sait pas. ¦ Для каждой пары её дети: дожившие до взрослого возраста, умершие в детстве или неизвестно. ¦ Для кожної пари її діти: що дожили до дорослого віку, що померли малими, або невідомо.
+Fratries qui survivent (enfants nés, arrivés adultes) ¦ Выжившие братья и сёстры (родившиеся дети, дожившие до взрослого возраста) ¦ Брати й сестри, що вижили (народжені діти, що дожили до дорослого віку)
+Un damier : chaque mois de l’année, pour chaque époque. Plus c’est foncé, plus il y a de naissances (ou de décès). ¦ Шахматная доска: каждый месяц года для каждой эпохи. Чем темнее, тем больше рождений (или смертей). ¦ Шахівниця: кожен місяць року для кожної доби. Що темніше, то більше народжень (або смертей).
+Saisons des naissances et des décès (mois × époque) ¦ Сезоны рождений и смертей (месяц × эпоха) ¦ Сезони народжень і смертей (місяць × доба)
+Couples et familles ¦ Пары и семьи ¦ Пари й родини
+Combien de temps attendaient les veufs et les veuves avant de se remarier. ¦ Сколько времени вдовцы и вдовы ждали, прежде чем снова вступить в брак. ¦ Скільки часу вдівці та вдови чекали, перш ніж знову взяти шлюб.
+Veuvage et remariage (délai avant de se remarier) ¦ Вдовство и повторный брак (срок до нового брака) ¦ Вдівство й повторний шлюб (строк до нового шлюбу)
+Combien d’années duraient les mariages, de la noce à la mort du premier des deux. ¦ Сколько лет длились браки, от свадьбы до смерти первого из супругов. ¦ Скільки років тривали шлюби, від весілля до смерті першого з подружжя.
+Durée des mariages (jusqu’à la mort d’un époux) ¦ Длительность браков (до смерти одного из супругов) ¦ Тривалість шлюбів (до смерті одного з подружжя)
+Chaque naissance est un point : l’âge du père (et celui de la mère) selon l’année. ¦ Каждое рождение — точка: возраст отца (и матери) по годам. ¦ Кожне народження — точка: вік батька (і матері) за роками.
+Âge des parents à chaque naissance (nuage de points) ¦ Возраст родителей при каждом рождении (облако точек) ¦ Вік батьків при кожному народженні (хмара точок)
+La part des premiers enfants nés avant le mariage, ou moins de 8 mois après. ¦ Доля первых детей, родившихся до брака или менее чем через 8 месяцев после него. ¦ Частка перших дітей, народжених до шлюбу або менш ніж через 8 місяців після нього.
+Conceptions avant mariage (premier enfant « trop tôt ») ¦ Зачатия до брака (первый ребёнок «слишком рано») ¦ Зачаття до шлюбу (перша дитина «надто рано»)
+À gauche les couples où le mari est plus âgé, à droite ceux où la femme est plus âgée, par tranches d’écart. ¦ Слева пары, где муж старше, справа — где старше жена, по интервалам разницы. ¦ Ліворуч пари, де чоловік старший, праворуч — де старша дружина, за інтервалами різниці.
+Écart d’âge entre époux (pyramide) ¦ Разница в возрасте между супругами (пирамида) ¦ Різниця у віці між подружжям (піраміда)
+À chaque génération d’ancêtres, la distance moyenne entre leur lieu de naissance et le lieu de référence. ¦ Для каждого поколения предков — среднее расстояние между их местом рождения и опорным местом. ¦ Для кожного покоління предків — середня відстань між їхнім місцем народження та опорним місцем.
+Loin du berceau (distance par génération) ¦ Вдали от колыбели (расстояние по поколениям) ¦ Далеко від колиски (відстань за поколіннями)
+La part de ceux qui ont signé l’acte (époux, épouses, témoins), période par période. ¦ Доля тех, кто подписал запись (женихи, невесты, свидетели), период за периодом. ¦ Частка тих, хто підписав запис (чоловіки, дружини, свідки), період за періодом.
+Savoir signer (époux, épouses, témoins) ¦ Умение расписаться (женихи, невесты, свидетели) ¦ Уміння розписатися (чоловіки, дружини, свідки)
+Pour chaque génération d’ancêtres : naissances, mariages et décès prouvés par une source (vert), sans source (jaune) ou manquants (gris). ¦ Для каждого поколения предков: рождения, браки и смерти, подтверждённые источником (зелёный), без источника (жёлтый) или отсутствующие (серый). ¦ Для кожного покоління предків: народження, шлюби й смерті, підтверджені джерелом (зелений), без джерела (жовтий) або відсутні (сірий).
+Ce que tu as prouvé (actes sourcés par génération) ¦ Что ты доказал(а) (записи с источниками по поколениям) ¦ Що ти довів(ла) (записи з джерелами за поколіннями)
+Pour chaque commune, une frise des années : dépouillées, vues sans rien trouver, à faire, actes trouvés ; en rouge pâle, les trous. ¦ Для каждой коммуны лента лет: выписанные, просмотренные без находок, предстоящие, найденные записи; бледно-красным — пробелы. ¦ Для кожної комуни стрічка років: виписані, переглянуті без знахідок, заплановані, знайдені записи; блідо-червоним — прогалини.
+Registres consultés (années vues et trous) ¦ Просмотренные книги записей (просмотренные годы и пробелы) ¦ Переглянуті книги записів (переглянуті роки та прогалини)
+Peinture des chromosomes (segments ADN par branche) ¦ Раскраска хромосом (сегменты ДНК по ветвям) ¦ Розфарбування хромосом (сегменти ДНК за гілками)
+Règle des cM (parentés possibles) ¦ Правило сМ (возможное родство) ¦ Правило сМ (можливе споріднення)
+Les correspondances ADN qui se correspondent entre elles, rangées en groupes de couleur (souvent un par grand-parent). ¦ ДНК-совпадения, совпадающие между собой, собранные в цветные группы (часто по одной на бабушку или дедушку). ¦ ДНК-збіги, що збігаються між собою, зібрані в кольорові групи (часто по одній на бабусю чи дідуся).
+Matrice des correspondances ADN (méthode de Leeds) ¦ Матрица ДНК-совпадений (метод Лидса) ¦ Матриця ДНК-збігів (метод Лідса)
+Chargement du diagramme… ¦ Загрузка диаграммы… ¦ Завантаження діаграми…
+Diagramme introuvable (supprimé ?). ¦ Диаграмма не найдена (удалена?). ¦ Діаграму не знайдено (видалено?).
+la fenêtre « Imprimer » n’est pas chargée ¦ окно «Печать» не загружено ¦ вікно «Друк» не завантажено
+Titre et légende ¦ Заголовок и подпись ¦ Заголовок і підпис
+Tableau des données dessous ¦ Таблица данных под ним ¦ Таблиця даних під ним
+Taille réelle ¦ Реальный размер ¦ Справжній розмір
+Image copiée : colle-la où tu veux (⌘V). ¦ Изображение скопировано: вставь его куда хочешь (⌘V). ¦ Зображення скопійовано: встав його куди хочеш (⌘V).
+Copie impossible ici : utilise « Image PNG ». ¦ Здесь копировать нельзя: используй «Изображение PNG». ¦ Тут копіювати не можна: скористайся «Зображення PNG».
+image trop grande : baisse la qualité ¦ изображение слишком большое: снизь качество ¦ зображення завелике: знизь якість
+📋 Copier l’image ¦ 📋 Копировать изображение ¦ 📋 Копіювати зображення
+🧾 Prendre un classeur du Tableur ¦ 🧾 Взять книгу из электронной таблицы ¦ 🧾 Взяти книгу з електронної таблиці
+Prendre un classeur du Tableur ¦ Взять книгу из электронной таблицы ¦ Взяти книгу з електронної таблиці
+Nom du diagramme ¦ Название диаграммы ¦ Назва діаграми
+PNG, JPG, SVG, PDF, impression, CSV, fichier du diagramme ¦ PNG, JPG, SVG, PDF, печать, CSV, файл диаграммы ¦ PNG, JPG, SVG, PDF, друк, CSV, файл діаграми
+Depuis l’app ¦ Из приложения ¦ Із застосунку
+Personnaliser n’est pas chargé. ¦ Настройка не загружена. ¦ Налаштування не завантажено.
+Dans l’ordre du tableau ¦ В порядке таблицы ¦ У порядку таблиці
+Prendre ces données ¦ Взять эти данные ¦ Взяти ці дані
+Prendre ces chiffres ¦ Взять эти числа ¦ Взяти ці числа
+🧮 Refaire avec « Compter dans ma base » ¦ 🧮 Пересчитать через «Посчитать в моей базе» ¦ 🧮 Перерахувати через «Порахувати в моїй базі»
+🧮 Compter dans ma base ¦ 🧮 Посчитать в моей базе ¦ 🧮 Порахувати в моїй базі
+Une personne, une enquête… ¦ Человек, расследование… ¦ Людина, розслідування…
+Tableau importé. ¦ Таблица импортирована. ¦ Таблицю імпортовано.
+Vider ce tableau ? ¦ Очистить эту таблицу? ¦ Очистити цю таблицю?
+Coller un tableau ¦ Вставить таблицу ¦ Вставити таблицю
+Données reprises du tableur. ¦ Данные взяты из электронной таблицы. ¦ Дані взято з електронної таблиці.
+Fermer sans enregistrer les changements ? ¦ Закрыть, не сохраняя изменения? ¦ Закрити, не зберігаючи змін?
+Changements non enregistrés ¦ Несохранённые изменения ¦ Незбережені зміни
+Remplacer mes données ¦ Заменить мои данные ¦ Замінити мої дані
+Choisir un diagramme ¦ Выбрать диаграмму ¦ Вибрати діаграму
+Importer (fichier, tableau, Wikipédia, image) ¦ Импорт (файл, таблица, Википедия, изображение) ¦ Імпорт (файл, таблиця, Вікіпедія, зображення)
+un classeur du Tableur ¦ книга из электронной таблицы ¦ книга з електронної таблиці
+Copie créée. ¦ Копия создана. ¦ Копію створено.
+Diagramme supprimé. ¦ Диаграмма удалена. ¦ Діаграму видалено.
+Ce fichier n’est pas un diagramme. ¦ Этот файл не является диаграммой. ¦ Цей файл не є діаграмою.
+Diagramme importé ¦ Диаграмма импортирована ¦ Діаграму імпортовано
+Diagramme importé. ¦ Диаграмма импортирована. ¦ Діаграму імпортовано.
+Naissances (ou baptêmes) ¦ Рождения (или крещения) ¦ Народження (або хрещення)
+Baptêmes ¦ Крещения ¦ Хрещення
+Décès (ou sépultures) ¦ Смерти (или погребения) ¦ Смерті (або поховання)
+Rien (un seul total) ¦ Ничего (один итог) ¦ Нічого (один підсумок)
+Âge (par 5 ans) ¦ Возраст (по 5 лет) ¦ Вік (по 5 років)
+Âge (par 10 ans) ¦ Возраст (по 10 лет) ¦ Вік (по 10 років)
+Nombre d’enfants ¦ Число детей ¦ Кількість дітей
+Âge au mariage (par 5 ans) ¦ Возраст при браке (по 5 лет) ¦ Вік при шлюбі (по 5 років)
+Âge au premier enfant (par 5 ans) ¦ Возраст при первом ребёнке (по 5 лет) ¦ Вік при першій дитині (по 5 років)
+Nombre d’unions ¦ Число союзов ¦ Кількість союзів
+Branche (côté père, côté mère) ¦ Ветвь (по отцу, по матери) ¦ Гілка (по батькові, по матері)
+En vie ou décédé ¦ Жив или умер ¦ Живий чи помер
+En vie ou décédés ¦ Живые или умершие ¦ Живі чи померлі
+Avec ou sans source ¦ С источником или без ¦ З джерелом чи без
+par nom ¦ по фамилии ¦ за прізвищем
+par prénom ¦ по имени ¦ за ім’ям
+par sexe ¦ по полу ¦ за статтю
+par métier ¦ по профессии ¦ за професією
+par génération ¦ по поколению ¦ за поколінням
+par commune ¦ по коммуне ¦ за комуною
+par département ¦ по департаменту ¦ за департаментом
+par région ¦ по региону ¦ за регіоном
+par pays ¦ по стране ¦ за країною
+par âge (5 ans) ¦ по возрасту (5 лет) ¦ за віком (5 років)
+par âge (10 ans) ¦ по возрасту (10 лет) ¦ за віком (10 років)
+par nombre d’enfants ¦ по числу детей ¦ за кількістю дітей
+par âge au mariage ¦ по возрасту при браке ¦ за віком при шлюбі
+par âge au premier enfant ¦ по возрасту при первом ребёнке ¦ за віком при першій дитині
+par nombre d’unions ¦ по числу союзов ¦ за кількістю союзів
+par branche ¦ по ветви ¦ за гілкою
+par cause ¦ по причине ¦ за причиною
+par sorte d’événement ¦ по виду события ¦ за видом події
+Mes ancêtres ¦ Мои предки ¦ Мої предки
+Branche paternelle (côté père) ¦ Отцовская ветвь (по отцу) ¦ Батьківська гілка (по батькові)
+Branche maternelle (côté mère) ¦ Материнская ветвь (по матери) ¦ Материнська гілка (по матері)
+Une étiquette ¦ Метка ¦ Мітка
+Une recherche dans les noms ¦ Поиск по фамилиям ¦ Пошук у прізвищах
+Les personnes que je choisis ¦ Люди, которых я выбираю ¦ Люди, яких я вибираю
+Une seule série ¦ Один ряд ¦ Один ряд
+Une série par sexe ¦ Один ряд на пол ¦ Один ряд на стать
+Une série par siècle ¦ Один ряд на век ¦ Один ряд на століття
+Une série par branche (côté père / mère) ¦ Один ряд на ветвь (по отцу / по матери) ¦ Один ряд на гілку (по батькові / по матері)
+Une série par génération ¦ Один ряд на поколение ¦ Один ряд на покоління
+Une série par département ¦ Один ряд на департамент ¦ Один ряд на департамент
+Une série par pays ¦ Один ряд на страну ¦ Один ряд на країну
+Du plus grand au plus petit ¦ От большего к меньшему ¦ Від більшого до меншого
+Du plus petit au plus grand ¦ От меньшего к большему ¦ Від меншого до більшого
+Dans l’ordre (temps, âges…) ¦ По порядку (время, возраст…) ¦ За порядком (час, вік…)
+Médiane ¦ Медиана ¦ Медіана
+Ce que chaque barre (ou part) compte : des personnes, des naissances, des mariages, des lieux, des médias… ¦ Что считает каждый столбец (или доля): люди, рождения, браки, места, медиафайлы… ¦ Що рахує кожен стовпець (або частка): люди, народження, шлюби, місця, медіафайли…
+Seulement les fiches qui portent cette étiquette. ¦ Только карточки с этой меткой. ¦ Лише картки з цією міткою.
+Seulement les personnes que tu choisis ici, une par une. ¦ Только люди, которых ты выбираешь здесь, по одному. ¦ Лише люди, яких ти вибираєш тут, по одній.
+Comment on range ce qu’on compte : par nom, par lieu (commune, département, pays), par siècle, décennie ou année, par âge, par génération… ¦ Как группировать то, что считаем: по фамилии, по месту (коммуна, департамент, страна), по веку, десятилетию или году, по возрасту, по поколению… ¦ Як групувати те, що рахуємо: за прізвищем, за місцем (комуна, департамент, країна), за століттям, десятиліттям або роком, за віком, за поколінням…
+Prénoms, par siècle ¦ Имена по векам ¦ Імена за століттями
+Âge au décès (par 5 ans) ¦ Возраст смерти (по 5 лет) ¦ Вік смерті (по 5 років)
+Mariages par décennie ¦ Браки по десятилетиям ¦ Шлюби за десятиліттями
+Nombre d’unions par personne ¦ Число союзов на человека ¦ Кількість союзів на людину
+Nombre moyen d’enfants par famille, par siècle ¦ Среднее число детей в семье, по векам ¦ Середня кількість дітей у родині, за століттями
+Naissances par département ¦ Рождения по департаментам ¦ Народження за департаментами
+Mariages par département, par siècle ¦ Браки по департаментам, по векам ¦ Шлюби за департаментами, за століттями
+Lieux par département ¦ Места по департаментам ¦ Місця за департаментами
+Métiers, par siècle ¦ Профессии по векам ¦ Професії за століттями
+Âge moyen au décès, par métier ¦ Средний возраст смерти по профессиям ¦ Середній вік смерті за професіями
+Décès par décennie ¦ Смерти по десятилетиям ¦ Смерті за десятиліттями
+Événements par siècle ¦ События по векам ¦ Події за століттями
+Mes ancêtres par génération ¦ Мои предки по поколениям ¦ Мої предки за поколіннями
+Fiches avec ou sans source ¦ Карточки с источником или без ¦ Картки з джерелом чи без
+Mes ancêtres avec ou sans source ¦ Мои предки с источником или без ¦ Мої предки з джерелом чи без
+Événements par sorte ¦ События по видам ¦ Події за видами
+Médias par sorte ¦ Медиафайлы по видам ¦ Медіафайли за видами
+Médias par décennie ¦ Медиафайлы по десятилетиям ¦ Медіафайли за десятиліттями
+Seulement les personnes… ¦ Только люди… ¦ Лише люди…
+tous ces critères (ET) ¦ все эти условия (И) ¦ усі ці умови (І)
+choisir… (métier, enfants, lieu, période…) ¦ выбрать… (профессия, дети, место, период…) ¦ вибрати… (професія, діти, місце, період…)
+Compter chaque personne une seule fois ¦ Считать каждого человека только один раз ¦ Рахувати кожну людину лише один раз
+Jusqu’à (générations, 0 = toutes) ¦ До (поколений, 0 = все) ¦ До (поколінь, 0 = усі)
+Nom ou prénom qui contient ¦ Фамилия или имя содержит ¦ Прізвище чи ім’я містить
+Chercher… (Martin, Jean) ¦ Искать… (Martin, Jean) ¦ Шукати… (Martin, Jean)
+Nées entre (période) ¦ Родились в период ¦ Народилися в період
+Regrouper par ¦ Группировать по ¦ Групувати за
+Garder les premiers (0 = tous) ¦ Оставить первые (0 = все) ¦ Залишити перші (0 = усі)
+Le reste dans « Autres » ¦ Остальное в «Другие» ¦ Решту в «Інші»
+Montrer « Inconnu » (les valeurs vides) ¦ Показывать «Неизвестно» (пустые значения) ¦ Показувати «Невідомо» (порожні значення)
+De quoi ¦ Чего ¦ Чого
+Écris une année (ex. 1800, vers 1850). ¦ Напиши год (напр. 1800, vers 1850). ¦ Напиши рік (напр. 1800, vers 1850).
+Choisis une étiquette. ¦ Выбери метку. ¦ Вибери мітку.
+Écris au moins 2 lettres. ¦ Напиши хотя бы 2 буквы. ¦ Напиши хоча б 2 літери.
+Choisis au moins une personne. ¦ Выбери хотя бы одного человека. ¦ Вибери хоча б одну людину.
+=siège ¦ место|места|мест ¦ місце|місця|місць
+Ajoute des valeurs positives. ¦ Добавь положительные значения. ¦ Додай додатні значення.
+Il faut au moins 3 lignes (les axes). ¦ Нужно хотя бы 3 строки (оси). ¦ Потрібно хоча б 3 рядки (осі).
+Ajoute des valeurs. ¦ Добавь значения. ¦ Додай значення.
+Ajoute des flux : de, vers, combien. ¦ Добавь потоки: откуда, куда, сколько. ¦ Додай потоки: звідки, куди, скільки.
+Il faut 2 ou 3 ensembles. ¦ Нужно 2 или 3 множества. ¦ Потрібно 2 або 3 множини.
+Ajoute une jauge : un nom, une valeur, un maximum. ¦ Добавь шкалу: название, значение, максимум. ¦ Додай шкалу: назву, значення, максимум.
+Ajoute des lignes : un nom, un nombre, un symbole (👤, 👶, ⚓…). ¦ Добавь строки: название, число, символ (👤, 👶, ⚓…). ¦ Додай рядки: назву, число, символ (👤, 👶, ⚓…).
+Majorité (banc du haut) ¦ Большинство (верхняя скамья) ¦ Більшість (верхня лава)
+Opposition (banc du bas) ¦ Оппозиция (нижняя скамья) ¦ Опозиція (нижня лава)
+Non-inscrits (bout) ¦ Независимые (край) ¦ Позафракційні (край)
+Présidence ¦ Председательство ¦ Головування
+Les chiffres ¦ Числа ¦ Числа
+Afficher les valeurs ¦ Показывать значения ¦ Показувати значення
+Hauteur du dessin ¦ Высота рисунка ¦ Висота малюнка
+Unité (ex. : personnes, €) ¦ Единица (напр.: человек, €) ¦ Одиниця (напр.: людей, €)
+Trou au centre ¦ Отверстие в центре ¦ Отвір у центрі
+Sièges ¦ Места ¦ Місця
+Hémicycle (demi-cercle) ¦ Полукруг (амфитеатр) ¦ Півколо (амфітеатр)
+Arc élargi (angle au choix) ¦ Расширенная дуга (угол на выбор) ¦ Розширена дуга (кут на вибір)
+Longueur des bancs droits ¦ Длина прямых скамей ¦ Довжина прямих лав
+Forme des sièges ¦ Форма мест ¦ Форма місць
+Carrés ¦ Квадраты ¦ Квадрати
+Carrés arrondis ¦ Скруглённые квадраты ¦ Заокруглені квадрати
+Espace entre les sièges ¦ Расстояние между местами ¦ Відстань між місцями
+Contour des sièges ¦ Контур мест ¦ Контур місць
+Majorité absolue ¦ Абсолютное большинство ¦ Абсолютна більшість
+Ne pas montrer ¦ Не показывать ¦ Не показувати
+En texte ¦ Текстом ¦ Текстом
+Sièges dans la légende ¦ Места в легенде ¦ Місця в легенді
+Assemblée ¦ Собрание ¦ Збори
+Les membres (une ligne par période ; même nom = même ligne) ¦ Участники (одна строка на период; одно имя = одна строка) ¦ Учасники (один рядок на період; одне ім’я = один рядок)
+Rôles (séparés par des virgules) ¦ Роли (через запятую) ¦ Ролі (через кому)
+1987 ou 03/1987 ¦ 1987 или 03/1987 ¦ 1987 або 03/1987
+Fin (vide = aujourd’hui) ¦ Конец (пусто = сегодня) ¦ Кінець (порожньо = сьогодні)
+Les traits verticaux (albums, tournées, événements) ¦ Вертикальные линии (альбомы, туры, события) ¦ Вертикальні лінії (альбоми, тури, події)
+Tournée (rouge, pointillés) ¦ Тур (красный, пунктир) ¦ Тур (червоний, пунктир)
+Autre (bleu, pointillés) ¦ Другое (синий, пунктир) ¦ Інше (синій, пунктир)
+Un repère tous les … ans (vide = auto) ¦ Отметка каждые … лет (пусто = авто) ¦ Позначка кожні … років (порожньо = авто)
+Épaisseur des barres ¦ Толщина полос ¦ Товщина смуг
+Espace entre les lignes ¦ Расстояние между строками ¦ Відстань між рядками
+Ordre des lignes ¦ Порядок строк ¦ Порядок рядків
+Par date d’arrivée ¦ По дате прихода ¦ За датою приходу
+Rôle par défaut (si vide) ¦ Роль по умолчанию (если пусто) ¦ Роль за замовчуванням (якщо порожньо)
+Les événements ¦ События ¦ Події
+En alternance dessus / dessous ¦ Попеременно сверху / снизу ¦ Почергово згори / знизу
+Tous au-dessus ¦ Все сверху ¦ Усі згори
+Étages au plus (pour éviter les chevauchements) ¦ Не больше ярусов (чтобы избежать наложений) ¦ Щонайбільше ярусів (щоб уникнути накладань)
+Carrés par ligne ¦ Квадратов в строке ¦ Квадратів у рядку
+Personnes trouvées ¦ Найденные люди ¦ Знайдені люди
+Avec un acte ¦ С записью акта ¦ З актовим записом
+Acte vérifié ¦ Запись проверена ¦ Запис перевірено
+Sourcées ¦ С источником ¦ З джерелом
+Complétude par branche ¦ Полнота по ветвям ¦ Повнота за гілками
+Couleur des petites valeurs ¦ Цвет малых значений ¦ Колір малих значень
+Couleur des grandes valeurs ¦ Цвет больших значений ¦ Колір великих значень
+Les points ¦ Точки ¦ Точки
+Une seule couleur ¦ Один цвет ¦ Один колір
+Les flux ¦ Потоки ¦ Потоки
+D’où venaient les conjoints ¦ Откуда были супруги ¦ Звідки були подружжя
+Les cases ¦ Клетки ¦ Клітинки
+Largeur des cases (vide = auto) ¦ Ширина клеток (пусто = авто) ¦ Ширина клітинок (порожньо = авто)
+Les ensembles (2 ou 3) ¦ Множества (2 или 3) ¦ Множини (2 або 3)
+Ce qu’on écrit dans chaque zone ¦ Что пишем в каждой зоне ¦ Що пишемо в кожній зоні
+Texte ou nombre ¦ Текст или число ¦ Текст або число
+Les mots ¦ Слова ¦ Слова
+Taille du plus gros mot ¦ Размер самого большого слова ¦ Розмір найбільшого слова
+Les jauges ¦ Шкалы ¦ Шкали
+Les lignes ¦ Строки ¦ Рядки
+Un symbole vaut ¦ Один символ равен ¦ Один символ дорівнює
+Taille des symboles ¦ Размер символов ¦ Розмір символів
+Légende ¦ Легенда ¦ Легенда
+En bas ¦ Внизу ¦ Унизу
+Couleurs par défaut ¦ Цвета по умолчанию ¦ Кольори за замовчуванням
+Sépia (ancien) ¦ Сепия (старинный) ¦ Сепія (старовинний)
+Taille des textes ¦ Размер текстов ¦ Розмір текстів
+Couleur du fond ¦ Цвет фона ¦ Колір тла
+Couleur des textes ¦ Цвет текстов ¦ Колір текстів
+Types remis comme au départ. ¦ Типы возвращены как было. ¦ Типи повернуто як було.
+Nom du groupe (ex. « Mes favoris », « Pour la famille ») : ¦ Название группы (напр. «Моё избранное», «Для семьи»): ¦ Назва групи (напр. «Моє обране», «Для родини»):
+Un tableau ¦ Таблица ¦ Таблиця
+Un fichier CSV ¦ Файл CSV ¦ Файл CSV
+Une page Wikipédia ¦ Страница Википедии ¦ Сторінка Вікіпедії
+Un graphique partagé ¦ Общий график ¦ Спільний графік
+📊 D’un graphique ¦ 📊 Из графика ¦ 📊 З графіка
+Avec quel dessin ? ¦ Каким рисунком? ¦ Яким малюнком?
+🖼️ Image d’un graphique ¦ 🖼️ Изображение графика ¦ 🖼️ Зображення графіка
+Un diagramme LCNDA (.json), un graphique partagé (.lcnda-widget.json) ou un tableau CSV. ¦ Диаграмма LCNDA (.json), общий график (.lcnda-widget.json) или таблица CSV. ¦ Діаграма LCNDA (.json), спільний графік (.lcnda-widget.json) або таблиця CSV.
+Lire la page ¦ Прочитать страницу ¦ Прочитати сторінку
+Comment faire mon propre graphique avec des données d’ailleurs ? ¦ Как сделать свой график с данными из другого места? ¦ Як зробити власний графік з даними з іншого місця?
+Ce fichier JSON n’est ni un diagramme ni un graphique LCNDA. ¦ Этот файл JSON не является ни диаграммой, ни графиком LCNDA. ¦ Цей файл JSON не є ні діаграмою, ні графіком LCNDA.
+Colle un tableau. ¦ Вставь таблицу. ¦ Встав таблицю.
+Tableau collé ¦ Таблица вставлена ¦ Таблицю вставлено
+Clique « Lire la page », puis choisis un tableau ou une image. ¦ Нажми «Прочитать страницу», затем выбери таблицу или изображение. ¦ Натисни «Прочитати сторінку», потім вибери таблицю або зображення.
+Colle l’adresse d’une page Wikipédia (https://xx.wikipedia.org/wiki/…). ¦ Вставь адрес страницы Википедии (https://xx.wikipedia.org/wiki/…). ¦ Встав адресу сторінки Вікіпедії (https://xx.wikipedia.org/wiki/…).
+Aucun tableau. ¦ Нет таблиц. ¦ Немає таблиць.
+＋ Une ligne ¦ ＋ Строка ¦ ＋ Рядок
+Je ne sais pas (barres ou colonnes) ¦ Не знаю (полосы или столбцы) ¦ Не знаю (смуги або стовпці)
+Hémicycle (sièges) ¦ Полукруг (места) ¦ Півколо (місця)
+Valeur du haut (la plus grande barre, ou 100 %) ¦ Верхнее значение (самый большой столбец или 100 %) ¦ Верхнє значення (найбільший стовпець або 100 %)
+D’après une image ¦ По изображению ¦ За зображенням
+Président ¦ Председатель ¦ Голова
+Majorité ¦ Большинство ¦ Більшість
+Indépendants ¦ Независимые ¦ Незалежні
+Liste du maire ¦ Список мэра ¦ Список мера
+Sens de l’arbre ¦ Направление древа ¦ Напрямок дерева
+Chercher un métier… (tisserand, laboureur) ¦ Искать профессию… (ткач, пахарь) ¦ Шукати професію… (ткач, орач)
+Chercher un métier ¦ Искать профессию ¦ Шукати професію
+Pour montrer ou imprimer l’arbre : les vivants et les fiches confidentielles n’apparaissent plus ¦ Чтобы показать или напечатать древо: живые и конфиденциальные карточки больше не отображаются ¦ Щоб показати або надрукувати дерево: живі та конфіденційні картки більше не показуються
+🔒 Sans les vivants ni les fiches confidentielles ¦ 🔒 Без живых и конфиденциальных карточек ¦ 🔒 Без живих і конфіденційних карток
+ARBRE DES MÉTIERS ¦ ДРЕВО ПРОФЕССИЙ ¦ ДЕРЕВО ПРОФЕСІЙ
+Les métiers des ancêtres de {name} ¦ Профессии предков {name} ¦ Професії предків {name}
+🧬 Les métiers des ancêtres de {name} ¦ 🧬 Профессии предков {name} ¦ 🧬 Професії предків {name}
+métier inconnu ¦ профессия неизвестна ¦ професія невідома
+Aucun métier noté dans cet arbre. ¦ В этом древе не указано ни одной профессии. ¦ У цьому дереві не вказано жодної професії.
+Même métier que le parent ¦ Та же профессия, что у родителя ¦ Та сама професія, що й у батька чи матері
+Changement de métier ¦ Смена профессии ¦ Зміна професії
+Métier inconnu pour l’un des deux ¦ Профессия одного из двух неизвестна ¦ Професія одного з двох невідома
+📊 La transmission du métier ¦ 📊 Передача профессии ¦ 📊 Передавання професії
+Un enfant « reprend » le métier quand au moins un de ses métiers est aussi celui du parent (mêmes mots du dictionnaire des métiers anciens : « laboureur » et « laboureur à bras » comptent pareil). ¦ Ребёнок «продолжает» профессию, если хотя бы одна из его профессий совпадает с профессией родителя (те же слова словаря старинных профессий: «laboureur» и «laboureur à bras» считаются одинаково). ¦ Дитина «продовжує» професію, якщо хоча б одна з її професій збігається з професією батька чи матері (ті самі слова словника старовинних професій: «laboureur» і «laboureur à bras» рахуються однаково).
+Pas encore de quoi compter : il faut le métier d’un parent et celui de son enfant du même sexe. ¦ Пока нечего считать: нужна профессия родителя и его ребёнка того же пола. ¦ Поки нічого рахувати: потрібна професія батька чи матері та їхньої дитини тієї самої статі.
+Arrivée au bagne ¦ Прибытие на каторгу ¦ Прибуття на каторгу
+Autre événement ¦ Другое событие ¦ Інша подія
+Décoration ¦ Награда ¦ Нагорода
+Décès en déportation ¦ Смерть в депортации ¦ Смерть у депортації
+Déportation ¦ Депортация ¦ Депортація
+Fusillé ¦ Расстрелян ¦ Розстріляний
+Libération ou décès au bagne ¦ Освобождение или смерть на каторге ¦ Звільнення або смерть на каторзі
+Lieu de résidence ¦ Место проживания ¦ Місце проживання
+Obsèques ¦ Похороны ¦ Похорон
+Séparation ¦ Раздельное проживание ¦ Окреме проживання
+{name} : {n} — voir les personnes ¦ {name}: {n} — посмотреть людей ¦ {name}: {n} — переглянути людей
+Personne de ta base n’est né ou baptisé un {date}. ¦ Никто в твоей базе не родился и не был крещён {date}. ¦ Ніхто у твоїй базі не народився і не був охрещений {date}.
+{n} coïncidences dans l’arbre ¦ Совпадений в древе: {n} ¦ Збігів у дереві: {n}
+Aucune bougie allumée cette semaine. ¦ На этой неделе ни одной зажжённой свечи. ¦ Цього тижня жодної запаленої свічки.
+Aucune lettre scellée. ¦ Нет запечатанных писем. ¦ Немає запечатаних листів.
+Le détail ¦ Подробности ¦ Подробиці
+Prochain à voir : ¦ Следующее к просмотру: ¦ Наступне до перегляду:
+L’ambiance ¦ Атмосфера ¦ Атмосфера
+La veillée au coin du feu (vers 1880) ¦ Посиделки у очага (около 1880) ¦ Вечорниці біля вогнища (близько 1880)
+Le village un dimanche matin ¦ Деревня воскресным утром ¦ Село недільного ранку
+L’atelier du forgeron ¦ Мастерская кузнеца ¦ Кузня коваля
+La gare (vers 1900) ¦ Вокзал (около 1900) ¦ Вокзал (близько 1900)
+Le moulin au bord de l’eau ¦ Мельница у воды ¦ Млин біля води
+La nuit d’orage ¦ Грозовая ночь ¦ Грозова ніч
+Le port ¦ Порт ¦ Порт
+La ferme au petit matin ¦ Ферма ранним утром ¦ Ферма раннього ранку
+Une nuit d’été à la campagne ¦ Летняя ночь в деревне ¦ Літня ніч на селі
+Le lavoir ¦ Прачечная у реки ¦ Пральня біля річки
+Le jour de marché ¦ Базарный день ¦ Базарний день
+Le café du village ¦ Деревенское кафе ¦ Сільська кав’ярня
+Le bal musette ¦ Танцы под аккордеон ¦ Танці під акордеон
+La messe à l’église ¦ Месса в церкви ¦ Меса в церкві
+L’atelier de couture ¦ Швейная мастерская ¦ Швейна майстерня
+La filature et le tissage ¦ Прядение и ткачество ¦ Прядіння й ткацтво
+La veillée des fileuses ¦ Посиделки прях ¦ Вечорниці прях
+L’atelier du menuisier ¦ Мастерская столяра ¦ Майстерня столяра
+La classe (vers 1900) ¦ Класс (около 1900) ¦ Клас (близько 1900)
+L’étude du notaire ¦ Контора нотариуса ¦ Контора нотаріуса
+Les moissons ¦ Жатва ¦ Жнива
+Le rucher ¦ Пасека ¦ Пасіка
+La route en diligence ¦ Дорога в дилижансе ¦ Дорога диліжансом
+Sons fabriqués par l’ordinateur, libres de droits. ¦ Звуки, созданные компьютером, свободные от авторских прав. ¦ Звуки, створені комп’ютером, вільні від авторських прав.
+Montrer les cartes postales anciennes à l’endroit qu’elles montrent (avec la direction de la vue) ¦ Показывать старые открытки в том месте, которое на них изображено (с направлением взгляда) ¦ Показувати старі листівки в тому місці, яке на них зображено (з напрямком погляду)
+＋ Nouvelle couche ¦ ＋ Новый слой ¦ ＋ Новий шар
+Départements ¦ Департаменты ¦ Департаменти
+Grandes régions ¦ Крупные регионы ¦ Великі регіони
+Grandes régions (NUTS 1) ¦ Крупные регионы (NUTS 1) ¦ Великі регіони (NUTS 1)
+Régions (NUTS 2) ¦ Регионы (NUTS 2) ¦ Регіони (NUTS 2)
+Le monde entier ¦ Весь мир ¦ Увесь світ
+France et voisins ¦ Франция и соседи ¦ Франція та сусіди
+France entière ¦ Вся Франция ¦ Уся Франція
+Ajoute des flux : départ, arrivée, combien. ¦ Добавь потоки: откуда, куда, сколько. ¦ Додай потоки: звідки, куди, скільки.
+📍 Zoomer sur ¦ 📍 Приблизить к ¦ 📍 Наблизити до
+✋ Mon cadrage (souris ou cadre tracé) ¦ ✋ Моя рамка (мышью или нарисованной рамкой) ¦ ✋ Моя рамка (мишею або намальованою рамкою)
+Mon cadrage : ouest, sud, est, nord (degrés) ¦ Моя рамка: запад, юг, восток, север (градусы) ¦ Моя рамка: захід, південь, схід, північ (градуси)
+Dégradé continu ¦ Плавный градиент ¦ Плавний градієнт
+Par classes (tranches) ¦ По классам (интервалы) ¦ За класами (інтервали)
+Du jaune au rouge ¦ От жёлтого к красному ¦ Від жовтого до червоного
+Du bleu au rouge (écarts) ¦ От синего к красному (отклонения) ¦ Від синього до червоного (відхилення)
+Couleur des petits chiffres ¦ Цвет малых чисел ¦ Колір малих чисел
+Couleur des grands chiffres ¦ Цвет больших чисел ¦ Колір великих чисел
+Découpage des classes ¦ Разбиение на классы ¦ Поділ на класи
+Couleur des zones sans chiffre ¦ Цвет зон без чисел ¦ Колір зон без чисел
+Couleur des limites ¦ Цвет границ ¦ Колір меж
+Automatiques (là où il y a la place) ¦ Автоматически (там, где есть место) ¦ Автоматично (там, де є місце)
+Noms des zones ¦ Названия зон ¦ Назви зон
+Noms et chiffres ¦ Названия и числа ¦ Назви й числа
+Taille des étiquettes ¦ Размер подписей ¦ Розмір підписів
+Unité (ex. : naissances, %) ¦ Единица (напр.: рождений, %) ¦ Одиниця (напр.: народжень, %)
+Courbure des flèches ¦ Изгиб стрелок ¦ Вигин стрілок
+Opacité des flèches ¦ Непрозрачность стрелок ¦ Непрозорість стрілок
+Couleur des flèches ¦ Цвет стрелок ¦ Колір стрілок
+Taille des ronds ¦ Размер кружков ¦ Розмір кружечків
+Couleur du tour des ronds ¦ Цвет обводки кружков ¦ Колір обведення кружечків
+Tous (sans se chevaucher) ¦ Все (без наложения) ¦ Усі (без накладання)
+Les 12 plus importants ¦ 12 самых важных ¦ 12 найважливіших
+Taille des noms ¦ Размер названий ¦ Розмір назв
+Couleur des terres ¦ Цвет суши ¦ Колір суходолу
+Unité (ex. : personnes) ¦ Единица (напр.: человек) ¦ Одиниця (напр.: людей)
+Signaler les lieux sans position ¦ Отмечать места без координат ¦ Позначати місця без координат
+Couleur des ronds ¦ Цвет кружков ¦ Колір кружечків
+Opacité des ronds ¦ Непрозрачность кружков ¦ Непрозорість кружечків
+Les 15 plus gros (sans se chevaucher) ¦ 15 самых крупных (без наложения) ¦ 15 найбільших (без накладання)
+Unité (ex. : naissances) ¦ Единица (напр.: рождений) ¦ Одиниця (напр.: народжень)
+Où sont nés mes ancêtres ¦ Где родились мои предки ¦ Де народилися мої предки
+Baptêmes seuls ¦ Только крещения ¦ Лише хрещення
+Sépultures seules ¦ Только погребения ¦ Лише поховання
+Recensements (personnes recensées) ¦ Переписи (переписанные люди) ¦ Переписи (переписані люди)
+Métiers (lieux où on les exerçait) ¦ Профессии (места, где ими занимались) ¦ Професії (місця, де ними займалися)
+Départs (nés ici, morts ailleurs) ¦ Уехавшие (родились здесь, умерли в другом месте) ¦ Ті, що виїхали (народилися тут, померли деінде)
+Arrivées (nés ailleurs, morts ici) ¦ Приехавшие (родились в другом месте, умерли здесь) ¦ Ті, що приїхали (народилися деінде, померли тут)
+Familles (patronymes différents) ¦ Семьи (разные фамилии) ¦ Родини (різні прізвища)
+Une sorte d’événement ¦ Вид события ¦ Вид події
+▭ Tracer un cadre ¦ ▭ Нарисовать рамку ¦ ▭ Намалювати рамку
+Chargement des sortes d’événements… ¦ Загрузка видов событий… ¦ Завантаження видів подій…
+Quelle sorte d’événement ¦ Какой вид события ¦ Який вид події
+Seulement mes ancêtres (lignée Sosa) ¦ Только мои предки (линия Sosa) ¦ Лише мої предки (лінія Sosa)
+Jusqu’à l’année ¦ До года ¦ До року
+Départ ¦ Отправление ¦ Відправлення
+Arrivée ¦ Прибытие ¦ Прибуття
+📍 Les lieux du tableau ¦ 📍 Места из таблицы ¦ 📍 Місця з таблиці
+🔎 Retrouver les lieux sans position ¦ 🔎 Найти места без координат ¦ 🔎 Знайти місця без координат
+Choisis d’abord une sorte d’événement. ¦ Сначала выбери вид события. ¦ Спершу вибери вид події.
+Choisis une sorte d’événement. ¦ Выбери вид события. ¦ Вибери вид події.
+Aucun lieu retrouvé : choisis-les un par un. ¦ Ни одно место не найдено: выбери их по одному. ¦ Жодного місця не знайдено: вибери їх по одному.
+Colorer les villes elles-mêmes ¦ Окрашивать сами города ¦ Зафарбовувати самі міста
+Zones proposées ¦ Предлагаемые зоны ¦ Запропоновані зони
+Tape un nom ou un code… ¦ Введи название или код… ¦ Введи назву або код…
+Note (dans la bulle) ¦ Заметка (в подсказке) ¦ Примітка (у підказці)
+Les flux (départ → arrivée) ¦ Потоки (откуда → куда) ¦ Потоки (звідки → куди)
+Départ (lieu) ¦ Откуда (место) ¦ Звідки (місце)
+Arrivée (lieu) ¦ Куда (место) ¦ Куди (місце)
+Hauteur au plus ¦ Высота не больше ¦ Висота щонайбільше
+Clic : ouvrir la fiche ¦ Щелчок: открыть карточку ¦ Клік: відкрити картку
+Oncle ou tante ¦ Дядя или тётя ¦ Дядько або тітка
+Père ou mère ¦ Отец или мать ¦ Батько або мати
+Autre lien (ou inconnu) ¦ Другая связь (или неизвестна) ¦ Інший зв’язок (або невідомий)
+Autre prénom ¦ Другое имя ¦ Інше ім’я
+Trait plein : même premier prénom ¦ Сплошная линия: то же первое имя ¦ Суцільна лінія: те саме перше ім’я
+Guerre et violence ¦ Война и насилие ¦ Війна й насильство
+Poumons et respiration ¦ Лёгкие и дыхание ¦ Легені й дихання
+Cœur et vaisseaux ¦ Сердце и сосуды ¦ Серце й судини
+Cancers et tumeurs ¦ Рак и опухоли ¦ Рак і пухлини
+Ventre et digestion ¦ Живот и пищеварение ¦ Живіт і травлення
+Nerfs et cerveau ¦ Нервы и мозг ¦ Нерви й мозок
+Autres et inconnues ¦ Другие и неизвестные ¦ Інші й невідомі
+Où vivait la famille ¦ Где жила семья ¦ Де жила родина
+Ancêtres ¦ Предки ¦ Предки
+De quoi sont morts mes ancêtres ¦ От чего умерли мои предки ¦ Від чого померли мої предки
+Tous les lieux ont une position. ¦ У всех мест есть координаты. ¦ Усі місця мають координати.
+Résidences et recensements ¦ Места жительства и переписи ¦ Місця проживання й переписи
+Prendre ces événements ¦ Взять эти события ¦ Взяти ці події
+📖 La vie d’une personne ¦ 📖 Жизнь человека ¦ 📖 Життя людини
+Prendre sa vie ¦ Взять его жизнь ¦ Взяти її життя
+🧱 Une descendance ¦ 🧱 Потомство ¦ 🧱 Нащадки
+Prendre la descendance ¦ Взять потомство ¦ Взяти нащадків
+Ces personnes ¦ Эти люди ¦ Ці люди
+Toute la vie ¦ Вся жизнь ¦ Усе життя
+Voir toute la vie ¦ Показать всю жизнь ¦ Показати все життя
+Lecture : les étapes défilent ¦ Воспроизведение: этапы сменяются ¦ Відтворення: етапи змінюються
+⤢ Toute la vie ¦ ⤢ Вся жизнь ¦ ⤢ Усе життя
+Les événements (un point par ligne) ¦ События (одна точка на строку) ¦ Події (одна точка на рядок)
+Date ou année ¦ Дата или год ¦ Дата або рік
+Couleur des points ¦ Цвет точек ¦ Колір точок
+Selon la sorte d’événement ¦ По виду события ¦ За видом події
+Taille des points ¦ Размер точек ¦ Розмір точок
+Opacité des points ¦ Непрозрачность точек ¦ Непрозорість точок
+Les 10 plus remplis ¦ 10 самых заполненных ¦ 10 найзаповненіших
+Opacité des alvéoles ¦ Непрозрачность сот ¦ Непрозорість стільників
+Traits blancs entre les alvéoles ¦ Белые линии между сотами ¦ Білі лінії між стільниками
+Des ronds (Dorling) ¦ Кружки (Дорлинг) ¦ Кружечки (Дорлінг)
+Des carrés (Demers) ¦ Квадраты (Демерс) ¦ Квадрати (Демерс)
+Couleur des formes ¦ Цвет фигур ¦ Колір фігур
+Nom et chiffre (là où il y a la place) ¦ Название и число (там, где есть место) ¦ Назва й число (там, де є місце)
+Légende des tailles ¦ Легенда размеров ¦ Легенда розмірів
+Unité (ex. : ancêtres) ¦ Единица (напр.: предков) ¦ Одиниця (напр.: предків)
+Signaler les zones pas trouvées ¦ Отмечать ненайденные зоны ¦ Позначати незнайдені зони
+Les étapes, dans l’ordre ¦ Этапы по порядку ¦ Етапи за порядком
+Détail (dans la bulle) ¦ Подробности (в подсказке) ¦ Подробиці (у підказці)
+La carte ¦ Карта ¦ Мапа
+Montre toute la vie (fixe) ¦ Показывать всю жизнь (неподвижно) ¦ Показувати все життя (нерухомо)
+Couleur du chemin ¦ Цвет пути ¦ Колір шляху
+Oui (sans se chevaucher) ¦ Да (без наложения) ¦ Так (без накладання)
+Les personnes (parent → enfant) ¦ Люди (родитель → ребёнок) ¦ Люди (батько чи мати → дитина)
+Parent (vide = l’ancêtre) ¦ Родитель (пусто = предок) ¦ Батько чи мати (порожньо = предок)
+Le chiffre (ou la somme) ¦ Число (или сумма) ¦ Число (або сума)
+Une par génération ¦ Одна на поколение ¦ Одна на покоління
+Hauteur d’une génération ¦ Высота одного поколения ¦ Висота одного покоління
+Dans les cases ¦ В клетках ¦ У клітинках
+Ordre des enfants ¦ Порядок детей ¦ Порядок дітей
+Les plus grandes familles d’abord ¦ Сначала самые большие семьи ¦ Спершу найбільші родини
+Traits blancs entre les cases ¦ Белые линии между клетками ¦ Білі лінії між клітинками
+Traits blancs entre les parts ¦ Белые линии между долями ¦ Білі лінії між частками
+Seulement les prénoms transmis ¦ Только передаваемые имена ¦ Лише передавані імена
+Aussi les filleuls au prénom différent ¦ Также крестники с другим именем ¦ Також хрещеники з іншим ім’ям
+Hauteur d’une ligne ¦ Высота строки ¦ Висота рядка
+Noms sous les ronds ¦ Имена под кружками ¦ Імена під кружечками
+Quand il y a la place ¦ Когда есть место ¦ Коли є місце
+Les noms ¦ Имена ¦ Імена
+Qui a connu qui dans la famille ¦ Кто кого знал в семье ¦ Хто кого знав у родині
+Autres métiers ¦ Другие профессии ¦ Інші професії
+Métier différent ¦ Другая профессия ¦ Інша професія
+Même lieu ¦ То же место ¦ Те саме місце
+Tout près ¦ Совсем рядом ¦ Зовсім поруч
+Ancêtres possibles (2, 4, 8…) ¦ Возможные предки (2, 4, 8…) ¦ Можливі предки (2, 4, 8…)
+Places trouvées ¦ Найденные места ¦ Знайдені місця
+Carême et Avent ¦ Великий пост и Адвент ¦ Великий піст і Адвент
+Si tout était égal ¦ Если бы всё было равно ¦ Якби все було рівно
+Garçon ¦ Мальчик ¦ Хлопчик
+Autres lieux ¦ Другие места ¦ Інші місця
+Prendre dans ma base ¦ Взять из моей базы ¦ Взяти з моєї бази
+Personnes comptées ¦ Учтённые люди ¦ Враховані люди
+🤝 Les vies autour d’une personne ¦ 🤝 Жизни вокруг человека ¦ 🤝 Життя навколо людини
+Une courbe par ¦ Одна кривая на ¦ Одна крива на
+Une seule courbe ¦ Одна кривая ¦ Одна крива
+Lignées ¦ Родовые линии ¦ Родові лінії
+Père → fils (lignées d’hommes) ¦ Отец → сын (мужские линии) ¦ Батько → син (чоловічі лінії)
+Rayon des mariages ¦ Радиус браков ¦ Радіус шлюбів
+🧮 L’ascendance d’une personne ¦ 🧮 Предки человека ¦ 🧮 Предки людини
+De (année) ¦ С (год) ¦ З (рік)
+Quelles mères ¦ Какие матери ¦ Які матері
+Une seule mère ¦ Одна мать ¦ Одна мати
+Espacement des naissances ¦ Интервалы между рождениями ¦ Інтервали між народженнями
+Quelles personnes ¦ Какие люди ¦ Які люди
+Générations d’ancêtres ¦ Поколения предков ¦ Покоління предків
+Début (année, vide = auto) ¦ Начало (год, пусто = авто) ¦ Початок (рік, порожньо = авто)
+Fin (année, vide = auto) ¦ Конец (год, пусто = авто) ¦ Кінець (рік, порожньо = авто)
+Les personnes (une ligne chacune) ¦ Люди (по одной строке на каждого) ¦ Люди (по одному рядку на кожного)
+Ordre des groupes ¦ Порядок групп ¦ Порядок груп
+Les plus nombreux d’abord ¦ Сначала самые многочисленные ¦ Спершу найчисленніші
+Couleur des bandes ¦ Цвет полос ¦ Колір смуг
+Cacher les métiers inconnus ¦ Скрыть неизвестные профессии ¦ Приховати невідомі професії
+Les couples ¦ Пары ¦ Пари
+Année du mariage ¦ Год брака ¦ Рік шлюбу
+Par siècle du mariage ¦ По веку брака ¦ За століттям шлюбу
+Selon la distance ¦ По расстоянию ¦ За відстанню
+Où allait-on chercher son conjoint ? ¦ Где искали себе супруга? ¦ Де шукали собі пару?
+Montrer les ancêtres possibles ¦ Показать возможных предков ¦ Показати можливих предків
+Mon implexe, génération par génération ¦ Мой импликс, поколение за поколением ¦ Мій імплекс, покоління за поколінням
+En % du total ¦ В % от общего ¦ У % від загального
+Les années ¦ Годы ¦ Роки
+Ordre des mères ¦ Порядок матерей ¦ Порядок матерів
+Le plus d’enfants d’abord ¦ Сначала те, у кого больше детей ¦ Спершу ті, хто має більше дітей
+Chargement des personnes… ¦ Загрузка людей… ¦ Завантаження людей…
+Aucune fiche trouvée. ¦ Ни одной карточки не найдено. ¦ Жодної картки не знайдено.
+Frères et sœurs ¦ Братья и сёстры ¦ Брати й сестри
+Plier cette branche ¦ Свернуть эту ветвь ¦ Згорнути цю гілку

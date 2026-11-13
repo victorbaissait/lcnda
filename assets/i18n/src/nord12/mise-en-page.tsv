@@ -1,0 +1,1060 @@
+fr ¦ ru ¦ uk
+Format de la page ¦ Формат страницы ¦ Формат сторінки
+Celui du design ¦ Как в дизайне ¦ Як у дизайні
+✏️ Personnalisé (à mes mesures) ¦ ✏️ Свой (по моим размерам) ¦ ✏️ Власний (за моїми розмірами)
+Portrait (plus haut que large) ¦ Книжная (выше, чем шире) ¦ Книжкова (вища, ніж ширша)
+Paysage (plus large que haut) ¦ Альбомная (шире, чем выше) ¦ Альбомна (ширша, ніж вища)
+Supprimer ce format à moi ¦ Удалить этот мой формат ¦ Видалити цей мій формат
+＋ Enregistrer ce format ¦ ＋ Сохранить этот формат ¦ ＋ Зберегти цей формат
+La page garde le format du design. ¦ Страница сохраняет формат дизайна. ¦ Сторінка зберігає формат дизайну.
+carré ¦ квадрат ¦ квадрат
+⚠️ Entre 3 cm et 1,5 m de côté. ¦ ⚠️ Сторона от 3 см до 1,5 м. ¦ ⚠️ Сторона від 3 см до 1,5 м.
+Format entre 3 cm et 1,5 m de côté. ¦ Формат со стороной от 3 см до 1,5 м. ¦ Формат зі стороною від 3 см до 1,5 м.
+Nom de ce format (ex. Mon carnet 17 × 24) : ¦ Название этого формата (напр. Мой блокнот 17 × 24): ¦ Назва цього формату (напр. Мій блокнот 17 × 24):
+Format « {name} » enregistré : il est proposé pour les prochains documents. ¦ Формат «{name}» сохранён: он будет предложен для следующих документов. ¦ Формат «{name}» збережено: його буде запропоновано для наступних документів.
+Format « {name} » supprimé ¦ Формат «{name}» удалён ¦ Формат «{name}» видалено
+Superposition (écran) ¦ Перекрытие (экран) ¦ Перекриття (екран)
+Lumière tamisée ¦ Мягкий свет ¦ М’яке світло
+Lumière crue ¦ Жёсткий свет ¦ Жорстке світло
+Éclaircir ¦ Замена светлым ¦ Заміна світлим
+Densité couleur − ¦ Осветление основы ¦ Освітлення основи
+Densité couleur + ¦ Затемнение основы ¦ Затемнення основи
+Différence ¦ Разница ¦ Різниця
+Luminosité ¦ Яркость ¦ Яскравість
+Pointillés ¦ Пунктир ¦ Пунктир
+Aucun habillage ¦ Без обтекания ¦ Без обтікання
+Autour du cadre ¦ Вокруг рамки ¦ Навколо рамки
+Autour de la forme (ellipse) ¦ Вокруг формы (эллипс) ¦ Навколо форми (еліпс)
+Saut d’objet (rien à côté) ¦ Перескок объекта (ничего сбоку) ¦ Перестрибування об’єкта (нічого збоку)
+Remplir le cadre proportionnellement ¦ Заполнить рамку пропорционально ¦ Заповнити рамку пропорційно
+Ajuster le contenu proportionnellement ¦ Вписать содержимое пропорционально ¦ Вписати вміст пропорційно
+Ajuster le contenu au cadre (déformé) ¦ Подогнать содержимое под рамку (с искажением) ¦ Припасувати вміст до рамки (зі спотворенням)
+Taille d’origine (centrée) ¦ Исходный размер (по центру) ¦ Початковий розмір (по центру)
+Titre du livre ¦ Название книги ¦ Назва книги
+Nom d’une personne ¦ Имя человека ¦ Ім’я людини
+Dates et numéro ¦ Даты и номер ¦ Дати й номер
+Folio (numéro de page) ¦ Колонцифра (номер страницы) ¦ Колонцифра (номер сторінки)
+Couleur du livre ¦ Цвет книги ¦ Колір книги
+Fond léger ¦ Светлый фон ¦ Світле тло
+Dégradé du livre ¦ Градиент книги ¦ Градієнт книги
+Dégradé ¦ Градиент ¦ Градієнт
+Ascendance (les ancêtres) ¦ Предки (восходящее древо) ¦ Предки (висхідне дерево)
+Descendance (les enfants, petits-enfants…) ¦ Потомство (дети, внуки…) ¦ Нащадки (діти, онуки…)
+Sablier (ancêtres en haut, descendants en bas) ¦ Песочные часы (предки сверху, потомки снизу) ¦ Пісочний годинник (предки згори, нащадки знизу)
+Éventail (roue des ancêtres) ¦ Веер (колесо предков) ¦ Віяло (колесо предків)
+Classique (cases arrondies, couleur du livre) ¦ Классический (скруглённые ячейки, цвет книги) ¦ Класичний (заокруглені клітинки, колір книги)
+Couleurs (bleu les hommes, rose les femmes) ¦ Цвета (синий — мужчины, розовый — женщины) ¦ Кольори (синій — чоловіки, рожевий — жінки)
+Élégant ¦ Элегантный ¦ Елегантний
+Sépia ¦ Сепия ¦ Сепія
+Comme le site ¦ Как на сайте ¦ Як на сайті
+Un chapitre commence ici. Change les styles dans l’onglet « Texte » : tout le livre suit. ¦ Здесь начинается глава. Меняй стили во вкладке «Текст»: вся книга следует за ними. ¦ Тут починається розділ. Змінюй стилі у вкладці «Текст»: уся книга слідує за ними.
+📜 Biographie d’un ancêtre ¦ 📜 Биография предка ¦ 📜 Біографія предка
+Page de titre, portrait, repères en frise, sa vie racontée, ses sources. ¦ Титульная страница, портрет, вехи на ленте времени, рассказ о его жизни, его источники. ¦ Титульна сторінка, портрет, віхи на стрічці часу, розповідь про його життя, його джерела.
+🌳 Arbre en double page ¦ 🌳 Древо на развороте ¦ 🌳 Дерево на розвороті
+Son arbre étalé sur deux pages en vis-à-vis. ¦ Его древо, растянутое на две страницы друг напротив друга. ¦ Його дерево, розгорнуте на дві сторінки одна навпроти одної.
+Des pages de photos, remplies avec celles de la personne ou de sa famille proche. ¦ Страницы с фотографиями, заполненные фото человека или его ближайшей семьи. ¦ Сторінки з фотографіями, заповнені фото людини або її найближчої родини.
+Le couple, les enfants, et les événements de la famille au fil des années. ¦ Пара, дети и события семьи на протяжении лет. ¦ Пара, діти й події родини впродовж років.
+L’ancêtre commun, ses descendants branche par branche, « qui est qui », des pages de souvenirs. ¦ Общий предок, его потомки ветвь за ветвью, «кто есть кто», страницы воспоминаний. ¦ Спільний предок, його нащадки гілка за гілкою, «хто є хто», сторінки спогадів.
+📚 Un livre de famille prêt à l’emploi ¦ 📚 Готовая семейная книга ¦ 📚 Готова родинна книга
+Nom du document ¦ Название документа ¦ Назва документа
+de la personne ¦ человека ¦ людини
+de la personne et de sa famille proche ¦ человека и его ближайшей семьи ¦ людини та її найближчої родини
+Tout se modifie ensuite. Les textes des fiches sont des objets dynamiques : « ↻ Mettre à jour » les refait si la fiche change. ¦ Потом всё можно изменить. Тексты карточек — динамические объекты: «↻ Обновить» пересоздаёт их, если карточка изменится. ¦ Потім усе можна змінити. Тексти карток — динамічні об’єкти: «↻ Оновити» перестворює їх, якщо картка зміниться.
+L’ancêtre commun ¦ Общий предок ¦ Спільний предок
+Le chef de famille (ou l’un des époux) ¦ Глава семьи (или один из супругов) ¦ Голова родини (або один із подружжя)
+Le livre se prépare… ¦ Книга готовится… ¦ Книга готується…
+Sélection (V) ¦ Выделение (V) ¦ Виділення (V)
+Cadre d’image (F) ¦ Рамка изображения (F) ¦ Рамка зображення (F)
+Étoile (E) ¦ Звезда (E) ¦ Зірка (E)
+Plume (P) : clic = point, double-clic ou Entrée = fini ¦ Перо (P): щелчок = точка, двойной щелчок или Enter = готово ¦ Перо (P): клацання = точка, подвійне клацання або Enter = готово
+Zoom (Z) — Alt pour reculer ¦ Масштаб (Z) — Alt, чтобы уменьшить ¦ Масштаб (Z) — Alt, щоб зменшити
+Clic : choisir (⇧ : en plus) · glisser : déplacer · poignées : agrandir · double-clic : écrire ou placer une image ¦ Щелчок: выбрать (⇧: добавить) · перетащить: переместить · маркеры: увеличить · двойной щелчок: писать или поместить изображение ¦ Клацання: вибрати (⇧: додати) · перетягнути: перемістити · маркери: збільшити · подвійне клацання: писати або розмістити зображення
+Glisse pour tracer un bloc de texte, puis écris ¦ Протяни, чтобы начертить текстовый блок, затем пиши ¦ Протягни, щоб накреслити текстовий блок, потім пиши
+Glisse pour tracer un cadre, puis double-clic pour y placer une image ¦ Протяни, чтобы начертить рамку, затем двойной щелчок, чтобы поместить в неё изображение ¦ Протягни, щоб накреслити рамку, потім подвійне клацання, щоб розмістити в ній зображення
+Glisse pour dessiner (⇧ : un carré) ¦ Протяни, чтобы нарисовать (⇧: квадрат) ¦ Протягни, щоб намалювати (⇧: квадрат)
+Glisse pour dessiner (⇧ : un cercle) ¦ Протяни, чтобы нарисовать (⇧: круг) ¦ Протягни, щоб намалювати (⇧: коло)
+Glisse pour dessiner un polygone ¦ Протяни, чтобы нарисовать многоугольник ¦ Протягни, щоб намалювати багатокутник
+Glisse pour dessiner une étoile ¦ Протяни, чтобы нарисовать звезду ¦ Протягни, щоб намалювати зірку
+Glisse pour tracer une ligne (⇧ : droite ou à 45°) ¦ Протяни, чтобы провести линию (⇧: прямую или под 45°) ¦ Протягни, щоб провести лінію (⇧: пряму або під 45°)
+Clic : un point · glisser : une courbe · double-clic ou Entrée : fini ¦ Щелчок: точка · протянуть: кривая · двойной щелчок или Enter: готово ¦ Клацання: точка · протягнути: крива · подвійне клацання або Enter: готово
+Glisse pour déplacer la vue (ou barre d’espace) ¦ Протяни, чтобы сдвинуть вид (или пробел) ¦ Протягни, щоб зсунути вигляд (або пробіл)
+Choisir la police dans la liste ¦ Выбрать шрифт в списке ¦ Вибрати шрифт у списку
+Menus du haut ¦ Верхние меню ¦ Верхні меню
+🎨 Enregistrer comme design… ¦ 🎨 Сохранить как дизайн… ¦ 🎨 Зберегти як дизайн…
+📐 Format du document… ¦ 📐 Формат документа… ¦ 📐 Формат документа…
+ℹ️ Informations du document… ¦ ℹ️ Сведения о документе… ¦ ℹ️ Відомості про документ…
+⤓ Exporter (PDF, ePub, HTML, fichier)… ¦ ⤓ Экспорт (PDF, ePub, HTML, файл)… ¦ ⤓ Експорт (PDF, ePub, HTML, файл)…
+✅ Contrôle avant impression… ¦ ✅ Проверка перед печатью… ¦ ✅ Перевірка перед друком…
+↻ Mettre à jour les objets dynamiques (photos, fiches, arbres) ¦ ↻ Обновить динамические объекты (фото, карточки, древа) ¦ ↻ Оновити динамічні об’єкти (фото, картки, дерева)
+🎨 Mes styles (pour tous mes documents)… ¦ 🎨 Мои стили (для всех моих документов)… ¦ 🎨 Мої стилі (для всіх моїх документів)…
+Arrière-plan ¦ Задний план ¦ Задній план
+Ajuster le cadre au contenu ¦ Подогнать рамку под содержимое ¦ Припасувати рамку до вмісту
+🖼️ Placer une image (liée si elle vient de l’app)… ¦ 🖼️ Поместить изображение (связанное, если оно из приложения)… ¦ 🖼️ Розмістити зображення (пов’язане, якщо воно із застосунку)…
+➜ Chaîner le bloc de texte vers un autre… ¦ ➜ Связать текстовый блок с другим… ¦ ➜ Зв’язати текстовий блок з іншим…
+⤵ Faire couler le texte sur de nouvelles pages ¦ ⤵ Перелить текст на новые страницы ¦ ⤵ Перелити текст на нові сторінки
+Couper le chaînage ¦ Разорвать цепочку ¦ Розірвати ланцюжок
+📑 Insérer une table des matières ¦ 📑 Вставить оглавление ¦ 📑 Вставити зміст
+🔤 Insérer un index des noms ¦ 🔤 Вставить указатель имён ¦ 🔤 Вставити покажчик імен
+📍 Insérer un index des lieux ¦ 📍 Вставить указатель мест ¦ 📍 Вставити покажчик місць
+🔨 Insérer un index des métiers ¦ 🔨 Вставить указатель профессий ¦ 🔨 Вставити покажчик професій
+¹ Insérer une note de bas de page… ¦ ¹ Вставить сноску… ¦ ¹ Вставити виноску…
+📚 Citer une source (en note)… ¦ 📚 Сослаться на источник (в сноске)… ¦ 📚 Послатися на джерело (у виносці)…
+🗒 Insérer les notes du chapitre ¦ 🗒 Вставить примечания главы ¦ 🗒 Вставити примітки розділу
+📚 Insérer la bibliographie ¦ 📚 Вставить библиографию ¦ 📚 Вставити бібліографію
+🌳 Insérer un arbre généalogique (objet dynamique)… ¦ 🌳 Вставить генеалогическое древо (динамический объект)… ¦ 🌳 Вставити генеалогічне дерево (динамічний об’єкт)…
+👤 Insérer le texte d’une fiche (objet dynamique)… ¦ 👤 Вставить текст карточки (динамический объект)… ¦ 👤 Вставити текст картки (динамічний об’єкт)…
+🌦 Encadré météo d’un événement… ¦ 🌦 Врезка с погодой события… ¦ 🌦 Врізка з погодою події…
+📊 Insérer un diagramme (objet dynamique)… ¦ 📊 Вставить диаграмму (динамический объект)… ¦ 📊 Вставити діаграму (динамічний об’єкт)…
+▦ Insérer un QR code (fiche, adresse, texte)… ¦ ▦ Вставить QR-код (карточка, адрес, текст)… ¦ ▦ Вставити QR-код (картка, адреса, текст)…
+＋ Ajouter une page à la fin ¦ ＋ Добавить страницу в конец ¦ ＋ Додати сторінку в кінець
+＋ Insérer des pages… ¦ ＋ Вставить страницы… ¦ ＋ Вставити сторінки…
+📨 Publipostage : une page par personne… ¦ 📨 Слияние: одна страница на человека… ¦ 📨 Злиття: одна сторінка на людину…
+📨 Page modèle de publipostage (avec des champs) ¦ 📨 Шаблон страницы для слияния (с полями) ¦ 📨 Шаблон сторінки для злиття (з полями)
+Aller à la page… ¦ Перейти к странице… ¦ Перейти до сторінки…
+⏮ Première page ¦ ⏮ Первая страница ¦ ⏮ Перша сторінка
+‹ Page précédente ¦ ‹ Предыдущая страница ¦ ‹ Попередня сторінка
+Dernière page ⏭ ¦ Последняя страница ⏭ ¦ Остання сторінка ⏭
+💬 Commenter le passage ou l’objet choisi… ¦ 💬 Прокомментировать выбранный фрагмент или объект… ¦ 💬 Прокоментувати вибраний фрагмент або об’єкт…
+✎ Suggérer une modification du texte choisi… ¦ ✎ Предложить правку выбранного текста… ¦ ✎ Запропонувати правку вибраного тексту…
+🗂 Voir les commentaires ¦ 🗂 Показать комментарии ¦ 🗂 Показати коментарі
+📨 Envoyer à un cousin (fichier de relecture)… ¦ 📨 Отправить кузену (файл для вычитки)… ¦ 📨 Надіслати кузенові (файл для вичитування)…
+⤒ Importer les commentaires d’un cousin… ¦ ⤒ Импорт комментариев кузена… ¦ ⤒ Імпорт коментарів кузена…
+📝 PDF annoté (avec les commentaires)… ¦ 📝 PDF с пометками (с комментариями)… ¦ 📝 PDF із позначками (з коментарями)…
+📏 Repères et marges ¦ 📏 Направляющие и поля ¦ 📏 Напрямні й поля
+Aperçu (sans repères) ¦ Предпросмотр (без направляющих) ¦ Попередній перегляд (без напрямних)
+Annuler / rétablir (en haut) ¦ Отменить / вернуть (вверху) ¦ Відмінити / повторити (угорі)
+Annuler (⌘Z) ¦ Отменить (⌘Z) ¦ Відмінити (⌘Z)
+Rétablir (⇧⌘Z) ¦ Вернуть (⇧⌘Z) ¦ Повторити (⇧⌘Z)
+Exporter : PDF, ePub, HTML, impression, fichier du document ¦ Экспорт: PDF, ePub, HTML, печать, файл документа ¦ Експорт: PDF, ePub, HTML, друк, файл документа
+Fond et contour de l’objet choisi : clic = choisir la couleur ¦ Заливка и контур выбранного объекта: щелчок = выбрать цвет ¦ Заливка й контур вибраного об’єкта: клацання = вибрати колір
+Fond : clic pour choisir la couleur ¦ Заливка: щёлкни, чтобы выбрать цвет ¦ Заливка: клацни, щоб вибрати колір
+Contour : clic pour choisir la couleur ¦ Контур: щёлкни, чтобы выбрать цвет ¦ Контур: клацни, щоб вибрати колір
+Intervertir fond et contour (⇧X) ¦ Поменять местами заливку и контур (⇧X) ¦ Поміняти місцями заливку й контур (⇧X)
+Aucune couleur pour le fond ou le contour choisi (/) ¦ Без цвета для выбранной заливки или контура (/) ¦ Без кольору для вибраної заливки чи контуру (/)
+Barre du bas ¦ Нижняя панель ¦ Нижня панель
+Première page ¦ Первая страница ¦ Перша сторінка
+Numéro de la page ¦ Номер страницы ¦ Номер сторінки
+Dernière page ¦ Последняя страница ¦ Остання сторінка
+Position du pointeur (mm) ¦ Положение указателя (мм) ¦ Положення вказівника (мм)
+Voyant des erreurs (contrôle en direct) ¦ Индикатор ошибок (проверка на лету) ¦ Індикатор помилок (перевірка на льоту)
+Contrôle en direct ¦ Проверка на лету ¦ Перевірка на льоту
+Ouverture du document ¦ Открытие документа ¦ Відкриття документа
+Rétabli : {x} ¦ Возвращено: {x} ¦ Повторено: {x}
+la mise en page est fermée ¦ вёрстка закрыта ¦ верстку закрито
+d’autres changements ont suivi : utilise ↶ dans la barre de l’outil ¦ после этого были другие изменения: используй ↶ на панели инструмента ¦ після цього були інші зміни: використай ↶ на панелі інструмента
+Annuler : {x} (⌘Z) ¦ Отменить: {x} (⌘Z) ¦ Відмінити: {x} (⌘Z)
+Rien à annuler ¦ Нечего отменять ¦ Нічого відмінити
+Rétablir : {x} (⇧⌘Z) ¦ Вернуть: {x} (⇧⌘Z) ¦ Повторити: {x} (⇧⌘Z)
+Rien à rétablir ¦ Нечего возвращать ¦ Нічого повторити
+Gabarit « {name} » — ce qui est posé ici apparaît sur toutes ses pages. ¦ Шаблон «{name}» — то, что размещено здесь, появляется на всех его страницах. ¦ Шаблон «{name}» — те, що розміщено тут, з’являється на всіх його сторінках.
+＋ Numéro de page ¦ ＋ Номер страницы ¦ ＋ Номер сторінки
+＋ Titre du livre en haut ¦ ＋ Название книги вверху ¦ ＋ Назва книги вгорі
+＋ Chapitre en cours en haut ¦ ＋ Текущая глава вверху ¦ ＋ Поточний розділ угорі
+Revenir aux pages ¦ Вернуться к страницам ¦ Повернутися до сторінок
+Aimanter : les objets se collent aux marges, aux repères et aux autres objets ¦ Притягивать: объекты прилипают к полям, направляющим и другим объектам ¦ Притягувати: об’єкти прилипають до полів, напрямних та інших об’єктів
+Repères et marges : montrer ou cacher ¦ Направляющие и поля: показать или скрыть ¦ Напрямні й поля: показати або приховати
+{what} se remplit tout seul (réglages dans Objet). ¦ {what} заполняется сам (настройки в меню «Объект»). ¦ {what} заповнюється сам (налаштування в меню «Об’єкт»).
+Le sommaire ¦ Оглавление ¦ Зміст
+L’index des noms ¦ Указатель имён ¦ Покажчик імен
+L’index des lieux ¦ Указатель мест ¦ Покажчик місць
+L’index des métiers ¦ Указатель профессий ¦ Покажчик професій
+Le bloc des notes ¦ Блок примечаний ¦ Блок приміток
+La bibliographie ¦ Библиография ¦ Бібліографія
+Ce bloc ¦ Этот блок ¦ Цей блок
+Ce bloc est la suite d’un sommaire ou d’un index automatique. ¦ Этот блок — продолжение оглавления или автоматического указателя. ¦ Цей блок — продовження змісту або автоматичного покажчика.
+Texte chaîné : il s’écrit dans son premier bloc (la suite se remplit toute seule). ¦ Связанный текст: он пишется в первом блоке (продолжение заполняется само). ¦ Зв’язаний текст: він пишеться в першому блоці (продовження заповнюється само).
+Ce texte suit une fiche de la généalogie (objet dynamique). L’écrire à la main le détache de la fiche. ¦ Этот текст следует за карточкой генеалогии (динамический объект). Если писать его вручную, он отвяжется от карточки. ¦ Цей текст стежить за карткою генеалогії (динамічний об’єкт). Якщо писати його вручну, він від’єднається від картки.
+Détacher le texte de la fiche ? ¦ Отвязать текст от карточки? ¦ Від’єднати текст від картки?
+Détacher et écrire ¦ Отвязать и писать ¦ Від’єднати й писати
+Texte détaché de la fiche ¦ Текст отвязан от карточки ¦ Текст від’єднано від картки
+Objet verrouillé. ¦ Объект заблокирован. ¦ Об’єкт заблоковано.
+Texte modifié ¦ Текст изменён ¦ Текст змінено
+Choisis un bloc de texte (ou du texte dedans). ¦ Выбери текстовый блок (или текст в нём). ¦ Вибери текстовий блок (або текст у ньому).
+Choisis un bloc de texte. ¦ Выбери текстовый блок. ¦ Вибери текстовий блок.
+Chaînage annulé. ¦ Цепочка отменена. ¦ Ланцюжок скасовано.
+Objet verrouillé (Objet → Verrouiller pour le libérer). ¦ Объект заблокирован (Объект → Заблокировать, чтобы освободить). ¦ Об’єкт заблоковано (Об’єкт → Заблокувати, щоб звільнити).
+Élément du gabarit : Pages → gabarit → « Modifier », ou « Détacher les éléments du gabarit ». ¦ Элемент шаблона: Страницы → шаблон → «Изменить» или «Отделить элементы шаблона». ¦ Елемент шаблону: Сторінки → шаблон → «Змінити» або «Відокремити елементи шаблону».
+Copie déplacée ¦ Копия перемещена ¦ Копію переміщено
+Déplacement ({what}) ¦ Перемещение ({what}) ¦ Переміщення ({what})
+Taille changée ¦ Размер изменён ¦ Розмір змінено
+Nouveau : {x} ¦ Новое: {x} ¦ Нове: {x}
+cadre d’image ¦ рамка изображения ¦ рамка зображення
+étoile ¦ звезда ¦ зірка
+Cadre d’image : double-clic pour y placer une image. ¦ Рамка изображения: двойной щелчок, чтобы поместить в неё изображение. ¦ Рамка зображення: подвійне клацання, щоб розмістити в ній зображення.
+Tracé à la plume ¦ Контур пером ¦ Контур пером
+Objet verrouillé : déverrouille-le d’abord (Objet → 🔒 Verrouiller / déverrouiller). ¦ Объект заблокирован: сначала разблокируй его (Объект → 🔒 Заблокировать / разблокировать). ¦ Об’єкт заблоковано: спершу розблокуй його (Об’єкт → 🔒 Заблокувати / розблокувати).
+{n} objets supprimés ¦ Удалено объектов: {n} ¦ Видалено об’єктів: {n}
+Objet supprimé ¦ Объект удалён ¦ Об’єкт видалено
+objets copiés ¦ объектов скопировано ¦ об’єктів скопійовано
+Rien à coller. ¦ Нечего вставлять. ¦ Нічого вставляти.
+pages ajoutées ¦ страниц добавлено ¦ сторінок додано
+Insérer des pages ¦ Вставить страницы ¦ Вставити сторінки
+Insérer ¦ Вставить ¦ Вставити
+après la page ¦ после страницы ¦ після сторінки
+avant la page ¦ перед страницей ¦ перед сторінкою
+au début du document ¦ в начало документа ¦ на початок документа
+à la fin du document ¦ в конец документа ¦ у кінець документа
+La liste des formats n’est pas chargée. ¦ Список форматов не загружен. ¦ Список форматів не завантажено.
+📐 Format du document ¦ 📐 Формат документа ¦ 📐 Формат документа
+Pages en vis-à-vis (livre) ¦ Развороты (книга) ¦ Розвороти (книга)
+Appliquer le format à ¦ Применить формат к ¦ Застосувати формат до
+Toutes les pages ({what}) ¦ Все страницы ({what}) ¦ Усі сторінки ({what})
+La page {n} seulement ¦ Только страница {n} ¦ Лише сторінка {n}
+Numéros des pages ¦ Номера страниц ¦ Номери сторінок
+Les pages : ¦ Страницы: ¦ Сторінки:
+Les marges, colonnes et le fond perdu valent pour tout le document. ¦ Поля, колонки и вылеты действуют для всего документа. ¦ Поля, колонки й виліт діють для всього документа.
+Les objets ¦ Объекты ¦ Об’єкти
+Restent en place ¦ Остаются на месте ¦ Залишаються на місці
+Sont remis à l’échelle (agrandis ou réduits avec la page) ¦ Масштабируются (увеличиваются или уменьшаются вместе со страницей) ¦ Масштабуються (збільшуються або зменшуються разом зі сторінкою)
+Petit fond (intérieur) ¦ Внутреннее поле ¦ Внутрішнє поле
+Grand fond (extérieur) ¦ Внешнее поле ¦ Зовнішнє поле
+Colonnes et fond perdu ¦ Колонки и вылеты ¦ Колонки й виліт
+Gouttière ¦ Средник ¦ Міжколонковий проміжок
+↶ Annuler (⌘Z) revient au format d’avant. ¦ ↶ Отменить (⌘Z) возвращает прежний формат. ¦ ↶ Відмінити (⌘Z) повертає попередній формат.
+Choisis une page entre 3 cm et 1,5 m de côté. ¦ Выбери страницу со стороной от 3 см до 1,5 м. ¦ Вибери сторінку зі стороною від 3 см до 1,5 м.
+Écris les numéros des pages, par exemple « {a}-{b}, {c} ». ¦ Напиши номера страниц, например «{a}-{b}, {c}». ¦ Напиши номери сторінок, наприклад «{a}-{b}, {c}».
+Format du document : {f} ¦ Формат документа: {f} ¦ Формат документа: {f}
+Format du document : {f} ({what}) ¦ Формат документа: {f} ({what}) ¦ Формат документа: {f} ({what})
+Ces informations vont dans le PDF (titre du fichier, auteur, sujet, mots-clés) et dans l’ePub exportés (la description aussi). ¦ Эти сведения попадают в экспортированный PDF (название файла, автор, тема, ключевые слова) и в ePub (вместе с описанием). ¦ Ці відомості потрапляють в експортований PDF (назва файлу, автор, тема, ключові слова) і в ePub (разом з описом).
+Informations du document ¦ Сведения о документе ¦ Відомості про документ
+Mettre le gabarit ¦ Применить шаблон ¦ Застосувати шаблон
+Aucun (enlever le gabarit) ¦ Нет (убрать шаблон) ¦ Немає (прибрати шаблон)
+Sur ¦ На ¦ На
+la page {n} seulement ¦ только страница {n} ¦ лише сторінка {n}
+les pages de … à … ¦ страницы с … по … ¦ сторінки з … по …
+les pages qui ont le gabarit… (remplacer) ¦ страницы с шаблоном… (заменить) ¦ сторінки із шаблоном… (замінити)
+les pages de gauche ¦ левые страницы ¦ ліві сторінки
+les pages de droite ¦ правые страницы ¦ праві сторінки
+Gabarit à remplacer ¦ Шаблон, который заменить ¦ Шаблон, який замінити
+les pages sans gabarit ¦ страницы без шаблона ¦ сторінки без шаблону
+Rien à changer : ces pages ont déjà ce gabarit. ¦ Менять нечего: у этих страниц уже этот шаблон. ¦ Змінювати нічого: ці сторінки вже мають цей шаблон.
+Gabarit « {name} » sur {what} ¦ Шаблон «{name}» на {what} ¦ Шаблон «{name}» на {what}
+Gabarit enlevé de {what} ¦ Шаблон убран с {what} ¦ Шаблон прибрано з {what}
+Aller à la page (1 à {n}) : ¦ Перейти к странице (от 1 до {n}): ¦ Перейти до сторінки (від 1 до {n}):
+Il faut garder au moins une page. ¦ Нужно оставить хотя бы одну страницу. ¦ Треба залишити хоча б одну сторінку.
+Page {n} supprimée ¦ Страница {n} удалена ¦ Сторінку {n} видалено
+Choisis un autre bloc. ¦ Выбери другой блок. ¦ Вибери інший блок.
+Un sommaire ou un index ne peut pas recevoir la suite d’un texte. ¦ Оглавление или указатель не может принять продолжение текста. ¦ Зміст або покажчик не може прийняти продовження тексту.
+Ce bloc reçoit déjà la suite d’un autre texte. ¦ Этот блок уже принимает продолжение другого текста. ¦ Цей блок уже приймає продовження іншого тексту.
+Ce chaînage ferait une boucle. ¦ Эта цепочка образовала бы петлю. ¦ Цей ланцюжок утворив би петлю.
+Ce bloc contient déjà du texte : il sera ajouté à la fin du texte chaîné. ¦ В этом блоке уже есть текст: он будет добавлен в конец связанного текста. ¦ У цьому блоці вже є текст: його буде додано в кінець зв’язаного тексту.
+Chaîner vers ce bloc ? ¦ Связать с этим блоком? ¦ Зв’язати з цим блоком?
+Chaîner ¦ Связать ¦ Зв’язати
+Blocs de texte chaînés ¦ Связанные текстовые блоки ¦ Зв’язані текстові блоки
+➜ Chaîné : la suite va dans le bloc de la page {n}. ¦ ➜ Связано: продолжение идёт в блок на странице {n}. ¦ ➜ Зв’язано: продовження йде в блок на сторінці {n}.
+Choisis d’abord un bloc de texte. ¦ Сначала выбери текстовый блок. ¦ Спершу вибери текстовий блок.
+Je répartis le texte… ¦ Распределяю текст… ¦ Розподіляю текст…
+Suite du texte ¦ Продолжение текста ¦ Продовження тексту
+Le texte tient déjà dans ses blocs. ¦ Текст уже помещается в свои блоки. ¦ Текст уже вміщується у свої блоки.
+Texte réparti sur {what} ¦ Текст распределён на {what} ¦ Текст розподілено на {what}
+{what} : le texte continue de bloc en bloc. ¦ {what}: текст продолжается из блока в блок. ¦ {what}: текст продовжується з блоку в блок.
+Ouvre d’abord un gabarit (Pages → Modifier). ¦ Сначала открой шаблон (Страницы → Изменить). ¦ Спершу відкрий шаблон (Сторінки → Змінити).
+Table des matières ¦ Оглавление ¦ Зміст
+Index des lieux ¦ Указатель мест ¦ Покажчик місць
+Index des métiers ¦ Указатель профессий ¦ Покажчик професій
+Notes du chapitre ¦ Примечания главы ¦ Примітки розділу
+Pas dans un gabarit : sur une page. ¦ Не в шаблоне: на странице. ¦ Не в шаблоні: на сторінці.
+Les notes du chapitre se rangeront dans ce bloc au lieu du bas de chaque texte (Document → Notes de bas de page). ¦ Примечания главы будут собираться в этом блоке, а не внизу каждого текста (Документ → Сноски). ¦ Примітки розділу збиратимуться в цьому блоці, а не внизу кожного тексту (Документ → Виноски).
+Mettre les notes en fin de chapitre ? ¦ Поместить примечания в конец главы? ¦ Розмістити примітки в кінці розділу?
+Oui, en fin de chapitre ¦ Да, в конец главы ¦ Так, у кінці розділу
+Non, garder en bas des blocs ¦ Нет, оставить внизу блоков ¦ Ні, залишити внизу блоків
+🗒 Les notes du chapitre se rangent ici toutes seules. ¦ 🗒 Примечания главы собираются здесь сами. ¦ 🗒 Примітки розділу збираються тут самі.
+📚 La bibliographie se remplit avec les sources citées en note. ¦ 📚 Библиография заполняется источниками, на которые есть ссылки в сносках. ¦ 📚 Бібліографія заповнюється джерелами, на які є посилання у виносках.
+Lieu à indexer ¦ Место для указателя ¦ Місце для покажчика
+Métier à indexer ¦ Профессия для указателя ¦ Професія для покажчика
+Sinon : seulement les mots marqués avec le style de caractère « {name} ». ¦ Иначе: только слова, отмеченные стилем символов «{name}». ¦ Інакше: лише слова, позначені стилем символів «{name}».
+Chercher aussi les lieux de ta généalogie ? ¦ Искать также места твоей генеалогии? ¦ Шукати також місця твоєї генеалогії?
+Chercher aussi les métiers de ta généalogie ? ¦ Искать также профессии твоей генеалогии? ¦ Шукати також професії твоєї генеалогії?
+Oui, les chercher ¦ Да, искать их ¦ Так, шукати їх
+Non, seulement les mots marqués ¦ Нет, только отмеченные слова ¦ Ні, лише позначені слова
+{what} : rangé de A à Z, avec les pages. S’il est long : Objet → Faire couler le texte. ¦ {what}: упорядочено от А до Я, со страницами. Если он длинный: Объект → Перелить текст. ¦ {what}: упорядковано від А до Я, зі сторінками. Якщо він довгий: Об’єкт → Перелити текст.
+Nom à indexer ¦ Имя для указателя ¦ Ім’я для покажчика
+Sinon : seulement les noms marqués avec le style de caractère « Nom à indexer ». ¦ Иначе: только имена, отмеченные стилем символов «Имя для указателя». ¦ Інакше: лише імена, позначені стилем символів «Ім’я для покажчика».
+Chercher aussi les noms des personnes de la généalogie ? ¦ Искать также имена людей из генеалогии? ¦ Шукати також імена людей із генеалогії?
+Oui, chercher les noms ¦ Да, искать имена ¦ Так, шукати імена
+Non, seulement les noms marqués ¦ Нет, только отмеченные имена ¦ Ні, лише позначені імена
+Sommaire : il suit les paragraphes en style « Chapitre » (d’autres styles dans Objet). S’il est long : Objet → Faire couler le texte. ¦ Оглавление: оно следует за абзацами в стиле «Глава» (другие стили — в меню «Объект»). Если оно длинное: Объект → Перелить текст. ¦ Зміст: він стежить за абзацами в стилі «Розділ» (інші стилі — у меню «Об’єкт»). Якщо він довгий: Об’єкт → Перелити текст.
+Index : rangé par nom, avec les pages. S’il est long : Objet → Faire couler le texte. ¦ Указатель: упорядочен по именам, со страницами. Если он длинный: Объект → Перелить текст. ¦ Покажчик: упорядкований за іменами, зі сторінками. Якщо він довгий: Об’єкт → Перелити текст.
+Termine d’abord le texte en cours (Échap), puis recommence. ¦ Сначала закончи текущий текст (Esc), затем начни снова. ¦ Спершу закінчи поточний текст (Esc), потім почни знову.
+Aucun objet dynamique dans ce document (photos liées, textes de fiches, diagrammes, arbres). ¦ В этом документе нет динамических объектов (связанные фото, тексты карточек, диаграммы, древа). ¦ У цьому документі немає динамічних об’єктів (пов’язані фото, тексти карток, діаграми, дерева).
+Objets dynamiques mis à jour ¦ Динамические объекты обновлены ¦ Динамічні об’єкти оновлено
+{n} mis à jour ¦ Обновлено: {n} ¦ Оновлено: {n}
+tout est à jour ¦ всё актуально ¦ усе актуальне
+Cette image n’est pas liée à une photo de l’app. ¦ Это изображение не связано с фото приложения. ¦ Це зображення не пов’язане з фото застосунку.
+Photo introuvable dans l’app. ¦ Фото не найдено в приложении. ¦ Фото не знайдено в застосунку.
+Insérer un diagramme ¦ Вставить диаграмму ¦ Вставити діаграму
+Diagramme inséré ¦ Диаграмма вставлена ¦ Діаграму вставлено
+La météo d’autrefois n’est pas prête. ¦ Погода прошлого ещё не готова. ¦ Погода минулого ще не готова.
+Encadré météo ¦ Врезка с погодой ¦ Врізка з погодою
+Insérer un encadré météo ¦ Вставить врезку с погодой ¦ Вставити врізку з погодою
+Mettre à jour ¦ Обновить ¦ Оновити
+L’encadré dit le temps qu’il faisait le jour de l’événement (icône, phrase et source, qui suit à l’export). « ↻ Mettre à jour les objets dynamiques » le refait. ¦ Врезка сообщает, какая была погода в день события (значок, фраза и источник, который сохраняется при экспорте). «↻ Обновить динамические объекты» пересоздаёт её. ¦ Врізка повідомляє, яка була погода в день події (значок, фраза й джерело, яке зберігається під час експорту). «↻ Оновити динамічні об’єкти» перестворює її.
+Choisis un événement. ¦ Выбери событие. ¦ Вибери подію.
+Texte lié à une fiche ¦ Текст, связанный с карточкой ¦ Текст, пов’язаний з карткою
+Insérer le texte d’une fiche ¦ Вставить текст карточки ¦ Вставити текст картки
+Le texte suit la fiche : si elle change dans la généalogie, « 🔗 Mettre à jour les liens » (ou la réouverture du document) le refait. ¦ Текст следует за карточкой: если она изменится в генеалогии, «🔗 Обновить связи» (или повторное открытие документа) пересоздаёт его. ¦ Текст стежить за карткою: якщо вона зміниться в генеалогії, «🔗 Оновити зв’язки» (або повторне відкриття документа) перестворює його.
+Ce qu’il faut montrer ¦ Что показывать ¦ Що показувати
+Coche au moins une chose à montrer. ¦ Отметь хотя бы одно, что показывать. ¦ Познач хоча б щось одне для показу.
+Le générateur de QR codes n’est pas encore prêt. ¦ Генератор QR-кодов ещё не готов. ¦ Генератор QR-кодів ще не готовий.
+▦ Modifier le QR code ¦ ▦ Изменить QR-код ¦ ▦ Змінити QR-код
+▦ Insérer un QR code ¦ ▦ Вставить QR-код ¦ ▦ Вставити QR-код
+Ce que le QR code ouvre ¦ Что открывает QR-код ¦ Що відкриває QR-код
+👤 Une fiche de la généalogie ¦ 👤 Карточка из генеалогии ¦ 👤 Картка з генеалогії
+🌐 Une adresse web ¦ 🌐 Веб-адрес ¦ 🌐 Вебадреса
+🔤 Un texte ¦ 🔤 Текст ¦ 🔤 Текст
+Le contenu ¦ Содержимое ¦ Вміст
+(choisis d’abord la personne) ¦ (сначала выбери человека) ¦ (спершу вибери людину)
+Les fiches de l’app restent sur cet ordinateur : le QR code mène aux fiches en ligne de la personne (Geneanet, Filae…, notées dans sa fiche) ou à FamilySearch ; sinon, il contient son identité en texte (lisible par n’importe quel téléphone). ¦ Карточки приложения остаются на этом компьютере: QR-код ведёт к онлайн-карточкам человека (Geneanet, Filae…, указанным в его карточке) или на FamilySearch; иначе он содержит его данные в виде текста (читается любым телефоном). ¦ Картки застосунку залишаються на цьому комп’ютері: QR-код веде до онлайн-карток людини (Geneanet, Filae…, зазначених у її картці) або на FamilySearch; інакше він містить її дані у вигляді тексту (читається будь-яким телефоном).
+Rien à coder pour l’instant. ¦ Пока нечего кодировать. ¦ Поки нічого кодувати.
+{n} octets · version {v} ({s} × {s} modules) · correction d’erreurs M ¦ {n} байт · версия {v} ({s} × {s} модулей) · коррекция ошибок M ¦ {n} байт · версія {v} ({s} × {s} модулів) · корекція помилок M
+Choisis la personne (et ce que le QR code contient). ¦ Выбери человека (и что будет содержать QR-код). ¦ Вибери людину (і що міститиме QR-код).
+Écris ce que le QR code doit contenir. ¦ Напиши, что должен содержать QR-код. ¦ Напиши, що має містити QR-код.
+QR code modifié ¦ QR-код изменён ¦ QR-код змінено
+QR code inséré ¦ QR-код вставлен ¦ QR-код вставлено
+▦ QR code : tire un coin pour la taille (il reste carré) ; double-clic pour le modifier. ¦ ▦ QR-код: потяни за угол, чтобы изменить размер (он остаётся квадратным); двойной щелчок — изменить. ¦ ▦ QR-код: потягни за кут, щоб змінити розмір (він залишається квадратним); подвійне клацання — змінити.
+🪪 Son identité en texte : « {x} » ¦ 🪪 Его данные текстом: «{x}» ¦ 🪪 Її дані текстом: «{x}»
+Repères ¦ Направляющие ¦ Напрямні
+Page modèle de publipostage ¦ Шаблон страницы для слияния ¦ Шаблон сторінки для злиття
+📨 Page modèle posée : change la mise en forme à ton goût, puis Page → « Publipostage ». ¦ 📨 Шаблон страницы размещён: измени оформление по вкусу, затем Страница → «Слияние». ¦ 📨 Шаблон сторінки розміщено: зміни оформлення на свій смак, потім Сторінка → «Злиття».
+Gabarit « {name} » ¦ Шаблон «{name}» ¦ Шаблон «{name}»
+📨 Une page par personne ¦ 📨 Одна страница на человека ¦ 📨 Одна сторінка на людину
+Créer les pages ¦ Создать страницы ¦ Створити сторінки
+Page modèle ¦ Шаблон страницы ¦ Шаблон сторінки
+les ancêtres de… ¦ предки… ¦ предки…
+les descendants de… ¦ потомки… ¦ нащадки…
+ancêtres et descendants de… ¦ предки и потомки… ¦ предки й нащадки…
+une liste de fiches ¦ список карточек ¦ список карток
+les fiches d’une étiquette ¦ карточки с меткой ¦ картки з міткою
+Les fiches ¦ Карточки ¦ Картки
+celui de l’arbre (Sosa, d’Aboville) ¦ как в древе (Sosa, d’Aboville) ¦ як у дереві (Sosa, d’Aboville)
+par naissance ¦ по рождению ¦ за народженням
+après la page modèle ¦ после шаблона страницы ¦ після шаблону сторінки
+retirer la page modèle ensuite ¦ затем убрать шаблон страницы ¦ потім прибрати шаблон сторінки
+Champs trouvés : {list} ¦ Найденные поля: {list} ¦ Знайдені поля: {list}
+⚠️ Aucun champ sur cette page : Page → « Page modèle de publipostage » en pose une toute prête. ¦ ⚠️ На этой странице нет полей: Страница → «Шаблон страницы для слияния» размещает готовый. ¦ ⚠️ На цій сторінці немає полів: Сторінка → «Шаблон сторінки для злиття» розміщує готовий.
+→ {what} (seulement les {n} premières). ¦ → {what} (только первые {n}). ¦ → {what} (лише перші {n}).
+=page sera créée ¦ страница будет создана|страницы будут созданы|страниц будет создано ¦ сторінку буде створено|сторінки буде створено|сторінок буде створено
+pages seront créées ¦ страниц будет создано ¦ сторінок буде створено
+Choisis les personnes. ¦ Выбери людей. ¦ Вибери людей.
+(aucune étiquette) ¦ (нет меток) ¦ (немає міток)
+Aucune personne dans ce choix. ¦ В этом выборе нет людей. ¦ У цьому виборі немає людей.
+📨 {what} (une par personne). ↶ pour tout défaire. ¦ 📨 {what} (по одной на человека). ↶ — чтобы всё отменить. ¦ 📨 {what} (по одній на людину). ↶ — щоб усе відмінити.
+=page créée ¦ страница создана|страницы созданы|страниц создано ¦ сторінку створено|сторінки створено|сторінок створено
+pages créées ¦ страниц создано ¦ сторінок створено
+Double-clic dans un bloc de texte, place le curseur où va l’appel de note, puis recommence. ¦ Дважды щёлкни в текстовом блоке, поставь курсор туда, где будет знак сноски, затем повтори. ¦ Двічі клацни в текстовому блоці, постав курсор туди, де буде знак виноски, потім повтори.
+¹ Note ajoutée : tous les numéros se remettent dans l’ordre quand tu sors du texte (Échap). ¦ ¹ Сноска добавлена: все номера выстроятся по порядку, когда ты выйдешь из текста (Esc). ¦ ¹ Виноску додано: усі номери стануть по порядку, коли ти вийдеш із тексту (Esc).
+Texte de la note (il s’écrit en bas du bloc, ou en fin de chapitre) : ¦ Текст сноски (он пишется внизу блока или в конце главы): ¦ Текст виноски (він пишеться внизу блоку або в кінці розділу):
+Ajouter la note ¦ Добавить сноску ¦ Додати виноску
+Comme les archives (« AD Corrèze, 3 E 123, f° 12 ») ¦ Как в архивах («AD Corrèze, 3 E 123, f° 12») ¦ Як в архівах («AD Corrèze, 3 E 123, f° 12»)
+NOTE · SOURCE ¦ СНОСКА · ИСТОЧНИК ¦ ВИНОСКА · ДЖЕРЕЛО
+📚 Citer une source ¦ 📚 Сослаться на источник ¦ 📚 Послатися на джерело
+Écrire la note ¦ Написать сноску ¦ Написати виноску
+La référence s’écrit en note, à l’endroit du curseur, dans le style choisi ; la source entre dans la bibliographie (Objet → Insérer la bibliographie). ¦ Ссылка пишется в сноске, в месте курсора, в выбранном стиле; источник попадает в библиографию (Объект → Вставить библиографию). ¦ Посилання пишеться у виносці, у місці курсора, у вибраному стилі; джерело потрапляє до бібліографії (Об’єкт → Вставити бібліографію).
+AD Corrèze ¦ AD Corrèze ¦ AD Corrèze
+acte de baptême de Jean ¦ запись о крещении Jean ¦ запис про хрещення Jean
+Dépôt (archives) ¦ Хранилище (архив) ¦ Сховище (архів)
+Folio, page ou vue ¦ Лист, страница или кадр ¦ Аркуш, сторінка або кадр
+À ajouter (facultatif) ¦ Дополнительно (необязательно) ¦ Додатково (необов’язково)
+Choisis une source : la note s’écrit ici. ¦ Выбери источник: сноска пишется здесь. ¦ Вибери джерело: виноска пишеться тут.
+Choisis une source. ¦ Выбери источник. ¦ Вибери джерело.
+📚 Citation ajoutée en note (et dans la bibliographie). ¦ 📚 Цитата добавлена в сноску (и в библиографию). ¦ 📚 Цитату додано у виноску (і до бібліографії).
+Note retirée ¦ Сноска убрана ¦ Виноску прибрано
+¹ Modifier la note ¦ ¹ Изменить сноску ¦ ¹ Змінити виноску
+Texte de la note : ¦ Текст сноски: ¦ Текст виноски:
+Note modifiée ¦ Сноска изменена ¦ Виноску змінено
+🌳 Modifier l’arbre ¦ 🌳 Изменить древо ¦ 🌳 Змінити дерево
+🌳 Insérer un arbre généalogique ¦ 🌳 Вставить генеалогическое древо ¦ 🌳 Вставити генеалогічне дерево
+Mettre à jour l’arbre ¦ Обновить древо ¦ Оновити дерево
+Insérer l’arbre ¦ Вставить древо ¦ Вставити дерево
+L’arbre est dessiné d’après la base : il se refait tout seul à l’ouverture du document et avec « ↻ Mettre à jour les objets dynamiques ». Il s’imprime et passe dans le PDF comme une image nette. ¦ Древо рисуется по базе: оно само пересоздаётся при открытии документа и через «↻ Обновить динамические объекты». Оно печатается и попадает в PDF как чёткое изображение. ¦ Дерево малюється за базою: воно саме перестворюється під час відкриття документа і через «↻ Оновити динамічні об’єкти». Воно друкується й потрапляє в PDF як чітке зображення.
+Style des cases ¦ Стиль ячеек ¦ Стиль клітинок
+Photos des fiches ¦ Фото карточек ¦ Фото карток
+Choisis la personne de l’arbre. ¦ Выбери человека для древа. ¦ Вибери людину для дерева.
+🌳 Je dessine l’arbre… ¦ 🌳 Рисую древо… ¦ 🌳 Малюю дерево…
+Arbre modifié ¦ Древо изменено ¦ Дерево змінено
+Arbre inséré ¦ Древо вставлено ¦ Дерево вставлено
+💬 Ton nom ¦ 💬 Твоё имя ¦ 💬 Твоє ім’я
+Ton prénom (il signe tes commentaires) : ¦ Твоё имя (им подписываются твои комментарии): ¦ Твоє ім’я (ним підписуються твої коментарі):
+Choisis d’abord les mots à changer : double-clic dans le texte, puis sélectionne-les. ¦ Сначала выбери слова для замены: дважды щёлкни в тексте, затем выдели их. ¦ Спершу вибери слова для заміни: двічі клацни в тексті, потім виділи їх.
+Choisis un objet, ou des mots dans un texte (double-clic), puis « 💬 Commenter ». ¦ Выбери объект или слова в тексте (двойной щелчок), затем «💬 Комментировать». ¦ Вибери об’єкт або слова в тексті (подвійне клацання), потім «💬 Коментувати».
+✎ Suggérer une modification ¦ ✎ Предложить правку ¦ ✎ Запропонувати правку
+Remplacer « {x} » par : ¦ Заменить «{x}» на: ¦ Замінити «{x}» на:
+Suggérer ¦ Предложить ¦ Запропонувати
+Ton commentaire sur « {x} » : ¦ Твой комментарий к «{x}»: ¦ Твій коментар до «{x}»:
+Ton commentaire sur cet objet : ¦ Твой комментарий к этому объекту: ¦ Твій коментар до цього об’єкта:
+Ajouter le commentaire ¦ Добавить комментарий ¦ Додати коментар
+Suggestion ajoutée ¦ Предложение добавлено ¦ Пропозицію додано
+Commentaire ajouté ¦ Комментарий добавлен ¦ Коментар додано
+✎ Suggestion notée : elle s’accepte ou se refuse dans Relecture. ¦ ✎ Предложение записано: его можно принять или отклонить в «Вычитке». ¦ ✎ Пропозицію записано: її можна прийняти або відхилити у «Вичитуванні».
+💬 Commentaire ajouté. ¦ 💬 Комментарий добавлен. ¦ 💬 Коментар додано.
+Le passage a changé depuis : la suggestion ne peut plus s’appliquer toute seule. Change le texte à la main, puis « Résoudre ». ¦ Фрагмент с тех пор изменился: предложение уже не может примениться само. Измени текст вручную, затем «Решить». ¦ Фрагмент відтоді змінився: пропозиція вже не може застосуватися сама. Зміни текст вручну, потім «Розв’язати».
+Suggestion acceptée ¦ Предложение принято ¦ Пропозицію прийнято
+Suggestion refusée ¦ Предложение отклонено ¦ Пропозицію відхилено
+remplacer « {a} » par « {b} » ¦ заменить «{a}» на «{b}» ¦ замінити «{a}» на «{b}»
+📨 Fichier de relecture prêt : envoie-le à ton cousin. Il l’importe dans 📐 Mise en page, commente, puis te renvoie le sien (Relecture → Importer). ¦ 📨 Файл для вычитки готов: отправь его кузену. Он импортирует его в 📐 Вёрстку, комментирует, затем отправляет тебе свой (Вычитка → Импорт). ¦ 📨 Файл для вичитування готовий: надішли його кузенові. Він імпортує його у 📐 Верстку, коментує, потім надсилає тобі свій (Вичитування → Імпорт).
+Ce fichier n’est pas un fichier de relecture LCNDA. ¦ Это не файл вычитки LCNDA. ¦ Це не файл вичитування LCNDA.
+C’est un fichier de réglage, pas un fichier de relecture. ¦ Это файл настроек, а не файл вычитки. ¦ Це файл налаштувань, а не файл вичитування.
+Ce fichier n’est pas un fichier de relecture LCNDA (📨 Envoyer à un cousin). ¦ Это не файл вычитки LCNDA (📨 Отправить кузену). ¦ Це не файл вичитування LCNDA (📨 Надіслати кузенові).
+Ce fichier de relecture a été fait pour un autre document. Importer quand même ses commentaires ? ¦ Этот файл вычитки сделан для другого документа. Всё равно импортировать его комментарии? ¦ Цей файл вичитування зроблено для іншого документа. Усе одно імпортувати його коментарі?
+Un autre document ? ¦ Другой документ? ¦ Інший документ?
+Rien de nouveau dans ce fichier : ses commentaires sont déjà là. ¦ В этом файле ничего нового: его комментарии уже здесь. ¦ У цьому файлі нічого нового: його коментарі вже тут.
+Commentaires importés ¦ Комментарии импортированы ¦ Коментарі імпортовано
+=commentaire ajouté ¦ комментарий добавлен|комментария добавлено|комментариев добавлено ¦ коментар додано|коментарі додано|коментарів додано
+commentaires ajoutés ¦ комментариев добавлено ¦ коментарів додано
+=réponse ajoutée ¦ ответ добавлен|ответа добавлено|ответов добавлено ¦ відповідь додано|відповіді додано|відповідей додано
+réponses ajoutées ¦ ответов добавлено ¦ відповідей додано
+✓ acceptée ¦ ✓ принято ¦ ✓ прийнято
+✕ refusée ¦ ✕ отклонено ¦ ✕ відхилено
+sur un objet de la page ¦ на объекте страницы ¦ на об’єкті сторінки
+✎ Remplacer par « <b>{x}</b> » ¦ ✎ Заменить на «<b>{x}</b>» ¦ ✎ Замінити на «<b>{x}</b>»
+↩ Répondre ¦ ↩ Ответить ¦ ↩ Відповісти
+✓ Résoudre ¦ ✓ Решить ¦ ✓ Розв’язати
+Supprimer le commentaire ¦ Удалить комментарий ¦ Видалити коментар
+Choisis des mots (double-clic dans un texte) ou un objet, puis « 💬 Commenter » ou « ✎ Suggérer ». Les bulles au bord des pages montrent où ils sont. ¦ Выбери слова (двойной щелчок в тексте) или объект, затем «💬 Комментировать» или «✎ Предложить». Пузырьки на краях страниц показывают, где они. ¦ Вибери слова (подвійне клацання в тексті) або об’єкт, потім «💬 Коментувати» або «✎ Запропонувати». Бульбашки на краях сторінок показують, де вони.
+✎ Suggérer ¦ ✎ Предложить ¦ ✎ Запропонувати
+Résolus ¦ Решённые ¦ Розв’язані
+Aucun commentaire résolu ¦ Нет решённых комментариев ¦ Немає розв’язаних коментарів
+Aucun commentaire ¦ Нет комментариев ¦ Немає коментарів
+Choisis des mots dans un texte, puis « 💬 Commenter ». ¦ Выбери слова в тексте, затем «💬 Комментировать». ¦ Вибери слова в тексті, потім «💬 Коментувати».
+Aucun commentaire. ¦ Нет комментариев. ¦ Немає коментарів.
+Envoyer à un cousin ¦ Отправить кузену ¦ Надіслати кузенові
+Le fichier de relecture contient le livre : ton cousin l’importe dans son LCNDA (📐 Mise en page → Importer), ajoute ses commentaires, puis te renvoie le sien. Ou envoie-lui le PDF annoté, à lire sur papier. ¦ Файл для вычитки содержит книгу: твой кузен импортирует его в свой LCNDA (📐 Вёрстка → Импорт), добавляет комментарии и отправляет тебе свой. Или отправь ему PDF с пометками, чтобы читать на бумаге. ¦ Файл для вичитування містить книгу: твій кузен імпортує його у свій LCNDA (📐 Верстка → Імпорт), додає коментарі й надсилає тобі свій. Або надішли йому PDF із позначками, щоб читати на папері.
+⤒ Importer ses commentaires… ¦ ⤒ Импорт его комментариев… ¦ ⤒ Імпорт його коментарів…
+📝 PDF annoté… ¦ 📝 PDF с пометками… ¦ 📝 PDF із позначками…
+Ton nom ¦ Твоё имя ¦ Твоє ім’я
+il signe tes commentaires ¦ им подписываются твои комментарии ¦ ним підписуються твої коментарі
+L’envoi des images n’est pas encore prêt. Réessaie dans un instant. ¦ Отправка изображений ещё не готова. Попробуй ещё раз через минуту. ¦ Надсилання зображень ще не готове. Спробуй ще раз за хвилину.
+Seules les images se posent sur la page. ¦ На страницу можно поместить только изображения. ¦ На сторінку можна розмістити лише зображення.
+Envoi de {what} dans les médias… ¦ Отправка {what} в медиафайлы… ¦ Надсилання {what} до медіафайлів…
+=image déposée ¦ изображение добавлено|изображения добавлено|изображений добавлено ¦ зображення додано|зображення додано|зображень додано
+images déposées ¦ изображений добавлено ¦ зображень додано
+🖼️ {what} dans les médias et sur la page (liées). ¦ 🖼️ {what} в медиафайлах и на странице (связаны). ¦ 🖼️ {what} у медіафайлах і на сторінці (пов’язані).
+🖼️ {what} dans les médias et sur la page (liée). ¦ 🖼️ {what} в медиафайлах и на странице (связано). ¦ 🖼️ {what} у медіафайлах і на сторінці (пов’язане).
+Plus de place : supprime un ensemble. ¦ Больше нет места: удали набор. ¦ Більше немає місця: видали набір.
+les styles de ce document ¦ стили этого документа ¦ стилі цього документа
+{a} de paragraphe · {b} de caractère ¦ абзаца: {a} · символов: {b} ¦ абзацу: {a} · символів: {b}
+Styles « {name} » mis dans le document ¦ Стили «{name}» добавлены в документ ¦ Стилі «{name}» додано до документа
+Styles mis dans le document : tout le texte qui les utilise suit. ¦ Стили добавлены в документ: весь текст, который их использует, следует за ними. ¦ Стилі додано до документа: увесь текст, який їх використовує, слідує за ними.
+Copie « {name} » créée. ¦ Копия «{name}» создана. ¦ Копію «{name}» створено.
+Styles « {name} » supprimés ¦ Стили «{name}» удалены ¦ Стилі «{name}» видалено
+les styles de la mise en page ¦ стили вёрстки ¦ стилі верстки
+Ce réglage ne contient aucun style. ¦ В этих настройках нет стилей. ¦ У цих налаштуваннях немає стилів.
+Réglage « {name} » importé. ¦ Настройки «{name}» импортированы. ¦ Налаштування «{name}» імпортовано.
+🎨 Mes styles, pour tous mes documents ¦ 🎨 Мои стили для всех моих документов ¦ 🎨 Мої стилі для всіх моїх документів
+Garde les styles de paragraphe et de caractère (et les couleurs du nuancier qu’ils utilisent) de ce document, pour les remettre dans un autre (« Appliquer »). Les styles du même nom sont remplacés, les autres ajoutés. ¦ Сохраняет стили абзацев и символов (и используемые ими цвета палитры) этого документа, чтобы применить их в другом («Применить»). Стили с тем же именем заменяются, остальные добавляются. ¦ Зберігає стилі абзаців і символів (і кольори палітри, які вони використовують) цього документа, щоб застосувати їх в іншому («Застосувати»). Стилі з тією самою назвою замінюються, решта додаються.
+=texte qui déborde ¦ текст выходит за рамку|текста выходят за рамку|текстов выходят за рамку ¦ текст виходить за рамку|тексти виходять за рамку|текстів виходять за рамку
+textes qui débordent ¦ текстов выходят за рамку ¦ текстів виходять за рамку
+=fait contredit par les fiches ¦ факт противоречит карточкам|факта противоречат карточкам|фактов противоречат карточкам ¦ факт суперечить карткам|факти суперечать карткам|фактів суперечать карткам
+faits contredits par les fiches ¦ фактов противоречат карточкам ¦ фактів суперечать карткам
+{n} à vérifier ¦ Проверить: {n} ¦ Перевірити: {n}
+Aucune erreur ¦ Ошибок нет ¦ Помилок немає
+Aucun texte ne déborde, aucun fait contredit par les fiches ¦ Ни один текст не выходит за рамку, ни один факт не противоречит карточкам ¦ Жоден текст не виходить за рамку, жоден факт не суперечить карткам
+Contrôle en cours… ¦ Идёт проверка… ¦ Триває перевірка…
+Texte qui déborde (alors qu’il est chaîné : vérifie le bloc suivant). ¦ Текст выходит за рамку (хотя он связан: проверь следующий блок). ¦ Текст виходить за рамку (хоча він зв’язаний: перевір наступний блок).
+Texte qui déborde de son bloc (⊞) : agrandis le bloc, chaîne-le, ou « Faire couler le texte ». ¦ Текст выходит за свой блок (⊞): увеличь блок, свяжи его или «Перелить текст». ¦ Текст виходить за свій блок (⊞): збільш блок, зв’яжи його або «Перелити текст».
+Texte hors des marges : il risque d’être coupé ou trop près du bord. ¦ Текст за полями: он может обрезаться или оказаться слишком близко к краю. ¦ Текст за полями: він може обрізатися або опинитися надто близько до краю.
+Cadre d’image vide. ¦ Пустая рамка изображения. ¦ Порожня рамка зображення.
+Photo liée introuvable dans l’app. ¦ Связанное фото не найдено в приложении. ¦ Пов’язане фото не знайдено в застосунку.
+Image trop petite pour l’impression : {n} points par pouce à cette taille (il en faut 300 pour une belle impression, 150 au minimum). ¦ Изображение слишком маленькое для печати: {n} точек на дюйм при этом размере (для хорошей печати нужно 300, минимум 150). ¦ Зображення замале для друку: {n} точок на дюйм за цього розміру (для гарного друку треба 300, мінімум 150).
+Touche le bord de la page sans aller jusqu’au fond perdu ({n} mm) : un liseré blanc peut apparaître à la coupe. ¦ Касается края страницы, не доходя до вылета ({n} мм): при обрезке может появиться белая полоска. ¦ Торкається краю сторінки, не доходячи до вильоту ({n} мм): під час обрізання може з’явитися біла смужка.
+Vérification des faits impossible pour le moment (la base ne répond pas). ¦ Проверка фактов пока невозможна (база не отвечает). ¦ Перевірка фактів поки неможлива (база не відповідає).
+Appel de note sans texte : Texte → « Notes de ce bloc » pour l’écrire. ¦ Знак сноски без текста: Текст → «Сноски этого блока», чтобы его написать. ¦ Знак виноски без тексту: Текст → «Виноски цього блоку», щоб його написати.
+Les notes vont « en fin de chapitre », mais aucun bloc ne les reçoit : Objet → « Insérer les notes du chapitre » (ou Document → Notes : en bas du bloc). ¦ Сноски идут «в конец главы», но ни один блок их не принимает: Объект → «Вставить примечания главы» (или Документ → Сноски: внизу блока). ¦ Виноски йдуть «у кінець розділу», але жоден блок їх не приймає: Об’єкт → «Вставити примітки розділу» (або Документ → Виноски: унизу блоку).
+{what} pas encore résolus (onglet 💬 Relecture). Ils ne s’impriment pas. ¦ Ещё не решены: {what} (вкладка 💬 Вычитка). Они не печатаются. ¦ Ще не розв’язано: {what} (вкладка 💬 Вичитування). Вони не друкуються.
+{what} pas encore résolu (onglet 💬 Relecture). Ils ne s’impriment pas. ¦ Ещё не решён: {what} (вкладка 💬 Вычитка). Он не печатается. ¦ Ще не розв’язано: {what} (вкладка 💬 Вичитування). Він не друкується.
+Police « {name} » absente de cet ordinateur : une autre la remplace à l’impression. ¦ Шрифта «{name}» нет на этом компьютере: при печати его заменит другой. ¦ Шрифту «{name}» немає на цьому комп’ютері: під час друку його замінить інший.
+Pas de fond perdu (Document → Fond perdu, 3 à 5 mm) : nécessaire si des images ou couleurs vont jusqu’au bord. ¦ Нет вылетов (Документ → Вылеты, 3–5 мм): нужны, если изображения или цвета доходят до края. ¦ Немає вильотів (Документ → Виліт, 3–5 мм): потрібні, якщо зображення чи кольори доходять до краю.
+CONTRÔLE AVANT IMPRESSION ¦ ПРОВЕРКА ПЕРЕД ПЕЧАТЬЮ ¦ ПЕРЕВІРКА ПЕРЕД ДРУКОМ
+{what} à corriger ¦ Исправить: {what} ¦ Виправити: {what}
+=problème ¦ проблема|проблемы|проблем ¦ проблема|проблеми|проблем
+Prêt pour l’impression ({what}) ¦ Готово к печати ({what}) ¦ Готово до друку ({what})
+Prêt pour l’impression ¦ Готово к печати ¦ Готово до друку
+{a} · {b} · {c}. Clique sur « Aller » pour voir l’objet. Pour l’imprimeur : Fichier → « PDF avec fond perdu et traits de coupe ». ¦ {a} · {b} · {c}. Нажми «Перейти», чтобы увидеть объект. Для типографии: Файл → «PDF с вылетами и метками обреза». ¦ {a} · {b} · {c}. Натисни «Перейти», щоб побачити об’єкт. Для друкарні: Файл → «PDF із вильотами й мітками обрізу».
+✅ Rien à signaler. ¦ ✅ Замечаний нет. ¦ ✅ Зауважень немає.
+Ajuster le cadre ¦ Подогнать рамку ¦ Припасувати рамку
+Placer une image ¦ Поместить изображение ¦ Розмістити зображення
+Page ajoutée à la fin ¦ Страница добавлена в конец ¦ Сторінку додано в кінець
+Pages insérées ¦ Страницы вставлены ¦ Сторінки вставлено
+Page dupliquée ¦ Страница продублирована ¦ Сторінку продубльовано
+Page supprimée ¦ Страница удалена ¦ Сторінку видалено
+🧲 Aimanter : oui. ¦ 🧲 Притягивать: да. ¦ 🧲 Притягувати: так.
+🧲 Aimanter : arrêté. ¦ 🧲 Притягивать: выключено. ¦ 🧲 Притягувати: вимкнено.
+Ce bloc est déjà chaîné (« Couper le chaînage » d’abord). ¦ Этот блок уже связан (сначала «Разорвать цепочку»). ¦ Цей блок уже зв’язаний (спершу «Розірвати ланцюжок»).
+➜ Clique sur le bloc de texte qui reçoit la suite (sur n’importe quelle page). Échap : annuler. ¦ ➜ Щёлкни по текстовому блоку, который примет продолжение (на любой странице). Esc — отмена. ¦ ➜ Клацни по текстовому блоку, який прийме продовження (на будь-якій сторінці). Esc — скасувати.
+Ce bloc n’est pas chaîné vers un autre. ¦ Этот блок не связан с другим. ¦ Цей блок не зв’язаний з іншим.
+Chaînage coupé ¦ Цепочка разорвана ¦ Ланцюжок розірвано
+Choisis un objet. ¦ Выбери объект. ¦ Вибери об’єкт.
+Déplacement au clavier ¦ Перемещение с клавиатуры ¦ Переміщення з клавіатури
+Nom du design (il sera proposé pour les prochains livres) : ¦ Название дизайна (он будет предложен для следующих книг): ¦ Назва дизайну (його буде запропоновано для наступних книг):
+Nom de la copie : ¦ Название копии: ¦ Назва копії:
+Design « {name} » enregistré : il est proposé pour les nouveaux livres. ¦ Дизайн «{name}» сохранён: он предлагается для новых книг. ¦ Дизайн «{name}» збережено: його пропонують для нових книг.
+Les dernières modifications seront perdues. ¦ Последние изменения будут потеряны. ¦ Останні зміни буде втрачено.
+{what} · {w} × {h} mm. Dans la fenêtre du navigateur, garde « Taille réelle (100 %) ». ¦ {what} · {w} × {h} мм. В окне браузера оставь «Фактический размер (100 %)». ¦ {what} · {w} × {h} мм. У вікні браузера залиш «Фактичний розмір (100 %)».
+Planches (pages en vis-à-vis) ¦ Развороты (страницы друг напротив друга) ¦ Розвороти (сторінки одна навпроти одної)
+Livret plié ¦ Сложенная брошюра ¦ Складена брошура
+(pages remises dans l’ordre, 2 par face) ¦ (страницы переупорядочены, 2 на сторону) ¦ (сторінки переупорядковано, 2 на бік)
+Notes et commentaires ({n}) ¦ Примечания и комментарии ({n}) ¦ Примітки й коментарі ({n})
+Notes et commentaires ¦ Примечания и комментарии ¦ Примітки й коментарі
+Préparation du fichier HTML (les images sont intégrées)… ¦ Подготовка HTML-файла (изображения встраиваются)… ¦ Підготовка HTML-файлу (зображення вбудовуються)…
+Préparation du livre numérique (ePub)… ¦ Подготовка электронной книги (ePub)… ¦ Підготовка електронної книги (ePub)…
+📱 ePub prêt ({n} Ko) : il s’ouvre dans Livres, Kobo, Calibre… ¦ 📱 ePub готов ({n} КБ): он открывается в Книгах, Kobo, Calibre… ¦ 📱 ePub готовий ({n} КБ): він відкривається в Книгах, Kobo, Calibre…
+🗄️ PDF/A : dessin des pages… ¦ 🗄️ PDF/A: отрисовка страниц… ¦ 🗄️ PDF/A: малювання сторінок…
+🗄️ PDF/A : dessin des pages… {n} % ¦ 🗄️ PDF/A: отрисовка страниц… {n} % ¦ 🗄️ PDF/A: малювання сторінок… {n} %
+🗄️ PDF/A prêt ({n} Mo) : fait pour être gardé longtemps (archives, notaire, dépôt). ¦ 🗄️ PDF/A готов ({n} МБ): создан для долгого хранения (архивы, нотариус, сдача на хранение). ¦ 🗄️ PDF/A готовий ({n} МБ): створений для довгого зберігання (архіви, нотаріус, передання на зберігання).
+par l’impression ¦ через печать ¦ через друк
+📖 Livret à plier ¦ 📖 Брошюра для сгиба ¦ 📖 Брошура для згинання
+pages remises dans l’ordre, 2 par face ¦ страницы переупорядочены, 2 на сторону ¦ сторінки переупорядковано, 2 на бік
+archivage (ISO 19005), pages en image ¦ архивирование (ISO 19005), страницы как изображения ¦ архівування (ISO 19005), сторінки як зображення
+liseuse, téléphone, tablette ¦ читалка, телефон, планшет ¦ читалка, телефон, планшет
+une page, photos comprises ¦ одна страница, включая фото ¦ одна сторінка, разом із фото
+📝 PDF annoté ¦ 📝 PDF с пометками ¦ 📝 PDF із позначками
+avec les commentaires ¦ с комментариями ¦ з коментарями
+à envoyer à un cousin ¦ чтобы отправить кузену ¦ щоб надіслати кузенові
+le document (.json) ¦ документ (.json) ¦ документ (.json)
+Aucun gabarit ¦ Без шаблона ¦ Без шаблону
+Le gabarit est un fond commun à plusieurs pages (numéro de page, titre courant, filets) : ce qui est posé sur le gabarit apparaît sur toutes ses pages. ¦ Шаблон — это общий фон для нескольких страниц (номер страницы, колонтитул, линейки): то, что размещено на шаблоне, появляется на всех его страницах. ¦ Шаблон — це спільне тло для кількох сторінок (номер сторінки, колонтитул, лінійки): те, що розміщено на шаблоні, з’являється на всіх його сторінках.
+Ajouter, enlever ou remplacer le gabarit de cette page ¦ Добавить, убрать или заменить шаблон этой страницы ¦ Додати, прибрати або замінити шаблон цієї сторінки
+Mettre, enlever ou remplacer un gabarit sur plusieurs pages ¦ Поставить, убрать или заменить шаблон на нескольких страницах ¦ Поставити, прибрати або замінити шаблон на кількох сторінках
+Appliquer à la page {n} ¦ Применить к странице {n} ¦ Застосувати до сторінки {n}
+Les éléments du gabarit deviennent modifiables sur cette page ¦ Элементы шаблона становятся изменяемыми на этой странице ¦ Елементи шаблону стають змінюваними на цій сторінці
+＋ Nouveau gabarit ¦ ＋ Новый шаблон ¦ ＋ Новий шаблон
+Détacher les éléments ¦ Отделить элементы ¦ Відокремити елементи
+Avancer la page ¦ Передвинуть страницу вперёд ¦ Пересунути сторінку вперед
+Reculer la page ¦ Передвинуть страницу назад ¦ Пересунути сторінку назад
+＋ Page à la fin ¦ ＋ Страница в конце ¦ ＋ Сторінка в кінці
+＋ Insérer… ¦ ＋ Вставить… ¦ ＋ Вставити…
+Aller à ¦ Перейти ¦ Перейти
+Le calque du haut est devant. Nouveaux objets : calque choisi (●). ¦ Верхний слой — впереди. Новые объекты: выбранный слой (●). ¦ Верхній шар — попереду. Нові об’єкти: вибраний шар (●).
+Double-clic : renommer ¦ Двойной щелчок: переименовать ¦ Подвійне клацання: перейменувати
+Sélection vers ¦ Выделение в ¦ Виділення в
+Objets de la page ¦ Объекты страницы ¦ Об’єкти сторінки
+Cadre d’image ¦ Рамка изображения ¦ Рамка зображення
+Tracé ¦ Контур ¦ Контур
+Forme composée ¦ Составная форма ¦ Складена форма
+Aucun objet sur cette page. ¦ На этой странице нет объектов. ¦ На цій сторінці немає об’єктів.
+Choisis un objet sur la page (outil ➤). Double-clic sur un texte pour l’écrire, sur un cadre pour y placer une image. ¦ Выбери объект на странице (инструмент ➤). Двойной щелчок по тексту — писать, по рамке — поместить изображение. ¦ Вибери об’єкт на сторінці (інструмент ➤). Подвійне клацання по тексту — писати, по рамці — розмістити зображення.
+🖼️ Placer une image ¦ 🖼️ Поместить изображение ¦ 🖼️ Розмістити зображення
+Position et taille ¦ Положение и размер ¦ Положення й розмір
+(dans Calques) ¦ (в «Слоях») ¦ (у «Шарах»)
+Biseautés ¦ Скошенные ¦ Скошені
+Comment la couleur de l’objet se mélange à ce qui est dessous : « Produit » assombrit, « Superposition » éclaircit. ¦ Как цвет объекта смешивается с тем, что под ним: «Умножение» затемняет, «Перекрытие» осветляет. ¦ Як колір об’єкта змішується з тим, що під ним: «Множення» затемнює, «Перекриття» освітлює.
+Adoucit les bords de l’objet sur cette largeur, comme un flou du pourtour. ¦ Смягчает края объекта на эту ширину, как размытие по контуру. ¦ Пом’якшує краї об’єкта на цю ширину, як розмиття по контуру.
+Ombre portée ¦ Отбрасываемая тень ¦ Відкинута тінь
+Décalage X ¦ Сдвиг X ¦ Зсув X
+Décalage Y ¦ Сдвиг Y ¦ Зсув Y
+Côtés ¦ Стороны ¦ Сторони
+Convertir la forme ¦ Преобразовать форму ¦ Перетворити форму
+Habillage du texte ¦ Обтекание текстом ¦ Обтікання текстом
+Le texte voisin ¦ Соседний текст ¦ Сусідній текст
+Les blocs de texte posés sous cet objet le contournent au lieu de passer dessous. ¦ Текстовые блоки под этим объектом обтекают его, а не проходят под ним. ¦ Текстові блоки під цим об’єктом обтікають його, а не проходять під ним.
+Les blocs de texte de la page contournent cet objet. ¦ Текстовые блоки страницы обтекают этот объект. ¦ Текстові блоки сторінки обтікають цей об’єкт.
+mis à jour ¦ обновлено ¦ оновлено
+personne introuvable ¦ человек не найден ¦ людину не знайдено
+Il suit la base : il se refait à l’ouverture du document et avec « ↻ Mettre à jour ». ¦ Он следует за базой: пересоздаётся при открытии документа и через «↻ Обновить». ¦ Він стежить за базою: перестворюється під час відкриття документа і через «↻ Оновити».
+L’arbre reste tel quel et ne suit plus la base ¦ Древо остаётся как есть и больше не следует за базой ¦ Дерево залишається як є й більше не стежить за базою
+✎ Modifier l’arbre… ¦ ✎ Изменить древо… ¦ ✎ Змінити дерево…
+↻ Mettre à jour ¦ ↻ Обновить ¦ ↻ Оновити
+Détacher ¦ Отвязать ¦ Від’єднати
+Il contient : « {x} ». Il se redessine net à toutes les tailles (PDF, ePub, HTML). ¦ Он содержит: «{x}». Он перерисовывается чётко при любом размере (PDF, ePub, HTML). ¦ Він містить: «{x}». Він перемальовується чітко за будь-якого розміру (PDF, ePub, HTML).
+▦ Modifier le QR code… ¦ ▦ Изменить QR-код… ¦ ▦ Змінити QR-код…
+lié ¦ связан ¦ пов’язаний
+✎ Modifier le diagramme ¦ ✎ Изменить диаграмму ¦ ✎ Змінити діаграму
+liée ¦ связана ¦ пов’язана
+mise à jour ¦ обновлена ¦ оновлена
+L’image ne suit plus la photo de l’app ¦ Изображение больше не следует за фото приложения ¦ Зображення більше не стежить за фото застосунку
+✎ Modifier l’original (retouche) ¦ ✎ Изменить оригинал (ретушь) ¦ ✎ Змінити оригінал (ретуш)
+Incorporer (ne plus suivre) ¦ Встроить (больше не следовать) ¦ Вбудувати (більше не стежити)
+Image incorporée au document. Pour qu’elle suive une photo de l’app (et ses retouches) : « Remplacer l’image » et choisis-la dans la base. ¦ Изображение встроено в документ. Чтобы оно следовало за фото приложения (и его ретушью): «Заменить изображение» и выбери его в базе. ¦ Зображення вбудовано в документ. Щоб воно стежило за фото застосунку (і його ретушшю): «Замінити зображення» і вибери його в базі.
+🖼️ Remplacer l’image ¦ 🖼️ Заменить изображение ¦ 🖼️ Замінити зображення
+🖼️ Placer l’image ¦ 🖼️ Поместить изображение ¦ 🖼️ Розмістити зображення
+Cadre au contenu ¦ Рамка по содержимому ¦ Рамка за вмістом
+Marge intérieure ¦ Внутренний отступ ¦ Внутрішній відступ
+En haut ¦ Вверху ¦ Угорі
+Au milieu ¦ Посередине ¦ Посередині
+Ajuster la hauteur au texte ¦ Подогнать высоту под текст ¦ Припасувати висоту до тексту
+➜ Texte chaîné ¦ ➜ Связанный текст ¦ ➜ Зв’язаний текст
+Bloc {a} sur {b} : ¦ Блок {a} из {b}: ¦ Блок {a} із {b}:
+Un texte peut continuer d’un bloc à l’autre, sur d’autres pages : il passe tout seul à la suite quand le premier est plein. ¦ Текст может продолжаться из блока в блок, на других страницах: он сам переходит дальше, когда первый заполнен. ¦ Текст може продовжуватися з блоку в блок, на інших сторінках: він сам переходить далі, коли перший заповнений.
+Couper après ce bloc ¦ Разорвать после этого блока ¦ Розірвати після цього блоку
+➜ Chaîner vers un bloc… ¦ ➜ Связать с блоком… ¦ ➜ Зв’язати з блоком…
+Ajoute des pages (même gabarit) et des blocs chaînés jusqu’à ce que tout le texte tienne ¦ Добавляет страницы (тот же шаблон) и связанные блоки, пока весь текст не поместится ¦ Додає сторінки (той самий шаблон) і зв’язані блоки, доки весь текст не вміститься
+⤵ Faire couler sur de nouvelles pages ¦ ⤵ Перелить на новые страницы ¦ ⤵ Перелити на нові сторінки
+📍 Index des lieux ¦ 📍 Указатель мест ¦ 📍 Покажчик місць
+🔨 Index des métiers ¦ 🔨 Указатель профессий ¦ 🔨 Покажчик професій
+métiers ¦ профессии ¦ професії
+Mots marqués avec le style de caractère « Lieu à indexer », et {what} de ta base cherchés dans le texte. Rangé de A à Z, avec les pages. ¦ Слова, отмеченные стилем символов «Место для указателя», и {what} твоей базы, найденные в тексте. От А до Я, со страницами. ¦ Слова, позначені стилем символів «Місце для покажчика», і {what} твоєї бази, знайдені в тексті. Від А до Я, зі сторінками.
+Mots marqués avec le style de caractère « Lieu à indexer », et {what} de ta base cherché dans le texte. Rangé de A à Z, avec les pages. ¦ Слова, отмеченные стилем символов «Место для указателя», и {what} твоей базы, найденное в тексте. От А до Я, со страницами. ¦ Слова, позначені стилем символів «Місце для покажчика», і {what} твоєї бази, знайдене в тексті. Від А до Я, зі сторінками.
+Mots marqués avec le style de caractère « Lieu à indexer ». Rangé de A à Z, avec les pages. ¦ Слова, отмеченные стилем символов «Место для указателя». От А до Я, со страницами. ¦ Слова, позначені стилем символів «Місце для покажчика». Від А до Я, зі сторінками.
+Mots marqués avec le style de caractère « Métier à indexer », et {what} de ta base cherchés dans le texte. Rangé de A à Z, avec les pages. ¦ Слова, отмеченные стилем символов «Профессия для указателя», и {what} твоей базы, найденные в тексте. От А до Я, со страницами. ¦ Слова, позначені стилем символів «Професія для покажчика», і {what} твоєї бази, знайдені в тексті. Від А до Я, зі сторінками.
+Mots marqués avec le style de caractère « Métier à indexer », et {what} de ta base cherché dans le texte. Rangé de A à Z, avec les pages. ¦ Слова, отмеченные стилем символов «Профессия для указателя», и {what} твоей базы, найденная в тексте. От А до Я, со страницами. ¦ Слова, позначені стилем символів «Професія для покажчика», і {what} твоєї бази, знайдена в тексті. Від А до Я, зі сторінками.
+Mots marqués avec le style de caractère « Métier à indexer ». Rangé de A à Z, avec les pages. ¦ Слова, отмеченные стилем символов «Профессия для указателя». От А до Я, со страницами. ¦ Слова, позначені стилем символів «Професія для покажчика». Від А до Я, зі сторінками.
+Style des lignes ¦ Стиль строк ¦ Стиль рядків
+↻ Recharger ceux de la base ¦ ↻ Перезагрузить из базы ¦ ↻ Перезавантажити з бази
+＋ Chercher ceux de la base ¦ ＋ Искать в базе ¦ ＋ Шукати в базі
+Seulement les mots marqués ¦ Только отмеченные слова ¦ Лише позначені слова
+🗒 Notes du chapitre ¦ 🗒 Примечания главы ¦ 🗒 Примітки розділу
+Les notes appelées dans le chapitre où se trouve ce bloc s’y rangent toutes seules, numérotées (Document → Notes de bas de page). ¦ Сноски из главы, в которой находится этот блок, собираются в нём сами, с номерами (Документ → Сноски). ¦ Виноски з розділу, у якому міститься цей блок, збираються в ньому самі, з номерами (Документ → Виноски).
+Les sources citées en note (« 📚 Citer une source ») s’y rangent toutes seules, de A à Z. ¦ Источники, на которые есть ссылки в сносках («📚 Сослаться на источник»), собираются здесь сами, от А до Я. ¦ Джерела, на які є посилання у виносках («📚 Послатися на джерело»), збираються тут самі, від А до Я.
+📑 Table des matières ¦ 📑 Оглавление ¦ 📑 Зміст
+Elle reprend, dans l’ordre des pages, les paragraphes de ces styles (le 1er au premier niveau, les suivants en retrait) : ¦ Оно повторяет, в порядке страниц, абзацы этих стилей (1-й — на первом уровне, следующие — с отступом): ¦ Він повторює, у порядку сторінок, абзаци цих стилів (1-й — на першому рівні, наступні — з відступом):
+Noms marqués avec le style de caractère « Nom à indexer », et {what} de la généalogie cherchées dans le texte. Rangé par nom de famille, avec les pages. ¦ Имена, отмеченные стилем символов «Имя для указателя», и {what} из генеалогии, найденные в тексте. По фамилиям, со страницами. ¦ Імена, позначені стилем символів «Ім’я для покажчика», і {what} з генеалогії, знайдені в тексті. За прізвищами, зі сторінками.
+Noms marqués avec le style de caractère « Nom à indexer », et {what} de la généalogie cherchée dans le texte. Rangé par nom de famille, avec les pages. ¦ Имена, отмеченные стилем символов «Имя для указателя», и {what} из генеалогии, найденная в тексте. По фамилиям, со страницами. ¦ Імена, позначені стилем символів «Ім’я для покажчика», і {what} з генеалогії, знайдена в тексті. За прізвищами, зі сторінками.
+Noms marqués avec le style de caractère « Nom à indexer ». Rangé par nom de famille, avec les pages. ¦ Имена, отмеченные стилем символов «Имя для указателя». По фамилиям, со страницами. ¦ Імена, позначені стилем символів «Ім’я для покажчика». За прізвищами, зі сторінками.
+↻ Recharger les noms de la généalogie ¦ ↻ Перезагрузить имена из генеалогии ¦ ↻ Перезавантажити імена з генеалогії
+＋ Chercher les noms de la généalogie ¦ ＋ Искать имена из генеалогии ¦ ＋ Шукати імена з генеалогії
+Seulement les noms marqués ¦ Только отмеченные имена ¦ Лише позначені імена
+🌦 Objet dynamique : météo ¦ 🌦 Динамический объект: погода ¦ 🌦 Динамічний об’єкт: погода
+Cet encadré suit la météo d’un événement ({when}). L’écrire à la main le détache. ¦ Эта врезка следует за погодой события ({when}). Если писать её вручную, она отвяжется. ¦ Ця врізка стежить за погодою події ({when}). Якщо писати її вручну, вона від’єднається.
+Cet encadré suit la météo d’un événement. L’écrire à la main le détache. ¦ Эта врезка следует за погодой события. Если писать её вручную, она отвяжется. ¦ Ця врізка стежить за погодою події. Якщо писати її вручну, вона від’єднається.
+Changer l’événement… ¦ Сменить событие… ¦ Змінити подію…
+👤 Objet dynamique : fiche ¦ 👤 Динамический объект: карточка ¦ 👤 Динамічний об’єкт: картка
+Ce texte suit une fiche de la généalogie ({when}). L’écrire à la main le détache. ¦ Этот текст следует за карточкой генеалогии ({when}). Если писать его вручную, он отвяжется. ¦ Цей текст стежить за карткою генеалогії ({when}). Якщо писати його вручну, він від’єднається.
+Ce texte suit une fiche de la généalogie. L’écrire à la main le détache. ¦ Этот текст следует за карточкой генеалогии. Если писать его вручную, он отвяжется. ¦ Цей текст стежить за карткою генеалогії. Якщо писати його вручну, він від’єднається.
+Changer la fiche ou ce qu’on montre… ¦ Сменить карточку или то, что показывается… ¦ Змінити картку або те, що показується…
+Aligner et répartir ¦ Выровнять и распределить ¦ Вирівняти й розподілити
+Par rapport à ¦ Относительно ¦ Відносно
+la sélection ¦ выделения ¦ виділення
+aux marges ¦ полей ¦ полів
+Répartir ↔ ¦ Распределить ↔ ¦ Розподілити ↔
+Répartir ↕ ¦ Распределить ↕ ¦ Розподілити ↕
+Soustraire : les formes de devant découpent celle du fond. ¦ Вычесть: передние формы вырезают заднюю. ¦ Відняти: передні форми вирізають задню.
+Décomposer ¦ Разобрать ¦ Розібрати
+Choisis au moins deux formes (Maj + clic). ¦ Выбери хотя бы две формы (Shift + щелчок). ¦ Вибери щонайменше дві форми (Shift + клацання).
+Toutes capitales ¦ Все прописные ¦ Усі великі
+Crénage ¦ Кернинг ¦ Кернінг
+Enlever la mise en forme ¦ Убрать форматирование ¦ Прибрати форматування
+Choisir n’importe quelle couleur ¦ Выбрать любой цвет ¦ Вибрати будь-який колір
+Justifié, dernière ligne aussi ¦ По ширине, включая последнюю строку ¦ По ширині, включно з останнім рядком
+Césure ¦ Перенос ¦ Перенесення
+Une note numérotée toute seule, à l’endroit du curseur ¦ Сноска с автоматическим номером в месте курсора ¦ Виноска з автоматичним номером у місці курсора
+La référence d’une source de ta base, en note ¦ Ссылка на источник из твоей базы, в сноске ¦ Посилання на джерело з твоєї бази, у виносці
+Un commentaire de relecture sur les mots choisis ¦ Комментарий вычитки к выбранным словам ¦ Коментар вичитування до вибраних слів
+Proposer un autre texte à la place des mots choisis ¦ Предложить другой текст вместо выбранных слов ¦ Запропонувати інший текст замість вибраних слів
+1. Liste ¦ 1. Список ¦ 1. Список
+Insérer : ¦ Вставить: ¦ Вставити:
+Modifier le style (tout le livre suit) ¦ Изменить стиль (вся книга следует за ним) ¦ Змінити стиль (уся книга слідує за ним)
+Styles de caractère ¦ Стили символов ¦ Стилі символів
+Aucun (enlever) ¦ Нет (убрать) ¦ Немає (прибрати)
+✏️ Tu écris dans un bloc : les réglages s’appliquent au texte choisi (sinon au paragraphe ou à tout le bloc). Échap pour sortir. ¦ ✏️ Ты пишешь в блоке: настройки применяются к выбранному тексту (иначе к абзацу или ко всему блоку). Esc — выйти. ¦ ✏️ Ти пишеш у блоці: налаштування застосовуються до вибраного тексту (інакше до абзацу або до всього блоку). Esc — вийти.
+Bloc choisi : les réglages s’appliquent à tout son texte. Double-clic pour écrire dedans. ¦ Блок выбран: настройки применяются ко всему его тексту. Двойной щелчок — писать в нём. ¦ Блок вибрано: налаштування застосовуються до всього його тексту. Подвійне клацання — писати в ньому.
+Choisis un bloc de texte (outil T pour en tracer un). ¦ Выбери текстовый блок (инструмент T, чтобы начертить его). ¦ Вибери текстовий блок (інструмент T, щоб накреслити його).
+Notes de ce bloc ({n}) ¦ Сноски этого блока ({n}) ¦ Виноски цього блоку ({n})
+Modifier la note ¦ Изменить сноску ¦ Змінити виноску
+Retirer la note ¦ Убрать сноску ¦ Прибрати виноску
+Modifier le dégradé ¦ Изменить градиент ¦ Змінити градієнт
+Changer la couleur (tout le livre suit) ¦ Изменить цвет (вся книга следует за ним) ¦ Змінити колір (уся книга слідує за ним)
+＋ Ajouter la couleur ¦ ＋ Добавить цвет ¦ ＋ Додати колір
+＋ Nouveau dégradé ¦ ＋ Новый градиент ¦ ＋ Новий градієнт
+Dégradé « {name} » ¦ Градиент «{name}» ¦ Градієнт «{name}»
+＋ Arrêt de couleur ¦ ＋ Опорная точка цвета ¦ ＋ Опорна точка кольору
+pour l’objet choisi, sans l’ajouter au nuancier ¦ для выбранного объекта, не добавляя в палитру ¦ для вибраного об’єкта, не додаючи до палітри
+↻ Mettre à jour les objets dynamiques ¦ ↻ Обновить динамические объекты ¦ ↻ Оновити динамічні об’єкти
+⛔ personne introuvable ¦ ⛔ человек не найден ¦ ⛔ людину не знайдено
+suit la base ¦ следует за базой ¦ стежить за базою
+Textes liés à des fiches ({n}) ¦ Тексты, связанные с карточками ({n}) ¦ Тексти, пов’язані з картками ({n})
+⛔ fiche introuvable ¦ ⛔ карточка не найдена ¦ ⛔ картку не знайдено
+suit la fiche ¦ следует за карточкой ¦ стежить за карткою
+Liens — images placées ({n}) ¦ Связи — размещённые изображения ({n}) ¦ Зв’язки — розміщені зображення ({n})
+Image intégrée ¦ Встроенное изображение ¦ Вбудоване зображення
+intégrée au document ¦ встроено в документ ¦ вбудовано в документ
+🔗 liée · mise à jour ¦ 🔗 связано · обновлено ¦ 🔗 пов’язане · оновлено
+🔗 liée · à jour ¦ 🔗 связано · актуально ¦ 🔗 пов’язане · актуальне
+photo de la base ¦ фото из базы ¦ фото з бази
+Retoucher la photo de l’app ¦ Отретушировать фото приложения ¦ Відретушувати фото застосунку
+Aucun cadre d’image : outil ⊠ ou Objet → Placer une image. ¦ Нет рамок изображений: инструмент ⊠ или Объект → Поместить изображение. ¦ Немає рамок зображень: інструмент ⊠ або Об’єкт → Розмістити зображення.
+Clique sur une étape pour revenir à ce moment-là. Les étapes d’après restent (en gris) tant que tu ne modifies rien d’autre. ¦ Нажми на шаг, чтобы вернуться к тому моменту. Последующие шаги остаются (серым), пока ты ничего больше не изменишь. ¦ Натисни на крок, щоб повернутися до того моменту. Наступні кроки залишаються (сірим), доки ти нічого більше не зміниш.
+Format du document ¦ Формат документа ¦ Формат документа
+Titre du livre ({titre}) ¦ Название книги ({titre}) ¦ Назва книги ({titre})
+Personnalisé ¦ Свой ¦ Власний
+La marge de 3 à 5 mm autour de la page, coupée par l’imprimeur : les images qui vont jusqu’au bord doivent la remplir. ¦ Поле 3–5 мм вокруг страницы, которое обрезает типография: изображения, доходящие до края, должны его заполнять. ¦ Поле 3–5 мм навколо сторінки, яке обрізає друкарня: зображення, що доходять до краю, мають його заповнювати.
+Une bande en dehors du fond perdu pour les notes à l’imprimeur (titre, date) ; elle ne s’imprime qu’avec les traits de coupe. ¦ Полоса за пределами вылета для заметок для типографии (название, дата); она печатается только вместе с метками обреза. ¦ Смуга за межами вильоту для нотаток для друкарні (назва, дата); вона друкується лише разом із мітками обрізу.
+Les nouveaux documents partent des <button type="button" class="link-button" data-ly-defaults>réglages par défaut</button>. ¦ Новые документы начинаются с <button type="button" class="link-button" data-ly-defaults>настроек по умолчанию</button>. ¦ Нові документи починаються з <button type="button" class="link-button" data-ly-defaults>налаштувань за замовчуванням</button>.
+réglages par défaut ¦ настройки по умолчанию ¦ налаштування за замовчуванням
+Les notes vont ¦ Сноски идут ¦ Виноски йдуть
+En bas du bloc : chaque note s’écrit sous le texte qui l’appelle. En fin de chapitre : toutes les notes du chapitre se rangent dans le bloc « Notes du chapitre » (Objet → Insérer les notes du chapitre). ¦ Внизу блока: каждая сноска пишется под текстом, который на неё ссылается. В конце главы: все сноски главы собираются в блоке «Примечания главы» (Объект → Вставить примечания главы). ¦ Унизу блоку: кожна виноска пишеться під текстом, який на неї посилається. У кінці розділу: усі виноски розділу збираються в блоці «Примітки розділу» (Об’єкт → Вставити примітки розділу).
+en bas du bloc de texte ¦ внизу текстового блока ¦ унизу текстового блоку
+en fin de chapitre ¦ в конце главы ¦ у кінці розділу
+qui se suivent dans tout le livre ¦ со сквозной нумерацией по всей книге ¦ з наскрізною нумерацією по всій книзі
+qui recommencent à 1 à chaque chapitre ¦ с нумерацией от 1 в каждой главе ¦ з нумерацією від 1 у кожному розділі
+qui recommencent à 1 à chaque page ¦ с нумерацией от 1 на каждой странице ¦ з нумерацією від 1 на кожній сторінці
+{what} dans le document. Pour en ajouter une : double-clic dans un texte, place le curseur, puis Texte → « ¹ Note » ou « 📚 Citer une source ». ¦ {what} в документе. Чтобы добавить: двойной щелчок в тексте, поставь курсор, затем Текст → «¹ Сноска» или «📚 Сослаться на источник». ¦ {what} у документі. Щоб додати: подвійне клацання в тексті, постав курсор, потім Текст → «¹ Виноска» або «📚 Послатися на джерело».
+Notes de bas de page : réglage ¦ Сноски: настройка ¦ Виноски: налаштування
+Gabarit « {name} » sur la page {n} ¦ Шаблон «{name}» на странице {n} ¦ Шаблон «{name}» на сторінці {n}
+Gabarit enlevé de la page {n} ¦ Шаблон убран со страницы {n} ¦ Шаблон прибрано зі сторінки {n}
+{what} changé ¦ Изменено: {what} ¦ Змінено: {what}
+Une adresse commence par https:// ou mailto: ¦ Адрес начинается с https:// или mailto: ¦ Адреса починається з https:// або mailto:
+Code couleur : # suivi de 6 chiffres ou lettres (ex. #7a2e2e). ¦ Код цвета: # и 6 цифр или букв (напр. #7a2e2e). ¦ Код кольору: # і 6 цифр або літер (напр. #7a2e2e).
+Image incorporée ¦ Изображение встроено ¦ Зображення вбудовано
+Texte de la fiche mis à jour ¦ Текст карточки обновлён ¦ Текст картки оновлено
+Les dernières modifications ne sont pas enregistrées (enregistre d’abord si besoin). ¦ Последние изменения не сохранены (при необходимости сначала сохрани). ¦ Останні зміни не збережено (за потреби спершу збережи).
+Fermer la mise en page pour ouvrir la fiche ? ¦ Закрыть вёрстку, чтобы открыть карточку? ¦ Закрити верстку, щоб відкрити картку?
+Index : noms de la généalogie ¦ Указатель: имена из генеалогии ¦ Покажчик: імена з генеалогії
+Index : noms marqués seulement ¦ Указатель: только отмеченные имена ¦ Покажчик: лише позначені імена
+Index : mots de la base ¦ Указатель: слова из базы ¦ Покажчик: слова з бази
+Index : mots marqués seulement ¦ Указатель: только отмеченные слова ¦ Покажчик: лише позначені слова
+🌳 Je redessine l’arbre… ¦ 🌳 Перерисовываю древо… ¦ 🌳 Перемальовую дерево…
+Arbre mis à jour ¦ Древо обновлено ¦ Дерево оновлено
+🌳 Arbre à jour d’après la base. ¦ 🌳 Древо обновлено по базе. ¦ 🌳 Дерево оновлено за базою.
+Arbre détaché de la base ¦ Древо отвязано от базы ¦ Дерево від’єднано від бази
+Ta réponse à {name} : ¦ Твой ответ для {name}: ¦ Твоя відповідь для {name}:
+Réponse ajoutée ¦ Ответ добавлен ¦ Відповідь додано
+Commentaire résolu ¦ Комментарий решён ¦ Коментар розв’язано
+Nom du calque : ¦ Название слоя: ¦ Назва шару:
+Choisis du texte, puis le bouton. ¦ Выбери текст, затем кнопку. ¦ Вибери текст, потім кнопку.
+Choisis du texte dans un bloc. ¦ Выбери текст в блоке. ¦ Вибери текст у блоці.
+Adresse du lien (https://…) : ¦ Адрес ссылки (https://…): ¦ Адреса посилання (https://…):
+Double-clic dans un bloc de texte d’abord. ¦ Сначала дважды щёлкни в текстовом блоке. ¦ Спершу двічі клацни в текстовому блоці.
+Choisis des mots dans un bloc de texte. ¦ Выбери слова в текстовом блоке. ¦ Вибери слова в текстовому блоці.
+Ce navigateur ne sait pas lister les polices de l’ordinateur : tape le nom de la police. ¦ Этот браузер не умеет показывать шрифты компьютера: введи название шрифта. ¦ Цей браузер не вміє показувати шрифти комп’ютера: введи назву шрифту.
+{what} de l’ordinateur ajoutées à la liste. ¦ {what} компьютера добавлены в список. ¦ {what} комп’ютера додано до списку.
+{what} de l’ordinateur ajoutée à la liste. ¦ {what} компьютера добавлен в список. ¦ {what} комп’ютера додано до списку.
+(niveau {n}) ¦ (уровень {n}) ¦ (рівень {n})
+Accès aux polices refusé. ¦ Доступ к шрифтам запрещён. ¦ Доступ до шрифтів заборонено.
+Nom de la couleur : ¦ Название цвета: ¦ Назва кольору:
+Nuance supprimée ¦ Образец удалён ¦ Зразок видалено
+Nuance supprimée ({n} objets passent en noir) ¦ Образец удалён (объектов, ставших чёрными: {n}) ¦ Зразок видалено (об’єктів, що стали чорними: {n})
+Nuance supprimée ({n} objet passe en noir) ¦ Образец удалён ({n} объект становится чёрным) ¦ Зразок видалено ({n} об’єкт стає чорним)
+Nom du gabarit : ¦ Название шаблона: ¦ Назва шаблону:
+Supprimer « {name} » ¦ Удалить «{name}» ¦ Видалити «{name}»
+Supprimer le gabarit ¦ Удалить шаблон ¦ Видалити шаблон
+{n} pages utilisent ce gabarit. ¦ Страниц с этим шаблоном: {n}. ¦ Сторінок із цим шаблоном: {n}.
+{n} page utilise ce gabarit. ¦ {n} страница использует этот шаблон. ¦ {n} сторінка використовує цей шаблон.
+Aucune page n’utilise ce gabarit. ¦ Ни одна страница не использует этот шаблон. ¦ Жодна сторінка не використовує цей шаблон.
+Ces pages prennent à la place ¦ Вместо него эти страницы получают ¦ Замість нього ці сторінки отримують
+Gabarit « {name} » supprimé ¦ Шаблон «{name}» удалён ¦ Шаблон «{name}» видалено
+Cette page n’a pas de gabarit. ¦ У этой страницы нет шаблона. ¦ Ця сторінка не має шаблону.
+Éléments du gabarit détachés : modifiables sur cette page. ¦ Элементы шаблона отделены: их можно изменять на этой странице. ¦ Елементи шаблону відокремлено: їх можна змінювати на цій сторінці.
+Il faut au moins un calque. ¦ Нужен хотя бы один слой. ¦ Потрібен хоча б один шар.
+Calque « {name} » supprimé ¦ Слой «{name}» удалён ¦ Шар «{name}» видалено
+Choisis un objet pour intervertir son fond et son contour. ¦ Выбери объект, чтобы поменять местами его заливку и контур. ¦ Вибери об’єкт, щоб поміняти місцями його заливку й контур.
+Nouveau style ¦ Новый стиль ¦ Новий стиль
+Nouveau style de caractère ¦ Новый стиль символов ¦ Новий стиль символів
+STYLE DE CARACTÈRE ¦ СТИЛЬ СИМВОЛОВ ¦ СТИЛЬ СИМВОЛІВ
+Enregistrer le style ¦ Сохранить стиль ¦ Зберегти стиль
+Justifié (tout) ¦ По ширине (всё) ¦ По ширині (усе)
+Lettrine (lignes, 0 = aucune) ¦ Буквица (строк, 0 = нет) ¦ Буквиця (рядків, 0 = немає)
+Tous les paragraphes (mots) qui ont ce style changent dans tout le livre. ¦ Все абзацы (слова) с этим стилем меняются во всей книге. ¦ Усі абзаци (слова) з цим стилем змінюються в усій книзі.
+Tous les paragraphes qui ont ce style changent dans tout le livre. ¦ Все абзацы с этим стилем меняются во всей книге. ¦ Усі абзаци з цим стилем змінюються в усій книзі.
+La fenêtre des images n’est pas encore prête. Réessaie dans un instant. ¦ Окно изображений ещё не готово. Попробуй ещё раз через минуту. ¦ Вікно зображень ще не готове. Спробуй ще раз за хвилину.
+PLACER UNE IMAGE ¦ ПОМЕСТИТЬ ИЗОБРАЖЕНИЕ ¦ РОЗМІСТИТИ ЗОБРАЖЕННЯ
+Placer cette image ¦ Поместить это изображение ¦ Розмістити це зображення
+Elle reste liée (objet dynamique) : retouchée dans l’app, elle se met à jour ici. ¦ Оно остаётся связанным (динамический объект): после ретуши в приложении оно обновится здесь. ¦ Воно залишається пов’язаним (динамічний об’єкт): після ретуші в застосунку воно оновиться тут.
+Naissance et décès (dates et lieux) ¦ Рождение и смерть (даты и места) ¦ Народження й смерть (дати й місця)
+acceptée ¦ принято ¦ прийнято
+refusée ¦ отклонено ¦ відхилено
+✎ Remplacer « {a} » par « {b} » ¦ ✎ Заменить «{a}» на «{b}» ¦ ✎ Замінити «{a}» на «{b}»
+(page {w} × {h} + fond perdu {b} mm et traits de coupe) ¦ (страница {w} × {h} + вылеты {b} мм и метки обреза) ¦ (сторінка {w} × {h} + виліт {b} мм і мітки обрізу)
+🖨 Imprimer / enregistrer en PDF ¦ 🖨 Печать / сохранить в PDF ¦ 🖨 Друк / зберегти в PDF
+Fichier trop gros pour un réglage. ¦ Файл слишком большой для настроек. ¦ Файл завеликий для налаштувань.
+Ce réglage vient d’un autre outil (« {tool} ») : il ne va pas dans {label}. ¦ Эти настройки из другого инструмента («{tool}»): они не подходят для {label}. ¦ Ці налаштування з іншого інструмента («{tool}»): вони не підходять для {label}.
+Tu as déjà un réglage « {name} ». Nom pour celui-ci : ¦ У тебя уже есть настройки «{name}». Название для этих: ¦ Ти вже маєш налаштування «{name}». Назва для цих:
+{name} (importé) ¦ {name} (импортировано) ¦ {name} (імпортовано)
+Réglages par défaut des nouveaux documents ¦ Настройки по умолчанию для новых документов ¦ Налаштування за замовчуванням для нових документів
+Petit fond / intérieur ¦ Внутреннее поле ¦ Внутрішнє поле
+Grand fond / extérieur ¦ Внешнее поле ¦ Зовнішнє поле
+Police des titres ¦ Шрифт заголовков ¦ Шрифт заголовків
+Police du texte ¦ Шрифт текста ¦ Шрифт тексту
+Corps du texte ¦ Кегль текста ¦ Кегль тексту
+Numéro de la 1re page ¦ Номер 1-й страницы ¦ Номер 1-ї сторінки
+Folio et titre courant sur le gabarit ¦ Колонцифра и колонтитул на шаблоне ¦ Колонцифра й колонтитул на шаблоні
+Réglages par défaut des livres ¦ Настройки книг по умолчанию ¦ Налаштування книг за замовчуванням
+Un atelier façon InDesign : pages, gabarits, calques, textes, formes, images, nuancier… Pars d’une page blanche, des données de la famille ou d’un design. ¦ Мастерская в духе InDesign: страницы, шаблоны, слои, тексты, формы, изображения, палитра… Начни с чистой страницы, с данных семьи или с дизайна. ¦ Майстерня в дусі InDesign: сторінки, шаблони, шари, тексти, форми, зображення, палітра… Почни з чистої сторінки, з даних родини або з дизайну.
+＋ Nouveau livre d’après la famille ¦ ＋ Новая книга по семье ¦ ＋ Нова книга за родиною
+📚 Livre prêt à l’emploi ¦ 📚 Готовая книга ¦ 📚 Готова книга
+＋ Nouveau depuis un design ¦ ＋ Новая из дизайна ¦ ＋ Нова з дизайну
+⚙️ Réglages par défaut ¦ ⚙️ Настройки по умолчанию ¦ ⚙️ Налаштування за замовчуванням
+📚 Livres de famille prêts à l’emploi ¦ 📚 Готовые семейные книги ¦ 📚 Готові родинні книги
+Aucun livre pour l’instant ¦ Пока нет книг ¦ Поки немає книг
+Commence par un livre fait d’après la famille : il se remplit avec les fiches. ¦ Начни с книги по семье: она заполняется карточками. ¦ Почни з книги за родиною: вона заповнюється картками.
+Un design est un modèle : ouvre un livre, puis Fichier → « Enregistrer comme design ». Les designs de l’app (ci-dessous) peuvent aussi être modifiés et enregistrés à ton nom. ¦ Дизайн — это образец: открой книгу, затем Файл → «Сохранить как дизайн». Дизайны приложения (ниже) тоже можно изменить и сохранить под своим именем. ¦ Дизайн — це зразок: відкрий книгу, потім Файл → «Зберегти як дизайн». Дизайни застосунку (нижче) теж можна змінити й зберегти під своїм ім’ям.
+✨ Designs de l’app ¦ ✨ Дизайны приложения ¦ ✨ Дизайни застосунку
+Modifier (à mon nom) ¦ Изменить (под моим именем) ¦ Змінити (під моїм ім’ям)
+Exporte-le d’abord si tu veux le garder. ¦ Сначала экспортируй его, если хочешь сохранить. ¦ Спершу експортуй його, якщо хочеш зберегти.
+Supprimer ce document ? ¦ Удалить этот документ? ¦ Видалити цей документ?
+Supprimer le document ¦ Удалить документ ¦ Видалити документ
+Document supprimé. ¦ Документ удалён. ¦ Документ видалено.
+Ce fichier n’est pas un document de mise en page LCNDA. ¦ Это не документ вёрстки LCNDA. ¦ Це не документ верстки LCNDA.
+Livre à relire importé (de {name}) : ouvre-le, commente (menu Relecture), puis « 📨 Envoyer à un cousin » pour renvoyer tes commentaires. ¦ Книга для вычитки импортирована (от {name}): открой её, прокомментируй (меню «Вычитка»), затем «📨 Отправить кузену», чтобы вернуть свои комментарии. ¦ Книгу для вичитування імпортовано (від {name}): відкрий її, прокоментуй (меню «Вичитування»), потім «📨 Надіслати кузенові», щоб повернути свої коментарі.
+Livre à relire importé : ouvre-le, commente (menu Relecture), puis « 📨 Envoyer à un cousin » pour renvoyer tes commentaires. ¦ Книга для вычитки импортирована: открой её, прокомментируй (меню «Вычитка»), затем «📨 Отправить кузену», чтобы вернуть свои комментарии. ¦ Книгу для вичитування імпортовано: відкрий її, прокоментуй (меню «Вичитування»), потім «📨 Надіслати кузенові», щоб повернути свої коментарі.
+C’est un fichier de réglage : il s’importe dans le document ouvert, Fichier → « Mes styles » → « Importer un réglage ». ¦ Это файл настроек: он импортируется в открытый документ, Файл → «Мои стили» → «Импорт настроек». ¦ Це файл налаштувань: він імпортується у відкритий документ, Файл → «Мої стилі» → «Імпорт налаштувань».
+Document importé. ¦ Документ импортирован. ¦ Документ імпортовано.
+La famille en chiffres ¦ Семья в цифрах ¦ Родина в цифрах
+Une page par personne ¦ Одна страница на человека ¦ Одна сторінка на людину
+Les lieux ¦ Места ¦ Місця
+Mot de la fin ¦ Заключительное слово ¦ Заключне слово
+👪 Un livre d’après la famille ¦ 👪 Книга по семье ¦ 👪 Книга за родиною
+🎨 Depuis un design ¦ 🎨 Из дизайна ¦ 🎨 З дизайну
+Créer le document ¦ Создать документ ¦ Створити документ
+Pages, marges et colonnes ¦ Страницы, поля и колонки ¦ Сторінки, поля й колонки
+Marges en millimètres. Le fond perdu (trait rouge) dépasse de la page pour les images à bord perdu ; la ligne-bloc (trait bleu) garde la place des notes pour l’imprimeur. Les deux s’impriment avec « PDF avec fond perdu et traits de coupe ». ¦ Поля в миллиметрах. Вылет (красная линия) выходит за страницу для изображений в обрез; служебное поле (синяя линия) оставляет место для заметок для типографии. Оба печатаются с «PDF с вылетами и метками обреза». ¦ Поля в міліметрах. Виліт (червона лінія) виходить за сторінку для зображень в обріз; службове поле (синя лінія) залишає місце для нотаток для друкарні. Обидва друкуються з «PDF із вильотами й мітками обрізу».
+Ordre des fiches ¦ Порядок карточек ¦ Порядок карток
+celui de l’arbre ¦ как в древе ¦ як у дереві
+Photos par personne ¦ Фото на человека ¦ Фото на людину
+Le design est copié : couverture, pages d’exemple, gabarits, styles et couleurs — tout se modifie. ¦ Дизайн скопирован: обложка, страницы-образцы, шаблоны, стили и цвета — всё можно изменить. ¦ Дизайн скопійовано: обкладинка, сторінки-зразки, шаблони, стилі й кольори — усе можна змінити.
+Le livre est fait page par page (les textes trop longs continuent sur la page suivante) ; tout se modifie ensuite. Les personnes cachées à l’export restent cachées. ¦ Книга создаётся страница за страницей (слишком длинные тексты продолжаются на следующей странице); потом всё можно изменить. Люди, скрытые при экспорте, остаются скрытыми. ¦ Книга створюється сторінка за сторінкою (задовгі тексти продовжуються на наступній сторінці); потім усе можна змінити. Люди, приховані під час експорту, залишаються прихованими.
+Choisis la personne de départ. ¦ Выбери исходного человека. ¦ Вибери вихідну людину.
+Les livres faits dans l’atelier de mise en page (façon InDesign) et tes designs : ouvre-les, crée-en un, règle les réglages par défaut. ¦ Книги, сделанные в мастерской вёрстки (в духе InDesign), и твои дизайны: открывай их, создавай новые, задавай настройки по умолчанию. ¦ Книги, зроблені в майстерні верстки (у дусі InDesign), і твої дизайни: відкривай їх, створюй нові, задавай налаштування за замовчуванням.
+↗ Ouvrir l’atelier ¦ ↗ Открыть мастерскую ¦ ↗ Відкрити майстерню
+Aucun livre pour « {q} ». ¦ Нет книг для «{q}». ¦ Немає книг для «{q}».
+Aucun livre pour l’instant : « ＋ Nouveau livre d’après la famille ». ¦ Пока нет книг: «＋ Новая книга по семье». ¦ Поки немає книг: «＋ Нова книга за родиною».
+Aucun design pour « {q} ». ¦ Нет дизайнов для «{q}». ¦ Немає дизайнів для «{q}».
+Aucun design à toi : dans un livre, Fichier → « Enregistrer comme design », ou « ↗ Ouvrir l’atelier » → Designs de l’app → « Modifier (à mon nom) ». ¦ У тебя нет своих дизайнов: в книге Файл → «Сохранить как дизайн» или «↗ Открыть мастерскую» → Дизайны приложения → «Изменить (под моим именем)». ¦ Ти не маєш власних дизайнів: у книзі Файл → «Зберегти як дизайн» або «↗ Відкрити майстерню» → Дизайни застосунку → «Змінити (під моїм ім’ям)».
+Chercher un livre ou un design… (nom) ¦ Искать книгу или дизайн… (название) ¦ Шукати книгу або дизайн… (назва)
+↻ Objets dynamiques : {a}, {b}. ¦ ↻ Динамические объекты: {a}, {b}. ¦ ↻ Динамічні об’єкти: {a}, {b}.
+↻ Objets dynamiques : {a}. ¦ ↻ Динамические объекты: {a}. ¦ ↻ Динамічні об’єкти: {a}.
+Page {n} (celle-ci) ¦ Страница {n} (эта) ¦ Сторінка {n} (ця)
+La page modèle contient des champs entre accolades, remplacés pour chaque personne : {list}. Un cadre d’image nommé <code>{portrait}</code> (onglet Objet → Nom) reçoit son portrait. ¦ Шаблон страницы содержит поля в фигурных скобках, которые заменяются для каждого человека: {list}. Рамка изображения с именем <code>{portrait}</code> (вкладка «Объект» → Название) получает его портрет. ¦ Шаблон сторінки містить поля у фігурних дужках, які замінюються для кожної людини: {list}. Рамка зображення з назвою <code>{portrait}</code> (вкладка «Об’єкт» → Назва) отримує її портрет.
+· cadre {portrait} ¦ · рамка {portrait} ¦ · рамка {portrait}
+→ {what}. ¦ → {what}. ¦ → {what}.
+Publipostage : {what} ¦ Слияние: {what} ¦ Злиття: {what}
+📊 Diagramme <b>lié</b>{state} : modifié dans Graphiques → Mes diagrammes, il se redessine ici (« Mettre à jour »). ¦ 📊 Диаграмма <b>связана</b>{state}: если изменить её в Графики → Мои диаграммы, она перерисуется здесь («Обновить»). ¦ 📊 Діаграма <b>пов’язана</b>{state}: якщо змінити її в Графіки → Мої діаграми, вона перемалюється тут («Оновити»).
+Image <b>liée</b> à une photo de l’app{state} : elle reste en pleine qualité (rien n’est réduit), et toute retouche faite dans l’app arrive ici. ¦ Изображение <b>связано</b> с фото приложения{state}: оно остаётся в полном качестве (ничего не уменьшается), и любая ретушь в приложении попадает сюда. ¦ Зображення <b>пов’язане</b> з фото застосунку{state}: воно залишається в повній якості (нічого не зменшується), і будь-яка ретуш у застосунку потрапляє сюди.
+Historique ({what}) ¦ История ({what}) ¦ Історія ({what})
+📖 Livres ({n}) ¦ 📖 Книги ({n}) ¦ 📖 Книги ({n})
+🎨 Mes designs ({n}) ¦ 🎨 Мои дизайны ({n}) ¦ 🎨 Мої дизайни ({n})
+{y} n’est pas une année bissextile (février n’a que 28 jours) ¦ {y} — не високосный год (в феврале только 28 дней) ¦ {y} — не високосний рік (у лютому лише 28 днів)
+il n’y a pas de jour 0 ¦ дня 0 не бывает ¦ дня 0 не буває
+{month} n’a que {n} jours ¦ в месяце {month} только {n} дн. ¦ у місяці {month} лише {n} дн.
+il n’y a que 12 mois ¦ месяцев всего 12 ¦ місяців лише 12
+{month} {y} n’a que {n} jours ¦ в месяце {month} {y} только {n} дн. ¦ у місяці {month} {y} лише {n} дн.
+📅 Date impossible : « {said} » — {why}. ¦ 📅 Невозможная дата: «{said}» — {why}. ¦ 📅 Неможлива дата: «{said}» — {why}.
+✍️ « {said} » : aucune fiche à ce nom. Tu voulais écrire « {fix} » ? ¦ ✍️ «{said}»: нет карточки с таким именем. Может, ты хотел(а) написать «{fix}»? ¦ ✍️ «{said}»: немає картки з таким ім’ям. Може, ти хотів(ла) написати «{fix}»?
+🎂 Âge impossible : « {said} » (personne n’a vécu plus de 122 ans). ¦ 🎂 Невозможный возраст: «{said}» (никто не прожил больше 122 лет). ¦ 🎂 Неможливий вік: «{said}» (ніхто не прожив понад 122 роки).
+🎂 Âge impossible pour un mariage : « {said} ». ¦ 🎂 Невозможный возраст для брака: «{said}». ¦ 🎂 Неможливий вік для шлюбу: «{said}».
+{a} ou {b} ans ¦ {a} или {b} лет ¦ {a} або {b} р.
+🎂 {name} : le texte dit « {said} », d’après la fiche (° {b}, {ev} {e}) elle avait {age}{multi}. ¦ 🎂 {name}: в тексте сказано «{said}», по карточке (° {b}, {ev} {e}) ей было {age}{multi}. ¦ 🎂 {name}: у тексті сказано «{said}», за карткою (° {b}, {ev} {e}) їй було {age}{multi}.
+🎂 {name} : le texte dit « {said} », d’après la fiche (° {b}, {ev} {e}) il avait {age}{multi}. ¦ 🎂 {name}: в тексте сказано «{said}», по карточке (° {b}, {ev} {e}) ему было {age}{multi}. ¦ 🎂 {name}: у тексті сказано «{said}», за карткою (° {b}, {ev} {e}) йому було {age}{multi}.
+({n} fiches portent ce nom) ¦ (карточек с этим именем: {n}) ¦ (карток із цим ім’ям: {n})
+🔎 {name} : le texte place {event} à « {place} », la fiche dit {fiche}{multi}. ¦ 🔎 {name}: текст относит {event} к «{place}», в карточке — {fiche}{multi}. ¦ 🔎 {name}: текст відносить {event} до «{place}», у картці — {fiche}{multi}.
+🔎 {name} : le texte dit « {said} », la fiche dit {what} {fiche}{multi}. ¦ 🔎 {name}: в тексте сказано «{said}», в карточке {what} {fiche}{multi}. ¦ 🔎 {name}: у тексті сказано «{said}», у картці {what} {fiche}{multi}.
+🔎 {name} : le texte parle d’{event} (« {said} ») que la fiche n’a pas encore{multi} — à ajouter ? ¦ 🔎 {name}: текст говорит о событии «{event}» («{said}»), которого ещё нет в карточке{multi} — добавить? ¦ 🔎 {name}: текст говорить про подію «{event}» («{said}»), якої ще немає в картці{multi} — додати?
+📍 « {place} » n’est pas un lieu de ta base : tu voulais dire « {near} » ? ¦ 📍 «{place}» — не место из твоей базы: может, ты имел(а) в виду «{near}»? ¦ 📍 «{place}» — не місце з твоєї бази: може, ти мав(ла) на увазі «{near}»?
+📍 « {place} » n’est pas encore dans les lieux de ta base. ¦ 📍 «{place}» ещё нет среди мест твоей базы. ¦ 📍 «{place}» ще немає серед місць твоєї бази.
+🔢 {name} : le texte dit « {said} », la fiche a le Sosa {nums}{who}{multi}. ¦ 🔢 {name}: в тексте сказано «{said}», у карточки номер Sosa {nums}{who}{multi}. ¦ 🔢 {name}: у тексті сказано «{said}», картка має номер Sosa {nums}{who}{multi}.
+(ancêtres de {name}) ¦ (предки {name}) ¦ (предки {name})
+🔢 {name} : le texte dit « {said} », mais la fiche n’a pas de numéro Sosa{who}{multi}. ¦ 🔢 {name}: в тексте сказано «{said}», но у карточки нет номера Sosa{who}{multi}. ¦ 🔢 {name}: у тексті сказано «{said}», але картка не має номера Sosa{who}{multi}.
+(ce n’est pas un ancêtre direct de {name}) ¦ (это не прямой предок {name}) ¦ (це не прямий предок {name})
+Pages remises dans l’ordre du pliage ¦ Страницы в порядке сгиба ¦ Сторінки в порядку згинання
+L’imprimante retourne la feuille ¦ Принтер переворачивает лист ¦ Принтер перевертає аркуш
+Retourner sur le côté ¦ Переворот по боковой стороне ¦ Перевертання по бічній стороні
+(petit côté, le plus courant) ¦ (короткая сторона, чаще всего) ¦ (коротка сторона, найчастіше)
+Retourner par le haut ¦ Переворот по верху ¦ Перевертання по верху
+{n} feuilles pliées ({p} pages) : imprime en recto verso, puis plie et agrafe au milieu. ¦ Сложенных листов: {n} (страниц: {p}): печатай с двух сторон, затем сложи и скрепи посередине. ¦ Складених аркушів: {n} (сторінок: {p}): друкуй з двох боків, потім склади й скріпи посередині.
+{n} feuille pliée ({p} pages) : imprime en recto verso, puis plie et agrafe au milieu. ¦ {n} сложенный лист (страниц: {p}): печатай с двух сторон, затем сложи и скрепи посередине. ¦ {n} складений аркуш (сторінок: {p}): друкуй з двох боків, потім склади й скріпи посередині.
+{name} — livret ¦ {name} — брошюра ¦ {name} — брошура
+la mise en page n’est pas chargée ¦ вёрстка не загружена ¦ верстку не завантажено
+la page {n} n’a pas pu être dessinée ¦ страницу {n} не удалось отрисовать ¦ сторінку {n} не вдалося намалювати
+=objet copié ¦ объект скопирован|объекта скопировано|объектов скопировано ¦ об’єкт скопійовано|об’єкти скопійовано|об’єктів скопійовано
+=page ajoutée ¦ страница добавлена|страницы добавлено|страниц добавлено ¦ сторінку додано|сторінки додано|сторінок додано
+=objet ¦ объект|объекта|объектов ¦ об’єкт|об’єкти|об’єктів
+=introuvable ¦ не найден|не найдено|не найдено ¦ не знайдено|не знайдено|не знайдено
+=commentaire de relecture ¦ комментарий вычитки|комментария вычитки|комментариев вычитки ¦ коментар вичитування|коментарі вичитування|коментарів вичитування
+=avertissement ¦ предупреждение|предупреждения|предупреждений ¦ попередження|попередження|попереджень
+=remarque ¦ замечание|замечания|замечаний ¦ зауваження|зауваження|зауважень
+=police ¦ шрифт|шрифта|шрифтов ¦ шрифт|шрифти|шрифтів
+ly|Relecture ¦ Вычитка ¦ Вичитування
+ly|Objet ¦ Объект ¦ Об’єкт
+ly|Calques ¦ Слои ¦ Шари
+ly|Texte ¦ Текст ¦ Текст
+ly|Liens ¦ Связи ¦ Зв’язки
+ly|Historique ¦ История ¦ Історія
+ly|Affichage ¦ Вид ¦ Вигляд
+ly|Édition ¦ Правка ¦ Редагування
+Menu {name} ¦ Меню {name} ¦ Меню {name}
+Plume : clic = point, double-clic ou Entrée = fini ¦ Перо: щелчок = точка, двойной щелчок или Enter = готово ¦ Перо: клацання = точка, подвійне клацання або Enter = готово
+Zoom — Alt pour reculer ¦ Масштаб — Alt, чтобы уменьшить ¦ Масштаб — Alt, щоб зменшити
+Rectangle ¦ Прямоугольник ¦ Прямокутник
+Ellipse ¦ Эллипс ¦ Еліпс
+Polygone ¦ Многоугольник ¦ Багатокутник
+Main ¦ Рука ¦ Рука
+bloc de texte ¦ текстовый блок ¦ текстовий блок
+rectangle ¦ прямоугольник ¦ прямокутник
+ellipse ¦ эллипс ¦ еліпс
+polygone ¦ многоугольник ¦ багатокутник
+mois|janvier ¦ январь ¦ січень
+mois|février ¦ февраль ¦ лютий
+mois|mars ¦ март ¦ березень
+mois|avril ¦ апрель ¦ квітень
+mois|mai ¦ май ¦ травень
+mois|juin ¦ июнь ¦ червень
+mois|juillet ¦ июль ¦ липень
+mois|août ¦ август ¦ серпень
+mois|septembre ¦ сентябрь ¦ вересень
+mois|octobre ¦ октябрь ¦ жовтень
+mois|novembre ¦ ноябрь ¦ листопад
+mois|décembre ¦ декабрь ¦ грудень
+la naissance ¦ рождение ¦ народження
+le baptême ¦ крещение ¦ хрещення
+le décès ¦ смерть ¦ смерть
+la inhumation ¦ погребение ¦ поховання
+le mariage ¦ брак ¦ шлюб
+une naissance ¦ рождение ¦ народження
+un baptême ¦ крещение ¦ хрещення
+un décès ¦ смерть ¦ смерть
+une inhumation ¦ погребение ¦ поховання
+un mariage ¦ брак ¦ шлюб
+Produit ¦ Умножение ¦ Множення
+Incrustation ¦ Наложение ¦ Накладання
+Obscurcir ¦ Затемнение ¦ Затемнення
+Exclusion ¦ Исключение ¦ Виключення
+Teinte ¦ Цветовой тон ¦ Колірний тон
+Saturation ¦ Насыщенность ¦ Насиченість
+Plein ¦ Сплошная ¦ Суцільна
+Tirets ¦ Штрихи ¦ Штрихи
+Tiret-point ¦ Штрих-пунктир ¦ Штрих-пунктир
+Tirets longs ¦ Длинные штрихи ¦ Довгі штрихи
+Sobre (simple trait) ¦ Строгая (одна линия) ¦ Строга (одна лінія)
+Cartouche (double filet) ¦ Картуш (двойная линейка) ¦ Картуш (подвійна лінійка)
+Calques ¦ Слои ¦ Шари
+Objet ¦ Объект ¦ Об’єкт
+Liens ¦ Связи ¦ Зв’язки
+Historique ¦ История ¦ Історія
+Premier plan ¦ На передний план ¦ На передній план
+Avancer ¦ Переместить вперёд ¦ Перемістити вперед
+Reculer ¦ Переместить назад ¦ Перемістити назад
+🙈 Masquer ¦ 🙈 Скрыть ¦ 🙈 Приховати
+Masquer ¦ Скрыть ¦ Приховати
+Outils (colonne de gauche) ¦ Инструменты (левая колонка) ¦ Інструменти (ліва колонка)
+Messages ¦ Сообщения ¦ Повідомлення
+＋ Pied de page ¦ ＋ Нижний колонтитул ¦ ＋ Нижній колонтитул
+Pied de page ¦ Нижний колонтитул ¦ Нижній колонтитул
+Faire tourner ¦ Повернуть ¦ Повернути
+Rotation ¦ Поворот ¦ Поворот
+PAGES ¦ СТРАНИЦЫ ¦ СТОРІНКИ
+DOCUMENT ¦ ДОКУМЕНТ ¦ ДОКУМЕНТ
+GABARITS ¦ ШАБЛОНЫ ¦ ШАБЛОНИ
+OBJET DYNAMIQUE ¦ ДИНАМИЧЕСКИЙ ОБЪЕКТ ¦ ДИНАМІЧНИЙ ОБ’ЄКТ
+QR CODE ¦ QR-КОД ¦ QR-КОД
+PUBLIPOSTAGE ¦ СЛИЯНИЕ ¦ ЗЛИТТЯ
+STYLE DE PARAGRAPHE ¦ СТИЛЬ АБЗАЦА ¦ СТИЛЬ АБЗАЦУ
+LIVRE DE FAMILLE ¦ СЕМЕЙНАЯ КНИГА ¦ РОДИННА КНИГА
+Format de page ¦ Формат страницы ¦ Формат сторінки
+Marges ¦ Поля ¦ Поля
+Fond perdu ¦ Вылет ¦ Виліт
+Maintenant ¦ Сейчас ¦ Зараз
+Gabarit de plusieurs pages ¦ Шаблон на несколько страниц ¦ Шаблон на кілька сторінок
+📄 Gabarit de plusieurs pages… ¦ 📄 Шаблон на несколько страниц… ¦ 📄 Шаблон на кілька сторінок…
+Appliquer ¦ Применить ¦ Застосувати
+Chapitre courant ¦ Текущая глава ¦ Поточний розділ
+Diagrammes indisponibles. ¦ Диаграммы недоступны. ¦ Діаграми недоступні.
+Diagramme ¦ Диаграмма ¦ Діаграма
+📊 Diagramme ¦ 📊 Диаграмма ¦ 📊 Діаграма
+Marge (modules) ¦ Поле (модули) ¦ Поле (модулі)
+QR code ¦ QR-код ¦ QR-код
+▦ QR code ¦ ▦ QR-код ¦ ▦ QR-код
+Ordre ¦ Порядок ¦ Порядок
+Valider ¦ Подтвердить ¦ Підтвердити
+Forme ¦ Форма ¦ Форма
+💬 Commentaire ¦ 💬 Комментарий ¦ 💬 Коментар
+✕ Refuser ¦ ✕ Отклонить ¦ ✕ Відхилити
+Ouverts ¦ Открытые ¦ Відкриті
+Page vide. ¦ Пустая страница. ¦ Порожня сторінка.
+Bloc de texte vide. ¦ Пустой текстовый блок. ¦ Порожній текстовий блок.
+Pages simples ¦ Одиночные страницы ¦ Окремі сторінки
+Traits de coupe ¦ Метки обреза ¦ Мітки обрізу
+Gabarits ¦ Шаблоны ¦ Шаблони
+Page sans gabarit ¦ Страница без шаблона ¦ Сторінка без шаблону
+↑ Avancer ¦ ↑ Вперёд ¦ ↑ Вперед
+↓ Reculer ¦ ↓ Назад ¦ ↓ Назад
+Cacher ¦ Скрыть ¦ Приховати
+Montrer ¦ Показать ¦ Показати
+Angle ¦ Угол ¦ Кут
+⇋ Miroir H ¦ ⇋ Отразить по горизонтали ¦ ⇋ Віддзеркалити по горизонталі
+⇵ Miroir V ¦ ⇵ Отразить по вертикали ¦ ⇵ Віддзеркалити по вертикалі
+Bouts ¦ Концы ¦ Кінці
+Droits ¦ Прямые ¦ Прямі
+Arrondis ¦ Скруглённые ¦ Заокруглені
+Angles ¦ Углы ¦ Кути
+Pointus ¦ Острые ¦ Гострі
+Angles arrondis ¦ Скруглённые углы ¦ Заокруглені кути
+Effets ¦ Эффекты ¦ Ефекти
+Fusion ¦ Наложение ¦ Накладання
+Flou ¦ Размытие ¦ Розмиття
+Creux ¦ Вогнутые ¦ Увігнуті
+Courbe douce ¦ Плавная кривая ¦ Плавна крива
+Distance ¦ Расстояние ¦ Відстань
+🌳 Arbre (objet dynamique) ¦ 🌳 Древо (динамический объект) ¦ 🌳 Дерево (динамічний об’єкт)
+🔗 Objet dynamique ¦ 🔗 Динамический объект ¦ 🔗 Динамічний об’єкт
+Vider ¦ Очистить ¦ Очистити
+Ajustement ¦ Подгонка ¦ Припасування
+Bloc de texte ¦ Текстовый блок ¦ Текстовий блок
+Vertical ¦ Вертикально ¦ Вертикально
+Pathfinder ¦ Обработка контуров ¦ Обробка контурів
+⊖ Soustraire ¦ ⊖ Вычесть ¦ ⊖ Відняти
+⊗ Intersection ¦ ⊗ Пересечение ¦ ⊗ Перетин
+⊘ Exclure ¦ ⊘ Исключить ¦ ⊘ Виключити
+Disposition ¦ Расположение ¦ Розташування
+Graisse ¦ Насыщенность шрифта ¦ Товщина шрифту
+Romain ¦ Прямой ¦ Прямий
+Corps ¦ Кегль ¦ Кегль
+Interlignage ¦ Интерлиньяж ¦ Інтерліньяж
+Approche ¦ Трекинг ¦ Трекінг
+Ligne de base ¦ Базовая линия ¦ Базова лінія
+Capitales ¦ Прописные ¦ Великі літери
+Normales ¦ Обычные ¦ Звичайні
+Couleur libre ¦ Свободный цвет ¦ Вільний колір
+Retrait droit ¦ Отступ справа ¦ Відступ праворуч
+Nuancier ¦ Палитра ¦ Палітра
+Cadre vide ¦ Пустая рамка ¦ Порожня рамка
+Petit fond ¦ Внутреннее поле ¦ Внутрішнє поле
+Grand fond ¦ Внешнее поле ¦ Зовнішнє поле
+Ligne-bloc ¦ Служебное поле ¦ Службове поле
+Notes de bas de page ¦ Сноски ¦ Виноски
+Commentaire rouvert ¦ Комментарий снова открыт ¦ Коментар знову відкрито
+Ascendance ¦ Предки ¦ Предки
+Descendance ¦ Потомки ¦ Нащадки
+Copie faite. ¦ Копия сделана. ¦ Копію зроблено.
+Marge gauche ¦ Левое поле ¦ Ліве поле
+Marge droite ¦ Правое поле ¦ Праве поле
+📐 Livres de famille ¦ 📐 Семейные книги ¦ 📐 Родинні книги
+📖 Livres ¦ 📖 Книги ¦ 📖 Книги
+🎨 Designs ¦ 🎨 Дизайны ¦ 🎨 Дизайни
+Traits de pli ¦ Линии сгиба ¦ Лінії згину
+Album photo ¦ Фотоальбом ¦ Фотоальбом
+Sobre ¦ Строгий ¦ Строгий
+🖼️ Galerie de photos ¦ 🖼️ Фотогалерея ¦ 🖼️ Фотогалерея
+📗 Livret de famille / chronique ¦ 📗 Семейная книжка / хроника ¦ 📗 Родинна книжечка / хроніка
+🎉 Carnet de cousinade ¦ 🎉 Альбом встречи родни ¦ 🎉 Альбом зустрічі родини
+Gabarit : {name} ¦ Шаблон: {name} ¦ Шаблон: {name}
+Publipostage : {what}. ¦ Слияние: {what}. ¦ Злиття: {what}.
+Note : {x} ¦ Сноска: {x} ¦ Виноска: {x}
+Page {n} : ¦ Страница {n}: ¦ Сторінка {n}:
+Pages ({n}) ¦ Страницы ({n}) ¦ Сторінки ({n})
+Arbres ({n}) ¦ Древа ({n}) ¦ Дерева ({n})
+📚 Mes livres ({n}) ¦ 📚 Мои книги ({n}) ¦ 📚 Мої книги ({n})
+💬 Commentaires de relecture ({n}) ¦ 💬 Комментарии вычитки ({n}) ¦ 💬 Коментарі вичитування ({n})
+(Le sommaire se remplit avec les paragraphes en style « Chapitre », ou ceux choisis dans Objet.) ¦ (Оглавление заполняется абзацами в стиле «Глава» или выбранными в меню «Объект».) ¦ (Зміст заповнюється абзацами в стилі «Розділ» або вибраними в меню «Об’єкт».)
+(Les notes sont en bas de chaque bloc de texte. Pour les avoir ici, en fin de chapitre : Document → Notes de bas de page.) ¦ (Сноски находятся внизу каждого текстового блока. Чтобы они были здесь, в конце главы: Документ → Сноски.) ¦ (Виноски містяться внизу кожного текстового блоку. Щоб вони були тут, у кінці розділу: Документ → Виноски.)
+(Aucune note dans ce chapitre : elles se rangent ici toutes seules.) ¦ (В этой главе нет сносок: они собираются здесь сами.) ¦ (У цьому розділі немає виносок: вони збираються тут самі.)
+(La bibliographie se remplit avec les sources citées en note : Texte → « 📚 Citer une source ».) ¦ (Библиография заполняется источниками, на которые есть ссылки в сносках: Текст → «📚 Сослаться на источник».) ¦ (Бібліографія заповнюється джерелами, на які є посилання у виносках: Текст → «📚 Послатися на джерело».)
+(L’index se remplit avec les noms marqués en style de caractère « Nom à indexer », et les personnes de la généalogie trouvées dans le texte.) ¦ (Указатель заполняется именами, отмеченными стилем символов «Имя для указателя», и людьми из генеалогии, найденными в тексте.) ¦ (Покажчик заповнюється іменами, позначеними стилем символів «Ім’я для покажчика», і людьми з генеалогії, знайденими в тексті.)
+(L’index des lieux se remplit avec les mots marqués « Lieu à indexer », et les lieux de ta base trouvés dans le texte.) ¦ (Указатель мест заполняется словами, отмеченными «Место для указателя», и местами твоей базы, найденными в тексте.) ¦ (Покажчик місць заповнюється словами, позначеними «Місце для покажчика», і місцями твоєї бази, знайденими в тексті.)
+(L’index des métiers se remplit avec les mots marqués « Métier à indexer », et les métiers de ta base trouvés dans le texte.) ¦ (Указатель профессий заполняется словами, отмеченными «Профессия для указателя», и профессиями твоей базы, найденными в тексте.) ¦ (Покажчик професій заповнюється словами, позначеними «Професія для покажчика», і професіями твоєї бази, знайденими в тексті.)
+Historique ({n} étapes) ¦ История (шагов: {n}) ¦ Історія (кроків: {n})
+Historique ({n} étape) ¦ История ({n} шаг) ¦ Історія ({n} крок)
+Clic : le contrôle détaillé. ¦ Щелчок: подробная проверка. ¦ Клацання: детальна перевірка.
+https://… (cliquable dans le PDF et le HTML) ¦ https://… (кликабельно в PDF и HTML) ¦ https://… (клікабельне в PDF і HTML)
+Garder les styles de ce document sous un nom ¦ Сохранить стили этого документа под именем ¦ Зберегти стилі цього документа під назвою
+tout de suite ¦ сразу ¦ одразу
+Largeur et hauteur ¦ Ширина и высота ¦ Ширина й висота
+mariage, Brive, 1925 (séparés par des virgules) ¦ брак, Brive, 1925 (через запятую) ¦ шлюб, Brive, 1925 (через кому)
+La marge claire autour du code : 4 modules d’après la norme, pour que les téléphones le lisent bien. ¦ Светлое поле вокруг кода: по стандарту 4 модуля, чтобы телефоны хорошо его читали. ¦ Світле поле навколо коду: за стандартом 4 модулі, щоб телефони добре його читали.
+Le numéro de la feuille (f° 12, f° 12 v° pour le verso), de la page ou de la vue en ligne. ¦ Номер листа (f° 12, f° 12 v° для оборота), страницы или кадра онлайн. ¦ Номер аркуша (f° 12, f° 12 v° для звороту), сторінки або кадру онлайн.
+Combien de rangées : 2 = la personne et ses parents (ou ses enfants), 4 = jusqu’aux arrière-grands-parents. Au-delà de 6, les cases deviennent petites. ¦ Сколько рядов: 2 = человек и его родители (или дети), 4 = до прадедушек и прабабушек. Больше 6 — ячейки становятся маленькими. ¦ Скільки рядів: 2 = людина та її батьки (або діти), 4 = до прадідусів і прабабусь. Понад 6 — клітинки стають маленькими.
+La marge de 3 à 5 mm qui sera coupée par l’imprimeur, pour que les images aillent jusqu’au bord. ¦ Поле 3–5 мм, которое обрежет типография, чтобы изображения доходили до края. ¦ Поле 3–5 мм, яке обріже друкарня, щоб зображення доходили до краю.
+1re page n° ¦ № 1-й страницы ¦ № 1-ї сторінки
+paysage ¦ альбомная ¦ альбомна
+portrait ¦ книжная ¦ книжкова
+Papier ¦ Бумага ¦ Папір
+Marge haut ¦ Верхнее поле ¦ Верхнє поле
+Marge bas ¦ Нижнее поле ¦ Нижнє поле
+fond transparent ¦ прозрачный фон ¦ прозоре тло
+📨 Fichier de relecture… ¦ 📨 Файл для вычитки… ¦ 📨 Файл для вичитування…
+Plusieurs pages… ¦ Несколько страниц… ¦ Кілька сторінок…
+Points de conduite (……… 12) ¦ Отточие (……… 12) ¦ Відточія (……… 12)
+¹ Note ¦ ¹ Сноска ¦ ¹ Виноска
+Approche (‰) ¦ Трекинг (‰) ¦ Трекінг (‰)
+Retrait 1re ligne ¦ Отступ 1-й строки ¦ Відступ 1-го рядка
+💿 Discographie ¦ 💿 Дискография ¦ 💿 Дискографія
+Livre de famille ¦ Семейная книга ¦ Родинна книга
+Aide : La marge de 3 à 5 mm qui sera coupée par l’imprimeur, pour que les images aillent jusqu’au bord. ¦ Подсказка: поле 3–5 мм, которое обрежет типография, чтобы изображения доходили до края. ¦ Підказка: поле 3–5 мм, яке обріже друкарня, щоб зображення доходили до краю.
