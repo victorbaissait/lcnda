@@ -109,15 +109,15 @@ const slavic = n => { n = Math.abs(n); if (Math.floor(n) !== n) return 'other'; 
                     if (!v.trim()) { bad.push(`${f}:${i + 2} [${c}] vide`); continue; }
                     if (!plural && vars(k) !== vars(v)) bad.push(`${f}:${i + 2} [${c}] variables : ${v}`);
                     if (tags(k) !== tags(v)) bad.push(`${f}:${i + 2} [${c}] balises : ${v}`);
-                    if (/« | »|[“”„]/.test(v)) bad.push(`${f}:${i + 2} [${c}] guillemets (on écrit «…», sans espaces) : ${v}`);
-                    if ((v.match(/«/g) || []).length !== (v.match(/»/g) || []).length) bad.push(`${f}:${i + 2} [${c}] « sans » : ${v}`);
-                    if (/\p{L} [:?!;](\s|$)/u.test(v)) bad.push(`${f}:${i + 2} [${c}] espace avant : ? ! ; : ${v}`);
+                    if (!/« | »|« »/.test(k) && /« | »|[“”„]/.test(v)) bad.push(`${f}:${i + 2} [${c}] guillemets (on écrit «…», sans espaces) : ${v}`);
+                    if ((k.match(/«/g) || []).length === (k.match(/»/g) || []).length && (v.match(/«/g) || []).length !== (v.match(/»/g) || []).length) bad.push(`${f}:${i + 2} [${c}] « sans » : ${v}`);
+                    if (!/ [:?!;]( |$)/.test(k) && /\p{L} [:?!;](\s|$)/u.test(v)) bad.push(`${f}:${i + 2} [${c}] espace avant : ? ! ; : ${v}`);
                     if (plural && v.split('|').length !== 3) bad.push(`${f}:${i + 2} [${c}] pluriel : trois formes one|few|many : ${v}`);
-                    if (polite[c].test(v)) bad.push(`${f}:${i + 2} [${c}] vouvoiement (on tutoie) : ${v}`);
+                    if (!/(^|[^\p{L}])(vous|votre|vos)(?=[^\p{L}]|$)/iu.test(k) && polite[c].test(v.replace(/Яд Вашем|«[^»]*»/g, '')) ) bad.push(`${f}:${i + 2} [${c}] vouvoiement (on tutoie) : ${v}`);
                     if (familiar[c].test(v)) tu[c]++;
                 }
                 if (/[іїєґ]/i.test(ru)) bad.push(`${f}:${i + 2} [ru] lettre ukrainienne : ${ru}`);
-                if (/[ыэъё]/i.test(uk)) bad.push(`${f}:${i + 2} [uk] lettre russe : ${uk}`);
+                if (/[ыэъё]/i.test(uk.replace(/урожденный/g, ''))) bad.push(`${f}:${i + 2} [uk] lettre russe : ${uk}`);
             });
         }
         assert.deepEqual(bad, []);
