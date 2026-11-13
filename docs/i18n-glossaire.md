@@ -3,7 +3,7 @@
 À suivre pour toute traduction de LCNDA (mode d’emploi : `docs/I18N.md`). Un mot de l’app se traduit **toujours de la
 même façon** dans une langue. Ton : on tutoie partout (en : *you* ; es : *tú* ; de : *du* ; it : *tu* ; pt : *tu* ;
 pl : *ty* ; nl : *je* ; cs : *ty* ; sv : *du* ; da : *du*). Phrases courtes et simples, comme en français.
-Le tchèque, le suédois et le danois, puis le slovaque et le norvégien bokmål (et les langues suivantes, jusqu’au vietnamien, à l’indonésien, au russe et à l’ukrainien) ont leur propre section à la fin (« Langues ajoutées ensuite »).
+Le tchèque, le suédois et le danois, puis le slovaque et le norvégien bokmål (et les langues suivantes, jusqu’au vietnamien, à l’indonésien, au russe, à l’ukrainien, au grec et au bulgare) ont leur propre section à la fin (« Langues ajoutées ensuite »).
 
 ## Généalogie
 
@@ -1765,6 +1765,193 @@ tourner la phrase (« Елементів: {n} », « Знайдено: {what} »
 | app | застосунок |
 | FAQ | FAQ (часті запитання) |
 | Traduction faite par une IA | Переклад зроблено ШІ |
+
+## Langue ajoutée ensuite : grec (el)
+
+Fichiers : `assets/i18n/src/nord13/<zone>.tsv` (1re ligne `fr ¦ el ¦ bg`), 2e colonne. `node scripts/i18n-todo.js el <zone>`
+montre l’anglais et l’allemand (pas de langue proche déjà traduite). **Traduire depuis le français** (le sens). Grec moderne
+standard (monotonique), ton simple et chaleureux : on **tutoie** (*εσύ* : « Είσαι σίγουρος/η; », « η γενεαλογία σου »,
+« Διάλεξε… », « Δοκίμασε ξανά ») — jamais *εσείς / σας* de politesse, même dans les messages d’erreur ; quand le genre de la
+personne compte, les deux formes (« σίγουρος/η »). Boutons courts, au nom d’action (« Αποθήκευση », « Διαγραφή », « Ακύρωση »,
+« Κλείσιμο », « Προσθήκη ») ; une phrase qui s’adresse à la personne, à l’impératif singulier (« Διάλεξε ένα αρχείο. »).
+**Ponctuation grecque** : le point d’interrogation est « ; » (« Είσαι σίγουρος/η; »), sans espace avant ; le point-virgule
+français devient le point haut « · » ; guillemets **«…» sans espaces à l’intérieur** ; pas d’espace avant « : ! ». Tous les
+accents (tonos) écrits, aussi sur les minuscules ; les CAPITALES sans accent (« ΡΥΘΜΙΣΕΙΣ »).
+Exemples de dates d’actes en chiffres (« 12/03/1790 ») ou laissés en français (« vers 1784 », « an II ») : c’est ce que l’app
+comprend ; dates et nombres `el-GR` (« 3,5 », « 1.000 »), sinon `en` (`intlFallback`). Touches de déplacement « W A S D ».
+**Pluriel : deux formes** `one|other` comme l’anglais (1 | le reste ; 1,5 → other) : `=personne ¦ άτομο|άτομα`,
+`=semaine ¦ εβδομάδα|εβδομάδες`. Hors `plural()`, un nombre variable ne s’accorde pas : tourner la phrase
+(« Βρέθηκαν: {what} », « Εισήχθησαν: {what}. »).
+
+| Français | Ελληνικά |
+|---|---|
+| Sosa (numéro Sosa) | Sosa |
+| fiche (d’une personne) | καρτέλα |
+| 📒 Fiches (sujets) | 📒 Σημειώσεις |
+| Liste \| Fiches (affichage) | Λίστα \| Κάρτες |
+| personne / Personnes | άτομο / Άτομα |
+| généalogie (la base de la personne) | γενεαλογία (η γενεαλογία σου) |
+| base (de données) | βάση |
+| acte | πράξη (ληξιαρχική πράξη) |
+| baptême / naissance | βάπτιση / γέννηση |
+| mariage | γάμος |
+| décès | θάνατος |
+| parrain / marraine | νονός / νονά |
+| témoin / déclarant | μάρτυρας / δηλών |
+| ascendants / descendants | πρόγονοι / απόγονοι |
+| ancêtre | πρόγονος |
+| branche | κλάδος |
+| génération | γενιά |
+| implexe | implexe (πρόγονοι που επαναλαμβάνονται) |
+| recensement | απογραφή |
+| inventaire après décès | απογραφή μετά θάνατον |
+| dépouillement | αποδελτίωση |
+| cote (d’archive) | κωδικός (αρχείου) |
+| mur de brique | αδιέξοδο |
+| cousinade | οικογενειακή συγκέντρωση |
+| commune / ville / village | δήμος / πόλη / χωριό |
+| paroisse | ενορία |
+| lieu | τόπος |
+| source | πηγή |
+| média / Médias | πολυμέσο / Πολυμέσα |
+| étiquette | ετικέτα |
+| enquête / Enquêtes | έρευνα / Έρευνες |
+| Recherche (onglet) | Έρευνα |
+| Battue | χτένισμα |
+| catalogue raisonné | κατάλογος έργων |
+| Tableau de bord | Πίνακας ελέγχου |
+| Tableaux (planches façon Freeform) | Πίνακες ιδεών |
+| widget | widget |
+| Graphiques / Diagrammes | Γραφήματα / Διαγράμματα |
+| Carte (géographique) | Χάρτης |
+| arbre | δέντρο |
+| Listes | Λίστες |
+| Chronologie | Χρονολόγιο |
+| Trésors | Θησαυροί |
+| Réglages | Ρυθμίσεις |
+| Apparence | Εμφάνιση |
+| Mode simple / Mode consultation | Απλή λειτουργία / Λειτουργία προβολής |
+| Sauvegarde | Αντίγραφο ασφαλείας |
+| Enregistrer / ✓ Enregistré | Αποθήκευση / ✓ Αποθηκεύτηκε |
+| Annuler (bouton) | Ακύρωση |
+| ↶ Annuler / ↷ Rétablir | ↶ Αναίρεση / ↷ Επανάληψη |
+| Fermer | Κλείσιμο |
+| Supprimer | Διαγραφή |
+| Retirer (détacher) | Αφαίρεση |
+| Modifier | Επεξεργασία |
+| Créer… / ＋ Ajouter… / ＋ Nouveau… | Δημιουργία… / ＋ Προσθήκη… / ＋ Νέο… (Νέα…, Νέος…) |
+| Relier | Σύνδεση |
+| ↺ Remettre comme au départ | ↺ Επαναφορά στην αρχική κατάσταση |
+| Réessayer | Δοκίμασε ξανά |
+| ⤒ Importer / ⤓ Exporter ▾ | ⤒ Εισαγωγή / ⤓ Εξαγωγή ▾ |
+| 🖨 Imprimer | 🖨 Εκτύπωση |
+| Chercher / Filtrer ▾ / Trier : | Αναζήτηση / Φίλτρο ▾ / Ταξινόμηση: |
+| ✓ Compris : | ✓ Κατανοητό: |
+| Aimanter | Μαγνήτισμα |
+| Portée (d’un animal) | γέννα |
+| onglet | καρτέλα (του μενού) |
+| fichier / dossier | αρχείο / φάκελος |
+| Tableur / Traitement de texte | Υπολογιστικό φύλλο / Επεξεργαστής κειμένου |
+| Mise en page | Σελιδοποίηση |
+| ordinateur | υπολογιστής |
+| app | εφαρμογή |
+| FAQ | Συχνές ερωτήσεις |
+| Traduction faite par une IA | Μετάφραση από τεχνητή νοημοσύνη |
+
+Attention : « καρτέλα » sert à la fois pour la fiche d’une personne et pour un onglet du menu (comme en grec courant) ; quand
+les deux se côtoient, préciser « καρτέλα ατόμου » (fiche) ou « καρτέλα του μενού » (onglet).
+
+## Langue ajoutée ensuite : bulgare (bg)
+
+Mêmes fichiers que le grec : `assets/i18n/src/nord13/<zone>.tsv`, 3e colonne. `node scripts/i18n-todo.js bg <zone>` montre
+l’anglais, l’allemand et le russe (langue slave en cyrillique, déjà traduite). **Traduire depuis le français**, jamais depuis
+le russe (faux amis : « неделя » = dimanche en bulgare, semaine en russe… ; pas de cas, l’article est collé au mot :
+« картонът », « базата »). Bulgare standard, ton simple et chaleureux : on **tutoie** (*ти* : « Сигурен ли си? »,
+« твоята генеалогия », « Избери… », « Опитай отново ») — jamais *Вие / вие / Ви / ваш* de politesse. Boutons à l’impératif
+singulier (« Запази », « Изтрий », « Добави », « Затвори », « Създай ») ; « Отказ » pour fermer sans garder, « ↶ Отмени »
+pour défaire. **Guillemets „…“** (habitude bulgare : bas-haut, sans espaces) ; pas d’espace avant « : ? ! ; » ; tiret « — ».
+Jamais de lettres russes (ы, э, ё) ni ukrainiennes (і, ї, є) ; « ѝ » (elle, à elle) avec son accent.
+Exemples de dates d’actes en chiffres (« 12/03/1790 ») ou laissés en français (« vers 1784 », « an II ») ; dates et nombres
+`bg-BG` (« 3,5 », « 1 000 »), sinon `en` (`intlFallback`). Touches de déplacement « W A S D ».
+**Pluriel : deux formes** `one|other` comme l’anglais (1 | le reste ; 1,5 → other). Après un nombre, les noms masculins
+prennent la « forme comptée » en -а / -я (« 5 документа », « 3 клона ») et « personne » devient « души » :
+`=personne ¦ човек|души`, `=semaine ¦ седмица|седмици`, `=fiche ¦ картон|картона`. Hors `plural()`, un nombre variable
+ne s’accorde pas : tourner la phrase (« Елементи: {n} », « Намерени: {what} », « Импортирани: {what}. »).
+
+| Français | Български |
+|---|---|
+| Sosa (numéro Sosa) | Sosa |
+| fiche (d’une personne) | картон |
+| 📒 Fiches (sujets) | 📒 Бележки |
+| Liste \| Fiches (affichage) | Списък \| Картони |
+| personne / Personnes | човек / Хора |
+| généalogie (la base de la personne) | генеалогия (твоята генеалогия) |
+| base (de données) | база |
+| acte | акт |
+| baptême / naissance | кръщене / раждане |
+| mariage | брак (la fête : сватба) |
+| décès | смърт |
+| parrain / marraine | кръстник / кръстница |
+| témoin / déclarant | свидетел / заявител |
+| ascendants / descendants | предци / потомци |
+| ancêtre | предшественик (предок) |
+| branche | клон |
+| génération | поколение |
+| implexe | имплекс |
+| recensement | преброяване |
+| inventaire après décès | опис след смърт |
+| dépouillement | извлечение |
+| cote (d’archive) | архивен номер |
+| mur de brique | задънена улица |
+| cousinade | родова среща |
+| commune / ville / village | община / град / село |
+| paroisse | енория |
+| lieu | място |
+| source | източник |
+| média / Médias | медия / Медии |
+| étiquette | етикет |
+| enquête / Enquêtes | разследване / Разследвания |
+| Recherche (onglet) | Проучване |
+| Battue | претърсване |
+| catalogue raisonné | каталог резоне |
+| Tableau de bord | Табло |
+| Tableaux (planches façon Freeform) | Дъски |
+| widget | уиджет |
+| Graphiques / Diagrammes | Графики / Диаграми |
+| Carte (géographique) | Карта |
+| arbre | дърво |
+| Listes | Списъци |
+| Chronologie | Хронология |
+| Trésors | Съкровища |
+| Réglages | Настройки |
+| Apparence | Облик |
+| Mode simple / Mode consultation | Опростен режим / Режим на разглеждане |
+| Sauvegarde | Резервно копие |
+| Enregistrer / ✓ Enregistré | Запази / ✓ Запазено |
+| Annuler (bouton) | Отказ |
+| ↶ Annuler / ↷ Rétablir | ↶ Отмени / ↷ Върни отново |
+| Fermer | Затвори |
+| Supprimer | Изтрий |
+| Retirer (détacher) | Премахни |
+| Modifier | Редактирай |
+| Créer… / ＋ Ajouter… / ＋ Nouveau… | Създай… / ＋ Добави… / ＋ Нов… (Нова…, Ново…) |
+| Relier | Свържи |
+| ↺ Remettre comme au départ | ↺ Върни както в началото |
+| Réessayer | Опитай отново |
+| ⤒ Importer / ⤓ Exporter ▾ | ⤒ Импортирай / ⤓ Експортирай ▾ |
+| 🖨 Imprimer | 🖨 Печат |
+| Chercher / Filtrer ▾ / Trier : | Търси / Филтрирай ▾ / Подреди: |
+| ✓ Compris : | ✓ Разбрано: |
+| Aimanter | Прилепване |
+| Portée (d’un animal) | котило |
+| onglet | раздел |
+| fichier / dossier | файл / папка |
+| Tableur / Traitement de texte | Електронна таблица / Текстообработка |
+| Mise en page | Оформление |
+| ordinateur | компютър |
+| app | приложение |
+| FAQ | ЧЗВ (често задавани въпроси) |
+| Traduction faite par une IA | Превод, направен от ИИ |
 
 ## Zone « tresors-ui » (étiquettes et fenêtres des pages Trésors)
 

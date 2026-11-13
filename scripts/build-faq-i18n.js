@@ -13,7 +13,7 @@
  * (repli) jusqu'à ce qu'on la retraduise (--status la liste). Si la question française change, la ligne n'est plus reconnue.
  * Les thèmes (Fiches, Outils…) sont des textes ordinaires : assets/i18n/src/faq.tsv.
  * Une réponse qui dépend de l'ordinateur s'écrit « {mac:⌃⌘Espace|pc:⊞ + .} » dans la traduction.
- * Langues en cours (cs, sv, da, sk, nb, ro, fi, hu, hr, sl, lt, lv, et, is, tr, lb, sq, mt, vi, id, ru, uk : NEW_LANGS) : même principe, assets/i18n/faq/src/cs/*.tsv, …/sk/*.tsv, …/nb/*.tsv, …/ro/*.tsv, …/fi/*.tsv, …/hu/*.tsv, …/hr/*.tsv, …/sl/*.tsv, …/lt/*.tsv, …/lv/*.tsv, …/et/*.tsv, …/is/*.tsv, …/tr/*.tsv, …/lb/*.tsv, …/sq/*.tsv, …/mt/*.tsv, …/vi/*.tsv, …/id/*.tsv, …/ru/*.tsv, …/uk/*.tsv ; leurs .json sont fabriqués
+ * Langues en cours (cs, sv, da, sk, nb, ro, fi, hu, hr, sl, lt, lv, et, is, tr, lb, sq, mt, vi, id, ru, uk, el, bg : NEW_LANGS) : même principe, assets/i18n/faq/src/cs/*.tsv, …/sk/*.tsv, …/nb/*.tsv, …/ro/*.tsv, …/fi/*.tsv, …/hu/*.tsv, …/hr/*.tsv, …/sl/*.tsv, …/lt/*.tsv, …/lv/*.tsv, …/et/*.tsv, …/is/*.tsv, …/tr/*.tsv, …/lb/*.tsv, …/sq/*.tsv, …/mt/*.tsv, …/vi/*.tsv, …/id/*.tsv, …/ru/*.tsv, …/uk/*.tsv, …/el/*.tsv, …/bg/*.tsv ; leurs .json sont fabriqués
  * (vides au départ : tout reste en français) ; --status les montre, mais une question sans traduction n'y est pas une faute.
  */
 'use strict';
@@ -25,7 +25,7 @@ const ROOT = path.join(__dirname, '..');
 const DIR = path.join(ROOT, 'assets/i18n/faq');
 const SRC = path.join(DIR, 'src');
 const LANGS = ['en', 'es', 'de', 'it', 'pt', 'pl', 'nl'];  // traduites en entier (tests/test-i18n-faq.js)
-const NEW_LANGS = ['cs', 'sv', 'da', 'sk', 'nb', 'ro', 'fi', 'hu', 'hr', 'sl', 'lt', 'lv', 'et', 'is', 'tr', 'lb', 'sq', 'mt', 'vi', 'id', 'ru', 'uk']; // en cours : une question absente reste en français
+const NEW_LANGS = ['cs', 'sv', 'da', 'sk', 'nb', 'ro', 'fi', 'hu', 'hr', 'sl', 'lt', 'lv', 'et', 'is', 'tr', 'lb', 'sq', 'mt', 'vi', 'id', 'ru', 'uk', 'el', 'bg']; // en cours : une question absente reste en français
 const ALL_LANGS = [...LANGS, ...NEW_LANGS];
 const VERSION = 17; // monter avec FAQ_I18N_V dans heritage-more.js quand les .json changent
 

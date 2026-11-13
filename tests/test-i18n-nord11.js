@@ -33,7 +33,7 @@ const BASE_ZONES = ['cadre', 'composants', 'colonnes', 'premier', 'touches', 're
 
     /* ═════ 1. Node ═════ */
     await t('vi et id déclarés partout : app-i18n.js, lib/i18n.php, scripts, FAQ', () => {
-        assert.deepEqual(I.CODES.slice(26, 28), NEW); assert.equal(I.CODES.length, 30);
+        assert.deepEqual(I.CODES.slice(26, 28), NEW); assert.equal(I.CODES.length, 32);
         assert.deepEqual([I.info('vi').name, I.info('vi').flag, I.info('vi').locale], ['Tiếng Việt', '🇻🇳', 'vi-VN']);
         assert.deepEqual([I.info('id').name, I.info('id').flag, I.info('id').locale], ['Bahasa Indonesia', '🇮🇩', 'id-ID']);
         assert.deepEqual(I.info('vi').intlFallback, ['en']); assert.deepEqual(I.info('id').intlFallback, ['en']);

@@ -23,10 +23,11 @@
  *     other seulement (vi, id : une seule forme pour tous les nombres, sans « | » ; người, orang) ;
  *     one|few|many (ru, uk, comme le polonais : 1, 21… sauf 11 | 2 à 4, 22 à 24… sauf 12 à 14 | 0, 5 à 20, 25… ;
  *     человек|человека|человек, людина|людини|людей ; les nombres à virgule prennent la forme few, « 1,5 человека ») ;
+ *     one|other (el, bg : 1 | le reste, comme l’anglais ; άτομο|άτομα, човек|души) ;
  *   - ligne vide ou commençant par « # » : ignorée. Variables {n}, {x} : les mêmes dans toutes les langues.
  * Les langues ajoutées ensuite ont leurs propres fichiers, un par zone, dans un sous-dossier de assets/i18n/src/ :
  * nord/<zone>.tsv (1re ligne « fr ¦ cs ¦ sv ¦ da »), nord2/<zone>.tsv (1re ligne « fr ¦ sk ¦ nb »), nord3/<zone>.tsv
- * (1re ligne « fr ¦ ro »), nord4/<zone>.tsv (1re ligne « fr ¦ fi ¦ hu ») , nord5/<zone>.tsv (1re ligne « fr ¦ hr ¦ sl ») , nord6/<zone>.tsv (1re ligne « fr ¦ lt ¦ lv ¦ et »), nord7/<zone>.tsv (1re ligne « fr ¦ is »), nord8/<zone>.tsv (1re ligne « fr ¦ tr »), nord9/<zone>.tsv (1re ligne « fr ¦ lb ») nord10/<zone>.tsv (1re ligne « fr ¦ sq ¦ mt »), nord11/<zone>.tsv (1re ligne « fr ¦ vi ¦ id ») et nord12/<zone>.tsv (1re ligne « fr ¦ ru ¦ uk »),
+ * (1re ligne « fr ¦ ro »), nord4/<zone>.tsv (1re ligne « fr ¦ fi ¦ hu ») , nord5/<zone>.tsv (1re ligne « fr ¦ hr ¦ sl ») , nord6/<zone>.tsv (1re ligne « fr ¦ lt ¦ lv ¦ et »), nord7/<zone>.tsv (1re ligne « fr ¦ is »), nord8/<zone>.tsv (1re ligne « fr ¦ tr »), nord9/<zone>.tsv (1re ligne « fr ¦ lb ») nord10/<zone>.tsv (1re ligne « fr ¦ sq ¦ mt »), nord11/<zone>.tsv (1re ligne « fr ¦ vi ¦ id »), nord12/<zone>.tsv (1re ligne « fr ¦ ru ¦ uk ») et nord13/<zone>.tsv (1re ligne « fr ¦ el ¦ bg »),
  * mêmes clés
  * (y compris « ctx|… » et « =mot ») que assets/i18n/src/<zone>.tsv : ainsi on les traduit sans toucher aux fichiers des
  * 7 premières langues. Tout sous-dossier de src/ est lu ; chaque fichier dit ses langues dans sa 1re ligne : toutes les
@@ -41,9 +42,9 @@ const ROOT = path.join(__dirname, '..');
 const SRC = path.join(ROOT, 'assets/i18n/src');
 const NORD = path.join(SRC, 'nord');
 const CORE = ['en', 'es', 'de', 'it', 'pt', 'pl', 'nl'];  // traduites en entier : une clé absente est une erreur
-const NEW_LANGS = ['cs', 'sv', 'da', 'sk', 'nb', 'ro', 'fi', 'hu', 'hr', 'sl', 'lt', 'lv', 'et', 'is', 'tr', 'lb', 'sq', 'mt', 'vi', 'id', 'ru', 'uk']; // en cours de traduction : une clé absente → repli sur le français
+const NEW_LANGS = ['cs', 'sv', 'da', 'sk', 'nb', 'ro', 'fi', 'hu', 'hr', 'sl', 'lt', 'lv', 'et', 'is', 'tr', 'lb', 'sq', 'mt', 'vi', 'id', 'ru', 'uk', 'el', 'bg']; // en cours de traduction : une clé absente → repli sur le français
 const LANGS = [...CORE, ...NEW_LANGS];
-const NAMES = {en: 'English', es: 'Español', de: 'Deutsch', it: 'Italiano', pt: 'Português', pl: 'Polski', nl: 'Nederlands', cs: 'Čeština', sv: 'Svenska', da: 'Dansk', sk: 'Slovenčina', nb: 'Norsk (bokmål)', ro: 'Română', fi: 'Suomi', hu: 'Magyar', hr: 'Hrvatski', sl: 'Slovenščina', lt: 'Lietuvių', lv: 'Latviešu', et: 'Eesti', is: 'Íslenska', tr: 'Türkçe', lb: 'Lëtzebuergesch', sq: 'Shqip', mt: 'Malti', vi: 'Tiếng Việt', id: 'Bahasa Indonesia', ru: 'Русский', uk: 'Українська'};
+const NAMES = {en: 'English', es: 'Español', de: 'Deutsch', it: 'Italiano', pt: 'Português', pl: 'Polski', nl: 'Nederlands', cs: 'Čeština', sv: 'Svenska', da: 'Dansk', sk: 'Slovenčina', nb: 'Norsk (bokmål)', ro: 'Română', fi: 'Suomi', hu: 'Magyar', hr: 'Hrvatski', sl: 'Slovenščina', lt: 'Lietuvių', lv: 'Latviešu', et: 'Eesti', is: 'Íslenska', tr: 'Türkçe', lb: 'Lëtzebuergesch', sq: 'Shqip', mt: 'Malti', vi: 'Tiếng Việt', id: 'Bahasa Indonesia', ru: 'Русский', uk: 'Українська', el: 'Ελληνικά', bg: 'Български'};
 const FORMS = {pl: ['one', 'few', 'many'], cs: ['one', 'few', 'many'], sk: ['one', 'few', 'many'], ro: ['one', 'few', 'other'], hr: ['one', 'few', 'other'], sl: ['one', 'two', 'few', 'other'], lt: ['one', 'few', 'other'], lv: ['zero', 'one', 'other'], mt: ['one', 'two', 'few', 'many', 'other'], vi: ['other'], id: ['other'], ru: ['one', 'few', 'many'], uk: ['one', 'few', 'many'], def: ['one', 'other']};
 
 function readFile(file, label) {

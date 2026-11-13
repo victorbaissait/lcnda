@@ -37,7 +37,7 @@ const slavic = n => { n = Math.abs(n); if (Math.floor(n) !== n) return 'other'; 
 
     /* ═════ 1. Node ═════ */
     await t('ru et uk déclarés partout : app-i18n.js, lib/i18n.php, scripts, FAQ', () => {
-        assert.deepEqual(I.CODES.slice(28, 30), NEW); assert.equal(I.CODES.length, 30);
+        assert.deepEqual(I.CODES.slice(28, 30), NEW); assert.equal(I.CODES.length, 32);
         assert.deepEqual([I.info('ru').name, I.info('ru').flag, I.info('ru').locale], ['Русский', '🇷🇺', 'ru-RU']);
         assert.deepEqual([I.info('uk').name, I.info('uk').flag, I.info('uk').locale], ['Українська', '🇺🇦', 'uk-UA']);
         assert.deepEqual(I.info('ru').intlFallback, ['en']); assert.deepEqual(I.info('uk').intlFallback, ['en']);

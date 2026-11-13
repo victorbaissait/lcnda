@@ -30,7 +30,7 @@ const mtRule = n => { n = Math.abs(n); if (Math.floor(n) !== n) return 'other'; 
     const B = require('../scripts/i18n-build.js');
     const F = require('../scripts/build-faq-i18n.js');
     await t('sq et mt déclarés partout : app-i18n.js, lib/i18n.php, scripts, FAQ', () => {
-        assert.deepEqual(I.CODES.slice(24, 26), NEW); assert.equal(I.CODES.length, 30);
+        assert.deepEqual(I.CODES.slice(24, 26), NEW); assert.equal(I.CODES.length, 32);
         assert.deepEqual([I.info('sq').name, I.info('sq').flag, I.info('sq').locale], ['Shqip', '🇦🇱', 'sq-AL']);
         assert.deepEqual([I.info('mt').name, I.info('mt').flag, I.info('mt').locale], ['Malti', '🇲🇹', 'mt-MT']);
         assert.deepEqual(I.info('sq').intlFallback, ['en']); assert.deepEqual(I.info('mt').intlFallback, ['en-MT', 'en']);
