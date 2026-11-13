@@ -58,5 +58,35 @@ const check = vm.runInNewContext(out + ';this.n = FAQ.reduce((s, g) => s + g[1].
 if (check !== count) throw new Error('faq-data.js ne se relit pas correctement');
 
 fs.writeFileSync(path.join(root, 'faq-data.js'), out);
+
+// 🇬🇧 La même FAQ en anglais pour la page anglaise (faq-data-en.js) : traductions de la FAQ de l'app
+// (assets/i18n/faq/en.json, repère = empreinte de la question française, comme heritage-more.js) et noms des thèmes
+// (assets/i18n/en.json, clé « faq|Thème ») ; une question pas encore traduite reste en français.
+const faqId = q => { let h = 0x811c9dc5; for (const ch of String(q)) { h ^= ch.codePointAt(0); h = Math.imul(h, 0x01000193) >>> 0; } return h.toString(36).padStart(7, '0'); };
+const pcKeys = t => String(t).replace(/\{mac:([^|{}]*)\|pc:([^{}]*)\}/g, (m, mac, pc) => pc);
+const enItems = JSON.parse(fs.readFileSync(path.join(root, 'assets/i18n/faq/en.json'), 'utf8')).items || {};
+const enDict = JSON.parse(fs.readFileSync(path.join(root, 'assets/i18n/en.json'), 'utf8'));
+let enCount = 0, enMissing = 0;
+const enGroups = FAQ.map(([theme, items]) => {
+    const label = enDict['faq|' + theme] || enDict[theme] || theme;
+    const rows = items.map(([q, a]) => {
+        enCount++;
+        const tr = enItems[faqId(q)];
+        if (!tr || !tr[0] || !tr[1]) enMissing++;
+        return `            [${js(pcKeys(tr && tr[0] ? tr[0] : q))}, ${js(pcKeys(tr && tr[1] ? tr[1] : a))}],`;
+    });
+    return `        [${js(label)}, [\n${rows.join('\n')}\n        ]],`;
+});
+const outEn = `// LCNDA website FAQ (English page) — place it next to the page.
+// Format: [ 'Theme', [ ['Question', 'Answer'], ... ] ]
+// Built by scripts/build-faq-data.js from the app FAQ and its English translation (assets/i18n/faq/en.json): do not edit by hand.
+const FAQ = [
+${enGroups.join('\n')}
+    ];
+`;
+const checkEn = vm.runInNewContext(outEn + ';this.n = FAQ.reduce((s, g) => s + g[1].length, 0);', {});
+if (checkEn !== enCount) throw new Error('faq-data-en.js ne se relit pas correctement');
+fs.writeFileSync(path.join(root, 'faq-data-en.js'), outEn);
+if (enMissing) console.warn(`faq-data-en.js : ${enMissing} question(s) encore en français`);
 console.log(`faq-data.js : ${FAQ.length} thèmes, ${count} questions.`);
 FAQ.forEach(([theme, items]) => console.log(`  ${theme} : ${items.length}`));
