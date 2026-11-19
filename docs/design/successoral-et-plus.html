@@ -1,0 +1,697 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Généalogie successorale</title>
+<style>
+*{box-sizing:border-box}
+body{background:#f4f5f7;padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:#111;margin:0;line-height:1.45}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:19px;margin:38px 0 6px}
+.sub{color:#555;margin:0 0 18px;font-size:14px;max-width:980px}
+.wrap{max-width:1240px;margin:0 auto}
+.sum{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+.sum div{background:#fff;border:2px solid #111;padding:8px 14px;box-shadow:4px 4px 0 rgba(5,93,255,.25)}
+.sum b{font-size:20px;display:block}.sum span{font-size:12px;color:#555}
+.badge{font:700 10.5px/1.2 system-ui;border:1.5px solid #111;padding:3px 6px;letter-spacing:.03em;display:inline-block;text-transform:uppercase;white-space:nowrap}
+.badge.new{border-color:#055dff;color:#fff;background:#055dff}
+.badge.re{border-color:#1a7f37;color:#1a7f37;background:#eaf6ee}
+.badge.have{border-color:#8a8f99;color:#555;background:#f1f2f4}
+.badge.idee{border-color:#8a3ffc;color:#6929c4;background:#f3ecff}
+.badge.ok{border-color:#1a7f37;color:#1a7f37}.badge.warn{border-color:#b08800;color:#7a5d00;background:#fff8d6}.badge.red{border-color:#c62828;color:#c62828;background:#fdecec}.badge.blue{border-color:#055dff;color:#055dff}.badge.grey{border-color:#8a8f99;color:#555}
+.audit{background:#fff;border:2px solid #111;box-shadow:6px 6px 0 rgba(5,93,255,.25)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#666;text-align:left;padding:8px;border-bottom:2px solid #111}
+td{padding:7px 8px;border-bottom:1px solid #eceef2;vertical-align:top}
+.audit td.n{font-weight:700;color:#666;width:30px}.audit td.nm{width:210px}
+code{font:11.5px ui-monospace,Menlo,Consolas,monospace;color:#444;word-break:break-word}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px 26px}
+.wide{grid-column:1 / -1}
+.case{background:#fff;border:2px solid #111;box-shadow:6px 6px 0 rgba(5,93,255,.25);padding:16px 18px 18px;min-width:0}
+.case .head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.case .tag{font:700 11px/1 system-ui;letter-spacing:.1em;color:#055dff;text-transform:uppercase}
+.case h3{margin:8px 0 10px;font-size:17px}
+.note{font-size:12.5px;color:#555;margin:10px 0 0}
+.reuse{font-size:12px;color:#1a5d2c;background:#f1f9f3;border:1px dashed #9bcfa9;padding:7px 10px;margin-top:12px}
+.reuse b{color:#1a7f37}
+.msg{border-left:4px solid #055dff;background:#eef4ff;padding:9px 12px;font-size:13px;margin:12px 0}
+.msg.warn{border-color:#d4a800;background:#fff8d6}.msg.ok{border-color:#1a7f37;background:#eaf6ee}.msg.red{border-color:#c62828;background:#fdecec}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid #111;background:#fff;font:700 13px system-ui;padding:7px 11px;box-shadow:3px 3px 0 rgba(5,93,255,.25);color:#111}
+.btn.blue{background:#055dff;border-color:#055dff;color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:#c9ced8;box-shadow:none;color:#444}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.lab{display:block;font-weight:700;font-size:13px;margin:12px 0 6px}
+.input{border:1.5px solid #c9ced8;padding:5px 8px;font-size:13.5px;background:#fff;width:100%;min-height:30px}
+.k{color:#666}
+.form{display:grid;grid-template-columns:170px 1fr;gap:7px 12px;font-size:13.5px;align-items:center}
+.seg{display:inline-flex;border:2px solid #111;flex-wrap:wrap}.seg span{padding:5px 9px;font:700 12px system-ui;border-right:1.5px solid #111;background:#fff}.seg span:last-child{border-right:0}.seg span.on{background:#055dff;color:#fff}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.scrollx>table{min-width:620px}
+.hint{font-size:11.5px;color:#777;margin-top:4px;display:none}
+/* fenêtre de l'app (faux écran) */
+.win{border:2px solid #111;background:#fff}
+.win-bar{display:flex;align-items:center;gap:10px;padding:7px 10px;border-bottom:2px solid #111;background:#fafbfc;flex-wrap:wrap}
+.win-bar .eyebrow{font:700 10.5px system-ui;letter-spacing:.12em;color:#666;text-transform:uppercase}
+.win-bar b{font-size:14px}
+.win-body{padding:12px}
+.tabs{display:flex;gap:0;border-bottom:2px solid #111;flex-wrap:wrap;font-size:13px}
+.tabs span{padding:7px 10px;border-right:1px solid #e3e5ea;white-space:nowrap}
+.tabs span.on{background:#055dff;color:#fff;font-weight:700}
+.tabs span.off{color:#aaa;text-decoration:line-through}
+/* cartes d'usage (P1) */
+.uz{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.uz div{border:2px solid #c9ced8;padding:8px 9px;font-size:12px;background:#fff;min-width:0}
+.uz div b{display:block;font-size:12.5px;margin:2px 0}.uz div i{font-style:normal;font-size:18px}
+.uz div.on{border-color:#055dff;box-shadow:inset 0 0 0 2px #055dff;background:#f3f7ff}
+.uz div small{display:block;color:#666;margin-top:4px;font-size:11px}
+.sw{display:grid;grid-template-columns:40px 1fr;gap:10px;align-items:start;padding:8px 0;border-top:1px solid #eceef2;font-size:13px}
+.tog{width:34px;height:20px;border-radius:10px;background:#c9ced8;position:relative;margin-top:2px}
+.tog::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#fff}
+.tog.on{background:#055dff}.tog.on::after{left:17px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.box{border:1.5px solid #e3e5ea;padding:9px 11px;font-size:13px}
+.box h4{font:700 11px/1 system-ui;letter-spacing:.1em;text-transform:uppercase;color:#666;margin:2px 0 8px}
+.box ul{margin:0;padding-left:18px}.box li{margin:2px 0}
+/* état du dossier */
+.steps{display:flex;gap:0;margin:6px 0 4px;flex-wrap:wrap}
+.steps span{flex:1;min-width:110px;text-align:center;font:700 12px system-ui;padding:7px 4px;border:2px solid #111;border-right:0;background:#fff}
+.steps span:last-child{border-right:2px solid #111}
+.steps span.done{background:#eaf6ee;color:#1a7f37}.steps span.on{background:#055dff;color:#fff}
+.dl{display:grid;grid-template-columns:auto 1fr auto;gap:6px 10px;font-size:13px;align-items:center}
+.dl .d{font-weight:700;white-space:nowrap}
+/* ordres */
+.ladder{display:grid;gap:6px;font-size:13px}
+.ladder div{display:grid;grid-template-columns:120px 1fr auto;gap:10px;align-items:center;border:1.5px solid #e3e5ea;padding:7px 10px}
+.ladder div.on{border:2px solid #055dff;background:#f3f7ff}
+.ladder div.skip{color:#888}
+.ladder em{font-style:normal;font-weight:700}
+.frac{font:700 14px ui-monospace,Menlo,Consolas,monospace;white-space:nowrap}
+.dead{text-decoration:line-through;text-decoration-color:#c62828;color:#666}
+.st{font:700 11px system-ui;padding:2px 6px;white-space:nowrap}
+.st.v{background:#eaf6ee;color:#1a7f37}.st.d{background:#f1f2f4;color:#555}.st.u{background:#fff8d6;color:#7a5d00}
+tr.sum-row td{border-top:2px solid #111;font-weight:700}
+.find{display:grid;grid-template-columns:28px 1fr auto;gap:8px;align-items:start;padding:8px 0;border-top:1px solid #eceef2;font-size:13px}
+.find .ic{font-size:18px}
+.fig{border:1.5px solid #e3e5ea;background:#fff;padding:6px}
+.fig svg{display:block;width:100%;height:auto;min-width:760px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:#444;margin-top:8px}
+.legend i{display:inline-block;width:14px;height:10px;margin-right:5px;vertical-align:-1px;border:1.5px solid #111}
+/* pièces */
+.piece td:nth-child(3){white-space:nowrap}
+.p-ok{color:#1a7f37;font-weight:700}.p-ask{color:#055dff;font-weight:700}.p-miss{color:#c62828;font-weight:700}
+.chain{font-size:12px;color:#555}
+/* tableau à remettre (aperçu impression) */
+.paper{background:#fff;border:1px solid #c9ced8;box-shadow:0 2px 10px rgba(0,0,0,.08);padding:22px 26px;font-family:Georgia,"Times New Roman",serif;font-size:13px;color:#111}
+.paper h4{font-size:16px;margin:0;text-align:center;letter-spacing:.04em}
+.paper .ref{text-align:center;font-size:12px;color:#444;margin:4px 0 12px}
+.paper table{font-size:12px;font-family:Georgia,serif}
+.paper th{font:700 10.5px Georgia,serif;letter-spacing:.04em;color:#111;border-bottom:1.5px solid #111}
+.paper td{border-bottom:1px solid #ddd}
+.paper .foot{font-size:11px;color:#444;margin-top:12px;border-top:1px solid #111;padding-top:8px}
+/* journal */
+.log{font:12.5px ui-monospace,Menlo,Consolas,monospace;border:1.5px solid #e3e5ea;max-height:none}
+.log div{display:grid;grid-template-columns:150px 1fr;gap:10px;padding:5px 9px;border-bottom:1px solid #f0f1f4}
+.log div span:first-child{color:#777}
+/* idées */
+.where{font-size:12.5px;background:#f6f7f9;border:1.5px solid #111;padding:8px 11px;margin-top:12px}
+.where b.t{display:block;font:700 10.5px system-ui;letter-spacing:.1em;text-transform:uppercase;color:#055dff;margin-bottom:4px}
+.where ul{margin:0;padding-left:18px}.where li{margin:2px 0}
+.path{font-weight:700;white-space:normal}
+.qs li{margin:8px 0;font-size:13.5px}
+.menu{border:2px solid #111;background:#fff;font-size:13px;max-width:290px;box-shadow:4px 4px 0 rgba(0,0,0,.15)}
+.menu div{padding:6px 10px;border-bottom:1px solid #eceef2}.menu div.on{background:#eaf1ff;font-weight:700}
+.ideas{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.idea{border:2px dashed #8a3ffc;background:#fbf8ff;padding:10px 12px;font-size:13px}
+.idea b{display:block;margin:6px 0 4px;font-size:14px}
+/* lettre */
+.letter{background:#fffdf7;border:1px solid #d8cfb8;padding:20px 24px;font-family:Georgia,serif;font-size:13.5px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.letter h4{font-size:20px;margin:0 0 2px;text-align:center}
+.letter .date{text-align:center;color:#6b5b3a;font-size:12px;margin-bottom:12px}
+.letter h5{font:700 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:#6b5b3a;margin:14px 0 6px;border-bottom:1px solid #e5dcc4;padding-bottom:3px}
+.letter ul{margin:0;padding-left:18px}
+.lt-cols{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:start}
+.photo{background:repeating-linear-gradient(45deg,#e9e4d6,#e9e4d6 6px,#ded7c4 6px,#ded7c4 12px);border:1.5px solid #b9b19a;height:150px;display:grid;place-items:center;font:italic 12px Georgia,serif;color:#6b5b3a;text-align:center;padding:6px}
+/* score */
+.score{display:grid;grid-template-columns:110px 1fr;gap:14px;align-items:center}
+.ring{width:104px;height:104px;border-radius:50%;background:conic-gradient(#d4a800 0 68%,#e3e5ea 68% 100%);display:grid;place-items:center}
+.ring span{width:78px;height:78px;border-radius:50%;background:#fff;display:grid;place-items:center;font:800 24px system-ui;text-align:center;line-height:1}
+.ring small{display:block;font:600 10px system-ui;color:#666}
+.why{display:grid;grid-template-columns:22px 1fr auto;gap:6px 8px;font-size:13px;align-items:start;margin-top:10px}
+.bar{height:7px;background:#e3e5ea;margin-top:5px}.bar i{display:block;height:100%}
+/* relecture cousin */
+.fact{display:grid;grid-template-columns:1fr auto;gap:6px 10px;border-top:1px solid #eceef2;padding:8px 0;font-size:13px;align-items:start}
+.vote{display:inline-flex;border:2px solid #111}.vote span{padding:3px 8px;font:700 12px system-ui;border-right:1.5px solid #111;background:#fff;white-space:nowrap}.vote span:last-child{border-right:0}
+.vote .y{background:#eaf6ee;color:#1a7f37}.vote .n{background:#fdecec;color:#c62828}
+.com{grid-column:1 / -1;border:1.5px solid #c9ced8;padding:5px 8px;font-size:12.5px;color:#333;background:#fff}
+/* latin */
+.tri{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.pane{border:2px solid #111;padding:9px 11px;font-size:13.5px;min-width:0}
+.pane h4{font:700 11px/1.2 system-ui;letter-spacing:.08em;text-transform:uppercase;color:#666;margin:0 0 8px}
+.la{font:14px/1.75 Georgia,serif}
+.w{border-bottom:2px solid #055dff;background:#eef4ff;padding:0 1px}
+.w.f{border-bottom-color:#1a7f37;background:#eaf6ee}
+.w.u{border-bottom:2px dotted #b08800;background:#fff8d6}
+.w.on{outline:2px solid #055dff}
+.mam{font-size:12.5px;display:grid;grid-template-columns:auto 1fr;gap:3px 10px}
+.mam b{font-family:Georgia,serif;font-weight:400;font-style:italic}
+.toolbar{display:flex;gap:4px;flex-wrap:wrap;border:2px solid #111;padding:5px;background:#fafbfc;margin-bottom:10px}
+.toolbar span{border:1.5px solid #c9ced8;background:#fff;padding:4px 8px;font:600 12px system-ui}
+.toolbar span.hl{border-color:#055dff;background:#055dff;color:#fff}
+@media (max-width:900px){
+ .grid{grid-template-columns:1fr}
+ .uz{grid-template-columns:repeat(2,1fr)}
+ .tri{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+ body{padding:16px}
+ .audit table,.audit thead,.audit tbody,.audit tr,.audit td{display:block}.audit thead{display:none}
+ .audit tr{border-bottom:2px solid #e3e5ea;padding:8px 10px}
+ .audit td{border:0;padding:2px 0;width:auto!important}
+ .audit td.n{display:inline-block;margin-right:6px}.audit td.nm{display:inline}
+ .form{grid-template-columns:1fr}.form .k{margin-top:6px}
+ .cols{grid-template-columns:1fr}
+ .ladder div{grid-template-columns:1fr}
+ .dl{grid-template-columns:1fr auto}.dl .d{grid-column:1 / -1}
+ .lt-cols{grid-template-columns:1fr}
+ .score{grid-template-columns:1fr}
+ .log div{grid-template-columns:1fr;gap:0}
+ .hint{display:block}
+ .steps span{min-width:45%}
+}
+</style></head><body><div class="wrap">
+
+<h1>⚖️ Généalogiste successoral, et quatre outils de plus</h1>
+<p class="sub">Maquette à faire valider, rien n’est encore codé. La première partie dessine un <b>nouvel usage de l’app</b> : chercher les héritiers d’une personne qui vient de mourir, pour un notaire, selon le Code civil d’aujourd’hui. La seconde, plus courte : la <b>lettre de famille</b>, le <b>score de fiabilité par personne</b>, la <b>relecture d’une branche par un cousin</b> et la <b>traduction d’un acte latin</b>. Toutes les personnes, communes, notaires et numéros sont <b>inventés</b> (MAZAUD, LACOMBE, Malvialle…).</p>
+
+<div class="msg warn">⚖️ <b>Ce que l’app n’est pas.</b> Elle n’est pas notaire. Le calcul des parts est <b>indicatif</b>. Il aide à savoir qui chercher et quels actes réunir. La dévolution est toujours établie et vérifiée par le notaire. Ce nouvel usage ne remplace pas « 🏠 Héritages et successions », qui reste l’endroit où l’on note <b>ce que disent les actes anciens</b> (testaments, partages, inventaires après décès des ancêtres).</div>
+
+<div class="sum"><div><b>12</b><span>écrans dessinés</span></div><div><b>8</b><span>pour l’usage successoral</span></div><div><b>4</b><span>autres demandes</span></div><div><b>5</b><span>idées en plus (à choisir)</span></div><div><b>3</b><span>emplacements décidés, les autres proposés</span></div></div>
+
+<div class="msg">📍 Cette maquette sert aussi de <b>cahier des charges</b> : chaque écran a son encadré « 📍 Où ça se trouve » avec le chemin de menu exact, et la section <a href="#ou">« Où tout se trouve »</a> en bas reprend toutes les entrées, puis <a href="#questions">les questions encore ouvertes</a>.</div>
+<h2>Ce qui existe déjà, ce qu’on réutilise, ce qui est nouveau</h2>
+<p class="sub">Pour chaque écran, on a cherché dans le code ce qui fait déjà le travail. <span class="badge have">Déjà là</span> : on s’en sert tel quel. <span class="badge re">Réutilisé</span> : on part de l’existant et on le prolonge. <span class="badge new">Nouveau</span> : rien d’équivalent n’existe.</p>
+<section class="audit"><table><thead><tr><th>N°</th><th>Écran</th><th>Déjà là</th><th>Réutilisé (prolongé)</th><th>Nouveau</th></tr></thead><tbody>
+<tr><td class="n">1</td><td class="nm"><b>Usage « ⚖️ Généalogiste successoral »</b></td><td>Les 9 usages, la grille du premier lancement, « 🧭 Usage de l’app » <code>app-premier.js:30 USAGES</code></td><td>Une 10ᵉ carte dans <code>USAGES</code> (onglets montrés / cachés, premier écran)</td><td><span class="badge new">Nouveau</span> l’onglet « ⚖️ Successions »</td></tr>
+<tr><td class="n">2</td><td class="nm"><b>Dossier de succession</b></td><td>Fiches, lieux, menu de choix des personnes, barre de liste H10, fenêtre K6</td><td>Le notaire : comme <code>notary_person_id</code> de <code>lib/successions.php</code> ; échéances dans « 🗓 Ma semaine de recherche »</td><td><span class="badge new">Nouveau</span> la fiche dossier (défunt, mandant, n°, état, échéances)</td></tr>
+<tr><td class="n">3</td><td class="nm"><b>Recherche des héritiers, dévolution</b></td><td>Liens familiaux, vivant / décédé des fiches, calcul des descendants vivants de la Cousinade <code>app-cousinade-core.js</code>, lien de parenté</td><td>Le parcours de la Cousinade, élargi aux frères, sœurs, oncles et cousins (degrés civils)</td><td><span class="badge new">Nouveau</span> le moteur des ordres, de la représentation, de la fente et des parts en fractions</td></tr>
+<tr><td class="n">4</td><td class="nm"><b>Arbre de dévolution</b></td><td>Moteur de diagrammes commun <code>ext.diagramRender</code>, export E3 (PDF)</td><td>Un type « dévolution » dans Mes diagrammes, comme le schéma de partage (Sankey) des successions</td><td><span class="badge new">Nouveau</span> le dessin (parts, barrés, représentation)</td></tr>
+<tr><td class="n">5</td><td class="nm"><b>Pièces justificatives</b></td><td>« 📮 Demander l’acte » <code>heritage-courriers-actes.js</code>, « Que manque-t-il ? », médias de preuve</td><td>La liste des actes manquants, faite ici lien par lien du défunt à chaque héritier</td><td><span class="badge new">Nouveau</span> la grille « en main / demandé / manquant » par héritier</td></tr>
+<tr><td class="n">6</td><td class="nm"><b>Tableau pour le notaire, courriers aux héritiers</b></td><td>Impression L1 / PDF, Registre de courriers (suivi, relance), traitement de texte</td><td>Un modèle « Contrat de révélation » et « Lettre à un héritier » dans le traitement de texte ; colonnes « réponse » et « signé » dans le registre</td><td><span class="badge new">Nouveau</span> le tableau généalogique sobre avec la source de chaque lien</td></tr>
+<tr><td class="n">7</td><td class="nm"><b>Confidentialité et journal du dossier</b></td><td>Règle des vivants des exports (GEDCOM « pour partager », Partager avec la famille), Répertoire des vivants</td><td>La règle de la Cousinade (« les coordonnées restent dans le projet »)</td><td><span class="badge new">Nouveau</span> le journal horodaté propre au dossier</td></tr>
+<tr><td class="n">8</td><td class="nm"><b>Idées pour aller plus loin</b></td><td>Journal des recherches, dépouillements, « Où chercher ? »</td><td>À voir une par une</td><td><span class="badge idee">Idée</span> ×5, à choisir</td></tr>
+<tr><td class="n">9</td><td class="nm"><b>Lettre de famille</b></td><td>Modèle « 💌 Lettre à la famille » <code>heritage-traitement-texte-outils.js:65</code>, « 📰 La gazette de l’année » <code>heritage-tresors-ateliers.js:190</code>, anniversaires (agenda .ics), courriel prêt (mailto)</td><td>Le modèle se remplit tout seul (anniversaires du mois, découvertes, photo, ancêtre à l’honneur)</td><td><span class="badge new">Nouveau</span> le remplissage automatique seulement</td></tr>
+<tr><td class="n">10</td><td class="nm"><b>Score de fiabilité par personne</b></td><td>Fiabilité de chaque fait (<code>factConfidence</code>, <code>app.js:2769</code>), sources et citations, 🛡 solidité des liens <code>heritage-preuve.js</code>, export « 🌐 Pour Geneanet »</td><td>Ces trois mesures, réunies en une note par fiche</td><td><span class="badge new">Nouveau</span> la note, ses raisons, le filtre « à revoir avant publication »</td></tr>
+<tr><td class="n">11</td><td class="nm"><b>Relecture d’une branche par un cousin</b></td><td>« 📤 Partager avec la famille » (lecture seule, .zip) <code>heritage-partage.js</code>, « ⤒ Importer les réponses » des Questions aux proches</td><td>Le même fichier, avec une case sur chaque fait ; le même import</td><td><span class="badge new">Nouveau</span> les cases « d’accord / faux » et le tri des remarques</td></tr>
+<tr><td class="n">12</td><td class="nm"><b>Traduire un acte latin</b></td><td>Aide à la lecture (dictionnaire latin, formules) <code>aide-langues/la.js</code>, lecture approfondie Ollama <code>lib/transcription_actes.php</code></td><td>Le dictionnaire pour le mot à mot ; le modèle déjà installé pour la traduction</td><td><span class="badge new">Nouveau</span> le bouton « 🌐 Traduire » et la vue côte à côte</td></tr>
+</tbody></table></section>
+
+<h2>Partie 1 · Le généalogiste successoral</h2>
+<p class="sub">Un exemple suivi d’un bout à l’autre : <b>Marcel MAZAUD</b>, mort le 3 mars 2026 à Malvialle, veuf, sans enfant, ses parents décédés. Le notaire cherche ses héritiers. L’app part des fiches qui existent déjà dans la base.</p>
+<div class="grid">
+
+<!-- 1 -->
+<div class="case wide"><div class="head"><span class="tag">1 · Usage de l’app</span><span class="badge re">Réutilisé : grille des usages</span></div>
+<h3>Une 10ᵉ carte au premier lancement, et dans « 🧭 Usage de l’app »</h3>
+<div class="uz">
+  <div><i>🌳</i><b>Ma généalogie</b>Ta famille, tes ancêtres.</div>
+  <div><i>🐾</i><b>Une lignée d’animaux</b>Élevage, pedigree.</div>
+  <div><i>🔭</i><b>Recenser des animaux</b>Baguage, observations.</div>
+  <div><i>🏠</i><b>Maison ou village</b>Qui a vécu où.</div>
+  <div><i>🎨</i><b>Artiste ou collection</b>Catalogue raisonné.</div>
+  <div><i>📚</i><b>Archives ou musée</b>Photos, lettres, objets.</div>
+  <div><i>🔤</i><b>Un nom de famille</b>Tous ses porteurs.</div>
+  <div><i>🏭</i><b>Entreprise ou association</b>Dirigeants, membres.</div>
+  <div><i>✨</i><b>Transmettre des souvenirs</b>Lettres, recettes.</div>
+  <div class="on"><i>⚖️</i><b>Généalogiste successoral</b>Retrouver les héritiers d’une personne décédée, pour un notaire.<small><b style="display:inline;font-size:11px">Ce qui change :</b> + ⚖️ Successions. Premier écran : « Ouvrir un dossier ».</small></div>
+</div>
+<div class="cols" style="margin-top:14px">
+  <div class="box"><h4>Ce qu’il montre</h4><ul>
+    <li><b>⚖️ Successions</b> : nouvel onglet, un dossier par défunt</li>
+    <li>👤 Personnes, 🌳 Graphiques (arbre de dévolution)</li>
+    <li>📇 Répertoire des vivants, mis en avant</li>
+    <li>📮 Registre de courriers, 🗓 Journal des recherches</li>
+    <li>🔎 Recherche, 📄 Documents (les actes)</li>
+  </ul></div>
+  <div class="box"><h4>Ce qu’il cache (rien n’est effacé)</h4><ul>
+    <li>✨ Trésors de famille, 🎨 Catalogue raisonné</li>
+    <li>🐾 Animaux, 🐾 Suivi des animaux</li>
+    <li>Les widgets de loisir du tableau de bord (météo, jeux)</li>
+  </ul>
+  <p class="note" style="margin-top:8px">Comme les autres usages, il change <b>seulement les onglets et le premier écran</b>, et il peut être allumé avec « 🌳 Ma généalogie ».</p></div>
+</div>
+<span class="lab">Ses onglets, une fois choisi</span>
+<div class="tabs"><span>🏠 Tableau de bord</span><span class="on">⚖️ Successions</span><span>👤 Personnes</span><span>📇 Vivants</span><span>📮 Courriers</span><span>🔎 Recherche</span><span>📄 Documents</span><span class="off">✨ Trésors</span></div>
+<span class="lab">Réglages → Apparence → 🧭 Usage de l’app</span>
+<div class="sw"><span class="tog on"></span><span><b>🌳 Ma généalogie</b> · Personnes, arbre, actes.</span></div>
+<div class="sw"><span class="tog on"></span><span><b>⚖️ Généalogiste successoral</b> · ⚖️ Successions, 📇 Vivants, 📮 Courriers. <span class="badge new">Nouveau</span></span></div>
+<div class="sw"><span class="tog"></span><span><b>✨ Transmettre des souvenirs</b> · ✨ Trésors de famille.</span></div>
+<div class="where"><b class="t">📍 Où ça se trouve</b><ul><li><span class="path">Premier lancement</span> → « Je veux faire autre chose ▾ » → 10ᵉ carte « ⚖️ Généalogiste successoral » (dernière de la grille). La carte de droite devient « Commencer avec une base vide », puis l’app s’ouvre sur l’onglet ⚖️ Successions et son bouton « ＋ Ouvrir un dossier ».</li><li><span class="path">Réglages → Apparence → « 🧭 Usage de l’app »</span> : un interrupteur de plus, et « ⚖️ Successions » dans la liste « Premier écran à l’ouverture ».</li><li><span class="path">Réglages → FAQ / tuto → « 🧭 Revoir le premier lancement »</span> : la même grille de 10 cartes.</li></ul></div>
+<div class="reuse"><b>Réutilisé :</b> le tableau <code>USAGES</code>, <code>usageChanges()</code>, la grille au clavier et les interrupteurs K16 de <code>assets/js/app-premier.js</code>. On ajoute une entrée <code>{k:'successoral', ic:'⚖️', tabs:[…], start:{module:'successoral'}}</code>.</div>
+</div>
+
+<!-- 2 -->
+<div class="case wide"><div class="head"><span class="tag">2 · Dossier de succession</span><span class="badge new">Nouveau</span></div>
+<h3>Dossier n° 2026-014 · Succession de Marcel MAZAUD</h3>
+<div class="win"><div class="win-bar"><span class="eyebrow">⚖️ Successions</span><b>Marcel MAZAUD (1938-2026)</b><span class="badge blue">En recherche</span></div>
+<div class="win-body">
+<span class="lab" style="margin-top:0">État du dossier</span>
+<div class="steps"><span class="done">✓ Ouvert</span><span class="on">En recherche</span><span>Héritiers trouvés</span><span>Remis au notaire</span><span>Clos</span></div>
+<div class="cols" style="margin-top:12px">
+<div class="box"><h4>Le défunt</h4>
+<div class="form">
+ <span class="k">Personne</span><span><b>Marcel MAZAUD</b> <span class="badge grey">fiche n° 2318</span></span>
+ <span class="k">Décès</span><span>3 mars 2026, Malvialle (hôpital)</span>
+ <span class="k">Dernier domicile</span><span>4 rue des Tilleuls, Malvialle</span>
+ <span class="k">Situation</span><span>Veuf de Jeanne LACOMBE († 2019). Sans enfant. Père et mère décédés.</span>
+ <span class="k">Testament</span><span>Aucun connu <small class="k">(le notaire interroge le fichier des dernières volontés)</small></span>
+</div></div>
+<div class="box"><h4>Le mandat</h4>
+<div class="form">
+ <span class="k">Notaire mandant</span><span>Maître Bertrand ROUSSILHE, notaire à Malvialle</span>
+ <span class="k">Réf. du notaire</span><span>BR/26/0412</span>
+ <span class="k">N° de dossier</span><span><b>2026-014</b></span>
+ <span class="k">Ouvert le</span><span>2 avril 2026</span>
+ <span class="k">Dévolution</span><span>Droit actuel (décès après le 1ᵉʳ janvier 2007) <span class="badge ok">OK</span></span>
+</div></div>
+</div>
+<span class="lab">Échéances</span>
+<div class="dl">
+ <span class="d">3 sept. 2026</span><span>Déclaration de succession (6 mois après le décès), côté notaire <span class="k">· dépassée, notaire prévenu</span></span><span class="badge grey">Passée</span>
+ <span class="d">28 nov. 2026</span><span>Relance : la mairie de Saint-Fréjoux pour l’acte de naissance de Suzanne</span><span class="badge warn">Dans 9 j</span>
+ <span class="d">15 déc. 2026</span><span><b>Remettre le tableau généalogique au notaire</b></span><span class="badge blue">Dans 26 j</span>
+</div>
+<div class="row" style="margin-top:12px"><span class="btn blue">👥 Rechercher les héritiers</span><span class="btn">🌳 Arbre de dévolution</span><span class="btn">📑 Pièces (9 / 16)</span><span class="btn">🖨 Tableau pour le notaire</span><span class="btn ghost">🕓 Journal du dossier</span></div>
+</div></div>
+<span class="lab">Les trois façons d’arriver aux dossiers</span>
+<div class="cols">
+<div class="box"><h4>① L’onglet du menu principal</h4><div class="tabs" style="font-size:12px"><span>🏠 Tableau de bord</span><span class="on">⚖️ Successions</span><span>👤 Personnes</span><span>📋 Listes</span></div>
+<p class="note">Visible quand l’usage successoral est allumé, caché sinon. Comme les autres onglets, on le montre, le cache, le renomme et le range dans <b>Réglages → Menus, colonne et listes</b>.</p>
+<h4 style="margin-top:12px">② Dans Listes</h4><p style="margin:0">Listes → 🔎 Recherche et organisation → <b>« ⚖️ Dossiers de succession »</b>, juste après « 🎉 Cousinades ». Toujours là, même sans l’usage successoral (sauf mode consultation). C’est la même page que l’onglet : barre H10, liste ou vignettes K9, filtre par état.</p></div>
+<div class="box"><h4>③ Depuis la fiche du défunt (⋯)</h4>
+<div class="menu"><div>✏️ Modifier…</div><div>⚖️ Dossier de preuve…</div><div>🎉 Organiser une cousinade…</div><div class="on">⚖️ Rechercher les héritiers…</div><div>📮 Demander un acte…</div></div>
+<p class="note">Seulement pour une personne <b>décédée</b> (pas un animal, pas en mode consultation). S’il n’y a pas de dossier : un nouveau dossier s’ouvre avec le défunt, la date et le lieu du décès déjà remplis. S’il y en a un : il s’ouvre sur « 👥 Héritiers ».</p></div>
+</div>
+<span class="lab">Les onglets d’un dossier</span>
+<div class="tabs" style="font-size:12px"><span class="on">📁 Dossier</span><span>👥 Héritiers</span><span>🌳 Arbre</span><span>📑 Pièces</span><span>✉️ Héritiers contactés</span><span>🖨 Pour le notaire</span><span>🕓 Journal</span></div>
+<p class="note">Les échéances s’affichent aussi dans <b>🗓 Ma semaine de recherche</b> et dans un widget de tableau de bord « ⚖️ Dossiers de succession » (dossiers en cours, prochaine échéance), à ajouter par « ＋ Ajouter un widget ». À ne pas confondre avec <b>Listes → 🖼️ Médias et documents → « 🏠 Héritages et successions »</b>, qui garde les actes anciens des ancêtres : les deux listes ont des noms et des icônes de liste distincts.</p>
+<div class="reuse"><b>Réutilisé :</b> le menu de choix des personnes (défunt, notaire), les lieux, la barre de liste H10 pour la liste des dossiers, la fenêtre K6 avec « ↶ Annuler » (H7) ; les échéances apparaissent aussi dans <b>🗓 Ma semaine de recherche</b> (<code>lib/semaine.php</code>). La date du décès choisit tout seul le droit à appliquer (écran 3).</div>
+</div>
+
+<!-- 3 -->
+<div class="case wide"><div class="head"><span class="tag">3 · Recherche des héritiers et dévolution</span><span class="badge new">Nouveau</span></div>
+<h3>Qui hérite de Marcel, d’après les fiches de la base</h3>
+<div class="msg warn">⚖️ <b>Calcul indicatif, à faire vérifier par le notaire.</b> Il suit le Code civil en vigueur pour un décès en 2026 (art. 731 et suivants), sans testament, sans donation, sans renonciation connue. Il ne tient pas compte du droit de retour légal (art. 738-2), des biens à l’étranger ni d’un régime matrimonial.</div>
+
+<div class="cols">
+<div>
+<span class="lab" style="margin-top:0">Le conjoint survivant</span>
+<div class="box">Aucun : Jeanne LACOMBE est décédée le 11 février 2019 (acte de décès en main). <span class="k">S’il y avait un conjoint, l’app afficherait ici ses droits (art. 757 à 757-3) avant les ordres.</span></div>
+<span class="lab">Les ordres d’héritiers (art. 734) : le premier qui a quelqu’un prend tout</span>
+<div class="ladder">
+ <div class="skip"><em>1ᵉʳ ordre</em><span>Enfants et descendants, avec représentation</span><span class="badge grey">Personne</span></div>
+ <div class="on"><em>2ᵉ ordre</em><span>Père et mère, frères et sœurs et leurs descendants (« parents privilégiés », art. 738)</span><span class="badge blue">Retenu</span></div>
+ <div class="skip"><em>3ᵉ ordre</em><span>Autres ascendants (grands-parents…), fente paternelle / maternelle</span><span class="badge grey">Écarté</span></div>
+ <div class="skip"><em>4ᵉ ordre</em><span>Oncles, tantes, cousins… jusqu’au 6ᵉ degré (art. 745)</span><span class="badge grey">Écarté</span></div>
+</div>
+</div>
+<div>
+<span class="lab" style="margin-top:0">Comment le 2ᵉ ordre se partage ici</span>
+<div class="box">
+<p style="margin:0 0 6px">Père et mère décédés : les frères et sœurs prennent tout (art. 737). Ils ne sont pas tous du même lit, donc <b>moitié pour la lignée du père, moitié pour celle de la mère</b> (art. 752) :</p>
+<ul>
+ <li><b>André</b>, frère du premier mariage du père (consanguin) : seulement côté père.</li>
+ <li><b>Paul</b> et <b>Suzanne</b>, du même père et de la même mère (germains) : des deux côtés.</li>
+ <li><b>Jean</b>, mort en 1944 sans descendance : ne compte pas.</li>
+</ul>
+<p style="margin:8px 0 0">Côté père : ½ ÷ 3 = <span class="frac">1/6</span> chacun. Côté mère : ½ ÷ 2 = <span class="frac">1/4</span> chacun.<br>Paul et Suzanne : 1/6 + 1/4 = <span class="frac">5/12</span>. André : <span class="frac">1/6</span>.</p>
+<p style="margin:8px 0 0">Paul est mort avant Marcel : <b>ses enfants le représentent</b> (art. 751-753) et se partagent ses 5/12. Henri, lui aussi décédé, est représenté par ses deux enfants.</p>
+</div>
+</div>
+</div>
+
+<span class="lab">Les héritiers trouvés</span>
+<div class="scrollx"><table>
+<thead><tr><th>Personne</th><th>Lien avec Marcel</th><th>Degré</th><th>État</th><th>Vient</th><th>Part</th><th>≈</th></tr></thead>
+<tbody>
+<tr><td><b>Suzanne LACOMBE</b>, née MAZAUD (1941)</td><td>Sœur germaine</td><td>2ᵉ</td><td><span class="st v">Vivante</span></td><td>de son chef</td><td class="frac">5/12</td><td>41,67 %</td></tr>
+<tr><td><span class="dead">Paul MAZAUD</span> (1936-2010)</td><td>Frère germain</td><td>2ᵉ</td><td><span class="st d">Décédé</span></td><td>représenté</td><td class="frac" style="color:#888">5/12</td><td style="color:#888">souche</td></tr>
+<tr><td>&nbsp;&nbsp;↳ <b>Claire MAZAUD</b> (1962)</td><td>Nièce</td><td>3ᵉ</td><td><span class="st v">Vivante</span></td><td>par représentation</td><td class="frac">5/24</td><td>20,83 %</td></tr>
+<tr><td>&nbsp;&nbsp;↳ <span class="dead">Henri MAZAUD</span> (1965-2018)</td><td>Neveu</td><td>3ᵉ</td><td><span class="st d">Décédé</span></td><td>représenté</td><td class="frac" style="color:#888">5/24</td><td style="color:#888">souche</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;↳ <b>Lucas MAZAUD</b> (1993)</td><td>Petit-neveu</td><td>4ᵉ</td><td><span class="st v">Vivant</span></td><td>par représentation</td><td class="frac">5/48</td><td>10,42 %</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;↳ <b>Emma MAZAUD</b> (1996)</td><td>Petite-nièce</td><td>4ᵉ</td><td><span class="st v">Vivante</span> <span class="badge warn">adresse ?</span></td><td>par représentation</td><td class="frac">5/48</td><td>10,42 %</td></tr>
+<tr><td><b>André MAZAUD</b> (1926)</td><td>Demi-frère (même père)</td><td>2ᵉ</td><td><span class="st u">Inconnu</span></td><td>de son chef, s’il vit</td><td class="frac">1/6</td><td>16,67 %</td></tr>
+<tr><td><span class="dead">Jean MAZAUD</span> (1922-1944)</td><td>Frère germain</td><td>2ᵉ</td><td><span class="st d">Décédé</span></td><td>sans descendance connue</td><td class="frac" style="color:#888">0</td><td style="color:#888">—</td></tr>
+<tr class="sum-row"><td colspan="5">Total</td><td class="frac">48/48</td><td>100 %</td></tr>
+</tbody></table></div>
+<p class="hint">↔ Faire glisser le tableau pour voir les parts.</p>
+<div class="msg">🔀 <b>Autre hypothèse</b>, si André est mort avant Marcel sans descendant : Suzanne <span class="frac">1/2</span>, Claire <span class="frac">1/4</span>, Lucas <span class="frac">1/8</span>, Emma <span class="frac">1/8</span>. L’app garde les deux calculs tant que la branche d’André n’est pas tranchée.</div>
+
+<span class="lab">Les branches à chercher</span>
+<div class="find"><span class="ic">🔎</span><span><b>André MAZAUD</b>, né en 1926 du premier mariage du père. Parti à Lyon en 1948, plus rien ensuite. <span class="k">Vivant ? Décédé ? Des enfants ?</span> Il ferait passer la part de chacun des autres.</span><span class="btn small">🔍 Chercher</span></div>
+<div class="find"><span class="ic">❓</span><span><b>Jean MAZAUD</b>, mort en 1944 à 22 ans : <b>frère sans descendance connue</b>. <span class="k">Un enfant reconnu ou naturel changerait le partage.</span></span><span class="btn small">🔍 Vérifier</span></div>
+<div class="find"><span class="ic">📇</span><span><b>Emma MAZAUD</b> : vivante, mais pas d’adresse dans le Répertoire des vivants.</span><span class="btn small">📇 Compléter</span></div>
+<div class="find"><span class="ic">🧩</span><span>Les deux mariages du père : l’app a besoin de savoir qui est né de quel lit. <b>Toutes les fiches sont reliées</b> <span class="badge ok">OK</span></span><span></span></div>
+
+<span class="lab">Si le décès est ancien : l’avertissement de date</span>
+<div class="msg red">🕰 <b>Décès du 14 mai 1999 : le droit de l’époque n’est pas celui d’aujourd’hui.</b> Avant le 1ᵉʳ juillet 2002 (loi du 3 décembre 2001), le conjoint survivant avait surtout de l’usufruit, et les enfants nés hors mariage n’avaient pas tous les mêmes droits. Avant le 1ᵉʳ août 1972, les enfants naturels avaient des droits réduits. Avant le 1ᵉʳ janvier 2007 (loi du 23 juin 2006), on ne pouvait pas représenter un héritier qui avait renoncé. <b>L’app ne fait pas ce calcul</b> : elle liste les parents proches et les actes, le notaire applique le droit de la date.</div>
+
+<span class="lab">Un deuxième exemple : la fente paternelle / maternelle (3ᵉ et 4ᵉ ordres)</span>
+<div class="box">
+<p style="margin:0 0 6px"><b>Dossier 2026-031 · Odette LACOMBE</b> († 2025), sans descendant, sans frère ni sœur, parents et grands-parents décédés. On saute au 4ᵉ ordre : la succession est <b>coupée en deux moitiés</b>, une par lignée (art. 749), et dans chaque lignée le plus proche en degré prend tout (art. 750). Pas de représentation entre cousins.</p>
+<div class="scrollx"><table>
+<thead><tr><th>Lignée</th><th>Personne</th><th>Lien</th><th>Degré</th><th>État</th><th>Part</th></tr></thead>
+<tbody>
+<tr><td>Paternelle</td><td><b>Pierre LACOMBE</b> (1950)</td><td>Cousin germain</td><td>4ᵉ</td><td><span class="st v">Vivant</span></td><td class="frac">1/2</td></tr>
+<tr><td>Paternelle</td><td><span class="dead">Anne LACOMBE</span> (1948-2015)</td><td>Cousine germaine</td><td>4ᵉ</td><td><span class="st d">Décédée</span></td><td class="k">0 (pas de représentation, ses enfants n’héritent pas)</td></tr>
+<tr><td>Maternelle</td><td>Les enfants de <b>Léonie VIDAL</b>, sœur de la grand-mère, <b>partie en Argentine en 1920, à retrouver</b></td><td>Cousins issus de germains de la mère</td><td>5ᵉ</td><td><span class="st u">Inconnu</span></td><td class="frac">1/2 ?</td></tr>
+<tr><td>Maternelle</td><td><b>Germaine VIDAL</b> (1958)</td><td>Petite-cousine</td><td>6ᵉ</td><td><span class="st v">Vivante</span></td><td class="frac">1/2 ou 0</td></tr>
+</tbody></table></div>
+<p class="note">Si un enfant de Léonie (5ᵉ degré) est en vie, il passe avant Germaine (6ᵉ). S’il n’y a plus personne dans la lignée maternelle, Pierre prend tout (art. 750). Et si un grand-parent avait survécu dans une lignée, il aurait pris <b>toute</b> la succession, cousins de l’autre lignée compris : c’est le 3ᵉ ordre (art. 747-748), et c’est une des nouveautés de la réforme de 2001.</p>
+</div>
+<span class="lab">Les degrés civils (art. 741-743) : on compte les générations jusqu’à l’ancêtre commun, puis on redescend</span>
+<div class="row" style="font-size:12.5px"><span class="badge grey">Père, mère, enfant : 1</span><span class="badge grey">Frère, sœur, grand-parent : 2</span><span class="badge grey">Neveu, oncle : 3</span><span class="badge grey">Cousin germain, petit-neveu, grand-oncle : 4</span><span class="badge grey">Enfant de cousin germain : 5</span><span class="badge grey">Cousin issu de germain : 6 (limite)</span></div>
+<div class="where"><b class="t">📍 Où ça se trouve</b><ul><li>Dossier → onglet <span class="path">« 👥 Héritiers »</span>. Le calcul se relance tout seul quand une fiche de la famille change (décès ajouté, enfant relié), avec une ligne dans le 🕓 Journal du dossier.</li><li>« 🔍 Chercher » d’une branche ouvre une piste dans <span class="path">Recherche → « 🗓 Journal des recherches »</span>, déjà rattachée à la personne ; « 📇 Compléter » ouvre sa ligne du <span class="path">Répertoire des vivants</span> (Listes → 👥 Personnes et familles).</li></ul></div>
+<div class="reuse"><b>Réutilisé :</b> le parcours des descendants vivants de la Cousinade (<code>app-cousinade-core.js</code>, <code>heritage-cousinade.js</code>) qui trouve déjà tous les descendants d’un ancêtre, avec le lien de parenté ; ici on le lance depuis les parents, les grands-parents… du défunt, branche par branche. Vivant / décédé / inconnu vient des fiches (date de décès, case « décédé »), sans rien recopier.</div>
+</div>
+
+<!-- 4 -->
+<div class="case wide"><div class="head"><span class="tag">4 · Arbre de dévolution</span><span class="badge new">Nouveau type de diagramme</span></div>
+<h3>Le défunt au centre, chaque héritier avec sa part</h3>
+<div class="fig scrollx">
+<svg viewBox="0 0 960 470" role="img" aria-label="Arbre de dévolution de Marcel MAZAUD" font-family="Inter,system-ui,sans-serif">
+<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#f1f2f4"/><line x1="0" y1="0" x2="0" y2="6" stroke="#d6d9df" stroke-width="2"/></pattern></defs>
+<!-- traits -->
+<g stroke="#111" stroke-width="2" fill="none">
+ <line x1="270" y1="48" x2="405" y2="48"/><line x1="555" y1="48" x2="690" y2="48"/>
+ <path d="M337 48 V130 H115 V160" stroke="#c76a00" stroke-width="3"/>
+ <path d="M622 48 V130"/><path d="M325 130 H885"/>
+ <path d="M325 130 V160"/><path d="M515 130 V160"/><path d="M705 130 V160"/><path d="M885 130 V160"/>
+ <path d="M325 216 V262 H415"/><path d="M325 262 H245 V290"/><path d="M415 262 V290"/>
+ <path d="M415 346 V376 H330 V400"/><path d="M415 376 H500 V400"/>
+</g>
+<text x="337" y="44" font-size="11" text-anchor="middle" fill="#c76a00" font-weight="700">1ᵉʳ mariage</text>
+<text x="622" y="44" font-size="11" text-anchor="middle" fill="#666" font-weight="700">2ᵉ mariage</text>
+<!-- parents -->
+<g font-size="13">
+ <rect x="120" y="20" width="150" height="56" fill="url(#hatch)" stroke="#111" stroke-width="2"/><text x="195" y="44" text-anchor="middle" font-weight="700">Hélène PEYRAT</text><text x="195" y="62" text-anchor="middle" font-size="11" fill="#555">† 1930</text>
+ <rect x="405" y="20" width="150" height="56" fill="url(#hatch)" stroke="#111" stroke-width="2"/><text x="480" y="44" text-anchor="middle" font-weight="700">Louis MAZAUD</text><text x="480" y="62" text-anchor="middle" font-size="11" fill="#555">père · † 1980</text>
+ <rect x="690" y="20" width="150" height="56" fill="url(#hatch)" stroke="#111" stroke-width="2"/><text x="765" y="44" text-anchor="middle" font-weight="700">Marie BESSE</text><text x="765" y="62" text-anchor="middle" font-size="11" fill="#555">mère · † 1995</text>
+</g>
+<!-- frères et sœurs -->
+<g font-size="13">
+ <rect x="40" y="160" width="150" height="56" fill="#fff8d6" stroke="#c76a00" stroke-width="2.5" stroke-dasharray="6 3"/><text x="115" y="182" text-anchor="middle" font-weight="700">André MAZAUD</text><text x="115" y="198" text-anchor="middle" font-size="11" fill="#7a5d00">né 1926 · à retrouver</text>
+ <rect x="138" y="202" width="48" height="20" fill="#c76a00"/><text x="162" y="216" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">1/6</text>
+
+ <rect x="250" y="160" width="150" height="56" fill="url(#hatch)" stroke="#111" stroke-width="2"/><text x="325" y="182" text-anchor="middle" font-weight="700" fill="#666">Paul MAZAUD</text><text x="325" y="198" text-anchor="middle" font-size="11" fill="#666">† 2010 · représenté</text><line x1="252" y1="214" x2="398" y2="162" stroke="#c62828" stroke-width="2"/>
+ <rect x="346" y="202" width="50" height="20" fill="#8a8f99"/><text x="371" y="216" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">5/12</text>
+
+ <rect x="430" y="152" width="170" height="70" fill="#111" stroke="#111" stroke-width="2"/><text x="515" y="174" text-anchor="middle" font-size="10.5" fill="#9ec1ff" font-weight="700" letter-spacing="1.5">⚖️ LE DÉFUNT</text><text x="515" y="194" text-anchor="middle" font-weight="800" fill="#fff" font-size="14">Marcel MAZAUD</text><text x="515" y="211" text-anchor="middle" font-size="11" fill="#ddd">1938 - † 3 mars 2026</text>
+
+ <rect x="630" y="160" width="150" height="56" fill="#eaf6ee" stroke="#1a7f37" stroke-width="2.5"/><text x="705" y="182" text-anchor="middle" font-weight="700">Suzanne LACOMBE</text><text x="705" y="198" text-anchor="middle" font-size="11" fill="#1a7f37">née MAZAUD · vivante</text>
+ <rect x="726" y="202" width="50" height="20" fill="#055dff"/><text x="751" y="216" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">5/12</text>
+
+ <rect x="810" y="160" width="150" height="56" fill="url(#hatch)" stroke="#111" stroke-width="2"/><text x="885" y="182" text-anchor="middle" font-weight="700" fill="#666">Jean MAZAUD</text><text x="885" y="198" text-anchor="middle" font-size="11" fill="#666">† 1944 · sans descend.</text><line x1="812" y1="214" x2="958" y2="162" stroke="#c62828" stroke-width="2"/>
+ <rect x="922" y="202" width="34" height="20" fill="#c9ced8"/><text x="939" y="216" text-anchor="middle" font-size="12" fill="#111" font-weight="700">0</text>
+</g>
+<!-- neveux -->
+<g font-size="13">
+ <rect x="170" y="290" width="150" height="56" fill="#eaf6ee" stroke="#1a7f37" stroke-width="2.5"/><text x="245" y="312" text-anchor="middle" font-weight="700">Claire MAZAUD</text><text x="245" y="328" text-anchor="middle" font-size="11" fill="#1a7f37">nièce · vivante</text>
+ <rect x="266" y="332" width="50" height="20" fill="#055dff"/><text x="291" y="346" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">5/24</text>
+ <rect x="340" y="290" width="150" height="56" fill="url(#hatch)" stroke="#111" stroke-width="2"/><text x="415" y="312" text-anchor="middle" font-weight="700" fill="#666">Henri MAZAUD</text><text x="415" y="328" text-anchor="middle" font-size="11" fill="#666">† 2018 · représenté</text><line x1="342" y1="344" x2="488" y2="292" stroke="#c62828" stroke-width="2"/>
+ <rect x="436" y="332" width="50" height="20" fill="#8a8f99"/><text x="461" y="346" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">5/24</text>
+</g>
+<!-- petits-neveux -->
+<g font-size="13">
+ <rect x="255" y="400" width="150" height="56" fill="#eaf6ee" stroke="#1a7f37" stroke-width="2.5"/><text x="330" y="422" text-anchor="middle" font-weight="700">Lucas MAZAUD</text><text x="330" y="438" text-anchor="middle" font-size="11" fill="#1a7f37">petit-neveu · vivant</text>
+ <rect x="351" y="442" width="50" height="20" fill="#055dff"/><text x="376" y="456" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">5/48</text>
+ <rect x="425" y="400" width="150" height="56" fill="#eaf6ee" stroke="#1a7f37" stroke-width="2.5"/><text x="500" y="422" text-anchor="middle" font-weight="700">Emma MAZAUD</text><text x="500" y="438" text-anchor="middle" font-size="11" fill="#1a7f37">petite-nièce · vivante</text>
+ <rect x="521" y="442" width="50" height="20" fill="#055dff"/><text x="546" y="456" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">5/48</text>
+</g>
+<text x="700" y="300" font-size="12" fill="#555">Côté père (½) : André, Paul, Suzanne</text>
+<text x="700" y="318" font-size="12" fill="#555">Côté mère (½) : Paul, Suzanne</text>
+<text x="700" y="346" font-size="12" fill="#555">Bleu = héritier vivant, sa part</text>
+<text x="700" y="364" font-size="12" fill="#555">Gris barré = prédécédé, sa souche</text>
+<text x="700" y="382" font-size="12" fill="#555">Pointillé orangé = branche à chercher</text>
+</svg></div>
+<p class="hint">↔ Faire glisser le dessin.</p>
+<div class="legend"><span><i style="background:#eaf6ee;border-color:#1a7f37"></i>Héritier vivant</span><span><i style="background:#f1f2f4"></i>Décédé (barré si avant le défunt)</span><span><i style="background:#fff8d6;border-color:#c76a00;border-style:dashed"></i>État inconnu</span><span><i style="background:#055dff;border-color:#055dff"></i>Part qui revient</span><span><i style="background:#8a8f99;border-color:#8a8f99"></i>Part transmise par représentation</span></div>
+<div class="where"><b class="t">📍 Où ça se trouve</b><ul><li>Dossier → onglet <span class="path">« 🌳 Arbre »</span> : le dessin du dossier, toujours à jour.</li><li><span class="path">« 📊 Modifier dans Mes diagrammes »</span> en dessous : une copie à retoucher (couleurs, police) dans Graphiques → Mes diagrammes, type « ⚖️ Dévolution », qui ne se choisit que depuis un dossier.</li><li>Il est aussi la page 2 du PDF « 🖨 Pour le notaire ».</li></ul></div>
+<div class="reuse"><b>Réutilisé :</b> le moteur de diagrammes commun (<code>ext.diagramRender</code>) et « 📊 Modifier dans Mes diagrammes », l’export E3 (PDF, SVG). Clic sur une case : la fiche ; clic droit : « 🛡 Solidité de ce lien », comme dans la 🛡 Vue solidité des arbres.</div>
+</div>
+
+<!-- 5 -->
+<div class="case wide"><div class="head"><span class="tag">5 · Pièces justificatives</span><span class="badge re">Réutilisé : 📮 Demander l’acte</span></div>
+<h3>Les actes qui prouvent chaque lien, du défunt à chaque héritier</h3>
+<div class="row" style="margin-bottom:10px"><span class="badge ok">9 en main</span><span class="badge blue">3 demandés</span><span class="badge red">4 manquants</span><span class="seg"><span class="on">Par héritier</span><span>Par acte</span></span></div>
+<div class="scrollx"><table class="piece">
+<thead><tr><th>Ce qu’il faut prouver</th><th>Acte</th><th>État</th><th></th></tr></thead>
+<tbody>
+<tr><td colspan="4" style="background:#fafbfc"><b>Commun à tous</b></td></tr>
+<tr><td>Le décès de Marcel</td><td>Décès, Malvialle, 3 mars 2026</td><td class="p-ok">✓ En main</td><td></td></tr>
+<tr><td>Marcel, fils de Louis et de Marie</td><td>Naissance, Malvialle, 1938</td><td class="p-ok">✓ En main</td><td></td></tr>
+<tr><td>Pas de conjoint survivant</td><td>Décès de Jeanne LACOMBE, 2019</td><td class="p-ok">✓ En main</td><td></td></tr>
+<tr><td>Les parents sont morts avant</td><td>Décès Louis (1980), décès Marie (1995)</td><td class="p-ok">✓ En main</td><td></td></tr>
+<tr><td colspan="4" style="background:#fafbfc"><b>Suzanne LACOMBE</b> <span class="chain">· Marcel → parents → Suzanne</span></td></tr>
+<tr><td>Suzanne, fille des mêmes parents</td><td>Naissance, Saint-Fréjoux, 1941</td><td class="p-ask">📮 Demandé le 21 oct.</td><td><span class="btn small ghost">Relancer</span></td></tr>
+<tr><td>Son nom d’épouse</td><td>Mariage MAZAUD × LACOMBE, 1963</td><td class="p-ok">✓ En main</td><td></td></tr>
+<tr><td colspan="4" style="background:#fafbfc"><b>Claire, Lucas et Emma</b> <span class="chain">· Marcel → parents → Paul → Claire / Henri → Lucas, Emma</span></td></tr>
+<tr><td>Paul, fils des mêmes parents</td><td>Naissance, Malvialle, 1936</td><td class="p-ok">✓ En main</td><td></td></tr>
+<tr><td>Paul est mort avant Marcel</td><td>Décès, 2010</td><td class="p-ok">✓ En main</td><td></td></tr>
+<tr><td>Claire, fille de Paul</td><td>Naissance, 1962</td><td class="p-miss">✗ Manquant</td><td><span class="btn small">📮 Demander l’acte</span></td></tr>
+<tr><td>Henri, fils de Paul, mort avant Marcel</td><td>Naissance 1965 ; décès 2018</td><td class="p-ask">✓ naissance · 📮 décès demandé</td><td><span class="btn small ghost">Relancer</span></td></tr>
+<tr><td>Lucas et Emma, enfants d’Henri</td><td>Naissances 1993, 1996</td><td class="p-miss">✗ Manquants (2)</td><td><span class="btn small">📮 Demander l’acte</span></td></tr>
+<tr><td colspan="4" style="background:#fafbfc"><b>André MAZAUD</b> <span class="chain">· Marcel → père → André (1ᵉʳ lit)</span></td></tr>
+<tr><td>André, fils de Louis et d’Hélène</td><td>Naissance, 1926 (mention marginale ?)</td><td class="p-ask">📮 Demandé</td><td><span class="btn small ghost">Relancer</span></td></tr>
+<tr><td>Le premier mariage du père</td><td>Mariage MAZAUD × PEYRAT, 1925</td><td class="p-ok">✓ En main</td><td></td></tr>
+<tr><td colspan="4" style="background:#fafbfc"><b>Jean MAZAUD</b> (pour l’écarter)</td></tr>
+<tr><td>Mort avant Marcel, sans enfant</td><td>Décès, 1944</td><td class="p-miss">✗ Manquant</td><td><span class="btn small">📮 Demander l’acte</span></td></tr>
+</tbody></table></div>
+<p class="hint">↔ Faire glisser le tableau.</p>
+<p class="note">Pour un acte de moins de 75 ans, « 📮 Demander l’acte » prépare déjà la bonne lettre (copie intégrale, justification de la qualité de mandataire) et dit la règle des délais en clair. Une fois rangée dans le Registre de courriers, l’état passe tout seul à « Demandé », et à « En main » quand l’acte est attaché à la fiche.</p>
+<div class="where"><b class="t">📍 Où ça se trouve</b><ul><li>Dossier → onglet <span class="path">« 📑 Pièces »</span>.</li><li>« 📮 Demander l’acte » ouvre la lettre existante, déjà remplie (personne, acte, mairie) ; le courrier rangé va dans <span class="path">Listes → 🏛️ Archives et sources → « Registre de courriers »</span>, relié au dossier (filtre « Dossier 2026-014 »).</li><li>L’acte reçu s’attache par la fenêtre unique des médias : il est rangé sur la fiche et sur le fait, et l’état passe à « En main ».</li></ul></div>
+<div class="reuse"><b>Réutilisé :</b> <code>ext.openActLetter()</code> (<code>heritage-courriers-actes.js</code>, <code>lib/courriers_actes.php</code>), le Registre de courriers pour l’état « demandé », les médias de preuve des faits (<code>confidence_media_id</code>) pour l’état « en main ».</div>
+</div>
+
+<!-- 6a -->
+<div class="case"><div class="head"><span class="tag">6 · Tableau à remettre au notaire</span><span class="badge new">Nouveau</span></div>
+<h3>Un PDF sobre, une source pour chaque lien</h3>
+<div class="paper">
+<h4>TABLEAU GÉNÉALOGIQUE</h4>
+<div class="ref">Succession de M. Marcel MAZAUD, décédé à Malvialle le 3 mars 2026<br>Dossier 2026-014 · Réf. notaire BR/26/0412</div>
+<div class="scrollx"><table>
+<thead><tr><th>Héritier</th><th>Qualité</th><th>Part</th><th>Sources du lien</th></tr></thead>
+<tbody>
+<tr><td>Suzanne MAZAUD, ép. LACOMBE</td><td>sœur germaine</td><td>5/12</td><td>N. Malvialle 1938 ; N. St-Fréjoux 1941 ; M. 1963</td></tr>
+<tr><td>Claire MAZAUD</td><td>nièce, repr. Paul</td><td>5/24</td><td>N. 1936 ; D. 2010 ; N. 1962</td></tr>
+<tr><td>Lucas MAZAUD</td><td>petit-neveu, repr. Paul et Henri</td><td>5/48</td><td>N. 1965 ; D. 2018 ; N. 1993</td></tr>
+<tr><td>Emma MAZAUD</td><td>petite-nièce, repr. Paul et Henri</td><td>5/48</td><td>N. 1965 ; D. 2018 ; N. 1996</td></tr>
+<tr><td>André MAZAUD</td><td>frère consanguin</td><td>1/6</td><td>M. 1925 ; N. 1926 — <i>existence à ce jour non établie</i></td></tr>
+</tbody></table></div>
+<div class="foot">Calcul établi d’après les actes cités, art. 731 et suiv. du Code civil, sous réserve de vérification par le notaire. N. = naissance, M. = mariage, D. = décès. Page 1 / 3 : l’arbre de dévolution (p. 2) et la liste des pièces avec leurs cotes (p. 3) suivent.</div>
+</div>
+<div class="row" style="margin-top:12px"><span class="btn blue">🖨 Imprimer ou ⤓ PDF</span><span class="btn">📝 Ouvrir dans le traitement de texte</span></div>
+<p class="note">Aucune photo, aucune note privée : seulement les noms, les qualités, les parts et les sources. Les adresses des héritiers n’y figurent pas, sauf si on coche « joindre les adresses ».</p>
+<div class="where"><b class="t">📍 Où ça se trouve</b><ul><li>Dossier → onglet <span class="path">« 🖨 Pour le notaire »</span> ; et le bouton « 🖨 Tableau pour le notaire » de l’onglet 📁 Dossier.</li><li>Une copie du PDF peut être rangée dans les médias du dossier (« 📁 Copie dans les médias »).</li></ul></div>
+<div class="reuse"><b>Réutilisé :</b> l’impression L1 (<code>UI.openPrintDialog</code>), les citations des sources de chaque fait, le traitement de texte (<code>ext.openTextDoc</code>).</div>
+</div>
+
+<!-- 6b -->
+<div class="case"><div class="head"><span class="tag">6 · Courriers aux héritiers</span><span class="badge re">Réutilisé : Registre de courriers</span></div>
+<h3>Contrat de révélation, réponses, signatures</h3>
+<div class="row" style="margin-bottom:8px"><span class="btn">📝 Contrat de révélation</span><span class="btn">✉️ Lettre de premier contact</span></div>
+<div class="scrollx"><table>
+<thead><tr><th>Héritier</th><th>Courrier</th><th>Envoyé</th><th>Réponse</th><th>Contrat</th></tr></thead>
+<tbody>
+<tr><td><b>Suzanne</b></td><td>Premier contact + contrat</td><td>12 oct.</td><td><span class="badge ok">A répondu</span></td><td><span class="badge ok">Signé 2 nov.</span></td></tr>
+<tr><td><b>Claire</b></td><td>Premier contact + contrat</td><td>12 oct.</td><td><span class="badge ok">A répondu</span></td><td><span class="badge warn">À signer</span></td></tr>
+<tr><td><b>Lucas</b></td><td>Premier contact + contrat</td><td>12 oct.</td><td><span class="badge grey">Rien</span></td><td><span class="btn small ghost">Relancer</span></td></tr>
+<tr><td><b>Emma</b></td><td>—</td><td>—</td><td><span class="badge red">Adresse ?</span></td><td>—</td></tr>
+<tr><td><b>André</b></td><td>—</td><td>—</td><td><span class="badge warn">À retrouver</span></td><td>—</td></tr>
+</tbody></table></div>
+<p class="hint">↔ Faire glisser le tableau.</p>
+<div class="msg">📝 <b>Le contrat de révélation</b> est un modèle du traitement de texte, rempli avec le dossier : le nom du défunt n’y est <b>pas</b> révélé avant signature, seulement « une succession en cours où vous pourriez avoir des droits ». Le pourcentage d’honoraires et la date limite sont à toi de les écrire.</div>
+<p class="note">Chaque courrier est rangé dans le <b>Registre de courriers</b> (avec la relance, aussi dans 🗓 Ma semaine), lié au dossier et à la fiche de l’héritier. Rien n’est envoyé par l’app : lettre imprimée, PDF, ou courriel prêt (mailto). La date de signature et le contrat signé (scan) s’ajoutent au courrier.</p>
+<div class="where"><b class="t">📍 Où ça se trouve</b><ul><li>Dossier → onglet <span class="path">« ✉️ Héritiers contactés »</span>.</li><li>Les deux modèles s’ajoutent à <span class="path">Listes → 🛠️ Créer et raconter → Outils de modification → « 📝 Traitement de texte » → « 📋 Partir d’un modèle »</span> : « ⚖️ Contrat de révélation » et « ⚖️ Lettre à un héritier » (montrés seulement si l’usage successoral est allumé).</li><li>Les courriers sont dans <span class="path">Listes → 🏛️ Archives et sources → « Registre de courriers »</span>, avec deux colonnes de plus : « Réponse » et « Signé le ».</li></ul></div>
+<div class="reuse"><b>Réutilisé :</b> Registre de courriers (relances), modèles du traitement de texte (<code>heritage-traitement-texte-outils.js</code>), adresses du Répertoire des vivants, fenêtre unique pour joindre le scan signé.</div>
+</div>
+
+<!-- 7 -->
+<div class="case wide"><div class="head"><span class="tag">7 · Confidentialité et journal du dossier</span><span class="badge new">Nouveau : journal</span></div>
+<h3>Les vivants restent dans le dossier, chaque action est notée</h3>
+<div class="cols">
+<div class="box"><h4>La règle</h4><ul>
+ <li>Les héritiers vivants, leurs adresses et leurs parts <b>ne sortent jamais</b> de l’app, sauf dans les papiers de <b>ce</b> dossier (tableau pour le notaire, courriers).</li>
+ <li>Les exports habituels (GEDCOM, Geneanet, Partager avec la famille, livre) gardent la règle des vivants : cachés ou anonymes. Le dossier n’y change rien.</li>
+ <li>Le mode consultation et le mode simple ne montrent pas l’onglet ⚖️.</li>
+ <li>Les montants et la valeur de la succession ne sont pas notés dans l’app.</li>
+ <li>Un dossier clos peut être <b>archivé</b> : les adresses des vivants sont alors retirées, le journal reste.</li>
+</ul></div>
+<div><span class="lab" style="margin-top:0">🕓 Journal du dossier 2026-014 (on ne peut ni le modifier ni l’effacer)</span>
+<div class="log">
+ <div><span>19/11/2026 10:42</span><span>Tableau pour le notaire : PDF créé (3 pages)</span></div>
+ <div><span>18/11/2026 16:05</span><span>Courrier n° 57 « relance » : Lucas MAZAUD</span></div>
+ <div><span>02/11/2026 09:30</span><span>Contrat signé reçu : Suzanne LACOMBE (scan joint)</span></div>
+ <div><span>21/10/2026 14:12</span><span>📮 Acte demandé : naissance de Suzanne, mairie de Saint-Fréjoux</span></div>
+ <div><span>12/10/2026 11:00</span><span>3 courriers « premier contact » rangés dans le registre</span></div>
+ <div><span>08/10/2026 17:44</span><span>Dévolution recalculée : André ajouté (statut inconnu)</span></div>
+ <div><span>02/04/2026 09:15</span><span>Dossier ouvert, mandant : M° ROUSSILHE</span></div>
+</div>
+<div class="row" style="margin-top:8px"><span class="btn small">⤓ Exporter le journal (CSV)</span></div></div>
+</div>
+<div class="where"><b class="t">📍 Où ça se trouve</b><ul><li>Dossier → onglet <span class="path">« 🕓 Journal »</span>. Les changements des fiches restent aussi dans <span class="path">Réglages → Journal des modifications</span>, comme aujourd’hui.</li><li>Dossier → ⋯ → « 🗄 Archiver le dossier clos » (retire les adresses des vivants, garde le journal).</li></ul></div>
+<div class="reuse"><b>Réutilisé :</b> la règle des vivants des exports (<code>heritage-partage.js</code>, <code>heritage-echanges.js</code>), le Répertoire des vivants (seule source des adresses), la règle de la Cousinade (« les coordonnées des vivants restent dans le projet »), l’export CSV (csvCell) du Journal des recherches. Le <b>🗓 Journal des recherches</b> existant continue de noter les recherches faites ; le journal du dossier note, lui, les actions du dossier.</div>
+</div>
+
+<!-- 8 -->
+<div class="case wide"><div class="head"><span class="tag">8 · Pour aller plus loin</span><span class="badge idee">Idées, à valider une par une</span></div>
+<h3>Cinq fonctions utiles aux généalogistes successoraux</h3>
+<div class="ideas">
+ <div class="idea"><span class="badge idee">Idée</span><b>🌍 Héritiers à l’étranger</b>Pour une branche partie (André à Lyon, Léonie en Argentine) : la liste des services à interroger (Service central d’état civil à Nantes pour les Français nés à l’étranger, consulats, registres du pays), avec les lettres prêtes en plusieurs langues.</div>
+ <div class="idea"><span class="badge idee">Idée</span><b>❔ Absents et disparus</b>Un statut « absent » sur la fiche, avec le bon chemin : présomption d’absence (art. 112), déclaration d’absence après 10 ans (art. 122), jugement déclaratif de décès (art. 88). La part reste « réservée » dans le calcul.</div>
+ <div class="idea"><span class="badge idee">Idée</span><b>🗂 Tables de successions des AD</b>Dépouiller les tables de successions et absences et les registres de mutations par décès (série Q, Enregistrement) : la date et le bureau de chaque succession d’un ancêtre. Se range dans le Journal des recherches comme un dépouillement.</div>
+ <div class="idea"><span class="badge idee">Idée</span><b>💶 Honoraires et temps passé</b>Le temps passé par dossier, les frais (actes, déplacements), le pourcentage de chaque contrat signé, un relevé à joindre au dossier. Sans montant de succession.</div>
+ <div class="idea"><span class="badge idee">Idée</span><b>📋 Liste de contrôle du notaire</b>Avant « Remis au notaire » : chaque héritier a ses actes, chaque prédécédé a son acte de décès, aucune branche « inconnue » sans explication, l’hypothèse retenue est écrite.</div>
+</div>
+<div class="where"><b class="t">📍 Où elles iraient</b><ul><li>🌍 Étranger : bouton « 🌍 Héritier à l’étranger » sur une branche à chercher (onglet 👥 Héritiers), lettres par la fenêtre « 📮 Demander l’acte ».</li><li>❔ Absents : nouvel état sur la fiche (à côté de « décédé »), lu par le calcul.</li><li>🗂 Tables des AD : une sorte de plus dans <span class="path">Listes → Médias et documents → « Dépouillements »</span> et dans le Journal des recherches.</li><li>💶 Honoraires : onglet « 💶 Temps et frais » du dossier, à côté du <span class="path">Budget de recherche</span> (Listes → Recherche et organisation) qui reste à part.</li><li>📋 Contrôle : passage obligé avant l’état « Remis au notaire ».</li></ul></div>
+</div>
+</div>
+
+<h2>Partie 2 · Les autres demandes</h2>
+<div class="grid">
+
+<!-- 9 -->
+<div class="case"><div class="head"><span class="tag">9 · Lettre de famille</span><span class="badge re">Réutilisé : 💌 Lettre à la famille</span></div>
+<h3>Remplie toute seule, chaque mois</h3>
+<div class="letter">
+<h4>La lettre des MAZAUD</h4>
+<div class="date">Novembre 2026 · n° 7</div>
+<div class="lt-cols">
+ <div class="photo">Photo : la noce de Louis et Marie, Malvialle, 1935</div>
+ <div>
+  <h5>🎂 Les anniversaires du mois</h5>
+  <ul><li>3 nov. : Claire, 64 ans</li><li>17 nov. : Lucas, 33 ans</li><li>25 nov. : il y a 100 ans naissait André</li></ul>
+ </div>
+</div>
+<h5>🔎 Les dernières découvertes</h5>
+<ul><li>L’acte de mariage de Louis MAZAUD et Hélène PEYRAT (1925) : on ignorait ce premier mariage.</li><li>Deux nouvelles photos de la ferme des LACOMBE à Malvialle.</li></ul>
+<h5>⭐ L’ancêtre à l’honneur</h5>
+<p style="margin:0">Pierre MAZAUD (1724-1789), laboureur à Malvialle. Il a vu naître onze enfants…</p>
+</div>
+<div class="box" style="margin-top:12px"><h4>Ce que l’app y met</h4>
+<div class="sw"><span class="tog on"></span><span>Anniversaires du mois (vivants : seulement le prénom et l’âge)</span></div>
+<div class="sw"><span class="tog on"></span><span>Dernières découvertes (fiches et médias ajoutés ce mois-ci)</span></div>
+<div class="sw"><span class="tog on"></span><span>Une photo (choisie, ou la plus ancienne du mois)</span></div>
+<div class="sw"><span class="tog on"></span><span>Un ancêtre à l’honneur (début de sa biographie)</span></div>
+</div>
+<div class="row" style="margin-top:12px"><span class="btn blue">🖨 Imprimer</span><span class="btn">⤓ PDF</span><span class="btn">✉️ Courriel prêt</span><span class="btn ghost">📝 Retoucher</span></div>
+<div class="where"><b class="t">📍 Où ça se trouve (décidé)</b><ul><li><span class="path">✨ Trésors → 🎨 Créer et fabriquer → « 💌 Lettre de famille »</span>, juste à côté de « 📰 La gazette de l’année ». On choisit le mois, ce qu’on y met, la photo et l’ancêtre (menu de choix) ; « 💾 Garder » la range.</li><li>Les lettres gardées : <span class="path">Listes → ✨ Trésors de famille → « 💌 Lettres de famille »</span>, à côté de « 📰 Gazettes » (à ne pas confondre avec « ✉️ Lettres aux descendants », qui sont des lettres à ouvrir plus tard).</li><li><span class="path">Listes → 🛠️ Créer et raconter → Outils de modification → « 📝 Traitement de texte » → « 📋 Partir d’un modèle » → « 💌 Lettre à la famille »</span> : le modèle se remplit de la même façon (même moteur), puis on écrit autour.</li></ul></div>
+<div class="reuse"><b>Réutilisé :</b> le modèle « 💌 Lettre à la famille » du traitement de texte (aujourd’hui vide, avec des zones à remplir), la mise en page de la « 📰 Gazette de l’année » des Trésors, les anniversaires de l’agenda, la biographie F5, l’impression L1 et le courriel prêt (mailto). Nouveau : le remplissage.</div>
+</div>
+
+<!-- 10 -->
+<div class="case"><div class="head"><span class="tag">10 · Score de fiabilité par personne</span><span class="badge new">Nouveau : la note</span></div>
+<h3>Une note simple, et pourquoi</h3>
+<div class="score">
+ <div class="ring"><span>68<small>sur 100</small></span></div>
+ <div><b style="font-size:15px">Antoine LACOMBE (1802-1871)</b><br><span class="badge warn">Assez sûr</span> <span class="k" style="font-size:12.5px">À revoir avant publication</span></div>
+</div>
+<div class="why">
+ <span>📌</span><span><b>Ses faits</b> : 4 certains, 1 estimé, 1 en doute (le décès)<div class="bar"><i style="width:72%;background:#1a7f37"></i></div></span><span class="frac">72</span>
+ <span>📚</span><span><b>Ses sources</b> : 5 faits sur 7 ont une source, le mariage n’en a pas<div class="bar"><i style="width:70%;background:#d4a800"></i></div></span><span class="frac">70</span>
+ <span>🛡</span><span><b>Ses liens</b> : père solide (acte), mère fragile (déduite d’un recensement)<div class="bar"><i style="width:60%;background:#d4a800"></i></div></span><span class="frac">60</span>
+</div>
+<div class="msg">💡 Pour gagner des points : attacher l’acte de mariage de 1826, confirmer le lien avec sa mère.</div>
+<span class="lab">Dans la liste des personnes</span>
+<div class="row"><span class="seg"><span>Toutes</span><span class="on">À revoir avant publication (23)</span></span><span class="btn small">🌐 Exporter pour Geneanet</span></div>
+<p class="note">La note n’est pas le <b>score de complétude</b> (qui compte ce qui est rempli) : une fiche peut être bien remplie et peu sûre. Avant l’export « 🌐 Pour Geneanet », l’app propose de laisser de côté les fiches sous 50.</p>
+<span class="lab">Le widget du tableau de bord</span>
+<div class="box"><h4>🛡 Fiches les moins fiables</h4>
+<div class="dl"><span class="d">32</span><span>Marguerite BESSE (1790-?)</span><span class="badge red">À revoir</span><span class="d">41</span><span>Jean LACOMBE (1755-1820)</span><span class="badge red">À revoir</span><span class="d">48</span><span>Rose MAZAUD (1880-1951)</span><span class="badge red">À revoir</span></div></div>
+<span class="lab">À l’export</span>
+<div class="msg warn">🛡 <b>23 fiches sont à revoir avant publication</b> (note sous 50). <span class="row" style="margin-top:6px"><span class="btn small">Les voir</span><span class="btn small">Les laisser de côté</span><span class="btn small ghost">Exporter quand même</span></span></div>
+<div class="where"><b class="t">📍 Où ça se trouve (décidé)</b><ul><li><b>Fiche</b> : bloc <span class="path">« 🛡 Fiabilité »</span> (la note et ses raisons, sous « Sources »). Masquable et déplaçable comme les autres dans <span class="path">Réglages → Fiches personnes et animaux</span>.</li><li><b>Liste des personnes</b> : <span class="path">Listes → 👥 Personnes et familles → Personnes</span>, colonne « 🛡 Fiabilité » (ajoutée par « ⚙️ Colonnes », triable) et filtre « À revoir avant publication » dans la barre de filtres.</li><li><b>Export</b> : le contrôle ci-dessus s’affiche avant de fabriquer le fichier dans <span class="path">Réglages → Export propre → GEDCOM</span> (quand « Pour partager » est coché) et <span class="path">Réglages → Export propre → « ⤓ Vers d’autres logiciels et sites » → « 🌐 Pour Geneanet »</span>.</li><li><b>Tableau de bord</b> : widget <span class="path">« 🛡 Fiches les moins fiables »</span> par « ＋ Ajouter un widget », à côté du widget « 🛡 Branches fragiles » (nombre de lignes réglable, 5 par défaut).</li></ul></div>
+<div class="reuse"><b>Réutilisé :</b> la fiabilité de chaque fait (<code>fact_confidence</code> : certain, déduit, estimé, doute ; <code>app.js:2769</code>), les sources et citations des faits, la 🛡 solidité des liens et les Branches fragiles (<code>heritage-preuve.js</code>, <code>lib/preuve.php</code>), l’export Geneanet (<code>heritage-echanges.js</code>).</div>
+</div>
+
+<!-- 11 -->
+<div class="case"><div class="head"><span class="tag">11 · Relecture par un cousin</span><span class="badge re">Réutilisé : Partager avec la famille</span></div>
+<h3>Le cousin coche, commente, renvoie</h3>
+<span class="lab" style="margin-top:0">Chez le cousin : le fichier ouvert d’un double-clic, en lecture seule</span>
+<div class="win"><div class="win-bar"><span class="eyebrow">📤 Branche LACOMBE · à relire</span><b>Antoine LACOMBE</b></div>
+<div class="win-body" style="padding-top:2px">
+ <div class="fact"><span><b>Naissance</b> : 4 avril 1802, Malvialle</span><span class="vote"><span class="y">✓ D’accord</span><span>✗ Faux</span></span></div>
+ <div class="fact"><span><b>Mariage</b> : 1826 avec Françoise BESSE</span><span class="vote"><span>✓ D’accord</span><span class="n">✗ Je pense que c’est faux</span></span>
+  <span class="com">💬 Mamie disait que c’était en 1828, après le retour du service. — Claire</span></div>
+ <div class="fact"><span><b>Décès</b> : vers 1871, Malvialle</span><span class="vote"><span>✓ D’accord</span><span>✗ Faux</span></span></div>
+ <div class="row" style="margin-top:8px"><span class="btn blue">⤓ Renvoyer mes remarques</span><span class="k" style="font-size:12px">un petit fichier .json à envoyer par courriel</span></div>
+</div></div>
+<span class="lab">Chez toi : « ⤒ Importer les réponses »</span>
+<div class="box">
+ <div class="find" style="border-top:0"><span class="ic">✗</span><span><b>Mariage d’Antoine</b> : « faux », dit Claire. « 1828, après le service. »</span><span class="row"><span class="btn small">Corriger</span><span class="btn small ghost">Noter</span></span></div>
+ <div class="find"><span class="ic">✓</span><span>12 faits confirmés par Claire : ajoutés comme témoignage.</span><span class="btn small ghost">Voir</span></div>
+</div>
+<div class="where"><b class="t">📍 Où ça se trouve</b><ul><li><span class="path">Réglages → Export propre → « 📤 Partager avec la famille… »</span> : une case de plus « 🖊 Demander une relecture (le cousin peut cocher et commenter chaque fait) ». Le .zip contient alors les cases et le bouton « ⤓ Renvoyer mes remarques ».</li><li>Raccourci : fiche → ⋯ → « 🖊 Faire relire cette branche… » (ouvre la même fenêtre, branche déjà choisie).</li><li>Le retour : <span class="path">Listes → 🖼️ Médias et documents → « Questions aux proches » → « ⤒ Importer les réponses »</span>, le même bouton reconnaît le fichier de relecture ; chaque relecture y devient une ligne (envoyé / répondu / rangé).</li><li>Les remarques « faux » restent sur le fait (pastille 💬) jusqu’à « Corriger » ou « Noter ».</li></ul></div>
+<div class="reuse"><b>Réutilisé :</b> « 📤 Partager avec la famille » (<code>heritage-partage.js</code>, <code>lib/family_share.php</code>, même règle des vivants) avec une case « 🖊 Demander une relecture » ; l’import « ⤒ Importer les réponses » des 💬 Questions aux proches (<code>heritage-questions.js</code>) : chaque remarque devient un témoignage ou une note sur le fait, rien n’est changé sans ton accord.</div>
+</div>
+
+<!-- 12 -->
+<div class="case wide"><div class="head"><span class="tag">12 · Traduire un acte latin</span><span class="badge new">Nouveau : bouton et vue côte à côte</span></div>
+<h3>Le mot à mot tout de suite, la traduction complète si le modèle est installé</h3>
+<div class="toolbar"><span>🔎 Lire</span><span>✍ Écriture à la main</span><span>🔍 Lecture approfondie</span><span>📖 Aide à la lecture</span><span class="hl">🌐 Traduire</span></div>
+<div class="tri">
+ <div class="pane"><h4>L’acte (latin, transcrit)</h4>
+ <div class="la"><span class="w f">Anno Domini</span> <span class="w">millesimo septingentesimo quinquagesimo secundo</span>, <span class="w f">die</span> decima quarta <span class="w">mensis martii</span>, <span class="w f on">baptizatus est</span> Joannes, <span class="w f">filius legitimus</span> Petri MAZAUD et Mariae LACOMBE <span class="w">conjugum</span> <span class="w f">hujus parochiae</span> de Malvialle, <span class="w">natus</span> <span class="w u">hesterna</span> die. <span class="w f">Patrinus fuit</span> Joannes LACOMBE, <span class="w">matrina</span> Antonia BESSE, <span class="w f">qui signare nescierunt</span>.</div>
+ <p class="note" style="font-size:11.5px"><span class="w f">vert</span> formule connue · <span class="w">bleu</span> mot du dictionnaire · <span class="w u">pointillé</span> peu sûr</p></div>
+ <div class="pane"><h4>Niveau 1 · mot à mot <span class="badge ok">sans installation</span></h4>
+ <div class="mam">
+  <b>Anno Domini</b><span>l’an du Seigneur</span>
+  <b>millesimo… secundo</b><span>1752</span>
+  <b>die decima quarta</b><span>le 14ᵉ jour</span>
+  <b>mensis martii</b><span>du mois de mars</span>
+  <b style="background:#eef4ff">baptizatus est</b><span style="background:#eef4ff"><b>a été baptisé</b></span>
+  <b>filius legitimus</b><span>fils légitime</span>
+  <b>conjugum</b><span>époux (des)</span>
+  <b>hujus parochiae</b><span>de cette paroisse</span>
+  <b>natus hesterna die</b><span>né hier <span class="badge warn">?</span></span>
+  <b>patrinus fuit</b><span>le parrain fut</span>
+  <b>matrina</b><span>la marraine</span>
+  <b>qui signare nescierunt</b><span>qui n’ont su signer</span>
+ </div></div>
+ <div class="pane"><h4>Niveau 2 · traduction complète <span class="badge blue">Qwen3-VL, sur cet ordinateur</span></h4>
+ <p style="margin:0;font:14px/1.6 Georgia,serif">L’an du Seigneur mil sept cent cinquante-deux, le quatorzième jour du mois de mars, a été baptisé Jean, fils légitime de Pierre MAZAUD et de Marie LACOMBE, époux de cette paroisse de Malvialle, né la veille. Le parrain fut Jean LACOMBE, la marraine Antoinette BESSE, qui n’ont su signer.</p>
+ <div class="msg ok" style="font-size:12px">✓ Les deux lectures sont d’accord sur les noms, la date et les rôles.</div></div>
+</div>
+<div class="msg warn" style="margin-top:12px">🔍 <b>Le niveau 2 n’est pas installé ?</b> La colonne de droite montre « La traduction complète utilise le modèle de la lecture approfondie (Ollama, ≈ 6 Go, rien ne part sur Internet). » <span class="btn small" style="margin-left:6px">Installer la lecture approfondie</span> Le niveau 1 marche toujours.</div>
+<p class="note">Cliquer un mot à gauche surligne sa ligne du mot à mot, et l’inverse. Les noms, dates et rôles trouvés partent ensuite dans « Ce que l’app a trouvé » de la transcription, comme aujourd’hui.</p>
+<div class="where"><b class="t">📍 Où ça se trouve</b><ul><li>Atelier de transcription (<span class="path">Listes → 🛠️ Créer et raconter → Outils de modification → « 📜 Transcription d’actes »</span>, ou visionneuse d’une image → « 📜 Atelier ») : bouton <span class="path">« 🌐 Traduire »</span> dans la barre, à côté de « 📖 Aide à la lecture ». Il apparaît quand la langue de l’acte est le latin (choisie ou reconnue).</li><li>La vue côte à côte remplace le panneau de droite ; « ✕ » revient au texte. La traduction peut être gardée dans la transcription (champ « Traduction ») et sort avec le modèle « ✍ Transcription d’acte mise au propre ».</li></ul></div>
+<div class="reuse"><b>Réutilisé :</b> l’Aide à la lecture (<code>LCNDA_EXT.readingAid</code> : dictionnaire latin, formules, abréviations ; <code>aide-langues/la.js</code>) pour le niveau 1 ; la lecture approfondie (<code>lib/transcription_actes.php</code>, Ollama sur 127.0.0.1 seulement, modèles Qwen3-VL) pour le niveau 2 ; le surlignage lié image / texte de <code>heritage-transcribe.js</code>.</div>
+</div>
+
+</div>
+<h2 id="ou">Où tout se trouve</h2>
+<p class="sub">Toutes les entrées nouvelles, avec leur chemin exact. <span class="badge new">Décidé</span> = choisi par l’utilisateur ; <span class="badge re">Proposé</span> = l’endroit le plus logique, à confirmer à la validation.</p>
+<section class="audit"><table><thead><tr><th>N°</th><th>Quoi</th><th>Chemin dans l’app</th><th>Statut</th></tr></thead><tbody>
+<tr><td class="n">1</td><td class="nm"><b>Usage successoral</b></td><td>Premier lancement → « Je veux faire autre chose ▾ » → carte « ⚖️ Généalogiste successoral » · Réglages → Apparence → « 🧭 Usage de l’app » · Réglages → FAQ / tuto → « 🧭 Revoir le premier lancement »</td><td><span class="badge re">Proposé</span></td></tr>
+<tr><td class="n">2</td><td class="nm"><b>Dossiers de succession</b></td><td>Onglet « ⚖️ Successions » (visible avec l’usage successoral, caché sinon ; réglable dans Réglages → Menus, colonne et listes) · Listes → 🔎 Recherche et organisation → « ⚖️ Dossiers de succession » (après « Cousinades ») · Fiche du défunt → ⋯ → « ⚖️ Rechercher les héritiers… »</td><td><span class="badge new">Décidé</span></td></tr>
+<tr><td class="n">2</td><td class="nm"><b>Échéances</b></td><td>Onglet 📁 Dossier · 🗓 Ma semaine de recherche · widget « ⚖️ Dossiers de succession » (Tableau de bord → ＋ Ajouter un widget)</td><td><span class="badge re">Proposé</span></td></tr>
+<tr><td class="n">3</td><td class="nm"><b>Héritiers et dévolution</b></td><td>Dossier → « 👥 Héritiers » ; pistes vers Recherche → « 🗓 Journal des recherches », adresses vers Listes → 👥 Personnes et familles → « Répertoire des vivants »</td><td><span class="badge re">Proposé</span></td></tr>
+<tr><td class="n">4</td><td class="nm"><b>Arbre de dévolution</b></td><td>Dossier → « 🌳 Arbre » · « 📊 Modifier dans Mes diagrammes » (Graphiques → Mes diagrammes, type « ⚖️ Dévolution ») · page 2 du PDF pour le notaire</td><td><span class="badge re">Proposé</span></td></tr>
+<tr><td class="n">5</td><td class="nm"><b>Pièces justificatives</b></td><td>Dossier → « 📑 Pièces » · « 📮 Demander l’acte » → Listes → 🏛️ Archives et sources → « Registre de courriers » (filtre par dossier)</td><td><span class="badge re">Proposé</span></td></tr>
+<tr><td class="n">6</td><td class="nm"><b>Tableau pour le notaire</b></td><td>Dossier → « 🖨 Pour le notaire » (Imprimer / PDF, traitement de texte, copie dans les médias)</td><td><span class="badge re">Proposé</span></td></tr>
+<tr><td class="n">6</td><td class="nm"><b>Courriers aux héritiers</b></td><td>Dossier → « ✉️ Héritiers contactés » · modèles « ⚖️ Contrat de révélation » et « ⚖️ Lettre à un héritier » : Listes → 🛠️ Créer et raconter → Outils de modification → « 📝 Traitement de texte » → « 📋 Partir d’un modèle » · suivi dans le Registre de courriers (colonnes « Réponse », « Signé le »)</td><td><span class="badge re">Proposé</span></td></tr>
+<tr><td class="n">7</td><td class="nm"><b>Journal du dossier</b></td><td>Dossier → « 🕓 Journal » (⤓ CSV) · Dossier → ⋯ → « 🗄 Archiver le dossier clos »</td><td><span class="badge re">Proposé</span></td></tr>
+<tr><td class="n">9</td><td class="nm"><b>Lettre de famille</b></td><td>✨ Trésors → 🎨 Créer et fabriquer → « 💌 Lettre de famille » (à côté de « 📰 La gazette de l’année ») · modèle « 💌 Lettre à la famille » du traitement de texte, rempli pareil</td><td><span class="badge new">Décidé</span></td></tr>
+<tr><td class="n">9</td><td class="nm"><b>Lettres gardées</b></td><td>Listes → ✨ Trésors de famille → « 💌 Lettres de famille » (à côté de « 📰 Gazettes »)</td><td><span class="badge re">Proposé</span></td></tr>
+<tr><td class="n">10</td><td class="nm"><b>Score de fiabilité</b></td><td>Bloc « 🛡 Fiabilité » de la fiche (Réglages → Fiches personnes et animaux) · Listes → Personnes : colonne « 🛡 Fiabilité » + filtre « À revoir avant publication » · contrôle avant Réglages → Export propre → GEDCOM « Pour partager » et « 🌐 Pour Geneanet » · widget « 🛡 Fiches les moins fiables »</td><td><span class="badge new">Décidé</span></td></tr>
+<tr><td class="n">11</td><td class="nm"><b>Relecture par un cousin</b></td><td>Réglages → Export propre → « 📤 Partager avec la famille… » → case « 🖊 Demander une relecture » · fiche → ⋯ → « 🖊 Faire relire cette branche… » · retour par Listes → 🖼️ Médias et documents → « Questions aux proches » → « ⤒ Importer les réponses »</td><td><span class="badge re">Proposé</span></td></tr>
+<tr><td class="n">12</td><td class="nm"><b>Traduire un acte latin</b></td><td>Atelier de transcription (Listes → 🛠️ Créer et raconter → Outils de modification → « 📜 Transcription d’actes », ou visionneuse → « 📜 Atelier ») → « 🌐 Traduire », à côté de « 📖 Aide à la lecture »</td><td><span class="badge re">Proposé</span></td></tr>
+</tbody></table></section>
+
+<h2 id="questions">Questions à poser à l’utilisateur</h2>
+<div class="case"><ol class="qs">
+<li><b>Le mode consultation et le mode simple</b> : faut-il cacher entièrement « ⚖️ Dossiers de succession » (proposé), ou le montrer en lecture seule ?</li>
+<li><b>L’arbre de dévolution dans Mes diagrammes</b> : un vrai type « ⚖️ Dévolution » (il touche au moteur de diagrammes, en travaux en ce moment), ou seulement le dessin dans le dossier et le PDF ?</li>
+<li><b>Le conjoint survivant et les décès anciens</b> : on s’arrête à l’avertissement pour un décès d’avant 2002 (proposé), ou faut-il aussi calculer selon le droit de l’époque ?</li>
+<li><b>Les modèles « ⚖️ Contrat de révélation » et « ⚖️ Lettre à un héritier »</b> : seulement quand l’usage successoral est allumé (proposé), ou toujours dans la liste des modèles ?</li>
+<li><b>La relecture par un cousin</b> : son retour passe par « Questions aux proches » (proposé, même bouton d’import), ou mérite-t-il sa propre liste « 🖊 Relectures » ?</li>
+<li><b>Le seuil « à revoir avant publication »</b> : 50 sur 100 par défaut, réglable dans Réglages → ⚙️ Seuils du contrôle (proposé) ?</li>
+</ol></div>
+<p class="note" style="margin-top:28px">Maquette : <code>docs/design/successoral-et-plus.html</code>. Les articles du Code civil sont cités pour guider la recherche, pas comme un conseil juridique.</p>
+</div></body></html>
