@@ -14,6 +14,8 @@
  *    from, to                   années couvertes par le site (sa vie doit les croiser)
  *    born: [a, b]               années de naissance qui comptent (soldats de 14-18 : 1865-1901)
  *    sex: 'male' | 'female'
+ *    diedIn: [[a, b]…]          sites des MORTS d'une guerre : si son décès est connu et hors de ces années (et que sa fiche ne dit pas
+ *                               « mort pour la France »), le site est écarté (mort en 1913 : pas « Morts de la guerre de 1870 »)
  *    profiles: ['soldier'…]     profils qui le rendent utile (voir PROFILES) ; require: ['profile'] = seulement pour eux
  *    events: ['EMIG'…]          événements (balises GEDCOM) qui le rendent utile
  *    missing: ['birth'…]        ce qui manque et qu'il aide à trouver (birth, death, parents, father, mother, marriage)
@@ -132,6 +134,8 @@
 
     /* ═════ les règles des sites qu'on connaît (clés de « Chercher sur internet » et des lots) ═════ */
     const S = (o) => o;
+    /** années où l'on meurt « à la guerre » (1870-71, 14-18, 39-45, Indochine, Algérie), avec un an pour les blessés et disparus */
+    const WAR_DEATHS = [[1870, 1872], [1914, 1921], [1939, 1946], [1946, 1963]];
     const war14 = ctx => T(ctx.profiles.has('soldier') || ctx.profiles.has('mpf') ? (ctx.female ? '{born} : elle a fait la guerre de 14' : '{born} : il a fait la guerre de 14') : (ctx.female ? '{born} : elle a sans doute fait la guerre de 14' : '{born} : il a sans doute fait la guerre de 14'), {born: bornText(ctx)});
     const war39 = ctx => T(ctx.female ? '{born} : elle avait l’âge d’être mobilisé en 1939-1945' : '{born} : il avait l’âge d’être mobilisé en 1939-1945', {born: bornText(ctx)});
     const RULES = {
@@ -148,9 +152,9 @@
         findagrave: S({base: 0.6, missing: ['death'], why: () => T('Tombes photographiées par des bénévoles')}), billiongraves: S({base: 0.4, missing: ['death']}),
         // militaires
         memoiredeshommes: S({countries: ['fr'], born: [1865, 1901], sex: 'male', profiles: ['soldier', 'mpf', 'pow'], base: 1.2, why: war14}),
-        so_mdh_mpf1418: S({countries: ['fr'], born: [1865, 1901], sex: 'male', profiles: ['soldier', 'mpf'], base: 1, why: war14}),
-        so_mdh_mpf3945: S({countries: ['fr'], born: [1890, 1927], sex: 'male', profiles: ['soldier', 'mpf', 'resistant', 'deported'], base: 0.6, why: war39}),
-        so_mdh_sepultures: S({countries: ['fr'], born: [1865, 1927], sex: 'male', profiles: ['soldier', 'mpf'], missing: ['death'], base: 0.4}),
+        so_mdh_mpf1418: S({countries: ['fr'], born: [1865, 1901], diedIn: [[1914, 1921]], sex: 'male', profiles: ['soldier', 'mpf'], base: 1, why: war14}),
+        so_mdh_mpf3945: S({countries: ['fr'], born: [1890, 1927], diedIn: [[1939, 1946]], sex: 'male', profiles: ['soldier', 'mpf', 'resistant', 'deported'], base: 0.6, why: war39}),
+        so_mdh_sepultures: S({countries: ['fr'], born: [1865, 1927], diedIn: [[1914, 1921], [1939, 1946]], sex: 'male', profiles: ['soldier', 'mpf'], missing: ['death'], base: 0.4}),
         so_mdh_hors_mpf: S({countries: ['fr'], born: [1850, 1927], sex: 'male', profiles: ['soldier'], require: ['profile'], base: 0.4}),
         so_mdh_marins: S({countries: ['fr'], born: [1850, 1927], profiles: ['sailor'], require: ['profile'], base: 0.5}),
         so_mdh_jmo: S({countries: ['fr'], born: [1865, 1901], sex: 'male', profiles: ['soldier'], require: ['profile'], base: 0.5, why: () => T('Le journal de marche de son régiment : où il était, jour après jour')}),
@@ -161,8 +165,8 @@
         leonore: S({countries: ['fr'], profiles: ['soldier', 'elected', 'doctor', 'inventor', 'artist'], base: 0.5, to: 1977, why: () => T('Les dossiers de la Légion d’honneur (morts avant 1977)')}),
         so_leonore: S({countries: ['fr'], profiles: ['soldier', 'elected'], base: 0.3, to: 1977}),
         so5_sainte_helene: S({countries: ['fr'], born: [1765, 1800], sex: 'male', profiles: ['soldier'], base: 0.5, why: ctx => T('{born} : un soldat de Napoléon a peut-être reçu la médaille de Sainte-Hélène', {born: bornText(ctx)})}),
-        so4_morts_1870: S({countries: ['fr'], born: [1835, 1853], sex: 'male', base: 0.6, why: ctx => T(ctx.female ? '{born} : elle avait l’âge de faire la guerre de 1870' : '{born} : il avait l’âge de faire la guerre de 1870', {born: bornText(ctx)})}),
-        so4_memorialgenweb: S({countries: ['fr'], born: [1840, 1927], sex: 'male', profiles: ['soldier', 'mpf'], base: 0.4}),
+        so4_morts_1870: S({countries: ['fr'], born: [1835, 1853], diedIn: [[1870, 1872]], sex: 'male', base: 0.6, why: ctx => T(ctx.female ? '{born} : elle avait l’âge de faire la guerre de 1870' : '{born} : il avait l’âge de faire la guerre de 1870', {born: bornText(ctx)})}),
+        so4_memorialgenweb: S({countries: ['fr'], born: [1840, 1927], diedIn: WAR_DEATHS, sex: 'male', profiles: ['soldier', 'mpf'], base: 0.4}),
         so2_shd_officiers: S({countries: ['fr'], profiles: ['soldier'], require: ['profile'], base: 0.4}),
         // gens de mer
         so2_shd_marins: S({countries: ['fr'], profiles: ['sailor'], require: ['profile'], base: 1, why: () => T('Un marin : l’inscription maritime suit chaque embarquement')}),
@@ -268,6 +272,9 @@
             if (ctx.by >= r.born[0] && ctx.by <= r.born[1]) { s += 3; strong = true; }
             else out = out || T(ctx.female ? 'née en {year}, hors des années {from}–{to}' : 'né en {year}, hors des années {from}–{to}', {year: ctx.by, from: r.born[0], to: r.born[1]});
         } else if (Array.isArray(r.born) && !ctx.by) s -= 1;
+        // les morts d'une guerre : un décès connu hors de ses années l'écarte (sauf « mort pour la France » sur la fiche)
+        if (Array.isArray(r.diedIn) && r.diedIn.length && ctx.deathKnown && ctx.dy && !ctx.profiles.has('mpf')
+            && !r.diedIn.some(([a, b]) => ctx.dy >= a && ctx.dy <= b)) out = out || T(ctx.female ? 'morte en {year}, pas pendant une guerre' : 'mort en {year}, pas pendant une guerre', {year: ctx.dy});
         if (r.sex && ((r.sex === 'male' && ctx.female) || (r.sex === 'female' && ctx.male))) out = out || T(ctx.female ? 'pour les hommes' : 'pour les femmes');
         // profils (règle, ou « where / on » des lots)
         const whereList = [...(Array.isArray(site.where) ? site.where : []), ...(Array.isArray(site.on) ? site.on : [])];
